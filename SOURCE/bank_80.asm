@@ -105,25 +105,25 @@ fCore_SetPlayerName:
     SEP #$20                                                   ;80810D|E220    |      ;
     LDA.B #$00                                                 ;80810F|A900    |      ;
     XBA                                                        ;808111|EB      |      ;
-    LDA.W sTempNameVariable                                    ;808112|AD8508  |000885;
-    STA.W sPlayerNameShort                                     ;808115|8D8108  |000881;
+    LDA.W strcNames.sTemp                                      ;808112|AD8508  |000885;
+    STA.W strcNames.sPlayer                                    ;808115|8D8108  |000881;
     REP #$20                                                   ;808118|C220    |      ;
-    STA.W sPlayerNameLong                                      ;80811A|8DD508  |0008D5;
+    STA.W strcNames.wPlayer                                    ;80811A|8DD508  |0008D5;
     SEP #$20                                                   ;80811D|E220    |      ;
-    LDA.W sTempNameVariable+1                                  ;80811F|AD8608  |000886;
-    STA.W sPlayerNameShort+1                                   ;808122|8D8208  |000882;
+    LDA.W strcNames.sTemp+1                                    ;80811F|AD8608  |000886;
+    STA.W strcNames.sPlayer+1                                  ;808122|8D8208  |000882;
     REP #$20                                                   ;808125|C220    |      ;
-    STA.W sPlayerNameLong+2                                    ;808127|8DD708  |0008D7;
+    STA.W strcNames.wPlayer+2                                  ;808127|8DD708  |0008D7;
     SEP #$20                                                   ;80812A|E220    |      ;
-    LDA.W sTempNameVariable+2                                  ;80812C|AD8708  |000887;
-    STA.W sPlayerNameShort+2                                   ;80812F|8D8308  |000883;
+    LDA.W strcNames.sTemp+2                                    ;80812C|AD8708  |000887;
+    STA.W strcNames.sPlayer+2                                  ;80812F|8D8308  |000883;
     REP #$20                                                   ;808132|C220    |      ;
-    STA.W sPlayerNameLong+4                                    ;808134|8DD908  |0008D9;
+    STA.W strcNames.wPlayer+4                                  ;808134|8DD908  |0008D9;
     SEP #$20                                                   ;808137|E220    |      ;
-    LDA.W sTempNameVariable+3                                  ;808139|AD8808  |000888;
-    STA.W sPlayerNameShort+3                                   ;80813C|8D8408  |000884;
+    LDA.W strcNames.sTemp+3                                    ;808139|AD8808  |000888;
+    STA.W strcNames.sPlayer+3                                  ;80813C|8D8408  |000884;
     REP #$20                                                   ;80813F|C220    |      ;
-    STA.W sPlayerNameLong+6                                    ;808141|8DDB08  |0008DB;
+    STA.W strcNames.wPlayer+6                                  ;808141|8DDB08  |0008DB;
     REP #$20                                                   ;808144|C220    |      ;
     LDA.W nMapEngine_flags                                     ;808146|AD9601  |000196;
     ORA.W #!AFLAGS_FORCETELEPORT                                               
@@ -155,16 +155,16 @@ fCore_SetBoughtCowName:
     SEP #$20                                                   ;808188|E220    |      ;
     REP #$10                                                   ;80818A|C210    |      ;
     LDY.W #$000C                                               ;80818C|A00C00  |      ;
-    LDA.W sTempNameVariable                                    ;80818F|AD8508  |000885;
+    LDA.W strcNames.sTemp                                      ;80818F|AD8508  |000885;
     STA.B [ptrUnknown0x72],Y                                   ;808192|9772    |000072;
     LDY.W #$000D                                               ;808194|A00D00  |      ;
-    LDA.W sTempNameVariable+1                                  ;808197|AD8608  |000886;
+    LDA.W strcNames.sTemp+1                                    ;808197|AD8608  |000886;
     STA.B [ptrUnknown0x72],Y                                   ;80819A|9772    |000072;
     LDY.W #$000E                                               ;80819C|A00E00  |      ;
-    LDA.W sTempNameVariable+2                                  ;80819F|AD8708  |000887;
+    LDA.W strcNames.sTemp+2                                    ;80819F|AD8708  |000887;
     STA.B [ptrUnknown0x72],Y                                   ;8081A2|9772    |000072;
     LDY.W #$000F                                               ;8081A4|A00F00  |      ;
-    LDA.W sTempNameVariable+3                                  ;8081A7|AD8808  |000888;
+    LDA.W strcNames.sTemp+3                                    ;8081A7|AD8808  |000888;
     STA.B [ptrUnknown0x72],Y                                   ;8081AA|9772    |000072;
     REP #$20                                                   ;8081AC|C220    |      ;
     LDA.W nMapEngine_flags                                     ;8081AE|AD9601  |000196;
@@ -198,16 +198,16 @@ fCore_SetBornCowName:
     SEP #$20                                                   ;8081FB|E220    |      ;
     REP #$10                                                   ;8081FD|C210    |      ;
     LDY.W #$000C                                               ;8081FF|A00C00  |      ;
-    LDA.W sTempNameVariable                                    ;808202|AD8508  |000885;
+    LDA.W strcNames.sTemp                                      ;808202|AD8508  |000885;
     STA.B [ptrUnknown0x72],Y                                   ;808205|9772    |000072;
     LDY.W #$000D                                               ;808207|A00D00  |      ;
-    LDA.W sTempNameVariable+1                                  ;80820A|AD8608  |000886;
+    LDA.W strcNames.sTemp+1                                    ;80820A|AD8608  |000886;
     STA.B [ptrUnknown0x72],Y                                   ;80820D|9772    |000072;
     LDY.W #$000E                                               ;80820F|A00E00  |      ;
-    LDA.W sTempNameVariable+2                                  ;808212|AD8708  |000887;
+    LDA.W strcNames.sTemp+2                                    ;808212|AD8708  |000887;
     STA.B [ptrUnknown0x72],Y                                   ;808215|9772    |000072;
     LDY.W #$000F                                               ;808217|A00F00  |      ;
-    LDA.W sTempNameVariable+3                                  ;80821A|AD8808  |000888;
+    LDA.W strcNames.sTemp+3                                    ;80821A|AD8808  |000888;
     STA.B [ptrUnknown0x72],Y                                   ;80821D|9772    |000072;
     REP #$20                                                   ;80821F|C220    |      ;
     %UnsetFlag(event1, ~$FFFB)
@@ -241,25 +241,25 @@ fCore_SetDogName:
     SEP #$20                                                   ;808274|E220    |      ;
     LDA.B #$00                                                 ;808276|A900    |      ;
     XBA                                                        ;808278|EB      |      ;
-    LDA.W sTempNameVariable                                    ;808279|AD8508  |000885;
-    STA.W sDogNameShort                                        ;80827C|8D9908  |000899;
+    LDA.W strcNames.sTemp                                      ;808279|AD8508  |000885;
+    STA.W strcNames.sDog                                       ;80827C|8D9908  |000899;
     REP #$20                                                   ;80827F|C220    |      ;
-    STA.W sDogNameLong                                         ;808281|8DDD08  |0008DD;
+    STA.W strcNames.wDog                                       ;808281|8DDD08  |0008DD;
     SEP #$20                                                   ;808284|E220    |      ;
-    LDA.W sTempNameVariable+1                                  ;808286|AD8608  |000886;
-    STA.W sDogNameShort+1                                      ;808289|8D9A08  |00089A;
+    LDA.W strcNames.sTemp+1                                    ;808286|AD8608  |000886;
+    STA.W strcNames.sDog+1                                     ;808289|8D9A08  |00089A;
     REP #$20                                                   ;80828C|C220    |      ;
-    STA.W sDogNameLong+2                                       ;80828E|8DDF08  |0008DF;
+    STA.W strcNames.wDog+2                                     ;80828E|8DDF08  |0008DF;
     SEP #$20                                                   ;808291|E220    |      ;
-    LDA.W sTempNameVariable+2                                  ;808293|AD8708  |000887;
-    STA.W sDogNameShort+2                                      ;808296|8D9B08  |00089B;
+    LDA.W strcNames.sTemp+2                                    ;808293|AD8708  |000887;
+    STA.W strcNames.sDog+2                                     ;808296|8D9B08  |00089B;
     REP #$20                                                   ;808299|C220    |      ;
-    STA.W sDogNameLong+4                                       ;80829B|8DE108  |0008E1;
+    STA.W strcNames.wDog+4                                     ;80829B|8DE108  |0008E1;
     SEP #$20                                                   ;80829E|E220    |      ;
-    LDA.W sTempNameVariable+3                                  ;8082A0|AD8808  |000888;
-    STA.W sDogNameShort+3                                      ;8082A3|8D9C08  |00089C;
+    LDA.W strcNames.sTemp+3                                    ;8082A0|AD8808  |000888;
+    STA.W strcNames.sDog+3                                     ;8082A3|8D9C08  |00089C;
     REP #$20                                                   ;8082A6|C220    |      ;
-    STA.W sDogNameLong+6                                       ;8082A8|8DE308  |0008E3;
+    STA.W strcNames.wDog+6                                     ;8082A8|8DE308  |0008E3;
     REP #$20                                                   ;8082AB|C220    |      ;
     LDA.W nMapEngine_flags                                     ;8082AD|AD9601  |000196;
     ORA.W #!AFLAGS_FORCETELEPORT                                               
@@ -288,25 +288,25 @@ fCore_SetHorseName:
     SEP #$20                                                   ;8082E6|E220    |      ;
     LDA.B #$00                                                 ;8082E8|A900    |      ;
     XBA                                                        ;8082EA|EB      |      ;
-    LDA.W sTempNameVariable                                    ;8082EB|AD8508  |000885;
-    STA.W sHorseNameShort                                      ;8082EE|8D9D08  |00089D;
+    LDA.W strcNames.sTemp                                      ;8082EB|AD8508  |000885;
+    STA.W strcNames.sHorse                                     ;8082EE|8D9D08  |00089D;
     REP #$20                                                   ;8082F1|C220    |      ;
-    STA.W sHorseNameLong                                       ;8082F3|8DE508  |0008E5;
+    STA.W strcNames.wHorse                                     ;8082F3|8DE508  |0008E5;
     SEP #$20                                                   ;8082F6|E220    |      ;
-    LDA.W sTempNameVariable+1                                  ;8082F8|AD8608  |000886;
-    STA.W sHorseNameShort+1                                    ;8082FB|8D9E08  |00089E;
+    LDA.W strcNames.sTemp+1                                    ;8082F8|AD8608  |000886;
+    STA.W strcNames.sHorse+1                                   ;8082FB|8D9E08  |00089E;
     REP #$20                                                   ;8082FE|C220    |      ;
-    STA.W sHorseNameLong+2                                     ;808300|8DE708  |0008E7;
+    STA.W strcNames.wHorse+2                                   ;808300|8DE708  |0008E7;
     SEP #$20                                                   ;808303|E220    |      ;
-    LDA.W sTempNameVariable+2                                  ;808305|AD8708  |000887;
-    STA.W sHorseNameShort+2                                    ;808308|8D9F08  |00089F;
+    LDA.W strcNames.sTemp+2                                    ;808305|AD8708  |000887;
+    STA.W strcNames.sHorse+2                                   ;808308|8D9F08  |00089F;
     REP #$20                                                   ;80830B|C220    |      ;
-    STA.W sHorseNameLong+4                                     ;80830D|8DE908  |0008E9;
+    STA.W strcNames.wHorse+4                                   ;80830D|8DE908  |0008E9;
     SEP #$20                                                   ;808310|E220    |      ;
-    LDA.W sTempNameVariable+3                                  ;808312|AD8808  |000888;
-    STA.W sHorseNameShort+3                                    ;808315|8DA008  |0008A0;
+    LDA.W strcNames.sTemp+3                                    ;808312|AD8808  |000888;
+    STA.W strcNames.sHorse+3                                   ;808315|8DA008  |0008A0;
     REP #$20                                                   ;808318|C220    |      ;
-    STA.W sHorseNameLong+6                                     ;80831A|8DEB08  |0008EB;
+    STA.W strcNames.wHorse+6                                   ;80831A|8DEB08  |0008EB;
     REP #$20                                                   ;80831D|C220    |      ;
     LDA.W nMapEngine_flags                                     ;80831F|AD9601  |000196;
     ORA.W #!AFLAGS_FORCETELEPORT                                               
@@ -335,25 +335,25 @@ fCore_SetFirstChildName:
     SEP #$20                                                   ;808358|E220    |      ;
     LDA.B #$00                                                 ;80835A|A900    |      ;
     XBA                                                        ;80835C|EB      |      ;
-    LDA.W sTempNameVariable                                    ;80835D|AD8508  |000885;
+    LDA.W strcNames.sTemp                                      ;80835D|AD8508  |000885;
     STA.L sFirstChildNameShort                                 ;808360|8F3D1F7F|7F1F3D;
     REP #$20                                                   ;808364|C220    |      ;
-    STA.W sFirstChildNameLong                                  ;808366|8DED08  |0008ED;
+    STA.W strcNames.wFirstChild                                ;808366|8DED08  |0008ED;
     SEP #$20                                                   ;808369|E220    |      ;
-    LDA.W sTempNameVariable+1                                  ;80836B|AD8608  |000886;
+    LDA.W strcNames.sTemp+1                                    ;80836B|AD8608  |000886;
     STA.L sFirstChildNameShort+1                               ;80836E|8F3E1F7F|7F1F3E;
     REP #$20                                                   ;808372|C220    |      ;
-    STA.W sFirstChildNameLong+2                                ;808374|8DEF08  |0008EF;
+    STA.W strcNames.wFirstChild+2                              ;808374|8DEF08  |0008EF;
     SEP #$20                                                   ;808377|E220    |      ;
-    LDA.W sTempNameVariable+2                                  ;808379|AD8708  |000887;
+    LDA.W strcNames.sTemp+2                                    ;808379|AD8708  |000887;
     STA.L sFirstChildNameShort+2                               ;80837C|8F3F1F7F|7F1F3F;
     REP #$20                                                   ;808380|C220    |      ;
-    STA.W sFirstChildNameLong+4                                ;808382|8DF108  |0008F1;
+    STA.W strcNames.wFirstChild+4                              ;808382|8DF108  |0008F1;
     SEP #$20                                                   ;808385|E220    |      ;
-    LDA.W sTempNameVariable+3                                  ;808387|AD8808  |000888;
+    LDA.W strcNames.sTemp+3                                    ;808387|AD8808  |000888;
     STA.L sFirstChildNameShort+3                               ;80838A|8F401F7F|7F1F40;
     REP #$20                                                   ;80838E|C220    |      ;
-    STA.W sFirstChildNameLong+6                                ;808390|8DF308  |0008F3;
+    STA.W strcNames.wFirstChild+6                              ;808390|8DF308  |0008F3;
     REP #$20                                                   ;808393|C220    |      ;
     LDA.W nMapEngine_flags                                     ;808395|AD9601  |000196;
     ORA.W #!AFLAGS_FORCETELEPORT                                               
@@ -382,25 +382,25 @@ fCore_SetSecondChildName:
     SEP #$20                                                   ;8083CE|E220    |      ;
     LDA.B #$00                                                 ;8083D0|A900    |      ;
     XBA                                                        ;8083D2|EB      |      ;
-    LDA.W sTempNameVariable                                    ;8083D3|AD8508  |000885;
+    LDA.W strcNames.sTemp                                      ;8083D3|AD8508  |000885;
     STA.L sSecondChildNameShort                                ;8083D6|8F411F7F|7F1F41;
     REP #$20                                                   ;8083DA|C220    |      ;
-    STA.W sSecondChildNameLong                                 ;8083DC|8DF508  |0008F5;
+    STA.W strcNames.wSecondChild                               ;8083DC|8DF508  |0008F5;
     SEP #$20                                                   ;8083DF|E220    |      ;
-    LDA.W sTempNameVariable+1                                  ;8083E1|AD8608  |000886;
+    LDA.W strcNames.sTemp+1                                    ;8083E1|AD8608  |000886;
     STA.L sSecondChildNameShort+1                              ;8083E4|8F421F7F|7F1F42;
     REP #$20                                                   ;8083E8|C220    |      ;
-    STA.W sSecondChildNameLong+2                               ;8083EA|8DF708  |0008F7;
+    STA.W strcNames.wSecondChild+2                             ;8083EA|8DF708  |0008F7;
     SEP #$20                                                   ;8083ED|E220    |      ;
-    LDA.W sTempNameVariable+2                                  ;8083EF|AD8708  |000887;
+    LDA.W strcNames.sTemp+2                                    ;8083EF|AD8708  |000887;
     STA.L sSecondChildNameShort+2                              ;8083F2|8F431F7F|7F1F43;
     REP #$20                                                   ;8083F6|C220    |      ;
-    STA.W sSecondChildNameLong+4                               ;8083F8|8DF908  |0008F9;
+    STA.W strcNames.wSecondChild+4                             ;8083F8|8DF908  |0008F9;
     SEP #$20                                                   ;8083FB|E220    |      ;
-    LDA.W sTempNameVariable+3                                  ;8083FD|AD8808  |000888;
+    LDA.W strcNames.sTemp+3                                    ;8083FD|AD8808  |000888;
     STA.L sSecondChildNameShort+3                              ;808400|8F441F7F|7F1F44;
     REP #$20                                                   ;808404|C220    |      ;
-    STA.W sSecondChildNameLong+6                               ;808406|8DFB08  |0008FB;
+    STA.W strcNames.wSecondChild+6                             ;808406|8DFB08  |0008FB;
     REP #$20                                                   ;808409|C220    |      ;
     LDA.W nMapEngine_flags                                     ;80840B|AD9601  |000196;
     ORA.W #!AFLAGS_FORCETELEPORT                                               
@@ -1008,7 +1008,7 @@ fCore_Unused8088C3:
     STA.W SNES_A1T4H                                           ;808942|8D4343  |004343;
     LDA.B #$7E                                                 ;808945|A97E    |      ;
     STA.W SNES_A1B4                                            ;808947|8D4443  |004344;
-    LDX.B strcSingleObjectData.unkAF                           ;80894A|A6AF    |0000AF;
+    LDX.B strcObject.unkAF                                     ;80894A|A6AF    |0000AF;
     STX.W SNES_DAS4L                                           ;80894C|8E4543  |004345;
     LDA.B #$10                                                 ;80894F|A910    |      ;
     STA.W SNES_MDMAEN                                          ;808951|8D0B42  |00420B;
@@ -2677,19 +2677,19 @@ fSubrutinesExecute_809553:
 fGraphics_MapScrool:
     SEP #$20                                                   ;8095B3|E220    |      ;
     REP #$10                                                   ;8095B5|C210    |      ;
-    LDA.W nMapScrool_Timer                                     ;8095B7|AD8008  |000880;
+    LDA.W strcMapScrool.timer                                  ;8095B7|AD8008  |000880;
     BEQ +                                                      ;8095BA|F021    |8095DD;
     DEC A                                                      ;8095BC|3A      |      ;
-    STA.W nMapScrool_Timer                                     ;8095BD|8D8008  |000880;
+    STA.W strcMapScrool.timer                                  ;8095BD|8D8008  |000880;
     REP #$20                                                   ;8095C0|C220    |      ;
     LDA.B nCameraX                                             ;8095C2|A5F5    |0000F5;
     CLC                                                        ;8095C4|18      |      ;
-    ADC.W nMapScrool_SpeedX                                    ;8095C5|6D7C08  |00087C;
+    ADC.W strcMapScrool.speedX                                 ;8095C5|6D7C08  |00087C;
     STA.B nCameraX                                             ;8095C8|85F5    |0000F5;
     STA.W strcBGScrool.BG1HorOffs                              ;8095CA|8D3C01  |00013C;
     LDA.B nCameraY                                             ;8095CD|A5F7    |0000F7;
     CLC                                                        ;8095CF|18      |      ;
-    ADC.W nMapScrool_SpeedY                                    ;8095D0|6D7E08  |00087E;
+    ADC.W strcMapScrool.speedY                                 ;8095D0|6D7E08  |00087E;
     STA.B nCameraY                                             ;8095D3|85F7    |0000F7;
     STA.W strcBGScrool.BG1VerOffs                              ;8095D5|8D3E01  |00013E;
     BPL +                                                      ;8095D8|1003    |8095DD;
@@ -3098,9 +3098,9 @@ fMap_SetupArea:
     STA.L $7F1F7A                                              ;809927|8F7A1F7F|7F1F7A;
     STZ.W $0878                                                ;80992B|9C7808  |000878;
     LDA.B strcPlayer.posX                                      ;80992E|A5D6    |0000D6;
-    STA.W nPlayerPosXCopy2                                     ;809930|8D0709  |000907;
+    STA.W strcObjectData.playerX                               ;809930|8D0709  |000907;
     LDA.B strcPlayer.posY                                      ;809933|A5D8    |0000D8;
-    STA.W nPlayerPosYCopy2                                     ;809935|8D0909  |000909;
+    STA.W strcObjectData.playerY                               ;809935|8D0909  |000909;
     SEP #$20                                                   ;809938|E220    |      ;
     STZ.W $098A                                                ;80993A|9C8A09  |00098A;
     STZ.W $0919                                                ;80993D|9C1909  |000919;
@@ -3124,9 +3124,9 @@ fMap_SetupArea:
     REP #$20                                                   ;80997A|C220    |      ;
     LDY.W #$0001                                               ;80997C|A00100  |      ;
     JSL.L fUnknown_8180B7                                      ;80997F|22B78081|8180B7;
-    LDA.W $090B                                                ;809983|AD0B09  |00090B;
+    LDA.W strcObjectData.unkPosX                               ;809983|AD0B09  |00090B;
     STA.W nUnknownX                                            ;809986|8D8009  |000980;
-    LDA.W $090D                                                ;809989|AD0D09  |00090D;
+    LDA.W strcObjectData.unkPosY                               ;809989|AD0D09  |00090D;
     STA.W nUnknownY                                            ;80998C|8D8209  |000982;
     SEP #$20                                                   ;80998F|E220    |      ;
     LDA.B #$01                                                 ;809991|A901    |      ;
@@ -3140,7 +3140,7 @@ fMap_SetupArea:
     LDA.W #$0014                                               ;8099A6|A91400  |      ;
     CLC                                                        ;8099A9|18      |      ;
     ADC.B strcPlayer.direction                                 ;8099AA|65DA    |0000DA;
-    STA.W nSmallItemSpriteIndex                                ;8099AC|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;8099AC|8D0109  |000901;
     BRA .label12                                               ;8099AF|801C    |8099CD;
  
  
@@ -3149,7 +3149,7 @@ fMap_SetupArea:
     LDA.W #$0000                                               ;8099B3|A90000  |      ;
     CLC                                                        ;8099B6|18      |      ;
     ADC.B strcPlayer.direction                                 ;8099B7|65DA    |0000DA;
-    STA.W nSmallItemSpriteIndex                                ;8099B9|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;8099B9|8D0109  |000901;
  
 .label11:
     SEP #$20                                                   ;8099BC|E220    |      ;
@@ -3509,7 +3509,7 @@ fMapChangeHandler_809A64:
     STA.B strcPlayer.direction                                 ;809C93|85DA    |0000DA;
     REP #$30                                                   ;809C95|C230    |      ;
     LDA.W #$0003                                               ;809C97|A90300  |      ;
-    STA.W nPlayerDirectionCopy                                 ;809C9A|8D1109  |000911;
+    STA.W strcObjectData.direction                             ;809C9A|8D1109  |000911;
     JMP.W .return                                              ;809C9D|4C0A9D  |809D0A;
  
  
@@ -3519,7 +3519,7 @@ fMapChangeHandler_809A64:
     STA.B strcPlayer.direction                                 ;809CA5|85DA    |0000DA;
     REP #$30                                                   ;809CA7|C230    |      ;
     LDA.W #$0000                                               ;809CA9|A90000  |      ;
-    STA.W nPlayerDirectionCopy                                 ;809CAC|8D1109  |000911;
+    STA.W strcObjectData.direction                             ;809CAC|8D1109  |000911;
     BRA .return                                                ;809CAF|8059    |809D0A;
  
  
@@ -3529,7 +3529,7 @@ fMapChangeHandler_809A64:
     STA.B strcPlayer.direction                                 ;809CB6|85DA    |0000DA;
     REP #$30                                                   ;809CB8|C230    |      ;
     LDA.W #$0001                                               ;809CBA|A90100  |      ;
-    STA.W nPlayerDirectionCopy                                 ;809CBD|8D1109  |000911;
+    STA.W strcObjectData.direction                             ;809CBD|8D1109  |000911;
     BRA .return                                                ;809CC0|8048    |809D0A;
  
  
@@ -3539,7 +3539,7 @@ fMapChangeHandler_809A64:
     STA.B strcPlayer.direction                                 ;809CC7|85DA    |0000DA;
     REP #$30                                                   ;809CC9|C230    |      ;
     LDA.W #$0002                                               ;809CCB|A90200  |      ;
-    STA.W nPlayerDirectionCopy                                 ;809CCE|8D1109  |000911;
+    STA.W strcObjectData.direction                             ;809CCE|8D1109  |000911;
     BRA .return                                                ;809CD1|8037    |809D0A;
  
  
@@ -3818,7 +3818,7 @@ fUnknown_809EBC:
     ADC.W #$0080                                               ;809ECF|698000  |      ;
     SEC                                                        ;809ED2|38      |      ;
     SBC.B strcPlayer.newCamX                                   ;809ED3|E5ED    |0000ED;
-    STA.W $090B                                                ;809ED5|8D0B09  |00090B;
+    STA.W strcObjectData.unkPosX                               ;809ED5|8D0B09  |00090B;
     SEP #$20                                                   ;809ED8|E220    |      ;
     LDA.B #$00                                                 ;809EDA|A900    |      ;
     STA.B strcMap.unk20                                        ;809EDC|8520    |000020;
@@ -3834,7 +3834,7 @@ fUnknown_809EBC:
     BCS .label3                                                ;809EEA|B00A    |809EF6;
     STA.B nCameraX                                             ;809EEC|85F5    |0000F5;
     LDA.W #$0080                                               ;809EEE|A98000  |      ;
-    STA.W $090B                                                ;809EF1|8D0B09  |00090B;
+    STA.W strcObjectData.unkPosX                               ;809EF1|8D0B09  |00090B;
     BRA .label4                                                ;809EF4|8018    |809F0E;
  
  
@@ -3844,7 +3844,7 @@ fUnknown_809EBC:
     ADC.W #$0080                                               ;809EF9|698000  |      ;
     SEC                                                        ;809EFC|38      |      ;
     SBC.B $F1                                                  ;809EFD|E5F1    |0000F1;
-    STA.W $090B                                                ;809EFF|8D0B09  |00090B;
+    STA.W strcObjectData.unkPosX                               ;809EFF|8D0B09  |00090B;
     SEP #$20                                                   ;809F02|E220    |      ;
     LDA.B #$08                                                 ;809F04|A908    |      ;
     STA.B strcMap.unk20                                        ;809F06|8520    |000020;
@@ -3868,7 +3868,7 @@ fUnknown_809EBC:
     ADC.W #$0080                                               ;809F21|698000  |      ;
     SEC                                                        ;809F24|38      |      ;
     SBC.B strcPlayer.newCamY                                   ;809F25|E5EF    |0000EF;
-    STA.W $090D                                                ;809F27|8D0D09  |00090D;
+    STA.W strcObjectData.unkPosY                               ;809F27|8D0D09  |00090D;
     SEP #$20                                                   ;809F2A|E220    |      ;
     LDA.B #$00                                                 ;809F2C|A900    |      ;
     STA.B strcMap.unk21                                        ;809F2E|8521    |000021;
@@ -3884,7 +3884,7 @@ fUnknown_809EBC:
     BCS .label7                                                ;809F3C|B00A    |809F48;
     STA.B nCameraY                                             ;809F3E|85F7    |0000F7;
     LDA.W #$0080                                               ;809F40|A98000  |      ;
-    STA.W $090D                                                ;809F43|8D0D09  |00090D;
+    STA.W strcObjectData.unkPosY                               ;809F43|8D0D09  |00090D;
     BRA .return                                                ;809F46|8018    |809F60;
  
  
@@ -3894,7 +3894,7 @@ fUnknown_809EBC:
     ADC.W #$0080                                               ;809F4B|698000  |      ;
     SEC                                                        ;809F4E|38      |      ;
     SBC.B $F3                                                  ;809F4F|E5F3    |0000F3;
-    STA.W $090D                                                ;809F51|8D0D09  |00090D;
+    STA.W strcObjectData.unkPosY                               ;809F51|8D0D09  |00090D;
     SEP #$20                                                   ;809F54|E220    |      ;
     LDA.B #$08                                                 ;809F56|A908    |      ;
     STA.B strcMap.unk21                                        ;809F58|8521    |000021;
