@@ -2985,16 +2985,16 @@ fAIAction0x30_UpdateChicken:
     REP #$20                                                   ;8499E5|C220    |      ;
     ASL A                                                      ;8499E7|0A      |      ;
     TAX                                                        ;8499E8|AA      |      ;
-    LDA.W strcAnimalsData.unkEachChicken,X                     ;8499E9|BD3B09  |00093B;
+    LDA.W strcGoodsData.unkEachChicken,X                       ;8499E9|BD3B09  |00093B;
     CMP.W #$0200                                               ;8499EC|C90002  |      ;
     BEQ +                                                      ;8499EF|F007    |8499F8;
     INC A                                                      ;8499F1|1A      |      ;
-    STA.W strcAnimalsData.unkEachChicken,X                     ;8499F2|9D3B09  |00093B;
+    STA.W strcGoodsData.unkEachChicken,X                       ;8499F2|9D3B09  |00093B;
     JMP.W .label2                                              ;8499F5|4C419A  |849A41;
  
  
   + REP #$30                                                   ;8499F8|C230    |      ;
-    STZ.W strcAnimalsData.unkEachChicken,X                     ;8499FA|9E3B09  |00093B;
+    STZ.W strcGoodsData.unkEachChicken,X                       ;8499FA|9E3B09  |00093B;
     SEP #$20                                                   ;8499FD|E220    |      ;
     LDA.B strcPlayer.lastRandomNumber                          ;8499FF|A5DE    |0000DE;
     CMP.B #$55                                                 ;849A01|C955    |      ;
@@ -3946,17 +3946,17 @@ fUnknown_ToFarm:
     REP #$20                                                   ;84A0EC|C220    |      ;
     ASL A                                                      ;84A0EE|0A      |      ;
     TAX                                                        ;84A0EF|AA      |      ;
-    LDA.W strcAnimalsData.unkEachCow,X                         ;84A0F0|BD5309  |000953;
+    LDA.W strcGoodsData.unkEachCow,X                           ;84A0F0|BD5309  |000953;
     CMP.W #$0100                                               ;84A0F3|C90001  |      ;
     BEQ .label39                                               ;84A0F6|F007    |84A0FF;
     INC A                                                      ;84A0F8|1A      |      ;
-    STA.W strcAnimalsData.unkEachCow,X                         ;84A0F9|9D5309  |000953;
+    STA.W strcGoodsData.unkEachCow,X                           ;84A0F9|9D5309  |000953;
     JMP.W fUnknown_84A46E                                      ;84A0FC|4C6EA4  |84A46E;
  
  
 .label39:
     REP #$30                                                   ;84A0FF|C230    |      ;
-    STZ.W strcAnimalsData.unkEachCow,X                         ;84A101|9E5309  |000953;
+    STZ.W strcGoodsData.unkEachCow,X                           ;84A101|9E5309  |000953;
     SEP #$20                                                   ;84A104|E220    |      ;
     LDA.B strcPlayer.lastRandomNumber                          ;84A106|A5DE    |0000DE;
     CMP.B #$40                                                 ;84A108|C940    |      ;
@@ -4075,16 +4075,16 @@ fUnknown_ToFarm:
     REP #$20                                                   ;84A1D9|C220    |      ;
     ASL A                                                      ;84A1DB|0A      |      ;
     TAX                                                        ;84A1DC|AA      |      ;
-    LDA.W strcAnimalsData.unkEachCow,X                         ;84A1DD|BD5309  |000953;
+    LDA.W strcGoodsData.unkEachCow,X                           ;84A1DD|BD5309  |000953;
     CMP.W #$0100                                               ;84A1E0|C90001  |      ;
     BEQ +                                                      ;84A1E3|F007    |84A1EC;
     INC A                                                      ;84A1E5|1A      |      ;
-    STA.W strcAnimalsData.unkEachCow,X                         ;84A1E6|9D5309  |000953;
+    STA.W strcGoodsData.unkEachCow,X                           ;84A1E6|9D5309  |000953;
     JMP.W fUnknown_84A46E                                      ;84A1E9|4C6EA4  |84A46E;
  
  
   + REP #$30                                                   ;84A1EC|C230    |      ;
-    STZ.W strcAnimalsData.unkEachCow,X                         ;84A1EE|9E5309  |000953;
+    STZ.W strcGoodsData.unkEachCow,X                           ;84A1EE|9E5309  |000953;
     SEP #$20                                                   ;84A1F1|E220    |      ;
     LDA.B strcPlayer.lastRandomNumber                          ;84A1F3|A5DE    |0000DE;
     CMP.B #$40                                                 ;84A1F5|C940    |      ;
@@ -4203,16 +4203,16 @@ fUnknown_ToFarm:
     REP #$20                                                   ;84A2C6|C220    |      ;
     ASL A                                                      ;84A2C8|0A      |      ;
     TAX                                                        ;84A2C9|AA      |      ;
-    LDA.W strcAnimalsData.unkEachCow,X                         ;84A2CA|BD5309  |000953;
+    LDA.W strcGoodsData.unkEachCow,X                           ;84A2CA|BD5309  |000953;
     CMP.W #$0100                                               ;84A2CD|C90001  |      ;
     BEQ +                                                      ;84A2D0|F007    |84A2D9;
     INC A                                                      ;84A2D2|1A      |      ;
-    STA.W strcAnimalsData.unkEachCow,X                         ;84A2D3|9D5309  |000953;
+    STA.W strcGoodsData.unkEachCow,X                           ;84A2D3|9D5309  |000953;
     JMP.W fUnknown_84A46E                                      ;84A2D6|4C6EA4  |84A46E;
  
  
   + REP #$30                                                   ;84A2D9|C230    |      ;
-    STZ.W strcAnimalsData.unkEachCow,X                         ;84A2DB|9E5309  |000953;
+    STZ.W strcGoodsData.unkEachCow,X                           ;84A2DB|9E5309  |000953;
     SEP #$20                                                   ;84A2DE|E220    |      ;
     LDY.W #$0000                                               ;84A2E0|A00000  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;84A2E3|B772    |000072;
@@ -4675,7 +4675,7 @@ fUnknown_84A607:
     REP #$20                                                   ;84A630|C220    |      ;
     ASL A                                                      ;84A632|0A      |      ;
     TAX                                                        ;84A633|AA      |      ;
-    STZ.W strcAnimalsData.unkEachCow,X                         ;84A634|9E5309  |000953;
+    STZ.W strcGoodsData.unkEachCow,X                           ;84A634|9E5309  |000953;
     SEP #$20                                                   ;84A637|E220    |      ;
     LDY.W #$0000                                               ;84A639|A00000  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;84A63C|B772    |000072;
@@ -4851,7 +4851,7 @@ fUnknown_84A740:
     REP #$20                                                   ;84A769|C220    |      ;
     ASL A                                                      ;84A76B|0A      |      ;
     TAX                                                        ;84A76C|AA      |      ;
-    STZ.W strcAnimalsData.unkEachCow,X                         ;84A76D|9E5309  |000953;
+    STZ.W strcGoodsData.unkEachCow,X                           ;84A76D|9E5309  |000953;
     SEP #$20                                                   ;84A770|E220    |      ;
     LDY.W #$0000                                               ;84A772|A00000  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;84A775|B772    |000072;
@@ -5219,16 +5219,16 @@ fAIAction0x33_UpdateMole:
  
 .label1:
     SEP #$20                                                   ;84AA1E|E220    |      ;
-    LDA.W strcAnimalsData.unkMole                              ;84AA20|AD3A09  |00093A;
+    LDA.W strcGoodsData.unkMole                                ;84AA20|AD3A09  |00093A;
     CMP.B #$B4                                                 ;84AA23|C9B4    |      ;
     BEQ +                                                      ;84AA25|F007    |84AA2E;
     INC A                                                      ;84AA27|1A      |      ;
-    STA.W strcAnimalsData.unkMole                              ;84AA28|8D3A09  |00093A;
+    STA.W strcGoodsData.unkMole                                ;84AA28|8D3A09  |00093A;
     JMP.W .return                                              ;84AA2B|4C4FAA  |84AA4F;
  
  
   + SEP #$20                                                   ;84AA2E|E220    |      ;
-    STZ.W strcAnimalsData.unkMole                              ;84AA30|9C3A09  |00093A;
+    STZ.W strcGoodsData.unkMole                                ;84AA30|9C3A09  |00093A;
     REP #$30                                                   ;84AA33|C230    |      ;
     SEP #$20                                                   ;84AA35|E220    |      ;
     LDA.B strcPlayer.lastRandomNumber                          ;84AA37|A5DE    |0000DE;
@@ -5363,17 +5363,17 @@ fAIAction0x35_UpdateHorse:
     CMP.B #$15                                                 ;84AB46|C915    |      ;
     BEQ .label1                                                ;84AB48|F029    |84AB73;
     SEP #$20                                                   ;84AB4A|E220    |      ;
-    LDA.W strcAnimalsData.unkHorse                             ;84AB4C|AD3909  |000939;
+    LDA.W strcGoodsData.unkHorse                               ;84AB4C|AD3909  |000939;
     CMP.B #$78                                                 ;84AB4F|C978    |      ;
     BEQ +                                                      ;84AB51|F007    |84AB5A;
     INC A                                                      ;84AB53|1A      |      ;
-    STA.W strcAnimalsData.unkHorse                             ;84AB54|8D3909  |000939;
+    STA.W strcGoodsData.unkHorse                               ;84AB54|8D3909  |000939;
     JMP.W .label8                                              ;84AB57|4C88AD  |84AD88;
  
  
   + SEP #$20                                                   ;84AB5A|E220    |      ;
     REP #$10                                                   ;84AB5C|C210    |      ;
-    STZ.W strcAnimalsData.unkHorse                             ;84AB5E|9C3909  |000939;
+    STZ.W strcGoodsData.unkHorse                               ;84AB5E|9C3909  |000939;
     REP #$20                                                   ;84AB61|C220    |      ;
     LDA.W #$0017                                               ;84AB63|A91700  |      ;
     LDX.W #$0000                                               ;84AB66|A20000  |      ;
@@ -5576,16 +5576,16 @@ fAIAction0x35_UpdateHorse:
     REP #$30                                                   ;84ACEE|C230    |      ;
     %UnsetFlag(daily2, ~$F7FF)
     SEP #$20                                                   ;84ACFB|E220    |      ;
-    LDA.W strcAnimalsData.unkHorse                             ;84ACFD|AD3909  |000939;
+    LDA.W strcGoodsData.unkHorse                               ;84ACFD|AD3909  |000939;
     CMP.B #$78                                                 ;84AD00|C978    |      ;
     BEQ +                                                      ;84AD02|F007    |84AD0B;
     INC A                                                      ;84AD04|1A      |      ;
-    STA.W strcAnimalsData.unkHorse                             ;84AD05|8D3909  |000939;
+    STA.W strcGoodsData.unkHorse                               ;84AD05|8D3909  |000939;
     JMP.W .label8                                              ;84AD08|4C88AD  |84AD88;
  
  
   + SEP #$20                                                   ;84AD0B|E220    |      ;
-    STZ.W strcAnimalsData.unkHorse                             ;84AD0D|9C3909  |000939;
+    STZ.W strcGoodsData.unkHorse                               ;84AD0D|9C3909  |000939;
     SEP #$20                                                   ;84AD10|E220    |      ;
     LDA.B strcPlayer.lastRandomNumber                          ;84AD12|A5DE    |0000DE;
     CMP.B #$24                                                 ;84AD14|C924    |      ;
@@ -5706,7 +5706,7 @@ fAIAction0x35_UpdateHorse:
     JMP.W .label11                                             ;84ADFE|4C35AE  |84AE35;
  
  
-  + STZ.W strcAnimalsData.unkHorse                             ;84AE01|9C3909  |000939;
+  + STZ.W strcGoodsData.unkHorse                               ;84AE01|9C3909  |000939;
     SEP #$20                                                   ;84AE04|E220    |      ;
     REP #$10                                                   ;84AE06|C210    |      ;
     LDY.W #$0001                                               ;84AE08|A00100  |      ;
@@ -5732,7 +5732,7 @@ fAIAction0x35_UpdateHorse:
  
  
 .label11:
-    STZ.W strcAnimalsData.unkHorse                             ;84AE35|9C3909  |000939;
+    STZ.W strcGoodsData.unkHorse                               ;84AE35|9C3909  |000939;
     SEP #$20                                                   ;84AE38|E220    |      ;
     REP #$10                                                   ;84AE3A|C210    |      ;
     LDY.W #$0001                                               ;84AE3C|A00100  |      ;
@@ -5971,16 +5971,16 @@ fAIAction0x36_UpdateDog:
  
 .label1:
     SEP #$20                                                   ;84AFF4|E220    |      ;
-    LDA.W strcAnimalsData.unkDog                               ;84AFF6|AD3809  |000938;
+    LDA.W strcGoodsData.unkDog                                 ;84AFF6|AD3809  |000938;
     CMP.B #$78                                                 ;84AFF9|C978    |      ;
     BEQ +                                                      ;84AFFB|F007    |84B004;
     INC A                                                      ;84AFFD|1A      |      ;
-    STA.W strcAnimalsData.unkDog                               ;84AFFE|8D3809  |000938;
+    STA.W strcGoodsData.unkDog                                 ;84AFFE|8D3809  |000938;
     JMP.W .label24                                             ;84B001|4C5CB2  |84B25C;
  
  
   + SEP #$20                                                   ;84B004|E220    |      ;
-    STZ.W strcAnimalsData.unkDog                               ;84B006|9C3809  |000938;
+    STZ.W strcGoodsData.unkDog                                 ;84B006|9C3809  |000938;
     REP #$30                                                   ;84B009|C230    |      ;
     LDA.L $7F1F58                                              ;84B00B|AF581F7F|7F1F58;
     AND.W #$0001                                               ;84B00F|290100  |      ;
@@ -6295,7 +6295,7 @@ fAIAction0x36_UpdateDog:
 .whistledog:
     SEP #$20                                                   ;84B278|E220    |      ;
     REP #$10                                                   ;84B27A|C210    |      ;
-    STZ.W strcAnimalsData.unkDog                               ;84B27C|9C3809  |000938;
+    STZ.W strcGoodsData.unkDog                                 ;84B27C|9C3809  |000938;
     SEP #$20                                                   ;84B27F|E220    |      ;
     REP #$10                                                   ;84B281|C210    |      ;
     LDY.W #$0001                                               ;84B283|A00100  |      ;
@@ -9463,7 +9463,7 @@ fInput_Unknown84CAA5:
     STZ.W $0878                                                ;84CD0A|9C7808  |000878;
     STZ.W $087A                                                ;84CD0D|9C7A08  |00087A;
     SEP #$20                                                   ;84CD10|E220    |      ;
-    STZ.W strcAnimalsData.unkHorse                             ;84CD12|9C3909  |000939;
+    STZ.W strcGoodsData.unkHorse                               ;84CD12|9C3909  |000939;
  
 .justReturn3:
     RTL                                                        ;84CD15|6B      |      ;

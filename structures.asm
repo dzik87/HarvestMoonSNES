@@ -250,15 +250,16 @@ endstruct
 ; 936 not used
 
 ;
-; Animal data ?
+; Animal data ? but also any seed is last
 ;
-struct strcAnimalsData      $000937
+struct strcGoodsData        $000937
     .unkCow                 : skip 1    ; 937
     .unkDog                 : skip 1    ; 938
     .unkHorse               : skip 1    ; 939
     .unkMole                : skip 1    ; 93A
     .unkEachChicken         : skip 12*2 ; 93B-952
     .unkEachCow             : skip 12*2 ; 953-96A
+    .unkAnySeed             : skip 1    ; 96B
 endstruct
 
 ;
