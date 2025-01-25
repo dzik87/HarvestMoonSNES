@@ -4,7 +4,7 @@
  
 fUnknown_858000:
     REP #$20                                                   ;858000|C220    |      ;
-    LDA.B strcSingleObjectData.spriteTableIdx                  ;858002|A5A1    |0000A1;
+    LDA.B strcObject.spriteTableIdx                            ;858002|A5A1    |0000A1;
     CMP.W #$0262                                               ;858004|C96202  |      ; game object indexes above 0x262 are located at bank 87
     BCS .label1                                                ;858007|B00A    |858013;
     SEP #$20                                                   ;858009|E220    |      ;
@@ -42,26 +42,26 @@ fUnknown_858000:
     CPY.B strcPlayer.unkDC                                     ;85803B|C4DC    |0000DC;
     BNE .label3                                                ;85803D|D0F0    |85802F;
     LDA.W #$FFFF                                               ;85803F|A9FFFF  |      ;
-    STA.B strcSingleObjectData.exists                          ;858042|85A7    |0000A7;
+    STA.B strcObject.exists                                    ;858042|85A7    |0000A7;
     BRA fReturn_8580B8                                         ;858044|8072    |8580B8;
  
  
 .label4:
-    STY.B strcSingleObjectData.gameObjectIdx                   ;858046|84A5    |0000A5;
+    STY.B strcObject.gameObjectIdx                             ;858046|84A5    |0000A5;
     LDA.W #$7777                                               ;858048|A97777  |      ;
     STA.W strcGameObject.initailized,X                         ;85804B|9D9C01  |00019C;
-    LDA.B strcSingleObjectData.spriteTableIdx                  ;85804E|A5A1    |0000A1;
+    LDA.B strcObject.spriteTableIdx                            ;85804E|A5A1    |0000A1;
     STA.W strcGameObject.spriteTableIdx,X                      ;858050|9D9E01  |00019E;
-    LDA.B strcSingleObjectData.flip                            ;858053|A59F    |00009F;
+    LDA.B strcObject.flip                                      ;858053|A59F    |00009F;
     STA.W strcGameObject.flip,X                                ;858055|9DA001  |0001A0;
-    LDA.B strcSingleObjectData.unk6                            ;858058|A5A3    |0000A3;
+    LDA.B strcObject.unkA3                                     ;858058|A5A3    |0000A3;
     STA.W strcGameObject.unknown6,X                            ;85805A|9DA201  |0001A2;
-    LDA.B strcSingleObjectData.posX                            ;85805D|A59B    |00009B;
+    LDA.B strcObject.posX                                      ;85805D|A59B    |00009B;
     STA.W strcGameObject.positionX,X                           ;85805F|9DA401  |0001A4;
-    LDA.B strcSingleObjectData.posY                            ;858062|A59D    |00009D;
+    LDA.B strcObject.posY                                      ;858062|A59D    |00009D;
     STA.W strcGameObject.positionY,X                           ;858064|9DA601  |0001A6;
-    STX.B strcSingleObjectData.gameObjectIdxOffs               ;858067|86A9    |0000A9;
-    LDA.B strcSingleObjectData.spriteTableIdx                  ;858069|A5A1    |0000A1;
+    STX.B strcObject.gameObjectIdxOffs                         ;858067|86A9    |0000A9;
+    LDA.B strcObject.spriteTableIdx                            ;858069|A5A1    |0000A1;
     CMP.W #$0262                                               ;85806B|C96202  |      ;
     BCS .label5                                                ;85806E|B00D    |85807D;
     LDA.W strcGameObject.spriteTableIdx,X                      ;858070|BD9E01  |00019E;
@@ -82,7 +82,7 @@ fUnknown_858000:
     STA.B ptrUnknown0x75                                       ;85808A|8575    |000075;
  
 .label6:
-    LDX.B strcSingleObjectData.gameObjectIdxOffs               ;85808C|A6A9    |0000A9;
+    LDX.B strcObject.gameObjectIdxOffs                         ;85808C|A6A9    |0000A9;
     LDA.B ptrUnknown0x75                                       ;85808E|A575    |000075;
     STA.W strcGameObject.objectListPointer,X                   ;858090|9DA801  |0001A8;
     CLC                                                        ;858093|18      |      ;
@@ -99,7 +99,7 @@ fUnknown_858000:
     JSR.W fObject_ParseObjectData                              ;8580AE|20E58A  |858AE5;
     REP #$20                                                   ;8580B1|C220    |      ;
     LDA.W #$0000                                               ;8580B3|A90000  |      ;
-    STA.B strcSingleObjectData.exists                          ;8580B6|85A7    |0000A7;
+    STA.B strcObject.exists                                    ;8580B6|85A7    |0000A7;
  
 fReturn_8580B8:
     RTL                                                        ;8580B8|6B      |      ; FIXME: I want to be .return
@@ -107,7 +107,7 @@ fReturn_8580B8:
  
 fObject_Unknown8580B9:
     REP #$20                                                   ;8580B9|C220    |      ;
-    LDA.B strcSingleObjectData.spriteTableIdx                  ;8580BB|A5A1    |0000A1;
+    LDA.B strcObject.spriteTableIdx                            ;8580BB|A5A1    |0000A1;
     CMP.W #$0262                                               ;8580BD|C96202  |      ;
     BCS .label1                                                ;8580C0|B00A    |8580CC;
     SEP #$20                                                   ;8580C2|E220    |      ;
@@ -125,24 +125,24 @@ fObject_Unknown8580B9:
  
 .label2:
     REP #$30                                                   ;8580D4|C230    |      ;
-    LDA.B strcSingleObjectData.gameObjectIdx                   ;8580D6|A5A5    |0000A5;
+    LDA.B strcObject.gameObjectIdx                             ;8580D6|A5A5    |0000A5;
     ASL A                                                      ;8580D8|0A      |      ;
     TAX                                                        ;8580D9|AA      |      ;
     LDA.L aGameObjectIndexOffsets,X                            ;8580DA|BFE08B85|858BE0;
-    STA.B strcSingleObjectData.gameObjectIdxOffs               ;8580DE|85A9    |0000A9;
+    STA.B strcObject.gameObjectIdxOffs                         ;8580DE|85A9    |0000A9;
     TAX                                                        ;8580E0|AA      |      ;
     LDA.W #$0001                                               ;8580E1|A90100  |      ;
-    STA.B strcSingleObjectData.exists                          ;8580E4|85A7    |0000A7;
+    STA.B strcObject.exists                                    ;8580E4|85A7    |0000A7;
     LDA.W strcGameObject.initailized,X                         ;8580E6|BD9C01  |00019C;
     BEQ .return                                                ;8580E9|F014    |8580FF;
-    LDA.B strcSingleObjectData.flip                            ;8580EB|A59F    |00009F;
+    LDA.B strcObject.flip                                      ;8580EB|A59F    |00009F;
     STA.W strcGameObject.flip,X                                ;8580ED|9DA001  |0001A0;
-    LDA.B strcSingleObjectData.posX                            ;8580F0|A59B    |00009B;
+    LDA.B strcObject.posX                                      ;8580F0|A59B    |00009B;
     STA.W strcGameObject.positionX,X                           ;8580F2|9DA401  |0001A4;
-    LDA.B strcSingleObjectData.posY                            ;8580F5|A59D    |00009D;
+    LDA.B strcObject.posY                                      ;8580F5|A59D    |00009D;
     STA.W strcGameObject.positionY,X                           ;8580F7|9DA601  |0001A6;
     LDA.W #$0000                                               ;8580FA|A90000  |      ;
-    STA.B strcSingleObjectData.exists                          ;8580FD|85A7    |0000A7;
+    STA.B strcObject.exists                                    ;8580FD|85A7    |0000A7;
  
 .return:
     RTL                                                        ;8580FF|6B      |      ;
@@ -151,7 +151,7 @@ fObject_Unknown8580B9:
 fObject_Unknown858100:
     REP #$30                                                   ;858100|C230    |      ;
     REP #$20                                                   ;858102|C220    |      ;
-    LDA.B strcSingleObjectData.spriteTableIdx                  ;858104|A5A1    |0000A1;
+    LDA.B strcObject.spriteTableIdx                            ;858104|A5A1    |0000A1;
     CMP.W #$0262                                               ;858106|C96202  |      ;
     BCS .label1                                                ;858109|B00A    |858115;
     SEP #$20                                                   ;85810B|E220    |      ;
@@ -169,30 +169,30 @@ fObject_Unknown858100:
  
 .label2:
     REP #$30                                                   ;85811D|C230    |      ;
-    LDA.B strcSingleObjectData.gameObjectIdx                   ;85811F|A5A5    |0000A5;
+    LDA.B strcObject.gameObjectIdx                             ;85811F|A5A5    |0000A5;
     ASL A                                                      ;858121|0A      |      ;
     TAX                                                        ;858122|AA      |      ;
     LDA.L aGameObjectIndexOffsets,X                            ;858123|BFE08B85|858BE0;
-    STA.B strcSingleObjectData.gameObjectIdxOffs               ;858127|85A9    |0000A9;
+    STA.B strcObject.gameObjectIdxOffs                         ;858127|85A9    |0000A9;
     JSR.W fUnknown_858B7B                                      ;858129|207B8B  |858B7B;
-    LDA.B strcSingleObjectData.unkAF                           ;85812C|A5AF    |0000AF;
+    LDA.B strcObject.unkAF                                     ;85812C|A5AF    |0000AF;
     BNE fReturn_8580B8                                         ;85812E|D088    |8580B8; BUG - should be .return in this function rather than previous one since we are out of function scope
     JSR.W fUnknown_858B41                                      ;858130|20418B  |858B41;
     REP #$30                                                   ;858133|C230    |      ;
-    LDY.B strcSingleObjectData.gameObjectIdx                   ;858135|A4A5    |0000A5;
-    LDX.B strcSingleObjectData.gameObjectIdxOffs               ;858137|A6A9    |0000A9;
-    LDA.B strcSingleObjectData.spriteTableIdx                  ;858139|A5A1    |0000A1;
+    LDY.B strcObject.gameObjectIdx                             ;858135|A4A5    |0000A5;
+    LDX.B strcObject.gameObjectIdxOffs                         ;858137|A6A9    |0000A9;
+    LDA.B strcObject.spriteTableIdx                            ;858139|A5A1    |0000A1;
     STA.W strcGameObject.spriteTableIdx,X                      ;85813B|9D9E01  |00019E;
-    LDA.B strcSingleObjectData.flip                            ;85813E|A59F    |00009F;
+    LDA.B strcObject.flip                                      ;85813E|A59F    |00009F;
     STA.W strcGameObject.flip,X                                ;858140|9DA001  |0001A0;
-    LDA.B strcSingleObjectData.unk6                            ;858143|A5A3    |0000A3;
+    LDA.B strcObject.unkA3                                     ;858143|A5A3    |0000A3;
     STA.W strcGameObject.unknown6,X                            ;858145|9DA201  |0001A2;
-    LDA.B strcSingleObjectData.posX                            ;858148|A59B    |00009B;
+    LDA.B strcObject.posX                                      ;858148|A59B    |00009B;
     STA.W strcGameObject.positionX,X                           ;85814A|9DA401  |0001A4;
-    LDA.B strcSingleObjectData.posY                            ;85814D|A59D    |00009D;
+    LDA.B strcObject.posY                                      ;85814D|A59D    |00009D;
     STA.W strcGameObject.positionY,X                           ;85814F|9DA601  |0001A6;
-    STX.B strcSingleObjectData.gameObjectIdxOffs               ;858152|86A9    |0000A9;
-    LDA.B strcSingleObjectData.spriteTableIdx                  ;858154|A5A1    |0000A1;
+    STX.B strcObject.gameObjectIdxOffs                         ;858152|86A9    |0000A9;
+    LDA.B strcObject.spriteTableIdx                            ;858154|A5A1    |0000A1;
     CMP.W #$0262                                               ;858156|C96202  |      ;
     BCS .label3                                                ;858159|B00D    |858168;
     LDA.W strcGameObject.spriteTableIdx,X                      ;85815B|BD9E01  |00019E;
@@ -213,7 +213,7 @@ fObject_Unknown858100:
     STA.B ptrUnknown0x75                                       ;858175|8575    |000075;
  
 .label4:
-    LDX.B strcSingleObjectData.gameObjectIdxOffs               ;858177|A6A9    |0000A9;
+    LDX.B strcObject.gameObjectIdxOffs                         ;858177|A6A9    |0000A9;
     LDA.B ptrUnknown0x75                                       ;858179|A575    |000075;
     STA.W strcGameObject.objectListPointer,X                   ;85817B|9DA801  |0001A8;
     CLC                                                        ;85817E|18      |      ;
@@ -229,7 +229,7 @@ fObject_Unknown858100:
     REP #$20                                                   ;858197|C220    |      ;
     JSR.W fObject_ParseObjectData                              ;858199|20E58A  |858AE5;
     LDA.W #$0000                                               ;85819C|A90000  |      ;
-    STA.B strcSingleObjectData.exists                          ;85819F|85A7    |0000A7;
+    STA.B strcObject.exists                                    ;85819F|85A7    |0000A7;
  
 .return:
     RTL                                                        ;8581A1|6B      |      ;
@@ -237,20 +237,20 @@ fObject_Unknown858100:
  
 fObject_Unknown8581A2:
     REP #$30                                                   ;8581A2|C230    |      ;
-    LDA.B strcSingleObjectData.gameObjectIdx                   ;8581A4|A5A5    |0000A5;
+    LDA.B strcObject.gameObjectIdx                             ;8581A4|A5A5    |0000A5;
     ASL A                                                      ;8581A6|0A      |      ;
     TAX                                                        ;8581A7|AA      |      ;
     LDA.L aGameObjectIndexOffsets,X                            ;8581A8|BFE08B85|858BE0;
-    STA.B strcSingleObjectData.gameObjectIdxOffs               ;8581AC|85A9    |0000A9;
+    STA.B strcObject.gameObjectIdxOffs                         ;8581AC|85A9    |0000A9;
     JSR.W fUnknown_858B7B                                      ;8581AE|207B8B  |858B7B;
-    LDA.B strcSingleObjectData.unkAF                           ;8581B1|A5AF    |0000AF;
+    LDA.B strcObject.unkAF                                     ;8581B1|A5AF    |0000AF;
     BEQ +                                                      ;8581B3|F003    |8581B8;
     JMP.W fReturn_8580B8                                       ;8581B5|4CB880  |8580B8; BUG - should be .return in this function rather than JUMP to other RTL
  
  
   + JSR.W fUnknown_858B41                                      ;8581B8|20418B  |858B41;
     REP #$30                                                   ;8581BB|C230    |      ;
-    LDX.B strcSingleObjectData.gameObjectIdxOffs               ;8581BD|A6A9    |0000A9;
+    LDX.B strcObject.gameObjectIdxOffs                         ;8581BD|A6A9    |0000A9;
     REP #$30                                                   ;8581BF|C230    |      ;
     LDA.W #$0000                                               ;8581C1|A90000  |      ;
     STA.W strcGameObject.initailized,X                         ;8581C4|9D9C01  |00019C;
@@ -262,24 +262,24 @@ fObject_Unknown8581A2:
  
 fObject_GetSingleObjectData:
     REP #$30                                                   ;8581CB|C230    |      ;
-    LDA.B strcSingleObjectData.gameObjectIdx                   ;8581CD|A5A5    |0000A5;
+    LDA.B strcObject.gameObjectIdx                             ;8581CD|A5A5    |0000A5;
     ASL A                                                      ;8581CF|0A      |      ;
     TAX                                                        ;8581D0|AA      |      ;
     LDA.L aGameObjectIndexOffsets,X                            ;8581D1|BFE08B85|858BE0;
-    STA.B strcSingleObjectData.gameObjectIdxOffs               ;8581D5|85A9    |0000A9;
+    STA.B strcObject.gameObjectIdxOffs                         ;8581D5|85A9    |0000A9;
     TAX                                                        ;8581D7|AA      |      ;
     LDA.W strcGameObject.initailized,X                         ;8581D8|BD9C01  |00019C;
     BEQ +                                                      ;8581DB|F019    |8581F6;
     LDA.W strcGameObject.spriteTableIdx,X                      ;8581DD|BD9E01  |00019E;
-    STA.B strcSingleObjectData.spriteTableIdx                  ;8581E0|85A1    |0000A1;
+    STA.B strcObject.spriteTableIdx                            ;8581E0|85A1    |0000A1;
     LDA.W strcGameObject.flip,X                                ;8581E2|BDA001  |0001A0;
-    STA.B strcSingleObjectData.flip                            ;8581E5|859F    |00009F;
+    STA.B strcObject.flip                                      ;8581E5|859F    |00009F;
     LDA.W strcGameObject.unknown6,X                            ;8581E7|BDA201  |0001A2;
-    STA.B strcSingleObjectData.unk6                            ;8581EA|85A3    |0000A3;
+    STA.B strcObject.unkA3                                     ;8581EA|85A3    |0000A3;
     LDA.W strcGameObject.positionX,X                           ;8581EC|BDA401  |0001A4;
-    STA.B strcSingleObjectData.posX                            ;8581EF|859B    |00009B;
+    STA.B strcObject.posX                                      ;8581EF|859B    |00009B;
     LDA.W strcGameObject.positionY,X                           ;8581F1|BDA601  |0001A6;
-    STA.B strcSingleObjectData.posY                            ;8581F4|859D    |00009D;
+    STA.B strcObject.posY                                      ;8581F4|859D    |00009D;
  
   + SEP #$20                                                   ;8581F6|E220    |      ;
     LDA.W strcGameObject.objectDataPointer+2,X                 ;8581F8|BDAE01  |0001AE;
@@ -298,14 +298,14 @@ fObject_GetSingleObjectData:
 .label2:
     XBA                                                        ;858209|EB      |      ;
     REP #$20                                                   ;85820A|C220    |      ;
-    STA.B strcSingleObjectData.exists                          ;85820C|85A7    |0000A7;
+    STA.B strcObject.exists                                    ;85820C|85A7    |0000A7;
     RTL                                                        ;85820E|6B      |      ;
  
  
 fObject_ClearGameObject:
     REP #$30                                                   ;85820F|C230    |      ;
     REP #$20                                                   ;858211|C220    |      ;
-    LDA.B strcSingleObjectData.spriteTableIdx                  ;858213|A5A1    |0000A1;
+    LDA.B strcObject.spriteTableIdx                            ;858213|A5A1    |0000A1;
     CMP.W #$0262                                               ;858215|C96202  |      ;
     BCS .bank87                                                ;858218|B00A    |858224;
     SEP #$20                                                   ;85821A|E220    |      ;
@@ -352,21 +352,21 @@ fObject_ClearGameObject:
     SEP #$20                                                   ;858276|E220    |      ;
     LDA.B #$FF                                                 ;858278|A9FF    |      ;
     STA.W strcGameObject.components,X                          ;85827A|9DB001  |0001B0;
-    STA.W strcGameObject.unknown21,X                           ;85827D|9DB101  |0001B1;
-    STA.W strcGameObject.unknown22,X                           ;858280|9DB201  |0001B2;
-    STA.W strcGameObject.unknown23,X                           ;858283|9DB301  |0001B3;
-    STA.W strcGameObject.unknown24,X                           ;858286|9DB401  |0001B4;
-    STA.W strcGameObject.unknown25,X                           ;858289|9DB501  |0001B5;
-    STA.W strcGameObject.unknown26,X                           ;85828C|9DB601  |0001B6;
-    STA.W strcGameObject.unknown27,X                           ;85828F|9DB701  |0001B7;
-    STA.W strcGameObject.unknown28,X                           ;858292|9DB801  |0001B8;
-    STA.W strcGameObject.unknown29,X                           ;858295|9DB901  |0001B9;
-    STA.W strcGameObject.unknown30,X                           ;858298|9DBA01  |0001BA;
-    STA.W strcGameObject.unknown31,X                           ;85829B|9DBB01  |0001BB;
-    STA.W strcGameObject.unknown32,X                           ;85829E|9DBC01  |0001BC;
-    STA.W strcGameObject.unknown33,X                           ;8582A1|9DBD01  |0001BD;
-    STA.W strcGameObject.unknown34,X                           ;8582A4|9DBE01  |0001BE;
-    STA.W strcGameObject.unknown35,X                           ;8582A7|9DBF01  |0001BF;
+    STA.W strcGameObject.unknown1B1,X                          ;85827D|9DB101  |0001B1;
+    STA.W strcGameObject.unknown1B2,X                          ;858280|9DB201  |0001B2;
+    STA.W strcGameObject.unknown1B3,X                          ;858283|9DB301  |0001B3;
+    STA.W strcGameObject.unknown1B4,X                          ;858286|9DB401  |0001B4;
+    STA.W strcGameObject.unknown1B5,X                          ;858289|9DB501  |0001B5;
+    STA.W strcGameObject.unknown1B6,X                          ;85828C|9DB601  |0001B6;
+    STA.W strcGameObject.unknown1B7,X                          ;85828F|9DB701  |0001B7;
+    STA.W strcGameObject.unknown1B8,X                          ;858292|9DB801  |0001B8;
+    STA.W strcGameObject.unknown1B9,X                          ;858295|9DB901  |0001B9;
+    STA.W strcGameObject.unknown1BA,X                          ;858298|9DBA01  |0001BA;
+    STA.W strcGameObject.unknown1BB,X                          ;85829B|9DBB01  |0001BB;
+    STA.W strcGameObject.unknown1BC,X                          ;85829E|9DBC01  |0001BC;
+    STA.W strcGameObject.unknown1BD,X                          ;8582A1|9DBD01  |0001BD;
+    STA.W strcGameObject.unknown1BE,X                          ;8582A4|9DBE01  |0001BE;
+    STA.W strcGameObject.unknown1BF,X                          ;8582A7|9DBF01  |0001BF;
     REP #$20                                                   ;8582AA|C220    |      ;
     LDA.W $0086                                                ;8582AC|AD8600  |000086;
     CLC                                                        ;8582AF|18      |      ;
@@ -387,21 +387,21 @@ fObject_ClearGameObject:
  
 fObject_Unknown8582C7:
     REP #$30                                                   ;8582C7|C230    |      ;
-    STZ.B strcSingleObjectData.gameObjectIdxOffs               ;8582C9|64A9    |0000A9;
-    STZ.B strcSingleObjectData.unkAB                           ;8582CB|64AB    |0000AB;
+    STZ.B strcObject.gameObjectIdxOffs                         ;8582C9|64A9    |0000A9;
+    STZ.B strcObject.unkAB                                     ;8582CB|64AB    |0000AB;
  
 .loop1:
-    LDX.B strcSingleObjectData.gameObjectIdxOffs               ;8582CD|A6A9    |0000A9; outer loop
+    LDX.B strcObject.gameObjectIdxOffs                         ;8582CD|A6A9    |0000A9; outer loop
     LDA.W strcGameObject.initailized,X                         ;8582CF|BD9C01  |00019C;
     BNE .label1                                                ;8582D2|D013    |8582E7;
  
 .loop2:
-    LDA.B strcSingleObjectData.gameObjectIdxOffs               ;8582D4|A5A9    |0000A9; inner loop
+    LDA.B strcObject.gameObjectIdxOffs                         ;8582D4|A5A9    |0000A9; inner loop
     CLC                                                        ;8582D6|18      |      ;
     ADC.W #$0024                                               ;8582D7|692400  |      ;
-    STA.B strcSingleObjectData.gameObjectIdxOffs               ;8582DA|85A9    |0000A9;
-    INC.B strcSingleObjectData.unkAB                           ;8582DC|E6AB    |0000AB;
-    LDA.B strcSingleObjectData.unkAB                           ;8582DE|A5AB    |0000AB;
+    STA.B strcObject.gameObjectIdxOffs                         ;8582DA|85A9    |0000A9;
+    INC.B strcObject.unkAB                                     ;8582DC|E6AB    |0000AB;
+    LDA.B strcObject.unkAB                                     ;8582DE|A5AB    |0000AB;
     CMP.B strcPlayer.unkDC                                     ;8582E0|C5DC    |0000DC;
     BNE .loop1                                                 ;8582E2|D0E9    |8582CD;
     JMP.W .return                                              ;8582E4|4C7683  |858376;
@@ -431,11 +431,11 @@ fObject_Unknown8582C7:
     BNE .label5                                                ;858308|D03F    |858349;
     REP #$20                                                   ;85830A|C220    |      ;
     JSR.W fUnknown_858B7B                                      ;85830C|207B8B  |858B7B;
-    LDA.B strcSingleObjectData.unkAF                           ;85830F|A5AF    |0000AF;
+    LDA.B strcObject.unkAF                                     ;85830F|A5AF    |0000AF;
     BNE .loop2                                                 ;858311|D0C1    |8582D4;
     JSR.W fUnknown_858B41                                      ;858313|20418B  |858B41;
     REP #$30                                                   ;858316|C230    |      ;
-    LDX.B strcSingleObjectData.gameObjectIdxOffs               ;858318|A6A9    |0000A9;
+    LDX.B strcObject.gameObjectIdxOffs                         ;858318|A6A9    |0000A9;
     LDA.W strcGameObject.objectListPointer+2,X                 ;85831A|BDAA01  |0001AA;
     STA.B ptrUnknown0x75                                       ;85831D|8575    |000075;
  
@@ -477,7 +477,7 @@ fObject_Unknown8582C7:
  
  
 .label6:
-    LDX.B strcSingleObjectData.gameObjectIdxOffs               ;858362|A6A9    |0000A9;
+    LDX.B strcObject.gameObjectIdxOffs                         ;858362|A6A9    |0000A9;
     SEP #$20                                                   ;858364|E220    |      ;
     LDA.W strcGameObject.objectDataPointer+2,X                 ;858366|BDAE01  |0001AE;
     CMP.B #$FF                                                 ;858369|C9FF    |      ;
@@ -496,18 +496,18 @@ fObject_Unknown8582C7:
  
 fObject_Unknown858377:
     REP #$30                                                   ;858377|C230    |      ;
-    LDA.W $0905                                                ;858379|AD0509  |000905;
+    LDA.W strcObjectData.gameObjectIdx                         ;858379|AD0509  |000905;
     ASL A                                                      ;85837C|0A      |      ;
     TAX                                                        ;85837D|AA      |      ;
     LDA.L aGameObjectIndexOffsets,X                            ;85837E|BFE08B85|858BE0;
     TAX                                                        ;858382|AA      |      ;
     LDA.W strcGameObject.positionY,X                           ;858383|BDA601  |0001A6;
-    STA.B strcSingleObjectData.gameObjectIdxOffs               ;858386|85A9    |0000A9;
+    STA.B strcObject.gameObjectIdxOffs                         ;858386|85A9    |0000A9;
     LDA.W #$0000                                               ;858388|A90000  |      ;
-    STA.B strcSingleObjectData.totalComponents                 ;85838B|85AD    |0000AD;
+    STA.B strcObject.totalComponents                           ;85838B|85AD    |0000AD;
     LDA.B strcPlayer.unkDC                                     ;85838D|A5DC    |0000DC;
     DEC A                                                      ;85838F|3A      |      ;
-    STA.B strcSingleObjectData.unkAF                           ;858390|85AF    |0000AF;
+    STA.B strcObject.unkAF                                     ;858390|85AF    |0000AF;
     LDA.W #$FFFF                                               ;858392|A9FFFF  |      ;
     STA.B n16TempVar1                                          ;858395|857E    |00007E;
     LDY.W #$0000                                               ;858397|A00000  |      ;
@@ -516,28 +516,28 @@ fObject_Unknown858377:
 .loop:
     REP #$20                                                   ;85839D|C220    |      ;
     PHX                                                        ;85839F|DA      |      ;
-    CPY.W $0905                                                ;8583A0|CC0509  |000905;
+    CPY.W strcObjectData.gameObjectIdx                         ;8583A0|CC0509  |000905;
     BEQ .label2                                                ;8583A3|F023    |8583C8;
     LDA.W strcGameObject.positionY,X                           ;8583A5|BDA601  |0001A6;
-    CMP.B strcSingleObjectData.gameObjectIdxOffs               ;8583A8|C5A9    |0000A9;
+    CMP.B strcObject.gameObjectIdxOffs                         ;8583A8|C5A9    |0000A9;
     BCC .label1                                                ;8583AA|900E    |8583BA;
-    LDX.B strcSingleObjectData.totalComponents                 ;8583AC|A6AD    |0000AD;
+    LDX.B strcObject.totalComponents                           ;8583AC|A6AD    |0000AD;
     TYA                                                        ;8583AE|98      |      ;
     SEP #$20                                                   ;8583AF|E220    |      ;
     STA.W $084C,X                                              ;8583B1|9D4C08  |00084C;
     REP #$20                                                   ;8583B4|C220    |      ;
-    INC.B strcSingleObjectData.totalComponents                 ;8583B6|E6AD    |0000AD;
+    INC.B strcObject.totalComponents                           ;8583B6|E6AD    |0000AD;
     BRA .label2                                                ;8583B8|800E    |8583C8;
  
  
 .label1:
     REP #$20                                                   ;8583BA|C220    |      ;
-    LDX.B strcSingleObjectData.unkAF                           ;8583BC|A6AF    |0000AF;
+    LDX.B strcObject.unkAF                                     ;8583BC|A6AF    |0000AF;
     TYA                                                        ;8583BE|98      |      ;
     SEP #$20                                                   ;8583BF|E220    |      ;
     STA.W $084C,X                                              ;8583C1|9D4C08  |00084C;
     REP #$20                                                   ;8583C4|C220    |      ;
-    DEC.B strcSingleObjectData.unkAF                           ;8583C6|C6AF    |0000AF;
+    DEC.B strcObject.unkAF                                     ;8583C6|C6AF    |0000AF;
  
 .label2:
     REP #$20                                                   ;8583C8|C220    |      ;
@@ -548,8 +548,8 @@ fObject_Unknown858377:
     INY                                                        ;8583D0|C8      |      ;
     CPY.B strcPlayer.unkDC                                     ;8583D1|C4DC    |0000DC;
     BNE .loop                                                  ;8583D3|D0C8    |85839D;
-    LDX.B strcSingleObjectData.totalComponents                 ;8583D5|A6AD    |0000AD;
-    LDA.W $0905                                                ;8583D7|AD0509  |000905;
+    LDX.B strcObject.totalComponents                           ;8583D5|A6AD    |0000AD;
+    LDA.W strcObjectData.gameObjectIdx                         ;8583D7|AD0509  |000905;
     SEP #$20                                                   ;8583DA|E220    |      ;
     STA.W $084C,X                                              ;8583DC|9D4C08  |00084C;
  
@@ -560,7 +560,7 @@ fObject_Unknown858377:
 fUnknown_8583E0:
     REP #$30                                                   ;8583E0|C230    |      ;
     REP #$20                                                   ;8583E2|C220    |      ;
-    LDA.B strcSingleObjectData.spriteTableIdx                  ;8583E4|A5A1    |0000A1;
+    LDA.B strcObject.spriteTableIdx                            ;8583E4|A5A1    |0000A1;
     CMP.W #$0262                                               ;8583E6|C96202  |      ;
     BCS .label1                                                ;8583E9|B00A    |8583F5;
     SEP #$20                                                   ;8583EB|E220    |      ;
@@ -589,14 +589,14 @@ fUnknown_8583E0:
     ASL A                                                      ;858411|0A      |      ;
     TAX                                                        ;858412|AA      |      ;
     LDA.L aGameObjectIndexOffsets,X                            ;858413|BFE08B85|858BE0;
-    STA.B strcSingleObjectData.gameObjectIdxOffs               ;858417|85A9    |0000A9;
+    STA.B strcObject.gameObjectIdxOffs                         ;858417|85A9    |0000A9;
     LDA.W #$0000                                               ;858419|A90000  |      ;
-    STA.B strcSingleObjectData.unkAB                           ;85841C|85AB    |0000AB;
-    STA.B strcSingleObjectData.unkAF                           ;85841E|85AF    |0000AF;
-    LDY.B strcSingleObjectData.unkAB                           ;858420|A4AB    |0000AB;
+    STA.B strcObject.unkAB                                     ;85841C|85AB    |0000AB;
+    STA.B strcObject.unkAF                                     ;85841E|85AF    |0000AF;
+    LDY.B strcObject.unkAB                                     ;858420|A4AB    |0000AB;
  
 .label3:
-    LDX.B strcSingleObjectData.gameObjectIdxOffs               ;858422|A6A9    |0000A9;
+    LDX.B strcObject.gameObjectIdxOffs                         ;858422|A6A9    |0000A9;
     LDA.W strcGameObject.initailized,X                         ;858424|BD9C01  |00019C;
     BNE .exit                                                  ;858427|D01B    |858444;
  
@@ -611,15 +611,15 @@ fUnknown_8583E0:
     ASL A                                                      ;858435|0A      |      ;
     TAX                                                        ;858436|AA      |      ;
     LDA.L aGameObjectIndexOffsets,X                            ;858437|BFE08B85|858BE0;
-    STA.B strcSingleObjectData.gameObjectIdxOffs               ;85843B|85A9    |0000A9;
+    STA.B strcObject.gameObjectIdxOffs                         ;85843B|85A9    |0000A9;
     CPY.B strcPlayer.unkDC                                     ;85843D|C4DC    |0000DC;
     BNE .label3                                                ;85843F|D0E1    |858422;
     JMP.W fUnknown_8585F4                                      ;858441|4CF485  |8585F4;
  
  
 .exit:
-    STY.B strcSingleObjectData.unkAB                           ;858444|84AB    |0000AB;
-    LDX.B strcSingleObjectData.gameObjectIdxOffs               ;858446|A6A9    |0000A9;
+    STY.B strcObject.unkAB                                     ;858444|84AB    |0000AB;
+    LDX.B strcObject.gameObjectIdxOffs                         ;858446|A6A9    |0000A9;
     LDA.W strcGameObject.spriteTableIdx,X                      ;858448|BD9E01  |00019E;
     CMP.W #$0262                                               ;85844B|C96202  |      ;
     BCS .label5                                                ;85844E|B00A    |85845A;
@@ -641,18 +641,18 @@ fUnknown_8583E0:
     LDA.W strcGameObject.objectDataPointer,X                   ;858464|BDAC01  |0001AC;
     STA.B ptrObjectData                                        ;858467|8578    |000078;
     LDA.W strcGameObject.flip,X                                ;858469|BDA001  |0001A0;
-    STA.B strcSingleObjectData.flip                            ;85846C|859F    |00009F;
+    STA.B strcObject.flip                                      ;85846C|859F    |00009F;
     LDA.W strcGameObject.positionX,X                           ;85846E|BDA401  |0001A4;
-    STA.B strcSingleObjectData.posX                            ;858471|859B    |00009B;
+    STA.B strcObject.posX                                      ;858471|859B    |00009B;
     LDA.W strcGameObject.positionY,X                           ;858473|BDA601  |0001A6;
-    STA.B strcSingleObjectData.posY                            ;858476|859D    |00009D;
+    STA.B strcObject.posY                                      ;858476|859D    |00009D;
     SEP #$20                                                   ;858478|E220    |      ;
     LDA.W strcGameObject.totalComponents,X                     ;85847A|BDAF01  |0001AF;
-    STA.B strcSingleObjectData.totalComponents                 ;85847D|85AD    |0000AD;
-    STZ.B strcSingleObjectData.totalComponents+1               ;85847F|64AE    |0000AE;
+    STA.B strcObject.totalComponents                           ;85847D|85AD    |0000AD;
+    STZ.B strcObject.totalComponents+1                         ;85847F|64AE    |0000AE;
     REP #$20                                                   ;858481|C220    |      ;
     INC.B ptrObjectData                                        ;858483|E678    |000078;
-    LDA.B strcSingleObjectData.totalComponents                 ;858485|A5AD    |0000AD;
+    LDA.B strcObject.totalComponents                           ;858485|A5AD    |0000AD;
     DEC A                                                      ;858487|3A      |      ;
     STA.B n16TempVar1                                          ;858488|857E    |00007E; i = i - 1
     ASL A                                                      ;85848A|0A      |      ; i = i * 2
@@ -662,17 +662,17 @@ fUnknown_8583E0:
     ADC.B n16TempVar2                                          ;858490|6580    |000080; i = i * 5
     ADC.B ptrObjectData                                        ;858492|6578    |000078;
     STA.B ptrObjectData                                        ;858494|8578    |000078;
-    LDA.B strcSingleObjectData.gameObjectIdxOffs               ;858496|A5A9    |0000A9;
+    LDA.B strcObject.gameObjectIdxOffs                         ;858496|A5A9    |0000A9;
     STA.B ptrUnknown0x75                                       ;858498|8575    |000075;
     CLC                                                        ;85849A|18      |      ;
-    ADC.B strcSingleObjectData.totalComponents                 ;85849B|65AD    |0000AD;
+    ADC.B strcObject.totalComponents                           ;85849B|65AD    |0000AD;
     SEC                                                        ;85849D|38      |      ;
     SBC.W #$0001                                               ;85849E|E90100  |      ;
     STA.B ptrUnknown0x75                                       ;8584A1|8575    |000075;
  
 .label7:
-    LDY.B strcSingleObjectData.unkAB                           ;8584A3|A4AB    |0000AB;
-    LDA.B strcSingleObjectData.totalComponents                 ;8584A5|A5AD    |0000AD;
+    LDY.B strcObject.unkAB                                     ;8584A3|A4AB    |0000AB;
+    LDA.B strcObject.totalComponents                           ;8584A5|A5AD    |0000AD;
     BNE .label8                                                ;8584A7|D003    |8584AC;
     JMP.W .label4                                              ;8584A9|4C2984  |858429;
  
@@ -708,7 +708,7 @@ fUnknown_8583E0:
     REP #$20                                                   ;8584D2|C220    |      ;
     JSR.W fUnknown_858BB0                                      ;8584D4|20B08B  |858BB0;
     CLC                                                        ;8584D7|18      |      ;
-    ADC.B strcSingleObjectData.posX                            ;8584D8|659B    |00009B;
+    ADC.B strcObject.posX                                      ;8584D8|659B    |00009B;
     SEC                                                        ;8584DA|38      |      ;
     SBC.B nCameraX                                             ;8584DB|E5F5    |0000F5;
     STA.B $BF                                                  ;8584DD|85BF    |0000BF;
@@ -732,13 +732,13 @@ fUnknown_8583E0:
     REP #$20                                                   ;8584F3|C220    |      ;
     JSR.W fUnknown_858BBC                                      ;8584F5|20BC8B  |858BBC;
     CLC                                                        ;8584F8|18      |      ;
-    ADC.B strcSingleObjectData.posY                            ;8584F9|659D    |00009D;
+    ADC.B strcObject.posY                                      ;8584F9|659D    |00009D;
     SEC                                                        ;8584FB|38      |      ;
     SBC.B nCameraY                                             ;8584FC|E5F7    |0000F7;
     STA.B $C1                                                  ;8584FE|85C1    |0000C1;
     STY.B $C5                                                  ;858500|84C5    |0000C5;
     REP #$30                                                   ;858502|C230    |      ;
-    LDA.B strcSingleObjectData.unkAF                           ;858504|A5AF    |0000AF;
+    LDA.B strcObject.unkAF                                     ;858504|A5AF    |0000AF;
     AND.W #$FFE0                                               ;858506|29E0FF  |      ;
     STA.B n16TempVar1                                          ;858509|857E    |00007E;
     LSR A                                                      ;85850B|4A      |      ;
@@ -746,7 +746,7 @@ fUnknown_8583E0:
     LSR A                                                      ;85850D|4A      |      ;
     LSR A                                                      ;85850E|4A      |      ;
     STA.B n16TempVar2                                          ;85850F|8580    |000080;
-    LDA.B strcSingleObjectData.unkAF                           ;858511|A5AF    |0000AF;
+    LDA.B strcObject.unkAF                                     ;858511|A5AF    |0000AF;
     SEC                                                        ;858513|38      |      ;
     SBC.B n16TempVar1                                          ;858514|E57E    |00007E;
     STA.B n16TempVar1                                          ;858516|857E    |00007E;
@@ -787,7 +787,7 @@ fUnknown_8583E0:
  
 .label16:
     REP #$30                                                   ;858559|C230    |      ;
-    LDX.B strcSingleObjectData.unkAF                           ;85855B|A6AF    |0000AF;
+    LDX.B strcObject.unkAF                                     ;85855B|A6AF    |0000AF;
     LDA.B $BF                                                  ;85855D|A5BF    |0000BF;
     SEP #$20                                                   ;85855F|E220    |      ;
     STA.L DMASpriteOBJQueue,X                                  ;858561|9F00A07E|7EA000;
@@ -800,28 +800,28 @@ fUnknown_8583E0:
     LDA.B $C3                                                  ;858573|A5C3    |0000C3;
     STA.L DMASpriteOBJ2BitQueue,X                              ;858575|9F00A27E|7EA200;
     REP #$30                                                   ;858579|C230    |      ;
-    LDX.B strcSingleObjectData.unkAF                           ;85857B|A6AF    |0000AF;
+    LDX.B strcObject.unkAF                                     ;85857B|A6AF    |0000AF;
     LDY.B $C5                                                  ;85857D|A4C5    |0000C5;
     INY                                                        ;85857F|C8      |      ;
     SEP #$20                                                   ;858580|E220    |      ;
     LDA.B [ptrObjectData],Y                                    ;858582|B778    |000078;
-    STA.B strcSingleObjectData.unkB2                           ;858584|85B2    |0000B2;
+    STA.B strcObject.unkB2                                     ;858584|85B2    |0000B2;
     ASL A                                                      ;858586|0A      |      ;
     AND.B #$0E                                                 ;858587|290E    |      ;
-    STA.B strcSingleObjectData.unkB1                           ;858589|85B1    |0000B1;
-    LDA.B strcSingleObjectData.unkB2                           ;85858B|A5B2    |0000B2;
+    STA.B strcObject.unkB1                                     ;858589|85B1    |0000B1;
+    LDA.B strcObject.unkB2                                     ;85858B|A5B2    |0000B2;
     ASL A                                                      ;85858D|0A      |      ;
     ASL A                                                      ;85858E|0A      |      ;
     AND.B #$C0                                                 ;85858F|29C0    |      ;
     LSR A                                                      ;858591|4A      |      ;
-    STA.B strcSingleObjectData.unkB2                           ;858592|85B2    |0000B2;
+    STA.B strcObject.unkB2                                     ;858592|85B2    |0000B2;
     ASL A                                                      ;858594|0A      |      ;
     ASL A                                                      ;858595|0A      |      ;
-    ORA.B strcSingleObjectData.unkB2                           ;858596|05B2    |0000B2;
+    ORA.B strcObject.unkB2                                     ;858596|05B2    |0000B2;
     AND.B #$C0                                                 ;858598|29C0    |      ;
-    ORA.B strcSingleObjectData.unkB1                           ;85859A|05B1    |0000B1;
+    ORA.B strcObject.unkB1                                     ;85859A|05B1    |0000B1;
     ORA.B #$20                                                 ;85859C|0920    |      ;
-    EOR.B strcSingleObjectData.flip                            ;85859E|459F    |00009F;
+    EOR.B strcObject.flip                                      ;85859E|459F    |00009F;
     STA.L $7EA003,X                                            ;8585A0|9F03A07E|7EA003;
     LDA.W nCurrentMapdataPresetId                              ;8585A4|AD9501  |000195;
     ASL A                                                      ;8585A7|0A      |      ;
@@ -840,13 +840,13 @@ fUnknown_8583E0:
     TAX                                                        ;8585C2|AA      |      ;
     LDA.L aMultiplicantValue_868000,X                          ;8585C3|BF008086|868000;
     SEP #$20                                                   ;8585C7|E220    |      ;
-    LDX.B strcSingleObjectData.unkAF                           ;8585C9|A6AF    |0000AF;
+    LDX.B strcObject.unkAF                                     ;8585C9|A6AF    |0000AF;
     STA.L $7EA002,X                                            ;8585CB|9F02A07E|7EA002;
     REP #$20                                                   ;8585CF|C220    |      ;
-    LDA.B strcSingleObjectData.unkAF                           ;8585D1|A5AF    |0000AF;
+    LDA.B strcObject.unkAF                                     ;8585D1|A5AF    |0000AF;
     CLC                                                        ;8585D3|18      |      ;
     ADC.W #$0004                                               ;8585D4|690400  |      ;
-    STA.B strcSingleObjectData.unkAF                           ;8585D7|85AF    |0000AF;
+    STA.B strcObject.unkAF                                     ;8585D7|85AF    |0000AF;
  
 .label17:
     LDA.B ptrObjectData                                        ;8585D9|A578    |000078;
@@ -865,13 +865,13 @@ fUnknown_8583E0:
  
 .label19:
     DEC.B ptrUnknown0x75                                       ;8585ED|C675    |000075;
-    DEC.B strcSingleObjectData.totalComponents                 ;8585EF|C6AD    |0000AD;
+    DEC.B strcObject.totalComponents                           ;8585EF|C6AD    |0000AD;
     JMP.W .label7                                              ;8585F1|4CA384  |8584A3;
  
  
 fUnknown_8585F4:
     REP #$30                                                   ;8585F4|C230    |      ;
-    LDA.B strcSingleObjectData.unkAF                           ;8585F6|A5AF    |0000AF;
+    LDA.B strcObject.unkAF                                     ;8585F6|A5AF    |0000AF;
     STA.W $084A                                                ;8585F8|8D4A08  |00084A;
     SEP #$20                                                   ;8585FB|E220    |      ;
     LDX.W #$0000                                               ;8585FD|A20000  |      ;
@@ -1209,15 +1209,15 @@ fUnknown_858896:
  
 fObject_ParseObjectData:
     REP #$30                                                   ;858AE5|C230    |      ;
-    LDX.B strcSingleObjectData.gameObjectIdxOffs               ;858AE7|A6A9    |0000A9;
+    LDX.B strcObject.gameObjectIdxOffs                         ;858AE7|A6A9    |0000A9;
     LDA.W strcGameObject.objectDataPointer,X                   ;858AE9|BDAC01  |0001AC;
     STA.B ptrObjectData                                        ;858AEC|8578    |000078;
     LDY.W #$0000                                               ;858AEE|A00000  |      ;
     SEP #$20                                                   ;858AF1|E220    |      ;
     LDA.B [ptrObjectData],Y                                    ;858AF3|B778    |000078;
-    STA.B strcSingleObjectData.totalComponents                 ;858AF5|85AD    |0000AD;
+    STA.B strcObject.totalComponents                           ;858AF5|85AD    |0000AD;
     STA.W strcGameObject.totalComponents,X                     ;858AF7|9DAF01  |0001AF;
-    STZ.B strcSingleObjectData.totalComponents+1               ;858AFA|64AE    |0000AE;
+    STZ.B strcObject.totalComponents+1                         ;858AFA|64AE    |0000AE;
     REP #$20                                                   ;858AFC|C220    |      ;
     INY                                                        ;858AFE|C8      |      ;
     TXA                                                        ;858AFF|8A      |      ;
@@ -1225,18 +1225,18 @@ fObject_ParseObjectData:
     ADC.W #$019C                                               ;858B01|699C01  |      ;
     CLC                                                        ;858B04|18      |      ;
     ADC.W #$0014                                               ;858B05|691400  |      ;
-    STA.B strcSingleObjectData.unkAF                           ;858B08|85AF    |0000AF;
+    STA.B strcObject.unkAF                                     ;858B08|85AF    |0000AF;
  
 .loop:
-    LDA.B strcSingleObjectData.totalComponents                 ;858B0A|A5AD    |0000AD;
+    LDA.B strcObject.totalComponents                           ;858B0A|A5AD    |0000AD;
     BNE +                                                      ;858B0C|D002    |858B10;
     BRA .exit                                                  ;858B0E|802C    |858B3C;
  
  
   + LDA.B [ptrObjectData],Y                                    ;858B10|B778    |000078;
-    STA.B strcSingleObjectData.pObjectData                     ;858B12|85B3    |0000B3;
-    LDA.B strcSingleObjectData.unkAF                           ;858B14|A5AF    |0000AF;
-    STA.B strcSingleObjectData.pObjectData+2                   ;858B16|85B5    |0000B5;
+    STA.B strcObject.pData                                     ;858B12|85B3    |0000B3;
+    LDA.B strcObject.unkAF                                     ;858B14|A5AF    |0000AF;
+    STA.B strcObject.pData+2                                   ;858B16|85B5    |0000B5;
     REP #$30                                                   ;858B18|C230    |      ;
     PHX                                                        ;858B1A|DA      |      ;
     PHY                                                        ;858B1B|5A      |      ;
@@ -1244,30 +1244,30 @@ fObject_ParseObjectData:
     REP #$30                                                   ;858B1F|C230    |      ;
     PLY                                                        ;858B21|7A      |      ;
     PLX                                                        ;858B22|FA      |      ;
-    LDA.B strcSingleObjectData.pObjectData                     ;858B23|A5B3    |0000B3;
+    LDA.B strcObject.pData                                     ;858B23|A5B3    |0000B3;
     AND.W #$00FF                                               ;858B25|29FF00  |      ;
     SEP #$20                                                   ;858B28|E220    |      ;
     STA.W strcGameObject.components,X                          ;858B2A|9DB001  |0001B0;
     REP #$20                                                   ;858B2D|C220    |      ;
     INX                                                        ;858B2F|E8      |      ;
-    INC.B strcSingleObjectData.unkAF                           ;858B30|E6AF    |0000AF;
+    INC.B strcObject.unkAF                                     ;858B30|E6AF    |0000AF;
     TYA                                                        ;858B32|98      |      ;
     CLC                                                        ;858B33|18      |      ;
     ADC.W #$0005                                               ;858B34|690500  |      ;
     TAY                                                        ;858B37|A8      |      ;
-    DEC.B strcSingleObjectData.totalComponents                 ;858B38|C6AD    |0000AD;
+    DEC.B strcObject.totalComponents                           ;858B38|C6AD    |0000AD;
     BRA .loop                                                  ;858B3A|80CE    |858B0A;
  
  
 .exit:
     REP #$30                                                   ;858B3C|C230    |      ;
-    LDX.B strcSingleObjectData.gameObjectIdxOffs               ;858B3E|A6A9    |0000A9;
+    LDX.B strcObject.gameObjectIdxOffs                         ;858B3E|A6A9    |0000A9;
     RTS                                                        ;858B40|60      |      ;
  
  
 fUnknown_858B41:
     REP #$30                                                   ;858B41|C230    |      ;
-    LDX.B strcSingleObjectData.gameObjectIdxOffs               ;858B43|A6A9    |0000A9;
+    LDX.B strcObject.gameObjectIdxOffs                         ;858B43|A6A9    |0000A9;
     SEP #$20                                                   ;858B45|E220    |      ;
     LDA.B #$00                                                 ;858B47|A900    |      ;
     XBA                                                        ;858B49|EB      |      ;
@@ -1282,7 +1282,7 @@ fUnknown_858B41:
     LDA.W strcGameObject.components,X                          ;858B57|BDB001  |0001B0;
     CMP.B #$FF                                                 ;858B5A|C9FF    |      ;
     BEQ +                                                      ;858B5C|F014    |858B72;
-    STA.B strcSingleObjectData.pObjectData                     ;858B5E|85B3    |0000B3;
+    STA.B strcObject.pData                                     ;858B5E|85B3    |0000B3;
     STZ.B $B4                                                  ;858B60|64B4    |0000B4;
     LDA.B #$FF                                                 ;858B62|A9FF    |      ;
     STA.W strcGameObject.components,X                          ;858B64|9DB001  |0001B0;
@@ -1301,13 +1301,13 @@ fUnknown_858B41:
  
 .exit:
     REP #$30                                                   ;858B76|C230    |      ;
-    LDX.B strcSingleObjectData.gameObjectIdxOffs               ;858B78|A6A9    |0000A9;
+    LDX.B strcObject.gameObjectIdxOffs                         ;858B78|A6A9    |0000A9;
     RTS                                                        ;858B7A|60      |      ;
  
  
 fUnknown_858B7B:
     REP #$10                                                   ;858B7B|C210    |      ;
-    LDX.B strcSingleObjectData.gameObjectIdxOffs               ;858B7D|A6A9    |0000A9;
+    LDX.B strcObject.gameObjectIdxOffs                         ;858B7D|A6A9    |0000A9;
     SEP #$20                                                   ;858B7F|E220    |      ;
     LDA.B #$00                                                 ;858B81|A900    |      ;
     XBA                                                        ;858B83|EB      |      ;
@@ -1329,16 +1329,16 @@ fUnknown_858B7B:
  
 .label1:
     REP #$30                                                   ;858B9C|C230    |      ;
-    INC.W $0740                                                ;858B9E|EE4007  |000740;
+    INC.W strcUnknown740.unk740                                ;858B9E|EE4007  |000740;
     LDA.W #$FFFF                                               ;858BA1|A9FFFF  |      ;
-    STA.B strcSingleObjectData.unkAF                           ;858BA4|85AF    |0000AF;
+    STA.B strcObject.unkAF                                     ;858BA4|85AF    |0000AF;
     BRA .return                                                ;858BA6|8007    |858BAF;
  
  
 .label2:
     REP #$30                                                   ;858BA8|C230    |      ;
     LDA.W #$0000                                               ;858BAA|A90000  |      ;
-    STA.B strcSingleObjectData.unkAF                           ;858BAD|85AF    |0000AF;
+    STA.B strcObject.unkAF                                     ;858BAD|85AF    |0000AF;
  
 .return:
     RTS                                                        ;858BAF|60      |      ;
@@ -1347,7 +1347,7 @@ fUnknown_858B7B:
 fUnknown_858BB0:
     REP #$30                                                   ;858BB0|C230    |      ;
     PHA                                                        ;858BB2|48      |      ;
-    LDA.B strcSingleObjectData.flip                            ;858BB3|A59F    |00009F;
+    LDA.B strcObject.flip                                      ;858BB3|A59F    |00009F;
     AND.W #$0040                                               ;858BB5|294000  |      ;
     BEQ fReturnWithPullA_858BCE                                ;858BB8|F014    |858BCE;
     BRA fUnknown_858BC4                                        ;858BBA|8008    |858BC4;
@@ -1355,7 +1355,7 @@ fUnknown_858BB0:
  
 fUnknown_858BBC:
     PHA                                                        ;858BBC|48      |      ;
-    LDA.B strcSingleObjectData.flip                            ;858BBD|A59F    |00009F;
+    LDA.B strcObject.flip                                      ;858BBD|A59F    |00009F;
     AND.W #$0080                                               ;858BBF|298000  |      ;
     BEQ fReturnWithPullA_858BCE                                ;858BC2|F00A    |858BCE;
  
@@ -1384,12 +1384,12 @@ aGameObjectIndexOffsets:
     dw $0288,$02AC,$02D0,$02F4,$0318,$033C                     ;858C04|        |      ;
     dw $0360,$0384,$03A8,$03CC,$03F0,$0414                     ;858C10|        |      ;
     dw $0438,$045C,$0480,$04A4,$04C8,$04EC                     ;858C1C|        |      ;
-    dw $0540,$0534,$0558,$057C                                 ;858C28|        |      ;
+    dw $0540,$0534,$0558,$057C                                 ;858C28|        |      ; BUG - should be $510
  
 fUnknown_858C30:
     REP #$30                                                   ;858C30|C230    |      ;
     SEP #$20                                                   ;858C32|E220    |      ;
-    LDX.B strcSingleObjectData.pObjectData                     ;858C34|A6B3    |0000B3;
+    LDX.B strcObject.pData                                     ;858C34|A6B3    |0000B3;
     LDA.B #$00                                                 ;858C36|A900    |      ;
     XBA                                                        ;858C38|EB      |      ;
     LDA.L $7F0F00,X                                            ;858C39|BF000F7F|7F0F00;
@@ -1413,12 +1413,12 @@ fUnknown_858C30:
     CMP.B $BB                                                  ;858C59|C5BB    |0000BB;
     BEQ .label1                                                ;858C5B|F0FC    |858C59;
     STA.B $BD                                                  ;858C5D|85BD    |0000BD;
-    LDA.B strcSingleObjectData.pObjectData                     ;858C5F|A5B3    |0000B3;
+    LDA.B strcObject.pData                                     ;858C5F|A5B3    |0000B3;
     STA.L $7EA220,X                                            ;858C61|9F20A27E|7EA220;
-    LDA.B strcSingleObjectData.pObjectData+2                   ;858C65|A5B5    |0000B5;
+    LDA.B strcObject.pData+2                                   ;858C65|A5B5    |0000B5;
     STA.L $7EA222,X                                            ;858C67|9F22A27E|7EA222;
     LDA.W #$FFFF                                               ;858C6B|A9FFFF  |      ;
-    STA.B strcSingleObjectData.pObjectData                     ;858C6E|85B3    |0000B3;
+    STA.B strcObject.pData                                     ;858C6E|85B3    |0000B3;
     BRA .return                                                ;858C70|800C    |858C7E;
  
  
@@ -1427,7 +1427,7 @@ fUnknown_858C30:
     INC A                                                      ;858C76|1A      |      ;
     STA.L $7EA320,X                                            ;858C77|9F20A37E|7EA320;
     TYA                                                        ;858C7B|98      |      ;
-    STA.B strcSingleObjectData.pObjectData                     ;858C7C|85B3    |0000B3;
+    STA.B strcObject.pData                                     ;858C7C|85B3    |0000B3;
  
 .return:
     RTS                                                        ;858C7E|60      |      ;
@@ -1440,7 +1440,7 @@ Table_858C7F:
  
 fUnknown_858C9F:
     REP #$30                                                   ;858C9F|C230    |      ;
-    LDA.B strcSingleObjectData.pObjectData                     ;858CA1|A5B3    |0000B3;
+    LDA.B strcObject.pData                                     ;858CA1|A5B3    |0000B3;
     ASL A                                                      ;858CA3|0A      |      ;
     ASL A                                                      ;858CA4|0A      |      ;
     TAX                                                        ;858CA5|AA      |      ;
@@ -1673,8 +1673,8 @@ fUnknown_858CB2:
  
   + LSR A                                                      ;858E3C|4A      |      ;
     LSR A                                                      ;858E3D|4A      |      ;
-    STA.W $0742                                                ;858E3E|8D4207  |000742;
-    STZ.W $0743                                                ;858E41|9C4307  |000743;
+    STA.W strcUnknown740.unk742                                ;858E3E|8D4207  |000742;
+    STZ.W strcUnknown740.unk743                                ;858E41|9C4307  |000743;
     REP #$20                                                   ;858E44|C220    |      ;
     RTL                                                        ;858E46|6B      |      ;
  

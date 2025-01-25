@@ -33,7 +33,7 @@ fAI_Unknown848020:
     REP #$30                                                   ;848031|C230    |      ;
     LDY.W #$0012                                               ;848033|A01200  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;848036|B7CC    |0000CC;
-    STA.B strcSingleObjectData.gameObjectIdx                   ;848038|85A5    |0000A5;
+    STA.B strcObject.gameObjectIdx                             ;848038|85A5    |0000A5;
     JSL.L fObject_Unknown8581A2                                ;84803A|22A28185|8581A2;
     RTL                                                        ;84803E|6B      |      ;
  
@@ -349,19 +349,19 @@ fAI_Unknown848286:
   + REP #$30                                                   ;84829B|C230    |      ;
     LDY.W #$0012                                               ;84829D|A01200  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;8482A0|B7CC    |0000CC;
-    STA.B strcSingleObjectData.gameObjectIdx                   ;8482A2|85A5    |0000A5;
+    STA.B strcObject.gameObjectIdx                             ;8482A2|85A5    |0000A5;
     LDY.W #$0014                                               ;8482A4|A01400  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;8482A7|B7CC    |0000CC;
-    STA.B strcSingleObjectData.flip                            ;8482A9|859F    |00009F;
+    STA.B strcObject.flip                                      ;8482A9|859F    |00009F;
     LDY.W #$001A                                               ;8482AB|A01A00  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;8482AE|B7CC    |0000CC;
-    STA.B strcSingleObjectData.posX                            ;8482B0|859B    |00009B;
+    STA.B strcObject.posX                                      ;8482B0|859B    |00009B;
     LDY.W #$001C                                               ;8482B2|A01C00  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;8482B5|B7CC    |0000CC;
-    STA.B strcSingleObjectData.posY                            ;8482B7|859D    |00009D;
+    STA.B strcObject.posY                                      ;8482B7|859D    |00009D;
     LDY.W #$0016                                               ;8482B9|A01600  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;8482BC|B7CC    |0000CC;
-    STA.B strcSingleObjectData.spriteTableIdx                  ;8482BE|85A1    |0000A1;
+    STA.B strcObject.spriteTableIdx                            ;8482BE|85A1    |0000A1;
     SEP #$20                                                   ;8482C0|E220    |      ;
     REP #$10                                                   ;8482C2|C210    |      ;
     LDY.W #$0001                                               ;8482C4|A00100  |      ;
@@ -381,7 +381,7 @@ fAI_Unknown848286:
 .label1:
     JSL.L fUnknown_858000                                      ;8482DF|22008085|858000;
     REP #$30                                                   ;8482E3|C230    |      ;
-    LDA.B strcSingleObjectData.gameObjectIdx                   ;8482E5|A5A5    |0000A5;
+    LDA.B strcObject.gameObjectIdx                             ;8482E5|A5A5    |0000A5;
     REP #$30                                                   ;8482E7|C230    |      ;
     LDY.W #$0012                                               ;8482E9|A01200  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;8482EC|97CC    |0000CC;
@@ -1422,8 +1422,8 @@ fAIAction0x07_SetPlayerDirection:
     LDA.B [ptrAIActionData]                                    ;848AD0|A7C9    |0000C9;
     REP #$20                                                   ;848AD2|C220    |      ;
     STA.B strcPlayer.direction                                 ;848AD4|85DA    |0000DA;
-    STA.W nPlayerDirectionCopy                                 ;848AD6|8D1109  |000911;
-    STA.W nSmallItemSpriteIndex                                ;848AD9|8D0109  |000901;
+    STA.W strcObjectData.direction                             ;848AD6|8D1109  |000911;
+    STA.W strcObjectData.spriteIdx                             ;848AD9|8D0109  |000901;
     %AIMoveAction($0001)
     RTS                                                        ;848AE6|60      |      ;
  
@@ -1807,7 +1807,7 @@ fAIAction0x19:
     REP #$30                                                   ;848EC9|C230    |      ;
     %AIMoveAction($0001)
     LDA.B [ptrAIActionData]                                    ;848ED5|A7C9    |0000C9;
-    STA.W nSmallItemSpriteIndex                                ;848ED7|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;848ED7|8D0109  |000901;
     %AIMoveAction($0002)
     SEP #$20                                                   ;848EE4|E220    |      ;
     LDA.B #$00                                                 ;848EE6|A900    |      ;
@@ -1820,7 +1820,7 @@ fAIAction0x19:
     ASL A                                                      ;848EF0|0A      |      ;
     ASL A                                                      ;848EF1|0A      |      ;
     ASL A                                                      ;848EF2|0A      |      ;
-    STA.W $090F                                                ;848EF3|8D0F09  |00090F;
+    STA.W strcObjectData.flip                                  ;848EF3|8D0F09  |00090F;
     %AIMoveAction($0001)
     %SetPlayerFlag(!PFLAGS_KNEEING)
     RTS                                                        ;848F09|60      |      ;
@@ -2299,7 +2299,7 @@ fAIAction0x25:
     REP #$30                                                   ;8493AF|C230    |      ;
     LDY.W #$0012                                               ;8493B1|A01200  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;8493B4|B7CC    |0000CC;
-    STA.B strcSingleObjectData.gameObjectIdx                   ;8493B6|85A5    |0000A5;
+    STA.B strcObject.gameObjectIdx                             ;8493B6|85A5    |0000A5;
     JSL.L fObject_Unknown8581A2                                ;8493B8|22A28185|8581A2;
     REP #$20                                                   ;8493BC|C220    |      ;
     LDA.B ptrUnknown0x72                                       ;8493BE|A572    |000072;
@@ -2449,15 +2449,15 @@ fAIAction0x29_SetMapScrooling:
     %AIMoveAction($0001)
     REP #$20                                                   ;84951F|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;849521|A7C9    |0000C9;
-    STA.W nMapScrool_SpeedX                                    ;849523|8D7C08  |00087C;
+    STA.W strcMapScrool.speedX                                 ;849523|8D7C08  |00087C;
     %AIMoveAction($0002)
     REP #$20                                                   ;849530|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;849532|A7C9    |0000C9;
-    STA.W nMapScrool_SpeedY                                    ;849534|8D7E08  |00087E;
+    STA.W strcMapScrool.speedY                                 ;849534|8D7E08  |00087E;
     %AIMoveAction($0002)
     SEP #$20                                                   ;849541|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;849543|A7C9    |0000C9;
-    STA.W nMapScrool_Timer                                     ;849545|8D8008  |000880;
+    STA.W strcMapScrool.timer                                  ;849545|8D8008  |000880;
     %AIMoveAction($0001)
     RTS                                                        ;849552|60      |      ;
  
@@ -5503,7 +5503,7 @@ fAIAction0x35_UpdateHorse:
     STA.B strcPlayer.lastY                                     ;84AC78|85E1    |0000E1;
     STZ.B strcPlayer.newX                                      ;84AC7A|64E5    |0000E5;
     STZ.B strcPlayer.newY                                      ;84AC7C|64E7    |0000E7;
-    LDA.W $0913                                                ;84AC7E|AD1309  |000913;
+    LDA.W strcObjectData.directionNew                          ;84AC7E|AD1309  |000913;
     JSL.L fGameEngine_DirectionHandler83AF37                   ;84AC81|2237AF83|83AF37;
     REP #$30                                                   ;84AC85|C230    |      ;
     BEQ +                                                      ;84AC87|F003    |84AC8C;
@@ -5529,7 +5529,7 @@ fAIAction0x35_UpdateHorse:
   + REP #$20                                                   ;84ACA8|C220    |      ;
     LDA.W #$0020                                               ;84ACAA|A92000  |      ;
     STA.B strcPlayer.unkE3                                     ;84ACAD|85E3    |0000E3;
-    LDA.W $0913                                                ;84ACAF|AD1309  |000913;
+    LDA.W strcObjectData.directionNew                          ;84ACAF|AD1309  |000913;
     JSL.L fGameEngine_DirectionHandler83AD91                   ;84ACB2|2291AD83|83AD91;
     REP #$30                                                   ;84ACB6|C230    |      ;
     CMP.W #$0000                                               ;84ACB8|C90000  |      ;
@@ -6406,7 +6406,7 @@ fAIAction0x37:
     REP #$30                                                   ;84B357|C230    |      ;
     LDY.W #$0012                                               ;84B359|A01200  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;84B35C|B7CC    |0000CC;
-    STA.B strcSingleObjectData.gameObjectIdx                   ;84B35E|85A5    |0000A5;
+    STA.B strcObject.gameObjectIdx                             ;84B35E|85A5    |0000A5;
     JSL.L fObject_Unknown8581A2                                ;84B360|22A28185|8581A2;
     RTS                                                        ;84B364|60      |      ;
  
@@ -7267,7 +7267,7 @@ fAIAction0x50:
     LDA.W #$0000                                               ;84BBFA|A90000  |      ;
     CLC                                                        ;84BBFD|18      |      ;
     ADC.B strcPlayer.direction                                 ;84BBFE|65DA    |0000DA;
-    STA.W nSmallItemSpriteIndex                                ;84BC00|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;84BC00|8D0109  |000901;
     JMP.W .return                                              ;84BC03|4C9BBC  |84BC9B;
  
  
@@ -7311,7 +7311,7 @@ fAIAction0x50:
     LDA.W #$0000                                               ;84BC51|A90000  |      ;
     CLC                                                        ;84BC54|18      |      ;
     ADC.B strcPlayer.direction                                 ;84BC55|65DA    |0000DA;
-    STA.W nSmallItemSpriteIndex                                ;84BC57|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;84BC57|8D0109  |000901;
     BRA .return                                                ;84BC5A|803F    |84BC9B;
  
  
@@ -7334,7 +7334,7 @@ fAIAction0x50:
     LDA.W #$0000                                               ;84BC90|A90000  |      ;
     CLC                                                        ;84BC93|18      |      ;
     ADC.B strcPlayer.direction                                 ;84BC94|65DA    |0000DA;
-    STA.W nSmallItemSpriteIndex                                ;84BC96|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;84BC96|8D0109  |000901;
     BRA .return                                                ;84BC99|8000    |84BC9B;
  
  
@@ -7819,7 +7819,7 @@ fNameInput_ControlsHandler:
  
 fNameInput_BButton:
     SEP #$20                                                   ;84C0AB|E220    |      ;
-    LDA.W strcMenuObjectData.nameEntryIdx                      ;84C0AD|AD9409  |000994;
+    LDA.W strcMenuData.nameEntryIdx                            ;84C0AD|AD9409  |000994;
     BEQ .label2                                                ;84C0B0|F029    |84C0DB;
     CMP.B #$04                                                 ;84C0B2|C904    |      ;
     BEQ .label1                                                ;84C0B4|F009    |84C0BF;
@@ -7831,17 +7831,17 @@ fNameInput_BButton:
     SEP #$20                                                   ;84C0BF|E220    |      ;
     LDA.B #$00                                                 ;84C0C1|A900    |      ;
     XBA                                                        ;84C0C3|EB      |      ;
-    LDA.W strcMenuObjectData.nameEntryIdx                      ;84C0C4|AD9409  |000994;
+    LDA.W strcMenuData.nameEntryIdx                            ;84C0C4|AD9409  |000994;
     DEC A                                                      ;84C0C7|3A      |      ;
     REP #$20                                                   ;84C0C8|C220    |      ;
     TAX                                                        ;84C0CA|AA      |      ;
     SEP #$20                                                   ;84C0CB|E220    |      ;
     LDA.B #$B1                                                 ;84C0CD|A9B1    |      ;
-    STA.W sTempNameVariable,X                                  ;84C0CF|9D8508  |000885;
+    STA.W strcNames.sTemp,X                                    ;84C0CF|9D8508  |000885;
     SEP #$20                                                   ;84C0D2|E220    |      ;
-    LDA.W strcMenuObjectData.nameEntryIdx                      ;84C0D4|AD9409  |000994;
+    LDA.W strcMenuData.nameEntryIdx                            ;84C0D4|AD9409  |000994;
     DEC A                                                      ;84C0D7|3A      |      ;
-    STA.W strcMenuObjectData.nameEntryIdx                      ;84C0D8|8D9409  |000994;
+    STA.W strcMenuData.nameEntryIdx                            ;84C0D8|8D9409  |000994;
  
 .label2:
     SEP #$20                                                   ;84C0DB|E220    |      ;
@@ -7874,7 +7874,7 @@ fNameInput_AButton:
  
  
   + SEP #$20                                                   ;84C113|E220    |      ;
-    LDA.W strcMenuObjectData.nameEntryIdx                      ;84C115|AD9409  |000994;
+    LDA.W strcMenuData.nameEntryIdx                            ;84C115|AD9409  |000994;
     CMP.B #$04                                                 ;84C118|C904    |      ;
     BEQ .lastLetterInput                                       ;84C11A|F028    |84C144;
     REP #$20                                                   ;84C11C|C220    |      ;
@@ -7884,17 +7884,17 @@ fNameInput_AButton:
     PHA                                                        ;84C127|48      |      ;
     LDA.B #$00                                                 ;84C128|A900    |      ;
     XBA                                                        ;84C12A|EB      |      ;
-    LDA.W strcMenuObjectData.nameEntryIdx                      ;84C12B|AD9409  |000994;
+    LDA.W strcMenuData.nameEntryIdx                            ;84C12B|AD9409  |000994;
     REP #$20                                                   ;84C12E|C220    |      ;
     TAX                                                        ;84C130|AA      |      ;
     SEP #$20                                                   ;84C131|E220    |      ;
     PLA                                                        ;84C133|68      |      ;
-    STA.W sTempNameVariable,X                                  ;84C134|9D8508  |000885;
+    STA.W strcNames.sTemp,X                                    ;84C134|9D8508  |000885;
     JSL.L fTextUnknown_82EA60                                  ;84C137|2260EA82|82EA60;
     SEP #$20                                                   ;84C13B|E220    |      ;
-    LDA.W strcMenuObjectData.nameEntryIdx                      ;84C13D|AD9409  |000994;
+    LDA.W strcMenuData.nameEntryIdx                            ;84C13D|AD9409  |000994;
     INC A                                                      ;84C140|1A      |      ;
-    STA.W strcMenuObjectData.nameEntryIdx                      ;84C141|8D9409  |000994;
+    STA.W strcMenuData.nameEntryIdx                            ;84C141|8D9409  |000994;
  
 .lastLetterInput:
     SEP #$20                                                   ;84C144|E220    |      ;
@@ -7910,12 +7910,12 @@ fNameInput_AButton:
 fInput_Unknown84C157:
     SEP #$20                                                   ;84C157|E220    |      ;
     LDA.B #$00                                                 ;84C159|A900    |      ;
-    STA.W strcMenuObjectData.tableSelector                     ;84C15B|8D9309  |000993;
+    STA.W strcMenuData.tableSelector                           ;84C15B|8D9309  |000993;
     REP #$20                                                   ;84C15E|C220    |      ;
     STZ.W strcBGScrool.BG1HorOffs                              ;84C160|9C3C01  |00013C;
     STZ.W strcBGScrool.BG1VerOffs                              ;84C163|9C3E01  |00013E;
     REP #$20                                                   ;84C166|C220    |      ;
-    STZ.W strcMenuObjectData.menuIdx                           ;84C168|9C9109  |000991;
+    STZ.W strcMenuData.menuIdx                                 ;84C168|9C9109  |000991;
     SEP #$20                                                   ;84C16B|E220    |      ;
     REP #$10                                                   ;84C16D|C210    |      ;
     LDA.B #$01                                                 ;84C16F|A901    |      ;
@@ -7929,13 +7929,13 @@ fInput_Unknown84C157:
 fInput_Unknown84C17E:
     SEP #$20                                                   ;84C17E|E220    |      ;
     LDA.B #$01                                                 ;84C180|A901    |      ;
-    STA.W strcMenuObjectData.tableSelector                     ;84C182|8D9309  |000993;
+    STA.W strcMenuData.tableSelector                           ;84C182|8D9309  |000993;
     REP #$20                                                   ;84C185|C220    |      ;
     LDA.W #$0100                                               ;84C187|A90001  |      ;
     STA.W strcBGScrool.BG1HorOffs                              ;84C18A|8D3C01  |00013C;
     STZ.W strcBGScrool.BG1VerOffs                              ;84C18D|9C3E01  |00013E;
     REP #$20                                                   ;84C190|C220    |      ;
-    STZ.W strcMenuObjectData.menuIdx                           ;84C192|9C9109  |000991;
+    STZ.W strcMenuData.menuIdx                                 ;84C192|9C9109  |000991;
     SEP #$20                                                   ;84C195|E220    |      ;
     REP #$10                                                   ;84C197|C210    |      ;
     LDA.B #$01                                                 ;84C199|A901    |      ;
@@ -7949,13 +7949,13 @@ fInput_Unknown84C17E:
 fInput_Unknown84C1A8:
     SEP #$20                                                   ;84C1A8|E220    |      ;
     LDA.B #$02                                                 ;84C1AA|A902    |      ;
-    STA.W strcMenuObjectData.tableSelector                     ;84C1AC|8D9309  |000993;
+    STA.W strcMenuData.tableSelector                           ;84C1AC|8D9309  |000993;
     REP #$20                                                   ;84C1AF|C220    |      ;
     STZ.W strcBGScrool.BG1HorOffs                              ;84C1B1|9C3C01  |00013C;
     LDA.W #$0100                                               ;84C1B4|A90001  |      ;
     STA.W strcBGScrool.BG1VerOffs                              ;84C1B7|8D3E01  |00013E;
     REP #$20                                                   ;84C1BA|C220    |      ;
-    STZ.W strcMenuObjectData.menuIdx                           ;84C1BC|9C9109  |000991;
+    STZ.W strcMenuData.menuIdx                                 ;84C1BC|9C9109  |000991;
     SEP #$20                                                   ;84C1BF|E220    |      ;
     REP #$10                                                   ;84C1C1|C210    |      ;
     LDA.B #$01                                                 ;84C1C3|A901    |      ;
@@ -7968,10 +7968,10 @@ fInput_Unknown84C1A8:
  
 fInput_Unknown84C1D2:
     SEP #$20                                                   ;84C1D2|E220    |      ;
-    LDA.W strcMenuObjectData.nameEntryIdx                      ;84C1D4|AD9409  |000994;
+    LDA.W strcMenuData.nameEntryIdx                            ;84C1D4|AD9409  |000994;
     BEQ +                                                      ;84C1D7|F018    |84C1F1;
     LDA.B #$03                                                 ;84C1D9|A903    |      ;
-    STA.W strcMenuObjectData.tableSelector                     ;84C1DB|8D9309  |000993;
+    STA.W strcMenuData.tableSelector                           ;84C1DB|8D9309  |000993;
     SEP #$20                                                   ;84C1DE|E220    |      ;
     REP #$10                                                   ;84C1E0|C210    |      ;
     LDA.B #$01                                                 ;84C1E2|A901    |      ;
@@ -7997,7 +7997,7 @@ fNameInput_DownButton:
     LDA.W #$0000                                               ;84C206|A90000  |      ;
     JSL.L fMenuUnknown_82EBAC                                  ;84C209|22ACEB82|82EBAC;
     REP #$20                                                   ;84C20D|C220    |      ;
-    STA.W strcMenuObjectData.menuIdx                           ;84C20F|8D9109  |000991;
+    STA.W strcMenuData.menuIdx                                 ;84C20F|8D9109  |000991;
     SEP #$20                                                   ;84C212|E220    |      ;
     REP #$10                                                   ;84C214|C210    |      ;
     LDA.B #$03                                                 ;84C216|A903    |      ;
@@ -8013,7 +8013,7 @@ fNameInput_UpButton:
     LDA.W #$0001                                               ;84C227|A90100  |      ;
     JSL.L fMenuUnknown_82EBAC                                  ;84C22A|22ACEB82|82EBAC;
     REP #$20                                                   ;84C22E|C220    |      ;
-    STA.W strcMenuObjectData.menuIdx                           ;84C230|8D9109  |000991;
+    STA.W strcMenuData.menuIdx                                 ;84C230|8D9109  |000991;
     SEP #$20                                                   ;84C233|E220    |      ;
     REP #$10                                                   ;84C235|C210    |      ;
     LDA.B #$03                                                 ;84C237|A903    |      ;
@@ -8029,7 +8029,7 @@ fNameInput_RightButton:
     LDA.W #$0002                                               ;84C248|A90200  |      ;
     JSL.L fMenuUnknown_82EBAC                                  ;84C24B|22ACEB82|82EBAC;
     REP #$20                                                   ;84C24F|C220    |      ;
-    STA.W strcMenuObjectData.menuIdx                           ;84C251|8D9109  |000991;
+    STA.W strcMenuData.menuIdx                                 ;84C251|8D9109  |000991;
     SEP #$20                                                   ;84C254|E220    |      ;
     REP #$10                                                   ;84C256|C210    |      ;
     LDA.B #$03                                                 ;84C258|A903    |      ;
@@ -8045,7 +8045,7 @@ fNameInput_LeftButton:
     LDA.W #$0003                                               ;84C269|A90300  |      ;
     JSL.L fMenuUnknown_82EBAC                                  ;84C26C|22ACEB82|82EBAC;
     REP #$20                                                   ;84C270|C220    |      ;
-    STA.W strcMenuObjectData.menuIdx                           ;84C272|8D9109  |000991;
+    STA.W strcMenuData.menuIdx                                 ;84C272|8D9109  |000991;
     SEP #$20                                                   ;84C275|E220    |      ;
     REP #$10                                                   ;84C277|C210    |      ;
     LDA.B #$03                                                 ;84C279|A903    |      ;
@@ -8896,14 +8896,14 @@ fInput_Unused84C852:
  
 .down:
     REP #$30                                                   ;84C88A|C230    |      ;
-    LDA.W nPlayerDirectionCopy                                 ;84C88C|AD1109  |000911;
+    LDA.W strcObjectData.direction                             ;84C88C|AD1109  |000911;
     CMP.W #$0000                                               ;84C88F|C90000  |      ;
     BNE +                                                      ;84C892|D003    |84C897;
     JMP.W .setPlayerAction7                                    ;84C894|4C17C9  |84C917;
  
  
   + REP #$30                                                   ;84C897|C230    |      ;
-    LDA.W nPlayerDirectionCopy                                 ;84C899|AD1109  |000911;
+    LDA.W strcObjectData.direction                             ;84C899|AD1109  |000911;
     CMP.W #$0001                                               ;84C89C|C90100  |      ;
     BNE +                                                      ;84C89F|D003    |84C8A4;
     JMP.W .setPlayerAction6                                    ;84C8A1|4C21C9  |84C921;
@@ -8915,14 +8915,14 @@ fInput_Unused84C852:
  
 .up:
     REP #$30                                                   ;84C8AD|C230    |      ;
-    LDA.W nPlayerDirectionCopy                                 ;84C8AF|AD1109  |000911;
+    LDA.W strcObjectData.direction                             ;84C8AF|AD1109  |000911;
     CMP.W #$0001                                               ;84C8B2|C90100  |      ;
     BNE +                                                      ;84C8B5|D003    |84C8BA;
     JMP.W .setPlayerAction7                                    ;84C8B7|4C17C9  |84C917;
  
  
   + REP #$30                                                   ;84C8BA|C230    |      ;
-    LDA.W nPlayerDirectionCopy                                 ;84C8BC|AD1109  |000911;
+    LDA.W strcObjectData.direction                             ;84C8BC|AD1109  |000911;
     CMP.W #$0000                                               ;84C8BF|C90000  |      ;
     BNE +                                                      ;84C8C2|D003    |84C8C7;
     JMP.W .setPlayerAction6                                    ;84C8C4|4C21C9  |84C921;
@@ -8934,14 +8934,14 @@ fInput_Unused84C852:
  
 .right:
     REP #$30                                                   ;84C8D0|C230    |      ;
-    LDA.W nPlayerDirectionCopy                                 ;84C8D2|AD1109  |000911;
+    LDA.W strcObjectData.direction                             ;84C8D2|AD1109  |000911;
     CMP.W #$0002                                               ;84C8D5|C90200  |      ;
     BNE +                                                      ;84C8D8|D003    |84C8DD;
     JMP.W .setPlayerAction7                                    ;84C8DA|4C17C9  |84C917;
  
  
   + REP #$30                                                   ;84C8DD|C230    |      ;
-    LDA.W nPlayerDirectionCopy                                 ;84C8DF|AD1109  |000911;
+    LDA.W strcObjectData.direction                             ;84C8DF|AD1109  |000911;
     CMP.W #$0003                                               ;84C8E2|C90300  |      ;
     BNE +                                                      ;84C8E5|D003    |84C8EA;
     JMP.W .setPlayerAction6                                    ;84C8E7|4C21C9  |84C921;
@@ -8953,14 +8953,14 @@ fInput_Unused84C852:
  
 .left:
     REP #$30                                                   ;84C8F3|C230    |      ;
-    LDA.W nPlayerDirectionCopy                                 ;84C8F5|AD1109  |000911;
+    LDA.W strcObjectData.direction                             ;84C8F5|AD1109  |000911;
     CMP.W #$0003                                               ;84C8F8|C90300  |      ;
     BNE +                                                      ;84C8FB|D003    |84C900;
     JMP.W .setPlayerAction7                                    ;84C8FD|4C17C9  |84C917;
  
  
   + REP #$30                                                   ;84C900|C230    |      ;
-    LDA.W nPlayerDirectionCopy                                 ;84C902|AD1109  |000911;
+    LDA.W strcObjectData.direction                             ;84C902|AD1109  |000911;
     CMP.W #$0002                                               ;84C905|C90200  |      ;
     BNE +                                                      ;84C908|D003    |84C90D;
     JMP.W .setPlayerAction6                                    ;84C90A|4C21C9  |84C921;
@@ -8992,11 +8992,11 @@ fAiInput_PressDown:
     STA.B strcPlayer.direction                                 ;84C941|85DA    |0000DA;
     REP #$30                                                   ;84C943|C230    |      ;
     LDA.W #$0000                                               ;84C945|A90000  |      ;
-    STA.W nPlayerDirectionCopy                                 ;84C948|8D1109  |000911;
+    STA.W strcObjectData.direction                             ;84C948|8D1109  |000911;
     JMP.W fInput_Unknown84C740                                 ;84C94B|4C40C7  |84C740;
  
     REP #$30                                                   ;84C94E|C230    |      ;
-    LDA.W nPlayerDirectionCopy                                 ;84C950|AD1109  |000911;
+    LDA.W strcObjectData.direction                             ;84C950|AD1109  |000911;
     CMP.W #$0001                                               ;84C953|C90100  |      ;
     BNE +                                                      ;84C956|D003    |84C95B;
     JMP.W .label1                                              ;84C958|4C5EC9  |84C95E;
@@ -9020,11 +9020,11 @@ fAiInput_PressUp:
     STA.B strcPlayer.direction                                 ;84C97B|85DA    |0000DA;
     REP #$30                                                   ;84C97D|C230    |      ;
     LDA.W #$0001                                               ;84C97F|A90100  |      ;
-    STA.W nPlayerDirectionCopy                                 ;84C982|8D1109  |000911;
+    STA.W strcObjectData.direction                             ;84C982|8D1109  |000911;
     JMP.W fInput_Unknown84C740                                 ;84C985|4C40C7  |84C740;
  
     REP #$30                                                   ;84C988|C230    |      ;
-    LDA.W nPlayerDirectionCopy                                 ;84C98A|AD1109  |000911;
+    LDA.W strcObjectData.direction                             ;84C98A|AD1109  |000911;
     CMP.W #$0000                                               ;84C98D|C90000  |      ;
     BNE +                                                      ;84C990|D003    |84C995;
     JMP.W .label1                                              ;84C992|4C98C9  |84C998;
@@ -9048,11 +9048,11 @@ fAiInput_PressRight:
     STA.B strcPlayer.direction                                 ;84C9B5|85DA    |0000DA;
     REP #$30                                                   ;84C9B7|C230    |      ;
     LDA.W #$0002                                               ;84C9B9|A90200  |      ;
-    STA.W nPlayerDirectionCopy                                 ;84C9BC|8D1109  |000911;
+    STA.W strcObjectData.direction                             ;84C9BC|8D1109  |000911;
     JMP.W fInput_Unknown84C740                                 ;84C9BF|4C40C7  |84C740;
  
     REP #$30                                                   ;84C9C2|C230    |      ;
-    LDA.W nPlayerDirectionCopy                                 ;84C9C4|AD1109  |000911;
+    LDA.W strcObjectData.direction                             ;84C9C4|AD1109  |000911;
     CMP.W #$0003                                               ;84C9C7|C90300  |      ;
     BNE +                                                      ;84C9CA|D003    |84C9CF;
     JMP.W .label1                                              ;84C9CC|4CD2C9  |84C9D2;
@@ -9076,11 +9076,11 @@ fAiInput_PressLeft:
     STA.B strcPlayer.direction                                 ;84C9EF|85DA    |0000DA;
     REP #$30                                                   ;84C9F1|C230    |      ;
     LDA.W #$0003                                               ;84C9F3|A90300  |      ;
-    STA.W nPlayerDirectionCopy                                 ;84C9F6|8D1109  |000911;
+    STA.W strcObjectData.direction                             ;84C9F6|8D1109  |000911;
     JMP.W fInput_Unknown84C740                                 ;84C9F9|4C40C7  |84C740;
  
     REP #$30                                                   ;84C9FC|C230    |      ;
-    LDA.W nPlayerDirectionCopy                                 ;84C9FE|AD1109  |000911;
+    LDA.W strcObjectData.direction                             ;84C9FE|AD1109  |000911;
     CMP.W #$0002                                               ;84CA01|C90200  |      ;
     BNE +                                                      ;84CA04|D003    |84CA09;
     JMP.W .label1                                              ;84CA06|4C0CCA  |84CA0C;
@@ -9357,7 +9357,7 @@ fInput_Unknown84CAA5:
 .label5:
     REP #$30                                                   ;84CC40|C230    |      ;
     LDA.W #$0002                                               ;84CC42|A90200  |      ;
-    STA.W nPlayerDirectionCopy                                 ;84CC45|8D1109  |000911;
+    STA.W strcObjectData.direction                             ;84CC45|8D1109  |000911;
     JSL.L fInput_Unknown84CD16                                 ;84CC48|2216CD84|84CD16;
     REP #$30                                                   ;84CC4C|C230    |      ;
     BNE +                                                      ;84CC4E|D003    |84CC53;
@@ -9365,7 +9365,7 @@ fInput_Unknown84CAA5:
  
  
   + LDA.W #$0003                                               ;84CC53|A90300  |      ;
-    STA.W nPlayerDirectionCopy                                 ;84CC56|8D1109  |000911;
+    STA.W strcObjectData.direction                             ;84CC56|8D1109  |000911;
     JSL.L fInput_Unknown84CD16                                 ;84CC59|2216CD84|84CD16;
     REP #$30                                                   ;84CC5D|C230    |      ;
     BNE +                                                      ;84CC5F|D003    |84CC64;
@@ -9374,61 +9374,61 @@ fInput_Unknown84CAA5:
  
   + LDA.W #!PDIR_DOWN                                               
     STA.B strcPlayer.direction                                 ;84CC67|85DA    |0000DA;
-    STA.W nPlayerDirectionCopy                                 ;84CC69|8D1109  |000911;
+    STA.W strcObjectData.direction                             ;84CC69|8D1109  |000911;
     JMP.W .justReturn3                                         ;84CC6C|4C15CD  |84CD15;
  
  
 .label6:
     REP #$30                                                   ;84CC6F|C230    |      ;
     LDA.W #$0003                                               ;84CC71|A90300  |      ;
-    STA.W nPlayerDirectionCopy                                 ;84CC74|8D1109  |000911;
+    STA.W strcObjectData.direction                             ;84CC74|8D1109  |000911;
     JSL.L fInput_Unknown84CD16                                 ;84CC77|2216CD84|84CD16;
     REP #$30                                                   ;84CC7B|C230    |      ;
     BEQ .label9                                                ;84CC7D|F069    |84CCE8;
     LDA.W #$0002                                               ;84CC7F|A90200  |      ;
-    STA.W nPlayerDirectionCopy                                 ;84CC82|8D1109  |000911;
+    STA.W strcObjectData.direction                             ;84CC82|8D1109  |000911;
     JSL.L fInput_Unknown84CD16                                 ;84CC85|2216CD84|84CD16;
     REP #$30                                                   ;84CC89|C230    |      ;
     BEQ .label9                                                ;84CC8B|F05B    |84CCE8;
     LDA.W #!PDIR_UP                                               
     STA.B strcPlayer.direction                                 ;84CC90|85DA    |0000DA;
-    STA.W nPlayerDirectionCopy                                 ;84CC92|8D1109  |000911;
+    STA.W strcObjectData.direction                             ;84CC92|8D1109  |000911;
     JMP.W .justReturn3                                         ;84CC95|4C15CD  |84CD15;
  
  
 .label7:
     REP #$30                                                   ;84CC98|C230    |      ;
     LDA.W #$0000                                               ;84CC9A|A90000  |      ;
-    STA.W nPlayerDirectionCopy                                 ;84CC9D|8D1109  |000911;
+    STA.W strcObjectData.direction                             ;84CC9D|8D1109  |000911;
     JSL.L fInput_Unknown84CD16                                 ;84CCA0|2216CD84|84CD16;
     REP #$30                                                   ;84CCA4|C230    |      ;
     BEQ .label9                                                ;84CCA6|F040    |84CCE8;
     LDA.W #$0001                                               ;84CCA8|A90100  |      ;
-    STA.W nPlayerDirectionCopy                                 ;84CCAB|8D1109  |000911;
+    STA.W strcObjectData.direction                             ;84CCAB|8D1109  |000911;
     JSL.L fInput_Unknown84CD16                                 ;84CCAE|2216CD84|84CD16;
     REP #$30                                                   ;84CCB2|C230    |      ;
     BEQ .label9                                                ;84CCB4|F032    |84CCE8;
     LDA.W #!PDIR_LEFT                                               
     STA.B strcPlayer.direction                                 ;84CCB9|85DA    |0000DA;
-    STA.W nPlayerDirectionCopy                                 ;84CCBB|8D1109  |000911;
+    STA.W strcObjectData.direction                             ;84CCBB|8D1109  |000911;
     BRA .justReturn3                                           ;84CCBE|8055    |84CD15;
  
  
 .label8:
     REP #$30                                                   ;84CCC0|C230    |      ;
     LDA.W #$0000                                               ;84CCC2|A90000  |      ;
-    STA.W nPlayerDirectionCopy                                 ;84CCC5|8D1109  |000911;
+    STA.W strcObjectData.direction                             ;84CCC5|8D1109  |000911;
     JSL.L fInput_Unknown84CD16                                 ;84CCC8|2216CD84|84CD16;
     REP #$30                                                   ;84CCCC|C230    |      ;
     BEQ .label9                                                ;84CCCE|F018    |84CCE8;
     LDA.W #$0001                                               ;84CCD0|A90100  |      ;
-    STA.W nPlayerDirectionCopy                                 ;84CCD3|8D1109  |000911;
+    STA.W strcObjectData.direction                             ;84CCD3|8D1109  |000911;
     JSL.L fInput_Unknown84CD16                                 ;84CCD6|2216CD84|84CD16;
     REP #$30                                                   ;84CCDA|C230    |      ;
     BEQ .label9                                                ;84CCDC|F00A    |84CCE8;
     LDA.W #!PDIR_RIGHT                                               
     STA.B strcPlayer.direction                                 ;84CCE1|85DA    |0000DA;
-    STA.W nPlayerDirectionCopy                                 ;84CCE3|8D1109  |000911;
+    STA.W strcObjectData.direction                             ;84CCE3|8D1109  |000911;
     BRA .justReturn3                                           ;84CCE6|802D    |84CD15;
  
  
@@ -9463,7 +9463,7 @@ fInput_Unknown84CD16:
     STA.B strcPlayer.lastY                                     ;84CD23|85E1    |0000E1;
     STZ.B strcPlayer.newX                                      ;84CD25|64E5    |0000E5;
     STZ.B strcPlayer.newY                                      ;84CD27|64E7    |0000E7;
-    LDA.W nPlayerDirectionCopy                                 ;84CD29|AD1109  |000911;
+    LDA.W strcObjectData.direction                             ;84CD29|AD1109  |000911;
     JSL.L fGameEngine_DirectionHandler83AF37                   ;84CD2C|2237AF83|83AF37;
     REP #$30                                                   ;84CD30|C230    |      ;
     BEQ +                                                      ;84CD32|F003    |84CD37;
@@ -9489,7 +9489,7 @@ fInput_Unknown84CD16:
   + REP #$20                                                   ;84CD53|C220    |      ;
     LDA.W #$0010                                               ;84CD55|A91000  |      ;
     STA.B strcPlayer.unkE3                                     ;84CD58|85E3    |0000E3;
-    LDA.W nPlayerDirectionCopy                                 ;84CD5A|AD1109  |000911;
+    LDA.W strcObjectData.direction                             ;84CD5A|AD1109  |000911;
     JSL.L fGameEngine_DirectionHandler83AD91                   ;84CD5D|2291AD83|83AD91;
     REP #$30                                                   ;84CD61|C230    |      ;
     CMP.W #$0000                                               ;84CD63|C90000  |      ;
@@ -9581,7 +9581,7 @@ fInput_SetPlayerAction0x13:
     REP #$20                                                   ;84CE02|C220    |      ;
     CLC                                                        ;84CE04|18      |      ;
     ADC.W #$008B                                               ;84CE05|698B00  |      ;
-    STA.W nSmallItemSpriteIndex                                ;84CE08|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;84CE08|8D0109  |000901;
     RTL                                                        ;84CE0B|6B      |      ;
  
  

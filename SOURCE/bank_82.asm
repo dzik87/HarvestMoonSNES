@@ -429,7 +429,7 @@ fNextDayHandler:
     JSL.L fCore_FindBestLove                                   ;8283A8|22C68E82|828EC6;
     JSL.L fUnknown_828790                                      ;8283AC|22908782|828790;
     REP #$20                                                   ;8283B0|C220    |      ;
-    STZ.W $0915                                                ;8283B2|9C1509  |000915;
+    STZ.W strcObjectData.exist                                 ;8283B2|9C1509  |000915;
     STZ.B strcPlayer.flags                                     ;8283B5|64D2    |0000D2;
     STZ.B strcPlayer.action                                    ;8283B7|64D4    |0000D4;
     SEP #$20                                                   ;8283B9|E220    |      ;
@@ -443,10 +443,10 @@ fNextDayHandler:
     STA.B strcPlayer.direction                                 ;8283D9|85DA    |0000DA;
     REP #$30                                                   ;8283DB|C230    |      ;
     LDA.W #$0000                                               ;8283DD|A90000  |      ;
-    STA.W nPlayerDirectionCopy                                 ;8283E0|8D1109  |000911;
+    STA.W strcObjectData.direction                             ;8283E0|8D1109  |000911;
     REP #$30                                                   ;8283E3|C230    |      ;
     LDA.W #$0000                                               ;8283E5|A90000  |      ;
-    STA.W nSmallItemSpriteIndex                                ;8283E8|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;8283E8|8D0109  |000901;
     REP #$20                                                   ;8283EB|C220    |      ;
     LDA.L nShippingProfit                                      ;8283ED|AF071F7F|7F1F07;
     STA.B ptrUnknown0x72                                       ;8283F1|8572    |000072;
@@ -964,27 +964,27 @@ fWriteSeasonWeekdayAndDayOrdinal:
     ASL A                                                      ;8289E6|0A      |      ; * 16
     TAX                                                        ;8289E7|AA      |      ;
     LDA.L aSeasonString,X                                      ;8289E8|BFD98A82|828AD9;
-    STA.W sSeasonName                                          ;8289EC|8DB308  |0008B3;
+    STA.W strcNames.wSeason                                    ;8289EC|8DB308  |0008B3;
     INX                                                        ;8289EF|E8      |      ;
     INX                                                        ;8289F0|E8      |      ;
     LDA.L aSeasonString,X                                      ;8289F1|BFD98A82|828AD9;
-    STA.W sSeasonName+2                                        ;8289F5|8DB508  |0008B5;
+    STA.W strcNames.wSeason+2                                  ;8289F5|8DB508  |0008B5;
     INX                                                        ;8289F8|E8      |      ;
     INX                                                        ;8289F9|E8      |      ;
     LDA.L aSeasonString,X                                      ;8289FA|BFD98A82|828AD9;
-    STA.W sSeasonName+4                                        ;8289FE|8DB708  |0008B7;
+    STA.W strcNames.wSeason+4                                  ;8289FE|8DB708  |0008B7;
     INX                                                        ;828A01|E8      |      ;
     INX                                                        ;828A02|E8      |      ;
     LDA.L aSeasonString,X                                      ;828A03|BFD98A82|828AD9;
-    STA.W sSeasonName+6                                        ;828A07|8DB908  |0008B9;
+    STA.W strcNames.wSeason+6                                  ;828A07|8DB908  |0008B9;
     INX                                                        ;828A0A|E8      |      ;
     INX                                                        ;828A0B|E8      |      ;
     LDA.L aSeasonString,X                                      ;828A0C|BFD98A82|828AD9;
-    STA.W sSeasonName+8                                        ;828A10|8DBB08  |0008BB;
+    STA.W strcNames.wSeason+8                                  ;828A10|8DBB08  |0008BB;
     INX                                                        ;828A13|E8      |      ;
     INX                                                        ;828A14|E8      |      ;
     LDA.L aSeasonString,X                                      ;828A15|BFD98A82|828AD9;
-    STA.W sSeasonName+10                                       ;828A19|8DBD08  |0008BD;
+    STA.W strcNames.wSeason+10                                 ;828A19|8DBD08  |0008BD;
     SEP #$20                                                   ;828A1C|E220    |      ;
     LDA.B #$00                                                 ;828A1E|A900    |      ;
     XBA                                                        ;828A20|EB      |      ;
@@ -997,39 +997,39 @@ fWriteSeasonWeekdayAndDayOrdinal:
     ASL A                                                      ;828A2B|0A      |      ;
     TAX                                                        ;828A2C|AA      |      ;
     LDA.L aWeekdayString,X                                     ;828A2D|BF198B82|828B19;
-    STA.W sWeekdayName                                         ;828A31|8DBF08  |0008BF;
+    STA.W strcNames.wWeekday                                   ;828A31|8DBF08  |0008BF;
     INX                                                        ;828A34|E8      |      ;
     INX                                                        ;828A35|E8      |      ;
     LDA.L aWeekdayString,X                                     ;828A36|BF198B82|828B19;
-    STA.W sWeekdayName+2                                       ;828A3A|8DC108  |0008C1;
+    STA.W strcNames.wWeekday+2                                 ;828A3A|8DC108  |0008C1;
     INX                                                        ;828A3D|E8      |      ;
     INX                                                        ;828A3E|E8      |      ;
     LDA.L aWeekdayString,X                                     ;828A3F|BF198B82|828B19;
-    STA.W sWeekdayName+4                                       ;828A43|8DC308  |0008C3;
+    STA.W strcNames.wWeekday+4                                 ;828A43|8DC308  |0008C3;
     INX                                                        ;828A46|E8      |      ;
     INX                                                        ;828A47|E8      |      ;
     LDA.L aWeekdayString,X                                     ;828A48|BF198B82|828B19;
-    STA.W sWeekdayName+6                                       ;828A4C|8DC508  |0008C5;
+    STA.W strcNames.wWeekday+6                                 ;828A4C|8DC508  |0008C5;
     INX                                                        ;828A4F|E8      |      ;
     INX                                                        ;828A50|E8      |      ;
     LDA.L aWeekdayString,X                                     ;828A51|BF198B82|828B19;
-    STA.W sWeekdayName+8                                       ;828A55|8DC708  |0008C7;
+    STA.W strcNames.wWeekday+8                                 ;828A55|8DC708  |0008C7;
     INX                                                        ;828A58|E8      |      ;
     INX                                                        ;828A59|E8      |      ;
     LDA.L aWeekdayString,X                                     ;828A5A|BF198B82|828B19;
-    STA.W sWeekdayName+10                                      ;828A5E|8DC908  |0008C9;
+    STA.W strcNames.wWeekday+10                                ;828A5E|8DC908  |0008C9;
     INX                                                        ;828A61|E8      |      ;
     INX                                                        ;828A62|E8      |      ;
     LDA.L aWeekdayString,X                                     ;828A63|BF198B82|828B19;
-    STA.W sWeekdayName+12                                      ;828A67|8DCB08  |0008CB;
+    STA.W strcNames.wWeekday+12                                ;828A67|8DCB08  |0008CB;
     INX                                                        ;828A6A|E8      |      ;
     INX                                                        ;828A6B|E8      |      ;
     LDA.L aWeekdayString,X                                     ;828A6C|BF198B82|828B19;
-    STA.W sWeekdayName+14                                      ;828A70|8DCD08  |0008CD;
+    STA.W strcNames.wWeekday+14                                ;828A70|8DCD08  |0008CD;
     INX                                                        ;828A73|E8      |      ;
     INX                                                        ;828A74|E8      |      ;
     LDA.L aWeekdayString,X                                     ;828A75|BF198B82|828B19;
-    STA.W sWeekdayName+16                                      ;828A79|8DCF08  |0008CF;
+    STA.W strcNames.wWeekday+16                                ;828A79|8DCF08  |0008CF;
     SEP #$20                                                   ;828A7C|E220    |      ;
     LDA.B #$00                                                 ;828A7E|A900    |      ;
     XBA                                                        ;828A80|EB      |      ;
@@ -1066,11 +1066,11 @@ fWriteSeasonWeekdayAndDayOrdinal:
 .loadordinal:
     REP #$30                                                   ;828AB0|C230    |      ;
     LDA.L aDayOrdinalString,X                                  ;828AB2|BFF98B82|828BF9;
-    STA.W sNumberOrdinal                                       ;828AB6|8DD108  |0008D1;
+    STA.W strcNames.wDayOrdinal                                ;828AB6|8DD108  |0008D1;
     INX                                                        ;828AB9|E8      |      ;
     INX                                                        ;828ABA|E8      |      ;
     LDA.L aDayOrdinalString,X                                  ;828ABB|BFF98B82|828BF9;
-    STA.W sNumberOrdinal+2                                     ;828ABF|8DD308  |0008D3;
+    STA.W strcNames.wDayOrdinal+2                              ;828ABF|8DD308  |0008D3;
     RTL                                                        ;828AC2|6B      |      ;
  
  
@@ -1517,75 +1517,75 @@ fCore_FindBestLove:
 .maria:
     REP #$30                                                   ;828F0C|C230    |      ;
     LDA.W #$0026                                               ;828F0E|A92600  |      ;
-    STA.W sMostLovedGirlName                                   ;828F11|8DA108  |0008A1;
+    STA.W strcNames.wMostLovedGirl                             ;828F11|8DA108  |0008A1;
     LDA.W #$0000                                               ;828F14|A90000  |      ;
-    STA.W sMostLovedGirlName+2                                 ;828F17|8DA308  |0008A3;
+    STA.W strcNames.wMostLovedGirl+2                           ;828F17|8DA308  |0008A3;
     LDA.W #$0011                                               ;828F1A|A91100  |      ;
-    STA.W sMostLovedGirlName+4                                 ;828F1D|8DA508  |0008A5;
+    STA.W strcNames.wMostLovedGirl+4                           ;828F1D|8DA508  |0008A5;
     LDA.W #$0008                                               ;828F20|A90800  |      ;
-    STA.W sMostLovedGirlName+6                                 ;828F23|8DA708  |0008A7;
+    STA.W strcNames.wMostLovedGirl+6                           ;828F23|8DA708  |0008A7;
     LDA.W #$0000                                               ;828F26|A90000  |      ;
-    STA.W sMostLovedGirlName+8                                 ;828F29|8DA908  |0008A9;
+    STA.W strcNames.wMostLovedGirl+8                           ;828F29|8DA908  |0008A9;
     RTL                                                        ;828F2C|6B      |      ;
  
  
 .ann:
     REP #$30                                                   ;828F2D|C230    |      ;
     LDA.W #$001A                                               ;828F2F|A91A00  |      ;
-    STA.W sMostLovedGirlName                                   ;828F32|8DA108  |0008A1;
+    STA.W strcNames.wMostLovedGirl                             ;828F32|8DA108  |0008A1;
     LDA.W #$000D                                               ;828F35|A90D00  |      ;
-    STA.W sMostLovedGirlName+2                                 ;828F38|8DA308  |0008A3;
+    STA.W strcNames.wMostLovedGirl+2                           ;828F38|8DA308  |0008A3;
     LDA.W #$000D                                               ;828F3B|A90D00  |      ;
-    STA.W sMostLovedGirlName+4                                 ;828F3E|8DA508  |0008A5;
+    STA.W strcNames.wMostLovedGirl+4                           ;828F3E|8DA508  |0008A5;
     LDA.W #$00B1                                               ;828F41|A9B100  |      ;
-    STA.W sMostLovedGirlName+6                                 ;828F44|8DA708  |0008A7;
+    STA.W strcNames.wMostLovedGirl+6                           ;828F44|8DA708  |0008A7;
     LDA.W #$00B1                                               ;828F47|A9B100  |      ;
-    STA.W sMostLovedGirlName+8                                 ;828F4A|8DA908  |0008A9;
+    STA.W strcNames.wMostLovedGirl+8                           ;828F4A|8DA908  |0008A9;
     RTL                                                        ;828F4D|6B      |      ;
  
  
 .nina:
     REP #$30                                                   ;828F4E|C230    |      ;
     LDA.W #$0027                                               ;828F50|A92700  |      ;
-    STA.W sMostLovedGirlName                                   ;828F53|8DA108  |0008A1;
+    STA.W strcNames.wMostLovedGirl                             ;828F53|8DA108  |0008A1;
     LDA.W #$0008                                               ;828F56|A90800  |      ;
-    STA.W sMostLovedGirlName+2                                 ;828F59|8DA308  |0008A3;
+    STA.W strcNames.wMostLovedGirl+2                           ;828F59|8DA308  |0008A3;
     LDA.W #$000D                                               ;828F5C|A90D00  |      ;
-    STA.W sMostLovedGirlName+4                                 ;828F5F|8DA508  |0008A5;
+    STA.W strcNames.wMostLovedGirl+4                           ;828F5F|8DA508  |0008A5;
     LDA.W #$0000                                               ;828F62|A90000  |      ;
-    STA.W sMostLovedGirlName+6                                 ;828F65|8DA708  |0008A7;
+    STA.W strcNames.wMostLovedGirl+6                           ;828F65|8DA708  |0008A7;
     LDA.W #$00B1                                               ;828F68|A9B100  |      ;
-    STA.W sMostLovedGirlName+8                                 ;828F6B|8DA908  |0008A9;
+    STA.W strcNames.wMostLovedGirl+8                           ;828F6B|8DA908  |0008A9;
     RTL                                                        ;828F6E|6B      |      ;
  
  
 .ellen:
     REP #$30                                                   ;828F6F|C230    |      ;
     LDA.W #$001E                                               ;828F71|A91E00  |      ;
-    STA.W sMostLovedGirlName                                   ;828F74|8DA108  |0008A1;
+    STA.W strcNames.wMostLovedGirl                             ;828F74|8DA108  |0008A1;
     LDA.W #$000B                                               ;828F77|A90B00  |      ;
-    STA.W sMostLovedGirlName+2                                 ;828F7A|8DA308  |0008A3;
+    STA.W strcNames.wMostLovedGirl+2                           ;828F7A|8DA308  |0008A3;
     LDA.W #$000B                                               ;828F7D|A90B00  |      ;
-    STA.W sMostLovedGirlName+4                                 ;828F80|8DA508  |0008A5;
+    STA.W strcNames.wMostLovedGirl+4                           ;828F80|8DA508  |0008A5;
     LDA.W #$0004                                               ;828F83|A90400  |      ;
-    STA.W sMostLovedGirlName+6                                 ;828F86|8DA708  |0008A7;
+    STA.W strcNames.wMostLovedGirl+6                           ;828F86|8DA708  |0008A7;
     LDA.W #$000D                                               ;828F89|A90D00  |      ;
-    STA.W sMostLovedGirlName+8                                 ;828F8C|8DA908  |0008A9;
+    STA.W strcNames.wMostLovedGirl+8                           ;828F8C|8DA908  |0008A9;
     RTL                                                        ;828F8F|6B      |      ;
  
  
 .eve:
     REP #$30                                                   ;828F90|C230    |      ;
     LDA.W #$001E                                               ;828F92|A91E00  |      ;
-    STA.W sMostLovedGirlName                                   ;828F95|8DA108  |0008A1;
+    STA.W strcNames.wMostLovedGirl                             ;828F95|8DA108  |0008A1;
     LDA.W #$0015                                               ;828F98|A91500  |      ;
-    STA.W sMostLovedGirlName+2                                 ;828F9B|8DA308  |0008A3;
+    STA.W strcNames.wMostLovedGirl+2                           ;828F9B|8DA308  |0008A3;
     LDA.W #$0004                                               ;828F9E|A90400  |      ;
-    STA.W sMostLovedGirlName+4                                 ;828FA1|8DA508  |0008A5;
+    STA.W strcNames.wMostLovedGirl+4                           ;828FA1|8DA508  |0008A5;
     LDA.W #$00B1                                               ;828FA4|A9B100  |      ;
-    STA.W sMostLovedGirlName+6                                 ;828FA7|8DA708  |0008A7;
+    STA.W strcNames.wMostLovedGirl+6                           ;828FA7|8DA708  |0008A7;
     LDA.W #$00B1                                               ;828FAA|A9B100  |      ;
-    STA.W sMostLovedGirlName+8                                 ;828FAD|8DA908  |0008A9;
+    STA.W strcNames.wMostLovedGirl+8                           ;828FAD|8DA908  |0008A9;
     RTL                                                        ;828FB0|6B      |      ;
  
  
@@ -1709,7 +1709,7 @@ fToolUsedAnimationHandler:
 .label1:
     REP #$20                                                   ;8290CD|C220    |      ;
     LDA.W #$004D                                               ;8290CF|A94D00  |      ;
-    STA.W nSmallItemSpriteIndex                                ;8290D2|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;8290D2|8D0109  |000901;
     %SetPlayerAction(!PACTION_TIRED)
  
 .return:
@@ -1726,7 +1726,7 @@ fToolUsedAnimation0x01_Sickle:
     LDA.W #$0050                                               ;8290E2|A95000  |      ;
     CLC                                                        ;8290E5|18      |      ;
     ADC.B strcPlayer.direction                                 ;8290E6|65DA    |0000DA;
-    STA.W nSmallItemSpriteIndex                                ;8290E8|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;8290E8|8D0109  |000901;
     RTS                                                        ;8290EB|60      |      ;
  
  
@@ -1736,7 +1736,7 @@ fToolUsedAnimation0x02_Plow:
     LDA.W #$0054                                               ;8290F0|A95400  |      ;
     CLC                                                        ;8290F3|18      |      ;
     ADC.B strcPlayer.direction                                 ;8290F4|65DA    |0000DA;
-    STA.W nSmallItemSpriteIndex                                ;8290F6|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;8290F6|8D0109  |000901;
     RTS                                                        ;8290F9|60      |      ;
  
  
@@ -1746,7 +1746,7 @@ fToolUsedAnimation0x03_Hammer:
     LDA.W #$0058                                               ;8290FE|A95800  |      ;
     CLC                                                        ;829101|18      |      ;
     ADC.B strcPlayer.direction                                 ;829102|65DA    |0000DA;
-    STA.W nSmallItemSpriteIndex                                ;829104|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;829104|8D0109  |000901;
     RTS                                                        ;829107|60      |      ;
  
  
@@ -1756,7 +1756,7 @@ fToolUsedAnimation0x04_Axe:
     LDA.W #$005C                                               ;82910C|A95C00  |      ;
     CLC                                                        ;82910F|18      |      ;
     ADC.B strcPlayer.direction                                 ;829110|65DA    |0000DA;
-    STA.W nSmallItemSpriteIndex                                ;829112|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;829112|8D0109  |000901;
     RTS                                                        ;829115|60      |      ;
  
  
@@ -1764,7 +1764,7 @@ fToolUsedAnimation0x05_CornSeedBag:
     REP #$30                                                   ;829116|C230    |      ;
     REP #$30                                                   ;829118|C230    |      ;
     LDA.W #$0046                                               ;82911A|A94600  |      ;
-    STA.W nSmallItemSpriteIndex                                ;82911D|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;82911D|8D0109  |000901;
     RTS                                                        ;829120|60      |      ;
  
  
@@ -1772,7 +1772,7 @@ fToolUsedAnimation0x06_TomatoSeedBag:
     REP #$30                                                   ;829121|C230    |      ;
     REP #$30                                                   ;829123|C230    |      ;
     LDA.W #$0046                                               ;829125|A94600  |      ;
-    STA.W nSmallItemSpriteIndex                                ;829128|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;829128|8D0109  |000901;
     RTS                                                        ;82912B|60      |      ;
  
  
@@ -1780,7 +1780,7 @@ fToolUsedAnimation0x07_PotatoSeedBag:
     REP #$30                                                   ;82912C|C230    |      ;
     REP #$30                                                   ;82912E|C230    |      ;
     LDA.W #$0046                                               ;829130|A94600  |      ;
-    STA.W nSmallItemSpriteIndex                                ;829133|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;829133|8D0109  |000901;
     RTS                                                        ;829136|60      |      ;
  
  
@@ -1788,7 +1788,7 @@ fToolUsedAnimation0x08_TurnipSeedBag:
     REP #$30                                                   ;829137|C230    |      ;
     REP #$30                                                   ;829139|C230    |      ;
     LDA.W #$0046                                               ;82913B|A94600  |      ;
-    STA.W nSmallItemSpriteIndex                                ;82913E|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;82913E|8D0109  |000901;
     RTS                                                        ;829141|60      |      ;
  
  
@@ -1798,7 +1798,7 @@ fToolUsedAnimation0x09_CowMedicine:
     LDA.W #$00AC                                               ;829146|A9AC00  |      ;
     CLC                                                        ;829149|18      |      ;
     ADC.B strcPlayer.direction                                 ;82914A|65DA    |0000DA;
-    STA.W nSmallItemSpriteIndex                                ;82914C|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;82914C|8D0109  |000901;
     RTS                                                        ;82914F|60      |      ;
  
  
@@ -1808,7 +1808,7 @@ fToolUsedAnimation0x0A_MiraclePotion:
     LDA.W #$00AC                                               ;829154|A9AC00  |      ;
     CLC                                                        ;829157|18      |      ;
     ADC.B strcPlayer.direction                                 ;829158|65DA    |0000DA;
-    STA.W nSmallItemSpriteIndex                                ;82915A|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;82915A|8D0109  |000901;
     RTS                                                        ;82915D|60      |      ;
  
  
@@ -1818,7 +1818,7 @@ fToolUsedAnimation0x0B_Bell:
     LDA.W #$0060                                               ;829162|A96000  |      ;
     CLC                                                        ;829165|18      |      ;
     ADC.B strcPlayer.direction                                 ;829166|65DA    |0000DA;
-    STA.W nSmallItemSpriteIndex                                ;829168|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;829168|8D0109  |000901;
     REP #$20                                                   ;82916B|C220    |      ;
     %SetFlag(daily1, $0010)
     RTS                                                        ;829178|60      |      ;
@@ -1828,14 +1828,14 @@ fToolUsedAnimation0x0C_GrassSeedBag:
     REP #$30                                                   ;829179|C230    |      ;
     REP #$30                                                   ;82917B|C230    |      ;
     LDA.W #$0046                                               ;82917D|A94600  |      ;
-    STA.W nSmallItemSpriteIndex                                ;829180|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;829180|8D0109  |000901;
     RTS                                                        ;829183|60      |      ;
  
  
 fToolUsedAnimation0x0D_Paint:
     REP #$30                                                   ;829184|C230    |      ;
     LDA.W #$0044                                               ;829186|A94400  |      ;
-    STA.W nSmallItemSpriteIndex                                ;829189|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;829189|8D0109  |000901;
     RTS                                                        ;82918C|60      |      ;
  
  
@@ -1845,7 +1845,7 @@ fToolUsedAnimation0x0E_Milker:
     LDA.W #$0078                                               ;829191|A97800  |      ;
     CLC                                                        ;829194|18      |      ;
     ADC.B strcPlayer.direction                                 ;829195|65DA    |0000DA;
-    STA.W nSmallItemSpriteIndex                                ;829197|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;829197|8D0109  |000901;
     RTS                                                        ;82919A|60      |      ;
  
  
@@ -1855,7 +1855,7 @@ fToolUsedAnimation0x0F_Brush:
     LDA.W #$0064                                               ;82919F|A96400  |      ;
     CLC                                                        ;8291A2|18      |      ;
     ADC.B strcPlayer.direction                                 ;8291A3|65DA    |0000DA;
-    STA.W nSmallItemSpriteIndex                                ;8291A5|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;8291A5|8D0109  |000901;
     RTS                                                        ;8291A8|60      |      ;
  
  
@@ -1872,7 +1872,7 @@ fToolUsedAnimation0x10_WateringCan:
     LDA.W #$0068                                               ;8291BD|A96800  |      ;
     CLC                                                        ;8291C0|18      |      ;
     ADC.B strcPlayer.direction                                 ;8291C1|65DA    |0000DA;
-    STA.W nSmallItemSpriteIndex                                ;8291C3|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;8291C3|8D0109  |000901;
     BRA .return                                                ;8291C6|801F    |8291E7;
  
  
@@ -1881,7 +1881,7 @@ fToolUsedAnimation0x10_WateringCan:
     LDA.W #$006C                                               ;8291CA|A96C00  |      ;
     CLC                                                        ;8291CD|18      |      ;
     ADC.B strcPlayer.direction                                 ;8291CE|65DA    |0000DA;
-    STA.W nSmallItemSpriteIndex                                ;8291D0|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;8291D0|8D0109  |000901;
     BRA .return                                                ;8291D3|8012    |8291E7;
  
  
@@ -1890,7 +1890,7 @@ fToolUsedAnimation0x10_WateringCan:
     LDA.W #$0070                                               ;8291D7|A97000  |      ;
     CLC                                                        ;8291DA|18      |      ;
     ADC.B strcPlayer.direction                                 ;8291DB|65DA    |0000DA;
-    STA.W nSmallItemSpriteIndex                                ;8291DD|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;8291DD|8D0109  |000901;
     SEP #$20                                                   ;8291E0|E220    |      ;
     LDA.B #$14                                                 ;8291E2|A914    |      ;
     STA.W nAmountLeft_Water                                    ;8291E4|8D2609  |000926;
@@ -1902,7 +1902,7 @@ fToolUsedAnimation0x10_WateringCan:
 fToolUsedAnimation0x11_GoldenSickle:
     REP #$30                                                   ;8291E8|C230    |      ;
     LDA.W #$0048                                               ;8291EA|A94800  |      ;
-    STA.W nSmallItemSpriteIndex                                ;8291ED|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;8291ED|8D0109  |000901;
     RTS                                                        ;8291F0|60      |      ;
  
  
@@ -1911,7 +1911,7 @@ fToolUsedAnimation0x12_GoldenPlow:
     LDA.W #$007C                                               ;8291F3|A97C00  |      ;
     CLC                                                        ;8291F6|18      |      ;
     ADC.B strcPlayer.direction                                 ;8291F7|65DA    |0000DA;
-    STA.W nSmallItemSpriteIndex                                ;8291F9|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;8291F9|8D0109  |000901;
     RTS                                                        ;8291FC|60      |      ;
  
  
@@ -1920,7 +1920,7 @@ fToolUsedAnimation0x13_GoldenHammer:
     LDA.W #$0084                                               ;8291FF|A98400  |      ;
     CLC                                                        ;829202|18      |      ;
     ADC.B strcPlayer.direction                                 ;829203|65DA    |0000DA;
-    STA.W nSmallItemSpriteIndex                                ;829205|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;829205|8D0109  |000901;
     RTS                                                        ;829208|60      |      ;
  
  
@@ -1929,14 +1929,14 @@ fToolUsedAnimation0x14_GoldenAxe:
     LDA.W #$0080                                               ;82920B|A98000  |      ;
     CLC                                                        ;82920E|18      |      ;
     ADC.B strcPlayer.direction                                 ;82920F|65DA    |0000DA;
-    STA.W nSmallItemSpriteIndex                                ;829211|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;829211|8D0109  |000901;
     RTS                                                        ;829214|60      |      ;
  
  
 fToolUsedAnimation0x15_Sprinkler:
     REP #$30                                                   ;829215|C230    |      ;
     LDA.W #$0047                                               ;829217|A94700  |      ;
-    STA.W nSmallItemSpriteIndex                                ;82921A|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;82921A|8D0109  |000901;
     RTS                                                        ;82921D|60      |      ;
  
  
@@ -1945,7 +1945,7 @@ fToolUsedAnimation0x16_BeanstalkSeed:
     LDA.W #$00AC                                               ;829220|A9AC00  |      ;
     CLC                                                        ;829223|18      |      ;
     ADC.B strcPlayer.direction                                 ;829224|65DA    |0000DA;
-    STA.W nSmallItemSpriteIndex                                ;829226|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;829226|8D0109  |000901;
     RTS                                                        ;829229|60      |      ;
  
  
@@ -1954,14 +1954,14 @@ fToolUsedAnimation0x17_BlueDiamond:
     LDA.W #$00AC                                               ;82922C|A9AC00  |      ;
     CLC                                                        ;82922F|18      |      ;
     ADC.B strcPlayer.direction                                 ;829230|65DA    |0000DA;
-    STA.W nSmallItemSpriteIndex                                ;829232|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;829232|8D0109  |000901;
     RTS                                                        ;829235|60      |      ;
  
  
 fToolUsedAnimation0x18_BlueFeather:
     REP #$30                                                   ;829236|C230    |      ;
     LDA.W #$00A8                                               ;829238|A9A800  |      ;
-    STA.W nSmallItemSpriteIndex                                ;82923B|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;82923B|8D0109  |000901;
     RTS                                                        ;82923E|60      |      ;
  
  
@@ -1970,7 +1970,7 @@ fToolUsedAnimation0x19_ChickenFood:
     LDA.W #$0074                                               ;829241|A97400  |      ;
     CLC                                                        ;829244|18      |      ;
     ADC.B strcPlayer.direction                                 ;829245|65DA    |0000DA;
-    STA.W nSmallItemSpriteIndex                                ;829247|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;829247|8D0109  |000901;
     RTS                                                        ;82924A|60      |      ;
  
  
@@ -1979,14 +1979,14 @@ fToolUsedAnimation0x1A_CowFood:
     LDA.W #$0074                                               ;82924D|A97400  |      ;
     CLC                                                        ;829250|18      |      ;
     ADC.B strcPlayer.direction                                 ;829251|65DA    |0000DA;
-    STA.W nSmallItemSpriteIndex                                ;829253|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;829253|8D0109  |000901;
     RTS                                                        ;829256|60      |      ;
  
  
 fToolUsedAnimation0x1B_FishingPole:
     REP #$30                                                   ;829257|C230    |      ;
     LDA.W #$0088                                               ;829259|A98800  |      ;
-    STA.W nSmallItemSpriteIndex                                ;82925C|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;82925C|8D0109  |000901;
     RTS                                                        ;82925F|60      |      ;
  
  
@@ -6888,7 +6888,7 @@ fUnknown_82D1C0:
     STA.W nAmountLeft_CornSeeds                                ;82D28C|8D2809  |000928;
     STA.W nAmountLeft_TomatoSeeds                              ;82D28F|8D2909  |000929;
     REP #$20                                                   ;82D292|C220    |      ;
-    STZ.W $0915                                                ;82D294|9C1509  |000915;
+    STZ.W strcObjectData.exist                                 ;82D294|9C1509  |000915;
     STZ.B strcPlayer.flags                                     ;82D297|64D2    |0000D2;
     STZ.B strcPlayer.action                                    ;82D299|64D4    |0000D4;
     SEP #$20                                                   ;82D29B|E220    |      ;
@@ -6899,10 +6899,10 @@ fUnknown_82D1C0:
     STA.B strcPlayer.direction                                 ;82D2B2|85DA    |0000DA;
     REP #$30                                                   ;82D2B4|C230    |      ;
     LDA.W #$0000                                               ;82D2B6|A90000  |      ;
-    STA.W nPlayerDirectionCopy                                 ;82D2B9|8D1109  |000911;
+    STA.W strcObjectData.direction                             ;82D2B9|8D1109  |000911;
     REP #$30                                                   ;82D2BC|C230    |      ;
     LDA.W #$0000                                               ;82D2BE|A90000  |      ;
-    STA.W nSmallItemSpriteIndex                                ;82D2C1|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;82D2C1|8D0109  |000901;
     SEP #$20                                                   ;82D2C4|E220    |      ;
     STZ.W nTimeState                                           ;82D2C6|9C7309  |000973;
     LDA.B #$00                                                 ;82D2C9|A900    |      ;
@@ -7056,7 +7056,7 @@ fMainMenu_AutoHowToPlay:
     STZ.W nAIJoypadInput                                       ;82D48D|9CFD08  |0008FD;
     STZ.W nAISteeringCounter                                   ;82D490|9CFF08  |0008FF;
     REP #$20                                                   ;82D493|C220    |      ;
-    STZ.W $0915                                                ;82D495|9C1509  |000915;
+    STZ.W strcObjectData.exist                                 ;82D495|9C1509  |000915;
     STZ.B strcPlayer.flags                                     ;82D498|64D2    |0000D2;
     STZ.B strcPlayer.action                                    ;82D49A|64D4    |0000D4;
     SEP #$20                                                   ;82D49C|E220    |      ;
@@ -7067,10 +7067,10 @@ fMainMenu_AutoHowToPlay:
     STA.B strcPlayer.direction                                 ;82D4B3|85DA    |0000DA;
     REP #$30                                                   ;82D4B5|C230    |      ;
     LDA.W #$0000                                               ;82D4B7|A90000  |      ;
-    STA.W nPlayerDirectionCopy                                 ;82D4BA|8D1109  |000911;
+    STA.W strcObjectData.direction                             ;82D4BA|8D1109  |000911;
     REP #$30                                                   ;82D4BD|C230    |      ;
     LDA.W #$0000                                               ;82D4BF|A90000  |      ;
-    STA.W nSmallItemSpriteIndex                                ;82D4C2|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;82D4C2|8D0109  |000901;
     SEP #$20                                                   ;82D4C5|E220    |      ;
     STZ.W nTimeState                                           ;82D4C7|9C7309  |000973;
     LDA.B #$00                                                 ;82D4CA|A900    |      ;
@@ -7399,7 +7399,7 @@ fUnknown_82D75E:
     REP #$20                                                   ;82D804|C220    |      ;
     STZ.B $90                                                  ;82D806|6490    |000090;
     LDA.W #$0001                                               ;82D808|A90100  |      ;
-    STA.B strcSingleObjectData.unkAF                           ;82D80B|85AF    |0000AF;
+    STA.B strcObject.unkAF                                     ;82D80B|85AF    |0000AF;
  
 fUnknown_82D80D:
     SEP #$20                                                   ;82D80D|E220    |      ;
@@ -7515,10 +7515,10 @@ fUnknown_82D8B0:
     STA.B strcPlayer.direction                                 ;82D8E5|85DA    |0000DA;
     REP #$30                                                   ;82D8E7|C230    |      ;
     LDA.W #$0000                                               ;82D8E9|A90000  |      ;
-    STA.W nPlayerDirectionCopy                                 ;82D8EC|8D1109  |000911;
+    STA.W strcObjectData.direction                             ;82D8EC|8D1109  |000911;
     REP #$30                                                   ;82D8EF|C230    |      ;
     LDA.W #$0000                                               ;82D8F1|A90000  |      ;
-    STA.W nSmallItemSpriteIndex                                ;82D8F4|8D0109  |000901;
+    STA.W strcObjectData.spriteIdx                             ;82D8F4|8D0109  |000901;
     REP #$20                                                   ;82D8F7|C220    |      ;
     LDA.W #$0100                                               ;82D8F9|A90001  |      ;
     STA.W strcBGScrool.BG3VerOffs                              ;82D8FC|8D4601  |000146;
@@ -8818,7 +8818,7 @@ fUnknown_82E405:
     SEP #$20                                                   ;82E431|E220    |      ;
     LDA.B #$00                                                 ;82E433|A900    |      ;
     XBA                                                        ;82E435|EB      |      ;
-    LDA.W sPlayerNameShort,X                                   ;82E436|BD8108  |000881;
+    LDA.W strcNames.sPlayer,X                                  ;82E436|BD8108  |000881;
     LDX.W #$0000                                               ;82E439|A20000  |      ;
     JSL.L fDialog_TransferGlyph                                ;82E43C|22239883|839823;
     JSL.L fCore_StartTransfer                                  ;82E440|22F08A80|808AF0;
@@ -8928,7 +8928,7 @@ fUnknown_82E405:
     INX                                                        ;82E543|E8      |      ;
     LDA.L aUnknown_82F278,X                                    ;82E544|BF78F282|82F278;
     STA.L $800185                                              ;82E548|8F850180|800185;
-    LDA.W sSeasonName                                          ;82E54C|ADB308  |0008B3;
+    LDA.W strcNames.wSeason                                    ;82E54C|ADB308  |0008B3;
     LDX.W #$0000                                               ;82E54F|A20000  |      ;
     JSL.L fDialog_TransferGlyph                                ;82E552|22239883|839823;
     JSL.L fCore_StartTransfer                                  ;82E556|22F08A80|808AF0;
@@ -8937,7 +8937,7 @@ fUnknown_82E405:
     CLC                                                        ;82E560|18      |      ;
     ADC.W #$0008                                               ;82E561|690800  |      ;
     STA.L $800185                                              ;82E564|8F850180|800185;
-    LDA.W sSeasonName+2                                        ;82E568|ADB508  |0008B5;
+    LDA.W strcNames.wSeason+2                                  ;82E568|ADB508  |0008B5;
     LDX.W #$0000                                               ;82E56B|A20000  |      ;
     JSL.L fDialog_TransferGlyph                                ;82E56E|22239883|839823;
     JSL.L fCore_StartTransfer                                  ;82E572|22F08A80|808AF0;
@@ -8946,7 +8946,7 @@ fUnknown_82E405:
     CLC                                                        ;82E57C|18      |      ;
     ADC.W #$0008                                               ;82E57D|690800  |      ;
     STA.L $800185                                              ;82E580|8F850180|800185;
-    LDA.W sSeasonName+4                                        ;82E584|ADB708  |0008B7;
+    LDA.W strcNames.wSeason+4                                  ;82E584|ADB708  |0008B7;
     LDX.W #$0000                                               ;82E587|A20000  |      ;
     JSL.L fDialog_TransferGlyph                                ;82E58A|22239883|839823;
     JSL.L fCore_StartTransfer                                  ;82E58E|22F08A80|808AF0;
@@ -8955,7 +8955,7 @@ fUnknown_82E405:
     CLC                                                        ;82E598|18      |      ;
     ADC.W #$0008                                               ;82E599|690800  |      ;
     STA.L $800185                                              ;82E59C|8F850180|800185;
-    LDA.W sSeasonName+6                                        ;82E5A0|ADB908  |0008B9;
+    LDA.W strcNames.wSeason+6                                  ;82E5A0|ADB908  |0008B9;
     LDX.W #$0000                                               ;82E5A3|A20000  |      ;
     JSL.L fDialog_TransferGlyph                                ;82E5A6|22239883|839823;
     JSL.L fCore_StartTransfer                                  ;82E5AA|22F08A80|808AF0;
@@ -8964,7 +8964,7 @@ fUnknown_82E405:
     CLC                                                        ;82E5B4|18      |      ;
     ADC.W #$0008                                               ;82E5B5|690800  |      ;
     STA.L $800185                                              ;82E5B8|8F850180|800185;
-    LDA.W sSeasonName+8                                        ;82E5BC|ADBB08  |0008BB;
+    LDA.W strcNames.wSeason+8                                  ;82E5BC|ADBB08  |0008BB;
     LDX.W #$0000                                               ;82E5BF|A20000  |      ;
     JSL.L fDialog_TransferGlyph                                ;82E5C2|22239883|839823;
     JSL.L fCore_StartTransfer                                  ;82E5C6|22F08A80|808AF0;
@@ -8973,7 +8973,7 @@ fUnknown_82E405:
     CLC                                                        ;82E5D0|18      |      ;
     ADC.W #$0008                                               ;82E5D1|690800  |      ;
     STA.L $800185                                              ;82E5D4|8F850180|800185;
-    LDA.W sSeasonName+10                                       ;82E5D8|ADBD08  |0008BD;
+    LDA.W strcNames.wSeason+10                                 ;82E5D8|ADBD08  |0008BD;
     LDX.W #$0000                                               ;82E5DB|A20000  |      ;
     JSL.L fDialog_TransferGlyph                                ;82E5DE|22239883|839823;
     JSL.L fCore_StartTransfer                                  ;82E5E2|22F08A80|808AF0;
@@ -9179,7 +9179,7 @@ fStartNewGame:
 fUnreached_82E801:
     SEP #$20                                                   ;82E801|E220    |      ;
     LDA.B #$00                                                 ;82E803|A900    |      ;
-    STA.W strcMenuObjectData.nameDestinationIdx                ;82E805|8D9F09  |00099F;
+    STA.W strcMenuData.nameDestinationIdx                      ;82E805|8D9F09  |00099F;
     JML.L fScreen_NameInput                                    ;82E808|5C0CE882|82E80C;
  
  
@@ -9206,7 +9206,7 @@ fScreen_NameInput:
     LDA.W nMapEngine_flags                                     ;82E842|AD9601  |000196;
     STA.W nMapEngine_flags_TempCopy                            ;82E845|8D9801  |000198;
     STZ.W nMapEngine_flags                                     ;82E848|9C9601  |000196;
-    STZ.W $0905                                                ;82E84B|9C0509  |000905;
+    STZ.W strcObjectData.gameObjectIdx                         ;82E84B|9C0509  |000905;
     SEP #$20                                                   ;82E84E|E220    |      ;
     LDA.B #$05                                                 ;82E850|A905    |      ;
     STA.W $019A                                                ;82E852|8D9A01  |00019A;
@@ -9251,22 +9251,22 @@ fScreen_NameInput:
     JSL.L fUnknown_Zero07Ptr                                   ;82E8B4|22C7A481|81A4C7;
     REP #$20                                                   ;82E8B8|C220    |      ;
     LDA.W #$0219                                               ;82E8BA|A91902  |      ;
-    STA.B strcSingleObjectData.spriteTableIdx                  ;82E8BD|85A1    |0000A1;
-    STA.W strcMenuObjectData.spriteTableIdx                    ;82E8BF|8D9709  |000997;
+    STA.B strcObject.spriteTableIdx                            ;82E8BD|85A1    |0000A1;
+    STA.W strcMenuData.spriteTableIdx                          ;82E8BF|8D9709  |000997;
     LDA.W #$0000                                               ;82E8C2|A90000  |      ;
-    STA.B strcSingleObjectData.flip                            ;82E8C5|859F    |00009F;
-    STA.W strcMenuObjectData.flip                              ;82E8C7|8D9909  |000999;
+    STA.B strcObject.flip                                      ;82E8C5|859F    |00009F;
+    STA.W strcMenuData.flip                                    ;82E8C7|8D9909  |000999;
     LDA.W #$0028                                               ;82E8CA|A92800  |      ;
-    STA.B strcSingleObjectData.posX                            ;82E8CD|859B    |00009B;
-    STA.W strcMenuObjectData.posX                              ;82E8CF|8D9B09  |00099B;
+    STA.B strcObject.posX                                      ;82E8CD|859B    |00009B;
+    STA.W strcMenuData.posX                                    ;82E8CF|8D9B09  |00099B;
     LDA.W #$0044                                               ;82E8D2|A94400  |      ;
-    STA.B strcSingleObjectData.posY                            ;82E8D5|859D    |00009D;
-    STA.W strcMenuObjectData.posY                              ;82E8D7|8D9D09  |00099D;
-    STZ.B strcSingleObjectData.unk6                            ;82E8DA|64A3    |0000A3;
+    STA.B strcObject.posY                                      ;82E8D5|859D    |00009D;
+    STA.W strcMenuData.posY                                    ;82E8D7|8D9D09  |00099D;
+    STZ.B strcObject.unkA3                                     ;82E8DA|64A3    |0000A3;
     JSL.L fUnknown_858000                                      ;82E8DC|22008085|858000;
     REP #$20                                                   ;82E8E0|C220    |      ;
-    LDA.B strcSingleObjectData.gameObjectIdx                   ;82E8E2|A5A5    |0000A5;
-    STA.W strcMenuObjectData.gameObjectIdx                     ;82E8E4|8D9509  |000995;
+    LDA.B strcObject.gameObjectIdx                             ;82E8E2|A5A5    |0000A5;
+    STA.W strcMenuData.gameObjectIdx                           ;82E8E4|8D9509  |000995;
     JSL.L fUnknown_82EAB4                                      ;82E8E7|22B4EA82|82EAB4;
     JSL.L fUnknown_82EA80                                      ;82E8EB|2280EA82|82EA80;
     REP #$20                                                   ;82E8EF|C220    |      ;
@@ -9293,21 +9293,21 @@ fScreen_NameInput:
     STA.B n8TempVar3                                           ;82E92B|8594    |000094;
     JSL.L fCore_ScreenFadein                                   ;82E92D|22CE8780|8087CE;
     REP #$20                                                   ;82E931|C220    |      ;
-    STZ.W strcMenuObjectData.menuIdx                           ;82E933|9C9109  |000991;
+    STZ.W strcMenuData.menuIdx                                 ;82E933|9C9109  |000991;
     SEP #$20                                                   ;82E936|E220    |      ;
     LDA.B #$00                                                 ;82E938|A900    |      ;
-    STA.W strcMenuObjectData.tableSelector                     ;82E93A|8D9309  |000993;
-    STZ.W strcMenuObjectData.nameEntryIdx                      ;82E93D|9C9409  |000994;
+    STA.W strcMenuData.tableSelector                           ;82E93A|8D9309  |000993;
+    STZ.W strcMenuData.nameEntryIdx                            ;82E93D|9C9409  |000994;
     STZ.W $018B                                                ;82E940|9C8B01  |00018B;
     SEP #$20                                                   ;82E943|E220    |      ;
     LDA.B #$B1                                                 ;82E945|A9B1    |      ;
-    STA.W sTempNameVariable                                    ;82E947|8D8508  |000885;
+    STA.W strcNames.sTemp                                      ;82E947|8D8508  |000885;
     LDA.B #$B1                                                 ;82E94A|A9B1    |      ;
-    STA.W sTempNameVariable+1                                  ;82E94C|8D8608  |000886;
+    STA.W strcNames.sTemp+1                                    ;82E94C|8D8608  |000886;
     LDA.B #$B1                                                 ;82E94F|A9B1    |      ;
-    STA.W sTempNameVariable+2                                  ;82E951|8D8708  |000887;
+    STA.W strcNames.sTemp+2                                    ;82E951|8D8708  |000887;
     LDA.B #$B1                                                 ;82E954|A9B1    |      ;
-    STA.W sTempNameVariable+3                                  ;82E956|8D8808  |000888;
+    STA.W strcNames.sTemp+3                                    ;82E956|8D8808  |000888;
     STZ.B n8TempVar3                                           ;82E959|6494    |000094;
     STZ.B $96                                                  ;82E95B|6496    |000096;
     STZ.B $97                                                  ;82E95D|6497    |000097;
@@ -9321,7 +9321,7 @@ fScreen_NameInput:
     JSR.W fUnknown_82EA15                                      ;82E96C|2015EA  |82EA15;
     JSL.L fInput_Handler                                       ;82E96F|2234C084|84C034;
     SEP #$20                                                   ;82E973|E220    |      ;
-    LDA.W strcMenuObjectData.tableSelector                     ;82E975|AD9309  |000993;
+    LDA.W strcMenuData.tableSelector                           ;82E975|AD9309  |000993;
     CMP.B #$03                                                 ;82E978|C903    |      ;
     BNE +                                                      ;82E97A|D003    |82E97F;
     JMP.W .nameHandler                                         ;82E97C|4CCEE9  |82E9CE;
@@ -9344,16 +9344,16 @@ fScreen_NameInput:
     INC.B $96                                                  ;82E999|E696    |000096;
  
   + REP #$20                                                   ;82E99B|C220    |      ;
-    LDA.W strcMenuObjectData.spriteTableIdx                    ;82E99D|AD9709  |000997;
-    STA.B strcSingleObjectData.spriteTableIdx                  ;82E9A0|85A1    |0000A1;
-    LDA.W strcMenuObjectData.flip                              ;82E9A2|AD9909  |000999;
-    STA.B strcSingleObjectData.flip                            ;82E9A5|859F    |00009F;
-    LDA.W strcMenuObjectData.posX                              ;82E9A7|AD9B09  |00099B;
-    STA.B strcSingleObjectData.posX                            ;82E9AA|859B    |00009B;
-    LDA.W strcMenuObjectData.posY                              ;82E9AC|AD9D09  |00099D;
-    STA.B strcSingleObjectData.posY                            ;82E9AF|859D    |00009D;
-    LDA.W strcMenuObjectData.gameObjectIdx                     ;82E9B1|AD9509  |000995;
-    STA.B strcSingleObjectData.gameObjectIdx                   ;82E9B4|85A5    |0000A5;
+    LDA.W strcMenuData.spriteTableIdx                          ;82E99D|AD9709  |000997;
+    STA.B strcObject.spriteTableIdx                            ;82E9A0|85A1    |0000A1;
+    LDA.W strcMenuData.flip                                    ;82E9A2|AD9909  |000999;
+    STA.B strcObject.flip                                      ;82E9A5|859F    |00009F;
+    LDA.W strcMenuData.posX                                    ;82E9A7|AD9B09  |00099B;
+    STA.B strcObject.posX                                      ;82E9AA|859B    |00009B;
+    LDA.W strcMenuData.posY                                    ;82E9AC|AD9D09  |00099D;
+    STA.B strcObject.posY                                      ;82E9AF|859D    |00009D;
+    LDA.W strcMenuData.gameObjectIdx                           ;82E9B1|AD9509  |000995;
+    STA.B strcObject.gameObjectIdx                             ;82E9B4|85A5    |0000A5;
     JSL.L fObject_Unknown8580B9                                ;82E9B6|22B98085|8580B9;
     JSL.L fObject_Unknown8582C7                                ;82E9BA|22C78285|8582C7;
     JSL.L fUnknown_858CB2                                      ;82E9BE|22B28C85|858CB2;
@@ -9368,7 +9368,7 @@ fScreen_NameInput:
     LDA.W nMapEngine_flags_TempCopy                            ;82E9D0|AD9801  |000198;
     STA.W nMapEngine_flags                                     ;82E9D3|8D9601  |000196;
     SEP #$20                                                   ;82E9D6|E220    |      ;
-    LDA.W strcMenuObjectData.nameDestinationIdx                ;82E9D8|AD9F09  |00099F;
+    LDA.W strcMenuData.nameDestinationIdx                      ;82E9D8|AD9F09  |00099F;
     CMP.B #!NI_PLAYER                                                 
     BNE +                                                      ;82E9DD|D004    |82E9E3;
     JML.L fCore_SetPlayerName                                  ;82E9DF|5CED8080|8080ED;
@@ -9410,7 +9410,7 @@ fScreen_NameInput:
 fUnknown_82EA15:
     SEP #$20                                                   ;82EA15|E220    |      ;
     REP #$10                                                   ;82EA17|C210    |      ;
-    LDA.W strcMenuObjectData.nameEntryIdx                      ;82EA19|AD9409  |000994;
+    LDA.W strcMenuData.nameEntryIdx                            ;82EA19|AD9409  |000994;
     CMP.B #$04                                                 ;82EA1C|C904    |      ;
     BEQ .return                                                ;82EA1E|F03F    |82EA5F;
     REP #$20                                                   ;82EA20|C220    |      ;
@@ -9455,7 +9455,7 @@ fTextUnknown_82EA60:
     SEP #$20                                                   ;82EA63|E220    |      ;
     LDA.B #$00                                                 ;82EA65|A900    |      ;
     XBA                                                        ;82EA67|EB      |      ;
-    LDA.W strcMenuObjectData.nameEntryIdx                      ;82EA68|AD9409  |000994;
+    LDA.W strcMenuData.nameEntryIdx                            ;82EA68|AD9409  |000994;
     REP #$20                                                   ;82EA6B|C220    |      ;
     ASL A                                                      ;82EA6D|0A      |      ;
     TAX                                                        ;82EA6E|AA      |      ;
@@ -9585,7 +9585,7 @@ fMenuUnknown_82EB57:
     SEP #$20                                                   ;82EB5E|E220    |      ;
     LDA.B #$82                                                 ;82EB60|A982    |      ;
     STA.B ptrUnknown0x72+2                                     ;82EB62|8574    |000074; 82EBF8 -> $72
-    LDA.W strcMenuObjectData.tableSelector                     ;82EB64|AD9309  |000993;
+    LDA.W strcMenuData.tableSelector                           ;82EB64|AD9309  |000993;
     BEQ .load                                                  ;82EB67|F020    |82EB89;
     CMP.B #$01                                                 ;82EB69|C901    |      ;
     BEQ +                                                      ;82EB6B|F00F    |82EB7C;
@@ -9607,7 +9607,7 @@ fMenuUnknown_82EB57:
  
 .load:
     REP #$20                                                   ;82EB89|C220    |      ;
-    LDA.W strcMenuObjectData.menuIdx                           ;82EB8B|AD9109  |000991;
+    LDA.W strcMenuData.menuIdx                                 ;82EB8B|AD9109  |000991;
     ASL A                                                      ;82EB8E|0A      |      ;
     ASL A                                                      ;82EB8F|0A      |      ;
     ASL A                                                      ;82EB90|0A      |      ;
@@ -9617,14 +9617,14 @@ fMenuUnknown_82EB57:
     XBA                                                        ;82EB96|EB      |      ; B = 0
     LDA.B [ptrUnknown0x72],Y                                   ;82EB97|B772    |000072; Y = $0991 * 8
     REP #$20                                                   ;82EB99|C220    |      ;
-    STA.W strcMenuObjectData.posX                              ;82EB9B|8D9B09  |00099B;
+    STA.W strcMenuData.posX                                    ;82EB9B|8D9B09  |00099B;
     INY                                                        ;82EB9E|C8      |      ; Y++
     SEP #$20                                                   ;82EB9F|E220    |      ;
     LDA.B #$00                                                 ;82EBA1|A900    |      ;
     XBA                                                        ;82EBA3|EB      |      ; B = 0
     LDA.B [ptrUnknown0x72],Y                                   ;82EBA4|B772    |000072;
     REP #$20                                                   ;82EBA6|C220    |      ;
-    STA.W strcMenuObjectData.posY                              ;82EBA8|8D9D09  |00099D;
+    STA.W strcMenuData.posY                                    ;82EBA8|8D9D09  |00099D;
     RTL                                                        ;82EBAB|6B      |      ;
  
  
@@ -9636,7 +9636,7 @@ fMenuUnknown_82EBAC:
     SEP #$20                                                   ;82EBB4|E220    |      ;
     LDA.B #$82                                                 ;82EBB6|A982    |      ;
     STA.B ptrUnknown0x72+2                                     ;82EBB8|8574    |000074; 82EBF8 -> $72
-    LDA.W strcMenuObjectData.tableSelector                     ;82EBBA|AD9309  |000993;
+    LDA.W strcMenuData.tableSelector                           ;82EBBA|AD9309  |000993;
     BEQ .load                                                  ;82EBBD|F020    |82EBDF;
     CMP.B #$01                                                 ;82EBBF|C901    |      ;
     BEQ +                                                      ;82EBC1|F00F    |82EBD2;
@@ -9662,7 +9662,7 @@ fMenuUnknown_82EBAC:
     INC A                                                      ;82EBE2|1A      |      ;
     INC A                                                      ;82EBE3|1A      |      ;
     STA.B n16TempVar1                                          ;82EBE4|857E    |00007E; $7E = nArg * 4
-    LDA.W strcMenuObjectData.menuIdx                           ;82EBE6|AD9109  |000991; A = $0991
+    LDA.W strcMenuData.menuIdx                                 ;82EBE6|AD9109  |000991; A = $0991
     ASL A                                                      ;82EBE9|0A      |      ;
     ASL A                                                      ;82EBEA|0A      |      ;
     ASL A                                                      ;82EBEB|0A      |      ;
