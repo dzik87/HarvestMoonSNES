@@ -257,8 +257,8 @@ struct strcAnimalsData      $000937
     .unkDog                 : skip 1    ; 938
     .unkHorse               : skip 1    ; 939
     .unkMole                : skip 1    ; 93A
-    .unk93B                 : skip 12*2 ; 93B-952
-    .unk953                 : skip 12*2 ; 953
+    .unkEachChicken         : skip 12*2 ; 93B-952
+    .unkEachCow             : skip 12*2 ; 953-96A
 endstruct
 
 ;

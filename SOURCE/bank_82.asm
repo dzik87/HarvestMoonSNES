@@ -2244,7 +2244,7 @@ fToolUsedAction0x02_Plow:
     LDY.W #$0030                                               ;8294A9|A03000  |      ;
     JSL.L fAI_Unknown8480F8                                    ;8294AC|22F88084|8480F8;
     SEP #$20                                                   ;8294B0|E220    |      ;
-    STZ.W $093A                                                ;8294B2|9C3A09  |00093A;
+    STZ.W strcAnimalsData.unkMole                              ;8294B2|9C3A09  |00093A;
     REP #$20                                                   ;8294B5|C220    |      ;
     %SetFlag(daily1, $1000)
     JMP.W .return                                              ;8294C2|4CB095  |8295B0;

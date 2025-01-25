@@ -7603,7 +7603,7 @@ fPlayerAction0x16:
     LDA.W #$0001                                               ;81C1E1|A90100  |      ;
     STA.L $7F1F58                                              ;81C1E4|8F581F7F|7F1F58;
     SEP #$20                                                   ;81C1E8|E220    |      ;
-    STZ.W $0938                                                ;81C1EA|9C3809  |000938;
+    STZ.W strcAnimalsData.unkDog                               ;81C1EA|9C3809  |000938;
  
 .exit:
     JMP.W fUnknown_81C002                                      ;81C1ED|4C02C0  |81C002;
