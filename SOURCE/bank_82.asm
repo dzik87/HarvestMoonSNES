@@ -2244,7 +2244,7 @@ fToolUsedAction0x02_Plow:
     LDY.W #$0030                                               ;8294A9|A03000  |      ;
     JSL.L fAI_Unknown8480F8                                    ;8294AC|22F88084|8480F8;
     SEP #$20                                                   ;8294B0|E220    |      ;
-    STZ.W strcAnimalsData.unkMole                              ;8294B2|9C3A09  |00093A;
+    STZ.W strcGoodsData.unkMole                                ;8294B2|9C3A09  |00093A;
     REP #$20                                                   ;8294B5|C220    |      ;
     %SetFlag(daily1, $1000)
     JMP.W .return                                              ;8294C2|4CB095  |8295B0;
@@ -2774,7 +2774,7 @@ fToolUsedAction0x05_CornSeedBag:
     REP #$10                                                   ;82999B|C210    |      ;
     LDA.B #$00                                                 ;82999D|A900    |      ;
     XBA                                                        ;82999F|EB      |      ;
-    LDA.W $096B                                                ;8299A0|AD6B09  |00096B;
+    LDA.W strcGoodsData.unkAnySeed                             ;8299A0|AD6B09  |00096B;
     JSR.W fToolUsedUnknown_8292D6                              ;8299A3|20D692  |8292D6;
     BNE +                                                      ;8299A6|D003    |8299AB;
     JMP.W .label1                                              ;8299A8|4CCA99  |8299CA;
@@ -2796,12 +2796,12 @@ fToolUsedAction0x05_CornSeedBag:
  
 .label1:
     SEP #$20                                                   ;8299CA|E220    |      ;
-    LDA.W $096B                                                ;8299CC|AD6B09  |00096B;
+    LDA.W strcGoodsData.unkAnySeed                             ;8299CC|AD6B09  |00096B;
     INC A                                                      ;8299CF|1A      |      ;
-    STA.W $096B                                                ;8299D0|8D6B09  |00096B;
+    STA.W strcGoodsData.unkAnySeed                             ;8299D0|8D6B09  |00096B;
     CMP.B #$09                                                 ;8299D3|C909    |      ;
     BNE .return                                                ;8299D5|D020    |8299F7;
-    STZ.W $096B                                                ;8299D7|9C6B09  |00096B;
+    STZ.W strcGoodsData.unkAnySeed                             ;8299D7|9C6B09  |00096B;
     SEP #$20                                                   ;8299DA|E220    |      ;
     LDA.W strcPlayerData.leftCornSeeds                         ;8299DC|AD2809  |000928;
     DEC A                                                      ;8299DF|3A      |      ;
@@ -2823,7 +2823,7 @@ fToolUsedAction0x06_TomatoSeedBag:
     REP #$10                                                   ;8299FA|C210    |      ;
     LDA.B #$00                                                 ;8299FC|A900    |      ;
     XBA                                                        ;8299FE|EB      |      ;
-    LDA.W $096B                                                ;8299FF|AD6B09  |00096B;
+    LDA.W strcGoodsData.unkAnySeed                             ;8299FF|AD6B09  |00096B;
     JSR.W fToolUsedUnknown_8292D6                              ;829A02|20D692  |8292D6;
     BNE +                                                      ;829A05|D003    |829A0A;
     JMP.W .label1                                              ;829A07|4C299A  |829A29;
@@ -2845,12 +2845,12 @@ fToolUsedAction0x06_TomatoSeedBag:
  
 .label1:
     SEP #$20                                                   ;829A29|E220    |      ;
-    LDA.W $096B                                                ;829A2B|AD6B09  |00096B;
+    LDA.W strcGoodsData.unkAnySeed                             ;829A2B|AD6B09  |00096B;
     INC A                                                      ;829A2E|1A      |      ;
-    STA.W $096B                                                ;829A2F|8D6B09  |00096B;
+    STA.W strcGoodsData.unkAnySeed                             ;829A2F|8D6B09  |00096B;
     CMP.B #$09                                                 ;829A32|C909    |      ;
     BNE .return                                                ;829A34|D020    |829A56;
-    STZ.W $096B                                                ;829A36|9C6B09  |00096B;
+    STZ.W strcGoodsData.unkAnySeed                             ;829A36|9C6B09  |00096B;
     SEP #$20                                                   ;829A39|E220    |      ;
     LDA.W strcPlayerData.leftTomatoSeeds                       ;829A3B|AD2909  |000929;
     DEC A                                                      ;829A3E|3A      |      ;
@@ -2872,7 +2872,7 @@ fToolUsedAction0x07_PotatoSeedBag:
     REP #$10                                                   ;829A59|C210    |      ;
     LDA.B #$00                                                 ;829A5B|A900    |      ;
     XBA                                                        ;829A5D|EB      |      ;
-    LDA.W $096B                                                ;829A5E|AD6B09  |00096B;
+    LDA.W strcGoodsData.unkAnySeed                             ;829A5E|AD6B09  |00096B;
     JSR.W fToolUsedUnknown_8292D6                              ;829A61|20D692  |8292D6;
     BNE +                                                      ;829A64|D003    |829A69;
     JMP.W .label1                                              ;829A66|4C869A  |829A86;
@@ -2893,12 +2893,12 @@ fToolUsedAction0x07_PotatoSeedBag:
  
 .label1:
     SEP #$20                                                   ;829A86|E220    |      ;
-    LDA.W $096B                                                ;829A88|AD6B09  |00096B;
+    LDA.W strcGoodsData.unkAnySeed                             ;829A88|AD6B09  |00096B;
     INC A                                                      ;829A8B|1A      |      ;
-    STA.W $096B                                                ;829A8C|8D6B09  |00096B;
+    STA.W strcGoodsData.unkAnySeed                             ;829A8C|8D6B09  |00096B;
     CMP.B #$09                                                 ;829A8F|C909    |      ;
     BNE .return                                                ;829A91|D020    |829AB3;
-    STZ.W $096B                                                ;829A93|9C6B09  |00096B;
+    STZ.W strcGoodsData.unkAnySeed                             ;829A93|9C6B09  |00096B;
     SEP #$20                                                   ;829A96|E220    |      ;
     LDA.W strcPlayerData.leftPotatoSeeds                       ;829A98|AD2A09  |00092A;
     DEC A                                                      ;829A9B|3A      |      ;
@@ -2920,7 +2920,7 @@ fToolUsedAction0x08_TurnipSeedBag:
     REP #$10                                                   ;829AB6|C210    |      ;
     LDA.B #$00                                                 ;829AB8|A900    |      ;
     XBA                                                        ;829ABA|EB      |      ;
-    LDA.W $096B                                                ;829ABB|AD6B09  |00096B;
+    LDA.W strcGoodsData.unkAnySeed                             ;829ABB|AD6B09  |00096B;
     JSR.W fToolUsedUnknown_8292D6                              ;829ABE|20D692  |8292D6;
     BNE +                                                      ;829AC1|D003    |829AC6;
     JMP.W .label1                                              ;829AC3|4CE39A  |829AE3;
@@ -2941,12 +2941,12 @@ fToolUsedAction0x08_TurnipSeedBag:
  
 .label1:
     SEP #$20                                                   ;829AE3|E220    |      ;
-    LDA.W $096B                                                ;829AE5|AD6B09  |00096B;
+    LDA.W strcGoodsData.unkAnySeed                             ;829AE5|AD6B09  |00096B;
     INC A                                                      ;829AE8|1A      |      ;
-    STA.W $096B                                                ;829AE9|8D6B09  |00096B;
+    STA.W strcGoodsData.unkAnySeed                             ;829AE9|8D6B09  |00096B;
     CMP.B #$09                                                 ;829AEC|C909    |      ;
     BNE .return                                                ;829AEE|D020    |829B10;
-    STZ.W $096B                                                ;829AF0|9C6B09  |00096B;
+    STZ.W strcGoodsData.unkAnySeed                             ;829AF0|9C6B09  |00096B;
     SEP #$20                                                   ;829AF3|E220    |      ;
     LDA.W strcPlayerData.leftTurnipSeeds                       ;829AF5|AD2B09  |00092B;
     DEC A                                                      ;829AF8|3A      |      ;
@@ -2998,7 +2998,7 @@ fToolUsedAction0x0C_GrassSeedBag:
     REP #$10                                                   ;829B63|C210    |      ;
     LDA.B #$00                                                 ;829B65|A900    |      ;
     XBA                                                        ;829B67|EB      |      ;
-    LDA.W $096B                                                ;829B68|AD6B09  |00096B;
+    LDA.W strcGoodsData.unkAnySeed                             ;829B68|AD6B09  |00096B;
     JSR.W fToolUsedUnknown_8292D6                              ;829B6B|20D692  |8292D6;
     BNE +                                                      ;829B6E|D003    |829B73;
     JMP.W .label1                                              ;829B70|4C9D9B  |829B9D;
@@ -3024,12 +3024,12 @@ fToolUsedAction0x0C_GrassSeedBag:
  
 .label1:
     SEP #$20                                                   ;829B9D|E220    |      ;
-    LDA.W $096B                                                ;829B9F|AD6B09  |00096B;
+    LDA.W strcGoodsData.unkAnySeed                             ;829B9F|AD6B09  |00096B;
     INC A                                                      ;829BA2|1A      |      ;
-    STA.W $096B                                                ;829BA3|8D6B09  |00096B;
+    STA.W strcGoodsData.unkAnySeed                             ;829BA3|8D6B09  |00096B;
     CMP.B #$09                                                 ;829BA6|C909    |      ;
     BNE .return                                                ;829BA8|D020    |829BCA;
-    STZ.W $096B                                                ;829BAA|9C6B09  |00096B;
+    STZ.W strcGoodsData.unkAnySeed                             ;829BAA|9C6B09  |00096B;
     SEP #$20                                                   ;829BAD|E220    |      ;
     LDA.W strcPlayerData.leftGrassSeeds                        ;829BAF|AD2709  |000927;
     DEC A                                                      ;829BB2|3A      |      ;
@@ -3211,7 +3211,7 @@ fToolUsedAction0x11_GoldenSickle:
     REP #$10                                                   ;829D44|C210    |      ;
     LDA.B #$00                                                 ;829D46|A900    |      ;
     XBA                                                        ;829D48|EB      |      ;
-    LDA.W $096B                                                ;829D49|AD6B09  |00096B;
+    LDA.W strcGoodsData.unkAnySeed                             ;829D49|AD6B09  |00096B;
     JSR.W fToolUsedUnknown_8292D6                              ;829D4C|20D692  |8292D6;
     BNE +                                                      ;829D4F|D003    |829D54;
     JMP.W .label6                                              ;829D51|4C6E9E  |829E6E;
@@ -3339,12 +3339,12 @@ fToolUsedAction0x11_GoldenSickle:
  
 .label6:
     SEP #$20                                                   ;829E6E|E220    |      ;
-    LDA.W $096B                                                ;829E70|AD6B09  |00096B;
+    LDA.W strcGoodsData.unkAnySeed                             ;829E70|AD6B09  |00096B;
     INC A                                                      ;829E73|1A      |      ;
-    STA.W $096B                                                ;829E74|8D6B09  |00096B;
+    STA.W strcGoodsData.unkAnySeed                             ;829E74|8D6B09  |00096B;
     CMP.B #$09                                                 ;829E77|C909    |      ;
     BNE .justReturn                                            ;829E79|D012    |829E8D;
-    STZ.W $096B                                                ;829E7B|9C6B09  |00096B;
+    STZ.W strcGoodsData.unkAnySeed                             ;829E7B|9C6B09  |00096B;
     %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;829E85|E220    |      ;
     LDA.B #$F8                                                 ;829E87|A9F8    |      ;
@@ -3359,7 +3359,7 @@ fToolUsedAction0x12_GoldenPlow:
     REP #$10                                                   ;829E90|C210    |      ;
     LDA.B #$00                                                 ;829E92|A900    |      ;
     XBA                                                        ;829E94|EB      |      ;
-    LDA.W $096B                                                ;829E95|AD6B09  |00096B;
+    LDA.W strcGoodsData.unkAnySeed                             ;829E95|AD6B09  |00096B;
     JSR.W fToolUsedUnknown_8292BC                              ;829E98|20BC92  |8292BC;
     BNE +                                                      ;829E9B|D003    |829EA0;
     JMP.W .return                                              ;829E9D|4CF09F  |829FF0;
@@ -3476,15 +3476,15 @@ fToolUsedAction0x12_GoldenPlow:
  
 .label6:
     SEP #$20                                                   ;829FE3|E220    |      ;
-    LDA.W $096B                                                ;829FE5|AD6B09  |00096B;
+    LDA.W strcGoodsData.unkAnySeed                             ;829FE5|AD6B09  |00096B;
     INC A                                                      ;829FE8|1A      |      ;
-    STA.W $096B                                                ;829FE9|8D6B09  |00096B;
+    STA.W strcGoodsData.unkAnySeed                             ;829FE9|8D6B09  |00096B;
     CMP.B #$06                                                 ;829FEC|C906    |      ;
     BNE .justReturn                                            ;829FEE|D014    |82A004;
  
 .return:
     SEP #$20                                                   ;829FF0|E220    |      ;
-    STZ.W $096B                                                ;829FF2|9C6B09  |00096B;
+    STZ.W strcGoodsData.unkAnySeed                             ;829FF2|9C6B09  |00096B;
     %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;829FFC|E220    |      ;
     LDA.B #$F8                                                 ;829FFE|A9F8    |      ;
@@ -3848,7 +3848,7 @@ fToolUsedAction0x15_Sprinkler:
     SEP #$20                                                   ;82A31D|E220    |      ;
     LDA.B #$00                                                 ;82A31F|A900    |      ;
     XBA                                                        ;82A321|EB      |      ;
-    LDA.W $096B                                                ;82A322|AD6B09  |00096B;
+    LDA.W strcGoodsData.unkAnySeed                             ;82A322|AD6B09  |00096B;
     JSR.W fToolUsedUnknown_8292D6                              ;82A325|20D692  |8292D6;
     BNE +                                                      ;82A328|D003    |82A32D;
     JMP.W .return                                              ;82A32A|4C57A3  |82A357;
@@ -3878,12 +3878,12 @@ fToolUsedAction0x15_Sprinkler:
  
 .return:
     SEP #$20                                                   ;82A357|E220    |      ;
-    LDA.W $096B                                                ;82A359|AD6B09  |00096B;
+    LDA.W strcGoodsData.unkAnySeed                             ;82A359|AD6B09  |00096B;
     INC A                                                      ;82A35C|1A      |      ;
-    STA.W $096B                                                ;82A35D|8D6B09  |00096B;
+    STA.W strcGoodsData.unkAnySeed                             ;82A35D|8D6B09  |00096B;
     CMP.B #$09                                                 ;82A360|C909    |      ;
     BNE .justReturn                                            ;82A362|D012    |82A376;
-    STZ.W $096B                                                ;82A364|9C6B09  |00096B;
+    STZ.W strcGoodsData.unkAnySeed                             ;82A364|9C6B09  |00096B;
     %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;82A36E|E220    |      ;
     LDA.B #$F8                                                 ;82A370|A9F8    |      ;

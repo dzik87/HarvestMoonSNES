@@ -4626,7 +4626,7 @@ fGameEngine_SetDefaults:
     LDA.B #$00                                                 ;83AA35|A900    |      ;
     STA.W $09A3                                                ;83AA37|8DA309  |0009A3;
     LDA.B #$00                                                 ;83AA3A|A900    |      ;
-    STA.W strcAnimalsData.unkCow                               ;83AA3C|8D3709  |000937;
+    STA.W strcGoodsData.unkCow                                 ;83AA3C|8D3709  |000937;
     STZ.W strcPlayerData.toolSecond                            ;83AA3F|9C2309  |000923;
     REP #$20                                                   ;83AA42|C220    |      ;
     LDA.W #$0000                                               ;83AA44|A90000  |      ;
@@ -4884,7 +4884,7 @@ fGameEngine_FirstNight:
     STZ.W strcPlayerData.carryItemIdPrev                       ;83AD19|9C1E09  |00091E;
     STZ.W strcPlayerData.unkMap91F                             ;83AD1C|9C1F09  |00091F;
     STZ.W strcPlayerData.nAiArg                                ;83AD1F|9C2009  |000920;
-    STZ.W $096B                                                ;83AD22|9C6B09  |00096B;
+    STZ.W strcGoodsData.unkAnySeed                             ;83AD22|9C6B09  |00096B;
     SEP #$20                                                   ;83AD25|E220    |      ;
     STZ.W $098F                                                ;83AD27|9C8F09  |00098F;
     SEP #$20                                                   ;83AD2A|E220    |      ;
@@ -5840,7 +5840,7 @@ fGameEngine_LoadGame:
     STA.W $09A3                                                ;83B3A6|8DA309  |0009A3;
     LDY.W #$0019                                               ;83B3A9|A01900  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B3AC|B772    |000072;
-    STA.W strcAnimalsData.unkCow                               ;83B3AE|8D3709  |000937;
+    STA.W strcGoodsData.unkCow                                 ;83B3AE|8D3709  |000937;
     LDY.W #$001A                                               ;83B3B1|A01A00  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B3B4|B772    |000072;
     STA.W strcPlayerData.toolSecond                            ;83B3B6|8D2309  |000923;
@@ -6219,7 +6219,7 @@ fGameEngine_SaveGame:
     LDA.W $09A3                                                ;83B782|ADA309  |0009A3;
     STA.B [ptrUnknown0x72],Y                                   ;83B785|9772    |000072;
     LDY.W #$0019                                               ;83B787|A01900  |      ;
-    LDA.W strcAnimalsData.unkCow                               ;83B78A|AD3709  |000937;
+    LDA.W strcGoodsData.unkCow                                 ;83B78A|AD3709  |000937;
     STA.B [ptrUnknown0x72],Y                                   ;83B78D|9772    |000072;
     LDY.W #$001A                                               ;83B78F|A01A00  |      ;
     LDA.W strcPlayerData.toolSecond                            ;83B792|AD2309  |000923;
@@ -7157,7 +7157,7 @@ fGameEngine_AnimalsUnknown83BC5A:
     PHX                                                        ;83BF7D|DA      |      ;
     TXA                                                        ;83BF7E|8A      |      ;
     SEP #$20                                                   ;83BF7F|E220    |      ;
-    STA.W strcAnimalsData.unkCow                               ;83BF81|8D3709  |000937;
+    STA.W strcGoodsData.unkCow                                 ;83BF81|8D3709  |000937;
     JMP.W .chicken                                             ;83BF84|4C1AC0  |83C01A;
  
  
@@ -7762,7 +7762,7 @@ fGameEngine_ChichenUnknown83C296:
     PHA                                                        ;83C3E8|48      |      ;
     ASL A                                                      ;83C3E9|0A      |      ;
     TAX                                                        ;83C3EA|AA      |      ;
-    STZ.W strcAnimalsData.unkEachChicken,X                     ;83C3EB|9E3B09  |00093B;
+    STZ.W strcGoodsData.unkEachChicken,X                       ;83C3EB|9E3B09  |00093B;
     BRA .label12                                               ;83C3EE|8011    |83C401;
  
  
@@ -8000,7 +8000,7 @@ fGameEngine_ChichenUnknown83C296:
     PHA                                                        ;83C569|48      |      ;
     ASL A                                                      ;83C56A|0A      |      ;
     TAX                                                        ;83C56B|AA      |      ;
-    STZ.W strcAnimalsData.unkEachCow,X                         ;83C56C|9E5309  |000953;
+    STZ.W strcGoodsData.unkEachCow,X                           ;83C56C|9E5309  |000953;
     JMP.W .label29                                             ;83C56F|4C3DC6  |83C63D;
  
  
@@ -8038,7 +8038,7 @@ fGameEngine_ChichenUnknown83C296:
     PHA                                                        ;83C5AD|48      |      ;
     ASL A                                                      ;83C5AE|0A      |      ;
     TAX                                                        ;83C5AF|AA      |      ;
-    STZ.W strcAnimalsData.unkEachCow,X                         ;83C5B0|9E5309  |000953;
+    STZ.W strcGoodsData.unkEachCow,X                           ;83C5B0|9E5309  |000953;
     JMP.W .label29                                             ;83C5B3|4C3DC6  |83C63D;
  
  
@@ -8116,7 +8116,7 @@ fGameEngine_ChichenUnknown83C296:
     PHA                                                        ;83C635|48      |      ;
     ASL A                                                      ;83C636|0A      |      ;
     TAX                                                        ;83C637|AA      |      ;
-    STZ.W strcAnimalsData.unkEachCow,X                         ;83C638|9E5309  |000953;
+    STZ.W strcGoodsData.unkEachCow,X                           ;83C638|9E5309  |000953;
     BRA .label29                                               ;83C63B|8000    |83C63D;
  
  
@@ -8265,7 +8265,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.W #$0001                                               ;83C728|A90100  |      ;
     STA.L $7F1F58                                              ;83C72B|8F581F7F|7F1F58;
     SEP #$20                                                   ;83C72F|E220    |      ;
-    STZ.W strcAnimalsData.unkDog                               ;83C731|9C3809  |000938;
+    STZ.W strcGoodsData.unkDog                                 ;83C731|9C3809  |000938;
  
 .label37:
     REP #$30                                                   ;83C734|C230    |      ;
@@ -8389,7 +8389,7 @@ fGameEngine_ChichenUnknown83C296:
     LDX.W #$0000                                               ;83C7FA|A20000  |      ;
     JSL.L fAI_Unknown8480F8                                    ;83C7FD|22F88084|8480F8;
     SEP #$20                                                   ;83C801|E220    |      ;
-    STZ.W strcAnimalsData.unkHorse                             ;83C803|9C3909  |000939;
+    STZ.W strcGoodsData.unkHorse                               ;83C803|9C3909  |000939;
  
 .return:
     RTL                                                        ;83C806|6B      |      ;
@@ -10784,7 +10784,7 @@ fAreaEvents_House:
     SEP #$20                                                   ;83E0F3|E220    |      ;
     LDA.B #$00                                                 ;83E0F5|A900    |      ;
     XBA                                                        ;83E0F7|EB      |      ;
-    LDA.W strcAnimalsData.unkCow                               ;83E0F8|AD3709  |000937;
+    LDA.W strcGoodsData.unkCow                                 ;83E0F8|AD3709  |000937;
     REP #$20                                                   ;83E0FB|C220    |      ;
     JSL.L fGameEngine_GetCowData                               ;83E0FD|22A7C983|83C9A7;
     SEP #$20                                                   ;83E101|E220    |      ;
