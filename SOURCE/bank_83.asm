@@ -4593,22 +4593,22 @@ fGameEngine_SetDefaults:
     LDA.B #$01                                                 ;83A9D4|A901    |      ; Load 1 to A
     STA.L nCurrentDay                                          ;83A9D6|8F1B1F7F|7F1F1B; Store A to CurrentDay
     LDA.B #$01                                                 ;83A9DA|A901    |      ;
-    STA.W nAmountLeft_GrassSeeds                               ;83A9DC|8D2709  |000927;
-    STZ.W nAmountLeft_CornSeeds                                ;83A9DF|9C2809  |000928; Write 0
-    STZ.W nAmountLeft_TomatoSeeds                              ;83A9E2|9C2909  |000929;
-    STZ.W nAmountLeft_PotatoSeeds                              ;83A9E5|9C2A09  |00092A;
-    STZ.W nAmountLeft_TurnipSeeds                              ;83A9E8|9C2B09  |00092B;
-    STZ.W nAmountLeft_CowFood                                  ;83A9EB|9C2C09  |00092C;
-    STZ.W nAmountLeft_ChickenFood                              ;83A9EE|9C2D09  |00092D;
+    STA.W strcPlayerData.leftGrassSeeds                        ;83A9DC|8D2709  |000927;
+    STZ.W strcPlayerData.leftCornSeeds                         ;83A9DF|9C2809  |000928; Write 0
+    STZ.W strcPlayerData.leftTomatoSeeds                       ;83A9E2|9C2909  |000929;
+    STZ.W strcPlayerData.leftPotatoSeeds                       ;83A9E5|9C2A09  |00092A;
+    STZ.W strcPlayerData.leftTurnipSeeds                       ;83A9E8|9C2B09  |00092B;
+    STZ.W strcPlayerData.leftCowFood                           ;83A9EB|9C2C09  |00092C;
+    STZ.W strcPlayerData.leftChickenFood                       ;83A9EE|9C2D09  |00092D;
     LDA.B #$00                                                 ;83A9F1|A900    |      ;
     STA.L nOwnedCows                                           ;83A9F3|8F0A1F7F|7F1F0A;
     LDA.B #$00                                                 ;83A9F7|A900    |      ;
     STA.L nOwnedChickens                                       ;83A9F9|8F0B1F7F|7F1F0B;
     STZ.W nWeatherForecast                                     ;83A9FD|9C8C09  |00098C;
     LDA.B #$64                                                 ;83AA00|A964    |      ;
-    STA.W nPlayerStamina                                       ;83AA02|8D1709  |000917;
-    STZ.W nToolEquipped                                        ;83AA05|9C2109  |000921;
-    STZ.W nAmountLeft_Water                                    ;83AA08|9C2609  |000926;
+    STA.W strcPlayerData.stamina                               ;83AA02|8D1709  |000917;
+    STZ.W strcPlayerData.toolEquipped                          ;83AA05|9C2109  |000921;
+    STZ.W strcPlayerData.leftWater                             ;83AA08|9C2609  |000926;
     LDA.B #$00                                                 ;83AA0B|A900    |      ;
     STA.L nCowPregnacyDays                                     ;83AA0D|8F121F7F|7F1F12;
     LDA.B #$00                                                 ;83AA11|A900    |      ;
@@ -4627,7 +4627,7 @@ fGameEngine_SetDefaults:
     STA.W $09A3                                                ;83AA37|8DA309  |0009A3;
     LDA.B #$00                                                 ;83AA3A|A900    |      ;
     STA.W $0937                                                ;83AA3C|8D3709  |000937;
-    STZ.W nToolSecond                                          ;83AA3F|9C2309  |000923;
+    STZ.W strcPlayerData.toolSecond                            ;83AA3F|9C2309  |000923;
     REP #$20                                                   ;83AA42|C220    |      ;
     LDA.W #$0000                                               ;83AA44|A90000  |      ;
     STA.L nStoredWood                                          ;83AA47|8F0C1F7F|7F1F0C;
@@ -4822,7 +4822,7 @@ fGameEngine_FirstNight:
     STZ.W strcObjectData.playerX                               ;83AC5C|9C0709  |000907;
     STZ.W strcObjectData.playerY                               ;83AC5F|9C0909  |000909;
     SEP #$20                                                   ;83AC62|E220    |      ;
-    STZ.W $0919                                                ;83AC64|9C1909  |000919;
+    STZ.W strcPlayerData.unkCounter919                         ;83AC64|9C1909  |000919;
     REP #$20                                                   ;83AC67|C220    |      ;
     STZ.W strcMenuData.menuIdx                                 ;83AC69|9C9109  |000991;
     SEP #$20                                                   ;83AC6C|E220    |      ;
@@ -4870,26 +4870,26 @@ fGameEngine_FirstNight:
     REP #$20                                                   ;83ACF5|C220    |      ;
     STZ.W strcObjectData.exist                                 ;83ACF7|9C1509  |000915;
     SEP #$20                                                   ;83ACFA|E220    |      ;
-    LDA.W nPlayerStamina                                       ;83ACFC|AD1709  |000917;
-    STA.W nPlayerEnergy                                        ;83ACFF|8D1809  |000918;
+    LDA.W strcPlayerData.stamina                               ;83ACFC|AD1709  |000917;
+    STA.W strcPlayerData.energy                                ;83ACFF|8D1809  |000918;
     SEP #$20                                                   ;83AD02|E220    |      ;
-    STZ.W $091A                                                ;83AD04|9C1A09  |00091A;
-    STZ.W $091B                                                ;83AD07|9C1B09  |00091B;
+    STZ.W strcPlayerData.unkCounter91A                         ;83AD04|9C1A09  |00091A;
+    STZ.W strcPlayerData.unkCounter91B                         ;83AD07|9C1B09  |00091B;
     SEP #$20                                                   ;83AD0A|E220    |      ;
-    STZ.W $0925                                                ;83AD0C|9C2509  |000925;
+    STZ.W strcPlayerData.lastExcercise                         ;83AD0C|9C2509  |000925;
     SEP #$20                                                   ;83AD0F|E220    |      ;
     STZ.W nWeatherDialogIdIndex                                ;83AD11|9C9009  |000990;
     SEP #$20                                                   ;83AD14|E220    |      ;
-    STZ.W nCarryItem_Current                                   ;83AD16|9C1D09  |00091D;
-    STZ.W nCarryItem_Previous                                  ;83AD19|9C1E09  |00091E;
-    STZ.W $091F                                                ;83AD1C|9C1F09  |00091F;
-    STZ.W $0920                                                ;83AD1F|9C2009  |000920;
+    STZ.W strcPlayerData.carryItemId                           ;83AD16|9C1D09  |00091D;
+    STZ.W strcPlayerData.carryItemIdPrev                       ;83AD19|9C1E09  |00091E;
+    STZ.W strcPlayerData.unkMap91F                             ;83AD1C|9C1F09  |00091F;
+    STZ.W strcPlayerData.nAiArg                                ;83AD1F|9C2009  |000920;
     STZ.W $096B                                                ;83AD22|9C6B09  |00096B;
     SEP #$20                                                   ;83AD25|E220    |      ;
     STZ.W $098F                                                ;83AD27|9C8F09  |00098F;
     SEP #$20                                                   ;83AD2A|E220    |      ;
     STZ.W $096C                                                ;83AD2C|9C6C09  |00096C;
-    STZ.W $0922                                                ;83AD2F|9C2209  |000922;
+    STZ.W strcPlayerData.toolSound                             ;83AD2F|9C2209  |000922;
     SEP #$20                                                   ;83AD32|E220    |      ;
     STZ.W strcAudio.trackId                                    ;83AD34|9C1001  |000110;
     STZ.W strcAudio.reg114                                     ;83AD37|9C1401  |000114;
@@ -4897,11 +4897,11 @@ fGameEngine_FirstNight:
     STZ.W $0118                                                ;83AD3D|9C1801  |000118;
     STZ.W $0117                                                ;83AD40|9C1701  |000117;
     SEP #$20                                                   ;83AD43|E220    |      ;
-    STZ.W nPlacedCowFeed                                       ;83AD45|9C3009  |000930;
-    STZ.W nPlacedChickenFeed                                   ;83AD48|9C3109  |000931;
+    STZ.W strcPlayerData.placedCowFeed                         ;83AD45|9C3009  |000930;
+    STZ.W strcPlayerData.placedChcikenFeed                     ;83AD48|9C3109  |000931;
     REP #$20                                                   ;83AD4B|C220    |      ;
-    STZ.W sPlacedCowFeed                                       ;83AD4D|9C3209  |000932;
-    STZ.W sPlacedChickenFeed                                   ;83AD50|9C3409  |000934;
+    STZ.W strcPlayerData.placedCowFeedFlags                    ;83AD4D|9C3209  |000932;
+    STZ.W strcPlayerData.placedChickenFeedFlags                ;83AD50|9C3409  |000934;
     REP #$20                                                   ;83AD53|C220    |      ;
     STZ.W $084A                                                ;83AD55|9C4A08  |00084A;
     STZ.B strcPlayer.unkDC                                     ;83AD58|64DC    |0000DC;
@@ -5777,25 +5777,25 @@ fGameEngine_LoadGame:
     STA.L nCurrentDay                                          ;83B2F4|8F1B1F7F|7F1F1B;
     LDY.W #$0004                                               ;83B2F8|A00400  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B2FB|B772    |000072;
-    STA.W nAmountLeft_GrassSeeds                               ;83B2FD|8D2709  |000927;
+    STA.W strcPlayerData.leftGrassSeeds                        ;83B2FD|8D2709  |000927;
     LDY.W #$0005                                               ;83B300|A00500  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B303|B772    |000072;
-    STA.W nAmountLeft_CornSeeds                                ;83B305|8D2809  |000928;
+    STA.W strcPlayerData.leftCornSeeds                         ;83B305|8D2809  |000928;
     LDY.W #$0006                                               ;83B308|A00600  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B30B|B772    |000072;
-    STA.W nAmountLeft_TomatoSeeds                              ;83B30D|8D2909  |000929;
+    STA.W strcPlayerData.leftTomatoSeeds                       ;83B30D|8D2909  |000929;
     LDY.W #$0007                                               ;83B310|A00700  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B313|B772    |000072;
-    STA.W nAmountLeft_PotatoSeeds                              ;83B315|8D2A09  |00092A;
+    STA.W strcPlayerData.leftPotatoSeeds                       ;83B315|8D2A09  |00092A;
     LDY.W #$0008                                               ;83B318|A00800  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B31B|B772    |000072;
-    STA.W nAmountLeft_TurnipSeeds                              ;83B31D|8D2B09  |00092B;
+    STA.W strcPlayerData.leftTurnipSeeds                       ;83B31D|8D2B09  |00092B;
     LDY.W #$0009                                               ;83B320|A00900  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B323|B772    |000072;
-    STA.W nAmountLeft_CowFood                                  ;83B325|8D2C09  |00092C;
+    STA.W strcPlayerData.leftCowFood                           ;83B325|8D2C09  |00092C;
     LDY.W #$000A                                               ;83B328|A00A00  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B32B|B772    |000072;
-    STA.W nAmountLeft_ChickenFood                              ;83B32D|8D2D09  |00092D;
+    STA.W strcPlayerData.leftChickenFood                       ;83B32D|8D2D09  |00092D;
     LDY.W #$000B                                               ;83B330|A00B00  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B333|B772    |000072;
     STA.L nOwnedCows                                           ;83B335|8F0A1F7F|7F1F0A;
@@ -5807,13 +5807,13 @@ fGameEngine_LoadGame:
     STA.W nWeatherForecast                                     ;83B347|8D8C09  |00098C;
     LDY.W #$000E                                               ;83B34A|A00E00  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B34D|B772    |000072;
-    STA.W nPlayerStamina                                       ;83B34F|8D1709  |000917;
+    STA.W strcPlayerData.stamina                               ;83B34F|8D1709  |000917;
     LDY.W #$000F                                               ;83B352|A00F00  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B355|B772    |000072;
-    STA.W nToolEquipped                                        ;83B357|8D2109  |000921;
+    STA.W strcPlayerData.toolEquipped                          ;83B357|8D2109  |000921;
     LDY.W #$0010                                               ;83B35A|A01000  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B35D|B772    |000072;
-    STA.W nAmountLeft_Water                                    ;83B35F|8D2609  |000926;
+    STA.W strcPlayerData.leftWater                             ;83B35F|8D2609  |000926;
     LDY.W #$0011                                               ;83B362|A01100  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B365|B772    |000072;
     STA.L nCowPregnacyDays                                     ;83B367|8F121F7F|7F1F12;
@@ -5843,7 +5843,7 @@ fGameEngine_LoadGame:
     STA.W $0937                                                ;83B3AE|8D3709  |000937;
     LDY.W #$001A                                               ;83B3B1|A01A00  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B3B4|B772    |000072;
-    STA.W nToolSecond                                          ;83B3B6|8D2309  |000923;
+    STA.W strcPlayerData.toolSecond                            ;83B3B6|8D2309  |000923;
     REP #$20                                                   ;83B3B9|C220    |      ;
     LDY.W #$0040                                               ;83B3BB|A04000  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B3BE|B772    |000072;
@@ -6156,25 +6156,25 @@ fGameEngine_SaveGame:
     LDA.L nCurrentDay                                          ;83B6D0|AF1B1F7F|7F1F1B;
     STA.B [ptrUnknown0x72],Y                                   ;83B6D4|9772    |000072;
     LDY.W #$0004                                               ;83B6D6|A00400  |      ;
-    LDA.W nAmountLeft_GrassSeeds                               ;83B6D9|AD2709  |000927;
+    LDA.W strcPlayerData.leftGrassSeeds                        ;83B6D9|AD2709  |000927;
     STA.B [ptrUnknown0x72],Y                                   ;83B6DC|9772    |000072;
     LDY.W #$0005                                               ;83B6DE|A00500  |      ;
-    LDA.W nAmountLeft_CornSeeds                                ;83B6E1|AD2809  |000928;
+    LDA.W strcPlayerData.leftCornSeeds                         ;83B6E1|AD2809  |000928;
     STA.B [ptrUnknown0x72],Y                                   ;83B6E4|9772    |000072;
     LDY.W #$0006                                               ;83B6E6|A00600  |      ;
-    LDA.W nAmountLeft_TomatoSeeds                              ;83B6E9|AD2909  |000929;
+    LDA.W strcPlayerData.leftTomatoSeeds                       ;83B6E9|AD2909  |000929;
     STA.B [ptrUnknown0x72],Y                                   ;83B6EC|9772    |000072;
     LDY.W #$0007                                               ;83B6EE|A00700  |      ;
-    LDA.W nAmountLeft_PotatoSeeds                              ;83B6F1|AD2A09  |00092A;
+    LDA.W strcPlayerData.leftPotatoSeeds                       ;83B6F1|AD2A09  |00092A;
     STA.B [ptrUnknown0x72],Y                                   ;83B6F4|9772    |000072;
     LDY.W #$0008                                               ;83B6F6|A00800  |      ;
-    LDA.W nAmountLeft_TurnipSeeds                              ;83B6F9|AD2B09  |00092B;
+    LDA.W strcPlayerData.leftTurnipSeeds                       ;83B6F9|AD2B09  |00092B;
     STA.B [ptrUnknown0x72],Y                                   ;83B6FC|9772    |000072;
     LDY.W #$0009                                               ;83B6FE|A00900  |      ;
-    LDA.W nAmountLeft_CowFood                                  ;83B701|AD2C09  |00092C;
+    LDA.W strcPlayerData.leftCowFood                           ;83B701|AD2C09  |00092C;
     STA.B [ptrUnknown0x72],Y                                   ;83B704|9772    |000072;
     LDY.W #$000A                                               ;83B706|A00A00  |      ;
-    LDA.W nAmountLeft_ChickenFood                              ;83B709|AD2D09  |00092D;
+    LDA.W strcPlayerData.leftChickenFood                       ;83B709|AD2D09  |00092D;
     STA.B [ptrUnknown0x72],Y                                   ;83B70C|9772    |000072;
     LDY.W #$000B                                               ;83B70E|A00B00  |      ;
     LDA.L nOwnedCows                                           ;83B711|AF0A1F7F|7F1F0A;
@@ -6186,13 +6186,13 @@ fGameEngine_SaveGame:
     LDA.W nWeatherForecast                                     ;83B723|AD8C09  |00098C;
     STA.B [ptrUnknown0x72],Y                                   ;83B726|9772    |000072;
     LDY.W #$000E                                               ;83B728|A00E00  |      ;
-    LDA.W nPlayerStamina                                       ;83B72B|AD1709  |000917;
+    LDA.W strcPlayerData.stamina                               ;83B72B|AD1709  |000917;
     STA.B [ptrUnknown0x72],Y                                   ;83B72E|9772    |000072;
     LDY.W #$000F                                               ;83B730|A00F00  |      ;
-    LDA.W nToolEquipped                                        ;83B733|AD2109  |000921;
+    LDA.W strcPlayerData.toolEquipped                          ;83B733|AD2109  |000921;
     STA.B [ptrUnknown0x72],Y                                   ;83B736|9772    |000072;
     LDY.W #$0010                                               ;83B738|A01000  |      ;
-    LDA.W nAmountLeft_Water                                    ;83B73B|AD2609  |000926;
+    LDA.W strcPlayerData.leftWater                             ;83B73B|AD2609  |000926;
     STA.B [ptrUnknown0x72],Y                                   ;83B73E|9772    |000072;
     LDY.W #$0011                                               ;83B740|A01100  |      ;
     LDA.L nCowPregnacyDays                                     ;83B743|AF121F7F|7F1F12;
@@ -6222,7 +6222,7 @@ fGameEngine_SaveGame:
     LDA.W $0937                                                ;83B78A|AD3709  |000937;
     STA.B [ptrUnknown0x72],Y                                   ;83B78D|9772    |000072;
     LDY.W #$001A                                               ;83B78F|A01A00  |      ;
-    LDA.W nToolSecond                                          ;83B792|AD2309  |000923;
+    LDA.W strcPlayerData.toolSecond                            ;83B792|AD2309  |000923;
     STA.B [ptrUnknown0x72],Y                                   ;83B795|9772    |000072;
     REP #$20                                                   ;83B797|C220    |      ;
     LDY.W #$0040                                               ;83B799|A04000  |      ;
@@ -6807,7 +6807,7 @@ fGameEngine_AnimalsUnknown83BC5A:
     ASL A                                                      ;83BCB4|0A      |      ;
     TAX                                                        ;83BCB5|AA      |      ;
     LDA.L nCowFeedFlagsTable,X                                 ;83BCB6|BF71A582|82A571;
-    AND.W sPlacedCowFeed                                       ;83BCBA|2D3209  |000932;
+    AND.W strcPlayerData.placedCowFeedFlags                    ;83BCBA|2D3209  |000932;
     BEQ .label3                                                ;83BCBD|F051    |83BD10;
     JMP.W .label8                                              ;83BCBF|4C9EBD  |83BD9E;
  
@@ -6816,7 +6816,7 @@ fGameEngine_AnimalsUnknown83BC5A:
     REP #$30                                                   ;83BCC2|C230    |      ;
     LDX.W #$0018                                               ;83BCC4|A21800  |      ;
     LDA.L nCowFeedFlagsTable,X                                 ;83BCC7|BF71A582|82A571;
-    AND.W sPlacedCowFeed                                       ;83BCCB|2D3209  |000932;
+    AND.W strcPlayerData.placedCowFeedFlags                    ;83BCCB|2D3209  |000932;
     BEQ .label3                                                ;83BCCE|F040    |83BD10;
     JMP.W .label8                                              ;83BCD0|4C9EBD  |83BD9E;
  
@@ -6830,7 +6830,7 @@ fGameEngine_AnimalsUnknown83BC5A:
     BCS .label3                                                ;83BCDE|B030    |83BD10;
     JSL.L fObjectMap_EatingGrass                               ;83BCE0|22A0A982|82A9A0;
     REP #$20                                                   ;83BCE4|C220    |      ;
-    LDA.W $092E                                                ;83BCE6|AD2E09  |00092E;
+    LDA.W strcPlayerData.leftGrassToCut                        ;83BCE6|AD2E09  |00092E;
     BEQ .label3                                                ;83BCE9|F025    |83BD10;
     REP #$20                                                   ;83BCEB|C220    |      ;
     LDA.W nMapEngine_flags                                     ;83BCED|AD9601  |000196;
@@ -7303,10 +7303,10 @@ fGameEngine_AnimalsUnknown83BC5A:
     CMP.B #$28                                                 ;83C099|C928    |      ;
     BNE .label27                                               ;83C09B|D00E    |83C0AB;
     SEP #$20                                                   ;83C09D|E220    |      ;
-    LDA.W nPlacedChickenFeed                                   ;83C09F|AD3109  |000931;
+    LDA.W strcPlayerData.placedChcikenFeed                     ;83C09F|AD3109  |000931;
     BEQ +                                                      ;83C0A2|F02B    |83C0CF;
     DEC A                                                      ;83C0A4|3A      |      ;
-    STA.W nPlacedChickenFeed                                   ;83C0A5|8D3109  |000931;
+    STA.W strcPlayerData.placedChcikenFeed                     ;83C0A5|8D3109  |000931;
     JMP.W .label29                                             ;83C0A8|4C19C1  |83C119;
  
  
@@ -7319,7 +7319,7 @@ fGameEngine_AnimalsUnknown83BC5A:
     BCS +                                                      ;83C0B6|B017    |83C0CF;
     JSL.L fObjectMap_EatingGrass                               ;83C0B8|22A0A982|82A9A0;
     REP #$20                                                   ;83C0BC|C220    |      ;
-    LDA.W $092E                                                ;83C0BE|AD2E09  |00092E;
+    LDA.W strcPlayerData.leftGrassToCut                        ;83C0BE|AD2E09  |00092E;
     BEQ +                                                      ;83C0C1|F00C    |83C0CF;
     REP #$20                                                   ;83C0C3|C220    |      ;
     LDA.W nMapEngine_flags                                     ;83C0C5|AD9601  |000196;
@@ -11409,9 +11409,9 @@ fAreaEvents_Intro:
     STZ.B strcPlayer.flags                                     ;83E78A|64D2    |0000D2;
     STZ.B strcPlayer.action                                    ;83E78C|64D4    |0000D4;
     SEP #$20                                                   ;83E78E|E220    |      ;
-    LDA.W nPlayerStamina                                       ;83E790|AD1709  |000917;
-    STA.W nPlayerEnergy                                        ;83E793|8D1809  |000918;
-    STZ.W $0925                                                ;83E796|9C2509  |000925;
+    LDA.W strcPlayerData.stamina                               ;83E790|AD1709  |000917;
+    STA.W strcPlayerData.energy                                ;83E793|8D1809  |000918;
+    STZ.W strcPlayerData.lastExcercise                         ;83E796|9C2509  |000925;
     %SetPlayerFlag(!PFLAGS_ACTIVE)
     %SetPlayerAction(!PACTION_NONE)
     REP #$30                                                   ;83E7A9|C230    |      ;
@@ -11426,7 +11426,7 @@ fAreaEvents_Intro:
     SEP #$20                                                   ;83E7C0|E220    |      ;
     STZ.W nTimeState                                           ;83E7C2|9C7309  |000973;
     SEP #$20                                                   ;83E7C5|E220    |      ;
-    STZ.W nCarryItem_Current                                   ;83E7C7|9C1D09  |00091D;
+    STZ.W strcPlayerData.carryItemId                           ;83E7C7|9C1D09  |00091D;
     %UnsetPlayerFlag(!PFLAGS_HOLDINGITEM)
     SEP #$20                                                   ;83E7D6|E220    |      ;
     LDA.L nIntroHowToPlayIndex2                                ;83E7D8|AF491F7F|7F1F49;
@@ -11655,8 +11655,8 @@ fAreaEvents_Intro:
     STA.L strcShedItems.row3                                   ;83E965|8F021F7F|7F1F02;
     LDA.B #$00                                                 ;83E969|A900    |      ;
     STA.L strcShedItems.row4                                   ;83E96B|8F031F7F|7F1F03;
-    STZ.W nToolEquipped                                        ;83E96F|9C2109  |000921;
-    STZ.W nToolSecond                                          ;83E972|9C2309  |000923;
+    STZ.W strcPlayerData.toolEquipped                          ;83E96F|9C2109  |000921;
+    STZ.W strcPlayerData.toolSecond                            ;83E972|9C2309  |000923;
     REP #$30                                                   ;83E975|C230    |      ;
     %AIExecute($0000, $0047, $0008)
     SEP #$20                                                   ;83E984|E220    |      ;
@@ -11720,8 +11720,8 @@ fAreaEvents_Intro:
     STA.L strcShedItems.row3                                   ;83EA15|8F021F7F|7F1F02;
     LDA.B #$00                                                 ;83EA19|A900    |      ;
     STA.L strcShedItems.row4                                   ;83EA1B|8F031F7F|7F1F03;
-    STZ.W nToolEquipped                                        ;83EA1F|9C2109  |000921;
-    STZ.W nToolSecond                                          ;83EA22|9C2309  |000923;
+    STZ.W strcPlayerData.toolEquipped                          ;83EA1F|9C2109  |000921;
+    STZ.W strcPlayerData.toolSecond                            ;83EA22|9C2309  |000923;
     REP #$30                                                   ;83EA25|C230    |      ;
     %AIExecute($0000, $0047, $000E)
     SEP #$20                                                   ;83EA34|E220    |      ;
@@ -11884,9 +11884,9 @@ fAreaEvents_Endings:
     STZ.B strcPlayer.flags                                     ;83EBC3|64D2    |0000D2;
     STZ.B strcPlayer.action                                    ;83EBC5|64D4    |0000D4;
     SEP #$20                                                   ;83EBC7|E220    |      ;
-    LDA.W nPlayerStamina                                       ;83EBC9|AD1709  |000917;
-    STA.W nPlayerEnergy                                        ;83EBCC|8D1809  |000918;
-    STZ.W $0925                                                ;83EBCF|9C2509  |000925;
+    LDA.W strcPlayerData.stamina                               ;83EBC9|AD1709  |000917;
+    STA.W strcPlayerData.energy                                ;83EBCC|8D1809  |000918;
+    STZ.W strcPlayerData.lastExcercise                         ;83EBCF|9C2509  |000925;
     %SetPlayerFlag(!PFLAGS_ACTIVE)
     %SetPlayerAction(!PACTION_NONE)
     REP #$30                                                   ;83EBE2|C230    |      ;
@@ -11901,7 +11901,7 @@ fAreaEvents_Endings:
     SEP #$20                                                   ;83EBF9|E220    |      ;
     STZ.W nTimeState                                           ;83EBFB|9C7309  |000973;
     SEP #$20                                                   ;83EBFE|E220    |      ;
-    STZ.W nCarryItem_Current                                   ;83EC00|9C1D09  |00091D;
+    STZ.W strcPlayerData.carryItemId                           ;83EC00|9C1D09  |00091D;
     %UnsetPlayerFlag(!PFLAGS_HOLDINGITEM)
     SEP #$20                                                   ;83EC0F|E220    |      ;
     LDA.L nEndingStep                                          ;83EC11|AF471F7F|7F1F47;
@@ -12618,7 +12618,7 @@ fAreaEvents_Endings:
     SEP #$20                                                   ;83F2BF|E220    |      ;
     LDA.B #$00                                                 ;83F2C1|A900    |      ;
     XBA                                                        ;83F2C3|EB      |      ;
-    LDA.W nPlayerStamina                                       ;83F2C4|AD1709  |000917;
+    LDA.W strcPlayerData.stamina                               ;83F2C4|AD1709  |000917;
     SEC                                                        ;83F2C7|38      |      ;
     SBC.B #$64                                                 ;83F2C8|E964    |      ;
     LSR A                                                      ;83F2CA|4A      |      ;

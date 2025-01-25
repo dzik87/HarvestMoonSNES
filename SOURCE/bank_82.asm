@@ -143,7 +143,7 @@ fUnknown_8280AA:
     LDA.B #$03                                                 ;828113|A903    |      ;
     JSL.L fCore_GetRandomNumber                                ;828115|22F98980|8089F9;
     SEP #$20                                                   ;828119|E220    |      ;
-    STA.W nFoodToEat                                           ;82811B|8D2409  |000924;
+    STA.W strcPlayerData.eatFood                               ;82811B|8D2409  |000924;
     %SetPlayerFlag(!PFLAGS_EATINGMEAL)
     %SetPlayerFlag(!PFLAGS_UNK0400)
  
@@ -433,9 +433,9 @@ fNextDayHandler:
     STZ.B strcPlayer.flags                                     ;8283B5|64D2    |0000D2;
     STZ.B strcPlayer.action                                    ;8283B7|64D4    |0000D4;
     SEP #$20                                                   ;8283B9|E220    |      ;
-    LDA.W nPlayerStamina                                       ;8283BB|AD1709  |000917;
-    STA.W nPlayerEnergy                                        ;8283BE|8D1809  |000918; Reset player energy to max available
-    STZ.W $0925                                                ;8283C1|9C2509  |000925;
+    LDA.W strcPlayerData.stamina                               ;8283BB|AD1709  |000917;
+    STA.W strcPlayerData.energy                                ;8283BE|8D1809  |000918; Reset player energy to max available
+    STZ.W strcPlayerData.lastExcercise                         ;8283C1|9C2509  |000925;
     %SetPlayerFlag(!PFLAGS_ACTIVE)
     %SetPlayerAction(!PACTION_NONE)
     REP #$30                                                   ;8283D4|C230    |      ;
@@ -461,11 +461,11 @@ fNextDayHandler:
     LDA.B #$00                                                 ;82840A|A900    |      ;
     STA.L nShippingProfit+2                                    ;82840C|8F091F7F|7F1F09;
     SEP #$20                                                   ;828410|E220    |      ;
-    STZ.W nPlacedCowFeed                                       ;828412|9C3009  |000930; clear cow feed counter
-    STZ.W nPlacedChickenFeed                                   ;828415|9C3109  |000931; clear chicken feed counter
+    STZ.W strcPlayerData.placedCowFeed                         ;828412|9C3009  |000930; clear cow feed counter
+    STZ.W strcPlayerData.placedChcikenFeed                     ;828415|9C3109  |000931; clear chicken feed counter
     REP #$20                                                   ;828418|C220    |      ;
-    STZ.W sPlacedCowFeed                                       ;82841A|9C3209  |000932; zero cow feed data
-    STZ.W sPlacedChickenFeed                                   ;82841D|9C3409  |000934; zero chicken feed data
+    STZ.W strcPlayerData.placedCowFeedFlags                    ;82841A|9C3209  |000932; zero cow feed data
+    STZ.W strcPlayerData.placedChickenFeedFlags                ;82841D|9C3409  |000934; zero chicken feed data
     REP #$20                                                   ;828420|C220    |      ;
     LDA.W #$0000                                               ;828422|A90000  |      ;
     STA.L strcFlags.daily1                                     ;828425|8F5A1F7F|7F1F5A;
@@ -543,17 +543,17 @@ fNextDayHandler:
  
 .label3:
     SEP #$20                                                   ;828551|E220    |      ;
-    LDA.W nToolEquipped                                        ;828553|AD2109  |000921;
+    LDA.W strcPlayerData.toolEquipped                          ;828553|AD2109  |000921;
     CMP.B #$02                                                 ;828556|C902    |      ;
     BNE .label4                                                ;828558|D003    |82855D;
-    STZ.W nToolEquipped                                        ;82855A|9C2109  |000921;
+    STZ.W strcPlayerData.toolEquipped                          ;82855A|9C2109  |000921;
  
 .label4:
     SEP #$20                                                   ;82855D|E220    |      ;
-    LDA.W nToolSecond                                          ;82855F|AD2309  |000923;
+    LDA.W strcPlayerData.toolSecond                            ;82855F|AD2309  |000923;
     CMP.B #$02                                                 ;828562|C902    |      ;
     BNE .label5                                                ;828564|D003    |828569;
-    STZ.W nToolSecond                                          ;828566|9C2309  |000923;
+    STZ.W strcPlayerData.toolSecond                            ;828566|9C2309  |000923;
  
 .label5:
     SEP #$20                                                   ;828569|E220    |      ;
@@ -690,7 +690,7 @@ fNextDayHandler:
   + SEP #$20                                                   ;828733|E220    |      ;
     STZ.W nTimeState                                           ;828735|9C7309  |000973;
     SEP #$20                                                   ;828738|E220    |      ;
-    STZ.W nCarryItem_Current                                   ;82873A|9C1D09  |00091D;
+    STZ.W strcPlayerData.carryItemId                           ;82873A|9C1D09  |00091D;
     %UnsetPlayerFlag(!PFLAGS_HOLDINGITEM)
     REP #$30                                                   ;828749|C230    |      ;
     LDA.W #$0088                                               ;82874B|A98800  |      ;
@@ -712,7 +712,7 @@ fNextDayHandler:
     LDA.B #$03                                                 ;828779|A903    |      ;
     JSL.L fCore_GetRandomNumber                                ;82877B|22F98980|8089F9;
     SEP #$20                                                   ;82877F|E220    |      ;
-    STA.W nFoodToEat                                           ;828781|8D2409  |000924;
+    STA.W strcPlayerData.eatFood                               ;828781|8D2409  |000924;
     %SetPlayerFlag(!PFLAGS_EATINGMEAL)
  
 .return:
@@ -1593,7 +1593,7 @@ fToolUsedSound_Unknown828FB1:
     SEP #$20                                                   ;828FB1|E220    |      ;
     LDA.B #$00                                                 ;828FB3|A900    |      ; A = 0
     XBA                                                        ;828FB5|EB      |      ; A <-> B
-    LDA.W $0922                                                ;828FB6|AD2209  |000922;
+    LDA.W strcPlayerData.toolSound                             ;828FB6|AD2209  |000922;
     CMP.B #$02                                                 ;828FB9|C902    |      ;
     BEQ .return                                                ;828FBB|F035    |828FF2;
     REP #$20                                                   ;828FBD|C220    |      ;
@@ -1601,7 +1601,7 @@ fToolUsedSound_Unknown828FB1:
     SEP #$20                                                   ;828FC1|E220    |      ;
     LDA.B #$00                                                 ;828FC3|A900    |      ;
     XBA                                                        ;828FC5|EB      |      ;
-    LDA.W nToolEquipped                                        ;828FC6|AD2109  |000921;
+    LDA.W strcPlayerData.toolEquipped                          ;828FC6|AD2109  |000921;
     REP #$20                                                   ;828FC9|C220    |      ;
     STA.B n16TempVar1                                          ;828FCB|857E    |00007E;
     ASL A                                                      ;828FCD|0A      |      ;
@@ -1631,7 +1631,7 @@ fToolUsedSound_Unknown828FF3:
     SEP #$20                                                   ;828FF3|E220    |      ;
     LDA.B #$00                                                 ;828FF5|A900    |      ;
     XBA                                                        ;828FF7|EB      |      ;
-    LDA.W nToolEquipped                                        ;828FF8|AD2109  |000921;
+    LDA.W strcPlayerData.toolEquipped                          ;828FF8|AD2109  |000921;
     CMP.W $0119                                                ;828FFB|CD1901  |000119;
     BEQ .return                                                ;828FFE|F04B    |82904B;
     REP #$20                                                   ;829000|C220    |      ;
@@ -1672,7 +1672,7 @@ fToolUsedSound_Unknown828FF3:
  
 .return:
     SEP #$20                                                   ;82904B|E220    |      ;
-    LDA.W nToolEquipped                                        ;82904D|AD2109  |000921;
+    LDA.W strcPlayerData.toolEquipped                          ;82904D|AD2109  |000921;
     STA.W $0119                                                ;829050|8D1901  |000119;
     RTL                                                        ;829053|6B      |      ;
  
@@ -1696,10 +1696,10 @@ fToolUsedAnimationHandler:
  
   + JSR.W fToolUsedUnknown_82927D                              ;8290B8|207D92  |82927D;
     SEP #$20                                                   ;8290BB|E220    |      ;
-    STZ.W $091B                                                ;8290BD|9C1B09  |00091B;
+    STZ.W strcPlayerData.unkCounter91B                         ;8290BD|9C1B09  |00091B;
     LDA.B #$00                                                 ;8290C0|A900    |      ;
     XBA                                                        ;8290C2|EB      |      ;
-    LDA.W nToolEquipped                                        ;8290C3|AD2109  |000921;
+    LDA.W strcPlayerData.toolEquipped                          ;8290C3|AD2109  |000921;
     ASL A                                                      ;8290C6|0A      |      ;
     TAX                                                        ;8290C7|AA      |      ;
     JSR.W (aToolUsedAnimationTable,X)                          ;8290C8|FC8BA5  |82A58B;
@@ -1866,7 +1866,7 @@ fToolUsedAnimation0x10_WateringCan:
     SEP #$20                                                   ;8291B0|E220    |      ;
     CMP.B #$02                                                 ;8291B2|C902    |      ;
     BEQ .label2                                                ;8291B4|F01F    |8291D5;
-    LDA.W nAmountLeft_Water                                    ;8291B6|AD2609  |000926;
+    LDA.W strcPlayerData.leftWater                             ;8291B6|AD2609  |000926;
     BEQ .haveWater                                             ;8291B9|F00D    |8291C8;
     REP #$30                                                   ;8291BB|C230    |      ;
     LDA.W #$0068                                               ;8291BD|A96800  |      ;
@@ -1893,7 +1893,7 @@ fToolUsedAnimation0x10_WateringCan:
     STA.W strcObjectData.spriteIdx                             ;8291DD|8D0109  |000901;
     SEP #$20                                                   ;8291E0|E220    |      ;
     LDA.B #$14                                                 ;8291E2|A914    |      ;
-    STA.W nAmountLeft_Water                                    ;8291E4|8D2609  |000926;
+    STA.W strcPlayerData.leftWater                             ;8291E4|8D2609  |000926;
  
 .return:
     RTS                                                        ;8291E7|60      |      ;
@@ -1995,7 +1995,7 @@ fToolUsedActionHandler:
     REP #$10                                                   ;829262|C210    |      ;
     LDA.B #$00                                                 ;829264|A900    |      ;
     XBA                                                        ;829266|EB      |      ;
-    LDA.W nToolEquipped                                        ;829267|AD2109  |000921;
+    LDA.W strcPlayerData.toolEquipped                          ;829267|AD2109  |000921;
     ASL A                                                      ;82926A|0A      |      ;
     TAX                                                        ;82926B|AA      |      ;
     JSR.W (aToolUsedActionTable,X)                             ;82926C|FCC3A5  |82A5C3;
@@ -2016,7 +2016,7 @@ fToolUsedUnknown_82927D:
     JSL.L fSound_GetToolSound                                  ;829294|2271AA82|82AA71;
     SEP #$20                                                   ;829298|E220    |      ;
     REP #$10                                                   ;82929A|C210    |      ;
-    STA.W $0922                                                ;82929C|8D2209  |000922;
+    STA.W strcPlayerData.toolSound                             ;82929C|8D2209  |000922;
     RTS                                                        ;82929F|60      |      ;
  
  
@@ -2128,9 +2128,9 @@ fToolUsedAction0x01_Sickle:
     LDA.W #$0001                                               ;829376|A90100  |      ;
     JSL.L fGameEngine_AddFeed                                  ;829379|2253B283|83B253;
     REP #$20                                                   ;82937D|C220    |      ;
-    LDA.W $092E                                                ;82937F|AD2E09  |00092E;
+    LDA.W strcPlayerData.leftGrassToCut                        ;82937F|AD2E09  |00092E;
     DEC A                                                      ;829382|3A      |      ;
-    STA.W $092E                                                ;829383|8D2E09  |00092E;
+    STA.W strcPlayerData.leftGrassToCut                        ;829383|8D2E09  |00092E;
     REP #$20                                                   ;829386|C220    |      ;
     LDA.W #$0052                                               ;829388|A95200  |      ;
     LDX.W nTileInFrontOfPlayerX                                ;82938B|AE8509  |000985;
@@ -2803,11 +2803,11 @@ fToolUsedAction0x05_CornSeedBag:
     BNE .return                                                ;8299D5|D020    |8299F7;
     STZ.W $096B                                                ;8299D7|9C6B09  |00096B;
     SEP #$20                                                   ;8299DA|E220    |      ;
-    LDA.W nAmountLeft_CornSeeds                                ;8299DC|AD2809  |000928;
+    LDA.W strcPlayerData.leftCornSeeds                         ;8299DC|AD2809  |000928;
     DEC A                                                      ;8299DF|3A      |      ;
-    STA.W nAmountLeft_CornSeeds                                ;8299E0|8D2809  |000928;
+    STA.W strcPlayerData.leftCornSeeds                         ;8299E0|8D2809  |000928;
     BNE +                                                      ;8299E3|D003    |8299E8;
-    STZ.W nToolEquipped                                        ;8299E5|9C2109  |000921;
+    STZ.W strcPlayerData.toolEquipped                          ;8299E5|9C2109  |000921;
  
   + %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;8299EF|E220    |      ;
@@ -2852,11 +2852,11 @@ fToolUsedAction0x06_TomatoSeedBag:
     BNE .return                                                ;829A34|D020    |829A56;
     STZ.W $096B                                                ;829A36|9C6B09  |00096B;
     SEP #$20                                                   ;829A39|E220    |      ;
-    LDA.W nAmountLeft_TomatoSeeds                              ;829A3B|AD2909  |000929;
+    LDA.W strcPlayerData.leftTomatoSeeds                       ;829A3B|AD2909  |000929;
     DEC A                                                      ;829A3E|3A      |      ;
-    STA.W nAmountLeft_TomatoSeeds                              ;829A3F|8D2909  |000929;
+    STA.W strcPlayerData.leftTomatoSeeds                       ;829A3F|8D2909  |000929;
     BNE +                                                      ;829A42|D003    |829A47;
-    STZ.W nToolEquipped                                        ;829A44|9C2109  |000921;
+    STZ.W strcPlayerData.toolEquipped                          ;829A44|9C2109  |000921;
  
   + %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;829A4E|E220    |      ;
@@ -2900,11 +2900,11 @@ fToolUsedAction0x07_PotatoSeedBag:
     BNE .return                                                ;829A91|D020    |829AB3;
     STZ.W $096B                                                ;829A93|9C6B09  |00096B;
     SEP #$20                                                   ;829A96|E220    |      ;
-    LDA.W nAmountLeft_PotatoSeeds                              ;829A98|AD2A09  |00092A;
+    LDA.W strcPlayerData.leftPotatoSeeds                       ;829A98|AD2A09  |00092A;
     DEC A                                                      ;829A9B|3A      |      ;
-    STA.W nAmountLeft_PotatoSeeds                              ;829A9C|8D2A09  |00092A;
+    STA.W strcPlayerData.leftPotatoSeeds                       ;829A9C|8D2A09  |00092A;
     BNE +                                                      ;829A9F|D003    |829AA4;
-    STZ.W nToolEquipped                                        ;829AA1|9C2109  |000921;
+    STZ.W strcPlayerData.toolEquipped                          ;829AA1|9C2109  |000921;
  
   + %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;829AAB|E220    |      ;
@@ -2948,11 +2948,11 @@ fToolUsedAction0x08_TurnipSeedBag:
     BNE .return                                                ;829AEE|D020    |829B10;
     STZ.W $096B                                                ;829AF0|9C6B09  |00096B;
     SEP #$20                                                   ;829AF3|E220    |      ;
-    LDA.W nAmountLeft_TurnipSeeds                              ;829AF5|AD2B09  |00092B;
+    LDA.W strcPlayerData.leftTurnipSeeds                       ;829AF5|AD2B09  |00092B;
     DEC A                                                      ;829AF8|3A      |      ;
-    STA.W nAmountLeft_TurnipSeeds                              ;829AF9|8D2B09  |00092B;
+    STA.W strcPlayerData.leftTurnipSeeds                       ;829AF9|8D2B09  |00092B;
     BNE +                                                      ;829AFC|D003    |829B01;
-    STZ.W nToolEquipped                                        ;829AFE|9C2109  |000921;
+    STZ.W strcPlayerData.toolEquipped                          ;829AFE|9C2109  |000921;
  
   + %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;829B08|E220    |      ;
@@ -2966,7 +2966,7 @@ fToolUsedAction0x08_TurnipSeedBag:
 fToolUsedAction0x09_CowMedicine:
     %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;829B18|E220    |      ;
-    STZ.W nToolEquipped                                        ;829B1A|9C2109  |000921;
+    STZ.W strcPlayerData.toolEquipped                          ;829B1A|9C2109  |000921;
     LDA.B #$FF                                                 ;829B1D|A9FF    |      ;
     JSL.L fPlayerEnergyHandler                                 ;829B1F|2261D081|81D061;
     REP #$20                                                   ;829B23|C220    |      ;
@@ -2977,7 +2977,7 @@ fToolUsedAction0x09_CowMedicine:
 fToolUsedAction0x0A_MiraclePotion:
     %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;829B38|E220    |      ;
-    STZ.W nToolEquipped                                        ;829B3A|9C2109  |000921;
+    STZ.W strcPlayerData.toolEquipped                          ;829B3A|9C2109  |000921;
     LDA.B #$FF                                                 ;829B3D|A9FF    |      ;
     JSL.L fPlayerEnergyHandler                                 ;829B3F|2261D081|81D061;
     REP #$20                                                   ;829B43|C220    |      ;
@@ -3031,11 +3031,11 @@ fToolUsedAction0x0C_GrassSeedBag:
     BNE .return                                                ;829BA8|D020    |829BCA;
     STZ.W $096B                                                ;829BAA|9C6B09  |00096B;
     SEP #$20                                                   ;829BAD|E220    |      ;
-    LDA.W nAmountLeft_GrassSeeds                               ;829BAF|AD2709  |000927;
+    LDA.W strcPlayerData.leftGrassSeeds                        ;829BAF|AD2709  |000927;
     DEC A                                                      ;829BB2|3A      |      ;
-    STA.W nAmountLeft_GrassSeeds                               ;829BB3|8D2709  |000927;
+    STA.W strcPlayerData.leftGrassSeeds                        ;829BB3|8D2709  |000927;
     BNE +                                                      ;829BB6|D003    |829BBB;
-    STZ.W nToolEquipped                                        ;829BB8|9C2109  |000921;
+    STZ.W strcPlayerData.toolEquipped                          ;829BB8|9C2109  |000921;
  
   + %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;829BC2|E220    |      ;
@@ -3167,10 +3167,10 @@ fToolUsedAction0x10_WateringCan:
     SEP #$20                                                   ;829CF1|E220    |      ;
     CMP.B #$02                                                 ;829CF3|C902    |      ;
     BEQ .return                                                ;829CF5|F03B    |829D32;
-    LDA.W nAmountLeft_Water                                    ;829CF7|AD2609  |000926;
+    LDA.W strcPlayerData.leftWater                             ;829CF7|AD2609  |000926;
     BEQ .return                                                ;829CFA|F036    |829D32;
     DEC A                                                      ;829CFC|3A      |      ;
-    STA.W nAmountLeft_Water                                    ;829CFD|8D2609  |000926;
+    STA.W strcPlayerData.leftWater                             ;829CFD|8D2609  |000926;
     JSR.W fToolusedUnknown_8292A0                              ;829D00|20A092  |8292A0;
     BNE +                                                      ;829D03|D003    |829D08;
     JMP.W .return                                              ;829D05|4C329D  |829D32;
@@ -3260,9 +3260,9 @@ fToolUsedAction0x11_GoldenSickle:
     LDA.W #$0001                                               ;829D94|A90100  |      ;
     JSL.L fGameEngine_AddFeed                                  ;829D97|2253B283|83B253;
     REP #$20                                                   ;829D9B|C220    |      ;
-    LDA.W $092E                                                ;829D9D|AD2E09  |00092E;
+    LDA.W strcPlayerData.leftGrassToCut                        ;829D9D|AD2E09  |00092E;
     DEC A                                                      ;829DA0|3A      |      ;
-    STA.W $092E                                                ;829DA1|8D2E09  |00092E;
+    STA.W strcPlayerData.leftGrassToCut                        ;829DA1|8D2E09  |00092E;
     REP #$20                                                   ;829DA4|C220    |      ;
     LDA.W #$0052                                               ;829DA6|A95200  |      ;
     LDX.W nTileInFrontOfPlayerX                                ;829DA9|AE8509  |000985;
@@ -3907,7 +3907,7 @@ fToolUsedAction0x16_BeanstalkSeed:
     LDA.W #$0042                                               ;82A396|A94200  |      ;
     JSL.L fUnknownCF_SetPointer                                ;82A399|22E1A581|81A5E1;
     SEP #$20                                                   ;82A39D|E220    |      ;
-    STZ.W nToolEquipped                                        ;82A39F|9C2109  |000921;
+    STZ.W strcPlayerData.toolEquipped                          ;82A39F|9C2109  |000921;
  
   + %SetPlayerAction(!PACTION_NONE)
     RTS                                                        ;82A3A9|60      |      ;
@@ -3938,7 +3938,7 @@ fToolUsedAction0x17_BlueDiamond:
     REP #$30                                                   ;82A3E1|C230    |      ;
     %AIExecute($0000, $0012, $0000)
     SEP #$20                                                   ;82A3F0|E220    |      ;
-    STZ.W nToolEquipped                                        ;82A3F2|9C2109  |000921;
+    STZ.W strcPlayerData.toolEquipped                          ;82A3F2|9C2109  |000921;
  
   + %SetPlayerAction(!PACTION_NONE)
     RTS                                                        ;82A3FC|60      |      ;
@@ -3979,12 +3979,12 @@ fToolUsedAction0x19_ChickenFeed:
     ASL A                                                      ;82A44D|0A      |      ;
     TAX                                                        ;82A44E|AA      |      ;
     LDA.L nCowFeedFlagsTable,X                                 ;82A44F|BF71A582|82A571;
-    ORA.W sPlacedChickenFeed                                   ;82A453|0D3409  |000934;
-    STA.W sPlacedChickenFeed                                   ;82A456|8D3409  |000934;
+    ORA.W strcPlayerData.placedChickenFeedFlags                ;82A453|0D3409  |000934;
+    STA.W strcPlayerData.placedChickenFeedFlags                ;82A456|8D3409  |000934;
     SEP #$20                                                   ;82A459|E220    |      ;
-    LDA.W nPlacedChickenFeed                                   ;82A45B|AD3109  |000931;
+    LDA.W strcPlayerData.placedChcikenFeed                     ;82A45B|AD3109  |000931;
     INC A                                                      ;82A45E|1A      |      ;
-    STA.W nPlacedChickenFeed                                   ;82A45F|8D3109  |000931;
+    STA.W strcPlayerData.placedChcikenFeed                     ;82A45F|8D3109  |000931;
     REP #$20                                                   ;82A462|C220    |      ;
     LDA.W #$0099                                               ;82A464|A99900  |      ;
     LDX.W nTileInFrontOfPlayerX                                ;82A467|AE8509  |000985;
@@ -4015,11 +4015,11 @@ fToolUsedAction0x19_ChickenFeed:
  
 .label2:
     SEP #$20                                                   ;82A4A4|E220    |      ;
-    LDA.W nAmountLeft_ChickenFood                              ;82A4A6|AD2D09  |00092D;
+    LDA.W strcPlayerData.leftChickenFood                       ;82A4A6|AD2D09  |00092D;
     DEC A                                                      ;82A4A9|3A      |      ;
-    STA.W nAmountLeft_ChickenFood                              ;82A4AA|8D2D09  |00092D;
+    STA.W strcPlayerData.leftChickenFood                       ;82A4AA|8D2D09  |00092D;
     BNE +                                                      ;82A4AD|D003    |82A4B2;
-    STZ.W nToolEquipped                                        ;82A4AF|9C2109  |000921;
+    STZ.W strcPlayerData.toolEquipped                          ;82A4AF|9C2109  |000921;
  
   + SEP #$20                                                   ;82A4B2|E220    |      ;
     LDA.B #$FE                                                 ;82A4B4|A9FE    |      ;
@@ -4055,12 +4055,12 @@ fToolUsedAction0x1A_CowFeed:
     ASL A                                                      ;82A4FB|0A      |      ;
     TAX                                                        ;82A4FC|AA      |      ;
     LDA.L nCowFeedFlagsTable,X                                 ;82A4FD|BF71A582|82A571;
-    ORA.W sPlacedCowFeed                                       ;82A501|0D3209  |000932;
-    STA.W sPlacedCowFeed                                       ;82A504|8D3209  |000932;
+    ORA.W strcPlayerData.placedCowFeedFlags                    ;82A501|0D3209  |000932;
+    STA.W strcPlayerData.placedCowFeedFlags                    ;82A504|8D3209  |000932;
     SEP #$20                                                   ;82A507|E220    |      ;
-    LDA.W nPlacedCowFeed                                       ;82A509|AD3009  |000930;
+    LDA.W strcPlayerData.placedCowFeed                         ;82A509|AD3009  |000930;
     INC A                                                      ;82A50C|1A      |      ;
-    STA.W nPlacedCowFeed                                       ;82A50D|8D3009  |000930;
+    STA.W strcPlayerData.placedCowFeed                         ;82A50D|8D3009  |000930;
     REP #$20                                                   ;82A510|C220    |      ;
     LDA.W #$0099                                               ;82A512|A99900  |      ;
     LDX.W nTileInFrontOfPlayerX                                ;82A515|AE8509  |000985;
@@ -4091,11 +4091,11 @@ fToolUsedAction0x1A_CowFeed:
  
 .label2:
     SEP #$20                                                   ;82A552|E220    |      ;
-    LDA.W nAmountLeft_CowFood                                  ;82A554|AD2C09  |00092C;
+    LDA.W strcPlayerData.leftCowFood                           ;82A554|AD2C09  |00092C;
     DEC A                                                      ;82A557|3A      |      ;
-    STA.W nAmountLeft_CowFood                                  ;82A558|8D2C09  |00092C;
+    STA.W strcPlayerData.leftCowFood                           ;82A558|8D2C09  |00092C;
     BNE +                                                      ;82A55B|D003    |82A560;
-    STZ.W nToolEquipped                                        ;82A55D|9C2109  |000921;
+    STZ.W strcPlayerData.toolEquipped                          ;82A55D|9C2109  |000921;
  
   + %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;82A567|E220    |      ;
@@ -4439,9 +4439,9 @@ fObjectMap_HuricaneDamage:
  
 .label4:
     REP #$30                                                   ;82A7AD|C230    |      ;
-    LDA.W $092E                                                ;82A7AF|AD2E09  |00092E;
+    LDA.W strcPlayerData.leftGrassToCut                        ;82A7AF|AD2E09  |00092E;
     DEC A                                                      ;82A7B2|3A      |      ;
-    STA.W $092E                                                ;82A7B3|8D2E09  |00092E;
+    STA.W strcPlayerData.leftGrassToCut                        ;82A7B3|8D2E09  |00092E;
     BRA .label3                                                ;82A7B6|80CC    |82A784;
  
  
@@ -4743,7 +4743,7 @@ fObjectMap_EatingGrass:
     LDA.B #$04                                                 ;82A9A4|A904    |      ;
     STA.W nCurrentMapdata_RoomWidthMult                        ;82A9A6|8D8101  |000181;
     REP #$20                                                   ;82A9A9|C220    |      ;
-    STZ.W $092E                                                ;82A9AB|9C2E09  |00092E;
+    STZ.W strcPlayerData.leftGrassToCut                        ;82A9AB|9C2E09  |00092E;
     LDY.W #$0000                                               ;82A9AE|A00000  |      ;
  
  -- LDX.W #$0000                                               ;82A9B1|A20000  |      ;
@@ -4770,15 +4770,15 @@ fObjectMap_EatingGrass:
     LDA.B #$7A                                                 ;82A9D7|A97A    |      ;
     STA.L sFarmTilemap,X                                       ;82A9D9|9FE6A47E|7EA4E6;
     REP #$20                                                   ;82A9DD|C220    |      ;
-    LDA.W $092E                                                ;82A9DF|AD2E09  |00092E;
+    LDA.W strcPlayerData.leftGrassToCut                        ;82A9DF|AD2E09  |00092E;
     INC A                                                      ;82A9E2|1A      |      ;
-    STA.W $092E                                                ;82A9E3|8D2E09  |00092E;
+    STA.W strcPlayerData.leftGrassToCut                        ;82A9E3|8D2E09  |00092E;
  
 .label1:
     REP #$30                                                   ;82A9E6|C230    |      ;
     PLX                                                        ;82A9E8|FA      |      ;
     PLY                                                        ;82A9E9|7A      |      ;
-    LDA.W $092E                                                ;82A9EA|AD2E09  |00092E;
+    LDA.W strcPlayerData.leftGrassToCut                        ;82A9EA|AD2E09  |00092E;
     BNE .justReturn                                            ;82A9ED|D01C    |82AA0B;
     TXA                                                        ;82A9EF|8A      |      ;
     CLC                                                        ;82A9F0|18      |      ;
@@ -4866,7 +4866,7 @@ fObjectMap_CalculateRanchDev:
 fSound_GetToolSound:
     SEP #$20                                                   ;82AA71|E220    |      ; X: nTileX, Y: nTileY, return A: nToolSoundId (0/1/2)
     REP #$10                                                   ;82AA73|C210    |      ;
-    LDA.W nToolEquipped                                        ;82AA75|AD2109  |000921;
+    LDA.W strcPlayerData.toolEquipped                          ;82AA75|AD2109  |000921;
     CMP.B #$01                                                 ;82AA78|C901    |      ;
     BEQ .sickle                                                ;82AA7A|F069    |82AAE5;
     CMP.B #$11                                                 ;82AA7C|C911    |      ;
@@ -5351,7 +5351,7 @@ fUnknown_82AD0E:
  
   + DEY                                                        ;82AD96|88      |      ;
     LDA.B [strcMap.pSelected],Y                                ;82AD97|B70D    |00000D;
-    STA.W $091F                                                ;82AD99|8D1F09  |00091F;
+    STA.W strcPlayerData.unkMap91F                             ;82AD99|8D1F09  |00091F;
     REP #$20                                                   ;82AD9C|C220    |      ;
     TXA                                                        ;82AD9E|8A      |      ;
     ASL A                                                      ;82AD9F|0A      |      ;
@@ -5367,7 +5367,7 @@ fUnknown_82AD0E:
     TAX                                                        ;82ADB1|AA      |      ;
     SEP #$20                                                   ;82ADB2|E220    |      ;
     LDA.L aInteractionItemTable,X                              ;82ADB4|BFB4CF82|82CFB4;
-    STA.W nCarryItem_Current                                   ;82ADB8|8D1D09  |00091D;
+    STA.W strcPlayerData.carryItemId                           ;82ADB8|8D1D09  |00091D;
     %SetPlayerAction(!PACTION_ITEMONHAND)
     JMP.W .justReturn                                          ;82ADC2|4CE5AE  |82AEE5;
  
@@ -6880,13 +6880,13 @@ fUnknown_82D1C0:
     STA.L strcShedItems.row3                                   ;82D274|8F021F7F|7F1F02;
     LDA.B #$00                                                 ;82D278|A900    |      ;
     STA.L strcShedItems.row4                                   ;82D27A|8F031F7F|7F1F03;
-    STZ.W nToolEquipped                                        ;82D27E|9C2109  |000921;
-    STZ.W nToolSecond                                          ;82D281|9C2309  |000923;
+    STZ.W strcPlayerData.toolEquipped                          ;82D27E|9C2109  |000921;
+    STZ.W strcPlayerData.toolSecond                            ;82D281|9C2309  |000923;
     LDA.B #$01                                                 ;82D284|A901    |      ;
-    STA.W nAmountLeft_GrassSeeds                               ;82D286|8D2709  |000927;
-    STA.W nAmountLeft_TurnipSeeds                              ;82D289|8D2B09  |00092B;
-    STA.W nAmountLeft_CornSeeds                                ;82D28C|8D2809  |000928;
-    STA.W nAmountLeft_TomatoSeeds                              ;82D28F|8D2909  |000929;
+    STA.W strcPlayerData.leftGrassSeeds                        ;82D286|8D2709  |000927;
+    STA.W strcPlayerData.leftTurnipSeeds                       ;82D289|8D2B09  |00092B;
+    STA.W strcPlayerData.leftCornSeeds                         ;82D28C|8D2809  |000928;
+    STA.W strcPlayerData.leftTomatoSeeds                       ;82D28F|8D2909  |000929;
     REP #$20                                                   ;82D292|C220    |      ;
     STZ.W strcObjectData.exist                                 ;82D294|9C1509  |000915;
     STZ.B strcPlayer.flags                                     ;82D297|64D2    |0000D2;
@@ -6908,11 +6908,11 @@ fUnknown_82D1C0:
     LDA.B #$00                                                 ;82D2C9|A900    |      ;
     STA.L nCurrentSeasonID                                     ;82D2CB|8F191F7F|7F1F19;
     SEP #$20                                                   ;82D2CF|E220    |      ;
-    STZ.W nCarryItem_Current                                   ;82D2D1|9C1D09  |00091D;
+    STZ.W strcPlayerData.carryItemId                           ;82D2D1|9C1D09  |00091D;
     %UnsetPlayerFlag(!PFLAGS_HOLDINGITEM)
     REP #$30                                                   ;82D2E0|C230    |      ;
-    STZ.W sPlacedCowFeed                                       ;82D2E2|9C3209  |000932;
-    STZ.W sPlacedChickenFeed                                   ;82D2E5|9C3409  |000934;
+    STZ.W strcPlayerData.placedCowFeedFlags                    ;82D2E2|9C3209  |000932;
+    STZ.W strcPlayerData.placedChickenFeedFlags                ;82D2E5|9C3409  |000934;
     %UnsetFlag(daily2, ~$FFFB)
     JSL.L fCore_ZeroVRAM                                       ;82D2F3|22468880|808846;
     JSL.L fCore_ZeroCGRAM                                      ;82D2F7|22808980|808980;
@@ -7047,11 +7047,11 @@ fMainMenu_AutoHowToPlay:
     STA.L strcShedItems.row3                                   ;82D473|8F021F7F|7F1F02;
     LDA.B #$00                                                 ;82D477|A900    |      ;
     STA.L strcShedItems.row4                                   ;82D479|8F031F7F|7F1F03;
-    STZ.W nToolEquipped                                        ;82D47D|9C2109  |000921;
-    STZ.W nToolSecond                                          ;82D480|9C2309  |000923;
+    STZ.W strcPlayerData.toolEquipped                          ;82D47D|9C2109  |000921;
+    STZ.W strcPlayerData.toolSecond                            ;82D480|9C2309  |000923;
     LDA.B #$01                                                 ;82D483|A901    |      ;
-    STA.W nAmountLeft_GrassSeeds                               ;82D485|8D2709  |000927;
-    STA.W nAmountLeft_TurnipSeeds                              ;82D488|8D2B09  |00092B;
+    STA.W strcPlayerData.leftGrassSeeds                        ;82D485|8D2709  |000927;
+    STA.W strcPlayerData.leftTurnipSeeds                       ;82D488|8D2B09  |00092B;
     REP #$20                                                   ;82D48B|C220    |      ;
     STZ.W nAIJoypadInput                                       ;82D48D|9CFD08  |0008FD;
     STZ.W nAISteeringCounter                                   ;82D490|9CFF08  |0008FF;
@@ -7076,11 +7076,11 @@ fMainMenu_AutoHowToPlay:
     LDA.B #$00                                                 ;82D4CA|A900    |      ;
     STA.L nCurrentSeasonID                                     ;82D4CC|8F191F7F|7F1F19;
     SEP #$20                                                   ;82D4D0|E220    |      ;
-    STZ.W nCarryItem_Current                                   ;82D4D2|9C1D09  |00091D;
+    STZ.W strcPlayerData.carryItemId                           ;82D4D2|9C1D09  |00091D;
     %UnsetPlayerFlag(!PFLAGS_HOLDINGITEM)
     REP #$30                                                   ;82D4E1|C230    |      ;
-    STZ.W sPlacedCowFeed                                       ;82D4E3|9C3209  |000932;
-    STZ.W sPlacedChickenFeed                                   ;82D4E6|9C3409  |000934;
+    STZ.W strcPlayerData.placedCowFeedFlags                    ;82D4E3|9C3209  |000932;
+    STZ.W strcPlayerData.placedChickenFeedFlags                ;82D4E6|9C3409  |000934;
     %UnsetFlag(daily2, ~$FFFB)
     JSL.L fCore_ZeroVRAM                                       ;82D4F4|22468880|808846;
     JSL.L fCore_ZeroCGRAM                                      ;82D4F8|22808980|808980;

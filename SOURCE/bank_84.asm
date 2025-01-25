@@ -2609,9 +2609,9 @@ fAIAction0x2D:
  
  
   + SEP #$20                                                   ;8496B0|E220    |      ;
-    LDA.W nCarryItem_Current                                   ;8496B2|AD1D09  |00091D;
+    LDA.W strcPlayerData.carryItemId                           ;8496B2|AD1D09  |00091D;
     BEQ .continue                                              ;8496B5|F00D    |8496C4;
-    STA.W nCarryItem_Previous                                  ;8496B7|8D1E09  |00091E;
+    STA.W strcPlayerData.carryItemIdPrev                       ;8496B7|8D1E09  |00091E;
     %AIMoveAction($0002)
  
 .continue:
@@ -2883,7 +2883,7 @@ fAIAction0x30_UpdateChicken:
  
  
   + SEP #$20                                                   ;849922|E220    |      ;
-    LDA.W nCarryItem_Current                                   ;849924|AD1D09  |00091D;
+    LDA.W strcPlayerData.carryItemId                           ;849924|AD1D09  |00091D;
     BEQ +                                                      ;849927|F003    |84992C;
     JMP.W .label1                                              ;849929|4CC899  |8499C8;
  
@@ -2909,7 +2909,7 @@ fAIAction0x30_UpdateChicken:
     REP #$10                                                   ;84994B|C210    |      ;
     LDY.W #$003F                                               ;84994D|A03F00  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;849950|B7CC    |0000CC;
-    STA.W $0920                                                ;849952|8D2009  |000920;
+    STA.W strcPlayerData.nAiArg                                ;849952|8D2009  |000920;
     SEP #$20                                                   ;849955|E220    |      ;
     REP #$10                                                   ;849957|C210    |      ;
     LDY.W #$0000                                               ;849959|A00000  |      ;
@@ -2944,7 +2944,9 @@ fAIAction0x30_UpdateChicken:
     LDA.B [ptrUnknown0x72],Y                                   ;849996|B772    |000072;
     AND.B #$04                                                 ;849998|2904    |      ;
     BEQ +                                                      ;84999A|F00F    |8499AB;
-    %SetCurrentCarriedItemDirect($26)
+    SEP #$20                                                   ;84999C|E220    |      ;
+    LDA.B #$26                                                 ;84999E|A926    |      ;
+    STA.W strcPlayerData.carryItemId                           ;8499A0|8D1D09  |00091D;
     %SetPlayerAction(!PACTION_ITEMONHAND)
     RTS                                                        ;8499AA|60      |      ;
  
@@ -2957,7 +2959,9 @@ fAIAction0x30_UpdateChicken:
     JMP.W .label2                                              ;8499B6|4C419A  |849A41;
  
  
-  + %SetCurrentCarriedItemDirect($25)
+  + SEP #$20                                                   ;8499B9|E220    |      ;
+    LDA.B #$25                                                 ;8499BB|A925    |      ;
+    STA.W strcPlayerData.carryItemId                           ;8499BD|8D1D09  |00091D;
     %SetPlayerAction(!PACTION_ITEMONHAND)
     RTS                                                        ;8499C7|60      |      ;
  
@@ -3491,7 +3495,7 @@ fUnknown_ToFarm:
 .label18:
     SEP #$20                                                   ;849DBE|E220    |      ;
     REP #$10                                                   ;849DC0|C210    |      ;
-    LDA.W nToolEquipped                                        ;849DC2|AD2109  |000921;
+    LDA.W strcPlayerData.toolEquipped                          ;849DC2|AD2109  |000921;
     BNE +                                                      ;849DC5|D003    |849DCA;
     JMP.W .continue                                            ;849DC7|4CB9A0  |84A0B9;
  
@@ -3550,18 +3554,24 @@ fUnknown_ToFarm:
     LDA.B [ptrUnknown0x72],Y                                   ;849E1A|B772    |000072;
     ORA.B #$02                                                 ;849E1C|0902    |      ;
     STA.B [ptrUnknown0x72],Y                                   ;849E1E|9772    |000072;
-    %SetCurrentCarriedItemDirect(!EITEM_SPRINKLER)
+    SEP #$20                                                   ;849E20|E220    |      ;
+    LDA.B #!EITEM_SPRINKLER                                                 
+    STA.W strcPlayerData.carryItemId                           ;849E24|8D1D09  |00091D;
     LDY.W #$0004                                               ;849E27|A00400  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;849E2A|B772    |000072;
     CMP.B #$60                                                 ;849E2C|C960    |      ;
     BCC .label20                                               ;849E2E|9014    |849E44;
     CMP.B #$C0                                                 ;849E30|C9C0    |      ;
     BCC +                                                      ;849E32|9009    |849E3D;
-    %SetCurrentCarriedItemDirect(!EITEM_BLUEDIAMOND)
+    SEP #$20                                                   ;849E34|E220    |      ;
+    LDA.B #!EITEM_BLUEDIAMOND                                                 
+    STA.W strcPlayerData.carryItemId                           ;849E38|8D1D09  |00091D;
     BRA .label20                                               ;849E3B|8007    |849E44;
  
  
-  + %SetCurrentCarriedItemDirect(!EITEM_BEANSTALKSEED)
+  + SEP #$20                                                   ;849E3D|E220    |      ;
+    LDA.B #!EITEM_BEANSTALKSEED                                                 
+    STA.W strcPlayerData.carryItemId                           ;849E41|8D1D09  |00091D;
  
 .label20:
     %SetPlayerAction(!PACTION_ITEMONHAND)
@@ -5170,7 +5180,7 @@ fAIAction0x33_UpdateMole:
  
  
   + SEP #$20                                                   ;84A9CD|E220    |      ;
-    LDA.W nCarryItem_Current                                   ;84A9CF|AD1D09  |00091D;
+    LDA.W strcPlayerData.carryItemId                           ;84A9CF|AD1D09  |00091D;
     BEQ +                                                      ;84A9D2|F003    |84A9D7;
     JMP.W .label1                                              ;84A9D4|4C1EAA  |84AA1E;
  
@@ -5179,7 +5189,7 @@ fAIAction0x33_UpdateMole:
     REP #$10                                                   ;84A9D9|C210    |      ;
     LDY.W #$003F                                               ;84A9DB|A03F00  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;84A9DE|B7CC    |0000CC;
-    STA.W $0920                                                ;84A9E0|8D2009  |000920;
+    STA.W strcPlayerData.nAiArg                                ;84A9E0|8D2009  |000920;
     SEP #$20                                                   ;84A9E3|E220    |      ;
     REP #$10                                                   ;84A9E5|C210    |      ;
     LDY.W #$0000                                               ;84A9E7|A00000  |      ;
@@ -5200,7 +5210,9 @@ fAIAction0x33_UpdateMole:
     CLC                                                        ;84AA09|18      |      ;
     ADC.W #$0001                                               ;84AA0A|690100  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;84AA0D|97CC    |0000CC;
-    %SetCurrentCarriedItemDirect($29)
+    SEP #$20                                                   ;84AA0F|E220    |      ;
+    LDA.B #$29                                                 ;84AA11|A929    |      ;
+    STA.W strcPlayerData.carryItemId                           ;84AA13|8D1D09  |00091D;
     %SetPlayerAction(!PACTION_ITEMONHAND)
     RTS                                                        ;84AA1D|60      |      ;
  
@@ -5294,7 +5306,7 @@ fAIAction0x34:
  
  
   + SEP #$20                                                   ;84AAC8|E220    |      ;
-    LDA.W nCarryItem_Current                                   ;84AACA|AD1D09  |00091D;
+    LDA.W strcPlayerData.carryItemId                           ;84AACA|AD1D09  |00091D;
     BEQ +                                                      ;84AACD|F003    |84AAD2;
     JMP.W .return                                              ;84AACF|4C19AB  |84AB19;
  
@@ -5303,7 +5315,7 @@ fAIAction0x34:
     REP #$10                                                   ;84AAD4|C210    |      ;
     LDY.W #$003F                                               ;84AAD6|A03F00  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;84AAD9|B7CC    |0000CC;
-    STA.W $0920                                                ;84AADB|8D2009  |000920;
+    STA.W strcPlayerData.nAiArg                                ;84AADB|8D2009  |000920;
     SEP #$20                                                   ;84AADE|E220    |      ;
     REP #$10                                                   ;84AAE0|C210    |      ;
     LDY.W #$0000                                               ;84AAE2|A00000  |      ;
@@ -5324,7 +5336,9 @@ fAIAction0x34:
     CLC                                                        ;84AB04|18      |      ;
     ADC.W #$0001                                               ;84AB05|690100  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;84AB08|97CC    |0000CC;
-    %SetCurrentCarriedItemDirect(!EITEM_POTATOSEED)
+    SEP #$20                                                   ;84AB0A|E220    |      ;
+    LDA.B #!EITEM_POTATOSEED                                                 
+    STA.W strcPlayerData.carryItemId                           ;84AB0E|8D1D09  |00091D;
     %SetPlayerAction(!PACTION_ITEMONHAND)
     RTS                                                        ;84AB18|60      |      ;
  
@@ -5906,7 +5920,7 @@ fAIAction0x36_UpdateDog:
  
  
   + SEP #$20                                                   ;84AF8A|E220    |      ;
-    LDA.W nCarryItem_Current                                   ;84AF8C|AD1D09  |00091D;
+    LDA.W strcPlayerData.carryItemId                           ;84AF8C|AD1D09  |00091D;
     BEQ +                                                      ;84AF8F|F003    |84AF94;
     JMP.W .label1                                              ;84AF91|4CF4AF  |84AFF4;
  
@@ -6566,7 +6580,7 @@ fAIAction0x3B:
     %AIMoveAction($0001)
     SEP #$20                                                   ;84B4E8|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B4EA|A7C9    |0000C9;
-    STA.W nCarryItem_Current                                   ;84B4EC|8D1D09  |00091D;
+    STA.W strcPlayerData.carryItemId                           ;84B4EC|8D1D09  |00091D;
     %AIMoveAction($0001)
     %SetPlayerFlag(!PFLAGS_HOLDINGITEM)
     RTS                                                        ;84B502|60      |      ;
@@ -6605,7 +6619,7 @@ fAIAction0x3E:
     %AIMoveAction($0001)
     SEP #$20                                                   ;84B562|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84B564|A7C9    |0000C9;
-    STA.W nCarryItem_Current                                   ;84B566|8D1D09  |00091D;
+    STA.W strcPlayerData.carryItemId                           ;84B566|8D1D09  |00091D;
     %AIMoveAction($0001)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     RTS                                                        ;84B57A|60      |      ;
@@ -7006,7 +7020,7 @@ fAIAction0x4A:
  
  
   + SEP #$20                                                   ;84B9BD|E220    |      ;
-    LDA.W nCarryItem_Current                                   ;84B9BF|AD1D09  |00091D;
+    LDA.W strcPlayerData.carryItemId                           ;84B9BF|AD1D09  |00091D;
     BEQ +                                                      ;84B9C2|F003    |84B9C7;
     JMP.W .return                                              ;84B9C4|4C02BA  |84BA02;
  
@@ -7031,7 +7045,9 @@ fAIAction0x4A:
     CLC                                                        ;84B9ED|18      |      ;
     ADC.W #$0001                                               ;84B9EE|690100  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;84B9F1|97CC    |0000CC;
-    %SetCurrentCarriedItemDirect(!EITEM_TURNIPSEED)
+    SEP #$20                                                   ;84B9F3|E220    |      ;
+    LDA.B #!EITEM_TURNIPSEED                                                 
+    STA.W strcPlayerData.carryItemId                           ;84B9F7|8D1D09  |00091D;
     %SetPlayerAction(!PACTION_ITEMONHAND)
     RTS                                                        ;84BA01|60      |      ;
  
@@ -7190,7 +7206,7 @@ fAIAction0x4F:
     SEP #$20                                                   ;84BB65|E220    |      ;
     LDA.B #$00                                                 ;84BB67|A900    |      ;
     XBA                                                        ;84BB69|EB      |      ;
-    LDA.W nToolEquipped                                        ;84BB6A|AD2109  |000921;
+    LDA.W strcPlayerData.toolEquipped                          ;84BB6A|AD2109  |000921;
     BEQ +                                                      ;84BB6D|F02F    |84BB9E;
     REP #$20                                                   ;84BB6F|C220    |      ;
     ASL A                                                      ;84BB71|0A      |      ;
@@ -7215,13 +7231,13 @@ fAIAction0x4F:
     LDA.L strcShedItems,X                                      ;84BB91|BF001F7F|7F1F00;
     ORA.B n8TempVar1                                           ;84BB95|0592    |000092;
     STA.L strcShedItems,X                                      ;84BB97|9F001F7F|7F1F00;
-    STZ.W nToolEquipped                                        ;84BB9B|9C2109  |000921;
+    STZ.W strcPlayerData.toolEquipped                          ;84BB9B|9C2109  |000921;
  
   + SEP #$20                                                   ;84BB9E|E220    |      ;
     REP #$10                                                   ;84BBA0|C210    |      ;
     LDA.B #$00                                                 ;84BBA2|A900    |      ;
     XBA                                                        ;84BBA4|EB      |      ;
-    LDA.W nToolSecond                                          ;84BBA5|AD2309  |000923;
+    LDA.W strcPlayerData.toolSecond                            ;84BBA5|AD2309  |000923;
     BEQ .return                                                ;84BBA8|F02F    |84BBD9;
     REP #$20                                                   ;84BBAA|C220    |      ;
     ASL A                                                      ;84BBAC|0A      |      ;
@@ -7246,7 +7262,7 @@ fAIAction0x4F:
     LDA.L strcShedItems,X                                      ;84BBCC|BF001F7F|7F1F00;
     ORA.B n8TempVar1                                           ;84BBD0|0592    |000092;
     STA.L strcShedItems,X                                      ;84BBD2|9F001F7F|7F1F00;
-    STZ.W nToolSecond                                          ;84BBD6|9C2309  |000923;
+    STZ.W strcPlayerData.toolSecond                            ;84BBD6|9C2309  |000923;
  
 .return:
     RTS                                                        ;84BBD9|60      |      ;
@@ -7256,13 +7272,13 @@ fAIAction0x50:
     REP #$30                                                   ;84BBDA|C230    |      ;
     %AIMoveAction($0001)
     SEP #$20                                                   ;84BBE6|E220    |      ;
-    LDA.W nCarryItem_Current                                   ;84BBE8|AD1D09  |00091D;
+    LDA.W strcPlayerData.carryItemId                           ;84BBE8|AD1D09  |00091D;
     BEQ .label2                                                ;84BBEB|F06F    |84BC5C;
     CMP.B #$25                                                 ;84BBED|C925    |      ;
     BEQ .label1                                                ;84BBEF|F015    |84BC06;
     CMP.B #$26                                                 ;84BBF1|C926    |      ;
     BEQ .label1                                                ;84BBF3|F011    |84BC06;
-    STZ.W nCarryItem_Current                                   ;84BBF5|9C1D09  |00091D;
+    STZ.W strcPlayerData.carryItemId                           ;84BBF5|9C1D09  |00091D;
     REP #$30                                                   ;84BBF8|C230    |      ;
     LDA.W #$0000                                               ;84BBFA|A90000  |      ;
     CLC                                                        ;84BBFD|18      |      ;
@@ -7276,7 +7292,7 @@ fAIAction0x50:
     REP #$10                                                   ;84BC08|C210    |      ;
     LDA.B #$00                                                 ;84BC0A|A900    |      ;
     XBA                                                        ;84BC0C|EB      |      ;
-    LDA.W $0920                                                ;84BC0D|AD2009  |000920;
+    LDA.W strcPlayerData.nAiArg                                ;84BC0D|AD2009  |000920;
     SEC                                                        ;84BC10|38      |      ;
     SBC.B #$24                                                 ;84BC11|E924    |      ;
     REP #$20                                                   ;84BC13|C220    |      ;
@@ -7306,7 +7322,7 @@ fAIAction0x50:
     LDA.L aGameEngine_AddChickenPositionsData,X                ;84BC44|BF10CA83|83CA10;
     STA.B [ptrUnknown0x72],Y                                   ;84BC48|9772    |000072;
     SEP #$20                                                   ;84BC4A|E220    |      ;
-    STZ.W nCarryItem_Current                                   ;84BC4C|9C1D09  |00091D;
+    STZ.W strcPlayerData.carryItemId                           ;84BC4C|9C1D09  |00091D;
     REP #$30                                                   ;84BC4F|C230    |      ;
     LDA.W #$0000                                               ;84BC51|A90000  |      ;
     CLC                                                        ;84BC54|18      |      ;
@@ -7346,7 +7362,7 @@ fAIAction0x51:
     REP #$30                                                   ;84BC9C|C230    |      ;
     %AIMoveAction($0001)
     SEP #$20                                                   ;84BCA8|E220    |      ;
-    LDA.W nCarryItem_Current                                   ;84BCAA|AD1D09  |00091D;
+    LDA.W strcPlayerData.carryItemId                           ;84BCAA|AD1D09  |00091D;
     BEQ .label3                                                ;84BCAD|F060    |84BD0F;
     CMP.B #$25                                                 ;84BCAF|C925    |      ;
     BEQ .label2                                                ;84BCB1|F011    |84BCC4;
@@ -7358,7 +7374,7 @@ fAIAction0x51:
  
  
 .label1:
-    STZ.W nCarryItem_Current                                   ;84BCBE|9C1D09  |00091D;
+    STZ.W strcPlayerData.carryItemId                           ;84BCBE|9C1D09  |00091D;
     JMP.W .return                                              ;84BCC1|4C43BD  |84BD43;
  
  
@@ -7367,7 +7383,7 @@ fAIAction0x51:
     REP #$10                                                   ;84BCC6|C210    |      ;
     LDA.B #$00                                                 ;84BCC8|A900    |      ;
     XBA                                                        ;84BCCA|EB      |      ;
-    LDA.W $0920                                                ;84BCCB|AD2009  |000920;
+    LDA.W strcPlayerData.nAiArg                                ;84BCCB|AD2009  |000920;
     SEC                                                        ;84BCCE|38      |      ;
     SBC.B #$24                                                 ;84BCCF|E924    |      ;
     REP #$20                                                   ;84BCD1|C220    |      ;
@@ -7397,7 +7413,7 @@ fAIAction0x51:
     LDA.L aGameEngine_AddChickenPositionsData,X                ;84BD02|BF10CA83|83CA10;
     STA.B [ptrUnknown0x72],Y                                   ;84BD06|9772    |000072;
     SEP #$20                                                   ;84BD08|E220    |      ;
-    STZ.W nCarryItem_Current                                   ;84BD0A|9C1D09  |00091D;
+    STZ.W strcPlayerData.carryItemId                           ;84BD0A|9C1D09  |00091D;
     BRA .return                                                ;84BD0D|8034    |84BD43;
  
  
@@ -7481,7 +7497,7 @@ fAIAction0x52:
  
  
   + SEP #$20                                                   ;84BDBB|E220    |      ;
-    LDA.W nCarryItem_Current                                   ;84BDBD|AD1D09  |00091D;
+    LDA.W strcPlayerData.carryItemId                           ;84BDBD|AD1D09  |00091D;
     BEQ +                                                      ;84BDC0|F003    |84BDC5;
     JMP.W .return                                              ;84BDC2|4CFFBD  |84BDFF;
  
@@ -7579,7 +7595,7 @@ fAIAction0x53:
  
  
   + SEP #$20                                                   ;84BE84|E220    |      ;
-    LDA.W nCarryItem_Current                                   ;84BE86|AD1D09  |00091D;
+    LDA.W strcPlayerData.carryItemId                           ;84BE86|AD1D09  |00091D;
     BEQ +                                                      ;84BE89|F003    |84BE8E;
     JMP.W .return                                              ;84BE8B|4CC8BE  |84BEC8;
  
@@ -7685,7 +7701,7 @@ fAIAction0x56_UseEquippedItem:
     REP #$30                                                   ;84BF81|C230    |      ;
     %AIMoveAction($0001)
     SEP #$20                                                   ;84BF8D|E220    |      ;
-    LDA.W nToolEquipped                                        ;84BF8F|AD2109  |000921;
+    LDA.W strcPlayerData.toolEquipped                          ;84BF8F|AD2109  |000921;
     BEQ .return                                                ;84BF92|F00B    |84BF9F;
     %SetPlayerAction(!PACTION_USINGTOOL)
     JSL.L fToolUsedAnimationHandler                            ;84BF9B|22A89082|8290A8;
@@ -9550,7 +9566,7 @@ fInput_SetPlayerAction0x0A:
     %CheckFlag(daily4, $8000)
     BNE fInput_Return84CDDC                                    ;84CDC8|D012    |84CDDC;
     SEP #$20                                                   ;84CDCA|E220    |      ;
-    LDA.W nToolEquipped                                        ;84CDCC|AD2109  |000921;
+    LDA.W strcPlayerData.toolEquipped                          ;84CDCC|AD2109  |000921;
     BEQ fInput_Return84CDDC                                    ;84CDCF|F00B    |84CDDC;
     %SetPlayerAction(!PACTION_USINGTOOL)
     JSL.L fToolUsedAnimationHandler                            ;84CDD8|22A89082|8290A8;
