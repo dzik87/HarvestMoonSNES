@@ -45,7 +45,7 @@ fCore_GameStart:
     LDA.B #$03                                                 ;80806F|A903    |      ;
     JSL.L fCore_GetRandomNumber                                ;808071|22F98980|8089F9;
     SEP #$20                                                   ;808075|E220    |      ;
-    STA.W nFoodToEat                                           ;808077|8D2409  |000924;
+    STA.W strcPlayerData.eatFood                               ;808077|8D2409  |000924;
     %SetPlayerFlag(!PFLAGS_EATINGMEAL)
  
 fCore_MainLoop:
@@ -3091,7 +3091,7 @@ fMap_SetupArea:
  
 .label9:
     SEP #$20                                                   ;809912|E220    |      ;
-    STZ.W $091C                                                ;809914|9C1C09  |00091C;
+    STZ.W strcPlayerData.unkCounter91C                         ;809914|9C1C09  |00091C;
     REP #$20                                                   ;809917|C220    |      ;
     %UnsetFlag(daily1, ~$FDFF)
     LDA.W #$0000                                               ;809924|A90000  |      ;
@@ -3103,14 +3103,14 @@ fMap_SetupArea:
     STA.W strcObjectData.playerY                               ;809935|8D0909  |000909;
     SEP #$20                                                   ;809938|E220    |      ;
     STZ.W $098A                                                ;80993A|9C8A09  |00098A;
-    STZ.W $0919                                                ;80993D|9C1909  |000919;
+    STZ.W strcPlayerData.unkCounter919                         ;80993D|9C1909  |000919;
     %UnsetPlayerFlag(!PFLAGS_INTRANSITION)
     REP #$20                                                   ;80994C|C220    |      ;
     STZ.W nAIJoypadInput                                       ;80994E|9CFD08  |0008FD;
     STZ.W nAISteeringCounter                                   ;809951|9CFF08  |0008FF;
     %UnsetPlayerFlag(!PFLAGS_AISTEERING)
     SEP #$20                                                   ;809960|E220    |      ;
-    LDA.W nCarryItem_Current                                   ;809962|AD1D09  |00091D;
+    LDA.W strcPlayerData.carryItemId                           ;809962|AD1D09  |00091D;
     BEQ .label11                                               ;809965|F055    |8099BC;
     CMP.B #!EITEM_PAINT                                                 
     BEQ .label10                                               ;809969|F046    |8099B1;
@@ -3153,7 +3153,7 @@ fMap_SetupArea:
  
 .label11:
     SEP #$20                                                   ;8099BC|E220    |      ;
-    STZ.W nCarryItem_Current                                   ;8099BE|9C1D09  |00091D;
+    STZ.W strcPlayerData.carryItemId                           ;8099BE|9C1D09  |00091D;
     %UnsetPlayerFlag(!PFLAGS_HOLDINGITEM)
  
 .label12:
@@ -4015,16 +4015,16 @@ fUnknown_809F61:
  
 .back:
     SEP #$20                                                   ;80A007|E220    |      ;
-    LDA.W $091C                                                ;80A009|AD1C09  |00091C;
+    LDA.W strcPlayerData.unkCounter91C                         ;80A009|AD1C09  |00091C;
     INC A                                                      ;80A00C|1A      |      ;
-    STA.W $091C                                                ;80A00D|8D1C09  |00091C;
+    STA.W strcPlayerData.unkCounter91C                         ;80A00D|8D1C09  |00091C;
     CMP.B #$0A                                                 ;80A010|C90A    |      ;
     BEQ .label12                                               ;80A012|F003    |80A017;
     JMP.W .return                                              ;80A014|4CAAA0  |80A0AA;
  
  
 .label12:
-    STZ.W $091C                                                ;80A017|9C1C09  |00091C;
+    STZ.W strcPlayerData.unkCounter91C                         ;80A017|9C1C09  |00091C;
     REP #$20                                                   ;80A01A|C220    |      ;
     LDA.W strcBGScrool.BG2HorOffs                              ;80A01C|AD4001  |000140;
     CLC                                                        ;80A01F|18      |      ;

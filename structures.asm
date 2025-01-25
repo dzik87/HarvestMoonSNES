@@ -196,7 +196,7 @@ endstruct
 
 
 ;
-;
+; ObjectData
 ;
 struct strcObjectData       $000901
     .spriteIdx              : skip 2    ; 901-902 x
@@ -211,6 +211,48 @@ struct strcObjectData       $000901
     .directionNew           : skip 2    ; 913-914
     .exist                  : skip 2    ; 915-916
 endstruct
+
+
+;
+; PlayerData
+;
+struct strcPlayerData       $000917
+    .stamina                : skip 1    ; 917
+    .energy                 : skip 1    ; 918
+    .unkCounter919          : skip 1    ; 919
+    .unkCounter91A          : skip 1    ; 91A
+    .unkCounter91B          : skip 1    ; 91B
+    .unkCounter91C          : skip 1    ; 91C
+    .carryItemId            : skip 1    ; 91D
+    .carryItemIdPrev        : skip 1    ; 91E
+    .unkMap91F              : skip 1    ; 91F
+    .nAiArg                 : skip 1    ; 920
+    .toolEquipped           : skip 1    ; 921
+    .toolSound              : skip 1    ; 922
+    .toolSecond             : skip 1    ; 923
+    .eatFood                : skip 1    ; 924
+    .lastExcercise          : skip 1    ; 925
+    .leftWater              : skip 1    ; 926
+    .leftGrassSeeds         : skip 1    ; 927
+    .leftCornSeeds          : skip 1    ; 928
+    .leftTomatoSeeds        : skip 1    ; 929
+    .leftPotatoSeeds        : skip 1    ; 92A
+    .leftTurnipSeeds        : skip 1    ; 92B
+    .leftCowFood            : skip 1    ; 92C
+    .leftChickenFood        : skip 1    ; 92D
+    .leftGrassToCut         : skip 2    ; 92E-92F
+    .placedCowFeed          : skip 1    ; 930
+    .placedChcikenFeed      : skip 1    ; 931
+    .placedCowFeedFlags     : skip 2    ; 932-933
+    .placedChickenFeedFlags : skip 2    ; 934-935
+endstruct
+
+; 936 not used
+
+;
+;
+;
+
 
 ;
 ; Size and start to be confirmed
