@@ -1,5 +1,25 @@
 ;
-; Size to be confirmed, start is 100% ok
+; 1-3       ptrCurrentDialog            ptr24
+;
+
+
+;
+; 4-5       ptrPaletteNext              ptr24
+;
+
+
+;
+; 7-9       ptrUnknown0x07              ptr24
+;
+
+
+;
+; A-C       ptrAudioData                ptr24
+;
+
+
+;
+; Size and start OK
 ;
 struct strcMap              $00000D
     .pSelected              : skip 3    ; 0D-0F     ptr24
@@ -13,7 +33,82 @@ struct strcMap              $00000D
     .unk20                  : skip 1    ; 20
     .unk21                  : skip 1    ; 21
     .loadAreaId             : skip 1    ; 22
-endstruct
+endstruct align 22
+
+
+;
+; Size and start OK - System stuff - require more attention to actually figure out what is what
+;
+struct strcSystem           $000023
+    .unk23                  : skip 1    ; 23
+    .unk24                  : skip 1    ; 24
+    .unk25                  : skip 1    ; 25
+    .unk26                  : skip 1    ; 26
+    .arrayIndex             : skip 1    ; 27
+    .unk28                  : skip 1    ; 28
+    .unk29                  : skip 1    ; 29
+    .array2A                : skip 1*8  ; 2A-31
+    .array32                : skip 2*8  ; 32-41
+endstruct align 31
+
+
+;
+; 42-71     ptrUnknown0x42              16 * ptr24
+;
+
+
+;
+; 72-74     ptrUnknown0x72              ptr24
+;
+
+
+;
+; 75-77     ptrUnknown0x75              ptr24
+;
+
+
+;
+; 78-7A     ptrObjectData               ptr24
+;
+
+
+;
+; 7B-7D not used
+;
+
+
+;
+; 7E - 91 Variables used everywhere
+;
+struct strcVariables        $00007E
+    .n16Temp1               : skip 2    ; 7E-7F
+    .n16Temp2               : skip 2    ; 80-81
+    .n16Temp3               : skip 2    ; 82-83
+    .n16Temp4               : skip 2    ; 84-85
+    .n16Unk86               : skip 2    ; 86-87
+    .n16Unk88               : skip 2    ; 88-89
+    .n16Unk8A               : skip 2    ; 8A-8B
+    .n16Unk8C               : skip 2    ; 8C-8D
+    .n16Unk8E               : skip 2    ; 8E-8F
+    .n16Unk90               : skip 2    ; 90-91
+    .n8Temp1                : skip 1    ; 92
+    .n8Temp2                : skip 1    ; 93
+    .n8Temp3                : skip 1    ; 94
+    .n8Temp4                : skip 1    ; 95
+    .u8Unk96                : skip 1    ; 96
+    .u8Unk97                : skip 1    ; 97
+endstruct align 26
+
+
+;
+; 98 not used
+;
+
+
+;
+; 99 - ???
+; 9A - written to SNES_MDMAEN (DMA Enable)
+;
 
 
 ;
@@ -38,7 +133,7 @@ endstruct
 
 
 ;
-; Size and start(99% sure its ok) to be confirmed
+; Size to be checkd and start OK
 ;
 struct strcPlayer           $0000D2
     .flags                  : skip 2    ; D2-D3
@@ -56,12 +151,12 @@ struct strcPlayer           $0000D2
     .unkPosX                : skip 2    ; E9-EA     unknown X
     .unkPosY                : skip 2    ; EB-EC     unknown Y
     .newCamX                : skip 2    ; ED-EE     new camera coords
-    .newCamY                : skip 2    ; EF-ED     new camera coords
+    .newCamY                : skip 2    ; EF-F0     new camera coords
 endstruct
 
 
 ;
-; Size to be confirmed, start is 100% ok
+; Size to be checkd and start OK
 ;
 struct strcAudio            $000103
     .index                  : skip 1    ; 103
@@ -79,7 +174,12 @@ endstruct
 
 
 ;
-; Joypad 1 controls
+; 117 - 123 ???
+;
+
+
+;
+; Size and start OK - Joypad 1 controls
 ;
 struct strcJoypad1          $000124
     .current                : skip 2    ; 124-125
@@ -92,7 +192,7 @@ endstruct align 12
 
 
 ;
-; Joypad 2 controls
+; Size and start OK - Joypad 2 controls
 ;
 struct strcJoypad2          $000130
     .current                : skip 2    ; 130-131
@@ -104,7 +204,9 @@ struct strcJoypad2          $000130
 endstruct align 12
 
 
-; Gfx BG scrool Data
+;
+; Size not sure and start OK - Gfx BG scrool Data
+;
 struct strcBGScrool         $00013C
     .BG1HorOffs             : skip 2    ; 13C-13D
     .BG1VerOffs             : skip 2    ; 13E-13F
@@ -116,7 +218,7 @@ endstruct
 
 
 ;
-; Game Objects x 40 entries (19C - 73B)
+; Size and start OK - Game Objects x 40 entries (19C - 73B)
 ;
 struct strcGameObject       $00019C
     .initailized            : skip 2    ; 19C-19D   $7777 if initialized, 0 if not
@@ -153,7 +255,7 @@ endstruct align 36
 
 
 ;
-; Unkown 740
+; Unknown 740
 ;
 struct strcUnknown740       $000740
     .unk740                 : skip 2    ; 740-741
@@ -163,17 +265,17 @@ endstruct
 
 
 ;
-; Map scrool
+; Size and start OK - Map scrool
 ;
 struct strcMapScrool        $00087C
     .speedX                 : skip 2    ; 87C-87D
     .speedY                 : skip 2    ; 87E-87F
     .timer                  : skip 1    ; 880
-endstruct
+endstruct align 5
 
 
 ;
-; Names
+; Size and start OK - Names
 ;
 struct strcNames            $000881
     .sPlayer                : skip 4    ; 881-884
@@ -192,11 +294,20 @@ struct strcNames            $000881
     .wHorse                 : skip 8    ; 8E5-8EC
     .wFirstChild            : skip 8    ; 8ED-8F4
     .wSecondChild           : skip 8    ; 8F5-8FC
-endstruct
+endstruct align 124
 
 
 ;
-; ObjectData
+; strcAiControlData 8FD-900
+;
+struct strcAiControlData    $0008FD
+    .input                  : skip 2    ; 8FD-8FE
+    .counter                : skip 2    ; 8FF-900
+endstruct align 4
+
+
+;
+; Size and start OK - Object data
 ;
 struct strcObjectData       $000901
     .spriteIdx              : skip 2    ; 901-902 x
@@ -210,11 +321,11 @@ struct strcObjectData       $000901
     .direction              : skip 2    ; 911-912 x
     .directionNew           : skip 2    ; 913-914
     .exist                  : skip 2    ; 915-916
-endstruct
+endstruct align 22
 
 
 ;
-; strcPlayerData.carryItemId
+; size and start OK - Player data
 ;
 struct strcPlayerData       $000917
     .stamina                : skip 1    ; 917
@@ -245,14 +356,18 @@ struct strcPlayerData       $000917
     .placedChcikenFeed      : skip 1    ; 931
     .placedCowFeedFlags     : skip 2    ; 932-933
     .placedChickenFeedFlags : skip 2    ; 934-935
-endstruct
+endstruct align 31
 
+
+;
 ; 936 not used
+;
+
 
 ;
-; Animal data ? but also any seed is last
+; Size and start OK - Animal data ? but also any seed is last
 ;
-struct strcGoodsData        $000937
+struct strcStockData        $000937
     .unkCow                 : skip 1    ; 937
     .unkDog                 : skip 1    ; 938
     .unkHorse               : skip 1    ; 939
@@ -260,7 +375,13 @@ struct strcGoodsData        $000937
     .unkEachChicken         : skip 12*2 ; 93B-952
     .unkEachCow             : skip 12*2 ; 953-96A
     .unkAnySeed             : skip 1    ; 96B
-endstruct
+endstruct align 53
+
+
+;
+; 96C - 990 ???
+;
+
 
 ;
 ; Size and start to be confirmed
@@ -277,8 +398,9 @@ struct strcMenuData         $000991
     .nameDestinationIdx     : skip 1    ; 099F
 endstruct
 
-
+;
 ; Unknown AI structure pointer to it is stored at 0xCC
+;
 struct strcAIUnknown        $7EB586
     .unk00                  skip 1
     .flags                  skip 1  ; n8
