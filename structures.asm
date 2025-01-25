@@ -47,7 +47,7 @@ struct strcPlayer           $0000D2
     .posY                   : skip 2    ; D8-D9     current coords
     .direction              : skip 2    ; DA-DB     
     .unkDC                  : skip 2    ; DC-DD     
-    .lastRandomNumber       : skip 1    ; DE
+    .lastRandomNumber       : skip 1    ; DE        rng + 
     .lastX                  : skip 2    ; DF-E0     last coords
     .lastY                  : skip 2    ; E1-E2     last coords
     .unkE3                  : skip 2    ; E3-E4     speed? move increment? rounding?
@@ -214,7 +214,7 @@ endstruct
 
 
 ;
-; PlayerData
+; strcPlayerData.carryItemId
 ;
 struct strcPlayerData       $000917
     .stamina                : skip 1    ; 917
@@ -250,9 +250,16 @@ endstruct
 ; 936 not used
 
 ;
+; Animal data ?
 ;
-;
-
+struct strcAnimalsData      $000937
+    .unkCow                 : skip 1    ; 937
+    .unkDog                 : skip 1    ; 938
+    .unkHorse               : skip 1    ; 939
+    .unkMole                : skip 1    ; 93A
+    .unk93B                 : skip 12*2 ; 93B-952
+    .unk953                 : skip 12*2 ; 953
+endstruct
 
 ;
 ; Size and start to be confirmed

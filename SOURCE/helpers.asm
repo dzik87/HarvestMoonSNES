@@ -69,13 +69,13 @@ macro SetCurrentCarriedItemIndex(nIndex)
     TAX
     SEP #$20
     LDA.L aInteractionItemTable,X
-    STA.W nCarryItem_Current
+    STA.W strcPlayerData.carryItemId
 endmacro
 
 macro SetCurrentCarriedItemDirect(nItem)
     SEP #$20
     LDA.B #<nItem>
-    STA.W nCarryItem_Current
+    STA.W strcPlayerData.carryItemId
 endmacro
 
 
