@@ -89,7 +89,7 @@ fUnknown_8280AA:
     JMP.W .return                                              ;8280B6|4C3081  |828130;
  
  
-  + %UpdateStamina($14)
+  + %UpdateStamina(20)
     REP #$20                                                   ;8280C1|C220    |      ;
     %CheckPlayerFlagsNoReg(!PFLAGS_UNK0400|!PFLAGS_INSPRINGS|!PFLAGS_RIDINGHORSE)
     BEQ +                                                      ;8280C8|F003    |8280CD;
@@ -2201,7 +2201,7 @@ fToolUsedAction0x01_Sickle:
  
 .return:
     %SetPlayerAction(!PACTION_NONE)
-    %UpdateStamina($FE)
+    %UpdateStamina(-2)
     RTS                                                        ;82945F|60      |      ;
  
  
@@ -2324,7 +2324,7 @@ fToolUsedAction0x02_Plow:
  
 .return:
     %SetPlayerAction(!PACTION_NONE)
-    %UpdateStamina($FE)
+    %UpdateStamina(-2)
     RTS                                                        ;8295BF|60      |      ;
  
  
@@ -2504,7 +2504,7 @@ fToolUsedAction0x03_Hammer:
  
 .return:
     %SetPlayerAction(!PACTION_NONE)
-    %UpdateStamina($FE)
+    %UpdateStamina(-2)
     RTS                                                        ;82973E|60      |      ;
  
  
@@ -2751,7 +2751,7 @@ fToolUsedAction0x04_Axe:
  
 .return:
     %SetPlayerAction(!PACTION_NONE)
-    %UpdateStamina($FE)
+    %UpdateStamina(-2)
     RTS                                                        ;829998|60      |      ;
  
  
@@ -2796,7 +2796,7 @@ fToolUsedAction0x05_CornSeedBag:
     STZ.W strcPlayerData.toolEquipped                          ;8299E5|9C2109  |000921;
  
   + %SetPlayerAction(!PACTION_NONE)
-    %UpdateStamina($FF)
+    %UpdateStamina(-1)
  
 .return:
     RTS                                                        ;8299F7|60      |      ;
@@ -2843,7 +2843,7 @@ fToolUsedAction0x06_TomatoSeedBag:
     STZ.W strcPlayerData.toolEquipped                          ;829A44|9C2109  |000921;
  
   + %SetPlayerAction(!PACTION_NONE)
-    %UpdateStamina($FF)
+    %UpdateStamina(-1)
  
 .return:
     RTS                                                        ;829A56|60      |      ;
@@ -2889,7 +2889,7 @@ fToolUsedAction0x07_PotatoSeedBag:
     STZ.W strcPlayerData.toolEquipped                          ;829AA1|9C2109  |000921;
  
   + %SetPlayerAction(!PACTION_NONE)
-    %UpdateStamina($FF)
+    %UpdateStamina(-1)
  
 .return:
     RTS                                                        ;829AB3|60      |      ;
@@ -2935,7 +2935,7 @@ fToolUsedAction0x08_TurnipSeedBag:
     STZ.W strcPlayerData.toolEquipped                          ;829AFE|9C2109  |000921;
  
   + %SetPlayerAction(!PACTION_NONE)
-    %UpdateStamina($FF)
+    %UpdateStamina(-1)
  
 .return:
     RTS                                                        ;829B10|60      |      ;
@@ -2965,7 +2965,7 @@ fToolUsedAction0x0A_MiraclePotion:
  
 fToolUsedAction0x0B_Bell:
     %SetPlayerAction(!PACTION_NONE)
-    %UpdateStamina($FF)
+    %UpdateStamina(-1)
     RTS                                                        ;829B60|60      |      ;
  
  
@@ -3014,7 +3014,7 @@ fToolUsedAction0x0C_GrassSeedBag:
     STZ.W strcPlayerData.toolEquipped                          ;829BB8|9C2109  |000921;
  
   + %SetPlayerAction(!PACTION_NONE)
-    %UpdateStamina($FF)
+    %UpdateStamina(-1)
  
 .return:
     RTS                                                        ;829BCA|60      |      ;
@@ -3108,7 +3108,7 @@ fToolUsedAction0x0D_Paint:
  
 .return:
     %SetPlayerAction(!PACTION_NONE)
-    %UpdateStamina($FE)
+    %UpdateStamina(-2)
     RTS                                                        ;829CBF|60      |      ;
  
  
@@ -3119,7 +3119,7 @@ fToolUsedAction0x0E_Milker:
  
 fToolUsedAction0x0F_Brush:
     %SetPlayerAction(!PACTION_NONE)
-    %UpdateStamina($FF)
+    %UpdateStamina(-1)
     RTS                                                        ;829CD7|60      |      ;
  
  
@@ -3170,7 +3170,7 @@ fToolUsedAction0x10_WateringCan:
  
 .return:
     %SetPlayerAction(!PACTION_NONE)
-    %UpdateStamina($FE)
+    %UpdateStamina(-2)
     RTS                                                        ;829D41|60      |      ;
  
  
@@ -3314,7 +3314,7 @@ fToolUsedAction0x11_GoldenSickle:
     BNE .justReturn                                            ;829E79|D012    |829E8D;
     STZ.W strcStockData.unkAnyTool                             ;829E7B|9C6B09  |00096B;
     %SetPlayerAction(!PACTION_NONE)
-    %UpdateStamina($F8)
+    %UpdateStamina(-8)
  
 .justReturn:
     RTS                                                        ;829E8D|60      |      ;
@@ -3452,7 +3452,7 @@ fToolUsedAction0x12_GoldenPlow:
     SEP #$20                                                   ;829FF0|E220    |      ;
     STZ.W strcStockData.unkAnyTool                             ;829FF2|9C6B09  |00096B;
     %SetPlayerAction(!PACTION_NONE)
-    %UpdateStamina($F8)
+    %UpdateStamina(-8)
  
 .justReturn:
     RTS                                                        ;82A004|60      |      ;
@@ -3604,7 +3604,7 @@ fToolUsedAction0x13_GolderHammer:
  
 .loop:
     %SetPlayerAction(!PACTION_NONE)
-    %UpdateStamina($FC)
+    %UpdateStamina(-4)
     RTS                                                        ;82A140|60      |      ;
  
  
@@ -3791,7 +3791,7 @@ fToolUsedAction0x14_GoldenAxe:
  
 .return:
     %SetPlayerAction(!PACTION_NONE)
-    %UpdateStamina($F8)
+    %UpdateStamina(-8)
     RTS                                                        ;82A306|60      |      ;
  
  
@@ -3845,7 +3845,7 @@ fToolUsedAction0x15_Sprinkler:
     BNE .justReturn                                            ;82A362|D012    |82A376;
     STZ.W strcStockData.unkAnyTool                             ;82A364|9C6B09  |00096B;
     %SetPlayerAction(!PACTION_NONE)
-    %UpdateStamina($F8)
+    %UpdateStamina(-8)
  
 .justReturn:
     RTS                                                        ;82A376|60      |      ;
@@ -3979,7 +3979,7 @@ fToolUsedAction0x19_ChickenFeed:
     BNE +                                                      ;82A4AD|D003    |82A4B2;
     STZ.W strcPlayerData.toolEquipped                          ;82A4AF|9C2109  |000921;
  
-  + %UpdateStamina($FE)
+  + %UpdateStamina(-2)
     %SetPlayerAction(!PACTION_NONE)
     RTS                                                        ;82A4C1|60      |      ;
  
@@ -4054,7 +4054,7 @@ fToolUsedAction0x1A_CowFeed:
     STZ.W strcPlayerData.toolEquipped                          ;82A55D|9C2109  |000921;
  
   + %SetPlayerAction(!PACTION_NONE)
-    %UpdateStamina($FE)
+    %UpdateStamina(-2)
     RTS                                                        ;82A56F|60      |      ;
  
  
