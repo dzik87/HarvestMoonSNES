@@ -4884,7 +4884,7 @@ fGameEngine_FirstNight:
     STZ.W strcPlayerData.carryItemIdPrev                       ;83AD19|9C1E09  |00091E;
     STZ.W strcPlayerData.unkMap91F                             ;83AD1C|9C1F09  |00091F;
     STZ.W strcPlayerData.nAiArg                                ;83AD1F|9C2009  |000920;
-    STZ.W strcStockData.unkAnySeed                             ;83AD22|9C6B09  |00096B;
+    STZ.W strcStockData.unkAnyTool                             ;83AD22|9C6B09  |00096B;
     SEP #$20                                                   ;83AD25|E220    |      ;
     STZ.W $098F                                                ;83AD27|9C8F09  |00098F;
     SEP #$20                                                   ;83AD2A|E220    |      ;
