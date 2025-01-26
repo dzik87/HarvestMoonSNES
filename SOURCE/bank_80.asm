@@ -3172,7 +3172,7 @@ fMap_SetupArea:
     JSL.L fToolUsedSound_Unknown828FF3                         ;8099F7|22F38F82|828FF3;
     SEP #$20                                                   ;8099FB|E220    |      ;
     LDA.W strcAudio.trackId                                    ;8099FD|AD1001  |000110;
-    STA.W $0117                                                ;809A00|8D1701  |000117;
+    STA.W strcAudio.trackIdCopy                                ;809A00|8D1701  |000117;
     JSL.L fCore_WaitForNextNMI                                 ;809A03|22458680|808645;
     REP #$20                                                   ;809A07|C220    |      ;
     LDA.W #$1800                                               ;809A09|A90018  |      ;

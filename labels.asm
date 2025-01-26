@@ -9,9 +9,6 @@
     ptrAIActionData = $0000C9; !^ ptr24 ^!
     ptrAIUnknown0xCC = $0000CC; !^ prt24 ^!
     ptrUnknown0xCF = $0000CF; !^ ptr24 ^!
-    nRandomTempVar1 = $000100
-    nRandomTempVar2 = $000101
-    nRandomTempVar3 = $000102
     nPaletteCountdown = $00017A; !^ n8 ^!
     nPaletteNextIndex = $00017B; !^ n8 ^!
     nPaletteNextHourIndex = $00017C; !^ n8 ^!

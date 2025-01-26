@@ -5,57 +5,57 @@
 fMathMultiply_7EbyA:
     PHP                                                        ;838000|08      |      ;
     REP #$30                                                   ;838001|C230    |      ;
-    STA.W $011C                                                ;838003|8D1C01  |00011C;
-    STZ.W $011E                                                ;838006|9C1E01  |00011E;
-    STZ.W $0120                                                ;838009|9C2001  |000120;
-    STZ.W $0122                                                ;83800C|9C2201  |000122;
+    STA.W strcAudio.unkMulti11C                                ;838003|8D1C01  |00011C;
+    STZ.W strcAudio.unkMulti11E                                ;838006|9C1E01  |00011E;
+    STZ.W strcAudio.unkMulti120                                ;838009|9C2001  |000120;
+    STZ.W strcAudio.unkMulti122                                ;83800C|9C2201  |000122;
     SEP #$20                                                   ;83800F|E220    |      ;
-    STA.W $011A                                                ;838011|8D1A01  |00011A;
+    STA.W strcAudio.unkMulti11A                                ;838011|8D1A01  |00011A;
     LDA.B strcVariables.n16Temp1                               ;838014|A57E    |00007E;
-    STA.W $011B                                                ;838016|8D1B01  |00011B;
+    STA.W strcAudio.unkMulti11B                                ;838016|8D1B01  |00011B;
     JSR.W fMathMultiply                                        ;838019|206780  |838067;
     REP #$20                                                   ;83801C|C220    |      ;
-    STA.W $011E                                                ;83801E|8D1E01  |00011E;
-    LDA.W $011C                                                ;838021|AD1C01  |00011C;
+    STA.W strcAudio.unkMulti11E                                ;83801E|8D1E01  |00011E;
+    LDA.W strcAudio.unkMulti11C                                ;838021|AD1C01  |00011C;
     AND.W #$FF00                                               ;838024|2900FF  |      ;
     BEQ +                                                      ;838027|F012    |83803B;
     SEP #$20                                                   ;838029|E220    |      ;
     XBA                                                        ;83802B|EB      |      ;
-    STA.W $011A                                                ;83802C|8D1A01  |00011A;
+    STA.W strcAudio.unkMulti11A                                ;83802C|8D1A01  |00011A;
     JSR.W fMathMultiply                                        ;83802F|206780  |838067;
     REP #$20                                                   ;838032|C220    |      ;
     AND.W #$00FF                                               ;838034|29FF00  |      ;
     XBA                                                        ;838037|EB      |      ;
-    STA.W $0120                                                ;838038|8D2001  |000120;
+    STA.W strcAudio.unkMulti120                                ;838038|8D2001  |000120;
  
   + LDA.B strcVariables.n16Temp1                               ;83803B|A57E    |00007E;
     AND.W #$FF00                                               ;83803D|2900FF  |      ;
     BEQ +                                                      ;838040|F018    |83805A;
     SEP #$20                                                   ;838042|E220    |      ;
     XBA                                                        ;838044|EB      |      ;
-    STA.W $011B                                                ;838045|8D1B01  |00011B;
-    LDA.W $011C                                                ;838048|AD1C01  |00011C;
-    STA.W $011A                                                ;83804B|8D1A01  |00011A;
+    STA.W strcAudio.unkMulti11B                                ;838045|8D1B01  |00011B;
+    LDA.W strcAudio.unkMulti11C                                ;838048|AD1C01  |00011C;
+    STA.W strcAudio.unkMulti11A                                ;83804B|8D1A01  |00011A;
     JSR.W fMathMultiply                                        ;83804E|206780  |838067;
     REP #$20                                                   ;838051|C220    |      ;
     AND.W #$00FF                                               ;838053|29FF00  |      ;
     XBA                                                        ;838056|EB      |      ;
-    STA.W $0122                                                ;838057|8D2201  |000122;
+    STA.W strcAudio.unkMulti122                                ;838057|8D2201  |000122;
  
-  + LDA.W $011E                                                ;83805A|AD1E01  |00011E;
+  + LDA.W strcAudio.unkMulti11E                                ;83805A|AD1E01  |00011E;
     CLC                                                        ;83805D|18      |      ;
-    ADC.W $0120                                                ;83805E|6D2001  |000120;
+    ADC.W strcAudio.unkMulti120                                ;83805E|6D2001  |000120;
     CLC                                                        ;838061|18      |      ;
-    ADC.W $0122                                                ;838062|6D2201  |000122;
+    ADC.W strcAudio.unkMulti122                                ;838062|6D2201  |000122;
     PLP                                                        ;838065|28      |      ;
     RTL                                                        ;838066|6B      |      ;
  
  
 fMathMultiply:
     SEP #$20                                                   ;838067|E220    |      ; $011A: nA, $011B, return A = $011A * $011B
-    LDA.W $011A                                                ;838069|AD1A01  |00011A;
+    LDA.W strcAudio.unkMulti11A                                ;838069|AD1A01  |00011A;
     STA.L SNES_WRMPYA                                          ;83806C|8F024200|004202;
-    LDA.W $011B                                                ;838070|AD1B01  |00011B;
+    LDA.W strcAudio.unkMulti11B                                ;838070|AD1B01  |00011B;
     STA.L SNES_WRMPYB                                          ;838073|8F034200|004203;
     REP #$20                                                   ;838077|C220    |      ;
     NOP                                                        ;838079|EA      |      ;
@@ -177,24 +177,24 @@ fMathDivide:
  
 fGetRandomNumber:
     SEP #$20                                                   ;838138|E220    |      ; return A: nRandomNumber (0x00-0xFF)
-    LDA.W nRandomTempVar2                                      ;83813A|AD0101  |000101;
-    EOR.W nRandomTempVar1                                      ;83813D|4D0001  |000100;
+    LDA.W strcRandom.b                                         ;83813A|AD0101  |000101;
+    EOR.W strcRandom.a                                         ;83813D|4D0001  |000100;
     AND.B #$02                                                 ;838140|2902    |      ;
     CLC                                                        ;838142|18      |      ;
     BEQ +                                                      ;838143|F001    |838146;
     SEC                                                        ;838145|38      |      ;
  
-  + ROR.W nRandomTempVar2                                      ;838146|6E0101  |000101;
-    ROR.W nRandomTempVar1                                      ;838149|6E0001  |000100;
-    ROR.W nRandomTempVar3                                      ;83814C|6E0201  |000102;
+  + ROR.W strcRandom.b                                         ;838146|6E0101  |000101;
+    ROR.W strcRandom.a                                         ;838149|6E0001  |000100;
+    ROR.W strcRandom.c                                         ;83814C|6E0201  |000102;
     CLC                                                        ;83814F|18      |      ;
-    LDA.W nRandomTempVar2                                      ;838150|AD0101  |000101;
+    LDA.W strcRandom.b                                         ;838150|AD0101  |000101;
     ADC.B #$47                                                 ;838153|6947    |      ;
     ROR A                                                      ;838155|6A      |      ;
     ROR A                                                      ;838156|6A      |      ;
-    EOR.W nRandomTempVar1                                      ;838157|4D0001  |000100;
-    ADC.W nRandomTempVar3                                      ;83815A|6D0201  |000102;
-    STA.W nRandomTempVar1                                      ;83815D|8D0001  |000100;
+    EOR.W strcRandom.a                                         ;838157|4D0001  |000100;
+    ADC.W strcRandom.c                                         ;83815A|6D0201  |000102;
+    STA.W strcRandom.a                                         ;83815D|8D0001  |000100;
     REP #$20                                                   ;838160|C220    |      ;
     AND.W #$00FF                                               ;838162|29FF00  |      ;
     RTL                                                        ;838165|6B      |      ;
@@ -406,7 +406,7 @@ fAudioUnknown_8382C6:
     JSL.L fAudioUnknown_838380                                 ;8382D9|22808383|838380;
     SEP #$20                                                   ;8382DD|E220    |      ;
     LDA.W strcAudio.trackId                                    ;8382DF|AD1001  |000110;
-    STA.W $0117                                                ;8382E2|8D1701  |000117;
+    STA.W strcAudio.trackIdCopy                                ;8382E2|8D1701  |000117;
     REP #$30                                                   ;8382E5|C230    |      ;
     LDA.W #$00B4                                               ;8382E7|A9B400  |      ;
     JSL.L fCore_WaitForNMITimes                                ;8382EA|225D8680|80865D;
@@ -429,7 +429,7 @@ fAudioUnknown_8382FE:
     STA.W strcAudio.reg115                                     ;83830B|8D1501  |000115;
     LDA.B #$00                                                 ;83830E|A900    |      ;
     XBA                                                        ;838310|EB      |      ;
-    LDA.W $0118                                                ;838311|AD1801  |000118;
+    LDA.W strcAudio.unk118                                     ;838311|AD1801  |000118;
     REP #$20                                                   ;838314|C220    |      ;
     TAX                                                        ;838316|AA      |      ;
     SEP #$20                                                   ;838317|E220    |      ;
@@ -496,7 +496,7 @@ fAudioUnknown_838380:
     SEP #$20                                                   ;838380|E220    |      ;
     LDA.W strcAudio.trackId                                    ;838382|AD1001  |000110;
     BEQ +                                                      ;838385|F017    |83839E;
-    CMP.W $0117                                                ;838387|CD1701  |000117;
+    CMP.W strcAudio.trackIdCopy                                ;838387|CD1701  |000117;
     BEQ +                                                      ;83838A|F012    |83839E;
     CMP.B #$FF                                                 ;83838C|C9FF    |      ;
     BEQ +                                                      ;83838E|F00E    |83839E;
@@ -507,14 +507,14 @@ fAudioUnknown_838380:
     JSL.L fAudioUnknown_838D39                                 ;83839A|22398D83|838D39;
  
   + SEP #$20                                                   ;83839E|E220    |      ;
-    STZ.W $0119                                                ;8383A0|9C1901  |000119;
+    STZ.W strcAudio.toolId                                     ;8383A0|9C1901  |000119;
     RTL                                                        ;8383A3|6B      |      ;
  
  
 fAudioUnknown_8383A4:
     SEP #$20                                                   ;8383A4|E220    |      ;
     LDA.W strcAudio.trackId                                    ;8383A6|AD1001  |000110;
-    CMP.W $0117                                                ;8383A9|CD1701  |000117;
+    CMP.W strcAudio.trackIdCopy                                ;8383A9|CD1701  |000117;
     BEQ +                                                      ;8383AC|F022    |8383D0;
     LDA.B #$00                                                 ;8383AE|A900    |      ;
     JSL.L fAudioUnknown_8389C7                                 ;8383B0|22C78983|8389C7;
@@ -540,11 +540,11 @@ fAudioUnknown_8383A4:
     LDA.B #$00                                                 ;8383DE|A900    |      ;
     XBA                                                        ;8383E0|EB      |      ;
     LDA.W strcAudio.trackId                                    ;8383E1|AD1001  |000110;
-    STA.W $0118                                                ;8383E4|8D1801  |000118;
+    STA.W strcAudio.unk118                                     ;8383E4|8D1801  |000118;
     CMP.B #$FF                                                 ;8383E7|C9FF    |      ;
     BNE +                                                      ;8383E9|D005    |8383F0;
     LDA.B #$00                                                 ;8383EB|A900    |      ;
-    STA.W $0118                                                ;8383ED|8D1801  |000118;
+    STA.W strcAudio.unk118                                     ;8383ED|8D1801  |000118;
  
   + REP #$20                                                   ;8383F0|C220    |      ;
     TAX                                                        ;8383F2|AA      |      ;
@@ -560,9 +560,9 @@ fAudioReturn_838400:
 fAudioUnknown_838401:
     SEP #$20                                                   ;838401|E220    |      ;
     LDA.W strcAudio.trackId                                    ;838403|AD1001  |000110;
-    CMP.W $0117                                                ;838406|CD1701  |000117;
+    CMP.W strcAudio.trackIdCopy                                ;838406|CD1701  |000117;
     BEQ .return                                                ;838409|F013    |83841E;
-    LDA.W $0117                                                ;83840B|AD1701  |000117;
+    LDA.W strcAudio.trackIdCopy                                ;83840B|AD1701  |000117;
     BEQ fAudioReturn_838400                                    ;83840E|F0F0    |838400; BUG - should be .return in this function rather than previous one since we are out of function scope
     LDA.B #$01                                                 ;838410|A901    |      ;
     STA.W strcAudio.unk112                                     ;838412|8D1201  |000112;
@@ -577,9 +577,9 @@ fAudioUnknown_838401:
 fAudioUnknown_83841F:
     SEP #$20                                                   ;83841F|E220    |      ;
     LDA.W strcAudio.trackId                                    ;838421|AD1001  |000110;
-    CMP.W $0117                                                ;838424|CD1701  |000117;
+    CMP.W strcAudio.trackIdCopy                                ;838424|CD1701  |000117;
     BEQ .return                                                ;838427|F013    |83843C;
-    LDA.W $0117                                                ;838429|AD1701  |000117;
+    LDA.W strcAudio.trackIdCopy                                ;838429|AD1701  |000117;
     BEQ .return                                                ;83842C|F00E    |83843C;
     LDA.B #$01                                                 ;83842E|A901    |      ;
     STA.W strcAudio.unk112                                     ;838430|8D1201  |000112;
@@ -4893,9 +4893,9 @@ fGameEngine_FirstNight:
     SEP #$20                                                   ;83AD32|E220    |      ;
     STZ.W strcAudio.trackId                                    ;83AD34|9C1001  |000110;
     STZ.W strcAudio.reg114                                     ;83AD37|9C1401  |000114;
-    STZ.W $0117                                                ;83AD3A|9C1701  |000117;
-    STZ.W $0118                                                ;83AD3D|9C1801  |000118;
-    STZ.W $0117                                                ;83AD40|9C1701  |000117;
+    STZ.W strcAudio.trackIdCopy                                ;83AD3A|9C1701  |000117;
+    STZ.W strcAudio.unk118                                     ;83AD3D|9C1801  |000118;
+    STZ.W strcAudio.trackIdCopy                                ;83AD40|9C1701  |000117;
     SEP #$20                                                   ;83AD43|E220    |      ;
     STZ.W strcPlayerData.placedCowFeed                         ;83AD45|9C3009  |000930;
     STZ.W strcPlayerData.placedChcikenFeed                     ;83AD48|9C3109  |000931;

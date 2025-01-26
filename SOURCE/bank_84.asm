@@ -2537,7 +2537,7 @@ fAIAction0x2C:
     PLA                                                        ;84961A|68      |      ;
     JSL.L fAudioUnknown_8382FE                                 ;84961B|22FE8283|8382FE;
     SEP #$20                                                   ;84961F|E220    |      ;
-    STZ.W $0119                                                ;849621|9C1901  |000119;
+    STZ.W strcAudio.toolId                                     ;849621|9C1901  |000119;
     JSL.L fToolUsedSound_Unknown828FF3                         ;849624|22F38F82|828FF3;
     %AIMoveAction($0002)
     RTS                                                        ;849632|60      |      ;

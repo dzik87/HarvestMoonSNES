@@ -185,22 +185,33 @@ endstruct
 
 
 ;
-;
+; some of prevoius structs might be part if this structure
 ;
 struct strcCamera           $0000F1
     .unkF1                  : skip 2    ; F1-F2
     .unkF3                  : skip 2    ; F3-F4
     .cameraX                : skip 2    ; F5-F6
     .cameraY                : skip 2    ; F7-F8
+endstruct align 8
+
+
+;
+; F9 - FF not used
+;
+
+
+;
+; Size and start OK
+;
+struct strcRandom           $000100
+    .a                      : skip 1    ; 100
+    .b                      : skip 1    ; 101
+    .c                      : skip 1    ; 102
 endstruct
 
-;
-; F1 - 102 ???
-;
-
 
 ;
-; Size to be checkd and start OK
+; Size and start OK
 ;
 struct strcAudio            $000103
     .index                  : skip 1    ; 103
@@ -214,12 +225,16 @@ struct strcAudio            $000103
     .reg114                 : skip 1    ; 114
     .reg115                 : skip 1    ; 115
     .reg116                 : skip 1    ; 116
-endstruct
-
-
-;
-; 117 - 123 ???
-;
+    .trackIdCopy            : skip 1    ; 117
+    .unk118                 : skip 1    ; 118
+    .toolId                 : skip 1    ; 119
+    .unkMulti11A            : skip 1    ; 11A
+    .unkMulti11B            : skip 1    ; 11B
+    .unkMulti11C            : skip 2    ; 11C-11D
+    .unkMulti11E            : skip 2    ; 11E-11F
+    .unkMulti120            : skip 2    ; 120-121
+    .unkMulti122            : skip 2    ; 122-123
+endstruct align 33
 
 
 ;
@@ -259,6 +274,12 @@ struct strcBGScrool         $00013C
     .BG3HorOffs             : skip 2    ; 144-145
     .BG3VerOffs             : skip 2    ; 146-147
 endstruct
+
+
+;
+; 148 - 19B ???
+;
+
 
 
 ;
