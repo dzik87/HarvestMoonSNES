@@ -784,7 +784,7 @@ fAudio_PlayAudio_Unknown838598:
     LDX.W #$0000                                               ;83859C|A20000  |      ;
  
 .loop:
-    LDA.L aAudio2IndexLookup_8392B1,X                          ;83859F|BFB19283|8392B1;
+    LDA.L aAudioSampleLookupTable,X                            ;83859F|BFB19283|8392B1;
     STA.B strcVariables.n8Temp3                                ;8385A3|8594    |000094; sAudioData2Index
     BNE +                                                      ;8385A5|D009    |8385B0;
     INX                                                        ;8385A7|E8      |      ;
@@ -821,7 +821,7 @@ fAudio_PlayAudio_Unknown838598:
     LDA.B strcVariables.n8Temp3                                ;8385E2|A594    |000094; sAudioData2Index
     STA.W SNES_APUIO0                                          ;8385E4|8D4021  |002140;
     REP #$20                                                   ;8385E7|C220    |      ;
-    LDA.L sAudioData2_8390EF,X                                 ;8385E9|BFEF9083|8390EF;
+    LDA.L sAudioSampleData,X                                   ;8385E9|BFEF9083|8390EF;
     SEP #$20                                                   ;8385ED|E220    |      ;
     STA.W SNES_APUIO1                                          ;8385EF|8D4121  |002141;
     XBA                                                        ;8385F2|EB      |      ;
@@ -856,13 +856,13 @@ fAudio_PlayAudio_Unknown838598:
   - LDA.B #$01                                                 ;838625|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838627|CD4321  |002143;
     BNE -                                                      ;83862A|D0F9    |838625;
-    LDA.L sAudioData2_8390EF,X                                 ;83862C|BFEF9083|8390EF;
+    LDA.L sAudioSampleData,X                                   ;83862C|BFEF9083|8390EF;
     STA.W SNES_APUIO0                                          ;838630|8D4021  |002140;
     INX                                                        ;838633|E8      |      ;
-    LDA.L sAudioData2_8390EF,X                                 ;838634|BFEF9083|8390EF;
+    LDA.L sAudioSampleData,X                                   ;838634|BFEF9083|8390EF;
     STA.W SNES_APUIO1                                          ;838638|8D4121  |002141;
     INX                                                        ;83863B|E8      |      ;
-    LDA.L sAudioData2_8390EF,X                                 ;83863C|BFEF9083|8390EF;
+    LDA.L sAudioSampleData,X                                   ;83863C|BFEF9083|8390EF;
     STA.W SNES_APUIO2                                          ;838640|8D4221  |002142;
     LDA.B #$02                                                 ;838643|A902    |      ;
     STA.W SNES_APUIO3                                          ;838645|8D4321  |002143;
@@ -893,10 +893,10 @@ fAudio_PlayAudio_Unknown838598:
   - LDA.B #$01                                                 ;838671|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838673|CD4321  |002143;
     BNE -                                                      ;838676|D0F9    |838671;
-    LDA.L sAudioData2_8390EF,X                                 ;838678|BFEF9083|8390EF;
+    LDA.L sAudioSampleData,X                                   ;838678|BFEF9083|8390EF;
     STA.W SNES_APUIO0                                          ;83867C|8D4021  |002140;
     INX                                                        ;83867F|E8      |      ;
-    LDA.L sAudioData2_8390EF,X                                 ;838680|BFEF9083|8390EF;
+    LDA.L sAudioSampleData,X                                   ;838680|BFEF9083|8390EF;
     STA.W SNES_APUIO1                                          ;838684|8D4121  |002141;
     STZ.W SNES_APUIO2                                          ;838687|9C4221  |002142;
     LDA.B #$02                                                 ;83868A|A902    |      ;
@@ -929,12 +929,12 @@ fAudio_PlayAudio_Unknown838598:
     CMP.W SNES_APUIO3                                          ;8386BA|CD4321  |002143;
     BNE -                                                      ;8386BD|D0F9    |8386B8;
     REP #$20                                                   ;8386BF|C220    |      ;
-    LDA.L sAudioData2_8390EF,X                                 ;8386C1|BFEF9083|8390EF; read ptr at offset 7
+    LDA.L sAudioSampleData,X                                   ;8386C1|BFEF9083|8390EF; read ptr at offset 7
     STA.B ptrAudioData                                         ;8386C5|850A    |00000A; store 16b to $0A
     INX                                                        ;8386C7|E8      |      ;
     INX                                                        ;8386C8|E8      |      ;
     SEP #$20                                                   ;8386C9|E220    |      ;
-    LDA.L sAudioData2_8390EF,X                                 ;8386CB|BFEF9083|8390EF;
+    LDA.L sAudioSampleData,X                                   ;8386CB|BFEF9083|8390EF;
     STA.B ptrAudioData+2                                       ;8386CF|850C    |00000C; store 8b to $0C
     LDA.B #$00                                                 ;8386D1|A900    |      ;
     XBA                                                        ;8386D3|EB      |      ;
@@ -942,7 +942,7 @@ fAudio_PlayAudio_Unknown838598:
     ASL A                                                      ;8386D6|0A      |      ;
     REP #$20                                                   ;8386D7|C220    |      ;
     TAX                                                        ;8386D9|AA      |      ;
-    LDA.L aAudioTracks2Size,X                                  ;8386DA|BFFF8E83|838EFF;
+    LDA.L aAudioSampleSize,X                                   ;8386DA|BFFF8E83|838EFF;
     STA.B strcVariables.n16Temp1                               ;8386DE|857E    |00007E;
     LDA.W #$0003                                               ;8386E0|A90300  |      ;
     STA.B strcVariables.n16Temp2                               ;8386E3|8580    |000080;
@@ -1118,7 +1118,7 @@ fAudioUnknown_83878C:
     LDA.B strcVariables.n8Temp3                                ;83881A|A594    |000094;
     STA.W SNES_APUIO0                                          ;83881C|8D4021  |002140;
     REP #$20                                                   ;83881F|C220    |      ;
-    LDA.L sAudioData2_8390EF,X                                 ;838821|BFEF9083|8390EF;
+    LDA.L sAudioSampleData,X                                   ;838821|BFEF9083|8390EF;
     SEP #$20                                                   ;838825|E220    |      ;
     STA.W SNES_APUIO1                                          ;838827|8D4121  |002141;
     XBA                                                        ;83882A|EB      |      ;
@@ -1153,13 +1153,13 @@ fAudioUnknown_83878C:
   - LDA.B #$01                                                 ;83885D|A901    |      ;
     CMP.W SNES_APUIO3                                          ;83885F|CD4321  |002143;
     BNE -                                                      ;838862|D0F9    |83885D;
-    LDA.L sAudioData2_8390EF,X                                 ;838864|BFEF9083|8390EF;
+    LDA.L sAudioSampleData,X                                   ;838864|BFEF9083|8390EF;
     STA.W SNES_APUIO0                                          ;838868|8D4021  |002140;
     INX                                                        ;83886B|E8      |      ;
-    LDA.L sAudioData2_8390EF,X                                 ;83886C|BFEF9083|8390EF;
+    LDA.L sAudioSampleData,X                                   ;83886C|BFEF9083|8390EF;
     STA.W SNES_APUIO1                                          ;838870|8D4121  |002141;
     INX                                                        ;838873|E8      |      ;
-    LDA.L sAudioData2_8390EF,X                                 ;838874|BFEF9083|8390EF;
+    LDA.L sAudioSampleData,X                                   ;838874|BFEF9083|8390EF;
     STA.W SNES_APUIO2                                          ;838878|8D4221  |002142;
     LDA.B #$02                                                 ;83887B|A902    |      ;
     STA.W SNES_APUIO3                                          ;83887D|8D4321  |002143;
@@ -1190,10 +1190,10 @@ fAudioUnknown_83878C:
   - LDA.B #$01                                                 ;8388A9|A901    |      ;
     CMP.W SNES_APUIO3                                          ;8388AB|CD4321  |002143;
     BNE -                                                      ;8388AE|D0F9    |8388A9;
-    LDA.L sAudioData2_8390EF,X                                 ;8388B0|BFEF9083|8390EF;
+    LDA.L sAudioSampleData,X                                   ;8388B0|BFEF9083|8390EF;
     STA.W SNES_APUIO0                                          ;8388B4|8D4021  |002140;
     INX                                                        ;8388B7|E8      |      ;
-    LDA.L sAudioData2_8390EF,X                                 ;8388B8|BFEF9083|8390EF;
+    LDA.L sAudioSampleData,X                                   ;8388B8|BFEF9083|8390EF;
     STA.W SNES_APUIO1                                          ;8388BC|8D4121  |002141;
     STZ.W SNES_APUIO2                                          ;8388BF|9C4221  |002142;
     LDA.B #$02                                                 ;8388C2|A902    |      ;
@@ -1226,12 +1226,12 @@ fAudioUnknown_83878C:
     CMP.W SNES_APUIO3                                          ;8388F2|CD4321  |002143;
     BNE -                                                      ;8388F5|D0F9    |8388F0;
     REP #$20                                                   ;8388F7|C220    |      ;
-    LDA.L sAudioData2_8390EF,X                                 ;8388F9|BFEF9083|8390EF;
+    LDA.L sAudioSampleData,X                                   ;8388F9|BFEF9083|8390EF;
     STA.B ptrAudioData                                         ;8388FD|850A    |00000A;
     INX                                                        ;8388FF|E8      |      ;
     INX                                                        ;838900|E8      |      ;
     SEP #$20                                                   ;838901|E220    |      ;
-    LDA.L sAudioData2_8390EF,X                                 ;838903|BFEF9083|8390EF;
+    LDA.L sAudioSampleData,X                                   ;838903|BFEF9083|8390EF;
     STA.B ptrAudioData+2                                       ;838907|850C    |00000C;
     LDA.B #$00                                                 ;838909|A900    |      ;
     XBA                                                        ;83890B|EB      |      ;
@@ -1239,7 +1239,7 @@ fAudioUnknown_83878C:
     ASL A                                                      ;83890E|0A      |      ;
     REP #$20                                                   ;83890F|C220    |      ;
     TAX                                                        ;838911|AA      |      ;
-    LDA.L aAudioTracks2Size,X                                  ;838912|BFFF8E83|838EFF;
+    LDA.L aAudioSampleSize,X                                   ;838912|BFFF8E83|838EFF;
     STA.B strcVariables.n16Temp1                               ;838916|857E    |00007E;
     LDA.W #$0003                                               ;838918|A90300  |      ;
     STA.B strcVariables.n16Temp2                               ;83891B|8580    |000080;
@@ -1547,7 +1547,7 @@ fAudioUnknown_838AFF:
     LDA.B strcVariables.n8Temp3                                ;838B4E|A594    |000094;
     STA.W SNES_APUIO0                                          ;838B50|8D4021  |002140;
     REP #$20                                                   ;838B53|C220    |      ;
-    LDA.L sAudioData2_8390EF,X                                 ;838B55|BFEF9083|8390EF;
+    LDA.L sAudioSampleData,X                                   ;838B55|BFEF9083|8390EF; X = 0
     SEP #$20                                                   ;838B59|E220    |      ;
     STA.W SNES_APUIO1                                          ;838B5B|8D4121  |002141;
     XBA                                                        ;838B5E|EB      |      ;
@@ -1582,13 +1582,13 @@ fAudioUnknown_838AFF:
   - LDA.B #$01                                                 ;838B91|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838B93|CD4321  |002143;
     BNE -                                                      ;838B96|D0F9    |838B91;
-    LDA.L sAudioData2_8390EF,X                                 ;838B98|BFEF9083|8390EF;
+    LDA.L sAudioSampleData,X                                   ;838B98|BFEF9083|8390EF; X = 2
     STA.W SNES_APUIO0                                          ;838B9C|8D4021  |002140;
     INX                                                        ;838B9F|E8      |      ;
-    LDA.L sAudioData2_8390EF,X                                 ;838BA0|BFEF9083|8390EF;
+    LDA.L sAudioSampleData,X                                   ;838BA0|BFEF9083|8390EF; X = 3
     STA.W SNES_APUIO1                                          ;838BA4|8D4121  |002141;
     INX                                                        ;838BA7|E8      |      ;
-    LDA.L sAudioData2_8390EF,X                                 ;838BA8|BFEF9083|8390EF;
+    LDA.L sAudioSampleData,X                                   ;838BA8|BFEF9083|8390EF; X = 4
     STA.W SNES_APUIO2                                          ;838BAC|8D4221  |002142;
     LDA.B #$02                                                 ;838BAF|A902    |      ;
     STA.W SNES_APUIO3                                          ;838BB1|8D4321  |002143;
@@ -1619,10 +1619,10 @@ fAudioUnknown_838AFF:
   - LDA.B #$01                                                 ;838BDD|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838BDF|CD4321  |002143;
     BNE -                                                      ;838BE2|D0F9    |838BDD;
-    LDA.L sAudioData2_8390EF,X                                 ;838BE4|BFEF9083|8390EF;
+    LDA.L sAudioSampleData,X                                   ;838BE4|BFEF9083|8390EF; X = 5
     STA.W SNES_APUIO0                                          ;838BE8|8D4021  |002140;
     INX                                                        ;838BEB|E8      |      ;
-    LDA.L sAudioData2_8390EF,X                                 ;838BEC|BFEF9083|8390EF;
+    LDA.L sAudioSampleData,X                                   ;838BEC|BFEF9083|8390EF; X = 6
     STA.W SNES_APUIO1                                          ;838BF0|8D4121  |002141;
     STZ.W SNES_APUIO2                                          ;838BF3|9C4221  |002142;
     LDA.B #$02                                                 ;838BF6|A902    |      ;
@@ -1655,12 +1655,12 @@ fAudioUnknown_838AFF:
     CMP.W SNES_APUIO3                                          ;838C26|CD4321  |002143;
     BNE -                                                      ;838C29|D0F9    |838C24;
     REP #$20                                                   ;838C2B|C220    |      ;
-    LDA.L sAudioData2_8390EF,X                                 ;838C2D|BFEF9083|8390EF;
+    LDA.L sAudioSampleData,X                                   ;838C2D|BFEF9083|8390EF; X = 7
     STA.B ptrAudioData                                         ;838C31|850A    |00000A;
     INX                                                        ;838C33|E8      |      ;
     INX                                                        ;838C34|E8      |      ;
     SEP #$20                                                   ;838C35|E220    |      ;
-    LDA.L sAudioData2_8390EF,X                                 ;838C37|BFEF9083|8390EF;
+    LDA.L sAudioSampleData,X                                   ;838C37|BFEF9083|8390EF; X = 9
     STA.B ptrAudioData+2                                       ;838C3B|850C    |00000C;
     LDA.B #$00                                                 ;838C3D|A900    |      ;
     XBA                                                        ;838C3F|EB      |      ;
@@ -1668,7 +1668,7 @@ fAudioUnknown_838AFF:
     ASL A                                                      ;838C42|0A      |      ;
     REP #$20                                                   ;838C43|C220    |      ;
     TAX                                                        ;838C45|AA      |      ;
-    LDA.L aAudioTracks2Size,X                                  ;838C46|BFFF8E83|838EFF;
+    LDA.L aAudioSampleSize,X                                   ;838C46|BFFF8E83|838EFF;
     STA.B strcVariables.n16Temp1                               ;838C4A|857E    |00007E;
     LDA.W #$0003                                               ;838C4C|A90300  |      ;
     STA.B strcVariables.n16Temp2                               ;838C4F|8580    |000080;
@@ -2031,7 +2031,7 @@ fAudioUnknown_838EE4:
     RTS                                                        ;838EFE|60      |      ;
  
  
-aAudioTracks2Size:
+aAudioSampleSize:
     dw $10C0,$10C0,$2EE0,$0BB0,$0780,$0D10                     ;838EFF|        |      ;
     dw $0040,$1F30,$1950,$1300,$02D0,$1B80                     ;838F0B|        |      ;
     dw $0340,$0670,$0DA0,$1240,$0FA0,$07D0                     ;838F17|        |      ;
@@ -2101,8 +2101,10 @@ sAudioData1_838F83:
     dl sAudioTrack_ADC52D                                      ;8390E1|        |ADC52D;
     db $13,$15,$00,$00,$00,$00,$00,$00,$00,$00,$00             ;8390E4|        |      ;
  
-sAudioData2_8390EF:
-    db $B0,$01,$FF,$E0,$B8,$05,$20                             ;8390EF|        |      ; 0x28 * [n8, n8, n8, n8, n8, n8, n8, ptr24 pAudioTrack]
+sAudioSampleData:
+    dw $01B0                                                   ;8390EF|        |      ; 0x28 * [n16 ?, n8 nAttackVolumeEnvelope, n8 nSustainVolumeEnvelope, n8 ?, n16 nPitch, ptr24 pAudioSample]
+    db $FF,$E0,$B8                                             ;8390F1|        |      ;
+    dw $2005                                                   ;8390F4|        |      ;
     dl sAudioTrack_ADC5E9                                      ;8390F6|        |ADC5E9;
     db $B0,$01,$FF,$E0,$B8,$05,$20                             ;8390F9|        |      ;
     dl sAudioTrack_ADC5E9                                      ;839100|        |ADC5E9;
@@ -2190,7 +2192,7 @@ aAudioUnknown_83927F:
     db $14,$1C,$1F,$14,$11,$0F,$12,$10,$11,$11,$11,$07         ;8392A3|        |      ;
     db $26,$06                                                 ;8392AF|        |      ;
  
-aAudio2IndexLookup_8392B1:
+aAudioSampleLookupTable:
     db $17,$18,$19,$1A,$15,$06,$0A,$00,$00,$00                 ;8392B1|        |      ;
  
 fDialog_Unknown_8392BB:
@@ -4703,7 +4705,7 @@ fGameEngine_SetDefaults:
     STA.W strcNames.sPlayer+3                                  ;83AB2F|8D8408  |000884;
     SEP #$20                                                   ;83AB32|E220    |      ;
     LDA.B #$0F                                                 ;83AB34|A90F    |      ;
-    STA.L strcShedItems                                        ;83AB36|8F001F7F|7F1F00;
+    STA.L strcShedItems.row1                                   ;83AB36|8F001F7F|7F1F00;
     LDA.B #$88                                                 ;83AB3A|A988    |      ;
     STA.L strcShedItems.row2                                   ;83AB3C|8F011F7F|7F1F01;
     LDA.B #$00                                                 ;83AB40|A900    |      ;
@@ -4858,12 +4860,8 @@ fGameEngine_FirstNight:
     REP #$20                                                   ;83ACCC|C220    |      ;
     %SetPlayerFlag(!PFLAGS_ACTIVE)
     %SetPlayerAction(!PACTION_NONE)
-    REP #$30                                                   ;83ACDE|C230    |      ;
-    LDA.W #!PDIR_DOWN                                               
-    STA.B strcPlayer.direction                                 ;83ACE3|85DA    |0000DA;
-    REP #$30                                                   ;83ACE5|C230    |      ;
-    LDA.W #$0000                                               ;83ACE7|A90000  |      ;
-    STA.W strcObjectData.direction                             ;83ACEA|8D1109  |000911;
+    %SetPlayerDirection(!PDIR_DOWN)
+    %SetObjectDirection(!PDIR_DOWN)
     REP #$30                                                   ;83ACED|C230    |      ;
     LDA.W #$0000                                               ;83ACEF|A90000  |      ;
     STA.W strcObjectData.spriteIdx                             ;83ACF2|8D0109  |000901;
@@ -5969,7 +5967,7 @@ fGameEngine_LoadGame:
     SEP #$20                                                   ;83B514|E220    |      ;
     LDY.W #$0084                                               ;83B516|A08400  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B519|B772    |000072;
-    STA.L strcShedItems                                        ;83B51B|8F001F7F|7F1F00;
+    STA.L strcShedItems.row1                                   ;83B51B|8F001F7F|7F1F00;
     LDY.W #$0085                                               ;83B51F|A08500  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B522|B772    |000072;
     STA.L strcShedItems.row2                                   ;83B524|8F011F7F|7F1F01;
@@ -6335,7 +6333,7 @@ fGameEngine_SaveGame:
     STA.B [ptrUnknown0x72],Y                                   ;83B8D3|9772    |000072;
     SEP #$20                                                   ;83B8D5|E220    |      ;
     LDY.W #$0084                                               ;83B8D7|A08400  |      ;
-    LDA.L strcShedItems                                        ;83B8DA|AF001F7F|7F1F00;
+    LDA.L strcShedItems.row1                                   ;83B8DA|AF001F7F|7F1F00;
     STA.B [ptrUnknown0x72],Y                                   ;83B8DE|9772    |000072;
     LDY.W #$0085                                               ;83B8E0|A08500  |      ;
     LDA.L strcShedItems.row2                                   ;83B8E3|AF011F7F|7F1F01;
@@ -11414,12 +11412,8 @@ fAreaEvents_Intro:
     STZ.W strcPlayerData.lastExcercise                         ;83E796|9C2509  |000925;
     %SetPlayerFlag(!PFLAGS_ACTIVE)
     %SetPlayerAction(!PACTION_NONE)
-    REP #$30                                                   ;83E7A9|C230    |      ;
-    LDA.W #!PDIR_DOWN                                               
-    STA.B strcPlayer.direction                                 ;83E7AE|85DA    |0000DA;
-    REP #$30                                                   ;83E7B0|C230    |      ;
-    LDA.W #$0000                                               ;83E7B2|A90000  |      ;
-    STA.W strcObjectData.direction                             ;83E7B5|8D1109  |000911;
+    %SetPlayerDirection(!PDIR_DOWN)
+    %SetObjectDirection(!PDIR_DOWN)
     REP #$30                                                   ;83E7B8|C230    |      ;
     LDA.W #$0000                                               ;83E7BA|A90000  |      ;
     STA.W strcObjectData.spriteIdx                             ;83E7BD|8D0109  |000901;
@@ -11648,7 +11642,7 @@ fAreaEvents_Intro:
 .howToPlay07:
     SEP #$20                                                   ;83E955|E220    |      ;
     LDA.B #$3D                                                 ;83E957|A93D    |      ;
-    STA.L strcShedItems                                        ;83E959|8F001F7F|7F1F00;
+    STA.L strcShedItems.row1                                   ;83E959|8F001F7F|7F1F00;
     LDA.B #$00                                                 ;83E95D|A900    |      ;
     STA.L strcShedItems.row2                                   ;83E95F|8F011F7F|7F1F01;
     LDA.B #$12                                                 ;83E963|A912    |      ;
@@ -11713,7 +11707,7 @@ fAreaEvents_Intro:
 .howToPlay0D:
     SEP #$20                                                   ;83EA05|E220    |      ;
     LDA.B #$0D                                                 ;83EA07|A90D    |      ;
-    STA.L strcShedItems                                        ;83EA09|8F001F7F|7F1F00;
+    STA.L strcShedItems.row1                                   ;83EA09|8F001F7F|7F1F00;
     LDA.B #$64                                                 ;83EA0D|A964    |      ;
     STA.L strcShedItems.row2                                   ;83EA0F|8F011F7F|7F1F01;
     LDA.B #$12                                                 ;83EA13|A912    |      ;
@@ -11889,12 +11883,8 @@ fAreaEvents_Endings:
     STZ.W strcPlayerData.lastExcercise                         ;83EBCF|9C2509  |000925;
     %SetPlayerFlag(!PFLAGS_ACTIVE)
     %SetPlayerAction(!PACTION_NONE)
-    REP #$30                                                   ;83EBE2|C230    |      ;
-    LDA.W #!PDIR_DOWN                                               
-    STA.B strcPlayer.direction                                 ;83EBE7|85DA    |0000DA;
-    REP #$30                                                   ;83EBE9|C230    |      ;
-    LDA.W #$0000                                               ;83EBEB|A90000  |      ;
-    STA.W strcObjectData.direction                             ;83EBEE|8D1109  |000911;
+    %SetPlayerDirection(!PDIR_DOWN)
+    %SetObjectDirection(!PDIR_DOWN)
     REP #$30                                                   ;83EBF1|C230    |      ;
     LDA.W #$0000                                               ;83EBF3|A90000  |      ;
     STA.W strcObjectData.spriteIdx                             ;83EBF6|8D0109  |000901;

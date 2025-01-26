@@ -290,7 +290,7 @@ subItemCarried_GreenPerfume:
     BNE +                                                      ;8181B8|D00D    |8181C7;
     SEP #$20                                                   ;8181BA|E220    |      ;
     STZ.W $0976                                                ;8181BC|9C7609  |000976;
-    LDA.B #$58                                                 ;8181BF|A958    |      ;
+    LDA.B #!EITEM_PERFUMEGREEN                                                 
     STA.W nCarriedItemId                                       ;8181C1|8D8409  |000984;
     STA.W strcPlayerData.carryItemId                           ;8181C4|8D1D09  |00091D;
  
@@ -305,7 +305,7 @@ subItemCarried_RedPerfume:
     BNE +                                                      ;8181D2|D00D    |8181E1;
     SEP #$20                                                   ;8181D4|E220    |      ;
     STZ.W $0976                                                ;8181D6|9C7609  |000976;
-    LDA.B #$59                                                 ;8181D9|A959    |      ;
+    LDA.B #!EITEM_PERFUMERED                                                 
     STA.W nCarriedItemId                                       ;8181DB|8D8409  |000984;
     STA.W strcPlayerData.carryItemId                           ;8181DE|8D1D09  |00091D;
  
@@ -320,7 +320,7 @@ subItemCarried_BluePerfume:
     BNE +                                                      ;8181EC|D00D    |8181FB;
     SEP #$20                                                   ;8181EE|E220    |      ;
     STZ.W $0976                                                ;8181F0|9C7609  |000976;
-    LDA.B #$5A                                                 ;8181F3|A95A    |      ;
+    LDA.B #!EITEM_PERFUMEBLUE                                                 
     STA.W nCarriedItemId                                       ;8181F5|8D8409  |000984;
     STA.W strcPlayerData.carryItemId                           ;8181F8|8D1D09  |00091D;
  
@@ -755,9 +755,9 @@ subItemCarried_0x45:
     LDA.W $0976                                                ;8184DA|AD7609  |000976;
     CMP.B #$FF                                                 ;8184DD|C9FF    |      ;
     BNE ++                                                     ;8184DF|D02F    |818510;
-    LDA.L strcShedItems                                        ;8184E1|AF001F7F|7F1F00;
+    LDA.L strcShedItems.row1                                   ;8184E1|AF001F7F|7F1F00;
     ORA.B #$10                                                 ;8184E5|0910    |      ;
-    STA.L strcShedItems                                        ;8184E7|8F001F7F|7F1F00;
+    STA.L strcShedItems.row1                                   ;8184E7|8F001F7F|7F1F00;
     SEP #$20                                                   ;8184EB|E220    |      ;
     LDA.W strcPlayerData.toolEquipped                          ;8184ED|AD2109  |000921;
     CMP.B #$05                                                 ;8184F0|C905    |      ;
@@ -786,9 +786,9 @@ subItemCarried_0x46:
     LDA.W $0976                                                ;818516|AD7609  |000976;
     CMP.B #$FF                                                 ;818519|C9FF    |      ;
     BNE ++                                                     ;81851B|D02F    |81854C;
-    LDA.L strcShedItems                                        ;81851D|AF001F7F|7F1F00;
+    LDA.L strcShedItems.row1                                   ;81851D|AF001F7F|7F1F00;
     ORA.B #$20                                                 ;818521|0920    |      ;
-    STA.L strcShedItems                                        ;818523|8F001F7F|7F1F00;
+    STA.L strcShedItems.row1                                   ;818523|8F001F7F|7F1F00;
     SEP #$20                                                   ;818527|E220    |      ;
     LDA.W strcPlayerData.toolEquipped                          ;818529|AD2109  |000921;
     CMP.B #$06                                                 ;81852C|C906    |      ;
@@ -817,9 +817,9 @@ subItemCarried_0x47:
     LDA.W $0976                                                ;818552|AD7609  |000976;
     CMP.B #$FF                                                 ;818555|C9FF    |      ;
     BNE ++                                                     ;818557|D02F    |818588;
-    LDA.L strcShedItems                                        ;818559|AF001F7F|7F1F00;
+    LDA.L strcShedItems.row1                                   ;818559|AF001F7F|7F1F00;
     ORA.B #$40                                                 ;81855D|0940    |      ;
-    STA.L strcShedItems                                        ;81855F|8F001F7F|7F1F00;
+    STA.L strcShedItems.row1                                   ;81855F|8F001F7F|7F1F00;
     SEP #$20                                                   ;818563|E220    |      ;
     LDA.W strcPlayerData.toolEquipped                          ;818565|AD2109  |000921;
     CMP.B #$07                                                 ;818568|C907    |      ;
@@ -848,9 +848,9 @@ subItemCarried_0x48:
     LDA.W $0976                                                ;81858E|AD7609  |000976;
     CMP.B #$FF                                                 ;818591|C9FF    |      ;
     BNE ++                                                     ;818593|D02F    |8185C4;
-    LDA.L strcShedItems                                        ;818595|AF001F7F|7F1F00;
+    LDA.L strcShedItems.row1                                   ;818595|AF001F7F|7F1F00;
     ORA.B #$80                                                 ;818599|0980    |      ;
-    STA.L strcShedItems                                        ;81859B|8F001F7F|7F1F00;
+    STA.L strcShedItems.row1                                   ;81859B|8F001F7F|7F1F00;
     SEP #$20                                                   ;81859F|E220    |      ;
     LDA.W strcPlayerData.toolEquipped                          ;8185A1|AD2109  |000921;
     CMP.B #$08                                                 ;8185A4|C908    |      ;
@@ -936,9 +936,9 @@ subItemCarried_0x4D:
     LDA.L strcShedItems.row3                                   ;818630|AF021F7F|7F1F02;
     ORA.B #$01                                                 ;818634|0901    |      ;
     STA.L strcShedItems.row3                                   ;818636|8F021F7F|7F1F02;
-    LDA.L strcShedItems                                        ;81863A|AF001F7F|7F1F00;
+    LDA.L strcShedItems.row1                                   ;81863A|AF001F7F|7F1F00;
     AND.B #$FE                                                 ;81863E|29FE    |      ;
-    STA.L strcShedItems                                        ;818640|8F001F7F|7F1F00;
+    STA.L strcShedItems.row1                                   ;818640|8F001F7F|7F1F00;
     LDA.W strcPlayerData.toolEquipped                          ;818644|AD2109  |000921;
     CMP.B #$01                                                 ;818647|C901    |      ;
     BNE +                                                      ;818649|D003    |81864E;
@@ -962,9 +962,9 @@ subItemCarried_0x4E:
     LDA.L strcShedItems.row3                                   ;818667|AF021F7F|7F1F02;
     ORA.B #$02                                                 ;81866B|0902    |      ;
     STA.L strcShedItems.row3                                   ;81866D|8F021F7F|7F1F02;
-    LDA.L strcShedItems                                        ;818671|AF001F7F|7F1F00;
+    LDA.L strcShedItems.row1                                   ;818671|AF001F7F|7F1F00;
     AND.B #$FD                                                 ;818675|29FD    |      ;
-    STA.L strcShedItems                                        ;818677|8F001F7F|7F1F00;
+    STA.L strcShedItems.row1                                   ;818677|8F001F7F|7F1F00;
     LDA.W strcPlayerData.toolEquipped                          ;81867B|AD2109  |000921;
     CMP.B #$02                                                 ;81867E|C902    |      ;
     BNE +                                                      ;818680|D003    |818685;
@@ -988,9 +988,9 @@ subItemCarried_0x4F:
     LDA.L strcShedItems.row3                                   ;81869E|AF021F7F|7F1F02;
     ORA.B #$04                                                 ;8186A2|0904    |      ;
     STA.L strcShedItems.row3                                   ;8186A4|8F021F7F|7F1F02;
-    LDA.L strcShedItems                                        ;8186A8|AF001F7F|7F1F00;
+    LDA.L strcShedItems.row1                                   ;8186A8|AF001F7F|7F1F00;
     AND.B #$FB                                                 ;8186AC|29FB    |      ;
-    STA.L strcShedItems                                        ;8186AE|8F001F7F|7F1F00;
+    STA.L strcShedItems.row1                                   ;8186AE|8F001F7F|7F1F00;
     LDA.W strcPlayerData.toolEquipped                          ;8186B2|AD2109  |000921;
     CMP.B #$03                                                 ;8186B5|C903    |      ;
     BNE +                                                      ;8186B7|D003    |8186BC;
@@ -1014,9 +1014,9 @@ subItemCarried_0x50:
     LDA.L strcShedItems.row3                                   ;8186D5|AF021F7F|7F1F02;
     ORA.B #$08                                                 ;8186D9|0908    |      ;
     STA.L strcShedItems.row3                                   ;8186DB|8F021F7F|7F1F02;
-    LDA.L strcShedItems                                        ;8186DF|AF001F7F|7F1F00;
+    LDA.L strcShedItems.row1                                   ;8186DF|AF001F7F|7F1F00;
     AND.B #$F7                                                 ;8186E3|29F7    |      ;
-    STA.L strcShedItems                                        ;8186E5|8F001F7F|7F1F00;
+    STA.L strcShedItems.row1                                   ;8186E5|8F001F7F|7F1F00;
     LDA.W strcPlayerData.toolEquipped                          ;8186E9|AD2109  |000921;
     CMP.B #$04                                                 ;8186EC|C904    |      ;
     BNE +                                                      ;8186EE|D003    |8186F3;
@@ -1179,9 +1179,9 @@ fUnknown_8187C3:
     REP #$20                                                   ;8187FF|C220    |      ;
     TAX                                                        ;818801|AA      |      ;
     SEP #$20                                                   ;818802|E220    |      ;
-    LDA.L strcShedItems,X                                      ;818804|BF001F7F|7F1F00;
+    LDA.L strcShedItems.row1,X                                 ;818804|BF001F7F|7F1F00;
     AND.B strcVariables.n8Temp1                                ;818808|2592    |000092;
-    STA.L strcShedItems,X                                      ;81880A|9F001F7F|7F1F00;
+    STA.L strcShedItems.row1,X                                 ;81880A|9F001F7F|7F1F00;
     %SetPlayerAction(!PACTION_NONE)
     %UnsetPlayerFlag(!PFLAGS_HOLDINGITEM)
     REP #$20                                                   ;818821|C220    |      ;
@@ -1794,9 +1794,7 @@ fUnknown_818C24:
     INC A                                                      ;818C2D|1A      |      ;
     INC A                                                      ;818C2E|1A      |      ;
     STA.W nUnknownY                                            ;818C2F|8D8209  |000982;
-    REP #$30                                                   ;818C32|C230    |      ;
-    LDA.B strcPlayer.action                                    ;818C34|A5D4    |0000D4;
-    CMP.W #!PACTION_JUMP                                               
+    %CheckPlayerAction(!PACTION_JUMP)
     BNE .label1                                                ;818C39|D003    |818C3E;
     JMP.W .label2                                              ;818C3B|4C538C  |818C53;
  
@@ -1838,9 +1836,7 @@ fUnknown_818C24:
     BEQ .label1                                                ;818C83|F0B9    |818C3E;
  
 .label3:
-    REP #$30                                                   ;818C85|C230    |      ;
-    LDA.B strcPlayer.action                                    ;818C87|A5D4    |0000D4;
-    CMP.W #$0005                                               ;818C89|C90500  |      ;
+    %CheckPlayerAction(!PACTION_DROPITEM)
     BEQ .lable5                                                ;818C8C|F003    |818C91;
     JMP.W fReturn_818E1A                                       ;818C8E|4C1A8E  |818E1A;
  
@@ -2297,9 +2293,7 @@ fUnknown_819049:
     INC A                                                      ;819052|1A      |      ;
     INC A                                                      ;819053|1A      |      ;
     STA.W nUnknownY                                            ;819054|8D8209  |000982;
-    REP #$30                                                   ;819057|C230    |      ;
-    LDA.B strcPlayer.action                                    ;819059|A5D4    |0000D4;
-    CMP.W #$0003                                               ;81905B|C90300  |      ;
+    %CheckPlayerAction(!PACTION_JUMP)
     BNE fUnknown_819063                                        ;81905E|D003    |819063;
     JMP.W fUnknown_819078                                      ;819060|4C7890  |819078;
  
@@ -2340,9 +2334,7 @@ fUnknown_819078:
     BEQ fUnknown_819063                                        ;8190A8|F0B9    |819063;
  
 fItemSell_Unknown8190AA:
-    REP #$30                                                   ;8190AA|C230    |      ;
-    LDA.B strcPlayer.action                                    ;8190AC|A5D4    |0000D4;
-    CMP.W #$0005                                               ;8190AE|C90500  |      ;
+    %CheckPlayerAction(!PACTION_DROPITEM)
     BEQ +                                                      ;8190B1|F003    |8190B6;
     JMP.W fReturn_819227                                       ;8190B3|4C2792  |819227;
  
@@ -2521,9 +2513,7 @@ fUnknown_819228:
     INC A                                                      ;819231|1A      |      ;
     INC A                                                      ;819232|1A      |      ;
     STA.W nUnknownY                                            ;819233|8D8209  |000982;
-    REP #$30                                                   ;819236|C230    |      ;
-    LDA.B strcPlayer.action                                    ;819238|A5D4    |0000D4;
-    CMP.W #!PACTION_JUMP                                               
+    %CheckPlayerAction(!PACTION_JUMP)
     BNE .notjump                                               ;81923D|D003    |819242;
     JMP.W .jump                                                ;81923F|4C5792  |819257;
  
@@ -2565,9 +2555,7 @@ fUnknown_819228:
     BEQ .notjump                                               ;819287|F0B9    |819242;
  
 .label2:
-    REP #$30                                                   ;819289|C230    |      ;
-    LDA.B strcPlayer.action                                    ;81928B|A5D4    |0000D4;
-    CMP.W #$0005                                               ;81928D|C90500  |      ;
+    %CheckPlayerAction(!PACTION_DROPITEM)
     BEQ +                                                      ;819290|F003    |819295;
     JMP.W .justReturn                                          ;819292|4C7893  |819378;
  
@@ -2817,7 +2805,7 @@ fUnknown_819497:
     SEP #$20                                                   ;819497|E220    |      ;
     REP #$10                                                   ;819499|C210    |      ;
     LDA.W strcPlayerData.carryItemId                           ;81949B|AD1D09  |00091D;
-    CMP.B #$14                                                 ;81949E|C914    |      ;
+    CMP.B #!EITEM_GOLDAXE                                                 
     BEQ +                                                      ;8194A0|F003    |8194A5;
     JMP.W fUnknown_81953F                                      ;8194A2|4C3F95  |81953F;
  
@@ -4854,9 +4842,9 @@ fUnknown_81A94A:
     LDA.L nCarriedItemTable_81BE0F,X                           ;81A9D3|BF0FBE81|81BE0F;
     STA.B strcVariables.n8Temp1                                ;81A9D7|8592    |000092; A -> $92
     TYX                                                        ;81A9D9|BB      |      ;
-    LDA.L strcShedItems,X                                      ;81A9DA|BF001F7F|7F1F00;
+    LDA.L strcShedItems.row1,X                                 ;81A9DA|BF001F7F|7F1F00;
     ORA.B strcVariables.n8Temp1                                ;81A9DE|0592    |000092;
-    STA.L strcShedItems,X                                      ;81A9E0|9F001F7F|7F1F00;
+    STA.L strcShedItems.row1,X                                 ;81A9E0|9F001F7F|7F1F00;
  
 .return:
     RTL                                                        ;81A9E4|6B      |      ;
@@ -6287,7 +6275,7 @@ fUnknown_81B2BB:
     CMP.W #$0001                                               ;81B333|C90100  |      ;
     BEQ .label6                                                ;81B336|F00C    |81B344;
     SEP #$20                                                   ;81B338|E220    |      ;
-    LDA.L strcShedItems,X                                      ;81B33A|BF001F7F|7F1F00;
+    LDA.L strcShedItems.row1,X                                 ;81B33A|BF001F7F|7F1F00;
     AND.B strcVariables.n8Temp1                                ;81B33E|2592    |000092;
     BNE .return                                                ;81B340|D020    |81B362;
     BRA .label7                                                ;81B342|800A    |81B34E;
@@ -6295,7 +6283,7 @@ fUnknown_81B2BB:
  
 .label6:
     SEP #$20                                                   ;81B344|E220    |      ;
-    LDA.L strcShedItems,X                                      ;81B346|BF001F7F|7F1F00;
+    LDA.L strcShedItems.row1,X                                 ;81B346|BF001F7F|7F1F00;
     AND.B strcVariables.n8Temp1                                ;81B34A|2592    |000092;
     BEQ .return                                                ;81B34C|F014    |81B362;
  
@@ -7398,9 +7386,7 @@ fPlayerAction0x00:
  
  
 fUnknown_81C002:
-    REP #$30                                                   ;81C002|C230    |      ;
-    LDA.B strcPlayer.action                                    ;81C004|A5D4    |0000D4;
-    CMP.W #!PACTION_NONE                                               
+    %CheckPlayerAction(!PACTION_NONE)
     BNE fPlayerAction0x19                                      ;81C009|D003    |81C00E;
     JMP.W fUnknown_81C556                                      ;81C00B|4C56C5  |81C556;
  
@@ -8796,23 +8782,17 @@ fUnknown_81CB77:
  
 .down:
     REP #$30                                                   ;81CB9E|C230    |      ;
-    REP #$30                                                   ;81CBA0|C230    |      ;
-    LDA.B strcPlayer.action                                    ;81CBA2|A5D4    |0000D4;
-    CMP.W #!PACTION_JUMP                                               
+    %CheckPlayerAction(!PACTION_JUMP)
     BNE +                                                      ;81CBA7|D003    |81CBAC;
     JMP.W .addY                                                ;81CBA9|4C30CC  |81CC30;
  
  
-  + REP #$30                                                   ;81CBAC|C230    |      ;
-    LDA.B strcPlayer.action                                    ;81CBAE|A5D4    |0000D4;
-    CMP.W #$0017                                               ;81CBB0|C91700  |      ;
+  + %CheckPlayerAction(!PACTION_17)
     BNE +                                                      ;81CBB3|D003    |81CBB8;
     JMP.W .addY                                                ;81CBB5|4C30CC  |81CC30;
  
  
-  + REP #$30                                                   ;81CBB8|C230    |      ;
-    LDA.B strcPlayer.action                                    ;81CBBA|A5D4    |0000D4;
-    CMP.W #$0018                                               ;81CBBC|C91800  |      ;
+  + %CheckPlayerAction(!PACTION_18)
     BNE +                                                      ;81CBBF|D003    |81CBC4;
     JMP.W .addY                                                ;81CBC1|4C30CC  |81CC30;
  
@@ -8885,23 +8865,17 @@ fUnknown_81CB77:
  
 .up:
     REP #$30                                                   ;81CC42|C230    |      ;
-    REP #$30                                                   ;81CC44|C230    |      ;
-    LDA.B strcPlayer.action                                    ;81CC46|A5D4    |0000D4;
-    CMP.W #!PACTION_JUMP                                               
+    %CheckPlayerAction(!PACTION_JUMP)
     BNE +                                                      ;81CC4B|D003    |81CC50;
     JMP.W .subY                                                ;81CC4D|4CD4CC  |81CCD4;
  
  
-  + REP #$30                                                   ;81CC50|C230    |      ;
-    LDA.B strcPlayer.action                                    ;81CC52|A5D4    |0000D4;
-    CMP.W #$0017                                               ;81CC54|C91700  |      ;
+  + %CheckPlayerAction(!PACTION_17)
     BNE +                                                      ;81CC57|D003    |81CC5C;
     JMP.W .subY                                                ;81CC59|4CD4CC  |81CCD4;
  
  
-  + REP #$30                                                   ;81CC5C|C230    |      ;
-    LDA.B strcPlayer.action                                    ;81CC5E|A5D4    |0000D4;
-    CMP.W #$0018                                               ;81CC60|C91800  |      ;
+  + %CheckPlayerAction(!PACTION_18)
     BNE +                                                      ;81CC63|D003    |81CC68;
     JMP.W .subY                                                ;81CC65|4CD4CC  |81CCD4;
  
@@ -8974,23 +8948,17 @@ fUnknown_81CB77:
  
 .left:
     REP #$30                                                   ;81CCE6|C230    |      ;
-    REP #$30                                                   ;81CCE8|C230    |      ;
-    LDA.B strcPlayer.action                                    ;81CCEA|A5D4    |0000D4;
-    CMP.W #!PACTION_JUMP                                               
+    %CheckPlayerAction(!PACTION_JUMP)
     BNE +                                                      ;81CCEF|D003    |81CCF4;
     JMP.W .addX                                                ;81CCF1|4C78CD  |81CD78;
  
  
-  + REP #$30                                                   ;81CCF4|C230    |      ;
-    LDA.B strcPlayer.action                                    ;81CCF6|A5D4    |0000D4;
-    CMP.W #$0017                                               ;81CCF8|C91700  |      ;
+  + %CheckPlayerAction(!PACTION_17)
     BNE +                                                      ;81CCFB|D003    |81CD00;
     JMP.W .addX                                                ;81CCFD|4C78CD  |81CD78;
  
  
-  + REP #$30                                                   ;81CD00|C230    |      ;
-    LDA.B strcPlayer.action                                    ;81CD02|A5D4    |0000D4;
-    CMP.W #$0018                                               ;81CD04|C91800  |      ;
+  + %CheckPlayerAction(!PACTION_18)
     BNE +                                                      ;81CD07|D003    |81CD0C;
     JMP.W .addX                                                ;81CD09|4C78CD  |81CD78;
  
@@ -9063,23 +9031,17 @@ fUnknown_81CB77:
  
 .right:
     REP #$30                                                   ;81CD8A|C230    |      ;
-    REP #$30                                                   ;81CD8C|C230    |      ;
-    LDA.B strcPlayer.action                                    ;81CD8E|A5D4    |0000D4;
-    CMP.W #!PACTION_JUMP                                               
+    %CheckPlayerAction(!PACTION_JUMP)
     BNE +                                                      ;81CD93|D003    |81CD98;
     JMP.W .subX                                                ;81CD95|4C1CCE  |81CE1C;
  
  
-  + REP #$30                                                   ;81CD98|C230    |      ;
-    LDA.B strcPlayer.action                                    ;81CD9A|A5D4    |0000D4;
-    CMP.W #$0017                                               ;81CD9C|C91700  |      ;
+  + %CheckPlayerAction(!PACTION_17)
     BNE +                                                      ;81CD9F|D003    |81CDA4;
     JMP.W .subX                                                ;81CDA1|4C1CCE  |81CE1C;
  
  
-  + REP #$30                                                   ;81CDA4|C230    |      ;
-    LDA.B strcPlayer.action                                    ;81CDA6|A5D4    |0000D4;
-    CMP.W #$0018                                               ;81CDA8|C91800  |      ;
+  + %CheckPlayerAction(!PACTION_18)
     BNE +                                                      ;81CDAB|D003    |81CDB0;
     JMP.W .subX                                                ;81CDAD|4C1CCE  |81CE1C;
  
@@ -9193,9 +9155,7 @@ fUnknown_81CB77:
  
  ++ LDA.W #$0001                                               ;81CE72|A90100  |      ;
     STA.B strcMap.unk1E                                        ;81CE75|851E    |00001E;
-    REP #$30                                                   ;81CE77|C230    |      ;
-    LDA.W #!PDIR_RIGHT                                               
-    STA.B strcPlayer.direction                                 ;81CE7C|85DA    |0000DA;
+    %SetPlayerDirection(!PDIR_RIGHT)
     JMP.W .right                                               ;81CE7E|4C8ACD  |81CD8A;
  
  
@@ -9216,9 +9176,7 @@ fUnknown_81CB77:
  
  ++ LDA.W #$0001                                               ;81CE9B|A90100  |      ;
     STA.B strcMap.unk1E                                        ;81CE9E|851E    |00001E;
-    REP #$30                                                   ;81CEA0|C230    |      ;
-    LDA.W #!PDIR_LEFT                                               
-    STA.B strcPlayer.direction                                 ;81CEA5|85DA    |0000DA;
+    %SetPlayerDirection(!PDIR_LEFT)
     JMP.W .left                                                ;81CEA7|4CE6CC  |81CCE6;
  
  
@@ -9239,9 +9197,7 @@ fUnknown_81CB77:
  
  ++ LDA.W #$0001                                               ;81CEC4|A90100  |      ;
     STA.B strcMap.unk1E                                        ;81CEC7|851E    |00001E;
-    REP #$30                                                   ;81CEC9|C230    |      ;
-    LDA.W #!PDIR_RIGHT                                               
-    STA.B strcPlayer.direction                                 ;81CECE|85DA    |0000DA;
+    %SetPlayerDirection(!PDIR_RIGHT)
     JMP.W .right                                               ;81CED0|4C8ACD  |81CD8A;
  
  
@@ -9262,9 +9218,7 @@ fUnknown_81CB77:
  
  ++ LDA.W #$0001                                               ;81CEED|A90100  |      ;
     STA.B strcMap.unk1E                                        ;81CEF0|851E    |00001E;
-    REP #$30                                                   ;81CEF2|C230    |      ;
-    LDA.W #!PDIR_LEFT                                               
-    STA.B strcPlayer.direction                                 ;81CEF7|85DA    |0000DA;
+    %SetPlayerDirection(!PDIR_LEFT)
     JMP.W .left                                                ;81CEF9|4CE6CC  |81CCE6;
  
  
@@ -9285,9 +9239,7 @@ fUnknown_81CB77:
  
  ++ LDA.W #$0001                                               ;81CF16|A90100  |      ;
     STA.B strcMap.unk1E                                        ;81CF19|851E    |00001E;
-    REP #$30                                                   ;81CF1B|C230    |      ;
-    LDA.W #!PDIR_UP                                               
-    STA.B strcPlayer.direction                                 ;81CF20|85DA    |0000DA;
+    %SetPlayerDirection(!PDIR_UP)
     JMP.W .up                                                  ;81CF22|4C42CC  |81CC42;
  
  
@@ -9308,9 +9260,7 @@ fUnknown_81CB77:
  
  ++ LDA.W #$0001                                               ;81CF3F|A90100  |      ;
     STA.B strcMap.unk1E                                        ;81CF42|851E    |00001E;
-    REP #$30                                                   ;81CF44|C230    |      ;
-    LDA.W #!PDIR_DOWN                                               
-    STA.B strcPlayer.direction                                 ;81CF49|85DA    |0000DA;
+    %SetPlayerDirection(!PDIR_DOWN)
     JMP.W .down                                                ;81CF4B|4C9ECB  |81CB9E;
  
  
@@ -9331,9 +9281,7 @@ fUnknown_81CB77:
  
  ++ LDA.W #$0001                                               ;81CF68|A90100  |      ;
     STA.B strcMap.unk1E                                        ;81CF6B|851E    |00001E;
-    REP #$30                                                   ;81CF6D|C230    |      ;
-    LDA.W #!PDIR_UP                                               
-    STA.B strcPlayer.direction                                 ;81CF72|85DA    |0000DA;
+    %SetPlayerDirection(!PDIR_UP)
     JMP.W .up                                                  ;81CF74|4C42CC  |81CC42;
  
  
@@ -9354,9 +9302,7 @@ fUnknown_81CB77:
  
  ++ LDA.W #$0001                                               ;81CF91|A90100  |      ;
     STA.B strcMap.unk1E                                        ;81CF94|851E    |00001E;
-    REP #$30                                                   ;81CF96|C230    |      ;
-    LDA.W #!PDIR_DOWN                                               
-    STA.B strcPlayer.direction                                 ;81CF9B|85DA    |0000DA;
+    %SetPlayerDirection(!PDIR_DOWN)
     JMP.W .down                                                ;81CF9D|4C9ECB  |81CB9E;
  
  
@@ -10379,7 +10325,7 @@ fPlayerInteraction0x01_WoodStorage:
     REP #$20                                                   ;81D64D|C220    |      ;
     CMP.W #$0001                                               ;81D64F|C90100  |      ;
     BEQ +                                                      ;81D652|F00E    |81D662;
-    %SetCurrentCarriedItemDirect($57)
+    %SetCurrentCarriedItemDirect(!EITEM_WOODFENCE)
     %SetPlayerAction(!PACTION_ITEMONHAND)
  
   + %UnsetPlayerFlag(!PFLAGS_INTERACTING)
@@ -10677,12 +10623,8 @@ fPlayerInteraction0x10_PlayerDiary:
     BNE .marriedCheck                                          ;81D8AC|D04F    |81D8FD;
     %SetPlayerFlag(!PFLAGS_INTRANSITION)
     %SetPlayerAction(!PACTION_WALK)
-    REP #$30                                                   ;81D8BE|C230    |      ;
-    LDA.W #!PDIR_RIGHT                                               
-    STA.B strcPlayer.direction                                 ;81D8C3|85DA    |0000DA;
-    REP #$30                                                   ;81D8C5|C230    |      ;
-    LDA.W #$0003                                               ;81D8C7|A90300  |      ;
-    STA.W strcObjectData.direction                             ;81D8CA|8D1109  |000911;
+    %SetPlayerDirection(!PDIR_RIGHT)
+    %SetObjectDirection(!PDIR_RIGHT)
     SEP #$20                                                   ;81D8CD|E220    |      ;
     INC.W nPlayerInteractionArg2                               ;81D8CF|EE7009  |000970;
     LDA.W nPlayerInteractionArg2                               ;81D8D2|AD7009  |000970;
@@ -10709,12 +10651,8 @@ fPlayerInteraction0x10_PlayerDiary:
     %SetFlag(daily3, $0800)
     %SetPlayerFlag(!PFLAGS_INTRANSITION)
     %SetPlayerAction(!PACTION_WALK)
-    REP #$30                                                   ;81D91A|C230    |      ;
-    LDA.W #!PDIR_RIGHT                                               
-    STA.B strcPlayer.direction                                 ;81D91F|85DA    |0000DA;
-    REP #$30                                                   ;81D921|C230    |      ;
-    LDA.W #$0003                                               ;81D923|A90300  |      ;
-    STA.W strcObjectData.direction                             ;81D926|8D1109  |000911;
+    %SetPlayerDirection(!PDIR_RIGHT)
+    %SetObjectDirection(!PDIR_RIGHT)
     SEP #$20                                                   ;81D929|E220    |      ;
     INC.W nPlayerInteractionArg2                               ;81D92B|EE7009  |000970;
     LDA.W nPlayerInteractionArg2                               ;81D92E|AD7009  |000970;
@@ -10762,12 +10700,8 @@ fPlayerInteraction0x11:
     BEQ +                                                      ;81D982|F030    |81D9B4;
     %SetPlayerFlag(!PFLAGS_INTRANSITION)
     %SetPlayerAction(!PACTION_0E)
-    REP #$30                                                   ;81D994|C230    |      ;
-    LDA.W #!PDIR_UP                                               
-    STA.B strcPlayer.direction                                 ;81D999|85DA    |0000DA;
-    REP #$30                                                   ;81D99B|C230    |      ;
-    LDA.W #$0001                                               ;81D99D|A90100  |      ;
-    STA.W strcObjectData.direction                             ;81D9A0|8D1109  |000911;
+    %SetPlayerDirection(!PDIR_UP)
+    %SetObjectDirection(!PDIR_UP)
     SEP #$20                                                   ;81D9A3|E220    |      ;
     INC.W nPlayerInteractionArg2                               ;81D9A5|EE7009  |000970;
     LDA.W nPlayerInteractionArg2                               ;81D9A8|AD7009  |000970;
@@ -11201,84 +11135,42 @@ fPlayerInteraction0x26_MariaDiary:
  
  
 fPlayerInteraction0x27:
-    REP #$20                                                   ;81DCCE|C220    |      ;
-    LDA.W #$0070                                               ;81DCD0|A97000  |      ;
-    ASL A                                                      ;81DCD3|0A      |      ;
-    ASL A                                                      ;81DCD4|0A      |      ;
-    TAX                                                        ;81DCD5|AA      |      ;
-    SEP #$20                                                   ;81DCD6|E220    |      ;
-    LDA.L aInteractionItemTable,X                              ;81DCD8|BFB4CF82|82CFB4;
-    STA.W strcPlayerData.carryItemId                           ;81DCDC|8D1D09  |00091D;
+    %SetCurrentCarriedItemIndex($0070)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     RTS                                                        ;81DCF2|60      |      ;
  
  
 fPlayerInteraction0x28:
-    REP #$20                                                   ;81DCF3|C220    |      ;
-    LDA.W #$0071                                               ;81DCF5|A97100  |      ;
-    ASL A                                                      ;81DCF8|0A      |      ;
-    ASL A                                                      ;81DCF9|0A      |      ;
-    TAX                                                        ;81DCFA|AA      |      ;
-    SEP #$20                                                   ;81DCFB|E220    |      ;
-    LDA.L aInteractionItemTable,X                              ;81DCFD|BFB4CF82|82CFB4;
-    STA.W strcPlayerData.carryItemId                           ;81DD01|8D1D09  |00091D;
+    %SetCurrentCarriedItemIndex($0071)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     RTS                                                        ;81DD17|60      |      ;
  
  
 fPlayerInteraction0x29:
-    REP #$20                                                   ;81DD18|C220    |      ;
-    LDA.W #$0072                                               ;81DD1A|A97200  |      ;
-    ASL A                                                      ;81DD1D|0A      |      ;
-    ASL A                                                      ;81DD1E|0A      |      ;
-    TAX                                                        ;81DD1F|AA      |      ;
-    SEP #$20                                                   ;81DD20|E220    |      ;
-    LDA.L aInteractionItemTable,X                              ;81DD22|BFB4CF82|82CFB4;
-    STA.W strcPlayerData.carryItemId                           ;81DD26|8D1D09  |00091D;
+    %SetCurrentCarriedItemIndex($0072)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     RTS                                                        ;81DD3C|60      |      ;
  
  
 fPlayerInteraction0x2A:
-    REP #$20                                                   ;81DD3D|C220    |      ;
-    LDA.W #$0073                                               ;81DD3F|A97300  |      ;
-    ASL A                                                      ;81DD42|0A      |      ;
-    ASL A                                                      ;81DD43|0A      |      ;
-    TAX                                                        ;81DD44|AA      |      ;
-    SEP #$20                                                   ;81DD45|E220    |      ;
-    LDA.L aInteractionItemTable,X                              ;81DD47|BFB4CF82|82CFB4;
-    STA.W strcPlayerData.carryItemId                           ;81DD4B|8D1D09  |00091D;
+    %SetCurrentCarriedItemIndex($0073)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     RTS                                                        ;81DD61|60      |      ;
  
  
 fPlayerInteraction0x2B:
-    REP #$20                                                   ;81DD62|C220    |      ;
-    LDA.W #$0074                                               ;81DD64|A97400  |      ;
-    ASL A                                                      ;81DD67|0A      |      ;
-    ASL A                                                      ;81DD68|0A      |      ;
-    TAX                                                        ;81DD69|AA      |      ;
-    SEP #$20                                                   ;81DD6A|E220    |      ;
-    LDA.L aInteractionItemTable,X                              ;81DD6C|BFB4CF82|82CFB4;
-    STA.W strcPlayerData.carryItemId                           ;81DD70|8D1D09  |00091D;
+    %SetCurrentCarriedItemIndex($0074)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     RTS                                                        ;81DD86|60      |      ;
  
  
 fPlayerInteraction0x2C:
-    REP #$20                                                   ;81DD87|C220    |      ;
-    LDA.W #$0075                                               ;81DD89|A97500  |      ;
-    ASL A                                                      ;81DD8C|0A      |      ;
-    ASL A                                                      ;81DD8D|0A      |      ;
-    TAX                                                        ;81DD8E|AA      |      ;
-    SEP #$20                                                   ;81DD8F|E220    |      ;
-    LDA.L aInteractionItemTable,X                              ;81DD91|BFB4CF82|82CFB4;
-    STA.W strcPlayerData.carryItemId                           ;81DD95|8D1D09  |00091D;
+    %SetCurrentCarriedItemIndex($0075)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     RTS                                                        ;81DDAB|60      |      ;
@@ -11780,56 +11672,28 @@ fPlayerInteraction0x2E_AnimalNPC:
  
  
 fPlayerInteraction0x2F:
-    REP #$20                                                   ;81E245|C220    |      ;
-    LDA.W #$007E                                               ;81E247|A97E00  |      ;
-    ASL A                                                      ;81E24A|0A      |      ;
-    ASL A                                                      ;81E24B|0A      |      ;
-    TAX                                                        ;81E24C|AA      |      ;
-    SEP #$20                                                   ;81E24D|E220    |      ;
-    LDA.L aInteractionItemTable,X                              ;81E24F|BFB4CF82|82CFB4;
-    STA.W strcPlayerData.carryItemId                           ;81E253|8D1D09  |00091D;
+    %SetCurrentCarriedItemIndex($007E)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     RTS                                                        ;81E269|60      |      ;
  
  
 fPlayerInteraction0x30:
-    REP #$20                                                   ;81E26A|C220    |      ;
-    LDA.W #$007F                                               ;81E26C|A97F00  |      ;
-    ASL A                                                      ;81E26F|0A      |      ;
-    ASL A                                                      ;81E270|0A      |      ;
-    TAX                                                        ;81E271|AA      |      ;
-    SEP #$20                                                   ;81E272|E220    |      ;
-    LDA.L aInteractionItemTable,X                              ;81E274|BFB4CF82|82CFB4;
-    STA.W strcPlayerData.carryItemId                           ;81E278|8D1D09  |00091D;
+    %SetCurrentCarriedItemIndex($007F)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     RTS                                                        ;81E28E|60      |      ;
  
  
 fPlayerInteraction0x31:
-    REP #$20                                                   ;81E28F|C220    |      ;
-    LDA.W #$0080                                               ;81E291|A98000  |      ;
-    ASL A                                                      ;81E294|0A      |      ;
-    ASL A                                                      ;81E295|0A      |      ;
-    TAX                                                        ;81E296|AA      |      ;
-    SEP #$20                                                   ;81E297|E220    |      ;
-    LDA.L aInteractionItemTable,X                              ;81E299|BFB4CF82|82CFB4;
-    STA.W strcPlayerData.carryItemId                           ;81E29D|8D1D09  |00091D;
+    %SetCurrentCarriedItemIndex($0080)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     RTS                                                        ;81E2B3|60      |      ;
  
  
 fPlayerInteraction0x32:
-    REP #$20                                                   ;81E2B4|C220    |      ;
-    LDA.W #$0081                                               ;81E2B6|A98100  |      ;
-    ASL A                                                      ;81E2B9|0A      |      ;
-    ASL A                                                      ;81E2BA|0A      |      ;
-    TAX                                                        ;81E2BB|AA      |      ;
-    SEP #$20                                                   ;81E2BC|E220    |      ;
-    LDA.L aInteractionItemTable,X                              ;81E2BE|BFB4CF82|82CFB4;
-    STA.W strcPlayerData.carryItemId                           ;81E2C2|8D1D09  |00091D;
+    %SetCurrentCarriedItemIndex($0081)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     RTS                                                        ;81E2D8|60      |      ;
@@ -11890,14 +11754,7 @@ fPlayerInteraction0x33_EllenDiary:
  
  
 fPlayerInteraction0x34:
-    REP #$20                                                   ;81E349|C220    |      ;
-    LDA.W #$0082                                               ;81E34B|A98200  |      ;
-    ASL A                                                      ;81E34E|0A      |      ;
-    ASL A                                                      ;81E34F|0A      |      ;
-    TAX                                                        ;81E350|AA      |      ;
-    SEP #$20                                                   ;81E351|E220    |      ;
-    LDA.L aInteractionItemTable,X                              ;81E353|BFB4CF82|82CFB4;
-    STA.W strcPlayerData.carryItemId                           ;81E357|8D1D09  |00091D;
+    %SetCurrentCarriedItemIndex($0082)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     RTS                                                        ;81E36D|60      |      ;
@@ -11972,112 +11829,56 @@ fPlayerInteraction0x36_AnnDiary:
  
  
 fPlayerInteraction0x37:
-    REP #$20                                                   ;81E404|C220    |      ;
-    LDA.W #$0077                                               ;81E406|A97700  |      ;
-    ASL A                                                      ;81E409|0A      |      ;
-    ASL A                                                      ;81E40A|0A      |      ;
-    TAX                                                        ;81E40B|AA      |      ;
-    SEP #$20                                                   ;81E40C|E220    |      ;
-    LDA.L aInteractionItemTable,X                              ;81E40E|BFB4CF82|82CFB4;
-    STA.W strcPlayerData.carryItemId                           ;81E412|8D1D09  |00091D;
+    %SetCurrentCarriedItemIndex($0077)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     RTS                                                        ;81E428|60      |      ;
  
  
 fPlayerInteraction0x38:
-    REP #$20                                                   ;81E429|C220    |      ;
-    LDA.W #$0076                                               ;81E42B|A97600  |      ;
-    ASL A                                                      ;81E42E|0A      |      ;
-    ASL A                                                      ;81E42F|0A      |      ;
-    TAX                                                        ;81E430|AA      |      ;
-    SEP #$20                                                   ;81E431|E220    |      ;
-    LDA.L aInteractionItemTable,X                              ;81E433|BFB4CF82|82CFB4;
-    STA.W strcPlayerData.carryItemId                           ;81E437|8D1D09  |00091D;
+    %SetCurrentCarriedItemIndex($0076)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     RTS                                                        ;81E44D|60      |      ;
  
  
 fPlayerInteraction0x39:
-    REP #$20                                                   ;81E44E|C220    |      ;
-    LDA.W #$0078                                               ;81E450|A97800  |      ;
-    ASL A                                                      ;81E453|0A      |      ;
-    ASL A                                                      ;81E454|0A      |      ;
-    TAX                                                        ;81E455|AA      |      ;
-    SEP #$20                                                   ;81E456|E220    |      ;
-    LDA.L aInteractionItemTable,X                              ;81E458|BFB4CF82|82CFB4;
-    STA.W strcPlayerData.carryItemId                           ;81E45C|8D1D09  |00091D;
+    %SetCurrentCarriedItemIndex($0078)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     RTS                                                        ;81E472|60      |      ;
  
  
 fPlayerInteraction0x3A:
-    REP #$20                                                   ;81E473|C220    |      ;
-    LDA.W #$007D                                               ;81E475|A97D00  |      ;
-    ASL A                                                      ;81E478|0A      |      ;
-    ASL A                                                      ;81E479|0A      |      ;
-    TAX                                                        ;81E47A|AA      |      ;
-    SEP #$20                                                   ;81E47B|E220    |      ;
-    LDA.L aInteractionItemTable,X                              ;81E47D|BFB4CF82|82CFB4;
-    STA.W strcPlayerData.carryItemId                           ;81E481|8D1D09  |00091D;
+    %SetCurrentCarriedItemIndex($007D)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     RTS                                                        ;81E497|60      |      ;
  
  
 fPlayerInteraction0x3B:
-    REP #$20                                                   ;81E498|C220    |      ;
-    LDA.W #$0079                                               ;81E49A|A97900  |      ;
-    ASL A                                                      ;81E49D|0A      |      ;
-    ASL A                                                      ;81E49E|0A      |      ;
-    TAX                                                        ;81E49F|AA      |      ;
-    SEP #$20                                                   ;81E4A0|E220    |      ;
-    LDA.L aInteractionItemTable,X                              ;81E4A2|BFB4CF82|82CFB4;
-    STA.W strcPlayerData.carryItemId                           ;81E4A6|8D1D09  |00091D;
+    %SetCurrentCarriedItemIndex($0079)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     RTS                                                        ;81E4BC|60      |      ;
  
  
 fPlayerInteraction0x3C:
-    REP #$20                                                   ;81E4BD|C220    |      ;
-    LDA.W #$007A                                               ;81E4BF|A97A00  |      ;
-    ASL A                                                      ;81E4C2|0A      |      ;
-    ASL A                                                      ;81E4C3|0A      |      ;
-    TAX                                                        ;81E4C4|AA      |      ;
-    SEP #$20                                                   ;81E4C5|E220    |      ;
-    LDA.L aInteractionItemTable,X                              ;81E4C7|BFB4CF82|82CFB4;
-    STA.W strcPlayerData.carryItemId                           ;81E4CB|8D1D09  |00091D;
+    %SetCurrentCarriedItemIndex($007A)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     RTS                                                        ;81E4E1|60      |      ;
  
  
 fPlayerInteraction0x3D:
-    REP #$20                                                   ;81E4E2|C220    |      ;
-    LDA.W #$007B                                               ;81E4E4|A97B00  |      ;
-    ASL A                                                      ;81E4E7|0A      |      ;
-    ASL A                                                      ;81E4E8|0A      |      ;
-    TAX                                                        ;81E4E9|AA      |      ;
-    SEP #$20                                                   ;81E4EA|E220    |      ;
-    LDA.L aInteractionItemTable,X                              ;81E4EC|BFB4CF82|82CFB4;
-    STA.W strcPlayerData.carryItemId                           ;81E4F0|8D1D09  |00091D;
+    %SetCurrentCarriedItemIndex($007B)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     RTS                                                        ;81E506|60      |      ;
  
  
 fPlayerInteraction0x3E:
-    REP #$20                                                   ;81E507|C220    |      ;
-    LDA.W #$007C                                               ;81E509|A97C00  |      ;
-    ASL A                                                      ;81E50C|0A      |      ;
-    ASL A                                                      ;81E50D|0A      |      ;
-    TAX                                                        ;81E50E|AA      |      ;
-    SEP #$20                                                   ;81E50F|E220    |      ;
-    LDA.L aInteractionItemTable,X                              ;81E511|BFB4CF82|82CFB4;
-    STA.W strcPlayerData.carryItemId                           ;81E515|8D1D09  |00091D;
+    %SetCurrentCarriedItemIndex($007C)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     RTS                                                        ;81E52B|60      |      ;
@@ -12288,12 +12089,8 @@ fPlayerInteraction0x42:
 .default:
     %SetPlayerFlag(!PFLAGS_INTRANSITION)
     %SetPlayerAction(!PACTION_WALK)
-    REP #$30                                                   ;81E710|C230    |      ;
-    LDA.W #!PDIR_LEFT                                               
-    STA.B strcPlayer.direction                                 ;81E715|85DA    |0000DA;
-    REP #$30                                                   ;81E717|C230    |      ;
-    LDA.W #$0002                                               ;81E719|A90200  |      ;
-    STA.W strcObjectData.direction                             ;81E71C|8D1109  |000911;
+    %SetPlayerDirection(!PDIR_LEFT)
+    %SetObjectDirection(!PDIR_LEFT)
     SEP #$20                                                   ;81E71F|E220    |      ;
     INC.W nPlayerInteractionArg2                               ;81E721|EE7009  |000970;
     LDA.W nPlayerInteractionArg2                               ;81E724|AD7009  |000970;
@@ -13325,12 +13122,8 @@ fPlayerInteraction0x45:
 .case1:
     %SetPlayerFlag(!PFLAGS_INTRANSITION)
     %SetPlayerAction(!PACTION_WALK)
-    REP #$30                                                   ;81EFF1|C230    |      ;
-    LDA.W #!PDIR_LEFT                                               
-    STA.B strcPlayer.direction                                 ;81EFF6|85DA    |0000DA;
-    REP #$30                                                   ;81EFF8|C230    |      ;
-    LDA.W #$0002                                               ;81EFFA|A90200  |      ;
-    STA.W strcObjectData.direction                             ;81EFFD|8D1109  |000911;
+    %SetPlayerDirection(!PDIR_LEFT)
+    %SetObjectDirection(!PDIR_LEFT)
     SEP #$20                                                   ;81F000|E220    |      ;
     INC.W nPlayerInteractionArg2                               ;81F002|EE7009  |000970;
     LDA.W nPlayerInteractionArg2                               ;81F005|AD7009  |000970;

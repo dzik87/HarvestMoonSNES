@@ -57,6 +57,15 @@ macro SetPlayerAction(nAction)
     STA.B strcPlayer.action
 endmacro
 
+;
+;
+;
+macro CheckPlayerAction(nAction)
+    REP #$30
+    LDA.B strcPlayer.action
+    CMP.W #<nAction>
+endmacro
+
 
 ;
 ;
@@ -109,4 +118,18 @@ macro PaletteModify(nValue, nRegister, nIndex, nOffset)
     LDX.W #<nIndex>
     LDY.W #<nOffset>
     JSL.L fPalette_ModifyPalette
+endmacro
+
+
+macro SetPlayerDirection(eDirection)
+    REP #$30
+    LDA.W #<eDirection>
+    STA.B strcPlayer.direction
+endmacro
+
+
+macro SetObjectDirection(eDirection)
+    REP #$30
+    LDA.W #<eDirection>
+    STA.W strcObjectData.direction
 endmacro

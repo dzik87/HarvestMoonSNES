@@ -99,37 +99,37 @@ fUnknown_8280AA:
  
  
   + LDA.B strcPlayer.action                                    ;8280CD|A5D4    |0000D4;
-    CMP.W #$000F                                               ;8280CF|C90F00  |      ;
+    CMP.W #!PACTION_0F                                               
     BNE +                                                      ;8280D2|D003    |8280D7;
     JMP.W .return                                              ;8280D4|4C3081  |828130;
  
  
-  + CMP.W #$0010                                               ;8280D7|C91000  |      ;
+  + CMP.W #!PACTION_10                                               
     BNE +                                                      ;8280DA|D003    |8280DF;
     JMP.W .return                                              ;8280DC|4C3081  |828130;
  
  
-  + CMP.W #$0011                                               ;8280DF|C91100  |      ;
+  + CMP.W #!PACTION_FISHING                                               
     BNE +                                                      ;8280E2|D003    |8280E7;
     JMP.W .return                                              ;8280E4|4C3081  |828130;
  
  
-  + CMP.W #$0012                                               ;8280E7|C91200  |      ;
+  + CMP.W #!PACTION_FISHINGBITE                                               
     BNE +                                                      ;8280EA|D003    |8280EF;
     JMP.W .return                                              ;8280EC|4C3081  |828130;
  
  
-  + CMP.W #$0013                                               ;8280EF|C91300  |      ;
+  + CMP.W #!PACTION_REELING                                               
     BNE +                                                      ;8280F2|D003    |8280F7;
     JMP.W .return                                              ;8280F4|4C3081  |828130;
  
  
-  + CMP.W #$0017                                               ;8280F7|C91700  |      ;
+  + CMP.W #!PACTION_17                                               
     BNE +                                                      ;8280FA|D003    |8280FF;
     JMP.W .return                                              ;8280FC|4C3081  |828130;
  
  
-  + CMP.W #$0018                                               ;8280FF|C91800  |      ;
+  + CMP.W #!PACTION_18                                               
     BNE +                                                      ;828102|D003    |828107;
     JMP.W .return                                              ;828104|4C3081  |828130;
  
@@ -438,12 +438,8 @@ fNextDayHandler:
     STZ.W strcPlayerData.lastExcercise                         ;8283C1|9C2509  |000925;
     %SetPlayerFlag(!PFLAGS_ACTIVE)
     %SetPlayerAction(!PACTION_NONE)
-    REP #$30                                                   ;8283D4|C230    |      ;
-    LDA.W #!PDIR_DOWN                                               
-    STA.B strcPlayer.direction                                 ;8283D9|85DA    |0000DA;
-    REP #$30                                                   ;8283DB|C230    |      ;
-    LDA.W #$0000                                               ;8283DD|A90000  |      ;
-    STA.W strcObjectData.direction                             ;8283E0|8D1109  |000911;
+    %SetPlayerDirection(!PDIR_DOWN)
+    %SetObjectDirection(!PDIR_DOWN)
     REP #$30                                                   ;8283E3|C230    |      ;
     LDA.W #$0000                                               ;8283E5|A90000  |      ;
     STA.W strcObjectData.spriteIdx                             ;8283E8|8D0109  |000901;
@@ -557,9 +553,9 @@ fNextDayHandler:
  
 .label5:
     SEP #$20                                                   ;828569|E220    |      ;
-    LDA.L strcShedItems                                        ;82856B|AF001F7F|7F1F00;
+    LDA.L strcShedItems.row1                                   ;82856B|AF001F7F|7F1F00;
     AND.B #$FD                                                 ;82856F|29FD    |      ;
-    STA.L strcShedItems                                        ;828571|8F001F7F|7F1F00;
+    STA.L strcShedItems.row1                                   ;828571|8F001F7F|7F1F00;
     LDA.L strcShedItems.row3                                   ;828575|AF021F7F|7F1F02;
     ORA.B #$02                                                 ;828579|0902    |      ;
     STA.L strcShedItems.row3                                   ;82857B|8F021F7F|7F1F02;
@@ -676,7 +672,7 @@ fNextDayHandler:
 .skipToEndGame:
     REP #$20                                                   ;828712|C220    |      ;
     LDA.W strcJoypad1.current                                  ;828714|AD2401  |000124;
-    AND.W #$2030                                               ;828717|293020  |      ;
+    AND.W #!JOYPAD_SELECT|!JOYPAD_R|!JOYPAD_L                                               
     EOR.W #$2030                                               ;82871A|493020  |      ;
     BNE +                                                      ;82871D|D014    |828733;
     SEP #$20                                                   ;82871F|E220    |      ;
@@ -6873,7 +6869,7 @@ fUnknown_82D1C0:
     STA.L nIntroHowToPlayIndex2                                ;82D260|8F491F7F|7F1F49;
     SEP #$20                                                   ;82D264|E220    |      ;
     LDA.B #$8F                                                 ;82D266|A98F    |      ;
-    STA.L strcShedItems                                        ;82D268|8F001F7F|7F1F00;
+    STA.L strcShedItems.row1                                   ;82D268|8F001F7F|7F1F00;
     LDA.B #$88                                                 ;82D26C|A988    |      ;
     STA.L strcShedItems.row2                                   ;82D26E|8F011F7F|7F1F01;
     LDA.B #$00                                                 ;82D272|A900    |      ;
@@ -6894,12 +6890,8 @@ fUnknown_82D1C0:
     SEP #$20                                                   ;82D29B|E220    |      ;
     %SetPlayerFlag(!PFLAGS_ACTIVE)
     %SetPlayerAction(!PACTION_NONE)
-    REP #$30                                                   ;82D2AD|C230    |      ;
-    LDA.W #!PDIR_DOWN                                               
-    STA.B strcPlayer.direction                                 ;82D2B2|85DA    |0000DA;
-    REP #$30                                                   ;82D2B4|C230    |      ;
-    LDA.W #$0000                                               ;82D2B6|A90000  |      ;
-    STA.W strcObjectData.direction                             ;82D2B9|8D1109  |000911;
+    %SetPlayerDirection(!PDIR_DOWN)
+    %SetObjectDirection(!PDIR_DOWN)
     REP #$30                                                   ;82D2BC|C230    |      ;
     LDA.W #$0000                                               ;82D2BE|A90000  |      ;
     STA.W strcObjectData.spriteIdx                             ;82D2C1|8D0109  |000901;
@@ -7040,7 +7032,7 @@ fMainMenu_AutoHowToPlay:
     STA.L strcFlags.event8                                     ;82D45F|8F721F7F|7F1F72;
     SEP #$20                                                   ;82D463|E220    |      ;
     LDA.B #$8F                                                 ;82D465|A98F    |      ;
-    STA.L strcShedItems                                        ;82D467|8F001F7F|7F1F00;
+    STA.L strcShedItems.row1                                   ;82D467|8F001F7F|7F1F00;
     LDA.B #$EC                                                 ;82D46B|A9EC    |      ;
     STA.L strcShedItems.row2                                   ;82D46D|8F011F7F|7F1F01;
     LDA.B #$00                                                 ;82D471|A900    |      ;
@@ -7062,12 +7054,8 @@ fMainMenu_AutoHowToPlay:
     SEP #$20                                                   ;82D49C|E220    |      ;
     %SetPlayerFlag(!PFLAGS_ACTIVE)
     %SetPlayerAction(!PACTION_NONE)
-    REP #$30                                                   ;82D4AE|C230    |      ;
-    LDA.W #!PDIR_DOWN                                               
-    STA.B strcPlayer.direction                                 ;82D4B3|85DA    |0000DA;
-    REP #$30                                                   ;82D4B5|C230    |      ;
-    LDA.W #$0000                                               ;82D4B7|A90000  |      ;
-    STA.W strcObjectData.direction                             ;82D4BA|8D1109  |000911;
+    %SetPlayerDirection(!PDIR_DOWN)
+    %SetObjectDirection(!PDIR_DOWN)
     REP #$30                                                   ;82D4BD|C230    |      ;
     LDA.W #$0000                                               ;82D4BF|A90000  |      ;
     STA.W strcObjectData.spriteIdx                             ;82D4C2|8D0109  |000901;
@@ -7510,12 +7498,8 @@ fUnknown_82D8B0:
     REP #$20                                                   ;82D8CE|C220    |      ;
     %SetPlayerFlag(!PFLAGS_ACTIVE)
     %SetPlayerAction(!PACTION_NONE)
-    REP #$30                                                   ;82D8E0|C230    |      ;
-    LDA.W #!PDIR_DOWN                                               
-    STA.B strcPlayer.direction                                 ;82D8E5|85DA    |0000DA;
-    REP #$30                                                   ;82D8E7|C230    |      ;
-    LDA.W #$0000                                               ;82D8E9|A90000  |      ;
-    STA.W strcObjectData.direction                             ;82D8EC|8D1109  |000911;
+    %SetPlayerDirection(!PDIR_DOWN)
+    %SetObjectDirection(!PDIR_DOWN)
     REP #$30                                                   ;82D8EF|C230    |      ;
     LDA.W #$0000                                               ;82D8F1|A90000  |      ;
     STA.W strcObjectData.spriteIdx                             ;82D8F4|8D0109  |000901;
