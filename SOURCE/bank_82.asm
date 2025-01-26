@@ -57,7 +57,7 @@ fGame_TimeHandler:
     BNE .continue                                              ;828078|D012    |82808C;
     SEP #$20                                                   ;82807A|E220    |      ;
     LDA.B #$FF                                                 ;82807C|A9FF    |      ;
-    STA.W $0117                                                ;82807E|8D1701  |000117;
+    STA.W strcAudio.trackIdCopy                                ;82807E|8D1701  |000117;
     JSL.L fAudioUnknown_838401                                 ;828081|22018483|838401;
     SEP #$20                                                   ;828085|E220    |      ;
     LDA.B #$FF                                                 ;828087|A9FF    |      ;
@@ -377,7 +377,7 @@ fNextDayHandler:
     SEP #$20                                                   ;8282F6|E220    |      ;
     STA.L nCurrentDay                                          ;8282F8|8F1B1F7F|7F1F1B;
     LDA.B #$FF                                                 ;8282FC|A9FF    |      ;
-    STA.W $0117                                                ;8282FE|8D1701  |000117;
+    STA.W strcAudio.trackIdCopy                                ;8282FE|8D1701  |000117;
     JSL.L fAudioUnknown_838401                                 ;828301|22018483|838401;
     SEP #$20                                                   ;828305|E220    |      ;
     LDA.B #$0F                                                 ;828307|A90F    |      ;
@@ -1632,7 +1632,7 @@ fToolUsedSound_Unknown828FF3:
     LDA.B #$00                                                 ;828FF5|A900    |      ;
     XBA                                                        ;828FF7|EB      |      ;
     LDA.W strcPlayerData.toolEquipped                          ;828FF8|AD2109  |000921;
-    CMP.W $0119                                                ;828FFB|CD1901  |000119;
+    CMP.W strcAudio.toolId                                     ;828FFB|CD1901  |000119;
     BEQ .return                                                ;828FFE|F04B    |82904B;
     REP #$20                                                   ;829000|C220    |      ;
     STA.B strcVariables.n16Temp1                               ;829002|857E    |00007E;
@@ -1652,7 +1652,7 @@ fToolUsedSound_Unknown828FF3:
     SEP #$20                                                   ;82901F|E220    |      ;
     LDA.B #$00                                                 ;829021|A900    |      ;
     XBA                                                        ;829023|EB      |      ;
-    LDA.W $0118                                                ;829024|AD1801  |000118;
+    LDA.W strcAudio.unk118                                     ;829024|AD1801  |000118;
     REP #$20                                                   ;829027|C220    |      ;
     TAX                                                        ;829029|AA      |      ;
     SEP #$20                                                   ;82902A|E220    |      ;
@@ -1673,7 +1673,7 @@ fToolUsedSound_Unknown828FF3:
 .return:
     SEP #$20                                                   ;82904B|E220    |      ;
     LDA.W strcPlayerData.toolEquipped                          ;82904D|AD2109  |000921;
-    STA.W $0119                                                ;829050|8D1901  |000119;
+    STA.W strcAudio.toolId                                     ;829050|8D1901  |000119;
     RTL                                                        ;829053|6B      |      ;
  
  
@@ -7534,7 +7534,7 @@ fUnknown_82D8B0:
     JSL.L fAudioUnknown_838380                                 ;82D925|22808383|838380;
     SEP #$20                                                   ;82D929|E220    |      ;
     LDA.W strcAudio.trackId                                    ;82D92B|AD1001  |000110;
-    STA.W $0117                                                ;82D92E|8D1701  |000117;
+    STA.W strcAudio.trackIdCopy                                ;82D92E|8D1701  |000117;
     SEP #$20                                                   ;82D931|E220    |      ;
     LDA.W nDestinationAreaId                                   ;82D933|AD8B09  |00098B;
     JSL.L fMap_SetupArea                                       ;82D936|222C9780|80972C;
@@ -7646,7 +7646,7 @@ fUnknown_82D8B0:
     JSL.L fAudioUnknown_838380                                 ;82DA58|22808383|838380;
     SEP #$20                                                   ;82DA5C|E220    |      ;
     LDA.W strcAudio.trackId                                    ;82DA5E|AD1001  |000110;
-    STA.W $0117                                                ;82DA61|8D1701  |000117;
+    STA.W strcAudio.trackIdCopy                                ;82DA61|8D1701  |000117;
     JSL.L fCore_ResetForceBlank                                ;82DA64|221E8E80|808E1E;
     JSL.L fCore_WaitForNextNMI                                 ;82DA68|22458680|808645;
     SEP #$20                                                   ;82DA6C|E220    |      ;
@@ -7821,7 +7821,7 @@ fUnknown_82DBB2:
     JSL.L fAudioUnknown_838380                                 ;82DBDB|22808383|838380;
     SEP #$20                                                   ;82DBDF|E220    |      ;
     LDA.W strcAudio.trackId                                    ;82DBE1|AD1001  |000110;
-    STA.W $0117                                                ;82DBE4|8D1701  |000117;
+    STA.W strcAudio.trackIdCopy                                ;82DBE4|8D1701  |000117;
     JSL.L fCore_ResetForceBlank                                ;82DBE7|221E8E80|808E1E;
     JSL.L fCore_WaitForNextNMI                                 ;82DBEB|22458680|808645;
     SEP #$20                                                   ;82DBEF|E220    |      ;
@@ -8240,7 +8240,7 @@ fUnknown_82DEC5:
     JSL.L fAudioUnknown_838380                                 ;82DF5C|22808383|838380;
     SEP #$20                                                   ;82DF60|E220    |      ;
     LDA.W strcAudio.trackId                                    ;82DF62|AD1001  |000110;
-    STA.W $0117                                                ;82DF65|8D1701  |000117;
+    STA.W strcAudio.trackIdCopy                                ;82DF65|8D1701  |000117;
     JSL.L fCore_ResetForceBlank                                ;82DF68|221E8E80|808E1E;
     JSL.L fCore_WaitForNextNMI                                 ;82DF6C|22458680|808645;
     SEP #$20                                                   ;82DF70|E220    |      ;
@@ -8390,7 +8390,7 @@ fUnknown_82E0B5:
     JSL.L fAudioUnknown_838380                                 ;82E0BD|22808383|838380;
     SEP #$20                                                   ;82E0C1|E220    |      ;
     LDA.W strcAudio.trackId                                    ;82E0C3|AD1001  |000110;
-    STA.W $0117                                                ;82E0C6|8D1701  |000117;
+    STA.W strcAudio.trackIdCopy                                ;82E0C6|8D1701  |000117;
     JSL.L fCore_ResetForceBlank                                ;82E0C9|221E8E80|808E1E;
     JSL.L fCore_WaitForNextNMI                                 ;82E0CD|22458680|808645;
     SEP #$20                                                   ;82E0D1|E220    |      ;
@@ -8666,7 +8666,7 @@ fUnknown_82E1F1:
     JSL.L fAudioUnknown_838380                                 ;82E309|22808383|838380;
     SEP #$20                                                   ;82E30D|E220    |      ;
     LDA.W strcAudio.trackId                                    ;82E30F|AD1001  |000110;
-    STA.W $0117                                                ;82E312|8D1701  |000117;
+    STA.W strcAudio.trackIdCopy                                ;82E312|8D1701  |000117;
     JSL.L fCore_ResetForceBlank                                ;82E315|221E8E80|808E1E;
     JSL.L fCore_WaitForNextNMI                                 ;82E319|22458680|808645;
     SEP #$20                                                   ;82E31D|E220    |      ;
@@ -9281,7 +9281,7 @@ fScreen_NameInput:
     JSL.L fAudioUnknown_838380                                 ;82E90B|22808383|838380;
     SEP #$20                                                   ;82E90F|E220    |      ;
     LDA.W strcAudio.trackId                                    ;82E911|AD1001  |000110;
-    STA.W $0117                                                ;82E914|8D1701  |000117;
+    STA.W strcAudio.trackIdCopy                                ;82E914|8D1701  |000117;
     JSL.L fCore_ResetForceBlank                                ;82E917|221E8E80|808E1E;
     JSL.L fCore_WaitForNextNMI                                 ;82E91B|22458680|808645;
     SEP #$20                                                   ;82E91F|E220    |      ;

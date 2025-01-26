@@ -10403,7 +10403,7 @@ fPlayerInteraction0x03:
     STA.W strcAudio.reg115                                     ;81D684|8D1501  |000115;
     LDA.B #$00                                                 ;81D687|A900    |      ;
     XBA                                                        ;81D689|EB      |      ;
-    LDA.W $0118                                                ;81D68A|AD1801  |000118;
+    LDA.W strcAudio.unk118                                     ;81D68A|AD1801  |000118;
     REP #$20                                                   ;81D68D|C220    |      ;
     TAX                                                        ;81D68F|AA      |      ;
     SEP #$20                                                   ;81D690|E220    |      ;
@@ -10429,7 +10429,7 @@ fPlayerInteraction0x03:
     BNE .return                                                ;81D6C9|D015    |81D6E0;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     SEP #$20                                                   ;81D6D7|E220    |      ;
-    STZ.W $0119                                                ;81D6D9|9C1901  |000119;
+    STZ.W strcAudio.toolId                                     ;81D6D9|9C1901  |000119;
     JSL.L fToolUsedSound_Unknown828FF3                         ;81D6DC|22F38F82|828FF3;
  
 .return:
@@ -11911,7 +11911,7 @@ fPlayerInteraction0x35:
     LDY.W #$0078                                               ;81E377|A07800  |      ;
     JSL.L fAudioUnknown_8382FE                                 ;81E37A|22FE8283|8382FE;
     SEP #$20                                                   ;81E37E|E220    |      ;
-    STZ.W $0119                                                ;81E380|9C1901  |000119;
+    STZ.W strcAudio.toolId                                     ;81E380|9C1901  |000119;
     JSL.L fToolUsedSound_Unknown828FF3                         ;81E383|22F38F82|828FF3;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     RTS                                                        ;81E393|60      |      ;
