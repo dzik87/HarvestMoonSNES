@@ -89,9 +89,7 @@ fUnknown_8280AA:
     JMP.W .return                                              ;8280B6|4C3081  |828130;
  
  
-  + SEP #$20                                                   ;8280B9|E220    |      ;
-    LDA.B #$14                                                 ;8280BB|A914    |      ;
-    JSL.L fPlayerEnergyHandler                                 ;8280BD|2261D081|81D061;
+  + %UpdateStamina($14)
     REP #$20                                                   ;8280C1|C220    |      ;
     %CheckPlayerFlagsNoReg(!PFLAGS_UNK0400|!PFLAGS_INSPRINGS|!PFLAGS_RIDINGHORSE)
     BEQ +                                                      ;8280C8|F003    |8280CD;
@@ -2203,9 +2201,7 @@ fToolUsedAction0x01_Sickle:
  
 .return:
     %SetPlayerAction(!PACTION_NONE)
-    SEP #$20                                                   ;829457|E220    |      ;
-    LDA.B #$FE                                                 ;829459|A9FE    |      ;
-    JSL.L fPlayerEnergyHandler                                 ;82945B|2261D081|81D061;
+    %UpdateStamina($FE)
     RTS                                                        ;82945F|60      |      ;
  
  
@@ -2328,9 +2324,7 @@ fToolUsedAction0x02_Plow:
  
 .return:
     %SetPlayerAction(!PACTION_NONE)
-    SEP #$20                                                   ;8295B7|E220    |      ;
-    LDA.B #$FE                                                 ;8295B9|A9FE    |      ;
-    JSL.L fPlayerEnergyHandler                                 ;8295BB|2261D081|81D061;
+    %UpdateStamina($FE)
     RTS                                                        ;8295BF|60      |      ;
  
  
@@ -2510,9 +2504,7 @@ fToolUsedAction0x03_Hammer:
  
 .return:
     %SetPlayerAction(!PACTION_NONE)
-    SEP #$20                                                   ;829736|E220    |      ;
-    LDA.B #$FE                                                 ;829738|A9FE    |      ;
-    JSL.L fPlayerEnergyHandler                                 ;82973A|2261D081|81D061;
+    %UpdateStamina($FE)
     RTS                                                        ;82973E|60      |      ;
  
  
@@ -2759,9 +2751,7 @@ fToolUsedAction0x04_Axe:
  
 .return:
     %SetPlayerAction(!PACTION_NONE)
-    SEP #$20                                                   ;829990|E220    |      ;
-    LDA.B #$FE                                                 ;829992|A9FE    |      ;
-    JSL.L fPlayerEnergyHandler                                 ;829994|2261D081|81D061;
+    %UpdateStamina($FE)
     RTS                                                        ;829998|60      |      ;
  
  
@@ -2806,9 +2796,7 @@ fToolUsedAction0x05_CornSeedBag:
     STZ.W strcPlayerData.toolEquipped                          ;8299E5|9C2109  |000921;
  
   + %SetPlayerAction(!PACTION_NONE)
-    SEP #$20                                                   ;8299EF|E220    |      ;
-    LDA.B #$FF                                                 ;8299F1|A9FF    |      ;
-    JSL.L fPlayerEnergyHandler                                 ;8299F3|2261D081|81D061;
+    %UpdateStamina($FF)
  
 .return:
     RTS                                                        ;8299F7|60      |      ;
@@ -2855,9 +2843,7 @@ fToolUsedAction0x06_TomatoSeedBag:
     STZ.W strcPlayerData.toolEquipped                          ;829A44|9C2109  |000921;
  
   + %SetPlayerAction(!PACTION_NONE)
-    SEP #$20                                                   ;829A4E|E220    |      ;
-    LDA.B #$FF                                                 ;829A50|A9FF    |      ;
-    JSL.L fPlayerEnergyHandler                                 ;829A52|2261D081|81D061;
+    %UpdateStamina($FF)
  
 .return:
     RTS                                                        ;829A56|60      |      ;
@@ -2903,9 +2889,7 @@ fToolUsedAction0x07_PotatoSeedBag:
     STZ.W strcPlayerData.toolEquipped                          ;829AA1|9C2109  |000921;
  
   + %SetPlayerAction(!PACTION_NONE)
-    SEP #$20                                                   ;829AAB|E220    |      ;
-    LDA.B #$FF                                                 ;829AAD|A9FF    |      ;
-    JSL.L fPlayerEnergyHandler                                 ;829AAF|2261D081|81D061;
+    %UpdateStamina($FF)
  
 .return:
     RTS                                                        ;829AB3|60      |      ;
@@ -2951,9 +2935,7 @@ fToolUsedAction0x08_TurnipSeedBag:
     STZ.W strcPlayerData.toolEquipped                          ;829AFE|9C2109  |000921;
  
   + %SetPlayerAction(!PACTION_NONE)
-    SEP #$20                                                   ;829B08|E220    |      ;
-    LDA.B #$FF                                                 ;829B0A|A9FF    |      ;
-    JSL.L fPlayerEnergyHandler                                 ;829B0C|2261D081|81D061;
+    %UpdateStamina($FF)
  
 .return:
     RTS                                                        ;829B10|60      |      ;
@@ -2983,9 +2965,7 @@ fToolUsedAction0x0A_MiraclePotion:
  
 fToolUsedAction0x0B_Bell:
     %SetPlayerAction(!PACTION_NONE)
-    SEP #$20                                                   ;829B58|E220    |      ;
-    LDA.B #$FF                                                 ;829B5A|A9FF    |      ;
-    JSL.L fPlayerEnergyHandler                                 ;829B5C|2261D081|81D061;
+    %UpdateStamina($FF)
     RTS                                                        ;829B60|60      |      ;
  
  
@@ -3034,9 +3014,7 @@ fToolUsedAction0x0C_GrassSeedBag:
     STZ.W strcPlayerData.toolEquipped                          ;829BB8|9C2109  |000921;
  
   + %SetPlayerAction(!PACTION_NONE)
-    SEP #$20                                                   ;829BC2|E220    |      ;
-    LDA.B #$FF                                                 ;829BC4|A9FF    |      ;
-    JSL.L fPlayerEnergyHandler                                 ;829BC6|2261D081|81D061;
+    %UpdateStamina($FF)
  
 .return:
     RTS                                                        ;829BCA|60      |      ;
@@ -3130,9 +3108,7 @@ fToolUsedAction0x0D_Paint:
  
 .return:
     %SetPlayerAction(!PACTION_NONE)
-    SEP #$20                                                   ;829CB7|E220    |      ;
-    LDA.B #$FE                                                 ;829CB9|A9FE    |      ;
-    JSL.L fPlayerEnergyHandler                                 ;829CBB|2261D081|81D061;
+    %UpdateStamina($FE)
     RTS                                                        ;829CBF|60      |      ;
  
  
@@ -3143,9 +3119,7 @@ fToolUsedAction0x0E_Milker:
  
 fToolUsedAction0x0F_Brush:
     %SetPlayerAction(!PACTION_NONE)
-    SEP #$20                                                   ;829CCF|E220    |      ;
-    LDA.B #$FF                                                 ;829CD1|A9FF    |      ;
-    JSL.L fPlayerEnergyHandler                                 ;829CD3|2261D081|81D061;
+    %UpdateStamina($FF)
     RTS                                                        ;829CD7|60      |      ;
  
  
@@ -3196,9 +3170,7 @@ fToolUsedAction0x10_WateringCan:
  
 .return:
     %SetPlayerAction(!PACTION_NONE)
-    SEP #$20                                                   ;829D39|E220    |      ;
-    LDA.B #$FE                                                 ;829D3B|A9FE    |      ;
-    JSL.L fPlayerEnergyHandler                                 ;829D3D|2261D081|81D061;
+    %UpdateStamina($FE)
     RTS                                                        ;829D41|60      |      ;
  
  
@@ -3342,9 +3314,7 @@ fToolUsedAction0x11_GoldenSickle:
     BNE .justReturn                                            ;829E79|D012    |829E8D;
     STZ.W strcStockData.unkAnyTool                             ;829E7B|9C6B09  |00096B;
     %SetPlayerAction(!PACTION_NONE)
-    SEP #$20                                                   ;829E85|E220    |      ;
-    LDA.B #$F8                                                 ;829E87|A9F8    |      ;
-    JSL.L fPlayerEnergyHandler                                 ;829E89|2261D081|81D061;
+    %UpdateStamina($F8)
  
 .justReturn:
     RTS                                                        ;829E8D|60      |      ;
@@ -3482,9 +3452,7 @@ fToolUsedAction0x12_GoldenPlow:
     SEP #$20                                                   ;829FF0|E220    |      ;
     STZ.W strcStockData.unkAnyTool                             ;829FF2|9C6B09  |00096B;
     %SetPlayerAction(!PACTION_NONE)
-    SEP #$20                                                   ;829FFC|E220    |      ;
-    LDA.B #$F8                                                 ;829FFE|A9F8    |      ;
-    JSL.L fPlayerEnergyHandler                                 ;82A000|2261D081|81D061;
+    %UpdateStamina($F8)
  
 .justReturn:
     RTS                                                        ;82A004|60      |      ;
@@ -3636,9 +3604,7 @@ fToolUsedAction0x13_GolderHammer:
  
 .loop:
     %SetPlayerAction(!PACTION_NONE)
-    SEP #$20                                                   ;82A138|E220    |      ;
-    LDA.B #$FC                                                 ;82A13A|A9FC    |      ;
-    JSL.L fPlayerEnergyHandler                                 ;82A13C|2261D081|81D061;
+    %UpdateStamina($FC)
     RTS                                                        ;82A140|60      |      ;
  
  
@@ -3825,9 +3791,7 @@ fToolUsedAction0x14_GoldenAxe:
  
 .return:
     %SetPlayerAction(!PACTION_NONE)
-    SEP #$20                                                   ;82A2FE|E220    |      ;
-    LDA.B #$F8                                                 ;82A300|A9F8    |      ;
-    JSL.L fPlayerEnergyHandler                                 ;82A302|2261D081|81D061;
+    %UpdateStamina($F8)
     RTS                                                        ;82A306|60      |      ;
  
  
@@ -3881,9 +3845,7 @@ fToolUsedAction0x15_Sprinkler:
     BNE .justReturn                                            ;82A362|D012    |82A376;
     STZ.W strcStockData.unkAnyTool                             ;82A364|9C6B09  |00096B;
     %SetPlayerAction(!PACTION_NONE)
-    SEP #$20                                                   ;82A36E|E220    |      ;
-    LDA.B #$F8                                                 ;82A370|A9F8    |      ;
-    JSL.L fPlayerEnergyHandler                                 ;82A372|2261D081|81D061;
+    %UpdateStamina($F8)
  
 .justReturn:
     RTS                                                        ;82A376|60      |      ;
@@ -4017,9 +3979,7 @@ fToolUsedAction0x19_ChickenFeed:
     BNE +                                                      ;82A4AD|D003    |82A4B2;
     STZ.W strcPlayerData.toolEquipped                          ;82A4AF|9C2109  |000921;
  
-  + SEP #$20                                                   ;82A4B2|E220    |      ;
-    LDA.B #$FE                                                 ;82A4B4|A9FE    |      ;
-    JSL.L fPlayerEnergyHandler                                 ;82A4B6|2261D081|81D061;
+  + %UpdateStamina($FE)
     %SetPlayerAction(!PACTION_NONE)
     RTS                                                        ;82A4C1|60      |      ;
  
@@ -4094,9 +4054,7 @@ fToolUsedAction0x1A_CowFeed:
     STZ.W strcPlayerData.toolEquipped                          ;82A55D|9C2109  |000921;
  
   + %SetPlayerAction(!PACTION_NONE)
-    SEP #$20                                                   ;82A567|E220    |      ;
-    LDA.B #$FE                                                 ;82A569|A9FE    |      ;
-    JSL.L fPlayerEnergyHandler                                 ;82A56B|2261D081|81D061;
+    %UpdateStamina($FE)
     RTS                                                        ;82A56F|60      |      ;
  
  

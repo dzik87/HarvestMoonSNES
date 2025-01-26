@@ -133,3 +133,10 @@ macro SetObjectDirection(eDirection)
     LDA.W #<eDirection>
     STA.W strcObjectData.direction
 endmacro
+
+
+macro UpdateStamina(nAmmount)
+    SEP #$20
+    LDA.B #<nAmmount>
+    JSL.L fPlayerEnergyHandler
+endmacro
