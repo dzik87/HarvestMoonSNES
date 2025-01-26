@@ -1564,10 +1564,10 @@ fCore_SetBrightness:
  
 fCore_Store0x72To0x42AtIndex:
     SEP #$30                                                   ;808E48|E230    |      ; A: nValue1, X nIndex, Y: nValue2, Y, $72: ptr24
-    STA.W $015A,X                                              ;808E4A|9D5A01  |00015A;
+    STA.W strcPalette.unk15A,X                                 ;808E4A|9D5A01  |00015A;
     TYA                                                        ;808E4D|98      |      ;
-    STA.W $016A,X                                              ;808E4E|9D6A01  |00016A;
-    STZ.W $014A,X                                              ;808E51|9E4A01  |00014A;
+    STA.W strcPalette.unk16A,X                                 ;808E4E|9D6A01  |00016A;
+    STZ.W strcPalette.unk14A,X                                 ;808E51|9E4A01  |00014A;
     REP #$20                                                   ;808E54|C220    |      ;
     TXA                                                        ;808E56|8A      |      ;
     STA.B strcVariables.n16Temp1                               ;808E57|857E    |00007E;
@@ -1641,7 +1641,7 @@ fCore_Unknown808E69:
     PLY                                                        ;808EC4|7A      |      ;
     TYX                                                        ;808EC5|BB      |      ;
     SEP #$20                                                   ;808EC6|E220    |      ;
-    LDA.W $014A,X                                              ;808EC8|BD4A01  |00014A;
+    LDA.W strcPalette.unk14A,X                                 ;808EC8|BD4A01  |00014A;
     BEQ .label5                                                ;808ECB|F003    |808ED0;
     JMP.W .label8                                              ;808ECD|4C528F  |808F52;
  
@@ -1651,14 +1651,14 @@ fCore_Unknown808E69:
     TYX                                                        ;808ED1|BB      |      ;
     LDA.B #$00                                                 ;808ED2|A900    |      ;
     XBA                                                        ;808ED4|EB      |      ;
-    LDA.W $016A,X                                              ;808ED5|BD6A01  |00016A;
+    LDA.W strcPalette.unk16A,X                                 ;808ED5|BD6A01  |00016A;
     REP #$20                                                   ;808ED8|C220    |      ;
     PHA                                                        ;808EDA|48      |      ;
     TYX                                                        ;808EDB|BB      |      ;
     SEP #$20                                                   ;808EDC|E220    |      ;
     LDA.B #$00                                                 ;808EDE|A900    |      ;
     XBA                                                        ;808EE0|EB      |      ;
-    LDA.W $015A,X                                              ;808EE1|BD5A01  |00015A;
+    LDA.W strcPalette.unk15A,X                                 ;808EE1|BD5A01  |00015A;
     REP #$20                                                   ;808EE4|C220    |      ;
     PHA                                                        ;808EE6|48      |      ;
     LDA.B [ptrUnknown0x72]                                     ;808EE7|A772    |000072;
@@ -1672,7 +1672,7 @@ fCore_Unknown808E69:
     LDY.W #$0002                                               ;808EF4|A00200  |      ;
     SEP #$20                                                   ;808EF7|E220    |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;808EF9|B772    |000072;
-    STA.W $014A,X                                              ;808EFB|9D4A01  |00014A;
+    STA.W strcPalette.unk14A,X                                 ;808EFB|9D4A01  |00014A;
     REP #$20                                                   ;808EFE|C220    |      ;
     PLY                                                        ;808F00|7A      |      ;
     TYA                                                        ;808F01|98      |      ;
@@ -1727,7 +1727,7 @@ fCore_Unknown808E69:
  
  
 .label8:
-    DEC.W $014A,X                                              ;808F52|DE4A01  |00014A;
+    DEC.W strcPalette.unk14A,X                                 ;808F52|DE4A01  |00014A;
     BRA .label6                                                ;808F55|80C2    |808F19;
  
  
@@ -1813,8 +1813,8 @@ fCore_Zero0x42Ptr:
 fPalette_Unknown808FC7:
     SEP #$20                                                   ;808FC7|E220    |      ;
     REP #$10                                                   ;808FC9|C210    |      ;
-    STA.W nPaletteNextHourIndex                                ;808FCB|8D7C01  |00017C;
-    STZ.W nPaletteCountdown                                    ;808FCE|9C7A01  |00017A;
+    STA.W strcPalette.nextHourIdx                              ;808FCB|8D7C01  |00017C;
+    STZ.W strcPalette.countDown                                ;808FCE|9C7A01  |00017A;
     XBA                                                        ;808FD1|EB      |      ;
     LDA.B #$00                                                 ;808FD2|A900    |      ;
     XBA                                                        ;808FD4|EB      |      ;
@@ -1871,15 +1871,15 @@ fPallete_ChangeHandler:
  
  
   + SEP #$20                                                   ;809029|E220    |      ;
-    LDA.W nPaletteCountdown                                    ;80902B|AD7A01  |00017A;
+    LDA.W strcPalette.countDown                                ;80902B|AD7A01  |00017A;
     INC A                                                      ;80902E|1A      |      ;
-    STA.W nPaletteCountdown                                    ;80902F|8D7A01  |00017A;
+    STA.W strcPalette.countDown                                ;80902F|8D7A01  |00017A;
     CMP.B #$20                                                 ;809032|C920    |      ;
     BEQ +                                                      ;809034|F003    |809039;
     JMP.W .return                                              ;809036|4C5691  |809156;
  
  
-  + STZ.W nPaletteCountdown                                    ;809039|9C7A01  |00017A;
+  + STZ.W strcPalette.countDown                                ;809039|9C7A01  |00017A;
     REP #$20                                                   ;80903C|C220    |      ;
     LDA.W #$0100                                               ;80903E|A90001  |      ;
     STA.B strcVariables.n16Temp4                               ;809041|8584    |000084;
@@ -2060,8 +2060,8 @@ fPallete_ChangeHandler:
     STZ.B ptrPaletteNext                                       ;809159|6404    |000004;
     SEP #$20                                                   ;80915B|E220    |      ;
     STZ.B ptrPaletteNext+2                                     ;80915D|6406    |000006;
-    LDA.W nPaletteNextHourIndex                                ;80915F|AD7C01  |00017C;
-    STA.W nPaletteNextIndex                                    ;809162|8D7B01  |00017B;
+    LDA.W strcPalette.nextHourIdx                              ;80915F|AD7C01  |00017C;
+    STA.W strcPalette.nextIdx                                  ;809162|8D7B01  |00017B;
     RTL                                                        ;809165|6B      |      ;
  
  
@@ -2329,7 +2329,7 @@ fPalette_ChangeTimePallete:
     LDA.B #$00                                                 ;809318|A900    |      ;
     XBA                                                        ;80931A|EB      |      ;
     LDA.L aMapPalettesIndexes,X                                ;80931B|BF5CBB80|80BB5C; X = nSelectedTilemapId * 6 + X
-    STA.W nPaletteNextIndex                                    ;80931F|8D7B01  |00017B;
+    STA.W strcPalette.nextIdx                                  ;80931F|8D7B01  |00017B;
     REP #$20                                                   ;809322|C220    |      ;
     JSL.L fPalette_LoadFirstHalf                               ;809324|22CF9180|8091CF;
     RTL                                                        ;809328|6B      |      ;
@@ -2604,7 +2604,7 @@ fPalette_AdjustTimePalette:
     LDA.B #$00                                                 ;809537|A900    |      ;
     XBA                                                        ;809539|EB      |      ;
     LDA.L aMapPalettesIndexes,X                                ;80953A|BF5CBB80|80BB5C;
-    CMP.W nPaletteNextIndex                                    ;80953E|CD7B01  |00017B;
+    CMP.W strcPalette.nextIdx                                  ;80953E|CD7B01  |00017B;
     BEQ +                                                      ;809541|F00F    |809552;
     CMP.B #$FF                                                 ;809543|C9FF    |      ;
     BEQ +                                                      ;809545|F00B    |809552;
@@ -2612,7 +2612,7 @@ fPalette_AdjustTimePalette:
     JSL.L fPalette_Unknown808FC7                               ;809548|22C78F80|808FC7;
     SEP #$20                                                   ;80954C|E220    |      ;
     PLA                                                        ;80954E|68      |      ;
-    STA.W nPaletteNextIndex                                    ;80954F|8D7B01  |00017B;
+    STA.W strcPalette.nextIdx                                  ;80954F|8D7B01  |00017B;
  
   + RTL                                                        ;809552|6B      |      ;
  

@@ -65,12 +65,12 @@ fGame_TimeHandler:
  
 .continue:
     SEP #$20                                                   ;82808C|E220    |      ;
-    LDA.W nPaletteNextIndex                                    ;82808E|AD7B01  |00017B;
+    LDA.W strcPalette.nextIdx                                  ;82808E|AD7B01  |00017B;
     PHA                                                        ;828091|48      |      ;
     JSL.L fPalette_AdjustTimePalette                           ;828092|22019580|809501;
     SEP #$20                                                   ;828096|E220    |      ;
     PLA                                                        ;828098|68      |      ;
-    CMP.W nPaletteNextIndex                                    ;828099|CD7B01  |00017B;
+    CMP.W strcPalette.nextIdx                                  ;828099|CD7B01  |00017B;
     BEQ .return                                                ;82809C|F00B    |8280A9;
     LDY.W #$0004                                               ;82809E|A00400  |      ;
     JSL.L fCore_Zero0x42PtrFromIndex                           ;8280A1|22928F80|808F92;
