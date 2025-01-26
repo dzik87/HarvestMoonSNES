@@ -283,7 +283,7 @@ endstruct
 
 
 ;
-;
+; Size and start OK
 ;
 struct strcPalette          $00014A
     .unk14A                 : skip 16   ; 14A-159   r?
@@ -293,10 +293,11 @@ struct strcPalette          $00014A
     .nextIdx                : skip 1    ; 17B
     .nextHourIdx            : skip 1    ; 17C
 endstruct
-;
-; 14A - 19B ???
-;
 
+
+;
+; 17D - 19B ???
+;
 
 
 ;
@@ -392,15 +393,15 @@ endstruct align 4
 ; Size and start OK - Object data
 ;
 struct strcObjectData       $000901
-    .spriteIdx              : skip 2    ; 901-902 x
+    .spriteIdx              : skip 2    ; 901-902
     .spriteIdxOld           : skip 2    ; 903-904
     .gameObjectIdx          : skip 2    ; 905-906
-    .playerX                : skip 2    ; 907-908 x
-    .playerY                : skip 2    ; 909-90A x
+    .playerX                : skip 2    ; 907-908
+    .playerY                : skip 2    ; 909-90A
     .unkPosX                : skip 2    ; 90B-90C
     .unkPosY                : skip 2    ; 90D-90E
     .flip                   : skip 2    ; 90F-910
-    .direction              : skip 2    ; 911-912 x
+    .direction              : skip 2    ; 911-912
     .directionNew           : skip 2    ; 913-914
     .exist                  : skip 2    ; 915-916
 endstruct align 22
@@ -463,6 +464,15 @@ endstruct align 53
 ;
 ; 96C - 990 ???
 ;
+;struct strcInteractionData  $00096C
+;    .unk96C                 : skip 1    ; 96C
+;    .breakCounter           : skip 1    ; 96D
+;    .index                  : skip 1    ; 96E
+;    .arg1                   : skip 1    ; 96F
+;    .arg2                   : skip 1    ; 970 
+;    .unk971                 : skip 1    ; 971
+;endstruct
+
 
 
 ;

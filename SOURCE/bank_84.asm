@@ -212,9 +212,7 @@ fAI_HowToPlaySetup:
     JMP.W .return                                              ;848181|4C1A82  |84821A;
  
  
-  + REP #$30                                                   ;848184|C230    |      ;
-    LDA.B strcPlayer.action                                    ;848186|A5D4    |0000D4;
-    CMP.W #$0003                                               ;848188|C90300  |      ;
+  + %CheckPlayerAction(!PACTION_JUMP)
     BNE +                                                      ;84818B|D003    |848190;
     JMP.W .return                                              ;84818D|4C1A82  |84821A;
  
@@ -1972,30 +1970,22 @@ fAIAction0x1F:
     JMP.W .return                                              ;849092|4C8591  |849185;
  
  
-  + REP #$30                                                   ;849095|C230    |      ;
-    LDA.B strcPlayer.action                                    ;849097|A5D4    |0000D4;
-    CMP.W #$000A                                               ;849099|C90A00  |      ;
+  + %CheckPlayerAction(!PACTION_USINGTOOL)
     BNE +                                                      ;84909C|D003    |8490A1;
     JMP.W .return                                              ;84909E|4C8591  |849185;
  
  
-  + REP #$30                                                   ;8490A1|C230    |      ;
-    LDA.B strcPlayer.action                                    ;8490A3|A5D4    |0000D4;
-    CMP.W #$000C                                               ;8490A5|C90C00  |      ;
+  + %CheckPlayerAction(!PACTION_SHOWTOOL)
     BNE +                                                      ;8490A8|D003    |8490AD;
     JMP.W .return                                              ;8490AA|4C8591  |849185;
  
  
-  + REP #$30                                                   ;8490AD|C230    |      ;
-    LDA.B strcPlayer.action                                    ;8490AF|A5D4    |0000D4;
-    CMP.W #$000D                                               ;8490B1|C90D00  |      ;
+  + %CheckPlayerAction(!PACTION_WHISTLEHORSE)
     BNE +                                                      ;8490B4|D003    |8490B9;
     JMP.W .return                                              ;8490B6|4C8591  |849185;
  
  
-  + REP #$30                                                   ;8490B9|C230    |      ;
-    LDA.B strcPlayer.action                                    ;8490BB|A5D4    |0000D4;
-    CMP.W #$001B                                               ;8490BD|C91B00  |      ;
+  + %CheckPlayerAction(!PACTION_WHISTLEDOG)
     BNE +                                                      ;8490C0|D003    |8490C5;
     JMP.W .return                                              ;8490C2|4C8591  |849185;
  
@@ -2013,7 +2003,7 @@ fAIAction0x1F:
  
   + REP #$20                                                   ;8490DD|C220    |      ;
     LDA.W strcJoypad1.newInput                                 ;8490DF|AD2801  |000128;
-    BIT.W #$0080                                               ;8490E2|898000  |      ;
+    BIT.W #!JOYPAD_A                                               
     BNE .continue                                              ;8490E5|D003    |8490EA;
     JMP.W .return                                              ;8490E7|4C8591  |849185;
  
@@ -2555,30 +2545,22 @@ fAIAction0x2D:
     JMP.W .return                                              ;84964C|4C5F97  |84975F;
  
  
-  + REP #$30                                                   ;84964F|C230    |      ;
-    LDA.B strcPlayer.action                                    ;849651|A5D4    |0000D4;
-    CMP.W #$000A                                               ;849653|C90A00  |      ;
+  + %CheckPlayerAction(!PACTION_USINGTOOL)
     BNE +                                                      ;849656|D003    |84965B;
     JMP.W .return                                              ;849658|4C5F97  |84975F;
  
  
-  + REP #$30                                                   ;84965B|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84965D|A5D4    |0000D4;
-    CMP.W #$000C                                               ;84965F|C90C00  |      ;
+  + %CheckPlayerAction(!PACTION_SHOWTOOL)
     BNE +                                                      ;849662|D003    |849667;
     JMP.W .return                                              ;849664|4C5F97  |84975F;
  
  
-  + REP #$30                                                   ;849667|C230    |      ;
-    LDA.B strcPlayer.action                                    ;849669|A5D4    |0000D4;
-    CMP.W #$000D                                               ;84966B|C90D00  |      ;
+  + %CheckPlayerAction(!PACTION_WHISTLEHORSE)
     BNE +                                                      ;84966E|D003    |849673;
     JMP.W .return                                              ;849670|4C5F97  |84975F;
  
  
-  + REP #$30                                                   ;849673|C230    |      ;
-    LDA.B strcPlayer.action                                    ;849675|A5D4    |0000D4;
-    CMP.W #$001B                                               ;849677|C91B00  |      ;
+  + %CheckPlayerAction(!PACTION_WHISTLEDOG)
     BNE +                                                      ;84967A|D003    |84967F;
     JMP.W .return                                              ;84967C|4C5F97  |84975F;
  
@@ -2596,14 +2578,12 @@ fAIAction0x2D:
  
   + REP #$20                                                   ;849697|C220    |      ;
     LDA.W strcJoypad1.newInput                                 ;849699|AD2801  |000128;
-    BIT.W #$0080                                               ;84969C|898000  |      ;
+    BIT.W #!JOYPAD_A                                               
     BNE +                                                      ;84969F|D003    |8496A4;
     JMP.W .return                                              ;8496A1|4C5F97  |84975F;
  
  
-  + REP #$30                                                   ;8496A4|C230    |      ;
-    LDA.B strcPlayer.action                                    ;8496A6|A5D4    |0000D4;
-    CMP.W #$0005                                               ;8496A8|C90500  |      ;
+  + %CheckPlayerAction(!PACTION_DROPITEM)
     BEQ +                                                      ;8496AB|F003    |8496B0;
     JMP.W .continue                                            ;8496AD|4CC496  |8496C4;
  
@@ -2673,7 +2653,7 @@ fAIAction0x2D:
     %SetPlayerFlag(!PFLAGS_INTERACTING)
     %SetPlayerAction(!PACTION_NONE)
     REP #$30                                                   ;849751|C230    |      ;
-    LDY.W #$0010                                               ;849753|A01000  |      ;
+    LDY.W #!PACTION_10                                               
     LDA.B [ptrAIUnknown0xCC],Y                                 ;849756|B7CC    |0000CC;
     CLC                                                        ;849758|18      |      ;
     ADC.W #$0001                                               ;849759|690100  |      ;
@@ -2871,7 +2851,7 @@ fAIAction0x30_UpdateChicken:
  
  
   + LDA.B strcPlayer.action                                    ;84990E|A5D4    |0000D4;
-    CMP.W #$0017                                               ;849910|C91700  |      ;
+    CMP.W #!PACTION_17                                               
     BNE +                                                      ;849913|D003    |849918;
     JMP.W .label1                                              ;849915|4CC899  |8499C8;
  
@@ -3152,30 +3132,22 @@ fUnknown_ToFarm:
     JMP.W .continue                                            ;849B52|4CB9A0  |84A0B9;
  
  
-  + REP #$30                                                   ;849B55|C230    |      ;
-    LDA.B strcPlayer.action                                    ;849B57|A5D4    |0000D4;
-    CMP.W #!PACTION_USINGTOOL                                               
+  + %CheckPlayerAction(!PACTION_USINGTOOL)
     BNE +                                                      ;849B5C|D003    |849B61;
     JMP.W .continue                                            ;849B5E|4CB9A0  |84A0B9;
  
  
-  + REP #$30                                                   ;849B61|C230    |      ;
-    LDA.B strcPlayer.action                                    ;849B63|A5D4    |0000D4;
-    CMP.W #!PACTION_SHOWTOOL                                               
+  + %CheckPlayerAction(!PACTION_SHOWTOOL)
     BNE +                                                      ;849B68|D003    |849B6D;
     JMP.W .continue                                            ;849B6A|4CB9A0  |84A0B9;
  
  
-  + REP #$30                                                   ;849B6D|C230    |      ;
-    LDA.B strcPlayer.action                                    ;849B6F|A5D4    |0000D4;
-    CMP.W #!PACTION_WHISTLEHORSE                                               
+  + %CheckPlayerAction(!PACTION_WHISTLEHORSE)
     BNE +                                                      ;849B74|D003    |849B79;
     JMP.W .continue                                            ;849B76|4CB9A0  |84A0B9;
  
  
-  + REP #$30                                                   ;849B79|C230    |      ;
-    LDA.B strcPlayer.action                                    ;849B7B|A5D4    |0000D4;
-    CMP.W #!PACTION_WHISTLEDOG                                               
+  + %CheckPlayerAction(!PACTION_WHISTLEDOG)
     BNE +                                                      ;849B80|D003    |849B85;
     JMP.W .continue                                            ;849B82|4CB9A0  |84A0B9;
  
@@ -5118,30 +5090,22 @@ fAIAction0x33_UpdateMole:
     JMP.W .label1                                              ;84A965|4C1EAA  |84AA1E;
  
  
-  + REP #$30                                                   ;84A968|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84A96A|A5D4    |0000D4;
-    CMP.W #!PACTION_USINGTOOL                                               
+  + %CheckPlayerAction(!PACTION_USINGTOOL)
     BNE +                                                      ;84A96F|D003    |84A974;
     JMP.W .label1                                              ;84A971|4C1EAA  |84AA1E;
  
  
-  + REP #$30                                                   ;84A974|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84A976|A5D4    |0000D4;
-    CMP.W #!PACTION_SHOWTOOL                                               
+  + %CheckPlayerAction(!PACTION_SHOWTOOL)
     BNE +                                                      ;84A97B|D003    |84A980;
     JMP.W .label1                                              ;84A97D|4C1EAA  |84AA1E;
  
  
-  + REP #$30                                                   ;84A980|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84A982|A5D4    |0000D4;
-    CMP.W #!PACTION_WHISTLEHORSE                                               
+  + %CheckPlayerAction(!PACTION_WHISTLEHORSE)
     BNE +                                                      ;84A987|D003    |84A98C;
     JMP.W .label1                                              ;84A989|4C1EAA  |84AA1E;
  
  
-  + REP #$30                                                   ;84A98C|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84A98E|A5D4    |0000D4;
-    CMP.W #!PACTION_WHISTLEDOG                                               
+  + %CheckPlayerAction(!PACTION_WHISTLEDOG)
     BNE +                                                      ;84A993|D003    |84A998;
     JMP.W .label1                                              ;84A995|4C1EAA  |84AA1E;
  
@@ -5164,7 +5128,7 @@ fAIAction0x33_UpdateMole:
  
  
   + LDA.B strcPlayer.action                                    ;84A9C3|A5D4    |0000D4;
-    CMP.W #$0017                                               ;84A9C5|C91700  |      ;
+    CMP.W #!PACTION_17                                               
     BNE +                                                      ;84A9C8|D003    |84A9CD;
     JMP.W .label1                                              ;84A9CA|4C1EAA  |84AA1E;
  
@@ -5253,30 +5217,22 @@ fAIAction0x34:
     JMP.W .return                                              ;84AA76|4C19AB  |84AB19;
  
  
-  + REP #$30                                                   ;84AA79|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84AA7B|A5D4    |0000D4;
-    CMP.W #$000A                                               ;84AA7D|C90A00  |      ;
+  + %CheckPlayerAction(!PACTION_USINGTOOL)
     BNE +                                                      ;84AA80|D003    |84AA85;
     JMP.W .return                                              ;84AA82|4C19AB  |84AB19;
  
  
-  + REP #$30                                                   ;84AA85|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84AA87|A5D4    |0000D4;
-    CMP.W #$000C                                               ;84AA89|C90C00  |      ;
+  + %CheckPlayerAction(!PACTION_SHOWTOOL)
     BNE +                                                      ;84AA8C|D003    |84AA91;
     JMP.W .return                                              ;84AA8E|4C19AB  |84AB19;
  
  
-  + REP #$30                                                   ;84AA91|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84AA93|A5D4    |0000D4;
-    CMP.W #$000D                                               ;84AA95|C90D00  |      ;
+  + %CheckPlayerAction(!PACTION_WHISTLEHORSE)
     BNE +                                                      ;84AA98|D003    |84AA9D;
     JMP.W .return                                              ;84AA9A|4C19AB  |84AB19;
  
  
-  + REP #$30                                                   ;84AA9D|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84AA9F|A5D4    |0000D4;
-    CMP.W #$001B                                               ;84AAA1|C91B00  |      ;
+  + %CheckPlayerAction(!PACTION_WHISTLEDOG)
     BNE +                                                      ;84AAA4|D003    |84AAA9;
     JMP.W .return                                              ;84AAA6|4C19AB  |84AB19;
  
@@ -5288,7 +5244,7 @@ fAIAction0x34:
     BNE .return                                                ;84AAB9|D05E    |84AB19;
     REP #$20                                                   ;84AABB|C220    |      ;
     LDA.W strcJoypad1.newInput                                 ;84AABD|AD2801  |000128;
-    BIT.W #$0080                                               ;84AAC0|898000  |      ;
+    BIT.W #!JOYPAD_A                                               
     BNE +                                                      ;84AAC3|D003    |84AAC8;
     JMP.W .return                                              ;84AAC5|4C19AB  |84AB19;
  
@@ -5446,30 +5402,22 @@ fAIAction0x35_UpdateHorse:
     JMP.W .label2                                              ;84AC06|4CEEAC  |84ACEE;
  
  
-  + REP #$30                                                   ;84AC09|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84AC0B|A5D4    |0000D4;
-    CMP.W #$000A                                               ;84AC0D|C90A00  |      ;
+  + %CheckPlayerAction(!PACTION_USINGTOOL)
     BNE +                                                      ;84AC10|D003    |84AC15;
     JMP.W .label2                                              ;84AC12|4CEEAC  |84ACEE;
  
  
-  + REP #$30                                                   ;84AC15|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84AC17|A5D4    |0000D4;
-    CMP.W #$000C                                               ;84AC19|C90C00  |      ;
+  + %CheckPlayerAction(!PACTION_SHOWTOOL)
     BNE +                                                      ;84AC1C|D003    |84AC21;
     JMP.W .label2                                              ;84AC1E|4CEEAC  |84ACEE;
  
  
-  + REP #$30                                                   ;84AC21|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84AC23|A5D4    |0000D4;
-    CMP.W #$000D                                               ;84AC25|C90D00  |      ;
+  + %CheckPlayerAction(!PACTION_WHISTLEHORSE)
     BNE +                                                      ;84AC28|D003    |84AC2D;
     JMP.W .label2                                              ;84AC2A|4CEEAC  |84ACEE;
  
  
-  + REP #$30                                                   ;84AC2D|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84AC2F|A5D4    |0000D4;
-    CMP.W #$001B                                               ;84AC31|C91B00  |      ;
+  + %CheckPlayerAction(!PACTION_WHISTLEDOG)
     BNE +                                                      ;84AC34|D003    |84AC39;
     JMP.W .label2                                              ;84AC36|4CEEAC  |84ACEE;
  
@@ -5489,7 +5437,7 @@ fAIAction0x35_UpdateHorse:
     %SetFlag(daily2, $0010)
     REP #$20                                                   ;84AC5E|C220    |      ;
     LDA.W strcJoypad1.newInput                                 ;84AC60|AD2801  |000128;
-    BIT.W #$0080                                               ;84AC63|898000  |      ;
+    BIT.W #!JOYPAD_A                                               
     BNE +                                                      ;84AC66|D003    |84AC6B;
     JMP.W .label2                                              ;84AC68|4CEEAC  |84ACEE;
  
@@ -5547,9 +5495,7 @@ fAIAction0x35_UpdateHorse:
     JMP.W .label8                                              ;84ACD5|4C88AD  |84AD88;
  
  
-  + REP #$30                                                   ;84ACD8|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84ACDA|A5D4    |0000D4;
-    CMP.W #$0004                                               ;84ACDC|C90400  |      ;
+  + %CheckPlayerAction(!PACTION_ITEMONHAND)
     BNE +                                                      ;84ACDF|D003    |84ACE4;
     JMP.W .label8                                              ;84ACE1|4C88AD  |84AD88;
  
@@ -5862,30 +5808,22 @@ fAIAction0x36_UpdateDog:
     JMP.W .label1                                              ;84AF35|4CF4AF  |84AFF4;
  
  
-  + REP #$30                                                   ;84AF38|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84AF3A|A5D4    |0000D4;
-    CMP.W #!PACTION_USINGTOOL                                               
+  + %CheckPlayerAction(!PACTION_USINGTOOL)
     BNE +                                                      ;84AF3F|D003    |84AF44;
     JMP.W .label1                                              ;84AF41|4CF4AF  |84AFF4;
  
  
-  + REP #$30                                                   ;84AF44|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84AF46|A5D4    |0000D4;
-    CMP.W #!PACTION_SHOWTOOL                                               
+  + %CheckPlayerAction(!PACTION_SHOWTOOL)
     BNE +                                                      ;84AF4B|D003    |84AF50;
     JMP.W .label1                                              ;84AF4D|4CF4AF  |84AFF4;
  
  
-  + REP #$30                                                   ;84AF50|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84AF52|A5D4    |0000D4;
-    CMP.W #!PACTION_WHISTLEHORSE                                               
+  + %CheckPlayerAction(!PACTION_WHISTLEHORSE)
     BNE +                                                      ;84AF57|D003    |84AF5C;
     JMP.W .label1                                              ;84AF59|4CF4AF  |84AFF4;
  
  
-  + REP #$30                                                   ;84AF5C|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84AF5E|A5D4    |0000D4;
-    CMP.W #!PACTION_WHISTLEDOG                                               
+  + %CheckPlayerAction(!PACTION_WHISTLEDOG)
     BNE +                                                      ;84AF63|D003    |84AF68;
     JMP.W .label1                                              ;84AF65|4CF4AF  |84AFF4;
  
@@ -5922,7 +5860,7 @@ fAIAction0x36_UpdateDog:
  
  
   + LDA.B strcPlayer.action                                    ;84AFAA|A5D4    |0000D4;
-    CMP.W #$0017                                               ;84AFAC|C91700  |      ;
+    CMP.W #!PACTION_17                                               
     BNE +                                                      ;84AFAF|D003    |84AFB4;
     JMP.W .label1                                              ;84AFB1|4CF4AF  |84AFF4;
  
@@ -6954,30 +6892,22 @@ fAIAction0x4A:
     JMP.W .return                                              ;84B955|4C02BA  |84BA02;
  
  
-  + REP #$30                                                   ;84B958|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84B95A|A5D4    |0000D4;
-    CMP.W #$000A                                               ;84B95C|C90A00  |      ;
+  + %CheckPlayerAction(!PACTION_USINGTOOL)
     BNE +                                                      ;84B95F|D003    |84B964;
     JMP.W .return                                              ;84B961|4C02BA  |84BA02;
  
  
-  + REP #$30                                                   ;84B964|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84B966|A5D4    |0000D4;
-    CMP.W #$000C                                               ;84B968|C90C00  |      ;
+  + %CheckPlayerAction(!PACTION_SHOWTOOL)
     BNE +                                                      ;84B96B|D003    |84B970;
     JMP.W .return                                              ;84B96D|4C02BA  |84BA02;
  
  
-  + REP #$30                                                   ;84B970|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84B972|A5D4    |0000D4;
-    CMP.W #$000D                                               ;84B974|C90D00  |      ;
+  + %CheckPlayerAction(!PACTION_WHISTLEHORSE)
     BNE +                                                      ;84B977|D003    |84B97C;
     JMP.W .return                                              ;84B979|4C02BA  |84BA02;
  
  
-  + REP #$30                                                   ;84B97C|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84B97E|A5D4    |0000D4;
-    CMP.W #$001B                                               ;84B980|C91B00  |      ;
+  + %CheckPlayerAction(!PACTION_WHISTLEDOG)
     BNE +                                                      ;84B983|D003    |84B988;
     JMP.W .return                                              ;84B985|4C02BA  |84BA02;
  
@@ -6989,7 +6919,7 @@ fAIAction0x4A:
     BNE .return                                                ;84B998|D068    |84BA02;
     REP #$20                                                   ;84B99A|C220    |      ;
     LDA.W strcJoypad1.newInput                                 ;84B99C|AD2801  |000128;
-    BIT.W #$0080                                               ;84B99F|898000  |      ;
+    BIT.W #!JOYPAD_A                                               
     BNE +                                                      ;84B9A2|D003    |84B9A7;
     JMP.W .return                                              ;84B9A4|4C02BA  |84BA02;
  
@@ -7000,7 +6930,7 @@ fAIAction0x4A:
  
  
   + LDA.B strcPlayer.action                                    ;84B9B3|A5D4    |0000D4;
-    CMP.W #$0017                                               ;84B9B5|C91700  |      ;
+    CMP.W #!PACTION_17                                               
     BNE +                                                      ;84B9B8|D003    |84B9BD;
     JMP.W .return                                              ;84B9BA|4C02BA  |84BA02;
  
@@ -7095,9 +7025,7 @@ fAIAction0x4D:
     JMP.W .return                                              ;84BA8B|4C26BB  |84BB26;
  
  
-  + REP #$30                                                   ;84BA8E|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84BA90|A5D4    |0000D4;
-    CMP.W #$000A                                               ;84BA92|C90A00  |      ;
+  + %CheckPlayerAction(!PACTION_USINGTOOL)
     BNE +                                                      ;84BA95|D003    |84BA9A;
     JMP.W .return                                              ;84BA97|4C26BB  |84BB26;
  
@@ -7212,9 +7140,9 @@ fAIAction0x4F:
     REP #$20                                                   ;84BB8C|C220    |      ;
     TAX                                                        ;84BB8E|AA      |      ;
     SEP #$20                                                   ;84BB8F|E220    |      ;
-    LDA.L strcShedItems,X                                      ;84BB91|BF001F7F|7F1F00;
+    LDA.L strcShedItems.row1,X                                 ;84BB91|BF001F7F|7F1F00;
     ORA.B strcVariables.n8Temp1                                ;84BB95|0592    |000092;
-    STA.L strcShedItems,X                                      ;84BB97|9F001F7F|7F1F00;
+    STA.L strcShedItems.row1,X                                 ;84BB97|9F001F7F|7F1F00;
     STZ.W strcPlayerData.toolEquipped                          ;84BB9B|9C2109  |000921;
  
   + SEP #$20                                                   ;84BB9E|E220    |      ;
@@ -7243,9 +7171,9 @@ fAIAction0x4F:
     REP #$20                                                   ;84BBC7|C220    |      ;
     TAX                                                        ;84BBC9|AA      |      ;
     SEP #$20                                                   ;84BBCA|E220    |      ;
-    LDA.L strcShedItems,X                                      ;84BBCC|BF001F7F|7F1F00;
+    LDA.L strcShedItems.row1,X                                 ;84BBCC|BF001F7F|7F1F00;
     ORA.B strcVariables.n8Temp1                                ;84BBD0|0592    |000092;
-    STA.L strcShedItems,X                                      ;84BBD2|9F001F7F|7F1F00;
+    STA.L strcShedItems.row1,X                                 ;84BBD2|9F001F7F|7F1F00;
     STZ.W strcPlayerData.toolSecond                            ;84BBD6|9C2309  |000923;
  
 .return:
@@ -7435,30 +7363,22 @@ fAIAction0x52:
     JMP.W .return                                              ;84BD5D|4CFFBD  |84BDFF;
  
  
-  + REP #$30                                                   ;84BD60|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84BD62|A5D4    |0000D4;
-    CMP.W #$000A                                               ;84BD64|C90A00  |      ;
+  + %CheckPlayerAction(!PACTION_USINGTOOL)
     BNE +                                                      ;84BD67|D003    |84BD6C;
     JMP.W .return                                              ;84BD69|4CFFBD  |84BDFF;
  
  
-  + REP #$30                                                   ;84BD6C|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84BD6E|A5D4    |0000D4;
-    CMP.W #$000C                                               ;84BD70|C90C00  |      ;
+  + %CheckPlayerAction(!PACTION_SHOWTOOL)
     BNE +                                                      ;84BD73|D003    |84BD78;
     JMP.W .return                                              ;84BD75|4CFFBD  |84BDFF;
  
  
-  + REP #$30                                                   ;84BD78|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84BD7A|A5D4    |0000D4;
-    CMP.W #$000D                                               ;84BD7C|C90D00  |      ;
+  + %CheckPlayerAction(!PACTION_WHISTLEHORSE)
     BNE +                                                      ;84BD7F|D003    |84BD84;
     JMP.W .return                                              ;84BD81|4CFFBD  |84BDFF;
  
  
-  + REP #$30                                                   ;84BD84|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84BD86|A5D4    |0000D4;
-    CMP.W #$001B                                               ;84BD88|C91B00  |      ;
+  + %CheckPlayerAction(!PACTION_WHISTLEDOG)
     BNE +                                                      ;84BD8B|D003    |84BD90;
     JMP.W .return                                              ;84BD8D|4CFFBD  |84BDFF;
  
@@ -7470,7 +7390,7 @@ fAIAction0x52:
     BNE .return                                                ;84BDA0|D05D    |84BDFF;
     REP #$20                                                   ;84BDA2|C220    |      ;
     LDA.W strcJoypad1.newInput                                 ;84BDA4|AD2801  |000128;
-    BIT.W #$0080                                               ;84BDA7|898000  |      ;
+    BIT.W #!JOYPAD_A                                               
     BNE +                                                      ;84BDAA|D003    |84BDAF;
     JMP.W .return                                              ;84BDAC|4CFFBD  |84BDFF;
  
@@ -7533,30 +7453,22 @@ fAIAction0x53:
     JMP.W .return                                              ;84BE26|4CC8BE  |84BEC8;
  
  
-  + REP #$30                                                   ;84BE29|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84BE2B|A5D4    |0000D4;
-    CMP.W #$000A                                               ;84BE2D|C90A00  |      ;
+  + %CheckPlayerAction(!PACTION_USINGTOOL)
     BNE +                                                      ;84BE30|D003    |84BE35;
     JMP.W .return                                              ;84BE32|4CC8BE  |84BEC8;
  
  
-  + REP #$30                                                   ;84BE35|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84BE37|A5D4    |0000D4;
-    CMP.W #$000C                                               ;84BE39|C90C00  |      ;
+  + %CheckPlayerAction(!PACTION_SHOWTOOL)
     BNE +                                                      ;84BE3C|D003    |84BE41;
     JMP.W .return                                              ;84BE3E|4CC8BE  |84BEC8;
  
  
-  + REP #$30                                                   ;84BE41|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84BE43|A5D4    |0000D4;
-    CMP.W #$000D                                               ;84BE45|C90D00  |      ;
+  + %CheckPlayerAction(!PACTION_WHISTLEHORSE)
     BNE +                                                      ;84BE48|D003    |84BE4D;
     JMP.W .return                                              ;84BE4A|4CC8BE  |84BEC8;
  
  
-  + REP #$30                                                   ;84BE4D|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84BE4F|A5D4    |0000D4;
-    CMP.W #$001B                                               ;84BE51|C91B00  |      ;
+  + %CheckPlayerAction(!PACTION_WHISTLEDOG)
     BNE +                                                      ;84BE54|D003    |84BE59;
     JMP.W .return                                              ;84BE56|4CC8BE  |84BEC8;
  
@@ -7568,7 +7480,7 @@ fAIAction0x53:
     BNE .return                                                ;84BE69|D05D    |84BEC8;
     REP #$20                                                   ;84BE6B|C220    |      ;
     LDA.W strcJoypad1.newInput                                 ;84BE6D|AD2801  |000128;
-    BIT.W #$0080                                               ;84BE70|898000  |      ;
+    BIT.W #!JOYPAD_A                                               
     BNE +                                                      ;84BE73|D003    |84BE78;
     JMP.W .return                                              ;84BE75|4CC8BE  |84BEC8;
  
@@ -8090,9 +8002,7 @@ fInput_Handler_case04:
  
  
 fInput_Unknown84C2B4:
-    REP #$30                                                   ;84C2B4|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84C2B6|A5D4    |0000D4;
-    CMP.W #$0003                                               ;84C2B8|C90300  |      ;
+    %CheckPlayerAction(!PACTION_JUMP)
     BEQ +                                                      ;84C2BB|F004    |84C2C1;
     JSL.L fInput_AIJoypadHandler                               ;84C2BD|22D6C784|84C7D6;
  
@@ -8100,7 +8010,7 @@ fInput_Unknown84C2B4:
     %CheckFlag(daily1, $8000)
     BEQ .justReturn                                            ;84C2CA|F00B    |84C2D7;
     LDA.W strcJoypad1.newInput                                 ;84C2CC|AD2801  |000128;
-    BIT.W #$1000                                               ;84C2CF|890010  |      ;
+    BIT.W #!JOYPAD_START                                               
     BEQ .justReturn                                            ;84C2D2|F003    |84C2D7;
     JMP.W +                                                    ;84C2D4|4CD8C2  |84C2D8;
  
@@ -8127,25 +8037,25 @@ fInput_Unknown84C2B4:
 fInput_Unknown84C2FE:
     REP #$30                                                   ;84C2FE|C230    |      ;
     LDA.W strcJoypad1.newInput                                 ;84C300|AD2801  |000128;
-    BIT.W #$0400                                               ;84C303|890004  |      ;
+    BIT.W #!JOYPAD_DOWN                                               
     BEQ +                                                      ;84C306|F003    |84C30B;
     JMP.W .label1                                              ;84C308|4C2DC3  |84C32D;
  
  
   + LDA.W strcJoypad1.newInput                                 ;84C30B|AD2801  |000128;
-    BIT.W #$0800                                               ;84C30E|890008  |      ;
+    BIT.W #!JOYPAD_UP                                               
     BEQ +                                                      ;84C311|F003    |84C316;
     JMP.W .label1                                              ;84C313|4C2DC3  |84C32D;
  
  
   + LDA.W strcJoypad1.newInput                                 ;84C316|AD2801  |000128;
-    BIT.W #$8000                                               ;84C319|890080  |      ;
+    BIT.W #!JOYPAD_B                                               
     BEQ +                                                      ;84C31C|F003    |84C321;
     JMP.W .label2                                              ;84C31E|4C4EC3  |84C34E;
  
  
   + LDA.W strcJoypad1.newInput                                 ;84C321|AD2801  |000128;
-    BIT.W #$0080                                               ;84C324|898000  |      ;
+    BIT.W #!JOYPAD_A                                               
     BEQ .justReturn                                            ;84C327|F003    |84C32C;
     JMP.W .label3                                              ;84C329|4C67C3  |84C367;
  
@@ -8202,25 +8112,25 @@ fInput_Unknown84C2FE:
 fInput_Unkown84C380:
     REP #$30                                                   ;84C380|C230    |      ;
     LDA.W strcJoypad1.newInput                                 ;84C382|AD2801  |000128;
-    BIT.W #$0400                                               ;84C385|890004  |      ;
+    BIT.W #!JOYPAD_DOWN                                               
     BEQ +                                                      ;84C388|F003    |84C38D;
     JMP.W .label1                                              ;84C38A|4CAFC3  |84C3AF;
  
  
   + LDA.W strcJoypad1.newInput                                 ;84C38D|AD2801  |000128;
-    BIT.W #$0800                                               ;84C390|890008  |      ;
+    BIT.W #!JOYPAD_UP                                               
     BEQ +                                                      ;84C393|F003    |84C398;
     JMP.W .label1                                              ;84C395|4CAFC3  |84C3AF;
  
  
   + LDA.W strcJoypad1.newInput                                 ;84C398|AD2801  |000128;
-    BIT.W #$8000                                               ;84C39B|890080  |      ;
+    BIT.W #!JOYPAD_B                                               
     BEQ +                                                      ;84C39E|F003    |84C3A3;
     JMP.W .label2                                              ;84C3A0|4CD0C3  |84C3D0;
  
  
   + LDA.W strcJoypad1.newInput                                 ;84C3A3|AD2801  |000128;
-    BIT.W #$0080                                               ;84C3A6|898000  |      ;
+    BIT.W #!JOYPAD_A                                               
     BEQ .justReturn                                            ;84C3A9|F003    |84C3AE;
     JMP.W .label3                                              ;84C3AB|4CE9C3  |84C3E9;
  
@@ -8297,7 +8207,7 @@ fInput_Unknown84C428:
     %CheckFlag(daily1, $8000)
     BEQ .justReturn                                            ;84C431|F00B    |84C43E;
     LDA.W strcJoypad1.newInput                                 ;84C433|AD2801  |000128;
-    BIT.W #$1000                                               ;84C436|890010  |      ;
+    BIT.W #!JOYPAD_START                                               
     BEQ .justReturn                                            ;84C439|F003    |84C43E;
     JMP.W .label1                                              ;84C43B|4C3FC4  |84C43F;
  
@@ -8323,19 +8233,19 @@ fInput_Unknown84C428:
 fInput_Unknown84C458:
     REP #$30                                                   ;84C458|C230    |      ;
     LDA.W strcJoypad1.newInput                                 ;84C45A|AD2801  |000128;
-    BIT.W #$0400                                               ;84C45D|890004  |      ;
+    BIT.W #!JOYPAD_DOWN                                               
     BEQ +                                                      ;84C460|F003    |84C465;
     JMP.W .label1                                              ;84C462|4C7CC4  |84C47C;
  
  
   + LDA.W strcJoypad1.newInput                                 ;84C465|AD2801  |000128;
-    BIT.W #$0800                                               ;84C468|890008  |      ;
+    BIT.W #!JOYPAD_UP                                               
     BEQ +                                                      ;84C46B|F003    |84C470;
     JMP.W .label2                                              ;84C46D|4CC4C4  |84C4C4;
  
  
   + LDA.W strcJoypad1.newInput                                 ;84C470|AD2801  |000128;
-    BIT.W #$0080                                               ;84C473|898000  |      ;
+    BIT.W #!JOYPAD_A                                               
     BEQ +                                                      ;84C476|F003    |84C47B;
     JMP.W .label3                                              ;84C478|4C0CC5  |84C50C;
  
@@ -8479,7 +8389,7 @@ fInput_Handler_case03:
  
  
   + LDA.W strcJoypad1.newInput                                 ;84C56E|AD2801  |000128;
-    BIT.W #$0080                                               ;84C571|898000  |      ;
+    BIT.W #!JOYPAD_A                                               
     BEQ +                                                      ;84C574|F003    |84C579;
     JMP.W fInput_Unknown84C57A                                 ;84C576|4C7AC5  |84C57A;
  
@@ -8653,18 +8563,18 @@ fInput_Unknown84C684:
 fInput_Handler_case01:
     %CheckPlayerFlags(!PFLAGS_INTRANSITION|!PFLAGS_INTERACTING|!PFLAGS_EATINGMEAL)
     BEQ +                                                      ;84C6BE|F003    |84C6C3;
-    JMP.W fInput_Return84C7B5                                  ;84C6C0|4CB5C7  |84C7B5;
+    JMP.W fInput_PlayerReturn                                  ;84C6C0|4CB5C7  |84C7B5;
  
  
   + LDA.B strcPlayer.action                                    ;84C6C3|A5D4    |0000D4;
-    CMP.W #$0003                                               ;84C6C5|C90300  |      ;
+    CMP.W #!PACTION_JUMP                                               
     BNE +                                                      ;84C6C8|D003    |84C6CD;
-    JMP.W fInput_Return84C7B5                                  ;84C6CA|4CB5C7  |84C7B5;
+    JMP.W fInput_PlayerReturn                                  ;84C6CA|4CB5C7  |84C7B5;
  
  
   + %CheckFlag(daily2, $0020)
     BEQ +                                                      ;84C6D4|F003    |84C6D9;
-    JMP.W fInput_Return84C7B5                                  ;84C6D6|4CB5C7  |84C7B5;
+    JMP.W fInput_PlayerReturn                                  ;84C6D6|4CB5C7  |84C7B5;
  
  
   + %CheckPlayerFlags(!PFLAGS_AISTEERING)
@@ -8674,122 +8584,118 @@ fInput_Handler_case01:
  
   + %CheckPlayerFlags(!PFLAGS_USERCONTROL)
     BNE +                                                      ;84C6EC|D003    |84C6F1;
-    JMP.W fInput_Return84C7B5                                  ;84C6EE|4CB5C7  |84C7B5;
+    JMP.W fInput_PlayerReturn                                  ;84C6EE|4CB5C7  |84C7B5;
  
  
-  + REP #$30                                                   ;84C6F1|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84C6F3|A5D4    |0000D4;
-    CMP.W #$0011                                               ;84C6F5|C91100  |      ;
+  + %CheckPlayerAction(!PACTION_FISHING)
     BNE +                                                      ;84C6F8|D003    |84C6FD;
-    JMP.W fInput_Unknown84C7AA                                 ;84C6FA|4CAAC7  |84C7AA;
+    JMP.W fInput_PlayerButtonY                                 ;84C6FA|4CAAC7  |84C7AA;
  
  
-  + CMP.W #$0012                                               ;84C6FD|C91200  |      ;
+  + CMP.W #!PACTION_FISHINGBITE                                               
     BNE +                                                      ;84C700|D003    |84C705;
-    JMP.W fInput_Unknown84C7AA                                 ;84C702|4CAAC7  |84C7AA;
+    JMP.W fInput_PlayerButtonY                                 ;84C702|4CAAC7  |84C7AA;
  
  
   + SEP #$20                                                   ;84C705|E220    |      ;
     LDX.B strcPlayer.action                                    ;84C707|A6D4    |0000D4;
-    LDA.L aLoopupTable_84C7B6,X                                ;84C709|BFB6C784|84C7B6;
+    LDA.L aActionLookupTable,X                                 ;84C709|BFB6C784|84C7B6;
     BEQ +                                                      ;84C70D|F003    |84C712;
-    JMP.W fInput_Return84C7B5                                  ;84C70F|4CB5C7  |84C7B5;
+    JMP.W fInput_PlayerReturn                                  ;84C70F|4CB5C7  |84C7B5;
  
  
   + REP #$30                                                   ;84C712|C230    |      ;
     LDA.W strcJoypad1.current                                  ;84C714|AD2401  |000124;
-    BIT.W #$0400                                               ;84C717|890004  |      ;
+    BIT.W #!JOYPAD_DOWN                                               
     BEQ +                                                      ;84C71A|F003    |84C71F;
     JMP.W fAiInput_PressDown                                   ;84C71C|4C35C9  |84C935;
  
  
   + LDA.W strcJoypad1.current                                  ;84C71F|AD2401  |000124;
-    BIT.W #$0800                                               ;84C722|890008  |      ;
+    BIT.W #!JOYPAD_UP                                               
     BEQ +                                                      ;84C725|F003    |84C72A;
     JMP.W fAiInput_PressUp                                     ;84C727|4C6FC9  |84C96F;
  
  
   + LDA.W strcJoypad1.current                                  ;84C72A|AD2401  |000124;
-    BIT.W #$0100                                               ;84C72D|890001  |      ;
+    BIT.W #!JOYPAD_RIGHT                                               
     BEQ +                                                      ;84C730|F003    |84C735;
     JMP.W fAiInput_PressRight                                  ;84C732|4CA9C9  |84C9A9;
  
  
   + LDA.W strcJoypad1.current                                  ;84C735|AD2401  |000124;
-    BIT.W #$0200                                               ;84C738|890002  |      ;
-    BEQ fInput_Unknown84C740                                   ;84C73B|F003    |84C740;
+    BIT.W #!JOYPAD_LEFT                                               
+    BEQ fInput_PlayerNormalGameplay                            ;84C73B|F003    |84C740;
     JMP.W fAiInput_PressLeft                                   ;84C73D|4CE3C9  |84C9E3;
  
  
-fInput_Unknown84C740:
+fInput_PlayerNormalGameplay:
     %CheckPlayerFlags(!PFLAGS_AISTEERING)
     BEQ +                                                      ;84C747|F003    |84C74C;
-    JMP.W fInput_Unknown08FD_case0200                          ;84C749|4C04C8  |84C804;
+    JMP.W fInput_AiControl                                     ;84C749|4C04C8  |84C804;
  
  
-  + REP #$30                                                   ;84C74C|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84C74E|A5D4    |0000D4;
-    CMP.W #$000F                                               ;84C750|C90F00  |      ;
+  + %CheckPlayerAction(!PACTION_0F)
     BNE +                                                      ;84C753|D003    |84C758;
-    JMP.W fInput_Unknown84C7AA                                 ;84C755|4CAAC7  |84C7AA;
+    JMP.W fInput_PlayerButtonY                                 ;84C755|4CAAC7  |84C7AA;
  
  
   + REP #$20                                                   ;84C758|C220    |      ;
     LDA.W strcJoypad1.newInput                                 ;84C75A|AD2801  |000128;
-    BIT.W #$0080                                               ;84C75D|898000  |      ;
+    BIT.W #!JOYPAD_A                                               
     BEQ +                                                      ;84C760|F003    |84C765;
-    JMP.W fInput_Unknown84CAA5                                 ;84C762|4CA5CA  |84CAA5;
+    JMP.W fInput_PlayerButtonA_Interact                        ;84C762|4CA5CA  |84CAA5;
  
  
   + %CheckPlayerFlags(!PFLAGS_INSPRINGS)
     BEQ +                                                      ;84C76C|F003    |84C771;
-    JMP.W fInput_Return84C7B5                                  ;84C76E|4CB5C7  |84C7B5;
+    JMP.W fInput_PlayerReturn                                  ;84C76E|4CB5C7  |84C7B5;
  
  
   + REP #$20                                                   ;84C771|C220    |      ;
     LDA.W strcJoypad1.current                                  ;84C773|AD2401  |000124;
-    BIT.W #$8000                                               ;84C776|890080  |      ;
+    BIT.W #!JOYPAD_B                                               
     BEQ +                                                      ;84C779|F003    |84C77E;
-    JMP.W fInput_RunToJump                                     ;84C77B|4C1DCA  |84CA1D;
+    JMP.W fInput_PlayerButtonB                                 ;84C77B|4C1DCA  |84CA1D;
  
  
   + LDA.W strcJoypad1.newInput                                 ;84C77E|AD2801  |000128;
-    BIT.W #$2000                                               ;84C781|890020  |      ;
+    BIT.W #!JOYPAD_SELECT                                               
     BEQ +                                                      ;84C784|F003    |84C789;
-    JMP.W fInput_SetPlayerAction0x0C                           ;84C786|4C7ACE  |84CE7A;
+    JMP.W fInput_PlayerButtonSelect_ShowTool                   ;84C786|4C7ACE  |84CE7A;
  
  
   + LDA.W strcJoypad1.newInput                                 ;84C789|AD2801  |000128;
-    BIT.W #$0040                                               ;84C78C|894000  |      ;
+    BIT.W #!JOYPAD_X                                               
     BEQ +                                                      ;84C78F|F003    |84C794;
-    JMP.W fInput_SetPlayerAction0x1C                           ;84C791|4CA6CE  |84CEA6;
+    JMP.W fInput_PlayerButtonX_SwapTool                        ;84C791|4CA6CE  |84CEA6;
  
  
   + LDA.W strcJoypad1.newInput                                 ;84C794|AD2801  |000128;
-    BIT.W #$0010                                               ;84C797|891000  |      ;
+    BIT.W #!JOYPAD_R                                               
     BEQ +                                                      ;84C79A|F003    |84C79F;
-    JMP.W fInput_SetPlayerAction0x0D_WhistleR                  ;84C79C|4C0CCE  |84CE0C;
+    JMP.W fInput_PlayerButtonR_WhistleHorse                    ;84C79C|4C0CCE  |84CE0C;
  
  
   + LDA.W strcJoypad1.newInput                                 ;84C79F|AD2801  |000128;
-    BIT.W #$0020                                               ;84C7A2|892000  |      ;
-    BEQ fInput_Unknown84C7AA                                   ;84C7A5|F003    |84C7AA;
-    JMP.W fInput_SetPlayerAction0x1B_WhistleL                  ;84C7A7|4C43CE  |84CE43;
+    BIT.W #!JOYPAD_L                                               
+    BEQ fInput_PlayerButtonY                                   ;84C7A5|F003    |84C7AA;
+    JMP.W fInput_PlayerButtonL_WhistleDog                      ;84C7A7|4C43CE  |84CE43;
  
  
-fInput_Unknown84C7AA:
+fInput_PlayerButtonY:
     LDA.W strcJoypad1.newInput                                 ;84C7AA|AD2801  |000128;
-    BIT.W #$4000                                               ;84C7AD|890040  |      ;
-    BEQ fInput_Return84C7B5                                    ;84C7B0|F003    |84C7B5;
-    JMP.W fInput_Unknown84CD77                                 ;84C7B2|4C77CD  |84CD77;
+    BIT.W #!JOYPAD_Y                                               
+    BEQ fInput_PlayerReturn                                    ;84C7B0|F003    |84C7B5;
+    JMP.W fInput_PlayerButtonY_UseTool                         ;84C7B2|4C77CD  |84CD77;
  
  
-fInput_Return84C7B5:
+fInput_PlayerReturn:
     RTL                                                        ;84C7B5|6B      |      ;
  
  
-aLoopupTable_84C7B6:
-    db $00,$00,$00,$00,$01,$01,$00,$00,$01,$00,$01,$01         ;84C7B6|        |      ;
+aActionLookupTable:
+    db $00,$00,$00,$00,$01,$01,$00,$00,$01,$00,$01,$01         ;84C7B6|        |      ; 0x20 * [n8]
     db $01,$01,$00,$00,$01,$00,$00,$01,$01,$01,$01,$01         ;84C7C2|        |      ;
     db $01,$00,$01,$01,$01,$00,$00,$00                         ;84C7CE|        |      ;
  
@@ -8815,51 +8721,51 @@ fInput_AIJoypadHandler:
  
   + LDA.W strcAiControlData.input                              ;84C7F9|ADFD08  |0008FD;
     BIT.W #!JOYPAD_LEFT                                               
-    BEQ fInput_Unknown08FD_case0200                            ;84C7FF|F003    |84C804;
+    BEQ fInput_AiControl                                       ;84C7FF|F003    |84C804;
     JMP.W fAiInput_PressLeft                                   ;84C801|4CE3C9  |84C9E3;
  
  
-fInput_Unknown08FD_case0200:
+fInput_AiControl:
     LDA.W strcAiControlData.input                              ;84C804|ADFD08  |0008FD;
     BIT.W #$0080                                               ;84C807|898000  |      ;
     BEQ +                                                      ;84C80A|F003    |84C80F;
-    JMP.W fInput_Unknown84CAA5                                 ;84C80C|4CA5CA  |84CAA5;
+    JMP.W fInput_PlayerButtonA_Interact                        ;84C80C|4CA5CA  |84CAA5;
  
  
   + LDA.W strcAiControlData.input                              ;84C80F|ADFD08  |0008FD;
     BIT.W #$8000                                               ;84C812|890080  |      ;
     BEQ +                                                      ;84C815|F003    |84C81A;
-    JMP.W fInput_RunToJump                                     ;84C817|4C1DCA  |84CA1D;
+    JMP.W fInput_PlayerButtonB                                 ;84C817|4C1DCA  |84CA1D;
  
  
   + LDA.W strcAiControlData.input                              ;84C81A|ADFD08  |0008FD;
     BIT.W #$2000                                               ;84C81D|890020  |      ;
     BEQ +                                                      ;84C820|F003    |84C825;
-    JMP.W fInput_SetPlayerAction0x0C                           ;84C822|4C7ACE  |84CE7A;
+    JMP.W fInput_PlayerButtonSelect_ShowTool                   ;84C822|4C7ACE  |84CE7A;
  
  
   + LDA.W strcAiControlData.input                              ;84C825|ADFD08  |0008FD;
     BIT.W #$0040                                               ;84C828|894000  |      ;
     BEQ +                                                      ;84C82B|F003    |84C830;
-    JMP.W fInput_SetPlayerAction0x1C                           ;84C82D|4CA6CE  |84CEA6;
+    JMP.W fInput_PlayerButtonX_SwapTool                        ;84C82D|4CA6CE  |84CEA6;
  
  
   + LDA.W strcAiControlData.input                              ;84C830|ADFD08  |0008FD;
     BIT.W #$0010                                               ;84C833|891000  |      ;
     BEQ +                                                      ;84C836|F003    |84C83B;
-    JMP.W fInput_SetPlayerAction0x0D_WhistleR                  ;84C838|4C0CCE  |84CE0C;
+    JMP.W fInput_PlayerButtonR_WhistleHorse                    ;84C838|4C0CCE  |84CE0C;
  
  
   + LDA.W strcAiControlData.input                              ;84C83B|ADFD08  |0008FD;
     BIT.W #$0020                                               ;84C83E|892000  |      ;
     BEQ +                                                      ;84C841|F003    |84C846;
-    JMP.W fInput_SetPlayerAction0x1B_WhistleL                  ;84C843|4C43CE  |84CE43;
+    JMP.W fInput_PlayerButtonL_WhistleDog                      ;84C843|4C43CE  |84CE43;
  
  
   + LDA.W strcAiControlData.input                              ;84C846|ADFD08  |0008FD;
     BIT.W #$4000                                               ;84C849|890040  |      ;
     BEQ +                                                      ;84C84C|F003    |84C851;
-    JMP.W fInput_Unknown84CD77                                 ;84C84E|4C77CD  |84CD77;
+    JMP.W fInput_PlayerButtonY_UseTool                         ;84C84E|4C77CD  |84CD77;
  
  
   + RTL                                                        ;84C851|6B      |      ;
@@ -8987,13 +8893,9 @@ fInput_Unused84C852:
  
 fAiInput_PressDown:
     %SetPlayerAction(!PACTION_WALK)
-    REP #$30                                                   ;84C93C|C230    |      ;
-    LDA.W #!PDIR_DOWN                                               
-    STA.B strcPlayer.direction                                 ;84C941|85DA    |0000DA;
-    REP #$30                                                   ;84C943|C230    |      ;
-    LDA.W #$0000                                               ;84C945|A90000  |      ;
-    STA.W strcObjectData.direction                             ;84C948|8D1109  |000911;
-    JMP.W fInput_Unknown84C740                                 ;84C94B|4C40C7  |84C740;
+    %SetPlayerDirection(!PDIR_DOWN)
+    %SetObjectDirection(!PDIR_DOWN)
+    JMP.W fInput_PlayerNormalGameplay                          ;84C94B|4C40C7  |84C740;
  
     REP #$30                                                   ;84C94E|C230    |      ;
     LDA.W strcObjectData.direction                             ;84C950|AD1109  |000911;
@@ -9002,26 +8904,20 @@ fAiInput_PressDown:
     JMP.W .label1                                              ;84C958|4C5EC9  |84C95E;
  
  
-  + JMP.W fInput_Return84C7B5                                  ;84C95B|4CB5C7  |84C7B5;
+  + JMP.W fInput_PlayerReturn                                  ;84C95B|4CB5C7  |84C7B5;
  
  
 .label1:
     %SetPlayerAction(!PACTION_WALK)
-    REP #$30                                                   ;84C965|C230    |      ;
-    LDA.W #!PDIR_UP                                               
-    STA.B strcPlayer.direction                                 ;84C96A|85DA    |0000DA;
-    JMP.W fInput_Return84C7B5                                  ;84C96C|4CB5C7  |84C7B5;
+    %SetPlayerDirection(!PDIR_UP)
+    JMP.W fInput_PlayerReturn                                  ;84C96C|4CB5C7  |84C7B5;
  
  
 fAiInput_PressUp:
     %SetPlayerAction(!PACTION_WALK)
-    REP #$30                                                   ;84C976|C230    |      ;
-    LDA.W #!PDIR_UP                                               
-    STA.B strcPlayer.direction                                 ;84C97B|85DA    |0000DA;
-    REP #$30                                                   ;84C97D|C230    |      ;
-    LDA.W #$0001                                               ;84C97F|A90100  |      ;
-    STA.W strcObjectData.direction                             ;84C982|8D1109  |000911;
-    JMP.W fInput_Unknown84C740                                 ;84C985|4C40C7  |84C740;
+    %SetPlayerDirection(!PDIR_UP)
+    %SetObjectDirection(!PDIR_UP)
+    JMP.W fInput_PlayerNormalGameplay                          ;84C985|4C40C7  |84C740;
  
     REP #$30                                                   ;84C988|C230    |      ;
     LDA.W strcObjectData.direction                             ;84C98A|AD1109  |000911;
@@ -9030,26 +8926,20 @@ fAiInput_PressUp:
     JMP.W .label1                                              ;84C992|4C98C9  |84C998;
  
  
-  + JMP.W fInput_Unknown84C740                                 ;84C995|4C40C7  |84C740;
+  + JMP.W fInput_PlayerNormalGameplay                          ;84C995|4C40C7  |84C740;
  
  
 .label1:
     %SetPlayerAction(!PACTION_WALK)
-    REP #$30                                                   ;84C99F|C230    |      ;
-    LDA.W #!PDIR_DOWN                                               
-    STA.B strcPlayer.direction                                 ;84C9A4|85DA    |0000DA;
-    JMP.W fInput_Return84C7B5                                  ;84C9A6|4CB5C7  |84C7B5;
+    %SetPlayerDirection(!PDIR_DOWN)
+    JMP.W fInput_PlayerReturn                                  ;84C9A6|4CB5C7  |84C7B5;
  
  
 fAiInput_PressRight:
     %SetPlayerAction(!PACTION_WALK)
-    REP #$30                                                   ;84C9B0|C230    |      ;
-    LDA.W #!PDIR_LEFT                                               
-    STA.B strcPlayer.direction                                 ;84C9B5|85DA    |0000DA;
-    REP #$30                                                   ;84C9B7|C230    |      ;
-    LDA.W #$0002                                               ;84C9B9|A90200  |      ;
-    STA.W strcObjectData.direction                             ;84C9BC|8D1109  |000911;
-    JMP.W fInput_Unknown84C740                                 ;84C9BF|4C40C7  |84C740;
+    %SetPlayerDirection(!PDIR_LEFT)
+    %SetObjectDirection(!PDIR_LEFT)
+    JMP.W fInput_PlayerNormalGameplay                          ;84C9BF|4C40C7  |84C740;
  
     REP #$30                                                   ;84C9C2|C230    |      ;
     LDA.W strcObjectData.direction                             ;84C9C4|AD1109  |000911;
@@ -9058,26 +8948,20 @@ fAiInput_PressRight:
     JMP.W .label1                                              ;84C9CC|4CD2C9  |84C9D2;
  
  
-  + JMP.W fInput_Unknown84C740                                 ;84C9CF|4C40C7  |84C740;
+  + JMP.W fInput_PlayerNormalGameplay                          ;84C9CF|4C40C7  |84C740;
  
  
 .label1:
     %SetPlayerAction(!PACTION_WALK)
-    REP #$30                                                   ;84C9D9|C230    |      ;
-    LDA.W #!PDIR_RIGHT                                               
-    STA.B strcPlayer.direction                                 ;84C9DE|85DA    |0000DA;
-    JMP.W fInput_Return84C7B5                                  ;84C9E0|4CB5C7  |84C7B5;
+    %SetPlayerDirection(!PDIR_RIGHT)
+    JMP.W fInput_PlayerReturn                                  ;84C9E0|4CB5C7  |84C7B5;
  
  
 fAiInput_PressLeft:
     %SetPlayerAction(!PACTION_WALK)
-    REP #$30                                                   ;84C9EA|C230    |      ;
-    LDA.W #!PDIR_RIGHT                                               
-    STA.B strcPlayer.direction                                 ;84C9EF|85DA    |0000DA;
-    REP #$30                                                   ;84C9F1|C230    |      ;
-    LDA.W #$0003                                               ;84C9F3|A90300  |      ;
-    STA.W strcObjectData.direction                             ;84C9F6|8D1109  |000911;
-    JMP.W fInput_Unknown84C740                                 ;84C9F9|4C40C7  |84C740;
+    %SetPlayerDirection(!PDIR_RIGHT)
+    %SetObjectDirection(!PDIR_RIGHT)
+    JMP.W fInput_PlayerNormalGameplay                          ;84C9F9|4C40C7  |84C740;
  
     REP #$30                                                   ;84C9FC|C230    |      ;
     LDA.W strcObjectData.direction                             ;84C9FE|AD1109  |000911;
@@ -9086,18 +8970,16 @@ fAiInput_PressLeft:
     JMP.W .label1                                              ;84CA06|4C0CCA  |84CA0C;
  
  
-  + JMP.W fInput_Unknown84C740                                 ;84CA09|4C40C7  |84C740;
+  + JMP.W fInput_PlayerNormalGameplay                          ;84CA09|4C40C7  |84C740;
  
  
 .label1:
     %SetPlayerAction(!PACTION_WALK)
-    REP #$30                                                   ;84CA13|C230    |      ;
-    LDA.W #!PDIR_LEFT                                               
-    STA.B strcPlayer.direction                                 ;84CA18|85DA    |0000DA;
-    JMP.W fInput_Return84C7B5                                  ;84CA1A|4CB5C7  |84C7B5;
+    %SetPlayerDirection(!PDIR_LEFT)
+    JMP.W fInput_PlayerReturn                                  ;84CA1A|4CB5C7  |84C7B5;
  
  
-fInput_RunToJump:
+fInput_PlayerButtonB:
     %CheckPlayerFlags(!PFLAGS_DOGHUGGING)
     BEQ +                                                      ;84CA24|F003    |84CA29;
     JMP.W .return                                              ;84CA26|4C9DCA  |84CA9D;
@@ -9161,7 +9043,7 @@ fInput_RunToJump:
     RTL                                                        ;84CAA4|6B      |      ;
  
  
-fInput_Unknown84CAA5:
+fInput_PlayerButtonA_Interact:
     %CheckPlayerFlags(!PFLAGS_DOGHUGGING)
     BEQ +                                                      ;84CAAC|F003    |84CAB1;
     JMP.W .label3                                              ;84CAAE|4C2BCB  |84CB2B;
@@ -9355,16 +9237,14 @@ fInput_Unknown84CAA5:
  
  
 .label5:
-    REP #$30                                                   ;84CC40|C230    |      ;
-    LDA.W #$0002                                               ;84CC42|A90200  |      ;
-    STA.W strcObjectData.direction                             ;84CC45|8D1109  |000911;
+    %SetObjectDirection(!PDIR_LEFT)
     JSL.L fInput_Unknown84CD16                                 ;84CC48|2216CD84|84CD16;
     REP #$30                                                   ;84CC4C|C230    |      ;
     BNE +                                                      ;84CC4E|D003    |84CC53;
     JMP.W .label9                                              ;84CC50|4CE8CC  |84CCE8;
  
  
-  + LDA.W #$0003                                               ;84CC53|A90300  |      ;
+  + LDA.W #!PDIR_RIGHT                                               
     STA.W strcObjectData.direction                             ;84CC56|8D1109  |000911;
     JSL.L fInput_Unknown84CD16                                 ;84CC59|2216CD84|84CD16;
     REP #$30                                                   ;84CC5D|C230    |      ;
@@ -9379,13 +9259,11 @@ fInput_Unknown84CAA5:
  
  
 .label6:
-    REP #$30                                                   ;84CC6F|C230    |      ;
-    LDA.W #$0003                                               ;84CC71|A90300  |      ;
-    STA.W strcObjectData.direction                             ;84CC74|8D1109  |000911;
+    %SetObjectDirection(!PDIR_RIGHT)
     JSL.L fInput_Unknown84CD16                                 ;84CC77|2216CD84|84CD16;
     REP #$30                                                   ;84CC7B|C230    |      ;
     BEQ .label9                                                ;84CC7D|F069    |84CCE8;
-    LDA.W #$0002                                               ;84CC7F|A90200  |      ;
+    LDA.W #!PDIR_LEFT                                               
     STA.W strcObjectData.direction                             ;84CC82|8D1109  |000911;
     JSL.L fInput_Unknown84CD16                                 ;84CC85|2216CD84|84CD16;
     REP #$30                                                   ;84CC89|C230    |      ;
@@ -9397,13 +9275,11 @@ fInput_Unknown84CAA5:
  
  
 .label7:
-    REP #$30                                                   ;84CC98|C230    |      ;
-    LDA.W #$0000                                               ;84CC9A|A90000  |      ;
-    STA.W strcObjectData.direction                             ;84CC9D|8D1109  |000911;
+    %SetObjectDirection(!PDIR_DOWN)
     JSL.L fInput_Unknown84CD16                                 ;84CCA0|2216CD84|84CD16;
     REP #$30                                                   ;84CCA4|C230    |      ;
     BEQ .label9                                                ;84CCA6|F040    |84CCE8;
-    LDA.W #$0001                                               ;84CCA8|A90100  |      ;
+    LDA.W #!PDIR_UP                                               
     STA.W strcObjectData.direction                             ;84CCAB|8D1109  |000911;
     JSL.L fInput_Unknown84CD16                                 ;84CCAE|2216CD84|84CD16;
     REP #$30                                                   ;84CCB2|C230    |      ;
@@ -9415,13 +9291,11 @@ fInput_Unknown84CAA5:
  
  
 .label8:
-    REP #$30                                                   ;84CCC0|C230    |      ;
-    LDA.W #$0000                                               ;84CCC2|A90000  |      ;
-    STA.W strcObjectData.direction                             ;84CCC5|8D1109  |000911;
+    %SetObjectDirection($0000)
     JSL.L fInput_Unknown84CD16                                 ;84CCC8|2216CD84|84CD16;
     REP #$30                                                   ;84CCCC|C230    |      ;
     BEQ .label9                                                ;84CCCE|F018    |84CCE8;
-    LDA.W #$0001                                               ;84CCD0|A90100  |      ;
+    LDA.W #!PDIR_UP                                               
     STA.W strcObjectData.direction                             ;84CCD3|8D1109  |000911;
     JSL.L fInput_Unknown84CD16                                 ;84CCD6|2216CD84|84CD16;
     REP #$30                                                   ;84CCDA|C230    |      ;
@@ -9508,39 +9382,33 @@ fInput_Unknown84CD16:
     RTL                                                        ;84CD76|6B      |      ;
  
  
-fInput_Unknown84CD77:
+fInput_PlayerButtonY_UseTool:
     %CheckPlayerFlags(!PFLAGS_HOLDINGITEM)
     BEQ +                                                      ;84CD7E|F003    |84CD83;
-    JMP.W fInput_Return84CDDC                                  ;84CD80|4CDCCD  |84CDDC;
+    JMP.W fInput_PlayerButtonY_Return                          ;84CD80|4CDCCD  |84CDDC;
  
  
   + %CheckPlayerFlags(!PFLAGS_RIDINGHORSE)
     BEQ +                                                      ;84CD8A|F003    |84CD8F;
-    JMP.W fInput_Return84CDDC                                  ;84CD8C|4CDCCD  |84CDDC;
+    JMP.W fInput_PlayerButtonY_Return                          ;84CD8C|4CDCCD  |84CDDC;
  
  
   + %CheckPlayerFlags(!PFLAGS_DOGHUGGING)
     BEQ +                                                      ;84CD96|F003    |84CD9B;
-    JMP.W fInput_Return84CDDC                                  ;84CD98|4CDCCD  |84CDDC;
+    JMP.W fInput_PlayerButtonY_Return                          ;84CD98|4CDCCD  |84CDDC;
  
  
-  + REP #$30                                                   ;84CD9B|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84CD9D|A5D4    |0000D4;
-    CMP.W #$000F                                               ;84CD9F|C90F00  |      ;
+  + %CheckPlayerAction(!PACTION_0F)
     BNE +                                                      ;84CDA2|D003    |84CDA7;
     JMP.W fInput_SetPlayerAction0x10                           ;84CDA4|4CDDCD  |84CDDD;
  
  
-  + REP #$30                                                   ;84CDA7|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84CDA9|A5D4    |0000D4;
-    CMP.W #$0011                                               ;84CDAB|C91100  |      ;
+  + %CheckPlayerAction(!PACTION_FISHING)
     BNE +                                                      ;84CDAE|D003    |84CDB3;
     JMP.W fInput_SetPlayerAction0x0F                           ;84CDB0|4CE5CD  |84CDE5;
  
  
-  + REP #$30                                                   ;84CDB3|C230    |      ;
-    LDA.B strcPlayer.action                                    ;84CDB5|A5D4    |0000D4;
-    CMP.W #$0012                                               ;84CDB7|C91200  |      ;
+  + %CheckPlayerAction(!PACTION_FISHINGBITE)
     BNE fInput_SetPlayerAction0x0A                             ;84CDBA|D003    |84CDBF;
     JMP.W fInput_SetPlayerAction0x13                           ;84CDBC|4CEDCD  |84CDED;
  
@@ -9548,14 +9416,14 @@ fInput_Unknown84CD77:
 fInput_SetPlayerAction0x0A:
     REP #$20                                                   ;84CDBF|C220    |      ;
     %CheckFlag(daily4, $8000)
-    BNE fInput_Return84CDDC                                    ;84CDC8|D012    |84CDDC;
+    BNE fInput_PlayerButtonY_Return                            ;84CDC8|D012    |84CDDC;
     SEP #$20                                                   ;84CDCA|E220    |      ;
     LDA.W strcPlayerData.toolEquipped                          ;84CDCC|AD2109  |000921;
-    BEQ fInput_Return84CDDC                                    ;84CDCF|F00B    |84CDDC;
+    BEQ fInput_PlayerButtonY_Return                            ;84CDCF|F00B    |84CDDC;
     %SetPlayerAction(!PACTION_USINGTOOL)
     JSL.L fToolUsedAnimationHandler                            ;84CDD8|22A89082|8290A8;
  
-fInput_Return84CDDC:
+fInput_PlayerButtonY_Return:
     RTL                                                        ;84CDDC|6B      |      ;
  
  
@@ -9585,7 +9453,7 @@ fInput_SetPlayerAction0x13:
     RTL                                                        ;84CE0B|6B      |      ;
  
  
-fInput_SetPlayerAction0x0D_WhistleR:
+fInput_PlayerButtonR_WhistleHorse:
     %CheckPlayerFlags(!PFLAGS_HOLDINGITEM)
     BEQ +                                                      ;84CE13|F003    |84CE18;
     JMP.W .justReturn                                          ;84CE15|4C42CE  |84CE42;
@@ -9610,7 +9478,7 @@ fInput_SetPlayerAction0x0D_WhistleR:
     RTL                                                        ;84CE42|6B      |      ;
  
  
-fInput_SetPlayerAction0x1B_WhistleL:
+fInput_PlayerButtonL_WhistleDog:
     %CheckPlayerFlags(!PFLAGS_HOLDINGITEM)
     BEQ +                                                      ;84CE4A|F003    |84CE4F;
     JMP.W .justReturn                                          ;84CE4C|4C79CE  |84CE79;
@@ -9635,7 +9503,7 @@ fInput_SetPlayerAction0x1B_WhistleL:
     RTL                                                        ;84CE79|6B      |      ;
  
  
-fInput_SetPlayerAction0x0C:
+fInput_PlayerButtonSelect_ShowTool:
     %CheckPlayerFlags(!PFLAGS_HOLDINGITEM)
     BEQ +                                                      ;84CE81|F003    |84CE86;
     JMP.W .justReturn                                          ;84CE83|4CA5CE  |84CEA5;
@@ -9657,7 +9525,7 @@ fInput_SetPlayerAction0x0C:
     RTL                                                        ;84CEA5|6B      |      ;
  
  
-fInput_SetPlayerAction0x1C:
+fInput_PlayerButtonX_SwapTool:
     %CheckPlayerFlags(!PFLAGS_HOLDINGITEM)
     BEQ +                                                      ;84CEAD|F003    |84CEB2;
     JMP.W .justReturn                                          ;84CEAF|4CD1CE  |84CED1;
@@ -9729,7 +9597,7 @@ fInput_Handler_case02:
 fInput_Unknown84CF2D:
     REP #$30                                                   ;84CF2D|C230    |      ;
     LDA.W strcJoypad1.current                                  ;84CF2F|AD2401  |000124;
-    BIT.W #$0080                                               ;84CF32|898000  |      ;
+    BIT.W #!JOYPAD_A                                               
     BNE fInput_Unknown84CF38                                   ;84CF35|D001    |84CF38;
     RTL                                                        ;84CF37|6B      |      ;
  
@@ -9744,7 +9612,7 @@ fInput_Unknown84CF38:
 fInput_Unknown84CF40:
     REP #$30                                                   ;84CF40|C230    |      ;
     LDA.W strcJoypad1.newInput                                 ;84CF42|AD2801  |000128;
-    BIT.W #$0080                                               ;84CF45|898000  |      ;
+    BIT.W #!JOYPAD_A                                               
     BNE +                                                      ;84CF48|D001    |84CF4B;
     RTL                                                        ;84CF4A|6B      |      ;
  
@@ -9763,7 +9631,7 @@ fInput_Unknown84CF40:
 fInput_Unknown84CF62:
     REP #$30                                                   ;84CF62|C230    |      ;
     LDA.W strcJoypad1.newInput                                 ;84CF64|AD2801  |000128;
-    BIT.W #$0080                                               ;84CF67|898000  |      ;
+    BIT.W #!JOYPAD_A                                               
     BNE +                                                      ;84CF6A|D001    |84CF6D;
     RTL                                                        ;84CF6C|6B      |      ;
  

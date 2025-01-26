@@ -28,6 +28,10 @@
 !EITEM_COWFEED              =   $1A
 !EITEM_FISHINGPOLE          =   $1B
 
+!EITEM_WOODFENCE            =   $57
+!EITEM_PERFUMEGREEN         =   $58
+!EITEM_PERFUMERED           =   $59
+!EITEM_PERFUMEBLUE          =   $5A
 
 ; Carry items               $00091D
 !CITEM_NONE                 =   $00
@@ -240,7 +244,7 @@
 !PACTION_1F                 = $001F
 
 
-; PLayer direction          $0000DA
+; Direction
 !PDIR_DOWN                  = $0000
 !PDIR_UP                    = $0001
 !PDIR_LEFT                  = $0002

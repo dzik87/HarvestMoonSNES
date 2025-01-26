@@ -3504,42 +3504,26 @@ fMapChangeHandler_809A64:
     BEQ .setDirectionUp                                        ;809C87|F028    |809CB1;
     CMP.W #!PDIR_LEFT                                               
     BEQ .setDirectionLeft                                      ;809C8C|F034    |809CC2;
-    REP #$30                                                   ;809C8E|C230    |      ;
-    LDA.W #!PDIR_RIGHT                                               
-    STA.B strcPlayer.direction                                 ;809C93|85DA    |0000DA;
-    REP #$30                                                   ;809C95|C230    |      ;
-    LDA.W #$0003                                               ;809C97|A90300  |      ;
-    STA.W strcObjectData.direction                             ;809C9A|8D1109  |000911;
+    %SetPlayerDirection(!PDIR_RIGHT)
+    %SetObjectDirection(!PDIR_RIGHT)
     JMP.W .return                                              ;809C9D|4C0A9D  |809D0A;
  
  
 .setDirectionDown:
-    REP #$30                                                   ;809CA0|C230    |      ;
-    LDA.W #!PDIR_DOWN                                               
-    STA.B strcPlayer.direction                                 ;809CA5|85DA    |0000DA;
-    REP #$30                                                   ;809CA7|C230    |      ;
-    LDA.W #$0000                                               ;809CA9|A90000  |      ;
-    STA.W strcObjectData.direction                             ;809CAC|8D1109  |000911;
+    %SetPlayerDirection(!PDIR_DOWN)
+    %SetObjectDirection(!PDIR_DOWN)
     BRA .return                                                ;809CAF|8059    |809D0A;
  
  
 .setDirectionUp:
-    REP #$30                                                   ;809CB1|C230    |      ;
-    LDA.W #!PDIR_UP                                               
-    STA.B strcPlayer.direction                                 ;809CB6|85DA    |0000DA;
-    REP #$30                                                   ;809CB8|C230    |      ;
-    LDA.W #$0001                                               ;809CBA|A90100  |      ;
-    STA.W strcObjectData.direction                             ;809CBD|8D1109  |000911;
+    %SetPlayerDirection(!PDIR_UP)
+    %SetObjectDirection(!PDIR_UP)
     BRA .return                                                ;809CC0|8048    |809D0A;
  
  
 .setDirectionLeft:
-    REP #$30                                                   ;809CC2|C230    |      ;
-    LDA.W #!PDIR_LEFT                                               
-    STA.B strcPlayer.direction                                 ;809CC7|85DA    |0000DA;
-    REP #$30                                                   ;809CC9|C230    |      ;
-    LDA.W #$0002                                               ;809CCB|A90200  |      ;
-    STA.W strcObjectData.direction                             ;809CCE|8D1109  |000911;
+    %SetPlayerDirection(!PDIR_LEFT)
+    %SetObjectDirection(!PDIR_LEFT)
     BRA .return                                                ;809CD1|8037    |809D0A;
  
  
@@ -3689,33 +3673,25 @@ fMapChangeHandler_809A64:
  
  
 .label48:
-    REP #$30                                                   ;809DC3|C230    |      ;
-    LDA.B strcPlayer.action                                    ;809DC5|A5D4    |0000D4;
-    CMP.W #$0010                                               ;809DC7|C91000  |      ;
+    %CheckPlayerAction(!PACTION_10)
     BNE .label49                                               ;809DCA|D003    |809DCF;
     JMP.W .return2                                             ;809DCC|4CBB9E  |809EBB;
  
  
 .label49:
-    REP #$30                                                   ;809DCF|C230    |      ;
-    LDA.B strcPlayer.action                                    ;809DD1|A5D4    |0000D4;
-    CMP.W #!PACTION_FISHING                                               
+    %CheckPlayerAction(!PACTION_FISHING)
     BNE .label50                                               ;809DD6|D003    |809DDB;
     JMP.W .return2                                             ;809DD8|4CBB9E  |809EBB;
  
  
 .label50:
-    REP #$30                                                   ;809DDB|C230    |      ;
-    LDA.B strcPlayer.action                                    ;809DDD|A5D4    |0000D4;
-    CMP.W #!PACTION_FISHINGBITE                                               
+    %CheckPlayerAction(!PACTION_FISHINGBITE)
     BNE .label51                                               ;809DE2|D003    |809DE7;
     JMP.W .return2                                             ;809DE4|4CBB9E  |809EBB;
  
  
 .label51:
-    REP #$30                                                   ;809DE7|C230    |      ;
-    LDA.B strcPlayer.action                                    ;809DE9|A5D4    |0000D4;
-    CMP.W #!PACTION_REELING                                               
+    %CheckPlayerAction(!PACTION_REELING)
     BNE .label52                                               ;809DEE|D003    |809DF3;
     JMP.W .return2                                             ;809DF0|4CBB9E  |809EBB;
  
@@ -5638,16 +5614,33 @@ aTileMapData:
  
 sFarmSpringMap:
     db $00                                                     ;80AB3C|        |      ; Graphic Preset
-    dw !AFLAGS_RAWCHARMAP|!AFLAGS_UNK0080|!AFLAGS_FOR0040|!AFLAGS_UNK0020                                                   
-    db $04,$04,$03,$01                                         ;80AB3F|        |      ;
-    dw $0000,$0300,$0000,$0300,$2000                           ;80AB43|        |      ; OBJ_clamp_left
+ 
+  + dw !AFLAGS_RAWCHARMAP|!AFLAGS_UNK0080|!AFLAGS_FOR0040|!AFLAGS_UNK0020                                                   
+ 
+  + db $04                                                     ;80AB3F|        |      ; room width multi
+ 
+  + db $04                                                     ;80AB40|        |      ; room height multi
+ 
+  + db $03                                                     ;80AB41|        |      ; number_of_tilemaps
+ 
+  + db $01                                                     ;80AB42|        |      ; number_of_charactermaps
+ 
+  + dw $0000                                                   ;80AB43|        |      ; OBJ_clamp_left
+ 
+  + dw $0300                                                   ;80AB45|        |      ; OBJ_clamp_right
+ 
+  + dw $0000                                                   ;80AB47|        |      ; OBJ_clamp_up
+ 
+  + dw $0300                                                   ;80AB49|        |      ; OBJ_clamp_down
+ 
+  + dw $2000                                                   ;80AB4B|        |      ; Destination in VRAM 1
     dl sCompressedTilemap_92D3AB                               ;80AB4D|        |92D3AB; Compressed Location 1
     dw $3000                                                   ;80AB50|        |      ; Destination in VRAM 2
     dl sCompressedTilemap_938000                               ;80AB52|        |938000; Compressed Location 2
     dw $4000                                                   ;80AB55|        |      ; Destination in VRAM 3
     dl sCompressedTilemap_939E8E                               ;80AB57|        |939E8E; Compressed Location 3
     dw $6000                                                   ;80AB5A|        |      ; Destination in VRAM
-    dl sCompressedCharactermap_A18000                          ;80AB5C|        |A18000; Compressed Location
+    dl sCharactermap_A18000                                    ;80AB5C|        |A18000; Compressed Location
  
 sFarmSummerMap:
     db $00                                                     ;80AB5F|        |      ;
@@ -5660,7 +5653,7 @@ sFarmSummerMap:
     dw $4000                                                   ;80AB78|        |      ;
     dl sCompressedTilemap_939E8E                               ;80AB7A|        |939E8E;
     dw $6000                                                   ;80AB7D|        |      ;
-    dl sCompressedCharactermap_A18000                          ;80AB7F|        |A18000;
+    dl sCharactermap_A18000                                    ;80AB7F|        |A18000;
  
 sFarmFallMap:
     db $00                                                     ;80AB82|        |      ;
@@ -5673,7 +5666,7 @@ sFarmFallMap:
     dw $4000                                                   ;80AB9B|        |      ;
     dl sCompressedTilemap_92BB03                               ;80AB9D|        |92BB03;
     dw $6000                                                   ;80ABA0|        |      ;
-    dl sCompressedCharactermap_A18000                          ;80ABA2|        |A18000;
+    dl sCharactermap_A18000                                    ;80ABA2|        |A18000;
  
 sFarmWinterMap:
     db $00                                                     ;80ABA5|        |      ;
@@ -5686,7 +5679,7 @@ sFarmWinterMap:
     dw $4000                                                   ;80ABBE|        |      ;
     dl sCompressedTilemap_93E12B                               ;80ABC0|        |93E12B;
     dw $6000                                                   ;80ABC3|        |      ;
-    dl sCompressedCharactermap_A18000                          ;80ABC5|        |A18000;
+    dl sCharactermap_A18000                                    ;80ABC5|        |A18000;
  
 sTownSpringMap:
     db $00                                                     ;80ABC8|        |      ;
@@ -5699,7 +5692,7 @@ sTownSpringMap:
     dw $4000                                                   ;80ABE1|        |      ;
     dl sCompressedTilemap_999A74                               ;80ABE3|        |999A74;
     dw $6000                                                   ;80ABE6|        |      ;
-    dl sCompressedCharactermap_A38000                          ;80ABE8|        |A38000;
+    dl sCharactermap_A38000                                    ;80ABE8|        |A38000;
  
 sTownSummerMap:
     db $00                                                     ;80ABEB|        |      ;
@@ -5712,7 +5705,7 @@ sTownSummerMap:
     dw $4000                                                   ;80AC04|        |      ;
     dl sCompressedTilemap_97E7A2                               ;80AC06|        |97E7A2;
     dw $6000                                                   ;80AC09|        |      ;
-    dl sCompressedCharactermap_A38000                          ;80AC0B|        |A38000;
+    dl sCharactermap_A38000                                    ;80AC0B|        |A38000;
  
 sTownFallMap:
     db $00                                                     ;80AC0E|        |      ;
@@ -5725,7 +5718,7 @@ sTownFallMap:
     dw $4000                                                   ;80AC27|        |      ;
     dl sCompressedTilemap_989A52                               ;80AC29|        |989A52;
     dw $6000                                                   ;80AC2C|        |      ;
-    dl sCompressedCharactermap_A38000                          ;80AC2E|        |A38000;
+    dl sCharactermap_A38000                                    ;80AC2E|        |A38000;
  
 sTownWinterMap:
     db $00                                                     ;80AC31|        |      ;
@@ -5738,7 +5731,7 @@ sTownWinterMap:
     dw $4000                                                   ;80AC4A|        |      ;
     dl sCompressedTilemap_9A9921                               ;80AC4C|        |9A9921;
     dw $6000                                                   ;80AC4F|        |      ;
-    dl sCompressedCharactermap_A38000                          ;80AC51|        |A38000;
+    dl sCharactermap_A38000                                    ;80AC51|        |A38000;
  
 sFlowerFestivalMap:
     db $00                                                     ;80AC54|        |      ;
@@ -5839,7 +5832,7 @@ sMountainSpring:
     dw $4000                                                   ;80AD5D|        |      ;
     dl sCompressedTilemap_9D8000                               ;80AD5F|        |9D8000;
     dw $6000                                                   ;80AD62|        |      ;
-    dl sCompressedCharactermap_A28000                          ;80AD64|        |A28000;
+    dl sCharactermap_A28000                                    ;80AD64|        |A28000;
  
 sMountainSummerMap:
     db $00                                                     ;80AD67|        |      ;
@@ -5852,7 +5845,7 @@ sMountainSummerMap:
     dw $4000                                                   ;80AD80|        |      ;
     dl sCompressedTilemap_9D8000                               ;80AD82|        |9D8000;
     dw $6000                                                   ;80AD85|        |      ;
-    dl sCompressedCharactermap_A28000                          ;80AD87|        |A28000;
+    dl sCharactermap_A28000                                    ;80AD87|        |A28000;
  
 sMountainFallMap:
     db $00                                                     ;80AD8A|        |      ;
@@ -5865,7 +5858,7 @@ sMountainFallMap:
     dw $4000                                                   ;80ADA3|        |      ;
     dl sCompressedTilemap_9DCE31                               ;80ADA5|        |9DCE31;
     dw $6000                                                   ;80ADA8|        |      ;
-    dl sCompressedCharactermap_A28000                          ;80ADAA|        |A28000;
+    dl sCharactermap_A28000                                    ;80ADAA|        |A28000;
  
 sMountainWinterMap:
     db $00                                                     ;80ADAD|        |      ;
@@ -5878,7 +5871,7 @@ sMountainWinterMap:
     dw $4000                                                   ;80ADC6|        |      ;
     dl sCompressedTilemap_9ED208                               ;80ADC8|        |9ED208;
     dw $6000                                                   ;80ADCB|        |      ;
-    dl sCompressedCharactermap_A28000                          ;80ADCD|        |A28000;
+    dl sCharactermap_A28000                                    ;80ADCD|        |A28000;
  
 sStarNightFestivalSpaMap:
     db $00                                                     ;80ADD0|        |      ;
@@ -6130,7 +6123,7 @@ sMap_80B064:
     dw $4000                                                   ;80B07D|        |      ;
     dl sCompressedTilemap_999A74                               ;80B07F|        |999A74;
     dw $6000                                                   ;80B082|        |      ;
-    dl sCompressedCharactermap_A38000                          ;80B084|        |A38000;
+    dl sCharactermap_A38000                                    ;80B084|        |A38000;
  
 sMap_80B087:
     db $00                                                     ;80B087|        |      ;
@@ -6143,7 +6136,7 @@ sMap_80B087:
     dw $4000                                                   ;80B0A0|        |      ;
     dl sCompressedTilemap_97E7A2                               ;80B0A2|        |97E7A2;
     dw $6000                                                   ;80B0A5|        |      ;
-    dl sCompressedCharactermap_A38000                          ;80B0A7|        |A38000;
+    dl sCharactermap_A38000                                    ;80B0A7|        |A38000;
  
 sMap_80B0AA:
     db $00                                                     ;80B0AA|        |      ;
@@ -6156,7 +6149,7 @@ sMap_80B0AA:
     dw $4000                                                   ;80B0C3|        |      ;
     dl sCompressedTilemap_989A52                               ;80B0C5|        |989A52;
     dw $6000                                                   ;80B0C8|        |      ;
-    dl sCompressedCharactermap_A38000                          ;80B0CA|        |A38000;
+    dl sCharactermap_A38000                                    ;80B0CA|        |A38000;
  
 sMap_80B0CD:
     db $00                                                     ;80B0CD|        |      ;
@@ -6169,7 +6162,7 @@ sMap_80B0CD:
     dw $4000                                                   ;80B0E6|        |      ;
     dl sCompressedTilemap_9A9921                               ;80B0E8|        |9A9921;
     dw $6000                                                   ;80B0EB|        |      ;
-    dl sCompressedCharactermap_A38000                          ;80B0ED|        |A38000;
+    dl sCharactermap_A38000                                    ;80B0ED|        |A38000;
  
 sSummitSpringMap:
     db $01                                                     ;80B0F0|        |      ;

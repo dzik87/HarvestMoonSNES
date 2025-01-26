@@ -2,7 +2,7 @@
     ORG $A38000
  
  
-sCompressedCharactermap_A38000:
+sCharactermap_A38000:
     db $ED,$85,$ED,$85,$ED,$85,$ED,$85,$ED,$85,$ED,$85         ;A38000|        |      ;
     db $ED,$85,$ED,$85,$ED,$85,$ED,$85,$ED,$85,$ED,$85         ;A3800C|        |      ;
     db $ED,$85,$ED,$85,$ED,$85,$ED,$85,$ED,$85,$ED,$85         ;A38018|        |      ;

@@ -1028,7 +1028,7 @@ DATA8_B48C45:
     %AICMD0x12_Jump($B48CB4)                                   ;B48CA9
     %AICMD0x47_SetValue8($800923, 0)                           ;B48CAC
     %AICMD0x12_Jump($B48CB4)                                   ;B48CB1
-    %AICMD0x28(strcShedItems, $00)                             ;B48CB4
+    %AICMD0x28(strcShedItems.row1, $00)                        ;B48CB4
     %AICMD0x23_OrWithIndexedValue(strcFlags.event6, $0F)       ;B48CB9
     %AICMD0x41_AddValue16(nPlayerHappiness, 20)                ;B48CBE
     %AICMD0x0B($00)                                            ;B48CC4
@@ -1121,7 +1121,7 @@ DATA8_B48D58:
     %AICMD0x12_Jump($B48DE0)                                   ;B48DD5
     %AICMD0x47_SetValue8($800923, 0)                           ;B48DD8
     %AICMD0x12_Jump($B48DE0)                                   ;B48DDD
-    %AICMD0x28(strcShedItems, $02)                             ;B48DE0
+    %AICMD0x28(strcShedItems.row1, $02)                        ;B48DE0
     %AICMD0x23_OrWithIndexedValue(strcFlags.event3, $0F)       ;B48DE5
     %AICMD0x41_AddValue16(nPlayerHappiness, 20)                ;B48DEA
     %AICMD0x12_Jump($B48D84)                                   ;B48DF0
@@ -1174,7 +1174,7 @@ DATA8_B48E25:
     %AICMD0x41_AddValue16(nPlayerHappiness, -30)               ;B48E69
     %AICMD0x12_Jump($B48E89)                                   ;B48E6F
     %AICMD0x1C_ShowDialog($0320, $00)                          ;B48E72
-    %AICMD0x28(strcShedItems, $03)                             ;B48E76
+    %AICMD0x28(strcShedItems.row1, $03)                        ;B48E76
     %AICMD0x47_SetValue8($800921, 20)                          ;B48E7B
     %AICMD0x41_AddValue16(nPlayerHappiness, 20)                ;B48E80
     %AICMD0x12_Jump($B48E89)                                   ;B48E86
