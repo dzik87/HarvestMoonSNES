@@ -9,8 +9,6 @@
     ptrAIActionData = $0000C9; !^ ptr24 ^!
     ptrAIUnknown0xCC = $0000CC; !^ prt24 ^!
     ptrUnknown0xCF = $0000CF; !^ ptr24 ^!
-    nCameraX = $0000F5; !^ n16 ^!
-    nCameraY = $0000F7; !^ n16 ^!
     nRandomTempVar1 = $000100
     nRandomTempVar2 = $000101
     nRandomTempVar3 = $000102

@@ -112,7 +112,7 @@ endstruct align 26
 
 
 ;
-; Size and start to be confirmed
+; Size and start OK
 ;
 struct strcObject           $00009B
     .posX                   : skip 2    ; 9B-9C
@@ -128,8 +128,37 @@ struct strcObject           $00009B
     .unkAF                  : skip 2    ; AF-B0 
     .unkB1                  : skip 1    ; B1
     .unkB2                  : skip 1    ; B2
-    .pData                  : skip 4    ; B3-B6     ptr24 - B6 not used, end of struct ?
-endstruct
+    .pData                  : skip 3    ; B3-B5     ptr24
+endstruct align 27
+
+
+;
+; B6 not used
+;
+
+
+;
+; B7-B8 ???
+;
+
+
+;
+; B9-BA not used
+;
+
+
+;
+; BB-BC
+; BD-BE
+; BF-C0 X - something with camera
+; C1-C2 Y - something with camera
+; C3-C4 flags
+; C5-C6
+; C7-C8
+; C9-CB ptrAIActionData     ptr24
+; CC-CE ptrAIUnknown0xCC    prt24
+; CF-D1 ptrUnknown0xCF      ptr24
+;
 
 
 ;
@@ -153,6 +182,21 @@ struct strcPlayer           $0000D2
     .newCamX                : skip 2    ; ED-EE     new camera coords
     .newCamY                : skip 2    ; EF-F0     new camera coords
 endstruct
+
+
+;
+;
+;
+struct strcCamera           $0000F1
+    .unkF1                  : skip 2    ; F1-F2
+    .unkF3                  : skip 2    ; F3-F4
+    .cameraX                : skip 2    ; F5-F6
+    .cameraY                : skip 2    ; F7-F8
+endstruct
+
+;
+; F1 - 102 ???
+;
 
 
 ;
@@ -374,7 +418,7 @@ struct strcStockData        $000937
     .unkMole                : skip 1    ; 93A
     .unkEachChicken         : skip 12*2 ; 93B-952
     .unkEachCow             : skip 12*2 ; 953-96A
-    .unkAnySeed             : skip 1    ; 96B
+    .unkAnyTool             : skip 1    ; 96B
 endstruct align 53
 
 

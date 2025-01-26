@@ -2944,9 +2944,7 @@ fAIAction0x30_UpdateChicken:
     LDA.B [ptrUnknown0x72],Y                                   ;849996|B772    |000072;
     AND.B #$04                                                 ;849998|2904    |      ;
     BEQ +                                                      ;84999A|F00F    |8499AB;
-    SEP #$20                                                   ;84999C|E220    |      ;
-    LDA.B #$26                                                 ;84999E|A926    |      ;
-    STA.W strcPlayerData.carryItemId                           ;8499A0|8D1D09  |00091D;
+    %SetCurrentCarriedItemDirect($26)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     RTS                                                        ;8499AA|60      |      ;
  
@@ -2959,9 +2957,7 @@ fAIAction0x30_UpdateChicken:
     JMP.W .label2                                              ;8499B6|4C419A  |849A41;
  
  
-  + SEP #$20                                                   ;8499B9|E220    |      ;
-    LDA.B #$25                                                 ;8499BB|A925    |      ;
-    STA.W strcPlayerData.carryItemId                           ;8499BD|8D1D09  |00091D;
+  + %SetCurrentCarriedItemDirect($25)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     RTS                                                        ;8499C7|60      |      ;
  
@@ -3554,24 +3550,18 @@ fUnknown_ToFarm:
     LDA.B [ptrUnknown0x72],Y                                   ;849E1A|B772    |000072;
     ORA.B #$02                                                 ;849E1C|0902    |      ;
     STA.B [ptrUnknown0x72],Y                                   ;849E1E|9772    |000072;
-    SEP #$20                                                   ;849E20|E220    |      ;
-    LDA.B #!EITEM_SPRINKLER                                                 
-    STA.W strcPlayerData.carryItemId                           ;849E24|8D1D09  |00091D;
+    %SetCurrentCarriedItemDirect(!EITEM_SPRINKLER)
     LDY.W #$0004                                               ;849E27|A00400  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;849E2A|B772    |000072;
     CMP.B #$60                                                 ;849E2C|C960    |      ;
     BCC .label20                                               ;849E2E|9014    |849E44;
     CMP.B #$C0                                                 ;849E30|C9C0    |      ;
     BCC +                                                      ;849E32|9009    |849E3D;
-    SEP #$20                                                   ;849E34|E220    |      ;
-    LDA.B #!EITEM_BLUEDIAMOND                                                 
-    STA.W strcPlayerData.carryItemId                           ;849E38|8D1D09  |00091D;
+    %SetCurrentCarriedItemDirect(!EITEM_BLUEDIAMOND)
     BRA .label20                                               ;849E3B|8007    |849E44;
  
  
-  + SEP #$20                                                   ;849E3D|E220    |      ;
-    LDA.B #!EITEM_BEANSTALKSEED                                                 
-    STA.W strcPlayerData.carryItemId                           ;849E41|8D1D09  |00091D;
+  + %SetCurrentCarriedItemDirect(!EITEM_BEANSTALKSEED)
  
 .label20:
     %SetPlayerAction(!PACTION_ITEMONHAND)
@@ -5210,9 +5200,7 @@ fAIAction0x33_UpdateMole:
     CLC                                                        ;84AA09|18      |      ;
     ADC.W #$0001                                               ;84AA0A|690100  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;84AA0D|97CC    |0000CC;
-    SEP #$20                                                   ;84AA0F|E220    |      ;
-    LDA.B #$29                                                 ;84AA11|A929    |      ;
-    STA.W strcPlayerData.carryItemId                           ;84AA13|8D1D09  |00091D;
+    %SetCurrentCarriedItemDirect($29)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     RTS                                                        ;84AA1D|60      |      ;
  
@@ -5336,9 +5324,7 @@ fAIAction0x34:
     CLC                                                        ;84AB04|18      |      ;
     ADC.W #$0001                                               ;84AB05|690100  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;84AB08|97CC    |0000CC;
-    SEP #$20                                                   ;84AB0A|E220    |      ;
-    LDA.B #!EITEM_POTATOSEED                                                 
-    STA.W strcPlayerData.carryItemId                           ;84AB0E|8D1D09  |00091D;
+    %SetCurrentCarriedItemDirect(!EITEM_POTATOSEED)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     RTS                                                        ;84AB18|60      |      ;
  
@@ -7045,9 +7031,7 @@ fAIAction0x4A:
     CLC                                                        ;84B9ED|18      |      ;
     ADC.W #$0001                                               ;84B9EE|690100  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;84B9F1|97CC    |0000CC;
-    SEP #$20                                                   ;84B9F3|E220    |      ;
-    LDA.B #!EITEM_TURNIPSEED                                                 
-    STA.W strcPlayerData.carryItemId                           ;84B9F7|8D1D09  |00091D;
+    %SetCurrentCarriedItemDirect(!EITEM_TURNIPSEED)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     RTS                                                        ;84BA01|60      |      ;
  

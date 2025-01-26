@@ -2682,15 +2682,15 @@ fGraphics_MapScrool:
     DEC A                                                      ;8095BC|3A      |      ;
     STA.W strcMapScrool.timer                                  ;8095BD|8D8008  |000880;
     REP #$20                                                   ;8095C0|C220    |      ;
-    LDA.B nCameraX                                             ;8095C2|A5F5    |0000F5;
+    LDA.B strcCamera.cameraX                                   ;8095C2|A5F5    |0000F5;
     CLC                                                        ;8095C4|18      |      ;
     ADC.W strcMapScrool.speedX                                 ;8095C5|6D7C08  |00087C;
-    STA.B nCameraX                                             ;8095C8|85F5    |0000F5;
+    STA.B strcCamera.cameraX                                   ;8095C8|85F5    |0000F5;
     STA.W strcBGScrool.BG1HorOffs                              ;8095CA|8D3C01  |00013C;
-    LDA.B nCameraY                                             ;8095CD|A5F7    |0000F7;
+    LDA.B strcCamera.cameraY                                   ;8095CD|A5F7    |0000F7;
     CLC                                                        ;8095CF|18      |      ;
     ADC.W strcMapScrool.speedY                                 ;8095D0|6D7E08  |00087E;
-    STA.B nCameraY                                             ;8095D3|85F7    |0000F7;
+    STA.B strcCamera.cameraY                                   ;8095D3|85F7    |0000F7;
     STA.W strcBGScrool.BG1VerOffs                              ;8095D5|8D3E01  |00013E;
     BPL +                                                      ;8095D8|1003    |8095DD;
     STZ.W strcBGScrool.BG1VerOffs                              ;8095DA|9C3E01  |00013E;
@@ -3077,9 +3077,9 @@ fMap_SetupArea:
     JSL.L fCore_StartPreparedTransfer                          ;8098F0|22B28A80|808AB2;
     REP #$30                                                   ;8098F4|C230    |      ;
     STZ.B strcMap.unk1E                                        ;8098F6|641E    |00001E;
-    LDA.B nCameraX                                             ;8098F8|A5F5    |0000F5;
+    LDA.B strcCamera.cameraX                                   ;8098F8|A5F5    |0000F5;
     STA.W strcBGScrool.BG2HorOffs                              ;8098FA|8D4001  |000140;
-    LDA.B nCameraY                                             ;8098FD|A5F7    |0000F7;
+    LDA.B strcCamera.cameraY                                   ;8098FD|A5F7    |0000F7;
     STA.W strcBGScrool.BG2VerOffs                              ;8098FF|8D4201  |000142;
     SEP #$20                                                   ;809902|E220    |      ;
     LDA.B strcMap.loadAreaId                                   ;809904|A522    |000022;
@@ -3824,15 +3824,15 @@ fUnknown_809EBC:
     STA.B strcMap.unk20                                        ;809EDC|8520    |000020;
     REP #$20                                                   ;809EDE|C220    |      ;
     LDA.B strcPlayer.newCamX                                   ;809EE0|A5ED    |0000ED;
-    STA.B nCameraX                                             ;809EE2|85F5    |0000F5;
+    STA.B strcCamera.cameraX                                   ;809EE2|85F5    |0000F5;
     BRA .label4                                                ;809EE4|8028    |809F0E;
  
  
 .label2:
     REP #$20                                                   ;809EE6|C220    |      ;
-    CMP.B $F1                                                  ;809EE8|C5F1    |0000F1;
+    CMP.B strcCamera.unkF1                                     ;809EE8|C5F1    |0000F1;
     BCS .label3                                                ;809EEA|B00A    |809EF6;
-    STA.B nCameraX                                             ;809EEC|85F5    |0000F5;
+    STA.B strcCamera.cameraX                                   ;809EEC|85F5    |0000F5;
     LDA.W #$0080                                               ;809EEE|A98000  |      ;
     STA.W strcObjectData.unkPosX                               ;809EF1|8D0B09  |00090B;
     BRA .label4                                                ;809EF4|8018    |809F0E;
@@ -3843,14 +3843,14 @@ fUnknown_809EBC:
     CLC                                                        ;809EF8|18      |      ;
     ADC.W #$0080                                               ;809EF9|698000  |      ;
     SEC                                                        ;809EFC|38      |      ;
-    SBC.B $F1                                                  ;809EFD|E5F1    |0000F1;
+    SBC.B strcCamera.unkF1                                     ;809EFD|E5F1    |0000F1;
     STA.W strcObjectData.unkPosX                               ;809EFF|8D0B09  |00090B;
     SEP #$20                                                   ;809F02|E220    |      ;
     LDA.B #$08                                                 ;809F04|A908    |      ;
     STA.B strcMap.unk20                                        ;809F06|8520    |000020;
     REP #$20                                                   ;809F08|C220    |      ;
-    LDA.B $F1                                                  ;809F0A|A5F1    |0000F1;
-    STA.B nCameraX                                             ;809F0C|85F5    |0000F5;
+    LDA.B strcCamera.unkF1                                     ;809F0A|A5F1    |0000F1;
+    STA.B strcCamera.cameraX                                   ;809F0C|85F5    |0000F5;
  
 .label4:
     REP #$20                                                   ;809F0E|C220    |      ;
@@ -3874,15 +3874,15 @@ fUnknown_809EBC:
     STA.B strcMap.unk21                                        ;809F2E|8521    |000021;
     REP #$20                                                   ;809F30|C220    |      ;
     LDA.B strcPlayer.newCamY                                   ;809F32|A5EF    |0000EF;
-    STA.B nCameraY                                             ;809F34|85F7    |0000F7;
+    STA.B strcCamera.cameraY                                   ;809F34|85F7    |0000F7;
     BRA .return                                                ;809F36|8028    |809F60;
  
  
 .label6:
     REP #$20                                                   ;809F38|C220    |      ;
-    CMP.B $F3                                                  ;809F3A|C5F3    |0000F3;
+    CMP.B strcCamera.unkF3                                     ;809F3A|C5F3    |0000F3;
     BCS .label7                                                ;809F3C|B00A    |809F48;
-    STA.B nCameraY                                             ;809F3E|85F7    |0000F7;
+    STA.B strcCamera.cameraY                                   ;809F3E|85F7    |0000F7;
     LDA.W #$0080                                               ;809F40|A98000  |      ;
     STA.W strcObjectData.unkPosY                               ;809F43|8D0D09  |00090D;
     BRA .return                                                ;809F46|8018    |809F60;
@@ -3893,14 +3893,14 @@ fUnknown_809EBC:
     CLC                                                        ;809F4A|18      |      ;
     ADC.W #$0080                                               ;809F4B|698000  |      ;
     SEC                                                        ;809F4E|38      |      ;
-    SBC.B $F3                                                  ;809F4F|E5F3    |0000F3;
+    SBC.B strcCamera.unkF3                                     ;809F4F|E5F3    |0000F3;
     STA.W strcObjectData.unkPosY                               ;809F51|8D0D09  |00090D;
     SEP #$20                                                   ;809F54|E220    |      ;
     LDA.B #$08                                                 ;809F56|A908    |      ;
     STA.B strcMap.unk21                                        ;809F58|8521    |000021;
     REP #$20                                                   ;809F5A|C220    |      ;
-    LDA.B $F3                                                  ;809F5C|A5F3    |0000F3;
-    STA.B nCameraY                                             ;809F5E|85F7    |0000F7;
+    LDA.B strcCamera.unkF3                                     ;809F5C|A5F3    |0000F3;
+    STA.B strcCamera.cameraY                                   ;809F5E|85F7    |0000F7;
  
 .return:
     RTL                                                        ;809F60|6B      |      ;
@@ -3919,20 +3919,20 @@ fUnknown_809F61:
     CMP.B #$31                                                 ;809F6E|C931    |      ;
     BCC .label6                                                ;809F70|9041    |809FB3;
     REP #$20                                                   ;809F72|C220    |      ;
-    LDA.B nCameraY                                             ;809F74|A5F7    |0000F7;
+    LDA.B strcCamera.cameraY                                   ;809F74|A5F7    |0000F7;
     CMP.B strcPlayer.newCamY                                   ;809F76|C5EF    |0000EF;
     BNE .label2                                                ;809F78|D003    |809F7D;
     JMP.W .return                                              ;809F7A|4CAAA0  |80A0AA;
  
  
 .label2:
-    CMP.B $F3                                                  ;809F7D|C5F3    |0000F3;
+    CMP.B strcCamera.unkF3                                     ;809F7D|C5F3    |0000F3;
     BNE .label3                                                ;809F7F|D003    |809F84;
     JMP.W .return                                              ;809F81|4CAAA0  |80A0AA;
  
  
 .label3:
-    LDA.B nCameraX                                             ;809F84|A5F5    |0000F5;
+    LDA.B strcCamera.cameraX                                   ;809F84|A5F5    |0000F5;
     STA.W strcBGScrool.BG2HorOffs                              ;809F86|8D4001  |000140;
     LDA.B strcMap.unk1E                                        ;809F89|A51E    |00001E;
     ASL A                                                      ;809F8B|0A      |      ;
@@ -3953,7 +3953,7 @@ fUnknown_809F61:
  
  
 .label5:
-    LDA.B nCameraY                                             ;809FA6|A5F7    |0000F7;
+    LDA.B strcCamera.cameraY                                   ;809FA6|A5F7    |0000F7;
     LSR A                                                      ;809FA8|4A      |      ;
     CLC                                                        ;809FA9|18      |      ;
     ADC.W #$0080                                               ;809FAA|698000  |      ;
@@ -3966,9 +3966,9 @@ fUnknown_809F61:
     LDA.W nMapEngine_flags                                     ;809FB5|AD9601  |000196;
     AND.W #$0002                                               ;809FB8|290200  |      ;
     BEQ .label7                                                ;809FBB|F00D    |809FCA;
-    LDA.B nCameraX                                             ;809FBD|A5F5    |0000F5;
+    LDA.B strcCamera.cameraX                                   ;809FBD|A5F5    |0000F5;
     STA.W strcBGScrool.BG2HorOffs                              ;809FBF|8D4001  |000140;
-    LDA.B nCameraY                                             ;809FC2|A5F7    |0000F7;
+    LDA.B strcCamera.cameraY                                   ;809FC2|A5F7    |0000F7;
     STA.W strcBGScrool.BG2VerOffs                              ;809FC4|8D4201  |000142;
     JMP.W .return                                              ;809FC7|4CAAA0  |80A0AA;
  
@@ -4039,10 +4039,10 @@ fUnknown_809F61:
  
 .and0000:
     REP #$30                                                   ;80A033|C230    |      ;
-    LDA.B nCameraY                                             ;80A035|A5F7    |0000F7;
+    LDA.B strcCamera.cameraY                                   ;80A035|A5F7    |0000F7;
     CMP.B strcPlayer.newCamY                                   ;80A037|C5EF    |0000EF;
     BEQ .back                                                  ;80A039|F0CC    |80A007;
-    CMP.B $F3                                                  ;80A03B|C5F3    |0000F3;
+    CMP.B strcCamera.unkF3                                     ;80A03B|C5F3    |0000F3;
     BEQ .back                                                  ;80A03D|F0C8    |80A007;
     LDA.W strcBGScrool.BG2VerOffs                              ;80A03F|AD4201  |000142;
     CLC                                                        ;80A042|18      |      ;
@@ -4053,10 +4053,10 @@ fUnknown_809F61:
  
 .and0001:
     REP #$30                                                   ;80A04A|C230    |      ;
-    LDA.B nCameraY                                             ;80A04C|A5F7    |0000F7;
+    LDA.B strcCamera.cameraY                                   ;80A04C|A5F7    |0000F7;
     CMP.B strcPlayer.newCamY                                   ;80A04E|C5EF    |0000EF;
     BEQ .back                                                  ;80A050|F0B5    |80A007;
-    CMP.B $F3                                                  ;80A052|C5F3    |0000F3;
+    CMP.B strcCamera.unkF3                                     ;80A052|C5F3    |0000F3;
     BEQ .back                                                  ;80A054|F0B1    |80A007;
     LDA.W strcBGScrool.BG2VerOffs                              ;80A056|AD4201  |000142;
     SEC                                                        ;80A059|38      |      ;
@@ -4067,10 +4067,10 @@ fUnknown_809F61:
  
 .and0002:
     REP #$30                                                   ;80A061|C230    |      ;
-    LDA.B nCameraX                                             ;80A063|A5F5    |0000F5;
+    LDA.B strcCamera.cameraX                                   ;80A063|A5F5    |0000F5;
     CMP.B strcPlayer.newCamX                                   ;80A065|C5ED    |0000ED;
     BEQ .back                                                  ;80A067|F09E    |80A007;
-    CMP.B $F1                                                  ;80A069|C5F1    |0000F1;
+    CMP.B strcCamera.unkF1                                     ;80A069|C5F1    |0000F1;
     BEQ .back                                                  ;80A06B|F09A    |80A007;
     LDA.W strcBGScrool.BG2HorOffs                              ;80A06D|AD4001  |000140;
     CLC                                                        ;80A070|18      |      ;
@@ -4081,14 +4081,14 @@ fUnknown_809F61:
  
 .and0003:
     REP #$30                                                   ;80A078|C230    |      ;
-    LDA.B nCameraX                                             ;80A07A|A5F5    |0000F5;
+    LDA.B strcCamera.cameraX                                   ;80A07A|A5F5    |0000F5;
     CMP.B strcPlayer.newCamX                                   ;80A07C|C5ED    |0000ED;
     BNE .label13                                               ;80A07E|D003    |80A083;
     JMP.W .back                                                ;80A080|4C07A0  |80A007;
  
  
 .label13:
-    CMP.B $F1                                                  ;80A083|C5F1    |0000F1;
+    CMP.B strcCamera.unkF1                                     ;80A083|C5F1    |0000F1;
     BNE .label14                                               ;80A085|D003    |80A08A;
     JMP.W .back                                                ;80A087|4C07A0  |80A007;
  
@@ -4106,9 +4106,9 @@ fUnknown_809F61:
     LDA.W nMapEngine_flags                                     ;80A098|AD9601  |000196;
     AND.W #$0008                                               ;80A09B|290800  |      ;
     BEQ .return                                                ;80A09E|F00A    |80A0AA;
-    LDA.B nCameraX                                             ;80A0A0|A5F5    |0000F5;
+    LDA.B strcCamera.cameraX                                   ;80A0A0|A5F5    |0000F5;
     STA.W strcBGScrool.BG2HorOffs                              ;80A0A2|8D4001  |000140;
-    LDA.B nCameraY                                             ;80A0A5|A5F7    |0000F7;
+    LDA.B strcCamera.cameraY                                   ;80A0A5|A5F7    |0000F7;
     STA.W strcBGScrool.BG2VerOffs                              ;80A0A7|8D4201  |000142;
  
 .return:
@@ -4117,11 +4117,11 @@ fUnknown_809F61:
  
 fUnknown_80A0AB:
     REP #$30                                                   ;80A0AB|C230    |      ;
-    LDA.B nCameraY                                             ;80A0AD|A5F7    |0000F7;
+    LDA.B strcCamera.cameraY                                   ;80A0AD|A5F7    |0000F7;
     STA.W strcBGScrool.BG1VerOffs                              ;80A0AF|8D3E01  |00013E;
     CMP.B strcPlayer.newCamY                                   ;80A0B2|C5EF    |0000EF;
     BEQ .return                                                ;80A0B4|F02A    |80A0E0;
-    CMP.B $F3                                                  ;80A0B6|C5F3    |0000F3;
+    CMP.B strcCamera.unkF3                                     ;80A0B6|C5F3    |0000F3;
     BEQ .return                                                ;80A0B8|F026    |80A0E0;
     CMP.B strcMap.unk1E                                        ;80A0BA|C51E    |00001E;
     BCS .label1                                                ;80A0BC|B002    |80A0C0;
@@ -4150,15 +4150,15 @@ fUnknown_80A0AB:
  
 fUnknown_80A0E1:
     REP #$30                                                   ;80A0E1|C230    |      ;
-    LDA.B nCameraY                                             ;80A0E3|A5F7    |0000F7;
+    LDA.B strcCamera.cameraY                                   ;80A0E3|A5F7    |0000F7;
     STA.W strcBGScrool.BG1VerOffs                              ;80A0E5|8D3E01  |00013E;
     CMP.B strcPlayer.newCamY                                   ;80A0E8|C5EF    |0000EF;
     BEQ .return                                                ;80A0EA|F02F    |80A11B;
-    CMP.B $F3                                                  ;80A0EC|C5F3    |0000F3;
+    CMP.B strcCamera.unkF3                                     ;80A0EC|C5F3    |0000F3;
     BEQ .return                                                ;80A0EE|F02B    |80A11B;
-    LDA.B $F3                                                  ;80A0F0|A5F3    |0000F3;
+    LDA.B strcCamera.unkF3                                     ;80A0F0|A5F3    |0000F3;
     SEC                                                        ;80A0F2|38      |      ;
-    SBC.B nCameraY                                             ;80A0F3|E5F7    |0000F7;
+    SBC.B strcCamera.cameraY                                   ;80A0F3|E5F7    |0000F7;
     CMP.B strcMap.unk1E                                        ;80A0F5|C51E    |00001E;
     BCS .label1                                                ;80A0F7|B002    |80A0FB;
     STA.B strcMap.unk1E                                        ;80A0F9|851E    |00001E;
@@ -4186,11 +4186,11 @@ fUnknown_80A0E1:
  
 fUnknown_80A11C:
     REP #$30                                                   ;80A11C|C230    |      ;
-    LDA.B nCameraX                                             ;80A11E|A5F5    |0000F5;
+    LDA.B strcCamera.cameraX                                   ;80A11E|A5F5    |0000F5;
     STA.W strcBGScrool.BG1HorOffs                              ;80A120|8D3C01  |00013C;
     CMP.B strcPlayer.newCamX                                   ;80A123|C5ED    |0000ED;
     BEQ .return                                                ;80A125|F02A    |80A151;
-    CMP.B $F1                                                  ;80A127|C5F1    |0000F1;
+    CMP.B strcCamera.unkF1                                     ;80A127|C5F1    |0000F1;
     BEQ .return                                                ;80A129|F026    |80A151;
     CMP.B strcMap.unk1E                                        ;80A12B|C51E    |00001E;
     BCS .label1                                                ;80A12D|B002    |80A131;
@@ -4219,15 +4219,15 @@ fUnknown_80A11C:
  
 fUnknown_80A152:
     REP #$30                                                   ;80A152|C230    |      ;
-    LDA.B nCameraX                                             ;80A154|A5F5    |0000F5;
+    LDA.B strcCamera.cameraX                                   ;80A154|A5F5    |0000F5;
     STA.W strcBGScrool.BG1HorOffs                              ;80A156|8D3C01  |00013C;
     CMP.B strcPlayer.newCamX                                   ;80A159|C5ED    |0000ED;
     BEQ .return                                                ;80A15B|F02F    |80A18C;
-    CMP.B $F1                                                  ;80A15D|C5F1    |0000F1;
+    CMP.B strcCamera.unkF1                                     ;80A15D|C5F1    |0000F1;
     BEQ .return                                                ;80A15F|F02B    |80A18C;
-    LDA.B $F1                                                  ;80A161|A5F1    |0000F1;
+    LDA.B strcCamera.unkF1                                     ;80A161|A5F1    |0000F1;
     SEC                                                        ;80A163|38      |      ;
-    SBC.B nCameraX                                             ;80A164|E5F5    |0000F5;
+    SBC.B strcCamera.cameraX                                   ;80A164|E5F5    |0000F5;
     CMP.B strcMap.unk1E                                        ;80A166|C51E    |00001E;
     BCS .label1                                                ;80A168|B002    |80A16C;
     STA.B strcMap.unk1E                                        ;80A16A|851E    |00001E;
@@ -5223,7 +5223,7 @@ fTileMap_MapChangeHandler:
     INY                                                        ;80A847|C8      |      ;
     INY                                                        ;80A848|C8      |      ;
     LDA.B (strcMap.pCurrent),Y                                 ;80A849|B118    |000018; Y = 9
-    STA.B $F1                                                  ;80A84B|85F1    |0000F1;
+    STA.B strcCamera.unkF1                                     ;80A84B|85F1    |0000F1;
     INY                                                        ;80A84D|C8      |      ;
     INY                                                        ;80A84E|C8      |      ;
     LDA.B (strcMap.pCurrent),Y                                 ;80A84F|B118    |000018; Y = 11
@@ -5231,7 +5231,7 @@ fTileMap_MapChangeHandler:
     INY                                                        ;80A853|C8      |      ;
     INY                                                        ;80A854|C8      |      ;
     LDA.B (strcMap.pCurrent),Y                                 ;80A855|B118    |000018; Y = 13
-    STA.B $F3                                                  ;80A857|85F3    |0000F3;
+    STA.B strcCamera.unkF3                                     ;80A857|85F3    |0000F3;
     INY                                                        ;80A859|C8      |      ;
     INY                                                        ;80A85A|C8      |      ;
  
@@ -5350,8 +5350,8 @@ fTileMap_MapChangeHandler:
  
 .label11:
     REP #$20                                                   ;80A924|C220    |      ;
-    STZ.B nCameraX                                             ;80A926|64F5    |0000F5;
-    STZ.B nCameraY                                             ;80A928|64F7    |0000F7;
+    STZ.B strcCamera.cameraX                                   ;80A926|64F5    |0000F5;
+    STZ.B strcCamera.cameraY                                   ;80A928|64F7    |0000F7;
     LDA.W #$0410                                               ;80A92A|A91004  |      ;
     STA.B strcMap.unk10                                        ;80A92D|8510    |000010;
     LDA.W #$0A00                                               ;80A92F|A9000A  |      ;

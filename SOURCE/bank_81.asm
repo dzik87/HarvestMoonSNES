@@ -10379,9 +10379,7 @@ fPlayerInteraction0x01_WoodStorage:
     REP #$20                                                   ;81D64D|C220    |      ;
     CMP.W #$0001                                               ;81D64F|C90100  |      ;
     BEQ +                                                      ;81D652|F00E    |81D662;
-    SEP #$20                                                   ;81D654|E220    |      ;
-    LDA.B #$57                                                 ;81D656|A957    |      ;
-    STA.W strcPlayerData.carryItemId                           ;81D658|8D1D09  |00091D;
+    %SetCurrentCarriedItemDirect($57)
     %SetPlayerAction(!PACTION_ITEMONHAND)
  
   + %UnsetPlayerFlag(!PFLAGS_INTERACTING)
@@ -11018,9 +11016,7 @@ fPlayerInteraction0x15_FeedStorage:
     REP #$20                                                   ;81DBAA|C220    |      ;
     CMP.W #$0001                                               ;81DBAC|C90100  |      ;
     BEQ +                                                      ;81DBAF|F00E    |81DBBF;
-    SEP #$20                                                   ;81DBB1|E220    |      ;
-    LDA.B #!EITEM_COWFEED                                                 
-    STA.W strcPlayerData.carryItemId                           ;81DBB5|8D1D09  |00091D;
+    %SetCurrentCarriedItemDirect(!EITEM_COWFEED)
     %SetPlayerAction(!PACTION_ITEMONHAND)
  
   + %UnsetPlayerFlag(!PFLAGS_INTERACTING)
@@ -14318,9 +14314,7 @@ fPlayerInteraction0x53:
     LDX.W #$0000                                               ;81F808|A20000  |      ;
     LDY.W #$0000                                               ;81F80B|A00000  |      ;
     JSL.L fStoreTileOnFrontOfPlayerAtDistance                  ;81F80E|224ED181|81D14E;
-    SEP #$20                                                   ;81F812|E220    |      ;
-    LDA.B #!EITEM_GOLDAXE                                                 
-    STA.W strcPlayerData.carryItemId                           ;81F816|8D1D09  |00091D;
+    %SetCurrentCarriedItemDirect(!EITEM_GOLDAXE)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     REP #$30                                                   ;81F82C|C230    |      ;

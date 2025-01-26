@@ -710,7 +710,7 @@ fUnknown_8583E0:
     CLC                                                        ;8584D7|18      |      ;
     ADC.B strcObject.posX                                      ;8584D8|659B    |00009B;
     SEC                                                        ;8584DA|38      |      ;
-    SBC.B nCameraX                                             ;8584DB|E5F5    |0000F5;
+    SBC.B strcCamera.cameraX                                   ;8584DB|E5F5    |0000F5;
     STA.B $BF                                                  ;8584DD|85BF    |0000BF;
     INY                                                        ;8584DF|C8      |      ;
     SEP #$20                                                   ;8584E0|E220    |      ;
@@ -734,7 +734,7 @@ fUnknown_8583E0:
     CLC                                                        ;8584F8|18      |      ;
     ADC.B strcObject.posY                                      ;8584F9|659D    |00009D;
     SEC                                                        ;8584FB|38      |      ;
-    SBC.B nCameraY                                             ;8584FC|E5F7    |0000F7;
+    SBC.B strcCamera.cameraY                                   ;8584FC|E5F7    |0000F7;
     STA.B $C1                                                  ;8584FE|85C1    |0000C1;
     STY.B $C5                                                  ;858500|84C5    |0000C5;
     REP #$30                                                   ;858502|C230    |      ;
