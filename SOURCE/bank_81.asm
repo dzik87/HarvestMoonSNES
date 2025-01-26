@@ -1719,7 +1719,7 @@ fItemFound_Unknown818B6B:
     CLC                                                        ;818B82|18      |      ;
     ADC.B strcVariables.n16Temp1                               ;818B83|657E    |00007E;
     TAX                                                        ;818B85|AA      |      ; X = (nCarriedItem - 1) * 3
-    LDA.L aDialogData_FoundItem,X                              ;818B86|BFC69F81|819FC6;
+    LDA.L aFoundItemData,X                                     ;818B86|BFC69F81|819FC6;
     TAX                                                        ;818B8A|AA      |      ;
     SEP #$20                                                   ;818B8B|E220    |      ;
     LDA.B #$02                                                 ;818B8D|A902    |      ;
@@ -1769,7 +1769,7 @@ fItemFound_Consume:
     INX                                                        ;818BF2|E8      |      ;
     INX                                                        ;818BF3|E8      |      ;
     SEP #$20                                                   ;818BF4|E220    |      ;
-    LDA.L aDialogData_FoundItem,X                              ;818BF6|BFC69F81|819FC6;
+    LDA.L aFoundItemData,X                                     ;818BF6|BFC69F81|819FC6;
     JSL.L fPlayerEnergyHandler                                 ;818BFA|2261D081|81D061;
     %UnsetPlayerFlag(!PFLAGS_HOLDINGITEM)
     BRA fReturn_818C23                                         ;818C0A|8017    |818C23;
@@ -3593,7 +3593,7 @@ DATA24_819FA2:
     db $C6,$03,$00,$C7,$03,$00,$C8,$03,$00,$C9,$03,$01         ;819FB1|        |      ;
     db $C9,$03,$00,$0A,$01,$00,$CB,$03,$00                     ;819FBD|        |      ;
  
-aDialogData_FoundItem:
+aFoundItemData:
     dw $0366                                                   ;819FC6|        |      ; 0x08 * [n16 nDialogId, n8 nEnergyIncrease] ; Mushroom
     db $0A                                                     ;819FC8|        |      ;
     dw $0367                                                   ;819FC9|        |      ; Poisonous mushroom
@@ -12067,9 +12067,7 @@ fPlayerInteraction0x41_HotSprings:
     %SetPlayerFlag(!PFLAGS_INSPRINGS)
     %SetPlayerAction(!PACTION_JUMP)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
-    SEP #$20                                                   ;81E6E1|E220    |      ;
-    LDA.B #$0C                                                 ;81E6E3|A90C    |      ;
-    JSL.L fPlayerEnergyHandler                                 ;81E6E5|2261D081|81D061;
+    %UpdateStamina($0C)
     RTS                                                        ;81E6E9|60      |      ;
  
  
