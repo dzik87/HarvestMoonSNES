@@ -12067,7 +12067,7 @@ fPlayerInteraction0x41_HotSprings:
     %SetPlayerFlag(!PFLAGS_INSPRINGS)
     %SetPlayerAction(!PACTION_JUMP)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
-    %UpdateStamina($0C)
+    %UpdateStamina(12)
     RTS                                                        ;81E6E9|60      |      ;
  
  
