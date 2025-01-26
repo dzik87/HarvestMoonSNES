@@ -9,9 +9,6 @@
     ptrAIActionData = $0000C9; !^ ptr24 ^!
     ptrAIUnknown0xCC = $0000CC; !^ prt24 ^!
     ptrUnknown0xCF = $0000CF; !^ ptr24 ^!
-    nPaletteCountdown = $00017A; !^ n8 ^!
-    nPaletteNextIndex = $00017B; !^ n8 ^!
-    nPaletteNextHourIndex = $00017C; !^ n8 ^!
     nMapEngine_DestinationX = $00017D; !^ n16 (used when we change map) ^!
     nMapEngine_DestinationY = $00017F; !^ n16 (used when we change map) ^!
     nCurrentMapdata_RoomWidthMult = $000181; !^ n8 (offset 0x03) ^!

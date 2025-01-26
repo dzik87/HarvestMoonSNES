@@ -273,11 +273,28 @@ struct strcBGScrool         $00013C
     .BG2VerOffs             : skip 2    ; 142-143
     .BG3HorOffs             : skip 2    ; 144-145
     .BG3VerOffs             : skip 2    ; 146-147
+    .unk148                 : skip 1    ; 148
 endstruct
 
 
 ;
-; 148 - 19B ???
+; 149 not used
+;
+
+
+;
+;
+;
+struct strcPalette          $00014A
+    .unk14A                 : skip 16   ; 14A-159   r?
+    .unk15A                 : skip 16   ; 15A-169   g?
+    .unk16A                 : skip 16   ; 16A-179   b?
+    .countDown              : skip 1    ; 17A
+    .nextIdx                : skip 1    ; 17B
+    .nextHourIdx            : skip 1    ; 17C
+endstruct
+;
+; 14A - 19B ???
 ;
 
 
