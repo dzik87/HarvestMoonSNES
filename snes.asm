@@ -1,3 +1,10 @@
+!CONSTANT                   =   $20
+!SPEED_FASTROM              =   $10
+!SPEED_SLOWROM              =   $00
+!MODE_LoROM                 =   $00
+!MODE_HiROM                 =   $01
+!MODE_ExHiROM               =   $05
+
 ; source: https://wiki.superfamicom.org/registers#inidisp-screen-display-186
 
 ;INIDISP - Screen Display

@@ -175,7 +175,7 @@ fObject_Unknown858100:
     LDA.L aGameObjectIndexOffsets,X                            ;858123|BFE08B85|858BE0;
     STA.B strcObject.gameObjectIdxOffs                         ;858127|85A9    |0000A9;
     JSR.W fUnknown_858B7B                                      ;858129|207B8B  |858B7B;
-    LDA.B strcObject.unkAF                                     ;85812C|A5AF    |0000AF;
+    LDA.B strcObject.bankAddress                               ;85812C|A5AF    |0000AF;
     BNE fReturn_8580B8                                         ;85812E|D088    |8580B8; BUG - should be .return in this function rather than previous one since we are out of function scope
     JSR.W fUnknown_858B41                                      ;858130|20418B  |858B41;
     REP #$30                                                   ;858133|C230    |      ;
@@ -243,7 +243,7 @@ fObject_Unknown8581A2:
     LDA.L aGameObjectIndexOffsets,X                            ;8581A8|BFE08B85|858BE0;
     STA.B strcObject.gameObjectIdxOffs                         ;8581AC|85A9    |0000A9;
     JSR.W fUnknown_858B7B                                      ;8581AE|207B8B  |858B7B;
-    LDA.B strcObject.unkAF                                     ;8581B1|A5AF    |0000AF;
+    LDA.B strcObject.bankAddress                               ;8581B1|A5AF    |0000AF;
     BEQ +                                                      ;8581B3|F003    |8581B8;
     JMP.W fReturn_8580B8                                       ;8581B5|4CB880  |8580B8; BUG - should be .return in this function rather than JUMP to other RTL
  
@@ -431,7 +431,7 @@ fObject_Unknown8582C7:
     BNE .label5                                                ;858308|D03F    |858349;
     REP #$20                                                   ;85830A|C220    |      ;
     JSR.W fUnknown_858B7B                                      ;85830C|207B8B  |858B7B;
-    LDA.B strcObject.unkAF                                     ;85830F|A5AF    |0000AF;
+    LDA.B strcObject.bankAddress                               ;85830F|A5AF    |0000AF;
     BNE .loop2                                                 ;858311|D0C1    |8582D4;
     JSR.W fUnknown_858B41                                      ;858313|20418B  |858B41;
     REP #$30                                                   ;858316|C230    |      ;
@@ -507,7 +507,7 @@ fObject_Unknown858377:
     STA.B strcObject.totalComponents                           ;85838B|85AD    |0000AD;
     LDA.B strcPlayer.unkDC                                     ;85838D|A5DC    |0000DC;
     DEC A                                                      ;85838F|3A      |      ;
-    STA.B strcObject.unkAF                                     ;858390|85AF    |0000AF;
+    STA.B strcObject.bankAddress                               ;858390|85AF    |0000AF;
     LDA.W #$FFFF                                               ;858392|A9FFFF  |      ;
     STA.B strcVariables.n16Temp1                               ;858395|857E    |00007E;
     LDY.W #$0000                                               ;858397|A00000  |      ;
@@ -532,12 +532,12 @@ fObject_Unknown858377:
  
 .label1:
     REP #$20                                                   ;8583BA|C220    |      ;
-    LDX.B strcObject.unkAF                                     ;8583BC|A6AF    |0000AF;
+    LDX.B strcObject.bankAddress                               ;8583BC|A6AF    |0000AF;
     TYA                                                        ;8583BE|98      |      ;
     SEP #$20                                                   ;8583BF|E220    |      ;
     STA.W $084C,X                                              ;8583C1|9D4C08  |00084C;
     REP #$20                                                   ;8583C4|C220    |      ;
-    DEC.B strcObject.unkAF                                     ;8583C6|C6AF    |0000AF;
+    DEC.B strcObject.bankAddress                               ;8583C6|C6AF    |0000AF;
  
 .label2:
     REP #$20                                                   ;8583C8|C220    |      ;
@@ -592,7 +592,7 @@ fUnknown_8583E0:
     STA.B strcObject.gameObjectIdxOffs                         ;858417|85A9    |0000A9;
     LDA.W #$0000                                               ;858419|A90000  |      ;
     STA.B strcObject.unkAB                                     ;85841C|85AB    |0000AB;
-    STA.B strcObject.unkAF                                     ;85841E|85AF    |0000AF;
+    STA.B strcObject.bankAddress                               ;85841E|85AF    |0000AF;
     LDY.B strcObject.unkAB                                     ;858420|A4AB    |0000AB;
  
 .label3:
@@ -738,7 +738,7 @@ fUnknown_8583E0:
     STA.B $C1                                                  ;8584FE|85C1    |0000C1;
     STY.B $C5                                                  ;858500|84C5    |0000C5;
     REP #$30                                                   ;858502|C230    |      ;
-    LDA.B strcObject.unkAF                                     ;858504|A5AF    |0000AF;
+    LDA.B strcObject.bankAddress                               ;858504|A5AF    |0000AF;
     AND.W #$FFE0                                               ;858506|29E0FF  |      ;
     STA.B strcVariables.n16Temp1                               ;858509|857E    |00007E;
     LSR A                                                      ;85850B|4A      |      ;
@@ -746,7 +746,7 @@ fUnknown_8583E0:
     LSR A                                                      ;85850D|4A      |      ;
     LSR A                                                      ;85850E|4A      |      ;
     STA.B strcVariables.n16Temp2                               ;85850F|8580    |000080;
-    LDA.B strcObject.unkAF                                     ;858511|A5AF    |0000AF;
+    LDA.B strcObject.bankAddress                               ;858511|A5AF    |0000AF;
     SEC                                                        ;858513|38      |      ;
     SBC.B strcVariables.n16Temp1                               ;858514|E57E    |00007E;
     STA.B strcVariables.n16Temp1                               ;858516|857E    |00007E;
@@ -787,7 +787,7 @@ fUnknown_8583E0:
  
 .label16:
     REP #$30                                                   ;858559|C230    |      ;
-    LDX.B strcObject.unkAF                                     ;85855B|A6AF    |0000AF;
+    LDX.B strcObject.bankAddress                               ;85855B|A6AF    |0000AF;
     LDA.B $BF                                                  ;85855D|A5BF    |0000BF;
     SEP #$20                                                   ;85855F|E220    |      ;
     STA.L DMASpriteOBJQueue,X                                  ;858561|9F00A07E|7EA000;
@@ -800,7 +800,7 @@ fUnknown_8583E0:
     LDA.B $C3                                                  ;858573|A5C3    |0000C3;
     STA.L DMASpriteOBJ2BitQueue,X                              ;858575|9F00A27E|7EA200;
     REP #$30                                                   ;858579|C230    |      ;
-    LDX.B strcObject.unkAF                                     ;85857B|A6AF    |0000AF;
+    LDX.B strcObject.bankAddress                               ;85857B|A6AF    |0000AF;
     LDY.B $C5                                                  ;85857D|A4C5    |0000C5;
     INY                                                        ;85857F|C8      |      ;
     SEP #$20                                                   ;858580|E220    |      ;
@@ -840,13 +840,13 @@ fUnknown_8583E0:
     TAX                                                        ;8585C2|AA      |      ;
     LDA.L aMultiplicantValue_868000,X                          ;8585C3|BF008086|868000;
     SEP #$20                                                   ;8585C7|E220    |      ;
-    LDX.B strcObject.unkAF                                     ;8585C9|A6AF    |0000AF;
+    LDX.B strcObject.bankAddress                               ;8585C9|A6AF    |0000AF;
     STA.L $7EA002,X                                            ;8585CB|9F02A07E|7EA002;
     REP #$20                                                   ;8585CF|C220    |      ;
-    LDA.B strcObject.unkAF                                     ;8585D1|A5AF    |0000AF;
+    LDA.B strcObject.bankAddress                               ;8585D1|A5AF    |0000AF;
     CLC                                                        ;8585D3|18      |      ;
     ADC.W #$0004                                               ;8585D4|690400  |      ;
-    STA.B strcObject.unkAF                                     ;8585D7|85AF    |0000AF;
+    STA.B strcObject.bankAddress                               ;8585D7|85AF    |0000AF;
  
 .label17:
     LDA.B ptrObjectData                                        ;8585D9|A578    |000078;
@@ -871,7 +871,7 @@ fUnknown_8583E0:
  
 fUnknown_8585F4:
     REP #$30                                                   ;8585F4|C230    |      ;
-    LDA.B strcObject.unkAF                                     ;8585F6|A5AF    |0000AF;
+    LDA.B strcObject.bankAddress                               ;8585F6|A5AF    |0000AF;
     STA.W $084A                                                ;8585F8|8D4A08  |00084A;
     SEP #$20                                                   ;8585FB|E220    |      ;
     LDX.W #$0000                                               ;8585FD|A20000  |      ;
@@ -1225,7 +1225,7 @@ fObject_ParseObjectData:
     ADC.W #$019C                                               ;858B01|699C01  |      ;
     CLC                                                        ;858B04|18      |      ;
     ADC.W #$0014                                               ;858B05|691400  |      ;
-    STA.B strcObject.unkAF                                     ;858B08|85AF    |0000AF;
+    STA.B strcObject.bankAddress                               ;858B08|85AF    |0000AF;
  
 .loop:
     LDA.B strcObject.totalComponents                           ;858B0A|A5AD    |0000AD;
@@ -1235,7 +1235,7 @@ fObject_ParseObjectData:
  
   + LDA.B [ptrObjectData],Y                                    ;858B10|B778    |000078;
     STA.B strcObject.pData                                     ;858B12|85B3    |0000B3;
-    LDA.B strcObject.unkAF                                     ;858B14|A5AF    |0000AF;
+    LDA.B strcObject.bankAddress                               ;858B14|A5AF    |0000AF;
     STA.B strcObject.pData+2                                   ;858B16|85B5    |0000B5;
     REP #$30                                                   ;858B18|C230    |      ;
     PHX                                                        ;858B1A|DA      |      ;
@@ -1250,7 +1250,7 @@ fObject_ParseObjectData:
     STA.W strcGameObject.components,X                          ;858B2A|9DB001  |0001B0;
     REP #$20                                                   ;858B2D|C220    |      ;
     INX                                                        ;858B2F|E8      |      ;
-    INC.B strcObject.unkAF                                     ;858B30|E6AF    |0000AF;
+    INC.B strcObject.bankAddress                               ;858B30|E6AF    |0000AF;
     TYA                                                        ;858B32|98      |      ;
     CLC                                                        ;858B33|18      |      ;
     ADC.W #$0005                                               ;858B34|690500  |      ;
@@ -1331,14 +1331,14 @@ fUnknown_858B7B:
     REP #$30                                                   ;858B9C|C230    |      ;
     INC.W strcUnknown740.unk740                                ;858B9E|EE4007  |000740;
     LDA.W #$FFFF                                               ;858BA1|A9FFFF  |      ;
-    STA.B strcObject.unkAF                                     ;858BA4|85AF    |0000AF;
+    STA.B strcObject.bankAddress                               ;858BA4|85AF    |0000AF;
     BRA .return                                                ;858BA6|8007    |858BAF;
  
  
 .label2:
     REP #$30                                                   ;858BA8|C230    |      ;
     LDA.W #$0000                                               ;858BAA|A90000  |      ;
-    STA.B strcObject.unkAF                                     ;858BAD|85AF    |0000AF;
+    STA.B strcObject.bankAddress                               ;858BAD|85AF    |0000AF;
  
 .return:
     RTS                                                        ;858BAF|60      |      ;

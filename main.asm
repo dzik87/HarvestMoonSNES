@@ -14,6 +14,9 @@
     incsrc "structures.asm"
     incsrc "enums.asm"
     
+    ; ROM header
+    incsrc "SOURCE/header.asm"
+    
     ; Source Code
     incsrc "SOURCE/helpers.asm"
     incsrc "SOURCE/bank_80.asm"

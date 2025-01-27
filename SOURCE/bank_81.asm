@@ -85,7 +85,7 @@ subUnknown81A58B_0x01:
     TAX                                                        ;8180A5|AA      |      ;
     JSR.W (pItemCarriedSubrutines,X)                           ;8180A6|FCC097  |8197C0;
     REP #$30                                                   ;8180A9|C230    |      ;
-    %UnsetFlag(daily3, ~$FFFE)
+    %UnsetFlag(daily3, $0001)
     RTS                                                        ;8180B6|60      |      ;
  
  
@@ -2249,9 +2249,9 @@ fUnknown_818FEA:
     REP #$20                                                   ;818FEA|C220    |      ;
     LDY.W #$0001                                               ;818FEC|A00100  |      ;
     JSL.L fUnknown_8180B7                                      ;818FEF|22B78081|8180B7;
-    LDA.W strcObjectData.unkPosX                               ;818FF3|AD0B09  |00090B;
+    LDA.W strcObjectData.camX                                  ;818FF3|AD0B09  |00090B;
     STA.W nUnknownX                                            ;818FF6|8D8009  |000980;
-    LDA.W strcObjectData.unkPosY                               ;818FF9|AD0D09  |00090D;
+    LDA.W strcObjectData.camY                                  ;818FF9|AD0D09  |00090D;
     STA.W nUnknownY                                            ;818FFC|8D8209  |000982;
     SEP #$20                                                   ;818FFF|E220    |      ;
     LDA.B #$02                                                 ;819001|A902    |      ;
@@ -4461,7 +4461,7 @@ fUnknown_81A6C1:
     LDA.B strcVariables.n8Temp1                                ;81A76A|A592    |000092;
     STA.B strcSystem.arrayIndex                                ;81A76C|8527    |000027;
     LDA.B #$18                                                 ;81A76E|A918    |      ;
-    STA.B strcSystem.unk29                                     ;81A770|8529    |000029;
+    STA.B strcSystem.destinationRegister                       ;81A770|8529    |000029;
     REP #$20                                                   ;81A772|C220    |      ;
     LDY.B strcVariables.n16Temp2                               ;81A774|A480    |000080;
     TXA                                                        ;81A776|8A      |      ;
@@ -4489,7 +4489,7 @@ fUnknown_81A6C1:
     INC A                                                      ;81A79A|1A      |      ;
     STA.B strcSystem.arrayIndex                                ;81A79B|8527    |000027;
     LDA.B #$18                                                 ;81A79D|A918    |      ;
-    STA.B strcSystem.unk29                                     ;81A79F|8529    |000029;
+    STA.B strcSystem.destinationRegister                       ;81A79F|8529    |000029;
     REP #$20                                                   ;81A7A1|C220    |      ;
     LDY.B strcVariables.n16Temp2                               ;81A7A3|A480    |000080;
     TXA                                                        ;81A7A5|8A      |      ;
@@ -7502,7 +7502,7 @@ fPlayerAction0x1A:
  
 .label2:
     REP #$30                                                   ;81C101|C230    |      ;
-    %UnsetFlag(daily4, ~$FFF9)
+    %UnsetFlag(daily4, $0006)
  
 .exit:
     JMP.W fUnknown_81C002                                      ;81C10E|4C02C0  |81C002;
