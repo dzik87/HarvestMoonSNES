@@ -41,12 +41,12 @@ endstruct align 22
 ;
 struct strcSystem           $000023
     .unk23                  : skip 1    ; 23
-    .unk24                  : skip 1    ; 24
-    .unk25                  : skip 1    ; 25
-    .unk26                  : skip 1    ; 26
+    .INIDISP                : skip 1    ; 24        SNES_INIDISP
+    .nBrightness            : skip 1    ; 25
+    .nBrightnessStep        : skip 1    ; 26
     .arrayIndex             : skip 1    ; 27
-    .unk28                  : skip 1    ; 28
-    .unk29                  : skip 1    ; 29
+    .DMAchannelFlags        : skip 1    ; 28
+    .destinationRegister    : skip 1    ; 29        SNES_BBAD0
     .array2A                : skip 1*8  ; 2A-31
     .array32                : skip 2*8  ; 32-41
 endstruct align 31
@@ -125,7 +125,7 @@ struct strcObject           $00009B
     .gameObjectIdxOffs      : skip 2    ; A9-AA     aGameObjectIndexOffsets[gameObjectIdx]
     .unkAB                  : skip 2    ; AB-AC
     .totalComponents        : skip 2    ; AD-AE 
-    .unkAF                  : skip 2    ; AF-B0 
+    .bankAddress            : skip 2    ; AF-B0 
     .unkB1                  : skip 1    ; B1
     .unkB2                  : skip 1    ; B2
     .pData                  : skip 3    ; B3-B5     ptr24
@@ -179,8 +179,8 @@ struct strcPlayer           $0000D2
     .newY                   : skip 2    ; E7-E8     new coords
     .unkPosX                : skip 2    ; E9-EA     unknown X
     .unkPosY                : skip 2    ; EB-EC     unknown Y
-    .newCamX                : skip 2    ; ED-EE     new camera coords
-    .newCamY                : skip 2    ; EF-F0     new camera coords
+    .offsetCamX             : skip 2    ; ED-EE     new camera coords
+    .offsetCamY             : skip 2    ; EF-F0     new camera coords
 endstruct
 
 
@@ -188,8 +188,8 @@ endstruct
 ; some of prevoius structs might be part if this structure
 ;
 struct strcCamera           $0000F1
-    .unkF1                  : skip 2    ; F1-F2
-    .unkF3                  : skip 2    ; F3-F4
+    .offsetCamX             : skip 2    ; F1-F2
+    .offsetCamY             : skip 2    ; F3-F4
     .cameraX                : skip 2    ; F5-F6
     .cameraY                : skip 2    ; F7-F8
 endstruct align 8
@@ -398,8 +398,8 @@ struct strcObjectData       $000901
     .gameObjectIdx          : skip 2    ; 905-906
     .playerX                : skip 2    ; 907-908
     .playerY                : skip 2    ; 909-90A
-    .unkPosX                : skip 2    ; 90B-90C
-    .unkPosY                : skip 2    ; 90D-90E
+    .camX                   : skip 2    ; 90B-90C
+    .camY                   : skip 2    ; 90D-90E
     .flip                   : skip 2    ; 90F-910
     .direction              : skip 2    ; 911-912
     .directionNew           : skip 2    ; 913-914

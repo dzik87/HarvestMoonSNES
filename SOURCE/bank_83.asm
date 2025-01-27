@@ -211,7 +211,7 @@ fGraphicsTransferData:
     LDA.B #$06                                                 ;838170|A906    |      ;
     STA.B strcSystem.arrayIndex                                ;838172|8527    |000027; $27 = 0x06
     LDA.B #$18                                                 ;838174|A918    |      ;
-    STA.B strcSystem.unk29                                     ;838176|8529    |000029; $29 = 0x18
+    STA.B strcSystem.destinationRegister                       ;838176|8529    |000029; $29 = 0x18
     REP #$20                                                   ;838178|C220    |      ;
     LDA.W #$0010                                               ;83817A|A91000  |      ;
     CLC                                                        ;83817D|18      |      ;
@@ -225,7 +225,7 @@ fGraphicsTransferData:
     LDA.B #$07                                                 ;83818D|A907    |      ;
     STA.B strcSystem.arrayIndex                                ;83818F|8527    |000027; $27 = 0x07
     LDA.B #$18                                                 ;838191|A918    |      ;
-    STA.B strcSystem.unk29                                     ;838193|8529    |000029; $29 = 0x18
+    STA.B strcSystem.destinationRegister                       ;838193|8529    |000029; $29 = 0x18
     REP #$30                                                   ;838195|C230    |      ;
     PLX                                                        ;838197|FA      |      ; X = stack1
     TXA                                                        ;838198|8A      |      ;
@@ -252,7 +252,7 @@ fGraphicsUnknown_8381B7:
     LDA.B #$06                                                 ;8381BB|A906    |      ;
     STA.B strcSystem.arrayIndex                                ;8381BD|8527    |000027; $27 = 0x06
     LDA.B #$18                                                 ;8381BF|A918    |      ;
-    STA.B strcSystem.unk29                                     ;8381C1|8529    |000029; $29 = 0x18
+    STA.B strcSystem.destinationRegister                       ;8381C1|8529    |000029; $29 = 0x18
     LDY.W #$0004                                               ;8381C3|A00400  |      ; Y = 0x04
     REP #$20                                                   ;8381C6|C220    |      ;
     LDA.W #$0080                                               ;8381C8|A98000  |      ; A = 0x80
@@ -262,7 +262,7 @@ fGraphicsUnknown_8381B7:
     LDA.B #$07                                                 ;8381D2|A907    |      ;
     STA.B strcSystem.arrayIndex                                ;8381D4|8527    |000027; $27 = 0x07
     LDA.B #$18                                                 ;8381D6|A918    |      ;
-    STA.B strcSystem.unk29                                     ;8381D8|8529    |000029; $29 = 0x18
+    STA.B strcSystem.destinationRegister                       ;8381D8|8529    |000029; $29 = 0x18
     REP #$30                                                   ;8381DA|C230    |      ;
     PLX                                                        ;8381DC|FA      |      ;
     TXA                                                        ;8381DD|8A      |      ;
@@ -2212,7 +2212,7 @@ fDialog_Unknown_8392BB:
     LDA.B #$00                                                 ;8392D9|A900    |      ;
     STA.B strcSystem.arrayIndex                                ;8392DB|8527    |000027;
     LDA.B #$18                                                 ;8392DD|A918    |      ;
-    STA.B strcSystem.unk29                                     ;8392DF|8529    |000029;
+    STA.B strcSystem.destinationRegister                       ;8392DF|8529    |000029;
     REP #$30                                                   ;8392E1|C230    |      ;
     LDY.W #$0400                                               ;8392E3|A00004  |      ;
     LDX.W #$7800                                               ;8392E6|A20078  |      ;
@@ -2229,7 +2229,7 @@ fDialog_Unknown_8392BB:
     LDA.B #$00                                                 ;839303|A900    |      ;
     STA.B strcSystem.arrayIndex                                ;839305|8527    |000027;
     LDA.B #$18                                                 ;839307|A918    |      ;
-    STA.B strcSystem.unk29                                     ;839309|8529    |000029;
+    STA.B strcSystem.destinationRegister                       ;839309|8529    |000029;
     REP #$30                                                   ;83930B|C230    |      ;
     LDA.W #$5000                                               ;83930D|A90050  |      ;
     TAX                                                        ;839310|AA      |      ;
@@ -2251,7 +2251,7 @@ fDialog_Unknown_83932D:
     LDA.B #$06                                                 ;83932F|A906    |      ;
     STA.B strcSystem.arrayIndex                                ;839331|8527    |000027;
     LDA.B #$18                                                 ;839333|A918    |      ;
-    STA.B strcSystem.unk29                                     ;839335|8529    |000029;
+    STA.B strcSystem.destinationRegister                       ;839335|8529    |000029;
     REP #$30                                                   ;839337|C230    |      ;
     LDA.W #$5000                                               ;839339|A90050  |      ;
     TAX                                                        ;83933C|AA      |      ;
@@ -2308,7 +2308,7 @@ fDialog_DialogHandler:
     LDA.B #$01                                                 ;8393AF|A901    |      ;
     STA.W $0191                                                ;8393B1|8D9101  |000191;
     REP #$20                                                   ;8393B4|C220    |      ;
-    LDA.W strcObjectData.unkPosY                               ;8393B6|AD0D09  |00090D;
+    LDA.W strcObjectData.camY                                  ;8393B6|AD0D09  |00090D;
     CMP.W #$0081                                               ;8393B9|C98100  |      ;
     BCS +                                                      ;8393BC|B007    |8393C5;
     SEP #$20                                                   ;8393BE|E220    |      ;
@@ -2377,7 +2377,7 @@ fDialog_Unknown_8393F9:
     STA.W nTimeState                                           ;839436|8D7309  |000973;
  
   + REP #$20                                                   ;839439|C220    |      ;
-    %UnsetFlag(daily1, ~$BFFF)
+    %UnsetFlag(daily1, $4000)
     RTL                                                        ;839446|6B      |      ;
  
  
@@ -4783,7 +4783,7 @@ fGameEngine_FirstNight:
     SEP #$20                                                   ;83ABFB|E220    |      ;
     STZ.W $019B                                                ;83ABFD|9C9B01  |00019B;
     STZ.W $019A                                                ;83AC00|9C9A01  |00019A;
-    STZ.B strcSystem.unk28                                     ;83AC03|6428    |000028;
+    STZ.B strcSystem.DMAchannelFlags                           ;83AC03|6428    |000028;
     REP #$20                                                   ;83AC05|C220    |      ;
     STZ.B ptrPaletteNext                                       ;83AC07|6404    |000004;
     SEP #$20                                                   ;83AC09|E220    |      ;
@@ -6569,7 +6569,7 @@ fGameEngine_SaveCheck:
     REP #$10                                                   ;83BAD6|C210    |      ;
     STZ.W $098E                                                ;83BAD8|9C8E09  |00098E;
     REP #$20                                                   ;83BADB|C220    |      ;
-    %UnsetFlag(daily4, ~$F7FF)
+    %UnsetFlag(daily4, $0800)
     STZ.B strcVariables.n16Temp3                               ;83BAE8|6482    |000082;
     LDA.W #$0000                                               ;83BAEA|A90000  |      ;
     STA.B ptrUnknown0x72                                       ;83BAED|8572    |000072;
@@ -7005,7 +7005,7 @@ fGameEngine_AnimalsUnknown83BC5A:
  
 .label13:
     REP #$30                                                   ;83BE4B|C230    |      ;
-    %UnsetFlag(event6, ~$EFBF)
+    %UnsetFlag(event6, $1040)
     LDX.W #$0000                                               ;83BE58|A20000  |      ;
  
 .label14:
@@ -7250,7 +7250,7 @@ fGameEngine_AnimalsUnknown83BC5A:
  
  
   + REP #$30                                                   ;83C034|C230    |      ;
-    %UnsetFlag(event6, ~$FFDF)
+    %UnsetFlag(event6, $0020)
     LDX.W #$0000                                               ;83C041|A20000  |      ;
  
 .chickenDeath:
@@ -7427,7 +7427,7 @@ fGameEngine_AnimalsUnknown83BC5A:
     INC A                                                      ;83C197|1A      |      ;
     STA.L nOwnedChickens                                       ;83C198|8F0B1F7F|7F1F0B;
     REP #$30                                                   ;83C19C|C230    |      ;
-    %UnsetFlag(event6, ~$DFFF)
+    %UnsetFlag(event6, $2000)
     BRA .label37                                               ;83C1A9|8031    |83C1DC;
  
  
@@ -7469,7 +7469,7 @@ fGameEngine_AnimalsUnknown83BC5A:
   + REP #$30                                                   ;83C1E8|C230    |      ;
     LDA.W #$0000                                               ;83C1EA|A90000  |      ;
     STA.L nEggInCoopFlags                                      ;83C1ED|8F451F7F|7F1F45;
-    %UnsetFlag(event6, ~$FBFF)
+    %UnsetFlag(event6, $0400)
     LDX.W #$0000                                               ;83C1FC|A20000  |      ;
  
 .label33:
@@ -9218,7 +9218,7 @@ fAreaEvents_Farm:
     %SetPlayerFlag(!PFLAGS_INTERACTING)
     %SetPlayerAction(!PACTION_NONE)
     REP #$20                                                   ;83D02F|C220    |      ;
-    %UnsetFlag(event2, ~$FFBF)
+    %UnsetFlag(event2, $0040)
     RTS                                                        ;83D03C|60      |      ;
  
  
@@ -9238,7 +9238,7 @@ fAreaEvents_Farm:
     REP #$30                                                   ;83D060|C230    |      ;
     %CheckFlag(event2, $0100)
     BEQ .label20                                               ;83D069|F047    |83D0B2;
-    %UnsetFlag(event2, ~$FEFF)
+    %UnsetFlag(event2, $0100)
     REP #$30                                                   ;83D076|C230    |      ;
     %AIExecute($0009, $0000, $0036)
     REP #$30                                                   ;83D085|C230    |      ;
@@ -10640,7 +10640,7 @@ fAreaEvents_House:
  
  
 .label1:
-    %UnsetFlag(event6, ~$FF7F)
+    %UnsetFlag(event6, $0080)
     SEP #$20                                                   ;83DF60|E220    |      ;
     LDA.B #$19                                                 ;83DF62|A919    |      ;
     JSL.L fAudioUnknown_8382C6                                 ;83DF64|22C68283|8382C6;
@@ -10703,7 +10703,7 @@ fAreaEvents_House:
     REP #$30                                                   ;83DFF8|C230    |      ;
     %CheckFlag(event6, $0100)
     BEQ +                                                      ;83E001|F013    |83E016;
-    %UnsetFlag(event6, ~$FEFF)
+    %UnsetFlag(event6, $0100)
     SEP #$20                                                   ;83E00E|E220    |      ;
     LDA.B #$15                                                 ;83E010|A915    |      ;
     JSL.L fAudioUnknown_8382C6                                 ;83E012|22C68283|8382C6;
@@ -10711,7 +10711,7 @@ fAreaEvents_House:
   + REP #$30                                                   ;83E016|C230    |      ;
     %CheckFlag(event6, $0200)
     BEQ +                                                      ;83E01F|F02B    |83E04C;
-    %UnsetFlag(event6, ~$FDFF)
+    %UnsetFlag(event6, $0200)
     SEP #$20                                                   ;83E02C|E220    |      ;
     REP #$10                                                   ;83E02E|C210    |      ;
     LDA.B #$22                                                 ;83E030|A922    |      ;
@@ -10735,7 +10735,7 @@ fAreaEvents_House:
     LDY.W #$003C                                               ;83E060|A03C00  |      ;
     JSL.L fAudioUnknown_8382FE                                 ;83E063|22FE8283|8382FE;
     REP #$30                                                   ;83E067|C230    |      ;
-    %UnsetFlag(event6, ~$FFDF)
+    %UnsetFlag(event6, $0020)
  
   + REP #$30                                                   ;83E074|C230    |      ;
     %CheckFlag(event6, $0010)
@@ -10778,7 +10778,7 @@ fAreaEvents_House:
     %CheckFlag(event6, $0040)
     BEQ .label7                                                ;83E0E4|F05E    |83E144;
     REP #$30                                                   ;83E0E6|C230    |      ;
-    %UnsetFlag(event6, ~$FFBF)
+    %UnsetFlag(event6, $0040)
     SEP #$20                                                   ;83E0F3|E220    |      ;
     LDA.B #$00                                                 ;83E0F5|A900    |      ;
     XBA                                                        ;83E0F7|EB      |      ;
@@ -10895,7 +10895,7 @@ fAreaEvents_House:
  
 .label14:
     REP #$30                                                   ;83E210|C230    |      ;
-    %UnsetFlag(daily3, ~$EFFF)
+    %UnsetFlag(daily3, $1000)
     %CheckFlag(event6, $0002)
     BNE .label17                                               ;83E224|D03C    |83E262;
     %CheckFlag(event2, !EFLAGS2_MARRIEDMARIA)
@@ -11079,7 +11079,7 @@ fAreaEvents_House:
  
 fAreaEvents_CrossRoad:
     REP #$30                                                   ;83E407|C230    |      ;
-    %UnsetFlag(daily2, ~$FF7F)
+    %UnsetFlag(daily2, $0080)
     REP #$30                                                   ;83E414|C230    |      ;
     %AIExecute($0015, $0000, $0015)
     REP #$20                                                   ;83E423|C220    |      ;
@@ -12424,7 +12424,7 @@ fAreaEvents_Endings:
     LDA.B #$14                                                 ;83F0CF|A914    |      ;
     STA.L nEndingStep                                          ;83F0D1|8F471F7F|7F1F47;
     REP #$20                                                   ;83F0D5|C220    |      ;
-    %UnsetFlag(daily3, ~$7FFF)
+    %UnsetFlag(daily3, $8000)
     RTS                                                        ;83F0E2|60      |      ;
  
  
@@ -12526,7 +12526,7 @@ fAreaEvents_Endings:
     LDA.B #$20                                                 ;83F1EC|A920    |      ;
     STA.L nEndingStep                                          ;83F1EE|8F471F7F|7F1F47;
     REP #$20                                                   ;83F1F2|C220    |      ;
-    %UnsetFlag(daily3, ~$7FFF)
+    %UnsetFlag(daily3, $8000)
     RTS                                                        ;83F1FF|60      |      ;
  
  
@@ -12564,7 +12564,7 @@ fAreaEvents_Endings:
     LDA.B #$20                                                 ;83F259|A920    |      ;
     STA.L nEndingStep                                          ;83F25B|8F471F7F|7F1F47;
     REP #$20                                                   ;83F25F|C220    |      ;
-    %UnsetFlag(daily3, ~$7FFF)
+    %UnsetFlag(daily3, $8000)
     RTS                                                        ;83F26C|60      |      ;
  
  

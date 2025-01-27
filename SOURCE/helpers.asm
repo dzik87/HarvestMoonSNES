@@ -140,3 +140,11 @@ macro UpdateStamina(nAmmount)
     LDA.B #<nAmmount>
     JSL.L fPlayerEnergyHandler
 endmacro
+
+
+macro DecreaseStock(nStock)
+    SEP #$20
+    LDA.W strcPlayerData.<nStock>
+    DEC A
+    STA.W strcPlayerData.<nStock>
+endmacro

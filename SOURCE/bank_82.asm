@@ -198,7 +198,7 @@ fEvents_ShippingSceneDialog:
     LDY.W #$0027                                               ;8281AB|A02700  |      ;
     JSL.L fAI_Unknown84803F                                    ;8281AE|223F8084|84803F;
     REP #$20                                                   ;8281B2|C220    |      ;
-    %UnsetFlag(daily1, ~$FBFF)
+    %UnsetFlag(daily1, $0400)
  
 fEvents_ShippingSceneReturn:
     RTL                                                        ;8281BF|6B      |      ;
@@ -390,8 +390,8 @@ fNextDayHandler:
     LDA.B #$0F                                                 ;82831D|A90F    |      ;
     STA.B strcMap.loadAreaId                                   ;82831F|8522    |000022;
     REP #$30                                                   ;828321|C230    |      ;
-    %UnsetFlag(event1, ~$FFCF)
-    %UnsetFlag(event7, ~$FFFD)
+    %UnsetFlag(event1, $0030)
+    %UnsetFlag(event7, $0002)
     REP #$30                                                   ;828339|C230    |      ;
     LDA.W nMapEngine_flags                                     ;82833B|AD9601  |000196;
     AND.W #$0010                                               ;82833E|291000  |      ;
@@ -480,7 +480,7 @@ fNextDayHandler:
     %CheckFlag(event2, $0020)
     BEQ +                                                      ;828468|F018    |828482;
     REP #$20                                                   ;82846A|C220    |      ;
-    %UnsetFlag(event2, ~$FFDF)
+    %UnsetFlag(event2, $0020)
     %SetFlag(event2, $0040)
  
   + REP #$20                                                   ;828482|C220    |      ;
@@ -497,7 +497,7 @@ fNextDayHandler:
     REP #$20                                                   ;8284A9|C220    |      ;
     LDA.W #$01F4                                               ;8284AB|A9F401  |      ;
     STA.L nReqWoodForExpansion                                 ;8284AE|8F0E1F7F|7F1F0E;
-    %UnsetFlag(event2, ~$FF7F)
+    %UnsetFlag(event2, $0080)
     %CheckFlag(event1, $0040)
     BEQ .label1                                                ;8284C4|F00F    |8284D5;
     REP #$30                                                   ;8284C6|C230    |      ;
@@ -513,13 +513,13 @@ fNextDayHandler:
     REP #$30                                                   ;8284E2|C230    |      ;
     %CheckFlag(event3, $0800)
     BEQ +                                                      ;8284EB|F016    |828503;
-    %UnsetFlag(event3, ~$F7FF)
+    %UnsetFlag(event3, $0800)
     %SetFlag(event3, $1000)
  
   + REP #$30                                                   ;828503|C230    |      ;
     %CheckFlag(event3, $8000)
     BEQ +                                                      ;82850C|F017    |828525;
-    %UnsetFlag(event3, ~$7FFF)
+    %UnsetFlag(event3, $8000)
     SEP #$20                                                   ;828519|E220    |      ;
     LDA.L strcShedItems.row3                                   ;82851B|AF021F7F|7F1F02;
     ORA.B #$04                                                 ;82851F|0904    |      ;
@@ -528,7 +528,7 @@ fNextDayHandler:
   + REP #$30                                                   ;828525|C230    |      ;
     %CheckFlag(event4, $0080)
     BEQ .label6                                                ;82852E|F04F    |82857F;
-    %UnsetFlag(event4, ~$FF7F)
+    %UnsetFlag(event4, $0080)
     %CheckFlag(event4, $0100)
     BNE .label3                                                ;828542|D00D    |828551;
     %SetFlag(event4, $0102)
@@ -565,7 +565,7 @@ fNextDayHandler:
     %CheckFlag(event4, $0800)
     BNE +                                                      ;828591|D016    |8285A9;
     %SetFlag(event4, $0800)
-    %UnsetFlag(event4, ~$FBFF)
+    %UnsetFlag(event4, $0400)
  
   + REP #$30                                                   ;8285A9|C230    |      ;
     %CheckFlag(event4, $1000)
@@ -580,7 +580,7 @@ fNextDayHandler:
     BNE +                                                      ;8285C8|D018    |8285E2;
     REP #$20                                                   ;8285CA|C220    |      ;
     %SetFlag(event4, $2000)
-    %UnsetFlag(event4, ~$EFFF)
+    %UnsetFlag(event4, $1000)
  
   + REP #$30                                                   ;8285E2|C230    |      ;
     %CheckFlag(event4, $4000)
@@ -595,7 +595,7 @@ fNextDayHandler:
     BNE +                                                      ;828601|D018    |82861B;
     REP #$20                                                   ;828603|C220    |      ;
     %SetFlag(event4, $8000)
-    %UnsetFlag(event4, ~$BFFF)
+    %UnsetFlag(event4, $4000)
  
   + REP #$30                                                   ;82861B|C230    |      ;
     %CheckFlag(event5, $0001)
@@ -610,7 +610,7 @@ fNextDayHandler:
     BNE +                                                      ;82863A|D018    |828654;
     REP #$20                                                   ;82863C|C220    |      ;
     %SetFlag(event5, $0002)
-    %UnsetFlag(event5, ~$FFFE)
+    %UnsetFlag(event5, $0001)
  
   + REP #$30                                                   ;828654|C230    |      ;
     %CheckFlag(event5, $0004)
@@ -625,7 +625,7 @@ fNextDayHandler:
     BNE +                                                      ;828673|D018    |82868D;
     REP #$20                                                   ;828675|C220    |      ;
     %SetFlag(event5, $0008)
-    %UnsetFlag(event5, ~$FFFB)
+    %UnsetFlag(event5, $0004)
  
   + REP #$30                                                   ;82868D|C230    |      ;
     %CheckFlag(event5, $0010)
@@ -640,12 +640,12 @@ fNextDayHandler:
     BNE +                                                      ;8286AC|D018    |8286C6;
     REP #$20                                                   ;8286AE|C220    |      ;
     %SetFlag(event5, $0020)
-    %UnsetFlag(event5, ~$FFEF)
+    %UnsetFlag(event5, $0010)
  
   + REP #$30                                                   ;8286C6|C230    |      ;
     %CheckFlag(event6, $8000)
     BEQ +                                                      ;8286CF|F017    |8286E8;
-    %UnsetFlag(event6, ~$7FFF)
+    %UnsetFlag(event6, $8000)
     SEP #$20                                                   ;8286DC|E220    |      ;
     LDA.L strcShedItems.row3                                   ;8286DE|AF021F7F|7F1F02;
     ORA.B #$01                                                 ;8286E2|0901    |      ;
@@ -719,7 +719,7 @@ fNextDayHandler:
  
 fUnknown_828790:
     REP #$30                                                   ;828790|C230    |      ;
-    %UnsetFlag(event5, ~$FC7F)
+    %UnsetFlag(event5, $0380)
     %CheckFlag(event2, !EFLAGS2_MARRIEDMARIA)
     BNE .marriedCheck                                          ;8287A4|D027    |8287CD;
     %CheckFlag(event2, !EFLAGS2_MARRIEDANN)
@@ -2788,10 +2788,7 @@ fToolUsedAction0x05_CornSeedBag:
     CMP.B #$09                                                 ;8299D3|C909    |      ;
     BNE .return                                                ;8299D5|D020    |8299F7;
     STZ.W strcStockData.unkAnyTool                             ;8299D7|9C6B09  |00096B;
-    SEP #$20                                                   ;8299DA|E220    |      ;
-    LDA.W strcPlayerData.leftCornSeeds                         ;8299DC|AD2809  |000928;
-    DEC A                                                      ;8299DF|3A      |      ;
-    STA.W strcPlayerData.leftCornSeeds                         ;8299E0|8D2809  |000928;
+    %DecreaseStock(leftCornSeeds)
     BNE +                                                      ;8299E3|D003    |8299E8;
     STZ.W strcPlayerData.toolEquipped                          ;8299E5|9C2109  |000921;
  
@@ -2835,10 +2832,7 @@ fToolUsedAction0x06_TomatoSeedBag:
     CMP.B #$09                                                 ;829A32|C909    |      ;
     BNE .return                                                ;829A34|D020    |829A56;
     STZ.W strcStockData.unkAnyTool                             ;829A36|9C6B09  |00096B;
-    SEP #$20                                                   ;829A39|E220    |      ;
-    LDA.W strcPlayerData.leftTomatoSeeds                       ;829A3B|AD2909  |000929;
-    DEC A                                                      ;829A3E|3A      |      ;
-    STA.W strcPlayerData.leftTomatoSeeds                       ;829A3F|8D2909  |000929;
+    %DecreaseStock(leftTomatoSeeds)
     BNE +                                                      ;829A42|D003    |829A47;
     STZ.W strcPlayerData.toolEquipped                          ;829A44|9C2109  |000921;
  
@@ -2881,10 +2875,7 @@ fToolUsedAction0x07_PotatoSeedBag:
     CMP.B #$09                                                 ;829A8F|C909    |      ;
     BNE .return                                                ;829A91|D020    |829AB3;
     STZ.W strcStockData.unkAnyTool                             ;829A93|9C6B09  |00096B;
-    SEP #$20                                                   ;829A96|E220    |      ;
-    LDA.W strcPlayerData.leftPotatoSeeds                       ;829A98|AD2A09  |00092A;
-    DEC A                                                      ;829A9B|3A      |      ;
-    STA.W strcPlayerData.leftPotatoSeeds                       ;829A9C|8D2A09  |00092A;
+    %DecreaseStock(leftPotatoSeeds)
     BNE +                                                      ;829A9F|D003    |829AA4;
     STZ.W strcPlayerData.toolEquipped                          ;829AA1|9C2109  |000921;
  
@@ -2927,10 +2918,7 @@ fToolUsedAction0x08_TurnipSeedBag:
     CMP.B #$09                                                 ;829AEC|C909    |      ;
     BNE .return                                                ;829AEE|D020    |829B10;
     STZ.W strcStockData.unkAnyTool                             ;829AF0|9C6B09  |00096B;
-    SEP #$20                                                   ;829AF3|E220    |      ;
-    LDA.W strcPlayerData.leftTurnipSeeds                       ;829AF5|AD2B09  |00092B;
-    DEC A                                                      ;829AF8|3A      |      ;
-    STA.W strcPlayerData.leftTurnipSeeds                       ;829AF9|8D2B09  |00092B;
+    %DecreaseStock(leftTurnipSeeds)
     BNE +                                                      ;829AFC|D003    |829B01;
     STZ.W strcPlayerData.toolEquipped                          ;829AFE|9C2109  |000921;
  
@@ -3006,10 +2994,7 @@ fToolUsedAction0x0C_GrassSeedBag:
     CMP.B #$09                                                 ;829BA6|C909    |      ;
     BNE .return                                                ;829BA8|D020    |829BCA;
     STZ.W strcStockData.unkAnyTool                             ;829BAA|9C6B09  |00096B;
-    SEP #$20                                                   ;829BAD|E220    |      ;
-    LDA.W strcPlayerData.leftGrassSeeds                        ;829BAF|AD2709  |000927;
-    DEC A                                                      ;829BB2|3A      |      ;
-    STA.W strcPlayerData.leftGrassSeeds                        ;829BB3|8D2709  |000927;
+    %DecreaseStock(leftGrassSeeds)
     BNE +                                                      ;829BB6|D003    |829BBB;
     STZ.W strcPlayerData.toolEquipped                          ;829BB8|9C2109  |000921;
  
@@ -3972,10 +3957,7 @@ fToolUsedAction0x19_ChickenFeed:
     JSL.L fUnknown_81A500                                      ;82A4A0|2200A581|81A500;
  
 .label2:
-    SEP #$20                                                   ;82A4A4|E220    |      ;
-    LDA.W strcPlayerData.leftChickenFood                       ;82A4A6|AD2D09  |00092D;
-    DEC A                                                      ;82A4A9|3A      |      ;
-    STA.W strcPlayerData.leftChickenFood                       ;82A4AA|8D2D09  |00092D;
+    %DecreaseStock(leftChickenFood)
     BNE +                                                      ;82A4AD|D003    |82A4B2;
     STZ.W strcPlayerData.toolEquipped                          ;82A4AF|9C2109  |000921;
  
@@ -4046,10 +4028,7 @@ fToolUsedAction0x1A_CowFeed:
     JSL.L fUnknown_81A500                                      ;82A54E|2200A581|81A500;
  
 .label2:
-    SEP #$20                                                   ;82A552|E220    |      ;
-    LDA.W strcPlayerData.leftCowFood                           ;82A554|AD2C09  |00092C;
-    DEC A                                                      ;82A557|3A      |      ;
-    STA.W strcPlayerData.leftCowFood                           ;82A558|8D2C09  |00092C;
+    %DecreaseStock(leftCowFood)
     BNE +                                                      ;82A55B|D003    |82A560;
     STZ.W strcPlayerData.toolEquipped                          ;82A55D|9C2109  |000921;
  
@@ -6863,7 +6842,7 @@ fUnknown_82D1C0:
     REP #$30                                                   ;82D2E0|C230    |      ;
     STZ.W strcPlayerData.placedCowFeedFlags                    ;82D2E2|9C3209  |000932;
     STZ.W strcPlayerData.placedChickenFeedFlags                ;82D2E5|9C3409  |000934;
-    %UnsetFlag(daily2, ~$FFFB)
+    %UnsetFlag(daily2, $0004)
     JSL.L fCore_ZeroVRAM                                       ;82D2F3|22468880|808846;
     JSL.L fCore_ZeroCGRAM                                      ;82D2F7|22808980|808980;
     JSL.L fCore_Zero0x42Ptr                                    ;82D2FB|22AB8F80|808FAB;
@@ -7027,7 +7006,7 @@ fMainMenu_AutoHowToPlay:
     REP #$30                                                   ;82D4E1|C230    |      ;
     STZ.W strcPlayerData.placedCowFeedFlags                    ;82D4E3|9C3209  |000932;
     STZ.W strcPlayerData.placedChickenFeedFlags                ;82D4E6|9C3409  |000934;
-    %UnsetFlag(daily2, ~$FFFB)
+    %UnsetFlag(daily2, $0004)
     JSL.L fCore_ZeroVRAM                                       ;82D4F4|22468880|808846;
     JSL.L fCore_ZeroCGRAM                                      ;82D4F8|22808980|808980;
     JSL.L fCore_Zero0x42Ptr                                    ;82D4FC|22AB8F80|808FAB;
@@ -7314,7 +7293,7 @@ fUnknown_82D75E:
     LDA.B #$00                                                 ;82D7B5|A900    |      ;
     STA.B strcSystem.arrayIndex                                ;82D7B7|8527    |000027;
     LDA.B #$22                                                 ;82D7B9|A922    |      ;
-    STA.B strcSystem.unk29                                     ;82D7BB|8529    |000029;
+    STA.B strcSystem.destinationRegister                       ;82D7BB|8529    |000029;
     REP #$20                                                   ;82D7BD|C220    |      ;
     LDY.W #$0200                                               ;82D7BF|A00002  |      ;
     LDX.W #$0000                                               ;82D7C2|A20000  |      ;
@@ -7345,7 +7324,7 @@ fUnknown_82D75E:
     REP #$20                                                   ;82D804|C220    |      ;
     STZ.B strcVariables.n16Unk90                               ;82D806|6490    |000090;
     LDA.W #$0001                                               ;82D808|A90100  |      ;
-    STA.B strcObject.unkAF                                     ;82D80B|85AF    |0000AF;
+    STA.B strcObject.bankAddress                               ;82D80B|85AF    |0000AF;
  
 fUnknown_82D80D:
     SEP #$20                                                   ;82D80D|E220    |      ;
@@ -7562,7 +7541,7 @@ fUnknown_82D8B0:
     LDA.B #$00                                                 ;82DA0F|A900    |      ;
     STA.B strcSystem.arrayIndex                                ;82DA11|8527    |000027;
     LDA.B #$22                                                 ;82DA13|A922    |      ;
-    STA.B strcSystem.unk29                                     ;82DA15|8529    |000029;
+    STA.B strcSystem.destinationRegister                       ;82DA15|8529    |000029;
     REP #$20                                                   ;82DA17|C220    |      ;
     LDY.W #$0200                                               ;82DA19|A00002  |      ;
     LDX.W #$0000                                               ;82DA1C|A20000  |      ;
@@ -7712,7 +7691,7 @@ fUnknown_82DAF5:
     LDA.B #$00                                                 ;82DB63|A900    |      ;
     STA.B strcSystem.arrayIndex                                ;82DB65|8527    |000027;
     LDA.B #$22                                                 ;82DB67|A922    |      ;
-    STA.B strcSystem.unk29                                     ;82DB69|8529    |000029;
+    STA.B strcSystem.destinationRegister                       ;82DB69|8529    |000029;
     REP #$20                                                   ;82DB6B|C220    |      ;
     LDY.W #$0200                                               ;82DB6D|A00002  |      ;
     LDX.W #$0000                                               ;82DB70|A20000  |      ;
@@ -8166,7 +8145,7 @@ fUnknown_82DEC5:
     LDA.B #$00                                                 ;82DF31|A900    |      ;
     STA.B strcSystem.arrayIndex                                ;82DF33|8527    |000027;
     LDA.B #$22                                                 ;82DF35|A922    |      ;
-    STA.B strcSystem.unk29                                     ;82DF37|8529    |000029;
+    STA.B strcSystem.destinationRegister                       ;82DF37|8529    |000029;
     REP #$20                                                   ;82DF39|C220    |      ;
     LDY.W #$0200                                               ;82DF3B|A00002  |      ;
     LDX.W #$0000                                               ;82DF3E|A20000  |      ;
@@ -8230,7 +8209,7 @@ fUnknown_82DF92:
     LDA.B #$00                                                 ;82DFD3|A900    |      ;
     STA.B strcSystem.arrayIndex                                ;82DFD5|8527    |000027;
     LDA.B #$22                                                 ;82DFD7|A922    |      ;
-    STA.B strcSystem.unk29                                     ;82DFD9|8529    |000029;
+    STA.B strcSystem.destinationRegister                       ;82DFD9|8529    |000029;
     REP #$20                                                   ;82DFDB|C220    |      ;
     LDY.W #$0200                                               ;82DFDD|A00002  |      ;
     LDX.W #$0000                                               ;82DFE0|A20000  |      ;
@@ -8515,7 +8494,7 @@ fUnknown_82E1F1:
     LDA.B #$00                                                 ;82E232|A900    |      ;
     STA.B strcSystem.arrayIndex                                ;82E234|8527    |000027;
     LDA.B #$22                                                 ;82E236|A922    |      ;
-    STA.B strcSystem.unk29                                     ;82E238|8529    |000029;
+    STA.B strcSystem.destinationRegister                       ;82E238|8529    |000029;
     REP #$20                                                   ;82E23A|C220    |      ;
     LDY.W #$0200                                               ;82E23C|A00002  |      ;
     LDX.W #$0000                                               ;82E23F|A20000  |      ;
@@ -8951,7 +8930,7 @@ fUnknown_82E5E7:
     LDA.B #$00                                                 ;82E614|A900    |      ; A = 0x00
     STA.B strcSystem.arrayIndex                                ;82E616|8527    |000027; $27 = 0x00
     LDA.B #$18                                                 ;82E618|A918    |      ;
-    STA.B strcSystem.unk29                                     ;82E61A|8529    |000029; $29 = 0x18
+    STA.B strcSystem.destinationRegister                       ;82E61A|8529    |000029; $29 = 0x18
     REP #$20                                                   ;82E61C|C220    |      ;
     LDA.W #$E666                                               ;82E61E|A966E6  |      ;
     CLC                                                        ;82E621|18      |      ;
@@ -9042,7 +9021,7 @@ fUnknown_82E742:
     LDA.B #$00                                                 ;82E768|A900    |      ;
     STA.B strcSystem.arrayIndex                                ;82E76A|8527    |000027;
     LDA.B #$18                                                 ;82E76C|A918    |      ;
-    STA.B strcSystem.unk29                                     ;82E76E|8529    |000029;
+    STA.B strcSystem.destinationRegister                       ;82E76E|8529    |000029;
     REP #$30                                                   ;82E770|C230    |      ;
     LDY.W #$0004                                               ;82E772|A00400  |      ;
     LDX.B strcVariables.n16Unk86                               ;82E775|A686    |000086;
@@ -9058,7 +9037,7 @@ fUnknown_82E742:
     LDA.B #$01                                                 ;82E78D|A901    |      ;
     STA.B strcSystem.arrayIndex                                ;82E78F|8527    |000027;
     LDA.B #$18                                                 ;82E791|A918    |      ;
-    STA.B strcSystem.unk29                                     ;82E793|8529    |000029;
+    STA.B strcSystem.destinationRegister                       ;82E793|8529    |000029;
     REP #$30                                                   ;82E795|C230    |      ;
     LDY.W #$0004                                               ;82E797|A00400  |      ;
     LDX.B strcVariables.n16Unk86                               ;82E79A|A686    |000086;
@@ -9164,7 +9143,7 @@ fScreen_NameInput:
     LDA.B #$00                                                 ;82E86E|A900    |      ;
     STA.B strcSystem.arrayIndex                                ;82E870|8527    |000027;
     LDA.B #$22                                                 ;82E872|A922    |      ;
-    STA.B strcSystem.unk29                                     ;82E874|8529    |000029;
+    STA.B strcSystem.destinationRegister                       ;82E874|8529    |000029;
     REP #$20                                                   ;82E876|C220    |      ;
     LDY.W #$0100                                               ;82E878|A00001  |      ;
     LDX.W #$0000                                               ;82E87B|A20000  |      ;
@@ -9179,7 +9158,7 @@ fScreen_NameInput:
     LDA.B #$01                                                 ;82E891|A901    |      ;
     STA.B strcSystem.arrayIndex                                ;82E893|8527    |000027;
     LDA.B #$22                                                 ;82E895|A922    |      ;
-    STA.B strcSystem.unk29                                     ;82E897|8529    |000029;
+    STA.B strcSystem.destinationRegister                       ;82E897|8529    |000029;
     REP #$20                                                   ;82E899|C220    |      ;
     LDY.W #$0100                                               ;82E89B|A00001  |      ;
     LDX.W #$0080                                               ;82E89E|A28000  |      ;
@@ -9455,7 +9434,7 @@ fUnknown_82EAB4:
     LDA.B #$00                                                 ;82EAD4|A900    |      ;
     STA.B strcSystem.arrayIndex                                ;82EAD6|8527    |000027;
     LDA.B #$18                                                 ;82EAD8|A918    |      ;
-    STA.B strcSystem.unk29                                     ;82EADA|8529    |000029;
+    STA.B strcSystem.destinationRegister                       ;82EADA|8529    |000029;
     REP #$30                                                   ;82EADC|C230    |      ;
     LDY.W #$0004                                               ;82EADE|A00400  |      ;
     LDX.B strcVariables.n16Unk86                               ;82EAE1|A686    |000086;
@@ -9471,7 +9450,7 @@ fUnknown_82EAB4:
     LDA.B #$01                                                 ;82EAF9|A901    |      ;
     STA.B strcSystem.arrayIndex                                ;82EAFB|8527    |000027;
     LDA.B #$18                                                 ;82EAFD|A918    |      ;
-    STA.B strcSystem.unk29                                     ;82EAFF|8529    |000029;
+    STA.B strcSystem.destinationRegister                       ;82EAFF|8529    |000029;
     REP #$30                                                   ;82EB01|C230    |      ;
     LDY.W #$0004                                               ;82EB03|A00400  |      ;
     LDX.B strcVariables.n16Unk86                               ;82EB06|A686    |000086;

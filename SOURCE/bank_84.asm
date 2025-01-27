@@ -293,10 +293,10 @@ fAI_HowToPlaySetup:
  
 .return:
     REP #$20                                                   ;84821A|C220    |      ;
-    %UnsetFlag(daily1, ~$FE2F)
-    %UnsetFlag(daily2, ~$FBFF)
-    %UnsetFlag(daily3, ~$FFBF)
-    %UnsetFlag(daily4, ~$FFEF)
+    %UnsetFlag(daily1, $01D0)
+    %UnsetFlag(daily2, $0400)
+    %UnsetFlag(daily3, $0040)
+    %UnsetFlag(daily4, $0010)
     RTL                                                        ;848248|6B      |      ;
  
  
@@ -1343,7 +1343,7 @@ fAIAction0x01_UnfreezeTime:
     LDA.B #$01                                                 ;8489F1|A901    |      ;
     STA.W nTimeState                                           ;8489F3|8D7309  |000973;
     REP #$20                                                   ;8489F6|C220    |      ;
-    %UnsetFlag(daily2, ~$FFFE)
+    %UnsetFlag(daily2, $0001)
     LDA.W nMapEngine_flags                                     ;848A03|AD9601  |000196;
     ORA.W #$0020                                               ;848A06|092000  |      ;
     STA.W nMapEngine_flags                                     ;848A09|8D9601  |000196;
@@ -3031,7 +3031,7 @@ fAIAction0x30_UpdateChicken:
     JMP.W .loop                                                ;849A6A|4CA198  |8498A1;
  
  
-  + %UnsetFlag(daily1, ~$FFF7)
+  + %UnsetFlag(daily1, $0008)
     REP #$20                                                   ;849A78|C220    |      ;
     LDA.W #$0032                                               ;849A7A|A93200  |      ;
     STA.L nGameUnk7F1F15                                       ;849A7D|8F151F7F|7F1F15;
@@ -4445,7 +4445,7 @@ fUnkonown_84A498:
     JMP.W fUnknown_ToFarm                                      ;84A4A3|4C459B  |849B45;
  
  
-  + %UnsetFlag(daily1, ~$FFFB)
+  + %UnsetFlag(daily1, $0004)
     REP #$20                                                   ;84A4B1|C220    |      ;
     LDA.W #$01F4                                               ;84A4B3|A9F401  |      ;
     STA.L nGameUnk7F1F15                                       ;84A4B6|8F151F7F|7F1F15;
@@ -5299,7 +5299,7 @@ fAIAction0x35_UpdateHorse:
     REP #$30                                                   ;84AB27|C230    |      ;
     %AIMoveAction($0001)
     REP #$20                                                   ;84AB33|C220    |      ;
-    %UnsetFlag(daily2, ~$FFEF)
+    %UnsetFlag(daily2, $0010)
     SEP #$20                                                   ;84AB40|E220    |      ;
     LDA.L nHorseAge                                            ;84AB42|AF321F7F|7F1F32;
     CMP.B #$15                                                 ;84AB46|C915    |      ;
@@ -5379,7 +5379,7 @@ fAIAction0x35_UpdateHorse:
 .break:
     JSL.L fAI_Unknown84803F                                    ;84ABCE|223F8084|84803F;
     REP #$30                                                   ;84ABD2|C230    |      ;
-    %UnsetFlag(daily2, ~$FFBF)
+    %UnsetFlag(daily2, $0040)
  
 .loop:
     REP #$30                                                   ;84ABDF|C230    |      ;
@@ -5506,7 +5506,7 @@ fAIAction0x35_UpdateHorse:
  
 .label2:
     REP #$30                                                   ;84ACEE|C230    |      ;
-    %UnsetFlag(daily2, ~$F7FF)
+    %UnsetFlag(daily2, $0800)
     SEP #$20                                                   ;84ACFB|E220    |      ;
     LDA.W strcStockData.unkHorse                               ;84ACFD|AD3909  |000939;
     CMP.B #$78                                                 ;84AD00|C978    |      ;
@@ -5600,7 +5600,7 @@ fAIAction0x35_UpdateHorse:
 .label9:
     %SetPlayerFlag(!PFLAGS_RIDINGHORSE)
     REP #$20                                                   ;84ADAD|C220    |      ;
-    %UnsetFlag(daily2, ~$FFDF)
+    %UnsetFlag(daily2, $0020)
     SEP #$20                                                   ;84ADBA|E220    |      ;
     REP #$10                                                   ;84ADBC|C210    |      ;
     LDY.W #$0000                                               ;84ADBE|A00000  |      ;
@@ -7104,7 +7104,7 @@ fAIAction0x4E:
     REP #$30                                                   ;84BB31|C230    |      ;
     %AIMoveAction($0001)
     REP #$20                                                   ;84BB3D|C220    |      ;
-    %UnsetFlag(daily2, ~$FFF7)
+    %UnsetFlag(daily2, $0008)
     RTS                                                        ;84BB4A|60      |      ;
  
  
