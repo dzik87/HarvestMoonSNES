@@ -522,10 +522,10 @@ fEggFestivalUnknown_WrongEgg:
     %UnsetPlayerFlag(!PFLAGS_HOLDINGITEM)
     SEP #$20                                                   ;8183A2|E220    |      ;
     LDA.B #$02                                                 ;8183A4|A902    |      ;
-    STA.W $019A                                                ;8183A6|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;8183A6|8D9A01  |00019A;
     LDX.W #$038D                                               ;8183A9|A28D03  |      ;
     LDA.B #$00                                                 ;8183AC|A900    |      ;
-    STA.W $0191                                                ;8183AE|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;8183AE|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;8183B1|225F9383|83935F;
     RTS                                                        ;8183B5|60      |      ;
  
@@ -1393,7 +1393,7 @@ fUnknown_818923:
 fItemBuy_Unknown81893F:
     SEP #$20                                                   ;81893F|E220    |      ;
     LDA.B #$02                                                 ;818941|A902    |      ;
-    STA.W $019A                                                ;818943|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;818943|8D9A01  |00019A;
     SEP #$20                                                   ;818946|E220    |      ;
     LDA.W nCarriedItemId                                       ;818948|AD8409  |000984;
     CMP.B #$44                                                 ;81894B|C944    |      ;
@@ -1427,7 +1427,7 @@ fItemBuy_Unknown81893F:
     TAX                                                        ;818973|AA      |      ;
     SEP #$20                                                   ;818974|E220    |      ;
     LDA.B #$00                                                 ;818976|A900    |      ;
-    STA.W $0191                                                ;818978|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;818978|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81897B|225F9383|83935F;
     SEP #$20                                                   ;81897F|E220    |      ;
     LDA.B #$01                                                 ;818981|A901    |      ;
@@ -1437,13 +1437,13 @@ fItemBuy_Unknown81893F:
  
 fItemBuy_Unknown818989:
     SEP #$20                                                   ;818989|E220    |      ;
-    LDA.W $019A                                                ;81898B|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81898B|AD9A01  |00019A;
     CMP.B #$02                                                 ;81898E|C902    |      ;
     BNE +                                                      ;818990|D003    |818995;
     JMP.W fReturn_818B6A                                       ;818992|4C6A8B  |818B6A;
  
  
-  + LDA.W nSelectedDialogOption                                ;818995|AD8F01  |00018F;
+  + LDA.W strcDialogDisplay.dialogOptionsAnswer                ;818995|AD8F01  |00018F;
     BEQ +                                                      ;818998|F003    |81899D;
     JMP.W fItemBuy_Unknown818A4E                               ;81899A|4C4E8A  |818A4E;
  
@@ -1500,7 +1500,7 @@ fItemBuy_Unknown818989:
 .label3:
     SEP #$20                                                   ;8189EB|E220    |      ;
     LDA.B #$02                                                 ;8189ED|A902    |      ;
-    STA.W $019A                                                ;8189EF|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;8189EF|8D9A01  |00019A;
     SEP #$20                                                   ;8189F2|E220    |      ;
     LDA.W nCarriedItemId                                       ;8189F4|AD8409  |000984;
     CMP.B #$44                                                 ;8189F7|C944    |      ;
@@ -1537,7 +1537,7 @@ fItemBuy_Unknown818989:
     TAX                                                        ;818A25|AA      |      ;
     SEP #$20                                                   ;818A26|E220    |      ;
     LDA.B #$00                                                 ;818A28|A900    |      ;
-    STA.W $0191                                                ;818A2A|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;818A2A|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;818A2D|225F9383|83935F;
     REP #$20                                                   ;818A31|C220    |      ;
     LDA.B strcVariables.n16Temp2                               ;818A33|A580    |000080;
@@ -1561,7 +1561,7 @@ fUnknown_818A44:
 fItemBuy_Unknown818A4E:
     SEP #$20                                                   ;818A4E|E220    |      ;
     LDA.B #$02                                                 ;818A50|A902    |      ;
-    STA.W $019A                                                ;818A52|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;818A52|8D9A01  |00019A;
     SEP #$20                                                   ;818A55|E220    |      ;
     LDA.W nCarriedItemId                                       ;818A57|AD8409  |000984;
     CMP.B #$44                                                 ;818A5A|C944    |      ;
@@ -1597,14 +1597,14 @@ fItemBuy_Unknown818A4E:
     TAX                                                        ;818A86|AA      |      ;
     SEP #$20                                                   ;818A87|E220    |      ;
     LDA.B #$00                                                 ;818A89|A900    |      ;
-    STA.W $0191                                                ;818A8B|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;818A8B|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;818A8E|225F9383|83935F;
     BRA fItemBuy_Unknown818AA0                                 ;818A92|800C    |818AA0;
  
  
 fUnknown_818A94:
     SEP #$20                                                   ;818A94|E220    |      ;
-    LDA.W $019A                                                ;818A96|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;818A96|AD9A01  |00019A;
     CMP.B #$02                                                 ;818A99|C902    |      ;
     BNE fItemBuy_Unknown818AA0                                 ;818A9B|D003    |818AA0;
     JMP.W fReturn_818B6A                                       ;818A9D|4C6A8B  |818B6A;
@@ -1669,7 +1669,7 @@ fItemBuy_Unknown818AA0:
  
 fUnknown_818B19:
     SEP #$20                                                   ;818B19|E220    |      ;
-    LDA.W $019A                                                ;818B1B|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;818B1B|AD9A01  |00019A;
     CMP.B #$02                                                 ;818B1E|C902    |      ;
     BNE +                                                      ;818B20|D003    |818B25;
     JMP.W fReturn_818B6A                                       ;818B22|4C6A8B  |818B6A;
@@ -1723,9 +1723,9 @@ fItemFound_Unknown818B6B:
     TAX                                                        ;818B8A|AA      |      ;
     SEP #$20                                                   ;818B8B|E220    |      ;
     LDA.B #$02                                                 ;818B8D|A902    |      ;
-    STA.W $019A                                                ;818B8F|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;818B8F|8D9A01  |00019A;
     LDA.B #$00                                                 ;818B92|A900    |      ;
-    STA.W $0191                                                ;818B94|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;818B94|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;818B97|225F9383|83935F;
     SEP #$20                                                   ;818B9B|E220    |      ;
     LDA.B #$01                                                 ;818B9D|A901    |      ;
@@ -1735,13 +1735,13 @@ fItemFound_Unknown818B6B:
  
 fItemFound_Consume:
     SEP #$20                                                   ;818BA5|E220    |      ;
-    LDA.W $019A                                                ;818BA7|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;818BA7|AD9A01  |00019A;
     CMP.B #$02                                                 ;818BAA|C902    |      ;
     BNE +                                                      ;818BAC|D003    |818BB1;
     JMP.W fReturn_818C23                                       ;818BAE|4C238C  |818C23;
  
  
-  + LDA.W nSelectedDialogOption                                ;818BB1|AD8F01  |00018F;
+  + LDA.W strcDialogDisplay.dialogOptionsAnswer                ;818BB1|AD8F01  |00018F;
     BEQ +                                                      ;818BB4|F003    |818BB9;
     JMP.W fUnknown_818C0C                                      ;818BB6|4C0C8C  |818C0C;
  
@@ -2151,7 +2151,7 @@ fUnknown_818E98:
 fItemSell_Unknown818F2A:
     SEP #$20                                                   ;818F2A|E220    |      ;
     LDA.B #$02                                                 ;818F2C|A902    |      ;
-    STA.W $019A                                                ;818F2E|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;818F2E|8D9A01  |00019A;
     LDA.B #$00                                                 ;818F31|A900    |      ;
     XBA                                                        ;818F33|EB      |      ;
     LDA.W nCarriedItemId                                       ;818F34|AD8409  |000984;
@@ -2165,7 +2165,7 @@ fItemSell_Unknown818F2A:
     TAX                                                        ;818F44|AA      |      ;
     SEP #$20                                                   ;818F45|E220    |      ;
     LDA.B #$00                                                 ;818F47|A900    |      ;
-    STA.W $0191                                                ;818F49|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;818F49|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;818F4C|225F9383|83935F;
     SEP #$20                                                   ;818F50|E220    |      ;
     LDA.B #$06                                                 ;818F52|A906    |      ;
@@ -2175,13 +2175,13 @@ fItemSell_Unknown818F2A:
  
 fItemSell_Unknown818F5A:
     SEP #$20                                                   ;818F5A|E220    |      ;
-    LDA.W $019A                                                ;818F5C|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;818F5C|AD9A01  |00019A;
     CMP.B #$02                                                 ;818F5F|C902    |      ;
     BNE +                                                      ;818F61|D003    |818F66;
     JMP.W fReturn_81900F                                       ;818F63|4C0F90  |81900F;
  
  
-  + LDA.W nSelectedDialogOption                                ;818F66|AD8F01  |00018F;
+  + LDA.W strcDialogDisplay.dialogOptionsAnswer                ;818F66|AD8F01  |00018F;
     BEQ +                                                      ;818F69|F003    |818F6E;
     JMP.W fUnknown_818FD7                                      ;818F6B|4CD78F  |818FD7;
  
@@ -2200,10 +2200,10 @@ fItemSell_Unknown818F5A:
     BEQ fUnknown_818FEA                                        ;818F84|F064    |818FEA;
     SEP #$20                                                   ;818F86|E220    |      ;
     LDA.B #$02                                                 ;818F88|A902    |      ;
-    STA.W $019A                                                ;818F8A|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;818F8A|8D9A01  |00019A;
     LDX.W #$02FA                                               ;818F8D|A2FA02  |      ;
     LDA.B #$00                                                 ;818F90|A900    |      ;
-    STA.W $0191                                                ;818F92|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;818F92|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;818F95|225F9383|83935F;
     REP #$20                                                   ;818F99|C220    |      ;
     LDA.W nGameObjectIdx                                       ;818F9B|AD7809  |000978;
@@ -2239,10 +2239,10 @@ fItemSell_Unknown818F5A:
 fUnknown_818FD7:
     SEP #$20                                                   ;818FD7|E220    |      ;
     LDA.B #$02                                                 ;818FD9|A902    |      ;
-    STA.W $019A                                                ;818FDB|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;818FDB|8D9A01  |00019A;
     LDX.W #$0303                                               ;818FDE|A20303  |      ;
     LDA.B #$00                                                 ;818FE1|A900    |      ;
-    STA.W $0191                                                ;818FE3|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;818FE3|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;818FE6|225F9383|83935F;
  
 fUnknown_818FEA:
@@ -2380,7 +2380,7 @@ fItemSell_Unknown8190AA:
  
  
   + REP #$20                                                   ;8190FF|C220    |      ;
-    LDA.W nMapEngine_flags                                     ;819101|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;819101|AD9601  |000196;
     AND.W #$0002                                               ;819104|290200  |      ;
     BEQ +                                                      ;819107|F003    |81910C;
     JMP.W fUnknown_81917E                                      ;819109|4C7E91  |81917E;
@@ -4612,7 +4612,7 @@ fUnknown_81A83A:
     LDA.W #$0040                                               ;81A854|A94000  |      ;
     STA.B strcVariables.n16Unk88                               ;81A857|8588    |000088;
     SEP #$20                                                   ;81A859|E220    |      ;
-    LDA.W nCurrentMapdata_RoomWidthMult                        ;81A85B|AD8101  |000181;
+    LDA.W strcDialogDisplay.mapMultiWidth                      ;81A85B|AD8101  |000181;
     CMP.B #$01                                                 ;81A85E|C901    |      ;
     BEQ +                                                      ;81A860|F01B    |81A87D;
     REP #$20                                                   ;81A862|C220    |      ;
@@ -4621,7 +4621,7 @@ fUnknown_81A83A:
     STA.B strcVariables.n16Temp2                               ;81A867|8580    |000080;
     ASL.B strcVariables.n16Unk88                               ;81A869|0688    |000088;
     SEP #$20                                                   ;81A86B|E220    |      ;
-    LDA.W nCurrentMapdata_RoomWidthMult                        ;81A86D|AD8101  |000181;
+    LDA.W strcDialogDisplay.mapMultiWidth                      ;81A86D|AD8101  |000181;
     CMP.B #$02                                                 ;81A870|C902    |      ;
     BEQ +                                                      ;81A872|F009    |81A87D;
     REP #$20                                                   ;81A874|C220    |      ;
@@ -5221,10 +5221,10 @@ fItemSub81A9F6_0x0F:
  
 fItemSub81A9F6_0x10to0x13:
     REP #$30                                                   ;81AC80|C230    |      ;
-    LDA.W nMapEngine_flags                                     ;81AC82|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;81AC82|AD9601  |000196;
     AND.W #$0002                                               ;81AC85|290200  |      ;
     BNE +                                                      ;81AC88|D02D    |81ACB7;
-    LDA.W nMapEngine_flags                                     ;81AC8A|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;81AC8A|AD9601  |000196;
     AND.W #$0008                                               ;81AC8D|290800  |      ;
     BNE +                                                      ;81AC90|D025    |81ACB7;
  
@@ -5269,7 +5269,7 @@ fItemSub81A9F6_0x14:
  
 fItemSub81A9F6_0x15:
     REP #$30                                                   ;81ACCC|C230    |      ;
-    LDA.W nMapEngine_flags                                     ;81ACCE|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;81ACCE|AD9601  |000196;
     AND.W #$0010                                               ;81ACD1|291000  |      ;
     BEQ +                                                      ;81ACD4|F00D    |81ACE3;
     LDA.W #$00EE                                               ;81ACD6|A9EE00  |      ;
@@ -5303,7 +5303,7 @@ fItemSub81A9F6_0x15:
  
 fItemSub81A9F6_0x16:
     REP #$30                                                   ;81AD23|C230    |      ;
-    LDA.W nMapEngine_flags                                     ;81AD25|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;81AD25|AD9601  |000196;
     AND.W #$0010                                               ;81AD28|291000  |      ;
     BEQ +                                                      ;81AD2B|F00D    |81AD3A;
     LDA.W #$00EE                                               ;81AD2D|A9EE00  |      ;
@@ -5337,7 +5337,7 @@ fItemSub81A9F6_0x16:
  
 fItemSub81A9F6_0x17:
     REP #$30                                                   ;81AD7A|C230    |      ;
-    LDA.W nMapEngine_flags                                     ;81AD7C|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;81AD7C|AD9601  |000196;
     AND.W #$0010                                               ;81AD7F|291000  |      ;
     BEQ +                                                      ;81AD82|F00D    |81AD91;
     LDA.W #$00EE                                               ;81AD84|A9EE00  |      ;
@@ -7940,9 +7940,9 @@ fPlayerAction0x0C_SelectDialog:
 .timeHandler:
     SEP #$20                                                   ;81C4BA|E220    |      ;
     LDA.B #$02                                                 ;81C4BC|A902    |      ;
-    STA.W $019A                                                ;81C4BE|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81C4BE|8D9A01  |00019A;
     LDA.B #$00                                                 ;81C4C1|A900    |      ;
-    STA.W $0191                                                ;81C4C3|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81C4C3|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81C4C6|225F9383|83935F;
  
 .continue:
@@ -10444,7 +10444,7 @@ fPlayerInteraction0x0F:
     BEQ .case2                                                 ;81D723|F075    |81D79A;
     %SetPlayerFlag(!PFLAGS_SITTING)
     REP #$20                                                   ;81D72E|C220    |      ;
-    LDA.W nMapEngine_flags                                     ;81D730|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;81D730|AD9601  |000196;
     AND.W #$0010                                               ;81D733|291000  |      ;
     BNE +                                                      ;81D736|D007    |81D73F;
     LDA.W #$0000                                               ;81D738|A90000  |      ;
@@ -10480,9 +10480,9 @@ fPlayerInteraction0x0F:
     TAX                                                        ;81D773|AA      |      ;
     SEP #$20                                                   ;81D774|E220    |      ;
     LDA.B #$02                                                 ;81D776|A902    |      ;
-    STA.W $019A                                                ;81D778|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81D778|8D9A01  |00019A;
     LDA.B #$00                                                 ;81D77B|A900    |      ;
-    STA.W $0191                                                ;81D77D|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81D77D|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81D780|225F9383|83935F;
  
   + SEP #$20                                                   ;81D784|E220    |      ;
@@ -10499,7 +10499,7 @@ fPlayerInteraction0x0F:
  
 .case2:
     SEP #$20                                                   ;81D79A|E220    |      ;
-    LDA.W $019A                                                ;81D79C|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81D79C|AD9A01  |00019A;
     CMP.B #$02                                                 ;81D79F|C902    |      ;
     BEQ .return                                                ;81D7A1|F021    |81D7C4;
     REP #$20                                                   ;81D7A3|C220    |      ;
@@ -10547,11 +10547,11 @@ fPlayerInteraction0x10_PlayerDiary:
  
   + SEP #$20                                                   ;81D7FD|E220    |      ;
     LDA.B #$02                                                 ;81D7FF|A902    |      ;
-    STA.W $019A                                                ;81D801|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81D801|8D9A01  |00019A;
     LDX.W #$000A                                               ;81D804|A20A00  |      ;
     SEP #$20                                                   ;81D807|E220    |      ;
     LDA.B #$00                                                 ;81D809|A900    |      ;
-    STA.W $0191                                                ;81D80B|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81D80B|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81D80E|225F9383|83935F;
     SEP #$20                                                   ;81D812|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81D814|EE6F09  |00096F;
@@ -10559,14 +10559,14 @@ fPlayerInteraction0x10_PlayerDiary:
  
  
 .case1:
-    LDA.W $019A                                                ;81D81A|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81D81A|AD9A01  |00019A;
     CMP.B #$02                                                 ;81D81D|C902    |      ;
     BNE +                                                      ;81D81F|D003    |81D824;
     JMP.W .justReturn                                          ;81D821|4C6BD9  |81D96B;
  
  
   + SEP #$20                                                   ;81D824|E220    |      ;
-    LDA.W nSelectedDialogOption                                ;81D826|AD8F01  |00018F;
+    LDA.W strcDialogDisplay.dialogOptionsAnswer                ;81D826|AD8F01  |00018F;
     BNE .no                                                    ;81D829|D013    |81D83E;
     INC.W nPlayerInteractionArg1                               ;81D82B|EE6F09  |00096F;
     INC.W nPlayerInteractionArg1                               ;81D82E|EE6F09  |00096F;
@@ -10579,11 +10579,11 @@ fPlayerInteraction0x10_PlayerDiary:
  
 .no:
     LDA.B #$02                                                 ;81D83E|A902    |      ;
-    STA.W $019A                                                ;81D840|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81D840|8D9A01  |00019A;
     LDX.W #$000C                                               ;81D843|A20C00  |      ;
     SEP #$20                                                   ;81D846|E220    |      ;
     LDA.B #$00                                                 ;81D848|A900    |      ;
-    STA.W $0191                                                ;81D84A|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81D84A|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81D84D|225F9383|83935F;
     SEP #$20                                                   ;81D851|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81D853|EE6F09  |00096F;
@@ -10591,14 +10591,14 @@ fPlayerInteraction0x10_PlayerDiary:
  
  
 .case2:
-    LDA.W $019A                                                ;81D859|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81D859|AD9A01  |00019A;
     CMP.B #$02                                                 ;81D85C|C902    |      ;
     BNE +                                                      ;81D85E|D003    |81D863;
     JMP.W .justReturn                                          ;81D860|4C6BD9  |81D96B;
  
  
   + SEP #$20                                                   ;81D863|E220    |      ;
-    LDA.W nSelectedDialogOption                                ;81D865|AD8F01  |00018F;
+    LDA.W strcDialogDisplay.dialogOptionsAnswer                ;81D865|AD8F01  |00018F;
     BNE .stillSomethingToDo                                    ;81D868|D006    |81D870;
     INC.W nPlayerInteractionArg1                               ;81D86A|EE6F09  |00096F;
     JMP.W .justReturn                                          ;81D86D|4C6BD9  |81D96B;
@@ -10731,7 +10731,7 @@ fPlayerInteraction0x12:
     BEQ .case2                                                 ;81D9D9|F07C    |81DA57;
     %SetPlayerFlag(!PFLAGS_SITTING)
     REP #$20                                                   ;81D9E4|C220    |      ;
-    LDA.W nMapEngine_flags                                     ;81D9E6|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;81D9E6|AD9601  |000196;
     AND.W #$0010                                               ;81D9E9|291000  |      ;
     BNE +                                                      ;81D9EC|D007    |81D9F5;
     LDA.W #$0027                                               ;81D9EE|A92700  |      ;
@@ -10770,9 +10770,9 @@ fPlayerInteraction0x12:
     TAX                                                        ;81DA2C|AA      |      ;
     SEP #$20                                                   ;81DA2D|E220    |      ;
     LDA.B #$02                                                 ;81DA2F|A902    |      ;
-    STA.W $019A                                                ;81DA31|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81DA31|8D9A01  |00019A;
     LDA.B #$00                                                 ;81DA34|A900    |      ;
-    STA.W $0191                                                ;81DA36|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81DA36|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81DA39|225F9383|83935F;
  
   + SEP #$20                                                   ;81DA3D|E220    |      ;
@@ -10791,7 +10791,7 @@ fPlayerInteraction0x12:
  
 .case2:
     SEP #$20                                                   ;81DA57|E220    |      ;
-    LDA.W $019A                                                ;81DA59|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81DA59|AD9A01  |00019A;
     CMP.B #$02                                                 ;81DA5C|C902    |      ;
     BEQ .return                                                ;81DA5E|F021    |81DA81;
     REP #$20                                                   ;81DA60|C220    |      ;
@@ -10814,7 +10814,7 @@ fPlayerInteraction0x13:
     BEQ .case2                                                 ;81DA8F|F07C    |81DB0D;
     %SetPlayerFlag(!PFLAGS_SITTING)
     REP #$20                                                   ;81DA9A|C220    |      ;
-    LDA.W nMapEngine_flags                                     ;81DA9C|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;81DA9C|AD9601  |000196;
     AND.W #$0010                                               ;81DA9F|291000  |      ;
     BNE +                                                      ;81DAA2|D007    |81DAAB;
     LDA.W #$0034                                               ;81DAA4|A93400  |      ;
@@ -10853,9 +10853,9 @@ fPlayerInteraction0x13:
     TAX                                                        ;81DAE2|AA      |      ;
     SEP #$20                                                   ;81DAE3|E220    |      ;
     LDA.B #$02                                                 ;81DAE5|A902    |      ;
-    STA.W $019A                                                ;81DAE7|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81DAE7|8D9A01  |00019A;
     LDA.B #$00                                                 ;81DAEA|A900    |      ;
-    STA.W $0191                                                ;81DAEC|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81DAEC|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81DAEF|225F9383|83935F;
  
   + SEP #$20                                                   ;81DAF3|E220    |      ;
@@ -10874,7 +10874,7 @@ fPlayerInteraction0x13:
  
 .case2:
     SEP #$20                                                   ;81DB0D|E220    |      ;
-    LDA.W $019A                                                ;81DB0F|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81DB0F|AD9A01  |00019A;
     CMP.B #$02                                                 ;81DB12|C902    |      ;
     BEQ .return                                                ;81DB14|F021    |81DB37;
     REP #$20                                                   ;81DB16|C220    |      ;
@@ -10898,7 +10898,7 @@ fPlayerInteraction0x14:
     CMP.B #$03                                                 ;81DB47|C903    |      ;
     BEQ .case3                                                 ;81DB49|F047    |81DB92;
     SEP #$20                                                   ;81DB4B|E220    |      ;
-    STZ.W $018A                                                ;81DB4D|9C8A01  |00018A;
+    STZ.W strcDialogDisplay.dialoUnk18A                        ;81DB4D|9C8A01  |00018A;
     INC.W nPlayerInteractionArg1                               ;81DB50|EE6F09  |00096F;
  
 .case1:
@@ -10906,21 +10906,21 @@ fPlayerInteraction0x14:
     STZ.W strcBGScrool.BG2VerOffs                              ;81DB55|9C4201  |000142;
     SEP #$20                                                   ;81DB58|E220    |      ;
     LDA.B #$03                                                 ;81DB5A|A903    |      ;
-    STA.W $019A                                                ;81DB5C|8D9A01  |00019A;
-    LDA.W $019B                                                ;81DB5F|AD9B01  |00019B;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81DB5C|8D9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19B                          ;81DB5F|AD9B01  |00019B;
     ORA.B #$20                                                 ;81DB62|0920    |      ;
-    STA.W $019B                                                ;81DB64|8D9B01  |00019B;
+    STA.W strcDialogDisplay.mapUnk19B                          ;81DB64|8D9B01  |00019B;
     INC.W nPlayerInteractionArg1                               ;81DB67|EE6F09  |00096F;
-    STZ.W $018B                                                ;81DB6A|9C8B01  |00018B;
+    STZ.W strcDialogDisplay.dialoUnk18B                        ;81DB6A|9C8B01  |00018B;
     BRA .return                                                ;81DB6D|8031    |81DBA0;
  
  
 .case2:
     SEP #$20                                                   ;81DB6F|E220    |      ;
-    LDA.W $019A                                                ;81DB71|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81DB71|AD9A01  |00019A;
     CMP.B #$03                                                 ;81DB74|C903    |      ;
     BEQ .return                                                ;81DB76|F028    |81DBA0;
-    LDA.W $019A                                                ;81DB78|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81DB78|AD9A01  |00019A;
     CMP.B #$02                                                 ;81DB7B|C902    |      ;
     BNE +                                                      ;81DB7D|D005    |81DB84;
     INC.W nPlayerInteractionArg1                               ;81DB7F|EE6F09  |00096F;
@@ -10933,7 +10933,7 @@ fPlayerInteraction0x14:
  
 .case3:
     SEP #$20                                                   ;81DB92|E220    |      ;
-    LDA.W $019A                                                ;81DB94|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81DB94|AD9A01  |00019A;
     CMP.B #$02                                                 ;81DB97|C902    |      ;
     BEQ .return                                                ;81DB99|F005    |81DBA0;
     LDA.B #$01                                                 ;81DB9B|A901    |      ;
@@ -11006,10 +11006,10 @@ fPlayerInteraction0x1E:
     BEQ .case1                                                 ;81DBF9|F01B    |81DC16;
     SEP #$20                                                   ;81DBFB|E220    |      ;
     LDA.B #$02                                                 ;81DBFD|A902    |      ;
-    STA.W $019A                                                ;81DBFF|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81DBFF|8D9A01  |00019A;
     LDX.W #$0371                                               ;81DC02|A27103  |      ;
     LDA.B #$00                                                 ;81DC05|A900    |      ;
-    STA.W $0191                                                ;81DC07|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81DC07|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81DC0A|225F9383|83935F;
     SEP #$20                                                   ;81DC0E|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81DC10|EE6F09  |00096F;
@@ -11018,13 +11018,13 @@ fPlayerInteraction0x1E:
  
 .case1:
     SEP #$20                                                   ;81DC16|E220    |      ;
-    LDA.W $019A                                                ;81DC18|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81DC18|AD9A01  |00019A;
     CMP.B #$02                                                 ;81DC1B|C902    |      ;
     BNE +                                                      ;81DC1D|D003    |81DC22;
     JMP.W .return                                              ;81DC1F|4C56DC  |81DC56;
  
  
-  + LDA.W nSelectedDialogOption                                ;81DC22|AD8F01  |00018F;
+  + LDA.W strcDialogDisplay.dialogOptionsAnswer                ;81DC22|AD8F01  |00018F;
     BEQ +                                                      ;81DC25|F003    |81DC2A;
     JMP.W .exit                                                ;81DC27|4C4ADC  |81DC4A;
  
@@ -11039,9 +11039,9 @@ fPlayerInteraction0x1E:
     TAX                                                        ;81DC39|AA      |      ;
     SEP #$20                                                   ;81DC3A|E220    |      ;
     LDA.B #$02                                                 ;81DC3C|A902    |      ;
-    STA.W $019A                                                ;81DC3E|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81DC3E|8D9A01  |00019A;
     LDA.B #$00                                                 ;81DC41|A900    |      ;
-    STA.W $0191                                                ;81DC43|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81DC43|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81DC46|225F9383|83935F;
  
 .exit:
@@ -11087,10 +11087,10 @@ fPlayerInteraction0x26_MariaDiary:
     BEQ .case1                                                 ;81DC67|F01B    |81DC84;
     SEP #$20                                                   ;81DC69|E220    |      ;
     LDA.B #$02                                                 ;81DC6B|A902    |      ;
-    STA.W $019A                                                ;81DC6D|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81DC6D|8D9A01  |00019A;
     LDX.W #$0023                                               ;81DC70|A22300  |      ;
     LDA.B #$00                                                 ;81DC73|A900    |      ;
-    STA.W $0191                                                ;81DC75|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81DC75|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81DC78|225F9383|83935F;
     SEP #$20                                                   ;81DC7C|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81DC7E|EE6F09  |00096F;
@@ -11099,13 +11099,13 @@ fPlayerInteraction0x26_MariaDiary:
  
 .case1:
     SEP #$20                                                   ;81DC84|E220    |      ;
-    LDA.W $019A                                                ;81DC86|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81DC86|AD9A01  |00019A;
     CMP.B #$02                                                 ;81DC89|C902    |      ;
     BNE +                                                      ;81DC8B|D003    |81DC90;
     JMP.W .return                                              ;81DC8D|4CCDDC  |81DCCD;
  
  
-  + LDA.W nSelectedDialogOption                                ;81DC90|AD8F01  |00018F;
+  + LDA.W strcDialogDisplay.dialogOptionsAnswer                ;81DC90|AD8F01  |00018F;
     BEQ +                                                      ;81DC93|F003    |81DC98;
     JMP.W .exit                                                ;81DC95|4CC1DC  |81DCC1;
  
@@ -11119,9 +11119,9 @@ fPlayerInteraction0x26_MariaDiary:
     TAX                                                        ;81DCA7|AA      |      ;
     SEP #$20                                                   ;81DCA8|E220    |      ;
     LDA.B #$02                                                 ;81DCAA|A902    |      ;
-    STA.W $019A                                                ;81DCAC|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81DCAC|8D9A01  |00019A;
     LDA.B #$00                                                 ;81DCAF|A900    |      ;
-    STA.W $0191                                                ;81DCB1|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81DCB1|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81DCB4|225F9383|83935F;
     REP #$20                                                   ;81DCB8|C220    |      ;
     LDA.W #$FFFF                                               ;81DCBA|A9FFFF  |      ; -1
@@ -11184,10 +11184,10 @@ fPlayerInteraction0x2D_NinaDiary:
     BEQ .case1                                                 ;81DDB5|F01B    |81DDD2;
     SEP #$20                                                   ;81DDB7|E220    |      ;
     LDA.B #$02                                                 ;81DDB9|A902    |      ;
-    STA.W $019A                                                ;81DDBB|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81DDBB|8D9A01  |00019A;
     LDX.W #$0023                                               ;81DDBE|A22300  |      ;
     LDA.B #$00                                                 ;81DDC1|A900    |      ;
-    STA.W $0191                                                ;81DDC3|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81DDC3|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81DDC6|225F9383|83935F;
     SEP #$20                                                   ;81DDCA|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81DDCC|EE6F09  |00096F;
@@ -11196,13 +11196,13 @@ fPlayerInteraction0x2D_NinaDiary:
  
 .case1:
     SEP #$20                                                   ;81DDD2|E220    |      ;
-    LDA.W $019A                                                ;81DDD4|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81DDD4|AD9A01  |00019A;
     CMP.B #$02                                                 ;81DDD7|C902    |      ;
     BNE +                                                      ;81DDD9|D003    |81DDDE;
     JMP.W .return                                              ;81DDDB|4C1BDE  |81DE1B;
  
  
-  + LDA.W nSelectedDialogOption                                ;81DDDE|AD8F01  |00018F;
+  + LDA.W strcDialogDisplay.dialogOptionsAnswer                ;81DDDE|AD8F01  |00018F;
     BEQ +                                                      ;81DDE1|F003    |81DDE6;
     JMP.W .exit                                                ;81DDE3|4C0FDE  |81DE0F;
  
@@ -11216,9 +11216,9 @@ fPlayerInteraction0x2D_NinaDiary:
     TAX                                                        ;81DDF5|AA      |      ;
     SEP #$20                                                   ;81DDF6|E220    |      ;
     LDA.B #$02                                                 ;81DDF8|A902    |      ;
-    STA.W $019A                                                ;81DDFA|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81DDFA|8D9A01  |00019A;
     LDA.B #$00                                                 ;81DDFD|A900    |      ;
-    STA.W $0191                                                ;81DDFF|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81DDFF|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81DE02|225F9383|83935F;
     REP #$20                                                   ;81DE06|C220    |      ;
     LDA.W #$FFFF                                               ;81DE08|A9FFFF  |      ;
@@ -11255,15 +11255,15 @@ fPlayerInteraction0x2E_AnimalNPC:
  
  
   + REP #$20                                                   ;81DE43|C220    |      ;
-    LDA.W nMapEngine_flags                                     ;81DE45|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;81DE45|AD9601  |000196;
     AND.W #$000A                                               ;81DE48|290A00  |      ;
     BNE .cantSellAnimal                                        ;81DE4B|D01B    |81DE68;
     SEP #$20                                                   ;81DE4D|E220    |      ;
     LDA.B #$02                                                 ;81DE4F|A902    |      ;
-    STA.W $019A                                                ;81DE51|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81DE51|8D9A01  |00019A;
     LDX.W #$0305                                               ;81DE54|A20503  |      ;
     LDA.B #$00                                                 ;81DE57|A900    |      ;
-    STA.W $0191                                                ;81DE59|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81DE59|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81DE5C|225F9383|83935F;
     SEP #$20                                                   ;81DE60|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81DE62|EE6F09  |00096F;
@@ -11273,10 +11273,10 @@ fPlayerInteraction0x2E_AnimalNPC:
 .cantSellAnimal:
     SEP #$20                                                   ;81DE68|E220    |      ;
     LDA.B #$02                                                 ;81DE6A|A902    |      ;
-    STA.W $019A                                                ;81DE6C|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81DE6C|8D9A01  |00019A;
     LDX.W #$03D0                                               ;81DE6F|A2D003  |      ;
     LDA.B #$00                                                 ;81DE72|A900    |      ;
-    STA.W $0191                                                ;81DE74|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81DE74|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81DE77|225F9383|83935F;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     JMP.W .return                                              ;81DE87|4C21E2  |81E221;
@@ -11291,13 +11291,13 @@ fPlayerInteraction0x2E_AnimalNPC:
  
  
   + SEP #$20                                                   ;81DE97|E220    |      ;
-    LDA.W $019A                                                ;81DE99|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81DE99|AD9A01  |00019A;
     CMP.B #$02                                                 ;81DE9C|C902    |      ;
     BNE +                                                      ;81DE9E|D003    |81DEA3;
     JMP.W .return                                              ;81DEA0|4C21E2  |81E221;
  
  
-  + LDA.W nSelectedDialogOption                                ;81DEA3|AD8F01  |00018F;
+  + LDA.W strcDialogDisplay.dialogOptionsAnswer                ;81DEA3|AD8F01  |00018F;
     CMP.B #$00                                                 ;81DEA6|C900    |      ;
     BEQ .cowCheck                                              ;81DEA8|F012    |81DEBC;
     CMP.B #$01                                                 ;81DEAA|C901    |      ;
@@ -11326,10 +11326,10 @@ fPlayerInteraction0x2E_AnimalNPC:
 .askBuyCow:
     SEP #$20                                                   ;81DED4|E220    |      ;
     LDA.B #$02                                                 ;81DED6|A902    |      ;
-    STA.W $019A                                                ;81DED8|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81DED8|8D9A01  |00019A;
     LDX.W #$0307                                               ;81DEDB|A20703  |      ;
     LDA.B #$00                                                 ;81DEDE|A900    |      ;
-    STA.W $0191                                                ;81DEE0|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81DEE0|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81DEE3|225F9383|83935F;
     SEP #$20                                                   ;81DEE7|E220    |      ;
     LDA.B #$02                                                 ;81DEE9|A902    |      ;
@@ -11339,10 +11339,10 @@ fPlayerInteraction0x2E_AnimalNPC:
  
  ++ SEP #$20                                                   ;81DEF1|E220    |      ;
     LDA.B #$02                                                 ;81DEF3|A902    |      ;
-    STA.W $019A                                                ;81DEF5|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81DEF5|8D9A01  |00019A;
     LDX.W #$03B6                                               ;81DEF8|A2B603  |      ;
     LDA.B #$00                                                 ;81DEFB|A900    |      ;
-    STA.W $0191                                                ;81DEFD|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81DEFD|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81DF00|225F9383|83935F;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     JMP.W .return                                              ;81DF10|4C21E2  |81E221;
@@ -11361,10 +11361,10 @@ fPlayerInteraction0x2E_AnimalNPC:
  
   + SEP #$20                                                   ;81DF2B|E220    |      ;
     LDA.B #$02                                                 ;81DF2D|A902    |      ;
-    STA.W $019A                                                ;81DF2F|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81DF2F|8D9A01  |00019A;
     LDX.W #$030A                                               ;81DF32|A20A03  |      ;
     LDA.B #$00                                                 ;81DF35|A900    |      ;
-    STA.W $0191                                                ;81DF37|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81DF37|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81DF3A|225F9383|83935F;
     SEP #$20                                                   ;81DF3E|E220    |      ;
     LDA.B #$03                                                 ;81DF40|A903    |      ;
@@ -11374,10 +11374,10 @@ fPlayerInteraction0x2E_AnimalNPC:
  
  ++ SEP #$20                                                   ;81DF48|E220    |      ;
     LDA.B #$02                                                 ;81DF4A|A902    |      ;
-    STA.W $019A                                                ;81DF4C|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81DF4C|8D9A01  |00019A;
     LDX.W #$03B6                                               ;81DF4F|A2B603  |      ;
     LDA.B #$00                                                 ;81DF52|A900    |      ;
-    STA.W $0191                                                ;81DF54|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81DF54|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81DF57|225F9383|83935F;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     JMP.W .return                                              ;81DF67|4C21E2  |81E221;
@@ -11386,10 +11386,10 @@ fPlayerInteraction0x2E_AnimalNPC:
 .label02:
     SEP #$20                                                   ;81DF6A|E220    |      ;
     LDA.B #$02                                                 ;81DF6C|A902    |      ;
-    STA.W $019A                                                ;81DF6E|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81DF6E|8D9A01  |00019A;
     LDX.W #$030B                                               ;81DF71|A20B03  |      ;
     LDA.B #$00                                                 ;81DF74|A900    |      ;
-    STA.W $0191                                                ;81DF76|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81DF76|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81DF79|225F9383|83935F;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     REP #$20                                                   ;81DF89|C220    |      ;
@@ -11400,10 +11400,10 @@ fPlayerInteraction0x2E_AnimalNPC:
 .label04:
     SEP #$20                                                   ;81DF99|E220    |      ;
     LDA.B #$02                                                 ;81DF9B|A902    |      ;
-    STA.W $019A                                                ;81DF9D|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81DF9D|8D9A01  |00019A;
     LDX.W #$030B                                               ;81DFA0|A20B03  |      ;
     LDA.B #$00                                                 ;81DFA3|A900    |      ;
-    STA.W $0191                                                ;81DFA5|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81DFA5|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81DFA8|225F9383|83935F;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     REP #$20                                                   ;81DFB8|C220    |      ;
@@ -11413,13 +11413,13 @@ fPlayerInteraction0x2E_AnimalNPC:
  
 .case2:
     SEP #$20                                                   ;81DFC8|E220    |      ;
-    LDA.W $019A                                                ;81DFCA|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81DFCA|AD9A01  |00019A;
     CMP.B #$02                                                 ;81DFCD|C902    |      ;
     BNE +                                                      ;81DFCF|D003    |81DFD4;
     JMP.W .return                                              ;81DFD1|4C21E2  |81E221;
  
  
-  + LDA.W nSelectedDialogOption                                ;81DFD4|AD8F01  |00018F;
+  + LDA.W strcDialogDisplay.dialogOptionsAnswer                ;81DFD4|AD8F01  |00018F;
     BEQ +                                                      ;81DFD7|F003    |81DFDC;
     JMP.W .label23                                             ;81DFD9|4CCDE0  |81E0CD;
  
@@ -11453,10 +11453,10 @@ fPlayerInteraction0x2E_AnimalNPC:
     BCS .label21                                               ;81E00A|B044    |81E050;
     SEP #$20                                                   ;81E00C|E220    |      ;
     LDA.B #$02                                                 ;81E00E|A902    |      ;
-    STA.W $019A                                                ;81E010|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81E010|8D9A01  |00019A;
     LDX.W #$0306                                               ;81E013|A20603  |      ;
     LDA.B #$00                                                 ;81E016|A900    |      ;
-    STA.W $0191                                                ;81E018|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81E018|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81E01B|225F9383|83935F;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     JMP.W .return                                              ;81E02B|4C21E2  |81E221;
@@ -11465,10 +11465,10 @@ fPlayerInteraction0x2E_AnimalNPC:
 .haveMaxCows:
     SEP #$20                                                   ;81E02E|E220    |      ;
     LDA.B #$02                                                 ;81E030|A902    |      ;
-    STA.W $019A                                                ;81E032|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81E032|8D9A01  |00019A;
     LDX.W #$03B7                                               ;81E035|A2B703  |      ;
     LDA.B #$00                                                 ;81E038|A900    |      ;
-    STA.W $0191                                                ;81E03A|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81E03A|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81E03D|225F9383|83935F;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     JMP.W .return                                              ;81E04D|4C21E2  |81E221;
@@ -11487,10 +11487,10 @@ fPlayerInteraction0x2E_AnimalNPC:
     BEQ +                                                      ;81E066|F022    |81E08A;
     SEP #$20                                                   ;81E068|E220    |      ;
     LDA.B #$02                                                 ;81E06A|A902    |      ;
-    STA.W $019A                                                ;81E06C|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81E06C|8D9A01  |00019A;
     LDX.W #$0304                                               ;81E06F|A20403  |      ;
     LDA.B #$00                                                 ;81E072|A900    |      ;
-    STA.W $0191                                                ;81E074|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81E074|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81E077|225F9383|83935F;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     JMP.W .return                                              ;81E087|4C21E2  |81E221;
@@ -11498,10 +11498,10 @@ fPlayerInteraction0x2E_AnimalNPC:
  
   + SEP #$20                                                   ;81E08A|E220    |      ;
     LDA.B #$02                                                 ;81E08C|A902    |      ;
-    STA.W $019A                                                ;81E08E|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81E08E|8D9A01  |00019A;
     LDX.W #$0308                                               ;81E091|A20803  |      ;
     LDA.B #$00                                                 ;81E094|A900    |      ;
-    STA.W $0191                                                ;81E096|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81E096|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81E099|225F9383|83935F;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     REP #$20                                                   ;81E0A9|C220    |      ;
@@ -11519,10 +11519,10 @@ fPlayerInteraction0x2E_AnimalNPC:
 .label23:
     SEP #$20                                                   ;81E0CD|E220    |      ;
     LDA.B #$02                                                 ;81E0CF|A902    |      ;
-    STA.W $019A                                                ;81E0D1|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81E0D1|8D9A01  |00019A;
     LDX.W #$0303                                               ;81E0D4|A20303  |      ;
     LDA.B #$00                                                 ;81E0D7|A900    |      ;
-    STA.W $0191                                                ;81E0D9|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81E0D9|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81E0DC|225F9383|83935F;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     JMP.W .return                                              ;81E0EC|4C21E2  |81E221;
@@ -11530,13 +11530,13 @@ fPlayerInteraction0x2E_AnimalNPC:
  
 .case3:
     SEP #$20                                                   ;81E0EF|E220    |      ;
-    LDA.W $019A                                                ;81E0F1|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81E0F1|AD9A01  |00019A;
     CMP.B #$02                                                 ;81E0F4|C902    |      ;
     BNE +                                                      ;81E0F6|D003    |81E0FB;
     JMP.W .return                                              ;81E0F8|4C21E2  |81E221;
  
  
-  + LDA.W nSelectedDialogOption                                ;81E0FB|AD8F01  |00018F;
+  + LDA.W strcDialogDisplay.dialogOptionsAnswer                ;81E0FB|AD8F01  |00018F;
     BEQ +                                                      ;81E0FE|F003    |81E103;
     JMP.W .label31                                             ;81E100|4C00E2  |81E200;
  
@@ -11573,10 +11573,10 @@ fPlayerInteraction0x2E_AnimalNPC:
  
   + SEP #$20                                                   ;81E136|E220    |      ;
     LDA.B #$02                                                 ;81E138|A902    |      ;
-    STA.W $019A                                                ;81E13A|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81E13A|8D9A01  |00019A;
     LDX.W #$0306                                               ;81E13D|A20603  |      ;
     LDA.B #$00                                                 ;81E140|A900    |      ;
-    STA.W $0191                                                ;81E142|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81E142|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81E145|225F9383|83935F;
     REP #$20                                                   ;81E149|C220    |      ;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
@@ -11586,10 +11586,10 @@ fPlayerInteraction0x2E_AnimalNPC:
 .haveMaxChickens:
     SEP #$20                                                   ;81E15A|E220    |      ;
     LDA.B #$02                                                 ;81E15C|A902    |      ;
-    STA.W $019A                                                ;81E15E|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81E15E|8D9A01  |00019A;
     LDX.W #$03B7                                               ;81E161|A2B703  |      ;
     LDA.B #$00                                                 ;81E164|A900    |      ;
-    STA.W $0191                                                ;81E166|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81E166|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81E169|225F9383|83935F;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     JMP.W .return                                              ;81E179|4C21E2  |81E221;
@@ -11608,10 +11608,10 @@ fPlayerInteraction0x2E_AnimalNPC:
     BEQ +                                                      ;81E192|F021    |81E1B5;
     SEP #$20                                                   ;81E194|E220    |      ;
     LDA.B #$02                                                 ;81E196|A902    |      ;
-    STA.W $019A                                                ;81E198|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81E198|8D9A01  |00019A;
     LDX.W #$0304                                               ;81E19B|A20403  |      ;
     LDA.B #$00                                                 ;81E19E|A900    |      ;
-    STA.W $0191                                                ;81E1A0|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81E1A0|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81E1A3|225F9383|83935F;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     BRA .return                                                ;81E1B3|806C    |81E221;
@@ -11619,10 +11619,10 @@ fPlayerInteraction0x2E_AnimalNPC:
  
   + SEP #$20                                                   ;81E1B5|E220    |      ;
     LDA.B #$02                                                 ;81E1B7|A902    |      ;
-    STA.W $019A                                                ;81E1B9|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81E1B9|8D9A01  |00019A;
     LDX.W #$0311                                               ;81E1BC|A21103  |      ;
     LDA.B #$00                                                 ;81E1BF|A900    |      ;
-    STA.W $0191                                                ;81E1C1|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81E1C1|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81E1C4|225F9383|83935F;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     REP #$20                                                   ;81E1D4|C220    |      ;
@@ -11643,10 +11643,10 @@ fPlayerInteraction0x2E_AnimalNPC:
 .label31:
     SEP #$20                                                   ;81E200|E220    |      ;
     LDA.B #$02                                                 ;81E202|A902    |      ;
-    STA.W $019A                                                ;81E204|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81E204|8D9A01  |00019A;
     LDX.W #$0303                                               ;81E207|A20303  |      ;
     LDA.B #$00                                                 ;81E20A|A900    |      ;
-    STA.W $0191                                                ;81E20C|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81E20C|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81E20F|225F9383|83935F;
  
 .break:
@@ -11662,7 +11662,7 @@ fPlayerInteraction0x2E_AnimalNPC:
     JSL.L fDialog_Unknown_8393F9                               ;81E222|22F99383|8393F9;
     SEP #$20                                                   ;81E226|E220    |      ;
     LDA.B #$01                                                 ;81E228|A901    |      ;
-    STA.W $019A                                                ;81E22A|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81E22A|8D9A01  |00019A;
     REP #$20                                                   ;81E22D|C220    |      ;
     LDA.W strcJoypad1.newInput                                 ;81E22F|AD2801  |000128;
     AND.W #$FF7F                                               ;81E232|297FFF  |      ;
@@ -11707,10 +11707,10 @@ fPlayerInteraction0x33_EllenDiary:
     BEQ +                                                      ;81E2E2|F01B    |81E2FF;
     SEP #$20                                                   ;81E2E4|E220    |      ;
     LDA.B #$02                                                 ;81E2E6|A902    |      ;
-    STA.W $019A                                                ;81E2E8|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81E2E8|8D9A01  |00019A;
     LDX.W #$0023                                               ;81E2EB|A22300  |      ;
     LDA.B #$00                                                 ;81E2EE|A900    |      ;
-    STA.W $0191                                                ;81E2F0|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81E2F0|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81E2F3|225F9383|83935F;
     SEP #$20                                                   ;81E2F7|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81E2F9|EE6F09  |00096F;
@@ -11718,13 +11718,13 @@ fPlayerInteraction0x33_EllenDiary:
  
  
   + SEP #$20                                                   ;81E2FF|E220    |      ;
-    LDA.W $019A                                                ;81E301|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81E301|AD9A01  |00019A;
     CMP.B #$02                                                 ;81E304|C902    |      ;
     BNE +                                                      ;81E306|D003    |81E30B;
     JMP.W .justReturn                                          ;81E308|4C48E3  |81E348;
  
  
-  + LDA.W nSelectedDialogOption                                ;81E30B|AD8F01  |00018F;
+  + LDA.W strcDialogDisplay.dialogOptionsAnswer                ;81E30B|AD8F01  |00018F;
     BEQ +                                                      ;81E30E|F003    |81E313;
     JMP.W .return                                              ;81E310|4C3CE3  |81E33C;
  
@@ -11738,9 +11738,9 @@ fPlayerInteraction0x33_EllenDiary:
     TAX                                                        ;81E322|AA      |      ;
     SEP #$20                                                   ;81E323|E220    |      ;
     LDA.B #$02                                                 ;81E325|A902    |      ;
-    STA.W $019A                                                ;81E327|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81E327|8D9A01  |00019A;
     LDA.B #$00                                                 ;81E32A|A900    |      ;
-    STA.W $0191                                                ;81E32C|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81E32C|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81E32F|225F9383|83935F;
     REP #$20                                                   ;81E333|C220    |      ;
     LDA.W #$FFFF                                               ;81E335|A9FFFF  |      ;
@@ -11782,10 +11782,10 @@ fPlayerInteraction0x36_AnnDiary:
     BEQ +                                                      ;81E39D|F01B    |81E3BA;
     SEP #$20                                                   ;81E39F|E220    |      ;
     LDA.B #$02                                                 ;81E3A1|A902    |      ;
-    STA.W $019A                                                ;81E3A3|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81E3A3|8D9A01  |00019A;
     LDX.W #$0023                                               ;81E3A6|A22300  |      ;
     LDA.B #$00                                                 ;81E3A9|A900    |      ;
-    STA.W $0191                                                ;81E3AB|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81E3AB|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81E3AE|225F9383|83935F;
     SEP #$20                                                   ;81E3B2|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81E3B4|EE6F09  |00096F;
@@ -11793,13 +11793,13 @@ fPlayerInteraction0x36_AnnDiary:
  
  
   + SEP #$20                                                   ;81E3BA|E220    |      ;
-    LDA.W $019A                                                ;81E3BC|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81E3BC|AD9A01  |00019A;
     CMP.B #$02                                                 ;81E3BF|C902    |      ;
     BNE +                                                      ;81E3C1|D003    |81E3C6;
     JMP.W .return                                              ;81E3C3|4C03E4  |81E403;
  
  
-  + LDA.W nSelectedDialogOption                                ;81E3C6|AD8F01  |00018F;
+  + LDA.W strcDialogDisplay.dialogOptionsAnswer                ;81E3C6|AD8F01  |00018F;
     BEQ +                                                      ;81E3C9|F003    |81E3CE;
     JMP.W .exit                                                ;81E3CB|4CF7E3  |81E3F7;
  
@@ -11813,9 +11813,9 @@ fPlayerInteraction0x36_AnnDiary:
     TAX                                                        ;81E3DD|AA      |      ;
     SEP #$20                                                   ;81E3DE|E220    |      ;
     LDA.B #$02                                                 ;81E3E0|A902    |      ;
-    STA.W $019A                                                ;81E3E2|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81E3E2|8D9A01  |00019A;
     LDA.B #$00                                                 ;81E3E5|A900    |      ;
-    STA.W $0191                                                ;81E3E7|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81E3E7|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81E3EA|225F9383|83935F;
     REP #$20                                                   ;81E3EE|C220    |      ;
     LDA.W #$FFFF                                               ;81E3F0|A9FFFF  |      ;
@@ -11892,10 +11892,10 @@ fPlayerInteraction0x3F_EveDiary:
     BEQ +                                                      ;81E535|F01B    |81E552;
     SEP #$20                                                   ;81E537|E220    |      ;
     LDA.B #$02                                                 ;81E539|A902    |      ;
-    STA.W $019A                                                ;81E53B|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81E53B|8D9A01  |00019A;
     LDX.W #$0023                                               ;81E53E|A22300  |      ;
     LDA.B #$00                                                 ;81E541|A900    |      ;
-    STA.W $0191                                                ;81E543|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81E543|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81E546|225F9383|83935F;
     SEP #$20                                                   ;81E54A|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81E54C|EE6F09  |00096F;
@@ -11903,13 +11903,13 @@ fPlayerInteraction0x3F_EveDiary:
  
  
   + SEP #$20                                                   ;81E552|E220    |      ;
-    LDA.W $019A                                                ;81E554|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81E554|AD9A01  |00019A;
     CMP.B #$02                                                 ;81E557|C902    |      ;
     BNE +                                                      ;81E559|D003    |81E55E;
     JMP.W .return                                              ;81E55B|4C9BE5  |81E59B;
  
  
-  + LDA.W nSelectedDialogOption                                ;81E55E|AD8F01  |00018F;
+  + LDA.W strcDialogDisplay.dialogOptionsAnswer                ;81E55E|AD8F01  |00018F;
     BEQ +                                                      ;81E561|F003    |81E566;
     JMP.W .exit                                                ;81E563|4C8FE5  |81E58F;
  
@@ -11923,9 +11923,9 @@ fPlayerInteraction0x3F_EveDiary:
     TAX                                                        ;81E575|AA      |      ;
     SEP #$20                                                   ;81E576|E220    |      ;
     LDA.B #$02                                                 ;81E578|A902    |      ;
-    STA.W $019A                                                ;81E57A|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81E57A|8D9A01  |00019A;
     LDA.B #$00                                                 ;81E57D|A900    |      ;
-    STA.W $0191                                                ;81E57F|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81E57F|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81E582|225F9383|83935F;
     REP #$20                                                   ;81E586|C220    |      ;
     LDA.W #$FFFF                                               ;81E588|A9FFFF  |      ;
@@ -11946,10 +11946,10 @@ fPlayerInteraction0x40_LessonsOfLove:
     BEQ .check                                                 ;81E5A5|F01B    |81E5C2;
     SEP #$20                                                   ;81E5A7|E220    |      ;
     LDA.B #$02                                                 ;81E5A9|A902    |      ;
-    STA.W $019A                                                ;81E5AB|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81E5AB|8D9A01  |00019A;
     LDX.W #$045F                                               ;81E5AE|A25F04  |      ;
     LDA.B #$00                                                 ;81E5B1|A900    |      ;
-    STA.W $0191                                                ;81E5B3|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81E5B3|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81E5B6|225F9383|83935F;
     SEP #$20                                                   ;81E5BA|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81E5BC|EE6F09  |00096F;
@@ -11965,13 +11965,13 @@ fPlayerInteraction0x40_LessonsOfLove:
  
  
   + SEP #$20                                                   ;81E5CF|E220    |      ;
-    LDA.W $019A                                                ;81E5D1|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81E5D1|AD9A01  |00019A;
     CMP.B #$02                                                 ;81E5D4|C902    |      ;
     BNE +                                                      ;81E5D6|D003    |81E5DB;
     JMP.W .justReturn                                          ;81E5D8|4C9FE6  |81E69F;
  
  
-  + LDA.W nSelectedDialogOption                                ;81E5DB|AD8F01  |00018F;
+  + LDA.W strcDialogDisplay.dialogOptionsAnswer                ;81E5DB|AD8F01  |00018F;
     CMP.B #$00                                                 ;81E5DE|C900    |      ;
     BEQ .present                                               ;81E5E0|F013    |81E5F5;
     CMP.B #$01                                                 ;81E5E2|C901    |      ;
@@ -11988,10 +11988,10 @@ fPlayerInteraction0x40_LessonsOfLove:
 .present:
     SEP #$20                                                   ;81E5F5|E220    |      ;
     LDA.B #$02                                                 ;81E5F7|A902    |      ;
-    STA.W $019A                                                ;81E5F9|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81E5F9|8D9A01  |00019A;
     LDX.W #$0460                                               ;81E5FC|A26004  |      ;
     LDA.B #$00                                                 ;81E5FF|A900    |      ;
-    STA.W $0191                                                ;81E601|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81E601|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81E604|225F9383|83935F;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     JMP.W .justReturn                                          ;81E614|4C9FE6  |81E69F;
@@ -12000,10 +12000,10 @@ fPlayerInteraction0x40_LessonsOfLove:
 .festival:
     SEP #$20                                                   ;81E617|E220    |      ;
     LDA.B #$02                                                 ;81E619|A902    |      ;
-    STA.W $019A                                                ;81E61B|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81E61B|8D9A01  |00019A;
     LDX.W #$0462                                               ;81E61E|A26204  |      ;
     LDA.B #$00                                                 ;81E621|A900    |      ;
-    STA.W $0191                                                ;81E623|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81E623|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81E626|225F9383|83935F;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     JMP.W .justReturn                                          ;81E636|4C9FE6  |81E69F;
@@ -12012,10 +12012,10 @@ fPlayerInteraction0x40_LessonsOfLove:
 .marriage:
     SEP #$20                                                   ;81E639|E220    |      ;
     LDA.B #$02                                                 ;81E63B|A902    |      ;
-    STA.W $019A                                                ;81E63D|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81E63D|8D9A01  |00019A;
     LDX.W #$0464                                               ;81E640|A26404  |      ;
     LDA.B #$00                                                 ;81E643|A900    |      ;
-    STA.W $0191                                                ;81E645|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81E645|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81E648|225F9383|83935F;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     JMP.W .justReturn                                          ;81E658|4C9FE6  |81E69F;
@@ -12024,10 +12024,10 @@ fPlayerInteraction0x40_LessonsOfLove:
 .conversation:
     SEP #$20                                                   ;81E65B|E220    |      ;
     LDA.B #$02                                                 ;81E65D|A902    |      ;
-    STA.W $019A                                                ;81E65F|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81E65F|8D9A01  |00019A;
     LDX.W #$0461                                               ;81E662|A26104  |      ;
     LDA.B #$00                                                 ;81E665|A900    |      ;
-    STA.W $0191                                                ;81E667|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81E667|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81E66A|225F9383|83935F;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     JMP.W .justReturn                                          ;81E67A|4C9FE6  |81E69F;
@@ -12036,10 +12036,10 @@ fPlayerInteraction0x40_LessonsOfLove:
 .diary:
     SEP #$20                                                   ;81E67D|E220    |      ;
     LDA.B #$02                                                 ;81E67F|A902    |      ;
-    STA.W $019A                                                ;81E681|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81E681|8D9A01  |00019A;
     LDX.W #$0463                                               ;81E684|A26304  |      ;
     LDA.B #$00                                                 ;81E687|A900    |      ;
-    STA.W $0191                                                ;81E689|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81E689|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81E68C|225F9383|83935F;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     JMP.W .justReturn                                          ;81E69C|4C9FE6  |81E69F;
@@ -12053,7 +12053,7 @@ fPlayerInteraction0x40_LessonsOfLove:
     JSL.L fDialog_Unknown_8393F9                               ;81E6A0|22F99383|8393F9;
     SEP #$20                                                   ;81E6A4|E220    |      ;
     LDA.B #$01                                                 ;81E6A6|A901    |      ;
-    STA.W $019A                                                ;81E6A8|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81E6A8|8D9A01  |00019A;
     REP #$20                                                   ;81E6AB|C220    |      ;
     LDA.W strcJoypad1.newInput                                 ;81E6AD|AD2801  |000128;
     AND.W #~!JOYPAD_A                                               
@@ -12112,9 +12112,9 @@ fPlayerInteraction0x42:
  
   + SEP #$20                                                   ;81E749|E220    |      ;
     LDA.B #$02                                                 ;81E74B|A902    |      ;
-    STA.W $019A                                                ;81E74D|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81E74D|8D9A01  |00019A;
     LDA.B #$00                                                 ;81E750|A900    |      ;
-    STA.W $0191                                                ;81E752|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81E752|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81E755|225F9383|83935F;
     SEP #$20                                                   ;81E759|E220    |      ;
     LDA.B #$02                                                 ;81E75B|A902    |      ;
@@ -12124,7 +12124,7 @@ fPlayerInteraction0x42:
  
 .case2:
     SEP #$20                                                   ;81E762|E220    |      ;
-    LDA.W $019A                                                ;81E764|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81E764|AD9A01  |00019A;
     CMP.B #$02                                                 ;81E767|C902    |      ;
     BNE +                                                      ;81E769|D003    |81E76E;
     JMP.W .return                                              ;81E76B|4C9DE7  |81E79D;
@@ -12139,9 +12139,9 @@ fPlayerInteraction0x42:
     ORA.B #$04                                                 ;81E77E|0904    |      ;
     STA.L strcShedItems.row2                                   ;81E780|8F011F7F|7F1F01;
     REP #$20                                                   ;81E784|C220    |      ;
-    LDA.W nMapEngine_flags                                     ;81E786|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;81E786|AD9601  |000196;
     ORA.W #$2000                                               ;81E789|090020  |      ;
-    STA.W nMapEngine_flags                                     ;81E78C|8D9601  |000196;
+    STA.W strcDialogDisplay.mapFlags                           ;81E78C|8D9601  |000196;
     BRA .return                                                ;81E78F|800C    |81E79D;
  
  
@@ -12267,7 +12267,7 @@ fPlayerInteraction0x43:
     BNE .label17                                               ;81E87E|D071    |81E8F1;
     SEP #$20                                                   ;81E880|E220    |      ;
     LDA.B #$02                                                 ;81E882|A902    |      ;
-    STA.W $019A                                                ;81E884|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81E884|8D9A01  |00019A;
     SEP #$20                                                   ;81E887|E220    |      ;
     LDA.B #$00                                                 ;81E889|A900    |      ;
     XBA                                                        ;81E88B|EB      |      ;
@@ -12287,7 +12287,7 @@ fPlayerInteraction0x43:
     LDX.W #$030E                                               ;81E8A9|A20E03  |      ;
     SEP #$20                                                   ;81E8AC|E220    |      ;
     LDA.B #$00                                                 ;81E8AE|A900    |      ;
-    STA.W $0191                                                ;81E8B0|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81E8B0|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81E8B3|225F9383|83935F;
     SEP #$20                                                   ;81E8B7|E220    |      ;
     LDA.B #$02                                                 ;81E8B9|A902    |      ;
@@ -12299,7 +12299,7 @@ fPlayerInteraction0x43:
     LDX.W #$0310                                               ;81E8C1|A21003  |      ; TEXT_B9C65A
     SEP #$20                                                   ;81E8C4|E220    |      ;
     LDA.B #$00                                                 ;81E8C6|A900    |      ;
-    STA.W $0191                                                ;81E8C8|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81E8C8|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81E8CB|225F9383|83935F;
     SEP #$20                                                   ;81E8CF|E220    |      ;
     LDA.B #$05                                                 ;81E8D1|A905    |      ;
@@ -12311,7 +12311,7 @@ fPlayerInteraction0x43:
     LDX.W #$030D                                               ;81E8D9|A20D03  |      ; TEXT_B9C3EA
     SEP #$20                                                   ;81E8DC|E220    |      ;
     LDA.B #$00                                                 ;81E8DE|A900    |      ;
-    STA.W $0191                                                ;81E8E0|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81E8E0|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81E8E3|225F9383|83935F;
     SEP #$20                                                   ;81E8E7|E220    |      ;
     LDA.B #$05                                                 ;81E8E9|A905    |      ;
@@ -12324,9 +12324,9 @@ fPlayerInteraction0x43:
     LDX.W #$0487                                               ;81E8F3|A28704  |      ;
     SEP #$20                                                   ;81E8F6|E220    |      ;
     LDA.B #$02                                                 ;81E8F8|A902    |      ;
-    STA.W $019A                                                ;81E8FA|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81E8FA|8D9A01  |00019A;
     LDA.B #$00                                                 ;81E8FD|A900    |      ;
-    STA.W $0191                                                ;81E8FF|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81E8FF|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81E902|225F9383|83935F;
     SEP #$20                                                   ;81E906|E220    |      ;
     LDA.B #$05                                                 ;81E908|A905    |      ;
@@ -12336,21 +12336,21 @@ fPlayerInteraction0x43:
  
 .case2:
     SEP #$20                                                   ;81E910|E220    |      ;
-    LDA.W $019A                                                ;81E912|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81E912|AD9A01  |00019A;
     CMP.B #$02                                                 ;81E915|C902    |      ;
     BNE +                                                      ;81E917|D003    |81E91C;
     JMP.W .return                                              ;81E919|4CD4EB  |81EBD4;
  
  
   + SEP #$20                                                   ;81E91C|E220    |      ;
-    LDA.W nSelectedDialogOption                                ;81E91E|AD8F01  |00018F;
+    LDA.W strcDialogDisplay.dialogOptionsAnswer                ;81E91E|AD8F01  |00018F;
     BNE +                                                      ;81E921|D01D    |81E940;
     SEP #$20                                                   ;81E923|E220    |      ;
     LDA.B #$02                                                 ;81E925|A902    |      ;
-    STA.W $019A                                                ;81E927|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81E927|8D9A01  |00019A;
     LDX.W #$030F                                               ;81E92A|A20F03  |      ;
     LDA.B #$00                                                 ;81E92D|A900    |      ;
-    STA.W $0191                                                ;81E92F|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81E92F|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81E932|225F9383|83935F;
     SEP #$20                                                   ;81E936|E220    |      ;
     LDA.B #$03                                                 ;81E938|A903    |      ;
@@ -12360,10 +12360,10 @@ fPlayerInteraction0x43:
  
   + SEP #$20                                                   ;81E940|E220    |      ;
     LDA.B #$02                                                 ;81E942|A902    |      ;
-    STA.W $019A                                                ;81E944|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81E944|8D9A01  |00019A;
     LDX.W #$0309                                               ;81E947|A20903  |      ;
     LDA.B #$00                                                 ;81E94A|A900    |      ;
-    STA.W $0191                                                ;81E94C|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81E94C|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81E94F|225F9383|83935F;
     SEP #$20                                                   ;81E953|E220    |      ;
     LDA.B #$05                                                 ;81E955|A905    |      ;
@@ -12373,7 +12373,7 @@ fPlayerInteraction0x43:
  
 .case3:
     SEP #$20                                                   ;81E95D|E220    |      ;
-    LDA.W $019A                                                ;81E95F|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81E95F|AD9A01  |00019A;
     CMP.B #$02                                                 ;81E962|C902    |      ;
     BNE +                                                      ;81E964|D003    |81E969;
     JMP.W .return                                              ;81E966|4CD4EB  |81EBD4;
@@ -12446,7 +12446,7 @@ fPlayerInteraction0x43:
  
 .case5:
     SEP #$20                                                   ;81EA11|E220    |      ;
-    LDA.W $019A                                                ;81EA13|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81EA13|AD9A01  |00019A;
     CMP.B #$02                                                 ;81EA16|C902    |      ;
     BNE +                                                      ;81EA18|D003    |81EA1D;
     JMP.W .return                                              ;81EA1A|4CD4EB  |81EBD4;
@@ -12509,9 +12509,9 @@ fPlayerInteraction0x43:
   + LDX.W #$0149                                               ;81EA9D|A24901  |      ;
     SEP #$20                                                   ;81EAA0|E220    |      ;
     LDA.B #$02                                                 ;81EAA2|A902    |      ;
-    STA.W $019A                                                ;81EAA4|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81EAA4|8D9A01  |00019A;
     LDA.B #$00                                                 ;81EAA7|A900    |      ;
-    STA.W $0191                                                ;81EAA9|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81EAA9|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81EAAC|225F9383|83935F;
     SEP #$20                                                   ;81EAB0|E220    |      ;
     LDA.B #$08                                                 ;81EAB2|A908    |      ;
@@ -12521,21 +12521,21 @@ fPlayerInteraction0x43:
  
 .case8:
     SEP #$20                                                   ;81EABA|E220    |      ;
-    LDA.W $019A                                                ;81EABC|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81EABC|AD9A01  |00019A;
     CMP.B #$02                                                 ;81EABF|C902    |      ;
     BNE +                                                      ;81EAC1|D003    |81EAC6;
     JMP.W .return                                              ;81EAC3|4CD4EB  |81EBD4;
  
  
   + SEP #$20                                                   ;81EAC6|E220    |      ;
-    LDA.W nSelectedDialogOption                                ;81EAC8|AD8F01  |00018F;
+    LDA.W strcDialogDisplay.dialogOptionsAnswer                ;81EAC8|AD8F01  |00018F;
     BNE +                                                      ;81EACB|D01D    |81EAEA;
     SEP #$20                                                   ;81EACD|E220    |      ;
     LDA.B #$02                                                 ;81EACF|A902    |      ;
-    STA.W $019A                                                ;81EAD1|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81EAD1|8D9A01  |00019A;
     LDX.W #$014B                                               ;81EAD4|A24B01  |      ;
     LDA.B #$00                                                 ;81EAD7|A900    |      ;
-    STA.W $0191                                                ;81EAD9|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81EAD9|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81EADC|225F9383|83935F;
     SEP #$20                                                   ;81EAE0|E220    |      ;
     LDA.B #$09                                                 ;81EAE2|A909    |      ;
@@ -12545,10 +12545,10 @@ fPlayerInteraction0x43:
  
   + SEP #$20                                                   ;81EAEA|E220    |      ;
     LDA.B #$02                                                 ;81EAEC|A902    |      ;
-    STA.W $019A                                                ;81EAEE|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81EAEE|8D9A01  |00019A;
     LDX.W #$014C                                               ;81EAF1|A24C01  |      ;
     LDA.B #$00                                                 ;81EAF4|A900    |      ;
-    STA.W $0191                                                ;81EAF6|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81EAF6|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81EAF9|225F9383|83935F;
     SEP #$20                                                   ;81EAFD|E220    |      ;
     LDA.B #$0A                                                 ;81EAFF|A90A    |      ;
@@ -12558,7 +12558,7 @@ fPlayerInteraction0x43:
  
 .case9:
     SEP #$20                                                   ;81EB07|E220    |      ;
-    LDA.W $019A                                                ;81EB09|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81EB09|AD9A01  |00019A;
     CMP.B #$02                                                 ;81EB0C|C902    |      ;
     BNE +                                                      ;81EB0E|D003    |81EB13;
     JMP.W .return                                              ;81EB10|4CD4EB  |81EBD4;
@@ -12609,7 +12609,7 @@ fPlayerInteraction0x43:
  
 .caseA:
     SEP #$20                                                   ;81EB8F|E220    |      ;
-    LDA.W $019A                                                ;81EB91|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81EB91|AD9A01  |00019A;
     CMP.B #$02                                                 ;81EB94|C902    |      ;
     BNE +                                                      ;81EB96|D003    |81EB9B;
     JMP.W .return                                              ;81EB98|4CD4EB  |81EBD4;
@@ -12745,9 +12745,9 @@ fPlayerInteraction0x44:
     LDX.W #$030E                                               ;81EC97|A20E03  |      ;
     SEP #$20                                                   ;81EC9A|E220    |      ;
     LDA.B #$02                                                 ;81EC9C|A902    |      ;
-    STA.W $019A                                                ;81EC9E|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81EC9E|8D9A01  |00019A;
     LDA.B #$00                                                 ;81ECA1|A900    |      ;
-    STA.W $0191                                                ;81ECA3|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81ECA3|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81ECA6|225F9383|83935F;
     SEP #$20                                                   ;81ECAA|E220    |      ;
     LDA.B #$02                                                 ;81ECAC|A902    |      ;
@@ -12759,9 +12759,9 @@ fPlayerInteraction0x44:
     LDX.W #$0487                                               ;81ECB6|A28704  |      ;
     SEP #$20                                                   ;81ECB9|E220    |      ;
     LDA.B #$02                                                 ;81ECBB|A902    |      ;
-    STA.W $019A                                                ;81ECBD|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81ECBD|8D9A01  |00019A;
     LDA.B #$00                                                 ;81ECC0|A900    |      ;
-    STA.W $0191                                                ;81ECC2|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81ECC2|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81ECC5|225F9383|83935F;
     SEP #$20                                                   ;81ECC9|E220    |      ;
     LDA.B #$05                                                 ;81ECCB|A905    |      ;
@@ -12771,21 +12771,21 @@ fPlayerInteraction0x44:
  
 .case2:
     SEP #$20                                                   ;81ECD3|E220    |      ;
-    LDA.W $019A                                                ;81ECD5|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81ECD5|AD9A01  |00019A;
     CMP.B #$02                                                 ;81ECD8|C902    |      ;
     BNE +                                                      ;81ECDA|D003    |81ECDF;
     JMP.W .return                                              ;81ECDC|4CACEF  |81EFAC;
  
  
   + SEP #$20                                                   ;81ECDF|E220    |      ;
-    LDA.W nSelectedDialogOption                                ;81ECE1|AD8F01  |00018F;
+    LDA.W strcDialogDisplay.dialogOptionsAnswer                ;81ECE1|AD8F01  |00018F;
     BNE +                                                      ;81ECE4|D01D    |81ED03;
     SEP #$20                                                   ;81ECE6|E220    |      ;
     LDA.B #$02                                                 ;81ECE8|A902    |      ;
-    STA.W $019A                                                ;81ECEA|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81ECEA|8D9A01  |00019A;
     LDX.W #$030F                                               ;81ECED|A20F03  |      ;
     LDA.B #$00                                                 ;81ECF0|A900    |      ;
-    STA.W $0191                                                ;81ECF2|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81ECF2|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81ECF5|225F9383|83935F;
     SEP #$20                                                   ;81ECF9|E220    |      ;
     LDA.B #$03                                                 ;81ECFB|A903    |      ;
@@ -12795,10 +12795,10 @@ fPlayerInteraction0x44:
  
   + SEP #$20                                                   ;81ED03|E220    |      ;
     LDA.B #$02                                                 ;81ED05|A902    |      ;
-    STA.W $019A                                                ;81ED07|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81ED07|8D9A01  |00019A;
     LDX.W #$0309                                               ;81ED0A|A20903  |      ;
     LDA.B #$00                                                 ;81ED0D|A900    |      ;
-    STA.W $0191                                                ;81ED0F|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81ED0F|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81ED12|225F9383|83935F;
     SEP #$20                                                   ;81ED16|E220    |      ;
     LDA.B #$05                                                 ;81ED18|A905    |      ;
@@ -12808,7 +12808,7 @@ fPlayerInteraction0x44:
  
 .case3:
     SEP #$20                                                   ;81ED20|E220    |      ;
-    LDA.W $019A                                                ;81ED22|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81ED22|AD9A01  |00019A;
     CMP.B #$02                                                 ;81ED25|C902    |      ;
     BNE +                                                      ;81ED27|D003    |81ED2C;
     JMP.W .return                                              ;81ED29|4CACEF  |81EFAC;
@@ -12881,7 +12881,7 @@ fPlayerInteraction0x44:
  
 .case5:
     SEP #$20                                                   ;81EDD4|E220    |      ;
-    LDA.W $019A                                                ;81EDD6|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81EDD6|AD9A01  |00019A;
     CMP.B #$02                                                 ;81EDD9|C902    |      ;
     BNE +                                                      ;81EDDB|D003    |81EDE0;
     JMP.W .return                                              ;81EDDD|4CACEF  |81EFAC;
@@ -12944,9 +12944,9 @@ fPlayerInteraction0x44:
   + LDX.W #$0148                                               ;81EE60|A24801  |      ;
     SEP #$20                                                   ;81EE63|E220    |      ;
     LDA.B #$02                                                 ;81EE65|A902    |      ;
-    STA.W $019A                                                ;81EE67|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81EE67|8D9A01  |00019A;
     LDA.B #$00                                                 ;81EE6A|A900    |      ;
-    STA.W $0191                                                ;81EE6C|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81EE6C|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81EE6F|225F9383|83935F;
     SEP #$20                                                   ;81EE73|E220    |      ;
     LDA.B #$08                                                 ;81EE75|A908    |      ;
@@ -12956,21 +12956,21 @@ fPlayerInteraction0x44:
  
 .case8:
     SEP #$20                                                   ;81EE7D|E220    |      ;
-    LDA.W $019A                                                ;81EE7F|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81EE7F|AD9A01  |00019A;
     CMP.B #$02                                                 ;81EE82|C902    |      ;
     BNE +                                                      ;81EE84|D003    |81EE89;
     JMP.W .return                                              ;81EE86|4CACEF  |81EFAC;
  
  
   + SEP #$20                                                   ;81EE89|E220    |      ;
-    LDA.W nSelectedDialogOption                                ;81EE8B|AD8F01  |00018F;
+    LDA.W strcDialogDisplay.dialogOptionsAnswer                ;81EE8B|AD8F01  |00018F;
     BNE +                                                      ;81EE8E|D01D    |81EEAD;
     SEP #$20                                                   ;81EE90|E220    |      ;
     LDA.B #$02                                                 ;81EE92|A902    |      ;
-    STA.W $019A                                                ;81EE94|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81EE94|8D9A01  |00019A;
     LDX.W #$014A                                               ;81EE97|A24A01  |      ;
     LDA.B #$00                                                 ;81EE9A|A900    |      ;
-    STA.W $0191                                                ;81EE9C|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81EE9C|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81EE9F|225F9383|83935F;
     SEP #$20                                                   ;81EEA3|E220    |      ;
     LDA.B #$09                                                 ;81EEA5|A909    |      ;
@@ -12980,10 +12980,10 @@ fPlayerInteraction0x44:
  
   + SEP #$20                                                   ;81EEAD|E220    |      ;
     LDA.B #$02                                                 ;81EEAF|A902    |      ;
-    STA.W $019A                                                ;81EEB1|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81EEB1|8D9A01  |00019A;
     LDX.W #$014C                                               ;81EEB4|A24C01  |      ;
     LDA.B #$00                                                 ;81EEB7|A900    |      ;
-    STA.W $0191                                                ;81EEB9|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81EEB9|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81EEBC|225F9383|83935F;
     SEP #$20                                                   ;81EEC0|E220    |      ;
     LDA.B #$0A                                                 ;81EEC2|A90A    |      ;
@@ -12993,7 +12993,7 @@ fPlayerInteraction0x44:
  
 .case9:
     SEP #$20                                                   ;81EECA|E220    |      ;
-    LDA.W $019A                                                ;81EECC|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81EECC|AD9A01  |00019A;
     CMP.B #$02                                                 ;81EECF|C902    |      ;
     BNE +                                                      ;81EED1|D003    |81EED6;
     JMP.W .return                                              ;81EED3|4CACEF  |81EFAC;
@@ -13052,7 +13052,7 @@ fPlayerInteraction0x44:
  
 .caseA:
     SEP #$20                                                   ;81EF67|E220    |      ;
-    LDA.W $019A                                                ;81EF69|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81EF69|AD9A01  |00019A;
     CMP.B #$02                                                 ;81EF6C|C902    |      ;
     BNE +                                                      ;81EF6E|D003    |81EF73;
     JMP.W .return                                              ;81EF70|4CACEF  |81EFAC;
@@ -13136,9 +13136,9 @@ fPlayerInteraction0x45:
     SEP #$20                                                   ;81F013|E220    |      ;
     LDX.W #$0317                                               ;81F015|A21703  |      ;
     LDA.B #$02                                                 ;81F018|A902    |      ;
-    STA.W $019A                                                ;81F01A|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81F01A|8D9A01  |00019A;
     LDA.B #$00                                                 ;81F01D|A900    |      ;
-    STA.W $0191                                                ;81F01F|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81F01F|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81F022|225F9383|83935F;
     SEP #$20                                                   ;81F026|E220    |      ;
     LDA.B #$03                                                 ;81F028|A903    |      ;
@@ -13148,7 +13148,7 @@ fPlayerInteraction0x45:
  
 .case3:
     SEP #$20                                                   ;81F02F|E220    |      ;
-    LDA.W $019A                                                ;81F031|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81F031|AD9A01  |00019A;
     CMP.B #$02                                                 ;81F034|C902    |      ;
     BNE +                                                      ;81F036|D003    |81F03B;
     JMP.W .return                                              ;81F038|4C60F0  |81F060;
@@ -13160,9 +13160,9 @@ fPlayerInteraction0x45:
     LDA.B #$02                                                 ;81F042|A902    |      ;
     STA.W strcMenuData.nameDestinationIdx                      ;81F044|8D9F09  |00099F;
     REP #$20                                                   ;81F047|C220    |      ;
-    LDA.W nMapEngine_flags                                     ;81F049|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;81F049|AD9601  |000196;
     ORA.W #$2000                                               ;81F04C|090020  |      ;
-    STA.W nMapEngine_flags                                     ;81F04F|8D9601  |000196;
+    STA.W strcDialogDisplay.mapFlags                           ;81F04F|8D9601  |000196;
     BRA .return                                                ;81F052|800C    |81F060;
  
  
@@ -13208,7 +13208,7 @@ fPlayerInteraction0x46:
  
   + SEP #$20                                                   ;81F0A2|E220    |      ;
     LDA.B #$02                                                 ;81F0A4|A902    |      ;
-    STA.W $019A                                                ;81F0A6|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81F0A6|8D9A01  |00019A;
     LDX.W #$031A                                               ;81F0A9|A21A03  |      ;
     REP #$20                                                   ;81F0AC|C220    |      ;
     LDA.L nShippingProfit                                      ;81F0AE|AF071F7F|7F1F07;
@@ -13219,7 +13219,7 @@ fPlayerInteraction0x46:
     LDX.W #$031B                                               ;81F0BC|A21B03  |      ;
  
   + LDA.B #$00                                                 ;81F0BF|A900    |      ;
-    STA.W $0191                                                ;81F0C1|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81F0C1|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81F0C4|225F9383|83935F;
     SEP #$20                                                   ;81F0C8|E220    |      ;
     LDA.B #$02                                                 ;81F0CA|A902    |      ;
@@ -13229,7 +13229,7 @@ fPlayerInteraction0x46:
  
 .case2:
     SEP #$20                                                   ;81F0D2|E220    |      ;
-    LDA.W $019A                                                ;81F0D4|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81F0D4|AD9A01  |00019A;
     CMP.B #$02                                                 ;81F0D7|C902    |      ;
     BNE +                                                      ;81F0D9|D003    |81F0DE;
     JMP.W .return                                              ;81F0DB|4C20F1  |81F120;
@@ -13326,9 +13326,9 @@ fPlayerInteraction0x47:
 .notEnoughWood:
     SEP #$20                                                   ;81F197|E220    |      ;
     LDA.B #$02                                                 ;81F199|A902    |      ;
-    STA.W $019A                                                ;81F19B|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81F19B|8D9A01  |00019A;
     LDA.B #$00                                                 ;81F19E|A900    |      ;
-    STA.W $0191                                                ;81F1A0|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81F1A0|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81F1A3|225F9383|83935F;
     SEP #$20                                                   ;81F1A7|E220    |      ;
     LDA.B #$03                                                 ;81F1A9|A903    |      ;
@@ -13339,10 +13339,10 @@ fPlayerInteraction0x47:
 .upgrade:
     SEP #$20                                                   ;81F1B1|E220    |      ;
     LDA.B #$02                                                 ;81F1B3|A902    |      ;
-    STA.W $019A                                                ;81F1B5|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81F1B5|8D9A01  |00019A;
     LDX.W #$0137                                               ;81F1B8|A23701  |      ;
     LDA.B #$00                                                 ;81F1BB|A900    |      ;
-    STA.W $0191                                                ;81F1BD|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81F1BD|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81F1C0|225F9383|83935F;
     SEP #$20                                                   ;81F1C4|E220    |      ;
     LDA.B #$01                                                 ;81F1C6|A901    |      ;
@@ -13352,7 +13352,7 @@ fPlayerInteraction0x47:
  
 .case1:
     SEP #$20                                                   ;81F1CE|E220    |      ;
-    LDA.W $019A                                                ;81F1D0|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81F1D0|AD9A01  |00019A;
     CMP.B #$02                                                 ;81F1D3|C902    |      ;
     BNE +                                                      ;81F1D5|D003    |81F1DA;
     JMP.W .justReturn                                          ;81F1D7|4CD9F2  |81F2D9;
@@ -13384,14 +13384,14 @@ fPlayerInteraction0x47:
  
 .case3:
     SEP #$20                                                   ;81F211|E220    |      ;
-    LDA.W $019A                                                ;81F213|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81F213|AD9A01  |00019A;
     CMP.B #$02                                                 ;81F216|C902    |      ;
     BNE +                                                      ;81F218|D003    |81F21D;
     JMP.W .justReturn                                          ;81F21A|4CD9F2  |81F2D9;
  
  
   + SEP #$20                                                   ;81F21D|E220    |      ;
-    LDA.W nSelectedDialogOption                                ;81F21F|AD8F01  |00018F;
+    LDA.W strcDialogDisplay.dialogOptionsAnswer                ;81F21F|AD8F01  |00018F;
     BEQ +                                                      ;81F222|F003    |81F227;
     JMP.W .return                                              ;81F224|4CBDF2  |81F2BD;
  
@@ -13433,10 +13433,10 @@ fPlayerInteraction0x47:
     JSL.L fGameEngine_AddWood                                  ;81F26E|2224B283|83B224;
     SEP #$20                                                   ;81F272|E220    |      ;
     LDA.B #$02                                                 ;81F274|A902    |      ;
-    STA.W $019A                                                ;81F276|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81F276|8D9A01  |00019A;
     LDX.W #$0135                                               ;81F279|A23501  |      ;
     LDA.B #$00                                                 ;81F27C|A900    |      ;
-    STA.W $0191                                                ;81F27E|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81F27E|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81F281|225F9383|83935F;
     SEP #$20                                                   ;81F285|E220    |      ;
     LDA.B #$01                                                 ;81F287|A901    |      ;
@@ -13451,10 +13451,10 @@ fPlayerInteraction0x47:
 .label3:
     SEP #$20                                                   ;81F2A1|E220    |      ;
     LDA.B #$02                                                 ;81F2A3|A902    |      ;
-    STA.W $019A                                                ;81F2A5|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81F2A5|8D9A01  |00019A;
     LDX.W #$0304                                               ;81F2A8|A20403  |      ;
     LDA.B #$00                                                 ;81F2AB|A900    |      ;
-    STA.W $0191                                                ;81F2AD|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81F2AD|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81F2B0|225F9383|83935F;
     SEP #$20                                                   ;81F2B4|E220    |      ;
     LDA.B #$01                                                 ;81F2B6|A901    |      ;
@@ -13465,10 +13465,10 @@ fPlayerInteraction0x47:
 .return:
     SEP #$20                                                   ;81F2BD|E220    |      ;
     LDA.B #$02                                                 ;81F2BF|A902    |      ;
-    STA.W $019A                                                ;81F2C1|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81F2C1|8D9A01  |00019A;
     LDX.W #$0136                                               ;81F2C4|A23601  |      ;
     LDA.B #$00                                                 ;81F2C7|A900    |      ;
-    STA.W $0191                                                ;81F2C9|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81F2C9|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81F2CC|225F9383|83935F;
     SEP #$20                                                   ;81F2D0|E220    |      ;
     LDA.B #$01                                                 ;81F2D2|A901    |      ;
@@ -13526,9 +13526,9 @@ fPlayerInteraction0x48:
 .label2:
     SEP #$20                                                   ;81F32E|E220    |      ;
     LDA.B #$02                                                 ;81F330|A902    |      ;
-    STA.W $019A                                                ;81F332|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81F332|8D9A01  |00019A;
     LDA.B #$00                                                 ;81F335|A900    |      ;
-    STA.W $0191                                                ;81F337|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81F337|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81F33A|225F9383|83935F;
     SEP #$20                                                   ;81F33E|E220    |      ;
     LDA.B #$01                                                 ;81F340|A901    |      ;
@@ -13538,7 +13538,7 @@ fPlayerInteraction0x48:
  
 .case1:
     SEP #$20                                                   ;81F348|E220    |      ;
-    LDA.W $019A                                                ;81F34A|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81F34A|AD9A01  |00019A;
     CMP.B #$02                                                 ;81F34D|C902    |      ;
     BNE .obtainClock                                           ;81F34F|D003    |81F354;
     JMP.W .return                                              ;81F351|4C0DF4  |81F40D;
@@ -13555,10 +13555,10 @@ fPlayerInteraction0x48:
     %SetFlag(event6, $4000)
     SEP #$20                                                   ;81F377|E220    |      ;
     LDA.B #$02                                                 ;81F379|A902    |      ;
-    STA.W $019A                                                ;81F37B|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81F37B|8D9A01  |00019A;
     LDX.W #$025C                                               ;81F37E|A25C02  |      ;
     LDA.B #$00                                                 ;81F381|A900    |      ;
-    STA.W $0191                                                ;81F383|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81F383|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81F386|225F9383|83935F;
     SEP #$20                                                   ;81F38A|E220    |      ;
     LDA.B #$03                                                 ;81F38C|A903    |      ;
@@ -13597,7 +13597,7 @@ fPlayerInteraction0x48:
  
 .case3:
     SEP #$20                                                   ;81F3D9|E220    |      ;
-    LDA.W $019A                                                ;81F3DB|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81F3DB|AD9A01  |00019A;
     CMP.B #$02                                                 ;81F3DE|C902    |      ;
     BNE +                                                      ;81F3E0|D003    |81F3E5;
     JMP.W .return                                              ;81F3E2|4C0DF4  |81F40D;
@@ -13642,10 +13642,10 @@ fPlayerInteraction0x49:
   + STZ.W nPlayerInteractionArg2                               ;81F42C|9C7009  |000970;
     SEP #$20                                                   ;81F42F|E220    |      ;
     LDA.B #$02                                                 ;81F431|A902    |      ;
-    STA.W $019A                                                ;81F433|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81F433|8D9A01  |00019A;
     LDX.W #$0300                                               ;81F436|A20003  |      ;
     LDA.B #$00                                                 ;81F439|A900    |      ;
-    STA.W $0191                                                ;81F43B|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81F43B|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81F43E|225F9383|83935F;
     SEP #$20                                                   ;81F442|E220    |      ;
     LDA.B #$01                                                 ;81F444|A901    |      ;
@@ -13655,7 +13655,7 @@ fPlayerInteraction0x49:
  
 .case1:
     SEP #$20                                                   ;81F44C|E220    |      ;
-    LDA.W $019A                                                ;81F44E|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81F44E|AD9A01  |00019A;
     CMP.B #$02                                                 ;81F451|C902    |      ;
     BNE +                                                      ;81F453|D003    |81F458;
     JMP.W .return                                              ;81F455|4C8FF4  |81F48F;
@@ -13840,10 +13840,10 @@ fPlayerInteraction0x51:
  
   + SEP #$20                                                   ;81F5D0|E220    |      ;
     LDA.B #$02                                                 ;81F5D2|A902    |      ;
-    STA.W $019A                                                ;81F5D4|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81F5D4|8D9A01  |00019A;
     LDX.W #$024B                                               ;81F5D7|A24B02  |      ;
     LDA.B #$00                                                 ;81F5DA|A900    |      ;
-    STA.W $0191                                                ;81F5DC|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81F5DC|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81F5DF|225F9383|83935F;
     SEP #$20                                                   ;81F5E3|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81F5E5|EE6F09  |00096F;
@@ -13852,14 +13852,14 @@ fPlayerInteraction0x51:
  
 .case1:
     SEP #$20                                                   ;81F5EB|E220    |      ;
-    LDA.W $019A                                                ;81F5ED|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81F5ED|AD9A01  |00019A;
     CMP.B #$02                                                 ;81F5F0|C902    |      ;
     BNE +                                                      ;81F5F2|D003    |81F5F7;
     JMP.W fReturn_81F6D6                                       ;81F5F4|4CD6F6  |81F6D6;
  
  
   + SEP #$20                                                   ;81F5F7|E220    |      ;
-    LDA.W nSelectedDialogOption                                ;81F5F9|AD8F01  |00018F;
+    LDA.W strcDialogDisplay.dialogOptionsAnswer                ;81F5F9|AD8F01  |00018F;
     BNE .label1                                                ;81F5FC|D035    |81F633;
     REP #$20                                                   ;81F5FE|C220    |      ;
     LDA.W #$FFEC                                               ;81F600|A9ECFF  |      ;
@@ -13873,10 +13873,10 @@ fPlayerInteraction0x51:
     BNE .label2                                                ;81F614|D03A    |81F650;
     SEP #$20                                                   ;81F616|E220    |      ;
     LDA.B #$02                                                 ;81F618|A902    |      ;
-    STA.W $019A                                                ;81F61A|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81F61A|8D9A01  |00019A;
     LDX.W #$024C                                               ;81F61D|A24C02  |      ;
     LDA.B #$00                                                 ;81F620|A900    |      ;
-    STA.W $0191                                                ;81F622|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81F622|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81F625|225F9383|83935F;
     SEP #$20                                                   ;81F629|E220    |      ;
     LDA.B #$02                                                 ;81F62B|A902    |      ;
@@ -13887,10 +13887,10 @@ fPlayerInteraction0x51:
 .label1:
     SEP #$20                                                   ;81F633|E220    |      ;
     LDA.B #$02                                                 ;81F635|A902    |      ;
-    STA.W $019A                                                ;81F637|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81F637|8D9A01  |00019A;
     LDX.W #$024D                                               ;81F63A|A24D02  |      ;
     LDA.B #$00                                                 ;81F63D|A900    |      ;
-    STA.W $0191                                                ;81F63F|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81F63F|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81F642|225F9383|83935F;
     SEP #$20                                                   ;81F646|E220    |      ;
     LDA.B #$03                                                 ;81F648|A903    |      ;
@@ -13901,10 +13901,10 @@ fPlayerInteraction0x51:
 .label2:
     SEP #$20                                                   ;81F650|E220    |      ;
     LDA.B #$02                                                 ;81F652|A902    |      ;
-    STA.W $019A                                                ;81F654|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81F654|8D9A01  |00019A;
     LDX.W #$0213                                               ;81F657|A21302  |      ;
     LDA.B #$00                                                 ;81F65A|A900    |      ;
-    STA.W $0191                                                ;81F65C|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81F65C|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81F65F|225F9383|83935F;
     SEP #$20                                                   ;81F663|E220    |      ;
     LDA.B #$03                                                 ;81F665|A903    |      ;
@@ -13914,7 +13914,7 @@ fPlayerInteraction0x51:
  
 .case2:
     SEP #$20                                                   ;81F66C|E220    |      ;
-    LDA.W $019A                                                ;81F66E|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81F66E|AD9A01  |00019A;
     CMP.B #$02                                                 ;81F671|C902    |      ;
     BEQ fReturn_81F6D6                                         ;81F673|F061    |81F6D6;
     REP #$20                                                   ;81F675|C220    |      ;
@@ -13935,7 +13935,7 @@ fPlayerInteraction0x51:
  
 .case3:
     SEP #$20                                                   ;81F69E|E220    |      ;
-    LDA.W $019A                                                ;81F6A0|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81F6A0|AD9A01  |00019A;
     CMP.B #$02                                                 ;81F6A3|C902    |      ;
     BEQ fReturn_81F6D6                                         ;81F6A5|F02F    |81F6D6;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
@@ -13980,10 +13980,10 @@ fPlayerInteraction0x52:
  
   + SEP #$20                                                   ;81F6F7|E220    |      ;
     LDA.B #$02                                                 ;81F6F9|A902    |      ;
-    STA.W $019A                                                ;81F6FB|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81F6FB|8D9A01  |00019A;
     LDX.W #$024A                                               ;81F6FE|A24A02  |      ;
     LDA.B #$00                                                 ;81F701|A900    |      ;
-    STA.W $0191                                                ;81F703|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81F703|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81F706|225F9383|83935F;
     SEP #$20                                                   ;81F70A|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81F70C|EE6F09  |00096F;
@@ -13992,14 +13992,14 @@ fPlayerInteraction0x52:
  
 .case1:
     SEP #$20                                                   ;81F712|E220    |      ;
-    LDA.W $019A                                                ;81F714|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81F714|AD9A01  |00019A;
     CMP.B #$02                                                 ;81F717|C902    |      ;
     BNE +                                                      ;81F719|D003    |81F71E;
     JMP.W .return                                              ;81F71B|4CFEF7  |81F7FE;
  
  
   + SEP #$20                                                   ;81F71E|E220    |      ;
-    LDA.W nSelectedDialogOption                                ;81F720|AD8F01  |00018F;
+    LDA.W strcDialogDisplay.dialogOptionsAnswer                ;81F720|AD8F01  |00018F;
     BNE .label1                                                ;81F723|D035    |81F75A;
     REP #$20                                                   ;81F725|C220    |      ;
     LDA.W #$FFE2                                               ;81F727|A9E2FF  |      ;
@@ -14013,10 +14013,10 @@ fPlayerInteraction0x52:
     BNE .label2                                                ;81F73B|D03A    |81F777;
     SEP #$20                                                   ;81F73D|E220    |      ;
     LDA.B #$02                                                 ;81F73F|A902    |      ;
-    STA.W $019A                                                ;81F741|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81F741|8D9A01  |00019A;
     LDX.W #$024C                                               ;81F744|A24C02  |      ;
     LDA.B #$00                                                 ;81F747|A900    |      ;
-    STA.W $0191                                                ;81F749|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81F749|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81F74C|225F9383|83935F;
     SEP #$20                                                   ;81F750|E220    |      ;
     LDA.B #$02                                                 ;81F752|A902    |      ;
@@ -14027,10 +14027,10 @@ fPlayerInteraction0x52:
 .label1:
     SEP #$20                                                   ;81F75A|E220    |      ;
     LDA.B #$02                                                 ;81F75C|A902    |      ;
-    STA.W $019A                                                ;81F75E|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81F75E|8D9A01  |00019A;
     LDX.W #$024D                                               ;81F761|A24D02  |      ;
     LDA.B #$00                                                 ;81F764|A900    |      ;
-    STA.W $0191                                                ;81F766|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81F766|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81F769|225F9383|83935F;
     SEP #$20                                                   ;81F76D|E220    |      ;
     LDA.B #$03                                                 ;81F76F|A903    |      ;
@@ -14041,10 +14041,10 @@ fPlayerInteraction0x52:
 .label2:
     SEP #$20                                                   ;81F777|E220    |      ;
     LDA.B #$02                                                 ;81F779|A902    |      ;
-    STA.W $019A                                                ;81F77B|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81F77B|8D9A01  |00019A;
     LDX.W #$0213                                               ;81F77E|A21302  |      ;
     LDA.B #$00                                                 ;81F781|A900    |      ;
-    STA.W $0191                                                ;81F783|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81F783|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81F786|225F9383|83935F;
     SEP #$20                                                   ;81F78A|E220    |      ;
     LDA.B #$03                                                 ;81F78C|A903    |      ;
@@ -14054,7 +14054,7 @@ fPlayerInteraction0x52:
  
 .case2:
     SEP #$20                                                   ;81F794|E220    |      ;
-    LDA.W $019A                                                ;81F796|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81F796|AD9A01  |00019A;
     CMP.B #$02                                                 ;81F799|C902    |      ;
     BEQ .return                                                ;81F79B|F061    |81F7FE;
     REP #$20                                                   ;81F79D|C220    |      ;
@@ -14075,7 +14075,7 @@ fPlayerInteraction0x52:
  
 .case3:
     SEP #$20                                                   ;81F7C6|E220    |      ;
-    LDA.W $019A                                                ;81F7C8|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81F7C8|AD9A01  |00019A;
     CMP.B #$02                                                 ;81F7CB|C902    |      ;
     BEQ .return                                                ;81F7CD|F02F    |81F7FE;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
@@ -14161,10 +14161,10 @@ fPlayerInteraction0x54_FloristNotebook:
     BEQ .checks                                                ;81F873|F01B    |81F890;
     SEP #$20                                                   ;81F875|E220    |      ;
     LDA.B #$02                                                 ;81F877|A902    |      ;
-    STA.W $019A                                                ;81F879|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81F879|8D9A01  |00019A;
     LDX.W #$0455                                               ;81F87C|A25504  |      ;
     LDA.B #$00                                                 ;81F87F|A900    |      ;
-    STA.W $0191                                                ;81F881|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81F881|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81F884|225F9383|83935F;
     SEP #$20                                                   ;81F888|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81F88A|EE6F09  |00096F;
@@ -14180,13 +14180,13 @@ fPlayerInteraction0x54_FloristNotebook:
  
  
   + SEP #$20                                                   ;81F89D|E220    |      ;
-    LDA.W $019A                                                ;81F89F|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81F89F|AD9A01  |00019A;
     CMP.B #$02                                                 ;81F8A2|C902    |      ;
     BNE +                                                      ;81F8A4|D003    |81F8A9;
     JMP.W .justReturn                                          ;81F8A6|4C1EF9  |81F91E;
  
  
-  + LDA.W nSelectedDialogOption                                ;81F8A9|AD8F01  |00018F;
+  + LDA.W strcDialogDisplay.dialogOptionsAnswer                ;81F8A9|AD8F01  |00018F;
     CMP.B #$00                                                 ;81F8AC|C900    |      ;
     BEQ .case0                                                 ;81F8AE|F008    |81F8B8;
     CMP.B #$01                                                 ;81F8B0|C901    |      ;
@@ -14197,10 +14197,10 @@ fPlayerInteraction0x54_FloristNotebook:
 .case0:
     SEP #$20                                                   ;81F8B8|E220    |      ;
     LDA.B #$02                                                 ;81F8BA|A902    |      ;
-    STA.W $019A                                                ;81F8BC|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81F8BC|8D9A01  |00019A;
     LDX.W #$0456                                               ;81F8BF|A25604  |      ;
     LDA.B #$00                                                 ;81F8C2|A900    |      ;
-    STA.W $0191                                                ;81F8C4|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81F8C4|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81F8C7|225F9383|83935F;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     JMP.W .justReturn                                          ;81F8D7|4C1EF9  |81F91E;
@@ -14209,10 +14209,10 @@ fPlayerInteraction0x54_FloristNotebook:
 .case1:
     SEP #$20                                                   ;81F8DA|E220    |      ;
     LDA.B #$02                                                 ;81F8DC|A902    |      ;
-    STA.W $019A                                                ;81F8DE|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81F8DE|8D9A01  |00019A;
     LDX.W #$0457                                               ;81F8E1|A25704  |      ;
     LDA.B #$00                                                 ;81F8E4|A900    |      ;
-    STA.W $0191                                                ;81F8E6|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81F8E6|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81F8E9|225F9383|83935F;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     JMP.W .justReturn                                          ;81F8F9|4C1EF9  |81F91E;
@@ -14221,10 +14221,10 @@ fPlayerInteraction0x54_FloristNotebook:
 .case2:
     SEP #$20                                                   ;81F8FC|E220    |      ;
     LDA.B #$02                                                 ;81F8FE|A902    |      ;
-    STA.W $019A                                                ;81F900|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81F900|8D9A01  |00019A;
     LDX.W #$0458                                               ;81F903|A25804  |      ;
     LDA.B #$00                                                 ;81F906|A900    |      ;
-    STA.W $0191                                                ;81F908|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81F908|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81F90B|225F9383|83935F;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     JMP.W .justReturn                                          ;81F91B|4C1EF9  |81F91E;
@@ -14238,7 +14238,7 @@ fPlayerInteraction0x54_FloristNotebook:
     JSL.L fDialog_Unknown_8393F9                               ;81F91F|22F99383|8393F9;
     SEP #$20                                                   ;81F923|E220    |      ;
     LDA.B #$01                                                 ;81F925|A901    |      ;
-    STA.W $019A                                                ;81F927|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81F927|8D9A01  |00019A;
     REP #$20                                                   ;81F92A|C220    |      ;
     LDA.W strcJoypad1.newInput                                 ;81F92C|AD2801  |000128;
     AND.W #~!JOYPAD_A                                               
@@ -14255,10 +14255,10 @@ fPlayerInteraction0x55_AnimalNotebook:
     BEQ .checks                                                ;81F94B|F01B    |81F968;
     SEP #$20                                                   ;81F94D|E220    |      ;
     LDA.B #$02                                                 ;81F94F|A902    |      ;
-    STA.W $019A                                                ;81F951|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81F951|8D9A01  |00019A;
     LDX.W #$0459                                               ;81F954|A25904  |      ;
     LDA.B #$00                                                 ;81F957|A900    |      ;
-    STA.W $0191                                                ;81F959|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81F959|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81F95C|225F9383|83935F;
     SEP #$20                                                   ;81F960|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81F962|EE6F09  |00096F;
@@ -14274,13 +14274,13 @@ fPlayerInteraction0x55_AnimalNotebook:
  
  
   + SEP #$20                                                   ;81F975|E220    |      ;
-    LDA.W $019A                                                ;81F977|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;81F977|AD9A01  |00019A;
     CMP.B #$02                                                 ;81F97A|C902    |      ;
     BNE +                                                      ;81F97C|D003    |81F981;
     JMP.W .justReturn                                          ;81F97E|4C45FA  |81FA45;
  
  
-  + LDA.W nSelectedDialogOption                                ;81F981|AD8F01  |00018F;
+  + LDA.W strcDialogDisplay.dialogOptionsAnswer                ;81F981|AD8F01  |00018F;
     CMP.B #$00                                                 ;81F984|C900    |      ;
     BEQ .case0                                                 ;81F986|F013    |81F99B;
     CMP.B #$01                                                 ;81F988|C901    |      ;
@@ -14297,10 +14297,10 @@ fPlayerInteraction0x55_AnimalNotebook:
 .case0:
     SEP #$20                                                   ;81F99B|E220    |      ;
     LDA.B #$02                                                 ;81F99D|A902    |      ;
-    STA.W $019A                                                ;81F99F|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81F99F|8D9A01  |00019A;
     LDX.W #$045A                                               ;81F9A2|A25A04  |      ;
     LDA.B #$00                                                 ;81F9A5|A900    |      ;
-    STA.W $0191                                                ;81F9A7|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81F9A7|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81F9AA|225F9383|83935F;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     JMP.W .justReturn                                          ;81F9BA|4C45FA  |81FA45;
@@ -14309,10 +14309,10 @@ fPlayerInteraction0x55_AnimalNotebook:
 .case1:
     SEP #$20                                                   ;81F9BD|E220    |      ;
     LDA.B #$02                                                 ;81F9BF|A902    |      ;
-    STA.W $019A                                                ;81F9C1|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81F9C1|8D9A01  |00019A;
     LDX.W #$045B                                               ;81F9C4|A25B04  |      ;
     LDA.B #$00                                                 ;81F9C7|A900    |      ;
-    STA.W $0191                                                ;81F9C9|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81F9C9|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81F9CC|225F9383|83935F;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     JMP.W .justReturn                                          ;81F9DC|4C45FA  |81FA45;
@@ -14321,10 +14321,10 @@ fPlayerInteraction0x55_AnimalNotebook:
 .case2:
     SEP #$20                                                   ;81F9DF|E220    |      ;
     LDA.B #$02                                                 ;81F9E1|A902    |      ;
-    STA.W $019A                                                ;81F9E3|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81F9E3|8D9A01  |00019A;
     LDX.W #$045C                                               ;81F9E6|A25C04  |      ;
     LDA.B #$00                                                 ;81F9E9|A900    |      ;
-    STA.W $0191                                                ;81F9EB|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81F9EB|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81F9EE|225F9383|83935F;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     JMP.W .justReturn                                          ;81F9FE|4C45FA  |81FA45;
@@ -14333,10 +14333,10 @@ fPlayerInteraction0x55_AnimalNotebook:
 .case3:
     SEP #$20                                                   ;81FA01|E220    |      ;
     LDA.B #$02                                                 ;81FA03|A902    |      ;
-    STA.W $019A                                                ;81FA05|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81FA05|8D9A01  |00019A;
     LDX.W #$045D                                               ;81FA08|A25D04  |      ;
     LDA.B #$00                                                 ;81FA0B|A900    |      ;
-    STA.W $0191                                                ;81FA0D|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81FA0D|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81FA10|225F9383|83935F;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     JMP.W .justReturn                                          ;81FA20|4C45FA  |81FA45;
@@ -14345,10 +14345,10 @@ fPlayerInteraction0x55_AnimalNotebook:
 .case4:
     SEP #$20                                                   ;81FA23|E220    |      ;
     LDA.B #$02                                                 ;81FA25|A902    |      ;
-    STA.W $019A                                                ;81FA27|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81FA27|8D9A01  |00019A;
     LDX.W #$045E                                               ;81FA2A|A25E04  |      ;
     LDA.B #$00                                                 ;81FA2D|A900    |      ;
-    STA.W $0191                                                ;81FA2F|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81FA2F|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81FA32|225F9383|83935F;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     JMP.W .justReturn                                          ;81FA42|4C45FA  |81FA45;
@@ -14362,7 +14362,7 @@ fPlayerInteraction0x55_AnimalNotebook:
     JSL.L fDialog_Unknown_8393F9                               ;81FA46|22F99383|8393F9;
     SEP #$20                                                   ;81FA4A|E220    |      ;
     LDA.B #$01                                                 ;81FA4C|A901    |      ;
-    STA.W $019A                                                ;81FA4E|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81FA4E|8D9A01  |00019A;
     REP #$20                                                   ;81FA51|C220    |      ;
     LDA.W strcJoypad1.newInput                                 ;81FA53|AD2801  |000128;
     AND.W #~!JOYPAD_A                                               
@@ -14393,9 +14393,9 @@ fPlayerInteraction0x57:
   + SEP #$20                                                   ;81FA95|E220    |      ;
     REP #$10                                                   ;81FA97|C210    |      ;
     LDA.B #$02                                                 ;81FA99|A902    |      ;
-    STA.W $019A                                                ;81FA9B|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;81FA9B|8D9A01  |00019A;
     LDA.B #$00                                                 ;81FA9E|A900    |      ;
-    STA.W $0191                                                ;81FAA0|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;81FAA0|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81FAA3|225F9383|83935F;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     RTS                                                        ;81FAB3|60      |      ;

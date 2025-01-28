@@ -296,8 +296,32 @@ endstruct
 
 
 ;
-; 17D - 19B ???
+; Size and start OK
 ;
+struct strcDialogDisplay    $00017D
+    .mapDestX               : skip 2    ; 17D-17E
+    .mapDestY               : skip 2    ; 17F-180
+    .mapMultiWidth          : skip 1    ; 181
+    .mapMultiHeight         : skip 1    ; 182
+    .pDialog                : skip 2    ; 183-184
+    .dialogOptionCount      : skip 2    ; 185-186   stores how many options there was for current dialog
+    .dialogCurrentOffset    : skip 2    ; 187-188   current offset in current dialog / index
+    .dialoUnk189            : skip 1    ; 189
+    .dialoUnk18A            : skip 1    ; 18A
+    .dialoUnk18B            : skip 1    ; 18B
+    .dialogVarSize          : skip 1    ; 18C
+    .dialogUnk18D           : skip 1    ; 18D
+    .dialogUnk18E           : skip 1    ; 18E
+    .dialogOptionsAnswer    : skip 1    ; 18F
+    .dialogUnk190           : skip 1    ; 190
+    .dialogUnk191           : skip 1    ; 191
+    .dialogNumericVarSize   : skip 3    ; 192-194   used to store dialog numeric value - sizes 0-3
+    .mapCurrentPresetId     : skip 1    ; 195    
+    .mapFlags               : skip 2    ; 196-197
+    .mapFlagsBackup         : skip 2    ; 198-199
+    .mapUnk19A              : skip 1    ; 19A
+    .mapUnk19B              : skip 1    ; 19B
+endstruct
 
 
 ;

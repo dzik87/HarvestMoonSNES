@@ -9,16 +9,6 @@
     ptrAIActionData = $0000C9; !^ ptr24 ^!
     ptrAIUnknown0xCC = $0000CC; !^ prt24 ^!
     ptrUnknown0xCF = $0000CF; !^ ptr24 ^!
-    nMapEngine_DestinationX = $00017D; !^ n16 (used when we change map) ^!
-    nMapEngine_DestinationY = $00017F; !^ n16 (used when we change map) ^!
-    nCurrentMapdata_RoomWidthMult = $000181; !^ n8 (offset 0x03) ^!
-    nCurrentMapdata_RoomHeightMult = $000182; !^ n8 (offset 0x04) ^!
-    nCurrentDialogPointerIndex = $000183; !^ n16, ptrDialog index ^!
-    nCurrentTextIndex = $000187; !^ n16, ptrCurrentDialog index (to get one letter) ^!
-    nSelectedDialogOption = $00018F; !^ n8 ^!
-    nCurrentMapdataPresetId = $000195; !^ n8 (offset 0x00) ^!
-    nMapEngine_flags = $000196; !^ n16 (offset 0x01) ^!
-    nMapEngine_flags_TempCopy = $000198; !^ n16 ^!
     nBreakHitCounter = $00096D; !^ n8 (used for example to break wood or stones) ^!
     nPlayerInteractionIndex = $00096E; !^ n8 ^!
     nPlayerInteractionArg1 = $00096F; !^ n8 ^!

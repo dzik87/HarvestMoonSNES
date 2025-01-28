@@ -201,7 +201,7 @@ fAI_Unknown8480F8:
 fAI_HowToPlaySetup:
     SEP #$20                                                   ;84816F|E220    |      ;
     REP #$10                                                   ;848171|C210    |      ;
-    LDA.W $019A                                                ;848173|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;848173|AD9A01  |00019A;
     CMP.B #$02                                                 ;848176|C902    |      ;
     BNE +                                                      ;848178|D003    |84817D;
     JMP.W .return                                              ;84817A|4C1A82  |84821A;
@@ -1344,9 +1344,9 @@ fAIAction0x01_UnfreezeTime:
     STA.W nTimeState                                           ;8489F3|8D7309  |000973;
     REP #$20                                                   ;8489F6|C220    |      ;
     %UnsetFlag(daily2, $0001)
-    LDA.W nMapEngine_flags                                     ;848A03|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;848A03|AD9601  |000196;
     ORA.W #$0020                                               ;848A06|092000  |      ;
-    STA.W nMapEngine_flags                                     ;848A09|8D9601  |000196;
+    STA.W strcDialogDisplay.mapFlags                           ;848A09|8D9601  |000196;
     RTS                                                        ;848A0C|60      |      ;
  
  
@@ -1359,9 +1359,9 @@ fAIAction0x02_FreezeTime:
     REP #$20                                                   ;848A20|C220    |      ;
     %SetFlag(daily2, $0001)
     REP #$30                                                   ;848A2D|C230    |      ;
-    LDA.W nMapEngine_flags                                     ;848A2F|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;848A2F|AD9601  |000196;
     AND.W #$FFDF                                               ;848A32|29DFFF  |      ;
-    STA.W nMapEngine_flags                                     ;848A35|8D9601  |000196;
+    STA.W strcDialogDisplay.mapFlags                           ;848A35|8D9601  |000196;
     RTS                                                        ;848A38|60      |      ;
  
  
@@ -1385,11 +1385,11 @@ fAIAction0x05_SetTransferPosition:
     REP #$30                                                   ;848A65|C230    |      ;
     %AIMoveAction($0001)
     LDA.B [ptrAIActionData]                                    ;848A71|A7C9    |0000C9;
-    STA.W nMapEngine_DestinationX                              ;848A73|8D7D01  |00017D;
+    STA.W strcDialogDisplay.mapDestX                           ;848A73|8D7D01  |00017D;
     STA.B strcPlayer.posX                                      ;848A76|85D6    |0000D6;
     %AIMoveAction($0002)
     LDA.B [ptrAIActionData]                                    ;848A82|A7C9    |0000C9;
-    STA.W nMapEngine_DestinationY                              ;848A84|8D7F01  |00017F;
+    STA.W strcDialogDisplay.mapDestY                           ;848A84|8D7F01  |00017F;
     STA.B strcPlayer.posY                                      ;848A87|85D8    |0000D8;
     %AIMoveAction($0002)
     RTS                                                        ;848A93|60      |      ;
@@ -1919,10 +1919,10 @@ fAIAction0x1C_ShowDialog:
     %AIMoveAction($0002)
     SEP #$20                                                   ;84900A|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84900C|A7C9    |0000C9;
-    STA.W $0191                                                ;84900E|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;84900E|8D9101  |000191;
     SEP #$20                                                   ;849011|E220    |      ;
     LDA.B #$02                                                 ;849013|A902    |      ;
-    STA.W $019A                                                ;849015|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;849015|8D9A01  |00019A;
     JSL.L fDialog_DialogHandler                                ;849018|225F9383|83935F;
     %AIMoveAction($0001)
     REP #$30                                                   ;849026|C230    |      ;
@@ -1943,10 +1943,10 @@ fAIAction0x1D_ShowDialog:
     %AIMoveAction($0002)
     SEP #$20                                                   ;84904F|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;849051|A7C9    |0000C9;
-    STA.W $0191                                                ;849053|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;849053|8D9101  |000191;
     SEP #$20                                                   ;849056|E220    |      ;
     LDA.B #$02                                                 ;849058|A902    |      ;
-    STA.W $019A                                                ;84905A|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;84905A|8D9A01  |00019A;
     JSL.L fDialog_DialogHandler                                ;84905D|225F9383|83935F;
     %AIMoveAction($0001)
     REP #$30                                                   ;84906B|C230    |      ;
@@ -2092,7 +2092,7 @@ fAIAction0x20_JumpIfChoice:
     SEP #$20                                                   ;8491A9|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;8491AB|A7C9    |0000C9;
     STA.B strcVariables.n8Temp1                                ;8491AD|8592    |000092;
-    LDA.W nSelectedDialogOption                                ;8491AF|AD8F01  |00018F;
+    LDA.W strcDialogDisplay.dialogOptionsAnswer                ;8491AF|AD8F01  |00018F;
     CMP.B strcVariables.n8Temp1                                ;8491B2|C592    |000092;
     BNE +                                                      ;8491B4|D011    |8491C7;
     %AIMoveAction($0001)
@@ -3273,9 +3273,9 @@ fUnknown_ToFarm:
     SEP #$20                                                   ;849C64|E220    |      ;
     REP #$10                                                   ;849C66|C210    |      ;
     LDA.B #$00                                                 ;849C68|A900    |      ;
-    STA.W $0191                                                ;849C6A|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;849C6A|8D9101  |000191;
     LDA.B #$02                                                 ;849C6D|A902    |      ;
-    STA.W $019A                                                ;849C6F|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;849C6F|8D9A01  |00019A;
     JSL.L fDialog_DialogHandler                                ;849C72|225F9383|83935F;
     SEP #$20                                                   ;849C76|E220    |      ;
     REP #$10                                                   ;849C78|C210    |      ;
@@ -6517,9 +6517,9 @@ fAIAction0x3C:
     LDA.B #$15                                                 ;84B511|A915    |      ;
     STA.W nDestinationAreaId                                   ;84B513|8D8B09  |00098B;
     REP #$30                                                   ;84B516|C230    |      ;
-    LDA.W nMapEngine_flags                                     ;84B518|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;84B518|AD9601  |000196;
     ORA.W #$4000                                               ;84B51B|090040  |      ;
-    STA.W nMapEngine_flags                                     ;84B51E|8D9601  |000196;
+    STA.W strcDialogDisplay.mapFlags                           ;84B51E|8D9601  |000196;
     %SetFlag(daily4, $0020)
     RTS                                                        ;84B52C|60      |      ;
  
@@ -6532,9 +6532,9 @@ fAIAction0x3D_TeleportToArea:
     STA.W nDestinationAreaId                                   ;84B53D|8D8B09  |00098B;
     %AIMoveAction($0001)
     REP #$30                                                   ;84B54A|C230    |      ;
-    LDA.W nMapEngine_flags                                     ;84B54C|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;84B54C|AD9601  |000196;
     ORA.W #$4000                                               ;84B54F|090040  |      ;
-    STA.W nMapEngine_flags                                     ;84B552|8D9601  |000196;
+    STA.W strcDialogDisplay.mapFlags                           ;84B552|8D9601  |000196;
     RTS                                                        ;84B555|60      |      ;
  
  
@@ -7540,12 +7540,12 @@ fAIAction0x54:
     %AIMoveAction($0002)
     SEP #$20                                                   ;84BEF1|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84BEF3|A7C9    |0000C9;
-    STA.W $0191                                                ;84BEF5|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;84BEF5|8D9101  |000191;
     REP #$20                                                   ;84BEF8|C220    |      ;
     STZ.W $09B1                                                ;84BEFA|9CB109  |0009B1;
     SEP #$20                                                   ;84BEFD|E220    |      ;
     LDA.B #$06                                                 ;84BEFF|A906    |      ;
-    STA.W $019A                                                ;84BF01|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;84BF01|8D9A01  |00019A;
     JSL.L fDialog_DialogHandler                                ;84BF04|225F9383|83935F;
     %AIMoveAction($0001)
     REP #$30                                                   ;84BF12|C230    |      ;
@@ -7653,7 +7653,7 @@ aAICheckFlags:
 fInput_Handler:
     SEP #$20                                                   ;84C034|E220    |      ;
     REP #$10                                                   ;84C036|C210    |      ;
-    LDA.W $019A                                                ;84C038|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.mapUnk19A                          ;84C038|AD9A01  |00019A;
     CMP.B #$01                                                 ;84C03B|C901    |      ;
     BNE +                                                      ;84C03D|D003    |84C042;
     JMP.W fInput_Handler_case01                                ;84C03F|4CB7C6  |84C6B7;
@@ -8406,18 +8406,18 @@ fInput_Unknown84C57A:
     STA.W strcAudio.reg115                                     ;84C585|8D1501  |000115;
     JSL.L fAudioSetRegister2to0A                               ;84C588|22328383|838332;
     SEP #$20                                                   ;84C58C|E220    |      ;
-    STZ.W $019B                                                ;84C58E|9C9B01  |00019B;
+    STZ.W strcDialogDisplay.mapUnk19B                          ;84C58E|9C9B01  |00019B;
     SEP #$20                                                   ;84C591|E220    |      ;
     LDA.B #$02                                                 ;84C593|A902    |      ;
-    STA.W $019A                                                ;84C595|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;84C595|8D9A01  |00019A;
     LDA.B #$00                                                 ;84C598|A900    |      ;
     XBA                                                        ;84C59A|EB      |      ;
-    LDA.W $018A                                                ;84C59B|AD8A01  |00018A;
+    LDA.W strcDialogDisplay.dialoUnk18A                        ;84C59B|AD8A01  |00018A;
     CMP.B #$0B                                                 ;84C59E|C90B    |      ;
     BCC .label1                                                ;84C5A0|9012    |84C5B4;
     SEP #$20                                                   ;84C5A2|E220    |      ;
     LDA.B #$01                                                 ;84C5A4|A901    |      ;
-    STA.W $019A                                                ;84C5A6|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;84C5A6|8D9A01  |00019A;
     REP #$20                                                   ;84C5A9|C220    |      ;
     LDA.W #$0001                                               ;84C5AB|A90100  |      ;
     JSL.L fDialog_Unknown_8394D7                               ;84C5AE|22D79483|8394D7;
@@ -8432,7 +8432,7 @@ fInput_Unknown84C57A:
     TAX                                                        ;84C5BC|AA      |      ;
     SEP #$20                                                   ;84C5BD|E220    |      ;
     LDA.B #$00                                                 ;84C5BF|A900    |      ;
-    STA.W $0191                                                ;84C5C1|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;84C5C1|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;84C5C4|225F9383|83935F;
  
   + REP #$20                                                   ;84C5C8|C220    |      ;
@@ -8450,26 +8450,26 @@ fInput_Unknown84C5D1:
     STA.W strcAudio.reg115                                     ;84C5DC|8D1501  |000115;
     JSL.L fAudioSetRegister2to0A                               ;84C5DF|22328383|838332;
     SEP #$20                                                   ;84C5E3|E220    |      ;
-    LDA.W $018A                                                ;84C5E5|AD8A01  |00018A;
+    LDA.W strcDialogDisplay.dialoUnk18A                        ;84C5E5|AD8A01  |00018A;
     CMP.B #$0B                                                 ;84C5E8|C90B    |      ;
     BCS .return                                                ;84C5EA|B025    |84C611;
     REP #$20                                                   ;84C5EC|C220    |      ;
     LDA.W #$0001                                               ;84C5EE|A90100  |      ;
     JSL.L fDialog_Unknown_8394D7                               ;84C5F1|22D79483|8394D7;
     SEP #$20                                                   ;84C5F5|E220    |      ;
-    LDA.W $018A                                                ;84C5F7|AD8A01  |00018A;
+    LDA.W strcDialogDisplay.dialoUnk18A                        ;84C5F7|AD8A01  |00018A;
     CMP.B #$0A                                                 ;84C5FA|C90A    |      ;
     BNE +                                                      ;84C5FC|D007    |84C605;
     LDA.B #$00                                                 ;84C5FE|A900    |      ;
-    STA.W $018A                                                ;84C600|8D8A01  |00018A;
+    STA.W strcDialogDisplay.dialoUnk18A                        ;84C600|8D8A01  |00018A;
     BRA .return                                                ;84C603|800C    |84C611;
  
  
   + SEP #$20                                                   ;84C605|E220    |      ;
-    LDA.W $018A                                                ;84C607|AD8A01  |00018A;
+    LDA.W strcDialogDisplay.dialoUnk18A                        ;84C607|AD8A01  |00018A;
     INC A                                                      ;84C60A|1A      |      ;
-    STA.W $018A                                                ;84C60B|8D8A01  |00018A;
-    STZ.W $018B                                                ;84C60E|9C8B01  |00018B;
+    STA.W strcDialogDisplay.dialoUnk18A                        ;84C60B|8D8A01  |00018A;
+    STZ.W strcDialogDisplay.dialoUnk18B                        ;84C60E|9C8B01  |00018B;
  
 .return:
     RTL                                                        ;84C611|6B      |      ;
@@ -8484,25 +8484,25 @@ fInput_Unknown84C612:
     STA.W strcAudio.reg115                                     ;84C61D|8D1501  |000115;
     JSL.L fAudioSetRegister2to0A                               ;84C620|22328383|838332;
     SEP #$20                                                   ;84C624|E220    |      ;
-    LDA.W $018A                                                ;84C626|AD8A01  |00018A;
+    LDA.W strcDialogDisplay.dialoUnk18A                        ;84C626|AD8A01  |00018A;
     CMP.B #$0B                                                 ;84C629|C90B    |      ;
     BCS .return                                                ;84C62B|B023    |84C650;
     REP #$20                                                   ;84C62D|C220    |      ;
     LDA.W #$0001                                               ;84C62F|A90100  |      ;
     JSL.L fDialog_Unknown_8394D7                               ;84C632|22D79483|8394D7;
     SEP #$20                                                   ;84C636|E220    |      ;
-    LDA.W $018A                                                ;84C638|AD8A01  |00018A;
+    LDA.W strcDialogDisplay.dialoUnk18A                        ;84C638|AD8A01  |00018A;
     BNE +                                                      ;84C63B|D007    |84C644;
     LDA.B #$0A                                                 ;84C63D|A90A    |      ;
-    STA.W $018A                                                ;84C63F|8D8A01  |00018A;
+    STA.W strcDialogDisplay.dialoUnk18A                        ;84C63F|8D8A01  |00018A;
     BRA .return                                                ;84C642|800C    |84C650;
  
  
   + SEP #$20                                                   ;84C644|E220    |      ;
-    LDA.W $018A                                                ;84C646|AD8A01  |00018A;
+    LDA.W strcDialogDisplay.dialoUnk18A                        ;84C646|AD8A01  |00018A;
     DEC A                                                      ;84C649|3A      |      ;
-    STA.W $018A                                                ;84C64A|8D8A01  |00018A;
-    STZ.W $018B                                                ;84C64D|9C8B01  |00018B;
+    STA.W strcDialogDisplay.dialoUnk18A                        ;84C64A|8D8A01  |00018A;
+    STZ.W strcDialogDisplay.dialoUnk18B                        ;84C64D|9C8B01  |00018B;
  
 .return:
     RTL                                                        ;84C650|6B      |      ;
@@ -8517,18 +8517,18 @@ fInput_Unknown84C651:
     STA.W strcAudio.reg115                                     ;84C65C|8D1501  |000115;
     JSL.L fAudioSetRegister2to0A                               ;84C65F|22328383|838332;
     SEP #$20                                                   ;84C663|E220    |      ;
-    LDA.W $018A                                                ;84C665|AD8A01  |00018A;
+    LDA.W strcDialogDisplay.dialoUnk18A                        ;84C665|AD8A01  |00018A;
     CMP.B #$0B                                                 ;84C668|C90B    |      ;
     BCS .return                                                ;84C66A|B017    |84C683;
     REP #$20                                                   ;84C66C|C220    |      ;
     LDA.W #$0001                                               ;84C66E|A90100  |      ;
     JSL.L fDialog_Unknown_8394D7                               ;84C671|22D79483|8394D7;
     SEP #$20                                                   ;84C675|E220    |      ;
-    LDA.W $018A                                                ;84C677|AD8A01  |00018A;
+    LDA.W strcDialogDisplay.dialoUnk18A                        ;84C677|AD8A01  |00018A;
     CLC                                                        ;84C67A|18      |      ;
     ADC.B #$0B                                                 ;84C67B|690B    |      ;
-    STA.W $018A                                                ;84C67D|8D8A01  |00018A;
-    STZ.W $018B                                                ;84C680|9C8B01  |00018B;
+    STA.W strcDialogDisplay.dialoUnk18A                        ;84C67D|8D8A01  |00018A;
+    STZ.W strcDialogDisplay.dialoUnk18B                        ;84C680|9C8B01  |00018B;
  
 .return:
     RTL                                                        ;84C683|6B      |      ;
@@ -8543,18 +8543,18 @@ fInput_Unknown84C684:
     STA.W strcAudio.reg115                                     ;84C68F|8D1501  |000115;
     JSL.L fAudioSetRegister2to0A                               ;84C692|22328383|838332;
     SEP #$20                                                   ;84C696|E220    |      ;
-    LDA.W $018A                                                ;84C698|AD8A01  |00018A;
+    LDA.W strcDialogDisplay.dialoUnk18A                        ;84C698|AD8A01  |00018A;
     CMP.B #$0B                                                 ;84C69B|C90B    |      ;
     BCC .return                                                ;84C69D|9017    |84C6B6;
     REP #$20                                                   ;84C69F|C220    |      ;
     LDA.W #$0001                                               ;84C6A1|A90100  |      ;
     JSL.L fDialog_Unknown_8394D7                               ;84C6A4|22D79483|8394D7;
     SEP #$20                                                   ;84C6A8|E220    |      ;
-    LDA.W $018A                                                ;84C6AA|AD8A01  |00018A;
+    LDA.W strcDialogDisplay.dialoUnk18A                        ;84C6AA|AD8A01  |00018A;
     SEC                                                        ;84C6AD|38      |      ;
     SBC.B #$0B                                                 ;84C6AE|E90B    |      ;
-    STA.W $018A                                                ;84C6B0|8D8A01  |00018A;
-    STZ.W $018B                                                ;84C6B3|9C8B01  |00018B;
+    STA.W strcDialogDisplay.dialoUnk18A                        ;84C6B0|8D8A01  |00018A;
+    STZ.W strcDialogDisplay.dialoUnk18B                        ;84C6B3|9C8B01  |00018B;
  
 .return:
     RTL                                                        ;84C6B6|6B      |      ;
@@ -9550,7 +9550,7 @@ fInput_PlayerButtonX_SwapTool:
 fInput_Handler_case06:
     SEP #$20                                                   ;84CED2|E220    |      ;
     REP #$10                                                   ;84CED4|C210    |      ;
-    LDA.W $019B                                                ;84CED6|AD9B01  |00019B;
+    LDA.W strcDialogDisplay.mapUnk19B                          ;84CED6|AD9B01  |00019B;
     AND.B #$04                                                 ;84CED9|2904    |      ;
     BEQ .justReturn                                            ;84CEDB|F027    |84CF04;
     REP #$30                                                   ;84CEDD|C230    |      ;
@@ -9563,7 +9563,7 @@ fInput_Handler_case06:
     JSL.L fDialog_Unknown_8393F9                               ;84CEEE|22F99383|8393F9;
     SEP #$20                                                   ;84CEF2|E220    |      ;
     LDA.B #$01                                                 ;84CEF4|A901    |      ;
-    STA.W $019A                                                ;84CEF6|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;84CEF6|8D9A01  |00019A;
     REP #$20                                                   ;84CEF9|C220    |      ;
     LDA.W strcJoypad1.newInput                                 ;84CEFB|AD2801  |000128;
     AND.W #$FF7F                                               ;84CEFE|297FFF  |      ;
@@ -9576,19 +9576,19 @@ fInput_Handler_case06:
 fInput_Handler_case02:
     SEP #$20                                                   ;84CF05|E220    |      ;
     REP #$10                                                   ;84CF07|C210    |      ;
-    LDA.W $019B                                                ;84CF09|AD9B01  |00019B;
+    LDA.W strcDialogDisplay.mapUnk19B                          ;84CF09|AD9B01  |00019B;
     AND.B #$02                                                 ;84CF0C|2902    |      ;
     BNE fInput_Unknown84CF2D                                   ;84CF0E|D01D    |84CF2D;
-    LDA.W $019B                                                ;84CF10|AD9B01  |00019B;
+    LDA.W strcDialogDisplay.mapUnk19B                          ;84CF10|AD9B01  |00019B;
     AND.B #$04                                                 ;84CF13|2904    |      ;
     BNE fInput_Unknown84CF40                                   ;84CF15|D029    |84CF40;
-    LDA.W $019B                                                ;84CF17|AD9B01  |00019B;
+    LDA.W strcDialogDisplay.mapUnk19B                          ;84CF17|AD9B01  |00019B;
     AND.B #$08                                                 ;84CF1A|2908    |      ;
     BNE fInput_Unknown84CF62                                   ;84CF1C|D044    |84CF62;
-    LDA.W $019B                                                ;84CF1E|AD9B01  |00019B;
+    LDA.W strcDialogDisplay.mapUnk19B                          ;84CF1E|AD9B01  |00019B;
     AND.B #$10                                                 ;84CF21|2910    |      ;
     BNE fInput_Unknown84CF95                                   ;84CF23|D070    |84CF95;
-    LDA.W $019B                                                ;84CF25|AD9B01  |00019B;
+    LDA.W strcDialogDisplay.mapUnk19B                          ;84CF25|AD9B01  |00019B;
     AND.B #$20                                                 ;84CF28|2920    |      ;
     BNE fInput_Unknown84CF40                                   ;84CF2A|D014    |84CF40;
     RTL                                                        ;84CF2C|6B      |      ;
@@ -9605,7 +9605,7 @@ fInput_Unknown84CF2D:
 fInput_Unknown84CF38:
     SEP #$20                                                   ;84CF38|E220    |      ;
     LDA.B #$04                                                 ;84CF3A|A904    |      ;
-    STA.W $0189                                                ;84CF3C|8D8901  |000189;
+    STA.W strcDialogDisplay.dialoUnk189                        ;84CF3C|8D8901  |000189;
     RTL                                                        ;84CF3F|6B      |      ;
  
  
@@ -9620,7 +9620,7 @@ fInput_Unknown84CF40:
   + JSL.L fDialog_Unknown_8393F9                               ;84CF4B|22F99383|8393F9;
     SEP #$20                                                   ;84CF4F|E220    |      ;
     LDA.B #$01                                                 ;84CF51|A901    |      ;
-    STA.W $019A                                                ;84CF53|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;84CF53|8D9A01  |00019A;
     REP #$20                                                   ;84CF56|C220    |      ;
     LDA.W strcJoypad1.newInput                                 ;84CF58|AD2801  |000128;
     AND.W #$FF7F                                               ;84CF5B|297FFF  |      ;
@@ -9638,19 +9638,19 @@ fInput_Unknown84CF62:
  
   + JSL.L fDialog_Unknown_83932D                               ;84CF6D|222D9383|83932D;
     REP #$20                                                   ;84CF71|C220    |      ;
-    LDA.W nCurrentTextIndex                                    ;84CF73|AD8701  |000187;
+    LDA.W strcDialogDisplay.dialogCurrentOffset                ;84CF73|AD8701  |000187;
     INC A                                                      ;84CF76|1A      |      ;
-    STA.W nCurrentTextIndex                                    ;84CF77|8D8701  |000187;
+    STA.W strcDialogDisplay.dialogCurrentOffset                ;84CF77|8D8701  |000187;
     LDA.W #$5000                                               ;84CF7A|A90050  |      ;
     CLC                                                        ;84CF7D|18      |      ;
     ADC.W #$0010                                               ;84CF7E|691000  |      ;
-    STA.W $0185                                                ;84CF81|8D8501  |000185;
+    STA.W strcDialogDisplay.dialogOptionCount                  ;84CF81|8D8501  |000185;
     SEP #$20                                                   ;84CF84|E220    |      ;
-    STZ.W $018B                                                ;84CF86|9C8B01  |00018B;
-    LDA.W $019B                                                ;84CF89|AD9B01  |00019B;
+    STZ.W strcDialogDisplay.dialoUnk18B                        ;84CF86|9C8B01  |00018B;
+    LDA.W strcDialogDisplay.mapUnk19B                          ;84CF89|AD9B01  |00019B;
     AND.B #$F7                                                 ;84CF8C|29F7    |      ;
-    STA.W $019B                                                ;84CF8E|8D9B01  |00019B;
-    STZ.W $0189                                                ;84CF91|9C8901  |000189;
+    STA.W strcDialogDisplay.mapUnk19B                          ;84CF8E|8D9B01  |00019B;
+    STZ.W strcDialogDisplay.dialoUnk189                        ;84CF91|9C8901  |000189;
     RTL                                                        ;84CF94|6B      |      ;
  
  
@@ -9697,7 +9697,7 @@ fInput_Unknown84CFCC:
     JSL.L fDialog_Unknown_8393F9                               ;84CFDE|22F99383|8393F9;
     SEP #$20                                                   ;84CFE2|E220    |      ;
     LDA.B #$01                                                 ;84CFE4|A901    |      ;
-    STA.W $019A                                                ;84CFE6|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;84CFE6|8D9A01  |00019A;
     RTL                                                        ;84CFE9|6B      |      ;
  
  
@@ -9714,38 +9714,38 @@ fInput_Unknown84CFEA:
     LDA.W #$00B1                                               ;84D001|A9B100  |      ;
     JSL.L fDialog_TransferGlyph                                ;84D004|22239883|839823;
     SEP #$20                                                   ;84D008|E220    |      ;
-    LDA.W nSelectedDialogOption                                ;84D00A|AD8F01  |00018F;
+    LDA.W strcDialogDisplay.dialogOptionsAnswer                ;84D00A|AD8F01  |00018F;
     CMP.B #$03                                                 ;84D00D|C903    |      ;
     BCC .label1                                                ;84D00F|900B    |84D01C;
-    CMP.W $018E                                                ;84D011|CD8E01  |00018E;
+    CMP.W strcDialogDisplay.dialogUnk18E                       ;84D011|CD8E01  |00018E;
     BEQ .label2                                                ;84D014|F01A    |84D030;
     INC A                                                      ;84D016|1A      |      ;
-    STA.W nSelectedDialogOption                                ;84D017|8D8F01  |00018F;
+    STA.W strcDialogDisplay.dialogOptionsAnswer                ;84D017|8D8F01  |00018F;
     BRA fInput_Unknown84D036                                   ;84D01A|801A    |84D036;
  
  
 .label1:
-    CMP.W $018E                                                ;84D01C|CD8E01  |00018E;
+    CMP.W strcDialogDisplay.dialogUnk18E                       ;84D01C|CD8E01  |00018E;
     BEQ +                                                      ;84D01F|F00A    |84D02B;
     CMP.B #$02                                                 ;84D021|C902    |      ;
     BEQ +                                                      ;84D023|F006    |84D02B;
     INC A                                                      ;84D025|1A      |      ;
-    STA.W nSelectedDialogOption                                ;84D026|8D8F01  |00018F;
+    STA.W strcDialogDisplay.dialogOptionsAnswer                ;84D026|8D8F01  |00018F;
     BRA fInput_Unknown84D036                                   ;84D029|800B    |84D036;
  
  
-  + STZ.W nSelectedDialogOption                                ;84D02B|9C8F01  |00018F;
+  + STZ.W strcDialogDisplay.dialogOptionsAnswer                ;84D02B|9C8F01  |00018F;
     BRA fInput_Unknown84D036                                   ;84D02E|8006    |84D036;
  
  
 .label2:
     DEC A                                                      ;84D030|3A      |      ;
-    STA.W nSelectedDialogOption                                ;84D031|8D8F01  |00018F;
+    STA.W strcDialogDisplay.dialogOptionsAnswer                ;84D031|8D8F01  |00018F;
     BRA fInput_Unknown84D036                                   ;84D034|8000    |84D036;
  
  
 fInput_Unknown84D036:
-    STZ.W $018B                                                ;84D036|9C8B01  |00018B;
+    STZ.W strcDialogDisplay.dialoUnk18B                        ;84D036|9C8B01  |00018B;
     RTL                                                        ;84D039|6B      |      ;
  
  
@@ -9762,38 +9762,38 @@ fInput_Unknown84D03A:
     LDA.W #$00B1                                               ;84D051|A9B100  |      ;
     JSL.L fDialog_TransferGlyph                                ;84D054|22239883|839823;
     SEP #$20                                                   ;84D058|E220    |      ;
-    LDA.W nSelectedDialogOption                                ;84D05A|AD8F01  |00018F;
+    LDA.W strcDialogDisplay.dialogOptionsAnswer                ;84D05A|AD8F01  |00018F;
     BEQ .label1                                                ;84D05D|F00A    |84D069;
     CMP.B #$03                                                 ;84D05F|C903    |      ;
     BEQ .label2                                                ;84D061|F019    |84D07C;
     DEC A                                                      ;84D063|3A      |      ;
-    STA.W nSelectedDialogOption                                ;84D064|8D8F01  |00018F;
+    STA.W strcDialogDisplay.dialogOptionsAnswer                ;84D064|8D8F01  |00018F;
     BRA fInput_Unknown84D036                                   ;84D067|80CD    |84D036;
  
  
 .label1:
-    LDA.W $018E                                                ;84D069|AD8E01  |00018E;
+    LDA.W strcDialogDisplay.dialogUnk18E                       ;84D069|AD8E01  |00018E;
     CMP.B #$03                                                 ;84D06C|C903    |      ;
     BCC +                                                      ;84D06E|9007    |84D077;
     LDA.B #$02                                                 ;84D070|A902    |      ;
-    STA.W nSelectedDialogOption                                ;84D072|8D8F01  |00018F;
+    STA.W strcDialogDisplay.dialogOptionsAnswer                ;84D072|8D8F01  |00018F;
     BRA .return                                                ;84D075|8013    |84D08A;
  
  
-  + STA.W nSelectedDialogOption                                ;84D077|8D8F01  |00018F;
+  + STA.W strcDialogDisplay.dialogOptionsAnswer                ;84D077|8D8F01  |00018F;
     BRA .return                                                ;84D07A|800E    |84D08A;
  
  
 .label2:
-    LDA.W $018E                                                ;84D07C|AD8E01  |00018E;
+    LDA.W strcDialogDisplay.dialogUnk18E                       ;84D07C|AD8E01  |00018E;
     CMP.B #$03                                                 ;84D07F|C903    |      ;
     BEQ .return                                                ;84D081|F007    |84D08A;
-    LDA.W nSelectedDialogOption                                ;84D083|AD8F01  |00018F;
+    LDA.W strcDialogDisplay.dialogOptionsAnswer                ;84D083|AD8F01  |00018F;
     INC A                                                      ;84D086|1A      |      ;
-    STA.W nSelectedDialogOption                                ;84D087|8D8F01  |00018F;
+    STA.W strcDialogDisplay.dialogOptionsAnswer                ;84D087|8D8F01  |00018F;
  
 .return:
-    STZ.W $018B                                                ;84D08A|9C8B01  |00018B;
+    STZ.W strcDialogDisplay.dialoUnk18B                        ;84D08A|9C8B01  |00018B;
     RTL                                                        ;84D08D|6B      |      ;
  
  
@@ -9806,10 +9806,10 @@ fInput_Unknown84D08E:
     STA.W strcAudio.reg115                                     ;84D099|8D1501  |000115;
     JSL.L fAudioSetRegister2to0A                               ;84D09C|22328383|838332;
     SEP #$20                                                   ;84D0A0|E220    |      ;
-    LDA.W $018E                                                ;84D0A2|AD8E01  |00018E;
+    LDA.W strcDialogDisplay.dialogUnk18E                       ;84D0A2|AD8E01  |00018E;
     CMP.B #$03                                                 ;84D0A5|C903    |      ;
     BCC .return                                                ;84D0A7|9047    |84D0F0;
-    LDA.W nSelectedDialogOption                                ;84D0A9|AD8F01  |00018F;
+    LDA.W strcDialogDisplay.dialogOptionsAnswer                ;84D0A9|AD8F01  |00018F;
     CMP.B #$02                                                 ;84D0AC|C902    |      ;
     BEQ .return                                                ;84D0AE|F040    |84D0F0;
     REP #$30                                                   ;84D0B0|C230    |      ;
@@ -9817,36 +9817,36 @@ fInput_Unknown84D08E:
     LDA.W #$00B1                                               ;84D0B5|A9B100  |      ;
     JSL.L fDialog_TransferGlyph                                ;84D0B8|22239883|839823;
     SEP #$20                                                   ;84D0BC|E220    |      ;
-    LDA.W nSelectedDialogOption                                ;84D0BE|AD8F01  |00018F;
+    LDA.W strcDialogDisplay.dialogOptionsAnswer                ;84D0BE|AD8F01  |00018F;
     CMP.B #$02                                                 ;84D0C1|C902    |      ;
     BCC +                                                      ;84D0C3|9008    |84D0CD;
     SEC                                                        ;84D0C5|38      |      ;
     SBC.B #$03                                                 ;84D0C6|E903    |      ;
-    STA.W nSelectedDialogOption                                ;84D0C8|8D8F01  |00018F;
+    STA.W strcDialogDisplay.dialogOptionsAnswer                ;84D0C8|8D8F01  |00018F;
     BRA .return                                                ;84D0CB|8023    |84D0F0;
  
  
   + SEP #$20                                                   ;84D0CD|E220    |      ;
-    LDA.W nSelectedDialogOption                                ;84D0CF|AD8F01  |00018F;
+    LDA.W strcDialogDisplay.dialogOptionsAnswer                ;84D0CF|AD8F01  |00018F;
     CMP.B #$01                                                 ;84D0D2|C901    |      ;
     BEQ +                                                      ;84D0D4|F008    |84D0DE;
     CLC                                                        ;84D0D6|18      |      ;
     ADC.B #$03                                                 ;84D0D7|6903    |      ;
-    STA.W nSelectedDialogOption                                ;84D0D9|8D8F01  |00018F;
+    STA.W strcDialogDisplay.dialogOptionsAnswer                ;84D0D9|8D8F01  |00018F;
     BRA .return                                                ;84D0DC|8012    |84D0F0;
  
  
   + SEP #$20                                                   ;84D0DE|E220    |      ;
-    LDA.W $018E                                                ;84D0E0|AD8E01  |00018E;
+    LDA.W strcDialogDisplay.dialogUnk18E                       ;84D0E0|AD8E01  |00018E;
     CMP.B #$03                                                 ;84D0E3|C903    |      ;
     BEQ .return                                                ;84D0E5|F009    |84D0F0;
-    LDA.W nSelectedDialogOption                                ;84D0E7|AD8F01  |00018F;
+    LDA.W strcDialogDisplay.dialogOptionsAnswer                ;84D0E7|AD8F01  |00018F;
     CLC                                                        ;84D0EA|18      |      ;
     ADC.B #$03                                                 ;84D0EB|6903    |      ;
-    STA.W nSelectedDialogOption                                ;84D0ED|8D8F01  |00018F;
+    STA.W strcDialogDisplay.dialogOptionsAnswer                ;84D0ED|8D8F01  |00018F;
  
 .return:
-    STZ.W $018B                                                ;84D0F0|9C8B01  |00018B;
+    STZ.W strcDialogDisplay.dialoUnk18B                        ;84D0F0|9C8B01  |00018B;
     RTL                                                        ;84D0F3|6B      |      ;
  
  
@@ -9859,10 +9859,10 @@ fInput_Unknown84D0F4:
     STA.W strcAudio.reg115                                     ;84D0FF|8D1501  |000115;
     JSL.L fAudioSetRegister2to0A                               ;84D102|22328383|838332;
     SEP #$20                                                   ;84D106|E220    |      ;
-    LDA.W $018E                                                ;84D108|AD8E01  |00018E;
+    LDA.W strcDialogDisplay.dialogUnk18E                       ;84D108|AD8E01  |00018E;
     CMP.B #$03                                                 ;84D10B|C903    |      ;
     BCC .return                                                ;84D10D|9047    |84D156;
-    LDA.W nSelectedDialogOption                                ;84D10F|AD8F01  |00018F;
+    LDA.W strcDialogDisplay.dialogOptionsAnswer                ;84D10F|AD8F01  |00018F;
     CMP.B #$02                                                 ;84D112|C902    |      ;
     BEQ .return                                                ;84D114|F040    |84D156;
     REP #$30                                                   ;84D116|C230    |      ;
@@ -9870,36 +9870,36 @@ fInput_Unknown84D0F4:
     LDA.W #$00B1                                               ;84D11B|A9B100  |      ;
     JSL.L fDialog_TransferGlyph                                ;84D11E|22239883|839823;
     SEP #$20                                                   ;84D122|E220    |      ;
-    LDA.W nSelectedDialogOption                                ;84D124|AD8F01  |00018F;
+    LDA.W strcDialogDisplay.dialogOptionsAnswer                ;84D124|AD8F01  |00018F;
     CMP.B #$02                                                 ;84D127|C902    |      ;
     BCC +                                                      ;84D129|9008    |84D133;
     SEC                                                        ;84D12B|38      |      ;
     SBC.B #$03                                                 ;84D12C|E903    |      ;
-    STA.W nSelectedDialogOption                                ;84D12E|8D8F01  |00018F;
+    STA.W strcDialogDisplay.dialogOptionsAnswer                ;84D12E|8D8F01  |00018F;
     BRA .return                                                ;84D131|8023    |84D156;
  
  
   + SEP #$20                                                   ;84D133|E220    |      ;
-    LDA.W nSelectedDialogOption                                ;84D135|AD8F01  |00018F;
+    LDA.W strcDialogDisplay.dialogOptionsAnswer                ;84D135|AD8F01  |00018F;
     CMP.B #$01                                                 ;84D138|C901    |      ;
     BEQ +                                                      ;84D13A|F008    |84D144;
     CLC                                                        ;84D13C|18      |      ;
     ADC.B #$03                                                 ;84D13D|6903    |      ;
-    STA.W nSelectedDialogOption                                ;84D13F|8D8F01  |00018F;
+    STA.W strcDialogDisplay.dialogOptionsAnswer                ;84D13F|8D8F01  |00018F;
     BRA .return                                                ;84D142|8012    |84D156;
  
  
   + SEP #$20                                                   ;84D144|E220    |      ;
-    LDA.W $018E                                                ;84D146|AD8E01  |00018E;
+    LDA.W strcDialogDisplay.dialogUnk18E                       ;84D146|AD8E01  |00018E;
     CMP.B #$03                                                 ;84D149|C903    |      ;
     BEQ .return                                                ;84D14B|F009    |84D156;
-    LDA.W nSelectedDialogOption                                ;84D14D|AD8F01  |00018F;
+    LDA.W strcDialogDisplay.dialogOptionsAnswer                ;84D14D|AD8F01  |00018F;
     CLC                                                        ;84D150|18      |      ;
     ADC.B #$03                                                 ;84D151|6903    |      ;
-    STA.W nSelectedDialogOption                                ;84D153|8D8F01  |00018F;
+    STA.W strcDialogDisplay.dialogOptionsAnswer                ;84D153|8D8F01  |00018F;
  
 .return:
-    STZ.W $018B                                                ;84D156|9C8B01  |00018B;
+    STZ.W strcDialogDisplay.dialoUnk18B                        ;84D156|9C8B01  |00018B;
     RTL                                                        ;84D159|6B      |      ;
  
  

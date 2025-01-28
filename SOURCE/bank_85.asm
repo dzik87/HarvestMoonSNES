@@ -823,7 +823,7 @@ fUnknown_8583E0:
     ORA.B #$20                                                 ;85859C|0920    |      ;
     EOR.B strcObject.flip                                      ;85859E|459F    |00009F;
     STA.L $7EA003,X                                            ;8585A0|9F03A07E|7EA003;
-    LDA.W nCurrentMapdataPresetId                              ;8585A4|AD9501  |000195;
+    LDA.W strcDialogDisplay.mapCurrentPresetId                 ;8585A4|AD9501  |000195;
     ASL A                                                      ;8585A7|0A      |      ;
     ASL A                                                      ;8585A8|0A      |      ;
     ASL A                                                      ;8585A9|0A      |      ;
