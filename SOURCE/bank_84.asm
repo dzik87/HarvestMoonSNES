@@ -7661,7 +7661,7 @@ fInput_Handler:
  
   + CMP.B #$02                                                 ;84C042|C902    |      ;
     BNE +                                                      ;84C044|D003    |84C049;
-    JMP.W fInput_Handler_case02                                ;84C046|4C05CF  |84CF05;
+    JMP.W fInput_DialogHandler                                 ;84C046|4C05CF  |84CF05;
  
  
   + CMP.B #$03                                                 ;84C049|C903    |      ;
@@ -8406,7 +8406,7 @@ fInput_Unknown84C57A:
     STA.W strcAudio.reg115                                     ;84C585|8D1501  |000115;
     JSL.L fAudioSetRegister2to0A                               ;84C588|22328383|838332;
     SEP #$20                                                   ;84C58C|E220    |      ;
-    STZ.W strcDialogDisplay.mapUnk19B                          ;84C58E|9C9B01  |00019B;
+    STZ.W strcDialogDisplay.dialogFlags                        ;84C58E|9C9B01  |00019B;
     SEP #$20                                                   ;84C591|E220    |      ;
     LDA.B #$02                                                 ;84C593|A902    |      ;
     STA.W strcDialogDisplay.mapUnk19A                          ;84C595|8D9A01  |00019A;
@@ -9550,8 +9550,8 @@ fInput_PlayerButtonX_SwapTool:
 fInput_Handler_case06:
     SEP #$20                                                   ;84CED2|E220    |      ;
     REP #$10                                                   ;84CED4|C210    |      ;
-    LDA.W strcDialogDisplay.mapUnk19B                          ;84CED6|AD9B01  |00019B;
-    AND.B #$04                                                 ;84CED9|2904    |      ;
+    LDA.W strcDialogDisplay.dialogFlags                        ;84CED6|AD9B01  |00019B;
+    AND.B #!DFLAGS_ENDDIALOG                                                 
     BEQ .justReturn                                            ;84CEDB|F027    |84CF04;
     REP #$30                                                   ;84CEDD|C230    |      ;
     LDA.W $09B1                                                ;84CEDF|ADB109  |0009B1;
@@ -9573,43 +9573,42 @@ fInput_Handler_case06:
     RTL                                                        ;84CF04|6B      |      ;
  
  
-fInput_Handler_case02:
+fInput_DialogHandler:
     SEP #$20                                                   ;84CF05|E220    |      ;
     REP #$10                                                   ;84CF07|C210    |      ;
-    LDA.W strcDialogDisplay.mapUnk19B                          ;84CF09|AD9B01  |00019B;
-    AND.B #$02                                                 ;84CF0C|2902    |      ;
-    BNE fInput_Unknown84CF2D                                   ;84CF0E|D01D    |84CF2D;
-    LDA.W strcDialogDisplay.mapUnk19B                          ;84CF10|AD9B01  |00019B;
-    AND.B #$04                                                 ;84CF13|2904    |      ;
-    BNE fInput_Unknown84CF40                                   ;84CF15|D029    |84CF40;
-    LDA.W strcDialogDisplay.mapUnk19B                          ;84CF17|AD9B01  |00019B;
-    AND.B #$08                                                 ;84CF1A|2908    |      ;
-    BNE fInput_Unknown84CF62                                   ;84CF1C|D044    |84CF62;
-    LDA.W strcDialogDisplay.mapUnk19B                          ;84CF1E|AD9B01  |00019B;
-    AND.B #$10                                                 ;84CF21|2910    |      ;
-    BNE fInput_Unknown84CF95                                   ;84CF23|D070    |84CF95;
-    LDA.W strcDialogDisplay.mapUnk19B                          ;84CF25|AD9B01  |00019B;
-    AND.B #$20                                                 ;84CF28|2920    |      ;
-    BNE fInput_Unknown84CF40                                   ;84CF2A|D014    |84CF40;
+    LDA.W strcDialogDisplay.dialogFlags                        ;84CF09|AD9B01  |00019B;
+    AND.B #!DFLAGS_UNK02                                                 
+    BNE fInput_DialogUnk20                                     ;84CF0E|D01D    |84CF2D;
+    LDA.W strcDialogDisplay.dialogFlags                        ;84CF10|AD9B01  |00019B;
+    AND.B #!DFLAGS_ENDDIALOG                                                 
+    BNE fInput_DialogEndDialog                                 ;84CF15|D029    |84CF40;
+    LDA.W strcDialogDisplay.dialogFlags                        ;84CF17|AD9B01  |00019B;
+    AND.B #!DFLAGS_NEXTSCREEN                                                 
+    BNE fInput_DialogNextScreen                                ;84CF1C|D044    |84CF62;
+    LDA.W strcDialogDisplay.dialogFlags                        ;84CF1E|AD9B01  |00019B;
+    AND.B #!DFLAGS_OPTIONS                                                 
+    BNE fInput_DialogOptions                                   ;84CF23|D070    |84CF95;
+    LDA.W strcDialogDisplay.dialogFlags                        ;84CF25|AD9B01  |00019B;
+    AND.B #!DFLAGS_UNK20                                                 
+    BNE fInput_DialogEndDialog                                 ;84CF2A|D014    |84CF40;
     RTL                                                        ;84CF2C|6B      |      ;
  
  
-fInput_Unknown84CF2D:
+fInput_DialogUnk20:
     REP #$30                                                   ;84CF2D|C230    |      ;
     LDA.W strcJoypad1.current                                  ;84CF2F|AD2401  |000124;
     BIT.W #!JOYPAD_A                                               
-    BNE fInput_Unknown84CF38                                   ;84CF35|D001    |84CF38;
+    BNE +                                                      ;84CF35|D001    |84CF38;
     RTL                                                        ;84CF37|6B      |      ;
  
  
-fInput_Unknown84CF38:
-    SEP #$20                                                   ;84CF38|E220    |      ;
+  + SEP #$20                                                   ;84CF38|E220    |      ;
     LDA.B #$04                                                 ;84CF3A|A904    |      ;
     STA.W strcDialogDisplay.dialoUnk189                        ;84CF3C|8D8901  |000189;
     RTL                                                        ;84CF3F|6B      |      ;
  
  
-fInput_Unknown84CF40:
+fInput_DialogEndDialog:
     REP #$30                                                   ;84CF40|C230    |      ;
     LDA.W strcJoypad1.newInput                                 ;84CF42|AD2801  |000128;
     BIT.W #!JOYPAD_A                                               
@@ -9628,7 +9627,7 @@ fInput_Unknown84CF40:
     RTL                                                        ;84CF61|6B      |      ;
  
  
-fInput_Unknown84CF62:
+fInput_DialogNextScreen:
     REP #$30                                                   ;84CF62|C230    |      ;
     LDA.W strcJoypad1.newInput                                 ;84CF64|AD2801  |000128;
     BIT.W #!JOYPAD_A                                               
@@ -9647,14 +9646,14 @@ fInput_Unknown84CF62:
     STA.W strcDialogDisplay.dialogOptionCount                  ;84CF81|8D8501  |000185;
     SEP #$20                                                   ;84CF84|E220    |      ;
     STZ.W strcDialogDisplay.dialoUnk18B                        ;84CF86|9C8B01  |00018B;
-    LDA.W strcDialogDisplay.mapUnk19B                          ;84CF89|AD9B01  |00019B;
-    AND.B #$F7                                                 ;84CF8C|29F7    |      ;
-    STA.W strcDialogDisplay.mapUnk19B                          ;84CF8E|8D9B01  |00019B;
+    LDA.W strcDialogDisplay.dialogFlags                        ;84CF89|AD9B01  |00019B;
+    AND.B #~!DFLAGS_NEXTSCREEN                                                 
+    STA.W strcDialogDisplay.dialogFlags                        ;84CF8E|8D9B01  |00019B;
     STZ.W strcDialogDisplay.dialoUnk189                        ;84CF91|9C8901  |000189;
     RTL                                                        ;84CF94|6B      |      ;
  
  
-fInput_Unknown84CF95:
+fInput_DialogOptions:
     REP #$30                                                   ;84CF95|C230    |      ;
     LDA.W strcJoypad1.newInput                                 ;84CF97|AD2801  |000128;
     BIT.W #!JOYPAD_DOWN                                               

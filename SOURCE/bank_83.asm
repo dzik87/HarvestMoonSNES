@@ -2273,16 +2273,16 @@ fDialog_Unknown_83932D:
  
 fDialog_DialogHandler:
     REP #$30                                                   ;83935F|C230    |      ; X: nDialogPointerIndex
-    STX.W strcDialogDisplay.pDialog                            ;839361|8E8301  |000183;
+    STX.W strcDialogDisplay.dialogId                           ;839361|8E8301  |000183;
     LDA.W #$5000                                               ;839364|A90050  |      ;
     CLC                                                        ;839367|18      |      ;
     ADC.W #$0010                                               ;839368|691000  |      ;
     STA.W strcDialogDisplay.dialogOptionCount                  ;83936B|8D8501  |000185;
     STZ.W strcDialogDisplay.dialogCurrentOffset                ;83936E|9C8701  |000187;
     SEP #$20                                                   ;839371|E220    |      ;
-    LDA.W strcDialogDisplay.mapUnk19B                          ;839373|AD9B01  |00019B;
-    ORA.B #$01                                                 ;839376|0901    |      ;
-    STA.W strcDialogDisplay.mapUnk19B                          ;839378|8D9B01  |00019B;
+    LDA.W strcDialogDisplay.dialogFlags                        ;839373|AD9B01  |00019B;
+    ORA.B #!DFLAGS_PROCESSDIALOG                                                 
+    STA.W strcDialogDisplay.dialogFlags                        ;839378|8D9B01  |00019B;
     STZ.W strcDialogDisplay.dialoUnk189                        ;83937B|9C8901  |000189;
     STZ.W strcDialogDisplay.dialoUnk18B                        ;83937E|9C8B01  |00018B;
     STZ.W strcDialogDisplay.dialogVarSize                      ;839381|9C8C01  |00018C;
@@ -2290,18 +2290,18 @@ fDialog_DialogHandler:
     STZ.W strcDialogDisplay.dialogOptionsAnswer                ;839387|9C8F01  |00018F;
     STZ.W strcDialogDisplay.dialogUnk190                       ;83938A|9C9001  |000190;
     REP #$20                                                   ;83938D|C220    |      ;
-    LDA.W strcDialogDisplay.pDialog                            ;83938F|AD8301  |000183;
+    LDA.W strcDialogDisplay.dialogId                           ;83938F|AD8301  |000183;
     ASL A                                                      ;839392|0A      |      ;
     CLC                                                        ;839393|18      |      ;
-    ADC.W strcDialogDisplay.pDialog                            ;839394|6D8301  |000183;
+    ADC.W strcDialogDisplay.dialogId                           ;839394|6D8301  |000183;
     TAX                                                        ;839397|AA      |      ;
     LDA.L aDialogPointers,X                                    ;839398|BFF69B83|839BF6;
-    STA.B ptrCurrentDialog                                     ;83939C|8501    |000001;
+    STA.B ptrDialog                                            ;83939C|8501    |000001;
     INX                                                        ;83939E|E8      |      ;
     INX                                                        ;83939F|E8      |      ;
     SEP #$20                                                   ;8393A0|E220    |      ;
     LDA.L aDialogPointers,X                                    ;8393A2|BFF69B83|839BF6;
-    STA.B ptrCurrentDialog+2                                   ;8393A6|8503    |000003;
+    STA.B ptrDialog+2                                          ;8393A6|8503    |000003;
     SEP #$20                                                   ;8393A8|E220    |      ;
     LDA.W strcDialogDisplay.dialogUnk191                       ;8393AA|AD9101  |000191;
     BNE +                                                      ;8393AD|D016    |8393C5;
@@ -2345,7 +2345,7 @@ fDialog_DialogHandler:
 fDialog_Unknown_8393F9:
     SEP #$20                                                   ;8393F9|E220    |      ;
     REP #$10                                                   ;8393FB|C210    |      ;
-    STZ.W strcDialogDisplay.mapUnk19B                          ;8393FD|9C9B01  |00019B;
+    STZ.W strcDialogDisplay.dialogFlags                        ;8393FD|9C9B01  |00019B;
     SEP #$20                                                   ;839400|E220    |      ;
     LDA.B #$00                                                 ;839402|A900    |      ;
     XBA                                                        ;839404|EB      |      ;
@@ -2484,51 +2484,51 @@ fDialog_Unknown_8394D7:
 fDialog_IterateText:
     SEP #$20                                                   ;83951C|E220    |      ;
     REP #$10                                                   ;83951E|C210    |      ;
-    LDA.W strcDialogDisplay.mapUnk19B                          ;839520|AD9B01  |00019B;
-    AND.B #$20                                                 ;839523|2920    |      ;
+    LDA.W strcDialogDisplay.dialogFlags                        ;839520|AD9B01  |00019B;
+    AND.B #!DFLAGS_UNK20                                                 
     BEQ +                                                      ;839525|F003    |83952A;
     JMP.W fDialog_Unknown_839447                               ;839527|4C4794  |839447;
  
  
-  + LDA.W strcDialogDisplay.mapUnk19B                          ;83952A|AD9B01  |00019B;
-    AND.B #$01                                                 ;83952D|2901    |      ;
+  + LDA.W strcDialogDisplay.dialogFlags                        ;83952A|AD9B01  |00019B;
+    AND.B #!DFLAGS_PROCESSDIALOG                                                 
     BNE .getCurrentLetter                                      ;83952F|D003    |839534;
     JMP.W .justReturn                                          ;839531|4CF095  |8395F0;
  
  
 .getCurrentLetter:
     SEP #$20                                                   ;839534|E220    |      ;
-    LDA.W strcDialogDisplay.mapUnk19B                          ;839536|AD9B01  |00019B;
-    AND.B #$FD                                                 ;839539|29FD    |      ;
-    STA.W strcDialogDisplay.mapUnk19B                          ;83953B|8D9B01  |00019B;
+    LDA.W strcDialogDisplay.dialogFlags                        ;839536|AD9B01  |00019B;
+    AND.B #~!DFLAGS_UNK02                                                 
+    STA.W strcDialogDisplay.dialogFlags                        ;83953B|8D9B01  |00019B;
     REP #$20                                                   ;83953E|C220    |      ;
     LDA.W strcDialogDisplay.dialogCurrentOffset                ;839540|AD8701  |000187; A = nCurrentTextIndex
     ASL A                                                      ;839543|0A      |      ;
     TAY                                                        ;839544|A8      |      ;
-    LDA.B [ptrCurrentDialog],Y                                 ;839545|B701    |000001; Y = nCurrentTextIndex * 2
+    LDA.B [ptrDialog],Y                                        ;839545|B701    |000001; Y = nCurrentTextIndex * 2
     CMP.W #$00A2                                               ;839547|C9A200  |      ;
     BNE +                                                      ;83954A|D003    |83954F;
-    JMP.W .textNextScreenHandler                               ;83954C|4CF195  |8395F1;
+    JMP.W .A2_nextScreen                                       ;83954C|4CF195  |8395F1;
  
  
   + CMP.W #$00B1                                               ;83954F|C9B100  |      ;
     BNE +                                                      ;839552|D003    |839557;
-    JMP.W .textSpaceHandler                                    ;839554|4C0D96  |83960D;
+    JMP.W .B1_space                                            ;839554|4C0D96  |83960D;
  
  
   + CMP.W #$FFFC                                               ;839557|C9FCFF  |      ;
     BNE +                                                      ;83955A|D003    |83955F;
-    JMP.W .textFFFCHandler                                     ;83955C|4C2196  |839621;
+    JMP.W .FFFC_numberVariable                                 ;83955C|4C2196  |839621;
  
  
   + CMP.W #$FFFE                                               ;83955F|C9FEFF  |      ;
     BNE +                                                      ;839562|D003    |839567;
-    JMP.W .textFFFEHandler                                     ;839564|4C1997  |839719;
+    JMP.W .FFFE_optionSelect                                   ;839564|4C1997  |839719;
  
  
   + CMP.W #$FFFF                                               ;839567|C9FFFF  |      ;
     BNE +                                                      ;83956A|D003    |83956F;
-    JMP.W .textFFFFHandler                                     ;83956C|4C5297  |839752;
+    JMP.W .FFFF_endDialog                                      ;83956C|4C5297  |839752;
  
  
   + SEP #$20                                                   ;83956F|E220    |      ;
@@ -2537,25 +2537,25 @@ fDialog_IterateText:
     BNE .return                                                ;839576|D06F    |8395E7;
     STZ.W strcDialogDisplay.dialoUnk189                        ;839578|9C8901  |000189;
     REP #$20                                                   ;83957B|C220    |      ;
-    LDA.B [ptrCurrentDialog],Y                                 ;83957D|B701    |000001;
+    LDA.B [ptrDialog],Y                                        ;83957D|B701    |000001;
     CMP.W #$FFFD                                               ;83957F|C9FDFF  |      ;
     BNE +                                                      ;839582|D003    |839587;
-    JMP.W .textFFFDHandler                                     ;839584|4CA196  |8396A1;
+    JMP.W .FFFD_textVariable                                   ;839584|4CA196  |8396A1;
  
  
   + REP #$30                                                   ;839587|C230    |      ;
-    LDA.B [ptrCurrentDialog],Y                                 ;839589|B701    |000001;
+    LDA.B [ptrDialog],Y                                        ;839589|B701    |000001;
     SEP #$10                                                   ;83958B|E210    |      ;
     LDX.B #$01                                                 ;83958D|A201    |      ;
     CMP.W #$00BC                                               ;83958F|C9BC00  |      ;
-    BCC .label4                                                ;839592|9009    |83959D;
+    BCC .BCtoC6_unk                                            ;839592|9009    |83959D;
     CMP.W #$00C6                                               ;839594|C9C600  |      ;
-    BCS .label4                                                ;839597|B004    |83959D;
+    BCS .BCtoC6_unk                                            ;839597|B004    |83959D;
     LDX.B #$00                                                 ;839599|A200    |      ;
     BRA .label5                                                ;83959B|8007    |8395A4;
  
  
-.label4:
+.BCtoC6_unk:
     CMP.W #$0270                                               ;83959D|C97002  |      ;
     BNE .label5                                                ;8395A0|D002    |8395A4;
     LDX.B #$00                                                 ;8395A2|A200    |      ;
@@ -2571,22 +2571,21 @@ fDialog_IterateText:
     STA.W strcAudio.reg115                                     ;8395B6|8D1501  |000115;
     JSL.L fAudioSetRegister2to0A                               ;8395B9|22328383|838332;
     SEP #$20                                                   ;8395BD|E220    |      ;
-    LDA.W strcDialogDisplay.mapUnk19B                          ;8395BF|AD9B01  |00019B;
-    ORA.B #$02                                                 ;8395C2|0902    |      ;
-    STA.W strcDialogDisplay.mapUnk19B                          ;8395C4|8D9B01  |00019B;
+    LDA.W strcDialogDisplay.dialogFlags                        ;8395BF|AD9B01  |00019B;
+    ORA.B #!DFLAGS_UNK02                                                 
+    STA.W strcDialogDisplay.dialogFlags                        ;8395C4|8D9B01  |00019B;
     REP #$30                                                   ;8395C7|C230    |      ;
  
 .loop:
     SEP #$20                                                   ;8395C9|E220    |      ;
     LDA.W strcDialogDisplay.dialogVarSize                      ;8395CB|AD8C01  |00018C;
-    BNE .label6                                                ;8395CE|D009    |8395D9;
+    BNE +                                                      ;8395CE|D009    |8395D9;
     REP #$20                                                   ;8395D0|C220    |      ;
     LDA.W strcDialogDisplay.dialogCurrentOffset                ;8395D2|AD8701  |000187;
     INC A                                                      ;8395D5|1A      |      ;
     STA.W strcDialogDisplay.dialogCurrentOffset                ;8395D6|8D8701  |000187;
  
-.label6:
-    SEP #$20                                                   ;8395D9|E220    |      ;
+  + SEP #$20                                                   ;8395D9|E220    |      ;
     LDA.B #$00                                                 ;8395DB|A900    |      ;
     XBA                                                        ;8395DD|EB      |      ;
     LDA.W strcDialogDisplay.dialogUnk190                       ;8395DE|AD9001  |000190;
@@ -2604,11 +2603,11 @@ fDialog_IterateText:
     RTL                                                        ;8395F0|6B      |      ;
  
  
-.textNextScreenHandler:
+.A2_nextScreen:
     SEP #$20                                                   ;8395F1|E220    |      ;
-    LDA.W strcDialogDisplay.mapUnk19B                          ;8395F3|AD9B01  |00019B;
-    ORA.B #$08                                                 ;8395F6|0908    |      ;
-    STA.W strcDialogDisplay.mapUnk19B                          ;8395F8|8D9B01  |00019B;
+    LDA.W strcDialogDisplay.dialogFlags                        ;8395F3|AD9B01  |00019B;
+    ORA.B #!DFLAGS_NEXTSCREEN                                                 
+    STA.W strcDialogDisplay.dialogFlags                        ;8395F8|8D9B01  |00019B;
     REP #$20                                                   ;8395FB|C220    |      ;
     LDA.W #$5528                                               ;8395FD|A92855  |      ;
     STA.W strcDialogDisplay.dialogOptionCount                  ;839600|8D8501  |000185; $0185 = 0x5528
@@ -2618,7 +2617,7 @@ fDialog_IterateText:
     BRA .justReturn                                            ;83960B|80E3    |8395F0;
  
  
-.textSpaceHandler:
+.B1_space:
     REP #$20                                                   ;83960D|C220    |      ;
     LDA.W strcDialogDisplay.dialogCurrentOffset                ;83960F|AD8701  |000187;
     INC A                                                      ;839612|1A      |      ;
@@ -2629,10 +2628,10 @@ fDialog_IterateText:
     JMP.W .getCurrentLetter                                    ;83961E|4C3495  |839534;
  
  
-.textFFFCHandler:
+.FFFC_numberVariable:
     SEP #$20                                                   ;839621|E220    |      ;
     LDA.W strcDialogDisplay.dialogVarSize                      ;839623|AD8C01  |00018C;
-    BNE .label7                                                ;839626|D052    |83967A;
+    BNE +                                                      ;839626|D052    |83967A;
     REP #$20                                                   ;839628|C220    |      ;
     LDA.W strcDialogDisplay.dialogCurrentOffset                ;83962A|AD8701  |000187;
     ASL A                                                      ;83962D|0A      |      ;
@@ -2640,12 +2639,12 @@ fDialog_IterateText:
     INY                                                        ;83962F|C8      |      ;
     INY                                                        ;839630|C8      |      ;
     SEP #$20                                                   ;839631|E220    |      ;
-    LDA.B [ptrCurrentDialog],Y                                 ;839633|B701    |000001;
+    LDA.B [ptrDialog],Y                                        ;839633|B701    |000001;
     STA.W strcDialogDisplay.dialogVarSize                      ;839635|8D8C01  |00018C;
     REP #$20                                                   ;839638|C220    |      ;
     INY                                                        ;83963A|C8      |      ;
     INY                                                        ;83963B|C8      |      ;
-    LDA.B [ptrCurrentDialog],Y                                 ;83963C|B701    |000001;
+    LDA.B [ptrDialog],Y                                        ;83963C|B701    |000001;
     DEC A                                                      ;83963E|3A      |      ;
     ASL A                                                      ;83963F|0A      |      ;
     ASL A                                                      ;839640|0A      |      ;
@@ -2660,9 +2659,9 @@ fDialog_IterateText:
     STZ.W strcDialogDisplay.dialogNumericVarSize               ;839652|9C9201  |000192;
     STZ.W strcDialogDisplay.dialogNumericVarSize+1             ;839655|9C9301  |000193;
     STZ.W strcDialogDisplay.dialogNumericVarSize+2             ;839658|9C9401  |000194;
-    LDA.W strcDialogDisplay.mapUnk19B                          ;83965B|AD9B01  |00019B;
-    AND.B #$7F                                                 ;83965E|297F    |      ;
-    STA.W strcDialogDisplay.mapUnk19B                          ;839660|8D9B01  |00019B;
+    LDA.W strcDialogDisplay.dialogFlags                        ;83965B|AD9B01  |00019B;
+    AND.B #~!DFLAGS_NUMERICVAR                                                 
+    STA.W strcDialogDisplay.dialogFlags                        ;839660|8D9B01  |00019B;
     INX                                                        ;839663|E8      |      ;
     LDA.L aTextDataTableFFFC,X                                 ;839664|BFEE9883|8398EE;
     LDY.W #$0000                                               ;839668|A00000  |      ;
@@ -2677,8 +2676,7 @@ fDialog_IterateText:
     DEC A                                                      ;839677|3A      |      ;
     BNE -                                                      ;839678|D0F4    |83966E;
  
-.label7:
-    SEP #$20                                                   ;83967A|E220    |      ;
+  + SEP #$20                                                   ;83967A|E220    |      ;
     LDA.W strcDialogDisplay.dialogVarSize                      ;83967C|AD8C01  |00018C;
     DEC A                                                      ;83967F|3A      |      ;
     STA.W strcDialogDisplay.dialogVarSize                      ;839680|8D8C01  |00018C;
@@ -2697,7 +2695,7 @@ fDialog_IterateText:
   + JMP.W .loop                                                ;83969E|4CC995  |8395C9;
  
  
-.textFFFDHandler:
+.FFFD_textVariable:
     SEP #$20                                                   ;8396A1|E220    |      ;
     LDA.W strcDialogDisplay.dialogVarSize                      ;8396A3|AD8C01  |00018C;
     BNE +                                                      ;8396A6|D014    |8396BC;
@@ -2708,7 +2706,7 @@ fDialog_IterateText:
     INY                                                        ;8396AF|C8      |      ;
     INY                                                        ;8396B0|C8      |      ;
     SEP #$20                                                   ;8396B1|E220    |      ;
-    LDA.B [ptrCurrentDialog],Y                                 ;8396B3|B701    |000001;
+    LDA.B [ptrDialog],Y                                        ;8396B3|B701    |000001;
     STA.W strcDialogDisplay.dialogVarSize                      ;8396B5|8D8C01  |00018C;
     DEC A                                                      ;8396B8|3A      |      ;
     STA.W strcDialogDisplay.dialogUnk18D                       ;8396B9|8D8D01  |00018D;
@@ -2719,7 +2717,7 @@ fDialog_IterateText:
     CLC                                                        ;8396C2|18      |      ;
     ADC.W #$0004                                               ;8396C3|690400  |      ;
     TAY                                                        ;8396C6|A8      |      ;
-    LDA.B [ptrCurrentDialog],Y                                 ;8396C7|B701    |000001;
+    LDA.B [ptrDialog],Y                                        ;8396C7|B701    |000001;
     DEC A                                                      ;8396C9|3A      |      ;
     ASL A                                                      ;8396CA|0A      |      ;
     ASL A                                                      ;8396CB|0A      |      ;
@@ -2761,11 +2759,11 @@ fDialog_IterateText:
   + JMP.W .loop                                                ;839716|4CC995  |8395C9;
  
  
-.textFFFEHandler:
+.FFFE_optionSelect:
     SEP #$20                                                   ;839719|E220    |      ;
-    LDA.W strcDialogDisplay.mapUnk19B                          ;83971B|AD9B01  |00019B;
-    ORA.B #$10                                                 ;83971E|0910    |      ;
-    STA.W strcDialogDisplay.mapUnk19B                          ;839720|8D9B01  |00019B;
+    LDA.W strcDialogDisplay.dialogFlags                        ;83971B|AD9B01  |00019B;
+    ORA.B #!DFLAGS_OPTIONS                                                 
+    STA.W strcDialogDisplay.dialogFlags                        ;839720|8D9B01  |00019B;
     REP #$20                                                   ;839723|C220    |      ;
     LDA.W strcDialogDisplay.dialogCurrentOffset                ;839725|AD8701  |000187;
     ASL A                                                      ;839728|0A      |      ;
@@ -2773,7 +2771,7 @@ fDialog_IterateText:
     INY                                                        ;83972A|C8      |      ;
     INY                                                        ;83972B|C8      |      ;
     SEP #$20                                                   ;83972C|E220    |      ;
-    LDA.B [ptrCurrentDialog],Y                                 ;83972E|B701    |000001;
+    LDA.B [ptrDialog],Y                                        ;83972E|B701    |000001;
     DEC A                                                      ;839730|3A      |      ;
     STA.W strcDialogDisplay.dialogUnk18E                       ;839731|8D8E01  |00018E;
     SEP #$20                                                   ;839734|E220    |      ;
@@ -2791,11 +2789,11 @@ fDialog_IterateText:
     JMP.W .justReturn                                          ;83974F|4CF095  |8395F0;
  
  
-.textFFFFHandler:
+.FFFF_endDialog:
     SEP #$20                                                   ;839752|E220    |      ;
-    LDA.W strcDialogDisplay.mapUnk19B                          ;839754|AD9B01  |00019B;
-    ORA.B #$04                                                 ;839757|0904    |      ;
-    STA.W strcDialogDisplay.mapUnk19B                          ;839759|8D9B01  |00019B;
+    LDA.W strcDialogDisplay.dialogFlags                        ;839754|AD9B01  |00019B;
+    ORA.B #!DFLAGS_ENDDIALOG                                                 
+    STA.W strcDialogDisplay.dialogFlags                        ;839759|8D9B01  |00019B;
     JMP.W .justReturn                                          ;83975C|4CF095  |8395F0;
  
  
@@ -2881,19 +2879,19 @@ fDialog_Unknown_8397A6:
     ADC.B strcVariables.n16Temp2                               ;8397F5|6580    |000080;
     STA.W strcDialogDisplay.dialogNumericVarSize+2             ;8397F7|8D9401  |000194;
     SEP #$20                                                   ;8397FA|E220    |      ;
-    LDA.W strcDialogDisplay.mapUnk19B                          ;8397FC|AD9B01  |00019B;
-    AND.B #$80                                                 ;8397FF|2980    |      ;
+    LDA.W strcDialogDisplay.dialogFlags                        ;8397FC|AD9B01  |00019B;
+    AND.B #!DFLAGS_NUMERICVAR                                                 
     BNE +                                                      ;839801|D00D    |839810;
     CPX.W #$0000                                               ;839803|E00000  |      ;
     BEQ .return                                                ;839806|F01A    |839822;
-    LDA.W strcDialogDisplay.mapUnk19B                          ;839808|AD9B01  |00019B;
-    ORA.B #$80                                                 ;83980B|0980    |      ;
-    STA.W strcDialogDisplay.mapUnk19B                          ;83980D|8D9B01  |00019B;
+    LDA.W strcDialogDisplay.dialogFlags                        ;839808|AD9B01  |00019B;
+    ORA.B #!DFLAGS_NUMERICVAR                                                 
+    STA.W strcDialogDisplay.dialogFlags                        ;83980D|8D9B01  |00019B;
  
   + REP #$30                                                   ;839810|C230    |      ;
     TXA                                                        ;839812|8A      |      ;
     STA.B strcVariables.n16Temp1                               ;839813|857E    |00007E;
-    LDA.W #$00BC                                               ;839815|A9BC00  |      ;
+    LDA.W #$00BC                                               ;839815|A9BC00  |      ; ZERO GLYPH
     CLC                                                        ;839818|18      |      ;
     ADC.B strcVariables.n16Temp1                               ;839819|657E    |00007E;
     LDX.W #$0000                                               ;83981B|A20000  |      ;
@@ -4777,11 +4775,11 @@ fGameEngine_SetDefaults:
  
 fGameEngine_FirstNight:
     REP #$30                                                   ;83ABF0|C230    |      ;
-    STZ.W strcDialogDisplay.pDialog                            ;83ABF2|9C8301  |000183;
+    STZ.W strcDialogDisplay.dialogId                           ;83ABF2|9C8301  |000183;
     STZ.W strcDialogDisplay.dialogOptionCount                  ;83ABF5|9C8501  |000185;
     STZ.W strcDialogDisplay.dialogCurrentOffset                ;83ABF8|9C8701  |000187;
     SEP #$20                                                   ;83ABFB|E220    |      ;
-    STZ.W strcDialogDisplay.mapUnk19B                          ;83ABFD|9C9B01  |00019B;
+    STZ.W strcDialogDisplay.dialogFlags                        ;83ABFD|9C9B01  |00019B;
     STZ.W strcDialogDisplay.mapUnk19A                          ;83AC00|9C9A01  |00019A;
     STZ.B strcSystem.DMAchannelFlags                           ;83AC03|6428    |000028;
     REP #$20                                                   ;83AC05|C220    |      ;

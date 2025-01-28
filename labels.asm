@@ -1,4 +1,4 @@
-    ptrCurrentDialog = $000001; !^ ptr24 ^!
+    ptrDialog = $000001; !^ ptr24 ^!
     ptrPaletteNext = $000004; !^ ptr24 ^!
     ptrUnknown0x07 = $000007; !^ ptr24 ^!
     ptrAudioData = $00000A; !^ ptr24 ^!

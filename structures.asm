@@ -296,14 +296,14 @@ endstruct
 
 
 ;
-; Size and start OK
+; Size and start OK - name to be reconsidered
 ;
 struct strcDialogDisplay    $00017D
     .mapDestX               : skip 2    ; 17D-17E
     .mapDestY               : skip 2    ; 17F-180
     .mapMultiWidth          : skip 1    ; 181
     .mapMultiHeight         : skip 1    ; 182
-    .pDialog                : skip 2    ; 183-184
+    .dialogId               : skip 2    ; 183-184
     .dialogOptionCount      : skip 2    ; 185-186   stores how many options there was for current dialog
     .dialogCurrentOffset    : skip 2    ; 187-188   current offset in current dialog / index
     .dialoUnk189            : skip 1    ; 189
@@ -320,9 +320,17 @@ struct strcDialogDisplay    $00017D
     .mapFlags               : skip 2    ; 196-197
     .mapFlagsBackup         : skip 2    ; 198-199
     .mapUnk19A              : skip 1    ; 19A
-    .mapUnk19B              : skip 1    ; 19B
+    .dialogFlags            : skip 1    ; 19B
 endstruct
 
+!DFLAGS_PROCESSDIALOG       =   $01
+!DFLAGS_UNK02               =   $02
+!DFLAGS_ENDDIALOG           =   $04
+!DFLAGS_NEXTSCREEN          =   $08
+!DFLAGS_OPTIONS             =   $10
+!DFLAGS_UNK20               =   $20
+!DFLAGS_UNK40               =   $30
+!DFLAGS_NUMERICVAR          =   $80
 
 ;
 ; Size and start OK - Game Objects x 40 entries (19C - 73B)
