@@ -163,7 +163,7 @@ fEvents_ShippingScene:
     CMP.B #$04                                                 ;828142|C904    |      ;
     BCS fEvents_ShippingSceneReturn                            ;828144|B079    |8281BF;
     LDA.B #$00                                                 ;828146|A900    |      ;
-    STA.W $019A                                                ;828148|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;828148|8D9A01  |00019A;
     REP #$20                                                   ;82814B|C220    |      ;
     %SetFlag(daily1, $0400)
     %AIExecute($0006, $0000, $0026)
@@ -178,7 +178,7 @@ fEvents_ShippingSceneDialog:
  
  
   + LDA.W #$0002                                               ;82817C|A90200  |      ;
-    STA.W $019A                                                ;82817F|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;82817F|8D9A01  |00019A;
     LDX.W #$031A                                               ;828182|A21A03  |      ;
     REP #$20                                                   ;828185|C220    |      ;
     LDA.L nShippingProfit                                      ;828187|AF071F7F|7F1F07;
@@ -190,7 +190,7 @@ fEvents_ShippingSceneDialog:
  
   + SEP #$20                                                   ;828198|E220    |      ;
     LDA.B #$00                                                 ;82819A|A900    |      ;
-    STA.W $0191                                                ;82819C|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;82819C|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;82819F|225F9383|83935F;
     REP #$20                                                   ;8281A3|C220    |      ;
     LDA.W #$0006                                               ;8281A5|A90600  |      ;
@@ -216,10 +216,10 @@ fWeatherUnknown_8281C0:
     LDA.L .data,X                                              ;8281CF|BFFD8182|8281FD;
     STA.W nWeatherDialogIdIndex                                ;8281D3|8D9009  |000990;
     REP #$20                                                   ;8281D6|C220    |      ;
-    LDA.W nMapEngine_flags                                     ;8281D8|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;8281D8|AD9601  |000196;
     AND.W #$0010                                               ;8281DB|291000  |      ;
     BNE .label1                                                ;8281DE|D00A    |8281EA;
-    LDA.W nMapEngine_flags                                     ;8281E0|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;8281E0|AD9601  |000196;
     AND.W #$0200                                               ;8281E3|290002  |      ;
     BNE .label2                                                ;8281E6|D00B    |8281F3;
     BRA .return                                                ;8281E8|8012    |8281FC;
@@ -248,19 +248,19 @@ fWeatherUnknown_8281C0:
  
 fUnknown_828209:
     REP #$30                                                   ;828209|C230    |      ;
-    LDA.W nMapEngine_flags                                     ;82820B|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;82820B|AD9601  |000196;
     AND.W #$0002                                               ;82820E|290200  |      ;
     BNE .label1                                                ;828211|D021    |828234;
-    LDA.W nMapEngine_flags                                     ;828213|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;828213|AD9601  |000196;
     AND.W #$0008                                               ;828216|290800  |      ;
     BNE .label2                                                ;828219|D027    |828242;
-    LDA.W nMapEngine_flags                                     ;82821B|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;82821B|AD9601  |000196;
     AND.W #$0010                                               ;82821E|291000  |      ;
     BNE .label3                                                ;828221|D02D    |828250;
-    LDA.W nMapEngine_flags                                     ;828223|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;828223|AD9601  |000196;
     AND.W #$0100                                               ;828226|290001  |      ;
     BNE .label4                                                ;828229|D033    |82825E;
-    LDA.W nMapEngine_flags                                     ;82822B|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;82822B|AD9601  |000196;
     AND.W #$0200                                               ;82822E|290002  |      ;
     BNE .label5                                                ;828231|D02D    |828260;
  
@@ -393,20 +393,20 @@ fNextDayHandler:
     %UnsetFlag(event1, $0030)
     %UnsetFlag(event7, $0002)
     REP #$30                                                   ;828339|C230    |      ;
-    LDA.W nMapEngine_flags                                     ;82833B|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;82833B|AD9601  |000196;
     AND.W #$0010                                               ;82833E|291000  |      ;
     BEQ +                                                      ;828341|F00B    |82834E;
     %SetFlag(event1, $0020)
  
   + JSL.L fWeatherForecast_828C09                              ;82834E|22098C82|828C09;
     REP #$30                                                   ;828352|C230    |      ;
-    LDA.W nMapEngine_flags                                     ;828354|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;828354|AD9601  |000196;
     AND.W #$0200                                               ;828357|290002  |      ;
     BEQ +                                                      ;82835A|F00B    |828367;
     %SetFlag(event1, $0010)
  
   + REP #$30                                                   ;828367|C230    |      ;
-    LDA.W nMapEngine_flags                                     ;828369|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;828369|AD9601  |000196;
     AND.W #$0100                                               ;82836C|290001  |      ;
     BEQ +                                                      ;82836F|F00B    |82837C;
     %SetFlag(event7, $0002)
@@ -652,7 +652,7 @@ fNextDayHandler:
     STA.L strcShedItems.row3                                   ;8286E4|8F021F7F|7F1F02;
  
   + REP #$30                                                   ;8286E8|C230    |      ;
-    LDA.W nMapEngine_flags                                     ;8286EA|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;8286EA|AD9601  |000196;
     AND.W #$0010                                               ;8286ED|291000  |      ;
     BEQ +                                                      ;8286F0|F00B    |8286FD;
     %SetFlag(daily4, $0001)
@@ -688,9 +688,9 @@ fNextDayHandler:
     %UnsetPlayerFlag(!PFLAGS_HOLDINGITEM)
     REP #$30                                                   ;828749|C230    |      ;
     LDA.W #$0088                                               ;82874B|A98800  |      ;
-    STA.W nMapEngine_DestinationX                              ;82874E|8D7D01  |00017D;
+    STA.W strcDialogDisplay.mapDestX                           ;82874E|8D7D01  |00017D;
     LDA.W #$0078                                               ;828751|A97800  |      ;
-    STA.W nMapEngine_DestinationY                              ;828754|8D7F01  |00017F;
+    STA.W strcDialogDisplay.mapDestY                           ;828754|8D7F01  |00017F;
     SEP #$20                                                   ;828757|E220    |      ;
     LDA.B #$15                                                 ;828759|A915    |      ;
     STA.W nDestinationAreaId                                   ;82875B|8D8B09  |00098B;
@@ -1107,7 +1107,7 @@ aDayOrdinalString:
  
 fWeatherForecast_828C09:
     REP #$30                                                   ;828C09|C230    |      ;
-    STZ.W nMapEngine_flags                                     ;828C0B|9C9601  |000196;
+    STZ.W strcDialogDisplay.mapFlags                           ;828C0B|9C9601  |000196;
     SEP #$20                                                   ;828C0E|E220    |      ;
     LDA.B #$00                                                 ;828C10|A900    |      ;
     XBA                                                        ;828C12|EB      |      ;
@@ -1139,7 +1139,7 @@ fWeatherForecast_828C09:
  
   + REP #$20                                                   ;828C3F|C220    |      ;
     LDA.L nWeatherTable_828CED                                 ;828C41|AFED8C82|828CED;
-    STA.W nMapEngine_flags                                     ;828C45|8D9601  |000196;
+    STA.W strcDialogDisplay.mapFlags                           ;828C45|8D9601  |000196;
     JMP.W .return                                              ;828C48|4CEC8C  |828CEC;
  
  
@@ -1151,14 +1151,14 @@ fWeatherForecast_828C09:
     REP #$20                                                   ;828C55|C220    |      ;
     LDX.W #$0004                                               ;828C57|A20400  |      ;
     LDA.L nWeatherTable_828CED,X                               ;828C5A|BFED8C82|828CED;
-    STA.W nMapEngine_flags                                     ;828C5E|8D9601  |000196;
+    STA.W strcDialogDisplay.mapFlags                           ;828C5E|8D9601  |000196;
     JMP.W .return                                              ;828C61|4CEC8C  |828CEC;
  
  
   + REP #$20                                                   ;828C64|C220    |      ;
     LDX.W #$0002                                               ;828C66|A20200  |      ;
     LDA.L nWeatherTable_828CED,X                               ;828C69|BFED8C82|828CED;
-    STA.W nMapEngine_flags                                     ;828C6D|8D9601  |000196;
+    STA.W strcDialogDisplay.mapFlags                           ;828C6D|8D9601  |000196;
     BRA .return                                                ;828C70|807A    |828CEC;
  
  
@@ -1169,14 +1169,14 @@ fWeatherForecast_828C09:
     LDX.W #$0002                                               ;828C7A|A20200  |      ;
     REP #$20                                                   ;828C7D|C220    |      ;
     LDA.L nWeatherTable_828CED,X                               ;828C7F|BFED8C82|828CED;
-    STA.W nMapEngine_flags                                     ;828C83|8D9601  |000196;
+    STA.W strcDialogDisplay.mapFlags                           ;828C83|8D9601  |000196;
     BRA .return                                                ;828C86|8064    |828CEC;
  
  
   + REP #$20                                                   ;828C88|C220    |      ;
     LDX.W #$0004                                               ;828C8A|A20400  |      ;
     LDA.L nWeatherTable_828CED,X                               ;828C8D|BFED8C82|828CED;
-    STA.W nMapEngine_flags                                     ;828C91|8D9601  |000196;
+    STA.W strcDialogDisplay.mapFlags                           ;828C91|8D9601  |000196;
     BRA .return                                                ;828C94|8056    |828CEC;
  
  
@@ -1184,7 +1184,7 @@ fWeatherForecast_828C09:
     REP #$20                                                   ;828C96|C220    |      ;
     LDX.W #$0006                                               ;828C98|A20600  |      ;
     LDA.L nWeatherTable_828CED,X                               ;828C9B|BFED8C82|828CED;
-    STA.W nMapEngine_flags                                     ;828C9F|8D9601  |000196;
+    STA.W strcDialogDisplay.mapFlags                           ;828C9F|8D9601  |000196;
     BRA .return                                                ;828CA2|8048    |828CEC;
  
  
@@ -1192,7 +1192,7 @@ fWeatherForecast_828C09:
     REP #$20                                                   ;828CA4|C220    |      ;
     LDX.W #$0008                                               ;828CA6|A20800  |      ;
     LDA.L nWeatherTable_828CED,X                               ;828CA9|BFED8C82|828CED;
-    STA.W nMapEngine_flags                                     ;828CAD|8D9601  |000196;
+    STA.W strcDialogDisplay.mapFlags                           ;828CAD|8D9601  |000196;
     %SetFlag(event1, $0002)
     %SetFlag(event6, $0100)
     BRA .return                                                ;828CC6|8024    |828CEC;
@@ -1202,7 +1202,7 @@ fWeatherForecast_828C09:
     REP #$20                                                   ;828CC8|C220    |      ;
     LDX.W #$000A                                               ;828CCA|A20A00  |      ;
     LDA.L nWeatherTable_828CED,X                               ;828CCD|BFED8C82|828CED;
-    STA.W nMapEngine_flags                                     ;828CD1|8D9601  |000196;
+    STA.W strcDialogDisplay.mapFlags                           ;828CD1|8D9601  |000196;
     %SetFlag(event1, $0001)
     %SetFlag(event6, $0080)
     BRA .return                                                ;828CEA|8000    |828CEC;
@@ -2740,7 +2740,7 @@ fToolUsedAction0x04_Axe:
     CPX.W #$00F4                                               ;829957|E0F400  |      ;
     BNE .return                                                ;82995A|D02D    |829989;
     REP #$30                                                   ;82995C|C230    |      ;
-    LDA.W nMapEngine_flags                                     ;82995E|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;82995E|AD9601  |000196;
     AND.W #$001A                                               ;829961|291A00  |      ;
     BNE .return                                                ;829964|D023    |829989;
     %CheckFlag(event4, $0020)
@@ -4212,7 +4212,7 @@ fObjectMap_CurrentMapToFarmMap:
     CMP.B #$03                                                 ;82A6AA|C903    |      ;
     BNE .return                                                ;82A6AC|D064    |82A712;
     LDA.B #$04                                                 ;82A6AE|A904    |      ;
-    STA.W nCurrentMapdata_RoomWidthMult                        ;82A6B0|8D8101  |000181;
+    STA.W strcDialogDisplay.mapMultiWidth                      ;82A6B0|8D8101  |000181;
     REP #$20                                                   ;82A6B3|C220    |      ;
     LDY.W #$0000                                               ;82A6B5|A00000  |      ;
  
@@ -4289,7 +4289,7 @@ fObjectMap_HuricaneDamage:
     STY.B strcVariables.n16Unk8A                               ;82A719|848A    |00008A;
     SEP #$20                                                   ;82A71B|E220    |      ;
     LDA.B #$04                                                 ;82A71D|A904    |      ;
-    STA.W nCurrentMapdata_RoomWidthMult                        ;82A71F|8D8101  |000181;
+    STA.W strcDialogDisplay.mapMultiWidth                      ;82A71F|8D8101  |000181;
     REP #$20                                                   ;82A722|C220    |      ;
     LDY.W #$0000                                               ;82A724|A00000  |      ;
  
@@ -4440,7 +4440,7 @@ fObjectMap_Unknown82A811:
     SEP #$20                                                   ;82A811|E220    |      ;
     REP #$10                                                   ;82A813|C210    |      ;
     LDA.B #$04                                                 ;82A815|A904    |      ;
-    STA.W nCurrentMapdata_RoomWidthMult                        ;82A817|8D8101  |000181;
+    STA.W strcDialogDisplay.mapMultiWidth                      ;82A817|8D8101  |000181;
     REP #$20                                                   ;82A81A|C220    |      ;
     LDY.W #$0000                                               ;82A81C|A00000  |      ;
  
@@ -4537,7 +4537,7 @@ fObjectMap_Unknown82A811:
  
 .label1:
     REP #$20                                                   ;82A8A4|C220    |      ;
-    LDA.W nMapEngine_flags                                     ;82A8A6|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;82A8A6|AD9601  |000196;
     AND.W #$0002                                               ;82A8A9|290200  |      ;
     BEQ +                                                      ;82A8AC|F003    |82A8B1;
     JMP.W .label6                                              ;82A8AE|4C06A9  |82A906;
@@ -4548,7 +4548,7 @@ fObjectMap_Unknown82A811:
  
 .label2:
     REP #$20                                                   ;82A8B4|C220    |      ;
-    LDA.W nMapEngine_flags                                     ;82A8B6|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;82A8B6|AD9601  |000196;
     AND.W #$0002                                               ;82A8B9|290200  |      ;
     BEQ +                                                      ;82A8BC|F003    |82A8C1;
     JMP.W .label9                                              ;82A8BE|4C69A9  |82A969;
@@ -4630,9 +4630,9 @@ fObjectMap_Unknown82A811:
     JSL.L fCore_GetRandomNumber                                ;82A94D|22F98980|8089F9;
     BNE .label9                                                ;82A951|D016    |82A969;
     REP #$20                                                   ;82A953|C220    |      ;
-    LDA.W nMapEngine_flags                                     ;82A955|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;82A955|AD9601  |000196;
     ORA.W #$0400                                               ;82A958|090004  |      ;
-    STA.W nMapEngine_flags                                     ;82A95B|8D9601  |000196;
+    STA.W strcDialogDisplay.mapFlags                           ;82A95B|8D9601  |000196;
     %SetFlag(event6, $0200)
  
 .label9:
@@ -4674,7 +4674,7 @@ fObjectMap_EatingGrass:
     SEP #$20                                                   ;82A9A0|E220    |      ;
     REP #$10                                                   ;82A9A2|C210    |      ;
     LDA.B #$04                                                 ;82A9A4|A904    |      ;
-    STA.W nCurrentMapdata_RoomWidthMult                        ;82A9A6|8D8101  |000181;
+    STA.W strcDialogDisplay.mapMultiWidth                      ;82A9A6|8D8101  |000181;
     REP #$20                                                   ;82A9A9|C220    |      ;
     STZ.W strcPlayerData.leftGrassToCut                        ;82A9AB|9C2E09  |00092E;
     LDY.W #$0000                                               ;82A9AE|A00000  |      ;
@@ -4739,7 +4739,7 @@ fObjectMap_CalculateRanchDev:
     SEP #$20                                                   ;82AA0C|E220    |      ;
     REP #$10                                                   ;82AA0E|C210    |      ;
     LDA.B #$04                                                 ;82AA10|A904    |      ;
-    STA.W nCurrentMapdata_RoomWidthMult                        ;82AA12|8D8101  |000181;
+    STA.W strcDialogDisplay.mapMultiWidth                      ;82AA12|8D8101  |000181;
     REP #$20                                                   ;82AA15|C220    |      ;
     LDA.W #$0000                                               ;82AA17|A90000  |      ;
     STA.L nRanchDevelopmentRate                                ;82AA1A|8F561F7F|7F1F56;
@@ -5406,7 +5406,7 @@ fUnknown_82AD0E:
     AND.B #$80                                                 ;82AE71|2980    |      ;
     BEQ .justReturn                                            ;82AE73|F070    |82AEE5;
     REP #$20                                                   ;82AE75|C220    |      ;
-    LDA.W nMapEngine_flags                                     ;82AE77|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;82AE77|AD9601  |000196;
     AND.W #$0010                                               ;82AE7A|291000  |      ;
     BEQ .justReturn                                            ;82AE7D|F066    |82AEE5;
     BRA .label2                                                ;82AE7F|8000    |82AE81;
@@ -5415,9 +5415,9 @@ fUnknown_82AD0E:
 .label2:
     SEP #$20                                                   ;82AE81|E220    |      ;
     LDA.B #$02                                                 ;82AE83|A902    |      ;
-    STA.W $019A                                                ;82AE85|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;82AE85|8D9A01  |00019A;
     LDA.B #$00                                                 ;82AE88|A900    |      ;
-    STA.W $0191                                                ;82AE8A|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;82AE8A|8D9101  |000191;
     LDA.B #$00                                                 ;82AE8D|A900    |      ;
     XBA                                                        ;82AE8F|EB      |      ;
     LDA.B strcVariables.n8Temp2                                ;82AE90|A593    |000093;
@@ -5438,9 +5438,9 @@ fUnknown_82AD0E:
     SEP #$20                                                   ;82AEA4|E220    |      ;
     REP #$10                                                   ;82AEA6|C210    |      ;
     LDA.B #$02                                                 ;82AEA8|A902    |      ;
-    STA.W $019A                                                ;82AEAA|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;82AEAA|8D9A01  |00019A;
     LDA.B #$00                                                 ;82AEAD|A900    |      ;
-    STA.W $0191                                                ;82AEAF|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;82AEAF|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;82AEB2|225F9383|83935F;
     BRA .justReturn                                            ;82AEB6|802D    |82AEE5;
  
@@ -5693,7 +5693,7 @@ fMap_UpdateFarmTilemapCoords:
     REP #$10                                                   ;82B04B|C210    |      ;
     PHA                                                        ;82B04D|48      |      ;
     LDA.B #$04                                                 ;82B04E|A904    |      ;
-    STA.W nCurrentMapdata_RoomWidthMult                        ;82B050|8D8101  |000181;
+    STA.W strcDialogDisplay.mapMultiWidth                      ;82B050|8D8101  |000181;
     PLA                                                        ;82B053|68      |      ;
     PHA                                                        ;82B054|48      |      ;
     JSR.W fObjectEngine_ConvertCoordsToOffset                  ;82B055|203CB1  |82B13C;
@@ -5867,7 +5867,7 @@ fObjectEngine_ConvertCoordsToOffset:
     AND.W #$FFF0                                               ;82B146|29F0FF  |      ;
     STA.B strcVariables.n16Temp2                               ;82B149|8580    |000080;
     SEP #$20                                                   ;82B14B|E220    |      ;
-    LDA.W nCurrentMapdata_RoomWidthMult                        ;82B14D|AD8101  |000181;
+    LDA.W strcDialogDisplay.mapMultiWidth                      ;82B14D|AD8101  |000181;
     CMP.B #$01                                                 ;82B150|C901    |      ;
     BEQ +                                                      ;82B152|F017    |82B16B;
     REP #$20                                                   ;82B154|C220    |      ;
@@ -5875,7 +5875,7 @@ fObjectEngine_ConvertCoordsToOffset:
     ASL A                                                      ;82B158|0A      |      ;
     STA.B strcVariables.n16Temp2                               ;82B159|8580    |000080;
     SEP #$20                                                   ;82B15B|E220    |      ;
-    LDA.W nCurrentMapdata_RoomWidthMult                        ;82B15D|AD8101  |000181;
+    LDA.W strcDialogDisplay.mapMultiWidth                      ;82B15D|AD8101  |000181;
     CMP.B #$02                                                 ;82B160|C902    |      ;
     BEQ +                                                      ;82B162|F007    |82B16B;
     REP #$20                                                   ;82B164|C220    |      ;
@@ -7261,7 +7261,7 @@ fUnknown_82D75E:
     REP #$30                                                   ;82D75E|C230    |      ;
     SEP #$20                                                   ;82D760|E220    |      ;
     LDA.B #$04                                                 ;82D762|A904    |      ;
-    STA.W $019A                                                ;82D764|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;82D764|8D9A01  |00019A;
     SEP #$20                                                   ;82D767|E220    |      ;
     STZ.W nUnknownFlags09D                                     ;82D769|9C8D09  |00098D;
     REP #$20                                                   ;82D76C|C220    |      ;
@@ -7676,9 +7676,9 @@ fUnknown_82DAF5:
     REP #$20                                                   ;82DB3D|C220    |      ;
     STZ.B strcPlayer.posX                                      ;82DB3F|64D6    |0000D6;
     STZ.B strcPlayer.posY                                      ;82DB41|64D8    |0000D8;
-    STZ.W nMapEngine_DestinationX                              ;82DB43|9C7D01  |00017D;
-    STZ.W nMapEngine_DestinationY                              ;82DB46|9C7F01  |00017F;
-    STZ.W nMapEngine_flags                                     ;82DB49|9C9601  |000196;
+    STZ.W strcDialogDisplay.mapDestX                           ;82DB43|9C7D01  |00017D;
+    STZ.W strcDialogDisplay.mapDestY                           ;82DB46|9C7F01  |00017F;
+    STZ.W strcDialogDisplay.mapFlags                           ;82DB49|9C9601  |000196;
     SEP #$20                                                   ;82DB4C|E220    |      ;
     LDA.B #$5B                                                 ;82DB4E|A95B    |      ;
     STA.B strcMap.loadAreaId                                   ;82DB50|8522    |000022;
@@ -7733,9 +7733,9 @@ fUnknown_82DBB2:
     STZ.W strcBGScrool.BG2VerOffs                              ;82DBBF|9C4201  |000142;
     STZ.B strcPlayer.posX                                      ;82DBC2|64D6    |0000D6;
     STZ.B strcPlayer.posY                                      ;82DBC4|64D8    |0000D8;
-    STZ.W nMapEngine_DestinationX                              ;82DBC6|9C7D01  |00017D;
-    STZ.W nMapEngine_DestinationY                              ;82DBC9|9C7F01  |00017F;
-    STZ.W nMapEngine_flags                                     ;82DBCC|9C9601  |000196;
+    STZ.W strcDialogDisplay.mapDestX                           ;82DBC6|9C7D01  |00017D;
+    STZ.W strcDialogDisplay.mapDestY                           ;82DBC9|9C7F01  |00017F;
+    STZ.W strcDialogDisplay.mapFlags                           ;82DBCC|9C9601  |000196;
     JSL.L fTileMap_MapChangeHandler                            ;82DBCF|22C6A780|80A7C6;
     JSL.L fAudioUnknown_83841F                                 ;82DBD3|221F8483|83841F;
     JSL.L fAudioUnknown_8383A4                                 ;82DBD7|22A48383|8383A4;
@@ -8126,9 +8126,9 @@ fUnknown_82DEC5:
     STZ.W strcBGScrool.BG2VerOffs                              ;82DF00|9C4201  |000142;
     STZ.B strcPlayer.posX                                      ;82DF03|64D6    |0000D6;
     STZ.B strcPlayer.posY                                      ;82DF05|64D8    |0000D8;
-    STZ.W nMapEngine_DestinationX                              ;82DF07|9C7D01  |00017D;
-    STZ.W nMapEngine_DestinationY                              ;82DF0A|9C7F01  |00017F;
-    STZ.W nMapEngine_flags                                     ;82DF0D|9C9601  |000196;
+    STZ.W strcDialogDisplay.mapDestX                           ;82DF07|9C7D01  |00017D;
+    STZ.W strcDialogDisplay.mapDestY                           ;82DF0A|9C7F01  |00017F;
+    STZ.W strcDialogDisplay.mapFlags                           ;82DF0D|9C9601  |000196;
     SEP #$20                                                   ;82DF10|E220    |      ;
     LDA.B #$5B                                                 ;82DF12|A95B    |      ;
     STA.B strcMap.loadAreaId                                   ;82DF14|8522    |000022;
@@ -8762,15 +8762,15 @@ fUnknown_82E405:
     SEP #$20                                                   ;82E463|E220    |      ;
     LDA.L nCurrentYearID                                       ;82E465|AF181F7F|7F1F18;
     INC A                                                      ;82E469|1A      |      ;
-    STA.W $0192                                                ;82E46A|8D9201  |000192;
+    STA.W strcDialogDisplay.dialogNumericVarSize               ;82E46A|8D9201  |000192;
     REP #$20                                                   ;82E46D|C220    |      ;
-    STZ.W $0193                                                ;82E46F|9C9301  |000193;
+    STZ.W strcDialogDisplay.dialogNumericVarSize+1             ;82E46F|9C9301  |000193;
     SEP #$20                                                   ;82E472|E220    |      ;
     LDA.B #$00                                                 ;82E474|A900    |      ;
-    STA.W $018C                                                ;82E476|8D8C01  |00018C;
-    LDA.W $019B                                                ;82E479|AD9B01  |00019B;
+    STA.W strcDialogDisplay.dialogVarSize                      ;82E476|8D8C01  |00018C;
+    LDA.W strcDialogDisplay.mapUnk19B                          ;82E479|AD9B01  |00019B;
     AND.B #$7F                                                 ;82E47C|297F    |      ;
-    STA.W $019B                                                ;82E47E|8D9B01  |00019B;
+    STA.W strcDialogDisplay.mapUnk19B                          ;82E47E|8D9B01  |00019B;
     JSL.L fDialog_Unknown_8397A6                               ;82E481|22A69783|8397A6;
     JSL.L fCore_StartTransfer                                  ;82E485|22F08A80|808AF0;
     REP #$30                                                   ;82E489|C230    |      ;
@@ -8818,15 +8818,15 @@ fUnknown_82E405:
     STA.L $800185                                              ;82E4F1|8F850180|800185;
     SEP #$20                                                   ;82E4F5|E220    |      ;
     LDA.L nCurrentDay                                          ;82E4F7|AF1B1F7F|7F1F1B;
-    STA.W $0192                                                ;82E4FB|8D9201  |000192;
+    STA.W strcDialogDisplay.dialogNumericVarSize               ;82E4FB|8D9201  |000192;
     REP #$20                                                   ;82E4FE|C220    |      ;
-    STZ.W $0193                                                ;82E500|9C9301  |000193;
+    STZ.W strcDialogDisplay.dialogNumericVarSize+1             ;82E500|9C9301  |000193;
     SEP #$20                                                   ;82E503|E220    |      ;
     LDA.B #$01                                                 ;82E505|A901    |      ;
-    STA.W $018C                                                ;82E507|8D8C01  |00018C;
-    LDA.W $019B                                                ;82E50A|AD9B01  |00019B;
+    STA.W strcDialogDisplay.dialogVarSize                      ;82E507|8D8C01  |00018C;
+    LDA.W strcDialogDisplay.mapUnk19B                          ;82E50A|AD9B01  |00019B;
     AND.B #$7F                                                 ;82E50D|297F    |      ;
-    STA.W $019B                                                ;82E50F|8D9B01  |00019B;
+    STA.W strcDialogDisplay.mapUnk19B                          ;82E50F|8D9B01  |00019B;
     JSL.L fDialog_Unknown_8397A6                               ;82E512|22A69783|8397A6;
     JSL.L fCore_StartTransfer                                  ;82E516|22F08A80|808AF0;
     REP #$30                                                   ;82E51A|C230    |      ;
@@ -8838,7 +8838,7 @@ fUnknown_82E405:
     STA.L $800185                                              ;82E526|8F850180|800185;
     SEP #$20                                                   ;82E52A|E220    |      ;
     LDA.B #$00                                                 ;82E52C|A900    |      ;
-    STA.W $018C                                                ;82E52E|8D8C01  |00018C;
+    STA.W strcDialogDisplay.dialogVarSize                      ;82E52E|8D8C01  |00018C;
     JSL.L fDialog_Unknown_8397A6                               ;82E531|22A69783|8397A6;
     JSL.L fCore_StartTransfer                                  ;82E535|22F08A80|808AF0;
     REP #$30                                                   ;82E539|C230    |      ;
@@ -9124,13 +9124,13 @@ fScreen_NameInput:
     JSL.L fUnknown_Zero7EA220                                  ;82E838|22D78E85|858ED7;
     JSL.L fObject_ClearGameObject                              ;82E83C|220F8285|85820F;
     REP #$20                                                   ;82E840|C220    |      ;
-    LDA.W nMapEngine_flags                                     ;82E842|AD9601  |000196;
-    STA.W nMapEngine_flags_TempCopy                            ;82E845|8D9801  |000198;
-    STZ.W nMapEngine_flags                                     ;82E848|9C9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;82E842|AD9601  |000196;
+    STA.W strcDialogDisplay.mapFlagsBackup                     ;82E845|8D9801  |000198;
+    STZ.W strcDialogDisplay.mapFlags                           ;82E848|9C9601  |000196;
     STZ.W strcObjectData.gameObjectIdx                         ;82E84B|9C0509  |000905;
     SEP #$20                                                   ;82E84E|E220    |      ;
     LDA.B #$05                                                 ;82E850|A905    |      ;
-    STA.W $019A                                                ;82E852|8D9A01  |00019A;
+    STA.W strcDialogDisplay.mapUnk19A                          ;82E852|8D9A01  |00019A;
     SEP #$20                                                   ;82E855|E220    |      ;
     LDA.B #$04                                                 ;82E857|A904    |      ;
     JSL.L fCore_ManageGraphicsPresets                          ;82E859|22598C80|808C59;
@@ -9219,7 +9219,7 @@ fScreen_NameInput:
     LDA.B #$00                                                 ;82E938|A900    |      ;
     STA.W strcMenuData.tableSelector                           ;82E93A|8D9309  |000993;
     STZ.W strcMenuData.nameEntryIdx                            ;82E93D|9C9409  |000994;
-    STZ.W $018B                                                ;82E940|9C8B01  |00018B;
+    STZ.W strcDialogDisplay.dialoUnk18B                        ;82E940|9C8B01  |00018B;
     SEP #$20                                                   ;82E943|E220    |      ;
     LDA.B #$B1                                                 ;82E945|A9B1    |      ;
     STA.W strcNames.sTemp                                      ;82E947|8D8508  |000885;
@@ -9286,8 +9286,8 @@ fScreen_NameInput:
  
 .nameHandler:
     REP #$20                                                   ;82E9CE|C220    |      ;
-    LDA.W nMapEngine_flags_TempCopy                            ;82E9D0|AD9801  |000198;
-    STA.W nMapEngine_flags                                     ;82E9D3|8D9601  |000196;
+    LDA.W strcDialogDisplay.mapFlagsBackup                     ;82E9D0|AD9801  |000198;
+    STA.W strcDialogDisplay.mapFlags                           ;82E9D3|8D9601  |000196;
     SEP #$20                                                   ;82E9D6|E220    |      ;
     LDA.W strcMenuData.nameDestinationIdx                      ;82E9D8|AD9F09  |00099F;
     CMP.B #!NI_PLAYER                                                 
@@ -9335,18 +9335,18 @@ fUnknown_82EA15:
     CMP.B #$04                                                 ;82EA1C|C904    |      ;
     BEQ .return                                                ;82EA1E|F03F    |82EA5F;
     REP #$20                                                   ;82EA20|C220    |      ;
-    LDA.W $018B                                                ;82EA22|AD8B01  |00018B;
+    LDA.W strcDialogDisplay.dialoUnk18B                        ;82EA22|AD8B01  |00018B;
     AND.W #$007F                                               ;82EA25|297F00  |      ;
     CMP.W #$0014                                               ;82EA28|C91400  |      ;
     BNE +                                                      ;82EA2B|D00C    |82EA39;
     SEP #$20                                                   ;82EA2D|E220    |      ;
-    LDA.W $018B                                                ;82EA2F|AD8B01  |00018B;
+    LDA.W strcDialogDisplay.dialoUnk18B                        ;82EA2F|AD8B01  |00018B;
     AND.B #$80                                                 ;82EA32|2980    |      ;
     EOR.B #$80                                                 ;82EA34|4980    |      ;
-    STA.W $018B                                                ;82EA36|8D8B01  |00018B;
+    STA.W strcDialogDisplay.dialoUnk18B                        ;82EA36|8D8B01  |00018B;
  
   + SEP #$20                                                   ;82EA39|E220    |      ;
-    LDA.W $018B                                                ;82EA3B|AD8B01  |00018B;
+    LDA.W strcDialogDisplay.dialoUnk18B                        ;82EA3B|AD8B01  |00018B;
     AND.B #$80                                                 ;82EA3E|2980    |      ;
     BNE .label1                                                ;82EA40|D00B    |82EA4D;
     REP #$20                                                   ;82EA42|C220    |      ;
@@ -9362,9 +9362,9 @@ fUnknown_82EA15:
  
 .label2:
     SEP #$20                                                   ;82EA56|E220    |      ;
-    LDA.W $018B                                                ;82EA58|AD8B01  |00018B;
+    LDA.W strcDialogDisplay.dialoUnk18B                        ;82EA58|AD8B01  |00018B;
     INC A                                                      ;82EA5B|1A      |      ;
-    STA.W $018B                                                ;82EA5C|8D8B01  |00018B;
+    STA.W strcDialogDisplay.dialoUnk18B                        ;82EA5C|8D8B01  |00018B;
  
 .return:
     RTS                                                        ;82EA5F|60      |      ; BIGEND

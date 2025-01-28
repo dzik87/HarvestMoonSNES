@@ -2273,27 +2273,27 @@ fDialog_Unknown_83932D:
  
 fDialog_DialogHandler:
     REP #$30                                                   ;83935F|C230    |      ; X: nDialogPointerIndex
-    STX.W nCurrentDialogPointerIndex                           ;839361|8E8301  |000183;
+    STX.W strcDialogDisplay.pDialog                            ;839361|8E8301  |000183;
     LDA.W #$5000                                               ;839364|A90050  |      ;
     CLC                                                        ;839367|18      |      ;
     ADC.W #$0010                                               ;839368|691000  |      ;
-    STA.W $0185                                                ;83936B|8D8501  |000185;
-    STZ.W nCurrentTextIndex                                    ;83936E|9C8701  |000187;
+    STA.W strcDialogDisplay.dialogOptionCount                  ;83936B|8D8501  |000185;
+    STZ.W strcDialogDisplay.dialogCurrentOffset                ;83936E|9C8701  |000187;
     SEP #$20                                                   ;839371|E220    |      ;
-    LDA.W $019B                                                ;839373|AD9B01  |00019B;
+    LDA.W strcDialogDisplay.mapUnk19B                          ;839373|AD9B01  |00019B;
     ORA.B #$01                                                 ;839376|0901    |      ;
-    STA.W $019B                                                ;839378|8D9B01  |00019B;
-    STZ.W $0189                                                ;83937B|9C8901  |000189;
-    STZ.W $018B                                                ;83937E|9C8B01  |00018B;
-    STZ.W $018C                                                ;839381|9C8C01  |00018C;
-    STZ.W $018E                                                ;839384|9C8E01  |00018E;
-    STZ.W nSelectedDialogOption                                ;839387|9C8F01  |00018F;
-    STZ.W $0190                                                ;83938A|9C9001  |000190;
+    STA.W strcDialogDisplay.mapUnk19B                          ;839378|8D9B01  |00019B;
+    STZ.W strcDialogDisplay.dialoUnk189                        ;83937B|9C8901  |000189;
+    STZ.W strcDialogDisplay.dialoUnk18B                        ;83937E|9C8B01  |00018B;
+    STZ.W strcDialogDisplay.dialogVarSize                      ;839381|9C8C01  |00018C;
+    STZ.W strcDialogDisplay.dialogUnk18E                       ;839384|9C8E01  |00018E;
+    STZ.W strcDialogDisplay.dialogOptionsAnswer                ;839387|9C8F01  |00018F;
+    STZ.W strcDialogDisplay.dialogUnk190                       ;83938A|9C9001  |000190;
     REP #$20                                                   ;83938D|C220    |      ;
-    LDA.W nCurrentDialogPointerIndex                           ;83938F|AD8301  |000183;
+    LDA.W strcDialogDisplay.pDialog                            ;83938F|AD8301  |000183;
     ASL A                                                      ;839392|0A      |      ;
     CLC                                                        ;839393|18      |      ;
-    ADC.W nCurrentDialogPointerIndex                           ;839394|6D8301  |000183;
+    ADC.W strcDialogDisplay.pDialog                            ;839394|6D8301  |000183;
     TAX                                                        ;839397|AA      |      ;
     LDA.L aDialogPointers,X                                    ;839398|BFF69B83|839BF6;
     STA.B ptrCurrentDialog                                     ;83939C|8501    |000001;
@@ -2303,22 +2303,22 @@ fDialog_DialogHandler:
     LDA.L aDialogPointers,X                                    ;8393A2|BFF69B83|839BF6;
     STA.B ptrCurrentDialog+2                                   ;8393A6|8503    |000003;
     SEP #$20                                                   ;8393A8|E220    |      ;
-    LDA.W $0191                                                ;8393AA|AD9101  |000191;
+    LDA.W strcDialogDisplay.dialogUnk191                       ;8393AA|AD9101  |000191;
     BNE +                                                      ;8393AD|D016    |8393C5;
     LDA.B #$01                                                 ;8393AF|A901    |      ;
-    STA.W $0191                                                ;8393B1|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;8393B1|8D9101  |000191;
     REP #$20                                                   ;8393B4|C220    |      ;
     LDA.W strcObjectData.camY                                  ;8393B6|AD0D09  |00090D;
     CMP.W #$0081                                               ;8393B9|C98100  |      ;
     BCS +                                                      ;8393BC|B007    |8393C5;
     SEP #$20                                                   ;8393BE|E220    |      ;
     LDA.B #$02                                                 ;8393C0|A902    |      ;
-    STA.W $0191                                                ;8393C2|8D9101  |000191;
+    STA.W strcDialogDisplay.dialogUnk191                       ;8393C2|8D9101  |000191;
  
   + SEP #$20                                                   ;8393C5|E220    |      ;
     LDA.B #$00                                                 ;8393C7|A900    |      ;
     XBA                                                        ;8393C9|EB      |      ;
-    LDA.W $0191                                                ;8393CA|AD9101  |000191;
+    LDA.W strcDialogDisplay.dialogUnk191                       ;8393CA|AD9101  |000191;
     DEC A                                                      ;8393CD|3A      |      ;
     REP #$30                                                   ;8393CE|C230    |      ;
     ASL A                                                      ;8393D0|0A      |      ;
@@ -2345,11 +2345,11 @@ fDialog_DialogHandler:
 fDialog_Unknown_8393F9:
     SEP #$20                                                   ;8393F9|E220    |      ;
     REP #$10                                                   ;8393FB|C210    |      ;
-    STZ.W $019B                                                ;8393FD|9C9B01  |00019B;
+    STZ.W strcDialogDisplay.mapUnk19B                          ;8393FD|9C9B01  |00019B;
     SEP #$20                                                   ;839400|E220    |      ;
     LDA.B #$00                                                 ;839402|A900    |      ;
     XBA                                                        ;839404|EB      |      ;
-    LDA.W $0191                                                ;839405|AD9101  |000191;
+    LDA.W strcDialogDisplay.dialogUnk191                       ;839405|AD9101  |000191;
     DEC A                                                      ;839408|3A      |      ;
     REP #$20                                                   ;839409|C220    |      ;
     ASL A                                                      ;83940B|0A      |      ;
@@ -2368,7 +2368,7 @@ fDialog_Unknown_8393F9:
     STA.W strcBGScrool.BG3VerOffs                              ;83941E|8D4601  |000146;
     JSL.L fDialog_Unknown_83932D                               ;839421|222D9383|83932D;
     REP #$20                                                   ;839425|C220    |      ;
-    LDA.W nMapEngine_flags                                     ;839427|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;839427|AD9601  |000196;
     AND.W #$0020                                               ;83942A|292000  |      ;
     BEQ +                                                      ;83942D|F00A    |839439;
     SEP #$20                                                   ;83942F|E220    |      ;
@@ -2407,18 +2407,18 @@ aDialogUnknown_83947D:
 fDialog_Unknown_839495:
     REP #$30                                                   ;839495|C230    |      ;
     STA.B strcVariables.n16Temp1                               ;839497|857E    |00007E;
-    LDA.W $018B                                                ;839499|AD8B01  |00018B;
+    LDA.W strcDialogDisplay.dialoUnk18B                        ;839499|AD8B01  |00018B;
     AND.W #$007F                                               ;83949C|297F00  |      ;
     CMP.W #$0014                                               ;83949F|C91400  |      ;
     BNE +                                                      ;8394A2|D00C    |8394B0;
     SEP #$20                                                   ;8394A4|E220    |      ;
-    LDA.W $018B                                                ;8394A6|AD8B01  |00018B;
+    LDA.W strcDialogDisplay.dialoUnk18B                        ;8394A6|AD8B01  |00018B;
     AND.B #$80                                                 ;8394A9|2980    |      ;
     EOR.B #$80                                                 ;8394AB|4980    |      ;
-    STA.W $018B                                                ;8394AD|8D8B01  |00018B;
+    STA.W strcDialogDisplay.dialoUnk18B                        ;8394AD|8D8B01  |00018B;
  
   + SEP #$20                                                   ;8394B0|E220    |      ;
-    LDA.W $018B                                                ;8394B2|AD8B01  |00018B;
+    LDA.W strcDialogDisplay.dialoUnk18B                        ;8394B2|AD8B01  |00018B;
     AND.B #$80                                                 ;8394B5|2980    |      ;
     BNE +                                                      ;8394B7|D00B    |8394C4;
     REP #$20                                                   ;8394B9|C220    |      ;
@@ -2433,9 +2433,9 @@ fDialog_Unknown_839495:
  
 .return:
     SEP #$20                                                   ;8394CD|E220    |      ;
-    LDA.W $018B                                                ;8394CF|AD8B01  |00018B;
+    LDA.W strcDialogDisplay.dialoUnk18B                        ;8394CF|AD8B01  |00018B;
     INC A                                                      ;8394D2|1A      |      ;
-    STA.W $018B                                                ;8394D3|8D8B01  |00018B;
+    STA.W strcDialogDisplay.dialoUnk18B                        ;8394D3|8D8B01  |00018B;
     RTS                                                        ;8394D6|60      |      ;
  
  
@@ -2446,7 +2446,7 @@ fDialog_Unknown_8394D7:
     REP #$10                                                   ;8394DC|C210    |      ;
     LDA.B #$00                                                 ;8394DE|A900    |      ;
     XBA                                                        ;8394E0|EB      |      ;
-    LDA.W $018A                                                ;8394E1|AD8A01  |00018A;
+    LDA.W strcDialogDisplay.dialoUnk18A                        ;8394E1|AD8A01  |00018A;
     CMP.B #$0B                                                 ;8394E4|C90B    |      ;
     BCC +                                                      ;8394E6|9002    |8394EA;
     LDA.B #$0B                                                 ;8394E8|A90B    |      ;
@@ -2484,13 +2484,13 @@ fDialog_Unknown_8394D7:
 fDialog_IterateText:
     SEP #$20                                                   ;83951C|E220    |      ;
     REP #$10                                                   ;83951E|C210    |      ;
-    LDA.W $019B                                                ;839520|AD9B01  |00019B;
+    LDA.W strcDialogDisplay.mapUnk19B                          ;839520|AD9B01  |00019B;
     AND.B #$20                                                 ;839523|2920    |      ;
     BEQ +                                                      ;839525|F003    |83952A;
     JMP.W fDialog_Unknown_839447                               ;839527|4C4794  |839447;
  
  
-  + LDA.W $019B                                                ;83952A|AD9B01  |00019B;
+  + LDA.W strcDialogDisplay.mapUnk19B                          ;83952A|AD9B01  |00019B;
     AND.B #$01                                                 ;83952D|2901    |      ;
     BNE .getCurrentLetter                                      ;83952F|D003    |839534;
     JMP.W .justReturn                                          ;839531|4CF095  |8395F0;
@@ -2498,11 +2498,11 @@ fDialog_IterateText:
  
 .getCurrentLetter:
     SEP #$20                                                   ;839534|E220    |      ;
-    LDA.W $019B                                                ;839536|AD9B01  |00019B;
+    LDA.W strcDialogDisplay.mapUnk19B                          ;839536|AD9B01  |00019B;
     AND.B #$FD                                                 ;839539|29FD    |      ;
-    STA.W $019B                                                ;83953B|8D9B01  |00019B;
+    STA.W strcDialogDisplay.mapUnk19B                          ;83953B|8D9B01  |00019B;
     REP #$20                                                   ;83953E|C220    |      ;
-    LDA.W nCurrentTextIndex                                    ;839540|AD8701  |000187; A = nCurrentTextIndex
+    LDA.W strcDialogDisplay.dialogCurrentOffset                ;839540|AD8701  |000187; A = nCurrentTextIndex
     ASL A                                                      ;839543|0A      |      ;
     TAY                                                        ;839544|A8      |      ;
     LDA.B [ptrCurrentDialog],Y                                 ;839545|B701    |000001; Y = nCurrentTextIndex * 2
@@ -2532,10 +2532,10 @@ fDialog_IterateText:
  
  
   + SEP #$20                                                   ;83956F|E220    |      ;
-    LDA.W $0189                                                ;839571|AD8901  |000189;
+    LDA.W strcDialogDisplay.dialoUnk189                        ;839571|AD8901  |000189;
     CMP.B #$04                                                 ;839574|C904    |      ;
     BNE .return                                                ;839576|D06F    |8395E7;
-    STZ.W $0189                                                ;839578|9C8901  |000189;
+    STZ.W strcDialogDisplay.dialoUnk189                        ;839578|9C8901  |000189;
     REP #$20                                                   ;83957B|C220    |      ;
     LDA.B [ptrCurrentDialog],Y                                 ;83957D|B701    |000001;
     CMP.W #$FFFD                                               ;83957F|C9FDFF  |      ;
@@ -2561,7 +2561,7 @@ fDialog_IterateText:
     LDX.B #$00                                                 ;8395A2|A200    |      ;
  
 .label5:
-    STX.W $0190                                                ;8395A4|8E9001  |000190;
+    STX.W strcDialogDisplay.dialogUnk190                       ;8395A4|8E9001  |000190;
     JSL.L fDialog_TransferGlyph                                ;8395A7|22239883|839823;
     SEP #$20                                                   ;8395AB|E220    |      ;
     REP #$10                                                   ;8395AD|C210    |      ;
@@ -2571,34 +2571,34 @@ fDialog_IterateText:
     STA.W strcAudio.reg115                                     ;8395B6|8D1501  |000115;
     JSL.L fAudioSetRegister2to0A                               ;8395B9|22328383|838332;
     SEP #$20                                                   ;8395BD|E220    |      ;
-    LDA.W $019B                                                ;8395BF|AD9B01  |00019B;
+    LDA.W strcDialogDisplay.mapUnk19B                          ;8395BF|AD9B01  |00019B;
     ORA.B #$02                                                 ;8395C2|0902    |      ;
-    STA.W $019B                                                ;8395C4|8D9B01  |00019B;
+    STA.W strcDialogDisplay.mapUnk19B                          ;8395C4|8D9B01  |00019B;
     REP #$30                                                   ;8395C7|C230    |      ;
  
 .loop:
     SEP #$20                                                   ;8395C9|E220    |      ;
-    LDA.W $018C                                                ;8395CB|AD8C01  |00018C;
+    LDA.W strcDialogDisplay.dialogVarSize                      ;8395CB|AD8C01  |00018C;
     BNE .label6                                                ;8395CE|D009    |8395D9;
     REP #$20                                                   ;8395D0|C220    |      ;
-    LDA.W nCurrentTextIndex                                    ;8395D2|AD8701  |000187;
+    LDA.W strcDialogDisplay.dialogCurrentOffset                ;8395D2|AD8701  |000187;
     INC A                                                      ;8395D5|1A      |      ;
-    STA.W nCurrentTextIndex                                    ;8395D6|8D8701  |000187;
+    STA.W strcDialogDisplay.dialogCurrentOffset                ;8395D6|8D8701  |000187;
  
 .label6:
     SEP #$20                                                   ;8395D9|E220    |      ;
     LDA.B #$00                                                 ;8395DB|A900    |      ;
     XBA                                                        ;8395DD|EB      |      ;
-    LDA.W $0190                                                ;8395DE|AD9001  |000190;
+    LDA.W strcDialogDisplay.dialogUnk190                       ;8395DE|AD9001  |000190;
     REP #$30                                                   ;8395E1|C230    |      ;
     TAX                                                        ;8395E3|AA      |      ;
     JSR.W fDialog_Unknown839838                                ;8395E4|203898  |839838;
  
 .return:
     SEP #$20                                                   ;8395E7|E220    |      ;
-    LDA.W $0189                                                ;8395E9|AD8901  |000189;
+    LDA.W strcDialogDisplay.dialoUnk189                        ;8395E9|AD8901  |000189;
     INC A                                                      ;8395EC|1A      |      ;
-    STA.W $0189                                                ;8395ED|8D8901  |000189;
+    STA.W strcDialogDisplay.dialoUnk189                        ;8395ED|8D8901  |000189;
  
 .justReturn:
     RTL                                                        ;8395F0|6B      |      ;
@@ -2606,12 +2606,12 @@ fDialog_IterateText:
  
 .textNextScreenHandler:
     SEP #$20                                                   ;8395F1|E220    |      ;
-    LDA.W $019B                                                ;8395F3|AD9B01  |00019B;
+    LDA.W strcDialogDisplay.mapUnk19B                          ;8395F3|AD9B01  |00019B;
     ORA.B #$08                                                 ;8395F6|0908    |      ;
-    STA.W $019B                                                ;8395F8|8D9B01  |00019B;
+    STA.W strcDialogDisplay.mapUnk19B                          ;8395F8|8D9B01  |00019B;
     REP #$20                                                   ;8395FB|C220    |      ;
     LDA.W #$5528                                               ;8395FD|A92855  |      ;
-    STA.W $0185                                                ;839600|8D8501  |000185; $0185 = 0x5528
+    STA.W strcDialogDisplay.dialogOptionCount                  ;839600|8D8501  |000185; $0185 = 0x5528
     REP #$20                                                   ;839603|C220    |      ;
     LDA.W #$00A2                                               ;839605|A9A200  |      ; A = 0xA2
     JSR.W fDialog_NextScreenHandler                            ;839608|205F97  |83975F;
@@ -2620,9 +2620,9 @@ fDialog_IterateText:
  
 .textSpaceHandler:
     REP #$20                                                   ;83960D|C220    |      ;
-    LDA.W nCurrentTextIndex                                    ;83960F|AD8701  |000187;
+    LDA.W strcDialogDisplay.dialogCurrentOffset                ;83960F|AD8701  |000187;
     INC A                                                      ;839612|1A      |      ;
-    STA.W nCurrentTextIndex                                    ;839613|8D8701  |000187; nCurrentTextIndex++
+    STA.W strcDialogDisplay.dialogCurrentOffset                ;839613|8D8701  |000187; nCurrentTextIndex++
     REP #$30                                                   ;839616|C230    |      ;
     LDX.W #$0001                                               ;839618|A20100  |      ;
     JSR.W fDialog_Unknown839838                                ;83961B|203898  |839838;
@@ -2631,17 +2631,17 @@ fDialog_IterateText:
  
 .textFFFCHandler:
     SEP #$20                                                   ;839621|E220    |      ;
-    LDA.W $018C                                                ;839623|AD8C01  |00018C;
+    LDA.W strcDialogDisplay.dialogVarSize                      ;839623|AD8C01  |00018C;
     BNE .label7                                                ;839626|D052    |83967A;
     REP #$20                                                   ;839628|C220    |      ;
-    LDA.W nCurrentTextIndex                                    ;83962A|AD8701  |000187;
+    LDA.W strcDialogDisplay.dialogCurrentOffset                ;83962A|AD8701  |000187;
     ASL A                                                      ;83962D|0A      |      ;
     TAY                                                        ;83962E|A8      |      ;
     INY                                                        ;83962F|C8      |      ;
     INY                                                        ;839630|C8      |      ;
     SEP #$20                                                   ;839631|E220    |      ;
     LDA.B [ptrCurrentDialog],Y                                 ;839633|B701    |000001;
-    STA.W $018C                                                ;839635|8D8C01  |00018C;
+    STA.W strcDialogDisplay.dialogVarSize                      ;839635|8D8C01  |00018C;
     REP #$20                                                   ;839638|C220    |      ;
     INY                                                        ;83963A|C8      |      ;
     INY                                                        ;83963B|C8      |      ;
@@ -2657,12 +2657,12 @@ fDialog_IterateText:
     SEP #$20                                                   ;83964A|E220    |      ;
     LDA.L aTextDataTableFFFC,X                                 ;83964C|BFEE9883|8398EE;
     STA.B ptrUnknown0x72+2                                     ;839650|8574    |000074;
-    STZ.W $0192                                                ;839652|9C9201  |000192;
-    STZ.W $0193                                                ;839655|9C9301  |000193;
-    STZ.W $0194                                                ;839658|9C9401  |000194;
-    LDA.W $019B                                                ;83965B|AD9B01  |00019B;
+    STZ.W strcDialogDisplay.dialogNumericVarSize               ;839652|9C9201  |000192;
+    STZ.W strcDialogDisplay.dialogNumericVarSize+1             ;839655|9C9301  |000193;
+    STZ.W strcDialogDisplay.dialogNumericVarSize+2             ;839658|9C9401  |000194;
+    LDA.W strcDialogDisplay.mapUnk19B                          ;83965B|AD9B01  |00019B;
     AND.B #$7F                                                 ;83965E|297F    |      ;
-    STA.W $019B                                                ;839660|8D9B01  |00019B;
+    STA.W strcDialogDisplay.mapUnk19B                          ;839660|8D9B01  |00019B;
     INX                                                        ;839663|E8      |      ;
     LDA.L aTextDataTableFFFC,X                                 ;839664|BFEE9883|8398EE;
     LDY.W #$0000                                               ;839668|A00000  |      ;
@@ -2670,7 +2670,7 @@ fDialog_IterateText:
  
   - PHA                                                        ;83966E|48      |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83966F|B772    |000072;
-    STA.W $0192,X                                              ;839671|9D9201  |000192;
+    STA.W strcDialogDisplay.dialogNumericVarSize,X             ;839671|9D9201  |000192;
     INY                                                        ;839674|C8      |      ;
     INX                                                        ;839675|E8      |      ;
     PLA                                                        ;839676|68      |      ;
@@ -2679,42 +2679,42 @@ fDialog_IterateText:
  
 .label7:
     SEP #$20                                                   ;83967A|E220    |      ;
-    LDA.W $018C                                                ;83967C|AD8C01  |00018C;
+    LDA.W strcDialogDisplay.dialogVarSize                      ;83967C|AD8C01  |00018C;
     DEC A                                                      ;83967F|3A      |      ;
-    STA.W $018C                                                ;839680|8D8C01  |00018C;
+    STA.W strcDialogDisplay.dialogVarSize                      ;839680|8D8C01  |00018C;
     JSL.L fDialog_Unknown_8397A6                               ;839683|22A69783|8397A6;
     SEP #$20                                                   ;839687|E220    |      ;
-    STZ.W $0190                                                ;839689|9C9001  |000190;
+    STZ.W strcDialogDisplay.dialogUnk190                       ;839689|9C9001  |000190;
     SEP #$20                                                   ;83968C|E220    |      ;
-    STZ.W $0189                                                ;83968E|9C8901  |000189;
-    LDA.W $018C                                                ;839691|AD8C01  |00018C;
+    STZ.W strcDialogDisplay.dialoUnk189                        ;83968E|9C8901  |000189;
+    LDA.W strcDialogDisplay.dialogVarSize                      ;839691|AD8C01  |00018C;
     BNE +                                                      ;839694|D008    |83969E;
-    LDA.W nCurrentTextIndex                                    ;839696|AD8701  |000187;
+    LDA.W strcDialogDisplay.dialogCurrentOffset                ;839696|AD8701  |000187;
     INC A                                                      ;839699|1A      |      ;
     INC A                                                      ;83969A|1A      |      ;
-    STA.W nCurrentTextIndex                                    ;83969B|8D8701  |000187;
+    STA.W strcDialogDisplay.dialogCurrentOffset                ;83969B|8D8701  |000187;
  
   + JMP.W .loop                                                ;83969E|4CC995  |8395C9;
  
  
 .textFFFDHandler:
     SEP #$20                                                   ;8396A1|E220    |      ;
-    LDA.W $018C                                                ;8396A3|AD8C01  |00018C;
+    LDA.W strcDialogDisplay.dialogVarSize                      ;8396A3|AD8C01  |00018C;
     BNE +                                                      ;8396A6|D014    |8396BC;
     REP #$20                                                   ;8396A8|C220    |      ;
-    LDA.W nCurrentTextIndex                                    ;8396AA|AD8701  |000187;
+    LDA.W strcDialogDisplay.dialogCurrentOffset                ;8396AA|AD8701  |000187;
     ASL A                                                      ;8396AD|0A      |      ;
     TAY                                                        ;8396AE|A8      |      ;
     INY                                                        ;8396AF|C8      |      ;
     INY                                                        ;8396B0|C8      |      ;
     SEP #$20                                                   ;8396B1|E220    |      ;
     LDA.B [ptrCurrentDialog],Y                                 ;8396B3|B701    |000001;
-    STA.W $018C                                                ;8396B5|8D8C01  |00018C;
+    STA.W strcDialogDisplay.dialogVarSize                      ;8396B5|8D8C01  |00018C;
     DEC A                                                      ;8396B8|3A      |      ;
-    STA.W $018D                                                ;8396B9|8D8D01  |00018D;
+    STA.W strcDialogDisplay.dialogUnk18D                       ;8396B9|8D8D01  |00018D;
  
   + REP #$20                                                   ;8396BC|C220    |      ;
-    LDA.W nCurrentTextIndex                                    ;8396BE|AD8701  |000187;
+    LDA.W strcDialogDisplay.dialogCurrentOffset                ;8396BE|AD8701  |000187;
     ASL A                                                      ;8396C1|0A      |      ;
     CLC                                                        ;8396C2|18      |      ;
     ADC.W #$0004                                               ;8396C3|690400  |      ;
@@ -2732,14 +2732,14 @@ fDialog_IterateText:
     LDA.L aTextDataTableFFFD,X                                 ;8396D7|BFAE9A83|839AAE;
     STA.B ptrUnknown0x72+2                                     ;8396DB|8574    |000074;
     SEP #$20                                                   ;8396DD|E220    |      ;
-    LDA.W $018C                                                ;8396DF|AD8C01  |00018C;
+    LDA.W strcDialogDisplay.dialogVarSize                      ;8396DF|AD8C01  |00018C;
     DEC A                                                      ;8396E2|3A      |      ;
-    STA.W $018C                                                ;8396E3|8D8C01  |00018C;
+    STA.W strcDialogDisplay.dialogVarSize                      ;8396E3|8D8C01  |00018C;
     LDA.B #$00                                                 ;8396E6|A900    |      ;
     XBA                                                        ;8396E8|EB      |      ;
-    LDA.W $018D                                                ;8396E9|AD8D01  |00018D;
+    LDA.W strcDialogDisplay.dialogUnk18D                       ;8396E9|AD8D01  |00018D;
     SEC                                                        ;8396EC|38      |      ;
-    SBC.W $018C                                                ;8396ED|ED8C01  |00018C;
+    SBC.W strcDialogDisplay.dialogVarSize                      ;8396ED|ED8C01  |00018C;
     REP #$30                                                   ;8396F0|C230    |      ;
     ASL A                                                      ;8396F2|0A      |      ;
     TAY                                                        ;8396F3|A8      |      ;
@@ -2748,26 +2748,26 @@ fDialog_IterateText:
     JSL.L fDialog_TransferGlyph                                ;8396F9|22239883|839823;
     SEP #$20                                                   ;8396FD|E220    |      ;
     LDA.B #$01                                                 ;8396FF|A901    |      ;
-    STA.W $0190                                                ;839701|8D9001  |000190;
+    STA.W strcDialogDisplay.dialogUnk190                       ;839701|8D9001  |000190;
     SEP #$20                                                   ;839704|E220    |      ;
-    STZ.W $0189                                                ;839706|9C8901  |000189;
-    LDA.W $018C                                                ;839709|AD8C01  |00018C;
+    STZ.W strcDialogDisplay.dialoUnk189                        ;839706|9C8901  |000189;
+    LDA.W strcDialogDisplay.dialogVarSize                      ;839709|AD8C01  |00018C;
     BNE +                                                      ;83970C|D008    |839716;
-    LDA.W nCurrentTextIndex                                    ;83970E|AD8701  |000187;
+    LDA.W strcDialogDisplay.dialogCurrentOffset                ;83970E|AD8701  |000187;
     INC A                                                      ;839711|1A      |      ;
     INC A                                                      ;839712|1A      |      ;
-    STA.W nCurrentTextIndex                                    ;839713|8D8701  |000187;
+    STA.W strcDialogDisplay.dialogCurrentOffset                ;839713|8D8701  |000187;
  
   + JMP.W .loop                                                ;839716|4CC995  |8395C9;
  
  
 .textFFFEHandler:
     SEP #$20                                                   ;839719|E220    |      ;
-    LDA.W $019B                                                ;83971B|AD9B01  |00019B;
+    LDA.W strcDialogDisplay.mapUnk19B                          ;83971B|AD9B01  |00019B;
     ORA.B #$10                                                 ;83971E|0910    |      ;
-    STA.W $019B                                                ;839720|8D9B01  |00019B;
+    STA.W strcDialogDisplay.mapUnk19B                          ;839720|8D9B01  |00019B;
     REP #$20                                                   ;839723|C220    |      ;
-    LDA.W nCurrentTextIndex                                    ;839725|AD8701  |000187;
+    LDA.W strcDialogDisplay.dialogCurrentOffset                ;839725|AD8701  |000187;
     ASL A                                                      ;839728|0A      |      ;
     TAY                                                        ;839729|A8      |      ;
     INY                                                        ;83972A|C8      |      ;
@@ -2775,16 +2775,16 @@ fDialog_IterateText:
     SEP #$20                                                   ;83972C|E220    |      ;
     LDA.B [ptrCurrentDialog],Y                                 ;83972E|B701    |000001;
     DEC A                                                      ;839730|3A      |      ;
-    STA.W $018E                                                ;839731|8D8E01  |00018E;
+    STA.W strcDialogDisplay.dialogUnk18E                       ;839731|8D8E01  |00018E;
     SEP #$20                                                   ;839734|E220    |      ;
     LDA.B #$00                                                 ;839736|A900    |      ;
     XBA                                                        ;839738|EB      |      ;
-    LDA.W nSelectedDialogOption                                ;839739|AD8F01  |00018F;
+    LDA.W strcDialogDisplay.dialogOptionsAnswer                ;839739|AD8F01  |00018F;
     ASL A                                                      ;83973C|0A      |      ;
     TAX                                                        ;83973D|AA      |      ;
     REP #$20                                                   ;83973E|C220    |      ;
     LDA.L aTextDataTableFFFE,X                                 ;839740|BFCC9883|8398CC;
-    STA.W $0185                                                ;839744|8D8501  |000185;
+    STA.W strcDialogDisplay.dialogOptionCount                  ;839744|8D8501  |000185;
     REP #$20                                                   ;839747|C220    |      ;
     LDA.W #$0275                                               ;839749|A97502  |      ;
     JSR.W fDialog_NextScreenHandler                            ;83974C|205F97  |83975F;
@@ -2793,27 +2793,27 @@ fDialog_IterateText:
  
 .textFFFFHandler:
     SEP #$20                                                   ;839752|E220    |      ;
-    LDA.W $019B                                                ;839754|AD9B01  |00019B;
+    LDA.W strcDialogDisplay.mapUnk19B                          ;839754|AD9B01  |00019B;
     ORA.B #$04                                                 ;839757|0904    |      ;
-    STA.W $019B                                                ;839759|8D9B01  |00019B;
+    STA.W strcDialogDisplay.mapUnk19B                          ;839759|8D9B01  |00019B;
     JMP.W .justReturn                                          ;83975C|4CF095  |8395F0;
  
  
 fDialog_NextScreenHandler:
     REP #$20                                                   ;83975F|C220    |      ; A: nLetterCode
     STA.B strcVariables.n16Temp1                               ;839761|857E    |00007E;
-    LDA.W $018B                                                ;839763|AD8B01  |00018B;
+    LDA.W strcDialogDisplay.dialoUnk18B                        ;839763|AD8B01  |00018B;
     AND.W #$007F                                               ;839766|297F00  |      ;
     CMP.W #$0014                                               ;839769|C91400  |      ;
     BNE +                                                      ;83976C|D00C    |83977A;
     SEP #$20                                                   ;83976E|E220    |      ;
-    LDA.W $018B                                                ;839770|AD8B01  |00018B;
+    LDA.W strcDialogDisplay.dialoUnk18B                        ;839770|AD8B01  |00018B;
     AND.B #$80                                                 ;839773|2980    |      ;
     EOR.B #$80                                                 ;839775|4980    |      ;
-    STA.W $018B                                                ;839777|8D8B01  |00018B;
+    STA.W strcDialogDisplay.dialoUnk18B                        ;839777|8D8B01  |00018B;
  
   + SEP #$20                                                   ;83977A|E220    |      ;
-    LDA.W $018B                                                ;83977C|AD8B01  |00018B;
+    LDA.W strcDialogDisplay.dialoUnk18B                        ;83977C|AD8B01  |00018B;
     AND.B #$80                                                 ;83977F|2980    |      ;
     BNE .noSign                                                ;839781|D00D    |839790;
     REP #$30                                                   ;839783|C230    |      ;
@@ -2831,9 +2831,9 @@ fDialog_NextScreenHandler:
  
 .return:
     SEP #$20                                                   ;83979C|E220    |      ;
-    LDA.W $018B                                                ;83979E|AD8B01  |00018B;
+    LDA.W strcDialogDisplay.dialoUnk18B                        ;83979E|AD8B01  |00018B;
     INC A                                                      ;8397A1|1A      |      ;
-    STA.W $018B                                                ;8397A2|8D8B01  |00018B;
+    STA.W strcDialogDisplay.dialoUnk18B                        ;8397A2|8D8B01  |00018B;
     RTS                                                        ;8397A5|60      |      ;
  
  
@@ -2842,10 +2842,10 @@ fDialog_Unknown_8397A6:
     REP #$10                                                   ;8397A8|C210    |      ;
     LDA.B #$00                                                 ;8397AA|A900    |      ;
     XBA                                                        ;8397AC|EB      |      ;
-    LDA.W $018C                                                ;8397AD|AD8C01  |00018C;
+    LDA.W strcDialogDisplay.dialogVarSize                      ;8397AD|AD8C01  |00018C;
     ASL A                                                      ;8397B0|0A      |      ;
     CLC                                                        ;8397B1|18      |      ;
-    ADC.W $018C                                                ;8397B2|6D8C01  |00018C;
+    ADC.W strcDialogDisplay.dialogVarSize                      ;8397B2|6D8C01  |00018C;
     REP #$20                                                   ;8397B5|C220    |      ;
     TAX                                                        ;8397B7|AA      |      ;
     LDA.L pTextAmmountTable,X                                  ;8397B8|BFD69883|8398D6;
@@ -2858,37 +2858,37 @@ fDialog_Unknown_8397A6:
     LDX.W #$0000                                               ;8397C8|A20000  |      ;
  
   - REP #$20                                                   ;8397CB|C220    |      ;
-    LDA.W $0192                                                ;8397CD|AD9201  |000192;
+    LDA.W strcDialogDisplay.dialogNumericVarSize               ;8397CD|AD9201  |000192;
     SEC                                                        ;8397D0|38      |      ;
     SBC.B strcVariables.n16Temp1                               ;8397D1|E57E    |00007E;
-    STA.W $0192                                                ;8397D3|8D9201  |000192;
+    STA.W strcDialogDisplay.dialogNumericVarSize               ;8397D3|8D9201  |000192;
     SEP #$20                                                   ;8397D6|E220    |      ;
-    LDA.W $0194                                                ;8397D8|AD9401  |000194;
+    LDA.W strcDialogDisplay.dialogNumericVarSize+2             ;8397D8|AD9401  |000194;
     SBC.B strcVariables.n16Temp2                               ;8397DB|E580    |000080;
-    STA.W $0194                                                ;8397DD|8D9401  |000194;
+    STA.W strcDialogDisplay.dialogNumericVarSize+2             ;8397DD|8D9401  |000194;
     BMI +                                                      ;8397E0|3003    |8397E5;
     INX                                                        ;8397E2|E8      |      ;
     BRA -                                                      ;8397E3|80E6    |8397CB;
  
  
   + REP #$20                                                   ;8397E5|C220    |      ;
-    LDA.W $0192                                                ;8397E7|AD9201  |000192;
+    LDA.W strcDialogDisplay.dialogNumericVarSize               ;8397E7|AD9201  |000192;
     CLC                                                        ;8397EA|18      |      ;
     ADC.B strcVariables.n16Temp1                               ;8397EB|657E    |00007E;
-    STA.W $0192                                                ;8397ED|8D9201  |000192;
+    STA.W strcDialogDisplay.dialogNumericVarSize               ;8397ED|8D9201  |000192;
     SEP #$20                                                   ;8397F0|E220    |      ;
-    LDA.W $0194                                                ;8397F2|AD9401  |000194;
+    LDA.W strcDialogDisplay.dialogNumericVarSize+2             ;8397F2|AD9401  |000194;
     ADC.B strcVariables.n16Temp2                               ;8397F5|6580    |000080;
-    STA.W $0194                                                ;8397F7|8D9401  |000194;
+    STA.W strcDialogDisplay.dialogNumericVarSize+2             ;8397F7|8D9401  |000194;
     SEP #$20                                                   ;8397FA|E220    |      ;
-    LDA.W $019B                                                ;8397FC|AD9B01  |00019B;
+    LDA.W strcDialogDisplay.mapUnk19B                          ;8397FC|AD9B01  |00019B;
     AND.B #$80                                                 ;8397FF|2980    |      ;
     BNE +                                                      ;839801|D00D    |839810;
     CPX.W #$0000                                               ;839803|E00000  |      ;
     BEQ .return                                                ;839806|F01A    |839822;
-    LDA.W $019B                                                ;839808|AD9B01  |00019B;
+    LDA.W strcDialogDisplay.mapUnk19B                          ;839808|AD9B01  |00019B;
     ORA.B #$80                                                 ;83980B|0980    |      ;
-    STA.W $019B                                                ;83980D|8D9B01  |00019B;
+    STA.W strcDialogDisplay.mapUnk19B                          ;83980D|8D9B01  |00019B;
  
   + REP #$30                                                   ;839810|C230    |      ;
     TXA                                                        ;839812|8A      |      ;
@@ -2911,7 +2911,7 @@ fDialog_TransferGlyph:
     REP #$30                                                   ;83982C|C230    |      ;
     PLX                                                        ;83982E|FA      |      ;
     TXA                                                        ;83982F|8A      |      ;
-    LDX.W $0185                                                ;839830|AE8501  |000185;
+    LDX.W strcDialogDisplay.dialogOptionCount                  ;839830|AE8501  |000185;
     JSL.L fGraphicsTransferData                                ;839833|22668183|838166;
     RTL                                                        ;839837|6B      |      ;
  
@@ -2925,17 +2925,17 @@ fDialog_Unknown839838:
     ASL A                                                      ;839840|0A      |      ;
     ADC.W #$0008                                               ;839841|690800  |      ;
     STA.B strcVariables.n16Temp2                               ;839844|8580    |000080; $80 = A * 8 + 8
-    LDA.W $0185                                                ;839846|AD8501  |000185;
+    LDA.W strcDialogDisplay.dialogOptionCount                  ;839846|AD8501  |000185;
     CLC                                                        ;839849|18      |      ;
     ADC.B strcVariables.n16Temp2                               ;83984A|6580    |000080;
-    STA.W $0185                                                ;83984C|8D8501  |000185; $0185 += A * 8 + 8
+    STA.W strcDialogDisplay.dialogOptionCount                  ;83984C|8D8501  |000185; $0185 += A * 8 + 8
     AND.W #$00FF                                               ;83984F|29FF00  |      ;
     CMP.W #$0080                                               ;839852|C98000  |      ;
     BNE .return                                                ;839855|D00A    |839861;
-    LDA.W $0185                                                ;839857|AD8501  |000185;
+    LDA.W strcDialogDisplay.dialogOptionCount                  ;839857|AD8501  |000185;
     CLC                                                        ;83985A|18      |      ;
     ADC.W #$0080                                               ;83985B|698000  |      ;
-    STA.W $0185                                                ;83985E|8D8501  |000185;
+    STA.W strcDialogDisplay.dialogOptionCount                  ;83985E|8D8501  |000185;
  
 .return:
     RTS                                                        ;839861|60      |      ;
@@ -4635,7 +4635,7 @@ fGameEngine_SetDefaults:
     STA.L nStoredWood                                          ;83AA47|8F0C1F7F|7F1F0C;
     LDA.W #$0000                                               ;83AA4B|A90000  |      ;
     STA.L nStoredFeed                                          ;83AA4E|8F101F7F|7F1F10;
-    STZ.W nMapEngine_flags                                     ;83AA52|9C9601  |000196;
+    STZ.W strcDialogDisplay.mapFlags                           ;83AA52|9C9601  |000196;
     LDA.W #$0000                                               ;83AA55|A90000  |      ;
     STA.L nPlantedGrassCount                                   ;83AA58|8F291F7F|7F1F29;
     LDA.W #$0000                                               ;83AA5C|A90000  |      ;
@@ -4777,12 +4777,12 @@ fGameEngine_SetDefaults:
  
 fGameEngine_FirstNight:
     REP #$30                                                   ;83ABF0|C230    |      ;
-    STZ.W nCurrentDialogPointerIndex                           ;83ABF2|9C8301  |000183;
-    STZ.W $0185                                                ;83ABF5|9C8501  |000185;
-    STZ.W nCurrentTextIndex                                    ;83ABF8|9C8701  |000187;
+    STZ.W strcDialogDisplay.pDialog                            ;83ABF2|9C8301  |000183;
+    STZ.W strcDialogDisplay.dialogOptionCount                  ;83ABF5|9C8501  |000185;
+    STZ.W strcDialogDisplay.dialogCurrentOffset                ;83ABF8|9C8701  |000187;
     SEP #$20                                                   ;83ABFB|E220    |      ;
-    STZ.W $019B                                                ;83ABFD|9C9B01  |00019B;
-    STZ.W $019A                                                ;83AC00|9C9A01  |00019A;
+    STZ.W strcDialogDisplay.mapUnk19B                          ;83ABFD|9C9B01  |00019B;
+    STZ.W strcDialogDisplay.mapUnk19A                          ;83AC00|9C9A01  |00019A;
     STZ.B strcSystem.DMAchannelFlags                           ;83AC03|6428    |000028;
     REP #$20                                                   ;83AC05|C220    |      ;
     STZ.B ptrPaletteNext                                       ;83AC07|6404    |000004;
@@ -4830,7 +4830,7 @@ fGameEngine_FirstNight:
     SEP #$20                                                   ;83AC6C|E220    |      ;
     STZ.W strcMenuData.tableSelector                           ;83AC6E|9C9309  |000993;
     STZ.W strcMenuData.nameEntryIdx                            ;83AC71|9C9409  |000994;
-    STZ.W $018B                                                ;83AC74|9C8B01  |00018B;
+    STZ.W strcDialogDisplay.dialoUnk18B                        ;83AC74|9C8B01  |00018B;
     SEP #$20                                                   ;83AC77|E220    |      ;
     LDA.B #$06                                                 ;83AC79|A906    |      ;
     STA.L nCurrentTimeID                                       ;83AC7B|8F1C1F7F|7F1F1C;
@@ -5851,7 +5851,7 @@ fGameEngine_LoadGame:
     STA.L nStoredFeed                                          ;83B3C9|8F101F7F|7F1F10;
     LDY.W #$0044                                               ;83B3CD|A04400  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B3D0|B772    |000072;
-    STA.W nMapEngine_flags                                     ;83B3D2|8D9601  |000196;
+    STA.W strcDialogDisplay.mapFlags                           ;83B3D2|8D9601  |000196;
     LDY.W #$0046                                               ;83B3D5|A04600  |      ;
     LDA.B [ptrUnknown0x72],Y                                   ;83B3D8|B772    |000072;
     STA.L nPlantedGrassCount                                   ;83B3DA|8F291F7F|7F1F29;
@@ -6230,7 +6230,7 @@ fGameEngine_SaveGame:
     LDA.L nStoredFeed                                          ;83B7A5|AF101F7F|7F1F10;
     STA.B [ptrUnknown0x72],Y                                   ;83B7A9|9772    |000072;
     LDY.W #$0044                                               ;83B7AB|A04400  |      ;
-    LDA.W nMapEngine_flags                                     ;83B7AE|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83B7AE|AD9601  |000196;
     STA.B [ptrUnknown0x72],Y                                   ;83B7B1|9772    |000072;
     LDY.W #$0046                                               ;83B7B3|A04600  |      ;
     LDA.L nPlantedGrassCount                                   ;83B7B6|AF291F7F|7F1F29;
@@ -6831,16 +6831,16 @@ fGameEngine_AnimalsUnknown83BC5A:
     LDA.W strcPlayerData.leftGrassToCut                        ;83BCE6|AD2E09  |00092E;
     BEQ .label3                                                ;83BCE9|F025    |83BD10;
     REP #$20                                                   ;83BCEB|C220    |      ;
-    LDA.W nMapEngine_flags                                     ;83BCED|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83BCED|AD9601  |000196;
     AND.W #$0002                                               ;83BCF0|290200  |      ;
     BNE .label3                                                ;83BCF3|D01B    |83BD10;
-    LDA.W nMapEngine_flags                                     ;83BCF5|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83BCF5|AD9601  |000196;
     AND.W #$0008                                               ;83BCF8|290800  |      ;
     BNE .label4                                                ;83BCFB|D023    |83BD20;
-    LDA.W nMapEngine_flags                                     ;83BCFD|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83BCFD|AD9601  |000196;
     AND.W #$0010                                               ;83BD00|291000  |      ;
     BNE .label5                                                ;83BD03|D02B    |83BD30;
-    LDA.W nMapEngine_flags                                     ;83BD05|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83BD05|AD9601  |000196;
     AND.W #$0200                                               ;83BD08|290002  |      ;
     BNE .label6                                                ;83BD0B|D033    |83BD40;
     JMP.W .label8                                              ;83BD0D|4C9EBD  |83BD9E;
@@ -6944,7 +6944,7 @@ fGameEngine_AnimalsUnknown83BC5A:
  
 .label9:
     REP #$20                                                   ;83BDD6|C220    |      ;
-    LDA.W nMapEngine_flags                                     ;83BDD8|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83BDD8|AD9601  |000196;
     AND.W #$0400                                               ;83BDDB|290004  |      ;
     BEQ .label12                                               ;83BDDE|F05F    |83BE3F;
     SEP #$20                                                   ;83BDE0|E220    |      ;
@@ -7128,7 +7128,7 @@ fGameEngine_AnimalsUnknown83BC5A:
  
 .label18:
     REP #$30                                                   ;83BF42|C230    |      ;
-    LDA.W nMapEngine_flags                                     ;83BF44|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83BF44|AD9601  |000196;
     AND.W #$001A                                               ;83BF47|291A00  |      ;
     BEQ +                                                      ;83BF4A|F003    |83BF4F;
     JMP.W .chicken                                             ;83BF4C|4C1AC0  |83C01A;
@@ -7320,7 +7320,7 @@ fGameEngine_AnimalsUnknown83BC5A:
     LDA.W strcPlayerData.leftGrassToCut                        ;83C0BE|AD2E09  |00092E;
     BEQ +                                                      ;83C0C1|F00C    |83C0CF;
     REP #$20                                                   ;83C0C3|C220    |      ;
-    LDA.W nMapEngine_flags                                     ;83C0C5|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83C0C5|AD9601  |000196;
     AND.W #$020A                                               ;83C0C8|290A02  |      ;
     BNE +                                                      ;83C0CB|D002    |83C0CF;
     BRA .label28                                               ;83C0CD|8016    |83C0E5;
@@ -7340,7 +7340,7 @@ fGameEngine_AnimalsUnknown83BC5A:
  
 .label28:
     REP #$30                                                   ;83C0E5|C230    |      ;
-    LDA.W nMapEngine_flags                                     ;83C0E7|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83C0E7|AD9601  |000196;
     AND.W #$0410                                               ;83C0EA|291004  |      ;
     BEQ .label29                                               ;83C0ED|F02A    |83C119;
     %CheckFlag(event6, $0020)
@@ -7971,7 +7971,7 @@ fGameEngine_ChichenUnknown83C296:
     AND.B #$02                                                 ;83C535|2902    |      ;
     BEQ .label22                                               ;83C537|F039    |83C572;
     REP #$20                                                   ;83C539|C220    |      ;
-    LDA.W nMapEngine_flags                                     ;83C53B|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83C53B|AD9601  |000196;
     AND.W #$0002                                               ;83C53E|290200  |      ;
     BEQ .label21                                               ;83C541|F010    |83C553;
     SEP #$20                                                   ;83C543|E220    |      ;
@@ -8009,7 +8009,7 @@ fGameEngine_ChichenUnknown83C296:
     AND.B #$04                                                 ;83C579|2904    |      ;
     BEQ .label24                                               ;83C57B|F039    |83C5B6;
     REP #$20                                                   ;83C57D|C220    |      ;
-    LDA.W nMapEngine_flags                                     ;83C57F|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83C57F|AD9601  |000196;
     AND.W #$0002                                               ;83C582|290200  |      ;
     BEQ .label23                                               ;83C585|F010    |83C597;
     SEP #$20                                                   ;83C587|E220    |      ;
@@ -8080,7 +8080,7 @@ fGameEngine_ChichenUnknown83C296:
  
  
   + REP #$20                                                   ;83C5FC|C220    |      ;
-    LDA.W nMapEngine_flags                                     ;83C5FE|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83C5FE|AD9601  |000196;
     AND.W #$0002                                               ;83C601|290200  |      ;
     BEQ .label27                                               ;83C604|F01B    |83C621;
     SEP #$20                                                   ;83C606|E220    |      ;
@@ -8876,7 +8876,7 @@ fAreaEvents_Farm:
     %AIExecute($0015, $0045, $0004)
  
   + REP #$30                                                   ;83CC0A|C230    |      ;
-    LDA.W nMapEngine_flags                                     ;83CC0C|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83CC0C|AD9601  |000196;
     AND.W #$001A                                               ;83CC0F|291A00  |      ;
     BEQ +                                                      ;83CC12|F003    |83CC17;
     JMP.W .label9                                              ;83CC14|4C5BCE  |83CE5B;
@@ -9287,7 +9287,7 @@ fAreaEvents_Farm:
     LDA.L nInGameMinuteCounter                                 ;83D117|AF1E1F7F|7F1F1E;
     BNE .label22                                               ;83D11B|D046    |83D163;
     REP #$20                                                   ;83D11D|C220    |      ;
-    LDA.W nMapEngine_flags                                     ;83D11F|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83D11F|AD9601  |000196;
     AND.W #$001A                                               ;83D122|291A00  |      ;
     BNE .label22                                               ;83D125|D03C    |83D163;
     REP #$20                                                   ;83D127|C220    |      ;
@@ -9330,7 +9330,7 @@ fAreaEvents_Farm:
     CMP.B #$06                                                 ;83D18F|C906    |      ;
     BNE .label24                                               ;83D191|D03B    |83D1CE;
     REP #$20                                                   ;83D193|C220    |      ;
-    LDA.W nMapEngine_flags                                     ;83D195|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83D195|AD9601  |000196;
     AND.W #$001A                                               ;83D198|291A00  |      ;
     BNE .label24                                               ;83D19B|D031    |83D1CE;
     REP #$30                                                   ;83D19D|C230    |      ;
@@ -9369,7 +9369,7 @@ fAreaEvents_Farm:
  
 .label25:
     REP #$20                                                   ;83D1F8|C220    |      ;
-    LDA.W nMapEngine_flags                                     ;83D1FA|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83D1FA|AD9601  |000196;
     AND.W #$001A                                               ;83D1FD|291A00  |      ;
     BNE .label26                                               ;83D200|D03C    |83D23E;
     REP #$30                                                   ;83D202|C230    |      ;
@@ -9393,7 +9393,7 @@ fAreaEvents_Farm:
     BNE .label28                                               ;83D247|D055    |83D29E;
     %CheckFlag(event4, $0400)
     BNE .label27                                               ;83D250|D03C    |83D28E;
-    LDA.W nMapEngine_flags                                     ;83D252|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83D252|AD9601  |000196;
     AND.W #$001E                                               ;83D255|291E00  |      ;
     BNE .label28                                               ;83D258|D044    |83D29E;
     %CheckFlag(event6, $0400)
@@ -9420,7 +9420,7 @@ fAreaEvents_Farm:
  
 .label28:
     REP #$30                                                   ;83D29E|C230    |      ;
-    LDA.W nMapEngine_flags                                     ;83D2A0|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83D2A0|AD9601  |000196;
     AND.W #$001A                                               ;83D2A3|291A00  |      ;
     BNE .justReturn                                            ;83D2A6|D037    |83D2DF;
     SEP #$20                                                   ;83D2A8|E220    |      ;
@@ -9598,7 +9598,7 @@ fAreaEvents_Town:
  
  
   + REP #$20                                                   ;83D46D|C220    |      ;
-    LDA.W nMapEngine_flags                                     ;83D46F|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83D46F|AD9601  |000196;
     AND.W #$0008                                               ;83D472|290800  |      ;
     BNE +                                                      ;83D475|D03F    |83D4B6;
     SEP #$20                                                   ;83D477|E220    |      ;
@@ -9608,10 +9608,10 @@ fAreaEvents_Town:
     REP #$30                                                   ;83D480|C230    |      ;
     %CheckFlag(event1, $0020)
     BNE +                                                      ;83D489|D02B    |83D4B6;
-    LDA.W nMapEngine_flags                                     ;83D48B|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83D48B|AD9601  |000196;
     AND.W #$0200                                               ;83D48E|290002  |      ;
     BNE +                                                      ;83D491|D023    |83D4B6;
-    LDA.W nMapEngine_flags                                     ;83D493|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83D493|AD9601  |000196;
     AND.W #$0002                                               ;83D496|290200  |      ;
     BNE +                                                      ;83D499|D01B    |83D4B6;
     SEP #$20                                                   ;83D49B|E220    |      ;
@@ -9678,7 +9678,7 @@ fAreaEvents_MajorHouseHandler:
  
  
   + REP #$20                                                   ;83D546|C220    |      ;
-    LDA.W nMapEngine_flags                                     ;83D548|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83D548|AD9601  |000196;
     AND.W #$0008                                               ;83D54B|290800  |      ;
     BNE .label2                                                ;83D54E|D067    |83D5B7;
     SEP #$20                                                   ;83D550|E220    |      ;
@@ -9692,10 +9692,10 @@ fAreaEvents_MajorHouseHandler:
     REP #$30                                                   ;83D562|C230    |      ;
     %CheckFlag(event1, $0020)
     BNE .hurricane                                             ;83D56B|D05A    |83D5C7;
-    LDA.W nMapEngine_flags                                     ;83D56D|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83D56D|AD9601  |000196;
     AND.W #$0200                                               ;83D570|290002  |      ;
     BNE .label3                                                ;83D573|D062    |83D5D7;
-    LDA.W nMapEngine_flags                                     ;83D575|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83D575|AD9601  |000196;
     AND.W #$0002                                               ;83D578|290200  |      ;
     BNE .label1                                                ;83D57B|D02A    |83D5A7;
     SEP #$20                                                   ;83D57D|E220    |      ;
@@ -9799,7 +9799,7 @@ fAreaEvents_Church:
  
  
   + REP #$20                                                   ;83D689|C220    |      ;
-    LDA.W nMapEngine_flags                                     ;83D68B|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83D68B|AD9601  |000196;
     AND.W #!AFLAGS_UNK0008                                               
     BEQ +                                                      ;83D691|F003    |83D696;
     JMP.W .label4                                              ;83D693|4C1ED7  |83D71E;
@@ -9819,7 +9819,7 @@ fAreaEvents_Church:
   + REP #$30                                                   ;83D6AB|C230    |      ;
     %CheckFlag(event1, $0020)
     BNE .hurricane                                             ;83D6B4|D078    |83D72E;
-    LDA.W nMapEngine_flags                                     ;83D6B6|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83D6B6|AD9601  |000196;
     AND.W #$0200                                               ;83D6B9|290002  |      ;
     BEQ +                                                      ;83D6BC|F003    |83D6C1;
     JMP.W .label5                                              ;83D6BE|4C3ED7  |83D73E;
@@ -9827,7 +9827,7 @@ fAreaEvents_Church:
  
   + %CheckFlag(event3, $0001)
     BEQ .justReturn                                            ;83D6C8|F023    |83D6ED;
-    LDA.W nMapEngine_flags                                     ;83D6CA|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83D6CA|AD9601  |000196;
     AND.W #$0002                                               ;83D6CD|290200  |      ;
     BNE .label3                                                ;83D6D0|D03C    |83D70E;
     SEP #$20                                                   ;83D6D2|E220    |      ;
@@ -9905,7 +9905,7 @@ fAreaEvents_FloristHandler:
  
  
   + REP #$20                                                   ;83D791|C220    |      ;
-    LDA.W nMapEngine_flags                                     ;83D793|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83D793|AD9601  |000196;
     AND.W #$0008                                               ;83D796|290800  |      ;
     BNE .label5                                                ;83D799|D04D    |83D7E8;
     SEP #$20                                                   ;83D79B|E220    |      ;
@@ -9919,10 +9919,10 @@ fAreaEvents_FloristHandler:
     REP #$30                                                   ;83D7AD|C230    |      ;
     %CheckFlag(event1, $0020)
     BNE .hurricane                                             ;83D7B6|D040    |83D7F8;
-    LDA.W nMapEngine_flags                                     ;83D7B8|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83D7B8|AD9601  |000196;
     AND.W #$0200                                               ;83D7BB|290002  |      ;
     BNE .label7                                                ;83D7BE|D048    |83D808;
-    LDA.W nMapEngine_flags                                     ;83D7C0|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83D7C0|AD9601  |000196;
     AND.W #$0002                                               ;83D7C3|290200  |      ;
     BNE .label4                                                ;83D7C6|D010    |83D7D8;
  
@@ -10008,7 +10008,7 @@ fAreaEvents_ToolshopHandler:
  
 .label1:
     REP #$20                                                   ;83D8A2|C220    |      ;
-    LDA.W nMapEngine_flags                                     ;83D8A4|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83D8A4|AD9601  |000196;
     AND.W #$0008                                               ;83D8A7|290800  |      ;
     BNE .label3                                                ;83D8AA|D04D    |83D8F9;
     SEP #$20                                                   ;83D8AC|E220    |      ;
@@ -10022,10 +10022,10 @@ fAreaEvents_ToolshopHandler:
     REP #$30                                                   ;83D8BE|C230    |      ;
     %CheckFlag(event1, $0020)
     BNE .hurricane                                             ;83D8C7|D040    |83D909;
-    LDA.W nMapEngine_flags                                     ;83D8C9|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83D8C9|AD9601  |000196;
     AND.W #$0200                                               ;83D8CC|290002  |      ;
     BNE .label4                                                ;83D8CF|D048    |83D919;
-    LDA.W nMapEngine_flags                                     ;83D8D1|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83D8D1|AD9601  |000196;
     AND.W #$0002                                               ;83D8D4|290200  |      ;
     BNE .label2                                                ;83D8D7|D010    |83D8E9;
  
@@ -10102,7 +10102,7 @@ fAreaEvents_RestaurantHandler:
  
  
   + REP #$20                                                   ;83D998|C220    |      ;
-    LDA.W nMapEngine_flags                                     ;83D99A|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83D99A|AD9601  |000196;
     AND.W #$0008                                               ;83D99D|290800  |      ;
     BNE .label2                                                ;83D9A0|D04D    |83D9EF;
     SEP #$20                                                   ;83D9A2|E220    |      ;
@@ -10116,10 +10116,10 @@ fAreaEvents_RestaurantHandler:
     REP #$30                                                   ;83D9B4|C230    |      ;
     %CheckFlag(event1, $0020)
     BNE .hurricane                                             ;83D9BD|D040    |83D9FF;
-    LDA.W nMapEngine_flags                                     ;83D9BF|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83D9BF|AD9601  |000196;
     AND.W #$0200                                               ;83D9C2|290002  |      ;
     BNE .label3                                                ;83D9C5|D048    |83DA0F;
-    LDA.W nMapEngine_flags                                     ;83D9C7|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83D9C7|AD9601  |000196;
     AND.W #$0002                                               ;83D9CA|290200  |      ;
     BNE .label1                                                ;83D9CD|D010    |83D9DF;
  
@@ -10181,7 +10181,7 @@ fAreaEvents_FortuneTeller:
  
  
   + REP #$20                                                   ;83DA66|C220    |      ;
-    LDA.W nMapEngine_flags                                     ;83DA68|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83DA68|AD9601  |000196;
     AND.W #$0008                                               ;83DA6B|290800  |      ;
     BNE .label2                                                ;83DA6E|D04D    |83DABD;
     SEP #$20                                                   ;83DA70|E220    |      ;
@@ -10195,10 +10195,10 @@ fAreaEvents_FortuneTeller:
     REP #$30                                                   ;83DA82|C230    |      ;
     %CheckFlag(event1, $0020)
     BNE .hurricane                                             ;83DA8B|D040    |83DACD;
-    LDA.W nMapEngine_flags                                     ;83DA8D|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83DA8D|AD9601  |000196;
     AND.W #$0200                                               ;83DA90|290002  |      ;
     BNE .label3                                                ;83DA93|D048    |83DADD;
-    LDA.W nMapEngine_flags                                     ;83DA95|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83DA95|AD9601  |000196;
     AND.W #$0002                                               ;83DA98|290200  |      ;
     BNE .label1                                                ;83DA9B|D010    |83DAAD;
  
@@ -10242,7 +10242,7 @@ fAreaEvents_AnimalShop:
  
  
   + REP #$20                                                   ;83DB08|C220    |      ;
-    LDA.W nMapEngine_flags                                     ;83DB0A|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83DB0A|AD9601  |000196;
     AND.W #$0008                                               ;83DB0D|290800  |      ;
     BNE .label2                                                ;83DB10|D04D    |83DB5F;
     SEP #$20                                                   ;83DB12|E220    |      ;
@@ -10256,10 +10256,10 @@ fAreaEvents_AnimalShop:
     REP #$30                                                   ;83DB24|C230    |      ;
     %CheckFlag(event1, $0020)
     BNE .hurricane                                             ;83DB2D|D040    |83DB6F;
-    LDA.W nMapEngine_flags                                     ;83DB2F|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83DB2F|AD9601  |000196;
     AND.W #$0200                                               ;83DB32|290002  |      ;
     BNE .label3                                                ;83DB35|D048    |83DB7F;
-    LDA.W nMapEngine_flags                                     ;83DB37|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83DB37|AD9601  |000196;
     AND.W #$0002                                               ;83DB3A|290200  |      ;
     BNE .label1                                                ;83DB3D|D010    |83DB4F;
  
@@ -10425,7 +10425,7 @@ fAreaEvents_Woods:
  
  
   + REP #$20                                                   ;83DD0F|C220    |      ;
-    LDA.W nMapEngine_flags                                     ;83DD11|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83DD11|AD9601  |000196;
     AND.W #$001A                                               ;83DD14|291A00  |      ;
     BNE .label2                                                ;83DD17|D026    |83DD3F;
     %CheckFlag(event4, $0200)
@@ -10442,13 +10442,13 @@ fAreaEvents_Woods:
  
 .label2:
     REP #$30                                                   ;83DD3F|C230    |      ;
-    LDA.W nMapEngine_flags                                     ;83DD41|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83DD41|AD9601  |000196;
     AND.W #$0008                                               ;83DD44|290800  |      ;
     BNE .justReturn                                            ;83DD47|D02B    |83DD74;
-    LDA.W nMapEngine_flags                                     ;83DD49|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83DD49|AD9601  |000196;
     AND.W #$0200                                               ;83DD4C|290002  |      ;
     BNE .justReturn                                            ;83DD4F|D023    |83DD74;
-    LDA.W nMapEngine_flags                                     ;83DD51|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83DD51|AD9601  |000196;
     AND.W #$0002                                               ;83DD54|290200  |      ;
     BNE .justReturn                                            ;83DD57|D01B    |83DD74;
     SEP #$20                                                   ;83DD59|E220    |      ;
@@ -10514,13 +10514,13 @@ fAreaEvents_WorksmanHouse:
  
 .label2:
     REP #$30                                                   ;83DE0A|C230    |      ;
-    LDA.W nMapEngine_flags                                     ;83DE0C|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83DE0C|AD9601  |000196;
     AND.W #$0008                                               ;83DE0F|290800  |      ;
     BNE .label4                                                ;83DE12|D030    |83DE44;
-    LDA.W nMapEngine_flags                                     ;83DE14|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83DE14|AD9601  |000196;
     AND.W #$0200                                               ;83DE17|290002  |      ;
     BNE .label5                                                ;83DE1A|D038    |83DE54;
-    LDA.W nMapEngine_flags                                     ;83DE1C|AD9601  |000196;
+    LDA.W strcDialogDisplay.mapFlags                           ;83DE1C|AD9601  |000196;
     AND.W #$0002                                               ;83DE1F|290200  |      ;
     BNE .label3                                                ;83DE22|D010    |83DE34;
     REP #$30                                                   ;83DE24|C230    |      ;
@@ -12837,7 +12837,7 @@ fAreaInit_HouseHelper:
     REP #$30                                                   ;83F4D8|C230    |      ;
     %AIExecute($0000, $002E, $0000)
     REP #$30                                                   ;83F4E7|C230    |      ;
-    STZ.W nMapEngine_flags                                     ;83F4E9|9C9601  |000196;
+    STZ.W strcDialogDisplay.mapFlags                           ;83F4E9|9C9601  |000196;
     %SetFlag(daily3, $0002)
     SEP #$20                                                   ;83F4F7|E220    |      ;
     LDA.B #$00                                                 ;83F4F9|A900    |      ;
