@@ -10907,9 +10907,9 @@ fPlayerInteraction0x14:
     SEP #$20                                                   ;81DB58|E220    |      ;
     LDA.B #$03                                                 ;81DB5A|A903    |      ;
     STA.W strcDialogDisplay.mapUnk19A                          ;81DB5C|8D9A01  |00019A;
-    LDA.W strcDialogDisplay.mapUnk19B                          ;81DB5F|AD9B01  |00019B;
-    ORA.B #$20                                                 ;81DB62|0920    |      ;
-    STA.W strcDialogDisplay.mapUnk19B                          ;81DB64|8D9B01  |00019B;
+    LDA.W strcDialogDisplay.dialogFlags                        ;81DB5F|AD9B01  |00019B;
+    ORA.B #!DFLAGS_UNK20                                                 
+    STA.W strcDialogDisplay.dialogFlags                        ;81DB64|8D9B01  |00019B;
     INC.W nPlayerInteractionArg1                               ;81DB67|EE6F09  |00096F;
     STZ.W strcDialogDisplay.dialoUnk18B                        ;81DB6A|9C8B01  |00018B;
     BRA .return                                                ;81DB6D|8031    |81DBA0;

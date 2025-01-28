@@ -8768,9 +8768,9 @@ fUnknown_82E405:
     SEP #$20                                                   ;82E472|E220    |      ;
     LDA.B #$00                                                 ;82E474|A900    |      ;
     STA.W strcDialogDisplay.dialogVarSize                      ;82E476|8D8C01  |00018C;
-    LDA.W strcDialogDisplay.mapUnk19B                          ;82E479|AD9B01  |00019B;
-    AND.B #$7F                                                 ;82E47C|297F    |      ;
-    STA.W strcDialogDisplay.mapUnk19B                          ;82E47E|8D9B01  |00019B;
+    LDA.W strcDialogDisplay.dialogFlags                        ;82E479|AD9B01  |00019B;
+    AND.B #~!DFLAGS_NUMERICVAR                                                 
+    STA.W strcDialogDisplay.dialogFlags                        ;82E47E|8D9B01  |00019B;
     JSL.L fDialog_Unknown_8397A6                               ;82E481|22A69783|8397A6;
     JSL.L fCore_StartTransfer                                  ;82E485|22F08A80|808AF0;
     REP #$30                                                   ;82E489|C230    |      ;
@@ -8824,9 +8824,9 @@ fUnknown_82E405:
     SEP #$20                                                   ;82E503|E220    |      ;
     LDA.B #$01                                                 ;82E505|A901    |      ;
     STA.W strcDialogDisplay.dialogVarSize                      ;82E507|8D8C01  |00018C;
-    LDA.W strcDialogDisplay.mapUnk19B                          ;82E50A|AD9B01  |00019B;
-    AND.B #$7F                                                 ;82E50D|297F    |      ;
-    STA.W strcDialogDisplay.mapUnk19B                          ;82E50F|8D9B01  |00019B;
+    LDA.W strcDialogDisplay.dialogFlags                        ;82E50A|AD9B01  |00019B;
+    AND.B #~!DFLAGS_NUMERICVAR                                                 
+    STA.W strcDialogDisplay.dialogFlags                        ;82E50F|8D9B01  |00019B;
     JSL.L fDialog_Unknown_8397A6                               ;82E512|22A69783|8397A6;
     JSL.L fCore_StartTransfer                                  ;82E516|22F08A80|808AF0;
     REP #$30                                                   ;82E51A|C230    |      ;
