@@ -8411,7 +8411,7 @@ DATA8_B3E90B:
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 96)                    ;B3E937
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 16)                  ;B3E93B
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B3E93F
-    %AICMD0x54($0290, $00)                                     ;B3E941
+    %AICMD0x54_ShowDialog($0290, $00)                          ;B3E941
     %AICMD0x50()                                               ;B3E945
     %AICMD0x47_SetValue8($800973, 3)                           ;B3E946
     %AICMD0x10_End()                                           ;B3E94B
@@ -8420,7 +8420,7 @@ DATA8_B3E90B:
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 96)                    ;B3E954
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 16)                  ;B3E958
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B3E95C
-    %AICMD0x54($0290, $00)                                     ;B3E95E
+    %AICMD0x54_ShowDialog($0290, $00)                          ;B3E95E
     %AICMD0x50()                                               ;B3E962
     %AICMD0x47_SetValue8($800973, 3)                           ;B3E963
     %AICMD0x10_End()                                           ;B3E968
@@ -8428,7 +8428,7 @@ DATA8_B3E90B:
     %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 166)                ;B3E96D
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 96)                    ;B3E971
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B3E975
-    %AICMD0x54($0290, $00)                                     ;B3E977
+    %AICMD0x54_ShowDialog($0290, $00)                          ;B3E977
     %AICMD0x50()                                               ;B3E97B
     %AICMD0x47_SetValue8($800973, 3)                           ;B3E97C
     %AICMD0x10_End()                                           ;B3E981

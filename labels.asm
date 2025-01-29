@@ -3,7 +3,7 @@
     ptrUnknown0x07 = $000007; !^ ptr24 ^!
     ptrAudioData = $00000A; !^ ptr24 ^!
     ptrUnknown0x42 = $000042; !^ 16 * ptr24 ^!
-    ptrUnknown0x72 = $000072; !^ ptr24 ^!
+    ptrTemp0x72 = $000072; !^ ptr24 ^!
     ptrUnknown0x75 = $000075; !^ ptr24 ^!
     ptrObjectData = $000078; !^ ptr24 ^!
     ptrAIActionData = $0000C9; !^ ptr24 ^!

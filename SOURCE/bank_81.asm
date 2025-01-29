@@ -102,12 +102,12 @@ fUnknown_8180B7:
     ADC.B strcVariables.n16Temp1                               ;8180C7|657E    |00007E;
     TAX                                                        ;8180C9|AA      |      ;
     LDA.L pItemCarriedTable_8196AF,X                           ;8180CA|BFAF9681|8196AF;
-    STA.B ptrUnknown0x72                                       ;8180CE|8572    |000072;
+    STA.B ptrTemp0x72                                          ;8180CE|8572    |000072;
     INX                                                        ;8180D0|E8      |      ;
     INX                                                        ;8180D1|E8      |      ;
     SEP #$20                                                   ;8180D2|E220    |      ;
     LDA.L pItemCarriedTable_8196AF,X                           ;8180D4|BFAF9681|8196AF;
-    STA.B ptrUnknown0x72+2                                     ;8180D8|8574    |000074;
+    STA.B ptrTemp0x72+2                                        ;8180D8|8574    |000074;
     REP #$30                                                   ;8180DA|C230    |      ;
     TYA                                                        ;8180DC|98      |      ;
     STA.B strcVariables.n16Temp1                               ;8180DD|857E    |00007E;
@@ -115,14 +115,14 @@ fUnknown_8180B7:
     CLC                                                        ;8180E0|18      |      ;
     ADC.B strcVariables.n16Temp1                               ;8180E1|657E    |00007E;
     TAY                                                        ;8180E3|A8      |      ;
-    LDA.B [ptrUnknown0x72],Y                                   ;8180E4|B772    |000072;
+    LDA.B [ptrTemp0x72],Y                                      ;8180E4|B772    |000072;
     STA.W $097A                                                ;8180E6|8D7A09  |00097A;
     INY                                                        ;8180E9|C8      |      ;
     INY                                                        ;8180EA|C8      |      ;
     SEP #$20                                                   ;8180EB|E220    |      ;
     LDA.B #$00                                                 ;8180ED|A900    |      ;
     XBA                                                        ;8180EF|EB      |      ;
-    LDA.B [ptrUnknown0x72],Y                                   ;8180F0|B772    |000072;
+    LDA.B [ptrTemp0x72],Y                                      ;8180F0|B772    |000072;
     REP #$20                                                   ;8180F2|C220    |      ;
     ASL A                                                      ;8180F4|0A      |      ;
     ASL A                                                      ;8180F5|0A      |      ;
@@ -1480,12 +1480,12 @@ fItemBuy_Unknown818989:
     ADC.W #$0009                                               ;8189C6|690900  |      ;
     TAX                                                        ;8189C9|AA      |      ;
     LDA.L aDialogsData_BuyItems,X                              ;8189CA|BFA5A181|81A1A5;
-    STA.B ptrUnknown0x72                                       ;8189CE|8572    |000072;
+    STA.B ptrTemp0x72                                          ;8189CE|8572    |000072;
     INX                                                        ;8189D0|E8      |      ;
     INX                                                        ;8189D1|E8      |      ;
     SEP #$20                                                   ;8189D2|E220    |      ;
     LDA.L aDialogsData_BuyItems,X                              ;8189D4|BFA5A181|81A1A5;
-    STA.B ptrUnknown0x72+2                                     ;8189D8|8574    |000074;
+    STA.B ptrTemp0x72+2                                        ;8189D8|8574    |000074;
     JSL.L fGameEngine_AddProfit                                ;8189DA|22C9B183|83B1C9;
     REP #$20                                                   ;8189DE|C220    |      ;
     BEQ .zero0x80                                              ;8189E0|F007    |8189E9;
@@ -2031,18 +2031,18 @@ fUnknown_818E1B:
     SEP #$20                                                   ;818E33|E220    |      ;
     LDY.W #$0001                                               ;818E35|A00100  |      ;
     LDA.B strcMap.loadAreaId                                   ;818E38|A522    |000022;
-    STA.B [ptrUnknown0x72],Y                                   ;818E3A|9772    |000072;
+    STA.B [ptrTemp0x72],Y                                      ;818E3A|9772    |000072;
     LDY.W #$0000                                               ;818E3C|A00000  |      ;
-    LDA.B [ptrUnknown0x72],Y                                   ;818E3F|B772    |000072;
+    LDA.B [ptrTemp0x72],Y                                      ;818E3F|B772    |000072;
     AND.B #$DF                                                 ;818E41|29DF    |      ;
-    STA.B [ptrUnknown0x72],Y                                   ;818E43|9772    |000072;
+    STA.B [ptrTemp0x72],Y                                      ;818E43|9772    |000072;
     REP #$20                                                   ;818E45|C220    |      ;
     LDY.W #$0004                                               ;818E47|A00400  |      ;
     LDA.W nTileInFrontOfPlayerX                                ;818E4A|AD8509  |000985;
-    STA.B [ptrUnknown0x72],Y                                   ;818E4D|9772    |000072;
+    STA.B [ptrTemp0x72],Y                                      ;818E4D|9772    |000072;
     LDY.W #$0006                                               ;818E4F|A00600  |      ;
     LDA.W nTileInFrontOfPlayerY                                ;818E52|AD8709  |000987;
-    STA.B [ptrUnknown0x72],Y                                   ;818E55|9772    |000072;
+    STA.B [ptrTemp0x72],Y                                      ;818E55|9772    |000072;
  
   + REP #$30                                                   ;818E57|C230    |      ;
     LDY.W #$0001                                               ;818E59|A00100  |      ;
@@ -2227,9 +2227,9 @@ fItemSell_Unknown818F5A:
     XBA                                                        ;818FBF|EB      |      ;
     LDA.L aDialogData_SellItems,X                              ;818FC0|BF94A081|81A094;
     REP #$20                                                   ;818FC4|C220    |      ;
-    STA.B ptrUnknown0x72                                       ;818FC6|8572    |000072;
+    STA.B ptrTemp0x72                                          ;818FC6|8572    |000072;
     SEP #$20                                                   ;818FC8|E220    |      ;
-    STZ.B ptrUnknown0x72+2                                     ;818FCA|6474    |000074;
+    STZ.B ptrTemp0x72+2                                        ;818FCA|6474    |000074;
     JSL.L fGameEngine_AddProfit                                ;818FCC|22C9B183|83B1C9;
     SEP #$20                                                   ;818FD0|E220    |      ;
     STZ.W strcPlayerData.carryItemId                           ;818FD2|9C1D09  |00091D;
@@ -4301,17 +4301,17 @@ fUnknownCF_81A600:
     INY                                                        ;81A66C|C8      |      ;
     INY                                                        ;81A66D|C8      |      ;
     LDA.B [ptrUnknown0xCF],Y                                   ;81A66E|B7CF    |0000CF;
-    STA.B ptrUnknown0x72                                       ;81A670|8572    |000072;
+    STA.B ptrTemp0x72                                          ;81A670|8572    |000072;
     INY                                                        ;81A672|C8      |      ;
     INY                                                        ;81A673|C8      |      ;
     SEP #$20                                                   ;81A674|E220    |      ;
     LDA.B [ptrUnknown0xCF],Y                                   ;81A676|B7CF    |0000CF;
-    STA.B ptrUnknown0x72+2                                     ;81A678|8574    |000074;
+    STA.B ptrTemp0x72+2                                        ;81A678|8574    |000074;
     REP #$20                                                   ;81A67A|C220    |      ;
-    LDA.B ptrUnknown0x72                                       ;81A67C|A572    |000072;
+    LDA.B ptrTemp0x72                                          ;81A67C|A572    |000072;
     STA.B ptrUnknown0xCF                                       ;81A67E|85CF    |0000CF;
     SEP #$20                                                   ;81A680|E220    |      ;
-    LDA.B ptrUnknown0x72+2                                     ;81A682|A574    |000074;
+    LDA.B ptrTemp0x72+2                                        ;81A682|A574    |000074;
     STA.B ptrUnknown0xCF+2                                     ;81A684|85D1    |0000D1;
     BRA .loop                                                  ;81A686|80A1    |81A629;
  
@@ -4428,11 +4428,11 @@ fUnknown_81A6C1:
 .label5:
     REP #$20                                                   ;81A730|C220    |      ;
     LDA.W #$A096                                               ;81A732|A996A0  |      ;
-    STA.B ptrUnknown0x72                                       ;81A735|8572    |000072;
+    STA.B ptrTemp0x72                                          ;81A735|8572    |000072;
     STA.B ptrUnknown0x75                                       ;81A737|8575    |000075;
     SEP #$20                                                   ;81A739|E220    |      ;
     LDA.B #$A6                                                 ;81A73B|A9A6    |      ;
-    STA.B ptrUnknown0x72+2                                     ;81A73D|8574    |000074;
+    STA.B ptrTemp0x72+2                                        ;81A73D|8574    |000074;
     STA.B ptrUnknown0x75+2                                     ;81A73F|8577    |000077;
     REP #$20                                                   ;81A741|C220    |      ;
     PLA                                                        ;81A743|68      |      ;
@@ -4445,10 +4445,10 @@ fUnknown_81A6C1:
     LDA.B strcVariables.n16Temp3                               ;81A750|A582    |000082;
     ASL A                                                      ;81A752|0A      |      ;
     STA.B strcVariables.n16Temp3                               ;81A753|8582    |000082;
-    LDA.B ptrUnknown0x72                                       ;81A755|A572    |000072;
+    LDA.B ptrTemp0x72                                          ;81A755|A572    |000072;
     CLC                                                        ;81A757|18      |      ;
     ADC.B strcVariables.n16Temp1                               ;81A758|657E    |00007E;
-    STA.B ptrUnknown0x72                                       ;81A75A|8572    |000072;
+    STA.B ptrTemp0x72                                          ;81A75A|8572    |000072;
     STA.B ptrUnknown0x75                                       ;81A75C|8575    |000075;
     SEP #$20                                                   ;81A75E|E220    |      ;
     LDA.B #$02                                                 ;81A760|A902    |      ;
@@ -4477,10 +4477,10 @@ fUnknown_81A6C1:
     LDA.W #$0080                                               ;81A782|A98000  |      ;
     JSL.L fCore_PrepareTransfer                                ;81A785|22338A80|808A33;
     REP #$20                                                   ;81A789|C220    |      ;
-    LDA.B ptrUnknown0x72                                       ;81A78B|A572    |000072;
+    LDA.B ptrTemp0x72                                          ;81A78B|A572    |000072;
     CLC                                                        ;81A78D|18      |      ;
     ADC.W #$0040                                               ;81A78E|694000  |      ;
-    STA.B ptrUnknown0x72                                       ;81A791|8572    |000072;
+    STA.B ptrTemp0x72                                          ;81A791|8572    |000072;
     PLX                                                        ;81A793|FA      |      ;
     INX                                                        ;81A794|E8      |      ;
     PHX                                                        ;81A795|DA      |      ;
@@ -4509,7 +4509,7 @@ fUnknown_81A6C1:
     CLC                                                        ;81A7BC|18      |      ;
     ADC.B strcVariables.n16Temp2                               ;81A7BD|6580    |000080;
     STA.B ptrUnknown0x75                                       ;81A7BF|8575    |000075;
-    STA.B ptrUnknown0x72                                       ;81A7C1|8572    |000072;
+    STA.B ptrTemp0x72                                          ;81A7C1|8572    |000072;
     SEP #$20                                                   ;81A7C3|E220    |      ;
     STZ.B strcVariables.n8Temp1                                ;81A7C5|6492    |000092;
     PLX                                                        ;81A7C7|FA      |      ;
@@ -4646,11 +4646,11 @@ fUnknown_81A83A:
     LDA.W #$A096                                               ;81A895|A996A0  |      ;
     CLC                                                        ;81A898|18      |      ;
     ADC.B strcVariables.n16Temp1                               ;81A899|657E    |00007E;
-    STA.B ptrUnknown0x72                                       ;81A89B|8572    |000072;
+    STA.B ptrTemp0x72                                          ;81A89B|8572    |000072;
     STA.B ptrObjectData                                        ;81A89D|8578    |000078;
     SEP #$20                                                   ;81A89F|E220    |      ;
     LDA.B #$A6                                                 ;81A8A1|A9A6    |      ;
-    STA.B ptrUnknown0x72+2                                     ;81A8A3|8574    |000074;
+    STA.B ptrTemp0x72+2                                        ;81A8A3|8574    |000074;
     STA.B ptrObjectData+2                                      ;81A8A5|857A    |00007A;
     REP #$20                                                   ;81A8A7|C220    |      ;
     LDA.W #$2000                                               ;81A8A9|A90020  |      ;
@@ -4673,7 +4673,7 @@ fUnknown_81A83A:
     LDX.W #$0000                                               ;81A8C8|A20000  |      ;
     STZ.B strcVariables.n16Unk90                               ;81A8CB|6490    |000090;
  
-  - LDA.B [ptrUnknown0x72],Y                                   ;81A8CD|B772    |000072;
+  - LDA.B [ptrTemp0x72],Y                                      ;81A8CD|B772    |000072;
     PHY                                                        ;81A8CF|5A      |      ;
     TXY                                                        ;81A8D0|9B      |      ;
     STA.B [ptrUnknown0x75],Y                                   ;81A8D1|9775    |000075;
@@ -4720,10 +4720,10 @@ fUnknown_81A83A:
 .label3:
     CPX.B strcVariables.n16Temp2                               ;81A910|E480    |000080;
     BNE -                                                      ;81A912|D0B9    |81A8CD;
-    LDA.B ptrUnknown0x72                                       ;81A914|A572    |000072;
+    LDA.B ptrTemp0x72                                          ;81A914|A572    |000072;
     CLC                                                        ;81A916|18      |      ;
     ADC.W #$0040                                               ;81A917|694000  |      ;
-    STA.B ptrUnknown0x72                                       ;81A91A|8572    |000072;
+    STA.B ptrTemp0x72                                          ;81A91A|8572    |000072;
     LDA.B ptrUnknown0x75                                       ;81A91C|A575    |000075;
     CLC                                                        ;81A91E|18      |      ;
     ADC.B strcVariables.n16Unk88                               ;81A91F|6588    |000088;
@@ -4738,7 +4738,7 @@ fUnknown_81A83A:
     ADC.B strcVariables.n16Temp2                               ;81A92F|6580    |000080;
     ADC.B strcVariables.n16Unk8E                               ;81A931|658E    |00008E;
     STA.B ptrObjectData                                        ;81A933|8578    |000078;
-    STA.B ptrUnknown0x72                                       ;81A935|8572    |000072;
+    STA.B ptrTemp0x72                                          ;81A935|8572    |000072;
     STZ.B strcVariables.n16Unk8E                               ;81A937|648E    |00008E;
     LDA.B strcVariables.n16Temp1                               ;81A939|A57E    |00007E;
     CLC                                                        ;81A93B|18      |      ;
@@ -6208,40 +6208,40 @@ fUnknown_81B2BB:
 .case0:
     REP #$20                                                   ;81B2D3|C220    |      ;
     LDA.W #$BE0F                                               ;81B2D5|A90FBE  |      ;
-    STA.B ptrUnknown0x72                                       ;81B2D8|8572    |000072;
+    STA.B ptrTemp0x72                                          ;81B2D8|8572    |000072;
     SEP #$20                                                   ;81B2DA|E220    |      ;
     LDA.B #$81                                                 ;81B2DC|A981    |      ;
-    STA.B ptrUnknown0x72+2                                     ;81B2DE|8574    |000074;
+    STA.B ptrTemp0x72+2                                        ;81B2DE|8574    |000074;
     BRA .continue                                              ;81B2E0|802D    |81B30F;
  
  
 .case1:
     REP #$20                                                   ;81B2E2|C220    |      ;
     LDA.W #$BEEF                                               ;81B2E4|A9EFBE  |      ;
-    STA.B ptrUnknown0x72                                       ;81B2E7|8572    |000072;
+    STA.B ptrTemp0x72                                          ;81B2E7|8572    |000072;
     SEP #$20                                                   ;81B2E9|E220    |      ;
     LDA.B #$81                                                 ;81B2EB|A981    |      ;
-    STA.B ptrUnknown0x72+2                                     ;81B2ED|8574    |000074;
+    STA.B ptrTemp0x72+2                                        ;81B2ED|8574    |000074;
     BRA .continue                                              ;81B2EF|801E    |81B30F;
  
  
 .case2:
     REP #$20                                                   ;81B2F1|C220    |      ;
     LDA.W #$BF27                                               ;81B2F3|A927BF  |      ;
-    STA.B ptrUnknown0x72                                       ;81B2F6|8572    |000072;
+    STA.B ptrTemp0x72                                          ;81B2F6|8572    |000072;
     SEP #$20                                                   ;81B2F8|E220    |      ;
     LDA.B #$81                                                 ;81B2FA|A981    |      ;
-    STA.B ptrUnknown0x72+2                                     ;81B2FC|8574    |000074;
+    STA.B ptrTemp0x72+2                                        ;81B2FC|8574    |000074;
     BRA .continue                                              ;81B2FE|800F    |81B30F;
  
  
 .case4:
     REP #$20                                                   ;81B300|C220    |      ;
     LDA.W #$BF6F                                               ;81B302|A96FBF  |      ;
-    STA.B ptrUnknown0x72                                       ;81B305|8572    |000072;
+    STA.B ptrTemp0x72                                          ;81B305|8572    |000072;
     SEP #$20                                                   ;81B307|E220    |      ;
     LDA.B #$81                                                 ;81B309|A981    |      ;
-    STA.B ptrUnknown0x72+2                                     ;81B30B|8574    |000074;
+    STA.B ptrTemp0x72+2                                        ;81B30B|8574    |000074;
     BRA .continue                                              ;81B30D|8000    |81B30F;
  
  
@@ -6262,10 +6262,10 @@ fUnknown_81B2BB:
     SEP #$20                                                   ;81B31D|E220    |      ;
     LDA.B #$00                                                 ;81B31F|A900    |      ;
     XBA                                                        ;81B321|EB      |      ;
-    LDA.B [ptrUnknown0x72],Y                                   ;81B322|B772    |000072;
+    LDA.B [ptrTemp0x72],Y                                      ;81B322|B772    |000072;
     TAX                                                        ;81B324|AA      |      ;
     INY                                                        ;81B325|C8      |      ;
-    LDA.B [ptrUnknown0x72],Y                                   ;81B326|B772    |000072;
+    LDA.B [ptrTemp0x72],Y                                      ;81B326|B772    |000072;
     STA.B strcVariables.n8Temp1                                ;81B328|8592    |000092;
     PLY                                                        ;81B32A|7A      |      ;
     REP #$20                                                   ;81B32B|C220    |      ;
@@ -6289,15 +6289,15 @@ fUnknown_81B2BB:
  
 .label7:
     REP #$20                                                   ;81B34E|C220    |      ;
-    LDA.B [ptrUnknown0x72],Y                                   ;81B350|B772    |000072;
+    LDA.B [ptrTemp0x72],Y                                      ;81B350|B772    |000072;
     PHA                                                        ;81B352|48      |      ;
     INY                                                        ;81B353|C8      |      ;
     INY                                                        ;81B354|C8      |      ;
-    LDA.B [ptrUnknown0x72],Y                                   ;81B355|B772    |000072;
+    LDA.B [ptrTemp0x72],Y                                      ;81B355|B772    |000072;
     PHA                                                        ;81B357|48      |      ;
     INY                                                        ;81B358|C8      |      ;
     INY                                                        ;81B359|C8      |      ;
-    LDA.B [ptrUnknown0x72],Y                                   ;81B35A|B772    |000072;
+    LDA.B [ptrTemp0x72],Y                                      ;81B35A|B772    |000072;
     PLY                                                        ;81B35C|7A      |      ;
     PLX                                                        ;81B35D|FA      |      ;
     JSL.L fUnknown_81A7CE                                      ;81B35E|22CEA781|81A7CE;
@@ -10911,7 +10911,7 @@ fPlayerInteraction0x14:
     ORA.B #!DFLAGS_UNK20                                                 
     STA.W strcDialogDisplay.dialogFlags                        ;81DB64|8D9B01  |00019B;
     INC.W nPlayerInteractionArg1                               ;81DB67|EE6F09  |00096F;
-    STZ.W strcDialogDisplay.dialoUnk18B                        ;81DB6A|9C8B01  |00018B;
+    STZ.W strcDialogDisplay.dialogBlinkTimer                   ;81DB6A|9C8B01  |00018B;
     BRA .return                                                ;81DB6D|8031    |81DBA0;
  
  
@@ -11477,10 +11477,10 @@ fPlayerInteraction0x2E_AnimalNPC:
 .label21:
     REP #$20                                                   ;81E050|C220    |      ;
     LDA.W #$FE0C                                               ;81E052|A90CFE  |      ;
-    STA.B ptrUnknown0x72                                       ;81E055|8572    |000072;
+    STA.B ptrTemp0x72                                          ;81E055|8572    |000072;
     SEP #$20                                                   ;81E057|E220    |      ;
     LDA.B #$FF                                                 ;81E059|A9FF    |      ;
-    STA.B ptrUnknown0x72+2                                     ;81E05B|8574    |000074;
+    STA.B ptrTemp0x72+2                                        ;81E05B|8574    |000074;
     JSL.L fGameEngine_AddProfit                                ;81E05D|22C9B183|83B1C9;
     REP #$20                                                   ;81E061|C220    |      ;
     CMP.W #$0000                                               ;81E063|C90000  |      ;
@@ -11598,10 +11598,10 @@ fPlayerInteraction0x2E_AnimalNPC:
 .label29:
     REP #$20                                                   ;81E17C|C220    |      ;
     LDA.W #$FF9C                                               ;81E17E|A99CFF  |      ;
-    STA.B ptrUnknown0x72                                       ;81E181|8572    |000072;
+    STA.B ptrTemp0x72                                          ;81E181|8572    |000072;
     SEP #$20                                                   ;81E183|E220    |      ;
     LDA.B #$FF                                                 ;81E185|A9FF    |      ;
-    STA.B ptrUnknown0x72+2                                     ;81E187|8574    |000074;
+    STA.B ptrTemp0x72+2                                        ;81E187|8574    |000074;
     JSL.L fGameEngine_AddProfit                                ;81E189|22C9B183|83B1C9;
     REP #$20                                                   ;81E18D|C220    |      ;
     CMP.W #$0000                                               ;81E18F|C90000  |      ;
@@ -12222,10 +12222,10 @@ fPlayerInteraction0x43:
     JSL.L fGameEngine_GetCowData                               ;81E7FF|22A7C983|83C9A7;
     SEP #$20                                                   ;81E803|E220    |      ;
     LDY.W #$0000                                               ;81E805|A00000  |      ;
-    LDA.B [ptrUnknown0x72],Y                                   ;81E808|B772    |000072; strcCowData.statusFlags
+    LDA.B [ptrTemp0x72],Y                                      ;81E808|B772    |000072; strcCowData.statusFlags
     AND.B #$06                                                 ;81E80A|2906    |      ; 00000110 = adult, child
     BNE .failCheck                                             ;81E80C|D03F    |81E84D;
-    LDA.B [ptrUnknown0x72],Y                                   ;81E80E|B772    |000072; strcCowData.statusFlags
+    LDA.B [ptrTemp0x72],Y                                      ;81E80E|B772    |000072; strcCowData.statusFlags
     AND.B #$70                                                 ;81E810|2970    |      ; 01110000 = pregnacy, sick, cranky
     BNE .failCheck                                             ;81E812|D039    |81E84D;
     SEP #$20                                                   ;81E814|E220    |      ;
@@ -12278,10 +12278,10 @@ fPlayerInteraction0x43:
     JSL.L fGameEngine_GetCowData                               ;81E894|22A7C983|83C9A7;
     SEP #$20                                                   ;81E898|E220    |      ;
     LDY.W #$0000                                               ;81E89A|A00000  |      ;
-    LDA.B [ptrUnknown0x72],Y                                   ;81E89D|B772    |000072; strcCowData.statusFlags
+    LDA.B [ptrTemp0x72],Y                                      ;81E89D|B772    |000072; strcCowData.statusFlags
     AND.B #$06                                                 ;81E89F|2906    |      ; 00000110 = adult, child
     BNE .label15                                               ;81E8A1|D01E    |81E8C1;
-    LDA.B [ptrUnknown0x72],Y                                   ;81E8A3|B772    |000072; strcCowData.statusFlags
+    LDA.B [ptrTemp0x72],Y                                      ;81E8A3|B772    |000072; strcCowData.statusFlags
     AND.B #$70                                                 ;81E8A5|2970    |      ; 01110000 = pregnacy, sick, cranky
     BNE .label16                                               ;81E8A7|D030    |81E8D9;
     LDX.W #$030E                                               ;81E8A9|A20E03  |      ;
@@ -12381,10 +12381,10 @@ fPlayerInteraction0x43:
  
   + REP #$20                                                   ;81E969|C220    |      ;
     LDA.L nGameUnk7F1F15                                       ;81E96B|AF151F7F|7F1F15;
-    STA.B ptrUnknown0x72                                       ;81E96F|8572    |000072;
+    STA.B ptrTemp0x72                                          ;81E96F|8572    |000072;
     SEP #$20                                                   ;81E971|E220    |      ;
     LDA.L nGameUnk7F1F15+2                                     ;81E973|AF171F7F|7F1F17;
-    STA.B ptrUnknown0x72+2                                     ;81E977|8574    |000074;
+    STA.B ptrTemp0x72+2                                        ;81E977|8574    |000074;
     JSL.L fGameEngine_AddProfit                                ;81E979|22C9B183|83B1C9;
     REP #$20                                                   ;81E97D|C220    |      ;
     LDA.W #$0007                                               ;81E97F|A90700  |      ;
@@ -12409,7 +12409,7 @@ fPlayerInteraction0x43:
     SEP #$20                                                   ;81E9B8|E220    |      ;
     LDY.W #$0000                                               ;81E9BA|A00000  |      ;
     LDA.B #$00                                                 ;81E9BD|A900    |      ;
-    STA.B [ptrUnknown0x72],Y                                   ;81E9BF|9772    |000072;
+    STA.B [ptrTemp0x72],Y                                      ;81E9BF|9772    |000072;
     SEP #$20                                                   ;81E9C1|E220    |      ;
     LDA.L nOwnedCows                                           ;81E9C3|AF0A1F7F|7F1F0A;
     DEC A                                                      ;81E9C7|3A      |      ;
@@ -12587,7 +12587,7 @@ fPlayerInteraction0x43:
     SEP #$20                                                   ;81EB4E|E220    |      ;
     LDY.W #$0000                                               ;81EB50|A00000  |      ;
     LDA.B #$00                                                 ;81EB53|A900    |      ;
-    STA.B [ptrUnknown0x72],Y                                   ;81EB55|9772    |000072;
+    STA.B [ptrTemp0x72],Y                                      ;81EB55|9772    |000072;
     SEP #$20                                                   ;81EB57|E220    |      ;
     LDA.L nOwnedCows                                           ;81EB59|AF0A1F7F|7F1F0A;
     DEC A                                                      ;81EB5D|3A      |      ;
@@ -12816,10 +12816,10 @@ fPlayerInteraction0x44:
  
   + REP #$20                                                   ;81ED2C|C220    |      ;
     LDA.L nGameUnk7F1F15                                       ;81ED2E|AF151F7F|7F1F15;
-    STA.B ptrUnknown0x72                                       ;81ED32|8572    |000072;
+    STA.B ptrTemp0x72                                          ;81ED32|8572    |000072;
     SEP #$20                                                   ;81ED34|E220    |      ;
     LDA.L nGameUnk7F1F15+2                                     ;81ED36|AF171F7F|7F1F17;
-    STA.B ptrUnknown0x72+2                                     ;81ED3A|8574    |000074;
+    STA.B ptrTemp0x72+2                                        ;81ED3A|8574    |000074;
     JSL.L fGameEngine_AddProfit                                ;81ED3C|22C9B183|83B1C9;
     REP #$20                                                   ;81ED40|C220    |      ;
     LDA.W #$0007                                               ;81ED42|A90700  |      ;
@@ -12844,7 +12844,7 @@ fPlayerInteraction0x44:
     SEP #$20                                                   ;81ED7B|E220    |      ;
     LDY.W #$0000                                               ;81ED7D|A00000  |      ;
     LDA.B #$00                                                 ;81ED80|A900    |      ;
-    STA.B [ptrUnknown0x72],Y                                   ;81ED82|9772    |000072;
+    STA.B [ptrTemp0x72],Y                                      ;81ED82|9772    |000072;
     SEP #$20                                                   ;81ED84|E220    |      ;
     LDA.L nOwnedChickens                                       ;81ED86|AF0B1F7F|7F1F0B;
     DEC A                                                      ;81ED8A|3A      |      ;
@@ -13022,7 +13022,7 @@ fPlayerInteraction0x44:
     SEP #$20                                                   ;81EF11|E220    |      ;
     LDY.W #$0000                                               ;81EF13|A00000  |      ;
     LDA.B #$00                                                 ;81EF16|A900    |      ;
-    STA.B [ptrUnknown0x72],Y                                   ;81EF18|9772    |000072;
+    STA.B [ptrTemp0x72],Y                                      ;81EF18|9772    |000072;
     SEP #$20                                                   ;81EF1A|E220    |      ;
     LDA.L nOwnedChickens                                       ;81EF1C|AF0B1F7F|7F1F0B;
     DEC A                                                      ;81EF20|3A      |      ;
@@ -13033,10 +13033,10 @@ fPlayerInteraction0x44:
     STZ.W nPlayerInteractionArg2                               ;81EF2C|9C7009  |000970;
     REP #$30                                                   ;81EF2F|C230    |      ;
     LDY.W #$0004                                               ;81EF31|A00400  |      ;
-    LDA.B [ptrUnknown0x72],Y                                   ;81EF34|B772    |000072;
+    LDA.B [ptrTemp0x72],Y                                      ;81EF34|B772    |000072;
     STA.W nTileInFrontOfPlayerX                                ;81EF36|8D8509  |000985;
     LDY.W #$0006                                               ;81EF39|A00600  |      ;
-    LDA.B [ptrUnknown0x72],Y                                   ;81EF3C|B772    |000072;
+    LDA.B [ptrTemp0x72],Y                                      ;81EF3C|B772    |000072;
     STA.W nTileInFrontOfPlayerY                                ;81EF3E|8D8709  |000987;
     LDA.W #$0010                                               ;81EF41|A91000  |      ;
     LDX.W #$0000                                               ;81EF44|A20000  |      ;
@@ -13402,10 +13402,10 @@ fPlayerInteraction0x47:
     BEQ .label1                                                ;81F230|F01A    |81F24C;
     REP #$20                                                   ;81F232|C220    |      ;
     LDA.W #$FC18                                               ;81F234|A918FC  |      ;
-    STA.B ptrUnknown0x72                                       ;81F237|8572    |000072;
+    STA.B ptrTemp0x72                                          ;81F237|8572    |000072;
     SEP #$20                                                   ;81F239|E220    |      ;
     LDA.B #$FF                                                 ;81F23B|A9FF    |      ;
-    STA.B ptrUnknown0x72+2                                     ;81F23D|8574    |000074;
+    STA.B ptrTemp0x72+2                                        ;81F23D|8574    |000074;
     JSL.L fGameEngine_AddProfit                                ;81F23F|22C9B183|83B1C9;
     REP #$20                                                   ;81F243|C220    |      ;
     CMP.W #$0000                                               ;81F245|C90000  |      ;
@@ -13416,10 +13416,10 @@ fPlayerInteraction0x47:
 .label1:
     REP #$20                                                   ;81F24C|C220    |      ;
     LDA.W #$FE0C                                               ;81F24E|A90CFE  |      ;
-    STA.B ptrUnknown0x72                                       ;81F251|8572    |000072;
+    STA.B ptrTemp0x72                                          ;81F251|8572    |000072;
     SEP #$20                                                   ;81F253|E220    |      ;
     LDA.B #$FF                                                 ;81F255|A9FF    |      ;
-    STA.B ptrUnknown0x72+2                                     ;81F257|8574    |000074;
+    STA.B ptrTemp0x72+2                                        ;81F257|8574    |000074;
     JSL.L fGameEngine_AddProfit                                ;81F259|22C9B183|83B1C9;
     REP #$20                                                   ;81F25D|C220    |      ;
     CMP.W #$0000                                               ;81F25F|C90000  |      ;
@@ -13863,10 +13863,10 @@ fPlayerInteraction0x51:
     BNE .label1                                                ;81F5FC|D035    |81F633;
     REP #$20                                                   ;81F5FE|C220    |      ;
     LDA.W #$FFEC                                               ;81F600|A9ECFF  |      ;
-    STA.B ptrUnknown0x72                                       ;81F603|8572    |000072;
+    STA.B ptrTemp0x72                                          ;81F603|8572    |000072;
     SEP #$20                                                   ;81F605|E220    |      ;
     LDA.B #$FF                                                 ;81F607|A9FF    |      ;
-    STA.B ptrUnknown0x72+2                                     ;81F609|8574    |000074;
+    STA.B ptrTemp0x72+2                                        ;81F609|8574    |000074;
     JSL.L fGameEngine_AddProfit                                ;81F60B|22C9B183|83B1C9;
     REP #$20                                                   ;81F60F|C220    |      ;
     CMP.W #$0000                                               ;81F611|C90000  |      ;
@@ -14003,10 +14003,10 @@ fPlayerInteraction0x52:
     BNE .label1                                                ;81F723|D035    |81F75A;
     REP #$20                                                   ;81F725|C220    |      ;
     LDA.W #$FFE2                                               ;81F727|A9E2FF  |      ;
-    STA.B ptrUnknown0x72                                       ;81F72A|8572    |000072;
+    STA.B ptrTemp0x72                                          ;81F72A|8572    |000072;
     SEP #$20                                                   ;81F72C|E220    |      ;
     LDA.B #$FF                                                 ;81F72E|A9FF    |      ;
-    STA.B ptrUnknown0x72+2                                     ;81F730|8574    |000074;
+    STA.B ptrTemp0x72+2                                        ;81F730|8574    |000074;
     JSL.L fGameEngine_AddProfit                                ;81F732|22C9B183|83B1C9;
     REP #$20                                                   ;81F736|C220    |      ;
     CMP.W #$0000                                               ;81F738|C90000  |      ;

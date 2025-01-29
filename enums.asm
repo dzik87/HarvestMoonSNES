@@ -71,26 +71,6 @@
 !SEASON_WINTER              =   $03
 
 
-; nMapEngine_flags          $000196
-!AFLAGS_NONE                = $0000
-!AFLAGS_UNK0001             = $0001
-!AFLAGS_UNK0002             = $0002
-!AFLAGS_FOR0004             = $0004
-!AFLAGS_UNK0008             = $0008
-!AFLAGS_UNK0010             = $0010
-!AFLAGS_UNK0020             = $0020
-!AFLAGS_FOR0040             = $0040
-!AFLAGS_UNK0080             = $0080
-!AFLAGS_UNK0100             = $0100
-!AFLAGS_UNK0200             = $0200
-!AFLAGS_FOR0400             = $0400
-!AFLAGS_UNK0800             = $0800
-!AFLAGS_UNK1000             = $1000
-!AFLAGS_NAMEINPUTREQUEST    = $2000
-!AFLAGS_FORCETELEPORT       = $4000
-!AFLAGS_RAWCHARMAP          = $8000
-
-
 ; Areas/Maps                $00098B
 !AREA_FARMSPRING            =   $00
 !AREA_FARMSUMMER            =   $01
