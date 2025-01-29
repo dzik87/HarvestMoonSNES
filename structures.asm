@@ -304,16 +304,16 @@ struct strcDialogDisplay    $00017D
     .mapMultiWidth          : skip 1    ; 181
     .mapMultiHeight         : skip 1    ; 182
     .dialogId               : skip 2    ; 183-184
-    .dialogOptionCount      : skip 2    ; 185-186   stores how many options there was for current dialog
+    .dialogUnk185           : skip 2    ; 185-186   
     .dialogCurrentOffset    : skip 2    ; 187-188   current offset in current dialog / index
     .dialoUnk189            : skip 1    ; 189
     .dialoUnk18A            : skip 1    ; 18A
-    .dialoUnk18B            : skip 1    ; 18B
+    .dialogBlinkTimer       : skip 1    ; 18B
     .dialogVarSize          : skip 1    ; 18C
-    .dialogUnk18D           : skip 1    ; 18D
-    .dialogUnk18E           : skip 1    ; 18E
-    .dialogOptionsAnswer    : skip 1    ; 18F
-    .dialogUnk190           : skip 1    ; 190
+    .dialogNameVarSize      : skip 1    ; 18D
+    .dialogOptionsCount     : skip 1    ; 18E       stores how many options there was for current dialog
+    .dialogOptionsAnswer    : skip 1    ; 18F       stores id of selected option
+    .fontGlyphType          : skip 1    ; 190       1 - wide, 0 - thin ???
     .dialogUnk191           : skip 1    ; 191
     .dialogNumericVarSize   : skip 3    ; 192-194   used to store dialog numeric value - sizes 0-3
     .mapCurrentPresetId     : skip 1    ; 195    
@@ -323,14 +323,34 @@ struct strcDialogDisplay    $00017D
     .dialogFlags            : skip 1    ; 19B
 endstruct
 
-!DFLAGS_PROCESSDIALOG       =   $01
-!DFLAGS_UNK02               =   $02
-!DFLAGS_ENDDIALOG           =   $04
-!DFLAGS_NEXTSCREEN          =   $08
-!DFLAGS_OPTIONS             =   $10
-!DFLAGS_UNK20               =   $20
-!DFLAGS_UNK40               =   $30
-!DFLAGS_NUMERICVAR          =   $80
+; mapFlags
+!AFLAGS_NONE                = $0000
+!AFLAGS_UNK0001             = $0001
+!AFLAGS_UNK0002             = $0002
+!AFLAGS_FOR0004             = $0004
+!AFLAGS_UNK0008             = $0008
+!AFLAGS_UNK0010             = $0010
+!AFLAGS_UNK0020             = $0020
+!AFLAGS_FOR0040             = $0040
+!AFLAGS_UNK0080             = $0080
+!AFLAGS_UNK0100             = $0100
+!AFLAGS_UNK0200             = $0200
+!AFLAGS_FOR0400             = $0400
+!AFLAGS_UNK0800             = $0800
+!AFLAGS_UNK1000             = $1000
+!AFLAGS_NAMEINPUTREQUEST    = $2000
+!AFLAGS_FORCETELEPORT       = $4000
+!AFLAGS_RAWCHARMAP          = $8000
+
+; dialogFlags
+!DFLAGS_PROCESSDIALOG       =   $01     ; set when there is dialog to process
+!DFLAGS_UNK02               =   $02     ; 
+!DFLAGS_ENDDIALOG           =   $04     ; set when end of dialog is detected
+!DFLAGS_NEXTSCREEN          =   $08     ; set when next screeen character is detected
+!DFLAGS_OPTIONS             =   $10     ; set when FFFE is detected
+!DFLAGS_UNK20               =   $20     ; 
+!DFLAGS_UNK40               =   $30     ; 
+!DFLAGS_NUMERICVAR          =   $80     ; set when FFFC is detected
 
 ;
 ; Size and start OK - Game Objects x 40 entries (19C - 73B)

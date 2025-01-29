@@ -620,9 +620,9 @@ macro AICMD0x53()
 endmacro
 
 ; AI command 0x54 - 
-macro AICMD0x54(nUnknown1, nUnknown2)
+macro AICMD0x54_ShowDialog(nDialogId, nUnknown2)
     db $54
-    dw <nUnknown1>
+    dw <nDialogId>
     db <nUnknown2>
     
 endmacro

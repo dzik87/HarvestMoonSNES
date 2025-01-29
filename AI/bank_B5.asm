@@ -2340,58 +2340,58 @@ DATA8_B5A85D:
     %AICMD0x29_SetMapScrooling(0, -1, 208)                     ;B5A876
     %AICMD0x13_Wait(240)                                       ;B5A87C
     %AICMD0x13_Wait(64)                                        ;B5A87F
-    %AICMD0x54($0444, $01)                                     ;B5A882
+    %AICMD0x54_ShowDialog($0444, $01)                          ;B5A882
     %AICMD0x13_Wait(120)                                       ;B5A886
-    %AICMD0x54($0445, $01)                                     ;B5A889
+    %AICMD0x54_ShowDialog($0445, $01)                          ;B5A889
     %AICMD0x13_Wait(120)                                       ;B5A88D
-    %AICMD0x54($0446, $01)                                     ;B5A890
+    %AICMD0x54_ShowDialog($0446, $01)                          ;B5A890
     %AICMD0x13_Wait(120)                                       ;B5A894
-    %AICMD0x54($044D, $01)                                     ;B5A897
+    %AICMD0x54_ShowDialog($044D, $01)                          ;B5A897
     %AICMD0x13_Wait(120)                                       ;B5A89B
-    %AICMD0x54($044E, $01)                                     ;B5A89E
+    %AICMD0x54_ShowDialog($044E, $01)                          ;B5A89E
     %AICMD0x13_Wait(120)                                       ;B5A8A2
-    %AICMD0x54($044F, $01)                                     ;B5A8A5
+    %AICMD0x54_ShowDialog($044F, $01)                          ;B5A8A5
     %AICMD0x13_Wait(120)                                       ;B5A8A9
-    %AICMD0x54($0450, $01)                                     ;B5A8AC
+    %AICMD0x54_ShowDialog($0450, $01)                          ;B5A8AC
     %AICMD0x13_Wait(120)                                       ;B5A8B0
-    %AICMD0x54($0447, $01)                                     ;B5A8B3
+    %AICMD0x54_ShowDialog($0447, $01)                          ;B5A8B3
     %AICMD0x13_Wait(120)                                       ;B5A8B7
-    %AICMD0x54($0448, $01)                                     ;B5A8BA
+    %AICMD0x54_ShowDialog($0448, $01)                          ;B5A8BA
     %AICMD0x13_Wait(120)                                       ;B5A8BE
-    %AICMD0x54($0449, $01)                                     ;B5A8C1
+    %AICMD0x54_ShowDialog($0449, $01)                          ;B5A8C1
     %AICMD0x13_Wait(120)                                       ;B5A8C5
-    %AICMD0x54($044A, $01)                                     ;B5A8C8
+    %AICMD0x54_ShowDialog($044A, $01)                          ;B5A8C8
     %AICMD0x13_Wait(120)                                       ;B5A8CC
-    %AICMD0x54($044B, $01)                                     ;B5A8CF
+    %AICMD0x54_ShowDialog($044B, $01)                          ;B5A8CF
     %AICMD0x13_Wait(120)                                       ;B5A8D3
-    %AICMD0x54($044C, $01)                                     ;B5A8D6
+    %AICMD0x54_ShowDialog($044C, $01)                          ;B5A8D6
     %AICMD0x13_Wait(120)                                       ;B5A8DA
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $07, $B5A8F9)   ;B5A8DD
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $06, $B5A8F2)   ;B5A8E4
-    %AICMD0x54($0451, $01)                                     ;B5A8EB
+    %AICMD0x54_ShowDialog($0451, $01)                          ;B5A8EB
     %AICMD0x12_Jump($B5A8FD)                                   ;B5A8EF
-    %AICMD0x54($0452, $01)                                     ;B5A8F2
+    %AICMD0x54_ShowDialog($0452, $01)                          ;B5A8F2
     %AICMD0x12_Jump($B5A8FD)                                   ;B5A8F6
-    %AICMD0x54($0453, $01)                                     ;B5A8F9
+    %AICMD0x54_ShowDialog($0453, $01)                          ;B5A8F9
     %AICMD0x13_Wait(120)                                       ;B5A8FD
-    %AICMD0x54($048C, $01)                                     ;B5A900
+    %AICMD0x54_ShowDialog($048C, $01)                          ;B5A900
     %AICMD0x13_Wait(120)                                       ;B5A904
-    %AICMD0x54($0454, $01)                                     ;B5A907
+    %AICMD0x54_ShowDialog($0454, $01)                          ;B5A907
     %AICMD0x13_Wait(120)                                       ;B5A90B
     %AICMD0x45_JumpIfBetween16(nRanchMasteringRate, 0, 199, $B5A940);B5A90E
     %AICMD0x45_JumpIfBetween16(nRanchMasteringRate, 200, 399, $B5A947);B5A918
     %AICMD0x45_JumpIfBetween16(nRanchMasteringRate, 400, 599, $B5A94E);B5A922
     %AICMD0x45_JumpIfBetween16(nRanchMasteringRate, 600, 799, $B5A955);B5A92C
     %AICMD0x45_JumpIfBetween16(nRanchMasteringRate, 800, 999, $B5A95C);B5A936
-    %AICMD0x54($0483, $01)                                     ;B5A940
+    %AICMD0x54_ShowDialog($0483, $01)                          ;B5A940
     %AICMD0x12_Jump($B5A963)                                   ;B5A944
-    %AICMD0x54($0488, $01)                                     ;B5A947
+    %AICMD0x54_ShowDialog($0488, $01)                          ;B5A947
     %AICMD0x12_Jump($B5A963)                                   ;B5A94B
-    %AICMD0x54($0489, $01)                                     ;B5A94E
+    %AICMD0x54_ShowDialog($0489, $01)                          ;B5A94E
     %AICMD0x12_Jump($B5A963)                                   ;B5A952
-    %AICMD0x54($048A, $01)                                     ;B5A955
+    %AICMD0x54_ShowDialog($048A, $01)                          ;B5A955
     %AICMD0x12_Jump($B5A963)                                   ;B5A959
-    %AICMD0x54($048B, $01)                                     ;B5A95C
+    %AICMD0x54_ShowDialog($048B, $01)                          ;B5A95C
     %AICMD0x12_Jump($B5A963)                                   ;B5A960
     %AICMD0x19($00E8, $00)                                     ;B5A963
     %AICMD0x09($01, $B5A9E9)                                   ;B5A967
@@ -2447,7 +2447,7 @@ DATA8_B5A85D:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $02, $B5AB2C)   ;B5AA2D
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $03, $B5AB2C)   ;B5AA34
     %AICMD0x45_JumpIfBetween16(nLove_Maria, 0, 250, $B5AB33)   ;B5AA3B
-    %AICMD0x54($0468, $01)                                     ;B5AA45
+    %AICMD0x54_ShowDialog($0468, $01)                          ;B5AA45
     %AICMD0x12_Jump($B5AB3A)                                   ;B5AA49
     %AICMD0x1A($0088, $0188, $B3845C, $01)                     ;B5AA4C
     %AICMD0x0C($03)                                            ;B5AA54
@@ -2458,7 +2458,7 @@ DATA8_B5A85D:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $02, $B5AB2C)   ;B5AA65
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $03, $B5AB2C)   ;B5AA6C
     %AICMD0x45_JumpIfBetween16(nLove_Ann, 0, 250, $B5AB33)     ;B5AA73
-    %AICMD0x54($0468, $01)                                     ;B5AA7D
+    %AICMD0x54_ShowDialog($0468, $01)                          ;B5AA7D
     %AICMD0x12_Jump($B5AB3A)                                   ;B5AA81
     %AICMD0x1A($0088, $0188, $B3845C, $01)                     ;B5AA84
     %AICMD0x0C($03)                                            ;B5AA8C
@@ -2469,7 +2469,7 @@ DATA8_B5A85D:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $02, $B5AB2C)   ;B5AA9D
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $03, $B5AB2C)   ;B5AAA4
     %AICMD0x45_JumpIfBetween16(nLove_Nina, 0, 250, $B5AB33)    ;B5AAAB
-    %AICMD0x54($0468, $01)                                     ;B5AAB5
+    %AICMD0x54_ShowDialog($0468, $01)                          ;B5AAB5
     %AICMD0x12_Jump($B5AB3A)                                   ;B5AAB9
     %AICMD0x1A($0088, $0188, $B3845C, $01)                     ;B5AABC
     %AICMD0x0C($03)                                            ;B5AAC4
@@ -2480,7 +2480,7 @@ DATA8_B5A85D:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $02, $B5AB2C)   ;B5AAD5
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $03, $B5AB2C)   ;B5AADC
     %AICMD0x45_JumpIfBetween16(nLove_Ellen, 0, 250, $B5AB33)   ;B5AAE3
-    %AICMD0x54($0468, $01)                                     ;B5AAED
+    %AICMD0x54_ShowDialog($0468, $01)                          ;B5AAED
     %AICMD0x12_Jump($B5AB3A)                                   ;B5AAF1
     %AICMD0x1A($0088, $0188, $B3845C, $01)                     ;B5AAF4
     %AICMD0x0C($03)                                            ;B5AAFC
@@ -2491,11 +2491,11 @@ DATA8_B5A85D:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $02, $B5AB2C)   ;B5AB0D
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $03, $B5AB2C)   ;B5AB14
     %AICMD0x45_JumpIfBetween16(nLove_Eve, 0, 250, $B5AB33)     ;B5AB1B
-    %AICMD0x54($0468, $01)                                     ;B5AB25
+    %AICMD0x54_ShowDialog($0468, $01)                          ;B5AB25
     %AICMD0x12_Jump($B5AB3A)                                   ;B5AB29
-    %AICMD0x54($0467, $01)                                     ;B5AB2C
+    %AICMD0x54_ShowDialog($0467, $01)                          ;B5AB2C
     %AICMD0x12_Jump($B5AB3A)                                   ;B5AB30
-    %AICMD0x54($0469, $01)                                     ;B5AB33
+    %AICMD0x54_ShowDialog($0469, $01)                          ;B5AB33
     %AICMD0x12_Jump($B5AB3A)                                   ;B5AB37
     %AICMD0x1B($02E6, $00)                                     ;B5AB3A
     %AICMD0x13_Wait(120)                                       ;B5AB3E
@@ -2536,9 +2536,9 @@ DATA8_B5A85D:
     %AICMD0x13_Wait(60)                                        ;B5ABB7
     %AICMD0x0B($00)                                            ;B5ABBA
     %AICMD0x46_JumpIfBetween24(nMoney, 1000, 9999, $B5ABCF)    ;B5ABBC
-    %AICMD0x54($047B, $01)                                     ;B5ABC8
+    %AICMD0x54_ShowDialog($047B, $01)                          ;B5ABC8
     %AICMD0x12_Jump($B5ABD6)                                   ;B5ABCC
-    %AICMD0x54($048E, $01)                                     ;B5ABCF
+    %AICMD0x54_ShowDialog($048E, $01)                          ;B5ABCF
     %AICMD0x12_Jump($B5ABD6)                                   ;B5ABD3
     %AICMD0x13_Wait(60)                                        ;B5ABD6
     %AICMD0x1B($02DA, $00)                                     ;B5ABD9
@@ -4600,7 +4600,7 @@ DATA8_B5C8EE:
     %AICMD0x06_SetDestinationArea(!AREA_DANCINGS2)             ;B5C938
     %AICMD0x38()                                               ;B5C93A
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 64)                    ;B5C93B
-    %AICMD0x54($0241, $00)                                     ;B5C93F
+    %AICMD0x54_ShowDialog($0241, $00)                          ;B5C93F
     %AICMD0x47_SetValue8($80019A, 4)                           ;B5C943
     %AICMD0x40_DisableTileInteractions()                       ;B5C948
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B5C949
@@ -4694,7 +4694,7 @@ DATA8_B5CA3D:
     %AICMD0x1A($0178, $0378, $B38198, $00)                     ;B5CA76
     %AICMD0x13_Wait(110)                                       ;B5CA7E
     %AICMD0x1B($022A, $00)                                     ;B5CA81
-    %AICMD0x54($03B2, $00)                                     ;B5CA85
+    %AICMD0x54_ShowDialog($03B2, $00)                          ;B5CA85
     %AICMD0x47_SetValue8($80019A, 4)                           ;B5CA89
     %AICMD0x13_Wait(1)                                         ;B5CA8E
     %AICMD0x12_Jump($B5CA8E)                                   ;B5CA91
