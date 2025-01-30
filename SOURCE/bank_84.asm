@@ -3210,22 +3210,22 @@ fUnknown_ToFarm:
     LDY.W #$000C                                               ;849BF3|A00C00  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;849BF6|B772    |000072;
     REP #$20                                                   ;849BF8|C220    |      ;
-    STA.W $0889                                                ;849BFA|8D8908  |000889;
+    STA.W strcNames.wCurrentCow                                ;849BFA|8D8908  |000889;
     SEP #$20                                                   ;849BFD|E220    |      ;
     LDY.W #$000D                                               ;849BFF|A00D00  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;849C02|B772    |000072;
     REP #$20                                                   ;849C04|C220    |      ;
-    STA.W $088B                                                ;849C06|8D8B08  |00088B;
+    STA.W strcNames.wCurrentCow+2                              ;849C06|8D8B08  |00088B;
     SEP #$20                                                   ;849C09|E220    |      ;
     LDY.W #$000E                                               ;849C0B|A00E00  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;849C0E|B772    |000072;
     REP #$20                                                   ;849C10|C220    |      ;
-    STA.W $088D                                                ;849C12|8D8D08  |00088D;
+    STA.W strcNames.wCurrentCow+4                              ;849C12|8D8D08  |00088D;
     SEP #$20                                                   ;849C15|E220    |      ;
     LDY.W #$000F                                               ;849C17|A00F00  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;849C1A|B772    |000072;
     REP #$20                                                   ;849C1C|C220    |      ;
-    STA.W $088F                                                ;849C1E|8D8F08  |00088F;
+    STA.W strcNames.wCurrentCow+6                              ;849C1E|8D8F08  |00088F;
     SEP #$20                                                   ;849C21|E220    |      ;
     LDY.W #$0000                                               ;849C23|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;849C26|B772    |000072;
@@ -9710,7 +9710,7 @@ fInput_Unknown84CFEA:
     JSL.L fAudioSetRegister2to0A                               ;84CFF8|22328383|838332;
     REP #$30                                                   ;84CFFC|C230    |      ;
     LDX.W #$0001                                               ;84CFFE|A20100  |      ;
-    LDA.W #$00B1                                               ;84D001|A9B100  |      ;
+    LDA.W #!DIALOG_SPACE                                               
     JSL.L fDialog_TransferGlyph                                ;84D004|22239883|839823;
     SEP #$20                                                   ;84D008|E220    |      ;
     LDA.W strcDialogDisplay.dialogOptionsAnswer                ;84D00A|AD8F01  |00018F;
@@ -9758,7 +9758,7 @@ fInput_Unknown84D03A:
     JSL.L fAudioSetRegister2to0A                               ;84D048|22328383|838332;
     REP #$30                                                   ;84D04C|C230    |      ;
     LDX.W #$0001                                               ;84D04E|A20100  |      ;
-    LDA.W #$00B1                                               ;84D051|A9B100  |      ;
+    LDA.W #!DIALOG_SPACE                                               
     JSL.L fDialog_TransferGlyph                                ;84D054|22239883|839823;
     SEP #$20                                                   ;84D058|E220    |      ;
     LDA.W strcDialogDisplay.dialogOptionsAnswer                ;84D05A|AD8F01  |00018F;
@@ -9813,7 +9813,7 @@ fInput_Unknown84D08E:
     BEQ .return                                                ;84D0AE|F040    |84D0F0;
     REP #$30                                                   ;84D0B0|C230    |      ;
     LDX.W #$0001                                               ;84D0B2|A20100  |      ;
-    LDA.W #$00B1                                               ;84D0B5|A9B100  |      ;
+    LDA.W #!DIALOG_SPACE                                               
     JSL.L fDialog_TransferGlyph                                ;84D0B8|22239883|839823;
     SEP #$20                                                   ;84D0BC|E220    |      ;
     LDA.W strcDialogDisplay.dialogOptionsAnswer                ;84D0BE|AD8F01  |00018F;
@@ -9866,7 +9866,7 @@ fInput_Unknown84D0F4:
     BEQ .return                                                ;84D114|F040    |84D156;
     REP #$30                                                   ;84D116|C230    |      ;
     LDX.W #$0001                                               ;84D118|A20100  |      ;
-    LDA.W #$00B1                                               ;84D11B|A9B100  |      ;
+    LDA.W #!DIALOG_SPACE                                               
     JSL.L fDialog_TransferGlyph                                ;84D11E|22239883|839823;
     SEP #$20                                                   ;84D122|E220    |      ;
     LDA.W strcDialogDisplay.dialogOptionsAnswer                ;84D124|AD8F01  |00018F;

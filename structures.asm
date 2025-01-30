@@ -308,13 +308,13 @@ struct strcDialogDisplay    $00017D
     .dialogCurrentOffset    : skip 2    ; 187-188   current offset in current dialog / index
     .dialoUnk189            : skip 1    ; 189
     .dialoUnk18A            : skip 1    ; 18A
-    .dialogBlinkTimer       : skip 1    ; 18B
+    .dialogBlinkTimer       : skip 1    ; 18B       time used for blinking effect for next screen sign
     .dialogVarSize          : skip 1    ; 18C
     .dialogNameVarSize      : skip 1    ; 18D
     .dialogOptionsCount     : skip 1    ; 18E       stores how many options there was for current dialog
     .dialogOptionsAnswer    : skip 1    ; 18F       stores id of selected option
     .fontGlyphType          : skip 1    ; 190       1 - wide, 0 - thin ???
-    .dialogUnk191           : skip 1    ; 191
+    .dialogUnk191           : skip 1    ; 191       TEST THIS - might be dialog display location ?
     .dialogNumericVarSize   : skip 3    ; 192-194   used to store dialog numeric value - sizes 0-3
     .mapCurrentPresetId     : skip 1    ; 195    
     .mapFlags               : skip 2    ; 196-197
