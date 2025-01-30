@@ -17,15 +17,6 @@
     ; ROM header
     incsrc "SOURCE/header.asm"
     
-    ; Source Code
-    incsrc "SOURCE/helpers.asm"
-    incsrc "SOURCE/bank_80.asm"
-    incsrc "SOURCE/bank_81.asm"
-    incsrc "SOURCE/bank_82.asm"
-    incsrc "SOURCE/bank_83.asm"
-    incsrc "SOURCE/bank_84.asm"
-    incsrc "SOURCE/bank_85.asm"
-    
     ; Objects data
     incsrc "DATA/objects/bank_86.asm"
     incsrc "DATA/objects/bank_87.asm"
@@ -94,6 +85,7 @@
     incsrc "AI/bank_B5.asm"
     
     ; US/EU/DE dialogs
+    incsrc "DIALOGS/helpers.asm"
     incsrc "DIALOGS/US/bank_B6.asm"
     incsrc "DIALOGS/US/bank_B7.asm"
     incsrc "DIALOGS/US/bank_B8.asm"
@@ -106,3 +98,12 @@
     ;incsrc "DATA/padding/bank_BD.asm"
     ;incsrc "DATA/padding/bank_BE.asm"
     ;incsrc "DATA/padding/bank_BF.asm"
+    
+    ; Source Code
+    incsrc "SOURCE/helpers.asm"
+    incsrc "SOURCE/bank_80.asm"
+    incsrc "SOURCE/bank_81.asm"
+    incsrc "SOURCE/bank_82.asm"
+    incsrc "SOURCE/bank_83.asm"
+    incsrc "SOURCE/bank_84.asm"
+    incsrc "SOURCE/bank_85.asm"

@@ -2506,27 +2506,27 @@ fDialog_IterateText:
     ASL A                                                      ;839543|0A      |      ;
     TAY                                                        ;839544|A8      |      ;
     LDA.B [ptrDialog],Y                                        ;839545|B701    |000001; Y = nCurrentTextIndex * 2
-    CMP.W #$00A2                                               ;839547|C9A200  |      ;
+    CMP.W #!DIALOG_NEXTSCREEN                                               
     BNE +                                                      ;83954A|D003    |83954F;
     JMP.W .A2_nextScreen                                       ;83954C|4CF195  |8395F1;
  
  
-  + CMP.W #$00B1                                               ;83954F|C9B100  |      ;
+  + CMP.W #!DIALOG_SPACE                                               
     BNE +                                                      ;839552|D003    |839557;
     JMP.W .B1_space                                            ;839554|4C0D96  |83960D;
  
  
-  + CMP.W #$FFFC                                               ;839557|C9FCFF  |      ;
+  + CMP.W #!DIALOG_NUMERICVARIABLE                                               
     BNE +                                                      ;83955A|D003    |83955F;
     JMP.W .FFFC_numberVariable                                 ;83955C|4C2196  |839621;
  
  
-  + CMP.W #$FFFE                                               ;83955F|C9FEFF  |      ;
+  + CMP.W #!DIALOG_OPTIONS                                               
     BNE +                                                      ;839562|D003    |839567;
     JMP.W .FFFE_optionSelect                                   ;839564|4C1997  |839719;
  
  
-  + CMP.W #$FFFF                                               ;839567|C9FFFF  |      ;
+  + CMP.W #!DIALOG_END                                               
     BNE +                                                      ;83956A|D003    |83956F;
     JMP.W .FFFF_endDialog                                      ;83956C|4C5297  |839752;
  
@@ -2538,7 +2538,7 @@ fDialog_IterateText:
     STZ.W strcDialogDisplay.dialoUnk189                        ;839578|9C8901  |000189;
     REP #$20                                                   ;83957B|C220    |      ;
     LDA.B [ptrDialog],Y                                        ;83957D|B701    |000001;
-    CMP.W #$FFFD                                               ;83957F|C9FDFF  |      ;
+    CMP.W #!DIALOG_TEXTVARIABLE                                               
     BNE +                                                      ;839582|D003    |839587;
     JMP.W .FFFD_textVariable                                   ;839584|4CA196  |8396A1;
  
@@ -2612,7 +2612,7 @@ fDialog_IterateText:
     LDA.W #$5528                                               ;8395FD|A92855  |      ;
     STA.W strcDialogDisplay.dialogUnk185                       ;839600|8D8501  |000185; $0185 = 0x5528
     REP #$20                                                   ;839603|C220    |      ;
-    LDA.W #$00A2                                               ;839605|A9A200  |      ; A = 0xA2
+    LDA.W #!DIALOG_NEXTSCREEN                                               
     JSR.W fDialog_NextScreenHandler                            ;839608|205F97  |83975F;
     BRA .justReturn                                            ;83960B|80E3    |8395F0;
  
@@ -2824,7 +2824,7 @@ fDialog_NextScreenHandler:
 .noSign:
     REP #$30                                                   ;839790|C230    |      ;
     LDX.W #$0001                                               ;839792|A20100  |      ;
-    LDA.W #$00B1                                               ;839795|A9B100  |      ; SPACE
+    LDA.W #!DIALOG_SPACE                                               
     JSL.L fDialog_TransferGlyph                                ;839798|22239883|839823;
  
 .return:
@@ -4756,7 +4756,7 @@ fGameEngine_SetDefaults:
     LDA.B #$B1                                                 ;83ABBC|A9B1    |      ;
     STA.L sSecondChildNameShort+3                              ;83ABBE|8F441F7F|7F1F44;
     REP #$20                                                   ;83ABC2|C220    |      ;
-    LDA.W #$00B1                                               ;83ABC4|A9B100  |      ;
+    LDA.W #!DIALOG_SPACE                                               
     STA.W strcNames.wPlayer                                    ;83ABC7|8DD508  |0008D5;
     STA.W strcNames.wPlayer+2                                  ;83ABCA|8DD708  |0008D7;
     STA.W strcNames.wPlayer+4                                  ;83ABCD|8DD908  |0008D9;
@@ -10790,21 +10790,21 @@ fAreaEvents_House:
     LDY.W #$000C                                               ;83E108|A00C00  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83E10B|B772    |000072;
     REP #$20                                                   ;83E10D|C220    |      ;
-    STA.W $0889                                                ;83E10F|8D8908  |000889;
+    STA.W strcNames.wCurrentCow                                ;83E10F|8D8908  |000889;
     SEP #$20                                                   ;83E112|E220    |      ;
     LDY.W #$000D                                               ;83E114|A00D00  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83E117|B772    |000072;
     REP #$20                                                   ;83E119|C220    |      ;
-    STA.W $088B                                                ;83E11B|8D8B08  |00088B;
+    STA.W strcNames.wCurrentCow+2                              ;83E11B|8D8B08  |00088B;
     SEP #$20                                                   ;83E11E|E220    |      ;
     LDY.W #$000E                                               ;83E120|A00E00  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83E123|B772    |000072;
     REP #$20                                                   ;83E125|C220    |      ;
-    STA.W $088D                                                ;83E127|8D8D08  |00088D;
+    STA.W strcNames.wCurrentCow+4                              ;83E127|8D8D08  |00088D;
     SEP #$20                                                   ;83E12A|E220    |      ;
     LDY.W #$000F                                               ;83E12C|A00F00  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83E12F|B772    |000072;
-    STA.W $088F                                                ;83E131|8D8F08  |00088F;
+    STA.W strcNames.wCurrentCow+6                              ;83E131|8D8F08  |00088F;
     REP #$30                                                   ;83E134|C230    |      ;
     %AIExecute($0000, $0020, $0000)
     RTS                                                        ;83E143|60      |      ;
@@ -12844,11 +12844,11 @@ fAreaInit_HouseHelper:
     REP #$10                                                   ;83F501|C210    |      ;
     STZ.W $09B5                                                ;83F503|9CB509  |0009B5;
     REP #$20                                                   ;83F506|C220    |      ;
-    LDA.W #$00B1                                               ;83F508|A9B100  |      ;
-    STA.W $0889                                                ;83F50B|8D8908  |000889;
-    STA.W $088B                                                ;83F50E|8D8B08  |00088B;
-    STA.W $088D                                                ;83F511|8D8D08  |00088D;
-    STA.W $088F                                                ;83F514|8D8F08  |00088F;
+    LDA.W #!DIALOG_SPACE                                               
+    STA.W strcNames.wCurrentCow                                ;83F50B|8D8908  |000889;
+    STA.W strcNames.wCurrentCow+2                              ;83F50E|8D8B08  |00088B;
+    STA.W strcNames.wCurrentCow+4                              ;83F511|8D8D08  |00088D;
+    STA.W strcNames.wCurrentCow+6                              ;83F514|8D8F08  |00088F;
     LDX.W #$0000                                               ;83F517|A20000  |      ;
  
   - REP #$30                                                   ;83F51A|C230    |      ;
@@ -12877,22 +12877,22 @@ fAreaInit_HouseHelper:
     LDY.W #$000C                                               ;83F545|A00C00  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83F548|B772    |000072;
     REP #$20                                                   ;83F54A|C220    |      ;
-    STA.W $0889                                                ;83F54C|8D8908  |000889;
+    STA.W strcNames.wCurrentCow                                ;83F54C|8D8908  |000889;
     SEP #$20                                                   ;83F54F|E220    |      ;
     LDY.W #$000D                                               ;83F551|A00D00  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83F554|B772    |000072;
     REP #$20                                                   ;83F556|C220    |      ;
-    STA.W $088B                                                ;83F558|8D8B08  |00088B;
+    STA.W strcNames.wCurrentCow+2                              ;83F558|8D8B08  |00088B;
     SEP #$20                                                   ;83F55B|E220    |      ;
     LDY.W #$000E                                               ;83F55D|A00E00  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83F560|B772    |000072;
     REP #$20                                                   ;83F562|C220    |      ;
-    STA.W $088D                                                ;83F564|8D8D08  |00088D;
+    STA.W strcNames.wCurrentCow+4                              ;83F564|8D8D08  |00088D;
     SEP #$20                                                   ;83F567|E220    |      ;
     LDY.W #$000F                                               ;83F569|A00F00  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83F56C|B772    |000072;
     REP #$20                                                   ;83F56E|C220    |      ;
-    STA.W $088F                                                ;83F570|8D8F08  |00088F;
+    STA.W strcNames.wCurrentCow+6                              ;83F570|8D8F08  |00088F;
  
 .label2:
     REP #$30                                                   ;83F573|C230    |      ;

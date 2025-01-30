@@ -1531,9 +1531,9 @@ fCore_FindBestLove:
     STA.W strcNames.wMostLovedGirl+2                           ;828F38|8DA308  |0008A3;
     LDA.W #$000D                                               ;828F3B|A90D00  |      ;
     STA.W strcNames.wMostLovedGirl+4                           ;828F3E|8DA508  |0008A5;
-    LDA.W #$00B1                                               ;828F41|A9B100  |      ;
+    LDA.W #!DIALOG_SPACE                                               
     STA.W strcNames.wMostLovedGirl+6                           ;828F44|8DA708  |0008A7;
-    LDA.W #$00B1                                               ;828F47|A9B100  |      ;
+    LDA.W #!DIALOG_SPACE                                               
     STA.W strcNames.wMostLovedGirl+8                           ;828F4A|8DA908  |0008A9;
     RTL                                                        ;828F4D|6B      |      ;
  
@@ -1548,7 +1548,7 @@ fCore_FindBestLove:
     STA.W strcNames.wMostLovedGirl+4                           ;828F5F|8DA508  |0008A5;
     LDA.W #$0000                                               ;828F62|A90000  |      ;
     STA.W strcNames.wMostLovedGirl+6                           ;828F65|8DA708  |0008A7;
-    LDA.W #$00B1                                               ;828F68|A9B100  |      ;
+    LDA.W #!DIALOG_SPACE                                               
     STA.W strcNames.wMostLovedGirl+8                           ;828F6B|8DA908  |0008A9;
     RTL                                                        ;828F6E|6B      |      ;
  
@@ -1576,9 +1576,9 @@ fCore_FindBestLove:
     STA.W strcNames.wMostLovedGirl+2                           ;828F9B|8DA308  |0008A3;
     LDA.W #$0004                                               ;828F9E|A90400  |      ;
     STA.W strcNames.wMostLovedGirl+4                           ;828FA1|8DA508  |0008A5;
-    LDA.W #$00B1                                               ;828FA4|A9B100  |      ;
+    LDA.W #!DIALOG_SPACE                                               
     STA.W strcNames.wMostLovedGirl+6                           ;828FA7|8DA708  |0008A7;
-    LDA.W #$00B1                                               ;828FAA|A9B100  |      ;
+    LDA.W #!DIALOG_SPACE                                               
     STA.W strcNames.wMostLovedGirl+8                           ;828FAD|8DA908  |0008A9;
     RTL                                                        ;828FB0|6B      |      ;
  
@@ -9357,7 +9357,7 @@ fUnknown_82EA15:
  
 .label1:
     REP #$20                                                   ;82EA4D|C220    |      ;
-    LDA.W #$00B1                                               ;82EA4F|A9B100  |      ;
+    LDA.W #!DIALOG_SPACE                                               
     JSL.L fTextUnknown_82EA60                                  ;82EA52|2260EA82|82EA60;
  
 .label2:
