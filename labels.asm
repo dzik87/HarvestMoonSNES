@@ -91,10 +91,5 @@
     Table_858C8E = $858C8E
  
  
- 
- 
- 
- 
- 
     PTR16_80FFFF = $80FFFF
     EMPTY_FFFFFF = $FFFFFF
