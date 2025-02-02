@@ -2,23 +2,23 @@
     ORG $B58000
  
  
-PTR16_B58000:
+pAIScripting0x43:
     dw DATA8_B58020                                            ;B58000|        |B58020;
     dw DATA8_B584DA                                            ;B58002|        |B584DA;
     dw DATA8_B58990                                            ;B58004|        |B58990;
     dw DATA8_B58E4E                                            ;B58006|        |B58E4E;
     dw DATA8_B59313                                            ;B58008|        |B59313;
-    dw PTR16_B597D1                                            ;B5800A|        |B597D1;
-    dw PTR16_B597D1                                            ;B5800C|        |B597D1;
-    dw PTR16_B597D1                                            ;B5800E|        |B597D1;
-    dw PTR16_B597D1                                            ;B58010|        |B597D1;
-    dw PTR16_B597D1                                            ;B58012|        |B597D1;
-    dw PTR16_B597D1                                            ;B58014|        |B597D1;
-    dw PTR16_B597D1                                            ;B58016|        |B597D1;
-    dw PTR16_B597D1                                            ;B58018|        |B597D1;
-    dw PTR16_B597D1                                            ;B5801A|        |B597D1;
-    dw PTR16_B597D1                                            ;B5801C|        |B597D1;
-    dw PTR16_B597D1                                            ;B5801E|        |B597D1;
+    dw pAIScripting0x44                                        ;B5800A|        |B597D1;
+    dw pAIScripting0x44                                        ;B5800C|        |B597D1;
+    dw pAIScripting0x44                                        ;B5800E|        |B597D1;
+    dw pAIScripting0x44                                        ;B58010|        |B597D1;
+    dw pAIScripting0x44                                        ;B58012|        |B597D1;
+    dw pAIScripting0x44                                        ;B58014|        |B597D1;
+    dw pAIScripting0x44                                        ;B58016|        |B597D1;
+    dw pAIScripting0x44                                        ;B58018|        |B597D1;
+    dw pAIScripting0x44                                        ;B5801A|        |B597D1;
+    dw pAIScripting0x44                                        ;B5801C|        |B597D1;
+    dw pAIScripting0x44                                        ;B5801E|        |B597D1;
  
 DATA8_B58020:
  
@@ -1284,23 +1284,23 @@ DATA8_B59313:
     %AICMD0x10_End()                                           ;B597D0
 
 
-PTR16_B597D1:
+pAIScripting0x44:
     dw DATA8_B597F1                                            ;B597D1|        |B597F1;
     dw DATA8_B599EB                                            ;B597D3|        |B599EB;
     dw DATA8_B59BE3                                            ;B597D5|        |B59BE3;
     dw DATA8_B59DD3                                            ;B597D7|        |B59DD3;
     dw DATA8_B59FCA                                            ;B597D9|        |B59FCA;
-    dw PTR16_B5A1E5                                            ;B597DB|        |B5A1E5;
-    dw PTR16_B5A1E5                                            ;B597DD|        |B5A1E5;
-    dw PTR16_B5A1E5                                            ;B597DF|        |B5A1E5;
-    dw PTR16_B5A1E5                                            ;B597E1|        |B5A1E5;
-    dw PTR16_B5A1E5                                            ;B597E3|        |B5A1E5;
-    dw PTR16_B5A1E5                                            ;B597E5|        |B5A1E5;
-    dw PTR16_B5A1E5                                            ;B597E7|        |B5A1E5;
-    dw PTR16_B5A1E5                                            ;B597E9|        |B5A1E5;
-    dw PTR16_B5A1E5                                            ;B597EB|        |B5A1E5;
-    dw PTR16_B5A1E5                                            ;B597ED|        |B5A1E5;
-    dw PTR16_B5A1E5                                            ;B597EF|        |B5A1E5;
+    dw pAIScripting0x45                                        ;B597DB|        |B5A1E5;
+    dw pAIScripting0x45                                        ;B597DD|        |B5A1E5;
+    dw pAIScripting0x45                                        ;B597DF|        |B5A1E5;
+    dw pAIScripting0x45                                        ;B597E1|        |B5A1E5;
+    dw pAIScripting0x45                                        ;B597E3|        |B5A1E5;
+    dw pAIScripting0x45                                        ;B597E5|        |B5A1E5;
+    dw pAIScripting0x45                                        ;B597E7|        |B5A1E5;
+    dw pAIScripting0x45                                        ;B597E9|        |B5A1E5;
+    dw pAIScripting0x45                                        ;B597EB|        |B5A1E5;
+    dw pAIScripting0x45                                        ;B597ED|        |B5A1E5;
+    dw pAIScripting0x45                                        ;B597EF|        |B5A1E5;
  
 DATA8_B597F1:
  
@@ -1832,23 +1832,23 @@ DATA8_B59FCA:
     %AICMD0x12_Jump($B5A1DF)                                   ;B5A1E2
 
 
-PTR16_B5A1E5:
+pAIScripting0x45:
     dw DATA8_B5A205                                            ;B5A1E5|        |B5A205;
     dw DATA8_B5A2FD                                            ;B5A1E7|        |B5A2FD;
     dw DATA8_B5A407                                            ;B5A1E9|        |B5A407;
     dw DATA8_B5A484                                            ;B5A1EB|        |B5A484;
     dw DATA8_B5A57C                                            ;B5A1ED|        |B5A57C;
     dw DATA8_B5A686                                            ;B5A1EF|        |B5A686;
-    dw PTR16_B5A703                                            ;B5A1F1|        |B5A703;
-    dw PTR16_B5A703                                            ;B5A1F3|        |B5A703;
-    dw PTR16_B5A703                                            ;B5A1F5|        |B5A703;
-    dw PTR16_B5A703                                            ;B5A1F7|        |B5A703;
-    dw PTR16_B5A703                                            ;B5A1F9|        |B5A703;
-    dw PTR16_B5A703                                            ;B5A1FB|        |B5A703;
-    dw PTR16_B5A703                                            ;B5A1FD|        |B5A703;
-    dw PTR16_B5A703                                            ;B5A1FF|        |B5A703;
-    dw PTR16_B5A703                                            ;B5A201|        |B5A703;
-    dw PTR16_B5A703                                            ;B5A203|        |B5A703;
+    dw pAIScripting0x46                                        ;B5A1F1|        |B5A703;
+    dw pAIScripting0x46                                        ;B5A1F3|        |B5A703;
+    dw pAIScripting0x46                                        ;B5A1F5|        |B5A703;
+    dw pAIScripting0x46                                        ;B5A1F7|        |B5A703;
+    dw pAIScripting0x46                                        ;B5A1F9|        |B5A703;
+    dw pAIScripting0x46                                        ;B5A1FB|        |B5A703;
+    dw pAIScripting0x46                                        ;B5A1FD|        |B5A703;
+    dw pAIScripting0x46                                        ;B5A1FF|        |B5A703;
+    dw pAIScripting0x46                                        ;B5A201|        |B5A703;
+    dw pAIScripting0x46                                        ;B5A203|        |B5A703;
  
 DATA8_B5A205:
  
@@ -2112,7 +2112,7 @@ DATA8_B5A686:
     %AICMD0x12_Jump($B5A6FB)                                   ;B5A700
 
 
-PTR16_B5A703:
+pAIScripting0x46:
     dw DATA8_B5A723                                            ;B5A703|        |B5A723;
     dw DATA8_B5A73D                                            ;B5A705|        |B5A73D;
     dw DATA8_B5A757                                            ;B5A707|        |B5A757;
@@ -2126,9 +2126,9 @@ PTR16_B5A703:
     dw DATA8_B5A827                                            ;B5A717|        |B5A827;
     dw DATA8_B5A841                                            ;B5A719|        |B5A841;
     dw DATA8_B5A85D                                            ;B5A71B|        |B5A85D;
-    dw PTR16_B5AC6E                                            ;B5A71D|        |B5AC6E;
-    dw PTR16_B5AC6E                                            ;B5A71F|        |B5AC6E;
-    dw PTR16_B5AC6E                                            ;B5A721|        |B5AC6E;
+    dw pAIScripting0x47_HowToPlay                              ;B5A71D|        |B5AC6E;
+    dw pAIScripting0x47_HowToPlay                              ;B5A71F|        |B5AC6E;
+    dw pAIScripting0x47_HowToPlay                              ;B5A721|        |B5AC6E;
  
 DATA8_B5A723:
  
@@ -2579,7 +2579,7 @@ DATA8_B5A85D:
     %AICMD0x12_Jump($B5AC68)                                   ;B5AC6B
 
 
-PTR16_B5AC6E:
+pAIScripting0x47_HowToPlay:
     dw DATA8_B5ACAE                                            ;B5AC6E|        |B5ACAE;
     dw DATA8_B5ACDE                                            ;B5AC70|        |B5ACDE;
     dw DATA8_B5AD25                                            ;B5AC72|        |B5AD25;
