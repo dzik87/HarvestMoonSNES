@@ -603,7 +603,7 @@ fCore_InterruptIRQ5:
     REP #$10                                                   ;80862E|C210    |      ;
     LDA.B #$80                                                 ;808630|A980    |      ;
     STA.W SNES_INIDISP                                         ;808632|8D0021  |002100;
-    STZ.W $0148                                                ;808635|9C4801  |000148;
+    STZ.W strcBGScrool.unk148                                  ;808635|9C4801  |000148;
     LDA.B #$80                                                 ;808638|A980    |      ;
     STA.W SNES_NMITIMEN                                        ;80863A|8D0042  |004200;
     STZ.W SNES_INIDISP                                         ;80863D|9C0021  |002100;
