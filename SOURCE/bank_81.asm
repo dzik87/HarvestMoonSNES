@@ -3042,7 +3042,6 @@ fUnknown_819695:
 fReturn_8196AE:
     RTS                                                        ;8196AE|60      |      ;
  
- 
 pItemCarriedTable_8196AF:
     dl EMPTY_FFFFFF                                            ;8196AF|        |FFFFFF; 0x5B * [ptr24]
     dl DATA24_819876                                           ;8196B2|        |819876;
@@ -4748,7 +4747,7 @@ fUnknown_81A83A:
     INY                                                        ;81A941|C8      |      ;
     CPY.B strcVariables.n16Temp3                               ;81A942|C482    |000082;
     BEQ +                                                      ;81A944|F003    |81A949;
-    JMP.W ---                                                  ;81A946|4CC0A8  |81A8C0;
+    JMP.W $A8C0                                                ;81A946|4CC0A8  |81A8C0;
  
  
   + RTL                                                        ;81A949|6B      |      ;
@@ -4861,7 +4860,6 @@ fItemSubrutineHandler_81A9E5:
     TAX                                                        ;81A9F1|AA      |      ;
     JSR.W (pItemSubrutines_81A9F6,X)                           ;81A9F2|FCF6A9  |81A9F6;
     RTL                                                        ;81A9F5|6B      |      ;
- 
  
 pItemSubrutines_81A9F6:
     dw fItemSub81A9F6_0x00to0x03                               ;81A9F6|        |81AAB6; 5F * ptr24
@@ -6820,7 +6818,6 @@ Table_81B363:
     dw $0000,$0000                                             ;81B95B|        |      ;
     db $00,$00                                                 ;81B95F|        |      ;
     dw $0000                                                   ;81B961|        |      ;
- 
 pTable_81B963:
     dl DATA8_81BA3E                                            ;81B963|        |81BA3E; 0x49 * [ptr24]
     dl DATA8_81BA5C                                            ;81B966|        |81BA5C;
@@ -7404,7 +7401,6 @@ fUnknown_81C013:
     STA.B strcPlayer.direction                                 ;81C021|85DA    |0000DA;
     STA.W strcObjectData.directionNew                          ;81C023|8D1309  |000913;
     RTL                                                        ;81C026|6B      |      ;
- 
  
 aPlayerAction_JumpTable:
     dw fPlayerAction0x00                                       ;81C027|        |81BFDC; 0x1D * [ptr16]
@@ -10222,7 +10218,6 @@ fPlayerInteraction_Handler:
  
 .skipToNextDay:
     JMP.W fPlayerAction_Handler                                ;81D590|4CD3BF  |81BFD3;
- 
  
 .aJumpTable:
     dw fPlayerInteraction0x00                                  ;81D593|        |81D643; 0x58 * [ptr16]

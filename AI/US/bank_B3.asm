@@ -1,7 +1,6 @@
  
     ORG $B38000
  
- 
 ppAIScriptingList:
     dl pAIScripting0x00_General                                ;B38000|        |B38BB8; 0x48 * [ptr24]
     dl pAIScripting0x01                                        ;B38003|        |B39359;
@@ -1933,7 +1932,6 @@ aAIScriptingData:
     db $00                                                     ;B38BB4|        |      ;
     dw $00F4                                                   ;B38BB5|        |      ;
     db $00                                                     ;B38BB7|        |      ;
- 
 pAIScripting0x00_General:
     dw DATA8_B38CC8                                            ;B38BB8|        |B38CC8; 0x88 * [ptr16]
     dw DATA8_B38CD0                                            ;B38BBA|        |B38CD0;
@@ -2212,6 +2210,7 @@ DATA8_B38D9B:
     %AICMD0x2E($01, $B38120, $10)                              ;B38D9F
     %AICMD0x12_Jump($B38DAC)                                   ;B38DA4
     %AICMD0x2E($01, $B38948, $10)                              ;B38DA7
+B38DAC:
     %AICMD0x36_UpdateDog()                                     ;B38DAC
     %AICMD0x12_Jump($B38DAC)                                   ;B38DAD
 
@@ -2230,6 +2229,7 @@ DATA8_B38DBC:
     %AICMD0x2E($01, $B38774, $10)                              ;B38DC0
     %AICMD0x12_Jump($B38DCD)                                   ;B38DC5
     %AICMD0x2E($01, $B38780, $10)                              ;B38DC8
+B38DCD:
     %AICMD0x35_UpdateHorse()                                   ;B38DCD
     %AICMD0x12_Jump($B38DCD)                                   ;B38DCE
 
@@ -2240,6 +2240,7 @@ DATA8_B38DD1:
     %AICMD0x2E($01, $B38138, $10)                              ;B38DD4
     %AICMD0x12_Jump($B38DE1)                                   ;B38DD9
     %AICMD0x2E($01, $B389F0, $10)                              ;B38DDC
+B38DE1:
     %AICMD0x35_UpdateHorse()                                   ;B38DE1
     %AICMD0x12_Jump($B38DE1)                                   ;B38DE2
 
@@ -2782,6 +2783,7 @@ DATA8_B39129:
     %AICMD0x2B($B38A2C, $00)                                   ;B39129
     %AICMD0x1F($B39133)                                        ;B3912D
     %AICMD0x12_Jump($B3912D)                                   ;B39130
+B39133:
     %AICMD0x1C_ShowDialog($03A3, $00)                          ;B39133
     %AICMD0x12_Jump($B3912D)                                   ;B39137
 
@@ -2998,11 +3000,13 @@ DATA8_B39250:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, $B39281)     ;B3925F
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, $B392A0)     ;B39266
     %AICMD0x12_Jump($B392AD)                                   ;B3926D
+B39270:
     %AICMD0x1B($03DA, $00)                                     ;B39270
     %AICMD0x13_Wait(180)                                       ;B39274
     %AICMD0x1B($03D9, $00)                                     ;B39277
     %AICMD0x13_Wait(240)                                       ;B3927B
     %AICMD0x12_Jump($B39270)                                   ;B3927E
+B39281:
     %AICMD0x1B($03DA, $00)                                     ;B39281
     %AICMD0x13_Wait(180)                                       ;B39285
     %AICMD0x1B($03DB, $00)                                     ;B39288
@@ -3012,10 +3016,12 @@ DATA8_B39250:
     %AICMD0x1B($03DA, $01)                                     ;B39296
     %AICMD0x13_Wait(360)                                       ;B3929A
     %AICMD0x12_Jump($B39281)                                   ;B3929D
+B392A0:
     %AICMD0x13_Wait(240)                                       ;B392A0
     %AICMD0x1B($03DA, $01)                                     ;B392A3
     %AICMD0x13_Wait(90)                                        ;B392A7
     %AICMD0x12_Jump($B392A0)                                   ;B392AA
+B392AD:
     %AICMD0x13_Wait(1)                                         ;B392AD
     %AICMD0x12_Jump($B392AD)                                   ;B392B0
 
@@ -3025,6 +3031,7 @@ DATA8_B392B3:
     %AICMD0x1A($0018, $0048, $B387C8, $00)                     ;B392B3
     %AICMD0x1F($B392C1)                                        ;B392BB
     %AICMD0x12_Jump($B392BB)                                   ;B392BE
+B392C1:
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $04)       ;B392C1
     %AICMD0x3D_TeleportToArea(!AREA_TOOLSSHOP)                 ;B392C6
     %AICMD0x05_SetTransferPosition(144, 456)                   ;B392C8
@@ -3079,21 +3086,25 @@ DATA8_B39306:
 
 
 DATA8_B39313:
- 
+B39313:
     %AICMD0x1A($0058, $0148, $B38258, $02)                     ;B39313
     %AICMD0x1F($B39321)                                        ;B3931B
     %AICMD0x12_Jump($B3931B)                                   ;B3931E
+B39321:
     %AICMD0x1C_ShowDialog($013A, $00)                          ;B39321
     %AICMD0x12_Jump($B3931B)                                   ;B39325
     %AICMD0x1A($0088, $0120, $B38264, $00)                     ;B39328
     %AICMD0x1F($B39336)                                        ;B39330
     %AICMD0x12_Jump($B39330)                                   ;B39333
+B39336:
     %AICMD0x1C_ShowDialog($013B, $00)                          ;B39336
     %AICMD0x12_Jump($B39330)                                   ;B3933A
+B3933D:
     %AICMD0x1A($0088, $0100, $B3824C, $00)                     ;B3933D
     %AICMD0x22($20, $08, $01, $B3824C, $10)                    ;B39345
     %AICMD0x1F($B39352)                                        ;B3934C
     %AICMD0x12_Jump($B3934C)                                   ;B3934F
+B39352:
     %AICMD0x1C_ShowDialog($013C, $00)                          ;B39352
     %AICMD0x12_Jump($B3934C)                                   ;B39356
 
@@ -3124,18 +3135,24 @@ DATA8_B39379:
     %AICMD0x09($07, $B39CE8)                                   ;B39382
     %AICMD0x12_Jump($B3938A)                                   ;B39386
     %AICMD0x10_End()                                           ;B39389
+B3938A:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, $B3939C)   ;B3938A
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0C, $B3939C)   ;B39391
     %AICMD0x09($03, $B39599)                                   ;B39398
+B3939C:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, $B393AE)   ;B3939C
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $00, $B393AE)   ;B393A3
     %AICMD0x09($04, $B39775)                                   ;B393AA
+B393AE:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, $B393B9)   ;B393AE
     %AICMD0x09($05, $B3997D)                                   ;B393B5
+B393B9:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, $B393CB)   ;B393B9
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $04, $B393CB)   ;B393C0
     %AICMD0x09($06, $B39B94)                                   ;B393C7
+B393CB:
     %AICMD0x12_Jump($B39389)                                   ;B393CB
+B393CE:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B39497) ;B393CE
     %AICMD0x1A($0158, $00B8, $B38420, $00)                     ;B393D6
     %AICMD0x22($18, $18, $01, $B3842C, $0C)                    ;B393DE
@@ -3150,6 +3167,7 @@ DATA8_B39379:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3940F)         ;B39400
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B39408
     %AICMD0x12_Jump($B393E5)                                   ;B3940C
+B3940F:
     %AICMD0x1C_ShowDialog($03B8, $00)                          ;B3940F
     %AICMD0x12_Jump($B393E5)                                   ;B39413
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0C, $B39489)   ;B39416
@@ -3160,10 +3178,13 @@ DATA8_B39379:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, $B39459)     ;B3943A
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B39482)     ;B39441
     %AICMD0x12_Jump($B393E5)                                   ;B39448
+B3944B:
     %AICMD0x1C_ShowDialog($006A, $00)                          ;B3944B
     %AICMD0x12_Jump($B393E5)                                   ;B3944F
+B39452:
     %AICMD0x1C_ShowDialog($006B, $00)                          ;B39452
     %AICMD0x12_Jump($B393E5)                                   ;B39456
+B39459:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 19, $B39490)         ;B39459
     %AICMD0x17($02)                                            ;B39460
     %AICMD0x18($00, $B3946D)                                   ;B39462
@@ -3171,17 +3192,24 @@ DATA8_B39379:
     %AICMD0x12_Jump($B393E5)                                   ;B3946A
     %AICMD0x1C_ShowDialog($00FB, $00)                          ;B3946D
     %AICMD0x12_Jump($B393E5)                                   ;B39471
+B39474:
     %AICMD0x1C_ShowDialog($0392, $00)                          ;B39474
     %AICMD0x12_Jump($B393E5)                                   ;B39478
+B3947B:
     %AICMD0x1C_ShowDialog($03E0, $00)                          ;B3947B
     %AICMD0x12_Jump($B393F0)                                   ;B3947F
+B39482:
     %AICMD0x1C_ShowDialog($006B, $00)                          ;B39482
     %AICMD0x12_Jump($B393E5)                                   ;B39486
+B39489:
     %AICMD0x1C_ShowDialog($01D0, $00)                          ;B39489
     %AICMD0x12_Jump($B393E5)                                   ;B3948D
+B39490:
     %AICMD0x1C_ShowDialog($03F3, $00)                          ;B39490
     %AICMD0x12_Jump($B393E5)                                   ;B39494
+B39497:
     %AICMD0x10_End()                                           ;B39497
+B39498:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0A, $B39598)   ;B39498
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B39598) ;B3949F
     %AICMD0x1A($0228, $0268, $B38384, $00)                     ;B394A7
@@ -3193,6 +3221,7 @@ DATA8_B39379:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B394D0)         ;B394C1
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B394C9
     %AICMD0x12_Jump($B394AF)                                   ;B394CD
+B394D0:
     %AICMD0x1C_ShowDialog($03BA, $00)                          ;B394D0
     %AICMD0x12_Jump($B394AF)                                   ;B394D4
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B39562) ;B394D7
@@ -3207,34 +3236,44 @@ DATA8_B39379:
     %AICMD0x45_JumpIfBetween16(nLove_Eve, 200, 249, $B39569)   ;B39523
     %AICMD0x1C_ShowDialog($03CE, $00)                          ;B3952D
     %AICMD0x12_Jump($B394AF)                                   ;B39531
+B39534:
     %AICMD0x17($02)                                            ;B39534
     %AICMD0x18($00, $B394FB)                                   ;B39536
     %AICMD0x1C_ShowDialog($0064, $00)                          ;B3953A
     %AICMD0x12_Jump($B394AF)                                   ;B3953E
+B39541:
     %AICMD0x17($02)                                            ;B39541
     %AICMD0x18($00, $B394FB)                                   ;B39543
     %AICMD0x1C_ShowDialog($0065, $00)                          ;B39547
     %AICMD0x12_Jump($B394AF)                                   ;B3954B
+B3954E:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 19, $B39584)         ;B3954E
     %AICMD0x17($02)                                            ;B39555
     %AICMD0x18($00, $B394FB)                                   ;B39557
     %AICMD0x1C_ShowDialog($0066, $00)                          ;B3955B
     %AICMD0x12_Jump($B394AF)                                   ;B3955F
+B39562:
     %AICMD0x1C_ShowDialog($0391, $00)                          ;B39562
     %AICMD0x12_Jump($B394AF)                                   ;B39566
+B39569:
     %AICMD0x1C_ShowDialog($03CD, $00)                          ;B39569
     %AICMD0x12_Jump($B394AF)                                   ;B3956D
+B39570:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B3958B)         ;B39570
     %AICMD0x17($02)                                            ;B39577
     %AICMD0x18($00, $B394FB)                                   ;B39579
     %AICMD0x1C_ShowDialog($0068, $00)                          ;B3957D
     %AICMD0x12_Jump($B394AF)                                   ;B39581
+B39584:
     %AICMD0x1C_ShowDialog($03F2, $00)                          ;B39584
     %AICMD0x12_Jump($B394AF)                                   ;B39588
+B3958B:
     %AICMD0x1C_ShowDialog($0324, $00)                          ;B3958B
     %AICMD0x41_AddValue16(nPlayerHappiness, 5)                 ;B3958F
     %AICMD0x12_Jump($B394AF)                                   ;B39595
+B39598:
     %AICMD0x10_End()                                           ;B39598
+B39599:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B39774) ;B39599
     %AICMD0x1A($0138, $0118, $B3818C, $01)                     ;B395A1
     %AICMD0x4D($B395BD)                                        ;B395A9
@@ -3246,6 +3285,7 @@ DATA8_B39379:
     %AICMD0x45_JumpIfBetween16(nLove_Maria, 0, 249, $B395CE)   ;B395BD
     %AICMD0x1C_ShowDialog($043D, $00)                          ;B395C7
     %AICMD0x12_Jump($B395A9)                                   ;B395CB
+B395CE:
     %AICMD0x1C_ShowDialog($0174, $00)                          ;B395CE
     %AICMD0x12_Jump($B395A9)                                   ;B395D2
     %AICMD0x15_JumpIfEquals8($80091E, 2, $B39610)              ;B395D5
@@ -3257,18 +3297,23 @@ DATA8_B39379:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B39644)         ;B39601
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B39609
     %AICMD0x12_Jump($B395A9)                                   ;B3960D
+B39610:
     %AICMD0x1C_ShowDialog($03B0, $00)                          ;B39610
     %AICMD0x41_AddValue16(nLove_Maria, -8)                     ;B39614
     %AICMD0x12_Jump($B395A9)                                   ;B3961A
+B3961D:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B3961D
     %AICMD0x41_AddValue16(nLove_Maria, 4)                      ;B39621
     %AICMD0x12_Jump($B395A9)                                   ;B39627
+B3962A:
     %AICMD0x1C_ShowDialog($03B5, $00)                          ;B3962A
     %AICMD0x41_AddValue16(nLove_Maria, 3)                      ;B3962E
     %AICMD0x12_Jump($B395A9)                                   ;B39634
+B39637:
     %AICMD0x1C_ShowDialog($03B2, $00)                          ;B39637
     %AICMD0x41_AddValue16(nLove_Maria, 5)                      ;B3963B
     %AICMD0x12_Jump($B395A9)                                   ;B39641
+B39644:
     %AICMD0x1C_ShowDialog($01D9, $00)                          ;B39644
     %AICMD0x41_AddValue16(nLove_Maria, -2)                     ;B39648
     %AICMD0x12_Jump($B395A9)                                   ;B3964E
@@ -3278,6 +3323,7 @@ DATA8_B39379:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, $B396DE)     ;B39667
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B39729)     ;B3966E
     %AICMD0x12_Jump($B395A9)                                   ;B39675
+B39678:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 22, $B396BC)         ;B39678
     %AICMD0x17($02)                                            ;B3967F
     %AICMD0x18($00, $B3968C)                                   ;B39681
@@ -3289,14 +3335,18 @@ DATA8_B39379:
     %AICMD0x20_JumpIfChoice(0, $B396A2)                        ;B39697
     %AICMD0x20_JumpIfChoice(1, $B396AF)                        ;B3969B
     %AICMD0x12_Jump($B395A9)                                   ;B3969F
+B396A2:
     %AICMD0x1C_ShowDialog($0087, $00)                          ;B396A2
     %AICMD0x41_AddValue16(nLove_Maria, 8)                      ;B396A6
     %AICMD0x12_Jump($B395B4)                                   ;B396AC
+B396AF:
     %AICMD0x1C_ShowDialog($0088, $00)                          ;B396AF
     %AICMD0x41_AddValue16(nLove_Maria, 2)                      ;B396B3
     %AICMD0x12_Jump($B395B4)                                   ;B396B9
+B396BC:
     %AICMD0x1C_ShowDialog($00BF, $00)                          ;B396BC
     %AICMD0x12_Jump($B395A9)                                   ;B396C0
+B396C3:
     %AICMD0x17($02)                                            ;B396C3
     %AICMD0x18($00, $B396D0)                                   ;B396C5
     %AICMD0x18($01, $B396D7)                                   ;B396C9
@@ -3305,6 +3355,7 @@ DATA8_B39379:
     %AICMD0x12_Jump($B395A9)                                   ;B396D4
     %AICMD0x1C_ShowDialog($0089, $00)                          ;B396D7
     %AICMD0x12_Jump($B395A9)                                   ;B396DB
+B396DE:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 11, $B39722)         ;B396DE
     %AICMD0x17($02)                                            ;B396E5
     %AICMD0x18($00, $B396F2)                                   ;B396E7
@@ -3316,14 +3367,18 @@ DATA8_B39379:
     %AICMD0x20_JumpIfChoice(0, $B39708)                        ;B396FD
     %AICMD0x20_JumpIfChoice(1, $B39715)                        ;B39701
     %AICMD0x12_Jump($B395A9)                                   ;B39705
+B39708:
     %AICMD0x1C_ShowDialog($008B, $00)                          ;B39708
     %AICMD0x41_AddValue16(nLove_Maria, 8)                      ;B3970C
     %AICMD0x12_Jump($B395B4)                                   ;B39712
+B39715:
     %AICMD0x1C_ShowDialog($008C, $00)                          ;B39715
     %AICMD0x41_AddValue16(nLove_Maria, 2)                      ;B39719
     %AICMD0x12_Jump($B395B4)                                   ;B3971F
+B39722:
     %AICMD0x1C_ShowDialog($0238, $00)                          ;B39722
     %AICMD0x12_Jump($B395A9)                                   ;B39726
+B39729:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 23, $B39752)         ;B39729
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B39759)         ;B39730
     %AICMD0x17($02)                                            ;B39737
@@ -3334,16 +3389,22 @@ DATA8_B39379:
     %AICMD0x12_Jump($B395A9)                                   ;B39748
     %AICMD0x1C_ShowDialog($008D, $00)                          ;B3974B
     %AICMD0x12_Jump($B395A9)                                   ;B3974F
+B39752:
     %AICMD0x1C_ShowDialog($02AF, $00)                          ;B39752
     %AICMD0x12_Jump($B395A9)                                   ;B39756
+B39759:
     %AICMD0x1C_ShowDialog($03F8, $00)                          ;B39759
     %AICMD0x41_AddValue16(nLove_Maria, 5)                      ;B3975D
     %AICMD0x12_Jump($B395A9)                                   ;B39763
+B39766:
     %AICMD0x1C_ShowDialog($0410, $00)                          ;B39766
     %AICMD0x12_Jump($B395B4)                                   ;B3976A
+B3976D:
     %AICMD0x1C_ShowDialog($0391, $00)                          ;B3976D
     %AICMD0x12_Jump($B395A9)                                   ;B39771
+B39774:
     %AICMD0x10_End()                                           ;B39774
+B39775:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3997C) ;B39775
     %AICMD0x1A($0208, $0108, $B381C8, $00)                     ;B3977D
     %AICMD0x22($08, $20, $01, $B381D4, $10)                    ;B39785
@@ -3359,6 +3420,7 @@ DATA8_B39379:
     %AICMD0x45_JumpIfBetween16(nLove_Nina, 0, 249, $B397BA)    ;B397A9
     %AICMD0x1C_ShowDialog($043F, $00)                          ;B397B3
     %AICMD0x12_Jump($B3978C)                                   ;B397B7
+B397BA:
     %AICMD0x1C_ShowDialog($0178, $00)                          ;B397BA
     %AICMD0x12_Jump($B3978C)                                   ;B397BE
     %AICMD0x15_JumpIfEquals8($80091E, 2, $B3982A)              ;B397C1
@@ -3371,18 +3433,23 @@ DATA8_B39379:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3982A)         ;B397F4
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B397FC
     %AICMD0x12_Jump($B3978C)                                   ;B39800
+B39803:
     %AICMD0x1C_ShowDialog($03B2, $00)                          ;B39803
     %AICMD0x41_AddValue16(nLove_Nina, 4)                       ;B39807
     %AICMD0x12_Jump($B3978C)                                   ;B3980D
+B39810:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B39810
     %AICMD0x41_AddValue16(nLove_Nina, 8)                       ;B39814
     %AICMD0x12_Jump($B3978C)                                   ;B3981A
+B3981D:
     %AICMD0x1C_ShowDialog($03B1, $00)                          ;B3981D
     %AICMD0x41_AddValue16(nLove_Nina, -6)                      ;B39821
     %AICMD0x12_Jump($B3978C)                                   ;B39827
+B3982A:
     %AICMD0x1C_ShowDialog($01D9, $00)                          ;B3982A
     %AICMD0x41_AddValue16(nLove_Nina, -4)                      ;B3982E
     %AICMD0x12_Jump($B3978C)                                   ;B39834
+B39837:
     %AICMD0x1C_ShowDialog($0143, $00)                          ;B39837
     %AICMD0x41_AddValue16(nLove_Nina, 6)                       ;B3983B
     %AICMD0x12_Jump($B3978C)                                   ;B39841
@@ -3392,6 +3459,7 @@ DATA8_B39379:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, $B398D1)     ;B3985A
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B39908)     ;B39861
     %AICMD0x12_Jump($B3978C)                                   ;B39868
+B3986B:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 22, $B3988D)         ;B3986B
     %AICMD0x17($02)                                            ;B39872
     %AICMD0x18($00, $B3987F)                                   ;B39874
@@ -3401,8 +3469,10 @@ DATA8_B39379:
     %AICMD0x12_Jump($B3978C)                                   ;B39883
     %AICMD0x1C_ShowDialog($00B5, $00)                          ;B39886
     %AICMD0x12_Jump($B3978C)                                   ;B3988A
+B3988D:
     %AICMD0x1C_ShowDialog($0208, $00)                          ;B3988D
     %AICMD0x12_Jump($B3978C)                                   ;B39891
+B39894:
     %AICMD0x17($02)                                            ;B39894
     %AICMD0x18($00, $B398A1)                                   ;B39896
     %AICMD0x18($01, $B398CA)                                   ;B3989A
@@ -3411,14 +3481,17 @@ DATA8_B39379:
     %AICMD0x20_JumpIfChoice(0, $B398B0)                        ;B398A5
     %AICMD0x20_JumpIfChoice(1, $B398BD)                        ;B398A9
     %AICMD0x12_Jump($B3978C)                                   ;B398AD
+B398B0:
     %AICMD0x1C_ShowDialog($00B0, $00)                          ;B398B0
     %AICMD0x41_AddValue16(nLove_Nina, 8)                       ;B398B4
     %AICMD0x12_Jump($B39797)                                   ;B398BA
+B398BD:
     %AICMD0x1C_ShowDialog($00B1, $00)                          ;B398BD
     %AICMD0x41_AddValue16(nLove_Nina, 2)                       ;B398C1
     %AICMD0x12_Jump($B39797)                                   ;B398C7
     %AICMD0x1C_ShowDialog($00B6, $00)                          ;B398CA
     %AICMD0x12_Jump($B3978C)                                   ;B398CE
+B398D1:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 11, $B398FA)         ;B398D1
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 19, $B39901)         ;B398D8
     %AICMD0x17($02)                                            ;B398DF
@@ -3429,10 +3502,13 @@ DATA8_B39379:
     %AICMD0x12_Jump($B3978C)                                   ;B398F0
     %AICMD0x1C_ShowDialog($00B7, $00)                          ;B398F3
     %AICMD0x12_Jump($B3978C)                                   ;B398F7
+B398FA:
     %AICMD0x1C_ShowDialog($023A, $00)                          ;B398FA
     %AICMD0x12_Jump($B3978C)                                   ;B398FE
+B39901:
     %AICMD0x1C_ShowDialog($03F2, $00)                          ;B39901
     %AICMD0x12_Jump($B3978C)                                   ;B39905
+B39908:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 23, $B39953)         ;B39908
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B3995A)         ;B3990F
     %AICMD0x17($02)                                            ;B39916
@@ -3443,26 +3519,35 @@ DATA8_B39379:
     %AICMD0x20_JumpIfChoice(0, $B39932)                        ;B39927
     %AICMD0x20_JumpIfChoice(1, $B3993F)                        ;B3992B
     %AICMD0x12_Jump($B3978C)                                   ;B3992F
+B39932:
     %AICMD0x1C_ShowDialog($00B4, $00)                          ;B39932
     %AICMD0x41_AddValue16(nLove_Nina, 8)                       ;B39936
     %AICMD0x12_Jump($B39797)                                   ;B3993C
+B3993F:
     %AICMD0x1C_ShowDialog($00B1, $00)                          ;B3993F
     %AICMD0x41_AddValue16(nLove_Nina, 2)                       ;B39943
     %AICMD0x12_Jump($B39797)                                   ;B39949
     %AICMD0x1C_ShowDialog($00B8, $00)                          ;B3994C
     %AICMD0x12_Jump($B3978C)                                   ;B39950
+B39953:
     %AICMD0x1C_ShowDialog($02B1, $00)                          ;B39953
     %AICMD0x12_Jump($B3978C)                                   ;B39957
+B3995A:
     %AICMD0x1C_ShowDialog($03FA, $00)                          ;B3995A
     %AICMD0x41_AddValue16(nLove_Nina, 5)                       ;B3995E
     %AICMD0x12_Jump($B3978C)                                   ;B39964
+B39967:
     %AICMD0x1C_ShowDialog($040D, $00)                          ;B39967
     %AICMD0x12_Jump($B39797)                                   ;B3996B
+B3996E:
     %AICMD0x1C_ShowDialog($00B1, $00)                          ;B3996E
     %AICMD0x12_Jump($B397A0)                                   ;B39972
+B39975:
     %AICMD0x1C_ShowDialog($0391, $00)                          ;B39975
     %AICMD0x12_Jump($B3978C)                                   ;B39979
+B3997C:
     %AICMD0x10_End()                                           ;B3997C
+B3997D:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B39A4D) ;B3997D
     %AICMD0x1A($0288, $0388, $B381E0, $00)                     ;B39985
     %AICMD0x22($20, $10, $01, $B381EC, $10)                    ;B3998D
@@ -3478,6 +3563,7 @@ DATA8_B39379:
     %AICMD0x45_JumpIfBetween16(nLove_Ellen, 0, 249, $B399C2)   ;B399B1
     %AICMD0x1C_ShowDialog($0440, $00)                          ;B399BB
     %AICMD0x12_Jump($B39994)                                   ;B399BF
+B399C2:
     %AICMD0x1C_ShowDialog($017A, $00)                          ;B399C2
     %AICMD0x12_Jump($B39994)                                   ;B399C6
     %AICMD0x15_JumpIfEquals8($80091E, 2, $B39A0C)              ;B399C9
@@ -3490,21 +3576,27 @@ DATA8_B39379:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B39A40)         ;B399FD
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B39A05
     %AICMD0x12_Jump($B39994)                                   ;B39A09
+B39A0C:
     %AICMD0x1C_ShowDialog($03B0, $00)                          ;B39A0C
     %AICMD0x41_AddValue16(nLove_Ellen, -8)                     ;B39A10
     %AICMD0x12_Jump($B39994)                                   ;B39A16
+B39A19:
     %AICMD0x1C_ShowDialog($03B2, $00)                          ;B39A19
     %AICMD0x41_AddValue16(nLove_Ellen, 6)                      ;B39A1D
     %AICMD0x12_Jump($B39994)                                   ;B39A23
+B39A26:
     %AICMD0x1C_ShowDialog($03B3, $00)                          ;B39A26
     %AICMD0x41_AddValue16(nLove_Ellen, 8)                      ;B39A2A
     %AICMD0x12_Jump($B39994)                                   ;B39A30
+B39A33:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B39A33
     %AICMD0x41_AddValue16(nLove_Ellen, 5)                      ;B39A37
     %AICMD0x12_Jump($B39994)                                   ;B39A3D
+B39A40:
     %AICMD0x1C_ShowDialog($01D9, $00)                          ;B39A40
     %AICMD0x41_AddValue16(nLove_Ellen, -4)                     ;B39A44
     %AICMD0x12_Jump($B39994)                                   ;B39A4A
+B39A4D:
     %AICMD0x10_End()                                           ;B39A4D
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $02, $B39B8D)   ;B39A4E
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B39B86) ;B39A55
@@ -3513,6 +3605,7 @@ DATA8_B39379:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, $B39AF0)     ;B39A6B
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B39B3B)     ;B39A72
     %AICMD0x12_Jump($B39994)                                   ;B39A79
+B39A7C:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 22, $B39AC0)         ;B39A7C
     %AICMD0x17($02)                                            ;B39A83
     %AICMD0x18($00, $B39A90)                                   ;B39A85
@@ -3522,16 +3615,20 @@ DATA8_B39379:
     %AICMD0x20_JumpIfChoice(0, $B39A9F)                        ;B39A94
     %AICMD0x20_JumpIfChoice(1, $B39AAC)                        ;B39A98
     %AICMD0x12_Jump($B39994)                                   ;B39A9C
+B39A9F:
     %AICMD0x1C_ShowDialog($00CC, $00)                          ;B39A9F
     %AICMD0x41_AddValue16(nLove_Ellen, 8)                      ;B39AA3
     %AICMD0x12_Jump($B3999F)                                   ;B39AA9
+B39AAC:
     %AICMD0x1C_ShowDialog($00CD, $00)                          ;B39AAC
     %AICMD0x41_AddValue16(nLove_Ellen, 2)                      ;B39AB0
     %AICMD0x12_Jump($B3999F)                                   ;B39AB6
     %AICMD0x1D_ShowDialog($00C5, $00)                          ;B39AB9
     %AICMD0x12_Jump($B39994)                                   ;B39ABD
+B39AC0:
     %AICMD0x1C_ShowDialog($0209, $00)                          ;B39AC0
     %AICMD0x12_Jump($B39994)                                   ;B39AC4
+B39AC7:
     %AICMD0x17($02)                                            ;B39AC7
     %AICMD0x18($00, $B39AD4)                                   ;B39AC9
     %AICMD0x18($01, $B39AE2)                                   ;B39ACD
@@ -3541,8 +3638,10 @@ DATA8_B39379:
     %AICMD0x12_Jump($B39994)                                   ;B39ADF
     %AICMD0x1C_ShowDialog($00CE, $00)                          ;B39AE2
     %AICMD0x12_Jump($B39994)                                   ;B39AE6
+B39AE9:
     %AICMD0x1C_ShowDialog($048D, $00)                          ;B39AE9
     %AICMD0x12_Jump($B39994)                                   ;B39AED
+B39AF0:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 11, $B39B34)         ;B39AF0
     %AICMD0x17($02)                                            ;B39AF7
     %AICMD0x18($00, $B39B04)                                   ;B39AF9
@@ -3552,16 +3651,20 @@ DATA8_B39379:
     %AICMD0x20_JumpIfChoice(0, $B39B13)                        ;B39B08
     %AICMD0x20_JumpIfChoice(1, $B39B20)                        ;B39B0C
     %AICMD0x12_Jump($B39994)                                   ;B39B10
+B39B13:
     %AICMD0x1C_ShowDialog($00C8, $00)                          ;B39B13
     %AICMD0x41_AddValue16(nLove_Ellen, 8)                      ;B39B17
     %AICMD0x12_Jump($B3999F)                                   ;B39B1D
+B39B20:
     %AICMD0x1C_ShowDialog($00C9, $00)                          ;B39B20
     %AICMD0x41_AddValue16(nLove_Ellen, 2)                      ;B39B24
     %AICMD0x12_Jump($B3999F)                                   ;B39B2A
     %AICMD0x1C_ShowDialog($00CF, $00)                          ;B39B2D
     %AICMD0x12_Jump($B39994)                                   ;B39B31
+B39B34:
     %AICMD0x1C_ShowDialog($023B, $00)                          ;B39B34
     %AICMD0x12_Jump($B39994)                                   ;B39B38
+B39B3B:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 23, $B39B64)         ;B39B3B
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B39B6B)         ;B39B42
     %AICMD0x17($02)                                            ;B39B49
@@ -3572,19 +3675,26 @@ DATA8_B39379:
     %AICMD0x12_Jump($B39994)                                   ;B39B5A
     %AICMD0x1C_ShowDialog($00D0, $00)                          ;B39B5D
     %AICMD0x12_Jump($B39994)                                   ;B39B61
+B39B64:
     %AICMD0x1C_ShowDialog($02B2, $00)                          ;B39B64
     %AICMD0x12_Jump($B39994)                                   ;B39B68
+B39B6B:
     %AICMD0x1C_ShowDialog($03FB, $00)                          ;B39B6B
     %AICMD0x41_AddValue16(nLove_Ellen, 5)                      ;B39B6F
     %AICMD0x12_Jump($B39994)                                   ;B39B75
+B39B78:
     %AICMD0x1C_ShowDialog($00DB, $00)                          ;B39B78
     %AICMD0x12_Jump($B3999F)                                   ;B39B7C
+B39B7F:
     %AICMD0x1C_ShowDialog($00C9, $00)                          ;B39B7F
     %AICMD0x12_Jump($B3999F)                                   ;B39B83
+B39B86:
     %AICMD0x1C_ShowDialog($0391, $00)                          ;B39B86
     %AICMD0x12_Jump($B39994)                                   ;B39B8A
+B39B8D:
     %AICMD0x1C_ShowDialog($01EE, $00)                          ;B39B8D
     %AICMD0x12_Jump($B39994)                                   ;B39B91
+B39B94:
     %AICMD0x17($02)                                            ;B39B94
     %AICMD0x18($00, $B39C84)                                   ;B39B96
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B39C84) ;B39B9A
@@ -3599,6 +3709,7 @@ DATA8_B39379:
     %AICMD0x45_JumpIfBetween16(nLove_Eve, 0, 249, $B39BD6)     ;B39BC5
     %AICMD0x1C_ShowDialog($0441, $00)                          ;B39BCF
     %AICMD0x12_Jump($B39BB1)                                   ;B39BD3
+B39BD6:
     %AICMD0x1C_ShowDialog($017B, $00)                          ;B39BD6
     %AICMD0x12_Jump($B39BB1)                                   ;B39BDA
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B39C7D) ;B39BDD
@@ -3610,6 +3721,7 @@ DATA8_B39379:
     %AICMD0x12_Jump($B39BB1)                                   ;B39BF6
     %AICMD0x1C_ShowDialog($00DF, $00)                          ;B39BF9
     %AICMD0x12_Jump($B39BBC)                                   ;B39BFD
+B39C00:
     %AICMD0x1C_ShowDialog($0404, $00)                          ;B39C00
     %AICMD0x12_Jump($B39BBC)                                   ;B39C04
     %AICMD0x15_JumpIfEquals8($80091E, 2, $B39C49)              ;B39C07
@@ -3622,31 +3734,39 @@ DATA8_B39379:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B39C70)         ;B39C3A
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B39C42
     %AICMD0x12_Jump($B39BB1)                                   ;B39C46
+B39C49:
     %AICMD0x1C_ShowDialog($03B4, $00)                          ;B39C49
     %AICMD0x41_AddValue16(nLove_Eve, -8)                       ;B39C4D
     %AICMD0x12_Jump($B39BB1)                                   ;B39C53
+B39C56:
     %AICMD0x1C_ShowDialog($03B2, $00)                          ;B39C56
     %AICMD0x41_AddValue16(nLove_Eve, 5)                        ;B39C5A
     %AICMD0x12_Jump($B39BB1)                                   ;B39C60
+B39C63:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B39C63
     %AICMD0x41_AddValue16(nLove_Eve, 8)                        ;B39C67
     %AICMD0x12_Jump($B39BB1)                                   ;B39C6D
+B39C70:
     %AICMD0x1C_ShowDialog($03BA, $00)                          ;B39C70
     %AICMD0x41_AddValue16(nLove_Eve, -4)                       ;B39C74
     %AICMD0x12_Jump($B39BB1)                                   ;B39C7A
+B39C7D:
     %AICMD0x1C_ShowDialog($0391, $00)                          ;B39C7D
     %AICMD0x12_Jump($B39BB1)                                   ;B39C81
+B39C84:
     %AICMD0x10_End()                                           ;B39C84
     %AICMD0x1A($01A8, $0328, $B387C8, $00)                     ;B39C85
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, $B39CA5)     ;B39C8D
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, $B39CB6)     ;B39C94
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, $B39CD5)     ;B39C9B
     %AICMD0x12_Jump($B39CE2)                                   ;B39CA2
+B39CA5:
     %AICMD0x1B($03DA, $00)                                     ;B39CA5
     %AICMD0x13_Wait(180)                                       ;B39CA9
     %AICMD0x1B($03D9, $00)                                     ;B39CAC
     %AICMD0x13_Wait(240)                                       ;B39CB0
     %AICMD0x12_Jump($B39CA5)                                   ;B39CB3
+B39CB6:
     %AICMD0x1B($03DA, $00)                                     ;B39CB6
     %AICMD0x13_Wait(180)                                       ;B39CBA
     %AICMD0x1B($03DB, $00)                                     ;B39CBD
@@ -3656,17 +3776,22 @@ DATA8_B39379:
     %AICMD0x1B($03DA, $00)                                     ;B39CCB
     %AICMD0x13_Wait(360)                                       ;B39CCF
     %AICMD0x12_Jump($B39CB6)                                   ;B39CD2
+B39CD5:
     %AICMD0x13_Wait(240)                                       ;B39CD5
     %AICMD0x1B($03DA, $01)                                     ;B39CD8
     %AICMD0x13_Wait(90)                                        ;B39CDC
     %AICMD0x12_Jump($B39CD5)                                   ;B39CDF
+B39CE2:
     %AICMD0x13_Wait(1)                                         ;B39CE2
     %AICMD0x12_Jump($B39CE2)                                   ;B39CE5
+B39CE8:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $00, $B39CF0)   ;B39CE8
     %AICMD0x10_End()                                           ;B39CEF
+B39CF0:
     %AICMD0x1A($0198, $0368, $B38198, $00)                     ;B39CF0
     %AICMD0x1F($B39CFE)                                        ;B39CF8
     %AICMD0x12_Jump($B39CF8)                                   ;B39CFB
+B39CFE:
     %AICMD0x1C_ShowDialog($013F, $00)                          ;B39CFE
     %AICMD0x12_Jump($B39CF8)                                   ;B39D02
 
@@ -3678,6 +3803,7 @@ DATA8_B39D05:
     %AICMD0x09($02, $B39E2A)                                   ;B39D0A
     %AICMD0x13_Wait(1)                                         ;B39D0E
     %AICMD0x12_Jump($B39D0E)                                   ;B39D11
+B39D14:
     %AICMD0x1A($00A8, $0078, $B38300, $00)                     ;B39D14
     %AICMD0x22($20, $10, $01, $B3830C, $14)                    ;B39D1C
     %AICMD0x4D($B39D41)                                        ;B39D23
@@ -3693,6 +3819,7 @@ DATA8_B39D05:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B39D57)         ;B39D48
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B39D50
     %AICMD0x12_Jump($B39D23)                                   ;B39D54
+B39D57:
     %AICMD0x1C_ShowDialog($03B8, $00)                          ;B39D57
     %AICMD0x12_Jump($B39D23)                                   ;B39D5B
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0C, $B39E09)   ;B39D5E
@@ -3702,6 +3829,7 @@ DATA8_B39D05:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, $B39D92)   ;B39D7A
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, $B39D92)   ;B39D81
     %AICMD0x45_JumpIfBetween16(nLove_Maria, 200, 300, $B39E1D) ;B39D88
+B39D92:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, $B39DC2)     ;B39D92
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, $B39DCC)     ;B39D99
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B39DD6)     ;B39DA0
@@ -3713,32 +3841,43 @@ DATA8_B39D05:
     %AICMD0x12_Jump($B39D23)                                   ;B39DB8
     %AICMD0x1C_ShowDialog($0036, $00)                          ;B39DBB
     %AICMD0x12_Jump($B39D2E)                                   ;B39DBF
+B39DC2:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 22, $B39DE7)         ;B39DC2
     %AICMD0x12_Jump($B39DA7)                                   ;B39DC9
+B39DCC:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 11, $B39DEE)         ;B39DCC
     %AICMD0x12_Jump($B39DA7)                                   ;B39DD3
+B39DD6:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 23, $B39DF5)         ;B39DD6
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B39DFC)         ;B39DDD
     %AICMD0x12_Jump($B39DA7)                                   ;B39DE4
+B39DE7:
     %AICMD0x1C_ShowDialog($020B, $00)                          ;B39DE7
     %AICMD0x12_Jump($B39D23)                                   ;B39DEB
+B39DEE:
     %AICMD0x1C_ShowDialog($023D, $00)                          ;B39DEE
     %AICMD0x12_Jump($B39D23)                                   ;B39DF2
+B39DF5:
     %AICMD0x1C_ShowDialog($02AD, $00)                          ;B39DF5
     %AICMD0x12_Jump($B39D23)                                   ;B39DF9
+B39DFC:
     %AICMD0x1C_ShowDialog($03EC, $00)                          ;B39DFC
     %AICMD0x41_AddValue16(nPlayerHappiness, 5)                 ;B39E00
     %AICMD0x12_Jump($B39D23)                                   ;B39E06
+B39E09:
     %AICMD0x1C_ShowDialog($01CD, $00)                          ;B39E09
     %AICMD0x12_Jump($B39D23)                                   ;B39E0D
+B39E10:
     %AICMD0x17($02)                                            ;B39E10
     %AICMD0x18($00, $B39D92)                                   ;B39E12
     %AICMD0x1C_ShowDialog($03C0, $00)                          ;B39E16
     %AICMD0x12_Jump($B39D23)                                   ;B39E1A
+B39E1D:
     %AICMD0x17($02)                                            ;B39E1D
     %AICMD0x18($00, $B39D92)                                   ;B39E1F
     %AICMD0x1C_ShowDialog($03BF, $00)                          ;B39E23
     %AICMD0x12_Jump($B39D23)                                   ;B39E27
+B39E2A:
     %AICMD0x1A($0188, $00A0, $B383D8, $00)                     ;B39E2A
     %AICMD0x4D($B39E51)                                        ;B39E32
     %AICMD0x2D($B39E6E, $B39E58)                               ;B39E35
@@ -3754,6 +3893,7 @@ DATA8_B39D05:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B39E67)         ;B39E58
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B39E60
     %AICMD0x12_Jump($B39E32)                                   ;B39E64
+B39E67:
     %AICMD0x1C_ShowDialog($03B9, $00)                          ;B39E67
     %AICMD0x12_Jump($B39E32)                                   ;B39E6B
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0C, $B39F1D)   ;B39E6E
@@ -3763,6 +3903,7 @@ DATA8_B39D05:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, $B39EA2)   ;B39E8A
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, $B39EA2)   ;B39E91
     %AICMD0x45_JumpIfBetween16(nLove_Maria, 200, 300, $B39F31) ;B39E98
+B39EA2:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, $B39ED2)     ;B39EA2
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, $B39EDC)     ;B39EA9
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B39EE6)     ;B39EB0
@@ -3772,31 +3913,42 @@ DATA8_B39D05:
     %AICMD0x12_Jump($B39E32)                                   ;B39EC1
     %AICMD0x1C_ShowDialog($003A, $00)                          ;B39EC4
     %AICMD0x12_Jump($B39E32)                                   ;B39EC8
+B39ECB:
     %AICMD0x1C_ShowDialog($003B, $00)                          ;B39ECB
     %AICMD0x12_Jump($B39E3D)                                   ;B39ECF
+B39ED2:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 22, $B39EFB)         ;B39ED2
     %AICMD0x12_Jump($B39EB7)                                   ;B39ED9
+B39EDC:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 11, $B39F02)         ;B39EDC
     %AICMD0x12_Jump($B39EB7)                                   ;B39EE3
+B39EE6:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 23, $B39F09)         ;B39EE6
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B39F10)         ;B39EED
     %AICMD0x1C_ShowDialog($003F, $00)                          ;B39EF4
     %AICMD0x12_Jump($B39E32)                                   ;B39EF8
+B39EFB:
     %AICMD0x1C_ShowDialog($0202, $00)                          ;B39EFB
     %AICMD0x12_Jump($B39E32)                                   ;B39EFF
+B39F02:
     %AICMD0x1C_ShowDialog($023E, $00)                          ;B39F02
     %AICMD0x12_Jump($B39E32)                                   ;B39F06
+B39F09:
     %AICMD0x1C_ShowDialog($02AE, $00)                          ;B39F09
     %AICMD0x12_Jump($B39E32)                                   ;B39F0D
+B39F10:
     %AICMD0x1C_ShowDialog($03ED, $00)                          ;B39F10
     %AICMD0x41_AddValue16(nPlayerHappiness, 5)                 ;B39F14
     %AICMD0x12_Jump($B39E32)                                   ;B39F1A
+B39F1D:
     %AICMD0x1C_ShowDialog($01CE, $00)                          ;B39F1D
     %AICMD0x12_Jump($B39E46)                                   ;B39F21
+B39F24:
     %AICMD0x17($02)                                            ;B39F24
     %AICMD0x18($00, $B39EA2)                                   ;B39F26
     %AICMD0x1C_ShowDialog($03C2, $00)                          ;B39F2A
     %AICMD0x12_Jump($B39E32)                                   ;B39F2E
+B39F31:
     %AICMD0x17($02)                                            ;B39F31
     %AICMD0x18($00, $B39EA2)                                   ;B39F33
     %AICMD0x1C_ShowDialog($03C1, $00)                          ;B39F37
@@ -3809,6 +3961,7 @@ DATA8_B39F3E:
     %AICMD0x09($01, $B39F49)                                   ;B39F3F
     %AICMD0x13_Wait(1)                                         ;B39F43
     %AICMD0x12_Jump($B39F43)                                   ;B39F46
+B39F49:
     %AICMD0x1A($0068, $00E8, $B38354, $00)                     ;B39F49
     %AICMD0x4D($B39F7D)                                        ;B39F51
     %AICMD0x2D($B39F9A, $B39F84)                               ;B39F54
@@ -3827,6 +3980,7 @@ DATA8_B39F3E:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B39F93)         ;B39F84
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B39F8C
     %AICMD0x12_Jump($B39F51)                                   ;B39F90
+B39F93:
     %AICMD0x1C_ShowDialog($03B0, $00)                          ;B39F93
     %AICMD0x12_Jump($B39F51)                                   ;B39F97
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0C, $B3A074)   ;B39F9A
@@ -3850,36 +4004,46 @@ DATA8_B39F3E:
     %AICMD0x12_Jump($B39F5C)                                   ;B39FF7
     %AICMD0x1C_ShowDialog($03CB, $00)                          ;B39FFA
     %AICMD0x12_Jump($B39F67)                                   ;B39FFE
+B3A001:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 22, $B3A030)         ;B3A001
     %AICMD0x17($02)                                            ;B3A008
     %AICMD0x18($00, $B39FB6)                                   ;B3A00A
     %AICMD0x18($01, $B39FD9)                                   ;B3A00E
     %AICMD0x12_Jump($B39FD9)                                   ;B3A012
+B3A015:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 11, $B3A037)         ;B3A015
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 19, $B3A03E)         ;B3A01C
     %AICMD0x17($02)                                            ;B3A023
     %AICMD0x18($00, $B39FB6)                                   ;B3A025
     %AICMD0x18($01, $B39FD9)                                   ;B3A029
     %AICMD0x12_Jump($B39FD9)                                   ;B3A02D
+B3A030:
     %AICMD0x1C_ShowDialog($0205, $00)                          ;B3A030
     %AICMD0x12_Jump($B39F51)                                   ;B3A034
+B3A037:
     %AICMD0x1C_ShowDialog($03DC, $00)                          ;B3A037
     %AICMD0x12_Jump($B39F51)                                   ;B3A03B
+B3A03E:
     %AICMD0x1C_ShowDialog($03DC, $00)                          ;B3A03E
     %AICMD0x12_Jump($B39F51)                                   ;B3A042
+B3A045:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 23, $B3A060)         ;B3A045
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B3A067)         ;B3A04C
     %AICMD0x17($02)                                            ;B3A053
     %AICMD0x18($00, $B39FB6)                                   ;B3A055
     %AICMD0x18($01, $B39FD9)                                   ;B3A059
     %AICMD0x12_Jump($B39FD9)                                   ;B3A05D
+B3A060:
     %AICMD0x1C_ShowDialog($0405, $00)                          ;B3A060
     %AICMD0x12_Jump($B39F51)                                   ;B3A064
+B3A067:
     %AICMD0x1C_ShowDialog($03F0, $00)                          ;B3A067
     %AICMD0x41_AddValue16(nPlayerHappiness, 5)                 ;B3A06B
     %AICMD0x12_Jump($B39F51)                                   ;B3A071
+B3A074:
     %AICMD0x1C_ShowDialog($01CF, $00)                          ;B3A074
     %AICMD0x12_Jump($B39F67)                                   ;B3A078
+B3A07B:
     %AICMD0x17($02)                                            ;B3A07B
     %AICMD0x17($00)                                            ;B3A07D
     %AICMD0x1C_ShowDialog($03CC, $00)                          ;B3A07F
@@ -3892,6 +4056,7 @@ DATA8_B3A086:
     %AICMD0x09($01, $B3A091)                                   ;B3A087
     %AICMD0x13_Wait(1)                                         ;B3A08B
     %AICMD0x12_Jump($B3A08B)                                   ;B3A08E
+B3A091:
     %AICMD0x1A($0028, $0168, $B383FC, $02)                     ;B3A091
     %AICMD0x4D($B3A0A4)                                        ;B3A099
     %AICMD0x2D($B3A0C9, $B3A0AB)                               ;B3A09C
@@ -3902,6 +4067,7 @@ DATA8_B3A086:
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3A0B3
     %AICMD0x1B($02D0, $01)                                     ;B3A0B7
     %AICMD0x12_Jump($B3A099)                                   ;B3A0BB
+B3A0BE:
     %AICMD0x1C_ShowDialog($03B9, $00)                          ;B3A0BE
     %AICMD0x1B($02D0, $01)                                     ;B3A0C2
     %AICMD0x12_Jump($B3A099)                                   ;B3A0C6
@@ -3911,31 +4077,39 @@ DATA8_B3A086:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, $B3A10C)     ;B3A0DE
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B3A122)     ;B3A0E5
     %AICMD0x12_Jump($B3A099)                                   ;B3A0EC
+B3A0EF:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 22, $B3A117)         ;B3A0EF
     %AICMD0x1C_ShowDialog($0046, $00)                          ;B3A0F6
     %AICMD0x1B($02D0, $01)                                     ;B3A0FA
     %AICMD0x12_Jump($B3A099)                                   ;B3A0FE
+B3A101:
     %AICMD0x1C_ShowDialog($0047, $00)                          ;B3A101
     %AICMD0x1B($02D0, $01)                                     ;B3A105
     %AICMD0x12_Jump($B3A099)                                   ;B3A109
+B3A10C:
     %AICMD0x1C_ShowDialog($03C5, $00)                          ;B3A10C
     %AICMD0x1B($02D0, $01)                                     ;B3A110
     %AICMD0x12_Jump($B3A099)                                   ;B3A114
+B3A117:
     %AICMD0x1C_ShowDialog($0203, $00)                          ;B3A117
     %AICMD0x1B($02D0, $01)                                     ;B3A11B
     %AICMD0x12_Jump($B3A099)                                   ;B3A11F
+B3A122:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 23, $B3A13B)         ;B3A122
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B3A146)         ;B3A129
     %AICMD0x1C_ShowDialog($0047, $00)                          ;B3A130
     %AICMD0x1B($02D0, $01)                                     ;B3A134
     %AICMD0x12_Jump($B3A099)                                   ;B3A138
+B3A13B:
     %AICMD0x1C_ShowDialog($02AE, $00)                          ;B3A13B
     %AICMD0x1B($02D0, $01)                                     ;B3A13F
     %AICMD0x12_Jump($B3A099)                                   ;B3A143
+B3A146:
     %AICMD0x1C_ShowDialog($03EF, $00)                          ;B3A146
     %AICMD0x1B($02D0, $01)                                     ;B3A14A
     %AICMD0x41_AddValue16(nPlayerHappiness, 5)                 ;B3A14E
     %AICMD0x12_Jump($B3A099)                                   ;B3A154
+B3A157:
     %AICMD0x1C_ShowDialog($03C6, $00)                          ;B3A157
     %AICMD0x1B($02D0, $01)                                     ;B3A15B
     %AICMD0x12_Jump($B3A099)                                   ;B3A15F
@@ -3948,9 +4122,12 @@ DATA8_B3A162:
     %AICMD0x12_Jump($B3A170)                                   ;B3A167
     %AICMD0x13_Wait(1)                                         ;B3A16A
     %AICMD0x12_Jump($B3A16A)                                   ;B3A16D
+B3A170:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, $B3A17B)   ;B3A170
     %AICMD0x09($02, $B3A26D)                                   ;B3A177
+B3A17B:
     %AICMD0x12_Jump($B3A16A)                                   ;B3A17B
+B3A17E:
     %AICMD0x1A($0028, $0168, $B38318, $02)                     ;B3A17E
     %AICMD0x4D($B3A197)                                        ;B3A186
     %AICMD0x2D($B3A1BC, $B3A19E)                               ;B3A189
@@ -3963,6 +4140,7 @@ DATA8_B3A162:
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3A1A6
     %AICMD0x1B($029A, $01)                                     ;B3A1AA
     %AICMD0x12_Jump($B3A186)                                   ;B3A1AE
+B3A1B1:
     %AICMD0x1C_ShowDialog($0049, $00)                          ;B3A1B1
     %AICMD0x1B($029A, $01)                                     ;B3A1B5
     %AICMD0x12_Jump($B3A186)                                   ;B3A1B9
@@ -3973,38 +4151,48 @@ DATA8_B3A162:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, $B3A1FB)     ;B3A1DB
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, $B3A206)     ;B3A1E2
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B3A223)     ;B3A1E9
+B3A1F0:
     %AICMD0x1C_ShowDialog($0041, $00)                          ;B3A1F0
     %AICMD0x1B($029A, $01)                                     ;B3A1F4
     %AICMD0x12_Jump($B3A186)                                   ;B3A1F8
+B3A1FB:
     %AICMD0x1C_ShowDialog($0040, $00)                          ;B3A1FB
     %AICMD0x1B($029A, $01)                                     ;B3A1FF
     %AICMD0x12_Jump($B3A186)                                   ;B3A203
+B3A206:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 11, $B3A218)         ;B3A206
     %AICMD0x1C_ShowDialog($0040, $00)                          ;B3A20D
     %AICMD0x1B($029A, $01)                                     ;B3A211
     %AICMD0x12_Jump($B3A186)                                   ;B3A215
+B3A218:
     %AICMD0x1C_ShowDialog($03DC, $00)                          ;B3A218
     %AICMD0x1B($029A, $01)                                     ;B3A21C
     %AICMD0x12_Jump($B3A186)                                   ;B3A220
+B3A223:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B3A235)         ;B3A223
     %AICMD0x1C_ShowDialog($0416, $00)                          ;B3A22A
     %AICMD0x1B($029A, $01)                                     ;B3A22E
     %AICMD0x12_Jump($B3A186)                                   ;B3A232
+B3A235:
     %AICMD0x1C_ShowDialog($03EE, $00)                          ;B3A235
     %AICMD0x1B($029A, $01)                                     ;B3A239
     %AICMD0x41_AddValue16(nPlayerHappiness, 5)                 ;B3A23D
     %AICMD0x12_Jump($B3A186)                                   ;B3A243
+B3A246:
     %AICMD0x17($02)                                            ;B3A246
     %AICMD0x18($00, $B3A1D4)                                   ;B3A248
     %AICMD0x1C_ShowDialog($03C3, $00)                          ;B3A24C
     %AICMD0x1B($029A, $01)                                     ;B3A250
     %AICMD0x12_Jump($B3A186)                                   ;B3A254
+B3A257:
     %AICMD0x1C_ShowDialog($03C4, $00)                          ;B3A257
     %AICMD0x1B($029A, $01)                                     ;B3A25B
     %AICMD0x12_Jump($B3A186)                                   ;B3A25F
+B3A262:
     %AICMD0x1C_ShowDialog($01DC, $00)                          ;B3A262
     %AICMD0x1B($029A, $01)                                     ;B3A266
     %AICMD0x12_Jump($B3A191)                                   ;B3A26A
+B3A26D:
     %AICMD0x1A($0098, $0198, $B381B0, $00)                     ;B3A26D
     %AICMD0x4D($B3A28F)                                        ;B3A275
     %AICMD0x2D($B3A316, $B3A2A7)                               ;B3A278
@@ -4017,6 +4205,7 @@ DATA8_B3A162:
     %AICMD0x45_JumpIfBetween16(nLove_Ann, 0, 249, $B3A2A0)     ;B3A28F
     %AICMD0x1C_ShowDialog($043E, $00)                          ;B3A299
     %AICMD0x12_Jump($B3A275)                                   ;B3A29D
+B3A2A0:
     %AICMD0x1C_ShowDialog($0176, $00)                          ;B3A2A0
     %AICMD0x12_Jump($B3A275)                                   ;B3A2A4
     %AICMD0x15_JumpIfEquals8($80091E, 2, $B3A2E2)              ;B3A2A7
@@ -4028,15 +4217,19 @@ DATA8_B3A162:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3A309)         ;B3A2D3
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3A2DB
     %AICMD0x12_Jump($B3A275)                                   ;B3A2DF
+B3A2E2:
     %AICMD0x1C_ShowDialog($03B4, $00)                          ;B3A2E2
     %AICMD0x41_AddValue16(nLove_Ann, -8)                       ;B3A2E6
     %AICMD0x12_Jump($B3A275)                                   ;B3A2EC
+B3A2EF:
     %AICMD0x1C_ShowDialog($03B2, $00)                          ;B3A2EF
     %AICMD0x41_AddValue16(nLove_Ann, 6)                        ;B3A2F3
     %AICMD0x12_Jump($B3A275)                                   ;B3A2F9
+B3A2FC:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B3A2FC
     %AICMD0x41_AddValue16(nLove_Ann, 2)                        ;B3A300
     %AICMD0x12_Jump($B3A275)                                   ;B3A306
+B3A309:
     %AICMD0x1C_ShowDialog($03B4, $00)                          ;B3A309
     %AICMD0x41_AddValue16(nLove_Ann, -2)                       ;B3A30D
     %AICMD0x12_Jump($B3A275)                                   ;B3A313
@@ -4046,6 +4239,7 @@ DATA8_B3A162:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, $B3A3A2)     ;B3A32B
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B3A3CB)     ;B3A332
     %AICMD0x12_Jump($B3A275)                                   ;B3A339
+B3A33C:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 22, $B3A35E)         ;B3A33C
     %AICMD0x17($02)                                            ;B3A343
     %AICMD0x18($00, $B3A350)                                   ;B3A345
@@ -4055,8 +4249,10 @@ DATA8_B3A162:
     %AICMD0x12_Jump($B3A275)                                   ;B3A354
     %AICMD0x1C_ShowDialog($009E, $00)                          ;B3A357
     %AICMD0x12_Jump($B3A275)                                   ;B3A35B
+B3A35E:
     %AICMD0x1C_ShowDialog($0207, $00)                          ;B3A35E
     %AICMD0x12_Jump($B3A275)                                   ;B3A362
+B3A365:
     %AICMD0x17($02)                                            ;B3A365
     %AICMD0x18($00, $B3A372)                                   ;B3A367
     %AICMD0x18($01, $B3A39B)                                   ;B3A36B
@@ -4065,14 +4261,17 @@ DATA8_B3A162:
     %AICMD0x20_JumpIfChoice(0, $B3A381)                        ;B3A376
     %AICMD0x20_JumpIfChoice(1, $B3A38E)                        ;B3A37A
     %AICMD0x12_Jump($B3A275)                                   ;B3A37E
+B3A381:
     %AICMD0x1C_ShowDialog($0098, $00)                          ;B3A381
     %AICMD0x41_AddValue16(nLove_Ann, 8)                        ;B3A385
     %AICMD0x12_Jump($B3A280)                                   ;B3A38B
+B3A38E:
     %AICMD0x1C_ShowDialog($0099, $00)                          ;B3A38E
     %AICMD0x41_AddValue16(nLove_Ann, 2)                        ;B3A392
     %AICMD0x12_Jump($B3A280)                                   ;B3A398
     %AICMD0x1C_ShowDialog($009F, $00)                          ;B3A39B
     %AICMD0x12_Jump($B3A275)                                   ;B3A39F
+B3A3A2:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 11, $B3A3C4)         ;B3A3A2
     %AICMD0x17($02)                                            ;B3A3A9
     %AICMD0x18($00, $B3A3B6)                                   ;B3A3AB
@@ -4082,8 +4281,10 @@ DATA8_B3A162:
     %AICMD0x12_Jump($B3A275)                                   ;B3A3BA
     %AICMD0x1C_ShowDialog($00A0, $00)                          ;B3A3BD
     %AICMD0x12_Jump($B3A275)                                   ;B3A3C1
+B3A3C4:
     %AICMD0x1C_ShowDialog($0239, $00)                          ;B3A3C4
     %AICMD0x12_Jump($B3A275)                                   ;B3A3C8
+B3A3CB:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 23, $B3A416)         ;B3A3CB
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B3A41D)         ;B3A3D2
     %AICMD0x17($02)                                            ;B3A3D9
@@ -4094,21 +4295,27 @@ DATA8_B3A162:
     %AICMD0x20_JumpIfChoice(0, $B3A3F5)                        ;B3A3EA
     %AICMD0x20_JumpIfChoice(1, $B3A402)                        ;B3A3EE
     %AICMD0x12_Jump($B3A275)                                   ;B3A3F2
+B3A3F5:
     %AICMD0x1C_ShowDialog($009C, $00)                          ;B3A3F5
     %AICMD0x41_AddValue16(nLove_Ann, 8)                        ;B3A3F9
     %AICMD0x12_Jump($B3A280)                                   ;B3A3FF
+B3A402:
     %AICMD0x1C_ShowDialog($009D, $00)                          ;B3A402
     %AICMD0x41_AddValue16(nLove_Ann, 2)                        ;B3A406
     %AICMD0x12_Jump($B3A280)                                   ;B3A40C
     %AICMD0x1C_ShowDialog($00A1, $00)                          ;B3A40F
     %AICMD0x12_Jump($B3A275)                                   ;B3A413
+B3A416:
     %AICMD0x1C_ShowDialog($02B0, $00)                          ;B3A416
     %AICMD0x12_Jump($B3A275)                                   ;B3A41A
+B3A41D:
     %AICMD0x1C_ShowDialog($03F9, $00)                          ;B3A41D
     %AICMD0x41_AddValue16(nLove_Ann, 5)                        ;B3A421
     %AICMD0x12_Jump($B3A275)                                   ;B3A427
+B3A42A:
     %AICMD0x1C_ShowDialog($00A7, $00)                          ;B3A42A
     %AICMD0x12_Jump($B3A280)                                   ;B3A42E
+B3A431:
     %AICMD0x1C_ShowDialog($01DE, $00)                          ;B3A431
     %AICMD0x12_Jump($B3A289)                                   ;B3A435
 
@@ -4121,8 +4328,10 @@ DATA8_B3A438:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $02, $B3A453)   ;B3A441
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $03, $B3A453)   ;B3A448
     %AICMD0x09($03, $B3A5A3)                                   ;B3A44F
+B3A453:
     %AICMD0x13_Wait(1)                                         ;B3A453
     %AICMD0x12_Jump($B3A453)                                   ;B3A456
+B3A459:
     %AICMD0x1A($0028, $0198, $B38330, $02)                     ;B3A459
     %AICMD0x4D($B3A475)                                        ;B3A461
     %AICMD0x2D($B3A49A, $B3A47C)                               ;B3A464
@@ -4136,11 +4345,13 @@ DATA8_B3A438:
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3A484
     %AICMD0x1B($02A1, $01)                                     ;B3A488
     %AICMD0x12_Jump($B3A461)                                   ;B3A48C
+B3A48F:
     %AICMD0x1C_ShowDialog($03BB, $00)                          ;B3A48F
     %AICMD0x1B($02A1, $01)                                     ;B3A493
     %AICMD0x12_Jump($B3A461)                                   ;B3A497
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, $B3A4E3)     ;B3A49A
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B3A4F8)     ;B3A4A1
+B3A4A8:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $02, $B3A52D)   ;B3A4A8
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, $B3A51E)   ;B3A4AF
     %AICMD0x45_JumpIfBetween16(nLove_Ellen, 200, 249, $B3A513) ;B3A4B6
@@ -4154,27 +4365,35 @@ DATA8_B3A438:
     %AICMD0x1C_ShowDialog($004D, $00)                          ;B3A4D8
     %AICMD0x1B($02A1, $01)                                     ;B3A4DC
     %AICMD0x12_Jump($B3A46C)                                   ;B3A4E0
+B3A4E3:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 11, $B3A4ED)         ;B3A4E3
     %AICMD0x12_Jump($B3A4A8)                                   ;B3A4EA
+B3A4ED:
     %AICMD0x1C_ShowDialog($023F, $00)                          ;B3A4ED
     %AICMD0x1B($02A1, $01)                                     ;B3A4F1
     %AICMD0x12_Jump($B3A461)                                   ;B3A4F5
+B3A4F8:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B3A502)         ;B3A4F8
     %AICMD0x12_Jump($B3A4A8)                                   ;B3A4FF
+B3A502:
     %AICMD0x1C_ShowDialog($03EC, $00)                          ;B3A502
     %AICMD0x1B($02A1, $01)                                     ;B3A506
     %AICMD0x41_AddValue16(nPlayerHappiness, 5)                 ;B3A50A
     %AICMD0x12_Jump($B3A461)                                   ;B3A510
+B3A513:
     %AICMD0x1C_ShowDialog($03C7, $00)                          ;B3A513
     %AICMD0x1B($02A1, $01)                                     ;B3A517
     %AICMD0x12_Jump($B3A461)                                   ;B3A51B
+B3A51E:
     %AICMD0x1C_ShowDialog($03C8, $00)                          ;B3A51E
     %AICMD0x1B($02A1, $01)                                     ;B3A522
     %AICMD0x1C_ShowDialog($03CA, $00)                          ;B3A526
     %AICMD0x12_Jump($B3A461)                                   ;B3A52A
+B3A52D:
     %AICMD0x1C_ShowDialog($01ED, $00)                          ;B3A52D
     %AICMD0x1B($02A1, $01)                                     ;B3A531
     %AICMD0x12_Jump($B3A46C)                                   ;B3A535
+B3A538:
     %AICMD0x1A($0098, $0158, $B38348, $00)                     ;B3A538
     %AICMD0x4D($B3A54B)                                        ;B3A540
     %AICMD0x2D($B3A559, $B3A552)                               ;B3A543
@@ -4196,12 +4415,15 @@ DATA8_B3A438:
     %AICMD0x12_Jump($B3A540)                                   ;B3A57E
     %AICMD0x1C_ShowDialog($03C9, $00)                          ;B3A581
     %AICMD0x12_Jump($B3A540)                                   ;B3A585
+B3A588:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B3A596)         ;B3A588
     %AICMD0x1C_ShowDialog($03C9, $00)                          ;B3A58F
     %AICMD0x12_Jump($B3A540)                                   ;B3A593
+B3A596:
     %AICMD0x1C_ShowDialog($03FD, $00)                          ;B3A596
     %AICMD0x41_AddValue16(nPlayerHappiness, 5)                 ;B3A59A
     %AICMD0x12_Jump($B3A540)                                   ;B3A5A0
+B3A5A3:
     %AICMD0x1A($0087, $0097, $B38558, $00)                     ;B3A5A3
     %AICMD0x13_Wait(1)                                         ;B3A5AB
     %AICMD0x12_Jump($B3A5AB)                                   ;B3A5AE
@@ -4213,6 +4435,7 @@ DATA8_B3A5B1:
     %AICMD0x09($01, $B3A5BC)                                   ;B3A5B2
     %AICMD0x13_Wait(1)                                         ;B3A5B6
     %AICMD0x12_Jump($B3A5B6)                                   ;B3A5B9
+B3A5BC:
     %AICMD0x1A($0088, $0050, $B382E8, $00)                     ;B3A5BC
     %AICMD0x4D($B3A5E1)                                        ;B3A5C4
     %AICMD0x2D($B3A60A, $B3A5EC)                               ;B3A5C7
@@ -4230,6 +4453,7 @@ DATA8_B3A5B1:
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3A5F4
     %AICMD0x1B($0288, $00)                                     ;B3A5F8
     %AICMD0x12_Jump($B3A5C4)                                   ;B3A5FC
+B3A5FF:
     %AICMD0x1C_ShowDialog($03BB, $00)                          ;B3A5FF
     %AICMD0x1B($0288, $00)                                     ;B3A603
     %AICMD0x12_Jump($B3A5C4)                                   ;B3A607
@@ -4248,12 +4472,15 @@ DATA8_B3A5B1:
     %AICMD0x18($00, $B3A65C)                                   ;B3A651
     %AICMD0x18($01, $B3A667)                                   ;B3A655
     %AICMD0x12_Jump($B3A5C4)                                   ;B3A659
+B3A65C:
     %AICMD0x1C_ShowDialog($0062, $00)                          ;B3A65C
     %AICMD0x1B($0288, $00)                                     ;B3A660
     %AICMD0x12_Jump($B3A5CF)                                   ;B3A664
+B3A667:
     %AICMD0x1C_ShowDialog($0060, $00)                          ;B3A667
     %AICMD0x1B($0288, $00)                                     ;B3A66B
     %AICMD0x12_Jump($B3A5D8)                                   ;B3A66F
+B3A672:
     %AICMD0x17($03)                                            ;B3A672
     %AICMD0x18($00, $B3A65C)                                   ;B3A674
     %AICMD0x18($01, $B3A667)                                   ;B3A678
@@ -4268,35 +4495,44 @@ DATA8_B3A5B1:
     %AICMD0x20_JumpIfChoice(2, $B3A6EA)                        ;B3A69A
     %AICMD0x20_JumpIfChoice(3, $B3A6B7)                        ;B3A69E
     %AICMD0x20_JumpIfChoice(4, $B3A6D9)                        ;B3A6A2
+B3A6A6:
     %AICMD0x1C_ShowDialog($03E6, $00)                          ;B3A6A6
     %AICMD0x41_AddValue16(nLove_Maria, 2)                      ;B3A6AA
     %AICMD0x1B($0288, $00)                                     ;B3A6B0
     %AICMD0x12_Jump($B3A5CF)                                   ;B3A6B4
+B3A6B7:
     %AICMD0x1C_ShowDialog($03E7, $00)                          ;B3A6B7
     %AICMD0x41_AddValue16(nLove_Ann, 2)                        ;B3A6BB
     %AICMD0x1B($0288, $00)                                     ;B3A6C1
     %AICMD0x12_Jump($B3A5CF)                                   ;B3A6C5
+B3A6C8:
     %AICMD0x1C_ShowDialog($03E8, $00)                          ;B3A6C8
     %AICMD0x41_AddValue16(nLove_Nina, 2)                       ;B3A6CC
     %AICMD0x1B($0288, $00)                                     ;B3A6D2
     %AICMD0x12_Jump($B3A5CF)                                   ;B3A6D6
+B3A6D9:
     %AICMD0x1C_ShowDialog($0465, $00)                          ;B3A6D9
     %AICMD0x41_AddValue16(nLove_Ellen, 2)                      ;B3A6DD
     %AICMD0x1B($0288, $00)                                     ;B3A6E3
     %AICMD0x12_Jump($B3A5CF)                                   ;B3A6E7
+B3A6EA:
     %AICMD0x1C_ShowDialog($0466, $00)                          ;B3A6EA
     %AICMD0x41_AddValue16(nLove_Eve, 2)                        ;B3A6EE
     %AICMD0x1B($0288, $00)                                     ;B3A6F4
     %AICMD0x12_Jump($B3A5CF)                                   ;B3A6F8
+B3A6FB:
     %AICMD0x1C_ShowDialog($01D1, $00)                          ;B3A6FB
     %AICMD0x1B($0288, $00)                                     ;B3A6FF
     %AICMD0x12_Jump($B3A5C4)                                   ;B3A703
+B3A706:
     %AICMD0x1C_ShowDialog($01DD, $00)                          ;B3A706
     %AICMD0x1B($0288, $00)                                     ;B3A70A
     %AICMD0x12_Jump($B3A5C4)                                   ;B3A70E
+B3A711:
     %AICMD0x1C_ShowDialog($01E6, $00)                          ;B3A711
     %AICMD0x1B($0288, $00)                                     ;B3A715
     %AICMD0x12_Jump($B3A5C4)                                   ;B3A719
+B3A71C:
     %AICMD0x1C_ShowDialog($01EF, $00)                          ;B3A71C
     %AICMD0x1B($0288, $00)                                     ;B3A720
     %AICMD0x12_Jump($B3A5C4)                                   ;B3A724
@@ -4308,6 +4544,7 @@ DATA8_B3A727:
     %AICMD0x09($01, $B3A732)                                   ;B3A728
     %AICMD0x13_Wait(1)                                         ;B3A72C
     %AICMD0x12_Jump($B3A72C)                                   ;B3A72F
+B3A732:
     %AICMD0x1A($00E8, $0098, $B3836C, $03)                     ;B3A732
     %AICMD0x4D($B3A74E)                                        ;B3A73A
     %AICMD0x2D($B3A777, $B3A759)                               ;B3A73D
@@ -4322,6 +4559,7 @@ DATA8_B3A727:
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3A761
     %AICMD0x1B($02AF, $00)                                     ;B3A765
     %AICMD0x12_Jump($B3A73A)                                   ;B3A769
+B3A76C:
     %AICMD0x1C_ShowDialog($03BB, $00)                          ;B3A76C
     %AICMD0x1B($02AF, $00)                                     ;B3A770
     %AICMD0x12_Jump($B3A73A)                                   ;B3A774
@@ -4335,31 +4573,38 @@ DATA8_B3A727:
     %AICMD0x1C_ShowDialog($005C, $00)                          ;B3A799
     %AICMD0x1B($02AF, $00)                                     ;B3A79D
     %AICMD0x12_Jump($B3A73A)                                   ;B3A7A1
+B3A7A4:
     %AICMD0x1C_ShowDialog($005D, $00)                          ;B3A7A4
     %AICMD0x1B($02AF, $00)                                     ;B3A7A8
     %AICMD0x12_Jump($B3A745)                                   ;B3A7AC
+B3A7AF:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 19, $B3A7E3)         ;B3A7AF
     %AICMD0x16_JumpIfBetween8(nOwnedCows, 1, 12, $B3A7FF)      ;B3A7B6
     %AICMD0x1C_ShowDialog($005D, $00)                          ;B3A7BE
     %AICMD0x1B($02AF, $00)                                     ;B3A7C2
     %AICMD0x12_Jump($B3A73A)                                   ;B3A7C6
+B3A7C9:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B3A7EE)         ;B3A7C9
     %AICMD0x16_JumpIfBetween8(nOwnedCows, 1, 12, $B3A7FF)      ;B3A7D0
     %AICMD0x1C_ShowDialog($0407, $00)                          ;B3A7D8
     %AICMD0x1B($02AF, $00)                                     ;B3A7DC
     %AICMD0x12_Jump($B3A73A)                                   ;B3A7E0
+B3A7E3:
     %AICMD0x1C_ShowDialog($03F4, $00)                          ;B3A7E3
     %AICMD0x1B($02AF, $00)                                     ;B3A7E7
     %AICMD0x12_Jump($B3A73A)                                   ;B3A7EB
+B3A7EE:
     %AICMD0x1C_ShowDialog($0146, $00)                          ;B3A7EE
     %AICMD0x1B($02AF, $00)                                     ;B3A7F2
     %AICMD0x41_AddValue16(nPlayerHappiness, 5)                 ;B3A7F6
     %AICMD0x12_Jump($B3A73A)                                   ;B3A7FC
+B3A7FF:
     %AICMD0x17($02)                                            ;B3A7FF
     %AICMD0x18($00, $B3A78C)                                   ;B3A801
     %AICMD0x1C_ShowDialog($03CF, $00)                          ;B3A805
     %AICMD0x1B($02AF, $00)                                     ;B3A809
     %AICMD0x12_Jump($B3A73A)                                   ;B3A80D
+B3A810:
     %AICMD0x1C_ShowDialog($01F0, $00)                          ;B3A810
     %AICMD0x1B($02AF, $00)                                     ;B3A814
     %AICMD0x12_Jump($B3A73A)                                   ;B3A818
@@ -4376,8 +4621,10 @@ DATA8_B3A81B:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, $B3A850)     ;B3A83F
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B3A850)     ;B3A846
     %AICMD0x12_Jump($B3A85B)                                   ;B3A84D
+B3A850:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $04, $B3A85B)   ;B3A850
     %AICMD0x09($02, $B3A9FE)                                   ;B3A857
+B3A85B:
     %AICMD0x09($01, $B3A96A)                                   ;B3A85B
     %AICMD0x09($06, $B3A93A)                                   ;B3A85F
     %AICMD0x09($07, $B3A892)                                   ;B3A863
@@ -4388,8 +4635,10 @@ DATA8_B3A81B:
     %AICMD0x09($03, $B3AAA5)                                   ;B3A880
     %AICMD0x09($04, $B3AB9C)                                   ;B3A884
     %AICMD0x09($05, $B3AC5B)                                   ;B3A888
+B3A88C:
     %AICMD0x13_Wait(1)                                         ;B3A88C
     %AICMD0x12_Jump($B3A88C)                                   ;B3A88F
+B3A892:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3A8E5) ;B3A892
     %AICMD0x16_JumpIfBetween8(nCurrentSeasonID, 1, 3, $B3A8E5) ;B3A89A
     %AICMD0x1A($0168, $01A8, $B384EC, $00)                     ;B3A8A2
@@ -4406,7 +4655,9 @@ DATA8_B3A81B:
     %AICMD0x0D($01, $00, $08, $02)                             ;B3A8D8
     %AICMD0x0D($00, $FF, $06, $01)                             ;B3A8DD
     %AICMD0x12_Jump($B3A8AB)                                   ;B3A8E2
+B3A8E5:
     %AICMD0x10_End()                                           ;B3A8E5
+B3A8E6:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3A939) ;B3A8E6
     %AICMD0x16_JumpIfBetween8(nCurrentSeasonID, 1, 3, $B3A939) ;B3A8EE
     %AICMD0x1A($0028, $00C8, $B384EC, $00)                     ;B3A8F6
@@ -4423,7 +4674,9 @@ DATA8_B3A81B:
     %AICMD0x0D($01, $00, $08, $02)                             ;B3A92C
     %AICMD0x0D($00, $FF, $06, $01)                             ;B3A931
     %AICMD0x12_Jump($B3A8FF)                                   ;B3A936
+B3A939:
     %AICMD0x10_End()                                           ;B3A939
+B3A93A:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3A969) ;B3A93A
     %AICMD0x16_JumpIfBetween8(nCurrentSeasonID, 1, 2, $B3A969) ;B3A942
     %AICMD0x17($03)                                            ;B3A94A
@@ -4432,9 +4685,12 @@ DATA8_B3A81B:
     %AICMD0x1A($02B8, $00D0, $B38540, $00)                     ;B3A954
     %AICMD0x1F($B3A962)                                        ;B3A95C
     %AICMD0x12_Jump($B3A95C)                                   ;B3A95F
+B3A962:
     %AICMD0x1C_ShowDialog($01BE, $00)                          ;B3A962
     %AICMD0x12_Jump($B3A95C)                                   ;B3A966
+B3A969:
     %AICMD0x10_End()                                           ;B3A969
+B3A96A:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3A9FD) ;B3A96A
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B3A9FD)     ;B3A972
     %AICMD0x1A($0258, $0178, $B38270, $00)                     ;B3A979
@@ -4449,6 +4705,7 @@ DATA8_B3A81B:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3A9AB)         ;B3A99C
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3A9A4
     %AICMD0x12_Jump($B3A981)                                   ;B3A9A8
+B3A9AB:
     %AICMD0x1C_ShowDialog($03B8, $00)                          ;B3A9AB
     %AICMD0x12_Jump($B3A981)                                   ;B3A9AF
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $02, $B3A9F6)   ;B3A9B2
@@ -4457,19 +4714,26 @@ DATA8_B3A81B:
     %AICMD0x20_JumpIfChoice(0, $B3A9D0)                        ;B3A9C5
     %AICMD0x20_JumpIfChoice(1, $B3A9DC)                        ;B3A9C9
     %AICMD0x12_Jump($B3A981)                                   ;B3A9CD
+B3A9D0:
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily1, $09)       ;B3A9D0
     %AICMD0x1C_ShowDialog($007F, $00)                          ;B3A9D5
     %AICMD0x12_Jump($B3A98C)                                   ;B3A9D9
+B3A9DC:
     %AICMD0x1C_ShowDialog($0080, $00)                          ;B3A9DC
     %AICMD0x12_Jump($B3A981)                                   ;B3A9E0
+B3A9E3:
     %AICMD0x28(strcFlags.daily1, $09)                          ;B3A9E3
     %AICMD0x1C_ShowDialog($0081, $00)                          ;B3A9E8
     %AICMD0x12_Jump($B3A981)                                   ;B3A9EC
+B3A9EF:
     %AICMD0x1C_ShowDialog($0081, $00)                          ;B3A9EF
     %AICMD0x12_Jump($B3A981)                                   ;B3A9F3
+B3A9F6:
     %AICMD0x1C_ShowDialog($01EC, $00)                          ;B3A9F6
     %AICMD0x12_Jump($B3A981)                                   ;B3A9FA
+B3A9FD:
     %AICMD0x10_End()                                           ;B3A9FD
+B3A9FE:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3AAA4) ;B3A9FE
     %AICMD0x1A($0120, $0200, $B382D0, $00)                     ;B3AA06
     %AICMD0x4D($B3AA19)                                        ;B3AA0E
@@ -4480,6 +4744,7 @@ DATA8_B3A81B:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3AA2F)         ;B3AA20
     %AICMD0x1C_ShowDialog($03BC, $00)                          ;B3AA28
     %AICMD0x12_Jump($B3AA0E)                                   ;B3AA2C
+B3AA2F:
     %AICMD0x1C_ShowDialog($0049, $00)                          ;B3AA2F
     %AICMD0x12_Jump($B3AA0E)                                   ;B3AA33
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, $B3AA96)   ;B3AA36
@@ -4489,23 +4754,32 @@ DATA8_B3A81B:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, $B3AA74)     ;B3AA55
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B3AA7B)     ;B3AA5C
     %AICMD0x12_Jump($B3AA0E)                                   ;B3AA63
+B3AA66:
     %AICMD0x1C_ShowDialog($007A, $00)                          ;B3AA66
     %AICMD0x12_Jump($B3AA0E)                                   ;B3AA6A
+B3AA6D:
     %AICMD0x1C_ShowDialog($007C, $00)                          ;B3AA6D
     %AICMD0x12_Jump($B3AA0E)                                   ;B3AA71
+B3AA74:
     %AICMD0x1C_ShowDialog($007D, $00)                          ;B3AA74
     %AICMD0x12_Jump($B3AA0E)                                   ;B3AA78
+B3AA7B:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B3AA89)         ;B3AA7B
     %AICMD0x1C_ShowDialog($0408, $00)                          ;B3AA82
     %AICMD0x12_Jump($B3AA0E)                                   ;B3AA86
+B3AA89:
     %AICMD0x1C_ShowDialog($03F5, $00)                          ;B3AA89
     %AICMD0x41_AddValue16(nPlayerHappiness, 5)                 ;B3AA8D
     %AICMD0x12_Jump($B3AA0E)                                   ;B3AA93
+B3AA96:
     %AICMD0x1C_ShowDialog($03D3, $00)                          ;B3AA96
     %AICMD0x12_Jump($B3AA0E)                                   ;B3AA9A
+B3AA9D:
     %AICMD0x1C_ShowDialog($03D2, $00)                          ;B3AA9D
     %AICMD0x12_Jump($B3AA0E)                                   ;B3AAA1
+B3AAA4:
     %AICMD0x10_End()                                           ;B3AAA4
+B3AAA5:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3AB9B) ;B3AAA5
     %AICMD0x1A($01F8, $0258, $B38234, $00)                     ;B3AAAD
     %AICMD0x22($10, $18, $01, $B38240, $0C)                    ;B3AAB5
@@ -4517,6 +4791,7 @@ DATA8_B3A81B:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3AADD)         ;B3AACE
     %AICMD0x1C_ShowDialog($03BC, $00)                          ;B3AAD6
     %AICMD0x12_Jump($B3AABC)                                   ;B3AADA
+B3AADD:
     %AICMD0x1C_ShowDialog($03BB, $00)                          ;B3AADD
     %AICMD0x12_Jump($B3AABC)                                   ;B3AAE1
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, $B3AB79)   ;B3AAE4
@@ -4529,8 +4804,10 @@ DATA8_B3A81B:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, $B3AB57)     ;B3AB15
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B3AB5E)     ;B3AB1C
     %AICMD0x12_Jump($B3AABC)                                   ;B3AB23
+B3AB26:
     %AICMD0x1C_ShowDialog($012D, $00)                          ;B3AB26
     %AICMD0x12_Jump($B3AABC)                                   ;B3AB2A
+B3AB2D:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, $B3AB8D)   ;B3AB2D
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, $B3AB8D)   ;B3AB34
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, $B3AB8D)   ;B3AB3B
@@ -4538,24 +4815,32 @@ DATA8_B3A81B:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, $B3AB8D)   ;B3AB49
     %AICMD0x1C_ShowDialog($03D5, $00)                          ;B3AB50
     %AICMD0x12_Jump($B3AABC)                                   ;B3AB54
+B3AB57:
     %AICMD0x1C_ShowDialog($03D6, $00)                          ;B3AB57
     %AICMD0x12_Jump($B3AABC)                                   ;B3AB5B
+B3AB5E:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B3AB6C)         ;B3AB5E
     %AICMD0x1C_ShowDialog($0409, $00)                          ;B3AB65
     %AICMD0x12_Jump($B3AABC)                                   ;B3AB69
+B3AB6C:
     %AICMD0x1C_ShowDialog($03F6, $00)                          ;B3AB6C
     %AICMD0x41_AddValue16(nPlayerHappiness, 5)                 ;B3AB70
     %AICMD0x12_Jump($B3AABC)                                   ;B3AB76
+B3AB79:
     %AICMD0x17($02)                                            ;B3AB79
     %AICMD0x18($00, $B3AB07)                                   ;B3AB7B
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $07, $B3AB94)   ;B3AB7F
     %AICMD0x1C_ShowDialog($03DA, $00)                          ;B3AB86
     %AICMD0x12_Jump($B3AABC)                                   ;B3AB8A
+B3AB8D:
     %AICMD0x1C_ShowDialog($0415, $00)                          ;B3AB8D
     %AICMD0x12_Jump($B3AABC)                                   ;B3AB91
+B3AB94:
     %AICMD0x1C_ShowDialog($03D7, $00)                          ;B3AB94
     %AICMD0x12_Jump($B3AABC)                                   ;B3AB98
+B3AB9B:
     %AICMD0x10_End()                                           ;B3AB9B
+B3AB9C:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3AC5A) ;B3AB9C
     %AICMD0x1A($0298, $01F8, $B38234, $00)                     ;B3ABA4
     %AICMD0x22($18, $18, $01, $B38240, $0C)                    ;B3ABAC
@@ -4567,6 +4852,7 @@ DATA8_B3A81B:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3ABD4)         ;B3ABC5
     %AICMD0x1C_ShowDialog($03BC, $00)                          ;B3ABCD
     %AICMD0x12_Jump($B3ABB3)                                   ;B3ABD1
+B3ABD4:
     %AICMD0x1C_ShowDialog($03BB, $00)                          ;B3ABD4
     %AICMD0x12_Jump($B3ABB3)                                   ;B3ABD8
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, $B3AC4D)   ;B3ABDB
@@ -4579,23 +4865,31 @@ DATA8_B3A81B:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, $B3AC2B)     ;B3AC0C
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B3AC32)     ;B3AC13
     %AICMD0x12_Jump($B3ABB3)                                   ;B3AC1A
+B3AC1D:
     %AICMD0x1C_ShowDialog($012E, $00)                          ;B3AC1D
     %AICMD0x12_Jump($B3ABB3)                                   ;B3AC21
+B3AC24:
     %AICMD0x1C_ShowDialog($03D4, $00)                          ;B3AC24
     %AICMD0x12_Jump($B3ABB3)                                   ;B3AC28
+B3AC2B:
     %AICMD0x1C_ShowDialog($03D7, $00)                          ;B3AC2B
     %AICMD0x12_Jump($B3ABB3)                                   ;B3AC2F
+B3AC32:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B3AC40)         ;B3AC32
     %AICMD0x1C_ShowDialog($03D6, $00)                          ;B3AC39
     %AICMD0x12_Jump($B3ABB3)                                   ;B3AC3D
+B3AC40:
     %AICMD0x1C_ShowDialog($03F7, $00)                          ;B3AC40
     %AICMD0x41_AddValue16(nPlayerHappiness, 5)                 ;B3AC44
     %AICMD0x12_Jump($B3ABB3)                                   ;B3AC4A
+B3AC4D:
     %AICMD0x17($02)                                            ;B3AC4D
     %AICMD0x18($00, $B3ABFE)                                   ;B3AC4F
     %AICMD0x1C_ShowDialog($03D8, $00)                          ;B3AC53
     %AICMD0x12_Jump($B3ABB3)                                   ;B3AC57
+B3AC5A:
     %AICMD0x10_End()                                           ;B3AC5A
+B3AC5B:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3AD23) ;B3AC5B
     %AICMD0x1A($0178, $0208, $B38234, $00)                     ;B3AC63
     %AICMD0x22($18, $18, $01, $B38240, $0C)                    ;B3AC6B
@@ -4607,6 +4901,7 @@ DATA8_B3A81B:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3AC93)         ;B3AC84
     %AICMD0x1C_ShowDialog($03BC, $00)                          ;B3AC8C
     %AICMD0x12_Jump($B3AC72)                                   ;B3AC90
+B3AC93:
     %AICMD0x1C_ShowDialog($03BB, $00)                          ;B3AC93
     %AICMD0x12_Jump($B3AC72)                                   ;B3AC97
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, $B3AD16)   ;B3AC9A
@@ -4622,22 +4917,29 @@ DATA8_B3A81B:
     %AICMD0x18($00, $B3ACE6)                                   ;B3ACDB
     %AICMD0x18($01, $B3ACED)                                   ;B3ACDF
     %AICMD0x12_Jump($B3AC72)                                   ;B3ACE3
+B3ACE6:
     %AICMD0x1C_ShowDialog($012F, $00)                          ;B3ACE6
     %AICMD0x12_Jump($B3AC72)                                   ;B3ACEA
+B3ACED:
     %AICMD0x1C_ShowDialog($03D6, $00)                          ;B3ACED
     %AICMD0x12_Jump($B3AC72)                                   ;B3ACF1
+B3ACF4:
     %AICMD0x1C_ShowDialog($03DB, $00)                          ;B3ACF4
     %AICMD0x12_Jump($B3AC72)                                   ;B3ACF8
+B3ACFB:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B3AD09)         ;B3ACFB
     %AICMD0x1C_ShowDialog($03A0, $00)                          ;B3AD02
     %AICMD0x12_Jump($B3AC72)                                   ;B3AD06
+B3AD09:
     %AICMD0x1C_ShowDialog($03F6, $00)                          ;B3AD09
     %AICMD0x41_AddValue16(nPlayerHappiness, 5)                 ;B3AD0D
     %AICMD0x12_Jump($B3AC72)                                   ;B3AD13
+B3AD16:
     %AICMD0x17($02)                                            ;B3AD16
     %AICMD0x18($00, $B3ACBD)                                   ;B3AD18
     %AICMD0x1C_ShowDialog($03D9, $00)                          ;B3AD1C
     %AICMD0x12_Jump($B3AC72)                                   ;B3AD20
+B3AD23:
     %AICMD0x10_End()                                           ;B3AD23
 
 
@@ -4647,6 +4949,7 @@ DATA8_B3AD24:
     %AICMD0x09($01, $B3AD2F)                                   ;B3AD25
     %AICMD0x13_Wait(1)                                         ;B3AD29
     %AICMD0x12_Jump($B3AD29)                                   ;B3AD2C
+B3AD2F:
     %AICMD0x1A($0098, $0088, $B38234, $00)                     ;B3AD2F
     %AICMD0x2D($B3AD65, $B3AD4F)                               ;B3AD37
     %AICMD0x12_Jump($B3AD37)                                   ;B3AD3C
@@ -4658,6 +4961,7 @@ DATA8_B3AD24:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3AD5E)         ;B3AD4F
     %AICMD0x1C_ShowDialog($03BC, $00)                          ;B3AD57
     %AICMD0x12_Jump($B3AD37)                                   ;B3AD5B
+B3AD5E:
     %AICMD0x1C_ShowDialog($03BB, $00)                          ;B3AD5E
     %AICMD0x12_Jump($B3AD37)                                   ;B3AD62
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $07, $B3ADAA)   ;B3AD65
@@ -4668,38 +4972,47 @@ DATA8_B3AD24:
     %AICMD0x20_JumpIfChoice(0, $B3AD90)                        ;B3AD85
     %AICMD0x20_JumpIfChoice(1, $B3AD9C)                        ;B3AD89
     %AICMD0x12_Jump($B3AD37)                                   ;B3AD8D
+B3AD90:
     %AICMD0x23_OrWithIndexedValue(strcFlags.event2, $05)       ;B3AD90
     %AICMD0x1C_ShowDialog($0131, $00)                          ;B3AD95
     %AICMD0x12_Jump($B3AD3F)                                   ;B3AD99
+B3AD9C:
     %AICMD0x1C_ShowDialog($0132, $00)                          ;B3AD9C
     %AICMD0x12_Jump($B3AD37)                                   ;B3ADA0
+B3ADA3:
     %AICMD0x1C_ShowDialog($0139, $00)                          ;B3ADA3
     %AICMD0x12_Jump($B3AD3F)                                   ;B3ADA7
+B3ADAA:
     %AICMD0x1C_ShowDialog($0133, $00)                          ;B3ADAA
     %AICMD0x12_Jump($B3AD37)                                   ;B3ADAE
 
 
 DATA8_B3ADB1:
- 
     %AICMD0x11_EnableUserControl()                             ;B3ADB1
     %AICMD0x09($01, $B3ADC4)                                   ;B3ADB2
     %AICMD0x09($02, $B3ADD9)                                   ;B3ADB6
     %AICMD0x09($03, $B3ADEE)                                   ;B3ADBA
     %AICMD0x13_Wait(1)                                         ;B3ADBE
     %AICMD0x12_Jump($B3ADBE)                                   ;B3ADC1
+B3ADC4:
     %AICMD0x1A($0068, $0178, $B384C8, $00)                     ;B3ADC4
     %AICMD0x1F($B3ADD2)                                        ;B3ADCC
     %AICMD0x12_Jump($B3ADCC)                                   ;B3ADCF
+B3ADD2:
     %AICMD0x1D_ShowDialog($0170, $00)                          ;B3ADD2
     %AICMD0x12_Jump($B3ADCC)                                   ;B3ADD6
+B3ADD9:
     %AICMD0x1A($0038, $0178, $B384C8, $00)                     ;B3ADD9
     %AICMD0x1F($B3ADE7)                                        ;B3ADE1
     %AICMD0x12_Jump($B3ADE1)                                   ;B3ADE4
+B3ADE7:
     %AICMD0x1C_ShowDialog($0171, $00)                          ;B3ADE7
     %AICMD0x12_Jump($B3ADE1)                                   ;B3ADEB
+B3ADEE:
     %AICMD0x1A($0078, $0068, $B384C8, $01)                     ;B3ADEE
     %AICMD0x1F($B3ADFC)                                        ;B3ADF6
     %AICMD0x12_Jump($B3ADF6)                                   ;B3ADF9
+B3ADFC:
     %AICMD0x1C_ShowDialog($0172, $00)                          ;B3ADFC
     %AICMD0x12_Jump($B3ADF6)                                   ;B3AE00
 
@@ -4729,19 +5042,25 @@ DATA8_B3AE23:
     %AICMD0x09($01, $B3AECD)                                   ;B3AE2B
     %AICMD0x09($02, $B3AF5A)                                   ;B3AE2F
     %AICMD0x12_Jump($B3AE3E)                                   ;B3AE33
+B3AE36:
     %AICMD0x09($01, $B3AE6C)                                   ;B3AE36
     %AICMD0x09($02, $B3AF0F)                                   ;B3AE3A
+B3AE3E:
     %AICMD0x09($03, $B3AF9C)                                   ;B3AE3E
     %AICMD0x09($04, $B3B008)                                   ;B3AE42
     %AICMD0x09($05, $B3B07F)                                   ;B3AE46
     %AICMD0x12_Jump($B3AE53)                                   ;B3AE4A
     %AICMD0x13_Wait(1)                                         ;B3AE4D
     %AICMD0x12_Jump($B3AE4D)                                   ;B3AE50
+B3AE53:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, $B3AE5E)   ;B3AE53
     %AICMD0x09($06, $B3B0EF)                                   ;B3AE5A
+B3AE5E:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, $B3AE69)   ;B3AE5E
     %AICMD0x09($07, $B3B2B9)                                   ;B3AE65
+B3AE69:
     %AICMD0x12_Jump($B3AE4D)                                   ;B3AE69
+B3AE6C:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3AEBE) ;B3AE6C
     %AICMD0x1A($0128, $01B8, $B38318, $00)                     ;B3AE74
     %AICMD0x22($20, $10, $01, $B38324, $10)                    ;B3AE7C
@@ -4753,16 +5072,21 @@ DATA8_B3AE23:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3AEA4)         ;B3AE95
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3AE9D
     %AICMD0x12_Jump($B3AE83)                                   ;B3AEA1
+B3AEA4:
     %AICMD0x1C_ShowDialog($0049, $00)                          ;B3AEA4
     %AICMD0x12_Jump($B3AE83)                                   ;B3AEA8
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 7, 16, $B3AEBF)  ;B3AEAB
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3AEC6) ;B3AEB3
     %AICMD0x12_Jump($B3AE83)                                   ;B3AEBB
+B3AEBE:
     %AICMD0x10_End()                                           ;B3AEBE
+B3AEBF:
     %AICMD0x1C_ShowDialog($0043, $00)                          ;B3AEBF
     %AICMD0x12_Jump($B3AE83)                                   ;B3AEC3
+B3AEC6:
     %AICMD0x1C_ShowDialog($0392, $00)                          ;B3AEC6
     %AICMD0x12_Jump($B3AE83)                                   ;B3AECA
+B3AECD:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3AF00) ;B3AECD
     %AICMD0x1A($0128, $01A8, $B38324, $02)                     ;B3AED5
     %AICMD0x4D($B3AEE6)                                        ;B3AEDD
@@ -4770,14 +5094,19 @@ DATA8_B3AE23:
     %AICMD0x12_Jump($B3AEDD)                                   ;B3AEE3
     %AICMD0x1C_ShowDialog($01CA, $00)                          ;B3AEE6
     %AICMD0x12_Jump($B3AEDD)                                   ;B3AEEA
+B3AEED:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 7, 16, $B3AF01)  ;B3AEED
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3AF08) ;B3AEF5
     %AICMD0x12_Jump($B3AEDD)                                   ;B3AEFD
+B3AF00:
     %AICMD0x10_End()                                           ;B3AF00
+B3AF01:
     %AICMD0x1C_ShowDialog($0044, $00)                          ;B3AF01
     %AICMD0x12_Jump($B3AEDD)                                   ;B3AF05
+B3AF08:
     %AICMD0x1C_ShowDialog($0392, $00)                          ;B3AF08
     %AICMD0x12_Jump($B3AEDD)                                   ;B3AF0C
+B3AF0F:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3AF52) ;B3AF0F
     %AICMD0x1A($01A8, $0088, $B38414, $00)                     ;B3AF17
     %AICMD0x4D($B3AF2A)                                        ;B3AF1F
@@ -4788,13 +5117,17 @@ DATA8_B3AE23:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3AF40)         ;B3AF31
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3AF39
     %AICMD0x12_Jump($B3AF1F)                                   ;B3AF3D
+B3AF40:
     %AICMD0x1C_ShowDialog($03B9, $00)                          ;B3AF40
     %AICMD0x12_Jump($B3AF1F)                                   ;B3AF44
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 7, 18, $B3AF53)  ;B3AF47
     %AICMD0x12_Jump($B3AF1F)                                   ;B3AF4F
+B3AF52:
     %AICMD0x10_End()                                           ;B3AF52
+B3AF53:
     %AICMD0x1C_ShowDialog($0049, $00)                          ;B3AF53
     %AICMD0x12_Jump($B3AF1F)                                   ;B3AF57
+B3AF5A:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3AF8D) ;B3AF5A
     %AICMD0x1A($0138, $01A8, $B38408, $03)                     ;B3AF62
     %AICMD0x4D($B3AF73)                                        ;B3AF6A
@@ -4802,14 +5135,19 @@ DATA8_B3AE23:
     %AICMD0x12_Jump($B3AF6A)                                   ;B3AF70
     %AICMD0x1C_ShowDialog($01C6, $00)                          ;B3AF73
     %AICMD0x12_Jump($B3AF1F)                                   ;B3AF77
+B3AF7A:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 7, 16, $B3AF8E)  ;B3AF7A
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3AF95) ;B3AF82
     %AICMD0x12_Jump($B3AF6A)                                   ;B3AF8A
+B3AF8D:
     %AICMD0x10_End()                                           ;B3AF8D
+B3AF8E:
     %AICMD0x1C_ShowDialog($004A, $00)                          ;B3AF8E
     %AICMD0x12_Jump($B3AF6A)                                   ;B3AF92
+B3AF95:
     %AICMD0x1C_ShowDialog($0391, $00)                          ;B3AF95
     %AICMD0x12_Jump($B3AF6A)                                   ;B3AF99
+B3AF9C:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3AFEE) ;B3AF9C
     %AICMD0x1A($00B8, $0188, $B3833C, $02)                     ;B3AFA4
     %AICMD0x4D($B3AFB7)                                        ;B3AFAC
@@ -4820,20 +5158,26 @@ DATA8_B3AE23:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3AFCD)         ;B3AFBE
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3AFC6
     %AICMD0x12_Jump($B3AFAC)                                   ;B3AFCA
+B3AFCD:
     %AICMD0x1C_ShowDialog($03BB, $00)                          ;B3AFCD
     %AICMD0x12_Jump($B3AFAC)                                   ;B3AFD1
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $02, $B3AFFD)   ;B3AFD4
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 7, 16, $B3AFEF)  ;B3AFDB
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3AFF6) ;B3AFE3
     %AICMD0x12_Jump($B3AFAC)                                   ;B3AFEB
+B3AFEE:
     %AICMD0x10_End()                                           ;B3AFEE
+B3AFEF:
     %AICMD0x1C_ShowDialog($004F, $00)                          ;B3AFEF
     %AICMD0x12_Jump($B3AFAC)                                   ;B3AFF3
+B3AFF6:
     %AICMD0x1C_ShowDialog($0392, $00)                          ;B3AFF6
     %AICMD0x12_Jump($B3AFAC)                                   ;B3AFFA
+B3AFFD:
     %AICMD0x1C_ShowDialog($01ED, $00)                          ;B3AFFD
     %AICMD0x1B($02A1, $01)                                     ;B3B001
     %AICMD0x12_Jump($B3AFAC)                                   ;B3B005
+B3B008:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3B05A) ;B3B008
     %AICMD0x1A($0188, $0228, $B3842C, $01)                     ;B3B010
     %AICMD0x4D($B3B023)                                        ;B3B018
@@ -4844,22 +5188,29 @@ DATA8_B3AE23:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3B039)         ;B3B02A
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3B032
     %AICMD0x12_Jump($B3B018)                                   ;B3B036
+B3B039:
     %AICMD0x1C_ShowDialog($03B8, $00)                          ;B3B039
     %AICMD0x12_Jump($B3B018)                                   ;B3B03D
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0C, $B3B078)   ;B3B040
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 7, 16, $B3B05B)  ;B3B047
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3B071) ;B3B04F
     %AICMD0x12_Jump($B3B018)                                   ;B3B057
+B3B05A:
     %AICMD0x10_End()                                           ;B3B05A
+B3B05B:
     %AICMD0x16_JumpIfBetween8(nCurrentSeasonID, 0, 1, $B3B06A) ;B3B05B
     %AICMD0x1C_ShowDialog($006C, $00)                          ;B3B063
     %AICMD0x12_Jump($B3B018)                                   ;B3B067
+B3B06A:
     %AICMD0x1C_ShowDialog($006D, $00)                          ;B3B06A
     %AICMD0x12_Jump($B3B018)                                   ;B3B06E
+B3B071:
     %AICMD0x1C_ShowDialog($0392, $00)                          ;B3B071
     %AICMD0x12_Jump($B3B018)                                   ;B3B075
+B3B078:
     %AICMD0x1C_ShowDialog($01D0, $00)                          ;B3B078
     %AICMD0x12_Jump($B3B018)                                   ;B3B07C
+B3B07F:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0A, $B3B0D1)   ;B3B07F
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3B0D1) ;B3B086
     %AICMD0x1A($0198, $0228, $B38390, $03)                     ;B3B08E
@@ -4871,19 +5222,25 @@ DATA8_B3AE23:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3B0B7)         ;B3B0A8
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3B0B0
     %AICMD0x12_Jump($B3B096)                                   ;B3B0B4
+B3B0B7:
     %AICMD0x1C_ShowDialog($03BA, $00)                          ;B3B0B7
     %AICMD0x12_Jump($B3B096)                                   ;B3B0BB
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 7, 16, $B3B0D2)  ;B3B0BE
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3B0E8) ;B3B0C6
     %AICMD0x12_Jump($B3B096)                                   ;B3B0CE
+B3B0D1:
     %AICMD0x10_End()                                           ;B3B0D1
+B3B0D2:
     %AICMD0x16_JumpIfBetween8(nCurrentSeasonID, 0, 1, $B3B0E1) ;B3B0D2
     %AICMD0x1C_ShowDialog($0066, $00)                          ;B3B0DA
     %AICMD0x12_Jump($B3B096)                                   ;B3B0DE
+B3B0E1:
     %AICMD0x1C_ShowDialog($0067, $00)                          ;B3B0E1
     %AICMD0x12_Jump($B3B096)                                   ;B3B0E5
+B3B0E8:
     %AICMD0x1C_ShowDialog($0391, $00)                          ;B3B0E8
     %AICMD0x12_Jump($B3B096)                                   ;B3B0EC
+B3B0EF:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3B1FE) ;B3B0EF
     %AICMD0x45_JumpIfBetween16(nLove_Ann, 150, 200, $B3B1BA)   ;B3B0F7
     %AICMD0x1A($0178, $0378, $B38198, $00)                     ;B3B101
@@ -4901,6 +5258,7 @@ DATA8_B3AE23:
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $08)       ;B3B13C
     %AICMD0x3D_TeleportToArea(!AREA_WEDDINGSPRING)             ;B3B141
     %AICMD0x10_End()                                           ;B3B143
+B3B144:
     %AICMD0x1C_ShowDialog($0176, $00)                          ;B3B144
     %AICMD0x12_Jump($B3B110)                                   ;B3B148
     %AICMD0x15_JumpIfEquals8($80091E, 2, $B3B186)              ;B3B14B
@@ -4912,18 +5270,23 @@ DATA8_B3AE23:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3B1AD)         ;B3B177
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3B17F
     %AICMD0x12_Jump($B3B110)                                   ;B3B183
+B3B186:
     %AICMD0x1C_ShowDialog($03B4, $00)                          ;B3B186
     %AICMD0x41_AddValue16(nLove_Ann, -8)                       ;B3B18A
     %AICMD0x12_Jump($B3B110)                                   ;B3B190
+B3B193:
     %AICMD0x1C_ShowDialog($03B2, $00)                          ;B3B193
     %AICMD0x41_AddValue16(nLove_Ann, 5)                        ;B3B197
     %AICMD0x12_Jump($B3B110)                                   ;B3B19D
+B3B1A0:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B3B1A0
     %AICMD0x41_AddValue16(nLove_Ann, 2)                        ;B3B1A4
     %AICMD0x12_Jump($B3B110)                                   ;B3B1AA
+B3B1AD:
     %AICMD0x1C_ShowDialog($03B4, $00)                          ;B3B1AD
     %AICMD0x41_AddValue16(nLove_Ann, -2)                       ;B3B1B1
     %AICMD0x12_Jump($B3B110)                                   ;B3B1B7
+B3B1BA:
     %AICMD0x09($09, $B3B2AB)                                   ;B3B1BA
     %AICMD0x1A($0178, $0368, $B38198, $00)                     ;B3B1BE
     %AICMD0x2D($B3B25D, $B3B241)                               ;B3B1C6
@@ -4937,25 +5300,33 @@ DATA8_B3AE23:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 7, 16, $B3B1FF)  ;B3B1EB
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3B29D) ;B3B1F3
     %AICMD0x12_Jump($B3B110)                                   ;B3B1FB
+B3B1FE:
     %AICMD0x10_End()                                           ;B3B1FE
+B3B1FF:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, $B3B21E)     ;B3B1FF
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, $B3B225)     ;B3B206
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, $B3B22C)     ;B3B20D
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B3B233)     ;B3B214
     %AICMD0x12_Jump($B3B110)                                   ;B3B21B
+B3B21E:
     %AICMD0x1C_ShowDialog($00A5, $00)                          ;B3B21E
     %AICMD0x12_Jump($B3B110)                                   ;B3B222
+B3B225:
     %AICMD0x1C_ShowDialog($00A6, $00)                          ;B3B225
     %AICMD0x12_Jump($B3B110)                                   ;B3B229
+B3B22C:
     %AICMD0x1C_ShowDialog($00A7, $00)                          ;B3B22C
     %AICMD0x12_Jump($B3B110)                                   ;B3B230
+B3B233:
     %AICMD0x1C_ShowDialog($00A8, $00)                          ;B3B233
     %AICMD0x12_Jump($B3B110)                                   ;B3B237
+B3B23A:
     %AICMD0x1C_ShowDialog($00AA, $00)                          ;B3B23A
     %AICMD0x12_Jump($B3B110)                                   ;B3B23E
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3B250)         ;B3B241
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3B249
     %AICMD0x12_Jump($B3B1C6)                                   ;B3B24D
+B3B250:
     %AICMD0x1C_ShowDialog($03B4, $00)                          ;B3B250
     %AICMD0x41_AddValue16(nLove_Ann, -2)                       ;B3B254
     %AICMD0x12_Jump($B3B1C6)                                   ;B3B25A
@@ -4963,6 +5334,7 @@ DATA8_B3AE23:
     %AICMD0x20_JumpIfChoice(0, $B3B26C)                        ;B3B261
     %AICMD0x20_JumpIfChoice(1, $B3B282)                        ;B3B265
     %AICMD0x12_Jump($B3B1C6)                                   ;B3B269
+B3B26C:
     %AICMD0x08_EnableAIControl()                               ;B3B26C
     %AICMD0x19($00E9, $00)                                     ;B3B26D
     %AICMD0x13_Wait(120)                                       ;B3B271
@@ -4970,20 +5342,27 @@ DATA8_B3AE23:
     %AICMD0x1C_ShowDialog($00AC, $00)                          ;B3B275
     %AICMD0x41_AddValue16(nLove_Ann, 10)                       ;B3B279
     %AICMD0x12_Jump($B3B1CE)                                   ;B3B27F
+B3B282:
     %AICMD0x1C_ShowDialog($00AD, $00)                          ;B3B282
     %AICMD0x41_AddValue16(nLove_Ann, 2)                        ;B3B286
     %AICMD0x12_Jump($B3B1D4)                                   ;B3B28C
+B3B28F:
     %AICMD0x1C_ShowDialog($026C, $00)                          ;B3B28F
     %AICMD0x12_Jump($B3B1CE)                                   ;B3B293
+B3B296:
     %AICMD0x1C_ShowDialog($0099, $00)                          ;B3B296
     %AICMD0x12_Jump($B3B1D4)                                   ;B3B29A
+B3B29D:
     %AICMD0x1C_ShowDialog($0391, $00)                          ;B3B29D
     %AICMD0x12_Jump($B3B110)                                   ;B3B2A1
+B3B2A4:
     %AICMD0x1C_ShowDialog($01DE, $00)                          ;B3B2A4
     %AICMD0x12_Jump($B3B110)                                   ;B3B2A8
+B3B2AB:
     %AICMD0x1A($0168, $0368, $B38B1C, $00)                     ;B3B2AB
     %AICMD0x13_Wait(1)                                         ;B3B2B3
     %AICMD0x12_Jump($B3B2B3)                                   ;B3B2B6
+B3B2B9:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3B3BA) ;B3B2B9
     %AICMD0x1A($0218, $0318, $B381E0, $00)                     ;B3B2C1
     %AICMD0x4D($B3B2E8)                                        ;B3B2C9
@@ -5002,6 +5381,7 @@ DATA8_B3AE23:
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $08)       ;B3B300
     %AICMD0x3D_TeleportToArea(!AREA_WEDDINGSPRING)             ;B3B305
     %AICMD0x10_End()                                           ;B3B307
+B3B308:
     %AICMD0x1C_ShowDialog($017A, $00)                          ;B3B308
     %AICMD0x12_Jump($B3B2C9)                                   ;B3B30C
     %AICMD0x15_JumpIfEquals8($80091E, 2, $B3B34B)              ;B3B30F
@@ -5013,18 +5393,23 @@ DATA8_B3AE23:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3B37F)         ;B3B33C
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3B344
     %AICMD0x12_Jump($B3B2C9)                                   ;B3B348
+B3B34B:
     %AICMD0x1C_ShowDialog($03B0, $00)                          ;B3B34B
     %AICMD0x41_AddValue16(nLove_Ellen, -8)                     ;B3B34F
     %AICMD0x12_Jump($B3B2C9)                                   ;B3B355
+B3B358:
     %AICMD0x1C_ShowDialog($03B2, $00)                          ;B3B358
     %AICMD0x41_AddValue16(nLove_Ellen, 5)                      ;B3B35C
     %AICMD0x12_Jump($B3B2C9)                                   ;B3B362
+B3B365:
     %AICMD0x1C_ShowDialog($03B3, $00)                          ;B3B365
     %AICMD0x41_AddValue16(nLove_Ellen, 8)                      ;B3B369
     %AICMD0x12_Jump($B3B2C9)                                   ;B3B36F
+B3B372:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B3B372
     %AICMD0x41_AddValue16(nLove_Ellen, 5)                      ;B3B376
     %AICMD0x12_Jump($B3B2C9)                                   ;B3B37C
+B3B37F:
     %AICMD0x1C_ShowDialog($01DA, $00)                          ;B3B37F
     %AICMD0x41_AddValue16(nLove_Ellen, -2)                     ;B3B383
     %AICMD0x12_Jump($B3B2C9)                                   ;B3B389
@@ -5034,26 +5419,33 @@ DATA8_B3AE23:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 7, 16, $B3B3BB)  ;B3B3A7
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3B42F) ;B3B3AF
     %AICMD0x12_Jump($B3B2C9)                                   ;B3B3B7
+B3B3BA:
     %AICMD0x10_End()                                           ;B3B3BA
+B3B3BB:
     %AICMD0x1D_ShowDialog($00D2, $00)                          ;B3B3BB
     %AICMD0x20_JumpIfChoice(0, $B3B3CA)                        ;B3B3BF
     %AICMD0x20_JumpIfChoice(1, $B3B3D7)                        ;B3B3C3
     %AICMD0x12_Jump($B3B2D4)                                   ;B3B3C7
+B3B3CA:
     %AICMD0x1C_ShowDialog($00D3, $00)                          ;B3B3CA
     %AICMD0x41_AddValue16(nLove_Ellen, 8)                      ;B3B3CE
     %AICMD0x12_Jump($B3B2D4)                                   ;B3B3D4
+B3B3D7:
     %AICMD0x1C_ShowDialog($00D4, $00)                          ;B3B3D7
     %AICMD0x41_AddValue16(nLove_Ellen, 2)                      ;B3B3DB
     %AICMD0x12_Jump($B3B2D4)                                   ;B3B3E1
     %AICMD0x1C_ShowDialog($00C5, $00)                          ;B3B3E4
     %AICMD0x12_Jump($B3B2D4)                                   ;B3B3E8
+B3B3EB:
     %AICMD0x1C_ShowDialog($00D8, $00)                          ;B3B3EB
     %AICMD0x12_Jump($B3B2D4)                                   ;B3B3EF
+B3B3F2:
     %AICMD0x09($0A, $B3B43D)                                   ;B3B3F2
     %AICMD0x1D_ShowDialog($00D9, $00)                          ;B3B3F6
     %AICMD0x20_JumpIfChoice(0, $B3B405)                        ;B3B3FA
     %AICMD0x20_JumpIfChoice(1, $B3B41B)                        ;B3B3FE
     %AICMD0x12_Jump($B3B2D4)                                   ;B3B402
+B3B405:
     %AICMD0x08_EnableAIControl()                               ;B3B405
     %AICMD0x19($0039, $00)                                     ;B3B406
     %AICMD0x13_Wait(120)                                       ;B3B40A
@@ -5061,15 +5453,20 @@ DATA8_B3AE23:
     %AICMD0x1C_ShowDialog($00DA, $00)                          ;B3B40E
     %AICMD0x41_AddValue16(nLove_Ellen, 10)                     ;B3B412
     %AICMD0x12_Jump($B3B2DF)                                   ;B3B418
+B3B41B:
     %AICMD0x1C_ShowDialog($025B, $00)                          ;B3B41B
     %AICMD0x41_AddValue16(nLove_Ellen, 2)                      ;B3B41F
     %AICMD0x12_Jump($B3B2DF)                                   ;B3B425
+B3B428:
     %AICMD0x1C_ShowDialog($00DB, $00)                          ;B3B428
     %AICMD0x12_Jump($B3B2DF)                                   ;B3B42C
+B3B42F:
     %AICMD0x1C_ShowDialog($0391, $00)                          ;B3B42F
     %AICMD0x12_Jump($B3B2C9)                                   ;B3B433
+B3B436:
     %AICMD0x1C_ShowDialog($01EE, $00)                          ;B3B436
     %AICMD0x12_Jump($B3B2C9)                                   ;B3B43A
+B3B43D:
     %AICMD0x1A($0218, $0308, $B38A44, $00)                     ;B3B43D
     %AICMD0x13_Wait(1)                                         ;B3B445
     %AICMD0x37()                                               ;B3B448
@@ -5083,6 +5480,7 @@ DATA8_B3B44A:
     %AICMD0x09($02, $B3B49E)                                   ;B3B44F
     %AICMD0x13_Wait(1)                                         ;B3B453
     %AICMD0x12_Jump($B3B453)                                   ;B3B456
+B3B459:
     %AICMD0x1A($00A8, $0078, $B38300, $00)                     ;B3B459
     %AICMD0x4D($B3B46C)                                        ;B3B461
     %AICMD0x2D($B3B489, $B3B473)                               ;B3B464
@@ -5092,13 +5490,16 @@ DATA8_B3B44A:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3B482)         ;B3B473
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3B47B
     %AICMD0x12_Jump($B3B461)                                   ;B3B47F
+B3B482:
     %AICMD0x1C_ShowDialog($03B8, $00)                          ;B3B482
     %AICMD0x12_Jump($B3B461)                                   ;B3B486
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0C, $B3B497)   ;B3B489
     %AICMD0x1C_ShowDialog($0038, $00)                          ;B3B490
     %AICMD0x12_Jump($B3B461)                                   ;B3B494
+B3B497:
     %AICMD0x1C_ShowDialog($01CD, $00)                          ;B3B497
     %AICMD0x12_Jump($B3B461)                                   ;B3B49B
+B3B49E:
     %AICMD0x1A($0188, $00A0, $B383F0, $00)                     ;B3B49E
     %AICMD0x4D($B3B4B1)                                        ;B3B4A6
     %AICMD0x2D($B3B4CE, $B3B4B8)                               ;B3B4A9
@@ -5108,11 +5509,13 @@ DATA8_B3B44A:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3B4C7)         ;B3B4B8
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3B4C0
     %AICMD0x12_Jump($B3B4A6)                                   ;B3B4C4
+B3B4C7:
     %AICMD0x1C_ShowDialog($03B9, $00)                          ;B3B4C7
     %AICMD0x12_Jump($B3B4A6)                                   ;B3B4CB
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0C, $B3B4DC)   ;B3B4CE
     %AICMD0x1C_ShowDialog($003D, $00)                          ;B3B4D5
     %AICMD0x12_Jump($B3B4A6)                                   ;B3B4D9
+B3B4DC:
     %AICMD0x1C_ShowDialog($01CE, $00)                          ;B3B4DC
     %AICMD0x12_Jump($B3B4A6)                                   ;B3B4E0
 
@@ -5125,10 +5528,13 @@ DATA8_B3B4E3:
     %AICMD0x12_Jump($B3B4F5)                                   ;B3B4EC
     %AICMD0x13_Wait(1)                                         ;B3B4EF
     %AICMD0x12_Jump($B3B4EF)                                   ;B3B4F2
+B3B4F5:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, $B3B507)   ;B3B4F5
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0C, $B3B507)   ;B3B4FC
     %AICMD0x09($03, $B3B5CE)                                   ;B3B503
+B3B507:
     %AICMD0x12_Jump($B3B4EF)                                   ;B3B507
+B3B50A:
     %AICMD0x1A($0088, $0090, $B38354, $00)                     ;B3B50A
     %AICMD0x4D($B3B51D)                                        ;B3B512
     %AICMD0x2D($B3B53A, $B3B524)                               ;B3B515
@@ -5138,13 +5544,16 @@ DATA8_B3B4E3:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3B533)         ;B3B524
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3B52C
     %AICMD0x12_Jump($B3B512)                                   ;B3B530
+B3B533:
     %AICMD0x1C_ShowDialog($03B0, $00)                          ;B3B533
     %AICMD0x12_Jump($B3B512)                                   ;B3B537
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0C, $B3B548)   ;B3B53A
     %AICMD0x1C_ShowDialog($005A, $00)                          ;B3B541
     %AICMD0x12_Jump($B3B512)                                   ;B3B545
+B3B548:
     %AICMD0x1C_ShowDialog($01CF, $00)                          ;B3B548
     %AICMD0x12_Jump($B3B512)                                   ;B3B54C
+B3B54F:
     %AICMD0x1A($0078, $0148, $B382E8, $00)                     ;B3B54F
     %AICMD0x4D($B3B562)                                        ;B3B557
     %AICMD0x2D($B3B57F, $B3B569)                               ;B3B55A
@@ -5154,6 +5563,7 @@ DATA8_B3B4E3:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3B578)         ;B3B569
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3B571
     %AICMD0x12_Jump($B3B557)                                   ;B3B575
+B3B578:
     %AICMD0x1C_ShowDialog($03BB, $00)                          ;B3B578
     %AICMD0x12_Jump($B3B557)                                   ;B3B57C
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0C, $B3B5A2)   ;B3B57F
@@ -5162,18 +5572,23 @@ DATA8_B3B4E3:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $02, $B3B5C3)   ;B3B594
     %AICMD0x1C_ShowDialog($03EA, $00)                          ;B3B59B
     %AICMD0x12_Jump($B3B557)                                   ;B3B59F
+B3B5A2:
     %AICMD0x1C_ShowDialog($01D1, $00)                          ;B3B5A2
     %AICMD0x1B($0288, $00)                                     ;B3B5A6
     %AICMD0x12_Jump($B3B557)                                   ;B3B5AA
+B3B5AD:
     %AICMD0x1C_ShowDialog($01DD, $00)                          ;B3B5AD
     %AICMD0x1B($0288, $00)                                     ;B3B5B1
     %AICMD0x12_Jump($B3B557)                                   ;B3B5B5
+B3B5B8:
     %AICMD0x1C_ShowDialog($01E6, $00)                          ;B3B5B8
     %AICMD0x1B($0288, $00)                                     ;B3B5BC
     %AICMD0x12_Jump($B3B557)                                   ;B3B5C0
+B3B5C3:
     %AICMD0x1C_ShowDialog($01EF, $00)                          ;B3B5C3
     %AICMD0x1B($0288, $00)                                     ;B3B5C7
     %AICMD0x12_Jump($B3B557)                                   ;B3B5CB
+B3B5CE:
     %AICMD0x1A($0048, $0198, $B38168, $02)                     ;B3B5CE
     %AICMD0x4D($B3B5EC)                                        ;B3B5D6
     %AICMD0x2D($B3B68F, $B3B613)                               ;B3B5D9
@@ -5188,6 +5603,7 @@ DATA8_B3B4E3:
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $07)       ;B3B604
     %AICMD0x3D_TeleportToArea(!AREA_WEDDINGSPRING)             ;B3B609
     %AICMD0x10_End()                                           ;B3B60B
+B3B60C:
     %AICMD0x1C_ShowDialog($0174, $00)                          ;B3B60C
     %AICMD0x12_Jump($B3B5D6)                                   ;B3B610
     %AICMD0x15_JumpIfEquals8($80091E, 2, $B3B64E)              ;B3B613
@@ -5199,18 +5615,23 @@ DATA8_B3B4E3:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3B682)         ;B3B63F
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3B647
     %AICMD0x12_Jump($B3B5D6)                                   ;B3B64B
+B3B64E:
     %AICMD0x1C_ShowDialog($03B0, $00)                          ;B3B64E
     %AICMD0x41_AddValue16(nLove_Maria, -8)                     ;B3B652
     %AICMD0x12_Jump($B3B5D6)                                   ;B3B658
+B3B65B:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B3B65B
     %AICMD0x41_AddValue16(nLove_Maria, 4)                      ;B3B65F
     %AICMD0x12_Jump($B3B5D6)                                   ;B3B665
+B3B668:
     %AICMD0x1C_ShowDialog($03B5, $00)                          ;B3B668
     %AICMD0x41_AddValue16(nLove_Maria, 3)                      ;B3B66C
     %AICMD0x12_Jump($B3B5D6)                                   ;B3B672
+B3B675:
     %AICMD0x1C_ShowDialog($03B2, $00)                          ;B3B675
     %AICMD0x41_AddValue16(nLove_Maria, 5)                      ;B3B679
     %AICMD0x12_Jump($B3B5D6)                                   ;B3B67F
+B3B682:
     %AICMD0x1C_ShowDialog($01DA, $00)                          ;B3B682
     %AICMD0x41_AddValue16(nLove_Maria, -2)                     ;B3B686
     %AICMD0x12_Jump($B3B5D6)                                   ;B3B68C
@@ -5218,15 +5639,19 @@ DATA8_B3B4E3:
     %AICMD0x45_JumpIfBetween16(nLove_Maria, 150, 200, $B3B6B1) ;B3B699
     %AICMD0x1C_ShowDialog($040F, $00)                          ;B3B6A3
     %AICMD0x12_Jump($B3B5D6)                                   ;B3B6A7
+B3B6AA:
     %AICMD0x1C_ShowDialog($0092, $00)                          ;B3B6AA
     %AICMD0x12_Jump($B3B5D6)                                   ;B3B6AE
+B3B6B1:
     %AICMD0x1D_ShowDialog($0093, $00)                          ;B3B6B1
     %AICMD0x20_JumpIfChoice(0, $B3B6C0)                        ;B3B6B5
     %AICMD0x20_JumpIfChoice(1, $B3B6CD)                        ;B3B6B9
     %AICMD0x12_Jump($B3B5E1)                                   ;B3B6BD
+B3B6C0:
     %AICMD0x1C_ShowDialog($0094, $00)                          ;B3B6C0
     %AICMD0x41_AddValue16(nLove_Maria, 10)                     ;B3B6C4
     %AICMD0x12_Jump($B3B5E1)                                   ;B3B6CA
+B3B6CD:
     %AICMD0x1C_ShowDialog($0095, $00)                          ;B3B6CD
     %AICMD0x41_AddValue16(nLove_Maria, 2)                      ;B3B6D1
     %AICMD0x12_Jump($B3B5E1)                                   ;B3B6D7
@@ -5243,10 +5668,13 @@ DATA8_B3B6E1:
     %AICMD0x12_Jump($B3B6FA)                                   ;B3B6F1
     %AICMD0x13_Wait(1)                                         ;B3B6F4
     %AICMD0x12_Jump($B3B6F4)                                   ;B3B6F7
+B3B6FA:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, $B3B70C)   ;B3B6FA
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $04, $B3B70C)   ;B3B701
     %AICMD0x09($03, $B3B7DE)                                   ;B3B708
+B3B70C:
     %AICMD0x12_Jump($B3B6F4)                                   ;B3B70C
+B3B70F:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3B79D) ;B3B70F
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B3B79D)     ;B3B717
     %AICMD0x1A($0258, $0178, $B38270, $00)                     ;B3B71E
@@ -5261,6 +5689,7 @@ DATA8_B3B6E1:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3B752)         ;B3B743
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3B74B
     %AICMD0x12_Jump($B3B726)                                   ;B3B74F
+B3B752:
     %AICMD0x1C_ShowDialog($03B8, $00)                          ;B3B752
     %AICMD0x12_Jump($B3B726)                                   ;B3B756
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3B796) ;B3B759
@@ -5268,9 +5697,11 @@ DATA8_B3B6E1:
     %AICMD0x20_JumpIfChoice(0, $B3B770)                        ;B3B765
     %AICMD0x20_JumpIfChoice(1, $B3B77C)                        ;B3B769
     %AICMD0x12_Jump($B3B726)                                   ;B3B76D
+B3B770:
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily1, $09)       ;B3B770
     %AICMD0x1C_ShowDialog($007F, $00)                          ;B3B775
     %AICMD0x12_Jump($B3B731)                                   ;B3B779
+B3B77C:
     %AICMD0x1C_ShowDialog($0080, $00)                          ;B3B77C
     %AICMD0x12_Jump($B3B726)                                   ;B3B780
     %AICMD0x28(strcFlags.daily1, $09)                          ;B3B783
@@ -5278,9 +5709,12 @@ DATA8_B3B6E1:
     %AICMD0x12_Jump($B3B726)                                   ;B3B78C
     %AICMD0x1C_ShowDialog($0151, $00)                          ;B3B78F
     %AICMD0x12_Jump($B3B726)                                   ;B3B793
+B3B796:
     %AICMD0x1C_ShowDialog($0392, $00)                          ;B3B796
     %AICMD0x12_Jump($B3B726)                                   ;B3B79A
+B3B79D:
     %AICMD0x10_End()                                           ;B3B79D
+B3B79E:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3B7DD) ;B3B79E
     %AICMD0x1A($0068, $0038, $B382D0, $00)                     ;B3B7A6
     %AICMD0x4D($B3B7B9)                                        ;B3B7AE
@@ -5291,11 +5725,14 @@ DATA8_B3B6E1:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3B7CF)         ;B3B7C0
     %AICMD0x1C_ShowDialog($03BC, $00)                          ;B3B7C8
     %AICMD0x12_Jump($B3B7AE)                                   ;B3B7CC
+B3B7CF:
     %AICMD0x1C_ShowDialog($0049, $00)                          ;B3B7CF
     %AICMD0x12_Jump($B3B7AE)                                   ;B3B7D3
     %AICMD0x1C_ShowDialog($007B, $00)                          ;B3B7D6
     %AICMD0x12_Jump($B3B7AE)                                   ;B3B7DA
+B3B7DD:
     %AICMD0x10_End()                                           ;B3B7DD
+B3B7DE:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3B8D1) ;B3B7DE
     %AICMD0x1A($01F8, $00D8, $B38210, $00)                     ;B3B7E6
     %AICMD0x4D($B3B804)                                        ;B3B7EE
@@ -5311,6 +5748,7 @@ DATA8_B3B6E1:
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $09)       ;B3B81C
     %AICMD0x3D_TeleportToArea(!AREA_WEDDINGSPRING)             ;B3B821
     %AICMD0x10_End()                                           ;B3B823
+B3B824:
     %AICMD0x1C_ShowDialog($017C, $00)                          ;B3B824
     %AICMD0x12_Jump($B3B7EE)                                   ;B3B828
     %AICMD0x15_JumpIfEquals8($80091E, 2, $B3B86D)              ;B3B82B
@@ -5323,15 +5761,19 @@ DATA8_B3B6E1:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3B894)         ;B3B85E
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3B866
     %AICMD0x12_Jump($B3B7EE)                                   ;B3B86A
+B3B86D:
     %AICMD0x1C_ShowDialog($03B4, $00)                          ;B3B86D
     %AICMD0x41_AddValue16(nLove_Eve, -8)                       ;B3B871
     %AICMD0x12_Jump($B3B7EE)                                   ;B3B877
+B3B87A:
     %AICMD0x1C_ShowDialog($03B2, $00)                          ;B3B87A
     %AICMD0x41_AddValue16(nLove_Eve, 4)                        ;B3B87E
     %AICMD0x12_Jump($B3B7EE)                                   ;B3B884
+B3B887:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B3B887
     %AICMD0x41_AddValue16(nLove_Eve, 6)                        ;B3B88B
     %AICMD0x12_Jump($B3B7EE)                                   ;B3B891
+B3B894:
     %AICMD0x1C_ShowDialog($03BA, $00)                          ;B3B894
     %AICMD0x41_AddValue16(nLove_Eve, -2)                       ;B3B898
     %AICMD0x12_Jump($B3B7EE)                                   ;B3B89E
@@ -5339,27 +5781,32 @@ DATA8_B3B6E1:
     %AICMD0x20_JumpIfChoice(0, $B3B8B0)                        ;B3B8A5
     %AICMD0x20_JumpIfChoice(1, $B3B8BD)                        ;B3B8A9
     %AICMD0x12_Jump($B3B7F9)                                   ;B3B8AD
+B3B8B0:
     %AICMD0x1C_ShowDialog($00DD, $00)                          ;B3B8B0
     %AICMD0x41_AddValue16(nLove_Eve, 2)                        ;B3B8B4
     %AICMD0x12_Jump($B3B7F9)                                   ;B3B8BA
+B3B8BD:
     %AICMD0x1C_ShowDialog($00DE, $00)                          ;B3B8BD
     %AICMD0x41_AddValue16(nLove_Eve, 8)                        ;B3B8C1
     %AICMD0x12_Jump($B3B7F9)                                   ;B3B8C7
     %AICMD0x1C_ShowDialog($00DD, $00)                          ;B3B8CA
     %AICMD0x12_Jump($B3B7F9)                                   ;B3B8CE
+B3B8D1:
     %AICMD0x10_End()                                           ;B3B8D1
 
 
 DATA8_B3B8D2:
- 
     %AICMD0x11_EnableUserControl()                             ;B3B8D2
     %AICMD0x12_Jump($B3B8DC)                                   ;B3B8D3
     %AICMD0x13_Wait(1)                                         ;B3B8D6
     %AICMD0x12_Jump($B3B8D6)                                   ;B3B8D9
+B3B8DC:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, $B3B8EE)   ;B3B8DC
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $00, $B3B8EE)   ;B3B8E3
     %AICMD0x09($01, $B3B8F1)                                   ;B3B8EA
+B3B8EE:
     %AICMD0x12_Jump($B3B8D6)                                   ;B3B8EE
+B3B8F1:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3BA38) ;B3B8F1
     %AICMD0x1A($0058, $01A8, $B381D4, $00)                     ;B3B8F9
     %AICMD0x22($18, $10, $01, $B381D4, $10)                    ;B3B901
@@ -5375,6 +5822,7 @@ DATA8_B3B8D2:
     %AICMD0x45_JumpIfBetween16(nLove_Nina, 0, 249, $B3B936)    ;B3B925
     %AICMD0x1C_ShowDialog($043F, $00)                          ;B3B92F
     %AICMD0x12_Jump($B3B908)                                   ;B3B933
+B3B936:
     %AICMD0x1C_ShowDialog($0178, $00)                          ;B3B936
     %AICMD0x12_Jump($B3B908)                                   ;B3B93A
     %AICMD0x15_JumpIfEquals8($80091E, 2, $B3B9A6)              ;B3B93D
@@ -5387,18 +5835,23 @@ DATA8_B3B8D2:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3B9A6)         ;B3B970
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3B978
     %AICMD0x12_Jump($B3B908)                                   ;B3B97C
+B3B97F:
     %AICMD0x1C_ShowDialog($03B2, $00)                          ;B3B97F
     %AICMD0x41_AddValue16(nLove_Nina, 3)                       ;B3B983
     %AICMD0x12_Jump($B3B908)                                   ;B3B989
+B3B98C:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B3B98C
     %AICMD0x41_AddValue16(nLove_Nina, 8)                       ;B3B990
     %AICMD0x12_Jump($B3B908)                                   ;B3B996
+B3B999:
     %AICMD0x1C_ShowDialog($03B1, $00)                          ;B3B999
     %AICMD0x41_AddValue16(nLove_Nina, -6)                      ;B3B99D
     %AICMD0x12_Jump($B3B908)                                   ;B3B9A3
+B3B9A6:
     %AICMD0x1C_ShowDialog($01D9, $00)                          ;B3B9A6
     %AICMD0x41_AddValue16(nLove_Nina, -4)                      ;B3B9AA
     %AICMD0x12_Jump($B3B908)                                   ;B3B9B0
+B3B9B3:
     %AICMD0x1C_ShowDialog($0143, $00)                          ;B3B9B3
     %AICMD0x41_AddValue16(nLove_Nina, 4)                       ;B3B9B7
     %AICMD0x12_Jump($B3B908)                                   ;B3B9BD
@@ -5413,24 +5866,31 @@ DATA8_B3B8D2:
     %AICMD0x12_Jump($B3B913)                                   ;B3B9E9
     %AICMD0x1C_ShowDialog($040D, $00)                          ;B3B9EC
     %AICMD0x12_Jump($B3B913)                                   ;B3B9F0
+B3B9F3:
     %AICMD0x1C_ShowDialog($040E, $00)                          ;B3B9F3
     %AICMD0x12_Jump($B3B913)                                   ;B3B9F7
+B3B9FA:
     %AICMD0x1C_ShowDialog($00C1, $00)                          ;B3B9FA
     %AICMD0x12_Jump($B3B908)                                   ;B3B9FE
+B3BA01:
     %AICMD0x1D_ShowDialog($00C2, $00)                          ;B3BA01
     %AICMD0x20_JumpIfChoice(0, $B3BA10)                        ;B3BA05
     %AICMD0x20_JumpIfChoice(1, $B3BA1D)                        ;B3BA09
     %AICMD0x12_Jump($B3B908)                                   ;B3BA0D
+B3BA10:
     %AICMD0x1C_ShowDialog($00C3, $00)                          ;B3BA10
     %AICMD0x41_AddValue16(nLove_Nina, 10)                      ;B3BA14
     %AICMD0x12_Jump($B3B913)                                   ;B3BA1A
+B3BA1D:
     %AICMD0x1C_ShowDialog($00C4, $00)                          ;B3BA1D
     %AICMD0x41_AddValue16(nLove_Nina, 2)                       ;B3BA21
     %AICMD0x12_Jump($B3B91C)                                   ;B3BA27
+B3BA2A:
     %AICMD0x1C_ShowDialog($00B1, $00)                          ;B3BA2A
     %AICMD0x12_Jump($B3B91C)                                   ;B3BA2E
     %AICMD0x1C_ShowDialog($0391, $00)                          ;B3BA31
     %AICMD0x12_Jump($B3B908)                                   ;B3BA35
+B3BA38:
     %AICMD0x10_End()                                           ;B3BA38
 
 
@@ -5463,23 +5923,29 @@ DATA8_B3BA59:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $06, $B3BAB8)   ;B3BA6E
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $06, $B3BA7F)   ;B3BA75
     %AICMD0x12_Jump($B3BAB8)                                   ;B3BA7C
+B3BA7F:
     %AICMD0x45_JumpIfBetween16(nLove_Maria, 250, 999, $B3BAB4) ;B3BA7F
     %AICMD0x45_JumpIfBetween16(nLove_Ann, 250, 999, $B3BAB4)   ;B3BA89
     %AICMD0x45_JumpIfBetween16(nLove_Nina, 250, 999, $B3BAB4)  ;B3BA93
     %AICMD0x45_JumpIfBetween16(nLove_Ellen, 250, 999, $B3BAB4) ;B3BA9D
     %AICMD0x45_JumpIfBetween16(nLove_Eve, 250, 999, $B3BAB4)   ;B3BAA7
     %AICMD0x12_Jump($B3BAB8)                                   ;B3BAB1
+B3BAB4:
     %AICMD0x09($06, $B3BAC5)                                   ;B3BAB4
+B3BAB8:
     %AICMD0x13_Wait(1)                                         ;B3BAB8
     %AICMD0x12_Jump($B3BAB8)                                   ;B3BABB
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, $B3C1FD)   ;B3BABE
+B3BAC5:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3BB18) ;B3BAC5
     %AICMD0x1A($0238, $0168, $B38AA4, $00)                     ;B3BACD
     %AICMD0x1F($B3BADB)                                        ;B3BAD5
     %AICMD0x12_Jump($B3BAD5)                                   ;B3BAD8
+B3BADB:
     %AICMD0x1D_ShowDialog($01C3, $00)                          ;B3BADB
     %AICMD0x20_JumpIfChoice(0, $B3BAE7)                        ;B3BADF
     %AICMD0x20_JumpIfChoice(1, $B3BB0A)                        ;B3BAE3
+B3BAE7:
     %AICMD0x46_JumpIfBetween24(nMoney, 0, 99, $B3BB11)         ;B3BAE7
     %AICMD0x1C_ShowDialog($01C4, $00)                          ;B3BAF3
     %AICMD0x42_AddValue24(nMoney, -100)                        ;B3BAF7
@@ -5487,11 +5953,15 @@ DATA8_B3BA59:
     %AICMD0x23_OrWithIndexedValue(strcFlags.event5, $06)       ;B3BAFF
     %AICMD0x23_OrWithIndexedValue(strcShedItems.row3, $07)     ;B3BB04
     %AICMD0x10_End()                                           ;B3BB09
+B3BB0A:
     %AICMD0x1C_ShowDialog($01C5, $00)                          ;B3BB0A
     %AICMD0x12_Jump($B3BAD5)                                   ;B3BB0E
+B3BB11:
     %AICMD0x1C_ShowDialog($02FF, $00)                          ;B3BB11
     %AICMD0x12_Jump($B3BAD5)                                   ;B3BB15
+B3BB18:
     %AICMD0x10_End()                                           ;B3BB18
+B3BB19:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3BB80) ;B3BB19
     %AICMD0x1A($0248, $0268, $B382E8, $00)                     ;B3BB21
     %AICMD0x4D($B3BB34)                                        ;B3BB29
@@ -5502,6 +5972,7 @@ DATA8_B3BA59:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3BB4A)         ;B3BB3B
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3BB43
     %AICMD0x12_Jump($B3BB29)                                   ;B3BB47
+B3BB4A:
     %AICMD0x1C_ShowDialog($03BB, $00)                          ;B3BB4A
     %AICMD0x12_Jump($B3BB29)                                   ;B3BB4E
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0C, $B3BB8F)   ;B3BB51
@@ -5511,23 +5982,31 @@ DATA8_B3BA59:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 7, 16, $B3BB81)  ;B3BB6D
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3BB88) ;B3BB75
     %AICMD0x12_Jump($B3BB29)                                   ;B3BB7D
+B3BB80:
     %AICMD0x10_End()                                           ;B3BB80
+B3BB81:
     %AICMD0x1C_ShowDialog($0061, $00)                          ;B3BB81
     %AICMD0x12_Jump($B3BB29)                                   ;B3BB85
+B3BB88:
     %AICMD0x1C_ShowDialog($0392, $00)                          ;B3BB88
     %AICMD0x12_Jump($B3BB29)                                   ;B3BB8C
+B3BB8F:
     %AICMD0x1C_ShowDialog($01D1, $00)                          ;B3BB8F
     %AICMD0x1B($0288, $00)                                     ;B3BB93
     %AICMD0x12_Jump($B3BB29)                                   ;B3BB97
+B3BB9A:
     %AICMD0x1C_ShowDialog($01DD, $00)                          ;B3BB9A
     %AICMD0x1B($0288, $00)                                     ;B3BB9E
     %AICMD0x12_Jump($B3BB29)                                   ;B3BBA2
+B3BBA5:
     %AICMD0x1C_ShowDialog($01E6, $00)                          ;B3BBA5
     %AICMD0x1B($0288, $00)                                     ;B3BBA9
     %AICMD0x12_Jump($B3BB29)                                   ;B3BBAD
+B3BBB0:
     %AICMD0x1C_ShowDialog($01EF, $00)                          ;B3BBB0
     %AICMD0x1B($0288, $00)                                     ;B3BBB4
     %AICMD0x12_Jump($B3BB29)                                   ;B3BBB8
+B3BBBB:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3BBF7) ;B3BBBB
     %AICMD0x1A($0248, $0168, $B3839C, $00)                     ;B3BBC3
     %AICMD0x4D($B3BBD6)                                        ;B3BBCB
@@ -5540,11 +6019,15 @@ DATA8_B3BA59:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 7, 16, $B3BBF8)  ;B3BBE4
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3BBFF) ;B3BBEC
     %AICMD0x12_Jump($B3BBCB)                                   ;B3BBF4
+B3BBF7:
     %AICMD0x10_End()                                           ;B3BBF7
+B3BBF8:
     %AICMD0x1C_ShowDialog($0078, $00)                          ;B3BBF8
     %AICMD0x12_Jump($B3BBCB)                                   ;B3BBFC
+B3BBFF:
     %AICMD0x1C_ShowDialog($0081, $00)                          ;B3BBFF
     %AICMD0x12_Jump($B3BBCB)                                   ;B3BC03
+B3BC06:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3BC42) ;B3BC06
     %AICMD0x1A($00A8, $0188, $B38348, $00)                     ;B3BC0E
     %AICMD0x4D($B3BC21)                                        ;B3BC16
@@ -5557,11 +6040,15 @@ DATA8_B3BA59:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 7, 16, $B3BC43)  ;B3BC2F
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3BC4A) ;B3BC37
     %AICMD0x12_Jump($B3BC16)                                   ;B3BC3F
+B3BC42:
     %AICMD0x10_End()                                           ;B3BC42
+B3BC43:
     %AICMD0x1C_ShowDialog($0053, $00)                          ;B3BC43
     %AICMD0x12_Jump($B3BC16)                                   ;B3BC47
+B3BC4A:
     %AICMD0x1C_ShowDialog($0051, $00)                          ;B3BC4A
     %AICMD0x12_Jump($B3BC16)                                   ;B3BC4E
+B3BC51:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3BC9C) ;B3BC51
     %AICMD0x1A($0128, $0208, $B38288, $00)                     ;B3BC59
     %AICMD0x4D($B3BC6C)                                        ;B3BC61
@@ -5572,19 +6059,25 @@ DATA8_B3BA59:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3BC82)         ;B3BC73
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3BC7B
     %AICMD0x12_Jump($B3BC61)                                   ;B3BC7F
+B3BC82:
     %AICMD0x1C_ShowDialog($03B8, $00)                          ;B3BC82
     %AICMD0x12_Jump($B3BC61)                                   ;B3BC86
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 7, 16, $B3BC9D)  ;B3BC89
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3BCB2) ;B3BC91
     %AICMD0x12_Jump($B3BC61)                                   ;B3BC99
+B3BC9C:
     %AICMD0x10_End()                                           ;B3BC9C
+B3BC9D:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, $B3BCAB)     ;B3BC9D
     %AICMD0x1C_ShowDialog($0076, $00)                          ;B3BCA4
     %AICMD0x12_Jump($B3BC61)                                   ;B3BCA8
+B3BCAB:
     %AICMD0x1C_ShowDialog($0075, $00)                          ;B3BCAB
     %AICMD0x12_Jump($B3BC61)                                   ;B3BCAF
+B3BCB2:
     %AICMD0x1C_ShowDialog($0392, $00)                          ;B3BCB2
     %AICMD0x12_Jump($B3BC61)                                   ;B3BCB6
+B3BCB9:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3BCF1) ;B3BCB9
     %AICMD0x1A($0248, $0318, $B3836C, $00)                     ;B3BCC1
     %AICMD0x4D($B3BCD4)                                        ;B3BCC9
@@ -5595,19 +6088,24 @@ DATA8_B3BA59:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3BCEA)         ;B3BCDB
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3BCE3
     %AICMD0x12_Jump($B3BCC9)                                   ;B3BCE7
+B3BCEA:
     %AICMD0x1C_ShowDialog($03BB, $00)                          ;B3BCEA
     %AICMD0x12_Jump($B3BCC9)                                   ;B3BCEE
+B3BCF1:
     %AICMD0x10_End()                                           ;B3BCF1
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $02, $B3BD1E)   ;B3BCF2
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 7, 16, $B3BD0C)  ;B3BCF9
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3BD13) ;B3BD01
     %AICMD0x12_Jump($B3BCC9)                                   ;B3BD09
+B3BD0C:
     %AICMD0x1C_ShowDialog($005D, $00)                          ;B3BD0C
     %AICMD0x12_Jump($B3BCC9)                                   ;B3BD10
+B3BD13:
     %AICMD0x1B($02AC, $00)                                     ;B3BD13
     %AICMD0x0D($00, $01, $20, $01)                             ;B3BD17
     %AICMD0x37()                                               ;B3BD1C
     %AICMD0x10_End()                                           ;B3BD1D
+B3BD1E:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3BD13) ;B3BD1E
     %AICMD0x1C_ShowDialog($01F0, $00)                          ;B3BD26
     %AICMD0x12_Jump($B3BCC9)                                   ;B3BD2A
@@ -5625,14 +6123,19 @@ DATA8_B3BD2D:
     %AICMD0x12_Jump($B3BD4F)                                   ;B3BD46
     %AICMD0x13_Wait(1)                                         ;B3BD49
     %AICMD0x12_Jump($B3BD49)                                   ;B3BD4C
+B3BD4F:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, $B3BD61)   ;B3BD4F
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0C, $B3BD61)   ;B3BD56
     %AICMD0x09($09, $B3BF5A)                                   ;B3BD5D
+B3BD61:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, $B3BD6C)   ;B3BD61
     %AICMD0x09($0A, $B3C03A)                                   ;B3BD68
+B3BD6C:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, $B3BD77)   ;B3BD6C
     %AICMD0x09($0B, $B3C127)                                   ;B3BD73
+B3BD77:
     %AICMD0x12_Jump($B3BD49)                                   ;B3BD77
+B3BD7A:
     %AICMD0x1A($0080, $0090, $B38354, $00)                     ;B3BD7A
     %AICMD0x4D($B3BD8D)                                        ;B3BD82
     %AICMD0x2D($B3BDAA, $B3BD94)                               ;B3BD85
@@ -5642,13 +6145,16 @@ DATA8_B3BD2D:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3BDA3)         ;B3BD94
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3BD9C
     %AICMD0x12_Jump($B3BD82)                                   ;B3BDA0
+B3BDA3:
     %AICMD0x1C_ShowDialog($03B0, $00)                          ;B3BDA3
     %AICMD0x12_Jump($B3BD82)                                   ;B3BDA7
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0C, $B3BDB8)   ;B3BDAA
     %AICMD0x1C_ShowDialog($0059, $00)                          ;B3BDB1
     %AICMD0x12_Jump($B3BD82)                                   ;B3BDB5
+B3BDB8:
     %AICMD0x1C_ShowDialog($01CF, $00)                          ;B3BDB8
     %AICMD0x12_Jump($B3BD82)                                   ;B3BDBC
+B3BDBF:
     %AICMD0x1A($0058, $0118, $B38300, $01)                     ;B3BDBF
     %AICMD0x4D($B3BDD2)                                        ;B3BDC7
     %AICMD0x2D($B3BDFB, $B3BDDD)                               ;B3BDCA
@@ -5660,6 +6166,7 @@ DATA8_B3BD2D:
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3BDE5
     %AICMD0x1B($0291, $00)                                     ;B3BDE9
     %AICMD0x12_Jump($B3BDC7)                                   ;B3BDED
+B3BDF0:
     %AICMD0x1C_ShowDialog($03B8, $00)                          ;B3BDF0
     %AICMD0x1B($0291, $00)                                     ;B3BDF4
     %AICMD0x12_Jump($B3BDC7)                                   ;B3BDF8
@@ -5667,10 +6174,13 @@ DATA8_B3BD2D:
     %AICMD0x1C_ShowDialog($0037, $00)                          ;B3BE02
     %AICMD0x1B($0291, $00)                                     ;B3BE06
     %AICMD0x12_Jump($B3BDC7)                                   ;B3BE0A
+B3BE0D:
     %AICMD0x1C_ShowDialog($01CD, $00)                          ;B3BE0D
     %AICMD0x1B($0291, $00)                                     ;B3BE11
     %AICMD0x12_Jump($B3BDC7)                                   ;B3BE15
+B3BE18:
     %AICMD0x1A($0038, $0118, $B383D8, $01)                     ;B3BE18
+B3BE20:
     %AICMD0x4D($B3BE2B)                                        ;B3BE20
     %AICMD0x2D($B3BE54, $B3BE36)                               ;B3BE23
     %AICMD0x12_Jump($B3BE20)                                   ;B3BE28
@@ -5681,6 +6191,7 @@ DATA8_B3BD2D:
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3BE3E
     %AICMD0x1B($02C6, $00)                                     ;B3BE42
     %AICMD0x12_Jump($B3BE20)                                   ;B3BE46
+B3BE49:
     %AICMD0x1C_ShowDialog($03B9, $00)                          ;B3BE49
     %AICMD0x1B($02C6, $00)                                     ;B3BE4D
     %AICMD0x12_Jump($B3BE20)                                   ;B3BE51
@@ -5688,9 +6199,11 @@ DATA8_B3BD2D:
     %AICMD0x1C_ShowDialog($003C, $00)                          ;B3BE5B
     %AICMD0x1B($02C6, $00)                                     ;B3BE5F
     %AICMD0x12_Jump($B3BE20)                                   ;B3BE63
+B3BE66:
     %AICMD0x1C_ShowDialog($01CE, $00)                          ;B3BE66
     %AICMD0x1B($02C6, $00)                                     ;B3BE6A
     %AICMD0x12_Jump($B3BE20)                                   ;B3BE6E
+B3BE71:
     %AICMD0x1A($00A8, $0118, $B38318, $01)                     ;B3BE71
     %AICMD0x4D($B3BE84)                                        ;B3BE79
     %AICMD0x2D($B3BEAD, $B3BE8F)                               ;B3BE7C
@@ -5702,6 +6215,7 @@ DATA8_B3BD2D:
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3BE97
     %AICMD0x1B($0298, $00)                                     ;B3BE9B
     %AICMD0x12_Jump($B3BE79)                                   ;B3BE9F
+B3BEA2:
     %AICMD0x1C_ShowDialog($0049, $00)                          ;B3BEA2
     %AICMD0x1B($0298, $00)                                     ;B3BEA6
     %AICMD0x12_Jump($B3BE79)                                   ;B3BEAA
@@ -5709,9 +6223,11 @@ DATA8_B3BD2D:
     %AICMD0x1C_ShowDialog($0042, $00)                          ;B3BEB4
     %AICMD0x1B($0298, $00)                                     ;B3BEB8
     %AICMD0x12_Jump($B3BE79)                                   ;B3BEBC
+B3BEBF:
     %AICMD0x1C_ShowDialog($01DC, $00)                          ;B3BEBF
     %AICMD0x1B($0298, $00)                                     ;B3BEC3
     %AICMD0x12_Jump($B3BE79)                                   ;B3BEC7
+B3BECA:
     %AICMD0x1A($00D8, $0118, $B38414, $01)                     ;B3BECA
     %AICMD0x4D($B3BEDD)                                        ;B3BED2
     %AICMD0x2D($B3BEFA, $B3BEE4)                               ;B3BED5
@@ -5721,10 +6237,12 @@ DATA8_B3BD2D:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3BEF3)         ;B3BEE4
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3BEEC
     %AICMD0x12_Jump($B3BED2)                                   ;B3BEF0
+B3BEF3:
     %AICMD0x1C_ShowDialog($03B9, $00)                          ;B3BEF3
     %AICMD0x12_Jump($B3BED2)                                   ;B3BEF7
     %AICMD0x1C_ShowDialog($0048, $00)                          ;B3BEFA
     %AICMD0x12_Jump($B3BED2)                                   ;B3BEFE
+B3BF01:
     %AICMD0x1A($0048, $0158, $B38330, $01)                     ;B3BF01
     %AICMD0x4D($B3BF14)                                        ;B3BF09
     %AICMD0x2D($B3BF3D, $B3BF1F)                               ;B3BF0C
@@ -5736,6 +6254,7 @@ DATA8_B3BD2D:
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3BF27
     %AICMD0x1B($029F, $00)                                     ;B3BF2B
     %AICMD0x12_Jump($B3BF09)                                   ;B3BF2F
+B3BF32:
     %AICMD0x1C_ShowDialog($03BB, $00)                          ;B3BF32
     %AICMD0x1B($029F, $00)                                     ;B3BF36
     %AICMD0x12_Jump($B3BF09)                                   ;B3BF3A
@@ -5743,9 +6262,11 @@ DATA8_B3BD2D:
     %AICMD0x1C_ShowDialog($004E, $00)                          ;B3BF44
     %AICMD0x1B($029F, $00)                                     ;B3BF48
     %AICMD0x12_Jump($B3BF09)                                   ;B3BF4C
+B3BF4F:
     %AICMD0x1C_ShowDialog($01ED, $00)                          ;B3BF4F
     %AICMD0x1B($029F, $00)                                     ;B3BF53
     %AICMD0x12_Jump($B3BF09)                                   ;B3BF57
+B3BF5A:
     %AICMD0x1A($00C1, $0088, $B38180, $01)                     ;B3BF5A
     %AICMD0x4D($B3BF76)                                        ;B3BF62
     %AICMD0x2D($B3C00A, $B3BF8E)                               ;B3BF65
@@ -5756,6 +6277,7 @@ DATA8_B3BD2D:
     %AICMD0x45_JumpIfBetween16(nLove_Maria, 0, 249, $B3BF87)   ;B3BF76
     %AICMD0x1C_ShowDialog($043D, $00)                          ;B3BF80
     %AICMD0x12_Jump($B3BF62)                                   ;B3BF84
+B3BF87:
     %AICMD0x1C_ShowDialog($0174, $00)                          ;B3BF87
     %AICMD0x12_Jump($B3BF62)                                   ;B3BF8B
     %AICMD0x15_JumpIfEquals8($80091E, 2, $B3BFC9)              ;B3BF8E
@@ -5767,18 +6289,23 @@ DATA8_B3BD2D:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3BFFD)         ;B3BFBA
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3BFC2
     %AICMD0x12_Jump($B3BF62)                                   ;B3BFC6
+B3BFC9:
     %AICMD0x1C_ShowDialog($03B0, $00)                          ;B3BFC9
     %AICMD0x41_AddValue16(nLove_Maria, -8)                     ;B3BFCD
     %AICMD0x12_Jump($B3BF62)                                   ;B3BFD3
+B3BFD6:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B3BFD6
     %AICMD0x41_AddValue16(nLove_Maria, 4)                      ;B3BFDA
     %AICMD0x12_Jump($B3BF62)                                   ;B3BFE0
+B3BFE3:
     %AICMD0x1C_ShowDialog($03B5, $00)                          ;B3BFE3
     %AICMD0x41_AddValue16(nLove_Maria, 3)                      ;B3BFE7
     %AICMD0x12_Jump($B3BF62)                                   ;B3BFED
+B3BFF0:
     %AICMD0x1C_ShowDialog($03B2, $00)                          ;B3BFF0
     %AICMD0x41_AddValue16(nLove_Maria, 5)                      ;B3BFF4
     %AICMD0x12_Jump($B3BF62)                                   ;B3BFFA
+B3BFFD:
     %AICMD0x1C_ShowDialog($01DA, $00)                          ;B3BFFD
     %AICMD0x41_AddValue16(nLove_Maria, -2)                     ;B3C001
     %AICMD0x12_Jump($B3BF62)                                   ;B3C007
@@ -5786,14 +6313,18 @@ DATA8_B3BD2D:
     %AICMD0x20_JumpIfChoice(0, $B3C019)                        ;B3C00E
     %AICMD0x20_JumpIfChoice(1, $B3C026)                        ;B3C012
     %AICMD0x12_Jump($B3BF62)                                   ;B3C016
+B3C019:
     %AICMD0x1C_ShowDialog($008F, $00)                          ;B3C019
     %AICMD0x41_AddValue16(nLove_Maria, 4)                      ;B3C01D
     %AICMD0x12_Jump($B3BF6D)                                   ;B3C023
+B3C026:
     %AICMD0x1C_ShowDialog($0090, $00)                          ;B3C026
     %AICMD0x41_AddValue16(nLove_Maria, 1)                      ;B3C02A
     %AICMD0x12_Jump($B3BF6D)                                   ;B3C030
+B3C033:
     %AICMD0x1C_ShowDialog($0088, $00)                          ;B3C033
     %AICMD0x12_Jump($B3BF6D)                                   ;B3C037
+B3C03A:
     %AICMD0x1A($00D8, $0198, $B38198, $01)                     ;B3C03A
     %AICMD0x4D($B3C056)                                        ;B3C042
     %AICMD0x2D($B3C0DD, $B3C06E)                               ;B3C045
@@ -5804,6 +6335,7 @@ DATA8_B3BD2D:
     %AICMD0x45_JumpIfBetween16(nLove_Ann, 0, 249, $B3C067)     ;B3C056
     %AICMD0x1C_ShowDialog($043E, $00)                          ;B3C060
     %AICMD0x12_Jump($B3C042)                                   ;B3C064
+B3C067:
     %AICMD0x1C_ShowDialog($0176, $00)                          ;B3C067
     %AICMD0x12_Jump($B3C042)                                   ;B3C06B
     %AICMD0x15_JumpIfEquals8($80091E, 2, $B3C0A9)              ;B3C06E
@@ -5815,15 +6347,19 @@ DATA8_B3BD2D:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3C0D0)         ;B3C09A
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3C0A2
     %AICMD0x12_Jump($B3C042)                                   ;B3C0A6
+B3C0A9:
     %AICMD0x1C_ShowDialog($03B4, $00)                          ;B3C0A9
     %AICMD0x41_AddValue16(nLove_Ann, -8)                       ;B3C0AD
     %AICMD0x12_Jump($B3C042)                                   ;B3C0B3
+B3C0B6:
     %AICMD0x1C_ShowDialog($03B2, $00)                          ;B3C0B6
     %AICMD0x41_AddValue16(nLove_Ann, 5)                        ;B3C0BA
     %AICMD0x12_Jump($B3C042)                                   ;B3C0C0
+B3C0C3:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B3C0C3
     %AICMD0x41_AddValue16(nLove_Ann, 2)                        ;B3C0C7
     %AICMD0x12_Jump($B3C042)                                   ;B3C0CD
+B3C0D0:
     %AICMD0x1C_ShowDialog($03B4, $00)                          ;B3C0D0
     %AICMD0x41_AddValue16(nLove_Ann, -2)                       ;B3C0D4
     %AICMD0x12_Jump($B3C042)                                   ;B3C0DA
@@ -5832,19 +6368,24 @@ DATA8_B3BD2D:
     %AICMD0x20_JumpIfChoice(0, $B3C0F3)                        ;B3C0E8
     %AICMD0x20_JumpIfChoice(1, $B3C104)                        ;B3C0EC
     %AICMD0x12_Jump($B3C042)                                   ;B3C0F0
+B3C0F3:
     %AICMD0x1C_ShowDialog($00A3, $00)                          ;B3C0F3
     %AICMD0x1B($0228, $00)                                     ;B3C0F7
     %AICMD0x41_AddValue16(nLove_Ann, 4)                        ;B3C0FB
     %AICMD0x12_Jump($B3C04D)                                   ;B3C101
+B3C104:
     %AICMD0x1C_ShowDialog($00A4, $00)                          ;B3C104
     %AICMD0x41_AddValue16(nLove_Ann, 1)                        ;B3C108
     %AICMD0x1B($0228, $00)                                     ;B3C10E
     %AICMD0x12_Jump($B3C04D)                                   ;B3C112
+B3C115:
     %AICMD0x1B($0228, $00)                                     ;B3C115
     %AICMD0x1C_ShowDialog($02C2, $00)                          ;B3C119
     %AICMD0x12_Jump($B3C04D)                                   ;B3C11D
+B3C120:
     %AICMD0x1C_ShowDialog($01DE, $00)                          ;B3C120
     %AICMD0x12_Jump($B3C042)                                   ;B3C124
+B3C127:
     %AICMD0x1A($0048, $0198, $B381F8, $01)                     ;B3C127
     %AICMD0x4D($B3C13A)                                        ;B3C12F
     %AICMD0x2D($B3C1CF, $B3C152)                               ;B3C132
@@ -5852,6 +6393,7 @@ DATA8_B3BD2D:
     %AICMD0x45_JumpIfBetween16(nLove_Ellen, 0, 249, $B3C14B)   ;B3C13A
     %AICMD0x1C_ShowDialog($0440, $00)                          ;B3C144
     %AICMD0x12_Jump($B3C12F)                                   ;B3C148
+B3C14B:
     %AICMD0x1C_ShowDialog($017A, $00)                          ;B3C14B
     %AICMD0x12_Jump($B3C12F)                                   ;B3C14F
     %AICMD0x15_JumpIfEquals8($80091E, 2, $B3C18E)              ;B3C152
@@ -5863,30 +6405,35 @@ DATA8_B3BD2D:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3C1C2)         ;B3C17F
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3C187
     %AICMD0x12_Jump($B3C12F)                                   ;B3C18B
+B3C18E:
     %AICMD0x1C_ShowDialog($03B0, $00)                          ;B3C18E
     %AICMD0x41_AddValue16(nLove_Ellen, -8)                     ;B3C192
     %AICMD0x12_Jump($B3C12F)                                   ;B3C198
+B3C19B:
     %AICMD0x1C_ShowDialog($03B2, $00)                          ;B3C19B
     %AICMD0x41_AddValue16(nLove_Ellen, 5)                      ;B3C19F
     %AICMD0x12_Jump($B3C12F)                                   ;B3C1A5
+B3C1A8:
     %AICMD0x1C_ShowDialog($03B3, $00)                          ;B3C1A8
     %AICMD0x41_AddValue16(nLove_Ellen, 8)                      ;B3C1AC
     %AICMD0x12_Jump($B3C12F)                                   ;B3C1B2
+B3C1B5:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B3C1B5
     %AICMD0x41_AddValue16(nLove_Ellen, 5)                      ;B3C1B9
     %AICMD0x12_Jump($B3C12F)                                   ;B3C1BF
+B3C1C2:
     %AICMD0x1C_ShowDialog($01DA, $00)                          ;B3C1C2
     %AICMD0x41_AddValue16(nLove_Ellen, -2)                     ;B3C1C6
     %AICMD0x12_Jump($B3C12F)                                   ;B3C1CC
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $02, $B3C1DD)   ;B3C1CF
     %AICMD0x1C_ShowDialog($00D1, $00)                          ;B3C1D6
     %AICMD0x12_Jump($B3C12F)                                   ;B3C1DA
+B3C1DD:
     %AICMD0x1C_ShowDialog($01EE, $00)                          ;B3C1DD
     %AICMD0x12_Jump($B3C12F)                                   ;B3C1E1
 
 
 DATA8_B3C1E4:
- 
     %AICMD0x11_EnableUserControl()                             ;B3C1E4
     %AICMD0x09($01, $B3C482)                                   ;B3C1E5
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $04, $B3C1FD)   ;B3C1E9
@@ -5894,13 +6441,17 @@ DATA8_B3C1E4:
     %AICMD0x12_Jump($B3C1FD)                                   ;B3C1F4
     %AICMD0x13_Wait(1)                                         ;B3C1F7
     %AICMD0x12_Jump($B3C1F7)                                   ;B3C1FA
+B3C1FD:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, $B3C20F)   ;B3C1FD
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $04, $B3C20F)   ;B3C204
     %AICMD0x09($03, $B3C273)                                   ;B3C20B
+B3C20F:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, $B3C221)   ;B3C20F
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $00, $B3C221)   ;B3C216
     %AICMD0x09($04, $B3C2DF)                                   ;B3C21D
+B3C221:
     %AICMD0x12_Jump($B3C1F7)                                   ;B3C221
+B3C224:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3C26B) ;B3C224
     %AICMD0x1A($0068, $0038, $B382D0, $00)                     ;B3C22C
     %AICMD0x4D($B3C23F)                                        ;B3C234
@@ -5911,20 +6462,25 @@ DATA8_B3C1E4:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3C255)         ;B3C246
     %AICMD0x1C_ShowDialog($03BC, $00)                          ;B3C24E
     %AICMD0x12_Jump($B3C234)                                   ;B3C252
+B3C255:
     %AICMD0x1C_ShowDialog($0049, $00)                          ;B3C255
     %AICMD0x12_Jump($B3C234)                                   ;B3C259
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3C26C) ;B3C25C
     %AICMD0x1C_ShowDialog($007D, $00)                          ;B3C264
     %AICMD0x12_Jump($B3C234)                                   ;B3C268
+B3C26B:
     %AICMD0x10_End()                                           ;B3C26B
+B3C26C:
     %AICMD0x1C_ShowDialog($0392, $00)                          ;B3C26C
     %AICMD0x12_Jump($B3C234)                                   ;B3C270
+B3C273:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3C2DE) ;B3C273
     %AICMD0x1A($02A0, $00D8, $B38228, $00)                     ;B3C27B
     %AICMD0x1F($B3C28F)                                        ;B3C283
     %AICMD0x12_Jump($B3C283)                                   ;B3C286
     %AICMD0x1F($B3C2C9)                                        ;B3C289
     %AICMD0x12_Jump($B3C289)                                   ;B3C28C
+B3C28F:
     %AICMD0x17($02)                                            ;B3C28F
     %AICMD0x18($00, $B3C2A0)                                   ;B3C291
     %AICMD0x18($01, $B3C2D0)                                   ;B3C295
@@ -5934,19 +6490,24 @@ DATA8_B3C1E4:
     %AICMD0x20_JumpIfChoice(0, $B3C2AF)                        ;B3C2A4
     %AICMD0x20_JumpIfChoice(1, $B3C2BC)                        ;B3C2A8
     %AICMD0x12_Jump($B3C289)                                   ;B3C2AC
+B3C2AF:
     %AICMD0x1C_ShowDialog($00E3, $00)                          ;B3C2AF
     %AICMD0x41_AddValue16(nLove_Eve, 8)                        ;B3C2B3
     %AICMD0x12_Jump($B3C289)                                   ;B3C2B9
+B3C2BC:
     %AICMD0x1C_ShowDialog($00E4, $00)                          ;B3C2BC
     %AICMD0x41_AddValue16(nLove_Eve, 2)                        ;B3C2C0
     %AICMD0x12_Jump($B3C289)                                   ;B3C2C6
+B3C2C9:
     %AICMD0x1C_ShowDialog($00DD, $00)                          ;B3C2C9
     %AICMD0x12_Jump($B3C289)                                   ;B3C2CD
     %AICMD0x1C_ShowDialog($040A, $00)                          ;B3C2D0
     %AICMD0x12_Jump($B3C289)                                   ;B3C2D4
     %AICMD0x1C_ShowDialog($040B, $00)                          ;B3C2D7
     %AICMD0x12_Jump($B3C289)                                   ;B3C2DB
+B3C2DE:
     %AICMD0x10_End()                                           ;B3C2DE
+B3C2DF:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3C3DF) ;B3C2DF
     %AICMD0x1A($0028, $00C8, $B381D4, $00)                     ;B3C2E7
     %AICMD0x4D($B3C30E)                                        ;B3C2EF
@@ -5965,6 +6526,7 @@ DATA8_B3C1E4:
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $09)       ;B3C326
     %AICMD0x3D_TeleportToArea(!AREA_WEDDINGSPRING)             ;B3C32B
     %AICMD0x10_End()                                           ;B3C32D
+B3C32E:
     %AICMD0x1C_ShowDialog($0178, $00)                          ;B3C32E
     %AICMD0x12_Jump($B3C2EF)                                   ;B3C332
     %AICMD0x15_JumpIfEquals8($80091E, 2, $B3C39E)              ;B3C335
@@ -5977,18 +6539,23 @@ DATA8_B3C1E4:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3C39E)         ;B3C368
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3C370
     %AICMD0x12_Jump($B3C2EF)                                   ;B3C374
+B3C377:
     %AICMD0x1C_ShowDialog($03B2, $00)                          ;B3C377
     %AICMD0x41_AddValue16(nLove_Nina, 3)                       ;B3C37B
     %AICMD0x12_Jump($B3C2EF)                                   ;B3C381
+B3C384:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B3C384
     %AICMD0x41_AddValue16(nLove_Nina, 8)                       ;B3C388
     %AICMD0x12_Jump($B3C2EF)                                   ;B3C38E
+B3C391:
     %AICMD0x1C_ShowDialog($03B1, $00)                          ;B3C391
     %AICMD0x41_AddValue16(nLove_Nina, -6)                      ;B3C395
     %AICMD0x12_Jump($B3C2EF)                                   ;B3C39B
+B3C39E:
     %AICMD0x1C_ShowDialog($01D9, $00)                          ;B3C39E
     %AICMD0x41_AddValue16(nLove_Nina, -4)                      ;B3C3A2
     %AICMD0x12_Jump($B3C2EF)                                   ;B3C3A8
+B3C3AB:
     %AICMD0x1C_ShowDialog($0143, $00)                          ;B3C3AB
     %AICMD0x41_AddValue16(nLove_Nina, 4)                       ;B3C3AF
     %AICMD0x12_Jump($B3C2EF)                                   ;B3C3B5
@@ -5997,46 +6564,61 @@ DATA8_B3C1E4:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 7, 16, $B3C3E0)  ;B3C3CC
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3C47B) ;B3C3D4
     %AICMD0x12_Jump($B3C2EF)                                   ;B3C3DC
+B3C3DF:
     %AICMD0x10_End()                                           ;B3C3DF
+B3C3E0:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, $B3C3FF)     ;B3C3E0
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, $B3C406)     ;B3C3E7
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, $B3C40D)     ;B3C3EE
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B3C414)     ;B3C3F5
     %AICMD0x12_Jump($B3C2EF)                                   ;B3C3FC
+B3C3FF:
     %AICMD0x1C_ShowDialog($00B9, $00)                          ;B3C3FF
     %AICMD0x12_Jump($B3C2FA)                                   ;B3C403
+B3C406:
     %AICMD0x1C_ShowDialog($00BA, $00)                          ;B3C406
     %AICMD0x12_Jump($B3C2FA)                                   ;B3C40A
+B3C40D:
     %AICMD0x1C_ShowDialog($00BB, $00)                          ;B3C40D
     %AICMD0x12_Jump($B3C2FA)                                   ;B3C411
+B3C414:
     %AICMD0x1D_ShowDialog($00BC, $00)                          ;B3C414
     %AICMD0x20_JumpIfChoice(0, $B3C423)                        ;B3C418
     %AICMD0x20_JumpIfChoice(1, $B3C430)                        ;B3C41C
     %AICMD0x12_Jump($B3C2EF)                                   ;B3C420
+B3C423:
     %AICMD0x1C_ShowDialog($00BD, $00)                          ;B3C423
     %AICMD0x41_AddValue16(nLove_Nina, 4)                       ;B3C427
     %AICMD0x12_Jump($B3C2FA)                                   ;B3C42D
+B3C430:
     %AICMD0x1C_ShowDialog($00BE, $00)                          ;B3C430
     %AICMD0x41_AddValue16(nLove_Nina, 1)                       ;B3C434
     %AICMD0x12_Jump($B3C305)                                   ;B3C43A
     %AICMD0x1C_ShowDialog($00BD, $00)                          ;B3C43D
     %AICMD0x12_Jump($B3C2FA)                                   ;B3C441
+B3C444:
     %AICMD0x1C_ShowDialog($00C1, $00)                          ;B3C444
     %AICMD0x12_Jump($B3C2EF)                                   ;B3C448
+B3C44B:
     %AICMD0x1D_ShowDialog($00C2, $00)                          ;B3C44B
     %AICMD0x20_JumpIfChoice(0, $B3C45A)                        ;B3C44F
     %AICMD0x20_JumpIfChoice(1, $B3C467)                        ;B3C453
     %AICMD0x12_Jump($B3C2EF)                                   ;B3C457
+B3C45A:
     %AICMD0x1C_ShowDialog($00C3, $00)                          ;B3C45A
     %AICMD0x41_AddValue16(nLove_Nina, 10)                      ;B3C45E
     %AICMD0x12_Jump($B3C2FA)                                   ;B3C464
+B3C467:
     %AICMD0x1C_ShowDialog($00C4, $00)                          ;B3C467
     %AICMD0x41_AddValue16(nLove_Nina, 2)                       ;B3C46B
     %AICMD0x12_Jump($B3C305)                                   ;B3C471
+B3C474:
     %AICMD0x1C_ShowDialog($00B1, $00)                          ;B3C474
     %AICMD0x12_Jump($B3C305)                                   ;B3C478
+B3C47B:
     %AICMD0x1C_ShowDialog($0391, $00)                          ;B3C47B
     %AICMD0x12_Jump($B3C2EF)                                   ;B3C47F
+B3C482:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3C506) ;B3C482
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B3C506)     ;B3C48A
     %AICMD0x1A($0258, $0178, $B38270, $00)                     ;B3C491
@@ -6050,6 +6632,7 @@ DATA8_B3C1E4:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3C4C2)         ;B3C4B3
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3C4BB
     %AICMD0x12_Jump($B3C499)                                   ;B3C4BF
+B3C4C2:
     %AICMD0x1C_ShowDialog($03B8, $00)                          ;B3C4C2
     %AICMD0x12_Jump($B3C499)                                   ;B3C4C6
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3C4FF) ;B3C4C9
@@ -6057,16 +6640,20 @@ DATA8_B3C1E4:
     %AICMD0x20_JumpIfChoice(0, $B3C4E0)                        ;B3C4D5
     %AICMD0x20_JumpIfChoice(1, $B3C4EC)                        ;B3C4D9
     %AICMD0x12_Jump($B3C499)                                   ;B3C4DD
+B3C4E0:
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily1, $09)       ;B3C4E0
     %AICMD0x1C_ShowDialog($007F, $00)                          ;B3C4E5
     %AICMD0x12_Jump($B3C4A1)                                   ;B3C4E9
+B3C4EC:
     %AICMD0x1C_ShowDialog($0080, $00)                          ;B3C4EC
     %AICMD0x12_Jump($B3C499)                                   ;B3C4F0
     %AICMD0x28(strcFlags.daily1, $09)                          ;B3C4F3
     %AICMD0x1C_ShowDialog($0081, $00)                          ;B3C4F8
     %AICMD0x12_Jump($B3C499)                                   ;B3C4FC
+B3C4FF:
     %AICMD0x1C_ShowDialog($0081, $00)                          ;B3C4FF
     %AICMD0x12_Jump($B3C499)                                   ;B3C503
+B3C506:
     %AICMD0x10_End()                                           ;B3C506
 
 
@@ -6096,10 +6683,13 @@ DATA8_B3C527:
     %AICMD0x12_Jump($B3C539)                                   ;B3C530
     %AICMD0x13_Wait(1)                                         ;B3C533
     %AICMD0x12_Jump($B3C533)                                   ;B3C536
+B3C539:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, $B3C54B)   ;B3C539
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0C, $B3C54B)   ;B3C540
     %AICMD0x09($03, $B3C600)                                   ;B3C547
+B3C54B:
     %AICMD0x12_Jump($B3C533)                                   ;B3C54B
+B3C54E:
     %AICMD0x1A($00C8, $0078, $B38300, $00)                     ;B3C54E
     %AICMD0x4D($B3C561)                                        ;B3C556
     %AICMD0x2D($B3C57E, $B3C568)                               ;B3C559
@@ -6109,16 +6699,20 @@ DATA8_B3C527:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3C577)         ;B3C568
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3C570
     %AICMD0x12_Jump($B3C556)                                   ;B3C574
+B3C577:
     %AICMD0x1C_ShowDialog($03B8, $00)                          ;B3C577
     %AICMD0x12_Jump($B3C556)                                   ;B3C57B
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0C, $B3C59A)   ;B3C57E
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, $B3C593)     ;B3C585
     %AICMD0x1C_ShowDialog($0039, $00)                          ;B3C58C
     %AICMD0x12_Jump($B3C556)                                   ;B3C590
+B3C593:
     %AICMD0x1C_ShowDialog($03BE, $00)                          ;B3C593
     %AICMD0x12_Jump($B3C556)                                   ;B3C597
+B3C59A:
     %AICMD0x1C_ShowDialog($01CD, $00)                          ;B3C59A
     %AICMD0x12_Jump($B3C556)                                   ;B3C59E
+B3C5A1:
     %AICMD0x1A($0188, $00A0, $B383F0, $00)                     ;B3C5A1
     %AICMD0x4D($B3C5B4)                                        ;B3C5A9
     %AICMD0x2D($B3C5D1, $B3C5BB)                               ;B3C5AC
@@ -6128,18 +6722,23 @@ DATA8_B3C527:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3C5CA)         ;B3C5BB
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3C5C3
     %AICMD0x12_Jump($B3C5A9)                                   ;B3C5C7
+B3C5CA:
     %AICMD0x1C_ShowDialog($03B9, $00)                          ;B3C5CA
     %AICMD0x12_Jump($B3C5A9)                                   ;B3C5CE
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0C, $B3C5F9)   ;B3C5D1
     %AICMD0x16_JumpIfBetween8(nCurrentSeasonID, 0, 1, $B3C5EB) ;B3C5D8
     %AICMD0x16_JumpIfBetween8(nCurrentSeasonID, 2, 3, $B3C5F2) ;B3C5E0
     %AICMD0x12_Jump($B3C5A9)                                   ;B3C5E8
+B3C5EB:
     %AICMD0x1C_ShowDialog($003E, $00)                          ;B3C5EB
     %AICMD0x12_Jump($B3C5A9)                                   ;B3C5EF
+B3C5F2:
     %AICMD0x1C_ShowDialog($003F, $00)                          ;B3C5F2
     %AICMD0x12_Jump($B3C5A9)                                   ;B3C5F6
+B3C5F9:
     %AICMD0x1C_ShowDialog($01CE, $00)                          ;B3C5F9
     %AICMD0x12_Jump($B3C5A9)                                   ;B3C5FD
+B3C600:
     %AICMD0x1A($0048, $0198, $B38168, $00)                     ;B3C600
     %AICMD0x4D($B3C613)                                        ;B3C608
     %AICMD0x2D($B3C6A7, $B3C62B)                               ;B3C60B
@@ -6147,6 +6746,7 @@ DATA8_B3C527:
     %AICMD0x45_JumpIfBetween16(nLove_Maria, 0, 249, $B3C624)   ;B3C613
     %AICMD0x1C_ShowDialog($043D, $00)                          ;B3C61D
     %AICMD0x12_Jump($B3C608)                                   ;B3C621
+B3C624:
     %AICMD0x1C_ShowDialog($0174, $00)                          ;B3C624
     %AICMD0x12_Jump($B3C608)                                   ;B3C628
     %AICMD0x15_JumpIfEquals8($80091E, 2, $B3C666)              ;B3C62B
@@ -6158,18 +6758,23 @@ DATA8_B3C527:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3C69A)         ;B3C657
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3C65F
     %AICMD0x12_Jump($B3C608)                                   ;B3C663
+B3C666:
     %AICMD0x1C_ShowDialog($03B0, $00)                          ;B3C666
     %AICMD0x41_AddValue16(nLove_Maria, -8)                     ;B3C66A
     %AICMD0x12_Jump($B3C608)                                   ;B3C670
+B3C673:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B3C673
     %AICMD0x41_AddValue16(nLove_Maria, 4)                      ;B3C677
     %AICMD0x12_Jump($B3C608)                                   ;B3C67D
+B3C680:
     %AICMD0x1C_ShowDialog($03B5, $00)                          ;B3C680
     %AICMD0x41_AddValue16(nLove_Maria, 3)                      ;B3C684
     %AICMD0x12_Jump($B3C608)                                   ;B3C68A
+B3C68D:
     %AICMD0x1C_ShowDialog($03B2, $00)                          ;B3C68D
     %AICMD0x41_AddValue16(nLove_Maria, 5)                      ;B3C691
     %AICMD0x12_Jump($B3C608)                                   ;B3C697
+B3C69A:
     %AICMD0x1C_ShowDialog($01D9, $00)                          ;B3C69A
     %AICMD0x41_AddValue16(nLove_Maria, -2)                     ;B3C69E
     %AICMD0x12_Jump($B3C608)                                   ;B3C6A4
@@ -6183,6 +6788,7 @@ DATA8_B3C6AE:
     %AICMD0x09($01, $B3C6B9)                                   ;B3C6AF
     %AICMD0x13_Wait(1)                                         ;B3C6B3
     %AICMD0x12_Jump($B3C6B3)                                   ;B3C6B6
+B3C6B9:
     %AICMD0x1A($0068, $00E8, $B38354, $00)                     ;B3C6B9
     %AICMD0x4D($B3C6CC)                                        ;B3C6C1
     %AICMD0x2D($B3C6E9, $B3C6D3)                               ;B3C6C4
@@ -6192,11 +6798,13 @@ DATA8_B3C6AE:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3C6E2)         ;B3C6D3
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3C6DB
     %AICMD0x12_Jump($B3C6C1)                                   ;B3C6DF
+B3C6E2:
     %AICMD0x1C_ShowDialog($03B0, $00)                          ;B3C6E2
     %AICMD0x12_Jump($B3C6C1)                                   ;B3C6E6
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0C, $B3C6F7)   ;B3C6E9
     %AICMD0x1C_ShowDialog($005B, $00)                          ;B3C6F0
     %AICMD0x12_Jump($B3C6C1)                                   ;B3C6F4
+B3C6F7:
     %AICMD0x1C_ShowDialog($01CF, $00)                          ;B3C6F7
     %AICMD0x12_Jump($B3C6C1)                                   ;B3C6FB
 
@@ -6208,10 +6816,13 @@ DATA8_B3C6FE:
     %AICMD0x12_Jump($B3C70C)                                   ;B3C703
     %AICMD0x13_Wait(1)                                         ;B3C706
     %AICMD0x12_Jump($B3C706)                                   ;B3C709
+B3C70C:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, $B3C71E)   ;B3C70C
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $00, $B3C71E)   ;B3C713
     %AICMD0x09($02, $B3C758)                                   ;B3C71A
+B3C71E:
     %AICMD0x12_Jump($B3C706)                                   ;B3C71E
+B3C721:
     %AICMD0x1A($0028, $0168, $B383FC, $02)                     ;B3C721
     %AICMD0x4D($B3C734)                                        ;B3C729
     %AICMD0x2D($B3C751, $B3C73B)                               ;B3C72C
@@ -6221,18 +6832,22 @@ DATA8_B3C6FE:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3C74A)         ;B3C73B
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3C743
     %AICMD0x12_Jump($B3C729)                                   ;B3C747
+B3C74A:
     %AICMD0x1C_ShowDialog($03B9, $00)                          ;B3C74A
     %AICMD0x12_Jump($B3C729)                                   ;B3C74E
     %AICMD0x1C_ShowDialog($004B, $00)                          ;B3C751
     %AICMD0x12_Jump($B3C729)                                   ;B3C755
+B3C758:
     %AICMD0x1A($0058, $00B0, $B381C8, $00)                     ;B3C758
     %AICMD0x12_Jump($B3C763)                                   ;B3C760
+B3C763:
     %AICMD0x4D($B3C76E)                                        ;B3C763
     %AICMD0x2D($B3C809, $B3C786)                               ;B3C766
     %AICMD0x12_Jump($B3C763)                                   ;B3C76B
     %AICMD0x45_JumpIfBetween16(nLove_Nina, 0, 249, $B3C77F)    ;B3C76E
     %AICMD0x1C_ShowDialog($043F, $00)                          ;B3C778
     %AICMD0x12_Jump($B3C763)                                   ;B3C77C
+B3C77F:
     %AICMD0x1C_ShowDialog($0178, $00)                          ;B3C77F
     %AICMD0x12_Jump($B3C763)                                   ;B3C783
     %AICMD0x15_JumpIfEquals8($80091E, 2, $B3C7EF)              ;B3C786
@@ -6245,18 +6860,23 @@ DATA8_B3C6FE:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3C7EF)         ;B3C7B9
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3C7C1
     %AICMD0x12_Jump($B3C763)                                   ;B3C7C5
+B3C7C8:
     %AICMD0x1C_ShowDialog($03B2, $00)                          ;B3C7C8
     %AICMD0x41_AddValue16(nLove_Nina, 2)                       ;B3C7CC
     %AICMD0x12_Jump($B3C763)                                   ;B3C7D2
+B3C7D5:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B3C7D5
     %AICMD0x41_AddValue16(nLove_Nina, 8)                       ;B3C7D9
     %AICMD0x12_Jump($B3C763)                                   ;B3C7DF
+B3C7E2:
     %AICMD0x1C_ShowDialog($03B1, $00)                          ;B3C7E2
     %AICMD0x41_AddValue16(nLove_Nina, -6)                      ;B3C7E6
     %AICMD0x12_Jump($B3C763)                                   ;B3C7EC
+B3C7EF:
     %AICMD0x1C_ShowDialog($01D9, $00)                          ;B3C7EF
     %AICMD0x41_AddValue16(nLove_Nina, -4)                      ;B3C7F3
     %AICMD0x12_Jump($B3C763)                                   ;B3C7F9
+B3C7FC:
     %AICMD0x1C_ShowDialog($0143, $00)                          ;B3C7FC
     %AICMD0x41_AddValue16(nLove_Nina, 4)                       ;B3C800
     %AICMD0x12_Jump($B3C763)                                   ;B3C806
@@ -6271,9 +6891,12 @@ DATA8_B3C810:
     %AICMD0x12_Jump($B3C81E)                                   ;B3C815
     %AICMD0x13_Wait(1)                                         ;B3C818
     %AICMD0x12_Jump($B3C818)                                   ;B3C81B
+B3C81E:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, $B3C829)   ;B3C81E
     %AICMD0x09($02, $B3C871)                                   ;B3C825
+B3C829:
     %AICMD0x12_Jump($B3C818)                                   ;B3C829
+B3C82C:
     %AICMD0x1A($0028, $0168, $B38318, $02)                     ;B3C82C
     %AICMD0x4D($B3C83F)                                        ;B3C834
     %AICMD0x2D($B3C85C, $B3C846)                               ;B3C837
@@ -6283,22 +6906,27 @@ DATA8_B3C810:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3C855)         ;B3C846
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3C84E
     %AICMD0x12_Jump($B3C834)                                   ;B3C852
+B3C855:
     %AICMD0x1C_ShowDialog($0049, $00)                          ;B3C855
     %AICMD0x12_Jump($B3C834)                                   ;B3C859
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0E, $B3C86A)   ;B3C85C
     %AICMD0x1C_ShowDialog($0079, $00)                          ;B3C863
     %AICMD0x12_Jump($B3C834)                                   ;B3C867
+B3C86A:
     %AICMD0x1C_ShowDialog($01DC, $00)                          ;B3C86A
     %AICMD0x12_Jump($B3C834)                                   ;B3C86E
+B3C871:
     %AICMD0x1A($00B8, $0098, $B38198, $00)                     ;B3C871
     %AICMD0x22($20, $18, $01, $B381A4, $10)                    ;B3C879
     %AICMD0x12_Jump($B3C883)                                   ;B3C880
+B3C883:
     %AICMD0x4D($B3C88E)                                        ;B3C883
     %AICMD0x2D($B3C915, $B3C8A6)                               ;B3C886
     %AICMD0x12_Jump($B3C883)                                   ;B3C88B
     %AICMD0x45_JumpIfBetween16(nLove_Ann, 0, 249, $B3C89F)     ;B3C88E
     %AICMD0x1C_ShowDialog($043E, $00)                          ;B3C898
     %AICMD0x12_Jump($B3C883)                                   ;B3C89C
+B3C89F:
     %AICMD0x1C_ShowDialog($0176, $00)                          ;B3C89F
     %AICMD0x12_Jump($B3C883)                                   ;B3C8A3
     %AICMD0x15_JumpIfEquals8($80091E, 2, $B3C8E1)              ;B3C8A6
@@ -6310,21 +6938,26 @@ DATA8_B3C810:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3C908)         ;B3C8D2
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3C8DA
     %AICMD0x12_Jump($B3C883)                                   ;B3C8DE
+B3C8E1:
     %AICMD0x1C_ShowDialog($03B4, $00)                          ;B3C8E1
     %AICMD0x41_AddValue16(nLove_Ann, -8)                       ;B3C8E5
     %AICMD0x12_Jump($B3C883)                                   ;B3C8EB
+B3C8EE:
     %AICMD0x1C_ShowDialog($03B2, $00)                          ;B3C8EE
     %AICMD0x41_AddValue16(nLove_Ann, 6)                        ;B3C8F2
     %AICMD0x12_Jump($B3C883)                                   ;B3C8F8
+B3C8FB:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B3C8FB
     %AICMD0x41_AddValue16(nLove_Ann, 2)                        ;B3C8FF
     %AICMD0x12_Jump($B3C883)                                   ;B3C905
+B3C908:
     %AICMD0x1C_ShowDialog($03B4, $00)                          ;B3C908
     %AICMD0x41_AddValue16(nLove_Ann, -2)                       ;B3C90C
     %AICMD0x12_Jump($B3C883)                                   ;B3C912
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0E, $B3C923)   ;B3C915
     %AICMD0x1C_ShowDialog($00A9, $00)                          ;B3C91C
     %AICMD0x12_Jump($B3C883)                                   ;B3C920
+B3C923:
     %AICMD0x1C_ShowDialog($01DE, $00)                          ;B3C923
     %AICMD0x12_Jump($B3C883)                                   ;B3C927
 
@@ -6340,14 +6973,19 @@ DATA8_B3C92A:
     %AICMD0x12_Jump($B3C94E)                                   ;B3C945
     %AICMD0x13_Wait(1)                                         ;B3C948
     %AICMD0x12_Jump($B3C948)                                   ;B3C94B
+B3C94E:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, $B3C959)   ;B3C94E
     %AICMD0x09($03, $B3C9D4)                                   ;B3C955
+B3C959:
     %AICMD0x12_Jump($B3C948)                                   ;B3C959
+B3C95C:
     %AICMD0x1A($0087, $0097, $B38558, $00)                     ;B3C95C
     %AICMD0x13_Wait(1)                                         ;B3C964
     %AICMD0x12_Jump($B3C964)                                   ;B3C967
+B3C96A:
     %AICMD0x1A($0028, $0198, $B38330, $02)                     ;B3C96A
     %AICMD0x12_Jump($B3C975)                                   ;B3C972
+B3C975:
     %AICMD0x4D($B3C980)                                        ;B3C975
     %AICMD0x2D($B3C99D, $B3C987)                               ;B3C978
     %AICMD0x12_Jump($B3C975)                                   ;B3C97D
@@ -6356,13 +6994,16 @@ DATA8_B3C92A:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3C996)         ;B3C987
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3C98F
     %AICMD0x12_Jump($B3C975)                                   ;B3C993
+B3C996:
     %AICMD0x1C_ShowDialog($03BB, $00)                          ;B3C996
     %AICMD0x12_Jump($B3C975)                                   ;B3C99A
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $02, $B3C9AB)   ;B3C99D
     %AICMD0x1C_ShowDialog($0050, $00)                          ;B3C9A4
     %AICMD0x12_Jump($B3C975)                                   ;B3C9A8
+B3C9AB:
     %AICMD0x1C_ShowDialog($01ED, $00)                          ;B3C9AB
     %AICMD0x12_Jump($B3C975)                                   ;B3C9AF
+B3C9B2:
     %AICMD0x1A($0088, $0158, $B38348, $00)                     ;B3C9B2
     %AICMD0x2D($B3C9C9, $B3C9C2)                               ;B3C9BA
     %AICMD0x12_Jump($B3C9BA)                                   ;B3C9BF
@@ -6371,6 +7012,7 @@ DATA8_B3C92A:
     %AICMD0x1C_ShowDialog($0054, $02)                          ;B3C9C9
     %AICMD0x1C_ShowDialog($0055, $01)                          ;B3C9CD
     %AICMD0x12_Jump($B3C9BA)                                   ;B3C9D1
+B3C9D4:
     %AICMD0x1A($0058, $01B8, $B381E0, $00)                     ;B3C9D4
     %AICMD0x4D($B3C9E7)                                        ;B3C9DC
     %AICMD0x2D($B3CA83, $B3C9FF)                               ;B3C9DF
@@ -6378,6 +7020,7 @@ DATA8_B3C92A:
     %AICMD0x45_JumpIfBetween16(nLove_Ellen, 0, 249, $B3C9F8)   ;B3C9E7
     %AICMD0x1C_ShowDialog($0440, $00)                          ;B3C9F1
     %AICMD0x12_Jump($B3C9DC)                                   ;B3C9F5
+B3C9F8:
     %AICMD0x1C_ShowDialog($017A, $00)                          ;B3C9F8
     %AICMD0x12_Jump($B3C9DC)                                   ;B3C9FC
     %AICMD0x15_JumpIfEquals8($80091E, 2, $B3CA42)              ;B3C9FF
@@ -6390,24 +7033,30 @@ DATA8_B3C92A:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3CA76)         ;B3CA33
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3CA3B
     %AICMD0x12_Jump($B3C9DC)                                   ;B3CA3F
+B3CA42:
     %AICMD0x1C_ShowDialog($03B0, $00)                          ;B3CA42
     %AICMD0x41_AddValue16(nLove_Ellen, -8)                     ;B3CA46
     %AICMD0x12_Jump($B3C9DC)                                   ;B3CA4C
+B3CA4F:
     %AICMD0x1C_ShowDialog($03B2, $00)                          ;B3CA4F
     %AICMD0x41_AddValue16(nLove_Ellen, 6)                      ;B3CA53
     %AICMD0x12_Jump($B3C9DC)                                   ;B3CA59
+B3CA5C:
     %AICMD0x1C_ShowDialog($03B3, $00)                          ;B3CA5C
     %AICMD0x41_AddValue16(nLove_Ellen, 8)                      ;B3CA60
     %AICMD0x12_Jump($B3C9DC)                                   ;B3CA66
+B3CA69:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B3CA69
     %AICMD0x41_AddValue16(nLove_Ellen, 5)                      ;B3CA6D
     %AICMD0x12_Jump($B3C9DC)                                   ;B3CA73
+B3CA76:
     %AICMD0x1C_ShowDialog($01DA, $00)                          ;B3CA76
     %AICMD0x41_AddValue16(nLove_Ellen, -2)                     ;B3CA7A
     %AICMD0x12_Jump($B3C9DC)                                   ;B3CA80
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $02, $B3CA91)   ;B3CA83
     %AICMD0x1C_ShowDialog($00D5, $00)                          ;B3CA8A
     %AICMD0x12_Jump($B3C9DC)                                   ;B3CA8E
+B3CA91:
     %AICMD0x1C_ShowDialog($01EE, $00)                          ;B3CA91
     %AICMD0x12_Jump($B3C9DC)                                   ;B3CA95
 
@@ -6418,6 +7067,7 @@ DATA8_B3CA98:
     %AICMD0x09($02, $B3CB29)                                   ;B3CA9C
     %AICMD0x13_Wait(1)                                         ;B3CAA0
     %AICMD0x12_Jump($B3CAA0)                                   ;B3CAA3
+B3CAA6:
     %AICMD0x1A($0088, $0050, $B382E8, $00)                     ;B3CAA6
     %AICMD0x4D($B3CAB9)                                        ;B3CAAE
     %AICMD0x2D($B3CADA, $B3CAC4)                               ;B3CAB1
@@ -6428,6 +7078,7 @@ DATA8_B3CA98:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3CAD3)         ;B3CAC4
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3CACC
     %AICMD0x12_Jump($B3CAAE)                                   ;B3CAD0
+B3CAD3:
     %AICMD0x1C_ShowDialog($03BB, $00)                          ;B3CAD3
     %AICMD0x12_Jump($B3CAAE)                                   ;B3CAD7
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0C, $B3CAFD)   ;B3CADA
@@ -6436,18 +7087,23 @@ DATA8_B3CA98:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $02, $B3CB1E)   ;B3CAEF
     %AICMD0x1C_ShowDialog($0062, $00)                          ;B3CAF6
     %AICMD0x12_Jump($B3CAAE)                                   ;B3CAFA
+B3CAFD:
     %AICMD0x1C_ShowDialog($01D1, $00)                          ;B3CAFD
     %AICMD0x1B($0288, $00)                                     ;B3CB01
     %AICMD0x12_Jump($B3CAAE)                                   ;B3CB05
+B3CB08:
     %AICMD0x1C_ShowDialog($01DD, $00)                          ;B3CB08
     %AICMD0x1B($0288, $00)                                     ;B3CB0C
     %AICMD0x12_Jump($B3CAAE)                                   ;B3CB10
+B3CB13:
     %AICMD0x1C_ShowDialog($01E6, $00)                          ;B3CB13
     %AICMD0x1B($0288, $00)                                     ;B3CB17
     %AICMD0x12_Jump($B3CAAE)                                   ;B3CB1B
+B3CB1E:
     %AICMD0x1C_ShowDialog($01EF, $00)                          ;B3CB1E
     %AICMD0x1B($0288, $00)                                     ;B3CB22
     %AICMD0x12_Jump($B3CAAE)                                   ;B3CB26
+B3CB29:
     %AICMD0x1A($0038, $0098, $B38390, $00)                     ;B3CB29
     %AICMD0x4D($B3CB3C)                                        ;B3CB31
     %AICMD0x2D($B3CB59, $B3CB43)                               ;B3CB34
@@ -6457,6 +7113,7 @@ DATA8_B3CA98:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3CB52)         ;B3CB43
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3CB4B
     %AICMD0x12_Jump($B3CB31)                                   ;B3CB4F
+B3CB52:
     %AICMD0x1C_ShowDialog($03BA, $00)                          ;B3CB52
     %AICMD0x12_Jump($B3CB31)                                   ;B3CB56
     %AICMD0x1C_ShowDialog($0068, $00)                          ;B3CB59
@@ -6468,6 +7125,7 @@ DATA8_B3CB60:
     %AICMD0x09($01, $B3CB6A)                                   ;B3CB60
     %AICMD0x13_Wait(1)                                         ;B3CB64
     %AICMD0x12_Jump($B3CB64)                                   ;B3CB67
+B3CB6A:
     %AICMD0x1A($00E8, $009C, $B3836C, $03)                     ;B3CB6A
     %AICMD0x4D($B3CB7D)                                        ;B3CB72
     %AICMD0x2D($B3CB9E, $B3CB88)                               ;B3CB75
@@ -6478,6 +7136,7 @@ DATA8_B3CB60:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3CB97)         ;B3CB88
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3CB90
     %AICMD0x12_Jump($B3CB72)                                   ;B3CB94
+B3CB97:
     %AICMD0x1C_ShowDialog($03BB, $00)                          ;B3CB97
     %AICMD0x12_Jump($B3CB72)                                   ;B3CB9B
     %AICMD0x1C_ShowDialog($005E, $00)                          ;B3CB9E
@@ -6485,12 +7144,12 @@ DATA8_B3CB60:
 
 
 DATA8_B3CBA5:
- 
     %AICMD0x11_EnableUserControl()                             ;B3CBA5
     %AICMD0x09($01, $B3CBEC)                                   ;B3CBA6
     %AICMD0x09($02, $B3CBB4)                                   ;B3CBAA
     %AICMD0x13_Wait(1)                                         ;B3CBAE
     %AICMD0x12_Jump($B3CBAE)                                   ;B3CBB1
+B3CBB4:
     %AICMD0x1A($0058, $00B8, $B38234, $00)                     ;B3CBB4
     %AICMD0x4D($B3CBC7)                                        ;B3CBBC
     %AICMD0x2D($B3CBE4, $B3CBCE)                               ;B3CBBF
@@ -6500,11 +7159,13 @@ DATA8_B3CBA5:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3CBDD)         ;B3CBCE
     %AICMD0x1C_ShowDialog($03BC, $00)                          ;B3CBD6
     %AICMD0x12_Jump($B3CBBC)                                   ;B3CBDA
+B3CBDD:
     %AICMD0x1C_ShowDialog($03BB, $00)                          ;B3CBDD
     %AICMD0x12_Jump($B3CBBC)                                   ;B3CBE1
     %AICMD0x1C_ShowDialog($0150, $00)                          ;B3CBE4
     %AICMD0x12_Jump($B3CBBC)                                   ;B3CBE8
     %AICMD0x10_End()                                           ;B3CBEB
+B3CBEC:
     %AICMD0x1A($0098, $0088, $B38234, $00)                     ;B3CBEC
     %AICMD0x4D($B3CC08)                                        ;B3CBF4
     %AICMD0x2D($B3CC25, $B3CC0F)                               ;B3CBF7
@@ -6517,6 +7178,7 @@ DATA8_B3CBA5:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3CC1E)         ;B3CC0F
     %AICMD0x1C_ShowDialog($03BC, $00)                          ;B3CC17
     %AICMD0x12_Jump($B3CBF4)                                   ;B3CC1B
+B3CC1E:
     %AICMD0x1C_ShowDialog($03BB, $00)                          ;B3CC1E
     %AICMD0x12_Jump($B3CBF4)                                   ;B3CC22
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $07, $B3CC6A)   ;B3CC25
@@ -6527,13 +7189,17 @@ DATA8_B3CBA5:
     %AICMD0x20_JumpIfChoice(0, $B3CC50)                        ;B3CC45
     %AICMD0x20_JumpIfChoice(1, $B3CC5C)                        ;B3CC49
     %AICMD0x12_Jump($B3CBF4)                                   ;B3CC4D
+B3CC50:
     %AICMD0x23_OrWithIndexedValue(strcFlags.event2, $05)       ;B3CC50
     %AICMD0x1C_ShowDialog($0131, $00)                          ;B3CC55
     %AICMD0x12_Jump($B3CBFF)                                   ;B3CC59
+B3CC5C:
     %AICMD0x1C_ShowDialog($0132, $00)                          ;B3CC5C
     %AICMD0x12_Jump($B3CBF4)                                   ;B3CC60
+B3CC63:
     %AICMD0x1C_ShowDialog($0139, $00)                          ;B3CC63
     %AICMD0x12_Jump($B3CBFF)                                   ;B3CC67
+B3CC6A:
     %AICMD0x1C_ShowDialog($0133, $00)                          ;B3CC6A
     %AICMD0x12_Jump($B3CBF4)                                   ;B3CC6E
 
@@ -6557,7 +7223,6 @@ pAIScripting0x05:
     dw pAIScripting0x06                                        ;B3CC8F|        |B3D447;
  
 DATA8_B3CC91:
- 
     %AICMD0x11_EnableUserControl()                             ;B3CC91
     %AICMD0x09($01, $B3CCDB)                                   ;B3CC92
     %AICMD0x09($02, $B3CD7C)                                   ;B3CC96
@@ -6570,12 +7235,16 @@ DATA8_B3CC91:
     %AICMD0x12_Jump($B3CCBB)                                   ;B3CCB2
     %AICMD0x13_Wait(1)                                         ;B3CCB5
     %AICMD0x12_Jump($B3CCB5)                                   ;B3CCB8
+B3CCBB:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, $B3CCC6)   ;B3CCBB
     %AICMD0x09($09, $B3D1B0)                                   ;B3CCC2
+B3CCC6:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, $B3CCD8)   ;B3CCC6
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $04, $B3CCD8)   ;B3CCCD
     %AICMD0x09($0A, $B3D213)                                   ;B3CCD4
+B3CCD8:
     %AICMD0x12_Jump($B3CCB5)                                   ;B3CCD8
+B3CCDB:
     %AICMD0x1A($0028, $0198, $B382DC, $00)                     ;B3CCDB
     %AICMD0x4D($B3CCEE)                                        ;B3CCE3
     %AICMD0x2D($B3CD0B, $B3CCF5)                               ;B3CCE6
@@ -6585,6 +7254,7 @@ DATA8_B3CC91:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3CD04)         ;B3CCF5
     %AICMD0x1C_ShowDialog($03BC, $00)                          ;B3CCFD
     %AICMD0x12_Jump($B3CCE3)                                   ;B3CD01
+B3CD04:
     %AICMD0x1C_ShowDialog($03BB, $00)                          ;B3CD04
     %AICMD0x12_Jump($B3CCE3)                                   ;B3CD08
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $04, $B3CD71)   ;B3CD0B
@@ -6600,20 +7270,25 @@ DATA8_B3CC91:
     %AICMD0x1C_ShowDialog($03DD, $00)                          ;B3CD38
     %AICMD0x1B($0285, $00)                                     ;B3CD3C
     %AICMD0x12_Jump($B3CCE3)                                   ;B3CD40
+B3CD43:
     %AICMD0x1C_ShowDialog($03DE, $00)                          ;B3CD43
     %AICMD0x1B($0285, $00)                                     ;B3CD47
     %AICMD0x12_Jump($B3CCE3)                                   ;B3CD4B
+B3CD4E:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B3CD60)         ;B3CD4E
     %AICMD0x1C_ShowDialog($0069, $00)                          ;B3CD55
     %AICMD0x1B($0285, $00)                                     ;B3CD59
     %AICMD0x12_Jump($B3CCE3)                                   ;B3CD5D
+B3CD60:
     %AICMD0x1C_ShowDialog($03F6, $00)                          ;B3CD60
     %AICMD0x1B($0285, $00)                                     ;B3CD64
     %AICMD0x41_AddValue16(nPlayerHappiness, 5)                 ;B3CD68
     %AICMD0x12_Jump($B3CCE3)                                   ;B3CD6E
+B3CD71:
     %AICMD0x1C_ShowDialog($01FB, $00)                          ;B3CD71
     %AICMD0x1B($0285, $00)                                     ;B3CD75
     %AICMD0x12_Jump($B3CCE3)                                   ;B3CD79
+B3CD7C:
     %AICMD0x1A($0060, $0170, $B38348, $00)                     ;B3CD7C
     %AICMD0x2D($B3CD93, $B3CD8C)                               ;B3CD84
     %AICMD0x12_Jump($B3CD84)                                   ;B3CD89
@@ -6622,11 +7297,14 @@ DATA8_B3CC91:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B3CDA1)     ;B3CD93
     %AICMD0x1C_ShowDialog($0056, $00)                          ;B3CD9A
     %AICMD0x12_Jump($B3CD84)                                   ;B3CD9E
+B3CDA1:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B3CDAF)         ;B3CDA1
     %AICMD0x1C_ShowDialog($0056, $00)                          ;B3CDA8
     %AICMD0x12_Jump($B3CD84)                                   ;B3CDAC
+B3CDAF:
     %AICMD0x1C_ShowDialog($03FD, $00)                          ;B3CDAF
     %AICMD0x12_Jump($B3CD84)                                   ;B3CDB3
+B3CDB6:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, $B3CE2B)     ;B3CDB6
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B3CE2B)     ;B3CDBD
     %AICMD0x1A($00B4, $01A0, $B3827C, $01)                     ;B3CDC4
@@ -6636,6 +7314,7 @@ DATA8_B3CC91:
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3CDDC
     %AICMD0x1B($026B, $00)                                     ;B3CDE0
     %AICMD0x12_Jump($B3CDCC)                                   ;B3CDE4
+B3CDE7:
     %AICMD0x1C_ShowDialog($03B8, $00)                          ;B3CDE7
     %AICMD0x1B($026B, $00)                                     ;B3CDEB
     %AICMD0x12_Jump($B3CDCC)                                   ;B3CDEF
@@ -6647,10 +7326,13 @@ DATA8_B3CC91:
     %AICMD0x1C_ShowDialog($0077, $00)                          ;B3CE15
     %AICMD0x1B($026B, $00)                                     ;B3CE19
     %AICMD0x12_Jump($B3CDCC)                                   ;B3CE1D
+B3CE20:
     %AICMD0x1C_ShowDialog($03E2, $00)                          ;B3CE20
     %AICMD0x1B($026B, $00)                                     ;B3CE24
     %AICMD0x12_Jump($B3CDCC)                                   ;B3CE28
+B3CE2B:
     %AICMD0x10_End()                                           ;B3CE2B
+B3CE2C:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, $B3CE8B)     ;B3CE2C
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, $B3CE8B)     ;B3CE33
     %AICMD0x1A($0064, $01A0, $B382E8, $01)                     ;B3CE3A
@@ -6660,6 +7342,7 @@ DATA8_B3CC91:
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3CE52
     %AICMD0x1B($028A, $00)                                     ;B3CE56
     %AICMD0x12_Jump($B3CE42)                                   ;B3CE5A
+B3CE5D:
     %AICMD0x1C_ShowDialog($03BB, $00)                          ;B3CE5D
     %AICMD0x1B($028A, $00)                                     ;B3CE61
     %AICMD0x12_Jump($B3CE42)                                   ;B3CE65
@@ -6667,11 +7350,14 @@ DATA8_B3CC91:
     %AICMD0x1C_ShowDialog($0063, $00)                          ;B3CE6F
     %AICMD0x1B($028A, $00)                                     ;B3CE73
     %AICMD0x12_Jump($B3CE42)                                   ;B3CE77
+B3CE7A:
     %AICMD0x1C_ShowDialog($0406, $00)                          ;B3CE7A
     %AICMD0x1B($028A, $00)                                     ;B3CE7E
     %AICMD0x41_AddValue16(nPlayerHappiness, 5)                 ;B3CE82
     %AICMD0x12_Jump($B3CE42)                                   ;B3CE88
+B3CE8B:
     %AICMD0x10_End()                                           ;B3CE8B
+B3CE8C:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0E, $B3CF68)   ;B3CE8C
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $00, $B3CF68)   ;B3CE93
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, $B3CF68)     ;B3CE9A
@@ -6683,6 +7369,7 @@ DATA8_B3CC91:
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3CEC0
     %AICMD0x1B($0296, $00)                                     ;B3CEC4
     %AICMD0x12_Jump($B3CEB0)                                   ;B3CEC8
+B3CECB:
     %AICMD0x1C_ShowDialog($0049, $00)                          ;B3CECB
     %AICMD0x1B($0296, $00)                                     ;B3CECF
     %AICMD0x12_Jump($B3CEB0)                                   ;B3CED3
@@ -6696,6 +7383,7 @@ DATA8_B3CC91:
     %AICMD0x1C_ShowDialog($0045, $00)                          ;B3CF07
     %AICMD0x1B($0296, $00)                                     ;B3CF0B
     %AICMD0x12_Jump($B3CEB0)                                   ;B3CF0F
+B3CF12:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B3CF47)         ;B3CF12
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, $B3CF52)   ;B3CF19
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, $B3CF52)   ;B3CF20
@@ -6705,16 +7393,21 @@ DATA8_B3CC91:
     %AICMD0x1C_ShowDialog($0045, $00)                          ;B3CF3C
     %AICMD0x1B($0296, $00)                                     ;B3CF40
     %AICMD0x12_Jump($B3CEB0)                                   ;B3CF44
+B3CF47:
     %AICMD0x1C_ShowDialog($03FE, $00)                          ;B3CF47
     %AICMD0x1B($0296, $00)                                     ;B3CF4B
     %AICMD0x12_Jump($B3CEB0)                                   ;B3CF4F
+B3CF52:
     %AICMD0x1C_ShowDialog($03E1, $00)                          ;B3CF52
     %AICMD0x1B($0296, $00)                                     ;B3CF56
     %AICMD0x12_Jump($B3CEB0)                                   ;B3CF5A
+B3CF5D:
     %AICMD0x1C_ShowDialog($013E, $00)                          ;B3CF5D
     %AICMD0x1B($0296, $00)                                     ;B3CF61
     %AICMD0x12_Jump($B3CEB0)                                   ;B3CF65
+B3CF68:
     %AICMD0x10_End()                                           ;B3CF68
+B3CF69:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, $B3D049)     ;B3CF69
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, $B3D049)     ;B3CF70
     %AICMD0x1A($00D8, $0170, $B3836C, $00)                     ;B3CF77
@@ -6724,6 +7417,7 @@ DATA8_B3CC91:
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3CF8F
     %AICMD0x1B($02AB, $00)                                     ;B3CF93
     %AICMD0x12_Jump($B3CF7F)                                   ;B3CF97
+B3CF9A:
     %AICMD0x1C_ShowDialog($03BB, $00)                          ;B3CF9A
     %AICMD0x1B($02AB, $00)                                     ;B3CF9E
     %AICMD0x12_Jump($B3CF7F)                                   ;B3CFA2
@@ -6738,6 +7432,7 @@ DATA8_B3CC91:
     %AICMD0x1C_ShowDialog($005F, $00)                          ;B3CFDD
     %AICMD0x1B($02AB, $00)                                     ;B3CFE1
     %AICMD0x12_Jump($B3CF7F)                                   ;B3CFE5
+B3CFE8:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B3D03E)         ;B3CFE8
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, $B3D01D)   ;B3CFEF
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, $B3D01D)   ;B3CFF6
@@ -6747,19 +7442,25 @@ DATA8_B3CC91:
     %AICMD0x1C_ShowDialog($0407, $00)                          ;B3D012
     %AICMD0x1B($02AB, $00)                                     ;B3D016
     %AICMD0x12_Jump($B3CF7F)                                   ;B3D01A
+B3D01D:
     %AICMD0x1C_ShowDialog($03D8, $00)                          ;B3D01D
     %AICMD0x1B($02AB, $00)                                     ;B3D021
     %AICMD0x12_Jump($B3CF7F)                                   ;B3D025
+B3D028:
     %AICMD0x1C_ShowDialog($01F0, $00)                          ;B3D028
     %AICMD0x1B($02AB, $00)                                     ;B3D02C
     %AICMD0x12_Jump($B3CF7F)                                   ;B3D030
+B3D033:
     %AICMD0x1C_ShowDialog($013E, $00)                          ;B3D033
     %AICMD0x1B($02AB, $00)                                     ;B3D037
     %AICMD0x12_Jump($B3CF7F)                                   ;B3D03B
+B3D03E:
     %AICMD0x1C_ShowDialog($0146, $00)                          ;B3D03E
     %AICMD0x1B($02AB, $00)                                     ;B3D042
     %AICMD0x12_Jump($B3CF7F)                                   ;B3D046
+B3D049:
     %AICMD0x10_End()                                           ;B3D049
+B3D04A:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, $B3D109)     ;B3D04A
     %AICMD0x1A($0088, $0170, $B38294, $00)                     ;B3D051
     %AICMD0x2D($B3D077, $B3D061)                               ;B3D059
@@ -6767,6 +7468,7 @@ DATA8_B3CC91:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3D070)         ;B3D061
     %AICMD0x1C_ShowDialog($03BC, $00)                          ;B3D069
     %AICMD0x12_Jump($B3D059)                                   ;B3D06D
+B3D070:
     %AICMD0x1C_ShowDialog($03BB, $00)                          ;B3D070
     %AICMD0x12_Jump($B3D059)                                   ;B3D074
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $04, $B3D0FE)   ;B3D077
@@ -6780,27 +7482,34 @@ DATA8_B3CC91:
     %AICMD0x1C_ShowDialog($006F, $00)                          ;B3D0AF
     %AICMD0x1B($0270, $00)                                     ;B3D0B3
     %AICMD0x12_Jump($B3D059)                                   ;B3D0B7
+B3D0BA:
     %AICMD0x1C_ShowDialog($006E, $00)                          ;B3D0BA
     %AICMD0x1B($0270, $00)                                     ;B3D0BE
     %AICMD0x12_Jump($B3D059)                                   ;B3D0C2
+B3D0C5:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B3D0D7)         ;B3D0C5
     %AICMD0x1C_ShowDialog($0070, $00)                          ;B3D0CC
     %AICMD0x1B($0270, $00)                                     ;B3D0D0
     %AICMD0x12_Jump($B3D059)                                   ;B3D0D4
+B3D0D7:
     %AICMD0x1C_ShowDialog($03EC, $00)                          ;B3D0D7
     %AICMD0x1B($0270, $00)                                     ;B3D0DB
     %AICMD0x41_AddValue16(nPlayerHappiness, 5)                 ;B3D0DF
     %AICMD0x12_Jump($B3D059)                                   ;B3D0E5
+B3D0E8:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B3D0C5)     ;B3D0E8
     %AICMD0x17($02)                                            ;B3D0EF
     %AICMD0x17($00)                                            ;B3D0F1
     %AICMD0x1C_ShowDialog($03E3, $00)                          ;B3D0F3
     %AICMD0x1B($0270, $00)                                     ;B3D0F7
     %AICMD0x12_Jump($B3D059)                                   ;B3D0FB
+B3D0FE:
     %AICMD0x1C_ShowDialog($013E, $00)                          ;B3D0FE
     %AICMD0x1B($0270, $00)                                     ;B3D102
     %AICMD0x12_Jump($B3D059)                                   ;B3D106
+B3D109:
     %AICMD0x10_End()                                           ;B3D109
+B3D10A:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, $B3D1AF)     ;B3D10A
     %AICMD0x1A($00D8, $01B8, $B382AC, $00)                     ;B3D111
     %AICMD0x2D($B3D137, $B3D121)                               ;B3D119
@@ -6808,6 +7517,7 @@ DATA8_B3CC91:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3D130)         ;B3D121
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3D129
     %AICMD0x12_Jump($B3D119)                                   ;B3D12D
+B3D130:
     %AICMD0x1C_ShowDialog($0049, $00)                          ;B3D130
     %AICMD0x12_Jump($B3D119)                                   ;B3D134
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, $B3D19B)   ;B3D137
@@ -6825,18 +7535,23 @@ DATA8_B3CC91:
     %AICMD0x12_Jump($B3D119)                                   ;B3D176
     %AICMD0x1C_ShowDialog($0072, $00)                          ;B3D179
     %AICMD0x12_Jump($B3D119)                                   ;B3D17D
+B3D180:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B3D18E)         ;B3D180
     %AICMD0x1C_ShowDialog($0073, $00)                          ;B3D187
     %AICMD0x12_Jump($B3D119)                                   ;B3D18B
+B3D18E:
     %AICMD0x1C_ShowDialog($03FF, $00)                          ;B3D18E
     %AICMD0x41_AddValue16(nPlayerHappiness, 5)                 ;B3D192
     %AICMD0x12_Jump($B3D119)                                   ;B3D198
+B3D19B:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B3D180)     ;B3D19B
     %AICMD0x17($02)                                            ;B3D1A2
     %AICMD0x18($00, $B3D161)                                   ;B3D1A4
     %AICMD0x1C_ShowDialog($03E4, $00)                          ;B3D1A8
     %AICMD0x12_Jump($B3D119)                                   ;B3D1AC
+B3D1AF:
     %AICMD0x10_End()                                           ;B3D1AF
+B3D1B0:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $02, $B3D212)   ;B3D1B0
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, $B3D212)     ;B3D1B7
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B3D212)     ;B3D1BE
@@ -6847,6 +7562,7 @@ DATA8_B3CC91:
     %AICMD0x45_JumpIfBetween16(nLove_Ellen, 0, 249, $B3D1E9)   ;B3D1D8
     %AICMD0x1C_ShowDialog($0440, $00)                          ;B3D1E2
     %AICMD0x12_Jump($B3D1CD)                                   ;B3D1E6
+B3D1E9:
     %AICMD0x1C_ShowDialog($017A, $00)                          ;B3D1E9
     %AICMD0x12_Jump($B3D1CD)                                   ;B3D1ED
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3D1F0
@@ -6859,7 +7575,9 @@ DATA8_B3CC91:
     %AICMD0x12_Jump($B3D1CD)                                   ;B3D208
     %AICMD0x1C_ShowDialog($00D7, $00)                          ;B3D20B
     %AICMD0x12_Jump($B3D1CD)                                   ;B3D20F
+B3D212:
     %AICMD0x10_End()                                           ;B3D212
+B3D213:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $04, $B3D446)   ;B3D213
     %AICMD0x1A($0038, $01C0, $B38204, $00)                     ;B3D21A
     %AICMD0x22($18, $08, $01, $B38210, $08)                    ;B3D222
@@ -6875,6 +7593,7 @@ DATA8_B3CC91:
     %AICMD0x45_JumpIfBetween16(nLove_Eve, 0, 249, $B3D257)     ;B3D246
     %AICMD0x1C_ShowDialog($0441, $00)                          ;B3D250
     %AICMD0x12_Jump($B3D229)                                   ;B3D254
+B3D257:
     %AICMD0x1C_ShowDialog($017C, $00)                          ;B3D257
     %AICMD0x12_Jump($B3D229)                                   ;B3D25B
     %AICMD0x15_JumpIfEquals8($80091E, 2, $B3D2A0)              ;B3D25E
@@ -6887,15 +7606,19 @@ DATA8_B3CC91:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3D2C7)         ;B3D291
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3D299
     %AICMD0x12_Jump($B3D229)                                   ;B3D29D
+B3D2A0:
     %AICMD0x1C_ShowDialog($03B4, $00)                          ;B3D2A0
     %AICMD0x41_AddValue16(nLove_Eve, -8)                       ;B3D2A4
     %AICMD0x12_Jump($B3D229)                                   ;B3D2AA
+B3D2AD:
     %AICMD0x1C_ShowDialog($03B2, $00)                          ;B3D2AD
     %AICMD0x41_AddValue16(nLove_Eve, 3)                        ;B3D2B1
     %AICMD0x12_Jump($B3D229)                                   ;B3D2B7
+B3D2BA:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B3D2BA
     %AICMD0x41_AddValue16(nLove_Eve, 8)                        ;B3D2BE
     %AICMD0x12_Jump($B3D229)                                   ;B3D2C4
+B3D2C7:
     %AICMD0x1C_ShowDialog($03BA, $00)                          ;B3D2C7
     %AICMD0x41_AddValue16(nLove_Eve, -2)                       ;B3D2CB
     %AICMD0x12_Jump($B3D229)                                   ;B3D2D1
@@ -6907,6 +7630,7 @@ DATA8_B3CC91:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, $B3D381)     ;B3D2FD
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B3D3B1)     ;B3D304
     %AICMD0x12_Jump($B3D229)                                   ;B3D30B
+B3D30E:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 22, $B3D35F)         ;B3D30E
     %AICMD0x14_JumpIfFlagSet($800196, $01, $B3D42A)            ;B3D315
     %AICMD0x17($02)                                            ;B3D31C
@@ -6919,15 +7643,19 @@ DATA8_B3CC91:
     %AICMD0x20_JumpIfChoice(0, $B3D33F)                        ;B3D334
     %AICMD0x20_JumpIfChoice(1, $B3D352)                        ;B3D338
     %AICMD0x12_Jump($B3D229)                                   ;B3D33C
+B3D33F:
     %AICMD0x1C_ShowDialog($00E7, $00)                          ;B3D33F
     %AICMD0x32($8000D4, $0015)                                 ;B3D343
     %AICMD0x41_AddValue16(nLove_Eve, 4)                        ;B3D349
     %AICMD0x12_Jump($B3D234)                                   ;B3D34F
+B3D352:
     %AICMD0x1C_ShowDialog($00E8, $00)                          ;B3D352
     %AICMD0x41_AddValue16(nLove_Eve, 8)                        ;B3D356
     %AICMD0x12_Jump($B3D234)                                   ;B3D35C
+B3D35F:
     %AICMD0x1C_ShowDialog($020A, $00)                          ;B3D35F
     %AICMD0x12_Jump($B3D229)                                   ;B3D363
+B3D366:
     %AICMD0x17($02)                                            ;B3D366
     %AICMD0x18($00, $B3D373)                                   ;B3D368
     %AICMD0x18($01, $B3D37A)                                   ;B3D36C
@@ -6936,6 +7664,7 @@ DATA8_B3CC91:
     %AICMD0x12_Jump($B3D229)                                   ;B3D377
     %AICMD0x1C_ShowDialog($00EA, $00)                          ;B3D37A
     %AICMD0x12_Jump($B3D229)                                   ;B3D37E
+B3D381:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 11, $B3D3AA)         ;B3D381
     %AICMD0x14_JumpIfFlagSet($800196, $01, $B3D42A)            ;B3D388
     %AICMD0x17($02)                                            ;B3D38F
@@ -6946,42 +7675,55 @@ DATA8_B3CC91:
     %AICMD0x12_Jump($B3D229)                                   ;B3D3A0
     %AICMD0x1C_ShowDialog($00EC, $00)                          ;B3D3A3
     %AICMD0x12_Jump($B3D229)                                   ;B3D3A7
+B3D3AA:
     %AICMD0x1C_ShowDialog($023C, $00)                          ;B3D3AA
     %AICMD0x12_Jump($B3D229)                                   ;B3D3AE
+B3D3B1:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 23, $B3D3D2)         ;B3D3B1
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B3D3D9)         ;B3D3B8
     %AICMD0x1C_ShowDialog($00ED, $00)                          ;B3D3BF
     %AICMD0x32($8000D4, $0015)                                 ;B3D3C3
     %AICMD0x41_AddValue16(nLove_Eve, 2)                        ;B3D3C9
     %AICMD0x12_Jump($B3D229)                                   ;B3D3CF
+B3D3D2:
     %AICMD0x1C_ShowDialog($02B3, $00)                          ;B3D3D2
     %AICMD0x12_Jump($B3D229)                                   ;B3D3D6
+B3D3D9:
     %AICMD0x1C_ShowDialog($03FC, $00)                          ;B3D3D9
     %AICMD0x32($8000D4, $0015)                                 ;B3D3DD
     %AICMD0x41_AddValue16(nLove_Eve, 2)                        ;B3D3E3
     %AICMD0x12_Jump($B3D229)                                   ;B3D3E9
+B3D3EC:
     %AICMD0x1C_ShowDialog($00EE, $00)                          ;B3D3EC
     %AICMD0x12_Jump($B3D229)                                   ;B3D3F0
+B3D3F3:
     %AICMD0x1D_ShowDialog($00EF, $00)                          ;B3D3F3
     %AICMD0x20_JumpIfChoice(0, $B3D402)                        ;B3D3F7
     %AICMD0x20_JumpIfChoice(1, $B3D40F)                        ;B3D3FB
     %AICMD0x12_Jump($B3D229)                                   ;B3D3FF
+B3D402:
     %AICMD0x1C_ShowDialog($00F0, $00)                          ;B3D402
     %AICMD0x41_AddValue16(nLove_Eve, 8)                        ;B3D406
     %AICMD0x12_Jump($B3D23D)                                   ;B3D40C
+B3D40F:
     %AICMD0x1C_ShowDialog($00F1, $00)                          ;B3D40F
     %AICMD0x41_AddValue16(nLove_Eve, 2)                        ;B3D413
     %AICMD0x12_Jump($B3D23D)                                   ;B3D419
+B3D41C:
     %AICMD0x1C_ShowDialog($00E3, $00)                          ;B3D41C
     %AICMD0x12_Jump($B3D234)                                   ;B3D420
+B3D423:
     %AICMD0x1C_ShowDialog($0049, $00)                          ;B3D423
     %AICMD0x12_Jump($B3D23D)                                   ;B3D427
+B3D42A:
     %AICMD0x1C_ShowDialog($00E0, $00)                          ;B3D42A
     %AICMD0x12_Jump($B3D229)                                   ;B3D42E
+B3D431:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 23, $B3D3D2)         ;B3D431
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B3D3D9)         ;B3D438
     %AICMD0x1C_ShowDialog($039E, $00)                          ;B3D43F
     %AICMD0x12_Jump($B3D229)                                   ;B3D443
+B3D446:
     %AICMD0x10_End()                                           ;B3D446
 
 
@@ -7011,10 +7753,13 @@ DATA8_B3D467:
     %AICMD0x12_Jump($B3D479)                                   ;B3D470
     %AICMD0x13_Wait(1)                                         ;B3D473
     %AICMD0x12_Jump($B3D473)                                   ;B3D476
+B3D479:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, $B3D48B)   ;B3D479
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0C, $B3D48B)   ;B3D480
     %AICMD0x09($03, $B3D50B)                                   ;B3D487
+B3D48B:
     %AICMD0x12_Jump($B3D473)                                   ;B3D48B
+B3D48E:
     %AICMD0x1A($00A8, $0078, $B3830C, $00)                     ;B3D48E
     %AICMD0x22($20, $18, $01, $B3830C, $10)                    ;B3D496
     %AICMD0x2D($B3D4BB, $B3D4A5)                               ;B3D49D
@@ -7022,26 +7767,32 @@ DATA8_B3D467:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3D4B4)         ;B3D4A5
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3D4AD
     %AICMD0x12_Jump($B3D49D)                                   ;B3D4B1
+B3D4B4:
     %AICMD0x1C_ShowDialog($03B8, $00)                          ;B3D4B4
     %AICMD0x12_Jump($B3D49D)                                   ;B3D4B8
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $05, $B3D4C9)   ;B3D4BB
     %AICMD0x1C_ShowDialog($0153, $00)                          ;B3D4C2
     %AICMD0x12_Jump($B3D49D)                                   ;B3D4C6
+B3D4C9:
     %AICMD0x1C_ShowDialog($0400, $00)                          ;B3D4C9
     %AICMD0x12_Jump($B3D49D)                                   ;B3D4CD
+B3D4D0:
     %AICMD0x1A($0188, $00A0, $B383D8, $00)                     ;B3D4D0
     %AICMD0x2D($B3D4F6, $B3D4E0)                               ;B3D4D8
     %AICMD0x12_Jump($B3D4D8)                                   ;B3D4DD
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3D4EF)         ;B3D4E0
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3D4E8
     %AICMD0x12_Jump($B3D4D8)                                   ;B3D4EC
+B3D4EF:
     %AICMD0x1C_ShowDialog($03B9, $00)                          ;B3D4EF
     %AICMD0x12_Jump($B3D4D8)                                   ;B3D4F3
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $05, $B3D504)   ;B3D4F6
     %AICMD0x1C_ShowDialog($0154, $00)                          ;B3D4FD
     %AICMD0x12_Jump($B3D4D8)                                   ;B3D501
+B3D504:
     %AICMD0x1C_ShowDialog($0401, $00)                          ;B3D504
     %AICMD0x12_Jump($B3D4D8)                                   ;B3D508
+B3D50B:
     %AICMD0x1A($0048, $0198, $B38174, $00)                     ;B3D50B
     %AICMD0x4D($B3D51E)                                        ;B3D513
     %AICMD0x2D($B3D536, $B3D54B)                               ;B3D516
@@ -7049,11 +7800,13 @@ DATA8_B3D467:
     %AICMD0x45_JumpIfBetween16(nLove_Maria, 0, 249, $B3D52F)   ;B3D51E
     %AICMD0x1C_ShowDialog($043D, $00)                          ;B3D528
     %AICMD0x12_Jump($B3D513)                                   ;B3D52C
+B3D52F:
     %AICMD0x1C_ShowDialog($0174, $00)                          ;B3D52F
     %AICMD0x12_Jump($B3D513)                                   ;B3D533
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $05, $B3D544)   ;B3D536
     %AICMD0x1C_ShowDialog($0155, $00)                          ;B3D53D
     %AICMD0x12_Jump($B3D513)                                   ;B3D541
+B3D544:
     %AICMD0x1C_ShowDialog($0161, $00)                          ;B3D544
     %AICMD0x12_Jump($B3D513)                                   ;B3D548
     %AICMD0x15_JumpIfEquals8($80091E, 2, $B3D576)              ;B3D54B
@@ -7063,12 +7816,15 @@ DATA8_B3D467:
     %AICMD0x15_JumpIfEquals8($80091E, 73, $B3D583)             ;B3D568
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3D56F
     %AICMD0x12_Jump($B3D513)                                   ;B3D573
+B3D576:
     %AICMD0x1C_ShowDialog($03B0, $00)                          ;B3D576
     %AICMD0x41_AddValue16(nLove_Maria, -8)                     ;B3D57A
     %AICMD0x12_Jump($B3D513)                                   ;B3D580
+B3D583:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B3D583
     %AICMD0x41_AddValue16(nLove_Maria, 4)                      ;B3D587
     %AICMD0x12_Jump($B3D513)                                   ;B3D58D
+B3D590:
     %AICMD0x1C_ShowDialog($03B5, $00)                          ;B3D590
     %AICMD0x41_AddValue16(nLove_Maria, 3)                      ;B3D594
     %AICMD0x12_Jump($B3D513)                                   ;B3D59A
@@ -7080,17 +7836,20 @@ DATA8_B3D59D:
     %AICMD0x09($01, $B3D5A8)                                   ;B3D59E
     %AICMD0x13_Wait(1)                                         ;B3D5A2
     %AICMD0x12_Jump($B3D5A2)                                   ;B3D5A5
+B3D5A8:
     %AICMD0x1A($0068, $00E8, $B38354, $00)                     ;B3D5A8
     %AICMD0x2D($B3D5CE, $B3D5B8)                               ;B3D5B0
     %AICMD0x12_Jump($B3D5B0)                                   ;B3D5B5
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3D5C7)         ;B3D5B8
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3D5C0
     %AICMD0x12_Jump($B3D5B0)                                   ;B3D5C4
+B3D5C7:
     %AICMD0x1C_ShowDialog($03B0, $00)                          ;B3D5C7
     %AICMD0x12_Jump($B3D5B0)                                   ;B3D5CB
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $05, $B3D5DC)   ;B3D5CE
     %AICMD0x1C_ShowDialog($015A, $00)                          ;B3D5D5
     %AICMD0x12_Jump($B3D5B0)                                   ;B3D5D9
+B3D5DC:
     %AICMD0x1C_ShowDialog($016F, $00)                          ;B3D5DC
     %AICMD0x12_Jump($B3D5B0)                                   ;B3D5E0
 
@@ -7102,31 +7861,39 @@ DATA8_B3D5E3:
     %AICMD0x12_Jump($B3D5F1)                                   ;B3D5E8
     %AICMD0x13_Wait(1)                                         ;B3D5EB
     %AICMD0x12_Jump($B3D5EB)                                   ;B3D5EE
+B3D5F1:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, $B3D603)   ;B3D5F1
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $00, $B3D603)   ;B3D5F8
     %AICMD0x09($02, $B3D641)                                   ;B3D5FF
+B3D603:
     %AICMD0x12_Jump($B3D5EB)                                   ;B3D603
+B3D606:
     %AICMD0x1A($0028, $0168, $B383FC, $02)                     ;B3D606
     %AICMD0x2D($B3D62C, $B3D616)                               ;B3D60E
     %AICMD0x12_Jump($B3D60E)                                   ;B3D613
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3D625)         ;B3D616
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3D61E
     %AICMD0x12_Jump($B3D60E)                                   ;B3D622
+B3D625:
     %AICMD0x1C_ShowDialog($03B9, $00)                          ;B3D625
     %AICMD0x12_Jump($B3D60E)                                   ;B3D629
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $05, $B3D63A)   ;B3D62C
     %AICMD0x1C_ShowDialog($0158, $00)                          ;B3D633
     %AICMD0x12_Jump($B3D60E)                                   ;B3D637
+B3D63A:
     %AICMD0x1C_ShowDialog($016B, $00)                          ;B3D63A
     %AICMD0x12_Jump($B3D60E)                                   ;B3D63E
+B3D641:
     %AICMD0x1A($0078, $0088, $B381D4, $00)                     ;B3D641
     %AICMD0x12_Jump($B3D64C)                                   ;B3D649
+B3D64C:
     %AICMD0x4D($B3D657)                                        ;B3D64C
     %AICMD0x2D($B3D6BA, $B3D66F)                               ;B3D64F
     %AICMD0x12_Jump($B3D64C)                                   ;B3D654
     %AICMD0x45_JumpIfBetween16(nLove_Nina, 0, 249, $B3D668)    ;B3D657
     %AICMD0x1C_ShowDialog($043F, $00)                          ;B3D661
     %AICMD0x12_Jump($B3D64C)                                   ;B3D665
+B3D668:
     %AICMD0x1C_ShowDialog($0178, $00)                          ;B3D668
     %AICMD0x12_Jump($B3D64C)                                   ;B3D66C
     %AICMD0x16_JumpIfBetween8($80091E, 1, 4, $B3D693)          ;B3D66F
@@ -7135,18 +7902,22 @@ DATA8_B3D5E3:
     %AICMD0x15_JumpIfEquals8($80091E, 25, $B3D6AD)             ;B3D685
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3D68C
     %AICMD0x12_Jump($B3D64C)                                   ;B3D690
+B3D693:
     %AICMD0x1C_ShowDialog($03B2, $00)                          ;B3D693
     %AICMD0x41_AddValue16(nLove_Nina, -5)                      ;B3D697
     %AICMD0x12_Jump($B3D64C)                                   ;B3D69D
+B3D6A0:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B3D6A0
     %AICMD0x41_AddValue16(nLove_Nina, 8)                       ;B3D6A4
     %AICMD0x12_Jump($B3D64C)                                   ;B3D6AA
+B3D6AD:
     %AICMD0x1C_ShowDialog($03B1, $00)                          ;B3D6AD
     %AICMD0x41_AddValue16(nLove_Nina, -8)                      ;B3D6B1
     %AICMD0x12_Jump($B3D64C)                                   ;B3D6B7
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $05, $B3D6C8)   ;B3D6BA
     %AICMD0x1C_ShowDialog($0159, $00)                          ;B3D6C1
     %AICMD0x12_Jump($B3D64C)                                   ;B3D6C5
+B3D6C8:
     %AICMD0x1C_ShowDialog($0163, $00)                          ;B3D6C8
     %AICMD0x12_Jump($B3D64C)                                   ;B3D6CC
 
@@ -7158,31 +7929,39 @@ DATA8_B3D6CF:
     %AICMD0x12_Jump($B3D6DD)                                   ;B3D6D4
     %AICMD0x13_Wait(1)                                         ;B3D6D7
     %AICMD0x12_Jump($B3D6D7)                                   ;B3D6DA
+B3D6DD:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, $B3D6E8)   ;B3D6DD
     %AICMD0x09($02, $B3D726)                                   ;B3D6E4
+B3D6E8:
     %AICMD0x12_Jump($B3D6D7)                                   ;B3D6E8
+B3D6EB:
     %AICMD0x1A($0028, $0168, $B38318, $00)                     ;B3D6EB
     %AICMD0x2D($B3D711, $B3D6FB)                               ;B3D6F3
     %AICMD0x12_Jump($B3D6F3)                                   ;B3D6F8
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3D70A)         ;B3D6FB
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3D703
     %AICMD0x12_Jump($B3D6F3)                                   ;B3D707
+B3D70A:
     %AICMD0x1C_ShowDialog($0049, $00)                          ;B3D70A
     %AICMD0x12_Jump($B3D6F3)                                   ;B3D70E
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $05, $B3D71F)   ;B3D711
     %AICMD0x1C_ShowDialog($0156, $00)                          ;B3D718
     %AICMD0x12_Jump($B3D6F3)                                   ;B3D71C
+B3D71F:
     %AICMD0x1C_ShowDialog($016F, $00)                          ;B3D71F
     %AICMD0x12_Jump($B3D6F3)                                   ;B3D723
+B3D726:
     %AICMD0x1A($00C8, $0098, $B38198, $00)                     ;B3D726
     %AICMD0x22($20, $18, $01, $B381A4, $10)                    ;B3D72E
     %AICMD0x12_Jump($B3D738)                                   ;B3D735
+B3D738:
     %AICMD0x4D($B3D743)                                        ;B3D738
     %AICMD0x2D($B3D7B4, $B3D75B)                               ;B3D73B
     %AICMD0x12_Jump($B3D738)                                   ;B3D740
     %AICMD0x45_JumpIfBetween16(nLove_Ellen, 0, 249, $B3D754)   ;B3D743
     %AICMD0x1C_ShowDialog($043E, $00)                          ;B3D74D
     %AICMD0x12_Jump($B3D738)                                   ;B3D751
+B3D754:
     %AICMD0x1C_ShowDialog($0176, $00)                          ;B3D754
     %AICMD0x12_Jump($B3D738)                                   ;B3D758
     %AICMD0x15_JumpIfEquals8($80091E, 1, $B3D79A)              ;B3D75B
@@ -7193,18 +7972,22 @@ DATA8_B3D6CF:
     %AICMD0x15_JumpIfEquals8($80091E, 73, $B3D7A7)             ;B3D77F
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3D786
     %AICMD0x12_Jump($B3D738)                                   ;B3D78A
+B3D78D:
     %AICMD0x1C_ShowDialog($03B4, $00)                          ;B3D78D
     %AICMD0x41_AddValue16(nLove_Ann, -8)                       ;B3D791
     %AICMD0x12_Jump($B3D738)                                   ;B3D797
+B3D79A:
     %AICMD0x1C_ShowDialog($03B2, $00)                          ;B3D79A
     %AICMD0x41_AddValue16(nLove_Ann, 5)                        ;B3D79E
     %AICMD0x12_Jump($B3D738)                                   ;B3D7A4
+B3D7A7:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B3D7A7
     %AICMD0x41_AddValue16(nLove_Ann, 2)                        ;B3D7AB
     %AICMD0x12_Jump($B3D738)                                   ;B3D7B1
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $05, $B3D7C2)   ;B3D7B4
     %AICMD0x1C_ShowDialog($0157, $00)                          ;B3D7BB
     %AICMD0x12_Jump($B3D738)                                   ;B3D7BF
+B3D7C2:
     %AICMD0x1C_ShowDialog($0162, $00)                          ;B3D7C2
     %AICMD0x12_Jump($B3D738)                                   ;B3D7C6
 
@@ -7219,23 +8002,29 @@ DATA8_B3D7C9:
     %AICMD0x12_Jump($B3D7E9)                                   ;B3D7E0
     %AICMD0x13_Wait(1)                                         ;B3D7E3
     %AICMD0x12_Jump($B3D7E3)                                   ;B3D7E6
+B3D7E9:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, $B3D7F4)   ;B3D7E9
     %AICMD0x09($02, $B3D85E)                                   ;B3D7F0
+B3D7F4:
     %AICMD0x12_Jump($B3D7E3)                                   ;B3D7F4
+B3D7F7:
     %AICMD0x1A($0087, $0097, $B38558, $00)                     ;B3D7F7
     %AICMD0x13_Wait(1)                                         ;B3D7FF
     %AICMD0x12_Jump($B3D7FF)                                   ;B3D802
+B3D805:
     %AICMD0x1A($0028, $0198, $B38330, $02)                     ;B3D805
     %AICMD0x2D($B3D82B, $B3D815)                               ;B3D80D
     %AICMD0x12_Jump($B3D80D)                                   ;B3D812
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3D824)         ;B3D815
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3D81D
     %AICMD0x12_Jump($B3D80D)                                   ;B3D821
+B3D824:
     %AICMD0x1C_ShowDialog($03BB, $00)                          ;B3D824
     %AICMD0x12_Jump($B3D80D)                                   ;B3D828
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $05, $B3D839)   ;B3D82B
     %AICMD0x1C_ShowDialog($015E, $00)                          ;B3D832
     %AICMD0x12_Jump($B3D80D)                                   ;B3D836
+B3D839:
     %AICMD0x1C_ShowDialog($0402, $00)                          ;B3D839
     %AICMD0x12_Jump($B3D80D)                                   ;B3D83D
     %AICMD0x1A($0098, $0158, $B38348, $00)                     ;B3D840
@@ -7245,6 +8034,7 @@ DATA8_B3D7C9:
     %AICMD0x12_Jump($B3D848)                                   ;B3D854
     %AICMD0x1C_ShowDialog($0051, $00)                          ;B3D857
     %AICMD0x12_Jump($B3D848)                                   ;B3D85B
+B3D85E:
     %AICMD0x1A($0058, $01B8, $B381EC, $00)                     ;B3D85E
     %AICMD0x4D($B3D871)                                        ;B3D866
     %AICMD0x2D($B3D8F9, $B3D889)                               ;B3D869
@@ -7252,6 +8042,7 @@ DATA8_B3D7C9:
     %AICMD0x45_JumpIfBetween16(nLove_Ellen, 0, 249, $B3D882)   ;B3D871
     %AICMD0x1C_ShowDialog($0440, $00)                          ;B3D87B
     %AICMD0x12_Jump($B3D866)                                   ;B3D87F
+B3D882:
     %AICMD0x1C_ShowDialog($017A, $00)                          ;B3D882
     %AICMD0x12_Jump($B3D866)                                   ;B3D886
     %AICMD0x16_JumpIfBetween8($80091E, 1, 5, $B3D8C5)          ;B3D889
@@ -7263,21 +8054,26 @@ DATA8_B3D7C9:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3D8EC)         ;B3D8B6
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3D8BE
     %AICMD0x12_Jump($B3D866)                                   ;B3D8C2
+B3D8C5:
     %AICMD0x1C_ShowDialog($03B2, $00)                          ;B3D8C5
     %AICMD0x41_AddValue16(nLove_Ellen, 6)                      ;B3D8C9
     %AICMD0x12_Jump($B3D866)                                   ;B3D8CF
+B3D8D2:
     %AICMD0x1C_ShowDialog($03B3, $00)                          ;B3D8D2
     %AICMD0x41_AddValue16(nLove_Ellen, 8)                      ;B3D8D6
     %AICMD0x12_Jump($B3D866)                                   ;B3D8DC
+B3D8DF:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B3D8DF
     %AICMD0x41_AddValue16(nLove_Ellen, 5)                      ;B3D8E3
     %AICMD0x12_Jump($B3D866)                                   ;B3D8E9
+B3D8EC:
     %AICMD0x1C_ShowDialog($01DA, $00)                          ;B3D8EC
     %AICMD0x41_AddValue16(nLove_Ellen, -2)                     ;B3D8F0
     %AICMD0x12_Jump($B3D866)                                   ;B3D8F6
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $05, $B3D907)   ;B3D8F9
     %AICMD0x1C_ShowDialog($0158, $00)                          ;B3D900
     %AICMD0x12_Jump($B3D866)                                   ;B3D904
+B3D907:
     %AICMD0x1C_ShowDialog($0164, $00)                          ;B3D907
     %AICMD0x12_Jump($B3D866)                                   ;B3D90B
 
@@ -7289,19 +8085,23 @@ DATA8_B3D90E:
     %AICMD0x09($02, $B3D958)                                   ;B3D913
     %AICMD0x13_Wait(1)                                         ;B3D917
     %AICMD0x12_Jump($B3D917)                                   ;B3D91A
+B3D91D:
     %AICMD0x1A($0088, $0050, $B382E8, $00)                     ;B3D91D
     %AICMD0x2D($B3D943, $B3D92D)                               ;B3D925
     %AICMD0x12_Jump($B3D925)                                   ;B3D92A
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3D93C)         ;B3D92D
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3D935
     %AICMD0x12_Jump($B3D925)                                   ;B3D939
+B3D93C:
     %AICMD0x1C_ShowDialog($03BB, $00)                          ;B3D93C
     %AICMD0x12_Jump($B3D925)                                   ;B3D940
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $05, $B3D951)   ;B3D943
     %AICMD0x1C_ShowDialog($015E, $00)                          ;B3D94A
     %AICMD0x12_Jump($B3D925)                                   ;B3D94E
+B3D951:
     %AICMD0x1C_ShowDialog($0168, $00)                          ;B3D951
     %AICMD0x12_Jump($B3D925)                                   ;B3D955
+B3D958:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0A, $B3D99A)   ;B3D958
     %AICMD0x1A($0038, $0098, $B38390, $00)                     ;B3D95F
     %AICMD0x2D($B3D985, $B3D96F)                               ;B3D967
@@ -7309,28 +8109,32 @@ DATA8_B3D90E:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3D97E)         ;B3D96F
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3D977
     %AICMD0x12_Jump($B3D967)                                   ;B3D97B
+B3D97E:
     %AICMD0x1C_ShowDialog($03BA, $00)                          ;B3D97E
     %AICMD0x12_Jump($B3D967)                                   ;B3D982
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $05, $B3D993)   ;B3D985
     %AICMD0x1C_ShowDialog($0154, $00)                          ;B3D98C
     %AICMD0x12_Jump($B3D967)                                   ;B3D990
+B3D993:
     %AICMD0x1C_ShowDialog($0403, $00)                          ;B3D993
     %AICMD0x12_Jump($B3D967)                                   ;B3D997
+B3D99A:
     %AICMD0x10_End()                                           ;B3D99A
 
 
 DATA8_B3D99B:
- 
     %AICMD0x11_EnableUserControl()                             ;B3D99B
     %AICMD0x09($01, $B3D9A6)                                   ;B3D99C
     %AICMD0x13_Wait(1)                                         ;B3D9A0
     %AICMD0x12_Jump($B3D9A0)                                   ;B3D9A3
+B3D9A6:
     %AICMD0x1A($00E8, $009C, $B38378, $03)                     ;B3D9A6
     %AICMD0x2D($B3D9CC, $B3D9B6)                               ;B3D9AE
     %AICMD0x12_Jump($B3D9AE)                                   ;B3D9B3
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3D9C5)         ;B3D9B6
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3D9BE
     %AICMD0x12_Jump($B3D9AE)                                   ;B3D9C2
+B3D9C5:
     %AICMD0x1C_ShowDialog($03BB, $00)                          ;B3D9C5
     %AICMD0x12_Jump($B3D9AE)                                   ;B3D9C9
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $05, $B3D9F0)   ;B3D9CC
@@ -7338,10 +8142,13 @@ DATA8_B3D99B:
     %AICMD0x20_JumpIfChoice(0, $B3D9E2)                        ;B3D9D7
     %AICMD0x20_JumpIfChoice(1, $B3D9E9)                        ;B3D9DB
     %AICMD0x12_Jump($B3D9AE)                                   ;B3D9DF
+B3D9E2:
     %AICMD0x1C_ShowDialog($015C, $00)                          ;B3D9E2
     %AICMD0x12_Jump($B3D9AE)                                   ;B3D9E6
+B3D9E9:
     %AICMD0x1C_ShowDialog($015D, $00)                          ;B3D9E9
     %AICMD0x12_Jump($B3D9AE)                                   ;B3D9ED
+B3D9F0:
     %AICMD0x1C_ShowDialog($016C, $00)                          ;B3D9F0
     %AICMD0x12_Jump($B3D9AE)                                   ;B3D9F4
 
@@ -7372,10 +8179,13 @@ DATA8_B3DA17:
     %AICMD0x12_Jump($B3DA29)                                   ;B3DA20
     %AICMD0x13_Wait(1)                                         ;B3DA23
     %AICMD0x12_Jump($B3DA23)                                   ;B3DA26
+B3DA29:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, $B3DA3B)   ;B3DA29
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0C, $B3DA3B)   ;B3DA30
     %AICMD0x09($03, $B3DAEE)                                   ;B3DA37
+B3DA3B:
     %AICMD0x12_Jump($B3DA23)                                   ;B3DA3B
+B3DA3E:
     %AICMD0x1A($00C8, $0078, $B38300, $00)                     ;B3DA3E
     %AICMD0x4D($B3DA58)                                        ;B3DA46
     %AICMD0x2D($B3DA5F, $B3DA51)                               ;B3DA49
@@ -7389,13 +8199,17 @@ DATA8_B3DA17:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B3DA89)         ;B3DA6D
     %AICMD0x1C_ShowDialog($0393, $00)                          ;B3DA74
     %AICMD0x12_Jump($B3DA46)                                   ;B3DA78
+B3DA7B:
     %AICMD0x1C_ShowDialog($01CD, $00)                          ;B3DA7B
     %AICMD0x12_Jump($B3DA46)                                   ;B3DA7F
+B3DA82:
     %AICMD0x1C_ShowDialog($02AD, $00)                          ;B3DA82
     %AICMD0x12_Jump($B3DA46)                                   ;B3DA86
+B3DA89:
     %AICMD0x1C_ShowDialog($03EC, $00)                          ;B3DA89
     %AICMD0x41_AddValue16(nPlayerHappiness, 5)                 ;B3DA8D
     %AICMD0x12_Jump($B3DA46)                                   ;B3DA93
+B3DA96:
     %AICMD0x1A($0188, $00A0, $B383F0, $00)                     ;B3DA96
     %AICMD0x4D($B3DAB0)                                        ;B3DA9E
     %AICMD0x2D($B3DAB7, $B3DAA9)                               ;B3DAA1
@@ -7409,13 +8223,17 @@ DATA8_B3DA17:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B3DAE1)         ;B3DAC5
     %AICMD0x1C_ShowDialog($003F, $00)                          ;B3DACC
     %AICMD0x12_Jump($B3DA9E)                                   ;B3DAD0
+B3DAD3:
     %AICMD0x1C_ShowDialog($01CE, $00)                          ;B3DAD3
     %AICMD0x12_Jump($B3DA9E)                                   ;B3DAD7
+B3DADA:
     %AICMD0x1C_ShowDialog($02AE, $00)                          ;B3DADA
     %AICMD0x12_Jump($B3DA9E)                                   ;B3DADE
+B3DAE1:
     %AICMD0x1C_ShowDialog($03ED, $00)                          ;B3DAE1
     %AICMD0x41_AddValue16(nPlayerHappiness, 5)                 ;B3DAE5
     %AICMD0x12_Jump($B3DA9E)                                   ;B3DAEB
+B3DAEE:
     %AICMD0x1A($0048, $0198, $B38168, $00)                     ;B3DAEE
     %AICMD0x4D($B3DB01)                                        ;B3DAF6
     %AICMD0x2D($B3DB19, $B3DB42)                               ;B3DAF9
@@ -7423,14 +8241,17 @@ DATA8_B3DA17:
     %AICMD0x45_JumpIfBetween16(nLove_Maria, 0, 249, $B3DB12)   ;B3DB01
     %AICMD0x1C_ShowDialog($043D, $00)                          ;B3DB0B
     %AICMD0x12_Jump($B3DAF6)                                   ;B3DB0F
+B3DB12:
     %AICMD0x1C_ShowDialog($0174, $00)                          ;B3DB12
     %AICMD0x12_Jump($B3DAF6)                                   ;B3DB16
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 23, $B3DB2E)         ;B3DB19
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B3DB35)         ;B3DB20
     %AICMD0x1C_ShowDialog($039A, $00)                          ;B3DB27
     %AICMD0x12_Jump($B3DAF6)                                   ;B3DB2B
+B3DB2E:
     %AICMD0x1C_ShowDialog($02AF, $00)                          ;B3DB2E
     %AICMD0x12_Jump($B3DAF6)                                   ;B3DB32
+B3DB35:
     %AICMD0x1C_ShowDialog($03F8, $00)                          ;B3DB35
     %AICMD0x41_AddValue16(nLove_Maria, 5)                      ;B3DB39
     %AICMD0x12_Jump($B3DAF6)                                   ;B3DB3F
@@ -7438,9 +8259,11 @@ DATA8_B3DA17:
     %AICMD0x16_JumpIfBetween8($80091E, 16, 23, $B3DB65)        ;B3DB49
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3DB51
     %AICMD0x12_Jump($B3DAF6)                                   ;B3DB55
+B3DB58:
     %AICMD0x1C_ShowDialog($03B5, $00)                          ;B3DB58
     %AICMD0x41_AddValue16(nLove_Maria, 3)                      ;B3DB5C
     %AICMD0x12_Jump($B3DAF6)                                   ;B3DB62
+B3DB65:
     %AICMD0x1C_ShowDialog($03B2, $00)                          ;B3DB65
     %AICMD0x41_AddValue16(nLove_Maria, 5)                      ;B3DB69
     %AICMD0x12_Jump($B3DAF6)                                   ;B3DB6F
@@ -7452,6 +8275,7 @@ DATA8_B3DB72:
     %AICMD0x09($01, $B3DB7D)                                   ;B3DB73
     %AICMD0x13_Wait(1)                                         ;B3DB77
     %AICMD0x12_Jump($B3DB77)                                   ;B3DB7A
+B3DB7D:
     %AICMD0x1A($0068, $00E8, $B38354, $00)                     ;B3DB7D
     %AICMD0x4D($B3DB97)                                        ;B3DB85
     %AICMD0x2D($B3DB9E, $B3DB90)                               ;B3DB88
@@ -7465,10 +8289,13 @@ DATA8_B3DB72:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B3DBC8)         ;B3DBAC
     %AICMD0x1C_ShowDialog($0397, $00)                          ;B3DBB3
     %AICMD0x12_Jump($B3DB85)                                   ;B3DBB7
+B3DBBA:
     %AICMD0x1C_ShowDialog($01CF, $00)                          ;B3DBBA
     %AICMD0x12_Jump($B3DB85)                                   ;B3DBBE
+B3DBC1:
     %AICMD0x1C_ShowDialog($0405, $00)                          ;B3DBC1
     %AICMD0x12_Jump($B3DB85)                                   ;B3DBC5
+B3DBC8:
     %AICMD0x1C_ShowDialog($03F0, $00)                          ;B3DBC8
     %AICMD0x41_AddValue16(nPlayerHappiness, 5)                 ;B3DBCC
     %AICMD0x12_Jump($B3DB85)                                   ;B3DBD2
@@ -7481,10 +8308,13 @@ DATA8_B3DBD5:
     %AICMD0x12_Jump($B3DBE3)                                   ;B3DBDA
     %AICMD0x13_Wait(1)                                         ;B3DBDD
     %AICMD0x12_Jump($B3DBDD)                                   ;B3DBE0
+B3DBE3:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, $B3DBF5)   ;B3DBE3
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $00, $B3DBF5)   ;B3DBEA
     %AICMD0x09($02, $B3DC4A)                                   ;B3DBF1
+B3DBF5:
     %AICMD0x12_Jump($B3DBDD)                                   ;B3DBF5
+B3DBF8:
     %AICMD0x1A($0028, $0168, $B383FC, $02)                     ;B3DBF8
     %AICMD0x4D($B3DC12)                                        ;B3DC00
     %AICMD0x2D($B3DC19, $B3DC0B)                               ;B3DC03
@@ -7497,30 +8327,37 @@ DATA8_B3DBD5:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B3DC39)         ;B3DC20
     %AICMD0x1C_ShowDialog($0394, $00)                          ;B3DC27
     %AICMD0x12_Jump($B3DC00)                                   ;B3DC2B
+B3DC2E:
     %AICMD0x1C_ShowDialog($02AE, $00)                          ;B3DC2E
     %AICMD0x1B($02D0, $01)                                     ;B3DC32
     %AICMD0x12_Jump($B3DC00)                                   ;B3DC36
+B3DC39:
     %AICMD0x1C_ShowDialog($03EF, $00)                          ;B3DC39
     %AICMD0x1B($02D0, $01)                                     ;B3DC3D
     %AICMD0x41_AddValue16(nPlayerHappiness, 5)                 ;B3DC41
     %AICMD0x12_Jump($B3DC00)                                   ;B3DC47
+B3DC4A:
     %AICMD0x1A($0068, $0098, $B381C8, $00)                     ;B3DC4A
     %AICMD0x12_Jump($B3DC55)                                   ;B3DC52
+B3DC55:
     %AICMD0x4D($B3DC60)                                        ;B3DC55
     %AICMD0x2D($B3DCA8, $B3DC78)                               ;B3DC58
     %AICMD0x12_Jump($B3DC55)                                   ;B3DC5D
     %AICMD0x45_JumpIfBetween16(nLove_Nina, 0, 249, $B3DC71)    ;B3DC60
     %AICMD0x1C_ShowDialog($043F, $00)                          ;B3DC6A
     %AICMD0x12_Jump($B3DC55)                                   ;B3DC6E
+B3DC71:
     %AICMD0x1C_ShowDialog($0178, $00)                          ;B3DC71
     %AICMD0x12_Jump($B3DC55)                                   ;B3DC75
     %AICMD0x15_JumpIfEquals8($80091E, 6, $B3DC9B)              ;B3DC78
     %AICMD0x16_JumpIfBetween8($80091E, 16, 23, $B3DC8E)        ;B3DC7F
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3DC87
     %AICMD0x12_Jump($B3DC55)                                   ;B3DC8B
+B3DC8E:
     %AICMD0x1C_ShowDialog($03B2, $00)                          ;B3DC8E
     %AICMD0x41_AddValue16(nLove_Nina, 2)                       ;B3DC92
     %AICMD0x12_Jump($B3DC55)                                   ;B3DC98
+B3DC9B:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B3DC9B
     %AICMD0x41_AddValue16(nLove_Nina, 8)                       ;B3DC9F
     %AICMD0x12_Jump($B3DC55)                                   ;B3DCA5
@@ -7528,8 +8365,10 @@ DATA8_B3DBD5:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B3DCC4)         ;B3DCAF
     %AICMD0x1C_ShowDialog($039C, $00)                          ;B3DCB6
     %AICMD0x12_Jump($B3DC55)                                   ;B3DCBA
+B3DCBD:
     %AICMD0x1C_ShowDialog($02B1, $00)                          ;B3DCBD
     %AICMD0x12_Jump($B3DC55)                                   ;B3DCC1
+B3DCC4:
     %AICMD0x1C_ShowDialog($03FA, $00)                          ;B3DCC4
     %AICMD0x41_AddValue16(nLove_Nina, 5)                       ;B3DCC8
     %AICMD0x12_Jump($B3DC55)                                   ;B3DCCE
@@ -7542,9 +8381,12 @@ DATA8_B3DCD1:
     %AICMD0x12_Jump($B3DCDF)                                   ;B3DCD6
     %AICMD0x13_Wait(1)                                         ;B3DCD9
     %AICMD0x12_Jump($B3DCD9)                                   ;B3DCDC
+B3DCDF:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, $B3DCEA)   ;B3DCDF
     %AICMD0x09($02, $B3DD3F)                                   ;B3DCE6
+B3DCEA:
     %AICMD0x12_Jump($B3DCD9)                                   ;B3DCEA
+B3DCED:
     %AICMD0x1A($0028, $0168, $B38318, $02)                     ;B3DCED
     %AICMD0x4D($B3DD07)                                        ;B3DCF5
     %AICMD0x2D($B3DD0E, $B3DD00)                               ;B3DCF8
@@ -7558,26 +8400,32 @@ DATA8_B3DCD1:
     %AICMD0x1C_ShowDialog($0079, $00)                          ;B3DD1C
     %AICMD0x1B($029A, $01)                                     ;B3DD20
     %AICMD0x12_Jump($B3DCF5)                                   ;B3DD24
+B3DD27:
     %AICMD0x1C_ShowDialog($01DC, $00)                          ;B3DD27
     %AICMD0x12_Jump($B3DCF5)                                   ;B3DD2B
+B3DD2E:
     %AICMD0x1C_ShowDialog($03EE, $00)                          ;B3DD2E
     %AICMD0x1B($029A, $01)                                     ;B3DD32
     %AICMD0x41_AddValue16(nPlayerHappiness, 5)                 ;B3DD36
     %AICMD0x12_Jump($B3DCF5)                                   ;B3DD3C
+B3DD3F:
     %AICMD0x1A($0098, $0188, $B38198, $00)                     ;B3DD3F
     %AICMD0x12_Jump($B3DD4A)                                   ;B3DD47
+B3DD4A:
     %AICMD0x4D($B3DD55)                                        ;B3DD4A
     %AICMD0x2D($B3DD90, $B3DD6D)                               ;B3DD4D
     %AICMD0x12_Jump($B3DD4A)                                   ;B3DD52
     %AICMD0x45_JumpIfBetween16(nLove_Ann, 0, 249, $B3DD66)     ;B3DD55
     %AICMD0x1C_ShowDialog($043E, $00)                          ;B3DD5F
     %AICMD0x12_Jump($B3DD4A)                                   ;B3DD63
+B3DD66:
     %AICMD0x1C_ShowDialog($0176, $00)                          ;B3DD66
     %AICMD0x12_Jump($B3DD4A)                                   ;B3DD6A
     %AICMD0x15_JumpIfEquals8($80091E, 6, $B3DD83)              ;B3DD6D
     %AICMD0x16_JumpIfBetween8($80091E, 16, 23, $B3DD83)        ;B3DD74
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3DD7C
     %AICMD0x12_Jump($B3DD4A)                                   ;B3DD80
+B3DD83:
     %AICMD0x1C_ShowDialog($03B2, $00)                          ;B3DD83
     %AICMD0x41_AddValue16(nLove_Ann, 6)                        ;B3DD87
     %AICMD0x12_Jump($B3DD4A)                                   ;B3DD8D
@@ -7586,10 +8434,13 @@ DATA8_B3DCD1:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B3DDBA)         ;B3DD9E
     %AICMD0x1C_ShowDialog($039B, $00)                          ;B3DDA5
     %AICMD0x12_Jump($B3DD4A)                                   ;B3DDA9
+B3DDAC:
     %AICMD0x1C_ShowDialog($01DE, $00)                          ;B3DDAC
     %AICMD0x12_Jump($B3DD4A)                                   ;B3DDB0
+B3DDB3:
     %AICMD0x1C_ShowDialog($02B0, $00)                          ;B3DDB3
     %AICMD0x12_Jump($B3DD4A)                                   ;B3DDB7
+B3DDBA:
     %AICMD0x1C_ShowDialog($03F9, $00)                          ;B3DDBA
     %AICMD0x41_AddValue16(nLove_Ann, 5)                        ;B3DDBE
     %AICMD0x12_Jump($B3DD4A)                                   ;B3DDC4
@@ -7606,12 +8457,16 @@ DATA8_B3DDC7:
     %AICMD0x12_Jump($B3DDEB)                                   ;B3DDE2
     %AICMD0x13_Wait(1)                                         ;B3DDE5
     %AICMD0x12_Jump($B3DDE5)                                   ;B3DDE8
+B3DDEB:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, $B3DDF6)   ;B3DDEB
     %AICMD0x09($02, $B3DE91)                                   ;B3DDF2
+B3DDF6:
     %AICMD0x12_Jump($B3DDE5)                                   ;B3DDF6
+B3DDF9:
     %AICMD0x1A($0087, $0097, $B38558, $00)                     ;B3DDF9
     %AICMD0x13_Wait(1)                                         ;B3DE01
     %AICMD0x12_Jump($B3DE01)                                   ;B3DE04
+B3DE07:
     %AICMD0x1A($0028, $0198, $B38330, $02)                     ;B3DE07
     %AICMD0x4D($B3DE21)                                        ;B3DE0F
     %AICMD0x2D($B3DE28, $B3DE1A)                               ;B3DE12
@@ -7624,12 +8479,15 @@ DATA8_B3DDC7:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B3DE44)         ;B3DE2F
     %AICMD0x1C_ShowDialog($0395, $00)                          ;B3DE36
     %AICMD0x12_Jump($B3DE0F)                                   ;B3DE3A
+B3DE3D:
     %AICMD0x1C_ShowDialog($01ED, $00)                          ;B3DE3D
     %AICMD0x12_Jump($B3DE0F)                                   ;B3DE41
+B3DE44:
     %AICMD0x1C_ShowDialog($03EC, $00)                          ;B3DE44
     %AICMD0x1B($02A1, $01)                                     ;B3DE48
     %AICMD0x41_AddValue16(nPlayerHappiness, 5)                 ;B3DE4C
     %AICMD0x12_Jump($B3DE0F)                                   ;B3DE52
+B3DE55:
     %AICMD0x1A($0098, $0158, $B38348, $00)                     ;B3DE55
     %AICMD0x4D($B3DE68)                                        ;B3DE5D
     %AICMD0x2D($B3DE76, $B3DE6F)                               ;B3DE60
@@ -7641,9 +8499,11 @@ DATA8_B3DDC7:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B3DE84)         ;B3DE76
     %AICMD0x1C_ShowDialog($0396, $00)                          ;B3DE7D
     %AICMD0x12_Jump($B3DE5D)                                   ;B3DE81
+B3DE84:
     %AICMD0x1C_ShowDialog($03FD, $00)                          ;B3DE84
     %AICMD0x41_AddValue16(nPlayerHappiness, 5)                 ;B3DE88
     %AICMD0x12_Jump($B3DE5D)                                   ;B3DE8E
+B3DE91:
     %AICMD0x1A($00B8, $00A8, $B381E0, $00)                     ;B3DE91
     %AICMD0x4D($B3DEA4)                                        ;B3DE99
     %AICMD0x2D($B3DED8, $B3DEBC)                               ;B3DE9C
@@ -7651,11 +8511,13 @@ DATA8_B3DDC7:
     %AICMD0x45_JumpIfBetween16(nLove_Ellen, 0, 249, $B3DEB5)   ;B3DEA4
     %AICMD0x1C_ShowDialog($0440, $00)                          ;B3DEAE
     %AICMD0x12_Jump($B3DE99)                                   ;B3DEB2
+B3DEB5:
     %AICMD0x1C_ShowDialog($017A, $00)                          ;B3DEB5
     %AICMD0x12_Jump($B3DE99)                                   ;B3DEB9
     %AICMD0x16_JumpIfBetween8($80091E, 20, 23, $B3DECB)        ;B3DEBC
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3DEC4
     %AICMD0x12_Jump($B3DE99)                                   ;B3DEC8
+B3DECB:
     %AICMD0x1C_ShowDialog($03B3, $00)                          ;B3DECB
     %AICMD0x41_AddValue16(nLove_Ellen, 3)                      ;B3DECF
     %AICMD0x12_Jump($B3DE99)                                   ;B3DED5
@@ -7664,11 +8526,14 @@ DATA8_B3DDC7:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B3DEFB)         ;B3DEE6
     %AICMD0x1C_ShowDialog($039D, $00)                          ;B3DEED
     %AICMD0x12_Jump($B3DE99)                                   ;B3DEF1
+B3DEF4:
     %AICMD0x1C_ShowDialog($02B2, $00)                          ;B3DEF4
     %AICMD0x12_Jump($B3DE99)                                   ;B3DEF8
+B3DEFB:
     %AICMD0x1C_ShowDialog($03FB, $00)                          ;B3DEFB
     %AICMD0x41_AddValue16(nLove_Ellen, 5)                      ;B3DEFF
     %AICMD0x12_Jump($B3DE99)                                   ;B3DF05
+B3DF08:
     %AICMD0x1C_ShowDialog($01EE, $00)                          ;B3DF08
     %AICMD0x12_Jump($B3DE99)                                   ;B3DF0C
 
@@ -7680,6 +8545,7 @@ DATA8_B3DF0F:
     %AICMD0x09($02, $B3DF92)                                   ;B3DF14
     %AICMD0x13_Wait(1)                                         ;B3DF18
     %AICMD0x12_Jump($B3DF18)                                   ;B3DF1B
+B3DF1E:
     %AICMD0x1A($0088, $0050, $B382E8, $00)                     ;B3DF1E
     %AICMD0x4D($B3DF38)                                        ;B3DF26
     %AICMD0x2D($B3DF43, $B3DF31)                               ;B3DF29
@@ -7695,18 +8561,23 @@ DATA8_B3DF0F:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $02, $B3DF87)   ;B3DF58
     %AICMD0x1C_ShowDialog($0398, $00)                          ;B3DF5F
     %AICMD0x12_Jump($B3DF26)                                   ;B3DF63
+B3DF66:
     %AICMD0x1C_ShowDialog($01D1, $00)                          ;B3DF66
     %AICMD0x1B($0288, $00)                                     ;B3DF6A
     %AICMD0x12_Jump($B3DF26)                                   ;B3DF6E
+B3DF71:
     %AICMD0x1C_ShowDialog($01DD, $00)                          ;B3DF71
     %AICMD0x1B($0288, $00)                                     ;B3DF75
     %AICMD0x12_Jump($B3DF26)                                   ;B3DF79
+B3DF7C:
     %AICMD0x1C_ShowDialog($01E6, $00)                          ;B3DF7C
     %AICMD0x1B($0288, $00)                                     ;B3DF80
     %AICMD0x12_Jump($B3DF26)                                   ;B3DF84
+B3DF87:
     %AICMD0x1C_ShowDialog($01EF, $00)                          ;B3DF87
     %AICMD0x1B($0288, $00)                                     ;B3DF8B
     %AICMD0x12_Jump($B3DF26)                                   ;B3DF8F
+B3DF92:
     %AICMD0x1A($0038, $0098, $B38384, $00)                     ;B3DF92
     %AICMD0x4D($B3DFA5)                                        ;B3DF9A
     %AICMD0x2D($B3DFB3, $B3DFAC)                               ;B3DF9D
@@ -7718,6 +8589,7 @@ DATA8_B3DF0F:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B3DFC1)         ;B3DFB3
     %AICMD0x1C_ShowDialog($0399, $00)                          ;B3DFBA
     %AICMD0x12_Jump($B3DF9A)                                   ;B3DFBE
+B3DFC1:
     %AICMD0x1C_ShowDialog($0324, $00)                          ;B3DFC1
     %AICMD0x41_AddValue16(nPlayerHappiness, 5)                 ;B3DFC5
     %AICMD0x12_Jump($B3DF9A)                                   ;B3DFCB
@@ -7729,6 +8601,7 @@ DATA8_B3DFCE:
     %AICMD0x09($01, $B3DFD9)                                   ;B3DFCF
     %AICMD0x13_Wait(1)                                         ;B3DFD3
     %AICMD0x12_Jump($B3DFD3)                                   ;B3DFD6
+B3DFD9:
     %AICMD0x1A($00E8, $0098, $B3836C, $03)                     ;B3DFD9
     %AICMD0x4D($B3DFF7)                                        ;B3DFE1
     %AICMD0x2D($B3E002, $B3DFEC)                               ;B3DFE4
@@ -7744,9 +8617,11 @@ DATA8_B3DFCE:
     %AICMD0x1C_ShowDialog($005E, $00)                          ;B3E010
     %AICMD0x1B($02AF, $00)                                     ;B3E014
     %AICMD0x12_Jump($B3DFE1)                                   ;B3E018
+B3E01B:
     %AICMD0x1C_ShowDialog($01F0, $00)                          ;B3E01B
     %AICMD0x1B($02AF, $00)                                     ;B3E01F
     %AICMD0x12_Jump($B3DFE1)                                   ;B3E023
+B3E026:
     %AICMD0x1C_ShowDialog($0146, $00)                          ;B3E026
     %AICMD0x1B($02AF, $00)                                     ;B3E02A
     %AICMD0x41_AddValue16(nPlayerHappiness, 5)                 ;B3E02E
@@ -7754,12 +8629,12 @@ DATA8_B3DFCE:
 
 
 DATA8_B3E037:
- 
     %AICMD0x11_EnableUserControl()                             ;B3E037
     %AICMD0x09($01, $B3E083)                                   ;B3E038
     %AICMD0x09($02, $B3E046)                                   ;B3E03C
     %AICMD0x13_Wait(1)                                         ;B3E040
     %AICMD0x12_Jump($B3E040)                                   ;B3E043
+B3E046:
     %AICMD0x1A($0058, $00B8, $B38234, $00)                     ;B3E046
     %AICMD0x4D($B3E060)                                        ;B3E04E
     %AICMD0x2D($B3E067, $B3E059)                               ;B3E051
@@ -7771,10 +8646,12 @@ DATA8_B3E037:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B3E075)         ;B3E067
     %AICMD0x1C_ShowDialog($0150, $00)                          ;B3E06E
     %AICMD0x12_Jump($B3E04E)                                   ;B3E072
+B3E075:
     %AICMD0x1C_ShowDialog($03F6, $00)                          ;B3E075
     %AICMD0x41_AddValue16(nPlayerHappiness, 5)                 ;B3E079
     %AICMD0x12_Jump($B3E04E)                                   ;B3E07F
     %AICMD0x10_End()                                           ;B3E082
+B3E083:
     %AICMD0x1A($0098, $0088, $B38234, $00)                     ;B3E083
     %AICMD0x4D($B3E09D)                                        ;B3E08B
     %AICMD0x2D($B3E0A4, $B3E096)                               ;B3E08E
@@ -7786,6 +8663,7 @@ DATA8_B3E037:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, $B3E0B2)         ;B3E0A4
     %AICMD0x1C_ShowDialog($03A0, $00)                          ;B3E0AB
     %AICMD0x12_Jump($B3E08B)                                   ;B3E0AF
+B3E0B2:
     %AICMD0x1C_ShowDialog($03F7, $00)                          ;B3E0B2
     %AICMD0x41_AddValue16(nPlayerHappiness, 5)                 ;B3E0B6
     %AICMD0x12_Jump($B3E08B)                                   ;B3E0BC
@@ -7816,20 +8694,25 @@ DATA8_B3E0DF:
     %AICMD0x12_Jump($B3E0ED)                                   ;B3E0E4
     %AICMD0x13_Wait(1)                                         ;B3E0E7
     %AICMD0x12_Jump($B3E0E7)                                   ;B3E0EA
+B3E0ED:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, $B3E0FF)   ;B3E0ED
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0C, $B3E0FF)   ;B3E0F4
     %AICMD0x09($02, $B3E12F)                                   ;B3E0FB
+B3E0FF:
     %AICMD0x12_Jump($B3E0E7)                                   ;B3E0FF
+B3E102:
     %AICMD0x1A($0188, $00A0, $B383F0, $00)                     ;B3E102
     %AICMD0x2D($B3E128, $B3E112)                               ;B3E10A
     %AICMD0x12_Jump($B3E10A)                                   ;B3E10F
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3E121)         ;B3E112
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3E11A
     %AICMD0x12_Jump($B3E10A)                                   ;B3E11E
+B3E121:
     %AICMD0x1C_ShowDialog($03B9, $00)                          ;B3E121
     %AICMD0x12_Jump($B3E10A)                                   ;B3E125
     %AICMD0x1C_ShowDialog($0401, $00)                          ;B3E128
     %AICMD0x12_Jump($B3E10A)                                   ;B3E12C
+B3E12F:
     %AICMD0x1A($0048, $0198, $B38168, $00)                     ;B3E12F
     %AICMD0x4D($B3E142)                                        ;B3E137
     %AICMD0x2D($B3E15A, $B3E161)                               ;B3E13A
@@ -7837,6 +8720,7 @@ DATA8_B3E0DF:
     %AICMD0x45_JumpIfBetween16(nLove_Maria, 0, 249, $B3E153)   ;B3E142
     %AICMD0x1C_ShowDialog($043D, $00)                          ;B3E14C
     %AICMD0x12_Jump($B3E137)                                   ;B3E150
+B3E153:
     %AICMD0x1C_ShowDialog($0174, $00)                          ;B3E153
     %AICMD0x12_Jump($B3E137)                                   ;B3E157
     %AICMD0x1C_ShowDialog($016B, $00)                          ;B3E15A
@@ -7849,15 +8733,19 @@ DATA8_B3E0DF:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3E1BC)         ;B3E186
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3E18E
     %AICMD0x12_Jump($B3E137)                                   ;B3E192
+B3E195:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B3E195
     %AICMD0x41_AddValue16(nLove_Maria, 4)                      ;B3E199
     %AICMD0x12_Jump($B3E137)                                   ;B3E19F
+B3E1A2:
     %AICMD0x1C_ShowDialog($03B5, $00)                          ;B3E1A2
     %AICMD0x41_AddValue16(nLove_Maria, 3)                      ;B3E1A6
     %AICMD0x12_Jump($B3E137)                                   ;B3E1AC
+B3E1AF:
     %AICMD0x1C_ShowDialog($03B2, $00)                          ;B3E1AF
     %AICMD0x41_AddValue16(nLove_Maria, 5)                      ;B3E1B3
     %AICMD0x12_Jump($B3E137)                                   ;B3E1B9
+B3E1BC:
     %AICMD0x1C_ShowDialog($01DA, $00)                          ;B3E1BC
     %AICMD0x41_AddValue16(nLove_Maria, -2)                     ;B3E1C0
     %AICMD0x12_Jump($B3E137)                                   ;B3E1C6
@@ -7870,22 +8758,26 @@ DATA8_B3E1C9:
     %AICMD0x09($02, $B3E205)                                   ;B3E1CE
     %AICMD0x13_Wait(1)                                         ;B3E1D2
     %AICMD0x12_Jump($B3E1D2)                                   ;B3E1D5
+B3E1D8:
     %AICMD0x1A($0068, $00E8, $B38354, $02)                     ;B3E1D8
     %AICMD0x2D($B3E1FE, $B3E1E8)                               ;B3E1E0
     %AICMD0x12_Jump($B3E1E0)                                   ;B3E1E5
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3E1F7)         ;B3E1E8
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3E1F0
     %AICMD0x12_Jump($B3E1E0)                                   ;B3E1F4
+B3E1F7:
     %AICMD0x1C_ShowDialog($03B0, $00)                          ;B3E1F7
     %AICMD0x12_Jump($B3E1E0)                                   ;B3E1FB
     %AICMD0x1C_ShowDialog($0411, $00)                          ;B3E1FE
     %AICMD0x12_Jump($B3E1E0)                                   ;B3E202
+B3E205:
     %AICMD0x1A($0078, $00E8, $B38300, $03)                     ;B3E205
     %AICMD0x2D($B3E22B, $B3E215)                               ;B3E20D
     %AICMD0x12_Jump($B3E20D)                                   ;B3E212
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3E224)         ;B3E215
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3E21D
     %AICMD0x12_Jump($B3E20D)                                   ;B3E221
+B3E224:
     %AICMD0x1C_ShowDialog($03B8, $00)                          ;B3E224
     %AICMD0x12_Jump($B3E20D)                                   ;B3E228
     %AICMD0x1C_ShowDialog($016D, $00)                          ;B3E22B
@@ -7899,28 +8791,35 @@ DATA8_B3E232:
     %AICMD0x12_Jump($B3E240)                                   ;B3E237
     %AICMD0x13_Wait(1)                                         ;B3E23A
     %AICMD0x12_Jump($B3E23A)                                   ;B3E23D
+B3E240:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, $B3E252)   ;B3E240
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $00, $B3E252)   ;B3E247
     %AICMD0x09($02, $B3E282)                                   ;B3E24E
+B3E252:
     %AICMD0x12_Jump($B3E23A)                                   ;B3E252
+B3E255:
     %AICMD0x1A($0028, $0168, $B383FC, $02)                     ;B3E255
     %AICMD0x2D($B3E27B, $B3E265)                               ;B3E25D
     %AICMD0x12_Jump($B3E25D)                                   ;B3E262
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3E274)         ;B3E265
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3E26D
     %AICMD0x12_Jump($B3E25D)                                   ;B3E271
+B3E274:
     %AICMD0x1C_ShowDialog($03B9, $00)                          ;B3E274
     %AICMD0x12_Jump($B3E25D)                                   ;B3E278
     %AICMD0x1C_ShowDialog($016B, $00)                          ;B3E27B
     %AICMD0x12_Jump($B3E25D)                                   ;B3E27F
+B3E282:
     %AICMD0x1A($0058, $00B0, $B381C8, $00)                     ;B3E282
     %AICMD0x12_Jump($B3E28D)                                   ;B3E28A
+B3E28D:
     %AICMD0x4D($B3E298)                                        ;B3E28D
     %AICMD0x2D($B3E318, $B3E2B0)                               ;B3E290
     %AICMD0x12_Jump($B3E28D)                                   ;B3E295
     %AICMD0x45_JumpIfBetween16(nLove_Nina, 0, 249, $B3E2A9)    ;B3E298
     %AICMD0x1C_ShowDialog($043F, $00)                          ;B3E2A2
     %AICMD0x12_Jump($B3E28D)                                   ;B3E2A6
+B3E2A9:
     %AICMD0x1C_ShowDialog($0178, $00)                          ;B3E2A9
     %AICMD0x12_Jump($B3E28D)                                   ;B3E2AD
     %AICMD0x15_JumpIfEquals8($80091E, 5, $B3E2F1)              ;B3E2B0
@@ -7931,15 +8830,19 @@ DATA8_B3E232:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3E30B)         ;B3E2D5
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3E2DD
     %AICMD0x12_Jump($B3E28D)                                   ;B3E2E1
+B3E2E4:
     %AICMD0x1C_ShowDialog($03B2, $00)                          ;B3E2E4
     %AICMD0x41_AddValue16(nLove_Nina, 2)                       ;B3E2E8
     %AICMD0x12_Jump($B3E28D)                                   ;B3E2EE
+B3E2F1:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B3E2F1
     %AICMD0x41_AddValue16(nLove_Nina, 8)                       ;B3E2F5
     %AICMD0x12_Jump($B3E28D)                                   ;B3E2FB
+B3E2FE:
     %AICMD0x1C_ShowDialog($03B1, $00)                          ;B3E2FE
     %AICMD0x41_AddValue16(nLove_Nina, -8)                      ;B3E302
     %AICMD0x12_Jump($B3E28D)                                   ;B3E308
+B3E30B:
     %AICMD0x1C_ShowDialog($03BA, $00)                          ;B3E30B
     %AICMD0x41_AddValue16(nLove_Nina, -2)                      ;B3E30F
     %AICMD0x12_Jump($B3E28D)                                   ;B3E315
@@ -7954,28 +8857,35 @@ DATA8_B3E31F:
     %AICMD0x12_Jump($B3E32D)                                   ;B3E324
     %AICMD0x13_Wait(1)                                         ;B3E327
     %AICMD0x12_Jump($B3E327)                                   ;B3E32A
+B3E32D:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, $B3E338)   ;B3E32D
     %AICMD0x09($02, $B3E368)                                   ;B3E334
+B3E338:
     %AICMD0x12_Jump($B3E327)                                   ;B3E338
+B3E33B:
     %AICMD0x1A($0028, $0168, $B38318, $02)                     ;B3E33B
     %AICMD0x2D($B3E361, $B3E34B)                               ;B3E343
     %AICMD0x12_Jump($B3E343)                                   ;B3E348
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3E35A)         ;B3E34B
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3E353
     %AICMD0x12_Jump($B3E343)                                   ;B3E357
+B3E35A:
     %AICMD0x1C_ShowDialog($0049, $00)                          ;B3E35A
     %AICMD0x12_Jump($B3E343)                                   ;B3E35E
     %AICMD0x1C_ShowDialog($016F, $00)                          ;B3E361
     %AICMD0x12_Jump($B3E343)                                   ;B3E365
+B3E368:
     %AICMD0x1A($00D8, $00A8, $B38198, $00)                     ;B3E368
     %AICMD0x22($20, $18, $01, $B381A4, $10)                    ;B3E370
     %AICMD0x12_Jump($B3E37A)                                   ;B3E377
+B3E37A:
     %AICMD0x4D($B3E385)                                        ;B3E37A
     %AICMD0x2D($B3E40C, $B3E39D)                               ;B3E37D
     %AICMD0x12_Jump($B3E37A)                                   ;B3E382
     %AICMD0x45_JumpIfBetween16(nLove_Ellen, 0, 249, $B3E396)   ;B3E385
     %AICMD0x1C_ShowDialog($043E, $00)                          ;B3E38F
     %AICMD0x12_Jump($B3E37A)                                   ;B3E393
+B3E396:
     %AICMD0x1C_ShowDialog($0176, $00)                          ;B3E396
     %AICMD0x12_Jump($B3E37A)                                   ;B3E39A
     %AICMD0x15_JumpIfEquals8($80091E, 2, $B3E3D8)              ;B3E39D
@@ -7987,15 +8897,19 @@ DATA8_B3E31F:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3E3FF)         ;B3E3C9
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3E3D1
     %AICMD0x12_Jump($B3E37A)                                   ;B3E3D5
+B3E3D8:
     %AICMD0x1C_ShowDialog($03B4, $00)                          ;B3E3D8
     %AICMD0x41_AddValue16(nLove_Ann, -8)                       ;B3E3DC
     %AICMD0x12_Jump($B3E37A)                                   ;B3E3E2
+B3E3E5:
     %AICMD0x1C_ShowDialog($03B2, $00)                          ;B3E3E5
     %AICMD0x41_AddValue16(nLove_Ann, 6)                        ;B3E3E9
     %AICMD0x12_Jump($B3E37A)                                   ;B3E3EF
+B3E3F2:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B3E3F2
     %AICMD0x41_AddValue16(nLove_Ann, 2)                        ;B3E3F6
     %AICMD0x12_Jump($B3E37A)                                   ;B3E3FC
+B3E3FF:
     %AICMD0x1C_ShowDialog($03B4, $00)                          ;B3E3FF
     %AICMD0x41_AddValue16(nLove_Ann, -2)                       ;B3E403
     %AICMD0x12_Jump($B3E37A)                                   ;B3E409
@@ -8014,23 +8928,30 @@ DATA8_B3E413:
     %AICMD0x12_Jump($B3E437)                                   ;B3E42E
     %AICMD0x13_Wait(1)                                         ;B3E431
     %AICMD0x12_Jump($B3E431)                                   ;B3E434
+B3E437:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, $B3E442)   ;B3E437
     %AICMD0x09($03, $B3E4A5)                                   ;B3E43E
+B3E442:
     %AICMD0x12_Jump($B3E431)                                   ;B3E442
+B3E445:
     %AICMD0x1A($0087, $0097, $B38558, $00)                     ;B3E445
     %AICMD0x13_Wait(1)                                         ;B3E44D
     %AICMD0x12_Jump($B3E44D)                                   ;B3E450
+B3E453:
     %AICMD0x1A($0028, $0198, $B38330, $02)                     ;B3E453
     %AICMD0x12_Jump($B3E45E)                                   ;B3E45B
+B3E45E:
     %AICMD0x2D($B3E47C, $B3E466)                               ;B3E45E
     %AICMD0x12_Jump($B3E45E)                                   ;B3E463
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3E475)         ;B3E466
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3E46E
     %AICMD0x12_Jump($B3E45E)                                   ;B3E472
+B3E475:
     %AICMD0x1C_ShowDialog($03BB, $00)                          ;B3E475
     %AICMD0x12_Jump($B3E45E)                                   ;B3E479
     %AICMD0x1C_ShowDialog($0402, $00)                          ;B3E47C
     %AICMD0x12_Jump($B3E45E)                                   ;B3E480
+B3E483:
     %AICMD0x1A($0088, $0158, $B38348, $00)                     ;B3E483
     %AICMD0x2D($B3E49A, $B3E493)                               ;B3E48B
     %AICMD0x12_Jump($B3E48B)                                   ;B3E490
@@ -8039,6 +8960,7 @@ DATA8_B3E413:
     %AICMD0x1C_ShowDialog($03C9, $02)                          ;B3E49A
     %AICMD0x1C_ShowDialog($0412, $01)                          ;B3E49E
     %AICMD0x12_Jump($B3E48B)                                   ;B3E4A2
+B3E4A5:
     %AICMD0x1A($0058, $01B8, $B381E0, $00)                     ;B3E4A5
     %AICMD0x4D($B3E4B8)                                        ;B3E4AD
     %AICMD0x2D($B3E4E6, $B3E4D0)                               ;B3E4B0
@@ -8046,11 +8968,13 @@ DATA8_B3E413:
     %AICMD0x45_JumpIfBetween16(nLove_Ellen, 0, 249, $B3E4C9)   ;B3E4B8
     %AICMD0x1C_ShowDialog($0440, $00)                          ;B3E4C2
     %AICMD0x12_Jump($B3E4AD)                                   ;B3E4C6
+B3E4C9:
     %AICMD0x1C_ShowDialog($017A, $00)                          ;B3E4C9
     %AICMD0x12_Jump($B3E4AD)                                   ;B3E4CD
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3E4DF)         ;B3E4D0
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3E4D8
     %AICMD0x12_Jump($B3E4AD)                                   ;B3E4DC
+B3E4DF:
     %AICMD0x1C_ShowDialog($03B0, $00)                          ;B3E4DF
     %AICMD0x12_Jump($B3E4AD)                                   ;B3E4E3
     %AICMD0x1C_ShowDialog($0165, $00)                          ;B3E4E6
@@ -8065,16 +8989,19 @@ DATA8_B3E4ED:
     %AICMD0x0A($01)                                            ;B3E4F6
     %AICMD0x13_Wait(1)                                         ;B3E4F8
     %AICMD0x12_Jump($B3E4F8)                                   ;B3E4FB
+B3E4FE:
     %AICMD0x1A($0088, $0050, $B382E8, $00)                     ;B3E4FE
     %AICMD0x2D($B3E524, $B3E50E)                               ;B3E506
     %AICMD0x12_Jump($B3E506)                                   ;B3E50B
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3E51D)         ;B3E50E
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3E516
     %AICMD0x12_Jump($B3E506)                                   ;B3E51A
+B3E51D:
     %AICMD0x1C_ShowDialog($03BB, $00)                          ;B3E51D
     %AICMD0x12_Jump($B3E506)                                   ;B3E521
     %AICMD0x1C_ShowDialog($0168, $00)                          ;B3E524
     %AICMD0x12_Jump($B3E506)                                   ;B3E528
+B3E52B:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0A, $B3E55F)   ;B3E52B
     %AICMD0x1A($0038, $0098, $B38390, $00)                     ;B3E532
     %AICMD0x2D($B3E558, $B3E542)                               ;B3E53A
@@ -8082,10 +9009,12 @@ DATA8_B3E4ED:
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3E551)         ;B3E542
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3E54A
     %AICMD0x12_Jump($B3E53A)                                   ;B3E54E
+B3E551:
     %AICMD0x1C_ShowDialog($03BA, $00)                          ;B3E551
     %AICMD0x12_Jump($B3E53A)                                   ;B3E555
     %AICMD0x1C_ShowDialog($0413, $00)                          ;B3E558
     %AICMD0x12_Jump($B3E53A)                                   ;B3E55C
+B3E55F:
     %AICMD0x10_End()                                           ;B3E55F
 
 
@@ -8096,12 +9025,14 @@ DATA8_B3E560:
     %AICMD0x0A($01)                                            ;B3E565
     %AICMD0x13_Wait(1)                                         ;B3E567
     %AICMD0x12_Jump($B3E567)                                   ;B3E56A
+B3E56D:
     %AICMD0x1A($00E8, $009C, $B3836C, $03)                     ;B3E56D
     %AICMD0x2D($B3E593, $B3E57D)                               ;B3E575
     %AICMD0x12_Jump($B3E575)                                   ;B3E57A
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3E58C)         ;B3E57D
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3E585
     %AICMD0x12_Jump($B3E575)                                   ;B3E589
+B3E58C:
     %AICMD0x1C_ShowDialog($03BB, $00)                          ;B3E58C
     %AICMD0x12_Jump($B3E575)                                   ;B3E590
     %AICMD0x1C_ShowDialog($016C, $00)                          ;B3E593
@@ -8109,28 +9040,31 @@ DATA8_B3E560:
 
 
 DATA8_B3E59A:
- 
     %AICMD0x11_EnableUserControl()                             ;B3E59A
     %AICMD0x09($01, $B3E5D6)                                   ;B3E59B
     %AICMD0x09($02, $B3E5A9)                                   ;B3E59F
     %AICMD0x13_Wait(1)                                         ;B3E5A3
     %AICMD0x12_Jump($B3E5A3)                                   ;B3E5A6
+B3E5A9:
     %AICMD0x1A($0058, $00B8, $B38234, $00)                     ;B3E5A9
     %AICMD0x2D($B3E5CF, $B3E5B9)                               ;B3E5B1
     %AICMD0x12_Jump($B3E5B1)                                   ;B3E5B6
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3E5C8)         ;B3E5B9
     %AICMD0x1C_ShowDialog($03BC, $00)                          ;B3E5C1
     %AICMD0x12_Jump($B3E5B1)                                   ;B3E5C5
+B3E5C8:
     %AICMD0x1C_ShowDialog($03BB, $00)                          ;B3E5C8
     %AICMD0x12_Jump($B3E5B1)                                   ;B3E5CC
     %AICMD0x1C_ShowDialog($0414, $00)                          ;B3E5CF
     %AICMD0x12_Jump($B3E5B1)                                   ;B3E5D3
+B3E5D6:
     %AICMD0x1A($0098, $0088, $B38234, $00)                     ;B3E5D6
     %AICMD0x2D($B3E5FC, $B3E5E6)                               ;B3E5DE
     %AICMD0x12_Jump($B3E5DE)                                   ;B3E5E3
     %AICMD0x16_JumpIfBetween8($80091E, 9, 12, $B3E5F5)         ;B3E5E6
     %AICMD0x1C_ShowDialog($03BC, $00)                          ;B3E5EE
     %AICMD0x12_Jump($B3E5DE)                                   ;B3E5F2
+B3E5F5:
     %AICMD0x1C_ShowDialog($03BB, $00)                          ;B3E5F5
     %AICMD0x12_Jump($B3E5DE)                                   ;B3E5F9
     %AICMD0x1C_ShowDialog($0415, $00)                          ;B3E5FC
@@ -8156,7 +9090,6 @@ pAIScripting0x09:
     dw pAIScripting0x0A                                        ;B3E621|        |B3E83B;
  
 DATA8_B3E623:
- 
     %AICMD0x40_DisableTileInteractions()                       ;B3E623
     %AICMD0x02_FreezeTime()                                    ;B3E624
     %AICMD0x05_SetTransferPosition(96, 120)                    ;B3E625
@@ -8215,6 +9148,7 @@ DATA8_B3E623:
     %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 48)                  ;B3E6CD
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily2, $02)       ;B3E6D1
     %AICMD0x10_End()                                           ;B3E6D6
+B3E6D7:
     %AICMD0x1A($FFD8, $0078, $B38450, $02)                     ;B3E6D7
     %AICMD0x0C($00)                                            ;B3E6DF
     %AICMD0x13_Wait(40)                                        ;B3E6E1
@@ -8225,6 +9159,7 @@ DATA8_B3E623:
     %AICMD0x0D($01, $00, $20, $01)                             ;B3E6F4
     %AICMD0x0B($01)                                            ;B3E6F9
     %AICMD0x10_End()                                           ;B3E6FB
+B3E6FC:
     %AICMD0x1A($FFE8, $0068, $B38438, $00)                     ;B3E6FC
     %AICMD0x0C($00)                                            ;B3E704
     %AICMD0x1B($02DC, $01)                                     ;B3E706
@@ -8238,6 +9173,7 @@ DATA8_B3E623:
     %AICMD0x1B($02DD, $00)                                     ;B3E727
     %AICMD0x0B($02)                                            ;B3E72B
     %AICMD0x10_End()                                           ;B3E72D
+B3E72E:
     %AICMD0x1A($0120, $0078, $B38108, $03)                     ;B3E72E
     %AICMD0x0C($03)                                            ;B3E736
     %AICMD0x0D($FF, $00, $B4, $03)                             ;B3E738
@@ -8251,6 +9187,7 @@ DATA8_B3E623:
     %AICMD0x0D($FF, $00, $FF, $03)                             ;B3E756
     %AICMD0x0D($FF, $00, $80, $03)                             ;B3E75B
     %AICMD0x10_End()                                           ;B3E760
+B3E761:
     %AICMD0x1A($0108, $0078, $B38378, $03)                     ;B3E761
     %AICMD0x0C($03)                                            ;B3E769
     %AICMD0x0D($FF, $00, $B4, $03)                             ;B3E76B
@@ -8264,13 +9201,16 @@ DATA8_B3E623:
     %AICMD0x0D($FF, $00, $FF, $03)                             ;B3E789
     %AICMD0x0D($FF, $00, $80, $03)                             ;B3E78E
     %AICMD0x10_End()                                           ;B3E793
+B3E794:
     %AICMD0x1A($0058, $0088, $B38144, $00)                     ;B3E794
     %AICMD0x13_Wait(1)                                         ;B3E79C
     %AICMD0x12_Jump($B3E79C)                                   ;B3E79F
+B3E7A2:
     %AICMD0x1A($0048, $0088, $B38150, $00)                     ;B3E7A2
     %AICMD0x22($18, $08, $01, $B38150, $04)                    ;B3E7AA
     %AICMD0x13_Wait(1)                                         ;B3E7B1
     %AICMD0x12_Jump($B3E7B1)                                   ;B3E7B4
+B3E7B7:
     %AICMD0x1A($0048, $0058, $B384EC, $00)                     ;B3E7B7
     %AICMD0x0D($01, $00, $08, $01)                             ;B3E7BF
     %AICMD0x0D($00, $FF, $06, $01)                             ;B3E7C4
@@ -8284,6 +9224,7 @@ DATA8_B3E623:
     %AICMD0x0D($01, $00, $08, $02)                             ;B3E7EC
     %AICMD0x0D($00, $FF, $06, $01)                             ;B3E7F1
     %AICMD0x12_Jump($B3E7BF)                                   ;B3E7F6
+B3E7F9:
     %AICMD0x1A($0068, $0038, $B384EC, $00)                     ;B3E7F9
     %AICMD0x0D($00, $FF, $06, $01)                             ;B3E801
     %AICMD0x0D($FF, $00, $08, $02)                             ;B3E806
@@ -8332,6 +9273,7 @@ DATA8_B3E85B:
     %AICMD0x0C($01)                                            ;B3E86F
     %AICMD0x23_OrWithIndexedValue($800196, $0D)                ;B3E871
     %AICMD0x10_End()                                           ;B3E876
+B3E877:
     %AICMD0x1A($0068, $01A8, $B38294, $02)                     ;B3E877
     %AICMD0x0C($00)                                            ;B3E87F
     %AICMD0x1B($0275, $01)                                     ;B3E881
@@ -8358,6 +9300,7 @@ DATA8_B3E89A:
     %AICMD0x05_SetTransferPosition(712, 424)                   ;B3E8AE
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B3E8B3
     %AICMD0x10_End()                                           ;B3E8B5
+B3E8B6:
     %AICMD0x1A($00F0, $0088, $B3875C, $00)                     ;B3E8B6
     %AICMD0x0C($00)                                            ;B3E8BE
     %AICMD0x0D($FF, $00, $FF, $01)                             ;B3E8C0
@@ -8382,6 +9325,7 @@ DATA8_B3E8C8:
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 144)                 ;B3E8E1
     %AICMD0x3D_TeleportToArea(!AREA_CROSSROADSPRING)           ;B3E8E5
     %AICMD0x10_End()                                           ;B3E8E7
+B3E8E8:
     %AICMD0x1A($0088, $0168, $B38294, $01)                     ;B3E8E8
     %AICMD0x0C($00)                                            ;B3E8F0
     %AICMD0x1C_ShowDialog($00F3, $00)                          ;B3E8F2
@@ -8415,6 +9359,7 @@ DATA8_B3E90B:
     %AICMD0x50()                                               ;B3E945
     %AICMD0x47_SetValue8($800973, 3)                           ;B3E946
     %AICMD0x10_End()                                           ;B3E94B
+B3E94C:
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B3E94C
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 56)                  ;B3E950
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 96)                    ;B3E954
@@ -8424,6 +9369,7 @@ DATA8_B3E90B:
     %AICMD0x50()                                               ;B3E962
     %AICMD0x47_SetValue8($800973, 3)                           ;B3E963
     %AICMD0x10_End()                                           ;B3E968
+B3E969:
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B3E969
     %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 166)                ;B3E96D
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 96)                    ;B3E971
@@ -8441,6 +9387,7 @@ DATA8_B3E982:
     %AICMD0x09($01, $B3E98A)                                   ;B3E984
     %AICMD0x38()                                               ;B3E988
     %AICMD0x10_End()                                           ;B3E989
+B3E98A:
     %AICMD0x1A($0080, $00C8, $B38300, $01)                     ;B3E98A
     %AICMD0x13_Wait(60)                                        ;B3E992
     %AICMD0x1B($0292, $00)                                     ;B3E995
@@ -8454,12 +9401,12 @@ DATA8_B3E982:
 
 
 DATA8_B3E9AE:
- 
     %AICMD0x02_FreezeTime()                                    ;B3E9AE
     %AICMD0x08_EnableAIControl()                               ;B3E9AF
     %AICMD0x09($01, $B3E9B6)                                   ;B3E9B0
     %AICMD0x38()                                               ;B3E9B4
     %AICMD0x10_End()                                           ;B3E9B5
+B3E9B6:
     %AICMD0x1A($0080, $00C8, $B38300, $01)                     ;B3E9B6
     %AICMD0x13_Wait(60)                                        ;B3E9BE
     %AICMD0x1B($0292, $00)                                     ;B3E9C1
@@ -8504,61 +9451,80 @@ DATA8_B3E9FA:
     %AICMD0x09($08, $B3EAF8)                                   ;B3EA19
     %AICMD0x38()                                               ;B3EA1D
     %AICMD0x10_End()                                           ;B3EA1E
+B3EA1F:
     %AICMD0x1A($0128, $0228, $B3827C, $00)                     ;B3EA1F
     %AICMD0x22($18, $18, $01, $B38288, $0C)                    ;B3EA27
     %AICMD0x1F($B3EA34)                                        ;B3EA2E
     %AICMD0x12_Jump($B3EA2E)                                   ;B3EA31
+B3EA34:
     %AICMD0x1C_ShowDialog($00F4, $00)                          ;B3EA34
     %AICMD0x12_Jump($B3EA2E)                                   ;B3EA38
+B3EA3B:
     %AICMD0x1A($0048, $0118, $B38300, $00)                     ;B3EA3B
     %AICMD0x1F($B3EA4F)                                        ;B3EA43
     %AICMD0x12_Jump($B3EA43)                                   ;B3EA46
     %AICMD0x1F($B3EA56)                                        ;B3EA49
     %AICMD0x12_Jump($B3EA49)                                   ;B3EA4C
+B3EA4F:
     %AICMD0x1C_ShowDialog($00F5, $00)                          ;B3EA4F
     %AICMD0x12_Jump($B3EA49)                                   ;B3EA53
+B3EA56:
     %AICMD0x1C_ShowDialog($00F6, $00)                          ;B3EA56
     %AICMD0x12_Jump($B3EA49)                                   ;B3EA5A
+B3EA5D:
     %AICMD0x1A($0148, $00B8, $B38420, $00)                     ;B3EA5D
     %AICMD0x22($18, $18, $01, $B3842C, $0C)                    ;B3EA65
     %AICMD0x1F($B3EA72)                                        ;B3EA6C
     %AICMD0x12_Jump($B3EA6C)                                   ;B3EA6F
+B3EA72:
     %AICMD0x1C_ShowDialog($00FC, $00)                          ;B3EA72
     %AICMD0x12_Jump($B3EA6C)                                   ;B3EA76
+B3EA79:
     %AICMD0x1A($01A8, $00D8, $B38354, $00)                     ;B3EA79
     %AICMD0x1F($B3EA8D)                                        ;B3EA81
     %AICMD0x12_Jump($B3EA81)                                   ;B3EA84
     %AICMD0x1F($B3EA94)                                        ;B3EA87
     %AICMD0x12_Jump($B3EA87)                                   ;B3EA8A
+B3EA8D:
     %AICMD0x1C_ShowDialog($00FD, $00)                          ;B3EA8D
     %AICMD0x12_Jump($B3EA87)                                   ;B3EA91
+B3EA94:
     %AICMD0x1C_ShowDialog($00FE, $00)                          ;B3EA94
     %AICMD0x12_Jump($B3EA87)                                   ;B3EA98
+B3EA9B:
     %AICMD0x1A($0178, $0388, $B38198, $00)                     ;B3EA9B
     %AICMD0x22($20, $18, $01, $B381A4, $10)                    ;B3EAA3
     %AICMD0x1F($B3EAB6)                                        ;B3EAAA
     %AICMD0x12_Jump($B3EAAA)                                   ;B3EAAD
     %AICMD0x1F($B3EAC2)                                        ;B3EAB0
     %AICMD0x12_Jump($B3EAB0)                                   ;B3EAB3
+B3EAB6:
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown1, $00)     ;B3EAB6
     %AICMD0x1C_ShowDialog($0103, $00)                          ;B3EABB
     %AICMD0x12_Jump($B3EAB0)                                   ;B3EABF
+B3EAC2:
     %AICMD0x1C_ShowDialog($0104, $00)                          ;B3EAC2
     %AICMD0x12_Jump($B3EAB0)                                   ;B3EAC6
+B3EAC9:
     %AICMD0x1A($0248, $0168, $B3839C, $00)                     ;B3EAC9
     %AICMD0x1F($B3EAD7)                                        ;B3EAD1
     %AICMD0x12_Jump($B3EAD1)                                   ;B3EAD4
+B3EAD7:
     %AICMD0x1C_ShowDialog($010F, $00)                          ;B3EAD7
     %AICMD0x12_Jump($B3EAD1)                                   ;B3EADB
+B3EADE:
     %AICMD0x1A($0098, $0368, $B38204, $00)                     ;B3EADE
     %AICMD0x1F($B3EAEC)                                        ;B3EAE6
     %AICMD0x12_Jump($B3EAE6)                                   ;B3EAE9
+B3EAEC:
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown1, $01)     ;B3EAEC
     %AICMD0x1C_ShowDialog($0116, $00)                          ;B3EAF1
     %AICMD0x12_Jump($B3EAE6)                                   ;B3EAF5
+B3EAF8:
     %AICMD0x1A($02D8, $01A8, $B382AC, $03)                     ;B3EAF8
     %AICMD0x1F($B3EB06)                                        ;B3EB00
     %AICMD0x12_Jump($B3EB00)                                   ;B3EB03
+B3EB06:
     %AICMD0x55(strcFlags.unknown1, $00, $B3EB55)               ;B3EB06
     %AICMD0x55(strcFlags.unknown1, $01, $B3EB55)               ;B3EB0D
     %AICMD0x55(strcFlags.unknown1, $02, $B3EB55)               ;B3EB14
@@ -8569,11 +9535,13 @@ DATA8_B3E9FA:
     %AICMD0x20_JumpIfChoice(0, $B3EB3F)                        ;B3EB34
     %AICMD0x20_JumpIfChoice(1, $B3EB4E)                        ;B3EB38
     %AICMD0x12_Jump($B3EB00)                                   ;B3EB3C
+B3EB3F:
     %AICMD0x1C_ShowDialog($0118, $00)                          ;B3EB3F
     %AICMD0x1B($027B, $01)                                     ;B3EB43
     %AICMD0x0D($01, $00, $30, $01)                             ;B3EB47
     %AICMD0x37()                                               ;B3EB4C
     %AICMD0x10_End()                                           ;B3EB4D
+B3EB4E:
     %AICMD0x1C_ShowDialog($0119, $00)                          ;B3EB4E
     %AICMD0x12_Jump($B3EB00)                                   ;B3EB52
     %AICMD0x1C_ShowDialog($011A, $00)                          ;B3EB55
@@ -8584,13 +9552,16 @@ DATA8_B3EB5C:
  
     %AICMD0x09($01, $B3EB61)                                   ;B3EB5C
     %AICMD0x10_End()                                           ;B3EB60
+B3EB61:
     %AICMD0x1A($0188, $00A8, $B383D8, $00)                     ;B3EB61
     %AICMD0x1F($B3EB75)                                        ;B3EB69
     %AICMD0x12_Jump($B3EB69)                                   ;B3EB6C
     %AICMD0x1F($B3EB7C)                                        ;B3EB6F
     %AICMD0x12_Jump($B3EB6F)                                   ;B3EB72
+B3EB75:
     %AICMD0x1C_ShowDialog($00F7, $00)                          ;B3EB75
     %AICMD0x12_Jump($B3EB6F)                                   ;B3EB79
+B3EB7C:
     %AICMD0x1C_ShowDialog($00F8, $00)                          ;B3EB7C
     %AICMD0x12_Jump($B3EB6F)                                   ;B3EB80
 
@@ -8599,14 +9570,17 @@ DATA8_B3EB83:
  
     %AICMD0x09($01, $B3EB88)                                   ;B3EB83
     %AICMD0x10_End()                                           ;B3EB87
+B3EB88:
     %AICMD0x1A($0028, $0168, $B38318, $02)                     ;B3EB88
     %AICMD0x1F($B3EB9C)                                        ;B3EB90
     %AICMD0x12_Jump($B3EB90)                                   ;B3EB93
     %AICMD0x1F($B3EBA7)                                        ;B3EB96
     %AICMD0x12_Jump($B3EB96)                                   ;B3EB99
+B3EB9C:
     %AICMD0x1C_ShowDialog($0101, $00)                          ;B3EB9C
     %AICMD0x1B($029A, $01)                                     ;B3EBA0
     %AICMD0x12_Jump($B3EB96)                                   ;B3EBA4
+B3EBA7:
     %AICMD0x1C_ShowDialog($0102, $00)                          ;B3EBA7
     %AICMD0x1B($029A, $01)                                     ;B3EBAB
     %AICMD0x12_Jump($B3EB96)                                   ;B3EBAF
@@ -8617,31 +9591,39 @@ DATA8_B3EBB2:
     %AICMD0x09($01, $B3EBBB)                                   ;B3EBB2
     %AICMD0x09($02, $B3EBE2)                                   ;B3EBB6
     %AICMD0x10_End()                                           ;B3EBBA
+B3EBBB:
     %AICMD0x1A($0058, $0068, $B381C8, $00)                     ;B3EBBB
     %AICMD0x1F($B3EBCF)                                        ;B3EBC3
     %AICMD0x12_Jump($B3EBC3)                                   ;B3EBC6
     %AICMD0x1F($B3EBDB)                                        ;B3EBC9
     %AICMD0x12_Jump($B3EBC9)                                   ;B3EBCC
+B3EBCF:
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown1, $02)     ;B3EBCF
     %AICMD0x1C_ShowDialog($0107, $00)                          ;B3EBD4
     %AICMD0x12_Jump($B3EBC9)                                   ;B3EBD8
+B3EBDB:
     %AICMD0x1C_ShowDialog($0108, $00)                          ;B3EBDB
     %AICMD0x12_Jump($B3EBC9)                                   ;B3EBDF
+B3EBE2:
     %AICMD0x1A($0028, $0168, $B383FC, $02)                     ;B3EBE2
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $03, $B3EBF7) ;B3EBEA
     %AICMD0x1F($B3EBFD)                                        ;B3EBF1
     %AICMD0x12_Jump($B3EBF1)                                   ;B3EBF4
+B3EBF7:
     %AICMD0x1F($B3EC13)                                        ;B3EBF7
     %AICMD0x12_Jump($B3EBF7)                                   ;B3EBFA
+B3EBFD:
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown1, $03)     ;B3EBFD
     %AICMD0x1C_ShowDialog($0105, $00)                          ;B3EC02
     %AICMD0x1B($02D0, $01)                                     ;B3EC06
     %AICMD0x09($03, $B3EC1E)                                   ;B3EC0A
     %AICMD0x0C($00)                                            ;B3EC0E
     %AICMD0x12_Jump($B3EBF7)                                   ;B3EC10
+B3EC13:
     %AICMD0x1C_ShowDialog($0106, $00)                          ;B3EC13
     %AICMD0x1B($02D0, $01)                                     ;B3EC17
     %AICMD0x12_Jump($B3EBF7)                                   ;B3EC1B
+B3EC1E:
     %AICMD0x1A($0038, $0168, $B385A0, $00)                     ;B3EC1E
     %AICMD0x13_Wait(180)                                       ;B3EC26
     %AICMD0x0B($00)                                            ;B3EC29
@@ -8655,24 +9637,32 @@ DATA8_B3EC2D:
     %AICMD0x09($02, $B3EC67)                                   ;B3EC31
     %AICMD0x09($03, $B3EC7F)                                   ;B3EC35
     %AICMD0x10_End()                                           ;B3EC39
+B3EC3A:
     %AICMD0x1A($0028, $0198, $B38330, $02)                     ;B3EC3A
     %AICMD0x12_Jump($B3EC45)                                   ;B3EC42
+B3EC45:
     %AICMD0x1F($B3EC51)                                        ;B3EC45
     %AICMD0x12_Jump($B3EC45)                                   ;B3EC48
     %AICMD0x1F($B3EC5C)                                        ;B3EC4B
     %AICMD0x12_Jump($B3EC4B)                                   ;B3EC4E
+B3EC51:
     %AICMD0x1C_ShowDialog($0109, $00)                          ;B3EC51
     %AICMD0x1B($02A1, $01)                                     ;B3EC55
     %AICMD0x12_Jump($B3EC4B)                                   ;B3EC59
+B3EC5C:
     %AICMD0x1C_ShowDialog($010A, $00)                          ;B3EC5C
     %AICMD0x1B($02A1, $01)                                     ;B3EC60
     %AICMD0x12_Jump($B3EC4B)                                   ;B3EC64
+B3EC67:
     %AICMD0x1A($00C8, $01B8, $B38348, $00)                     ;B3EC67
     %AICMD0x12_Jump($B3EC72)                                   ;B3EC6F
+B3EC72:
     %AICMD0x1F($B3EC78)                                        ;B3EC72
     %AICMD0x12_Jump($B3EC72)                                   ;B3EC75
+B3EC78:
     %AICMD0x1C_ShowDialog($010B, $00)                          ;B3EC78
     %AICMD0x12_Jump($B3EC72)                                   ;B3EC7C
+B3EC7F:
     %AICMD0x1A($0087, $0097, $B38558, $00)                     ;B3EC7F
     %AICMD0x13_Wait(1)                                         ;B3EC87
     %AICMD0x12_Jump($B3EC87)                                   ;B3EC8A
@@ -8683,24 +9673,30 @@ DATA8_B3EC8D:
     %AICMD0x09($01, $B3EC96)                                   ;B3EC8D
     %AICMD0x09($02, $B3ECC0)                                   ;B3EC91
     %AICMD0x10_End()                                           ;B3EC95
+B3EC96:
     %AICMD0x1A($0088, $0050, $B382E8, $00)                     ;B3EC96
     %AICMD0x1F($B3ECAA)                                        ;B3EC9E
     %AICMD0x12_Jump($B3EC9E)                                   ;B3ECA1
     %AICMD0x1F($B3ECB5)                                        ;B3ECA4
     %AICMD0x12_Jump($B3ECA4)                                   ;B3ECA7
+B3ECAA:
     %AICMD0x1C_ShowDialog($0111, $00)                          ;B3ECAA
     %AICMD0x1B($0288, $00)                                     ;B3ECAE
     %AICMD0x12_Jump($B3ECA4)                                   ;B3ECB2
+B3ECB5:
     %AICMD0x1C_ShowDialog($0112, $00)                          ;B3ECB5
     %AICMD0x1B($0288, $00)                                     ;B3ECB9
     %AICMD0x12_Jump($B3ECA4)                                   ;B3ECBD
+B3ECC0:
     %AICMD0x1A($0038, $0078, $B38390, $00)                     ;B3ECC0
     %AICMD0x1F($B3ECD4)                                        ;B3ECC8
     %AICMD0x12_Jump($B3ECC8)                                   ;B3ECCB
     %AICMD0x1F($B3ECDB)                                        ;B3ECCE
     %AICMD0x12_Jump($B3ECC8)                                   ;B3ECD1
+B3ECD4:
     %AICMD0x1C_ShowDialog($0113, $00)                          ;B3ECD4
     %AICMD0x12_Jump($B3ECCE)                                   ;B3ECD8
+B3ECDB:
     %AICMD0x1C_ShowDialog($0114, $00)                          ;B3ECDB
     %AICMD0x12_Jump($B3ECCE)                                   ;B3ECDF
 
@@ -8709,12 +9705,15 @@ DATA8_B3ECE2:
  
     %AICMD0x09($01, $B3ECE7)                                   ;B3ECE2
     %AICMD0x10_End()                                           ;B3ECE6
+B3ECE7:
     %AICMD0x1A($00E8, $0098, $B3836C, $03)                     ;B3ECE7
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $04, $B3ECFC) ;B3ECEF
     %AICMD0x1F($B3ED02)                                        ;B3ECF6
     %AICMD0x12_Jump($B3ECF6)                                   ;B3ECF9
+B3ECFC:
     %AICMD0x1F($B3ED1F)                                        ;B3ECFC
     %AICMD0x12_Jump($B3ECFC)                                   ;B3ECFF
+B3ED02:
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown1, $04)     ;B3ED02
     %AICMD0x1C_ShowDialog($010C, $00)                          ;B3ED07
     %AICMD0x1B($02AF, $00)                                     ;B3ED0B
@@ -8723,9 +9722,11 @@ DATA8_B3ECE2:
     %AICMD0x0C($00)                                            ;B3ED16
     %AICMD0x1B($02AF, $00)                                     ;B3ED18
     %AICMD0x12_Jump($B3ECFC)                                   ;B3ED1C
+B3ED1F:
     %AICMD0x1C_ShowDialog($010D, $00)                          ;B3ED1F
     %AICMD0x1B($02AF, $00)                                     ;B3ED23
     %AICMD0x12_Jump($B3ECFC)                                   ;B3ED27
+B3ED2A:
     %AICMD0x1A($00D8, $0098, $B385AC, $00)                     ;B3ED2A
     %AICMD0x0B($00)                                            ;B3ED32
     %AICMD0x13_Wait(120)                                       ;B3ED34
@@ -8742,55 +9743,71 @@ DATA8_B3ED39:
     %AICMD0x09($05, $B3EDC6)                                   ;B3ED49
     %AICMD0x09($06, $B3EE05)                                   ;B3ED4D
     %AICMD0x10_End()                                           ;B3ED51
+B3ED52:
     %AICMD0x1A($00A8, $01B8, $B38204, $00)                     ;B3ED52
     %AICMD0x1F($B3ED66)                                        ;B3ED5A
     %AICMD0x12_Jump($B3ED5A)                                   ;B3ED5D
     %AICMD0x1F($B3ED73)                                        ;B3ED60
     %AICMD0x12_Jump($B3ED60)                                   ;B3ED63
+B3ED66:
     %AICMD0x1C_ShowDialog($011B, $00)                          ;B3ED66
     %AICMD0x32($8000D4, $0015)                                 ;B3ED6A
     %AICMD0x12_Jump($B3ED60)                                   ;B3ED70
+B3ED73:
     %AICMD0x1C_ShowDialog($011C, $00)                          ;B3ED73
     %AICMD0x12_Jump($B3ED60)                                   ;B3ED77
+B3ED7A:
     %AICMD0x1A($0028, $0198, $B382DC, $00)                     ;B3ED7A
     %AICMD0x1F($B3ED8E)                                        ;B3ED82
     %AICMD0x12_Jump($B3ED82)                                   ;B3ED85
     %AICMD0x1F($B3ED95)                                        ;B3ED88
     %AICMD0x12_Jump($B3ED88)                                   ;B3ED8B
+B3ED8E:
     %AICMD0x1C_ShowDialog($011D, $00)                          ;B3ED8E
     %AICMD0x12_Jump($B3ED88)                                   ;B3ED92
+B3ED95:
     %AICMD0x1C_ShowDialog($011E, $00)                          ;B3ED95
     %AICMD0x12_Jump($B3ED88)                                   ;B3ED99
+B3ED9C:
     %AICMD0x1A($0060, $0170, $B38294, $00)                     ;B3ED9C
     %AICMD0x1F($B3EDB0)                                        ;B3EDA4
     %AICMD0x12_Jump($B3EDA4)                                   ;B3EDA7
     %AICMD0x1F($B3EDBB)                                        ;B3EDAA
     %AICMD0x12_Jump($B3EDAA)                                   ;B3EDAD
+B3EDB0:
     %AICMD0x1C_ShowDialog($0120, $00)                          ;B3EDB0
     %AICMD0x1B($0270, $00)                                     ;B3EDB4
     %AICMD0x12_Jump($B3EDAA)                                   ;B3EDB8
+B3EDBB:
     %AICMD0x1C_ShowDialog($0121, $00)                          ;B3EDBB
     %AICMD0x1B($0270, $00)                                     ;B3EDBF
     %AICMD0x12_Jump($B3EDAA)                                   ;B3EDC3
+B3EDC6:
     %AICMD0x1A($00B0, $0170, $B38318, $00)                     ;B3EDC6
     %AICMD0x1F($B3EDDA)                                        ;B3EDCE
     %AICMD0x12_Jump($B3EDCE)                                   ;B3EDD1
     %AICMD0x1F($B3EDE5)                                        ;B3EDD4
     %AICMD0x12_Jump($B3EDD4)                                   ;B3EDD7
+B3EDDA:
     %AICMD0x1C_ShowDialog($0122, $00)                          ;B3EDDA
     %AICMD0x1B($0296, $00)                                     ;B3EDDE
     %AICMD0x12_Jump($B3EDD4)                                   ;B3EDE2
+B3EDE5:
     %AICMD0x1C_ShowDialog($0123, $00)                          ;B3EDE5
     %AICMD0x1B($0296, $00)                                     ;B3EDE9
     %AICMD0x12_Jump($B3EDD4)                                   ;B3EDED
+B3EDF0:
     %AICMD0x1A($0088, $0170, $B38348, $00)                     ;B3EDF0
     %AICMD0x1F($B3EDFE)                                        ;B3EDF8
     %AICMD0x12_Jump($B3EDF8)                                   ;B3EDFB
+B3EDFE:
     %AICMD0x1C_ShowDialog($011F, $00)                          ;B3EDFE
     %AICMD0x12_Jump($B3EDF8)                                   ;B3EE02
+B3EE05:
     %AICMD0x1A($00D8, $01B8, $B382AC, $00)                     ;B3EE05
     %AICMD0x1F($B3EE13)                                        ;B3EE0D
     %AICMD0x12_Jump($B3EE0D)                                   ;B3EE10
+B3EE13:
     %AICMD0x1C_ShowDialog($0072, $00)                          ;B3EE13
     %AICMD0x12_Jump($B3EE0D)                                   ;B3EE17
 
@@ -8808,46 +9825,62 @@ DATA8_B3EE1A:
     %AICMD0x11_EnableUserControl()                             ;B3EE32
     %AICMD0x13_Wait(1)                                         ;B3EE33
     %AICMD0x12_Jump($B3EE33)                                   ;B3EE36
+B3EE39:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3EE63) ;B3EE39
     %AICMD0x1A($0258, $0178, $B38270, $00)                     ;B3EE41
     %AICMD0x1F($B3EE55)                                        ;B3EE49
     %AICMD0x12_Jump($B3EE49)                                   ;B3EE4C
     %AICMD0x1F($B3EE5C)                                        ;B3EE4F
     %AICMD0x12_Jump($B3EE4F)                                   ;B3EE52
+B3EE55:
     %AICMD0x1C_ShowDialog($012B, $00)                          ;B3EE55
     %AICMD0x12_Jump($B3EE4F)                                   ;B3EE59
+B3EE5C:
     %AICMD0x1C_ShowDialog($012C, $00)                          ;B3EE5C
     %AICMD0x12_Jump($B3EE4F)                                   ;B3EE60
+B3EE63:
     %AICMD0x10_End()                                           ;B3EE63
+B3EE64:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3EE81) ;B3EE64
     %AICMD0x1A($01F8, $0258, $B38240, $00)                     ;B3EE6C
     %AICMD0x1F($B3EE7A)                                        ;B3EE74
     %AICMD0x12_Jump($B3EE74)                                   ;B3EE77
+B3EE7A:
     %AICMD0x1C_ShowDialog($0127, $00)                          ;B3EE7A
     %AICMD0x12_Jump($B3EE74)                                   ;B3EE7E
+B3EE81:
     %AICMD0x10_End()                                           ;B3EE81
+B3EE82:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3EEA6) ;B3EE82
     %AICMD0x1A($0298, $01F8, $B38234, $00)                     ;B3EE8A
     %AICMD0x22($18, $18, $01, $B38240, $0C)                    ;B3EE92
     %AICMD0x1F($B3EE9F)                                        ;B3EE99
     %AICMD0x12_Jump($B3EE99)                                   ;B3EE9C
+B3EE9F:
     %AICMD0x1C_ShowDialog($0128, $00)                          ;B3EE9F
     %AICMD0x12_Jump($B3EE99)                                   ;B3EEA3
+B3EEA6:
     %AICMD0x10_End()                                           ;B3EEA6
+B3EEA7:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3EECB) ;B3EEA7
     %AICMD0x1A($0178, $0208, $B38234, $00)                     ;B3EEAF
     %AICMD0x22($18, $18, $01, $B38240, $0C)                    ;B3EEB7
     %AICMD0x1F($B3EEC4)                                        ;B3EEBE
     %AICMD0x12_Jump($B3EEBE)                                   ;B3EEC1
+B3EEC4:
     %AICMD0x1C_ShowDialog($0129, $00)                          ;B3EEC4
     %AICMD0x12_Jump($B3EEBE)                                   ;B3EEC8
+B3EECB:
     %AICMD0x10_End()                                           ;B3EECB
+B3EECC:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, $B3EEE9) ;B3EECC
     %AICMD0x1A($0120, $0200, $B382D0, $00)                     ;B3EED4
     %AICMD0x1F($B3EEE2)                                        ;B3EEDC
     %AICMD0x12_Jump($B3EEDC)                                   ;B3EEDF
+B3EEE2:
     %AICMD0x1C_ShowDialog($0115, $00)                          ;B3EEE2
     %AICMD0x12_Jump($B3EEDC)                                   ;B3EEE6
+B3EEE9:
     %AICMD0x10_End()                                           ;B3EEE9
 
 
@@ -8857,9 +9890,11 @@ AI_HouseExtensionCampain:
     %AICMD0x38()                                               ;B3EEEE
     %AICMD0x13_Wait(1)                                         ;B3EEEF
     %AICMD0x12_Jump($B3EEEF)                                   ;B3EEF2
+B3EEF5:
     %AICMD0x1A($0098, $0088, $B38234, $02)                     ;B3EEF5
     %AICMD0x1F($B3EF03)                                        ;B3EEFD
     %AICMD0x12_Jump($B3EEFD)                                   ;B3EF00
+B3EF03:
     %AICMD0x1C_ShowDialog($012A, $00)                          ;B3EF03
     %AICMD0x12_Jump($B3EEFD)                                   ;B3EF07
 
@@ -8875,6 +9910,7 @@ DATA8_B3EF0A:
     %AICMD0x0C($01)                                            ;B3EF18
     %AICMD0x3C()                                               ;B3EF1A
     %AICMD0x10_End()                                           ;B3EF1B
+B3EF1C:
     %AICMD0x1A($0010, $0088, $B3875C, $02)                     ;B3EF1C
     %AICMD0x0C($00)                                            ;B3EF24
     %AICMD0x0D($01, $00, $FF, $01)                             ;B3EF26
@@ -8883,17 +9919,19 @@ DATA8_B3EF0A:
 
 
 DATA8_B3EF2E:
- 
     %AICMD0x09($01, $B3EF33)                                   ;B3EF2E
     %AICMD0x10_End()                                           ;B3EF32
+B3EF33:
     %AICMD0x1A($0068, $0188, $B38168, $00)                     ;B3EF33
     %AICMD0x1F($B3EF47)                                        ;B3EF3B
     %AICMD0x12_Jump($B3EF3B)                                   ;B3EF3E
     %AICMD0x1F($B3EF53)                                        ;B3EF41
     %AICMD0x12_Jump($B3EF41)                                   ;B3EF44
+B3EF47:
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown1, $05)     ;B3EF47
     %AICMD0x1C_ShowDialog($00F9, $00)                          ;B3EF4C
     %AICMD0x12_Jump($B3EF41)                                   ;B3EF50
+B3EF53:
     %AICMD0x1C_ShowDialog($00FA, $00)                          ;B3EF53
     %AICMD0x12_Jump($B3EF41)                                   ;B3EF57
 
@@ -8936,6 +9974,7 @@ AI_ObtainDog:
     %AICMD0x23_OrWithIndexedValue($800196, $0D)                ;B3EFA4
     %AICMD0x41_AddValue16(nPlayerHappiness, 10)                ;B3EFA9
     %AICMD0x10_End()                                           ;B3EFAF
+B3EFB0:
     %AICMD0x1A($FFF8, $01A8, $B38114, $02)                     ;B3EFB0
     %AICMD0x0C($00)                                            ;B3EFB8
     %AICMD0x1B($01EC, $01)                                     ;B3EFBA
@@ -8945,6 +9984,7 @@ AI_ObtainDog:
     %AICMD0x1B($01EA, $01)                                     ;B3EFCA
     %AICMD0x0B($03)                                            ;B3EFCE
     %AICMD0x10_End()                                           ;B3EFD0
+B3EFD1:
     %AICMD0x1A($FFEA, $01A8, $B381E0, $02)                     ;B3EFD1
     %AICMD0x0C($01)                                            ;B3EFD9
     %AICMD0x1B($0241, $01)                                     ;B3EFDB
@@ -8957,7 +9997,6 @@ AI_ObtainDog:
 
 
 AI_EllenSayGoodbye:
- 
     %AICMD0x50()                                               ;B3EFF3
     %AICMD0x02_FreezeTime()                                    ;B3EFF4
     %AICMD0x08_EnableAIControl()                               ;B3EFF5
@@ -8970,6 +10009,7 @@ AI_EllenSayGoodbye:
     %AICMD0x0C($02)                                            ;B3F008
     %AICMD0x11_EnableUserControl()                             ;B3F00A
     %AICMD0x10_End()                                           ;B3F00B
+B3F00C:
     %AICMD0x1A($0078, $01A8, $B38114, $02)                     ;B3F00C
     %AICMD0x0C($00)                                            ;B3F014
     %AICMD0x1B($01F2, $01)                                     ;B3F016
@@ -8981,6 +10021,7 @@ AI_EllenSayGoodbye:
     %AICMD0x2E($01, $B38120, $10)                              ;B3F02B
     %AICMD0x36_UpdateDog()                                     ;B3F030
     %AICMD0x12_Jump($B3F030)                                   ;B3F031
+B3F034:
     %AICMD0x1A($0068, $01A8, $B381E0, $02)                     ;B3F034
     %AICMD0x1B($023A, $01)                                     ;B3F03C
     %AICMD0x13_Wait(80)                                        ;B3F040
@@ -9027,12 +10068,12 @@ AI_ObtainHorse:
     %AICMD0x1C_ShowDialog($0318, $00)                          ;B3F096
     %AICMD0x23_OrWithIndexedValue($800196, $0D)                ;B3F09A
     %AICMD0x10_End()                                           ;B3F09F
+B3F0A0:
     %AICMD0x1A($00A8, $0080, $B38768, $02)                     ;B3F0A0
     %AICMD0x10_End()                                           ;B3F0A8
 
 
 DATA8_B3F0A9:
- 
     %AICMD0x50()                                               ;B3F0A9
     %AICMD0x02_FreezeTime()                                    ;B3F0AA
     %AICMD0x08_EnableAIControl()                               ;B3F0AB
@@ -9044,6 +10085,7 @@ DATA8_B3F0A9:
     %AICMD0x11_EnableUserControl()                             ;B3F0BA
     %AICMD0x41_AddValue16(nPlayerHappiness, 10)                ;B3F0BB
     %AICMD0x10_End()                                           ;B3F0C1
+B3F0C2:
     %AICMD0x1A($00A8, $0080, $B38768, $00)                     ;B3F0C2
     %AICMD0x0C($00)                                            ;B3F0CA
     %AICMD0x1B($020A, $00)                                     ;B3F0CC
@@ -9122,59 +10164,78 @@ DATA8_B3F106:
     %AICMD0x09($07, $B3FD26)                                   ;B3F1B3
     %AICMD0x41_AddValue16(nLove_Eve, 30)                       ;B3F1B7
     %AICMD0x12_Jump($B3FE2C)                                   ;B3F1BD
+B3F1C0:
     %AICMD0x41_AddValue16(nLove_Maria, 30)                     ;B3F1C0
     %AICMD0x12_Jump($B3F1EA)                                   ;B3F1C6
+B3F1C9:
     %AICMD0x41_AddValue16(nLove_Ann, 30)                       ;B3F1C9
     %AICMD0x12_Jump($B3F1EA)                                   ;B3F1CF
+B3F1D2:
     %AICMD0x41_AddValue16(nLove_Nina, 30)                      ;B3F1D2
     %AICMD0x12_Jump($B3F1EA)                                   ;B3F1D8
+B3F1DB:
     %AICMD0x41_AddValue16(nLove_Ellen, 30)                     ;B3F1DB
     %AICMD0x12_Jump($B3F1EA)                                   ;B3F1E1
+B3F1E4:
     %AICMD0x41_AddValue16(nLove_Eve, 30)                       ;B3F1E4
+B3F1EA:
     %AICMD0x09($07, $B3FD7D)                                   ;B3F1EA
     %AICMD0x12_Jump($B3FE2C)                                   ;B3F1EE
+B3F1F1:
     %AICMD0x1A($00B8, $0088, $B383FC, $03)                     ;B3F1F1
     %AICMD0x1F($B3F1FF)                                        ;B3F1F9
     %AICMD0x12_Jump($B3F1F9)                                   ;B3F1FC
+B3F1FF:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $0B, $B3F216) ;B3F1FF
     %AICMD0x1C_ShowDialog($020C, $00)                          ;B3F206
     %AICMD0x1B($02D0, $00)                                     ;B3F20A
     %AICMD0x28(strcFlags.unknown1, $00)                        ;B3F20E
     %AICMD0x12_Jump($B3F1F9)                                   ;B3F213
+B3F216:
     %AICMD0x1C_ShowDialog($0284, $00)                          ;B3F216
     %AICMD0x12_Jump($B3F1F9)                                   ;B3F21A
+B3F21D:
     %AICMD0x1A($0188, $0098, $B3839C, $00)                     ;B3F21D
     %AICMD0x1F($B3F231)                                        ;B3F225
     %AICMD0x12_Jump($B3F225)                                   ;B3F228
     %AICMD0x1F($B3F288)                                        ;B3F22B
     %AICMD0x12_Jump($B3F22B)                                   ;B3F22E
+B3F231:
     %AICMD0x28(strcFlags.unknown1, $01)                        ;B3F231
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $0B, $B3F24C)   ;B3F236
     %AICMD0x1D_ShowDialog($0214, $00)                          ;B3F23D
     %AICMD0x20_JumpIfChoice(0, $B3F253)                        ;B3F241
     %AICMD0x20_JumpIfChoice(1, $B3F281)                        ;B3F245
     %AICMD0x12_Jump($B3F225)                                   ;B3F249
+B3F24C:
     %AICMD0x1C_ShowDialog($024E, $00)                          ;B3F24C
     %AICMD0x12_Jump($B3F225)                                   ;B3F250
+B3F253:
     %AICMD0x46_JumpIfBetween24(nMoney, 0, 199, $B3F262)        ;B3F253
     %AICMD0x12_Jump($B3F269)                                   ;B3F25F
+B3F262:
     %AICMD0x1C_ShowDialog($0213, $00)                          ;B3F262
     %AICMD0x12_Jump($B3F22B)                                   ;B3F266
+B3F269:
     %AICMD0x1C_ShowDialog($0215, $00)                          ;B3F269
     %AICMD0x42_AddValue24(nMoney, -200)                        ;B3F26D
     %AICMD0x23_OrWithIndexedValue(strcShedItems.row3, $06)     ;B3F274
     %AICMD0x23_OrWithIndexedValue(strcFlags.event6, $0B)       ;B3F279
     %AICMD0x12_Jump($B3F22B)                                   ;B3F27E
+B3F281:
     %AICMD0x1C_ShowDialog($0216, $00)                          ;B3F281
     %AICMD0x12_Jump($B3F225)                                   ;B3F285
+B3F288:
     %AICMD0x1C_ShowDialog($0081, $00)                          ;B3F288
     %AICMD0x12_Jump($B3F22B)                                   ;B3F28C
     %AICMD0x10_End()                                           ;B3F28F
+B3F290:
     %AICMD0x1A($0078, $00F8, $B383D8, $02)                     ;B3F290
     %AICMD0x1F($B3F2A4)                                        ;B3F298
     %AICMD0x12_Jump($B3F298)                                   ;B3F29B
     %AICMD0x1F($B3F307)                                        ;B3F29E
     %AICMD0x12_Jump($B3F29E)                                   ;B3F2A1
+B3F2A4:
     %AICMD0x1C_ShowDialog($021F, $00)                          ;B3F2A4
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $00, $B3F298) ;B3F2A8
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $01, $B3F298) ;B3F2AF
@@ -9193,62 +10254,81 @@ DATA8_B3F106:
     %AICMD0x1B($02C4, $00)                                     ;B3F2FF
     %AICMD0x11_EnableUserControl()                             ;B3F303
     %AICMD0x12_Jump($B3F29E)                                   ;B3F304
+B3F307:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $0B, $B3F315) ;B3F307
     %AICMD0x1C_ShowDialog($0217, $00)                          ;B3F30E
     %AICMD0x12_Jump($B3F29E)                                   ;B3F312
+B3F315:
     %AICMD0x1C_ShowDialog($0282, $00)                          ;B3F315
     %AICMD0x12_Jump($B3F29E)                                   ;B3F319
+B3F31C:
     %AICMD0x1A($00B8, $00D8, $B38318, $00)                     ;B3F31C
     %AICMD0x1F($B3F32A)                                        ;B3F324
     %AICMD0x12_Jump($B3F324)                                   ;B3F327
+B3F32A:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $0B, $B3F33D) ;B3F32A
     %AICMD0x28(strcFlags.unknown1, $02)                        ;B3F331
     %AICMD0x1C_ShowDialog($0218, $00)                          ;B3F336
     %AICMD0x12_Jump($B3F324)                                   ;B3F33A
+B3F33D:
     %AICMD0x1C_ShowDialog($0283, $00)                          ;B3F33D
     %AICMD0x12_Jump($B3F324)                                   ;B3F341
+B3F344:
     %AICMD0x1A($01A8, $00F8, $B38354, $00)                     ;B3F344
     %AICMD0x1F($B3F352)                                        ;B3F34C
     %AICMD0x12_Jump($B3F34C)                                   ;B3F34F
+B3F352:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $0B, $B3F374) ;B3F352
     %AICMD0x28(strcFlags.unknown1, $03)                        ;B3F359
     %AICMD0x16_JumpIfBetween8(nCurrentYearID, 0, 1, $B3F36D)   ;B3F35E
     %AICMD0x1C_ShowDialog($0219, $00)                          ;B3F366
     %AICMD0x12_Jump($B3F34C)                                   ;B3F36A
+B3F36D:
     %AICMD0x1C_ShowDialog($0205, $00)                          ;B3F36D
     %AICMD0x12_Jump($B3F34C)                                   ;B3F371
+B3F374:
     %AICMD0x1C_ShowDialog($028A, $00)                          ;B3F374
     %AICMD0x12_Jump($B3F34C)                                   ;B3F378
+B3F37B:
     %AICMD0x1A($00F8, $00F8, $B38420, $01)                     ;B3F37B
     %AICMD0x1F($B3F389)                                        ;B3F383
     %AICMD0x12_Jump($B3F383)                                   ;B3F386
+B3F389:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $0B, $B3F3AA) ;B3F389
     %AICMD0x28(strcFlags.unknown1, $04)                        ;B3F390
     %AICMD0x15_JumpIfEquals8(nCurrentYearID, 0, $B3F3A3)       ;B3F395
     %AICMD0x1C_ShowDialog($021C, $00)                          ;B3F39C
     %AICMD0x12_Jump($B3F383)                                   ;B3F3A0
+B3F3A3:
     %AICMD0x1C_ShowDialog($021A, $00)                          ;B3F3A3
     %AICMD0x12_Jump($B3F383)                                   ;B3F3A7
+B3F3AA:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, $B3F3B8)   ;B3F3AA
     %AICMD0x1C_ShowDialog($0288, $00)                          ;B3F3B1
     %AICMD0x12_Jump($B3F383)                                   ;B3F3B5
+B3F3B8:
     %AICMD0x1C_ShowDialog($0250, $00)                          ;B3F3B8
     %AICMD0x12_Jump($B3F383)                                   ;B3F3BC
+B3F3BF:
     %AICMD0x1A($0118, $00F8, $B38384, $01)                     ;B3F3BF
     %AICMD0x1F($B3F3CD)                                        ;B3F3C7
     %AICMD0x12_Jump($B3F3C7)                                   ;B3F3CA
+B3F3CD:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $0B, $B3F3EE) ;B3F3CD
     %AICMD0x28(strcFlags.unknown1, $05)                        ;B3F3D4
     %AICMD0x15_JumpIfEquals8(nCurrentYearID, 0, $B3F3E7)       ;B3F3D9
     %AICMD0x1C_ShowDialog($021E, $00)                          ;B3F3E0
     %AICMD0x12_Jump($B3F3C7)                                   ;B3F3E4
+B3F3E7:
     %AICMD0x1C_ShowDialog($021D, $00)                          ;B3F3E7
     %AICMD0x12_Jump($B3F3C7)                                   ;B3F3EB
+B3F3EE:
     %AICMD0x1C_ShowDialog($0287, $00)                          ;B3F3EE
     %AICMD0x12_Jump($B3F3C7)                                   ;B3F3F2
     %AICMD0x1A($0158, $0138, $B382E8, $00)                     ;B3F3F5
     %AICMD0x1F($B3F403)                                        ;B3F3FD
     %AICMD0x12_Jump($B3F3FD)                                   ;B3F400
+B3F403:
     %AICMD0x1C_ShowDialog($021C, $00)                          ;B3F403
     %AICMD0x12_Jump($B3F3FD)                                   ;B3F407
     %AICMD0x1C_ShowDialog($028C, $00)                          ;B3F40A
@@ -9256,6 +10336,7 @@ DATA8_B3F106:
     %AICMD0x1A($0198, $00C8, $B38294, $00)                     ;B3F411
     %AICMD0x1F($B3F41F)                                        ;B3F419
     %AICMD0x12_Jump($B3F419)                                   ;B3F41C
+B3F41F:
     %AICMD0x1C_ShowDialog($021D, $00)                          ;B3F41F
     %AICMD0x12_Jump($B3F419)                                   ;B3F423
     %AICMD0x1C_ShowDialog($0288, $00)                          ;B3F426
@@ -9263,6 +10344,7 @@ DATA8_B3F106:
     %AICMD0x1A($0198, $0158, $B382AC, $01)                     ;B3F42D
     %AICMD0x1F($B3F43B)                                        ;B3F435
     %AICMD0x12_Jump($B3F435)                                   ;B3F438
+B3F43B:
     %AICMD0x1C_ShowDialog($021E, $00)                          ;B3F43B
     %AICMD0x12_Jump($B3F435)                                   ;B3F43F
     %AICMD0x1C_ShowDialog($0289, $00)                          ;B3F442
@@ -9270,15 +10352,19 @@ DATA8_B3F106:
     %AICMD0x1A($0198, $0158, $B3827C, $01)                     ;B3F449
     %AICMD0x1F($B3F457)                                        ;B3F451
     %AICMD0x12_Jump($B3F451)                                   ;B3F454
+B3F457:
     %AICMD0x1C_ShowDialog($021E, $00)                          ;B3F457
     %AICMD0x12_Jump($B3F451)                                   ;B3F45B
     %AICMD0x1C_ShowDialog($028B, $00)                          ;B3F45E
     %AICMD0x12_Jump($B3F451)                                   ;B3F462
+B3F465:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, $B3F477)   ;B3F465
     %AICMD0x1A($0148, $00B8, $B38168, $00)                     ;B3F46C
     %AICMD0x12_Jump($B3F486)                                   ;B3F474
+B3F477:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $04, $B3F55A)   ;B3F477
     %AICMD0x1A($0148, $00B8, $B3845C, $00)                     ;B3F47E
+B3F486:
     %AICMD0x2D($B3F496, $B3F51B)                               ;B3F486
     %AICMD0x12_Jump($B3F486)                                   ;B3F48B
     %AICMD0x2D($B3F508, $B3F51B)                               ;B3F48E
@@ -9290,18 +10376,23 @@ DATA8_B3F106:
     %AICMD0x45_JumpIfBetween16(nLove_Maria, 151, 300, $B3F4E1) ;B3F4B3
     %AICMD0x45_JumpIfBetween16(nLove_Maria, 301, 999, $B3F4EE) ;B3F4BD
     %AICMD0x12_Jump($B3F486)                                   ;B3F4C7
+B3F4CA:
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown1, $00)     ;B3F4CA
     %AICMD0x0B($00)                                            ;B3F4CF
     %AICMD0x12_Jump($B3F486)                                   ;B3F4D1
+B3F4D4:
     %AICMD0x1C_ShowDialog($0220, $00)                          ;B3F4D4
     %AICMD0x41_AddValue16(nLove_Maria, 8)                      ;B3F4D8
     %AICMD0x12_Jump($B3F48E)                                   ;B3F4DE
+B3F4E1:
     %AICMD0x1C_ShowDialog($0221, $00)                          ;B3F4E1
     %AICMD0x41_AddValue16(nLove_Maria, 12)                     ;B3F4E5
     %AICMD0x12_Jump($B3F48E)                                   ;B3F4EB
+B3F4EE:
     %AICMD0x1C_ShowDialog($0222, $00)                          ;B3F4EE
     %AICMD0x41_AddValue16(nLove_Maria, 15)                     ;B3F4F2
     %AICMD0x12_Jump($B3F48E)                                   ;B3F4F8
+B3F4FB:
     %AICMD0x1C_ShowDialog($0223, $00)                          ;B3F4FB
     %AICMD0x41_AddValue16(nLove_Maria, 4)                      ;B3F4FF
     %AICMD0x12_Jump($B3F486)                                   ;B3F505
@@ -9313,22 +10404,29 @@ DATA8_B3F106:
     %AICMD0x15_JumpIfEquals8($80091E, 88, $B3F540)             ;B3F522
     %AICMD0x15_JumpIfEquals8($80091E, 90, $B3F54D)             ;B3F529
     %AICMD0x12_Jump($B3F486)                                   ;B3F530
+B3F533:
     %AICMD0x1C_ShowDialog($01DA, $00)                          ;B3F533
     %AICMD0x41_AddValue16(nLove_Maria, 5)                      ;B3F537
     %AICMD0x12_Jump($B3F486)                                   ;B3F53D
+B3F540:
     %AICMD0x1C_ShowDialog($03B5, $00)                          ;B3F540
     %AICMD0x41_AddValue16(nLove_Maria, 15)                     ;B3F544
     %AICMD0x12_Jump($B3F486)                                   ;B3F54A
+B3F54D:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B3F54D
     %AICMD0x41_AddValue16(nLove_Maria, 8)                      ;B3F551
     %AICMD0x12_Jump($B3F486)                                   ;B3F557
+B3F55A:
     %AICMD0x28(strcFlags.unknown1, $06)                        ;B3F55A
     %AICMD0x10_End()                                           ;B3F55F
+B3F560:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, $B3F572)   ;B3F560
     %AICMD0x1A($00C8, $0128, $B38198, $02)                     ;B3F567
     %AICMD0x12_Jump($B3F581)                                   ;B3F56F
+B3F572:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $04, $B3F659)   ;B3F572
     %AICMD0x1A($00C8, $0128, $B3845C, $00)                     ;B3F579
+B3F581:
     %AICMD0x2D($B3F591, $B3F603)                               ;B3F581
     %AICMD0x12_Jump($B3F581)                                   ;B3F586
     %AICMD0x2D($B3F646, $B3F603)                               ;B3F589
@@ -9340,18 +10438,23 @@ DATA8_B3F106:
     %AICMD0x45_JumpIfBetween16(nLove_Ann, 151, 300, $B3F5DC)   ;B3F5AE
     %AICMD0x45_JumpIfBetween16(nLove_Ann, 301, 999, $B3F5E9)   ;B3F5B8
     %AICMD0x12_Jump($B3F581)                                   ;B3F5C2
+B3F5C5:
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown1, $01)     ;B3F5C5
     %AICMD0x0B($00)                                            ;B3F5CA
     %AICMD0x12_Jump($B3F581)                                   ;B3F5CC
+B3F5CF:
     %AICMD0x1C_ShowDialog($0224, $00)                          ;B3F5CF
     %AICMD0x41_AddValue16(nLove_Ann, 8)                        ;B3F5D3
     %AICMD0x12_Jump($B3F589)                                   ;B3F5D9
+B3F5DC:
     %AICMD0x1C_ShowDialog($0225, $00)                          ;B3F5DC
     %AICMD0x41_AddValue16(nLove_Ann, 12)                       ;B3F5E0
     %AICMD0x12_Jump($B3F589)                                   ;B3F5E6
+B3F5E9:
     %AICMD0x1C_ShowDialog($0226, $00)                          ;B3F5E9
     %AICMD0x41_AddValue16(nLove_Ann, 15)                       ;B3F5ED
     %AICMD0x12_Jump($B3F589)                                   ;B3F5F3
+B3F5F6:
     %AICMD0x1C_ShowDialog($0227, $00)                          ;B3F5F6
     %AICMD0x41_AddValue16(nLove_Ann, 4)                        ;B3F5FA
     %AICMD0x12_Jump($B3F589)                                   ;B3F600
@@ -9360,12 +10463,15 @@ DATA8_B3F106:
     %AICMD0x15_JumpIfEquals8($80091E, 90, $B3F639)             ;B3F611
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3F618
     %AICMD0x12_Jump($B3F581)                                   ;B3F61C
+B3F61F:
     %AICMD0x1C_ShowDialog($01DA, $00)                          ;B3F61F
     %AICMD0x41_AddValue16(nLove_Ann, 3)                        ;B3F623
     %AICMD0x12_Jump($B3F581)                                   ;B3F629
+B3F62C:
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3F62C
     %AICMD0x41_AddValue16(nLove_Ann, 6)                        ;B3F630
     %AICMD0x12_Jump($B3F581)                                   ;B3F636
+B3F639:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B3F639
     %AICMD0x41_AddValue16(nLove_Ann, 15)                       ;B3F63D
     %AICMD0x12_Jump($B3F581)                                   ;B3F643
@@ -9373,13 +10479,17 @@ DATA8_B3F106:
     %AICMD0x28(strcFlags.unknown1, $07)                        ;B3F64D
     %AICMD0x1C_ShowDialog($0362, $00)                          ;B3F652
     %AICMD0x12_Jump($B3F589)                                   ;B3F656
+B3F659:
     %AICMD0x28(strcFlags.unknown1, $07)                        ;B3F659
     %AICMD0x10_End()                                           ;B3F65E
+B3F65F:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, $B3F671)   ;B3F65F
     %AICMD0x1A($00E8, $0088, $B381C8, $00)                     ;B3F666
     %AICMD0x12_Jump($B3F680)                                   ;B3F66E
+B3F671:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $04, $B3F768)   ;B3F671
     %AICMD0x1A($00E8, $0088, $B3845C, $00)                     ;B3F678
+B3F680:
     %AICMD0x2D($B3F698, $B3F729)                               ;B3F680
     %AICMD0x12_Jump($B3F680)                                   ;B3F685
     %AICMD0x2D($B3F716, $B3F729)                               ;B3F688
@@ -9393,18 +10503,23 @@ DATA8_B3F106:
     %AICMD0x45_JumpIfBetween16(nLove_Nina, 151, 300, $B3F6E3)  ;B3F6B5
     %AICMD0x45_JumpIfBetween16(nLove_Nina, 301, 999, $B3F6F0)  ;B3F6BF
     %AICMD0x12_Jump($B3F680)                                   ;B3F6C9
+B3F6CC:
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown1, $02)     ;B3F6CC
     %AICMD0x0B($00)                                            ;B3F6D1
     %AICMD0x12_Jump($B3F680)                                   ;B3F6D3
+B3F6D6:
     %AICMD0x1C_ShowDialog($0228, $00)                          ;B3F6D6
     %AICMD0x41_AddValue16(nLove_Nina, 8)                       ;B3F6DA
     %AICMD0x12_Jump($B3F688)                                   ;B3F6E0
+B3F6E3:
     %AICMD0x1C_ShowDialog($0229, $00)                          ;B3F6E3
     %AICMD0x41_AddValue16(nLove_Nina, 12)                      ;B3F6E7
     %AICMD0x12_Jump($B3F688)                                   ;B3F6ED
+B3F6F0:
     %AICMD0x1C_ShowDialog($022A, $00)                          ;B3F6F0
     %AICMD0x41_AddValue16(nLove_Nina, 15)                      ;B3F6F4
     %AICMD0x12_Jump($B3F688)                                   ;B3F6FA
+B3F6FD:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $0B, $B3F6CC) ;B3F6FD
     %AICMD0x28(strcFlags.unknown1, $08)                        ;B3F704
     %AICMD0x1C_ShowDialog($022B, $00)                          ;B3F709
@@ -9418,22 +10533,29 @@ DATA8_B3F106:
     %AICMD0x15_JumpIfEquals8($80091E, 88, $B3F74E)             ;B3F730
     %AICMD0x15_JumpIfEquals8($80091E, 90, $B3F75B)             ;B3F737
     %AICMD0x12_Jump($B3F680)                                   ;B3F73E
+B3F741:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B3F741
     %AICMD0x41_AddValue16(nLove_Nina, 8)                       ;B3F745
     %AICMD0x12_Jump($B3F680)                                   ;B3F74B
+B3F74E:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B3F74E
     %AICMD0x41_AddValue16(nLove_Nina, 8)                       ;B3F752
     %AICMD0x12_Jump($B3F680)                                   ;B3F758
+B3F75B:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B3F75B
     %AICMD0x41_AddValue16(nLove_Nina, 8)                       ;B3F75F
     %AICMD0x12_Jump($B3F680)                                   ;B3F765
+B3F768:
     %AICMD0x28(strcFlags.unknown1, $08)                        ;B3F768
     %AICMD0x10_End()                                           ;B3F76D
+B3F76E:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, $B3F780)   ;B3F76E
     %AICMD0x1A($0138, $0148, $B381E0, $03)                     ;B3F775
     %AICMD0x12_Jump($B3F78F)                                   ;B3F77D
+B3F780:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $04, $B3F87B)   ;B3F780
     %AICMD0x1A($0138, $0148, $B3845C, $03)                     ;B3F787
+B3F78F:
     %AICMD0x2D($B3F7A7, $B3F825)                               ;B3F78F
     %AICMD0x12_Jump($B3F78F)                                   ;B3F794
     %AICMD0x2D($B3F868, $B3F825)                               ;B3F797
@@ -9447,18 +10569,23 @@ DATA8_B3F106:
     %AICMD0x45_JumpIfBetween16(nLove_Ellen, 101, 300, $B3F7F2) ;B3F7C4
     %AICMD0x45_JumpIfBetween16(nLove_Ellen, 301, 999, $B3F7FF) ;B3F7CE
     %AICMD0x12_Jump($B3F78F)                                   ;B3F7D8
+B3F7DB:
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown1, $03)     ;B3F7DB
     %AICMD0x0B($00)                                            ;B3F7E0
     %AICMD0x12_Jump($B3F78F)                                   ;B3F7E2
+B3F7E5:
     %AICMD0x1C_ShowDialog($022C, $00)                          ;B3F7E5
     %AICMD0x41_AddValue16(nLove_Ellen, 8)                      ;B3F7E9
     %AICMD0x12_Jump($B3F797)                                   ;B3F7EF
+B3F7F2:
     %AICMD0x1C_ShowDialog($022D, $00)                          ;B3F7F2
     %AICMD0x41_AddValue16(nLove_Ellen, 12)                     ;B3F7F6
     %AICMD0x12_Jump($B3F797)                                   ;B3F7FC
+B3F7FF:
     %AICMD0x1C_ShowDialog($022E, $00)                          ;B3F7FF
     %AICMD0x41_AddValue16(nLove_Ellen, 15)                     ;B3F803
     %AICMD0x12_Jump($B3F797)                                   ;B3F809
+B3F80C:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $0B, $B3F7DB) ;B3F80C
     %AICMD0x28(strcFlags.unknown1, $09)                        ;B3F813
     %AICMD0x1C_ShowDialog($022F, $00)                          ;B3F818
@@ -9469,12 +10596,15 @@ DATA8_B3F106:
     %AICMD0x15_JumpIfEquals8($80091E, 90, $B3F85B)             ;B3F833
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3F83A
     %AICMD0x12_Jump($B3F78F)                                   ;B3F83E
+B3F841:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B3F841
     %AICMD0x41_AddValue16(nLove_Ellen, 15)                     ;B3F845
     %AICMD0x12_Jump($B3F78F)                                   ;B3F84B
+B3F84E:
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3F84E
     %AICMD0x41_AddValue16(nLove_Ellen, 8)                      ;B3F852
     %AICMD0x12_Jump($B3F78F)                                   ;B3F858
+B3F85B:
     %AICMD0x1C_ShowDialog($01DA, $00)                          ;B3F85B
     %AICMD0x41_AddValue16(nLove_Ellen, 6)                      ;B3F85F
     %AICMD0x12_Jump($B3F78F)                                   ;B3F865
@@ -9482,13 +10612,17 @@ DATA8_B3F106:
     %AICMD0x28(strcFlags.unknown1, $09)                        ;B3F86F
     %AICMD0x1C_ShowDialog($0364, $00)                          ;B3F874
     %AICMD0x12_Jump($B3F797)                                   ;B3F878
+B3F87B:
     %AICMD0x28(strcFlags.unknown1, $09)                        ;B3F87B
     %AICMD0x10_End()                                           ;B3F880
+B3F881:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, $B3F893)   ;B3F881
     %AICMD0x1A($0118, $0158, $B38204, $00)                     ;B3F888
     %AICMD0x12_Jump($B3F8A2)                                   ;B3F890
+B3F893:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $04, $B3F984)   ;B3F893
     %AICMD0x1A($0118, $0158, $B3845C, $00)                     ;B3F89A
+B3F8A2:
     %AICMD0x2D($B3F8BA, $B3F932)                               ;B3F8A2
     %AICMD0x12_Jump($B3F8A2)                                   ;B3F8A7
     %AICMD0x2D($B3F971, $B3F932)                               ;B3F8AA
@@ -9502,18 +10636,23 @@ DATA8_B3F106:
     %AICMD0x45_JumpIfBetween16(nLove_Eve, 101, 300, $B3F905)   ;B3F8D7
     %AICMD0x45_JumpIfBetween16(nLove_Eve, 301, 999, $B3F912)   ;B3F8E1
     %AICMD0x12_Jump($B3F8A2)                                   ;B3F8EB
+B3F8EE:
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown1, $04)     ;B3F8EE
     %AICMD0x0B($00)                                            ;B3F8F3
     %AICMD0x12_Jump($B3F8A2)                                   ;B3F8F5
+B3F8F8:
     %AICMD0x1C_ShowDialog($0230, $00)                          ;B3F8F8
     %AICMD0x41_AddValue16(nLove_Eve, 8)                        ;B3F8FC
     %AICMD0x12_Jump($B3F8AA)                                   ;B3F902
+B3F905:
     %AICMD0x1C_ShowDialog($0231, $00)                          ;B3F905
     %AICMD0x41_AddValue16(nLove_Eve, 12)                       ;B3F909
     %AICMD0x12_Jump($B3F8AA)                                   ;B3F90F
+B3F912:
     %AICMD0x1C_ShowDialog($0232, $00)                          ;B3F912
     %AICMD0x41_AddValue16(nLove_Eve, 15)                       ;B3F916
     %AICMD0x12_Jump($B3F8AA)                                   ;B3F91C
+B3F91F:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $0B, $B3F8EE) ;B3F91F
     %AICMD0x28(strcFlags.unknown1, $0A)                        ;B3F926
     %AICMD0x1C_ShowDialog($0233, $00)                          ;B3F92B
@@ -9522,12 +10661,15 @@ DATA8_B3F106:
     %AICMD0x15_JumpIfEquals8($80091E, 88, $B3F957)             ;B3F939
     %AICMD0x15_JumpIfEquals8($80091E, 90, $B3F964)             ;B3F940
     %AICMD0x12_Jump($B3F8AA)                                   ;B3F947
+B3F94A:
     %AICMD0x1C_ShowDialog($0212, $00)                          ;B3F94A
     %AICMD0x41_AddValue16(nLove_Eve, 12)                       ;B3F94E
     %AICMD0x12_Jump($B3F8A2)                                   ;B3F954
+B3F957:
     %AICMD0x1C_ShowDialog($01DA, $00)                          ;B3F957
     %AICMD0x41_AddValue16(nLove_Eve, 4)                        ;B3F95B
     %AICMD0x12_Jump($B3F8A2)                                   ;B3F961
+B3F964:
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3F964
     %AICMD0x41_AddValue16(nLove_Eve, 8)                        ;B3F968
     %AICMD0x12_Jump($B3F8A2)                                   ;B3F96E
@@ -9535,20 +10677,25 @@ DATA8_B3F106:
     %AICMD0x28(strcFlags.unknown1, $0A)                        ;B3F978
     %AICMD0x1C_ShowDialog($0365, $00)                          ;B3F97D
     %AICMD0x12_Jump($B3F8AA)                                   ;B3F981
+B3F984:
     %AICMD0x28(strcFlags.unknown1, $0A)                        ;B3F984
     %AICMD0x10_End()                                           ;B3F989
+B3F98A:
     %AICMD0x1A($0058, $00E8, $B38300, $02)                     ;B3F98A
     %AICMD0x1F($B3F99E)                                        ;B3F992
     %AICMD0x12_Jump($B3F992)                                   ;B3F995
     %AICMD0x1F($B3F9AD)                                        ;B3F998
     %AICMD0x12_Jump($B3F998)                                   ;B3F99B
+B3F99E:
     %AICMD0x1D_ShowDialog($0234, $00)                          ;B3F99E
     %AICMD0x20_JumpIfChoice(0, $B3F9AD)                        ;B3F9A2
     %AICMD0x20_JumpIfChoice(1, $B3F9B9)                        ;B3F9A6
     %AICMD0x12_Jump($B3F992)                                   ;B3F9AA
+B3F9AD:
     %AICMD0x1C_ShowDialog($0235, $00)                          ;B3F9AD
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown1, $0B)     ;B3F9B1
     %AICMD0x12_Jump($B3F998)                                   ;B3F9B6
+B3F9B9:
     %AICMD0x1C_ShowDialog($0236, $00)                          ;B3F9B9
     %AICMD0x12_Jump($B3F992)                                   ;B3F9BD
     %AICMD0x1A($00B8, $00B8, $B38300, $02)                     ;B3F9C0
@@ -9683,6 +10830,7 @@ DATA8_B3F106:
     %AICMD0x1B($02B6, $01)                                     ;B3FBBE
     %AICMD0x0D($01, $00, $08, $01)                             ;B3FBC2
     %AICMD0x12_Jump($B3FB80)                                   ;B3FBC7
+B3FBCA:
     %AICMD0x1A($0110, $0108, $B38168, $03)                     ;B3FBCA
     %AICMD0x0C($09)                                            ;B3FBD2
     %AICMD0x13_Wait(200)                                       ;B3FBD4
@@ -9705,6 +10853,7 @@ DATA8_B3F106:
     %AICMD0x1B($0223, $00)                                     ;B3FC15
     %AICMD0x0D($FF, $00, $10, $02)                             ;B3FC19
     %AICMD0x12_Jump($B3FBD7)                                   ;B3FC1E
+B3FC21:
     %AICMD0x1A($0110, $0108, $B38198, $03)                     ;B3FC21
     %AICMD0x0C($09)                                            ;B3FC29
     %AICMD0x13_Wait(200)                                       ;B3FC2B
@@ -9727,6 +10876,7 @@ DATA8_B3F106:
     %AICMD0x1B($022B, $00)                                     ;B3FC6C
     %AICMD0x0D($FF, $00, $10, $02)                             ;B3FC70
     %AICMD0x12_Jump($B3FC2E)                                   ;B3FC75
+B3FC78:
     %AICMD0x1A($0110, $0108, $B381C8, $03)                     ;B3FC78
     %AICMD0x0C($09)                                            ;B3FC80
     %AICMD0x13_Wait(200)                                       ;B3FC82
@@ -9749,6 +10899,7 @@ DATA8_B3F106:
     %AICMD0x1B($0250, $00)                                     ;B3FCC3
     %AICMD0x0D($FF, $00, $10, $02)                             ;B3FCC7
     %AICMD0x12_Jump($B3FC85)                                   ;B3FCCC
+B3FCCF:
     %AICMD0x1A($0110, $0108, $B381E0, $03)                     ;B3FCCF
     %AICMD0x0C($09)                                            ;B3FCD7
     %AICMD0x13_Wait(200)                                       ;B3FCD9
@@ -9771,6 +10922,7 @@ DATA8_B3F106:
     %AICMD0x1B($0241, $00)                                     ;B3FD1A
     %AICMD0x0D($FF, $00, $10, $02)                             ;B3FD1E
     %AICMD0x12_Jump($B3FCDC)                                   ;B3FD23
+B3FD26:
     %AICMD0x1A($0110, $0108, $B38204, $03)                     ;B3FD26
     %AICMD0x0C($09)                                            ;B3FD2E
     %AICMD0x13_Wait(200)                                       ;B3FD30
@@ -9793,6 +10945,7 @@ DATA8_B3F106:
     %AICMD0x1B($0249, $00)                                     ;B3FD71
     %AICMD0x0D($FF, $00, $10, $02)                             ;B3FD75
     %AICMD0x12_Jump($B3FD33)                                   ;B3FD7A
+B3FD7D:
     %AICMD0x1A($0110, $0108, $B3845C, $03)                     ;B3FD7D
     %AICMD0x0C($09)                                            ;B3FD85
     %AICMD0x13_Wait(200)                                       ;B3FD87
@@ -9841,10 +10994,12 @@ DATA8_B3FDD4:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $02, $B3F184) ;B3FE17
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $03, $B3F198) ;B3FE1E
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $04, $B3F1AC) ;B3FE25
+B3FE2C:
     %AICMD0x06_SetDestinationArea(!AREA_DANCINGS1)             ;B3FE2C
     %AICMD0x38()                                               ;B3FE2E
     %AICMD0x0B($09)                                            ;B3FE2F
     %AICMD0x10_End()                                           ;B3FE31
+B3FE32:
     %AICMD0x1A($0100, $0108, $B380D8, $02)                     ;B3FE32
     %AICMD0x0C($09)                                            ;B3FE3A
     %AICMD0x13_Wait(200)                                       ;B3FE3C
