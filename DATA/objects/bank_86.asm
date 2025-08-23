@@ -14,7 +14,6 @@ aMultiplicantValue_868000:
     dw $00C0,$00C2,$00C4,$00C6,$00C8,$00CA                     ;868060|        |      ;
     dw $00CC,$00CE,$00E0,$00E2,$00E4,$00E6                     ;86806C|        |      ;
     dw $00E8,$00EA,$00EC,$00EE                                 ;868078|        |      ;
- 
 aObjectsList1:
     dw sObjectData0x0000                                       ;868080|        |868544;
     dw sObjectData0x0001                                       ;868082|        |868552;
@@ -626,7 +625,6 @@ aObjectsList1:
     dw sObjectData0x025F                                       ;86853E|        |86A490;
     dw sObjectData0x0260                                       ;868540|        |86A49E;
     dw sObjectData0x0261                                       ;868542|        |86A4A6;
- 
 sObjectData0x0000:
     dw DATA8_86A4B9                                            ;868544|        |86A4B9;
     db $10                                                     ;868546|        |      ;
@@ -637,7 +635,6 @@ sObjectData0x0000:
     dw DATA8_86A4AE                                            ;86854D|        |86A4AE;
     db $10                                                     ;86854F|        |      ;
     dw $0000                                                   ;868550|        |      ;
- 
 sObjectData0x0001:
     dw DATA8_86A4DA                                            ;868552|        |86A4DA;
     db $10                                                     ;868554|        |      ;
@@ -648,7 +645,6 @@ sObjectData0x0001:
     dw DATA8_86A4CF                                            ;86855B|        |86A4CF;
     db $10                                                     ;86855D|        |      ;
     dw $0000                                                   ;86855E|        |      ;
- 
 sObjectData0x0002:
     dw DATA8_86A4FB                                            ;868560|        |86A4FB;
     db $10                                                     ;868562|        |      ;
@@ -659,7 +655,6 @@ sObjectData0x0002:
     dw DATA8_86A4F0                                            ;868569|        |86A4F0;
     db $10                                                     ;86856B|        |      ;
     dw $0000                                                   ;86856C|        |      ;
- 
 sObjectData0x0003:
     dw DATA8_86A51C                                            ;86856E|        |86A51C;
     db $08                                                     ;868570|        |      ;
@@ -670,7 +665,6 @@ sObjectData0x0003:
     dw DATA8_86A511                                            ;868577|        |86A511;
     db $08                                                     ;868579|        |      ;
     dw $0000                                                   ;86857A|        |      ;
- 
 sObjectData0x0004:
     dw DATA8_86A53D                                            ;86857C|        |86A53D;
     db $08                                                     ;86857E|        |      ;
@@ -681,22 +675,18 @@ sObjectData0x0004:
     dw DATA8_86A532                                            ;868585|        |86A532;
     db $08                                                     ;868587|        |      ;
     dw $0000                                                   ;868588|        |      ;
- 
 sObjectData0x0005:
     dw DATA8_86A4AE                                            ;86858A|        |86A4AE;
     db $FF                                                     ;86858C|        |      ;
     dw $0000                                                   ;86858D|        |      ;
- 
 sObjectData0x0006:
     dw DATA8_86A4CF                                            ;86858F|        |86A4CF;
     db $FF                                                     ;868591|        |      ;
     dw $0000                                                   ;868592|        |      ;
- 
 sObjectData0x0007:
     dw DATA8_86A4F0                                            ;868594|        |86A4F0;
     db $FF                                                     ;868596|        |      ;
     dw $0000                                                   ;868597|        |      ;
- 
 sObjectData0x0008:
     dw DATA8_86A553                                            ;868599|        |86A553;
     db $10                                                     ;86859B|        |      ;
@@ -707,14 +697,12 @@ sObjectData0x0008:
     dw DATA8_86A569                                            ;8685A2|        |86A569;
     db $FF                                                     ;8685A4|        |      ;
     dw $0000                                                   ;8685A5|        |      ;
- 
 sObjectData0x0009:
     dw DATA8_86A553                                            ;8685A7|        |86A553;
     db $30                                                     ;8685A9|        |      ;
     dw DATA8_86A574                                            ;8685AA|        |86A574;
     db $FF                                                     ;8685AC|        |      ;
     dw $0000                                                   ;8685AD|        |      ;
- 
 sObjectData0x000A:
     dw DATA8_86A57F                                            ;8685AF|        |86A57F;
     db $10                                                     ;8685B1|        |      ;
@@ -725,14 +713,12 @@ sObjectData0x000A:
     dw DATA8_86A595                                            ;8685B8|        |86A595;
     db $FF                                                     ;8685BA|        |      ;
     dw $0000                                                   ;8685BB|        |      ;
- 
 sObjectData0x000B:
     dw DATA8_86A57F                                            ;8685BD|        |86A57F;
     db $30                                                     ;8685BF|        |      ;
     dw DATA8_86A5A0                                            ;8685C0|        |86A5A0;
     db $FF                                                     ;8685C2|        |      ;
     dw $0000                                                   ;8685C3|        |      ;
- 
 sObjectData0x000C:
     dw DATA8_86A5AB                                            ;8685C5|        |86A5AB;
     db $10                                                     ;8685C7|        |      ;
@@ -743,14 +729,12 @@ sObjectData0x000C:
     dw DATA8_86A5C1                                            ;8685CE|        |86A5C1;
     db $FF                                                     ;8685D0|        |      ;
     dw $0000                                                   ;8685D1|        |      ;
- 
 sObjectData0x000D:
     dw DATA8_86A5FD                                            ;8685D3|        |86A5FD;
     db $30                                                     ;8685D5|        |      ;
     dw DATA8_86A5CC                                            ;8685D6|        |86A5CC;
     db $FF                                                     ;8685D8|        |      ;
     dw $0000                                                   ;8685D9|        |      ;
- 
 sObjectData0x000E:
     dw DATA8_86A5E7                                            ;8685DB|        |86A5E7;
     db $08                                                     ;8685DD|        |      ;
@@ -761,7 +745,6 @@ sObjectData0x000E:
     dw DATA8_86A5DC                                            ;8685E4|        |86A5DC;
     db $08                                                     ;8685E6|        |      ;
     dw $0000                                                   ;8685E7|        |      ;
- 
 sObjectData0x000F:
     dw DATA8_86A569                                            ;8685E9|        |86A569;
     db $0C                                                     ;8685EB|        |      ;
@@ -770,7 +753,6 @@ sObjectData0x000F:
     dw DATA8_86A55E                                            ;8685EF|        |86A55E;
     db $FF                                                     ;8685F1|        |      ;
     dw $0000                                                   ;8685F2|        |      ;
- 
 sObjectData0x0010:
     dw DATA8_86A595                                            ;8685F4|        |86A595;
     db $0C                                                     ;8685F6|        |      ;
@@ -779,7 +761,6 @@ sObjectData0x0010:
     dw DATA8_86A58A                                            ;8685FA|        |86A58A;
     db $FF                                                     ;8685FC|        |      ;
     dw $0000                                                   ;8685FD|        |      ;
- 
 sObjectData0x0011:
     dw DATA8_86A5C1                                            ;8685FF|        |86A5C1;
     db $0C                                                     ;868601|        |      ;
@@ -788,22 +769,18 @@ sObjectData0x0011:
     dw DATA8_86A5B6                                            ;868605|        |86A5B6;
     db $FF                                                     ;868607|        |      ;
     dw $0000                                                   ;868608|        |      ;
- 
 sObjectData0x0012:
     dw DATA8_86A569                                            ;86860A|        |86A569;
     db $FF                                                     ;86860C|        |      ;
     dw $0000                                                   ;86860D|        |      ;
- 
 sObjectData0x0013:
     dw DATA8_86A595                                            ;86860F|        |86A595;
     db $FF                                                     ;868611|        |      ;
     dw $0000                                                   ;868612|        |      ;
- 
 sObjectData0x0014:
     dw DATA8_86A5C1                                            ;868614|        |86A5C1;
     db $FF                                                     ;868616|        |      ;
     dw $0000                                                   ;868617|        |      ;
- 
 sObjectData0x0015:
     dw DATA8_86A608                                            ;868619|        |86A608;
     db $02                                                     ;86861B|        |      ;
@@ -822,7 +799,6 @@ sObjectData0x0015:
     dw DATA8_86A608                                            ;86862E|        |86A608;
     db $FF                                                     ;868630|        |      ;
     dw $0000                                                   ;868631|        |      ;
- 
 sObjectData0x0016:
     dw DATA8_86A668                                            ;868633|        |86A668;
     db $02                                                     ;868635|        |      ;
@@ -841,7 +817,6 @@ sObjectData0x0016:
     dw DATA8_86A668                                            ;868648|        |86A668;
     db $FF                                                     ;86864A|        |      ;
     dw $0000                                                   ;86864B|        |      ;
- 
 sObjectData0x0017:
     dw DATA8_86A69E                                            ;86864D|        |86A69E;
     db $14                                                     ;86864F|        |      ;
@@ -852,7 +827,6 @@ sObjectData0x0017:
     dw DATA8_86A6B4                                            ;868656|        |86A6B4;
     db $14                                                     ;868658|        |      ;
     dw $0000                                                   ;868659|        |      ;
- 
 sObjectData0x0018:
     dw DATA8_86A608                                            ;86865B|        |86A608;
     db $02                                                     ;86865D|        |      ;
@@ -867,7 +841,6 @@ sObjectData0x0018:
     dw DATA8_86A643                                            ;86866A|        |86A643;
     db $FF                                                     ;86866C|        |      ;
     dw $0000                                                   ;86866D|        |      ;
- 
 sObjectData0x0019:
     dw DATA8_86A643                                            ;86866F|        |86A643;
     db $08                                                     ;868671|        |      ;
@@ -878,7 +851,6 @@ sObjectData0x0019:
     dw DATA8_86A608                                            ;868678|        |86A608;
     db $FF                                                     ;86867A|        |      ;
     dw $0000                                                   ;86867B|        |      ;
- 
 sObjectData0x001A:
     dw DATA8_86A6BF                                            ;86867D|        |86A6BF;
     db $20                                                     ;86867F|        |      ;
@@ -887,7 +859,6 @@ sObjectData0x001A:
     dw DATA8_86A6CA                                            ;868683|        |86A6CA;
     db $FF                                                     ;868685|        |      ;
     dw $0000                                                   ;868686|        |      ;
- 
 sObjectData0x001B:
     dw DATA8_86A6D5                                            ;868688|        |86A6D5;
     db $02                                                     ;86868A|        |      ;
@@ -906,7 +877,6 @@ sObjectData0x001B:
     dw DATA8_86A6D5                                            ;86869D|        |86A6D5;
     db $FF                                                     ;86869F|        |      ;
     dw $0000                                                   ;8686A0|        |      ;
- 
 sObjectData0x001C:
     dw DATA8_86A72B                                            ;8686A2|        |86A72B;
     db $02                                                     ;8686A4|        |      ;
@@ -925,7 +895,6 @@ sObjectData0x001C:
     dw DATA8_86A72B                                            ;8686B7|        |86A72B;
     db $FF                                                     ;8686B9|        |      ;
     dw $0000                                                   ;8686BA|        |      ;
- 
 sObjectData0x001D:
     dw DATA8_86A761                                            ;8686BC|        |86A761;
     db $14                                                     ;8686BE|        |      ;
@@ -936,7 +905,6 @@ sObjectData0x001D:
     dw DATA8_86A777                                            ;8686C5|        |86A777;
     db $14                                                     ;8686C7|        |      ;
     dw $0000                                                   ;8686C8|        |      ;
- 
 sObjectData0x001E:
     dw DATA8_86A6D5                                            ;8686CA|        |86A6D5;
     db $02                                                     ;8686CC|        |      ;
@@ -951,7 +919,6 @@ sObjectData0x001E:
     dw DATA8_86A710                                            ;8686D9|        |86A710;
     db $FF                                                     ;8686DB|        |      ;
     dw $0000                                                   ;8686DC|        |      ;
- 
 sObjectData0x001F:
     dw DATA8_86A710                                            ;8686DE|        |86A710;
     db $08                                                     ;8686E0|        |      ;
@@ -962,7 +929,6 @@ sObjectData0x001F:
     dw DATA8_86A6D5                                            ;8686E7|        |86A6D5;
     db $FF                                                     ;8686E9|        |      ;
     dw $0000                                                   ;8686EA|        |      ;
- 
 sObjectData0x0020:
     dw DATA8_86A782                                            ;8686EC|        |86A782;
     db $10                                                     ;8686EE|        |      ;
@@ -981,7 +947,6 @@ sObjectData0x0020:
     dw DATA8_86A782                                            ;868701|        |86A782;
     db $FF                                                     ;868703|        |      ;
     dw $0000                                                   ;868704|        |      ;
- 
 sObjectData0x0021:
     dw DATA8_86A7DA                                            ;868706|        |86A7DA;
     db $02                                                     ;868708|        |      ;
@@ -1000,7 +965,6 @@ sObjectData0x0021:
     dw DATA8_86A7DA                                            ;86871B|        |86A7DA;
     db $FF                                                     ;86871D|        |      ;
     dw $0000                                                   ;86871E|        |      ;
- 
 sObjectData0x0022:
     dw DATA8_86A82B                                            ;868720|        |86A82B;
     db $02                                                     ;868722|        |      ;
@@ -1019,7 +983,6 @@ sObjectData0x0022:
     dw DATA8_86A82B                                            ;868735|        |86A82B;
     db $FF                                                     ;868737|        |      ;
     dw $0000                                                   ;868738|        |      ;
- 
 sObjectData0x0023:
     dw DATA8_86A861                                            ;86873A|        |86A861;
     db $18                                                     ;86873C|        |      ;
@@ -1030,7 +993,6 @@ sObjectData0x0023:
     dw DATA8_86A87C                                            ;868743|        |86A87C;
     db $18                                                     ;868745|        |      ;
     dw $0000                                                   ;868746|        |      ;
- 
 sObjectData0x0024:
     dw DATA8_86A7DA                                            ;868748|        |86A7DA;
     db $02                                                     ;86874A|        |      ;
@@ -1045,7 +1007,6 @@ sObjectData0x0024:
     dw DATA8_86A810                                            ;868757|        |86A810;
     db $FF                                                     ;868759|        |      ;
     dw $0000                                                   ;86875A|        |      ;
- 
 sObjectData0x0025:
     dw DATA8_86A810                                            ;86875C|        |86A810;
     db $08                                                     ;86875E|        |      ;
@@ -1056,7 +1017,6 @@ sObjectData0x0025:
     dw DATA8_86A7DA                                            ;868765|        |86A7DA;
     db $FF                                                     ;868767|        |      ;
     dw $0000                                                   ;868768|        |      ;
- 
 sObjectData0x0026:
     dw DATA8_86A88C                                            ;86876A|        |86A88C;
     db $10                                                     ;86876C|        |      ;
@@ -1075,7 +1035,6 @@ sObjectData0x0026:
     dw DATA8_86A88C                                            ;86877F|        |86A88C;
     db $FF                                                     ;868781|        |      ;
     dw $0000                                                   ;868782|        |      ;
- 
 sObjectData0x0027:
     dw DATA8_86A8E9                                            ;868784|        |86A8E9;
     db $20                                                     ;868786|        |      ;
@@ -1096,7 +1055,6 @@ sObjectData0x0027:
     dw DATA8_86A90E                                            ;86879C|        |86A90E;
     db $FF                                                     ;86879E|        |      ;
     dw $0000                                                   ;86879F|        |      ;
- 
 sObjectData0x0028:
     dw DATA8_86A92E                                            ;8687A1|        |86A92E;
     db $20                                                     ;8687A3|        |      ;
@@ -1117,7 +1075,6 @@ sObjectData0x0028:
     dw DATA8_86A90E                                            ;8687B9|        |86A90E;
     db $FF                                                     ;8687BB|        |      ;
     dw $0000                                                   ;8687BC|        |      ;
- 
 sObjectData0x0029:
     dw DATA8_86A943                                            ;8687BE|        |86A943;
     db $20                                                     ;8687C0|        |      ;
@@ -1138,7 +1095,6 @@ sObjectData0x0029:
     dw DATA8_86A90E                                            ;8687D6|        |86A90E;
     db $FF                                                     ;8687D8|        |      ;
     dw $0000                                                   ;8687D9|        |      ;
- 
 sObjectData0x002A:
     dw DATA8_86A958                                            ;8687DB|        |86A958;
     db $20                                                     ;8687DD|        |      ;
@@ -1159,7 +1115,6 @@ sObjectData0x002A:
     dw DATA8_86A90E                                            ;8687F3|        |86A90E;
     db $FF                                                     ;8687F5|        |      ;
     dw $0000                                                   ;8687F6|        |      ;
- 
 sObjectData0x002B:
     dw DATA8_86A96D                                            ;8687F8|        |86A96D;
     db $20                                                     ;8687FA|        |      ;
@@ -1180,7 +1135,6 @@ sObjectData0x002B:
     dw DATA8_86A90E                                            ;868810|        |86A90E;
     db $FF                                                     ;868812|        |      ;
     dw $0000                                                   ;868813|        |      ;
- 
 sObjectData0x002C:
     dw DATA8_86A982                                            ;868815|        |86A982;
     db $20                                                     ;868817|        |      ;
@@ -1201,7 +1155,6 @@ sObjectData0x002C:
     dw DATA8_86A90E                                            ;86882D|        |86A90E;
     db $FF                                                     ;86882F|        |      ;
     dw $0000                                                   ;868830|        |      ;
- 
 sObjectData0x002D:
     dw DATA8_86A997                                            ;868832|        |86A997;
     db $20                                                     ;868834|        |      ;
@@ -1222,7 +1175,6 @@ sObjectData0x002D:
     dw DATA8_86A90E                                            ;86884A|        |86A90E;
     db $FF                                                     ;86884C|        |      ;
     dw $0000                                                   ;86884D|        |      ;
- 
 sObjectData0x002E:
     dw DATA8_86A9AC                                            ;86884F|        |86A9AC;
     db $20                                                     ;868851|        |      ;
@@ -1243,7 +1195,6 @@ sObjectData0x002E:
     dw DATA8_86A90E                                            ;868867|        |86A90E;
     db $FF                                                     ;868869|        |      ;
     dw $0000                                                   ;86886A|        |      ;
- 
 sObjectData0x002F:
     dw DATA8_86A9C1                                            ;86886C|        |86A9C1;
     db $20                                                     ;86886E|        |      ;
@@ -1264,7 +1215,6 @@ sObjectData0x002F:
     dw DATA8_86A90E                                            ;868884|        |86A90E;
     db $FF                                                     ;868886|        |      ;
     dw $0000                                                   ;868887|        |      ;
- 
 sObjectData0x0030:
     dw DATA8_86A9D6                                            ;868889|        |86A9D6;
     db $20                                                     ;86888B|        |      ;
@@ -1285,7 +1235,6 @@ sObjectData0x0030:
     dw DATA8_86A90E                                            ;8688A1|        |86A90E;
     db $FF                                                     ;8688A3|        |      ;
     dw $0000                                                   ;8688A4|        |      ;
- 
 sObjectData0x0031:
     dw DATA8_86A9EB                                            ;8688A6|        |86A9EB;
     db $20                                                     ;8688A8|        |      ;
@@ -1306,7 +1255,6 @@ sObjectData0x0031:
     dw DATA8_86A90E                                            ;8688BE|        |86A90E;
     db $FF                                                     ;8688C0|        |      ;
     dw $0000                                                   ;8688C1|        |      ;
- 
 sObjectData0x0032:
     dw DATA8_86A9FB                                            ;8688C3|        |86A9FB;
     db $20                                                     ;8688C5|        |      ;
@@ -1327,12 +1275,10 @@ sObjectData0x0032:
     dw DATA8_86A90E                                            ;8688DB|        |86A90E;
     db $FF                                                     ;8688DD|        |      ;
     dw $0000                                                   ;8688DE|        |      ;
- 
 sObjectData0x0033:
     dw DATA8_86AA10                                            ;8688E0|        |86AA10;
     db $FF                                                     ;8688E2|        |      ;
     dw $0000                                                   ;8688E3|        |      ;
- 
 sObjectData0x0034:
     dw DATA8_86AA30                                            ;8688E5|        |86AA30;
     db $10                                                     ;8688E7|        |      ;
@@ -1343,7 +1289,6 @@ sObjectData0x0034:
     dw DATA8_86AA25                                            ;8688EE|        |86AA25;
     db $10                                                     ;8688F0|        |      ;
     dw $0000                                                   ;8688F1|        |      ;
- 
 sObjectData0x0035:
     dw DATA8_86AA51                                            ;8688F3|        |86AA51;
     db $10                                                     ;8688F5|        |      ;
@@ -1354,7 +1299,6 @@ sObjectData0x0035:
     dw DATA8_86AA46                                            ;8688FC|        |86AA46;
     db $10                                                     ;8688FE|        |      ;
     dw $0000                                                   ;8688FF|        |      ;
- 
 sObjectData0x0036:
     dw DATA8_86AA72                                            ;868901|        |86AA72;
     db $10                                                     ;868903|        |      ;
@@ -1365,7 +1309,6 @@ sObjectData0x0036:
     dw DATA8_86AA67                                            ;86890A|        |86AA67;
     db $10                                                     ;86890C|        |      ;
     dw $0000                                                   ;86890D|        |      ;
- 
 sObjectData0x0037:
     dw DATA8_86AA93                                            ;86890F|        |86AA93;
     db $08                                                     ;868911|        |      ;
@@ -1376,7 +1319,6 @@ sObjectData0x0037:
     dw DATA8_86AA88                                            ;868918|        |86AA88;
     db $08                                                     ;86891A|        |      ;
     dw $0000                                                   ;86891B|        |      ;
- 
 sObjectData0x0038:
     dw DATA8_86AAB4                                            ;86891D|        |86AAB4;
     db $08                                                     ;86891F|        |      ;
@@ -1387,7 +1329,6 @@ sObjectData0x0038:
     dw DATA8_86AAA9                                            ;868926|        |86AAA9;
     db $08                                                     ;868928|        |      ;
     dw $0000                                                   ;868929|        |      ;
- 
 sObjectData0x0039:
     dw DATA8_86AAE4                                            ;86892B|        |86AAE4;
     db $10                                                     ;86892D|        |      ;
@@ -1398,7 +1339,6 @@ sObjectData0x0039:
     dw DATA8_86AACA                                            ;868934|        |86AACA;
     db $10                                                     ;868936|        |      ;
     dw $0000                                                   ;868937|        |      ;
- 
 sObjectData0x003A:
     dw DATA8_86AB23                                            ;868939|        |86AB23;
     db $10                                                     ;86893B|        |      ;
@@ -1409,7 +1349,6 @@ sObjectData0x003A:
     dw DATA8_86AB0E                                            ;868942|        |86AB0E;
     db $10                                                     ;868944|        |      ;
     dw $0000                                                   ;868945|        |      ;
- 
 sObjectData0x003B:
     dw DATA8_86AB5D                                            ;868947|        |86AB5D;
     db $10                                                     ;868949|        |      ;
@@ -1420,28 +1359,24 @@ sObjectData0x003B:
     dw DATA8_86AB43                                            ;868950|        |86AB43;
     db $10                                                     ;868952|        |      ;
     dw $0000                                                   ;868953|        |      ;
- 
 sObjectData0x003C:
     dw DATA8_86AB87                                            ;868955|        |86AB87;
     db $0B                                                     ;868957|        |      ;
     dw DATA8_86AB87                                            ;868958|        |86AB87;
     db $FF                                                     ;86895A|        |      ;
     dw $0000                                                   ;86895B|        |      ;
- 
 sObjectData0x003D:
     dw DATA8_86ABA1                                            ;86895D|        |86ABA1;
     db $0B                                                     ;86895F|        |      ;
     dw DATA8_86ABA1                                            ;868960|        |86ABA1;
     db $FF                                                     ;868962|        |      ;
     dw $0000                                                   ;868963|        |      ;
- 
 sObjectData0x003E:
     dw DATA8_86ABB6                                            ;868965|        |86ABB6;
     db $0B                                                     ;868967|        |      ;
     dw DATA8_86ABB6                                            ;868968|        |86ABB6;
     db $FF                                                     ;86896A|        |      ;
     dw $0000                                                   ;86896B|        |      ;
- 
 sObjectData0x003F:
     dw DATA8_86ABDB                                            ;86896D|        |86ABDB;
     db $08                                                     ;86896F|        |      ;
@@ -1452,27 +1387,22 @@ sObjectData0x003F:
     dw DATA8_86ABD0                                            ;868976|        |86ABD0;
     db $08                                                     ;868978|        |      ;
     dw $0000                                                   ;868979|        |      ;
- 
 sObjectData0x0040:
     dw DATA8_86ABF1                                            ;86897B|        |86ABF1;
     db $FF                                                     ;86897D|        |      ;
     dw $0000                                                   ;86897E|        |      ;
- 
 sObjectData0x0041:
     dw DATA8_86AACA                                            ;868980|        |86AACA;
     db $FF                                                     ;868982|        |      ;
     dw $0000                                                   ;868983|        |      ;
- 
 sObjectData0x0042:
     dw DATA8_86AB0E                                            ;868985|        |86AB0E;
     db $FF                                                     ;868987|        |      ;
     dw $0000                                                   ;868988|        |      ;
- 
 sObjectData0x0043:
     dw DATA8_86AB43                                            ;86898A|        |86AB43;
     db $FF                                                     ;86898C|        |      ;
     dw $0000                                                   ;86898D|        |      ;
- 
 sObjectData0x0044:
     dw DATA8_86AC01                                            ;86898F|        |86AC01;
     db $10                                                     ;868991|        |      ;
@@ -1485,7 +1415,6 @@ sObjectData0x0044:
     dw DATA8_86AC40                                            ;86899B|        |86AC40;
     db $FF                                                     ;86899D|        |      ;
     dw $0000                                                   ;86899E|        |      ;
- 
 sObjectData0x0045:
     dw DATA8_86AC55                                            ;8689A0|        |86AC55;
     db $10                                                     ;8689A2|        |      ;
@@ -1498,7 +1427,6 @@ sObjectData0x0045:
     dw DATA8_86AC94                                            ;8689AC|        |86AC94;
     db $FF                                                     ;8689AE|        |      ;
     dw $0000                                                   ;8689AF|        |      ;
- 
 sObjectData0x0046:
     dw DATA8_86ACA9                                            ;8689B1|        |86ACA9;
     db $10                                                     ;8689B3|        |      ;
@@ -1511,7 +1439,6 @@ sObjectData0x0046:
     dw DATA8_86ACE8                                            ;8689BD|        |86ACE8;
     db $FF                                                     ;8689BF|        |      ;
     dw $0000                                                   ;8689C0|        |      ;
- 
 sObjectData0x0047:
     dw DATA8_86ACFD                                            ;8689C2|        |86ACFD;
     db $10                                                     ;8689C4|        |      ;
@@ -1524,7 +1451,6 @@ sObjectData0x0047:
     dw DATA8_86AD23                                            ;8689CE|        |86AD23;
     db $FF                                                     ;8689D0|        |      ;
     dw $0000                                                   ;8689D1|        |      ;
- 
 sObjectData0x0048:
     dw DATA8_86AD2E                                            ;8689D3|        |86AD2E;
     db $10                                                     ;8689D5|        |      ;
@@ -1537,7 +1463,6 @@ sObjectData0x0048:
     dw DATA8_86AD59                                            ;8689DF|        |86AD59;
     db $FF                                                     ;8689E1|        |      ;
     dw $0000                                                   ;8689E2|        |      ;
- 
 sObjectData0x0049:
     dw DATA8_86AD64                                            ;8689E4|        |86AD64;
     db $10                                                     ;8689E6|        |      ;
@@ -1550,7 +1475,6 @@ sObjectData0x0049:
     dw DATA8_86ADA3                                            ;8689F0|        |86ADA3;
     db $FF                                                     ;8689F2|        |      ;
     dw $0000                                                   ;8689F3|        |      ;
- 
 sObjectData0x004A:
     dw DATA8_86ADB8                                            ;8689F5|        |86ADB8;
     db $10                                                     ;8689F7|        |      ;
@@ -1563,7 +1487,6 @@ sObjectData0x004A:
     dw DATA8_86ADE3                                            ;868A01|        |86ADE3;
     db $FF                                                     ;868A03|        |      ;
     dw $0000                                                   ;868A04|        |      ;
- 
 sObjectData0x004B:
     dw DATA8_86ADEE                                            ;868A06|        |86ADEE;
     db $10                                                     ;868A08|        |      ;
@@ -1576,7 +1499,6 @@ sObjectData0x004B:
     dw DATA8_86AE32                                            ;868A12|        |86AE32;
     db $FF                                                     ;868A14|        |      ;
     dw $0000                                                   ;868A15|        |      ;
- 
 sObjectData0x004C:
     dw DATA8_86AE47                                            ;868A17|        |86AE47;
     db $10                                                     ;868A19|        |      ;
@@ -1589,7 +1511,6 @@ sObjectData0x004C:
     dw DATA8_86AE86                                            ;868A23|        |86AE86;
     db $FF                                                     ;868A25|        |      ;
     dw $0000                                                   ;868A26|        |      ;
- 
 sObjectData0x004D:
     dw DATA8_86AE9B                                            ;868A28|        |86AE9B;
     db $10                                                     ;868A2A|        |      ;
@@ -1602,7 +1523,6 @@ sObjectData0x004D:
     dw DATA8_86AEC6                                            ;868A34|        |86AEC6;
     db $FF                                                     ;868A36|        |      ;
     dw $0000                                                   ;868A37|        |      ;
- 
 sObjectData0x004E:
     dw DATA8_86AED1                                            ;868A39|        |86AED1;
     db $10                                                     ;868A3B|        |      ;
@@ -1615,7 +1535,6 @@ sObjectData0x004E:
     dw DATA8_86AF06                                            ;868A45|        |86AF06;
     db $FF                                                     ;868A47|        |      ;
     dw $0000                                                   ;868A48|        |      ;
- 
 sObjectData0x004F:
     dw DATA8_86AF16                                            ;868A4A|        |86AF16;
     db $10                                                     ;868A4C|        |      ;
@@ -1628,7 +1547,6 @@ sObjectData0x004F:
     dw DATA8_86AF5A                                            ;868A56|        |86AF5A;
     db $FF                                                     ;868A58|        |      ;
     dw $0000                                                   ;868A59|        |      ;
- 
 sObjectData0x0050:
     dw DATA8_86AF6F                                            ;868A5B|        |86AF6F;
     db $10                                                     ;868A5D|        |      ;
@@ -1647,7 +1565,6 @@ sObjectData0x0050:
     dw DATA8_86AF94                                            ;868A70|        |86AF94;
     db $FF                                                     ;868A72|        |      ;
     dw $0000                                                   ;868A73|        |      ;
- 
 sObjectData0x0051:
     dw DATA8_86AFA4                                            ;868A75|        |86AFA4;
     db $10                                                     ;868A77|        |      ;
@@ -1666,7 +1583,6 @@ sObjectData0x0051:
     dw DATA8_86AFB4                                            ;868A8A|        |86AFB4;
     db $FF                                                     ;868A8C|        |      ;
     dw $0000                                                   ;868A8D|        |      ;
- 
 sObjectData0x0052:
     dw DATA8_86AFD4                                            ;868A8F|        |86AFD4;
     db $10                                                     ;868A91|        |      ;
@@ -1685,7 +1601,6 @@ sObjectData0x0052:
     dw DATA8_86AFDF                                            ;868AA4|        |86AFDF;
     db $FF                                                     ;868AA6|        |      ;
     dw $0000                                                   ;868AA7|        |      ;
- 
 sObjectData0x0053:
     dw DATA8_86B004                                            ;868AA9|        |86B004;
     db $10                                                     ;868AAB|        |      ;
@@ -1704,7 +1619,6 @@ sObjectData0x0053:
     dw DATA8_86B004                                            ;868ABE|        |86B004;
     db $FF                                                     ;868AC0|        |      ;
     dw $0000                                                   ;868AC1|        |      ;
- 
 sObjectData0x0054:
     dw DATA8_86B039                                            ;868AC3|        |86B039;
     db $10                                                     ;868AC5|        |      ;
@@ -1723,7 +1637,6 @@ sObjectData0x0054:
     dw DATA8_86B039                                            ;868AD8|        |86B039;
     db $FF                                                     ;868ADA|        |      ;
     dw $0000                                                   ;868ADB|        |      ;
- 
 sObjectData0x0055:
     dw DATA8_86B06E                                            ;868ADD|        |86B06E;
     db $10                                                     ;868ADF|        |      ;
@@ -1742,7 +1655,6 @@ sObjectData0x0055:
     dw DATA8_86B079                                            ;868AF2|        |86B079;
     db $FF                                                     ;868AF4|        |      ;
     dw $0000                                                   ;868AF5|        |      ;
- 
 sObjectData0x0056:
     dw DATA8_86B099                                            ;868AF7|        |86B099;
     db $10                                                     ;868AF9|        |      ;
@@ -1755,7 +1667,6 @@ sObjectData0x0056:
     dw DATA8_86B0DD                                            ;868B03|        |86B0DD;
     db $FF                                                     ;868B05|        |      ;
     dw $0000                                                   ;868B06|        |      ;
- 
 sObjectData0x0057:
     dw DATA8_86B0F7                                            ;868B08|        |86B0F7;
     db $10                                                     ;868B0A|        |      ;
@@ -1776,14 +1687,12 @@ sObjectData0x0057:
     dw DATA8_86B102                                            ;868B20|        |86B102;
     db $FF                                                     ;868B22|        |      ;
     dw $0000                                                   ;868B23|        |      ;
- 
 sObjectData0x0058:
     dw DATA8_86B0F7                                            ;868B25|        |86B0F7;
     db $10                                                     ;868B27|        |      ;
     dw DATA8_86B102                                            ;868B28|        |86B102;
     db $FF                                                     ;868B2A|        |      ;
     dw $0000                                                   ;868B2B|        |      ;
- 
 sObjectData0x0059:
     dw DATA8_86B102                                            ;868B2D|        |86B102;
     db $10                                                     ;868B2F|        |      ;
@@ -1792,7 +1701,6 @@ sObjectData0x0059:
     dw DATA8_86B0F7                                            ;868B33|        |86B0F7;
     db $FF                                                     ;868B35|        |      ;
     dw $0000                                                   ;868B36|        |      ;
- 
 sObjectData0x005A:
     dw DATA8_86B199                                            ;868B38|        |86B199;
     db $10                                                     ;868B3A|        |      ;
@@ -1813,7 +1721,6 @@ sObjectData0x005A:
     dw DATA8_86B1A9                                            ;868B50|        |86B1A9;
     db $FF                                                     ;868B52|        |      ;
     dw $0000                                                   ;868B53|        |      ;
- 
 sObjectData0x005B:
     dw DATA8_86B20D                                            ;868B55|        |86B20D;
     db $10                                                     ;868B57|        |      ;
@@ -1834,21 +1741,18 @@ sObjectData0x005B:
     dw DATA8_86B21D                                            ;868B6D|        |86B21D;
     db $FF                                                     ;868B6F|        |      ;
     dw $0000                                                   ;868B70|        |      ;
- 
 sObjectData0x005C:
     dw DATA8_86B199                                            ;868B72|        |86B199;
     db $10                                                     ;868B74|        |      ;
     dw DATA8_86B1A9                                            ;868B75|        |86B1A9;
     db $FF                                                     ;868B77|        |      ;
     dw $0000                                                   ;868B78|        |      ;
- 
 sObjectData0x005D:
     dw DATA8_86B20D                                            ;868B7A|        |86B20D;
     db $10                                                     ;868B7C|        |      ;
     dw DATA8_86B21D                                            ;868B7D|        |86B21D;
     db $FF                                                     ;868B7F|        |      ;
     dw $0000                                                   ;868B80|        |      ;
- 
 sObjectData0x005E:
     dw DATA8_86B1A9                                            ;868B82|        |86B1A9;
     db $20                                                     ;868B84|        |      ;
@@ -1857,14 +1761,12 @@ sObjectData0x005E:
     dw DATA8_86B199                                            ;868B88|        |86B199;
     db $FF                                                     ;868B8A|        |      ;
     dw $0000                                                   ;868B8B|        |      ;
- 
 sObjectData0x005F:
     dw DATA8_86B20D                                            ;868B8D|        |86B20D;
     db $50                                                     ;868B8F|        |      ;
     dw DATA8_86B20D                                            ;868B90|        |86B20D;
     db $FF                                                     ;868B92|        |      ;
     dw $0000                                                   ;868B93|        |      ;
- 
 sObjectData0x0060:
     dw DATA8_86B2B4                                            ;868B95|        |86B2B4;
     db $10                                                     ;868B97|        |      ;
@@ -1883,7 +1785,6 @@ sObjectData0x0060:
     dw DATA8_86B2D4                                            ;868BAA|        |86B2D4;
     db $FF                                                     ;868BAC|        |      ;
     dw $0000                                                   ;868BAD|        |      ;
- 
 sObjectData0x0061:
     dw DATA8_86B2F4                                            ;868BAF|        |86B2F4;
     db $10                                                     ;868BB1|        |      ;
@@ -1902,7 +1803,6 @@ sObjectData0x0061:
     dw DATA8_86B314                                            ;868BC4|        |86B314;
     db $FF                                                     ;868BC6|        |      ;
     dw $0000                                                   ;868BC7|        |      ;
- 
 sObjectData0x0062:
     dw DATA8_86B334                                            ;868BC9|        |86B334;
     db $10                                                     ;868BCB|        |      ;
@@ -1921,14 +1821,12 @@ sObjectData0x0062:
     dw DATA8_86B34F                                            ;868BDE|        |86B34F;
     db $FF                                                     ;868BE0|        |      ;
     dw $0000                                                   ;868BE1|        |      ;
- 
 sObjectData0x0063:
     dw DATA8_86B379                                            ;868BE3|        |86B379;
     db $14                                                     ;868BE5|        |      ;
     dw DATA8_86B384                                            ;868BE6|        |86B384;
     db $14                                                     ;868BE8|        |      ;
     dw $0000                                                   ;868BE9|        |      ;
- 
 sObjectData0x0064:
     dw DATA8_86B38F                                            ;868BEB|        |86B38F;
     db $10                                                     ;868BED|        |      ;
@@ -1945,7 +1843,6 @@ sObjectData0x0064:
     dw DATA8_86B39F                                            ;868BFD|        |86B39F;
     db $FF                                                     ;868BFF|        |      ;
     dw $0000                                                   ;868C00|        |      ;
- 
 sObjectData0x0065:
     dw DATA8_86B3AF                                            ;868C02|        |86B3AF;
     db $10                                                     ;868C04|        |      ;
@@ -1962,7 +1859,6 @@ sObjectData0x0065:
     dw DATA8_86B3BF                                            ;868C14|        |86B3BF;
     db $FF                                                     ;868C16|        |      ;
     dw $0000                                                   ;868C17|        |      ;
- 
 sObjectData0x0066:
     dw DATA8_86B3CF                                            ;868C19|        |86B3CF;
     db $10                                                     ;868C1B|        |      ;
@@ -1979,7 +1875,6 @@ sObjectData0x0066:
     dw DATA8_86B3DF                                            ;868C2B|        |86B3DF;
     db $FF                                                     ;868C2D|        |      ;
     dw $0000                                                   ;868C2E|        |      ;
- 
 sObjectData0x0067:
     dw DATA8_86B3EA                                            ;868C30|        |86B3EA;
     db $0F                                                     ;868C32|        |      ;
@@ -2000,7 +1895,6 @@ sObjectData0x0067:
     dw DATA8_86B4A5                                            ;868C48|        |86B4A5;
     db $FF                                                     ;868C4A|        |      ;
     dw $0000                                                   ;868C4B|        |      ;
- 
 sObjectData0x0068:
     dw DATA8_86B4BA                                            ;868C4D|        |86B4BA;
     db $0F                                                     ;868C4F|        |      ;
@@ -2015,7 +1909,6 @@ sObjectData0x0068:
     dw DATA8_86B51D                                            ;868C5C|        |86B51D;
     db $FF                                                     ;868C5E|        |      ;
     dw $0000                                                   ;868C5F|        |      ;
- 
 sObjectData0x0069:
     dw DATA8_86B52D                                            ;868C61|        |86B52D;
     db $0F                                                     ;868C63|        |      ;
@@ -2030,7 +1923,6 @@ sObjectData0x0069:
     dw DATA8_86B586                                            ;868C70|        |86B586;
     db $FF                                                     ;868C72|        |      ;
     dw $0000                                                   ;868C73|        |      ;
- 
 sObjectData0x006A:
     dw DATA8_86B596                                            ;868C75|        |86B596;
     db $0F                                                     ;868C77|        |      ;
@@ -2045,7 +1937,6 @@ sObjectData0x006A:
     dw DATA8_86B5F9                                            ;868C84|        |86B5F9;
     db $FF                                                     ;868C86|        |      ;
     dw $0000                                                   ;868C87|        |      ;
- 
 sObjectData0x006B:
     dw DATA8_86B60E                                            ;868C89|        |86B60E;
     db $0F                                                     ;868C8B|        |      ;
@@ -2060,7 +1951,6 @@ sObjectData0x006B:
     dw DATA8_86B662                                            ;868C98|        |86B662;
     db $FF                                                     ;868C9A|        |      ;
     dw $0000                                                   ;868C9B|        |      ;
- 
 sObjectData0x006C:
     dw DATA8_86B677                                            ;868C9D|        |86B677;
     db $0F                                                     ;868C9F|        |      ;
@@ -2075,7 +1965,6 @@ sObjectData0x006C:
     dw DATA8_86B6C6                                            ;868CAC|        |86B6C6;
     db $FF                                                     ;868CAE|        |      ;
     dw $0000                                                   ;868CAF|        |      ;
- 
 sObjectData0x006D:
     dw DATA8_86B6D6                                            ;868CB1|        |86B6D6;
     db $0F                                                     ;868CB3|        |      ;
@@ -2090,7 +1979,6 @@ sObjectData0x006D:
     dw DATA8_86B74D                                            ;868CC0|        |86B74D;
     db $FF                                                     ;868CC2|        |      ;
     dw $0000                                                   ;868CC3|        |      ;
- 
 sObjectData0x006E:
     dw DATA8_86B767                                            ;868CC5|        |86B767;
     db $0F                                                     ;868CC7|        |      ;
@@ -2105,7 +1993,6 @@ sObjectData0x006E:
     dw DATA8_86B7C0                                            ;868CD4|        |86B7C0;
     db $FF                                                     ;868CD6|        |      ;
     dw $0000                                                   ;868CD7|        |      ;
- 
 sObjectData0x006F:
     dw DATA8_86B7D0                                            ;868CD9|        |86B7D0;
     db $0F                                                     ;868CDB|        |      ;
@@ -2120,7 +2007,6 @@ sObjectData0x006F:
     dw DATA8_86B824                                            ;868CE8|        |86B824;
     db $FF                                                     ;868CEA|        |      ;
     dw $0000                                                   ;868CEB|        |      ;
- 
 sObjectData0x0070:
     dw DATA8_86B834                                            ;868CED|        |86B834;
     db $0F                                                     ;868CEF|        |      ;
@@ -2135,7 +2021,6 @@ sObjectData0x0070:
     dw DATA8_86B8AB                                            ;868CFC|        |86B8AB;
     db $FF                                                     ;868CFE|        |      ;
     dw $0000                                                   ;868CFF|        |      ;
- 
 sObjectData0x0071:
     dw DATA8_86B8C0                                            ;868D01|        |86B8C0;
     db $10                                                     ;868D03|        |      ;
@@ -2158,12 +2043,10 @@ sObjectData0x0071:
     dw DATA8_86B8D0                                            ;868D1C|        |86B8D0;
     db $FF                                                     ;868D1E|        |      ;
     dw $0000                                                   ;868D1F|        |      ;
- 
 sObjectData0x0072:
     dw DATA8_86B90A                                            ;868D21|        |86B90A;
     db $FF                                                     ;868D23|        |      ;
     dw $0000                                                   ;868D24|        |      ;
- 
 sObjectData0x0073:
     dw DATA8_86B958                                            ;868D26|        |86B958;
     db $0C                                                     ;868D28|        |      ;
@@ -2172,7 +2055,6 @@ sObjectData0x0073:
     dw DATA8_86B987                                            ;868D2C|        |86B987;
     db $FF                                                     ;868D2E|        |      ;
     dw $0000                                                   ;868D2F|        |      ;
- 
 sObjectData0x0074:
     dw DATA8_86B9A1                                            ;868D31|        |86B9A1;
     db $0C                                                     ;868D33|        |      ;
@@ -2189,7 +2071,6 @@ sObjectData0x0074:
     dw DATA8_86B987                                            ;868D43|        |86B987;
     db $FF                                                     ;868D45|        |      ;
     dw $0000                                                   ;868D46|        |      ;
- 
 sObjectData0x0075:
     dw DATA8_86B9A1                                            ;868D48|        |86B9A1;
     db $04                                                     ;868D4A|        |      ;
@@ -2200,7 +2081,6 @@ sObjectData0x0075:
     dw DATA8_86B90A                                            ;868D51|        |86B90A;
     db $FF                                                     ;868D53|        |      ;
     dw $0000                                                   ;868D54|        |      ;
- 
 sObjectData0x0076:
     dw DATA8_86B987                                            ;868D56|        |86B987;
     db $04                                                     ;868D58|        |      ;
@@ -2211,7 +2091,6 @@ sObjectData0x0076:
     dw DATA8_86B90A                                            ;868D5F|        |86B90A;
     db $FF                                                     ;868D61|        |      ;
     dw $0000                                                   ;868D62|        |      ;
- 
 sObjectData0x0077:
     dw DATA8_86B9A1                                            ;868D64|        |86B9A1;
     db $04                                                     ;868D66|        |      ;
@@ -2222,12 +2101,10 @@ sObjectData0x0077:
     dw DATA8_86B90A                                            ;868D6D|        |86B90A;
     db $FF                                                     ;868D6F|        |      ;
     dw $0000                                                   ;868D70|        |      ;
- 
 sObjectData0x0078:
     dw DATA8_86B987                                            ;868D72|        |86B987;
     db $FF                                                     ;868D74|        |      ;
     dw $0000                                                   ;868D75|        |      ;
- 
 sObjectData0x0079:
     dw DATA8_86B9DA                                            ;868D77|        |86B9DA;
     db $10                                                     ;868D79|        |      ;
@@ -2256,7 +2133,6 @@ sObjectData0x0079:
     dw DATA8_86B9E5                                            ;868D9B|        |86B9E5;
     db $FF                                                     ;868D9D|        |      ;
     dw $0000                                                   ;868D9E|        |      ;
- 
 sObjectData0x007A:
     dw DATA8_86BA0B                                            ;868DA0|        |86BA0B;
     db $11                                                     ;868DA2|        |      ;
@@ -2275,7 +2151,6 @@ sObjectData0x007A:
     dw DATA8_86BA26                                            ;868DB5|        |86BA26;
     db $FF                                                     ;868DB7|        |      ;
     dw $0000                                                   ;868DB8|        |      ;
- 
 sObjectData0x007B:
     dw DATA8_86BA0B                                            ;868DBA|        |86BA0B;
     db $10                                                     ;868DBC|        |      ;
@@ -2290,7 +2165,6 @@ sObjectData0x007B:
     dw DATA8_86BA26                                            ;868DC9|        |86BA26;
     db $FF                                                     ;868DCB|        |      ;
     dw $0000                                                   ;868DCC|        |      ;
- 
 sObjectData0x007C:
     dw DATA8_86BA61                                            ;868DCE|        |86BA61;
     db $0F                                                     ;868DD0|        |      ;
@@ -2317,7 +2191,6 @@ sObjectData0x007C:
     dw DATA8_86BA26                                            ;868DEF|        |86BA26;
     db $FF                                                     ;868DF1|        |      ;
     dw $0000                                                   ;868DF2|        |      ;
- 
 sObjectData0x007D:
     dw DATA8_86BAAC                                            ;868DF4|        |86BAAC;
     db $10                                                     ;868DF6|        |      ;
@@ -2332,7 +2205,6 @@ sObjectData0x007D:
     dw DATA8_86BAF1                                            ;868E03|        |86BAF1;
     db $FF                                                     ;868E05|        |      ;
     dw $0000                                                   ;868E06|        |      ;
- 
 sObjectData0x007E:
     dw DATA8_86BB06                                            ;868E08|        |86BB06;
     db $08                                                     ;868E0A|        |      ;
@@ -2365,42 +2237,36 @@ sObjectData0x007E:
     dw DATA8_86BB76                                            ;868E32|        |86BB76;
     db $FF                                                     ;868E34|        |      ;
     dw $0000                                                   ;868E35|        |      ;
- 
 sObjectData0x007F:
     dw DATA8_86BB81                                            ;868E37|        |86BB81;
     db $10                                                     ;868E39|        |      ;
     dw DATA8_86BB87                                            ;868E3A|        |86BB87;
     db $10                                                     ;868E3C|        |      ;
     dw $0000                                                   ;868E3D|        |      ;
- 
 sObjectData0x0080:
     dw DATA8_86BB8D                                            ;868E3F|        |86BB8D;
     db $10                                                     ;868E41|        |      ;
     dw DATA8_86BB93                                            ;868E42|        |86BB93;
     db $10                                                     ;868E44|        |      ;
     dw $0000                                                   ;868E45|        |      ;
- 
 sObjectData0x0081:
     dw DATA8_86BB99                                            ;868E47|        |86BB99;
     db $10                                                     ;868E49|        |      ;
     dw DATA8_86BB9F                                            ;868E4A|        |86BB9F;
     db $10                                                     ;868E4C|        |      ;
     dw $0000                                                   ;868E4D|        |      ;
- 
 sObjectData0x0082:
     dw DATA8_86BBA5                                            ;868E4F|        |86BBA5;
     db $50                                                     ;868E51|        |      ;
     dw DATA8_86BBAB                                            ;868E52|        |86BBAB;
     db $30                                                     ;868E54|        |      ;
     dw $0000                                                   ;868E55|        |      ;
- 
 sObjectData0x0083:
     dw DATA8_86BBB1                                            ;868E57|        |86BBB1;
     db $50                                                     ;868E59|        |      ;
     dw DATA8_86BBB7                                            ;868E5A|        |86BBB7;
     db $30                                                     ;868E5C|        |      ;
     dw $0000                                                   ;868E5D|        |      ;
- 
 sObjectData0x0084:
     dw DATA8_86BBBD                                            ;868E5F|        |86BBBD;
     db $08                                                     ;868E61|        |      ;
@@ -2417,14 +2283,12 @@ sObjectData0x0084:
     dw DATA8_86BBF9                                            ;868E71|        |86BBF9;
     db $FF                                                     ;868E73|        |      ;
     dw $0000                                                   ;868E74|        |      ;
- 
 sObjectData0x0085:
     dw DATA8_86BC04                                            ;868E76|        |86BC04;
     db $50                                                     ;868E78|        |      ;
     dw DATA8_86BC0A                                            ;868E79|        |86BC0A;
     db $30                                                     ;868E7B|        |      ;
     dw $0000                                                   ;868E7C|        |      ;
- 
 sObjectData0x0086:
     dw DATA8_86BC10                                            ;868E7E|        |86BC10;
     db $08                                                     ;868E80|        |      ;
@@ -2443,7 +2307,6 @@ sObjectData0x0086:
     dw DATA8_86BC52                                            ;868E93|        |86BC52;
     db $FF                                                     ;868E95|        |      ;
     dw $0000                                                   ;868E96|        |      ;
- 
 sObjectData0x0087:
     dw DATA8_86BC5D                                            ;868E98|        |86BC5D;
     db $10                                                     ;868E9A|        |      ;
@@ -2470,7 +2333,6 @@ sObjectData0x0087:
     dw DATA8_86BC73                                            ;868EB9|        |86BC73;
     db $FF                                                     ;868EBB|        |      ;
     dw $0000                                                   ;868EBC|        |      ;
- 
 sObjectData0x0088:
     dw DATA8_86BC73                                            ;868EBE|        |86BC73;
     db $20                                                     ;868EC0|        |      ;
@@ -2505,7 +2367,6 @@ sObjectData0x0088:
     dw DATA8_86BC73                                            ;868EEB|        |86BC73;
     db $FF                                                     ;868EED|        |      ;
     dw $0000                                                   ;868EEE|        |      ;
- 
 sObjectData0x0089:
     dw DATA8_86BCE9                                            ;868EF0|        |86BCE9;
     db $10                                                     ;868EF2|        |      ;
@@ -2534,7 +2395,6 @@ sObjectData0x0089:
     dw DATA8_86BCF4                                            ;868F14|        |86BCF4;
     db $FF                                                     ;868F16|        |      ;
     dw $0000                                                   ;868F17|        |      ;
- 
 sObjectData0x008A:
     dw DATA8_86BCDE                                            ;868F19|        |86BCDE;
     db $20                                                     ;868F1B|        |      ;
@@ -2543,7 +2403,6 @@ sObjectData0x008A:
     dw DATA8_86BD1F                                            ;868F1F|        |86BD1F;
     db $FF                                                     ;868F21|        |      ;
     dw $0000                                                   ;868F22|        |      ;
- 
 sObjectData0x008B:
     dw DATA8_86BD2F                                            ;868F24|        |86BD2F;
     db $0D                                                     ;868F26|        |      ;
@@ -2552,7 +2411,6 @@ sObjectData0x008B:
     dw DATA8_86BD3A                                            ;868F2A|        |86BD3A;
     db $FF                                                     ;868F2C|        |      ;
     dw $0000                                                   ;868F2D|        |      ;
- 
 sObjectData0x008C:
     dw DATA8_86BD45                                            ;868F2F|        |86BD45;
     db $0F                                                     ;868F31|        |      ;
@@ -2587,7 +2445,6 @@ sObjectData0x008C:
     dw DATA8_86BD50                                            ;868F5C|        |86BD50;
     db $FF                                                     ;868F5E|        |      ;
     dw $0000                                                   ;868F5F|        |      ;
- 
 sObjectData0x008D:
     dw DATA8_86BD81                                            ;868F61|        |86BD81;
     db $10                                                     ;868F63|        |      ;
@@ -2596,7 +2453,6 @@ sObjectData0x008D:
     dw DATA8_86BD8C                                            ;868F67|        |86BD8C;
     db $FF                                                     ;868F69|        |      ;
     dw $0000                                                   ;868F6A|        |      ;
- 
 sObjectData0x008E:
     dw DATA8_86BD97                                            ;868F6C|        |86BD97;
     db $16                                                     ;868F6E|        |      ;
@@ -2605,7 +2461,6 @@ sObjectData0x008E:
     dw DATA8_86BDA2                                            ;868F72|        |86BDA2;
     db $FF                                                     ;868F74|        |      ;
     dw $0000                                                   ;868F75|        |      ;
- 
 sObjectData0x008F:
     dw DATA8_86BDBD                                            ;868F77|        |86BDBD;
     db $09                                                     ;868F79|        |      ;
@@ -2614,7 +2469,6 @@ sObjectData0x008F:
     dw DATA8_86BDE7                                            ;868F7D|        |86BDE7;
     db $09                                                     ;868F7F|        |      ;
     dw $0000                                                   ;868F80|        |      ;
- 
 sObjectData0x0090:
     dw DATA8_86BE0C                                            ;868F82|        |86BE0C;
     db $09                                                     ;868F84|        |      ;
@@ -2623,7 +2477,6 @@ sObjectData0x0090:
     dw DATA8_86BE31                                            ;868F88|        |86BE31;
     db $09                                                     ;868F8A|        |      ;
     dw $0000                                                   ;868F8B|        |      ;
- 
 sObjectData0x0091:
     dw DATA8_86BE46                                            ;868F8D|        |86BE46;
     db $06                                                     ;868F8F|        |      ;
@@ -2636,7 +2489,6 @@ sObjectData0x0091:
     dw DATA8_86BDBD                                            ;868F99|        |86BDBD;
     db $FF                                                     ;868F9B|        |      ;
     dw $0000                                                   ;868F9C|        |      ;
- 
 sObjectData0x0092:
     dw DATA8_86BE80                                            ;868F9E|        |86BE80;
     db $06                                                     ;868FA0|        |      ;
@@ -2649,17 +2501,14 @@ sObjectData0x0092:
     dw DATA8_86BDFC                                            ;868FAA|        |86BDFC;
     db $FF                                                     ;868FAC|        |      ;
     dw $0000                                                   ;868FAD|        |      ;
- 
 sObjectData0x0093:
     dw DATA8_86BDAD                                            ;868FAF|        |86BDAD;
     db $FF                                                     ;868FB1|        |      ;
     dw $0000                                                   ;868FB2|        |      ;
- 
 sObjectData0x0094:
     dw DATA8_86BDFC                                            ;868FB4|        |86BDFC;
     db $FF                                                     ;868FB6|        |      ;
     dw $0000                                                   ;868FB7|        |      ;
- 
 sObjectData0x0095:
     dw DATA8_86BED9                                            ;868FB9|        |86BED9;
     db $09                                                     ;868FBB|        |      ;
@@ -2668,7 +2517,6 @@ sObjectData0x0095:
     dw DATA8_86BF0D                                            ;868FBF|        |86BF0D;
     db $09                                                     ;868FC1|        |      ;
     dw $0000                                                   ;868FC2|        |      ;
- 
 sObjectData0x0096:
     dw DATA8_86BF22                                            ;868FC4|        |86BF22;
     db $06                                                     ;868FC6|        |      ;
@@ -2681,12 +2529,10 @@ sObjectData0x0096:
     dw DATA8_86BEC4                                            ;868FD0|        |86BEC4;
     db $FF                                                     ;868FD2|        |      ;
     dw $0000                                                   ;868FD3|        |      ;
- 
 sObjectData0x0097:
     dw DATA8_86BEC4                                            ;868FD5|        |86BEC4;
     db $FF                                                     ;868FD7|        |      ;
     dw $0000                                                   ;868FD8|        |      ;
- 
 sObjectData0x0098:
     dw DATA8_86BF7F                                            ;868FDA|        |86BF7F;
     db $18                                                     ;868FDC|        |      ;
@@ -2695,7 +2541,6 @@ sObjectData0x0098:
     dw DATA8_86BF8F                                            ;868FE0|        |86BF8F;
     db $FF                                                     ;868FE2|        |      ;
     dw $0000                                                   ;868FE3|        |      ;
- 
 sObjectData0x0099:
     dw DATA8_86BF9F                                            ;868FE5|        |86BF9F;
     db $18                                                     ;868FE7|        |      ;
@@ -2704,196 +2549,168 @@ sObjectData0x0099:
     dw DATA8_86BFAF                                            ;868FEB|        |86BFAF;
     db $FF                                                     ;868FED|        |      ;
     dw $0000                                                   ;868FEE|        |      ;
- 
 sObjectData0x009A:
     dw DATA8_86BFBF                                            ;868FF0|        |86BFBF;
     db $30                                                     ;868FF2|        |      ;
     dw DATA8_86BFBF                                            ;868FF3|        |86BFBF;
     db $FF                                                     ;868FF5|        |      ;
     dw $0000                                                   ;868FF6|        |      ;
- 
 sObjectData0x009B:
     dw DATA8_86BFCF                                            ;868FF8|        |86BFCF;
     db $30                                                     ;868FFA|        |      ;
     dw DATA8_86BFCF                                            ;868FFB|        |86BFCF;
     db $FF                                                     ;868FFD|        |      ;
     dw $0000                                                   ;868FFE|        |      ;
- 
 sObjectData0x009C:
     dw DATA8_86BFE4                                            ;869000|        |86BFE4;
     db $30                                                     ;869002|        |      ;
     dw DATA8_86BFE4                                            ;869003|        |86BFE4;
     db $FF                                                     ;869005|        |      ;
     dw $0000                                                   ;869006|        |      ;
- 
 sObjectData0x009D:
     dw DATA8_86BFF9                                            ;869008|        |86BFF9;
     db $10                                                     ;86900A|        |      ;
     dw DATA8_86BFF9                                            ;86900B|        |86BFF9;
     db $FF                                                     ;86900D|        |      ;
     dw $0000                                                   ;86900E|        |      ;
- 
 sObjectData0x009E:
     dw DATA8_86C00E                                            ;869010|        |86C00E;
     db $30                                                     ;869012|        |      ;
     dw DATA8_86C00E                                            ;869013|        |86C00E;
     db $FF                                                     ;869015|        |      ;
     dw $0000                                                   ;869016|        |      ;
- 
 sObjectData0x009F:
     dw DATA8_86C023                                            ;869018|        |86C023;
     db $30                                                     ;86901A|        |      ;
     dw DATA8_86C023                                            ;86901B|        |86C023;
     db $FF                                                     ;86901D|        |      ;
     dw $0000                                                   ;86901E|        |      ;
- 
 sObjectData0x00A0:
     dw DATA8_86C038                                            ;869020|        |86C038;
     db $30                                                     ;869022|        |      ;
     dw DATA8_86C038                                            ;869023|        |86C038;
     db $FF                                                     ;869025|        |      ;
     dw $0000                                                   ;869026|        |      ;
- 
 sObjectData0x00A1:
     dw DATA8_86C04D                                            ;869028|        |86C04D;
     db $30                                                     ;86902A|        |      ;
     dw DATA8_86C04D                                            ;86902B|        |86C04D;
     db $FF                                                     ;86902D|        |      ;
     dw $0000                                                   ;86902E|        |      ;
- 
 sObjectData0x00A2:
     dw DATA8_86C062                                            ;869030|        |86C062;
     db $30                                                     ;869032|        |      ;
     dw DATA8_86C062                                            ;869033|        |86C062;
     db $FF                                                     ;869035|        |      ;
     dw $0000                                                   ;869036|        |      ;
- 
 sObjectData0x00A3:
     dw DATA8_86C077                                            ;869038|        |86C077;
     db $30                                                     ;86903A|        |      ;
     dw DATA8_86C077                                            ;86903B|        |86C077;
     db $FF                                                     ;86903D|        |      ;
     dw $0000                                                   ;86903E|        |      ;
- 
 sObjectData0x00A4:
     dw DATA8_86C08C                                            ;869040|        |86C08C;
     db $30                                                     ;869042|        |      ;
     dw DATA8_86C08C                                            ;869043|        |86C08C;
     db $FF                                                     ;869045|        |      ;
     dw $0000                                                   ;869046|        |      ;
- 
 sObjectData0x00A5:
     dw DATA8_86C0A1                                            ;869048|        |86C0A1;
     db $30                                                     ;86904A|        |      ;
     dw DATA8_86C0A1                                            ;86904B|        |86C0A1;
     db $FF                                                     ;86904D|        |      ;
     dw $0000                                                   ;86904E|        |      ;
- 
 sObjectData0x00A6:
     dw DATA8_86C0B6                                            ;869050|        |86C0B6;
     db $30                                                     ;869052|        |      ;
     dw DATA8_86C0B6                                            ;869053|        |86C0B6;
     db $FF                                                     ;869055|        |      ;
     dw $0000                                                   ;869056|        |      ;
- 
 sObjectData0x00A7:
     dw DATA8_86C0CB                                            ;869058|        |86C0CB;
     db $30                                                     ;86905A|        |      ;
     dw DATA8_86C0CB                                            ;86905B|        |86C0CB;
     db $FF                                                     ;86905D|        |      ;
     dw $0000                                                   ;86905E|        |      ;
- 
 sObjectData0x00A8:
     dw DATA8_86C0E0                                            ;869060|        |86C0E0;
     db $30                                                     ;869062|        |      ;
     dw DATA8_86C0E0                                            ;869063|        |86C0E0;
     db $FF                                                     ;869065|        |      ;
     dw $0000                                                   ;869066|        |      ;
- 
 sObjectData0x00A9:
     dw DATA8_86C0F5                                            ;869068|        |86C0F5;
     db $30                                                     ;86906A|        |      ;
     dw DATA8_86C0F5                                            ;86906B|        |86C0F5;
     db $FF                                                     ;86906D|        |      ;
     dw $0000                                                   ;86906E|        |      ;
- 
 sObjectData0x00AA:
     dw DATA8_86C10A                                            ;869070|        |86C10A;
     db $30                                                     ;869072|        |      ;
     dw DATA8_86C10A                                            ;869073|        |86C10A;
     db $FF                                                     ;869075|        |      ;
     dw $0000                                                   ;869076|        |      ;
- 
 sObjectData0x00AB:
     dw DATA8_86C11F                                            ;869078|        |86C11F;
     db $30                                                     ;86907A|        |      ;
     dw DATA8_86C11F                                            ;86907B|        |86C11F;
     db $FF                                                     ;86907D|        |      ;
     dw $0000                                                   ;86907E|        |      ;
- 
 sObjectData0x00AC:
     dw DATA8_86C134                                            ;869080|        |86C134;
     db $30                                                     ;869082|        |      ;
     dw DATA8_86C134                                            ;869083|        |86C134;
     db $FF                                                     ;869085|        |      ;
     dw $0000                                                   ;869086|        |      ;
- 
 sObjectData0x00AD:
     dw DATA8_86C149                                            ;869088|        |86C149;
     db $30                                                     ;86908A|        |      ;
     dw DATA8_86C149                                            ;86908B|        |86C149;
     db $FF                                                     ;86908D|        |      ;
     dw $0000                                                   ;86908E|        |      ;
- 
 sObjectData0x00AE:
     dw DATA8_86C15E                                            ;869090|        |86C15E;
     db $10                                                     ;869092|        |      ;
     dw DATA8_86C15E                                            ;869093|        |86C15E;
     db $FF                                                     ;869095|        |      ;
     dw $0000                                                   ;869096|        |      ;
- 
 sObjectData0x00AF:
     dw DATA8_86C173                                            ;869098|        |86C173;
     db $30                                                     ;86909A|        |      ;
     dw DATA8_86C173                                            ;86909B|        |86C173;
     db $FF                                                     ;86909D|        |      ;
     dw $0000                                                   ;86909E|        |      ;
- 
 sObjectData0x00B0:
     dw DATA8_86C188                                            ;8690A0|        |86C188;
     db $30                                                     ;8690A2|        |      ;
     dw DATA8_86C188                                            ;8690A3|        |86C188;
     db $FF                                                     ;8690A5|        |      ;
     dw $0000                                                   ;8690A6|        |      ;
- 
 sObjectData0x00B1:
     dw DATA8_86C19D                                            ;8690A8|        |86C19D;
     db $30                                                     ;8690AA|        |      ;
     dw DATA8_86C19D                                            ;8690AB|        |86C19D;
     db $FF                                                     ;8690AD|        |      ;
     dw $0000                                                   ;8690AE|        |      ;
- 
 sObjectData0x00B2:
     dw DATA8_86C1B2                                            ;8690B0|        |86C1B2;
     db $30                                                     ;8690B2|        |      ;
     dw DATA8_86C1B2                                            ;8690B3|        |86C1B2;
     db $FF                                                     ;8690B5|        |      ;
     dw $0000                                                   ;8690B6|        |      ;
- 
 sObjectData0x00B3:
     dw DATA8_86C1C7                                            ;8690B8|        |86C1C7;
     db $30                                                     ;8690BA|        |      ;
     dw DATA8_86C1C7                                            ;8690BB|        |86C1C7;
     db $FF                                                     ;8690BD|        |      ;
     dw $0000                                                   ;8690BE|        |      ;
- 
 sObjectData0x00B4:
     dw DATA8_86C1DC                                            ;8690C0|        |86C1DC;
     db $30                                                     ;8690C2|        |      ;
     dw DATA8_86C1DC                                            ;8690C3|        |86C1DC;
     db $FF                                                     ;8690C5|        |      ;
     dw $0000                                                   ;8690C6|        |      ;
- 
 sObjectData0x00B5:
     dw DATA8_86C1F1                                            ;8690C8|        |86C1F1;
     db $10                                                     ;8690CA|        |      ;
@@ -2912,7 +2729,6 @@ sObjectData0x00B5:
     dw DATA8_86C1F1                                            ;8690DD|        |86C1F1;
     db $FF                                                     ;8690DF|        |      ;
     dw $0000                                                   ;8690E0|        |      ;
- 
 sObjectData0x00B6:
     dw DATA8_86C249                                            ;8690E2|        |86C249;
     db $10                                                     ;8690E4|        |      ;
@@ -2945,7 +2761,6 @@ sObjectData0x00B6:
     dw DATA8_86C249                                            ;86910C|        |86C249;
     db $FF                                                     ;86910E|        |      ;
     dw $0000                                                   ;86910F|        |      ;
- 
 sObjectData0x00B7:
     dw DATA8_86C468                                            ;869111|        |86C468;
     db $0D                                                     ;869113|        |      ;
@@ -2968,7 +2783,6 @@ sObjectData0x00B7:
     dw DATA8_86C47A                                            ;86912C|        |86C47A;
     db $FE                                                     ;86912E|        |      ;
     dw $0000                                                   ;86912F|        |      ;
- 
 sObjectData0x00B8:
     dw DATA8_86C480                                            ;869131|        |86C480;
     db $0A                                                     ;869133|        |      ;
@@ -2995,14 +2809,12 @@ sObjectData0x00B8:
     dw DATA8_86C4FD                                            ;869152|        |86C4FD;
     db $FE                                                     ;869154|        |      ;
     dw $0000                                                   ;869155|        |      ;
- 
 sObjectData0x00B9:
     dw DATA8_86C51C                                            ;869157|        |86C51C;
     db $10                                                     ;869159|        |      ;
     dw DATA8_86C522                                            ;86915A|        |86C522;
     db $10                                                     ;86915C|        |      ;
     dw $0000                                                   ;86915D|        |      ;
- 
 sObjectData0x00BA:
     dw DATA8_86C51C                                            ;86915F|        |86C51C;
     db $10                                                     ;869161|        |      ;
@@ -3029,27 +2841,22 @@ sObjectData0x00BA:
     dw DATA8_86C51C                                            ;869180|        |86C51C;
     db $FE                                                     ;869182|        |      ;
     dw $0000                                                   ;869183|        |      ;
- 
 sObjectData0x00BB:
     dw DATA8_86C528                                            ;869185|        |86C528;
     db $FF                                                     ;869187|        |      ;
     dw $0000                                                   ;869188|        |      ;
- 
 sObjectData0x00BC:
     dw DATA8_86C52E                                            ;86918A|        |86C52E;
     db $01                                                     ;86918C|        |      ;
     dw $0000                                                   ;86918D|        |      ;
- 
 sObjectData0x00BD:
     dw DATA8_86C534                                            ;86918F|        |86C534;
     db $FF                                                     ;869191|        |      ;
     dw $0000                                                   ;869192|        |      ;
- 
 sObjectData0x00BE:
     dw DATA8_86C53A                                            ;869194|        |86C53A;
     db $FF                                                     ;869196|        |      ;
     dw $0000                                                   ;869197|        |      ;
- 
 sObjectData0x00BF:
     dw DATA8_86C540                                            ;869199|        |86C540;
     db $0F                                                     ;86919B|        |      ;
@@ -3082,7 +2889,6 @@ sObjectData0x00BF:
     dw DATA8_86C546                                            ;8691C3|        |86C546;
     db $FE                                                     ;8691C5|        |      ;
     dw $0000                                                   ;8691C6|        |      ;
- 
 sObjectData0x00C0:
     dw DATA8_86C558                                            ;8691C8|        |86C558;
     db $10                                                     ;8691CA|        |      ;
@@ -3103,7 +2909,6 @@ sObjectData0x00C0:
     dw DATA8_86C564                                            ;8691E0|        |86C564;
     db $FE                                                     ;8691E2|        |      ;
     dw $0000                                                   ;8691E3|        |      ;
- 
 sObjectData0x00C1:
     dw DATA8_86C56A                                            ;8691E5|        |86C56A;
     db $10                                                     ;8691E7|        |      ;
@@ -3122,7 +2927,6 @@ sObjectData0x00C1:
     dw DATA8_86C56A                                            ;8691FA|        |86C56A;
     db $FE                                                     ;8691FC|        |      ;
     dw $0000                                                   ;8691FD|        |      ;
- 
 sObjectData0x00C2:
     dw DATA8_86C570                                            ;8691FF|        |86C570;
     db $10                                                     ;869201|        |      ;
@@ -3141,12 +2945,10 @@ sObjectData0x00C2:
     dw DATA8_86C570                                            ;869214|        |86C570;
     db $FE                                                     ;869216|        |      ;
     dw $0000                                                   ;869217|        |      ;
- 
 sObjectData0x00C3:
     dw DATA8_86C576                                            ;869219|        |86C576;
     db $FF                                                     ;86921B|        |      ;
     dw $0000                                                   ;86921C|        |      ;
- 
 sObjectData0x00C4:
     dw DATA8_86C57C                                            ;86921E|        |86C57C;
     db $30                                                     ;869220|        |      ;
@@ -3165,7 +2967,6 @@ sObjectData0x00C4:
     dw DATA8_86C57C                                            ;869233|        |86C57C;
     db $FE                                                     ;869235|        |      ;
     dw $0000                                                   ;869236|        |      ;
- 
 sObjectData0x00C5:
     dw DATA8_86C588                                            ;869238|        |86C588;
     db $30                                                     ;86923A|        |      ;
@@ -3184,7 +2985,6 @@ sObjectData0x00C5:
     dw DATA8_86C588                                            ;86924D|        |86C588;
     db $FE                                                     ;86924F|        |      ;
     dw $0000                                                   ;869250|        |      ;
- 
 sObjectData0x00C6:
     dw DATA8_86C58E                                            ;869252|        |86C58E;
     db $30                                                     ;869254|        |      ;
@@ -3203,12 +3003,10 @@ sObjectData0x00C6:
     dw DATA8_86C58E                                            ;869267|        |86C58E;
     db $FE                                                     ;869269|        |      ;
     dw $0000                                                   ;86926A|        |      ;
- 
 sObjectData0x00C7:
     dw DATA8_86C594                                            ;86926C|        |86C594;
     db $FF                                                     ;86926E|        |      ;
     dw $0000                                                   ;86926F|        |      ;
- 
 sObjectData0x00C8:
     dw DATA8_86C5CF                                            ;869271|        |86C5CF;
     db $09                                                     ;869273|        |      ;
@@ -3219,7 +3017,6 @@ sObjectData0x00C8:
     dw DATA8_86C5EF                                            ;86927A|        |86C5EF;
     db $FE                                                     ;86927C|        |      ;
     dw $0000                                                   ;86927D|        |      ;
- 
 sObjectData0x00C9:
     dw DATA8_86C604                                            ;86927F|        |86C604;
     db $09                                                     ;869281|        |      ;
@@ -3230,7 +3027,6 @@ sObjectData0x00C9:
     dw DATA8_86C633                                            ;869288|        |86C633;
     db $FE                                                     ;86928A|        |      ;
     dw $0000                                                   ;86928B|        |      ;
- 
 sObjectData0x00CA:
     dw DATA8_86C652                                            ;86928D|        |86C652;
     db $0C                                                     ;86928F|        |      ;
@@ -3241,7 +3037,6 @@ sObjectData0x00CA:
     dw DATA8_86C65E                                            ;869296|        |86C65E;
     db $FE                                                     ;869298|        |      ;
     dw $0000                                                   ;869299|        |      ;
- 
 sObjectData0x00CB:
     dw DATA8_86C669                                            ;86929B|        |86C669;
     db $08                                                     ;86929D|        |      ;
@@ -3250,247 +3045,198 @@ sObjectData0x00CB:
     dw DATA8_86C67E                                            ;8692A1|        |86C67E;
     db $FE                                                     ;8692A3|        |      ;
     dw $0000                                                   ;8692A4|        |      ;
- 
 sObjectData0x00CC:
     dw DATA8_86C684                                            ;8692A6|        |86C684;
     db $FF                                                     ;8692A8|        |      ;
     dw $0000                                                   ;8692A9|        |      ;
- 
 sObjectData0x00CD:
     dw DATA8_86C68A                                            ;8692AB|        |86C68A;
     db $FF                                                     ;8692AD|        |      ;
     dw $0000                                                   ;8692AE|        |      ;
- 
 sObjectData0x00CE:
     dw DATA8_86C690                                            ;8692B0|        |86C690;
     db $FF                                                     ;8692B2|        |      ;
     dw $0000                                                   ;8692B3|        |      ;
- 
 sObjectData0x00CF:
     dw DATA8_86C696                                            ;8692B5|        |86C696;
     db $FF                                                     ;8692B7|        |      ;
     dw $0000                                                   ;8692B8|        |      ;
- 
 sObjectData0x00D0:
     dw DATA8_86C69C                                            ;8692BA|        |86C69C;
     db $FF                                                     ;8692BC|        |      ;
     dw $0000                                                   ;8692BD|        |      ;
- 
 sObjectData0x00D1:
     dw DATA8_86C6A2                                            ;8692BF|        |86C6A2;
     db $FF                                                     ;8692C1|        |      ;
     dw $0000                                                   ;8692C2|        |      ;
- 
 sObjectData0x00D2:
     dw DATA8_86C6A8                                            ;8692C4|        |86C6A8;
     db $FF                                                     ;8692C6|        |      ;
     dw $0000                                                   ;8692C7|        |      ;
- 
 sObjectData0x00D3:
     dw DATA8_86C6AE                                            ;8692C9|        |86C6AE;
     db $FF                                                     ;8692CB|        |      ;
     dw $0000                                                   ;8692CC|        |      ;
- 
 sObjectData0x00D4:
     dw DATA8_86C6B4                                            ;8692CE|        |86C6B4;
     db $FF                                                     ;8692D0|        |      ;
     dw $0000                                                   ;8692D1|        |      ;
- 
 sObjectData0x00D5:
     dw DATA8_86C6BA                                            ;8692D3|        |86C6BA;
     db $FF                                                     ;8692D5|        |      ;
     dw $0000                                                   ;8692D6|        |      ;
- 
 sObjectData0x00D6:
     dw DATA8_86C6C0                                            ;8692D8|        |86C6C0;
     db $FF                                                     ;8692DA|        |      ;
     dw $0000                                                   ;8692DB|        |      ;
- 
 sObjectData0x00D7:
     dw DATA8_86C6C6                                            ;8692DD|        |86C6C6;
     db $FF                                                     ;8692DF|        |      ;
     dw $0000                                                   ;8692E0|        |      ;
- 
 sObjectData0x00D8:
     dw DATA8_86C6CC                                            ;8692E2|        |86C6CC;
     db $FF                                                     ;8692E4|        |      ;
     dw $0000                                                   ;8692E5|        |      ;
- 
 sObjectData0x00D9:
     dw DATA8_86C6D2                                            ;8692E7|        |86C6D2;
     db $FF                                                     ;8692E9|        |      ;
     dw $0000                                                   ;8692EA|        |      ;
- 
 sObjectData0x00DA:
     dw DATA8_86C6D8                                            ;8692EC|        |86C6D8;
     db $FF                                                     ;8692EE|        |      ;
     dw $0000                                                   ;8692EF|        |      ;
- 
 sObjectData0x00DB:
     dw DATA8_86C6DE                                            ;8692F1|        |86C6DE;
     db $FF                                                     ;8692F3|        |      ;
     dw $0000                                                   ;8692F4|        |      ;
- 
 sObjectData0x00DC:
     dw DATA8_86C6E4                                            ;8692F6|        |86C6E4;
     db $FF                                                     ;8692F8|        |      ;
     dw $0000                                                   ;8692F9|        |      ;
- 
 sObjectData0x00DD:
     dw DATA8_86C6EA                                            ;8692FB|        |86C6EA;
     db $FF                                                     ;8692FD|        |      ;
     dw $0000                                                   ;8692FE|        |      ;
- 
 sObjectData0x00DE:
     dw DATA8_86C6F0                                            ;869300|        |86C6F0;
     db $FF                                                     ;869302|        |      ;
     dw $0000                                                   ;869303|        |      ;
- 
 sObjectData0x00DF:
     dw DATA8_86C6F6                                            ;869305|        |86C6F6;
     db $FF                                                     ;869307|        |      ;
     dw $0000                                                   ;869308|        |      ;
- 
 sObjectData0x00E0:
     dw DATA8_86C6FC                                            ;86930A|        |86C6FC;
     db $FF                                                     ;86930C|        |      ;
     dw $0000                                                   ;86930D|        |      ;
- 
 sObjectData0x00E1:
     dw DATA8_86C702                                            ;86930F|        |86C702;
     db $FF                                                     ;869311|        |      ;
     dw $0000                                                   ;869312|        |      ;
- 
 sObjectData0x00E2:
     dw DATA8_86C708                                            ;869314|        |86C708;
     db $FF                                                     ;869316|        |      ;
     dw $0000                                                   ;869317|        |      ;
- 
 sObjectData0x00E3:
     dw DATA8_86C70E                                            ;869319|        |86C70E;
     db $FF                                                     ;86931B|        |      ;
     dw $0000                                                   ;86931C|        |      ;
- 
 sObjectData0x00E4:
     dw DATA8_86C714                                            ;86931E|        |86C714;
     db $FF                                                     ;869320|        |      ;
     dw $0000                                                   ;869321|        |      ;
- 
 sObjectData0x00E5:
     dw DATA8_86C71A                                            ;869323|        |86C71A;
     db $FF                                                     ;869325|        |      ;
     dw $0000                                                   ;869326|        |      ;
- 
 sObjectData0x00E6:
     dw DATA8_86C720                                            ;869328|        |86C720;
     db $FF                                                     ;86932A|        |      ;
     dw $0000                                                   ;86932B|        |      ;
- 
 sObjectData0x00E7:
     dw DATA8_86C726                                            ;86932D|        |86C726;
     db $FF                                                     ;86932F|        |      ;
     dw $0000                                                   ;869330|        |      ;
- 
 sObjectData0x00E8:
     dw DATA8_86C72C                                            ;869332|        |86C72C;
     db $FF                                                     ;869334|        |      ;
     dw $0000                                                   ;869335|        |      ;
- 
 sObjectData0x00E9:
     dw DATA8_86C732                                            ;869337|        |86C732;
     db $FF                                                     ;869339|        |      ;
     dw $0000                                                   ;86933A|        |      ;
- 
 sObjectData0x00EA:
     dw DATA8_86C738                                            ;86933C|        |86C738;
     db $FF                                                     ;86933E|        |      ;
     dw $0000                                                   ;86933F|        |      ;
- 
 sObjectData0x00EB:
     dw DATA8_86C73E                                            ;869341|        |86C73E;
     db $FF                                                     ;869343|        |      ;
     dw $0000                                                   ;869344|        |      ;
- 
 sObjectData0x00EC:
     dw DATA8_86C744                                            ;869346|        |86C744;
     db $FF                                                     ;869348|        |      ;
     dw $0000                                                   ;869349|        |      ;
- 
 sObjectData0x00ED:
     dw DATA8_86C74A                                            ;86934B|        |86C74A;
     db $FF                                                     ;86934D|        |      ;
     dw $0000                                                   ;86934E|        |      ;
- 
 sObjectData0x00EE:
     dw DATA8_86C750                                            ;869350|        |86C750;
     db $FF                                                     ;869352|        |      ;
     dw $0000                                                   ;869353|        |      ;
- 
 sObjectData0x00EF:
     dw DATA8_86C756                                            ;869355|        |86C756;
     db $FF                                                     ;869357|        |      ;
     dw $0000                                                   ;869358|        |      ;
- 
 sObjectData0x00F0:
     dw DATA8_86C75C                                            ;86935A|        |86C75C;
     db $FF                                                     ;86935C|        |      ;
     dw $0000                                                   ;86935D|        |      ;
- 
 sObjectData0x00F1:
     dw DATA8_86C762                                            ;86935F|        |86C762;
     db $FF                                                     ;869361|        |      ;
     dw $0000                                                   ;869362|        |      ;
- 
 sObjectData0x00F2:
     dw DATA8_86C768                                            ;869364|        |86C768;
     db $FF                                                     ;869366|        |      ;
     dw $0000                                                   ;869367|        |      ;
- 
 sObjectData0x00F3:
     dw DATA8_86C76E                                            ;869369|        |86C76E;
     db $FF                                                     ;86936B|        |      ;
     dw $0000                                                   ;86936C|        |      ;
- 
 sObjectData0x00F4:
     dw DATA8_86C774                                            ;86936E|        |86C774;
     db $FF                                                     ;869370|        |      ;
     dw $0000                                                   ;869371|        |      ;
- 
 sObjectData0x00F5:
     dw DATA8_86C77A                                            ;869373|        |86C77A;
     db $FF                                                     ;869375|        |      ;
     dw $0000                                                   ;869376|        |      ;
- 
 sObjectData0x00F6:
     dw DATA8_86C780                                            ;869378|        |86C780;
     db $FF                                                     ;86937A|        |      ;
     dw $0000                                                   ;86937B|        |      ;
- 
 sObjectData0x00F7:
     dw DATA8_86C786                                            ;86937D|        |86C786;
     db $FF                                                     ;86937F|        |      ;
     dw $0000                                                   ;869380|        |      ;
- 
 sObjectData0x00F8:
     dw DATA8_86C78C                                            ;869382|        |86C78C;
     db $FF                                                     ;869384|        |      ;
     dw $0000                                                   ;869385|        |      ;
- 
 sObjectData0x00F9:
     dw DATA8_86C792                                            ;869387|        |86C792;
     db $FF                                                     ;869389|        |      ;
     dw $0000                                                   ;86938A|        |      ;
- 
 sObjectData0x00FA:
     dw DATA8_86C798                                            ;86938C|        |86C798;
     db $FF                                                     ;86938E|        |      ;
     dw $0000                                                   ;86938F|        |      ;
- 
 sObjectData0x00FB:
     dw DATA8_86C79E                                            ;869391|        |86C79E;
     db $FF                                                     ;869393|        |      ;
     dw $0000                                                   ;869394|        |      ;
- 
 sObjectData0x00FC:
     dw DATA8_86C7A4                                            ;869396|        |86C7A4;
     db $30                                                     ;869398|        |      ;
@@ -3507,7 +3253,6 @@ sObjectData0x00FC:
     dw DATA8_86C7A4                                            ;8693A8|        |86C7A4;
     db $FE                                                     ;8693AA|        |      ;
     dw $0000                                                   ;8693AB|        |      ;
- 
 sObjectData0x00FD:
     dw DATA8_86C7AA                                            ;8693AD|        |86C7AA;
     db $30                                                     ;8693AF|        |      ;
@@ -3524,7 +3269,6 @@ sObjectData0x00FD:
     dw DATA8_86C7AA                                            ;8693BF|        |86C7AA;
     db $FE                                                     ;8693C1|        |      ;
     dw $0000                                                   ;8693C2|        |      ;
- 
 sObjectData0x00FE:
     dw DATA8_86C7B0                                            ;8693C4|        |86C7B0;
     db $30                                                     ;8693C6|        |      ;
@@ -3541,7 +3285,6 @@ sObjectData0x00FE:
     dw DATA8_86C7B0                                            ;8693D6|        |86C7B0;
     db $FE                                                     ;8693D8|        |      ;
     dw $0000                                                   ;8693D9|        |      ;
- 
 sObjectData0x00FF:
     dw DATA8_86C7B6                                            ;8693DB|        |86C7B6;
     db $30                                                     ;8693DD|        |      ;
@@ -3558,7 +3301,6 @@ sObjectData0x00FF:
     dw DATA8_86C7B6                                            ;8693ED|        |86C7B6;
     db $FE                                                     ;8693EF|        |      ;
     dw $0000                                                   ;8693F0|        |      ;
- 
 sObjectData0x0100:
     dw DATA8_86C7BC                                            ;8693F2|        |86C7BC;
     db $30                                                     ;8693F4|        |      ;
@@ -3575,7 +3317,6 @@ sObjectData0x0100:
     dw DATA8_86C7BC                                            ;869404|        |86C7BC;
     db $FE                                                     ;869406|        |      ;
     dw $0000                                                   ;869407|        |      ;
- 
 sObjectData0x0101:
     dw DATA8_86C7C2                                            ;869409|        |86C7C2;
     db $30                                                     ;86940B|        |      ;
@@ -3592,7 +3333,6 @@ sObjectData0x0101:
     dw DATA8_86C7C2                                            ;86941B|        |86C7C2;
     db $FE                                                     ;86941D|        |      ;
     dw $0000                                                   ;86941E|        |      ;
- 
 sObjectData0x0102:
     dw DATA8_86C7C8                                            ;869420|        |86C7C8;
     db $30                                                     ;869422|        |      ;
@@ -3609,7 +3349,6 @@ sObjectData0x0102:
     dw DATA8_86C7C8                                            ;869432|        |86C7C8;
     db $FE                                                     ;869434|        |      ;
     dw $0000                                                   ;869435|        |      ;
- 
 sObjectData0x0103:
     dw DATA8_86C7CE                                            ;869437|        |86C7CE;
     db $30                                                     ;869439|        |      ;
@@ -3626,7 +3365,6 @@ sObjectData0x0103:
     dw DATA8_86C7CE                                            ;869449|        |86C7CE;
     db $FE                                                     ;86944B|        |      ;
     dw $0000                                                   ;86944C|        |      ;
- 
 sObjectData0x0104:
     dw DATA8_86C7D4                                            ;86944E|        |86C7D4;
     db $30                                                     ;869450|        |      ;
@@ -3643,7 +3381,6 @@ sObjectData0x0104:
     dw DATA8_86C7D4                                            ;869460|        |86C7D4;
     db $FE                                                     ;869462|        |      ;
     dw $0000                                                   ;869463|        |      ;
- 
 sObjectData0x0105:
     dw DATA8_86C7DA                                            ;869465|        |86C7DA;
     db $30                                                     ;869467|        |      ;
@@ -3660,7 +3397,6 @@ sObjectData0x0105:
     dw DATA8_86C7DA                                            ;869477|        |86C7DA;
     db $FE                                                     ;869479|        |      ;
     dw $0000                                                   ;86947A|        |      ;
- 
 sObjectData0x0106:
     dw DATA8_86C7E0                                            ;86947C|        |86C7E0;
     db $30                                                     ;86947E|        |      ;
@@ -3677,7 +3413,6 @@ sObjectData0x0106:
     dw DATA8_86C7E0                                            ;86948E|        |86C7E0;
     db $FE                                                     ;869490|        |      ;
     dw $0000                                                   ;869491|        |      ;
- 
 sObjectData0x0107:
     dw DATA8_86C7E6                                            ;869493|        |86C7E6;
     db $30                                                     ;869495|        |      ;
@@ -3694,7 +3429,6 @@ sObjectData0x0107:
     dw DATA8_86C7E6                                            ;8694A5|        |86C7E6;
     db $FE                                                     ;8694A7|        |      ;
     dw $0000                                                   ;8694A8|        |      ;
- 
 sObjectData0x0108:
     dw DATA8_86C7EC                                            ;8694AA|        |86C7EC;
     db $30                                                     ;8694AC|        |      ;
@@ -3711,7 +3445,6 @@ sObjectData0x0108:
     dw DATA8_86C7EC                                            ;8694BC|        |86C7EC;
     db $FE                                                     ;8694BE|        |      ;
     dw $0000                                                   ;8694BF|        |      ;
- 
 sObjectData0x0109:
     dw DATA8_86C7F2                                            ;8694C1|        |86C7F2;
     db $30                                                     ;8694C3|        |      ;
@@ -3728,7 +3461,6 @@ sObjectData0x0109:
     dw DATA8_86C7F2                                            ;8694D3|        |86C7F2;
     db $FE                                                     ;8694D5|        |      ;
     dw $0000                                                   ;8694D6|        |      ;
- 
 sObjectData0x010A:
     dw DATA8_86C7F8                                            ;8694D8|        |86C7F8;
     db $30                                                     ;8694DA|        |      ;
@@ -3745,47 +3477,38 @@ sObjectData0x010A:
     dw DATA8_86C7F8                                            ;8694EA|        |86C7F8;
     db $FE                                                     ;8694EC|        |      ;
     dw $0000                                                   ;8694ED|        |      ;
- 
 sObjectData0x010B:
     dw DATA8_86C804                                            ;8694EF|        |86C804;
     db $FF                                                     ;8694F1|        |      ;
     dw $0000                                                   ;8694F2|        |      ;
- 
 sObjectData0x010C:
     dw DATA8_86C80A                                            ;8694F4|        |86C80A;
     db $FF                                                     ;8694F6|        |      ;
     dw $0000                                                   ;8694F7|        |      ;
- 
 sObjectData0x010D:
     dw DATA8_86C810                                            ;8694F9|        |86C810;
     db $FF                                                     ;8694FB|        |      ;
     dw $0000                                                   ;8694FC|        |      ;
- 
 sObjectData0x010E:
     dw DATA8_86C816                                            ;8694FE|        |86C816;
     db $FF                                                     ;869500|        |      ;
     dw $0000                                                   ;869501|        |      ;
- 
 sObjectData0x010F:
     dw DATA8_86C81C                                            ;869503|        |86C81C;
     db $FF                                                     ;869505|        |      ;
     dw $0000                                                   ;869506|        |      ;
- 
 sObjectData0x0110:
     dw DATA8_86C822                                            ;869508|        |86C822;
     db $FF                                                     ;86950A|        |      ;
     dw $0000                                                   ;86950B|        |      ;
- 
 sObjectData0x0111:
     dw DATA8_86C828                                            ;86950D|        |86C828;
     db $FF                                                     ;86950F|        |      ;
     dw $0000                                                   ;869510|        |      ;
- 
 sObjectData0x0112:
     dw DATA8_86C82E                                            ;869512|        |86C82E;
     db $FF                                                     ;869514|        |      ;
     dw $0000                                                   ;869515|        |      ;
- 
 sObjectData0x0113:
     dw DATA8_86C834                                            ;869517|        |86C834;
     db $30                                                     ;869519|        |      ;
@@ -3802,7 +3525,6 @@ sObjectData0x0113:
     dw DATA8_86C834                                            ;869529|        |86C834;
     db $FE                                                     ;86952B|        |      ;
     dw $0000                                                   ;86952C|        |      ;
- 
 sObjectData0x0114:
     dw DATA8_86C83A                                            ;86952E|        |86C83A;
     db $30                                                     ;869530|        |      ;
@@ -3819,7 +3541,6 @@ sObjectData0x0114:
     dw DATA8_86C83A                                            ;869540|        |86C83A;
     db $FE                                                     ;869542|        |      ;
     dw $0000                                                   ;869543|        |      ;
- 
 sObjectData0x0115:
     dw DATA8_86C840                                            ;869545|        |86C840;
     db $30                                                     ;869547|        |      ;
@@ -3836,22 +3557,18 @@ sObjectData0x0115:
     dw DATA8_86C840                                            ;869557|        |86C840;
     db $FE                                                     ;869559|        |      ;
     dw $0000                                                   ;86955A|        |      ;
- 
 sObjectData0x0116:
     dw DATA8_86C846                                            ;86955C|        |86C846;
     db $FF                                                     ;86955E|        |      ;
     dw $0000                                                   ;86955F|        |      ;
- 
 sObjectData0x0117:
     dw DATA8_86C84C                                            ;869561|        |86C84C;
     db $FF                                                     ;869563|        |      ;
     dw $0000                                                   ;869564|        |      ;
- 
 sObjectData0x0118:
     dw DATA8_86C852                                            ;869566|        |86C852;
     db $FF                                                     ;869568|        |      ;
     dw $0000                                                   ;869569|        |      ;
- 
 sObjectData0x0119:
     dw DATA8_86C858                                            ;86956B|        |86C858;
     db $10                                                     ;86956D|        |      ;
@@ -3870,7 +3587,6 @@ sObjectData0x0119:
     dw DATA8_86C858                                            ;869580|        |86C858;
     db $FE                                                     ;869582|        |      ;
     dw $0000                                                   ;869583|        |      ;
- 
 sObjectData0x011A:
     dw DATA8_86C84C                                            ;869585|        |86C84C;
     db $30                                                     ;869587|        |      ;
@@ -3889,7 +3605,6 @@ sObjectData0x011A:
     dw DATA8_86C85E                                            ;86959A|        |86C85E;
     db $FE                                                     ;86959C|        |      ;
     dw $0000                                                   ;86959D|        |      ;
- 
 sObjectData0x011B:
     dw DATA8_86C864                                            ;86959F|        |86C864;
     db $10                                                     ;8695A1|        |      ;
@@ -3900,7 +3615,6 @@ sObjectData0x011B:
     dw DATA8_86C870                                            ;8695A8|        |86C870;
     db $FF                                                     ;8695AA|        |      ;
     dw $0000                                                   ;8695AB|        |      ;
- 
 sObjectData0x011C:
     dw DATA8_86C876                                            ;8695AD|        |86C876;
     db $10                                                     ;8695AF|        |      ;
@@ -3911,7 +3625,6 @@ sObjectData0x011C:
     dw DATA8_86C870                                            ;8695B6|        |86C870;
     db $FF                                                     ;8695B8|        |      ;
     dw $0000                                                   ;8695B9|        |      ;
- 
 sObjectData0x011D:
     dw DATA8_86C882                                            ;8695BB|        |86C882;
     db $10                                                     ;8695BD|        |      ;
@@ -3922,7 +3635,6 @@ sObjectData0x011D:
     dw DATA8_86C870                                            ;8695C4|        |86C870;
     db $FF                                                     ;8695C6|        |      ;
     dw $0000                                                   ;8695C7|        |      ;
- 
 sObjectData0x011E:
     dw DATA8_86C870                                            ;8695C9|        |86C870;
     db $0C                                                     ;8695CB|        |      ;
@@ -3931,7 +3643,6 @@ sObjectData0x011E:
     dw DATA8_86C88E                                            ;8695CF|        |86C88E;
     db $FF                                                     ;8695D1|        |      ;
     dw $0000                                                   ;8695D2|        |      ;
- 
 sObjectData0x011F:
     dw DATA8_86C870                                            ;8695D4|        |86C870;
     db $0C                                                     ;8695D6|        |      ;
@@ -3940,7 +3651,6 @@ sObjectData0x011F:
     dw DATA8_86C894                                            ;8695DA|        |86C894;
     db $FF                                                     ;8695DC|        |      ;
     dw $0000                                                   ;8695DD|        |      ;
- 
 sObjectData0x0120:
     dw DATA8_86C870                                            ;8695DF|        |86C870;
     db $0C                                                     ;8695E1|        |      ;
@@ -3949,12 +3659,10 @@ sObjectData0x0120:
     dw DATA8_86C89A                                            ;8695E5|        |86C89A;
     db $FF                                                     ;8695E7|        |      ;
     dw $0000                                                   ;8695E8|        |      ;
- 
 sObjectData0x0121:
     dw DATA8_86C870                                            ;8695EA|        |86C870;
     db $FF                                                     ;8695EC|        |      ;
     dw $0000                                                   ;8695ED|        |      ;
- 
 sObjectData0x0122:
     dw DATA8_86C8A0                                            ;8695EF|        |86C8A0;
     db $02                                                     ;8695F1|        |      ;
@@ -3973,7 +3681,6 @@ sObjectData0x0122:
     dw DATA8_86C8A0                                            ;869604|        |86C8A0;
     db $FF                                                     ;869606|        |      ;
     dw $0000                                                   ;869607|        |      ;
- 
 sObjectData0x0123:
     dw DATA8_86C8C4                                            ;869609|        |86C8C4;
     db $10                                                     ;86960B|        |      ;
@@ -3984,7 +3691,6 @@ sObjectData0x0123:
     dw DATA8_86C8D0                                            ;869612|        |86C8D0;
     db $FF                                                     ;869614|        |      ;
     dw $0000                                                   ;869615|        |      ;
- 
 sObjectData0x0124:
     dw DATA8_86C8D6                                            ;869617|        |86C8D6;
     db $10                                                     ;869619|        |      ;
@@ -3995,7 +3701,6 @@ sObjectData0x0124:
     dw DATA8_86C8D0                                            ;869620|        |86C8D0;
     db $FF                                                     ;869622|        |      ;
     dw $0000                                                   ;869623|        |      ;
- 
 sObjectData0x0125:
     dw DATA8_86C8E2                                            ;869625|        |86C8E2;
     db $10                                                     ;869627|        |      ;
@@ -4006,7 +3711,6 @@ sObjectData0x0125:
     dw DATA8_86C8D0                                            ;86962E|        |86C8D0;
     db $FF                                                     ;869630|        |      ;
     dw $0000                                                   ;869631|        |      ;
- 
 sObjectData0x0126:
     dw DATA8_86C8D0                                            ;869633|        |86C8D0;
     db $0C                                                     ;869635|        |      ;
@@ -4015,7 +3719,6 @@ sObjectData0x0126:
     dw DATA8_86C8EE                                            ;869639|        |86C8EE;
     db $FF                                                     ;86963B|        |      ;
     dw $0000                                                   ;86963C|        |      ;
- 
 sObjectData0x0127:
     dw DATA8_86C8D0                                            ;86963E|        |86C8D0;
     db $0C                                                     ;869640|        |      ;
@@ -4024,7 +3727,6 @@ sObjectData0x0127:
     dw DATA8_86C8F4                                            ;869644|        |86C8F4;
     db $FF                                                     ;869646|        |      ;
     dw $0000                                                   ;869647|        |      ;
- 
 sObjectData0x0128:
     dw DATA8_86C8D0                                            ;869649|        |86C8D0;
     db $0C                                                     ;86964B|        |      ;
@@ -4033,12 +3735,10 @@ sObjectData0x0128:
     dw DATA8_86C8FA                                            ;86964F|        |86C8FA;
     db $FF                                                     ;869651|        |      ;
     dw $0000                                                   ;869652|        |      ;
- 
 sObjectData0x0129:
     dw DATA8_86C8D0                                            ;869654|        |86C8D0;
     db $FF                                                     ;869656|        |      ;
     dw $0000                                                   ;869657|        |      ;
- 
 sObjectData0x012A:
     dw DATA8_86C900                                            ;869659|        |86C900;
     db $02                                                     ;86965B|        |      ;
@@ -4057,7 +3757,6 @@ sObjectData0x012A:
     dw DATA8_86C900                                            ;86966E|        |86C900;
     db $FF                                                     ;869670|        |      ;
     dw $0000                                                   ;869671|        |      ;
- 
 sObjectData0x012B:
     dw DATA8_86C924                                            ;869673|        |86C924;
     db $10                                                     ;869675|        |      ;
@@ -4068,7 +3767,6 @@ sObjectData0x012B:
     dw DATA8_86C930                                            ;86967C|        |86C930;
     db $FF                                                     ;86967E|        |      ;
     dw $0000                                                   ;86967F|        |      ;
- 
 sObjectData0x012C:
     dw DATA8_86C936                                            ;869681|        |86C936;
     db $10                                                     ;869683|        |      ;
@@ -4079,7 +3777,6 @@ sObjectData0x012C:
     dw DATA8_86C930                                            ;86968A|        |86C930;
     db $FF                                                     ;86968C|        |      ;
     dw $0000                                                   ;86968D|        |      ;
- 
 sObjectData0x012D:
     dw DATA8_86C942                                            ;86968F|        |86C942;
     db $10                                                     ;869691|        |      ;
@@ -4090,7 +3787,6 @@ sObjectData0x012D:
     dw DATA8_86C930                                            ;869698|        |86C930;
     db $FF                                                     ;86969A|        |      ;
     dw $0000                                                   ;86969B|        |      ;
- 
 sObjectData0x012E:
     dw DATA8_86C930                                            ;86969D|        |86C930;
     db $0C                                                     ;86969F|        |      ;
@@ -4099,7 +3795,6 @@ sObjectData0x012E:
     dw DATA8_86C94E                                            ;8696A3|        |86C94E;
     db $FF                                                     ;8696A5|        |      ;
     dw $0000                                                   ;8696A6|        |      ;
- 
 sObjectData0x012F:
     dw DATA8_86C930                                            ;8696A8|        |86C930;
     db $0C                                                     ;8696AA|        |      ;
@@ -4108,7 +3803,6 @@ sObjectData0x012F:
     dw DATA8_86C954                                            ;8696AE|        |86C954;
     db $FF                                                     ;8696B0|        |      ;
     dw $0000                                                   ;8696B1|        |      ;
- 
 sObjectData0x0130:
     dw DATA8_86C930                                            ;8696B3|        |86C930;
     db $0C                                                     ;8696B5|        |      ;
@@ -4117,12 +3811,10 @@ sObjectData0x0130:
     dw DATA8_86C95A                                            ;8696B9|        |86C95A;
     db $FF                                                     ;8696BB|        |      ;
     dw $0000                                                   ;8696BC|        |      ;
- 
 sObjectData0x0131:
     dw DATA8_86C930                                            ;8696BE|        |86C930;
     db $FF                                                     ;8696C0|        |      ;
     dw $0000                                                   ;8696C1|        |      ;
- 
 sObjectData0x0132:
     dw DATA8_86C960                                            ;8696C3|        |86C960;
     db $02                                                     ;8696C5|        |      ;
@@ -4141,7 +3833,6 @@ sObjectData0x0132:
     dw DATA8_86C960                                            ;8696D8|        |86C960;
     db $FF                                                     ;8696DA|        |      ;
     dw $0000                                                   ;8696DB|        |      ;
- 
 sObjectData0x0133:
     dw DATA8_86C984                                            ;8696DD|        |86C984;
     db $10                                                     ;8696DF|        |      ;
@@ -4152,7 +3843,6 @@ sObjectData0x0133:
     dw DATA8_86C990                                            ;8696E6|        |86C990;
     db $FF                                                     ;8696E8|        |      ;
     dw $0000                                                   ;8696E9|        |      ;
- 
 sObjectData0x0134:
     dw DATA8_86C996                                            ;8696EB|        |86C996;
     db $10                                                     ;8696ED|        |      ;
@@ -4163,7 +3853,6 @@ sObjectData0x0134:
     dw DATA8_86C990                                            ;8696F4|        |86C990;
     db $FF                                                     ;8696F6|        |      ;
     dw $0000                                                   ;8696F7|        |      ;
- 
 sObjectData0x0135:
     dw DATA8_86C9A2                                            ;8696F9|        |86C9A2;
     db $10                                                     ;8696FB|        |      ;
@@ -4174,7 +3863,6 @@ sObjectData0x0135:
     dw DATA8_86C990                                            ;869702|        |86C990;
     db $FF                                                     ;869704|        |      ;
     dw $0000                                                   ;869705|        |      ;
- 
 sObjectData0x0136:
     dw DATA8_86C990                                            ;869707|        |86C990;
     db $0C                                                     ;869709|        |      ;
@@ -4183,7 +3871,6 @@ sObjectData0x0136:
     dw DATA8_86C9AE                                            ;86970D|        |86C9AE;
     db $FF                                                     ;86970F|        |      ;
     dw $0000                                                   ;869710|        |      ;
- 
 sObjectData0x0137:
     dw DATA8_86C990                                            ;869712|        |86C990;
     db $0C                                                     ;869714|        |      ;
@@ -4192,7 +3879,6 @@ sObjectData0x0137:
     dw DATA8_86C9B4                                            ;869718|        |86C9B4;
     db $FF                                                     ;86971A|        |      ;
     dw $0000                                                   ;86971B|        |      ;
- 
 sObjectData0x0138:
     dw DATA8_86C990                                            ;86971D|        |86C990;
     db $0C                                                     ;86971F|        |      ;
@@ -4201,12 +3887,10 @@ sObjectData0x0138:
     dw DATA8_86C9BA                                            ;869723|        |86C9BA;
     db $FF                                                     ;869725|        |      ;
     dw $0000                                                   ;869726|        |      ;
- 
 sObjectData0x0139:
     dw DATA8_86C990                                            ;869728|        |86C990;
     db $FF                                                     ;86972A|        |      ;
     dw $0000                                                   ;86972B|        |      ;
- 
 sObjectData0x013A:
     dw DATA8_86C9C0                                            ;86972D|        |86C9C0;
     db $02                                                     ;86972F|        |      ;
@@ -4225,7 +3909,6 @@ sObjectData0x013A:
     dw DATA8_86C9C0                                            ;869742|        |86C9C0;
     db $FF                                                     ;869744|        |      ;
     dw $0000                                                   ;869745|        |      ;
- 
 sObjectData0x013B:
     dw DATA8_86C9E4                                            ;869747|        |86C9E4;
     db $10                                                     ;869749|        |      ;
@@ -4236,7 +3919,6 @@ sObjectData0x013B:
     dw DATA8_86C9F0                                            ;869750|        |86C9F0;
     db $FF                                                     ;869752|        |      ;
     dw $0000                                                   ;869753|        |      ;
- 
 sObjectData0x013C:
     dw DATA8_86C9F6                                            ;869755|        |86C9F6;
     db $10                                                     ;869757|        |      ;
@@ -4247,7 +3929,6 @@ sObjectData0x013C:
     dw DATA8_86C9F0                                            ;86975E|        |86C9F0;
     db $FF                                                     ;869760|        |      ;
     dw $0000                                                   ;869761|        |      ;
- 
 sObjectData0x013D:
     dw DATA8_86CA02                                            ;869763|        |86CA02;
     db $10                                                     ;869765|        |      ;
@@ -4258,7 +3939,6 @@ sObjectData0x013D:
     dw DATA8_86C9F0                                            ;86976C|        |86C9F0;
     db $FF                                                     ;86976E|        |      ;
     dw $0000                                                   ;86976F|        |      ;
- 
 sObjectData0x013E:
     dw DATA8_86C9F0                                            ;869771|        |86C9F0;
     db $0C                                                     ;869773|        |      ;
@@ -4267,7 +3947,6 @@ sObjectData0x013E:
     dw DATA8_86CA0E                                            ;869777|        |86CA0E;
     db $FF                                                     ;869779|        |      ;
     dw $0000                                                   ;86977A|        |      ;
- 
 sObjectData0x013F:
     dw DATA8_86C9F0                                            ;86977C|        |86C9F0;
     db $0C                                                     ;86977E|        |      ;
@@ -4276,7 +3955,6 @@ sObjectData0x013F:
     dw DATA8_86CA14                                            ;869782|        |86CA14;
     db $FF                                                     ;869784|        |      ;
     dw $0000                                                   ;869785|        |      ;
- 
 sObjectData0x0140:
     dw DATA8_86C9F0                                            ;869787|        |86C9F0;
     db $0C                                                     ;869789|        |      ;
@@ -4285,12 +3963,10 @@ sObjectData0x0140:
     dw DATA8_86CA1A                                            ;86978D|        |86CA1A;
     db $FF                                                     ;86978F|        |      ;
     dw $0000                                                   ;869790|        |      ;
- 
 sObjectData0x0141:
     dw DATA8_86C9F0                                            ;869792|        |86C9F0;
     db $FF                                                     ;869794|        |      ;
     dw $0000                                                   ;869795|        |      ;
- 
 sObjectData0x0142:
     dw DATA8_86CA20                                            ;869797|        |86CA20;
     db $02                                                     ;869799|        |      ;
@@ -4309,7 +3985,6 @@ sObjectData0x0142:
     dw DATA8_86CA20                                            ;8697AC|        |86CA20;
     db $FF                                                     ;8697AE|        |      ;
     dw $0000                                                   ;8697AF|        |      ;
- 
 sObjectData0x0143:
     dw DATA8_86CA44                                            ;8697B1|        |86CA44;
     db $10                                                     ;8697B3|        |      ;
@@ -4320,7 +3995,6 @@ sObjectData0x0143:
     dw DATA8_86CA50                                            ;8697BA|        |86CA50;
     db $FF                                                     ;8697BC|        |      ;
     dw $0000                                                   ;8697BD|        |      ;
- 
 sObjectData0x0144:
     dw DATA8_86CA56                                            ;8697BF|        |86CA56;
     db $10                                                     ;8697C1|        |      ;
@@ -4331,7 +4005,6 @@ sObjectData0x0144:
     dw DATA8_86CA50                                            ;8697C8|        |86CA50;
     db $FF                                                     ;8697CA|        |      ;
     dw $0000                                                   ;8697CB|        |      ;
- 
 sObjectData0x0145:
     dw DATA8_86CA62                                            ;8697CD|        |86CA62;
     db $10                                                     ;8697CF|        |      ;
@@ -4342,7 +4015,6 @@ sObjectData0x0145:
     dw DATA8_86CA50                                            ;8697D6|        |86CA50;
     db $FF                                                     ;8697D8|        |      ;
     dw $0000                                                   ;8697D9|        |      ;
- 
 sObjectData0x0146:
     dw DATA8_86CA6E                                            ;8697DB|        |86CA6E;
     db $10                                                     ;8697DD|        |      ;
@@ -4353,7 +4025,6 @@ sObjectData0x0146:
     dw DATA8_86CA7A                                            ;8697E4|        |86CA7A;
     db $FF                                                     ;8697E6|        |      ;
     dw $0000                                                   ;8697E7|        |      ;
- 
 sObjectData0x0147:
     dw DATA8_86CA80                                            ;8697E9|        |86CA80;
     db $10                                                     ;8697EB|        |      ;
@@ -4364,7 +4035,6 @@ sObjectData0x0147:
     dw DATA8_86CA7A                                            ;8697F2|        |86CA7A;
     db $FF                                                     ;8697F4|        |      ;
     dw $0000                                                   ;8697F5|        |      ;
- 
 sObjectData0x0148:
     dw DATA8_86CA8C                                            ;8697F7|        |86CA8C;
     db $10                                                     ;8697F9|        |      ;
@@ -4375,7 +4045,6 @@ sObjectData0x0148:
     dw DATA8_86CA7A                                            ;869800|        |86CA7A;
     db $FF                                                     ;869802|        |      ;
     dw $0000                                                   ;869803|        |      ;
- 
 sObjectData0x0149:
     dw DATA8_86CA98                                            ;869805|        |86CA98;
     db $10                                                     ;869807|        |      ;
@@ -4386,7 +4055,6 @@ sObjectData0x0149:
     dw DATA8_86CAA4                                            ;86980E|        |86CAA4;
     db $FF                                                     ;869810|        |      ;
     dw $0000                                                   ;869811|        |      ;
- 
 sObjectData0x014A:
     dw DATA8_86CAAA                                            ;869813|        |86CAAA;
     db $10                                                     ;869815|        |      ;
@@ -4397,7 +4065,6 @@ sObjectData0x014A:
     dw DATA8_86CAA4                                            ;86981C|        |86CAA4;
     db $FF                                                     ;86981E|        |      ;
     dw $0000                                                   ;86981F|        |      ;
- 
 sObjectData0x014B:
     dw DATA8_86CAB6                                            ;869821|        |86CAB6;
     db $10                                                     ;869823|        |      ;
@@ -4408,7 +4075,6 @@ sObjectData0x014B:
     dw DATA8_86CAA4                                            ;86982A|        |86CAA4;
     db $FF                                                     ;86982C|        |      ;
     dw $0000                                                   ;86982D|        |      ;
- 
 sObjectData0x014C:
     dw DATA8_86CAC2                                            ;86982F|        |86CAC2;
     db $10                                                     ;869831|        |      ;
@@ -4419,7 +4085,6 @@ sObjectData0x014C:
     dw DATA8_86CACE                                            ;869838|        |86CACE;
     db $FF                                                     ;86983A|        |      ;
     dw $0000                                                   ;86983B|        |      ;
- 
 sObjectData0x014D:
     dw DATA8_86CAD4                                            ;86983D|        |86CAD4;
     db $10                                                     ;86983F|        |      ;
@@ -4430,7 +4095,6 @@ sObjectData0x014D:
     dw DATA8_86CACE                                            ;869846|        |86CACE;
     db $FF                                                     ;869848|        |      ;
     dw $0000                                                   ;869849|        |      ;
- 
 sObjectData0x014E:
     dw DATA8_86CAE0                                            ;86984B|        |86CAE0;
     db $10                                                     ;86984D|        |      ;
@@ -4441,7 +4105,6 @@ sObjectData0x014E:
     dw DATA8_86CACE                                            ;869854|        |86CACE;
     db $FF                                                     ;869856|        |      ;
     dw $0000                                                   ;869857|        |      ;
- 
 sObjectData0x014F:
     dw DATA8_86CAEC                                            ;869859|        |86CAEC;
     db $10                                                     ;86985B|        |      ;
@@ -4452,7 +4115,6 @@ sObjectData0x014F:
     dw DATA8_86CAF8                                            ;869862|        |86CAF8;
     db $FF                                                     ;869864|        |      ;
     dw $0000                                                   ;869865|        |      ;
- 
 sObjectData0x0150:
     dw DATA8_86CAFE                                            ;869867|        |86CAFE;
     db $10                                                     ;869869|        |      ;
@@ -4463,7 +4125,6 @@ sObjectData0x0150:
     dw DATA8_86CAF8                                            ;869870|        |86CAF8;
     db $FF                                                     ;869872|        |      ;
     dw $0000                                                   ;869873|        |      ;
- 
 sObjectData0x0151:
     dw DATA8_86CB0A                                            ;869875|        |86CB0A;
     db $10                                                     ;869877|        |      ;
@@ -4474,7 +4135,6 @@ sObjectData0x0151:
     dw DATA8_86CAF8                                            ;86987E|        |86CAF8;
     db $FF                                                     ;869880|        |      ;
     dw $0000                                                   ;869881|        |      ;
- 
 sObjectData0x0152:
     dw DATA8_86CB16                                            ;869883|        |86CB16;
     db $10                                                     ;869885|        |      ;
@@ -4485,7 +4145,6 @@ sObjectData0x0152:
     dw DATA8_86CB22                                            ;86988C|        |86CB22;
     db $FF                                                     ;86988E|        |      ;
     dw $0000                                                   ;86988F|        |      ;
- 
 sObjectData0x0153:
     dw DATA8_86CB28                                            ;869891|        |86CB28;
     db $10                                                     ;869893|        |      ;
@@ -4496,7 +4155,6 @@ sObjectData0x0153:
     dw DATA8_86CB22                                            ;86989A|        |86CB22;
     db $FF                                                     ;86989C|        |      ;
     dw $0000                                                   ;86989D|        |      ;
- 
 sObjectData0x0154:
     dw DATA8_86CB34                                            ;86989F|        |86CB34;
     db $10                                                     ;8698A1|        |      ;
@@ -4507,7 +4165,6 @@ sObjectData0x0154:
     dw DATA8_86CB22                                            ;8698A8|        |86CB22;
     db $FF                                                     ;8698AA|        |      ;
     dw $0000                                                   ;8698AB|        |      ;
- 
 sObjectData0x0155:
     dw DATA8_86CB40                                            ;8698AD|        |86CB40;
     db $10                                                     ;8698AF|        |      ;
@@ -4518,7 +4175,6 @@ sObjectData0x0155:
     dw DATA8_86CB4C                                            ;8698B6|        |86CB4C;
     db $FF                                                     ;8698B8|        |      ;
     dw $0000                                                   ;8698B9|        |      ;
- 
 sObjectData0x0156:
     dw DATA8_86CB52                                            ;8698BB|        |86CB52;
     db $10                                                     ;8698BD|        |      ;
@@ -4529,7 +4185,6 @@ sObjectData0x0156:
     dw DATA8_86CB4C                                            ;8698C4|        |86CB4C;
     db $FF                                                     ;8698C6|        |      ;
     dw $0000                                                   ;8698C7|        |      ;
- 
 sObjectData0x0157:
     dw DATA8_86CB5E                                            ;8698C9|        |86CB5E;
     db $10                                                     ;8698CB|        |      ;
@@ -4540,7 +4195,6 @@ sObjectData0x0157:
     dw DATA8_86CB4C                                            ;8698D2|        |86CB4C;
     db $FF                                                     ;8698D4|        |      ;
     dw $0000                                                   ;8698D5|        |      ;
- 
 sObjectData0x0158:
     dw DATA8_86CB6A                                            ;8698D7|        |86CB6A;
     db $10                                                     ;8698D9|        |      ;
@@ -4551,7 +4205,6 @@ sObjectData0x0158:
     dw DATA8_86CB76                                            ;8698E0|        |86CB76;
     db $FF                                                     ;8698E2|        |      ;
     dw $0000                                                   ;8698E3|        |      ;
- 
 sObjectData0x0159:
     dw DATA8_86CB7C                                            ;8698E5|        |86CB7C;
     db $10                                                     ;8698E7|        |      ;
@@ -4562,7 +4215,6 @@ sObjectData0x0159:
     dw DATA8_86CB76                                            ;8698EE|        |86CB76;
     db $FF                                                     ;8698F0|        |      ;
     dw $0000                                                   ;8698F1|        |      ;
- 
 sObjectData0x015A:
     dw DATA8_86CB88                                            ;8698F3|        |86CB88;
     db $10                                                     ;8698F5|        |      ;
@@ -4573,7 +4225,6 @@ sObjectData0x015A:
     dw DATA8_86CB76                                            ;8698FC|        |86CB76;
     db $FF                                                     ;8698FE|        |      ;
     dw $0000                                                   ;8698FF|        |      ;
- 
 sObjectData0x015B:
     dw DATA8_86CB94                                            ;869901|        |86CB94;
     db $10                                                     ;869903|        |      ;
@@ -4584,7 +4235,6 @@ sObjectData0x015B:
     dw DATA8_86CBA0                                            ;86990A|        |86CBA0;
     db $FF                                                     ;86990C|        |      ;
     dw $0000                                                   ;86990D|        |      ;
- 
 sObjectData0x015C:
     dw DATA8_86CBA6                                            ;86990F|        |86CBA6;
     db $10                                                     ;869911|        |      ;
@@ -4595,7 +4245,6 @@ sObjectData0x015C:
     dw DATA8_86CBA0                                            ;869918|        |86CBA0;
     db $FF                                                     ;86991A|        |      ;
     dw $0000                                                   ;86991B|        |      ;
- 
 sObjectData0x015D:
     dw DATA8_86CBB2                                            ;86991D|        |86CBB2;
     db $10                                                     ;86991F|        |      ;
@@ -4606,7 +4255,6 @@ sObjectData0x015D:
     dw DATA8_86CBA0                                            ;869926|        |86CBA0;
     db $FF                                                     ;869928|        |      ;
     dw $0000                                                   ;869929|        |      ;
- 
 sObjectData0x015E:
     dw DATA8_86CBBE                                            ;86992B|        |86CBBE;
     db $10                                                     ;86992D|        |      ;
@@ -4617,7 +4265,6 @@ sObjectData0x015E:
     dw DATA8_86CBCA                                            ;869934|        |86CBCA;
     db $FF                                                     ;869936|        |      ;
     dw $0000                                                   ;869937|        |      ;
- 
 sObjectData0x015F:
     dw DATA8_86CBD0                                            ;869939|        |86CBD0;
     db $10                                                     ;86993B|        |      ;
@@ -4628,7 +4275,6 @@ sObjectData0x015F:
     dw DATA8_86CBCA                                            ;869942|        |86CBCA;
     db $FF                                                     ;869944|        |      ;
     dw $0000                                                   ;869945|        |      ;
- 
 sObjectData0x0160:
     dw DATA8_86CBDC                                            ;869947|        |86CBDC;
     db $10                                                     ;869949|        |      ;
@@ -4639,7 +4285,6 @@ sObjectData0x0160:
     dw DATA8_86CBCA                                            ;869950|        |86CBCA;
     db $FF                                                     ;869952|        |      ;
     dw $0000                                                   ;869953|        |      ;
- 
 sObjectData0x0161:
     dw DATA8_86CBE8                                            ;869955|        |86CBE8;
     db $10                                                     ;869957|        |      ;
@@ -4650,7 +4295,6 @@ sObjectData0x0161:
     dw DATA8_86CBF4                                            ;86995E|        |86CBF4;
     db $FF                                                     ;869960|        |      ;
     dw $0000                                                   ;869961|        |      ;
- 
 sObjectData0x0162:
     dw DATA8_86CBFA                                            ;869963|        |86CBFA;
     db $10                                                     ;869965|        |      ;
@@ -4661,7 +4305,6 @@ sObjectData0x0162:
     dw DATA8_86CBF4                                            ;86996C|        |86CBF4;
     db $FF                                                     ;86996E|        |      ;
     dw $0000                                                   ;86996F|        |      ;
- 
 sObjectData0x0163:
     dw DATA8_86CC06                                            ;869971|        |86CC06;
     db $10                                                     ;869973|        |      ;
@@ -4672,7 +4315,6 @@ sObjectData0x0163:
     dw DATA8_86CBF4                                            ;86997A|        |86CBF4;
     db $FF                                                     ;86997C|        |      ;
     dw $0000                                                   ;86997D|        |      ;
- 
 sObjectData0x0164:
     dw DATA8_86CC12                                            ;86997F|        |86CC12;
     db $10                                                     ;869981|        |      ;
@@ -4683,7 +4325,6 @@ sObjectData0x0164:
     dw DATA8_86CC1E                                            ;869988|        |86CC1E;
     db $FF                                                     ;86998A|        |      ;
     dw $0000                                                   ;86998B|        |      ;
- 
 sObjectData0x0165:
     dw DATA8_86CC24                                            ;86998D|        |86CC24;
     db $10                                                     ;86998F|        |      ;
@@ -4694,7 +4335,6 @@ sObjectData0x0165:
     dw DATA8_86CC1E                                            ;869996|        |86CC1E;
     db $FF                                                     ;869998|        |      ;
     dw $0000                                                   ;869999|        |      ;
- 
 sObjectData0x0166:
     dw DATA8_86CC30                                            ;86999B|        |86CC30;
     db $10                                                     ;86999D|        |      ;
@@ -4705,7 +4345,6 @@ sObjectData0x0166:
     dw DATA8_86CC1E                                            ;8699A4|        |86CC1E;
     db $FF                                                     ;8699A6|        |      ;
     dw $0000                                                   ;8699A7|        |      ;
- 
 sObjectData0x0167:
     dw DATA8_86CC3C                                            ;8699A9|        |86CC3C;
     db $10                                                     ;8699AB|        |      ;
@@ -4716,7 +4355,6 @@ sObjectData0x0167:
     dw DATA8_86CC48                                            ;8699B2|        |86CC48;
     db $FF                                                     ;8699B4|        |      ;
     dw $0000                                                   ;8699B5|        |      ;
- 
 sObjectData0x0168:
     dw DATA8_86CC4E                                            ;8699B7|        |86CC4E;
     db $10                                                     ;8699B9|        |      ;
@@ -4727,7 +4365,6 @@ sObjectData0x0168:
     dw DATA8_86CC48                                            ;8699C0|        |86CC48;
     db $FF                                                     ;8699C2|        |      ;
     dw $0000                                                   ;8699C3|        |      ;
- 
 sObjectData0x0169:
     dw DATA8_86CC5A                                            ;8699C5|        |86CC5A;
     db $10                                                     ;8699C7|        |      ;
@@ -4738,7 +4375,6 @@ sObjectData0x0169:
     dw DATA8_86CC48                                            ;8699CE|        |86CC48;
     db $FF                                                     ;8699D0|        |      ;
     dw $0000                                                   ;8699D1|        |      ;
- 
 sObjectData0x016A:
     dw DATA8_86CC66                                            ;8699D3|        |86CC66;
     db $10                                                     ;8699D5|        |      ;
@@ -4749,7 +4385,6 @@ sObjectData0x016A:
     dw DATA8_86CC72                                            ;8699DC|        |86CC72;
     db $FF                                                     ;8699DE|        |      ;
     dw $0000                                                   ;8699DF|        |      ;
- 
 sObjectData0x016B:
     dw DATA8_86CC78                                            ;8699E1|        |86CC78;
     db $10                                                     ;8699E3|        |      ;
@@ -4760,7 +4395,6 @@ sObjectData0x016B:
     dw DATA8_86CC72                                            ;8699EA|        |86CC72;
     db $FF                                                     ;8699EC|        |      ;
     dw $0000                                                   ;8699ED|        |      ;
- 
 sObjectData0x016C:
     dw DATA8_86CC84                                            ;8699EF|        |86CC84;
     db $10                                                     ;8699F1|        |      ;
@@ -4771,7 +4405,6 @@ sObjectData0x016C:
     dw DATA8_86CC72                                            ;8699F8|        |86CC72;
     db $FF                                                     ;8699FA|        |      ;
     dw $0000                                                   ;8699FB|        |      ;
- 
 sObjectData0x016D:
     dw DATA8_86CC90                                            ;8699FD|        |86CC90;
     db $10                                                     ;8699FF|        |      ;
@@ -4782,7 +4415,6 @@ sObjectData0x016D:
     dw DATA8_86CC9C                                            ;869A06|        |86CC9C;
     db $FF                                                     ;869A08|        |      ;
     dw $0000                                                   ;869A09|        |      ;
- 
 sObjectData0x016E:
     dw DATA8_86CCA2                                            ;869A0B|        |86CCA2;
     db $10                                                     ;869A0D|        |      ;
@@ -4793,7 +4425,6 @@ sObjectData0x016E:
     dw DATA8_86CC9C                                            ;869A14|        |86CC9C;
     db $FF                                                     ;869A16|        |      ;
     dw $0000                                                   ;869A17|        |      ;
- 
 sObjectData0x016F:
     dw DATA8_86CCAE                                            ;869A19|        |86CCAE;
     db $10                                                     ;869A1B|        |      ;
@@ -4804,7 +4435,6 @@ sObjectData0x016F:
     dw DATA8_86CC9C                                            ;869A22|        |86CC9C;
     db $FF                                                     ;869A24|        |      ;
     dw $0000                                                   ;869A25|        |      ;
- 
 sObjectData0x0170:
     dw DATA8_86CCBA                                            ;869A27|        |86CCBA;
     db $10                                                     ;869A29|        |      ;
@@ -4815,7 +4445,6 @@ sObjectData0x0170:
     dw DATA8_86CCC6                                            ;869A30|        |86CCC6;
     db $FF                                                     ;869A32|        |      ;
     dw $0000                                                   ;869A33|        |      ;
- 
 sObjectData0x0171:
     dw DATA8_86CCCC                                            ;869A35|        |86CCCC;
     db $10                                                     ;869A37|        |      ;
@@ -4826,7 +4455,6 @@ sObjectData0x0171:
     dw DATA8_86CCC6                                            ;869A3E|        |86CCC6;
     db $FF                                                     ;869A40|        |      ;
     dw $0000                                                   ;869A41|        |      ;
- 
 sObjectData0x0172:
     dw DATA8_86CCD8                                            ;869A43|        |86CCD8;
     db $10                                                     ;869A45|        |      ;
@@ -4837,7 +4465,6 @@ sObjectData0x0172:
     dw DATA8_86CCC6                                            ;869A4C|        |86CCC6;
     db $FF                                                     ;869A4E|        |      ;
     dw $0000                                                   ;869A4F|        |      ;
- 
 sObjectData0x0173:
     dw DATA8_86CCE4                                            ;869A51|        |86CCE4;
     db $10                                                     ;869A53|        |      ;
@@ -4848,7 +4475,6 @@ sObjectData0x0173:
     dw DATA8_86CCF0                                            ;869A5A|        |86CCF0;
     db $FF                                                     ;869A5C|        |      ;
     dw $0000                                                   ;869A5D|        |      ;
- 
 sObjectData0x0174:
     dw DATA8_86CCF6                                            ;869A5F|        |86CCF6;
     db $10                                                     ;869A61|        |      ;
@@ -4859,7 +4485,6 @@ sObjectData0x0174:
     dw DATA8_86CCF0                                            ;869A68|        |86CCF0;
     db $FF                                                     ;869A6A|        |      ;
     dw $0000                                                   ;869A6B|        |      ;
- 
 sObjectData0x0175:
     dw DATA8_86CD02                                            ;869A6D|        |86CD02;
     db $10                                                     ;869A6F|        |      ;
@@ -4870,7 +4495,6 @@ sObjectData0x0175:
     dw DATA8_86CCF0                                            ;869A76|        |86CCF0;
     db $FF                                                     ;869A78|        |      ;
     dw $0000                                                   ;869A79|        |      ;
- 
 sObjectData0x0176:
     dw DATA8_86CD0E                                            ;869A7B|        |86CD0E;
     db $10                                                     ;869A7D|        |      ;
@@ -4881,7 +4505,6 @@ sObjectData0x0176:
     dw DATA8_86CD1A                                            ;869A84|        |86CD1A;
     db $FF                                                     ;869A86|        |      ;
     dw $0000                                                   ;869A87|        |      ;
- 
 sObjectData0x0177:
     dw DATA8_86CD20                                            ;869A89|        |86CD20;
     db $10                                                     ;869A8B|        |      ;
@@ -4892,7 +4515,6 @@ sObjectData0x0177:
     dw DATA8_86CD1A                                            ;869A92|        |86CD1A;
     db $FF                                                     ;869A94|        |      ;
     dw $0000                                                   ;869A95|        |      ;
- 
 sObjectData0x0178:
     dw DATA8_86CD2C                                            ;869A97|        |86CD2C;
     db $10                                                     ;869A99|        |      ;
@@ -4903,7 +4525,6 @@ sObjectData0x0178:
     dw DATA8_86CD1A                                            ;869AA0|        |86CD1A;
     db $FF                                                     ;869AA2|        |      ;
     dw $0000                                                   ;869AA3|        |      ;
- 
 sObjectData0x0179:
     dw DATA8_86CD38                                            ;869AA5|        |86CD38;
     db $10                                                     ;869AA7|        |      ;
@@ -4914,7 +4535,6 @@ sObjectData0x0179:
     dw DATA8_86CD44                                            ;869AAE|        |86CD44;
     db $FF                                                     ;869AB0|        |      ;
     dw $0000                                                   ;869AB1|        |      ;
- 
 sObjectData0x017A:
     dw DATA8_86CD4A                                            ;869AB3|        |86CD4A;
     db $10                                                     ;869AB5|        |      ;
@@ -4925,7 +4545,6 @@ sObjectData0x017A:
     dw DATA8_86CD44                                            ;869ABC|        |86CD44;
     db $FF                                                     ;869ABE|        |      ;
     dw $0000                                                   ;869ABF|        |      ;
- 
 sObjectData0x017B:
     dw DATA8_86CD56                                            ;869AC1|        |86CD56;
     db $10                                                     ;869AC3|        |      ;
@@ -4936,7 +4555,6 @@ sObjectData0x017B:
     dw DATA8_86CD44                                            ;869ACA|        |86CD44;
     db $FF                                                     ;869ACC|        |      ;
     dw $0000                                                   ;869ACD|        |      ;
- 
 sObjectData0x017C:
     dw DATA8_86CD62                                            ;869ACF|        |86CD62;
     db $10                                                     ;869AD1|        |      ;
@@ -4947,7 +4565,6 @@ sObjectData0x017C:
     dw DATA8_86CD6E                                            ;869AD8|        |86CD6E;
     db $FF                                                     ;869ADA|        |      ;
     dw $0000                                                   ;869ADB|        |      ;
- 
 sObjectData0x017D:
     dw DATA8_86CD74                                            ;869ADD|        |86CD74;
     db $10                                                     ;869ADF|        |      ;
@@ -4958,7 +4575,6 @@ sObjectData0x017D:
     dw DATA8_86CD6E                                            ;869AE6|        |86CD6E;
     db $FF                                                     ;869AE8|        |      ;
     dw $0000                                                   ;869AE9|        |      ;
- 
 sObjectData0x017E:
     dw DATA8_86CD80                                            ;869AEB|        |86CD80;
     db $10                                                     ;869AED|        |      ;
@@ -4969,7 +4585,6 @@ sObjectData0x017E:
     dw DATA8_86CD6E                                            ;869AF4|        |86CD6E;
     db $FF                                                     ;869AF6|        |      ;
     dw $0000                                                   ;869AF7|        |      ;
- 
 sObjectData0x017F:
     dw DATA8_86CD8C                                            ;869AF9|        |86CD8C;
     db $10                                                     ;869AFB|        |      ;
@@ -4980,7 +4595,6 @@ sObjectData0x017F:
     dw DATA8_86CD98                                            ;869B02|        |86CD98;
     db $FF                                                     ;869B04|        |      ;
     dw $0000                                                   ;869B05|        |      ;
- 
 sObjectData0x0180:
     dw DATA8_86CD9E                                            ;869B07|        |86CD9E;
     db $10                                                     ;869B09|        |      ;
@@ -4991,7 +4605,6 @@ sObjectData0x0180:
     dw DATA8_86CD98                                            ;869B10|        |86CD98;
     db $FF                                                     ;869B12|        |      ;
     dw $0000                                                   ;869B13|        |      ;
- 
 sObjectData0x0181:
     dw DATA8_86CDAA                                            ;869B15|        |86CDAA;
     db $10                                                     ;869B17|        |      ;
@@ -5002,7 +4615,6 @@ sObjectData0x0181:
     dw DATA8_86CD98                                            ;869B1E|        |86CD98;
     db $FF                                                     ;869B20|        |      ;
     dw $0000                                                   ;869B21|        |      ;
- 
 sObjectData0x0182:
     dw DATA8_86CDB6                                            ;869B23|        |86CDB6;
     db $10                                                     ;869B25|        |      ;
@@ -5013,7 +4625,6 @@ sObjectData0x0182:
     dw DATA8_86CDC2                                            ;869B2C|        |86CDC2;
     db $FF                                                     ;869B2E|        |      ;
     dw $0000                                                   ;869B2F|        |      ;
- 
 sObjectData0x0183:
     dw DATA8_86CDC8                                            ;869B31|        |86CDC8;
     db $10                                                     ;869B33|        |      ;
@@ -5024,7 +4635,6 @@ sObjectData0x0183:
     dw DATA8_86CDC2                                            ;869B3A|        |86CDC2;
     db $FF                                                     ;869B3C|        |      ;
     dw $0000                                                   ;869B3D|        |      ;
- 
 sObjectData0x0184:
     dw DATA8_86CDD4                                            ;869B3F|        |86CDD4;
     db $10                                                     ;869B41|        |      ;
@@ -5035,7 +4645,6 @@ sObjectData0x0184:
     dw DATA8_86CDC2                                            ;869B48|        |86CDC2;
     db $FF                                                     ;869B4A|        |      ;
     dw $0000                                                   ;869B4B|        |      ;
- 
 sObjectData0x0185:
     dw DATA8_86CDE0                                            ;869B4D|        |86CDE0;
     db $10                                                     ;869B4F|        |      ;
@@ -5046,7 +4655,6 @@ sObjectData0x0185:
     dw DATA8_86CDEC                                            ;869B56|        |86CDEC;
     db $FF                                                     ;869B58|        |      ;
     dw $0000                                                   ;869B59|        |      ;
- 
 sObjectData0x0186:
     dw DATA8_86CDF2                                            ;869B5B|        |86CDF2;
     db $10                                                     ;869B5D|        |      ;
@@ -5057,7 +4665,6 @@ sObjectData0x0186:
     dw DATA8_86CDEC                                            ;869B64|        |86CDEC;
     db $FF                                                     ;869B66|        |      ;
     dw $0000                                                   ;869B67|        |      ;
- 
 sObjectData0x0187:
     dw DATA8_86CDFE                                            ;869B69|        |86CDFE;
     db $10                                                     ;869B6B|        |      ;
@@ -5068,7 +4675,6 @@ sObjectData0x0187:
     dw DATA8_86CDEC                                            ;869B72|        |86CDEC;
     db $FF                                                     ;869B74|        |      ;
     dw $0000                                                   ;869B75|        |      ;
- 
 sObjectData0x0188:
     dw DATA8_86CE0A                                            ;869B77|        |86CE0A;
     db $10                                                     ;869B79|        |      ;
@@ -5079,7 +4685,6 @@ sObjectData0x0188:
     dw DATA8_86CE16                                            ;869B80|        |86CE16;
     db $FF                                                     ;869B82|        |      ;
     dw $0000                                                   ;869B83|        |      ;
- 
 sObjectData0x0189:
     dw DATA8_86CE1C                                            ;869B85|        |86CE1C;
     db $10                                                     ;869B87|        |      ;
@@ -5090,7 +4695,6 @@ sObjectData0x0189:
     dw DATA8_86CE28                                            ;869B8E|        |86CE28;
     db $FF                                                     ;869B90|        |      ;
     dw $0000                                                   ;869B91|        |      ;
- 
 sObjectData0x018A:
     dw DATA8_86CE2E                                            ;869B93|        |86CE2E;
     db $10                                                     ;869B95|        |      ;
@@ -5101,7 +4705,6 @@ sObjectData0x018A:
     dw DATA8_86CE3A                                            ;869B9C|        |86CE3A;
     db $FF                                                     ;869B9E|        |      ;
     dw $0000                                                   ;869B9F|        |      ;
- 
 sObjectData0x018B:
     dw DATA8_86CE55                                            ;869BA1|        |86CE55;
     db $10                                                     ;869BA3|        |      ;
@@ -5112,12 +4715,10 @@ sObjectData0x018B:
     dw DATA8_86CE40                                            ;869BAA|        |86CE40;
     db $10                                                     ;869BAC|        |      ;
     dw $0000                                                   ;869BAD|        |      ;
- 
 sObjectData0x018C:
     dw DATA8_86CE40                                            ;869BAF|        |86CE40;
     db $FF                                                     ;869BB1|        |      ;
     dw $0000                                                   ;869BB2|        |      ;
- 
 sObjectData0x018D:
     dw DATA8_86CE40                                            ;869BB4|        |86CE40;
     db $20                                                     ;869BB6|        |      ;
@@ -5128,7 +4729,6 @@ sObjectData0x018D:
     dw DATA8_86CEA9                                            ;869BBD|        |86CEA9;
     db $FF                                                     ;869BBF|        |      ;
     dw $0000                                                   ;869BC0|        |      ;
- 
 sObjectData0x018E:
     dw DATA8_86CEA9                                            ;869BC2|        |86CEA9;
     db $20                                                     ;869BC4|        |      ;
@@ -5139,7 +4739,6 @@ sObjectData0x018E:
     dw DATA8_86CE40                                            ;869BCB|        |86CE40;
     db $FF                                                     ;869BCD|        |      ;
     dw $0000                                                   ;869BCE|        |      ;
- 
 sObjectData0x018F:
     dw DATA8_86CEE8                                            ;869BD0|        |86CEE8;
     db $16                                                     ;869BD2|        |      ;
@@ -5160,7 +4759,6 @@ sObjectData0x018F:
     dw DATA8_86CE40                                            ;869BE8|        |86CE40;
     db $FF                                                     ;869BEA|        |      ;
     dw $0000                                                   ;869BEB|        |      ;
- 
 sObjectData0x0190:
     dw DATA8_86CF12                                            ;869BED|        |86CF12;
     db $20                                                     ;869BEF|        |      ;
@@ -5177,14 +4775,12 @@ sObjectData0x0190:
     dw DATA8_86CE40                                            ;869BFF|        |86CE40;
     db $FF                                                     ;869C01|        |      ;
     dw $0000                                                   ;869C02|        |      ;
- 
 sObjectData0x0191:
     dw DATA8_86CF3C                                            ;869C04|        |86CF3C;
     db $1B                                                     ;869C06|        |      ;
     dw DATA8_86CF51                                            ;869C07|        |86CF51;
     db $1B                                                     ;869C09|        |      ;
     dw $0000                                                   ;869C0A|        |      ;
- 
 sObjectData0x0192:
     dw DATA8_86CF66                                            ;869C0C|        |86CF66;
     db $20                                                     ;869C0E|        |      ;
@@ -5201,22 +4797,18 @@ sObjectData0x0192:
     dw DATA8_86CE40                                            ;869C1E|        |86CE40;
     db $FF                                                     ;869C20|        |      ;
     dw $0000                                                   ;869C21|        |      ;
- 
 sObjectData0x0193:
     dw DATA8_86CE7F                                            ;869C23|        |86CE7F;
     db $FF                                                     ;869C25|        |      ;
     dw $0000                                                   ;869C26|        |      ;
- 
 sObjectData0x0194:
     dw DATA8_86CE94                                            ;869C28|        |86CE94;
     db $FF                                                     ;869C2A|        |      ;
     dw $0000                                                   ;869C2B|        |      ;
- 
 sObjectData0x0195:
     dw DATA8_86CEA9                                            ;869C2D|        |86CEA9;
     db $FF                                                     ;869C2F|        |      ;
     dw $0000                                                   ;869C30|        |      ;
- 
 sObjectData0x0196:
     dw DATA8_86CFA5                                            ;869C32|        |86CFA5;
     db $10                                                     ;869C34|        |      ;
@@ -5227,12 +4819,10 @@ sObjectData0x0196:
     dw DATA8_86CF90                                            ;869C3B|        |86CF90;
     db $10                                                     ;869C3D|        |      ;
     dw $0000                                                   ;869C3E|        |      ;
- 
 sObjectData0x0197:
     dw DATA8_86CFCF                                            ;869C40|        |86CFCF;
     db $FF                                                     ;869C42|        |      ;
     dw $0000                                                   ;869C43|        |      ;
- 
 sObjectData0x0198:
     dw DATA8_86CF90                                            ;869C45|        |86CF90;
     db $30                                                     ;869C47|        |      ;
@@ -5243,7 +4833,6 @@ sObjectData0x0198:
     dw DATA8_86CFF9                                            ;869C4E|        |86CFF9;
     db $FF                                                     ;869C50|        |      ;
     dw $0000                                                   ;869C51|        |      ;
- 
 sObjectData0x0199:
     dw DATA8_86CFF9                                            ;869C53|        |86CFF9;
     db $30                                                     ;869C55|        |      ;
@@ -5254,7 +4843,6 @@ sObjectData0x0199:
     dw DATA8_86CF90                                            ;869C5C|        |86CF90;
     db $FF                                                     ;869C5E|        |      ;
     dw $0000                                                   ;869C5F|        |      ;
- 
 sObjectData0x019A:
     dw DATA8_86D038                                            ;869C61|        |86D038;
     db $26                                                     ;869C63|        |      ;
@@ -5271,7 +4859,6 @@ sObjectData0x019A:
     dw DATA8_86CF90                                            ;869C73|        |86CF90;
     db $FF                                                     ;869C75|        |      ;
     dw $0000                                                   ;869C76|        |      ;
- 
 sObjectData0x019B:
     dw DATA8_86D062                                            ;869C78|        |86D062;
     db $28                                                     ;869C7A|        |      ;
@@ -5288,24 +4875,20 @@ sObjectData0x019B:
     dw DATA8_86CF90                                            ;869C8A|        |86CF90;
     db $FF                                                     ;869C8C|        |      ;
     dw $0000                                                   ;869C8D|        |      ;
- 
 sObjectData0x019C:
     dw DATA8_86D08C                                            ;869C8F|        |86D08C;
     db $08                                                     ;869C91|        |      ;
     dw DATA8_86D0A1                                            ;869C92|        |86D0A1;
     db $08                                                     ;869C94|        |      ;
     dw $0000                                                   ;869C95|        |      ;
- 
 sObjectData0x019D:
     dw DATA8_86CFE4                                            ;869C97|        |86CFE4;
     db $FF                                                     ;869C99|        |      ;
     dw $0000                                                   ;869C9A|        |      ;
- 
 sObjectData0x019E:
     dw DATA8_86D0B6                                            ;869C9C|        |86D0B6;
     db $FF                                                     ;869C9E|        |      ;
     dw $0000                                                   ;869C9F|        |      ;
- 
 sObjectData0x019F:
     dw DATA8_86D0C6                                            ;869CA1|        |86D0C6;
     db $10                                                     ;869CA3|        |      ;
@@ -5316,7 +4899,6 @@ sObjectData0x019F:
     dw DATA8_86D0B6                                            ;869CAA|        |86D0B6;
     db $10                                                     ;869CAC|        |      ;
     dw $0000                                                   ;869CAD|        |      ;
- 
 sObjectData0x01A0:
     dw DATA8_86D0E6                                            ;869CAF|        |86D0E6;
     db $20                                                     ;869CB1|        |      ;
@@ -5333,7 +4915,6 @@ sObjectData0x01A0:
     dw DATA8_86D0B6                                            ;869CC1|        |86D0B6;
     db $FF                                                     ;869CC3|        |      ;
     dw $0000                                                   ;869CC4|        |      ;
- 
 sObjectData0x01A1:
     dw DATA8_86D106                                            ;869CC6|        |86D106;
     db $28                                                     ;869CC8|        |      ;
@@ -5350,12 +4931,10 @@ sObjectData0x01A1:
     dw DATA8_86D0B6                                            ;869CD8|        |86D0B6;
     db $FF                                                     ;869CDA|        |      ;
     dw $0000                                                   ;869CDB|        |      ;
- 
 sObjectData0x01A2:
     dw DATA8_86D126                                            ;869CDD|        |86D126;
     db $FF                                                     ;869CDF|        |      ;
     dw $0000                                                   ;869CE0|        |      ;
- 
 sObjectData0x01A3:
     dw DATA8_86D136                                            ;869CE2|        |86D136;
     db $10                                                     ;869CE4|        |      ;
@@ -5366,14 +4945,12 @@ sObjectData0x01A3:
     dw DATA8_86D126                                            ;869CEB|        |86D126;
     db $10                                                     ;869CED|        |      ;
     dw $0000                                                   ;869CEE|        |      ;
- 
 sObjectData0x01A4:
     dw DATA8_86D156                                            ;869CF0|        |86D156;
     db $16                                                     ;869CF2|        |      ;
     dw DATA8_86D166                                            ;869CF3|        |86D166;
     db $16                                                     ;869CF5|        |      ;
     dw $0000                                                   ;869CF6|        |      ;
- 
 sObjectData0x01A5:
     dw DATA8_86D176                                            ;869CF8|        |86D176;
     db $30                                                     ;869CFA|        |      ;
@@ -5390,12 +4967,10 @@ sObjectData0x01A5:
     dw DATA8_86D0B6                                            ;869D0A|        |86D0B6;
     db $FF                                                     ;869D0C|        |      ;
     dw $0000                                                   ;869D0D|        |      ;
- 
 sObjectData0x01A6:
     dw DATA8_86D1A0                                            ;869D0F|        |86D1A0;
     db $FF                                                     ;869D11|        |      ;
     dw $0000                                                   ;869D12|        |      ;
- 
 sObjectData0x01A7:
     dw DATA8_86D1B0                                            ;869D14|        |86D1B0;
     db $10                                                     ;869D16|        |      ;
@@ -5406,7 +4981,6 @@ sObjectData0x01A7:
     dw DATA8_86D1A0                                            ;869D1D|        |86D1A0;
     db $10                                                     ;869D1F|        |      ;
     dw $0000                                                   ;869D20|        |      ;
- 
 sObjectData0x01A8:
     dw DATA8_86D1D0                                            ;869D22|        |86D1D0;
     db $18                                                     ;869D24|        |      ;
@@ -5423,7 +4997,6 @@ sObjectData0x01A8:
     dw DATA8_86D1A0                                            ;869D34|        |86D1A0;
     db $FF                                                     ;869D36|        |      ;
     dw $0000                                                   ;869D37|        |      ;
- 
 sObjectData0x01A9:
     dw DATA8_86D205                                            ;869D39|        |86D205;
     db $16                                                     ;869D3B|        |      ;
@@ -5434,7 +5007,6 @@ sObjectData0x01A9:
     dw DATA8_86D1F0                                            ;869D42|        |86D1F0;
     db $16                                                     ;869D44|        |      ;
     dw $0000                                                   ;869D45|        |      ;
- 
 sObjectData0x01AA:
     dw DATA8_86D22F                                            ;869D47|        |86D22F;
     db $20                                                     ;869D49|        |      ;
@@ -5445,7 +5017,6 @@ sObjectData0x01AA:
     dw DATA8_86D1F0                                            ;869D50|        |86D1F0;
     db $FF                                                     ;869D52|        |      ;
     dw $0000                                                   ;869D53|        |      ;
- 
 sObjectData0x01AB:
     dw DATA8_86D1F0                                            ;869D55|        |86D1F0;
     db $28                                                     ;869D57|        |      ;
@@ -5456,7 +5027,6 @@ sObjectData0x01AB:
     dw DATA8_86D22F                                            ;869D5E|        |86D22F;
     db $FF                                                     ;869D60|        |      ;
     dw $0000                                                   ;869D61|        |      ;
- 
 sObjectData0x01AC:
     dw DATA8_86D26E                                            ;869D63|        |86D26E;
     db $30                                                     ;869D65|        |      ;
@@ -5469,7 +5039,6 @@ sObjectData0x01AC:
     dw DATA8_86D1F0                                            ;869D6F|        |86D1F0;
     db $FF                                                     ;869D71|        |      ;
     dw $0000                                                   ;869D72|        |      ;
- 
 sObjectData0x01AD:
     dw DATA8_86D298                                            ;869D74|        |86D298;
     db $20                                                     ;869D76|        |      ;
@@ -5482,7 +5051,6 @@ sObjectData0x01AD:
     dw DATA8_86D1F0                                            ;869D80|        |86D1F0;
     db $FF                                                     ;869D82|        |      ;
     dw $0000                                                   ;869D83|        |      ;
- 
 sObjectData0x01AE:
     dw DATA8_86D2D2                                            ;869D85|        |86D2D2;
     db $16                                                     ;869D87|        |      ;
@@ -5493,12 +5061,10 @@ sObjectData0x01AE:
     dw DATA8_86D2C2                                            ;869D8E|        |86D2C2;
     db $16                                                     ;869D90|        |      ;
     dw $0000                                                   ;869D91|        |      ;
- 
 sObjectData0x01AF:
     dw DATA8_86D2C2                                            ;869D93|        |86D2C2;
     db $FF                                                     ;869D95|        |      ;
     dw $0000                                                   ;869D96|        |      ;
- 
 sObjectData0x01B0:
     dw DATA8_86D2F2                                            ;869D98|        |86D2F2;
     db $10                                                     ;869D9A|        |      ;
@@ -5509,7 +5075,6 @@ sObjectData0x01B0:
     dw DATA8_86D331                                            ;869DA1|        |86D331;
     db $14                                                     ;869DA3|        |      ;
     dw $0000                                                   ;869DA4|        |      ;
- 
 sObjectData0x01B1:
     dw DATA8_86D35B                                            ;869DA6|        |86D35B;
     db $10                                                     ;869DA8|        |      ;
@@ -5526,14 +5091,12 @@ sObjectData0x01B1:
     dw DATA8_86D2F2                                            ;869DB8|        |86D2F2;
     db $FF                                                     ;869DBA|        |      ;
     dw $0000                                                   ;869DBB|        |      ;
- 
 sObjectData0x01B2:
     dw DATA8_86D385                                            ;869DBD|        |86D385;
     db $0D                                                     ;869DBF|        |      ;
     dw DATA8_86D39A                                            ;869DC0|        |86D39A;
     db $0D                                                     ;869DC2|        |      ;
     dw $0000                                                   ;869DC3|        |      ;
- 
 sObjectData0x01B3:
     dw DATA8_86D3AF                                            ;869DC5|        |86D3AF;
     db $20                                                     ;869DC7|        |      ;
@@ -5550,7 +5113,6 @@ sObjectData0x01B3:
     dw DATA8_86D2F2                                            ;869DD7|        |86D2F2;
     db $FF                                                     ;869DD9|        |      ;
     dw $0000                                                   ;869DDA|        |      ;
- 
 sObjectData0x01B4:
     dw DATA8_86D3EE                                            ;869DDC|        |86D3EE;
     db $18                                                     ;869DDE|        |      ;
@@ -5561,19 +5123,16 @@ sObjectData0x01B4:
     dw DATA8_86D3D9                                            ;869DE5|        |86D3D9;
     db $18                                                     ;869DE7|        |      ;
     dw $0000                                                   ;869DE8|        |      ;
- 
 sObjectData0x01B5:
     dw DATA8_86D3D9                                            ;869DEA|        |86D3D9;
     db $FF                                                     ;869DEC|        |      ;
     dw $0000                                                   ;869DED|        |      ;
- 
 sObjectData0x01B6:
     dw DATA8_86D418                                            ;869DEF|        |86D418;
     db $1B                                                     ;869DF1|        |      ;
     dw DATA8_86D46C                                            ;869DF2|        |86D46C;
     db $1B                                                     ;869DF4|        |      ;
     dw $0000                                                   ;869DF5|        |      ;
- 
 sObjectData0x01B7:
     dw DATA8_86D442                                            ;869DF7|        |86D442;
     db $18                                                     ;869DF9|        |      ;
@@ -5584,24 +5143,20 @@ sObjectData0x01B7:
     dw DATA8_86D42D                                            ;869E00|        |86D42D;
     db $18                                                     ;869E02|        |      ;
     dw $0000                                                   ;869E03|        |      ;
- 
 sObjectData0x01B8:
     dw DATA8_86D42D                                            ;869E05|        |86D42D;
     db $FF                                                     ;869E07|        |      ;
     dw $0000                                                   ;869E08|        |      ;
- 
 sObjectData0x01B9:
     dw DATA8_86D481                                            ;869E0A|        |86D481;
     db $1B                                                     ;869E0C|        |      ;
     dw DATA8_86D496                                            ;869E0D|        |86D496;
     db $1B                                                     ;869E0F|        |      ;
     dw $0000                                                   ;869E10|        |      ;
- 
 sObjectData0x01BA:
     dw DATA8_86D4AB                                            ;869E12|        |86D4AB;
     db $FF                                                     ;869E14|        |      ;
     dw $0000                                                   ;869E15|        |      ;
- 
 sObjectData0x01BB:
     dw DATA8_86D4B6                                            ;869E17|        |86D4B6;
     db $0F                                                     ;869E19|        |      ;
@@ -5612,12 +5167,10 @@ sObjectData0x01BB:
     dw DATA8_86D4AB                                            ;869E20|        |86D4AB;
     db $0F                                                     ;869E22|        |      ;
     dw $0000                                                   ;869E23|        |      ;
- 
 sObjectData0x01BC:
     dw DATA8_86D4CC                                            ;869E25|        |86D4CC;
     db $FF                                                     ;869E27|        |      ;
     dw $0000                                                   ;869E28|        |      ;
- 
 sObjectData0x01BD:
     dw DATA8_86D4D7                                            ;869E2A|        |86D4D7;
     db $20                                                     ;869E2C|        |      ;
@@ -5630,7 +5183,6 @@ sObjectData0x01BD:
     dw DATA8_86D4AB                                            ;869E36|        |86D4AB;
     db $FF                                                     ;869E38|        |      ;
     dw $0000                                                   ;869E39|        |      ;
- 
 sObjectData0x01BE:
     dw DATA8_86D4F8                                            ;869E3B|        |86D4F8;
     db $1A                                                     ;869E3D|        |      ;
@@ -5647,7 +5199,6 @@ sObjectData0x01BE:
     dw DATA8_86D4AB                                            ;869E4D|        |86D4AB;
     db $FF                                                     ;869E4F|        |      ;
     dw $0000                                                   ;869E50|        |      ;
- 
 sObjectData0x01BF:
     dw DATA8_86D50E                                            ;869E52|        |86D50E;
     db $1C                                                     ;869E54|        |      ;
@@ -5660,19 +5211,16 @@ sObjectData0x01BF:
     dw DATA8_86D4AB                                            ;869E5E|        |86D4AB;
     db $FF                                                     ;869E60|        |      ;
     dw $0000                                                   ;869E61|        |      ;
- 
 sObjectData0x01C0:
     dw DATA8_86D524                                            ;869E63|        |86D524;
     db $10                                                     ;869E65|        |      ;
     dw DATA8_86D52F                                            ;869E66|        |86D52F;
     db $18                                                     ;869E68|        |      ;
     dw $0000                                                   ;869E69|        |      ;
- 
 sObjectData0x01C1:
     dw DATA8_86D53A                                            ;869E6B|        |86D53A;
     db $FF                                                     ;869E6D|        |      ;
     dw $0000                                                   ;869E6E|        |      ;
- 
 sObjectData0x01C2:
     dw DATA8_86D545                                            ;869E70|        |86D545;
     db $0F                                                     ;869E72|        |      ;
@@ -5683,12 +5231,10 @@ sObjectData0x01C2:
     dw DATA8_86D53A                                            ;869E79|        |86D53A;
     db $0F                                                     ;869E7B|        |      ;
     dw $0000                                                   ;869E7C|        |      ;
- 
 sObjectData0x01C3:
     dw DATA8_86D55B                                            ;869E7E|        |86D55B;
     db $FF                                                     ;869E80|        |      ;
     dw $0000                                                   ;869E81|        |      ;
- 
 sObjectData0x01C4:
     dw DATA8_86D566                                            ;869E83|        |86D566;
     db $0F                                                     ;869E85|        |      ;
@@ -5699,12 +5245,10 @@ sObjectData0x01C4:
     dw DATA8_86D55B                                            ;869E8C|        |86D55B;
     db $0F                                                     ;869E8E|        |      ;
     dw $0000                                                   ;869E8F|        |      ;
- 
 sObjectData0x01C5:
     dw DATA8_86D57C                                            ;869E91|        |86D57C;
     db $FF                                                     ;869E93|        |      ;
     dw $0000                                                   ;869E94|        |      ;
- 
 sObjectData0x01C6:
     dw DATA8_86D587                                            ;869E96|        |86D587;
     db $0F                                                     ;869E98|        |      ;
@@ -5715,12 +5259,10 @@ sObjectData0x01C6:
     dw DATA8_86D57C                                            ;869E9F|        |86D57C;
     db $0F                                                     ;869EA1|        |      ;
     dw $0000                                                   ;869EA2|        |      ;
- 
 sObjectData0x01C7:
     dw DATA8_86D59D                                            ;869EA4|        |86D59D;
     db $FF                                                     ;869EA6|        |      ;
     dw $0000                                                   ;869EA7|        |      ;
- 
 sObjectData0x01C8:
     dw DATA8_86D5A8                                            ;869EA9|        |86D5A8;
     db $0F                                                     ;869EAB|        |      ;
@@ -5731,12 +5273,10 @@ sObjectData0x01C8:
     dw DATA8_86D59D                                            ;869EB2|        |86D59D;
     db $0F                                                     ;869EB4|        |      ;
     dw $0000                                                   ;869EB5|        |      ;
- 
 sObjectData0x01C9:
     dw DATA8_86D5BE                                            ;869EB7|        |86D5BE;
     db $FF                                                     ;869EB9|        |      ;
     dw $0000                                                   ;869EBA|        |      ;
- 
 sObjectData0x01CA:
     dw DATA8_86D5C9                                            ;869EBC|        |86D5C9;
     db $16                                                     ;869EBE|        |      ;
@@ -5747,7 +5287,6 @@ sObjectData0x01CA:
     dw DATA8_86D5BE                                            ;869EC5|        |86D5BE;
     db $16                                                     ;869EC7|        |      ;
     dw $0000                                                   ;869EC8|        |      ;
- 
 sObjectData0x01CB:
     dw DATA8_86D5DF                                            ;869ECA|        |86D5DF;
     db $10                                                     ;869ECC|        |      ;
@@ -5760,7 +5299,6 @@ sObjectData0x01CB:
     dw DATA8_86D5BE                                            ;869ED6|        |86D5BE;
     db $FF                                                     ;869ED8|        |      ;
     dw $0000                                                   ;869ED9|        |      ;
- 
 sObjectData0x01CC:
     dw DATA8_86D5F5                                            ;869EDB|        |86D5F5;
     db $0F                                                     ;869EDD|        |      ;
@@ -5773,12 +5311,10 @@ sObjectData0x01CC:
     dw DATA8_86D5BE                                            ;869EE7|        |86D5BE;
     db $FF                                                     ;869EE9|        |      ;
     dw $0000                                                   ;869EEA|        |      ;
- 
 sObjectData0x01CD:
     dw DATA8_86D61A                                            ;869EEC|        |86D61A;
     db $FF                                                     ;869EEE|        |      ;
     dw $0000                                                   ;869EEF|        |      ;
- 
 sObjectData0x01CE:
     dw DATA8_86D5BE                                            ;869EF1|        |86D5BE;
     db $20                                                     ;869EF3|        |      ;
@@ -5789,7 +5325,6 @@ sObjectData0x01CE:
     dw DATA8_86D625                                            ;869EFA|        |86D625;
     db $FF                                                     ;869EFC|        |      ;
     dw $0000                                                   ;869EFD|        |      ;
- 
 sObjectData0x01CF:
     dw DATA8_86D625                                            ;869EFF|        |86D625;
     db $20                                                     ;869F01|        |      ;
@@ -5798,7 +5333,6 @@ sObjectData0x01CF:
     dw DATA8_86D5BE                                            ;869F05|        |86D5BE;
     db $FF                                                     ;869F07|        |      ;
     dw $0000                                                   ;869F08|        |      ;
- 
 sObjectData0x01D0:
     dw DATA8_86D646                                            ;869F0A|        |86D646;
     db $18                                                     ;869F0C|        |      ;
@@ -5815,7 +5349,6 @@ sObjectData0x01D0:
     dw DATA8_86D625                                            ;869F1C|        |86D625;
     db $FF                                                     ;869F1E|        |      ;
     dw $0000                                                   ;869F1F|        |      ;
- 
 sObjectData0x01D1:
     dw DATA8_86D65C                                            ;869F21|        |86D65C;
     db $1A                                                     ;869F23|        |      ;
@@ -5836,7 +5369,6 @@ sObjectData0x01D1:
     dw DATA8_86D6EB                                            ;869F39|        |86D6EB;
     db $FF                                                     ;869F3B|        |      ;
     dw $0000                                                   ;869F3C|        |      ;
- 
 sObjectData0x01D2:
     dw DATA8_86D672                                            ;869F3E|        |86D672;
     db $1A                                                     ;869F40|        |      ;
@@ -5853,12 +5385,10 @@ sObjectData0x01D2:
     dw DATA8_86D6EB                                            ;869F50|        |86D6EB;
     db $FF                                                     ;869F52|        |      ;
     dw $0000                                                   ;869F53|        |      ;
- 
 sObjectData0x01D3:
     dw DATA8_86D688                                            ;869F55|        |86D688;
     db $FF                                                     ;869F57|        |      ;
     dw $0000                                                   ;869F58|        |      ;
- 
 sObjectData0x01D4:
     dw DATA8_86D693                                            ;869F5A|        |86D693;
     db $10                                                     ;869F5C|        |      ;
@@ -5869,12 +5399,10 @@ sObjectData0x01D4:
     dw DATA8_86D688                                            ;869F63|        |86D688;
     db $10                                                     ;869F65|        |      ;
     dw $0000                                                   ;869F66|        |      ;
- 
 sObjectData0x01D5:
     dw DATA8_86D6A9                                            ;869F68|        |86D6A9;
     db $FF                                                     ;869F6A|        |      ;
     dw $0000                                                   ;869F6B|        |      ;
- 
 sObjectData0x01D6:
     dw DATA8_86D6B4                                            ;869F6D|        |86D6B4;
     db $10                                                     ;869F6F|        |      ;
@@ -5885,12 +5413,10 @@ sObjectData0x01D6:
     dw DATA8_86D6A9                                            ;869F76|        |86D6A9;
     db $10                                                     ;869F78|        |      ;
     dw $0000                                                   ;869F79|        |      ;
- 
 sObjectData0x01D7:
     dw DATA8_86D6CA                                            ;869F7B|        |86D6CA;
     db $FF                                                     ;869F7D|        |      ;
     dw $0000                                                   ;869F7E|        |      ;
- 
 sObjectData0x01D8:
     dw DATA8_86D6D5                                            ;869F80|        |86D6D5;
     db $10                                                     ;869F82|        |      ;
@@ -5901,12 +5427,10 @@ sObjectData0x01D8:
     dw DATA8_86D6CA                                            ;869F89|        |86D6CA;
     db $10                                                     ;869F8B|        |      ;
     dw $0000                                                   ;869F8C|        |      ;
- 
 sObjectData0x01D9:
     dw DATA8_86D6F6                                            ;869F8E|        |86D6F6;
     db $FF                                                     ;869F90|        |      ;
     dw $0000                                                   ;869F91|        |      ;
- 
 sObjectData0x01DA:
     dw DATA8_86D6FC                                            ;869F93|        |86D6FC;
     db $10                                                     ;869F95|        |      ;
@@ -5917,17 +5441,14 @@ sObjectData0x01DA:
     dw DATA8_86D6F6                                            ;869F9C|        |86D6F6;
     db $10                                                     ;869F9E|        |      ;
     dw $0000                                                   ;869F9F|        |      ;
- 
 sObjectData0x01DB:
     dw DATA8_86D712                                            ;869FA1|        |86D712;
     db $FF                                                     ;869FA3|        |      ;
     dw $0000                                                   ;869FA4|        |      ;
- 
 sObjectData0x01DC:
     dw DATA8_86D71D                                            ;869FA6|        |86D71D;
     db $FF                                                     ;869FA8|        |      ;
     dw $0000                                                   ;869FA9|        |      ;
- 
 sObjectData0x01DD:
     dw DATA8_86D728                                            ;869FAB|        |86D728;
     db $0D                                                     ;869FAD|        |      ;
@@ -5940,7 +5461,6 @@ sObjectData0x01DD:
     dw DATA8_86D6F6                                            ;869FB7|        |86D6F6;
     db $FF                                                     ;869FB9|        |      ;
     dw $0000                                                   ;869FBA|        |      ;
- 
 sObjectData0x01DE:
     dw DATA8_86D73E                                            ;869FBC|        |86D73E;
     db $02                                                     ;869FBE|        |      ;
@@ -5959,7 +5479,6 @@ sObjectData0x01DE:
     dw DATA8_86D6F6                                            ;869FD1|        |86D6F6;
     db $FF                                                     ;869FD3|        |      ;
     dw $0000                                                   ;869FD4|        |      ;
- 
 sObjectData0x01DF:
     dw DATA8_86D6F6                                            ;869FD6|        |86D6F6;
     db $08                                                     ;869FD8|        |      ;
@@ -5968,12 +5487,10 @@ sObjectData0x01DF:
     dw DATA8_86D77F                                            ;869FDC|        |86D77F;
     db $08                                                     ;869FDE|        |      ;
     dw $0000                                                   ;869FDF|        |      ;
- 
 sObjectData0x01E0:
     dw DATA8_86D795                                            ;869FE1|        |86D795;
     db $FF                                                     ;869FE3|        |      ;
     dw $0000                                                   ;869FE4|        |      ;
- 
 sObjectData0x01E1:
     dw DATA8_86D7A0                                            ;869FE6|        |86D7A0;
     db $0F                                                     ;869FE8|        |      ;
@@ -5984,7 +5501,6 @@ sObjectData0x01E1:
     dw DATA8_86D795                                            ;869FEF|        |86D795;
     db $0F                                                     ;869FF1|        |      ;
     dw $0000                                                   ;869FF2|        |      ;
- 
 sObjectData0x01E2:
     dw DATA8_86D7B6                                            ;869FF4|        |86D7B6;
     db $08                                                     ;869FF6|        |      ;
@@ -5993,12 +5509,10 @@ sObjectData0x01E2:
     dw DATA8_86D7CC                                            ;869FFA|        |86D7CC;
     db $08                                                     ;869FFC|        |      ;
     dw $0000                                                   ;869FFD|        |      ;
- 
 sObjectData0x01E3:
     dw DATA8_86D7D2                                            ;869FFF|        |86D7D2;
     db $FF                                                     ;86A001|        |      ;
     dw $0000                                                   ;86A002|        |      ;
- 
 sObjectData0x01E4:
     dw DATA8_86D7D8                                            ;86A004|        |86D7D8;
     db $0C                                                     ;86A006|        |      ;
@@ -6011,7 +5525,6 @@ sObjectData0x01E4:
     dw DATA8_86D795                                            ;86A010|        |86D795;
     db $FF                                                     ;86A012|        |      ;
     dw $0000                                                   ;86A013|        |      ;
- 
 sObjectData0x01E5:
     dw DATA8_86D7EE                                            ;86A015|        |86D7EE;
     db $04                                                     ;86A017|        |      ;
@@ -6028,22 +5541,18 @@ sObjectData0x01E5:
     dw DATA8_86D825                                            ;86A027|        |86D825;
     db $FF                                                     ;86A029|        |      ;
     dw $0000                                                   ;86A02A|        |      ;
- 
 sObjectData0x01E6:
     dw DATA8_86D835                                            ;86A02C|        |86D835;
     db $FF                                                     ;86A02E|        |      ;
     dw $0000                                                   ;86A02F|        |      ;
- 
 sObjectData0x01E7:
     dw DATA8_86D83B                                            ;86A031|        |86D83B;
     db $FF                                                     ;86A033|        |      ;
     dw $0000                                                   ;86A034|        |      ;
- 
 sObjectData0x01E8:
     dw DATA8_86D841                                            ;86A036|        |86D841;
     db $FF                                                     ;86A038|        |      ;
     dw $0000                                                   ;86A039|        |      ;
- 
 sObjectData0x01E9:
     dw DATA8_86D84C                                            ;86A03B|        |86D84C;
     db $10                                                     ;86A03D|        |      ;
@@ -6054,17 +5563,14 @@ sObjectData0x01E9:
     dw DATA8_86D841                                            ;86A044|        |86D841;
     db $10                                                     ;86A046|        |      ;
     dw $0000                                                   ;86A047|        |      ;
- 
 sObjectData0x01EA:
     dw DATA8_86D862                                            ;86A049|        |86D862;
     db $FF                                                     ;86A04B|        |      ;
     dw $0000                                                   ;86A04C|        |      ;
- 
 sObjectData0x01EB:
     dw DATA8_86D86D                                            ;86A04E|        |86D86D;
     db $FF                                                     ;86A050|        |      ;
     dw $0000                                                   ;86A051|        |      ;
- 
 sObjectData0x01EC:
     dw DATA8_86D878                                            ;86A053|        |86D878;
     db $08                                                     ;86A055|        |      ;
@@ -6073,7 +5579,6 @@ sObjectData0x01EC:
     dw DATA8_86D88E                                            ;86A059|        |86D88E;
     db $08                                                     ;86A05B|        |      ;
     dw $0000                                                   ;86A05C|        |      ;
- 
 sObjectData0x01ED:
     dw DATA8_86D878                                            ;86A05E|        |86D878;
     db $02                                                     ;86A060|        |      ;
@@ -6092,7 +5597,6 @@ sObjectData0x01ED:
     dw DATA8_86D88E                                            ;86A073|        |86D88E;
     db $FF                                                     ;86A075|        |      ;
     dw $0000                                                   ;86A076|        |      ;
- 
 sObjectData0x01EE:
     dw DATA8_86D8E9                                            ;86A078|        |86D8E9;
     db $14                                                     ;86A07A|        |      ;
@@ -6105,12 +5609,10 @@ sObjectData0x01EE:
     dw DATA8_86D841                                            ;86A084|        |86D841;
     db $FF                                                     ;86A086|        |      ;
     dw $0000                                                   ;86A087|        |      ;
- 
 sObjectData0x01EF:
     dw DATA8_86D8FF                                            ;86A089|        |86D8FF;
     db $FF                                                     ;86A08B|        |      ;
     dw $0000                                                   ;86A08C|        |      ;
- 
 sObjectData0x01F0:
     dw DATA8_86D8FF                                            ;86A08E|        |86D8FF;
     db $0C                                                     ;86A090|        |      ;
@@ -6127,7 +5629,6 @@ sObjectData0x01F0:
     dw DATA8_86D8FF                                            ;86A0A0|        |86D8FF;
     db $FF                                                     ;86A0A2|        |      ;
     dw $0000                                                   ;86A0A3|        |      ;
- 
 sObjectData0x01F1:
     dw DATA8_86D920                                            ;86A0A5|        |86D920;
     db $18                                                     ;86A0A7|        |      ;
@@ -6136,7 +5637,6 @@ sObjectData0x01F1:
     dw DATA8_86D915                                            ;86A0AB|        |86D915;
     db $FF                                                     ;86A0AD|        |      ;
     dw $0000                                                   ;86A0AE|        |      ;
- 
 sObjectData0x01F2:
     dw DATA8_86D920                                            ;86A0B0|        |86D920;
     db $0C                                                     ;86A0B2|        |      ;
@@ -6149,7 +5649,6 @@ sObjectData0x01F2:
     dw DATA8_86D999                                            ;86A0BC|        |86D999;
     db $FF                                                     ;86A0BE|        |      ;
     dw $0000                                                   ;86A0BF|        |      ;
- 
 sObjectData0x01F3:
     dw DATA8_86D936                                            ;86A0C1|        |86D936;
     db $20                                                     ;86A0C3|        |      ;
@@ -6162,14 +5661,12 @@ sObjectData0x01F3:
     dw DATA8_86D98E                                            ;86A0CD|        |86D98E;
     db $FF                                                     ;86A0CF|        |      ;
     dw $0000                                                   ;86A0D0|        |      ;
- 
 sObjectData0x01F4:
     dw DATA8_86D94C                                            ;86A0D2|        |86D94C;
     db $E0                                                     ;86A0D4|        |      ;
     dw DATA8_86D94C                                            ;86A0D5|        |86D94C;
     db $FF                                                     ;86A0D7|        |      ;
     dw $0000                                                   ;86A0D8|        |      ;
- 
 sObjectData0x01F5:
     dw DATA8_86D957                                            ;86A0DA|        |86D957;
     db $60                                                     ;86A0DC|        |      ;
@@ -6178,7 +5675,6 @@ sObjectData0x01F5:
     dw DATA8_86D94C                                            ;86A0E0|        |86D94C;
     db $FF                                                     ;86A0E2|        |      ;
     dw $0000                                                   ;86A0E3|        |      ;
- 
 sObjectData0x01F6:
     dw DATA8_86D962                                            ;86A0E5|        |86D962;
     db $0C                                                     ;86A0E7|        |      ;
@@ -6193,7 +5689,6 @@ sObjectData0x01F6:
     dw DATA8_86D999                                            ;86A0F4|        |86D999;
     db $FF                                                     ;86A0F6|        |      ;
     dw $0000                                                   ;86A0F7|        |      ;
- 
 sObjectData0x01F7:
     dw DATA8_86D978                                            ;86A0F9|        |86D978;
     db $0C                                                     ;86A0FB|        |      ;
@@ -6204,7 +5699,6 @@ sObjectData0x01F7:
     dw DATA8_86D999                                            ;86A102|        |86D999;
     db $FF                                                     ;86A104|        |      ;
     dw $0000                                                   ;86A105|        |      ;
- 
 sObjectData0x01F8:
     dw DATA8_86D98E                                            ;86A107|        |86D98E;
     db $0C                                                     ;86A109|        |      ;
@@ -6221,12 +5715,10 @@ sObjectData0x01F8:
     dw DATA8_86D999                                            ;86A119|        |86D999;
     db $FF                                                     ;86A11B|        |      ;
     dw $0000                                                   ;86A11C|        |      ;
- 
 sObjectData0x01F9:
     dw DATA8_86D9A4                                            ;86A11E|        |86D9A4;
     db $FF                                                     ;86A120|        |      ;
     dw $0000                                                   ;86A121|        |      ;
- 
 sObjectData0x01FA:
     dw DATA8_86D9A4                                            ;86A123|        |86D9A4;
     db $08                                                     ;86A125|        |      ;
@@ -6237,7 +5729,6 @@ sObjectData0x01FA:
     dw DATA8_86D9C5                                            ;86A12C|        |86D9C5;
     db $08                                                     ;86A12E|        |      ;
     dw $0000                                                   ;86A12F|        |      ;
- 
 sObjectData0x01FB:
     dw DATA8_86D9DB                                            ;86A131|        |86D9DB;
     db $12                                                     ;86A133|        |      ;
@@ -6248,12 +5739,10 @@ sObjectData0x01FB:
     dw DATA8_86D9D0                                            ;86A13A|        |86D9D0;
     db $12                                                     ;86A13C|        |      ;
     dw $0000                                                   ;86A13D|        |      ;
- 
 sObjectData0x01FC:
     dw DATA8_86D9FC                                            ;86A13F|        |86D9FC;
     db $FF                                                     ;86A141|        |      ;
     dw $0000                                                   ;86A142|        |      ;
- 
 sObjectData0x01FD:
     dw DATA8_86D9FC                                            ;86A144|        |86D9FC;
     db $0C                                                     ;86A146|        |      ;
@@ -6264,7 +5753,6 @@ sObjectData0x01FD:
     dw DATA8_86DA1D                                            ;86A14D|        |86DA1D;
     db $0C                                                     ;86A14F|        |      ;
     dw $0000                                                   ;86A150|        |      ;
- 
 sObjectData0x01FE:
     dw DATA8_86DA28                                            ;86A152|        |86DA28;
     db $12                                                     ;86A154|        |      ;
@@ -6275,7 +5763,6 @@ sObjectData0x01FE:
     dw DATA8_86DA49                                            ;86A15B|        |86DA49;
     db $12                                                     ;86A15D|        |      ;
     dw $0000                                                   ;86A15E|        |      ;
- 
 sObjectData0x01FF:
     dw DATA8_86DA54                                            ;86A160|        |86DA54;
     db $1C                                                     ;86A162|        |      ;
@@ -6288,12 +5775,10 @@ sObjectData0x01FF:
     dw DATA8_86DA54                                            ;86A16C|        |86DA54;
     db $FF                                                     ;86A16E|        |      ;
     dw $0000                                                   ;86A16F|        |      ;
- 
 sObjectData0x0200:
     dw DATA8_86DA6A                                            ;86A171|        |86DA6A;
     db $FF                                                     ;86A173|        |      ;
     dw $0000                                                   ;86A174|        |      ;
- 
 sObjectData0x0201:
     dw DATA8_86DA7A                                            ;86A176|        |86DA7A;
     db $12                                                     ;86A178|        |      ;
@@ -6304,7 +5789,6 @@ sObjectData0x0201:
     dw DATA8_86DA6A                                            ;86A17F|        |86DA6A;
     db $12                                                     ;86A181|        |      ;
     dw $0000                                                   ;86A182|        |      ;
- 
 sObjectData0x0202:
     dw DATA8_86DA9A                                            ;86A184|        |86DA9A;
     db $0C                                                     ;86A186|        |      ;
@@ -6313,7 +5797,6 @@ sObjectData0x0202:
     dw DATA8_86DABF                                            ;86A18A|        |86DABF;
     db $0C                                                     ;86A18C|        |      ;
     dw $0000                                                   ;86A18D|        |      ;
- 
 sObjectData0x0203:
     dw DATA8_86DAD4                                            ;86A18F|        |86DAD4;
     db $1C                                                     ;86A191|        |      ;
@@ -6324,12 +5807,10 @@ sObjectData0x0203:
     dw DATA8_86DA6A                                            ;86A198|        |86DA6A;
     db $FF                                                     ;86A19A|        |      ;
     dw $0000                                                   ;86A19B|        |      ;
- 
 sObjectData0x0204:
     dw DATA8_86DB03                                            ;86A19D|        |86DB03;
     db $FF                                                     ;86A19F|        |      ;
     dw $0000                                                   ;86A1A0|        |      ;
- 
 sObjectData0x0205:
     dw DATA8_86DB13                                            ;86A1A2|        |86DB13;
     db $18                                                     ;86A1A4|        |      ;
@@ -6346,7 +5827,6 @@ sObjectData0x0205:
     dw DATA8_86DB03                                            ;86A1B4|        |86DB03;
     db $FF                                                     ;86A1B6|        |      ;
     dw $0000                                                   ;86A1B7|        |      ;
- 
 sObjectData0x0206:
     dw DATA8_86DB48                                            ;86A1B9|        |86DB48;
     db $18                                                     ;86A1BB|        |      ;
@@ -6355,7 +5835,6 @@ sObjectData0x0206:
     dw DATA8_86DB33                                            ;86A1BF|        |86DB33;
     db $FF                                                     ;86A1C1|        |      ;
     dw $0000                                                   ;86A1C2|        |      ;
- 
 sObjectData0x0207:
     dw DATA8_86DB72                                            ;86A1C4|        |86DB72;
     db $18                                                     ;86A1C6|        |      ;
@@ -6364,7 +5843,6 @@ sObjectData0x0207:
     dw DATA8_86DB5D                                            ;86A1CA|        |86DB5D;
     db $FF                                                     ;86A1CC|        |      ;
     dw $0000                                                   ;86A1CD|        |      ;
- 
 sObjectData0x0208:
     dw DATA8_86DB97                                            ;86A1CF|        |86DB97;
     db $18                                                     ;86A1D1|        |      ;
@@ -6373,12 +5851,10 @@ sObjectData0x0208:
     dw DATA8_86DB87                                            ;86A1D5|        |86DB87;
     db $FF                                                     ;86A1D7|        |      ;
     dw $0000                                                   ;86A1D8|        |      ;
- 
 sObjectData0x0209:
     dw DATA8_86DBA7                                            ;86A1DA|        |86DBA7;
     db $0D                                                     ;86A1DC|        |      ;
     dw $0000                                                   ;86A1DD|        |      ;
- 
 sObjectData0x020A:
     dw DATA8_86DBB2                                            ;86A1DF|        |86DBB2;
     db $10                                                     ;86A1E1|        |      ;
@@ -6389,7 +5865,6 @@ sObjectData0x020A:
     dw DATA8_86DBA7                                            ;86A1E8|        |86DBA7;
     db $10                                                     ;86A1EA|        |      ;
     dw $0000                                                   ;86A1EB|        |      ;
- 
 sObjectData0x020B:
     dw DATA8_86DBA7                                            ;86A1ED|        |86DBA7;
     db $0A                                                     ;86A1EF|        |      ;
@@ -6398,12 +5873,10 @@ sObjectData0x020B:
     dw DATA8_86DBD3                                            ;86A1F3|        |86DBD3;
     db $0A                                                     ;86A1F5|        |      ;
     dw $0000                                                   ;86A1F6|        |      ;
- 
 sObjectData0x020C:
     dw DATA8_86DBDE                                            ;86A1F8|        |86DBDE;
     db $FF                                                     ;86A1FA|        |      ;
     dw $0000                                                   ;86A1FB|        |      ;
- 
 sObjectData0x020D:
     dw DATA8_86DBDE                                            ;86A1FD|        |86DBDE;
     db $10                                                     ;86A1FF|        |      ;
@@ -6414,7 +5887,6 @@ sObjectData0x020D:
     dw DATA8_86DBF4                                            ;86A206|        |86DBF4;
     db $10                                                     ;86A208|        |      ;
     dw $0000                                                   ;86A209|        |      ;
- 
 sObjectData0x020E:
     dw DATA8_86DBFF                                            ;86A20B|        |86DBFF;
     db $0A                                                     ;86A20D|        |      ;
@@ -6423,12 +5895,10 @@ sObjectData0x020E:
     dw DATA8_86DC15                                            ;86A211|        |86DC15;
     db $0A                                                     ;86A213|        |      ;
     dw $0000                                                   ;86A214|        |      ;
- 
 sObjectData0x020F:
     dw DATA8_86DC20                                            ;86A216|        |86DC20;
     db $FF                                                     ;86A218|        |      ;
     dw $0000                                                   ;86A219|        |      ;
- 
 sObjectData0x0210:
     dw DATA8_86DC30                                            ;86A21B|        |86DC30;
     db $10                                                     ;86A21D|        |      ;
@@ -6439,7 +5909,6 @@ sObjectData0x0210:
     dw DATA8_86DC20                                            ;86A224|        |86DC20;
     db $10                                                     ;86A226|        |      ;
     dw $0000                                                   ;86A227|        |      ;
- 
 sObjectData0x0211:
     dw DATA8_86DC20                                            ;86A229|        |86DC20;
     db $08                                                     ;86A22B|        |      ;
@@ -6448,92 +5917,78 @@ sObjectData0x0211:
     dw DATA8_86DC60                                            ;86A22F|        |86DC60;
     db $08                                                     ;86A231|        |      ;
     dw $0000                                                   ;86A232|        |      ;
- 
 sObjectData0x0212:
     dw DATA8_86DC75                                            ;86A234|        |86DC75;
     db $08                                                     ;86A236|        |      ;
     dw DATA8_86DC7B                                            ;86A237|        |86DC7B;
     db $08                                                     ;86A239|        |      ;
     dw $0000                                                   ;86A23A|        |      ;
- 
 sObjectData0x0213:
     dw DATA8_86DC81                                            ;86A23C|        |86DC81;
     db $08                                                     ;86A23E|        |      ;
     dw DATA8_86DC87                                            ;86A23F|        |86DC87;
     db $08                                                     ;86A241|        |      ;
     dw $0000                                                   ;86A242|        |      ;
- 
 sObjectData0x0214:
     dw DATA8_86DC8D                                            ;86A244|        |86DC8D;
     db $08                                                     ;86A246|        |      ;
     dw DATA8_86DC93                                            ;86A247|        |86DC93;
     db $08                                                     ;86A249|        |      ;
     dw $0000                                                   ;86A24A|        |      ;
- 
 sObjectData0x0215:
     dw DATA8_86DC99                                            ;86A24C|        |86DC99;
     db $20                                                     ;86A24E|        |      ;
     dw DATA8_86DC9F                                            ;86A24F|        |86DC9F;
     db $18                                                     ;86A251|        |      ;
     dw $0000                                                   ;86A252|        |      ;
- 
 sObjectData0x0216:
     dw DATA8_86DCA5                                            ;86A254|        |86DCA5;
     db $08                                                     ;86A256|        |      ;
     dw DATA8_86DCAB                                            ;86A257|        |86DCAB;
     db $08                                                     ;86A259|        |      ;
     dw $0000                                                   ;86A25A|        |      ;
- 
 sObjectData0x0217:
     dw DATA8_86DCB1                                            ;86A25C|        |86DCB1;
     db $12                                                     ;86A25E|        |      ;
     dw DATA8_86DCB7                                            ;86A25F|        |86DCB7;
     db $12                                                     ;86A261|        |      ;
     dw $0000                                                   ;86A262|        |      ;
- 
 sObjectData0x0218:
     dw DATA8_86DCBD                                            ;86A264|        |86DCBD;
     db $12                                                     ;86A266|        |      ;
     dw DATA8_86DCC3                                            ;86A267|        |86DCC3;
     db $12                                                     ;86A269|        |      ;
     dw $0000                                                   ;86A26A|        |      ;
- 
 sObjectData0x0219:
     dw DATA8_86DCC9                                            ;86A26C|        |86DCC9;
     db $18                                                     ;86A26E|        |      ;
     dw DATA8_86DCCF                                            ;86A26F|        |86DCCF;
     db $18                                                     ;86A271|        |      ;
     dw $0000                                                   ;86A272|        |      ;
- 
 sObjectData0x021A:
     dw DATA8_86DCD5                                            ;86A274|        |86DCD5;
     db $30                                                     ;86A276|        |      ;
     dw DATA8_86DCDB                                            ;86A277|        |86DCDB;
     db $20                                                     ;86A279|        |      ;
     dw $0000                                                   ;86A27A|        |      ;
- 
 sObjectData0x021B:
     dw DATA8_86DCE1                                            ;86A27C|        |86DCE1;
     db $10                                                     ;86A27E|        |      ;
     dw DATA8_86DCE7                                            ;86A27F|        |86DCE7;
     db $10                                                     ;86A281|        |      ;
     dw $0000                                                   ;86A282|        |      ;
- 
 sObjectData0x021C:
     dw DATA8_86DCED                                            ;86A284|        |86DCED;
     db $FF                                                     ;86A286|        |      ;
     dw $0000                                                   ;86A287|        |      ;
- 
 sObjectData0x021D:
     dw DATA8_86DCF3                                            ;86A289|        |86DCF3;
     db $FF                                                     ;86A28B|        |      ;
     dw $0000                                                   ;86A28C|        |      ;
- 
 sObjectData0x021E:
     dw DATA8_86DCF9                                            ;86A28E|        |86DCF9;
     db $FF                                                     ;86A290|        |      ;
     dw $0000                                                   ;86A291|        |      ;
- 
 sObjectData0x021F:
     dw DATA8_86DD04                                            ;86A293|        |86DD04;
     db $10                                                     ;86A295|        |      ;
@@ -6544,12 +5999,10 @@ sObjectData0x021F:
     dw DATA8_86DCF9                                            ;86A29C|        |86DCF9;
     db $10                                                     ;86A29E|        |      ;
     dw $0000                                                   ;86A29F|        |      ;
- 
 sObjectData0x0220:
     dw DATA8_86DD1A                                            ;86A2A1|        |86DD1A;
     db $FF                                                     ;86A2A3|        |      ;
     dw $0000                                                   ;86A2A4|        |      ;
- 
 sObjectData0x0221:
     dw DATA8_86DD25                                            ;86A2A6|        |86DD25;
     db $10                                                     ;86A2A8|        |      ;
@@ -6560,12 +6013,10 @@ sObjectData0x0221:
     dw DATA8_86DD1A                                            ;86A2AF|        |86DD1A;
     db $10                                                     ;86A2B1|        |      ;
     dw $0000                                                   ;86A2B2|        |      ;
- 
 sObjectData0x0222:
     dw DATA8_86DD3B                                            ;86A2B4|        |86DD3B;
     db $FF                                                     ;86A2B6|        |      ;
     dw $0000                                                   ;86A2B7|        |      ;
- 
 sObjectData0x0223:
     dw DATA8_86DD46                                            ;86A2B9|        |86DD46;
     db $10                                                     ;86A2BB|        |      ;
@@ -6576,24 +6027,20 @@ sObjectData0x0223:
     dw DATA8_86DD3B                                            ;86A2C2|        |86DD3B;
     db $10                                                     ;86A2C4|        |      ;
     dw $0000                                                   ;86A2C5|        |      ;
- 
 sObjectData0x0224:
     dw DATA8_86DD5C                                            ;86A2C7|        |86DD5C;
     db $FF                                                     ;86A2C9|        |      ;
     dw $0000                                                   ;86A2CA|        |      ;
- 
 sObjectData0x0225:
     dw DATA8_86DD67                                            ;86A2CC|        |86DD67;
     db $80                                                     ;86A2CE|        |      ;
     dw DATA8_86DD67                                            ;86A2CF|        |86DD67;
     db $FF                                                     ;86A2D1|        |      ;
     dw $0000                                                   ;86A2D2|        |      ;
- 
 sObjectData0x0226:
     dw DATA8_86DD72                                            ;86A2D4|        |86DD72;
     db $FF                                                     ;86A2D6|        |      ;
     dw $0000                                                   ;86A2D7|        |      ;
- 
 sObjectData0x0227:
     dw DATA8_86DD7D                                            ;86A2D9|        |86DD7D;
     db $10                                                     ;86A2DB|        |      ;
@@ -6604,12 +6051,10 @@ sObjectData0x0227:
     dw DATA8_86DD72                                            ;86A2E2|        |86DD72;
     db $10                                                     ;86A2E4|        |      ;
     dw $0000                                                   ;86A2E5|        |      ;
- 
 sObjectData0x0228:
     dw DATA8_86DD93                                            ;86A2E7|        |86DD93;
     db $FF                                                     ;86A2E9|        |      ;
     dw $0000                                                   ;86A2EA|        |      ;
- 
 sObjectData0x0229:
     dw DATA8_86DD9E                                            ;86A2EC|        |86DD9E;
     db $10                                                     ;86A2EE|        |      ;
@@ -6620,12 +6065,10 @@ sObjectData0x0229:
     dw DATA8_86DD93                                            ;86A2F5|        |86DD93;
     db $10                                                     ;86A2F7|        |      ;
     dw $0000                                                   ;86A2F8|        |      ;
- 
 sObjectData0x022A:
     dw DATA8_86DDB4                                            ;86A2FA|        |86DDB4;
     db $FF                                                     ;86A2FC|        |      ;
     dw $0000                                                   ;86A2FD|        |      ;
- 
 sObjectData0x022B:
     dw DATA8_86DDC4                                            ;86A2FF|        |86DDC4;
     db $10                                                     ;86A301|        |      ;
@@ -6636,102 +6079,84 @@ sObjectData0x022B:
     dw DATA8_86DDB4                                            ;86A308|        |86DDB4;
     db $10                                                     ;86A30A|        |      ;
     dw $0000                                                   ;86A30B|        |      ;
- 
 sObjectData0x022C:
     dw DATA8_86DDE4                                            ;86A30D|        |86DDE4;
     db $0F                                                     ;86A30F|        |      ;
     dw DATA8_86DDF9                                            ;86A310|        |86DDF9;
     db $0F                                                     ;86A312|        |      ;
     dw $0000                                                   ;86A313|        |      ;
- 
 sObjectData0x022D:
     dw DATA8_86DE0E                                            ;86A315|        |86DE0E;
     db $80                                                     ;86A317|        |      ;
     dw DATA8_86DE0E                                            ;86A318|        |86DE0E;
     db $FF                                                     ;86A31A|        |      ;
     dw $0000                                                   ;86A31B|        |      ;
- 
 sObjectData0x022E:
     dw DATA8_86DE1E                                            ;86A31D|        |86DE1E;
     db $FF                                                     ;86A31F|        |      ;
     dw $0000                                                   ;86A320|        |      ;
- 
 sObjectData0x022F:
     dw DATA8_86DE29                                            ;86A322|        |86DE29;
     db $FF                                                     ;86A324|        |      ;
     dw $0000                                                   ;86A325|        |      ;
- 
 sObjectData0x0230:
     dw DATA8_86DE34                                            ;86A327|        |86DE34;
     db $20                                                     ;86A329|        |      ;
     dw DATA8_86DE3F                                            ;86A32A|        |86DE3F;
     db $20                                                     ;86A32C|        |      ;
     dw $0000                                                   ;86A32D|        |      ;
- 
 sObjectData0x0231:
     dw DATA8_86DE4A                                            ;86A32F|        |86DE4A;
     db $FF                                                     ;86A331|        |      ;
     dw $0000                                                   ;86A332|        |      ;
- 
 sObjectData0x0232:
     dw DATA8_86DE55                                            ;86A334|        |86DE55;
     db $FF                                                     ;86A336|        |      ;
     dw $0000                                                   ;86A337|        |      ;
- 
 sObjectData0x0233:
     dw DATA8_86DE60                                            ;86A339|        |86DE60;
     db $FF                                                     ;86A33B|        |      ;
     dw $0000                                                   ;86A33C|        |      ;
- 
 sObjectData0x0234:
     dw DATA8_86DE6B                                            ;86A33E|        |86DE6B;
     db $FF                                                     ;86A340|        |      ;
     dw $0000                                                   ;86A341|        |      ;
- 
 sObjectData0x0235:
     dw DATA8_86DE71                                            ;86A343|        |86DE71;
     db $FF                                                     ;86A345|        |      ;
     dw $0000                                                   ;86A346|        |      ;
- 
 sObjectData0x0236:
     dw DATA8_86DE77                                            ;86A348|        |86DE77;
     db $FF                                                     ;86A34A|        |      ;
     dw $0000                                                   ;86A34B|        |      ;
- 
 sObjectData0x0237:
     dw DATA8_86DE7D                                            ;86A34D|        |86DE7D;
     db $FF                                                     ;86A34F|        |      ;
     dw $0000                                                   ;86A350|        |      ;
- 
 sObjectData0x0238:
     dw DATA8_86DE83                                            ;86A352|        |86DE83;
     db $1C                                                     ;86A354|        |      ;
     dw DATA8_86DE89                                            ;86A355|        |86DE89;
     db $1C                                                     ;86A357|        |      ;
     dw $0000                                                   ;86A358|        |      ;
- 
 sObjectData0x0239:
     dw DATA8_86DE89                                            ;86A35A|        |86DE89;
     db $FF                                                     ;86A35C|        |      ;
     dw $0000                                                   ;86A35D|        |      ;
- 
 sObjectData0x023A:
     dw DATA8_86DE8F                                            ;86A35F|        |86DE8F;
     db $1C                                                     ;86A361|        |      ;
     dw DATA8_86DE9A                                            ;86A362|        |86DE9A;
     db $1C                                                     ;86A364|        |      ;
     dw $0000                                                   ;86A365|        |      ;
- 
 sObjectData0x023B:
     dw DATA8_86DE9A                                            ;86A367|        |86DE9A;
     db $FF                                                     ;86A369|        |      ;
     dw $0000                                                   ;86A36A|        |      ;
- 
 sObjectData0x023C:
     dw DATA8_86DEA5                                            ;86A36C|        |86DEA5;
     db $FF                                                     ;86A36E|        |      ;
     dw $0000                                                   ;86A36F|        |      ;
- 
 sObjectData0x023D:
     dw DATA8_86DEB0                                            ;86A371|        |86DEB0;
     db $10                                                     ;86A373|        |      ;
@@ -6742,12 +6167,10 @@ sObjectData0x023D:
     dw DATA8_86DEA5                                            ;86A37A|        |86DEA5;
     db $10                                                     ;86A37C|        |      ;
     dw $0000                                                   ;86A37D|        |      ;
- 
 sObjectData0x023E:
     dw DATA8_86DEC6                                            ;86A37F|        |86DEC6;
     db $FF                                                     ;86A381|        |      ;
     dw $0000                                                   ;86A382|        |      ;
- 
 sObjectData0x023F:
     dw DATA8_86DED1                                            ;86A384|        |86DED1;
     db $10                                                     ;86A386|        |      ;
@@ -6758,12 +6181,10 @@ sObjectData0x023F:
     dw DATA8_86DEC6                                            ;86A38D|        |86DEC6;
     db $10                                                     ;86A38F|        |      ;
     dw $0000                                                   ;86A390|        |      ;
- 
 sObjectData0x0240:
     dw DATA8_86DEE7                                            ;86A392|        |86DEE7;
     db $FF                                                     ;86A394|        |      ;
     dw $0000                                                   ;86A395|        |      ;
- 
 sObjectData0x0241:
     dw DATA8_86DEF2                                            ;86A397|        |86DEF2;
     db $10                                                     ;86A399|        |      ;
@@ -6774,24 +6195,20 @@ sObjectData0x0241:
     dw DATA8_86DEE7                                            ;86A3A0|        |86DEE7;
     db $10                                                     ;86A3A2|        |      ;
     dw $0000                                                   ;86A3A3|        |      ;
- 
 sObjectData0x0242:
     dw DATA8_86DF08                                            ;86A3A5|        |86DF08;
     db $FF                                                     ;86A3A7|        |      ;
     dw $0000                                                   ;86A3A8|        |      ;
- 
 sObjectData0x0243:
     dw DATA8_86DF13                                            ;86A3AA|        |86DF13;
     db $80                                                     ;86A3AC|        |      ;
     dw DATA8_86DF13                                            ;86A3AD|        |86DF13;
     db $FF                                                     ;86A3AF|        |      ;
     dw $0000                                                   ;86A3B0|        |      ;
- 
 sObjectData0x0244:
     dw DATA8_86DF1E                                            ;86A3B2|        |86DF1E;
     db $FF                                                     ;86A3B4|        |      ;
     dw $0000                                                   ;86A3B5|        |      ;
- 
 sObjectData0x0245:
     dw DATA8_86DF29                                            ;86A3B7|        |86DF29;
     db $10                                                     ;86A3B9|        |      ;
@@ -6802,12 +6219,10 @@ sObjectData0x0245:
     dw DATA8_86DF1E                                            ;86A3C0|        |86DF1E;
     db $10                                                     ;86A3C2|        |      ;
     dw $0000                                                   ;86A3C3|        |      ;
- 
 sObjectData0x0246:
     dw DATA8_86DF3F                                            ;86A3C5|        |86DF3F;
     db $FF                                                     ;86A3C7|        |      ;
     dw $0000                                                   ;86A3C8|        |      ;
- 
 sObjectData0x0247:
     dw DATA8_86DF4A                                            ;86A3CA|        |86DF4A;
     db $10                                                     ;86A3CC|        |      ;
@@ -6818,12 +6233,10 @@ sObjectData0x0247:
     dw DATA8_86DF3F                                            ;86A3D3|        |86DF3F;
     db $10                                                     ;86A3D5|        |      ;
     dw $0000                                                   ;86A3D6|        |      ;
- 
 sObjectData0x0248:
     dw DATA8_86DF60                                            ;86A3D8|        |86DF60;
     db $FF                                                     ;86A3DA|        |      ;
     dw $0000                                                   ;86A3DB|        |      ;
- 
 sObjectData0x0249:
     dw DATA8_86DF70                                            ;86A3DD|        |86DF70;
     db $10                                                     ;86A3DF|        |      ;
@@ -6834,19 +6247,16 @@ sObjectData0x0249:
     dw DATA8_86DF60                                            ;86A3E6|        |86DF60;
     db $10                                                     ;86A3E8|        |      ;
     dw $0000                                                   ;86A3E9|        |      ;
- 
 sObjectData0x024A:
     dw DATA8_86DF8B                                            ;86A3EB|        |86DF8B;
     db $80                                                     ;86A3ED|        |      ;
     dw DATA8_86DF8B                                            ;86A3EE|        |86DF8B;
     db $FF                                                     ;86A3F0|        |      ;
     dw $0000                                                   ;86A3F1|        |      ;
- 
 sObjectData0x024B:
     dw DATA8_86DF9B                                            ;86A3F3|        |86DF9B;
     db $FF                                                     ;86A3F5|        |      ;
     dw $0000                                                   ;86A3F6|        |      ;
- 
 sObjectData0x024C:
     dw DATA8_86DFB0                                            ;86A3F8|        |86DFB0;
     db $10                                                     ;86A3FA|        |      ;
@@ -6857,12 +6267,10 @@ sObjectData0x024C:
     dw DATA8_86DF9B                                            ;86A401|        |86DF9B;
     db $10                                                     ;86A403|        |      ;
     dw $0000                                                   ;86A404|        |      ;
- 
 sObjectData0x024D:
     dw DATA8_86DFDA                                            ;86A406|        |86DFDA;
     db $FF                                                     ;86A408|        |      ;
     dw $0000                                                   ;86A409|        |      ;
- 
 sObjectData0x024E:
     dw DATA8_86DFEF                                            ;86A40B|        |86DFEF;
     db $10                                                     ;86A40D|        |      ;
@@ -6873,12 +6281,10 @@ sObjectData0x024E:
     dw DATA8_86DFDA                                            ;86A414|        |86DFDA;
     db $10                                                     ;86A416|        |      ;
     dw $0000                                                   ;86A417|        |      ;
- 
 sObjectData0x024F:
     dw DATA8_86E019                                            ;86A419|        |86E019;
     db $FF                                                     ;86A41B|        |      ;
     dw $0000                                                   ;86A41C|        |      ;
- 
 sObjectData0x0250:
     dw DATA8_86E029                                            ;86A41E|        |86E029;
     db $10                                                     ;86A420|        |      ;
@@ -6889,65 +6295,54 @@ sObjectData0x0250:
     dw DATA8_86E019                                            ;86A427|        |86E019;
     db $10                                                     ;86A429|        |      ;
     dw $0000                                                   ;86A42A|        |      ;
- 
 sObjectData0x0251:
     dw DATA8_86E049                                            ;86A42C|        |86E049;
     db $16                                                     ;86A42E|        |      ;
     dw DATA8_86E059                                            ;86A42F|        |86E059;
     db $16                                                     ;86A431|        |      ;
     dw $0000                                                   ;86A432|        |      ;
- 
 sObjectData0x0252:
     dw DATA8_86E069                                            ;86A434|        |86E069;
     db $80                                                     ;86A436|        |      ;
     dw DATA8_86E069                                            ;86A437|        |86E069;
     db $FF                                                     ;86A439|        |      ;
     dw $0000                                                   ;86A43A|        |      ;
- 
 sObjectData0x0253:
     dw DATA8_86E079                                            ;86A43C|        |86E079;
     db $20                                                     ;86A43E|        |      ;
     dw DATA8_86E084                                            ;86A43F|        |86E084;
     db $40                                                     ;86A441|        |      ;
     dw $0000                                                   ;86A442|        |      ;
- 
 sObjectData0x0254:
     dw DATA8_86E084                                            ;86A444|        |86E084;
     db $FF                                                     ;86A446|        |      ;
     dw $0000                                                   ;86A447|        |      ;
- 
 sObjectData0x0255:
     dw DATA8_86E08F                                            ;86A449|        |86E08F;
     db $FF                                                     ;86A44B|        |      ;
     dw $0000                                                   ;86A44C|        |      ;
- 
 sObjectData0x0256:
     dw DATA8_86E095                                            ;86A44E|        |86E095;
     db $FF                                                     ;86A450|        |      ;
     dw $0000                                                   ;86A451|        |      ;
- 
 sObjectData0x0257:
     dw DATA8_86E09B                                            ;86A453|        |86E09B;
     db $FF                                                     ;86A455|        |      ;
     dw $0000                                                   ;86A456|        |      ;
- 
 sObjectData0x0258:
     dw DATA8_86E0A6                                            ;86A458|        |86E0A6;
     db $10                                                     ;86A45A|        |      ;
     dw DATA8_86E0B1                                            ;86A45B|        |86E0B1;
     db $10                                                     ;86A45D|        |      ;
     dw $0000                                                   ;86A45E|        |      ;
- 
 sObjectData0x0259:
     dw DATA8_86E0B1                                            ;86A460|        |86E0B1;
     db $FF                                                     ;86A462|        |      ;
     dw $0000                                                   ;86A463|        |      ;
- 
 sObjectData0x025A:
     dw DATA8_86E0BC                                            ;86A465|        |86E0BC;
     db $FF                                                     ;86A467|        |      ;
     dw $0000                                                   ;86A468|        |      ;
- 
 sObjectData0x025B:
     dw DATA8_86E0C7                                            ;86A46A|        |86E0C7;
     db $10                                                     ;86A46C|        |      ;
@@ -6958,12 +6353,10 @@ sObjectData0x025B:
     dw DATA8_86E0BC                                            ;86A473|        |86E0BC;
     db $10                                                     ;86A475|        |      ;
     dw $0000                                                   ;86A476|        |      ;
- 
 sObjectData0x025C:
     dw DATA8_86E0DD                                            ;86A478|        |86E0DD;
     db $FF                                                     ;86A47A|        |      ;
     dw $0000                                                   ;86A47B|        |      ;
- 
 sObjectData0x025D:
     dw DATA8_86E0E8                                            ;86A47D|        |86E0E8;
     db $10                                                     ;86A47F|        |      ;
@@ -6974,12 +6367,10 @@ sObjectData0x025D:
     dw DATA8_86E0DD                                            ;86A486|        |86E0DD;
     db $10                                                     ;86A488|        |      ;
     dw $0000                                                   ;86A489|        |      ;
- 
 sObjectData0x025E:
     dw DATA8_86E0FE                                            ;86A48B|        |86E0FE;
     db $FF                                                     ;86A48D|        |      ;
     dw $0000                                                   ;86A48E|        |      ;
- 
 sObjectData0x025F:
     dw DATA8_86E109                                            ;86A490|        |86E109;
     db $10                                                     ;86A492|        |      ;
@@ -6990,14 +6381,12 @@ sObjectData0x025F:
     dw DATA8_86E0FE                                            ;86A499|        |86E0FE;
     db $10                                                     ;86A49B|        |      ;
     dw $0000                                                   ;86A49C|        |      ;
- 
 sObjectData0x0260:
     dw DATA8_86E11F                                            ;86A49E|        |86E11F;
     db $60                                                     ;86A4A0|        |      ;
     dw DATA8_86E0BC                                            ;86A4A1|        |86E0BC;
     db $FF                                                     ;86A4A3|        |      ;
     dw $0000                                                   ;86A4A4|        |      ;
- 
 sObjectData0x0261:
     dw DATA8_86E12A                                            ;86A4A6|        |86E12A;
     db $20                                                     ;86A4A8|        |      ;

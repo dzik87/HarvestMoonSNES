@@ -93,6 +93,12 @@
     incsrc "DIALOGS/US/bank_BA.asm"
     incsrc "DIALOGS/US/bank_BB.asm"
     
+    ; Unused
+    ;incsrc "DATA/padding/bank_BC.asm"
+    ;incsrc "DATA/padding/bank_BD.asm"
+    ;incsrc "DATA/padding/bank_BE.asm"
+    ;incsrc "DATA/padding/bank_BF.asm"
+    
     ; Source Code
     incsrc "SOURCE/helpers.asm"
     incsrc "SOURCE/bank_80.asm"

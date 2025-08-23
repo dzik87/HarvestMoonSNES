@@ -1552,7 +1552,7 @@ fCore_SetBrightness:
     BNE +                                                      ;808E32|D002    |808E36;
     LDA.B #$80                                                 ;808E34|A980    |      ;
  
-  + STA.L $80007E                                              ;808E36|8F7E0080|80007E;
+  + STA.L strcVariables.n16Temp1+$20000                        ;808E36|8F7E0080|80007E;
     LDA.B strcSystem.INIDISP                                   ;808E3A|A524    |000024;
     AND.B #!INIDISP_FORCEBLANK                                                 
     ORA.B strcVariables.n16Temp1                               ;808E3E|057E    |00007E;
@@ -5513,7 +5513,6 @@ nTable_80AA68:
  
 nTable_80AA72:
     dw $0000,$1000,$2000,$4000,$4000                           ;80AA72|        |      ;
- 
 aTileMapData:
     dw sFarmSpringMap                                          ;80AA7C|        |80AB3C; 0x60 * [ptr16]
     dw sFarmSummerMap                                          ;80AA7E|        |80AB5F;
@@ -6879,7 +6878,6 @@ nToolSoundData_80B8CD:
     dw $0400,$0502,$0303,$0403,$0103,$0302                     ;80B8CD|        |      ; 0x0D * [n16]
     dw $0303,$0401,$0303,$0104,$0301,$0101                     ;80B8D9|        |      ;
     dw $0201                                                   ;80B8E5|        |      ;
- 
 pAudioEngine_MapMusic:
     dw aAudioEngine_MapMusicId_0x00                            ;80B8E7|        |80B9A7; 0x60 * [ptr16]
     dw aAudioEngine_MapMusicId_0x00                            ;80B8E9|        |80B9A7;
@@ -7043,7 +7041,6 @@ sData42_80B9F5:
     db $BD,$7F,$28                                             ;80B9F5|        |      ;
     dw $FFFE                                                   ;80B9F8|        |      ;
     dl sData42_80B9EF                                          ;80B9FA|        |80B9EF;
- 
 aPalettes:
     dl sPalette_0x0A                                           ;80B9FD|        |A89400; 0x75 * [ptr24]
     dl sPalette_0x0B                                           ;80BA00|        |A89600;
@@ -7246,7 +7243,6 @@ aMapPalettesId:
     db $6B,$6C,$6B,$6C,$6B,$6C,$6B,$6C,$6B,$6C,$6B,$6C         ;80BEC8|        |      ;
     db $6B,$6C,$6B,$6C,$6B,$6C,$FF,$FF,$FF,$FF,$FF,$FF         ;80BED4|        |      ;
     db $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF         ;80BEE0|        |      ;
- 
 pSubrutineTable_80BEEC:
     dw subUnknown_80C36C                                       ;80BEEC|        |80C36C; 0x60 * [ptr16, ptr16, ptr16, ptr16, ptr16, n16]
     dw subUnknown_80C36C                                       ;80BEEE|        |80C36C;

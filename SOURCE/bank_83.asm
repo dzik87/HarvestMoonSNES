@@ -172,7 +172,7 @@ fMathDivide:
     PLA                                                        ;838131|68      |      ;
     LSR A                                                      ;838132|4A      |      ;
     LDA.B strcVariables.n16Temp3                               ;838133|A582    |000082;
-    JMP.W --                                                   ;838135|4C0F81  |83810F;
+    JMP.W $810F                                                ;838135|4C0F81  |83810F;
  
  
 fGetRandomNumber:
@@ -2046,7 +2046,6 @@ aAudioUnknown_838F4F:
     dw $01D1,$0293,$023D,$02F2,$0435,$0113                     ;838F67|        |      ;
     dw $04B7,$007A,$0080,$00DB,$011E,$00B0                     ;838F73|        |      ;
     dw $005C,$00BC                                             ;838F7F|        |      ;
- 
 sAudioData1_838F83:
     dl sAudioTrack_Spring                                      ;838F83|        |AD8FD6; 0x1A * [ptr24 pAudioTrack, n8, n8, n8, n8, n8, n8, n8, n8, n8, n8, n8]
     db $07,$03,$01,$0C,$05,$26,$24,$00,$00,$00,$00             ;838F86|        |      ;
@@ -2991,7 +2990,6 @@ fDialog_GetGlyphPointer:
     STA.B ptrTemp0x72                                          ;8398AB|8572    |000072; save calculated offset to memory
     RTS                                                        ;8398AD|60      |      ;
  
- 
 aLetterGlyphsPointers:
     dl sFontGlyphs_0x00                                        ;8398AE|        |949843; 0x0A * [ptr24]
     dl sFontGlyphs_0x01                                        ;8398B1|        |94A843;
@@ -3010,7 +3008,6 @@ aTextDataTableFFFE:
 pTextAmmountTable:
     dl $000001,$00000A,$000064,$0003E8                         ;8398D6|        |      ; 0x06 * [n24/ptr24] (used for example to show any variable number for example: money, logs, etc on text screen. Last entry seems to be ptr24)
     dl $002710,$0186A0,$0F4240,$989680                         ;8398E2|        |      ;
- 
 aTextDataTableFFFC:
     dl $7F1F04                                                 ;8398EE|        |7F1F04; 0x70 * [ptr28 pData, n8 nSize]
     db $03                                                     ;8398F1|        |      ;
@@ -3236,7 +3233,6 @@ aTextDataTableFFFC:
     db $02                                                     ;839AA9|        |      ;
     dl $7F1F56                                                 ;839AAA|        |7F1F56;
     db $02                                                     ;839AAD|        |      ;
- 
 aTextDataTableFFFD:
     dl $8008DD                                                 ;839AAE|        |8008DD; 0x52 * [ptr28 pData, n8 nSize]
     db $08                                                     ;839AB1|        |      ;
@@ -3402,7 +3398,6 @@ aTextDataTableFFFD:
     db $0C                                                     ;839BF1|        |      ;
     dl $8008D5                                                 ;839BF2|        |8008D5;
     db $08                                                     ;839BF5|        |      ;
- 
 aDialogPointers:
     dl sDialogUS_0x0000                                        ;839BF6|        |B68000; 0x0498 * [ptr24]
     dl sDialogUS_0x0001                                        ;839BF9|        |B680D8;
@@ -4936,7 +4931,6 @@ fGameEngine_DirectionHandler83AD91:
     TAX                                                        ;83ADA2|AA      |      ;
     JMP.W (.jumpTable,X)                                       ;83ADA3|7CA6AD  |83ADA6;
  
- 
 .jumpTable:
     dw .case0                                                  ;83ADA6|        |83ADAE;
     dw .case1                                                  ;83ADA8|        |83ADC4;
@@ -5116,7 +5110,6 @@ fGameEngine_Unknown83AEC3:
     TAX                                                        ;83AEC6|AA      |      ;
     JMP.W (.aJumpTable,X)                                      ;83AEC7|7CCAAE  |83AECA; X = nIndex * 2
  
- 
 .aJumpTable:
     dw .case0                                                  ;83AECA|        |83AED2;
     dw .case1                                                  ;83AECC|        |83AEDF;
@@ -5199,7 +5192,6 @@ fGameEngine_DirectionHandler83AF37:
     ASL A                                                      ;83AF39|0A      |      ;
     TAX                                                        ;83AF3A|AA      |      ;
     JMP.W (.aJumpTable,X)                                      ;83AF3B|7C3EAF  |83AF3E;
- 
  
 .aJumpTable:
     dw .case0                                                  ;83AF3E|        |83AF46;
@@ -8724,7 +8716,6 @@ fMapEngine_AreaEvents:
     TAX                                                        ;83CAA4|AA      |      ;
     JSR.W (.areaEventsJumpTable,X)                             ;83CAA5|FCA9CA  |83CAA9;
     RTL                                                        ;83CAA8|6B      |      ;
- 
  
 .areaEventsJumpTable:
     dw fAreaEvents_Farm                                        ;83CAA9|        |83CB69; 0x60 * [ptr16]
