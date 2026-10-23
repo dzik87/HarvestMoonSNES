@@ -12,6 +12,7 @@
 | 1a | przeniesienie plików do `src/` bez zmian treści | hash US zgodny |
 | 1b | podział banków 80–85 na moduły (konkatenacja == oryginał) | hash US zgodny |
 | 2 | skrypty AI (US): 7622 surowych adresów → etykiety (`<skrypt>_Lnnn`) | hash US zgodny |
+| 2c | skrypty AI (US) podzielone na 72 pliki per skrypt + 3 nagłówki banków (konkatenacja == oryginał) | hash US zgodny |
 | 2b | dokumentacja 90 komend AICMD z handlerów interpretera (`docs/ai/commands/*.yml` → `docs/ai/commands.md`) | wyrywkowa weryfikacja w kodzie; bez zmian w źródłach |
 
 ## Stan wersji regionalnych (z analizy przed migracją)
