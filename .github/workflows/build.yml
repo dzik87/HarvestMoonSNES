@@ -51,15 +51,19 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Build and verify (US)
-        run: python3 tools/build.py --region US -v | tee build-us.log
+        run: |
+          set -o pipefail
+          python3 tools/build.py --region US -v 2>&1 | tee build-us.log
 
-      - name: Job summary
+      - name: Report result
         if: always()
         run: |
+          MSG=$(tail -n 25 build-us.log 2>/dev/null | sed ':a;N;$!ba;s/\n/%0A/g')
+          echo "::notice title=build-us log::${MSG}"
           {
             echo "### Build US"
             echo '```'
-            tail -n 12 build-us.log || true
+            tail -n 25 build-us.log 2>/dev/null || echo "brak logu"
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
 
