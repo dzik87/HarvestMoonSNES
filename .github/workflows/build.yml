@@ -1,0 +1,59 @@
+name: build
+
+on:
+  push:
+    branches: [main, overhaul]
+  pull_request:
+  workflow_dispatch:
+
+env:
+  ASAR_TAG: v1.91
+
+jobs:
+  build-us:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache asar
+        id: cache-asar
+        uses: actions/cache@v4
+        with:
+          path: tools/bin/asar
+          key: asar-${{ env.ASAR_TAG }}-${{ runner.os }}
+
+      - name: Build asar from source
+        if: steps.cache-asar.outputs.cache-hit != 'true'
+        run: |
+          git clone --depth 1 --branch "$ASAR_TAG" https://github.com/RPGHacker/asar "$RUNNER_TEMP/asar"
+          cmake -S "$RUNNER_TEMP/asar/src" -B "$RUNNER_TEMP/asar/build" \
+                -DCMAKE_BUILD_TYPE=Release -DASAR_GEN_DLL=OFF -DASAR_GEN_LIB=OFF
+          cmake --build "$RUNNER_TEMP/asar/build" --config Release --parallel
+          BIN=$(find "$RUNNER_TEMP/asar/build" -type f -name asar -perm -u+x | head -n1)
+          test -n "$BIN" || { echo "nie znaleziono binarki asar"; exit 1; }
+          mkdir -p tools/bin
+          cp "$BIN" tools/bin/asar
+          chmod +x tools/bin/asar
+
+      - name: Build and verify (US)
+        run: python3 tools/build.py --region US -v | tee build-us.log
+
+      - name: Job summary
+        if: always()
+        run: |
+          {
+            echo "### Build US"
+            echo '```'
+            tail -n 12 build-us.log || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload ROM
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: HarvestMoon-US
+          path: |
+            build/HarvestMoon.sfc
+            build-us.log
+          if-no-files-found: ignore
