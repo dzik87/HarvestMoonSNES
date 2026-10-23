@@ -4045,7 +4045,6 @@ nCowFeedFlagsTable:
     dw $0001,$0002,$0004,$0008,$0010,$0020                     ;82A571|        |      ; 16b
     dw $0040,$0080,$0100,$0200,$0400,$0800                     ;82A57D|        |      ;
     dw $1000                                                   ;82A589|        |      ;
- 
 aToolUsedAnimationTable:
     dw fToolUsedAnimation0x00_Empty                            ;82A58B|        |8290DD; 0x1C * [ptr16]
     dw fToolUsedAnimation0x01_Sickle                           ;82A58D|        |8290DE;
@@ -4075,7 +4074,6 @@ aToolUsedAnimationTable:
     dw fToolUsedAnimation0x19_ChickenFood                      ;82A5BD|        |82923F;
     dw fToolUsedAnimation0x1A_CowFood                          ;82A5BF|        |82924B;
     dw fToolUsedAnimation0x1B_FishingPole                      ;82A5C1|        |829257;
- 
 aToolUsedActionTable:
     dw fToolUsedAction0x00_Empty                               ;82A5C3|        |82931E; 0x1C * [ptr16]
     dw fToolUsedAction0x01_Sickle                              ;82A5C5|        |829328;
@@ -4420,7 +4418,7 @@ fObjectMap_HuricaneDamage:
     TAX                                                        ;82A7F9|AA      |      ;
     CPX.W #$0400                                               ;82A7FA|E00004  |      ;
     BEQ +                                                      ;82A7FD|F003    |82A802;
-    JMP.W -                                                    ;82A7FF|4C2AA7  |82A72A;
+    JMP.W $A72A                                                ;82A7FF|4C2AA7  |82A72A;
  
  
   + TYA                                                        ;82A802|98      |      ;
@@ -4429,7 +4427,7 @@ fObjectMap_HuricaneDamage:
     TAY                                                        ;82A807|A8      |      ;
     CPY.W #$0400                                               ;82A808|C00004  |      ;
     BEQ .return                                                ;82A80B|F003    |82A810;
-    JMP.W --                                                   ;82A80D|4C27A7  |82A727;
+    JMP.W $A727                                                ;82A80D|4C27A7  |82A727;
  
  
 .return:
@@ -4719,7 +4717,7 @@ fObjectMap_EatingGrass:
     TAX                                                        ;82A9F4|AA      |      ;
     CPX.W #$0400                                               ;82A9F5|E00004  |      ;
     BEQ +                                                      ;82A9F8|F003    |82A9FD;
-    JMP.W -                                                    ;82A9FA|4CB4A9  |82A9B4;
+    JMP.W $A9B4                                                ;82A9FA|4CB4A9  |82A9B4;
  
  
   + TYA                                                        ;82A9FD|98      |      ;
@@ -4728,7 +4726,7 @@ fObjectMap_EatingGrass:
     TAY                                                        ;82AA02|A8      |      ;
     CPY.W #$0400                                               ;82AA03|C00004  |      ;
     BEQ .justReturn                                            ;82AA06|F003    |82AA0B;
-    JMP.W --                                                   ;82AA08|4CB1A9  |82A9B1;
+    JMP.W $A9B1                                                ;82AA08|4CB1A9  |82A9B1;
  
  
 .justReturn:
@@ -4780,7 +4778,7 @@ fObjectMap_CalculateRanchDev:
     TAX                                                        ;82AA59|AA      |      ;
     CPX.W #$0400                                               ;82AA5A|E00004  |      ;
     BEQ +                                                      ;82AA5D|F003    |82AA62;
-    JMP.W -                                                    ;82AA5F|4C24AA  |82AA24;
+    JMP.W $AA24                                                ;82AA5F|4C24AA  |82AA24;
  
  
   + TYA                                                        ;82AA62|98      |      ;
@@ -4789,7 +4787,7 @@ fObjectMap_CalculateRanchDev:
     TAY                                                        ;82AA67|A8      |      ;
     CPY.W #$0400                                               ;82AA68|C00004  |      ;
     BEQ .justReturn                                            ;82AA6B|F003    |82AA70;
-    JMP.W --                                                   ;82AA6D|4C21AA  |82AA21;
+    JMP.W $AA21                                                ;82AA6D|4C21AA  |82AA21;
  
  
 .justReturn:
@@ -5890,7 +5888,6 @@ fObjectEngine_ConvertCoordsToOffset:
     TAX                                                        ;82B172|AA      |      ;
     RTS                                                        ;82B173|60      |      ;
  
- 
 pObjectMap:
     dl sObjectMap_DefaultFarm                                  ;82B174|        |A78000; 0x60 * [ptr24]
     dl sObjectMap_DefaultFarm                                  ;82B177|        |A78000;
@@ -5988,7 +5985,6 @@ pObjectMap:
     dl EMPTY_FFFFFF                                            ;82B28B|        |FFFFFF;
     dl EMPTY_FFFFFF                                            ;82B28E|        |FFFFFF;
     dl EMPTY_FFFFFF                                            ;82B291|        |FFFFFF;
- 
 pObjectMap2:
     dl sObjectMap2_0x00                                        ;82B294|        |82B3B4; 0x60 * [ptr24]
     dl sObjectMap2_0x00                                        ;82B297|        |82B3B4;
@@ -6895,7 +6891,7 @@ fUnknown_82D1C0:
     BNE +                                                      ;82D39D|D007    |82D3A6;
     SEP #$20                                                   ;82D39F|E220    |      ;
     STZ.B $00                                                  ;82D3A1|6400    |000000;
-    JMP.W -                                                    ;82D3A3|4C47D3  |82D347;
+    JMP.W $D347                                                ;82D3A3|4C47D3  |82D347;
  
  
   + REP #$30                                                   ;82D3A6|C230    |      ;
@@ -7229,7 +7225,7 @@ fMainMenu_PrepareHowToPlay:
     BNE fUnknown_82D731                                        ;82D728|D007    |82D731;
     SEP #$20                                                   ;82D72A|E220    |      ;
     STZ.B $00                                                  ;82D72C|6400    |000000;
-    JMP.W -                                                    ;82D72E|4CC9D6  |82D6C9;
+    JMP.W $D6C9                                                ;82D72E|4CC9D6  |82D6C9;
  
  
 fUnknown_82D731:
@@ -7488,7 +7484,7 @@ fUnknown_82D8B0:
     BNE +                                                      ;82D991|D020    |82D9B3;
     SEP #$20                                                   ;82D993|E220    |      ;
     STZ.B $00                                                  ;82D995|6400    |000000;
-    JMP.W -                                                    ;82D997|4C3FD9  |82D93F;
+    JMP.W $D93F                                                ;82D997|4C3FD9  |82D93F;
  
     PLY                                                        ;82D99A|7A      |      ;
     INY                                                        ;82D99B|C8      |      ;
@@ -7856,7 +7852,7 @@ fUnknown_82DC0D:
     LDX.B #$08                                                 ;82DCCA|A208    |      ;
     LDY.B #$02                                                 ;82DCCC|A002    |      ;
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82DCCE|22488E80|808E48;
-    JML.L +                                                    ;82DCD2|5C80DD82|82DD80;
+    JML.L $82DD80                                              ;82DCD2|5C80DD82|82DD80;
  
  
 .case01:
@@ -7896,7 +7892,7 @@ fUnknown_82DC0D:
     LDX.B #$08                                                 ;82DD1F|A208    |      ;
     LDY.B #$02                                                 ;82DD21|A002    |      ;
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82DD23|22488E80|808E48;
-    JML.L +                                                    ;82DD27|5C80DD82|82DD80;
+    JML.L $82DD80                                              ;82DD27|5C80DD82|82DD80;
  
  
 .case02:
@@ -7936,7 +7932,7 @@ fUnknown_82DC0D:
     LDX.B #$08                                                 ;82DD74|A208    |      ;
     LDY.B #$02                                                 ;82DD76|A002    |      ;
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82DD78|22488E80|808E48;
-    JML.L +                                                    ;82DD7C|5C80DD82|82DD80;
+    JML.L $82DD80                                              ;82DD7C|5C80DD82|82DD80;
  
  
   + SEP #$20                                                   ;82DD80|E220    |      ;
@@ -8735,7 +8731,7 @@ fUnknown_82E405:
   - REP #$20                                                   ;82E428|C220    |      ;
     PHX                                                        ;82E42A|DA      |      ;
     LDA.B strcVariables.n16Temp3                               ;82E42B|A582    |000082;
-    STA.L $800185                                              ;82E42D|8F850180|800185;
+    STA.L strcDialogDisplay.dialogUnk185+$20000                ;82E42D|8F850180|800185;
     SEP #$20                                                   ;82E431|E220    |      ;
     LDA.B #$00                                                 ;82E433|A900    |      ;
     XBA                                                        ;82E435|EB      |      ;
@@ -8758,7 +8754,7 @@ fUnknown_82E405:
     INX                                                        ;82E459|E8      |      ;
     LDA.L aUnknown_82F278,X                                    ;82E45A|BF78F282|82F278;
     PHX                                                        ;82E45E|DA      |      ;
-    STA.L $800185                                              ;82E45F|8F850180|800185;
+    STA.L strcDialogDisplay.dialogUnk185+$20000                ;82E45F|8F850180|800185;
     SEP #$20                                                   ;82E463|E220    |      ;
     LDA.L nCurrentYearID                                       ;82E465|AF181F7F|7F1F18;
     INC A                                                      ;82E469|1A      |      ;
@@ -8774,10 +8770,10 @@ fUnknown_82E405:
     JSL.L fDialog_Unknown_8397A6                               ;82E481|22A69783|8397A6;
     JSL.L fCore_StartTransfer                                  ;82E485|22F08A80|808AF0;
     REP #$30                                                   ;82E489|C230    |      ;
-    LDA.L $800185                                              ;82E48B|AF850180|800185;
+    LDA.L strcDialogDisplay.dialogUnk185+$20000                ;82E48B|AF850180|800185;
     CLC                                                        ;82E48F|18      |      ;
     ADC.W #$0008                                               ;82E490|690800  |      ;
-    STA.L $800185                                              ;82E493|8F850180|800185;
+    STA.L strcDialogDisplay.dialogUnk185+$20000                ;82E493|8F850180|800185;
     REP #$20                                                   ;82E497|C220    |      ;
     LDA.W #$0000                                               ;82E499|A90000  |      ;
     SEP #$20                                                   ;82E49C|E220    |      ;
@@ -8791,10 +8787,10 @@ fUnknown_82E405:
     JSL.L fDialog_TransferGlyph                                ;82E4AE|22239883|839823;
     JSL.L fCore_StartTransfer                                  ;82E4B2|22F08A80|808AF0;
     REP #$30                                                   ;82E4B6|C230    |      ;
-    LDA.L $800185                                              ;82E4B8|AF850180|800185;
+    LDA.L strcDialogDisplay.dialogUnk185+$20000                ;82E4B8|AF850180|800185;
     CLC                                                        ;82E4BC|18      |      ;
     ADC.W #$0008                                               ;82E4BD|690800  |      ;
-    STA.L $800185                                              ;82E4C0|8F850180|800185;
+    STA.L strcDialogDisplay.dialogUnk185+$20000                ;82E4C0|8F850180|800185;
     REP #$20                                                   ;82E4C4|C220    |      ;
     LDA.W #$0000                                               ;82E4C6|A90000  |      ;
     SEP #$20                                                   ;82E4C9|E220    |      ;
@@ -8815,7 +8811,7 @@ fUnknown_82E405:
     INX                                                        ;82E4EB|E8      |      ;
     LDA.L aUnknown_82F278,X                                    ;82E4EC|BF78F282|82F278;
     PHX                                                        ;82E4F0|DA      |      ;
-    STA.L $800185                                              ;82E4F1|8F850180|800185;
+    STA.L strcDialogDisplay.dialogUnk185+$20000                ;82E4F1|8F850180|800185;
     SEP #$20                                                   ;82E4F5|E220    |      ;
     LDA.L nCurrentDay                                          ;82E4F7|AF1B1F7F|7F1F1B;
     STA.W strcDialogDisplay.dialogNumericVarSize               ;82E4FB|8D9201  |000192;
@@ -8835,7 +8831,7 @@ fUnknown_82E405:
     PHX                                                        ;82E521|DA      |      ;
     CLC                                                        ;82E522|18      |      ;
     ADC.W #$0008                                               ;82E523|690800  |      ;
-    STA.L $800185                                              ;82E526|8F850180|800185;
+    STA.L strcDialogDisplay.dialogUnk185+$20000                ;82E526|8F850180|800185;
     SEP #$20                                                   ;82E52A|E220    |      ;
     LDA.B #$00                                                 ;82E52C|A900    |      ;
     STA.W strcDialogDisplay.dialogVarSize                      ;82E52E|8D8C01  |00018C;
@@ -8848,52 +8844,52 @@ fUnknown_82E405:
     INX                                                        ;82E542|E8      |      ;
     INX                                                        ;82E543|E8      |      ;
     LDA.L aUnknown_82F278,X                                    ;82E544|BF78F282|82F278;
-    STA.L $800185                                              ;82E548|8F850180|800185;
+    STA.L strcDialogDisplay.dialogUnk185+$20000                ;82E548|8F850180|800185;
     LDA.W strcNames.wSeason                                    ;82E54C|ADB308  |0008B3;
     LDX.W #$0000                                               ;82E54F|A20000  |      ;
     JSL.L fDialog_TransferGlyph                                ;82E552|22239883|839823;
     JSL.L fCore_StartTransfer                                  ;82E556|22F08A80|808AF0;
     REP #$30                                                   ;82E55A|C230    |      ;
-    LDA.L $800185                                              ;82E55C|AF850180|800185;
+    LDA.L strcDialogDisplay.dialogUnk185+$20000                ;82E55C|AF850180|800185;
     CLC                                                        ;82E560|18      |      ;
     ADC.W #$0008                                               ;82E561|690800  |      ;
-    STA.L $800185                                              ;82E564|8F850180|800185;
+    STA.L strcDialogDisplay.dialogUnk185+$20000                ;82E564|8F850180|800185;
     LDA.W strcNames.wSeason+2                                  ;82E568|ADB508  |0008B5;
     LDX.W #$0000                                               ;82E56B|A20000  |      ;
     JSL.L fDialog_TransferGlyph                                ;82E56E|22239883|839823;
     JSL.L fCore_StartTransfer                                  ;82E572|22F08A80|808AF0;
     REP #$30                                                   ;82E576|C230    |      ;
-    LDA.L $800185                                              ;82E578|AF850180|800185;
+    LDA.L strcDialogDisplay.dialogUnk185+$20000                ;82E578|AF850180|800185;
     CLC                                                        ;82E57C|18      |      ;
     ADC.W #$0008                                               ;82E57D|690800  |      ;
-    STA.L $800185                                              ;82E580|8F850180|800185;
+    STA.L strcDialogDisplay.dialogUnk185+$20000                ;82E580|8F850180|800185;
     LDA.W strcNames.wSeason+4                                  ;82E584|ADB708  |0008B7;
     LDX.W #$0000                                               ;82E587|A20000  |      ;
     JSL.L fDialog_TransferGlyph                                ;82E58A|22239883|839823;
     JSL.L fCore_StartTransfer                                  ;82E58E|22F08A80|808AF0;
     REP #$30                                                   ;82E592|C230    |      ;
-    LDA.L $800185                                              ;82E594|AF850180|800185;
+    LDA.L strcDialogDisplay.dialogUnk185+$20000                ;82E594|AF850180|800185;
     CLC                                                        ;82E598|18      |      ;
     ADC.W #$0008                                               ;82E599|690800  |      ;
-    STA.L $800185                                              ;82E59C|8F850180|800185;
+    STA.L strcDialogDisplay.dialogUnk185+$20000                ;82E59C|8F850180|800185;
     LDA.W strcNames.wSeason+6                                  ;82E5A0|ADB908  |0008B9;
     LDX.W #$0000                                               ;82E5A3|A20000  |      ;
     JSL.L fDialog_TransferGlyph                                ;82E5A6|22239883|839823;
     JSL.L fCore_StartTransfer                                  ;82E5AA|22F08A80|808AF0;
     REP #$30                                                   ;82E5AE|C230    |      ;
-    LDA.L $800185                                              ;82E5B0|AF850180|800185;
+    LDA.L strcDialogDisplay.dialogUnk185+$20000                ;82E5B0|AF850180|800185;
     CLC                                                        ;82E5B4|18      |      ;
     ADC.W #$0008                                               ;82E5B5|690800  |      ;
-    STA.L $800185                                              ;82E5B8|8F850180|800185;
+    STA.L strcDialogDisplay.dialogUnk185+$20000                ;82E5B8|8F850180|800185;
     LDA.W strcNames.wSeason+8                                  ;82E5BC|ADBB08  |0008BB;
     LDX.W #$0000                                               ;82E5BF|A20000  |      ;
     JSL.L fDialog_TransferGlyph                                ;82E5C2|22239883|839823;
     JSL.L fCore_StartTransfer                                  ;82E5C6|22F08A80|808AF0;
     REP #$30                                                   ;82E5CA|C230    |      ;
-    LDA.L $800185                                              ;82E5CC|AF850180|800185;
+    LDA.L strcDialogDisplay.dialogUnk185+$20000                ;82E5CC|AF850180|800185;
     CLC                                                        ;82E5D0|18      |      ;
     ADC.W #$0008                                               ;82E5D1|690800  |      ;
-    STA.L $800185                                              ;82E5D4|8F850180|800185;
+    STA.L strcDialogDisplay.dialogUnk185+$20000                ;82E5D4|8F850180|800185;
     LDA.W strcNames.wSeason+10                                 ;82E5D8|ADBD08  |0008BD;
     LDX.W #$0000                                               ;82E5DB|A20000  |      ;
     JSL.L fDialog_TransferGlyph                                ;82E5DE|22239883|839823;
@@ -9076,7 +9072,7 @@ fUnknown_82E742:
     INX                                                        ;82E7DE|E8      |      ;
     CPX.W #$0010                                               ;82E7DF|E01000  |      ;
     BEQ .justReturn                                            ;82E7E2|F004    |82E7E8;
-    JML.L --                                                   ;82E7E4|5C47E782|82E747;
+    JML.L $82E747                                              ;82E7E4|5C47E782|82E747;
  
  
 .justReturn:
@@ -9281,7 +9277,7 @@ fScreen_NameInput:
     JSL.L fUnknown_8583E0                                      ;82E9C2|22E08385|8583E0;
     SEP #$20                                                   ;82E9C6|E220    |      ;
     STZ.B $00                                                  ;82E9C8|6400    |000000;
-    JML.L -                                                    ;82E9CA|5C5FE982|82E95F;
+    JML.L $82E95F                                              ;82E9CA|5C5FE982|82E95F;
  
  
 .nameHandler:
@@ -9381,7 +9377,7 @@ fTextUnknown_82EA60:
     ASL A                                                      ;82EA6D|0A      |      ;
     TAX                                                        ;82EA6E|AA      |      ;
     LDA.L aUnknown_82EB4D,X                                    ;82EA6F|BF4DEB82|82EB4D;
-    STA.L $800185                                              ;82EA73|8F850180|800185;
+    STA.L strcDialogDisplay.dialogUnk185+$20000                ;82EA73|8F850180|800185;
     PLA                                                        ;82EA77|68      |      ; A = nLetterCode
     LDX.W #$0001                                               ;82EA78|A20100  |      ;
     JSL.L fDialog_TransferGlyph                                ;82EA7B|22239883|839823;
@@ -9397,7 +9393,7 @@ fUnknown_82EA80:
   - REP #$20                                                   ;82EA8B|C220    |      ;
     PHX                                                        ;82EA8D|DA      |      ;
     LDA.B strcVariables.n16Temp3                               ;82EA8E|A582    |000082;
-    STA.L $800185                                              ;82EA90|8F850180|800185;
+    STA.L strcDialogDisplay.dialogUnk185+$20000                ;82EA90|8F850180|800185;
     LDA.W #$00A8                                               ;82EA94|A9A800  |      ; nLetterCode
     LDX.W #$0001                                               ;82EA97|A20100  |      ;
     JSL.L fDialog_TransferGlyph                                ;82EA9A|22239883|839823;

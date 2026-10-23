@@ -1,7 +1,6 @@
  
     ORG $B58000
  
- 
 pAIScripting0x43:
     dw DATA8_B58020                                            ;B58000|        |B58020;
     dw DATA8_B584DA                                            ;B58002|        |B584DA;
@@ -1033,7 +1032,6 @@ DATA8_B58E4E:
 
 
 DATA8_B59313:
- 
     %AICMD0x14_JumpIfFlagSet($800196, $01, $B59329)            ;B59313
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B59329)     ;B5931A
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 11, 14, $B597CB) ;B59321
@@ -1721,7 +1719,6 @@ DATA8_B59DD3:
 
 
 DATA8_B59FCA:
- 
     %AICMD0x14_JumpIfFlagSet($800196, $01, $B5A1C8)            ;B59FCA
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B5A1C8)     ;B59FD1
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 6, 10, $B5A1C8)  ;B59FD8
@@ -2086,7 +2083,6 @@ DATA8_B5A57C:
 
 
 DATA8_B5A686:
- 
     %AICMD0x45_JumpIfBetween16(nSecondChildAge, 0, 89, $B5A6BF);B5A686
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, $B5A6B6)   ;B5A690
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, $B5A6B7)   ;B5A697
@@ -2325,7 +2321,6 @@ DATA8_B5A841:
 
 
 DATA8_B5A85D:
- 
     %AICMD0x00_SetMusic($0E, $B4)                              ;B5A85D
     %AICMD0x01_UnfreezeTime()                                  ;B5A860
     %AICMD0x03_SetHour($10)                                    ;B5A861

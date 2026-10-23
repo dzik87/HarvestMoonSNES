@@ -1,7 +1,6 @@
  
     ORG $B38000
  
- 
 ppAIScriptingList:
     dl pAIScripting0x00_General                                ;B38000|        |B38BB8; 0x48 * [ptr24]
     dl pAIScripting0x01                                        ;B38003|        |B39359;
@@ -1933,7 +1932,6 @@ aAIScriptingData:
     db $00                                                     ;B38BB4|        |      ;
     dw $00F4                                                   ;B38BB5|        |      ;
     db $00                                                     ;B38BB7|        |      ;
- 
 pAIScripting0x00_General:
     dw DATA8_B38CC8                                            ;B38BB8|        |B38CC8; 0x88 * [ptr16]
     dw DATA8_B38CD0                                            ;B38BBA|        |B38CD0;
@@ -3079,7 +3077,6 @@ DATA8_B39306:
 
 
 DATA8_B39313:
- 
     %AICMD0x1A($0058, $0148, $B38258, $02)                     ;B39313
     %AICMD0x1F($B39321)                                        ;B3931B
     %AICMD0x12_Jump($B3931B)                                   ;B3931E
@@ -4680,7 +4677,6 @@ DATA8_B3AD24:
 
 
 DATA8_B3ADB1:
- 
     %AICMD0x11_EnableUserControl()                             ;B3ADB1
     %AICMD0x09($01, $B3ADC4)                                   ;B3ADB2
     %AICMD0x09($02, $B3ADD9)                                   ;B3ADB6
@@ -5351,7 +5347,6 @@ DATA8_B3B6E1:
 
 
 DATA8_B3B8D2:
- 
     %AICMD0x11_EnableUserControl()                             ;B3B8D2
     %AICMD0x12_Jump($B3B8DC)                                   ;B3B8D3
     %AICMD0x13_Wait(1)                                         ;B3B8D6
@@ -5886,7 +5881,6 @@ DATA8_B3BD2D:
 
 
 DATA8_B3C1E4:
- 
     %AICMD0x11_EnableUserControl()                             ;B3C1E4
     %AICMD0x09($01, $B3C482)                                   ;B3C1E5
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $04, $B3C1FD)   ;B3C1E9
@@ -6485,7 +6479,6 @@ DATA8_B3CB60:
 
 
 DATA8_B3CBA5:
- 
     %AICMD0x11_EnableUserControl()                             ;B3CBA5
     %AICMD0x09($01, $B3CBEC)                                   ;B3CBA6
     %AICMD0x09($02, $B3CBB4)                                   ;B3CBAA
@@ -6557,7 +6550,6 @@ pAIScripting0x05:
     dw pAIScripting0x06                                        ;B3CC8F|        |B3D447;
  
 DATA8_B3CC91:
- 
     %AICMD0x11_EnableUserControl()                             ;B3CC91
     %AICMD0x09($01, $B3CCDB)                                   ;B3CC92
     %AICMD0x09($02, $B3CD7C)                                   ;B3CC96
@@ -7320,7 +7312,6 @@ DATA8_B3D90E:
 
 
 DATA8_B3D99B:
- 
     %AICMD0x11_EnableUserControl()                             ;B3D99B
     %AICMD0x09($01, $B3D9A6)                                   ;B3D99C
     %AICMD0x13_Wait(1)                                         ;B3D9A0
@@ -7754,7 +7745,6 @@ DATA8_B3DFCE:
 
 
 DATA8_B3E037:
- 
     %AICMD0x11_EnableUserControl()                             ;B3E037
     %AICMD0x09($01, $B3E083)                                   ;B3E038
     %AICMD0x09($02, $B3E046)                                   ;B3E03C
@@ -8109,7 +8099,6 @@ DATA8_B3E560:
 
 
 DATA8_B3E59A:
- 
     %AICMD0x11_EnableUserControl()                             ;B3E59A
     %AICMD0x09($01, $B3E5D6)                                   ;B3E59B
     %AICMD0x09($02, $B3E5A9)                                   ;B3E59F
@@ -8156,7 +8145,6 @@ pAIScripting0x09:
     dw pAIScripting0x0A                                        ;B3E621|        |B3E83B;
  
 DATA8_B3E623:
- 
     %AICMD0x40_DisableTileInteractions()                       ;B3E623
     %AICMD0x02_FreezeTime()                                    ;B3E624
     %AICMD0x05_SetTransferPosition(96, 120)                    ;B3E625
@@ -8454,7 +8442,6 @@ DATA8_B3E982:
 
 
 DATA8_B3E9AE:
- 
     %AICMD0x02_FreezeTime()                                    ;B3E9AE
     %AICMD0x08_EnableAIControl()                               ;B3E9AF
     %AICMD0x09($01, $B3E9B6)                                   ;B3E9B0
@@ -8883,7 +8870,6 @@ DATA8_B3EF0A:
 
 
 DATA8_B3EF2E:
- 
     %AICMD0x09($01, $B3EF33)                                   ;B3EF2E
     %AICMD0x10_End()                                           ;B3EF32
     %AICMD0x1A($0068, $0188, $B38168, $00)                     ;B3EF33
@@ -8957,7 +8943,6 @@ AI_ObtainDog:
 
 
 AI_EllenSayGoodbye:
- 
     %AICMD0x50()                                               ;B3EFF3
     %AICMD0x02_FreezeTime()                                    ;B3EFF4
     %AICMD0x08_EnableAIControl()                               ;B3EFF5
@@ -9032,7 +9017,6 @@ AI_ObtainHorse:
 
 
 DATA8_B3F0A9:
- 
     %AICMD0x50()                                               ;B3F0A9
     %AICMD0x02_FreezeTime()                                    ;B3F0AA
     %AICMD0x08_EnableAIControl()                               ;B3F0AB

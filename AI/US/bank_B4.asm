@@ -1,7 +1,6 @@
  
     ORG $B48000
  
- 
 pAIScripting0x0F_StarNightFestival:
     dw DATA8_B48020                                            ;B48000|        |B48020;
     dw DATA8_B48075                                            ;B48002|        |B48075;
@@ -495,7 +494,6 @@ DATA8_B485C6:
 
 
 DATA8_B486E8:
- 
     %AICMD0x4F()                                               ;B486E8
     %AICMD0x50()                                               ;B486E9
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B486EA
@@ -570,7 +568,6 @@ pAIScripting0x10_WoodsPondEvent:
     dw pAIScripting0x11                                        ;B487D6|        |B48818;
  
 AI_WaterImp:
- 
     %AICMD0x08_EnableAIControl()                               ;B487D8
     %AICMD0x13_Wait(60)                                        ;B487D9
     %AICMD0x09($07, $B487E5)                                   ;B487DC
@@ -612,7 +609,6 @@ pAIScripting0x11:
     dw pAIScripting0x12                                        ;B48836|        |B488A0;
  
 DATA8_B48838:
- 
     %AICMD0x50()                                               ;B48838
     %AICMD0x09($01, $B4886C)                                   ;B48839
     %AICMD0x38()                                               ;B4883D
@@ -670,7 +666,6 @@ pAIScripting0x12:
     dw pAIScripting0x13                                        ;B488BE|        |B4892A;
  
 DATA8_B488C0:
- 
     %AICMD0x50()                                               ;B488C0
     %AICMD0x00_SetMusic($0A, $B4)                              ;B488C1
     %AICMD0x08_EnableAIControl()                               ;B488C4
@@ -723,7 +718,6 @@ pAIScripting0x13:
     dw pAIScripting0x14                                        ;B48948|        |B489D2;
  
 DATA8_B4894A:
- 
     %AICMD0x50()                                               ;B4894A
     %AICMD0x08_EnableAIControl()                               ;B4894B
     %AICMD0x09($01, $B4895D)                                   ;B4894C
@@ -951,7 +945,6 @@ DATA8_B48B9B:
 
 
 DATA8_B48BDE:
- 
     %AICMD0x4F()                                               ;B48BDE
     %AICMD0x50()                                               ;B48BDF
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B48BE0
@@ -995,7 +988,6 @@ pAIScripting0x15:
     dw pAIScripting0x16                                        ;B48C43|        |B48D38;
  
 DATA8_B48C45:
- 
     %AICMD0x05_SetTransferPosition(184, 360)                   ;B48C45
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B48C4A
     %AICMD0x08_EnableAIControl()                               ;B48C4C
@@ -1082,7 +1074,6 @@ pAIScripting0x16:
     dw pAIScripting0x17                                        ;B48D56|        |B48E05;
  
 DATA8_B48D58:
- 
     %AICMD0x50()                                               ;B48D58
     %AICMD0x08_EnableAIControl()                               ;B48D59
     %AICMD0x09($01, $B48D6B)                                   ;B48D5A
@@ -1150,7 +1141,6 @@ pAIScripting0x17:
     dw pAIScripting0x18                                        ;B48E23|        |B48EC5;
  
 DATA8_B48E25:
- 
     %AICMD0x00_SetMusic($0A, $B4)                              ;B48E25
     %AICMD0x08_EnableAIControl()                               ;B48E28
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B48E29
@@ -1217,7 +1207,6 @@ pAIScripting0x18:
     dw pAIScripting0x19                                        ;B48EE3|        |B48F95;
  
 DATA8_B48EE5:
- 
     %AICMD0x09($01, $B48EF9)                                   ;B48EE5
     %AICMD0x38()                                               ;B48EE9
     %AICMD0x10_End()                                           ;B48EEA
@@ -1299,7 +1288,6 @@ DATA8_B48FB5:
 
 
 DATA8_B48FDE:
- 
     %AICMD0x50()                                               ;B48FDE
     %AICMD0x00_SetMusic($0E, $B4)                              ;B48FDF
     %AICMD0x08_EnableAIControl()                               ;B48FE2
@@ -1413,7 +1401,6 @@ DATA8_B490F3:
 
 
 DATA8_B4911C:
- 
     %AICMD0x50()                                               ;B4911C
     %AICMD0x00_SetMusic($0E, $B4)                              ;B4911D
     %AICMD0x02_FreezeTime()                                    ;B49120
@@ -1508,7 +1495,6 @@ DATA8_B491D3:
 
 
 DATA8_B49210:
- 
     %AICMD0x00_SetMusic($0E, $B4)                              ;B49210
     %AICMD0x09($01, $B49221)                                   ;B49213
     %AICMD0x38()                                               ;B49217
@@ -1670,7 +1656,6 @@ DATA8_B4931D:
 
 
 DATA8_B49401:
- 
     %AICMD0x50()                                               ;B49401
     %AICMD0x02_FreezeTime()                                    ;B49402
     %AICMD0x08_EnableAIControl()                               ;B49403
@@ -1811,7 +1796,6 @@ DATA8_B49513:
 
 
 DATA8_B4958B:
- 
     %AICMD0x50()                                               ;B4958B
     %AICMD0x08_EnableAIControl()                               ;B4958C
     %AICMD0x09($01, $B495C4)                                   ;B4958D
@@ -1906,7 +1890,6 @@ pAIScripting0x1E:
     dw pAIScripting0x1F                                        ;B49698|        |B49A3F;
  
 DATA8_B4969A:
- 
     %AICMD0x50()                                               ;B4969A
     %AICMD0x00_SetMusic($18, $B4)                              ;B4969B
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B4969E
@@ -2388,7 +2371,6 @@ DATA8_B49C2A:
 
 
 DATA8_B49DD5:
- 
     %AICMD0x50()                                               ;B49DD5
     %AICMD0x08_EnableAIControl()                               ;B49DD6
     %AICMD0x05_SetTransferPosition(296, 104)                   ;B49DD7
@@ -2434,7 +2416,6 @@ pAIScripting0x20:
     dw pAIScripting0x21                                        ;B49E4F|        |B49F13;
  
 DATA8_B49E51:
- 
     %AICMD0x50()                                               ;B49E51
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B49E52
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $02)       ;B49E57
@@ -2513,7 +2494,6 @@ pAIScripting0x21:
     dw pAIScripting0x22                                        ;B49F31|        |B49FD8;
  
 DATA8_B49F33:
- 
     %AICMD0x09($13, $B49FB3)                                   ;B49F33
     %AICMD0x10_End()                                           ;B49F37
     %AICMD0x1A($0108, $01A8, $B382C4, $03)                     ;B49F38
@@ -2886,7 +2866,6 @@ DATA8_B4A301:
 
 
 DATA8_B4A321:
- 
     %AICMD0x50()                                               ;B4A321
     %AICMD0x08_EnableAIControl()                               ;B4A322
     %AICMD0x09($01, $B4A348)                                   ;B4A323
@@ -2938,7 +2917,6 @@ pAIScripting0x23:
     dw pAIScripting0x24                                        ;B4A39D|        |B4A455;
  
 DATA8_B4A39F:
- 
     %AICMD0x09($0C, $B4A3B7)                                   ;B4A39F
     %AICMD0x09($0D, $B4A3F1)                                   ;B4A3A3
     %AICMD0x09($0E, $B4A429)                                   ;B4A3A7
@@ -3100,7 +3078,6 @@ DATA8_B4A55D:
 
 
 DATA8_B4A589:
- 
     %AICMD0x08_EnableAIControl()                               ;B4A589
     %AICMD0x1A($FFF8, $01A8, $B38240, $02)                     ;B4A58A
     %AICMD0x38()                                               ;B4A592
@@ -3136,7 +3113,6 @@ pAIScripting0x25:
     dw pAIScripting0x26                                        ;B4A5D3|        |B4A60D;
  
 DATA8_B4A5D5:
- 
     %AICMD0x02_FreezeTime()                                    ;B4A5D5
     %AICMD0x05_SetTransferPosition(136, 344)                   ;B4A5D6
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B4A5DB
@@ -4089,7 +4065,6 @@ DATA8_B4A62D:
 
 
 DATA8_B4B48E:
- 
     %AICMD0x4F()                                               ;B4B48E
     %AICMD0x50()                                               ;B4B48F
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B4B490
@@ -4497,7 +4472,6 @@ DATA8_B4B9C2:
 
 
 DATA8_B4BA8E:
- 
     %AICMD0x4F()                                               ;B4BA8E
     %AICMD0x50()                                               ;B4BA8F
     %AICMD0x09($01, $B4BA9A)                                   ;B4BA90
@@ -5102,7 +5076,6 @@ DATA8_B4BD19:
 
 
 DATA8_B4C3AC:
- 
     %AICMD0x4F()                                               ;B4C3AC
     %AICMD0x50()                                               ;B4C3AD
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B4C3AE
@@ -5161,7 +5134,6 @@ pAIScripting0x29:
     dw pAIScripting0x2A                                        ;B4C445|        |B4C4B8;
  
 DATA8_B4C447:
- 
     %AICMD0x09($01, $B4C44D)                                   ;B4C447
     %AICMD0x38()                                               ;B4C44B
     %AICMD0x10_End()                                           ;B4C44C
@@ -5210,7 +5182,6 @@ pAIScripting0x2A:
     dw pAIScripting0x2B                                        ;B4C4D6|        |B4C504;
  
 DATA8_B4C4D8:
- 
     %AICMD0x1A($0218, $0078, $B387A4, $00)                     ;B4C4D8
     %AICMD0x13_Wait(1)                                         ;B4C4E0
     %AICMD0x1B($0305, $01)                                     ;B4C4E3
@@ -5243,7 +5214,6 @@ pAIScripting0x2B:
     dw pAIScripting0x2C                                        ;B4C522|        |B4C548;
  
 DATA8_B4C524:
- 
     %AICMD0x1A($0088, $0098, $B38798, $00)                     ;B4C524
     %AICMD0x13_Wait(1)                                         ;B4C52C
     %AICMD0x1B($0303, $00)                                     ;B4C52F
@@ -5274,7 +5244,6 @@ pAIScripting0x2C:
     dw pAIScripting0x2D                                        ;B4C566|        |B4C584;
  
 DATA8_B4C568:
- 
     %AICMD0x1A($0228, $0258, $B387B0, $00)                     ;B4C568
     %AICMD0x13_Wait(60)                                        ;B4C570
     %AICMD0x1B($0307, $01)                                     ;B4C573
@@ -5303,7 +5272,6 @@ pAIScripting0x2D:
     dw pAIScripting0x2E                                        ;B4C5A2|        |B4C5F4;
  
 DATA8_B4C5A4:
- 
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B4C5A4
     %AICMD0x09($01, $B4C5B2)                                   ;B4C5A6
     %AICMD0x11_EnableUserControl()                             ;B4C5AA
@@ -5344,7 +5312,6 @@ pAIScripting0x2E:
     dw pAIScripting0x2F                                        ;B4C612|        |B4C6F1;
  
 DATA8_B4C614:
- 
     %AICMD0x00_SetMusic($01, $B4)                              ;B4C614
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $02)       ;B4C617
     %AICMD0x05_SetTransferPosition(136, 120)                   ;B4C61C
@@ -5427,7 +5394,6 @@ pAIScripting0x2F:
     dw pAIScripting0x30                                        ;B4C70F|        |B4C7C3;
  
 DATA8_B4C711:
- 
     %AICMD0x00_SetMusic($11, $B4)                              ;B4C711
     %AICMD0x02_FreezeTime()                                    ;B4C714
     %AICMD0x03_SetHour($06)                                    ;B4C715
@@ -5505,7 +5471,6 @@ pAIScripting0x30:
     dw pAIScripting0x31                                        ;B4C7E1|        |B4C9F9;
  
 DATA8_B4C7E3:
- 
     %AICMD0x00_SetMusic($10, $B4)                              ;B4C7E3
     %AICMD0x02_FreezeTime()                                    ;B4C7E6
     %AICMD0x03_SetHour($06)                                    ;B4C7E7
@@ -5672,7 +5637,6 @@ pAIScripting0x31:
     dw pAIScripting0x32                                        ;B4CA17|        |B4CB3F;
  
 DATA8_B4CA19:
- 
     %AICMD0x00_SetMusic($10, $B4)                              ;B4CA19
     %AICMD0x05_SetTransferPosition(65520, 104)                 ;B4CA1C
     %AICMD0x02_FreezeTime()                                    ;B4CA21
@@ -5781,7 +5745,6 @@ pAIScripting0x32:
     dw pAIScripting0x33                                        ;B4CB5D|        |B4CD56;
  
 DATA8_B4CB5F:
- 
     %AICMD0x00_SetMusic($10, $B4)                              ;B4CB5F
     %AICMD0x02_FreezeTime()                                    ;B4CB62
     %AICMD0x03_SetHour($06)                                    ;B4CB63
@@ -5940,7 +5903,6 @@ pAIScripting0x33:
     dw pAIScripting0x34                                        ;B4CD74|        |B4CECA;
  
 DATA8_B4CD76:
- 
     %AICMD0x00_SetMusic($10, $B4)                              ;B4CD76
     %AICMD0x02_FreezeTime()                                    ;B4CD79
     %AICMD0x03_SetHour($06)                                    ;B4CD7A
@@ -6057,7 +6019,6 @@ pAIScripting0x34:
     dw pAIScripting0x35                                        ;B4CEE8|        |B4D011;
  
 DATA8_B4CEEA:
- 
     %AICMD0x47_SetValue8($800921, 16)                          ;B4CEEA
     %AICMD0x47_SetValue8($800926, 5)                           ;B4CEEF
     %AICMD0x00_SetMusic($10, $B4)                              ;B4CEF4
@@ -6176,7 +6137,6 @@ pAIScripting0x35:
     dw pAIScripting0x36                                        ;B4D02F|        |B4D160;
  
 DATA8_B4D031:
- 
     %AICMD0x47_SetValue8($800921, 21)                          ;B4D031
     %AICMD0x00_SetMusic($10, $B4)                              ;B4D036
     %AICMD0x02_FreezeTime()                                    ;B4D039
@@ -6295,7 +6255,6 @@ pAIScripting0x36:
     dw pAIScripting0x37                                        ;B4D17E|        |B4D2CC;
  
 DATA8_B4D180:
- 
     %AICMD0x00_SetMusic($10, $B4)                              ;B4D180
     %AICMD0x02_FreezeTime()                                    ;B4D183
     %AICMD0x03_SetHour($06)                                    ;B4D184
@@ -6421,7 +6380,6 @@ pAIScripting0x37:
     dw pAIScripting0x38                                        ;B4D2EA|        |B4D447;
  
 DATA8_B4D2EC:
- 
     %AICMD0x47_SetValue8($800921, 16)                          ;B4D2EC
     %AICMD0x47_SetValue8($800926, 5)                           ;B4D2F1
     %AICMD0x00_SetMusic($10, $B4)                              ;B4D2F6
@@ -6551,7 +6509,6 @@ pAIScripting0x38:
     dw pAIScripting0x39                                        ;B4D465|        |B4D531;
  
 DATA8_B4D467:
- 
     %AICMD0x00_SetMusic($10, $B4)                              ;B4D467
     %AICMD0x02_FreezeTime()                                    ;B4D46A
     %AICMD0x03_SetHour($06)                                    ;B4D46B
@@ -6634,7 +6591,6 @@ pAIScripting0x39:
     dw pAIScripting0x3A                                        ;B4D54F|        |B4D772;
  
 DATA8_B4D551:
- 
     %AICMD0x00_SetMusic($10, $B4)                              ;B4D551
     %AICMD0x02_FreezeTime()                                    ;B4D554
     %AICMD0x03_SetHour($07)                                    ;B4D555
@@ -6876,7 +6832,6 @@ DATA8_B4D792:
 
 
 DATA8_B4D863:
- 
     %AICMD0x00_SetMusic($10, $B4)                              ;B4D863
     %AICMD0x02_FreezeTime()                                    ;B4D866
     %AICMD0x03_SetHour($07)                                    ;B4D867
@@ -7085,7 +7040,6 @@ DATA8_B4DA42:
 
 
 DATA8_B4DB0A:
- 
     %AICMD0x00_SetMusic($10, $B4)                              ;B4DB0A
     %AICMD0x02_FreezeTime()                                    ;B4DB0D
     %AICMD0x03_SetHour($07)                                    ;B4DB0E
@@ -7328,7 +7282,6 @@ DATA8_B4DCED:
 
 
 DATA8_B4DE3E:
- 
     %AICMD0x00_SetMusic($10, $B4)                              ;B4DE3E
     %AICMD0x02_FreezeTime()                                    ;B4DE41
     %AICMD0x03_SetHour($07)                                    ;B4DE42
@@ -7548,7 +7501,6 @@ DATA8_B4DFB4:
 
 
 DATA8_B4E0F8:
- 
     %AICMD0x00_SetMusic($10, $B4)                              ;B4E0F8
     %AICMD0x02_FreezeTime()                                    ;B4E0FB
     %AICMD0x03_SetHour($07)                                    ;B4E0FC
@@ -7647,7 +7599,6 @@ pAIScripting0x3E:
     dw pAIScripting0x3F                                        ;B4E21E|        |B4E3FF;
  
 DATA8_B4E220:
- 
     %AICMD0x00_SetMusic($10, $B4)                              ;B4E220
     %AICMD0x02_FreezeTime()                                    ;B4E223
     %AICMD0x03_SetHour($07)                                    ;B4E224
@@ -7803,7 +7754,6 @@ pAIScripting0x3F:
     dw pAIScripting0x40                                        ;B4E41D|        |B4E5F4;
  
 DATA8_B4E41F:
- 
     %AICMD0x00_SetMusic($10, $B4)                              ;B4E41F
     %AICMD0x02_FreezeTime()                                    ;B4E422
     %AICMD0x03_SetHour($07)                                    ;B4E423
@@ -7962,7 +7912,6 @@ pAIScripting0x40:
     dw pAIScripting0x41                                        ;B4E612|        |B4E7AF;
  
 DATA8_B4E614:
- 
     %AICMD0x00_SetMusic($10, $B4)                              ;B4E614
     %AICMD0x02_FreezeTime()                                    ;B4E617
     %AICMD0x03_SetHour($06)                                    ;B4E618
@@ -8103,7 +8052,6 @@ pAIScripting0x41:
     dw pAIScripting0x42                                        ;B4E7CD|        |B4E989;
  
 DATA8_B4E7CF:
- 
     %AICMD0x47_SetValue8($800921, 2)                           ;B4E7CF
     %AICMD0x00_SetMusic($10, $B4)                              ;B4E7D4
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $03)       ;B4E7D7
