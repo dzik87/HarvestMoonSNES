@@ -1,0 +1,109 @@
+    ; HarvestMoon is LOROM
+    lorom
+    
+    ; Default padding value
+    padbyte $00
+    
+    ; SNES
+    incsrc "common/snes.asm"
+    
+    ; DiztinGUIsh generated labels
+    incsrc "common/ram.asm"
+    
+    ; Structures
+    incsrc "common/structures.asm"
+    incsrc "common/enums.asm"
+    
+    ; ROM header
+    incsrc "code/header.asm"
+    
+    ; Objects data
+    incsrc "data/objects/bank_86.asm"
+    incsrc "data/objects/bank_87.asm"
+    
+    ; Sprites GFX
+    incsrc "data/gfx/sprites/bank_88.asm"
+    incsrc "data/gfx/sprites/bank_89.asm"
+    incsrc "data/gfx/sprites/bank_8A.asm"
+    incsrc "data/gfx/sprites/bank_8B.asm"
+    incsrc "data/gfx/sprites/bank_8C.asm"
+    incsrc "data/gfx/sprites/bank_8D.asm"
+    incsrc "data/gfx/sprites/bank_8E.asm"
+    incsrc "data/gfx/sprites/bank_8F.asm"
+    incsrc "data/gfx/sprites/bank_90.asm"
+    incsrc "data/gfx/sprites/bank_91.asm"
+    
+    ; Tiles GFX
+    incsrc "data/gfx/tiles/bank_92.asm"
+    incsrc "data/gfx/tiles/bank_93.asm"
+    incsrc "data/gfx/tiles/bank_94.asm"
+    incsrc "data/gfx/tiles/bank_95.asm"
+    incsrc "data/gfx/tiles/bank_96.asm"
+    incsrc "data/gfx/tiles/bank_97.asm"
+    incsrc "data/gfx/tiles/bank_98.asm"
+    incsrc "data/gfx/tiles/bank_99.asm"
+    incsrc "data/gfx/tiles/bank_9A.asm"
+    incsrc "data/gfx/tiles/bank_9B.asm"
+    incsrc "data/gfx/tiles/bank_9C.asm"
+    incsrc "data/gfx/tiles/bank_9D.asm"
+    incsrc "data/gfx/tiles/bank_9E.asm"
+    incsrc "data/gfx/tiles/bank_9F.asm"
+    incsrc "data/gfx/tiles/bank_A0.asm"
+    
+    ; Characters GFX
+    incsrc "data/gfx/characters/bank_A1.asm"
+    incsrc "data/gfx/characters/bank_A2.asm"
+    incsrc "data/gfx/characters/bank_A3.asm"
+    incsrc "data/gfx/characters/bank_A4.asm"
+    incsrc "data/gfx/characters/bank_A5.asm"
+    incsrc "data/gfx/characters/bank_A6.asm"
+    
+    ; Tilemap data
+    incsrc "data/tilemaps/bank_A7.asm"
+    
+    ; Palettes
+    incsrc "data/gfx/palettes/bank_A8.asm"
+    incsrc "data/gfx/palettes/bank_A9.asm"
+    
+    ; JP dialogs (empty in US/EU/DE versions)
+    ;incsrc "data/dialogs/jp/bank_AA.asm"
+    ;incsrc "data/dialogs/jp/bank_AB.asm"
+    ;incsrc "data/dialogs/jp/bank_AC.asm"
+    
+    ; Audio
+    incsrc "data/audio/bank_AD.asm"
+    incsrc "data/audio/bank_AE.asm"
+    incsrc "data/audio/bank_AF.asm"
+    incsrc "data/audio/bank_B0.asm"
+    incsrc "data/audio/bank_B1.asm"
+    incsrc "data/audio/bank_B2.asm"
+    
+    ; AI
+    incsrc "ai/commands.asm"
+    incsrc "ai/us/bank_B3.asm"
+    incsrc "ai/us/bank_B4.asm"
+    incsrc "ai/us/bank_B5.asm"
+    
+    ; US/EU/DE dialogs
+    incsrc "data/dialogs/macros.asm"
+    incsrc "data/dialogs/us/bank_B6.asm"
+    incsrc "data/dialogs/us/bank_B7.asm"
+    incsrc "data/dialogs/us/bank_B8.asm"
+    incsrc "data/dialogs/us/bank_B9.asm"
+    incsrc "data/dialogs/us/bank_BA.asm"
+    incsrc "data/dialogs/us/bank_BB.asm"
+    
+    ; Unused
+    ;incsrc "data/padding/bank_BC.asm"
+    ;incsrc "data/padding/bank_BD.asm"
+    ;incsrc "data/padding/bank_BE.asm"
+    ;incsrc "data/padding/bank_BF.asm"
+    
+    ; Source Code
+    incsrc "common/macros.asm"
+    incsrc "code/bank_80.asm"
+    incsrc "code/bank_81.asm"
+    incsrc "code/bank_82.asm"
+    incsrc "code/bank_83.asm"
+    incsrc "code/bank_84.asm"
+    incsrc "code/bank_85.asm"

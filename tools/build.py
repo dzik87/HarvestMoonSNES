@@ -21,7 +21,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 ROM_SIZE = 0x200000
-MAIN = {"US": "main.asm"}  # kolejne regiony beda dodawane wraz z migracja
+MAIN = {"US": "src/main.asm"}  # kolejne regiony beda dodawane wraz z migracja
 
 
 def find_asar(explicit):
