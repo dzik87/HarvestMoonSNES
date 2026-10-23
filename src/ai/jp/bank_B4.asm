@@ -22,12 +22,12 @@ pAIScripting0x0F_StarNightFestival:
  
 DATA8_B48020:
  
-    %AICMD0x4F()                                               ;B48020
+    %AICMD0x4F_DisableToolUse()                                               ;B48020
     %AICMD0x50()                                               ;B48021
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B48022
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $00)       ;B48027
     %AICMD0x08_EnableAIControl()                               ;B4802C
-    %AICMD0x38()                                               ;B4802D
+    %AICMD0x38_WaitForFadeIn()                                               ;B4802D
     %AICMD0x01_UnfreezeTime()                                  ;B4802E
     %AICMD0x24_NextHourPalette($74)                            ;B4802F
     %AICMD0x13_Wait(180)                                       ;B48031
@@ -57,7 +57,7 @@ DATA8_B48020:
 
 DATA8_B48075:
  
-    %AICMD0x4F()                                               ;B48075
+    %AICMD0x4F_DisableToolUse()                                               ;B48075
     %AICMD0x50()                                               ;B48076
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B48077
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $0F)       ;B4807C
@@ -65,19 +65,19 @@ DATA8_B48075:
     %AICMD0x03_SetHour($11)                                    ;B48084
     %AICMD0x05_SetTransferPosition(264, 312)                   ;B48086
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B4808B
-    %AICMD0x09($01, $B480BC)                                   ;B4808D
-    %AICMD0x09($02, $B480D3)                                   ;B48091
-    %AICMD0x09($03, $B480EA)                                   ;B48095
-    %AICMD0x09($05, $B48128)                                   ;B48099
-    %AICMD0x09($06, $B48189)                                   ;B4809D
-    %AICMD0x38()                                               ;B480A1
-    %AICMD0x0C($00)                                            ;B480A2
-    %AICMD0x0C($01)                                            ;B480A4
-    %AICMD0x0C($02)                                            ;B480A6
-    %AICMD0x0C($03)                                            ;B480A8
-    %AICMD0x0C($04)                                            ;B480AA
+    %AICMD0x09_StartScript($01, $B480BC)                                   ;B4808D
+    %AICMD0x09_StartScript($02, $B480D3)                                   ;B48091
+    %AICMD0x09_StartScript($03, $B480EA)                                   ;B48095
+    %AICMD0x09_StartScript($05, $B48128)                                   ;B48099
+    %AICMD0x09_StartScript($06, $B48189)                                   ;B4809D
+    %AICMD0x38_WaitForFadeIn()                                               ;B480A1
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B480A2
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B480A4
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B480A6
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B480A8
+    %AICMD0x0C_WaitForScriptFlag($04)                                            ;B480AA
     %AICMD0x13_Wait(60)                                        ;B480AC
-    %AICMD0x28(strcFlags.daily3, $0F)                          ;B480AF
+    %AICMD0x28_ClearBit(strcFlags.daily3, $0F)                          ;B480AF
     %AICMD0x41_AddValue16(nLove_Ellen, 30)                     ;B480B4
     %AICMD0x3C()                                               ;B480BA
     %AICMD0x10_End()                                           ;B480BB
@@ -85,13 +85,13 @@ DATA8_B48075:
     %AICMD0x1F($B480CA)                                        ;B480C4
     %AICMD0x12_Jump($B480C4)                                   ;B480C7
     %AICMD0x1C_ShowDialog($02B7, $00)                          ;B480CA
-    %AICMD0x0B($00)                                            ;B480CE
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B480CE
     %AICMD0x12_Jump($B480C4)                                   ;B480D0
     %AICMD0x1A($00B8, $00A8, $B383D8, $01)                     ;B480D3
     %AICMD0x1F($B480E1)                                        ;B480DB
     %AICMD0x12_Jump($B480DB)                                   ;B480DE
     %AICMD0x1C_ShowDialog($02B8, $00)                          ;B480E1
-    %AICMD0x0B($01)                                            ;B480E5
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B480E5
     %AICMD0x12_Jump($B480DB)                                   ;B480E7
     %AICMD0x1A($0168, $00D8, $B382F4, $03)                     ;B480EA
     %AICMD0x1F($B480FE)                                        ;B480F2
@@ -103,20 +103,20 @@ DATA8_B48075:
     %AICMD0x20_JumpIfChoice(1, $B48116)                        ;B48106
     %AICMD0x12_Jump($B480F2)                                   ;B4810A
     %AICMD0x1C_ShowDialog($02BB, $00)                          ;B4810D
-    %AICMD0x0B($02)                                            ;B48111
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B48111
     %AICMD0x12_Jump($B480F8)                                   ;B48113
     %AICMD0x1C_ShowDialog($02BC, $00)                          ;B48116
-    %AICMD0x0B($02)                                            ;B4811A
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4811A
     %AICMD0x12_Jump($B480F8)                                   ;B4811C
     %AICMD0x1C_ShowDialog($02DC, $00)                          ;B4811F
-    %AICMD0x0B($02)                                            ;B48123
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B48123
     %AICMD0x12_Jump($B480F8)                                   ;B48125
     %AICMD0x1A($0148, $0128, $B38330, $03)                     ;B48128
     %AICMD0x22($20, $18, $01, $B3833C, $0C)                    ;B48130
     %AICMD0x1F($B4813D)                                        ;B48137
     %AICMD0x12_Jump($B48137)                                   ;B4813A
     %AICMD0x1C_ShowDialog($02B9, $00)                          ;B4813D
-    %AICMD0x0B($03)                                            ;B48141
+    %AICMD0x0B_SetScriptFlag($03)                                            ;B48141
     %AICMD0x12_Jump($B48137)                                   ;B48143
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, $B48165)   ;B48146
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, $B4816E)   ;B4814D
@@ -140,10 +140,10 @@ DATA8_B48075:
     %AICMD0x1A($0128, $0098, $B3845C, $00)                     ;B481A5
     %AICMD0x13_Wait(1)                                         ;B481AD
     %AICMD0x1B($02E9, $00)                                     ;B481B0
-    %AICMD0x0C($00)                                            ;B481B4
-    %AICMD0x0C($01)                                            ;B481B6
-    %AICMD0x0C($02)                                            ;B481B8
-    %AICMD0x0C($03)                                            ;B481BA
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B481B4
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B481B6
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B481B8
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B481BA
     %AICMD0x1F($B481C2)                                        ;B481BC
     %AICMD0x12_Jump($B481BC)                                   ;B481BF
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, $B48205)   ;B481C2
@@ -152,47 +152,47 @@ DATA8_B48075:
     %AICMD0x45_JumpIfBetween16(nLove_Ellen, 301, 999, $B481FC) ;B481DD
     %AICMD0x12_Jump($B481BC)                                   ;B481E7
     %AICMD0x1C_ShowDialog($02BD, $00)                          ;B481EA
-    %AICMD0x0B($04)                                            ;B481EE
+    %AICMD0x0B_SetScriptFlag($04)                                            ;B481EE
     %AICMD0x12_Jump($B481BC)                                   ;B481F0
     %AICMD0x1C_ShowDialog($02BE, $00)                          ;B481F3
-    %AICMD0x0B($04)                                            ;B481F7
+    %AICMD0x0B_SetScriptFlag($04)                                            ;B481F7
     %AICMD0x12_Jump($B481BC)                                   ;B481F9
     %AICMD0x1C_ShowDialog($0433, $00)                          ;B481FC
-    %AICMD0x0B($04)                                            ;B48200
+    %AICMD0x0B_SetScriptFlag($04)                                            ;B48200
     %AICMD0x12_Jump($B481BC)                                   ;B48202
     %AICMD0x1C_ShowDialog($0434, $00)                          ;B48205
-    %AICMD0x0B($04)                                            ;B48209
+    %AICMD0x0B_SetScriptFlag($04)                                            ;B48209
     %AICMD0x12_Jump($B481BC)                                   ;B4820B
 
 
 DATA8_B4820E:
  
-    %AICMD0x4F()                                               ;B4820E
+    %AICMD0x4F_DisableToolUse()                                               ;B4820E
     %AICMD0x50()                                               ;B4820F
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B48210
     %AICMD0x00_SetMusic($09, $B4)                              ;B48215
     %AICMD0x03_SetHour($07)                                    ;B48218
     %AICMD0x05_SetTransferPosition(128, 440)                   ;B4821A
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B4821F
-    %AICMD0x09($01, $B48261)                                   ;B48221
-    %AICMD0x09($02, $B48278)                                   ;B48225
-    %AICMD0x09($03, $B48293)                                   ;B48229
-    %AICMD0x09($04, $B482AE)                                   ;B4822D
-    %AICMD0x09($05, $B482C5)                                   ;B48231
-    %AICMD0x09($06, $B482E0)                                   ;B48235
-    %AICMD0x09($07, $B4833E)                                   ;B48239
-    %AICMD0x38()                                               ;B4823D
-    %AICMD0x0C($00)                                            ;B4823E
-    %AICMD0x0C($01)                                            ;B48240
-    %AICMD0x0C($02)                                            ;B48242
-    %AICMD0x0C($03)                                            ;B48244
-    %AICMD0x0C($04)                                            ;B48246
-    %AICMD0x0C($05)                                            ;B48248
-    %AICMD0x0B($07)                                            ;B4824A
-    %AICMD0x0C($06)                                            ;B4824C
+    %AICMD0x09_StartScript($01, $B48261)                                   ;B48221
+    %AICMD0x09_StartScript($02, $B48278)                                   ;B48225
+    %AICMD0x09_StartScript($03, $B48293)                                   ;B48229
+    %AICMD0x09_StartScript($04, $B482AE)                                   ;B4822D
+    %AICMD0x09_StartScript($05, $B482C5)                                   ;B48231
+    %AICMD0x09_StartScript($06, $B482E0)                                   ;B48235
+    %AICMD0x09_StartScript($07, $B4833E)                                   ;B48239
+    %AICMD0x38_WaitForFadeIn()                                               ;B4823D
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4823E
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B48240
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B48242
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B48244
+    %AICMD0x0C_WaitForScriptFlag($04)                                            ;B48246
+    %AICMD0x0C_WaitForScriptFlag($05)                                            ;B48248
+    %AICMD0x0B_SetScriptFlag($07)                                            ;B4824A
+    %AICMD0x0C_WaitForScriptFlag($06)                                            ;B4824C
     %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 16)                 ;B4824E
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B48252
-    %AICMD0x0B($08)                                            ;B48254
+    %AICMD0x0B_SetScriptFlag($08)                                            ;B48254
     %AICMD0x13_Wait(180)                                       ;B48256
     %AICMD0x41_AddValue16(nLove_Maria, 30)                     ;B48259
     %AICMD0x3C()                                               ;B4825F
@@ -201,41 +201,41 @@ DATA8_B4820E:
     %AICMD0x1F($B4826F)                                        ;B48269
     %AICMD0x12_Jump($B48269)                                   ;B4826C
     %AICMD0x1C_ShowDialog($02BF, $00)                          ;B4826F
-    %AICMD0x0B($00)                                            ;B48273
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B48273
     %AICMD0x12_Jump($B48269)                                   ;B48275
     %AICMD0x1A($0038, $0118, $B38420, $01)                     ;B48278
     %AICMD0x1F($B48286)                                        ;B48280
     %AICMD0x12_Jump($B48280)                                   ;B48283
     %AICMD0x1C_ShowDialog($02C1, $00)                          ;B48286
     %AICMD0x1B($02D4, $00)                                     ;B4828A
-    %AICMD0x0B($01)                                            ;B4828E
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4828E
     %AICMD0x12_Jump($B48280)                                   ;B48290
     %AICMD0x1A($0050, $0118, $B38384, $01)                     ;B48293
     %AICMD0x1F($B482A1)                                        ;B4829B
     %AICMD0x12_Jump($B4829B)                                   ;B4829E
     %AICMD0x1B($02B3, $00)                                     ;B482A1
     %AICMD0x1C_ShowDialog($02C2, $00)                          ;B482A5
-    %AICMD0x0B($02)                                            ;B482A9
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B482A9
     %AICMD0x12_Jump($B4829B)                                   ;B482AB
     %AICMD0x1A($0080, $01C8, $B38294, $01)                     ;B482AE
     %AICMD0x1F($B482BC)                                        ;B482B6
     %AICMD0x12_Jump($B482B6)                                   ;B482B9
     %AICMD0x1C_ShowDialog($037A, $00)                          ;B482BC
-    %AICMD0x0B($03)                                            ;B482C0
+    %AICMD0x0B_SetScriptFlag($03)                                            ;B482C0
     %AICMD0x12_Jump($B482B6)                                   ;B482C2
     %AICMD0x1A($00B8, $0158, $B382AC, $01)                     ;B482C5
     %AICMD0x1F($B482D3)                                        ;B482CD
     %AICMD0x12_Jump($B482CD)                                   ;B482D0
     %AICMD0x1B($0278, $00)                                     ;B482D3
     %AICMD0x1C_ShowDialog($035F, $00)                          ;B482D7
-    %AICMD0x0B($04)                                            ;B482DB
+    %AICMD0x0B_SetScriptFlag($04)                                            ;B482DB
     %AICMD0x12_Jump($B482CD)                                   ;B482DD
     %AICMD0x1A($00C8, $0118, $B3827C, $01)                     ;B482E0
     %AICMD0x1F($B482EE)                                        ;B482E8
     %AICMD0x12_Jump($B482E8)                                   ;B482EB
     %AICMD0x1C_ShowDialog($02C0, $00)                          ;B482EE
     %AICMD0x1B($026B, $00)                                     ;B482F2
-    %AICMD0x0B($05)                                            ;B482F6
+    %AICMD0x0B_SetScriptFlag($05)                                            ;B482F6
     %AICMD0x12_Jump($B482E8)                                   ;B482F8
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, $B4831A)   ;B482FB
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, $B48323)   ;B48302
@@ -253,7 +253,7 @@ DATA8_B4820E:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, $B48355)   ;B4833E
     %AICMD0x12_Jump($B482FB)                                   ;B48345
     %AICMD0x1A($00C1, $0088, $B38180, $01)                     ;B48348
-    %AICMD0x0C($07)                                            ;B48350
+    %AICMD0x0C_WaitForScriptFlag($07)                                            ;B48350
     %AICMD0x12_Jump($B4835D)                                   ;B48352
     %AICMD0x1A($00C1, $0088, $B38180, $01)                     ;B48355
     %AICMD0x1F($B48363)                                        ;B4835D
@@ -264,8 +264,8 @@ DATA8_B4820E:
     %AICMD0x45_JumpIfBetween16(nLove_Maria, 201, 300, $B483A9) ;B48375
     %AICMD0x45_JumpIfBetween16(nLove_Maria, 301, 999, $B483C6) ;B4837F
     %AICMD0x12_Jump($B4835D)                                   ;B48389
-    %AICMD0x0B($06)                                            ;B4838C
-    %AICMD0x0C($08)                                            ;B4838E
+    %AICMD0x0B_SetScriptFlag($06)                                            ;B4838C
+    %AICMD0x0C_WaitForScriptFlag($08)                                            ;B4838E
     %AICMD0x13_Wait(30)                                        ;B48390
     %AICMD0x1B($0223, $01)                                     ;B48393
     %AICMD0x0D($01, $00, $10, $01)                             ;B48397
@@ -273,8 +273,8 @@ DATA8_B4820E:
     %AICMD0x1C_ShowDialog($02C3, $00)                          ;B4839F
     %AICMD0x13_Wait(180)                                       ;B483A3
     %AICMD0x12_Jump($B4835D)                                   ;B483A6
-    %AICMD0x0B($06)                                            ;B483A9
-    %AICMD0x0C($08)                                            ;B483AB
+    %AICMD0x0B_SetScriptFlag($06)                                            ;B483A9
+    %AICMD0x0C_WaitForScriptFlag($08)                                            ;B483AB
     %AICMD0x13_Wait(30)                                        ;B483AD
     %AICMD0x1B($0223, $01)                                     ;B483B0
     %AICMD0x0D($01, $00, $10, $01)                             ;B483B4
@@ -282,8 +282,8 @@ DATA8_B4820E:
     %AICMD0x1C_ShowDialog($02C4, $00)                          ;B483BC
     %AICMD0x13_Wait(180)                                       ;B483C0
     %AICMD0x12_Jump($B4835D)                                   ;B483C3
-    %AICMD0x0B($06)                                            ;B483C6
-    %AICMD0x0C($08)                                            ;B483C8
+    %AICMD0x0B_SetScriptFlag($06)                                            ;B483C6
+    %AICMD0x0C_WaitForScriptFlag($08)                                            ;B483C8
     %AICMD0x13_Wait(30)                                        ;B483CA
     %AICMD0x1B($0223, $01)                                     ;B483CD
     %AICMD0x0D($01, $00, $10, $01)                             ;B483D1
@@ -291,8 +291,8 @@ DATA8_B4820E:
     %AICMD0x1C_ShowDialog($0435, $00)                          ;B483D9
     %AICMD0x13_Wait(180)                                       ;B483DD
     %AICMD0x12_Jump($B4835D)                                   ;B483E0
-    %AICMD0x0B($06)                                            ;B483E3
-    %AICMD0x0C($08)                                            ;B483E5
+    %AICMD0x0B_SetScriptFlag($06)                                            ;B483E3
+    %AICMD0x0C_WaitForScriptFlag($08)                                            ;B483E5
     %AICMD0x13_Wait(30)                                        ;B483E7
     %AICMD0x1B($02E7, $01)                                     ;B483EA
     %AICMD0x0D($01, $00, $10, $01)                             ;B483EE
@@ -304,29 +304,29 @@ DATA8_B4820E:
 
 DATA8_B48400:
  
-    %AICMD0x4F()                                               ;B48400
+    %AICMD0x4F_DisableToolUse()                                               ;B48400
     %AICMD0x50()                                               ;B48401
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B48402
     %AICMD0x00_SetMusic($07, $B4)                              ;B48407
     %AICMD0x03_SetHour($12)                                    ;B4840A
     %AICMD0x05_SetTransferPosition(144, 440)                   ;B4840C
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B48411
-    %AICMD0x09($01, $B4844E)                                   ;B48413
-    %AICMD0x09($02, $B48465)                                   ;B48417
-    %AICMD0x09($03, $B4847C)                                   ;B4841B
-    %AICMD0x09($04, $B48497)                                   ;B4841F
-    %AICMD0x09($05, $B48523)                                   ;B48423
-    %AICMD0x09($06, $B484B2)                                   ;B48427
-    %AICMD0x09($07, $B484C9)                                   ;B4842B
-    %AICMD0x38()                                               ;B4842F
-    %AICMD0x0C($00)                                            ;B48430
-    %AICMD0x0C($01)                                            ;B48432
-    %AICMD0x0C($02)                                            ;B48434
-    %AICMD0x0C($03)                                            ;B48436
-    %AICMD0x0C($05)                                            ;B48438
-    %AICMD0x0C($06)                                            ;B4843A
+    %AICMD0x09_StartScript($01, $B4844E)                                   ;B48413
+    %AICMD0x09_StartScript($02, $B48465)                                   ;B48417
+    %AICMD0x09_StartScript($03, $B4847C)                                   ;B4841B
+    %AICMD0x09_StartScript($04, $B48497)                                   ;B4841F
+    %AICMD0x09_StartScript($05, $B48523)                                   ;B48423
+    %AICMD0x09_StartScript($06, $B484B2)                                   ;B48427
+    %AICMD0x09_StartScript($07, $B484C9)                                   ;B4842B
+    %AICMD0x38_WaitForFadeIn()                                               ;B4842F
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B48430
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B48432
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B48434
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B48436
+    %AICMD0x0C_WaitForScriptFlag($05)                                            ;B48438
+    %AICMD0x0C_WaitForScriptFlag($06)                                            ;B4843A
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown1, $05)     ;B4843C
-    %AICMD0x0C($04)                                            ;B48441
+    %AICMD0x0C_WaitForScriptFlag($04)                                            ;B48441
     %AICMD0x13_Wait(180)                                       ;B48443
     %AICMD0x41_AddValue16(nLove_Eve, 30)                       ;B48446
     %AICMD0x3C()                                               ;B4844C
@@ -335,39 +335,39 @@ DATA8_B48400:
     %AICMD0x1F($B4845C)                                        ;B48456
     %AICMD0x12_Jump($B48456)                                   ;B48459
     %AICMD0x1C_ShowDialog($02C5, $00)                          ;B4845C
-    %AICMD0x0B($00)                                            ;B48460
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B48460
     %AICMD0x12_Jump($B48456)                                   ;B48462
     %AICMD0x1A($0064, $0170, $B38348, $00)                     ;B48465
     %AICMD0x1F($B48473)                                        ;B4846D
     %AICMD0x12_Jump($B4846D)                                   ;B48470
     %AICMD0x1C_ShowDialog($02C6, $00)                          ;B48473
-    %AICMD0x0B($01)                                            ;B48477
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B48477
     %AICMD0x12_Jump($B4846D)                                   ;B48479
     %AICMD0x1A($00B4, $01A0, $B38318, $01)                     ;B4847C
     %AICMD0x1F($B4848A)                                        ;B48484
     %AICMD0x12_Jump($B48484)                                   ;B48487
     %AICMD0x1C_ShowDialog($02C7, $00)                          ;B4848A
     %AICMD0x1B($0298, $00)                                     ;B4848E
-    %AICMD0x0B($02)                                            ;B48492
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B48492
     %AICMD0x12_Jump($B48484)                                   ;B48494
     %AICMD0x1A($00B4, $0170, $B383FC, $00)                     ;B48497
     %AICMD0x1F($B484A5)                                        ;B4849F
     %AICMD0x12_Jump($B4849F)                                   ;B484A2
     %AICMD0x1C_ShowDialog($02C8, $00)                          ;B484A5
     %AICMD0x1B($02CC, $00)                                     ;B484A9
-    %AICMD0x0B($03)                                            ;B484AD
+    %AICMD0x0B_SetScriptFlag($03)                                            ;B484AD
     %AICMD0x12_Jump($B4849F)                                   ;B484AF
     %AICMD0x1A($0088, $0148, $B38234, $00)                     ;B484B2
     %AICMD0x1F($B484C0)                                        ;B484BA
     %AICMD0x12_Jump($B484BA)                                   ;B484BD
     %AICMD0x1C_ShowDialog($0407, $00)                          ;B484C0
-    %AICMD0x0B($05)                                            ;B484C4
+    %AICMD0x0B_SetScriptFlag($05)                                            ;B484C4
     %AICMD0x12_Jump($B484BA)                                   ;B484C6
     %AICMD0x1A($0090, $01C8, $B38234, $01)                     ;B484C9
     %AICMD0x1F($B484D7)                                        ;B484D1
     %AICMD0x12_Jump($B484D1)                                   ;B484D4
     %AICMD0x1C_ShowDialog($03D9, $00)                          ;B484D7
-    %AICMD0x0B($06)                                            ;B484DB
+    %AICMD0x0B_SetScriptFlag($06)                                            ;B484DB
     %AICMD0x12_Jump($B484D1)                                   ;B484DD
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, $B484FF)   ;B484E0
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, $B48508)   ;B484E7
@@ -400,26 +400,26 @@ DATA8_B48400:
     %AICMD0x45_JumpIfBetween16(nLove_Eve, 301, 999, $B485A8)   ;B4857D
     %AICMD0x12_Jump($B4854E)                                   ;B48587
     %AICMD0x1C_ShowDialog($02C9, $00)                          ;B4858A
-    %AICMD0x32($8000D4, $0015)                                 ;B4858E
-    %AICMD0x0B($04)                                            ;B48594
+    %AICMD0x32_SetValue16($8000D4, $0015)                                 ;B4858E
+    %AICMD0x0B_SetScriptFlag($04)                                            ;B48594
     %AICMD0x12_Jump($B4854E)                                   ;B48596
     %AICMD0x1C_ShowDialog($02CA, $00)                          ;B48599
-    %AICMD0x32($8000D4, $0015)                                 ;B4859D
-    %AICMD0x0B($04)                                            ;B485A3
+    %AICMD0x32_SetValue16($8000D4, $0015)                                 ;B4859D
+    %AICMD0x0B_SetScriptFlag($04)                                            ;B485A3
     %AICMD0x12_Jump($B4854E)                                   ;B485A5
     %AICMD0x1C_ShowDialog($0437, $00)                          ;B485A8
-    %AICMD0x32($8000D4, $0015)                                 ;B485AC
-    %AICMD0x0B($04)                                            ;B485B2
+    %AICMD0x32_SetValue16($8000D4, $0015)                                 ;B485AC
+    %AICMD0x0B_SetScriptFlag($04)                                            ;B485B2
     %AICMD0x12_Jump($B4854E)                                   ;B485B4
     %AICMD0x1C_ShowDialog($0438, $00)                          ;B485B7
-    %AICMD0x32($8000D4, $0015)                                 ;B485BB
-    %AICMD0x0B($04)                                            ;B485C1
+    %AICMD0x32_SetValue16($8000D4, $0015)                                 ;B485BB
+    %AICMD0x0B_SetScriptFlag($04)                                            ;B485C1
     %AICMD0x12_Jump($B4854E)                                   ;B485C3
 
 
 DATA8_B485C6:
  
-    %AICMD0x4F()                                               ;B485C6
+    %AICMD0x4F_DisableToolUse()                                               ;B485C6
     %AICMD0x50()                                               ;B485C7
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B485C8
     %AICMD0x00_SetMusic($0E, $B4)                              ;B485CD
@@ -427,22 +427,22 @@ DATA8_B485C6:
     %AICMD0x05_SetTransferPosition(120, 456)                   ;B485D2
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B485D7
     %AICMD0x08_EnableAIControl()                               ;B485D9
-    %AICMD0x09($01, $B48677)                                   ;B485DA
-    %AICMD0x38()                                               ;B485DE
+    %AICMD0x09_StartScript($01, $B48677)                                   ;B485DA
+    %AICMD0x38_WaitForFadeIn()                                               ;B485DE
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 176)                   ;B485DF
     %AICMD0x13_Wait(60)                                        ;B485E3
     %AICMD0x29_SetMapScrooling(0, -1, 240)                     ;B485E6
     %AICMD0x13_Wait(240)                                       ;B485EC
     %AICMD0x29_SetMapScrooling(0, -1, 64)                      ;B485EF
     %AICMD0x13_Wait(64)                                        ;B485F5
-    %AICMD0x09($02, $B48623)                                   ;B485F8
-    %AICMD0x0C($00)                                            ;B485FC
+    %AICMD0x09_StartScript($02, $B48623)                                   ;B485F8
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B485FC
     %AICMD0x29_SetMapScrooling(0, 1, 240)                      ;B485FE
     %AICMD0x13_Wait(240)                                       ;B48604
     %AICMD0x29_SetMapScrooling(0, 1, 64)                       ;B48607
     %AICMD0x13_Wait(64)                                        ;B4860D
-    %AICMD0x0B($01)                                            ;B48610
-    %AICMD0x0C($02)                                            ;B48612
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B48610
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B48612
     %AICMD0x19($0006, $00)                                     ;B48614
     %AICMD0x13_Wait(180)                                       ;B48618
     %AICMD0x41_AddValue16(nLove_Nina, 30)                      ;B4861B
@@ -450,7 +450,7 @@ DATA8_B485C6:
     %AICMD0x10_End()                                           ;B48622
     %AICMD0x1A($0100, $FF80, $B3857C, $00)                     ;B48623
     %AICMD0x0D($FE, $01, $A0, $01)                             ;B4862B
-    %AICMD0x0B($00)                                            ;B48630
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B48630
     %AICMD0x37()                                               ;B48632
     %AICMD0x10_End()                                           ;B48633
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, $B48653)   ;B48634
@@ -469,34 +469,34 @@ DATA8_B485C6:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, $B486AD)   ;B48677
     %AICMD0x12_Jump($B48634)                                   ;B4867E
     %AICMD0x1A($0088, $0118, $B381C8, $01)                     ;B48681
-    %AICMD0x0C($01)                                            ;B48689
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B48689
     %AICMD0x1B($0250, $00)                                     ;B4868B
     %AICMD0x45_JumpIfBetween16(nLove_Nina, 0, 200, $B486C4)    ;B4868F
     %AICMD0x45_JumpIfBetween16(nLove_Nina, 201, 300, $B486CD)  ;B48699
     %AICMD0x45_JumpIfBetween16(nLove_Nina, 301, 999, $B486D6)  ;B486A3
     %AICMD0x1A($0088, $0118, $B3845C, $01)                     ;B486AD
-    %AICMD0x0C($01)                                            ;B486B5
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B486B5
     %AICMD0x1B($02E6, $00)                                     ;B486B7
     %AICMD0x12_Jump($B486DF)                                   ;B486BB
     %AICMD0x13_Wait(1)                                         ;B486BE
     %AICMD0x12_Jump($B486BE)                                   ;B486C1
     %AICMD0x1C_ShowDialog($02CB, $00)                          ;B486C4
-    %AICMD0x0B($02)                                            ;B486C8
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B486C8
     %AICMD0x12_Jump($B486BE)                                   ;B486CA
     %AICMD0x1C_ShowDialog($02CC, $00)                          ;B486CD
-    %AICMD0x0B($02)                                            ;B486D1
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B486D1
     %AICMD0x12_Jump($B486BE)                                   ;B486D3
     %AICMD0x1C_ShowDialog($0439, $00)                          ;B486D6
-    %AICMD0x0B($02)                                            ;B486DA
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B486DA
     %AICMD0x12_Jump($B486BE)                                   ;B486DC
     %AICMD0x1C_ShowDialog($043A, $00)                          ;B486DF
-    %AICMD0x0B($02)                                            ;B486E3
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B486E3
     %AICMD0x12_Jump($B486BE)                                   ;B486E5
 
 
 DATA8_B486E8:
  
-    %AICMD0x4F()                                               ;B486E8
+    %AICMD0x4F_DisableToolUse()                                               ;B486E8
     %AICMD0x50()                                               ;B486E9
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B486EA
     %AICMD0x00_SetMusic($0E, $B4)                              ;B486EF
@@ -504,13 +504,13 @@ DATA8_B486E8:
     %AICMD0x05_SetTransferPosition(24, 88)                     ;B486F4
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B486F9
     %AICMD0x08_EnableAIControl()                               ;B486FB
-    %AICMD0x09($01, $B4875B)                                   ;B486FC
-    %AICMD0x38()                                               ;B48700
+    %AICMD0x09_StartScript($01, $B4875B)                                   ;B486FC
+    %AICMD0x38_WaitForFadeIn()                                               ;B48700
     %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 32)                 ;B48701
     %AICMD0x13_Wait(120)                                       ;B48705
     %AICMD0x11_EnableUserControl()                             ;B48708
-    %AICMD0x0B($00)                                            ;B48709
-    %AICMD0x0C($01)                                            ;B4870B
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B48709
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4870B
     %AICMD0x13_Wait(180)                                       ;B4870D
     %AICMD0x41_AddValue16(nLove_Ann, 30)                       ;B48710
     %AICMD0x3C()                                               ;B48716
@@ -538,16 +538,16 @@ DATA8_B486E8:
     %AICMD0x45_JumpIfBetween16(nLove_Ann, 301, 999, $B487A6)   ;B48787
     %AICMD0x12_Jump($B48766)                                   ;B48791
     %AICMD0x1C_ShowDialog($02CD, $00)                          ;B48794
-    %AICMD0x0B($01)                                            ;B48798
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B48798
     %AICMD0x12_Jump($B48766)                                   ;B4879A
     %AICMD0x1C_ShowDialog($02A9, $00)                          ;B4879D
-    %AICMD0x0B($01)                                            ;B487A1
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B487A1
     %AICMD0x12_Jump($B48766)                                   ;B487A3
     %AICMD0x1C_ShowDialog($043B, $00)                          ;B487A6
-    %AICMD0x0B($01)                                            ;B487AA
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B487AA
     %AICMD0x12_Jump($B48766)                                   ;B487AC
     %AICMD0x1C_ShowDialog($043C, $00)                          ;B487AF
-    %AICMD0x0B($01)                                            ;B487B3
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B487B3
     %AICMD0x12_Jump($B48766)                                   ;B487B5
 
 
@@ -573,16 +573,16 @@ AI_WaterImp:
  
     %AICMD0x08_EnableAIControl()                               ;B487D8
     %AICMD0x13_Wait(60)                                        ;B487D9
-    %AICMD0x09($07, $B487E5)                                   ;B487DC
-    %AICMD0x09($15, $B487F8)                                   ;B487E0
+    %AICMD0x09_StartScript($07, $B487E5)                                   ;B487DC
+    %AICMD0x09_StartScript($15, $B487F8)                                   ;B487E0
     %AICMD0x10_End()                                           ;B487E4
     %AICMD0x1A($02B0, $0170, $B38564, $00)                     ;B487E5
     %AICMD0x1C_ShowDialog($0335, $00)                          ;B487ED
-    %AICMD0x0B($00)                                            ;B487F1
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B487F1
     %AICMD0x13_Wait(180)                                       ;B487F3
     %AICMD0x37()                                               ;B487F6
     %AICMD0x10_End()                                           ;B487F7
-    %AICMD0x0C($00)                                            ;B487F8
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B487F8
     %AICMD0x1A($02A8, $0178, $B38720, $00)                     ;B487FA
     %AICMD0x0D($00, $01, $0C, $01)                             ;B48802
     %AICMD0x0D($00, $02, $12, $01)                             ;B48807
@@ -614,37 +614,37 @@ pAIScripting0x11:
 DATA8_B48838:
  
     %AICMD0x50()                                               ;B48838
-    %AICMD0x09($01, $B4886C)                                   ;B48839
-    %AICMD0x38()                                               ;B4883D
+    %AICMD0x09_StartScript($01, $B4886C)                                   ;B48839
+    %AICMD0x38_WaitForFadeIn()                                               ;B4883D
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 80)                  ;B4883E
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B48842
     %AICMD0x1D_ShowDialog($0148, $00)                          ;B48844
     %AICMD0x20_JumpIfChoice(0, $B48850)                        ;B48848
     %AICMD0x20_JumpIfChoice(1, $B48862)                        ;B4884C
     %AICMD0x0F_ScreenFadeout($01)                              ;B48850
-    %AICMD0x09($02, $B4888C)                                   ;B48852
-    %AICMD0x0A($01)                                            ;B48856
+    %AICMD0x09_StartScript($02, $B4888C)                                   ;B48852
+    %AICMD0x0A_ScreenFadein($01)                                            ;B48856
     %AICMD0x1C_ShowDialog($014A, $00)                          ;B48858
-    %AICMD0x0B($00)                                            ;B4885C
-    %AICMD0x0C($01)                                            ;B4885E
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4885C
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4885E
     %AICMD0x11_EnableUserControl()                             ;B48860
     %AICMD0x10_End()                                           ;B48861
     %AICMD0x1C_ShowDialog($014C, $00)                          ;B48862
-    %AICMD0x0B($00)                                            ;B48866
-    %AICMD0x0C($01)                                            ;B48868
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B48866
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B48868
     %AICMD0x11_EnableUserControl()                             ;B4886A
     %AICMD0x10_End()                                           ;B4886B
     %AICMD0x1A($0068, $01A8, $B383A8, $02)                     ;B4886C
-    %AICMD0x0C($00)                                            ;B48874
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B48874
     %AICMD0x1B($02BB, $00)                                     ;B48876
     %AICMD0x0D($00, $01, $10, $01)                             ;B4887A
     %AICMD0x1B($02BF, $00)                                     ;B4887F
     %AICMD0x0D($FF, $00, $A0, $01)                             ;B48883
-    %AICMD0x0B($01)                                            ;B48888
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B48888
     %AICMD0x37()                                               ;B4888A
     %AICMD0x10_End()                                           ;B4888B
     %AICMD0x1A($0078, $01A8, $B38144, $00)                     ;B4888C
-    %AICMD0x0C($00)                                            ;B48894
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B48894
     %AICMD0x13_Wait(30)                                        ;B48896
     %AICMD0x0D($FF, $00, $A0, $01)                             ;B48899
     %AICMD0x37()                                               ;B4889E
@@ -676,9 +676,9 @@ DATA8_B488C0:
     %AICMD0x08_EnableAIControl()                               ;B488C4
     %AICMD0x2A($0041)                                          ;B488C5
     %AICMD0x13_Wait(180)                                       ;B488C8
-    %AICMD0x09($01, $B488D6)                                   ;B488CB
-    %AICMD0x0C($00)                                            ;B488CF
-    %AICMD0x09($10, $B48919)                                   ;B488D1
+    %AICMD0x09_StartScript($01, $B488D6)                                   ;B488CB
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B488CF
+    %AICMD0x09_StartScript($10, $B48919)                                   ;B488D1
     %AICMD0x10_End()                                           ;B488D5
     %AICMD0x1A($0088, $00F8, $B3851C, $00)                     ;B488D6
     %AICMD0x13_Wait(180)                                       ;B488DE
@@ -687,7 +687,7 @@ DATA8_B488C0:
     %AICMD0x0D($00, $01, $10, $01)                             ;B488EB
     %AICMD0x0D($FF, $00, $10, $01)                             ;B488F0
     %AICMD0x1C_ShowDialog($0339, $01)                          ;B488F5
-    %AICMD0x0B($00)                                            ;B488F9
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B488F9
     %AICMD0x13_Wait(120)                                       ;B488FB
     %AICMD0x1C_ShowDialog($033A, $01)                          ;B488FE
     %AICMD0x13_Wait(30)                                        ;B48902
@@ -726,16 +726,16 @@ DATA8_B4894A:
  
     %AICMD0x50()                                               ;B4894A
     %AICMD0x08_EnableAIControl()                               ;B4894B
-    %AICMD0x09($01, $B4895D)                                   ;B4894C
-    %AICMD0x38()                                               ;B48950
+    %AICMD0x09_StartScript($01, $B4895D)                                   ;B4894C
+    %AICMD0x38_WaitForFadeIn()                                               ;B48950
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 80)                  ;B48951
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B48955
-    %AICMD0x0B($00)                                            ;B48957
-    %AICMD0x0C($01)                                            ;B48959
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B48957
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B48959
     %AICMD0x11_EnableUserControl()                             ;B4895B
     %AICMD0x10_End()                                           ;B4895C
     %AICMD0x1A($0078, $01A8, $B383C0, $02)                     ;B4895D
-    %AICMD0x0C($00)                                            ;B48965
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B48965
     %AICMD0x1D_ShowDialog($014D, $00)                          ;B48967
     %AICMD0x20_JumpIfChoice(0, $B48973)                        ;B4896B
     %AICMD0x20_JumpIfChoice(1, $B489B5)                        ;B4896F
@@ -760,7 +760,7 @@ DATA8_B4894A:
     %AICMD0x0D($00, $01, $10, $01)                             ;B489C0
     %AICMD0x1B($02C3, $00)                                     ;B489C5
     %AICMD0x0D($FF, $00, $90, $01)                             ;B489C9
-    %AICMD0x0B($01)                                            ;B489CE
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B489CE
     %AICMD0x37()                                               ;B489D0
     %AICMD0x10_End()                                           ;B489D1
 
@@ -791,27 +791,27 @@ DATA8_B489F2:
     %AICMD0x05_SetTransferPosition(136, 344)                   ;B489F6
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B489FB
     %AICMD0x08_EnableAIControl()                               ;B489FD
-    %AICMD0x09($01, $B48A1B)                                   ;B489FE
-    %AICMD0x38()                                               ;B48A02
+    %AICMD0x09_StartScript($01, $B48A1B)                                   ;B489FE
+    %AICMD0x38_WaitForFadeIn()                                               ;B48A02
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 80)                  ;B48A03
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B48A07
-    %AICMD0x0B($00)                                            ;B48A09
-    %AICMD0x0C($01)                                            ;B48A0B
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B48A09
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B48A0B
     %AICMD0x0F_ScreenFadeout($01)                              ;B48A0D
-    %AICMD0x09($02, $B48A8B)                                   ;B48A0F
-    %AICMD0x0A($01)                                            ;B48A13
-    %AICMD0x0B($02)                                            ;B48A15
-    %AICMD0x0C($04)                                            ;B48A17
+    %AICMD0x09_StartScript($02, $B48A8B)                                   ;B48A0F
+    %AICMD0x0A_ScreenFadein($01)                                            ;B48A13
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B48A15
+    %AICMD0x0C_WaitForScriptFlag($04)                                            ;B48A17
     %AICMD0x11_EnableUserControl()                             ;B48A19
     %AICMD0x10_End()                                           ;B48A1A
     %AICMD0x1A($FFF0, $01A8, $B383B4, $02)                     ;B48A1B
-    %AICMD0x0C($00)                                            ;B48A23
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B48A23
     %AICMD0x0D($01, $00, $60, $01)                             ;B48A25
     %AICMD0x1D_ShowDialog($0149, $00)                          ;B48A2A
     %AICMD0x20_JumpIfChoice(0, $B48A36)                        ;B48A2E
     %AICMD0x20_JumpIfChoice(1, $B48A61)                        ;B48A32
-    %AICMD0x0B($01)                                            ;B48A36
-    %AICMD0x0C($02)                                            ;B48A38
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B48A36
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B48A38
     %AICMD0x1B($02BB, $00)                                     ;B48A3A
     %AICMD0x0D($00, $01, $20, $01)                             ;B48A3E
     %AICMD0x1B($02BF, $00)                                     ;B48A43
@@ -825,30 +825,30 @@ DATA8_B489F2:
     %AICMD0x12_Jump($B48A75)                                   ;B48A65
     %AICMD0x1B($02BF, $00)                                     ;B48A68
     %AICMD0x0D($FF, $00, $40, $01)                             ;B48A6C
-    %AICMD0x0B($03)                                            ;B48A71
+    %AICMD0x0B_SetScriptFlag($03)                                            ;B48A71
     %AICMD0x37()                                               ;B48A73
     %AICMD0x10_End()                                           ;B48A74
     %AICMD0x1B($02BB, $00)                                     ;B48A75
     %AICMD0x0D($00, $01, $20, $01)                             ;B48A79
     %AICMD0x1B($02BF, $00)                                     ;B48A7E
     %AICMD0x0D($FF, $00, $A0, $01)                             ;B48A82
-    %AICMD0x0B($04)                                            ;B48A87
+    %AICMD0x0B_SetScriptFlag($04)                                            ;B48A87
     %AICMD0x37()                                               ;B48A89
     %AICMD0x10_End()                                           ;B48A8A
     %AICMD0x1A($0048, $01E8, $B380FC, $03)                     ;B48A8B
-    %AICMD0x0C($03)                                            ;B48A93
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B48A93
     %AICMD0x1B($01A7, $00)                                     ;B48A95
     %AICMD0x0D($00, $FF, $10, $01)                             ;B48A99
     %AICMD0x1B($018B, $00)                                     ;B48A9E
     %AICMD0x0D($FF, $00, $40, $01)                             ;B48AA2
-    %AICMD0x0B($04)                                            ;B48AA7
+    %AICMD0x0B_SetScriptFlag($04)                                            ;B48AA7
     %AICMD0x37()                                               ;B48AA9
     %AICMD0x10_End()                                           ;B48AAA
 
 
 DATA8_B48AAB:
  
-    %AICMD0x4F()                                               ;B48AAB
+    %AICMD0x4F_DisableToolUse()                                               ;B48AAB
     %AICMD0x50()                                               ;B48AAC
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B48AAD
     %AICMD0x00_SetMusic($0A, $B4)                              ;B48AB2
@@ -857,11 +857,11 @@ DATA8_B48AAB:
     %AICMD0x08_EnableAIControl()                               ;B48ABC
     %AICMD0x02_FreezeTime()                                    ;B48ABD
     %AICMD0x03_SetHour($07)                                    ;B48ABE
-    %AICMD0x09($01, $B48AD0)                                   ;B48AC0
+    %AICMD0x09_StartScript($01, $B48AD0)                                   ;B48AC0
     %AICMD0x19($00E8, $00)                                     ;B48AC4
     %AICMD0x06_SetDestinationArea(!AREA_MOUNTAINTOPBEAN)       ;B48AC8
-    %AICMD0x38()                                               ;B48ACA
-    %AICMD0x0C($00)                                            ;B48ACB
+    %AICMD0x38_WaitForFadeIn()                                               ;B48ACA
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B48ACB
     %AICMD0x3D_TeleportToArea(!AREA_GOLDCHICKEN)               ;B48ACD
     %AICMD0x10_End()                                           ;B48ACF
     %AICMD0x1A($0080, $01C8, $B380E4, $01)                     ;B48AD0
@@ -872,24 +872,24 @@ DATA8_B48AAB:
     %AICMD0x13_Wait(60)                                        ;B48AEC
     %AICMD0x1B($0063, $00)                                     ;B48AEF
     %AICMD0x0D($00, $FF, $90, $02)                             ;B48AF3
-    %AICMD0x0B($00)                                            ;B48AF8
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B48AF8
     %AICMD0x13_Wait(1)                                         ;B48AFA
     %AICMD0x12_Jump($B48AFA)                                   ;B48AFD
 
 
 DATA8_B48B00:
  
-    %AICMD0x4F()                                               ;B48B00
+    %AICMD0x4F_DisableToolUse()                                               ;B48B00
     %AICMD0x50()                                               ;B48B01
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B48B02
     %AICMD0x03_SetHour($07)                                    ;B48B07
     %AICMD0x05_SetTransferPosition(136, 632)                   ;B48B09
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B48B0E
-    %AICMD0x09($01, $B48B23)                                   ;B48B10
-    %AICMD0x28(strcFlags.event3, $09)                          ;B48B14
+    %AICMD0x09_StartScript($01, $B48B23)                                   ;B48B10
+    %AICMD0x28_ClearBit(strcFlags.event3, $09)                          ;B48B14
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $0A)       ;B48B19
     %AICMD0x06_SetDestinationArea(!AREA_GOLDCHICKEN)           ;B48B1E
-    %AICMD0x38()                                               ;B48B20
+    %AICMD0x38_WaitForFadeIn()                                               ;B48B20
     %AICMD0x11_EnableUserControl()                             ;B48B21
     %AICMD0x10_End()                                           ;B48B22
     %AICMD0x1A($0088, $00CC, $B38624, $00)                     ;B48B23
@@ -901,19 +901,19 @@ DATA8_B48B00:
     %AICMD0x20_JumpIfChoice(1, $B48B7A)                        ;B48B3B
     %AICMD0x08_EnableAIControl()                               ;B48B3F
     %AICMD0x1B($021B, $00)                                     ;B48B40
-    %AICMD0x09($02, $B48B8F)                                   ;B48B44
+    %AICMD0x09_StartScript($02, $B48B8F)                                   ;B48B44
     %AICMD0x0D($FF, $FF, $24, $02)                             ;B48B48
     %AICMD0x13_Wait(30)                                        ;B48B4D
     %AICMD0x1B($021C, $00)                                     ;B48B50
     %AICMD0x13_Wait(120)                                       ;B48B54
     %AICMD0x1C_ShowDialog($0337, $00)                          ;B48B57
-    %AICMD0x0B($00)                                            ;B48B5B
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B48B5B
     %AICMD0x2A($0043)                                          ;B48B5D
     %AICMD0x4B($C3, $0040, $0080)                              ;B48B60
     %AICMD0x3E_SetCarryItem($23)                               ;B48B66
     %AICMD0x13_Wait(60)                                        ;B48B68
-    %AICMD0x32($8000D4, $0000)                                 ;B48B6B
-    %AICMD0x28($8000D2, $01)                                   ;B48B71
+    %AICMD0x32_SetValue16($8000D4, $0000)                                 ;B48B6B
+    %AICMD0x28_ClearBit($8000D2, $01)                                   ;B48B71
     %AICMD0x11_EnableUserControl()                             ;B48B76
     %AICMD0x12_Jump($B48B31)                                   ;B48B77
     %AICMD0x2A($0043)                                          ;B48B7A
@@ -922,22 +922,22 @@ DATA8_B48B00:
     %AICMD0x1C_ShowDialog($0338, $00)                          ;B48B88
     %AICMD0x12_Jump($B48B31)                                   ;B48B8C
     %AICMD0x1A($0088, $00C8, $B38618, $00)                     ;B48B8F
-    %AICMD0x0C($00)                                            ;B48B97
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B48B97
     %AICMD0x37()                                               ;B48B99
     %AICMD0x10_End()                                           ;B48B9A
 
 
 DATA8_B48B9B:
  
-    %AICMD0x4F()                                               ;B48B9B
+    %AICMD0x4F_DisableToolUse()                                               ;B48B9B
     %AICMD0x50()                                               ;B48B9C
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B48B9D
     %AICMD0x14_JumpIfFlagSet(strcFlags.daily2, $0C, $B48BDE)   ;B48BA2
     %AICMD0x08_EnableAIControl()                               ;B48BA9
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B48BAA
-    %AICMD0x09($01, $B48BC2)                                   ;B48BAC
-    %AICMD0x09($02, $B48BD0)                                   ;B48BB0
-    %AICMD0x38()                                               ;B48BB4
+    %AICMD0x09_StartScript($01, $B48BC2)                                   ;B48BAC
+    %AICMD0x09_StartScript($02, $B48BD0)                                   ;B48BB0
+    %AICMD0x38_WaitForFadeIn()                                               ;B48BB4
     %AICMD0x1C_ShowDialog($0360, $00)                          ;B48BB5
     %AICMD0x42_AddValue24(nMoney, 1000)                        ;B48BB9
     %AICMD0x3C()                                               ;B48BC0
@@ -952,7 +952,7 @@ DATA8_B48B9B:
 
 DATA8_B48BDE:
  
-    %AICMD0x4F()                                               ;B48BDE
+    %AICMD0x4F_DisableToolUse()                                               ;B48BDE
     %AICMD0x50()                                               ;B48BDF
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B48BE0
     %AICMD0x05_SetTransferPosition(136, 456)                   ;B48BE5
@@ -969,7 +969,7 @@ DATA8_B48BDE:
     %AICMD0x12_Jump($B48C1B)                                   ;B48C13
     %AICMD0x06_SetDestinationArea(!AREA_FARMWINTER)            ;B48C16
     %AICMD0x12_Jump($B48C1B)                                   ;B48C18
-    %AICMD0x38()                                               ;B48C1B
+    %AICMD0x38_WaitForFadeIn()                                               ;B48C1B
     %AICMD0x19($004D, $00)                                     ;B48C1C
     %AICMD0x13_Wait(120)                                       ;B48C20
     %AICMD0x3C()                                               ;B48C23
@@ -999,14 +999,14 @@ DATA8_B48C45:
     %AICMD0x05_SetTransferPosition(184, 360)                   ;B48C45
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B48C4A
     %AICMD0x08_EnableAIControl()                               ;B48C4C
-    %AICMD0x09($01, $B48C67)                                   ;B48C4D
-    %AICMD0x09($02, $B48CF6)                                   ;B48C51
-    %AICMD0x09($03, $B48D1F)                                   ;B48C55
-    %AICMD0x38()                                               ;B48C59
+    %AICMD0x09_StartScript($01, $B48C67)                                   ;B48C4D
+    %AICMD0x09_StartScript($02, $B48CF6)                                   ;B48C51
+    %AICMD0x09_StartScript($03, $B48D1F)                                   ;B48C55
+    %AICMD0x38_WaitForFadeIn()                                               ;B48C59
     %AICMD0x11_EnableUserControl()                             ;B48C5A
-    %AICMD0x0C($00)                                            ;B48C5B
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B48C5B
     %AICMD0x08_EnableAIControl()                               ;B48C5D
-    %AICMD0x0C($01)                                            ;B48C5E
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B48C5E
     %AICMD0x11_EnableUserControl()                             ;B48C60
     %AICMD0x13_Wait(1)                                         ;B48C61
     %AICMD0x12_Jump($B48C61)                                   ;B48C64
@@ -1028,22 +1028,22 @@ DATA8_B48C45:
     %AICMD0x12_Jump($B48CB4)                                   ;B48CA9
     %AICMD0x47_SetValue8($800903, 0)                           ;B48CAC
     %AICMD0x12_Jump($B48CB4)                                   ;B48CB1
-    %AICMD0x28(strcShedItems.row1, $00)                        ;B48CB4
+    %AICMD0x28_ClearBit(strcShedItems.row1, $00)                        ;B48CB4
     %AICMD0x23_OrWithIndexedValue(strcFlags.event6, $0F)       ;B48CB9
     %AICMD0x41_AddValue16(nPlayerHappiness, 20)                ;B48CBE
-    %AICMD0x0B($00)                                            ;B48CC4
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B48CC4
     %AICMD0x12_Jump($B48CE4)                                   ;B48CC6
     %AICMD0x1C_ShowDialog($0329, $00)                          ;B48CC9
     %AICMD0x23_OrWithIndexedValue(strcFlags.event4, $00)       ;B48CCD
     %AICMD0x41_AddValue16(nPlayerHappiness, -10)               ;B48CD2
-    %AICMD0x0B($00)                                            ;B48CD8
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B48CD8
     %AICMD0x12_Jump($B48CE4)                                   ;B48CDA
     %AICMD0x1C_ShowDialog($032A, $00)                          ;B48CDD
     %AICMD0x12_Jump($B48C75)                                   ;B48CE1
     %AICMD0x1B($030E, $00)                                     ;B48CE4
     %AICMD0x0D($FF, $00, $30, $01)                             ;B48CE8
     %AICMD0x1B($030E, $01)                                     ;B48CED
-    %AICMD0x0B($01)                                            ;B48CF1
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B48CF1
     %AICMD0x12_Jump($B48C75)                                   ;B48CF3
     %AICMD0x1A($0058, $0188, $B384D4, $00)                     ;B48CF6
     %AICMD0x22($04, $04, $01, $B384D4, $02)                    ;B48CFE
@@ -1085,23 +1085,23 @@ DATA8_B48D58:
  
     %AICMD0x50()                                               ;B48D58
     %AICMD0x08_EnableAIControl()                               ;B48D59
-    %AICMD0x09($01, $B48D6B)                                   ;B48D5A
-    %AICMD0x38()                                               ;B48D5E
+    %AICMD0x09_StartScript($01, $B48D6B)                                   ;B48D5A
+    %AICMD0x38_WaitForFadeIn()                                               ;B48D5E
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 80)                  ;B48D5F
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B48D63
-    %AICMD0x0B($00)                                            ;B48D65
-    %AICMD0x0C($01)                                            ;B48D67
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B48D65
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B48D67
     %AICMD0x11_EnableUserControl()                             ;B48D69
     %AICMD0x10_End()                                           ;B48D6A
     %AICMD0x1A($0078, $01A8, $B38234, $02)                     ;B48D6B
-    %AICMD0x0C($00)                                            ;B48D73
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B48D73
     %AICMD0x1D_ShowDialog($0321, $00)                          ;B48D75
     %AICMD0x20_JumpIfChoice(0, $B48D90)                        ;B48D79
     %AICMD0x20_JumpIfChoice(1, $B48DF3)                        ;B48D7D
     %AICMD0x12_Jump($B48D84)                                   ;B48D81
     %AICMD0x1B($025F, $00)                                     ;B48D84
     %AICMD0x0D($FF, $00, $90, $01)                             ;B48D88
-    %AICMD0x0B($01)                                            ;B48D8D
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B48D8D
     %AICMD0x10_End()                                           ;B48D8F
     %AICMD0x1B($025D, $00)                                     ;B48D90
     %AICMD0x0D($00, $FF, $30, $01)                             ;B48D94
@@ -1121,7 +1121,7 @@ DATA8_B48D58:
     %AICMD0x12_Jump($B48DE0)                                   ;B48DD5
     %AICMD0x47_SetValue8($800903, 0)                           ;B48DD8
     %AICMD0x12_Jump($B48DE0)                                   ;B48DDD
-    %AICMD0x28(strcShedItems.row1, $02)                        ;B48DE0
+    %AICMD0x28_ClearBit(strcShedItems.row1, $02)                        ;B48DE0
     %AICMD0x23_OrWithIndexedValue(strcFlags.event3, $0F)       ;B48DE5
     %AICMD0x41_AddValue16(nPlayerHappiness, 20)                ;B48DEA
     %AICMD0x12_Jump($B48D84)                                   ;B48DF0
@@ -1154,33 +1154,33 @@ DATA8_B48E25:
     %AICMD0x00_SetMusic($0A, $B4)                              ;B48E25
     %AICMD0x08_EnableAIControl()                               ;B48E28
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B48E29
-    %AICMD0x09($01, $B48E33)                                   ;B48E2B
-    %AICMD0x0C($00)                                            ;B48E2F
+    %AICMD0x09_StartScript($01, $B48E33)                                   ;B48E2B
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B48E2F
     %AICMD0x11_EnableUserControl()                             ;B48E31
     %AICMD0x10_End()                                           ;B48E32
     %AICMD0x1A($0068, $0218, $B38528, $00)                     ;B48E33
     %AICMD0x1B($0315, $00)                                     ;B48E3B
     %AICMD0x0D($00, $03, $10, $01)                             ;B48E3F
-    %AICMD0x09($02, $B48E94)                                   ;B48E44
+    %AICMD0x09_StartScript($02, $B48E94)                                   ;B48E44
     %AICMD0x13_Wait(30)                                        ;B48E48
     %AICMD0x1D_ShowDialog($031E, $00)                          ;B48E4B
     %AICMD0x20_JumpIfChoice(0, $B48E5A)                        ;B48E4F
     %AICMD0x20_JumpIfChoice(1, $B48E72)                        ;B48E53
     %AICMD0x12_Jump($B48E89)                                   ;B48E57
-    %AICMD0x25($02)                                            ;B48E5A
-    %AICMD0x09($02, $B48EAE)                                   ;B48E5C
+    %AICMD0x25_RemoveActor($02)                                            ;B48E5A
+    %AICMD0x09_StartScript($02, $B48EAE)                                   ;B48E5C
     %AICMD0x1C_ShowDialog($031F, $00)                          ;B48E60
     %AICMD0x23_OrWithIndexedValue(strcFlags.event4, $03)       ;B48E64
     %AICMD0x41_AddValue16(nPlayerHappiness, -30)               ;B48E69
     %AICMD0x12_Jump($B48E89)                                   ;B48E6F
     %AICMD0x1C_ShowDialog($0320, $00)                          ;B48E72
-    %AICMD0x28(strcShedItems.row1, $03)                        ;B48E76
+    %AICMD0x28_ClearBit(strcShedItems.row1, $03)                        ;B48E76
     %AICMD0x47_SetValue8($800901, 20)                          ;B48E7B
     %AICMD0x41_AddValue16(nPlayerHappiness, 20)                ;B48E80
     %AICMD0x12_Jump($B48E89)                                   ;B48E86
     %AICMD0x13_Wait(120)                                       ;B48E89
     %AICMD0x1B($0316, $00)                                     ;B48E8C
-    %AICMD0x0B($00)                                            ;B48E90
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B48E90
     %AICMD0x37()                                               ;B48E92
     %AICMD0x10_End()                                           ;B48E93
     %AICMD0x13_Wait(30)                                        ;B48E94
@@ -1218,8 +1218,8 @@ pAIScripting0x18:
  
 DATA8_B48EE5:
  
-    %AICMD0x09($01, $B48EF9)                                   ;B48EE5
-    %AICMD0x38()                                               ;B48EE9
+    %AICMD0x09_StartScript($01, $B48EF9)                                   ;B48EE5
+    %AICMD0x38_WaitForFadeIn()                                               ;B48EE9
     %AICMD0x10_End()                                           ;B48EEA
     %AICMD0x15_JumpIfEquals8(nCurrentTimeID, 18, $B48EF8)      ;B48EEB
     %AICMD0x13_Wait(1)                                         ;B48EF2
@@ -1227,10 +1227,10 @@ DATA8_B48EE5:
     %AICMD0x10_End()                                           ;B48EF8
     %AICMD0x15_JumpIfEquals8(nCurrentTimeID, 18, $B48F94)      ;B48EF9
     %AICMD0x1A($0098, $01A8, $B384E0, $01)                     ;B48F00
-    %AICMD0x2D($B48F28, $B48F2F)                               ;B48F08
+    %AICMD0x2D_JumpOnInteract($B48F28, $B48F2F)                               ;B48F08
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 18, 24, $B48F6E) ;B48F0D
     %AICMD0x12_Jump($B48F08)                                   ;B48F15
-    %AICMD0x2D($B48F67, $B48F2F)                               ;B48F18
+    %AICMD0x2D_JumpOnInteract($B48F67, $B48F2F)                               ;B48F18
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 18, 24, $B48F6E) ;B48F1D
     %AICMD0x12_Jump($B48F18)                                   ;B48F25
     %AICMD0x1C_ShowDialog($032B, $00)                          ;B48F28
@@ -1283,12 +1283,12 @@ DATA8_B48FB5:
  
     %AICMD0x50()                                               ;B48FB5
     %AICMD0x08_EnableAIControl()                               ;B48FB6
-    %AICMD0x09($01, $B48FBF)                                   ;B48FB7
-    %AICMD0x38()                                               ;B48FBB
-    %AICMD0x0B($00)                                            ;B48FBC
+    %AICMD0x09_StartScript($01, $B48FBF)                                   ;B48FB7
+    %AICMD0x38_WaitForFadeIn()                                               ;B48FBB
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B48FBC
     %AICMD0x10_End()                                           ;B48FBE
     %AICMD0x1A($0088, $01B8, $B3830C, $01)                     ;B48FBF
-    %AICMD0x0C($00)                                            ;B48FC7
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B48FC7
     %AICMD0x0D($00, $FF, $50, $01)                             ;B48FC9
     %AICMD0x1C_ShowDialog($01CC, $00)                          ;B48FCE
     %AICMD0x1B($0290, $00)                                     ;B48FD2
@@ -1303,57 +1303,57 @@ DATA8_B48FDE:
     %AICMD0x50()                                               ;B48FDE
     %AICMD0x00_SetMusic($0E, $B4)                              ;B48FDF
     %AICMD0x08_EnableAIControl()                               ;B48FE2
-    %AICMD0x09($01, $B49083)                                   ;B48FE3
-    %AICMD0x09($02, $B4903D)                                   ;B48FE7
-    %AICMD0x09($03, $B49051)                                   ;B48FEB
-    %AICMD0x09($04, $B49065)                                   ;B48FEF
-    %AICMD0x38()                                               ;B48FF3
+    %AICMD0x09_StartScript($01, $B49083)                                   ;B48FE3
+    %AICMD0x09_StartScript($02, $B4903D)                                   ;B48FE7
+    %AICMD0x09_StartScript($03, $B49051)                                   ;B48FEB
+    %AICMD0x09_StartScript($04, $B49065)                                   ;B48FEF
+    %AICMD0x38_WaitForFadeIn()                                               ;B48FF3
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 24)                  ;B48FF4
-    %AICMD0x0B($00)                                            ;B48FF8
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B48FF8
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 48)                    ;B48FFA
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B48FFE
-    %AICMD0x0B($01)                                            ;B49000
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B49000
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 20)                  ;B49002
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 51)                    ;B49006
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B4900A
-    %AICMD0x0B($02)                                            ;B4900C
-    %AICMD0x0C($03)                                            ;B4900E
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4900C
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B4900E
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B49010
-    %AICMD0x0C($04)                                            ;B49012
+    %AICMD0x0C_WaitForScriptFlag($04)                                            ;B49012
     %AICMD0x19($0007, $00)                                     ;B49014
     %AICMD0x13_Wait(60)                                        ;B49018
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B4901B
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 64)                  ;B4901D
-    %AICMD0x0B($05)                                            ;B49021
+    %AICMD0x0B_SetScriptFlag($05)                                            ;B49021
     %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 48)                 ;B49023
     %AICMD0x40_DisableTileInteractions()                       ;B49027
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 64)                  ;B49028
-    %AICMD0x0C($06)                                            ;B4902C
+    %AICMD0x0C_WaitForScriptFlag($06)                                            ;B4902C
     %AICMD0x13_Wait(60)                                        ;B4902E
     %AICMD0x23_OrWithIndexedValue(strcFlags.event4, $0D)       ;B49031
-    %AICMD0x28(strcFlags.event4, $0C)                          ;B49036
+    %AICMD0x28_ClearBit(strcFlags.event4, $0C)                          ;B49036
     %AICMD0x3C()                                               ;B4903B
     %AICMD0x10_End()                                           ;B4903C
     %AICMD0x1A($0058, $00C8, $B38234, $02)                     ;B4903D
-    %AICMD0x0C($00)                                            ;B49045
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B49045
     %AICMD0x1C_ShowDialog($01D3, $00)                          ;B49047
     %AICMD0x13_Wait(1)                                         ;B4904B
     %AICMD0x12_Jump($B4904B)                                   ;B4904E
     %AICMD0x1A($00A8, $0098, $B38234, $03)                     ;B49051
-    %AICMD0x0C($01)                                            ;B49059
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B49059
     %AICMD0x1C_ShowDialog($01D4, $00)                          ;B4905B
     %AICMD0x13_Wait(1)                                         ;B4905F
     %AICMD0x12_Jump($B4905F)                                   ;B49062
     %AICMD0x1A($0068, $0068, $B38234, $00)                     ;B49065
-    %AICMD0x0C($02)                                            ;B4906D
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4906D
     %AICMD0x1B($025F, $00)                                     ;B4906F
     %AICMD0x1C_ShowDialog($01D5, $00)                          ;B49073
-    %AICMD0x0B($03)                                            ;B49077
+    %AICMD0x0B_SetScriptFlag($03)                                            ;B49077
     %AICMD0x1B($025A, $00)                                     ;B49079
     %AICMD0x13_Wait(1)                                         ;B4907D
     %AICMD0x12_Jump($B4907D)                                   ;B49080
     %AICMD0x1A($0028, $0068, $B38168, $02)                     ;B49083
-    %AICMD0x0C($03)                                            ;B4908B
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B4908B
     %AICMD0x1B($0223, $01)                                     ;B4908D
     %AICMD0x0D($01, $00, $22, $01)                             ;B49091
     %AICMD0x1C_ShowDialog($01D6, $00)                          ;B49096
@@ -1362,15 +1362,15 @@ DATA8_B48FDE:
     %AICMD0x1B($0223, $01)                                     ;B490A1
     %AICMD0x0D($FF, $00, $04, $01)                             ;B490A5
     %AICMD0x41_AddValue16(nLove_Maria, 50)                     ;B490AA
-    %AICMD0x0B($04)                                            ;B490B0
-    %AICMD0x0C($05)                                            ;B490B2
+    %AICMD0x0B_SetScriptFlag($04)                                            ;B490B0
+    %AICMD0x0C_WaitForScriptFlag($05)                                            ;B490B2
     %AICMD0x1B($021F, $00)                                     ;B490B4
     %AICMD0x0D($00, $01, $40, $01)                             ;B490B8
     %AICMD0x1B($0223, $01)                                     ;B490BD
     %AICMD0x0D($01, $00, $30, $01)                             ;B490C1
     %AICMD0x1B($021F, $00)                                     ;B490C6
     %AICMD0x0D($00, $01, $40, $01)                             ;B490CA
-    %AICMD0x0B($06)                                            ;B490CF
+    %AICMD0x0B_SetScriptFlag($06)                                            ;B490CF
     %AICMD0x37()                                               ;B490D1
     %AICMD0x10_End()                                           ;B490D2
 
@@ -1397,12 +1397,12 @@ DATA8_B490F3:
  
     %AICMD0x50()                                               ;B490F3
     %AICMD0x08_EnableAIControl()                               ;B490F4
-    %AICMD0x09($01, $B490FD)                                   ;B490F5
-    %AICMD0x38()                                               ;B490F9
-    %AICMD0x0B($00)                                            ;B490FA
+    %AICMD0x09_StartScript($01, $B490FD)                                   ;B490F5
+    %AICMD0x38_WaitForFadeIn()                                               ;B490F9
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B490FA
     %AICMD0x10_End()                                           ;B490FC
     %AICMD0x1A($0088, $01B8, $B381A4, $01)                     ;B490FD
-    %AICMD0x0C($00)                                            ;B49105
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B49105
     %AICMD0x0D($00, $FF, $50, $01)                             ;B49107
     %AICMD0x1C_ShowDialog($01DB, $00)                          ;B4910C
     %AICMD0x1B($0227, $00)                                     ;B49110
@@ -1421,24 +1421,24 @@ DATA8_B4911C:
     %AICMD0x05_SetTransferPosition(136, 456)                   ;B49123
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B49128
     %AICMD0x08_EnableAIControl()                               ;B4912A
-    %AICMD0x09($01, $B49155)                                   ;B4912B
-    %AICMD0x09($02, $B4919D)                                   ;B4912F
+    %AICMD0x09_StartScript($01, $B49155)                                   ;B4912B
+    %AICMD0x09_StartScript($02, $B4919D)                                   ;B4912F
     %AICMD0x3B($24)                                            ;B49133
-    %AICMD0x38()                                               ;B49135
-    %AICMD0x0B($03)                                            ;B49136
+    %AICMD0x38_WaitForFadeIn()                                               ;B49135
+    %AICMD0x0B_SetScriptFlag($03)                                            ;B49136
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 64)                    ;B49138
     %AICMD0x3F_ThrowCarriedItem()                              ;B4913C
-    %AICMD0x0B($00)                                            ;B4913D
-    %AICMD0x0C($02)                                            ;B4913F
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4913D
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4913F
     %AICMD0x40_DisableTileInteractions()                       ;B49141
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 96)                  ;B49142
     %AICMD0x13_Wait(60)                                        ;B49146
     %AICMD0x23_OrWithIndexedValue(strcFlags.event4, $0F)       ;B49149
-    %AICMD0x28(strcFlags.event4, $0E)                          ;B4914E
+    %AICMD0x28_ClearBit(strcFlags.event4, $0E)                          ;B4914E
     %AICMD0x3C()                                               ;B49153
     %AICMD0x10_End()                                           ;B49154
     %AICMD0x1A($0088, $0178, $B38198, $00)                     ;B49155
-    %AICMD0x0C($00)                                            ;B4915D
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4915D
     %AICMD0x1B($0226, $00)                                     ;B4915F
     %AICMD0x13_Wait(60)                                        ;B49163
     %AICMD0x1C_ShowDialog($01E1, $00)                          ;B49166
@@ -1453,13 +1453,13 @@ DATA8_B4911C:
     %AICMD0x41_AddValue16(nLove_Ann, 50)                       ;B4918A
     %AICMD0x1B($0227, $00)                                     ;B49190
     %AICMD0x0D($00, $01, $50, $01)                             ;B49194
-    %AICMD0x0B($01)                                            ;B49199
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B49199
     %AICMD0x37()                                               ;B4919B
     %AICMD0x10_End()                                           ;B4919C
     %AICMD0x1A($0028, $0168, $B38318, $02)                     ;B4919D
-    %AICMD0x0C($01)                                            ;B491A5
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B491A5
     %AICMD0x1C_ShowDialog($01E2, $00)                          ;B491A7
-    %AICMD0x0B($02)                                            ;B491AB
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B491AB
     %AICMD0x13_Wait(1)                                         ;B491AD
     %AICMD0x12_Jump($B491AD)                                   ;B491B0
 
@@ -1486,12 +1486,12 @@ DATA8_B491D3:
  
     %AICMD0x50()                                               ;B491D3
     %AICMD0x08_EnableAIControl()                               ;B491D4
-    %AICMD0x09($01, $B491DD)                                   ;B491D5
-    %AICMD0x38()                                               ;B491D9
-    %AICMD0x0B($00)                                            ;B491DA
+    %AICMD0x09_StartScript($01, $B491DD)                                   ;B491D5
+    %AICMD0x38_WaitForFadeIn()                                               ;B491D9
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B491DA
     %AICMD0x10_End()                                           ;B491DC
     %AICMD0x1A($0088, $01B8, $B38324, $01)                     ;B491DD
-    %AICMD0x0C($00)                                            ;B491E5
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B491E5
     %AICMD0x0D($00, $FF, $50, $01)                             ;B491E7
     %AICMD0x1B($029B, $01)                                     ;B491EC
     %AICMD0x13_Wait(10)                                        ;B491F0
@@ -1501,7 +1501,7 @@ DATA8_B491D3:
     %AICMD0x1C_ShowDialog($01E3, $00)                          ;B491FE
     %AICMD0x1B($0297, $00)                                     ;B49202
     %AICMD0x0D($00, $01, $60, $01)                             ;B49206
-    %AICMD0x0B($01)                                            ;B4920B
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4920B
     %AICMD0x37()                                               ;B4920D
     %AICMD0x11_EnableUserControl()                             ;B4920E
     %AICMD0x10_End()                                           ;B4920F
@@ -1510,8 +1510,8 @@ DATA8_B491D3:
 DATA8_B49210:
  
     %AICMD0x00_SetMusic($0E, $B4)                              ;B49210
-    %AICMD0x09($01, $B49221)                                   ;B49213
-    %AICMD0x38()                                               ;B49217
+    %AICMD0x09_StartScript($01, $B49221)                                   ;B49213
+    %AICMD0x38_WaitForFadeIn()                                               ;B49217
     %AICMD0x11_EnableUserControl()                             ;B49218
     %AICMD0x10_End()                                           ;B49219
     %AICMD0x13_Wait(1)                                         ;B4921A
@@ -1519,9 +1519,9 @@ DATA8_B49210:
     %AICMD0x10_End()                                           ;B49220
     %AICMD0x1A($0038, $00F8, $B387EC, $00)                     ;B49221
     %AICMD0x12_Jump($B4922C)                                   ;B49229
-    %AICMD0x2D($B4923C, $B4924A)                               ;B4922C
+    %AICMD0x2D_JumpOnInteract($B4923C, $B4924A)                               ;B4922C
     %AICMD0x12_Jump($B4922C)                                   ;B49231
-    %AICMD0x2D($B49243, $B4924A)                               ;B49234
+    %AICMD0x2D_JumpOnInteract($B49243, $B4924A)                               ;B49234
     %AICMD0x12_Jump($B49234)                                   ;B49239
     %AICMD0x1C_ShowDialog($01E5, $00)                          ;B4923C
     %AICMD0x12_Jump($B49234)                                   ;B49240
@@ -1537,7 +1537,7 @@ DATA8_B49210:
     %AICMD0x13_Wait(90)                                        ;B49266
     %AICMD0x1B($024F, $01)                                     ;B49269
     %AICMD0x41_AddValue16(nLove_Nina, 50)                      ;B4926D
-    %AICMD0x0B($00)                                            ;B49273
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B49273
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B49275
     %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 48)                 ;B49277
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B4927B
@@ -1561,7 +1561,7 @@ DATA8_B49210:
     %AICMD0x1B($024E, $00)                                     ;B492BF
     %AICMD0x13_Wait(60)                                        ;B492C3
     %AICMD0x23_OrWithIndexedValue(strcFlags.event5, $01)       ;B492C6
-    %AICMD0x28(strcFlags.event5, $00)                          ;B492CB
+    %AICMD0x28_ClearBit(strcFlags.event5, $00)                          ;B492CB
     %AICMD0x3C()                                               ;B492D0
     %AICMD0x10_End()                                           ;B492D1
 
@@ -1588,17 +1588,17 @@ DATA8_B492F2:
  
     %AICMD0x50()                                               ;B492F2
     %AICMD0x08_EnableAIControl()                               ;B492F3
-    %AICMD0x09($01, $B492FC)                                   ;B492F4
-    %AICMD0x38()                                               ;B492F8
-    %AICMD0x0B($00)                                            ;B492F9
+    %AICMD0x09_StartScript($01, $B492FC)                                   ;B492F4
+    %AICMD0x38_WaitForFadeIn()                                               ;B492F8
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B492F9
     %AICMD0x10_End()                                           ;B492FB
     %AICMD0x1A($0088, $01B8, $B381EC, $01)                     ;B492FC
-    %AICMD0x0C($00)                                            ;B49304
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B49304
     %AICMD0x0D($00, $FF, $50, $01)                             ;B49306
     %AICMD0x1C_ShowDialog($01EB, $00)                          ;B4930B
     %AICMD0x1B($023D, $00)                                     ;B4930F
     %AICMD0x0D($00, $01, $60, $01)                             ;B49313
-    %AICMD0x0B($01)                                            ;B49318
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B49318
     %AICMD0x37()                                               ;B4931A
     %AICMD0x11_EnableUserControl()                             ;B4931B
     %AICMD0x10_End()                                           ;B4931C
@@ -1607,8 +1607,8 @@ DATA8_B492F2:
 DATA8_B4931D:
  
     %AICMD0x00_SetMusic($0E, $B4)                              ;B4931D
-    %AICMD0x09($0A, $B49326)                                   ;B49320
-    %AICMD0x38()                                               ;B49324
+    %AICMD0x09_StartScript($0A, $B49326)                                   ;B49320
+    %AICMD0x38_WaitForFadeIn()                                               ;B49324
     %AICMD0x10_End()                                           ;B49325
     %AICMD0x1A($029C, $018E, $B38558, $03)                     ;B49326
     %AICMD0x1F($B49334)                                        ;B4932E
@@ -1632,12 +1632,12 @@ DATA8_B4931D:
     %AICMD0x12_Jump($B49378)                                   ;B49375
     %AICMD0x10_End()                                           ;B49378
     %AICMD0x1A($0288, $01F5, $B38558, $03)                     ;B49379
-    %AICMD0x0C($01)                                            ;B49381
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B49381
     %AICMD0x1B($0320, $01)                                     ;B49383
     %AICMD0x0D($02, $FF, $20, $02)                             ;B49387
     %AICMD0x0D($01, $FF, $20, $02)                             ;B4938C
     %AICMD0x0D($01, $FF, $50, $01)                             ;B49391
-    %AICMD0x0B($02)                                            ;B49396
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B49396
     %AICMD0x37()                                               ;B49398
     %AICMD0x10_End()                                           ;B49399
     %AICMD0x1A($0208, $0208, $B381EC, $02)                     ;B4939A
@@ -1645,10 +1645,10 @@ DATA8_B4931D:
     %AICMD0x1B($0240, $01)                                     ;B493A7
     %AICMD0x13_Wait(90)                                        ;B493AB
     %AICMD0x1C_ShowDialog($01F1, $00)                          ;B493AE
-    %AICMD0x0B($01)                                            ;B493B2
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B493B2
     %AICMD0x1B($0242, $00)                                     ;B493B4
     %AICMD0x13_Wait(90)                                        ;B493B8
-    %AICMD0x0C($02)                                            ;B493BB
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B493BB
     %AICMD0x1B($0240, $01)                                     ;B493BD
     %AICMD0x1C_ShowDialog($01F2, $00)                          ;B493C1
     %AICMD0x1B($0241, $01)                                     ;B493C5
@@ -1664,7 +1664,7 @@ DATA8_B4931D:
     %AICMD0x0D($00, $01, $50, $01)                             ;B493EF
     %AICMD0x1B($0241, $00)                                     ;B493F4
     %AICMD0x0D($FF, $00, $70, $01)                             ;B493F8
-    %AICMD0x0B($03)                                            ;B493FD
+    %AICMD0x0B_SetScriptFlag($03)                                            ;B493FD
     %AICMD0x37()                                               ;B493FF
     %AICMD0x10_End()                                           ;B49400
 
@@ -1676,10 +1676,10 @@ DATA8_B49401:
     %AICMD0x08_EnableAIControl()                               ;B49403
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B49404
     %AICMD0x05_SetTransferPosition(648, 520)                   ;B49406
-    %AICMD0x09($0A, $B4939A)                                   ;B4940B
-    %AICMD0x09($0B, $B49379)                                   ;B4940F
-    %AICMD0x38()                                               ;B49413
-    %AICMD0x0C($01)                                            ;B49414
+    %AICMD0x09_StartScript($0A, $B4939A)                                   ;B4940B
+    %AICMD0x09_StartScript($0B, $B49379)                                   ;B4940F
+    %AICMD0x38_WaitForFadeIn()                                               ;B49413
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B49414
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B49416
     %AICMD0x13_Wait(60)                                        ;B49418
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B4941B
@@ -1689,9 +1689,9 @@ DATA8_B49401:
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B49425
     %AICMD0x13_Wait(220)                                       ;B49427
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 48)                  ;B4942A
-    %AICMD0x0C($03)                                            ;B4942E
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B4942E
     %AICMD0x23_OrWithIndexedValue(strcFlags.event5, $03)       ;B49430
-    %AICMD0x28(strcFlags.event5, $02)                          ;B49435
+    %AICMD0x28_ClearBit(strcFlags.event5, $02)                          ;B49435
     %AICMD0x3C()                                               ;B4943A
     %AICMD0x10_End()                                           ;B4943B
 
@@ -1718,12 +1718,12 @@ DATA8_B4945C:
  
     %AICMD0x50()                                               ;B4945C
     %AICMD0x08_EnableAIControl()                               ;B4945D
-    %AICMD0x09($01, $B49466)                                   ;B4945E
-    %AICMD0x38()                                               ;B49462
-    %AICMD0x0B($00)                                            ;B49463
+    %AICMD0x09_StartScript($01, $B49466)                                   ;B4945E
+    %AICMD0x38_WaitForFadeIn()                                               ;B49462
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B49463
     %AICMD0x10_End()                                           ;B49465
     %AICMD0x1A($0088, $01B8, $B38240, $01)                     ;B49466
-    %AICMD0x0C($00)                                            ;B4946E
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4946E
     %AICMD0x0D($00, $FE, $28, $01)                             ;B49470
     %AICMD0x1B($025F, $01)                                     ;B49475
     %AICMD0x13_Wait(10)                                        ;B49479
@@ -1733,7 +1733,7 @@ DATA8_B4945C:
     %AICMD0x1C_ShowDialog($01F5, $00)                          ;B49487
     %AICMD0x1B($025B, $00)                                     ;B4948B
     %AICMD0x0D($00, $02, $30, $01)                             ;B4948F
-    %AICMD0x0B($01)                                            ;B49494
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B49494
     %AICMD0x37()                                               ;B49496
     %AICMD0x11_EnableUserControl()                             ;B49497
     %AICMD0x10_End()                                           ;B49498
@@ -1741,11 +1741,11 @@ DATA8_B4945C:
 
 DATA8_B49499:
  
-    %AICMD0x09($01, $B494B1)                                   ;B49499
-    %AICMD0x09($02, $B494C6)                                   ;B4949D
-    %AICMD0x09($03, $B494E2)                                   ;B494A1
-    %AICMD0x09($04, $B494F7)                                   ;B494A5
-    %AICMD0x38()                                               ;B494A9
+    %AICMD0x09_StartScript($01, $B494B1)                                   ;B49499
+    %AICMD0x09_StartScript($02, $B494C6)                                   ;B4949D
+    %AICMD0x09_StartScript($03, $B494E2)                                   ;B494A1
+    %AICMD0x09_StartScript($04, $B494F7)                                   ;B494A5
+    %AICMD0x38_WaitForFadeIn()                                               ;B494A9
     %AICMD0x10_End()                                           ;B494AA
     %AICMD0x13_Wait(1)                                         ;B494AB
     %AICMD0x12_Jump($B494AB)                                   ;B494AE
@@ -1777,10 +1777,10 @@ DATA8_B49513:
  
     %AICMD0x50()                                               ;B49513
     %AICMD0x00_SetMusic($0E, $B4)                              ;B49514
-    %AICMD0x09($01, $B49574)                                   ;B49517
-    %AICMD0x09($02, $B4955F)                                   ;B4951B
-    %AICMD0x38()                                               ;B4951F
-    %AICMD0x0C($00)                                            ;B49520
+    %AICMD0x09_StartScript($01, $B49574)                                   ;B49517
+    %AICMD0x09_StartScript($02, $B4955F)                                   ;B4951B
+    %AICMD0x38_WaitForFadeIn()                                               ;B4951F
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B49520
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $05)       ;B49522
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, $B49543)     ;B49527
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, $B49548)     ;B4952E
@@ -1806,7 +1806,7 @@ DATA8_B49513:
     %AICMD0x1F($B49582)                                        ;B4957C
     %AICMD0x12_Jump($B4957C)                                   ;B4957F
     %AICMD0x1C_ShowDialog($01FC, $00)                          ;B49582
-    %AICMD0x0B($00)                                            ;B49586
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B49586
     %AICMD0x12_Jump($B4957C)                                   ;B49588
 
 
@@ -1814,36 +1814,36 @@ DATA8_B4958B:
  
     %AICMD0x50()                                               ;B4958B
     %AICMD0x08_EnableAIControl()                               ;B4958C
-    %AICMD0x09($01, $B495C4)                                   ;B4958D
-    %AICMD0x09($02, $B4965F)                                   ;B49591
-    %AICMD0x09($03, $B4962A)                                   ;B49595
-    %AICMD0x38()                                               ;B49599
-    %AICMD0x0B($00)                                            ;B4959A
-    %AICMD0x0C($02)                                            ;B4959C
+    %AICMD0x09_StartScript($01, $B495C4)                                   ;B4958D
+    %AICMD0x09_StartScript($02, $B4965F)                                   ;B49591
+    %AICMD0x09_StartScript($03, $B4962A)                                   ;B49595
+    %AICMD0x38_WaitForFadeIn()                                               ;B49599
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4959A
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4959C
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B4959E
-    %AICMD0x0C($04)                                            ;B495A0
+    %AICMD0x0C_WaitForScriptFlag($04)                                            ;B495A0
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B495A2
-    %AICMD0x0C($06)                                            ;B495A4
+    %AICMD0x0C_WaitForScriptFlag($06)                                            ;B495A4
     %AICMD0x13_Wait(120)                                       ;B495A6
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 48)                  ;B495A9
-    %AICMD0x0C($07)                                            ;B495AD
+    %AICMD0x0C_WaitForScriptFlag($07)                                            ;B495AD
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B495AF
     %AICMD0x13_Wait(60)                                        ;B495B1
     %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 32)                 ;B495B4
     %AICMD0x23_OrWithIndexedValue(strcFlags.event5, $05)       ;B495B8
-    %AICMD0x28(strcFlags.event5, $04)                          ;B495BD
+    %AICMD0x28_ClearBit(strcFlags.event5, $04)                          ;B495BD
     %AICMD0x3C()                                               ;B495C2
     %AICMD0x10_End()                                           ;B495C3
     %AICMD0x1A($0068, $01A8, $B38204, $02)                     ;B495C4
-    %AICMD0x0C($00)                                            ;B495CC
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B495CC
     %AICMD0x1B($0249, $01)                                     ;B495CE
     %AICMD0x0D($01, $00, $20, $01)                             ;B495D2
     %AICMD0x1C_ShowDialog($01FD, $01)                          ;B495D7
-    %AICMD0x0B($01)                                            ;B495DB
-    %AICMD0x0C($02)                                            ;B495DD
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B495DB
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B495DD
     %AICMD0x1C_ShowDialog($01FF, $01)                          ;B495DF
-    %AICMD0x0B($03)                                            ;B495E3
-    %AICMD0x0C($05)                                            ;B495E5
+    %AICMD0x0B_SetScriptFlag($03)                                            ;B495E3
+    %AICMD0x0C_WaitForScriptFlag($05)                                            ;B495E5
     %AICMD0x1B($0249, $01)                                     ;B495E7
     %AICMD0x0D($01, $00, $10, $01)                             ;B495EB
     %AICMD0x1C_ShowDialog($0200, $01)                          ;B495F0
@@ -1851,38 +1851,38 @@ DATA8_B4958B:
     %AICMD0x1B($024A, $01)                                     ;B495F9
     %AICMD0x13_Wait(90)                                        ;B495FD
     %AICMD0x41_AddValue16(nLove_Eve, 50)                       ;B49600
-    %AICMD0x0B($06)                                            ;B49606
+    %AICMD0x0B_SetScriptFlag($06)                                            ;B49606
     %AICMD0x1B($0245, $00)                                     ;B49608
     %AICMD0x0D($00, $01, $30, $01)                             ;B4960C
     %AICMD0x13_Wait(10)                                        ;B49611
     %AICMD0x1B($0249, $01)                                     ;B49614
     %AICMD0x0D($01, $00, $30, $01)                             ;B49618
-    %AICMD0x0B($07)                                            ;B4961D
+    %AICMD0x0B_SetScriptFlag($07)                                            ;B4961D
     %AICMD0x1B($0249, $01)                                     ;B4961F
     %AICMD0x0D($01, $00, $76, $01)                             ;B49623
     %AICMD0x37()                                               ;B49628
     %AICMD0x10_End()                                           ;B49629
     %AICMD0x1A($0098, $01A8, $B382D0, $00)                     ;B4962A
-    %AICMD0x0C($01)                                            ;B49632
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B49632
     %AICMD0x1B($0281, $00)                                     ;B49634
     %AICMD0x1C_ShowDialog($01FE, $00)                          ;B49638
-    %AICMD0x0B($02)                                            ;B4963C
-    %AICMD0x0C($03)                                            ;B4963E
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4963C
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B4963E
     %AICMD0x1B($027D, $00)                                     ;B49640
     %AICMD0x0D($00, $01, $30, $01)                             ;B49644
     %AICMD0x1B($0281, $01)                                     ;B49649
     %AICMD0x0D($01, $00, $20, $01)                             ;B4964D
-    %AICMD0x0B($04)                                            ;B49652
+    %AICMD0x0B_SetScriptFlag($04)                                            ;B49652
     %AICMD0x1B($0281, $01)                                     ;B49654
     %AICMD0x0D($01, $00, $70, $01)                             ;B49658
     %AICMD0x37()                                               ;B4965D
     %AICMD0x10_End()                                           ;B4965E
     %AICMD0x1A($00D8, $01D8, $B38234, $03)                     ;B4965F
-    %AICMD0x0C($04)                                            ;B49667
+    %AICMD0x0C_WaitForScriptFlag($04)                                            ;B49667
     %AICMD0x1C_ShowDialog($01F9, $01)                          ;B49669
     %AICMD0x1B($025F, $01)                                     ;B4966D
     %AICMD0x0D($01, $00, $70, $01)                             ;B49671
-    %AICMD0x0B($05)                                            ;B49676
+    %AICMD0x0B_SetScriptFlag($05)                                            ;B49676
     %AICMD0x37()                                               ;B49678
     %AICMD0x10_End()                                           ;B49679
 
@@ -1916,16 +1916,16 @@ DATA8_B4969A:
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B496AB
     %AICMD0x08_EnableAIControl()                               ;B496AD
     %AICMD0x19($00E8, $00)                                     ;B496AE
-    %AICMD0x09($01, $B4979C)                                   ;B496B2
-    %AICMD0x09($02, $B499CF)                                   ;B496B6
-    %AICMD0x09($03, $B499DD)                                   ;B496BA
-    %AICMD0x09($04, $B499EB)                                   ;B496BE
-    %AICMD0x09($05, $B499F9)                                   ;B496C2
-    %AICMD0x09($06, $B49A15)                                   ;B496C6
-    %AICMD0x09($07, $B49A07)                                   ;B496CA
-    %AICMD0x09($08, $B49A23)                                   ;B496CE
-    %AICMD0x09($09, $B49A31)                                   ;B496D2
-    %AICMD0x09($0A, $B4973C)                                   ;B496D6
+    %AICMD0x09_StartScript($01, $B4979C)                                   ;B496B2
+    %AICMD0x09_StartScript($02, $B499CF)                                   ;B496B6
+    %AICMD0x09_StartScript($03, $B499DD)                                   ;B496BA
+    %AICMD0x09_StartScript($04, $B499EB)                                   ;B496BE
+    %AICMD0x09_StartScript($05, $B499F9)                                   ;B496C2
+    %AICMD0x09_StartScript($06, $B49A15)                                   ;B496C6
+    %AICMD0x09_StartScript($07, $B49A07)                                   ;B496CA
+    %AICMD0x09_StartScript($08, $B49A23)                                   ;B496CE
+    %AICMD0x09_StartScript($09, $B49A31)                                   ;B496D2
+    %AICMD0x09_StartScript($0A, $B4973C)                                   ;B496D6
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, $B496F6)     ;B496DA
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, $B496FB)     ;B496E1
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, $B49700)     ;B496E8
@@ -1938,14 +1938,14 @@ DATA8_B4969A:
     %AICMD0x12_Jump($B4970A)                                   ;B49702
     %AICMD0x06_SetDestinationArea(!AREA_TOWNWINTER)            ;B49705
     %AICMD0x12_Jump($B4970A)                                   ;B49707
-    %AICMD0x38()                                               ;B4970A
-    %AICMD0x0C($01)                                            ;B4970B
-    %AICMD0x09($0B, $B4991D)                                   ;B4970D
-    %AICMD0x09($0C, $B49949)                                   ;B49711
-    %AICMD0x09($0D, $B49973)                                   ;B49715
-    %AICMD0x09($0E, $B49990)                                   ;B49719
-    %AICMD0x09($0F, $B499AD)                                   ;B4971D
-    %AICMD0x0C($03)                                            ;B49721
+    %AICMD0x38_WaitForFadeIn()                                               ;B4970A
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4970B
+    %AICMD0x09_StartScript($0B, $B4991D)                                   ;B4970D
+    %AICMD0x09_StartScript($0C, $B49949)                                   ;B49711
+    %AICMD0x09_StartScript($0D, $B49973)                                   ;B49715
+    %AICMD0x09_StartScript($0E, $B49990)                                   ;B49719
+    %AICMD0x09_StartScript($0F, $B499AD)                                   ;B4971D
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B49721
     %AICMD0x13_Wait(60)                                        ;B49723
     %AICMD0x41_AddValue16(nPlayerHappiness, 50)                ;B49726
     %AICMD0x01_UnfreezeTime()                                  ;B4972C
@@ -1964,7 +1964,7 @@ DATA8_B4969A:
     %AICMD0x1B($032E, $00)                                     ;B4975D
     %AICMD0x13_Wait(60)                                        ;B49761
     %AICMD0x1B($032F, $00)                                     ;B49764
-    %AICMD0x09($10, $B4978F)                                   ;B49768
+    %AICMD0x09_StartScript($10, $B4978F)                                   ;B49768
     %AICMD0x13_Wait(120)                                       ;B4976C
     %AICMD0x1B($032C, $00)                                     ;B4976F
     %AICMD0x13_Wait(60)                                        ;B49773
@@ -1973,7 +1973,7 @@ DATA8_B4969A:
     %AICMD0x0D($00, $01, $30, $01)                             ;B49780
     %AICMD0x13_Wait(60)                                        ;B49785
     %AICMD0x1B($032C, $00)                                     ;B49788
-    %AICMD0x0B($01)                                            ;B4978C
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4978C
     %AICMD0x10_End()                                           ;B4978E
     %AICMD0x1A($0170, $0090, $B38B4C, $00)                     ;B4978F
     %AICMD0x13_Wait(60)                                        ;B49797
@@ -1998,7 +1998,7 @@ DATA8_B4969A:
     %AICMD0x13_Wait(60)                                        ;B497EC
     %AICMD0x1B($0331, $00)                                     ;B497EF
     %AICMD0x0D($00, $01, $30, $01)                             ;B497F3
-    %AICMD0x0B($02)                                            ;B497F8
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B497F8
     %AICMD0x13_Wait(1)                                         ;B497FA
     %AICMD0x12_Jump($B497FA)                                   ;B497FD
     %AICMD0x1A($0178, $0098, $B38678, $00)                     ;B49800
@@ -2015,7 +2015,7 @@ DATA8_B4969A:
     %AICMD0x13_Wait(60)                                        ;B4982D
     %AICMD0x1B($0335, $00)                                     ;B49830
     %AICMD0x0D($00, $01, $30, $01)                             ;B49834
-    %AICMD0x0B($02)                                            ;B49839
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B49839
     %AICMD0x13_Wait(1)                                         ;B4983B
     %AICMD0x12_Jump($B4983B)                                   ;B4983E
     %AICMD0x1A($0178, $0098, $B38684, $00)                     ;B49841
@@ -2032,7 +2032,7 @@ DATA8_B4969A:
     %AICMD0x13_Wait(60)                                        ;B4986E
     %AICMD0x1B($0341, $00)                                     ;B49871
     %AICMD0x0D($00, $01, $30, $01)                             ;B49875
-    %AICMD0x0B($02)                                            ;B4987A
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4987A
     %AICMD0x13_Wait(1)                                         ;B4987C
     %AICMD0x12_Jump($B4987C)                                   ;B4987F
     %AICMD0x1A($0178, $0098, $B38690, $00)                     ;B49882
@@ -2049,7 +2049,7 @@ DATA8_B4969A:
     %AICMD0x13_Wait(60)                                        ;B498AF
     %AICMD0x1B($0339, $00)                                     ;B498B2
     %AICMD0x0D($00, $01, $30, $01)                             ;B498B6
-    %AICMD0x0B($02)                                            ;B498BB
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B498BB
     %AICMD0x13_Wait(1)                                         ;B498BD
     %AICMD0x12_Jump($B498BD)                                   ;B498C0
     %AICMD0x1A($0178, $0098, $B3869C, $00)                     ;B498C3
@@ -2066,7 +2066,7 @@ DATA8_B4969A:
     %AICMD0x13_Wait(60)                                        ;B498F0
     %AICMD0x1B($033D, $00)                                     ;B498F3
     %AICMD0x0D($00, $01, $30, $01)                             ;B498F7
-    %AICMD0x0B($02)                                            ;B498FC
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B498FC
     %AICMD0x13_Wait(1)                                         ;B498FE
     %AICMD0x12_Jump($B498FE)                                   ;B49901
     %AICMD0x1A($0178, $00D0, $B3863C, $00)                     ;B49904
@@ -2076,50 +2076,50 @@ DATA8_B4969A:
     %AICMD0x37()                                               ;B4991B
     %AICMD0x10_End()                                           ;B4991C
     %AICMD0x1A($0208, $00CC, $B3854C, $03)                     ;B4991D
-    %AICMD0x0C($02)                                            ;B49925
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B49925
     %AICMD0x0D($FD, $00, $30, $03)                             ;B49927
     %AICMD0x0D($FD, $FF, $30, $03)                             ;B4992C
     %AICMD0x0D($FC, $FE, $30, $03)                             ;B49931
     %AICMD0x0D($FC, $FD, $18, $02)                             ;B49936
     %AICMD0x0D($FC, $FC, $18, $02)                             ;B4993B
     %AICMD0x0D($FC, $FB, $14, $02)                             ;B49940
-    %AICMD0x0B($03)                                            ;B49945
+    %AICMD0x0B_SetScriptFlag($03)                                            ;B49945
     %AICMD0x37()                                               ;B49947
     %AICMD0x10_End()                                           ;B49948
     %AICMD0x1A($01F8, $0068, $B3854C, $03)                     ;B49949
-    %AICMD0x0C($02)                                            ;B49951
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B49951
     %AICMD0x13_Wait(40)                                        ;B49953
     %AICMD0x0D($FD, $04, $3C, $03)                             ;B49956
     %AICMD0x0D($FD, $03, $30, $02)                             ;B4995B
     %AICMD0x0D($FD, $02, $40, $02)                             ;B49960
     %AICMD0x0D($FD, $01, $40, $02)                             ;B49965
     %AICMD0x0D($FD, $00, $30, $02)                             ;B4996A
-    %AICMD0x0B($03)                                            ;B4996F
+    %AICMD0x0B_SetScriptFlag($03)                                            ;B4996F
     %AICMD0x37()                                               ;B49971
     %AICMD0x10_End()                                           ;B49972
     %AICMD0x1A($0100, $00C8, $B3854C, $02)                     ;B49973
-    %AICMD0x0C($02)                                            ;B4997B
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4997B
     %AICMD0x0D($03, $FF, $30, $02)                             ;B4997D
     %AICMD0x0D($03, $FE, $20, $03)                             ;B49982
     %AICMD0x0D($01, $FF, $40, $01)                             ;B49987
-    %AICMD0x0B($03)                                            ;B4998C
+    %AICMD0x0B_SetScriptFlag($03)                                            ;B4998C
     %AICMD0x37()                                               ;B4998E
     %AICMD0x10_End()                                           ;B4998F
     %AICMD0x1A($0196, $0048, $B3854C, $00)                     ;B49990
-    %AICMD0x0C($02)                                            ;B49998
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B49998
     %AICMD0x0D($00, $02, $20, $02)                             ;B4999A
     %AICMD0x0D($FE, $03, $40, $03)                             ;B4999F
     %AICMD0x0D($FE, $03, $90, $02)                             ;B499A4
-    %AICMD0x0B($03)                                            ;B499A9
+    %AICMD0x0B_SetScriptFlag($03)                                            ;B499A9
     %AICMD0x37()                                               ;B499AB
     %AICMD0x10_End()                                           ;B499AC
     %AICMD0x1A($00E8, $0028, $B3854C, $00)                     ;B499AD
-    %AICMD0x0C($02)                                            ;B499B5
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B499B5
     %AICMD0x0D($00, $02, $40, $02)                             ;B499B7
     %AICMD0x0D($01, $03, $40, $03)                             ;B499BC
     %AICMD0x0D($02, $03, $40, $03)                             ;B499C1
     %AICMD0x0D($03, $03, $58, $03)                             ;B499C6
-    %AICMD0x0B($03)                                            ;B499CB
+    %AICMD0x0B_SetScriptFlag($03)                                            ;B499CB
     %AICMD0x37()                                               ;B499CD
     %AICMD0x10_End()                                           ;B499CE
     %AICMD0x1A($0140, $0098, $B38360, $02)                     ;B499CF
@@ -2170,15 +2170,15 @@ DATA8_B49A5F:
  
     %AICMD0x50()                                               ;B49A5F
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $0D)       ;B49A60
-    %AICMD0x09($01, $B49AE0)                                   ;B49A65
-    %AICMD0x09($02, $B49B97)                                   ;B49A69
-    %AICMD0x09($03, $B49B74)                                   ;B49A6D
+    %AICMD0x09_StartScript($01, $B49AE0)                                   ;B49A65
+    %AICMD0x09_StartScript($02, $B49B97)                                   ;B49A69
+    %AICMD0x09_StartScript($03, $B49B74)                                   ;B49A6D
     %AICMD0x12_Jump($B49A97)                                   ;B49A71
-    %AICMD0x55(strcFlags.event6, $02, $B49A89)                 ;B49A74
+    %AICMD0x55_JumpIfFlagNotSet(strcFlags.event6, $02, $B49A89)                 ;B49A74
     %AICMD0x45_JumpIfBetween16(nFirstChildAge, 0, 60, $B49A89) ;B49A7B
-    %AICMD0x09($05, $B49D57)                                   ;B49A85
-    %AICMD0x38()                                               ;B49A89
-    %AICMD0x0C($00)                                            ;B49A8A
+    %AICMD0x09_StartScript($05, $B49D57)                                   ;B49A85
+    %AICMD0x38_WaitForFadeIn()                                               ;B49A89
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B49A8A
     %AICMD0x13_Wait(3600)                                      ;B49A8C
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $0D)       ;B49A8F
     %AICMD0x3D_TeleportToArea(!AREA_HOUSE3)                    ;B49A94
@@ -2189,29 +2189,29 @@ DATA8_B49A5F:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, $B49AD2)   ;B49AAC
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, $B49AD9)   ;B49AB3
     %AICMD0x12_Jump($B49A74)                                   ;B49ABA
-    %AICMD0x09($04, $B49BAC)                                   ;B49ABD
+    %AICMD0x09_StartScript($04, $B49BAC)                                   ;B49ABD
     %AICMD0x12_Jump($B49A74)                                   ;B49AC1
-    %AICMD0x09($04, $B49BC8)                                   ;B49AC4
+    %AICMD0x09_StartScript($04, $B49BC8)                                   ;B49AC4
     %AICMD0x12_Jump($B49A74)                                   ;B49AC8
-    %AICMD0x09($04, $B49BE4)                                   ;B49ACB
+    %AICMD0x09_StartScript($04, $B49BE4)                                   ;B49ACB
     %AICMD0x12_Jump($B49A74)                                   ;B49ACF
-    %AICMD0x09($04, $B49BF9)                                   ;B49AD2
+    %AICMD0x09_StartScript($04, $B49BF9)                                   ;B49AD2
     %AICMD0x12_Jump($B49A74)                                   ;B49AD6
-    %AICMD0x09($04, $B49C15)                                   ;B49AD9
+    %AICMD0x09_StartScript($04, $B49C15)                                   ;B49AD9
     %AICMD0x12_Jump($B49A74)                                   ;B49ADD
     %AICMD0x1A($0119, $0063, $B38B58, $00)                     ;B49AE0
     %AICMD0x1F($B49AF4)                                        ;B49AE8
     %AICMD0x12_Jump($B49AE8)                                   ;B49AEB
     %AICMD0x1F($B49B40)                                        ;B49AEE
     %AICMD0x12_Jump($B49AEE)                                   ;B49AF1
-    %AICMD0x0B($00)                                            ;B49AF4
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B49AF4
     %AICMD0x1D_ShowDialog($01AA, $00)                          ;B49AF6
     %AICMD0x20_JumpIfChoice(0, $B49B05)                        ;B49AFA
     %AICMD0x20_JumpIfChoice(1, $B49B12)                        ;B49AFE
     %AICMD0x12_Jump($B49AE8)                                   ;B49B02
     %AICMD0x1C_ShowDialog($01AB, $00)                          ;B49B05
-    %AICMD0x25($03)                                            ;B49B09
-    %AICMD0x09($03, $B49B89)                                   ;B49B0B
+    %AICMD0x25_RemoveActor($03)                                            ;B49B09
+    %AICMD0x09_StartScript($03, $B49B89)                                   ;B49B0B
     %AICMD0x12_Jump($B49AEE)                                   ;B49B0F
     %AICMD0x1C_ShowDialog($01AC, $00)                          ;B49B12
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, $B49B47)   ;B49B16
@@ -2283,19 +2283,19 @@ DATA8_B49C2A:
     %AICMD0x05_SetTransferPosition(136, 184)                   ;B49C2E
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B49C33
     %AICMD0x08_EnableAIControl()                               ;B49C35
-    %AICMD0x09($01, $B49CBD)                                   ;B49C36
-    %AICMD0x09($02, $B49CD4)                                   ;B49C3A
-    %AICMD0x09($03, $B49D34)                                   ;B49C3E
-    %AICMD0x09($04, $B49D49)                                   ;B49C42
+    %AICMD0x09_StartScript($01, $B49CBD)                                   ;B49C36
+    %AICMD0x09_StartScript($02, $B49CD4)                                   ;B49C3A
+    %AICMD0x09_StartScript($03, $B49D34)                                   ;B49C3E
+    %AICMD0x09_StartScript($04, $B49D49)                                   ;B49C42
     %AICMD0x12_Jump($B49C74)                                   ;B49C46
-    %AICMD0x55(strcFlags.event6, $02, $B49C5E)                 ;B49C49
+    %AICMD0x55_JumpIfFlagNotSet(strcFlags.event6, $02, $B49C5E)                 ;B49C49
     %AICMD0x45_JumpIfBetween16(nFirstChildAge, 0, 60, $B49C5E) ;B49C50
-    %AICMD0x09($05, $B49D57)                                   ;B49C5A
-    %AICMD0x38()                                               ;B49C5E
+    %AICMD0x09_StartScript($05, $B49D57)                                   ;B49C5A
+    %AICMD0x38_WaitForFadeIn()                                               ;B49C5E
     %AICMD0x13_Wait(1)                                         ;B49C5F
     %AICMD0x1C_ShowDialog($01B3, $01)                          ;B49C62
     %AICMD0x11_EnableUserControl()                             ;B49C66
-    %AICMD0x0C($00)                                            ;B49C67
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B49C67
     %AICMD0x23_OrWithIndexedValue($800196, $0D)                ;B49C69
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $0E)       ;B49C6E
     %AICMD0x10_End()                                           ;B49C73
@@ -2305,21 +2305,21 @@ DATA8_B49C2A:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, $B49CAF)   ;B49C89
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, $B49CB6)   ;B49C90
     %AICMD0x12_Jump($B49C49)                                   ;B49C97
-    %AICMD0x09($06, $B49D6C)                                   ;B49C9A
+    %AICMD0x09_StartScript($06, $B49D6C)                                   ;B49C9A
     %AICMD0x12_Jump($B49C49)                                   ;B49C9E
-    %AICMD0x09($06, $B49D81)                                   ;B49CA1
+    %AICMD0x09_StartScript($06, $B49D81)                                   ;B49CA1
     %AICMD0x12_Jump($B49C49)                                   ;B49CA5
-    %AICMD0x09($06, $B49D96)                                   ;B49CA8
+    %AICMD0x09_StartScript($06, $B49D96)                                   ;B49CA8
     %AICMD0x12_Jump($B49C49)                                   ;B49CAC
-    %AICMD0x09($06, $B49DAB)                                   ;B49CAF
+    %AICMD0x09_StartScript($06, $B49DAB)                                   ;B49CAF
     %AICMD0x12_Jump($B49C49)                                   ;B49CB3
-    %AICMD0x09($06, $B49DC0)                                   ;B49CB6
+    %AICMD0x09_StartScript($06, $B49DC0)                                   ;B49CB6
     %AICMD0x12_Jump($B49C49)                                   ;B49CBA
     %AICMD0x1A($0119, $0063, $B3845C, $00)                     ;B49CBD
     %AICMD0x1F($B49CCB)                                        ;B49CC5
     %AICMD0x12_Jump($B49CC5)                                   ;B49CC8
     %AICMD0x1C_ShowDialog($01BA, $00)                          ;B49CCB
-    %AICMD0x0B($00)                                            ;B49CCF
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B49CCF
     %AICMD0x12_Jump($B49CC5)                                   ;B49CD1
     %AICMD0x1A($0138, $0068, $B382E8, $03)                     ;B49CD4
     %AICMD0x1F($B49CFD)                                        ;B49CDC
@@ -2331,9 +2331,9 @@ DATA8_B49C2A:
     %AICMD0x12_Jump($B49CE2)                                   ;B49CF3
     %AICMD0x1C_ShowDialog($01B4, $00)                          ;B49CF6
     %AICMD0x12_Jump($B49CE2)                                   ;B49CFA
-    %AICMD0x17($02)                                            ;B49CFD
-    %AICMD0x18($00, $B49D0A)                                   ;B49CFF
-    %AICMD0x18($01, $B49D16)                                   ;B49D03
+    %AICMD0x17_RollRandom($02)                                            ;B49CFD
+    %AICMD0x18_JumpIfRandomEquals($00, $B49D0A)                                   ;B49CFF
+    %AICMD0x18_JumpIfRandomEquals($01, $B49D16)                                   ;B49D03
     %AICMD0x12_Jump($B49CDC)                                   ;B49D07
     %AICMD0x1C_ShowDialog($01B4, $00)                          ;B49D0A
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown1, $00)     ;B49D0E
@@ -2393,18 +2393,18 @@ DATA8_B49DD5:
     %AICMD0x08_EnableAIControl()                               ;B49DD6
     %AICMD0x05_SetTransferPosition(296, 104)                   ;B49DD7
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B49DDC
-    %AICMD0x09($01, $B49E15)                                   ;B49DDE
-    %AICMD0x09($02, $B49E23)                                   ;B49DE2
-    %AICMD0x55(strcFlags.event6, $02, $B49DFB)                 ;B49DE6
+    %AICMD0x09_StartScript($01, $B49E15)                                   ;B49DDE
+    %AICMD0x09_StartScript($02, $B49E23)                                   ;B49DE2
+    %AICMD0x55_JumpIfFlagNotSet(strcFlags.event6, $02, $B49DFB)                 ;B49DE6
     %AICMD0x45_JumpIfBetween16(nFirstChildAge, 0, 60, $B49DFB) ;B49DED
-    %AICMD0x09($05, $B49D57)                                   ;B49DF7
-    %AICMD0x38()                                               ;B49DFB
+    %AICMD0x09_StartScript($05, $B49D57)                                   ;B49DF7
+    %AICMD0x38_WaitForFadeIn()                                               ;B49DFB
     %AICMD0x1C_ShowDialog($01BB, $00)                          ;B49DFC
     %AICMD0x01_UnfreezeTime()                                  ;B49E00
     %AICMD0x24_NextHourPalette($74)                            ;B49E01
     %AICMD0x13_Wait(180)                                       ;B49E03
     %AICMD0x1C_ShowDialog($01BC, $00)                          ;B49E06
-    %AICMD0x28(strcFlags.event6, $04)                          ;B49E0A
+    %AICMD0x28_ClearBit(strcFlags.event6, $04)                          ;B49E0A
     %AICMD0x47_SetValue8($800953, 3)                           ;B49E0F
     %AICMD0x10_End()                                           ;B49E14
     %AICMD0x1A($0119, $0063, $B3845C, $02)                     ;B49E15
@@ -2444,8 +2444,8 @@ DATA8_B49E51:
     %AICMD0x05_SetTransferPosition(440, 160)                   ;B49E62
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B49E67
     %AICMD0x08_EnableAIControl()                               ;B49E69
-    %AICMD0x09($01, $B49EC6)                                   ;B49E6A
-    %AICMD0x09($02, $B49EDF)                                   ;B49E6E
+    %AICMD0x09_StartScript($01, $B49EC6)                                   ;B49E6A
+    %AICMD0x09_StartScript($02, $B49EDF)                                   ;B49E6E
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, $B49E8E)     ;B49E72
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 1, $B49E93)     ;B49E79
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, $B49E98)     ;B49E80
@@ -2458,9 +2458,9 @@ DATA8_B49E51:
     %AICMD0x12_Jump($B49EA2)                                   ;B49E9A
     %AICMD0x06_SetDestinationArea(!AREA_TOWNWINTER)            ;B49E9D
     %AICMD0x12_Jump($B49EA2)                                   ;B49E9F
-    %AICMD0x38()                                               ;B49EA2
-    %AICMD0x0B($00)                                            ;B49EA3
-    %AICMD0x0C($02)                                            ;B49EA5
+    %AICMD0x38_WaitForFadeIn()                                               ;B49EA2
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B49EA3
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B49EA5
     %AICMD0x19($0025, $00)                                     ;B49EA7
     %AICMD0x13_Wait(180)                                       ;B49EAB
     %AICMD0x01_UnfreezeTime()                                  ;B49EAE
@@ -2472,14 +2472,14 @@ DATA8_B49E51:
     %AICMD0x47_SetValue8($800953, 3)                           ;B49EC0
     %AICMD0x10_End()                                           ;B49EC5
     %AICMD0x1A($0198, $0098, $B38354, $02)                     ;B49EC6
-    %AICMD0x0C($00)                                            ;B49ECE
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B49ECE
     %AICMD0x13_Wait(120)                                       ;B49ED0
     %AICMD0x1C_ShowDialog($0315, $00)                          ;B49ED3
-    %AICMD0x0B($01)                                            ;B49ED7
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B49ED7
     %AICMD0x1F($B49ECE)                                        ;B49ED9
     %AICMD0x12_Jump($B49ED9)                                   ;B49EDC
     %AICMD0x1A($01F8, $0090, $B3836C, $03)                     ;B49EDF
-    %AICMD0x0C($01)                                            ;B49EE7
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B49EE7
     %AICMD0x1B($02B0, $00)                                     ;B49EE9
     %AICMD0x0D($FF, $00, $30, $01)                             ;B49EED
     %AICMD0x1B($02AB, $00)                                     ;B49EF2
@@ -2489,7 +2489,7 @@ DATA8_B49E51:
     %AICMD0x0D($01, $00, $30, $01)                             ;B49F01
     %AICMD0x1B($02AC, $00)                                     ;B49F06
     %AICMD0x0D($00, $01, $90, $01)                             ;B49F0A
-    %AICMD0x0B($02)                                            ;B49F0F
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B49F0F
     %AICMD0x37()                                               ;B49F11
     %AICMD0x10_End()                                           ;B49F12
 
@@ -2514,7 +2514,7 @@ pAIScripting0x21:
  
 DATA8_B49F33:
  
-    %AICMD0x09($13, $B49FB3)                                   ;B49F33
+    %AICMD0x09_StartScript($13, $B49FB3)                                   ;B49F33
     %AICMD0x10_End()                                           ;B49F37
     %AICMD0x1A($0108, $01A8, $B382C4, $03)                     ;B49F38
     %AICMD0x1B($0281, $00)                                     ;B49F40
@@ -2537,14 +2537,14 @@ DATA8_B49F33:
     %AICMD0x12_Jump($B49F8F)                                   ;B49F85
     %AICMD0x1C_ShowDialog($0334, $00)                          ;B49F88
     %AICMD0x12_Jump($B49F9D)                                   ;B49F8C
-    %AICMD0x0B($03)                                            ;B49F8F
+    %AICMD0x0B_SetScriptFlag($03)                                            ;B49F8F
     %AICMD0x1B($0281, $01)                                     ;B49F91
     %AICMD0x0D($01, $00, $70, $01)                             ;B49F95
     %AICMD0x37()                                               ;B49F9A
     %AICMD0x11_EnableUserControl()                             ;B49F9B
     %AICMD0x10_End()                                           ;B49F9C
     %AICMD0x0D($FF, $00, $30, $01)                             ;B49F9D
-    %AICMD0x25($13)                                            ;B49FA2
+    %AICMD0x25_RemoveActor($13)                                            ;B49FA2
     %AICMD0x13_Wait(10)                                        ;B49FA4
     %AICMD0x1B($0284, $00)                                     ;B49FA7
     %AICMD0x0D($01, $00, $A0, $01)                             ;B49FAB
@@ -2556,8 +2556,8 @@ DATA8_B49F33:
     %AICMD0x12_Jump($B49FBB)                                   ;B49FBE
     %AICMD0x08_EnableAIControl()                               ;B49FC1
     %AICMD0x23_OrWithIndexedValue(strcFlags.event4, $09)       ;B49FC2
-    %AICMD0x09($09, $B49F38)                                   ;B49FC7
-    %AICMD0x0C($03)                                            ;B49FCB
+    %AICMD0x09_StartScript($09, $B49F38)                                   ;B49FC7
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B49FCB
     %AICMD0x1B($0303, $00)                                     ;B49FCD
     %AICMD0x0D($FF, $00, $3A, $01)                             ;B49FD1
     %AICMD0x37()                                               ;B49FD6
@@ -2587,17 +2587,17 @@ DATA8_B49FF8:
     %AICMD0x50()                                               ;B49FF8
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B49FF9
     %AICMD0x08_EnableAIControl()                               ;B49FFB
-    %AICMD0x09($01, $B4A012)                                   ;B49FFC
-    %AICMD0x38()                                               ;B4A000
-    %AICMD0x0B($00)                                            ;B4A001
+    %AICMD0x09_StartScript($01, $B4A012)                                   ;B49FFC
+    %AICMD0x38_WaitForFadeIn()                                               ;B4A000
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4A001
     %AICMD0x13_Wait(150)                                       ;B4A003
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B4A006
-    %AICMD0x0C($01)                                            ;B4A008
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4A008
     %AICMD0x11_EnableUserControl()                             ;B4A00A
     %AICMD0x41_AddValue16(nPlayerHappiness, -50)               ;B4A00B
     %AICMD0x10_End()                                           ;B4A011
     %AICMD0x1A($00A8, $0078, $B3845C, $03)                     ;B4A012
-    %AICMD0x0C($00)                                            ;B4A01A
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4A01A
     %AICMD0x13_Wait(90)                                        ;B4A01C
     %AICMD0x1C_ShowDialog($019A, $00)                          ;B4A01F
     %AICMD0x1B($02E3, $00)                                     ;B4A023
@@ -2607,7 +2607,7 @@ DATA8_B49FF8:
     %AICMD0x1B($02E3, $00)                                     ;B4A035
     %AICMD0x0D($00, $01, $30, $01)                             ;B4A039
     %AICMD0x13_Wait(60)                                        ;B4A03E
-    %AICMD0x0B($01)                                            ;B4A041
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4A041
     %AICMD0x37()                                               ;B4A043
     %AICMD0x10_End()                                           ;B4A044
 
@@ -2618,16 +2618,16 @@ DATA8_B4A045:
     %AICMD0x05_SetTransferPosition(136, 120)                   ;B4A046
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B4A04B
     %AICMD0x08_EnableAIControl()                               ;B4A04D
-    %AICMD0x09($01, $B4A05E)                                   ;B4A04E
-    %AICMD0x38()                                               ;B4A052
-    %AICMD0x0B($00)                                            ;B4A053
+    %AICMD0x09_StartScript($01, $B4A05E)                                   ;B4A04E
+    %AICMD0x38_WaitForFadeIn()                                               ;B4A052
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4A053
     %AICMD0x13_Wait(150)                                       ;B4A055
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B4A058
-    %AICMD0x0C($01)                                            ;B4A05A
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4A05A
     %AICMD0x11_EnableUserControl()                             ;B4A05C
     %AICMD0x10_End()                                           ;B4A05D
     %AICMD0x1A($00A8, $0078, $B3845C, $03)                     ;B4A05E
-    %AICMD0x0C($00)                                            ;B4A066
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4A066
     %AICMD0x13_Wait(90)                                        ;B4A068
     %AICMD0x1C_ShowDialog($019A, $00)                          ;B4A06B
     %AICMD0x1B($02E3, $00)                                     ;B4A06F
@@ -2637,7 +2637,7 @@ DATA8_B4A045:
     %AICMD0x1B($02E3, $00)                                     ;B4A081
     %AICMD0x0D($00, $01, $30, $01)                             ;B4A085
     %AICMD0x13_Wait(60)                                        ;B4A08A
-    %AICMD0x0B($01)                                            ;B4A08D
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4A08D
     %AICMD0x37()                                               ;B4A08F
     %AICMD0x10_End()                                           ;B4A090
 
@@ -2656,8 +2656,8 @@ DATA8_B4A091:
 DATA8_B4A0B6:
  
     %AICMD0x50()                                               ;B4A0B6
-    %AICMD0x09($01, $B4A0BD)                                   ;B4A0B7
-    %AICMD0x38()                                               ;B4A0BB
+    %AICMD0x09_StartScript($01, $B4A0BD)                                   ;B4A0B7
+    %AICMD0x38_WaitForFadeIn()                                               ;B4A0BB
     %AICMD0x10_End()                                           ;B4A0BC
     %AICMD0x1A($0158, $0058, $B383D8, $00)                     ;B4A0BD
     %AICMD0x1F($B4A0CB)                                        ;B4A0C5
@@ -2670,17 +2670,17 @@ DATA8_B4A0D2:
  
     %AICMD0x50()                                               ;B4A0D2
     %AICMD0x08_EnableAIControl()                               ;B4A0D3
-    %AICMD0x09($01, $B4A0EC)                                   ;B4A0D4
-    %AICMD0x38()                                               ;B4A0D8
+    %AICMD0x09_StartScript($01, $B4A0EC)                                   ;B4A0D4
+    %AICMD0x38_WaitForFadeIn()                                               ;B4A0D8
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 16)                  ;B4A0D9
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 20)                  ;B4A0DD
-    %AICMD0x0B($00)                                            ;B4A0E1
-    %AICMD0x0C($01)                                            ;B4A0E3
-    %AICMD0x28(strcFlags.event6, $01)                          ;B4A0E5
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4A0E1
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4A0E3
+    %AICMD0x28_ClearBit(strcFlags.event6, $01)                          ;B4A0E5
     %AICMD0x3C()                                               ;B4A0EA
     %AICMD0x10_End()                                           ;B4A0EB
     %AICMD0x1A($0058, $0168, $B3845C, $03)                     ;B4A0EC
-    %AICMD0x0C($00)                                            ;B4A0F4
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4A0F4
     %AICMD0x13_Wait(60)                                        ;B4A0F6
     %AICMD0x1B($02E7, $01)                                     ;B4A0F9
     %AICMD0x0D($01, $00, $20, $01)                             ;B4A0FD
@@ -2688,7 +2688,7 @@ DATA8_B4A0D2:
     %AICMD0x41_AddValue16(nLove_Maria, 100)                    ;B4A106
     %AICMD0x1B($02F0, $01)                                     ;B4A10C
     %AICMD0x13_Wait(60)                                        ;B4A110
-    %AICMD0x0B($01)                                            ;B4A113
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4A113
     %AICMD0x12_Jump($B4A118)                                   ;B4A115
     %AICMD0x13_Wait(1)                                         ;B4A118
     %AICMD0x12_Jump($B4A118)                                   ;B4A11B
@@ -2697,8 +2697,8 @@ DATA8_B4A0D2:
 DATA8_B4A11E:
  
     %AICMD0x50()                                               ;B4A11E
-    %AICMD0x09($01, $B4A125)                                   ;B4A11F
-    %AICMD0x38()                                               ;B4A123
+    %AICMD0x09_StartScript($01, $B4A125)                                   ;B4A11F
+    %AICMD0x38_WaitForFadeIn()                                               ;B4A123
     %AICMD0x10_End()                                           ;B4A124
     %AICMD0x1A($0028, $0164, $B38324, $00)                     ;B4A125
     %AICMD0x22($01, $01, $01, $B38324, $01)                    ;B4A12D
@@ -2712,30 +2712,30 @@ DATA8_B4A141:
  
     %AICMD0x50()                                               ;B4A141
     %AICMD0x08_EnableAIControl()                               ;B4A142
-    %AICMD0x09($01, $B4A178)                                   ;B4A143
-    %AICMD0x38()                                               ;B4A147
+    %AICMD0x09_StartScript($01, $B4A178)                                   ;B4A143
+    %AICMD0x38_WaitForFadeIn()                                               ;B4A147
     %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 32)                 ;B4A148
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 48)                    ;B4A14C
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B4A150
-    %AICMD0x0B($00)                                            ;B4A152
-    %AICMD0x0C($01)                                            ;B4A154
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4A152
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4A154
     %AICMD0x13_Wait(90)                                        ;B4A156
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 16)                  ;B4A159
     %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 32)                 ;B4A15D
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B4A161
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 32)                  ;B4A165
-    %AICMD0x0B($02)                                            ;B4A169
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4A169
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 64)                  ;B4A16B
-    %AICMD0x0C($03)                                            ;B4A16F
-    %AICMD0x28(strcFlags.event6, $01)                          ;B4A171
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B4A16F
+    %AICMD0x28_ClearBit(strcFlags.event6, $01)                          ;B4A171
     %AICMD0x3C()                                               ;B4A176
     %AICMD0x10_End()                                           ;B4A177
     %AICMD0x1A($0098, $0088, $B3845C, $01)                     ;B4A178
-    %AICMD0x0C($00)                                            ;B4A180
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4A180
     %AICMD0x13_Wait(30)                                        ;B4A182
     %AICMD0x1B($02E7, $01)                                     ;B4A185
-    %AICMD0x0B($01)                                            ;B4A189
-    %AICMD0x0C($02)                                            ;B4A18B
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4A189
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4A18B
     %AICMD0x13_Wait(30)                                        ;B4A18D
     %AICMD0x1B($02E7, $00)                                     ;B4A190
     %AICMD0x13_Wait(30)                                        ;B4A194
@@ -2745,7 +2745,7 @@ DATA8_B4A141:
     %AICMD0x0D($01, $00, $04, $01)                             ;B4A1A5
     %AICMD0x1B($02F0, $01)                                     ;B4A1AA
     %AICMD0x13_Wait(60)                                        ;B4A1AE
-    %AICMD0x0B($03)                                            ;B4A1B1
+    %AICMD0x0B_SetScriptFlag($03)                                            ;B4A1B1
     %AICMD0x12_Jump($B4A1B6)                                   ;B4A1B3
     %AICMD0x13_Wait(1)                                         ;B4A1B6
     %AICMD0x12_Jump($B4A1B6)                                   ;B4A1B9
@@ -2754,8 +2754,8 @@ DATA8_B4A141:
 DATA8_B4A1BC:
  
     %AICMD0x50()                                               ;B4A1BC
-    %AICMD0x09($01, $B4A1C3)                                   ;B4A1BD
-    %AICMD0x38()                                               ;B4A1C1
+    %AICMD0x09_StartScript($01, $B4A1C3)                                   ;B4A1BD
+    %AICMD0x38_WaitForFadeIn()                                               ;B4A1C1
     %AICMD0x10_End()                                           ;B4A1C2
     %AICMD0x1A($0028, $0168, $B383FC, $00)                     ;B4A1C3
     %AICMD0x1F($B4A1D1)                                        ;B4A1CB
@@ -2768,51 +2768,51 @@ DATA8_B4A1D8:
  
     %AICMD0x50()                                               ;B4A1D8
     %AICMD0x08_EnableAIControl()                               ;B4A1D9
-    %AICMD0x09($01, $B4A217)                                   ;B4A1DA
-    %AICMD0x38()                                               ;B4A1DE
+    %AICMD0x09_StartScript($01, $B4A217)                                   ;B4A1DA
+    %AICMD0x38_WaitForFadeIn()                                               ;B4A1DE
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 32)                    ;B4A1DF
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B4A1E3
-    %AICMD0x0B($00)                                            ;B4A1E5
-    %AICMD0x0C($01)                                            ;B4A1E7
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4A1E5
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4A1E7
     %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 16)                 ;B4A1E9
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 32)                    ;B4A1ED
-    %AICMD0x0B($02)                                            ;B4A1F1
-    %AICMD0x0C($03)                                            ;B4A1F3
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4A1F1
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B4A1F3
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B4A1F5
     %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 16)                 ;B4A1F9
-    %AICMD0x0B($04)                                            ;B4A1FD
-    %AICMD0x0C($05)                                            ;B4A1FF
+    %AICMD0x0B_SetScriptFlag($04)                                            ;B4A1FD
+    %AICMD0x0C_WaitForScriptFlag($05)                                            ;B4A1FF
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B4A201
-    %AICMD0x0C($06)                                            ;B4A203
+    %AICMD0x0C_WaitForScriptFlag($06)                                            ;B4A203
     %AICMD0x19($0024, $00)                                     ;B4A205
     %AICMD0x13_Wait(60)                                        ;B4A209
     %AICMD0x1C_ShowDialog($019D, $00)                          ;B4A20C
-    %AICMD0x28(strcFlags.event6, $01)                          ;B4A210
+    %AICMD0x28_ClearBit(strcFlags.event6, $01)                          ;B4A210
     %AICMD0x3C()                                               ;B4A215
     %AICMD0x10_End()                                           ;B4A216
     %AICMD0x1A($0078, $0088, $B3845C, $01)                     ;B4A217
-    %AICMD0x0C($00)                                            ;B4A21F
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4A21F
     %AICMD0x13_Wait(30)                                        ;B4A221
     %AICMD0x1B($02E5, $00)                                     ;B4A224
     %AICMD0x0D($00, $FF, $20, $01)                             ;B4A228
-    %AICMD0x0B($01)                                            ;B4A22D
-    %AICMD0x0C($02)                                            ;B4A22F
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4A22D
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4A22F
     %AICMD0x13_Wait(30)                                        ;B4A231
     %AICMD0x1B($02E7, $01)                                     ;B4A234
     %AICMD0x0D($01, $00, $20, $01)                             ;B4A238
-    %AICMD0x0B($03)                                            ;B4A23D
-    %AICMD0x0C($04)                                            ;B4A23F
+    %AICMD0x0B_SetScriptFlag($03)                                            ;B4A23D
+    %AICMD0x0C_WaitForScriptFlag($04)                                            ;B4A23F
     %AICMD0x13_Wait(30)                                        ;B4A241
     %AICMD0x1B($02E3, $00)                                     ;B4A244
     %AICMD0x0D($00, $01, $40, $01)                             ;B4A248
-    %AICMD0x0B($05)                                            ;B4A24D
+    %AICMD0x0B_SetScriptFlag($05)                                            ;B4A24D
     %AICMD0x13_Wait(60)                                        ;B4A24F
     %AICMD0x1B($02E7, $00)                                     ;B4A252
     %AICMD0x0D($FF, $00, $10, $01)                             ;B4A256
     %AICMD0x1B($02E5, $00)                                     ;B4A25B
     %AICMD0x13_Wait(60)                                        ;B4A25F
     %AICMD0x0D($00, $FE, $1A, $01)                             ;B4A262
-    %AICMD0x0B($06)                                            ;B4A267
+    %AICMD0x0B_SetScriptFlag($06)                                            ;B4A267
     %AICMD0x41_AddValue16(nLove_Nina, 100)                     ;B4A269
     %AICMD0x12_Jump($B4A272)                                   ;B4A26F
     %AICMD0x13_Wait(1)                                         ;B4A272
@@ -2822,8 +2822,8 @@ DATA8_B4A1D8:
 DATA8_B4A278:
  
     %AICMD0x50()                                               ;B4A278
-    %AICMD0x09($01, $B4A27F)                                   ;B4A279
-    %AICMD0x38()                                               ;B4A27D
+    %AICMD0x09_StartScript($01, $B4A27F)                                   ;B4A279
+    %AICMD0x38_WaitForFadeIn()                                               ;B4A27D
     %AICMD0x10_End()                                           ;B4A27E
     %AICMD0x1A($0028, $0198, $B38330, $00)                     ;B4A27F
     %AICMD0x12_Jump($B4A28A)                                   ;B4A287
@@ -2837,35 +2837,35 @@ DATA8_B4A297:
  
     %AICMD0x50()                                               ;B4A297
     %AICMD0x08_EnableAIControl()                               ;B4A298
-    %AICMD0x09($01, $B4A2C5)                                   ;B4A299
-    %AICMD0x38()                                               ;B4A29D
+    %AICMD0x09_StartScript($01, $B4A2C5)                                   ;B4A299
+    %AICMD0x38_WaitForFadeIn()                                               ;B4A29D
     %AICMD0x13_Wait(90)                                        ;B4A29E
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B4A2A1
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 16)                  ;B4A2A5
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B4A2A9
-    %AICMD0x0B($00)                                            ;B4A2AB
-    %AICMD0x0C($01)                                            ;B4A2AD
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4A2AB
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4A2AD
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 96)                    ;B4A2AF
-    %AICMD0x0B($02)                                            ;B4A2B3
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4A2B3
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 32)                    ;B4A2B5
-    %AICMD0x0C($03)                                            ;B4A2B9
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B4A2B9
     %AICMD0x13_Wait(60)                                        ;B4A2BB
-    %AICMD0x28(strcFlags.event6, $01)                          ;B4A2BE
+    %AICMD0x28_ClearBit(strcFlags.event6, $01)                          ;B4A2BE
     %AICMD0x3C()                                               ;B4A2C3
     %AICMD0x10_End()                                           ;B4A2C4
     %AICMD0x1A($0058, $0088, $B3845C, $00)                     ;B4A2C5
-    %AICMD0x0C($00)                                            ;B4A2CD
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4A2CD
     %AICMD0x1B($02E5, $00)                                     ;B4A2CF
     %AICMD0x0D($00, $FF, $30, $01)                             ;B4A2D3
     %AICMD0x1B($02E4, $00)                                     ;B4A2D8
-    %AICMD0x0B($01)                                            ;B4A2DC
-    %AICMD0x0C($02)                                            ;B4A2DE
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4A2DC
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4A2DE
     %AICMD0x13_Wait(10)                                        ;B4A2E0
     %AICMD0x1C_ShowDialog($019E, $00)                          ;B4A2E3
     %AICMD0x41_AddValue16(nLove_Ellen, 100)                    ;B4A2E7
     %AICMD0x1B($02E3, $00)                                     ;B4A2ED
     %AICMD0x0D($00, $01, $08, $02)                             ;B4A2F1
-    %AICMD0x0B($03)                                            ;B4A2F6
+    %AICMD0x0B_SetScriptFlag($03)                                            ;B4A2F6
     %AICMD0x12_Jump($B4A2FB)                                   ;B4A2F8
     %AICMD0x13_Wait(1)                                         ;B4A2FB
     %AICMD0x12_Jump($B4A2FB)                                   ;B4A2FE
@@ -2874,8 +2874,8 @@ DATA8_B4A297:
 DATA8_B4A301:
  
     %AICMD0x50()                                               ;B4A301
-    %AICMD0x09($01, $B4A308)                                   ;B4A302
-    %AICMD0x38()                                               ;B4A306
+    %AICMD0x09_StartScript($01, $B4A308)                                   ;B4A302
+    %AICMD0x38_WaitForFadeIn()                                               ;B4A306
     %AICMD0x10_End()                                           ;B4A307
     %AICMD0x1A($0028, $0198, $B382DC, $00)                     ;B4A308
     %AICMD0x1F($B4A316)                                        ;B4A310
@@ -2889,22 +2889,22 @@ DATA8_B4A321:
  
     %AICMD0x50()                                               ;B4A321
     %AICMD0x08_EnableAIControl()                               ;B4A322
-    %AICMD0x09($01, $B4A348)                                   ;B4A323
-    %AICMD0x38()                                               ;B4A327
+    %AICMD0x09_StartScript($01, $B4A348)                                   ;B4A323
+    %AICMD0x38_WaitForFadeIn()                                               ;B4A327
     %AICMD0x13_Wait(90)                                        ;B4A328
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 24)                    ;B4A32B
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 68)                  ;B4A32F
     %AICMD0x40_DisableTileInteractions()                       ;B4A333
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 94)                    ;B4A334
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B4A338
-    %AICMD0x0B($00)                                            ;B4A33A
-    %AICMD0x0C($01)                                            ;B4A33C
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4A33A
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4A33C
     %AICMD0x13_Wait(90)                                        ;B4A33E
-    %AICMD0x28(strcFlags.event6, $01)                          ;B4A341
+    %AICMD0x28_ClearBit(strcFlags.event6, $01)                          ;B4A341
     %AICMD0x3C()                                               ;B4A346
     %AICMD0x10_End()                                           ;B4A347
     %AICMD0x1A($0020, $004E, $B3845C, $03)                     ;B4A348
-    %AICMD0x0C($00)                                            ;B4A350
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4A350
     %AICMD0x13_Wait(30)                                        ;B4A352
     %AICMD0x1B($02E7, $01)                                     ;B4A355
     %AICMD0x0D($01, $00, $18, $01)                             ;B4A359
@@ -2913,7 +2913,7 @@ DATA8_B4A321:
     %AICMD0x13_Wait(10)                                        ;B4A368
     %AICMD0x0D($02, $00, $01, $01)                             ;B4A36B
     %AICMD0x1B($02F0, $01)                                     ;B4A370
-    %AICMD0x0B($01)                                            ;B4A374
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4A374
     %AICMD0x12_Jump($B4A379)                                   ;B4A376
     %AICMD0x13_Wait(1)                                         ;B4A379
     %AICMD0x12_Jump($B4A379)                                   ;B4A37C
@@ -2939,13 +2939,13 @@ pAIScripting0x23:
  
 DATA8_B4A39F:
  
-    %AICMD0x09($0C, $B4A3B7)                                   ;B4A39F
-    %AICMD0x09($0D, $B4A3F1)                                   ;B4A3A3
-    %AICMD0x09($0E, $B4A429)                                   ;B4A3A7
+    %AICMD0x09_StartScript($0C, $B4A3B7)                                   ;B4A39F
+    %AICMD0x09_StartScript($0D, $B4A3F1)                                   ;B4A3A3
+    %AICMD0x09_StartScript($0E, $B4A429)                                   ;B4A3A7
     %AICMD0x08_EnableAIControl()                               ;B4A3AB
-    %AICMD0x38()                                               ;B4A3AC
+    %AICMD0x38_WaitForFadeIn()                                               ;B4A3AC
     %AICMD0x2C($23, $0007, $003C)                              ;B4A3AD
-    %AICMD0x0C($00)                                            ;B4A3B3
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4A3B3
     %AICMD0x11_EnableUserControl()                             ;B4A3B5
     %AICMD0x10_End()                                           ;B4A3B6
     %AICMD0x1A($0098, $0178, $B38570, $03)                     ;B4A3B7
@@ -2959,7 +2959,7 @@ DATA8_B4A39F:
     %AICMD0x1B($0329, $01)                                     ;B4A3DA
     %AICMD0x0D($03, $FF, $40, $03)                             ;B4A3DE
     %AICMD0x0D($02, $FF, $40, $02)                             ;B4A3E3
-    %AICMD0x0B($00)                                            ;B4A3E8
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4A3E8
     %AICMD0x0D($01, $FF, $20, $01)                             ;B4A3EA
     %AICMD0x37()                                               ;B4A3EF
     %AICMD0x10_End()                                           ;B4A3F0
@@ -2972,7 +2972,7 @@ DATA8_B4A39F:
     %AICMD0x1B($0329, $00)                                     ;B4A40D
     %AICMD0x0D($FF, $00, $10, $01)                             ;B4A411
     %AICMD0x0D($FF, $FF, $20, $01)                             ;B4A416
-    %AICMD0x0B($00)                                            ;B4A41B
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4A41B
     %AICMD0x0D($00, $00, $04, $01)                             ;B4A41D
     %AICMD0x0D($FE, $FF, $40, $01)                             ;B4A422
     %AICMD0x37()                                               ;B4A427
@@ -3012,7 +3012,7 @@ DATA8_B4A475:
  
     %AICMD0x08_EnableAIControl()                               ;B4A475
     %AICMD0x1A($FFF8, $01A8, $B382AC, $02)                     ;B4A476
-    %AICMD0x38()                                               ;B4A47E
+    %AICMD0x38_WaitForFadeIn()                                               ;B4A47E
     %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 40)                   ;B4A47F
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B4A483
     %AICMD0x1B($027B, $01)                                     ;B4A485
@@ -3043,9 +3043,9 @@ DATA8_B4A475:
     %AICMD0x37()                                               ;B4A4F4
     %AICMD0x11_EnableUserControl()                             ;B4A4F5
     %AICMD0x10_End()                                           ;B4A4F6
-    %AICMD0x09($02, $B4A50C)                                   ;B4A4F7
+    %AICMD0x09_StartScript($02, $B4A50C)                                   ;B4A4F7
     %AICMD0x13_Wait(30)                                        ;B4A4FB
-    %AICMD0x0C($02)                                            ;B4A4FE
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4A4FE
     %AICMD0x1B($027B, $00)                                     ;B4A500
     %AICMD0x0D($FF, $00, $80, $01)                             ;B4A504
     %AICMD0x37()                                               ;B4A509
@@ -3056,7 +3056,7 @@ DATA8_B4A475:
     %AICMD0x0D($01, $00, $70, $01)                             ;B4A518
     %AICMD0x13_Wait(30)                                        ;B4A51D
     %AICMD0x1C_ShowDialog($028F, $00)                          ;B4A520
-    %AICMD0x0B($02)                                            ;B4A524
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4A524
     %AICMD0x1B($026E, $00)                                     ;B4A526
     %AICMD0x0D($FF, $00, $80, $01)                             ;B4A52A
     %AICMD0x37()                                               ;B4A52F
@@ -3067,7 +3067,7 @@ DATA8_B4A531:
  
     %AICMD0x08_EnableAIControl()                               ;B4A531
     %AICMD0x1A($FFF8, $01A8, $B38318, $02)                     ;B4A532
-    %AICMD0x38()                                               ;B4A53A
+    %AICMD0x38_WaitForFadeIn()                                               ;B4A53A
     %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 40)                   ;B4A53B
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B4A53F
     %AICMD0x1B($029B, $01)                                     ;B4A541
@@ -3085,7 +3085,7 @@ DATA8_B4A55D:
  
     %AICMD0x08_EnableAIControl()                               ;B4A55D
     %AICMD0x1A($FFF8, $01A8, $B38240, $02)                     ;B4A55E
-    %AICMD0x38()                                               ;B4A566
+    %AICMD0x38_WaitForFadeIn()                                               ;B4A566
     %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 40)                   ;B4A567
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B4A56B
     %AICMD0x1B($025F, $01)                                     ;B4A56D
@@ -3103,7 +3103,7 @@ DATA8_B4A589:
  
     %AICMD0x08_EnableAIControl()                               ;B4A589
     %AICMD0x1A($FFF8, $01A8, $B38240, $02)                     ;B4A58A
-    %AICMD0x38()                                               ;B4A592
+    %AICMD0x38_WaitForFadeIn()                                               ;B4A592
     %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 40)                   ;B4A593
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B4A597
     %AICMD0x1B($025F, $01)                                     ;B4A599
@@ -3141,20 +3141,20 @@ DATA8_B4A5D5:
     %AICMD0x05_SetTransferPosition(136, 344)                   ;B4A5D6
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B4A5DB
     %AICMD0x08_EnableAIControl()                               ;B4A5DD
-    %AICMD0x09($01, $B4A5E9)                                   ;B4A5DE
-    %AICMD0x38()                                               ;B4A5E2
-    %AICMD0x0B($00)                                            ;B4A5E3
-    %AICMD0x0C($01)                                            ;B4A5E5
+    %AICMD0x09_StartScript($01, $B4A5E9)                                   ;B4A5DE
+    %AICMD0x38_WaitForFadeIn()                                               ;B4A5E2
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4A5E3
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4A5E5
     %AICMD0x11_EnableUserControl()                             ;B4A5E7
     %AICMD0x10_End()                                           ;B4A5E8
     %AICMD0x1A($0068, $01A8, $B38318, $02)                     ;B4A5E9
-    %AICMD0x0C($00)                                            ;B4A5F1
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4A5F1
     %AICMD0x1C_ShowDialog($0300, $00)                          ;B4A5F3
     %AICMD0x1B($0297, $00)                                     ;B4A5F7
     %AICMD0x0D($00, $01, $60, $01)                             ;B4A5FB
     %AICMD0x1B($029B, $01)                                     ;B4A600
     %AICMD0x0D($FF, $00, $70, $01)                             ;B4A604
-    %AICMD0x0B($01)                                            ;B4A609
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4A609
     %AICMD0x37()                                               ;B4A60B
     %AICMD0x10_End()                                           ;B4A60C
 
@@ -3179,7 +3179,7 @@ pAIScripting0x26:
  
 DATA8_B4A62D:
  
-    %AICMD0x4F()                                               ;B4A62D
+    %AICMD0x4F_DisableToolUse()                                               ;B4A62D
     %AICMD0x51()                                               ;B4A62E
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B4A62F
     %AICMD0x00_SetMusic($03, $B4)                              ;B4A634
@@ -3188,21 +3188,21 @@ DATA8_B4A62D:
     %AICMD0x08_EnableAIControl()                               ;B4A63A
     %AICMD0x05_SetTransferPosition(264, 312)                   ;B4A63B
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B4A640
-    %AICMD0x32(strcFlags.unknown1, $FFDF)                      ;B4A642
-    %AICMD0x09($01, $B4A962)                                   ;B4A648
-    %AICMD0x09($03, $B4A9D9)                                   ;B4A64C
-    %AICMD0x09($06, $B4AA81)                                   ;B4A650
-    %AICMD0x09($07, $B4AAB2)                                   ;B4A654
-    %AICMD0x09($0B, $B4AB61)                                   ;B4A658
-    %AICMD0x09($0D, $B4AB97)                                   ;B4A65C
-    %AICMD0x09($0E, $B4AC3D)                                   ;B4A660
-    %AICMD0x09($0F, $B4AD63)                                   ;B4A664
-    %AICMD0x09($10, $B4AE66)                                   ;B4A668
-    %AICMD0x09($11, $B4AF7F)                                   ;B4A66C
-    %AICMD0x09($12, $B4A75E)                                   ;B4A670
-    %AICMD0x09($13, $B4A993)                                   ;B4A674
+    %AICMD0x32_SetValue16(strcFlags.unknown1, $FFDF)                      ;B4A642
+    %AICMD0x09_StartScript($01, $B4A962)                                   ;B4A648
+    %AICMD0x09_StartScript($03, $B4A9D9)                                   ;B4A64C
+    %AICMD0x09_StartScript($06, $B4AA81)                                   ;B4A650
+    %AICMD0x09_StartScript($07, $B4AAB2)                                   ;B4A654
+    %AICMD0x09_StartScript($0B, $B4AB61)                                   ;B4A658
+    %AICMD0x09_StartScript($0D, $B4AB97)                                   ;B4A65C
+    %AICMD0x09_StartScript($0E, $B4AC3D)                                   ;B4A660
+    %AICMD0x09_StartScript($0F, $B4AD63)                                   ;B4A664
+    %AICMD0x09_StartScript($10, $B4AE66)                                   ;B4A668
+    %AICMD0x09_StartScript($11, $B4AF7F)                                   ;B4A66C
+    %AICMD0x09_StartScript($12, $B4A75E)                                   ;B4A670
+    %AICMD0x09_StartScript($13, $B4A993)                                   ;B4A674
     %AICMD0x06_SetDestinationArea(!AREA_DANCINGS2)             ;B4A678
-    %AICMD0x38()                                               ;B4A67A
+    %AICMD0x38_WaitForFadeIn()                                               ;B4A67A
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 64)                    ;B4A67B
     %AICMD0x15_JumpIfEquals8($8008FD, 0, $B4A6A1)              ;B4A67F
     %AICMD0x1C_ShowDialog($0241, $00)                          ;B4A686
@@ -3213,40 +3213,40 @@ DATA8_B4A62D:
     %AICMD0x1C_ShowDialog($0243, $00)                          ;B4A693
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 16)                  ;B4A697
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B4A69B
-    %AICMD0x4E()                                               ;B4A69D
+    %AICMD0x4E_EnableTileInteractions()                                               ;B4A69D
     %AICMD0x12_Jump($B4A6AE)                                   ;B4A69E
     %AICMD0x1C_ShowDialog($0242, $00)                          ;B4A6A1
     %AICMD0x1C_ShowDialog($0243, $00)                          ;B4A6A5
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown2, $00)     ;B4A6A9
     %AICMD0x13_Wait(120)                                       ;B4A6AE
-    %AICMD0x0B($00)                                            ;B4A6B1
-    %AICMD0x0C($01)                                            ;B4A6B3
-    %AICMD0x09($14, $B4A7B0)                                   ;B4A6B5
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4A6B1
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4A6B3
+    %AICMD0x09_StartScript($14, $B4A7B0)                                   ;B4A6B5
     %AICMD0x19($0012, $00)                                     ;B4A6B9
     %AICMD0x13_Wait(20)                                        ;B4A6BD
     %AICMD0x13_Wait(120)                                       ;B4A6C0
     %AICMD0x11_EnableUserControl()                             ;B4A6C3
-    %AICMD0x0C($02)                                            ;B4A6C4
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4A6C4
     %AICMD0x3D_TeleportToArea(!AREA_DANCINGS2)                 ;B4A6C6
     %AICMD0x10_End()                                           ;B4A6C8
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, $B4A72D)   ;B4A6C9
-    %AICMD0x09($07, $B4B284)                                   ;B4A6D0
+    %AICMD0x09_StartScript($07, $B4B284)                                   ;B4A6D0
     %AICMD0x41_AddValue16(nLove_Maria, 30)                     ;B4A6D4
     %AICMD0x12_Jump($B4B4E6)                                   ;B4A6DA
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, $B4A736)   ;B4A6DD
-    %AICMD0x09($07, $B4B2DB)                                   ;B4A6E4
+    %AICMD0x09_StartScript($07, $B4B2DB)                                   ;B4A6E4
     %AICMD0x41_AddValue16(nLove_Ann, 30)                       ;B4A6E8
     %AICMD0x12_Jump($B4B4E6)                                   ;B4A6EE
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, $B4A73F)   ;B4A6F1
-    %AICMD0x09($07, $B4B332)                                   ;B4A6F8
+    %AICMD0x09_StartScript($07, $B4B332)                                   ;B4A6F8
     %AICMD0x41_AddValue16(nLove_Nina, 30)                      ;B4A6FC
     %AICMD0x12_Jump($B4B4E6)                                   ;B4A702
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, $B4A748)   ;B4A705
-    %AICMD0x09($07, $B4B389)                                   ;B4A70C
+    %AICMD0x09_StartScript($07, $B4B389)                                   ;B4A70C
     %AICMD0x41_AddValue16(nLove_Ellen, 30)                     ;B4A710
     %AICMD0x12_Jump($B4B4E6)                                   ;B4A716
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, $B4A751)   ;B4A719
-    %AICMD0x09($07, $B4B3E0)                                   ;B4A720
+    %AICMD0x09_StartScript($07, $B4B3E0)                                   ;B4A720
     %AICMD0x41_AddValue16(nLove_Eve, 30)                       ;B4A724
     %AICMD0x12_Jump($B4B4E6)                                   ;B4A72A
     %AICMD0x41_AddValue16(nLove_Maria, 30)                     ;B4A72D
@@ -3258,10 +3258,10 @@ DATA8_B4A62D:
     %AICMD0x41_AddValue16(nLove_Ellen, 30)                     ;B4A748
     %AICMD0x12_Jump($B4A757)                                   ;B4A74E
     %AICMD0x41_AddValue16(nLove_Eve, 30)                       ;B4A751
-    %AICMD0x09($07, $B4B437)                                   ;B4A757
+    %AICMD0x09_StartScript($07, $B4B437)                                   ;B4A757
     %AICMD0x12_Jump($B4B4E6)                                   ;B4A75B
     %AICMD0x1A($0108, $00B8, $B38AB0, $00)                     ;B4A75E
-    %AICMD0x0C($00)                                            ;B4A766
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4A766
     %AICMD0x1B($02A2, $01)                                     ;B4A768
     %AICMD0x0D($01, $00, $30, $01)                             ;B4A76C
     %AICMD0x1B($029E, $01)                                     ;B4A771
@@ -3272,7 +3272,7 @@ DATA8_B4A62D:
     %AICMD0x2A($0045)                                          ;B4A787
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B4A78A
     %AICMD0x1C_ShowDialog($0244, $00)                          ;B4A78C
-    %AICMD0x0B($01)                                            ;B4A790
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4A790
     %AICMD0x2F($B38330)                                        ;B4A792
     %AICMD0x1F($B4A79B)                                        ;B4A795
     %AICMD0x12_Jump($B4A795)                                   ;B4A798
@@ -3294,15 +3294,15 @@ DATA8_B4A62D:
     %AICMD0x16_JumpIfBetween8($8008FE, 9, 12, $B4A808)         ;B4A7F6
     %AICMD0x15_JumpIfEquals8($8008FE, 26, $B4A808)             ;B4A7FE
     %AICMD0x12_Jump($B4A808)                                   ;B4A805
-    %AICMD0x17($02)                                            ;B4A808
-    %AICMD0x18($00, $B4A8DE)                                   ;B4A80A
-    %AICMD0x18($01, $B4A8F8)                                   ;B4A80E
+    %AICMD0x17_RollRandom($02)                                            ;B4A808
+    %AICMD0x18_JumpIfRandomEquals($00, $B4A8DE)                                   ;B4A80A
+    %AICMD0x18_JumpIfRandomEquals($01, $B4A8F8)                                   ;B4A80E
     %AICMD0x10_End()                                           ;B4A812
-    %AICMD0x17($04)                                            ;B4A813
-    %AICMD0x18($00, $B4A876)                                   ;B4A815
-    %AICMD0x18($01, $B4A890)                                   ;B4A819
-    %AICMD0x18($02, $B4A8AA)                                   ;B4A81D
-    %AICMD0x18($03, $B4A8C4)                                   ;B4A821
+    %AICMD0x17_RollRandom($04)                                            ;B4A813
+    %AICMD0x18_JumpIfRandomEquals($00, $B4A876)                                   ;B4A815
+    %AICMD0x18_JumpIfRandomEquals($01, $B4A890)                                   ;B4A819
+    %AICMD0x18_JumpIfRandomEquals($02, $B4A8AA)                                   ;B4A81D
+    %AICMD0x18_JumpIfRandomEquals($03, $B4A8C4)                                   ;B4A821
     %AICMD0x10_End()                                           ;B4A825
     %AICMD0x1A($0118, $00F8, $B38ABC, $00)                     ;B4A826
     %AICMD0x13_Wait(16)                                        ;B4A82E
@@ -3520,12 +3520,12 @@ DATA8_B4A62D:
     %AICMD0x12_Jump($B4ABB8)                                   ;B4ABBB
     %AICMD0x1F($B4AC29)                                        ;B4ABBE
     %AICMD0x12_Jump($B4ABBE)                                   ;B4ABC1
-    %AICMD0x28(strcFlags.unknown1, $00)                        ;B4ABC4
+    %AICMD0x28_ClearBit(strcFlags.unknown1, $00)                        ;B4ABC4
     %AICMD0x15_JumpIfEquals8(nCurrentYearID, 0, $B4ABE4)       ;B4ABC9
     %AICMD0x15_JumpIfEquals8(nCurrentYearID, 1, $B4AC0D)       ;B4ABD0
     %AICMD0x12_Jump($B4ABB8)                                   ;B4ABD7
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown1, $00)     ;B4ABDA
-    %AICMD0x0B($02)                                            ;B4ABDF
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4ABDF
     %AICMD0x12_Jump($B4ABB8)                                   ;B4ABE1
     %AICMD0x1D_ShowDialog($0252, $00)                          ;B4ABE4
     %AICMD0x20_JumpIfChoice(0, $B4ABF3)                        ;B4ABE8
@@ -3548,7 +3548,7 @@ DATA8_B4A62D:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $05, $B4ABDA) ;B4AC29
     %AICMD0x1C_ShowDialog($027A, $00)                          ;B4AC30
     %AICMD0x12_Jump($B4ABBE)                                   ;B4AC34
-    %AICMD0x28(strcFlags.unknown1, $00)                        ;B4AC37
+    %AICMD0x28_ClearBit(strcFlags.unknown1, $00)                        ;B4AC37
     %AICMD0x10_End()                                           ;B4AC3C
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, $B4AC4F)   ;B4AC3D
     %AICMD0x1A($0098, $0058, $B38198, $00)                     ;B4AC44
@@ -3559,12 +3559,12 @@ DATA8_B4A62D:
     %AICMD0x12_Jump($B4AC5E)                                   ;B4AC61
     %AICMD0x1F($B4AD4F)                                        ;B4AC64
     %AICMD0x12_Jump($B4AC64)                                   ;B4AC67
-    %AICMD0x28(strcFlags.unknown1, $01)                        ;B4AC6A
+    %AICMD0x28_ClearBit(strcFlags.unknown1, $01)                        ;B4AC6A
     %AICMD0x15_JumpIfEquals8(nCurrentYearID, 0, $B4AC8A)       ;B4AC6F
     %AICMD0x15_JumpIfEquals8(nCurrentYearID, 1, $B4AD14)       ;B4AC76
     %AICMD0x12_Jump($B4AC5E)                                   ;B4AC7D
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown1, $01)     ;B4AC80
-    %AICMD0x0B($02)                                            ;B4AC85
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4AC85
     %AICMD0x12_Jump($B4AC5E)                                   ;B4AC87
     %AICMD0x1D_ShowDialog($025E, $00)                          ;B4AC8A
     %AICMD0x20_JumpIfChoice(0, $B4AC99)                        ;B4AC8E
@@ -3624,7 +3624,7 @@ DATA8_B4A62D:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $05, $B4AC80) ;B4AD4F
     %AICMD0x1C_ShowDialog($0255, $00)                          ;B4AD56
     %AICMD0x12_Jump($B4AC64)                                   ;B4AD5A
-    %AICMD0x28(strcFlags.unknown1, $01)                        ;B4AD5D
+    %AICMD0x28_ClearBit(strcFlags.unknown1, $01)                        ;B4AD5D
     %AICMD0x10_End()                                           ;B4AD62
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, $B4AD75)   ;B4AD63
     %AICMD0x1A($0148, $00A8, $B381C8, $00)                     ;B4AD6A
@@ -3635,14 +3635,14 @@ DATA8_B4A62D:
     %AICMD0x12_Jump($B4AD84)                                   ;B4AD87
     %AICMD0x1F($B4AE52)                                        ;B4AD8A
     %AICMD0x12_Jump($B4AD8A)                                   ;B4AD8D
-    %AICMD0x28(strcFlags.unknown1, $02)                        ;B4AD90
+    %AICMD0x28_ClearBit(strcFlags.unknown1, $02)                        ;B4AD90
     %AICMD0x15_JumpIfEquals8(nCurrentYearID, 0, $B4ADB0)       ;B4AD95
     %AICMD0x15_JumpIfEquals8(nCurrentYearID, 1, $B4ADE6)       ;B4AD9C
     %AICMD0x12_Jump($B4AD84)                                   ;B4ADA3
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown1, $02)     ;B4ADA6
-    %AICMD0x0B($02)                                            ;B4ADAB
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4ADAB
     %AICMD0x12_Jump($B4AD84)                                   ;B4ADAD
-    %AICMD0x09($14, $B4A92E)                                   ;B4ADB0
+    %AICMD0x09_StartScript($14, $B4A92E)                                   ;B4ADB0
     %AICMD0x1D_ShowDialog($0256, $00)                          ;B4ADB4
     %AICMD0x20_JumpIfChoice(0, $B4ADC3)                        ;B4ADB8
     %AICMD0x20_JumpIfChoice(1, $B4ADD9)                        ;B4ADBC
@@ -3657,7 +3657,7 @@ DATA8_B4A62D:
     %AICMD0x1C_ShowDialog($0258, $00)                          ;B4ADD9
     %AICMD0x41_AddValue16(nLove_Nina, 2)                       ;B4ADDD
     %AICMD0x12_Jump($B4AD8A)                                   ;B4ADE3
-    %AICMD0x09($14, $B4A948)                                   ;B4ADE6
+    %AICMD0x09_StartScript($14, $B4A948)                                   ;B4ADE6
     %AICMD0x1D_ShowDialog($0291, $00)                          ;B4ADEA
     %AICMD0x20_JumpIfChoice(0, $B4ADF9)                        ;B4ADEE
     %AICMD0x20_JumpIfChoice(1, $B4AE0F)                        ;B4ADF2
@@ -3672,7 +3672,7 @@ DATA8_B4A62D:
     %AICMD0x1C_ShowDialog($0263, $00)                          ;B4AE0F
     %AICMD0x41_AddValue16(nLove_Nina, 2)                       ;B4AE13
     %AICMD0x12_Jump($B4AD8A)                                   ;B4AE19
-    %AICMD0x09($14, $B4A93B)                                   ;B4AE1C
+    %AICMD0x09_StartScript($14, $B4A93B)                                   ;B4AE1C
     %AICMD0x1D_ShowDialog($0256, $00)                          ;B4AE20
     %AICMD0x20_JumpIfChoice(0, $B4AE2F)                        ;B4AE24
     %AICMD0x20_JumpIfChoice(1, $B4ADD9)                        ;B4AE28
@@ -3690,7 +3690,7 @@ DATA8_B4A62D:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $05, $B4ADA6) ;B4AE52
     %AICMD0x1C_ShowDialog($026D, $00)                          ;B4AE59
     %AICMD0x12_Jump($B4AD8A)                                   ;B4AE5D
-    %AICMD0x28(strcFlags.unknown1, $02)                        ;B4AE60
+    %AICMD0x28_ClearBit(strcFlags.unknown1, $02)                        ;B4AE60
     %AICMD0x10_End()                                           ;B4AE65
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, $B4AE78)   ;B4AE66
     %AICMD0x1A($0108, $0098, $B381E0, $00)                     ;B4AE6D
@@ -3701,14 +3701,14 @@ DATA8_B4A62D:
     %AICMD0x12_Jump($B4AE87)                                   ;B4AE8A
     %AICMD0x1F($B4AF6B)                                        ;B4AE8D
     %AICMD0x12_Jump($B4AE8D)                                   ;B4AE90
-    %AICMD0x28(strcFlags.unknown1, $03)                        ;B4AE93
+    %AICMD0x28_ClearBit(strcFlags.unknown1, $03)                        ;B4AE93
     %AICMD0x15_JumpIfEquals8(nCurrentYearID, 0, $B4AEB3)       ;B4AE98
     %AICMD0x15_JumpIfEquals8(nCurrentYearID, 1, $B4AEE9)       ;B4AE9F
     %AICMD0x12_Jump($B4AE87)                                   ;B4AEA6
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown1, $03)     ;B4AEA9
-    %AICMD0x0B($02)                                            ;B4AEAE
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4AEAE
     %AICMD0x12_Jump($B4AE8D)                                   ;B4AEB0
-    %AICMD0x09($14, $B4A955)                                   ;B4AEB3
+    %AICMD0x09_StartScript($14, $B4A955)                                   ;B4AEB3
     %AICMD0x1D_ShowDialog($0259, $00)                          ;B4AEB7
     %AICMD0x20_JumpIfChoice(0, $B4AEC6)                        ;B4AEBB
     %AICMD0x20_JumpIfChoice(1, $B4AEDC)                        ;B4AEBF
@@ -3723,7 +3723,7 @@ DATA8_B4A62D:
     %AICMD0x1C_ShowDialog($025B, $00)                          ;B4AEDC
     %AICMD0x41_AddValue16(nLove_Ellen, 2)                      ;B4AEE0
     %AICMD0x12_Jump($B4AE8D)                                   ;B4AEE6
-    %AICMD0x09($14, $B4A955)                                   ;B4AEE9
+    %AICMD0x09_StartScript($14, $B4A955)                                   ;B4AEE9
     %AICMD0x1D_ShowDialog($0264, $00)                          ;B4AEED
     %AICMD0x20_JumpIfChoice(0, $B4AEFC)                        ;B4AEF1
     %AICMD0x20_JumpIfChoice(1, $B4AF12)                        ;B4AEF5
@@ -3738,7 +3738,7 @@ DATA8_B4A62D:
     %AICMD0x1C_ShowDialog($0266, $00)                          ;B4AF12
     %AICMD0x41_AddValue16(nLove_Ellen, 2)                      ;B4AF16
     %AICMD0x12_Jump($B4AE8D)                                   ;B4AF1C
-    %AICMD0x09($14, $B4A955)                                   ;B4AF1F
+    %AICMD0x09_StartScript($14, $B4A955)                                   ;B4AF1F
     %AICMD0x1D_ShowDialog($0275, $00)                          ;B4AF23
     %AICMD0x20_JumpIfChoice(0, $B4AF32)                        ;B4AF27
     %AICMD0x20_JumpIfChoice(1, $B4AF48)                        ;B4AF2B
@@ -3763,7 +3763,7 @@ DATA8_B4A62D:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $05, $B4AEA9) ;B4AF6B
     %AICMD0x1C_ShowDialog($027D, $00)                          ;B4AF72
     %AICMD0x12_Jump($B4AE8D)                                   ;B4AF76
-    %AICMD0x28(strcFlags.unknown1, $03)                        ;B4AF79
+    %AICMD0x28_ClearBit(strcFlags.unknown1, $03)                        ;B4AF79
     %AICMD0x10_End()                                           ;B4AF7E
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, $B4AF91)   ;B4AF7F
     %AICMD0x1A($00B8, $0098, $B38204, $00)                     ;B4AF86
@@ -3774,19 +3774,19 @@ DATA8_B4A62D:
     %AICMD0x12_Jump($B4AFA0)                                   ;B4AFA3
     %AICMD0x1F($B4B066)                                        ;B4AFA6
     %AICMD0x12_Jump($B4AFA6)                                   ;B4AFA9
-    %AICMD0x28(strcFlags.unknown1, $04)                        ;B4AFAC
+    %AICMD0x28_ClearBit(strcFlags.unknown1, $04)                        ;B4AFAC
     %AICMD0x15_JumpIfEquals8(nCurrentYearID, 0, $B4AFCC)       ;B4AFB1
     %AICMD0x15_JumpIfEquals8(nCurrentYearID, 1, $B4B02A)       ;B4AFB8
     %AICMD0x12_Jump($B4AFA0)                                   ;B4AFBF
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown1, $04)     ;B4AFC2
-    %AICMD0x0B($02)                                            ;B4AFC7
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4AFC7
     %AICMD0x12_Jump($B4AFA0)                                   ;B4AFC9
     %AICMD0x1D_ShowDialog($0267, $00)                          ;B4AFCC
     %AICMD0x20_JumpIfChoice(0, $B4AFDB)                        ;B4AFD0
     %AICMD0x20_JumpIfChoice(1, $B4AFEE)                        ;B4AFD4
     %AICMD0x12_Jump($B4AFA6)                                   ;B4AFD8
     %AICMD0x1C_ShowDialog($0268, $00)                          ;B4AFDB
-    %AICMD0x32($8000D4, $0015)                                 ;B4AFDF
+    %AICMD0x32_SetValue16($8000D4, $0015)                                 ;B4AFDF
     %AICMD0x41_AddValue16(nLove_Eve, 8)                        ;B4AFE5
     %AICMD0x12_Jump($B4AFA6)                                   ;B4AFEB
     %AICMD0x1C_ShowDialog($0269, $00)                          ;B4AFEE
@@ -3797,7 +3797,7 @@ DATA8_B4A62D:
     %AICMD0x20_JumpIfChoice(1, $B4B01D)                        ;B4B003
     %AICMD0x12_Jump($B4AFA0)                                   ;B4B007
     %AICMD0x1C_ShowDialog($0270, $00)                          ;B4B00A
-    %AICMD0x32($8000D4, $0015)                                 ;B4B00E
+    %AICMD0x32_SetValue16($8000D4, $0015)                                 ;B4B00E
     %AICMD0x41_AddValue16(nLove_Eve, 8)                        ;B4B014
     %AICMD0x12_Jump($B4AFA6)                                   ;B4B01A
     %AICMD0x1C_ShowDialog($0271, $00)                          ;B4B01D
@@ -3808,22 +3808,22 @@ DATA8_B4A62D:
     %AICMD0x20_JumpIfChoice(1, $B4B04C)                        ;B4B032
     %AICMD0x12_Jump($B4AFA6)                                   ;B4B036
     %AICMD0x1C_ShowDialog($0278, $00)                          ;B4B039
-    %AICMD0x32($8000D4, $0015)                                 ;B4B03D
+    %AICMD0x32_SetValue16($8000D4, $0015)                                 ;B4B03D
     %AICMD0x41_AddValue16(nLove_Eve, 8)                        ;B4B043
     %AICMD0x12_Jump($B4AFA6)                                   ;B4B049
     %AICMD0x1C_ShowDialog($0279, $00)                          ;B4B04C
     %AICMD0x41_AddValue16(nLove_Eve, 2)                        ;B4B050
     %AICMD0x12_Jump($B4AFA6)                                   ;B4B056
     %AICMD0x1C_ShowDialog($027F, $00)                          ;B4B059
-    %AICMD0x32($8000D4, $0015)                                 ;B4B05D
+    %AICMD0x32_SetValue16($8000D4, $0015)                                 ;B4B05D
     %AICMD0x12_Jump($B4AFA6)                                   ;B4B063
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $05, $B4AFC2) ;B4B066
     %AICMD0x1C_ShowDialog($0365, $00)                          ;B4B06D
     %AICMD0x12_Jump($B4AFA6)                                   ;B4B071
-    %AICMD0x28(strcFlags.unknown1, $04)                        ;B4B074
+    %AICMD0x28_ClearBit(strcFlags.unknown1, $04)                        ;B4B074
     %AICMD0x10_End()                                           ;B4B079
     %AICMD0x1A($00B8, $00B8, $B38300, $02)                     ;B4B07A
-    %AICMD0x0C($09)                                            ;B4B082
+    %AICMD0x0C_WaitForScriptFlag($09)                                            ;B4B082
     %AICMD0x13_Wait(180)                                       ;B4B084
     %AICMD0x1B($0294, $01)                                     ;B4B087
     %AICMD0x13_Wait(50)                                        ;B4B08B
@@ -3845,7 +3845,7 @@ DATA8_B4A62D:
     %AICMD0x0D($01, $00, $10, $02)                             ;B4B0C9
     %AICMD0x12_Jump($B4B087)                                   ;B4B0CE
     %AICMD0x1A($00C8, $00B8, $B383D8, $03)                     ;B4B0D1
-    %AICMD0x0C($09)                                            ;B4B0D9
+    %AICMD0x0C_WaitForScriptFlag($09)                                            ;B4B0D9
     %AICMD0x13_Wait(180)                                       ;B4B0DB
     %AICMD0x1B($02C5, $00)                                     ;B4B0DE
     %AICMD0x13_Wait(10)                                        ;B4B0E2
@@ -3867,7 +3867,7 @@ DATA8_B4A62D:
     %AICMD0x0D($FF, $00, $10, $02)                             ;B4B120
     %AICMD0x12_Jump($B4B0DE)                                   ;B4B125
     %AICMD0x1A($0158, $00D8, $B38318, $02)                     ;B4B128
-    %AICMD0x0C($09)                                            ;B4B130
+    %AICMD0x0C_WaitForScriptFlag($09)                                            ;B4B130
     %AICMD0x13_Wait(180)                                       ;B4B132
     %AICMD0x1B($029B, $01)                                     ;B4B135
     %AICMD0x13_Wait(50)                                        ;B4B139
@@ -3889,7 +3889,7 @@ DATA8_B4A62D:
     %AICMD0x0D($01, $00, $10, $02)                             ;B4B177
     %AICMD0x12_Jump($B4B135)                                   ;B4B17C
     %AICMD0x1A($0168, $00D8, $B383FC, $03)                     ;B4B17F
-    %AICMD0x0C($09)                                            ;B4B187
+    %AICMD0x0C_WaitForScriptFlag($09)                                            ;B4B187
     %AICMD0x13_Wait(180)                                       ;B4B189
     %AICMD0x1B($02D0, $00)                                     ;B4B18C
     %AICMD0x13_Wait(10)                                        ;B4B190
@@ -3911,7 +3911,7 @@ DATA8_B4A62D:
     %AICMD0x0D($FF, $00, $10, $02)                             ;B4B1CE
     %AICMD0x12_Jump($B4B18C)                                   ;B4B1D3
     %AICMD0x1A($00B8, $0128, $B38420, $02)                     ;B4B1D6
-    %AICMD0x0C($09)                                            ;B4B1DE
+    %AICMD0x0C_WaitForScriptFlag($09)                                            ;B4B1DE
     %AICMD0x13_Wait(180)                                       ;B4B1E0
     %AICMD0x1B($02D7, $01)                                     ;B4B1E3
     %AICMD0x13_Wait(50)                                        ;B4B1E7
@@ -3933,7 +3933,7 @@ DATA8_B4A62D:
     %AICMD0x0D($FF, $00, $08, $01)                             ;B4B225
     %AICMD0x12_Jump($B4B1E3)                                   ;B4B22A
     %AICMD0x1A($00C8, $0128, $B38384, $03)                     ;B4B22D
-    %AICMD0x0C($09)                                            ;B4B235
+    %AICMD0x0C_WaitForScriptFlag($09)                                            ;B4B235
     %AICMD0x13_Wait(180)                                       ;B4B237
     %AICMD0x1B($02B6, $01)                                     ;B4B23A
     %AICMD0x13_Wait(10)                                        ;B4B23E
@@ -3955,7 +3955,7 @@ DATA8_B4A62D:
     %AICMD0x0D($01, $00, $08, $01)                             ;B4B27C
     %AICMD0x12_Jump($B4B23A)                                   ;B4B281
     %AICMD0x1A($0110, $0108, $B38168, $03)                     ;B4B284
-    %AICMD0x0C($09)                                            ;B4B28C
+    %AICMD0x0C_WaitForScriptFlag($09)                                            ;B4B28C
     %AICMD0x13_Wait(200)                                       ;B4B28E
     %AICMD0x1B($0223, $00)                                     ;B4B291
     %AICMD0x13_Wait(10)                                        ;B4B295
@@ -3977,7 +3977,7 @@ DATA8_B4A62D:
     %AICMD0x0D($FF, $00, $10, $02)                             ;B4B2D3
     %AICMD0x12_Jump($B4B291)                                   ;B4B2D8
     %AICMD0x1A($0110, $0108, $B38198, $03)                     ;B4B2DB
-    %AICMD0x0C($09)                                            ;B4B2E3
+    %AICMD0x0C_WaitForScriptFlag($09)                                            ;B4B2E3
     %AICMD0x13_Wait(200)                                       ;B4B2E5
     %AICMD0x1B($022B, $00)                                     ;B4B2E8
     %AICMD0x13_Wait(10)                                        ;B4B2EC
@@ -3999,7 +3999,7 @@ DATA8_B4A62D:
     %AICMD0x0D($FF, $00, $10, $02)                             ;B4B32A
     %AICMD0x12_Jump($B4B2E8)                                   ;B4B32F
     %AICMD0x1A($0110, $0108, $B381C8, $03)                     ;B4B332
-    %AICMD0x0C($09)                                            ;B4B33A
+    %AICMD0x0C_WaitForScriptFlag($09)                                            ;B4B33A
     %AICMD0x13_Wait(200)                                       ;B4B33C
     %AICMD0x1B($0250, $00)                                     ;B4B33F
     %AICMD0x13_Wait(10)                                        ;B4B343
@@ -4021,7 +4021,7 @@ DATA8_B4A62D:
     %AICMD0x0D($FF, $00, $10, $02)                             ;B4B381
     %AICMD0x12_Jump($B4B33F)                                   ;B4B386
     %AICMD0x1A($0110, $0108, $B381E0, $03)                     ;B4B389
-    %AICMD0x0C($09)                                            ;B4B391
+    %AICMD0x0C_WaitForScriptFlag($09)                                            ;B4B391
     %AICMD0x13_Wait(200)                                       ;B4B393
     %AICMD0x1B($0241, $00)                                     ;B4B396
     %AICMD0x13_Wait(10)                                        ;B4B39A
@@ -4043,7 +4043,7 @@ DATA8_B4A62D:
     %AICMD0x0D($FF, $00, $10, $02)                             ;B4B3D8
     %AICMD0x12_Jump($B4B396)                                   ;B4B3DD
     %AICMD0x1A($0110, $0108, $B38204, $03)                     ;B4B3E0
-    %AICMD0x0C($09)                                            ;B4B3E8
+    %AICMD0x0C_WaitForScriptFlag($09)                                            ;B4B3E8
     %AICMD0x13_Wait(200)                                       ;B4B3EA
     %AICMD0x1B($0249, $00)                                     ;B4B3ED
     %AICMD0x13_Wait(10)                                        ;B4B3F1
@@ -4065,7 +4065,7 @@ DATA8_B4A62D:
     %AICMD0x0D($FF, $00, $10, $02)                             ;B4B42F
     %AICMD0x12_Jump($B4B3ED)                                   ;B4B434
     %AICMD0x1A($0110, $0108, $B3845C, $03)                     ;B4B437
-    %AICMD0x0C($09)                                            ;B4B43F
+    %AICMD0x0C_WaitForScriptFlag($09)                                            ;B4B43F
     %AICMD0x13_Wait(200)                                       ;B4B441
     %AICMD0x1B($02E7, $00)                                     ;B4B444
     %AICMD0x13_Wait(10)                                        ;B4B448
@@ -4090,7 +4090,7 @@ DATA8_B4A62D:
 
 DATA8_B4B48E:
  
-    %AICMD0x4F()                                               ;B4B48E
+    %AICMD0x4F_DisableToolUse()                                               ;B4B48E
     %AICMD0x50()                                               ;B4B48F
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B4B490
     %AICMD0x00_SetMusic($08, $B4)                              ;B4B495
@@ -4100,24 +4100,24 @@ DATA8_B4B48E:
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B4B4A0
     %AICMD0x08_EnableAIControl()                               ;B4B4A2
     %AICMD0x19($00E8, $00)                                     ;B4B4A3
-    %AICMD0x09($01, $B4B07A)                                   ;B4B4A7
-    %AICMD0x09($02, $B4B0D1)                                   ;B4B4AB
-    %AICMD0x09($03, $B4B128)                                   ;B4B4AF
-    %AICMD0x09($04, $B4B17F)                                   ;B4B4B3
-    %AICMD0x09($05, $B4B1D6)                                   ;B4B4B7
-    %AICMD0x09($06, $B4B22D)                                   ;B4B4BB
-    %AICMD0x09($08, $B4B4EC)                                   ;B4B4BF
+    %AICMD0x09_StartScript($01, $B4B07A)                                   ;B4B4A7
+    %AICMD0x09_StartScript($02, $B4B0D1)                                   ;B4B4AB
+    %AICMD0x09_StartScript($03, $B4B128)                                   ;B4B4AF
+    %AICMD0x09_StartScript($04, $B4B17F)                                   ;B4B4B3
+    %AICMD0x09_StartScript($05, $B4B1D6)                                   ;B4B4B7
+    %AICMD0x09_StartScript($06, $B4B22D)                                   ;B4B4BB
+    %AICMD0x09_StartScript($08, $B4B4EC)                                   ;B4B4BF
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $00, $B4A6C9) ;B4B4C3
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $01, $B4A6DD) ;B4B4CA
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $02, $B4A6F1) ;B4B4D1
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $03, $B4A705) ;B4B4D8
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $04, $B4A719) ;B4B4DF
     %AICMD0x06_SetDestinationArea(!AREA_DANCINGS2)             ;B4B4E6
-    %AICMD0x38()                                               ;B4B4E8
-    %AICMD0x0B($09)                                            ;B4B4E9
+    %AICMD0x38_WaitForFadeIn()                                               ;B4B4E8
+    %AICMD0x0B_SetScriptFlag($09)                                            ;B4B4E9
     %AICMD0x10_End()                                           ;B4B4EB
     %AICMD0x1A($0100, $0108, $B380D8, $02)                     ;B4B4EC
-    %AICMD0x0C($09)                                            ;B4B4F4
+    %AICMD0x0C_WaitForScriptFlag($09)                                            ;B4B4F4
     %AICMD0x13_Wait(200)                                       ;B4B4F6
     %AICMD0x1B($0002, $01)                                     ;B4B4F9
     %AICMD0x13_Wait(50)                                        ;B4B4FD
@@ -4233,25 +4233,25 @@ pAIScripting0x27:
  
 DATA8_B4B67E:
  
-    %AICMD0x4F()                                               ;B4B67E
+    %AICMD0x4F_DisableToolUse()                                               ;B4B67E
     %AICMD0x50()                                               ;B4B67F
-    %AICMD0x09($01, $B4B6EB)                                   ;B4B680
-    %AICMD0x09($02, $B4B72A)                                   ;B4B684
-    %AICMD0x09($03, $B4B75B)                                   ;B4B688
-    %AICMD0x09($04, $B4B785)                                   ;B4B68C
-    %AICMD0x09($05, $B4B7AD)                                   ;B4B690
-    %AICMD0x09($0A, $B4B6CC)                                   ;B4B694
+    %AICMD0x09_StartScript($01, $B4B6EB)                                   ;B4B680
+    %AICMD0x09_StartScript($02, $B4B72A)                                   ;B4B684
+    %AICMD0x09_StartScript($03, $B4B75B)                                   ;B4B688
+    %AICMD0x09_StartScript($04, $B4B785)                                   ;B4B68C
+    %AICMD0x09_StartScript($05, $B4B7AD)                                   ;B4B690
+    %AICMD0x09_StartScript($0A, $B4B6CC)                                   ;B4B694
     %AICMD0x12_Jump($B4B69D)                                   ;B4B698
-    %AICMD0x38()                                               ;B4B69B
+    %AICMD0x38_WaitForFadeIn()                                               ;B4B69B
     %AICMD0x10_End()                                           ;B4B69C
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, $B4B6A8)   ;B4B69D
-    %AICMD0x09($06, $B4B7C9)                                   ;B4B6A4
+    %AICMD0x09_StartScript($06, $B4B7C9)                                   ;B4B6A4
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, $B4B6B3)   ;B4B6A8
-    %AICMD0x09($07, $B4B826)                                   ;B4B6AF
+    %AICMD0x09_StartScript($07, $B4B826)                                   ;B4B6AF
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, $B4B6BE)   ;B4B6B3
-    %AICMD0x09($08, $B4B883)                                   ;B4B6BA
+    %AICMD0x09_StartScript($08, $B4B883)                                   ;B4B6BA
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, $B4B6C9)   ;B4B6BE
-    %AICMD0x09($09, $B4B8E0)                                   ;B4B6C5
+    %AICMD0x09_StartScript($09, $B4B8E0)                                   ;B4B6C5
     %AICMD0x12_Jump($B4B69B)                                   ;B4B6C9
     %AICMD0x1A($01A8, $0328, $B387C8, $00)                     ;B4B6CC
     %AICMD0x1B($03DA, $00)                                     ;B4B6D4
@@ -4405,7 +4405,7 @@ DATA8_B4B67E:
 
 DATA8_B4B947:
  
-    %AICMD0x4F()                                               ;B4B947
+    %AICMD0x4F_DisableToolUse()                                               ;B4B947
     %AICMD0x50()                                               ;B4B948
     %AICMD0x23_OrWithIndexedValue(strcFlags.event2, $01)       ;B4B949
     %AICMD0x02_FreezeTime()                                    ;B4B94E
@@ -4419,8 +4419,8 @@ DATA8_B4B947:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, $B4B97F)   ;B4B96E
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, $B4B97F)   ;B4B975
     %AICMD0x12_Jump($B4B983)                                   ;B4B97C
-    %AICMD0x09($01, $B4B98A)                                   ;B4B97F
-    %AICMD0x38()                                               ;B4B983
+    %AICMD0x09_StartScript($01, $B4B98A)                                   ;B4B97F
+    %AICMD0x38_WaitForFadeIn()                                               ;B4B983
     %AICMD0x13_Wait(1)                                         ;B4B984
     %AICMD0x12_Jump($B4B984)                                   ;B4B987
     %AICMD0x1A($0028, $0080, $B3845C, $00)                     ;B4B98A
@@ -4429,7 +4429,7 @@ DATA8_B4B947:
     %AICMD0x1F($B4B9B1)                                        ;B4B998
     %AICMD0x12_Jump($B4B998)                                   ;B4B99B
     %AICMD0x1C_ShowDialog($0292, $00)                          ;B4B99E
-    %AICMD0x09($02, $B4B9B8)                                   ;B4B9A2
+    %AICMD0x09_StartScript($02, $B4B9B8)                                   ;B4B9A2
     %AICMD0x41_AddValue16(nPlayerHappiness, 10)                ;B4B9A6
     %AICMD0x57_UpdateStamina(20)                               ;B4B9AC
     %AICMD0x12_Jump($B4B998)                                   ;B4B9AE
@@ -4444,14 +4444,14 @@ DATA8_B4B947:
 
 DATA8_B4B9C2:
  
-    %AICMD0x4F()                                               ;B4B9C2
+    %AICMD0x4F_DisableToolUse()                                               ;B4B9C2
     %AICMD0x50()                                               ;B4B9C3
-    %AICMD0x09($01, $B4B9DD)                                   ;B4B9C4
-    %AICMD0x09($02, $B4BA00)                                   ;B4B9C8
-    %AICMD0x09($03, $B4BA1C)                                   ;B4B9CC
+    %AICMD0x09_StartScript($01, $B4B9DD)                                   ;B4B9C4
+    %AICMD0x09_StartScript($02, $B4BA00)                                   ;B4B9C8
+    %AICMD0x09_StartScript($03, $B4BA1C)                                   ;B4B9CC
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, $B4B9DB)   ;B4B9D0
-    %AICMD0x09($04, $B4BA31)                                   ;B4B9D7
-    %AICMD0x38()                                               ;B4B9DB
+    %AICMD0x09_StartScript($04, $B4BA31)                                   ;B4B9D7
+    %AICMD0x38_WaitForFadeIn()                                               ;B4B9DB
     %AICMD0x10_End()                                           ;B4B9DC
     %AICMD0x1A($0070, $00F8, $B38354, $00)                     ;B4B9DD
     %AICMD0x1F($B4B9EB)                                        ;B4B9E5
@@ -4498,11 +4498,11 @@ DATA8_B4B9C2:
 
 DATA8_B4BA8E:
  
-    %AICMD0x4F()                                               ;B4BA8E
+    %AICMD0x4F_DisableToolUse()                                               ;B4BA8E
     %AICMD0x50()                                               ;B4BA8F
-    %AICMD0x09($01, $B4BA9A)                                   ;B4BA90
-    %AICMD0x09($02, $B4BAB6)                                   ;B4BA94
-    %AICMD0x38()                                               ;B4BA98
+    %AICMD0x09_StartScript($01, $B4BA9A)                                   ;B4BA90
+    %AICMD0x09_StartScript($02, $B4BAB6)                                   ;B4BA94
+    %AICMD0x38_WaitForFadeIn()                                               ;B4BA98
     %AICMD0x10_End()                                           ;B4BA99
     %AICMD0x1A($00A8, $0078, $B38300, $00)                     ;B4BA9A
     %AICMD0x22($20, $10, $01, $B3830C, $14)                    ;B4BAA2
@@ -4537,12 +4537,12 @@ pAIScripting0x28:
  
 DATA8_B4BAEB:
  
-    %AICMD0x4F()                                               ;B4BAEB
+    %AICMD0x4F_DisableToolUse()                                               ;B4BAEB
     %AICMD0x50()                                               ;B4BAEC
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B4BAED
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $00)       ;B4BAF2
     %AICMD0x08_EnableAIControl()                               ;B4BAF7
-    %AICMD0x38()                                               ;B4BAF8
+    %AICMD0x38_WaitForFadeIn()                                               ;B4BAF8
     %AICMD0x01_UnfreezeTime()                                  ;B4BAF9
     %AICMD0x24_NextHourPalette($74)                            ;B4BAFA
     %AICMD0x13_Wait(180)                                       ;B4BAFC
@@ -4553,7 +4553,7 @@ DATA8_B4BAEB:
 
 DATA8_B4BB06:
  
-    %AICMD0x4F()                                               ;B4BB06
+    %AICMD0x4F_DisableToolUse()                                               ;B4BB06
     %AICMD0x50()                                               ;B4BB07
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B4BB08
     %AICMD0x00_SetMusic($0E, $B4)                              ;B4BB0D
@@ -4562,29 +4562,29 @@ DATA8_B4BB06:
     %AICMD0x05_SetTransferPosition(128, 440)                   ;B4BB13
     %AICMD0x08_EnableAIControl()                               ;B4BB18
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B4BB19
-    %AICMD0x09($01, $B4BB63)                                   ;B4BB1B
-    %AICMD0x09($02, $B4BB91)                                   ;B4BB1F
-    %AICMD0x09($03, $B4BC36)                                   ;B4BB23
-    %AICMD0x09($04, $B4BC4D)                                   ;B4BB27
-    %AICMD0x09($05, $B4BBC1)                                   ;B4BB2B
-    %AICMD0x09($06, $B4BC73)                                   ;B4BB2F
-    %AICMD0x09($07, $B4BC8A)                                   ;B4BB33
-    %AICMD0x09($08, $B4BCA1)                                   ;B4BB37
-    %AICMD0x09($09, $B4BCDD)                                   ;B4BB3B
+    %AICMD0x09_StartScript($01, $B4BB63)                                   ;B4BB1B
+    %AICMD0x09_StartScript($02, $B4BB91)                                   ;B4BB1F
+    %AICMD0x09_StartScript($03, $B4BC36)                                   ;B4BB23
+    %AICMD0x09_StartScript($04, $B4BC4D)                                   ;B4BB27
+    %AICMD0x09_StartScript($05, $B4BBC1)                                   ;B4BB2B
+    %AICMD0x09_StartScript($06, $B4BC73)                                   ;B4BB2F
+    %AICMD0x09_StartScript($07, $B4BC8A)                                   ;B4BB33
+    %AICMD0x09_StartScript($08, $B4BCA1)                                   ;B4BB37
+    %AICMD0x09_StartScript($09, $B4BCDD)                                   ;B4BB3B
     %AICMD0x06_SetDestinationArea(!AREA_MOUNTAINTOPSUNRISE)    ;B4BB3F
-    %AICMD0x38()                                               ;B4BB41
+    %AICMD0x38_WaitForFadeIn()                                               ;B4BB41
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 96)                    ;B4BB42
     %AICMD0x11_EnableUserControl()                             ;B4BB46
-    %AICMD0x0C($00)                                            ;B4BB47
-    %AICMD0x0C($02)                                            ;B4BB49
-    %AICMD0x0C($03)                                            ;B4BB4B
-    %AICMD0x0C($04)                                            ;B4BB4D
-    %AICMD0x0C($05)                                            ;B4BB4F
-    %AICMD0x0C($06)                                            ;B4BB51
-    %AICMD0x0C($07)                                            ;B4BB53
-    %AICMD0x0C($08)                                            ;B4BB55
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4BB47
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4BB49
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B4BB4B
+    %AICMD0x0C_WaitForScriptFlag($04)                                            ;B4BB4D
+    %AICMD0x0C_WaitForScriptFlag($05)                                            ;B4BB4F
+    %AICMD0x0C_WaitForScriptFlag($06)                                            ;B4BB51
+    %AICMD0x0C_WaitForScriptFlag($07)                                            ;B4BB53
+    %AICMD0x0C_WaitForScriptFlag($08)                                            ;B4BB55
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown1, $02)     ;B4BB57
-    %AICMD0x0C($01)                                            ;B4BB5C
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4BB5C
     %AICMD0x13_Wait(60)                                        ;B4BB5E
     %AICMD0x3C()                                               ;B4BB61
     %AICMD0x10_End()                                           ;B4BB62
@@ -4595,7 +4595,7 @@ DATA8_B4BB06:
     %AICMD0x12_Jump($B4BB71)                                   ;B4BB74
     %AICMD0x08_EnableAIControl()                               ;B4BB77
     %AICMD0x1C_ShowDialog($02CE, $00)                          ;B4BB78
-    %AICMD0x0B($00)                                            ;B4BB7C
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4BB7C
     %AICMD0x01_UnfreezeTime()                                  ;B4BB7E
     %AICMD0x03_SetHour($07)                                    ;B4BB7F
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B4BB81
@@ -4614,7 +4614,7 @@ DATA8_B4BB06:
     %AICMD0x1C_ShowDialog($02CF, $00)                          ;B4BBB1
     %AICMD0x12_Jump($B4BB9E)                                   ;B4BBB5
     %AICMD0x1C_ShowDialog($001A, $00)                          ;B4BBB8
-    %AICMD0x0B($01)                                            ;B4BBBC
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4BBBC
     %AICMD0x12_Jump($B4BBA4)                                   ;B4BBBE
     %AICMD0x1A($0048, $0168, $B382E8, $01)                     ;B4BBC1
     %AICMD0x1F($B4BBD5)                                        ;B4BBC9
@@ -4626,25 +4626,25 @@ DATA8_B4BB06:
     %AICMD0x20_JumpIfChoice(1, $B4BBF9)                        ;B4BBDD
     %AICMD0x12_Jump($B4BBC9)                                   ;B4BBE1
     %AICMD0x1D_ShowDialog($02D4, $00)                          ;B4BBE4
-    %AICMD0x17($03)                                            ;B4BBE8
-    %AICMD0x18($00, $B4BC02)                                   ;B4BBEA
-    %AICMD0x18($01, $B4BC11)                                   ;B4BBEE
-    %AICMD0x18($02, $B4BC20)                                   ;B4BBF2
+    %AICMD0x17_RollRandom($03)                                            ;B4BBE8
+    %AICMD0x18_JumpIfRandomEquals($00, $B4BC02)                                   ;B4BBEA
+    %AICMD0x18_JumpIfRandomEquals($01, $B4BC11)                                   ;B4BBEE
+    %AICMD0x18_JumpIfRandomEquals($02, $B4BC20)                                   ;B4BBF2
     %AICMD0x12_Jump($B4BBCF)                                   ;B4BBF6
     %AICMD0x1C_ShowDialog($02D8, $00)                          ;B4BBF9
-    %AICMD0x0B($02)                                            ;B4BBFD
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4BBFD
     %AICMD0x12_Jump($B4BBCF)                                   ;B4BBFF
     %AICMD0x1C_ShowDialog($02D5, $00)                          ;B4BC02
     %AICMD0x41_AddValue16(nPlayerHappiness, 30)                ;B4BC06
-    %AICMD0x0B($02)                                            ;B4BC0C
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4BC0C
     %AICMD0x12_Jump($B4BBCF)                                   ;B4BC0E
     %AICMD0x1C_ShowDialog($02D6, $00)                          ;B4BC11
     %AICMD0x41_AddValue16(nPlayerHappiness, 10)                ;B4BC15
-    %AICMD0x0B($02)                                            ;B4BC1B
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4BC1B
     %AICMD0x12_Jump($B4BBCF)                                   ;B4BC1D
     %AICMD0x1C_ShowDialog($02D7, $00)                          ;B4BC20
     %AICMD0x41_AddValue16(nPlayerHappiness, -20)               ;B4BC24
-    %AICMD0x0B($02)                                            ;B4BC2A
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4BC2A
     %AICMD0x12_Jump($B4BBCF)                                   ;B4BC2C
     %AICMD0x1C_ShowDialog($02DC, $00)                          ;B4BC2F
     %AICMD0x12_Jump($B4BBCF)                                   ;B4BC33
@@ -4652,7 +4652,7 @@ DATA8_B4BB06:
     %AICMD0x1F($B4BC44)                                        ;B4BC3E
     %AICMD0x12_Jump($B4BC3E)                                   ;B4BC41
     %AICMD0x1C_ShowDialog($02D0, $00)                          ;B4BC44
-    %AICMD0x0B($03)                                            ;B4BC48
+    %AICMD0x0B_SetScriptFlag($03)                                            ;B4BC48
     %AICMD0x12_Jump($B4BC3E)                                   ;B4BC4A
     %AICMD0x1A($00B8, $0168, $B38318, $01)                     ;B4BC4D
     %AICMD0x1F($B4BC61)                                        ;B4BC55
@@ -4660,22 +4660,22 @@ DATA8_B4BB06:
     %AICMD0x1F($B4BC6A)                                        ;B4BC5B
     %AICMD0x12_Jump($B4BC5B)                                   ;B4BC5E
     %AICMD0x1C_ShowDialog($02D1, $00)                          ;B4BC61
-    %AICMD0x0B($04)                                            ;B4BC65
+    %AICMD0x0B_SetScriptFlag($04)                                            ;B4BC65
     %AICMD0x12_Jump($B4BC5B)                                   ;B4BC67
     %AICMD0x1C_ShowDialog($038E, $00)                          ;B4BC6A
-    %AICMD0x0B($04)                                            ;B4BC6E
+    %AICMD0x0B_SetScriptFlag($04)                                            ;B4BC6E
     %AICMD0x12_Jump($B4BC5B)                                   ;B4BC70
     %AICMD0x1A($00B8, $0198, $B382C4, $01)                     ;B4BC73
     %AICMD0x1F($B4BC81)                                        ;B4BC7B
     %AICMD0x12_Jump($B4BC7B)                                   ;B4BC7E
     %AICMD0x1C_ShowDialog($02D9, $00)                          ;B4BC81
-    %AICMD0x0B($05)                                            ;B4BC85
+    %AICMD0x0B_SetScriptFlag($05)                                            ;B4BC85
     %AICMD0x12_Jump($B4BC7B)                                   ;B4BC87
     %AICMD0x1A($0058, $0188, $B38330, $01)                     ;B4BC8A
     %AICMD0x1F($B4BC98)                                        ;B4BC92
     %AICMD0x12_Jump($B4BC92)                                   ;B4BC95
     %AICMD0x1C_ShowDialog($02D2, $00)                          ;B4BC98
-    %AICMD0x0B($06)                                            ;B4BC9C
+    %AICMD0x0B_SetScriptFlag($06)                                            ;B4BC9C
     %AICMD0x12_Jump($B4BC92)                                   ;B4BC9E
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, $B4BCB3)   ;B4BCA1
     %AICMD0x1A($0098, $0178, $B38168, $01)                     ;B4BCA8
@@ -4687,7 +4687,7 @@ DATA8_B4BB06:
     %AICMD0x12_Jump($B4BCC1)                                   ;B4BCC4
     %AICMD0x1C_ShowDialog($02DA, $00)                          ;B4BCC7
     %AICMD0x41_AddValue16(nLove_Maria, 10)                     ;B4BCCB
-    %AICMD0x0B($07)                                            ;B4BCD1
+    %AICMD0x0B_SetScriptFlag($07)                                            ;B4BCD1
     %AICMD0x12_Jump($B4BCC1)                                   ;B4BCD3
     %AICMD0x1C_ShowDialog($0293, $00)                          ;B4BCD6
     %AICMD0x12_Jump($B4BCC1)                                   ;B4BCDA
@@ -4701,7 +4701,7 @@ DATA8_B4BB06:
     %AICMD0x12_Jump($B4BCFD)                                   ;B4BD00
     %AICMD0x1C_ShowDialog($02DB, $00)                          ;B4BD03
     %AICMD0x41_AddValue16(nLove_Eve, 10)                       ;B4BD07
-    %AICMD0x0B($08)                                            ;B4BD0D
+    %AICMD0x0B_SetScriptFlag($08)                                            ;B4BD0D
     %AICMD0x12_Jump($B4BCFD)                                   ;B4BD0F
     %AICMD0x1C_ShowDialog($0293, $00)                          ;B4BD12
     %AICMD0x12_Jump($B4BCFD)                                   ;B4BD16
@@ -4709,7 +4709,7 @@ DATA8_B4BB06:
 
 DATA8_B4BD19:
  
-    %AICMD0x4F()                                               ;B4BD19
+    %AICMD0x4F_DisableToolUse()                                               ;B4BD19
     %AICMD0x50()                                               ;B4BD1A
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B4BD1B
     %AICMD0x00_SetMusic($0D, $B4)                              ;B4BD20
@@ -4717,17 +4717,17 @@ DATA8_B4BD19:
     %AICMD0x03_SetHour($07)                                    ;B4BD24
     %AICMD0x05_SetTransferPosition(296, 536)                   ;B4BD26
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B4BD2B
-    %AICMD0x09($01, $B4BD6F)                                   ;B4BD2D
-    %AICMD0x09($02, $B4C001)                                   ;B4BD31
-    %AICMD0x09($03, $B4C08F)                                   ;B4BD35
-    %AICMD0x09($04, $B4C0DA)                                   ;B4BD39
-    %AICMD0x09($05, $B4C13E)                                   ;B4BD3D
-    %AICMD0x09($06, $B4C18F)                                   ;B4BD41
-    %AICMD0x09($07, $B4C239)                                   ;B4BD45
-    %AICMD0x09($08, $B4C2E6)                                   ;B4BD49
+    %AICMD0x09_StartScript($01, $B4BD6F)                                   ;B4BD2D
+    %AICMD0x09_StartScript($02, $B4C001)                                   ;B4BD31
+    %AICMD0x09_StartScript($03, $B4C08F)                                   ;B4BD35
+    %AICMD0x09_StartScript($04, $B4C0DA)                                   ;B4BD39
+    %AICMD0x09_StartScript($05, $B4C13E)                                   ;B4BD3D
+    %AICMD0x09_StartScript($06, $B4C18F)                                   ;B4BD41
+    %AICMD0x09_StartScript($07, $B4C239)                                   ;B4BD45
+    %AICMD0x09_StartScript($08, $B4C2E6)                                   ;B4BD49
     %AICMD0x06_SetDestinationArea(!AREA_EGGFESTIVAL)           ;B4BD4D
     %AICMD0x11_EnableUserControl()                             ;B4BD4F
-    %AICMD0x38()                                               ;B4BD50
+    %AICMD0x38_WaitForFadeIn()                                               ;B4BD50
     %AICMD0x13_Wait(1)                                         ;B4BD51
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $04, $B4BD5E) ;B4BD54
     %AICMD0x12_Jump($B4BD51)                                   ;B4BD5B
@@ -4740,7 +4740,7 @@ DATA8_B4BD19:
     %AICMD0x1A($0128, $01A8, $B38300, $00)                     ;B4BD6F
     %AICMD0x1F($B4BD8C)                                        ;B4BD77
     %AICMD0x12_Jump($B4BD77)                                   ;B4BD7A
-    %AICMD0x2D($B4BDC3, $B4BDCE)                               ;B4BD7D
+    %AICMD0x2D_JumpOnInteract($B4BDC3, $B4BDCE)                               ;B4BD7D
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $05, $B4BE7C) ;B4BD82
     %AICMD0x12_Jump($B4BD7D)                                   ;B4BD89
     %AICMD0x1D_ShowDialog($02DD, $00)                          ;B4BD8C
@@ -4749,11 +4749,11 @@ DATA8_B4BD19:
     %AICMD0x12_Jump($B4BD77)                                   ;B4BD98
     %AICMD0x08_EnableAIControl()                               ;B4BD9B
     %AICMD0x1C_ShowDialog($02DE, $00)                          ;B4BD9C
-    %AICMD0x28(strcFlags.unknown1, $05)                        ;B4BDA0
+    %AICMD0x28_ClearBit(strcFlags.unknown1, $05)                        ;B4BDA0
     %AICMD0x1B($0295, $00)                                     ;B4BDA5
-    %AICMD0x09($09, $B4BEF0)                                   ;B4BDA9
-    %AICMD0x09($0A, $B4BD66)                                   ;B4BDAD
-    %AICMD0x0C($01)                                            ;B4BDB1
+    %AICMD0x09_StartScript($09, $B4BEF0)                                   ;B4BDA9
+    %AICMD0x09_StartScript($0A, $B4BD66)                                   ;B4BDAD
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4BDB1
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown1, $03)     ;B4BDB3
     %AICMD0x11_EnableUserControl()                             ;B4BDB8
     %AICMD0x12_Jump($B4BD7D)                                   ;B4BDB9
@@ -4792,11 +4792,11 @@ DATA8_B4BD19:
     %AICMD0x12_Jump($B4BE5C)                                   ;B4BE51
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown3, $04)     ;B4BE54
     %AICMD0x12_Jump($B4BE5C)                                   ;B4BE59
-    %AICMD0x25($09)                                            ;B4BE5C
-    %AICMD0x28(strcFlags.unknown1, $05)                        ;B4BE5E
+    %AICMD0x25_RemoveActor($09)                                            ;B4BE5C
+    %AICMD0x28_ClearBit(strcFlags.unknown1, $05)                        ;B4BE5E
     %AICMD0x1B($0295, $00)                                     ;B4BE63
-    %AICMD0x09($09, $B4BEF0)                                   ;B4BE67
-    %AICMD0x09($0A, $B4BD66)                                   ;B4BE6B
+    %AICMD0x09_StartScript($09, $B4BEF0)                                   ;B4BE67
+    %AICMD0x09_StartScript($0A, $B4BD66)                                   ;B4BE6B
     %AICMD0x12_Jump($B4BD7D)                                   ;B4BE6F
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown1, $04)     ;B4BE72
     %AICMD0x1C_ShowDialog($02E8, $00)                          ;B4BE77
@@ -4817,7 +4817,7 @@ DATA8_B4BD19:
     %AICMD0x11_EnableUserControl()                             ;B4BEBC
     %AICMD0x1C_ShowDialog($02E9, $00)                          ;B4BEBD
     %AICMD0x12_Jump($B4BE11)                                   ;B4BEC1
-    %AICMD0x28(strcFlags.unknown1, $06)                        ;B4BEC4
+    %AICMD0x28_ClearBit(strcFlags.unknown1, $06)                        ;B4BEC4
     %AICMD0x08_EnableAIControl()                               ;B4BEC9
     %AICMD0x13_Wait(1)                                         ;B4BECA
     %AICMD0x2C($04, $0006, $005A)                              ;B4BECD
@@ -4829,14 +4829,14 @@ DATA8_B4BD19:
     %AICMD0x12_Jump($B4BEE3)                                   ;B4BEE6
     %AICMD0x1C_ShowDialog($02ED, $00)                          ;B4BEE9
     %AICMD0x12_Jump($B4BEE3)                                   ;B4BEED
-    %AICMD0x17($05)                                            ;B4BEF0
-    %AICMD0x18($00, $B4BF0C)                                   ;B4BEF2
-    %AICMD0x18($01, $B4BF28)                                   ;B4BEF6
-    %AICMD0x18($02, $B4BF44)                                   ;B4BEFA
-    %AICMD0x18($03, $B4BF60)                                   ;B4BEFE
-    %AICMD0x18($04, $B4BF7C)                                   ;B4BF02
+    %AICMD0x17_RollRandom($05)                                            ;B4BEF0
+    %AICMD0x18_JumpIfRandomEquals($00, $B4BF0C)                                   ;B4BEF2
+    %AICMD0x18_JumpIfRandomEquals($01, $B4BF28)                                   ;B4BEF6
+    %AICMD0x18_JumpIfRandomEquals($02, $B4BF44)                                   ;B4BEFA
+    %AICMD0x18_JumpIfRandomEquals($03, $B4BF60)                                   ;B4BEFE
+    %AICMD0x18_JumpIfRandomEquals($04, $B4BF7C)                                   ;B4BF02
     %AICMD0x13_Wait(120)                                       ;B4BF06
-    %AICMD0x0B($01)                                            ;B4BF09
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4BF09
     %AICMD0x10_End()                                           ;B4BF0B
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown2, $00, $B4BF28) ;B4BF0C
     %AICMD0x1A($0128, $01B0, $B385DC, $00)                     ;B4BF13
@@ -4863,30 +4863,30 @@ DATA8_B4BD19:
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown2, $04)     ;B4BF8B
     %AICMD0x47_SetValue8($80098C, 5)                           ;B4BF90
     %AICMD0x12_Jump($B4BF06)                                   ;B4BF95
-    %AICMD0x17($02)                                            ;B4BF98
-    %AICMD0x18($00, $B4BFD9)                                   ;B4BF9A
-    %AICMD0x18($01, $B4BFF0)                                   ;B4BF9E
+    %AICMD0x17_RollRandom($02)                                            ;B4BF98
+    %AICMD0x18_JumpIfRandomEquals($00, $B4BFD9)                                   ;B4BF9A
+    %AICMD0x18_JumpIfRandomEquals($01, $B4BFF0)                                   ;B4BF9E
     %AICMD0x10_End()                                           ;B4BFA2
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $0A, $B4BFD9)   ;B4BFA3
     %AICMD0x23_OrWithIndexedValue(strcFlags.event5, $0A)       ;B4BFAA
     %AICMD0x41_AddValue16(nStoredFeed, 30)                     ;B4BFAF
     %AICMD0x1C_ShowDialog($02EB, $00)                          ;B4BFB5
-    %AICMD0x0B($00)                                            ;B4BFB9
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4BFB9
     %AICMD0x12_Jump($B4BFA2)                                   ;B4BFBB
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $0B, $B4BFD9)   ;B4BFBE
     %AICMD0x23_OrWithIndexedValue(strcFlags.event5, $0B)       ;B4BFC5
     %AICMD0x41_AddValue16(nStoredFeed, 30)                     ;B4BFCA
     %AICMD0x1C_ShowDialog($02EB, $00)                          ;B4BFD0
-    %AICMD0x0B($00)                                            ;B4BFD4
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4BFD4
     %AICMD0x12_Jump($B4BFA2)                                   ;B4BFD6
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $0C, $B4BFF0)   ;B4BFD9
     %AICMD0x23_OrWithIndexedValue(strcFlags.event5, $0C)       ;B4BFE0
     %AICMD0x41_AddValue16(nPlayerHappiness, 50)                ;B4BFE5
-    %AICMD0x0B($00)                                            ;B4BFEB
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4BFEB
     %AICMD0x12_Jump($B4BFA2)                                   ;B4BFED
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $0D, $B4BFD9)   ;B4BFF0
     %AICMD0x23_OrWithIndexedValue(strcFlags.event5, $0D)       ;B4BFF7
-    %AICMD0x0B($00)                                            ;B4BFFC
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4BFFC
     %AICMD0x12_Jump($B4BFA2)                                   ;B4BFFE
     %AICMD0x1A($00E0, $0168, $B3836C, $00)                     ;B4C001
     %AICMD0x1F($B4C016)                                        ;B4C009
@@ -4917,10 +4917,10 @@ DATA8_B4BD19:
     %AICMD0x15_JumpIfEquals8($800982, 1, $B4C086)              ;B4C06F
     %AICMD0x15_JumpIfEquals8($800982, 2, $B4C086)              ;B4C076
     %AICMD0x1C_ShowDialog($02EF, $00)                          ;B4C07D
-    %AICMD0x0B($03)                                            ;B4C081
+    %AICMD0x0B_SetScriptFlag($03)                                            ;B4C081
     %AICMD0x12_Jump($B4C062)                                   ;B4C083
     %AICMD0x1C_ShowDialog($02EE, $00)                          ;B4C086
-    %AICMD0x0B($03)                                            ;B4C08A
+    %AICMD0x0B_SetScriptFlag($03)                                            ;B4C08A
     %AICMD0x12_Jump($B4C062)                                   ;B4C08C
     %AICMD0x1A($0170, $0168, $B38348, $00)                     ;B4C08F
     %AICMD0x1F($B4C0AA)                                        ;B4C097
@@ -4938,7 +4938,7 @@ DATA8_B4BD19:
     %AICMD0x1F($B4C0D1)                                        ;B4C0CB
     %AICMD0x12_Jump($B4C0CB)                                   ;B4C0CE
     %AICMD0x1C_ShowDialog($02F0, $00)                          ;B4C0D1
-    %AICMD0x0B($04)                                            ;B4C0D5
+    %AICMD0x0B_SetScriptFlag($04)                                            ;B4C0D5
     %AICMD0x12_Jump($B4C0CB)                                   ;B4C0D7
     %AICMD0x1A($0118, $0270, $B3842C, $02)                     ;B4C0DA
     %AICMD0x1F($B4C0F5)                                        ;B4C0E2
@@ -4962,7 +4962,7 @@ DATA8_B4BD19:
     %AICMD0x1F($B4C135)                                        ;B4C12F
     %AICMD0x12_Jump($B4C12F)                                   ;B4C132
     %AICMD0x1C_ShowDialog($02F1, $00)                          ;B4C135
-    %AICMD0x0B($05)                                            ;B4C139
+    %AICMD0x0B_SetScriptFlag($05)                                            ;B4C139
     %AICMD0x12_Jump($B4C12F)                                   ;B4C13B
     %AICMD0x1A($0138, $0298, $B38390, $00)                     ;B4C13E
     %AICMD0x1F($B4C159)                                        ;B4C146
@@ -4981,7 +4981,7 @@ DATA8_B4BD19:
     %AICMD0x1F($B4C186)                                        ;B4C180
     %AICMD0x12_Jump($B4C180)                                   ;B4C183
     %AICMD0x1C_ShowDialog($02F1, $00)                          ;B4C186
-    %AICMD0x0B($06)                                            ;B4C18A
+    %AICMD0x0B_SetScriptFlag($06)                                            ;B4C18A
     %AICMD0x12_Jump($B4C180)                                   ;B4C18C
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, $B4C1A1)   ;B4C18F
     %AICMD0x1A($00D8, $0228, $B381A4, $01)                     ;B4C196
@@ -5014,7 +5014,7 @@ DATA8_B4BD19:
     %AICMD0x12_Jump($B4C21C)                                   ;B4C21F
     %AICMD0x1C_ShowDialog($02F2, $00)                          ;B4C222
     %AICMD0x41_AddValue16(nLove_Ann, 10)                       ;B4C226
-    %AICMD0x0B($07)                                            ;B4C22C
+    %AICMD0x0B_SetScriptFlag($07)                                            ;B4C22C
     %AICMD0x12_Jump($B4C21C)                                   ;B4C22E
     %AICMD0x1C_ShowDialog($02F1, $00)                          ;B4C231
     %AICMD0x12_Jump($B4C21C)                                   ;B4C235
@@ -5051,7 +5051,7 @@ DATA8_B4BD19:
     %AICMD0x12_Jump($B4C2C9)                                   ;B4C2CC
     %AICMD0x1C_ShowDialog($02F3, $00)                          ;B4C2CF
     %AICMD0x41_AddValue16(nLove_Nina, 10)                      ;B4C2D3
-    %AICMD0x0B($08)                                            ;B4C2D9
+    %AICMD0x0B_SetScriptFlag($08)                                            ;B4C2D9
     %AICMD0x12_Jump($B4C2C9)                                   ;B4C2DB
     %AICMD0x1C_ShowDialog($02F1, $00)                          ;B4C2DE
     %AICMD0x12_Jump($B4C21C)                                   ;B4C2E2
@@ -5094,7 +5094,7 @@ DATA8_B4BD19:
     %AICMD0x12_Jump($B4C38F)                                   ;B4C392
     %AICMD0x1C_ShowDialog($02F4, $00)                          ;B4C395
     %AICMD0x41_AddValue16(nLove_Ellen, 10)                     ;B4C399
-    %AICMD0x0B($09)                                            ;B4C39F
+    %AICMD0x0B_SetScriptFlag($09)                                            ;B4C39F
     %AICMD0x12_Jump($B4C38F)                                   ;B4C3A1
     %AICMD0x1C_ShowDialog($02F1, $00)                          ;B4C3A4
     %AICMD0x12_Jump($B4C38F)                                   ;B4C3A8
@@ -5103,25 +5103,25 @@ DATA8_B4BD19:
 
 DATA8_B4C3AC:
  
-    %AICMD0x4F()                                               ;B4C3AC
+    %AICMD0x4F_DisableToolUse()                                               ;B4C3AC
     %AICMD0x50()                                               ;B4C3AD
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B4C3AE
     %AICMD0x02_FreezeTime()                                    ;B4C3B3
     %AICMD0x03_SetHour($07)                                    ;B4C3B4
     %AICMD0x05_SetTransferPosition(296, 536)                   ;B4C3B6
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B4C3BB
-    %AICMD0x09($01, $B4BEDB)                                   ;B4C3BD
-    %AICMD0x09($02, $B4C057)                                   ;B4C3C1
-    %AICMD0x09($03, $B4C0C0)                                   ;B4C3C5
-    %AICMD0x09($04, $B4C124)                                   ;B4C3C9
-    %AICMD0x09($05, $B4C178)                                   ;B4C3CD
-    %AICMD0x09($06, $B4C1F5)                                   ;B4C3D1
-    %AICMD0x09($07, $B4C2A2)                                   ;B4C3D5
-    %AICMD0x09($08, $B4C368)                                   ;B4C3D9
+    %AICMD0x09_StartScript($01, $B4BEDB)                                   ;B4C3BD
+    %AICMD0x09_StartScript($02, $B4C057)                                   ;B4C3C1
+    %AICMD0x09_StartScript($03, $B4C0C0)                                   ;B4C3C5
+    %AICMD0x09_StartScript($04, $B4C124)                                   ;B4C3C9
+    %AICMD0x09_StartScript($05, $B4C178)                                   ;B4C3CD
+    %AICMD0x09_StartScript($06, $B4C1F5)                                   ;B4C3D1
+    %AICMD0x09_StartScript($07, $B4C2A2)                                   ;B4C3D5
+    %AICMD0x09_StartScript($08, $B4C368)                                   ;B4C3D9
     %AICMD0x08_EnableAIControl()                               ;B4C3DD
     %AICMD0x13_Wait(1)                                         ;B4C3DE
     %AICMD0x06_SetDestinationArea(!AREA_EGGFESTIVAL)           ;B4C3E1
-    %AICMD0x38()                                               ;B4C3E3
+    %AICMD0x38_WaitForFadeIn()                                               ;B4C3E3
     %AICMD0x13_Wait(1)                                         ;B4C3E4
     %AICMD0x15_JumpIfEquals8($800982, 3, $B4C403)              ;B4C3E7
     %AICMD0x15_JumpIfEquals8($800982, 4, $B4C403)              ;B4C3EE
@@ -5130,8 +5130,8 @@ DATA8_B4C3AC:
     %AICMD0x12_Jump($B4C413)                                   ;B4C400
     %AICMD0x1C_ShowDialog($02EA, $00)                          ;B4C403
     %AICMD0x41_AddValue16(nPlayerHappiness, 30)                ;B4C407
-    %AICMD0x09($09, $B4BF98)                                   ;B4C40D
-    %AICMD0x0C($00)                                            ;B4C411
+    %AICMD0x09_StartScript($09, $B4BF98)                                   ;B4C40D
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4C411
     %AICMD0x13_Wait(1)                                         ;B4C413
     %AICMD0x1C_ShowDialog($02EC, $00)                          ;B4C416
     %AICMD0x13_Wait(1)                                         ;B4C41A
@@ -5162,12 +5162,12 @@ pAIScripting0x29:
  
 DATA8_B4C447:
  
-    %AICMD0x09($01, $B4C44D)                                   ;B4C447
-    %AICMD0x38()                                               ;B4C44B
+    %AICMD0x09_StartScript($01, $B4C44D)                                   ;B4C447
+    %AICMD0x38_WaitForFadeIn()                                               ;B4C44B
     %AICMD0x10_End()                                           ;B4C44C
     %AICMD0x15_JumpIfEquals8(nCurrentTimeID, 18, $B4C4B7)      ;B4C44D
     %AICMD0x1A($0068, $01A8, $B38384, $02)                     ;B4C454
-    %AICMD0x2D($B4C47A, $B4C46C)                               ;B4C45C
+    %AICMD0x2D_JumpOnInteract($B4C47A, $B4C46C)                               ;B4C45C
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 18, 24, $B4C481) ;B4C461
     %AICMD0x12_Jump($B4C45C)                                   ;B4C469
     %AICMD0x15_JumpIfEquals8($8008FE, 20, $B4C48E)             ;B4C46C
@@ -5183,7 +5183,7 @@ DATA8_B4C447:
     %AICMD0x41_AddValue16(nPlayerHappiness, 30)                ;B4C499
     %AICMD0x12_Jump($B4C4A2)                                   ;B4C49F
     %AICMD0x23_OrWithIndexedValue(strcFlags.event4, $0B)       ;B4C4A2
-    %AICMD0x28(strcFlags.event4, $0A)                          ;B4C4A7
+    %AICMD0x28_ClearBit(strcFlags.event4, $0A)                          ;B4C4A7
     %AICMD0x1B($02B6, $00)                                     ;B4C4AC
     %AICMD0x0D($FF, $00, $60, $01)                             ;B4C4B0
     %AICMD0x37()                                               ;B4C4B5
@@ -5305,9 +5305,9 @@ pAIScripting0x2D:
 DATA8_B4C5A4:
  
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B4C5A4
-    %AICMD0x09($01, $B4C5B2)                                   ;B4C5A6
+    %AICMD0x09_StartScript($01, $B4C5B2)                                   ;B4C5A6
     %AICMD0x11_EnableUserControl()                             ;B4C5AA
-    %AICMD0x38()                                               ;B4C5AB
+    %AICMD0x38_WaitForFadeIn()                                               ;B4C5AB
     %AICMD0x13_Wait(1)                                         ;B4C5AC
     %AICMD0x12_Jump($B4C5AC)                                   ;B4C5AF
     %AICMD0x1A($0108, $001A, $B384EC, $00)                     ;B4C5B2
@@ -5352,15 +5352,15 @@ DATA8_B4C614:
     %AICMD0x03_SetHour($07)                                    ;B4C622
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B4C624
     %AICMD0x08_EnableAIControl()                               ;B4C626
-    %AICMD0x09($01, $B4C6B1)                                   ;B4C627
-    %AICMD0x09($02, $B4C691)                                   ;B4C62B
+    %AICMD0x09_StartScript($01, $B4C6B1)                                   ;B4C627
+    %AICMD0x09_StartScript($02, $B4C691)                                   ;B4C62B
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, $B4C655)   ;B4C62F
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, $B4C655)   ;B4C636
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, $B4C655)   ;B4C63D
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, $B4C655)   ;B4C644
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, $B4C655)   ;B4C64B
     %AICMD0x12_Jump($B4C659)                                   ;B4C652
-    %AICMD0x09($03, $B4C6D8)                                   ;B4C655
+    %AICMD0x09_StartScript($03, $B4C6D8)                                   ;B4C655
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $07, $B4C671)   ;B4C659
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $06, $B4C66C)   ;B4C660
     %AICMD0x06_SetDestinationArea(!AREA_HOUSE1)                ;B4C667
@@ -5369,34 +5369,34 @@ DATA8_B4C614:
     %AICMD0x12_Jump($B4C676)                                   ;B4C66E
     %AICMD0x06_SetDestinationArea(!AREA_HOUSE3)                ;B4C671
     %AICMD0x12_Jump($B4C676)                                   ;B4C673
-    %AICMD0x38()                                               ;B4C676
+    %AICMD0x38_WaitForFadeIn()                                               ;B4C676
     %AICMD0x13_Wait(90)                                        ;B4C677
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 32)                  ;B4C67A
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 64)                  ;B4C67E
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B4C682
-    %AICMD0x0B($00)                                            ;B4C684
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4C684
     %AICMD0x13_Wait(90)                                        ;B4C686
-    %AICMD0x0C($02)                                            ;B4C689
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4C689
     %AICMD0x13_Wait(60)                                        ;B4C68B
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B4C68E
     %AICMD0x10_End()                                           ;B4C690
     %AICMD0x1A($0088, $00B8, $B38438, $03)                     ;B4C691
-    %AICMD0x0C($01)                                            ;B4C699
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4C699
     %AICMD0x13_Wait(30)                                        ;B4C69B
     %AICMD0x1B($02DC, $00)                                     ;B4C69E
     %AICMD0x0D($FF, $00, $10, $01)                             ;B4C6A2
     %AICMD0x1B($02DE, $00)                                     ;B4C6A7
     %AICMD0x13_Wait(120)                                       ;B4C6AB
-    %AICMD0x0B($02)                                            ;B4C6AE
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4C6AE
     %AICMD0x10_End()                                           ;B4C6B0
     %AICMD0x1A($0078, $00B8, $B38450, $02)                     ;B4C6B1
-    %AICMD0x0C($00)                                            ;B4C6B9
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4C6B9
     %AICMD0x1B($02E0, $00)                                     ;B4C6BB
     %AICMD0x13_Wait(120)                                       ;B4C6BF
     %AICMD0x1B($02DF, $00)                                     ;B4C6C2
     %AICMD0x0D($00, $01, $10, $01)                             ;B4C6C6
     %AICMD0x13_Wait(20)                                        ;B4C6CB
-    %AICMD0x0B($01)                                            ;B4C6CE
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4C6CE
     %AICMD0x1B($02E0, $00)                                     ;B4C6D0
     %AICMD0x13_Wait(120)                                       ;B4C6D4
     %AICMD0x10_End()                                           ;B4C6D7
@@ -5434,33 +5434,33 @@ DATA8_B4C711:
     %AICMD0x05_SetTransferPosition(136, 344)                   ;B4C717
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B4C71C
     %AICMD0x08_EnableAIControl()                               ;B4C71E
-    %AICMD0x09($01, $B4C74F)                                   ;B4C71F
+    %AICMD0x09_StartScript($01, $B4C74F)                                   ;B4C71F
     %AICMD0x06_SetDestinationArea(!AREA_FARMSUMMER)            ;B4C723
-    %AICMD0x38()                                               ;B4C725
+    %AICMD0x38_WaitForFadeIn()                                               ;B4C725
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 32)                  ;B4C726
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B4C72A
     %AICMD0x13_Wait(90)                                        ;B4C72C
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B4C72F
     %AICMD0x13_Wait(120)                                       ;B4C731
-    %AICMD0x0B($00)                                            ;B4C734
-    %AICMD0x0C($01)                                            ;B4C736
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4C734
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4C736
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 48)                  ;B4C738
     %AICMD0x40_DisableTileInteractions()                       ;B4C73C
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 68)                  ;B4C73D
     %AICMD0x13_Wait(70)                                        ;B4C741
     %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 44)                   ;B4C744
-    %AICMD0x0B($02)                                            ;B4C748
-    %AICMD0x0C($03)                                            ;B4C74A
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4C748
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B4C74A
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B4C74C
     %AICMD0x10_End()                                           ;B4C74E
     %AICMD0x1A($0110, $0178, $B38114, $00)                     ;B4C74F
-    %AICMD0x0C($00)                                            ;B4C757
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4C757
     %AICMD0x1B($01EC, $00)                                     ;B4C759
     %AICMD0x0D($FF, $00, $78, $01)                             ;B4C75D
     %AICMD0x13_Wait(60)                                        ;B4C762
     %AICMD0x1B($01F2, $00)                                     ;B4C765
-    %AICMD0x0B($01)                                            ;B4C769
-    %AICMD0x0C($02)                                            ;B4C76B
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4C769
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4C76B
     %AICMD0x1B($01E9, $00)                                     ;B4C76D
     %AICMD0x0D($FF, $00, $40, $02)                             ;B4C771
     %AICMD0x1B($01DD, $00)                                     ;B4C776
@@ -5481,7 +5481,7 @@ DATA8_B4C711:
     %AICMD0x13_Wait(80)                                        ;B4C7B1
     %AICMD0x1B($01EB, $01)                                     ;B4C7B4
     %AICMD0x13_Wait(180)                                       ;B4C7B8
-    %AICMD0x0B($03)                                            ;B4C7BB
+    %AICMD0x0B_SetScriptFlag($03)                                            ;B4C7BB
     %AICMD0x13_Wait(1)                                         ;B4C7BD
     %AICMD0x12_Jump($B4C7BD)                                   ;B4C7C0
 
@@ -5513,25 +5513,25 @@ DATA8_B4C7E3:
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B4C7EE
     %AICMD0x40_DisableTileInteractions()                       ;B4C7F0
     %AICMD0x08_EnableAIControl()                               ;B4C7F1
-    %AICMD0x09($01, $B4C9BA)                                   ;B4C7F2
-    %AICMD0x09($02, $B4C862)                                   ;B4C7F6
-    %AICMD0x09($03, $B4C898)                                   ;B4C7FA
-    %AICMD0x09($04, $B4C8D1)                                   ;B4C7FE
-    %AICMD0x09($05, $B4C913)                                   ;B4C802
-    %AICMD0x09($06, $B4C949)                                   ;B4C806
-    %AICMD0x09($07, $B4C971)                                   ;B4C80A
+    %AICMD0x09_StartScript($01, $B4C9BA)                                   ;B4C7F2
+    %AICMD0x09_StartScript($02, $B4C862)                                   ;B4C7F6
+    %AICMD0x09_StartScript($03, $B4C898)                                   ;B4C7FA
+    %AICMD0x09_StartScript($04, $B4C8D1)                                   ;B4C7FE
+    %AICMD0x09_StartScript($05, $B4C913)                                   ;B4C802
+    %AICMD0x09_StartScript($06, $B4C949)                                   ;B4C806
+    %AICMD0x09_StartScript($07, $B4C971)                                   ;B4C80A
     %AICMD0x06_SetDestinationArea(!AREA_ENDING06)              ;B4C80E
-    %AICMD0x38()                                               ;B4C810
+    %AICMD0x38_WaitForFadeIn()                                               ;B4C810
     %AICMD0x13_Wait(120)                                       ;B4C811
     %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 136)                ;B4C814
     %AICMD0x13_Wait(60)                                        ;B4C818
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B4C81B
     %AICMD0x19($0062, $00)                                     ;B4C81D
     %AICMD0x13_Wait(90)                                        ;B4C821
-    %AICMD0x0B($00)                                            ;B4C824
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4C824
     %AICMD0x19($0063, $00)                                     ;B4C826
     %AICMD0x13_Wait(90)                                        ;B4C82A
-    %AICMD0x0B($01)                                            ;B4C82D
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4C82D
     %AICMD0x19($0060, $00)                                     ;B4C82F
     %AICMD0x13_Wait(90)                                        ;B4C833
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B4C836
@@ -5549,7 +5549,7 @@ DATA8_B4C7E3:
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B4C85F
     %AICMD0x10_End()                                           ;B4C861
     %AICMD0x1A($00B8, $0058, $B38888, $03)                     ;B4C862
-    %AICMD0x0C($00)                                            ;B4C86A
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4C86A
     %AICMD0x1B($018C, $00)                                     ;B4C86C
     %AICMD0x1B($019F, $00)                                     ;B4C870
     %AICMD0x0D($00, $01, $20, $01)                             ;B4C874
@@ -5562,9 +5562,9 @@ DATA8_B4C7E3:
     %AICMD0x13_Wait(1)                                         ;B4C892
     %AICMD0x12_Jump($B4C892)                                   ;B4C895
     %AICMD0x1A($0038, $0068, $B38870, $02)                     ;B4C898
-    %AICMD0x0C($00)                                            ;B4C8A0
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4C8A0
     %AICMD0x1B($0190, $01)                                     ;B4C8A2
-    %AICMD0x0C($01)                                            ;B4C8A6
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4C8A6
     %AICMD0x1B($018C, $01)                                     ;B4C8A8
     %AICMD0x1B($019F, $00)                                     ;B4C8AC
     %AICMD0x0D($00, $01, $1C, $02)                             ;B4C8B0
@@ -5576,7 +5576,7 @@ DATA8_B4C7E3:
     %AICMD0x13_Wait(1)                                         ;B4C8CB
     %AICMD0x12_Jump($B4C8CB)                                   ;B4C8CE
     %AICMD0x1A($0028, $00C8, $B38108, $01)                     ;B4C8D1
-    %AICMD0x0C($01)                                            ;B4C8D9
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4C8D9
     %AICMD0x13_Wait(10)                                        ;B4C8DB
     %AICMD0x1B($018B, $01)                                     ;B4C8DE
     %AICMD0x0D($01, $00, $20, $01)                             ;B4C8E2
@@ -5592,7 +5592,7 @@ DATA8_B4C7E3:
     %AICMD0x13_Wait(1)                                         ;B4C90D
     %AICMD0x12_Jump($B4C90D)                                   ;B4C910
     %AICMD0x1A($0098, $0038, $B38888, $00)                     ;B4C913
-    %AICMD0x0C($00)                                            ;B4C91B
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4C91B
     %AICMD0x13_Wait(20)                                        ;B4C91D
     %AICMD0x1B($019F, $00)                                     ;B4C920
     %AICMD0x0D($00, $01, $30, $01)                             ;B4C924
@@ -5606,7 +5606,7 @@ DATA8_B4C7E3:
     %AICMD0x13_Wait(1)                                         ;B4C943
     %AICMD0x12_Jump($B4C943)                                   ;B4C946
     %AICMD0x1A($00A8, $00A8, $B386FC, $03)                     ;B4C949
-    %AICMD0x0C($01)                                            ;B4C951
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4C951
     %AICMD0x1B($01B0, $00)                                     ;B4C953
     %AICMD0x0D($FE, $00, $48, $03)                             ;B4C957
     %AICMD0x13_Wait(20)                                        ;B4C95C
@@ -5616,7 +5616,7 @@ DATA8_B4C7E3:
     %AICMD0x13_Wait(1)                                         ;B4C96B
     %AICMD0x12_Jump($B4C96B)                                   ;B4C96E
     %AICMD0x1A($0088, $00B8, $B386B4, $02)                     ;B4C971
-    %AICMD0x0C($00)                                            ;B4C979
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4C979
     %AICMD0x13_Wait(60)                                        ;B4C97B
     %AICMD0x1B($01CA, $00)                                     ;B4C97E
     %AICMD0x0D($FF, $00, $20, $01)                             ;B4C982
@@ -5629,20 +5629,20 @@ DATA8_B4C7E3:
     %AICMD0x13_Wait(60)                                        ;B4C99F
     %AICMD0x1B($01CA, $01)                                     ;B4C9A2
     %AICMD0x0D($01, $00, $40, $02)                             ;B4C9A6
-    %AICMD0x0B($02)                                            ;B4C9AB
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4C9AB
     %AICMD0x1B($01D0, $01)                                     ;B4C9AD
     %AICMD0x13_Wait(120)                                       ;B4C9B1
     %AICMD0x13_Wait(1)                                         ;B4C9B4
     %AICMD0x12_Jump($B4C9B4)                                   ;B4C9B7
     %AICMD0x1A($0038, $00A0, $B389A8, $02)                     ;B4C9BA
-    %AICMD0x0C($00)                                            ;B4C9C2
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4C9C2
     %AICMD0x1B($01F5, $01)                                     ;B4C9C4
     %AICMD0x13_Wait(120)                                       ;B4C9C8
     %AICMD0x1B($01F4, $01)                                     ;B4C9CB
     %AICMD0x1B($01F3, $01)                                     ;B4C9CF
     %AICMD0x13_Wait(120)                                       ;B4C9D3
     %AICMD0x1B($01E8, $01)                                     ;B4C9D6
-    %AICMD0x0C($02)                                            ;B4C9DA
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4C9DA
     %AICMD0x1B($01EC, $01)                                     ;B4C9DC
     %AICMD0x0D($01, $00, $60, $01)                             ;B4C9E0
     %AICMD0x1B($01F2, $01)                                     ;B4C9E5
@@ -5680,19 +5680,19 @@ DATA8_B4CA19:
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B4CA24
     %AICMD0x40_DisableTileInteractions()                       ;B4CA26
     %AICMD0x08_EnableAIControl()                               ;B4CA27
-    %AICMD0x09($01, $B4CAA6)                                   ;B4CA28
-    %AICMD0x09($02, $B4CAE0)                                   ;B4CA2C
-    %AICMD0x09($03, $B4CB15)                                   ;B4CA30
-    %AICMD0x09($04, $B4CB2A)                                   ;B4CA34
+    %AICMD0x09_StartScript($01, $B4CAA6)                                   ;B4CA28
+    %AICMD0x09_StartScript($02, $B4CAE0)                                   ;B4CA2C
+    %AICMD0x09_StartScript($03, $B4CB15)                                   ;B4CA30
+    %AICMD0x09_StartScript($04, $B4CB2A)                                   ;B4CA34
     %AICMD0x06_SetDestinationArea(!AREA_ENDING06)              ;B4CA38
-    %AICMD0x38()                                               ;B4CA3A
+    %AICMD0x38_WaitForFadeIn()                                               ;B4CA3A
     %AICMD0x13_Wait(120)                                       ;B4CA3B
     %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 120)                ;B4CA3E
     %AICMD0x13_Wait(30)                                        ;B4CA42
     %AICMD0x19($007A, $01)                                     ;B4CA45
     %AICMD0x13_Wait(90)                                        ;B4CA49
     %AICMD0x3E_SetCarryItem($16)                               ;B4CA4C
-    %AICMD0x0B($00)                                            ;B4CA4E
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4CA4E
     %AICMD0x13_Wait(90)                                        ;B4CA50
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B4CA53
     %AICMD0x13_Wait(30)                                        ;B4CA55
@@ -5713,9 +5713,9 @@ DATA8_B4CA19:
     %AICMD0x19($0066, $01)                                     ;B4CA85
     %AICMD0x13_Wait(90)                                        ;B4CA89
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B4CA8C
-    %AICMD0x0B($01)                                            ;B4CA8E
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4CA8E
     %AICMD0x13_Wait(90)                                        ;B4CA90
-    %AICMD0x0C($02)                                            ;B4CA93
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4CA93
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 16)                  ;B4CA95
     %AICMD0x13_Wait(30)                                        ;B4CA99
     %AICMD0x19($003D, $00)                                     ;B4CA9C
@@ -5723,7 +5723,7 @@ DATA8_B4CA19:
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B4CAA3
     %AICMD0x10_End()                                           ;B4CAA5
     %AICMD0x1A($FFF0, $0088, $B38114, $02)                     ;B4CAA6
-    %AICMD0x0C($00)                                            ;B4CAAE
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4CAAE
     %AICMD0x1B($01EC, $01)                                     ;B4CAB0
     %AICMD0x0D($01, $00, $58, $01)                             ;B4CAB4
     %AICMD0x13_Wait(90)                                        ;B4CAB9
@@ -5746,10 +5746,10 @@ DATA8_B4CA19:
     %AICMD0x1B($0193, $01)                                     ;B4CAF9
     %AICMD0x13_Wait(180)                                       ;B4CAFD
     %AICMD0x1B($018C, $01)                                     ;B4CB00
-    %AICMD0x0C($01)                                            ;B4CB04
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4CB04
     %AICMD0x1B($0191, $01)                                     ;B4CB06
     %AICMD0x13_Wait(180)                                       ;B4CB0A
-    %AICMD0x0B($02)                                            ;B4CB0D
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4CB0D
     %AICMD0x13_Wait(1)                                         ;B4CB0F
     %AICMD0x12_Jump($B4CB0F)                                   ;B4CB12
     %AICMD0x1A($00A0, $0088, $B38144, $00)                     ;B4CB15
@@ -5788,17 +5788,17 @@ DATA8_B4CB5F:
     %AICMD0x05_SetTransferPosition(128, 200)                   ;B4CB65
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B4CB6A
     %AICMD0x08_EnableAIControl()                               ;B4CB6C
-    %AICMD0x09($01, $B4CC39)                                   ;B4CB6D
-    %AICMD0x09($02, $B4CC73)                                   ;B4CB71
-    %AICMD0x09($03, $B4CCA7)                                   ;B4CB75
-    %AICMD0x09($04, $B4CCDD)                                   ;B4CB79
-    %AICMD0x09($05, $B4CD12)                                   ;B4CB7D
-    %AICMD0x09($06, $B4CD41)                                   ;B4CB81
-    %AICMD0x09($07, $B4CC1F)                                   ;B4CB85
-    %AICMD0x09($08, $B4CC2B)                                   ;B4CB89
+    %AICMD0x09_StartScript($01, $B4CC39)                                   ;B4CB6D
+    %AICMD0x09_StartScript($02, $B4CC73)                                   ;B4CB71
+    %AICMD0x09_StartScript($03, $B4CCA7)                                   ;B4CB75
+    %AICMD0x09_StartScript($04, $B4CCDD)                                   ;B4CB79
+    %AICMD0x09_StartScript($05, $B4CD12)                                   ;B4CB7D
+    %AICMD0x09_StartScript($06, $B4CD41)                                   ;B4CB81
+    %AICMD0x09_StartScript($07, $B4CC1F)                                   ;B4CB85
+    %AICMD0x09_StartScript($08, $B4CC2B)                                   ;B4CB89
     %AICMD0x3B($14)                                            ;B4CB8D
     %AICMD0x06_SetDestinationArea(!AREA_COOP)                  ;B4CB8F
-    %AICMD0x38()                                               ;B4CB91
+    %AICMD0x38_WaitForFadeIn()                                               ;B4CB91
     %AICMD0x13_Wait(30)                                        ;B4CB92
     %AICMD0x3A_RunForTime(!AIINPUT_UP, 16)                     ;B4CB95
     %AICMD0x13_Wait(10)                                        ;B4CB99
@@ -5812,7 +5812,7 @@ DATA8_B4CB5F:
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 24)                    ;B4CBB1
     %AICMD0x13_Wait(30)                                        ;B4CBB5
     %AICMD0x3E_SetCarryItem($14)                               ;B4CBB8
-    %AICMD0x0B($02)                                            ;B4CBBA
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4CBBA
     %AICMD0x13_Wait(30)                                        ;B4CBBC
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B4CBBF
     %AICMD0x13_Wait(20)                                        ;B4CBC3
@@ -5821,14 +5821,14 @@ DATA8_B4CB5F:
     %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 21)                   ;B4CBCB
     %AICMD0x3F_ThrowCarriedItem()                              ;B4CBCF
     %AICMD0x13_Wait(30)                                        ;B4CBD0
-    %AICMD0x0B($00)                                            ;B4CBD3
-    %AICMD0x0C($01)                                            ;B4CBD5
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4CBD3
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4CBD5
     %AICMD0x19($0042, $00)                                     ;B4CBD7
     %AICMD0x13_Wait(40)                                        ;B4CBDB
     %AICMD0x19($0026, $00)                                     ;B4CBDE
     %AICMD0x13_Wait(60)                                        ;B4CBE2
     %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 64)                   ;B4CBE5
-    %AICMD0x0B($03)                                            ;B4CBE9
+    %AICMD0x0B_SetScriptFlag($03)                                            ;B4CBE9
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B4CBEB
     %AICMD0x13_Wait(60)                                        ;B4CBED
     %AICMD0x19($0026, $00)                                     ;B4CBF0
@@ -5847,70 +5847,70 @@ DATA8_B4CB5F:
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B4CC1C
     %AICMD0x10_End()                                           ;B4CC1E
     %AICMD0x1A($0078, $0088, $B3815C, $00)                     ;B4CC1F
-    %AICMD0x0C($02)                                            ;B4CC27
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4CC27
     %AICMD0x37()                                               ;B4CC29
     %AICMD0x10_End()                                           ;B4CC2A
     %AICMD0x1A($0048, $0060, $B3815C, $00)                     ;B4CC2B
     %AICMD0x13_Wait(1)                                         ;B4CC33
     %AICMD0x12_Jump($B4CC33)                                   ;B4CC36
     %AICMD0x1A($00C0, $0048, $B3893C, $00)                     ;B4CC39
-    %AICMD0x0C($00)                                            ;B4CC41
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4CC41
     %AICMD0x1B($0214, $00)                                     ;B4CC43
     %AICMD0x0D($FF, $00, $20, $01)                             ;B4CC47
     %AICMD0x0D($00, $01, $3A, $01)                             ;B4CC4C
     %AICMD0x0D($FF, $00, $42, $01)                             ;B4CC51
     %AICMD0x1B($0212, $00)                                     ;B4CC56
-    %AICMD0x0B($01)                                            ;B4CC5A
-    %AICMD0x0C($03)                                            ;B4CC5C
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4CC5A
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B4CC5C
     %AICMD0x0D($FF, $00, $28, $01)                             ;B4CC5E
     %AICMD0x2F($B38144)                                        ;B4CC63
     %AICMD0x22($10, $10, $01, $B38144, $04)                    ;B4CC66
     %AICMD0x13_Wait(1)                                         ;B4CC6D
     %AICMD0x12_Jump($B4CC6D)                                   ;B4CC70
     %AICMD0x1A($00C8, $0078, $B38144, $03)                     ;B4CC73
-    %AICMD0x0C($00)                                            ;B4CC7B
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4CC7B
     %AICMD0x1B($0214, $00)                                     ;B4CC7D
     %AICMD0x0D($FF, $00, $20, $01)                             ;B4CC81
     %AICMD0x0D($FF, $01, $14, $01)                             ;B4CC86
     %AICMD0x0D($FF, $00, $38, $01)                             ;B4CC8B
-    %AICMD0x0C($03)                                            ;B4CC90
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B4CC90
     %AICMD0x13_Wait(60)                                        ;B4CC92
     %AICMD0x0D($FF, $00, $28, $01)                             ;B4CC95
     %AICMD0x22($10, $08, $01, $B38144, $04)                    ;B4CC9A
     %AICMD0x13_Wait(1)                                         ;B4CCA1
     %AICMD0x12_Jump($B4CCA1)                                   ;B4CCA4
     %AICMD0x1A($0038, $0050, $B38144, $02)                     ;B4CCA7
-    %AICMD0x0C($00)                                            ;B4CCAF
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4CCAF
     %AICMD0x1B($0212, $01)                                     ;B4CCB1
     %AICMD0x0D($00, $01, $18, $01)                             ;B4CCB5
     %AICMD0x13_Wait(10)                                        ;B4CCBA
     %AICMD0x0D($01, $01, $08, $01)                             ;B4CCBD
     %AICMD0x13_Wait(180)                                       ;B4CCC2
-    %AICMD0x0C($03)                                            ;B4CCC5
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B4CCC5
     %AICMD0x1B($0214, $00)                                     ;B4CCC7
     %AICMD0x0D($FF, $00, $18, $01)                             ;B4CCCB
     %AICMD0x22($08, $08, $01, $B38144, $04)                    ;B4CCD0
     %AICMD0x13_Wait(1)                                         ;B4CCD7
     %AICMD0x12_Jump($B4CCD7)                                   ;B4CCDA
     %AICMD0x1A($0098, $00A8, $B38144, $00)                     ;B4CCDD
-    %AICMD0x0C($00)                                            ;B4CCE5
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4CCE5
     %AICMD0x1B($0212, $00)                                     ;B4CCE7
     %AICMD0x0D($FF, $00, $3C, $01)                             ;B4CCEB
     %AICMD0x1B($0213, $00)                                     ;B4CCF0
     %AICMD0x0D($FF, $FF, $10, $01)                             ;B4CCF4
-    %AICMD0x0C($03)                                            ;B4CCF9
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B4CCF9
     %AICMD0x0D($00, $FF, $08, $01)                             ;B4CCFB
     %AICMD0x0D($FF, $00, $20, $01)                             ;B4CD00
     %AICMD0x22($08, $08, $01, $B38144, $04)                    ;B4CD05
     %AICMD0x13_Wait(1)                                         ;B4CD0C
     %AICMD0x12_Jump($B4CD0C)                                   ;B4CD0F
     %AICMD0x1A($0088, $0078, $B38144, $01)                     ;B4CD12
-    %AICMD0x0C($00)                                            ;B4CD1A
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4CD1A
     %AICMD0x1B($0212, $00)                                     ;B4CD1C
     %AICMD0x0D($FF, $00, $30, $01)                             ;B4CD20
     %AICMD0x13_Wait(30)                                        ;B4CD25
     %AICMD0x0D($00, $01, $08, $01)                             ;B4CD28
-    %AICMD0x0C($03)                                            ;B4CD2D
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B4CD2D
     %AICMD0x0D($FF, $00, $20, $01)                             ;B4CD2F
     %AICMD0x22($10, $08, $01, $B38144, $04)                    ;B4CD34
     %AICMD0x13_Wait(1)                                         ;B4CD3B
@@ -5948,12 +5948,12 @@ DATA8_B4CD76:
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B4CD81
     %AICMD0x40_DisableTileInteractions()                       ;B4CD83
     %AICMD0x08_EnableAIControl()                               ;B4CD84
-    %AICMD0x09($01, $B4CDEF)                                   ;B4CD85
-    %AICMD0x09($02, $B4CE35)                                   ;B4CD89
-    %AICMD0x09($03, $B4CE6C)                                   ;B4CD8D
-    %AICMD0x09($04, $B4CE88)                                   ;B4CD91
+    %AICMD0x09_StartScript($01, $B4CDEF)                                   ;B4CD85
+    %AICMD0x09_StartScript($02, $B4CE35)                                   ;B4CD89
+    %AICMD0x09_StartScript($03, $B4CE6C)                                   ;B4CD8D
+    %AICMD0x09_StartScript($04, $B4CE88)                                   ;B4CD91
     %AICMD0x06_SetDestinationArea(!AREA_ENDING06)              ;B4CD95
-    %AICMD0x38()                                               ;B4CD97
+    %AICMD0x38_WaitForFadeIn()                                               ;B4CD97
     %AICMD0x13_Wait(120)                                       ;B4CD98
     %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 144)                ;B4CD9B
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B4CD9F
@@ -5964,8 +5964,8 @@ DATA8_B4CD76:
     %AICMD0x13_Wait(60)                                        ;B4CDAD
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 128)                 ;B4CDB0
     %AICMD0x3F_ThrowCarriedItem()                              ;B4CDB4
-    %AICMD0x0B($00)                                            ;B4CDB5
-    %AICMD0x0C($01)                                            ;B4CDB7
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4CDB5
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4CDB7
     %AICMD0x13_Wait(180)                                       ;B4CDB9
     %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 128)                ;B4CDBC
     %AICMD0x13_Wait(60)                                        ;B4CDC0
@@ -5975,7 +5975,7 @@ DATA8_B4CD76:
     %AICMD0x19($004C, $00)                                     ;B4CDCC
     %AICMD0x13_Wait(10)                                        ;B4CDD0
     %AICMD0x19($00E8, $00)                                     ;B4CDD3
-    %AICMD0x09($05, $B4CDE1)                                   ;B4CDD7
+    %AICMD0x09_StartScript($05, $B4CDE1)                                   ;B4CDD7
     %AICMD0x13_Wait(300)                                       ;B4CDDB
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B4CDDE
     %AICMD0x10_End()                                           ;B4CDE0
@@ -5983,7 +5983,7 @@ DATA8_B4CD76:
     %AICMD0x13_Wait(1)                                         ;B4CDE9
     %AICMD0x12_Jump($B4CDE9)                                   ;B4CDEC
     %AICMD0x1A($00A8, $0088, $B38114, $02)                     ;B4CDEF
-    %AICMD0x0C($00)                                            ;B4CDF7
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4CDF7
     %AICMD0x1B($01EC, $00)                                     ;B4CDF9
     %AICMD0x0D($FF, $00, $48, $01)                             ;B4CDFD
     %AICMD0x13_Wait(60)                                        ;B4CE02
@@ -6010,7 +6010,7 @@ DATA8_B4CD76:
     %AICMD0x1B($018C, $01)                                     ;B4CE4E
     %AICMD0x13_Wait(120)                                       ;B4CE52
     %AICMD0x1B($018D, $01)                                     ;B4CE55
-    %AICMD0x0B($01)                                            ;B4CE59
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4CE59
     %AICMD0x1B($0192, $01)                                     ;B4CE5B
     %AICMD0x13_Wait(120)                                       ;B4CE5F
     %AICMD0x1B($0195, $01)                                     ;B4CE62
@@ -6066,9 +6066,9 @@ DATA8_B4CEEA:
     %AICMD0x05_SetTransferPosition(232, 65528)                 ;B4CEFA
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B4CEFF
     %AICMD0x08_EnableAIControl()                               ;B4CF01
-    %AICMD0x09($01, $B4CFB1)                                   ;B4CF02
+    %AICMD0x09_StartScript($01, $B4CFB1)                                   ;B4CF02
     %AICMD0x06_SetDestinationArea(!AREA_ENDING07)              ;B4CF06
-    %AICMD0x38()                                               ;B4CF08
+    %AICMD0x38_WaitForFadeIn()                                               ;B4CF08
     %AICMD0x13_Wait(60)                                        ;B4CF09
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 112)                 ;B4CF0C
     %AICMD0x13_Wait(30)                                        ;B4CF10
@@ -6126,13 +6126,13 @@ DATA8_B4CEEA:
     %AICMD0x3A_RunForTime(!AIINPUT_UP, 48)                     ;B4CF9F
     %AICMD0x13_Wait(30)                                        ;B4CFA3
     %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 64)                   ;B4CFA6
-    %AICMD0x0B($00)                                            ;B4CFAA
-    %AICMD0x0C($01)                                            ;B4CFAC
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4CFAA
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4CFAC
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B4CFAE
     %AICMD0x10_End()                                           ;B4CFB0
     %AICMD0x1A($0098, $0098, $B389A8, $03)                     ;B4CFB1
     %AICMD0x1B($01EA, $00)                                     ;B4CFB9
-    %AICMD0x0C($00)                                            ;B4CFBD
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4CFBD
     %AICMD0x13_Wait(180)                                       ;B4CFBF
     %AICMD0x1B($01E1, $00)                                     ;B4CFC2
     %AICMD0x0D($00, $FF, $20, $01)                             ;B4CFC6
@@ -6152,7 +6152,7 @@ DATA8_B4CEEA:
     %AICMD0x0D($00, $FF, $10, $01)                             ;B4CFFD
     %AICMD0x1B($01F7, $00)                                     ;B4D002
     %AICMD0x13_Wait(90)                                        ;B4D006
-    %AICMD0x0B($01)                                            ;B4D009
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4D009
     %AICMD0x13_Wait(1)                                         ;B4D00B
     %AICMD0x12_Jump($B4D00B)                                   ;B4D00E
 
@@ -6184,10 +6184,10 @@ DATA8_B4D031:
     %AICMD0x05_SetTransferPosition(264, 120)                   ;B4D03C
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B4D041
     %AICMD0x08_EnableAIControl()                               ;B4D043
-    %AICMD0x09($01, $B4D0D4)                                   ;B4D044
-    %AICMD0x09($02, $B4D127)                                   ;B4D048
+    %AICMD0x09_StartScript($01, $B4D0D4)                                   ;B4D044
+    %AICMD0x09_StartScript($02, $B4D127)                                   ;B4D048
     %AICMD0x06_SetDestinationArea(!AREA_ENDING08)              ;B4D04C
-    %AICMD0x38()                                               ;B4D04E
+    %AICMD0x38_WaitForFadeIn()                                               ;B4D04E
     %AICMD0x13_Wait(180)                                       ;B4D04F
     %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 64)                   ;B4D052
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B4D056
@@ -6198,7 +6198,7 @@ DATA8_B4D031:
     %AICMD0x13_Wait(30)                                        ;B4D062
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 32)                    ;B4D065
     %AICMD0x3F_ThrowCarriedItem()                              ;B4D069
-    %AICMD0x0B($00)                                            ;B4D06A
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4D06A
     %AICMD0x13_Wait(60)                                        ;B4D06C
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 32)                  ;B4D06F
     %AICMD0x13_Wait(30)                                        ;B4D073
@@ -6213,7 +6213,7 @@ DATA8_B4D031:
     %AICMD0x13_Wait(30)                                        ;B4D08D
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B4D090
     %AICMD0x3F_ThrowCarriedItem()                              ;B4D092
-    %AICMD0x0B($01)                                            ;B4D093
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4D093
     %AICMD0x13_Wait(60)                                        ;B4D095
     %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 24)                   ;B4D098
     %AICMD0x19($00A5, $00)                                     ;B4D09C
@@ -6232,8 +6232,8 @@ DATA8_B4D031:
     %AICMD0x13_Wait(60)                                        ;B4D0C3
     %AICMD0x19($0030, $00)                                     ;B4D0C6
     %AICMD0x13_Wait(60)                                        ;B4D0CA
-    %AICMD0x0B($02)                                            ;B4D0CD
-    %AICMD0x0C($03)                                            ;B4D0CF
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4D0CD
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B4D0CF
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B4D0D1
     %AICMD0x10_End()                                           ;B4D0D3
     %AICMD0x1A($00A8, $0048, $B38114, $00)                     ;B4D0D4
@@ -6247,7 +6247,7 @@ DATA8_B4D031:
     %AICMD0x13_Wait(120)                                       ;B4D0F7
     %AICMD0x1B($01DC, $01)                                     ;B4D0FA
     %AICMD0x13_Wait(60)                                        ;B4D0FE
-    %AICMD0x0C($02)                                            ;B4D101
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4D101
     %AICMD0x1B($01DA, $00)                                     ;B4D103
     %AICMD0x0D($00, $01, $10, $01)                             ;B4D107
     %AICMD0x1B($01E9, $00)                                     ;B4D10C
@@ -6255,15 +6255,15 @@ DATA8_B4D031:
     %AICMD0x0D($FF, $00, $20, $01)                             ;B4D113
     %AICMD0x1B($01F2, $00)                                     ;B4D118
     %AICMD0x13_Wait(120)                                       ;B4D11C
-    %AICMD0x0B($03)                                            ;B4D11F
+    %AICMD0x0B_SetScriptFlag($03)                                            ;B4D11F
     %AICMD0x13_Wait(1)                                         ;B4D121
     %AICMD0x12_Jump($B4D121)                                   ;B4D124
     %AICMD0x1A($0080, $0048, $B3812C, $03)                     ;B4D127
-    %AICMD0x0C($00)                                            ;B4D12F
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4D12F
     %AICMD0x1B($0208, $00)                                     ;B4D131
     %AICMD0x13_Wait(60)                                        ;B4D135
     %AICMD0x1B($0200, $00)                                     ;B4D138
-    %AICMD0x0C($01)                                            ;B4D13C
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4D13C
     %AICMD0x1B($0208, $00)                                     ;B4D13E
     %AICMD0x13_Wait(60)                                        ;B4D142
     %AICMD0x1B($0200, $00)                                     ;B4D145
@@ -6302,14 +6302,14 @@ DATA8_B4D180:
     %AICMD0x05_SetTransferPosition(184, 104)                   ;B4D186
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B4D18B
     %AICMD0x08_EnableAIControl()                               ;B4D18D
-    %AICMD0x09($01, $B4D216)                                   ;B4D18E
-    %AICMD0x09($02, $B4D283)                                   ;B4D192
-    %AICMD0x09($04, $B4D1D4)                                   ;B4D196
-    %AICMD0x09($05, $B4D1E9)                                   ;B4D19A
-    %AICMD0x09($06, $B4D1FE)                                   ;B4D19E
+    %AICMD0x09_StartScript($01, $B4D216)                                   ;B4D18E
+    %AICMD0x09_StartScript($02, $B4D283)                                   ;B4D192
+    %AICMD0x09_StartScript($04, $B4D1D4)                                   ;B4D196
+    %AICMD0x09_StartScript($05, $B4D1E9)                                   ;B4D19A
+    %AICMD0x09_StartScript($06, $B4D1FE)                                   ;B4D19E
     %AICMD0x3B($12)                                            ;B4D1A2
     %AICMD0x06_SetDestinationArea(!AREA_ENDING09)              ;B4D1A4
-    %AICMD0x38()                                               ;B4D1A6
+    %AICMD0x38_WaitForFadeIn()                                               ;B4D1A6
     %AICMD0x13_Wait(60)                                        ;B4D1A7
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 192)                 ;B4D1AA
     %AICMD0x13_Wait(120)                                       ;B4D1AE
@@ -6322,33 +6322,33 @@ DATA8_B4D180:
     %AICMD0x3E_SetCarryItem($12)                               ;B4D1C0
     %AICMD0x13_Wait(30)                                        ;B4D1C2
     %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 108)                  ;B4D1C5
-    %AICMD0x0B($00)                                            ;B4D1C9
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4D1C9
     %AICMD0x3F_ThrowCarriedItem()                              ;B4D1CB
     %AICMD0x13_Wait(300)                                       ;B4D1CC
-    %AICMD0x0C($05)                                            ;B4D1CF
+    %AICMD0x0C_WaitForScriptFlag($05)                                            ;B4D1CF
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B4D1D1
     %AICMD0x10_End()                                           ;B4D1D3
     %AICMD0x1A($00B8, $0078, $B38A8C, $00)                     ;B4D1D4
-    %AICMD0x0C($00)                                            ;B4D1DC
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4D1DC
     %AICMD0x1B($00B7, $00)                                     ;B4D1DE
     %AICMD0x13_Wait(60)                                        ;B4D1E2
     %AICMD0x37()                                               ;B4D1E5
-    %AICMD0x0B($01)                                            ;B4D1E6
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4D1E6
     %AICMD0x10_End()                                           ;B4D1E8
     %AICMD0x1A($0098, $0078, $B38A8C, $00)                     ;B4D1E9
-    %AICMD0x0C($01)                                            ;B4D1F1
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4D1F1
     %AICMD0x1B($00B7, $00)                                     ;B4D1F3
     %AICMD0x13_Wait(60)                                        ;B4D1F7
     %AICMD0x37()                                               ;B4D1FA
-    %AICMD0x0B($02)                                            ;B4D1FB
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4D1FB
     %AICMD0x10_End()                                           ;B4D1FD
     %AICMD0x1A($0088, $0078, $B38A8C, $00)                     ;B4D1FE
-    %AICMD0x0C($02)                                            ;B4D206
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4D206
     %AICMD0x13_Wait(60)                                        ;B4D208
     %AICMD0x1B($00B7, $00)                                     ;B4D20B
     %AICMD0x13_Wait(60)                                        ;B4D20F
     %AICMD0x37()                                               ;B4D212
-    %AICMD0x0B($03)                                            ;B4D213
+    %AICMD0x0B_SetScriptFlag($03)                                            ;B4D213
     %AICMD0x10_End()                                           ;B4D215
     %AICMD0x1A($0078, $0078, $B38960, $02)                     ;B4D216
     %AICMD0x13_Wait(200)                                       ;B4D21E
@@ -6358,13 +6358,13 @@ DATA8_B4D180:
     %AICMD0x13_Wait(180)                                       ;B4D22C
     %AICMD0x1B($01EA, $01)                                     ;B4D22F
     %AICMD0x13_Wait(180)                                       ;B4D233
-    %AICMD0x0C($03)                                            ;B4D236
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B4D236
     %AICMD0x1B($01E8, $01)                                     ;B4D238
     %AICMD0x13_Wait(60)                                        ;B4D23C
-    %AICMD0x0C($03)                                            ;B4D23F
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B4D23F
     %AICMD0x1B($01F2, $01)                                     ;B4D241
     %AICMD0x13_Wait(120)                                       ;B4D245
-    %AICMD0x0B($04)                                            ;B4D248
+    %AICMD0x0B_SetScriptFlag($04)                                            ;B4D248
     %AICMD0x13_Wait(120)                                       ;B4D24A
     %AICMD0x1B($01EC, $01)                                     ;B4D24D
     %AICMD0x0D($01, $00, $30, $01)                             ;B4D251
@@ -6380,7 +6380,7 @@ DATA8_B4D180:
     %AICMD0x13_Wait(90)                                        ;B4D27A
     %AICMD0x13_Wait(1)                                         ;B4D27D
     %AICMD0x12_Jump($B4D27D)                                   ;B4D280
-    %AICMD0x0C($04)                                            ;B4D283
+    %AICMD0x0C_WaitForScriptFlag($04)                                            ;B4D283
     %AICMD0x1A($0088, $0078, $B38504, $00)                     ;B4D285
     %AICMD0x1B($0321, $00)                                     ;B4D28D
     %AICMD0x13_Wait(60)                                        ;B4D291
@@ -6397,7 +6397,7 @@ DATA8_B4D180:
     %AICMD0x0D($FF, $00, $80, $01)                             ;B4D2BC
     %AICMD0x1B($0325, $00)                                     ;B4D2C1
     %AICMD0x13_Wait(60)                                        ;B4D2C5
-    %AICMD0x0B($05)                                            ;B4D2C8
+    %AICMD0x0B_SetScriptFlag($05)                                            ;B4D2C8
     %AICMD0x37()                                               ;B4D2CA
     %AICMD0x10_End()                                           ;B4D2CB
 
@@ -6430,11 +6430,11 @@ DATA8_B4D2EC:
     %AICMD0x05_SetTransferPosition(88, 104)                    ;B4D2FC
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B4D301
     %AICMD0x08_EnableAIControl()                               ;B4D303
-    %AICMD0x09($01, $B4D384)                                   ;B4D304
-    %AICMD0x09($02, $B4D3A1)                                   ;B4D308
-    %AICMD0x09($03, $B4D3E6)                                   ;B4D30C
+    %AICMD0x09_StartScript($01, $B4D384)                                   ;B4D304
+    %AICMD0x09_StartScript($02, $B4D3A1)                                   ;B4D308
+    %AICMD0x09_StartScript($03, $B4D3E6)                                   ;B4D30C
     %AICMD0x06_SetDestinationArea(!AREA_ENDING10)              ;B4D310
-    %AICMD0x38()                                               ;B4D312
+    %AICMD0x38_WaitForFadeIn()                                               ;B4D312
     %AICMD0x13_Wait(30)                                        ;B4D313
     %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 40)                  ;B4D316
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B4D31A
@@ -6450,10 +6450,10 @@ DATA8_B4D2EC:
     %AICMD0x13_Wait(30)                                        ;B4D333
     %AICMD0x56_UseEquippedItem()                               ;B4D336
     %AICMD0x13_Wait(80)                                        ;B4D337
-    %AICMD0x0B($00)                                            ;B4D33A
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4D33A
     %AICMD0x13_Wait(60)                                        ;B4D33C
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B4D33F
-    %AICMD0x0C($02)                                            ;B4D341
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4D341
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 64)                  ;B4D343
     %AICMD0x13_Wait(60)                                        ;B4D347
     %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 40)                  ;B4D34A
@@ -6465,8 +6465,8 @@ DATA8_B4D2EC:
     %AICMD0x13_Wait(20)                                        ;B4D35C
     %AICMD0x3F_ThrowCarriedItem()                              ;B4D35F
     %AICMD0x13_Wait(10)                                        ;B4D360
-    %AICMD0x09($04, $B4D42D)                                   ;B4D363
-    %AICMD0x0B($04)                                            ;B4D367
+    %AICMD0x09_StartScript($04, $B4D42D)                                   ;B4D363
+    %AICMD0x0B_SetScriptFlag($04)                                            ;B4D367
     %AICMD0x13_Wait(60)                                        ;B4D369
     %AICMD0x19($000F, $00)                                     ;B4D36C
     %AICMD0x13_Wait(40)                                        ;B4D370
@@ -6477,19 +6477,19 @@ DATA8_B4D2EC:
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B4D381
     %AICMD0x10_End()                                           ;B4D383
     %AICMD0x1A($0078, $0058, $B38114, $02)                     ;B4D384
-    %AICMD0x0C($00)                                            ;B4D38C
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4D38C
     %AICMD0x1B($01F2, $00)                                     ;B4D38E
     %AICMD0x13_Wait(120)                                       ;B4D392
-    %AICMD0x0B($01)                                            ;B4D395
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4D395
     %AICMD0x1B($01EA, $00)                                     ;B4D397
     %AICMD0x13_Wait(1)                                         ;B4D39B
     %AICMD0x12_Jump($B4D39B)                                   ;B4D39E
     %AICMD0x1A($FFE8, $0068, $B384C8, $00)                     ;B4D3A1
-    %AICMD0x0C($01)                                            ;B4D3A9
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4D3A9
     %AICMD0x1B($030E, $01)                                     ;B4D3AB
     %AICMD0x0D($01, $00, $BC, $02)                             ;B4D3AF
     %AICMD0x1B($030D, $01)                                     ;B4D3B4
-    %AICMD0x0C($04)                                            ;B4D3B8
+    %AICMD0x0C_WaitForScriptFlag($04)                                            ;B4D3B8
     %AICMD0x13_Wait(30)                                        ;B4D3BA
     %AICMD0x1B($030E, $00)                                     ;B4D3BD
     %AICMD0x0D($FF, $00, $60, $02)                             ;B4D3C1
@@ -6504,12 +6504,12 @@ DATA8_B4D2EC:
     %AICMD0x37()                                               ;B4D3E4
     %AICMD0x10_End()                                           ;B4D3E5
     %AICMD0x1A($FFF8, $0068, $B384C8, $00)                     ;B4D3E6
-    %AICMD0x0C($01)                                            ;B4D3EE
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4D3EE
     %AICMD0x1B($030E, $01)                                     ;B4D3F0
     %AICMD0x0D($01, $00, $C0, $02)                             ;B4D3F4
     %AICMD0x1B($030F, $01)                                     ;B4D3F9
-    %AICMD0x0B($02)                                            ;B4D3FD
-    %AICMD0x0C($04)                                            ;B4D3FF
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4D3FD
+    %AICMD0x0C_WaitForScriptFlag($04)                                            ;B4D3FF
     %AICMD0x13_Wait(30)                                        ;B4D401
     %AICMD0x1B($030E, $00)                                     ;B4D404
     %AICMD0x0D($FF, $00, $60, $02)                             ;B4D408
@@ -6559,17 +6559,17 @@ DATA8_B4D467:
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B4D472
     %AICMD0x40_DisableTileInteractions()                       ;B4D474
     %AICMD0x08_EnableAIControl()                               ;B4D475
-    %AICMD0x09($01, $B4D4A6)                                   ;B4D476
-    %AICMD0x09($02, $B4D503)                                   ;B4D47A
+    %AICMD0x09_StartScript($01, $B4D4A6)                                   ;B4D476
+    %AICMD0x09_StartScript($02, $B4D503)                                   ;B4D47A
     %AICMD0x06_SetDestinationArea(!AREA_ENDING06)              ;B4D47E
-    %AICMD0x38()                                               ;B4D480
-    %AICMD0x0C($00)                                            ;B4D481
+    %AICMD0x38_WaitForFadeIn()                                               ;B4D480
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4D481
     %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 40)                  ;B4D483
     %AICMD0x13_Wait(30)                                        ;B4D487
     %AICMD0x19($00BE, $00)                                     ;B4D48A
-    %AICMD0x0B($01)                                            ;B4D48E
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4D48E
     %AICMD0x13_Wait(90)                                        ;B4D490
-    %AICMD0x0C($02)                                            ;B4D493
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4D493
     %AICMD0x13_Wait(30)                                        ;B4D495
     %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 12)                 ;B4D498
     %AICMD0x19($0041, $00)                                     ;B4D49C
@@ -6591,11 +6591,11 @@ DATA8_B4D467:
     %AICMD0x0D($FF, $00, $30, $01)                             ;B4D4D7
     %AICMD0x1B($01EA, $00)                                     ;B4D4DC
     %AICMD0x13_Wait(30)                                        ;B4D4E0
-    %AICMD0x0B($00)                                            ;B4D4E3
-    %AICMD0x0C($01)                                            ;B4D4E5
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4D4E3
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4D4E5
     %AICMD0x1B($01F8, $00)                                     ;B4D4E7
     %AICMD0x13_Wait(60)                                        ;B4D4EB
-    %AICMD0x0B($02)                                            ;B4D4EE
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4D4EE
     %AICMD0x1B($01EC, $00)                                     ;B4D4F0
     %AICMD0x0D($FF, $00, $2A, $01)                             ;B4D4F4
     %AICMD0x1B($01ED, $00)                                     ;B4D4F9
@@ -6641,12 +6641,12 @@ DATA8_B4D551:
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B4D557
     %AICMD0x05_SetTransferPosition(664, 112)                   ;B4D559
     %AICMD0x08_EnableAIControl()                               ;B4D55E
-    %AICMD0x09($01, $B4D610)                                   ;B4D55F
-    %AICMD0x09($02, $B4D61E)                                   ;B4D563
-    %AICMD0x09($03, $B4D671)                                   ;B4D567
-    %AICMD0x09($04, $B4D6C1)                                   ;B4D56B
+    %AICMD0x09_StartScript($01, $B4D610)                                   ;B4D55F
+    %AICMD0x09_StartScript($02, $B4D61E)                                   ;B4D563
+    %AICMD0x09_StartScript($03, $B4D671)                                   ;B4D567
+    %AICMD0x09_StartScript($04, $B4D6C1)                                   ;B4D56B
     %AICMD0x06_SetDestinationArea(!AREA_WOODSSUMMER)           ;B4D56F
-    %AICMD0x38()                                               ;B4D571
+    %AICMD0x38_WaitForFadeIn()                                               ;B4D571
     %AICMD0x13_Wait(60)                                        ;B4D572
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 80)                  ;B4D575
     %AICMD0x13_Wait(20)                                        ;B4D579
@@ -6670,19 +6670,19 @@ DATA8_B4D551:
     %AICMD0x19($004A, $00)                                     ;B4D5B6
     %AICMD0x13_Wait(120)                                       ;B4D5BA
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B4D5BD
-    %AICMD0x0B($00)                                            ;B4D5BF
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4D5BF
     %AICMD0x13_Wait(60)                                        ;B4D5C1
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B4D5C4
     %AICMD0x13_Wait(120)                                       ;B4D5C6
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 12)                  ;B4D5C9
-    %AICMD0x0B($03)                                            ;B4D5CD
+    %AICMD0x0B_SetScriptFlag($03)                                            ;B4D5CD
     %AICMD0x19($0010, $00)                                     ;B4D5CF
     %AICMD0x13_Wait(14)                                        ;B4D5D3
     %AICMD0x19($0014, $00)                                     ;B4D5D6
     %AICMD0x13_Wait(60)                                        ;B4D5DA
     %AICMD0x19($003B, $00)                                     ;B4D5DD
     %AICMD0x13_Wait(60)                                        ;B4D5E1
-    %AICMD0x0B($01)                                            ;B4D5E4
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4D5E4
     %AICMD0x13_Wait(120)                                       ;B4D5E6
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B4D5E9
     %AICMD0x13_Wait(300)                                       ;B4D5EB
@@ -6702,12 +6702,12 @@ DATA8_B4D551:
     %AICMD0x13_Wait(1)                                         ;B4D618
     %AICMD0x12_Jump($B4D618)                                   ;B4D61B
     %AICMD0x1A($0210, $0088, $B38798, $00)                     ;B4D61E
-    %AICMD0x0C($00)                                            ;B4D626
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4D626
     %AICMD0x1B($0303, $01)                                     ;B4D628
     %AICMD0x0D($01, $00, $38, $01)                             ;B4D62C
     %AICMD0x1B($0302, $01)                                     ;B4D631
     %AICMD0x13_Wait(60)                                        ;B4D635
-    %AICMD0x09($05, $B4D657)                                   ;B4D638
+    %AICMD0x09_StartScript($05, $B4D657)                                   ;B4D638
     %AICMD0x1B($0303, $00)                                     ;B4D63C
     %AICMD0x0D($FF, $00, $10, $01)                             ;B4D640
     %AICMD0x1B($0302, $01)                                     ;B4D645
@@ -6718,14 +6718,14 @@ DATA8_B4D551:
     %AICMD0x10_End()                                           ;B4D656
     %AICMD0x1A($0258, $0088, $B38720, $00)                     ;B4D657
     %AICMD0x13_Wait(30)                                        ;B4D65F
-    %AICMD0x0C($03)                                            ;B4D662
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B4D662
     %AICMD0x13_Wait(10)                                        ;B4D664
     %AICMD0x0D($00, $F0, $02, $01)                             ;B4D667
     %AICMD0x13_Wait(60)                                        ;B4D66C
     %AICMD0x37()                                               ;B4D66F
     %AICMD0x10_End()                                           ;B4D670
     %AICMD0x1A($0208, $0054, $B387B0, $00)                     ;B4D671
-    %AICMD0x0C($01)                                            ;B4D679
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4D679
     %AICMD0x13_Wait(90)                                        ;B4D67B
     %AICMD0x1B($0307, $01)                                     ;B4D67E
     %AICMD0x13_Wait(60)                                        ;B4D682
@@ -6740,17 +6740,17 @@ DATA8_B4D551:
     %AICMD0x0D($02, $00, $28, $03)                             ;B4D6A5
     %AICMD0x1B($0306, $00)                                     ;B4D6AA
     %AICMD0x13_Wait(60)                                        ;B4D6AE
-    %AICMD0x0B($02)                                            ;B4D6B1
-    %AICMD0x09($06, $B4D6EF)                                   ;B4D6B3
-    %AICMD0x09($07, $B4D71D)                                   ;B4D6B7
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4D6B1
+    %AICMD0x09_StartScript($06, $B4D6EF)                                   ;B4D6B3
+    %AICMD0x09_StartScript($07, $B4D71D)                                   ;B4D6B7
     %AICMD0x13_Wait(1)                                         ;B4D6BB
     %AICMD0x12_Jump($B4D6BB)                                   ;B4D6BE
     %AICMD0x1A($0320, $0078, $B387A4, $00)                     ;B4D6C1
-    %AICMD0x0C($02)                                            ;B4D6C9
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4D6C9
     %AICMD0x1B($0305, $00)                                     ;B4D6CB
     %AICMD0x0D($FF, $00, $70, $01)                             ;B4D6CF
     %AICMD0x1B($0304, $00)                                     ;B4D6D4
-    %AICMD0x09($08, $B4D752)                                   ;B4D6D8
+    %AICMD0x09_StartScript($08, $B4D752)                                   ;B4D6D8
     %AICMD0x1B($0305, $00)                                     ;B4D6DC
     %AICMD0x0D($FF, $00, $20, $01)                             ;B4D6E0
     %AICMD0x1B($0304, $00)                                     ;B4D6E5
@@ -6816,13 +6816,13 @@ DATA8_B4D792:
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B4D79D
     %AICMD0x40_DisableTileInteractions()                       ;B4D79F
     %AICMD0x08_EnableAIControl()                               ;B4D7A0
-    %AICMD0x09($01, $B4D844)                                   ;B4D7A1
-    %AICMD0x09($02, $B4D7FD)                                   ;B4D7A5
+    %AICMD0x09_StartScript($01, $B4D844)                                   ;B4D7A1
+    %AICMD0x09_StartScript($02, $B4D7FD)                                   ;B4D7A5
     %AICMD0x06_SetDestinationArea(!AREA_FARMSUMMER)            ;B4D7A9
-    %AICMD0x38()                                               ;B4D7AB
+    %AICMD0x38_WaitForFadeIn()                                               ;B4D7AB
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 112)                 ;B4D7AC
     %AICMD0x13_Wait(60)                                        ;B4D7B0
-    %AICMD0x0B($00)                                            ;B4D7B3
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4D7B3
     %AICMD0x13_Wait(60)                                        ;B4D7B5
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 16)                  ;B4D7B8
     %AICMD0x13_Wait(120)                                       ;B4D7BC
@@ -6832,7 +6832,7 @@ DATA8_B4D792:
     %AICMD0x13_Wait(10)                                        ;B4D7CA
     %AICMD0x19($0023, $00)                                     ;B4D7CD
     %AICMD0x13_Wait(60)                                        ;B4D7D1
-    %AICMD0x0C($01)                                            ;B4D7D4
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4D7D4
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 16)                  ;B4D7D6
     %AICMD0x13_Wait(10)                                        ;B4D7DA
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 24)                  ;B4D7DD
@@ -6840,14 +6840,14 @@ DATA8_B4D792:
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 32)                  ;B4D7E4
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B4D7E8
     %AICMD0x13_Wait(40)                                        ;B4D7EA
-    %AICMD0x0B($02)                                            ;B4D7ED
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4D7ED
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 16)                  ;B4D7EF
     %AICMD0x13_Wait(20)                                        ;B4D7F3
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 48)                  ;B4D7F6
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B4D7FA
     %AICMD0x10_End()                                           ;B4D7FC
     %AICMD0x1A($0088, $0158, $B3845C, $00)                     ;B4D7FD
-    %AICMD0x0C($00)                                            ;B4D805
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4D805
     %AICMD0x1B($02E3, $00)                                     ;B4D807
     %AICMD0x0D($00, $01, $20, $01)                             ;B4D80B
     %AICMD0x1B($02E6, $01)                                     ;B4D810
@@ -6856,8 +6856,8 @@ DATA8_B4D792:
     %AICMD0x13_Wait(120)                                       ;B4D81B
     %AICMD0x1B($02E9, $00)                                     ;B4D81E
     %AICMD0x13_Wait(120)                                       ;B4D822
-    %AICMD0x0B($01)                                            ;B4D825
-    %AICMD0x0C($02)                                            ;B4D827
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4D825
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4D827
     %AICMD0x1B($02E3, $00)                                     ;B4D829
     %AICMD0x0D($00, $01, $30, $01)                             ;B4D82D
     %AICMD0x13_Wait(10)                                        ;B4D832
@@ -6883,16 +6883,16 @@ DATA8_B4D863:
     %AICMD0x05_SetTransferPosition(744, 424)                   ;B4D869
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B4D86E
     %AICMD0x08_EnableAIControl()                               ;B4D870
-    %AICMD0x09($01, $B4D95C)                                   ;B4D871
-    %AICMD0x09($02, $B4D8E0)                                   ;B4D875
-    %AICMD0x09($03, $B4D998)                                   ;B4D879
-    %AICMD0x09($04, $B4D9BD)                                   ;B4D87D
-    %AICMD0x09($05, $B4D973)                                   ;B4D881
-    %AICMD0x09($06, $B4D981)                                   ;B4D885
-    %AICMD0x09($07, $B4D9D9)                                   ;B4D889
-    %AICMD0x09($08, $B4D9F9)                                   ;B4D88D
+    %AICMD0x09_StartScript($01, $B4D95C)                                   ;B4D871
+    %AICMD0x09_StartScript($02, $B4D8E0)                                   ;B4D875
+    %AICMD0x09_StartScript($03, $B4D998)                                   ;B4D879
+    %AICMD0x09_StartScript($04, $B4D9BD)                                   ;B4D87D
+    %AICMD0x09_StartScript($05, $B4D973)                                   ;B4D881
+    %AICMD0x09_StartScript($06, $B4D981)                                   ;B4D885
+    %AICMD0x09_StartScript($07, $B4D9D9)                                   ;B4D889
+    %AICMD0x09_StartScript($08, $B4D9F9)                                   ;B4D88D
     %AICMD0x06_SetDestinationArea(!AREA_TOWNSUMMER)            ;B4D891
-    %AICMD0x38()                                               ;B4D893
+    %AICMD0x38_WaitForFadeIn()                                               ;B4D893
     %AICMD0x13_Wait(90)                                        ;B4D894
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 56)                  ;B4D897
     %AICMD0x13_Wait(20)                                        ;B4D89B
@@ -6910,7 +6910,7 @@ DATA8_B4D863:
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B4D8C5
     %AICMD0x13_Wait(60)                                        ;B4D8C7
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 96)                    ;B4D8CA
-    %AICMD0x0B($00)                                            ;B4D8CE
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4D8CE
     %AICMD0x13_Wait(120)                                       ;B4D8D0
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B4D8D3
     %AICMD0x13_Wait(60)                                        ;B4D8D5
@@ -6934,7 +6934,7 @@ DATA8_B4D863:
     %AICMD0x13_Wait(20)                                        ;B4D918
     %AICMD0x1B($02E5, $00)                                     ;B4D91B
     %AICMD0x0D($00, $FF, $70, $01)                             ;B4D91F
-    %AICMD0x0B($02)                                            ;B4D924
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4D924
     %AICMD0x13_Wait(120)                                       ;B4D926
     %AICMD0x1B($02E3, $00)                                     ;B4D929
     %AICMD0x0D($00, $01, $70, $01)                             ;B4D92D
@@ -6944,14 +6944,14 @@ DATA8_B4D863:
     %AICMD0x13_Wait(60)                                        ;B4D93E
     %AICMD0x1B($02E5, $00)                                     ;B4D941
     %AICMD0x0D($00, $FF, $60, $01)                             ;B4D945
-    %AICMD0x0B($01)                                            ;B4D94A
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4D94A
     %AICMD0x13_Wait(120)                                       ;B4D94C
     %AICMD0x1B($02E6, $01)                                     ;B4D94F
     %AICMD0x13_Wait(60)                                        ;B4D953
     %AICMD0x13_Wait(1)                                         ;B4D956
     %AICMD0x12_Jump($B4D956)                                   ;B4D959
     %AICMD0x1A($0178, $00A8, $B38354, $00)                     ;B4D95C
-    %AICMD0x0C($02)                                            ;B4D964
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4D964
     %AICMD0x1B($02A6, $00)                                     ;B4D966
     %AICMD0x13_Wait(120)                                       ;B4D96A
     %AICMD0x13_Wait(1)                                         ;B4D96D
@@ -6960,13 +6960,13 @@ DATA8_B4D863:
     %AICMD0x13_Wait(1)                                         ;B4D97B
     %AICMD0x12_Jump($B4D97B)                                   ;B4D97E
     %AICMD0x1A($0168, $00B8, $B38384, $00)                     ;B4D981
-    %AICMD0x0C($02)                                            ;B4D989
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4D989
     %AICMD0x1B($02B6, $01)                                     ;B4D98B
     %AICMD0x13_Wait(120)                                       ;B4D98F
     %AICMD0x13_Wait(1)                                         ;B4D992
     %AICMD0x12_Jump($B4D992)                                   ;B4D995
     %AICMD0x1A($0088, $00B8, $B3830C, $03)                     ;B4D998
-    %AICMD0x0C($00)                                            ;B4D9A0
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4D9A0
     %AICMD0x1B($0293, $01)                                     ;B4D9A2
     %AICMD0x13_Wait(60)                                        ;B4D9A6
     %AICMD0x1B($028F, $00)                                     ;B4D9A9
@@ -6983,7 +6983,7 @@ DATA8_B4D863:
     %AICMD0x13_Wait(1)                                         ;B4D9D3
     %AICMD0x12_Jump($B4D9D3)                                   ;B4D9D6
     %AICMD0x1A($0078, $00B8, $B38438, $02)                     ;B4D9D9
-    %AICMD0x0C($00)                                            ;B4D9E1
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4D9E1
     %AICMD0x1B($02DA, $00)                                     ;B4D9E3
     %AICMD0x0D($00, $01, $10, $01)                             ;B4D9E7
     %AICMD0x1B($02DD, $01)                                     ;B4D9EC
@@ -6991,7 +6991,7 @@ DATA8_B4D863:
     %AICMD0x13_Wait(1)                                         ;B4D9F3
     %AICMD0x12_Jump($B4D9F3)                                   ;B4D9F6
     %AICMD0x1A($00A8, $00A8, $B38450, $03)                     ;B4D9F9
-    %AICMD0x0C($00)                                            ;B4DA01
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4DA01
     %AICMD0x1B($02E1, $01)                                     ;B4DA03
     %AICMD0x0D($01, $00, $10, $01)                             ;B4DA07
     %AICMD0x1B($02DF, $00)                                     ;B4DA0C
@@ -7028,14 +7028,14 @@ DATA8_B4DA42:
     %AICMD0x05_SetTransferPosition(136, 456)                   ;B4DA48
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B4DA4D
     %AICMD0x08_EnableAIControl()                               ;B4DA4F
-    %AICMD0x09($01, $B4DA90)                                   ;B4DA50
+    %AICMD0x09_StartScript($01, $B4DA90)                                   ;B4DA50
     %AICMD0x06_SetDestinationArea(!AREA_TOOLSSHOP)             ;B4DA54
-    %AICMD0x38()                                               ;B4DA56
+    %AICMD0x38_WaitForFadeIn()                                               ;B4DA56
     %AICMD0x13_Wait(60)                                        ;B4DA57
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 64)                    ;B4DA5A
     %AICMD0x13_Wait(60)                                        ;B4DA5E
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B4DA61
-    %AICMD0x0B($00)                                            ;B4DA63
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4DA63
     %AICMD0x13_Wait(96)                                        ;B4DA65
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B4DA68
     %AICMD0x13_Wait(30)                                        ;B4DA6A
@@ -7048,11 +7048,11 @@ DATA8_B4DA42:
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 16)                  ;B4DA80
     %AICMD0x13_Wait(30)                                        ;B4DA84
     %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 96)                 ;B4DA87
-    %AICMD0x0C($01)                                            ;B4DA8B
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4DA8B
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B4DA8D
     %AICMD0x10_End()                                           ;B4DA8F
     %AICMD0x1A($0098, $01E8, $B3845C, $00)                     ;B4DA90
-    %AICMD0x0C($00)                                            ;B4DA98
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4DA98
     %AICMD0x1B($02E5, $00)                                     ;B4DA9A
     %AICMD0x0D($00, $FF, $60, $01)                             ;B4DA9E
     %AICMD0x1B($02E7, $00)                                     ;B4DAA3
@@ -7066,7 +7066,7 @@ DATA8_B4DA42:
     %AICMD0x1B($02E7, $01)                                     ;B4DAC1
     %AICMD0x0D($01, $00, $30, $01)                             ;B4DAC5
     %AICMD0x13_Wait(30)                                        ;B4DACA
-    %AICMD0x09($02, $B4DAFC)                                   ;B4DACD
+    %AICMD0x09_StartScript($02, $B4DAFC)                                   ;B4DACD
     %AICMD0x13_Wait(30)                                        ;B4DAD1
     %AICMD0x1B($0233, $01)                                     ;B4DAD4
     %AICMD0x13_Wait(60)                                        ;B4DAD8
@@ -7076,7 +7076,7 @@ DATA8_B4DA42:
     %AICMD0x0D($FF, $00, $10, $01)                             ;B4DAE8
     %AICMD0x1B($0233, $00)                                     ;B4DAED
     %AICMD0x13_Wait(120)                                       ;B4DAF1
-    %AICMD0x0B($01)                                            ;B4DAF4
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4DAF4
     %AICMD0x13_Wait(1)                                         ;B4DAF6
     %AICMD0x12_Jump($B4DAF6)                                   ;B4DAF9
     %AICMD0x1A($00D8, $0168, $B38B1C, $00)                     ;B4DAFC
@@ -7092,13 +7092,13 @@ DATA8_B4DB0A:
     %AICMD0x05_SetTransferPosition(296, 872)                   ;B4DB10
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B4DB15
     %AICMD0x08_EnableAIControl()                               ;B4DB17
-    %AICMD0x09($01, $B4DB86)                                   ;B4DB18
-    %AICMD0x09($02, $B4DC50)                                   ;B4DB1C
-    %AICMD0x09($03, $B4DC1E)                                   ;B4DB20
-    %AICMD0x09($04, $B4DC37)                                   ;B4DB24
-    %AICMD0x09($05, $B4DC69)                                   ;B4DB28
+    %AICMD0x09_StartScript($01, $B4DB86)                                   ;B4DB18
+    %AICMD0x09_StartScript($02, $B4DC50)                                   ;B4DB1C
+    %AICMD0x09_StartScript($03, $B4DC1E)                                   ;B4DB20
+    %AICMD0x09_StartScript($04, $B4DC37)                                   ;B4DB24
+    %AICMD0x09_StartScript($05, $B4DC69)                                   ;B4DB28
     %AICMD0x06_SetDestinationArea(!AREA_TOWNSUMMER)            ;B4DB2C
-    %AICMD0x38()                                               ;B4DB2E
+    %AICMD0x38_WaitForFadeIn()                                               ;B4DB2E
     %AICMD0x13_Wait(90)                                        ;B4DB2F
     %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 32)                 ;B4DB32
     %AICMD0x13_Wait(20)                                        ;B4DB36
@@ -7107,8 +7107,8 @@ DATA8_B4DB0A:
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 32)                  ;B4DB40
     %AICMD0x13_Wait(20)                                        ;B4DB44
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 160)                   ;B4DB47
-    %AICMD0x0B($00)                                            ;B4DB4B
-    %AICMD0x0C($01)                                            ;B4DB4D
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4DB4B
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4DB4D
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B4DB4F
     %AICMD0x13_Wait(60)                                        ;B4DB51
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B4DB54
@@ -7143,7 +7143,7 @@ DATA8_B4DB0A:
     %AICMD0x13_Wait(20)                                        ;B4DBBE
     %AICMD0x1B($02E5, $00)                                     ;B4DBC1
     %AICMD0x0D($00, $FF, $A0, $01)                             ;B4DBC5
-    %AICMD0x0C($01)                                            ;B4DBCA
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4DBCA
     %AICMD0x1B($02E6, $00)                                     ;B4DBCC
     %AICMD0x13_Wait(60)                                        ;B4DBD0
     %AICMD0x1B($02E5, $00)                                     ;B4DBD3
@@ -7184,7 +7184,7 @@ DATA8_B4DB0A:
     %AICMD0x13_Wait(120)                                       ;B4DC63
     %AICMD0x12_Jump($B4DC58)                                   ;B4DC66
     %AICMD0x1A($01B8, $0218, $B381D4, $03)                     ;B4DC69
-    %AICMD0x0C($00)                                            ;B4DC71
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4DC71
     %AICMD0x0D($FF, $00, $80, $01)                             ;B4DC73
     %AICMD0x1B($024C, $00)                                     ;B4DC78
     %AICMD0x0D($00, $01, $08, $01)                             ;B4DC7C
@@ -7196,7 +7196,7 @@ DATA8_B4DB0A:
     %AICMD0x0D($01, $00, $30, $01)                             ;B4DC95
     %AICMD0x1B($024E, $00)                                     ;B4DC9A
     %AICMD0x0D($00, $FF, $50, $01)                             ;B4DC9E
-    %AICMD0x0B($01)                                            ;B4DCA3
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4DCA3
     %AICMD0x1B($024E, $00)                                     ;B4DCA5
     %AICMD0x0D($00, $FF, $B4, $01)                             ;B4DCA9
     %AICMD0x1B($0250, $01)                                     ;B4DCAE
@@ -7236,12 +7236,12 @@ DATA8_B4DCED:
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B4DCF8
     %AICMD0x40_DisableTileInteractions()                       ;B4DCFA
     %AICMD0x08_EnableAIControl()                               ;B4DCFB
-    %AICMD0x09($01, $B4DD4D)                                   ;B4DCFC
-    %AICMD0x09($02, $B4DD74)                                   ;B4DD00
-    %AICMD0x09($03, $B4DE29)                                   ;B4DD04
+    %AICMD0x09_StartScript($01, $B4DD4D)                                   ;B4DCFC
+    %AICMD0x09_StartScript($02, $B4DD74)                                   ;B4DD00
+    %AICMD0x09_StartScript($03, $B4DE29)                                   ;B4DD04
     %AICMD0x06_SetDestinationArea(!AREA_ENDING04)              ;B4DD08
-    %AICMD0x38()                                               ;B4DD0A
-    %AICMD0x0C($00)                                            ;B4DD0B
+    %AICMD0x38_WaitForFadeIn()                                               ;B4DD0A
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4DD0B
     %AICMD0x13_Wait(20)                                        ;B4DD0D
     %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 96)                 ;B4DD10
     %AICMD0x13_Wait(20)                                        ;B4DD14
@@ -7260,7 +7260,7 @@ DATA8_B4DCED:
     %AICMD0x13_Wait(20)                                        ;B4DD3E
     %AICMD0x19($006A, $00)                                     ;B4DD41
     %AICMD0x13_Wait(180)                                       ;B4DD45
-    %AICMD0x0C($01)                                            ;B4DD48
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4DD48
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B4DD4A
     %AICMD0x10_End()                                           ;B4DD4C
     %AICMD0x1A($0068, $0098, $B38114, $02)                     ;B4DD4D
@@ -7287,14 +7287,14 @@ DATA8_B4DCED:
     %AICMD0x1B($02E6, $00)                                     ;B4DDA1
     %AICMD0x13_Wait(60)                                        ;B4DDA5
     %AICMD0x1B($0233, $00)                                     ;B4DDA8
-    %AICMD0x0B($00)                                            ;B4DDAC
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4DDAC
     %AICMD0x13_Wait(240)                                       ;B4DDAE
     %AICMD0x1B($02E7, $00)                                     ;B4DDB1
     %AICMD0x0D($FF, $00, $10, $01)                             ;B4DDB5
     %AICMD0x13_Wait(60)                                        ;B4DDBA
     %AICMD0x1B($02ED, $00)                                     ;B4DDBD
     %AICMD0x13_Wait(60)                                        ;B4DDC1
-    %AICMD0x09($04, $B4DDF7)                                   ;B4DDC4
+    %AICMD0x09_StartScript($04, $B4DDF7)                                   ;B4DDC4
     %AICMD0x1B($02E7, $00)                                     ;B4DDC8
     %AICMD0x13_Wait(120)                                       ;B4DDCC
     %AICMD0x1B($02E7, $01)                                     ;B4DDCF
@@ -7305,7 +7305,7 @@ DATA8_B4DCED:
     %AICMD0x0D($FF, $00, $20, $01)                             ;B4DDE3
     %AICMD0x1B($0258, $00)                                     ;B4DDE8
     %AICMD0x13_Wait(180)                                       ;B4DDEC
-    %AICMD0x0B($01)                                            ;B4DDEF
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4DDEF
     %AICMD0x13_Wait(1)                                         ;B4DDF1
     %AICMD0x12_Jump($B4DDF1)                                   ;B4DDF4
     %AICMD0x1A($0078, $006A, $B384F8, $02)                     ;B4DDF7
@@ -7336,27 +7336,27 @@ DATA8_B4DE3E:
     %AICMD0x05_SetTransferPosition(136, 648)                   ;B4DE45
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B4DE4A
     %AICMD0x08_EnableAIControl()                               ;B4DE4C
-    %AICMD0x09($01, $B4DEB1)                                   ;B4DE4D
-    %AICMD0x09($02, $B4DF5E)                                   ;B4DE51
-    %AICMD0x09($03, $B4DF50)                                   ;B4DE55
-    %AICMD0x09($04, $B4DF6C)                                   ;B4DE59
+    %AICMD0x09_StartScript($01, $B4DEB1)                                   ;B4DE4D
+    %AICMD0x09_StartScript($02, $B4DF5E)                                   ;B4DE51
+    %AICMD0x09_StartScript($03, $B4DF50)                                   ;B4DE55
+    %AICMD0x09_StartScript($04, $B4DF6C)                                   ;B4DE59
     %AICMD0x06_SetDestinationArea(!AREA_WOODSSPRING)           ;B4DE5D
-    %AICMD0x38()                                               ;B4DE5F
+    %AICMD0x38_WaitForFadeIn()                                               ;B4DE5F
     %AICMD0x13_Wait(80)                                        ;B4DE60
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B4DE63
-    %AICMD0x0C($00)                                            ;B4DE65
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4DE65
     %AICMD0x13_Wait(180)                                       ;B4DE67
     %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 64)                 ;B4DE6A
     %AICMD0x13_Wait(10)                                        ;B4DE6E
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B4DE71
     %AICMD0x13_Wait(30)                                        ;B4DE73
-    %AICMD0x09($05, $B4DF80)                                   ;B4DE76
-    %AICMD0x0C($02)                                            ;B4DE7A
+    %AICMD0x09_StartScript($05, $B4DF80)                                   ;B4DE76
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4DE7A
     %AICMD0x13_Wait(20)                                        ;B4DE7C
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B4DE7F
     %AICMD0x13_Wait(50)                                        ;B4DE81
     %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 24)                   ;B4DE84
-    %AICMD0x4E()                                               ;B4DE88
+    %AICMD0x4E_EnableTileInteractions()                                               ;B4DE88
     %AICMD0x19($0023, $00)                                     ;B4DE89
     %AICMD0x13_Wait(60)                                        ;B4DE8D
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B4DE90
@@ -7375,8 +7375,8 @@ DATA8_B4DE3E:
     %AICMD0x10_End()                                           ;B4DEB0
     %AICMD0x1A($00A8, $0298, $B38474, $03)                     ;B4DEB1
     %AICMD0x13_Wait(60)                                        ;B4DEB9
-    %AICMD0x0B($00)                                            ;B4DEBC
-    %AICMD0x09($06, $B4DF2E)                                   ;B4DEBE
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4DEBC
+    %AICMD0x09_StartScript($06, $B4DF2E)                                   ;B4DEBE
     %AICMD0x1B($02E7, $01)                                     ;B4DEC2
     %AICMD0x0D($01, $00, $20, $01)                             ;B4DEC6
     %AICMD0x1B($02E6, $00)                                     ;B4DECB
@@ -7385,9 +7385,9 @@ DATA8_B4DE3E:
     %AICMD0x0D($00, $FF, $20, $01)                             ;B4DED6
     %AICMD0x1B($02E7, $01)                                     ;B4DEDB
     %AICMD0x0D($01, $00, $90, $01)                             ;B4DEDF
-    %AICMD0x0C($02)                                            ;B4DEE4
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4DEE4
     %AICMD0x13_Wait(60)                                        ;B4DEE6
-    %AICMD0x09($07, $B4DF13)                                   ;B4DEE9
+    %AICMD0x09_StartScript($07, $B4DF13)                                   ;B4DEE9
     %AICMD0x1B($02E7, $00)                                     ;B4DEED
     %AICMD0x0D($FF, $00, $90, $01)                             ;B4DEF1
     %AICMD0x1B($02E3, $00)                                     ;B4DEF6
@@ -7418,16 +7418,16 @@ DATA8_B4DE3E:
     %AICMD0x13_Wait(1)                                         ;B4DF66
     %AICMD0x12_Jump($B4DF66)                                   ;B4DF69
     %AICMD0x1A($0088, $0298, $B38A38, $00)                     ;B4DF6C
-    %AICMD0x0C($01)                                            ;B4DF74
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4DF74
     %AICMD0x0D($F0, $F0, $01, $01)                             ;B4DF76
     %AICMD0x13_Wait(60)                                        ;B4DF7B
     %AICMD0x37()                                               ;B4DF7E
     %AICMD0x10_End()                                           ;B4DF7F
     %AICMD0x1A($0078, $0298, $B38528, $00)                     ;B4DF80
     %AICMD0x13_Wait(60)                                        ;B4DF88
-    %AICMD0x0B($01)                                            ;B4DF8B
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4DF8B
     %AICMD0x13_Wait(60)                                        ;B4DF8D
-    %AICMD0x0B($02)                                            ;B4DF90
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4DF90
     %AICMD0x37()                                               ;B4DF92
     %AICMD0x10_End()                                           ;B4DF93
 
@@ -7459,13 +7459,13 @@ DATA8_B4DFB4:
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B4DFBF
     %AICMD0x40_DisableTileInteractions()                       ;B4DFC1
     %AICMD0x08_EnableAIControl()                               ;B4DFC2
-    %AICMD0x09($01, $B4E015)                                   ;B4DFC3
-    %AICMD0x09($02, $B4E0A9)                                   ;B4DFC7
+    %AICMD0x09_StartScript($01, $B4E015)                                   ;B4DFC3
+    %AICMD0x09_StartScript($02, $B4E0A9)                                   ;B4DFC7
     %AICMD0x06_SetDestinationArea(!AREA_ENDING06)              ;B4DFCB
-    %AICMD0x38()                                               ;B4DFCD
+    %AICMD0x38_WaitForFadeIn()                                               ;B4DFCD
     %AICMD0x13_Wait(120)                                       ;B4DFCE
     %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 56)                  ;B4DFD1
-    %AICMD0x0B($00)                                            ;B4DFD5
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4DFD5
     %AICMD0x19($0052, $00)                                     ;B4DFD7
     %AICMD0x13_Wait(80)                                        ;B4DFDB
     %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 16)                 ;B4DFDE
@@ -7473,7 +7473,7 @@ DATA8_B4DFB4:
     %AICMD0x13_Wait(80)                                        ;B4DFE6
     %AICMD0x19($0041, $00)                                     ;B4DFE9
     %AICMD0x13_Wait(60)                                        ;B4DFED
-    %AICMD0x0B($01)                                            ;B4DFF0
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4DFF0
     %AICMD0x13_Wait(60)                                        ;B4DFF2
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B4DFF5
     %AICMD0x13_Wait(180)                                       ;B4DFF7
@@ -7483,12 +7483,12 @@ DATA8_B4DFB4:
     %AICMD0x13_Wait(180)                                       ;B4E003
     %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 48)                 ;B4E006
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B4E00A
-    %AICMD0x0C($02)                                            ;B4E00C
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4E00C
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 32)                    ;B4E00E
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B4E012
     %AICMD0x10_End()                                           ;B4E014
     %AICMD0x1A($FFCE, $0038, $B38474, $02)                     ;B4E015
-    %AICMD0x0C($01)                                            ;B4E01D
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4E01D
     %AICMD0x1B($044A, $01)                                     ;B4E01F
     %AICMD0x0D($01, $00, $A0, $01)                             ;B4E023
     %AICMD0x13_Wait(80)                                        ;B4E028
@@ -7503,13 +7503,13 @@ DATA8_B4DFB4:
     %AICMD0x0D($01, $00, $40, $01)                             ;B4E04C
     %AICMD0x1B($0448, $01)                                     ;B4E051
     %AICMD0x13_Wait(60)                                        ;B4E055
-    %AICMD0x09($03, $B4E089)                                   ;B4E058
+    %AICMD0x09_StartScript($03, $B4E089)                                   ;B4E058
     %AICMD0x1B($0258, $00)                                     ;B4E05C
     %AICMD0x0D($F8, $F8, $01, $01)                             ;B4E060
     %AICMD0x1B($0258, $00)                                     ;B4E065
     %AICMD0x0D($FA, $06, $02, $01)                             ;B4E069
     %AICMD0x13_Wait(60)                                        ;B4E06E
-    %AICMD0x0B($02)                                            ;B4E071
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4E071
     %AICMD0x1B($02E8, $00)                                     ;B4E073
     %AICMD0x13_Wait(60)                                        ;B4E077
     %AICMD0x1B($02E3, $00)                                     ;B4E07A
@@ -7525,7 +7525,7 @@ DATA8_B4DFB4:
     %AICMD0x13_Wait(180)                                       ;B4E0A3
     %AICMD0x12_Jump($B4E091)                                   ;B4E0A6
     %AICMD0x1A($0048, $0088, $B38114, $02)                     ;B4E0A9
-    %AICMD0x0C($00)                                            ;B4E0B1
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4E0B1
     %AICMD0x1B($01EC, $01)                                     ;B4E0B3
     %AICMD0x0D($01, $00, $48, $01)                             ;B4E0B7
     %AICMD0x13_Wait(60)                                        ;B4E0BC
@@ -7555,17 +7555,17 @@ DATA8_B4E0F8:
     %AICMD0x05_SetTransferPosition(632, 504)                   ;B4E0FE
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B4E103
     %AICMD0x08_EnableAIControl()                               ;B4E105
-    %AICMD0x09($01, $B4E14C)                                   ;B4E106
-    %AICMD0x09($02, $B4E1B7)                                   ;B4E10A
-    %AICMD0x09($03, $B4E180)                                   ;B4E10E
-    %AICMD0x09($04, $B4E1E0)                                   ;B4E112
+    %AICMD0x09_StartScript($01, $B4E14C)                                   ;B4E106
+    %AICMD0x09_StartScript($02, $B4E1B7)                                   ;B4E10A
+    %AICMD0x09_StartScript($03, $B4E180)                                   ;B4E10E
+    %AICMD0x09_StartScript($04, $B4E1E0)                                   ;B4E112
     %AICMD0x06_SetDestinationArea(!AREA_WOODSSUMMER)           ;B4E116
-    %AICMD0x38()                                               ;B4E118
+    %AICMD0x38_WaitForFadeIn()                                               ;B4E118
     %AICMD0x13_Wait(30)                                        ;B4E119
-    %AICMD0x0B($00)                                            ;B4E11C
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4E11C
     %AICMD0x19($004A, $00)                                     ;B4E11E
     %AICMD0x13_Wait(120)                                       ;B4E122
-    %AICMD0x0C($01)                                            ;B4E125
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4E125
     %AICMD0x19($0041, $00)                                     ;B4E127
     %AICMD0x13_Wait(80)                                        ;B4E12B
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 24)                  ;B4E12E
@@ -7573,27 +7573,27 @@ DATA8_B4E0F8:
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 16)                  ;B4E135
     %AICMD0x13_Wait(20)                                        ;B4E139
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B4E13C
-    %AICMD0x0B($02)                                            ;B4E13E
-    %AICMD0x0C($03)                                            ;B4E140
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4E13E
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B4E140
     %AICMD0x19($0023, $00)                                     ;B4E142
     %AICMD0x13_Wait(120)                                       ;B4E146
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B4E149
     %AICMD0x10_End()                                           ;B4E14B
     %AICMD0x1A($01CC, $01A8, $B38558, $02)                     ;B4E14C
-    %AICMD0x0C($02)                                            ;B4E154
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4E154
     %AICMD0x1B($0320, $01)                                     ;B4E156
     %AICMD0x0D($02, $01, $40, $02)                             ;B4E15A
     %AICMD0x0D($01, $00, $10, $01)                             ;B4E15F
     %AICMD0x0D($00, $0A, $01, $01)                             ;B4E164
     %AICMD0x0D($01, $01, $1E, $02)                             ;B4E169
     %AICMD0x13_Wait(30)                                        ;B4E16E
-    %AICMD0x0B($03)                                            ;B4E171
+    %AICMD0x0B_SetScriptFlag($03)                                            ;B4E171
     %AICMD0x13_Wait(30)                                        ;B4E173
     %AICMD0x1B($031E, $01)                                     ;B4E176
     %AICMD0x13_Wait(1)                                         ;B4E17A
     %AICMD0x12_Jump($B4E17A)                                   ;B4E17D
     %AICMD0x1A($02B0, $0218, $B38378, $01)                     ;B4E180
-    %AICMD0x0C($00)                                            ;B4E188
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4E188
     %AICMD0x13_Wait(60)                                        ;B4E18A
     %AICMD0x0D($00, $FF, $20, $01)                             ;B4E18D
     %AICMD0x13_Wait(60)                                        ;B4E192
@@ -7601,14 +7601,14 @@ DATA8_B4E0F8:
     %AICMD0x0D($FF, $00, $28, $01)                             ;B4E199
     %AICMD0x13_Wait(60)                                        ;B4E19E
     %AICMD0x1B($02B0, $00)                                     ;B4E1A1
-    %AICMD0x0B($01)                                            ;B4E1A5
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4E1A5
     %AICMD0x13_Wait(180)                                       ;B4E1A7
     %AICMD0x1B($02AB, $00)                                     ;B4E1AA
     %AICMD0x13_Wait(120)                                       ;B4E1AE
     %AICMD0x13_Wait(1)                                         ;B4E1B1
     %AICMD0x12_Jump($B4E1B1)                                   ;B4E1B4
     %AICMD0x1A($0258, $0208, $B38474, $01)                     ;B4E1B7
-    %AICMD0x0C($01)                                            ;B4E1BF
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4E1BF
     %AICMD0x1B($02E6, $01)                                     ;B4E1C1
     %AICMD0x13_Wait(120)                                       ;B4E1C5
     %AICMD0x1B($02E2, $00)                                     ;B4E1C8
@@ -7654,15 +7654,15 @@ DATA8_B4E220:
     %AICMD0x05_SetTransferPosition(584, 432)                   ;B4E226
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B4E22B
     %AICMD0x08_EnableAIControl()                               ;B4E22D
-    %AICMD0x09($01, $B4E35C)                                   ;B4E22E
-    %AICMD0x09($02, $B4E321)                                   ;B4E232
-    %AICMD0x09($03, $B4E2B4)                                   ;B4E236
-    %AICMD0x09($04, $B4E3C7)                                   ;B4E23A
-    %AICMD0x09($05, $B4E3D5)                                   ;B4E23E
-    %AICMD0x09($06, $B4E3E3)                                   ;B4E242
-    %AICMD0x09($07, $B4E393)                                   ;B4E246
+    %AICMD0x09_StartScript($01, $B4E35C)                                   ;B4E22E
+    %AICMD0x09_StartScript($02, $B4E321)                                   ;B4E232
+    %AICMD0x09_StartScript($03, $B4E2B4)                                   ;B4E236
+    %AICMD0x09_StartScript($04, $B4E3C7)                                   ;B4E23A
+    %AICMD0x09_StartScript($05, $B4E3D5)                                   ;B4E23E
+    %AICMD0x09_StartScript($06, $B4E3E3)                                   ;B4E242
+    %AICMD0x09_StartScript($07, $B4E393)                                   ;B4E246
     %AICMD0x06_SetDestinationArea(!AREA_WOODSSUMMER)           ;B4E24A
-    %AICMD0x38()                                               ;B4E24C
+    %AICMD0x38_WaitForFadeIn()                                               ;B4E24C
     %AICMD0x13_Wait(30)                                        ;B4E24D
     %AICMD0x19($005F, $00)                                     ;B4E250
     %AICMD0x13_Wait(80)                                        ;B4E254
@@ -7683,21 +7683,21 @@ DATA8_B4E220:
     %AICMD0x19($004A, $00)                                     ;B4E286
     %AICMD0x13_Wait(180)                                       ;B4E28A
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 32)                  ;B4E28D
-    %AICMD0x0B($00)                                            ;B4E291
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4E291
     %AICMD0x13_Wait(120)                                       ;B4E293
     %AICMD0x19($0043, $00)                                     ;B4E296
     %AICMD0x13_Wait(120)                                       ;B4E29A
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 16)                  ;B4E29D
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 16)                  ;B4E2A1
-    %AICMD0x0C($03)                                            ;B4E2A5
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B4E2A5
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B4E2A7
     %AICMD0x13_Wait(30)                                        ;B4E2A9
-    %AICMD0x0C($04)                                            ;B4E2AC
+    %AICMD0x0C_WaitForScriptFlag($04)                                            ;B4E2AC
     %AICMD0x13_Wait(90)                                        ;B4E2AE
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B4E2B1
     %AICMD0x10_End()                                           ;B4E2B3
     %AICMD0x1A($0208, $01D8, $B38474, $00)                     ;B4E2B4
-    %AICMD0x0C($00)                                            ;B4E2BC
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4E2BC
     %AICMD0x13_Wait(30)                                        ;B4E2BE
     %AICMD0x1B($02E7, $01)                                     ;B4E2C1
     %AICMD0x0D($01, $00, $30, $01)                             ;B4E2C5
@@ -7712,7 +7712,7 @@ DATA8_B4E220:
     %AICMD0x13_Wait(120)                                       ;B4E2E9
     %AICMD0x1B($02E5, $00)                                     ;B4E2EC
     %AICMD0x0D($00, $FF, $20, $01)                             ;B4E2F0
-    %AICMD0x0B($01)                                            ;B4E2F5
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4E2F5
     %AICMD0x13_Wait(60)                                        ;B4E2F7
     %AICMD0x1B($02E3, $00)                                     ;B4E2FA
     %AICMD0x0D($00, $01, $08, $01)                             ;B4E2FE
@@ -7726,7 +7726,7 @@ DATA8_B4E220:
     %AICMD0x13_Wait(1)                                         ;B4E31B
     %AICMD0x12_Jump($B4E31B)                                   ;B4E31E
     %AICMD0x1A($0238, $0268, $B382D0, $01)                     ;B4E321
-    %AICMD0x0C($01)                                            ;B4E329
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4E329
     %AICMD0x13_Wait(20)                                        ;B4E32B
     %AICMD0x0D($00, $FF, $60, $01)                             ;B4E32E
     %AICMD0x13_Wait(20)                                        ;B4E333
@@ -7734,7 +7734,7 @@ DATA8_B4E220:
     %AICMD0x0D($01, $00, $10, $01)                             ;B4E33A
     %AICMD0x1B($0281, $01)                                     ;B4E33F
     %AICMD0x13_Wait(120)                                       ;B4E343
-    %AICMD0x0B($02)                                            ;B4E346
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4E346
     %AICMD0x1B($027F, $00)                                     ;B4E348
     %AICMD0x13_Wait(180)                                       ;B4E34C
     %AICMD0x1B($0281, $01)                                     ;B4E34F
@@ -7742,7 +7742,7 @@ DATA8_B4E220:
     %AICMD0x13_Wait(1)                                         ;B4E356
     %AICMD0x12_Jump($B4E356)                                   ;B4E359
     %AICMD0x1A($0278, $0208, $B38114, $03)                     ;B4E35C
-    %AICMD0x0C($02)                                            ;B4E364
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4E364
     %AICMD0x1B($01EC, $00)                                     ;B4E366
     %AICMD0x0D($FF, $00, $20, $01)                             ;B4E36A
     %AICMD0x13_Wait(60)                                        ;B4E36F
@@ -7750,24 +7750,24 @@ DATA8_B4E220:
     %AICMD0x13_Wait(180)                                       ;B4E376
     %AICMD0x1B($01EF, $00)                                     ;B4E379
     %AICMD0x13_Wait(60)                                        ;B4E37D
-    %AICMD0x0B($03)                                            ;B4E380
+    %AICMD0x0B_SetScriptFlag($03)                                            ;B4E380
     %AICMD0x1B($01F0, $00)                                     ;B4E382
     %AICMD0x13_Wait(120)                                       ;B4E386
     %AICMD0x1B($01E3, $00)                                     ;B4E389
     %AICMD0x13_Wait(1)                                         ;B4E38D
     %AICMD0x12_Jump($B4E38D)                                   ;B4E390
     %AICMD0x1A($0270, $0230, $B38234, $01)                     ;B4E393
-    %AICMD0x0C($03)                                            ;B4E39B
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B4E39B
     %AICMD0x1B($025D, $00)                                     ;B4E39D
     %AICMD0x0D($00, $FF, $40, $01)                             ;B4E3A1
     %AICMD0x1B($025F, $00)                                     ;B4E3A6
     %AICMD0x13_Wait(60)                                        ;B4E3AA
     %AICMD0x1B($025D, $00)                                     ;B4E3AD
     %AICMD0x13_Wait(30)                                        ;B4E3B1
-    %AICMD0x09($08, $B4E3F1)                                   ;B4E3B4
+    %AICMD0x09_StartScript($08, $B4E3F1)                                   ;B4E3B4
     %AICMD0x1B($025F, $00)                                     ;B4E3B8
     %AICMD0x13_Wait(60)                                        ;B4E3BC
-    %AICMD0x0B($04)                                            ;B4E3BF
+    %AICMD0x0B_SetScriptFlag($04)                                            ;B4E3BF
     %AICMD0x13_Wait(1)                                         ;B4E3C1
     %AICMD0x12_Jump($B4E3C1)                                   ;B4E3C4
     %AICMD0x1A($0254, $01E2, $B38A5C, $00)                     ;B4E3C7
@@ -7810,35 +7810,35 @@ DATA8_B4E41F:
     %AICMD0x05_SetTransferPosition(680, 392)                   ;B4E425
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B4E42A
     %AICMD0x08_EnableAIControl()                               ;B4E42C
-    %AICMD0x09($01, $B4E516)                                   ;B4E42D
-    %AICMD0x09($02, $B4E5BF)                                   ;B4E431
-    %AICMD0x09($03, $B4E4E4)                                   ;B4E435
-    %AICMD0x09($04, $B4E58D)                                   ;B4E439
-    %AICMD0x09($05, $B4E54C)                                   ;B4E43D
-    %AICMD0x09($06, $B4E5E6)                                   ;B4E441
+    %AICMD0x09_StartScript($01, $B4E516)                                   ;B4E42D
+    %AICMD0x09_StartScript($02, $B4E5BF)                                   ;B4E431
+    %AICMD0x09_StartScript($03, $B4E4E4)                                   ;B4E435
+    %AICMD0x09_StartScript($04, $B4E58D)                                   ;B4E439
+    %AICMD0x09_StartScript($05, $B4E54C)                                   ;B4E43D
+    %AICMD0x09_StartScript($06, $B4E5E6)                                   ;B4E441
     %AICMD0x06_SetDestinationArea(!AREA_TOWNSUMMER)            ;B4E445
-    %AICMD0x38()                                               ;B4E447
+    %AICMD0x38_WaitForFadeIn()                                               ;B4E447
     %AICMD0x13_Wait(60)                                        ;B4E448
     %AICMD0x3A_RunForTime(!AIINPUT_UP, 48)                     ;B4E44B
     %AICMD0x13_Wait(20)                                        ;B4E44F
     %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 80)                   ;B4E452
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B4E456
-    %AICMD0x0B($00)                                            ;B4E458
-    %AICMD0x0C($01)                                            ;B4E45A
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4E458
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4E45A
     %AICMD0x19($0038, $00)                                     ;B4E45C
     %AICMD0x13_Wait(90)                                        ;B4E460
     %AICMD0x19($0029, $00)                                     ;B4E463
     %AICMD0x13_Wait(90)                                        ;B4E467
     %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 76)                   ;B4E46A
-    %AICMD0x0B($02)                                            ;B4E46E
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4E46E
     %AICMD0x19($0003, $00)                                     ;B4E470
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B4E474
     %AICMD0x13_Wait(300)                                       ;B4E476
     %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 80)                   ;B4E479
     %AICMD0x13_Wait(10)                                        ;B4E47D
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B4E480
-    %AICMD0x0B($03)                                            ;B4E482
-    %AICMD0x0C($07)                                            ;B4E484
+    %AICMD0x0B_SetScriptFlag($03)                                            ;B4E482
+    %AICMD0x0C_WaitForScriptFlag($07)                                            ;B4E484
     %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 8)                  ;B4E486
     %AICMD0x13_Wait(90)                                        ;B4E48A
     %AICMD0x19($00CC, $00)                                     ;B4E48D
@@ -7847,8 +7847,8 @@ DATA8_B4E41F:
     %AICMD0x13_Wait(120)                                       ;B4E498
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 80)                  ;B4E49B
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B4E49F
-    %AICMD0x0B($04)                                            ;B4E4A1
-    %AICMD0x0C($05)                                            ;B4E4A3
+    %AICMD0x0B_SetScriptFlag($04)                                            ;B4E4A1
+    %AICMD0x0C_WaitForScriptFlag($05)                                            ;B4E4A3
     %AICMD0x13_Wait(60)                                        ;B4E4A5
     %AICMD0x19($0039, $00)                                     ;B4E4A8
     %AICMD0x13_Wait(90)                                        ;B4E4AC
@@ -7859,7 +7859,7 @@ DATA8_B4E41F:
     %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 68)                   ;B4E4BD
     %AICMD0x13_Wait(30)                                        ;B4E4C1
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 52)                  ;B4E4C4
-    %AICMD0x0B($06)                                            ;B4E4C8
+    %AICMD0x0B_SetScriptFlag($06)                                            ;B4E4C8
     %AICMD0x13_Wait(120)                                       ;B4E4CA
     %AICMD0x19($0023, $00)                                     ;B4E4CD
     %AICMD0x13_Wait(50)                                        ;B4E4D1
@@ -7870,12 +7870,12 @@ DATA8_B4E41F:
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B4E4E1
     %AICMD0x10_End()                                           ;B4E4E3
     %AICMD0x1A($0208, $00F8, $B381D4, $00)                     ;B4E4E4
-    %AICMD0x0C($00)                                            ;B4E4EC
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4E4EC
     %AICMD0x0D($00, $01, $1C, $01)                             ;B4E4EE
     %AICMD0x13_Wait(20)                                        ;B4E4F3
-    %AICMD0x09($06, $B4E509)                                   ;B4E4F6
+    %AICMD0x09_StartScript($06, $B4E509)                                   ;B4E4F6
     %AICMD0x13_Wait(120)                                       ;B4E4FA
-    %AICMD0x0B($01)                                            ;B4E4FD
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4E4FD
     %AICMD0x1B($0351, $00)                                     ;B4E4FF
     %AICMD0x13_Wait(1)                                         ;B4E503
     %AICMD0x12_Jump($B4E503)                                   ;B4E506
@@ -7884,7 +7884,7 @@ DATA8_B4E41F:
     %AICMD0x37()                                               ;B4E514
     %AICMD0x10_End()                                           ;B4E515
     %AICMD0x1A($0148, $0118, $B3818C, $00)                     ;B4E516
-    %AICMD0x0C($02)                                            ;B4E51E
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4E51E
     %AICMD0x1B($021F, $00)                                     ;B4E520
     %AICMD0x0D($00, $01, $10, $01)                             ;B4E524
     %AICMD0x13_Wait(10)                                        ;B4E529
@@ -7898,7 +7898,7 @@ DATA8_B4E41F:
     %AICMD0x13_Wait(1)                                         ;B4E546
     %AICMD0x12_Jump($B4E546)                                   ;B4E549
     %AICMD0x1A($0198, $0198, $B38204, $03)                     ;B4E54C
-    %AICMD0x0C($03)                                            ;B4E554
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B4E554
     %AICMD0x1B($0249, $00)                                     ;B4E556
     %AICMD0x0D($FF, $00, $10, $01)                             ;B4E55A
     %AICMD0x13_Wait(10)                                        ;B4E55F
@@ -7906,7 +7906,7 @@ DATA8_B4E41F:
     %AICMD0x0D($00, $01, $30, $01)                             ;B4E566
     %AICMD0x1B($0248, $00)                                     ;B4E56B
     %AICMD0x13_Wait(50)                                        ;B4E56F
-    %AICMD0x0B($07)                                            ;B4E572
+    %AICMD0x0B_SetScriptFlag($07)                                            ;B4E572
     %AICMD0x1B($0249, $00)                                     ;B4E574
     %AICMD0x0D($FF, $00, $08, $01)                             ;B4E578
     %AICMD0x13_Wait(320)                                       ;B4E57D
@@ -7915,11 +7915,11 @@ DATA8_B4E41F:
     %AICMD0x13_Wait(1)                                         ;B4E587
     %AICMD0x12_Jump($B4E587)                                   ;B4E58A
     %AICMD0x1A($00D8, $0218, $B381EC, $02)                     ;B4E58D
-    %AICMD0x0C($04)                                            ;B4E595
+    %AICMD0x0C_WaitForScriptFlag($04)                                            ;B4E595
     %AICMD0x0D($01, $00, $88, $01)                             ;B4E597
     %AICMD0x13_Wait(60)                                        ;B4E59C
-    %AICMD0x09($07, $B4E5B2)                                   ;B4E59F
-    %AICMD0x0B($05)                                            ;B4E5A3
+    %AICMD0x09_StartScript($07, $B4E5B2)                                   ;B4E59F
+    %AICMD0x0B_SetScriptFlag($05)                                            ;B4E5A3
     %AICMD0x13_Wait(200)                                       ;B4E5A5
     %AICMD0x1B($034F, $00)                                     ;B4E5A8
     %AICMD0x13_Wait(1)                                         ;B4E5AC
@@ -7929,7 +7929,7 @@ DATA8_B4E41F:
     %AICMD0x37()                                               ;B4E5BD
     %AICMD0x10_End()                                           ;B4E5BE
     %AICMD0x1A($00D8, $02D8, $B38198, $00)                     ;B4E5BF
-    %AICMD0x0C($06)                                            ;B4E5C7
+    %AICMD0x0C_WaitForScriptFlag($06)                                            ;B4E5C7
     %AICMD0x1B($0345, $00)                                     ;B4E5C9
     %AICMD0x13_Wait(90)                                        ;B4E5CD
     %AICMD0x1B($0346, $00)                                     ;B4E5D0
@@ -7970,21 +7970,21 @@ DATA8_B4E614:
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B4E61F
     %AICMD0x40_DisableTileInteractions()                       ;B4E621
     %AICMD0x08_EnableAIControl()                               ;B4E622
-    %AICMD0x09($01, $B4E67C)                                   ;B4E623
-    %AICMD0x09($02, $B4E6C9)                                   ;B4E627
-    %AICMD0x09($03, $B4E74B)                                   ;B4E62B
+    %AICMD0x09_StartScript($01, $B4E67C)                                   ;B4E623
+    %AICMD0x09_StartScript($02, $B4E6C9)                                   ;B4E627
+    %AICMD0x09_StartScript($03, $B4E74B)                                   ;B4E62B
     %AICMD0x06_SetDestinationArea(!AREA_HOUSE3)                ;B4E62F
-    %AICMD0x38()                                               ;B4E631
+    %AICMD0x38_WaitForFadeIn()                                               ;B4E631
     %AICMD0x13_Wait(60)                                        ;B4E632
     %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 24)                  ;B4E635
     %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 32)                   ;B4E639
     %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 54)                  ;B4E63D
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B4E641
-    %AICMD0x0B($00)                                            ;B4E643
-    %AICMD0x0C($01)                                            ;B4E645
-    %AICMD0x0B($02)                                            ;B4E647
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4E643
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4E645
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4E647
     %AICMD0x13_Wait(60)                                        ;B4E649
-    %AICMD0x0C($03)                                            ;B4E64C
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B4E64C
     %AICMD0x13_Wait(30)                                        ;B4E64E
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 16)                  ;B4E651
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 32)                    ;B4E655
@@ -7998,7 +7998,7 @@ DATA8_B4E614:
     %AICMD0x19($0042, $00)                                     ;B4E66E
     %AICMD0x13_Wait(120)                                       ;B4E672
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B4E675
-    %AICMD0x0C($04)                                            ;B4E677
+    %AICMD0x0C_WaitForScriptFlag($04)                                            ;B4E677
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B4E679
     %AICMD0x10_End()                                           ;B4E67B
     %AICMD0x1A($0168, $0098, $B384A4, $01)                     ;B4E67C
@@ -8021,24 +8021,24 @@ DATA8_B4E614:
     %AICMD0x13_Wait(1)                                         ;B4E6C3
     %AICMD0x12_Jump($B4E6C3)                                   ;B4E6C6
     %AICMD0x1A($0138, $0078, $B3845C, $00)                     ;B4E6C9
-    %AICMD0x0C($00)                                            ;B4E6D1
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4E6D1
     %AICMD0x13_Wait(30)                                        ;B4E6D3
     %AICMD0x1B($02E3, $00)                                     ;B4E6D6
     %AICMD0x0D($00, $01, $42, $01)                             ;B4E6DA
     %AICMD0x1B($02E6, $00)                                     ;B4E6DF
-    %AICMD0x0B($01)                                            ;B4E6E3
-    %AICMD0x0C($02)                                            ;B4E6E5
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4E6E3
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4E6E5
     %AICMD0x13_Wait(20)                                        ;B4E6E7
     %AICMD0x1B($02E7, $00)                                     ;B4E6EA
     %AICMD0x0D($FF, $00, $08, $02)                             ;B4E6EE
     %AICMD0x1B($0233, $00)                                     ;B4E6F3
     %AICMD0x13_Wait(60)                                        ;B4E6F7
     %AICMD0x1B($02F0, $00)                                     ;B4E6FA
-    %AICMD0x09($04, $B4E73E)                                   ;B4E6FE
+    %AICMD0x09_StartScript($04, $B4E73E)                                   ;B4E6FE
     %AICMD0x13_Wait(90)                                        ;B4E702
     %AICMD0x1B($02E5, $00)                                     ;B4E705
     %AICMD0x0D($00, $FF, $30, $01)                             ;B4E709
-    %AICMD0x0B($03)                                            ;B4E70E
+    %AICMD0x0B_SetScriptFlag($03)                                            ;B4E70E
     %AICMD0x13_Wait(40)                                        ;B4E710
     %AICMD0x1B($02E6, $01)                                     ;B4E713
     %AICMD0x13_Wait(160)                                       ;B4E717
@@ -8063,7 +8063,7 @@ DATA8_B4E614:
     %AICMD0x13_Wait(180)                                       ;B4E75E
     %AICMD0x1B($01EB, $00)                                     ;B4E761
     %AICMD0x13_Wait(180)                                       ;B4E765
-    %AICMD0x0C($03)                                            ;B4E768
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B4E768
     %AICMD0x13_Wait(120)                                       ;B4E76A
     %AICMD0x1B($01DF, $00)                                     ;B4E76D
     %AICMD0x0D($00, $01, $20, $01)                             ;B4E771
@@ -8079,7 +8079,7 @@ DATA8_B4E614:
     %AICMD0x0D($01, $00, $20, $02)                             ;B4E799
     %AICMD0x1B($01E1, $00)                                     ;B4E79E
     %AICMD0x0D($00, $FF, $20, $02)                             ;B4E7A2
-    %AICMD0x0B($04)                                            ;B4E7A7
+    %AICMD0x0B_SetScriptFlag($04)                                            ;B4E7A7
     %AICMD0x13_Wait(1)                                         ;B4E7A9
     %AICMD0x12_Jump($B4E7A9)                                   ;B4E7AC
 
@@ -8112,14 +8112,14 @@ DATA8_B4E7CF:
     %AICMD0x05_SetTransferPosition(88, 104)                    ;B4E7DF
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B4E7E4
     %AICMD0x08_EnableAIControl()                               ;B4E7E6
-    %AICMD0x09($01, $B4E862)                                   ;B4E7E7
-    %AICMD0x09($02, $B4E8B4)                                   ;B4E7EB
-    %AICMD0x09($03, $B4E906)                                   ;B4E7EF
-    %AICMD0x09($04, $B4E93B)                                   ;B4E7F3
-    %AICMD0x09($05, $B4E974)                                   ;B4E7F7
-    %AICMD0x09($06, $B4E8E0)                                   ;B4E7FB
+    %AICMD0x09_StartScript($01, $B4E862)                                   ;B4E7E7
+    %AICMD0x09_StartScript($02, $B4E8B4)                                   ;B4E7EB
+    %AICMD0x09_StartScript($03, $B4E906)                                   ;B4E7EF
+    %AICMD0x09_StartScript($04, $B4E93B)                                   ;B4E7F3
+    %AICMD0x09_StartScript($05, $B4E974)                                   ;B4E7F7
+    %AICMD0x09_StartScript($06, $B4E8E0)                                   ;B4E7FB
     %AICMD0x06_SetDestinationArea(!AREA_ENDING03)              ;B4E7FF
-    %AICMD0x38()                                               ;B4E801
+    %AICMD0x38_WaitForFadeIn()                                               ;B4E801
     %AICMD0x56_UseEquippedItem()                               ;B4E802
     %AICMD0x13_Wait(60)                                        ;B4E803
     %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 16)                 ;B4E806
@@ -8134,27 +8134,27 @@ DATA8_B4E7CF:
     %AICMD0x13_Wait(18)                                        ;B4E820
     %AICMD0x19($0041, $00)                                     ;B4E823
     %AICMD0x13_Wait(90)                                        ;B4E827
-    %AICMD0x0B($00)                                            ;B4E82A
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4E82A
     %AICMD0x19($003D, $00)                                     ;B4E82C
     %AICMD0x13_Wait(120)                                       ;B4E830
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B4E833
     %AICMD0x13_Wait(60)                                        ;B4E835
-    %AICMD0x0C($01)                                            ;B4E838
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4E838
     %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 16)                   ;B4E83A
     %AICMD0x13_Wait(60)                                        ;B4E83E
     %AICMD0x19($0042, $00)                                     ;B4E841
     %AICMD0x13_Wait(60)                                        ;B4E845
     %AICMD0x19($0023, $00)                                     ;B4E848
     %AICMD0x13_Wait(120)                                       ;B4E84C
-    %AICMD0x0B($02)                                            ;B4E84F
-    %AICMD0x0C($03)                                            ;B4E851
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4E84F
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B4E851
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 16)                  ;B4E853
     %AICMD0x13_Wait(30)                                        ;B4E857
-    %AICMD0x28(strcFlags.daily4, $03)                          ;B4E85A
+    %AICMD0x28_ClearBit(strcFlags.daily4, $03)                          ;B4E85A
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B4E85F
     %AICMD0x10_End()                                           ;B4E861
     %AICMD0x1A($0030, $0068, $B384A4, $02)                     ;B4E862
-    %AICMD0x0C($00)                                            ;B4E86A
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4E86A
     %AICMD0x0D($01, $00, $40, $04)                             ;B4E86C
     %AICMD0x13_Wait(30)                                        ;B4E871
     %AICMD0x0D($01, $00, $18, $04)                             ;B4E874
@@ -8167,8 +8167,8 @@ DATA8_B4E7CF:
     %AICMD0x1B($02F7, $01)                                     ;B4E88F
     %AICMD0x0D($01, $00, $20, $04)                             ;B4E893
     %AICMD0x13_Wait(30)                                        ;B4E898
-    %AICMD0x0B($01)                                            ;B4E89B
-    %AICMD0x0C($02)                                            ;B4E89D
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4E89B
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4E89D
     %AICMD0x13_Wait(60)                                        ;B4E89F
     %AICMD0x1B($02F7, $00)                                     ;B4E8A2
     %AICMD0x0D($FF, $00, $20, $02)                             ;B4E8A6
@@ -8176,7 +8176,7 @@ DATA8_B4E7CF:
     %AICMD0x13_Wait(1)                                         ;B4E8AE
     %AICMD0x12_Jump($B4E8AE)                                   ;B4E8B1
     %AICMD0x1A($FFF6, $0068, $B38474, $02)                     ;B4E8B4
-    %AICMD0x0C($02)                                            ;B4E8BC
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4E8BC
     %AICMD0x0D($01, $00, $40, $01)                             ;B4E8BE
     %AICMD0x1B($02E6, $01)                                     ;B4E8C3
     %AICMD0x13_Wait(60)                                        ;B4E8C7
@@ -8184,7 +8184,7 @@ DATA8_B4E7CF:
     %AICMD0x13_Wait(120)                                       ;B4E8CE
     %AICMD0x1B($0233, $01)                                     ;B4E8D1
     %AICMD0x13_Wait(60)                                        ;B4E8D5
-    %AICMD0x0B($03)                                            ;B4E8D8
+    %AICMD0x0B_SetScriptFlag($03)                                            ;B4E8D8
     %AICMD0x13_Wait(1)                                         ;B4E8DA
     %AICMD0x12_Jump($B4E8DA)                                   ;B4E8DD
     %AICMD0x1A($0024, $0078, $B384BC, $00)                     ;B4E8E0
@@ -8257,20 +8257,20 @@ DATA8_B4E9A9:
     %AICMD0x40_DisableTileInteractions()                       ;B4E9B4
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B4E9B5
     %AICMD0x08_EnableAIControl()                               ;B4E9B7
-    %AICMD0x09($01, $B4EA0B)                                   ;B4E9B8
-    %AICMD0x09($02, $B4EA68)                                   ;B4E9BC
-    %AICMD0x09($03, $B4EA92)                                   ;B4E9C0
-    %AICMD0x09($04, $B4EABF)                                   ;B4E9C4
-    %AICMD0x09($05, $B4EB54)                                   ;B4E9C8
-    %AICMD0x09($06, $B4EB2D)                                   ;B4E9CC
-    %AICMD0x09($07, $B4EB70)                                   ;B4E9D0
-    %AICMD0x09($08, $B4EB7E)                                   ;B4E9D4
-    %AICMD0x09($09, $B4EB93)                                   ;B4E9D8
-    %AICMD0x09($0A, $B4EAED)                                   ;B4E9DC
-    %AICMD0x09($0B, $B4EAFB)                                   ;B4E9E0
+    %AICMD0x09_StartScript($01, $B4EA0B)                                   ;B4E9B8
+    %AICMD0x09_StartScript($02, $B4EA68)                                   ;B4E9BC
+    %AICMD0x09_StartScript($03, $B4EA92)                                   ;B4E9C0
+    %AICMD0x09_StartScript($04, $B4EABF)                                   ;B4E9C4
+    %AICMD0x09_StartScript($05, $B4EB54)                                   ;B4E9C8
+    %AICMD0x09_StartScript($06, $B4EB2D)                                   ;B4E9CC
+    %AICMD0x09_StartScript($07, $B4EB70)                                   ;B4E9D0
+    %AICMD0x09_StartScript($08, $B4EB7E)                                   ;B4E9D4
+    %AICMD0x09_StartScript($09, $B4EB93)                                   ;B4E9D8
+    %AICMD0x09_StartScript($0A, $B4EAED)                                   ;B4E9DC
+    %AICMD0x09_StartScript($0B, $B4EAFB)                                   ;B4E9E0
     %AICMD0x06_SetDestinationArea(!AREA_ENDING12)              ;B4E9E4
-    %AICMD0x38()                                               ;B4E9E6
-    %AICMD0x0C($02)                                            ;B4E9E7
+    %AICMD0x38_WaitForFadeIn()                                               ;B4E9E6
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4E9E7
     %AICMD0x13_Wait(180)                                       ;B4E9E9
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 80)                    ;B4E9EC
     %AICMD0x13_Wait(60)                                        ;B4E9F0
@@ -8281,7 +8281,7 @@ DATA8_B4E9A9:
     %AICMD0x13_Wait(120)                                       ;B4E9FE
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B4EA01
     %AICMD0x13_Wait(60)                                        ;B4EA03
-    %AICMD0x0C($03)                                            ;B4EA06
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B4EA06
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B4EA08
     %AICMD0x10_End()                                           ;B4EA0A
     %AICMD0x1A($0110, $0078, $B38114, $00)                     ;B4EA0B
@@ -8305,16 +8305,16 @@ DATA8_B4E9A9:
     %AICMD0x13_Wait(60)                                        ;B4EA53
     %AICMD0x1B($01EC, $01)                                     ;B4EA56
     %AICMD0x0D($01, $00, $68, $01)                             ;B4EA5A
-    %AICMD0x0B($03)                                            ;B4EA5F
+    %AICMD0x0B_SetScriptFlag($03)                                            ;B4EA5F
     %AICMD0x10_End()                                           ;B4EA61
     %AICMD0x13_Wait(1)                                         ;B4EA62
     %AICMD0x12_Jump($B4EA62)                                   ;B4EA65
     %AICMD0x1A($0068, $0058, $B3845C, $00)                     ;B4EA68
-    %AICMD0x0C($00)                                            ;B4EA70
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4EA70
     %AICMD0x1B($02E3, $00)                                     ;B4EA72
     %AICMD0x0D($00, $01, $24, $01)                             ;B4EA76
     %AICMD0x13_Wait(120)                                       ;B4EA7B
-    %AICMD0x0B($01)                                            ;B4EA7E
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B4EA7E
     %AICMD0x1B($02E3, $00)                                     ;B4EA80
     %AICMD0x0D($00, $FF, $20, $01)                             ;B4EA84
     %AICMD0x13_Wait(120)                                       ;B4EA89
@@ -8325,8 +8325,8 @@ DATA8_B4E9A9:
     %AICMD0x0D($00, $01, $20, $01)                             ;B4EA9D
     %AICMD0x1B($02FB, $00)                                     ;B4EAA2
     %AICMD0x13_Wait(60)                                        ;B4EAA6
-    %AICMD0x0B($00)                                            ;B4EAA9
-    %AICMD0x0C($01)                                            ;B4EAAB
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B4EAA9
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4EAAB
     %AICMD0x1B($02FB, $00)                                     ;B4EAAD
     %AICMD0x0D($00, $FF, $20, $01)                             ;B4EAB1
     %AICMD0x13_Wait(120)                                       ;B4EAB6
@@ -8336,7 +8336,7 @@ DATA8_B4E9A9:
     %AICMD0x13_Wait(180)                                       ;B4EAC7
     %AICMD0x0D($01, $00, $10, $02)                             ;B4EACA
     %AICMD0x13_Wait(120)                                       ;B4EACF
-    %AICMD0x0C($02)                                            ;B4EAD2
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4EAD2
     %AICMD0x1B($02F7, $01)                                     ;B4EAD4
     %AICMD0x0D($FF, $00, $1E, $02)                             ;B4EAD8
     %AICMD0x13_Wait(60)                                        ;B4EADD
@@ -8352,7 +8352,7 @@ DATA8_B4E9A9:
     %AICMD0x1B($02E1, $01)                                     ;B4EB06
     %AICMD0x0D($01, $00, $10, $01)                             ;B4EB0A
     %AICMD0x13_Wait(90)                                        ;B4EB0F
-    %AICMD0x0B($02)                                            ;B4EB12
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B4EB12
     %AICMD0x1B($02E1, $01)                                     ;B4EB14
     %AICMD0x0D($FF, $00, $20, $02)                             ;B4EB18
     %AICMD0x13_Wait(60)                                        ;B4EB1D
@@ -8398,20 +8398,20 @@ DATA8_B4EBA1:
     %AICMD0x40_DisableTileInteractions()                       ;B4EBAC
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B4EBAD
     %AICMD0x08_EnableAIControl()                               ;B4EBAF
-    %AICMD0x09($01, $B4EBF0)                                   ;B4EBB0
-    %AICMD0x09($02, $B4EC05)                                   ;B4EBB4
-    %AICMD0x09($03, $B4EC13)                                   ;B4EBB8
-    %AICMD0x09($04, $B4EC21)                                   ;B4EBBC
-    %AICMD0x09($05, $B4EC60)                                   ;B4EBC0
-    %AICMD0x09($06, $B4EC52)                                   ;B4EBC4
-    %AICMD0x09($07, $B4EC6E)                                   ;B4EBC8
-    %AICMD0x09($08, $B4EC83)                                   ;B4EBCC
-    %AICMD0x09($09, $B4EC98)                                   ;B4EBD0
-    %AICMD0x09($0A, $B4EC2F)                                   ;B4EBD4
-    %AICMD0x09($0B, $B4EC3D)                                   ;B4EBD8
-    %AICMD0x09($0C, $B4ECA6)                                   ;B4EBDC
+    %AICMD0x09_StartScript($01, $B4EBF0)                                   ;B4EBB0
+    %AICMD0x09_StartScript($02, $B4EC05)                                   ;B4EBB4
+    %AICMD0x09_StartScript($03, $B4EC13)                                   ;B4EBB8
+    %AICMD0x09_StartScript($04, $B4EC21)                                   ;B4EBBC
+    %AICMD0x09_StartScript($05, $B4EC60)                                   ;B4EBC0
+    %AICMD0x09_StartScript($06, $B4EC52)                                   ;B4EBC4
+    %AICMD0x09_StartScript($07, $B4EC6E)                                   ;B4EBC8
+    %AICMD0x09_StartScript($08, $B4EC83)                                   ;B4EBCC
+    %AICMD0x09_StartScript($09, $B4EC98)                                   ;B4EBD0
+    %AICMD0x09_StartScript($0A, $B4EC2F)                                   ;B4EBD4
+    %AICMD0x09_StartScript($0B, $B4EC3D)                                   ;B4EBD8
+    %AICMD0x09_StartScript($0C, $B4ECA6)                                   ;B4EBDC
     %AICMD0x06_SetDestinationArea(!AREA_ENDING13)              ;B4EBE0
-    %AICMD0x38()                                               ;B4EBE2
+    %AICMD0x38_WaitForFadeIn()                                               ;B4EBE2
     %AICMD0x01_UnfreezeTime()                                  ;B4EBE3
     %AICMD0x24_NextHourPalette($74)                            ;B4EBE4
     %AICMD0x13_Wait(180)                                       ;B4EBE6

@@ -58,7 +58,7 @@
   open_questions: "Czy nCurrentTimeID to dokladnie godzina czy indeks pory dnia - nazwa makra SetHour jest przypuszczeniem; z handlera wynika tylko zapis do nCurrentTimeID."
 
 - opcode: 0x04
-  macro: AICMD0x04_Emtpy
+  macro: AICMD0x04_Nop
   handler: fAIAction0x04_DoesNothing
   handler_addr: "848A58"
   suggested_name: Nop
@@ -132,7 +132,7 @@
   open_questions: null
 
 - opcode: 0x09
-  macro: AICMD0x09
+  macro: AICMD0x09_StartScript
   handler: fAIAction0x09
   handler_addr: "848B08"
   suggested_name: StartScript
@@ -148,7 +148,7 @@
   open_questions: "Znaczenie wszystkich pol slotu resetowanych w fAI_Unknown8488D4 (strcAIUnknown.unkXX) nie jest w pelni opisane; nie sprawdzono, co dzieje sie gdy slot docelowy jest juz aktywny (jest nadpisywany bez sprawdzenia)."
 
 - opcode: 0x0A
-  macro: AICMD0x0A
+  macro: AICMD0x0A_ScreenFadein
   handler: fAIAction0x0A
   handler_addr: "848B83"
   suggested_name: ScreenFadein
@@ -163,7 +163,7 @@
   open_questions: "Znaczenie bitu daily1 $8000 (prawdopodobnie 'ekran widoczny') - wiadomo tylko, ze fade-in go ustawia, a fade-out kasuje."
 
 - opcode: 0x0B
-  macro: AICMD0x0B
+  macro: AICMD0x0B_SetScriptFlag
   handler: fAIAction0x0B
   handler_addr: "848BAC"
   suggested_name: SetScriptFlag
@@ -178,7 +178,7 @@
   open_questions: "Brak symbolu RAM dla $7F:1F7A - warto dodac do ram.asm (np. nAIScriptFlags). Zakres n >15 daje odczyt poza tablica aAISetMask."
 
 - opcode: 0x0C
-  macro: AICMD0x0C
+  macro: AICMD0x0C_WaitForScriptFlag
   handler: fAIAction0x0C
   handler_addr: "848BDC"
   suggested_name: WaitForScriptFlag

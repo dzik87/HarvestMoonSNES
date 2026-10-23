@@ -14,7 +14,7 @@
   open_questions: "Do czego dokladnie sluzy wartosc $74 (wpis w aPalettes) - nie sprawdzono zawartosci tablicy. Nazwa pola nextHourIdx sugeruje palete 'nastepnej godziny', ale kod uzywa go tylko jako indeksu przy nCurrentTimeID < $12."
 
 - opcode: 0x25
-  macro: AICMD0x25
+  macro: AICMD0x25_RemoveActor
   handler: fAIAction0x25
   handler_addr: "849375"
   suggested_name: RemoveActor
@@ -29,7 +29,7 @@
   open_questions: "Wywolanie fObject_Unknown8581A2 zawiera znany blad (skok do fReturn_8580B8 zamiast RTL) - nie wplywa na komende. Nie sprawdzono, co dzieje sie z innymi polami slotu (nie sa zerowane)."
 
 - opcode: 0x26
-  macro: AICMD0x26
+  macro: AICMD0x26_ClearBitAs0x28
   handler: fAIAction0x28
   handler_addr: "8493C9"
   suggested_name: ClearBit
@@ -45,7 +45,7 @@
   open_questions: "Makro AICMD0x26 powinno emitowac db $26 (lub zostac usuniete/zrobione aliasem 0x28). Oryginalna gra najprawdopodobniej nie uzywa tego opkodu."
 
 - opcode: 0x27
-  macro: AICMD0x27
+  macro: AICMD0x27_ClearBitAs0x28
   handler: fAIAction0x28
   handler_addr: "8493C9"
   suggested_name: ClearBit
@@ -61,7 +61,7 @@
   open_questions: "Makro AICMD0x27 powinno emitowac db $27 (lub zostac usuniete). Oryginalna gra najprawdopodobniej nie uzywa tego opkodu."
 
 - opcode: 0x28
-  macro: AICMD0x28
+  macro: AICMD0x28_ClearBit
   handler: fAIAction0x28
   handler_addr: "8493C9"
   suggested_name: ClearBit
@@ -142,7 +142,7 @@
   open_questions: "Dokladne znaczenie reg114 vs reg115 (id dzwieku / kategoria) nie zostalo potwierdzone w kodzie SPC; sama funkcja (efekt dzwiekowy + czekanie) jest pewna. Nie wiadomo, dlaczego po dzwieku odtwarzany jest dzwiek narzedzia (prawdopodobnie reset stanu strcAudio.toolId)."
 
 - opcode: 0x2D
-  macro: AICMD0x2D
+  macro: AICMD0x2D_JumpOnInteract
   handler: fAIAction0x2D
   handler_addr: "849633"
   suggested_name: JumpOnInteract
@@ -218,7 +218,7 @@
   open_questions: "Procedura ma ok. 1900 linii i nie zostala przesledzona w calosci: niepewne dokladne znaczenie poszczegolnych flag dnia daily1, bitow danych krowy i wartosci +$0E ($C2,$E0,$E1). Opis obejmuje tylko glowne sciezki, stad probable."
 
 - opcode: 0x32
-  macro: AICMD0x32
+  macro: AICMD0x32_SetValue16
   handler: fAIAction0x32
   handler_addr: "84A90F"
   suggested_name: SetValue16

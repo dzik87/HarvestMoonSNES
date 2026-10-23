@@ -27,7 +27,7 @@
   open_questions: "Dokladna semantyka fObject_Unknown8581A2 (np. sciezka z strcObject.bankAddress != 0 skacze do innego RTL - komentarz w kodzie wskazuje na bug) oraz to, jaki typ obiektu jest w slocie +0x12 (sprite NPC/zwierzecia)."
 
 - opcode: 0x38
-  macro: AICMD0x38
+  macro: AICMD0x38_WaitForFadeIn
   handler: fAIAction0x38
   handler_addr: "84B365"
   suggested_name: WaitForFadeIn

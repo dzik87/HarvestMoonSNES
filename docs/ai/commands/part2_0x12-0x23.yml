@@ -81,7 +81,7 @@
   open_questions: "Przypadek brzegowy: nMax = $FF daje nMax+1 = 0 i skok nigdy sie nie wykona (bledny wynik). W skryptach nie zaobserwowano tego uzycia."
 
 - opcode: 0x17
-  macro: AICMD0x17
+  macro: AICMD0x17_RollRandom
   handler: fAIAction0x17
   handler_addr: "848E68"
   suggested_name: RollRandom
@@ -96,7 +96,7 @@
   open_questions: "Komentarz przy fCore_GetRandomNumber mowi 0x00-nMax, ale z kodu (petla konczy sie na X == nMax-1) wynika zakres 0..nMax-1; zgodne z uzyciem w skryptach (0x17($02) + 0x18($00)/0x18($01)). Dziedzina innych uzytkownikow pola +$0D nieustalona."
 
 - opcode: 0x18
-  macro: AICMD0x18
+  macro: AICMD0x18_JumpIfRandomEquals
   handler: fAIAction0x18
   handler_addr: "848E90"
   suggested_name: JumpIfRandomEquals
