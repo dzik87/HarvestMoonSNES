@@ -8,7 +8,8 @@ Uzycie:
 Lokalizacja asara (kolejnosc): --asar, zmienna ASAR, tools/bin/asar(.exe), PATH.
 
 Plik wyjsciowy jest tworzony od zera jako 2 MB zer (rozmiar kartridza), a asar
-nanosi na niego kod i dane. Dzieki temu wynik nie zalezy od poprzedniego buildu,
+nanosi na niego kod i dane (--no-title-check, bo pusty plik nie ma naglowka;
+--fix-checksum=off, bo suma kontrolna pochodzi z naglowka w zrodlach). Dzieki temu wynik nie zalezy od poprzedniego buildu,
 a nieuzywane banki BC-BF maja deterministyczne wypelnienie zerami (jak w oryginale).
 """
 import argparse
@@ -53,7 +54,7 @@ def main() -> int:
     cmd = [asar]
     if args.verbose:
         cmd.append("-v")
-    cmd += ["-werror", MAIN[args.region], str(out)]
+    cmd += ["-werror", "--no-title-check", "--fix-checksum=off", MAIN[args.region], str(out)]
     print("+", " ".join(cmd))
     rc = subprocess.run(cmd, cwd=ROOT).returncode
     if rc != 0:
