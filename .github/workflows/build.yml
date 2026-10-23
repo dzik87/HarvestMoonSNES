@@ -25,15 +25,30 @@ jobs:
       - name: Build asar from source
         if: steps.cache-asar.outputs.cache-hit != 'true'
         run: |
-          git clone --depth 1 --branch "$ASAR_TAG" https://github.com/RPGHacker/asar "$RUNNER_TEMP/asar"
-          cmake -S "$RUNNER_TEMP/asar/src" -B "$RUNNER_TEMP/asar/build" \
-                -DCMAKE_BUILD_TYPE=Release -DASAR_GEN_DLL=OFF -DASAR_GEN_LIB=OFF
-          cmake --build "$RUNNER_TEMP/asar/build" --config Release --parallel
-          BIN=$(find "$RUNNER_TEMP/asar/build" -type f -name asar -perm -u+x | head -n1)
-          test -n "$BIN" || { echo "nie znaleziono binarki asar"; exit 1; }
-          mkdir -p tools/bin
-          cp "$BIN" tools/bin/asar
-          chmod +x tools/bin/asar
+          set -o pipefail
+          {
+            git clone --depth 1 --branch "$ASAR_TAG" https://github.com/RPGHacker/asar "$RUNNER_TEMP/asar"
+            cmake -S "$RUNNER_TEMP/asar/src" -B "$RUNNER_TEMP/asar/build" \
+                  -DCMAKE_BUILD_TYPE=Release \
+                  -DASAR_GEN_EXE=ON -DASAR_GEN_DLL=OFF -DASAR_GEN_LIB=OFF \
+                  -DASAR_GEN_EXE_TEST=OFF -DASAR_GEN_DLL_TEST=OFF
+            cmake --build "$RUNNER_TEMP/asar/build" --target asar-standalone --parallel
+            BIN=$(find "$RUNNER_TEMP/asar/build" -type f -name asar -perm -u+x | head -n1)
+            test -n "$BIN" || { echo "nie znaleziono binarki asar"; find "$RUNNER_TEMP/asar/build" -maxdepth 3 | head -40; exit 1; }
+            mkdir -p tools/bin
+            cp "$BIN" tools/bin/asar
+            chmod +x tools/bin/asar
+          } 2>&1 | tee asar-build.log
+
+      - name: Asar build log (on failure)
+        if: failure()
+        run: |
+          {
+            echo "### Błąd budowy asara"
+            echo '```'
+            tail -n 40 asar-build.log || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Build and verify (US)
         run: python3 tools/build.py --region US -v | tee build-us.log
