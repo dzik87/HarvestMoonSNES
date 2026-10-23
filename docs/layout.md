@@ -13,7 +13,7 @@ Mapowanie: LoROM, 64 banki po 32 KB ($80–$BF). Nagłówek i wektory: `src/code
 | $A8–$A9 | palety | `src/data/gfx/palettes/` |
 | $AA–$AC | dialogi JP (puste w US/EU/DE) | `src/data/dialogs/jp/` |
 | $AD–$B2 | audio (zawartość wygląda na program i dane SPC700 — do potwierdzenia) | `src/data/audio/` |
-| $B3–$B5 | skrypty AI | `src/ai/<region>/` |
+| $B3–$B5 | skrypty AI (US: jeden plik na skrypt, `src/ai/us/scripts/`) | `src/ai/<region>/` |
 | $B6–$BB | dialogi US/EU/DE | `src/data/dialogs/<region>/` |
 | $BC–$BF | nieużywane (zera) | — |
 

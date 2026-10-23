@@ -80,9 +80,7 @@
     
     ; AI
     incsrc "ai/commands.asm"
-    incsrc "ai/us/bank_B3.asm"
-    incsrc "ai/us/bank_B4.asm"
-    incsrc "ai/us/bank_B5.asm"
+    incsrc "ai/us/scripts.asm"
     
     ; US/EU/DE dialogs
     incsrc "data/dialogs/macros.asm"
