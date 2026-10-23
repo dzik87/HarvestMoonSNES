@@ -44,7 +44,7 @@ pAIScripting0x43_L004:
     %AICMD0x12_Jump(pAIScripting0x43_L006)                                   ;B58084
 pAIScripting0x43_L005:
     %AICMD0x14_JumpIfFlagSet(strcFlags.daily3, $0B, pAIScripting0x43_L060)   ;B58087
-    %AICMD0x2D(pAIScripting0x43_L016, pAIScripting0x43_L007)                               ;B5808E
+    %AICMD0x2D_JumpOnInteract(pAIScripting0x43_L016, pAIScripting0x43_L007)                               ;B5808E
     %AICMD0x12_Jump(pAIScripting0x43_L005)                                   ;B58093
 pAIScripting0x43_L006:
     %AICMD0x1F(pAIScripting0x43_L061)                                        ;B58096
@@ -114,11 +114,11 @@ pAIScripting0x43_L016:
     %AICMD0x45_JumpIfBetween16(nSecondChildAge, 40, 59, pAIScripting0x43_L030);B581D7
     %AICMD0x43_JumpIfEqual16(nFirstChildAge, 90, pAIScripting0x43_L032)      ;B581E1
     %AICMD0x43_JumpIfEqual16(nSecondChildAge, 90, pAIScripting0x43_L032)     ;B581E9
-    %AICMD0x55(strcFlags.event1, $07, pAIScripting0x43_L017)                 ;B581F1
-    %AICMD0x55(strcFlags.event2, $0A, pAIScripting0x43_L023)                 ;B581F8
-    %AICMD0x55(strcFlags.event2, $0B, pAIScripting0x43_L023)                 ;B581FF
-    %AICMD0x55(strcFlags.event2, $0C, pAIScripting0x43_L023)                 ;B58206
-    %AICMD0x55(strcFlags.event2, $09, pAIScripting0x43_L024)                 ;B5820D
+    %AICMD0x55_JumpIfFlagNotSet(strcFlags.event1, $07, pAIScripting0x43_L017)                 ;B581F1
+    %AICMD0x55_JumpIfFlagNotSet(strcFlags.event2, $0A, pAIScripting0x43_L023)                 ;B581F8
+    %AICMD0x55_JumpIfFlagNotSet(strcFlags.event2, $0B, pAIScripting0x43_L023)                 ;B581FF
+    %AICMD0x55_JumpIfFlagNotSet(strcFlags.event2, $0C, pAIScripting0x43_L023)                 ;B58206
+    %AICMD0x55_JumpIfFlagNotSet(strcFlags.event2, $09, pAIScripting0x43_L024)                 ;B5820D
 pAIScripting0x43_L017:
     %AICMD0x15_JumpIfEquals8(nCurrentWeekdayID, 0, pAIScripting0x43_L040)    ;B58214
     %AICMD0x15_JumpIfEquals8(nCurrentWeekdayID, 6, pAIScripting0x43_L039)    ;B5821B
@@ -159,25 +159,25 @@ pAIScripting0x43_L025:
     %AICMD0x1C_ShowDialog($01A2, $00)                          ;B582BF
     %AICMD0x12_Jump(pAIScripting0x43_L005)                                   ;B582C3
 pAIScripting0x43_L026:
-    %AICMD0x17($02)                                            ;B582C6
-    %AICMD0x18($00, pAIScripting0x43_L017)                                   ;B582C8
-    %AICMD0x18($01, pAIScripting0x43_L027)                                   ;B582CC
+    %AICMD0x17_RollRandom($02)                                            ;B582C6
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L017)                                   ;B582C8
+    %AICMD0x18_JumpIfRandomEquals($01, pAIScripting0x43_L027)                                   ;B582CC
     %AICMD0x12_Jump(pAIScripting0x43_L005)                                   ;B582D0
 pAIScripting0x43_L027:
     %AICMD0x1C_ShowDialog($01A3, $00)                          ;B582D3
     %AICMD0x12_Jump(pAIScripting0x43_L005)                                   ;B582D7
 pAIScripting0x43_L028:
-    %AICMD0x17($02)                                            ;B582DA
-    %AICMD0x18($00, pAIScripting0x43_L017)                                   ;B582DC
-    %AICMD0x18($01, pAIScripting0x43_L029)                                   ;B582E0
+    %AICMD0x17_RollRandom($02)                                            ;B582DA
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L017)                                   ;B582DC
+    %AICMD0x18_JumpIfRandomEquals($01, pAIScripting0x43_L029)                                   ;B582E0
     %AICMD0x12_Jump(pAIScripting0x43_L005)                                   ;B582E4
 pAIScripting0x43_L029:
     %AICMD0x1C_ShowDialog($01A4, $00)                          ;B582E7
     %AICMD0x12_Jump(pAIScripting0x43_L005)                                   ;B582EB
 pAIScripting0x43_L030:
-    %AICMD0x17($02)                                            ;B582EE
-    %AICMD0x18($00, pAIScripting0x43_L017)                                   ;B582F0
-    %AICMD0x18($01, pAIScripting0x43_L031)                                   ;B582F4
+    %AICMD0x17_RollRandom($02)                                            ;B582EE
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L017)                                   ;B582F0
+    %AICMD0x18_JumpIfRandomEquals($01, pAIScripting0x43_L031)                                   ;B582F4
 pAIScripting0x43_L031:
     %AICMD0x1C_ShowDialog($01A5, $00)                          ;B582F8
     %AICMD0x12_Jump(pAIScripting0x43_L005)                                   ;B582FC
@@ -191,8 +191,8 @@ pAIScripting0x43_L034:
     %AICMD0x1C_ShowDialog($0484, $00)                          ;B5830D
     %AICMD0x12_Jump(pAIScripting0x43_L005)                                   ;B58311
 pAIScripting0x43_L035:
-    %AICMD0x17($02)                                            ;B58314
-    %AICMD0x18($00, pAIScripting0x43_L036)                                   ;B58316
+    %AICMD0x17_RollRandom($02)                                            ;B58314
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L036)                                   ;B58316
     %AICMD0x1C_ShowDialog($0482, $00)                          ;B5831A
     %AICMD0x12_Jump(pAIScripting0x43_L005)                                   ;B5831E
 pAIScripting0x43_L036:
@@ -216,8 +216,8 @@ pAIScripting0x43_L041:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 22, pAIScripting0x43_L042)         ;B58352
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 23, pAIScripting0x43_L054)         ;B58359
     %AICMD0x14_JumpIfFlagSet($800196, $01, pAIScripting0x43_L055)            ;B58360
-    %AICMD0x17($02)                                            ;B58367
-    %AICMD0x18($00, pAIScripting0x43_L018)                                   ;B58369
+    %AICMD0x17_RollRandom($02)                                            ;B58367
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L018)                                   ;B58369
     %AICMD0x1C_ShowDialog($0182, $00)                          ;B5836D
     %AICMD0x12_Jump(pAIScripting0x43_L005)                                   ;B58371
 pAIScripting0x43_L042:
@@ -225,10 +225,10 @@ pAIScripting0x43_L042:
     %AICMD0x12_Jump(pAIScripting0x43_L005)                                   ;B58378
 pAIScripting0x43_L043:
     %AICMD0x14_JumpIfFlagSet($800196, $01, pAIScripting0x43_L055)            ;B5837B
-    %AICMD0x17($04)                                            ;B58382
-    %AICMD0x18($00, pAIScripting0x43_L044)                                   ;B58384
-    %AICMD0x18($01, pAIScripting0x43_L045)                                   ;B58388
-    %AICMD0x18($02, pAIScripting0x43_L018)                                   ;B5838C
+    %AICMD0x17_RollRandom($04)                                            ;B58382
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L044)                                   ;B58384
+    %AICMD0x18_JumpIfRandomEquals($01, pAIScripting0x43_L045)                                   ;B58388
+    %AICMD0x18_JumpIfRandomEquals($02, pAIScripting0x43_L018)                                   ;B5838C
     %AICMD0x1C_ShowDialog($0427, $00)                          ;B58390
     %AICMD0x12_Jump(pAIScripting0x43_L005)                                   ;B58394
 pAIScripting0x43_L044:
@@ -242,8 +242,8 @@ pAIScripting0x43_L046:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 12, pAIScripting0x43_L054)         ;B583AC
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 20, pAIScripting0x43_L054)         ;B583B3
     %AICMD0x14_JumpIfFlagSet($800196, $01, pAIScripting0x43_L055)            ;B583BA
-    %AICMD0x17($02)                                            ;B583C1
-    %AICMD0x18($00, pAIScripting0x43_L018)                                   ;B583C3
+    %AICMD0x17_RollRandom($02)                                            ;B583C1
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L018)                                   ;B583C3
     %AICMD0x1C_ShowDialog($018D, $00)                          ;B583C7
     %AICMD0x12_Jump(pAIScripting0x43_L005)                                   ;B583CB
 pAIScripting0x43_L047:
@@ -255,8 +255,8 @@ pAIScripting0x43_L048:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, pAIScripting0x43_L053)         ;B583E3
     %AICMD0x14_JumpIfFlagSet($800196, $03, pAIScripting0x43_L056)            ;B583EA
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 15, 17, pAIScripting0x43_L058) ;B583F1
-    %AICMD0x17($02)                                            ;B583F9
-    %AICMD0x18($00, pAIScripting0x43_L018)                                   ;B583FB
+    %AICMD0x17_RollRandom($02)                                            ;B583F9
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L018)                                   ;B583FB
     %AICMD0x1C_ShowDialog($042F, $00)                          ;B583FF
     %AICMD0x12_Jump(pAIScripting0x43_L005)                                   ;B58403
 pAIScripting0x43_L049:
@@ -358,7 +358,7 @@ pAIScripting0x43_L066:
     %AICMD0x12_Jump(pAIScripting0x43_L068)                                   ;B5853E
 pAIScripting0x43_L067:
     %AICMD0x14_JumpIfFlagSet(strcFlags.daily3, $0B, pAIScripting0x43_L122)   ;B58541
-    %AICMD0x2D(pAIScripting0x43_L078, pAIScripting0x43_L069)                               ;B58548
+    %AICMD0x2D_JumpOnInteract(pAIScripting0x43_L078, pAIScripting0x43_L069)                               ;B58548
     %AICMD0x12_Jump(pAIScripting0x43_L067)                                   ;B5854D
 pAIScripting0x43_L068:
     %AICMD0x1F(pAIScripting0x43_L123)                                        ;B58550
@@ -427,11 +427,11 @@ pAIScripting0x43_L078:
     %AICMD0x45_JumpIfBetween16(nSecondChildAge, 40, 59, pAIScripting0x43_L092);B5868A
     %AICMD0x43_JumpIfEqual16(nFirstChildAge, 90, pAIScripting0x43_L094)      ;B58694
     %AICMD0x43_JumpIfEqual16(nSecondChildAge, 90, pAIScripting0x43_L094)     ;B5869C
-    %AICMD0x55(strcFlags.event1, $07, pAIScripting0x43_L079)                 ;B586A4
-    %AICMD0x55(strcFlags.event2, $0A, pAIScripting0x43_L085)                 ;B586AB
-    %AICMD0x55(strcFlags.event2, $0B, pAIScripting0x43_L085)                 ;B586B2
-    %AICMD0x55(strcFlags.event2, $0C, pAIScripting0x43_L085)                 ;B586B9
-    %AICMD0x55(strcFlags.event2, $09, pAIScripting0x43_L086)                 ;B586C0
+    %AICMD0x55_JumpIfFlagNotSet(strcFlags.event1, $07, pAIScripting0x43_L079)                 ;B586A4
+    %AICMD0x55_JumpIfFlagNotSet(strcFlags.event2, $0A, pAIScripting0x43_L085)                 ;B586AB
+    %AICMD0x55_JumpIfFlagNotSet(strcFlags.event2, $0B, pAIScripting0x43_L085)                 ;B586B2
+    %AICMD0x55_JumpIfFlagNotSet(strcFlags.event2, $0C, pAIScripting0x43_L085)                 ;B586B9
+    %AICMD0x55_JumpIfFlagNotSet(strcFlags.event2, $09, pAIScripting0x43_L086)                 ;B586C0
 pAIScripting0x43_L079:
     %AICMD0x15_JumpIfEquals8(nCurrentWeekdayID, 0, pAIScripting0x43_L102)    ;B586C7
     %AICMD0x15_JumpIfEquals8(nCurrentWeekdayID, 6, pAIScripting0x43_L101)    ;B586CE
@@ -472,25 +472,25 @@ pAIScripting0x43_L087:
     %AICMD0x1C_ShowDialog($01A2, $00)                          ;B58772
     %AICMD0x12_Jump(pAIScripting0x43_L067)                                   ;B58776
 pAIScripting0x43_L088:
-    %AICMD0x17($02)                                            ;B58779
-    %AICMD0x18($00, pAIScripting0x43_L079)                                   ;B5877B
-    %AICMD0x18($01, pAIScripting0x43_L089)                                   ;B5877F
+    %AICMD0x17_RollRandom($02)                                            ;B58779
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L079)                                   ;B5877B
+    %AICMD0x18_JumpIfRandomEquals($01, pAIScripting0x43_L089)                                   ;B5877F
     %AICMD0x12_Jump(pAIScripting0x43_L067)                                   ;B58783
 pAIScripting0x43_L089:
     %AICMD0x1C_ShowDialog($01A4, $00)                          ;B58786
     %AICMD0x12_Jump(pAIScripting0x43_L067)                                   ;B5878A
 pAIScripting0x43_L090:
-    %AICMD0x17($02)                                            ;B5878D
-    %AICMD0x18($00, pAIScripting0x43_L079)                                   ;B5878F
-    %AICMD0x18($01, pAIScripting0x43_L091)                                   ;B58793
+    %AICMD0x17_RollRandom($02)                                            ;B5878D
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L079)                                   ;B5878F
+    %AICMD0x18_JumpIfRandomEquals($01, pAIScripting0x43_L091)                                   ;B58793
     %AICMD0x12_Jump(pAIScripting0x43_L067)                                   ;B58797
 pAIScripting0x43_L091:
     %AICMD0x1C_ShowDialog($01A6, $00)                          ;B5879A
     %AICMD0x12_Jump(pAIScripting0x43_L067)                                   ;B5879E
 pAIScripting0x43_L092:
-    %AICMD0x17($02)                                            ;B587A1
-    %AICMD0x18($00, pAIScripting0x43_L079)                                   ;B587A3
-    %AICMD0x18($01, pAIScripting0x43_L093)                                   ;B587A7
+    %AICMD0x17_RollRandom($02)                                            ;B587A1
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L079)                                   ;B587A3
+    %AICMD0x18_JumpIfRandomEquals($01, pAIScripting0x43_L093)                                   ;B587A7
     %AICMD0x12_Jump(pAIScripting0x43_L067)                                   ;B587AB
 pAIScripting0x43_L093:
     %AICMD0x1C_ShowDialog($01A7, $00)                          ;B587AE
@@ -505,8 +505,8 @@ pAIScripting0x43_L096:
     %AICMD0x1C_ShowDialog($0484, $00)                          ;B587C3
     %AICMD0x12_Jump(pAIScripting0x43_L067)                                   ;B587C7
 pAIScripting0x43_L097:
-    %AICMD0x17($02)                                            ;B587CA
-    %AICMD0x18($00, pAIScripting0x43_L098)                                   ;B587CC
+    %AICMD0x17_RollRandom($02)                                            ;B587CA
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L098)                                   ;B587CC
     %AICMD0x1C_ShowDialog($0482, $00)                          ;B587D0
     %AICMD0x12_Jump(pAIScripting0x43_L067)                                   ;B587D4
 pAIScripting0x43_L098:
@@ -530,8 +530,8 @@ pAIScripting0x43_L103:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 22, pAIScripting0x43_L104)         ;B58808
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 23, pAIScripting0x43_L116)         ;B5880F
     %AICMD0x14_JumpIfFlagSet($800196, $01, pAIScripting0x43_L117)            ;B58816
-    %AICMD0x17($02)                                            ;B5881D
-    %AICMD0x18($00, pAIScripting0x43_L080)                                   ;B5881F
+    %AICMD0x17_RollRandom($02)                                            ;B5881D
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L080)                                   ;B5881F
     %AICMD0x1C_ShowDialog($0182, $00)                          ;B58823
     %AICMD0x12_Jump(pAIScripting0x43_L067)                                   ;B58827
 pAIScripting0x43_L104:
@@ -539,10 +539,10 @@ pAIScripting0x43_L104:
     %AICMD0x12_Jump(pAIScripting0x43_L067)                                   ;B5882E
 pAIScripting0x43_L105:
     %AICMD0x14_JumpIfFlagSet($800196, $01, pAIScripting0x43_L117)            ;B58831
-    %AICMD0x17($04)                                            ;B58838
-    %AICMD0x18($00, pAIScripting0x43_L106)                                   ;B5883A
-    %AICMD0x18($01, pAIScripting0x43_L107)                                   ;B5883E
-    %AICMD0x18($02, pAIScripting0x43_L080)                                   ;B58842
+    %AICMD0x17_RollRandom($04)                                            ;B58838
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L106)                                   ;B5883A
+    %AICMD0x18_JumpIfRandomEquals($01, pAIScripting0x43_L107)                                   ;B5883E
+    %AICMD0x18_JumpIfRandomEquals($02, pAIScripting0x43_L080)                                   ;B58842
     %AICMD0x1C_ShowDialog($0422, $00)                          ;B58846
     %AICMD0x12_Jump(pAIScripting0x43_L067)                                   ;B5884A
 pAIScripting0x43_L106:
@@ -556,8 +556,8 @@ pAIScripting0x43_L108:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 12, pAIScripting0x43_L116)         ;B58862
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 20, pAIScripting0x43_L116)         ;B58869
     %AICMD0x14_JumpIfFlagSet($800196, $01, pAIScripting0x43_L117)            ;B58870
-    %AICMD0x17($02)                                            ;B58877
-    %AICMD0x18($00, pAIScripting0x43_L080)                                   ;B58879
+    %AICMD0x17_RollRandom($02)                                            ;B58877
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L080)                                   ;B58879
     %AICMD0x1C_ShowDialog($0423, $00)                          ;B5887D
     %AICMD0x12_Jump(pAIScripting0x43_L067)                                   ;B58881
 pAIScripting0x43_L109:
@@ -569,8 +569,8 @@ pAIScripting0x43_L110:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, pAIScripting0x43_L115)         ;B58899
     %AICMD0x14_JumpIfFlagSet($800196, $03, pAIScripting0x43_L118)            ;B588A0
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 15, 17, pAIScripting0x43_L121) ;B588A7
-    %AICMD0x17($02)                                            ;B588AF
-    %AICMD0x18($00, pAIScripting0x43_L080)                                   ;B588B1
+    %AICMD0x17_RollRandom($02)                                            ;B588AF
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L080)                                   ;B588B1
     %AICMD0x1C_ShowDialog($042D, $00)                          ;B588B5
     %AICMD0x12_Jump(pAIScripting0x43_L067)                                   ;B588B9
 pAIScripting0x43_L111:
@@ -672,7 +672,7 @@ pAIScripting0x43_L128:
     %AICMD0x12_Jump(pAIScripting0x43_L130)                                   ;B589F4
 pAIScripting0x43_L129:
     %AICMD0x14_JumpIfFlagSet(strcFlags.daily3, $0B, pAIScripting0x43_L184)   ;B589F7
-    %AICMD0x2D(pAIScripting0x43_L140, pAIScripting0x43_L131)                               ;B589FE
+    %AICMD0x2D_JumpOnInteract(pAIScripting0x43_L140, pAIScripting0x43_L131)                               ;B589FE
     %AICMD0x12_Jump(pAIScripting0x43_L129)                                   ;B58A03
 pAIScripting0x43_L130:
     %AICMD0x1F(pAIScripting0x43_L185)                                        ;B58A06
@@ -741,11 +741,11 @@ pAIScripting0x43_L140:
     %AICMD0x45_JumpIfBetween16(nSecondChildAge, 40, 59, pAIScripting0x43_L154);B58B40
     %AICMD0x43_JumpIfEqual16(nFirstChildAge, 90, pAIScripting0x43_L156)      ;B58B4A
     %AICMD0x43_JumpIfEqual16(nSecondChildAge, 90, pAIScripting0x43_L156)     ;B58B52
-    %AICMD0x55(strcFlags.event1, $07, pAIScripting0x43_L141)                 ;B58B5A
-    %AICMD0x55(strcFlags.event2, $0A, pAIScripting0x43_L147)                 ;B58B61
-    %AICMD0x55(strcFlags.event2, $0B, pAIScripting0x43_L147)                 ;B58B68
-    %AICMD0x55(strcFlags.event2, $0C, pAIScripting0x43_L147)                 ;B58B6F
-    %AICMD0x55(strcFlags.event2, $09, pAIScripting0x43_L148)                 ;B58B76
+    %AICMD0x55_JumpIfFlagNotSet(strcFlags.event1, $07, pAIScripting0x43_L141)                 ;B58B5A
+    %AICMD0x55_JumpIfFlagNotSet(strcFlags.event2, $0A, pAIScripting0x43_L147)                 ;B58B61
+    %AICMD0x55_JumpIfFlagNotSet(strcFlags.event2, $0B, pAIScripting0x43_L147)                 ;B58B68
+    %AICMD0x55_JumpIfFlagNotSet(strcFlags.event2, $0C, pAIScripting0x43_L147)                 ;B58B6F
+    %AICMD0x55_JumpIfFlagNotSet(strcFlags.event2, $09, pAIScripting0x43_L148)                 ;B58B76
 pAIScripting0x43_L141:
     %AICMD0x15_JumpIfEquals8(nCurrentWeekdayID, 0, pAIScripting0x43_L164)    ;B58B7D
     %AICMD0x15_JumpIfEquals8(nCurrentWeekdayID, 6, pAIScripting0x43_L163)    ;B58B84
@@ -787,25 +787,25 @@ pAIScripting0x43_L149:
     %AICMD0x1C_ShowDialog($01A2, $00)                          ;B58C30
     %AICMD0x12_Jump(pAIScripting0x43_L129)                                   ;B58C34
 pAIScripting0x43_L150:
-    %AICMD0x17($02)                                            ;B58C37
-    %AICMD0x18($00, pAIScripting0x43_L141)                                   ;B58C39
-    %AICMD0x18($01, pAIScripting0x43_L151)                                   ;B58C3D
+    %AICMD0x17_RollRandom($02)                                            ;B58C37
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L141)                                   ;B58C39
+    %AICMD0x18_JumpIfRandomEquals($01, pAIScripting0x43_L151)                                   ;B58C3D
     %AICMD0x12_Jump(pAIScripting0x43_L129)                                   ;B58C41
 pAIScripting0x43_L151:
     %AICMD0x1C_ShowDialog($01A4, $00)                          ;B58C44
     %AICMD0x12_Jump(pAIScripting0x43_L129)                                   ;B58C48
 pAIScripting0x43_L152:
-    %AICMD0x17($02)                                            ;B58C4B
-    %AICMD0x18($00, pAIScripting0x43_L141)                                   ;B58C4D
-    %AICMD0x18($01, pAIScripting0x43_L153)                                   ;B58C51
+    %AICMD0x17_RollRandom($02)                                            ;B58C4B
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L141)                                   ;B58C4D
+    %AICMD0x18_JumpIfRandomEquals($01, pAIScripting0x43_L153)                                   ;B58C51
     %AICMD0x12_Jump(pAIScripting0x43_L129)                                   ;B58C55
 pAIScripting0x43_L153:
     %AICMD0x1C_ShowDialog($01A6, $00)                          ;B58C58
     %AICMD0x12_Jump(pAIScripting0x43_L129)                                   ;B58C5C
 pAIScripting0x43_L154:
-    %AICMD0x17($02)                                            ;B58C5F
-    %AICMD0x18($00, pAIScripting0x43_L141)                                   ;B58C61
-    %AICMD0x18($01, pAIScripting0x43_L155)                                   ;B58C65
+    %AICMD0x17_RollRandom($02)                                            ;B58C5F
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L141)                                   ;B58C61
+    %AICMD0x18_JumpIfRandomEquals($01, pAIScripting0x43_L155)                                   ;B58C65
     %AICMD0x12_Jump(pAIScripting0x43_L129)                                   ;B58C69
 pAIScripting0x43_L155:
     %AICMD0x1C_ShowDialog($01A8, $00)                          ;B58C6C
@@ -820,8 +820,8 @@ pAIScripting0x43_L158:
     %AICMD0x1C_ShowDialog($0484, $00)                          ;B58C81
     %AICMD0x12_Jump(pAIScripting0x43_L129)                                   ;B58C85
 pAIScripting0x43_L159:
-    %AICMD0x17($02)                                            ;B58C88
-    %AICMD0x18($00, pAIScripting0x43_L160)                                   ;B58C8A
+    %AICMD0x17_RollRandom($02)                                            ;B58C88
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L160)                                   ;B58C8A
     %AICMD0x1C_ShowDialog($0482, $00)                          ;B58C8E
     %AICMD0x12_Jump(pAIScripting0x43_L129)                                   ;B58C92
 pAIScripting0x43_L160:
@@ -845,8 +845,8 @@ pAIScripting0x43_L165:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 22, pAIScripting0x43_L166)         ;B58CC6
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 23, pAIScripting0x43_L178)         ;B58CCD
     %AICMD0x14_JumpIfFlagSet($800196, $01, pAIScripting0x43_L180)            ;B58CD4
-    %AICMD0x17($02)                                            ;B58CDB
-    %AICMD0x18($00, pAIScripting0x43_L142)                                   ;B58CDD
+    %AICMD0x17_RollRandom($02)                                            ;B58CDB
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L142)                                   ;B58CDD
     %AICMD0x1C_ShowDialog($0424, $00)                          ;B58CE1
     %AICMD0x12_Jump(pAIScripting0x43_L129)                                   ;B58CE5
 pAIScripting0x43_L166:
@@ -854,10 +854,10 @@ pAIScripting0x43_L166:
     %AICMD0x12_Jump(pAIScripting0x43_L129)                                   ;B58CEC
 pAIScripting0x43_L167:
     %AICMD0x14_JumpIfFlagSet($800196, $01, pAIScripting0x43_L180)            ;B58CEF
-    %AICMD0x17($04)                                            ;B58CF6
-    %AICMD0x18($00, pAIScripting0x43_L168)                                   ;B58CF8
-    %AICMD0x18($01, pAIScripting0x43_L169)                                   ;B58CFC
-    %AICMD0x18($02, pAIScripting0x43_L142)                                   ;B58D00
+    %AICMD0x17_RollRandom($04)                                            ;B58CF6
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L168)                                   ;B58CF8
+    %AICMD0x18_JumpIfRandomEquals($01, pAIScripting0x43_L169)                                   ;B58CFC
+    %AICMD0x18_JumpIfRandomEquals($02, pAIScripting0x43_L142)                                   ;B58D00
     %AICMD0x1C_ShowDialog($0425, $00)                          ;B58D04
     %AICMD0x12_Jump(pAIScripting0x43_L129)                                   ;B58D08
 pAIScripting0x43_L168:
@@ -871,8 +871,8 @@ pAIScripting0x43_L170:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 12, pAIScripting0x43_L178)         ;B58D20
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 20, pAIScripting0x43_L178)         ;B58D27
     %AICMD0x14_JumpIfFlagSet($800196, $01, pAIScripting0x43_L180)            ;B58D2E
-    %AICMD0x17($02)                                            ;B58D35
-    %AICMD0x18($00, pAIScripting0x43_L142)                                   ;B58D37
+    %AICMD0x17_RollRandom($02)                                            ;B58D35
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L142)                                   ;B58D37
     %AICMD0x1C_ShowDialog($0423, $00)                          ;B58D3B
     %AICMD0x12_Jump(pAIScripting0x43_L129)                                   ;B58D3F
 pAIScripting0x43_L171:
@@ -884,8 +884,8 @@ pAIScripting0x43_L172:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, pAIScripting0x43_L177)         ;B58D57
     %AICMD0x14_JumpIfFlagSet($800196, $03, pAIScripting0x43_L181)            ;B58D5E
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 15, 17, pAIScripting0x43_L182) ;B58D65
-    %AICMD0x17($02)                                            ;B58D6D
-    %AICMD0x18($00, pAIScripting0x43_L142)                                   ;B58D6F
+    %AICMD0x17_RollRandom($02)                                            ;B58D6D
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L142)                                   ;B58D6F
     %AICMD0x1C_ShowDialog($042F, $00)                          ;B58D73
     %AICMD0x12_Jump(pAIScripting0x43_L129)                                   ;B58D77
 pAIScripting0x43_L173:
@@ -987,7 +987,7 @@ pAIScripting0x43_L190:
     %AICMD0x12_Jump(pAIScripting0x43_L192)                                   ;B58EB2
 pAIScripting0x43_L191:
     %AICMD0x14_JumpIfFlagSet(strcFlags.daily3, $0B, pAIScripting0x43_L247)   ;B58EB5
-    %AICMD0x2D(pAIScripting0x43_L203, pAIScripting0x43_L193)                               ;B58EBC
+    %AICMD0x2D_JumpOnInteract(pAIScripting0x43_L203, pAIScripting0x43_L193)                               ;B58EBC
     %AICMD0x12_Jump(pAIScripting0x43_L191)                                   ;B58EC1
 pAIScripting0x43_L192:
     %AICMD0x1F(pAIScripting0x43_L248)                                        ;B58EC4
@@ -1060,11 +1060,11 @@ pAIScripting0x43_L203:
     %AICMD0x45_JumpIfBetween16(nSecondChildAge, 40, 59, pAIScripting0x43_L217);B5900D
     %AICMD0x43_JumpIfEqual16(nFirstChildAge, 90, pAIScripting0x43_L219)      ;B59017
     %AICMD0x43_JumpIfEqual16(nSecondChildAge, 90, pAIScripting0x43_L219)     ;B5901F
-    %AICMD0x55(strcFlags.event1, $07, pAIScripting0x43_L204)                 ;B59027
-    %AICMD0x55(strcFlags.event2, $0A, pAIScripting0x43_L210)                 ;B5902E
-    %AICMD0x55(strcFlags.event2, $0B, pAIScripting0x43_L210)                 ;B59035
-    %AICMD0x55(strcFlags.event2, $0C, pAIScripting0x43_L210)                 ;B5903C
-    %AICMD0x55(strcFlags.event2, $09, pAIScripting0x43_L211)                 ;B59043
+    %AICMD0x55_JumpIfFlagNotSet(strcFlags.event1, $07, pAIScripting0x43_L204)                 ;B59027
+    %AICMD0x55_JumpIfFlagNotSet(strcFlags.event2, $0A, pAIScripting0x43_L210)                 ;B5902E
+    %AICMD0x55_JumpIfFlagNotSet(strcFlags.event2, $0B, pAIScripting0x43_L210)                 ;B59035
+    %AICMD0x55_JumpIfFlagNotSet(strcFlags.event2, $0C, pAIScripting0x43_L210)                 ;B5903C
+    %AICMD0x55_JumpIfFlagNotSet(strcFlags.event2, $09, pAIScripting0x43_L211)                 ;B59043
 pAIScripting0x43_L204:
     %AICMD0x15_JumpIfEquals8(nCurrentWeekdayID, 0, pAIScripting0x43_L226)    ;B5904A
     %AICMD0x15_JumpIfEquals8(nCurrentWeekdayID, 6, pAIScripting0x43_L227)    ;B59051
@@ -1105,25 +1105,25 @@ pAIScripting0x43_L212:
     %AICMD0x1C_ShowDialog($01A2, $00)                          ;B590F5
     %AICMD0x12_Jump(pAIScripting0x43_L191)                                   ;B590F9
 pAIScripting0x43_L213:
-    %AICMD0x17($02)                                            ;B590FC
-    %AICMD0x18($00, pAIScripting0x43_L204)                                   ;B590FE
-    %AICMD0x18($01, pAIScripting0x43_L214)                                   ;B59102
+    %AICMD0x17_RollRandom($02)                                            ;B590FC
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L204)                                   ;B590FE
+    %AICMD0x18_JumpIfRandomEquals($01, pAIScripting0x43_L214)                                   ;B59102
     %AICMD0x12_Jump(pAIScripting0x43_L191)                                   ;B59106
 pAIScripting0x43_L214:
     %AICMD0x1C_ShowDialog($01A3, $00)                          ;B59109
     %AICMD0x12_Jump(pAIScripting0x43_L191)                                   ;B5910D
 pAIScripting0x43_L215:
-    %AICMD0x17($02)                                            ;B59110
-    %AICMD0x18($00, pAIScripting0x43_L204)                                   ;B59112
-    %AICMD0x18($01, pAIScripting0x43_L216)                                   ;B59116
+    %AICMD0x17_RollRandom($02)                                            ;B59110
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L204)                                   ;B59112
+    %AICMD0x18_JumpIfRandomEquals($01, pAIScripting0x43_L216)                                   ;B59116
     %AICMD0x12_Jump(pAIScripting0x43_L191)                                   ;B5911A
 pAIScripting0x43_L216:
     %AICMD0x1C_ShowDialog($01A4, $00)                          ;B5911D
     %AICMD0x12_Jump(pAIScripting0x43_L191)                                   ;B59121
 pAIScripting0x43_L217:
-    %AICMD0x17($02)                                            ;B59124
-    %AICMD0x18($00, pAIScripting0x43_L204)                                   ;B59126
-    %AICMD0x18($01, pAIScripting0x43_L218)                                   ;B5912A
+    %AICMD0x17_RollRandom($02)                                            ;B59124
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L204)                                   ;B59126
+    %AICMD0x18_JumpIfRandomEquals($01, pAIScripting0x43_L218)                                   ;B5912A
     %AICMD0x12_Jump(pAIScripting0x43_L191)                                   ;B5912E
 pAIScripting0x43_L218:
     %AICMD0x1C_ShowDialog($01A5, $00)                          ;B59131
@@ -1138,8 +1138,8 @@ pAIScripting0x43_L221:
     %AICMD0x1C_ShowDialog($0484, $00)                          ;B59146
     %AICMD0x12_Jump(pAIScripting0x43_L191)                                   ;B5914A
 pAIScripting0x43_L222:
-    %AICMD0x17($02)                                            ;B5914D
-    %AICMD0x18($00, pAIScripting0x43_L223)                                   ;B5914F
+    %AICMD0x17_RollRandom($02)                                            ;B5914D
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L223)                                   ;B5914F
     %AICMD0x1C_ShowDialog($0482, $00)                          ;B59153
     %AICMD0x12_Jump(pAIScripting0x43_L191)                                   ;B59157
 pAIScripting0x43_L223:
@@ -1163,8 +1163,8 @@ pAIScripting0x43_L228:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 22, pAIScripting0x43_L229)         ;B5918B
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 23, pAIScripting0x43_L241)         ;B59192
     %AICMD0x14_JumpIfFlagSet($800196, $01, pAIScripting0x43_L242)            ;B59199
-    %AICMD0x17($02)                                            ;B591A0
-    %AICMD0x18($00, pAIScripting0x43_L205)                                   ;B591A2
+    %AICMD0x17_RollRandom($02)                                            ;B591A0
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L205)                                   ;B591A2
     %AICMD0x1C_ShowDialog($018C, $00)                          ;B591A6
     %AICMD0x12_Jump(pAIScripting0x43_L191)                                   ;B591AA
 pAIScripting0x43_L229:
@@ -1172,10 +1172,10 @@ pAIScripting0x43_L229:
     %AICMD0x12_Jump(pAIScripting0x43_L191)                                   ;B591B1
 pAIScripting0x43_L230:
     %AICMD0x14_JumpIfFlagSet($800196, $01, pAIScripting0x43_L242)            ;B591B4
-    %AICMD0x17($04)                                            ;B591BB
-    %AICMD0x18($00, pAIScripting0x43_L231)                                   ;B591BD
-    %AICMD0x18($01, pAIScripting0x43_L232)                                   ;B591C1
-    %AICMD0x18($02, pAIScripting0x43_L205)                                   ;B591C5
+    %AICMD0x17_RollRandom($04)                                            ;B591BB
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L231)                                   ;B591BD
+    %AICMD0x18_JumpIfRandomEquals($01, pAIScripting0x43_L232)                                   ;B591C1
+    %AICMD0x18_JumpIfRandomEquals($02, pAIScripting0x43_L205)                                   ;B591C5
     %AICMD0x1C_ShowDialog($018D, $00)                          ;B591C9
     %AICMD0x12_Jump(pAIScripting0x43_L191)                                   ;B591CD
 pAIScripting0x43_L231:
@@ -1189,8 +1189,8 @@ pAIScripting0x43_L233:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 12, pAIScripting0x43_L241)         ;B591E5
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 20, pAIScripting0x43_L241)         ;B591EC
     %AICMD0x14_JumpIfFlagSet($800196, $01, pAIScripting0x43_L242)            ;B591F3
-    %AICMD0x17($02)                                            ;B591FA
-    %AICMD0x18($00, pAIScripting0x43_L205)                                   ;B591FC
+    %AICMD0x17_RollRandom($02)                                            ;B591FA
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L205)                                   ;B591FC
     %AICMD0x1C_ShowDialog($0192, $00)                          ;B59200
     %AICMD0x12_Jump(pAIScripting0x43_L191)                                   ;B59204
 pAIScripting0x43_L234:
@@ -1202,8 +1202,8 @@ pAIScripting0x43_L235:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, pAIScripting0x43_L240)         ;B5921C
     %AICMD0x14_JumpIfFlagSet($800196, $03, pAIScripting0x43_L244)            ;B59223
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 15, 17, pAIScripting0x43_L245) ;B5922A
-    %AICMD0x17($02)                                            ;B59232
-    %AICMD0x18($00, pAIScripting0x43_L205)                                   ;B59234
+    %AICMD0x17_RollRandom($02)                                            ;B59232
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L205)                                   ;B59234
     %AICMD0x1C_ShowDialog($042F, $00)                          ;B59238
     %AICMD0x12_Jump(pAIScripting0x43_L191)                                   ;B5923C
 pAIScripting0x43_L236:
@@ -1304,7 +1304,7 @@ pAIScripting0x43_L253:
     %AICMD0x12_Jump(pAIScripting0x43_L255)                                   ;B59377
 pAIScripting0x43_L254:
     %AICMD0x14_JumpIfFlagSet(strcFlags.daily3, $0B, pAIScripting0x43_L309)   ;B5937A
-    %AICMD0x2D(pAIScripting0x43_L265, pAIScripting0x43_L256)                               ;B59381
+    %AICMD0x2D_JumpOnInteract(pAIScripting0x43_L265, pAIScripting0x43_L256)                               ;B59381
     %AICMD0x12_Jump(pAIScripting0x43_L254)                                   ;B59386
 pAIScripting0x43_L255:
     %AICMD0x1F(pAIScripting0x43_L310)                                        ;B59389
@@ -1374,11 +1374,11 @@ pAIScripting0x43_L265:
     %AICMD0x45_JumpIfBetween16(nSecondChildAge, 40, 59, pAIScripting0x43_L279);B594CA
     %AICMD0x43_JumpIfEqual16(nFirstChildAge, 90, pAIScripting0x43_L281)      ;B594D4
     %AICMD0x43_JumpIfEqual16(nSecondChildAge, 90, pAIScripting0x43_L281)     ;B594DC
-    %AICMD0x55(strcFlags.event1, $07, pAIScripting0x43_L266)                 ;B594E4
-    %AICMD0x55(strcFlags.event2, $0A, pAIScripting0x43_L272)                 ;B594EB
-    %AICMD0x55(strcFlags.event2, $0B, pAIScripting0x43_L272)                 ;B594F2
-    %AICMD0x55(strcFlags.event2, $0C, pAIScripting0x43_L272)                 ;B594F9
-    %AICMD0x55(strcFlags.event2, $09, pAIScripting0x43_L273)                 ;B59500
+    %AICMD0x55_JumpIfFlagNotSet(strcFlags.event1, $07, pAIScripting0x43_L266)                 ;B594E4
+    %AICMD0x55_JumpIfFlagNotSet(strcFlags.event2, $0A, pAIScripting0x43_L272)                 ;B594EB
+    %AICMD0x55_JumpIfFlagNotSet(strcFlags.event2, $0B, pAIScripting0x43_L272)                 ;B594F2
+    %AICMD0x55_JumpIfFlagNotSet(strcFlags.event2, $0C, pAIScripting0x43_L272)                 ;B594F9
+    %AICMD0x55_JumpIfFlagNotSet(strcFlags.event2, $09, pAIScripting0x43_L273)                 ;B59500
 pAIScripting0x43_L266:
     %AICMD0x15_JumpIfEquals8(nCurrentWeekdayID, 0, pAIScripting0x43_L288)    ;B59507
     %AICMD0x15_JumpIfEquals8(nCurrentWeekdayID, 6, pAIScripting0x43_L289)    ;B5950E
@@ -1419,25 +1419,25 @@ pAIScripting0x43_L274:
     %AICMD0x1C_ShowDialog($01A2, $00)                          ;B595B2
     %AICMD0x12_Jump(pAIScripting0x43_L254)                                   ;B595B6
 pAIScripting0x43_L275:
-    %AICMD0x17($02)                                            ;B595B9
-    %AICMD0x18($00, pAIScripting0x43_L266)                                   ;B595BB
-    %AICMD0x18($01, pAIScripting0x43_L276)                                   ;B595BF
+    %AICMD0x17_RollRandom($02)                                            ;B595B9
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L266)                                   ;B595BB
+    %AICMD0x18_JumpIfRandomEquals($01, pAIScripting0x43_L276)                                   ;B595BF
     %AICMD0x12_Jump(pAIScripting0x43_L254)                                   ;B595C3
 pAIScripting0x43_L276:
     %AICMD0x1C_ShowDialog($01A4, $00)                          ;B595C6
     %AICMD0x12_Jump(pAIScripting0x43_L254)                                   ;B595CA
 pAIScripting0x43_L277:
-    %AICMD0x17($02)                                            ;B595CD
-    %AICMD0x18($00, pAIScripting0x43_L266)                                   ;B595CF
-    %AICMD0x18($01, pAIScripting0x43_L278)                                   ;B595D3
+    %AICMD0x17_RollRandom($02)                                            ;B595CD
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L266)                                   ;B595CF
+    %AICMD0x18_JumpIfRandomEquals($01, pAIScripting0x43_L278)                                   ;B595D3
     %AICMD0x12_Jump(pAIScripting0x43_L254)                                   ;B595D7
 pAIScripting0x43_L278:
     %AICMD0x1C_ShowDialog($01A5, $00)                          ;B595DA
     %AICMD0x12_Jump(pAIScripting0x43_L254)                                   ;B595DE
 pAIScripting0x43_L279:
-    %AICMD0x17($02)                                            ;B595E1
-    %AICMD0x18($00, pAIScripting0x43_L266)                                   ;B595E3
-    %AICMD0x18($01, pAIScripting0x43_L280)                                   ;B595E7
+    %AICMD0x17_RollRandom($02)                                            ;B595E1
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L266)                                   ;B595E3
+    %AICMD0x18_JumpIfRandomEquals($01, pAIScripting0x43_L280)                                   ;B595E7
 pAIScripting0x43_L280:
     %AICMD0x1C_ShowDialog($01A7, $00)                          ;B595EB
     %AICMD0x12_Jump(pAIScripting0x43_L254)                                   ;B595EF
@@ -1451,8 +1451,8 @@ pAIScripting0x43_L283:
     %AICMD0x1C_ShowDialog($0484, $00)                          ;B59600
     %AICMD0x12_Jump(pAIScripting0x43_L254)                                   ;B59604
 pAIScripting0x43_L284:
-    %AICMD0x17($02)                                            ;B59607
-    %AICMD0x18($00, pAIScripting0x43_L285)                                   ;B59609
+    %AICMD0x17_RollRandom($02)                                            ;B59607
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L285)                                   ;B59609
     %AICMD0x1C_ShowDialog($0482, $00)                          ;B5960D
     %AICMD0x12_Jump(pAIScripting0x43_L254)                                   ;B59611
 pAIScripting0x43_L285:
@@ -1476,8 +1476,8 @@ pAIScripting0x43_L290:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 22, pAIScripting0x43_L291)         ;B59645
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 23, pAIScripting0x43_L303)         ;B5964C
     %AICMD0x14_JumpIfFlagSet($800196, $01, pAIScripting0x43_L304)            ;B59653
-    %AICMD0x17($02)                                            ;B5965A
-    %AICMD0x18($00, pAIScripting0x43_L267)                                   ;B5965C
+    %AICMD0x17_RollRandom($02)                                            ;B5965A
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L267)                                   ;B5965C
     %AICMD0x1C_ShowDialog($018F, $00)                          ;B59660
     %AICMD0x12_Jump(pAIScripting0x43_L254)                                   ;B59664
 pAIScripting0x43_L291:
@@ -1485,10 +1485,10 @@ pAIScripting0x43_L291:
     %AICMD0x12_Jump(pAIScripting0x43_L254)                                   ;B5966B
 pAIScripting0x43_L292:
     %AICMD0x14_JumpIfFlagSet($800196, $01, pAIScripting0x43_L304)            ;B5966E
-    %AICMD0x17($04)                                            ;B59675
-    %AICMD0x18($00, pAIScripting0x43_L293)                                   ;B59677
-    %AICMD0x18($01, pAIScripting0x43_L294)                                   ;B5967B
-    %AICMD0x18($02, pAIScripting0x43_L267)                                   ;B5967F
+    %AICMD0x17_RollRandom($04)                                            ;B59675
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L293)                                   ;B59677
+    %AICMD0x18_JumpIfRandomEquals($01, pAIScripting0x43_L294)                                   ;B5967B
+    %AICMD0x18_JumpIfRandomEquals($02, pAIScripting0x43_L267)                                   ;B5967F
     %AICMD0x1C_ShowDialog($0190, $00)                          ;B59683
     %AICMD0x12_Jump(pAIScripting0x43_L254)                                   ;B59687
 pAIScripting0x43_L293:
@@ -1502,8 +1502,8 @@ pAIScripting0x43_L295:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 12, pAIScripting0x43_L303)         ;B5969F
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 20, pAIScripting0x43_L303)         ;B596A6
     %AICMD0x14_JumpIfFlagSet($800196, $01, pAIScripting0x43_L304)            ;B596AD
-    %AICMD0x17($02)                                            ;B596B4
-    %AICMD0x18($00, pAIScripting0x43_L267)                                   ;B596B6
+    %AICMD0x17_RollRandom($02)                                            ;B596B4
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L267)                                   ;B596B6
     %AICMD0x1C_ShowDialog($0191, $00)                          ;B596BA
     %AICMD0x12_Jump(pAIScripting0x43_L254)                                   ;B596BE
 pAIScripting0x43_L296:
@@ -1515,8 +1515,8 @@ pAIScripting0x43_L297:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 30, pAIScripting0x43_L302)         ;B596D6
     %AICMD0x14_JumpIfFlagSet($800196, $03, pAIScripting0x43_L306)            ;B596DD
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 15, 17, pAIScripting0x43_L307) ;B596E4
-    %AICMD0x17($02)                                            ;B596EC
-    %AICMD0x18($00, pAIScripting0x43_L267)                                   ;B596EE
+    %AICMD0x17_RollRandom($02)                                            ;B596EC
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x43_L267)                                   ;B596EE
     %AICMD0x1C_ShowDialog($0430, $00)                          ;B596F2
     %AICMD0x12_Jump(pAIScripting0x43_L254)                                   ;B596F6
 pAIScripting0x43_L298:
@@ -1559,7 +1559,7 @@ pAIScripting0x43_L307:
     %AICMD0x1C_ShowDialog($0180, $00)                          ;B59760
     %AICMD0x1B($022F, $00)                                     ;B59764
     %AICMD0x08_EnableAIControl()                               ;B59768
-    %AICMD0x32($8000D4, $0015)                                 ;B59769
+    %AICMD0x32_SetValue16($8000D4, $0015)                                 ;B59769
     %AICMD0x13_Wait(120)                                       ;B5976F
     %AICMD0x11_EnableUserControl()                             ;B59772
     %AICMD0x57_UpdateStamina(30)                               ;B59773
@@ -1569,7 +1569,7 @@ pAIScripting0x43_L308:
     %AICMD0x1C_ShowDialog($042F, $00)                          ;B5977F
     %AICMD0x1B($022F, $00)                                     ;B59783
     %AICMD0x08_EnableAIControl()                               ;B59787
-    %AICMD0x32($8000D4, $0015)                                 ;B59788
+    %AICMD0x32_SetValue16($8000D4, $0015)                                 ;B59788
     %AICMD0x13_Wait(120)                                       ;B5978E
     %AICMD0x11_EnableUserControl()                             ;B59791
     %AICMD0x57_UpdateStamina(30)                               ;B59792
@@ -1624,7 +1624,7 @@ DATA8_B597F1:
 pAIScripting0x44_L001:
     %AICMD0x1A($0168, $0168, aAIScriptingData_L074, $00)                     ;B5982E
 pAIScripting0x44_L002:
-    %AICMD0x2D(pAIScripting0x44_L012, pAIScripting0x44_L003)                               ;B59836
+    %AICMD0x2D_JumpOnInteract(pAIScripting0x44_L012, pAIScripting0x44_L003)                               ;B59836
     %AICMD0x12_Jump(pAIScripting0x44_L002)                                   ;B5983B
 pAIScripting0x44_L003:
     %AICMD0x15_JumpIfEquals8($80091E, 2, pAIScripting0x44_L004)              ;B5983E
@@ -1710,8 +1710,8 @@ pAIScripting0x44_L019:
     %AICMD0x12_Jump(pAIScripting0x44_L002)                                   ;B5998F
 pAIScripting0x44_L020:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 22, pAIScripting0x44_L022)         ;B59992
-    %AICMD0x17($02)                                            ;B59999
-    %AICMD0x18($00, pAIScripting0x44_L021)                                   ;B5999B
+    %AICMD0x17_RollRandom($02)                                            ;B59999
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x44_L021)                                   ;B5999B
     %AICMD0x1C_ShowDialog($041F, $00)                          ;B5999F
     %AICMD0x12_Jump(pAIScripting0x44_L002)                                   ;B599A3
 pAIScripting0x44_L021:
@@ -1721,8 +1721,8 @@ pAIScripting0x44_L022:
     %AICMD0x1C_ShowDialog($0206, $00)                          ;B599AD
     %AICMD0x12_Jump(pAIScripting0x44_L002)                                   ;B599B1
 pAIScripting0x44_L023:
-    %AICMD0x17($02)                                            ;B599B4
-    %AICMD0x18($00, pAIScripting0x44_L024)                                   ;B599B6
+    %AICMD0x17_RollRandom($02)                                            ;B599B4
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x44_L024)                                   ;B599B6
     %AICMD0x1C_ShowDialog($0420, $00)                          ;B599BA
     %AICMD0x12_Jump(pAIScripting0x44_L002)                                   ;B599BE
 pAIScripting0x44_L024:
@@ -1730,8 +1730,8 @@ pAIScripting0x44_L024:
     %AICMD0x12_Jump(pAIScripting0x44_L002)                                   ;B599C5
 pAIScripting0x44_L025:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 11, pAIScripting0x44_L027)         ;B599C8
-    %AICMD0x17($02)                                            ;B599CF
-    %AICMD0x18($00, pAIScripting0x44_L026)                                   ;B599D1
+    %AICMD0x17_RollRandom($02)                                            ;B599CF
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x44_L026)                                   ;B599D1
     %AICMD0x1C_ShowDialog($0421, $00)                          ;B599D5
     %AICMD0x12_Jump(pAIScripting0x44_L002)                                   ;B599D9
 pAIScripting0x44_L026:
@@ -1750,7 +1750,7 @@ DATA8_B599EB:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 6, 10, pAIScripting0x44_L055)  ;B599F2
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 15, 18, pAIScripting0x44_L055) ;B599FA
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x44_L055)     ;B59A02
-    %AICMD0x09($01, pAIScripting0x44_L056)                                   ;B59A09
+    %AICMD0x09_StartScript($01, pAIScripting0x44_L056)                                   ;B59A09
     %AICMD0x45_JumpIfBetween16(nFirstChildAge, 60, 89, pAIScripting0x44_L029);B59A0D
     %AICMD0x45_JumpIfBetween16(nSecondChildAge, 60, 89, pAIScripting0x44_L029);B59A17
     %AICMD0x1A($0048, $0048, aAIScriptingData_L199, $00)                     ;B59A21
@@ -1758,7 +1758,7 @@ DATA8_B599EB:
 pAIScripting0x44_L029:
     %AICMD0x1A($0048, $0048, aAIScriptingData_L074, $00)                     ;B59A2C
 pAIScripting0x44_L030:
-    %AICMD0x2D(pAIScripting0x44_L039, pAIScripting0x44_L031)                               ;B59A34
+    %AICMD0x2D_JumpOnInteract(pAIScripting0x44_L039, pAIScripting0x44_L031)                               ;B59A34
     %AICMD0x12_Jump(pAIScripting0x44_L030)                                   ;B59A39
 pAIScripting0x44_L031:
     %AICMD0x15_JumpIfEquals8($80091E, 2, pAIScripting0x44_L032)              ;B59A3C
@@ -1839,8 +1839,8 @@ pAIScripting0x44_L046:
     %AICMD0x12_Jump(pAIScripting0x44_L030)                                   ;B59B79
 pAIScripting0x44_L047:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 22, pAIScripting0x44_L049)         ;B59B7C
-    %AICMD0x17($02)                                            ;B59B83
-    %AICMD0x18($00, pAIScripting0x44_L048)                                   ;B59B85
+    %AICMD0x17_RollRandom($02)                                            ;B59B83
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x44_L048)                                   ;B59B85
     %AICMD0x1C_ShowDialog($0185, $00)                          ;B59B89
     %AICMD0x12_Jump(pAIScripting0x44_L030)                                   ;B59B8D
 pAIScripting0x44_L048:
@@ -1850,8 +1850,8 @@ pAIScripting0x44_L049:
     %AICMD0x1C_ShowDialog($0207, $00)                          ;B59B97
     %AICMD0x12_Jump(pAIScripting0x44_L030)                                   ;B59B9B
 pAIScripting0x44_L050:
-    %AICMD0x17($02)                                            ;B59B9E
-    %AICMD0x18($00, pAIScripting0x44_L051)                                   ;B59BA0
+    %AICMD0x17_RollRandom($02)                                            ;B59B9E
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x44_L051)                                   ;B59BA0
     %AICMD0x1C_ShowDialog($0186, $00)                          ;B59BA4
     %AICMD0x12_Jump(pAIScripting0x44_L030)                                   ;B59BA8
 pAIScripting0x44_L051:
@@ -1859,8 +1859,8 @@ pAIScripting0x44_L051:
     %AICMD0x12_Jump(pAIScripting0x44_L030)                                   ;B59BAF
 pAIScripting0x44_L052:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 11, pAIScripting0x44_L054)         ;B59BB2
-    %AICMD0x17($02)                                            ;B59BB9
-    %AICMD0x18($00, pAIScripting0x44_L053)                                   ;B59BBB
+    %AICMD0x17_RollRandom($02)                                            ;B59BB9
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x44_L053)                                   ;B59BBB
     %AICMD0x1C_ShowDialog($0187, $00)                          ;B59BBF
     %AICMD0x12_Jump(pAIScripting0x44_L030)                                   ;B59BC3
 pAIScripting0x44_L053:
@@ -1891,7 +1891,7 @@ DATA8_B59BE3:
 pAIScripting0x44_L058:
     %AICMD0x1A($0168, $0168, aAIScriptingData_L075, $00)                     ;B59C20
 pAIScripting0x44_L059:
-    %AICMD0x2D(pAIScripting0x44_L069, pAIScripting0x44_L060)                               ;B59C28
+    %AICMD0x2D_JumpOnInteract(pAIScripting0x44_L069, pAIScripting0x44_L060)                               ;B59C28
     %AICMD0x12_Jump(pAIScripting0x44_L059)                                   ;B59C2D
 pAIScripting0x44_L060:
     %AICMD0x16_JumpIfBetween8($80091E, 1, 4, pAIScripting0x44_L063)          ;B59C30
@@ -1975,8 +1975,8 @@ pAIScripting0x44_L076:
     %AICMD0x12_Jump(pAIScripting0x44_L059)                                   ;B59D77
 pAIScripting0x44_L077:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 22, pAIScripting0x44_L079)         ;B59D7A
-    %AICMD0x17($02)                                            ;B59D81
-    %AICMD0x18($00, pAIScripting0x44_L078)                                   ;B59D83
+    %AICMD0x17_RollRandom($02)                                            ;B59D81
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x44_L078)                                   ;B59D83
     %AICMD0x1C_ShowDialog($0189, $00)                          ;B59D87
     %AICMD0x12_Jump(pAIScripting0x44_L059)                                   ;B59D8B
 pAIScripting0x44_L078:
@@ -1986,8 +1986,8 @@ pAIScripting0x44_L079:
     %AICMD0x1C_ShowDialog($0208, $00)                          ;B59D95
     %AICMD0x12_Jump(pAIScripting0x44_L059)                                   ;B59D99
 pAIScripting0x44_L080:
-    %AICMD0x17($02)                                            ;B59D9C
-    %AICMD0x18($00, pAIScripting0x44_L081)                                   ;B59D9E
+    %AICMD0x17_RollRandom($02)                                            ;B59D9C
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x44_L081)                                   ;B59D9E
     %AICMD0x1C_ShowDialog($018A, $00)                          ;B59DA2
     %AICMD0x12_Jump(pAIScripting0x44_L059)                                   ;B59DA6
 pAIScripting0x44_L081:
@@ -1995,8 +1995,8 @@ pAIScripting0x44_L081:
     %AICMD0x12_Jump(pAIScripting0x44_L059)                                   ;B59DAD
 pAIScripting0x44_L082:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 11, pAIScripting0x44_L084)         ;B59DB0
-    %AICMD0x17($02)                                            ;B59DB7
-    %AICMD0x18($00, pAIScripting0x44_L083)                                   ;B59DB9
+    %AICMD0x17_RollRandom($02)                                            ;B59DB7
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x44_L083)                                   ;B59DB9
     %AICMD0x1C_ShowDialog($0432, $00)                          ;B59DBD
     %AICMD0x12_Jump(pAIScripting0x44_L059)                                   ;B59DC1
 pAIScripting0x44_L083:
@@ -2021,7 +2021,7 @@ DATA8_B59DD3:
 pAIScripting0x44_L086:
     %AICMD0x1A($0168, $0168, aAIScriptingData_L075, $00)                     ;B59E08
 pAIScripting0x44_L087:
-    %AICMD0x2D(pAIScripting0x44_L098, pAIScripting0x44_L088)                               ;B59E10
+    %AICMD0x2D_JumpOnInteract(pAIScripting0x44_L098, pAIScripting0x44_L088)                               ;B59E10
     %AICMD0x12_Jump(pAIScripting0x44_L087)                                   ;B59E15
 pAIScripting0x44_L088:
     %AICMD0x15_JumpIfEquals8($80091E, 2, pAIScripting0x44_L089)              ;B59E18
@@ -2109,8 +2109,8 @@ pAIScripting0x44_L105:
     %AICMD0x12_Jump(pAIScripting0x44_L087)                                   ;B59F6E
 pAIScripting0x44_L106:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 22, pAIScripting0x44_L108)         ;B59F71
-    %AICMD0x17($02)                                            ;B59F78
-    %AICMD0x18($00, pAIScripting0x44_L107)                                   ;B59F7A
+    %AICMD0x17_RollRandom($02)                                            ;B59F78
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x44_L107)                                   ;B59F7A
     %AICMD0x1C_ShowDialog($0427, $00)                          ;B59F7E
     %AICMD0x12_Jump(pAIScripting0x44_L087)                                   ;B59F82
 pAIScripting0x44_L107:
@@ -2120,8 +2120,8 @@ pAIScripting0x44_L108:
     %AICMD0x1C_ShowDialog($0209, $00)                          ;B59F8C
     %AICMD0x12_Jump(pAIScripting0x44_L087)                                   ;B59F90
 pAIScripting0x44_L109:
-    %AICMD0x17($02)                                            ;B59F93
-    %AICMD0x18($00, pAIScripting0x44_L110)                                   ;B59F95
+    %AICMD0x17_RollRandom($02)                                            ;B59F93
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x44_L110)                                   ;B59F95
     %AICMD0x1C_ShowDialog($0429, $00)                          ;B59F99
     %AICMD0x12_Jump(pAIScripting0x44_L087)                                   ;B59F9D
 pAIScripting0x44_L110:
@@ -2129,8 +2129,8 @@ pAIScripting0x44_L110:
     %AICMD0x12_Jump(pAIScripting0x44_L087)                                   ;B59FA4
 pAIScripting0x44_L111:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 11, pAIScripting0x44_L113)         ;B59FA7
-    %AICMD0x17($02)                                            ;B59FAE
-    %AICMD0x18($00, pAIScripting0x44_L112)                                   ;B59FB0
+    %AICMD0x17_RollRandom($02)                                            ;B59FAE
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x44_L112)                                   ;B59FB0
     %AICMD0x1C_ShowDialog($0428, $00)                          ;B59FB4
     %AICMD0x12_Jump(pAIScripting0x44_L087)                                   ;B59FB8
 pAIScripting0x44_L112:
@@ -2148,8 +2148,8 @@ DATA8_B59FCA:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x44_L142)     ;B59FD1
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 6, 10, pAIScripting0x44_L142)  ;B59FD8
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 16, 18, pAIScripting0x44_L142) ;B59FE0
-    %AICMD0x09($01, pAIScripting0x44_L143)                                   ;B59FE8
-    %AICMD0x09($02, pAIScripting0x44_L145)                                   ;B59FEC
+    %AICMD0x09_StartScript($01, pAIScripting0x44_L143)                                   ;B59FE8
+    %AICMD0x09_StartScript($02, pAIScripting0x44_L145)                                   ;B59FEC
     %AICMD0x45_JumpIfBetween16(nFirstChildAge, 60, 89, pAIScripting0x44_L115);B59FF0
     %AICMD0x45_JumpIfBetween16(nSecondChildAge, 60, 89, pAIScripting0x44_L115);B59FFA
     %AICMD0x1A($0048, $0048, aAIScriptingData_L199, $03)                     ;B5A004
@@ -2157,7 +2157,7 @@ DATA8_B59FCA:
 pAIScripting0x44_L115:
     %AICMD0x1A($0048, $0048, aAIScriptingData_L074, $00)                     ;B5A00F
 pAIScripting0x44_L116:
-    %AICMD0x2D(pAIScripting0x44_L126, pAIScripting0x44_L117)                               ;B5A017
+    %AICMD0x2D_JumpOnInteract(pAIScripting0x44_L126, pAIScripting0x44_L117)                               ;B5A017
     %AICMD0x12_Jump(pAIScripting0x44_L116)                                   ;B5A01C
 pAIScripting0x44_L117:
     %AICMD0x15_JumpIfEquals8($80091E, 2, pAIScripting0x44_L118)              ;B5A01F
@@ -2242,8 +2242,8 @@ pAIScripting0x44_L133:
     %AICMD0x12_Jump(pAIScripting0x44_L116)                                   ;B5A16D
 pAIScripting0x44_L134:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 22, pAIScripting0x44_L136)         ;B5A170
-    %AICMD0x17($02)                                            ;B5A177
-    %AICMD0x18($00, pAIScripting0x44_L135)                                   ;B5A179
+    %AICMD0x17_RollRandom($02)                                            ;B5A177
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x44_L135)                                   ;B5A179
     %AICMD0x1C_ShowDialog($042A, $00)                          ;B5A17D
     %AICMD0x12_Jump(pAIScripting0x44_L116)                                   ;B5A181
 pAIScripting0x44_L135:
@@ -2253,8 +2253,8 @@ pAIScripting0x44_L136:
     %AICMD0x1C_ShowDialog($020A, $00)                          ;B5A18B
     %AICMD0x12_Jump(pAIScripting0x44_L116)                                   ;B5A18F
 pAIScripting0x44_L137:
-    %AICMD0x17($02)                                            ;B5A192
-    %AICMD0x18($00, pAIScripting0x44_L138)                                   ;B5A194
+    %AICMD0x17_RollRandom($02)                                            ;B5A192
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x44_L138)                                   ;B5A194
     %AICMD0x1C_ShowDialog($042B, $00)                          ;B5A198
     %AICMD0x12_Jump(pAIScripting0x44_L116)                                   ;B5A19C
 pAIScripting0x44_L138:
@@ -2262,8 +2262,8 @@ pAIScripting0x44_L138:
     %AICMD0x12_Jump(pAIScripting0x44_L116)                                   ;B5A1A3
 pAIScripting0x44_L139:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 11, pAIScripting0x44_L141)         ;B5A1A6
-    %AICMD0x17($02)                                            ;B5A1AD
-    %AICMD0x18($00, pAIScripting0x44_L140)                                   ;B5A1AF
+    %AICMD0x17_RollRandom($02)                                            ;B5A1AD
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x44_L140)                                   ;B5A1AF
     %AICMD0x1C_ShowDialog($042C, $00)                          ;B5A1B3
     %AICMD0x12_Jump(pAIScripting0x44_L116)                                   ;B5A1B7
 pAIScripting0x44_L140:
@@ -2316,7 +2316,7 @@ pAIScripting0x45_L001:
     %AICMD0x1A($0158, $0098, aAIScriptingData_L077, $00)                     ;B5A237
     %AICMD0x22($10, $10, $01, aAIScriptingData_L077, $04)                    ;B5A23F
 pAIScripting0x45_L002:
-    %AICMD0x2D(pAIScripting0x45_L008, pAIScripting0x45_L004)                               ;B5A246
+    %AICMD0x2D_JumpOnInteract(pAIScripting0x45_L008, pAIScripting0x45_L004)                               ;B5A246
     %AICMD0x12_Jump(pAIScripting0x45_L002)                                   ;B5A24B
 pAIScripting0x45_L003:
     %AICMD0x13_Wait(1)                                         ;B5A24E
@@ -2341,9 +2341,9 @@ pAIScripting0x45_L007:
     %AICMD0x1C_ShowDialog($01D9, $00)                          ;B5A292
     %AICMD0x12_Jump(pAIScripting0x45_L002)                                   ;B5A296
 pAIScripting0x45_L008:
-    %AICMD0x17($02)                                            ;B5A299
-    %AICMD0x18($00, pAIScripting0x45_L009)                                   ;B5A29B
-    %AICMD0x18($01, pAIScripting0x45_L010)                                   ;B5A29F
+    %AICMD0x17_RollRandom($02)                                            ;B5A299
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x45_L009)                                   ;B5A29B
+    %AICMD0x18_JumpIfRandomEquals($01, pAIScripting0x45_L010)                                   ;B5A29F
     %AICMD0x12_Jump(pAIScripting0x45_L002)                                   ;B5A2A3
 pAIScripting0x45_L009:
     %AICMD0x1C_ShowDialog($01C0, $00)                          ;B5A2A6
@@ -2358,12 +2358,12 @@ pAIScripting0x45_L012:
     %AICMD0x1A($0158, $0098, aAIScriptingData_L079, $00)                     ;B5A2BF
     %AICMD0x22($10, $10, $01, aAIScriptingData_L079, $04)                    ;B5A2C7
 pAIScripting0x45_L013:
-    %AICMD0x2D(pAIScripting0x45_L014, pAIScripting0x45_L004)                               ;B5A2CE
+    %AICMD0x2D_JumpOnInteract(pAIScripting0x45_L014, pAIScripting0x45_L004)                               ;B5A2CE
     %AICMD0x12_Jump(pAIScripting0x45_L013)                                   ;B5A2D3
 pAIScripting0x45_L014:
-    %AICMD0x17($02)                                            ;B5A2D6
-    %AICMD0x18($00, pAIScripting0x45_L015)                                   ;B5A2D8
-    %AICMD0x18($01, pAIScripting0x45_L016)                                   ;B5A2DC
+    %AICMD0x17_RollRandom($02)                                            ;B5A2D6
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x45_L015)                                   ;B5A2D8
+    %AICMD0x18_JumpIfRandomEquals($01, pAIScripting0x45_L016)                                   ;B5A2DC
     %AICMD0x12_Jump(pAIScripting0x45_L013)                                   ;B5A2E0
 pAIScripting0x45_L015:
     %AICMD0x1C_ShowDialog($01C1, $00)                          ;B5A2E3
@@ -2410,7 +2410,7 @@ pAIScripting0x45_L025:
 pAIScripting0x45_L026:
     %AICMD0x1A($0160, $0178, aAIScriptingData_L079, $00)                     ;B5A370
 pAIScripting0x45_L027:
-    %AICMD0x2D(pAIScripting0x45_L008, pAIScripting0x45_L004)                               ;B5A378
+    %AICMD0x2D_JumpOnInteract(pAIScripting0x45_L008, pAIScripting0x45_L004)                               ;B5A378
     %AICMD0x12_Jump(pAIScripting0x45_L027)                                   ;B5A37D
 pAIScripting0x45_L028:
     %AICMD0x14_JumpIfFlagSet($800196, $01, pAIScripting0x45_L034)            ;B5A380
@@ -2423,7 +2423,7 @@ pAIScripting0x45_L028:
 pAIScripting0x45_L029:
     %AICMD0x1A($0160, $0178, aAIScriptingData_L079, $00)                     ;B5A3B3
 pAIScripting0x45_L030:
-    %AICMD0x2D(pAIScripting0x45_L008, pAIScripting0x45_L004)                               ;B5A3BB
+    %AICMD0x2D_JumpOnInteract(pAIScripting0x45_L008, pAIScripting0x45_L004)                               ;B5A3BB
     %AICMD0x12_Jump(pAIScripting0x45_L030)                                   ;B5A3C0
 pAIScripting0x45_L031:
     %AICMD0x14_JumpIfFlagSet($800196, $01, pAIScripting0x45_L034)            ;B5A3C3
@@ -2436,7 +2436,7 @@ pAIScripting0x45_L031:
 pAIScripting0x45_L032:
     %AICMD0x1A($0160, $0178, aAIScriptingData_L079, $00)                     ;B5A3F6
 pAIScripting0x45_L033:
-    %AICMD0x2D(pAIScripting0x45_L008, pAIScripting0x45_L004)                               ;B5A3FE
+    %AICMD0x2D_JumpOnInteract(pAIScripting0x45_L008, pAIScripting0x45_L004)                               ;B5A3FE
     %AICMD0x12_Jump(pAIScripting0x45_L033)                                   ;B5A403
 pAIScripting0x45_L034:
     %AICMD0x10_End()                                           ;B5A406
@@ -2474,7 +2474,7 @@ pAIScripting0x45_L041:
 pAIScripting0x45_L042:
     %AICMD0x1A($0088, $0048, aAIScriptingData_L079, $00)                     ;B5A474
 pAIScripting0x45_L043:
-    %AICMD0x2D(pAIScripting0x45_L008, pAIScripting0x45_L004)                               ;B5A47C
+    %AICMD0x2D_JumpOnInteract(pAIScripting0x45_L008, pAIScripting0x45_L004)                               ;B5A47C
     %AICMD0x12_Jump(pAIScripting0x45_L043)                                   ;B5A481
 
 
@@ -2490,7 +2490,7 @@ pAIScripting0x45_L044:
     %AICMD0x1A($0168, $0088, aAIScriptingData_L076, $02)                     ;B5A4B6
     %AICMD0x22($10, $10, $01, aAIScriptingData_L077, $04)                    ;B5A4BE
 pAIScripting0x45_L045:
-    %AICMD0x2D(pAIScripting0x45_L051, pAIScripting0x45_L047)                               ;B5A4C5
+    %AICMD0x2D_JumpOnInteract(pAIScripting0x45_L051, pAIScripting0x45_L047)                               ;B5A4C5
     %AICMD0x12_Jump(pAIScripting0x45_L045)                                   ;B5A4CA
 pAIScripting0x45_L046:
     %AICMD0x13_Wait(1)                                         ;B5A4CD
@@ -2515,9 +2515,9 @@ pAIScripting0x45_L050:
     %AICMD0x1C_ShowDialog($01D9, $00)                          ;B5A511
     %AICMD0x12_Jump(pAIScripting0x45_L045)                                   ;B5A515
 pAIScripting0x45_L051:
-    %AICMD0x17($02)                                            ;B5A518
-    %AICMD0x18($00, pAIScripting0x45_L052)                                   ;B5A51A
-    %AICMD0x18($01, pAIScripting0x45_L053)                                   ;B5A51E
+    %AICMD0x17_RollRandom($02)                                            ;B5A518
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x45_L052)                                   ;B5A51A
+    %AICMD0x18_JumpIfRandomEquals($01, pAIScripting0x45_L053)                                   ;B5A51E
     %AICMD0x12_Jump(pAIScripting0x45_L045)                                   ;B5A522
 pAIScripting0x45_L052:
     %AICMD0x1C_ShowDialog($01C0, $00)                          ;B5A525
@@ -2532,12 +2532,12 @@ pAIScripting0x45_L055:
     %AICMD0x1A($0168, $0088, aAIScriptingData_L078, $00)                     ;B5A53E
     %AICMD0x22($10, $0C, $01, aAIScriptingData_L079, $04)                    ;B5A546
 pAIScripting0x45_L056:
-    %AICMD0x2D(pAIScripting0x45_L057, pAIScripting0x45_L047)                               ;B5A54D
+    %AICMD0x2D_JumpOnInteract(pAIScripting0x45_L057, pAIScripting0x45_L047)                               ;B5A54D
     %AICMD0x12_Jump(pAIScripting0x45_L056)                                   ;B5A552
 pAIScripting0x45_L057:
-    %AICMD0x17($02)                                            ;B5A555
-    %AICMD0x18($00, pAIScripting0x45_L058)                                   ;B5A557
-    %AICMD0x18($01, pAIScripting0x45_L059)                                   ;B5A55B
+    %AICMD0x17_RollRandom($02)                                            ;B5A555
+    %AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x45_L058)                                   ;B5A557
+    %AICMD0x18_JumpIfRandomEquals($01, pAIScripting0x45_L059)                                   ;B5A55B
     %AICMD0x12_Jump(pAIScripting0x45_L056)                                   ;B5A55F
 pAIScripting0x45_L058:
     %AICMD0x1C_ShowDialog($01C1, $00)                          ;B5A562
@@ -2584,7 +2584,7 @@ pAIScripting0x45_L068:
 pAIScripting0x45_L069:
     %AICMD0x1A($0170, $0178, aAIScriptingData_L079, $00)                     ;B5A5EF
 pAIScripting0x45_L070:
-    %AICMD0x2D(pAIScripting0x45_L051, pAIScripting0x45_L047)                               ;B5A5F7
+    %AICMD0x2D_JumpOnInteract(pAIScripting0x45_L051, pAIScripting0x45_L047)                               ;B5A5F7
     %AICMD0x12_Jump(pAIScripting0x45_L070)                                   ;B5A5FC
 pAIScripting0x45_L071:
     %AICMD0x14_JumpIfFlagSet($800196, $01, pAIScripting0x45_L077)            ;B5A5FF
@@ -2597,7 +2597,7 @@ pAIScripting0x45_L071:
 pAIScripting0x45_L072:
     %AICMD0x1A($0170, $0178, aAIScriptingData_L079, $00)                     ;B5A632
 pAIScripting0x45_L073:
-    %AICMD0x2D(pAIScripting0x45_L051, pAIScripting0x45_L047)                               ;B5A63A
+    %AICMD0x2D_JumpOnInteract(pAIScripting0x45_L051, pAIScripting0x45_L047)                               ;B5A63A
     %AICMD0x12_Jump(pAIScripting0x45_L073)                                   ;B5A63F
 pAIScripting0x45_L074:
     %AICMD0x14_JumpIfFlagSet($800196, $01, pAIScripting0x45_L077)            ;B5A642
@@ -2610,7 +2610,7 @@ pAIScripting0x45_L074:
 pAIScripting0x45_L075:
     %AICMD0x1A($0170, $0178, aAIScriptingData_L079, $00)                     ;B5A675
 pAIScripting0x45_L076:
-    %AICMD0x2D(pAIScripting0x45_L051, pAIScripting0x45_L047)                               ;B5A67D
+    %AICMD0x2D_JumpOnInteract(pAIScripting0x45_L051, pAIScripting0x45_L047)                               ;B5A67D
     %AICMD0x12_Jump(pAIScripting0x45_L076)                                   ;B5A682
 pAIScripting0x45_L077:
     %AICMD0x10_End()                                           ;B5A685
@@ -2647,7 +2647,7 @@ pAIScripting0x45_L084:
 pAIScripting0x45_L085:
     %AICMD0x1A($0068, $0048, aAIScriptingData_L079, $00)                     ;B5A6F3
 pAIScripting0x45_L086:
-    %AICMD0x2D(pAIScripting0x45_L051, pAIScripting0x45_L047)                               ;B5A6FB
+    %AICMD0x2D_JumpOnInteract(pAIScripting0x45_L051, pAIScripting0x45_L047)                               ;B5A6FB
     %AICMD0x12_Jump(pAIScripting0x45_L086)                                   ;B5A700
 
 
@@ -2679,7 +2679,7 @@ DATA8_B5A723:
     %AICMD0x19($00E8, $00)                                     ;B5A72F
     %AICMD0x08_EnableAIControl()                               ;B5A733
     %AICMD0x06_SetDestinationArea(!AREA_CREDITS0)              ;B5A734
-    %AICMD0x38()                                               ;B5A736
+    %AICMD0x38_WaitForFadeIn()                                               ;B5A736
     %AICMD0x13_Wait(180)                                       ;B5A737
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B5A73A
     %AICMD0x10_End()                                           ;B5A73C
@@ -2695,7 +2695,7 @@ DATA8_B5A73D:
     %AICMD0x19($00E8, $00)                                     ;B5A749
     %AICMD0x08_EnableAIControl()                               ;B5A74D
     %AICMD0x06_SetDestinationArea(!AREA_CREDITS1)              ;B5A74E
-    %AICMD0x38()                                               ;B5A750
+    %AICMD0x38_WaitForFadeIn()                                               ;B5A750
     %AICMD0x13_Wait(180)                                       ;B5A751
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B5A754
     %AICMD0x10_End()                                           ;B5A756
@@ -2711,7 +2711,7 @@ DATA8_B5A757:
     %AICMD0x19($00E8, $00)                                     ;B5A763
     %AICMD0x08_EnableAIControl()                               ;B5A767
     %AICMD0x06_SetDestinationArea(!AREA_CREDITS2)              ;B5A768
-    %AICMD0x38()                                               ;B5A76A
+    %AICMD0x38_WaitForFadeIn()                                               ;B5A76A
     %AICMD0x13_Wait(180)                                       ;B5A76B
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B5A76E
     %AICMD0x10_End()                                           ;B5A770
@@ -2727,7 +2727,7 @@ DATA8_B5A771:
     %AICMD0x19($00E8, $00)                                     ;B5A77D
     %AICMD0x08_EnableAIControl()                               ;B5A781
     %AICMD0x06_SetDestinationArea(!AREA_CREDITS3)              ;B5A782
-    %AICMD0x38()                                               ;B5A784
+    %AICMD0x38_WaitForFadeIn()                                               ;B5A784
     %AICMD0x13_Wait(180)                                       ;B5A785
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B5A788
     %AICMD0x10_End()                                           ;B5A78A
@@ -2743,7 +2743,7 @@ DATA8_B5A78B:
     %AICMD0x19($00E8, $00)                                     ;B5A797
     %AICMD0x08_EnableAIControl()                               ;B5A79B
     %AICMD0x06_SetDestinationArea(!AREA_CREDITS4)              ;B5A79C
-    %AICMD0x38()                                               ;B5A79E
+    %AICMD0x38_WaitForFadeIn()                                               ;B5A79E
     %AICMD0x13_Wait(180)                                       ;B5A79F
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B5A7A2
     %AICMD0x10_End()                                           ;B5A7A4
@@ -2759,7 +2759,7 @@ DATA8_B5A7A5:
     %AICMD0x19($00E8, $00)                                     ;B5A7B1
     %AICMD0x08_EnableAIControl()                               ;B5A7B5
     %AICMD0x06_SetDestinationArea(!AREA_DRIVETOTOWN)           ;B5A7B6
-    %AICMD0x38()                                               ;B5A7B8
+    %AICMD0x38_WaitForFadeIn()                                               ;B5A7B8
     %AICMD0x13_Wait(180)                                       ;B5A7B9
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B5A7BC
     %AICMD0x10_End()                                           ;B5A7BE
@@ -2775,7 +2775,7 @@ DATA8_B5A7BF:
     %AICMD0x19($00E8, $00)                                     ;B5A7CB
     %AICMD0x08_EnableAIControl()                               ;B5A7CF
     %AICMD0x06_SetDestinationArea(!AREA_UNKNOWN51)             ;B5A7D0
-    %AICMD0x38()                                               ;B5A7D2
+    %AICMD0x38_WaitForFadeIn()                                               ;B5A7D2
     %AICMD0x13_Wait(180)                                       ;B5A7D3
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B5A7D6
     %AICMD0x10_End()                                           ;B5A7D8
@@ -2791,7 +2791,7 @@ DATA8_B5A7D9:
     %AICMD0x19($00E8, $00)                                     ;B5A7E5
     %AICMD0x08_EnableAIControl()                               ;B5A7E9
     %AICMD0x06_SetDestinationArea(!AREA_UNKNOWN52)             ;B5A7EA
-    %AICMD0x38()                                               ;B5A7EC
+    %AICMD0x38_WaitForFadeIn()                                               ;B5A7EC
     %AICMD0x13_Wait(180)                                       ;B5A7ED
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B5A7F0
     %AICMD0x10_End()                                           ;B5A7F2
@@ -2807,7 +2807,7 @@ DATA8_B5A7F3:
     %AICMD0x19($00E8, $00)                                     ;B5A7FF
     %AICMD0x08_EnableAIControl()                               ;B5A803
     %AICMD0x06_SetDestinationArea(!AREA_UNKNOWN56)             ;B5A804
-    %AICMD0x38()                                               ;B5A806
+    %AICMD0x38_WaitForFadeIn()                                               ;B5A806
     %AICMD0x13_Wait(180)                                       ;B5A807
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B5A80A
     %AICMD0x10_End()                                           ;B5A80C
@@ -2823,7 +2823,7 @@ DATA8_B5A80D:
     %AICMD0x19($00E8, $00)                                     ;B5A819
     %AICMD0x08_EnableAIControl()                               ;B5A81D
     %AICMD0x06_SetDestinationArea(!AREA_UNKNOWN53)             ;B5A81E
-    %AICMD0x38()                                               ;B5A820
+    %AICMD0x38_WaitForFadeIn()                                               ;B5A820
     %AICMD0x13_Wait(180)                                       ;B5A821
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B5A824
     %AICMD0x10_End()                                           ;B5A826
@@ -2839,7 +2839,7 @@ DATA8_B5A827:
     %AICMD0x19($00E8, $00)                                     ;B5A833
     %AICMD0x08_EnableAIControl()                               ;B5A837
     %AICMD0x06_SetDestinationArea(!AREA_UNKNOWN54)             ;B5A838
-    %AICMD0x38()                                               ;B5A83A
+    %AICMD0x38_WaitForFadeIn()                                               ;B5A83A
     %AICMD0x13_Wait(180)                                       ;B5A83B
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B5A83E
     %AICMD0x10_End()                                           ;B5A840
@@ -2848,7 +2848,7 @@ DATA8_B5A827:
 DATA8_B5A841:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A841
-    %AICMD0x4F()                                               ;B5A844
+    %AICMD0x4F_DisableToolUse()                                               ;B5A844
     %AICMD0x50()                                               ;B5A845
     %AICMD0x02_FreezeTime()                                    ;B5A846
     %AICMD0x03_SetHour($06)                                    ;B5A847
@@ -2857,7 +2857,7 @@ DATA8_B5A841:
     %AICMD0x19($00E8, $00)                                     ;B5A84F
     %AICMD0x08_EnableAIControl()                               ;B5A853
     %AICMD0x06_SetDestinationArea(!AREA_UNKNOWN55)             ;B5A854
-    %AICMD0x38()                                               ;B5A856
+    %AICMD0x38_WaitForFadeIn()                                               ;B5A856
     %AICMD0x13_Wait(180)                                       ;B5A857
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B5A85A
     %AICMD0x10_End()                                           ;B5A85C
@@ -2872,7 +2872,7 @@ DATA8_B5A85D:
     %AICMD0x05_SetTransferPosition(120, 456)                   ;B5A865
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5A86A
     %AICMD0x06_SetDestinationArea(!AREA_MNTTOPENDINGSUMMER)    ;B5A86C
-    %AICMD0x38()                                               ;B5A86E
+    %AICMD0x38_WaitForFadeIn()                                               ;B5A86E
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 176)                   ;B5A86F
     %AICMD0x13_Wait(60)                                        ;B5A873
     %AICMD0x29_SetMapScrooling(0, -1, 208)                     ;B5A876
@@ -2941,7 +2941,7 @@ pAIScripting0x46_L008:
     %AICMD0x12_Jump(pAIScripting0x46_L009)                                   ;B5A960
 pAIScripting0x46_L009:
     %AICMD0x19($00E8, $00)                                     ;B5A963
-    %AICMD0x09($01, pAIScripting0x46_L019)                                   ;B5A967
+    %AICMD0x09_StartScript($01, pAIScripting0x46_L019)                                   ;B5A967
     %AICMD0x12_Jump(pAIScripting0x46_L010)                                   ;B5A96B
 pAIScripting0x46_L010:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, pAIScripting0x46_L011)   ;B5A96E
@@ -2952,56 +2952,56 @@ pAIScripting0x46_L010:
     %AICMD0x45_JumpIfBetween16(nPlayerHappiness, 0, 299, pAIScripting0x46_L016);B5A991
     %AICMD0x12_Jump(pAIScripting0x46_L017)                                   ;B5A99B
 pAIScripting0x46_L011:
-    %AICMD0x09($02, pAIScripting0x46_L020)                                   ;B5A99E
+    %AICMD0x09_StartScript($02, pAIScripting0x46_L020)                                   ;B5A99E
     %AICMD0x12_Jump(pAIScripting0x46_L018)                                   ;B5A9A2
 pAIScripting0x46_L012:
-    %AICMD0x09($02, pAIScripting0x46_L021)                                   ;B5A9A5
+    %AICMD0x09_StartScript($02, pAIScripting0x46_L021)                                   ;B5A9A5
     %AICMD0x12_Jump(pAIScripting0x46_L018)                                   ;B5A9A9
 pAIScripting0x46_L013:
-    %AICMD0x09($02, pAIScripting0x46_L022)                                   ;B5A9AC
+    %AICMD0x09_StartScript($02, pAIScripting0x46_L022)                                   ;B5A9AC
     %AICMD0x12_Jump(pAIScripting0x46_L018)                                   ;B5A9B0
 pAIScripting0x46_L014:
-    %AICMD0x09($02, pAIScripting0x46_L023)                                   ;B5A9B3
+    %AICMD0x09_StartScript($02, pAIScripting0x46_L023)                                   ;B5A9B3
     %AICMD0x12_Jump(pAIScripting0x46_L018)                                   ;B5A9B7
 pAIScripting0x46_L015:
-    %AICMD0x09($02, pAIScripting0x46_L024)                                   ;B5A9BA
+    %AICMD0x09_StartScript($02, pAIScripting0x46_L024)                                   ;B5A9BA
     %AICMD0x12_Jump(pAIScripting0x46_L018)                                   ;B5A9BE
 pAIScripting0x46_L016:
-    %AICMD0x09($03, pAIScripting0x46_L029)                                   ;B5A9C1
+    %AICMD0x09_StartScript($03, pAIScripting0x46_L029)                                   ;B5A9C1
     %AICMD0x12_Jump(pAIScripting0x46_L018)                                   ;B5A9C5
 pAIScripting0x46_L017:
-    %AICMD0x09($04, pAIScripting0x46_L028)                                   ;B5A9C8
+    %AICMD0x09_StartScript($04, pAIScripting0x46_L028)                                   ;B5A9C8
     %AICMD0x12_Jump(pAIScripting0x46_L018)                                   ;B5A9CC
 pAIScripting0x46_L018:
     %AICMD0x29_SetMapScrooling(0, 1, 208)                      ;B5A9CF
     %AICMD0x13_Wait(240)                                       ;B5A9D5
-    %AICMD0x0B($03)                                            ;B5A9D8
-    %AICMD0x0C($02)                                            ;B5A9DA
+    %AICMD0x0B_SetScriptFlag($03)                                            ;B5A9D8
+    %AICMD0x0C_WaitForScriptFlag($02)                                            ;B5A9DA
     %AICMD0x13_Wait(60)                                        ;B5A9DC
     %AICMD0x29_SetMapScrooling(0, -1, 128)                     ;B5A9DF
     %AICMD0x13_Wait(240)                                       ;B5A9E5
     %AICMD0x10_End()                                           ;B5A9E8
 pAIScripting0x46_L019:
     %AICMD0x1A($0078, $0118, aAIScriptingData, $01)                     ;B5A9E9
-    %AICMD0x0C($00)                                            ;B5A9F1
+    %AICMD0x0C_WaitForScriptFlag($00)                                            ;B5A9F1
     %AICMD0x1B($0007, $01)                                     ;B5A9F3
     %AICMD0x13_Wait(120)                                       ;B5A9F7
     %AICMD0x1B($0006, $00)                                     ;B5A9FA
     %AICMD0x13_Wait(180)                                       ;B5A9FE
     %AICMD0x1B($0005, $00)                                     ;B5AA01
-    %AICMD0x0C($01)                                            ;B5AA05
+    %AICMD0x0C_WaitForScriptFlag($01)                                            ;B5AA05
     %AICMD0x1B($0000, $00)                                     ;B5AA07
     %AICMD0x0D($00, $01, $80, $01)                             ;B5AA0B
-    %AICMD0x0B($02)                                            ;B5AA10
+    %AICMD0x0B_SetScriptFlag($02)                                            ;B5AA10
     %AICMD0x37()                                               ;B5AA12
     %AICMD0x10_End()                                           ;B5AA13
 pAIScripting0x46_L020:
     %AICMD0x1A($0088, $0188, aAIScriptingData_L071, $01)                     ;B5AA14
-    %AICMD0x0C($03)                                            ;B5AA1C
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B5AA1C
     %AICMD0x1B($02E5, $00)                                     ;B5AA1E
     %AICMD0x0D($00, $FF, $70, $01)                             ;B5AA22
     %AICMD0x1B($02E6, $00)                                     ;B5AA27
-    %AICMD0x0B($00)                                            ;B5AA2B
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B5AA2B
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $02, pAIScripting0x46_L025)   ;B5AA2D
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $03, pAIScripting0x46_L025)   ;B5AA34
     %AICMD0x45_JumpIfBetween16(nLove_Maria, 0, 250, pAIScripting0x46_L026)   ;B5AA3B
@@ -3009,11 +3009,11 @@ pAIScripting0x46_L020:
     %AICMD0x12_Jump(pAIScripting0x46_L027)                                   ;B5AA49
 pAIScripting0x46_L021:
     %AICMD0x1A($0088, $0188, aAIScriptingData_L071, $01)                     ;B5AA4C
-    %AICMD0x0C($03)                                            ;B5AA54
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B5AA54
     %AICMD0x1B($02E5, $00)                                     ;B5AA56
     %AICMD0x0D($00, $FF, $70, $01)                             ;B5AA5A
     %AICMD0x1B($02E6, $00)                                     ;B5AA5F
-    %AICMD0x0B($00)                                            ;B5AA63
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B5AA63
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $02, pAIScripting0x46_L025)   ;B5AA65
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $03, pAIScripting0x46_L025)   ;B5AA6C
     %AICMD0x45_JumpIfBetween16(nLove_Ann, 0, 250, pAIScripting0x46_L026)     ;B5AA73
@@ -3021,11 +3021,11 @@ pAIScripting0x46_L021:
     %AICMD0x12_Jump(pAIScripting0x46_L027)                                   ;B5AA81
 pAIScripting0x46_L022:
     %AICMD0x1A($0088, $0188, aAIScriptingData_L071, $01)                     ;B5AA84
-    %AICMD0x0C($03)                                            ;B5AA8C
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B5AA8C
     %AICMD0x1B($02E5, $00)                                     ;B5AA8E
     %AICMD0x0D($00, $FF, $70, $01)                             ;B5AA92
     %AICMD0x1B($02E6, $00)                                     ;B5AA97
-    %AICMD0x0B($00)                                            ;B5AA9B
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B5AA9B
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $02, pAIScripting0x46_L025)   ;B5AA9D
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $03, pAIScripting0x46_L025)   ;B5AAA4
     %AICMD0x45_JumpIfBetween16(nLove_Nina, 0, 250, pAIScripting0x46_L026)    ;B5AAAB
@@ -3033,11 +3033,11 @@ pAIScripting0x46_L022:
     %AICMD0x12_Jump(pAIScripting0x46_L027)                                   ;B5AAB9
 pAIScripting0x46_L023:
     %AICMD0x1A($0088, $0188, aAIScriptingData_L071, $01)                     ;B5AABC
-    %AICMD0x0C($03)                                            ;B5AAC4
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B5AAC4
     %AICMD0x1B($02E5, $00)                                     ;B5AAC6
     %AICMD0x0D($00, $FF, $70, $01)                             ;B5AACA
     %AICMD0x1B($02E6, $00)                                     ;B5AACF
-    %AICMD0x0B($00)                                            ;B5AAD3
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B5AAD3
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $02, pAIScripting0x46_L025)   ;B5AAD5
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $03, pAIScripting0x46_L025)   ;B5AADC
     %AICMD0x45_JumpIfBetween16(nLove_Ellen, 0, 250, pAIScripting0x46_L026)   ;B5AAE3
@@ -3045,11 +3045,11 @@ pAIScripting0x46_L023:
     %AICMD0x12_Jump(pAIScripting0x46_L027)                                   ;B5AAF1
 pAIScripting0x46_L024:
     %AICMD0x1A($0088, $0188, aAIScriptingData_L071, $01)                     ;B5AAF4
-    %AICMD0x0C($03)                                            ;B5AAFC
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B5AAFC
     %AICMD0x1B($02E5, $00)                                     ;B5AAFE
     %AICMD0x0D($00, $FF, $70, $01)                             ;B5AB02
     %AICMD0x1B($02E6, $00)                                     ;B5AB07
-    %AICMD0x0B($00)                                            ;B5AB0B
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B5AB0B
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $02, pAIScripting0x46_L025)   ;B5AB0D
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $03, pAIScripting0x46_L025)   ;B5AB14
     %AICMD0x45_JumpIfBetween16(nLove_Eve, 0, 250, pAIScripting0x46_L026)     ;B5AB1B
@@ -3068,21 +3068,21 @@ pAIScripting0x46_L027:
     %AICMD0x13_Wait(180)                                       ;B5AB45
     %AICMD0x1B($02E6, $00)                                     ;B5AB48
     %AICMD0x13_Wait(60)                                        ;B5AB4C
-    %AICMD0x0B($01)                                            ;B5AB4F
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B5AB4F
     %AICMD0x1B($02E3, $00)                                     ;B5AB51
     %AICMD0x0D($00, $01, $80, $01)                             ;B5AB55
     %AICMD0x37()                                               ;B5AB5A
     %AICMD0x10_End()                                           ;B5AB5B
 pAIScripting0x46_L028:
     %AICMD0x1A($0088, $0188, aAIScriptingData_L167, $03)                     ;B5AB5C
-    %AICMD0x0C($03)                                            ;B5AB64
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B5AB64
     %AICMD0x13_Wait(60)                                        ;B5AB66
     %AICMD0x1B($01E1, $00)                                     ;B5AB69
     %AICMD0x0D($00, $FF, $70, $01)                             ;B5AB6D
     %AICMD0x13_Wait(60)                                        ;B5AB72
     %AICMD0x1B($01EA, $00)                                     ;B5AB75
     %AICMD0x13_Wait(120)                                       ;B5AB79
-    %AICMD0x0B($00)                                            ;B5AB7C
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B5AB7C
     %AICMD0x1B($01F8, $00)                                     ;B5AB7E
     %AICMD0x13_Wait(120)                                       ;B5AB82
     %AICMD0x1B($01E6, $01)                                     ;B5AB85
@@ -3091,17 +3091,17 @@ pAIScripting0x46_L028:
     %AICMD0x13_Wait(90)                                        ;B5AB90
     %AICMD0x1B($01DA, $00)                                     ;B5AB93
     %AICMD0x0D($00, $01, $30, $01)                             ;B5AB97
-    %AICMD0x0B($01)                                            ;B5AB9C
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B5AB9C
     %AICMD0x1B($01DA, $00)                                     ;B5AB9E
     %AICMD0x0D($00, $01, $40, $01)                             ;B5ABA2
     %AICMD0x37()                                               ;B5ABA7
     %AICMD0x10_End()                                           ;B5ABA8
 pAIScripting0x46_L029:
     %AICMD0x1A($0088, $0118, aAIScriptingData_L069, $03)                     ;B5ABA9
-    %AICMD0x0C($03)                                            ;B5ABB1
+    %AICMD0x0C_WaitForScriptFlag($03)                                            ;B5ABB1
     %AICMD0x1B($02DD, $00)                                     ;B5ABB3
     %AICMD0x13_Wait(60)                                        ;B5ABB7
-    %AICMD0x0B($00)                                            ;B5ABBA
+    %AICMD0x0B_SetScriptFlag($00)                                            ;B5ABBA
     %AICMD0x46_JumpIfBetween24(nMoney, 1000, 9999, pAIScripting0x46_L030)    ;B5ABBC
     %AICMD0x54_ShowDialog($047B, $01)                          ;B5ABC8
     %AICMD0x12_Jump(pAIScripting0x46_L031)                                   ;B5ABCC
@@ -3112,33 +3112,33 @@ pAIScripting0x46_L031:
     %AICMD0x13_Wait(60)                                        ;B5ABD6
     %AICMD0x1B($02DA, $00)                                     ;B5ABD9
     %AICMD0x0D($00, $01, $80, $01)                             ;B5ABDD
-    %AICMD0x0B($01)                                            ;B5ABE2
+    %AICMD0x0B_SetScriptFlag($01)                                            ;B5ABE2
     %AICMD0x37()                                               ;B5ABE4
     %AICMD0x10_End()                                           ;B5ABE5
     %AICMD0x1A($0058, $0088, aAIScriptingData_L207, $00)                     ;B5ABE6
     %AICMD0x13_Wait(30)                                        ;B5ABEE
-    %AICMD0x09($05, pAIScripting0x46_L033)                                   ;B5ABF1
+    %AICMD0x09_StartScript($05, pAIScripting0x46_L033)                                   ;B5ABF1
 pAIScripting0x46_L032:
     %AICMD0x13_Wait(1)                                         ;B5ABF5
     %AICMD0x12_Jump(pAIScripting0x46_L032)                                   ;B5ABF8
 pAIScripting0x46_L033:
     %AICMD0x1A($0068, $0088, aAIScriptingData_L208, $00)                     ;B5ABFB
     %AICMD0x13_Wait(30)                                        ;B5AC03
-    %AICMD0x09($06, pAIScripting0x46_L035)                                   ;B5AC06
+    %AICMD0x09_StartScript($06, pAIScripting0x46_L035)                                   ;B5AC06
 pAIScripting0x46_L034:
     %AICMD0x13_Wait(1)                                         ;B5AC0A
     %AICMD0x12_Jump(pAIScripting0x46_L034)                                   ;B5AC0D
 pAIScripting0x46_L035:
     %AICMD0x1A($0078, $0088, aAIScriptingData_L209, $00)                     ;B5AC10
     %AICMD0x13_Wait(30)                                        ;B5AC18
-    %AICMD0x09($07, pAIScripting0x46_L037)                                   ;B5AC1B
+    %AICMD0x09_StartScript($07, pAIScripting0x46_L037)                                   ;B5AC1B
 pAIScripting0x46_L036:
     %AICMD0x13_Wait(1)                                         ;B5AC1F
     %AICMD0x12_Jump(pAIScripting0x46_L036)                                   ;B5AC22
 pAIScripting0x46_L037:
     %AICMD0x1A($008A, $0088, aAIScriptingData_L210, $00)                     ;B5AC25
     %AICMD0x13_Wait(60)                                        ;B5AC2D
-    %AICMD0x09($08, pAIScripting0x46_L039)                                   ;B5AC30
+    %AICMD0x09_StartScript($08, pAIScripting0x46_L039)                                   ;B5AC30
 pAIScripting0x46_L038:
     %AICMD0x13_Wait(1)                                         ;B5AC34
     %AICMD0x12_Jump(pAIScripting0x46_L038)                                   ;B5AC37
@@ -3201,7 +3201,7 @@ DATA8_B5ACAE:
     %AICMD0x08_EnableAIControl()                               ;B5ACBE
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5ACBF
     %AICMD0x06_SetDestinationArea(!AREA_FARMSPRING)            ;B5ACC1
-    %AICMD0x38()                                               ;B5ACC3
+    %AICMD0x38_WaitForFadeIn()                                               ;B5ACC3
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 32)                  ;B5ACC4
     %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 102)                 ;B5ACC8
     %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 56)                   ;B5ACCC
@@ -3222,7 +3222,7 @@ DATA8_B5ACDE:
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5ACEF
     %AICMD0x47_SetValue8(nCurrentSeasonID, 0)                  ;B5ACF1
     %AICMD0x06_SetDestinationArea(!AREA_SHED)                  ;B5ACF6
-    %AICMD0x38()                                               ;B5ACF8
+    %AICMD0x38_WaitForFadeIn()                                               ;B5ACF8
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B5ACF9
     %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 72)                 ;B5ACFD
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 8)                     ;B5AD01
@@ -3252,7 +3252,7 @@ DATA8_B5AD25:
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5AD40
     %AICMD0x47_SetValue8(nCurrentSeasonID, 0)                  ;B5AD42
     %AICMD0x06_SetDestinationArea(!AREA_FARMSPRING)            ;B5AD47
-    %AICMD0x38()                                               ;B5AD49
+    %AICMD0x38_WaitForFadeIn()                                               ;B5AD49
     %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 1)                    ;B5AD4A
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 14)                  ;B5AD4E
     %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 16)                 ;B5AD52
@@ -3514,7 +3514,7 @@ DATA8_B5AFF9:
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5B00A
     %AICMD0x47_SetValue8(nCurrentSeasonID, 0)                  ;B5B00C
     %AICMD0x06_SetDestinationArea(!AREA_SHED)                  ;B5B011
-    %AICMD0x38()                                               ;B5B013
+    %AICMD0x38_WaitForFadeIn()                                               ;B5B013
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 64)                    ;B5B014
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 24)                  ;B5B018
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 8)                     ;B5B01C
@@ -3598,7 +3598,7 @@ DATA8_B5B050:
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5B191
     %AICMD0x47_SetValue8(nCurrentSeasonID, 0)                  ;B5B193
     %AICMD0x06_SetDestinationArea(!AREA_FARMSPRING)            ;B5B198
-    %AICMD0x38()                                               ;B5B19A
+    %AICMD0x38_WaitForFadeIn()                                               ;B5B19A
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 15)                  ;B5B19B
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 15)                  ;B5B19F
     %AICMD0x56_UseEquippedItem()                               ;B5B1A3
@@ -3687,7 +3687,7 @@ DATA8_B5B261:
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5B272
     %AICMD0x47_SetValue8(nCurrentSeasonID, 0)                  ;B5B274
     %AICMD0x06_SetDestinationArea(!AREA_SHED)                  ;B5B279
-    %AICMD0x38()                                               ;B5B27B
+    %AICMD0x38_WaitForFadeIn()                                               ;B5B27B
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 64)                    ;B5B27C
     %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 72)                 ;B5B280
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 8)                     ;B5B284
@@ -3789,7 +3789,7 @@ DATA8_B5B2B8:
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5B465
     %AICMD0x47_SetValue8(nCurrentSeasonID, 0)                  ;B5B467
     %AICMD0x06_SetDestinationArea(!AREA_FARMSPRING)            ;B5B46C
-    %AICMD0x38()                                               ;B5B46E
+    %AICMD0x38_WaitForFadeIn()                                               ;B5B46E
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 31)                  ;B5B46F
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 47)                  ;B5B473
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5B477
@@ -3922,10 +3922,10 @@ DATA8_B5B501:
     %AICMD0x05_SetTransferPosition(136, 344)                   ;B5B6A8
     %AICMD0x08_EnableAIControl()                               ;B5B6AD
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5B6AE
-    %AICMD0x09($01, pAIScripting0x47_HowToPlay_L001)                                   ;B5B6B0
+    %AICMD0x09_StartScript($01, pAIScripting0x47_HowToPlay_L001)                                   ;B5B6B0
     %AICMD0x47_SetValue8(nCurrentSeasonID, 1)                  ;B5B6B4
     %AICMD0x06_SetDestinationArea(!AREA_FARMSUMMER)            ;B5B6B9
-    %AICMD0x38()                                               ;B5B6BB
+    %AICMD0x38_WaitForFadeIn()                                               ;B5B6BB
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 32)                  ;B5B6BC
     %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 23)                  ;B5B6C0
     %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 39)                   ;B5B6C4
@@ -4060,7 +4060,7 @@ DATA8_B5B834:
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5B845
     %AICMD0x47_SetValue8(nCurrentSeasonID, 1)                  ;B5B847
     %AICMD0x06_SetDestinationArea(!AREA_SHED)                  ;B5B84C
-    %AICMD0x38()                                               ;B5B84E
+    %AICMD0x38_WaitForFadeIn()                                               ;B5B84E
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B5B84F
     %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 40)                 ;B5B853
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 8)                     ;B5B857
@@ -4161,7 +4161,7 @@ DATA8_B5B87B:
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5BA40
     %AICMD0x47_SetValue8(nCurrentSeasonID, 1)                  ;B5BA42
     %AICMD0x06_SetDestinationArea(!AREA_FARMSUMMER)            ;B5BA47
-    %AICMD0x38()                                               ;B5BA49
+    %AICMD0x38_WaitForFadeIn()                                               ;B5BA49
     %AICMD0x56_UseEquippedItem()                               ;B5BA4A
     %AICMD0x13_Wait(60)                                        ;B5BA4B
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 15)                  ;B5BA4E
@@ -4328,7 +4328,7 @@ DATA8_B5BBFA:
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5BC0B
     %AICMD0x47_SetValue8(nCurrentSeasonID, 1)                  ;B5BC0D
     %AICMD0x06_SetDestinationArea(!AREA_SHED)                  ;B5BC12
-    %AICMD0x38()                                               ;B5BC14
+    %AICMD0x38_WaitForFadeIn()                                               ;B5BC14
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 64)                    ;B5BC15
     %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 40)                 ;B5BC19
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 8)                     ;B5BC1D
@@ -4457,7 +4457,7 @@ DATA8_B5BC45:
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5BEA6
     %AICMD0x47_SetValue8(nCurrentSeasonID, 1)                  ;B5BEA8
     %AICMD0x06_SetDestinationArea(!AREA_FARMSUMMER)            ;B5BEAD
-    %AICMD0x38()                                               ;B5BEAF
+    %AICMD0x38_WaitForFadeIn()                                               ;B5BEAF
     %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 79)                   ;B5BEB0
     %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 15)                   ;B5BEB4
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5BEB8
@@ -4487,7 +4487,7 @@ DATA8_B5BEDE:
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5BEEF
     %AICMD0x47_SetValue8(nCurrentSeasonID, 1)                  ;B5BEF1
     %AICMD0x06_SetDestinationArea(!AREA_SHED)                  ;B5BEF6
-    %AICMD0x38()                                               ;B5BEF8
+    %AICMD0x38_WaitForFadeIn()                                               ;B5BEF8
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B5BEF9
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 24)                  ;B5BEFD
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 8)                     ;B5BF01
@@ -4610,7 +4610,7 @@ DATA8_B5BF1A:
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5C17B
     %AICMD0x47_SetValue8(nCurrentSeasonID, 1)                  ;B5C17D
     %AICMD0x06_SetDestinationArea(!AREA_FARMSUMMER)            ;B5C182
-    %AICMD0x38()                                               ;B5C184
+    %AICMD0x38_WaitForFadeIn()                                               ;B5C184
     %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 79)                   ;B5C185
     %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 15)                   ;B5C189
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5C18D
@@ -4742,7 +4742,7 @@ DATA8_B5C1BD:
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5C41E
     %AICMD0x47_SetValue8(nCurrentSeasonID, 2)                  ;B5C420
     %AICMD0x06_SetDestinationArea(!AREA_FARMFALL)              ;B5C425
-    %AICMD0x38()                                               ;B5C427
+    %AICMD0x38_WaitForFadeIn()                                               ;B5C427
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 32)                  ;B5C428
     %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 102)                 ;B5C42C
     %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 56)                   ;B5C430
@@ -4763,7 +4763,7 @@ DATA8_B5C442:
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5C453
     %AICMD0x47_SetValue8(nCurrentSeasonID, 2)                  ;B5C455
     %AICMD0x06_SetDestinationArea(!AREA_SHED)                  ;B5C45A
-    %AICMD0x38()                                               ;B5C45C
+    %AICMD0x38_WaitForFadeIn()                                               ;B5C45C
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B5C45D
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 56)                  ;B5C461
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 8)                     ;B5C465
@@ -4791,7 +4791,7 @@ DATA8_B5C489:
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5C49A
     %AICMD0x47_SetValue8(nCurrentSeasonID, 2)                  ;B5C49C
     %AICMD0x06_SetDestinationArea(!AREA_FARMFALL)              ;B5C4A1
-    %AICMD0x38()                                               ;B5C4A3
+    %AICMD0x38_WaitForFadeIn()                                               ;B5C4A3
     %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 39)                   ;B5C4A4
     %AICMD0x3A_RunForTime(!AIINPUT_UP, 55)                     ;B5C4A8
     %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 7)                    ;B5C4AC
@@ -4811,11 +4811,11 @@ DATA8_B5C4BA:
     %AICMD0x05_SetTransferPosition(128, 360)                   ;B5C4CF
     %AICMD0x08_EnableAIControl()                               ;B5C4D4
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5C4D5
-    %AICMD0x09($01, pAIScripting0x47_HowToPlay_L003)                                   ;B5C4D7
-    %AICMD0x09($02, pAIScripting0x47_HowToPlay_L005)                                   ;B5C4DB
+    %AICMD0x09_StartScript($01, pAIScripting0x47_HowToPlay_L003)                                   ;B5C4D7
+    %AICMD0x09_StartScript($02, pAIScripting0x47_HowToPlay_L005)                                   ;B5C4DB
     %AICMD0x47_SetValue8(nCurrentSeasonID, 2)                  ;B5C4DF
     %AICMD0x06_SetDestinationArea(!AREA_COWBARN)               ;B5C4E4
-    %AICMD0x38()                                               ;B5C4E6
+    %AICMD0x38_WaitForFadeIn()                                               ;B5C4E6
     %AICMD0x3A_RunForTime(!AIINPUT_UP, 15)                     ;B5C4E7
     %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 27)                  ;B5C4EB
     %AICMD0x3A_RunForTime(!AIINPUT_UP, 23)                     ;B5C4EF
@@ -4903,7 +4903,7 @@ DATA8_B5C5D3:
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5C5E4
     %AICMD0x47_SetValue8(nCurrentSeasonID, 2)                  ;B5C5E6
     %AICMD0x06_SetDestinationArea(!AREA_FARMFALL)              ;B5C5EB
-    %AICMD0x38()                                               ;B5C5ED
+    %AICMD0x38_WaitForFadeIn()                                               ;B5C5ED
     %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 7)                    ;B5C5EE
     %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 7)                   ;B5C5F2
     %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 55)                   ;B5C5F6
@@ -4924,7 +4924,7 @@ DATA8_B5C608:
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5C619
     %AICMD0x47_SetValue8(nCurrentSeasonID, 2)                  ;B5C61B
     %AICMD0x06_SetDestinationArea(!AREA_SHED)                  ;B5C620
-    %AICMD0x38()                                               ;B5C622
+    %AICMD0x38_WaitForFadeIn()                                               ;B5C622
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 64)                    ;B5C623
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 40)                  ;B5C627
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 8)                     ;B5C62B
@@ -4949,7 +4949,7 @@ DATA8_B5C648:
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5C659
     %AICMD0x47_SetValue8(nCurrentSeasonID, 2)                  ;B5C65B
     %AICMD0x06_SetDestinationArea(!AREA_FARMFALL)              ;B5C660
-    %AICMD0x38()                                               ;B5C662
+    %AICMD0x38_WaitForFadeIn()                                               ;B5C662
     %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 39)                   ;B5C663
     %AICMD0x3A_RunForTime(!AIINPUT_UP, 55)                     ;B5C667
     %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 7)                    ;B5C66B
@@ -4968,11 +4968,11 @@ DATA8_B5C679:
     %AICMD0x05_SetTransferPosition(128, 360)                   ;B5C689
     %AICMD0x08_EnableAIControl()                               ;B5C68E
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5C68F
-    %AICMD0x09($01, pAIScripting0x47_HowToPlay_L007)                                   ;B5C691
-    %AICMD0x09($02, pAIScripting0x47_HowToPlay_L008)                                   ;B5C695
+    %AICMD0x09_StartScript($01, pAIScripting0x47_HowToPlay_L007)                                   ;B5C691
+    %AICMD0x09_StartScript($02, pAIScripting0x47_HowToPlay_L008)                                   ;B5C695
     %AICMD0x47_SetValue8(nCurrentSeasonID, 2)                  ;B5C699
     %AICMD0x06_SetDestinationArea(!AREA_COWBARN)               ;B5C69E
-    %AICMD0x38()                                               ;B5C6A0
+    %AICMD0x38_WaitForFadeIn()                                               ;B5C6A0
     %AICMD0x3A_RunForTime(!AIINPUT_UP, 15)                     ;B5C6A1
     %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 27)                  ;B5C6A5
     %AICMD0x3A_RunForTime(!AIINPUT_UP, 71)                     ;B5C6A9
@@ -5057,10 +5057,10 @@ DATA8_B5C793:
     %AICMD0x05_SetTransferPosition(328, 360)                   ;B5C79E
     %AICMD0x08_EnableAIControl()                               ;B5C7A3
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5C7A4
-    %AICMD0x09($01, pAIScripting0x47_HowToPlay_L010)                                   ;B5C7A6
+    %AICMD0x09_StartScript($01, pAIScripting0x47_HowToPlay_L010)                                   ;B5C7A6
     %AICMD0x47_SetValue8(nCurrentSeasonID, 2)                  ;B5C7AA
     %AICMD0x06_SetDestinationArea(!AREA_FARMFALL)              ;B5C7AF
-    %AICMD0x38()                                               ;B5C7B1
+    %AICMD0x38_WaitForFadeIn()                                               ;B5C7B1
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 15)                  ;B5C7B2
     %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 63)                  ;B5C7B6
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 32)                    ;B5C7BA
@@ -5087,11 +5087,11 @@ DATA8_B5C7DE:
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5C7EF
     %AICMD0x23_OrWithIndexedValue(nEggInCoopFlags, $04)        ;B5C7F1
     %AICMD0x23_OrWithIndexedValue(nEggInCoopFlags, $05)        ;B5C7F6
-    %AICMD0x09($01, pAIScripting0x47_HowToPlay_L012)                                   ;B5C7FB
-    %AICMD0x09($02, pAIScripting0x47_HowToPlay_L014)                                   ;B5C7FF
+    %AICMD0x09_StartScript($01, pAIScripting0x47_HowToPlay_L012)                                   ;B5C7FB
+    %AICMD0x09_StartScript($02, pAIScripting0x47_HowToPlay_L014)                                   ;B5C7FF
     %AICMD0x47_SetValue8(nCurrentSeasonID, 2)                  ;B5C803
     %AICMD0x06_SetDestinationArea(!AREA_COOP)                  ;B5C808
-    %AICMD0x38()                                               ;B5C80A
+    %AICMD0x38_WaitForFadeIn()                                               ;B5C80A
     %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 11)                   ;B5C80B
     %AICMD0x3A_RunForTime(!AIINPUT_UP, 7)                      ;B5C80F
     %AICMD0x3E_SetCarryItem($14)                               ;B5C813
@@ -5153,10 +5153,10 @@ DATA8_B5C8AF:
     %AICMD0x05_SetTransferPosition(456, 360)                   ;B5C8BA
     %AICMD0x08_EnableAIControl()                               ;B5C8BF
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5C8C0
-    %AICMD0x09($01, pAIScripting0x47_HowToPlay_L016)                                   ;B5C8C2
+    %AICMD0x09_StartScript($01, pAIScripting0x47_HowToPlay_L016)                                   ;B5C8C2
     %AICMD0x47_SetValue8(nCurrentSeasonID, 2)                  ;B5C8C6
     %AICMD0x06_SetDestinationArea(!AREA_FARMFALL)              ;B5C8CB
-    %AICMD0x38()                                               ;B5C8CD
+    %AICMD0x38_WaitForFadeIn()                                               ;B5C8CD
     %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 7)                    ;B5C8CE
     %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 159)                  ;B5C8D2
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 40)                    ;B5C8D6
@@ -5178,22 +5178,22 @@ DATA8_B5C8EE:
     %AICMD0x05_SetTransferPosition(264, 312)                   ;B5C8F9
     %AICMD0x08_EnableAIControl()                               ;B5C8FE
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B5C8FF
-    %AICMD0x09($01, pAIScripting0x47_HowToPlay_L018)                                   ;B5C901
-    %AICMD0x09($03, pAIScripting0x47_HowToPlay_L020)                                   ;B5C905
-    %AICMD0x09($06, pAIScripting0x47_HowToPlay_L022)                                   ;B5C909
-    %AICMD0x09($07, pAIScripting0x47_HowToPlay_L024)                                   ;B5C90D
-    %AICMD0x09($0B, pAIScripting0x47_HowToPlay_L026)                                   ;B5C911
-    %AICMD0x09($0D, pAIScripting0x47_HowToPlay_L028)                                   ;B5C915
-    %AICMD0x09($0E, pAIScripting0x47_HowToPlay_L030)                                   ;B5C919
-    %AICMD0x09($0F, pAIScripting0x47_HowToPlay_L032)                                   ;B5C91D
-    %AICMD0x09($10, pAIScripting0x47_HowToPlay_L034)                                   ;B5C921
-    %AICMD0x09($11, pAIScripting0x47_HowToPlay_L036)                                   ;B5C925
-    %AICMD0x09($12, pAIScripting0x47_HowToPlay_L038)                                   ;B5C929
-    %AICMD0x09($13, pAIScripting0x47_HowToPlay_L040)                                   ;B5C92D
+    %AICMD0x09_StartScript($01, pAIScripting0x47_HowToPlay_L018)                                   ;B5C901
+    %AICMD0x09_StartScript($03, pAIScripting0x47_HowToPlay_L020)                                   ;B5C905
+    %AICMD0x09_StartScript($06, pAIScripting0x47_HowToPlay_L022)                                   ;B5C909
+    %AICMD0x09_StartScript($07, pAIScripting0x47_HowToPlay_L024)                                   ;B5C90D
+    %AICMD0x09_StartScript($0B, pAIScripting0x47_HowToPlay_L026)                                   ;B5C911
+    %AICMD0x09_StartScript($0D, pAIScripting0x47_HowToPlay_L028)                                   ;B5C915
+    %AICMD0x09_StartScript($0E, pAIScripting0x47_HowToPlay_L030)                                   ;B5C919
+    %AICMD0x09_StartScript($0F, pAIScripting0x47_HowToPlay_L032)                                   ;B5C91D
+    %AICMD0x09_StartScript($10, pAIScripting0x47_HowToPlay_L034)                                   ;B5C921
+    %AICMD0x09_StartScript($11, pAIScripting0x47_HowToPlay_L036)                                   ;B5C925
+    %AICMD0x09_StartScript($12, pAIScripting0x47_HowToPlay_L038)                                   ;B5C929
+    %AICMD0x09_StartScript($13, pAIScripting0x47_HowToPlay_L040)                                   ;B5C92D
     %AICMD0x47_SetValue8(nCurrentSeasonID, 2)                  ;B5C931
     %AICMD0x3B($01)                                            ;B5C936
     %AICMD0x06_SetDestinationArea(!AREA_DANCINGS2)             ;B5C938
-    %AICMD0x38()                                               ;B5C93A
+    %AICMD0x38_WaitForFadeIn()                                               ;B5C93A
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 64)                    ;B5C93B
     %AICMD0x54_ShowDialog($0241, $00)                          ;B5C93F
     %AICMD0x47_SetValue8($80019A, 4)                           ;B5C943
@@ -5276,7 +5276,7 @@ DATA8_B5CA00:
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5CA11
     %AICMD0x47_SetValue8(nCurrentSeasonID, 3)                  ;B5CA13
     %AICMD0x06_SetDestinationArea(!AREA_FARMWINTER)            ;B5CA18
-    %AICMD0x38()                                               ;B5CA1A
+    %AICMD0x38_WaitForFadeIn()                                               ;B5CA1A
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 31)                  ;B5CA1B
     %AICMD0x3A_RunForTime(!AIINPUT_DOWN, 23)                   ;B5CA1F
     %AICMD0x3A_RunForTime(!AIINPUT_LEFT, 47)                   ;B5CA23
@@ -5298,11 +5298,11 @@ DATA8_B5CA3D:
     %AICMD0x08_EnableAIControl()                               ;B5CA4D
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B5CA4E
     %AICMD0x3B($06)                                            ;B5CA50
-    %AICMD0x09($01, pAIScripting0x47_HowToPlay_L042)                                   ;B5CA52
-    %AICMD0x09($02, pAIScripting0x47_HowToPlay_L044)                                   ;B5CA56
+    %AICMD0x09_StartScript($01, pAIScripting0x47_HowToPlay_L042)                                   ;B5CA52
+    %AICMD0x09_StartScript($02, pAIScripting0x47_HowToPlay_L044)                                   ;B5CA56
     %AICMD0x47_SetValue8(nCurrentSeasonID, 3)                  ;B5CA5A
     %AICMD0x06_SetDestinationArea(!AREA_TOWNWINTER)            ;B5CA5F
-    %AICMD0x38()                                               ;B5CA61
+    %AICMD0x38_WaitForFadeIn()                                               ;B5CA61
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 15)                  ;B5CA62
     %AICMD0x39_WalkForTime(!AIINPUT_RIGHT, 87)                 ;B5CA66
     %AICMD0x3F_ThrowCarriedItem()                              ;B5CA6A
@@ -5338,7 +5338,7 @@ DATA8_B5CAA2:
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B5CAB8
     %AICMD0x47_SetValue8(nCurrentSeasonID, 3)                  ;B5CABA
     %AICMD0x06_SetDestinationArea(!AREA_WOODSWINTER)           ;B5CABF
-    %AICMD0x38()                                               ;B5CAC1
+    %AICMD0x38_WaitForFadeIn()                                               ;B5CAC1
     %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 41)                  ;B5CAC2
     %AICMD0x3A_RunForTime(!AIINPUT_UP, 7)                      ;B5CAC6
     %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 7)                   ;B5CACA
@@ -5384,14 +5384,14 @@ DATA8_B5CB13:
     %AICMD0x05_SetTransferPosition(24, 456)                    ;B5CB1E
     %AICMD0x08_EnableAIControl()                               ;B5CB23
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B5CB24
-    %AICMD0x09($01, pAIScripting0x47_HowToPlay_L046)                                   ;B5CB26
+    %AICMD0x09_StartScript($01, pAIScripting0x47_HowToPlay_L046)                                   ;B5CB26
     %AICMD0x47_SetValue8(nCurrentSeasonID, 0)                  ;B5CB2A
     %AICMD0x06_SetDestinationArea(!AREA_FARMSPRING)            ;B5CB2F
-    %AICMD0x38()                                               ;B5CB31
+    %AICMD0x38_WaitForFadeIn()                                               ;B5CB31
     %AICMD0x3A_RunForTime(!AIINPUT_RIGHT, 53)                  ;B5CB32
     %AICMD0x3A_RunForTime(!AIINPUT_UP, 39)                     ;B5CB36
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B5CB3A
-    %AICMD0x32($8000D4, $001B)                                 ;B5CB3C
+    %AICMD0x32_SetValue16($8000D4, $001B)                                 ;B5CB3C
     %AICMD0x13_Wait(240)                                       ;B5CB42
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily2, $02)       ;B5CB45
     %AICMD0x10_End()                                           ;B5CB4A

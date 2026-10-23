@@ -1,5 +1,5 @@
 - opcode: 0x48
-  macro: AICMD0x48
+  macro: AICMD0x48_SetValue24
   handler: fAIAction0x48
   handler_addr: "84B889"
   suggested_name: SetValue24
@@ -75,7 +75,7 @@
   open_questions: "Wniosek o 'nieblokujacym' wynika z analizy fragmentu 83AE5B-83AE7F; nie zweryfikowano pozostalych miejsc czytajacych bit 0x02 obj+0x00."
 
 - opcode: 0x4D
-  macro: AICMD0x4D
+  macro: AICMD0x4D_JumpIfBlueFeatherUsed
   handler: fAIAction0x4D
   handler_addr: "84BA72"
   suggested_name: JumpIfBlueFeatherUsed
@@ -90,7 +90,7 @@
   open_questions: "Znaczenie bajtow obiektu +0x03/+0x04/+0x07/+0x08 (prawdopodobnie liczniki/kierunek ruchu NPC) nie ustalone."
 
 - opcode: 0x4E
-  macro: AICMD0x4E
+  macro: AICMD0x4E_EnableTileInteractions
   handler: fAIAction0x4E
   handler_addr: "84BB31"
   suggested_name: EnableTileInteractions
@@ -104,7 +104,7 @@
   open_questions: null
 
 - opcode: 0x4F
-  macro: AICMD0x4F
+  macro: AICMD0x4F_DisableToolUse
   handler: fAIAction0x4F
   handler_addr: "84BB4B"
   suggested_name: DisableToolUse
@@ -190,7 +190,7 @@
   open_questions: "Znaczenie nUnknown2 (dialogUnk191) nadal nieznane - w dialog.asm modyfikowane w kilku miejscach. Nazwa 'AutoClose' wynika z analizy case06 w input.asm; nie potwierdzono w grze."
 
 - opcode: 0x55
-  macro: AICMD0x55
+  macro: AICMD0x55_JumpIfFlagNotSet
   handler: fAIAction0x55
   handler_addr: "84BF20"
   suggested_name: JumpIfFlagNotSet

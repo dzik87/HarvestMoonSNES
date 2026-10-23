@@ -12,15 +12,15 @@ Pewność opisów: confirmed: 56, probable: 34
 | 0x01 | `AICMD0x01_UnfreezeTime` | UnfreezeTime | confirmed | 1 | 10 | 8 |
 | 0x02 | `AICMD0x02_FreezeTime` | FreezeTime | confirmed | 1 | 94 | 38 |
 | 0x03 | `AICMD0x03_SetHour` | SetTimeId | probable | 2 | 91 | 33 |
-| 0x04 | `AICMD0x04_Emtpy` | Nop | confirmed | 1 | 0 | 0 |
+| 0x04 | `AICMD0x04_Nop` | Nop | confirmed | 1 | 0 | 0 |
 | 0x05 | `AICMD0x05_SetTransferPosition` | SetPlayerPosition | confirmed | 5 | 107 | 44 |
 | 0x06 | `AICMD0x06_SetDestinationArea` | SetDestinationArea | confirmed | 2 | 94 | 31 |
 | 0x07 | `AICMD0x07_SetPlayerDirection` | SetPlayerDirection | confirmed | 2 | 293 | 51 |
 | 0x08 | `AICMD0x08_EnableAIControl` | EnableAIControl | confirmed | 1 | 175 | 57 |
-| 0x09 | `AICMD0x09` | StartScript | confirmed | 4 | 608 | 69 |
-| 0x0A | `AICMD0x0A` | ScreenFadein | confirmed | 2 | 5 | 4 |
-| 0x0B | `AICMD0x0B` | SetScriptFlag | confirmed | 2 | 308 | 54 |
-| 0x0C | `AICMD0x0C` | WaitForScriptFlag | confirmed | 2 | 317 | 54 |
+| 0x09 | `AICMD0x09_StartScript` | StartScript | confirmed | 4 | 608 | 69 |
+| 0x0A | `AICMD0x0A_ScreenFadein` | ScreenFadein | confirmed | 2 | 5 | 4 |
+| 0x0B | `AICMD0x0B_SetScriptFlag` | SetScriptFlag | confirmed | 2 | 308 | 54 |
+| 0x0C | `AICMD0x0C_WaitForScriptFlag` | WaitForScriptFlag | confirmed | 2 | 317 | 54 |
 | 0x0D | `AICMD0x0D` | MoveObject | probable | 5 | 729 | 66 |
 | 0x0E | `AICMD0x0E` | ApplyMusicChange | probable | 2 | 0 | 0 |
 | 0x0F | `AICMD0x0F_ScreenFadeout` | ScreenFadeout | confirmed | 2 | 3 | 3 |
@@ -31,8 +31,8 @@ Pewność opisów: confirmed: 56, probable: 34
 | 0x14 | `AICMD0x14_JumpIfFlagSet` | JumpIfBitSet | confirmed | 7 | 692 | 24 |
 | 0x15 | `AICMD0x15_JumpIfEquals8` | JumpIfEquals8 | confirmed | 7 | 586 | 25 |
 | 0x16 | `AICMD0x16_JumpIfBetween8` | JumpIfBetween8 | confirmed | 8 | 335 | 17 |
-| 0x17 | `AICMD0x17` | RollRandom | confirmed | 2 | 126 | 10 |
-| 0x18 | `AICMD0x18` | JumpIfRandomEquals | confirmed | 4 | 205 | 10 |
+| 0x17 | `AICMD0x17_RollRandom` | RollRandom | confirmed | 2 | 126 | 10 |
+| 0x18 | `AICMD0x18_JumpIfRandomEquals` | JumpIfRandomEquals | confirmed | 4 | 205 | 10 |
 | 0x19 | `AICMD0x19` | SetPlayerSprite | probable | 4 | 151 | 31 |
 | 0x1A | `AICMD0x1A` | SpawnNpc | probable | 8 | 737 | 74 |
 | 0x1B | `AICMD0x1B` | SetSprite | probable | 4 | 1304 | 68 |
@@ -45,26 +45,26 @@ Pewność opisów: confirmed: 56, probable: 34
 | 0x22 | `AICMD0x22` | StartRandomWalk | probable | 7 | 70 | 23 |
 | 0x23 | `AICMD0x23_OrWithIndexedValue` | SetBit | confirmed | 5 | 219 | 37 |
 | 0x24 | `AICMD0x24_NextHourPalette` | SetNextPalette | confirmed | 2 | 6 | 6 |
-| 0x25 | `AICMD0x25` | RemoveActor | confirmed | 2 | 6 | 5 |
-| 0x26 | `AICMD0x26` | ClearBit | confirmed | 5 | 0 | 0 |
-| 0x27 | `AICMD0x27` | ClearBit | confirmed | 5 | 0 | 0 |
-| 0x28 | `AICMD0x28` | ClearBit | confirmed | 5 | 60 | 21 |
+| 0x25 | `AICMD0x25_RemoveActor` | RemoveActor | confirmed | 2 | 6 | 5 |
+| 0x26 | `AICMD0x26_ClearBitAs0x28` | ClearBit | confirmed | 5 | 0 | 0 |
+| 0x27 | `AICMD0x27_ClearBitAs0x28` | ClearBit | confirmed | 5 | 0 | 0 |
+| 0x28 | `AICMD0x28_ClearBit` | ClearBit | confirmed | 5 | 60 | 21 |
 | 0x29 | `AICMD0x29_SetMapScrooling` | SetMapScroll | confirmed | 6 | 10 | 4 |
 | 0x2A | `AICMD0x2A` | StartTileSequence | probable | 3 | 4 | 3 |
 | 0x2B | `AICMD0x2B` | SpawnActor | probable | 4 | 22 | 1 |
 | 0x2C | `AICMD0x2C` | PlaySoundWait | probable | 6 | 4 | 2 |
-| 0x2D | `AICMD0x2D` | JumpOnInteract | confirmed | 5 | 181 | 16 |
+| 0x2D | `AICMD0x2D_JumpOnInteract` | JumpOnInteract | confirmed | 5 | 181 | 16 |
 | 0x2E | `AICMD0x2E` | StartWander | probable | 5 | 22 | 2 |
 | 0x2F | `AICMD0x2F` | SetActorSpriteTable | probable | 3 | 75 | 4 |
 | 0x30 | `AICMD0x30_UpdateChicken` | UpdateChicken | probable | 1 | 3 | 1 |
 | 0x31 | `AICMD0x31_UpdateCow` | UpdateCow | probable | 1 | 9 | 1 |
-| 0x32 | `AICMD0x32` | SetValue16 | confirmed | 6 | 18 | 8 |
+| 0x32 | `AICMD0x32_SetValue16` | SetValue16 | confirmed | 6 | 18 | 8 |
 | 0x33 | `AICMD0x33` | UpdateMole | probable | 1 | 2 | 1 |
 | 0x34 | `AICMD0x34` | UpdatePickup | probable | 1 | 1 | 1 |
 | 0x35 | `AICMD0x35_UpdateHorse` | UpdateHorse | probable | 1 | 3 | 1 |
 | 0x36 | `AICMD0x36_UpdateDog` | UpdateDog | probable | 1 | 3 | 2 |
 | 0x37 | `AICMD0x37` | RemoveObject | probable | 1 | 104 | 41 |
-| 0x38 | `AICMD0x38` | WaitForFadeIn | confirmed | 1 | 150 | 55 |
+| 0x38 | `AICMD0x38_WaitForFadeIn` | WaitForFadeIn | confirmed | 1 | 150 | 55 |
 | 0x39 | `AICMD0x39_WalkForTime` | WalkForTime | confirmed | 4 | 335 | 40 |
 | 0x3A | `AICMD0x3A_RunForTime` | RunForTime | confirmed | 4 | 274 | 17 |
 | 0x3B | `AICMD0x3B` | SetCarryItemHolding | probable | 2 | 5 | 4 |
@@ -80,20 +80,20 @@ Pewność opisów: confirmed: 56, probable: 34
 | 0x45 | `AICMD0x45_JumpIfBetween16` | JumpIfBetween16 | confirmed | 10 | 219 | 16 |
 | 0x46 | `AICMD0x46_JumpIfBetween24` | JumpIfBetween24 | confirmed | 12 | 3 | 3 |
 | 0x47 | `AICMD0x47_SetValue8` | SetValue8 | confirmed | 5 | 78 | 15 |
-| 0x48 | `AICMD0x48` | SetValue24 | confirmed | 7 | 0 | 0 |
+| 0x48 | `AICMD0x48_SetValue24` | SetValue24 | confirmed | 7 | 0 | 0 |
 | 0x49 | `AICMD0x49` | SetSpriteTableFacingPlayer | probable | 3 | 2 | 1 |
 | 0x4A | `AICMD0x4A` | PickUpObjectOnButtonA | probable | 1 | 3 | 3 |
 | 0x4B | `AICMD0x4B` | ReplaceMapTile | probable | 6 | 2 | 1 |
 | 0x4C | `AICMD0x4C` | SetPassable | probable | 1 | 3 | 2 |
-| 0x4D | `AICMD0x4D` | JumpIfBlueFeatherUsed | confirmed | 3 | 133 | 8 |
-| 0x4E | `AICMD0x4E` | EnableTileInteractions | confirmed | 1 | 2 | 2 |
-| 0x4F | `AICMD0x4F` | DisableToolUse | confirmed | 1 | 27 | 8 |
+| 0x4D | `AICMD0x4D_JumpIfBlueFeatherUsed` | JumpIfBlueFeatherUsed | confirmed | 3 | 133 | 8 |
+| 0x4E | `AICMD0x4E_EnableTileInteractions` | EnableTileInteractions | confirmed | 1 | 2 | 2 |
+| 0x4F | `AICMD0x4F_DisableToolUse` | DisableToolUse | confirmed | 1 | 27 | 8 |
 | 0x50 | `AICMD0x50` | ReleaseCarried | probable | 1 | 66 | 24 |
 | 0x51 | `AICMD0x51` | ReleaseCarriedAnimal | probable | 1 | 1 | 1 |
 | 0x52 | `AICMD0x52` | PickUpObjectForEventA | probable | 1 | 1 | 1 |
 | 0x53 | `AICMD0x53` | PickUpObjectForEventB | probable | 1 | 1 | 1 |
 | 0x54 | `AICMD0x54_ShowDialog` | ShowDialogAutoClose | probable | 4 | 37 | 3 |
-| 0x55 | `AICMD0x55` | JumpIfFlagNotSet | confirmed | 7 | 34 | 3 |
+| 0x55 | `AICMD0x55_JumpIfFlagNotSet` | JumpIfFlagNotSet | confirmed | 7 | 34 | 3 |
 | 0x56 | `AICMD0x56_UseEquippedItem` | UseEquippedItem | confirmed | 1 | 99 | 5 |
 | 0x57 | `AICMD0x57_UpdateStamina` | UpdateStamina | confirmed | 2 | 16 | 2 |
 | 0x58 | `AICMD0x58_ReplaceFarmTile` | ReplaceFarmTile | confirmed | 6 | 545 | 1 |
@@ -184,7 +184,7 @@ Przykłady z skryptów:
 
 ## 0x04 — Nop
 
-- Makro: `AICMD0x04_Emtpy` · handler: `fAIAction0x04_DoesNothing` ($848A58) · pewność: **confirmed**
+- Makro: `AICMD0x04_Nop` · handler: `fAIAction0x04_DoesNothing` ($848A58) · pewność: **confirmed**
 - Długość: 1 B · użycie: 0 wywołań w 0 skryptach
 
 Pusta komenda (NOP) - tylko przesuwa wskaznik o 1 bajt.
@@ -277,7 +277,7 @@ Przykłady z skryptów:
 
 ## 0x09 — StartScript
 
-- Makro: `AICMD0x09` · handler: `fAIAction0x09` ($848B08) · pewność: **confirmed**
+- Makro: `AICMD0x09_StartScript` · handler: `fAIAction0x09` ($848B08) · pewność: **confirmed**
 - Długość: 4 B · użycie: 608 wywołań w 69 skryptach
 
 Uruchamia rownolegly skrypt w innym slocie (nDataIndex), zaczynajacy sie od pNextAction; biezacy skrypt idzie dalej.
@@ -297,13 +297,13 @@ Wywołuje: `fAI_SetCCPointer`, `fAI_Unknown8488D4`
 
 Przykłady z skryptów:
 ```
-%AICMD0x09($09, pAIScripting0x00_General_L061)   ; pAIScripting0x00_General @ $B38F99
-%AICMD0x09($0A, pAIScripting0x00_General_L066)   ; pAIScripting0x00_General @ $B38F9D
+%AICMD0x09_StartScript($09, pAIScripting0x00_General_L061)   ; pAIScripting0x00_General @ $B38F99
+%AICMD0x09_StartScript($0A, pAIScripting0x00_General_L066)   ; pAIScripting0x00_General @ $B38F9D
 ```
 
 ## 0x0A — ScreenFadein
 
-- Makro: `AICMD0x0A` · handler: `fAIAction0x0A` ($848B83) · pewność: **confirmed**
+- Makro: `AICMD0x0A_ScreenFadein` · handler: `fAIAction0x0A` ($848B83) · pewność: **confirmed**
 - Długość: 2 B · użycie: 5 wywołań w 4 skryptach
 
 Plynnie rozjasnia ekran (fade-in) od jasnosci 3 do 15; blokuje do konca.
@@ -322,12 +322,12 @@ Wywołuje: `fCore_ScreenFadein`
 
 Przykłady z skryptów:
 ```
-%AICMD0x0A($01)   ; pAIScripting0x08 @ $B3E4F6
+%AICMD0x0A_ScreenFadein($01)   ; pAIScripting0x08 @ $B3E4F6
 ```
 
 ## 0x0B — SetScriptFlag
 
-- Makro: `AICMD0x0B` · handler: `fAIAction0x0B` ($848BAC) · pewność: **confirmed**
+- Makro: `AICMD0x0B_SetScriptFlag` · handler: `fAIAction0x0B` ($848BAC) · pewność: **confirmed**
 - Długość: 2 B · użycie: 308 wywołań w 54 skryptach
 
 Ustawia bit nFlagBit w globalnym polu flag skryptow $7F:1F7A (synchronizacja miedzy slotami).
@@ -344,13 +344,13 @@ RAM: `$7F1F7A`, `ptrAIActionData`
 
 Przykłady z skryptów:
 ```
-%AICMD0x0B($00)   ; pAIScripting0x09 @ $B3E638
-%AICMD0x0B($03)   ; pAIScripting0x09 @ $B3E684
+%AICMD0x0B_SetScriptFlag($00)   ; pAIScripting0x09 @ $B3E638
+%AICMD0x0B_SetScriptFlag($03)   ; pAIScripting0x09 @ $B3E684
 ```
 
 ## 0x0C — WaitForScriptFlag
 
-- Makro: `AICMD0x0C` · handler: `fAIAction0x0C` ($848BDC) · pewność: **confirmed**
+- Makro: `AICMD0x0C_WaitForScriptFlag` · handler: `fAIAction0x0C` ($848BDC) · pewność: **confirmed**
 - Długość: 2 B · użycie: 317 wywołań w 54 skryptach
 
 Czeka (klatka po klatce) az bit nFlagBit w $7F:1F7A bedzie ustawiony, po czym idzie dalej.
@@ -365,8 +365,8 @@ RAM: `$7F1F7A`, `ptrAIActionData`, `slot[+0x10] (wait counter)`
 
 Przykłady z skryptów:
 ```
-%AICMD0x0C($02)   ; pAIScripting0x09 @ $B3E63A
-%AICMD0x0C($04)   ; pAIScripting0x09 @ $B3E69D
+%AICMD0x0C_WaitForScriptFlag($02)   ; pAIScripting0x09 @ $B3E63A
+%AICMD0x0C_WaitForScriptFlag($04)   ; pAIScripting0x09 @ $B3E69D
 ```
 
 ## 0x0D — MoveObject
@@ -588,7 +588,7 @@ Przykłady z skryptów:
 
 ## 0x17 — RollRandom
 
-- Makro: `AICMD0x17` · handler: `fAIAction0x17` ($848E68) · pewność: **confirmed**
+- Makro: `AICMD0x17_RollRandom` · handler: `fAIAction0x17` ($848E68) · pewność: **confirmed**
 - Długość: 2 B · użycie: 126 wywołań w 10 skryptach
 
 Losuje liczbe 0..nMax-1 i zapisuje ja w polu +$0D biezacego obiektu AI.
@@ -607,13 +607,13 @@ Wywołuje: `fCore_GetRandomNumber`
 
 Przykłady z skryptów:
 ```
-%AICMD0x17($02)   ; pAIScripting0x01 @ $B39460
-%AICMD0x17($04)   ; pAIScripting0x01 @ $B39FD9
+%AICMD0x17_RollRandom($02)   ; pAIScripting0x01 @ $B39460
+%AICMD0x17_RollRandom($04)   ; pAIScripting0x01 @ $B39FD9
 ```
 
 ## 0x18 — JumpIfRandomEquals
 
-- Makro: `AICMD0x18` · handler: `fAIAction0x18` ($848E90) · pewność: **confirmed**
+- Makro: `AICMD0x18_JumpIfRandomEquals` · handler: `fAIAction0x18` ($848E90) · pewność: **confirmed**
 - Długość: 4 B · użycie: 205 wywołań w 10 skryptach
 
 Skok do pNextAction jesli ostatnio wylosowana (0x17) wartosc obiektu rowna sie nValue.
@@ -631,8 +631,8 @@ RAM: `ptrAIActionData`, `ptrAIUnknown0xCC+$0D`, `strcVariables.n8Temp1`, `strcVa
 
 Przykłady z skryptów:
 ```
-%AICMD0x18($00, pAIScripting0x01_L017)   ; pAIScripting0x01 @ $B39462
-%AICMD0x18($00, pAIScripting0x01_L030)   ; pAIScripting0x01 @ $B39536
+%AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_L017)   ; pAIScripting0x01 @ $B39462
+%AICMD0x18_JumpIfRandomEquals($00, pAIScripting0x01_L030)   ; pAIScripting0x01 @ $B39536
 ```
 
 ## 0x19 — SetPlayerSprite
@@ -926,7 +926,7 @@ Przykłady z skryptów:
 
 ## 0x25 — RemoveActor
 
-- Makro: `AICMD0x25` · handler: `fAIAction0x25` ($849375) · pewność: **confirmed**
+- Makro: `AICMD0x25_RemoveActor` · handler: `fAIAction0x25` ($849375) · pewność: **confirmed**
 - Długość: 2 B · użycie: 6 wywołań w 5 skryptach
 
 Dezaktywuje slot AI o zadanym numerze i usuwa jego obiekt gry (sprite) z mapy.
@@ -945,13 +945,13 @@ Wywołuje: `fAI_SetCCPointer`, `fObject_Unknown8581A2`
 
 Przykłady z skryptów:
 ```
-%AICMD0x25($01)   ; pAIScripting0x09 @ $B3E658
-%AICMD0x25($02)   ; pAIScripting0x09 @ $B3E65A
+%AICMD0x25_RemoveActor($01)   ; pAIScripting0x09 @ $B3E658
+%AICMD0x25_RemoveActor($02)   ; pAIScripting0x09 @ $B3E65A
 ```
 
 ## 0x26 — ClearBit
 
-- Makro: `AICMD0x26` · handler: `fAIAction0x28` ($8493C9) · pewność: **confirmed**
+- Makro: `AICMD0x26_ClearBitAs0x28` · handler: `fAIAction0x28` ($8493C9) · pewność: **confirmed**
 - Długość: 5 B · użycie: 0 wywołań w 0 skryptach
 
 Alias opkodu 0x28 (kasowanie bitu) - w tablicy aAIActions wpis 0x26 wskazuje na fAIAction0x28.
@@ -969,7 +969,7 @@ RAM: `ptrTemp0x72`, `strcVariables.n16Temp1`, `ptrAIActionData`
 
 ## 0x27 — ClearBit
 
-- Makro: `AICMD0x27` · handler: `fAIAction0x28` ($8493C9) · pewność: **confirmed**
+- Makro: `AICMD0x27_ClearBitAs0x28` · handler: `fAIAction0x28` ($8493C9) · pewność: **confirmed**
 - Długość: 5 B · użycie: 0 wywołań w 0 skryptach
 
 Alias opkodu 0x28 (kasowanie bitu) - w tablicy aAIActions wpis 0x27 wskazuje na fAIAction0x28.
@@ -987,7 +987,7 @@ RAM: `ptrTemp0x72`, `strcVariables.n16Temp1`, `ptrAIActionData`
 
 ## 0x28 — ClearBit
 
-- Makro: `AICMD0x28` · handler: `fAIAction0x28` ($8493C9) · pewność: **confirmed**
+- Makro: `AICMD0x28_ClearBit` · handler: `fAIAction0x28` ($8493C9) · pewność: **confirmed**
 - Długość: 5 B · użycie: 60 wywołań w 21 skryptach
 
 Kasuje jeden bit (0-15) w 16-bitowym slowie pod podanym adresem RAM.
@@ -1005,8 +1005,8 @@ RAM: `ptrTemp0x72`, `strcVariables.n16Temp1`, `ptrAIActionData`
 
 Przykłady z skryptów:
 ```
-%AICMD0x28(strcFlags.daily1, $09)   ; pAIScripting0x01 @ $B3A9E3
-%AICMD0x28($8000D2, $05)   ; pAIScripting0x0A @ $B3E90D
+%AICMD0x28_ClearBit(strcFlags.daily1, $09)   ; pAIScripting0x01 @ $B3A9E3
+%AICMD0x28_ClearBit($8000D2, $05)   ; pAIScripting0x0A @ $B3E90D
 ```
 
 ## 0x29 — SetMapScroll
@@ -1112,7 +1112,7 @@ Przykłady z skryptów:
 
 ## 0x2D — JumpOnInteract
 
-- Makro: `AICMD0x2D` · handler: `fAIAction0x2D` ($849633) · pewność: **confirmed**
+- Makro: `AICMD0x2D_JumpOnInteract` · handler: `fAIAction0x2D` ($849633) · pewność: **confirmed**
 - Długość: 5 B · użycie: 181 wywołań w 16 skryptach
 
 Jednoklatkowy test interakcji: jesli gracz nacisnal A przy tej postaci, skacze do jednego z dwoch adresow, w przeciwnym razie przechodzi do nastepnej komendy.
@@ -1132,8 +1132,8 @@ Wywołuje: `fAI_Unknown848895`
 
 Przykłady z skryptów:
 ```
-%AICMD0x2D(pAIScripting0x01_L013, pAIScripting0x01_L011)   ; pAIScripting0x01 @ $B393E8
-%AICMD0x2D(pAIScripting0x01_L029, pAIScripting0x01_L027)   ; pAIScripting0x01 @ $B394B2
+%AICMD0x2D_JumpOnInteract(pAIScripting0x01_L013, pAIScripting0x01_L011)   ; pAIScripting0x01 @ $B393E8
+%AICMD0x2D_JumpOnInteract(pAIScripting0x01_L029, pAIScripting0x01_L027)   ; pAIScripting0x01 @ $B394B2
 ```
 
 ## 0x2E — StartWander
@@ -1228,7 +1228,7 @@ Przykłady z skryptów:
 
 ## 0x32 — SetValue16
 
-- Makro: `AICMD0x32` · handler: `fAIAction0x32` ($84A90F) · pewność: **confirmed**
+- Makro: `AICMD0x32_SetValue16` · handler: `fAIAction0x32` ($84A90F) · pewność: **confirmed**
 - Długość: 6 B · użycie: 18 wywołań w 8 skryptach
 
 Zapisuje stala 16-bitowa pod dowolny adres RAM (odpowiednik 0x47 SetValue8 dla slowa).
@@ -1246,8 +1246,8 @@ RAM: `ptrTemp0x72`, `ptrAIActionData`
 
 Przykłady z skryptów:
 ```
-%AICMD0x32($8000D4, $0015)   ; pAIScripting0x05 @ $B3D343
-%AICMD0x32(strcFlags.unknown1, $F7FF)   ; pAIScripting0x0E @ $B3F11A
+%AICMD0x32_SetValue16($8000D4, $0015)   ; pAIScripting0x05 @ $B3D343
+%AICMD0x32_SetValue16(strcFlags.unknown1, $F7FF)   ; pAIScripting0x0E @ $B3F11A
 ```
 
 ## 0x33 — UpdateMole
@@ -1350,7 +1350,7 @@ Przykłady z skryptów:
 
 ## 0x38 — WaitForFadeIn
 
-- Makro: `AICMD0x38` · handler: `fAIAction0x38` ($84B365) · pewność: **confirmed**
+- Makro: `AICMD0x38_WaitForFadeIn` · handler: `fAIAction0x38` ($84B365) · pewność: **confirmed**
 - Długość: 1 B · użycie: 150 wywołań w 55 skryptach
 
 Blokuje skrypt do chwili, gdy ustawiona jest flaga daily1 $8000 (ekran w pelni rozjasniony po fade-in).
@@ -1363,7 +1363,7 @@ RAM: `strcFlags.daily1`, `ptrAIActionData`, `ptrAIUnknown0xCC`
 
 Przykłady z skryptów:
 ```
-%AICMD0x38()   ; pAIScripting0x09 @ $B3E637
+%AICMD0x38_WaitForFadeIn()   ; pAIScripting0x09 @ $B3E637
 ```
 
 ## 0x39 — WalkForTime
@@ -1695,7 +1695,7 @@ Przykłady z skryptów:
 
 ## 0x48 — SetValue24
 
-- Makro: `AICMD0x48` · handler: `fAIAction0x48` ($84B889) · pewność: **confirmed**
+- Makro: `AICMD0x48_SetValue24` · handler: `fAIAction0x48` ($84B889) · pewność: **confirmed**
 - Długość: 7 B · użycie: 0 wywołań w 0 skryptach
 
 Zapisuje wartosc 24-bit pod 24-bitowy adres (odpowiednik 0x47 SetValue8 dla n24).
@@ -1800,7 +1800,7 @@ Przykłady z skryptów:
 
 ## 0x4D — JumpIfBlueFeatherUsed
 
-- Makro: `AICMD0x4D` · handler: `fAIAction0x4D` ($84BA72) · pewność: **confirmed**
+- Makro: `AICMD0x4D_JumpIfBlueFeatherUsed` · handler: `fAIAction0x4D` ($84BA72) · pewność: **confirmed**
 - Długość: 3 B · użycie: 133 wywołań w 8 skryptach
 
 Skok warunkowy: jesli gracz jest przy obiekcie i uzyl Niebieskiego Piora (flaga daily3 0x0040), obiekt odwraca sie do gracza i skrypt skacze pod pNextAction.
@@ -1819,13 +1819,13 @@ Wywołuje: `fAI_Unknown848895`
 
 Przykłady z skryptów:
 ```
-%AICMD0x4D(pAIScripting0x01_L010)   ; pAIScripting0x01 @ $B393E5
-%AICMD0x4D(pAIScripting0x01_L026)   ; pAIScripting0x01 @ $B394AF
+%AICMD0x4D_JumpIfBlueFeatherUsed(pAIScripting0x01_L010)   ; pAIScripting0x01 @ $B393E5
+%AICMD0x4D_JumpIfBlueFeatherUsed(pAIScripting0x01_L026)   ; pAIScripting0x01 @ $B394AF
 ```
 
 ## 0x4E — EnableTileInteractions
 
-- Makro: `AICMD0x4E` · handler: `fAIAction0x4E` ($84BB31) · pewność: **confirmed**
+- Makro: `AICMD0x4E_EnableTileInteractions` · handler: `fAIAction0x4E` ($84BB31) · pewność: **confirmed**
 - Długość: 1 B · użycie: 2 wywołań w 2 skryptach
 
 Czysci flage daily2 0x0008 - przywraca interakcje z kaflami wylaczone przez 0x40.
@@ -1836,12 +1836,12 @@ RAM: `ptrAIActionData`, `strcFlags.daily2`
 
 Przykłady z skryptów:
 ```
-%AICMD0x4E()   ; pAIScripting0x26 @ $B4A69D
+%AICMD0x4E_EnableTileInteractions()   ; pAIScripting0x26 @ $B4A69D
 ```
 
 ## 0x4F — DisableToolUse
 
-- Makro: `AICMD0x4F` · handler: `fAIAction0x4F` ($84BB4B) · pewność: **confirmed**
+- Makro: `AICMD0x4F_DisableToolUse` · handler: `fAIAction0x4F` ($84BB4B) · pewność: **confirmed**
 - Długość: 1 B · użycie: 27 wywołań w 8 skryptach
 
 Ustawia flage daily4 0x8000, ktora blokuje uzycie narzedzia przyciskiem Y.
@@ -1854,7 +1854,7 @@ RAM: `ptrAIActionData`, `strcFlags.daily4`
 
 Przykłady z skryptów:
 ```
-%AICMD0x4F()   ; pAIScripting0x0A @ $B3E85B
+%AICMD0x4F_DisableToolUse()   ; pAIScripting0x0A @ $B3E85B
 ```
 
 ## 0x50 — ReleaseCarried
@@ -1961,7 +1961,7 @@ Przykłady z skryptów:
 
 ## 0x55 — JumpIfFlagNotSet
 
-- Makro: `AICMD0x55` · handler: `fAIAction0x55` ($84BF20) · pewność: **confirmed**
+- Makro: `AICMD0x55_JumpIfFlagNotSet` · handler: `fAIAction0x55` ($84BF20) · pewność: **confirmed**
 - Długość: 7 B · użycie: 34 wywołań w 3 skryptach
 
 Skacze pod pNextAction, jesli bit nFlagsIndex w slowie pod pAddress NIE jest ustawiony (negacja 0x14 JumpIfFlagSet).
@@ -1978,8 +1978,8 @@ RAM: `ptrAIActionData`, `ptrTemp0x72`, `strcVariables.n16Temp1`
 
 Przykłady z skryptów:
 ```
-%AICMD0x55(strcFlags.unknown1, $00, pAIScripting0x0B_L033)   ; pAIScripting0x0B @ $B3EB06
-%AICMD0x55(strcFlags.unknown1, $01, pAIScripting0x0B_L033)   ; pAIScripting0x0B @ $B3EB0D
+%AICMD0x55_JumpIfFlagNotSet(strcFlags.unknown1, $00, pAIScripting0x0B_L033)   ; pAIScripting0x0B @ $B3EB06
+%AICMD0x55_JumpIfFlagNotSet(strcFlags.unknown1, $01, pAIScripting0x0B_L033)   ; pAIScripting0x0B @ $B3EB0D
 ```
 
 ## 0x56 — UseEquippedItem
