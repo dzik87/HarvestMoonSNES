@@ -2327,7 +2327,6 @@ fAIAction0x28:
     %AIMoveAction($0001)
     RTS                                                        ;849418|60      |      ;
  
- 
 aAIActions:
     dw fAIAction0x00_SetMusicTrack                             ;849419|        |8489BB; 0x5A * [ptr16]
     dw fAIAction0x01_UnfreezeTime                              ;84941B|        |8489E3;
@@ -2419,7 +2418,6 @@ aAIActions:
     dw fAIAction0x57_UpdateStamina                             ;8494C7|        |84BFA0;
     dw fAIAction0x58_ReplaceFarmTile                           ;8494C9|        |84BFBF;
     dw fAIAction0x59_SwapEquippedItems                         ;8494CB|        |84C000;
- 
 pppAISelector:
     dl ppAIScriptingList                                       ;8494CD|        |B38000;
     dl pAIScripting0x0F_StarNightFestival                      ;8494D0|        |B48000;
@@ -8012,7 +8010,7 @@ fInput_Unknown84C2B4:
     LDA.W strcJoypad1.newInput                                 ;84C2CC|AD2801  |000128;
     BIT.W #!JOYPAD_START                                               
     BEQ .justReturn                                            ;84C2D2|F003    |84C2D7;
-    JMP.W +                                                    ;84C2D4|4CD8C2  |84C2D8;
+    JMP.W $C2D8                                                ;84C2D4|4CD8C2  |84C2D8;
  
  
 .justReturn:

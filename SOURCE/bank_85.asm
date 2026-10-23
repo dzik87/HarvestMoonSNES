@@ -1652,7 +1652,7 @@ fUnknown_858CB2:
   - CMP.W #$00C0                                               ;858E1E|C9C000  |      ;
     BEQ -                                                      ;858E21|F0FB    |858E1E;
     STA.B $BF                                                  ;858E23|85BF    |0000BF;
-    JMP.W --                                                   ;858E25|4CBC8C  |858CBC;
+    JMP.W $8CBC                                                ;858E25|4CBC8C  |858CBC;
  
  
 .return:
