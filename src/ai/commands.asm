@@ -63,8 +63,7 @@ endmacro
 macro AICMD0x09(nDataIndex, pNextAction)
     db $09
     db <nDataIndex>
-    dw <pNextAction>
-    
+    dw <pNextAction>&$FFFF
 endmacro
 
 ; AI command 0x0A - 
@@ -127,8 +126,7 @@ endmacro
 ; AI command 0x12 - Always jump
 macro AICMD0x12_Jump(pNextAction)
     db $12
-    dw <pNextAction>
-    
+    dw <pNextAction>&$FFFF
 endmacro
 
 ; AI command 0x13 - Wait for nTime time/frames without doing nothing
@@ -143,8 +141,7 @@ macro AICMD0x14_JumpIfFlagSet(nAddress, nIndex, pNextAction)
     db $14
     dl <nAddress>
     db <nIndex>
-    dw <pNextAction>
-    
+    dw <pNextAction>&$FFFF
 endmacro
 
 ; AI command 0x15 - jump to pNextAction if [nAddress] = nValue
@@ -152,8 +149,7 @@ macro AICMD0x15_JumpIfEquals8(nAddress, nValue, pNextAction)
     db $15
     dl <nAddress>
     db <nValue>
-    dw <pNextAction>
-    
+    dw <pNextAction>&$FFFF
 endmacro
 
 ; AI command 0x16 - Jump if [pAddress] is between nMin and nMax
@@ -162,8 +158,7 @@ macro AICMD0x16_JumpIfBetween8(nAddress, nMin, nMax, pNextAction)
     dl <nAddress>
     db <nMin>
     db <nMax>
-    dw <pNextAction>
-    
+    dw <pNextAction>&$FFFF
 endmacro
 
 ; AI command 0x17 - 
@@ -177,8 +172,7 @@ endmacro
 macro AICMD0x18(nUnknown1, pNextAction)
     db $18
     db <nUnknown1>
-    dw <pNextAction>
-    
+    dw <pNextAction>&$FFFF
 endmacro
 
 ; AI command 0x19 - 
@@ -194,7 +188,7 @@ macro AICMD0x1A(nUnknown1, nUnknown2, pPointerB3, nUnknown4)
     db $1A
     dw <nUnknown1>
     dw <nUnknown2>
-    dw <pPointerB3>
+    dw <pPointerB3>&$FFFF
     db <nUnknown4>
     
 endmacro
@@ -226,23 +220,20 @@ endmacro
 ; AI command 0x1E - does not exists, pointer to 0x1F
 macro AICMD0x1E(pNextAction)
     db $1E
-    dw <pNextAction>
-    
+    dw <pNextAction>&$FFFF
 endmacro
 
 ; AI command 0x1F - 
 macro AICMD0x1F(pNextAction)
     db $1F
-    dw <pNextAction>
-    
+    dw <pNextAction>&$FFFF
 endmacro
 
 ; AI command 0x20 - Jumps if nSelectedOption is equal to nAnswer
 macro AICMD0x20_JumpIfChoice(nAnswer, pNextAction)
     db $20
     db <nAnswer>
-    dw <pNextAction>
-    
+    dw <pNextAction>&$FFFF
 endmacro
 
 ; AI command 0x21 - Adds n8Value to [pAddress]
@@ -259,7 +250,7 @@ macro AICMD0x22(nUnknown1, nUnknown2, nUnknown3, pNextAction, nUnknown5)
     db <nUnknown1>
     db <nUnknown2>
     db <nUnknown3>
-    dw <pNextAction>
+    dw <pNextAction>&$FFFF
     db <nUnknown5>
     
 endmacro
@@ -329,7 +320,7 @@ endmacro
 ; AI command 0x2B - 
 macro AICMD0x2B(pPointerB3, nDataIndex)
     db $2B
-    dw <pPointerB3>
+    dw <pPointerB3>&$FFFF
     db <nDataIndex>
     
 endmacro
@@ -346,25 +337,23 @@ endmacro
 ; AI command 0x2D - 
 macro AICMD0x2D(pNextAction1, pNextAction2)
     db $2D
-    dw <pNextAction1>
-    dw <pNextAction2>
-    
+    dw <pNextAction1>&$FFFF
+    dw <pNextAction2>&$FFFF
 endmacro
 
 ; AI command 0x2E - 
 macro AICMD0x2E(nUnknown1, pPointerB3, nUnknown3)
     db $2E
     db <nUnknown1>
-    dw <pPointerB3>
+    dw <pPointerB3>&$FFFF
     db <nUnknown3>
     
 endmacro
 
 ; AI command 0x2F - 
-macro AICMD0x2F(nUnknown1)
+macro AICMD0x2F(pPointerB3)
     db $2F
-    dw <nUnknown1>
-    
+    dw <pPointerB3>&$FFFF
 endmacro
 
 ; AI command 0x30 - 
@@ -499,8 +488,7 @@ macro AICMD0x43_JumpIfEqual16(pAddress, n16Value, pNextAction)
     db $43
     dl <pAddress>
     dw <n16Value>
-    dw <pNextAction>
-    
+    dw <pNextAction>&$FFFF
 endmacro
 
 ; AI command 0x44 - Jump if [pAddress] = n24Value
@@ -508,8 +496,7 @@ macro AICMD0x44_JumpIfEqual24(pAddress, n24Value, pNextAction)
     db $44
     dl <pAddress>
     dl <n24Value>
-    dw <pNextAction>
-    
+    dw <pNextAction>&$FFFF
 endmacro
 
 ; AI command 0x45 - Jump if [pAddress] is between nMin and nMax
@@ -518,8 +505,7 @@ macro AICMD0x45_JumpIfBetween16(pAddress, nMin, nMax, pNextAction)
     dl <pAddress>
     dw <nMin>
     dw <nMax>
-    dw <pNextAction>
-    
+    dw <pNextAction>&$FFFF
 endmacro
 
 ; AI command 0x46 - Jump if [pAddress] is between nMin and nMax
@@ -528,8 +514,7 @@ macro AICMD0x46_JumpIfBetween24(pAddress, nMin, nMax, pNextAction)
     dl <pAddress>
     dl <nMin>
     dl <nMax>
-    dw <pNextAction>
-    
+    dw <pNextAction>&$FFFF
 endmacro
 
 ; AI command 0x47 - Sets [pAddress] to n8Value
@@ -549,10 +534,9 @@ macro AICMD0x48(nUnknown1, nUnknown2)
 endmacro
 
 ; AI command 0x49 - 
-macro AICMD0x49(nUnknown1)
+macro AICMD0x49(pPointerB3)
     db $49
-    dw <nUnknown1>
-    
+    dw <pPointerB3>&$FFFF
 endmacro
 
 ; AI command 0x4A - 
@@ -579,8 +563,7 @@ endmacro
 ; AI command 0x4D - 
 macro AICMD0x4D(pNextAction)
     db $4D
-    dw <pNextAction>
-    
+    dw <pNextAction>&$FFFF
 endmacro
 
 ; AI command 0x4E - 
@@ -632,8 +615,7 @@ macro AICMD0x55(pAddress, nFlagsIndex, pNextAction)
     db $55
     dl <pAddress>
     db <nFlagsIndex>
-    dw <pNextAction>
-    
+    dw <pNextAction>&$FFFF
 endmacro
 
 ; AI command 0x56 - 
