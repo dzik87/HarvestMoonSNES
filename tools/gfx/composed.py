@@ -205,25 +205,36 @@ class Ctx:
             combos = {}
             for dest, mlabel, pairs in info[table]:
                 sets = tuple((d, l) for d, l in pairs if l.startswith(TILE_PREFIX))
-                combos.setdefault(sets, mlabel)
-            for sets, mlabel in combos.items():
+                combos.setdefault((sets, P.bg_chr_base(self.root, mlabel, dest)), mlabel)
+            for (sets, chr_base), mlabel in combos.items():
                 if not any(l in self.blobs and kind_of(l) == "tiles" for _, l in sets):
                     continue
                 words, cols = self._table_words(table)
                 name = table if len(combos) == 1 else f"{table}__{mlabel}"
                 pid = P.map_palette_id(mlabel, self.root)
                 pal = P.view_palette128(pid, self.root) if pid else [c for c in P.grayscale_palette(4)] * 8
-                base = min(d for d, _ in sets)
                 szs = [(d, l, self.meta(l)["raw_size"] // 2) for d, l in sets]
-                targets = []
-                for n in range(1024):
-                    addr = base + n * 16
-                    t = None
-                    for d, l, words_ in reversed(szs):
-                        if d <= addr and addr + 16 <= d + words_:
-                            t = (l, (addr - d) // 16)
-                            break
-                    targets.append(t)
+
+                def resolve(base):
+                    out_t = []
+                    for n in range(1024):
+                        addr = base + n * 16
+                        t = None
+                        for d, l, words_ in reversed(szs):
+                            if d <= addr and addr + 16 <= d + words_:
+                                t = (l, (addr - d) // 16)
+                                break
+                        out_t.append(t)
+                    return out_t
+                if chr_base is not None:
+                    targets = resolve(chr_base)
+                else:
+                    # no graphic preset in the map header (area >= $57, weather overlays, menus, intro): the BG keeps the character base
+                    # of the preset that is active; take the 4K-word base under which the most used tiles are found (ties: $2000 first)
+                    used = {w & 0x3FF for w in words if w & 0x3FF}
+                    cands = [b for b in (0x2000, 0x1000, 0x3000, 0x4000, 0x5000, 0) if b <= min(d for d, _ in sets)]
+                    best = max(cands, key=lambda b: (sum(1 for n in used if resolve(b)[n]), -cands.index(b))) if cands else 0x2000
+                    targets = resolve(best)
                 out.append(Screen(name, table, cols, words, sets, pal, targets))
         return out
 
@@ -403,6 +414,16 @@ def table_widths(ctx, sheets, tables=None):
         sc = width_scores(scr, sheets)
         out[scr.table] = (scr.cols, suggest_width(sc, len(scr.words)), sc, scr)
     return out
+
+
+def audit_screen(scr, sheets):
+    """facts about a rendered screen: cells with a tile id (non-zero), cells whose tile is not in any loaded tile set at the character base
+    that was used (`unresolved`: drawn as colour 0 of their palette row, normally a wrong base), distinct colours, palette rows used."""
+    used = [w for w in scr.words if w & 0x3FF]
+    miss = sum(1 for w in used if scr.targets[w & 0x3FF] is None)
+    img = render_screen(scr, sheets)
+    return {"cells": len(scr.words), "used": len(used), "unresolved": miss, "colours": len(set(img)),
+            "indices": len({v & 15 for v in img}), "palettes": sorted({v >> 4 for v in img})}
 
 
 # ----------------------------------------------------------------------------------------------------------------------

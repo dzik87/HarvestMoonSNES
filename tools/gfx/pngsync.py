@@ -365,6 +365,45 @@ def map_table(root=ROOT):
     return info
 
 
+_BG_PRESETS = {}
+
+
+def bg_chr_base(root, map_label, dest):
+    """VRAM word address of tile 0 of the BG that shows the name table uploaded to `dest` by map `map_label`: the map header's graphic
+    preset (first byte, only maps that have one) selects BGnSC (name table address) and BG12NBA / BG34NBA (character base) in
+    src/code/bank_80/core.asm.  None when the map has no preset byte or no BG uses that address (callers fall back to the first tile set)."""
+    key = str(root)
+    if key not in _BG_PRESETS:
+        core = (Path(root) / "src/code/bank_80/core.asm").read_text(encoding="utf-8", errors="replace")
+
+        def tab(name):
+            m = re.search(name + r":\s*db ([^;\n]+)", core)
+            return [int(x.strip()[1:], 16) for x in m.group(1).split(",")]
+        sc = [tab(f"Table_BG{i}SC_Presets") for i in range(1, 5)]
+        n12, n34 = tab("Table_BG12NBA_Presets"), tab("Table_BG34NBA_Presets")
+        text = us_lines((Path(root) / "src/code/bank_80/tilemaps.asm").read_text(encoding="utf-8", errors="replace").splitlines())
+        start = next(i for i, l in enumerate(text) if re.match(r"^sFarmSpringMap:", l))
+        pres, cur = {}, None
+        for l in text[start:]:
+            m = re.match(r"^(\w+):", l)
+            if m:
+                cur = m.group(1)
+                pres[cur] = "?"
+            elif cur and pres[cur] == "?" and re.match(r"\s*db ", l):
+                m = re.match(r"\s*db \$([0-9A-Fa-f]{2})\s*(;|$)", l)
+                pres[cur] = int(m.group(1), 16) if m else None
+        _BG_PRESETS[key] = (sc, n12, n34, pres)
+    sc, n12, n34, pres = _BG_PRESETS[key]
+    p = pres.get(map_label)
+    if not isinstance(p, int):
+        return None
+    nba = [n12[p] & 15, n12[p] >> 4, n34[p] & 15, n34[p] >> 4]
+    for bg in range(4):
+        if (sc[bg][p] & 0xFC) << 8 == dest:
+            return nba[bg] * 0x1000
+    return None
+
+
 def usage(b):
     try:
         info = map_table(b.root).get(b.label, [])
@@ -597,6 +636,18 @@ def cmd_check(a, root=ROOT):
                 print(f"FAIL {table}: columns={cur} gives a discontinuous image (seam ratio {sc[cur]:.3f}); "
                       f"{min(sc, key=sc.get)} columns gives {min(sc.values()):.3f} (see `pngsync.py widths`)")
                 bad += 1
+        # screens must show their tiles: cells that use a tile id outside the loaded tile sets are drawn empty (wrong character base)
+        for scr in ctx.screens:
+            if own is not None and scr.table not in own:
+                continue
+            au = composed.audit_screen(scr, sheets)
+            if au["used"] and au["unresolved"] == au["used"]:
+                print(f"FAIL screens/{scr.name}.png: none of its {au['used']} tiles is found in the tile sets {[l for _, l in scr.sets]}"
+                      " (character base wrong?)")
+                bad += 1
+            elif au["used"] and au["unresolved"] * 10 > au["used"]:
+                print(f"WARN screens/{scr.name}.png: {au['unresolved']} of {au['used']} cells use tiles that this map does not load "
+                      "(documented in docs/formats/graphics-png.md, 'Screens: known special cases')")
     print(f"pngsync check: {len(sel)} blobs, " + (f"{bad} FAILED" if bad else "all reproduce the committed .bin bit-exactly"))
     return 1 if bad else 0
 
