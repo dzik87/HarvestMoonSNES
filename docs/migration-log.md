@@ -13,6 +13,8 @@
 | 1b | banks 80–85 split into modules (concatenation == original) | US hash matches |
 | 2 | AI scripts (US): 7622 raw addresses → labels (`<script>_Lnnn`) | US hash matches |
 | 2c | AI scripts (US) split into 72 per-script files + 3 bank headers (concatenation == original) | US hash matches |
+| 3 | 697 auto/Unknown labels renamed from agent-produced maps (`docs/naming/*.csv`, `tools/migration/apply_renames.py`) | US hash matches |
+| 4 | palettes ($A8/$A9): `db` dumps replaced by `incbin` of `assets/gfx/palettes/*.pal` + JSON/PNG, `tools/gfx/palette.py` | US hash matches |
 | 2b | documentation of 90 AICMD commands from the interpreter handlers (`docs/ai/commands/*.yml` → `docs/ai/commands.md`) | spot-checked against the code; no source changes |
 
 ## Regional versions (from the pre-migration analysis)

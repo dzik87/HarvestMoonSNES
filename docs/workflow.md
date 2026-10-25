@@ -14,3 +14,10 @@ and verifies the hashes. Diagnosing a mismatch: `python tools/verify.py build/Ha
 ## CI (`.github/workflows/build.yml`)
 Builds asar from source (tag `v1.91`, cached), assembles the US ROM, compares size/CRC32/MD5/SHA-1 and exposes
 the result in run annotations and as the `HarvestMoon-US` artifact.
+
+## Asset converters (`tools/gfx/`)
+- `palette.py` — palettes ($A8/$A9): `extract` (from the old `db` sources), `pack` (JSON -> `.pal`), `emit-asm`, `check`.
+  The source of truth is `assets/gfx/palettes/*.json` (edit colours as `#RRGGBB`), packed into `*.pal` files that the
+  assembler includes with `incbin`. CI runs `palette.py check` before the build.
+- Editing a palette: change the JSON, run `python tools/gfx/palette.py pack`, commit both files. The ROM hash will of
+  course change after an intentional edit; update `tests/expected.json` only for deliberate modifications.
