@@ -38,7 +38,8 @@ Label names refer to the current sources; see `docs/naming/*.csv` for old -> new
 - Commands go through APUIO0-3 with a handshake in `fAudio_SendSpcCommand` (waits for port 3 = $04).
 - Command ids as used by the code: 1 upload block ($3F2 bytes from $B2D120), 2 load common samples, 3 load one sample,
   4 free sample slots, 5 upload track data (3-byte chunks), 8 start track, 9 fade out ($40 slow / $10 fast), $0A play SFX,
-  $0B unclear (boot), $0C stub.
+  $0B stereo/mono switch (0 = stereo), $0C pause toggle on the SPC side (stubbed on the 65816 side).
+  Details, track format and sample layout: `docs/audio.md`.
 - `aAudioTrackDataSizeTable`: 26 words; `aAudioSfxSampleIdTable`: sample id per SFX id; track table entries are 14 bytes
   (ptr24 + 11 sample ids).
 

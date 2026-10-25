@@ -60,6 +60,8 @@ jobs:
           python3 tools/gfx/gfxpipe.py verify
           python3 tools/fonts/font.py check
           python3 tests/test_font.py
+          python3 tests/test_spc700.py
+          python3 tools/audio/audio_map.py --check
           python3 tests/test_objdata.py
           python3 tests/test_tilemap_codec.py
           python3 tools/gfx/tiles.py selftest

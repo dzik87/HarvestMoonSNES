@@ -32,3 +32,4 @@ the result in run annotations and as the `HarvestMoon-US` artifact.
   dither, 2/3 letter), run `python tools/fonts/font.py build --region us --write-assets` to regenerate the
   `assets/gfx/tiles/sFontGlyphs_*.bin` tables included by the ROM, then `font.py seal` to refresh the recorded hashes. Format: `docs/formats/font.md`.
 - `objects/objdata.py` — banks $86/$87 object animation data model (analyze/check/names); format: `docs/formats/object-data.md`.
+- `audio/spc700.py`, `audio/audio_map.py` — SPC700 disassembler and audio blob map; the audio system is documented in `docs/audio.md`.
