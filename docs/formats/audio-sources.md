@@ -1,7 +1,7 @@
 # Audio sources (samples, songs, SFX, sound driver)
 
 All audio of the game is stored as **editable sources** under `assets/audio/`. The binary blobs that the assembler
-`incbin`s (`assets/audio/<label>.bin`) and the 65816-side tables (`src/data/audio/audio_tables.inc`) are **generated** and
+`incbin`s (`assets/audio/<label>.bin`) and the 65816-side tables (`build/gen/audio/audio_tables.inc`) are **generated** and
 git-ignored; `python3 tools/build_assets.py` (run by `tools/build.py`) rebuilds them with
 `python3 tools/audio/audioconv.py build`. The result is byte-for-byte the audio data of the original ROM (the ROM hash check
 in CI proves it).
@@ -14,7 +14,9 @@ assets/audio/
   sfx/sfx.sfx.txt                    the SFX block (50 sound effects) uploaded to SPC RAM $1600
   driver/sAudioSpcDriver.spc.asm     the SPC700 sound engine as assembler source (4054 bytes)
   <label>.bin                        generated, git-ignored
-src/data/audio/audio_tables.inc      generated, git-ignored (included by src/code/bank_83/audio.asm)
+  banks.json                         bank layout: ORG + blob labels in ROM order
+build/gen/audio/bank_XX.asm          generated bank wrappers (label + incbin + fill align $8000), included by src/main.asm
+build/gen/audio/audio_tables.inc     generated, git-ignored (included by src/code/bank_83/audio.asm)
 ```
 
 Tools: `tools/audio/audioconv.py` (commands below), `brr.py` (BRR codec), `trackfmt.py` (song text format), `spcasm.py`
@@ -34,7 +36,7 @@ Tests: `tests/test_audio_convert.py`, `tests/test_spc700.py`.
 
 ## 1. Samples (`samples/<label>.wav` + `.json`)
 
-The label is the blob label of `src/data/audio/bank_*.asm` (`sAudioSample_Id07` holds sample id 7; `Id00` serves the ids 0 and 1,
+The label is the blob label of `assets/audio/banks.json` (`sAudioSample_Id07` holds sample id 7; `Id00` serves the ids 0 and 1,
 see `docs/audio.md` section 7). Every file pair describes one BRR stream.
 
 **WAV**: mono, 16-bit PCM, number of samples = 16 x number of BRR blocks. The values are exactly what the S-DSP outputs for the

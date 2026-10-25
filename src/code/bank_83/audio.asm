@@ -1640,4 +1640,4 @@ fAudio_ReadSpcStatusBit4:
  
 ; The sample/track tables below (sample sizes, track sizes, track table, sample table, SFX sample ids, common samples)
 ; are generated from assets/audio by tools/audio/audioconv.py build (run by tools/build_assets.py).
-    incsrc "../../data/audio/audio_tables.inc"
+    incsrc "../../../build/gen/audio/audio_tables.inc"

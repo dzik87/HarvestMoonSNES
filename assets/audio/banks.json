@@ -1,0 +1,79 @@
+{
+ "AD": {"org": "$AD8000", "blobs": [
+  "sAudioSpcDriver",
+  "sAudioTrack_Spring",
+  "sAudioTrack_Winter",
+  "sAudioTrack_TrollsCave",
+  "sAudioTrack_StarNightFestival",
+  "sAudioTrack_Id05",
+  "sAudioTrack_BadEnding",
+  "sAudioTrack_HarvestFestival",
+  "sAudioTrack_Id12",
+  "sAudioTrack_Ending",
+  "sAudioTrack_Church",
+  "sAudioTrack_Mountain",
+  "sAudioTrack_Fall",
+  "sAudioTrack_Dance",
+  "sAudioTrack_Summer",
+  "sAudioTrack_EggFestival",
+  "sAudioTrack_Opening",
+  "sAudioTrack_NamingScreen",
+  "sAudioTrack_Title",
+  "sAudioTrack_Rain",
+  "sAudioTrack_Id20",
+  "sAudioTrack_Id21",
+  "sAudioTrack_Hurricane",
+  "sAudioTrack_Id23",
+  "sAudioTrack_Bell",
+  "sAudioTrack_Id25",
+  "sAudioSample_Id00",
+  "sAudioSample_Id03",
+  "sAudioSample_Id04",
+  "sAudioSample_Id05",
+  "sAudioSample_Id06",
+  "sAudioSample_Id13"
+ ]},
+ "AE": {"org": "$AE8000", "blobs": [
+  "sAudioSample_Id02",
+  "sAudioSample_Id07",
+  "sAudioSample_Id08",
+  "sAudioSample_Id10",
+  "sAudioSample_Id12",
+  "sAudioSample_Id14"
+ ]},
+ "AF": {"org": "$AF8000", "blobs": [
+  "sAudioSample_Id09",
+  "sAudioSample_Id11",
+  "sAudioSample_Id15",
+  "sAudioSample_Id16",
+  "sAudioSample_Id17",
+  "sAudioSample_Id18",
+  "sAudioSample_Id20",
+  "sAudioSample_Id25"
+ ]},
+ "B0": {"org": "$B08000", "blobs": [
+  "sAudioSample_Id19",
+  "sAudioSample_Id21",
+  "sAudioSample_Id22",
+  "sAudioSample_Id23",
+  "sAudioSample_Id24",
+  "sAudioSample_Id26",
+  "sAudioSample_Id27"
+ ]},
+ "B1": {"org": "$B18000", "blobs": [
+  "sAudioSample_Id28",
+  "sAudioSample_Id29",
+  "sAudioSample_Id30",
+  "sAudioSample_Id31",
+  "sAudioSample_Id32",
+  "sAudioSample_Id33"
+ ]},
+ "B2": {"org": "$B28000", "blobs": [
+  "sAudioSample_Id36",
+  "sAudioSample_Id34",
+  "sAudioSample_Id35",
+  "sAudioSample_Id37",
+  "sAudioSample_Id38",
+  "sAudioSample_Id39"
+ ]}
+}

@@ -19,4 +19,3 @@ build/
 
 # generated from the audio sources by tools/audio/audioconv.py build (tools/build_assets.py)
 assets/audio/*.bin
-src/data/audio/audio_tables.inc

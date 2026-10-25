@@ -72,12 +72,12 @@
     incsrc "../build/gen/gfx/palettes/bank_A9.asm"
     
     ; Audio
-    incsrc "data/audio/bank_AD.asm"
-    incsrc "data/audio/bank_AE.asm"
-    incsrc "data/audio/bank_AF.asm"
-    incsrc "data/audio/bank_B0.asm"
-    incsrc "data/audio/bank_B1.asm"
-    incsrc "data/audio/bank_B2.asm"
+    incsrc "../build/gen/audio/bank_AD.asm"
+    incsrc "../build/gen/audio/bank_AE.asm"
+    incsrc "../build/gen/audio/bank_AF.asm"
+    incsrc "../build/gen/audio/bank_B0.asm"
+    incsrc "../build/gen/audio/bank_B1.asm"
+    incsrc "../build/gen/audio/bank_B2.asm"
     
     ; AI
     incsrc "ai/region.asm"
