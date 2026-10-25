@@ -1,0 +1,101 @@
+; sAudioTrack_Hurricane - song data (song list, patterns, voice streams); pointers are labels.
+; Format: docs/formats/audio-sources.md (tools/audio/trackfmt.py).
+
+songlist:
+    pattern pat0
+    jump songlist 255
+    songend
+
+pat0:
+    voices pat0_v0 pat0_v1 pat0_v2 pat0_v3 pat0_v4 pat0_v5 - -
+
+pat0_v0:
+    percbase $0B
+    echo $FF $5A $5A
+    echoparams $05 $3C $03
+    tempo $19
+    volume $8C
+    pan $0C
+    instrument $00
+    L96:G7V15 E4    ; t=0
+    slide $00 $C0 $84
+    tie tie E1    ; t=96
+    slide $00 $C0 $A8
+    tie    ; t=384
+    volumefade $C0 $32
+    tie tie    ; t=480
+    volume $8C
+    E4    ; t=672
+    slide $00 $C0 $84
+    tie tie E1    ; t=768
+    slide $00 $C0 $A8
+    tie    ; t=1056
+    volumefade $C0 $32
+    tie tie rest rest end    ; t=1152
+
+pat0_v1:
+    instrument $00
+    volume $96
+    pan $08
+    L96 rest rest L96:G7V15 C1    ; t=0
+    slide $00 $C0 $A4
+    tie tie tie C4    ; t=288
+    slide $00 $C0 $80
+    tie tie C1    ; t=672
+    slide $00 $C0 $A4
+    tie tie tie C4    ; t=960
+    slide $00 $C0 $80
+    tie tie    ; t=1344
+
+pat0_v2:
+    instrument $00
+    volume $B4
+    pan $05
+    vibrato $00 $32 $05
+    L96:G7V15 D3 tie tie tie tie tie tie tie tie tie tie tie tie tie tie tie    ; t=0
+
+pat0_v3:
+    instrument $00
+    volume $B4
+    pan $0F
+    vibrato $00 $32 $05
+    L96:G7V15 F3 tie tie tie tie tie tie tie tie tie tie tie tie tie tie tie    ; t=0
+
+pat0_v4:
+    instrument $00
+    volume $96
+    pan $14
+    vibrato $00 $32 $05
+    L96 rest rest rest rest    ; t=0
+    panfade $18 $00
+    L96:G7V15 C3    ; t=384
+    slide $06 $06 $B0
+    slide $00 $30 $8C
+    rest rest rest rest    ; t=480
+    panfade $18 $14
+    C3    ; t=864
+    slide $06 $06 $B5
+    slide $00 $30 $8C
+    rest rest rest rest rest rest    ; t=960
+
+pat0_v5:
+    instrument $00
+    volume $AA
+    pan $00
+    vibrato $00 $32 $05
+    panfade $C0 $14
+    L96:G7V15 C4 tie    ; t=0
+    panfade $C0 $00
+    tie tie    ; t=192
+    panfade $C0 $14
+    tie tie    ; t=384
+    panfade $C0 $00
+    tie tie    ; t=576
+    panfade $C0 $14
+    tie tie    ; t=768
+    panfade $C0 $00
+    tie tie    ; t=960
+    panfade $C0 $14
+    tie tie    ; t=1152
+    panfade $C0 $00
+    tie tie end    ; t=1344

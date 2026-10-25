@@ -21,4 +21,4 @@ sAudioSample_Id14:
     incbin "../../../assets/audio/sAudioSample_Id14.bin"
 
 Padding_AE0000:
-    fill 1264
+    fill align $8000

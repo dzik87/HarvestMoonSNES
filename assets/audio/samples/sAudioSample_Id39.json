@@ -1,0 +1,19 @@
+{
+  "label": "sAudioSample_Id39",
+  "sample_ids": [39],
+  "loop": false,
+  "unused_loop_offset": 7974,
+  "adsr1": 255,
+  "adsr2": 224,
+  "gain": 184,
+  "tuning_int": 1,
+  "tuning_frac": 224,
+  "pad_byte": 255,
+  "append": {"source": "sfx", "bytes": 1008},
+  "canon": "ff+r-",
+  "overrides": {
+    "0": "0 0 0000",
+    "170": "raw:d00111de31f1010d04",
+    "210": "6 0 0000"
+  }
+}

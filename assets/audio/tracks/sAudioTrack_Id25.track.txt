@@ -1,0 +1,67 @@
+; sAudioTrack_Id25 - song data (song list, patterns, voice streams); pointers are labels.
+; Format: docs/formats/audio-sources.md (tools/audio/trackfmt.py).
+
+    pattern pat0
+
+loop0:
+    pattern pat1
+    jump loop0 255
+    songend
+
+pat0:
+    voices pat0_v0 pat0_v1 pat0_v2 pat0_v3 pat0_v4 pat0_v5 - -
+
+pat1:
+    voices pat1_v0 - - - - - - -
+
+pat0_v0:
+    percbase $0B
+    echo $FF $5A $5A
+    echoparams $05 $3C $01
+    tempo $10
+    volume $FF
+    pan $0C
+    instrument $00
+    L96:G7V15 C2    ; t=0
+    slide $00 $C0 $84
+    tie tie tie L24 rest rest rest rest end    ; t=96
+
+pat0_v1:
+    instrument $00
+    volume $FF
+    pan $08
+    L96:G7V15 A1 tie tie tie tie    ; t=0
+
+pat0_v2:
+    instrument $00
+    volume $FF
+    pan $05
+    L96:G7V15 C2 tie tie tie L24 rest rest rest rest    ; t=0
+
+pat0_v3:
+    instrument $00
+    volume $FF
+    pan $0F
+    vibrato $00 $32 $05
+    L96:G7V15 C2 tie tie tie L24 rest rest rest rest    ; t=0
+
+pat0_v4:
+    instrument $00
+    volume $FF
+    pan $0A
+    vibrato $00 $32 $05
+    L96:G7V15 D1 tie tie L24 rest rest rest rest rest rest rest rest    ; t=0
+
+pat0_v5:
+    instrument $01
+    volume $FF
+    pan $0A
+    vibrato $00 $32 $05
+    L96:G7V15 C2    ; t=0
+    slide $00 $0C $B0
+    tie L24 rest rest rest rest rest rest rest rest rest rest rest rest    ; t=96
+
+pat1_v0:
+    volume $00
+    L96 rest end    ; t=0
+    db $00

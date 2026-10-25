@@ -1,0 +1,99 @@
+; sAudioTrack_Dance - song data (song list, patterns, voice streams); pointers are labels.
+; Format: docs/formats/audio-sources.md (tools/audio/trackfmt.py).
+
+songlist:
+    pattern pat0
+    jump songlist 255
+    songend
+
+pat0:
+    voices pat0_v0 pat0_v1 pat0_v2 pat0_v3 pat0_v4 pat0_v5 - -
+
+pat0_v0:
+    percbase $0B
+    echo $FE $5A $5A
+    echoparams $05 $3C $01
+    tempo $19
+    volume $B4
+    pan $0A
+    L24:G7V15 perc2 L6 perc2 L18 rest L6 perc2 L18 rest    ; t=0
+    call sub0 15
+    end
+
+pat0_v1:
+    instrument $00
+    volume $82
+    pan $0A
+    voicetranspose $F3
+    finetune $C3
+    vibrato $00 $14 $14
+    L8:G7V15 A5 F5 A5 C6 D6 C6 B5 rest C6 L24 A5 L48 F5 L8 A5 F5 A5 C6 D6 C6 B5 rest C6 L24    ; t=0
+    A#5 L48 G5 L8 A5 F5 A5 C6 D6 C6 B5 rest C6 L24 A5 L48 F5 L8 A5 F5 A5 C6 D6 C6 L16 D6 L8    ; t=216
+    E6 L24 F6 L48 F5    ; t=496
+    call sub1 1
+    L24 A5 L48 C6
+    call sub1 1
+    L24 F6 L48 F5
+
+pat0_v2:
+    instrument $01
+    volume $8C
+    voicetranspose $E8
+    finetune $40
+    pan $0F
+    vibrato $00 $14 $14
+    L48:G7V15 A5 L24 F5 L66 C6 L6 F5 L48 A5 L24 F5 L66 E5 L6 F5 L48 A5 L24 F5 L72 C6 L48 A#5    ; t=0
+    L24 E6    ; t=480
+    call sub2 1
+    L24 F6 C6 A5 L12 A#5 rest E6 rest E6 rest L24 F6 A5 C6 L12 A#5 rest E6 rest E6 rest L24
+    F6 C6 A5 A#5 E6 G6 L72 F6
+
+pat0_v3:
+    instrument $01
+    volume $96
+    voicetranspose $E8
+    finetune $40
+    pan $07
+    vibrato $00 $14 $14
+    L12:G7V15 F4 rest C4 rest A4 rest L72 F4 L12 F4 rest C4 rest A4 rest L72 A#4 L12 F4 rest    ; t=0
+    C4 rest A4 rest L72 F4 L12 A#4 rest A4 rest E4 rest L72 F4 L48 A#4 L24 C5 A4 L48 F4 A#4    ; t=312
+    L24 C5 A4 L48 C5 A#4 L24 C5 A4 L48 F4 A#4 L24 E4 L72 F4    ; t=768
+
+pat0_v4:
+    instrument $02
+    volume $D2
+    voicetranspose $E8
+    finetune $00
+    pan $0B
+    L24 rest L24:G7V15 F5 C5 A5 L48 rest L24 rest F5 C5 A#4 L48 rest L24 rest F5 C5 A5 L48    ; t=0
+    rest L24 rest A#5 E5 L72 F5    ; t=384
+    instrument $01
+    volume $50
+    voicetranspose $E8
+    finetune $40
+    pan $0C
+    vibrato $00 $14 $14
+    L12 rest L48 A#4 L24 C5 A4 L48 F4 A#4 L24 C5 A4 L48 C5 A#4 L24 C5 A4 L48 F4 A#4 L24 E4    ; t=576
+    L60 F4    ; t=1092
+
+pat0_v5:
+    instrument $01
+    volume $50
+    voicetranspose $E8
+    finetune $4A
+    pan $05
+    vibrato $00 $14 $1E
+    L12 rest L48:G7V15 A5 L24 F5 L66 C6 L6 F5 L48 A5 L24 F5 L66 E5 L6 F5 L48 A5 L24 F5 L72 C6    ; t=0
+    L48 A#5 L24 E6    ; t=444
+    call sub2 1
+    L24 F6 C6 A5 L12 A#5 rest E6 rest E6 rest L24 F6 A5 C6 L12 A#5 rest E6 rest E6 rest L24
+    F6 C6 A5 A#5 E6 G6 L60 F6 end
+
+sub0:
+    L24 perc2 L6 perc2 L18 rest L6 perc2 L18 rest end    ; t=0
+
+sub1:
+    L8 A#5 C6 A#5 C6 A#5 C6 A#5 C6 A#5 L24 A5 L48 F5 L8 A#5 C6 A#5 C6 A#5 C6 A#5 C6 A#5 end    ; t=0
+
+sub2:
+    F6 L12 C6 rest F5 rest A#5 rest E6 rest E6 rest end    ; t=0

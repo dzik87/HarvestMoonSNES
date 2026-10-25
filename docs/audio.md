@@ -12,6 +12,10 @@ Evidence tags used throughout:
 
 Everything below was derived statically. Nothing was run on an emulator.
 
+Editable sources: the blobs analysed here (`assets/audio/<label>.bin`) are **generated**; the committed sources are WAV/JSON
+samples, text songs, a text SFX block and an SPC700 assembler listing of the driver. See
+[`formats/audio-sources.md`](formats/audio-sources.md) (workflow for modders) and `tools/audio/audioconv.py`.
+
 ## 1. Overview
 
 - Banks $AD-$B2 contain **only APU data**: one SPC700 program (the sound engine), 25 song/track blobs (26 table entries), 39 BRR
@@ -29,7 +33,8 @@ Everything below was derived statically. Nothing was run on an emulator.
 ## 2. ROM layout of the audio blobs
 
 Generated with `python tools/audio/audio_map.py` (Markdown output). Addresses are computed from the order and sizes of
-the `incbin` lines in `src/data/audio/bank_*.asm`; sizes from `assets/audio/*.bin`.
+the `incbin` lines in `src/data/audio/bank_*.asm`; sizes from the generated `assets/audio/*.bin` (run
+`python tools/build_assets.py` first; the tables of section 3/7 come from the generated `src/data/audio/audio_tables.inc`).
 There are 65 blobs (not 71). Every blob is referenced from code, none is unused. [C]
 
 | Label | ROM | Size | Role | Details |
@@ -602,9 +607,13 @@ sounds for `length * gate / 256` ticks of its `length`. Exact BPM was not derive
 - `tests/test_spc700.py` - opcode-length and mnemonic tables against an independent copy, 106 hand-checked instructions,
   a smoke test that traces the whole engine (no overlaps, no stray branch targets, only three non-code gaps) and the
   `audio_map` checks.
+- `tools/audio/audioconv.py` (+ `brr.py`, `trackfmt.py`, `spcasm.py`) - builds the blobs and tables from the editable sources
+  (`build`), validates them (`check`), exports MIDI/WAV. Formats and workflow: `formats/audio-sources.md`.
+- `tests/test_audio_convert.py` - BRR decoder against an independent implementation, exact/lossy encoder, WAV I/O, SPC700
+  assembler round trip of all 256 opcodes, track text format, build of the whole audio set.
 
-Reproduce the disassembly of the dispatcher: `python tools/audio/spc700.py assets/audio/sAudioSpcDriver.bin --base 0x0500 --start 0xB4B --length 0x40 --bytes`
-(`$104B`, the command jump).
+Reproduce the disassembly of the dispatcher (after `python tools/build_assets.py`): `python tools/audio/spc700.py assets/audio/sAudioSpcDriver.bin --base 0x0500 --start 0xB4B --length 0x40 --bytes`
+(`$104B`, the command jump). The full listing with labels is `assets/audio/driver/sAudioSpcDriver.spc.asm`.
 
 ## 11. Open questions
 

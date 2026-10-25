@@ -1,0 +1,21 @@
+{
+  "label": "sAudioSample_Id32",
+  "sample_ids": [32],
+  "loop": false,
+  "unused_loop_offset": 2979,
+  "adsr1": 255,
+  "adsr2": 224,
+  "gain": 184,
+  "tuning_int": 0,
+  "tuning_frac": 176,
+  "pad_byte": 255,
+  "canon": "ff+r-",
+  "overrides": {
+    "0": "0 0 0000",
+    "326": "0 0 a818",
+    "327": "0 0 401b",
+    "328": "0 0 0004",
+    "329": "0 0 0000",
+    "330": "0 0 0000"
+  }
+}

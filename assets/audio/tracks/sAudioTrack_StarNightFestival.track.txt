@@ -1,0 +1,113 @@
+; sAudioTrack_StarNightFestival - song data (song list, patterns, voice streams); pointers are labels.
+; Format: docs/formats/audio-sources.md (tools/audio/trackfmt.py).
+
+songlist:
+    pattern pat0
+    jump songlist 255
+    songend
+
+pat0:
+    voices pat0_v0 pat0_v1 pat0_v2 pat0_v3 pat0_v4 pat0_v5 - -
+
+pat0_v0:
+    percbase $0B
+    echo $FF $5A $5A
+    echoparams $05 $3C $01
+    tempo $12
+    instrument $00
+    volume $82
+    pan $0A
+    voicetranspose $E9
+    vibrato $00 $0A $14
+    L6:G7V15 C4 G4 D5 C5 C4 G4 D5 C5 C4 G4 D5 C5 C4 G4 D5 C5 D4 A4 E5 D5 D4 A4 E5 D5 D4 A4 E5    ; t=0
+    D5 D4 A4 E5 D5    ; t=162
+    call sub0 15
+    end
+
+pat0_v1:
+    instrument $00
+    volume $80
+    pan $0B
+    voicetranspose $E9
+    vibrato $00 $05 $0A
+    L96:G7V15 C6 D6    ; t=0
+    call sub1 15
+
+pat0_v2:
+    instrument $00
+    volume $6E
+    pan $10
+    voicetranspose $E9
+    vibrato $00 $02 $0A
+    L12 rest L84:G7V15 G6 L12 rest L84 A6    ; t=0
+    call sub2 15
+
+pat0_v3:
+    instrument $00
+    volume $64
+    pan $14
+    voicetranspose $F5
+    L24 rest L72:G7V15 C6 L24 rest L72 D6    ; t=0
+    call sub3 15
+
+pat0_v4:
+    instrument $00
+    volume $8C
+    pan $05
+    voicetranspose $F5
+    vibrato $00 $05 $0A
+    L12 rest L12:G7V15 F5 F5 E5 F5 E5 F5 G5 tie L84 D5 L12 rest F5 F5 E5 F5 E5 F5 G5 tie L84    ; t=0
+    D5 L12 rest F5 F5 E5 F5 E5 F5 G5 tie L84 A5    ; t=300
+    call sub4 1
+    tie L84 D5
+    call sub5 2
+    call sub6 1
+    L84 tie L6 C6 B5 L96 C6 L84 tie L6 C6 B5 L96 C6 tie
+
+pat0_v5:
+    instrument $00
+    volume $5F
+    pan $0A
+    voicetranspose $F5
+    finetune $0A
+    vibrato $00 $05 $14
+    L12 rest rest L12:G7V15 F5 F5 E5 F5 E5 F5 G5 tie L84 D5 L12 rest F5 F5 E5 F5 E5 F5 G5 tie    ; t=0
+    L84 D5 L12 rest F5 F5 E5 F5 E5 F5 G5 tie L84 A5    ; t=312
+    call sub4 1
+    tie L84 D5
+    call sub7 2
+    call sub6 1
+    L84 tie L6 C6 B5 L96 C6 L84 tie L6 C6 B5 L96 C6 L84 tie end
+
+sub0:
+    C4 G4 D5 C5 C4 G4 D5 C5 C4 G4 D5 C5 C4 G4 D5 C5 D4 A4 E5 D5 D4 A4 E5 D5 D4 A4 E5 D5 D4 A4    ; t=0
+    E5 D5 end    ; t=0
+
+sub1:
+    C6 D6 end    ; t=0
+
+sub2:
+    L12 rest L84 G6 L12 rest L84 A6 end    ; t=0
+
+sub3:
+    L24 rest L72 C6 L24 rest L72 D6 end    ; t=0
+
+sub4:
+    L12 rest F5 F5 E5 F5 E5 F5 G5 tie L72 D5 L6 C5 D5 L60 E5 L24 F5 L12 E5 L84 D5 L6 C5 D5    ; t=0
+    L60 E5 L24 F5 L12 G5 end    ; t=384
+
+sub5:
+    volume $82
+    L6 B5 C6 B5 C6 B5 C6 B5 C6 B5 C6 B5 C6 B5 C6 B5 C6 B5 C6 B5 C6 B5 C6 B5 C6 D6 C6 rest L30    ; t=0
+    B5 L6 B5 C6 B5 C6 B5 C6 B5 C6 B5 C6 B5 C6 B5 C6 B5 C6 B5 C6 B5 C6 B5 C6 B5 C6 B5 L12 C6    ; t=162
+    L30 D6 end    ; t=354
+
+sub6:
+    L12 rest L72 E6 L12 F6 tie L84 D6 L12 rest L72 E6 L12 F6 L6 tie rest L65 D6 L7 rest L6 C6    ; t=0
+    B5 L12 C6 L72 C6 L12 D6 tie L24 A5 L48 D6 L6 C6 B5 L96 C6 end    ; t=378
+
+sub7:
+    volume $50
+    L6 B5 C6 B5 C6 B5 C6 B5 C6 B5 C6 B5 C6 B5 C6 B5 C6 B5 C6 B5 C6 B5 C6 B5 C6 D6 C6 rest L30    ; t=0
+    B5 L6 B5 C6 B5 C6 B5 C6 B5 C6 B5 C6 B5 C6 B5 C6 B5 C6 B5 C6 B5 C6 B5 C6 B5 C6 B5 L12 C6    ; t=162
+    L30 D6 end    ; t=354

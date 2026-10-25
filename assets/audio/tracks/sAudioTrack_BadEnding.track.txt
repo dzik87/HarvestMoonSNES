@@ -1,0 +1,68 @@
+; sAudioTrack_BadEnding - song data (song list, patterns, voice streams); pointers are labels.
+; Format: docs/formats/audio-sources.md (tools/audio/trackfmt.py).
+
+songlist:
+    pattern pat0
+    jump songlist 255
+    songend
+
+pat0:
+    voices pat0_v0 pat0_v1 pat0_v2 pat0_v3 pat0_v4 pat0_v5 - -
+
+pat0_v0:
+    percbase $0B
+    echo $FF $5A $5A
+    echoparams $05 $3C $01
+    transpose $01
+    tempo $12
+    instrument $00
+    volume $80
+    pan $0A
+    voicetranspose $F3
+    finetune $BE
+    L12:G7V15 G#5 G5 F5 G5 G#5 G5 A#5 F5 C6 F5 G#5 F5 G5 F5 G5 G#5 L72 F5 L24 D#5 L96 F5 L24    ; t=0
+    rest L60 C6 L12 C5 L96 F5 end    ; t=384
+
+pat0_v1:
+    instrument $01
+    volume $80
+    pan $0A
+    vibrato $00 $14 $1E
+    L84:G7V15 F4 L12 E4 L84 F4 L12 G4 L84 F4 L12 G#4 L84 F4 L6 F4 rest L84 F4 L12 E4 L84 F4    ; t=0
+    L6 F4 rest L84 F4 L12 G#4 L96 F4    ; t=564
+
+pat0_v2:
+    instrument $00
+    volume $82
+    pan $0F
+    voicetranspose $FF
+    finetune $BE
+    L72:G7V15 C5 L24 F5 L96 D#5 L48 C#5 L12 D#5 C5 A#5 G5 L96 F5 L48 F5 L12 G5 F5 G5 G#5 L6    ; t=0
+    G#5 G5 L84 F5 L48 F5 L12 G5 F5 G5 G#5 L6 A#5 C6 L84 F5    ; t=480
+
+pat0_v3:
+    instrument $00
+    volume $8C
+    pan $05
+    voicetranspose $FF
+    finetune $BE
+    vibrato $00 $14 $0A
+    L96:G7V15 C4 D#4 C#4 C4 D#4 C4 D#4 C4    ; t=0
+
+pat0_v4:
+    instrument $00
+    volume $8C
+    pan $06
+    voicetranspose $FF
+    finetune $BE
+    vibrato $00 $14 $0A
+    L96:G7V15 F3 A#3 G#3 F3 A#3 F3 A#3 F3    ; t=0
+
+pat0_v5:
+    instrument $00
+    volume $64
+    pan $0A
+    voicetranspose $F3
+    finetune $BE
+    L6 rest L12:G7V15 G#5 G5 F5 G5 G#5 G5 A#5 F5 C6 F5 G#5 F5 G5 F5 G5 G#5 L72 F5 L24 D#5 L96    ; t=0
+    F5 L24 rest L60 C6 L12 C5 L96 F5 L24 rest L60 C6 L12 C5 L90 F5 end    ; t=294
