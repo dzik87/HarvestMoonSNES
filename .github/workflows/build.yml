@@ -91,6 +91,25 @@ jobs:
           set -o pipefail
           python3 tools/build.py --region JP --out build/HarvestMoonJP.sfc -v 2>&1 | tee build-jp.log
 
+      - name: Render audio for listening (SPC + MP3, not committed)
+        continue-on-error: true
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          python3 tools/audio/audioconv.py spc --all --out build/listen/spc
+          python3 tools/audio/audioconv.py spc --out build/listen/spc $(seq 1 49 | sed 's/^/--sfx /')
+          python3 tools/audio/audioconv.py render build/listen/spc --out build/listen/mp3 --format mp3 --seconds 90
+
+      - name: Upload audio for listening
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: HarvestMoon-audio-listen
+          path: |
+            build/listen/spc
+            build/listen/mp3
+          retention-days: 14
+          if-no-files-found: ignore
+
       - name: Report result
         if: always()
         run: |
