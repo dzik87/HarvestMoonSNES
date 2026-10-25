@@ -296,6 +296,11 @@ def parse_asm_blobs(path, tail=0):
             if s.lower().startswith('db'):
                 for h in _HEX_RE.findall(s[2:]):
                     buf.append(int(h, 16))
+            elif s.lower().startswith('incbin'):
+                rel = re.search(r'"([^"]+)"', s).group(1)
+                buf.extend(open(os.path.join(os.path.dirname(os.path.abspath(path)), rel), 'rb').read())
+            elif s.lower().startswith('fill'):
+                buf.extend(bytes(int(s.split()[1])))
     if cur is not None:
         blobs[cur] = bytes(buf)
     if tail > 0:
