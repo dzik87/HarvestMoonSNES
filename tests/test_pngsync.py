@@ -87,7 +87,8 @@ def clone_tree(tmp, drop_sources=False):
     shutil.copytree(ROOT / "assets/gfx", tmp / "assets/gfx", ignore=shutil.ignore_patterns("*.pal"))
     shutil.copytree(ROOT / "assets/objects", tmp / "assets/objects")
     (tmp / "src/code/bank_80").mkdir(parents=True)
-    shutil.copy(ROOT / "src/code/bank_80/tilemaps.asm", tmp / "src/code/bank_80/tilemaps.asm")
+    for f in ("tilemaps.asm", "core.asm"):
+        shutil.copy(ROOT / "src/code/bank_80" / f, tmp / "src/code/bank_80" / f)
     if drop_sources:
         for r in ("", "eu/", "de/", "jp/"):
             base = tmp / "assets/gfx/png" / r

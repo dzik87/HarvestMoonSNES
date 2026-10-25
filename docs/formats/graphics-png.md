@@ -211,6 +211,35 @@ Still doubtful (cannot be decided from the picture alone):
 * Tables that are blank (all cells empty), `A59C08`, `A5A3D5`, `A5C4CD`, `A5AD17`..`A5BD8A` (2048 entries): 32 and 64 columns score the same; the
   engine default (32) is kept. If one of them is ever shown it must be re-evaluated.
 
+### Screens: known special cases
+
+How a name table cell finds its tile: entry tile id `n` shows the tile at VRAM word `chr_base + 16 * n` (4bpp). `chr_base` is the character base of
+the BG that shows the table: the map header's graphic preset (first byte, maps of areas below $57) selects `BGnSC` (which BG is at the
+name table's VRAM address) and `BG12NBA` / `BG34NBA` (`Table_*_Presets` in `src/code/bank_80/core.asm`) - $2000 for the BG1 / BG2 of presets 0-5.
+The tile sets of the map header are loaded at $2000 / $3000 / $4000 / $5000, so a set at $3000 holds ids $100-$1FF.
+(`composed.py` derives the base with `pngsync.bg_chr_base`; the first version used the lowest tile set address, which put the six shop interiors
+`A4AA99` flower shop, `A4AE95` bar, `A4B3D1` restaurant, `A4B8E0` general store, `A4BCC1` animal shop and `A4C065` fortune teller - whose only set is at
+$3000 - outside every set, so they were drawn as colour 0 only.)
+Maps without a preset byte (weather overlays, menus, intro, areas $57+) use the base of the active preset: the base under which most used ids are found
+($2000 in every case here).
+
+`pngsync.py check` verifies every screen: FAIL when none of its tile ids is found in the loaded sets (wrong base), WARN when more than 10 % of the used cells
+are not found.  Audit of all screens of the four releases (colours = distinct pixel values incl. palette row):
+
+| Screens | Finding | Evidence |
+|---|---|---|
+| All other map and interior name tables (farm, town, mountain, houses, shops, roads, summit, caves, festivals, ...) | normal BG1 / BG2 tables | 0 unresolved cells, 25-109 colours, palette rows 1-7 |
+| weather overlays `A48000` rain, `A4C3E2` falling leaves, `A5A3D5` heavy snow, `A5C955` snow | BG2 overlay at VRAM $7000, ids $300-$3C0 relative to base $2000 (set at $5000), priority bit set, palette row 0 | 4 colours (leaves 2), 0 unresolved after the base fix; before it 100 % unresolved |
+| `A690A6`, `A694EE`, `A69996` (caves / mine floors), `A5DE84` (Natsume logo), `A58D8E` (menu characters) | sparse tables, mostly id 0 | 356-692 used cells of 4096; 3-19 colours is correct |
+| `A59C08`, `A5B042`, `A5AD17`, `A5B361` (BG2 layer of tool shed / summit maps) | second layer with palette row 0 or 4, few colours | 4-15 colours, 0 unresolved |
+| `A5970F` menu background pattern, `A5D44C` intro scroll | repeating pattern of a few tiles | 9-10 colours, single palette row; the seam metric is high by construction (checked by eye) |
+| `A69996__sMap_80B5AF` (US, 34 %), `A694EE__sMap_80B514` (JP, 57 %) | tiles of a set that this map does not load: the 4th set ($5000) is loaded by other code / another map entry (`sMap_80B618` loads `A0CAAF` for the same table: 0 unresolved) | WARN, not an error; those cells stay colour 0 |
+| `A5D94A` (logo), `A5CB05` (dialog box, DMA'd to $7800), `A6A096` | not shown with any tile set in the map table: no screen | name table of BG3 (2bpp) / raw table |
+
+No table of the audit is a collision map or a mask: all entries are ordinary BG entries (tile id, palette row, priority, flips), every used id lies
+inside a loaded tile set, and the rendered pictures read as scenery.  BG3 (2bpp) name tables are not rendered as screens (no tile blob of the map table
+is shown on BG3); the dialog window `A5CB05` is the only BG3 table in the compressed tilemaps.
+
 ### Sidecar (`<label>.json`)
 | Key | Meaning |
 |---|---|
