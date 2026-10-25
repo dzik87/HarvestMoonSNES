@@ -1,0 +1,12 @@
+{
+  "label": "Sprites_908000",
+  "kind": "sprites",
+  "bin": "assets/gfx/sprites/Sprites_908000.bin",
+  "compression": "none",
+  "raw_size": 32768,
+  "format": "snes_planar_tiles",
+  "bpp": 4,
+  "bpp_confidence": "high",
+  "bpp_note": "OBJ tiles in the standard 4bpp layout; plane correlation and sheet appearance confirm it",
+  "tiles_per_row": 16
+}

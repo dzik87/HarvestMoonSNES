@@ -1,0 +1,20 @@
+{
+  "label": "sCharactermap_A28000",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/sCharactermap_A28000.bin",
+  "compression": "none",
+  "raw_size": 24512,
+  "format": "bg_name_table",
+  "entries": 12256,
+  "columns": 128,
+  "vram_word_dest": [
+    "$6000"
+  ],
+  "map_entries": 4,
+  "first_map": "sMountainSpring",
+  "tile_sets": [
+    "sCompressedTiles_9DE7CE@$2000",
+    "sCompressedTiles_9E8000@$3000",
+    "sCompressedTiles_9D8000@$4000"
+  ]
+}

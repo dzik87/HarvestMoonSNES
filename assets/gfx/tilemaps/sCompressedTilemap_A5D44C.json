@@ -1,0 +1,21 @@
+{
+  "label": "sCompressedTilemap_A5D44C",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/sCompressedTilemap_A5D44C.bin",
+  "compression": "lzss",
+  "raw_size": 8192,
+  "format": "bg_name_table",
+  "entries": 4096,
+  "columns": 32,
+  "vram_word_dest": [
+    "$7000"
+  ],
+  "map_entries": 1,
+  "first_map": "sIntroFarmScrool",
+  "tile_sets": [
+    "sCompressedTiles_9F8000@$2000",
+    "sCompressedTiles_9F946C@$3000",
+    "sCompressedTiles_9FAA75@$4000",
+    "sCompressedTiles_9FC04C@$5000"
+  ]
+}
