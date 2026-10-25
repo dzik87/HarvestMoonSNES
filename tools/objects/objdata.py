@@ -251,6 +251,11 @@ class Padding(Node):
         out += bytes([self.fill]) * self.length
 
 
+class Filler(Padding):
+    """Zero byte(s) between data structures that no structure accounts for."""
+    kind = 'Filler'
+
+
 class Opaque(Node):
     kind = 'Opaque'
 
@@ -406,7 +411,12 @@ def build_model(asm):
     for s, e in gaps:
         chunk = d[s - BASE:e - BASE]
         if not any(chunk):
-            claim(Padding(e - s), s)
+            if e == end:
+                claim(Padding(e - s), s)
+            else:
+                claim(Filler(e - s), s)
+                notes.append('%#x..%#x: %d unexplained zero byte(s) between structures'
+                             % (s, e, e - s))
             continue
         p = s
         new = []
@@ -482,7 +492,8 @@ def cmd_analyze(_args):
         steps = sum(len(a.steps) for a in lists)
         raw_ptr = sum(1 for a in lists for r, _ in a.steps if r.node is None) \
             + sum(1 for r in tbl.refs if r.node is None)
-        pad, opaque = by_kind['Padding'], by_kind['Opaque']
+        pad, opaque, filler = by_kind['Padding'], by_kind['Opaque'], by_kind['Filler']
+        opaque += filler            # unexplained bytes count as not modelled
         modelled = total - opaque
         tiles = [t for f in frames for (t, _, _, _) in f.comps]
         timers = collections.Counter(t for a in lists for _, t in a.steps)
@@ -503,7 +514,8 @@ def cmd_analyze(_args):
                  by_kind['Frame'] + by_kind['Frame(unreferenced)']))
         print('  unresolved pointers       : %d' % raw_ptr)
         print('  zero padding              : %d bytes' % pad)
-        print('  opaque (not modelled)     : %d bytes' % opaque)
+        print('  not modelled              : %d bytes (%d opaque, %d unexplained zero filler)'
+              % (opaque, opaque - filler, filler))
         print('  modelled                  : %d / %d bytes = %.3f%% (without padding: %d / %d = %.3f%%)'
               % (modelled, total, 100.0 * modelled / total, modelled - pad, total - pad,
                  100.0 * (modelled - pad) / (total - pad)))

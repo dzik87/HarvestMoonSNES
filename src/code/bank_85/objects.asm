@@ -67,7 +67,7 @@ fObject_Create:
     LDA.W strcGameObject.spriteTableIdx,X                      ;858070|BD9E01  |00019E;
     ASL A                                                      ;858073|0A      |      ;
     TAX                                                        ;858074|AA      |      ;
-    LDA.L aObjectsList1,X                                      ;858075|BF808086|868080;
+    LDA.L aObjAnimListPtrs_86,X                                      ;858075|BF808086|868080;
     STA.B ptrUnknown0x75                                       ;858079|8575    |000075;
     BRA .label6                                                ;85807B|800F    |85808C;
  
@@ -78,7 +78,7 @@ fObject_Create:
     SBC.W #$0262                                               ;858081|E96202  |      ;
     ASL A                                                      ;858084|0A      |      ;
     TAX                                                        ;858085|AA      |      ;
-    LDA.L aObjectsList2,X                                      ;858086|BF808087|878080;
+    LDA.L aObjAnimListPtrs_87,X                                      ;858086|BF808087|878080;
     STA.B ptrUnknown0x75                                       ;85808A|8575    |000075;
  
 .label6:
@@ -198,7 +198,7 @@ fObject_Replace:
     LDA.W strcGameObject.spriteTableIdx,X                      ;85815B|BD9E01  |00019E;
     ASL A                                                      ;85815E|0A      |      ;
     TAX                                                        ;85815F|AA      |      ;
-    LDA.L aObjectsList1,X                                      ;858160|BF808086|868080;
+    LDA.L aObjAnimListPtrs_86,X                                      ;858160|BF808086|868080;
     STA.B ptrUnknown0x75                                       ;858164|8575    |000075;
     BRA .label4                                                ;858166|800F    |858177;
  
@@ -209,7 +209,7 @@ fObject_Replace:
     SBC.W #$0262                                               ;85816C|E96202  |      ;
     ASL A                                                      ;85816F|0A      |      ;
     TAX                                                        ;858170|AA      |      ;
-    LDA.L aObjectsList2,X                                      ;858171|BF808087|878080;
+    LDA.L aObjAnimListPtrs_87,X                                      ;858171|BF808087|878080;
     STA.B ptrUnknown0x75                                       ;858175|8575    |000075;
  
 .label4:
@@ -838,7 +838,7 @@ fObject_RenderAll:
     REP #$20                                                   ;8585BF|C220    |      ;
     ASL A                                                      ;8585C1|0A      |      ;
     TAX                                                        ;8585C2|AA      |      ;
-    LDA.L aMultiplicantValue_868000,X                          ;8585C3|BF008086|868000;
+    LDA.L aObjSlotOamTile_868000,X                          ;8585C3|BF008086|868000;
     SEP #$20                                                   ;8585C7|E220    |      ;
     LDX.B strcObject.bankAddress                               ;8585C9|A6AF    |0000AF;
     STA.L $7EA002,X                                            ;8585CB|9F02A07E|7EA002;
@@ -1598,7 +1598,7 @@ fObject_ProcessTileLoadQueue:
     LDA.B $C1                                                  ;858DB4|A5C1    |0000C1;
     ASL A                                                      ;858DB6|0A      |      ;
     TAX                                                        ;858DB7|AA      |      ;
-    LDA.L aMultiplicantValue_868000,X                          ;858DB8|BF008086|868000;
+    LDA.L aObjSlotOamTile_868000,X                          ;858DB8|BF008086|868000;
     SEP #$20                                                   ;858DBC|E220    |      ;
     STA.W SNES_WRMPYA                                          ;858DBE|8D0242  |004202;
     LDA.B #$20                                                 ;858DC1|A920    |      ;
@@ -1621,7 +1621,7 @@ fObject_ProcessTileLoadQueue:
     LDA.B ptrUnknown0x75                                       ;858DDD|A575    |000075;
     ASL A                                                      ;858DDF|0A      |      ;
     TAX                                                        ;858DE0|AA      |      ;
-    LDA.L aMultiplicantValue_868000,X                          ;858DE1|BF008086|868000;
+    LDA.L aObjSlotOamTile_868000,X                          ;858DE1|BF008086|868000;
     SEP #$20                                                   ;858DE5|E220    |      ;
     STA.W SNES_WRMPYA                                          ;858DE7|8D0242  |004202;
     LDA.B #$10                                                 ;858DEA|A910    |      ;

@@ -33,6 +33,9 @@ def test_roundtrip(banks, ms):
 def test_full_coverage(banks, ms):
     for b, m in ms.items():
         check(not any(n.kind == 'Opaque' for n in m.nodes), 'bank %02X has no opaque bytes' % b)
+        fill = [(n.addr, n.size()) for n in m.nodes if n.kind == 'Filler']
+        check(fill == ([(0xA9C8, 1)] if b == 0x87 else []),
+              'bank %02X: unexplained zero filler bytes: %s' % (b, fill))
         check(sum(n.size() for n in m.nodes) == 0x8000, 'bank %02X nodes tile the bank' % b)
         pos = od.BASE
         for n in m.nodes:
