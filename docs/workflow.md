@@ -26,3 +26,4 @@ the result in run annotations and as the `HarvestMoon-US` artifact.
 - `dialogs/dialog.py` — dialog word streams <-> editable text (`assets/dialogs/<region>/`), all regions.
 - `maps/objmap.py` — object maps (bank $A7) <-> JSON grids in `assets/maps/`; widths in `tools/maps/map_dims.json`.
 - `data/bankbin.py` — sprite, tile, character and audio banks: one `.bin` per label in `assets/`, included with `incbin` (labels unchanged).
+- `gfx/gfxpipe.py` — export compressed blobs to raw/PNG, re-import edited PNG (recompress, size must stay equal), verify exact re-encode.
