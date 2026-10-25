@@ -85,6 +85,11 @@ VRAM advance (`fDialog_AdvanceGlyphDestination` $839838: `type*8+8` words).
 the per-region extras). US: `$00`-`$19` a-z, `$1A`-`$33` A-Z, `$34`-`$41` punctuation, `$42` heart, `$A2` next
 marker, `$B1` space, `$B2`-`$BB` digits (dialog text), `$BC`-`$C5` digits for number variables. JP: kana,
 see `tools/dialogs/glyphs/jp.json` (first occurrence of each character only; the table contains duplicates).
+JP blank glyphs: `$00B1` and `$0270` are plain dither (so they have no PNG) but are real spaces. They are not duplicates:
+`$00B1` is type 1 (16 px, full-width space, written `U+3000` in the dialog sources) and `$0270` is type 0 (8 px,
+half-width space, written as an ASCII space). `$00B1` is by far the most used code in JP text (about 6000 uses).
+In US/EU/DE the engine draws every glyph 8 px wide, so `$B1` is the only space there.
+
 Add new letters by drawing them into a free glyph id and registering the character in the dialog tool's map.
 
 ## Differences between regions
