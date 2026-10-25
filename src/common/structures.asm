@@ -53,7 +53,7 @@ endstruct align 31
 
 
 ;
-; 42-71     ptrUnknown0x42              16 * ptr24
+; 42-71     ptrPaletteAnimScripts              16 * ptr24
 ;
 
 
@@ -286,9 +286,9 @@ endstruct
 ; Size and start OK
 ;
 struct strcPalette          $7E014A
-    .unk14A                 : skip 16   ; 14A-159   r?
-    .unk15A                 : skip 16   ; 15A-169   g?
-    .unk16A                 : skip 16   ; 16A-179   b?
+    .animTimer                 : skip 16   ; 14A-159   palette animation: frame timer per slot
+    .animColorIndex                 : skip 16   ; 15A-169   palette animation: colour index per slot
+    .animPaletteRow                 : skip 16   ; 16A-179   palette animation: palette row per slot
     .countDown              : skip 1    ; 17A
     .nextIdx                : skip 1    ; 17B
     .nextHourIdx            : skip 1    ; 17C

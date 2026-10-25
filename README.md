@@ -24,7 +24,7 @@ CI (GitHub Actions) builds asar from source, assembles the ROM and compares the 
 | `src/ai/` | AI script interpreter: command definitions (`commands.asm`) and per-region scripts |
 | `src/data/` | graphics, tilemaps, objects, audio, dialogs |
 | `tools/` | build, verification, migration tools (`tools/migration/`) |
-| `docs/` | documentation (layout, workflow, migration log, AI commands) |
+| `docs/` | documentation (layout, workflow, migration log, findings, AI commands, naming maps) |
 | `tests/` | reference hash values |
 
 Details: [`docs/layout.md`](docs/layout.md), [`docs/workflow.md`](docs/workflow.md),

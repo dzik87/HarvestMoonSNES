@@ -1564,10 +1564,10 @@ fCore_SetBrightness:
  
 fCore_Store0x72To0x42AtIndex:
     SEP #$30                                                   ;808E48|E230    |      ; A: nValue1, X nIndex, Y: nValue2, Y, $72: ptr24
-    STA.W strcPalette.unk15A,X                                 ;808E4A|9D5A01  |00015A;
+    STA.W strcPalette.animColorIndex,X                                 ;808E4A|9D5A01  |00015A;
     TYA                                                        ;808E4D|98      |      ;
-    STA.W strcPalette.unk16A,X                                 ;808E4E|9D6A01  |00016A;
-    STZ.W strcPalette.unk14A,X                                 ;808E51|9E4A01  |00014A;
+    STA.W strcPalette.animPaletteRow,X                                 ;808E4E|9D6A01  |00016A;
+    STZ.W strcPalette.animTimer,X                                 ;808E51|9E4A01  |00014A;
     REP #$20                                                   ;808E54|C220    |      ;
     TXA                                                        ;808E56|8A      |      ;
     STA.B strcVariables.n16Temp1                               ;808E57|857E    |00007E;
@@ -1576,10 +1576,10 @@ fCore_Store0x72To0x42AtIndex:
     ADC.B strcVariables.n16Temp1                               ;808E5B|657E    |00007E; X * 3
     TAX                                                        ;808E5D|AA      |      ;
     LDA.B ptrTemp0x72                                          ;808E5E|A572    |000072;
-    STA.B ptrUnknown0x42,X                                     ;808E60|9542    |000042; $72 -> $42
+    STA.B ptrPaletteAnimScripts,X                                     ;808E60|9542    |000042; $72 -> $42
     SEP #$20                                                   ;808E62|E220    |      ;
     LDA.B ptrTemp0x72+2                                        ;808E64|A574    |000074;
-    STA.B ptrUnknown0x42+2,X                                   ;808E66|9544    |000044;
+    STA.B ptrPaletteAnimScripts+2,X                                   ;808E66|9544    |000044;
     RTL                                                        ;808E68|6B      |      ;
  
  
@@ -1603,10 +1603,10 @@ fPalette_ProcessColorAnimSlots:
     CLC                                                        ;808E87|18      |      ;
     ADC.B strcVariables.n16Temp1                               ;808E88|657E    |00007E;
     TAX                                                        ;808E8A|AA      |      ;
-    LDA.B ptrUnknown0x42,X                                     ;808E8B|B542    |000042;
+    LDA.B ptrPaletteAnimScripts,X                                     ;808E8B|B542    |000042;
     BNE .label2                                                ;808E8D|D00E    |808E9D;
     SEP #$20                                                   ;808E8F|E220    |      ;
-    LDA.B ptrUnknown0x42+2,X                                   ;808E91|B544    |000044;
+    LDA.B ptrPaletteAnimScripts+2,X                                   ;808E91|B544    |000044;
     BNE .label2                                                ;808E93|D008    |808E9D;
     CPY.W #$0004                                               ;808E95|C00400  |      ;
     BCC .label6                                                ;808E98|907F    |808F19;
@@ -1619,10 +1619,10 @@ fPalette_ProcessColorAnimSlots:
     STA.B strcVariables.n8Temp2                                ;808EA1|8593    |000093;
     REP #$20                                                   ;808EA3|C220    |      ;
     PHY                                                        ;808EA5|5A      |      ;
-    LDA.B ptrUnknown0x42,X                                     ;808EA6|B542    |000042;
+    LDA.B ptrPaletteAnimScripts,X                                     ;808EA6|B542    |000042;
     STA.B ptrTemp0x72                                          ;808EA8|8572    |000072;
     SEP #$20                                                   ;808EAA|E220    |      ;
-    LDA.B ptrUnknown0x42+2,X                                   ;808EAC|B544    |000044;
+    LDA.B ptrPaletteAnimScripts+2,X                                   ;808EAC|B544    |000044;
     STA.B ptrTemp0x72+2                                        ;808EAE|8574    |000074;
     REP #$20                                                   ;808EB0|C220    |      ;
     LDA.B [ptrTemp0x72]                                        ;808EB2|A772    |000072;
@@ -1641,7 +1641,7 @@ fPalette_ProcessColorAnimSlots:
     PLY                                                        ;808EC4|7A      |      ;
     TYX                                                        ;808EC5|BB      |      ;
     SEP #$20                                                   ;808EC6|E220    |      ;
-    LDA.W strcPalette.unk14A,X                                 ;808EC8|BD4A01  |00014A;
+    LDA.W strcPalette.animTimer,X                                 ;808EC8|BD4A01  |00014A;
     BEQ .label5                                                ;808ECB|F003    |808ED0;
     JMP.W .label8                                              ;808ECD|4C528F  |808F52;
  
@@ -1651,14 +1651,14 @@ fPalette_ProcessColorAnimSlots:
     TYX                                                        ;808ED1|BB      |      ;
     LDA.B #$00                                                 ;808ED2|A900    |      ;
     XBA                                                        ;808ED4|EB      |      ;
-    LDA.W strcPalette.unk16A,X                                 ;808ED5|BD6A01  |00016A;
+    LDA.W strcPalette.animPaletteRow,X                                 ;808ED5|BD6A01  |00016A;
     REP #$20                                                   ;808ED8|C220    |      ;
     PHA                                                        ;808EDA|48      |      ;
     TYX                                                        ;808EDB|BB      |      ;
     SEP #$20                                                   ;808EDC|E220    |      ;
     LDA.B #$00                                                 ;808EDE|A900    |      ;
     XBA                                                        ;808EE0|EB      |      ;
-    LDA.W strcPalette.unk15A,X                                 ;808EE1|BD5A01  |00015A;
+    LDA.W strcPalette.animColorIndex,X                                 ;808EE1|BD5A01  |00015A;
     REP #$20                                                   ;808EE4|C220    |      ;
     PHA                                                        ;808EE6|48      |      ;
     LDA.B [ptrTemp0x72]                                        ;808EE7|A772    |000072;
@@ -1672,7 +1672,7 @@ fPalette_ProcessColorAnimSlots:
     LDY.W #$0002                                               ;808EF4|A00200  |      ;
     SEP #$20                                                   ;808EF7|E220    |      ;
     LDA.B [ptrTemp0x72],Y                                      ;808EF9|B772    |000072;
-    STA.W strcPalette.unk14A,X                                 ;808EFB|9D4A01  |00014A;
+    STA.W strcPalette.animTimer,X                                 ;808EFB|9D4A01  |00014A;
     REP #$20                                                   ;808EFE|C220    |      ;
     PLY                                                        ;808F00|7A      |      ;
     TYA                                                        ;808F01|98      |      ;
@@ -1681,14 +1681,14 @@ fPalette_ProcessColorAnimSlots:
     CLC                                                        ;808F05|18      |      ;
     ADC.B strcVariables.n16Temp1                               ;808F06|657E    |00007E;
     TAX                                                        ;808F08|AA      |      ;
-    LDA.B ptrUnknown0x42,X                                     ;808F09|B542    |000042;
+    LDA.B ptrPaletteAnimScripts,X                                     ;808F09|B542    |000042;
     CLC                                                        ;808F0B|18      |      ;
     ADC.W #$0003                                               ;808F0C|690300  |      ;
-    STA.B ptrUnknown0x42,X                                     ;808F0F|9542    |000042;
+    STA.B ptrPaletteAnimScripts,X                                     ;808F0F|9542    |000042;
     SEP #$20                                                   ;808F11|E220    |      ;
-    LDA.B ptrUnknown0x42+2,X                                   ;808F13|B544    |000044;
+    LDA.B ptrPaletteAnimScripts+2,X                                   ;808F13|B544    |000044;
     ADC.B #$00                                                 ;808F15|6900    |      ;
-    STA.B ptrUnknown0x42+2,X                                   ;808F17|9544    |000044;
+    STA.B ptrPaletteAnimScripts+2,X                                   ;808F17|9544    |000044;
  
 .label6:
     REP #$20                                                   ;808F19|C220    |      ;
@@ -1727,15 +1727,15 @@ fPalette_ProcessColorAnimSlots:
  
  
 .label8:
-    DEC.W strcPalette.unk14A,X                                 ;808F52|DE4A01  |00014A;
+    DEC.W strcPalette.animTimer,X                                 ;808F52|DE4A01  |00014A;
     BRA .label6                                                ;808F55|80C2    |808F19;
  
  
 .noMoreData:
     REP #$20                                                   ;808F57|C220    |      ;
-    STZ.B ptrUnknown0x42,X                                     ;808F59|7442    |000042;
+    STZ.B ptrPaletteAnimScripts,X                                     ;808F59|7442    |000042;
     SEP #$20                                                   ;808F5B|E220    |      ;
-    STZ.B ptrUnknown0x42+2,X                                   ;808F5D|7444    |000044;
+    STZ.B ptrPaletteAnimScripts+2,X                                   ;808F5D|7444    |000044;
     JMP.W .loop                                                ;808F5F|4CC48E  |808EC4;
  
  
@@ -1743,17 +1743,17 @@ fPalette_ProcessColorAnimSlots:
     REP #$20                                                   ;808F62|C220    |      ;
     LDY.W #$0002                                               ;808F64|A00200  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;808F67|B772    |000072;
-    STA.B ptrUnknown0x42,X                                     ;808F69|9542    |000042;
+    STA.B ptrPaletteAnimScripts,X                                     ;808F69|9542    |000042;
     INY                                                        ;808F6B|C8      |      ;
     INY                                                        ;808F6C|C8      |      ;
     SEP #$20                                                   ;808F6D|E220    |      ;
     LDA.B [ptrTemp0x72],Y                                      ;808F6F|B772    |000072;
-    STA.B ptrUnknown0x42+2,X                                   ;808F71|9544    |000044;
+    STA.B ptrPaletteAnimScripts+2,X                                   ;808F71|9544    |000044;
     REP #$20                                                   ;808F73|C220    |      ;
-    LDA.B ptrUnknown0x42,X                                     ;808F75|B542    |000042;
+    LDA.B ptrPaletteAnimScripts,X                                     ;808F75|B542    |000042;
     STA.B ptrTemp0x72                                          ;808F77|8572    |000072;
     SEP #$20                                                   ;808F79|E220    |      ;
-    LDA.B ptrUnknown0x42+2,X                                   ;808F7B|B544    |000044;
+    LDA.B ptrPaletteAnimScripts+2,X                                   ;808F7B|B544    |000044;
     STA.B ptrTemp0x72+2                                        ;808F7D|8574    |000074;
     JMP.W .loop                                                ;808F7F|4CC48E  |808EC4;
  
@@ -1765,9 +1765,9 @@ fCore_Zero0x42PtrAtIndex:
     CLC                                                        ;808F87|18      |      ;
     ADC.B strcVariables.n16Temp1                               ;808F88|657E    |00007E;
     TAX                                                        ;808F8A|AA      |      ;
-    STZ.B ptrUnknown0x42,X                                     ;808F8B|7442    |000042;
+    STZ.B ptrPaletteAnimScripts,X                                     ;808F8B|7442    |000042;
     SEP #$20                                                   ;808F8D|E220    |      ;
-    STZ.B ptrUnknown0x42+2,X                                   ;808F8F|7444    |000044;
+    STZ.B ptrPaletteAnimScripts+2,X                                   ;808F8F|7444    |000044;
     RTL                                                        ;808F91|6B      |      ;
  
  
@@ -1781,9 +1781,9 @@ fCore_Zero0x42PtrFromIndex:
     CLC                                                        ;808F9A|18      |      ;
     ADC.B strcVariables.n16Temp1                               ;808F9B|657E    |00007E;
     TAX                                                        ;808F9D|AA      |      ;
-    STZ.B ptrUnknown0x42,X                                     ;808F9E|7442    |000042;
+    STZ.B ptrPaletteAnimScripts,X                                     ;808F9E|7442    |000042;
     SEP #$20                                                   ;808FA0|E220    |      ;
-    STZ.B ptrUnknown0x42+2,X                                   ;808FA2|7444    |000044;
+    STZ.B ptrPaletteAnimScripts+2,X                                   ;808FA2|7444    |000044;
     INY                                                        ;808FA4|C8      |      ;
     CPY.W #$0010                                               ;808FA5|C01000  |      ;
     BNE -                                                      ;808FA8|D0EA    |808F94;
@@ -1801,9 +1801,9 @@ fCore_Zero0x42Ptr:
     CLC                                                        ;808FB6|18      |      ;
     ADC.B strcVariables.n16Temp1                               ;808FB7|657E    |00007E;
     TAX                                                        ;808FB9|AA      |      ;
-    STZ.B ptrUnknown0x42,X                                     ;808FBA|7442    |000042;
+    STZ.B ptrPaletteAnimScripts,X                                     ;808FBA|7442    |000042;
     SEP #$20                                                   ;808FBC|E220    |      ;
-    STZ.B ptrUnknown0x42+2,X                                   ;808FBE|7444    |000044;
+    STZ.B ptrPaletteAnimScripts+2,X                                   ;808FBE|7444    |000044;
     INY                                                        ;808FC0|C8      |      ;
     CPY.W #$0010                                               ;808FC1|C01000  |      ;
     BNE -                                                      ;808FC4|D0EA    |808FB0;

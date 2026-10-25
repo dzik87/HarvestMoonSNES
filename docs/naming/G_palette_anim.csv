@@ -1,0 +1,5 @@
+old,new,confidence,reason
+unk14A,animTimer,high,Per-slot frame countdown of the palette animation (decremented in fCore palette animation updater)
+unk15A,animColorIndex,high,Per-slot target colour index within the palette row
+unk16A,animPaletteRow,high,Per-slot palette row (row*32 + colour*2 offset)
+ptrUnknown0x42,ptrPaletteAnimScripts,high,16 slots of 24-bit pointers to palette colour-cycle scripts

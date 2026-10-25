@@ -206,11 +206,11 @@ fGameEngine_FirstNight:
     SEP #$20                                                   ;83AC09|E220    |      ;
     STZ.B ptrPaletteNext+2                                     ;83AC0B|6406    |000006;
     REP #$20                                                   ;83AC0D|C220    |      ;
-    STZ.B ptrUnknown0x42                                       ;83AC0F|6442    |000042;
+    STZ.B ptrPaletteAnimScripts                                       ;83AC0F|6442    |000042;
     STZ.B $45                                                  ;83AC11|6445    |000045;
     STZ.B $48                                                  ;83AC13|6448    |000048;
     SEP #$20                                                   ;83AC15|E220    |      ;
-    STZ.B ptrUnknown0x42+2                                     ;83AC17|6444    |000044;
+    STZ.B ptrPaletteAnimScripts+2                                     ;83AC17|6444    |000044;
     STZ.B $47                                                  ;83AC19|6447    |000047;
     STZ.B $4A                                                  ;83AC1B|644A    |00004A;
     REP #$20                                                   ;83AC1D|C220    |      ;
