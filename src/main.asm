@@ -88,6 +88,7 @@
     incsrc "data/audio/bank_B2.asm"
     
     ; AI
+    incsrc "ai/region.asm"
     incsrc "ai/commands.asm"
     incsrc "ai/us/scripts.asm"
     

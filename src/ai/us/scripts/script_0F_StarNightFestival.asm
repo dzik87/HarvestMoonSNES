@@ -315,6 +315,9 @@ pAIScripting0x0F_StarNightFestival_L061:
     %AICMD0x12_Jump(pAIScripting0x0F_StarNightFestival_L063)                                   ;B48352
 pAIScripting0x0F_StarNightFestival_L062:
     %AICMD0x1A($00C1, $0088, aAIScriptingData_L013, $01)                     ;B48355
+    if !REGION_EU|!REGION_DE
+        %AICMD0x0C_WaitForScriptFlag($07)                      ; EU/DE: this path also waits for flag 7
+    endif
 pAIScripting0x0F_StarNightFestival_L063:
     %AICMD0x1F(pAIScripting0x0F_StarNightFestival_L064)                                        ;B4835D
     %AICMD0x12_Jump(pAIScripting0x0F_StarNightFestival_L063)                                   ;B48360

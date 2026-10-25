@@ -72,29 +72,44 @@ jobs:
           python3 tools/gfx/palette_map.py check
           python3 tools/gfx/pngsync.py check
           python3 tests/test_pngsync.py
+          python3 tests/test_ai_region.py
 
       - name: Build and verify (US)
         run: |
           set -o pipefail
           python3 tools/build.py --region US -v 2>&1 | tee build-us.log
 
-      - name: Build and verify (DE code banks)
+      - name: Build and verify (DE code banks and AI banks)
         run: |
           set -o pipefail
           python3 tools/build.py --region DE --out build/HarvestMoonDE.sfc -v 2>&1 | tee build-de.log
+
+      - name: Build and verify (EU AI banks)
+        run: |
+          set -o pipefail
+          python3 tools/build.py --region EU --out build/HarvestMoonEU.sfc -v 2>&1 | tee build-eu.log
+
+      - name: Build and verify (JP AI banks)
+        run: |
+          set -o pipefail
+          python3 tools/build.py --region JP --out build/HarvestMoonJP.sfc -v 2>&1 | tee build-jp.log
 
       - name: Report result
         if: always()
         run: |
           MSG=$(tail -n 25 build-us.log 2>/dev/null | sed ':a;N;$!ba;s/\n/%0A/g')
           echo "::notice title=build-us log::${MSG}"
-          MSGDE=$(tail -n 8 build-de.log 2>/dev/null | sed ':a;N;$!ba;s/\n/%0A/g')
-          echo "::notice title=build-de log::${MSGDE}"
+          for R in de eu jp; do
+            MSGR=$(tail -n 18 build-$R.log 2>/dev/null | sed ':a;N;$!ba;s/\n/%0A/g')
+            echo "::notice title=build-$R log::${MSGR}"
+          done
           {
-            echo "### Build DE (banks 80-85)"
-            echo '```'
-            tail -n 8 build-de.log 2>/dev/null || echo "no log"
-            echo '```'
+            for R in de eu jp; do
+              echo "### Build ${R^^} (partial ROM: code banks 80-85 for DE, AI banks B3-B5)"
+              echo '```'
+              tail -n 18 build-$R.log 2>/dev/null || echo "no log"
+              echo '```'
+            done
             echo "### Build US"
             echo '```'
             tail -n 25 build-us.log 2>/dev/null || echo "no log"

@@ -117,7 +117,7 @@ pAIScripting0x0A_Data04:
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B3E93F
     %AICMD0x54_ShowDialog($0290, $00)                          ;B3E941
     %AICMD0x50()                                               ;B3E945
-    %AICMD0x47_SetValue8($800973, 3)                           ;B3E946
+    %AICMD0x47_SetValue8(wram80(nTimeState), 3)                           ;B3E946
     %AICMD0x10_End()                                           ;B3E94B
 pAIScripting0x0A_L004:
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B3E94C
@@ -127,7 +127,7 @@ pAIScripting0x0A_L004:
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B3E95C
     %AICMD0x54_ShowDialog($0290, $00)                          ;B3E95E
     %AICMD0x50()                                               ;B3E962
-    %AICMD0x47_SetValue8($800973, 3)                           ;B3E963
+    %AICMD0x47_SetValue8(wram80(nTimeState), 3)                           ;B3E963
     %AICMD0x10_End()                                           ;B3E968
 pAIScripting0x0A_L005:
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 16)                    ;B3E969
@@ -136,7 +136,7 @@ pAIScripting0x0A_L005:
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B3E975
     %AICMD0x54_ShowDialog($0290, $00)                          ;B3E977
     %AICMD0x50()                                               ;B3E97B
-    %AICMD0x47_SetValue8($800973, 3)                           ;B3E97C
+    %AICMD0x47_SetValue8(wram80(nTimeState), 3)                           ;B3E97C
     %AICMD0x10_End()                                           ;B3E981
 
 

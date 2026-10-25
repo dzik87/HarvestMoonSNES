@@ -46,7 +46,7 @@ pAIScripting0x17_L002:
 pAIScripting0x17_L003:
     %AICMD0x1C_ShowDialog($0320, $00)                          ;B48E72
     %AICMD0x28_ClearBit(strcShedItems.row1, $03)                        ;B48E76
-    %AICMD0x47_SetValue8($800921, 20)                          ;B48E7B
+    %AICMD0x47_SetValue8(wram80(strcPlayerData.toolEquipped), 20)                          ;B48E7B
     %AICMD0x41_AddValue16(nPlayerHappiness, 20)                ;B48E80
     %AICMD0x12_Jump(pAIScripting0x17_L004)                                   ;B48E86
 pAIScripting0x17_L004:

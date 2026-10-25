@@ -22,8 +22,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 ROM_SIZE = 0x200000
-MAIN = {"US": "src/main.asm", "DE": "src/main.asm"}  # DE: same entry, `-DREGION_DE=1` (code banks $80-$85 only)
-DEFINES = {"US": [], "DE": ["-DREGION_DE=1"]}
+MAIN = {r: "src/main.asm" for r in ("US", "EU", "DE", "JP")}  # regions share the entry; `-DREGION_xx=1` selects patch blocks (banks $80-$85 only)
+DEFINES = {"US": [], "EU": ["-DREGION_EU=1"], "DE": ["-DREGION_DE=1"], "JP": ["-DREGION_JP=1"]}
 
 
 def find_asar(explicit):
@@ -70,9 +70,13 @@ def main() -> int:
 
     if args.no_verify:
         return 0
-    return subprocess.run(
-        [sys.executable, str(ROOT / "tools" / "verify.py"), str(out), "--region", args.region]
-    ).returncode
+    # every reference set of the region is checked: "DE" (code banks), "DE-AI" (AI banks $B3-$B5), ...
+    import json
+    expected = json.loads((ROOT / "tests" / "expected.json").read_text(encoding="utf-8"))
+    rc = 0
+    for key in [k for k in expected if k == args.region or k.startswith(args.region + "-")]:
+        rc |= subprocess.run([sys.executable, str(ROOT / "tools" / "verify.py"), str(out), "--region", key]).returncode
+    return rc
 
 
 if __name__ == "__main__":

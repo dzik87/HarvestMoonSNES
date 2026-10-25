@@ -14,5 +14,35 @@
     "crc32": "512C3F29",
     "md5": "1ef13cafa794a27c1f984880ac2bb3f6",
     "sha1": "b4bc335aba611bd2cc36934a2dadecf76e391940"
+  },
+  "DE-AI": {
+    "banks": [
+      "B3",
+      "B5"
+    ],
+    "size": 98304,
+    "crc32": "093904A2",
+    "md5": "e4da4759d7abc1beaf2685f2c0448551",
+    "sha1": "b94120ee9c41ccd66eab7b00352e99788d4af7d7"
+  },
+  "EU-AI": {
+    "banks": [
+      "B3",
+      "B5"
+    ],
+    "size": 98304,
+    "crc32": "53507E32",
+    "md5": "6c710a04eb8856d73edcbf96c3611d6b",
+    "sha1": "eaaa8505966384aee325e9cf40c6fd6d1e0da3e0"
+  },
+  "JP-AI": {
+    "banks": [
+      "B3",
+      "B5"
+    ],
+    "size": 98304,
+    "crc32": "E9B5776F",
+    "md5": "b26d1070003fe1674aa8ea499ec27711",
+    "sha1": "a34eca99bfe8b634df05db6a7de1cde056c29375"
   }
 }

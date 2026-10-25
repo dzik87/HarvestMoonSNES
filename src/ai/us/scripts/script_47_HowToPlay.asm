@@ -84,8 +84,8 @@ pAIScripting0x47_HowToPlay_Data02:
 
 pAIScripting0x47_HowToPlay_Data03:
  
-    %AICMD0x47_SetValue8($800921, 3)                           ;B5AD25
-    %AICMD0x47_SetValue8($800923, 4)                           ;B5AD2A
+    %AICMD0x47_SetValue8(wram80(strcPlayerData.toolEquipped), 3)                           ;B5AD25
+    %AICMD0x47_SetValue8(wram80(strcPlayerData.toolSecond), 4)                           ;B5AD2A
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $06)       ;B5AD2F
     %AICMD0x00_SetMusic($01, $B4)                              ;B5AD34
     %AICMD0x02_FreezeTime()                                    ;B5AD37
@@ -430,8 +430,8 @@ pAIScripting0x47_HowToPlay_Data05:
     %AICMD0x58_ReplaceFarmTile($02, 304, 448)                  ;B5B164
     %AICMD0x58_ReplaceFarmTile($02, 288, 464)                  ;B5B16A
     %AICMD0x58_ReplaceFarmTile($02, 304, 464)                  ;B5B170
-    %AICMD0x47_SetValue8($800921, 2)                           ;B5B176
-    %AICMD0x47_SetValue8($800923, 12)                          ;B5B17B
+    %AICMD0x47_SetValue8(wram80(strcPlayerData.toolEquipped), 2)                           ;B5B176
+    %AICMD0x47_SetValue8(wram80(strcPlayerData.toolSecond), 12)                          ;B5B17B
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $06)       ;B5B180
     %AICMD0x00_SetMusic($01, $B4)                              ;B5B185
     %AICMD0x02_FreezeTime()                                    ;B5B188
@@ -621,8 +621,8 @@ pAIScripting0x47_HowToPlay_Data07:
     %AICMD0x58_ReplaceFarmTile($70, 416, 528)                  ;B5B438
     %AICMD0x58_ReplaceFarmTile($70, 432, 528)                  ;B5B43E
     %AICMD0x58_ReplaceFarmTile($70, 448, 528)                  ;B5B444
-    %AICMD0x47_SetValue8($800921, 8)                           ;B5B44A
-    %AICMD0x47_SetValue8($800923, 16)                          ;B5B44F
+    %AICMD0x47_SetValue8(wram80(strcPlayerData.toolEquipped), 8)                           ;B5B44A
+    %AICMD0x47_SetValue8(wram80(strcPlayerData.toolSecond), 16)                          ;B5B44F
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $06)       ;B5B454
     %AICMD0x00_SetMusic($01, $B4)                              ;B5B459
     %AICMD0x02_FreezeTime()                                    ;B5B45C
@@ -756,8 +756,8 @@ pAIScripting0x47_HowToPlay_Data08:
     %AICMD0x58_ReplaceFarmTile($79, 416, 528)                  ;B5B681
     %AICMD0x58_ReplaceFarmTile($79, 432, 528)                  ;B5B687
     %AICMD0x58_ReplaceFarmTile($79, 448, 528)                  ;B5B68D
-    %AICMD0x47_SetValue8($800921, 0)                           ;B5B693
-    %AICMD0x47_SetValue8($800923, 0)                           ;B5B698
+    %AICMD0x47_SetValue8(wram80(strcPlayerData.toolEquipped), 0)                           ;B5B693
+    %AICMD0x47_SetValue8(wram80(strcPlayerData.toolSecond), 0)                           ;B5B698
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $06)       ;B5B69D
     %AICMD0x00_SetMusic($02, $B4)                              ;B5B6A2
     %AICMD0x02_FreezeTime()                                    ;B5B6A5
@@ -993,8 +993,8 @@ pAIScripting0x47_HowToPlay_Data10:
     %AICMD0x58_ReplaceFarmTile($02, 192, 480)                  ;B5BA13
     %AICMD0x58_ReplaceFarmTile($04, 192, 432)                  ;B5BA19
     %AICMD0x58_ReplaceFarmTile($04, 208, 432)                  ;B5BA1F
-    %AICMD0x47_SetValue8($800921, 1)                           ;B5BA25
-    %AICMD0x47_SetValue8($800923, 18)                          ;B5BA2A
+    %AICMD0x47_SetValue8(wram80(strcPlayerData.toolEquipped), 1)                           ;B5BA25
+    %AICMD0x47_SetValue8(wram80(strcPlayerData.toolSecond), 18)                          ;B5BA2A
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $06)       ;B5BA2F
     %AICMD0x00_SetMusic($02, $B4)                              ;B5BA34
     %AICMD0x02_FreezeTime()                                    ;B5BA37
@@ -1289,8 +1289,8 @@ pAIScripting0x47_HowToPlay_Data12:
     %AICMD0x58_ReplaceFarmTile($02, 224, 496)                  ;B5BE79
     %AICMD0x58_ReplaceFarmTile($02, 320, 512)                  ;B5BE7F
     %AICMD0x58_ReplaceFarmTile($02, 320, 544)                  ;B5BE85
-    %AICMD0x47_SetValue8($800921, 5)                           ;B5BE8B
-    %AICMD0x47_SetValue8($800923, 6)                           ;B5BE90
+    %AICMD0x47_SetValue8(wram80(strcPlayerData.toolEquipped), 5)                           ;B5BE8B
+    %AICMD0x47_SetValue8(wram80(strcPlayerData.toolSecond), 6)                           ;B5BE90
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $06)       ;B5BE95
     %AICMD0x00_SetMusic($02, $B4)                              ;B5BE9A
     %AICMD0x02_FreezeTime()                                    ;B5BE9D
@@ -1442,8 +1442,8 @@ pAIScripting0x47_HowToPlay_Data14:
     %AICMD0x58_ReplaceFarmTile($02, 224, 496)                  ;B5C14E
     %AICMD0x58_ReplaceFarmTile($02, 320, 512)                  ;B5C154
     %AICMD0x58_ReplaceFarmTile($02, 320, 544)                  ;B5C15A
-    %AICMD0x47_SetValue8($800921, 21)                          ;B5C160
-    %AICMD0x47_SetValue8($800923, 0)                           ;B5C165
+    %AICMD0x47_SetValue8(wram80(strcPlayerData.toolEquipped), 21)                          ;B5C160
+    %AICMD0x47_SetValue8(wram80(strcPlayerData.toolSecond), 0)                           ;B5C165
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $06)       ;B5C16A
     %AICMD0x00_SetMusic($02, $B4)                              ;B5C16F
     %AICMD0x02_FreezeTime()                                    ;B5C172
@@ -1574,8 +1574,8 @@ pAIScripting0x47_HowToPlay_Data15:
     %AICMD0x58_ReplaceFarmTile($02, 224, 496)                  ;B5C3F1
     %AICMD0x58_ReplaceFarmTile($02, 320, 512)                  ;B5C3F7
     %AICMD0x58_ReplaceFarmTile($02, 320, 544)                  ;B5C3FD
-    %AICMD0x47_SetValue8($800921, 0)                           ;B5C403
-    %AICMD0x47_SetValue8($800923, 0)                           ;B5C408
+    %AICMD0x47_SetValue8(wram80(strcPlayerData.toolEquipped), 0)                           ;B5C403
+    %AICMD0x47_SetValue8(wram80(strcPlayerData.toolSecond), 0)                           ;B5C408
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $06)       ;B5C40D
     %AICMD0x00_SetMusic($07, $B4)                              ;B5C412
     %AICMD0x02_FreezeTime()                                    ;B5C415
@@ -1645,8 +1645,8 @@ pAIScripting0x47_HowToPlay_Data17:
 
 pAIScripting0x47_HowToPlay_Data18:
  
-    %AICMD0x47_SetValue8($800921, 15)                          ;B5C4BA
-    %AICMD0x47_SetValue8($800923, 14)                          ;B5C4BF
+    %AICMD0x47_SetValue8(wram80(strcPlayerData.toolEquipped), 15)                          ;B5C4BA
+    %AICMD0x47_SetValue8(wram80(strcPlayerData.toolSecond), 14)                          ;B5C4BF
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $06)       ;B5C4C4
     %AICMD0x00_SetMusic($07, $B4)                              ;B5C4C9
     %AICMD0x02_FreezeTime()                                    ;B5C4CC
@@ -1803,7 +1803,7 @@ pAIScripting0x47_HowToPlay_Data21:
 
 pAIScripting0x47_HowToPlay_Data22:
  
-    %AICMD0x47_SetValue8($800921, 11)                          ;B5C679
+    %AICMD0x47_SetValue8(wram80(strcPlayerData.toolEquipped), 11)                          ;B5C679
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $06)       ;B5C67E
     %AICMD0x00_SetMusic($07, $B4)                              ;B5C683
     %AICMD0x02_FreezeTime()                                    ;B5C686
@@ -2172,7 +2172,7 @@ pAIScripting0x47_HowToPlay_L045:
 pAIScripting0x47_HowToPlay_Data29:
  
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $06)       ;B5CAA2
-    %AICMD0x47_SetValue8($800921, 4)                           ;B5CAA7
+    %AICMD0x47_SetValue8(wram80(strcPlayerData.toolEquipped), 4)                           ;B5CAA7
     %AICMD0x00_SetMusic($06, $B4)                              ;B5CAAC
     %AICMD0x02_FreezeTime()                                    ;B5CAAF
     %AICMD0x03_SetHour($07)                                    ;B5CAB0

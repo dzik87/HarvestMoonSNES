@@ -13,7 +13,7 @@ Mapping: LoROM, 64 banks of 32 KB ($80–$BF). Header and vectors: `src/code/hea
 | $A8–$A9 | palettes | `src/data/gfx/palettes/` |
 | $AA–$AC | JP dialogs (empty in US/EU/DE) | `src/data/dialogs/jp/` |
 | $AD–$B2 | audio (content looks like SPC700 program and data — to be confirmed) | `src/data/audio/` |
-| $B3–$B5 | AI scripts (US: one file per script, `src/ai/us/scripts/`) | `src/ai/<region>/` |
+| $B3–$B5 | AI scripts (one file per script, `src/ai/us/scripts/`; EU/DE/JP as `if !REGION_xx` blocks, `docs/regions-ai.md`) | `src/ai/` |
 | $B6–$BB | US/EU/DE dialogs | `src/data/dialogs/<region>/` |
 | $BC–$BF | unused (zeros) | — |
 

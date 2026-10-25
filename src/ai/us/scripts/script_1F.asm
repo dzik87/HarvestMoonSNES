@@ -343,7 +343,7 @@ pAIScripting0x1F_L087:
     %AICMD0x13_Wait(180)                                       ;B49E03
     %AICMD0x1C_ShowDialog($01BC, $00)                          ;B49E06
     %AICMD0x28_ClearBit(strcFlags.event6, $04)                          ;B49E0A
-    %AICMD0x47_SetValue8($800973, 3)                           ;B49E0F
+    %AICMD0x47_SetValue8(wram80(nTimeState), 3)                           ;B49E0F
     %AICMD0x10_End()                                           ;B49E14
 pAIScripting0x1F_L088:
     %AICMD0x1A($0119, $0063, aAIScriptingData_L071, $02)                     ;B49E15

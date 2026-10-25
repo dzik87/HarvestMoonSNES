@@ -329,6 +329,9 @@ pAIScripting0x46_L018:
     %AICMD0x13_Wait(60)                                        ;B5A9DC
     %AICMD0x29_SetMapScrooling(0, -1, 128)                     ;B5A9DF
     %AICMD0x13_Wait(240)                                       ;B5A9E5
+    if !REGION_JP
+        %AICMD0x09_StartScript($03, pAIScripting0x46_Parade)   ; JP: starts the walk-in sequence below (unreferenced in US/EU/DE)
+    endif
     %AICMD0x10_End()                                           ;B5A9E8
 pAIScripting0x46_L019:
     %AICMD0x1A($0078, $0118, aAIScriptingData, $01)                     ;B5A9E9
@@ -464,6 +467,7 @@ pAIScripting0x46_L031:
     %AICMD0x0B_SetScriptFlag($01)                                            ;B5ABE2
     %AICMD0x37()                                               ;B5ABE4
     %AICMD0x10_End()                                           ;B5ABE5
+pAIScripting0x46_Parade:
     %AICMD0x1A($0058, $0088, aAIScriptingData_L207, $00)                     ;B5ABE6
     %AICMD0x13_Wait(30)                                        ;B5ABEE
     %AICMD0x09_StartScript($05, pAIScripting0x46_L033)                                   ;B5ABF1

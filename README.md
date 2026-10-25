@@ -21,7 +21,7 @@ CI (GitHub Actions) builds asar from source, assembles the ROM and compares the 
 | `src/main.asm` | entry point (LoROM mapping, include order) |
 | `src/common/` | SNES registers, RAM map, structures, enums, code macros |
 | `src/code/bank_80 … bank_85/` | 65816 code split into thematic modules |
-| `src/ai/` | AI script interpreter: command definitions (`commands.asm`) and per-region scripts |
+| `src/ai/` | AI script interpreter: command definitions (`commands.asm`), region support (`region.asm`), US scripts (`us/`, EU/DE/JP as `if !REGION_xx` blocks) |
 | `src/data/` | graphics, tilemaps, objects, audio, dialogs |
 | `assets/gfx/png/`, `assets/gfx/tilemaps/` | graphics sources: indexed PNG tile sheets and name-table text (edit these, then `tools/gfx/pngsync.py import`) |
 | `tools/` | build, verification, migration tools (`tools/migration/`) |
@@ -30,6 +30,8 @@ CI (GitHub Actions) builds asar from source, assembles the ROM and compares the 
 
 Graphics modding (PNG -> ROM): [`docs/formats/graphics-png.md`](docs/formats/graphics-png.md); palette of every graphic: [`docs/formats/graphics-palettes.md`](docs/formats/graphics-palettes.md).
 Assembled object sprites / animation frames (derived PNGs + JSON, `tools/objects/spriteexport.py`): [`docs/formats/sprite-assembly.md`](docs/formats/sprite-assembly.md).
+
+Differences between the releases: [`docs/regions.md`](docs/regions.md) (code banks), [`docs/regions-ai.md`](docs/regions-ai.md) (AI scripts, command level).
 
 Details: [`docs/layout.md`](docs/layout.md), [`docs/workflow.md`](docs/workflow.md),
 [`docs/migration-log.md`](docs/migration-log.md).

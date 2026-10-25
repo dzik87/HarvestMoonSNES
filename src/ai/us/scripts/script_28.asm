@@ -302,7 +302,7 @@ pAIScripting0x28_L056:
     %AICMD0x1B($0295, $00)                                     ;B4BDC7
     %AICMD0x12_Jump(pAIScripting0x28_L052)                                   ;B4BDCB
 pAIScripting0x28_L057:
-    %AICMD0x21_AddValue8($8009A2, 1)                           ;B4BDCE
+    %AICMD0x21_AddValue8(wram80($7E09A2+!DE_RAM_SHIFT), 1)                           ;B4BDCE
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown2, $00, pAIScripting0x28_L058) ;B4BDD3
     %AICMD0x12_Jump(pAIScripting0x28_L062)                                   ;B4BDDA
 pAIScripting0x28_L058:
@@ -323,11 +323,11 @@ pAIScripting0x28_L062:
     %AICMD0x11_EnableUserControl()                             ;B4BE0C
     %AICMD0x1C_ShowDialog($02E7, $00)                          ;B4BE0D
 pAIScripting0x28_L063:
-    %AICMD0x15_JumpIfEquals8($8009AC, 1, pAIScripting0x28_L064)              ;B4BE11
-    %AICMD0x15_JumpIfEquals8($8009AC, 2, pAIScripting0x28_L065)              ;B4BE18
-    %AICMD0x15_JumpIfEquals8($8009AC, 3, pAIScripting0x28_L066)              ;B4BE1F
-    %AICMD0x15_JumpIfEquals8($8009AC, 4, pAIScripting0x28_L067)              ;B4BE26
-    %AICMD0x15_JumpIfEquals8($8009AC, 5, pAIScripting0x28_L068)              ;B4BE2D
+    %AICMD0x15_JumpIfEquals8(wram80($7E09AC+!DE_RAM_SHIFT), 1, pAIScripting0x28_L064)              ;B4BE11
+    %AICMD0x15_JumpIfEquals8(wram80($7E09AC+!DE_RAM_SHIFT), 2, pAIScripting0x28_L065)              ;B4BE18
+    %AICMD0x15_JumpIfEquals8(wram80($7E09AC+!DE_RAM_SHIFT), 3, pAIScripting0x28_L066)              ;B4BE1F
+    %AICMD0x15_JumpIfEquals8(wram80($7E09AC+!DE_RAM_SHIFT), 4, pAIScripting0x28_L067)              ;B4BE26
+    %AICMD0x15_JumpIfEquals8(wram80($7E09AC+!DE_RAM_SHIFT), 5, pAIScripting0x28_L068)              ;B4BE2D
 pAIScripting0x28_L064:
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown3, $00)     ;B4BE34
     %AICMD0x12_Jump(pAIScripting0x28_L069)                                   ;B4BE39
@@ -407,31 +407,31 @@ pAIScripting0x28_L083:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown2, $00, pAIScripting0x28_L084) ;B4BF0C
     %AICMD0x1A($0128, $01B0, aAIScriptingData_L097, $00)                     ;B4BF13
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown2, $00)     ;B4BF1B
-    %AICMD0x47_SetValue8($8009AC, 1)                           ;B4BF20
+    %AICMD0x47_SetValue8(wram80($7E09AC+!DE_RAM_SHIFT), 1)                           ;B4BF20
     %AICMD0x12_Jump(pAIScripting0x28_L082)                                   ;B4BF25
 pAIScripting0x28_L084:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown2, $01, pAIScripting0x28_L085) ;B4BF28
     %AICMD0x1A($0128, $01B0, aAIScriptingData_L098, $00)                     ;B4BF2F
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown2, $01)     ;B4BF37
-    %AICMD0x47_SetValue8($8009AC, 2)                           ;B4BF3C
+    %AICMD0x47_SetValue8(wram80($7E09AC+!DE_RAM_SHIFT), 2)                           ;B4BF3C
     %AICMD0x12_Jump(pAIScripting0x28_L082)                                   ;B4BF41
 pAIScripting0x28_L085:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown2, $02, pAIScripting0x28_L086) ;B4BF44
     %AICMD0x1A($0128, $01B0, aAIScriptingData_L099, $00)                     ;B4BF4B
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown2, $02)     ;B4BF53
-    %AICMD0x47_SetValue8($8009AC, 3)                           ;B4BF58
+    %AICMD0x47_SetValue8(wram80($7E09AC+!DE_RAM_SHIFT), 3)                           ;B4BF58
     %AICMD0x12_Jump(pAIScripting0x28_L082)                                   ;B4BF5D
 pAIScripting0x28_L086:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown2, $03, pAIScripting0x28_L087) ;B4BF60
     %AICMD0x1A($0128, $01B0, aAIScriptingData_L100, $00)                     ;B4BF67
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown2, $03)     ;B4BF6F
-    %AICMD0x47_SetValue8($8009AC, 4)                           ;B4BF74
+    %AICMD0x47_SetValue8(wram80($7E09AC+!DE_RAM_SHIFT), 4)                           ;B4BF74
     %AICMD0x12_Jump(pAIScripting0x28_L082)                                   ;B4BF79
 pAIScripting0x28_L087:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown2, $04, pAIScripting0x28_L083) ;B4BF7C
     %AICMD0x1A($0128, $01B0, aAIScriptingData_L101, $00)                     ;B4BF83
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown2, $04)     ;B4BF8B
-    %AICMD0x47_SetValue8($8009AC, 5)                           ;B4BF90
+    %AICMD0x47_SetValue8(wram80($7E09AC+!DE_RAM_SHIFT), 5)                           ;B4BF90
     %AICMD0x12_Jump(pAIScripting0x28_L082)                                   ;B4BF95
 pAIScripting0x28_L088:
     %AICMD0x17_RollRandom($02)                                            ;B4BF98
@@ -496,9 +496,9 @@ pAIScripting0x28_L099:
     %AICMD0x1F(pAIScripting0x28_L100)                                        ;B4C062
     %AICMD0x12_Jump(pAIScripting0x28_L099)                                   ;B4C065
 pAIScripting0x28_L100:
-    %AICMD0x15_JumpIfEquals8($8009A2, 0, pAIScripting0x28_L101)              ;B4C068
-    %AICMD0x15_JumpIfEquals8($8009A2, 1, pAIScripting0x28_L101)              ;B4C06F
-    %AICMD0x15_JumpIfEquals8($8009A2, 2, pAIScripting0x28_L101)              ;B4C076
+    %AICMD0x15_JumpIfEquals8(wram80($7E09A2+!DE_RAM_SHIFT), 0, pAIScripting0x28_L101)              ;B4C068
+    %AICMD0x15_JumpIfEquals8(wram80($7E09A2+!DE_RAM_SHIFT), 1, pAIScripting0x28_L101)              ;B4C06F
+    %AICMD0x15_JumpIfEquals8(wram80($7E09A2+!DE_RAM_SHIFT), 2, pAIScripting0x28_L101)              ;B4C076
     %AICMD0x1C_ShowDialog($02EF, $00)                          ;B4C07D
     %AICMD0x0B_SetScriptFlag($03)                                            ;B4C081
     %AICMD0x12_Jump(pAIScripting0x28_L099)                                   ;B4C083
@@ -773,9 +773,9 @@ pAIScripting0x28_Data04:
     %AICMD0x06_SetDestinationArea(!AREA_EGGFESTIVAL)           ;B4C3E1
     %AICMD0x38_WaitForFadeIn()                                               ;B4C3E3
     %AICMD0x13_Wait(1)                                         ;B4C3E4
-    %AICMD0x15_JumpIfEquals8($8009A2, 3, pAIScripting0x28_L169)              ;B4C3E7
-    %AICMD0x15_JumpIfEquals8($8009A2, 4, pAIScripting0x28_L169)              ;B4C3EE
-    %AICMD0x15_JumpIfEquals8($8009A2, 5, pAIScripting0x28_L169)              ;B4C3F5
+    %AICMD0x15_JumpIfEquals8(wram80($7E09A2+!DE_RAM_SHIFT), 3, pAIScripting0x28_L169)              ;B4C3E7
+    %AICMD0x15_JumpIfEquals8(wram80($7E09A2+!DE_RAM_SHIFT), 4, pAIScripting0x28_L169)              ;B4C3EE
+    %AICMD0x15_JumpIfEquals8(wram80($7E09A2+!DE_RAM_SHIFT), 5, pAIScripting0x28_L169)              ;B4C3F5
     %AICMD0x1C_ShowDialog($038F, $00)                          ;B4C3FC
     %AICMD0x12_Jump(pAIScripting0x28_L170)                                   ;B4C400
 pAIScripting0x28_L169:

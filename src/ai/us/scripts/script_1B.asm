@@ -70,7 +70,7 @@ pAIScripting0x1B_L007:
     %AICMD0x1C_ShowDialog($01E8, $00)                          ;B49243
     %AICMD0x12_Jump(pAIScripting0x1B_L005)                                   ;B49247
 pAIScripting0x1B_L008:
-    %AICMD0x43_JumpIfEqual16($80091E, 24, pAIScripting0x1B_L009)             ;B4924A
+    %AICMD0x43_JumpIfEqual16(wram80(strcPlayerData.carryItemIdPrev), 24, pAIScripting0x1B_L009)             ;B4924A
     %AICMD0x1C_ShowDialog($01E8, $00)                          ;B49252
     %AICMD0x12_Jump(pAIScripting0x1B_L005)                                   ;B49256
 pAIScripting0x1B_L009:

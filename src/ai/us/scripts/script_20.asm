@@ -58,7 +58,7 @@ pAIScripting0x20_L005:
     %AICMD0x1C_ShowDialog($038A, $00)                          ;B49EB4
     %AICMD0x41_AddValue16(nPlayerHappiness, -100)              ;B49EB8
     %AICMD0x03_SetHour($0F)                                    ;B49EBE
-    %AICMD0x47_SetValue8($800973, 3)                           ;B49EC0
+    %AICMD0x47_SetValue8(wram80(nTimeState), 3)                           ;B49EC0
     %AICMD0x10_End()                                           ;B49EC5
 pAIScripting0x20_L006:
     %AICMD0x1A($0198, $0098, aAIScriptingData_L051, $02)                     ;B49EC6

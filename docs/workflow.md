@@ -16,7 +16,18 @@ and verifies the hashes. Diagnosing a mismatch: `python tools/verify.py build/Ha
 verifies only banks $80-$85 against `tests/expected.json` (key `DE`). The DE graphics/dialog banks are not part of the
 tree yet, so the output is a partial ROM. A change in a shared (non-patch) line is checked against both regions;
 keep `+!DE_RAM_SHIFT` on hex literals that point into WRAM above `$08D1`.
-Tools for working with the DE patches: `tools/analysis/align_regions.py` (coverage report), `tools/analysis/disasm65816.py`.
+The DE build also contains the AI banks (see below). Tools for working with the DE patches: `tools/analysis/align_regions.py` (coverage report), `tools/analysis/disasm65816.py`.
+
+## AI script banks ($B3-$B5) per region
+`python3 tools/build.py --region EU|DE|JP` also assembles the AI banks of that release (US scripts + `if !REGION_xx` blocks, see
+`docs/regions-ai.md`) and verifies banks $B3-$B5 against the `EU-AI` / `DE-AI` / `JP-AI` hashes in `tests/expected.json`
+(`tools/build.py` checks every key `<REGION>` and `<REGION>-*` of the selected region). Rules for AI script edits:
+- addresses of low-WRAM variables go through `wram80(<label>)` (never a raw `$80xxxx` above `$0917`);
+- pointers are labels, so a longer or shorter script needs no other change;
+- a region difference is a small `if !REGION_xx ... else <US> ... endif` block; after a change run
+  `python3 tools/analysis/aidiff.py --built --md docs/regions-ai.md` (the block is checked by `tests/test_ai_region.py`).
+`tools/analysis/aidiff.py` decodes the AI scripts of ROMs (`--rom-dir` for the original dumps or `--built`) and classifies the
+differences per command.
 
 ## CI (`.github/workflows/build.yml`)
 Builds asar from source (tag `v1.91`, cached), assembles the US ROM, compares size/CRC32/MD5/SHA-1 and exposes
