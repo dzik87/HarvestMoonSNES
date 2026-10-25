@@ -1,7 +1,7 @@
 # Harvest Moon (SNES) — decompilation
 
 Reconstruction of compilable source code for the game. The **US** version is the base; JP/DE/EU are being moved
-into the common tree. Assembler: [asar](https://github.com/RPGHacker/asar) 1.91.
+into the common tree. Assembler: [asar](https://github.com/RPGHacker/asar) 1.91 (git submodule `third_party/asar`). Build guide for Linux and Windows: [docs/building.md](docs/building.md).
 Overriding rule: the build output must be **bit-identical** to the original ROM.
 
 ## Quick start
@@ -13,7 +13,7 @@ python tools/verify.py build/HarvestMoon.sfc --rom "original.sfc"   # per-bank d
 ```
 
 ROMs are not stored in the repository. Reference values (size, CRC32, MD5, SHA-1) are in `tests/expected.json`.
-CI (GitHub Actions) builds asar from source, assembles the ROM and compares the hashes on every push and PR.
+CI (GitHub Actions) builds asar from the submodule, assembles the ROM and compares the hashes on every push and PR.
 
 ## Repository layout
 

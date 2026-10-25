@@ -36,7 +36,7 @@ def find_asar(explicit):
     found = shutil.which("asar")
     if found:
         return found
-    sys.exit("asar not found. Pass --asar, set ASAR or place the binary in tools/bin/.")
+    sys.exit("asar not found. Run: python tools/build_asar.py (see docs/building.md), or pass --asar / set ASAR / place the binary in tools/bin/.")
 
 
 def main() -> int:
