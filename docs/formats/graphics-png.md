@@ -2,8 +2,8 @@
 
 Every graphic blob of the US ROM that can be shown as an image lives in the repository as an **indexed PNG**
 (tile graphics, sprite banks) or as a **text file** (BG name tables). These files are the source of truth for graphics mods;
-the binary `assets/gfx/{tiles,sprites,characters}/*.bin` files that the assembler `incbin`s are derived from them and must
-stay bit-identical. Converter: `tools/gfx/pngsync.py`; CI runs `pngsync.py check` and `tests/test_pngsync.py`.
+the binary `assets/gfx/{tiles,sprites,characters}/*.bin` files that the assembler `incbin`s are **generated** from them
+(`tools/build_assets.py`, git-ignored, never committed) and must stay bit-identical to the original ROM data. Converter: `tools/gfx/pngsync.py`; CI runs `pngsync.py check` and `tests/test_pngsync.py`.
 
 ## What is converted (151 blobs)
 
@@ -26,19 +26,19 @@ Findings made while building this:
 ## Workflow for modders
 
 ```
-python3 tools/gfx/pngsync.py import --label sCompressedTiles_92D3AB    # edit the PNG first, then import
-python3 tools/build.py                                                    # rebuild; ROM hash changes (intended)
-python3 tools/gfx/pngsync.py check                                        # PNG/text must reproduce every .bin
+python3 tools/build_assets.py                                             # once after cloning: generate the .bin files
+python3 tools/gfx/pngsync.py import --label sCompressedTiles_92D3AB    # after editing the PNG: re-encode, update sidecar/padding
+python3 tools/build.py                                                    # regenerates assets and rebuilds; ROM hash changes (intended)
 ```
 
 1. Edit `assets/gfx/png/tiles/<label>.png` (or sprite sheet / name table text) with any editor that preserves an
    **indexed palette** (Aseprite, GIMP "indexed", Grafx2). Do not convert to RGB: the pixel value *is* the SNES colour index.
-2. `pngsync.py import [--label PAT] [--kind K]` rewrites the `.bin` files of blobs whose source changed (PAT is an
-   `fnmatch` pattern, repeatable; default all). Unchanged blobs are not touched.
+2. `pngsync.py import [--label PAT] [--kind K]` re-encodes blobs whose source changed (PAT is an
+   `fnmatch` pattern, repeatable; default all), updating the generated `.bin`, the sidecar tail data and, with `--allow-resize`, the bank padding. Unchanged blobs are not touched.
 3. Rebuild with `tools/build.py` and test. Update `tests/expected.json` only for deliberate modifications.
-4. Commit PNG/text, sidecar, `.bin` (and the bank `.asm` if the padding changed) together; CI checks that they agree.
+4. Commit PNG/text, sidecar (and the bank `.asm` if the padding changed); the `.bin` files are not committed.
 
-`pngsync.py export` regenerates PNG/text/sidecar from the `.bin` files (only needed after changing the pipeline).
+`pngsync.py export` regenerates PNG/text/sidecar from the generated `.bin` files (only needed after changing the pipeline); `pngsync.py build` writes the `.bin` files from the sources.
 `pngsync.py preview` renders the name tables together with their tile sets into `build/gfx_preview/` in game colours (the palette bits of
 every entry pick the sub-palette, the palette is the day palette of the first map that uses the table; character base = lowest
 tile-set VRAM address, which reproduces the farm map exactly) and every tile sheet / sprite bank with the right sub-palette per

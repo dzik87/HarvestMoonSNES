@@ -7,7 +7,8 @@ Overriding rule: the build output must be **bit-identical** to the original ROM.
 ## Quick start
 
 ```
-python tools/build.py                    # build + hash verification (asar: --asar, $ASAR or tools/bin/)
+python tools/build.py                    # generates .bin/.pal assets from PNG/JSON sources, builds, verifies hashes (asar: --asar, $ASAR or tools/bin/)
+python tools/build_assets.py             # only generate the assets (needed before running individual checks/tests)
 python tools/verify.py build/HarvestMoon.sfc --rom "original.sfc"   # per-bank diff report
 ```
 

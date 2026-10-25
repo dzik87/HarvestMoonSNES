@@ -50,9 +50,13 @@ jobs:
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Check asset sources
+      - name: Generate assets from PNG/JSON sources
         run: |
           pip install pillow
+          python3 tools/build_assets.py
+
+      - name: Check asset sources
+        run: |
           python3 tools/gfx/palette.py check
           python3 tools/dialogs/dialog.py check
           python3 tools/maps/objmap.py check
@@ -73,23 +77,24 @@ jobs:
           python3 tools/gfx/pngsync.py check
           python3 tests/test_pngsync.py
           python3 tests/test_ai_region.py
+          python3 tests/test_region_patch.py
 
       - name: Build and verify (US)
         run: |
           set -o pipefail
           python3 tools/build.py --region US -v 2>&1 | tee build-us.log
 
-      - name: Build and verify (DE code banks and AI banks)
+      - name: Build and verify (DE code banks $80-$85 and AI banks)
         run: |
           set -o pipefail
           python3 tools/build.py --region DE --out build/HarvestMoonDE.sfc -v 2>&1 | tee build-de.log
 
-      - name: Build and verify (EU AI banks)
+      - name: Build and verify (EU code banks $80-$85 and AI banks)
         run: |
           set -o pipefail
           python3 tools/build.py --region EU --out build/HarvestMoonEU.sfc -v 2>&1 | tee build-eu.log
 
-      - name: Build and verify (JP AI banks)
+      - name: Build and verify (JP code banks $80-$85 and AI banks)
         run: |
           set -o pipefail
           python3 tools/build.py --region JP --out build/HarvestMoonJP.sfc -v 2>&1 | tee build-jp.log
@@ -105,7 +110,7 @@ jobs:
           done
           {
             for R in de eu jp; do
-              echo "### Build ${R^^} (partial ROM: code banks 80-85 for DE, AI banks B3-B5)"
+              echo "### Build ${R^^} (partial ROM: code banks 80-85, AI banks B3-B5)"
               echo '```'
               tail -n 18 build-$R.log 2>/dev/null || echo "no log"
               echo '```'

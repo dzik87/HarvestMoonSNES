@@ -43,11 +43,12 @@ the result in run annotations and as the `HarvestMoon-US` artifact.
 - `tiles.py` — reference implementation of raw 2/4/8bpp SNES tile data <-> indexed PNG sheets (`to-png`, `from-png`), lossless for any data.
 - `dialogs/dialog.py` — dialog word streams <-> editable text (`assets/dialogs/<region>/`), all regions.
 - `maps/objmap.py` — object maps (bank $A7) <-> JSON grids in `assets/maps/`; widths in `tools/maps/map_dims.json`.
-- `data/bankbin.py` — sprite, tile, character and audio banks: one `.bin` per label in `assets/`, included with `incbin` (labels unchanged).
+- `build_assets.py` — generates every `incbin`'d binary that has an editable source (`assets/gfx/palettes/*.pal`, `assets/gfx/{tiles,sprites,characters}/*.bin` incl. the font tables) from the PNG/text/JSON sources; run by `tools/build.py` before asar. These generated files are git-ignored; run `python3 tools/build_assets.py` by hand before the checks/tests that read them.
+- `data/bankbin.py` — sprite, tile, character and audio banks: one `.bin` per label in `assets/`, included with `incbin` (labels unchanged); audio `.bin` files are still committed sources.
 - `gfx/pngsync.py` — **graphics sources**: `assets/gfx/png/{tiles,sprites}/<label>.png` (indexed 4bpp sheets) and `assets/gfx/tilemaps/<label>.map.txt`
   (BG name tables) with a `<label>.json` sidecar each are the source of truth for all 150 graphic blobs; `export` / `import` / `check` / `preview`.
-  `import` rewrites the `assets/gfx/{tiles,sprites,characters}/*.bin` that the assembler includes (a longer compressed stream needs `--allow-resize`),
-  `check` (CI) asserts that the PNG/text reproduces every committed `.bin` bit-exactly. Modder workflow, constraints and what is not convertible yet: `docs/formats/graphics-png.md`.
+  `build` writes the (git-ignored) `assets/gfx/{tiles,sprites,characters}/*.bin` that the assembler includes from the sources, `import` re-encodes edited sources and updates sidecar/padding (a longer compressed stream needs `--allow-resize`),
+  `check` asserts that the sources rebuild to the generated `.bin`; the ROM hash check in CI proves they equal the original ROM data. Modder workflow, constraints and what is not convertible yet: `docs/formats/graphics-png.md`.
 - `gfx/gfxpipe.py` — older low-level helper (raw export, exact re-encode `verify`); superseded by `pngsync.py` for editing.
 - `fonts/font.py` — font glyphs: one 16x16 2bpp indexed PNG per glyph in `assets/fonts/<region>/glyph_XXXX.png`
   (id = dialog word, `glyphs.json` maps ids to characters). Edit a PNG (pixel value = SNES colour index: 0/1 baked background

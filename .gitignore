@@ -5,3 +5,9 @@ __pycache__/
 *.sfc
 *.smc
 *.srm
+
+# generated from PNG/JSON sources by tools/build_assets.py
+assets/gfx/palettes/*.pal
+assets/gfx/tiles/*.bin
+assets/gfx/characters/*.bin
+assets/gfx/sprites/*.bin

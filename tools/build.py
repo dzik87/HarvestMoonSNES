@@ -45,9 +45,16 @@ def main() -> int:
     p.add_argument("--asar")
     p.add_argument("--out", type=Path, default=ROOT / "build" / "HarvestMoon.sfc")
     p.add_argument("--no-verify", action="store_true")
+    p.add_argument("--no-assets", action="store_true", help="skip generating the .bin/.pal files from PNG/JSON sources")
     p.add_argument("-v", "--verbose", action="store_true")
     args = p.parse_args()
 
+    if not args.no_assets:
+        sys.path.insert(0, str(ROOT / "tools"))
+        import build_assets
+        rc = build_assets.main(quiet=not args.verbose)
+        if rc:
+            return rc
     asar = find_asar(args.asar)
     out = args.out if args.out.is_absolute() else ROOT / args.out
     out.parent.mkdir(parents=True, exist_ok=True)
