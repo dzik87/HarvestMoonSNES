@@ -171,9 +171,11 @@ def decode_rom(data):
 
 
 def script_names():
+    """{script index: name suffix} from assets/ai/scripts.json (label pAIScripting0x<ID><suffix>)."""
+    import json
     names = {}
-    for m in re.finditer(r"^\s*dl (pAIScripting0x([0-9A-F]{2})\w*)", (ROOT / "src/ai/us/scripts/head_B3.asm").read_text(), re.M):
-        names[int(m.group(2), 16)] = m.group(1)[len("pAIScripting0x"):]
+    for s in json.loads((ROOT / "assets/ai/scripts.json").read_text())["scripts"]:
+        names[int(s["id"], 16)] = s["label"][len("pAIScripting0x"):]
     return names
 
 

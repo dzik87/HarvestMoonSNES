@@ -356,7 +356,7 @@ KNOWN_COLUMNS = {"ScreenRaw_Unk_A6A096": 64}      # not shown with any tile set:
 
 def default_columns(entries):
     """row length the engine's map formats use for a name table of this size (strcDialogDisplay.mapMultiWidth in
-    src/code/bank_80/tilemaps.asm: 32 / 64 / 128 entries per row for 1 / 2 / 3+ screens wide)."""
+    assets/areas/area_gfx.json: 32 / 64 / 128 entries per row for 1 / 2 / 3+ screens wide)."""
     return 128 if entries >= 8192 else 64 if entries == 4096 else 32
 
 

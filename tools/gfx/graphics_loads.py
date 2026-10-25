@@ -6,7 +6,7 @@
           blob that nothing loads is listed in UNUSED below (with the reason)
   show LABEL   print the entry of one blob
 
-Sources: the map table of src/code/bank_80/tilemaps.asm (fTileMap_MapChangeHandler: per area a graphic preset, tile blobs @ VRAM word
+Sources: the area graphics descriptors assets/areas/area_gfx.json (fTileMap_MapChangeHandler: per area a graphic preset, tile blobs @ VRAM word
 address, name tables @ VRAM word address), the graphic presets of src/code/bank_80/core.asm (BG name table / character bases),
 assets/gfx/palette_map.json (area -> palette) and the code loaders that use literal addresses (LITERAL_LOADERS, checked against the
 source text).  See docs/formats/graphics-loading.md.

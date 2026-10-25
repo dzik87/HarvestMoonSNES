@@ -43,6 +43,8 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools" / "gfx"))
 import tilemap_codec as C  # noqa: E402
 from palette_map import us_lines  # noqa: E402
+sys.path.insert(0, str(ROOT / "tools" / "maps"))
+import areadata as AD  # noqa: E402
 
 PAD = bytes(64)            # lets decompress() read past the end of a blob that is the last thing in its file
 BANK = 0x8000
@@ -336,27 +338,12 @@ _MAP_INFO = None
 
 
 def map_table(root=ROOT):
-    """tilemaps.asm -> {label: [(vram_word_dest, map_label, [(dest, label), ...])]} (first map entry listed first)."""
+    """assets/maps/area_gfx.json -> {label: [(vram_word_dest, map_label, [(dest, label), ...])]} (first map entry listed first)."""
     global _MAP_INFO
     if _MAP_INFO is not None and Path(root) == ROOT:
         return _MAP_INFO
-    text = us_lines((Path(root) / "src/code/bank_80/tilemaps.asm").read_text(encoding="utf-8", errors="replace").splitlines())
-    start = next(i for i, l in enumerate(text) if re.match(r"^sFarmSpringMap:", l))
-    maps, cur, last = {}, None, None
-    for l in text[start:]:
-        l = l.split(";")[0]
-        m = re.match(r"^(\w+):", l)
-        if m:
-            cur = m.group(1)
-            maps[cur] = []
-            continue
-        m = re.match(r"^\s*(?:\+\s*)?dw (.*)$", l)
-        if m:
-            last = m.group(1).split(",")[-1].strip()
-            continue
-        m = re.match(r"^\s*(?:\+\s*)?dl ([A-Za-z_]\w+)", l)
-        if m and cur and last and last.startswith("$"):
-            maps[cur].append((int(last[1:], 16), m.group(1)))
+    _, desc = AD.load_gfx(root)
+    maps = {lab: [(AD.hexval(v), blob) for v, blob in d["loads"]] for lab, d in desc.items()}
     info = {}
     for mlabel, pairs in maps.items():
         for dest, label in pairs:
@@ -382,17 +369,8 @@ def bg_chr_base(root, map_label, dest):
             return [int(x.strip()[1:], 16) for x in m.group(1).split(",")]
         sc = [tab(f"Table_BG{i}SC_Presets") for i in range(1, 5)]
         n12, n34 = tab("Table_BG12NBA_Presets"), tab("Table_BG34NBA_Presets")
-        text = us_lines((Path(root) / "src/code/bank_80/tilemaps.asm").read_text(encoding="utf-8", errors="replace").splitlines())
-        start = next(i for i, l in enumerate(text) if re.match(r"^sFarmSpringMap:", l))
-        pres, cur = {}, None
-        for l in text[start:]:
-            m = re.match(r"^(\w+):", l)
-            if m:
-                cur = m.group(1)
-                pres[cur] = "?"
-            elif cur and pres[cur] == "?" and re.match(r"\s*db ", l):
-                m = re.match(r"\s*db \$([0-9A-Fa-f]{2})\s*(;|$)", l)
-                pres[cur] = int(m.group(1), 16) if m else None
+        _, desc = AD.load_gfx(root)
+        pres = {lab: d.get("preset") for lab, d in desc.items()}
         _BG_PRESETS[key] = (sc, n12, n34, pres)
     sc, n12, n34, pres = _BG_PRESETS[key]
     p = pres.get(map_label)

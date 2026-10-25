@@ -1,0 +1,16 @@
+{"_doc": "Map music sets (aAudioEngine_MapMusicId_*): the music track id per season (spring, summer, fall, winter) for an area; referenced from areas.csv.",
+ "sets": [
+  {"label": "aAudioEngine_MapMusicId_0x00", "seasons": [1, 2, 7, 4]},
+  {"label": "aAudioEngine_MapMusicId_0x01", "seasons": [5, 5, 5, 5]},
+  {"label": "aAudioEngine_MapMusicId_0x02", "seasons": [6, 6, 6, 6]},
+  {"label": "aAudioEngine_MapMusicId_0x03", "seasons": [3, 3, 3, 3]},
+  {"label": "aAudioEngine_MapMusicId_0x04", "seasons": [14, 14, 14, 14]},
+  {"label": "aAudioEngine_MapMusicId_0x05", "seasons": [13, 13, 13, 13]},
+  {"label": "aAudioEngine_MapMusicId_0x06", "seasons": [9, 9, 9, 9]},
+  {"label": "aAudioEngine_MapMusicId_0x07", "seasons": [15, 15, 15, 15]},
+  {"label": "aAudioEngine_MapMusicId_0x08", "seasons": [10, 10, 10, 10]},
+  {"label": "aAudioEngine_MapMusicId_0x09", "seasons": [11, 11, 11, 11]},
+  {"label": "aAudioEngine_MapMusicId_0x0A", "seasons": [18, 18, 18, 18]},
+  {"label": "aAudioEngine_MapMusicId_0x0B", "seasons": [8, 8, 8, 8]}
+ ]
+}

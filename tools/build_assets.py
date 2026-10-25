@@ -11,6 +11,7 @@ Sources (committed)                                   -> generated, git-ignored 
   assets/objects/bank_8{6,7}/ (bank.json, objects/*.json, frames.txt) -> build/gen/objects/bank_8{6,7}.asm (tools/objects/objdata.py build)
   assets/maps/*.json                                   -> build/gen/maps/bank_A7.asm                     (tools/maps/objmap.py build)
 
+  assets/areas/*, assets/tables/*.json                 -> build/gen/{maps,tables}/*.asm                      (tools/maps/areadata.py, tools/data/smalltables.py build)
   assets/ai/{scripts.json,npc_sprite_tables.txt}      -> build/gen/ai/{head_B3..B5,slots_NN}.asm       (tools/ai/aidata.py build)
 
   assets/audio/{samples,tracks,sfx,driver}/*, audio.json, banks.json -> assets/audio/*.bin + build/gen/audio/{bank_XX.asm,audio_tables.inc} (tools/audio/audioconv.py build)
@@ -30,8 +31,12 @@ STEPS = [
     ("graphics bank asm", [sys.executable, "tools/data/gfxbanks.py", "build"]),
     ("audio blobs", [sys.executable, "tools/audio/audioconv.py", "build", "-q"]),
     ("dialog banks", [sys.executable, "tools/dialogs/dialog.py", "build"]),
+    ("dialog text tables", [sys.executable, "tools/dialogs/texttables.py", "build"]),
     ("object animation banks", [sys.executable, "tools/objects/objdata.py", "build"]),
     ("object maps", [sys.executable, "tools/maps/objmap.py", "build"]),
+    ("small data tables", [sys.executable, "tools/data/smalltables.py", "build"]),
+    ("name input grids", [sys.executable, "tools/menu/nameinput.py", "build"]),
+    ("area tables", [sys.executable, "tools/maps/areadata.py", "build"]),
     ("AI script heads", [sys.executable, "tools/ai/aidata.py", "build"]),
 ]
 for _r in ("eu", "de", "jp"):
