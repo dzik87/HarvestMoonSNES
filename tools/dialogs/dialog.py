@@ -9,8 +9,8 @@ Dialog banks ($B6-$BB for US/EU/DE, $AA-$AC for JP) are sequences of 16-bit word
     $FFFE n        <OPT n>     selection menu with n options (ends the dialog text)
     $FFFF          <END>       end of dialog
 Glyph ids with a known character are written as that character (src/common/charmap.asm plus region extras);
-every other id is written as <XXXX> (hex) so that the conversion is always lossless. JP text is therefore
-mostly hex tokens until its glyph table is mapped.
+every other id (including repeated glyphs of the JP table) is written as <XXXX> (hex) so that the conversion is
+always lossless. The JP glyph table is tools/dialogs/glyphs/jp.json.
 
 Text files (assets/dialogs/<region>/bank_XX.txt): one block per dialog:
     @@ sDialogUS_0x0000 @@
@@ -21,7 +21,7 @@ Commands:
     emit-asm [--region R]  txt -> asm (canonical `dw` rows)
     check [--region R]     txt -> words must equal the words in the current asm (used by CI)
 """
-import argparse, re, sys
+import argparse, json, re, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -45,6 +45,10 @@ def load_charmap(region):
             m[int(mm.group(2), 16)] = mm.group(1)
     if region != "jp":
         m.update(EXTRA["all"]); m.update(EXTRA.get(region, {}))
+    else:
+        m = {}
+        g = json.loads((Path(__file__).parent / "glyphs" / "jp.json").read_text(encoding="utf-8"))["glyphs"]
+        m.update({int(k, 16): v for k, v in g.items()})
     return m
 
 
@@ -65,6 +69,12 @@ def parse_asm(path):
                 cur = None; pad = []
             else:
                 cur = (m.group(1), []); blocks.append(cur)
+            continue
+        m = re.match(r"^\s*fill (\d+)$", line)
+        if m:
+            if pad is None:
+                raise ValueError(f"{path}: fill outside padding")
+            pad.extend([0] * int(m.group(1)))
             continue
         m = re.match(r"^\s*(dw|db) (.*)$", line)
         if m:
