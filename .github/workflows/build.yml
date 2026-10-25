@@ -68,8 +68,6 @@ jobs:
           python3 tools/gfx/palette_map.py check
           python3 tools/gfx/pngsync.py check
           for R in eu de jp; do python3 tools/gfx/pngsync.py check --region $R; done
-          python3 tests/test_pngsync.py
-          python3 tests/test_ai_region.py
           python3 tests/test_region_patch.py
 
       - name: Build and verify (US)
@@ -123,3 +121,39 @@ jobs:
             build/HarvestMoon.sfc
             build-us.log
           if-no-files-found: ignore
+
+  # Slow tests run in parallel jobs so that the wall-clock time of a push stays near the longest one.
+  slow-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: pngsync (round trips, edits, conflicts)
+            cmd: python3 tests/test_pngsync.py
+          - name: AI scripts per region
+            cmd: python3 tests/test_ai_region.py
+    name: slow-tests (${{ matrix.name }})
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Cache asar
+        id: cache-asar
+        uses: actions/cache@v4
+        with:
+          path: tools/bin/asar
+          key: asar-${{ hashFiles('third_party/asar/src/**') }}-${{ runner.os }}
+
+      - name: Build asar from the third_party/asar submodule
+        if: steps.cache-asar.outputs.cache-hit != 'true'
+        run: python3 tools/build_asar.py
+
+      - name: Generate assets and assembly from sources
+        run: |
+          pip install pillow
+          python3 tools/build_assets.py
+
+      - name: ${{ matrix.name }}
+        run: ${{ matrix.cmd }}
