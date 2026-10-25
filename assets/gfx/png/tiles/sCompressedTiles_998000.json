@@ -18,7 +18,7 @@
     "sub": 1
   },
   "palette_confidence": "high",
-  "palette_note": "sub-palette 1 covers 7844 of 9970 name-table cells; per-tile sub-palettes 1/2/3/4 (tile_subs)",
+  "palette_note": "sub-palette 1 covers 15688 of 19940 name-table cells; per-tile sub-palettes 1/2/3/4 (tile_subs)",
   "palette_subs_used": [
     1,
     2,
@@ -31,5 +31,6 @@
       "sub": 1,
       "area_name": "DANCINGS1"
     }
-  ]
+  ],
+  "tiles_row_guessed": 17
 }

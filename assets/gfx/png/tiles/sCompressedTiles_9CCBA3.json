@@ -18,11 +18,62 @@
     "sub": 1
   },
   "palette_confidence": "high",
-  "palette_note": "sub-palette 1 covers 1811 of 2047 name-table cells; per-tile sub-palettes 1/2/5/6 (tile_subs)",
+  "palette_note": "sub-palette 1 covers 2093 of 2348 name-table cells; per-tile sub-palettes 1/2/5/6 (tile_subs)",
   "palette_subs_used": [
     1,
     2,
     5,
     6
-  ]
+  ],
+  "tile_rows_multi": {
+    "0": [
+      0,
+      2
+    ],
+    "2": [
+      1,
+      2
+    ],
+    "3": [
+      1,
+      2
+    ],
+    "31": [
+      1,
+      2
+    ],
+    "88": [
+      2,
+      1
+    ],
+    "102": [
+      1,
+      2
+    ],
+    "103": [
+      1,
+      2
+    ],
+    "201": [
+      1,
+      2
+    ],
+    "217": [
+      1,
+      2
+    ],
+    "240": [
+      2,
+      1
+    ],
+    "241": [
+      2,
+      1
+    ],
+    "243": [
+      1,
+      2
+    ]
+  },
+  "tiles_row_guessed": 80
 }

@@ -18,5 +18,6 @@
     "sub": 0
   },
   "palette_confidence": "high",
-  "palette_note": "sub-palette 0 covers 4096 of 4096 name-table cells"
+  "palette_note": "sub-palette 0 covers 4096 of 4096 name-table cells",
+  "tiles_row_guessed": 140
 }

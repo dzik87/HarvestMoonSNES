@@ -19,5 +19,6 @@
     "sub": 0
   },
   "palette_confidence": "low",
-  "palette_note": "no static BG name table references this sheet (its name table is written at run time); sub-palette 0 assumed"
+  "palette_note": "no static BG name table references this sheet (its name table is written at run time); sub-palette 0 assumed",
+  "tiles_row_guessed": 256
 }

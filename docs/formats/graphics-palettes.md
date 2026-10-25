@@ -132,8 +132,7 @@ roofs, water, pink trees on the town square); the weather overlays confirm the r
   `palette_alternatives` (up to 6, the full list is in `palette_map.json`).
 
 Confidence: **high** = the blob is referenced by static name tables (or object frames) and at least 16 cells/components give
-the sub-palette; the palette *id* is exact for the primary area. **medium** = the weather overlays (palette of the host map) and
-`sCompressedTiles_95D6E2` (6 referencing cells). **low** = no static data decides the sub-palette (see section 7).
+the sub-palette; the palette *id* is exact for the primary area. **medium** = the weather overlays (palette of the host map). **low** = no static data decides the sub-palette (see section 7).
 
 ## 6. Result table
 
@@ -152,7 +151,7 @@ the sub-palette; the palette *id* is exact for the primary area. **medium** = th
 | `sCompressedTiles_93E12B` | `sPalette_0x0E` | 2 | high | 1/2/3/4/5 | farmwinter |
 | `sCompressedTiles_948000` | `sPalette_0x12` | 1 | high | 1/2/3 | woodscave, impunderground |
 | `sCompressedTiles_95C000` | `sPalette_0x13` | 1 | high | 1/2/3 | house1, house2, house3 |
-| `sCompressedTiles_95D6E2` | `sPalette_0x13` | 2 | medium | 2 | house1, house2, house3 |
+| `sCompressedTiles_95D6E2` | `sPalette_0x13` | 1 | high | 1/2 | house1, house2, house3 |
 | `sCompressedTiles_95E8A3` | `sPalette_0x15` | 1 | high | 1/2 | majorhouse, majorcorridor, majorbedroom |
 | `sCompressedTiles_968000` | `sPalette_0x16` | 1 | high | 1/2/3/4/5 | church |
 | `sCompressedTiles_969437` | `sPalette_0x17` | 1 | high | 1/2/3 | florist, floristbedroom |
@@ -178,7 +177,7 @@ the sub-palette; the palette *id* is exact for the primary area. **medium** = th
 | `sCompressedTiles_9A8000` | `sPalette_0x40` | 1 | high | 1/2/3/4 | townwinter, ny_publicsquare, weddingwinter |
 | `sCompressedTiles_9A9921` | `sPalette_0x40` | 1 | high | 1/3/4/5/6 | townwinter, weddingwinter |
 | `sCompressedTiles_9AAEAB` | `sPalette_0x45` | 1 | high | 1/4/7 | ny_publicsquare |
-| `sCompressedTiles_9ABF97` | `sPalette_0x46` | 1 | high | 0/1 | menu_backgrounds, menu_characters |
+| `sCompressedTiles_9ABF97` | `sPalette_0x46` | 0 | high | 0/1 | menu_backgrounds, menu_characters |
 | `sCompressedTiles_9AC489` | `sPalette_0x46` | 0 | high | 0 | menu_backgrounds, menu_characters |
 | `sCompressedTiles_9ACB41` | `sPalette_0x46` | 0 | high | 0/1 | menu_backgrounds, menu_characters |
 | `sCompressedTiles_9AD357` | `sPalette_0x46` | 0 | high | 0/1 | menu_backgrounds, menu_characters |
@@ -187,13 +186,13 @@ the sub-palette; the palette *id* is exact for the primary area. **medium** = th
 | `sCompressedTiles_9B8441` | `sPalette_0x0B` | 0 | medium | 0 | heavysnow_overlay |
 | `sCompressedTiles_9B86AD` | `sPalette_0x48` | 2 | high | 1/2/3/4/5/6/7 | goldchicken |
 | `sCompressedTiles_9B9F53` | `sPalette_0x49` | 2 | high | 1/2 | worksmanhouse |
-| `sCompressedTiles_9BB76D` | `sPalette_0x53` | 4 | high | 1/2/4 | mountaintopspring, mountaintopsummer, mountaintopfall (+5) |
+| `sCompressedTiles_9BB76D` | `sPalette_0x53` | 4 | high | 1/2/3/4 | mountaintopspring, mountaintopsummer, mountaintopfall (+5) |
 | `sCompressedTiles_9BCF8F` | `sPalette_0x57` | 4 | high | 1/2/4 | mountaintopwinter, mountaintop2winter, ny_mountaintop |
-| `sCompressedTiles_9C8000` | `sPalette_0x53` | 1 | high | 1/2 | mountaintopspring, mountaintopsummer, mountaintopfall (+5) |
-| `sCompressedTiles_9C965F` | `sPalette_0x57` | 1 | high | 1/2 | mountaintopwinter, mountaintop2winter, ny_mountaintop |
+| `sCompressedTiles_9C8000` | `sPalette_0x53` | 1 | high | 1/2/3/4 | mountaintopspring, mountaintopsummer, mountaintopfall (+5) |
+| `sCompressedTiles_9C965F` | `sPalette_0x57` | 1 | high | 1/2/4 | mountaintopwinter, mountaintop2winter, ny_mountaintop |
 | `sCompressedTiles_9CA40C` | `sPalette_0x5B` | 2 | high | 1/2/4 | cowbarn, coop |
 | `sCompressedTiles_9CCBA3` | `sPalette_0x5C` | 1 | high | 1/2/5/6 | woodssummer, ending11 |
-| `sCompressedTiles_9CE37D` | `sPalette_0x5C` | 2 | high | 1/2/3 | woodssummer, ending11 |
+| `sCompressedTiles_9CE37D` | `sPalette_0x5C` | 2 | high | 1/2/3/4 | woodssummer, ending11 |
 | `sCompressedTiles_9D8000` | `sPalette_0x64` | 5 | high | 2/3/4/5 | woodsspring, woodssummer, ending11 |
 | `sCompressedTiles_9D991C` | `sPalette_0x60` | 1 | high | 1/2/5/6 | woodsfall |
 | `sCompressedTiles_9DB15E` | `sPalette_0x60` | 2 | high | 1/2/3 | woodsfall |
@@ -205,10 +204,10 @@ the sub-palette; the palette *id* is exact for the primary area. **medium** = th
 | `sCompressedTiles_9EB75D` | `sPalette_0x68` | 2 | high | 1/2/3 | woodswinter, ny_spa |
 | `sCompressedTiles_9ED208` | `sPalette_0x68` | 5 | high | 2/3/4/5 | woodswinter, ny_spa |
 | `sCompressedTiles_9EEB3D` | `sPalette_0x6E` | 0 | high | 0 | credits0, credits1, credits2 (+9) |
-| `sCompressedTiles_9F8000` | `sPalette_0x6C` | 6 | high | 0/1/3/4/5/6 | title_intro_farm, title_logo |
-| `sCompressedTiles_9F946C` | `sPalette_0x6C` | 4 | high | 1/2/3/4/5/6 | title_intro_farm, title_logo |
-| `sCompressedTiles_9FAA75` | `sPalette_0x6C` | 4 | high | 1/2/3/4/5/6 | title_intro_farm, title_logo |
-| `sCompressedTiles_9FC04C` | `sPalette_0x6C` | 2 | high | 2 | title_intro_farm, title_logo |
+| `sCompressedTiles_9F8000` | `sPalette_0x6C` | 6 | high | 0/1/3/4/5/6/7 | title_intro_farm, title_logo |
+| `sCompressedTiles_9F946C` | `sPalette_0x6C` | 7 | high | 1/2/3/4/5/6/7 | title_intro_farm, title_logo |
+| `sCompressedTiles_9FAA75` | `sPalette_0x6C` | 4 | high | 1/2/3/4/5/6/7 | title_intro_farm, title_logo |
+| `sCompressedTiles_9FC04C` | `sPalette_0x6C` | 2 | high | 2/7 | title_intro_farm, title_logo |
 | `sCompressedTiles_9FEF97` | `sPalette_0x6D` | 0 | high | 0 | natsume_logo |
 | `sCompressedTiles_A08000` | `sPalette_0x6E` | 0 | high | 0 | credits0, credits1, credits2 (+9) |
 | `sCompressedTiles_A088E9` | `sPalette_0x6E` | 0 | high | 0 | credits0, credits1, credits2 (+9) |

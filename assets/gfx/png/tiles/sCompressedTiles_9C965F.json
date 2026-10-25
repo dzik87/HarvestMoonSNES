@@ -18,10 +18,11 @@
     "sub": 1
   },
   "palette_confidence": "high",
-  "palette_note": "sub-palette 1 covers 414 of 496 name-table cells; per-tile sub-palettes 1/2 (tile_subs)",
+  "palette_note": "sub-palette 1 covers 828 of 1000 name-table cells; per-tile sub-palettes 1/2/4 (tile_subs)",
   "palette_subs_used": [
     1,
-    2
+    2,
+    4
   ],
   "palette_alternatives": [
     {
@@ -29,5 +30,6 @@
       "sub": 1,
       "area_name": "NY_MOUNTAINTOP"
     }
-  ]
+  ],
+  "tiles_row_guessed": 152
 }

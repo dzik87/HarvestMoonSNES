@@ -144,7 +144,7 @@ def check_exported_palettes(tmp):
     check(meta["palette"] == {"id": ent["palette"]["id"], "sub": ent["palette"]["sub"]}, "sidecar palette")
     check(meta["palette_confidence"] == ent["confidence"], "sidecar confidence")
     pal, _ = png_palette(b.art)
-    check(pal[:16] == P.load_view_palette(meta["palette"], 4, tmp), "exported PLTE")
+    check(pal[:128] == P.view_palette128(meta["palette"]["id"], tmp), "exported PLTE (8 rows: every tile has the row of its name table cells)")
     pal, trns = png_palette(P.Blob("sprites", "Sprites_888000", tmp).art)
     check(trns == 0, "sprite remainder sheets have transparent colour 0")
     first = sorted((tmp / "assets/gfx/png/frames/obj_0000").glob("f_*.png"))[0]
@@ -489,7 +489,7 @@ def test_sprite_cell_formula():
 
 
 def test_png_palettes_are_real_colours():
-    """every committed remainder sheet carries the 16 colours of palette.sub in its PLTE; the pixel data is independent of them."""
+    """every committed tile remainder sheet carries the 8 rows of its palette in its PLTE (sprites: the 16 colours of palette.sub); the pixel data is independent of them."""
     n = nconf = 0
     for b in P.blobs(kind="tiles") + P.blobs(kind="sprites"):
         meta = P.read_meta(b)
@@ -497,8 +497,10 @@ def test_png_palettes_are_real_colours():
         if "palette" not in meta:
             check(meta.get("palette_confidence") == "none", f"{b.label}: no palette and not flagged 'none'")
             continue
-        want = P.load_view_palette(meta["palette"], 4)
-        check(pal[:16] == want, f"{b.label}: PLTE differs from {meta['palette']}")
+        if b.kind == "tiles":
+            check(pal[:128] == P.view_palette128(meta["palette"]["id"]), f"{b.label}: PLTE differs from {meta['palette']['id']}")
+        else:
+            check(pal[:16] == P.load_view_palette(meta["palette"], 4), f"{b.label}: PLTE differs from {meta['palette']}")
         check(meta["palette_confidence"] in ("high", "medium", "low"), f"{b.label}: confidence")
         if b.kind == "sprites":
             check(trns == 0, f"{b.label}: index 0 must be transparent")
