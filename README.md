@@ -23,9 +23,12 @@ CI (GitHub Actions) builds asar from source, assembles the ROM and compares the 
 | `src/code/bank_80 … bank_85/` | 65816 code split into thematic modules |
 | `src/ai/` | AI script interpreter: command definitions (`commands.asm`) and per-region scripts |
 | `src/data/` | graphics, tilemaps, objects, audio, dialogs |
+| `assets/gfx/png/`, `assets/gfx/tilemaps/` | graphics sources: indexed PNG tile sheets and name-table text (edit these, then `tools/gfx/pngsync.py import`) |
 | `tools/` | build, verification, migration tools (`tools/migration/`) |
 | `docs/` | documentation (layout, workflow, migration log, findings, AI commands, naming maps) |
 | `tests/` | reference hash values |
+
+Graphics modding (PNG -> ROM): [`docs/formats/graphics-png.md`](docs/formats/graphics-png.md).
 
 Details: [`docs/layout.md`](docs/layout.md), [`docs/workflow.md`](docs/workflow.md),
 [`docs/migration-log.md`](docs/migration-log.md).

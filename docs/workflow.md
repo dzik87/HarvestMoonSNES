@@ -22,11 +22,15 @@ the result in run annotations and as the `HarvestMoon-US` artifact.
 - Editing a palette: change the JSON, run `python tools/gfx/palette.py pack`, commit both files. The ROM hash will of
   course change after an intentional edit; update `tests/expected.json` only for deliberate modifications.
 - `tilemap_codec.py` — LZSS codec for the compressed tilemap/charactermap blobs (see `docs/formats/tilemap-compression.md`).
-- `tiles.py` — raw 2/4/8bpp SNES tile data <-> indexed PNG sheets (`to-png`, `from-png`), lossless for any data.
+- `tiles.py` — reference implementation of raw 2/4/8bpp SNES tile data <-> indexed PNG sheets (`to-png`, `from-png`), lossless for any data.
 - `dialogs/dialog.py` — dialog word streams <-> editable text (`assets/dialogs/<region>/`), all regions.
 - `maps/objmap.py` — object maps (bank $A7) <-> JSON grids in `assets/maps/`; widths in `tools/maps/map_dims.json`.
 - `data/bankbin.py` — sprite, tile, character and audio banks: one `.bin` per label in `assets/`, included with `incbin` (labels unchanged).
-- `gfx/gfxpipe.py` — export compressed blobs to raw/PNG, re-import edited PNG (recompress, size must stay equal), verify exact re-encode.
+- `gfx/pngsync.py` — **graphics sources**: `assets/gfx/png/{tiles,sprites}/<label>.png` (indexed 4bpp sheets) and `assets/gfx/tilemaps/<label>.map.txt`
+  (BG name tables) with a `<label>.json` sidecar each are the source of truth for all 150 graphic blobs; `export` / `import` / `check` / `preview`.
+  `import` rewrites the `assets/gfx/{tiles,sprites,characters}/*.bin` that the assembler includes (a longer compressed stream needs `--allow-resize`),
+  `check` (CI) asserts that the PNG/text reproduces every committed `.bin` bit-exactly. Modder workflow, constraints and what is not convertible yet: `docs/formats/graphics-png.md`.
+- `gfx/gfxpipe.py` — older low-level helper (raw export, exact re-encode `verify`); superseded by `pngsync.py` for editing.
 - `fonts/font.py` — font glyphs: one 16x16 2bpp indexed PNG per glyph in `assets/fonts/<region>/glyph_XXXX.png`
   (id = dialog word, `glyphs.json` maps ids to characters). Edit a PNG (pixel value = SNES colour index: 0/1 baked background
   dither, 2/3 letter), run `python tools/fonts/font.py build --region us --write-assets` to regenerate the
