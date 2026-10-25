@@ -4,8 +4,8 @@ Status legend: **[C]** confirmed from the engine code (routine + address given),
 **[D]** confirmed from the data (checked by `tools/objects/objdata.py`, 100 % of
 both banks parse without exceptions), **[I]** inferred / interpretation, not proven by code.
 
-Tooling: `tools/objects/objdata.py` (`analyze`, `check`, `names`), tests in
-`tests/test_objdata.py`; how components map to pixels and the exported frame images: `docs/formats/sprite-assembly.md`, proposed label names in `docs/naming/H_objects_86_87.csv`.
+Tooling: `tools/objects/objdata.py` (`build`, `check`, `extract`, `analyze`), tests in
+`tests/test_objdata.py`; the editable sources are described in section 10; how components map to pixels and the exported frame images: `docs/formats/sprite-assembly.md`, the label renames that were applied during the migration are listed in `docs/naming/H_objects_86_87.csv`.
 All offsets below are 16-bit offsets inside the bank unless a full `$BBAAAA` address is given.
 
 ## 1. Overview
@@ -209,3 +209,24 @@ Counts (`objdata.py analyze`):
 | Steps | 2274 | 1500 | 3774 |
 | Frames (referenced / unreferenced) | 1177 / 4 | 853 / 3 | 2030 / 7 |
 | Components | 2865 | 1408 | 4273 |
+
+## 10. Editable sources and build
+
+The two banks are no longer committed as assembly. The source of truth is `assets/objects/bank_86/` and `assets/objects/bank_87/`:
+
+| File | Content |
+|---|---|
+| `bank.json` | `first_object_index` (`0000` / `0262`) and the 64-entry `slot_table` (section 7) |
+| `objects/NNNN.json` | one animation list per object index (4 hex digits, contiguous from `first_object_index`): `{"steps": [["<frame id>", timer], ...]}`, optional `"name"` (emitted as a comment) |
+| `frames.txt` | all frames **in ROM order**: `<id>: tile,x,y,attr tile,x,y,attr ...` (tile and attr in hex, x/y signed decimal); `raw <hex>` lines keep bytes that belong to no frame; `;` starts a comment |
+
+Frame ids are the suffix of the label (`86A4AE` -> `aObjFrame_86A4AE`); they are just names, the real address is computed by the layout pass, so adding a
+component, inserting a frame or reordering lines moves everything behind it and every pointer follows. Frames that no step uses (section 8) have ids starting
+with `U` (`U86C59A`). Frames shared by several steps (or objects) are shared by using the same id. The bank is padded with zeros to `$FFFF`; a layout that exceeds the bank is an error.
+The timer is a plain number (`255` = `$FF` = hold forever, section 5).
+
+`python3 tools/objects/objdata.py build` (run by `tools/build_assets.py`) writes `build/gen/objects/bank_86.asm` and `bank_87.asm`, which `src/main.asm` includes.
+Labels are generated from the sources and keep the names used by the code and docs: `aObjSlotOamTile_868000`, `aObjAnimListPtrs_86`, `aObjAnimList_####` (global object index),
+`aObjFrame_<id>`, `aObjPadding_<end>`; pointers in the generated asm are symbolic (`dw aObjFrame_86A4AE`). `check [--rom US.sfc]` assembles the sources, re-parses the bytes into the structural model
+and verifies the round trip (and, with a ROM dump, equality with the original banks); `extract --rom US.sfc` regenerates the sources from a dump (overwrites `assets/objects`).
+Size: about 170 KB of sources (1,104 object files plus two `frames.txt`), against 1.37 MB of `db`/`dw` text before.

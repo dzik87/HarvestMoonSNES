@@ -35,8 +35,8 @@ the result in run annotations and as the `HarvestMoon-US` artifact.
 - `tilemap_codec.py` — LZSS codec for the compressed tilemap/charactermap blobs (see `docs/formats/tilemap-compression.md`).
 - `tiles.py` — reference implementation of raw 2/4/8bpp SNES tile data <-> indexed PNG sheets (`to-png`, `from-png`), lossless for any data.
 - `dialogs/dialog.py` — dialog texts (`assets/dialogs/<region>/bank_XX.txt`, the only source) -> generated `build/gen/dialogs/<region>/bank_XX.asm` (`build`), `check`; all regions.
-- `maps/objmap.py` — object maps (bank $A7) <-> JSON grids in `assets/maps/`; widths in `tools/maps/map_dims.json`.
-- `build_assets.py` — generates every `incbin`'d binary that has an editable source (`assets/gfx/palettes/*.pal`, `assets/gfx/{tiles,sprites,characters}/*.bin` incl. the font tables) from the PNG/text/JSON sources; run by `tools/build.py` before asar. These generated files are git-ignored; run `python3 tools/build_assets.py` by hand before the checks/tests that read them.
+- `maps/objmap.py` — object maps (bank $A7): the JSON grids in `assets/maps/` are the only source; `build` writes `build/gen/maps/bank_A7.asm`, `check [--rom]`, `extract --rom`; widths in `tools/maps/map_dims.json`.
+- `build_assets.py` — also writes the generated assembly (`build/gen/{dialogs,objects,maps}/`); generates every `incbin`'d binary that has an editable source (`assets/gfx/palettes/*.pal`, `assets/gfx/{tiles,sprites,characters}/*.bin` incl. the font tables) from the PNG/text/JSON sources; run by `tools/build.py` before asar. These generated files are git-ignored; run `python3 tools/build_assets.py` by hand before the checks/tests that read them.
 - `data/regionbanks.py` — blob level inventory of the regional data banks (which blob of EU/DE/JP is region specific); `analysis/region_diff.py --data-ranges` lists the differing byte ranges.
 - `data/bankbin.py` — sprite, tile, character and audio banks: one `.bin` per label in `assets/`, included with `incbin` (labels unchanged); audio `.bin` files are still committed sources.
 - `gfx/pngsync.py` — **graphics sources**: `assets/gfx/png/{tiles,sprites}/<label>.png` (indexed 4bpp sheets) and `assets/gfx/tilemaps/<label>.map.txt`
@@ -49,5 +49,5 @@ the result in run annotations and as the `HarvestMoon-US` artifact.
   (id = dialog word, `glyphs.json` maps ids to characters). Edit a PNG (pixel value = SNES colour index: 0/1 baked background
   dither, 2/3 letter), run `python tools/fonts/font.py build --region us --write-assets` to regenerate the
   `assets/gfx/tiles/sFontGlyphs_*.bin` tables included by the ROM, then `font.py seal` to refresh the recorded hashes. Format: `docs/formats/font.md`.
-- `objects/objdata.py` — banks $86/$87 object animation data model (analyze/check/names); format: `docs/formats/object-data.md`.
+- `objects/objdata.py` — banks $86/$87 object animation data: sources `assets/objects/bank_8x/` (`bank.json`, `objects/NNNN.json`, `frames.txt`) -> `build/gen/objects/bank_8x.asm` (`build`), `check [--rom]`, `extract --rom`, `analyze`; format: `docs/formats/object-data.md`.
 - `audio/spc700.py`, `audio/audio_map.py` — SPC700 disassembler and audio blob map; the audio system is documented in `docs/audio.md`.

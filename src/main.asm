@@ -22,9 +22,9 @@
     ; ROM header
     incsrc "code/header.asm"
     
-    ; Objects data
-    incsrc "data/objects/bank_86.asm"
-    incsrc "data/objects/bank_87.asm"
+    ; Objects data (generated from assets/objects/ by tools/objects/objdata.py build)
+    incsrc "../build/gen/objects/bank_86.asm"
+    incsrc "../build/gen/objects/bank_87.asm"
     
     ; Sprites GFX
     incsrc "data/gfx/sprites/bank_88.asm"
@@ -64,7 +64,8 @@
     incsrc "data/gfx/characters/bank_A6.asm"
     
     ; Tilemap data
-    incsrc "data/tilemaps/bank_A7.asm"
+    ; (generated from assets/maps/*.json by tools/maps/objmap.py build)
+    incsrc "../build/gen/maps/bank_A7.asm"
     
     ; Palettes
     incsrc "data/gfx/palettes/bank_A8.asm"

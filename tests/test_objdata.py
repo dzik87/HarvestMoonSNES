@@ -89,28 +89,70 @@ def test_invariants(banks, ms):
         pad = m.nodes[-1]
         check(pad.kind == 'Padding' and pad.addr + pad.size() == 0x10000,
               'bank %02X: ends with zero padding to $FFFF' % b)
-        for (i, n) in enumerate(m.nodes):
-            if n.kind == 'Frame' and not n.referenced:
-                check(not n.labels, 'unreferenced frame %#x carries no label' % n.addr)
 
 
-def test_label_alignment(banks, ms):
-    if any(l.startswith('aObjAnimList_') for b in banks.values() for l in b.labels):
-        return  # migration-time check: the generic labels have been renamed already (docs/naming/H_objects_86_87.csv applied)
-    expect = {0x86: (1177, 610), 0x87: (853, 494)}
-    for b, m in ms.items():
-        by = {l: n for n in m.nodes for l in n.labels}
-        frame_labels = [l for l in banks[b].labels if l.startswith('DATA8_')]
-        list_labels = [l for l in banks[b].labels if l.startswith(('PTR16_', 'sObjectData0x'))]
-        check(len(frame_labels) == expect[b][0], 'bank %02X: %d DATA8 labels' % (b, expect[b][0]))
-        check(len(list_labels) == expect[b][1], 'bank %02X: %d list labels' % (b, expect[b][1]))
-        check(all(by[l].kind == 'Frame' for l in frame_labels), 'bank %02X: DATA8_ labels are frames' % b)
-        check(all(by[l].kind == 'AnimList' for l in list_labels), 'bank %02X: list labels are lists' % b)
-        referenced = sum(1 for n in m.nodes if n.kind == 'Frame' and n.referenced)
-        check(referenced == expect[b][0], 'bank %02X: labelled frames == referenced frames' % b)
-        # the only label off a node boundary is the known 1-byte-early padding label
-        check([l for l, _ in m.stray_labels] == (['Padding_870000'] if b == 0x87 else []),
-              'bank %02X: stray labels' % b)
+def test_labels(banks, ms):
+    """The generated labels keep the names the code and the docs refer to."""
+    for b, a in banks.items():
+        n = 0x262 if b == 0x86 else 0x1EE
+        base = 0 if b == 0x86 else 0x262
+        check('aObjSlotOamTile_%02X8000' % b in a.labels, 'bank %02X slot table label' % b)
+        check(a.labels['aObjAnimListPtrs_%02X' % b] == 0x8080, 'bank %02X list pointer table at $8080' % b)
+        check(all('aObjAnimList_%04X' % (base + i) in a.labels for i in range(n)),
+              'bank %02X has a label for each of its %d lists' % (b, n))
+        check(sum(1 for l in a.labels if l.startswith('aObjFrame_')) == sum(1 for nd in ms[b].nodes if nd.kind == 'Frame'),
+              'bank %02X: one label per frame' % b)
+    check(banks[0x86].labels['aObjFrame_86A4AE'] == 0xA4AE and banks[0x86].labels['aObjAnimList_0000'] == 0x8544,
+          'known label addresses ($86A4AE, $868544)')
+
+
+def test_sources(banks, ms):
+    """Source files <-> generated assembly <-> bytes."""
+    import tempfile, shutil
+    for b in od.BANKS:
+        src = od.read_sources(b)
+        text = od.emit_asm(src)
+        check('ORG $%02X8000' % b in text and 'aObjAnimListPtrs_%02X:' % b in text, 'bank %02X asm has ORG and table' % b)
+        # frames.txt round trip
+        txt = ''.join(od.format_frame_line(e[1], e[2]) + '\n' if e[0] == 'frame' else 'raw ' + e[1].hex() + '\n'
+                      for e in src.entries)
+        check(od.parse_frames_text(txt) == src.entries, 'bank %02X frames.txt text round trip' % b)
+    # extract -> write -> read gives the same bytes
+    tmp = tempfile.mkdtemp()
+    try:
+        for b, a in banks.items():
+            src = od.model_to_source(od.build_model(a))
+            od.write_sources(src, tmp)
+            again = od.source_to_asmbank(od.read_sources(b, tmp))
+            check(again.data == a.data, 'bank %02X: write_sources/read_sources round trip' % b)
+        # edit propagation: a longer frame shifts the following frames and keeps every pointer valid
+        src = od.read_sources(0x86)
+        i = next(k for k, e in enumerate(src.entries) if e[0] == 'frame')
+        e = src.entries[i]
+        src.entries[i] = ('frame', e[1], e[2] + [(0x0001, 0, 0, 0)], e[3])
+        data, labels, _ = od.layout(src)
+        check(labels['aObjFrame_' + src.entries[i + 1][1]] == banks[0x86].labels['aObjFrame_' + src.entries[i + 1][1]] + 5,
+              'adding a component moves the next frame by 5 bytes')
+        m2 = od.build_model(od.source_to_asmbank(src))
+        check(m2.serialize() == data, 'edited bank still parses and round-trips')
+        # overflow is rejected
+        src = od.read_sources(0x86)
+        src.entries.append(('raw', bytes(0x8000)))
+        try:
+            od.layout(src)
+            check(False, 'overflowing bank must be rejected')
+        except ValueError:
+            pass
+    finally:
+        shutil.rmtree(tmp)
+
+
+def test_no_committed_asm(banks, ms):
+    check(not os.path.exists(os.path.join(ROOT, 'src', 'data', 'objects', 'bank_86.asm')),
+          'object data is not committed as asm (generated into build/gen/objects)')
+    main = open(os.path.join(ROOT, 'src', 'main.asm'), encoding='utf-8').read()
+    check('build/gen/objects/bank_86.asm' in main and 'build/gen/maps/bank_A7.asm' in main,
+          'src/main.asm includes the generated object banks and maps')
 
 
 def test_pointers_are_symbolic(banks, ms):
@@ -139,26 +181,6 @@ def test_opaque_fallback(banks, ms):
     m = od.build_model(asm)
     check(any(n.kind == 'Opaque' for n in m.nodes), 'garbage after the frames becomes Opaque')
     check(m.serialize() == bytes(data), 'model with opaque bytes still round-trips')
-
-
-def test_names(banks, ms):
-    if any(l.startswith('aObjAnimList_') for b in banks.values() for l in b.labels):
-        return  # migration-time check: the generic labels have been renamed already (docs/naming/H_objects_86_87.csv applied)
-    rows = od.propose_names()
-    check(not od.validate_names(rows), 'proposed names validate: %s' % od.validate_names(rows)[:3])
-    new = [r[1] for r in rows]
-    check(len(new) == len(set(new)), 'new names unique')
-    check(all(od.NAME_RE.match(n) for n in new), 'new names are identifiers')
-    check(not any(re.search(r'_L\d+$', n) for n in new), 'no name ends in _L###')
-    labelled = sum(len(n.labels) for m in ms.values() for n in m.nodes) + 1  # + stray padding
-    check(len(rows) == labelled, 'one row per labelled node (%d rows, %d labels)' % (len(rows), labelled))
-    check(not any(r[3] == '' for r in rows), 'every row has a reason')
-    csv_path = os.path.join(ROOT, 'docs', 'naming', 'H_objects_86_87.csv')
-    if os.path.exists(csv_path):
-        import csv
-        with open(csv_path, newline='', encoding='utf-8') as fh:
-            got = [tuple(r) for r in list(csv.reader(fh))[1:]]
-        check(got == [tuple(r) for r in rows], 'docs/naming/H_objects_86_87.csv is up to date')
 
 
 def main():

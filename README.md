@@ -23,7 +23,8 @@ CI (GitHub Actions) builds asar from source, assembles the ROM and compares the 
 | `src/common/` | SNES registers, RAM map, structures, enums, code macros |
 | `src/code/bank_80 … bank_85/` | 65816 code split into thematic modules; EU/DE/JP code as `if !REGION_xx` patch blocks (switch and WRAM layout: `src/common/region.asm`) |
 | `src/ai/` | AI script interpreter: command definitions (`commands.asm`), region support (`region.asm`), US scripts (`us/`, EU/DE/JP as `if !REGION_xx` blocks) |
-| `src/data/` | graphics, tilemaps, objects, audio, dialogs |
+| `src/data/` | include wrappers of the graphics and audio blobs (pending conversion); everything else is generated from `assets/` into `build/gen/` |
+| `assets/objects/`, `assets/maps/` | object animation data (banks $86/$87) and object maps (bank $A7): the editable sources, see `docs/formats/object-data.md` |
 | `assets/gfx/png/`, `assets/gfx/tilemaps/` | graphics sources: indexed PNG tile sheets and name-table text (edit these, then `tools/gfx/pngsync.py import`) |
 | `tools/` | build, verification, migration tools (`tools/migration/`) |
 | `docs/` | documentation (layout, workflow, migration log, findings, AI commands, naming maps) |
