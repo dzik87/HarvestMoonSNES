@@ -65,6 +65,7 @@ jobs:
           python3 tests/test_objdata.py
           python3 tests/test_tilemap_codec.py
           python3 tests/test_disasm65816.py
+          python3 tests/test_bytealign.py
           python3 tools/gfx/tiles.py selftest
           python3 tools/gfx/pngsync.py check
           python3 tests/test_pngsync.py

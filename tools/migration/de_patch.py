@@ -272,7 +272,7 @@ def make_variants(al, de_rom, res, lm, lines, idx, blocks, equates, stats):
     return blocks
 
 
-def apply_to_sources(lines, idx, blocks, status, dry=False):
+def apply_to_sources(lines, idx, blocks, status):
     """Rewrite the module files. Returns dict file -> new text."""
     block_at = {}
     for blk in blocks:
@@ -287,8 +287,7 @@ def apply_to_sources(lines, idx, blocks, status, dry=False):
         blk = block_at.get(i)
         if blk is not None:
             last = idx[blk.last]
-            # include trailing labels/blank lines that precede the next code line? no: stop at last code line
-            # leading label/blank lines directly before the block stay outside
+            # label/blank lines directly before the block stay outside; lines up to the last code line are wrapped
             outs[ln.file].append("    if !REGION_DE")
             outs[ln.file] += blk.variant
             outs[ln.file].append("    else")
