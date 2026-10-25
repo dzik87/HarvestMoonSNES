@@ -56,8 +56,6 @@ derived and not committed.
   automatically (layout unchanged). A longer stream is refused unless `--allow-resize` is passed; then `import` also reduces the
   trailing `Padding_*` `fill N` in `src/data/gfx/<kind>/bank_XX.asm` by the growth, and fails if the bank is full. All
   pointers are labels, so following blobs move automatically. Raw blobs (sprites, `sCharactermap_*`) never change size.
-* A blob whose label span contains data after the compressed stream (`sCompressedTilemap_A69996`) cannot change its stream
-  length without `--allow-resize`, because that data would move.
 * Name tables: `.map.txt` has `columns` 16-bit hex words per row (32; 128 for `sCharactermap_*`), a blank line after every
   32 rows, no comments. Entry = tile 0-9, palette 10-12, priority 13, H flip 14, V flip 15.
 
@@ -67,7 +65,7 @@ derived and not committed.
 | `bin`, `kind`, `compression` (`lzss`/`none`), `raw_size` | where the bytes go and the decompressed size |
 | `bpp`, `bpp_confidence`, `bpp_note`, `tiles_per_row` | how the PNG is laid out (tiles only) |
 | `columns`, `entries` | text layout (name tables only) |
-| `tail_hex` / `tail_zeros` | bytes of the label span after the compressed stream, preserved exactly: 1-2 zero bytes on 9 blobs, 4056 bytes of other data on `sCompressedTilemap_A69996` |
+| `tail_hex` / `tail_zeros` | bytes of the label span after the compressed stream, preserved exactly: 1-2 zero bytes on 9 blobs |
 | `vram_word_dest`, `map_entries`, `first_map`, `tile_sets` | informational, taken from the map table in `src/code/bank_80/tilemaps.asm` |
 
 `bpp_confidence`: sprite banks and tile blobs are **high** (87 of 87; none medium or low). Evidence: VRAM slot size,
@@ -80,7 +78,6 @@ PNG looks: the conversion is lossless for any bytes and any bpp.
 
 | Item | Why / plan |
 |---|---|
-| `sCompressedTilemap_A69996` tail (4056 bytes at +1792) | uncompressed data after the stream; looks like name-table words (`4456 4456 ...`) but is not referenced by a label. Kept bit-exact in the sidecar; make it its own labelled blob and `.map.txt` once its user is found. |
 | `sFontGlyphs_*` (11 x 4096 bytes in `assets/gfx/tiles/`) | already PNG through the font pipeline (`assets/fonts/us/glyph_*.png`, `tools/fonts/font.py`), not duplicated here |
 | Palettes | already PNG + JSON + `.pal` (`assets/gfx/palettes/`) |
 | Region-specific graphics of EU, DE, JP | only the US ROM is in the repository. `docs/regions.md` shows graphics that differ per language in banks $94, $95 (JP), $9A, $9B, $9E (JP), $9F, $A5, $A6 and palettes $A9 (JP). They become `assets/gfx/png/<kind>/<region>/` entries in the region unification step (the sidecar format already fits; labels would get a region suffix). |

@@ -29,5 +29,8 @@ sCompressedTilemap_A694EE:
 sCompressedTilemap_A69996:
     incbin "../../../../assets/gfx/characters/sCompressedTilemap_A69996.bin"
 
+sCharactermap_A6A096:
+    incbin "../../../../assets/gfx/characters/sCharactermap_A6A096.bin"
+
 Padding_A60000:
-    fill 20370
+    fill 20330

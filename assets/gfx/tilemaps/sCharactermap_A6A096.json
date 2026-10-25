@@ -1,0 +1,10 @@
+{
+  "label": "sCharactermap_A6A096",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/sCharactermap_A6A096.bin",
+  "compression": "none",
+  "raw_size": 4096,
+  "format": "bg_name_table",
+  "entries": 2048,
+  "columns": 32
+}

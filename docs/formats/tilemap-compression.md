@@ -155,8 +155,9 @@ decoder also accepts streams from other encoders.)
   2 bytes of `sCompressedTiles_99DCBD` (`00 00`, a final back-reference) used to
   sit under `Padding_990000`; they now belong to the blob and the padding label
   starts 2 bytes later.
-* `sCompressedTilemap_A69996` is followed, inside the same label span, by
-  4056 bytes of other (non-compressed) data starting `44 56 44 56` at +1792.
+* The 4056 bytes that used to follow `sCompressedTilemap_A69996` inside its label span (starting `44 56 44 56` at +1792)
+  are a raw 64x32 BG name table, now the separate blob `sCharactermap_A6A096` ($A6A096, 4096 bytes including 40 zero
+  bytes that were hidden under `Padding_A60000`).
 
 ## Statistics
 
