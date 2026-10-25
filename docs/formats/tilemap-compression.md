@@ -7,8 +7,8 @@ ROM. Implementation: `tools/gfx/tilemap_codec.py`, tests:
 The format is a textbook LZSS (Haruhiko Okumura's `LZSS.C`) with a 2048-byte ring
 buffer, 3..34 byte matches, LSB-first flag bytes where `1` means literal, a
 4-byte header and no end marker (the output size in the header terminates the
-stream). It is used for every `sCompressedTilemap_*` and
-`sCompressedCharactermap_*` blob (banks $92-$A6, `src/data/gfx/tiles/` and
+stream). It is used for every `sCompressedTiles_*` and
+`sCompressedTilemap_*` blob (banks $92-$A6, `src/data/gfx/tiles/` and
 `src/data/gfx/characters/`). Despite the name, several of these blobs are plain
 tile maps for BG layers, others are character (tile graphics) data; the codec
 does not care.
@@ -100,7 +100,7 @@ counter, return if zero, then store into the ring. Instruction-level mapping:
 
 ## Examples (real blobs)
 
-`sCompressedTilemap_928000` (`$928000`), start of stream:
+`sCompressedTiles_928000` (`$928000`), start of stream:
 
 ```
 00 20 00 00   header: n = $2000 (8192 bytes)
@@ -112,7 +112,7 @@ FF FF         src=$7FF len=34
 ...
 ```
 
-`sCompressedTilemap_92BB03`:
+`sCompressedTiles_92BB03`:
 
 ```
 00 20 00 00   n = $2000
@@ -149,13 +149,13 @@ decoder also accepts streams from other encoders.)
 * The bytes of a blob after the last token are not part of the stream. In the
   ROM they are bank-end padding (`$00`).
 * **Formerly hidden blobs** are now labeled and stored as separate assets:
-  `sCompressedCharactermap_A5CB05` ($A5CB05, 4096 bytes, the dialog box graphics)
-  and `sCompressedTilemap_9FD4DA` ($9FD4DA, 8192 bytes; no label-based code
+  `sCompressedTilemap_A5CB05` ($A5CB05, 4096 bytes, the dialog box graphics)
+  and `sCompressedTiles_9FD4DA` ($9FD4DA, 8192 bytes; no label-based code
   reference found, presumably reached through a computed or raw pointer). The last
-  2 bytes of `sCompressedTilemap_99DCBD` (`00 00`, a final back-reference) used to
+  2 bytes of `sCompressedTiles_99DCBD` (`00 00`, a final back-reference) used to
   sit under `Padding_990000`; they now belong to the blob and the padding label
   starts 2 bytes later.
-* `sCompressedCharactermap_A69996` is followed, inside the same label span, by
+* `sCompressedTilemap_A69996` is followed, inside the same label span, by
   4056 bytes of other (non-compressed) data starting `44 56 44 56` at +1792.
 
 ## Statistics
@@ -164,7 +164,7 @@ Counted by `tests/test_tilemap_codec.py` (source: `src/data/gfx/*/*.asm`):
 
 | Item                                   | Value            |
 |----------------------------------------|------------------|
-| Labeled `sCompressed*` blobs           | 137 (78 Tilemap, 59 Charactermap) |
+| Labeled `sCompressed*` blobs           | 137 (77 Tiles, 60 Tilemap) |
 | Additional unlabeled blobs             | 0                |
 | Total blobs                            | 137              |
 | Compressed bytes (streams only)        | 485,289          |
@@ -172,9 +172,9 @@ Counted by `tests/test_tilemap_codec.py` (source: `src/data/gfx/*/*.asm`):
 | Overall ratio                          | 52.7%            |
 | Byte-exact re-encodes                  | 135 / 135 (and 2/2 unlabeled) |
 
-Output sizes (labeled blobs): 8192 B x 91 (76 Tilemap + 15 Charactermap), 2048 B
-x 24, 4096 B x 17 (1 Tilemap, 16 Charactermap), 6144 B x 2, 32768 B x 1
-(Charactermap).
+Output sizes (labeled blobs): 8192 B x 91 (76 Tiles + 15 Tilemap), 2048 B
+x 24, 4096 B x 17 (1 Tiles, 16 Tilemap), 6144 B x 2, 32768 B x 1
+(Tilemap).
 
 ## Using the tool
 
@@ -186,20 +186,20 @@ python3 tests/test_tilemap_codec.py
 API: `decompress(data, offset=0) -> (output, consumed)`, `compress(data) -> bytes`,
 `parse_asm_blobs(path, tail=0) -> {label: bytes}`.
 
-## What the blobs contain (naming caveat)
+## What the blobs contain
 
-Inspection of the decompressed data (`tools/gfx/gfxpipe.py export --png`) shows that the
-label prefixes follow the opposite of the usual SNES terminology:
+Inspection of the decompressed data (`tools/gfx/gfxpipe.py export --png`) showed that the
+original labels used the opposite of the usual SNES terminology (tile graphics were called
+"tilemaps", name tables "charactermaps"). The labels were corrected in
+`docs/naming/K1_gfx_tiles.csv` and `docs/naming/K2_gfx_tilemaps.csv`:
 
-| Prefix                       | Directory              | Count | Contents |
-|------------------------------|------------------------|-------|----------|
-| `sCompressedTilemap_*`       | `assets/gfx/tiles`     | 78    | **tile graphics** (77 blobs of 8192 bytes, 1 of 4096). Rendering as 4bpp gives coherent images (checked e.g. on `9282CB`); as 2bpp it is noise. |
-| `sCompressedCharactermap_*`  | `assets/gfx/characters`| 59    | **BG name tables**: 16-bit entries (tile bits 0-9, palette 10-12, priority 13, flips 14/15). Sizes 2048 (24), 4096 (18), 6144 (2), 8192 (15), 32768 (1). |
+| Prefix                 | Directory               | Count | Contents |
+|------------------------|-------------------------|-------|----------|
+| `sCompressedTiles_*`   | `assets/gfx/tiles`      | 77    | **tile graphics** (76 blobs of 8192 bytes, 1 of 4096). Rendering as 4bpp gives coherent images (checked e.g. on `9282CB`); as 2bpp it is noise. |
+| `sCompressedTilemap_*` | `assets/gfx/characters` | 60    | **BG name tables**: 16-bit entries (tile bits 0-9, palette 10-12, priority 13, flips 14/15). Sizes 2048, 4096, 6144, 8192, 32768. |
 
-The prefixes are kept for now because they come from the original disassembly labels and
-are referenced everywhere (about 590 labels). Renaming them to `sCompressedTiles_*` /
-`sCompressedTilemap_*` is mechanical with `tools/migration/apply_renames.py` (two passes to avoid
-collisions) and is left as a project decision. `gfxpipe.py export` writes name tables as
-readable `.map.txt` files (32 entries per row) and PNG sheets only for tile blobs.
-The bitplane depth of the individual tile blobs was verified visually on samples only; the
-4096-byte `sCompressedTilemap_928000` (rain overlay, 83% zero 16-byte blocks) is likely 2bpp.
+The directory `assets/gfx/characters` (banks $A1-$A6) also holds non-compressed character graphics, so it keeps its name.
+`gfxpipe.py export` writes name tables as readable `.map.txt` files (32 entries per row) and PNG
+sheets only for tile blobs. The bitplane depth of individual tile blobs was verified visually on
+samples only; the 4096-byte `sCompressedTiles_928000` (rain overlay, 83% zero 16-byte blocks) is
+likely 2bpp.
