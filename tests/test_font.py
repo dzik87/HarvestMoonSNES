@@ -100,7 +100,7 @@ def test_png_validation():
             font.load_png_dir(d); check(False, "RGB PNG must be rejected")
         except ValueError:
             pass
-        Image.new("P", (8, 16)).save(p)
+        Image.new("P", (9, 16)).save(p)
         try:
             font.load_png_dir(d); check(False, "wrong size must be rejected")
         except ValueError:
@@ -157,6 +157,21 @@ def test_region_roms():
             if rom:
                 t, _ = font.source_tables(r, rom)
                 check(all(t[i] == us_tables[i] for i in (3, 4, 5, 6, 7, 8, 10)), "%s tables 3-8 and UNK equal us" % r)
+
+
+def test_narrow_png_roundtrip():
+    """8x16 PNGs: right half is regenerated as dither; round trip of narrow and full glyphs is lossless."""
+    with tempfile.TemporaryDirectory() as d:
+        px = list(font.BLANK)
+        for y in range(2, 14):
+            px[y * 16 + 3] = 3
+        check(font.is_narrow_png("us", 0x41, px), "us glyph with plain right half is narrow")
+        check(not font.is_narrow_png("jp", 0x41, px), "jp glyph outside the narrow ids stays 16x16")
+        check(font.is_narrow_png("jp", 0xBC, px), "jp narrow id is narrow")
+        font.write_png(Path(d) / "glyph_0041.png", px, True)
+        check(font.read_png(Path(d) / "glyph_0041.png") == px, "8x16 PNG round trip")
+        px[5 * 16 + 12] = 3
+        check(not font.is_narrow_png("us", 0x41, px), "glyph with right-half data stays 16x16")
 
 
 def test_check_command():
