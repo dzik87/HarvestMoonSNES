@@ -9,20 +9,21 @@ that the assembler includes (assets/gfx/{tiles,sprites,characters}/*.bin) must b
                                           build/gfx_preview), tile sheets and sprite banks with a palette per tile to DIR/sheets
 
 Blob kinds (PAT is an fnmatch pattern on the label, e.g. 'sCompressedTiles_9*' or 'Sprites_88*'; default: all):
-  tiles      assets/gfx/tiles/sCompressedTiles_*.bin      LZSS-compressed 4bpp tile graphics -> assets/gfx/png/tiles/<label>/t_NNNN.png
-  sprites    assets/gfx/sprites/Sprites_*.bin             raw 4bpp OBJ graphics (banks $88-$91) -> assets/gfx/png/sprites/<label>/s_NNNN.png
+  tiles      assets/gfx/tiles/sCompressedTiles_*.bin      LZSS-compressed 4bpp tile graphics -> screens/*.png + tiles/<label>.png (remainder)
+  sprites    assets/gfx/sprites/Sprites_*.bin             raw 4bpp OBJ graphics (banks $88-$91) -> frames/*/*.png + sprites/<label>.png (remainder)
   tilemaps   assets/gfx/characters/sCompressedTilemap_*.bin (LZSS) and sCharactermap_*.bin (raw)
                                                           BG name tables -> assets/gfx/tilemaps/<label>.map.txt
-Graphics are stored as INDIVIDUAL 16x16 unit PNGs (one directory per blob, all-zero units omitted) plus a manifest.json
-(bpp, bpp_confidence, tiles_per_row, unit count / blank units, compression, raw_size, trailing bytes of the label span, VRAM
-destination).  Name tables keep one <label>.map.txt + <label>.json.  Details: docs/formats/graphics-png.md.
-  sheet   [--label PAT]... [--region R] [--out DIR] [--scale N] [--grid]   render the sheet of every blob from its unit PNGs
+Tile and sprite graphics are edited as COMPOSED images (tools/gfx/composed.py): assets/gfx/png/frames/obj_XXXX/f_PPPP.png (object
+animation frames), assets/gfx/png/screens/<name table>.png (name tables rendered with their tile sets) and, per blob, a remainder sheet
+<label>.png that holds only the pixels no composed image shows; `import` splits edited images back into tiles / sprite blocks.
+Every blob has a <label>.json sidecar (bpp, bpp_confidence, tiles_per_row, compression, raw_size, trailing bytes of the label span,
+VRAM destination, palette).  Name tables: <label>.map.txt + sidecar.  Details: docs/formats/graphics-png.md.
+  sheet   [--label PAT]... [--region R] [--out DIR] [--scale N] [--grid]   render the whole sheet of every blob (built from the sources)
                                           to DIR (default build/gfx_sheets/<region>) for viewing; never part of the sources
-
-PNG rules (every unit PNG is 16x16): indexed colour (mode P), fixed dimensions, pixel value = SNES colour index (must stay < 2^bpp); the palette
+PNG rules: indexed colour (mode P), fixed dimensions, pixel value = SNES colour index (must stay < 2^bpp); the palette
 stored in the PNG (PLTE) is only a viewing aid and is ignored on import: `export` fills it with the real 16 colours of the
 sub-palette the blob is displayed with (assets/gfx/palette_map.json, docs/formats/graphics-palettes.md); index 0 of sprite
-units is marked transparent (tRNS).  Name tables: 16-bit hex words, `columns` per row
+images is marked transparent (tRNS).  Name tables: 16-bit hex words, `columns` per row
 (sidecar: 32, or 128 for the raw sCharactermap_* world maps), a blank line after every 32 rows; free to edit, the number of words must not change.
 
 `import` refuses to change the size of the blob in the ROM unless --allow-resize is given: a shorter compressed stream is
@@ -61,10 +62,6 @@ KINDS = {
     "tilemaps": Kind("tilemaps", "assets/gfx/characters", ("sCompressedTilemap_", "sCharactermap_"), "assets/gfx/tilemaps",
                      ".map.txt", "sCompressedTilemap_"),
 }
-UNIT = 16                  # source unit: 16x16 px = 2x2 tiles (sprite block of the engine / tile-sheet cell)
-UNIT_PREFIX = {"tiles": "t", "sprites": "s"}
-UNIT_RE = re.compile(r"^([ts])_(\d{4})\.png$")
-MANIFEST = "manifest.json"
 # asm banks that include each kind (used to adjust the Padding fill when a blob grows)
 ASM_DIRS = {"tiles": "src/data/gfx/tiles", "sprites": "src/data/gfx/sprites", "tilemaps": "src/data/gfx/characters"}
 
@@ -211,116 +208,6 @@ def load_png(path):
 
 
 # ----------------------------------------------------------------------------------------------------------------------
-# sheet <-> 16x16 unit PNGs
-# ----------------------------------------------------------------------------------------------------------------------
-def ranges_text(idxs):
-    """{0,1,2,5} -> "0-2,5" (manifest field unit_blank)."""
-    out, run = [], []
-    for i in sorted(idxs):
-        if run and i == run[-1] + 1:
-            run.append(i)
-            continue
-        if run:
-            out.append(f"{run[0]}-{run[-1]}" if len(run) > 1 else str(run[0]))
-        run = [i]
-    if run:
-        out.append(f"{run[0]}-{run[-1]}" if len(run) > 1 else str(run[0]))
-    return ",".join(out)
-
-
-def parse_ranges(text):
-    out = set()
-    for part in filter(None, (text or "").split(",")):
-        a, _, z = part.partition("-")
-        out.update(range(int(a), int(z or a) + 1))
-    return out
-
-
-def unit_geometry(meta):
-    """(unit columns, unit rows) of the sheet of a tile blob: the sheet is tiles_per_row tiles wide, the tile rows are
-    rounded up to an even number so that every unit is a full 2x2 group of tiles."""
-    tsz = TILE_BYTES[meta["bpp"]]
-    n = (meta["raw_size"] + tsz - 1) // tsz
-    rows = (n + meta["tiles_per_row"] - 1) // meta["tiles_per_row"]
-    return meta["tiles_per_row"] // 2, (rows + 1) // 2
-
-
-def cut_units(pix, width, height, ucols, urows):
-    """sheet pixels -> list of 16x16 pixel blocks (256 bytes each) in row-major unit order (index = row * ucols + col)."""
-    pix = bytes(pix) + bytes(width * (urows * UNIT - height))
-    out = []
-    for u in range(ucols * urows):
-        x0, y0 = (u % ucols) * UNIT, (u // ucols) * UNIT
-        out.append(b"".join(pix[(y0 + y) * width + x0:(y0 + y) * width + x0 + UNIT] for y in range(UNIT)))
-    return out
-
-
-def paste_units(units, ucols, urows):
-    """{index: 256 pixel bytes} -> (width, height, sheet pixels); missing units are all zero."""
-    width = ucols * UNIT
-    buf = bytearray(width * urows * UNIT)
-    for u, data in units.items():
-        x0, y0 = (u % ucols) * UNIT, (u // ucols) * UNIT
-        for y in range(UNIT):
-            o = (y0 + y) * width + x0
-            buf[o:o + UNIT] = data[y * UNIT:(y + 1) * UNIT]
-    return width, urows * UNIT, bytes(buf)
-
-
-def unit_name(b, idx):
-    return f"{UNIT_PREFIX[b.kind]}_{idx:04d}.png"
-
-
-def load_units(b, meta, strict=True):
-    """unit PNGs of a blob -> {index: pixels}.  strict: the set of absent (= all-zero) units must equal manifest `unit_blank`
-    (guards against a deleted file silently turning into zero graphics; `import` refreshes the field)."""
-    ucols, urows = unit_geometry(meta)
-    count = ucols * urows
-    if not b.art.is_dir():
-        raise ValueError("missing " + b.rel(b.art))
-    units = {}
-    for p in sorted(b.art.iterdir()):
-        if p.name == MANIFEST:
-            continue
-        m = UNIT_RE.match(p.name)
-        if not m or m.group(1) != UNIT_PREFIX[b.kind] or int(m.group(2)) >= count:
-            raise ValueError(f"unexpected file {b.rel(p)} (units are {UNIT_PREFIX[b.kind]}_0000..{UNIT_PREFIX[b.kind]}_{count - 1:04d}.png)")
-        w, h, pix = load_png(p)
-        if (w, h) != (UNIT, UNIT):
-            raise ValueError(f"{b.rel(p)}: PNG is {w}x{h}, expected {UNIT}x{UNIT} (dimensions are fixed)")
-        units[int(m.group(2))] = pix
-    if strict:
-        blank = set(range(count)) - set(units)
-        want = parse_ranges(meta.get("unit_blank", ""))
-        if blank != want:
-            diff = sorted(blank ^ want)
-            raise ValueError(f"unit files differ from manifest unit_blank at {ranges_text(diff)} (run `pngsync.py import` after adding/removing units)")
-    return units
-
-
-def write_units(b, raw, pal, transparent0):
-    """raw payload -> unit PNGs (all-zero units omitted); returns the manifest fields describing the layout."""
-    meta = {"bpp": 4, "tiles_per_row": 16, "raw_size": len(raw)}
-    ucols, urows = unit_geometry(meta)
-    w, h, pix = decode_sheet(raw, 4, 16)
-    units = cut_units(pix, w, h, ucols, urows)
-    b.art.mkdir(parents=True, exist_ok=True)
-    for p in b.art.iterdir():
-        if UNIT_RE.match(p.name):
-            p.unlink()
-    blank = set()
-    for i, u in enumerate(units):
-        if any(u):
-            save_png(b.art / unit_name(b, i), UNIT, UNIT, u, pal, transparent0)
-        else:
-            blank.add(i)
-    fields = {"unit_size": UNIT, "unit_prefix": UNIT_PREFIX[b.kind], "unit_columns": ucols, "unit_count": len(units)}
-    if blank:
-        fields["unit_blank"] = ranges_text(blank)
-    return fields
-
-
-# ----------------------------------------------------------------------------------------------------------------------
 # name tables <-> text
 # ----------------------------------------------------------------------------------------------------------------------
 def nametable_text(raw, columns=32):
@@ -369,13 +256,8 @@ class Blob:
         k = KINDS[kind]
         src, art = region_dirs(k, region)
         self.bin = self.root / src / f"{label}.bin"
-        self.units = kind in UNIT_PREFIX                       # tiles / sprites: a directory of unit PNGs + manifest.json
-        if self.units:
-            self.art = self.root / art / label
-            self.meta = self.art / "manifest.json"
-        else:
-            self.art = self.root / art / f"{label}{k.art_ext}"
-            self.meta = self.root / art / f"{label}.json"
+        self.art = self.root / art / f"{label}{k.art_ext}"      # tiles / sprites: the remainder sheet
+        self.meta = self.root / art / f"{label}.json"
         self.compressed = bool(k.compressed_prefix and label.startswith(k.compressed_prefix))
 
     def rel(self, p):
@@ -389,10 +271,7 @@ def blobs(root=ROOT, patterns=None, kind=None, from_sources=False, region="us"):
         if kind and name != kind:
             continue
         d = Path(root) / region_dirs(k, region)[1 if from_sources else 0]
-        if from_sources and name in UNIT_PREFIX:
-            found = [(p.parent.name, p) for p in sorted(d.glob("*/" + MANIFEST))]
-        else:
-            found = [(p.stem, p) for p in sorted(d.glob("*.json" if from_sources else "*.bin"))]
+        found = [(p.stem, p) for p in sorted(d.glob("*.json" if from_sources else "*.bin"))]
         for label, p in found:
             if label.startswith(k.prefixes):
                 if not patterns or any(fnmatch.fnmatchcase(label, pat) for pat in patterns):
@@ -516,7 +395,8 @@ def read_raw(b):
 
 
 def export_blob(b, raw=None, tail=None, old=None):
-    """.bin (or the given raw payload / tail) -> unit PNGs + manifest.json (tiles, sprites) or .map.txt + .json (name tables)."""
+    """.bin (or the given raw payload / tail) -> sidecar .json (tiles, sprites; the images come from composed.export_images)
+    or .map.txt + .json (name tables)."""
     if raw is None:
         raw, tail = read_raw(b)
     if old is None:
@@ -530,13 +410,8 @@ def export_blob(b, raw=None, tail=None, old=None):
         b.art.write_text(nametable_text(raw, columns), encoding="utf-8", newline="\n")
     else:
         conf, note = bpp_assessment(b, raw)
-        tpr = old.get("tiles_per_row", 16)
-        if tpr != 16:
-            raise ValueError(f"{b.label}: unit PNGs need tiles_per_row 16")
-        meta.update({"format": "snes_planar_tiles", "bpp": 4, "bpp_confidence": conf, "bpp_note": note, "tiles_per_row": tpr})
+        meta.update({"format": "snes_planar_tiles", "bpp": 4, "bpp_confidence": conf, "bpp_note": note, "tiles_per_row": 16})
         pf = palette_fields(b, old)
-        pal = load_view_palette(pf["palette"], 4, b.root) if pf.get("palette") else grayscale_palette(4)
-        meta.update(write_units(b, raw, pal, transparent0=(b.kind == "sprites" and "palette" in pf)))
         meta.update(usage(b))
         meta.update(split_tail(tail))
         meta.update(pf)
@@ -548,16 +423,16 @@ def export_blob(b, raw=None, tail=None, old=None):
     return meta
 
 
-def source_payload(b, meta, strict=True):
-    """unit PNGs / text -> raw payload bytes (before compression)."""
+def source_payload(b, meta=None):
+    """sources -> raw payload bytes (before compression): name table text, or the composed images + remainder sheet."""
     if b.kind == "tilemaps":
+        meta = meta or read_meta(b)
         raw = parse_nametable(b.art.read_text(encoding="utf-8"))
         if len(raw) != meta["raw_size"]:
             raise ValueError(f"{b.label}: {len(raw) // 2} words, expected {meta['raw_size'] // 2} (the size is fixed)")
         return raw
-    ucols, urows = unit_geometry(meta)
-    w, h, pix = paste_units(load_units(b, meta, strict), ucols, urows)
-    return encode_sheet(pix, w, h, meta["bpp"], meta["tiles_per_row"], meta["raw_size"])
+    import composed
+    return composed.raw_from_sources(b.root, b.region, b.label)
 
 
 def build_bin(b, meta=None):
@@ -578,6 +453,7 @@ def export_region_from_rom(a, root=ROOT):
     import regionbanks as RB
     roms = RB.find_roms(a.rom_dir)
     n = 0
+    labels = []
     for bank in RB.GFX_BANKS:
         for placed, us, cls in RB.classify(roms["US"], roms[a.region.upper()], bank, root):
             e = placed.entry
@@ -590,37 +466,59 @@ def export_region_from_rom(a, root=ROOT):
             b.bin.parent.mkdir(parents=True, exist_ok=True)
             b.bin.write_bytes(placed.data)
             export_blob(b)
+            labels.append(e.label)
             n += 1
+    tl = [l for l in labels if l.startswith("sCompressedTiles_")]
+    if tl:
+        export_composed(root, a.region, tl)
     print(f"exported {n} {a.region.upper()} specific blobs")
 
 
+def export_composed(root, region, labels=None):
+    """sidecars of all tile / sprite blobs of a release (from the generated .bin files) and, from them, the composed images
+    (screens, frames) and the remainder sheets.  Always the whole release: an image can show tiles of several blobs."""
+    import composed
+    composed.reset()
+    if labels is None:
+        labels = [b.label for b in blobs(root, None, None, from_sources=True, region=region) if b.kind != "tilemaps"]
+    for lab in labels:
+        export_blob(Blob("tiles" if lab.startswith("sCompressedTiles_") else "sprites", lab, root, region))
+    ctx = composed.get_ctx(root, region, labels)
+    raws = composed.load_sheets(ctx)
+    composed.export_images(ctx, raws)
+    composed.reset()
+    return len(labels)
+
+
 def cmd_export(a, root=ROOT):
-    if getattr(a, "region", "us") != "us":
-        if not getattr(a, "rom_dir", None) and not os.environ.get("HM_ROM_DIR"):
-            sel = blobs(root, a.label, a.kind, region=a.region)
-            for b in sel:
-                export_blob(b)
-            print(f"exported {len(sel)} blobs")
-            return 0
+    region = getattr(a, "region", "us")
+    if region != "us" and (getattr(a, "rom_dir", None) or os.environ.get("HM_ROM_DIR")):
         return export_region_from_rom(a, root) or 0
-    sel = blobs(root, a.label, a.kind, region=getattr(a, "region", "us"))
+    sel = blobs(root, a.label, a.kind, region=region, from_sources=region != "us")
     for b in sel:
-        export_blob(b)
-    print(f"exported {len(sel)} blobs")
+        if b.kind == "tilemaps":
+            export_blob(b)
+    n = export_composed(root, region) if any(b.kind != "tilemaps" for b in sel) else 0
+    print(f"exported {len(sel)} blobs ({n} tile / sprite blobs as composed images + remainder sheets)")
     return 0
 
 
 def cmd_build(a, root=ROOT):
     """PNG / text sources -> .bin files (the .bin files are generated, git-ignored build products)."""
+    import composed
+    composed.reset()
     sel = []
     for r in (REGIONS if getattr(a, "region", None) == "all" else [getattr(a, "region", None) or "us"]):
         sel += blobs(root, a.label, a.kind, from_sources=True, region=r)
     for b in sel:
-        data = build_bin(b)
+        try:
+            data = build_bin(b)
+        except ValueError as e:
+            raise SystemExit(f"pngsync build: {b.label}: {e}")
         b.bin.parent.mkdir(parents=True, exist_ok=True)
         if not b.bin.exists() or b.bin.read_bytes() != data:
             b.bin.write_bytes(data)
-    print(f"pngsync build: {len(sel)} blobs written from PNG/text sources")
+    print(f"pngsync build: {len(sel)} blobs written from the composed images, remainder sheets and text sources")
     if getattr(a, "region", None) == "all":
         print(f"pngsync build: {share_us_blobs(root)} shared blobs copied into the regional directories")
     return 0
@@ -648,13 +546,25 @@ def share_us_blobs(root=ROOT):
 
 
 def cmd_check(a, root=ROOT):
+    import composed
+    composed.reset()
     bad = 0
     region = getattr(a, "region", None) or "us"
     sel = blobs(root, a.label, a.kind, region=region, from_sources=region != "us")   # regional .bin dirs also hold copies of shared US blobs
+    if any(b.kind != "tilemaps" for b in sel):
+        claims = composed.claims_for(composed.get_ctx(root, region))
+        for msg in claims.errors:
+            print("FAIL " + msg)
+            bad += 1
+        if claims.nerr > len(claims.errors):
+            print(f"FAIL ... {claims.nerr - len(claims.errors)} more problems")
+            bad += 1
     for b in sel:
         try:
             if not b.art.exists() or not b.meta.exists():
                 raise ValueError("missing " + b.rel(b.art if not b.art.exists() else b.meta))
+            if b.kind != "tilemaps" and bad:
+                continue                                         # the composed images are inconsistent: reported above
             got = build_bin(b)
             want = b.bin.read_bytes()
             if got != want:
@@ -668,20 +578,17 @@ def cmd_check(a, root=ROOT):
             d = Path(root) / region_dirs(k, region)[1]
             if not d.exists():
                 continue
-            if k.name in UNIT_PREFIX:
-                have = {x.label for x in sel if x.kind == k.name}
-                for p in sorted(d.glob("*")):
-                    if p.is_dir() and p.name not in have:
-                        print(f"FAIL orphan unit directory without .bin: {p.relative_to(root)}")
-                        bad += 1
-                    elif not p.is_dir():
-                        print(f"FAIL stray file (sources are unit directories now): {p.relative_to(root)}")
-                        bad += 1
-                continue
             known = {(x.art.name) for x in sel if x.kind == k.name} | {x.meta.name for x in sel if x.kind == k.name}
             for p in sorted(d.glob("*")):
                 if p.suffix in (".png", ".json", ".txt") and p.name not in known:
                     print(f"FAIL orphan source without .bin: {p.relative_to(root)}")
+                    bad += 1
+        ctx = composed.get_ctx(root, region)
+        want = composed.expected_files(ctx)
+        for d in (composed.screens_dir(root, region),) + ((composed.frames_dir(root),) if region == "us" else ()):
+            for p in sorted(d.rglob("*")) if d.exists() else []:
+                if p.is_file() and p not in want:
+                    print(f"FAIL orphan composed image: {p.relative_to(root)}")
                     bad += 1
     print(f"pngsync check: {len(sel)} blobs, " + (f"{bad} FAILED" if bad else "all reproduce the committed .bin bit-exactly"))
     return 1 if bad else 0
@@ -710,20 +617,33 @@ def adjust_padding(b, delta):
 
 
 def cmd_import(a, root=ROOT):
-    sel = blobs(root, a.label, a.kind, region=getattr(a, "region", None) or "us")
+    import composed
+    composed.reset()
+    region = getattr(a, "region", None) or "us"
+    sel = blobs(root, a.label, a.kind, region=region)
+    edited = {}
+    if any(b.kind != "tilemaps" for b in sel):
+        ctx = composed.get_ctx(root, region)
+        raws = composed.load_sheets(ctx)
+        claims, sheets = composed.edit_claims(ctx, raws)
+        if claims.errors:
+            print("\n".join("FAIL " + m for m in claims.errors))
+            print(f"import: {claims.nerr} problems, nothing written")
+            return 1
+        edited = composed.apply_edits(ctx, claims, sheets, raws)
+        outside = sorted(set(edited) - {b.label for b in sel})
+        if outside:
+            raise SystemExit("import: the edited images also change " + ", ".join(outside) + " (not selected by --label/--kind)")
     changed = 0
     for b in sel:
         meta = read_meta(b)
         old = b.bin.read_bytes()
-        raw = source_payload(b, meta, strict=False)
-        if b.units:                                             # unit files may have been added / removed: refresh the manifest
-            ucols, urows = unit_geometry(meta)
-            blank = set(range(ucols * urows)) - set(load_units(b, meta, strict=False))
-            if blank != parse_ranges(meta.get("unit_blank", "")):
-                meta.pop("unit_blank", None)
-                if blank:
-                    meta["unit_blank"] = ranges_text(blank)
-                write_meta(b, meta)
+        if b.kind == "tilemaps":
+            raw = source_payload(b, meta)
+        elif b.label in edited:
+            raw = edited[b.label]
+        else:
+            continue
         if b.compressed:
             old_raw, used = C.decompress(old + PAD)
             if old_raw == raw:
@@ -757,6 +677,8 @@ def cmd_import(a, root=ROOT):
             write_meta(b, meta)
         changed += 1
         print(f"imported {b.label}: {len(old)} -> {len(new)} bytes")
+    if changed:                                                   # other images show the changed tiles / blocks too: re-render everything
+        export_composed(root, region)
     print(f"import: {changed} of {len(sel)} blobs changed")
     return 0
 
@@ -889,13 +811,12 @@ def cmd_preview(a, root=ROOT):
     return 0
 
 
-def render_unit_sheet(b, scale=1, grid=False):
-    """sheet of a tile / sprite blob assembled from its unit PNGs, in the blob's viewing palette (RGBA; index 0 transparent
-    for sprites).  Viewing aid only (written to build/); blank units stay transparent / colour 0."""
+def render_built_sheet(b, scale=1, grid=False):
+    """whole sheet of a tile / sprite blob built from the composed images and the remainder sheet, in the blob's viewing
+    palette (RGBA; index 0 transparent for sprites).  Viewing aid only (written to build/)."""
     from PIL import Image
     meta = read_meta(b)
-    ucols, urows = unit_geometry(meta)
-    w, h, pix = paste_units(load_units(b, meta), ucols, urows)
+    w, h, pix = decode_sheet(source_payload(b, meta), 4, 16)
     img = Image.frombytes("P", (w, h), pix)
     pal = load_view_palette(meta["palette"], 4, b.root) if meta.get("palette") else grayscale_palette(4)
     img.putpalette([c for rgb in pal for c in rgb])
@@ -907,7 +828,7 @@ def render_unit_sheet(b, scale=1, grid=False):
     if grid:
         from PIL import ImageDraw
         d = ImageDraw.Draw(rgba)
-        step = UNIT * scale
+        step = (16 if b.kind == "sprites" else 8) * scale
         for x in range(0, w * scale, step):
             d.line([(x, 0), (x, h * scale)], fill=(255, 0, 255, 160))
         for y in range(0, h * scale, step):
@@ -916,17 +837,19 @@ def render_unit_sheet(b, scale=1, grid=False):
 
 
 def cmd_sheet(a, root=ROOT):
-    """render sheets from the unit PNGs for viewing (build/gfx_sheets/<region>/<label>.png)."""
+    """render the whole sheets for viewing (build/gfx_sheets/<region>/<label>.png)."""
+    import composed
+    composed.reset()
     region = getattr(a, "region", None) or "us"
     out = Path(a.out) if a.out else Path(root) / "build" / "gfx_sheets" / region
     out.mkdir(parents=True, exist_ok=True)
     n = 0
     for b in blobs(root, a.label, a.kind, from_sources=True, region=region):
-        if not b.units:
+        if b.kind == "tilemaps":
             continue
-        render_unit_sheet(b, a.scale, a.grid).save(out / f"{b.label}.png", optimize=True)
+        render_built_sheet(b, a.scale, a.grid).save(out / f"{b.label}.png", optimize=True)
         n += 1
-    print(f"wrote {n} sheets to {out} (assembled from the unit PNGs; derived, not committed)")
+    print(f"wrote {n} sheets to {out} (assembled from the composed images; derived, not committed)")
     return 0
 
 
@@ -957,4 +880,5 @@ def main(argv=None):
 
 
 if __name__ == "__main__":
+    sys.modules.setdefault("pngsync", sys.modules["__main__"])      # composed.py imports this file as `pngsync`
     sys.exit(main())

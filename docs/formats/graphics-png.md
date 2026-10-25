@@ -1,55 +1,66 @@
 # Graphics as PNG (editable sources)
 
-Every graphic blob of the US ROM that can be shown as an image lives in the repository as a directory of **indexed 16x16 PNG units**
-(tile graphics, sprite banks) or as a **text file** (BG name tables). These files are the source of truth for graphics mods;
-the binary `assets/gfx/{tiles,sprites,characters}/*.bin` files that the assembler `incbin`s are **generated** from them
-(`tools/build_assets.py`, git-ignored, never committed) and must stay bit-identical to the original ROM data. Converter: `tools/gfx/pngsync.py`; CI runs `pngsync.py check` and `tests/test_pngsync.py`.
+Every graphic blob that can be shown as an image lives in the repository as **composed PNG images** (tile graphics, sprite banks) or as a
+**text file** (BG name tables). These files are the source of truth for graphics mods; the binary `assets/gfx/{tiles,sprites,characters}/*.bin`
+files that the assembler `incbin`s are **generated** from them (`tools/build_assets.py`, git-ignored, never committed) and must stay
+bit-identical to the original ROM data. Converter: `tools/gfx/pngsync.py` (+ `tools/gfx/composed.py`); CI runs `pngsync.py check` and `tests/test_pngsync.py`.
 
 ## What is converted (151 blobs)
 
 | Kind | Blobs | `.bin` (included by asm) | Editable source | Stored in the ROM as |
 |---|---|---|---|---|
-| `tiles` | 77 | `assets/gfx/tiles/sCompressedTiles_*.bin` | `assets/gfx/png/tiles/<label>/t_NNNN.png` (+ `manifest.json`) | LZSS, 8192 bytes decompressed (256 4bpp tiles) |
-| `sprites` | 10 | `assets/gfx/sprites/Sprites_88..91*.bin` | `assets/gfx/png/sprites/<label>/s_NNNN.png` (+ `manifest.json`) | raw, 32768 bytes (1024 4bpp tiles) per bank |
+| `tiles` | 77 | `assets/gfx/tiles/sCompressedTiles_*.bin` | `assets/gfx/png/screens/*.png` (+ remainder sheet `png/tiles/<label>.png`) | LZSS, 8192 bytes decompressed (256 4bpp tiles) |
+| `sprites` | 10 | `assets/gfx/sprites/Sprites_88..91*.bin` | `assets/gfx/png/frames/obj_XXXX/f_PPPP.png` (+ remainder sheet `png/sprites/<label>.png`) | raw, 32768 bytes (1024 4bpp tiles) per bank |
 | `tilemaps` | 64 | `assets/gfx/characters/sCompressedTilemap_*.bin` (60, LZSS) and `sCharactermap_*.bin` (4, raw) | `assets/gfx/tilemaps/<label>.map.txt` | BG name tables (not graphics) |
 
-Every tile/sprite blob has a `manifest.json` in its directory, every name table a `<label>.json` next to its text file (the sidecar). Palettes were already PNG/JSON before
+Every blob has a `<label>.json` next to its remainder sheet / text file (the sidecar). Palettes were already PNG/JSON before
 (`assets/gfx/palettes/`), fonts are per-glyph PNGs (`assets/fonts/`, `docs/formats/font.md`).
 
-## Source units: one PNG per 16x16 block
+## Composed images: edit whole pictures, the build splits them into tiles and sprite blocks
 
-A tile or sprite blob is not one sheet PNG but a **directory of individual 16x16 PNGs** plus a manifest:
+The tile data of the game is only meaningful through the structures that use it, so the editable sources are the *pictures* those structures
+draw, not the raw sheets:
 
 ```
-assets/gfx/png/tiles/sCompressedTiles_92D3AB/    manifest.json, t_0000.png ... t_0063.png   (64 units = 8192 bytes)
-assets/gfx/png/sprites/Sprites_888000/           manifest.json, s_0000.png ... s_0255.png   (256 units = 32768 bytes)
-assets/gfx/png/<eu|de|jp>/tiles/<label>/         the same for the blobs that differ from US
+assets/gfx/png/frames/obj_0004/f_A53D.png         object animation frame (banks $86/$87, 2,621 images; unreferenced frames in frames/unreferenced/)
+assets/gfx/png/screens/sCompressedTilemap_A4CFAB.png   BG name table rendered with its tile sets (77 US + 24 regional images)
+assets/gfx/png/sprites/Sprites_888000.png          remainder sheet of a sprite bank   (10)
+assets/gfx/png/tiles/sCompressedTiles_92D3AB.png   remainder sheet of a tile blob     (77)
+assets/gfx/png/<eu|de|jp>/{screens,tiles}/         the same for the blobs that differ from US
 ```
 
-* **Unit = 2x2 tiles, 16x16 px.** Index = row-major position in the 128 px wide sheet (8 units per row): `index = (y / 16) * 8 + x / 16`.
-  * *Sprite banks*: the unit **is** what the engine addresses. A tile id selects `sheet = $88 + (id >> 8)`, block `(id >> 6) & 3`,
-    `n = id & $3F` (`docs/formats/sprite-assembly.md` section 1.1), i.e. the 16x16 block at `x = (n & 7) * 16`, `y = block * 128 + (n >> 3) * 16`;
-    that is unit `id & $FF` of the bank. `s_0000.png` of `Sprites_898000` is tile id `$0100`.
-  * *Tile blobs*: the BG name tables address single 8x8 characters (entry = tile 0-9 | palette | priority | flip). An analysis of all 64 tables
-    found no consistent 2x2 grouping (in 62 of 64 tables fewer than 40 % of the aligned 2x2 groups are `t, t+1, t+16, t+17`, the farm map 22 %; the maps use 8x8 characters
-    freely), so the engine-native unit would be the 8x8 tile. That would be about 22,100 non-blank PNGs for the tile blobs alone; the repository
-    uses **16x16 cells (2x2 tiles) as the storage granularity** instead (4,430 + 1,257 regional files). The cell only decides how the sheet is
-    cut into files; edit across cell borders freely, the pixels of tile `T` are always the 8x8 area `(T % 16) * 8, (T / 16) * 8` of the sheet,
-    i.e. cell `(T / 32) * 8 + (T % 16) / 2`, inside that cell at tile column `T & 1`, tile row `(T >> 4) & 1`.
-* **Naming**: `t_NNNN.png` (tiles) / `s_NNNN.png` (sprites), four decimal digits, directory = blob label. Deterministic, no content hashing.
-* **Blank units are omitted.** A unit whose 4 tiles are all zero is not stored; the manifest field `unit_blank` records the omitted indices
-  (e.g. `"0-3,7,12-15"`). `build`/`check` require that the set of missing files equals `unit_blank`, so an accidentally deleted file is an error,
-  not a silent zero tile. To paint into a blank unit just add the file (any 16x16 indexed PNG named like the others); `pngsync.py import` refreshes `unit_blank`.
-  Identical units are **not** de-duplicated, not within a blob and not across blobs.
-* **PNG content**: indexed (mode P), 16x16, pixel value = SNES colour index (0-15), PLTE = the real colours of the blob's palette row, sprite units
-  have index 0 transparent (tRNS). The PLTE is identical in all units of a blob and ignored on import.
-* **manifest.json** = the old sidecar plus the layout fields: `unit_size` (16), `unit_prefix` (`t`/`s`), `unit_columns` (8), `unit_count`, `unit_blank`;
-  `tiles_per_row` (16), `raw_size`, `compression`, `bpp`, `tail_hex`/`tail_zeros`, palette keys as before.
-* **Build**: `pngsync.py build` pastes the units into the sheet (absent units = zeros), encodes the 4bpp planar tiles, cuts the payload to `raw_size`,
-  LZSS-compresses (tile blobs) and appends the manifest tail bytes, exactly as before.
-* **Viewing**: `python3 tools/gfx/pngsync.py sheet [--label PAT] [--region R] [--scale N] [--grid]` assembles the sheets from the units into
-  `build/gfx_sheets/<region>/<label>.png` (derived, never committed); `pngsync.py preview` renders name tables and game-colour sheets from the `.bin` files.
-  The assembled object frames (animations) are rendered on demand by `tools/objects/spriteexport.py` into `build/sprites_assembled/`.
+* **Sprite frames** (`frames/`): the components of a frame (`tile id, x, y, attr`, from `assets/objects/`) drawn as the engine draws them (see
+  `sprite-assembly.md`): 16x16 blocks, attribute bits 4/5 = vertical / horizontal flip, bits 0-2 = OBJ palette row, the last component on top.
+  Pixel value = `(OBJ palette row << 4) | colour`, colour 0 = transparent; PLTE = day OBJ palette `sPalette_0x6F`, image size = bounding box of the
+  components. One file per distinct frame address of an object.
+* **Screens** (`screens/`): a name table (`assets/gfx/tilemaps/*.map.txt`) rendered with the tile blobs loaded next to it by the map table
+  (`tilemaps.asm`, character base = lowest tile-set VRAM address, which reproduces the farm exactly), 8x8 per entry with flips; pixel value =
+  `(entry palette << 4) | colour`; PLTE = the day palette of the first map using that tile-set combination. A name table that several maps show with different
+  tile sets (seasons) has one image per combination: `<table>__<first map>.png`. Tables without a loadable tile set have no image.
+* **Remainder sheets** (`tiles/<label>.png`, `sprites/<label>.png`): the 128 px wide sheet of the blob (16 tiles per row) containing **only the
+  pixels no composed image determines**, 0 everywhere else: tiles that no name table shows (e.g. other seasons' tiles, fonts, overlays), sprite
+  pixels hidden under other components, sprite blocks no frame uses. About 300,000 of the 1.26 million tile pixels and 12,700 of 655,000 sprite
+  pixels are in remainder sheets (see "Limits").
+* **Which pixels an image determines.** A name table cell shows one whole tile, so it determines all 64 pixels of the tile it refers to
+  (un-flipped according to its flip bits). A sprite component pixel is determined if no other component of the same frame covers it (a
+  covered pixel could belong to either component, or be transparent). The build reads every image, derives these claims and takes all
+  remaining pixels from the remainder sheet.
+* **Palettes and flips are not editable from the image.** A tile may be shown with different palette rows and flips in different cells;
+  the image pixel carries the row used there, and `import` checks that every non-transparent pixel still uses that row (the row is the name
+  table entry / sprite attribute, i.e. data outside the tile). Changing the colour *index* is what edits the tile. Flips are reversed
+  correctly when the pixels are written back.
+* **Contradictions.** Tiles and sprite blocks are shared: the same tile appears in many cells / name tables / seasons, the same sprite
+  block in many frames. If two images disagree about the same pixel, `check` / `build` / `import` stop with a message that names both images,
+  the tile / sprite id and the pixel. Workflow for shared graphics: edit one image, run `pngsync.py import`: it compares the images with the render of the
+  current `.bin` (the *baseline*), turns only the differing pixels into edits, refuses contradicting edits, writes the new `.bin` and re-renders **all** images, so
+  every other picture that shows the changed tile follows. (Editing two pictures of the same tile in the same way is fine; in different ways is the error.)
+* **Sprite edits on overlap.** A changed pixel is assigned to the topmost component whose block pixel is set there (or, if the pixel was transparent,
+  to the topmost component covering it). A pixel that lies in the bounding box but not under any 16x16 component is refused.
+* **Build** (`pngsync.py build`, no baseline): composed images + remainder sheets -> sheet -> 4bpp planar tiles -> LZSS (tile blobs) + tail bytes from the
+  sidecar -> `.bin`. A remainder pixel that an image also defines must be 0 (otherwise the edit would be silently ignored): error.
+* **Viewing**: `pngsync.py sheet [--label PAT] [--region R] [--scale N] [--grid]` builds the whole sheets into `build/gfx_sheets/<region>/`
+  (derived, never committed); `pngsync.py preview` renders name tables and game-colour sheets from the `.bin` files into `build/gfx_preview/`;
+  `tools/objects/spriteexport.py` renders contact sheets and an index of all frames into `build/sprites_assembled/`.
 
 Findings made while building this:
 * The three `sCharactermap_*` blobs in banks $A1-$A3 are **not** character graphics but raw (uncompressed) name tables of
@@ -66,25 +77,25 @@ python3 tools/gfx/pngsync.py import --label sCompressedTiles_92D3AB    # after e
 python3 tools/build.py                                                    # regenerates assets and rebuilds; ROM hash changes (intended)
 ```
 
-1. Edit the unit PNGs `assets/gfx/png/tiles/<label>/t_NNNN.png` (or `sprites/<label>/s_NNNN.png`, or the name table text; render a whole sheet for orientation with `pngsync.py sheet --grid`) with any editor that preserves an
+1. Edit a composed image (`frames/obj_XXXX/f_PPPP.png`, `screens/<table>.png`), a remainder sheet or the name table text (render a whole sheet for orientation with `pngsync.py sheet --grid`) with any editor that preserves an
    **indexed palette** (Aseprite, GIMP "indexed", Grafx2). Do not convert to RGB: the pixel value *is* the SNES colour index.
 2. `pngsync.py import [--label PAT] [--kind K]` re-encodes blobs whose source changed (PAT is an
    `fnmatch` pattern, repeatable; default all), updating the generated `.bin`, the sidecar tail data and, with `--allow-resize`, the bank padding. Unchanged blobs are not touched.
 3. Rebuild with `tools/build.py` and test. Update `tests/expected.json` only for deliberate modifications.
-4. Commit the unit PNGs, manifest (and the bank `.asm` if the padding changed); the `.bin` files are not committed.
+4. Commit the changed images (they are rewritten by `import` so that all pictures agree), sidecars (and the bank `.asm` if the padding changed); the `.bin` files are not committed.
 
-`pngsync.py export` regenerates unit PNGs/text/manifest from the generated `.bin` files (only needed after changing the pipeline); `pngsync.py build` writes the `.bin` files from the sources.
+`pngsync.py export` regenerates the images / sidecars / text from the generated `.bin` files (only needed after changing the pipeline); `pngsync.py build` writes the `.bin` files from the sources.
 `pngsync.py preview` renders the name tables together with their tile sets into `build/gfx_preview/` in game colours (the palette bits of
 every entry pick the sub-palette, the palette is the day palette of the first map that uses the table; character base = lowest
 tile-set VRAM address, which reproduces the farm map exactly) and every tile sheet / sprite bank with the right sub-palette per
 8x8 tile / 16x16 sprite into `build/gfx_preview/sheets/`. Previews are derived and not committed.
 
 ### Constraints
-* **Dimensions are fixed.** Every unit is 16x16; a blob has exactly `unit_count` unit slots (8192-byte tile blobs 64 = 128x128 px sheet,
-  sprite banks 256 = 128x512 px). Units cannot be added beyond that or renamed. Name tables keep their number of words.
+* **Dimensions are fixed.** Frame images keep the bounding box of the components, screens `columns x rows` cells of 8 px, remainder sheets 128 x
+  (tile rows x 8) px (8192-byte tile blobs 128x128, sprite banks 128x512). Name tables keep their number of words.
 * **Pixel values stay below 2^bpp** (4bpp: 0-15). `import`/`build` name the offending pixel otherwise. The 16 colours of the
   PNG palette (PLTE) are the **real colours** of the sub-palette the sheet is shown with in the game (primary palette per
-  blob: `assets/gfx/palette_map.json`, evidence in [`graphics-palettes.md`](graphics-palettes.md)); sprite units also mark index 0
+  blob: `assets/gfx/palette_map.json`, evidence in [`graphics-palettes.md`](graphics-palettes.md)); sprite images also mark index 0
   transparent (tRNS). They are only a viewing aid: changing the PLTE has no effect on the ROM, it is ignored on import (every
   `.bin` is rebuilt from the pixel indices alone; `pngsync.py check` and `tests/test_pngsync.py` verify this).
   A sheet that the game shows with several sub-palettes (e.g. a map tile set) displays its most used one; the others are listed in
@@ -98,12 +109,11 @@ tile-set VRAM address, which reproduces the farm map exactly) and every tile she
 * Name tables: `.map.txt` has `columns` 16-bit hex words per row (32; 128 for `sCharactermap_*`), a blank line after every
   32 rows, no comments. Entry = tile 0-9, palette 10-12, priority 13, H flip 14, V flip 15.
 
-### Sidecar / manifest (`manifest.json` of tile and sprite blobs, `<label>.json` of name tables)
+### Sidecar (`<label>.json`)
 | Key | Meaning |
 |---|---|
 | `bin`, `kind`, `compression` (`lzss`/`none`), `raw_size` | where the bytes go and the decompressed size |
 | `bpp`, `bpp_confidence`, `bpp_note`, `tiles_per_row` | how the sheet is laid out (tiles only) |
-| `unit_size`, `unit_prefix`, `unit_columns`, `unit_count`, `unit_blank` | unit layout: 16x16 units, file name prefix, units per sheet row and in total, indices of the omitted all-zero units (tiles/sprites only) |
 | `columns`, `entries` | text layout (name tables only) |
 | `tail_hex` / `tail_zeros` | bytes of the label span after the compressed stream, preserved exactly: 1-2 zero bytes on 9 blobs |
 | `vram_word_dest`, `map_entries`, `first_map`, `tile_sets` | informational, taken from the map table in `src/code/bank_80/tilemaps.asm` |
@@ -117,6 +127,22 @@ plane correlation (non-zero pixels of planes 0-1 and 2-3 overlap), and the rende
 checked by eye (reads correctly as 4bpp, garbled as 2bpp) and the note says so. Being wrong would only change how the
 PNG looks: the conversion is lossless for any bytes and any bpp.
 
+## Limits (what cannot be changed without changing the ROM layout)
+
+* **Pixel positions are the engine's.** An image can only change colour indices of existing tile pixels. Moving a graphic to another tile, adding tiles, using
+  a different flip or a different palette row for a cell, or re-arranging a frame (components, offsets, flips, attribute bytes) means editing the name table
+  text / `assets/objects/` data, not the image. Blob sizes are fixed (tile blobs always 256 tiles); compressed tile blobs that grow need `--allow-resize`
+  and bank space (`Padding_*`).
+* **Tiles shared with the other release / with sprites are read-only in screens.** A regional screen that shows a tile of a blob shared with the US
+  release, and any cell showing a sprite-bank tile, can be rendered but not edited there (error from `import`); edit it in the US screen / frame.
+* **Screens only cover tiles that a name table shows.** Everything else (tiles of blobs no map table row pairs with a name table, fonts, weather overlays, kanji,
+  tiles used only by code-built screens) is edited in the remainder sheets, which show only those pixels. A name table whose tile sets cannot be found
+  in the map table has no image. After changing a `.map.txt`, run `pngsync.py export` (re-render the images from the `.bin`; edit the name table and the pixels in separate steps).
+* **Hidden sprite pixels.** Pixels that two components of a frame both cover, or that only transparent frame positions would show, are not visible in any frame
+  image; they stay in the remainder sheet (an edit of a *visible* overlapped pixel is accepted, see above). Sprite blocks that no frame uses live in the remainder sheet too.
+* **Shared blocks propagate.** Changing a shared block changes every frame / screen that shows it; that is intended and is why `import` re-renders all images.
+* **BG3 / 2bpp layers.** All blobs are read as 4bpp; screens of 2bpp BG layers (text) show the 4bpp reading of the tiles. The round trip is lossless anyway.
+
 ## Not converted yet
 
 | Item | Why / plan |
@@ -125,11 +151,11 @@ PNG looks: the conversion is lossless for any bytes and any bpp.
 | Palettes | already PNG + JSON + `.pal` (`assets/gfx/palettes/`) |
 | Region-specific graphics of EU, DE, JP | only the US ROM is in the repository. `docs/regions.md` shows graphics that differ per language in banks $94, $95 (JP), $9A, $9B, $9E (JP), $9F, $A5, $A6 and palettes $A9 (JP). They become `assets/gfx/png/<kind>/<region>/` entries in the region unification step (the sidecar format already fits; labels would get a region suffix). |
 | Title/menu/text graphics inside code or object data | graphics not stored as the blobs above (e.g. anything generated at run time, object animation data in banks $86/$87 which only references sprite tiles) have no image form |
-| Per-object / per-animation sprite sheets | derived output only (not an editable source, not committed): `tools/objects/spriteexport.py` renders every object frame into `build/sprites_assembled/` on demand, see `docs/formats/sprite-assembly.md`; PNG -> tiles re-import of assembled frames is future work |
+| Per-object / per-animation sprite images | now the editable sprite source (`assets/gfx/png/frames/`); `tools/objects/spriteexport.py` additionally renders contact sheets / an index into `build/sprites_assembled/`, see `docs/formats/sprite-assembly.md` |
 | Time-of-day palettes | PNGs and previews use the day slot of the first area using a blob; the other slots of every area are in `palette_map.json` (`areas`) |
 
 ## Regional versions
 
-Blobs that differ in the EU, DE or JP release have their own sources next to the shared ones: `assets/gfx/png/<region>/tiles/<label>/` (unit PNGs + `manifest.json`),
+Blobs that differ in the EU, DE or JP release have their own sources next to the shared ones: `assets/gfx/png/<region>/tiles/<label>.png` (+ `.json`) and `assets/gfx/png/<region>/screens/*.png`,
 `assets/gfx/tilemaps/<region>/<label>.map.txt`. The label is the US label of the corresponding blob. Use `pngsync.py export|import|check|build --region eu|de|jp`;
 the generated `.bin` lands in `assets/gfx/{tiles,characters}/<region>/`. See `docs/regions.md`, "Regional data banks".

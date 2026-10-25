@@ -130,21 +130,23 @@ def test_export_check_and_tamper():
         shutil.rmtree(tmp)
 
 
-def test_sheets_read_unit_pngs():
-    """Sheets() cuts the 16x16 block of an id from the unit PNGs; it must equal the block of the sheet decoded from the
-    sources (units pasted into the 128x512 sheet, tile id -> position formula of the engine)."""
-    import pngsync as PS
+def test_frames_are_the_composed_sources():
+    """the committed frame PNGs (assets/gfx/png/frames, the editable sprite sources written by pngsync.py) show exactly what
+    spriteexport renders for the same frame (pixels; the palette is not compared)."""
+    od_data = S.ObjectData()
     sh = S.Sheets()
-    for bank in (0, 3, 9):
-        blob = PS.Blob("sprites", "Sprites_%02X8000" % (0x88 + bank))
-        meta = PS.read_meta(blob)
-        raw = PS.source_payload(blob, meta)
-        w, h, pix = PS.decode_sheet(raw, 4, 16)
-        for tid in (bank * 256 + k for k in (0, 1, 8, 63, 64, 130, 255)):
-            _, x0, y0 = S.Sheets.locate(tid)
-            expect = [bytes(pix[(y0 + y) * w + x0:(y0 + y) * w + x0 + 16]) for y in range(16)]
-            check(sh.sprite16(tid) == expect, "sprite id %04X: unit PNG block differs from the sheet position" % tid)
-    check(sh.sprite16(0x0A00) == [bytes(16)] * 16, "ids beyond bank $91 are empty")
+    n = 0
+    for idx in (0, 1, 4, 0x95, 0x18B, 0x2F6):
+        bank, _ = od_data.list_ptr(idx)
+        for fp in sorted({fp for fp, _t in od_data.steps(idx)}):
+            comps = od_data.frame(bank, fp)
+            if not comps:
+                continue
+            w, h, ox, oy, pix = S.render_frame(sh, comps)
+            pw, ph, ppix = S.read_pixels(ROOT / "assets/gfx/png/frames" / ("obj_%04X" % idx) / ("f_%04X.png" % fp))
+            check((pw, ph) == (w, h) and ppix == pix, "frame %04X/%04X: source PNG differs from the render" % (idx, fp))
+            n += 1
+    check(n > 10, "compared %d frames" % n)
 
 
 def test_counts():
