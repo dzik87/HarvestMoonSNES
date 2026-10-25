@@ -33,8 +33,8 @@ samples, text songs, a text SFX block and an SPC700 assembler listing of the dri
 ## 2. ROM layout of the audio blobs
 
 Generated with `python tools/audio/audio_map.py` (Markdown output). Addresses are computed from the order and sizes of
-the `incbin` lines in `src/data/audio/bank_*.asm`; sizes from the generated `assets/audio/*.bin` (run
-`python tools/build_assets.py` first; the tables of section 3/7 come from the generated `src/data/audio/audio_tables.inc`).
+the `incbin` lines in the generated `build/gen/audio/bank_*.asm` (layout: `assets/audio/banks.json`); sizes from the generated `assets/audio/*.bin` (run
+`python tools/build_assets.py` first; the tables of section 3/7 come from the generated `build/gen/audio/audio_tables.inc`).
 There are 65 blobs (not 71). Every blob is referenced from code, none is unused. [C]
 
 | Label | ROM | Size | Role | Details |

@@ -11,7 +11,8 @@ Sources (committed)                                   -> generated, git-ignored 
   assets/objects/bank_8{6,7}/ (bank.json, objects/*.json, frames.txt) -> build/gen/objects/bank_8{6,7}.asm (tools/objects/objdata.py build)
   assets/maps/*.json                                   -> build/gen/maps/bank_A7.asm                     (tools/maps/objmap.py build)
 
-Audio blobs (assets/audio/*.bin) have no editable source format yet and stay committed as binaries.
+  assets/audio/{samples,tracks,sfx,driver}/*, audio.json, banks.json -> assets/audio/*.bin + build/gen/audio/{bank_XX.asm,audio_tables.inc} (tools/audio/audioconv.py build)
+
 `tools/build.py` runs this script before asar; run it by hand before the tests/checks that read the generated files.
 The generated files are byte-for-byte what the original ROM contains (the ROM hash check in CI proves it).
 """

@@ -3,7 +3,7 @@
 
 Groups (source dir -> asset dir):
   (the graphics banks are generated from assets/gfx/banks.json by tools/data/gfxbanks.py and no longer handled here)
-  audio       src/data/audio/bank_*.asm           -> assets/audio/<label>.bin           (SPC700 program/data)
+  (the audio banks are generated from assets/audio/banks.json by tools/audio/audioconv.py; this module keeps BANK for the tests)
 
 Every label becomes one .bin; the generated .asm keeps ORG and labels (so code references are unchanged) and
 includes each file with incbin. Zero-only Padding_* labels become `fill N`.
@@ -16,9 +16,7 @@ import argparse, os, re, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-GROUPS = {
-    "audio": (ROOT / "src/data/audio", ROOT / "assets/audio"),
-}
+GROUPS = {}
 BANK = 0x8000
 
 
