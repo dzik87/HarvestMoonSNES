@@ -1,5 +1,5 @@
 {
-"comment": "JP glyph ids -> characters, from the project's extract_dialogs.py; first occurrence of each character only",
+"comment": "JP glyph ids -> characters, from the project's extract_dialogs.py; first occurrence of each character only; $00B1 = full-width blank (16 px, U+3000), $0270 = half-width blank (8 px, ASCII space)",
 "glyphs": {
 "0000": "あ",
 "0001": "い",
@@ -177,6 +177,7 @@
 "00AE": "→",
 "00AF": "…",
 "00B0": "‥",
+"00B1": "　",
 "00B2": "0",
 "00B3": "1",
 "00B4": "2",
@@ -607,6 +608,7 @@
 "026D": "恋",
 "026E": "誕",
 "026F": "減",
+"0270": " ",
 "0271": "兄",
 "0272": "服",
 "0273": "耳",
