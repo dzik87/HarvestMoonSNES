@@ -6,9 +6,9 @@
   confidence: confirmed
   length_bytes: 3
   params:
-    - {name: pNextAction, offset: 1, size: 2, type: script_ptr, meaning: "Mlodsze 16 bitow adresu nastepnej komendy. Bank (ptrAIActionData+2) pozostaje bez zmian, wiec skok jest mozliwy tylko w obrebie biezacego banku skryptow ($B3/$B4/$B5)."}
-  summary: "Bezwarunkowy skok do komendy pNextAction w biezacym banku skryptu."
-  details: "Handler przesuwa ptrAIActionData o 1 (na argument), czyta slowo 16-bit i zapisuje je do ptrAIActionData (tylko 2 mlodsze bajty, bajt banku nietkniety). Nie zmienia licznika +$10 obiektu, wiec petla fAI_HowToPlaySetup wykonuje kolejna komende w tej samej klatce (nie blokuje). Uwaga: petla Jump->Jump bez komendy blokujacej (Wait/0x1F/dialog) zawiesilaby gre, dlatego w skryptach 'pollingi' zawsze zawieraja komende, ktora inkrementuje +$10 (np. 0x1F)."
+    - {name: pNextAction, offset: 1, size: 2, type: script_ptr, meaning: "Low 16 bits of the address of the next command. The bank (ptrAIActionData+2) remains unchanged, so the jump is only possible within the current script bank ($B3/$B4/$B5)."}
+  summary: "Unconditional jump to command pNextAction in the current script bank."
+  details: "The handler advances ptrAIActionData by 1 (to the argument), reads a 16-bit word and stores it to ptrAIActionData (only the 2 low bytes, the bank byte is untouched). It does not change the object's +$10 counter, so the fAI_HowToPlaySetup loop executes the next command in the same frame (does not block). Note: a Jump->Jump loop without a blocking command (Wait/0x1F/dialog) would hang the game, which is why 'polling' loops in scripts always contain a command that increments +$10 (e.g. 0x1F)."
   ram_touched: [ptrAIActionData]
   calls: []
   open_questions: null
@@ -21,12 +21,12 @@
   confidence: confirmed
   length_bytes: 3
   params:
-    - {name: nTime, offset: 1, size: 2, type: n16, meaning: "Liczba wywolan petli AI (fAI_HowToPlaySetup, wywolywanej raz na klatke z petli glownej) przez ktora skrypt tego obiektu czeka. Wartosc 0 = brak oczekiwania. Typowe: 1, 60, 180, 240."}
-  summary: "Wstrzymuje wykonywanie skryptu danego obiektu AI na nTime klatek."
-  details: "Zapisuje nTime (16-bit) do pola +$10 struktury obiektu AI wskazywanej przez ptrAIUnknown0xCC (strcAIUnknown.unk10, licznik oczekiwania). Petla fAI_HowToPlaySetup przy kazdym wywolaniu dekrementuje +$10 dla aktywnych obiektow i wykonuje komendy dopoki +$10 = 0; po wykonaniu komendy z +$10 != 0 obiekt przestaje byc przetwarzany w tej klatce. Dzieki temu kolejna komenda wykona sie nTime klatek po Wait (Wait(1) = pominiecie jednej klatki). Skrypt czeka tylko dla biezacego obiektu (kazdy obiekt AI ma wlasny licznik); petla AI jest pomijana calkowicie gdy strcDialogDisplay.mapUnk19A == 2 lub 6 (dialog) albo gdy akcja gracza = PACTION_JUMP."
+    - {name: nTime, offset: 1, size: 2, type: n16, meaning: "Number of calls of the AI loop (fAI_HowToPlaySetup, called once per frame from the main loop) for which the script of this object waits. A value of 0 = no waiting. Typical: 1, 60, 180, 240."}
+  summary: "Suspends execution of the script of the given AI object for nTime frames."
+  details: "Stores nTime (16-bit) to field +$10 of the AI object structure pointed to by ptrAIUnknown0xCC (strcAIUnknown.unk10, wait counter). On each call, the fAI_HowToPlaySetup loop decrements +$10 for active objects and executes commands while +$10 = 0; after a command is executed with +$10 != 0, the object is no longer processed in that frame. As a result, the next command executes nTime frames after Wait (Wait(1) = skipping one frame). The script waits only for the current object (each AI object has its own counter); the AI loop is skipped entirely when strcDialogDisplay.mapUnk19A == 2 or 6 (dialog) or when the player action = PACTION_JUMP."
   ram_touched: [ptrAIActionData, ptrAIUnknown0xCC+$10]
   calls: []
-  open_questions: "Jednostka czasu to wywolania petli AI, nie jest potwierdzone, ze petla jest wolana dokladnie raz na klatke we wszystkich 10 miejscach wywolania fAI_HowToPlaySetup (core.asm, routines.asm, main_loop.asm, interaction_data.asm)."
+  open_questions: "The time unit is AI loop calls; it is not confirmed that the loop is called exactly once per frame at all 10 call sites of fAI_HowToPlaySetup (core.asm, routines.asm, main_loop.asm, interaction_data.asm)."
 
 - opcode: 0x14
   macro: AICMD0x14_JumpIfFlagSet
@@ -36,14 +36,14 @@
   confidence: confirmed
   length_bytes: 7
   params:
-    - {name: nAddress, offset: 1, size: 3, type: ram_ptr, meaning: "Adres 24-bit slowa 16-bit w pamieci (w skryptach prawie zawsze strcFlags.* w $7F:1F5A..., czyli daily1-5, event1-7, unknown1 itd.)."}
-    - {name: nIndex, offset: 4, size: 1, type: n8, meaning: "Numer bitu 0-15. Handler indeksuje aAISetMask (16 slow, 1<<n) wartoscia nIndex*2, wiec maska = 1<<nIndex. Wartosci >15 czytaja poza tablica (nie uzywane)."}
-    - {name: pNextAction, offset: 5, size: 2, type: script_ptr, meaning: "Mlodsze 16 bitow adresu komendy, do ktorej skok nastapi gdy bit jest ustawiony (bank bez zmian)."}
-  summary: "Skok do pNextAction jesli bit nIndex w 16-bitowym slowie pod nAddress jest ustawiony."
-  details: "Handler sklada 24-bitowy wskaznik do $72-$74 (ptrTemp0x72), pobiera maske z aAISetMask[nIndex], wykonuje 16-bitowe LDA [ptrTemp0x72] AND maska. Wynik != 0 -> ptrAIActionData = pNextAction (16 bit). Wynik = 0 -> wskaznik przesuniety za komende (lacznie 7 bajtow). Uzywa strcVariables.n16Temp1 jako bufora maski. Nie blokuje, nie modyfikuje flag. Komplementarne do 0x23 (ustawienie bitu)."
+    - {name: nAddress, offset: 1, size: 3, type: ram_ptr, meaning: "24-bit address of a 16-bit word in memory (in scripts almost always strcFlags.* at $7F:1F5A..., i.e. daily1-5, event1-7, unknown1, etc.)."}
+    - {name: nIndex, offset: 4, size: 1, type: n8, meaning: "Bit number 0-15. The handler indexes aAISetMask (16 words, 1<<n) with the value nIndex*2, so the mask = 1<<nIndex. Values >15 read outside the table (not used)."}
+    - {name: pNextAction, offset: 5, size: 2, type: script_ptr, meaning: "Low 16 bits of the address of the command to jump to when the bit is set (bank unchanged)."}
+  summary: "Jumps to pNextAction if bit nIndex in the 16-bit word at nAddress is set."
+  details: "The handler assembles a 24-bit pointer in $72-$74 (ptrTemp0x72), fetches the mask from aAISetMask[nIndex], and performs a 16-bit LDA [ptrTemp0x72] AND mask. Result != 0 -> ptrAIActionData = pNextAction (16 bit). Result = 0 -> the pointer is advanced past the command (7 bytes in total). Uses strcVariables.n16Temp1 as the mask buffer. Does not block, does not modify flags. Complementary to 0x23 (set bit)."
   ram_touched: [ptrAIActionData, ptrTemp0x72, strcVariables.n16Temp1, aAISetMask]
   calls: []
-  open_questions: "Komentarz w makrze mowi 'button mask ???' - to nieprawda, nie ma zwiazku z przyciskami; sa to flagi gry (bitowe). Nazwa makra JumpIfFlagSet jest poprawna, ale mozna doprecyzowac na JumpIfBitSet."
+  open_questions: "The comment in the macro says 'button mask ???' - this is incorrect, it has nothing to do with buttons; these are game (bit) flags. The macro name JumpIfFlagSet is correct, but it could be made more precise as JumpIfBitSet."
 
 - opcode: 0x15
   macro: AICMD0x15_JumpIfEquals8
@@ -53,11 +53,11 @@
   confidence: confirmed
   length_bytes: 7
   params:
-    - {name: nAddress, offset: 1, size: 3, type: ram_ptr, meaning: "Adres 24-bit bajtu do porownania (RAM lub ROM; w skryptach m.in. nCurrentSeasonID, nCurrentTimeID, strcPlayerData.*)."}
-    - {name: nValue, offset: 4, size: 1, type: n8, meaning: "Wartosc porownywana (8-bit) z bajtem pod nAddress."}
-    - {name: pNextAction, offset: 5, size: 2, type: script_ptr, meaning: "Mlodsze 16 bitow adresu komendy, do ktorej skok nastapi gdy bajt == nValue."}
-  summary: "Skok do pNextAction jesli bajt pod nAddress jest rowny nValue."
-  details: "Handler zapisuje nAddress do ptrTemp0x72, nValue do strcVariables.n8Temp1 ($92), a nastepnie w trybie 8-bit porownuje [ptrTemp0x72] z n8Temp1 (CMP, BNE). Rowne -> ptrAIActionData = pNextAction (16 bit), nierowne -> wskaznik za komende (7 bajtow). Nie blokuje."
+    - {name: nAddress, offset: 1, size: 3, type: ram_ptr, meaning: "24-bit address of the byte to compare (RAM or ROM; in scripts, among others, nCurrentSeasonID, nCurrentTimeID, strcPlayerData.*)."}
+    - {name: nValue, offset: 4, size: 1, type: n8, meaning: "Value (8-bit) compared with the byte at nAddress."}
+    - {name: pNextAction, offset: 5, size: 2, type: script_ptr, meaning: "Low 16 bits of the address of the command to jump to when the byte == nValue."}
+  summary: "Jumps to pNextAction if the byte at nAddress equals nValue."
+  details: "The handler stores nAddress to ptrTemp0x72 and nValue to strcVariables.n8Temp1 ($92), then in 8-bit mode compares [ptrTemp0x72] with n8Temp1 (CMP, BNE). Equal -> ptrAIActionData = pNextAction (16 bit), not equal -> pointer past the command (7 bytes). Does not block."
   ram_touched: [ptrAIActionData, ptrTemp0x72, strcVariables.n8Temp1]
   calls: []
   open_questions: null
@@ -70,15 +70,15 @@
   confidence: confirmed
   length_bytes: 8
   params:
-    - {name: nAddress, offset: 1, size: 3, type: ram_ptr, meaning: "Adres 24-bit testowanego bajtu."}
-    - {name: nMin, offset: 4, size: 1, type: n8, meaning: "Dolna granica (wlacznie), porownanie bez znaku."}
-    - {name: nMax, offset: 5, size: 1, type: n8, meaning: "Gorna granica (wlacznie). Handler liczy nMax+1 (INC A, 8-bit) i porownuje ostro mniejsze."}
-    - {name: pNextAction, offset: 6, size: 2, type: script_ptr, meaning: "Mlodsze 16 bitow adresu komendy, do ktorej skok nastapi gdy nMin <= bajt <= nMax."}
-  summary: "Skok do pNextAction jesli nMin <= [nAddress] <= nMax (porownanie 8-bit bez znaku)."
-  details: "Handler zapisuje nMin do n8Temp1 ($92) i nMax+1 do n8Temp2 ($93). Warunek skoku: [addr] >= n8Temp1 (BCC pomija) oraz [addr] < n8Temp2 (BCS pomija). Inaczej wskaznik przesuwany za komende (8 bajtow). Nie blokuje."
+    - {name: nAddress, offset: 1, size: 3, type: ram_ptr, meaning: "24-bit address of the byte being tested."}
+    - {name: nMin, offset: 4, size: 1, type: n8, meaning: "Lower bound (inclusive), unsigned comparison."}
+    - {name: nMax, offset: 5, size: 1, type: n8, meaning: "Upper bound (inclusive). The handler computes nMax+1 (INC A, 8-bit) and compares for strictly less."}
+    - {name: pNextAction, offset: 6, size: 2, type: script_ptr, meaning: "Low 16 bits of the address of the command to jump to when nMin <= byte <= nMax."}
+  summary: "Jumps to pNextAction if nMin <= [nAddress] <= nMax (8-bit unsigned comparison)."
+  details: "The handler stores nMin to n8Temp1 ($92) and nMax+1 to n8Temp2 ($93). Jump condition: [addr] >= n8Temp1 (BCC skips) and [addr] < n8Temp2 (BCS skips). Otherwise the pointer is advanced past the command (8 bytes). Does not block."
   ram_touched: [ptrAIActionData, ptrTemp0x72, strcVariables.n8Temp1, strcVariables.n8Temp2]
   calls: []
-  open_questions: "Przypadek brzegowy: nMax = $FF daje nMax+1 = 0 i skok nigdy sie nie wykona (bledny wynik). W skryptach nie zaobserwowano tego uzycia."
+  open_questions: "Edge case: nMax = $FF gives nMax+1 = 0 and the jump is never taken (incorrect result). This use was not observed in scripts."
 
 - opcode: 0x17
   macro: AICMD0x17_RollRandom
@@ -88,12 +88,12 @@
   confidence: confirmed
   length_bytes: 2
   params:
-    - {name: nMax, offset: 1, size: 1, type: n8, meaning: "Liczba mozliwych wynikow. Wynik losowania jest z zakresu 0..nMax-1 (fCore_GetRandomNumber nigdy nie zwraca nMax). Typowe: 2, 3, 4, 5."}
-  summary: "Losuje liczbe 0..nMax-1 i zapisuje ja w polu +$0D biezacego obiektu AI."
-  details: "Wola fCore_GetRandomNumber (A = nMax), wynik zapisuje do bajtu +$0D struktury obiektu AI (ptrAIUnknownCC). Nie blokuje. Zawsze uzywane razem z seria komend 0x18 porownujacych wylosowana wartosc. Pole +$0D jest tez uzywane przez inne handlery (fAIAction przy 849BFF i 84A011), nie sprawdzano po co."
+    - {name: nMax, offset: 1, size: 1, type: n8, meaning: "Number of possible outcomes. The roll result is in the range 0..nMax-1 (fCore_GetRandomNumber never returns nMax). Typical: 2, 3, 4, 5."}
+  summary: "Rolls a number 0..nMax-1 and stores it in field +$0D of the current AI object."
+  details: "Calls fCore_GetRandomNumber (A = nMax) and stores the result to byte +$0D of the AI object structure (ptrAIUnknownCC). Does not block. Always used together with a series of 0x18 commands that compare the rolled value. Field +$0D is also used by other handlers (fAIAction at 849BFF and 84A011); it was not checked what for."
   ram_touched: [ptrAIActionData, ptrAIUnknown0xCC+$0D]
   calls: [fCore_GetRandomNumber]
-  open_questions: "Komentarz przy fCore_GetRandomNumber mowi 0x00-nMax, ale z kodu (petla konczy sie na X == nMax-1) wynika zakres 0..nMax-1; zgodne z uzyciem w skryptach (0x17($02) + 0x18($00)/0x18($01)). Dziedzina innych uzytkownikow pola +$0D nieustalona."
+  open_questions: "The comment at fCore_GetRandomNumber says 0x00-nMax, but the code (the loop ends at X == nMax-1) implies the range 0..nMax-1; this is consistent with the usage in scripts (0x17($02) + 0x18($00)/0x18($01)). The other users of field +$0D are not determined."
 
 - opcode: 0x18
   macro: AICMD0x18_JumpIfRandomEquals
@@ -103,13 +103,13 @@
   confidence: confirmed
   length_bytes: 4
   params:
-    - {name: nValue, offset: 1, size: 1, type: n8, meaning: "Wartosc porownywana z polem +$0D biezacego obiektu AI (wynik poprzedniego 0x17)."}
-    - {name: pNextAction, offset: 2, size: 2, type: script_ptr, meaning: "Mlodsze 16 bitow adresu komendy, do ktorej skok nastapi gdy +$0D == nValue."}
-  summary: "Skok do pNextAction jesli ostatnio wylosowana (0x17) wartosc obiektu rowna sie nValue."
-  details: "Porownuje bajt +$0D obiektu AI z nValue; rowne -> ptrAIActionData = pNextAction (16 bit), nierowne -> przesuniecie za komende (4 bajty), co pozwala na lancuch kilku 0x18 po jednym 0x17 (tabela skokow). Nie blokuje. Efekt uboczny: nValue jest czytane 16-bitowo (brak SEP przed LDA) i zapisywane do $92-$93, czyli nadpisuje tez strcVariables.n8Temp2 ($93) bajtem pNextAction (lo)."
+    - {name: nValue, offset: 1, size: 1, type: n8, meaning: "Value compared with field +$0D of the current AI object (the result of the previous 0x17)."}
+    - {name: pNextAction, offset: 2, size: 2, type: script_ptr, meaning: "Low 16 bits of the address of the command to jump to when +$0D == nValue."}
+  summary: "Jumps to pNextAction if the object's last rolled (0x17) value equals nValue."
+  details: "Compares byte +$0D of the AI object with nValue; equal -> ptrAIActionData = pNextAction (16 bit), not equal -> advance past the command (4 bytes), which allows a chain of several 0x18 after a single 0x17 (jump table). Does not block. Side effect: nValue is read as 16-bit (no SEP before LDA) and stored to $92-$93, so it also overwrites strcVariables.n8Temp2 ($93) with the pNextAction (lo) byte."
   ram_touched: [ptrAIActionData, ptrAIUnknown0xCC+$0D, strcVariables.n8Temp1, strcVariables.n8Temp2]
   calls: []
-  open_questions: "Efekt uboczny na n8Temp2 jest prawdopodobnie niezamierzony (16-bitowy odczyt/zapis); nieszkodliwy, o ile $93 nie jest uzywane miedzy komendami."
+  open_questions: "The side effect on n8Temp2 is probably unintended (16-bit read/write); harmless as long as $93 is not used between commands."
 
 - opcode: 0x19
   macro: AICMD0x19
@@ -119,13 +119,13 @@
   confidence: probable
   length_bytes: 4
   params:
-    - {name: nSpriteIdx, offset: 1, size: 2, type: n16, meaning: "Indeks sprite'a (16-bit) zapisywany do strcObjectData.spriteIdx ($7E:0901) - obiektu gracza. Przyklady: $0006, $0007, $0024, $004D, $00E8."}
-    - {name: nFlip, offset: 3, size: 1, type: flag, meaning: "Flagi odbicia, przesuniete o 6 bitow w lewo i zapisane do strcObjectData.flip ($7E:090F): bit0 -> $0040 (odbicie poziome), bit1 -> $0080 (pionowe), jak atrybuty OAM. W skryptach 0 lub 1."}
-  summary: "Wymusza konkretny sprite i odbicie dla gracza oraz ustawia flage PFLAGS_KNEEING."
-  details: "Zapisuje nSpriteIdx do strcObjectData.spriteIdx i (nFlip << 6) do strcObjectData.flip, po czym ustawia strcPlayer.flags |= PFLAGS_KNEEING ($2000). Flaga KNEEING jest sprawdzana w player_actions.asm (fPlayerAction_Run, fUnknown_81C556), gdzie przy jej ustawieniu pomijana jest normalna obsluga ruchu/animacji - dzieki temu wymuszony sprite nie jest nadpisywany. Nie blokuje."
+    - {name: nSpriteIdx, offset: 1, size: 2, type: n16, meaning: "Sprite index (16-bit) stored to strcObjectData.spriteIdx ($7E:0901) - the player object. Examples: $0006, $0007, $0024, $004D, $00E8."}
+    - {name: nFlip, offset: 3, size: 1, type: flag, meaning: "Flip flags, shifted left by 6 bits and stored to strcObjectData.flip ($7E:090F): bit0 -> $0040 (horizontal flip), bit1 -> $0080 (vertical), like OAM attributes. 0 or 1 in scripts."}
+  summary: "Forces a specific sprite and flip for the player and sets the PFLAGS_KNEEING flag."
+  details: "Stores nSpriteIdx to strcObjectData.spriteIdx and (nFlip << 6) to strcObjectData.flip, then sets strcPlayer.flags |= PFLAGS_KNEEING ($2000). The KNEEING flag is checked in player_actions.asm (fPlayerAction_Run, fUnknown_81C556), where, when it is set, the normal movement/animation handling is skipped - so the forced sprite is not overwritten. Does not block."
   ram_touched: [ptrAIActionData, strcObjectData.spriteIdx, strcObjectData.flip, strcPlayer.flags]
   calls: []
-  open_questions: "Obiekt $7E:0901 jest zidentyfikowany jako gracz tylko na podstawie nazw pol w strcObjectData (playerX/playerY); nie potwierdzono tego w kodzie renderowania. Nazwa flagi KNEEING wydaje sie myląca - faktycznie to raczej 'poza wymuszona przez skrypt'. Nie ustalono kto i kiedy ja kasuje po scenie (player_actions.asm:2062 kasuje ja w jednym miejscu)."
+  open_questions: "Object $7E:0901 is identified as the player only from the field names in strcObjectData (playerX/playerY); this was not confirmed in the rendering code. The name of the KNEEING flag seems misleading - in fact it is more of a 'pose forced by the script'. It is not determined who clears it after the scene and when (player_actions.asm:2062 clears it in one place)."
 
 - opcode: 0x1A
   macro: AICMD0x1A
@@ -135,15 +135,15 @@
   confidence: probable
   length_bytes: 8
   params:
-    - {name: nPosX, offset: 1, size: 2, type: n16, meaning: "Pozycja X obiektu (16-bit, ze znakiem - w skryptach wystepuja wartosci jak $FF80, czyli poza ekranem po lewej) zapisywana do +$1A (posX) obiektu AI."}
-    - {name: nPosY, offset: 3, size: 2, type: n16, meaning: "Pozycja Y obiektu zapisywana do +$1C (posY)."}
-    - {name: pAnimTable, offset: 5, size: 2, type: ram_ptr, meaning: "Mlodsze 16 bitow wskaznika do tabeli sprite'ow w banku $B3 (aAIScriptingData_Lxxx, wskaznik zapisany do +$33, bank $B3 wstawiany na sztywno). Tabela: 3-bajtowe wpisy na kierunek [slowo indeks sprite'a][bajt flip]. Nie jest to adres kodu skryptu."}
-    - {name: nDirection, offset: 7, size: 1, type: n8, meaning: "Poczatkowy kierunek 0-3 (zapis do +$02), wybiera wpis z pAnimTable. Z kodu ruchu: 0 = dol, 1 = gora, 2 = prawo (dx=+1), 3 = lewo (dx=-1)."}
-  summary: "Tworzy/umieszcza obiekt NPC w danej pozycji z tabela sprite'ow i kierunkiem poczatkowym."
-  details: "Zapisuje nPosX -> +$1A, nPosY -> +$1C, pAnimTable -> +$33, nDirection -> +$02 w strukturze obiektu AI. Ustawia flagi obiektu (+$01) |= $03: bit $01 oznacza obiekt aktywny (fAI_Unknown848286/petla AI), bit $02 powoduje przy najblizszym przetwarzaniu wywolanie fUnknown_858000 (utworzenie obiektu gry, indeks zapisany w +$12). Nastepnie wola fAI_Unknown848895 z $72 = (+$33):$B3, ktora wybiera wpis tabeli [nDirection]: slowo -> +$16 (spriteTableIdx), bajt << 6 -> +$14 (flip). Na koncu +$10 += 1, czyli obiekt zostaje przetworzony od nastepnej klatki (blokuje 1 klatke)."
+    - {name: nPosX, offset: 1, size: 2, type: n16, meaning: "X position of the object (16-bit, signed - scripts contain values such as $FF80, i.e. off-screen to the left) stored to +$1A (posX) of the AI object."}
+    - {name: nPosY, offset: 3, size: 2, type: n16, meaning: "Y position of the object stored to +$1C (posY)."}
+    - {name: pAnimTable, offset: 5, size: 2, type: ram_ptr, meaning: "Low 16 bits of the pointer to the sprite table in bank $B3 (aAIScriptingData_Lxxx, the pointer is stored to +$33, bank $B3 is hardcoded). Table: 3-byte entries per direction [sprite index word][flip byte]. This is not a script code address."}
+    - {name: nDirection, offset: 7, size: 1, type: n8, meaning: "Initial direction 0-3 (stored to +$02), selects the entry from pAnimTable. From the movement code: 0 = down, 1 = up, 2 = right (dx=+1), 3 = left (dx=-1)."}
+  summary: "Creates/places an NPC object at the given position with a sprite table and an initial direction."
+  details: "Stores nPosX -> +$1A, nPosY -> +$1C, pAnimTable -> +$33, nDirection -> +$02 in the AI object structure. Sets the object flags (+$01) |= $03: bit $01 marks the object as active (fAI_Unknown848286/AI loop), bit $02 causes fUnknown_858000 to be called on the next processing (creation of the game object, index stored in +$12). Then calls fAI_Unknown848895 with $72 = (+$33):$B3, which selects the table entry [nDirection]: word -> +$16 (spriteTableIdx), byte << 6 -> +$14 (flip). Finally +$10 += 1, so the object is processed from the next frame (blocks for 1 frame)."
   ram_touched: [ptrAIActionData, ptrAIUnknown0xCC+$01, ptrAIUnknown0xCC+$02, ptrAIUnknown0xCC+$10, ptrAIUnknown0xCC+$14, ptrAIUnknown0xCC+$16, ptrAIUnknown0xCC+$1A, ptrAIUnknown0xCC+$1C, ptrAIUnknown0xCC+$33, ptrTemp0x72]
   calls: [fAI_Unknown848895]
-  open_questions: "Dokladne jednostki wspolrzednych (piksele swiata vs. mapy) niepotwierdzone - ta sama para trafia do strcObject.posX/posY. Konwencja kierunkow jest sprzeczna z enumem PDIR_* (PDIR_LEFT=2, PDIR_RIGHT=3), a kod ruchu NPC traktuje 2 jako ruch w +X (prawo); dotyczy tez 0x1F, gdzie uzywany jest strcPlayer.direction XOR 1. Do sprawdzenia, czy enum PDIR ma zamienione LEFT/RIGHT. Makro zawiera maskowanie &$FFFF dla pAnimTable - bank B3 jest wpisany na sztywno w handlerze."
+  open_questions: "The exact coordinate units (world pixels vs. map pixels) are unconfirmed - the same pair goes to strcObject.posX/posY. The direction convention conflicts with the PDIR_* enum (PDIR_LEFT=2, PDIR_RIGHT=3), while the NPC movement code treats 2 as movement in +X (right); this also affects 0x1F, which uses strcPlayer.direction XOR 1. It should be checked whether the PDIR enum has LEFT/RIGHT swapped. The macro contains &$FFFF masking for pAnimTable - bank B3 is hardcoded in the handler."
 
 - opcode: 0x1B
   macro: AICMD0x1B
@@ -153,13 +153,13 @@
   confidence: probable
   length_bytes: 4
   params:
-    - {name: nSpriteIdx, offset: 1, size: 2, type: n16, meaning: "Indeks sprite'a zapisywany do +$16 (spriteTableIdx) biezacego obiektu AI. Wartosci w skryptach rzedu $0223-$02E9 (NPC) - ta sama przestrzen indeksow co tabele pAnimTable z 0x1A."}
-    - {name: nFlip, offset: 3, size: 1, type: flag, meaning: "Flagi odbicia, wartosc << 6 zapisana do +$14 (flip): bit0 -> $0040 (poziome), bit1 -> $0080 (pionowe). W skryptach 0 lub 1."}
-  summary: "Ustawia bezposrednio sprite i odbicie biezacego obiektu AI (NPC) i zleca odswiezenie sprite'a."
-  details: "Zapisuje nSpriteIdx do +$16 i (nFlip << 6) do +$14 obiektu AI, po czym ustawia flage +$01 |= $04 (zadanie aktualizacji sprite'a). W fAI_Unknown848286 przy fladze $04 wolane jest fObject_Unknown858100, ktore zmienia sprite tylko gdy +$16 rozni sie od poprzedniego +$18; flaga jest czyszczona (maska $E9) na koncu przetwarzania. Nie blokuje. Odpowiednik 0x19 dla NPC zamiast gracza."
+    - {name: nSpriteIdx, offset: 1, size: 2, type: n16, meaning: "Sprite index stored to +$16 (spriteTableIdx) of the current AI object. Values in scripts are in the range $0223-$02E9 (NPCs) - the same index space as the pAnimTable tables from 0x1A."}
+    - {name: nFlip, offset: 3, size: 1, type: flag, meaning: "Flip flags, value << 6 stored to +$14 (flip): bit0 -> $0040 (horizontal), bit1 -> $0080 (vertical). 0 or 1 in scripts."}
+  summary: "Directly sets the sprite and flip of the current AI object (NPC) and requests a sprite refresh."
+  details: "Stores nSpriteIdx to +$16 and (nFlip << 6) to +$14 of the AI object, then sets the flag +$01 |= $04 (sprite update request). In fAI_Unknown848286, when flag $04 is set, fObject_Unknown858100 is called, which changes the sprite only when +$16 differs from the previous +$18; the flag is cleared (mask $E9) at the end of processing. Does not block. Counterpart of 0x19 for NPCs instead of the player."
   ram_touched: [ptrAIActionData, ptrAIUnknown0xCC+$01, ptrAIUnknown0xCC+$14, ptrAIUnknown0xCC+$16]
   calls: []
-  open_questions: "Funkcja fObject_Unknown858100 czytana tylko pobieznie (porownanie spriteTableIdx z $18 i wybor banku $86/$87 wg progu $0262); nie analizowano pelnego efektu na OAM."
+  open_questions: "The function fObject_Unknown858100 was only read superficially (comparison of spriteTableIdx with $18 and selection of bank $86/$87 by the threshold $0262); its full effect on OAM was not analyzed."
 
 - opcode: 0x1C
   macro: AICMD0x1C_ShowDialog
@@ -169,13 +169,13 @@
   confidence: confirmed
   length_bytes: 4
   params:
-    - {name: nDialogId, offset: 1, size: 2, type: n16, meaning: "Indeks dialogu (indeks w aDialogPointers, 3 bajty na wpis); trafia do X, a w fDialog_DialogHandler do strcDialogDisplay.dialogId."}
-    - {name: nPosition, offset: 3, size: 1, type: n8, meaning: "Zapisywane do strcDialogDisplay.dialogUnk191 ($7E:0191). W fDialog_DialogHandler: 0 = automatyczne (domyslnie 1, a gdy strcObjectData.camY < $81 to 2), wartosc niezerowa jest uzywana wprost do przesuniecia BG3 (o (wartosc-1)*128 px) - czyli prawdopodobnie polozenie okna dialogu (gora/dol ekranu). W skryptach 0 lub 1."}
-  summary: "Wyswietla dialog nDialogId i wstrzymuje skrypt na jedna klatke (petla AI jest dalej pomijana na czas dialogu)."
-  details: "Wczytuje nDialogId do X, zapisuje bajt nPosition do dialogUnk191, ustawia strcDialogDisplay.mapUnk19A = 2 i wola fDialog_DialogHandler (ustawia dialogId, dialogFlags |= DFLAGS_PROCESSDIALOG, zeruje liczniki opcji/odpowiedzi, wybiera wskaznik tekstu z aDialogPointers, ustawia przesuniecie BG3 i nTimeState = 0, daily1 |= $4000). Potem +$10 += 1 (jedna klatka). Poniewaz mapUnk19A == 2, fAI_HowToPlaySetup zwraca od razu na poczatku dopoki dialog nie zostanie zakonczony (kod dialogu zeruje/zmienia mapUnk19A), czyli skrypt i wszystkie obiekty AI czekaja do konca dialogu."
+    - {name: nDialogId, offset: 1, size: 2, type: n16, meaning: "Dialog index (index into aDialogPointers, 3 bytes per entry); goes to X, and in fDialog_DialogHandler to strcDialogDisplay.dialogId."}
+    - {name: nPosition, offset: 3, size: 1, type: n8, meaning: "Stored to strcDialogDisplay.dialogUnk191 ($7E:0191). In fDialog_DialogHandler: 0 = automatic (default 1, and 2 when strcObjectData.camY < $81), a non-zero value is used directly for the BG3 offset (by (value-1)*128 px) - so it is probably the position of the dialog window (top/bottom of the screen). 0 or 1 in scripts."}
+  summary: "Displays dialog nDialogId and suspends the script for one frame (the AI loop continues to be skipped for the duration of the dialog)."
+  details: "Loads nDialogId into X, stores the nPosition byte to dialogUnk191, sets strcDialogDisplay.mapUnk19A = 2 and calls fDialog_DialogHandler (sets dialogId, dialogFlags |= DFLAGS_PROCESSDIALOG, zeroes the option/answer counters, selects the text pointer from aDialogPointers, sets the BG3 offset and nTimeState = 0, daily1 |= $4000). Then +$10 += 1 (one frame). Because mapUnk19A == 2, fAI_HowToPlaySetup returns immediately at the start until the dialog ends (the dialog code zeroes/changes mapUnk19A), so the script and all AI objects wait until the end of the dialog."
   ram_touched: [ptrAIActionData, ptrAIUnknown0xCC+$10, strcDialogDisplay.dialogUnk191, strcDialogDisplay.mapUnk19A, strcDialogDisplay.dialogId, strcDialogDisplay.dialogFlags, strcDialogDisplay.dialogOptionsAnswer, strcFlags.daily1, nTimeState, strcBGScrool.BG3VerOffs]
   calls: [fDialog_DialogHandler]
-  open_questions: "Dokladne znaczenie nPosition (gora/dol) niepotwierdzone; nie sprawdzono kodu, ktory resetuje mapUnk19A po zamknieciu dialogu."
+  open_questions: "The exact meaning of nPosition (top/bottom) is unconfirmed; the code that resets mapUnk19A after the dialog is closed was not checked."
 
 - opcode: 0x1D
   macro: AICMD0x1D_ShowDialog
@@ -185,13 +185,13 @@
   confidence: confirmed
   length_bytes: 4
   params:
-    - {name: nDialogId, offset: 1, size: 2, type: n16, meaning: "Jak w 0x1C: indeks dialogu."}
-    - {name: nPosition, offset: 3, size: 1, type: n8, meaning: "Jak w 0x1C: trafia do strcDialogDisplay.dialogUnk191."}
-  summary: "Funkcjonalnie identyczny z 0x1C (ShowDialog); w skryptach uzywany dla dialogow z wyborem opcji, po ktorych idzie seria 0x20."
-  details: "Kod handlera jest instrukcja po instrukcji taki sam jak 0x1C (rozni sie tylko adres). Zaobserwowana konwencja w skryptach: 0x1D jest wolane przed lancuchem 0x20 JumpIfChoice (dialog z pytaniem), a 0x1C dla zwyklych wypowiedzi - rozroznienie jest czysto umowne (autorzy gry), bez wplywu na dzialanie."
+    - {name: nDialogId, offset: 1, size: 2, type: n16, meaning: "As in 0x1C: dialog index."}
+    - {name: nPosition, offset: 3, size: 1, type: n8, meaning: "As in 0x1C: goes to strcDialogDisplay.dialogUnk191."}
+  summary: "Functionally identical to 0x1C (ShowDialog); in scripts it is used for dialogs with choices, followed by a series of 0x20."
+  details: "The handler code is identical to 0x1C instruction by instruction (only the address differs). Convention observed in scripts: 0x1D is called before a chain of 0x20 JumpIfChoice (a dialog with a question), and 0x1C for ordinary lines - the distinction is purely conventional (by the game's authors), with no effect on behavior."
   ram_touched: [ptrAIActionData, ptrAIUnknown0xCC+$10, strcDialogDisplay.dialogUnk191, strcDialogDisplay.mapUnk19A, strcDialogDisplay.dialogId, strcDialogDisplay.dialogFlags]
   calls: [fDialog_DialogHandler]
-  open_questions: "Brak - roznica miedzy 0x1C i 0x1D istnieje tylko w konwencji uzycia (w kodzie handlera brak roznic)."
+  open_questions: "None - the difference between 0x1C and 0x1D exists only in usage convention (there are no differences in the handler code)."
 
 - opcode: 0x1E
   macro: AICMD0x1E
@@ -201,12 +201,12 @@
   confidence: probable
   length_bytes: 3
   params:
-    - {name: pNextAction, offset: 1, size: 2, type: script_ptr, meaning: "Jak w 0x1F: mlodsze 16 bitow adresu komendy, do ktorej skok nastapi po rozpoczeciu rozmowy."}
-  summary: "Alias 0x1F - wpis 0x1E w tablicy aAIActions wskazuje na ten sam handler fAIAction0x1F; nie wystepuje w zadnym skrypcie."
-  details: "W aAIActions (849455) wpisy dla opcodow 0x1E i 0x1F wskazuja na fAIAction0x1F ($849079). Zachowanie identyczne jak 0x1F. Makro AICMD0x1E ma ten sam format (opcode + 16-bitowy wskaznik). Komendy 0x1E nie znaleziono w bank_B3/B4/B5."
+    - {name: pNextAction, offset: 1, size: 2, type: script_ptr, meaning: "As in 0x1F: low 16 bits of the address of the command to jump to after the conversation starts."}
+  summary: "Alias of 0x1F - the 0x1E entry in the aAIActions table points to the same handler fAIAction0x1F; it does not occur in any script."
+  details: "In aAIActions (849455) the entries for opcodes 0x1E and 0x1F point to fAIAction0x1F ($849079). Behavior is identical to 0x1F. The macro AICMD0x1E has the same format (opcode + 16-bit pointer). Command 0x1E was not found in bank_B3/B4/B5."
   ram_touched: [ptrAIActionData]
   calls: []
-  open_questions: "Czy 0x1E bylo zamierzone jako osobna komenda (np. inny warunek) - w ROM US wskazuje na ten sam handler. Szczegoly w opisie 0x1F."
+  open_questions: "Whether 0x1E was intended as a separate command (e.g. a different condition) - in the US ROM it points to the same handler. See the description of 0x1F for details."
 
 - opcode: 0x1F
   macro: AICMD0x1F
@@ -216,12 +216,12 @@
   confidence: probable
   length_bytes: 3
   params:
-    - {name: pNextAction, offset: 1, size: 2, type: script_ptr, meaning: "Mlodsze 16 bitow adresu komendy (obslugi rozmowy), do ktorej skok nastapi gdy gracz zacznie rozmowe z NPC (bank bez zmian)."}
-  summary: "Sprawdza czy gracz stoi przy NPC i nacisnal A; jesli tak - obraca NPC do gracza, blokuje gracza interakcja i skacze do pNextAction, w przeciwnym razie czeka klatke i idzie dalej."
-  details: "Jest to komenda pollingowa: w skryptach zawsze 'AICMD0x1F(cel); Jump(ta_sama_komenda)'. Warunki (wszystkie musza byc spelnione, inaczej sciezka .return = ptrAIActionData += 3 oraz +$10 += 1, czyli blokada na jedna klatke): bajt +$0C obiektu != 0 (flaga bliskosci gracza ustawiana w petli game_engine.asm ~83AE26: |posX/posY NPC - pozycja gracza| < $19), akcja gracza nie jest PACTION_USINGTOOL / SHOWTOOL / WHISTLEHORSE / WHISTLEDOG, brak PFLAGS_EATINGMEAL, (strcFlags.daily4 & $0006) == 0, oraz strcJoypad1.newInput ma bit !JOYPAD_A (nowo wcisniety A). Gdy spelnione: ptrAIActionData = pNextAction (16 bit); +$08 := +$07; +$03 := 0, +$04 := 0 (zatrzymanie ruchu); +$0C := 0; +$02 := strcPlayer.direction XOR 1 (NPC patrzy na gracza); fAI_Unknown848895 z tablica (+$33):$B3 ustawia sprite (+$16) i flip (+$14) wg nowego kierunku; +$01 |= $14 (aktualizacja sprite'a + blokada auto-ruchu na ta klatke); nPlayerInteractionIndex := $56, Arg1 = Arg2 = 0; strcPlayer.flags |= PFLAGS_INTERACTING; strcPlayer.action := PACTION_NONE; +$10 += 1. fPlayerInteraction0x56 zwieksza Arg2 i po 2 wywolaniach zdejmuje PFLAGS_INTERACTING (efekt: krotka blokada gracza na czas przejscia do dialogu)."
+    - {name: pNextAction, offset: 1, size: 2, type: script_ptr, meaning: "Low 16 bits of the address of the command (conversation handler) to jump to when the player starts a conversation with the NPC (bank unchanged)."}
+  summary: "Checks whether the player is standing next to the NPC and pressed A; if so - turns the NPC toward the player, locks the player in an interaction and jumps to pNextAction, otherwise waits one frame and continues."
+  details: "This is a polling command: in scripts it is always 'AICMD0x1F(target); Jump(same_command)'. Conditions (all must be met, otherwise the .return path = ptrAIActionData += 3 and +$10 += 1, i.e. a one-frame block): byte +$0C of the object != 0 (player proximity flag set in the loop in game_engine.asm ~83AE26: |NPC posX/posY - player position| < $19), the player action is not PACTION_USINGTOOL / SHOWTOOL / WHISTLEHORSE / WHISTLEDOG, no PFLAGS_EATINGMEAL, (strcFlags.daily4 & $0006) == 0, and strcJoypad1.newInput has bit !JOYPAD_A (A newly pressed). When met: ptrAIActionData = pNextAction (16 bit); +$08 := +$07; +$03 := 0, +$04 := 0 (stop movement); +$0C := 0; +$02 := strcPlayer.direction XOR 1 (NPC faces the player); fAI_Unknown848895 with the table (+$33):$B3 sets the sprite (+$16) and flip (+$14) according to the new direction; +$01 |= $14 (sprite update + auto-movement lock for this frame); nPlayerInteractionIndex := $56, Arg1 = Arg2 = 0; strcPlayer.flags |= PFLAGS_INTERACTING; strcPlayer.action := PACTION_NONE; +$10 += 1. fPlayerInteraction0x56 increments Arg2 and after 2 calls removes PFLAGS_INTERACTING (effect: a short player lock during the transition to the dialog)."
   ram_touched: [ptrAIActionData, ptrAIUnknown0xCC+$01, ptrAIUnknown0xCC+$02, ptrAIUnknown0xCC+$03, ptrAIUnknown0xCC+$04, ptrAIUnknown0xCC+$07, ptrAIUnknown0xCC+$08, ptrAIUnknown0xCC+$0C, ptrAIUnknown0xCC+$10, ptrAIUnknown0xCC+$14, ptrAIUnknown0xCC+$16, ptrAIUnknown0xCC+$33, strcPlayer.flags, strcPlayer.action, strcPlayer.direction, strcJoypad1.newInput, strcFlags.daily4, nPlayerInteractionIndex, nPlayerInteractionArg1, nPlayerInteractionArg2, ptrTemp0x72]
   calls: [fAI_Unknown848895]
-  open_questions: "Znaczenie bitow $0002/$0004 w strcFlags.daily4 (blokuja rozmowe) nieustalone. Pole +$0C = 'gracz w poblizu' wywnioskowane z game_engine.asm:~83AE26-83AE68 (probable). Kierunek XOR 1 zalezy od konwencji kierunkow (patrz open_questions w 0x1A: enum PDIR vs kod ruchu NPC). Tablica aAIActions wskazuje dwa opcody (0x1E, 0x1F) na ten sam handler."
+  open_questions: "The meaning of bits $0002/$0004 in strcFlags.daily4 (they block conversation) is not determined. Field +$0C = 'player nearby' was inferred from game_engine.asm:~83AE26-83AE68 (probable). The direction XOR 1 depends on the direction convention (see open_questions in 0x1A: PDIR enum vs. NPC movement code). The aAIActions table points two opcodes (0x1E, 0x1F) to the same handler."
 
 - opcode: 0x20
   macro: AICMD0x20_JumpIfChoice
@@ -231,10 +231,10 @@
   confidence: confirmed
   length_bytes: 4
   params:
-    - {name: nAnswer, offset: 1, size: 1, type: n8, meaning: "Numer opcji (od 0) porownywany z strcDialogDisplay.dialogOptionsAnswer ($7E:018F) - odpowiedz wybrana w ostatnim dialogu z opcjami. W skryptach 0..4."}
-    - {name: pNextAction, offset: 2, size: 2, type: script_ptr, meaning: "Mlodsze 16 bitow adresu komendy, do ktorej skok nastapi gdy wybrana opcja == nAnswer."}
-  summary: "Skok do pNextAction jesli gracz wybral w ostatnim dialogu opcje nAnswer."
-  details: "Porownuje bajt dialogOptionsAnswer z nAnswer (8-bit). Rowne -> ptrAIActionData = pNextAction (16 bit), nierowne -> przesuniecie za komende (4 bajty), dzieki czemu kilka 0x20 pod rzad tworzy tablice skokow po 0x1D. dialogOptionsAnswer jest zerowane w fDialog_DialogHandler przy starcie dialogu (stad wynik 0 dla dialogow bez opcji). Zapisuje nAnswer w strcVariables.n8Temp1. Nie blokuje."
+    - {name: nAnswer, offset: 1, size: 1, type: n8, meaning: "Option number (from 0) compared with strcDialogDisplay.dialogOptionsAnswer ($7E:018F) - the answer chosen in the last dialog with options. 0..4 in scripts."}
+    - {name: pNextAction, offset: 2, size: 2, type: script_ptr, meaning: "Low 16 bits of the address of the command to jump to when the chosen option == nAnswer."}
+  summary: "Jumps to pNextAction if the player chose option nAnswer in the last dialog."
+  details: "Compares the byte dialogOptionsAnswer with nAnswer (8-bit). Equal -> ptrAIActionData = pNextAction (16 bit), not equal -> advance past the command (4 bytes), so several consecutive 0x20 form a jump table after 0x1D. dialogOptionsAnswer is zeroed in fDialog_DialogHandler at the start of a dialog (hence the result 0 for dialogs without options). Stores nAnswer in strcVariables.n8Temp1. Does not block."
   ram_touched: [ptrAIActionData, strcDialogDisplay.dialogOptionsAnswer, strcVariables.n8Temp1]
   calls: []
   open_questions: null
@@ -247,13 +247,13 @@
   confidence: confirmed
   length_bytes: 5
   params:
-    - {name: pAddress, offset: 1, size: 3, type: ram_ptr, meaning: "Adres 24-bit modyfikowanego bajtu (w skryptach np. nPowerBerryEaten, $800917 = strcPlayerData.stamina, $8009A2)."}
-    - {name: n8Value, offset: 4, size: 1, type: n8, meaning: "Wartosc ZE ZNAKIEM (-128..127) dodawana do bajtu: handler rozszerza znak do 16 bitow (BPL/ORA $FF00). Wartosci ujemne odejmuja."}
-  summary: "Dodaje (ze znakiem) n8Value do bajtu pod pAddress z nasyceniem do zakresu 0..255."
-  details: "Wczytuje bajt [pAddress] jako 0..255, dodaje 16-bitowo rozszerzony ze znakiem n8Value; gdy wynik ujemny (bit 15) zapisuje 0, gdy >= $FF zapisuje $FF, w przeciwnym razie wynik. Zapis 8-bitowy do [pAddress]. Nie blokuje. Uzyte zaledwie kilka razy w skryptach (stamina, licznik jagod)."
+    - {name: pAddress, offset: 1, size: 3, type: ram_ptr, meaning: "24-bit address of the byte being modified (in scripts e.g. nPowerBerryEaten, $800917 = strcPlayerData.stamina, $8009A2)."}
+    - {name: n8Value, offset: 4, size: 1, type: n8, meaning: "SIGNED value (-128..127) added to the byte: the handler sign-extends it to 16 bits (BPL/ORA $FF00). Negative values subtract."}
+  summary: "Adds n8Value (signed) to the byte at pAddress, saturating to the range 0..255."
+  details: "Loads the byte [pAddress] as 0..255, adds the sign-extended 16-bit n8Value; when the result is negative (bit 15) it stores 0, when >= $FF it stores $FF, otherwise the result. 8-bit write to [pAddress]. Does not block. Used only a few times in scripts (stamina, berry counter)."
   ram_touched: [ptrAIActionData, ptrTemp0x72, strcVariables.n16Temp1]
   calls: []
-  open_questions: "Makro opisuje argument jako n8Value bez zaznaczenia, ze jest ze znakiem - warto dopisac w komentarzu commands.asm."
+  open_questions: "The macro describes the argument as n8Value without noting that it is signed - this should be added to the comment in commands.asm."
 
 - opcode: 0x22
   macro: AICMD0x22
@@ -263,16 +263,16 @@
   confidence: probable
   length_bytes: 7
   params:
-    - {name: nRangeX, offset: 1, size: 1, type: n8, meaning: "Maksymalne odchylenie w poziomie od punktu startowego (zapis do +$09). W petli wedrowania (fAI_Unknown8483CC) porownywane z |posX - homeX| dla kierunkow 2/3. Wartosci w skryptach: 4, $10, $18, $20."}
-    - {name: nRangeY, offset: 2, size: 1, type: n8, meaning: "Maksymalne odchylenie w pionie od punktu startowego (zapis do +$0A), uzywane dla kierunkow 0/1. Wartosci: 0, 4, 8, $10, $18."}
-    - {name: nStepDelay, offset: 3, size: 1, type: n8, meaning: "Liczba klatek miedzy kolejnymi krokami o 1 px (zapis do +$0B, +$05 i +$06 - okres i licznik w fAI_Unknown848331). W skryptach zawsze 1."}
-    - {name: pAnimTable, offset: 4, size: 2, type: ram_ptr, meaning: "Mlodsze 16 bitow wskaznika do tabeli sprite'ow w banku $B3 (zapis do +$36, bank $B3 na sztywno) - tabela sprite'ow animacji marszu, uzywana po wyborze kierunku (label12 w fAI_Unknown8483CC). Format jak w 0x1A (3 bajty na kierunek)."}
-    - {name: nSegmentLen, offset: 6, size: 1, type: n8, meaning: "Liczba krokow wykonywanych w jednym wybranym kierunku zanim nastapi nowy wybor (zapis do +$07 i +$08; +$07 = wartosc przeladowania, +$08 = licznik). Wartosci: 0, 2, 8, $0C, $10."}
-  summary: "Wlacza dla biezacego NPC losowe wedrowanie po prostokatnym obszarze wokol jego aktualnej pozycji."
-  details: "Zapisuje argumenty do pol +$09,+$0A,+$0B,+$05,+$06,+$36,+$07,+$08 obiektu AI. Ustawia +$01 |= $28: bit $08 wlacza wedrowanie (fAI_Unknown8483CC), bit $20 wlacza automatyczny ruch (fAI_Unknown848331 dodaje predkosc +$03/+$04 do posX/posY co +$05 klatek). Kopiuje biezaca pozycje +$1A/+$1C do +$1E/+$20 jako punkt macierzysty (home). Dlatego komenda musi stac po 0x1A (ktora ustawia pozycje). Petla wedrowania wybiera kierunek (0 dol, 1 gora, 2 prawo, 3 lewo - na podstawie +$0F lub strcPlayer.lastRandomNumber), ustawia predkosc +-1 px, sprawdza granice wzgledem punktu home i konczy odcinek gdy +$08 dojdzie do 0 lub wyjdzie poza zakres. Komenda nie blokuje i nie zmienia +$10; wedrowanie dziala w tle, rownolegle do dalszego wykonywania skryptu (zwykle za nia stoi petla 0x1F)."
+    - {name: nRangeX, offset: 1, size: 1, type: n8, meaning: "Maximum horizontal deviation from the starting point (stored to +$09). In the wandering loop (fAI_Unknown8483CC) it is compared with |posX - homeX| for directions 2/3. Values in scripts: 4, $10, $18, $20."}
+    - {name: nRangeY, offset: 2, size: 1, type: n8, meaning: "Maximum vertical deviation from the starting point (stored to +$0A), used for directions 0/1. Values: 0, 4, 8, $10, $18."}
+    - {name: nStepDelay, offset: 3, size: 1, type: n8, meaning: "Number of frames between consecutive 1 px steps (stored to +$0B, +$05 and +$06 - period and counter in fAI_Unknown848331). Always 1 in scripts."}
+    - {name: pAnimTable, offset: 4, size: 2, type: ram_ptr, meaning: "Low 16 bits of the pointer to the sprite table in bank $B3 (stored to +$36, bank $B3 hardcoded) - the walking animation sprite table, used after a direction is chosen (label12 in fAI_Unknown8483CC). Same format as in 0x1A (3 bytes per direction)."}
+    - {name: nSegmentLen, offset: 6, size: 1, type: n8, meaning: "Number of steps taken in one chosen direction before a new choice is made (stored to +$07 and +$08; +$07 = reload value, +$08 = counter). Values: 0, 2, 8, $0C, $10."}
+  summary: "Enables random wandering for the current NPC within a rectangular area around its current position."
+  details: "Stores the arguments to fields +$09,+$0A,+$0B,+$05,+$06,+$36,+$07,+$08 of the AI object. Sets +$01 |= $28: bit $08 enables wandering (fAI_Unknown8483CC), bit $20 enables automatic movement (fAI_Unknown848331 adds the velocity +$03/+$04 to posX/posY every +$05 frames). Copies the current position +$1A/+$1C to +$1E/+$20 as the home point. For this reason the command must come after 0x1A (which sets the position). The wandering loop chooses a direction (0 down, 1 up, 2 right, 3 left - based on +$0F or strcPlayer.lastRandomNumber), sets a velocity of +-1 px, checks the bounds relative to the home point and ends the segment when +$08 reaches 0 or goes out of range. The command does not block and does not change +$10; wandering runs in the background, in parallel with the continued execution of the script (usually followed by a 0x1F loop)."
   ram_touched: [ptrAIActionData, ptrAIUnknown0xCC+$01, ptrAIUnknown0xCC+$05, ptrAIUnknown0xCC+$06, ptrAIUnknown0xCC+$07, ptrAIUnknown0xCC+$08, ptrAIUnknown0xCC+$09, ptrAIUnknown0xCC+$0A, ptrAIUnknown0xCC+$0B, ptrAIUnknown0xCC+$1A, ptrAIUnknown0xCC+$1C, ptrAIUnknown0xCC+$1E, ptrAIUnknown0xCC+$20, ptrAIUnknown0xCC+$36]
   calls: []
-  open_questions: "Interpretacja argumentow wynika z analizy pol w fAI_Unknown848286/8483CC/848331 (probable, nie przetestowana emulacja). Nie ustalono dokladnie roli +$0F (preferowany kierunek 1/2/4/8) ani bitu $80 flag (pomija sprawdzanie granic). Jednostki zakresu (px) wynikaja z porownania z posX/posY."
+  open_questions: "The interpretation of the arguments comes from analysis of the fields in fAI_Unknown848286/8483CC/848331 (probable, not tested in emulation). The exact role of +$0F (preferred direction 1/2/4/8) and of flag bit $80 (skips the bounds check) is not determined. The range units (px) follow from the comparison with posX/posY."
 
 - opcode: 0x23
   macro: AICMD0x23_OrWithIndexedValue
@@ -282,10 +282,10 @@
   confidence: confirmed
   length_bytes: 5
   params:
-    - {name: nAddress, offset: 1, size: 3, type: ram_ptr, meaning: "Adres 24-bit slowa 16-bit (w skryptach strcFlags.daily1-5, event*, unknown1 itd.)."}
-    - {name: nIndex, offset: 4, size: 1, type: n8, meaning: "Numer bitu 0-15 do ustawienia (indeks w aAISetMask: maska = 1<<nIndex)."}
-  summary: "Ustawia bit nIndex w 16-bitowym slowie pod nAddress (OR z aAISetMask[nIndex])."
-  details: "Handler sklada wskaznik 24-bit w $72-$74, pobiera maske z aAISetMask[nIndex*2] do n16Temp1, wykonuje 16-bitowe [addr] |= maska. Nie blokuje. Odpowiednik ustawiania flagi gry (np. flaga dzienna lub zdarzenia) ze skryptu; para do 0x14 (test bitu). Kasowanie bitu realizuje inna komenda (aAIResetMask)."
+    - {name: nAddress, offset: 1, size: 3, type: ram_ptr, meaning: "24-bit address of a 16-bit word (in scripts strcFlags.daily1-5, event*, unknown1, etc.)."}
+    - {name: nIndex, offset: 4, size: 1, type: n8, meaning: "Bit number 0-15 to set (index into aAISetMask: mask = 1<<nIndex)."}
+  summary: "Sets bit nIndex in the 16-bit word at nAddress (OR with aAISetMask[nIndex])."
+  details: "The handler assembles a 24-bit pointer in $72-$74, fetches the mask from aAISetMask[nIndex*2] into n16Temp1, and performs a 16-bit [addr] |= mask. Does not block. The equivalent of setting a game flag (e.g. a daily or event flag) from a script; pair of 0x14 (bit test). Clearing a bit is done by another command (aAIResetMask)."
   ram_touched: [ptrAIActionData, ptrTemp0x72, strcVariables.n16Temp1, aAISetMask]
   calls: []
   open_questions: null
