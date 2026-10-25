@@ -1,22 +1,6 @@
 
 
-pAIScripting0x08:
-    dw pAIScripting0x08_Data01                                            ;B3E0BF|        |B3E0DF;
-    dw pAIScripting0x08_Data02                                            ;B3E0C1|        |B3E1C9;
-    dw pAIScripting0x08_Data03                                            ;B3E0C3|        |B3E232;
-    dw pAIScripting0x08_Data04                                            ;B3E0C5|        |B3E31F;
-    dw pAIScripting0x08_Data05                                            ;B3E0C7|        |B3E413;
-    dw pAIScripting0x08_Data06                                            ;B3E0C9|        |B3E4ED;
-    dw pAIScripting0x08_Data07                                            ;B3E0CB|        |B3E560;
-    dw pAIScripting0x08_Data08                                            ;B3E0CD|        |B3E59A;
-    dw pAIScripting0x09                                        ;B3E0CF|        |B3E603;
-    dw pAIScripting0x09                                        ;B3E0D1|        |B3E603;
-    dw pAIScripting0x09                                        ;B3E0D3|        |B3E603;
-    dw pAIScripting0x09                                        ;B3E0D5|        |B3E603;
-    dw pAIScripting0x09                                        ;B3E0D7|        |B3E603;
-    dw pAIScripting0x09                                        ;B3E0D9|        |B3E603;
-    dw pAIScripting0x09                                        ;B3E0DB|        |B3E603;
-    dw pAIScripting0x09                                        ;B3E0DD|        |B3E603;
+    incsrc "../../../../build/gen/ai/slots_08.asm"
  
 pAIScripting0x08_Data01:
  

@@ -1,22 +1,6 @@
 
 
-pAIScripting0x25:
-    dw pAIScripting0x25_Data01                                            ;B4A5B5|        |B4A5D5;
-    dw pAIScripting0x26                                        ;B4A5B7|        |B4A60D;
-    dw pAIScripting0x26                                        ;B4A5B9|        |B4A60D;
-    dw pAIScripting0x26                                        ;B4A5BB|        |B4A60D;
-    dw pAIScripting0x26                                        ;B4A5BD|        |B4A60D;
-    dw pAIScripting0x26                                        ;B4A5BF|        |B4A60D;
-    dw pAIScripting0x26                                        ;B4A5C1|        |B4A60D;
-    dw pAIScripting0x26                                        ;B4A5C3|        |B4A60D;
-    dw pAIScripting0x26                                        ;B4A5C5|        |B4A60D;
-    dw pAIScripting0x26                                        ;B4A5C7|        |B4A60D;
-    dw pAIScripting0x26                                        ;B4A5C9|        |B4A60D;
-    dw pAIScripting0x26                                        ;B4A5CB|        |B4A60D;
-    dw pAIScripting0x26                                        ;B4A5CD|        |B4A60D;
-    dw pAIScripting0x26                                        ;B4A5CF|        |B4A60D;
-    dw pAIScripting0x26                                        ;B4A5D1|        |B4A60D;
-    dw pAIScripting0x26                                        ;B4A5D3|        |B4A60D;
+    incsrc "../../../../build/gen/ai/slots_25.asm"
  
 pAIScripting0x25_Data01:
     %AICMD0x02_FreezeTime()                                    ;B4A5D5

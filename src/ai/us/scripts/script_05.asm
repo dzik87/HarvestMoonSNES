@@ -1,22 +1,6 @@
 
 
-pAIScripting0x05:
-    dw pAIScripting0x05_Data01                                            ;B3CC71|        |B3CC91;
-    dw pAIScripting0x06                                        ;B3CC73|        |B3D447;
-    dw pAIScripting0x06                                        ;B3CC75|        |B3D447;
-    dw pAIScripting0x06                                        ;B3CC77|        |B3D447;
-    dw pAIScripting0x06                                        ;B3CC79|        |B3D447;
-    dw pAIScripting0x06                                        ;B3CC7B|        |B3D447;
-    dw pAIScripting0x06                                        ;B3CC7D|        |B3D447;
-    dw pAIScripting0x06                                        ;B3CC7F|        |B3D447;
-    dw pAIScripting0x06                                        ;B3CC81|        |B3D447;
-    dw pAIScripting0x06                                        ;B3CC83|        |B3D447;
-    dw pAIScripting0x06                                        ;B3CC85|        |B3D447;
-    dw pAIScripting0x06                                        ;B3CC87|        |B3D447;
-    dw pAIScripting0x06                                        ;B3CC89|        |B3D447;
-    dw pAIScripting0x06                                        ;B3CC8B|        |B3D447;
-    dw pAIScripting0x06                                        ;B3CC8D|        |B3D447;
-    dw pAIScripting0x06                                        ;B3CC8F|        |B3D447;
+    incsrc "../../../../build/gen/ai/slots_05.asm"
  
 pAIScripting0x05_Data01:
     %AICMD0x11_EnableUserControl()                             ;B3CC91

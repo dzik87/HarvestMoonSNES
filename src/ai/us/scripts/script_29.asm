@@ -1,22 +1,6 @@
 
 
-pAIScripting0x29:
-    dw pAIScripting0x29_Data01                                            ;B4C427|        |B4C447;
-    dw pAIScripting0x2A                                        ;B4C429|        |B4C4B8;
-    dw pAIScripting0x2A                                        ;B4C42B|        |B4C4B8;
-    dw pAIScripting0x2A                                        ;B4C42D|        |B4C4B8;
-    dw pAIScripting0x2A                                        ;B4C42F|        |B4C4B8;
-    dw pAIScripting0x2A                                        ;B4C431|        |B4C4B8;
-    dw pAIScripting0x2A                                        ;B4C433|        |B4C4B8;
-    dw pAIScripting0x2A                                        ;B4C435|        |B4C4B8;
-    dw pAIScripting0x2A                                        ;B4C437|        |B4C4B8;
-    dw pAIScripting0x2A                                        ;B4C439|        |B4C4B8;
-    dw pAIScripting0x2A                                        ;B4C43B|        |B4C4B8;
-    dw pAIScripting0x2A                                        ;B4C43D|        |B4C4B8;
-    dw pAIScripting0x2A                                        ;B4C43F|        |B4C4B8;
-    dw pAIScripting0x2A                                        ;B4C441|        |B4C4B8;
-    dw pAIScripting0x2A                                        ;B4C443|        |B4C4B8;
-    dw pAIScripting0x2A                                        ;B4C445|        |B4C4B8;
+    incsrc "../../../../build/gen/ai/slots_29.asm"
  
 pAIScripting0x29_Data01:
     %AICMD0x09_StartScript($01, pAIScripting0x29_L001)                                   ;B4C447

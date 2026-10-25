@@ -1,22 +1,6 @@
 
 
-pAIScripting0x0E:
-    dw pAIScripting0x0E_Data01                                            ;B3F0E6|        |B3F106;
-    dw pAIScripting0x0E_Data02                                            ;B3F0E8|        |B3FDD4;
-    dw pAIScripting0x0E_Data03                                            ;B3F0EA|        |B3FFA4;
-    dw pAIScripting0x0E_Data03                                            ;B3F0EC|        |B3FFA4;
-    dw pAIScripting0x0E_Data03                                            ;B3F0EE|        |B3FFA4;
-    dw pAIScripting0x0E_Data03                                            ;B3F0F0|        |B3FFA4;
-    dw pAIScripting0x0E_Data03                                            ;B3F0F2|        |B3FFA4;
-    dw pAIScripting0x0E_Data03                                            ;B3F0F4|        |B3FFA4;
-    dw pAIScripting0x0E_Data03                                            ;B3F0F6|        |B3FFA4;
-    dw pAIScripting0x0E_Data03                                            ;B3F0F8|        |B3FFA4;
-    dw pAIScripting0x0E_Data03                                            ;B3F0FA|        |B3FFA4;
-    dw pAIScripting0x0E_Data03                                            ;B3F0FC|        |B3FFA4;
-    dw pAIScripting0x0E_Data03                                            ;B3F0FE|        |B3FFA4;
-    dw pAIScripting0x0E_Data03                                            ;B3F100|        |B3FFA4;
-    dw pAIScripting0x0E_Data03                                            ;B3F102|        |B3FFA4;
-    dw pAIScripting0x0E_Data03                                            ;B3F104|        |B3FFA4;
+    incsrc "../../../../build/gen/ai/slots_0E.asm"
  
 pAIScripting0x0E_Data01:
  

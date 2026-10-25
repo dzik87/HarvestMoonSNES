@@ -1,22 +1,6 @@
 
 
-pAIScripting0x37:
-    dw pAIScripting0x37_Data01                                            ;B4D2CC|        |B4D2EC;
-    dw pAIScripting0x38                                        ;B4D2CE|        |B4D447;
-    dw pAIScripting0x38                                        ;B4D2D0|        |B4D447;
-    dw pAIScripting0x38                                        ;B4D2D2|        |B4D447;
-    dw pAIScripting0x38                                        ;B4D2D4|        |B4D447;
-    dw pAIScripting0x38                                        ;B4D2D6|        |B4D447;
-    dw pAIScripting0x38                                        ;B4D2D8|        |B4D447;
-    dw pAIScripting0x38                                        ;B4D2DA|        |B4D447;
-    dw pAIScripting0x38                                        ;B4D2DC|        |B4D447;
-    dw pAIScripting0x38                                        ;B4D2DE|        |B4D447;
-    dw pAIScripting0x38                                        ;B4D2E0|        |B4D447;
-    dw pAIScripting0x38                                        ;B4D2E2|        |B4D447;
-    dw pAIScripting0x38                                        ;B4D2E4|        |B4D447;
-    dw pAIScripting0x38                                        ;B4D2E6|        |B4D447;
-    dw pAIScripting0x38                                        ;B4D2E8|        |B4D447;
-    dw pAIScripting0x38                                        ;B4D2EA|        |B4D447;
+    incsrc "../../../../build/gen/ai/slots_37.asm"
  
 pAIScripting0x37_Data01:
     %AICMD0x47_SetValue8(wram80(strcPlayerData.toolEquipped), 16)                          ;B4D2EC

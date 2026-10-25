@@ -1,22 +1,6 @@
 
 
-pAIScripting0x13:
-    dw pAIScripting0x13_Data01                                            ;B4892A|        |B4894A;
-    dw pAIScripting0x14                                        ;B4892C|        |B489D2;
-    dw pAIScripting0x14                                        ;B4892E|        |B489D2;
-    dw pAIScripting0x14                                        ;B48930|        |B489D2;
-    dw pAIScripting0x14                                        ;B48932|        |B489D2;
-    dw pAIScripting0x14                                        ;B48934|        |B489D2;
-    dw pAIScripting0x14                                        ;B48936|        |B489D2;
-    dw pAIScripting0x14                                        ;B48938|        |B489D2;
-    dw pAIScripting0x14                                        ;B4893A|        |B489D2;
-    dw pAIScripting0x14                                        ;B4893C|        |B489D2;
-    dw pAIScripting0x14                                        ;B4893E|        |B489D2;
-    dw pAIScripting0x14                                        ;B48940|        |B489D2;
-    dw pAIScripting0x14                                        ;B48942|        |B489D2;
-    dw pAIScripting0x14                                        ;B48944|        |B489D2;
-    dw pAIScripting0x14                                        ;B48946|        |B489D2;
-    dw pAIScripting0x14                                        ;B48948|        |B489D2;
+    incsrc "../../../../build/gen/ai/slots_13.asm"
  
 pAIScripting0x13_Data01:
     %AICMD0x50()                                               ;B4894A

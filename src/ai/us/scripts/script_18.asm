@@ -1,22 +1,6 @@
 
 
-pAIScripting0x18:
-    dw pAIScripting0x18_Data01                                            ;B48EC5|        |B48EE5;
-    dw pAIScripting0x19                                        ;B48EC7|        |B48F95;
-    dw pAIScripting0x19                                        ;B48EC9|        |B48F95;
-    dw pAIScripting0x19                                        ;B48ECB|        |B48F95;
-    dw pAIScripting0x19                                        ;B48ECD|        |B48F95;
-    dw pAIScripting0x19                                        ;B48ECF|        |B48F95;
-    dw pAIScripting0x19                                        ;B48ED1|        |B48F95;
-    dw pAIScripting0x19                                        ;B48ED3|        |B48F95;
-    dw pAIScripting0x19                                        ;B48ED5|        |B48F95;
-    dw pAIScripting0x19                                        ;B48ED7|        |B48F95;
-    dw pAIScripting0x19                                        ;B48ED9|        |B48F95;
-    dw pAIScripting0x19                                        ;B48EDB|        |B48F95;
-    dw pAIScripting0x19                                        ;B48EDD|        |B48F95;
-    dw pAIScripting0x19                                        ;B48EDF|        |B48F95;
-    dw pAIScripting0x19                                        ;B48EE1|        |B48F95;
-    dw pAIScripting0x19                                        ;B48EE3|        |B48F95;
+    incsrc "../../../../build/gen/ai/slots_18.asm"
  
 pAIScripting0x18_Data01:
     %AICMD0x09_StartScript($01, pAIScripting0x18_L003)                                   ;B48EE5

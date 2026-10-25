@@ -1,22 +1,6 @@
 
 
-pAIScripting0x0D_CrossRoadsEvents:
-    dw AI_ObtainHorse                                          ;B3F068|        |B3F088;
-    dw pAIScripting0x0D_CrossRoadsEvents_Data01                                            ;B3F06A|        |B3F0A9;
-    dw pAIScripting0x0E                                        ;B3F06C|        |B3F0E6;
-    dw pAIScripting0x0E                                        ;B3F06E|        |B3F0E6;
-    dw pAIScripting0x0E                                        ;B3F070|        |B3F0E6;
-    dw pAIScripting0x0E                                        ;B3F072|        |B3F0E6;
-    dw pAIScripting0x0E                                        ;B3F074|        |B3F0E6;
-    dw pAIScripting0x0E                                        ;B3F076|        |B3F0E6;
-    dw pAIScripting0x0E                                        ;B3F078|        |B3F0E6;
-    dw pAIScripting0x0E                                        ;B3F07A|        |B3F0E6;
-    dw pAIScripting0x0E                                        ;B3F07C|        |B3F0E6;
-    dw pAIScripting0x0E                                        ;B3F07E|        |B3F0E6;
-    dw pAIScripting0x0E                                        ;B3F080|        |B3F0E6;
-    dw pAIScripting0x0E                                        ;B3F082|        |B3F0E6;
-    dw pAIScripting0x0E                                        ;B3F084|        |B3F0E6;
-    dw pAIScripting0x0E                                        ;B3F086|        |B3F0E6;
+    incsrc "../../../../build/gen/ai/slots_0D.asm"
  
 AI_ObtainHorse:
  

@@ -111,6 +111,15 @@ The US scripts in `src/ai/us/scripts/` are authoritative. The other releases are
 - **WRAM operands** use `wram80(<label>)` (`src/ai/region.asm`): the label carries `!DE_RAM_SHIFT` (see `src/common/ram.asm`), and the
   function applies the JP delta (`!AI_JP_WRAM_DELTA`, -32) until the common RAM map describes the JP layout. 459 raw
   `$80xxxx` literals were converted by `tools/migration/ai_wram80.py` (US bytes unchanged).
+- **What is source language and what is generated.** The script bodies are not raw bytes: they are a readable script language
+  (`%AICMD0x09_StartScript(...)` macro calls with named commands, `src/ai/commands.asm`). That DSL stays in `src/ai/us/scripts/script_*.asm`
+  as the source; no second bytecode/text format is introduced (it would be a 1:1 renaming of the macro calls, and the region
+  patch blocks and `wram80()` operands live right inside the macro lines). Only genuine *data* is generated from `assets/ai/`
+  by `tools/ai/aidata.py` (`build` -> `build/gen/ai/`, `check`): `scripts.json` (script id, label, bank, slot table = the entry points
+  of each script's sub scripts; `ppAIScriptingList` is derived from the order of the scripts) and `npc_sprite_tables.txt` (the 214
+  sprite/direction tables `aAIScriptingData*`, 3-byte records `sprite:flip`, 4 per line = the four facing directions). The generated
+  files carry the same labels, so the region patch structure is unaffected: slot tables and sprite tables are identical in all four releases
+  (only the relocation of the labels differs).
 - The former raw `db` dumps `src/ai/{de,eu,jp}/` (never part of the build) are gone.
 - `tools/build.py --region EU|DE|JP` builds the tree with `-DREGION_xx=1` and verifies banks `$B3-$B5` against the hashes
   `EU-AI`, `DE-AI`, `JP-AI` in `tests/expected.json` (banks `$80-$85` of DE are checked by the `DE` entry in the same run).

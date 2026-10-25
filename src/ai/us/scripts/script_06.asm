@@ -1,22 +1,6 @@
 
 
-pAIScripting0x06:
-    dw pAIScripting0x06_Data01                                            ;B3D447|        |B3D467;
-    dw pAIScripting0x06_Data02                                            ;B3D449|        |B3D59D;
-    dw pAIScripting0x06_Data03                                            ;B3D44B|        |B3D5E3;
-    dw pAIScripting0x06_Data04                                            ;B3D44D|        |B3D6CF;
-    dw pAIScripting0x06_Data05                                            ;B3D44F|        |B3D7C9;
-    dw pAIScripting0x06_Data06                                            ;B3D451|        |B3D90E;
-    dw pAIScripting0x06_Data07                                            ;B3D453|        |B3D99B;
-    dw pAIScripting0x07                                        ;B3D455|        |B3D9F7;
-    dw pAIScripting0x07                                        ;B3D457|        |B3D9F7;
-    dw pAIScripting0x07                                        ;B3D459|        |B3D9F7;
-    dw pAIScripting0x07                                        ;B3D45B|        |B3D9F7;
-    dw pAIScripting0x07                                        ;B3D45D|        |B3D9F7;
-    dw pAIScripting0x07                                        ;B3D45F|        |B3D9F7;
-    dw pAIScripting0x07                                        ;B3D461|        |B3D9F7;
-    dw pAIScripting0x07                                        ;B3D463|        |B3D9F7;
-    dw pAIScripting0x07                                        ;B3D465|        |B3D9F7;
+    incsrc "../../../../build/gen/ai/slots_06.asm"
  
 pAIScripting0x06_Data01:
  

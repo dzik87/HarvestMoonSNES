@@ -1,22 +1,6 @@
 
 
-pAIScripting0x2F:
-    dw pAIScripting0x2F_Data01                                            ;B4C6F1|        |B4C711;
-    dw pAIScripting0x30                                        ;B4C6F3|        |B4C7C3;
-    dw pAIScripting0x30                                        ;B4C6F5|        |B4C7C3;
-    dw pAIScripting0x30                                        ;B4C6F7|        |B4C7C3;
-    dw pAIScripting0x30                                        ;B4C6F9|        |B4C7C3;
-    dw pAIScripting0x30                                        ;B4C6FB|        |B4C7C3;
-    dw pAIScripting0x30                                        ;B4C6FD|        |B4C7C3;
-    dw pAIScripting0x30                                        ;B4C6FF|        |B4C7C3;
-    dw pAIScripting0x30                                        ;B4C701|        |B4C7C3;
-    dw pAIScripting0x30                                        ;B4C703|        |B4C7C3;
-    dw pAIScripting0x30                                        ;B4C705|        |B4C7C3;
-    dw pAIScripting0x30                                        ;B4C707|        |B4C7C3;
-    dw pAIScripting0x30                                        ;B4C709|        |B4C7C3;
-    dw pAIScripting0x30                                        ;B4C70B|        |B4C7C3;
-    dw pAIScripting0x30                                        ;B4C70D|        |B4C7C3;
-    dw pAIScripting0x30                                        ;B4C70F|        |B4C7C3;
+    incsrc "../../../../build/gen/ai/slots_2F.asm"
  
 pAIScripting0x2F_Data01:
     %AICMD0x00_SetMusic($11, $B4)                              ;B4C711

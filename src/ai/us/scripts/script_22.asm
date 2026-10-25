@@ -1,22 +1,6 @@
 
 
-pAIScripting0x22:
-    dw pAIScripting0x22_Data01                                            ;B49FD8|        |B49FF8;
-    dw pAIScripting0x22_Data02                                            ;B49FDA|        |B4A045;
-    dw pAIScripting0x22_Data03                                            ;B49FDC|        |B4A091;
-    dw pAIScripting0x22_L003                                            ;B49FDE|        |B4A0B6;
-    dw pAIScripting0x22_L007                                            ;B49FE0|        |B4A0D2;
-    dw pAIScripting0x22_L010                                            ;B49FE2|        |B4A11E;
-    dw pAIScripting0x22_L014                                            ;B49FE4|        |B4A141;
-    dw pAIScripting0x22_L017                                            ;B49FE6|        |B4A1BC;
-    dw pAIScripting0x22_Data04                                            ;B49FE8|        |B4A1D8;
-    dw pAIScripting0x22_Data05                                            ;B49FEA|        |B4A278;
-    dw pAIScripting0x22_Data06                                            ;B49FEC|        |B4A297;
-    dw pAIScripting0x22_Data07                                            ;B49FEE|        |B4A301;
-    dw pAIScripting0x22_Data08                                            ;B49FF0|        |B4A321;
-    dw pAIScripting0x23                                        ;B49FF2|        |B4A37F;
-    dw pAIScripting0x23                                        ;B49FF4|        |B4A37F;
-    dw pAIScripting0x23                                        ;B49FF6|        |B4A37F;
+    incsrc "../../../../build/gen/ai/slots_22.asm"
  
 pAIScripting0x22_Data01:
  

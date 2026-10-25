@@ -1,22 +1,6 @@
 
 
-pAIScripting0x0B:
-    dw pAIScripting0x0B_Data01                                            ;B3E9DA|        |B3E9FA;
-    dw pAIScripting0x0B_Data02                                            ;B3E9DC|        |B3EB5C;
-    dw pAIScripting0x0B_Data03                                            ;B3E9DE|        |B3EB83;
-    dw pAIScripting0x0B_Data04                                            ;B3E9E0|        |B3EBB2;
-    dw pAIScripting0x0B_Data05                                            ;B3E9E2|        |B3EC2D;
-    dw pAIScripting0x0B_Data06                                            ;B3E9E4|        |B3EC8D;
-    dw pAIScripting0x0B_Data07                                            ;B3E9E6|        |B3ECE2;
-    dw pAIScripting0x0B_Data08                                            ;B3E9E8|        |B3ED39;
-    dw pAIScripting0x0B_Data09                                            ;B3E9EA|        |B3EE1A;
-    dw pAIScripting0x0B_Data09                                            ;B3E9EC|        |B3EE1A;
-    dw AI_HouseExtensionCampain                                ;B3E9EE|        |B3EEEA;
-    dw pAIScripting0x0B_Data10                                            ;B3E9F0|        |B3EF0A;
-    dw pAIScripting0x0B_Data11                                            ;B3E9F2|        |B3EF2E;
-    dw pAIScripting0x0C_DogEvent                               ;B3E9F4|        |B3EF5A;
-    dw pAIScripting0x0C_DogEvent                               ;B3E9F6|        |B3EF5A;
-    dw pAIScripting0x0C_DogEvent                               ;B3E9F8|        |B3EF5A;
+    incsrc "../../../../build/gen/ai/slots_0B.asm"
  
 pAIScripting0x0B_Data01:
  

@@ -1,22 +1,6 @@
 
 
-pAIScripting0x46:
-    dw pAIScripting0x46_Data01                                            ;B5A703|        |B5A723;
-    dw pAIScripting0x46_Data02                                            ;B5A705|        |B5A73D;
-    dw pAIScripting0x46_Data03                                            ;B5A707|        |B5A757;
-    dw pAIScripting0x46_Data04                                            ;B5A709|        |B5A771;
-    dw pAIScripting0x46_Data05                                            ;B5A70B|        |B5A78B;
-    dw pAIScripting0x46_Data06                                            ;B5A70D|        |B5A7A5;
-    dw pAIScripting0x46_Data07                                            ;B5A70F|        |B5A7BF;
-    dw pAIScripting0x46_Data08                                            ;B5A711|        |B5A7D9;
-    dw pAIScripting0x46_Data09                                            ;B5A713|        |B5A7F3;
-    dw pAIScripting0x46_Data10                                            ;B5A715|        |B5A80D;
-    dw pAIScripting0x46_Data11                                            ;B5A717|        |B5A827;
-    dw pAIScripting0x46_Data12                                            ;B5A719|        |B5A841;
-    dw pAIScripting0x46_Data13                                            ;B5A71B|        |B5A85D;
-    dw pAIScripting0x47_HowToPlay                              ;B5A71D|        |B5AC6E;
-    dw pAIScripting0x47_HowToPlay                              ;B5A71F|        |B5AC6E;
-    dw pAIScripting0x47_HowToPlay                              ;B5A721|        |B5AC6E;
+    incsrc "../../../../build/gen/ai/slots_46.asm"
  
 pAIScripting0x46_Data01:
  

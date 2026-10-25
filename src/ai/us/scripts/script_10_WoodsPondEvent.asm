@@ -1,22 +1,6 @@
 
 
-pAIScripting0x10_WoodsPondEvent:
-    dw AI_WaterImp                                             ;B487B8|        |B487D8;
-    dw pAIScripting0x11                                        ;B487BA|        |B48818;
-    dw pAIScripting0x11                                        ;B487BC|        |B48818;
-    dw pAIScripting0x11                                        ;B487BE|        |B48818;
-    dw pAIScripting0x11                                        ;B487C0|        |B48818;
-    dw pAIScripting0x11                                        ;B487C2|        |B48818;
-    dw pAIScripting0x11                                        ;B487C4|        |B48818;
-    dw pAIScripting0x11                                        ;B487C6|        |B48818;
-    dw pAIScripting0x11                                        ;B487C8|        |B48818;
-    dw pAIScripting0x11                                        ;B487CA|        |B48818;
-    dw pAIScripting0x11                                        ;B487CC|        |B48818;
-    dw pAIScripting0x11                                        ;B487CE|        |B48818;
-    dw pAIScripting0x11                                        ;B487D0|        |B48818;
-    dw pAIScripting0x11                                        ;B487D2|        |B48818;
-    dw pAIScripting0x11                                        ;B487D4|        |B48818;
-    dw pAIScripting0x11                                        ;B487D6|        |B48818;
+    incsrc "../../../../build/gen/ai/slots_10.asm"
  
 AI_WaterImp:
     %AICMD0x08_EnableAIControl()                               ;B487D8

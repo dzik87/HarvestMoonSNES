@@ -1,22 +1,6 @@
 
 
-pAIScripting0x11:
-    dw pAIScripting0x11_Data01                                            ;B48818|        |B48838;
-    dw pAIScripting0x12                                        ;B4881A|        |B488A0;
-    dw pAIScripting0x12                                        ;B4881C|        |B488A0;
-    dw pAIScripting0x12                                        ;B4881E|        |B488A0;
-    dw pAIScripting0x12                                        ;B48820|        |B488A0;
-    dw pAIScripting0x12                                        ;B48822|        |B488A0;
-    dw pAIScripting0x12                                        ;B48824|        |B488A0;
-    dw pAIScripting0x12                                        ;B48826|        |B488A0;
-    dw pAIScripting0x12                                        ;B48828|        |B488A0;
-    dw pAIScripting0x12                                        ;B4882A|        |B488A0;
-    dw pAIScripting0x12                                        ;B4882C|        |B488A0;
-    dw pAIScripting0x12                                        ;B4882E|        |B488A0;
-    dw pAIScripting0x12                                        ;B48830|        |B488A0;
-    dw pAIScripting0x12                                        ;B48832|        |B488A0;
-    dw pAIScripting0x12                                        ;B48834|        |B488A0;
-    dw pAIScripting0x12                                        ;B48836|        |B488A0;
+    incsrc "../../../../build/gen/ai/slots_11.asm"
  
 pAIScripting0x11_Data01:
     %AICMD0x50()                                               ;B48838

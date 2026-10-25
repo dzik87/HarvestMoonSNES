@@ -1,22 +1,6 @@
 
 
-pAIScripting0x19:
-    dw pAIScripting0x19_Data01                                            ;B48F95|        |B48FB5;
-    dw pAIScripting0x19_Data02                                            ;B48F97|        |B48FDE;
-    dw pAIScripting0x1A                                        ;B48F99|        |B490D3;
-    dw pAIScripting0x1A                                        ;B48F9B|        |B490D3;
-    dw pAIScripting0x1A                                        ;B48F9D|        |B490D3;
-    dw pAIScripting0x1A                                        ;B48F9F|        |B490D3;
-    dw pAIScripting0x1A                                        ;B48FA1|        |B490D3;
-    dw pAIScripting0x1A                                        ;B48FA3|        |B490D3;
-    dw pAIScripting0x1A                                        ;B48FA5|        |B490D3;
-    dw pAIScripting0x1A                                        ;B48FA7|        |B490D3;
-    dw pAIScripting0x1A                                        ;B48FA9|        |B490D3;
-    dw pAIScripting0x1A                                        ;B48FAB|        |B490D3;
-    dw pAIScripting0x1A                                        ;B48FAD|        |B490D3;
-    dw pAIScripting0x1A                                        ;B48FAF|        |B490D3;
-    dw pAIScripting0x1A                                        ;B48FB1|        |B490D3;
-    dw pAIScripting0x1A                                        ;B48FB3|        |B490D3;
+    incsrc "../../../../build/gen/ai/slots_19.asm"
  
 pAIScripting0x19_Data01:
  

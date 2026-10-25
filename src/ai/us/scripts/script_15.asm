@@ -1,22 +1,6 @@
 
 
-pAIScripting0x15:
-    dw pAIScripting0x15_Data01                                            ;B48C25|        |B48C45;
-    dw pAIScripting0x16                                        ;B48C27|        |B48D38;
-    dw pAIScripting0x16                                        ;B48C29|        |B48D38;
-    dw pAIScripting0x16                                        ;B48C2B|        |B48D38;
-    dw pAIScripting0x16                                        ;B48C2D|        |B48D38;
-    dw pAIScripting0x16                                        ;B48C2F|        |B48D38;
-    dw pAIScripting0x16                                        ;B48C31|        |B48D38;
-    dw pAIScripting0x16                                        ;B48C33|        |B48D38;
-    dw pAIScripting0x16                                        ;B48C35|        |B48D38;
-    dw pAIScripting0x16                                        ;B48C37|        |B48D38;
-    dw pAIScripting0x16                                        ;B48C39|        |B48D38;
-    dw pAIScripting0x16                                        ;B48C3B|        |B48D38;
-    dw pAIScripting0x16                                        ;B48C3D|        |B48D38;
-    dw pAIScripting0x16                                        ;B48C3F|        |B48D38;
-    dw pAIScripting0x16                                        ;B48C41|        |B48D38;
-    dw pAIScripting0x16                                        ;B48C43|        |B48D38;
+    incsrc "../../../../build/gen/ai/slots_15.asm"
  
 pAIScripting0x15_Data01:
     %AICMD0x05_SetTransferPosition(184, 360)                   ;B48C45

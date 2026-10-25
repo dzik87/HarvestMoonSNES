@@ -1,22 +1,6 @@
 
 
-pAIScripting0x23:
-    dw pAIScripting0x23_Data01                                            ;B4A37F|        |B4A39F;
-    dw pAIScripting0x24                                        ;B4A381|        |B4A455;
-    dw pAIScripting0x24                                        ;B4A383|        |B4A455;
-    dw pAIScripting0x24                                        ;B4A385|        |B4A455;
-    dw pAIScripting0x24                                        ;B4A387|        |B4A455;
-    dw pAIScripting0x24                                        ;B4A389|        |B4A455;
-    dw pAIScripting0x24                                        ;B4A38B|        |B4A455;
-    dw pAIScripting0x24                                        ;B4A38D|        |B4A455;
-    dw pAIScripting0x24                                        ;B4A38F|        |B4A455;
-    dw pAIScripting0x24                                        ;B4A391|        |B4A455;
-    dw pAIScripting0x24                                        ;B4A393|        |B4A455;
-    dw pAIScripting0x24                                        ;B4A395|        |B4A455;
-    dw pAIScripting0x24                                        ;B4A397|        |B4A455;
-    dw pAIScripting0x24                                        ;B4A399|        |B4A455;
-    dw pAIScripting0x24                                        ;B4A39B|        |B4A455;
-    dw pAIScripting0x24                                        ;B4A39D|        |B4A455;
+    incsrc "../../../../build/gen/ai/slots_23.asm"
  
 pAIScripting0x23_Data01:
     %AICMD0x09_StartScript($0C, pAIScripting0x23_L001)                                   ;B4A39F

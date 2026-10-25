@@ -1,22 +1,6 @@
 
 
-pAIScripting0x1E:
-    dw pAIScripting0x1E_Data01                                            ;B4967A|        |B4969A;
-    dw pAIScripting0x1F                                        ;B4967C|        |B49A3F;
-    dw pAIScripting0x1F                                        ;B4967E|        |B49A3F;
-    dw pAIScripting0x1F                                        ;B49680|        |B49A3F;
-    dw pAIScripting0x1F                                        ;B49682|        |B49A3F;
-    dw pAIScripting0x1F                                        ;B49684|        |B49A3F;
-    dw pAIScripting0x1F                                        ;B49686|        |B49A3F;
-    dw pAIScripting0x1F                                        ;B49688|        |B49A3F;
-    dw pAIScripting0x1F                                        ;B4968A|        |B49A3F;
-    dw pAIScripting0x1F                                        ;B4968C|        |B49A3F;
-    dw pAIScripting0x1F                                        ;B4968E|        |B49A3F;
-    dw pAIScripting0x1F                                        ;B49690|        |B49A3F;
-    dw pAIScripting0x1F                                        ;B49692|        |B49A3F;
-    dw pAIScripting0x1F                                        ;B49694|        |B49A3F;
-    dw pAIScripting0x1F                                        ;B49696|        |B49A3F;
-    dw pAIScripting0x1F                                        ;B49698|        |B49A3F;
+    incsrc "../../../../build/gen/ai/slots_1E.asm"
  
 pAIScripting0x1E_Data01:
     %AICMD0x50()                                               ;B4969A
