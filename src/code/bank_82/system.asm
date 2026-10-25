@@ -26,12 +26,12 @@ nSystemTranferData_82E6D2:
 aSystemTransferArgument:
     dw $10E8,$1228                                             ;82E73E|        |      ; 0x02 * [n16, n16]
  
-fUnknown_82E742:
+fMainMenu_DrawSaveSlotFrames:
     REP #$30                                                   ;82E742|C230    |      ;
     LDX.W #$0000                                               ;82E744|A20000  |      ;
  
  -- REP #$20                                                   ;82E747|C220    |      ;
-    LDA.L aUnknown_82F268,X                                    ;82E749|BF68F282|82F268;
+    LDA.L aMainMenu_SlotFrameTileStart,X                                    ;82E749|BF68F282|82F268;
     STA.B strcVariables.n16Temp1                               ;82E74D|857E    |00007E;
     INC A                                                      ;82E74F|1A      |      ;
     STA.B strcVariables.n16Temp2                               ;82E750|8580    |000080;
@@ -40,7 +40,7 @@ fUnknown_82E742:
     STA.B strcVariables.n16Temp3                               ;82E756|8582    |000082;
     INC A                                                      ;82E758|1A      |      ;
     STA.B strcVariables.n16Temp4                               ;82E759|8584    |000084;
-    LDA.L aUnknown_82F258,X                                    ;82E75B|BF58F282|82F258;
+    LDA.L aMainMenu_SlotFrameVramAddr,X                                    ;82E75B|BF58F282|82F258;
     STA.B strcVariables.n16Unk86                               ;82E75F|8586    |000086;
     LDY.W #$0000                                               ;82E761|A00000  |      ;
  
@@ -97,7 +97,7 @@ fUnknown_82E742:
     PLX                                                        ;82E7D0|FA      |      ;
     PLY                                                        ;82E7D1|7A      |      ;
     INY                                                        ;82E7D2|C8      |      ;
-    LDA.L aUnknown_82F288,X                                    ;82E7D3|BF88F282|82F288;
+    LDA.L aMainMenu_SlotFrameRunLength,X                                    ;82E7D3|BF88F282|82F288;
     STA.B strcVariables.n16Unk88                               ;82E7D7|8588    |000088;
     CPY.B strcVariables.n16Unk88                               ;82E7D9|C488    |000088;
     BNE -                                                      ;82E7DB|D087    |82E764;

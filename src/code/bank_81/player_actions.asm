@@ -126,7 +126,7 @@ fPlayerAction0x1C:
     STA.W strcPlayerData.toolEquipped                          ;81C0A7|8D2109  |000921;
     PLA                                                        ;81C0AA|68      |      ;
     STA.W strcPlayerData.toolSecond                            ;81C0AB|8D2309  |000923;
-    JSL.L fToolUsedSound_Unknown828FF3                         ;81C0AE|22F38F82|828FF3;
+    JSL.L fToolUsedSound_PlayOnToolChange                         ;81C0AE|22F38F82|828FF3;
  
 .exit:
     JMP.W fPlayerAction_CheckIdle                                      ;81C0B2|4C02C0  |81C002;
@@ -661,7 +661,7 @@ fPlayerAction0x0A:
     STA.W strcPlayerData.unkCounter91B                         ;81C548|8D1B09  |00091B;
     CMP.B #$18                                                 ;81C54B|C918    |      ;
     BNE .exit                                                  ;81C54D|D004    |81C553;
-    JSL.L fToolUsedSound_Unknown828FB1                         ;81C54F|22B18F82|828FB1;
+    JSL.L fToolUsedSound_PlayToolHit                         ;81C54F|22B18F82|828FB1;
  
 .exit:
     JMP.W fPlayerAction_CheckIdle                                      ;81C553|4C02C0  |81C002;

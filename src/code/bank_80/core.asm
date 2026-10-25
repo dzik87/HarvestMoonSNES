@@ -608,7 +608,7 @@ fCore_InterruptIRQ5:
     STA.W SNES_NMITIMEN                                        ;80863A|8D0042  |004200;
     STZ.W SNES_INIDISP                                         ;80863D|9C0021  |002100;
     CLI                                                        ;808640|58      |      ;
-    JML.L fUnknown_82D75E                                      ;808641|5C5ED782|82D75E;
+    JML.L fMainMenu_TitleScreenInit                                      ;808641|5C5ED782|82D75E;
  
  
 fCore_WaitForNextNMI:

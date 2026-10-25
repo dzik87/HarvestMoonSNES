@@ -1191,7 +1191,7 @@ fItemCarriedTool_EquipFromShed:
     JSL.L fObjectSlots_FreeCurrent                                      ;81882C|22F1A481|81A4F1;
     SEP #$20                                                   ;818830|E220    |      ;
     STZ.W strcPlayerData.carryItemId                           ;818832|9C1D09  |00091D;
-    JSL.L fToolUsedSound_Unknown828FF3                         ;818835|22F38F82|828FF3;
+    JSL.L fToolUsedSound_PlayOnToolChange                         ;818835|22F38F82|828FF3;
     RTS                                                        ;818839|60      |      ;
  
  
@@ -1851,7 +1851,7 @@ fItemCarried_CarryLoop_NoSell:
     LDX.W nTileInFrontOfPlayerX                                ;818CA2|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;818CA5|AC8709  |000987;
     LDA.W #$0002                                               ;818CA8|A90200  |      ;
-    JSL.L fUnknown_82AC61                                      ;818CAB|2261AC82|82AC61;
+    JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;818CAB|2261AC82|82AC61;
     REP #$30                                                   ;818CAF|C230    |      ;
     CPX.W #$0001                                               ;818CB1|E00100  |      ;
     BEQ .label6                                                ;818CB4|F043    |818CF9;
@@ -1924,7 +1924,7 @@ fItemCarried_PutDown_NoSell:
     LDX.W nTileInFrontOfPlayerX                                ;818D49|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;818D4C|AC8709  |000987;
     LDA.W #$0002                                               ;818D4F|A90200  |      ;
-    JSL.L fUnknown_82AC61                                      ;818D52|2261AC82|82AC61;
+    JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;818D52|2261AC82|82AC61;
     REP #$30                                                   ;818D56|C230    |      ;
     CPX.W #$0001                                               ;818D58|E00100  |      ;
     BEQ fItemShipped_SetBinTileAndRelease                             ;818D5B|F04E    |818DAB;
@@ -2084,7 +2084,7 @@ fItemCarriedFeed_PutDown:
     LDX.W nTileInFrontOfPlayerX                                ;818EAE|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;818EB1|AC8709  |000987;
     LDA.W #$0000                                               ;818EB4|A90000  |      ;
-    JSL.L fUnknown_82AC61                                      ;818EB7|2261AC82|82AC61;
+    JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;818EB7|2261AC82|82AC61;
     SEP #$20                                                   ;818EBB|E220    |      ;
     REP #$10                                                   ;818EBD|C210    |      ;
     LDA.B strcMap.loadAreaId                                   ;818EBF|A522    |000022;
@@ -2395,7 +2395,7 @@ fItemCarried_HandleDropAction:
     LDA.W #$0000                                               ;81911D|A90000  |      ;
     LDX.W nTileInFrontOfPlayerX                                ;819120|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;819123|AC8709  |000987;
-    JSL.L fUnknown_82AC61                                      ;819126|2261AC82|82AC61;
+    JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;819126|2261AC82|82AC61;
     CPX.W #$00F0                                               ;81912A|E0F000  |      ;
     BEQ +                                                      ;81912D|F003    |819132;
     JMP.W fItemCarried_BeginPutDown                                      ;81912F|4C7E91  |81917E;
@@ -2586,7 +2586,7 @@ fItemCarriedAnimal_CarryLoop:
     LDA.W #$0002                                               ;8192C9|A90200  |      ;
     LDX.W nTileInFrontOfPlayerX                                ;8192CC|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;8192CF|AC8709  |000987;
-    JSL.L fUnknown_82AC61                                      ;8192D2|2261AC82|82AC61;
+    JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;8192D2|2261AC82|82AC61;
     SEP #$20                                                   ;8192D6|E220    |      ;
     AND.B #$1F                                                 ;8192D8|291F    |      ;
     BEQ +                                                      ;8192DA|F003    |8192DF;
@@ -2607,7 +2607,7 @@ fItemCarriedAnimal_CarryLoop:
     LDA.W #$0002                                               ;8192F8|A90200  |      ;
     LDX.W nTileInFrontOfPlayerX                                ;8192FB|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;8192FE|AC8709  |000987;
-    JSL.L fUnknown_82AC61                                      ;819301|2261AC82|82AC61;
+    JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;819301|2261AC82|82AC61;
     SEP #$20                                                   ;819305|E220    |      ;
     AND.B #$1F                                                 ;819307|291F    |      ;
     BEQ +                                                      ;819309|F003    |81930E;
@@ -2628,7 +2628,7 @@ fItemCarriedAnimal_CarryLoop:
     LDA.W #$0002                                               ;819327|A90200  |      ;
     LDX.W nTileInFrontOfPlayerX                                ;81932A|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;81932D|AC8709  |000987;
-    JSL.L fUnknown_82AC61                                      ;819330|2261AC82|82AC61;
+    JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;819330|2261AC82|82AC61;
     SEP #$20                                                   ;819334|E220    |      ;
     AND.B #$1F                                                 ;819336|291F    |      ;
     BEQ +                                                      ;819338|F003    |81933D;
@@ -2705,7 +2705,7 @@ fItemShipped_InFarmCoopOrBarn:
     LDA.W #$0000                                               ;8193A8|A90000  |      ;
     LDX.W nTileInFrontOfPlayerX                                ;8193AB|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;8193AE|AC8709  |000987;
-    JSL.L fUnknown_82AC61                                      ;8193B1|2261AC82|82AC61;
+    JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;8193B1|2261AC82|82AC61;
     CPX.W #$00F2                                               ;8193B5|E0F200  |      ;
     BEQ +                                                      ;8193B8|F003    |8193BD;
     JMP.W fItemCarried_PlaceEggInIncubator                                      ;8193BA|4C9794  |819497;
@@ -2825,7 +2825,7 @@ fItemCarried_PlaceEggInIncubator:
     LDA.W #$0000                                               ;8194BF|A90000  |      ;
     LDX.W nTileInFrontOfPlayerX                                ;8194C2|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;8194C5|AC8709  |000987;
-    JSL.L fUnknown_82AC61                                      ;8194C8|2261AC82|82AC61;
+    JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;8194C8|2261AC82|82AC61;
     CPX.W #$00F7                                               ;8194CC|E0F700  |      ;
     BEQ +                                                      ;8194CF|F003    |8194D4;
     JMP.W fItemCarried_PutDown_Outdoor                                      ;8194D1|4C3F95  |81953F;
@@ -2894,7 +2894,7 @@ fItemCarried_PutDown_Outdoor:
     LDX.W nTileInFrontOfPlayerX                                ;819568|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;81956B|AC8709  |000987;
     LDA.W #$0002                                               ;81956E|A90200  |      ;
-    JSL.L fUnknown_82AC61                                      ;819571|2261AC82|82AC61;
+    JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;819571|2261AC82|82AC61;
     REP #$30                                                   ;819575|C230    |      ;
     LDA.W #$0006                                               ;819577|A90600  |      ;
     CPX.W #$00F0                                               ;81957A|E0F000  |      ;
@@ -2921,7 +2921,7 @@ fItemCarried_PutDown_LowAreas:
     LDX.W nTileInFrontOfPlayerX                                ;8195A1|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;8195A4|AC8709  |000987;
     LDA.W #$0002                                               ;8195A7|A90200  |      ;
-    JSL.L fUnknown_82AC61                                      ;8195AA|2261AC82|82AC61;
+    JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;8195AA|2261AC82|82AC61;
     REP #$30                                                   ;8195AE|C230    |      ;
     LDA.W #$0000                                               ;8195B0|A90000  |      ;
     CPX.W #$00F0                                               ;8195B3|E0F000  |      ;

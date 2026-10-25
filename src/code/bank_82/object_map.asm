@@ -330,7 +330,7 @@ fObjectMap_HuricaneDamage:
     RTL                                                        ;82A810|6B      |      ;
  
  
-fObjectMap_Unknown82A811:
+fObjectMap_UpdateFarmTilesNewDay:
     SEP #$20                                                   ;82A811|E220    |      ;
     REP #$10                                                   ;82A813|C210    |      ;
     LDA.B #$04                                                 ;82A815|A904    |      ;

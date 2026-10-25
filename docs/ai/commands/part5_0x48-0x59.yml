@@ -24,10 +24,10 @@
   params:
     - {name: pPointerB3, offset: 1, size: 2, type: script_ptr, meaning: "16-bit pointer (bank $B3) to a sprite/flip data table indexed by direction; stored in the AI object +0x33 (pDataAddress)"}
   summary: "Sets the sprite data table of the AI object and immediately selects the entry matching the player's current direction (the 0x2B variant with index = strcPlayer.direction)."
-  details: "Writes pPointerB3 to the AI object +0x33. Writes the low byte of strcPlayer.direction to the object +0x02 (nDataIndex). Sets the object flags +0x01 |= 0x03. Calls fAI_Unknown848895 with ptrTemp0x72 = pDataAddress:B3, which loads from the table (3 bytes per entry, index*3) a word into the object +0x16 (spriteTableIdx) and a byte*64 into +0x14 (flip). At the end the object +0x10 += 1 (script execution is interrupted until the next frame). Used in dog/horse scripts (B3 General) before 0x2E and the UpdateDog loop. Difference from 0x2B - the index comes from the player's direction, not from an argument."
+  details: "Writes pPointerB3 to the AI object +0x33. Writes the low byte of strcPlayer.direction to the object +0x02 (nDataIndex). Sets the object flags +0x01 |= 0x03. Calls fAI_LoadSlotSpriteFromDirTable with ptrTemp0x72 = pDataAddress:B3, which loads from the table (3 bytes per entry, index*3) a word into the object +0x16 (spriteTableIdx) and a byte*64 into +0x14 (flip). At the end the object +0x10 += 1 (script execution is interrupted until the next frame). Used in dog/horse scripts (B3 General) before 0x2E and the UpdateDog loop. Difference from 0x2B - the index comes from the player's direction, not from an argument."
   ram_touched: [ptrAIActionData, ptrAIUnknown0xCC, strcPlayer.direction, ptrTemp0x72]
-  calls: [fAI_Unknown848895]
-  open_questions: "The exact meaning of the +0x01 flag bits (0x03) is not fully established - fAI_Unknown848286 indicates that bit0 = object drawn/active, bit1/bit2 select the object update variant. The name is a descriptive proposal."
+  calls: [fAI_LoadSlotSpriteFromDirTable]
+  open_questions: "The exact meaning of the +0x01 flag bits (0x03) is not fully established - fAI_UpdateSlotMovementAndObject indicates that bit0 = object drawn/active, bit1/bit2 select the object update variant. The name is a descriptive proposal."
 
 - opcode: 0x4A
   macro: AICMD0x4A
@@ -84,9 +84,9 @@
   params:
     - {name: pNextAction, offset: 1, size: 2, type: script_ptr, meaning: "jump address (same bank as the script), executed when the player used the Blue Feather next to the object"}
   summary: "Conditional jump: if the player is next to the object and used the Blue Feather (flag daily3 0x0040), the object turns to face the player and the script jumps to pNextAction."
-  details: "Conditions: obj+0x0C != 0 (player nearby), strcPlayer.action != USINGTOOL, strcFlags.daily3 & 0x0040 (set only by fToolUsedAction0x18_BlueFeather, cleared every frame in the AI loop). If not met - advances the pointer by 3 (skips the address) and continues without yielding the frame. If met - ptrAIActionData = pNextAction; obj+0x08 = obj+0x07, obj+0x03 = obj+0x04 = obj+0x0C = 0; obj+0x02 (direction/index) = strcPlayer.direction XOR 1 (turns face to the player); reloads the sprite via fAI_Unknown848895 from the pDataAddress table (+0x33, bank B3); obj+0x01 |= 0x14 (stops movement); obj+0x10 += 1 (yields the frame). Used 133 times, mainly in NPC scripts (e.g. B3 script 0x01) before a dialog."
+  details: "Conditions: obj+0x0C != 0 (player nearby), strcPlayer.action != USINGTOOL, strcFlags.daily3 & 0x0040 (set only by fToolUsedAction0x18_BlueFeather, cleared every frame in the AI loop). If not met - advances the pointer by 3 (skips the address) and continues without yielding the frame. If met - ptrAIActionData = pNextAction; obj+0x08 = obj+0x07, obj+0x03 = obj+0x04 = obj+0x0C = 0; obj+0x02 (direction/index) = strcPlayer.direction XOR 1 (turns face to the player); reloads the sprite via fAI_LoadSlotSpriteFromDirTable from the pDataAddress table (+0x33, bank B3); obj+0x01 |= 0x14 (stops movement); obj+0x10 += 1 (yields the frame). Used 133 times, mainly in NPC scripts (e.g. B3 script 0x01) before a dialog."
   ram_touched: [ptrAIActionData, ptrAIUnknown0xCC, strcPlayer.action, strcPlayer.direction, strcFlags.daily3]
-  calls: [fAI_Unknown848895]
+  calls: [fAI_LoadSlotSpriteFromDirTable]
   open_questions: "The meaning of the object bytes +0x03/+0x04/+0x07/+0x08 (probably NPC movement counters/direction) has not been established."
 
 - opcode: 0x4E
@@ -98,7 +98,7 @@
   length_bytes: 1
   params: []
   summary: "Clears flag daily2 0x0008 - restores tile interactions disabled by 0x40."
-  details: "Executes UnsetFlag(daily2, 0x0008). This flag is set by 0x40 DisableTileInteractions and checked, among others, in fUnknown_82AC61 (bank 82, handling of objects/tiles under the cursor) and in sound.asm. Does not block. Used in B4 at the end of a sequence (after 0x07 SetPlayerDirection)."
+  details: "Executes UnsetFlag(daily2, 0x0008). This flag is set by 0x40 DisableTileInteractions and checked, among others, in fObjectEngine_GetObjectPropertyByDirSeason (bank 82, handling of objects/tiles under the cursor) and in sound.asm. Does not block. Used in B4 at the end of a sequence (after 0x07 SetPlayerDirection)."
   ram_touched: [ptrAIActionData, strcFlags.daily2]
   calls: []
   open_questions: null
@@ -184,7 +184,7 @@
     - {name: nDialogId, offset: 1, size: 2, type: n16, meaning: "dialog index passed in X to fDialog_DialogHandler"}
     - {name: nUnknown2, offset: 3, size: 1, type: unknown, meaning: "stored to strcDialogDisplay.dialogUnk191 (always $01 in scripts)"}
   summary: "Shows a dialog in input handler mode 6 (closes by itself when finished, without player input) - a variant of 0x1C/0x1D."
-  details: "Identical to 0x1C/0x1D except: strcDialogDisplay.mapUnk19A = 6 (instead of 2) and additionally zeroing of $09B1 (16-bit). In fInput_Handler mode 6 (fInput_Handler_case06): after the ENDDIALOG flag is set, it counts frames in $09B1 up to 0x78 (120), calls fDialog_Unknown_8393F9, sets mapUnk19A and masks the A button - so the dialog closes by itself after about 2 s. After calling fDialog_DialogHandler, obj+0x10 += 1 (yields the frame). Used 37 times in B5 (scenes/festivals)."
+  details: "Identical to 0x1C/0x1D except: strcDialogDisplay.mapUnk19A = 6 (instead of 2) and additionally zeroing of $09B1 (16-bit). In fInput_Handler mode 6 (fInput_Handler_case06): after the ENDDIALOG flag is set, it counts frames in $09B1 up to 0x78 (120), calls fDialog_EndDialogRestoreScroll, sets mapUnk19A and masks the A button - so the dialog closes by itself after about 2 s. After calling fDialog_DialogHandler, obj+0x10 += 1 (yields the frame). Used 37 times in B5 (scenes/festivals)."
   ram_touched: [ptrAIActionData, strcDialogDisplay.dialogUnk191, strcDialogDisplay.mapUnk19A, strcDialogDisplay.dialogId, strcDialogDisplay.dialogFlags, "$09B1"]
   calls: [fDialog_DialogHandler]
   open_questions: "The meaning of nUnknown2 (dialogUnk191) is still unknown - it is modified in several places in dialog.asm. The name 'AutoClose' comes from analysis of case06 in input.asm; not confirmed in game."
@@ -261,7 +261,7 @@
   length_bytes: 1
   params: []
   summary: "Sets the player action PACTION_SWAPTOOL - swaps the current tool with the second one."
-  details: "Advances the pointer by 1 and sets strcPlayer.action = PACTION_SWAPTOOL (0x1C). fPlayerAction0x1C (81C061), after the animation finishes (PFLAGS_ANIMATING), swaps toolEquipped <-> toolSecond, calls fToolUsedSound_Unknown828FF3 and returns to PACTION_NONE. Does not yield the frame within the command itself; the effect happens in subsequent frames of the player action."
+  details: "Advances the pointer by 1 and sets strcPlayer.action = PACTION_SWAPTOOL (0x1C). fPlayerAction0x1C (81C061), after the animation finishes (PFLAGS_ANIMATING), swaps toolEquipped <-> toolSecond, calls fToolUsedSound_PlayOnToolChange and returns to PACTION_NONE. Does not yield the frame within the command itself; the effect happens in subsequent frames of the player action."
   ram_touched: [ptrAIActionData, strcPlayer.action, strcPlayerData.toolEquipped, strcPlayerData.toolSecond]
   calls: []
   open_questions: null

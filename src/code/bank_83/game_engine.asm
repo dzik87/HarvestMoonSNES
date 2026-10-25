@@ -903,7 +903,7 @@ fGameEngine_CheckTileCollision:
     LDA.W #$0000                                               ;83B10E|A90000  |      ;
     STA.B strcVariables.n16Unk90                               ;83B111|8590    |000090;
     LDA.W #$0002                                               ;83B113|A90200  |      ;
-    JSL.L fUnknown_82AC61                                      ;83B116|2261AC82|82AC61;
+    JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;83B116|2261AC82|82AC61;
     SEP #$20                                                   ;83B11A|E220    |      ;
     REP #$10                                                   ;83B11C|C210    |      ;
     STA.B strcVariables.n8Temp1                                ;83B11E|8592    |000092;

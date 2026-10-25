@@ -84,7 +84,7 @@ fSound_GetToolSound:
 .sickle:
     REP #$30                                                   ;82AAE5|C230    |      ;
     LDA.W #$0001                                               ;82AAE7|A90100  |      ;
-    JSL.L fUnknown_82AC61                                      ;82AAEA|2261AC82|82AC61;
+    JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;82AAEA|2261AC82|82AC61;
     CPX.W #$00A0                                               ;82AAEE|E0A000  |      ;
     BCS +                                                      ;82AAF1|B011    |82AB04;
     CPX.W #$0000                                               ;82AAF3|E00000  |      ;
@@ -105,7 +105,7 @@ fSound_GetToolSound:
 .plow:
     REP #$30                                                   ;82AB0A|C230    |      ;
     LDA.W #$0001                                               ;82AB0C|A90100  |      ;
-    JSL.L fUnknown_82AC61                                      ;82AB0F|2261AC82|82AC61;
+    JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;82AB0F|2261AC82|82AC61;
     CPX.W #$00A0                                               ;82AB13|E0A000  |      ;
     BCS +                                                      ;82AB16|B011    |82AB29;
     CPX.W #$0000                                               ;82AB18|E00000  |      ;
@@ -126,7 +126,7 @@ fSound_GetToolSound:
 .hammer:
     REP #$30                                                   ;82AB2F|C230    |      ;
     LDA.W #$0001                                               ;82AB31|A90100  |      ;
-    JSL.L fUnknown_82AC61                                      ;82AB34|2261AC82|82AC61;
+    JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;82AB34|2261AC82|82AC61;
     CPX.W #$00A0                                               ;82AB38|E0A000  |      ;
     BCS +                                                      ;82AB3B|B011    |82AB4E;
     CPX.W #$0000                                               ;82AB3D|E00000  |      ;
@@ -147,7 +147,7 @@ fSound_GetToolSound:
 .axe:
     REP #$30                                                   ;82AB54|C230    |      ;
     LDA.W #$0001                                               ;82AB56|A90100  |      ;
-    JSL.L fUnknown_82AC61                                      ;82AB59|2261AC82|82AC61;
+    JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;82AB59|2261AC82|82AC61;
     CPX.W #$00A0                                               ;82AB5D|E0A000  |      ;
     BCS +                                                      ;82AB60|B011    |82AB73;
     CPX.W #$0000                                               ;82AB62|E00000  |      ;
@@ -178,7 +178,7 @@ fSound_GetToolSound:
     BCS .wcreturn2                                             ;82AB8B|B058    |82ABE5;
     REP #$30                                                   ;82AB8D|C230    |      ;
     LDA.W #$0001                                               ;82AB8F|A90100  |      ;
-    JSL.L fUnknown_82AC61                                      ;82AB92|2261AC82|82AC61;
+    JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;82AB92|2261AC82|82AC61;
     CPX.W #$00F0                                               ;82AB96|E0F000  |      ;
     BEQ .wcreturn1                                             ;82AB99|F044    |82ABDF;
     CPX.W #$00F4                                               ;82AB9B|E0F400  |      ;
@@ -188,7 +188,7 @@ fSound_GetToolSound:
  
   + REP #$30                                                   ;82ABA2|C230    |      ;
     LDA.W #$0001                                               ;82ABA4|A90100  |      ;
-    JSL.L fUnknown_82AC61                                      ;82ABA7|2261AC82|82AC61;
+    JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;82ABA7|2261AC82|82AC61;
     CPX.W #$00F0                                               ;82ABAB|E0F000  |      ;
     BEQ .wcreturn1                                             ;82ABAE|F02F    |82ABDF;
     CPX.W #$00F9                                               ;82ABB0|E0F900  |      ;
@@ -228,7 +228,7 @@ fSound_GetToolSound:
 .sprinkler:
     REP #$30                                                   ;82ABEB|C230    |      ;
     LDA.W #$0001                                               ;82ABED|A90100  |      ;
-    JSL.L fUnknown_82AC61                                      ;82ABF0|2261AC82|82AC61;
+    JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;82ABF0|2261AC82|82AC61;
     CPX.W #$00A0                                               ;82ABF4|E0A000  |      ;
     BCS +                                                      ;82ABF7|B011    |82AC0A;
     CPX.W #$0000                                               ;82ABF9|E00000  |      ;
@@ -249,7 +249,7 @@ fSound_GetToolSound:
 .anySeedBag:
     REP #$30                                                   ;82AC10|C230    |      ;
     LDA.W #$0001                                               ;82AC12|A90100  |      ;
-    JSL.L fUnknown_82AC61                                      ;82AC15|2261AC82|82AC61;
+    JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;82AC15|2261AC82|82AC61;
     CPX.W #$00A0                                               ;82AC19|E0A000  |      ;
     BCS +                                                      ;82AC1C|B011    |82AC2F;
     CPX.W #$0000                                               ;82AC1E|E00000  |      ;
@@ -274,7 +274,7 @@ fSound_GetToolSound:
     BCS ..return0                                              ;82AC3B|B01E    |82AC5B;
     REP #$30                                                   ;82AC3D|C230    |      ;
     LDA.W #$0001                                               ;82AC3F|A90100  |      ;
-    JSL.L fUnknown_82AC61                                      ;82AC42|2261AC82|82AC61;
+    JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;82AC42|2261AC82|82AC61;
     CPX.W #$00C3                                               ;82AC46|E0C300  |      ;
     BEQ ..return1                                              ;82AC49|F00A    |82AC55;
     CPX.W #$00E2                                               ;82AC4B|E0E200  |      ;
@@ -294,7 +294,7 @@ fSound_GetToolSound:
     RTL                                                        ;82AC60|6B      |      ;
  
  
-fUnknown_82AC61:
+fObjectEngine_GetObjectPropertyByDirSeason:
     REP #$30                                                   ;82AC61|C230    |      ; A: nArg1, X: nPosX, Y: nPosY
     STA.B strcVariables.n16Temp3                               ;82AC63|8582    |000082;
     REP #$20                                                   ;82AC65|C220    |      ;
@@ -400,7 +400,7 @@ fUnknown_82AC61:
 .data2:
     dw $0010,$0020,$0040,$0080                                 ;82AD06|        |      ; 0x04 * [n16][nSeasonId]
  
-fUnknown_82AD0E:
+fPlayer_InteractWithFrontObject:
     SEP #$20                                                   ;82AD0E|E220    |      ;
     REP #$10                                                   ;82AD10|C210    |      ;
     CPX.W #$00F0                                               ;82AD12|E0F000  |      ;
@@ -692,7 +692,7 @@ fUnknown_82AD0E:
     RTL                                                        ;82AEFF|6B      |      ;
  
  
-fUnknown_82AF00:
+fObjectMap_ConnectAdjacentObjectTiles:
     REP #$30                                                   ;82AF00|C230    |      ;
     LDY.W #$0000                                               ;82AF02|A00000  |      ;
  

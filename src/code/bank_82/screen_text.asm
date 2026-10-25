@@ -85,8 +85,8 @@ fScreen_NameInput:
     REP #$20                                                   ;82E8E0|C220    |      ;
     LDA.B strcObject.gameObjectIdx                             ;82E8E2|A5A5    |0000A5;
     STA.W strcMenuData.gameObjectIdx                           ;82E8E4|8D9509  |000995;
-    JSL.L fUnknown_82EAB4                                      ;82E8E7|22B4EA82|82EAB4;
-    JSL.L fUnknown_82EA80                                      ;82E8EB|2280EA82|82EA80;
+    JSL.L fScreen_NameInput_DrawNameBox                                      ;82E8E7|22B4EA82|82EAB4;
+    JSL.L fScreen_NameInput_DrawEmptyNameSlots                                      ;82E8EB|2280EA82|82EA80;
     REP #$20                                                   ;82E8EF|C220    |      ;
     STZ.W strcBGScrool.BG1HorOffs                              ;82E8F1|9C3C01  |00013C;
     STZ.W strcBGScrool.BG1VerOffs                              ;82E8F4|9C3E01  |00013E;
@@ -136,7 +136,7 @@ fScreen_NameInput:
     REP #$20                                                   ;82E965|C220    |      ;
     LDA.W #$1800                                               ;82E967|A90018  |      ;
     STA.B $C7                                                  ;82E96A|85C7    |0000C7;
-    JSR.W fUnknown_82EA15                                      ;82E96C|2015EA  |82EA15;
+    JSR.W fScreen_NameInput_BlinkCursor                                      ;82E96C|2015EA  |82EA15;
     JSL.L fInput_Handler                                       ;82E96F|2234C084|84C034;
     SEP #$20                                                   ;82E973|E220    |      ;
     LDA.W strcMenuData.tableSelector                           ;82E975|AD9309  |000993;
@@ -145,7 +145,7 @@ fScreen_NameInput:
     JMP.W .nameHandler                                         ;82E97C|4CCEE9  |82E9CE;
  
  
-  + JSL.L fMenuUnknown_82EB57                                  ;82E97F|2257EB82|82EB57;
+  + JSL.L fMenu_LoadNameInputCursorPos                                  ;82E97F|2257EB82|82EB57;
     SEP #$20                                                   ;82E983|E220    |      ;
     LDA.B strcVariables.u8Unk96                                ;82E985|A596    |000096;
     CMP.B #$01                                                 ;82E987|C901    |      ;
@@ -225,7 +225,7 @@ fScreen_NameInput:
   + BRA .nameHandler                                           ;82EA13|80B9    |82E9CE;
  
  
-fUnknown_82EA15:
+fScreen_NameInput_BlinkCursor:
     SEP #$20                                                   ;82EA15|E220    |      ;
     REP #$10                                                   ;82EA17|C210    |      ;
     LDA.W strcMenuData.nameEntryIdx                            ;82EA19|AD9409  |000994;
@@ -248,14 +248,14 @@ fUnknown_82EA15:
     BNE .label1                                                ;82EA40|D00B    |82EA4D;
     REP #$20                                                   ;82EA42|C220    |      ;
     LDA.W #$00A8                                               ;82EA44|A9A800  |      ;
-    JSL.L fTextUnknown_82EA60                                  ;82EA47|2260EA82|82EA60;
+    JSL.L fScreen_NameInput_DrawLetterAtCursor                                  ;82EA47|2260EA82|82EA60;
     BRA .label2                                                ;82EA4B|8009    |82EA56;
  
  
 .label1:
     REP #$20                                                   ;82EA4D|C220    |      ;
     LDA.W #!DIALOG_SPACE                                               
-    JSL.L fTextUnknown_82EA60                                  ;82EA52|2260EA82|82EA60;
+    JSL.L fScreen_NameInput_DrawLetterAtCursor                                  ;82EA52|2260EA82|82EA60;
  
 .label2:
     SEP #$20                                                   ;82EA56|E220    |      ;
@@ -267,7 +267,7 @@ fUnknown_82EA15:
     RTS                                                        ;82EA5F|60      |      ; BIGEND
  
  
-fTextUnknown_82EA60:
+fScreen_NameInput_DrawLetterAtCursor:
     REP #$20                                                   ;82EA60|C220    |      ; A: nLetterCode
     PHA                                                        ;82EA62|48      |      ; nLetterCode -> stack1
     SEP #$20                                                   ;82EA63|E220    |      ;
@@ -277,7 +277,7 @@ fTextUnknown_82EA60:
     REP #$20                                                   ;82EA6B|C220    |      ;
     ASL A                                                      ;82EA6D|0A      |      ;
     TAX                                                        ;82EA6E|AA      |      ;
-    LDA.L aUnknown_82EB4D,X                                    ;82EA6F|BF4DEB82|82EB4D;
+    LDA.L aScreen_NameInput_LetterVramAddr,X                                    ;82EA6F|BF4DEB82|82EB4D;
     STA.L strcDialogDisplay.dialogUnk185+$20000                ;82EA73|8F850180|800185;
     PLA                                                        ;82EA77|68      |      ; A = nLetterCode
     LDX.W #$0001                                               ;82EA78|A20100  |      ;
@@ -285,9 +285,9 @@ fTextUnknown_82EA60:
     RTL                                                        ;82EA7F|6B      |      ;
  
  
-fUnknown_82EA80:
+fScreen_NameInput_DrawEmptyNameSlots:
     REP #$20                                                   ;82EA80|C220    |      ;
-    LDA.L aUnknown_82EB4D                                      ;82EA82|AF4DEB82|82EB4D;
+    LDA.L aScreen_NameInput_LetterVramAddr                                      ;82EA82|AF4DEB82|82EB4D;
     STA.B strcVariables.n16Temp3                               ;82EA86|8582    |000082;
     LDX.W #$0000                                               ;82EA88|A20000  |      ;
  
@@ -311,9 +311,9 @@ fUnknown_82EA80:
     RTL                                                        ;82EAB3|6B      |      ;
  
  
-fUnknown_82EAB4:
+fScreen_NameInput_DrawNameBox:
     REP #$30                                                   ;82EAB4|C230    |      ;
-    LDA.L nUnknown_82EB4B                                      ;82EAB6|AF4BEB82|82EB4B;
+    LDA.L nScreen_NameInput_BoxTileStart                                      ;82EAB6|AF4BEB82|82EB4B;
     STA.B strcVariables.n16Temp1                               ;82EABA|857E    |00007E;
     INC A                                                      ;82EABC|1A      |      ;
     STA.B strcVariables.n16Temp2                               ;82EABD|8580    |000080;
@@ -322,7 +322,7 @@ fUnknown_82EAB4:
     STA.B strcVariables.n16Temp3                               ;82EAC3|8582    |000082;
     INC A                                                      ;82EAC5|1A      |      ;
     STA.B strcVariables.n16Temp4                               ;82EAC6|8584    |000084;
-    LDA.L nUnknown_82EB49                                      ;82EAC8|AF49EB82|82EB49;
+    LDA.L nScreen_NameInput_BoxVramAddr                                      ;82EAC8|AF49EB82|82EB49;
     STA.B strcVariables.n16Unk86                               ;82EACC|8586    |000086;
     LDY.W #$0000                                               ;82EACE|A00000  |      ;
  
@@ -377,21 +377,21 @@ fUnknown_82EAB4:
     INC.B strcVariables.n16Unk86                               ;82EB3A|E686    |000086;
     PLY                                                        ;82EB3C|7A      |      ;
     INY                                                        ;82EB3D|C8      |      ;
-    LDA.L nUnknown82EB55                                       ;82EB3E|AF55EB82|82EB55;
+    LDA.L nScreen_NameInput_BoxTileCount                                       ;82EB3E|AF55EB82|82EB55;
     STA.B strcVariables.n16Unk88                               ;82EB42|8588    |000088;
     CPY.B strcVariables.n16Unk88                               ;82EB44|C488    |000088;
     BNE -                                                      ;82EB46|D089    |82EAD1;
     RTS                                                        ;82EB48|60      |      ;
  
  
-nUnknown_82EB49:
+nScreen_NameInput_BoxVramAddr:
     dw $788C                                                   ;82EB49|        |      ; n16
  
-nUnknown_82EB4B:
+nScreen_NameInput_BoxTileStart:
     dw $2002                                                   ;82EB4B|        |      ; n16
  
-aUnknown_82EB4D:
+aScreen_NameInput_LetterVramAddr:
     dw $5010,$5020,$5030,$5040                                 ;82EB4D|        |      ; 0x04 * [n16]
  
-nUnknown82EB55:
+nScreen_NameInput_BoxTileCount:
     dw $0004                                                   ;82EB55|        |      ; n16

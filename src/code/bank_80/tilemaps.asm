@@ -199,7 +199,7 @@ fTileMap_MapChangeHandler:
     LDA.B strcMap.loadAreaId                                   ;80A903|A522    |000022;
     CMP.B #!AREA_TOWNSPRING                                                 
     BCS .loadFarm                                              ;80A907|B004    |80A90D;
-    JSL.L fUnknown_82AF00                                      ;80A909|2200AF82|82AF00;
+    JSL.L fObjectMap_ConnectAdjacentObjectTiles                                      ;80A909|2200AF82|82AF00;
  
 .loadFarm:
     SEP #$20                                                   ;80A90D|E220    |      ;

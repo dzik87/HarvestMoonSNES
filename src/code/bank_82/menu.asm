@@ -1,6 +1,6 @@
 ; Bank $82 module "menu" - starts at $82EB57
  
-fMenuUnknown_82EB57:
+fMenu_LoadNameInputCursorPos:
     REP #$30                                                   ;82EB57|C230    |      ;
     LDA.W #$EBF8                                               ;82EB59|A9F8EB  |      ;
     STA.B ptrTemp0x72                                          ;82EB5C|8572    |000072;
@@ -50,7 +50,7 @@ fMenuUnknown_82EB57:
     RTL                                                        ;82EBAB|6B      |      ;
  
  
-fMenuUnknown_82EBAC:
+fMenu_GetNameInputCellField:
     REP #$30                                                   ;82EBAC|C230    |      ; A: nArg, return A: nResult
     PHA                                                        ;82EBAE|48      |      ; nArg -> stack1
     LDA.W #$EBF8                                               ;82EBAF|A9F8EB  |      ;
@@ -241,60 +241,60 @@ aMenuData_82F0D0:
     db $2F,$2D,$00,$01,$C8,$A4,$30,$2C,$1E,$2E,$00,$02         ;82F244|        |      ;
     db $C0,$B4,$2C,$2F,$23,$27,$00,$04                         ;82F250|        |      ;
  
-aUnknown_82F258:
+aMainMenu_SlotFrameVramAddr:
     dw $78C6,$78D0,$7908,$7910,$7A06,$7A10                     ;82F258|        |      ;
     dw $7A48,$7A50                                             ;82F264|        |      ;
  
-aUnknown_82F268:
+aMainMenu_SlotFrameTileStart:
     dw $2002,$2006,$200A,$200C,$2022,$2026                     ;82F268|        |      ;
     dw $202A,$202C                                             ;82F274|        |      ;
  
-aUnknown_82F278:
+aMainMenu_SlotInfoTextVramAddr:
     dw $5010,$5030,$5050,$5060,$5110,$5130                     ;82F278|        |      ;
     dw $5150,$5160                                             ;82F284|        |      ;
  
-aUnknown_82F288:
+aMainMenu_SlotFrameRunLength:
     dw $0002,$0002,$0001,$0003,$0002,$0002                     ;82F288|        |      ;
     dw $0001,$0003                                             ;82F294|        |      ;
  
 sYearOrdinal_82F298:
     dw $0012,$0013,$000D,$0003,$0011,$0003                     ;82F298|        |      ; 0x03 * [s16, s16]
  
-aUnknown_82F2A4:
+aMainMenu_PalAnimLogoA:
     dl $207F10,$107EF0,$107E8E                                 ;82F2A4|        |      ;
  
-DATA24_82F2AD:
+aMainMenu_PalAnimLogoA_Loop:
     dl $10720A                                                 ;82F2AD|        |      ;
     dw $FFFE                                                   ;82F2B0|        |      ;
-    dl DATA24_82F2AD                                           ;82F2B2|        |82F2AD;
+    dl aMainMenu_PalAnimLogoA_Loop                                           ;82F2B2|        |82F2AD;
  
-aUnknown_82F2B5:
+aMainMenu_PalAnimLogoB:
     dl $107A8A,$10724A,$106DE5,$1065A3                         ;82F2B5|        |      ;
  
-DATA24_82F2C1:
+aMainMenu_PalAnimLogoB_Loop:
     dl $1058C3                                                 ;82F2C1|        |      ;
     dw $FFFE                                                   ;82F2C4|        |      ;
-    dl DATA24_82F2C1                                           ;82F2C6|        |82F2C1;
+    dl aMainMenu_PalAnimLogoB_Loop                                           ;82F2C6|        |82F2C1;
  
-aUnknown_82F2C9:
+aMainMenu_PalAnimItemHighlighted:
     dl $08629F,$085E1F,$1059DF,$085E1F                         ;82F2C9|        |      ;
     dw $FFFE                                                   ;82F2D5|        |      ;
-    dl aUnknown_82F2C9                                         ;82F2D7|        |82F2C9;
+    dl aMainMenu_PalAnimItemHighlighted                                         ;82F2D7|        |82F2C9;
  
-aUnknown_82F2DA:
+aMainMenu_PalAnimItemNormal:
     dl $087F3F                                                 ;82F2DA|        |      ;
     dw $FFFE                                                   ;82F2DD|        |      ;
-    dl aUnknown_82F2DA                                         ;82F2DF|        |82F2DA;
+    dl aMainMenu_PalAnimItemNormal                                         ;82F2DF|        |82F2DA;
  
-aUnknown_82F2E2:
+aMainMenu_PalAnimSlotHighlighted:
     dl $041D4D,$04035D,$0403FF,$0437FF                         ;82F2E2|        |      ;
     dl $0403FF,$04035D                                         ;82F2EE|        |      ;
     dw $FFFE                                                   ;82F2F4|        |      ;
-    dl aUnknown_82F2E2                                         ;82F2F6|        |82F2E2;
+    dl aMainMenu_PalAnimSlotHighlighted                                         ;82F2F6|        |82F2E2;
  
-aUnknown_82F2F9:
+aMainMenu_PalAnimSlotNormal:
     dl $041D4D                                                 ;82F2F9|        |      ;
     dw $FFFE                                                   ;82F2FC|        |      ;
-    dl aUnknown_82F2F9                                         ;82F2FE|        |82F2F9;
+    dl aMainMenu_PalAnimSlotNormal                                         ;82F2FE|        |82F2F9;
  
     pad $82FFFF

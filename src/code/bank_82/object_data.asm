@@ -26,7 +26,7 @@ fMap_UpdateFarmTilemapCoords:
     RTL                                                        ;82B05F|6B      |      ;
  
  
-fUnknown_82B060:
+fMap_FillCurrentTilemapRect:
     SEP #$20                                                   ;82B060|E220    |      ; A: nArg1, X: nArg2, Y: nArg3
     REP #$10                                                   ;82B062|C210    |      ;
     STA.B $99                                                  ;82B064|8599    |000099;
@@ -75,7 +75,7 @@ fUnknown_82B060:
     RTL                                                        ;82B0A6|6B      |      ;
  
  
-fUnknown_82B0A7:
+fMap_StampTemplateToCurrentTilemap:
     REP #$30                                                   ;82B0A7|C230    |      ;
     STX.B strcVariables.n16Unk8E                               ;82B0A9|868E    |00008E;
     STY.B strcVariables.n16Unk90                               ;82B0AB|8490    |000090;
@@ -167,7 +167,7 @@ fObjectEngine_GetObjectAtCoords:
     RTL                                                        ;82B12E|6B      |      ;
  
  
-fUnknown_82B12F:
+fObjectEngine_AlignCoordsTo16_Unused:
     REP #$30                                                   ;82B12F|C230    |      ; UNUSED
     TXA                                                        ;82B131|8A      |      ;
     AND.W #$FFF0                                               ;82B132|29F0FF  |      ;

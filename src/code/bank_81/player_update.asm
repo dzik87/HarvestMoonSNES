@@ -183,7 +183,7 @@ fPlayerInteraction0x03:
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     SEP #$20                                                   ;81D6D7|E220    |      ;
     STZ.W strcAudio.toolId                                     ;81D6D9|9C1901  |000119;
-    JSL.L fToolUsedSound_Unknown828FF3                         ;81D6DC|22F38F82|828FF3;
+    JSL.L fToolUsedSound_PlayOnToolChange                         ;81D6DC|22F38F82|828FF3;
  
 .return:
     RTS                                                        ;81D6E0|60      |      ;
@@ -266,7 +266,7 @@ fPlayerInteraction0x0F:
     REP #$20                                                   ;81D747|C220    |      ;
     LDA.W ptrUnknown0xCF                                       ;81D749|ADCF00  |0000CF;
     BNE .return                                                ;81D74C|D076    |81D7C4;
-    JSL.L fWeatherUnknown_8281C0                               ;81D74E|22C08182|8281C0;
+    JSL.L fWeather_SetForecastDialogIndex                               ;81D74E|22C08182|8281C0;
     SEP #$20                                                   ;81D752|E220    |      ;
     LDA.B #$00                                                 ;81D754|A900    |      ;
     XBA                                                        ;81D756|EB      |      ;
@@ -556,7 +556,7 @@ fPlayerInteraction0x12:
     JMP.W .return                                              ;81DA04|4C81DA  |81DA81;
  
  
-  + JSL.L fWeatherUnknown_8281C0                               ;81DA07|22C08182|8281C0;
+  + JSL.L fWeather_SetForecastDialogIndex                               ;81DA07|22C08182|8281C0;
     SEP #$20                                                   ;81DA0B|E220    |      ;
     LDA.B #$00                                                 ;81DA0D|A900    |      ;
     XBA                                                        ;81DA0F|EB      |      ;
@@ -639,7 +639,7 @@ fPlayerInteraction0x13:
     JMP.W .return                                              ;81DABA|4C37DB  |81DB37;
  
  
-  + JSL.L fWeatherUnknown_8281C0                               ;81DABD|22C08182|8281C0;
+  + JSL.L fWeather_SetForecastDialogIndex                               ;81DABD|22C08182|8281C0;
     SEP #$20                                                   ;81DAC1|E220    |      ;
     LDA.B #$00                                                 ;81DAC3|A900    |      ;
     XBA                                                        ;81DAC5|EB      |      ;
@@ -1576,7 +1576,7 @@ fPlayerInteraction0x35:
     JSL.L fAudio_PlaySoundEffectAndWait                                 ;81E37A|22FE8283|8382FE;
     SEP #$20                                                   ;81E37E|E220    |      ;
     STZ.W strcAudio.toolId                                     ;81E380|9C1901  |000119;
-    JSL.L fToolUsedSound_Unknown828FF3                         ;81E383|22F38F82|828FF3;
+    JSL.L fToolUsedSound_PlayOnToolChange                         ;81E383|22F38F82|828FF3;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     RTS                                                        ;81E393|60      |      ;
  

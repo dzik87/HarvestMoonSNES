@@ -310,15 +310,15 @@ fMainMenu_PrepareHowToPlay:
     JSL.L fObject_RenderAll                                      ;82D712|22E08385|8583E0;
     REP #$20                                                   ;82D716|C220    |      ;
     %CheckFlag(daily2, $0004)
-    BNE fUnknown_82D731                                        ;82D71F|D010    |82D731;
+    BNE fMainMenu_HowToPlayCleanup                                        ;82D71F|D010    |82D731;
     %CheckFlag(daily4, $0080)
-    BNE fUnknown_82D731                                        ;82D728|D007    |82D731;
+    BNE fMainMenu_HowToPlayCleanup                                        ;82D728|D007    |82D731;
     SEP #$20                                                   ;82D72A|E220    |      ;
     STZ.B $00                                                  ;82D72C|6400    |000000;
     JMP.W $D6C9                                                ;82D72E|4CC9D6  |82D6C9;
  
  
-fUnknown_82D731:
+fMainMenu_HowToPlayCleanup:
     REP #$30                                                   ;82D731|C230    |      ;
     LDX.W #$0000                                               ;82D733|A20000  |      ;
  
@@ -331,19 +331,19 @@ fUnknown_82D731:
     SEP #$20                                                   ;82D744|E220    |      ;
     LDA.B strcMap.loadAreaId                                   ;82D746|A522    |000022;
     CMP.B #$04                                                 ;82D748|C904    |      ;
-    BCS fUnknown_82D750                                        ;82D74A|B004    |82D750;
+    BCS fMainMenu_SetStateReturnToTitle                                        ;82D74A|B004    |82D750;
     JSL.L fObjectMap_LoadFarm                                  ;82D74C|2282A682|82A682;
  
-fUnknown_82D750:
+fMainMenu_SetStateReturnToTitle:
     SEP #$20                                                   ;82D750|E220    |      ;
     LDA.B #$09                                                 ;82D752|A909    |      ;
     STA.B strcVariables.n8Temp4                                ;82D754|8595    |000095;
     REP #$20                                                   ;82D756|C220    |      ;
     STZ.B strcVariables.n16Unk90                               ;82D758|6490    |000090;
-    JML.L fUnknown_82D871                                      ;82D75A|5C71D882|82D871;
+    JML.L fMainMenu_EndFrame                                      ;82D75A|5C71D882|82D871;
  
  
-fUnknown_82D75E:
+fMainMenu_TitleScreenInit:
     REP #$30                                                   ;82D75E|C230    |      ;
     SEP #$20                                                   ;82D760|E220    |      ;
     LDA.B #$04                                                 ;82D762|A904    |      ;
@@ -412,66 +412,66 @@ fUnknown_82D75E:
     LDA.W #$0001                                               ;82D808|A90100  |      ;
     STA.B strcObject.bankAddress                               ;82D80B|85AF    |0000AF;
  
-fUnknown_82D80D:
+fMainMenu_StateLoop:
     SEP #$20                                                   ;82D80D|E220    |      ;
     LDA.B $00                                                  ;82D80F|A500    |000000;
-    BEQ fUnknown_82D80D                                        ;82D811|F0FA    |82D80D;
+    BEQ fMainMenu_StateLoop                                        ;82D811|F0FA    |82D80D;
     JSL.L fPalette_ProcessColorAnimSlots                                  ;82D813|22698E80|808E69;
     JSL.L fInput_Handler                                       ;82D817|2234C084|84C034;
     SEP #$20                                                   ;82D81B|E220    |      ;
     LDA.B strcVariables.n8Temp4                                ;82D81D|A595    |000095;
-    BEQ fUnknown_82D883                                        ;82D81F|F062    |82D883;
+    BEQ fMainMenu_StateInitialDelay                                        ;82D81F|F062    |82D883;
     CMP.B #$01                                                 ;82D821|C901    |      ;
     BNE +                                                      ;82D823|D004    |82D829;
-    JML.L fUnknown_82D8B0                                      ;82D825|5CB0D882|82D8B0;
+    JML.L fMainMenu_StateOpeningDemo                                      ;82D825|5CB0D882|82D8B0;
  
  
   + CMP.B #$02                                                 ;82D829|C902    |      ;
     BNE +                                                      ;82D82B|D004    |82D831;
-    JML.L fUnknown_82DA8C                                      ;82D82D|5C8CDA82|82DA8C;
+    JML.L fMainMenu_StateLogoScrollHorizontal                                      ;82D82D|5C8CDA82|82DA8C;
  
  
   + CMP.B #$03                                                 ;82D831|C903    |      ;
     BNE +                                                      ;82D833|D004    |82D839;
-    JML.L fUnknown_82DAC9                                      ;82D835|5CC9DA82|82DAC9;
+    JML.L fMainMenu_StateLogoScrollDiagonal                                      ;82D835|5CC9DA82|82DAC9;
  
  
   + CMP.B #$04                                                 ;82D839|C904    |      ;
     BNE +                                                      ;82D83B|D004    |82D841;
-    JML.L fUnknown_82DC0D                                      ;82D83D|5C0DDC82|82DC0D;
+    JML.L fMainMenu_StateTitleStartCursorAnim                                      ;82D83D|5C0DDC82|82DC0D;
  
  
   + CMP.B #$05                                                 ;82D841|C905    |      ;
     BNE +                                                      ;82D843|D004    |82D849;
-    JML.L fUnknown_82DD8C                                      ;82D845|5C8CDD82|82DD8C;
+    JML.L fMainMenu_StateTitleMenuInput                                      ;82D845|5C8CDD82|82DD8C;
  
  
   + CMP.B #$06                                                 ;82D849|C906    |      ;
     BNE +                                                      ;82D84B|D004    |82D851;
-    JML.L fUnknown_82DB8E                                      ;82D84D|5C8EDB82|82DB8E;
+    JML.L fMainMenu_StateSkipToTitleScreen                                      ;82D84D|5C8EDB82|82DB8E;
  
  
   + CMP.B #$07                                                 ;82D851|C907    |      ;
     BNE +                                                      ;82D853|D004    |82D859;
-    JML.L fUnknown_82DF92                                      ;82D855|5C92DF82|82DF92;
+    JML.L fMainMenu_StateNewGameSlotSelect                                      ;82D855|5C92DF82|82DF92;
  
  
   + CMP.B #$08                                                 ;82D859|C908    |      ;
     BNE +                                                      ;82D85B|D004    |82D861;
-    JML.L fUnknown_82E1F1                                      ;82D85D|5CF1E182|82E1F1;
+    JML.L fMainMenu_StateLoadGameSlotSelect                                      ;82D85D|5CF1E182|82E1F1;
  
  
   + CMP.B #$09                                                 ;82D861|C909    |      ;
     BNE +                                                      ;82D863|D004    |82D869;
-    JML.L fUnknown_82DAF5                                      ;82D865|5CF5DA82|82DAF5;
+    JML.L fMainMenu_StateReinitTitleScreen                                      ;82D865|5CF5DA82|82DAF5;
  
  
   + CMP.B #$0A                                                 ;82D869|C90A    |      ;
-    BNE fUnknown_82D871                                        ;82D86B|D004    |82D871;
-    JML.L fUnknown_82D1C0                                      ;82D86D|5CC0D182|82D1C0;
+    BNE fMainMenu_EndFrame                                        ;82D86B|D004    |82D871;
+    JML.L fMainMenu_StartHowToPlayDemo                                      ;82D86D|5CC0D182|82D1C0;
  
  
-fUnknown_82D871:
+fMainMenu_EndFrame:
     SEP #$20                                                   ;82D871|E220    |      ;
     STZ.B $00                                                  ;82D873|6400    |000000;
     REP #$20                                                   ;82D875|C220    |      ;
@@ -481,10 +481,10 @@ fUnknown_82D871:
     JMP.W fMainMenu_AutoHowToPlay                              ;82D87E|4CC7D3  |82D3C7;
  
  
-  + BRA fUnknown_82D80D                                        ;82D881|808A    |82D80D;
+  + BRA fMainMenu_StateLoop                                        ;82D881|808A    |82D80D;
  
  
-fUnknown_82D883:
+fMainMenu_StateInitialDelay:
     LDY.W #$0000                                               ;82D883|A00000  |      ;
  
   - PHY                                                        ;82D886|5A      |      ;
@@ -506,10 +506,10 @@ fUnknown_82D883:
     LDA.B #$01                                                 ;82D8A8|A901    |      ;
     STA.B strcVariables.n8Temp4                                ;82D8AA|8595    |000095;
     STZ.B strcVariables.n8Temp3                                ;82D8AC|6494    |000094;
-    BRA fUnknown_82D871                                        ;82D8AE|80C1    |82D871;
+    BRA fMainMenu_EndFrame                                        ;82D8AE|80C1    |82D871;
  
  
-fUnknown_82D8B0:
+fMainMenu_StateOpeningDemo:
     REP #$30                                                   ;82D8B0|C230    |      ;
     JSL.L fCore_ZeroVRAM                                       ;82D8B2|22468880|808846;
     JSL.L fCore_ZeroCGRAM                                      ;82D8B6|22808980|808980;
@@ -593,7 +593,7 @@ fUnknown_82D8B0:
     LDA.B strcVariables.n8Temp4                                ;82D9B5|A595    |000095;
     CMP.B #$09                                                 ;82D9B7|C909    |      ;
     BNE +                                                      ;82D9B9|D003    |82D9BE;
-    JMP.W fUnknown_82D871                                      ;82D9BB|4C71D8  |82D871;
+    JMP.W fMainMenu_EndFrame                                      ;82D9BB|4C71D8  |82D871;
  
  
   + SEP #$20                                                   ;82D9BE|E220    |      ;
@@ -669,10 +669,10 @@ fUnknown_82D8B0:
     STA.B strcVariables.n8Temp4                                ;82DA82|8595    |000095;
     STZ.B strcVariables.n8Temp3                                ;82DA84|6494    |000094;
     STZ.B strcVariables.u8Unk96                                ;82DA86|6496    |000096;
-    JML.L fUnknown_82D871                                      ;82DA88|5C71D882|82D871;
+    JML.L fMainMenu_EndFrame                                      ;82DA88|5C71D882|82D871;
  
  
-fUnknown_82DA8C:
+fMainMenu_StateLogoScrollHorizontal:
     SEP #$20                                                   ;82DA8C|E220    |      ;
     LDA.B strcVariables.n8Temp3                                ;82DA8E|A594    |000094;
     AND.B #$01                                                 ;82DA90|2901    |      ;
@@ -689,7 +689,7 @@ fUnknown_82DA8C:
 .label1:
     SEP #$20                                                   ;82DAA6|E220    |      ;
     INC.B strcVariables.n8Temp3                                ;82DAA8|E694    |000094;
-    JML.L fUnknown_82D871                                      ;82DAAA|5C71D882|82D871;
+    JML.L fMainMenu_EndFrame                                      ;82DAAA|5C71D882|82D871;
  
  
   + SEP #$20                                                   ;82DAAE|E220    |      ;
@@ -705,10 +705,10 @@ fUnknown_82DA8C:
     LDA.B #$03                                                 ;82DABF|A903    |      ;
     STA.B strcVariables.n8Temp4                                ;82DAC1|8595    |000095;
     STZ.B strcVariables.n8Temp3                                ;82DAC3|6494    |000094;
-    JML.L fUnknown_82D871                                      ;82DAC5|5C71D882|82D871;
+    JML.L fMainMenu_EndFrame                                      ;82DAC5|5C71D882|82D871;
  
  
-fUnknown_82DAC9:
+fMainMenu_StateLogoScrollDiagonal:
     SEP #$20                                                   ;82DAC9|E220    |      ;
     LDA.B strcVariables.n8Temp3                                ;82DACB|A594    |000094;
     AND.B #$01                                                 ;82DACD|2901    |      ;
@@ -719,7 +719,7 @@ fUnknown_82DAC9:
     STA.W strcBGScrool.BG2HorOffs                              ;82DAD7|8D4001  |000140;
     LDA.W strcBGScrool.BG1VerOffs                              ;82DADA|AD3E01  |00013E;
     BNE +                                                      ;82DADD|D003    |82DAE2;
-    JMP.W fUnknown_82DB8E                                      ;82DADF|4C8EDB  |82DB8E;
+    JMP.W fMainMenu_StateSkipToTitleScreen                                      ;82DADF|4C8EDB  |82DB8E;
  
  
   + DEC A                                                      ;82DAE2|3A      |      ;
@@ -731,10 +731,10 @@ fUnknown_82DAC9:
 .skip:
     SEP #$20                                                   ;82DAED|E220    |      ;
     INC.B strcVariables.n8Temp3                                ;82DAEF|E694    |000094;
-    JML.L fUnknown_82D871                                      ;82DAF1|5C71D882|82D871;
+    JML.L fMainMenu_EndFrame                                      ;82DAF1|5C71D882|82D871;
  
  
-fUnknown_82DAF5:
+fMainMenu_StateReinitTitleScreen:
     SEP #$20                                                   ;82DAF5|E220    |      ;
     LDA.B #$5C                                                 ;82DAF7|A95C    |      ;
     STA.B strcMap.loadAreaId                                   ;82DAF9|8522    |000022;
@@ -791,10 +791,10 @@ fUnknown_82DAF5:
     SEP #$20                                                   ;82DB86|E220    |      ;
     LDA.B #$5C                                                 ;82DB88|A95C    |      ;
     STA.B strcMap.loadAreaId                                   ;82DB8A|8522    |000022;
-    BRA fUnknown_82DBB2                                        ;82DB8C|8024    |82DBB2;
+    BRA fMainMenu_ShowTitleScreen                                        ;82DB8C|8024    |82DBB2;
  
  
-fUnknown_82DB8E:
+fMainMenu_StateSkipToTitleScreen:
     SEP #$20                                                   ;82DB8E|E220    |      ;
     LDA.B #$5C                                                 ;82DB90|A95C    |      ;
     STA.B strcMap.loadAreaId                                   ;82DB92|8522    |000022;
@@ -810,7 +810,7 @@ fUnknown_82DB8E:
     JSL.L fCore_ScreenFadeout                                  ;82DBAA|220A8880|80880A;
     JSL.L fCore_SetForceBlank                                  ;82DBAE|220F8E80|808E0F;
  
-fUnknown_82DBB2:
+fMainMenu_ShowTitleScreen:
     REP #$20                                                   ;82DBB2|C220    |      ;
     STZ.B strcVariables.n16Unk90                               ;82DBB4|6490    |000090;
     STZ.W strcBGScrool.BG1HorOffs                              ;82DBB6|9C3C01  |00013C;
@@ -843,10 +843,10 @@ fUnknown_82DBB2:
     LDA.B #$04                                                 ;82DC03|A904    |      ;
     STA.B strcVariables.n8Temp4                                ;82DC05|8595    |000095;
     STZ.B strcVariables.n8Temp3                                ;82DC07|6494    |000094;
-    JML.L fUnknown_82D871                                      ;82DC09|5C71D882|82D871;
+    JML.L fMainMenu_EndFrame                                      ;82DC09|5C71D882|82D871;
  
  
-fUnknown_82DC0D:
+fMainMenu_StateTitleStartCursorAnim:
     SEP #$20                                                   ;82DC0D|E220    |      ;
     LDA.B strcVariables.n8Temp3                                ;82DC0F|A594    |000094;
     AND.B #$01                                                 ;82DC11|2901    |      ;
@@ -866,7 +866,7 @@ fUnknown_82DC0D:
     BEQ +                                                      ;82DC28|F008    |82DC32;
     SEP #$20                                                   ;82DC2A|E220    |      ;
     INC.B strcVariables.n8Temp3                                ;82DC2C|E694    |000094;
-    JML.L fUnknown_82D871                                      ;82DC2E|5C71D882|82D871;
+    JML.L fMainMenu_EndFrame                                      ;82DC2E|5C71D882|82D871;
  
  
   + JSL.L fCore_Zero0x42Ptr                                    ;82DC32|22AB8F80|808FAB;
@@ -1029,10 +1029,10 @@ fUnknown_82DC0D:
     LDA.B #$05                                                 ;82DD82|A905    |      ;
     STA.B strcVariables.n8Temp4                                ;82DD84|8595    |000095;
     STZ.B strcVariables.n8Temp3                                ;82DD86|6494    |000094;
-    JML.L fUnknown_82D871                                      ;82DD88|5C71D882|82D871;
+    JML.L fMainMenu_EndFrame                                      ;82DD88|5C71D882|82D871;
  
  
-fUnknown_82DD8C:
+fMainMenu_StateTitleMenuInput:
     SEP #$20                                                   ;82DD8C|E220    |      ;
     LDA.B strcVariables.n8Temp3                                ;82DD8E|A594    |000094;
     AND.B #$01                                                 ;82DD90|2901    |      ;
@@ -1183,10 +1183,10 @@ fUnknown_82DD8C:
 .return:
     REP #$30                                                   ;82DEBD|C230    |      ;
     INC.B strcVariables.n16Unk90                               ;82DEBF|E690    |000090;
-    JML.L fUnknown_82D871                                      ;82DEC1|5C71D882|82D871;
+    JML.L fMainMenu_EndFrame                                      ;82DEC1|5C71D882|82D871;
  
  
-fUnknown_82DEC5:
+fMainMenu_ReturnToTitleFromSlotSelect:
     SEP #$20                                                   ;82DEC5|E220    |      ;
     LDA.B #$5C                                                 ;82DEC7|A95C    |      ;
     STA.B strcMap.loadAreaId                                   ;82DEC9|8522    |000022;
@@ -1264,10 +1264,10 @@ fUnknown_82DEC5:
     STZ.B strcVariables.n8Temp3                                ;82DF88|6494    |000094;
     REP #$20                                                   ;82DF8A|C220    |      ;
     STZ.B strcVariables.n16Unk90                               ;82DF8C|6490    |000090;
-    JML.L fUnknown_82D871                                      ;82DF8E|5C71D882|82D871;
+    JML.L fMainMenu_EndFrame                                      ;82DF8E|5C71D882|82D871;
  
  
-fUnknown_82DF92:
+fMainMenu_StateNewGameSlotSelect:
     SEP #$20                                                   ;82DF92|E220    |      ;
     LDA.B #$5E                                                 ;82DF94|A95E    |      ;
     STA.B strcMap.loadAreaId                                   ;82DF96|8522    |000022;
@@ -1306,15 +1306,15 @@ fUnknown_82DF92:
     STA.B ptrTemp0x72+2                                        ;82DFEC|8574    |000074;
     JSL.L fCore_PrepareTransfer                                ;82DFEE|22338A80|808A33;
     JSL.L fCore_StartPreparedTransfer                          ;82DFF2|22B28A80|808AB2;
-    JSR.W fUnknown_82E742                                      ;82DFF6|2042E7  |82E742;
+    JSR.W fMainMenu_DrawSaveSlotFrames                                      ;82DFF6|2042E7  |82E742;
     REP #$30                                                   ;82DFF9|C230    |      ;
     LDA.W #$0000                                               ;82DFFB|A90000  |      ;
     LDY.W #$0000                                               ;82DFFE|A00000  |      ;
-    JSR.W fUnknown_82E405                                      ;82E001|2005E4  |82E405;
+    JSR.W fMainMenu_DrawSaveSlotInfo                                      ;82E001|2005E4  |82E405;
     REP #$30                                                   ;82E004|C230    |      ;
     LDA.W #$0001                                               ;82E006|A90100  |      ;
     LDY.W #$0000                                               ;82E009|A00000  |      ;
-    JSR.W fUnknown_82E405                                      ;82E00C|2005E4  |82E405;
+    JSR.W fMainMenu_DrawSaveSlotInfo                                      ;82E00C|2005E4  |82E405;
     JSL.L fCore_Zero0x42Ptr                                    ;82E00F|22AB8F80|808FAB;
     REP #$20                                                   ;82E013|C220    |      ;
     STZ.W strcBGScrool.BG1HorOffs                              ;82E015|9C3C01  |00013C;
@@ -1335,7 +1335,7 @@ fUnknown_82DF92:
   + SEP #$20                                                   ;82E03A|E220    |      ;
     LDA.W $098E                                                ;82E03C|AD8E09  |00098E;
     BEQ +                                                      ;82E03F|F004    |82E045;
-    JML.L fUnknown_82E07F                                      ;82E041|5C7FE082|82E07F;
+    JML.L fMainMenu_NewGameSlotSelect_InitCursorSlot2                                      ;82E041|5C7FE082|82E07F;
  
  
   + REP #$20                                                   ;82E045|C220    |      ;
@@ -1362,10 +1362,10 @@ fUnknown_82DF92:
     LDX.B #$05                                                 ;82E073|A205    |      ;
     LDY.B #$01                                                 ;82E075|A001    |      ;
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82E077|22488E80|808E48;
-    JML.L fUnknown_82E0B5                                      ;82E07B|5CB5E082|82E0B5;
+    JML.L fMainMenu_NewGameSlotSelect_FadeIn                                      ;82E07B|5CB5E082|82E0B5;
  
  
-fUnknown_82E07F:
+fMainMenu_NewGameSlotSelect_InitCursorSlot2:
     REP #$20                                                   ;82E07F|C220    |      ;
     SEP #$10                                                   ;82E081|E210    |      ;
     LDA.W #$F2F9                                               ;82E083|A9F9F2  |      ;
@@ -1391,7 +1391,7 @@ fUnknown_82E07F:
     LDY.B #$01                                                 ;82E0AF|A001    |      ;
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82E0B1|22488E80|808E48;
  
-fUnknown_82E0B5:
+fMainMenu_NewGameSlotSelect_FadeIn:
     JSL.L fAudio_FadeOutOnTrackChangeFast                                 ;82E0B5|221F8483|83841F;
     JSL.L fAudio_LoadPendingTrack                                 ;82E0B9|22A48383|8383A4;
     JSL.L fAudio_StartPendingTrack                                 ;82E0BD|22808383|838380;
@@ -1413,10 +1413,10 @@ fUnknown_82E0B5:
     STZ.B strcVariables.u8Unk96                                ;82E0E7|6496    |000096;
     STZ.B strcVariables.u8Unk97                                ;82E0E9|6497    |000097;
  
-fUnknown_82E0EB:
+fMainMenu_NewGameSlotSelect_WaitFrame:
     SEP #$20                                                   ;82E0EB|E220    |      ;
     LDA.B $00                                                  ;82E0ED|A500    |000000;
-    BEQ fUnknown_82E0EB                                        ;82E0EF|F0FA    |82E0EB;
+    BEQ fMainMenu_NewGameSlotSelect_WaitFrame                                        ;82E0EF|F0FA    |82E0EB;
     REP #$20                                                   ;82E0F1|C220    |      ;
     LDA.W #$1800                                               ;82E0F3|A90018  |      ;
     STA.B $C7                                                  ;82E0F6|85C7    |0000C7;
@@ -1425,13 +1425,13 @@ fUnknown_82E0EB:
     SEP #$20                                                   ;82E100|E220    |      ;
     LDA.B strcVariables.u8Unk97                                ;82E102|A597    |000097;
     BNE +                                                      ;82E104|D004    |82E10A;
-    JML.L fUnknown_82E1BD                                      ;82E106|5CBDE182|82E1BD;
+    JML.L fMainMenu_NewGameSlotSelect_FrameTail                                      ;82E106|5CBDE182|82E1BD;
  
  
   + STZ.B strcVariables.u8Unk97                                ;82E10A|6497    |000097;
     LDA.W $098E                                                ;82E10C|AD8E09  |00098E;
     BEQ +                                                      ;82E10F|F004    |82E115;
-    JML.L fUnknown_82E16B                                      ;82E111|5C6BE182|82E16B;
+    JML.L fMainMenu_NewGameSlotSelect_MoveCursorSlot2                                      ;82E111|5C6BE182|82E16B;
  
  
   + REP #$20                                                   ;82E115|C220    |      ;
@@ -1474,10 +1474,10 @@ fUnknown_82E0EB:
     LDX.B #$05                                                 ;82E15F|A205    |      ;
     LDY.B #$01                                                 ;82E161|A001    |      ;
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82E163|22488E80|808E48;
-    JML.L fUnknown_82E1BD                                      ;82E167|5CBDE182|82E1BD;
+    JML.L fMainMenu_NewGameSlotSelect_FrameTail                                      ;82E167|5CBDE182|82E1BD;
  
  
-fUnknown_82E16B:
+fMainMenu_NewGameSlotSelect_MoveCursorSlot2:
     REP #$20                                                   ;82E16B|C220    |      ;
     LDA.W #$0001                                               ;82E16D|A90100  |      ;
     JSL.L fGameEngine_LoadContinue                             ;82E170|2245BA83|83BA45;
@@ -1519,7 +1519,7 @@ fUnknown_82E16B:
     LDY.B #$01                                                 ;82E1B7|A001    |      ;
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82E1B9|22488E80|808E48;
  
-fUnknown_82E1BD:
+fMainMenu_NewGameSlotSelect_FrameTail:
     SEP #$20                                                   ;82E1BD|E220    |      ;
     LDA.B strcVariables.u8Unk96                                ;82E1BF|A596    |000096;
     CMP.B #$01                                                 ;82E1C1|C901    |      ;
@@ -1539,7 +1539,7 @@ fUnknown_82E1BD:
     LDA.B strcVariables.n8Temp3                                ;82E1D7|A594    |000094;
     CMP.B #$01                                                 ;82E1D9|C901    |      ;
     BNE +                                                      ;82E1DB|D004    |82E1E1;
-    JML.L fUnknown_82DEC5                                      ;82E1DD|5CC5DE82|82DEC5;
+    JML.L fMainMenu_ReturnToTitleFromSlotSelect                                      ;82E1DD|5CC5DE82|82DEC5;
  
  
   + CMP.B #$02                                                 ;82E1E1|C902    |      ;
@@ -1549,10 +1549,10 @@ fUnknown_82E1BD:
  
   + SEP #$20                                                   ;82E1E9|E220    |      ;
     STZ.B $00                                                  ;82E1EB|6400    |000000;
-    JML.L fUnknown_82E0EB                                      ;82E1ED|5CEBE082|82E0EB;
+    JML.L fMainMenu_NewGameSlotSelect_WaitFrame                                      ;82E1ED|5CEBE082|82E0EB;
  
  
-fUnknown_82E1F1:
+fMainMenu_StateLoadGameSlotSelect:
     SEP #$20                                                   ;82E1F1|E220    |      ;
     LDA.B #$5E                                                 ;82E1F3|A95E    |      ;
     STA.B strcMap.loadAreaId                                   ;82E1F5|8522    |000022;
@@ -1591,15 +1591,15 @@ fUnknown_82E1F1:
     STA.B ptrTemp0x72+2                                        ;82E24B|8574    |000074;
     JSL.L fCore_PrepareTransfer                                ;82E24D|22338A80|808A33;
     JSL.L fCore_StartPreparedTransfer                          ;82E251|22B28A80|808AB2;
-    JSR.W fUnknown_82E742                                      ;82E255|2042E7  |82E742;
+    JSR.W fMainMenu_DrawSaveSlotFrames                                      ;82E255|2042E7  |82E742;
     REP #$30                                                   ;82E258|C230    |      ;
     LDA.W #$0000                                               ;82E25A|A90000  |      ;
     LDY.W #$0001                                               ;82E25D|A00100  |      ;
-    JSR.W fUnknown_82E405                                      ;82E260|2005E4  |82E405;
+    JSR.W fMainMenu_DrawSaveSlotInfo                                      ;82E260|2005E4  |82E405;
     REP #$30                                                   ;82E263|C230    |      ;
     LDA.W #$0001                                               ;82E265|A90100  |      ;
     LDY.W #$0001                                               ;82E268|A00100  |      ;
-    JSR.W fUnknown_82E405                                      ;82E26B|2005E4  |82E405;
+    JSR.W fMainMenu_DrawSaveSlotInfo                                      ;82E26B|2005E4  |82E405;
     JSL.L fCore_Zero0x42Ptr                                    ;82E26E|22AB8F80|808FAB;
     SEP #$20                                                   ;82E272|E220    |      ;
     LDA.W $098E                                                ;82E274|AD8E09  |00098E;
@@ -1689,10 +1689,10 @@ fUnknown_82E1F1:
     STZ.B strcVariables.u8Unk96                                ;82E333|6496    |000096;
     STZ.B strcVariables.u8Unk97                                ;82E335|6497    |000097;
  
-fUnknown_82E337:
+fMainMenu_LoadGameSlotSelect_WaitFrame:
     SEP #$20                                                   ;82E337|E220    |      ;
     LDA.B $00                                                  ;82E339|A500    |000000;
-    BEQ fUnknown_82E337                                        ;82E33B|F0FA    |82E337;
+    BEQ fMainMenu_LoadGameSlotSelect_WaitFrame                                        ;82E33B|F0FA    |82E337;
     REP #$20                                                   ;82E33D|C220    |      ;
     LDA.W #$1800                                               ;82E33F|A90018  |      ;
     STA.B $C7                                                  ;82E342|85C7    |0000C7;
@@ -1701,13 +1701,13 @@ fUnknown_82E337:
     SEP #$20                                                   ;82E34C|E220    |      ;
     LDA.B strcVariables.u8Unk97                                ;82E34E|A597    |000097;
     BNE +                                                      ;82E350|D004    |82E356;
-    JML.L fUnknown_82E3D1                                      ;82E352|5CD1E382|82E3D1;
+    JML.L fMainMenu_LoadGameSlotSelect_FrameTail                                      ;82E352|5CD1E382|82E3D1;
  
  
   + STZ.B strcVariables.u8Unk97                                ;82E356|6497    |000097;
     LDA.W $098E                                                ;82E358|AD8E09  |00098E;
     BEQ +                                                      ;82E35B|F004    |82E361;
-    JML.L fUnknown_82E39B                                      ;82E35D|5C9BE382|82E39B;
+    JML.L fMainMenu_LoadGameSlotSelect_MoveCursorSlot2                                      ;82E35D|5C9BE382|82E39B;
  
  
   + REP #$20                                                   ;82E361|C220    |      ;
@@ -1734,10 +1734,10 @@ fUnknown_82E337:
     LDX.B #$05                                                 ;82E38F|A205    |      ;
     LDY.B #$01                                                 ;82E391|A001    |      ;
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82E393|22488E80|808E48;
-    JML.L fUnknown_82E3D1                                      ;82E397|5CD1E382|82E3D1;
+    JML.L fMainMenu_LoadGameSlotSelect_FrameTail                                      ;82E397|5CD1E382|82E3D1;
  
  
-fUnknown_82E39B:
+fMainMenu_LoadGameSlotSelect_MoveCursorSlot2:
     REP #$20                                                   ;82E39B|C220    |      ;
     SEP #$10                                                   ;82E39D|E210    |      ;
     LDA.W #$F2F9                                               ;82E39F|A9F9F2  |      ;
@@ -1763,7 +1763,7 @@ fUnknown_82E39B:
     LDY.B #$01                                                 ;82E3CB|A001    |      ;
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82E3CD|22488E80|808E48;
  
-fUnknown_82E3D1:
+fMainMenu_LoadGameSlotSelect_FrameTail:
     SEP #$20                                                   ;82E3D1|E220    |      ;
     LDA.B strcVariables.u8Unk96                                ;82E3D3|A596    |000096;
     CMP.B #$01                                                 ;82E3D5|C901    |      ;
@@ -1783,7 +1783,7 @@ fUnknown_82E3D1:
     LDA.B strcVariables.n8Temp3                                ;82E3EB|A594    |000094;
     CMP.B #$01                                                 ;82E3ED|C901    |      ;
     BNE +                                                      ;82E3EF|D004    |82E3F5;
-    JML.L fUnknown_82DEC5                                      ;82E3F1|5CC5DE82|82DEC5;
+    JML.L fMainMenu_ReturnToTitleFromSlotSelect                                      ;82E3F1|5CC5DE82|82DEC5;
  
  
   + CMP.B #$02                                                 ;82E3F5|C902    |      ;
@@ -1793,10 +1793,10 @@ fUnknown_82E3D1:
  
   + SEP #$20                                                   ;82E3FD|E220    |      ;
     STZ.B $00                                                  ;82E3FF|6400    |000000;
-    JML.L fUnknown_82E337                                      ;82E401|5C37E382|82E337;
+    JML.L fMainMenu_LoadGameSlotSelect_WaitFrame                                      ;82E401|5C37E382|82E337;
  
  
-fUnknown_82E405:
+fMainMenu_DrawSaveSlotInfo:
     REP #$30                                                   ;82E405|C230    |      ;
     PHA                                                        ;82E407|48      |      ;
     PHY                                                        ;82E408|5A      |      ;
@@ -1806,14 +1806,14 @@ fUnknown_82E405:
     PLA                                                        ;82E410|68      |      ;
     CPX.W #$0000                                               ;82E411|E00000  |      ;
     BNE +                                                      ;82E414|D004    |82E41A;
-    JML.L fUnknown_82E5E7                                      ;82E416|5CE7E582|82E5E7;
+    JML.L fMainMenu_DrawEmptySaveSlot                                      ;82E416|5CE7E582|82E5E7;
  
  
   + ASL A                                                      ;82E41A|0A      |      ;
     ASL A                                                      ;82E41B|0A      |      ;
     ASL A                                                      ;82E41C|0A      |      ;
     TAX                                                        ;82E41D|AA      |      ;
-    LDA.L aUnknown_82F278,X                                    ;82E41E|BF78F282|82F278;
+    LDA.L aMainMenu_SlotInfoTextVramAddr,X                                    ;82E41E|BF78F282|82F278;
     PHX                                                        ;82E422|DA      |      ;
     STA.B strcVariables.n16Temp3                               ;82E423|8582    |000082;
     LDX.W #$0000                                               ;82E425|A20000  |      ;
@@ -1842,7 +1842,7 @@ fUnknown_82E405:
     PLX                                                        ;82E457|FA      |      ;
     INX                                                        ;82E458|E8      |      ;
     INX                                                        ;82E459|E8      |      ;
-    LDA.L aUnknown_82F278,X                                    ;82E45A|BF78F282|82F278;
+    LDA.L aMainMenu_SlotInfoTextVramAddr,X                                    ;82E45A|BF78F282|82F278;
     PHX                                                        ;82E45E|DA      |      ;
     STA.L strcDialogDisplay.dialogUnk185+$20000                ;82E45F|8F850180|800185;
     SEP #$20                                                   ;82E463|E220    |      ;
@@ -1899,7 +1899,7 @@ fUnknown_82E405:
     PLX                                                        ;82E4E9|FA      |      ;
     INX                                                        ;82E4EA|E8      |      ;
     INX                                                        ;82E4EB|E8      |      ;
-    LDA.L aUnknown_82F278,X                                    ;82E4EC|BF78F282|82F278;
+    LDA.L aMainMenu_SlotInfoTextVramAddr,X                                    ;82E4EC|BF78F282|82F278;
     PHX                                                        ;82E4F0|DA      |      ;
     STA.L strcDialogDisplay.dialogUnk185+$20000                ;82E4F1|8F850180|800185;
     SEP #$20                                                   ;82E4F5|E220    |      ;
@@ -1917,7 +1917,7 @@ fUnknown_82E405:
     JSL.L fCore_StartTransfer                                  ;82E516|22F08A80|808AF0;
     REP #$30                                                   ;82E51A|C230    |      ;
     PLX                                                        ;82E51C|FA      |      ;
-    LDA.L aUnknown_82F278,X                                    ;82E51D|BF78F282|82F278;
+    LDA.L aMainMenu_SlotInfoTextVramAddr,X                                    ;82E51D|BF78F282|82F278;
     PHX                                                        ;82E521|DA      |      ;
     CLC                                                        ;82E522|18      |      ;
     ADC.W #$0008                                               ;82E523|690800  |      ;
@@ -1933,7 +1933,7 @@ fUnknown_82E405:
     PLX                                                        ;82E541|FA      |      ;
     INX                                                        ;82E542|E8      |      ;
     INX                                                        ;82E543|E8      |      ;
-    LDA.L aUnknown_82F278,X                                    ;82E544|BF78F282|82F278;
+    LDA.L aMainMenu_SlotInfoTextVramAddr,X                                    ;82E544|BF78F282|82F278;
     STA.L strcDialogDisplay.dialogUnk185+$20000                ;82E548|8F850180|800185;
     LDA.W strcNames.wSeason                                    ;82E54C|ADB308  |0008B3;
     LDX.W #$0000                                               ;82E54F|A20000  |      ;
@@ -1987,7 +1987,7 @@ fUnknown_82E405:
     RTS                                                        ;82E5E6|60      |      ; GIGAEND
  
  
-fUnknown_82E5E7:
+fMainMenu_DrawEmptySaveSlot:
     REP #$30                                                   ;82E5E7|C230    |      ; A: nArg1, Y: nArg2
     ASL A                                                      ;82E5E9|0A      |      ;
     TAX                                                        ;82E5EA|AA      |      ;

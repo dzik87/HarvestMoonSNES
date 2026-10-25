@@ -553,7 +553,7 @@ fMap_SetupArea:
     JSL.L fAudio_FadeOutOnTrackChangeFast                                 ;8099EB|221F8483|83841F;
     JSL.L fAudio_LoadPendingTrack                                 ;8099EF|22A48383|8383A4;
     JSL.L fAudio_StartPendingTrack                                 ;8099F3|22808383|838380;
-    JSL.L fToolUsedSound_Unknown828FF3                         ;8099F7|22F38F82|828FF3;
+    JSL.L fToolUsedSound_PlayOnToolChange                         ;8099F7|22F38F82|828FF3;
     SEP #$20                                                   ;8099FB|E220    |      ;
     LDA.W strcAudio.trackId                                    ;8099FD|AD1001  |000110;
     STA.W strcAudio.trackIdCopy                                ;809A00|8D1701  |000117;
@@ -931,7 +931,7 @@ fMapChangeHandler_809A64:
     BEQ .destinationCrossRoad                                  ;809CF4|F009    |809CFF;
     INC A                                                      ;809CF6|1A      |      ;
     STA.L nCurrentTimeID                                       ;809CF7|8F1C1F7F|7F1F1C; changing area increase time by 1 hour
-    JSL.L fUnknown_8280AA                                      ;809CFB|22AA8082|8280AA;
+    JSL.L fEvents_NoonMealCheck                                      ;809CFB|22AA8082|8280AA;
  
 .destinationCrossRoad:
     REP #$30                                                   ;809CFF|C230    |      ;

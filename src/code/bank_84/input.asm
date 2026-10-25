@@ -87,7 +87,7 @@ fNameInput_BButton:
     BEQ .label1                                                ;84C0B4|F009    |84C0BF;
     REP #$20                                                   ;84C0B6|C220    |      ;
     LDA.W #$00A8                                               ;84C0B8|A9A800  |      ;
-    JSL.L fTextUnknown_82EA60                                  ;84C0BB|2260EA82|82EA60;
+    JSL.L fScreen_NameInput_DrawLetterAtCursor                                  ;84C0BB|2260EA82|82EA60;
  
 .label1:
     SEP #$20                                                   ;84C0BF|E220    |      ;
@@ -119,7 +119,7 @@ fNameInput_BButton:
 fNameInput_AButton:
     REP #$20                                                   ;84C0EE|C220    |      ;
     LDA.W #$0005                                               ;84C0F0|A90500  |      ;
-    JSL.L fMenuUnknown_82EBAC                                  ;84C0F3|22ACEB82|82EBAC;
+    JSL.L fMenu_GetNameInputCellField                                  ;84C0F3|22ACEB82|82EBAC;
     REP #$20                                                   ;84C0F7|C220    |      ;
     CMP.W #$0001                                               ;84C0F9|C90100  |      ;
     BEQ fNameInput_SelectCharTable0                                   ;84C0FC|F059    |84C157;
@@ -141,7 +141,7 @@ fNameInput_AButton:
     BEQ .lastLetterInput                                       ;84C11A|F028    |84C144;
     REP #$20                                                   ;84C11C|C220    |      ;
     LDA.W #$0004                                               ;84C11E|A90400  |      ;
-    JSL.L fMenuUnknown_82EBAC                                  ;84C121|22ACEB82|82EBAC;
+    JSL.L fMenu_GetNameInputCellField                                  ;84C121|22ACEB82|82EBAC;
     SEP #$20                                                   ;84C125|E220    |      ;
     PHA                                                        ;84C127|48      |      ;
     LDA.B #$00                                                 ;84C128|A900    |      ;
@@ -152,7 +152,7 @@ fNameInput_AButton:
     SEP #$20                                                   ;84C131|E220    |      ;
     PLA                                                        ;84C133|68      |      ;
     STA.W strcNames.sTemp,X                                    ;84C134|9D8508  |000885;
-    JSL.L fTextUnknown_82EA60                                  ;84C137|2260EA82|82EA60;
+    JSL.L fScreen_NameInput_DrawLetterAtCursor                                  ;84C137|2260EA82|82EA60;
     SEP #$20                                                   ;84C13B|E220    |      ;
     LDA.W strcMenuData.nameEntryIdx                            ;84C13D|AD9409  |000994;
     INC A                                                      ;84C140|1A      |      ;
@@ -257,7 +257,7 @@ fNameInput_SelectCharTable3:
 fNameInput_DownButton:
     REP #$20                                                   ;84C204|C220    |      ;
     LDA.W #$0000                                               ;84C206|A90000  |      ;
-    JSL.L fMenuUnknown_82EBAC                                  ;84C209|22ACEB82|82EBAC;
+    JSL.L fMenu_GetNameInputCellField                                  ;84C209|22ACEB82|82EBAC;
     REP #$20                                                   ;84C20D|C220    |      ;
     STA.W strcMenuData.menuIdx                                 ;84C20F|8D9109  |000991;
     SEP #$20                                                   ;84C212|E220    |      ;
@@ -273,7 +273,7 @@ fNameInput_DownButton:
 fNameInput_UpButton:
     REP #$20                                                   ;84C225|C220    |      ;
     LDA.W #$0001                                               ;84C227|A90100  |      ;
-    JSL.L fMenuUnknown_82EBAC                                  ;84C22A|22ACEB82|82EBAC;
+    JSL.L fMenu_GetNameInputCellField                                  ;84C22A|22ACEB82|82EBAC;
     REP #$20                                                   ;84C22E|C220    |      ;
     STA.W strcMenuData.menuIdx                                 ;84C230|8D9109  |000991;
     SEP #$20                                                   ;84C233|E220    |      ;
@@ -289,7 +289,7 @@ fNameInput_UpButton:
 fNameInput_RightButton:
     REP #$20                                                   ;84C246|C220    |      ;
     LDA.W #$0002                                               ;84C248|A90200  |      ;
-    JSL.L fMenuUnknown_82EBAC                                  ;84C24B|22ACEB82|82EBAC;
+    JSL.L fMenu_GetNameInputCellField                                  ;84C24B|22ACEB82|82EBAC;
     REP #$20                                                   ;84C24F|C220    |      ;
     STA.W strcMenuData.menuIdx                                 ;84C251|8D9109  |000991;
     SEP #$20                                                   ;84C254|E220    |      ;
@@ -305,7 +305,7 @@ fNameInput_RightButton:
 fNameInput_LeftButton:
     REP #$20                                                   ;84C267|C220    |      ;
     LDA.W #$0003                                               ;84C269|A90300  |      ;
-    JSL.L fMenuUnknown_82EBAC                                  ;84C26C|22ACEB82|82EBAC;
+    JSL.L fMenu_GetNameInputCellField                                  ;84C26C|22ACEB82|82EBAC;
     REP #$20                                                   ;84C270|C220    |      ;
     STA.W strcMenuData.menuIdx                                 ;84C272|8D9109  |000991;
     SEP #$20                                                   ;84C275|E220    |      ;
@@ -1343,7 +1343,7 @@ fInput_PlayerButtonB:
     LDX.W nTileInFrontOfPlayerX                                ;84CA38|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;84CA3B|AC8709  |000987;
     LDA.W #$0002                                               ;84CA3E|A90200  |      ;
-    JSL.L fUnknown_82AC61                                      ;84CA41|2261AC82|82AC61;
+    JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;84CA41|2261AC82|82AC61;
     SEP #$20                                                   ;84CA45|E220    |      ;
     AND.B #$60                                                 ;84CA47|2960    |      ;
     BEQ .return                                                ;84CA49|F052    |84CA9D;
@@ -1423,8 +1423,8 @@ fInput_PlayerButtonA_Interact:
     LDX.W nTileInFrontOfPlayerX                                ;84CAE4|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;84CAE7|AC8709  |000987;
     LDA.W #$0002                                               ;84CAEA|A90200  |      ;
-    JSL.L fUnknown_82AC61                                      ;84CAED|2261AC82|82AC61;
-    JSL.L fUnknown_82AD0E                                      ;84CAF1|220EAD82|82AD0E;
+    JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;84CAED|2261AC82|82AC61;
+    JSL.L fPlayer_InteractWithFrontObject                                      ;84CAF1|220EAD82|82AD0E;
     RTL                                                        ;84CAF5|6B      |      ;
  
  
@@ -1443,7 +1443,7 @@ fInput_PlayerButtonA_Interact:
     LDX.W nTileInFrontOfPlayerX                                ;84CB0F|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;84CB12|AC8709  |000987;
     LDA.W #$0000                                               ;84CB15|A90000  |      ;
-    JSL.L fUnknown_82AC61                                      ;84CB18|2261AC82|82AC61;
+    JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;84CB18|2261AC82|82AC61;
     REP #$30                                                   ;84CB1C|C230    |      ;
     CPX.W #$00F5                                               ;84CB1E|E0F500  |      ;
     BNE .justReturn                                            ;84CB21|D007    |84CB2A;
@@ -1480,7 +1480,7 @@ fInput_PlayerButtonA_Interact:
     LDA.W #$0002                                               ;84CB5F|A90200  |      ;
     LDX.W nTileInFrontOfPlayerX                                ;84CB62|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;84CB65|AC8709  |000987;
-    JSL.L fUnknown_82AC61                                      ;84CB68|2261AC82|82AC61;
+    JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;84CB68|2261AC82|82AC61;
     SEP #$20                                                   ;84CB6C|E220    |      ;
     AND.B #$1F                                                 ;84CB6E|291F    |      ;
     BEQ +                                                      ;84CB70|F003    |84CB75;
@@ -1501,7 +1501,7 @@ fInput_PlayerButtonA_Interact:
     LDA.W #$0002                                               ;84CB8E|A90200  |      ;
     LDX.W nTileInFrontOfPlayerX                                ;84CB91|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;84CB94|AC8709  |000987;
-    JSL.L fUnknown_82AC61                                      ;84CB97|2261AC82|82AC61;
+    JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;84CB97|2261AC82|82AC61;
     SEP #$20                                                   ;84CB9B|E220    |      ;
     AND.B #$1F                                                 ;84CB9D|291F    |      ;
     BEQ +                                                      ;84CB9F|F003    |84CBA4;
@@ -1522,7 +1522,7 @@ fInput_PlayerButtonA_Interact:
     LDA.W #$0002                                               ;84CBBD|A90200  |      ;
     LDX.W nTileInFrontOfPlayerX                                ;84CBC0|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;84CBC3|AC8709  |000987;
-    JSL.L fUnknown_82AC61                                      ;84CBC6|2261AC82|82AC61;
+    JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;84CBC6|2261AC82|82AC61;
     SEP #$20                                                   ;84CBCA|E220    |      ;
     AND.B #$1F                                                 ;84CBCC|291F    |      ;
     BEQ +                                                      ;84CBCE|F003    |84CBD3;

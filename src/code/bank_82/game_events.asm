@@ -43,7 +43,7 @@ fGame_TimeHandler:
     BEQ .continue                                              ;828054|F036    |82808C;
     INC A                                                      ;828056|1A      |      ;
     STA.L nCurrentTimeID                                       ;828057|8F1C1F7F|7F1F1C;
-    JSL.L fUnknown_8280AA                                      ;82805B|22AA8082|8280AA;
+    JSL.L fEvents_NoonMealCheck                                      ;82805B|22AA8082|8280AA;
     JSL.L fEvents_ShippingScene                                ;82805F|22318182|828131;
     SEP #$20                                                   ;828063|E220    |      ;
     LDA.L nCurrentTimeID                                       ;828065|AF1C1F7F|7F1F1C;
@@ -80,7 +80,7 @@ fGame_TimeHandler:
     RTL                                                        ;8280A9|6B      |      ;
  
  
-fUnknown_8280AA:
+fEvents_NoonMealCheck:
     SEP #$20                                                   ;8280AA|E220    |      ;
     REP #$10                                                   ;8280AC|C210    |      ;
     LDA.L nCurrentTimeID                                       ;8280AE|AF1C1F7F|7F1F1C;
@@ -204,7 +204,7 @@ fEvents_ShippingSceneReturn:
     RTL                                                        ;8281BF|6B      |      ;
  
  
-fWeatherUnknown_8281C0:
+fWeather_SetForecastDialogIndex:
     SEP #$20                                                   ;8281C0|E220    |      ;
     REP #$10                                                   ;8281C2|C210    |      ;
     LDA.B #$00                                                 ;8281C4|A900    |      ;
@@ -246,7 +246,7 @@ fWeatherUnknown_8281C0:
 .data:
     db $00,$01,$02,$03,$00,$00,$05,$06,$07,$08,$09,$0A         ;8281FD|        |      ; 0x0C * [n8][nWeatherForecast]
  
-fUnknown_828209:
+fObjectMap_ApplyHuricaneDamageByMapFlags:
     REP #$30                                                   ;828209|C230    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;82820B|AD9601  |000196;
     AND.W #$0002                                               ;82820E|290200  |      ;
@@ -420,12 +420,12 @@ fNextDayHandler:
     LDA.B #$00                                                 ;82838E|A900    |      ;
     STA.L nInGameMinuteCounter                                 ;828390|8F1E1F7F|7F1F1E;
     JSL.L fWriteSeasonWeekdayAndDayOrdinal                     ;828394|22D68982|8289D6;
-    JSL.L fObjectMap_Unknown82A811                             ;828398|2211A882|82A811;
-    JSL.L fUnknown_828209                                      ;82839C|22098282|828209;
+    JSL.L fObjectMap_UpdateFarmTilesNewDay                             ;828398|2211A882|82A811;
+    JSL.L fObjectMap_ApplyHuricaneDamageByMapFlags                                      ;82839C|22098282|828209;
     JSL.L fGameEngine_AnimalsDailyUpdate                     ;8283A0|225ABC83|83BC5A;
     JSL.L fWeatherRandomizer                                   ;8283A4|22F98C82|828CF9;
     JSL.L fCore_FindBestLove                                   ;8283A8|22C68E82|828EC6;
-    JSL.L fUnknown_828790                                      ;8283AC|22908782|828790;
+    JSL.L fEvents_UpdateMarriageAndChildGrowth                                      ;8283AC|22908782|828790;
     REP #$20                                                   ;8283B0|C220    |      ;
     STZ.W strcObjectData.exist                                 ;8283B2|9C1509  |000915;
     STZ.B strcPlayer.flags                                     ;8283B5|64D2    |0000D2;
@@ -717,7 +717,7 @@ fNextDayHandler:
     BRA .deadEnd                                               ;82878E|80FE    |82878E;
  
  
-fUnknown_828790:
+fEvents_UpdateMarriageAndChildGrowth:
     REP #$30                                                   ;828790|C230    |      ;
     %UnsetFlag(event5, $0380)
     %CheckFlag(event2, !EFLAGS2_MARRIEDMARIA)

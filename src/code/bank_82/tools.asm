@@ -1,7 +1,7 @@
 ; Bank $82 module "tools" - starts at $828FB1
  
  
-fToolUsedSound_Unknown828FB1:
+fToolUsedSound_PlayToolHit:
     SEP #$20                                                   ;828FB1|E220    |      ;
     LDA.B #$00                                                 ;828FB3|A900    |      ; A = 0
     XBA                                                        ;828FB5|EB      |      ; A <-> B
@@ -39,7 +39,7 @@ fToolUsedSound_Unknown828FB1:
     RTL                                                        ;828FF2|6B      |      ;
  
  
-fToolUsedSound_Unknown828FF3:
+fToolUsedSound_PlayOnToolChange:
     SEP #$20                                                   ;828FF3|E220    |      ;
     LDA.B #$00                                                 ;828FF5|A900    |      ;
     XBA                                                        ;828FF7|EB      |      ;
@@ -106,7 +106,7 @@ fToolUsedAnimationHandler:
     JMP.W .label1                                              ;8290B5|4CCD90  |8290CD;
  
  
-  + JSR.W fToolUsedUnknown_82927D                              ;8290B8|207D92  |82927D;
+  + JSR.W fToolUsed_StoreSoundForFrontTile                              ;8290B8|207D92  |82927D;
     SEP #$20                                                   ;8290BB|E220    |      ;
     STZ.W strcPlayerData.unkCounter91B                         ;8290BD|9C1B09  |00091B;
     LDA.B #$00                                                 ;8290C0|A900    |      ;
@@ -274,7 +274,7 @@ fToolUsedAnimation0x0F_Brush:
 fToolUsedAnimation0x10_WateringCan:
     SEP #$20                                                   ;8291A9|E220    |      ;
     REP #$10                                                   ;8291AB|C210    |      ;
-    JSR.W fToolusedUnknown_8292A0                              ;8291AD|20A092  |8292A0;
+    JSR.W fToolUsed_GetSoundForFrontTile                              ;8291AD|20A092  |8292A0;
     SEP #$20                                                   ;8291B0|E220    |      ;
     CMP.B #$02                                                 ;8291B2|C902    |      ;
     BEQ .label2                                                ;8291B4|F01F    |8291D5;
@@ -416,7 +416,7 @@ fToolUsedActionHandler:
     RTL                                                        ;82927C|6B      |      ;
  
  
-fToolUsedUnknown_82927D:
+fToolUsed_StoreSoundForFrontTile:
     REP #$30                                                   ;82927D|C230    |      ;
     LDA.W #$0001                                               ;82927F|A90100  |      ;
     LDX.W #$0000                                               ;829282|A20000  |      ;
@@ -432,7 +432,7 @@ fToolUsedUnknown_82927D:
     RTS                                                        ;82929F|60      |      ;
  
  
-fToolusedUnknown_8292A0:
+fToolUsed_GetSoundForFrontTile:
     REP #$30                                                   ;8292A0|C230    |      ;
     LDA.W #$0001                                               ;8292A2|A90100  |      ;
     LDX.W #$0000                                               ;8292A5|A20000  |      ;
@@ -445,7 +445,7 @@ fToolusedUnknown_8292A0:
     RTS                                                        ;8292BB|60      |      ;
  
  
-fToolUsedUnknown_8292BC:
+fToolUsed_GetSoundForFrontTileMode:
     REP #$30                                                   ;8292BC|C230    |      ;
     INC A                                                      ;8292BE|1A      |      ;
     LDX.W #$0000                                               ;8292BF|A20000  |      ;
@@ -458,7 +458,7 @@ fToolUsedUnknown_8292BC:
     RTS                                                        ;8292D5|60      |      ;
  
  
-fToolUsedUnknown_8292D6:
+fToolUsed_GetSoundForTileOffset:
     REP #$30                                                   ;8292D6|C230    |      ; A: nArg
     ASL A                                                      ;8292D8|0A      |      ;
     ASL A                                                      ;8292D9|0A      |      ;
@@ -492,7 +492,7 @@ fToolUsedAction0x00_Empty:
  
 fToolUsedAction0x01_Sickle:
     REP #$30                                                   ;829328|C230    |      ;
-    JSR.W fToolusedUnknown_8292A0                              ;82932A|20A092  |8292A0;
+    JSR.W fToolUsed_GetSoundForFrontTile                              ;82932A|20A092  |8292A0;
     BNE +                                                      ;82932D|D003    |829332;
     JMP.W .return                                              ;82932F|4C5094  |829450;
  
@@ -625,7 +625,7 @@ fToolUsedAction0x01_Sickle:
  
 fToolUsedAction0x02_Plow:
     REP #$30                                                   ;829460|C230    |      ;
-    JSR.W fToolusedUnknown_8292A0                              ;829462|20A092  |8292A0;
+    JSR.W fToolUsed_GetSoundForFrontTile                              ;829462|20A092  |8292A0;
     BNE +                                                      ;829465|D003    |82946A;
     JMP.W .return                                              ;829467|4CB095  |8295B0;
  
@@ -748,7 +748,7 @@ fToolUsedAction0x02_Plow:
  
 fToolUsedAction0x03_Hammer:
     REP #$30                                                   ;8295C0|C230    |      ;
-    JSR.W fToolusedUnknown_8292A0                              ;8295C2|20A092  |8292A0;
+    JSR.W fToolUsed_GetSoundForFrontTile                              ;8295C2|20A092  |8292A0;
     BNE +                                                      ;8295C5|D003    |8295CA;
     JMP.W .chickenStatue                                       ;8295C7|4C3F97  |82973F;
  
@@ -972,7 +972,7 @@ fToolUsedAction0x03_Hammer:
  
 fToolUsedAction0x04_Axe:
     REP #$30                                                   ;8297BD|C230    |      ;
-    JSR.W fToolusedUnknown_8292A0                              ;8297BF|20A092  |8292A0;
+    JSR.W fToolUsed_GetSoundForFrontTile                              ;8297BF|20A092  |8292A0;
     BNE +                                                      ;8297C2|D003    |8297C7;
     JMP.W .label7                                              ;8297C4|4C4B99  |82994B;
  
@@ -1179,7 +1179,7 @@ fToolUsedAction0x05_CornSeedBag:
     LDA.B #$00                                                 ;82999D|A900    |      ;
     XBA                                                        ;82999F|EB      |      ;
     LDA.W strcStockData.unkAnyTool                             ;8299A0|AD6B09  |00096B;
-    JSR.W fToolUsedUnknown_8292D6                              ;8299A3|20D692  |8292D6;
+    JSR.W fToolUsed_GetSoundForTileOffset                              ;8299A3|20D692  |8292D6;
     BNE +                                                      ;8299A6|D003    |8299AB;
     JMP.W .label1                                              ;8299A8|4CCA99  |8299CA;
  
@@ -1223,7 +1223,7 @@ fToolUsedAction0x06_TomatoSeedBag:
     LDA.B #$00                                                 ;8299FC|A900    |      ;
     XBA                                                        ;8299FE|EB      |      ;
     LDA.W strcStockData.unkAnyTool                             ;8299FF|AD6B09  |00096B;
-    JSR.W fToolUsedUnknown_8292D6                              ;829A02|20D692  |8292D6;
+    JSR.W fToolUsed_GetSoundForTileOffset                              ;829A02|20D692  |8292D6;
     BNE +                                                      ;829A05|D003    |829A0A;
     JMP.W .label1                                              ;829A07|4C299A  |829A29;
  
@@ -1267,7 +1267,7 @@ fToolUsedAction0x07_PotatoSeedBag:
     LDA.B #$00                                                 ;829A5B|A900    |      ;
     XBA                                                        ;829A5D|EB      |      ;
     LDA.W strcStockData.unkAnyTool                             ;829A5E|AD6B09  |00096B;
-    JSR.W fToolUsedUnknown_8292D6                              ;829A61|20D692  |8292D6;
+    JSR.W fToolUsed_GetSoundForTileOffset                              ;829A61|20D692  |8292D6;
     BNE +                                                      ;829A64|D003    |829A69;
     JMP.W .label1                                              ;829A66|4C869A  |829A86;
  
@@ -1310,7 +1310,7 @@ fToolUsedAction0x08_TurnipSeedBag:
     LDA.B #$00                                                 ;829AB8|A900    |      ;
     XBA                                                        ;829ABA|EB      |      ;
     LDA.W strcStockData.unkAnyTool                             ;829ABB|AD6B09  |00096B;
-    JSR.W fToolUsedUnknown_8292D6                              ;829ABE|20D692  |8292D6;
+    JSR.W fToolUsed_GetSoundForTileOffset                              ;829ABE|20D692  |8292D6;
     BNE +                                                      ;829AC1|D003    |829AC6;
     JMP.W .label1                                              ;829AC3|4CE39A  |829AE3;
  
@@ -1381,7 +1381,7 @@ fToolUsedAction0x0C_GrassSeedBag:
     LDA.B #$00                                                 ;829B65|A900    |      ;
     XBA                                                        ;829B67|EB      |      ;
     LDA.W strcStockData.unkAnyTool                             ;829B68|AD6B09  |00096B;
-    JSR.W fToolUsedUnknown_8292D6                              ;829B6B|20D692  |8292D6;
+    JSR.W fToolUsed_GetSoundForTileOffset                              ;829B6B|20D692  |8292D6;
     BNE +                                                      ;829B6E|D003    |829B73;
     JMP.W .label1                                              ;829B70|4C9D9B  |829B9D;
  
@@ -1425,7 +1425,7 @@ fToolUsedAction0x0C_GrassSeedBag:
  
 fToolUsedAction0x0D_Paint:
     REP #$30                                                   ;829BCB|C230    |      ;
-    JSR.W fToolusedUnknown_8292A0                              ;829BCD|20A092  |8292A0;
+    JSR.W fToolUsed_GetSoundForFrontTile                              ;829BCD|20A092  |8292A0;
     BNE +                                                      ;829BD0|D003    |829BD5;
     JMP.W .return                                              ;829BD2|4CB09C  |829CB0;
  
@@ -1536,7 +1536,7 @@ fToolUsedAction0x10_WateringCan:
     LDA.B #$07                                                 ;829CE5|A907    |      ;
     STA.W strcAudio.reg115                                     ;829CE7|8D1501  |000115;
     JSL.L fAudioSetRegister2to0A                               ;829CEA|22328383|838332;
-    JSR.W fToolusedUnknown_8292A0                              ;829CEE|20A092  |8292A0;
+    JSR.W fToolUsed_GetSoundForFrontTile                              ;829CEE|20A092  |8292A0;
     SEP #$20                                                   ;829CF1|E220    |      ;
     CMP.B #$02                                                 ;829CF3|C902    |      ;
     BEQ .return                                                ;829CF5|F03B    |829D32;
@@ -1544,7 +1544,7 @@ fToolUsedAction0x10_WateringCan:
     BEQ .return                                                ;829CFA|F036    |829D32;
     DEC A                                                      ;829CFC|3A      |      ;
     STA.W strcPlayerData.leftWater                             ;829CFD|8D2609  |000926;
-    JSR.W fToolusedUnknown_8292A0                              ;829D00|20A092  |8292A0;
+    JSR.W fToolUsed_GetSoundForFrontTile                              ;829D00|20A092  |8292A0;
     BNE +                                                      ;829D03|D003    |829D08;
     JMP.W .return                                              ;829D05|4C329D  |829D32;
  
@@ -1583,7 +1583,7 @@ fToolUsedAction0x11_GoldenSickle:
     LDA.B #$00                                                 ;829D46|A900    |      ;
     XBA                                                        ;829D48|EB      |      ;
     LDA.W strcStockData.unkAnyTool                             ;829D49|AD6B09  |00096B;
-    JSR.W fToolUsedUnknown_8292D6                              ;829D4C|20D692  |8292D6;
+    JSR.W fToolUsed_GetSoundForTileOffset                              ;829D4C|20D692  |8292D6;
     BNE +                                                      ;829D4F|D003    |829D54;
     JMP.W .label6                                              ;829D51|4C6E9E  |829E6E;
  
@@ -1729,7 +1729,7 @@ fToolUsedAction0x12_GoldenPlow:
     LDA.B #$00                                                 ;829E92|A900    |      ;
     XBA                                                        ;829E94|EB      |      ;
     LDA.W strcStockData.unkAnyTool                             ;829E95|AD6B09  |00096B;
-    JSR.W fToolUsedUnknown_8292BC                              ;829E98|20BC92  |8292BC;
+    JSR.W fToolUsed_GetSoundForFrontTileMode                              ;829E98|20BC92  |8292BC;
     BNE +                                                      ;829E9B|D003    |829EA0;
     JMP.W .return                                              ;829E9D|4CF09F  |829FF0;
  
@@ -1863,7 +1863,7 @@ fToolUsedAction0x12_GoldenPlow:
  
 fToolUsedAction0x13_GolderHammer:
     REP #$30                                                   ;82A005|C230    |      ;
-    JSR.W fToolusedUnknown_8292A0                              ;82A007|20A092  |8292A0;
+    JSR.W fToolUsed_GetSoundForFrontTile                              ;82A007|20A092  |8292A0;
     BNE +                                                      ;82A00A|D003    |82A00F;
     JMP.W .label9                                              ;82A00C|4C41A1  |82A141;
  
@@ -2057,7 +2057,7 @@ fToolUsedAction0x13_GolderHammer:
  
 fToolUsedAction0x14_GoldenAxe:
     REP #$30                                                   ;82A1BF|C230    |      ;
-    JSR.W fToolusedUnknown_8292A0                              ;82A1C1|20A092  |8292A0;
+    JSR.W fToolUsed_GetSoundForFrontTile                              ;82A1C1|20A092  |8292A0;
     BNE +                                                      ;82A1C4|D003    |82A1C9;
     JMP.W .return                                              ;82A1C6|4CF7A2  |82A2F7;
  
@@ -2212,7 +2212,7 @@ fToolUsedAction0x15_Sprinkler:
     LDA.B #$00                                                 ;82A31F|A900    |      ;
     XBA                                                        ;82A321|EB      |      ;
     LDA.W strcStockData.unkAnyTool                             ;82A322|AD6B09  |00096B;
-    JSR.W fToolUsedUnknown_8292D6                              ;82A325|20D692  |8292D6;
+    JSR.W fToolUsed_GetSoundForTileOffset                              ;82A325|20D692  |8292D6;
     BNE +                                                      ;82A328|D003    |82A32D;
     JMP.W .return                                              ;82A32A|4C57A3  |82A357;
  
@@ -2292,7 +2292,7 @@ fToolUsedAction0x17_BlueDiamond:
     LDX.W nTileInFrontOfPlayerX                                ;82A3CD|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;82A3D0|AC8709  |000987;
     LDA.W #$0000                                               ;82A3D3|A90000  |      ;
-    JSL.L fUnknown_82AC61                                      ;82A3D6|2261AC82|82AC61;
+    JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;82A3D6|2261AC82|82AC61;
     REP #$30                                                   ;82A3DA|C230    |      ;
     CPX.W #$00F6                                               ;82A3DC|E0F600  |      ;
     BNE +                                                      ;82A3DF|D014    |82A3F5;
@@ -2328,7 +2328,7 @@ fToolUsedAction0x19_ChickenFeed:
     LDX.W nTileInFrontOfPlayerX                                ;82A42F|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;82A432|AC8709  |000987;
     LDA.W #$0000                                               ;82A435|A90000  |      ;
-    JSL.L fUnknown_82AC61                                      ;82A438|2261AC82|82AC61;
+    JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;82A438|2261AC82|82AC61;
     CPX.W #$00E2                                               ;82A43C|E0E200  |      ;
     BCC .label1                                                ;82A43F|9032    |82A473;
     CPX.W #$00EF                                               ;82A441|E0EF00  |      ;
@@ -2399,7 +2399,7 @@ fToolUsedAction0x1A_CowFeed:
     LDX.W nTileInFrontOfPlayerX                                ;82A4DD|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;82A4E0|AC8709  |000987;
     LDA.W #$0000                                               ;82A4E3|A90000  |      ;
-    JSL.L fUnknown_82AC61                                      ;82A4E6|2261AC82|82AC61;
+    JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;82A4E6|2261AC82|82AC61;
     CPX.W #$00E2                                               ;82A4EA|E0E200  |      ;
     BCC .label1                                                ;82A4ED|9032    |82A521;
     CPX.W #$00EF                                               ;82A4EF|E0EF00  |      ;

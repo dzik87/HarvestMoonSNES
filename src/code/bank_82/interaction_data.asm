@@ -46,7 +46,7 @@ aInteractionItemTable:
     db $52,$52,$52,$52,$53,$53,$53,$53,$54,$54,$54,$54         ;82D1AC|        |      ;
     db $55,$55,$55,$55,$56,$56,$56,$56                         ;82D1B8|        |      ;
  
-fUnknown_82D1C0:
+fMainMenu_StartHowToPlayDemo:
     SEP #$20                                                   ;82D1C0|E220    |      ; GIGASTART
     REP #$10                                                   ;82D1C2|C210    |      ;
     LDA.B #$0F                                                 ;82D1C4|A90F    |      ;
@@ -209,4 +209,4 @@ fUnknown_82D1C0:
     STA.B strcVariables.n8Temp4                                ;82D3BD|8595    |000095;
     REP #$20                                                   ;82D3BF|C220    |      ;
     STZ.B strcVariables.n16Unk90                               ;82D3C1|6490    |000090;
-    JML.L fUnknown_82D871                                      ;82D3C3|5C71D882|82D871;
+    JML.L fMainMenu_EndFrame                                      ;82D3C3|5C71D882|82D871;

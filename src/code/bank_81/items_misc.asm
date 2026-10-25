@@ -1138,7 +1138,7 @@ fPlayer_LeaveSnowFootprint:
     LDA.W #$0000                                               ;81A5AB|A90000  |      ;
     LDX.W strcObjectData.playerX                               ;81A5AE|AE0709  |000907;
     LDY.W strcObjectData.playerY                               ;81A5B1|AC0909  |000909;
-    JSL.L fUnknown_82AC61                                      ;81A5B4|2261AC82|82AC61;
+    JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;81A5B4|2261AC82|82AC61;
     REP #$30                                                   ;81A5B8|C230    |      ;
     TXA                                                        ;81A5BA|8A      |      ;
     CMP.W #$0001                                               ;81A5BB|C90100  |      ;
@@ -1304,7 +1304,7 @@ fSetTileAtCoords:
     STA.B strcVariables.n16Unk88                               ;81A6B6|8588    |000088;
     LDA.B strcVariables.n16Temp4                               ;81A6B8|A584    |000084;
     BEQ .return                                                ;81A6BA|F004    |81A6C0;
-    JSL.L fUnknown_82B060                                      ;81A6BC|2260B082|82B060;
+    JSL.L fMap_FillCurrentTilemapRect                                      ;81A6BC|2260B082|82B060;
  
 .return:
     RTL                                                        ;81A6C0|6B      |      ;
@@ -1503,7 +1503,7 @@ fMap_DrawTilePatternAt:
     LDA.B strcVariables.n16Temp4                               ;81A7F6|A584    |000084;
     BEQ +                                                      ;81A7F8|F006    |81A800;
     SEP #$20                                                   ;81A7FA|E220    |      ;
-    JSL.L fUnknown_82B060                                      ;81A7FC|2260B082|82B060;
+    JSL.L fMap_FillCurrentTilemapRect                                      ;81A7FC|2260B082|82B060;
  
   + RTL                                                        ;81A800|6B      |      ;
  
@@ -1932,7 +1932,7 @@ fItemSub81A9F6_0x00to0x03:
     PLY                                                        ;81AAD3|7A      |      ;
     PLX                                                        ;81AAD4|FA      |      ;
     PLA                                                        ;81AAD5|68      |      ;
-    JSL.L fUnknown_82B0A7                                      ;81AAD6|22A7B082|82B0A7;
+    JSL.L fMap_StampTemplateToCurrentTilemap                                      ;81AAD6|22A7B082|82B0A7;
  
 .label1:
     REP #$30                                                   ;81AADA|C230    |      ;
@@ -1949,7 +1949,7 @@ fItemSub81A9F6_0x00to0x03:
     PLY                                                        ;81AAF7|7A      |      ;
     PLX                                                        ;81AAF8|FA      |      ;
     PLA                                                        ;81AAF9|68      |      ;
-    JSL.L fUnknown_82B0A7                                      ;81AAFA|22A7B082|82B0A7;
+    JSL.L fMap_StampTemplateToCurrentTilemap                                      ;81AAFA|22A7B082|82B0A7;
  
 .label2:
     REP #$30                                                   ;81AAFE|C230    |      ;
@@ -1967,7 +1967,7 @@ fItemSub81A9F6_0x00to0x03:
     PLY                                                        ;81AB1D|7A      |      ;
     PLX                                                        ;81AB1E|FA      |      ;
     PLA                                                        ;81AB1F|68      |      ;
-    JSL.L fUnknown_82B0A7                                      ;81AB20|22A7B082|82B0A7;
+    JSL.L fMap_StampTemplateToCurrentTilemap                                      ;81AB20|22A7B082|82B0A7;
     BRA .label4                                                ;81AB24|8026    |81AB4C;
  
  
@@ -1987,7 +1987,7 @@ fItemSub81A9F6_0x00to0x03:
     PLY                                                        ;81AB45|7A      |      ;
     PLX                                                        ;81AB46|FA      |      ;
     PLA                                                        ;81AB47|68      |      ;
-    JSL.L fUnknown_82B0A7                                      ;81AB48|22A7B082|82B0A7;
+    JSL.L fMap_StampTemplateToCurrentTilemap                                      ;81AB48|22A7B082|82B0A7;
  
 .label4:
     SEP #$20                                                   ;81AB4C|E220    |      ;
@@ -2023,7 +2023,7 @@ fItemSub81A9F6_0x00to0x03:
     PLY                                                        ;81AB7F|7A      |      ;
     PLX                                                        ;81AB80|FA      |      ;
     PLA                                                        ;81AB81|68      |      ;
-    JSL.L fUnknown_82B0A7                                      ;81AB82|22A7B082|82B0A7;
+    JSL.L fMap_StampTemplateToCurrentTilemap                                      ;81AB82|22A7B082|82B0A7;
     SEP #$20                                                   ;81AB86|E220    |      ;
     REP #$10                                                   ;81AB88|C210    |      ;
     PLA                                                        ;81AB8A|68      |      ;
@@ -2047,7 +2047,7 @@ fItemSub81A9F6_0x00to0x03:
     PLY                                                        ;81ABB1|7A      |      ;
     PLX                                                        ;81ABB2|FA      |      ;
     PLA                                                        ;81ABB3|68      |      ;
-    JSL.L fUnknown_82B0A7                                      ;81ABB4|22A7B082|82B0A7;
+    JSL.L fMap_StampTemplateToCurrentTilemap                                      ;81ABB4|22A7B082|82B0A7;
  
 .label6:
     REP #$30                                                   ;81ABB8|C230    |      ;
@@ -2064,7 +2064,7 @@ fItemSub81A9F6_0x00to0x03:
     PLY                                                        ;81ABD5|7A      |      ;
     PLX                                                        ;81ABD6|FA      |      ;
     PLA                                                        ;81ABD7|68      |      ;
-    JSL.L fUnknown_82B0A7                                      ;81ABD8|22A7B082|82B0A7;
+    JSL.L fMap_StampTemplateToCurrentTilemap                                      ;81ABD8|22A7B082|82B0A7;
  
 .label7:
     REP #$30                                                   ;81ABDC|C230    |      ;
@@ -2081,7 +2081,7 @@ fItemSub81A9F6_0x00to0x03:
     PLY                                                        ;81ABF9|7A      |      ;
     PLX                                                        ;81ABFA|FA      |      ;
     PLA                                                        ;81ABFB|68      |      ;
-    JSL.L fUnknown_82B0A7                                      ;81ABFC|22A7B082|82B0A7;
+    JSL.L fMap_StampTemplateToCurrentTilemap                                      ;81ABFC|22A7B082|82B0A7;
  
 .label8:
     REP #$30                                                   ;81AC00|C230    |      ;
@@ -2098,7 +2098,7 @@ fItemSub81A9F6_0x00to0x03:
     PLY                                                        ;81AC1D|7A      |      ;
     PLX                                                        ;81AC1E|FA      |      ;
     PLA                                                        ;81AC1F|68      |      ;
-    JSL.L fUnknown_82B0A7                                      ;81AC20|22A7B082|82B0A7;
+    JSL.L fMap_StampTemplateToCurrentTilemap                                      ;81AC20|22A7B082|82B0A7;
  
 .label10:
     REP #$30                                                   ;81AC24|C230    |      ;
@@ -2115,7 +2115,7 @@ fItemSub81A9F6_0x00to0x03:
     PLY                                                        ;81AC41|7A      |      ;
     PLX                                                        ;81AC42|FA      |      ;
     PLA                                                        ;81AC43|68      |      ;
-    JSL.L fUnknown_82B0A7                                      ;81AC44|22A7B082|82B0A7;
+    JSL.L fMap_StampTemplateToCurrentTilemap                                      ;81AC44|22A7B082|82B0A7;
  
 .return:
     RTS                                                        ;81AC48|60      |      ;
@@ -2199,7 +2199,7 @@ fItemSub81A9F6_0x10to0x13:
     PLY                                                        ;81ACAF|7A      |      ;
     PLX                                                        ;81ACB0|FA      |      ;
     PLA                                                        ;81ACB1|68      |      ;
-    JSL.L fUnknown_82B0A7                                      ;81ACB2|22A7B082|82B0A7;
+    JSL.L fMap_StampTemplateToCurrentTilemap                                      ;81ACB2|22A7B082|82B0A7;
  
 .return:
     RTS                                                        ;81ACB6|60      |      ;
@@ -2712,7 +2712,7 @@ fItemSub81A9F6_0x26:
     PLY                                                        ;81B0A0|7A      |      ;
     PLX                                                        ;81B0A1|FA      |      ;
     PLA                                                        ;81B0A2|68      |      ;
-    JSL.L fUnknown_82B0A7                                      ;81B0A3|22A7B082|82B0A7;
+    JSL.L fMap_StampTemplateToCurrentTilemap                                      ;81B0A3|22A7B082|82B0A7;
  
 .return:
     RTS                                                        ;81B0A7|60      |      ;
@@ -2906,7 +2906,7 @@ fItemSub81A9F6_0x2A:
     PLY                                                        ;81B23E|7A      |      ;
     PLX                                                        ;81B23F|FA      |      ;
     PLA                                                        ;81B240|68      |      ;
-    JSL.L fUnknown_82B0A7                                      ;81B241|22A7B082|82B0A7;
+    JSL.L fMap_StampTemplateToCurrentTilemap                                      ;81B241|22A7B082|82B0A7;
     REP #$30                                                   ;81B245|C230    |      ;
     LDA.W #$00EF                                               ;81B247|A9EF00  |      ;
     LDX.W #$0020                                               ;81B24A|A22000  |      ;
@@ -2919,7 +2919,7 @@ fItemSub81A9F6_0x2A:
     PLY                                                        ;81B259|7A      |      ;
     PLX                                                        ;81B25A|FA      |      ;
     PLA                                                        ;81B25B|68      |      ;
-    JSL.L fUnknown_82B0A7                                      ;81B25C|22A7B082|82B0A7;
+    JSL.L fMap_StampTemplateToCurrentTilemap                                      ;81B25C|22A7B082|82B0A7;
  
 .return:
     RTS                                                        ;81B260|60      |      ;
