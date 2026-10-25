@@ -24,14 +24,14 @@ draw, not the raw sheets:
 ```
 assets/gfx/png/frames/obj_0004/f_A53D.png         object animation frame (banks $86/$87, 2,621 images; unreferenced frames in frames/unreferenced/)
 assets/gfx/png/screens/Screen_Road.png   BG name table rendered with its tile sets (77 US + 24 regional images)
-assets/gfx/png/sprites/Sprites_888000.png          remainder sheet of a sprite bank   (10)
+assets/gfx/png/sprites/Sprites_Player_0.png          remainder sheet of a sprite bank   (10)
 assets/gfx/png/tiles/Tiles_Farm_SpringSummer_0.png   remainder sheet of a tile blob     (77)
 assets/gfx/png/<eu|de|jp>/{screens,tiles}/         the same for the blobs that differ from US
 ```
 
 * **Sprite frames** (`frames/`): the components of a frame (`tile id, x, y, attr`, from `assets/objects/`) drawn as the engine draws them (see
   `sprite-assembly.md`): 16x16 blocks, attribute bits 4/5 = vertical / horizontal flip, bits 0-2 = OBJ palette row, the last component on top.
-  Pixel value = `(OBJ palette row << 4) | colour`, colour 0 = transparent; PLTE = day OBJ palette `sPalette_0x6F`, image size = bounding box of the
+  Pixel value = `(OBJ palette row << 4) | colour`, colour 0 = transparent; PLTE = day OBJ palette `Palette_Obj_Day`, image size = bounding box of the
   components. One file per distinct frame address of an object.
 * **Screens** (`screens/`): a name table (`assets/gfx/tilemaps/*.map.txt`) rendered with the tile blobs loaded next to it by the map table
   (`tilemaps.asm`, character base = lowest tile-set VRAM address, which reproduces the farm exactly), 8x8 per entry with flips; pixel value =

@@ -45,7 +45,7 @@ def test_tile_mapping_matches_dma_formula():
     ids = [0x0000, 0x0001, 0x003F, 0x0040, 0x00C0, 0x00FF, 0x0100, 0x0345, 0x05A1, 0x09FE, 0x0777]
     for tid in ids:
         bank = 0x88 + (tid >> 8)
-        raw = (ROOT / "assets" / "gfx" / "sprites" / ("Sprites_%02X8000.bin" % bank)).read_bytes()
+        raw = (ROOT / "assets" / "gfx" / "sprites" / (S.SB.label(bank) + ".bin")).read_bytes()
         src = blocks[(tid >> 6) & 3] + slot[tid & 0x3F] * 0x20
         tiles = [src, src + 0x20, src + 0x200, src + 0x220]               # DMA 1: +0 ($40 bytes), DMA 2: +$200
         expect = [[0] * 16 for _ in range(16)]

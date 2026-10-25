@@ -144,7 +144,7 @@ MAX_ALTERNATIVES = 6
 
 
 def palette_colors(pal_id, root=ROOT):
-    """sPalette_0xNN -> 256 '#RRGGBB' strings (assets/gfx/palettes)."""
+    """Palette_<Area>_<Slot> -> 256 '#RRGGBB' strings (assets/gfx/palettes)."""
     key = (str(root), pal_id)
     if key not in _PALETTE_JSON:
         _PALETTE_JSON[key] = json.loads((Path(root) / "assets/gfx/palettes" / f"{pal_id}.json").read_text())["colors"]
@@ -156,7 +156,7 @@ def hex_rgb(c):
 
 
 def load_view_palette(spec, bpp, root=ROOT):
-    """sidecar "palette": {"id": "sPalette_0x05", "sub": 3} -> list of RGB for the PNG viewing palette."""
+    """sidecar "palette": {"id": "Palette_FarmSummer_Early", "sub": 3} -> list of RGB for the PNG viewing palette."""
     colors = palette_colors(spec["id"], root)
     n = 1 << bpp
     sub = spec.get("sub", 0)
@@ -582,6 +582,7 @@ def cmd_check(a, root=ROOT):
     composed.reset()
     bad = 0
     region = getattr(a, "region", None) or "us"
+    quick = getattr(a, "quick", False)          # tests: image / claim consistency only (no bit exact rebuild, no width audit)
     sel = blobs(root, a.label, a.kind, region=region, from_sources=region != "us")   # regional .bin dirs also hold copies of shared US blobs
     if any(b.kind != "tilemaps" for b in sel):
         claims = composed.claims_for(composed.get_ctx(root, region))
@@ -597,6 +598,8 @@ def cmd_check(a, root=ROOT):
                 raise ValueError("missing " + b.rel(b.art if not b.art.exists() else b.meta))
             if b.kind != "tilemaps" and bad:
                 continue                                         # the composed images are inconsistent: reported above
+            if quick:
+                continue
             got = build_bin(b)
             want = b.bin.read_bytes()
             if got != want:
@@ -622,7 +625,7 @@ def cmd_check(a, root=ROOT):
                 if p.is_file() and p not in want:
                     print(f"FAIL orphan composed image: {p.relative_to(root)}")
                     bad += 1
-        for b in sel:
+        for b in (sel if not quick else []):
             if b.kind == "tiles":
                 m = read_meta(b)
                 if m.get("tiles_row_guessed") == m["raw_size"] // 32:
@@ -630,14 +633,14 @@ def cmd_check(a, root=ROOT):
                           f"(confidence {m.get('palette_confidence')})")
         # name table width sanity: a table laid out with the wrong row length shows unrelated tiles side by side
         own = None if region == "us" else {x.label for x in sel if x.kind == "tilemaps"}
-        sheets = composed.decode_sheets(ctx, composed.load_sheets(ctx))
-        for table, (cur, sug, sc, _scr) in sorted(composed.table_widths(ctx, sheets, own).items()):
+        sheets = composed.decode_sheets(ctx, composed.load_sheets(ctx)) if not quick else {}
+        for table, (cur, sug, sc, _scr) in sorted(composed.table_widths(ctx, sheets, own).items() if not quick else []):
             if sc[cur] - min(sc.values()) > composed.WIDTH_FAIL:
                 print(f"FAIL {table}: columns={cur} gives a discontinuous image (seam ratio {sc[cur]:.3f}); "
                       f"{min(sc, key=sc.get)} columns gives {min(sc.values()):.3f} (see `pngsync.py widths`)")
                 bad += 1
         # screens must show their tiles: cells that use a tile id outside the loaded tile sets are drawn empty (wrong character base)
-        for scr in ctx.screens:
+        for scr in (ctx.screens if not quick else []):
             if own is not None and scr.table not in own:
                 continue
             au = composed.audit_screen(scr, sheets)

@@ -124,9 +124,9 @@ build/sprites_assembled/
   (1327 distinct pixel blocks across all objects; not shared between objects to keep every folder self-contained).
 * **PNG format**: indexed, size = bounding box of the components (so the image is *not* trimmed to its content, which keeps it reversible).
   Pixel value = `(OBJ palette number << 4) | colour index`, 128 palette entries, **every value whose colour index is 0 is transparent** (tRNS).
-  The embedded palette is the real **day OBJ palette** `sPalette_0x6F` (rows 0-7, `aMapPalettesId` `$6B`; see `docs/formats/graphics-palettes.md` section 4:
+  The embedded palette is the real **day OBJ palette** `Palette_Obj_Day` (rows 0-7, `aMapPalettesId` `$6B`; see `docs/formats/graphics-palettes.md` section 4:
   the code takes the OBJ row from bits 0-2 of the component attribute, which is what the pixel value's high nibble keeps), provided by `palette_map.sprite_palettes()`.
-  Not applied: the night palette (`sPalette_0x70`), the event palettes `0x71-0x73` and the run-time patches of OBJ row 7 (colours 10-12, season) and row 3 (colours 8-10, wife's dress).
+  Not applied: the night palette (`Palette_Obj_Evening`), the event palettes `0x71-0x73` and the run-time patches of OBJ row 7 (colours 10-12, season) and row 3 (colours 8-10, wife's dress).
   The provider is pluggable: `--palette-module FILE` with `sprite_palettes(object_index)` returning 8 lists of 16 `(r, g, b)` tuples. The palette of a PNG never influences `check`.
 * **index.json** (per object):
 
@@ -183,7 +183,7 @@ Objects with an empty (all-transparent) frame image, effects, particles and smal
 
 ## 5. Open points
 
-* **Colours**: day OBJ palette `sPalette_0x6F` for every object (all areas that have objects use `$6B` by day / `$6C` by night in `aMapPalettesId`); one palette per
+* **Colours**: day OBJ palette `Palette_Obj_Day` for every object (all areas that have objects use `$6B` by day / `$6C` by night in `aMapPalettesId`); one palette per
   component (`attr & 7`) is preserved in the pixel values, so another provider can colour a frame exactly (night, events, seasonal patches of rows 7 and 3).
 * `mapCurrentPresetId << 4` is ORed into the OAM attribute (`$8585A4`). With the map presets 0-2 it only changes priority; any preset >= 4
   (non-map screens) would set flip bits, so objects presumably are not used there (not verified).

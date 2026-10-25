@@ -15,7 +15,7 @@
   ],
   "map_entries": 1,
   "palette": {
-    "id": "sPalette_0x6C",
+    "id": "Palette_IntroFarmScroll_Day",
     "sub": 6
   },
   "palette_confidence": "high",
@@ -31,7 +31,7 @@
   ],
   "palette_alternatives": [
     {
-      "id": "sPalette_0x6C",
+      "id": "Palette_IntroFarmScroll_Day",
       "sub": 7,
       "area_name": "TITLE_LOGO"
     }

@@ -15,7 +15,7 @@
   ],
   "map_entries": 14,
   "palette": {
-    "id": "sPalette_0x0B",
+    "id": "Palette_FarmSpring_Day",
     "sub": 1
   },
   "palette_confidence": "high",
@@ -27,22 +27,22 @@
   ],
   "palette_alternatives": [
     {
-      "id": "sPalette_0x06",
+      "id": "Palette_FarmSummer_Day",
       "sub": 1,
       "area_name": "FARMSUMMER"
     },
     {
-      "id": "sPalette_0x06",
+      "id": "Palette_FarmSummer_Day",
       "sub": 5,
       "area_name": "ENDING02"
     },
     {
-      "id": "sPalette_0x06",
+      "id": "Palette_FarmSummer_Day",
       "sub": 6,
       "area_name": "ENDING04"
     },
     {
-      "id": "sPalette_0x06",
+      "id": "Palette_FarmSummer_Day",
       "sub": 2,
       "area_name": "ENDING06"
     }

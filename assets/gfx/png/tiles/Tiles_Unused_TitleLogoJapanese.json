@@ -11,7 +11,7 @@
   "bpp_note": "4bpp: planes 0-1 and 2-3 are strongly correlated and the sheet reads as coherent graphics",
   "tiles_per_row": 16,
   "palette": {
-    "id": "sPalette_0x6C",
+    "id": "Palette_IntroFarmScroll_Day",
     "sub": 7
   },
   "palette_confidence": "low",

@@ -2,7 +2,7 @@
  "format": 1,
  "generated_by": "tools/gfx/graphics_loads.py build",
  "blobs": {
-  "Sprites_888000": {
+  "Sprites_Player_0": {
    "kind": "sprites",
    "loaders": [
     {
@@ -13,7 +13,7 @@
    ],
    "status": "indexed"
   },
-  "Sprites_898000": {
+  "Sprites_Player_1": {
    "kind": "sprites",
    "loaders": [
     {
@@ -24,7 +24,7 @@
    ],
    "status": "indexed"
   },
-  "Sprites_8A8000": {
+  "Sprites_Player_2": {
    "kind": "sprites",
    "loaders": [
     {
@@ -35,7 +35,7 @@
    ],
    "status": "indexed"
   },
-  "Sprites_8B8000": {
+  "Sprites_Player_3": {
    "kind": "sprites",
    "loaders": [
     {
@@ -46,7 +46,7 @@
    ],
    "status": "indexed"
   },
-  "Sprites_8C8000": {
+  "Sprites_ItemsCrops": {
    "kind": "sprites",
    "loaders": [
     {
@@ -57,7 +57,7 @@
    ],
    "status": "indexed"
   },
-  "Sprites_8D8000": {
+  "Sprites_Cattle": {
    "kind": "sprites",
    "loaders": [
     {
@@ -68,7 +68,7 @@
    ],
    "status": "indexed"
   },
-  "Sprites_8E8000": {
+  "Sprites_DogChickensHorse": {
    "kind": "sprites",
    "loaders": [
     {
@@ -79,7 +79,7 @@
    ],
    "status": "indexed"
   },
-  "Sprites_8F8000": {
+  "Sprites_Npc_0": {
    "kind": "sprites",
    "loaders": [
     {
@@ -90,7 +90,7 @@
    ],
    "status": "indexed"
   },
-  "Sprites_908000": {
+  "Sprites_Npc_1": {
    "kind": "sprites",
    "loaders": [
     {
@@ -101,7 +101,7 @@
    ],
    "status": "indexed"
   },
-  "Sprites_918000": {
+  "Sprites_Npc_2_Ui": {
    "kind": "sprites",
    "loaders": [
     {
@@ -140,7 +140,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x01"
+      "Palette_FarmFall_Day"
      ]
     }
    ],
@@ -158,7 +158,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x01"
+      "Palette_FarmFall_Day"
      ]
     }
    ],
@@ -176,7 +176,7 @@
      "vram_word": "$4000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x01"
+      "Palette_FarmFall_Day"
      ]
     }
    ],
@@ -194,7 +194,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x0B"
+      "Palette_FarmSpring_Day"
      ]
     },
     {
@@ -206,7 +206,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x06"
+      "Palette_FarmSummer_Day"
      ]
     },
     {
@@ -344,7 +344,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x0B"
+      "Palette_FarmSpring_Day"
      ]
     },
     {
@@ -356,7 +356,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x06"
+      "Palette_FarmSummer_Day"
      ]
     },
     {
@@ -494,7 +494,7 @@
      "vram_word": "$4000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x0B"
+      "Palette_FarmSpring_Day"
      ]
     },
     {
@@ -506,7 +506,7 @@
      "vram_word": "$4000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x06"
+      "Palette_FarmSummer_Day"
      ]
     },
     {
@@ -644,7 +644,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x0E"
+      "Palette_FarmWinter_Day"
      ]
     }
    ],
@@ -662,7 +662,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x0E"
+      "Palette_FarmWinter_Day"
      ]
     }
    ],
@@ -680,7 +680,7 @@
      "vram_word": "$4000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x0E"
+      "Palette_FarmWinter_Day"
      ]
     }
    ],
@@ -698,7 +698,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x12"
+      "Palette_MountainCave_Day"
      ]
     },
     {
@@ -710,7 +710,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x12"
+      "Palette_MountainCave_Day"
      ]
     }
    ],
@@ -838,7 +838,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x13"
+      "Palette_House_Early"
      ]
     },
     {
@@ -850,7 +850,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x13"
+      "Palette_House_Early"
      ]
     },
     {
@@ -862,7 +862,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x13"
+      "Palette_House_Early"
      ]
     }
    ],
@@ -880,7 +880,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x13"
+      "Palette_House_Early"
      ]
     },
     {
@@ -892,7 +892,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x13"
+      "Palette_House_Early"
      ]
     },
     {
@@ -904,7 +904,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x13"
+      "Palette_House_Early"
      ]
     }
    ],
@@ -922,7 +922,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x15"
+      "Palette_MayorHouse_Day"
      ]
     },
     {
@@ -934,7 +934,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x15"
+      "Palette_MayorHouse_Day"
      ]
     },
     {
@@ -946,7 +946,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x15"
+      "Palette_MayorHouse_Day"
      ]
     }
    ],
@@ -964,7 +964,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x16"
+      "Palette_Church_Day"
      ]
     }
    ],
@@ -982,7 +982,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x17"
+      "Palette_FlowerShop_Day"
      ]
     },
     {
@@ -994,7 +994,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x17"
+      "Palette_FlowerShop_Day"
      ]
     }
    ],
@@ -1038,7 +1038,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x19"
+      "Palette_Restaurant_Day"
      ]
     },
     {
@@ -1050,7 +1050,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x19"
+      "Palette_Restaurant_Day"
      ]
     }
    ],
@@ -1068,7 +1068,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x1A"
+      "Palette_GeneralStore_Day"
      ]
     },
     {
@@ -1080,7 +1080,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x1A"
+      "Palette_GeneralStore_Day"
      ]
     }
    ],
@@ -1098,7 +1098,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x1B"
+      "Palette_AnimalShop_Day"
      ]
     }
    ],
@@ -1116,7 +1116,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x1C"
+      "Palette_FortuneTellerHouse_Day"
      ]
     }
    ],
@@ -1150,7 +1150,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x3F"
+      "Palette_EggFestival_Day"
      ]
     },
     {
@@ -1162,7 +1162,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x3B"
+      "Palette_FlowerFestival_Day"
      ]
     },
     {
@@ -1174,7 +1174,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x22"
+      "Palette_HarvestFestival_Day"
      ]
     },
     {
@@ -1186,7 +1186,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x3A"
+      "Palette_TownSpring_Day"
      ]
     },
     {
@@ -1198,7 +1198,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x1D"
+      "Palette_TownSummer_Day"
      ]
     },
     {
@@ -1210,7 +1210,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x21"
+      "Palette_TownFall_Day"
      ]
     },
     {
@@ -1232,7 +1232,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x21"
+      "Palette_TownFall_Day"
      ]
     },
     {
@@ -1244,7 +1244,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x3A"
+      "Palette_TownSpring_Day"
      ]
     },
     {
@@ -1256,7 +1256,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x1D"
+      "Palette_TownSummer_Day"
      ]
     }
    ],
@@ -1274,7 +1274,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x1D"
+      "Palette_TownSummer_Day"
      ]
     },
     {
@@ -1296,7 +1296,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x1D"
+      "Palette_TownSummer_Day"
      ]
     }
    ],
@@ -1314,7 +1314,7 @@
      "vram_word": "$4000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x1D"
+      "Palette_TownSummer_Day"
      ]
     },
     {
@@ -1336,7 +1336,7 @@
      "vram_word": "$4000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x1D"
+      "Palette_TownSummer_Day"
      ]
     }
    ],
@@ -1354,7 +1354,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x3F"
+      "Palette_EggFestival_Day"
      ]
     },
     {
@@ -1366,7 +1366,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x22"
+      "Palette_HarvestFestival_Day"
      ]
     },
     {
@@ -1378,7 +1378,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x21"
+      "Palette_TownFall_Day"
      ]
     },
     {
@@ -1390,7 +1390,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x21"
+      "Palette_TownFall_Day"
      ]
     }
    ],
@@ -1408,7 +1408,7 @@
      "vram_word": "$4000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x21"
+      "Palette_TownFall_Day"
      ]
     },
     {
@@ -1420,7 +1420,7 @@
      "vram_word": "$4000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x21"
+      "Palette_TownFall_Day"
      ]
     }
    ],
@@ -1438,7 +1438,7 @@
      "vram_word": "$4000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x22"
+      "Palette_HarvestFestival_Day"
      ]
     }
    ],
@@ -1466,7 +1466,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x2C"
+      "Palette_RoadFall_Day"
      ]
     },
     {
@@ -1478,7 +1478,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x27"
+      "Palette_RoadSpring_Day"
      ]
     },
     {
@@ -1490,7 +1490,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x36"
+      "Palette_RoadSummer_Day"
      ]
     }
    ],
@@ -1508,7 +1508,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x31"
+      "Palette_RoadWinter_Day"
      ]
     }
    ],
@@ -1526,7 +1526,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x3B"
+      "Palette_FlowerFestival_Day"
      ]
     },
     {
@@ -1538,7 +1538,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x3A"
+      "Palette_TownSpring_Day"
      ]
     },
     {
@@ -1550,7 +1550,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x3A"
+      "Palette_TownSpring_Day"
      ]
     }
    ],
@@ -1568,7 +1568,7 @@
      "vram_word": "$4000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x3A"
+      "Palette_TownSpring_Day"
      ]
     },
     {
@@ -1580,7 +1580,7 @@
      "vram_word": "$4000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x3A"
+      "Palette_TownSpring_Day"
      ]
     }
    ],
@@ -1598,7 +1598,7 @@
      "vram_word": "$4000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x3B"
+      "Palette_FlowerFestival_Day"
      ]
     }
    ],
@@ -1616,7 +1616,7 @@
      "vram_word": "$4000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x3F"
+      "Palette_EggFestival_Day"
      ]
     }
    ],
@@ -1634,7 +1634,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x40"
+      "Palette_TownWinter_Day"
      ]
     },
     {
@@ -1656,7 +1656,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x40"
+      "Palette_TownWinter_Day"
      ]
     }
    ],
@@ -1674,7 +1674,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x40"
+      "Palette_TownWinter_Day"
      ]
     },
     {
@@ -1696,7 +1696,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x40"
+      "Palette_TownWinter_Day"
      ]
     }
    ],
@@ -1714,7 +1714,7 @@
      "vram_word": "$4000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x40"
+      "Palette_TownWinter_Day"
      ]
     },
     {
@@ -1726,7 +1726,7 @@
      "vram_word": "$4000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x40"
+      "Palette_TownWinter_Day"
      ]
     }
    ],
@@ -1760,7 +1760,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x46"
+      "Palette_MenuScreenBackgrounds_Day"
      ]
     },
     {
@@ -1772,7 +1772,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x46"
+      "Palette_MenuScreenBackgrounds_Day"
      ]
     }
    ],
@@ -1790,7 +1790,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x46"
+      "Palette_MenuScreenBackgrounds_Day"
      ]
     },
     {
@@ -1802,7 +1802,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x46"
+      "Palette_MenuScreenBackgrounds_Day"
      ]
     }
    ],
@@ -1820,7 +1820,7 @@
      "vram_word": "$4000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x46"
+      "Palette_MenuScreenBackgrounds_Day"
      ]
     },
     {
@@ -1832,7 +1832,7 @@
      "vram_word": "$4000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x46"
+      "Palette_MenuScreenBackgrounds_Day"
      ]
     }
    ],
@@ -1850,7 +1850,7 @@
      "vram_word": "$5000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x46"
+      "Palette_MenuScreenBackgrounds_Day"
      ]
     },
     {
@@ -1862,7 +1862,7 @@
      "vram_word": "$5000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x46"
+      "Palette_MenuScreenBackgrounds_Day"
      ]
     }
    ],
@@ -1880,7 +1880,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x47"
+      "Palette_ToolShed_Early"
      ]
     }
    ],
@@ -1898,7 +1898,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x47"
+      "Palette_ToolShed_Early"
      ]
     }
    ],
@@ -1932,7 +1932,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x48"
+      "Palette_GoldChicken_Day"
      ]
     }
    ],
@@ -1950,7 +1950,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x49"
+      "Palette_WorksmanHouse_Day"
      ]
     }
    ],
@@ -1968,7 +1968,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x53"
+      "Palette_SummitSpring_Day"
      ]
     },
     {
@@ -1980,7 +1980,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x4E"
+      "Palette_SummitSummer_Day"
      ]
     },
     {
@@ -1992,7 +1992,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x4A"
+      "Palette_SummitFall_Day"
      ]
     },
     {
@@ -2004,7 +2004,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x53"
+      "Palette_SummitSpring_Day"
      ]
     },
     {
@@ -2016,7 +2016,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x52"
+      "Palette_NewYearsFestival_Day"
      ]
     },
     {
@@ -2028,7 +2028,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x4A"
+      "Palette_SummitFall_Day"
      ]
     },
     {
@@ -2040,7 +2040,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x53"
+      "Palette_SummitSpring_Day"
      ]
     },
     {
@@ -2052,7 +2052,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x4E"
+      "Palette_SummitSummer_Day"
      ]
     }
    ],
@@ -2070,7 +2070,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x57"
+      "Palette_SummitWinter_Day"
      ]
     },
     {
@@ -2092,7 +2092,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x57"
+      "Palette_SummitWinter_Day"
      ]
     }
    ],
@@ -2110,7 +2110,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x53"
+      "Palette_SummitSpring_Day"
      ]
     },
     {
@@ -2122,7 +2122,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x4E"
+      "Palette_SummitSummer_Day"
      ]
     },
     {
@@ -2134,7 +2134,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x4A"
+      "Palette_SummitFall_Day"
      ]
     },
     {
@@ -2146,7 +2146,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x53"
+      "Palette_SummitSpring_Day"
      ]
     },
     {
@@ -2158,7 +2158,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x52"
+      "Palette_NewYearsFestival_Day"
      ]
     },
     {
@@ -2170,7 +2170,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x4A"
+      "Palette_SummitFall_Day"
      ]
     },
     {
@@ -2182,7 +2182,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x53"
+      "Palette_SummitSpring_Day"
      ]
     },
     {
@@ -2194,7 +2194,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x4E"
+      "Palette_SummitSummer_Day"
      ]
     }
    ],
@@ -2212,7 +2212,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x57"
+      "Palette_SummitWinter_Day"
      ]
     },
     {
@@ -2234,7 +2234,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x57"
+      "Palette_SummitWinter_Day"
      ]
     }
    ],
@@ -2252,7 +2252,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x5B"
+      "Palette_Barn_Early"
      ]
     },
     {
@@ -2264,7 +2264,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x5B"
+      "Palette_Barn_Early"
      ]
     }
    ],
@@ -2305,7 +2305,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x5C"
+      "Palette_MountainSummer_Day"
      ]
     }
    ],
@@ -2333,7 +2333,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x5C"
+      "Palette_MountainSummer_Day"
      ]
     }
    ],
@@ -2361,7 +2361,7 @@
      "vram_word": "$4000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x64"
+      "Palette_MountainSpring_Day"
      ]
     },
     {
@@ -2373,7 +2373,7 @@
      "vram_word": "$4000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x5C"
+      "Palette_MountainSummer_Day"
      ]
     }
    ],
@@ -2391,7 +2391,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x60"
+      "Palette_MountainFall_Day"
      ]
     }
    ],
@@ -2409,7 +2409,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x60"
+      "Palette_MountainFall_Day"
      ]
     }
    ],
@@ -2427,7 +2427,7 @@
      "vram_word": "$4000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x60"
+      "Palette_MountainFall_Day"
      ]
     }
    ],
@@ -2445,7 +2445,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x64"
+      "Palette_MountainSpring_Day"
      ]
     }
    ],
@@ -2463,7 +2463,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x64"
+      "Palette_MountainSpring_Day"
      ]
     }
    ],
@@ -2497,7 +2497,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x68"
+      "Palette_MountainWinter_Day"
      ]
     },
     {
@@ -2525,7 +2525,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x68"
+      "Palette_MountainWinter_Day"
      ]
     },
     {
@@ -2553,7 +2553,7 @@
      "vram_word": "$4000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x68"
+      "Palette_MountainWinter_Day"
      ]
     },
     {
@@ -2707,7 +2707,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x6C"
+      "Palette_IntroFarmScroll_Day"
      ]
     }
    ],
@@ -2725,7 +2725,7 @@
      "vram_word": "$3000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x6C"
+      "Palette_IntroFarmScroll_Day"
      ]
     }
    ],
@@ -2743,7 +2743,7 @@
      "vram_word": "$4000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x6C"
+      "Palette_IntroFarmScroll_Day"
      ]
     }
    ],
@@ -2761,7 +2761,7 @@
      "vram_word": "$5000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x6C"
+      "Palette_IntroFarmScroll_Day"
      ]
     }
    ],
@@ -2785,7 +2785,7 @@
      "vram_word": "$2000",
      "as": "tiles",
      "palette": [
-      "sPalette_0x6D"
+      "Palette_NatsumeLogo_Day"
      ]
     }
    ],
@@ -3159,7 +3159,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x01"
+      "Palette_FarmFall_Day"
      ]
     },
     {
@@ -3171,7 +3171,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x0B"
+      "Palette_FarmSpring_Day"
      ]
     },
     {
@@ -3183,7 +3183,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x06"
+      "Palette_FarmSummer_Day"
      ]
     },
     {
@@ -3195,7 +3195,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x0E"
+      "Palette_FarmWinter_Day"
      ]
     }
    ],
@@ -3213,7 +3213,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x60"
+      "Palette_MountainFall_Day"
      ]
     },
     {
@@ -3225,7 +3225,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x64"
+      "Palette_MountainSpring_Day"
      ]
     },
     {
@@ -3237,7 +3237,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x5C"
+      "Palette_MountainSummer_Day"
      ]
     },
     {
@@ -3249,7 +3249,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x68"
+      "Palette_MountainWinter_Day"
      ]
     }
    ],
@@ -3267,7 +3267,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x3A"
+      "Palette_TownSpring_Day"
      ]
     },
     {
@@ -3279,7 +3279,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x1D"
+      "Palette_TownSummer_Day"
      ]
     },
     {
@@ -3291,7 +3291,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x21"
+      "Palette_TownFall_Day"
      ]
     },
     {
@@ -3303,7 +3303,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x40"
+      "Palette_TownWinter_Day"
      ]
     },
     {
@@ -3315,7 +3315,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x21"
+      "Palette_TownFall_Day"
      ]
     },
     {
@@ -3327,7 +3327,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x3A"
+      "Palette_TownSpring_Day"
      ]
     },
     {
@@ -3339,7 +3339,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x1D"
+      "Palette_TownSummer_Day"
      ]
     },
     {
@@ -3351,7 +3351,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x40"
+      "Palette_TownWinter_Day"
      ]
     }
    ],
@@ -3385,7 +3385,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x12"
+      "Palette_MountainCave_Day"
      ]
     }
    ],
@@ -3403,7 +3403,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x12"
+      "Palette_MountainCave_Day"
      ]
     }
    ],
@@ -3421,7 +3421,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x13"
+      "Palette_House_Early"
      ]
     }
    ],
@@ -3439,7 +3439,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x13"
+      "Palette_House_Early"
      ]
     }
    ],
@@ -3457,7 +3457,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x13"
+      "Palette_House_Early"
      ]
     }
    ],
@@ -3475,7 +3475,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x15"
+      "Palette_MayorHouse_Day"
      ]
     },
     {
@@ -3487,7 +3487,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x15"
+      "Palette_MayorHouse_Day"
      ]
     },
     {
@@ -3499,7 +3499,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x15"
+      "Palette_MayorHouse_Day"
      ]
     }
    ],
@@ -3517,7 +3517,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x16"
+      "Palette_Church_Day"
      ]
     }
    ],
@@ -3535,7 +3535,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x17"
+      "Palette_FlowerShop_Day"
      ]
     },
     {
@@ -3547,7 +3547,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x17"
+      "Palette_FlowerShop_Day"
      ]
     }
    ],
@@ -3591,7 +3591,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x19"
+      "Palette_Restaurant_Day"
      ]
     },
     {
@@ -3603,7 +3603,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x19"
+      "Palette_Restaurant_Day"
      ]
     }
    ],
@@ -3621,7 +3621,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x1A"
+      "Palette_GeneralStore_Day"
      ]
     },
     {
@@ -3633,7 +3633,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x1A"
+      "Palette_GeneralStore_Day"
      ]
     }
    ],
@@ -3651,7 +3651,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x1B"
+      "Palette_AnimalShop_Day"
      ]
     }
    ],
@@ -3669,7 +3669,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x1C"
+      "Palette_FortuneTellerHouse_Day"
      ]
     }
    ],
@@ -3703,7 +3703,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x22"
+      "Palette_HarvestFestival_Day"
      ]
     }
    ],
@@ -3721,7 +3721,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x2C"
+      "Palette_RoadFall_Day"
      ]
     },
     {
@@ -3733,7 +3733,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x27"
+      "Palette_RoadSpring_Day"
      ]
     },
     {
@@ -3745,7 +3745,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x36"
+      "Palette_RoadSummer_Day"
      ]
     },
     {
@@ -3757,7 +3757,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x31"
+      "Palette_RoadWinter_Day"
      ]
     }
    ],
@@ -3775,7 +3775,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x3B"
+      "Palette_FlowerFestival_Day"
      ]
     }
    ],
@@ -3793,7 +3793,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x3F"
+      "Palette_EggFestival_Day"
      ]
     }
    ],
@@ -3811,7 +3811,7 @@
      "vram_word": "$1000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x46"
+      "Palette_MenuScreenBackgrounds_Day"
      ]
     }
    ],
@@ -3845,7 +3845,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x47"
+      "Palette_ToolShed_Early"
      ]
     }
    ],
@@ -3863,7 +3863,7 @@
      "vram_word": "$1000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x46"
+      "Palette_MenuScreenBackgrounds_Day"
      ]
     }
    ],
@@ -3881,7 +3881,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x46"
+      "Palette_MenuScreenBackgrounds_Day"
      ]
     },
     {
@@ -3893,7 +3893,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x46"
+      "Palette_MenuScreenBackgrounds_Day"
      ]
     }
    ],
@@ -3911,7 +3911,7 @@
      "vram_word": "$7000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x47"
+      "Palette_ToolShed_Early"
      ]
     }
    ],
@@ -3961,7 +3961,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x48"
+      "Palette_GoldChicken_Day"
      ]
     }
    ],
@@ -3979,7 +3979,7 @@
      "vram_word": "$7000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x53"
+      "Palette_SummitSpring_Day"
      ]
     },
     {
@@ -3991,7 +3991,7 @@
      "vram_word": "$7000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x52"
+      "Palette_NewYearsFestival_Day"
      ]
     },
     {
@@ -4003,7 +4003,7 @@
      "vram_word": "$7000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x4A"
+      "Palette_SummitFall_Day"
      ]
     },
     {
@@ -4015,7 +4015,7 @@
      "vram_word": "$7000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x53"
+      "Palette_SummitSpring_Day"
      ]
     },
     {
@@ -4027,7 +4027,7 @@
      "vram_word": "$7000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x4E"
+      "Palette_SummitSummer_Day"
      ]
     },
     {
@@ -4039,7 +4039,7 @@
      "vram_word": "$7000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x57"
+      "Palette_SummitWinter_Day"
      ]
     }
    ],
@@ -4057,7 +4057,7 @@
      "vram_word": "$7000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x53"
+      "Palette_SummitSpring_Day"
      ]
     },
     {
@@ -4069,7 +4069,7 @@
      "vram_word": "$7000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x4E"
+      "Palette_SummitSummer_Day"
      ]
     },
     {
@@ -4081,7 +4081,7 @@
      "vram_word": "$7000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x4A"
+      "Palette_SummitFall_Day"
      ]
     },
     {
@@ -4093,7 +4093,7 @@
      "vram_word": "$7000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x57"
+      "Palette_SummitWinter_Day"
      ]
     }
    ],
@@ -4127,7 +4127,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x49"
+      "Palette_WorksmanHouse_Day"
      ]
     }
    ],
@@ -4145,7 +4145,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x53"
+      "Palette_SummitSpring_Day"
      ]
     },
     {
@@ -4157,7 +4157,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x4E"
+      "Palette_SummitSummer_Day"
      ]
     },
     {
@@ -4169,7 +4169,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x4A"
+      "Palette_SummitFall_Day"
      ]
     },
     {
@@ -4181,7 +4181,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x57"
+      "Palette_SummitWinter_Day"
      ]
     },
     {
@@ -4193,7 +4193,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x52"
+      "Palette_NewYearsFestival_Day"
      ]
     },
     {
@@ -4215,7 +4215,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x4A"
+      "Palette_SummitFall_Day"
      ]
     },
     {
@@ -4227,7 +4227,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x53"
+      "Palette_SummitSpring_Day"
      ]
     },
     {
@@ -4239,7 +4239,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x4E"
+      "Palette_SummitSummer_Day"
      ]
     },
     {
@@ -4251,7 +4251,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x57"
+      "Palette_SummitWinter_Day"
      ]
     }
    ],
@@ -4269,7 +4269,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x53"
+      "Palette_SummitSpring_Day"
      ]
     }
    ],
@@ -4287,7 +4287,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x5B"
+      "Palette_Barn_Early"
      ]
     }
    ],
@@ -4305,7 +4305,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x5B"
+      "Palette_Barn_Early"
      ]
     }
    ],
@@ -4352,7 +4352,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x6C"
+      "Palette_IntroFarmScroll_Day"
      ]
     }
    ],
@@ -4370,7 +4370,7 @@
      "vram_word": "$7000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x6C"
+      "Palette_IntroFarmScroll_Day"
      ]
     }
    ],
@@ -4388,7 +4388,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x6C"
+      "Palette_IntroFarmScroll_Day"
      ]
     }
    ],
@@ -4406,7 +4406,7 @@
      "vram_word": "$6000",
      "as": "name_table",
      "palette": [
-      "sPalette_0x6D"
+      "Palette_NatsumeLogo_Day"
      ]
     }
    ],
@@ -4796,7 +4796,7 @@
    "unused": "raw 64x32 name table; no label or literal address in the code; found hidden under bank padding",
    "status": "unused"
   },
-  "sPalette_0x00": {
+  "Palette_FarmFall_Early": {
    "kind": "palettes",
    "loaders": [
     {
@@ -4807,7 +4807,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x01": {
+  "Palette_FarmFall_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -4818,7 +4818,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x02": {
+  "Palette_FarmFall_Evening": {
    "kind": "palettes",
    "loaders": [
     {
@@ -4829,7 +4829,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x03": {
+  "Palette_FarmFall_Dusk": {
    "kind": "palettes",
    "loaders": [
     {
@@ -4840,7 +4840,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x04": {
+  "Palette_FarmFall_Night": {
    "kind": "palettes",
    "loaders": [
     {
@@ -4851,7 +4851,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x05": {
+  "Palette_FarmSummer_Early": {
    "kind": "palettes",
    "loaders": [
     {
@@ -4862,7 +4862,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x06": {
+  "Palette_FarmSummer_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -4873,7 +4873,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x07": {
+  "Palette_FarmSummer_Evening": {
    "kind": "palettes",
    "loaders": [
     {
@@ -4884,7 +4884,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x08": {
+  "Palette_FarmSpring_Dusk": {
    "kind": "palettes",
    "loaders": [
     {
@@ -4895,7 +4895,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x09": {
+  "Palette_FarmSpring_Night": {
    "kind": "palettes",
    "loaders": [
     {
@@ -4906,7 +4906,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x0A": {
+  "Palette_FarmSpring_Early": {
    "kind": "palettes",
    "loaders": [
     {
@@ -4917,7 +4917,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x0B": {
+  "Palette_FarmSpring_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -4928,7 +4928,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x0C": {
+  "Palette_FarmSpring_Evening": {
    "kind": "palettes",
    "loaders": [
     {
@@ -4939,7 +4939,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x0D": {
+  "Palette_FarmWinter_Early": {
    "kind": "palettes",
    "loaders": [
     {
@@ -4950,7 +4950,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x0E": {
+  "Palette_FarmWinter_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -4961,7 +4961,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x0F": {
+  "Palette_FarmWinter_Evening": {
    "kind": "palettes",
    "loaders": [
     {
@@ -4972,7 +4972,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x10": {
+  "Palette_FarmWinter_Dusk": {
    "kind": "palettes",
    "loaders": [
     {
@@ -4983,7 +4983,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x11": {
+  "Palette_FarmWinter_Night": {
    "kind": "palettes",
    "loaders": [
     {
@@ -4994,7 +4994,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x12": {
+  "Palette_MountainCave_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5005,7 +5005,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x13": {
+  "Palette_House_Early": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5016,7 +5016,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x14": {
+  "Palette_Unk_14": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5027,7 +5027,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x15": {
+  "Palette_MayorHouse_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5038,7 +5038,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x16": {
+  "Palette_Church_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5049,7 +5049,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x17": {
+  "Palette_FlowerShop_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5060,7 +5060,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x18": {
+  "Palette_Bar_Dusk": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5071,7 +5071,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x19": {
+  "Palette_Restaurant_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5082,7 +5082,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x1A": {
+  "Palette_GeneralStore_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5093,7 +5093,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x1B": {
+  "Palette_AnimalShop_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5104,7 +5104,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x1C": {
+  "Palette_FortuneTellerHouse_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5115,7 +5115,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x1D": {
+  "Palette_TownSummer_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5126,7 +5126,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x1E": {
+  "Palette_TownSummer_Evening": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5137,7 +5137,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x1F": {
+  "Palette_TownSummer_Dusk": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5148,7 +5148,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x20": {
+  "Palette_TownSummer_Night": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5159,7 +5159,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x21": {
+  "Palette_TownFall_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5170,7 +5170,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x22": {
+  "Palette_HarvestFestival_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5181,7 +5181,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x23": {
+  "Palette_TownFall_Evening": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5192,7 +5192,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x24": {
+  "Palette_TownFall_Dusk": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5203,7 +5203,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x25": {
+  "Palette_TownFall_Night": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5214,7 +5214,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x26": {
+  "Palette_RoadSpring_Early": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5225,7 +5225,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x27": {
+  "Palette_RoadSpring_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5236,7 +5236,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x28": {
+  "Palette_RoadSpring_Evening": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5247,7 +5247,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x29": {
+  "Palette_RoadSpring_Dusk": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5258,7 +5258,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x2A": {
+  "Palette_RoadSpring_Night": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5269,7 +5269,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x2B": {
+  "Palette_RoadFall_Early": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5280,7 +5280,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x2C": {
+  "Palette_RoadFall_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5291,7 +5291,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x2D": {
+  "Palette_RoadFall_Evening": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5302,7 +5302,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x2E": {
+  "Palette_RoadFall_Dusk": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5313,7 +5313,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x2F": {
+  "Palette_RoadFall_Night": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5324,7 +5324,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x30": {
+  "Palette_RoadWinter_Early": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5335,7 +5335,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x31": {
+  "Palette_RoadWinter_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5346,7 +5346,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x32": {
+  "Palette_RoadWinter_Evening": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5357,7 +5357,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x33": {
+  "Palette_RoadWinter_Dusk": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5368,7 +5368,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x34": {
+  "Palette_RoadWinter_Night": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5379,7 +5379,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x35": {
+  "Palette_RoadSummer_Early": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5390,7 +5390,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x36": {
+  "Palette_RoadSummer_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5401,7 +5401,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x37": {
+  "Palette_RoadSummer_Evening": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5412,7 +5412,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x38": {
+  "Palette_RoadSummer_Dusk": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5423,7 +5423,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x39": {
+  "Palette_RoadSummer_Night": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5434,7 +5434,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x3A": {
+  "Palette_TownSpring_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5445,7 +5445,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x3B": {
+  "Palette_FlowerFestival_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5456,7 +5456,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x3C": {
+  "Palette_TownSpring_Evening": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5467,7 +5467,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x3D": {
+  "Palette_TownSpring_Dusk": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5478,7 +5478,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x3E": {
+  "Palette_TownSpring_Night": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5489,7 +5489,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x3F": {
+  "Palette_EggFestival_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5500,7 +5500,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x40": {
+  "Palette_TownWinter_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5511,7 +5511,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x41": {
+  "Palette_TownWinter_Evening": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5522,7 +5522,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x42": {
+  "Palette_TownWinter_Dusk": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5533,7 +5533,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x43": {
+  "Palette_TownWinter_Night": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5544,7 +5544,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x44": {
+  "Palette_StarNightFestivalSquare_Night": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5555,7 +5555,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x45": {
+  "Palette_StarNightFestivalSquare_Dusk": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5566,7 +5566,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x46": {
+  "Palette_MenuScreenBackgrounds_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5577,7 +5577,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x47": {
+  "Palette_ToolShed_Early": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5588,7 +5588,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x48": {
+  "Palette_GoldChicken_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5599,7 +5599,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x49": {
+  "Palette_WorksmanHouse_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5610,7 +5610,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x4A": {
+  "Palette_SummitFall_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5621,7 +5621,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x4B": {
+  "Palette_SummitFall_Evening": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5632,7 +5632,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x4C": {
+  "Palette_SummitFall_Dusk": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5643,7 +5643,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x4D": {
+  "Palette_SummitFall_Night": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5654,7 +5654,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x4E": {
+  "Palette_SummitSummer_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5665,7 +5665,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x4F": {
+  "Palette_SummitSummer_Evening": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5676,7 +5676,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x50": {
+  "Palette_SummitSummer_Dusk": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5687,7 +5687,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x51": {
+  "Palette_SummitSummer_Night": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5698,7 +5698,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x52": {
+  "Palette_NewYearsFestival_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5709,7 +5709,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x53": {
+  "Palette_SummitSpring_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5720,7 +5720,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x54": {
+  "Palette_SummitSpring_Evening": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5731,7 +5731,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x55": {
+  "Palette_SummitSpring_Dusk": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5742,7 +5742,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x56": {
+  "Palette_SummitSpring_Night": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5753,7 +5753,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x57": {
+  "Palette_SummitWinter_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5764,7 +5764,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x58": {
+  "Palette_SummitWinter_Evening": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5775,7 +5775,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x59": {
+  "Palette_SummitWinter_Dusk": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5786,7 +5786,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x5A": {
+  "Palette_SummitWinter_Night": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5797,7 +5797,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x5B": {
+  "Palette_Barn_Early": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5808,7 +5808,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x5C": {
+  "Palette_MountainSummer_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5819,7 +5819,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x5D": {
+  "Palette_MountainSummer_Evening": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5830,7 +5830,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x5E": {
+  "Palette_MountainSummer_Dusk": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5841,7 +5841,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x5F": {
+  "Palette_MountainSummer_Night": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5852,7 +5852,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x60": {
+  "Palette_MountainFall_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5863,7 +5863,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x61": {
+  "Palette_MountainFall_Evening": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5874,7 +5874,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x62": {
+  "Palette_MountainFall_Dusk": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5885,7 +5885,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x63": {
+  "Palette_MountainFall_Night": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5896,7 +5896,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x64": {
+  "Palette_MountainSpring_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5907,7 +5907,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x65": {
+  "Palette_MountainSpring_Evening": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5918,7 +5918,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x66": {
+  "Palette_MountainSpring_Dusk": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5929,7 +5929,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x67": {
+  "Palette_MountainSpring_Night": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5940,7 +5940,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x68": {
+  "Palette_MountainWinter_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5951,7 +5951,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x69": {
+  "Palette_MountainWinter_Evening": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5962,7 +5962,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x6A": {
+  "Palette_MountainWinter_Dusk": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5973,7 +5973,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x6B": {
+  "Palette_MountainWinter_Night": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5984,7 +5984,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x6C": {
+  "Palette_IntroFarmScroll_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -5995,7 +5995,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x6D": {
+  "Palette_NatsumeLogo_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -6006,7 +6006,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x6E": {
+  "Palette_Credits0_Early": {
    "kind": "palettes",
    "loaders": [
     {
@@ -6017,7 +6017,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x6F": {
+  "Palette_Obj_Day": {
    "kind": "palettes",
    "loaders": [
     {
@@ -6028,7 +6028,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x70": {
+  "Palette_Obj_Evening": {
    "kind": "palettes",
    "loaders": [
     {
@@ -6039,7 +6039,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x71": {
+  "Palette_Unk_71": {
    "kind": "palettes",
    "loaders": [
     {
@@ -6050,7 +6050,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x72": {
+  "Palette_Unk_72": {
    "kind": "palettes",
    "loaders": [
     {
@@ -6061,7 +6061,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x73": {
+  "Palette_Unk_73": {
    "kind": "palettes",
    "loaders": [
     {
@@ -6072,7 +6072,7 @@
    ],
    "status": "indexed"
   },
-  "sPalette_0x74": {
+  "Palette_Unk_74": {
    "kind": "palettes",
    "loaders": [
     {
@@ -6103,7 +6103,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x1B"
+    "Palette_AnimalShop_Day"
    ]
   },
   "sBarMap": {
@@ -6162,7 +6162,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x5B"
+    "Palette_Barn_Early"
    ]
   },
   "sChurchMap": {
@@ -6183,7 +6183,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x16"
+    "Palette_Church_Day"
    ]
   },
   "sCloudsOverlay": {
@@ -6223,7 +6223,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x5B"
+    "Palette_Barn_Early"
    ]
   },
   "sEggFestivalMap": {
@@ -6252,7 +6252,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x3F"
+    "Palette_EggFestival_Day"
    ]
   },
   "sElfTunnelMap": {
@@ -6273,7 +6273,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x12"
+    "Palette_MountainCave_Day"
    ]
   },
   "sFarmFallMap": {
@@ -6302,7 +6302,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x01"
+    "Palette_FarmFall_Day"
    ]
   },
   "sFarmSpringMap": {
@@ -6331,7 +6331,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x0B"
+    "Palette_FarmSpring_Day"
    ]
   },
   "sFarmSummerMap": {
@@ -6360,7 +6360,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x06"
+    "Palette_FarmSummer_Day"
    ]
   },
   "sFarmWinterMap": {
@@ -6389,7 +6389,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x0E"
+    "Palette_FarmWinter_Day"
    ]
   },
   "sFlowerFestivalMap": {
@@ -6418,7 +6418,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x3B"
+    "Palette_FlowerFestival_Day"
    ]
   },
   "sFlowerShopMap": {
@@ -6439,7 +6439,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x17"
+    "Palette_FlowerShop_Day"
    ]
   },
   "sFlowerShopRoomMap": {
@@ -6460,7 +6460,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x17"
+    "Palette_FlowerShop_Day"
    ]
   },
   "sFortuneTellerHouseMap": {
@@ -6481,7 +6481,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x1C"
+    "Palette_FortuneTellerHouse_Day"
    ]
   },
   "sGeneralStoreMap": {
@@ -6502,7 +6502,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x1A"
+    "Palette_GeneralStore_Day"
    ]
   },
   "sGeneralStoreRoomMap": {
@@ -6523,7 +6523,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x1A"
+    "Palette_GeneralStore_Day"
    ]
   },
   "sHarvestFestivalMap": {
@@ -6552,7 +6552,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x22"
+    "Palette_HarvestFestival_Day"
    ]
   },
   "sHarvestMoonLogo": {
@@ -6568,7 +6568,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x6C"
+    "Palette_IntroFarmScroll_Day"
    ]
   },
   "sHeavySnowOverlay": {
@@ -6612,7 +6612,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x13"
+    "Palette_House_Early"
    ]
   },
   "sHouseUpgrade1Map": {
@@ -6637,7 +6637,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x13"
+    "Palette_House_Early"
    ]
   },
   "sHouseUpgrade2Map": {
@@ -6662,7 +6662,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x13"
+    "Palette_House_Early"
    ]
   },
   "sIntroFarmScrool": {
@@ -6700,7 +6700,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x6C"
+    "Palette_IntroFarmScroll_Day"
    ]
   },
   "sMap_80B032": {
@@ -6721,7 +6721,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x49"
+    "Palette_WorksmanHouse_Day"
    ]
   },
   "sMap_80B04B": {
@@ -6742,7 +6742,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x48"
+    "Palette_GoldChicken_Day"
    ]
   },
   "sMap_80B064": {
@@ -6771,7 +6771,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x3A"
+    "Palette_TownSpring_Day"
    ]
   },
   "sMap_80B087": {
@@ -6800,7 +6800,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x1D"
+    "Palette_TownSummer_Day"
    ]
   },
   "sMap_80B0AA": {
@@ -6829,7 +6829,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x21"
+    "Palette_TownFall_Day"
    ]
   },
   "sMap_80B0CD": {
@@ -6858,7 +6858,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x40"
+    "Palette_TownWinter_Day"
    ]
   },
   "sMap_80B17C": {
@@ -6888,7 +6888,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x53"
+    "Palette_SummitSpring_Day"
    ]
   },
   "sMap_80B19F": {
@@ -6918,7 +6918,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x4E"
+    "Palette_SummitSummer_Day"
    ]
   },
   "sMap_80B1C2": {
@@ -6948,7 +6948,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x4A"
+    "Palette_SummitFall_Day"
    ]
   },
   "sMap_80B1E5": {
@@ -6978,7 +6978,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x57"
+    "Palette_SummitWinter_Day"
    ]
   },
   "sMap_80B24E": {
@@ -7008,7 +7008,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x53"
+    "Palette_SummitSpring_Day"
    ]
   },
   "sMap_80B271": {
@@ -7782,7 +7782,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x15"
+    "Palette_MayorHouse_Day"
    ]
   },
   "sMayorHouseMap": {
@@ -7803,7 +7803,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x15"
+    "Palette_MayorHouse_Day"
    ]
   },
   "sMayorHouseMariaRoomMap": {
@@ -7824,7 +7824,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x15"
+    "Palette_MayorHouse_Day"
    ]
   },
   "sMenuCharacters": {
@@ -7862,7 +7862,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x46"
+    "Palette_MenuScreenBackgrounds_Day"
    ]
   },
   "sMenuScreenBackgrounds": {
@@ -7900,7 +7900,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x46"
+    "Palette_MenuScreenBackgrounds_Day"
    ]
   },
   "sMountainCaveMap": {
@@ -7921,7 +7921,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x12"
+    "Palette_MountainCave_Day"
    ]
   },
   "sMountainFallMap": {
@@ -7950,7 +7950,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x60"
+    "Palette_MountainFall_Day"
    ]
   },
   "sMountainSpring": {
@@ -7979,7 +7979,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x64"
+    "Palette_MountainSpring_Day"
    ]
   },
   "sMountainSummerMap": {
@@ -8008,7 +8008,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x5C"
+    "Palette_MountainSummer_Day"
    ]
   },
   "sMountainWinterMap": {
@@ -8037,7 +8037,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x68"
+    "Palette_MountainWinter_Day"
    ]
   },
   "sNatsumeLogo": {
@@ -8058,7 +8058,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x6D"
+    "Palette_NatsumeLogo_Day"
    ]
   },
   "sNewYearsFestivalMap": {
@@ -8088,7 +8088,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x52"
+    "Palette_NewYearsFestival_Day"
    ]
   },
   "sRainOverlay": {
@@ -8128,7 +8128,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x19"
+    "Palette_Restaurant_Day"
    ]
   },
   "sRestaurantRoomMap": {
@@ -8149,7 +8149,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x19"
+    "Palette_Restaurant_Day"
    ]
   },
   "sRoadFallMap": {
@@ -8170,7 +8170,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x2C"
+    "Palette_RoadFall_Day"
    ]
   },
   "sRoadSpringMap": {
@@ -8191,7 +8191,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x27"
+    "Palette_RoadSpring_Day"
    ]
   },
   "sRoadSummerMap": {
@@ -8212,7 +8212,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x36"
+    "Palette_RoadSummer_Day"
    ]
   },
   "sRoadWinterMap": {
@@ -8233,7 +8233,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x31"
+    "Palette_RoadWinter_Day"
    ]
   },
   "sSnowOverlay": {
@@ -8364,7 +8364,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x4A"
+    "Palette_SummitFall_Day"
    ]
   },
   "sSummitSpringMap": {
@@ -8394,7 +8394,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x53"
+    "Palette_SummitSpring_Day"
    ]
   },
   "sSummitSummerMap": {
@@ -8424,7 +8424,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x4E"
+    "Palette_SummitSummer_Day"
    ]
   },
   "sSummitWinterMap": {
@@ -8454,7 +8454,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x57"
+    "Palette_SummitWinter_Day"
    ]
   },
   "sToolShedMap": {
@@ -8484,7 +8484,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x47"
+    "Palette_ToolShed_Early"
    ]
   },
   "sTownFallMap": {
@@ -8513,7 +8513,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x21"
+    "Palette_TownFall_Day"
    ]
   },
   "sTownSpringMap": {
@@ -8542,7 +8542,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x3A"
+    "Palette_TownSpring_Day"
    ]
   },
   "sTownSummerMap": {
@@ -8571,7 +8571,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x1D"
+    "Palette_TownSummer_Day"
    ]
   },
   "sTownWinterMap": {
@@ -8600,7 +8600,7 @@
     }
    ],
    "palette": [
-    "sPalette_0x40"
+    "Palette_TownWinter_Day"
    ]
   }
  }

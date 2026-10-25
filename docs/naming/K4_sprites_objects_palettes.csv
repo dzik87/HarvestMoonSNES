@@ -1,0 +1,128 @@
+old,new,confidence,reason,address
+Sprites_888000,Sprites_Player_0,medium,"farmer in all poses (walking, tools, carrying)",$888000
+Sprites_898000,Sprites_Player_1,medium,"farmer poses, tool swings and impact effects",$898000
+Sprites_8A8000,Sprites_Player_2,medium,"farmer riding / using tools, effects",$8A8000
+Sprites_8B8000,Sprites_Player_3,medium,"farmer with horse, further tool effects",$8B8000
+Sprites_8C8000,Sprites_ItemsCrops,high,"crops, fruit, tools and items carried, sparkles, plus the horse rider heads",$8C8000
+Sprites_8D8000,Sprites_Cattle,high,cows and calves in all poses,$8D8000
+Sprites_8E8000,Sprites_DogChickensHorse,medium,"a cow, the dog, chicks / chickens, horse and rabbit-like animals",$8E8000
+Sprites_8F8000,Sprites_Npc_0,medium,"villagers (adults, children), walking poses",$8F8000
+Sprites_908000,Sprites_Npc_1,medium,"more villagers (carpenters, priest, merchants, bag carriers)",$908000
+Sprites_918000,Sprites_Npc_2_Ui,medium,"remaining villagers, the truck, 'The End' text graphics",$918000
+sPalette_0x00,Palette_FarmFall_Early,high,"used only by area FARMFALL ($02), time slot 0 (Early)",index $00
+sPalette_0x01,Palette_FarmFall_Day,high,"used only by area FARMFALL ($02), time slot 1 (Day)",index $01
+sPalette_0x02,Palette_FarmFall_Evening,high,"used only by area FARMFALL ($02), time slot 2 (Evening)",index $02
+sPalette_0x03,Palette_FarmFall_Dusk,high,"used only by area FARMFALL ($02), time slot 3 (Dusk)",index $03
+sPalette_0x04,Palette_FarmFall_Night,high,"used only by area FARMFALL ($02), time slot 4 (Night)",index $04
+sPalette_0x05,Palette_FarmSummer_Early,high,"used only by area FARMSUMMER ($01), time slot 0 (Early)",index $05
+sPalette_0x06,Palette_FarmSummer_Day,high,"first used by area FARMSUMMER ($01), time slot 1 (Day); also ENDING00, ENDING01, ENDING02",index $06
+sPalette_0x07,Palette_FarmSummer_Evening,high,"used only by area FARMSUMMER ($01), time slot 2 (Evening)",index $07
+sPalette_0x08,Palette_FarmSpring_Dusk,high,"first used by area FARMSPRING ($00), time slot 3 (Dusk); also FARMSUMMER",index $08
+sPalette_0x09,Palette_FarmSpring_Night,high,"first used by area FARMSPRING ($00), time slot 4 (Night); also FARMSUMMER",index $09
+sPalette_0x0A,Palette_FarmSpring_Early,high,"used only by area FARMSPRING ($00), time slot 0 (Early)",index $0A
+sPalette_0x0B,Palette_FarmSpring_Day,high,"used only by area FARMSPRING ($00), time slot 1 (Day)",index $0B
+sPalette_0x0C,Palette_FarmSpring_Evening,high,"used only by area FARMSPRING ($00), time slot 2 (Evening)",index $0C
+sPalette_0x0D,Palette_FarmWinter_Early,high,"used only by area FARMWINTER ($03), time slot 0 (Early)",index $0D
+sPalette_0x0E,Palette_FarmWinter_Day,high,"used only by area FARMWINTER ($03), time slot 1 (Day)",index $0E
+sPalette_0x0F,Palette_FarmWinter_Evening,high,"used only by area FARMWINTER ($03), time slot 2 (Evening)",index $0F
+sPalette_0x10,Palette_FarmWinter_Dusk,high,"used only by area FARMWINTER ($03), time slot 3 (Dusk)",index $10
+sPalette_0x11,Palette_FarmWinter_Night,high,"used only by area FARMWINTER ($03), time slot 4 (Night)",index $11
+sPalette_0x12,Palette_MountainCave_Day,high,"first used by area WOODSCAVE ($29), time slot 1 (Day); also IMPUNDERGROUND",index $12
+sPalette_0x13,Palette_House_Early,high,"first used by area HOUSE1 ($15), time slot 0 (Early); also HOUSE2, HOUSE3",index $13
+sPalette_0x14,Palette_Unk_14,low,no area or code references it,index $14
+sPalette_0x15,Palette_MayorHouse_Day,high,"first used by area MAJORHOUSE ($18), time slot 1 (Day); also MAJORCORRIDOR, MAJORBEDROOM",index $15
+sPalette_0x16,Palette_Church_Day,high,"used only by area CHURCH ($1B), time slot 1 (Day)",index $16
+sPalette_0x17,Palette_FlowerShop_Day,high,"first used by area FLORIST ($1C), time slot 1 (Day); also FLORISTBEDROOM",index $17
+sPalette_0x18,Palette_Bar_Dusk,high,"first used by area BAR ($1E), time slot 3 (Dusk); also BARBEDROOM",index $18
+sPalette_0x19,Palette_Restaurant_Day,high,"first used by area RESTAURANT ($20), time slot 1 (Day); also RESTAURANTBEDROOM",index $19
+sPalette_0x1A,Palette_GeneralStore_Day,high,"first used by area TOOLSSHOP ($22), time slot 1 (Day); also TOOLSSHOPBEDROOM",index $1A
+sPalette_0x1B,Palette_AnimalShop_Day,high,"used only by area ANIMALSHOP ($24), time slot 1 (Day)",index $1B
+sPalette_0x1C,Palette_FortuneTellerHouse_Day,high,"used only by area FORTUNETELLER ($25), time slot 1 (Day)",index $1C
+sPalette_0x1D,Palette_TownSummer_Day,high,"first used by area TOWNSUMMER ($05), time slot 1 (Day); also WEDDINGSUMMER, ENDING05",index $1D
+sPalette_0x1E,Palette_TownSummer_Evening,high,"used only by area TOWNSUMMER ($05), time slot 2 (Evening)",index $1E
+sPalette_0x1F,Palette_TownSummer_Dusk,high,"used only by area TOWNSUMMER ($05), time slot 3 (Dusk)",index $1F
+sPalette_0x20,Palette_TownSummer_Night,high,"used only by area TOWNSUMMER ($05), time slot 4 (Night)",index $20
+sPalette_0x21,Palette_TownFall_Day,high,"first used by area TOWNFALL ($06), time slot 1 (Day); also WEDDINGFALL",index $21
+sPalette_0x22,Palette_HarvestFestival_Day,high,"used only by area DANCINGS2 ($09), time slot 1 (Day)",index $22
+sPalette_0x23,Palette_TownFall_Evening,high,"used only by area TOWNFALL ($06), time slot 2 (Evening)",index $23
+sPalette_0x24,Palette_TownFall_Dusk,high,"used only by area TOWNFALL ($06), time slot 3 (Dusk)",index $24
+sPalette_0x25,Palette_TownFall_Night,high,"used only by area TOWNFALL ($06), time slot 4 (Night)",index $25
+sPalette_0x26,Palette_RoadSpring_Early,high,"used only by area CROSSROADSPRING ($0C), time slot 0 (Early)",index $26
+sPalette_0x27,Palette_RoadSpring_Day,high,"first used by area CROSSROADSPRING ($0C), time slot 1 (Day); also INTRO",index $27
+sPalette_0x28,Palette_RoadSpring_Evening,high,"used only by area CROSSROADSPRING ($0C), time slot 2 (Evening)",index $28
+sPalette_0x29,Palette_RoadSpring_Dusk,high,"used only by area CROSSROADSPRING ($0C), time slot 3 (Dusk)",index $29
+sPalette_0x2A,Palette_RoadSpring_Night,high,"used only by area CROSSROADSPRING ($0C), time slot 4 (Night)",index $2A
+sPalette_0x2B,Palette_RoadFall_Early,high,"used only by area CROSSROADFALL ($0E), time slot 0 (Early)",index $2B
+sPalette_0x2C,Palette_RoadFall_Day,high,"used only by area CROSSROADFALL ($0E), time slot 1 (Day)",index $2C
+sPalette_0x2D,Palette_RoadFall_Evening,high,"used only by area CROSSROADFALL ($0E), time slot 2 (Evening)",index $2D
+sPalette_0x2E,Palette_RoadFall_Dusk,high,"used only by area CROSSROADFALL ($0E), time slot 3 (Dusk)",index $2E
+sPalette_0x2F,Palette_RoadFall_Night,high,"used only by area CROSSROADFALL ($0E), time slot 4 (Night)",index $2F
+sPalette_0x30,Palette_RoadWinter_Early,high,"used only by area CROSSROADWINTER ($0F), time slot 0 (Early)",index $30
+sPalette_0x31,Palette_RoadWinter_Day,high,"used only by area CROSSROADWINTER ($0F), time slot 1 (Day)",index $31
+sPalette_0x32,Palette_RoadWinter_Evening,high,"used only by area CROSSROADWINTER ($0F), time slot 2 (Evening)",index $32
+sPalette_0x33,Palette_RoadWinter_Dusk,high,"used only by area CROSSROADWINTER ($0F), time slot 3 (Dusk)",index $33
+sPalette_0x34,Palette_RoadWinter_Night,high,"used only by area CROSSROADWINTER ($0F), time slot 4 (Night)",index $34
+sPalette_0x35,Palette_RoadSummer_Early,high,"used only by area CROSSROADSUMMER ($0D), time slot 0 (Early)",index $35
+sPalette_0x36,Palette_RoadSummer_Day,high,"used only by area CROSSROADSUMMER ($0D), time slot 1 (Day)",index $36
+sPalette_0x37,Palette_RoadSummer_Evening,high,"used only by area CROSSROADSUMMER ($0D), time slot 2 (Evening)",index $37
+sPalette_0x38,Palette_RoadSummer_Dusk,high,"used only by area CROSSROADSUMMER ($0D), time slot 3 (Dusk)",index $38
+sPalette_0x39,Palette_RoadSummer_Night,high,"used only by area CROSSROADSUMMER ($0D), time slot 4 (Night)",index $39
+sPalette_0x3A,Palette_TownSpring_Day,high,"first used by area TOWNSPRING ($04), time slot 1 (Day); also WEDDINGSPRING",index $3A
+sPalette_0x3B,Palette_FlowerFestival_Day,high,"used only by area DANCINGS1 ($08), time slot 1 (Day)",index $3B
+sPalette_0x3C,Palette_TownSpring_Evening,high,"used only by area TOWNSPRING ($04), time slot 2 (Evening)",index $3C
+sPalette_0x3D,Palette_TownSpring_Dusk,high,"used only by area TOWNSPRING ($04), time slot 3 (Dusk)",index $3D
+sPalette_0x3E,Palette_TownSpring_Night,high,"used only by area TOWNSPRING ($04), time slot 4 (Night)",index $3E
+sPalette_0x3F,Palette_EggFestival_Day,high,"used only by area EGGFESTIVAL ($0B), time slot 1 (Day)",index $3F
+sPalette_0x40,Palette_TownWinter_Day,high,"first used by area TOWNWINTER ($07), time slot 1 (Day); also WEDDINGWINTER",index $40
+sPalette_0x41,Palette_TownWinter_Evening,high,"used only by area TOWNWINTER ($07), time slot 2 (Evening)",index $41
+sPalette_0x42,Palette_TownWinter_Dusk,high,"used only by area TOWNWINTER ($07), time slot 3 (Dusk)",index $42
+sPalette_0x43,Palette_TownWinter_Night,high,"used only by area TOWNWINTER ($07), time slot 4 (Night)",index $43
+sPalette_0x44,Palette_StarNightFestivalSquare_Night,high,"used only by area NY_PUBLICSQUARE ($0A), time slot 4 (Night)",index $44
+sPalette_0x45,Palette_StarNightFestivalSquare_Dusk,high,"used only by area NY_PUBLICSQUARE ($0A), time slot 3 (Dusk)",index $45
+sPalette_0x46,Palette_MenuScreenBackgrounds_Day,high,"first used by area MENU_BACKGROUNDS ($5E), time slot 1 (Day); also MENU_CHARACTERS",index $46
+sPalette_0x47,Palette_ToolShed_Early,high,"used only by area SHED ($26), time slot 0 (Early)",index $47
+sPalette_0x48,Palette_GoldChicken_Day,high,"used only by area GOLDCHICKEN ($2C), time slot 1 (Day)",index $48
+sPalette_0x49,Palette_WorksmanHouse_Day,high,"used only by area WORKSMANHOUSE ($2B), time slot 1 (Day)",index $49
+sPalette_0x4A,Palette_SummitFall_Day,high,"first used by area MOUNTAINTOPFALL ($33), time slot 1 (Day); also MOUNTAINTOP2FALL",index $4A
+sPalette_0x4B,Palette_SummitFall_Evening,high,"first used by area MOUNTAINTOPFALL ($33), time slot 2 (Evening); also MOUNTAINTOP2FALL",index $4B
+sPalette_0x4C,Palette_SummitFall_Dusk,high,"first used by area MOUNTAINTOPFALL ($33), time slot 3 (Dusk); also MOUNTAINTOP2FALL",index $4C
+sPalette_0x4D,Palette_SummitFall_Night,high,"first used by area MOUNTAINTOPFALL ($33), time slot 4 (Night); also MOUNTAINTOP2FALL",index $4D
+sPalette_0x4E,Palette_SummitSummer_Day,high,"first used by area MOUNTAINTOPSUMMER ($32), time slot 1 (Day); also MNTTOPENDINGSUMMER",index $4E
+sPalette_0x4F,Palette_SummitSummer_Evening,high,"first used by area MOUNTAINTOPSUMMER ($32), time slot 2 (Evening); also MNTTOPENDINGSUMMER",index $4F
+sPalette_0x50,Palette_SummitSummer_Dusk,high,"first used by area MOUNTAINTOPSUMMER ($32), time slot 3 (Dusk); also MNTTOPENDINGSUMMER",index $50
+sPalette_0x51,Palette_SummitSummer_Night,high,"first used by area MOUNTAINTOPSUMMER ($32), time slot 4 (Night); also MNTTOPENDINGSUMMER",index $51
+sPalette_0x52,Palette_NewYearsFestival_Day,high,"used only by area MOUNTAINTOPSUNRISE ($3A), time slot 1 (Day)",index $52
+sPalette_0x53,Palette_SummitSpring_Day,high,"first used by area MOUNTAINTOPSPRING ($31), time slot 1 (Day); also MOUNTAINTOP2SPRING, MOUNTAINTOPBEAN",index $53
+sPalette_0x54,Palette_SummitSpring_Evening,high,"first used by area MOUNTAINTOPSPRING ($31), time slot 2 (Evening); also MOUNTAINTOP2SPRING, MOUNTAINTOPBEAN",index $54
+sPalette_0x55,Palette_SummitSpring_Dusk,high,"first used by area MOUNTAINTOPSPRING ($31), time slot 3 (Dusk); also MOUNTAINTOP2SPRING, MOUNTAINTOPBEAN",index $55
+sPalette_0x56,Palette_SummitSpring_Night,high,"first used by area MOUNTAINTOPSPRING ($31), time slot 4 (Night); also MOUNTAINTOP2SPRING, MOUNTAINTOPBEAN",index $56
+sPalette_0x57,Palette_SummitWinter_Day,high,"first used by area MOUNTAINTOPWINTER ($34), time slot 1 (Day); also MOUNTAINTOP2WINTER",index $57
+sPalette_0x58,Palette_SummitWinter_Evening,high,"first used by area MOUNTAINTOPWINTER ($34), time slot 2 (Evening); also MOUNTAINTOP2WINTER",index $58
+sPalette_0x59,Palette_SummitWinter_Dusk,high,"first used by area MOUNTAINTOPWINTER ($34), time slot 3 (Dusk); also MOUNTAINTOP2WINTER",index $59
+sPalette_0x5A,Palette_SummitWinter_Night,high,"first used by area MOUNTAINTOPWINTER ($34), time slot 4 (Night); also MOUNTAINTOP2WINTER, NY_MOUNTAINTOP, MOUNTAINTOPSUNRISE",index $5A
+sPalette_0x5B,Palette_Barn_Early,high,"first used by area COWBARN ($27), time slot 0 (Early); also COOP",index $5B
+sPalette_0x5C,Palette_MountainSummer_Day,high,"first used by area WOODSSUMMER ($11), time slot 1 (Day); also ENDING11",index $5C
+sPalette_0x5D,Palette_MountainSummer_Evening,high,"used only by area WOODSSUMMER ($11), time slot 2 (Evening)",index $5D
+sPalette_0x5E,Palette_MountainSummer_Dusk,high,"used only by area WOODSSUMMER ($11), time slot 3 (Dusk)",index $5E
+sPalette_0x5F,Palette_MountainSummer_Night,high,"used only by area WOODSSUMMER ($11), time slot 4 (Night)",index $5F
+sPalette_0x60,Palette_MountainFall_Day,high,"used only by area WOODSFALL ($12), time slot 1 (Day)",index $60
+sPalette_0x61,Palette_MountainFall_Evening,high,"used only by area WOODSFALL ($12), time slot 2 (Evening)",index $61
+sPalette_0x62,Palette_MountainFall_Dusk,high,"used only by area WOODSFALL ($12), time slot 3 (Dusk)",index $62
+sPalette_0x63,Palette_MountainFall_Night,high,"used only by area WOODSFALL ($12), time slot 4 (Night)",index $63
+sPalette_0x64,Palette_MountainSpring_Day,high,"used only by area WOODSSPRING ($10), time slot 1 (Day)",index $64
+sPalette_0x65,Palette_MountainSpring_Evening,high,"used only by area WOODSSPRING ($10), time slot 2 (Evening)",index $65
+sPalette_0x66,Palette_MountainSpring_Dusk,high,"used only by area WOODSSPRING ($10), time slot 3 (Dusk)",index $66
+sPalette_0x67,Palette_MountainSpring_Night,high,"used only by area WOODSSPRING ($10), time slot 4 (Night)",index $67
+sPalette_0x68,Palette_MountainWinter_Day,high,"used only by area WOODSWINTER ($13), time slot 1 (Day)",index $68
+sPalette_0x69,Palette_MountainWinter_Evening,high,"used only by area WOODSWINTER ($13), time slot 2 (Evening)",index $69
+sPalette_0x6A,Palette_MountainWinter_Dusk,high,"used only by area WOODSWINTER ($13), time slot 3 (Dusk)",index $6A
+sPalette_0x6B,Palette_MountainWinter_Night,high,"first used by area WOODSWINTER ($13), time slot 4 (Night); also NY_SPA",index $6B
+sPalette_0x6C,Palette_IntroFarmScroll_Day,high,"first used by area TITLE_INTRO_FARM ($5B), time slot 1 (Day); also TITLE_LOGO",index $6C
+sPalette_0x6D,Palette_NatsumeLogo_Day,high,"used only by area NATSUME_LOGO ($5D), time slot 1 (Day)",index $6D
+sPalette_0x6E,Palette_Credits0_Early,high,"first used by area CREDITS0 ($4B), time slot 0 (Early); also CREDITS1, CREDITS2, CREDITS3",index $6E
+sPalette_0x6F,Palette_Obj_Day,high,"OBJ palette (aMapPalettesId, day) shared by all areas",index $6F
+sPalette_0x70,Palette_Obj_Evening,high,"OBJ palette (aMapPalettesId, from 18:00)",index $70
+sPalette_0x71,Palette_Unk_71,low,no area or code references it,index $71
+sPalette_0x72,Palette_Unk_72,low,no area or code references it,index $72
+sPalette_0x73,Palette_Unk_73,low,no area or code references it,index $73
+sPalette_0x74,Palette_Unk_74,low,no area or code references it,index $74

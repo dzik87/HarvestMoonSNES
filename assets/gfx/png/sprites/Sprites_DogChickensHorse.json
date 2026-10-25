@@ -1,0 +1,44 @@
+{
+  "label": "Sprites_DogChickensHorse",
+  "kind": "sprites",
+  "bin": "assets/gfx/sprites/Sprites_DogChickensHorse.bin",
+  "compression": "none",
+  "raw_size": 32768,
+  "format": "snes_planar_tiles",
+  "bpp": 4,
+  "bpp_confidence": "high",
+  "bpp_note": "OBJ tiles in the standard 4bpp layout; plane correlation and sheet appearance confirm it",
+  "tiles_per_row": 16,
+  "palette": {
+    "id": "Palette_Obj_Day",
+    "sub": 5
+  },
+  "palette_confidence": "high",
+  "palette_note": "OAM palette row of 209 of 363 object components is 5; the rest use rows 4",
+  "palette_subs_used": [
+    4,
+    5
+  ],
+  "palette_alternatives": [
+    {
+      "id": "Palette_Obj_Evening",
+      "sub": 5,
+      "note": "same row, night palette (from 18:00)"
+    },
+    {
+      "id": "Palette_Unk_71",
+      "sub": 5,
+      "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    },
+    {
+      "id": "Palette_Unk_72",
+      "sub": 5,
+      "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    },
+    {
+      "id": "Palette_Unk_73",
+      "sub": 5,
+      "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    }
+  ]
+}

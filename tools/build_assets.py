@@ -2,7 +2,7 @@
 """Generates the binary assets that are included by the assembler (`incbin`) from their editable sources.
 
 Sources (committed)                                   -> generated, git-ignored files
-  assets/gfx/palettes/sPalette_0xNN.json               -> assets/gfx/palettes/sPalette_0xNN.pal          (tools/gfx/palette.py pack)
+  assets/gfx/palettes/Palette_<Area>_<Slot>.json               -> assets/gfx/palettes/Palette_<Area>_<Slot>.pal          (tools/gfx/palette.py pack)
   assets/fonts/us/glyph_*.png + glyphs.json            -> assets/gfx/tiles/sFontGlyphs_*.bin             (tools/fonts/font.py build)
   assets/gfx/png/{frames,screens,tiles,sprites}/ composed PNGs + <label>.json -> assets/gfx/{tiles,sprites}/*.bin  (tools/gfx/pngsync.py build)
   assets/gfx/tilemaps/*.map.txt + sidecar JSON         -> assets/gfx/characters/*.bin                    (tools/gfx/pngsync.py build)
