@@ -191,7 +191,7 @@ banks $B3-$B5 (above) the following banks differ from US and are produced by the
 |---|---|---|
 | $94, $95 | font glyph tables (EU 1 table, DE 2, JP 4 differ) | `tools/fonts/font.py` per release, `assets/fonts/<region>/` |
 | $9A, $9B, $9E, $9F, $A5, $A6 | language specific title/menu/text graphics and name tables (blobs in the table below) | PNG / name table text per release |
-| $A9 | JP: palettes `sPalette_0x46`, `0x6C`, `0x6D` | `assets/gfx/palettes/jp/*.json` |
+| $A9 | JP: palettes `Palette_MenuScreenBackgrounds_Day`, `0x6C`, `0x6D` | `assets/gfx/palettes/jp/*.json` |
 | $B6-$BB | US/EU/DE dialogs | `assets/dialogs/<region>/bank_XX.txt` -> generated asm |
 | $AA-$AC | JP dialogs (zero in the other releases; $B6-$BB are zero in JP) | same, generated |
 | $86-$93, $96-$99, $9C-$9D, $A0-$A4, $A7-$A8, $AD-$B2, $BC-$BF | byte-identical in all four releases (header area and `$FFxx` vectors included, which are in code bank $80) | shared |

@@ -10,9 +10,9 @@ Evidence chain (details and addresses: docs/formats/graphics-palettes.md):
 
   area id (strcMap.loadAreaId) --aTileMapData--> map entry: preset id, tile blobs @ VRAM dest, name tables @ VRAM dest
   preset id --Table_BGxSC / BG12NBA / BG34NBA_Presets--> VRAM address of every BG name table and character base
-  area id  --aMapPalettesIndexes (6 bytes/area; 5 time-of-day slots)--> index into aPalettes --> sPalette_0xNN
+  area id  --aMapPalettesIndexes (6 bytes/area; 5 time-of-day slots)--> index into aPalettes --> Palette_<Area>_<Slot>
            the first $100 bytes (8 sub-palettes) of that palette fill CGRAM $00-$7F (BG rows 0-7)
-  area id  --aMapPalettesId (2 bytes/area: day, from 18:00)--> sPalette_0x6F / 0x70: CGRAM $80-$FF (OBJ rows 0-7)
+  area id  --aMapPalettesId (2 bytes/area: day, from 18:00)--> Palette_Obj_Day / 0x70: CGRAM $80-$FF (OBJ rows 0-7)
   name table entry bits 10-12 = BG sub-palette row of the tile it points to (tile = bits 0-9 at charbase + 16*tile words)
   object frame component attr bits 0-2 = OBJ sub-palette row (banks $86/$87), tile id >> 8 = sprite bank - $88
 """
@@ -28,6 +28,7 @@ sys.path.insert(0, str(ROOT / "tools" / "gfx"))
 sys.path.insert(0, str(ROOT / "tools" / "objects"))
 sys.path.insert(0, str(ROOT / "tools" / "maps"))
 import areadata as AD  # noqa: E402
+import spritebanks as SB  # noqa: E402
 import tilemap_codec as C  # noqa: E402
 
 OUT = ROOT / "assets" / "gfx" / "palette_map.json"
@@ -469,7 +470,7 @@ def build():
     obj_day, obj_night = areas[0]["obj_palettes"]
     extras = [a_pal[i] for i in (0x71, 0x72, 0x73)]
     for bank in range(0x88, 0x92):
-        lab = "Sprites_%02X8000" % bank
+        lab = SB.label(bank)
         rows, cell, multi = Counter(), {}, {}
         for sid, cnt in sorted(use.get(bank, {}).items()):
             rows.update(cnt)
@@ -537,7 +538,7 @@ def doc_table_ok(d):
 
 def sprite_palettes(object_index=None):
     """The 8 OBJ sub-palettes (lists of 16 RGB tuples) objects are drawn with by day: row r of `obj_palettes[0]` of area 0
-    (aMapPalettesId $6B = sPalette_0x6F).  Same signature as the `--palette-module` hook of tools/objects/spriteexport.py;
+    (aMapPalettesId $6B = Palette_Obj_Day).  Same signature as the `--palette-module` hook of tools/objects/spriteexport.py;
     the seasonal patches of OBJ row 7 / row 3 (docs/formats/graphics-palettes.md section 4) are not applied."""
     pid = load()["areas"]["0"]["obj_palettes"][0]
     cols = json.loads((ROOT / "assets" / "gfx" / "palettes" / f"{pid}.json").read_text(encoding="utf-8"))["colors"]

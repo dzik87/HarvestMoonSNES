@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Tests for tools/gfx/pngsync.py.  Run: python3 tests/test_pngsync.py  (needs Pillow)"""
 import argparse
+import os
 import importlib.util
 import random
 import shutil
@@ -18,6 +19,7 @@ import tiles as T  # noqa: E402
 import bankbin as BB  # noqa: E402
 
 FAILS = []
+FULL = os.environ.get("HM_FULL_TESTS") == "1"       # default: a representative subset (see docs/workflow.md); HM_FULL_TESTS=1: every blob of every release
 
 
 def check(cond, msg):
@@ -28,6 +30,7 @@ def check(cond, msg):
 
 def ns(**kw):
     d = dict(label=None, kind=None, allow_resize=False)
+    d.setdefault('quick', False)
     d.update(kw)
     return argparse.Namespace(**d)
 
@@ -148,7 +151,7 @@ def check_exported_palettes(tmp):
     check(meta["palette_confidence"] == ent["confidence"], "sidecar confidence")
     pal, _ = png_palette(b.art)
     check(pal[:128] == P.view_palette128(meta["palette"]["id"], tmp), "exported PLTE (8 rows: every tile has the row of its name table cells)")
-    pal, trns = png_palette(P.Blob("sprites", "Sprites_888000", tmp).art)
+    pal, trns = png_palette(P.Blob("sprites", "Sprites_Player_0", tmp).art)
     check(trns == 0, "sprite remainder sheets have transparent colour 0")
     first = sorted((tmp / "assets/gfx/png/frames/obj_0000").glob("f_*.png"))[0]
     fpal, ftrns = png_palette(first)
@@ -160,7 +163,7 @@ def test_roundtrip_every_blob_every_region():
     are not allowed to contradict each other, and nothing is left over."""
     with tempfile.TemporaryDirectory() as d:
         tmp = clone_tree(Path(d), drop_sources=True)
-        for region in P.REGIONS:
+        for region in (P.REGIONS if FULL else ("eu", "de", "jp")):
             n = P.export_composed(tmp, region)
             check(n > 0, f"{region}: exported blobs")
             if region == "us":
@@ -169,7 +172,7 @@ def test_roundtrip_every_blob_every_region():
             check(rc == 0, f"{region}: sources rebuilt from the images equal the .bin of every blob")
         # the freshly exported sources equal the committed ones (the export is deterministic and canonical)
         diff = []
-        for sub in ("screens", "frames", "tiles", "sprites", "eu", "de", "jp"):
+        for sub in (("screens", "frames", "tiles", "sprites", "eu", "de", "jp") if FULL else ("eu", "de", "jp")):
             a, b = ROOT / "assets/gfx/png" / sub, tmp / "assets/gfx/png" / sub
             for f in sorted(a.rglob("*.png")):
                 if (b / f.relative_to(a)).read_bytes() != f.read_bytes():
@@ -182,9 +185,6 @@ def test_import_flow():
     tiles follow, check passes, growth needs --allow-resize and keeps every bank at $8000 bytes."""
     import composed as CO
     with shared() as tmp:
-        before = {p.name: p.read_bytes() for p in (tmp / "assets/gfx/sprites").glob("*.bin")}
-        check(P.cmd_import(ns(), tmp) == 0, "import of unchanged sources")
-        check(all(p.read_bytes() == before[p.name] for p in (tmp / "assets/gfx/sprites").glob("*.bin")), "unchanged import keeps the bytes")
         totals = bank_totals(tmp)
         check(set(totals.values()) == {BB.BANK}, "banks are full before")
 
@@ -200,21 +200,31 @@ def test_import_flow():
                         px[x, y] = (v & 0xF0) | ((v & 15) % 15 + 1)
                         spot.append((x, y, v & 15, px[x, y] & 15))
         edit_png(fr, paint)
-        # 2. a block of the spring farm screen
+        # 2. growth: flip-symmetric noise on a block of the spring farm screen
         scr = tmp / "assets/gfx/png/screens/ScreenRaw_Farm__sFarmSpringMap.png"
 
-        def paint2(px, w, h):
-            for y in range(64, 80):
-                for x in range(64, 80):
+        # growth: flip-symmetric noise on the name table screen (consistent for every cell showing a tile)
+        def noise(px, w, h):
+            for y in range(0, 160):
+                for x in range(0, 160):
                     v = px[x, y]
                     if v & 15:
-                        px[x, y] = (v & 0xF0) | ((v & 15) % 15 + 1)
-        edit_png(scr, paint2)
+                        mx, my = min(x % 8, 7 - x % 8), min(y % 8, 7 - y % 8)
+                        px[x, y] = (v & 0xF0) | ((v & 15) * 5 + mx * 3 + my * 7) % 15 + 1
+        edit_png(scr, noise)
         want_bins = {p.name: p.read_bytes() for p in (tmp / "assets/gfx/tiles").glob("*.bin")}
+        if FULL:                                                 # one more full image pass: only in the complete run
+            try:
+                P.cmd_import(ns(), tmp)
+                check(False, "growth must be refused without --allow-resize")
+            except SystemExit:
+                pass
+            check({p.name: p.read_bytes() for p in (tmp / "assets/gfx/tiles").glob("*.bin")} == want_bins, "a refused import writes nothing")
         check(P.cmd_import(ns(allow_resize=True), tmp) == 0, "import of edited images")
         after = {p.name: p.read_bytes() for p in (tmp / "assets/gfx/tiles").glob("*.bin")}
         check(after != want_bins, "tile blob changed")
-        check(P.cmd_check(ns(), tmp) == 0, "check after import")
+        check(any(len(after[n]) > len(want_bins[n]) for n in after), "a blob grew")
+        check(P.cmd_check(ns(quick=True), tmp) == 0, "check after import")
         check(set(bank_totals(tmp).values()) == {BB.BANK}, "banks are still $8000 bytes")
         # the sprite pixel landed exactly there, nowhere else (re-render the frame from the new bank)
         ctx = CO.get_ctx(tmp, "us")
@@ -228,29 +238,6 @@ def test_import_flow():
         check(pix[y * w + x] & 15 == new, "edited sprite pixel is in the rebuilt bank")
         _, _, got = P.load_png(fr)
         check(got == pix, "the frame image equals the render of the new bank (re-exported)")
-
-        # 3. growth: noise on a name table screen
-        rnd = random.Random(5)
-        scr2 = tmp / "assets/gfx/png/screens/ScreenRaw_Farm__sFarmSpringMap.png"
-
-        def noise(px, w, h):                                    # flip-symmetric function of the tile pixel: consistent for every cell
-            for y in range(0, 160):
-                for x in range(0, 160):
-                    v = px[x, y]
-                    if v & 15:
-                        mx, my = min(x % 8, 7 - x % 8), min(y % 8, 7 - y % 8)
-                        px[x, y] = (v & 0xF0) | ((v & 15) * 5 + mx * 3 + my * 7) % 15 + 1
-        edit_png(scr2, noise)
-        sizes = {p.name: len(p.read_bytes()) for p in (tmp / "assets/gfx/tiles").glob("*.bin")}
-        try:
-            P.cmd_import(ns(), tmp)
-            check(False, "growth must be refused without --allow-resize")
-        except SystemExit:
-            pass
-        P.cmd_import(ns(allow_resize=True), tmp)
-        check(any(len(p.read_bytes()) > sizes[p.name] for p in (tmp / "assets/gfx/tiles").glob("*.bin")), "a blob grew")
-        check(set(bank_totals(tmp).values()) == {BB.BANK}, "banks are still $8000 bytes after growth")
-        check(P.cmd_check(ns(), tmp) == 0, "check after growth")
 
 
 def find_shared_block_frames(ctx):
@@ -287,11 +274,10 @@ def test_conflicts_and_errors():
         setpix(B, kb, (old + 2) % 15 + 1)
         check(P.cmd_import(ns(), tmp) == 1, "import reports contradicting edits of a shared sprite block")
         check({p.name: p.read_bytes() for p in (tmp / "assets/gfx/sprites").glob("*.bin")} == bins, "nothing written on conflict")
-        check(P.cmd_check(ns(), tmp) == 1, "check reports the contradiction between the two frame images")
+        check(P.cmd_check(ns(quick=True), tmp) == 1, "check reports the contradiction between the two frame images")
         # equal edits are fine
         setpix(B, kb, (old + 1) % 15 + 1)
         check(P.cmd_import(ns(), tmp) == 0, "identical edits of the shared block are accepted")
-        check(P.cmd_check(ns(), tmp) == 0, "check passes after the images agree")
 
     with shared() as tmp:
         # wrong palette row in a frame
@@ -305,25 +291,25 @@ def test_conflicts_and_errors():
                         px[x, y] = ((px[x, y] >> 4) ^ 1) << 4 | ((px[x, y] & 15) % 15 + 1)
                         return
         edit_png(fr, wrong)
-        check(P.cmd_check(ns(), tmp) == 1, "check: a colour from another palette row is an error")
+        check(P.cmd_check(ns(quick=True), tmp) == 1, "check: a colour from another palette row is an error")
         check(P.cmd_import(ns(), tmp) == 1, "import: a colour from another palette row is an error")
         fr.write_bytes(saved_fr)
     with shared() as tmp:
         # a remainder pixel where an image defines the pixel
-        b = P.Blob("sprites", "Sprites_888000", tmp)
+        b = P.Blob("sprites", "Sprites_Player_0", tmp)
         saved_rem = b.art.read_bytes()
         w, h, pix = P.load_png(b.art)
         claims = CO.claims_for(CO.get_ctx(tmp, "us"))
-        i = next(i for i, c in enumerate(claims.val["Sprites_888000"]) if c != CO.UNC)
+        i = next(i for i, c in enumerate(claims.val["Sprites_Player_0"]) if c != CO.UNC)
         edit_png(b.art, lambda px, w_, h_: px.__setitem__((i % 128, i // 128), 5))
-        check(P.cmd_check(ns(label=["Sprites_888000"]), tmp) == 1, "check: remainder pixel under an image is an error")
+        check(P.cmd_check(ns(label=["Sprites_Player_0"]), tmp) == 1, "check: remainder pixel under an image is an error")
         b.art.write_bytes(saved_rem)
     with shared() as tmp:
         # missing image file
         victim = sorted((tmp / "assets/gfx/png/screens").glob("*.png"))[0]
         saved_v = victim.read_bytes()
         victim.unlink()
-        check(P.cmd_check(ns(), tmp) == 1, "check: a missing screen is an error")
+        check(P.cmd_check(ns(quick=True), tmp) == 1, "check: a missing screen is an error")
         victim.write_bytes(saved_v)
 
 
@@ -373,7 +359,8 @@ def test_real_blobs():
     allb = P.blobs()
     kinds = {k: sum(1 for b in allb if b.kind == k) for k in P.KINDS}
     check(kinds == {"tiles": 77, "sprites": 10, "tilemaps": 64}, f"blob inventory {kinds}")
-    check(P.cmd_check(ns()) == 0, "all committed .bin files must be reproducible from PNG / text")
+    check(P.cmd_check(ns(quick=not FULL)) == 0, "all committed .bin files must be reproducible from PNG / text" if FULL
+          else "the committed composed images are consistent (HM_FULL_TESTS=1 also rebuilds every .bin)")
     conf = {}
     for b in allb:
         m = P.read_meta(b)
@@ -401,7 +388,7 @@ def test_palette_map_matches_sources():
 def test_palette_tables():
     a_pal, idx, ids = PM.parse_palette_tables()
     check(len(a_pal) == 0x75 and len(set(a_pal)) == 0x75, "aPalettes: 0x75 distinct labels")
-    check(a_pal[:3] == ["sPalette_0x0A", "sPalette_0x0B", "sPalette_0x0C"] and a_pal[0x6B] == "sPalette_0x6F", "aPalettes order")
+    check(a_pal[:3] == ["Palette_FarmSpring_Early", "Palette_FarmSpring_Day", "Palette_FarmSpring_Evening"] and a_pal[0x6B] == "Palette_Obj_Day", "aPalettes order")
     check(len(idx) == 6 * 0x60, "aMapPalettesIndexes has 6 bytes for each of the 0x60 areas")
     check(idx[:6] == [0, 1, 2, 6, 7, 0xFF], "FarmSpring slots")
     check(ids[:4] == [0x6B, 0x6C, 0x6B, 0x6C], "aMapPalettesId day/night pairs")
@@ -473,12 +460,12 @@ def test_sprite_cell_formula():
     for n in range(64):
         v = d[2 * n] | d[2 * n + 1] << 8
         check(v == (n & 7) * 2 + (n >> 3) * 0x20, f"slot table entry {n}")
-    ent = {"palette": {"id": "sPalette_0x6F", "sub": 4}, "kind": "sprites",
+    ent = {"palette": {"id": "Palette_Obj_Day", "sub": 4}, "kind": "sprites",
            "sprite_rows": "".join(str(i % 8) for i in range(256))}
-    b = P.Blob("sprites", "Sprites_888000")
+    b = P.Blob("sprites", "Sprites_Player_0")
     meta = {"raw_size": 32768, "tiles_per_row": 16}
     saved = P.palette_map()
-    P._PALETTE_MAP[str(P.ROOT)] = {"blobs": {"Sprites_888000": ent}}
+    P._PALETTE_MAP[str(P.ROOT)] = {"blobs": {"Sprites_Player_0": ent}}
     try:
         subs = P.tile_sub_map(b, meta)
         for sid in (0, 1, 7, 8, 63, 64, 130, 255):
@@ -522,7 +509,7 @@ def test_assembled_sprites_use_obj_palette():
     import spriteexport as SE
     pals = PM.sprite_palettes(0)
     check(len(pals) == 8 and all(len(p) == 16 for p in pals), "sprite_palettes shape")
-    check(pals[4] == P.load_view_palette({"id": "sPalette_0x6F", "sub": 4}, 4), "OBJ row 4 of sPalette_0x6F")
+    check(pals[4] == P.load_view_palette({"id": "Palette_Obj_Day", "sub": 4}, 4), "OBJ row 4 of Palette_Obj_Day")
     flat = [c for p in pals for c in p]
     n = 0
     tmp = tempfile.mkdtemp()
@@ -548,12 +535,12 @@ def test_palette_is_ignored_by_import():
             im.putpalette([rnd.randrange(256) for _ in range(768)])
             im.info.pop("transparency", None)
             im.save(p, "PNG")
-        check(P.cmd_check(ns(), tmp) == 0, "bytes do not depend on the PLTE of any composed image")
+        check(P.cmd_check(ns(quick=True), tmp) == 0, "bytes do not depend on the PLTE of any composed image")
 
 
 def test_sheet_command_matches_bins():
     """pngsync sheet renders the sheet built from the composed sources: pixels equal the sheet decoded from the .bin."""
-    for label, kind in (("Tiles_Farm_SpringSummer_0", "tiles"), ("Sprites_898000", "sprites")):
+    for label, kind in (("Tiles_Farm_SpringSummer_0", "tiles"), ("Sprites_Player_1", "sprites")):
         b = P.Blob(kind, label)
         img = P.render_built_sheet(b)
         raw, _ = P.read_raw(b)

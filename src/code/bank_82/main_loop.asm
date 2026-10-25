@@ -655,7 +655,7 @@ fMainMenu_StateOpeningDemo:
     STA.B ptrTemp0x72                                          ;82DA22|8572    |000072;
     SEP #$20                                                   ;82DA24|E220    |      ;
     LDA.B #$A9                                                 ;82DA26|A9A9    |      ;
-    STA.B ptrTemp0x72+2                                        ;82DA28|8574    |000074; A9D8000 -> $72 (sPalette_0x6C)
+    STA.B ptrTemp0x72+2                                        ;82DA28|8574    |000074; A9D8000 -> $72 (Palette_IntroFarmScroll_Day)
     JSL.L fCore_PrepareTransfer                                ;82DA2A|22338A80|808A33;
     JSL.L fCore_StartPreparedTransfer                          ;82DA2E|22B28A80|808AB2;
     REP #$20                                                   ;82DA32|C220    |      ;
@@ -805,7 +805,7 @@ fMainMenu_StateReinitTitleScreen:
     STA.B ptrTemp0x72                                          ;82DB76|8572    |000072;
     SEP #$20                                                   ;82DB78|E220    |      ;
     LDA.B #$A9                                                 ;82DB7A|A9A9    |      ;
-    STA.B ptrTemp0x72+2                                        ;82DB7C|8574    |000074; A9D800 -> $72 (sPalette_0x6C)
+    STA.B ptrTemp0x72+2                                        ;82DB7C|8574    |000074; A9D800 -> $72 (Palette_IntroFarmScroll_Day)
     JSL.L fCore_PrepareTransfer                                ;82DB7E|22338A80|808A33;
     JSL.L fCore_StartPreparedTransfer                          ;82DB82|22B28A80|808AB2;
     SEP #$20                                                   ;82DB86|E220    |      ;

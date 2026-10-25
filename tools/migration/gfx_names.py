@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Meaningful names for the graphics blobs (old label = address-based -> new label), see docs/naming/README.md.
 
-  python3 tools/migration/gfx_names.py csv     write docs/naming/K3_gfx_names.csv (old,new,confidence,reason,address)
+  python3 tools/migration/gfx_names.py csv     write docs/naming/K3_gfx_names.csv and K4_sprites_objects_palettes.csv (old,new,confidence,reason,address)
   python3 tools/migration/gfx_names.py apply   rename labels in src/, docs/ai, tools/, tests/, docs/, assets/gfx (files and text)
 
 Convention: Tiles_<Place>[_<Season>][_<slot>]   tile graphics; <slot> = VRAM slot 0-3 ($2000/$3000/$4000/$5000 words)
@@ -17,6 +17,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 CSV = ROOT / "docs" / "naming" / "K3_gfx_names.csv"
+CSV4 = ROOT / "docs" / "naming" / "K4_sprites_objects_palettes.csv"
 T, M, C = "sCompressedTiles_", "sCompressedTilemap_", "sCharactermap_"
 
 # (old id, new name, confidence, reason)
@@ -177,22 +178,104 @@ def table():
     return rows
 
 
+# ---- K4: sprite banks, palettes ------------------------------------------------------------------------------------
+SPRITES = {   # bank -> (name, confidence, reason from the rendered sheets)
+    0x88: ("Sprites_Player_0", "medium", "farmer in all poses (walking, tools, carrying)"),
+    0x89: ("Sprites_Player_1", "medium", "farmer poses, tool swings and impact effects"),
+    0x8A: ("Sprites_Player_2", "medium", "farmer riding / using tools, effects"),
+    0x8B: ("Sprites_Player_3", "medium", "farmer with horse, further tool effects"),
+    0x8C: ("Sprites_ItemsCrops", "high", "crops, fruit, tools and items carried, sparkles, plus the horse rider heads"),
+    0x8D: ("Sprites_Cattle", "high", "cows and calves in all poses"),
+    0x8E: ("Sprites_DogChickensHorse", "medium", "a cow, the dog, chicks / chickens, horse and rabbit-like animals"),
+    0x8F: ("Sprites_Npc_0", "medium", "villagers (adults, children), walking poses"),
+    0x90: ("Sprites_Npc_1", "medium", "more villagers (carpenters, priest, merchants, bag carriers)"),
+    0x91: ("Sprites_Npc_2_Ui", "medium", "remaining villagers, the truck, 'The End' text graphics"),
+}
+AREA_BASE = {"DANCINGS1": "FlowerFestival", "DANCINGS2": "HarvestFestival", "MAJORHOUSE": "MayorHouse"}
+SLOTS = ("Early", "Day", "Evening", "Dusk", "Night")
+
+
+def camel(map_label, area_name):
+    m = map_label
+    if m.startswith("sMap_"):
+        base = area_name
+        for k, v in (("DRIVETOTOWN", "DriveToTown"), ("WORKSMANHOUSE", "WorksmanHouse"), ("GOLDCHICKEN", "GoldChicken"),
+                     ("MNTTOPENDINGSUMMER", "MountainTop2Summer"), ("MOUNTAINTOPBEAN", "MountainTopBean")):
+            base = v if base == k else base
+        if base.startswith(("ENDING", "CREDITS", "UNKNOWN")):
+            base = base.title()
+        elif base.startswith("WEDDING"):
+            base = "Wedding" + base[7:].title()
+        elif base.startswith("MOUNTAINTOP2"):
+            base = "MountainTop2" + base[12:].title()
+        else:
+            base = base.title() if base.isupper() else base
+        return base
+    m = m[1:]
+    for suf in ("Map",):
+        if m.endswith(suf):
+            m = m[:-3]
+    return m.replace("Scrool", "Scroll")
+
+
+def palette_rows():
+    """(old label, new name, confidence, reason, address) for the 117 sPalette_0xNN: named after the first area and time-of-day slot that
+    uses the palette (assets/gfx/palette_map.json); the two OBJ palettes and unreferenced ones by role."""
+    import json
+    pm = json.loads((ROOT / "assets/gfx/palette_map.json").read_text(encoding="utf-8"))
+    first = {}
+    for a, e in sorted(pm["areas"].items(), key=lambda x: int(x[0])):
+        for i, p in enumerate(e["bg_palettes"]):
+            if p and p not in first:
+                first[p] = (int(a), i, e)
+    rows = []
+    for n in range(117):
+        old = "sPalette_0x%02X" % n
+        if old in first:
+            a, i, e = first[old]
+            nm = "Palette_" + camel(e["map"], e["name"]) + "_" + SLOTS[i]
+            users = [x["name"] for x in pm["areas"].values() if old in x["bg_palettes"]]
+            why = f"first used by area {e['name']} (${a:02X}), time slot {i} ({SLOTS[i]}); also {', '.join(users[1:4])}" if len(users) > 1 \
+                else f"used only by area {e['name']} (${a:02X}), time slot {i} ({SLOTS[i]})"
+            rows.append((old, nm, "high", why, f"index ${n:02X}"))
+        elif n == 0x6F:
+            rows.append((old, "Palette_Obj_Day", "high", "OBJ palette (aMapPalettesId, day) shared by all areas", f"index ${n:02X}"))
+        elif n == 0x70:
+            rows.append((old, "Palette_Obj_Evening", "high", "OBJ palette (aMapPalettesId, from 18:00)", f"index ${n:02X}"))
+        else:
+            rows.append((old, "Palette_Unk_%02X" % n, "low", "no area or code references it", f"index ${n:02X}"))
+    return rows
+
+
+def table4():
+    rows = [("Sprites_%02X8000" % b, nm, c, why, "$%02X8000" % b) for b, (nm, c, why) in SPRITES.items()]
+    return rows + palette_rows()
+
+
 def rx(old):
     return re.compile(r"(?<![A-Za-z0-9_])" + re.escape(old) + r"(?![A-Za-z0-9])")
 
 
+def write_csv(path, rows):
+    with open(path, "w", newline="", encoding="utf-8") as f:
+        w = csv.writer(f, lineterminator="\n")
+        w.writerow(["old", "new", "confidence", "reason", "address"])
+        w.writerows(rows)
+    print(f"wrote {path.relative_to(ROOT)}: {len(rows)} names")
+
+
 def main():
     rows = table()
+    which = [r for r in sys.argv[1:] if r in ("k3", "k4")]
+    if sys.argv[1:2] == ["csv"]:
+        write_csv(CSV, rows)
+        write_csv(CSV4, table4())
+        return
+    if "k4" in sys.argv[2:]:
+        rows = table4()
     news = [r[1] for r in rows]
     assert len(set(news)) == len(news), "duplicate names"
-    if sys.argv[1:] == ["csv"]:
-        with open(CSV, "w", newline="", encoding="utf-8") as f:
-            w = csv.writer(f, lineterminator="\n")
-            w.writerow(["old", "new", "confidence", "reason", "address"])
-            w.writerows(rows)
-        print(f"wrote {CSV.relative_to(ROOT)}: {len(rows)} names")
-        return
-    if sys.argv[1:] != ["apply"]:
+    if sys.argv[1:2] != ["apply"]:
         sys.exit(__doc__)
     files = subprocess.run(["git", "ls-files", "src", "docs", "tools", "tests", "assets/gfx", ".github"], cwd=ROOT, capture_output=True,
                            text=True, check=True).stdout.split()
@@ -223,6 +306,9 @@ def main():
         if new != name:
             subprocess.run(["git", "mv", f, str(Path(f).with_name(new))], cwd=ROOT, check=True)
             moved += 1
+    for p in (ROOT / "assets/gfx").rglob("*"):                     # untracked generated files (.bin, .pal): drop, build_assets recreates them
+        if p.suffix in (".bin", ".pal") and p.is_file() and any(r.search(p.name) for r, _ in pats):
+            p.unlink()
     print(f"files renamed: {moved}")
 
 

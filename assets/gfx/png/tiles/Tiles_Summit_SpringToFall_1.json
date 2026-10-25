@@ -15,7 +15,7 @@
   ],
   "map_entries": 8,
   "palette": {
-    "id": "sPalette_0x53",
+    "id": "Palette_SummitSpring_Day",
     "sub": 1
   },
   "palette_confidence": "high",
@@ -28,17 +28,17 @@
   ],
   "palette_alternatives": [
     {
-      "id": "sPalette_0x4E",
+      "id": "Palette_SummitSummer_Day",
       "sub": 1,
       "area_name": "MOUNTAINTOPSUMMER"
     },
     {
-      "id": "sPalette_0x4A",
+      "id": "Palette_SummitFall_Day",
       "sub": 1,
       "area_name": "MOUNTAINTOPFALL"
     },
     {
-      "id": "sPalette_0x52",
+      "id": "Palette_NewYearsFestival_Day",
       "sub": 1,
       "area_name": "MOUNTAINTOPSUNRISE"
     }

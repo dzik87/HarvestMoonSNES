@@ -33,6 +33,11 @@ Locally: `python3 tools/audio/audioconv.py spc --all --out build/listen/spc`, th
 Builds asar from the `third_party/asar` submodule (tag `v1.91`, cached), assembles the US ROM, compares size/CRC32/MD5/SHA-1 and exposes
 the result in run annotations and as the `HarvestMoon-US` artifact.
 
+## Tests of the graphics pipeline
+`python3 tests/test_pngsync.py` runs in about 90 s (quick checks that skip the bit-exact rebuild, the round trip only for eu/de/jp).
+The full version (every scenario with the bit-exact rebuild, width and screen audits, US round trip, refusal checks) takes about 2.5 min:
+`HM_FULL_TESTS=1 python3 tests/test_pngsync.py`. CI runs the default version; run the full one before changing `composed.py` or `pngsync.py`.
+
 ## Asset converters (`tools/gfx/`)
 - `palette.py` — palettes ($A8/$A9): `extract` (from the old `db` sources), `pack` (JSON -> `.pal`), `emit-asm`, `check`.
   The source of truth is `assets/gfx/palettes/*.json` (edit colours as `#RRGGBB`), packed into `*.pal` files that the

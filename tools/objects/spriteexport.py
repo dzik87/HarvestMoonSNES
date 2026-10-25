@@ -18,7 +18,7 @@ Commands:
 
 PNG format: indexed (mode P), pixel value = (OBJ palette number << 4) | colour index, so 128 palette entries (8 OBJ palettes
 of 16 colours); every value whose low nibble is 0 is transparent (tRNS).  The PLTE chunk is only a viewing aid and is ignored
-by `check`: it comes from a pluggable function (default `game_palettes`: the real day OBJ palette sPalette_0x6F; pass
+by `check`: it comes from a pluggable function (default `game_palettes`: the real day OBJ palette Palette_Obj_Day; pass
 --palette-module FILE exposing `sprite_palettes(object_index) -> 8 lists of 16 (r, g, b)` to use other colours, or use
 `grayscale_palettes`).  The image is the bounding box of the
 components; "origin" in the index is the object origin inside the image (flip-free, as stored in the data).
@@ -36,6 +36,7 @@ sys.path.insert(0, str(ROOT / "tools" / "objects"))
 sys.path.insert(0, str(ROOT / "tools" / "gfx"))
 import objdata as od  # noqa: E402
 import pngsync as PS  # noqa: E402
+import spritebanks as SB  # noqa: E402
 
 OUT_DIR = ROOT / "build" / "sprites_assembled"          # derived output: rendered on demand, never committed
 SPRITE_DIR = ROOT / "assets" / "gfx" / "sprites"
@@ -60,7 +61,7 @@ def grayscale_palettes(object_index):
 
 
 def game_palettes(object_index):
-    """Default palette provider: the day OBJ palette (sPalette_0x6F), see docs/formats/graphics-palettes.md."""
+    """Default palette provider: the day OBJ palette (Palette_Obj_Day), see docs/formats/graphics-palettes.md."""
     import palette_map
     return palette_map.sprite_palettes(object_index)
 
@@ -93,7 +94,7 @@ class Sheets:
     def __init__(self, sprite_dir=SPRITE_DIR):
         self.pix = []
         for b in range(SPRITE_BANKS):
-            raw = (sprite_dir / ("Sprites_%02X8000.bin" % (FIRST_SPRITE_BANK + b))).read_bytes()
+            raw = (sprite_dir / (SB.label(FIRST_SPRITE_BANK + b) + ".bin")).read_bytes()
             w, h, pix = PS.decode_sheet(raw, 4, 16)
             assert (w, h) == (SHEET_W, 512)
             self.pix.append(pix)
@@ -282,7 +283,7 @@ def obj_dirname(idx, names):
 def comp_record(c):
     sheet, sx, sy = Sheets.locate(c.tile)
     return {"tile": c.tile, "x": s8(c.x), "y": s8(c.y), "attr": c.attr,
-            "sheet": "Sprites_%02X8000" % (FIRST_SPRITE_BANK + sheet), "sx": sx, "sy": sy,
+            "sheet": SB.label(FIRST_SPRITE_BANK + sheet), "sx": sx, "sy": sy,
             "palette": c.palette, "hflip": c.hflip, "vflip": c.vflip}
 
 

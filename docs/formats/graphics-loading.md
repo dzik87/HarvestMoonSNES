@@ -39,8 +39,16 @@ ordinary map entries, only without graphic preset byte. Their BG keeps the chara
 Blobs reached through an index (sprite banks, glyph tables, palettes) are marked `indexed`; whether every index is used is checked by
 `tools/objects/objdata.py` (frames) and `tools/fonts/font.py` (glyph tables), not here.
 
-## Open
+## Open questions
 
-* `Sprites_88xxxx`-`Sprites_91xxxx`, `obj_XXXX` frame folders and `sPalette_0xNN` still carry bank / index based names (their identity is the
-  index the engine uses; naming them needs the object-id meaning, see `docs/naming/H_objects_86_87.csv`).
-* VRAM layouts shared between screens are only recorded per map; no overlap check yet.
+Facts only.
+
+* `obj_XXXX` frame folders (`assets/gfx/png/frames/`) and object records (`assets/objects/**/objects/NNNN.json`) are named by object id only;
+  1104 objects. The sprite banks (`Sprites_Player_0` ... `Sprites_Npc_2_Ui`) and the palettes (`Palette_<Area>_<Slot>`) are named
+  (`docs/naming/K4_sprites_objects_palettes.csv`), the individual objects are not.
+* 5 palettes are not referenced by any area slot (`Palette_Unk_14`, `Palette_Unk_71` ... `Palette_Unk_74`); no code path that selects them
+  was found.
+* The `Tiles_Unk51_3` and `Tiles_Unused_TitleLogoJapanese` blobs are shown by no name table, so their palette row is a guess.
+* `Screen_Unk53to56__sMap_80B5AF`: 236 of 692 cells use tiles that the map does not load (see `graphics-png.md`).
+* VRAM overlap check: `graphics_loads.py check` compares, per map entry, the word ranges of all tile blobs and the name tables; it currently
+  finds no overlap, so the layouts shared between screens do not collide. Intended overlaps can be listed in `OVERLAP_OK`.

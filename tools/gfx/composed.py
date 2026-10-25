@@ -23,6 +23,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools" / "gfx"))
 sys.path.insert(0, str(ROOT / "tools" / "objects"))
 import pngsync as P  # noqa: E402
+import spritebanks as SB  # noqa: E402
 
 W = 128                                     # every sheet is 16 tiles = 128 px wide
 SPR = 16
@@ -67,6 +68,7 @@ class Claims:
         self.errors = []
         self.nerr = 0
         self._ids = {}
+        self.seen = set()
 
     def sid(self, name):
         if name not in self._ids:
@@ -90,7 +92,7 @@ class Claims:
         y, x = divmod(off, W)
         if label.startswith("Sprites_"):
             u = (y // 16) * 8 + x // 16
-            return f"sprite id ${(int(label[8:10], 16) - FIRST_BANK) * 256 + u:04X} ({label}) pixel ({x % 16},{y % 16})"
+            return f"sprite id ${(SB.bank(label) - FIRST_BANK) * 256 + u:04X} ({label}) pixel ({x % 16},{y % 16})"
         return f"tile {(y // 8) * 16 + x // 8} ({label}) pixel ({x % 8},{y % 8})"
 
     def put(self, label, off, data, sid):
@@ -233,8 +235,9 @@ class Ctx:
                     # of the preset that is active; take the 4K-word base under which the most used tiles are found (ties: $2000 first)
                     used = {w & 0x3FF for w in words if w & 0x3FF}
                     cands = [b for b in (0x2000, 0x1000, 0x3000, 0x4000, 0x5000, 0) if b <= min(d for d, _ in sets)]
-                    best = max(cands, key=lambda b: (sum(1 for n in used if resolve(b)[n]), -cands.index(b))) if cands else 0x2000
-                    targets = resolve(best)
+                    tried = {b: resolve(b) for b in cands}
+                    best = max(cands, key=lambda b: (sum(1 for n in used if tried[b][n]), -cands.index(b))) if cands else 0x2000
+                    targets = tried[best] if cands else resolve(best)
                 out.append(Screen(name, table, cols, words, sets, pal, targets))
         return out
 
@@ -326,7 +329,7 @@ class SheetView:
         sheet = tid >> 8
         if sheet >= SPRITE_BANKS:
             return [bytes(SPR)] * SPR
-        sp = self.sheets["Sprites_%02X8000" % (FIRST_BANK + sheet)]
+        sp = self.sheets[SB.label(FIRST_BANK + sheet)]
         u = tid & 0xFF
         x0, y0 = (u & 7) * SPR, (u >> 3) * SPR
         return [bytes(sp[(y0 + y) * W + x0:(y0 + y) * W + x0 + SPR]) for y in range(SPR)]
@@ -457,6 +460,11 @@ def screen_claims(ctx, scr, w, h, pix, claims, base=None):
         elif not claimable:
             continue
         label, t = tgt
+        if base is None:                                          # the same tile drawn the same way again claims nothing new
+            key = (label, t, word & 0xC000, pal, b"".join(rows))
+            if key in claims.seen:
+                continue
+            claims.seen.add(key)
         tx, ty = (t % 16) * 8, (t // 16) * 8
         for y in range(8):
             row = rows[y]
@@ -505,7 +513,7 @@ def frame_claims(ctx, fr, w, h, pix, claims, view=None, sheets=None):
             return None
         u = tid & 0xFF
         px, py = block_xy(c, bx, by)
-        return "Sprites_%02X8000" % (FIRST_BANK + (tid >> 8)), ((u >> 3) * SPR + py) * W + (u & 7) * SPR + px
+        return SB.label(FIRST_BANK + (tid >> 8)), ((u >> 3) * SPR + py) * W + (u & 7) * SPR + px
 
     if view is not None:                                     # import: compare with the baseline render
         base = render_frame(ctx, fr, view)
@@ -555,7 +563,7 @@ def frame_claims(ctx, fr, w, h, pix, claims, view=None, sheets=None):
         if (c.tile >> 8) >= SPRITE_BANKS:
             continue
         cx, cy = rect(k)
-        label = "Sprites_%02X8000" % (FIRST_BANK + (c.tile >> 8))
+        label = SB.label(FIRST_BANK + (c.tile >> 8))
         u = c.tile & 0xFF
         x0, y0 = (u & 7) * SPR, (u >> 3) * SPR
         for ry in range(SPR):
