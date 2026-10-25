@@ -114,3 +114,18 @@ $94/$95 differ; bank $9C is identical).
 `check` always verifies that the committed PNGs of every region rebuild to the SHA-256 values recorded in
 `glyphs.json` (no ROM needed) and, for US, that they equal `assets/gfx/tiles/sFontGlyphs_*.bin`. With ROMs
 (`--rom-dir`, `HM_ROM_DIR`, or `HM_ROM_<REGION>`) it also checks extract -> build against the ROM bytes.
+
+## PNG sizes: 8x16 and 16x16
+
+`glyph_<ID>.png` is **8x16** (left half only) when the engine draws that glyph 8 px wide and its right half is plain
+dither; otherwise it is 16x16. This is the case for all Latin letters and punctuation in US/EU/DE (the engine there
+always draws 8 px, see above) and for the narrow digit ids of JP. Translators therefore only see and edit the pixels
+that are really displayed. `build` accepts both sizes and regenerates the right half of an 8x16 glyph as the plain
+dither, so the ROM bytes are unchanged (checked by `font.py check`, `tests/test_font.py` and CI).
+
+* The leftover Japanese glyphs in US/EU/DE (kana/kanji from the original font) keep 16x16 PNGs: their right half
+  holds real data that the 8 px engine never shows. These are the candidates for replacement by proper Latin glyphs
+  (the original translation reused the Japanese font data and only patched the glyph routines).
+* Counts of 8x16 files are stored in `glyphs.json` (`png_files_8x16`).
+* `font.py narrow --region R` converts existing 16x16 PNGs in place (used once for the migration); `extract` writes the
+  narrow form directly.

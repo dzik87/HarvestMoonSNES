@@ -9,7 +9,7 @@ Format (details and evidence in docs/formats/font.md):
   * Pixel value 0..3 (plane 0 = bit 0, plane 1 = bit 1).  Values 0/1 form the dialog-window background dither
     ((x + y) even -> 1, odd -> 0) that is baked into every glyph, values 2/3 are the letter (3 = ink, 2 = soft edge).
 
-Editable output: assets/fonts/<region>/glyph_<ID4hex>.png (16x16 indexed PNG, 4-colour palette, index = SNES pixel
+Editable output: assets/fonts/<region>/glyph_<ID4hex>.png (16x16 or, for 8 px wide glyphs, 8x16 indexed PNG, 4-colour palette, index = SNES pixel
 value) and assets/fonts/<region>/glyphs.json (id -> character, table layout, SHA-256 of every table).
 A glyph whose 256 pixels are exactly the plain dither has no PNG file; it is regenerated on build.
 
@@ -17,6 +17,7 @@ Commands:
     extract --region R [--rom PATH] [--out DIR]   ROM (or assets/gfx/tiles for us) -> PNGs + glyphs.json
     build   --region R [--src DIR] [--out DIR] [--write-assets]   PNGs -> sFontGlyphs_*.bin
     check   [--region R]... [--rom-dir DIR]       round trip must reproduce every byte (exit 1 otherwise)
+    narrow  --region R                            convert committed PNGs to 8x16 where the engine draws 8 px wide
     seal    --region R                            recompute the SHA-256 values in glyphs.json after an edit
     sheet   --region R [--out FILE]               contact sheet of all glyphs (for viewing only)
 """
@@ -174,24 +175,40 @@ def glyphs_to_tables(glyphs):
     return [bytes(t) for t in tabs]
 
 
-def write_png(path, px):
+def right_half_is_dither(px):
+    return all(px[y * 16 + x] == BLANK[y * 16 + x] for y in range(16) for x in range(8, 16))
+
+
+def is_narrow_png(region, gid, px):
+    """True if the glyph is stored as an 8x16 PNG: the engine draws it 8 px wide and its right half is plain dither."""
+    engine_narrow = region != "jp" or gid in NARROW_IDS
+    return engine_narrow and right_half_is_dither(px)
+
+
+def write_png(path, px, narrow=False):
     Image = require_pil()
-    im = Image.new("P", (16, 16))
+    w = 8 if narrow else 16
+    im = Image.new("P", (w, 16))
     im.putpalette([c for rgb in PALETTE for c in rgb])
-    im.putdata(px)
+    im.putdata([px[y * 16 + x] for y in range(16) for x in range(w)])
     im.save(path, format="PNG", optimize=True)
 
 
 def read_png(path):
     Image = require_pil()
     im = Image.open(path)
-    if im.size != (16, 16):
-        raise ValueError("%s: glyph must be 16x16, got %dx%d" % (path, im.width, im.height))
+    if im.size not in ((16, 16), (8, 16)):
+        raise ValueError("%s: glyph must be 16x16 or 8x16, got %dx%d" % (path, im.width, im.height))
     if im.mode not in ("P", "L"):
         raise ValueError("%s: glyph must be an indexed (P) PNG with 4 colours, got mode %s" % (path, im.mode))
     px = list(im.get_flattened_data() if hasattr(im, "get_flattened_data") else im.getdata())
     if max(px) > 3:
         raise ValueError("%s: pixel index above 3 (only palette indices 0..3 are allowed)" % path)
+    if im.width == 8:   # narrow glyph: the right half is regenerated as plain dither
+        full = []
+        for y in range(16):
+            full += px[y * 8:y * 8 + 8] + BLANK[y * 16 + 8:y * 16 + 16]
+        px = full
     return px
 
 
@@ -222,13 +239,15 @@ def ranges(ids):
     return ["%04X" % a if a == b else "%04X-%04X" % (a, b) for a, b in out]
 
 
-def write_sidecar(path, region, tables, source, nfiles):
+def write_sidecar(path, region, tables, source, nfiles, nnarrow=0):
     cmap = char_map(region)
     meta = {
         "region": region,
         "source": source,
         "format": {
             "glyph_size": [16, 16],
+            "png_sizes": "glyph_XXXX.png is 8x16 (left half only) when the engine draws the glyph 8 px wide and the right half is plain dither; "
+                         "otherwise 16x16. build accepts both; the right half of an 8x16 glyph is regenerated as dither.",
             "bits_per_pixel": 2,
             "tile_layout": "TL=base TR=base+0x10 BL=base+0x100 BR=base+0x110, base=(idx&7)*32+(idx>>3)*512",
             "pixel_values": "0/1 = dialog background dither ((x+y) even -> 1), 2 = letter edge, 3 = letter ink",
@@ -239,6 +258,7 @@ def write_sidecar(path, region, tables, source, nfiles):
             {"default": 16, "narrow_8px_ids": ranges(NARROW_IDS)} if region == "jp"
             else {"default": 8, "note": "engine always draws only the left 8x16 half (TL+BL tiles); right half is unused"}),
         "png_files": nfiles,
+        "png_files_8x16": nnarrow,
         "tables": [
             {"table": t, "label": TABLE_NAME[t], "cpu_address": "$%06X" % TABLE_ADDR[t],
              "first_id": "%04X" % (t * 64), "last_id": "%04X" % (t * 64 + 63),
@@ -263,13 +283,16 @@ def cmd_extract(a):
     out.mkdir(parents=True, exist_ok=True)
     for p in out.glob("glyph_*.png"):
         p.unlink()
+    nnarrow = 0
     for gid, px in sorted(glyphs.items()):
-        write_png(out / glyph_filename(gid), px)
+        narrow = is_narrow_png(a.region, gid, px)
+        nnarrow += narrow
+        write_png(out / glyph_filename(gid), px, narrow)
     # the generated files must rebuild to the source bytes
     if glyphs_to_tables(load_png_dir(out)) != list(tables):
         sys.exit("internal error: extracted PNGs do not rebuild to the source data")
     src_label = "rom" if a.rom else source
-    write_sidecar(out / "glyphs.json", a.region, tables, src_label, len(glyphs))
+    write_sidecar(out / "glyphs.json", a.region, tables, src_label, len(glyphs), nnarrow)
     print("%s: %d glyph PNGs (%d blank ids omitted) -> %s" % (a.region, len(glyphs), N_GLYPHS - len(glyphs), out))
     return 0
 
@@ -341,6 +364,29 @@ def check_region(region, rom_dir):
     return ok, msgs
 
 
+def cmd_narrow(a):
+    """Convert the committed 16x16 PNGs of a region to 8x16 where the engine draws the glyph 8 px wide and the right
+    half is plain dither (in place; the rebuilt tables must stay identical)."""
+    pngdir = FONT_ASSETS / a.region
+    before = glyphs_to_tables(load_png_dir(pngdir))
+    n = 0
+    for gid, px in sorted(load_png_dir(pngdir).items()):
+        if is_narrow_png(a.region, gid, px):
+            write_png(pngdir / glyph_filename(gid), px, True)
+            n += 1
+    if glyphs_to_tables(load_png_dir(pngdir)) != before:
+        sys.exit("internal error: narrowing changed the built tables")
+    side = pngdir / "glyphs.json"
+    meta = json.loads(side.read_text(encoding="utf-8"))
+    meta["png_files_8x16"] = n
+    meta["format"]["png_sizes"] = ("glyph_XXXX.png is 8x16 (left half only) when the engine draws the glyph 8 px wide and "
+                                   "the right half is plain dither; otherwise 16x16. build accepts both; the right half of "
+                                   "an 8x16 glyph is regenerated as dither.")
+    side.write_text(json.dumps(meta, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    print("%s: %d glyph PNGs converted to 8x16" % (a.region, n))
+    return 0
+
+
 def cmd_check(a):
     ok_all = True
     for r in (a.region or REGIONS):
@@ -396,12 +442,13 @@ def main(argv=None):
     p.add_argument("--src"); p.add_argument("--out"); p.add_argument("--write-assets", action="store_true")
     p = sub.add_parser("check"); p.add_argument("--region", action="append", choices=REGIONS)
     p.add_argument("--rom-dir")
+    p = sub.add_parser("narrow"); p.add_argument("--region", required=True, choices=REGIONS)
     p = sub.add_parser("seal"); p.add_argument("--region", required=True, choices=REGIONS)
     p = sub.add_parser("sheet"); p.add_argument("--region", required=True, choices=REGIONS); p.add_argument("--out")
     a = ap.parse_args(argv)
     try:
         return {"extract": cmd_extract, "build": cmd_build, "check": cmd_check,
-                "seal": cmd_seal, "sheet": cmd_sheet}[a.cmd](a)
+                "seal": cmd_seal, "narrow": cmd_narrow, "sheet": cmd_sheet}[a.cmd](a)
     except (ValueError, OSError) as e:
         print("error: %s" % e, file=sys.stderr)
         return 1
