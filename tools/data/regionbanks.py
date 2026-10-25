@@ -28,7 +28,7 @@ import tilemap_codec as C  # noqa: E402
 BANK = 0x8000
 PAD = bytes(64)
 REGIONS = ("EU", "DE", "JP")
-GROUPS = {"tiles": "src/data/gfx/tiles", "characters": "src/data/gfx/characters", "sprites": "src/data/gfx/sprites"}
+GROUPS = ("tiles", "characters", "sprites")
 # banks whose contents differ between the releases (everything else is byte-identical in all four ROMs)
 GFX_BANKS = ("94", "95", "9A", "9B", "9E", "9F", "A5", "A6")
 
@@ -71,28 +71,23 @@ def kind_of(label):
 
 
 def us_layout(bank, root=ROOT):
-    """Ordered blobs of a US bank from the generated asm (`incbin` + `fill`) and the (generated) .bin sizes."""
-    for group, d in GROUPS.items():
-        f = Path(root) / d / f"bank_{bank}.asm"
-        if f.exists():
+    """Ordered blobs of a US bank from the layout (assets/gfx/banks.json) and the (generated) .bin sizes."""
+    sys.path.insert(0, str(ROOT / "tools" / "data"))
+    import gfxbanks
+    layout = gfxbanks.load_layout(root)
+    for group in GROUPS:
+        if bank in layout[group]:
             break
     else:
-        raise FileNotFoundError(f"bank ${bank}: no graphics asm")
-    out, label = [], None
-    for line in f.read_text(encoding="utf-8").splitlines():
-        line = re.sub(r";.*", "", line).strip()
-        m = re.match(r"^([A-Za-z_]\w*):$", line)
-        if m:
-            label = m.group(1)
-            continue
-        m = re.match(r'^incbin "([^"]+)"$', line)
-        if m:
-            asset = (f.parent / m.group(1).replace("!{REGDIR}", "")).resolve()
-            out.append(Entry(label, kind_of(label), asset.stat().st_size, group, asset))
-            continue
-        m = re.match(r"^fill (\d+|align \$8000)$", line)
-        if m:
-            out.append(Entry(label, "padding", int(m.group(1)) if m.group(1).isdigit() else 0, group, None))
+        raise FileNotFoundError(f"bank ${bank}: not in assets/gfx/banks.json")
+    b = layout[group][bank]
+    out = []
+    for name in b["blobs"]:
+        label = name.lstrip("*")
+        asset = Path(root) / "assets/gfx" / group / f"{label}.bin"
+        out.append(Entry(label, kind_of(label), asset.stat().st_size, group, asset))
+    if b["pad"] is not None:
+        out.append(Entry(f"Padding_{bank}0000", "padding", b["pad"] if b["pad"] != "align" else 0, group, None))
     return out
 
 

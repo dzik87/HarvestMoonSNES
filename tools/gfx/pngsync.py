@@ -28,7 +28,7 @@ images is marked transparent (tRNS).  Name tables: 16-bit hex words, `columns` p
 
 `import` refuses to change the size of the blob in the ROM unless --allow-resize is given: a shorter compressed stream is
 padded with zeros automatically (layout unchanged); a longer one needs --allow-resize, which also shrinks the bank's
-trailing `Padding_*` fill in src/data/gfx/<kind>/bank_XX.asm (error if the bank is full).
+trailing padding of the bank in assets/gfx/banks.json (error if the bank is full).
 """
 import argparse
 import fnmatch
@@ -62,8 +62,7 @@ KINDS = {
     "tilemaps": Kind("tilemaps", "assets/gfx/characters", ("sCompressedTilemap_", "sCharactermap_"), "assets/gfx/tilemaps",
                      ".map.txt", "sCompressedTilemap_"),
 }
-# asm banks that include each kind (used to adjust the Padding fill when a blob grows)
-ASM_DIRS = {"tiles": "src/data/gfx/tiles", "sprites": "src/data/gfx/sprites", "tilemaps": "src/data/gfx/characters"}
+LAYOUT_KIND = {"tiles": "tiles", "sprites": "sprites", "tilemaps": "characters"}     # kind -> group in assets/gfx/banks.json
 
 # 4bpp was decided from VRAM destination slots (tile blobs are 8192 bytes = 256 4bpp tiles per $1000-word slot), from the
 # plane-correlation statistics and by looking at the rendered sheets.  Blobs whose planes 2-3 are empty or that hold only a
@@ -404,7 +403,8 @@ def export_blob(b, raw=None, tail=None, old=None):
     meta = {"label": b.label, "kind": b.kind, "bin": b.rel(b.bin), "compression": "lzss" if b.compressed else "none",
             "raw_size": len(raw)}
     if b.kind == "tilemaps":
-        columns = old.get("columns", 128 if b.label.startswith("sCharactermap_") else 32)
+        import composed
+        columns = old.get("columns", composed.default_columns(len(raw) // 2))
         meta.update({"format": "bg_name_table", "entries": len(raw) // 2, "columns": columns})
         b.art.parent.mkdir(parents=True, exist_ok=True)
         b.art.write_text(nametable_text(raw, columns), encoding="utf-8", newline="\n")
@@ -525,16 +525,15 @@ def cmd_build(a, root=ROOT):
 
 
 def share_us_blobs(root=ROOT):
-    """The bank sources include a blob through `!{REGDIR}` when ANY release has its own version of it.  For the releases
-    that use the US data, the build copies the shared US file into that release's directory."""
+    """The generated bank asm (tools/data/gfxbanks.py) includes a blob through `!{REGDIR}` when ANY release has its own version of
+    it (`*` in assets/gfx/banks.json).  For the releases that use the US data, the build copies the shared US file into that
+    release's directory."""
+    sys.path.insert(0, str(ROOT / "tools" / "data"))
+    import gfxbanks
     n = 0
-    labels = set()
-    for d in ("tiles", "characters"):
-        for f in (Path(root) / "src/data/gfx" / d).glob("bank_*.asm"):
-            labels |= set(re.findall(r'/!\{REGDIR\}(\w+)\.bin"', f.read_text(encoding="utf-8")))
-    for lab in sorted(labels):
-        if lab.startswith("sFontGlyphs_"):
-            continue                                        # written for every release by tools/fonts/font.py
+    for lab, group in sorted(gfxbanks.regional_labels(root).items()):
+        if lab.startswith("sFontGlyphs_") or group == "palettes":
+            continue                                        # fonts: tools/fonts/font.py; palettes: tools/gfx/palette.py
         k = next(k for k in KINDS.values() if lab.startswith(k.prefixes))
         us = Path(root) / k.src / f"{lab}.bin"
         for r in REGIONS[1:]:
@@ -590,30 +589,38 @@ def cmd_check(a, root=ROOT):
                 if p.is_file() and p not in want:
                     print(f"FAIL orphan composed image: {p.relative_to(root)}")
                     bad += 1
+        # name table width sanity: a table laid out with the wrong row length shows unrelated tiles side by side
+        own = None if region == "us" else {x.label for x in sel if x.kind == "tilemaps"}
+        sheets = composed.decode_sheets(ctx, composed.load_sheets(ctx))
+        for table, (cur, sug, sc, _scr) in sorted(composed.table_widths(ctx, sheets, own).items()):
+            if sc[cur] - min(sc.values()) > composed.WIDTH_FAIL:
+                print(f"FAIL {table}: columns={cur} gives a discontinuous image (seam ratio {sc[cur]:.3f}); "
+                      f"{min(sc, key=sc.get)} columns gives {min(sc.values()):.3f} (see `pngsync.py widths`)")
+                bad += 1
     print(f"pngsync check: {len(sel)} blobs, " + (f"{bad} FAILED" if bad else "all reproduce the committed .bin bit-exactly"))
     return 1 if bad else 0
 
 
 def adjust_padding(b, delta):
-    """blob grew by `delta` bytes: shrink the bank's last Padding_* fill (same asm file as the blob)."""
+    """blob grew by `delta` bytes: shrink the trailing padding of its bank in assets/gfx/banks.json and regenerate the bank asm."""
     if getattr(b, "region", "us") != "us":
         return None                                     # regional banks end in `fill align`: the padding adapts by itself
-    asm_dir = Path(b.root) / ASM_DIRS[b.kind]
-    rx = re.compile(rf'incbin "[^"]*/{re.escape(b.label)}\.bin"')
-    for f in sorted(asm_dir.glob("bank_*.asm")):
-        text = f.read_text(encoding="utf-8")
-        if not rx.search(text):
+    sys.path.insert(0, str(ROOT / "tools" / "data"))
+    import gfxbanks
+    layout = gfxbanks.load_layout(b.root)
+    for bank, ent in layout[LAYOUT_KIND[b.kind]].items():
+        if b.label not in (x.lstrip("*") for x in ent["blobs"]):
             continue
-        fills = list(re.finditer(r"^(Padding_\w+:\s*\n\s*fill )(\d+)", text, re.M))
-        if not fills:
-            raise ValueError(f"{f.name}: no Padding_* fill to absorb {delta} extra bytes")
-        m = fills[-1]
-        left = int(m.group(2)) - delta
+        if not isinstance(ent["pad"], int):
+            raise ValueError(f"bank ${bank}: no fixed padding to absorb {delta} extra bytes")
+        left = ent["pad"] - delta
         if left < 0:
-            raise ValueError(f"{f.name}: bank full, blob would exceed it by {-left} bytes")
-        f.write_text(text[:m.start(2)] + str(left) + text[m.end(2):], encoding="utf-8", newline="\n")
-        return f
-    raise ValueError(f"{b.label}: not found in {asm_dir}")
+            raise ValueError(f"bank ${bank}: bank full, blob would exceed it by {-left} bytes")
+        ent["pad"] = left
+        gfxbanks.save_layout(layout, b.root)
+        gfxbanks.build(b.root)
+        return Path(gfxbanks.LAYOUT)
+    raise ValueError(f"{b.label}: not found in {gfxbanks.LAYOUT}")
 
 
 def cmd_import(a, root=ROOT):
@@ -853,19 +860,63 @@ def cmd_sheet(a, root=ROOT):
     return 0
 
 
+def cmd_widths(a, root=ROOT):
+    """name table width report: seam ratio per candidate row length for every shown table; --write stores the suggestion as `columns`
+    in the sidecar (then run `export` to rewrap the .map.txt files and redraw the screens)."""
+    import composed
+    composed.reset()
+    changed = 0
+    for region in (REGIONS if a.region == "all" else (a.region,)):
+        ctx = composed.get_ctx(root, region)
+        sheets = composed.decode_sheets(ctx, composed.load_sheets(ctx))
+        own = None if region == "us" else {p.name[:-len(".json")] for p in (Path(root) / region_dirs(KINDS["tilemaps"], region)[1]).glob("*.json")}
+        res = composed.table_widths(ctx, sheets, own)
+        shown = set(res)
+        for table, (cur, sug, sc, scr) in sorted(res.items()):
+            mark = "" if cur == sug else f"   -> {sug}"
+            flag = "  BAD" if sc[sug] > composed.WIDTH_BAD else ""
+            print(f"{region} {table} {len(scr.words):5d} entries  columns={cur:3d}  " + " ".join(f"{c}:{v:.3f}" for c, v in sc.items()) + mark + flag)
+            if a.write and cur != sug:
+                b = Blob("tilemaps", table, root, region)
+                meta = read_meta(b)
+                meta["columns"] = sug
+                write_meta(b, meta)
+                changed += 1
+        # tables no screen shows (no tile set known): same width as the US table, else the size default / documented layout
+        for sc_json in sorted((Path(root) / region_dirs(KINDS["tilemaps"], region)[1]).glob("*.json")):
+            label = sc_json.name[:-len(".json")]
+            if label in shown:
+                continue
+            b = Blob("tilemaps", label, root, region)
+            meta = read_meta(b)
+            us = Blob("tilemaps", label, root, "us")
+            sug = (read_meta(us).get("columns") if region != "us" and us.meta.exists() else None) \
+                or composed.KNOWN_COLUMNS.get(label) or composed.default_columns(meta["entries"])
+            print(f"{region} {label} {meta['entries']:5d} entries  columns={meta.get('columns', 32):3d}  (not shown with any tile set)"
+                  + ("" if meta.get("columns", 32) == sug else f"   -> {sug}"))
+            if a.write and meta.get("columns", 32) != sug:
+                meta["columns"] = sug
+                write_meta(b, meta)
+                changed += 1
+    print(f"{changed} sidecars changed" if a.write else "(report only; --write stores the suggested widths)")
+    return 0
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
-    for name in ("export", "import", "check", "preview", "build", "sheet"):
+    for name in ("export", "import", "check", "preview", "build", "sheet", "widths"):
         p = sub.add_parser(name)
         p.add_argument("--label", action="append", help="fnmatch pattern on the blob label (repeatable)")
         p.add_argument("--kind", choices=sorted(KINDS))
-        if name in ("export", "import", "check", "build", "sheet"):
-            p.add_argument("--region", choices=REGIONS + (("all",) if name == "build" else ()), default="us",
+        if name in ("export", "import", "check", "build", "sheet", "widths"):
+            p.add_argument("--region", choices=REGIONS + (("all",) if name in ("build", "widths") else ()), default="us",
                            help="release (default us = shared blobs; eu/de/jp = blobs that differ from US)")
         if name == "export":
             p.add_argument("--rom-dir", help="with --region eu|de|jp: take the region blobs from the ROM images "
                                              "(<dir>/{US,EU,DE,JP}/*.sfc or $HM_ROM_DIR); writes the .bin files and sources")
+        if name == "widths":
+            p.add_argument("--write", action="store_true", help="store the suggested widths in the sidecars")
         if name == "import":
             p.add_argument("--allow-resize", action="store_true", help="allow growing a blob (shrinks the bank padding)")
         if name == "preview":
@@ -876,7 +927,7 @@ def main(argv=None):
             p.add_argument("--grid", action="store_true", help="draw the 16x16 unit grid")
     a = ap.parse_args(argv)
     return {"export": cmd_export, "import": cmd_import, "check": cmd_check, "preview": cmd_preview, "build": cmd_build,
-            "sheet": cmd_sheet}[a.cmd](a)
+            "sheet": cmd_sheet, "widths": cmd_widths}[a.cmd](a)
 
 
 if __name__ == "__main__":

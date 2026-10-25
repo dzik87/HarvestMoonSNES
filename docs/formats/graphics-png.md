@@ -104,17 +104,119 @@ tile-set VRAM address, which reproduces the farm map exactly) and every tile she
   the sidecars and PNGs. A manual `"palette": {"id", "sub"}` sidecar key is only kept for blobs that are not in the map.
 * **Size of the compressed blob.** Edited tile graphics compress to a different length. A shorter stream is padded with zeros
   automatically (layout unchanged). A longer stream is refused unless `--allow-resize` is passed; then `import` also reduces the
-  trailing `Padding_*` `fill N` in `src/data/gfx/<kind>/bank_XX.asm` by the growth, and fails if the bank is full. All
+  trailing padding of the bank in `assets/gfx/banks.json` (`pad`; the bank asm in `build/gen/gfx/` is regenerated) by the growth, and fails if the bank is full. All
   pointers are labels, so following blobs move automatically. Raw blobs (sprites, `sCharactermap_*`) never change size.
-* Name tables: `.map.txt` has `columns` 16-bit hex words per row (32; 128 for `sCharactermap_*`), a blank line after every
+* Name tables: `.map.txt` has `columns` 16-bit hex words per row (32, 64 or 128, see "Name table width"), a blank line after every
   32 rows, no comments. Entry = tile 0-9, palette 10-12, priority 13, H flip 14, V flip 15.
+
+### Name table width
+
+A name table is a flat list of 16-bit entries; the row length (`columns` in the sidecar) decides how it is drawn into the `screens/` image
+and how `.map.txt` is wrapped. It never changes the `.bin` (entry order is the same). Evidence for the widths:
+
+* **Engine.** The map loader (`src/code/bank_80/tilemaps.asm`) uploads the big name tables row by row with a stride taken from
+  `nTable_80AA68[strcDialogDisplay.mapMultiWidth]` = `$40 / $80 / $100` bytes = **32 / 64 / 128 entries per row**, and the table size from
+  `nTable_80AA72` = `$1000 / $2000 / $4000` bytes. So row-major maps of 32, 64 and 128 entries per row exist (32x64, 64x64, 128x64+).
+  `sCharactermap_A18000/A28000/A38000` and `sCompressedTilemap_A4DC7E` use 128. The BG tilemaps loaded by the `.tilemaps` path are
+  decompressed to `$7E2000` and DMA'd linearly (`$2000` bytes) to the VRAM address of the map header, so the file order is the order in VRAM.
+* **Image continuity** (`pngsync.py widths`, also part of `check`). Every table is rendered with each of 32, 64 and 128 columns and the
+  *seam ratio* is computed: the share of differing neighbour pixels across 8x8 cell borders divided by the share inside cells. A correct layout
+  is about 1.0 (borders are not special), a wrong one places unrelated tiles side by side and scores clearly higher (the three tables that
+  were drawn 32 wide by mistake: `A48A2D` 1.52 -> 1.02, `A49745` 1.40 -> 1.03, `A4D379` 1.25 -> 1.10).
+* **Rule.** Default by size (`composed.default_columns`): 4096 entries = 64, 8192 and more = 128, otherwise 32. A different width is used only
+  when it is at least 0.05 more continuous than the default. Tables that are blank or not shown with any tile set keep the default
+  (`sCharactermap_A6A096` is a raw 64x32 name table, `KNOWN_COLUMNS`). Regional tables take the width of the US table with the same label.
+* **Check.** `pngsync.py check` fails when a table's declared width is more than 0.15 worse than the best candidate, so a wrong `columns`
+  cannot be committed unnoticed. `pngsync.py widths [--region R] [--write]` prints the scores and, with `--write`, stores the suggestion
+  (then `export` rewraps the `.map.txt` and redraws the screens).
+
+Widths (`columns x rows`; seam ratio at that width, `-` = not rendered; the regional releases that carry their own copy are listed, their
+widths equal the US one):
+
+| Table | Entries | Layout | Seam | Regional copies | Note |
+|---|---|---|---|---|---|
+| `sCharactermap_A18000` | 16384 | 128 x 128 | 0.99 | US only |  |
+| `sCharactermap_A28000` | 12256 | 128 x 96 | 1.04 | US only |  |
+| `sCharactermap_A38000` | 16384 | 128 x 128 | 1.12 | US only | weak metric |
+| `sCharactermap_A6A096` | 2048 | 64 x 32 | - | US only | no tile set: size / content default |
+| `sCompressedTilemap_A48000` | 2048 | 32 x 64 | 0.00 | US only | blank, size default |
+| `sCompressedTilemap_A481AE` | 3072 | 32 x 96 | 1.03 | US only |  |
+| `sCompressedTilemap_A48A2D` | 4096 | 64 x 64 | 1.02 | US only |  |
+| `sCompressedTilemap_A4945C` | 1024 | 32 x 32 | 1.17 | US only | weak metric |
+| `sCompressedTilemap_A49745` | 2048 | 64 x 32 | 1.03 | US only |  |
+| `sCompressedTilemap_A49B84` | 1024 | 32 x 32 | 1.20 | US only | weak metric |
+| `sCompressedTilemap_A49E2E` | 4096 | 64 x 64 | 1.01 | US only |  |
+| `sCompressedTilemap_A4A597` | 2048 | 32 x 64 | 1.37 | US only | metric high, image checked by eye |
+| `sCompressedTilemap_A4AA99` | 2048 | 32 x 64 | 0.00 | US only | blank, size default |
+| `sCompressedTilemap_A4AE95` | 2048 | 32 x 64 | 0.00 | US only | blank, size default |
+| `sCompressedTilemap_A4B3D1` | 2048 | 32 x 64 | 0.00 | US only | blank, size default |
+| `sCompressedTilemap_A4B8E0` | 2048 | 32 x 64 | 0.00 | US only | blank, size default |
+| `sCompressedTilemap_A4BCC1` | 1024 | 32 x 32 | 0.00 | US only | blank, size default |
+| `sCompressedTilemap_A4C065` | 1024 | 32 x 32 | 0.00 | US only | blank, size default |
+| `sCompressedTilemap_A4C3E2` | 2048 | 32 x 64 | 0.00 | US only | blank, size default |
+| `sCompressedTilemap_A4C5DE` | 4096 | 64 x 64 | 1.09 | US only |  |
+| `sCompressedTilemap_A4CFAB` | 1024 | 32 x 32 | 1.00 | US only |  |
+| `sCompressedTilemap_A4D379` | 4096 | 64 x 64 | 1.10 | US only |  |
+| `sCompressedTilemap_A4DC7E` | 16384 | 128 x 128 | 1.13 | US only | weak metric |
+| `sCompressedTilemap_A58000` | 4096 | 32 x 128 | 1.09 | de,eu,jp |  |
+| `sCompressedTilemap_A58327` | 4096 | 64 x 64 | 1.13 | US only | weak metric |
+| `sCompressedTilemap_A58B49` | 1024 | 32 x 32 | 1.15 | US only | weak metric |
+| `sCompressedTilemap_A58D8E` | 4096 | 64 x 64 | 1.11 | de,jp |  |
+| `sCompressedTilemap_A5970F` | 4096 | 64 x 64 | 3.09 | jp | metric high, image checked by eye |
+| `sCompressedTilemap_A59C08` | 2048 | 32 x 64 | 1.12 | de,jp | weak metric |
+| `sCompressedTilemap_A59E0B` | 1024 | 32 x 32 | 1.16 | US only | weak metric |
+| `sCompressedTilemap_A5A3D5` | 2048 | 32 x 64 | 0.37 | US only |  |
+| `sCompressedTilemap_A5A6A0` | 3072 | 32 x 96 | 1.14 | US only | weak metric |
+| `sCompressedTilemap_A5AD17` | 2048 | 32 x 64 | 1.00 | US only |  |
+| `sCompressedTilemap_A5B042` | 2048 | 32 x 64 | 1.01 | US only |  |
+| `sCompressedTilemap_A5B361` | 2048 | 32 x 64 | 0.99 | US only |  |
+| `sCompressedTilemap_A5B63B` | 1024 | 32 x 32 | 1.03 | US only |  |
+| `sCompressedTilemap_A5B943` | 2048 | 32 x 64 | 1.07 | US only |  |
+| `sCompressedTilemap_A5BD8A` | 2048 | 32 x 64 | 1.05 | US only |  |
+| `sCompressedTilemap_A5C258` | 1024 | 32 x 32 | 0.93 | US only |  |
+| `sCompressedTilemap_A5C4CD` | 2048 | 32 x 64 | 1.02 | US only |  |
+| `sCompressedTilemap_A5C955` | 2048 | 32 x 64 | 0.00 | US only | blank, size default |
+| `sCompressedTilemap_A5CB05` | 2048 | 32 x 64 | - | US only | no tile set: size / content default |
+| `sCompressedTilemap_A5CD88` | 4096 | 64 x 64 | 1.21 | de,eu,jp | weak metric |
+| `sCompressedTilemap_A5D44C` | 4096 | 64 x 64 | 1.21 | US only | weak metric |
+| `sCompressedTilemap_A5D94A` | 4096 | 64 x 64 | - | de,eu,jp | no tile set: size / content default |
+| `sCompressedTilemap_A5DE84` | 4096 | 64 x 64 | 0.97 | jp |  |
+| `sCompressedTilemap_A5E253` | 1024 | 32 x 32 | 1.07 | US only |  |
+| `sCompressedTilemap_A5E5CE` | 1024 | 32 x 32 | 1.10 | US only |  |
+| `sCompressedTilemap_A5E977` | 1024 | 32 x 32 | 1.10 | US only |  |
+| `sCompressedTilemap_A5ECFB` | 1024 | 32 x 32 | 1.00 | US only |  |
+| `sCompressedTilemap_A5F059` | 1024 | 32 x 32 | 1.11 | US only |  |
+| `sCompressedTilemap_A5F45A` | 1024 | 32 x 32 | 1.36 | US only | metric high, image checked by eye |
+| `sCompressedTilemap_A5F671` | 1024 | 32 x 32 | 1.04 | US only |  |
+| `sCompressedTilemap_A5F95C` | 1024 | 32 x 32 | 1.14 | US only | weak metric |
+| `sCompressedTilemap_A5FBCE` | 1024 | 32 x 32 | 0.99 | US only |  |
+| `sCompressedTilemap_A68000` | 1024 | 32 x 32 | 1.01 | US only |  |
+| `sCompressedTilemap_A68229` | 1024 | 32 x 32 | 0.99 | US only |  |
+| `sCompressedTilemap_A68433` | 1024 | 32 x 32 | 0.92 | US only |  |
+| `sCompressedTilemap_A6867E` | 1024 | 32 x 32 | 0.98 | US only |  |
+| `sCompressedTilemap_A68864` | 1024 | 32 x 32 | 1.06 | US only |  |
+| `sCompressedTilemap_A68DCF` | 1024 | 32 x 32 | 0.99 | US only |  |
+| `sCompressedTilemap_A690A6` | 4096 | 64 x 64 | 0.72 | jp |  |
+| `sCompressedTilemap_A694EE` | 4096 | 64 x 64 | 0.77 | de,jp |  |
+| `sCompressedTilemap_A69996` | 4096 | 64 x 64 | 0.65 | US only |  |
+
+Still doubtful (cannot be decided from the picture alone):
+
+* `sCompressedTilemap_A5970F` (4096): a repeating pattern of very different tiles with logo blocks; no layout is smooth, 64 is the best
+  and the picture reads correctly by eye (the metric is not meaningful for it).
+* `sCompressedTilemap_A4A597`, `sCompressedTilemap_A5F45A`: high metric at every width, but the pictures read correctly (church interior, 32x64).
+* `sCompressedTilemap_A58000` (menu backgrounds, 4096): 32 x 128 scores 1.09, 64 wide 1.16, and a VRAM-paged 64x64 (four 32x32 screens) 1.08.
+  None is smooth; the table probably mixes several sub-pictures. It is stored with 32 columns (0.07 better than the 64-column default,
+  which is above the 0.05 margin); revisit when the menu code is understood.
+* Tables that are blank (all cells empty), `A59C08`, `A5A3D5`, `A5C4CD`, `A5AD17`..`A5BD8A` (2048 entries): 32 and 64 columns score the same; the
+  engine default (32) is kept. If one of them is ever shown it must be re-evaluated.
 
 ### Sidecar (`<label>.json`)
 | Key | Meaning |
 |---|---|
 | `bin`, `kind`, `compression` (`lzss`/`none`), `raw_size` | where the bytes go and the decompressed size |
 | `bpp`, `bpp_confidence`, `bpp_note`, `tiles_per_row` | how the sheet is laid out (tiles only) |
-| `columns`, `entries` | text layout (name tables only) |
+| `columns`, `entries` | text layout (name tables only; `columns` = row length, 32 / 64 / 128, see "Name table width") |
 | `tail_hex` / `tail_zeros` | bytes of the label span after the compressed stream, preserved exactly: 1-2 zero bytes on 9 blobs |
 | `vram_word_dest`, `map_entries`, `first_map`, `tile_sets` | informational, taken from the map table in `src/code/bank_80/tilemaps.asm` |
 | `palette` (`id`, `sub`) | palette file (`assets/gfx/palettes/<id>.json`) and sub-palette (16-colour row 0-7) written into the PNG viewing palette |

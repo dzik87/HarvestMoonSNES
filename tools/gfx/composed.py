@@ -332,6 +332,80 @@ def decode_sheets(ctx, raws):
 
 
 # ----------------------------------------------------------------------------------------------------------------------
+# name table width: continuity of the rendered image
+# ----------------------------------------------------------------------------------------------------------------------
+WIDTHS = (32, 64, 128)           # candidate row lengths (entries); the engine's map formats are 32x32 screens side by side
+WIDTH_MARGIN = 0.05              # another width must be this much more continuous to replace the default
+WIDTH_FAIL = 0.15                # `check`: declared width worse than the best candidate by more than this is an error
+WIDTH_BAD = 1.3                  # seam ratio above this: the table still looks wrong whatever the width
+
+
+KNOWN_COLUMNS = {"sCharactermap_A6A096": 64}      # not shown with any tile set: layout known from its content (a raw 64x32 BG name table)
+
+
+def default_columns(entries):
+    """row length the engine's map formats use for a name table of this size (strcDialogDisplay.mapMultiWidth in
+    src/code/bank_80/tilemaps.asm: 32 / 64 / 128 entries per row for 1 / 2 / 3+ screens wide)."""
+    return 128 if entries >= 8192 else 64 if entries == 4096 else 32
+
+
+def seam_ratio(img, w8, h8):
+    """discontinuity metric: share of differing neighbour pixels ACROSS 8x8 cell borders divided by the share inside cells.  A correctly
+    laid out picture has ~1 (borders are not special); a wrong row length places unrelated tiles side by side and gives clearly more.
+    0 = nothing to judge (blank / flat image)."""
+    bb = bt = ib = it = 0
+    for y in range(h8):
+        row = img[y * w8:(y + 1) * w8]
+        for x in range(1, w8):
+            d = (row[x - 1] & 15) != (row[x] & 15)
+            if x % 8 == 0:
+                bt += 1
+                bb += d
+            else:
+                it += 1
+                ib += d
+    for y in range(1, h8):
+        r0 = img[(y - 1) * w8:y * w8]
+        r1 = img[y * w8:(y + 1) * w8]
+        d = sum(1 for a, b in zip(r0, r1) if (a & 15) != (b & 15))
+        if y % 8 == 0:
+            bt += w8
+            bb += d
+        else:
+            it += w8
+            ib += d
+    if ib == 0:
+        return 0.0 if bb == 0 else 9.0
+    return (bb / bt) / (ib / it)
+
+
+def width_scores(scr, sheets):
+    """{row length: seam ratio} of the screen's name table laid out with each candidate width"""
+    out = {}
+    for c in WIDTHS:
+        s = Screen(scr.name, scr.table, c, scr.words, scr.sets, scr.pal, scr.targets)
+        out[c] = seam_ratio(render_screen(s, sheets), s.width, s.height)
+    return out
+
+
+def suggest_width(scores, entries):
+    best = min(scores, key=lambda c: (scores[c], c))
+    d = default_columns(entries)
+    return best if scores[d] - scores[best] >= WIDTH_MARGIN else d
+
+
+def table_widths(ctx, sheets, tables=None):
+    """{table: (declared, suggested, scores, shown)}; one entry per name table that is shown with a tile blob of this release."""
+    out = {}
+    for scr in ctx.screens:
+        if scr.table in out or (tables is not None and scr.table not in tables):
+            continue
+        sc = width_scores(scr, sheets)
+        out[scr.table] = (scr.cols, suggest_width(sc, len(scr.words)), sc, scr)
+    return out
+
+
+# ----------------------------------------------------------------------------------------------------------------------
 # claims from images (build) and edit claims (import)
 # ----------------------------------------------------------------------------------------------------------------------
 def screen_claims(ctx, scr, w, h, pix, claims, base=None):

@@ -9,7 +9,6 @@ sys.path.insert(0, os.path.join(ROOT, 'tools', 'gfx'))
 import tilemap_codec as tc  # noqa: E402
 
 # Data files that contain sCompressed* labels.
-GFX_GLOB = os.path.join(ROOT, 'src', 'data', 'gfx', '*', '*.asm')
 
 # Label span continues with non-compressed data after the blob (not a blob).
 TRAILING_DATA = {'sCompressedTilemap_A69996'}
@@ -20,13 +19,20 @@ VALID_SIZES = {0x800, 0x1000, 0x1800, 0x2000, 0x8000}
 
 
 def load_blobs():
+    """(label, bytes of the label span, span + the first 64 bytes of what follows) of every sCompressed* blob, from the generated
+    assets/gfx/{tiles,characters}/*.bin in ROM order (layout: assets/gfx/banks.json; run tools/build_assets.py first)."""
+    sys.path.insert(0, os.path.join(ROOT, 'tools', 'data'))
+    import gfxbanks
     blobs = []
-    for path in sorted(glob.glob(GFX_GLOB)):
-        raw = tc.parse_asm_blobs(path)
-        ext = tc.parse_asm_blobs(path, tail=64)
-        for label, data in raw.items():
-            if label.startswith('sCompressed'):
-                blobs.append((label, data, ext[label]))
+    layout = gfxbanks.load_layout()
+    for kind in ('tiles', 'characters'):
+        for bank, b in layout[kind].items():
+            names = [x.lstrip('*') for x in b['blobs']]
+            datas = [open(os.path.join(ROOT, 'assets', 'gfx', kind, n + '.bin'), 'rb').read() for n in names]
+            for i, (n, d) in enumerate(zip(names, datas)):
+                if n.startswith('sCompressed'):
+                    nxt = b''.join(datas[i + 1:])[:64]
+                    blobs.append((n, d, d + nxt))
     return blobs
 
 
@@ -73,7 +79,7 @@ def test_unit():
 
 def test_game_blobs():
     blobs = load_blobs()
-    check(blobs, 'no sCompressed blobs found under src/data/gfx')
+    check(blobs, 'no sCompressed blobs found in assets/gfx/banks.json')
     n_blobs = comp_total = decomp_total = exact = 0
     hidden_found = 0
     for label, raw, ext in blobs:
@@ -118,8 +124,7 @@ def test_game_blobs():
 
 
 def test_parse():
-    path = os.path.join(ROOT, 'src', 'data', 'gfx', 'tiles', 'bank_92.asm')
-    blobs = tc.parse_asm_blobs(path)
+    blobs = {l: d for l, d, _ in load_blobs()}
     check('sCompressedTiles_928000' in blobs, 'label missing')
     check(blobs['sCompressedTiles_928000'][:8] ==
           bytes([0, 0x20, 0, 0, 0, 0xBC, 0xFF, 0xFF]), 'first bytes')

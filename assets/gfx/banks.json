@@ -1,0 +1,355 @@
+{
+ "sprites": {
+  "88": {"org": "$888000", "pad": null, "blobs": [
+    "Sprites_888000"
+  ]},
+  "89": {"org": "$898000", "pad": null, "blobs": [
+    "Sprites_898000"
+  ]},
+  "8A": {"org": "$8A8000", "pad": null, "blobs": [
+    "Sprites_8A8000"
+  ]},
+  "8B": {"org": "$8B8000", "pad": null, "blobs": [
+    "Sprites_8B8000"
+  ]},
+  "8C": {"org": "$8C8000", "pad": null, "blobs": [
+    "Sprites_8C8000"
+  ]},
+  "8D": {"org": "$8D8000", "pad": null, "blobs": [
+    "Sprites_8D8000"
+  ]},
+  "8E": {"org": "$8E8000", "pad": null, "blobs": [
+    "Sprites_8E8000"
+  ]},
+  "8F": {"org": "$8F8000", "pad": null, "blobs": [
+    "Sprites_8F8000"
+  ]},
+  "90": {"org": "$908000", "pad": null, "blobs": [
+    "Sprites_908000"
+  ]},
+  "91": {"org": "$918000", "pad": null, "blobs": [
+    "Sprites_918000"
+  ]}
+ },
+ "tiles": {
+  "92": {"org": "$928000", "pad": 4534, "blobs": [
+    "sCompressedTiles_928000",
+    "sCompressedTiles_9282CB",
+    "sCompressedTiles_929D10",
+    "sCompressedTiles_92BB03",
+    "sCompressedTiles_92D3AB"
+  ]},
+  "93": {"org": "$938000", "pad": 2236, "blobs": [
+    "sCompressedTiles_938000",
+    "sCompressedTiles_939E8E",
+    "sCompressedTiles_93B736",
+    "sCompressedTiles_93D049",
+    "sCompressedTiles_93E12B"
+  ]},
+  "94": {"org": "$948000", "pad": "align", "blobs": [
+    "sCompressedTiles_948000",
+    "*sFontGlyphs_0x00",
+    "*sFontGlyphs_0x01",
+    "*sFontGlyphs_0x02",
+    "sFontGlyphs_0x03",
+    "sFontGlyphs_0x04",
+    "sFontGlyphs_0x05"
+  ]},
+  "95": {"org": "$958000", "pad": "align", "blobs": [
+    "sFontGlyphs_0x06",
+    "sFontGlyphs_0x07",
+    "sFontGlyphs_0x08",
+    "*sFontGlyphs_0x09",
+    "sCompressedTiles_95C000",
+    "sCompressedTiles_95D6E2",
+    "sCompressedTiles_95E8A3"
+  ]},
+  "96": {"org": "$968000", "pad": 2724, "blobs": [
+    "sCompressedTiles_968000",
+    "sCompressedTiles_969437",
+    "sCompressedTiles_96AD11",
+    "sCompressedTiles_96C489",
+    "sCompressedTiles_96DC6D"
+  ]},
+  "97": {"org": "$978000", "pad": 974, "blobs": [
+    "sCompressedTiles_978000",
+    "sCompressedTiles_979A88",
+    "sCompressedTiles_97B11A",
+    "sCompressedTiles_97B45F",
+    "sCompressedTiles_97CD20",
+    "sCompressedTiles_97E7A2"
+  ]},
+  "98": {"org": "$988000", "pad": 1666, "blobs": [
+    "sCompressedTiles_988000",
+    "sCompressedTiles_989A52",
+    "sCompressedTiles_98AEDB",
+    "sCompressedTiles_98CC6B",
+    "sCompressedTiles_98E41D"
+  ]},
+  "99": {"org": "$998000", "pad": 3786, "blobs": [
+    "sCompressedTiles_998000",
+    "sCompressedTiles_999A74",
+    "sCompressedTiles_99AEC3",
+    "sCompressedTiles_99C3F2",
+    "sCompressedTiles_99DCBD"
+  ]},
+  "9A": {"org": "$9A8000", "pad": "align", "blobs": [
+    "sCompressedTiles_9A8000",
+    "sCompressedTiles_9A9921",
+    "sCompressedTiles_9AAEAB",
+    "*sCompressedTiles_9ABF97",
+    "*sCompressedTiles_9AC489",
+    "*sCompressedTiles_9ACB41",
+    "*sCompressedTiles_9AD357",
+    "sCompressedTiles_9AE02D"
+  ]},
+  "9B": {"org": "$9B8000", "pad": "align", "blobs": [
+    "*sCompressedTiles_9B8000",
+    "sCompressedTiles_9B8441",
+    "sCompressedTiles_9B86AD",
+    "sCompressedTiles_9B9F53",
+    "sCompressedTiles_9BB76D",
+    "sCompressedTiles_9BCF8F"
+  ]},
+  "9C": {"org": "$9C8000", "pad": 74, "blobs": [
+    "sCompressedTiles_9C8000",
+    "sCompressedTiles_9C965F",
+    "sCompressedTiles_9CA40C",
+    "sFontGlyphs_UNK",
+    "sCompressedTiles_9CCBA3",
+    "sCompressedTiles_9CE37D"
+  ]},
+  "9D": {"org": "$9D8000", "pad": 88, "blobs": [
+    "sCompressedTiles_9D8000",
+    "sCompressedTiles_9D991C",
+    "sCompressedTiles_9DB15E",
+    "sCompressedTiles_9DCE31",
+    "sCompressedTiles_9DE7CE"
+  ]},
+  "9E": {"org": "$9E8000", "pad": "align", "blobs": [
+    "sCompressedTiles_9E8000",
+    "sCompressedTiles_9E9C6D",
+    "sCompressedTiles_9E9EDC",
+    "sCompressedTiles_9EB75D",
+    "sCompressedTiles_9ED208",
+    "*sCompressedTiles_9EEB3D"
+  ]},
+  "9F": {"org": "$9F8000", "pad": "align", "blobs": [
+    "*sCompressedTiles_9F8000",
+    "*sCompressedTiles_9F946C",
+    "*sCompressedTiles_9FAA75",
+    "*sCompressedTiles_9FC04C",
+    "sCompressedTiles_9FD4DA",
+    "*sCompressedTiles_9FEF97"
+  ]},
+  "A0": {"org": "$A08000", "pad": 822, "blobs": [
+    "sCompressedTiles_A08000",
+    "sCompressedTiles_A088E9",
+    "sCompressedTiles_A09232",
+    "sCompressedTiles_A0AB1E",
+    "sCompressedTiles_A0CAAF",
+    "sCompressedTiles_A0E682"
+  ]}
+ },
+ "characters": {
+  "A1": {"org": "$A18000", "pad": null, "blobs": [
+    "sCharactermap_A18000"
+  ]},
+  "A2": {"org": "$A28000", "pad": 8256, "blobs": [
+    "sCharactermap_A28000"
+  ]},
+  "A3": {"org": "$A38000", "pad": null, "blobs": [
+    "sCharactermap_A38000"
+  ]},
+  "A4": {"org": "$A48000", "pad": 738, "blobs": [
+    "sCompressedTilemap_A48000",
+    "sCompressedTilemap_A481AE",
+    "sCompressedTilemap_A48A2D",
+    "sCompressedTilemap_A4945C",
+    "sCompressedTilemap_A49745",
+    "sCompressedTilemap_A49B84",
+    "sCompressedTilemap_A49E2E",
+    "sCompressedTilemap_A4A597",
+    "sCompressedTilemap_A4AA99",
+    "sCompressedTilemap_A4AE95",
+    "sCompressedTilemap_A4B3D1",
+    "sCompressedTilemap_A4B8E0",
+    "sCompressedTilemap_A4BCC1",
+    "sCompressedTilemap_A4C065",
+    "sCompressedTilemap_A4C3E2",
+    "sCompressedTilemap_A4C5DE",
+    "sCompressedTilemap_A4CFAB",
+    "sCompressedTilemap_A4D379",
+    "sCompressedTilemap_A4DC7E"
+  ]},
+  "A5": {"org": "$A58000", "pad": "align", "blobs": [
+    "*sCompressedTilemap_A58000",
+    "sCompressedTilemap_A58327",
+    "sCompressedTilemap_A58B49",
+    "*sCompressedTilemap_A58D8E",
+    "*sCompressedTilemap_A5970F",
+    "*sCompressedTilemap_A59C08",
+    "sCompressedTilemap_A59E0B",
+    "sCompressedTilemap_A5A3D5",
+    "sCompressedTilemap_A5A6A0",
+    "sCompressedTilemap_A5AD17",
+    "sCompressedTilemap_A5B042",
+    "sCompressedTilemap_A5B361",
+    "sCompressedTilemap_A5B63B",
+    "sCompressedTilemap_A5B943",
+    "sCompressedTilemap_A5BD8A",
+    "sCompressedTilemap_A5C258",
+    "sCompressedTilemap_A5C4CD",
+    "sCompressedTilemap_A5C955",
+    "sCompressedTilemap_A5CB05",
+    "*sCompressedTilemap_A5CD88",
+    "sCompressedTilemap_A5D44C",
+    "*sCompressedTilemap_A5D94A",
+    "*sCompressedTilemap_A5DE84",
+    "sCompressedTilemap_A5E253",
+    "sCompressedTilemap_A5E5CE",
+    "sCompressedTilemap_A5E977",
+    "sCompressedTilemap_A5ECFB",
+    "sCompressedTilemap_A5F059",
+    "sCompressedTilemap_A5F45A",
+    "sCompressedTilemap_A5F671",
+    "sCompressedTilemap_A5F95C",
+    "sCompressedTilemap_A5FBCE"
+  ]},
+  "A6": {"org": "$A68000", "pad": "align", "blobs": [
+    "sCompressedTilemap_A68000",
+    "sCompressedTilemap_A68229",
+    "sCompressedTilemap_A68433",
+    "sCompressedTilemap_A6867E",
+    "sCompressedTilemap_A68864",
+    "sCompressedTilemap_A68DCF",
+    "*sCompressedTilemap_A690A6",
+    "*sCompressedTilemap_A694EE",
+    "sCompressedTilemap_A69996",
+    "sCharactermap_A6A096"
+  ]}
+ },
+ "palettes": {
+  "A8": {"org": "$A88000", "pad": null, "blobs": [
+    "sPalette_0x00",
+    "sPalette_0x01",
+    "sPalette_0x02",
+    "sPalette_0x03",
+    "sPalette_0x04",
+    "sPalette_0x05",
+    "sPalette_0x06",
+    "sPalette_0x07",
+    "sPalette_0x08",
+    "sPalette_0x09",
+    "sPalette_0x0A",
+    "sPalette_0x0B",
+    "sPalette_0x0C",
+    "sPalette_0x0D",
+    "sPalette_0x0E",
+    "sPalette_0x0F",
+    "sPalette_0x10",
+    "sPalette_0x11",
+    "sPalette_0x12",
+    "sPalette_0x13",
+    "sPalette_0x14",
+    "sPalette_0x15",
+    "sPalette_0x16",
+    "sPalette_0x17",
+    "sPalette_0x18",
+    "sPalette_0x19",
+    "sPalette_0x1A",
+    "sPalette_0x1B",
+    "sPalette_0x1C",
+    "sPalette_0x1D",
+    "sPalette_0x1E",
+    "sPalette_0x1F",
+    "sPalette_0x20",
+    "sPalette_0x21",
+    "sPalette_0x22",
+    "sPalette_0x23",
+    "sPalette_0x24",
+    "sPalette_0x25",
+    "sPalette_0x26",
+    "sPalette_0x27",
+    "sPalette_0x28",
+    "sPalette_0x29",
+    "sPalette_0x2A",
+    "sPalette_0x2B",
+    "sPalette_0x2C",
+    "sPalette_0x2D",
+    "sPalette_0x2E",
+    "sPalette_0x2F",
+    "sPalette_0x30",
+    "sPalette_0x31",
+    "sPalette_0x32",
+    "sPalette_0x33",
+    "sPalette_0x34",
+    "sPalette_0x35",
+    "sPalette_0x36",
+    "sPalette_0x37",
+    "sPalette_0x38",
+    "sPalette_0x39",
+    "sPalette_0x3A",
+    "sPalette_0x3B",
+    "sPalette_0x3C",
+    "sPalette_0x3D",
+    "sPalette_0x3E",
+    "sPalette_0x3F"
+  ]},
+  "A9": {"org": "$A98000", "pad": 5632, "blobs": [
+    "sPalette_0x40",
+    "sPalette_0x41",
+    "sPalette_0x42",
+    "sPalette_0x43",
+    "sPalette_0x44",
+    "sPalette_0x45",
+    "*sPalette_0x46",
+    "sPalette_0x47",
+    "sPalette_0x48",
+    "sPalette_0x49",
+    "sPalette_0x4A",
+    "sPalette_0x4B",
+    "sPalette_0x4C",
+    "sPalette_0x4D",
+    "sPalette_0x4E",
+    "sPalette_0x4F",
+    "sPalette_0x50",
+    "sPalette_0x51",
+    "sPalette_0x52",
+    "sPalette_0x53",
+    "sPalette_0x54",
+    "sPalette_0x55",
+    "sPalette_0x56",
+    "sPalette_0x57",
+    "sPalette_0x58",
+    "sPalette_0x59",
+    "sPalette_0x5A",
+    "sPalette_0x5B",
+    "sPalette_0x5C",
+    "sPalette_0x5D",
+    "sPalette_0x5E",
+    "sPalette_0x5F",
+    "sPalette_0x60",
+    "sPalette_0x61",
+    "sPalette_0x62",
+    "sPalette_0x63",
+    "sPalette_0x64",
+    "sPalette_0x65",
+    "sPalette_0x66",
+    "sPalette_0x67",
+    "sPalette_0x68",
+    "sPalette_0x69",
+    "sPalette_0x6A",
+    "sPalette_0x6B",
+    "*sPalette_0x6C",
+    "*sPalette_0x6D",
+    "sPalette_0x6E",
+    "sPalette_0x6F",
+    "sPalette_0x70",
+    "sPalette_0x71",
+    "sPalette_0x72",
+    "sPalette_0x73",
+    "sPalette_0x74"
+  ]}
+ }
+}

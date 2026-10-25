@@ -8,8 +8,8 @@ The format is a textbook LZSS (Haruhiko Okumura's `LZSS.C`) with a 2048-byte rin
 buffer, 3..34 byte matches, LSB-first flag bytes where `1` means literal, a
 4-byte header and no end marker (the output size in the header terminates the
 stream). It is used for every `sCompressedTiles_*` and
-`sCompressedTilemap_*` blob (banks $92-$A6, `src/data/gfx/tiles/` and
-`src/data/gfx/characters/`). Despite the name, several of these blobs are plain
+`sCompressedTilemap_*` blob (banks $92-$A6, layout in `assets/gfx/banks.json`, generated asm in `build/gen/gfx/tiles/` and
+`build/gen/gfx/characters/`). Despite the name, several of these blobs are plain
 tile maps for BG layers, others are character (tile graphics) data; the codec
 does not care.
 
@@ -161,7 +161,7 @@ decoder also accepts streams from other encoders.)
 
 ## Statistics
 
-Counted by `tests/test_tilemap_codec.py` (source: `src/data/gfx/*/*.asm`):
+Counted by `tests/test_tilemap_codec.py` (source: the generated `assets/gfx/{tiles,characters}/*.bin` in the order of `assets/gfx/banks.json`):
 
 | Item                                   | Value            |
 |----------------------------------------|------------------|
@@ -180,7 +180,6 @@ x 24, 4096 B x 17 (1 Tiles, 16 Tilemap), 6144 B x 2, 32768 B x 1
 ## Using the tool
 
 ```
-python3 tools/gfx/tilemap_codec.py decompress src/data/gfx/tiles/bank_92.asm --outdir build/tilemaps
 python3 tests/test_tilemap_codec.py
 ```
 
@@ -200,7 +199,7 @@ original labels used the opposite of the usual SNES terminology (tile graphics w
 | `sCompressedTilemap_*` | `assets/gfx/characters` | 60    | **BG name tables**: 16-bit entries (tile bits 0-9, palette 10-12, priority 13, flips 14/15). Sizes 2048, 4096, 6144, 8192, 32768. |
 
 The directory `assets/gfx/characters` (banks $A1-$A6) also holds non-compressed character graphics, so it keeps its name.
-`gfxpipe.py export` writes name tables as readable `.map.txt` files (32 entries per row) and PNG
+`gfxpipe.py export` writes name tables as readable `.map.txt` files (32, 64 or 128 entries per row, see `docs/formats/graphics-png.md`, "Name table width") and PNG
 sheets only for tile blobs. The bitplane depth of individual tile blobs was verified visually on
 samples only; the 4096-byte `sCompressedTiles_928000` (rain overlay, 83% zero 16-byte blocks) is
 likely 2bpp.
