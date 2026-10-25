@@ -34,15 +34,15 @@ There are 65 blobs (not 71). Every blob is referenced from code, none is unused.
 
 | Label | ROM | Size | Role | Details |
 |---|---|---:|---|---|
-| `sAudioTrack_AD8000` | $AD:8000 | 4054 ($FD6) | SPC700 engine/driver | boot upload (IPL protocol) of $0FD6 bytes to SPC $0500, then execution starts there |
+| `sAudioSpcDriver` | $AD:8000 | 4054 ($FD6) | SPC700 engine/driver | boot upload (IPL protocol) of $0FD6 bytes to SPC $0500, then execution starts there |
 | `sAudioTrack_Spring` | $AD:8FD6 | 748 ($2EC) | track data | track id 0/1; cmd 5 -> SPC $19F4; sample ids $07,$03,$01,$0C,$05,$26,$24 |
 | `sAudioTrack_Winter` | $AD:92C2 | 694 ($2B6) | track data | track id 4; cmd 5 -> SPC $19F4; sample ids $03,$07,$01 |
 | `sAudioTrack_TrollsCave` | $AD:9578 | 754 ($2F2) | track data | track id 15; cmd 5 -> SPC $19F4; sample ids $05,$0B,$01,$08 |
 | `sAudioTrack_StarNightFestival` | $AD:986A | 573 ($23D) | track data | track id 14; cmd 5 -> SPC $19F4; sample ids $05 |
-| `sAudioTrack_AD9AA7` | $AD:9AA7 | 1091 ($443) | track data | track id 5; cmd 5 -> SPC $19F4; sample ids $05,$01,$07 |
+| `sAudioTrack_Id05` | $AD:9AA7 | 1091 ($443) | track data | track id 5; cmd 5 -> SPC $19F4; sample ids $05,$01,$07 |
 | `sAudioTrack_BadEnding` | $AD:9EEA | 275 ($113) | track data | track id 17; cmd 5 -> SPC $19F4; sample ids $05,$03,$07 |
 | `sAudioTrack_HarvestFestival` | $AD:9FFD | 939 ($3AB) | track data | track id 3; cmd 5 -> SPC $19F4; sample ids $03,$07,$01,$16,$05 |
-| `sAudioTrack_ADA3A8` | $AD:A3A8 | 465 ($1D1) | track data | track id 12; cmd 5 -> SPC $19F4; sample ids $05,$07,$01 |
+| `sAudioTrack_Id12` | $AD:A3A8 | 465 ($1D1) | track data | track id 12; cmd 5 -> SPC $19F4; sample ids $05,$07,$01 |
 | `sAudioTrack_Ending` | $AD:A579 | 1077 ($435) | track data | track id 16; cmd 5 -> SPC $19F4; sample ids $05,$01,$0C |
 | `sAudioTrack_Church` | $AD:A9AE | 608 ($260) | track data | track id 9; cmd 5 -> SPC $19F4; sample ids $02 |
 | `sAudioTrack_Mountain` | $AD:AC0E | 921 ($399) | track data | track id 6; cmd 5 -> SPC $19F4; sample ids $03,$07,$01 |
@@ -54,65 +54,65 @@ There are 65 blobs (not 71). Every blob is referenced from code, none is unused.
 | `sAudioTrack_NamingScreen` | $AD:BE06 | 410 ($19A) | track data | track id 10; cmd 5 -> SPC $19F4; sample ids $05,$07 |
 | `sAudioTrack_Title` | $AD:BFA0 | 398 ($18E) | track data | track id 11; cmd 5 -> SPC $19F4; sample ids $05,$01,$07 |
 | `sAudioTrack_Rain` | $AD:C12E | 122 ($7A) | track data | track id 19; cmd 5 -> SPC $19F4; sample ids $0D |
-| `sAudioTrack_ADC1A8` | $AD:C1A8 | 128 ($80) | track data | track id 20; cmd 5 -> SPC $19F4; sample ids $0D |
-| `sAudioTrack_ADC228` | $AD:C228 | 219 ($DB) | track data | track id 21; cmd 5 -> SPC $19F4; sample ids $15,$0D,$18 |
+| `sAudioTrack_Id20` | $AD:C1A8 | 128 ($80) | track data | track id 20; cmd 5 -> SPC $19F4; sample ids $0D |
+| `sAudioTrack_Id21` | $AD:C228 | 219 ($DB) | track data | track id 21; cmd 5 -> SPC $19F4; sample ids $15,$0D,$18 |
 | `sAudioTrack_Hurricane` | $AD:C303 | 286 ($11E) | track data | track id 22; cmd 5 -> SPC $19F4; sample ids $10 |
-| `sAudioTrack_ADC421` | $AD:C421 | 176 ($B0) | track data | track id 23; cmd 5 -> SPC $19F4; sample ids $1D |
+| `sAudioTrack_Id23` | $AD:C421 | 176 ($B0) | track data | track id 23; cmd 5 -> SPC $19F4; sample ids $1D |
 | `sAudioTrack_Bell` | $AD:C4D1 | 92 ($5C) | track data | track id 24; cmd 5 -> SPC $19F4; sample ids $1D |
-| `sAudioTrack_ADC52D` | $AD:C52D | 188 ($BC) | track data | track id 25; cmd 5 -> SPC $19F4; sample ids $13,$15 |
-| `sAudioTrack_ADC5E9` | $AD:C5E9 | 4288 ($10C0) | BRR sample | sample id 0/1; 476 BRR blocks, loop @block 48, ADSR FF E0, GAIN B8, tuning 5+20/256 |
-| `sAudioTrack_ADD6A9` | $AD:D6A9 | 2992 ($BB0) | BRR sample | sample id 3; 331 BRR blocks, loop @block 167, ADSR FF E3, GAIN B8, tuning 1+E0/256 |
-| `sAudioTrack_ADE259` | $AD:E259 | 1920 ($780) | BRR sample | sample id 4; 212 BRR blocks, loop @block 206, ADSR FF EF, GAIN B8, tuning 5+F0/256 |
-| `sAudioTrack_ADE9D9` | $AD:E9D9 | 3344 ($D10) | BRR sample | sample id 5; 371 BRR blocks, loop @block 226, ADSR FF EB, GAIN B8, tuning 3+E0/256 |
-| `sAudioTrack_ADF6E9` | $AD:F6E9 | 64 ($40) | BRR sample (common) | sample id 6; 7 BRR blocks, loop @block 3, ADSR FF E0, GAIN B8, tuning 4+00/256 |
-| `sAudioTrack_ADF729` | $AD:F729 | 1648 ($670) | BRR sample | sample id 13; 182 BRR blocks, loop @block 3, ADSR FF E0, GAIN B8, tuning 1+30/256 |
-| `sAudioTrack_AE8000` | $AE:8000 | 12000 ($2EE0) | BRR sample | sample id 2; 1332 BRR blocks, loop @block 70, ADSR FF E0, GAIN B8, tuning 6+B0/256 |
-| `sAudioTrack_AEAEE0` | $AE:AEE0 | 7984 ($1F30) | BRR sample | sample id 7; 887 BRR blocks, loop @block 172, ADSR FF E0, GAIN B8, tuning 5+A0/256 |
-| `sAudioTrack_AECE10` | $AE:CE10 | 6480 ($1950) | BRR sample | sample id 8; 720 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 5+A0/256 |
-| `sAudioTrack_AEE760` | $AE:E760 | 720 ($2D0) | BRR sample (common) | sample id 10; 79 BRR blocks, loop @block 75, ADSR FF EE, GAIN B8, tuning 3+F0/256 |
-| `sAudioTrack_AEEA30` | $AE:EA30 | 832 ($340) | BRR sample | sample id 12; 91 BRR blocks, loop @block 57, ADSR FF E9, GAIN B8, tuning 1+E0/256 |
-| `sAudioTrack_AEED70` | $AE:ED70 | 3488 ($DA0) | BRR sample | sample id 14; 387 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 7+A0/256 |
-| `sAudioTrack_AF8000` | $AF:8000 | 4864 ($1300) | BRR sample | sample id 9; 540 BRR blocks, loop @block 536, ADSR 86 EB, GAIN B8, tuning 4+00/256 |
-| `sAudioTrack_AF9300` | $AF:9300 | 7040 ($1B80) | BRR sample | sample id 11; 782 BRR blocks, loop @block 390, ADSR FF E0, GAIN B8, tuning 3+50/256 |
-| `sAudioTrack_AFAE80` | $AF:AE80 | 4672 ($1240) | BRR sample | sample id 15; 519 BRR blocks, loop @block 3, ADSR FF E0, GAIN B8, tuning 0+D0/256 |
-| `sAudioTrack_AFC0C0` | $AF:C0C0 | 4000 ($FA0) | BRR sample | sample id 16; 444 BRR blocks, loop @block 137, ADSR FF E0, GAIN B8, tuning 0+B0/256 |
-| `sAudioTrack_AFD060` | $AF:D060 | 2000 ($7D0) | BRR sample | sample id 17; 222 BRR blocks, loop @block 3, ADSR FF E0, GAIN B8, tuning 0+50/256 |
-| `sAudioTrack_AFD830` | $AF:D830 | 6976 ($1B40) | BRR sample | sample id 18; 775 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 3+C0/256 |
-| `sAudioTrack_AFF370` | $AF:F370 | 1712 ($6B0) | BRR sample | sample id 20; 190 BRR blocks, loop @block 3, ADSR FF E0, GAIN B8, tuning 0+90/256 |
-| `sAudioTrack_AFFA20` | $AF:FA20 | 1248 ($4E0) | BRR sample (common) | sample id 25; 138 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 7+A0/256 |
-| `sAudioTrack_B08000` | $B0:8000 | 7984 ($1F30) | BRR sample | sample id 19; 886 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 7+A0/256 |
-| `sAudioTrack_B09F30` | $B0:9F30 | 6464 ($1940) | BRR sample (common) | sample id 21; 718 BRR blocks, no loop, ADSR FF E9, GAIN B8, tuning 1+E0/256 |
-| `sAudioTrack_B0B870` | $B0:B870 | 1840 ($730) | BRR sample | sample id 22; 204 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 7+A0/256 |
-| `sAudioTrack_B0BFA0` | $B0:BFA0 | 992 ($3E0) | BRR sample (common) | sample id 23; 109 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 4+20/256 |
-| `sAudioTrack_B0C380` | $B0:C380 | 4992 ($1380) | BRR sample (common) | sample id 24; 553 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 5+20/256 |
-| `sAudioTrack_B0D700` | $B0:D700 | 3200 ($C80) | BRR sample (common) | sample id 26; 354 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 7+A0/256 |
-| `sAudioTrack_B0E380` | $B0:E380 | 3984 ($F90) | BRR sample | sample id 27; 442 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 1+50/256 |
-| `sAudioTrack_B18000` | $B1:8000 | 3664 ($E50) | BRR sample | sample id 28; 406 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 7+A0/256 |
-| `sAudioTrack_B18E50` | $B1:8E50 | 15984 ($3E70) | BRR sample | sample id 29; 1775 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 5+40/256 |
-| `sAudioTrack_B1CCC0` | $B1:CCC0 | 3984 ($F90) | BRR sample | sample id 30; 442 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 1+C0/256 |
-| `sAudioTrack_B1DC50` | $B1:DC50 | 2992 ($BB0) | BRR sample | sample id 31; 331 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 1+10/256 |
-| `sAudioTrack_B1E800` | $B1:E800 | 2992 ($BB0) | BRR sample | sample id 32; 331 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 0+B0/256 |
-| `sAudioTrack_B1F3B0` | $B1:F3B0 | 2992 ($BB0) | BRR sample | sample id 33; 331 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 2+90/256 |
-| `sAudioTrack_B28000` | $B2:8000 | 4992 ($1380) | BRR sample | sample id 36; 553 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 1+A0/256 |
-| `sAudioTrack_B29380` | $B2:9380 | 2992 ($BB0) | BRR sample | sample id 34; 332 BRR blocks, loop @block 2, ADSR FF E0, GAIN B8, tuning 0+20/256 |
-| `sAudioTrack_B29F30` | $B2:9F30 | 1984 ($7C0) | BRR sample | sample id 35; 220 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 1+10/256 |
-| `sAudioTrack_B2A6F0` | $B2:A6F0 | 832 ($340) | BRR sample | sample id 37; 91 BRR blocks, loop @block 57, ADSR FF E9, GAIN B8, tuning 1+E0/256 |
-| `sAudioTrack_B2AA30` | $B2:AA30 | 1984 ($7C0) | BRR sample | sample id 38; 220 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 1+00/256 |
-| `sAudioTrack_B2B1F0` | $B2:B1F0 | 8992 ($2320) | BRR sample | sample id 39; 886 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 1+E0/256 |
+| `sAudioTrack_Id25` | $AD:C52D | 188 ($BC) | track data | track id 25; cmd 5 -> SPC $19F4; sample ids $13,$15 |
+| `sAudioSample_Id00` | $AD:C5E9 | 4288 ($10C0) | BRR sample | sample id 0/1; 476 BRR blocks, loop @block 48, ADSR FF E0, GAIN B8, tuning 5+20/256 |
+| `sAudioSample_Id03` | $AD:D6A9 | 2992 ($BB0) | BRR sample | sample id 3; 331 BRR blocks, loop @block 167, ADSR FF E3, GAIN B8, tuning 1+E0/256 |
+| `sAudioSample_Id04` | $AD:E259 | 1920 ($780) | BRR sample | sample id 4; 212 BRR blocks, loop @block 206, ADSR FF EF, GAIN B8, tuning 5+F0/256 |
+| `sAudioSample_Id05` | $AD:E9D9 | 3344 ($D10) | BRR sample | sample id 5; 371 BRR blocks, loop @block 226, ADSR FF EB, GAIN B8, tuning 3+E0/256 |
+| `sAudioSample_Id06` | $AD:F6E9 | 64 ($40) | BRR sample (common) | sample id 6; 7 BRR blocks, loop @block 3, ADSR FF E0, GAIN B8, tuning 4+00/256 |
+| `sAudioSample_Id13` | $AD:F729 | 1648 ($670) | BRR sample | sample id 13; 182 BRR blocks, loop @block 3, ADSR FF E0, GAIN B8, tuning 1+30/256 |
+| `sAudioSample_Id02` | $AE:8000 | 12000 ($2EE0) | BRR sample | sample id 2; 1332 BRR blocks, loop @block 70, ADSR FF E0, GAIN B8, tuning 6+B0/256 |
+| `sAudioSample_Id07` | $AE:AEE0 | 7984 ($1F30) | BRR sample | sample id 7; 887 BRR blocks, loop @block 172, ADSR FF E0, GAIN B8, tuning 5+A0/256 |
+| `sAudioSample_Id08` | $AE:CE10 | 6480 ($1950) | BRR sample | sample id 8; 720 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 5+A0/256 |
+| `sAudioSample_Id10` | $AE:E760 | 720 ($2D0) | BRR sample (common) | sample id 10; 79 BRR blocks, loop @block 75, ADSR FF EE, GAIN B8, tuning 3+F0/256 |
+| `sAudioSample_Id12` | $AE:EA30 | 832 ($340) | BRR sample | sample id 12; 91 BRR blocks, loop @block 57, ADSR FF E9, GAIN B8, tuning 1+E0/256 |
+| `sAudioSample_Id14` | $AE:ED70 | 3488 ($DA0) | BRR sample | sample id 14; 387 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 7+A0/256 |
+| `sAudioSample_Id09` | $AF:8000 | 4864 ($1300) | BRR sample | sample id 9; 540 BRR blocks, loop @block 536, ADSR 86 EB, GAIN B8, tuning 4+00/256 |
+| `sAudioSample_Id11` | $AF:9300 | 7040 ($1B80) | BRR sample | sample id 11; 782 BRR blocks, loop @block 390, ADSR FF E0, GAIN B8, tuning 3+50/256 |
+| `sAudioSample_Id15` | $AF:AE80 | 4672 ($1240) | BRR sample | sample id 15; 519 BRR blocks, loop @block 3, ADSR FF E0, GAIN B8, tuning 0+D0/256 |
+| `sAudioSample_Id16` | $AF:C0C0 | 4000 ($FA0) | BRR sample | sample id 16; 444 BRR blocks, loop @block 137, ADSR FF E0, GAIN B8, tuning 0+B0/256 |
+| `sAudioSample_Id17` | $AF:D060 | 2000 ($7D0) | BRR sample | sample id 17; 222 BRR blocks, loop @block 3, ADSR FF E0, GAIN B8, tuning 0+50/256 |
+| `sAudioSample_Id18` | $AF:D830 | 6976 ($1B40) | BRR sample | sample id 18; 775 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 3+C0/256 |
+| `sAudioSample_Id20` | $AF:F370 | 1712 ($6B0) | BRR sample | sample id 20; 190 BRR blocks, loop @block 3, ADSR FF E0, GAIN B8, tuning 0+90/256 |
+| `sAudioSample_Id25` | $AF:FA20 | 1248 ($4E0) | BRR sample (common) | sample id 25; 138 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 7+A0/256 |
+| `sAudioSample_Id19` | $B0:8000 | 7984 ($1F30) | BRR sample | sample id 19; 886 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 7+A0/256 |
+| `sAudioSample_Id21` | $B0:9F30 | 6464 ($1940) | BRR sample (common) | sample id 21; 718 BRR blocks, no loop, ADSR FF E9, GAIN B8, tuning 1+E0/256 |
+| `sAudioSample_Id22` | $B0:B870 | 1840 ($730) | BRR sample | sample id 22; 204 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 7+A0/256 |
+| `sAudioSample_Id23` | $B0:BFA0 | 992 ($3E0) | BRR sample (common) | sample id 23; 109 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 4+20/256 |
+| `sAudioSample_Id24` | $B0:C380 | 4992 ($1380) | BRR sample (common) | sample id 24; 553 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 5+20/256 |
+| `sAudioSample_Id26` | $B0:D700 | 3200 ($C80) | BRR sample (common) | sample id 26; 354 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 7+A0/256 |
+| `sAudioSample_Id27` | $B0:E380 | 3984 ($F90) | BRR sample | sample id 27; 442 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 1+50/256 |
+| `sAudioSample_Id28` | $B1:8000 | 3664 ($E50) | BRR sample | sample id 28; 406 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 7+A0/256 |
+| `sAudioSample_Id29` | $B1:8E50 | 15984 ($3E70) | BRR sample | sample id 29; 1775 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 5+40/256 |
+| `sAudioSample_Id30` | $B1:CCC0 | 3984 ($F90) | BRR sample | sample id 30; 442 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 1+C0/256 |
+| `sAudioSample_Id31` | $B1:DC50 | 2992 ($BB0) | BRR sample | sample id 31; 331 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 1+10/256 |
+| `sAudioSample_Id32` | $B1:E800 | 2992 ($BB0) | BRR sample | sample id 32; 331 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 0+B0/256 |
+| `sAudioSample_Id33` | $B1:F3B0 | 2992 ($BB0) | BRR sample | sample id 33; 331 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 2+90/256 |
+| `sAudioSample_Id36` | $B2:8000 | 4992 ($1380) | BRR sample | sample id 36; 553 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 1+A0/256 |
+| `sAudioSample_Id34` | $B2:9380 | 2992 ($BB0) | BRR sample | sample id 34; 332 BRR blocks, loop @block 2, ADSR FF E0, GAIN B8, tuning 0+20/256 |
+| `sAudioSample_Id35` | $B2:9F30 | 1984 ($7C0) | BRR sample | sample id 35; 220 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 1+10/256 |
+| `sAudioSample_Id37` | $B2:A6F0 | 832 ($340) | BRR sample | sample id 37; 91 BRR blocks, loop @block 57, ADSR FF E9, GAIN B8, tuning 1+E0/256 |
+| `sAudioSample_Id38` | $B2:AA30 | 1984 ($7C0) | BRR sample | sample id 38; 220 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 1+00/256 |
+| `sAudioSample_Id39` | $B2:B1F0 | 8992 ($2320) | BRR sample | sample id 39; 886 BRR blocks, no loop, ADSR FF E0, GAIN B8, tuning 1+E0/256 |
 | (inside previous) | $B2:D120 | 1010 ($3F2) | SFX block (pointer table + streams) | cmd 1 -> SPC $1600; 50 SFX pointers; last 2 byte(s) come from padding after the label |
 
 Role summary (counts verified by `audio_map.py --check`):
 
 | Role | Blobs | Uploaded by |
 |---|---:|---|
-| SPC700 engine | 1 (`sAudioTrack_AD8000`) | `fAudio_UploadData` (boot, IPL protocol) |
+| SPC700 engine | 1 (`sAudioSpcDriver`) | `fAudio_UploadData` (boot, IPL protocol) |
 | Track (song) data | 25 distinct (26 table entries, entry 0 duplicates entry 1) | command 5, `fAudio_UploadTrackData` |
 | BRR samples | 39 distinct (40 table entries, entry 0 duplicates entry 1) | commands 2/3, `fAudio_LoadCommonSamples`, `fAudio_LoadTrackSamples`, `fAudio_LoadSfxSample` |
 | SFX block | 1, at `$B2:D120`, `$3F2` bytes | command 1, `fAudio_UploadSpcDataBlock_B2D120` |
 
 Two details worth knowing [C]:
 
-- The SFX block starts at offset `$1F30` of `sAudioTrack_B2B1F0`, exactly after that blob's BRR data (sample `$27`, size
+- The SFX block starts at offset `$1F30` of `sAudioSample_Id39`, exactly after that blob's BRR data (sample `$27`, size
   `$1F30`). The block is `$3F2` bytes long but only `$3F0` (1008) bytes belong to the asset; the last two bytes are
   the zero fill that follows the label in `bank_B2.asm`. They are the terminators `00 00` of the last SFX stream.
 - Every size in `aAudioSampleSize` is a multiple of 16: a BRR stream ends at the first block with the end flag and the
@@ -125,7 +125,7 @@ read from the same-numbered port on the other side (each direction has its own l
 
 ### 3.1 Boot sequence (`fCore` init, `src/code/bank_80/core.asm` $8085F0-$80860C) [C]
 
-1. `ptrAudioData = $AD:8000`, `fAudio_UploadData` - uploads `$0FD6` bytes (the whole `sAudioTrack_AD8000` blob) to SPC RAM
+1. `ptrAudioData = $AD:8000`, `fAudio_UploadData` - uploads `$0FD6` bytes (the whole `sAudioSpcDriver` blob) to SPC RAM
    `$0500` and starts execution there.
 2. `fAudio_SendCommand0B(A=0)` - command `$0B` with parameter 0 (stereo).
 3. `fAudio_LoadCommonSamples` - sends command 2 once per non-zero id in `aAudioSampleLookupTable`
@@ -163,14 +163,14 @@ Track ids: `aAudioTrackDataSizeTable` and `sAudioData1_838F83` have 26 entries (
 | 2 | `sAudioTrack_Summer` | $AD:B44A | 626 | $01, $05 | 1 | 6 |
 | 3 | `sAudioTrack_HarvestFestival` | $AD:9FFD | 939 | $03, $07, $01, $16, $05 | 1 | 6 |
 | 4 | `sAudioTrack_Winter` | $AD:92C2 | 694 | $03, $07, $01 | 1 | 6 |
-| 5 | `sAudioTrack_AD9AA7` | $AD:9AA7 | 1091 | $05, $01, $07 | 1 | 6 |
+| 5 | `sAudioTrack_Id05` | $AD:9AA7 | 1091 | $05, $01, $07 | 1 | 6 |
 | 6 | `sAudioTrack_Mountain` | $AD:AC0E | 921 | $03, $07, $01 | 1 | 6 |
 | 7 | `sAudioTrack_Fall` | $AD:AFA7 | 685 | $01, $04, $0C, $08 | 1 | 6 |
 | 8 | `sAudioTrack_Dance` | $AD:B254 | 502 | $01, $07, $16 | 1 | 6 |
 | 9 | `sAudioTrack_Church` | $AD:A9AE | 608 | $02 | 1 | 6 |
 | 10 | `sAudioTrack_NamingScreen` | $AD:BE06 | 410 | $05, $07 | 1 | 6 |
 | 11 | `sAudioTrack_Title` | $AD:BFA0 | 398 | $05, $01, $07 | 1 | 6 |
-| 12 | `sAudioTrack_ADA3A8` | $AD:A3A8 | 465 | $05, $07, $01 | 1 | 6 |
+| 12 | `sAudioTrack_Id12` | $AD:A3A8 | 465 | $05, $07, $01 | 1 | 6 |
 | 13 | `sAudioTrack_EggFestival` | $AD:B6BC | 659 | $05, $01, $08 | 1 | 6 |
 | 14 | `sAudioTrack_StarNightFestival` | $AD:986A | 573 | $05 | 1 | 6 |
 | 15 | `sAudioTrack_TrollsCave` | $AD:9578 | 754 | $05, $0B, $01, $08 | 1 | 6 |
@@ -178,12 +178,12 @@ Track ids: `aAudioTrackDataSizeTable` and `sAudioData1_838F83` have 26 entries (
 | 17 | `sAudioTrack_BadEnding` | $AD:9EEA | 275 | $05, $03, $07 | 1 | 6 |
 | 18 | `sAudioTrack_Opening` | $AD:B94F | 1207 | $04, $03, $07, $0B | 1 | 8 |
 | 19 | `sAudioTrack_Rain` | $AD:C12E | 122 | $0D | 1 | 3 |
-| 20 | `sAudioTrack_ADC1A8` | $AD:C1A8 | 128 | $0D | 1 | 3 |
-| 21 | `sAudioTrack_ADC228` | $AD:C228 | 219 | $15, $0D, $18 | 1 | 6 |
+| 20 | `sAudioTrack_Id20` | $AD:C1A8 | 128 | $0D | 1 | 3 |
+| 21 | `sAudioTrack_Id21` | $AD:C228 | 219 | $15, $0D, $18 | 1 | 6 |
 | 22 | `sAudioTrack_Hurricane` | $AD:C303 | 286 | $10 | 1 | 6 |
-| 23 | `sAudioTrack_ADC421` | $AD:C421 | 176 | $1D | 1 | 6 |
+| 23 | `sAudioTrack_Id23` | $AD:C421 | 176 | $1D | 1 | 6 |
 | 24 | `sAudioTrack_Bell` | $AD:C4D1 | 92 | $1D | 1 | 2 |
-| 25 | `sAudioTrack_ADC52D` | $AD:C52D | 188 | $13, $15 | 2 | 7 |
+| 25 | `sAudioTrack_Id25` | $AD:C52D | 188 | $13, $15 | 2 | 7 |
 
 ## 4. Port protocol
 
@@ -409,51 +409,51 @@ Capacity check [C]: the common set uses 17680 bytes (limit 17920). The largest s
 
 | Id | Label | Size | Loop offset | ADSR1 ADSR2 GAIN | Tuning (int.frac hex) | Notes |
 |---:|---|---:|---:|---|---|---|
-| $01 | `sAudioTrack_ADC5E9` | 4288 | 432 (block 48) | FF E0 B8 | 5.20 |  |
-| $02 | `sAudioTrack_AE8000` | 12000 | 630 (block 70) | FF E0 B8 | 6.B0 |  |
-| $03 | `sAudioTrack_ADD6A9` | 2992 | 1503 (block 167) | FF E3 B8 | 1.E0 |  |
-| $04 | `sAudioTrack_ADE259` | 1920 | 1854 (block 206) | FF EF B8 | 5.F0 |  |
-| $05 | `sAudioTrack_ADE9D9` | 3344 | 2034 (block 226) | FF EB B8 | 3.E0 |  |
-| $06 | `sAudioTrack_ADF6E9` | 64 | 27 (block 3) | FF E0 B8 | 4.00 | common set, slot $10 |
-| $07 | `sAudioTrack_AEAEE0` | 7984 | 1548 (block 172) | FF E0 B8 | 5.A0 |  |
-| $08 | `sAudioTrack_AECE10` | 6480 | none (end header $01) | FF E0 B8 | 5.A0 |  |
-| $09 | `sAudioTrack_AF8000` | 4864 | 4824 (block 536) | 86 EB B8 | 4.00 |  |
-| $0A | `sAudioTrack_AEE760` | 720 | 675 (block 75) | FF EE B8 | 3.F0 | common set, slot $11 |
-| $0B | `sAudioTrack_AF9300` | 7040 | 3510 (block 390) | FF E0 B8 | 3.50 |  |
-| $0C | `sAudioTrack_AEEA30` | 832 | 513 (block 57) | FF E9 B8 | 1.E0 |  |
-| $0D | `sAudioTrack_ADF729` | 1648 | 27 (block 3) | FF E0 B8 | 1.30 |  |
-| $0E | `sAudioTrack_AEED70` | 3488 | none (end header $01) | FF E0 B8 | 7.A0 |  |
-| $0F | `sAudioTrack_AFAE80` | 4672 | 27 (block 3) | FF E0 B8 | 0.D0 |  |
-| $10 | `sAudioTrack_AFC0C0` | 4000 | 1233 (block 137) | FF E0 B8 | 0.B0 |  |
-| $11 | `sAudioTrack_AFD060` | 2000 | 27 (block 3) | FF E0 B8 | 0.50 |  |
-| $12 | `sAudioTrack_AFD830` | 6976 | none (end header $01) | FF E0 B8 | 3.C0 |  |
-| $13 | `sAudioTrack_B08000` | 7984 | none (end header $01) | FF E0 B8 | 7.A0 |  |
-| $14 | `sAudioTrack_AFF370` | 1712 | 27 (block 3) | FF E0 B8 | 0.90 |  |
-| $15 | `sAudioTrack_B09F30` | 6464 | none (end header $01) | FF E9 B8 | 1.E0 | common set, slot $0F |
-| $16 | `sAudioTrack_B0B870` | 1840 | none (end header $01) | FF E0 B8 | 7.A0 |  |
-| $17 | `sAudioTrack_B0BFA0` | 992 | none (end header $01) | FF E0 B8 | 4.20 | common set, slot $0B |
-| $18 | `sAudioTrack_B0C380` | 4992 | none (end header $01) | FF E0 B8 | 5.20 | common set, slot $0C |
-| $19 | `sAudioTrack_AFFA20` | 1248 | none (end header $01) | FF E0 B8 | 7.A0 | common set, slot $0D |
-| $1A | `sAudioTrack_B0D700` | 3200 | none (end header $01) | FF E0 B8 | 7.A0 | common set, slot $0E |
-| $1B | `sAudioTrack_B0E380` | 3984 | none (end header $01) | FF E0 B8 | 1.50 |  |
-| $1C | `sAudioTrack_B18000` | 3664 | none (end header $69) | FF E0 B8 | 7.A0 |  |
-| $1D | `sAudioTrack_B18E50` | 15984 | none (end header $01) | FF E0 B8 | 5.40 |  |
-| $1E | `sAudioTrack_B1CCC0` | 3984 | none (end header $01) | FF E0 B8 | 1.C0 |  |
-| $1F | `sAudioTrack_B1DC50` | 2992 | none (end header $01) | FF E0 B8 | 1.10 |  |
-| $20 | `sAudioTrack_B1E800` | 2992 | none (end header $01) | FF E0 B8 | 0.B0 |  |
-| $21 | `sAudioTrack_B1F3B0` | 2992 | none (end header $01) | FF E0 B8 | 2.90 |  |
-| $22 | `sAudioTrack_B29380` | 2992 | 18 (block 2) | FF E0 B8 | 0.20 |  |
-| $23 | `sAudioTrack_B29F30` | 1984 | none (end header $01) | FF E0 B8 | 1.10 |  |
-| $24 | `sAudioTrack_B28000` | 4992 | none (end header $01) | FF E0 B8 | 1.A0 |  |
-| $25 | `sAudioTrack_B2A6F0` | 832 | 513 (block 57) | FF E9 B8 | 1.E0 |  |
-| $26 | `sAudioTrack_B2AA30` | 1984 | none (end header $01) | FF E0 B8 | 1.00 |  |
-| $27 | `sAudioTrack_B2B1F0` | 7984 | none (end header $B9) | FF E0 B8 | 1.E0 |  |
+| $01 | `sAudioSample_Id00` | 4288 | 432 (block 48) | FF E0 B8 | 5.20 |  |
+| $02 | `sAudioSample_Id02` | 12000 | 630 (block 70) | FF E0 B8 | 6.B0 |  |
+| $03 | `sAudioSample_Id03` | 2992 | 1503 (block 167) | FF E3 B8 | 1.E0 |  |
+| $04 | `sAudioSample_Id04` | 1920 | 1854 (block 206) | FF EF B8 | 5.F0 |  |
+| $05 | `sAudioSample_Id05` | 3344 | 2034 (block 226) | FF EB B8 | 3.E0 |  |
+| $06 | `sAudioSample_Id06` | 64 | 27 (block 3) | FF E0 B8 | 4.00 | common set, slot $10 |
+| $07 | `sAudioSample_Id07` | 7984 | 1548 (block 172) | FF E0 B8 | 5.A0 |  |
+| $08 | `sAudioSample_Id08` | 6480 | none (end header $01) | FF E0 B8 | 5.A0 |  |
+| $09 | `sAudioSample_Id09` | 4864 | 4824 (block 536) | 86 EB B8 | 4.00 |  |
+| $0A | `sAudioSample_Id10` | 720 | 675 (block 75) | FF EE B8 | 3.F0 | common set, slot $11 |
+| $0B | `sAudioSample_Id11` | 7040 | 3510 (block 390) | FF E0 B8 | 3.50 |  |
+| $0C | `sAudioSample_Id12` | 832 | 513 (block 57) | FF E9 B8 | 1.E0 |  |
+| $0D | `sAudioSample_Id13` | 1648 | 27 (block 3) | FF E0 B8 | 1.30 |  |
+| $0E | `sAudioSample_Id14` | 3488 | none (end header $01) | FF E0 B8 | 7.A0 |  |
+| $0F | `sAudioSample_Id15` | 4672 | 27 (block 3) | FF E0 B8 | 0.D0 |  |
+| $10 | `sAudioSample_Id16` | 4000 | 1233 (block 137) | FF E0 B8 | 0.B0 |  |
+| $11 | `sAudioSample_Id17` | 2000 | 27 (block 3) | FF E0 B8 | 0.50 |  |
+| $12 | `sAudioSample_Id18` | 6976 | none (end header $01) | FF E0 B8 | 3.C0 |  |
+| $13 | `sAudioSample_Id19` | 7984 | none (end header $01) | FF E0 B8 | 7.A0 |  |
+| $14 | `sAudioSample_Id20` | 1712 | 27 (block 3) | FF E0 B8 | 0.90 |  |
+| $15 | `sAudioSample_Id21` | 6464 | none (end header $01) | FF E9 B8 | 1.E0 | common set, slot $0F |
+| $16 | `sAudioSample_Id22` | 1840 | none (end header $01) | FF E0 B8 | 7.A0 |  |
+| $17 | `sAudioSample_Id23` | 992 | none (end header $01) | FF E0 B8 | 4.20 | common set, slot $0B |
+| $18 | `sAudioSample_Id24` | 4992 | none (end header $01) | FF E0 B8 | 5.20 | common set, slot $0C |
+| $19 | `sAudioSample_Id25` | 1248 | none (end header $01) | FF E0 B8 | 7.A0 | common set, slot $0D |
+| $1A | `sAudioSample_Id26` | 3200 | none (end header $01) | FF E0 B8 | 7.A0 | common set, slot $0E |
+| $1B | `sAudioSample_Id27` | 3984 | none (end header $01) | FF E0 B8 | 1.50 |  |
+| $1C | `sAudioSample_Id28` | 3664 | none (end header $69) | FF E0 B8 | 7.A0 |  |
+| $1D | `sAudioSample_Id29` | 15984 | none (end header $01) | FF E0 B8 | 5.40 |  |
+| $1E | `sAudioSample_Id30` | 3984 | none (end header $01) | FF E0 B8 | 1.C0 |  |
+| $1F | `sAudioSample_Id31` | 2992 | none (end header $01) | FF E0 B8 | 1.10 |  |
+| $20 | `sAudioSample_Id32` | 2992 | none (end header $01) | FF E0 B8 | 0.B0 |  |
+| $21 | `sAudioSample_Id33` | 2992 | none (end header $01) | FF E0 B8 | 2.90 |  |
+| $22 | `sAudioSample_Id34` | 2992 | 18 (block 2) | FF E0 B8 | 0.20 |  |
+| $23 | `sAudioSample_Id35` | 1984 | none (end header $01) | FF E0 B8 | 1.10 |  |
+| $24 | `sAudioSample_Id36` | 4992 | none (end header $01) | FF E0 B8 | 1.A0 |  |
+| $25 | `sAudioSample_Id37` | 832 | 513 (block 57) | FF E9 B8 | 1.E0 |  |
+| $26 | `sAudioSample_Id38` | 1984 | none (end header $01) | FF E0 B8 | 1.00 |  |
+| $27 | `sAudioSample_Id39` | 7984 | none (end header $B9) | FF E0 B8 | 1.E0 |  |
 
 ## 8. Track data format
 
 All pointers in a track blob are **relative to the start of the blob** (the engine adds `$AC`, which is `$19F4`). [C]
 The format was validated by decoding all 25 distinct tracks completely: every byte of 24 of them is accounted for by the
-structures below, the last one (`sAudioTrack_ADC52D`) has one extra trailing `00`. [C]
+structures below, the last one (`sAudioTrack_Id25`) has one extra trailing `00`. [C]
 
 ### 8.1 Song list (at offset 0; engine routine `$0BFD`/`$0C7B`)
 
@@ -603,7 +603,7 @@ sounds for `length * gate / 256` ticks of its `length`. Exact BPM was not derive
   a smoke test that traces the whole engine (no overlaps, no stray branch targets, only three non-code gaps) and the
   `audio_map` checks.
 
-Reproduce the disassembly of the dispatcher: `python tools/audio/spc700.py assets/audio/sAudioTrack_AD8000.bin --base 0x0500 --start 0xB4B --length 0x40 --bytes`
+Reproduce the disassembly of the dispatcher: `python tools/audio/spc700.py assets/audio/sAudioSpcDriver.bin --base 0x0500 --start 0xB4B --length 0x40 --bytes`
 (`$104B`, the command jump).
 
 ## 11. Open questions

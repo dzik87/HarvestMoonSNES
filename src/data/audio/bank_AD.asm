@@ -2,8 +2,8 @@
 
     ORG $AD8000
 
-sAudioTrack_AD8000:
-    incbin "../../../assets/audio/sAudioTrack_AD8000.bin"
+sAudioSpcDriver:
+    incbin "../../../assets/audio/sAudioSpcDriver.bin"
 
 sAudioTrack_Spring:
     incbin "../../../assets/audio/sAudioTrack_Spring.bin"
@@ -17,8 +17,8 @@ sAudioTrack_TrollsCave:
 sAudioTrack_StarNightFestival:
     incbin "../../../assets/audio/sAudioTrack_StarNightFestival.bin"
 
-sAudioTrack_AD9AA7:
-    incbin "../../../assets/audio/sAudioTrack_AD9AA7.bin"
+sAudioTrack_Id05:
+    incbin "../../../assets/audio/sAudioTrack_Id05.bin"
 
 sAudioTrack_BadEnding:
     incbin "../../../assets/audio/sAudioTrack_BadEnding.bin"
@@ -26,8 +26,8 @@ sAudioTrack_BadEnding:
 sAudioTrack_HarvestFestival:
     incbin "../../../assets/audio/sAudioTrack_HarvestFestival.bin"
 
-sAudioTrack_ADA3A8:
-    incbin "../../../assets/audio/sAudioTrack_ADA3A8.bin"
+sAudioTrack_Id12:
+    incbin "../../../assets/audio/sAudioTrack_Id12.bin"
 
 sAudioTrack_Ending:
     incbin "../../../assets/audio/sAudioTrack_Ending.bin"
@@ -62,41 +62,41 @@ sAudioTrack_Title:
 sAudioTrack_Rain:
     incbin "../../../assets/audio/sAudioTrack_Rain.bin"
 
-sAudioTrack_ADC1A8:
-    incbin "../../../assets/audio/sAudioTrack_ADC1A8.bin"
+sAudioTrack_Id20:
+    incbin "../../../assets/audio/sAudioTrack_Id20.bin"
 
-sAudioTrack_ADC228:
-    incbin "../../../assets/audio/sAudioTrack_ADC228.bin"
+sAudioTrack_Id21:
+    incbin "../../../assets/audio/sAudioTrack_Id21.bin"
 
 sAudioTrack_Hurricane:
     incbin "../../../assets/audio/sAudioTrack_Hurricane.bin"
 
-sAudioTrack_ADC421:
-    incbin "../../../assets/audio/sAudioTrack_ADC421.bin"
+sAudioTrack_Id23:
+    incbin "../../../assets/audio/sAudioTrack_Id23.bin"
 
 sAudioTrack_Bell:
     incbin "../../../assets/audio/sAudioTrack_Bell.bin"
 
-sAudioTrack_ADC52D:
-    incbin "../../../assets/audio/sAudioTrack_ADC52D.bin"
+sAudioTrack_Id25:
+    incbin "../../../assets/audio/sAudioTrack_Id25.bin"
 
-sAudioTrack_ADC5E9:
-    incbin "../../../assets/audio/sAudioTrack_ADC5E9.bin"
+sAudioSample_Id00:
+    incbin "../../../assets/audio/sAudioSample_Id00.bin"
 
-sAudioTrack_ADD6A9:
-    incbin "../../../assets/audio/sAudioTrack_ADD6A9.bin"
+sAudioSample_Id03:
+    incbin "../../../assets/audio/sAudioSample_Id03.bin"
 
-sAudioTrack_ADE259:
-    incbin "../../../assets/audio/sAudioTrack_ADE259.bin"
+sAudioSample_Id04:
+    incbin "../../../assets/audio/sAudioSample_Id04.bin"
 
-sAudioTrack_ADE9D9:
-    incbin "../../../assets/audio/sAudioTrack_ADE9D9.bin"
+sAudioSample_Id05:
+    incbin "../../../assets/audio/sAudioSample_Id05.bin"
 
-sAudioTrack_ADF6E9:
-    incbin "../../../assets/audio/sAudioTrack_ADF6E9.bin"
+sAudioSample_Id06:
+    incbin "../../../assets/audio/sAudioSample_Id06.bin"
 
-sAudioTrack_ADF729:
-    incbin "../../../assets/audio/sAudioTrack_ADF729.bin"
+sAudioSample_Id13:
+    incbin "../../../assets/audio/sAudioSample_Id13.bin"
 
 Padding_AD0000:
     fill 615

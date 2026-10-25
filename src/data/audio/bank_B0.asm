@@ -2,26 +2,26 @@
 
     ORG $B08000
 
-sAudioTrack_B08000:
-    incbin "../../../assets/audio/sAudioTrack_B08000.bin"
+sAudioSample_Id19:
+    incbin "../../../assets/audio/sAudioSample_Id19.bin"
 
-sAudioTrack_B09F30:
-    incbin "../../../assets/audio/sAudioTrack_B09F30.bin"
+sAudioSample_Id21:
+    incbin "../../../assets/audio/sAudioSample_Id21.bin"
 
-sAudioTrack_B0B870:
-    incbin "../../../assets/audio/sAudioTrack_B0B870.bin"
+sAudioSample_Id22:
+    incbin "../../../assets/audio/sAudioSample_Id22.bin"
 
-sAudioTrack_B0BFA0:
-    incbin "../../../assets/audio/sAudioTrack_B0BFA0.bin"
+sAudioSample_Id23:
+    incbin "../../../assets/audio/sAudioSample_Id23.bin"
 
-sAudioTrack_B0C380:
-    incbin "../../../assets/audio/sAudioTrack_B0C380.bin"
+sAudioSample_Id24:
+    incbin "../../../assets/audio/sAudioSample_Id24.bin"
 
-sAudioTrack_B0D700:
-    incbin "../../../assets/audio/sAudioTrack_B0D700.bin"
+sAudioSample_Id26:
+    incbin "../../../assets/audio/sAudioSample_Id26.bin"
 
-sAudioTrack_B0E380:
-    incbin "../../../assets/audio/sAudioTrack_B0E380.bin"
+sAudioSample_Id27:
+    incbin "../../../assets/audio/sAudioSample_Id27.bin"
 
 Padding_B00000:
     fill 3312

@@ -2,23 +2,23 @@
 
     ORG $AE8000
 
-sAudioTrack_AE8000:
-    incbin "../../../assets/audio/sAudioTrack_AE8000.bin"
+sAudioSample_Id02:
+    incbin "../../../assets/audio/sAudioSample_Id02.bin"
 
-sAudioTrack_AEAEE0:
-    incbin "../../../assets/audio/sAudioTrack_AEAEE0.bin"
+sAudioSample_Id07:
+    incbin "../../../assets/audio/sAudioSample_Id07.bin"
 
-sAudioTrack_AECE10:
-    incbin "../../../assets/audio/sAudioTrack_AECE10.bin"
+sAudioSample_Id08:
+    incbin "../../../assets/audio/sAudioSample_Id08.bin"
 
-sAudioTrack_AEE760:
-    incbin "../../../assets/audio/sAudioTrack_AEE760.bin"
+sAudioSample_Id10:
+    incbin "../../../assets/audio/sAudioSample_Id10.bin"
 
-sAudioTrack_AEEA30:
-    incbin "../../../assets/audio/sAudioTrack_AEEA30.bin"
+sAudioSample_Id12:
+    incbin "../../../assets/audio/sAudioSample_Id12.bin"
 
-sAudioTrack_AEED70:
-    incbin "../../../assets/audio/sAudioTrack_AEED70.bin"
+sAudioSample_Id14:
+    incbin "../../../assets/audio/sAudioSample_Id14.bin"
 
 Padding_AE0000:
     fill 1264

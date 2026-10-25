@@ -2,29 +2,29 @@
 
     ORG $AF8000
 
-sAudioTrack_AF8000:
-    incbin "../../../assets/audio/sAudioTrack_AF8000.bin"
+sAudioSample_Id09:
+    incbin "../../../assets/audio/sAudioSample_Id09.bin"
 
-sAudioTrack_AF9300:
-    incbin "../../../assets/audio/sAudioTrack_AF9300.bin"
+sAudioSample_Id11:
+    incbin "../../../assets/audio/sAudioSample_Id11.bin"
 
-sAudioTrack_AFAE80:
-    incbin "../../../assets/audio/sAudioTrack_AFAE80.bin"
+sAudioSample_Id15:
+    incbin "../../../assets/audio/sAudioSample_Id15.bin"
 
-sAudioTrack_AFC0C0:
-    incbin "../../../assets/audio/sAudioTrack_AFC0C0.bin"
+sAudioSample_Id16:
+    incbin "../../../assets/audio/sAudioSample_Id16.bin"
 
-sAudioTrack_AFD060:
-    incbin "../../../assets/audio/sAudioTrack_AFD060.bin"
+sAudioSample_Id17:
+    incbin "../../../assets/audio/sAudioSample_Id17.bin"
 
-sAudioTrack_AFD830:
-    incbin "../../../assets/audio/sAudioTrack_AFD830.bin"
+sAudioSample_Id18:
+    incbin "../../../assets/audio/sAudioSample_Id18.bin"
 
-sAudioTrack_AFF370:
-    incbin "../../../assets/audio/sAudioTrack_AFF370.bin"
+sAudioSample_Id20:
+    incbin "../../../assets/audio/sAudioSample_Id20.bin"
 
-sAudioTrack_AFFA20:
-    incbin "../../../assets/audio/sAudioTrack_AFFA20.bin"
+sAudioSample_Id25:
+    incbin "../../../assets/audio/sAudioSample_Id25.bin"
 
 Padding_AF0000:
     fill 256
