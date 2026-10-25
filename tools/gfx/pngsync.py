@@ -245,12 +245,14 @@ class Blob:
         return str(p.relative_to(self.root)).replace("\\", "/")
 
 
-def blobs(root=ROOT, patterns=None, kind=None):
+def blobs(root=ROOT, patterns=None, kind=None, from_sources=False):
+    """Blobs known from the committed .bin files, or (from_sources) from the sidecar .json files in the source dirs."""
     out = []
     for name, k in KINDS.items():
         if kind and name != kind:
             continue
-        for p in sorted((Path(root) / k.src).glob("*.bin")):
+        d = Path(root) / (k.art_dir if from_sources else k.src)
+        for p in sorted(d.glob("*.json" if from_sources else "*.bin")):
             if p.stem.startswith(k.prefixes):
                 if not patterns or any(fnmatch.fnmatchcase(p.stem, pat) for pat in patterns):
                     out.append(Blob(name, p.stem, root))
@@ -433,6 +435,18 @@ def cmd_export(a, root=ROOT):
     for b in sel:
         export_blob(b)
     print(f"exported {len(sel)} blobs")
+    return 0
+
+
+def cmd_build(a, root=ROOT):
+    """PNG / text sources -> .bin files (the .bin files are generated, git-ignored build products)."""
+    sel = blobs(root, a.label, a.kind, from_sources=True)
+    for b in sel:
+        data = build_bin(b)
+        b.bin.parent.mkdir(parents=True, exist_ok=True)
+        if not b.bin.exists() or b.bin.read_bytes() != data:
+            b.bin.write_bytes(data)
+    print(f"pngsync build: {len(sel)} blobs written from PNG/text sources")
     return 0
 
 
@@ -658,7 +672,7 @@ def cmd_preview(a, root=ROOT):
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
-    for name in ("export", "import", "check", "preview"):
+    for name in ("export", "import", "check", "preview", "build"):
         p = sub.add_parser(name)
         p.add_argument("--label", action="append", help="fnmatch pattern on the blob label (repeatable)")
         p.add_argument("--kind", choices=sorted(KINDS))
@@ -667,7 +681,7 @@ def main(argv=None):
         if name == "preview":
             p.add_argument("--out", default=str(ROOT / "build" / "gfx_preview"))
     a = ap.parse_args(argv)
-    return {"export": cmd_export, "import": cmd_import, "check": cmd_check, "preview": cmd_preview}[a.cmd](a)
+    return {"export": cmd_export, "import": cmd_import, "check": cmd_check, "preview": cmd_preview, "build": cmd_build}[a.cmd](a)
 
 
 if __name__ == "__main__":
