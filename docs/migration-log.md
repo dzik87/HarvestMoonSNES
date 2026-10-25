@@ -65,6 +65,15 @@ releases run the same scripts, see `docs/regions-ai.md`.
   extra checks, menu layout.
 - Variant text carries no address comments; local labels are `.r_<US address>_<n>`, region only targets are `L_<US address>`
   equates in `src/code/region_targets.asm`.
-- Open: the data banks (graphics, dialog) of EU/DE/JP; the remaining region specific data tables of the code banks are emitted
-  as `db`/`dw` text (no structure).
+- The remaining region specific data tables of the code banks are emitted as `db`/`dw` text (no structure).
+
+## Complete regional ROMs
+- Inventory of the data banks (`region_diff.py --data-ranges`, `data/regionbanks.py`): every release has the US blobs in the same order; 24 blobs
+  (fonts, title/menu graphics, name tables) plus three JP palettes and the dialogs differ.
+- Regional graphics/fonts/palettes became PNG/text/JSON sources per release (`pngsync.py --region`, `font.py --region`, `palette.py export-region`); bank sources include
+  them through `!{REGDIR}`, banks end in `fill align $8000`.
+- Map table pointers are labels (`tools/migration/region_labels.py`), dialog pointer table is one table of labels, dialogs are generated from the text files
+  (committed per release asm removed).
+- `tools/build.py --region EU|DE|JP` builds and verifies the complete ROM (`tests/expected.json` keys EU, DE, JP now hold full-ROM hashes; the partial
+  bank-range keys and `*-AI` keys were dropped).
 

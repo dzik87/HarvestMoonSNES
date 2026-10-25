@@ -297,10 +297,10 @@ def parse_asm_blobs(path, tail=0):
                 for h in _HEX_RE.findall(s[2:]):
                     buf.append(int(h, 16))
             elif s.lower().startswith('incbin'):
-                rel = re.search(r'"([^"]+)"', s).group(1)
+                rel = re.search(r'"([^"]+)"', s).group(1).replace("!{REGDIR}", "")
                 buf.extend(open(os.path.join(os.path.dirname(os.path.abspath(path)), rel), 'rb').read())
             elif s.lower().startswith('fill'):
-                buf.extend(bytes(int(s.split()[1])))
+                buf.extend(bytes(int(s.split()[1]) if s.split()[1].isdigit() else 0))   # `fill align $8000`: not data
     if cur is not None:
         blobs[cur] = bytes(buf)
     if tail > 0:

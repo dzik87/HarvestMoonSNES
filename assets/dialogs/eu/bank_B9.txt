@@ -1,710 +1,710 @@
-@@ sDialogEU_028D @@
+@@ sDialog_0x028D @@
 It's the Thanksgiving       Festival tomorrow. Nice     smells of baking cakes fill<NEXT>
 the whole town.             Dad,it'll be fun.<END>
 
-@@ sDialogEU_028E @@
+@@ sDialog_0x028E @@
 It's the Thanksgiving       Festival tomorrow. It's for all the husbands and<NEXT>
 fathers who are always      working hard. Women bake    cakes for them to show<NEXT>
 thanks. I suggest you come  to town if possible.<END>
 
-@@ sDialogEU_028F @@
+@@ sDialog_0x028F @@
 Girls give cakes to people  they like. If you have time,I suggest you come to town.<END>
 
-@@ sDialogEU_0290 @@
+@@ sDialog_0x0290 @@
 I'm going to bed now.       Good night.<END>
 
-@@ sDialogEU_0291 @@
+@@ sDialog_0x0291 @@
 Heh-heh,This is very        delicious! Want to try      some?<NEXT>
  Eat it                      I don't want it<OPT 2>
 
-@@ sDialogEU_0292 @@
+@@ sDialog_0x0292 @@
 It's Thanksgiving Festival  today. Here you are,        darling.<NEXT>
 Thank you for working hard  for me every day.<END>
 
-@@ sDialogEU_0293 @@
+@@ sDialog_0x0293 @@
 Please work well from       now on.<END>
 
-@@ sDialogEU_0294 @@
+@@ sDialog_0x0294 @@
 Fidgety...<END>
 
-@@ sDialogEU_0295 @@
+@@ sDialog_0x0295 @@
 Thump,thump,thump...<END>
 
-@@ sDialogEU_0296 @@
+@@ sDialog_0x0296 @@
 Yes,Ellen is a good cook andtakes good care of the      livestock.<NEXT>
 She is a nice and steady    girl. Don't you think so?<END>
 
-@@ sDialogEU_0297 @@
+@@ sDialog_0x0297 @@
 I love my wife's cake but mydaughter's makes me so much happier.<END>
 
-@@ sDialogEU_0298 @@
+@@ sDialog_0x0298 @@
 I scorched the cake again.<END>
 
-@@ sDialogEU_0299 @@
+@@ sDialog_0x0299 @@
 What should I do?<END>
 
-@@ sDialogEU_029A @@
+@@ sDialog_0x029A @@
 Ann's hand-made cake...it   won't explode,will it?<END>
 
-@@ sDialogEU_029B @@
+@@ sDialog_0x029B @@
 I get a cake from Maria     every year.<END>
 
-@@ sDialogEU_029C @@
+@@ sDialog_0x029C @@
 Yeah,I got a cake from      Maria!<END>
 
-@@ sDialogEU_029D @@
+@@ sDialog_0x029D @@
 I'll be able to bake a      perfectly delicious cake    when I get older! Gee!<END>
 
-@@ sDialogEU_029E @@
+@@ sDialog_0x029E @@
 Hi,well...it's for you.I    hope you like it.<END>
 
-@@ sDialogEU_029F @@
+@@ sDialog_0x029F @@
 uumm,thank you for working  every day.<END>
 
-@@ sDialogEU_02A0 @@
+@@ sDialog_0x02A0 @@
 Hello.<END>
 
-@@ sDialogEU_02A1 @@
+@@ sDialog_0x02A1 @@
 I'll give it to you. I'm notsure if it tastes good or   not.<END>
 
-@@ sDialogEU_02A2 @@
+@@ sDialog_0x02A2 @@
 You want medicine just in   case?<END>
 
-@@ sDialogEU_02A3 @@
+@@ sDialog_0x02A3 @@
 My dad is so rude. He lookedat my cake carefully before he ate it.<END>
 
-@@ sDialogEU_02A4 @@
+@@ sDialog_0x02A4 @@
 Here it is. It's a special  herb cake.<END>
 
-@@ sDialogEU_02A5 @@
+@@ sDialog_0x02A5 @@
 It doesn't look very good   but isn't it delicious?<END>
 
-@@ sDialogEU_02A6 @@
+@@ sDialog_0x02A6 @@
 My mom has been wandering   with a baked cake in her    hands since this morning.<END>
 
-@@ sDialogEU_02A7 @@
+@@ sDialog_0x02A7 @@
 I used plenty of milk and   eggs.<END>
 
-@@ sDialogEU_02A8 @@
+@@ sDialog_0x02A8 @@
 I have confidence in making sweets.<END>
 
-@@ sDialogEU_02A9 @@
+@@ sDialog_0x02A9 @@
 Hey,you probably think I'm  a monkey or something,      right?<NEXT>
 .........That's OK with me  though.<END>
 
-@@ sDialogEU_02AA @@
+@@ sDialog_0x02AA @@
 This is a cake filled with  berries.<END>
 
-@@ sDialogEU_02AB @@
+@@ sDialog_0x02AB @@
 I hope you like it.<END>
 
-@@ sDialogEU_02AC @@
+@@ sDialog_0x02AC @@
 It's the Star Night Festivaltomorrow. It'll be nice with the clear blue<NEXT>
 sky,You'll see the beautifulstars at night.<END>
 
-@@ sDialogEU_02AD @@
+@@ sDialog_0x02AD @@
 On the Star Night Festival  you are supposed to pray forthe night when<NEXT>
 you can see the most        beautiful stars of the year.<END>
 
-@@ sDialogEU_02AE @@
+@@ sDialog_0x02AE @@
 Look at the sky. It'll be   really beautiful tomorrow   night.<END>
 
-@@ sDialogEU_02AF @@
+@@ sDialog_0x02AF @@
 I'm going to play the organ at the church.<END>
 
-@@ sDialogEU_02B0 @@
+@@ sDialog_0x02B0 @@
 Tomorrow? Heh-heh,I'm going to a wonderful place.<END>
 
-@@ sDialogEU_02B1 @@
+@@ sDialog_0x02B1 @@
 Say,I'm going to the nearestplace to the stars.<END>
 
-@@ sDialogEU_02B2 @@
+@@ sDialog_0x02B2 @@
 We'll pray at the public    square. So romantic.<END>
 
-@@ sDialogEU_02B3 @@
+@@ sDialog_0x02B3 @@
 Let's have a ball tomorrow. I'm waiting for you.<END>
 
-@@ sDialogEU_02B4 @@
+@@ sDialog_0x02B4 @@
 It's the Star Night Festivaltomorrow. I'm going to the  place I always go.<END>
 
-@@ sDialogEU_02B5 @@
+@@ sDialog_0x02B5 @@
 It's the Star Night Festivaltomorrow! I'm going to the  place I always go so<NEXT>
 please come see me there.<END>
 
-@@ sDialogEU_02B6 @@
+@@ sDialog_0x02B6 @@
 It's the Star Night Festivaltoday! Where should I go?<NEXT>
  Public square  Mountaintop  Church         Spa          Bar<OPT 5>
 
-@@ sDialogEU_02B7 @@
+@@ sDialog_0x02B7 @@
 Well, ladies and gentlemen. Let's pray for the stars.<END>
 
-@@ sDialogEU_02B8 @@
+@@ sDialog_0x02B8 @@
 The light of the stars we   are seeing now is that of   millions of years ago.<NEXT>
 It's mysterious when I thinkof it.<END>
 
-@@ sDialogEU_02B9 @@
+@@ sDialog_0x02B9 @@
 ...May my business get      better.<END>
 
-@@ sDialogEU_02BA @@
+@@ sDialog_0x02BA @@
 Do you want me to read your horoscope?<NEXT>
  Sure                        No thanks<OPT 2>
 
-@@ sDialogEU_02BB @@
+@@ sDialog_0x02BB @@
 The girl who gets along wellwith you is no one but      <VAR 5 22>!<END>
 
-@@ sDialogEU_02BC @@
+@@ sDialog_0x02BC @@
 Really? Don't you want to   know?<END>
 
-@@ sDialogEU_02BD @@
+@@ sDialog_0x02BD @@
 When I close my eyes, I feellike I'm floating in the    night sky.<END>
 
-@@ sDialogEU_02BE @@
+@@ sDialog_0x02BE @@
 What did I pray for?        Everybody's good health.    ....And.. It's a secret.<END>
 
-@@ sDialogEU_02BF @@
+@@ sDialog_0x02BF @@
 The stars are shining all   the time. You just can't seethem because of those<NEXT>
 lights and stuff on the     earth. Truth and love alwaysexist just like the stars.<NEXT>
 You just don't see. Yes,it'strue.<END>
 
-@@ sDialogEU_02C0 @@
+@@ sDialog_0x02C0 @@
 It sometimes won't work evenif we are so much in love,  will it?<NEXT>
 In that case, all you have  to do is pray, I guess.<END>
 
-@@ sDialogEU_02C1 @@
+@@ sDialog_0x02C1 @@
 ...I feel sleepy now.<END>
 
-@@ sDialogEU_02C2 @@
+@@ sDialog_0x02C2 @@
 Zzzzzzz.....<END>
 
-@@ sDialogEU_02C3 @@
+@@ sDialog_0x02C3 @@
 I think I'll have a good    dream tonight.<END>
 
-@@ sDialogEU_02C4 @@
+@@ sDialog_0x02C4 @@
 Good evening. ....Umm,I wishwe could also spend some    time together next year.<END>
 
-@@ sDialogEU_02C5 @@
+@@ sDialog_0x02C5 @@
 Let's sing a song.          Enjoy yourselves!<END>
 
-@@ sDialogEU_02C6 @@
+@@ sDialog_0x02C6 @@
 Now,you sing something!<END>
 
-@@ sDialogEU_02C7 @@
+@@ sDialog_0x02C7 @@
 I happened to be here       tonight...well..it's        a coincidence...and she<NEXT>
 happens to be here too.<END>
 
-@@ sDialogEU_02C8 @@
+@@ sDialog_0x02C8 @@
 Ah,good evening. Nina?      She always goes somewhere   alone.<NEXT>
 I wonder where she's been?<END>
 
-@@ sDialogEU_02C9 @@
+@@ sDialog_0x02C9 @@
 Cheers for the beautiful skyin the night!<END>
 
-@@ sDialogEU_02CA @@
+@@ sDialog_0x02CA @@
 Hi! Are you having fun?     Cheers to the star's fate   that brought us together!<END>
 
-@@ sDialogEU_02CB @@
+@@ sDialog_0x02CB @@
 Did you see it? I see a     shooting star every year.   Don't tell anybody about<NEXT>
 this place. It's a secret   between us. OK?<END>
 
-@@ sDialogEU_02CC @@
+@@ sDialog_0x02CC @@
 Did you make a wish? I      wished... ..titter..        it's a secret.<END>
 
-@@ sDialogEU_02CD @@
+@@ sDialog_0x02CD @@
 I take a hot spring bath,   watching stars like this.   It's just like paradise,<NEXT>
 isn't it?<END>
 
-@@ sDialogEU_02CE @@
+@@ sDialog_0x02CE @@
 May everybody live happily. Now let's pray together.<END>
 
-@@ sDialogEU_02CF @@
+@@ sDialog_0x02CF @@
 Have you prayed already?    Also it's important to      choose a goal at the<NEXT>
 beginning of the year.<END>
 
-@@ sDialogEU_02D0 @@
+@@ sDialog_0x02D0 @@
 May the earth give us gifts this year too.<END>
 
-@@ sDialogEU_02D1 @@
+@@ sDialog_0x02D1 @@
 This...this year, I'll tell her...<END>
 
-@@ sDialogEU_02D2 @@
+@@ sDialog_0x02D2 @@
 May my business go well thisyear too.<END>
 
-@@ sDialogEU_02D3 @@
+@@ sDialog_0x02D3 @@
 Alright, I'm telling your   fortune.<NEXT>
  Yes                         No<OPT 2>
 
-@@ sDialogEU_02D4 @@
+@@ sDialog_0x02D4 @@
 Pick up any card you like.<NEXT>
  Top                         Middle                      Bottom<OPT 3>
 
-@@ sDialogEU_02D5 @@
+@@ sDialog_0x02D5 @@
 "Excellent luck"            Great harvest!              Everything goes well!<END>
 
-@@ sDialogEU_02D6 @@
+@@ sDialog_0x02D6 @@
 "Luck" Fair harvest.        The person you are waiting  for will come.<END>
 
-@@ sDialogEU_02D7 @@
+@@ sDialog_0x02D7 @@
 "Misfortune"                Nothing will turn out good.<END>
 
-@@ sDialogEU_02D8 @@
+@@ sDialog_0x02D8 @@
 I see. I'd better develop myway by myself.<END>
 
-@@ sDialogEU_02D9 @@
+@@ sDialog_0x02D9 @@
 Whmmm,it's going to be good this year.<END>
 
-@@ sDialogEU_02DA @@
+@@ sDialog_0x02DA @@
 May this year be a good yearfor you.<END>
 
-@@ sDialogEU_02DB @@
+@@ sDialog_0x02DB @@
 We should see the first     sunrise at the beginning of the year.<END>
 
-@@ sDialogEU_02DC @@
+@@ sDialog_0x02DC @@
 Well,do your best.<END>
 
-@@ sDialogEU_02DD @@
+@@ sDialog_0x02DD @@
 It's the annual egg         searching game in autumn!   The rule is simple.<NEXT>
 The first person who finds  the same colored egg as the one I show wins the game.<NEXT>
 May I begin now?<NEXT>
  Yes                         No<OPT 2>
 
-@@ sDialogEU_02DE @@
+@@ sDialog_0x02DE @@
 Here we go! The first one isthis!<END>
 
-@@ sDialogEU_02DF @@
+@@ sDialog_0x02DF @@
 Come on! Hurry up! The time is running out.<END>
 
-@@ sDialogEU_02E0 @@
+@@ sDialog_0x02E0 @@
 I won't be beaten by those  young kids.<END>
 
-@@ sDialogEU_02E1 @@
+@@ sDialog_0x02E1 @@
 Is the prize juice?<END>
 
-@@ sDialogEU_02E2 @@
+@@ sDialog_0x02E2 @@
 They say the winner will getthe great prize.<END>
 
-@@ sDialogEU_02E3 @@
+@@ sDialog_0x02E3 @@
 Little kids need a handicap.<END>
 
-@@ sDialogEU_02E4 @@
+@@ sDialog_0x02E4 @@
 Allright,I'll try to win    this year.<END>
 
-@@ sDialogEU_02E5 @@
+@@ sDialog_0x02E5 @@
 I hear the prize is a seed  of the rare flower.<END>
 
-@@ sDialogEU_02E6 @@
+@@ sDialog_0x02E6 @@
 If <VAR 4 23> were here,he would  find it very quickly.<END>
 
-@@ sDialogEU_02E7 @@
+@@ sDialog_0x02E7 @@
 Yes,that's the same color.  You get 1 point. Next is    this one!<END>
 
-@@ sDialogEU_02E8 @@
+@@ sDialog_0x02E8 @@
 OK,the game is over. I'm    announcing the winner.      Everybody,come here,please.<END>
 
-@@ sDialogEU_02E9 @@
+@@ sDialog_0x02E9 @@
 Bingo! You are correct.     Next is this one!<END>
 
-@@ sDialogEU_02EA @@
+@@ sDialog_0x02EA @@
 The winner of this year's   Egg Festival is             Mr. <VAR 4 24>!<END>
 
-@@ sDialogEU_02EB @@
+@@ sDialog_0x02EB @@
 This year's prize is fodder for one whole month! I'll deliver it to<NEXT>
 your ranch.<END>
 
-@@ sDialogEU_02EC @@
+@@ sDialog_0x02EC @@
 Congratulations! I'll       deliver the prize to your   home.<END>
 
-@@ sDialogEU_02ED @@
+@@ sDialog_0x02ED @@
 Now,everybody,let's do our  best this year too!<END>
 
-@@ sDialogEU_02EE @@
+@@ sDialog_0x02EE @@
 How humiliating you are,    young men.<END>
 
-@@ sDialogEU_02EF @@
+@@ sDialog_0x02EF @@
 Phew, I just couldn't do it like I usually do.<END>
 
-@@ sDialogEU_02F0 @@
+@@ sDialog_0x02F0 @@
 Hic...shouldn't have come   here.<END>
 
-@@ sDialogEU_02F1 @@
+@@ sDialog_0x02F1 @@
 Puff-puff.<END>
 
-@@ sDialogEU_02F2 @@
+@@ sDialog_0x02F2 @@
 Puff-puff...don't...speak...to me...please?<END>
 
-@@ sDialogEU_02F3 @@
+@@ sDialog_0x02F3 @@
 Hey,it's not a seed of a    flower. Who said that?<END>
 
-@@ sDialogEU_02F4 @@
+@@ sDialog_0x02F4 @@
 Phew,it's good for a healthybody to do exercise         sometimes.<END>
 
-@@ sDialogEU_02F5 @@
+@@ sDialog_0x02F5 @@
 New Year's Festival! Let's  go see the first sunrise!<END>
 
-@@ sDialogEU_02F6 @@
+@@ sDialog_0x02F6 @@
 That's a seed of grass. Thisgrass grows without         watering. It's 500G.<NEXT>
 Want it?<NEXT>
  Buy                         Not buy                      Money <NUM 7 21>0G<OPT 2>
 
-@@ sDialogEU_02F7 @@
+@@ sDialog_0x02F7 @@
 Thank you. I'll deliver it  to your shed.<END>
 
-@@ sDialogEU_02F8 @@
+@@ sDialog_0x02F8 @@
 Thank you very much.<END>
 
-@@ sDialogEU_02F9 @@
+@@ sDialog_0x02F9 @@
 Ah,you don't have enough    money for it.<END>
 
-@@ sDialogEU_02FA @@
+@@ sDialog_0x02FA @@
 Thank you. Come visit me    again.<END>
 
-@@ sDialogEU_02FB @@
+@@ sDialog_0x02FB @@
 Will you be buying a cow?   Then I'll give you this     bell.<NEXT>
 Cows gather when they hear  the sound of this bell.     But don't ring it so often.<NEXT>
 It makes you tired. Well,   I'll deliver it with the    cow.<END>
 
-@@ sDialogEU_02FC @@
+@@ sDialog_0x02FC @@
 It's special paint for the  house only. It's 1500G.     Do you want to buy it?<NEXT>
  Yes                         No                           Money <NUM 7 22>0G<OPT 2>
 
-@@ sDialogEU_02FD @@
+@@ sDialog_0x02FD @@
 Thank you. I'll deliver it  to your shed.<END>
 
-@@ sDialogEU_02FE @@
+@@ sDialog_0x02FE @@
 It's good stuff though.<END>
 
-@@ sDialogEU_02FF @@
+@@ sDialog_0x02FF @@
 Oh,you don't have enough    money for it.<END>
 
-@@ sDialogEU_0300 @@
+@@ sDialog_0x0300 @@
 Oh,your horse has become    big. I made saddle bags for your horse.<NEXT>
 Just put the shipping items in the saddle bags. It'll bevery convenient since your<NEXT>
 horse will carry them for   you.<END>
 
-@@ sDialogEU_0301 @@
+@@ sDialog_0x0301 @@
 That's medicine for the     cows. Are they sick? Use it only on sick cows.<NEXT>
 The price is...mmm...1000G. You usually have to take    good care of them.<NEXT>
  Buy                         Not buy                      Money <NUM 7 23>0G<OPT 2>
 
-@@ sDialogEU_0302 @@
+@@ sDialog_0x0302 @@
 I'll deliver it to your     shed.<END>
 
-@@ sDialogEU_0303 @@
+@@ sDialog_0x0303 @@
 Aha!<END>
 
-@@ sDialogEU_0304 @@
+@@ sDialog_0x0304 @@
 What? You don't have enough money. Come back again when you have saved enough money.<END>
 
-@@ sDialogEU_0305 @@
+@@ sDialog_0x0305 @@
 Hi, what do you want today?<NEXT>
  Buy a cow      Sell a cow   Buy a chicken               Sell a chicken<OPT 4>
 
-@@ sDialogEU_0306 @@
+@@ sDialog_0x0306 @@
 You need to have more grass to raise livestock.<END>
 
-@@ sDialogEU_0307 @@
+@@ sDialog_0x0307 @@
 A cow costs 5000G so will   you be buying one?<NEXT>
  Buy                         Not buy                      Money <NUM 7 24>0G<OPT 2>
 
-@@ sDialogEU_0308 @@
+@@ sDialog_0x0308 @@
 I'll deliver it to your pen.<END>
 
-@@ sDialogEU_0309 @@
+@@ sDialog_0x0309 @@
 If you want to sell         again,please contact me.    Bye!<END>
 
-@@ sDialogEU_030A @@
+@@ sDialog_0x030A @@
 A chicken costs 1000G.Do youwant one?<NEXT>
  Buy                         Not buy                      Money <NUM 7 25>0G<OPT 2>
 
-@@ sDialogEU_030B @@
+@@ sDialog_0x030B @@
 OK,I'll come pick it up     later so put it at the      entrance of your ranch<NEXT>
 today.<END>
 
-@@ sDialogEU_030C @@
+@@ sDialog_0x030C @@
 Hey,I put the cow in the    pen. Take good care of it.  Allright,the first thing is<NEXT>
 to name it with affection.  Bye!<END>
 
-@@ sDialogEU_030D @@
+@@ sDialog_0x030D @@
 Hey you,don't even think of selling a cow in this       condition.<NEXT>
 Consider it again.<END>
 
-@@ sDialogEU_030E @@
+@@ sDialog_0x030E @@
 It costs <NUM 4 26>0G. Do you wantto sell it?<NEXT>
  Sell                        Not sell                     Money <NUM 7 27>0G<OPT 2>
 
-@@ sDialogEU_030F @@
+@@ sDialog_0x030F @@
 OK! I'll take it with me.<END>
 
-@@ sDialogEU_0310 @@
+@@ sDialog_0x0310 @@
 I can't accept it until it'sgrown more.<END>
 
-@@ sDialogEU_0311 @@
+@@ sDialog_0x0311 @@
 It's outside so take it withyou. It'll eat grass by     itself when it's outside,<NEXT>
 but once it's in the pen,   feed it properly.<END>
 
-@@ sDialogEU_0312 @@
+@@ sDialog_0x0312 @@
 It's a milker. You can milk by using it facing a cow.   It's 1800G.<NEXT>
  Buy                         Not buy                      Money <NUM 7 28>0G<OPT 2>
 
-@@ sDialogEU_0313 @@
+@@ sDialog_0x0313 @@
 Sorry but we can't accept   that.<END>
 
-@@ sDialogEU_0314 @@
+@@ sDialog_0x0314 @@
 It's a brush for cows. They become happy when you brush them with affection.<NEXT>
 Once a day is enough.       It's 800G.<NEXT>
  Buy                         Not buy                      Money <NUM 7 29>0G<OPT 2>
 
-@@ sDialogEU_0315 @@
+@@ sDialog_0x0315 @@
 Our Father in Heaven,please help his precious cow rest.<END>
 
-@@ sDialogEU_0316 @@
+@@ sDialog_0x0316 @@
 ...Are you an idiot? Didn't I tell you to take care of  cows carefully?<NEXT>
 If they become sick next    time,give them the medicine right away.<END>
 
-@@ sDialogEU_0317 @@
+@@ sDialog_0x0317 @@
 Great! A calf was born! OK, I'll name it.<END>
 
-@@ sDialogEU_0318 @@
+@@ sDialog_0x0318 @@
 What? .....a foal! Alright, I'll name it.<END>
 
-@@ sDialogEU_0319 @@
+@@ sDialog_0x0319 @@
 Its name is ..... you do it.<END>
 
-@@ sDialogEU_031A @@
+@@ sDialog_0x031A @@
 Is that all you are shippingtoday? It totals <NUM 7 30>0G. I'll put your money in the <NEXT>
 box tomorrow.<END>
 
-@@ sDialogEU_031B @@
+@@ sDialog_0x031B @@
 Is there no shipping today? OK,bye.<END>
 
-@@ sDialogEU_031C @@
+@@ sDialog_0x031C @@
 Business hours              Weekday: 7:00am - 5:00pm    Weekend & holiday: closed<END>
 
-@@ sDialogEU_031D @@
+@@ sDialog_0x031D @@
 Don't throw things in the   spring.<END>
 
-@@ sDialogEU_031E @@
+@@ sDialog_0x031E @@
 Hi! How do you do? I'm the  Goddess of Spring. Did you  expect me to come out?<NEXT>
 By the way,I have a         question. Is this gold axe  the one you dropped?<NEXT>
  Yes                         No<OPT 2>
 
-@@ sDialogEU_031F @@
+@@ sDialog_0x031F @@
 You are lying. Yours is thisone. No,God knows           everything. Bye.<END>
 
-@@ sDialogEU_0320 @@
+@@ sDialog_0x0320 @@
 Oh yes,I've found an honest person!! I'm giving you thisgold axe.<NEXT>
 ...No,you don't have to     thank me. I'm so happy to   meet someone honest<NEXT>
 like you. Bye now. Keep up  with your work.<END>
 
-@@ sDialogEU_0321 @@
+@@ sDialog_0x0321 @@
 Excuse me but can I borrow  your hammer?<NEXT>
  OK                          No<OPT 2>
 
-@@ sDialogEU_0322 @@
+@@ sDialog_0x0322 @@
 Thank you. It'll have more  power when I return it.<END>
 
-@@ sDialogEU_0323 @@
+@@ sDialog_0x0323 @@
 What? I won't ask you any   more!<END>
 
-@@ sDialogEU_0324 @@
+@@ sDialog_0x0324 @@
 You can plow the field      before spring,but I hear    it's smarter to wait until<NEXT>
 spring arrives.<END>
 
-@@ sDialogEU_0325 @@
+@@ sDialog_0x0325 @@
 How do you do? Has your     ranch become lively?<END>
 
-@@ sDialogEU_0326 @@
+@@ sDialog_0x0326 @@
 You can go out from here.<END>
 
-@@ sDialogEU_0327 @@
+@@ sDialog_0x0327 @@
 Hey,are you from the ranch? Do you use the sickle in theshed? How's it working?<NEXT>
  Very good                   Don't use it often<OPT 2>
 
-@@ sDialogEU_0328 @@
+@@ sDialog_0x0328 @@
 Wow! I made it.I'm so happy.I'll make it better.        Look forward to it.<END>
 
-@@ sDialogEU_0329 @@
+@@ sDialog_0x0329 @@
 Really? Don't you use it?   I made it with all my       energy!<END>
 
-@@ sDialogEU_032A @@
+@@ sDialog_0x032A @@
 Bye-Bye.<END>
 
-@@ sDialogEU_032B @@
+@@ sDialog_0x032B @@
 Gi....give me something to  eat.<END>
 
-@@ sDialogEU_032C @@
+@@ sDialog_0x032C @@
 Mushroom if possible. I wanta mushroom.....<END>
 
-@@ sDialogEU_032D @@
+@@ sDialog_0x032D @@
 Phew,I'm alive now. Thank   you very much. I didn't eat anything for 3 days.<NEXT>
 I need to give you          something. Take a look in   the shed tomorrow.<END>
 
-@@ sDialogEU_032E @@
+@@ sDialog_0x032E @@
 That's a poisonous mushroom!It will kill you,you know.<END>
 
-@@ sDialogEU_032F @@
+@@ sDialog_0x032F @@
 Mush..mushroom... I want    nothing but a mushroom.<END>
 
-@@ sDialogEU_0330 @@
+@@ sDialog_0x0330 @@
 Stop that!! That rabbit is  mine. What are you doing    to it?<NEXT>
  Let it loose                Just watching<OPT 2>
 
-@@ sDialogEU_0331 @@
+@@ sDialog_0x0331 @@
 If you buy it with 1000G,   you can do what you want.<NEXT>
  Pay                         Not pay                      Money <NUM 7 31>0G<OPT 2>
 
-@@ sDialogEU_0332 @@
+@@ sDialog_0x0332 @@
 I live like this. Bye.<END>
 
-@@ sDialogEU_0333 @@
+@@ sDialog_0x0333 @@
 I see...you are kind.       I don't want money,but      everybody lives<NEXT>
 differently. Please         understand it. Bye.<END>
 
-@@ sDialogEU_0334 @@
+@@ sDialog_0x0334 @@
 No,I can't hand this rabbit to you. I live like this.   Bye.<END>
 
-@@ sDialogEU_0335 @@
+@@ sDialog_0x0335 @@
 I'm the spirit here,Water   Imp. You gave my fish back. You are a good man.<NEXT>
 I give you this.            You've become fine.<END>
 
-@@ sDialogEU_0336 @@
+@@ sDialog_0x0336 @@
 Ah,the first human in...    well,how long has it been   since the last human<NEXT>
 being came here? ...Hey you,are you working hard?<NEXT>
  Yes                         No<OPT 2>
 
-@@ sDialogEU_0337 @@
+@@ sDialog_0x0337 @@
 Now,take this with you.     You can sell it at an       expensive price.<NEXT>
 Work hard from now on.<END>
 
-@@ sDialogEU_0338 @@
+@@ sDialog_0x0338 @@
 Go home as soon as possible.<END>
 
-@@ sDialogEU_0339 @@
+@@ sDialog_0x0339 @@
 Thank you for letting it    bloom. No one has ever      planted it before.<NEXT>
 I'm so happy.... I want to  give something good to you.<END>
 
-@@ sDialogEU_033A @@
+@@ sDialog_0x033A @@
 .........Both the flower andI will disappear soon but...I will always pray for you<NEXT>
 to be happy.<END>
 
-@@ sDialogEU_033B @@
+@@ sDialog_0x033B @@
 That's the miracle potion.  Good luck.                  The medicine to get it<NEXT>
 in good shape is included   and it's 4000G in total,    a little expensive, huh?<NEXT>
  Buy                         Don't buy                    Money <NUM 7 32>0G<OPT 2>
 
-@@ sDialogEU_033C @@
+@@ sDialog_0x033C @@
 It's a tomato seed. It's    economical because even     after the harvest,<NEXT>
 you can have tomatoes if youkeep watering. It's 300G.<NEXT>
  Buy                         Don't buy                    Money <NUM 7 33>0G<OPT 2>
 
-@@ sDialogEU_033D @@
+@@ sDialog_0x033D @@
 That's a potato seed. You   can harvest it when the     leaves become big.<NEXT>
 It's 200G.<NEXT>
  Buy                         Don't buy                    Money <NUM 7 34>0G<OPT 2>
 
-@@ sDialogEU_033E @@
+@@ sDialog_0x033E @@
 That's a turnip seed. It    doesn't take you long to    harvest so it's very<NEXT>
 convenient. The price is    200G, convenient too, huh?<NEXT>
  Buy                         Don't buy                    Money <NUM 7 35>0G<OPT 2>
 
-@@ sDialogEU_033F @@
+@@ sDialog_0x033F @@
 That's a corn seed. It takesthe longest time to harvest but sells for more.<NEXT>
 Also you can have some corn if you keep watering them   after the harvest.<NEXT>
 It's 300G.<NEXT>
  Buy                         Don't buy                    Money <NUM 7 36>0G<OPT 2>
 
-@@ sDialogEU_0340 @@
+@@ sDialog_0x0340 @@
 That's a flower. It just    blooms one day but it's goodfor a present. OK,<NEXT>
 it's 300G, the discounted   price!<NEXT>
  Buy                         Don't buy                    Money <NUM 7 37>0G<OPT 2>
 
-@@ sDialogEU_0341 @@
+@@ sDialog_0x0341 @@
 That's feed for cows-12     feedings per bag.You better feed them fodder as much as<NEXT>
 possible.           It costs 1000G.<NEXT>
  Buy                         Don't buy                    Money <NUM 7 38>0G<OPT 2>
 
-@@ sDialogEU_0342 @@
+@@ sDialog_0x0342 @@
 It's feed for chickens-12   feedings per bag. Use it    when you don't have enough<NEXT>
 fodder but generally you'd  better feed them fodder.    It costs 300G.<NEXT>
  Buy                         Don't buy                    Money <NUM 7 39>0G<OPT 2>
 
-@@ sDialogEU_0343 @@
+@@ sDialog_0x0343 @@
 It's a sprinkler. You can   water with it very quickly! It's really cheap.<NEXT>
 If you trade your watering  can in, we can sell it for  2000G.<NEXT>
  Buy                         Don't buy                    Money <NUM 7 40>0G<OPT 2>
 
-@@ sDialogEU_0344 @@
+@@ sDialog_0x0344 @@
 That's a super sickle. I    invented it. If you trade   your sickle in,<NEXT>
 we can sell it for 2000G.<NEXT>
  Buy                         Don't buy                    Money <NUM 7 41>0G<OPT 2>
 
-@@ sDialogEU_0345 @@
+@@ sDialog_0x0345 @@
 That's a super hoe. It's    very powerful. If you trade your hoe in,<NEXT>
 we can sell it for 2000G.<NEXT>
  Buy                         Don't buy                    Money <NUM 7 42>0G<OPT 2>
 
-@@ sDialogEU_0346 @@
+@@ sDialog_0x0346 @@
 That's a super hammer. It   can knock a big rock down.  Don't you want it?<NEXT>
 If you trade your hammer in,we can sell it for 2000G.<NEXT>
  Buy                         Don't buy                    Money <NUM 7 43>0G<OPT 2>
 
-@@ sDialogEU_0347 @@
+@@ sDialog_0x0347 @@
 That's a super axe. You can chop a log with one blow!   If you trade your axe in,<NEXT>
 we can sell it for 2000G.<NEXT>
  Buy                         Don't buy                    Money <NUM 7 44>0G<OPT 2>
 
-@@ sDialogEU_0348 @@
+@@ sDialog_0x0348 @@
 That's a cake,good for a    present and recovery of     stamina. It's only 500G.<NEXT>
  Buy                         Don't  buy                   Money <NUM 7 45>0G<OPT 2>
 
-@@ sDialogEU_0349 @@
+@@ sDialog_0x0349 @@
 Thank you.It's perishable soeat while it's still fresh.<END>
 
-@@ sDialogEU_034A @@
+@@ sDialog_0x034A @@
 You don't know              how good it is!<END>
 
-@@ sDialogEU_034B @@
+@@ sDialog_0x034B @@
 "Place to Hatch Eggs"       Please place eggs here.<END>
 
-@@ sDialogEU_034C @@
+@@ sDialog_0x034C @@
 "Shipping Box for Eggs"<END>
 
-@@ sDialogEU_034D @@
+@@ sDialog_0x034D @@
 "Shipping Box for Milk"<END>
 
-@@ sDialogEU_034E @@
+@@ sDialog_0x034E @@
 Get the cows in here        when they give a birth.<END>
 
-@@ sDialogEU_034F @@
+@@ sDialog_0x034F @@
 "Take-out spout of fodder"  Cut grass comes out of here.<END>
 
-@@ sDialogEU_0350 @@
+@@ sDialog_0x0350 @@
 Milk? I'm buying it for 200GDo you agree?<NEXT>
  Yes                         No                           Money <NUM 7 46>0G<OPT 2>
 
-@@ sDialogEU_0351 @@
+@@ sDialog_0x0351 @@
 Milk? I'm buying it for 300Gbut is it OK?<NEXT>
  Yes                         No                           Money <NUM 7 47>0G<OPT 2>
 
-@@ sDialogEU_0352 @@
+@@ sDialog_0x0352 @@
 Milk? I'm buying it for 400Gbut is it OK?<NEXT>
  Yes                         No                           Money <NUM 7 48>0G<OPT 2>
 
-@@ sDialogEU_0353 @@
+@@ sDialog_0x0353 @@
 Corn? Well...I'm buying it  for 240G but is it OK?<NEXT>
  Yes                         No                           Money <NUM 7 49>0G<OPT 2>
 
-@@ sDialogEU_0354 @@
+@@ sDialog_0x0354 @@
 Yes,it's a well ripened     tomato. I'm buying it for   200G but is it OK?<NEXT>
  Yes                         No                           Money <NUM 7 50>0G<OPT 2>
 
-@@ sDialogEU_0355 @@
+@@ sDialog_0x0355 @@
 Potato? Well,I'm buying it  for 160G but is it OK?<NEXT>
  Yes                         No                           Money <NUM 7 51>0G<OPT 2>
 
-@@ sDialogEU_0356 @@
+@@ sDialog_0x0356 @@
 Turnip? Good shape,isn't it? I'm buying it for 120G but is it OK?<NEXT>
  Yes                         No                           Money <NUM 7 52>0G<OPT 2>
 
-@@ sDialogEU_0357 @@
+@@ sDialog_0x0357 @@
 Isn't it a fresh egg? I'm   buying it for 100G but is itOK?<NEXT>
  Yes                         No                           Money <NUM 7 53>0G<OPT 2>

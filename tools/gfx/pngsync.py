@@ -29,6 +29,7 @@ trailing `Padding_*` fill in src/data/gfx/<kind>/bank_XX.asm (error if the bank 
 import argparse
 import fnmatch
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -232,30 +233,44 @@ def parse_nametable(text):
 # ----------------------------------------------------------------------------------------------------------------------
 # blobs
 # ----------------------------------------------------------------------------------------------------------------------
+REGIONS = ("us", "eu", "de", "jp")
+
+
+def region_dirs(k, region):
+    """(generated .bin dir, source dir) of a kind for a release.  US = the shared blobs; other releases keep only the
+    blobs that differ from US in `<dir>/<region>/` (bin) and `assets/gfx/png/<region>/<kind>` / `assets/gfx/tilemaps/<region>` (sources)."""
+    if region == "us":
+        return k.src, k.art_dir
+    art = k.art_dir.replace("assets/gfx/png/", f"assets/gfx/png/{region}/") if k.art_dir.startswith("assets/gfx/png/") \
+        else f"{k.art_dir}/{region}"
+    return f"{k.src}/{region}", art
+
+
 class Blob:
-    def __init__(self, kind, label, root=ROOT):
-        self.kind, self.label, self.root = kind, label, Path(root)
+    def __init__(self, kind, label, root=ROOT, region="us"):
+        self.kind, self.label, self.root, self.region = kind, label, Path(root), region
         k = KINDS[kind]
-        self.bin = self.root / k.src / f"{label}.bin"
-        self.art = self.root / k.art_dir / f"{label}{k.art_ext}"
-        self.meta = self.root / k.art_dir / f"{label}.json"
+        src, art = region_dirs(k, region)
+        self.bin = self.root / src / f"{label}.bin"
+        self.art = self.root / art / f"{label}{k.art_ext}"
+        self.meta = self.root / art / f"{label}.json"
         self.compressed = bool(k.compressed_prefix and label.startswith(k.compressed_prefix))
 
     def rel(self, p):
         return str(p.relative_to(self.root)).replace("\\", "/")
 
 
-def blobs(root=ROOT, patterns=None, kind=None, from_sources=False):
+def blobs(root=ROOT, patterns=None, kind=None, from_sources=False, region="us"):
     """Blobs known from the committed .bin files, or (from_sources) from the sidecar .json files in the source dirs."""
     out = []
     for name, k in KINDS.items():
         if kind and name != kind:
             continue
-        d = Path(root) / (k.art_dir if from_sources else k.src)
+        d = Path(root) / region_dirs(k, region)[1 if from_sources else 0]
         for p in sorted(d.glob("*.json" if from_sources else "*.bin")):
             if p.stem.startswith(k.prefixes):
                 if not patterns or any(fnmatch.fnmatchcase(p.stem, pat) for pat in patterns):
-                    out.append(Blob(name, p.stem, root))
+                    out.append(Blob(name, p.stem, root, region))
     return out
 
 
@@ -430,8 +445,38 @@ def build_bin(b, meta=None):
 # ----------------------------------------------------------------------------------------------------------------------
 # commands
 # ----------------------------------------------------------------------------------------------------------------------
+def export_region_from_rom(a, root=ROOT):
+    """eu/de/jp: write the blobs that differ from US (found by tools/data/regionbanks.py) as .bin and export their sources."""
+    sys.path.insert(0, str(ROOT / "tools" / "data"))
+    import regionbanks as RB
+    roms = RB.find_roms(a.rom_dir)
+    n = 0
+    for bank in RB.GFX_BANKS:
+        for placed, us, cls in RB.classify(roms["US"], roms[a.region.upper()], bank, root):
+            e = placed.entry
+            if cls != "specific" or e.kind not in ("tiles", "tilemap", "charmap"):
+                continue
+            if a.label and not any(fnmatch.fnmatchcase(e.label, pat) for pat in a.label):
+                continue
+            kind = "tilemaps" if e.kind in ("tilemap", "charmap") else "tiles"
+            b = Blob(kind, e.label, root, a.region)
+            b.bin.parent.mkdir(parents=True, exist_ok=True)
+            b.bin.write_bytes(placed.data)
+            export_blob(b)
+            n += 1
+    print(f"exported {n} {a.region.upper()} specific blobs")
+
+
 def cmd_export(a, root=ROOT):
-    sel = blobs(root, a.label, a.kind)
+    if getattr(a, "region", "us") != "us":
+        if not getattr(a, "rom_dir", None) and not os.environ.get("HM_ROM_DIR"):
+            sel = blobs(root, a.label, a.kind, region=a.region)
+            for b in sel:
+                export_blob(b)
+            print(f"exported {len(sel)} blobs")
+            return 0
+        return export_region_from_rom(a, root) or 0
+    sel = blobs(root, a.label, a.kind, region=getattr(a, "region", "us"))
     for b in sel:
         export_blob(b)
     print(f"exported {len(sel)} blobs")
@@ -440,19 +485,45 @@ def cmd_export(a, root=ROOT):
 
 def cmd_build(a, root=ROOT):
     """PNG / text sources -> .bin files (the .bin files are generated, git-ignored build products)."""
-    sel = blobs(root, a.label, a.kind, from_sources=True)
+    sel = []
+    for r in (REGIONS if getattr(a, "region", None) == "all" else [getattr(a, "region", None) or "us"]):
+        sel += blobs(root, a.label, a.kind, from_sources=True, region=r)
     for b in sel:
         data = build_bin(b)
         b.bin.parent.mkdir(parents=True, exist_ok=True)
         if not b.bin.exists() or b.bin.read_bytes() != data:
             b.bin.write_bytes(data)
     print(f"pngsync build: {len(sel)} blobs written from PNG/text sources")
+    if getattr(a, "region", None) == "all":
+        print(f"pngsync build: {share_us_blobs(root)} shared blobs copied into the regional directories")
     return 0
+
+
+def share_us_blobs(root=ROOT):
+    """The bank sources include a blob through `!{REGDIR}` when ANY release has its own version of it.  For the releases
+    that use the US data, the build copies the shared US file into that release's directory."""
+    n = 0
+    labels = set()
+    for d in ("tiles", "characters"):
+        for f in (Path(root) / "src/data/gfx" / d).glob("bank_*.asm"):
+            labels |= set(re.findall(r'/!\{REGDIR\}(\w+)\.bin"', f.read_text(encoding="utf-8")))
+    for lab in sorted(labels):
+        if lab.startswith("sFontGlyphs_"):
+            continue                                        # written for every release by tools/fonts/font.py
+        k = next(k for k in KINDS.values() if lab.startswith(k.prefixes))
+        us = Path(root) / k.src / f"{lab}.bin"
+        for r in REGIONS[1:]:
+            dst = Path(root) / region_dirs(k, r)[0] / f"{lab}.bin"
+            if not dst.exists():
+                dst.parent.mkdir(parents=True, exist_ok=True)
+                dst.write_bytes(us.read_bytes()); n += 1
+    return n
 
 
 def cmd_check(a, root=ROOT):
     bad = 0
-    sel = blobs(root, a.label, a.kind)
+    region = getattr(a, "region", None) or "us"
+    sel = blobs(root, a.label, a.kind, region=region, from_sources=region != "us")   # regional .bin dirs also hold copies of shared US blobs
     for b in sel:
         try:
             if not b.art.exists() or not b.meta.exists():
@@ -468,7 +539,7 @@ def cmd_check(a, root=ROOT):
     if not a.label and not a.kind:       # coverage: no orphan sources
         known = {(x.art.name) for x in sel} | {x.meta.name for x in sel}
         for k in KINDS.values():
-            d = Path(root) / k.art_dir
+            d = Path(root) / region_dirs(k, region)[1]
             for p in sorted(d.glob("*")) if d.exists() else []:
                 if p.suffix in (".png", ".json", ".txt") and p.name not in known:
                     print(f"FAIL orphan source without .bin: {p.relative_to(root)}")
@@ -479,6 +550,8 @@ def cmd_check(a, root=ROOT):
 
 def adjust_padding(b, delta):
     """blob grew by `delta` bytes: shrink the bank's last Padding_* fill (same asm file as the blob)."""
+    if getattr(b, "region", "us") != "us":
+        return None                                     # regional banks end in `fill align`: the padding adapts by itself
     asm_dir = Path(b.root) / ASM_DIRS[b.kind]
     rx = re.compile(rf'incbin "[^"]*/{re.escape(b.label)}\.bin"')
     for f in sorted(asm_dir.glob("bank_*.asm")):
@@ -498,7 +571,7 @@ def adjust_padding(b, delta):
 
 
 def cmd_import(a, root=ROOT):
-    sel = blobs(root, a.label, a.kind)
+    sel = blobs(root, a.label, a.kind, region=getattr(a, "region", None) or "us")
     changed = 0
     for b in sel:
         meta = read_meta(b)
@@ -676,6 +749,12 @@ def main(argv=None):
         p = sub.add_parser(name)
         p.add_argument("--label", action="append", help="fnmatch pattern on the blob label (repeatable)")
         p.add_argument("--kind", choices=sorted(KINDS))
+        if name in ("export", "import", "check", "build"):
+            p.add_argument("--region", choices=REGIONS + (("all",) if name == "build" else ()), default="us",
+                           help="release (default us = shared blobs; eu/de/jp = blobs that differ from US)")
+        if name == "export":
+            p.add_argument("--rom-dir", help="with --region eu|de|jp: take the region blobs from the ROM images "
+                                             "(<dir>/{US,EU,DE,JP}/*.sfc or $HM_ROM_DIR); writes the .bin files and sources")
         if name == "import":
             p.add_argument("--allow-resize", action="store_true", help="allow growing a blob (shrinks the bank padding)")
         if name == "preview":

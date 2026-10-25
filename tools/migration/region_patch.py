@@ -35,7 +35,7 @@ Usage:
         --keep     do not reduce the sources to the US text first (add layers to the current patch blocks)
         --dry-run  work on a temporary copy of src/code and print statistics only
     python tools/migration/region_patch.py --write-expected --eu EU.sfc --de DE.sfc --jp JP.sfc
-        store the hashes of banks $80-$85 of the given regions in tests/expected.json
+        store the hashes of the complete regional ROMs in tests/expected.json
 """
 import argparse
 import bisect
@@ -781,8 +781,8 @@ def write_expected(roms):
     path = ROOT / "tests" / "expected.json"
     data = json.loads(path.read_text(encoding="utf-8"))
     for r, rom in roms.items():
-        part = rom[0:6 * BANK_SIZE]
-        data[r] = {"banks": ["80", "85"], "size": len(part), "crc32": "%08X" % (zlib.crc32(part) & 0xFFFFFFFF),
+        part = rom                                   # the complete ROM (all data banks are part of the unified tree)
+        data[r] = {"size": len(part), "crc32": "%08X" % (zlib.crc32(part) & 0xFFFFFFFF),
                    "md5": hashlib.md5(part).hexdigest(), "sha1": hashlib.sha1(part).hexdigest()}
     path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8", newline="\n")
 

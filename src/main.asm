@@ -70,11 +70,6 @@
     incsrc "data/gfx/palettes/bank_A8.asm"
     incsrc "data/gfx/palettes/bank_A9.asm"
     
-    ; JP dialogs (empty in US/EU/DE versions)
-    ;incsrc "data/dialogs/jp/bank_AA.asm"
-    ;incsrc "data/dialogs/jp/bank_AB.asm"
-    ;incsrc "data/dialogs/jp/bank_AC.asm"
-    
     ; Audio
     incsrc "data/audio/bank_AD.asm"
     incsrc "data/audio/bank_AE.asm"
@@ -88,14 +83,21 @@
     incsrc "ai/commands.asm"
     incsrc "ai/us/scripts.asm"
     
-    ; US/EU/DE dialogs
+    ; Dialogs (generated from assets/dialogs/<region>/*.txt by tools/dialogs/dialog.py build):
+    ; US/EU/DE in banks $B6-$BB, JP in banks $AA-$AC (the other banks stay zero)
     incsrc "data/dialogs/macros.asm"
-    incsrc "data/dialogs/us/bank_B6.asm"
-    incsrc "data/dialogs/us/bank_B7.asm"
-    incsrc "data/dialogs/us/bank_B8.asm"
-    incsrc "data/dialogs/us/bank_B9.asm"
-    incsrc "data/dialogs/us/bank_BA.asm"
-    incsrc "data/dialogs/us/bank_BB.asm"
+    if !REGION_JP
+        incsrc "../build/gen/dialogs/jp/bank_AA.asm"
+        incsrc "../build/gen/dialogs/jp/bank_AB.asm"
+        incsrc "../build/gen/dialogs/jp/bank_AC.asm"
+    else
+        incsrc "../build/gen/dialogs/!{DLGDIR}/bank_B6.asm"
+        incsrc "../build/gen/dialogs/!{DLGDIR}/bank_B7.asm"
+        incsrc "../build/gen/dialogs/!{DLGDIR}/bank_B8.asm"
+        incsrc "../build/gen/dialogs/!{DLGDIR}/bank_B9.asm"
+        incsrc "../build/gen/dialogs/!{DLGDIR}/bank_BA.asm"
+        incsrc "../build/gen/dialogs/!{DLGDIR}/bank_BB.asm"
+    endif
     
     ; Unused
     ;incsrc "data/padding/bank_BC.asm"

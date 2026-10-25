@@ -22,7 +22,7 @@ sPalette_0x45:
     incbin "../../../../assets/gfx/palettes/sPalette_0x45.pal"
 
 sPalette_0x46:
-    incbin "../../../../assets/gfx/palettes/sPalette_0x46.pal"
+    incbin "../../../../assets/gfx/palettes/!{REGDIR}sPalette_0x46.pal"
 
 sPalette_0x47:
     incbin "../../../../assets/gfx/palettes/sPalette_0x47.pal"
@@ -136,10 +136,10 @@ sPalette_0x6B:
     incbin "../../../../assets/gfx/palettes/sPalette_0x6B.pal"
 
 sPalette_0x6C:
-    incbin "../../../../assets/gfx/palettes/sPalette_0x6C.pal"
+    incbin "../../../../assets/gfx/palettes/!{REGDIR}sPalette_0x6C.pal"
 
 sPalette_0x6D:
-    incbin "../../../../assets/gfx/palettes/sPalette_0x6D.pal"
+    incbin "../../../../assets/gfx/palettes/!{REGDIR}sPalette_0x6D.pal"
 
 sPalette_0x6E:
     incbin "../../../../assets/gfx/palettes/sPalette_0x6E.pal"

@@ -1,296 +1,296 @@
-@@ sDialogDE_0406 @@
+@@ sDialog_0x0406 @@
 Die erste Weissagung des    Jahres findet auf der       Bergspitze statt.<END>
 
-@@ sDialogDE_0407 @@
+@@ sDialog_0x0407 @@
 Der Winter ist eine gute    Zeit, um seinen Viehbestand zu vergrößern. Oder um ein<NEXT>
 paar Mädchen kennenzulernen.<END>
 
-@@ sDialogDE_0408 @@
+@@ sDialog_0x0408 @@
 Im Winter gibt es in den    Bergen nicht viel Nahrung   für die Tiere. Es ist ein<NEXT>
 reiner Kampf ums Überleben.<END>
 
-@@ sDialogDE_0409 @@
+@@ sDialog_0x0409 @@
 Im Winter benötigst Du eine Menge Holz. Fange           rechtzeitig an, Holz zu<NEXT>
 hacken.<END>
 
-@@ sDialogDE_040A @@
+@@ sDialog_0x040A @@
 Wenn Du mich so anstarrst,  kann ich nicht aus dem      Wasser herauskommen. Zuerst<NEXT>
 mußt Du die Augen schließen,Du kleiner Frechdachs!<END>
 
-@@ sDialogDE_040B @@
+@@ sDialog_0x040B @@
 Wenige Menschen besuchen    diesen herrlichen Platz.<END>
 
-@@ sDialogDE_040C @@
+@@ sDialog_0x040C @@
 Diese Kräuter gedeihen      prächtig, obwohl nur sehr   wenig Licht auf diesen<NEXT>
 Platz fällt.<END>
 
-@@ sDialogDE_040D @@
+@@ sDialog_0x040D @@
 Ich träume davon, in einem  Blumenmeer zu baden.<END>
 
-@@ sDialogDE_040E @@
+@@ sDialog_0x040E @@
 Nicht nur Blumen! Ich liebe auch Kräuter und Gemüse. EinGemüsegarten wäre bei mir<NEXT>
 in besten Händen.<END>
 
-@@ sDialogDE_040F @@
+@@ sDialog_0x040F @@
 Die Stille der Kirche       verleiht mir innere Kraft.<END>
 
-@@ sDialogDE_0410 @@
+@@ sDialog_0x0410 @@
 Wer rastet, der rostet.<END>
 
-@@ sDialogDE_0411 @@
+@@ sDialog_0x0411 @@
 Alles in Ordnung? Ein Glück,daß niemand verletzt wurde. Die Natur verfügt über<NEXT>
 ungeheure Kräfte.<END>
 
-@@ sDialogDE_0412 @@
+@@ sDialog_0x0412 @@
 Warum überraschst Du uns    nicht mit einer passenden   Rede?<END>
 
-@@ sDialogDE_0413 @@
+@@ sDialog_0x0413 @@
 Dieses schreckliche         Erdbeben. Ich habe mir vor  Angst in die Hosen gemacht.<END>
 
-@@ sDialogDE_0414 @@
+@@ sDialog_0x0414 @@
 Ist Dir schon aufgefallen,  daß der große Fels          zerbrochen ist?<END>
 
-@@ sDialogDE_0415 @@
+@@ sDialog_0x0415 @@
 Ich habe von einer          mysteriösen Quelle in den   Bergen gehört. Sie ist ...<NEXT>
 ach, gerade habe ich es     vergessen.<END>
 
-@@ sDialogDE_0416 @@
+@@ sDialog_0x0416 @@
 Der Winter ist so trist und langweilig.<END>
 
-@@ sDialogDE_0417 @@
+@@ sDialog_0x0417 @@
 Der Wirbelsturm hat ein Lochin das Dach gerissen. Wir   reparieren es gerade.<END>
 
-@@ sDialogDE_0418 @@
+@@ sDialog_0x0418 @@
 Ähh, ich hätte gerne ein Ei!<END>
 
-@@ sDialogDE_0419 @@
+@@ sDialog_0x0419 @@
 Ich werde Dich nie mehr     etwas fragen. Du Trottel!<END>
 
-@@ sDialogDE_041A @@
+@@ sDialog_0x041A @@
 Danke schön. Dies sind      meine gesamten Ersparnisse. Bye!<END>
 
-@@ sDialogDE_041B @@
+@@ sDialog_0x041B @@
 Ich will ein Ei. Ich will   nur ein Ei. Bitte, bitte!<END>
 
-@@ sDialogDE_041C @@
+@@ sDialog_0x041C @@
 "Stall"<END>
 
-@@ sDialogDE_041D @@
+@@ sDialog_0x041D @@
 <VAR 4 26>s Geburtstagsfeier.     Schon wieder ist ein Jahr   vergangen. Die Zeit vergeht<NEXT>
 wie im Flug.<END>
 
-@@ sDialogDE_041E @@
+@@ sDialog_0x041E @@
 Wow, Kuchen! Ist es nicht   der Geburtstag von <VAR 4 27>?<END>
 
-@@ sDialogDE_041F @@
+@@ sDialog_0x041F @@
 Was für ein wundervoller    Tag. So schön warm!<END>
 
-@@ sDialogDE_0420 @@
+@@ sDialog_0x0420 @@
 Der Sommer ist die Zeit der Naturkatastrophen. Du       solltest ständig die<NEXT>
 Wettervorhersage anschauen.<END>
 
-@@ sDialogDE_0421 @@
+@@ sDialog_0x0421 @@
 Der Herbst von seiner       schönen Seite. Der Himmel   ist klar und freundlich.<END>
 
-@@ sDialogDE_0422 @@
+@@ sDialog_0x0422 @@
 Meine Kochkünste sind       ausbaufähig. Habe ein wenig Geduld mit mir.<END>
 
-@@ sDialogDE_0423 @@
+@@ sDialog_0x0423 @@
 Ich wünschte, ich hätte am  "Ehefrauen-Training"        teilgenommen.<END>
 
-@@ sDialogDE_0424 @@
+@@ sDialog_0x0424 @@
 Es ist Frühling! Frühling!  Laß uns pflanzen!<END>
 
-@@ sDialogDE_0425 @@
+@@ sDialog_0x0425 @@
 Guten Morgen. Welch ein     herrlicher Tag.<END>
 
-@@ sDialogDE_0426 @@
+@@ sDialog_0x0426 @@
 Hier streunen oft wildernde Hunde herum. Achte darauf,  daß Dein Zaun in Ordnung<NEXT>
 ist.<END>
 
-@@ sDialogDE_0427 @@
+@@ sDialog_0x0427 @@
 Wenn es regnet, müssen wir  <VAR 4 28> ins Haus bringen.<END>
 
-@@ sDialogDE_0428 @@
+@@ sDialog_0x0428 @@
 Schatz, bitte gehe mit <VAR 4 29> oder <VAR 4 30> öfters spazieren.<END>
 
-@@ sDialogDE_0429 @@
+@@ sDialog_0x0429 @@
 Ich würde gerne auf <VAR 4 31>    reiten.<END>
 
-@@ sDialogDE_042A @@
+@@ sDialog_0x042A @@
 Die Wetterbedingungen sind  optimal, um leckeren        Beerensaft herzustellen.<END>
 
-@@ sDialogDE_042B @@
+@@ sDialog_0x042B @@
 Das ist Traubensaft. Das    hier ist Lorbeersaft und dasist Pflaumensaft. Mein<NEXT>
 Onkel hat mir die Säfte     gegeben. Ich möchte sie mit vielen Leuten teilen.<END>
 
-@@ sDialogDE_042C @@
+@@ sDialog_0x042C @@
 Dieser wurde im Frühling    hergestellt. Er ist<NEXT>
 demnächst trinkbar.<END>
 
-@@ sDialogDE_042D @@
+@@ sDialog_0x042D @@
 Von Maschinen habe ich die  Nase voll. Heute bleibe ich zu Hause.<END>
 
-@@ sDialogDE_042E @@
+@@ sDialog_0x042E @@
 Die heftigen Schneefälle    zerstören große Teile der   Zäune.<END>
 
-@@ sDialogDE_042F @@
+@@ sDialog_0x042F @@
 Hoffentlich hält der        Frühling bald Einzug.<END>
 
-@@ sDialogDE_0430 @@
+@@ sDialog_0x0430 @@
 Im Moment ist nicht viel zu tun. Wir könnten mal eine   richtig heftige Party<NEXT>
 feiern.<END>
 
-@@ sDialogDE_0431 @@
+@@ sDialog_0x0431 @@
 Das Knistern des brennenden Holzes und der Geruch des   Feuers erzeugen eine<NEXT>
 nostalgische Stimmung.      Meinst Du nicht auch?<END>
 
-@@ sDialogDE_0432 @@
+@@ sDialog_0x0432 @@
 Das schöne Gras ist         verschwunden. Wie trostlos!<END>
 
-@@ sDialogDE_0433 @@
+@@ sDialog_0x0433 @@
 Es leben so viele Menschen  auf der Erde, wie Sterne am Firmament funkeln. Eine<NEXT>
 Wahnsinnsvorstellung! Die   Chance, den Partner Deines  Herzens zu treffen, beträgt<NEXT>
 eins zu vielen Millionen.   Ich bin glücklich, daß Du   bei mir bist.<END>
 
-@@ sDialogDE_0434 @@
+@@ sDialog_0x0434 @@
 Werden die Sterne noch      funkeln, wenn wir alt sind?<END>
 
-@@ sDialogDE_0435 @@
+@@ sDialog_0x0435 @@
 Hallo! Hä... hättest Du     vielleicht Lust, später mit mir die Sternenpracht<NEXT>
 anschauen?<END>
 
-@@ sDialogDE_0436 @@
+@@ sDialog_0x0436 @@
 Möge jeder glücklich und    zufrieden bis ans Ende allerTage leben. Laß uns nach<NEXT>
 Hause gehen, nachdem wir dieSterne beobachtet haben.<END>
 
-@@ sDialogDE_0437 @@
+@@ sDialog_0x0437 @@
 Ich bin glücklich, daß Du   hier bist. Ich will Dir     etwas ins Ohr flüstern:<NEXT>
 Das nächste Jahr will ich   nur mit Dir verbringen!<END>
 
-@@ sDialogDE_0438 @@
+@@ sDialog_0x0438 @@
 Hallo Darling!              Du kommst spät. Trink einen Schluck mit uns!<END>
 
-@@ sDialogDE_0439 @@
+@@ sDialog_0x0439 @@
 Ich warte jedes Jahr auf denKometen. Mit Dir zusammen   sind diese Momente doppelt<NEXT>
 so schön.<END>
 
-@@ sDialogDE_043A @@
+@@ sDialog_0x043A @@
 Ich hoffe, wir werden auch  in den kommenden Jahren hiergemeinsam sitzen und zu den<NEXT>
 Sternen schauen.<END>
 
-@@ sDialogDE_043B @@
+@@ sDialog_0x043B @@
 Wir sehen nicht oft         Menschen... besonders nicht so spät... und erst recht<NEXT>
 nicht an diesem Ort......   Ich bin ein wenig nervös!   Ähh, hörst Du mir überhaupt<NEXT>
 zu?<END>
 
-@@ sDialogDE_043C @@
+@@ sDialog_0x043C @@
 Hmmm, wie schön! Dies ist   der tollste Aussichtspunkt  der Welt.<END>
 
-@@ sDialogDE_043D @@
+@@ sDialog_0x043D @@
 Tut mir leid, aber ich kann Dir noch nicht antworten.   Wenn die Sonne scheint,<NEXT>
 treffen wir uns Samstag um  zwölf an der Kirche.<END>
 
-@@ sDialogDE_043E @@
+@@ sDialog_0x043E @@
 Was? Das hört sich traumhaftan, aber... Wir treffen uns am nächsten sonnigen<NEXT>
 Samstag vor dem Geschäft.   Komm bitte, bevor es dunkel ist.<END>
 
-@@ sDialogDE_043F @@
+@@ sDialog_0x043F @@
 Ich weiß wirklich nicht, wasich sagen soll. Komm am     Sonntag in die Berge, wenn<NEXT>
 die Sonne scheint. Ich warteauf Dich, bis zum           Sonnenuntergang.<END>
 
-@@ sDialogDE_0440 @@
+@@ sDialog_0x0440 @@
 Ohhh,... nun, ähhh... ich   weiß nicht so recht. Ich    erwarte Dich an einem<NEXT>
 sonnigen Tag am Haus des    Viehhändlers.<END>
 
-@@ sDialogDE_0441 @@
+@@ sDialog_0x0441 @@
 Huch. Wirklich? Ich muß     zuerst mit meinem Großvater reden. Besuche an einem<NEXT>
 sonnigen Samstag die Berge. Ich werde dort auf Dich     warten. Komm bitte so früh<NEXT>
 wie möglich.<END>
 
-@@ sDialogDE_0442 @@
+@@ sDialog_0x0442 @@
 Sie muht........<END>
 
-@@ sDialogDE_0443 @@
+@@ sDialog_0x0443 @@
 Hey, ich habe diesen Overallgemacht. Klasse, oder?<END>
 
-@@ sDialogDE_0444 @@
+@@ sDialog_0x0444 @@
   Geld <NUM 7 62>0G<END>
 
-@@ sDialogDE_0445 @@
+@@ sDialog_0x0445 @@
   Kühe    <NUM 2 63>                  Hühner  <NUM 2 64><END>
 
-@@ sDialogDE_0446 @@
+@@ sDialog_0x0446 @@
   Energie <NUM 3 65><END>
 
-@@ sDialogDE_0447 @@
+@@ sDialog_0x0447 @@
   Betreuung der Kühe                            <VAR 4 32> <NUM 3 66><END>
 
-@@ sDialogDE_0448 @@
+@@ sDialog_0x0448 @@
   Marias Liebe           <NUM 3 67><END>
 
-@@ sDialogDE_0449 @@
+@@ sDialog_0x0449 @@
   Anns Liebe             <NUM 3 68><END>
 
-@@ sDialogDE_044A @@
+@@ sDialog_0x044A @@
   Ninas Liebe            <NUM 3 69><END>
 
-@@ sDialogDE_044B @@
+@@ sDialog_0x044B @@
   Ellens Liebe           <NUM 3 70><END>
 
-@@ sDialogDE_044C @@
+@@ sDialog_0x044C @@
   Evas Liebe             <NUM 3 71><END>
 
-@@ sDialogDE_044D @@
+@@ sDialog_0x044D @@
 Menge verkaufter Tomaten                             <NUM 3 72><END>
 
-@@ sDialogDE_044E @@
+@@ sDialog_0x044E @@
 Menge verkaufter Maiskolben                          <NUM 3 73><END>
 
-@@ sDialogDE_044F @@
+@@ sDialog_0x044F @@
 Menge verkaufter Kartoffeln                          <NUM 3 74><END>
 
-@@ sDialogDE_0450 @@
+@@ sDialog_0x0450 @@
 Menge verkaufter Steckrüben                          <NUM 3 75><END>
 
-@@ sDialogDE_0451 @@
+@@ sDialog_0x0451 @@
 Blockhaus<END>
 
-@@ sDialogDE_0452 @@
+@@ sDialog_0x0452 @@
 Super-Blockhaus<END>
 
-@@ sDialogDE_0453 @@
+@@ sDialog_0x0453 @@
 Super-Luxus-Riesen-Blockhaus<END>
 
-@@ sDialogDE_0454 @@
+@@ sDialog_0x0454 @@
 Lebensfreude             <NUM 3 76><END>
 
-@@ sDialogDE_0455 @@
+@@ sDialog_0x0455 @@
 Merkzettel der Floristin<NEXT>
  "Tomaten, Maiskolben"       "Steckrüben, Kartoffeln"    "Gras"<OPT 3>
 
-@@ sDialogDE_0456 @@
+@@ sDialog_0x0456 @@
 Tomaten und Maiskolben      werden im Sommer gesät.     Beachte: Was Du in einer<NEXT>
 falschen Jahreszeit säst,   wird nicht wachsen. Manche  Gemüsesorten kannst Du<NEXT>
 mehrmals ernten. Tomaten    wachsen schneller. Im Herbstgehen sie ein.<NEXT>
 Verkaufspreise:             Tomate/Stück            100GMaiskolben/Stück        120G<END>
 
-@@ sDialogDE_0457 @@
+@@ sDialog_0x0457 @@
 Steckrüben und Kartoffeln   werden im Frühjahr          gepflanzt. Sie wachsen<NEXT>
 schneller als Tomaten und   Mais. Steckrüben wachsen am schnellsten. Beide Sorten<NEXT>
 lassen sich nur einmal      ernten.<NEXT>
 Verkauf:                    Steckrübe/Stück          60GKartoffel/Stück          80G<END>
 
-@@ sDialogDE_0458 @@
+@@ sDialog_0x0458 @@
 Gras wird im Frühjahr und imSommer gesät. Dafür kannst  Du es noch im Herbst mähen.<NEXT>
 Gras muß nicht zusätzlich   gegossen werden. Du kannst  es nicht verkaufen.<NEXT>
 Es ist jedoch sehr wichtig  als Futter für Deine Tiere.<END>
 
-@@ sDialogDE_0459 @@
+@@ sDialog_0x0459 @@
 Tiere:<NEXT>
  "Kühe"        "Hühner"      "Milch"       "Eier"        "Gras"<OPT 5>
 
-@@ sDialogDE_045A @@
+@@ sDialog_0x045A @@
 Neu erworbene Kälber können noch nicht gemolken werden. Nach 21 Tagen geben sie<NEXT>
 erstmals Milch. Halte sie   immer gesund und<NEXT>
 munter und vergiß niemals,  sie zu füttern. Bei Regen,  Gewitter oder gar einem<NEXT>
@@ -298,226 +298,226 @@ Wirbelsturm mußt Du sie     in den Stall führen.<NEXT>
 Regen ist Gift für          die Kühe. Sie geben         keine Milch, werden krank<NEXT>
 oder bekommen furchtbar     schlechte Laune.<END>
 
-@@ sDialogDE_045B @@
+@@ sDialog_0x045B @@
 Wenn Du Dich mit der        Melkmaschine ausgerüstet    hast, kannst Du die Kühe<NEXT>
 mit dem Y-Knopf melken. Sie geben nur einmal pro Tag    Milch. Die Milchproduktion<NEXT>
 steigt, wenn Du sie täglich bürstest und mit ihnen      sprichst. Je besser Du sie<NEXT>
 pflegst, desto mehr Milch   geben sie.<END>
 
-@@ sDialogDE_045C @@
+@@ sDialog_0x045C @@
 Kühe fressen am liebsten    Gras. Wenn das Gras auf der Weide noch zu jung ist,<NEXT>
 werden die Kühe nicht satt. Mähe genug Gras, um Futter  für die Tiere zu haben. Im<NEXT>
 Winter und an Regentagen    wirst Du auf Deinen         Heuvorrat angewiesen sein.<END>
 
-@@ sDialogDE_045D @@
+@@ sDialog_0x045D @@
 Hühner legen ein Ei pro Tag.Wenn Du sie nicht fütterst  oder sie im Regen stehen<NEXT>
 läßt, legen sie drei Tage   lang keine Eier. Bei einem  Wirbelsturm besteht die<NEXT>
 Gefahr, daß die Hühner      weggeweht werden. Wildernde Hunde sind eine besondere<NEXT>
 Gefahr für das Federvieh. Amsichersten ist immer noch   der Stall.<END>
 
-@@ sDialogDE_045E @@
+@@ sDialog_0x045E @@
 Wenn Du ein Ei ausbrütest,  schlüpft nach drei Tagen einkleines Küken. Es benötigt<NEXT>
 noch kein Futter. Nach      sieben Tagen werden aus     Küken ausgewachsene Hühner.<NEXT>
 Da jedes Huhn eine          Futtereinheit pro Tag       benötigt, solltest Du einen<NEXT>
 ausreichenden Vorrat        anlegen.<END>
 
-@@ sDialogDE_045F @@
+@@ sDialog_0x045F @@
 "Lektionen der Liebe"<NEXT>
  Geschenke     Gespräche     Feste         Tagebücher    Heirat<OPT 5>
 
-@@ sDialogDE_0460 @@
+@@ sDialog_0x0460 @@
 Alle transportablen         Gegenstände eignen sich als Geschenk. Die Mädchen haben<NEXT>
 ganz unterschiedliche       Vorlieben. Teure Geschenke  haben nicht unbedingt den<NEXT>
 größten Erfolg.<END>
 
-@@ sDialogDE_0461 @@
+@@ sDialog_0x0461 @@
 Mit dem Mädchen Deiner Wahl solltest Du so oft wie      möglich reden.<END>
 
-@@ sDialogDE_0462 @@
+@@ sDialog_0x0462 @@
 Feste sind eine herrliche   Gelegenheit, Kontakte zu    knüpfen. Je nach Art des<NEXT>
 Festes halten sich die      Mädchen an anderen Orten    auf. Rede vor dem Fest mit<NEXT>
 den Mädchen, um mehr zu     erfahren. Bei einem         wohlduftenden Parfum wird<NEXT>
 jedes Mädchen schwach.<END>
 
-@@ sDialogDE_0463 @@
+@@ sDialog_0x0463 @@
 In den Tagebüchern der      Mädchen kannst Du lesen, wiesie über Dich denken. Ein<NEXT>
 bißchen Neugier kann nicht  schaden! Schau aber nicht zuoft nach. Gib Dein Bestes,<NEXT>
 um ihr Herz zu erobern.<END>
 
-@@ sDialogDE_0464 @@
+@@ sDialog_0x0464 @@
 Nur mit der blauen Feder    kannst Du um die Hand DeinerAngebeteten anhalten. Wenn<NEXT>
 Du einige Herzchen im       Tagebuch Deiner Traumfrau   entdeckst, solltest Du am<NEXT>
 Sonntag den Händler         aufsuchen. Er verkauft die  blaue Feder. Baue zuvor<NEXT>
 allerdings Dein Haus aus.   Ohne Fleiß, kein Preis.<END>
 
-@@ sDialogDE_0465 @@
+@@ sDialog_0x0465 @@
 Ach, Ellen! Samstags hält   sie sich hinter dem Stall   auf. Am Kometenfest wirst<NEXT>
 Du sie auf dem Marktplatz   finden. Mit Blumen kannst Duimmer Eindruck bei Ihr<NEXT>
 schinden, aber sie steht    tierisch auf frische Eier   und selbstgezapfte Milch.<END>
 
-@@ sDialogDE_0466 @@
+@@ sDialog_0x0466 @@
 Oh, Eva? Abends trifft man  sie oft in der Kneipe.      Samstags und Sonntags<NEXT>
 erholt sie sich in den      Bergen. Sie mag besonders   Blumen und Beeren.<NEXT>
 Mit Fisch solltest Du ein   wenig vorsichtig sein. Sie  haßt die glitschigen<NEXT>
 Dinger!<END>
 
-@@ sDialogDE_0467 @@
+@@ sDialog_0x0467 @@
 Liebling... für immer       vereint.<END>
 
-@@ sDialogDE_0468 @@
+@@ sDialog_0x0468 @@
 Hallo Schatz... träumst Du  auch von einem Baby?<END>
 
-@@ sDialogDE_0469 @@
+@@ sDialog_0x0469 @@
 Du arbeitest zu viel. Wir   haben kaum Zeit für uns.<END>
 
-@@ sDialogDE_046A @@
+@@ sDialog_0x046A @@
 <VAR 10 33> <NUM 2 77>/<VAR 8 34>      Geld    <NUM 7 78>0G<END>
 
-@@ sDialogDE_046B @@
+@@ sDialog_0x046B @@
 <VAR 10 35> <NUM 2 79>/<VAR 8 36>      Es ist sechs Uhr morgens.<NEXT>
 Ich wünsche Dir einen       schönen Tag!                Geld    <NUM 7 80>0G<END>
 
-@@ sDialogDE_046C @@
+@@ sDialog_0x046C @@
 <VAR 10 37> <NUM 2 81>/<VAR 8 38>      Es ist jetzt sieben Uhr.    Geld    <NUM 7 82>0G<END>
 
-@@ sDialogDE_046D @@
+@@ sDialog_0x046D @@
 <VAR 10 39> <NUM 2 83>/<VAR 8 40>      Nun ist es acht Uhr.        Geld    <NUM 7 84>0G<END>
 
-@@ sDialogDE_046E @@
+@@ sDialog_0x046E @@
 <VAR 10 41> <NUM 2 85>/<VAR 8 42>      Es ist genau neun Uhr.      Geld    <NUM 7 86>0G<END>
 
-@@ sDialogDE_046F @@
+@@ sDialog_0x046F @@
 <VAR 10 43> <NUM 2 87>/<VAR 8 44>      Es ist zehn Uhr.            Geld    <NUM 7 88>0G<END>
 
-@@ sDialogDE_0470 @@
+@@ sDialog_0x0470 @@
 <VAR 10 45> <NUM 2 89>/<VAR 8 46>      Es ist elf Uhr. Ich bin     hungrig.<NEXT>
 Geld    <NUM 7 90>0G<END>
 
-@@ sDialogDE_0471 @@
+@@ sDialog_0x0471 @@
 <VAR 10 47> <NUM 2 91>/<VAR 8 48>      Nun ist es zwölf Uhr. Ich   bin fit.<NEXT>
 Geld    <NUM 7 92>0G<END>
 
-@@ sDialogDE_0472 @@
+@@ sDialog_0x0472 @@
 <VAR 10 49> <NUM 2 93>/<VAR 8 50>      Es ist jetzt ein Uhr.       Geld    <NUM 7 94>0G<END>
 
-@@ sDialogDE_0473 @@
+@@ sDialog_0x0473 @@
 <VAR 10 51> <NUM 2 95>/<VAR 8 52>      Es ist jetzt zwei Uhr.      Geld    <NUM 7 96>0G<END>
 
-@@ sDialogDE_0474 @@
+@@ sDialog_0x0474 @@
 <VAR 10 53> <NUM 2 97>/<VAR 8 54>      Es ist jetzt drei Uhr.<NEXT>
 Wollte ich nicht etwas      verkaufen?                  Geld    <NUM 7 98>0G<END>
 
-@@ sDialogDE_0475 @@
+@@ sDialog_0x0475 @@
 <VAR 10 55> <NUM 2 99>/<VAR 8 56>      Schon vier Uhr! Der Abholer ist schon unterwegs.<NEXT>
 Geld    <NUM 7 100>0G<END>
 
-@@ sDialogDE_0476 @@
+@@ sDialog_0x0476 @@
 <VAR 10 57> <NUM 2 101>/<VAR 8 58>      Es ist fünf Uhr! Langsam    werde ich müde.<NEXT>
 Geld    <NUM 7 102>0G<END>
 
-@@ sDialogDE_0477 @@
+@@ sDialog_0x0477 @@
 <VAR 10 59> <NUM 2 103>/<VAR 8 60>      Jetzt ist es sechs Uhr. Ich gehe nach Hause und lege<NEXT>
 mich ins Bett.              Geld    <NUM 7 104>0G<END>
 
-@@ sDialogDE_0478 @@
+@@ sDialog_0x0478 @@
 <VAR 10 61> <NUM 2 105>/<VAR 8 62>      Es ist jetzt fünf Uhr.      Geld    <NUM 7 106>0G<END>
 
-@@ sDialogDE_0479 @@
+@@ sDialog_0x0479 @@
 Hallo <VAR 4 63>! Ich habe heute  morgen eine Nachricht von   Deinem Vater bekommen.<NEXT>
 Er schreibt, daß er Ende desnächsten Sommers wieder     zurück sein wird. Er macht<NEXT>
 sich Sorgen um Dich und die Farm. Doch wenn Du weiter sohart arbeitest, wird er<NEXT>
 sehr stolz auf Dich sein.<END>
 
-@@ sDialogDE_047A @@
+@@ sDialog_0x047A @@
 Sei gegrüßt. Deine Eltern   kehren morgen zurück. Sie   werden überrascht sein, wie<NEXT>
 gut sich die Farm entwickelthat.<END>
 
-@@ sDialogDE_047B @@
+@@ sDialog_0x047B @@
 ....! Du benötigst noch ein wenig Übung.<END>
 
-@@ sDialogDE_047C @@
+@@ sDialog_0x047C @@
 Es ist mehr als schade, wenndas Wetter am Sonntag so    schlecht ist.<END>
 
-@@ sDialogDE_047D @@
+@@ sDialog_0x047D @@
 Schatz, die Geschäfte sind  Samstags generell           geschlossen.<END>
 
-@@ sDialogDE_047E @@
+@@ sDialog_0x047E @@
 Nimm die Axt, begib Dich zurQuelle in den Bergen und    .....<END>
 
-@@ sDialogDE_047F @@
+@@ sDialog_0x047F @@
 Wie geht es Dir? Ich arbeitegerade an einer tollen      Sache. Sie wird ungefähr am<NEXT>
 zwanzigsten des Monats im   Laden sein. Schau sie Dir   an.<END>
 
-@@ sDialogDE_0480 @@
+@@ sDialog_0x0480 @@
 Darling, singst Du unserem  Kind ein Schlaflied?<END>
 
-@@ sDialogDE_0481 @@
+@@ sDialog_0x0481 @@
 Schau doch. Es beginnt zu   krabbeln.<END>
 
-@@ sDialogDE_0482 @@
+@@ sDialog_0x0482 @@
 Unser Kind macht            Fortschritte. Es kann schon 'Mama' sagen.<END>
 
-@@ sDialogDE_0483 @@
+@@ sDialog_0x0483 @@
 Erfolgsquote           <NUM 3 107>  Noch viel zu tun.<END>
 
-@@ sDialogDE_0484 @@
+@@ sDialog_0x0484 @@
 Unser Kind ist so lebhaft.  Ich muß ständig nach ihm    schauen.<END>
 
-@@ sDialogDE_0485 @@
+@@ sDialog_0x0485 @@
 Liebling, paß bitte auf Dichauf.<END>
 
-@@ sDialogDE_0486 @@
+@@ sDialog_0x0486 @@
 Ich hörte ein schreckliches Geräusch. Ist alles in      Ordnung? Irgendetwas<NEXT>
 seltsames passiert? Schau   lieber mal nach!<END>
 
-@@ sDialogDE_0487 @@
+@@ sDialog_0x0487 @@
 Willst Du jetzt doch        nicht verkaufen? Dann       gehe ich halt!<END>
 
-@@ sDialogDE_0488 @@
+@@ sDialog_0x0488 @@
 Erfolgsquote           <NUM 3 108>  Das kannst Du besser, oder?<END>
 
-@@ sDialogDE_0489 @@
+@@ sDialog_0x0489 @@
 Erfolgsquote           <NUM 3 109>  Du bist nah dran.<END>
 
-@@ sDialogDE_048A @@
+@@ sDialog_0x048A @@
 Erfolgsquote           <NUM 3 110>  Klasse! Du kannst der Beste werden!<END>
 
-@@ sDialogDE_048B @@
+@@ sDialog_0x048B @@
 Erfolgsquote           <NUM 3 111>  Glückwunsch! Du bist der    perfekte Farmer!<END>
 
-@@ sDialogDE_048C @@
+@@ sDialog_0x048C @@
 Entwicklungsquote      <NUM 3 112>% <END>
 
-@@ sDialogDE_048D @@
+@@ sDialog_0x048D @@
 Wie geht es Laila? Ich      hoffe sie ist wohlauf.<END>
 
-@@ sDialogDE_048E @@
+@@ sDialog_0x048E @@
 Geld ist nicht alles im     Leben. Es gibt wichtigere   Dinge.<END>
 
-@@ sDialogDE_048F @@
+@@ sDialog_0x048F @@
 Die seltsame Hühnerstatue   könnte man sicher mit einem Werkzeug zerschlagen.<END>
 
-@@ sDialogDE_0490 @@
+@@ sDialog_0x0490 @@
 Was für eine wunderschöne   Blume!<END>
 
-@@ sDialogDE_0491 @@
+@@ sDialog_0x0491 @@
 Hallo, Du solltest heute    besonders viel essen! Warum?Einfach nur so!<END>
 
-@@ sDialogDE_0492 @@
+@@ sDialog_0x0492 @@
 Hat Nina so eine Art        Blumengarten auf der Farm   angelegt? Erzähl schon!<END>
 
-@@ sDialogDE_0493 @@
+@@ sDialog_0x0493 @@
 Liebling, hast Du nicht     vergessen, die Tür zu       streichen?<END>
 
-@@ sDialogDE_0494 @@
+@@ sDialog_0x0494 @@
 Maria scheint gut drauf zu  sein. Sie hat mir heute     morgen einen Kuchen<NEXT>
 gebracht.<END>
 
-@@ sDialogDE_0495 @@
+@@ sDialog_0x0495 @@
 Klappt das gut mit Deiner   Frau? Kein Streit?<END>
 
-@@ sDialogDE_0496 @@
+@@ sDialog_0x0496 @@
 Die Floristin hat mir einen Kuchen gebacken. Er ist ein Traum. Einfach köstlich!<END>
 
-@@ sDialogDE_0497 @@
+@@ sDialog_0x0497 @@
 Oh mein Gott! Nein, nein,   nicht das! Sag einfach      nur... danke!<END>

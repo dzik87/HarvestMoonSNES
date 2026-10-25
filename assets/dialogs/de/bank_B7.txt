@@ -1,659 +1,659 @@
-@@ sDialogDE_00C8 @@
+@@ sDialog_0x00C8 @@
 Wirklich? Ich backe die     leckersten Süßigkeiten im   ganzen Land. Du solltest<NEXT>
 sie unbedingt probieren!<END>
 
-@@ sDialogDE_00C9 @@
+@@ sDialog_0x00C9 @@
 Tut mir leid.<END>
 
-@@ sDialogDE_00CA @@
+@@ sDialog_0x00CA @@
 Die Ruhe des Winters ist    Balsam für meine Seele.<END>
 
-@@ sDialogDE_00CB @@
+@@ sDialog_0x00CB @@
 Liebst Du Tiere?<NEXT>
  Über alles!                 Sie machen nur Arbeit!<OPT 2>
 
-@@ sDialogDE_00CC @@
+@@ sDialog_0x00CC @@
 Ja? Ich liebe die Tiere     auch.<END>
 
-@@ sDialogDE_00CD @@
+@@ sDialog_0x00CD @@
 Du lügst. Tiere fühlen      genau, wer es gut mit       ihnen meint.<END>
 
-@@ sDialogDE_00CE @@
+@@ sDialog_0x00CE @@
 <VAR 4 8> bellt, wenn wildernde  Hunde umherstreunen. Achte  darauf, daß Dein Zaun in<NEXT>
 Ordnung ist.<END>
 
-@@ sDialogDE_00CF @@
+@@ sDialog_0x00CF @@
 Tiere brauchen viel Pflege. Wenn man sich nicht um sie  kümmert, werden sie schnell<NEXT>
 krank. Man muß sie behüten, wie kleine Kinder.<END>
 
-@@ sDialogDE_00D0 @@
+@@ sDialog_0x00D0 @@
 Du bist ständig auf Trab!   Die Kälte scheint Dir nichtsauszumachen.<END>
 
-@@ sDialogDE_00D1 @@
+@@ sDialog_0x00D1 @@
 Mein Vater trinkt viel      zuviel. Ich mache mir       Sorgen.<END>
 
-@@ sDialogDE_00D2 @@
+@@ sDialog_0x00D2 @@
 Mein Onkel mag Dich. Ihr    werdet sicher noch gute     Freunde.<NEXT>
  Klar!                       Na ja!<OPT 2>
 
-@@ sDialogDE_00D3 @@
+@@ sDialog_0x00D3 @@
 Ehrlich? Toll! Entschuldige,wenn er manchmal ein wenig  aufdringlich ist.<NEXT>
 Das hat er von seiner       Mutter.<END>
 
-@@ sDialogDE_00D4 @@
+@@ sDialog_0x00D4 @@
 Er besitzt eine harte       Schale, aber einen weichen  Kern.<END>
 
-@@ sDialogDE_00D5 @@
+@@ sDialog_0x00D5 @@
 Du bist ja völlig durchnäßt.Trockne Dich ab, bevor Du   Dich erkältest.<END>
 
-@@ sDialogDE_00D6 @@
+@@ sDialog_0x00D6 @@
 Hey Daddy! Laß uns endlich  nach Hause gehen.<END>
 
-@@ sDialogDE_00D7 @@
+@@ sDialog_0x00D7 @@
 Mama dreht sonst noch völligdurch.<END>
 
-@@ sDialogDE_00D8 @@
+@@ sDialog_0x00D8 @@
 Probierst Du meinen neuen   Kuchen, wenn er fertig ist?<END>
 
-@@ sDialogDE_00D9 @@
+@@ sDialog_0x00D9 @@
 Der Kuchen ist fertig.      Möchtest Du ein Stück?<NEXT>
  Oh ja!                      Bloß nicht!<OPT 2>
 
-@@ sDialogDE_00DA @@
+@@ sDialog_0x00DA @@
 Schmeckt's? Es ist          Käsekuchen.Meinst Du, ich   kann ihn im Laden verkaufen.<END>
 
-@@ sDialogDE_00DB @@
+@@ sDialog_0x00DB @@
 Du siehst abgespannt aus.   Fühlst Du Dich wirklich gut?<END>
 
-@@ sDialogDE_00DC @@
+@@ sDialog_0x00DC @@
 Ist es nicht ein Zufall, daßwir uns hier treffen?<NEXT>
  Ganz sicher!                Nicht unbedingt!<OPT 2>
 
-@@ sDialogDE_00DD @@
+@@ sDialog_0x00DD @@
 Hi-hi-hi...<END>
 
-@@ sDialogDE_00DE @@
+@@ sDialog_0x00DE @@
 Gib es zu! Du hast die ganzeZeit auf mich gewartet. Du  Schlingel! Wir treffen uns<NEXT>
 gleich in der Kneipe.<END>
 
-@@ sDialogDE_00DF @@
+@@ sDialog_0x00DF @@
 Hi! Tut mir leid, aber ich  bin gerade ziemlich in Eile.Bis zum nächsten Mal.<END>
 
-@@ sDialogDE_00E0 @@
+@@ sDialog_0x00E0 @@
 Du bist trotz des Regens    gekommen. Ich freue mich!<END>
 
-@@ sDialogDE_00E1 @@
+@@ sDialog_0x00E1 @@
 Großvater ist so streng...<END>
 
-@@ sDialogDE_00E2 @@
+@@ sDialog_0x00E2 @@
 Du Draufgänger! Soll ich Dirden Rücken schrubben?<NEXT>
  Oh bitte!                   N...Nein!<OPT 2>
 
-@@ sDialogDE_00E3 @@
+@@ sDialog_0x00E3 @@
 Hey, war doch nur ein       Scherz!<END>
 
-@@ sDialogDE_00E4 @@
+@@ sDialog_0x00E4 @@
 Hi-hi-hi, das könnte Dir so passen.<END>
 
-@@ sDialogDE_00E5 @@
+@@ sDialog_0x00E5 @@
 Hi! Du siehst richtig erholtaus.<END>
 
-@@ sDialogDE_00E6 @@
+@@ sDialog_0x00E6 @@
 Mein hausgemachter          Fruchtsaft. Willst Du ein   Gläschen?<NEXT>
  Gerne!                      Vielleicht später!<OPT 2>
 
-@@ sDialogDE_00E7 @@
+@@ sDialog_0x00E7 @@
 Hi-hi-hi... Wenn Du         austrinkst, bekommst Du     einen Kuß.<END>
 
-@@ sDialogDE_00E8 @@
+@@ sDialog_0x00E8 @@
 Warum hängst Du in der      Kneipe ab? Ah, Du bist      meinetwegen hier.<END>
 
-@@ sDialogDE_00E9 @@
+@@ sDialog_0x00E9 @@
 Dies wird eine schöne,      laue Nacht.<END>
 
-@@ sDialogDE_00EA @@
+@@ sDialog_0x00EA @@
 Danke für den herrlichen    Tag.<END>
 
-@@ sDialogDE_00EB @@
+@@ sDialog_0x00EB @@
 Ich bin nicht gerne allein.<END>
 
-@@ sDialogDE_00EC @@
+@@ sDialog_0x00EC @@
 Manchmal wandere ich in die Berge, um Beeren zu sammeln.<END>
 
-@@ sDialogDE_00ED @@
+@@ sDialog_0x00ED @@
 Ist es nicht eisig draußen? Wenn Dir kalt ist, solltest Du Dich von innen wärmen<NEXT>
 und etwas trinken.<END>
 
-@@ sDialogDE_00EE @@
+@@ sDialog_0x00EE @@
 Ich sah Dich neulich auf derFarm. Du warst so in die    Arbeit vertieft, daß Du<NEXT>
 mich nicht bemerkt hast.<END>
 
-@@ sDialogDE_00EF @@
+@@ sDialog_0x00EF @@
 Ich könnte mir nicht        vorstellen, ganz allein auf einer so großen Farm zu<NEXT>
 leben. Fühlst Du Dich nicht einsam?<NEXT>
  Manchmal schon!             Eigentlich nicht!<OPT 2>
 
-@@ sDialogDE_00F0 @@
+@@ sDialog_0x00F0 @@
 Es ist schön, jemanden zu   haben, dem man seine        Probleme anvertrauen kann.<NEXT>
 Ein Partner gibt            Geborgenheit. Zu zweit ist  alles viel leichter, oder?<END>
 
-@@ sDialogDE_00F1 @@
+@@ sDialog_0x00F1 @@
 Natürlich kann man auch     alleine leben. Das ist aber wie Erdbeerkuchen ohne<NEXT>
 Sahne. Langweilig!<END>
 
-@@ sDialogDE_00F2 @@
+@@ sDialog_0x00F2 @@
 Hallo! Du bist derjenige,   der hier auf der Farm       arbeitet? Wie heißt Du?<END>
 
-@@ sDialogDE_00F3 @@
+@@ sDialog_0x00F3 @@
 <VAR 4 9>, ich bin der örtliche  Warenhändler. Jeden Abend   komme ich vorbei und hole<NEXT>
 die Waren aus der Sammelbox ab. Schön, Dich             kennenzulernen. Rede mit<NEXT>
 den Leuten im Dorf. Sie     werden Dir mit Sicherheit   weiterhelfen.<END>
 
-@@ sDialogDE_00F4 @@
+@@ sDialog_0x00F4 @@
 Hallo! Woher                kommst Du? Du               kriegst das mit<NEXT>
 der Farm ganz               alleine hin? Ohne<NEXT>
 Deine Eltern? Großartig!    Deine Eltern müssen großes  Vertrauen in Dich haben.<END>
 
-@@ sDialogDE_00F5 @@
+@@ sDialog_0x00F5 @@
 Guten Tag! Wie geht's?      Ich bin hier der            Bürgermeister. Nett, Dich<NEXT>
 kennenzulernen. Im Schuppen findest Du einige Werkzeuge,die noch von Deinem<NEXT>
 Großvater stammen. Da liegt auch ein Buch herum, das    ihre Anwendung erklärt.<END>
 
-@@ sDialogDE_00F6 @@
+@@ sDialog_0x00F6 @@
 Dein Großvater hat mir      früher sehr geholfen. Wenn  Du Probleme hast, dann komm<NEXT>
 zu mir. Ruhe Dich ein wenig aus, wenn Du nach Hause     kommst.<END>
 
-@@ sDialogDE_00F7 @@
+@@ sDialog_0x00F7 @@
 Wie geht's? Ja, das Leben   ist hart. Aber da müssen wirdurch. Ich habe eine<NEXT>
 Tochter. Sie müßte in der   Kirche sein.<END>
 
-@@ sDialogDE_00F8 @@
+@@ sDialog_0x00F8 @@
 Sie ist ein hübsches Mädchenmit langen Haaren.<END>
 
-@@ sDialogDE_00F9 @@
+@@ sDialog_0x00F9 @@
 Ich habe Dich noch nie hier gesehen. Gehört Dir die     große Farm? Mein Name ist<NEXT>
 Maria. Endlich ein neues    Gesicht in der Gegend.<END>
 
-@@ sDialogDE_00FA @@
+@@ sDialog_0x00FA @@
 Die Anfangszeit ist mit     Sicherheit sehr hart.<END>
 
-@@ sDialogDE_00FB @@
+@@ sDialog_0x00FB @@
 Hast Du das auch vernommen? Ich hörte seltsames Kichern und Geplapper hinter den<NEXT>
 Bäumen Deiner Farm. ... Was das wohl sein mag?<END>
 
-@@ sDialogDE_00FC @@
+@@ sDialog_0x00FC @@
 Sei gegrüßt!<END>
 
-@@ sDialogDE_00FD @@
+@@ sDialog_0x00FD @@
 Wie geht es Dir, mein Sohn? Ich bin der Priester dieser Kirche. Rede mit allen<NEXT>
 Leuten im Dorf. Sie wissen  viel zu berichten. Versäume auch nicht, die Schilder zu<NEXT>
 lesen.<END>
 
-@@ sDialogDE_00FE @@
+@@ sDialog_0x00FE @@
 Es warten große             Herausforderungen auf Dich.<NEXT>
 Ich bin sicher, Du          schaffst es. Halte          durch!<END>
 
-@@ sDialogDE_00FF @@
+@@ sDialog_0x00FF @@
 Heute ist der letzte Tag desJahres. Ein glorreicher     Abschluß. Morgen feiern<NEXT>
 alle Dorfbewohner ein       rauschendes Fest. Sie       pilgern auf die Bergspitze,<NEXT>
 um dort den ersten          Sonnenaufgang des neuen     Jahres zu bestaunen.<END>
 
-@@ sDialogDE_0100 @@
+@@ sDialog_0x0100 @@
 "Sammelstelle für Vieh"     Bringe die Tiere, die Du    verkaufen willst, an diese<NEXT>
 Stelle. Rede zuvor mit dem  Viehhändler.<END>
 
-@@ sDialogDE_0101 @@
+@@ sDialog_0x0101 @@
 Die Werkzeuge liegen im     Schuppen. Mit dem A-Knopf   kannst Du sie aufnehmen.<NEXT>
 Drücke den Y-Knopf, um sie  einzusetzen.<END>
 
-@@ sDialogDE_0102 @@
+@@ sDialog_0x0102 @@
 Leider haben wir im Moment  noch keine Ware anzubieten. Schau in einigen Tagen<NEXT>
 wieder vorbei.<END>
 
-@@ sDialogDE_0103 @@
+@@ sDialog_0x0103 @@
 Bist Du der neue            Großgrundbesitzer?          Ich heiße Ann.<NEXT>
 Wir werden uns sicher       gut verstehen.<END>
 
-@@ sDialogDE_0104 @@
+@@ sDialog_0x0104 @@
 Du verbrauchst eine Menge   Kraft, wenn Du Werkzeuge    einsetzt. Iß etwas und<NEXT>
 schlafe viel, um Dich zu    erholen.<END>
 
-@@ sDialogDE_0105 @@
+@@ sDialog_0x0105 @@
 Hallo, junger Farmer! Ich   habe hier ein nützliches    Utensil, wenn Du Gemüse<NEXT>
 anbauen willst. Eine        nagelneue Gießkanne. Fülle  sie mit Wasser aus dem<NEXT>
 Teich. Ich bringe sie in denSchuppen.<END>
 
-@@ sDialogDE_0106 @@
+@@ sDialog_0x0106 @@
 Es dauert nicht mehr lang,  dann kannst Du hier Samen   kaufen.<END>
 
-@@ sDialogDE_0107 @@
+@@ sDialog_0x0107 @@
 Willkommen! Mein Name ist   Nina. Der Samen muß zur     richtigen Jahreszeit<NEXT>
 ausgesät werden. Sonst keimter nicht.<END>
 
-@@ sDialogDE_0108 @@
+@@ sDialog_0x0108 @@
 Vor der Saat mußt Du zuerst Dein Feld pflügen.<END>
 
-@@ sDialogDE_0109 @@
+@@ sDialog_0x0109 @@
 Hallo! Du solltest jeden Tagtüchtig essen, um immer bei Kräften zu bleiben.<END>
 
-@@ sDialogDE_010A @@
+@@ sDialog_0x010A @@
 Du hast Dir viel            vorgenommen. Viel Glück     dabei!<END>
 
-@@ sDialogDE_010B @@
+@@ sDialog_0x010B @@
 Hicks... warst Du schon     einmal hier?<END>
 
-@@ sDialogDE_010C @@
+@@ sDialog_0x010C @@
 Hi Farmer! Sorge für        ausreichend Weideland, damitDeine Hühner und Kühe immer<NEXT>
 lecker Futter haben. Ich    habe noch einige Grassamen  übrig. Ich bringe sie in<NEXT>
 Deinen Schuppen. Komm bitte zur Theke, wenn Du Hühner   oder Kühe kaufen möchtest.<END>
 
-@@ sDialogDE_010D @@
+@@ sDialog_0x010D @@
 Genug Futter ist für die    Tierhaltung erstes Gebot.   Am besten, Du beginnst mit<NEXT>
 einigen Hühnern.<END>
 
-@@ sDialogDE_010E @@
+@@ sDialog_0x010E @@
 Ich bringe die Kuh in den   Stall und schenke Dir noch  eine Kuhglocke dazu. Nun,<NEXT>
 zunächst solltest Du ihr    einen Namen geben. Paß gut  auf sie auf!<END>
 
-@@ sDialogDE_010F @@
+@@ sDialog_0x010F @@
 Sei gegrüßt! Ich bin ein    wandernder Händler. Leider  habe ich im Moment nichts<NEXT>
 anzubieten. Wenn Du etwas   verkaufen willst, kannst Du jederzeit vorbeischauen.<END>
 
-@@ sDialogDE_0110 @@
+@@ sDialog_0x0110 @@
 Die Mädchen in unserem Dorf sind alle recht hübsch. Du  wirst hier viel Spaß haben!<END>
 
-@@ sDialogDE_0111 @@
+@@ sDialog_0x0111 @@
 Tritt näher, junger Mann!   Weißt wohl nicht so recht,  wo Du anfangen sollst.<NEXT>
 Mache Dich zunächst mit den Werkzeugen vertraut. Das    Buch im Schuppen wird Dir<NEXT>
 helfen. Die Floristin       erzählt Dir etwas über      Blumen, der Viehhändler<NEXT>
 weist Dich in die Kunst der Viehhaltung ein.<END>
 
-@@ sDialogDE_0112 @@
+@@ sDialog_0x0112 @@
 Überangstrenge Dich nicht!  Wenn Du fertig bist, gehe   nicht zu spät ins Bett. Ein<NEXT>
 gesunder Körper ist die     Basis. So wirst Du ein      erfolgreicher Farmer.<END>
 
-@@ sDialogDE_0113 @@
+@@ sDialog_0x0113 @@
 Die Worte der Wahrsagerin   bewahrheiten sich meistens. So wie die Wettervorhersage!<END>
 
-@@ sDialogDE_0114 @@
+@@ sDialog_0x0114 @@
 Oh, hallo! Ich bin Ellen.   Nett, Dich kennenzulernen.  <END>
 
-@@ sDialogDE_0115 @@
+@@ sDialog_0x0115 @@
 Was? Du bist der Hüter der  großen Farm? Bin gespannt,  ob Du das schaffen wirst.<NEXT>
 Ihr jungen Männer seid      heutzutage so fleißig.<END>
 
-@@ sDialogDE_0116 @@
+@@ sDialog_0x0116 @@
 Die Kneipe ist heute        geschlossen. Außer          sonntags haben wir<NEXT>
 jeden Tag geöffnet.<END>
 
-@@ sDialogDE_0117 @@
+@@ sDialog_0x0117 @@
 Gehst Du zurück zur Farm?<NEXT>
  Ja!                         Später!<OPT 2>
 
-@@ sDialogDE_0118 @@
+@@ sDialog_0x0118 @@
 Gut. Ich nehme Dich mit.    Ich will auch bald Waren    verkaufen.<NEXT>
 Hoffentlich erreichen wir   beide unsere Ziele.<END>
 
-@@ sDialogDE_0119 @@
+@@ sDialog_0x0119 @@
 O.K.! Sag Bescheid, wenn Du gehen willst.<END>
 
-@@ sDialogDE_011A @@
+@@ sDialog_0x011A @@
 Ich schlage vor, daß Du nochein wenig mit den Leuten    sprichst.<END>
 
-@@ sDialogDE_011B @@
+@@ sDialog_0x011B @@
 Du lebst auf dieser         Spuk-Farm? Na dann, viel    Spaß. Ganz nebenbei, mein<NEXT>
 Name ist Eva. Nimm dieses   kleine Präsent.<END>
 
-@@ sDialogDE_011C @@
+@@ sDialog_0x011C @@
 Ein kräftiger Schluck wirkt bei Erschöpfung wahre       Wunder.<END>
 
-@@ sDialogDE_011D @@
+@@ sDialog_0x011D @@
 Willkommen. Fühle Dich wie  zu Hause.<END>
 
-@@ sDialogDE_011E @@
+@@ sDialog_0x011E @@
 Das ist Eva, das Goldstück  dieser Kneipe. Ist sie nichthübsch? Das macht die gute<NEXT>
 Ernährung.<END>
 
-@@ sDialogDE_011F @@
+@@ sDialog_0x011F @@
 Nein... Ich bin             stocknüchtern... hicks.<END>
 
-@@ sDialogDE_0120 @@
+@@ sDialog_0x0120 @@
 Guten Abend! Eva ist meine  absolute Traumfrau.<END>
 
-@@ sDialogDE_0121 @@
+@@ sDialog_0x0121 @@
 Eva arbeitet den ganzen     Abend. Sie trifft selten    Leute ihres Alters.<NEXT>
 <VAR 4 10>, besuche uns doch      regelmäßig, ja?<END>
 
-@@ sDialogDE_0122 @@
+@@ sDialog_0x0122 @@
 Eva verlor früh ihre Eltern.Sie wurde von ihrem         Großvater, einem Jäger,<NEXT>
 aufgezogen. Er lebt in den  Bergen und läßt sich nur    selten im Dorf blicken. <END>
 
-@@ sDialogDE_0123 @@
+@@ sDialog_0x0123 @@
 Ich glaube, sie vermißt     ihren Großvater sehr. Sie   ist ein liebenswertes<NEXT>
 Mädchen.<END>
 
-@@ sDialogDE_0124 @@
+@@ sDialog_0x0124 @@
 Koro! Warte!<END>
 
-@@ sDialogDE_0125 @@
+@@ sDialog_0x0125 @@
 Hey, renn nicht weg.        Oh! Du bist der Farmer, von dem alle reden. Würdest Du<NEXT>
 Dich um den kleinen Hund    kümmern?<NEXT>
 Ich darf kein Haustier      halten. Bitte sorge gut für ihn!<END>
 
-@@ sDialogDE_0126 @@
+@@ sDialog_0x0126 @@
 Vielen Dank! Du hast ein    neues Haus, <VAR 4 11>. Paß       gut auf Dich auf!<END>
 
-@@ sDialogDE_0127 @@
+@@ sDialog_0x0127 @@
 Ach, Du bist der            Neuankömmling. Ein echter   Farmer? Recht ungewöhnlich<NEXT>
 für so einen jungen         Burschen.<END>
 
-@@ sDialogDE_0128 @@
+@@ sDialog_0x0128 @@
 Wir sind Zimmermänner. Komm zu uns, wenn Du Dein Haus   vergrößern möchtest.<END>
 
-@@ sDialogDE_0129 @@
+@@ sDialog_0x0129 @@
 Für den Ausbau Deines Hausesbenötigst Du eine Menge     Holz. Du fängst am besten<NEXT>
 gleich an, etwas Holz zu    hacken. Wirf einen Blick aufdas Schild neben dem Haus.<END>
 
-@@ sDialogDE_012A @@
+@@ sDialog_0x012A @@
 Ich mache Dir ein           Sonderangebot. Wenn Du Dein Haus bis zum Ende des<NEXT>
 Sommers ausbauen läßt,      erhältst Du eine kostenlose Überraschung dazu.<END>
 
-@@ sDialogDE_012B @@
+@@ sDialog_0x012B @@
 Ich angle für mein Leben    gern. Man fühlt sich so     frei. Wenn Du Dich von<NEXT>
 Deiner Arbeit erholen       willst, mußt Du unbedingt   zum Fischen vorbeikommen.<END>
 
-@@ sDialogDE_012C @@
+@@ sDialog_0x012C @@
 Wenn Du mich das nächste Malbesuchst, leihe ich Dir     meine spitzenmäßige Angel.<END>
 
-@@ sDialogDE_012D @@
+@@ sDialog_0x012D @@
 Hi, wie läuft die Arbeit?<END>
 
-@@ sDialogDE_012E @@
+@@ sDialog_0x012E @@
 Auch in den Bergen kannst Dujede Menge Holz hacken.<END>
 
-@@ sDialogDE_012F @@
+@@ sDialog_0x012F @@
 Das Holz wirst Du sicherlichzum Bau eines großen Zaunes brauchen.<NEXT>
 Sammle, so viel Du          kannst!<END>
 
-@@ sDialogDE_0130 @@
+@@ sDialog_0x0130 @@
 Willst Du Dein Haus ausbauenlassen?<NEXT>
  Oh ja!                      Nein!<OPT 2>
 
-@@ sDialogDE_0131 @@
+@@ sDialog_0x0131 @@
 Also gut! Ich schaue morgen auf der Farm vorbei.<END>
 
-@@ sDialogDE_0132 @@
+@@ sDialog_0x0132 @@
 Laß es mich wissen, wenn Dirdie Hütte zu klein wird.<END>
 
-@@ sDialogDE_0133 @@
+@@ sDialog_0x0133 @@
 Wie gefällt Dir             Dein neues Haus?<NEXT>
 Ist es nicht ein            Meisterwerk?<END>
 
-@@ sDialogDE_0134 @@
+@@ sDialog_0x0134 @@
 Der Preis für den Ausbau    beträgt 5000G. Kann es      losgehen?<NEXT>
  Sofort!                     Noch nicht!                              Geld <NUM 7 8>0G<OPT 2>
 
-@@ sDialogDE_0135 @@
+@@ sDialog_0x0135 @@
 Na dann! Morgen früh legen  wir los.<END>
 
-@@ sDialogDE_0136 @@
+@@ sDialog_0x0136 @@
 Oh... dann nicht! Wir sind  allzeit bereit.<END>
 
-@@ sDialogDE_0137 @@
+@@ sDialog_0x0137 @@
 Ach Du liebe Güte! Du hast  ja nicht einmal genug Holz. Hör mir genau zu!<NEXT>
 Wir machen keine halben     Sachen! Die Arbeit kann erstbeginnen, wenn genug Holz<NEXT>
 vorhanden ist. Auf dem      Schild kannst Du lesen,     wieviel Holz Du für den<NEXT>
 Ausbau benötigst. Na dann,  an die Arbeit!<END>
 
-@@ sDialogDE_0138 @@
+@@ sDialog_0x0138 @@
 Haue mit der Axt auf        Baumstämme, um Holz zu      hacken. Du benötigst ca.<NEXT>
 sechs Schläge, um einen     Stamm zu fällen.<END>
 
-@@ sDialogDE_0139 @@
+@@ sDialog_0x0139 @@
 Hi-hi-hi! Warte nur, bis es fertig ist.<END>
 
-@@ sDialogDE_013A @@
+@@ sDialog_0x013A @@
 Ich werde ein riesengroßes  Haus bauen! Warte nur!<END>
 
-@@ sDialogDE_013B @@
+@@ sDialog_0x013B @@
 Dein Haus zu vergrößern wird10000G kosten. Bist Du      einverstanden?<NEXT>
  Ja!                         Nein!                                    Geld <NUM 7 9>0G<OPT 2>
 
-@@ sDialogDE_013C @@
+@@ sDialog_0x013C @@
 Na gut. Du mußt wissen, was Sache ist.<END>
 
-@@ sDialogDE_013D @@
+@@ sDialog_0x013D @@
 Ist es nicht brilliant? Wir nennen es das "Riesen-      Blockhaus."<END>
 
-@@ sDialogDE_013E @@
+@@ sDialog_0x013E @@
 Was ist heute Abend mit Eva passiert?<END>
 
-@@ sDialogDE_013F @@
+@@ sDialog_0x013F @@
 Ninas Mutter liegt im       Fieber. Ich kann keine      Werkzeuge verkaufen,<NEXT>
 solange sich Vater um sie   kümmert.<END>
 
-@@ sDialogDE_0140 @@
+@@ sDialog_0x0140 @@
 Es ist vollbracht! Schau Dirdieses "Super-Luxus-Riesen- Blockhaus" an! Ich bin ganz<NEXT>
 vernarrt in das Haus. Bis   bald.<END>
 
-@@ sDialogDE_0141 @@
+@@ sDialog_0x0141 @@
 Ich habe von einem          einzigartigen Samenkorn     gehört. Daraus soll eine<NEXT>
 Pflanze wachsen, die bis zumHimmel reicht. Das muß ich  sehen!<END>
 
-@@ sDialogDE_0142 @@
+@@ sDialog_0x0142 @@
 Hi! Das Erdbeben heute      morgen hat mir einen ganz   schönen Schreck eingejagt.<NEXT>
 Komm in die Berge, nachdem  Du Deine Farm begutachtet   hast.<END>
 
-@@ sDialogDE_0143 @@
+@@ sDialog_0x0143 @@
 ..... Magst Du... mich?<END>
 
-@@ sDialogDE_0144 @@
+@@ sDialog_0x0144 @@
 Heute ist der letzte Tag desJahres. Die Zeit verging wieim Flug. Es ist seltsam!<END>
 
-@@ sDialogDE_0145 @@
+@@ sDialog_0x0145 @@
 Die Neujahrsfeier wird ein  große Sache. Ich lasse das  Vieh lieber im Stall.<END>
 
-@@ sDialogDE_0146 @@
+@@ sDialog_0x0146 @@
 Endlich ist der lange Wintervorbei. Die Tiere freuen    sich so auf den Frühling.<END>
 
-@@ sDialogDE_0147 @@
+@@ sDialog_0x0147 @@
 Mir war nur etwas           schwindlig. Jetzt bin ich   wieder fit!<END>
 
-@@ sDialogDE_0148 @@
+@@ sDialog_0x0148 @@
 Ich bin ein handelnder      Wandersmann. Heute habe ich seltene Beeren im Angebot.<NEXT>
 Ein Biß und Du fühlst die   Kraft in Dir aufsteigen. Ichtausche sie gegen ein<NEXT>
 Huhn. Machen wir den Deal?<NEXT>
  Her damit!                  Lieber nicht!<OPT 2>
 
-@@ sDialogDE_0149 @@
+@@ sDialog_0x0149 @@
 Ich bin ein handelnder      Wandersmann. Heute habe ich einen seltenen Samen im<NEXT>
 Angebot. Es wird ein Wunder geschehen, wenn Du ihn      einpflanzt. Für nur eine<NEXT>
 Kuh gehört er Dir! Das ist  eine einmalige Chance!<NEXT>
  Also gut!                   Vergiß es!<OPT 2>
 
-@@ sDialogDE_014A @@
+@@ sDialog_0x014A @@
 Gut, her mit dem Huhn!      Geschäft ist Geschäft! Bis  zum nächsten Mal.<END>
 
-@@ sDialogDE_014B @@
+@@ sDialog_0x014B @@
 Danke für die Kuh. Ich      liefere Dir den Samen direktin Deinen Schuppen.<NEXT>
 Pflanze ihn auf der         Bergspitze ein. Du wirst    Augen machen! Schönen Tag<NEXT>
 noch.<END>
 
-@@ sDialogDE_014C @@
+@@ sDialog_0x014C @@
 Du bist wirklich hartherzig.Ich bin doch nur ein armer  Vertreter und jetzt sehr<NEXT>
 traurig. Tschüß.<END>
 
-@@ sDialogDE_014D @@
+@@ sDialog_0x014D @@
 Ich bin der Händler des     Reichtums. Mein bester      Artikel ist ein Samen für<NEXT>
 einen Glockenbaum. Klingt   das nicht unglaublich?<NEXT>
 Pflanzt Du den Samen, wirst Du eine riesige Überraschungerleben.<NEXT>
 Ein einzigartiges Angebot   für nur 20000G.<NEXT>
  Muß ich haben!              Zu teuer!                                Geld <NUM 7 10>0G<OPT 2>
 
-@@ sDialogDE_014E @@
+@@ sDialog_0x014E @@
 Jetzt habe ich ihn          eingepflanzt. Warte ein     wenig.<END>
 
-@@ sDialogDE_014F @@
+@@ sDialog_0x014F @@
 Bist Du sicher? Du wirst es für den Rest Deines Lebens  bereuen!<END>
 
-@@ sDialogDE_0150 @@
+@@ sDialog_0x0150 @@
 Das ist ein düsterer Tag    heute.<END>
 
-@@ sDialogDE_0151 @@
+@@ sDialog_0x0151 @@
 Aus dem Weg! Ich bin        beschäftigt.<END>
 
-@@ sDialogDE_0152 @@
+@@ sDialog_0x0152 @@
 Dieser Weg führt in eine    unterirdische Höhle.<END>
 
-@@ sDialogDE_0153 @@
+@@ sDialog_0x0153 @@
 Oh Gott, was ist denn hier  passiert? Alles in Ordnung?<END>
 
-@@ sDialogDE_0154 @@
+@@ sDialog_0x0154 @@
 Morgen soll ein Wirbelsturm über das Land ziehen.<END>
 
-@@ sDialogDE_0155 @@
+@@ sDialog_0x0155 @@
 Der Wind weht immer stärker.Ich befürchte Schlimmes.<END>
 
-@@ sDialogDE_0156 @@
+@@ sDialog_0x0156 @@
 Oh ja, der Himmel verdunkeltsich. Das sind die          Vorzeichen des Wirbelsturms.<END>
 
-@@ sDialogDE_0157 @@
+@@ sDialog_0x0157 @@
 Naturkatastrophen haben eineseltsame Faszination. Keinerweiß, was geschieht.<END>
 
-@@ sDialogDE_0158 @@
+@@ sDialog_0x0158 @@
 Der Wind weht immer         heftiger. Hoffentlich       verschont uns der<NEXT>
 Wirbelsturm.<END>
 
-@@ sDialogDE_0159 @@
+@@ sDialog_0x0159 @@
 Die armen Blumen haben bei  einem Wirbelsturm keine     Überlebenschance.<END>
 
-@@ sDialogDE_015A @@
+@@ sDialog_0x015A @@
 Bete zu Gott, daß der       Wirbelsturm nicht das ganze Land verwüstet. Nur er hat<NEXT>
 die alleinige Macht!<END>
 
-@@ sDialogDE_015B @@
+@@ sDialog_0x015B @@
 Hallo Junge, der Wirbelsturmrückt immer näher. Hast Du  die Tiere in den Stall<NEXT>
 gebracht?<NEXT>
  Schon erledigt!             Ups, vergessen!<OPT 2>
 
-@@ sDialogDE_015C @@
+@@ sDialog_0x015C @@
 Naturfreunde handeln        instinktiv richtig.<END>
 
-@@ sDialogDE_015D @@
+@@ sDialog_0x015D @@
 Bist du wahnsinnig? Was     stehst Du hier herum? Gehe  nach Hause und bringe Deine<NEXT>
 Tiere in den Stall.<END>
 
-@@ sDialogDE_015E @@
+@@ sDialog_0x015E @@
 Warum hängst Du noch hier   ab? Weißt Du nicht, daß der Wirbelsturm im Anmarsch ist?<END>
 
-@@ sDialogDE_015F @@
+@@ sDialog_0x015F @@
 Sind die Tiere im Stall?    Verschließe bitte die Türen und dann ab ins Bett.<END>
 
-@@ sDialogDE_0160 @@
+@@ sDialog_0x0160 @@
 Heute kann man keinen Fuß   vor die Tür setzen.<END>
 
-@@ sDialogDE_0161 @@
+@@ sDialog_0x0161 @@
 Zum Glück hat der           Wirbelsturm nur wenig       Schaden angerichtet.<END>
 
-@@ sDialogDE_0162 @@
+@@ sDialog_0x0162 @@
 Ich glaube, den Wetterhahn  hätte es fast weggeweht.<END>
 
-@@ sDialogDE_0163 @@
+@@ sDialog_0x0163 @@
 Schön, daß alle wohlauf     sind.<END>
 
-@@ sDialogDE_0164 @@
+@@ sDialog_0x0164 @@
 Steht Deine Farm noch?<END>
 
-@@ sDialogDE_0165 @@
+@@ sDialog_0x0165 @@
 Das war wirklich            schrecklich!<END>
 
-@@ sDialogDE_0166 @@
+@@ sDialog_0x0166 @@
 Schau Dir die Farm gut an.  Wenn die Zäune zerstört     sind, kannst Du echte<NEXT>
 Probleme bekommen.<END>
 
-@@ sDialogDE_0167 @@
+@@ sDialog_0x0167 @@
 Das Erdbeben letzte Nacht   war halb so wild. Höchstens eine vier auf der<NEXT>
 Richterskala!<END>
 
-@@ sDialogDE_0168 @@
+@@ sDialog_0x0168 @@
 Schau trotzdem nach, ob     alles in Ordnung ist.<END>
 
-@@ sDialogDE_0169 @@
+@@ sDialog_0x0169 @@
 Was? Ein Erdbeben? Ich habe nichts bemerkt!<END>
 
-@@ sDialogDE_016A @@
+@@ sDialog_0x016A @@
 Ich möchte gern wissen, wie es meinem Großvater geht. Inden Bergen lauern viele<NEXT>
 Gefahren. Ich sorge mich um ihn.<END>
 
-@@ sDialogDE_016B @@
+@@ sDialog_0x016B @@
 Na, das war ja wohl ein     Ding. Ist auf Deiner Farm   alles in Ordnung?<END>
 
-@@ sDialogDE_016C @@
+@@ sDialog_0x016C @@
 Kühe sind empfindlich,      deshalb solltest Du sie bei schlechtem Wetter nicht<NEXT>
 hinauslassen.<END>
 
-@@ sDialogDE_016D @@
+@@ sDialog_0x016D @@
 Das Erdbeben scheint einige Veränderungen verursacht zu haben. Du solltest Dich<NEXT>
 lieber mal auf der Farm     umsehen.<END>
 
-@@ sDialogDE_016E @@
+@@ sDialog_0x016E @@
 Der große Felsen ist bei demErdbeben zerbrochen. Hast Dudas schon bemerkt?<END>
 
-@@ sDialogDE_016F @@
+@@ sDialog_0x016F @@
 Oh ja, ich war ziemlich     überrascht.<END>
 
-@@ sDialogDE_0170 @@
+@@ sDialog_0x0170 @@
 Hey, bei dem großen Felsen  ist ein Durchgang.<END>
 
-@@ sDialogDE_0171 @@
+@@ sDialog_0x0171 @@
 Das scheint ein Tunnel zu   sein, der bis an das Ende   der Farm führt. Eine tolle<NEXT>
 Abkürzung!<END>
 
-@@ sDialogDE_0172 @@
+@@ sDialog_0x0172 @@
 Hast Du einen Maulwurf      gesehen? Vertreibe ihn      lieber von Deinen Feldern.<NEXT>
 Manchmal erschrecken die    kleinen Biester sogar die   Kühe!<END>
 
-@@ sDialogDE_0173 @@
+@@ sDialog_0x0173 @@
 Ich bin glücklich...<END>
 
-@@ sDialogDE_0174 @@
+@@ sDialog_0x0174 @@
 Naja, ich habe noch nicht   darüber nachgedacht!<END>
 
-@@ sDialogDE_0175 @@
+@@ sDialog_0x0175 @@
 Bist Du sicher? Mich?<END>
 
-@@ sDialogDE_0176 @@
+@@ sDialog_0x0176 @@
 Du machst Witze, oder?<END>
 
-@@ sDialogDE_0177 @@
+@@ sDialog_0x0177 @@
 Ja! DICH!<END>
 
-@@ sDialogDE_0178 @@
+@@ sDialog_0x0178 @@
 Tut mir leid, aber das ist  noch zu früh...<END>
 
-@@ sDialogDE_0179 @@
+@@ sDialog_0x0179 @@
 Was? ......Ja!<END>
 
-@@ sDialogDE_017A @@
+@@ sDialog_0x017A @@
 Das kommt alles so          plötzlich. Ich weiß nicht,  was ich tun soll!<END>
 
-@@ sDialogDE_017B @@
+@@ sDialog_0x017B @@
 Was soll's, ich sage O.K.!<END>
 
-@@ sDialogDE_017C @@
+@@ sDialog_0x017C @@
 Es ist immer noch zu früh!<END>
 
-@@ sDialogDE_017D @@
+@@ sDialog_0x017D @@
 Guten Morgen... Scha-Schatz!Sei von nun an glücklich.<END>
 
-@@ sDialogDE_017E @@
+@@ sDialog_0x017E @@
 <VAR 10 12> <NUM 2 11>/<VAR 8 13><END>
 
-@@ sDialogDE_017F @@
+@@ sDialog_0x017F @@
 Verspäte Dich nicht!<END>
 
-@@ sDialogDE_0180 @@
+@@ sDialog_0x0180 @@
 Du sorgst so gut für mich,  Schnäuzelchen!<END>
 
-@@ sDialogDE_0181 @@
+@@ sDialog_0x0181 @@
 Heute mußt auch Du hart     arbeiten.<END>

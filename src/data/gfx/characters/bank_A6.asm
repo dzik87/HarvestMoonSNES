@@ -21,10 +21,10 @@ sCompressedTilemap_A68DCF:
     incbin "../../../../assets/gfx/characters/sCompressedTilemap_A68DCF.bin"
 
 sCompressedTilemap_A690A6:
-    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A690A6.bin"
+    incbin "../../../../assets/gfx/characters/!{REGDIR}sCompressedTilemap_A690A6.bin"
 
 sCompressedTilemap_A694EE:
-    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A694EE.bin"
+    incbin "../../../../assets/gfx/characters/!{REGDIR}sCompressedTilemap_A694EE.bin"
 
 sCompressedTilemap_A69996:
     incbin "../../../../assets/gfx/characters/sCompressedTilemap_A69996.bin"
@@ -33,4 +33,4 @@ sCharactermap_A6A096:
     incbin "../../../../assets/gfx/characters/sCharactermap_A6A096.bin"
 
 Padding_A60000:
-    fill 20330
+    fill align $8000

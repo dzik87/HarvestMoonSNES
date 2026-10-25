@@ -23,6 +23,7 @@ SRC = ROOT / "src" / "data" / "gfx" / "palettes"
 PAL_SIZE = 512
 BANKS = {"A8": (0x00, 64), "A9": (0x40, 53)}  # bank -> (first palette id, palette count)
 BANK_SIZE = 0x8000
+REGION_PALETTES = {"sPalette_0x46", "sPalette_0x6C", "sPalette_0x6D"}   # replaced by the JP release (assets/gfx/palettes/jp/)
 
 
 def bgr555_to_rgb(w):
@@ -98,14 +99,47 @@ def cmd_extract(args):
     print(f"extracted {n} palettes to {ASSETS}")
 
 
+def cmd_export_region(args):
+    """eu/de/jp: palettes that differ from US -> assets/gfx/palettes/<region>/ (JSON source; .pal is generated)."""
+    import glob, os
+    rom_dir = args.rom_dir or os.environ.get("HM_ROM_DIR")
+    if not rom_dir:
+        sys.exit("error: pass --rom-dir or set HM_ROM_DIR (<dir>/{US,EU,DE,JP}/*.sfc)")
+    rd = lambda r: Path(sorted(glob.glob(str(Path(rom_dir) / r / "*.sfc")))[0]).read_bytes()
+    us, rg = rd("US"), rd(args.region.upper())
+    out = ASSETS / args.region
+    out.mkdir(parents=True, exist_ok=True)
+    n = 0
+    for bank, (first, count) in BANKS.items():
+        base = (int(bank, 16) - 0x80) * BANK_SIZE
+        for k in range(count):
+            a, b = us[base + k * PAL_SIZE: base + (k + 1) * PAL_SIZE], rg[base + k * PAL_SIZE: base + (k + 1) * PAL_SIZE]
+            if a != b:
+                label = "sPalette_0x%02X" % (first + k)
+                (out / f"{label}.json").write_text(json.dumps({"label": label, "address": "$%s%04X" % (bank, 0x8000 + k * PAL_SIZE),
+                                                              "region": args.region, "colors": bin_to_colors(b)}, indent=1) + "\n")
+                n += 1
+    print(f"exported {n} {args.region.upper()} palettes to {out}")
+
+
 def cmd_pack(args):
     n = 0
-    for j in sorted(ASSETS.glob("sPalette_0x*.json")):
+    for j in sorted(ASSETS.glob("sPalette_0x*.json")) + sorted(ASSETS.glob("*/sPalette_0x*.json")):
         data = colors_to_bin(json.loads(j.read_text())["colors"])
         p = j.with_suffix(".pal")
         if not p.exists() or p.read_bytes() != data:
             p.write_bytes(data)
             n += 1
+    # palettes that any release replaces are included through `!{REGDIR}`: the releases without their own copy use the US file
+    labels = set()
+    for f in SRC.glob("bank_*.asm"):
+        labels |= set(re.findall(r'/!\{REGDIR\}(sPalette_0x[0-9A-F]{2})\.pal"', f.read_text(encoding="utf-8")))
+    for lab in sorted(labels):
+        for r in ("eu", "de", "jp"):
+            dst = ASSETS / r / f"{lab}.pal"
+            if not (ASSETS / r / f"{lab}.json").exists() and (not dst.exists() or dst.read_bytes() != (ASSETS / f"{lab}.pal").read_bytes()):
+                dst.parent.mkdir(parents=True, exist_ok=True)
+                dst.write_bytes((ASSETS / f"{lab}.pal").read_bytes()); n += 1
     print(f"packed; {n} .pal files updated")
 
 
@@ -116,7 +150,8 @@ def cmd_emit_asm(args):
                  f"    ORG ${bank}8000", ""]
         for k in range(count):
             label = "sPalette_0x%02X" % (first + k)
-            lines += [f"{label}:", f'    incbin "../../../../assets/gfx/palettes/{label}.pal"', ""]
+            rd = "!{REGDIR}" if label in REGION_PALETTES else ""
+            lines += [f"{label}:", f'    incbin "../../../../assets/gfx/palettes/{rd}{label}.pal"', ""]
         pad = BANK_SIZE - count * PAL_SIZE
         if pad:
             lines += [f"Padding_{bank}0000:", f"    fill {pad}", ""]
@@ -146,8 +181,9 @@ def main():
     sub = ap.add_subparsers(dest="cmd", required=True)
     e = sub.add_parser("extract"); e.add_argument("--png", action="store_true")
     sub.add_parser("pack"); sub.add_parser("emit-asm"); sub.add_parser("check")
+    x = sub.add_parser("export-region"); x.add_argument("--region", required=True, choices=["eu", "de", "jp"]); x.add_argument("--rom-dir")
     args = ap.parse_args()
-    return {"extract": cmd_extract, "pack": cmd_pack, "emit-asm": cmd_emit_asm, "check": cmd_check}[args.cmd](args) or 0
+    return {"extract": cmd_extract, "pack": cmd_pack, "emit-asm": cmd_emit_asm, "check": cmd_check, "export-region": cmd_export_region}[args.cmd](args) or 0
 
 
 if __name__ == "__main__":

@@ -19,8 +19,11 @@ ROOT = Path(__file__).resolve().parent.parent
 STEPS = [
     ("palettes", [sys.executable, "tools/gfx/palette.py", "pack"]),
     ("font tables", [sys.executable, "tools/fonts/font.py", "build", "--region", "us", "--write-assets"]),
-    ("graphics blobs", [sys.executable, "tools/gfx/pngsync.py", "build"]),
+    ("graphics blobs", [sys.executable, "tools/gfx/pngsync.py", "build", "--region", "all"]),
+    ("dialog banks", [sys.executable, "tools/dialogs/dialog.py", "build"]),
 ]
+for _r in ("eu", "de", "jp"):
+    STEPS.insert(2, (f"font tables {_r}", [sys.executable, "tools/fonts/font.py", "build", "--region", _r, "--write-assets"]))
 
 
 def main(quiet=False):

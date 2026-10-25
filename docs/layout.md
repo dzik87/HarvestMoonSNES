@@ -11,10 +11,10 @@ Mapping: LoROM, 64 banks of 32 KB ($80–$BF). Header and vectors: `src/code/hea
 | $A1–$A6 | character graphics | `src/data/gfx/characters/` |
 | $A7 | tilemaps | `src/data/tilemaps/` |
 | $A8–$A9 | palettes | `src/data/gfx/palettes/` |
-| $AA–$AC | JP dialogs (empty in US/EU/DE) | `src/data/dialogs/jp/` |
+| $AA–$AC | JP dialogs (empty in US/EU/DE) | `assets/dialogs/jp/*.txt` (generated asm) |
 | $AD–$B2 | audio (content looks like SPC700 program and data — to be confirmed) | `src/data/audio/` |
 | $B3–$B5 | AI scripts (one file per script, `src/ai/us/scripts/`; EU/DE/JP as `if !REGION_xx` blocks, `docs/regions-ai.md`) | `src/ai/` |
-| $B6–$BB | US/EU/DE dialogs | `src/data/dialogs/<region>/` |
+| $B6–$BB | US/EU/DE dialogs (empty in JP) | `assets/dialogs/<region>/*.txt` (generated asm) |
 | $BC–$BF | unused (zeros) | — |
 
 ## Graphics sources
@@ -39,3 +39,8 @@ Every module (except the first in a bank) starts with a comment giving its start
 
 Prefixes: `f` routine, `a` data array, `p` pointer, `s` structure/complex data, `n` number/constant,
 `strc` RAM structure. Automatic DiztinGUIsh labels (`DATA8_xxxxxx` etc.) are being replaced gradually.
+
+## Regional builds
+
+Banks whose content differs per release ($94 $95 $9A $9B $9E $9F $A5 $A6 $A9 $AA-$AC $B6-$BB, plus the code/AI banks) are described in
+`docs/regions.md`. In the graphics banks the blob order is the same in every release; padding is `fill align $8000`.

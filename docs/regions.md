@@ -79,16 +79,15 @@ Large counts in code banks usually mean shifted code, not necessarily different 
 - AI script banks $B3-$B5: EU/DE differ from US in $B3-$B4; JP in $B5. At command level these are 3 (EU/DE) or 1 (JP)
   changed commands plus relocation and a WRAM shift: see [`regions-ai.md`](regions-ai.md).
 - Dialog banks differ everywhere (different text), JP additionally has its text in $AA-$AC.
-Next step for the unified tree: the code banks $80-$85 of EU, DE and JP are done (see below); the AI banks have their
-own patch blocks (`docs/regions-ai.md`); the differing graphics and dialog banks are next.
+The unified tree is complete: the code banks $80-$85 (patch blocks below), the AI banks (`docs/regions-ai.md`) and all
+data banks (section "Regional data banks") build the complete EU, DE and JP ROMs bit-identically.
 
 ## Regional code banks $80-$85 (patch blocks on the US source)
 
 The EU, DE and JP code is not a second copy of the sources. It is expressed as `if !REGION_xx ... else ... endif`
 blocks inside the US modules (`src/code/bank_80..85`), so every function keeps its US name and everything that is
-identical is shared. `python3 tools/build.py --region EU|DE|JP` defines `REGION_EU/DE/JP=1`, assembles banks
-$80-$85 and compares them with the reference hashes in `tests/expected.json` (keys `EU`, `DE`, `JP`, limited to banks
-$80-$85; the ROMs themselves are never stored in the repository). The US build is unchanged and bit-identical.
+identical is shared. `python3 tools/build.py --region EU|DE|JP` defines `REGION_EU/DE/JP=1`, assembles the whole ROM and compares
+it with the reference hashes in `tests/expected.json` (keys `EU`, `DE`, `JP`; the ROMs themselves are never stored in the repository). The US build is unchanged and bit-identical.
 
 ### Region switch (`src/common/region.asm`)
 - Symbols: `!REGION_US`, `!REGION_EU`, `!REGION_DE`, `!REGION_JP` (0/1, at most one of EU/DE/JP is defined by the
@@ -113,7 +112,7 @@ $80-$85; the ROMs themselves are never stored in the repository). The US build i
 - `src/code/region_targets.asm` defines, per region, the `L_<US address>` equates for branch targets / data pointers
   of region code that have no label in the US sources (plus the few US labels that do not exist in a region's code).
 - The ROM header (maker/game code, title, country, checksum) is region specific in `src/code/header.asm`.
-- Verification: CI builds and verifies all four regions (`tools/build.py --region EU|DE|JP`, `tests/expected.json`).
+- Verification: CI builds and verifies the complete ROM of all four regions (`tools/build.py --region EU|DE|JP`, `tests/expected.json`).
   The ROM dumps are needed only to regenerate or extend the patches.
 
 ### How the regions relate to US
@@ -182,6 +181,136 @@ Method (tools in `tools/analysis/` and `tools/migration/`):
 5. `migration/region_patch.py` regenerates the whole thing from the plain US text: layer 1 = DE+EU (identical
    texts merged into `!REGION_EUDE`), layer 2 = JP (wrapped around layer 1). `--write-expected` stores the hashes.
 
+## Regional data banks (complete ROMs)
+
+`python3 tools/build.py --region EU|DE|JP` builds the **complete 2 MB ROM** of the release and verifies size, CRC32, MD5 and
+SHA-1 of the whole image (`tests/expected.json`, keys `EU`, `DE`, `JP`; US unchanged). Besides the code banks $80-$85 and the AI
+banks $B3-$B5 (above) the following banks differ from US and are produced by the same source tree:
+
+| Banks | Contents | Mechanism |
+|---|---|---|
+| $94, $95 | font glyph tables (EU 1 table, DE 2, JP 4 differ) | `tools/fonts/font.py` per release, `assets/fonts/<region>/` |
+| $9A, $9B, $9E, $9F, $A5, $A6 | language specific title/menu/text graphics and name tables (blobs in the table below) | PNG / name table text per release |
+| $A9 | JP: palettes `sPalette_0x46`, `0x6C`, `0x6D` | `assets/gfx/palettes/jp/*.json` |
+| $B6-$BB | US/EU/DE dialogs | `assets/dialogs/<region>/bank_XX.txt` -> generated asm |
+| $AA-$AC | JP dialogs (zero in the other releases; $B6-$BB are zero in JP) | same, generated |
+| $86-$93, $96-$99, $9C-$9D, $A0-$A4, $A7-$A8, $AD-$B2, $BC-$BF | byte-identical in all four releases (header area and `$FFxx` vectors included, which are in code bank $80) | shared |
+
+The inventory (`tools/analysis/region_diff.py --data-ranges`, blob level: `tools/data/regionbanks.py report`) shows that a
+data bank of every release contains **the same blobs in the same order as US**; only the content of some blobs (and with it their
+size and all following addresses) differs. That is the design of the unified tree:
+
+* **One label per blob in all releases.** A blob keeps its US label (`sCompressedTiles_9AC489`, `sFontGlyphs_0x01`, ...). In a
+  release its address is simply different, the assembler relocates every reference. The pointers in the map table
+  (`src/code/bank_80/tilemaps.asm`) used to be raw addresses in `if !REGION_xx` blocks (about 50 blocks); they are now the plain label,
+  and the blocks are gone (`tools/migration/region_labels.py`).
+* **Shared stays shared.** A blob that is identical in every release has one source (`assets/gfx/png/tiles/<label>.png`, `assets/gfx/tilemaps/<label>.map.txt`).
+  A blob that differs in at least one release is included as `incbin "../../../../assets/gfx/tiles/!{REGDIR}<label>.bin"`; `!REGDIR` is
+  `""` (US) or `eu/`, `de/`, `jp/` (`src/common/region.asm`). Only the blobs that really differ are stored per release
+  (`assets/gfx/png/<region>/{tiles,sprites}/`, `assets/gfx/tilemaps/<region>/`, with the same sidecars as the US ones: palette, bpp, ...);
+  for a release that uses the US version of such a blob, `tools/gfx/pngsync.py build --region all` copies the shared file into that release's
+  directory (git-ignored build product).
+* **Bank padding adapts.** Every graphics bank ends with `Padding_XX0000: fill align $8000` (asar pads with the `padbyte` up to the
+  next 32 KB boundary), so blobs that grow or shrink in a release move the padding instead of overflowing. The bank layouts
+  are therefore not fixed numbers any more; an overflow shows up as a bank overlap error of asar. (`pngsync.py import --allow-resize`
+  needs no padding adjustment for regional blobs.)
+* **Dialogs.** The text files are the only source; `tools/dialogs/dialog.py build` generates `build/gen/dialogs/<region>/bank_XX.asm`
+  (git-ignored, run by `tools/build_assets.py`). `src/main.asm` includes US/EU/DE banks $B6-$BB or the JP banks $AA-$AC. All releases use the
+  same label names (`sDialog_0x0000` ... `sDialog_0x0497`, 1176 dialogs each) and **one** pointer table `aDialogPointers`
+  (`src/code/bank_83/dialog.asm`), so dialog texts can change length freely. The earlier four per-release pointer tables (raw bytes)
+  were removed. The per-release asm copies of the dialogs (about 2.6 MB) are no longer committed.
+* **Fonts.** `font.py build --region R --write-assets` writes `assets/gfx/tiles/<R>/sFontGlyphs_*.bin`; the tables that differ are included with `!{REGDIR}`.
+* **Palettes.** `palette.py pack` also packs `assets/gfx/palettes/<region>/*.json`; the three JP palettes are included with `!{REGDIR}`.
+
+Because the sources exist per release as PNG/text/JSON, a translation or graphics mod of one release is an ordinary asset edit:
+edit the PNG under `assets/gfx/png/<region>/...`, run `pngsync.py import --region <region> --label <label>` and rebuild.
+`pngsync.py export --region R` (with `--rom-dir`/`$HM_ROM_DIR`) regenerates the regional sources from the ROM dumps; the dumps are never stored.
+
+### Differing blobs per release (generated by `tools/data/regionbanks.py report`)
+
+| Bank | Release | Blobs | Identical (same address) | Identical, moved | Region specific | Specific bytes |
+|---|---|---|---|---|---|---|
+| $94 | EU | 7 | 6 | 0 | 1 | 4096 |
+| $94 | DE | 7 | 5 | 0 | 2 | 8192 |
+| $94 | JP | 7 | 4 | 0 | 3 | 12288 |
+| $95 | EU | 7 | 7 | 0 | 0 | 0 |
+| $95 | DE | 7 | 7 | 0 | 0 | 0 |
+| $95 | JP | 7 | 6 | 0 | 1 | 4096 |
+| $9A | EU | 8 | 8 | 0 | 0 | 0 |
+| $9A | DE | 8 | 4 | 3 | 1 | 1645 |
+| $9A | JP | 8 | 3 | 1 | 4 | 9739 |
+| $9B | EU | 6 | 6 | 0 | 0 | 0 |
+| $9B | DE | 6 | 0 | 5 | 1 | 1086 |
+| $9B | JP | 6 | 0 | 5 | 1 | 1870 |
+| $9E | EU | 6 | 6 | 0 | 0 | 0 |
+| $9E | DE | 6 | 6 | 0 | 0 | 0 |
+| $9E | JP | 6 | 5 | 0 | 1 | 1921 |
+| $9F | EU | 6 | 0 | 2 | 4 | 21894 |
+| $9F | DE | 6 | 0 | 2 | 4 | 21670 |
+| $9F | JP | 6 | 0 | 1 | 5 | 25347 |
+| $A5 | EU | 32 | 0 | 29 | 3 | 3860 |
+| $A5 | DE | 32 | 0 | 27 | 5 | 7006 |
+| $A5 | JP | 32 | 0 | 25 | 7 | 9089 |
+| $A6 | EU | 10 | 10 | 0 | 0 | 0 |
+| $A6 | DE | 10 | 7 | 2 | 1 | 1319 |
+| $A6 | JP | 10 | 6 | 2 | 2 | 4055 |
+
+Region specific blobs (label = the corresponding US blob; address and size in the release and in US):
+
+| Bank | Release | Label | Address | Size | US address | US size |
+|---|---|---|---|---|---|---|
+| $94 | EU | `sFontGlyphs_0x01` | $94:A843 | 4096 | $94:A843 | 4096 |
+| $94 | DE | `sFontGlyphs_0x01` | $94:A843 | 4096 | $94:A843 | 4096 |
+| $94 | DE | `sFontGlyphs_0x02` | $94:B843 | 4096 | $94:B843 | 4096 |
+| $94 | JP | `sFontGlyphs_0x00` | $94:9843 | 4096 | $94:9843 | 4096 |
+| $94 | JP | `sFontGlyphs_0x01` | $94:A843 | 4096 | $94:A843 | 4096 |
+| $94 | JP | `sFontGlyphs_0x02` | $94:B843 | 4096 | $94:B843 | 4096 |
+| $95 | JP | `sFontGlyphs_0x09` | $95:B000 | 4096 | $95:B000 | 4096 |
+| $9A | DE | `sCompressedTiles_9AC489` | $9A:C489 | 1645 | $9A:C489 | 1720 |
+| $9A | JP | `sCompressedTiles_9ABF97` | $9A:BF97 | 2247 | $9A:BF97 | 1266 |
+| $9A | JP | `sCompressedTiles_9AC489` | $9A:C85E | 1788 | $9A:C489 | 1720 |
+| $9A | JP | `sCompressedTiles_9ACB41` | $9A:CF5A | 2392 | $9A:CB41 | 2070 |
+| $9A | JP | `sCompressedTiles_9AD357` | $9A:D8B2 | 3312 | $9A:D357 | 3286 |
+| $9B | DE | `sCompressedTiles_9B8000` | $9B:8000 | 1086 | $9B:8000 | 1089 |
+| $9B | JP | `sCompressedTiles_9B8000` | $9B:8000 | 1870 | $9B:8000 | 1089 |
+| $9E | JP | `sCompressedTiles_9EEB3D` | $9E:EB3D | 1921 | $9E:EB3D | 1172 |
+| $9F | EU | `sCompressedTiles_9F8000` | $9F:8000 | 5385 | $9F:8000 | 5228 |
+| $9F | EU | `sCompressedTiles_9F946C` | $9F:9509 | 5691 | $9F:946C | 5641 |
+| $9F | EU | `sCompressedTiles_9FAA75` | $9F:AB44 | 5622 | $9F:AA75 | 5591 |
+| $9F | EU | `sCompressedTiles_9FC04C` | $9F:C13A | 5196 | $9F:C04C | 5262 |
+| $9F | DE | `sCompressedTiles_9F8000` | $9F:8000 | 5385 | $9F:8000 | 5228 |
+| $9F | DE | `sCompressedTiles_9F946C` | $9F:9509 | 5467 | $9F:946C | 5641 |
+| $9F | DE | `sCompressedTiles_9FAA75` | $9F:AA64 | 5622 | $9F:AA75 | 5591 |
+| $9F | DE | `sCompressedTiles_9FC04C` | $9F:C05A | 5196 | $9F:C04C | 5262 |
+| $9F | JP | `sCompressedTiles_9F8000` | $9F:8000 | 5440 | $9F:8000 | 5228 |
+| $9F | JP | `sCompressedTiles_9F946C` | $9F:9540 | 5749 | $9F:946C | 5641 |
+| $9F | JP | `sCompressedTiles_9FAA75` | $9F:ABB5 | 6045 | $9F:AA75 | 5591 |
+| $9F | JP | `sCompressedTiles_9FC04C` | $9F:C352 | 5686 | $9F:C04C | 5262 |
+| $9F | JP | `sCompressedTiles_9FEF97` | $9F:F445 | 2427 | $9F:EF97 | 2131 |
+| $A5 | EU | `sCompressedTilemap_A58000` | $A5:8000 | 796 | $A5:8000 | 807 |
+| $A5 | EU | `sCompressedTilemap_A5CD88` | $A5:CD7D | 1738 | $A5:CD88 | 1732 |
+| $A5 | EU | `sCompressedTilemap_A5D94A` | $A5:D945 | 1326 | $A5:D94A | 1338 |
+| $A5 | DE | `sCompressedTilemap_A58000` | $A5:8000 | 832 | $A5:8000 | 807 |
+| $A5 | DE | `sCompressedTilemap_A58D8E` | $A5:8DA7 | 2480 | $A5:8D8E | 2433 |
+| $A5 | DE | `sCompressedTilemap_A59C08` | $A5:9C50 | 633 | $A5:9C08 | 515 |
+| $A5 | DE | `sCompressedTilemap_A5CD88` | $A5:CE46 | 1738 | $A5:CD88 | 1732 |
+| $A5 | DE | `sCompressedTilemap_A5D94A` | $A5:DA0E | 1323 | $A5:D94A | 1338 |
+| $A5 | JP | `sCompressedTilemap_A58000` | $A5:8000 | 947 | $A5:8000 | 807 |
+| $A5 | JP | `sCompressedTilemap_A58D8E` | $A5:8E1A | 2535 | $A5:8D8E | 2433 |
+| $A5 | JP | `sCompressedTilemap_A5970F` | $A5:9801 | 1142 | $A5:970F | 1273 |
+| $A5 | JP | `sCompressedTilemap_A59C08` | $A5:9C77 | 637 | $A5:9C08 | 515 |
+| $A5 | JP | `sCompressedTilemap_A5CD88` | $A5:CE71 | 1738 | $A5:CD88 | 1732 |
+| $A5 | JP | `sCompressedTilemap_A5D94A` | $A5:DA39 | 1320 | $A5:D94A | 1338 |
+| $A5 | JP | `sCompressedTilemap_A5DE84` | $A5:DF61 | 770 | $A5:DE84 | 975 |
+| $A6 | DE | `sCompressedTilemap_A694EE` | $A6:94EE | 1319 | $A6:94EE | 1192 |
+| $A6 | JP | `sCompressedTilemap_A690A6` | $A6:90A6 | 1511 | $A6:90A6 | 1096 |
+| $A6 | JP | `sCompressedTilemap_A694EE` | $A6:968D | 2544 | $A6:94EE | 1192 |
+
+Notes: EU differs from US only in a few font tables, the language specific graphics of $9F and three name tables of $A5. DE and JP
+additionally translate the title/menu graphics ($9A, $9B, $A5, $A6); JP replaces the Latin fonts by kana/kanji tables and has
+a different text tile sheet in $9E. Blobs not listed are identical to US (the `Identical, moved` column counts blobs with the same
+bytes at a different address, because an earlier blob of the bank changed its size).
+
 ## Functional differences in the code banks
 
 What the patch blocks contain (EU = PAL English, DE = PAL German, JP = Japanese). "PAL" below means the change is
@@ -222,8 +351,7 @@ in both EU and DE (`!REGION_EUDE`).
 - **Palette animation:** three large JP specific data scripts after `fPaletteAnim_AnimalShop_T1234` and
   `fPaletteAnim_WoodsSpring_T1` (about 1500 data lines), palette animation table pointers (`pSubrutineTable_80BEEC`).
 - **Endings:** `fAreaEvents_Endings` sets the ending step to `$1C` instead of `$20` and does not clear the daily flag.
-- **Maps/tilemaps:** pointers in `src/code/bank_80/tilemaps.asm` to the language specific tilemaps (all three
-  regions; JP has its own graphics blobs in banks $9A/$9B/$A5/$AA-$AC).
+- **Maps/tilemaps:** the map table in `src/code/bank_80/tilemaps.asm` points to the language specific graphics by label (no patch blocks any more, see "Regional data banks").
 - **Tools and objects:** tool animation tables and handlers (`fToolUsedActionHandler`, `fToolUsedAnimationHandler`),
   ranch development and weather damage object-map routines.
 

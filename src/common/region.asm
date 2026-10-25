@@ -51,3 +51,20 @@ else
     !NAME_SEASON_SIZE = 12
     !NAME_ORDINAL_SIZE = 4
 endif
+
+; Data selection. `!{REGDIR}` is put in front of the file name of every region specific graphics blob / font table
+; (assets/gfx/{tiles,characters}/<region>/...; the shared US files have no directory) and `!{DLGDIR}` selects the
+; dialog banks generated from assets/dialogs/<region>/ (tools/dialogs/dialog.py build).
+if !REGION_EU
+    !REGDIR = "eu/"
+    !DLGDIR = "eu"
+elseif !REGION_DE
+    !REGDIR = "de/"
+    !DLGDIR = "de"
+elseif !REGION_JP
+    !REGDIR = "jp/"
+    !DLGDIR = "jp"
+else
+    !REGDIR = ""
+    !DLGDIR = "us"
+endif

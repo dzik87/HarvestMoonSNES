@@ -3,22 +3,22 @@
     ORG $9F8000
 
 sCompressedTiles_9F8000:
-    incbin "../../../../assets/gfx/tiles/sCompressedTiles_9F8000.bin"
+    incbin "../../../../assets/gfx/tiles/!{REGDIR}sCompressedTiles_9F8000.bin"
 
 sCompressedTiles_9F946C:
-    incbin "../../../../assets/gfx/tiles/sCompressedTiles_9F946C.bin"
+    incbin "../../../../assets/gfx/tiles/!{REGDIR}sCompressedTiles_9F946C.bin"
 
 sCompressedTiles_9FAA75:
-    incbin "../../../../assets/gfx/tiles/sCompressedTiles_9FAA75.bin"
+    incbin "../../../../assets/gfx/tiles/!{REGDIR}sCompressedTiles_9FAA75.bin"
 
 sCompressedTiles_9FC04C:
-    incbin "../../../../assets/gfx/tiles/sCompressedTiles_9FC04C.bin"
+    incbin "../../../../assets/gfx/tiles/!{REGDIR}sCompressedTiles_9FC04C.bin"
 
 sCompressedTiles_9FD4DA:
     incbin "../../../../assets/gfx/tiles/sCompressedTiles_9FD4DA.bin"
 
 sCompressedTiles_9FEF97:
-    incbin "../../../../assets/gfx/tiles/sCompressedTiles_9FEF97.bin"
+    incbin "../../../../assets/gfx/tiles/!{REGDIR}sCompressedTiles_9FEF97.bin"
 
 Padding_9F0000:
-    fill 2070
+    fill align $8000

@@ -22,7 +22,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 ROM_SIZE = 0x200000
-MAIN = {r: "src/main.asm" for r in ("US", "EU", "DE", "JP")}  # regions share the entry; `-DREGION_xx=1` selects patch blocks (banks $80-$85 only)
+MAIN = {r: "src/main.asm" for r in ("US", "EU", "DE", "JP")}  # regions share the entry; `-DREGION_xx=1` selects the patch blocks and the regional data (docs/regions.md)
 DEFINES = {"US": [], "EU": ["-DREGION_EU=1"], "DE": ["-DREGION_DE=1"], "JP": ["-DREGION_JP=1"]}
 
 

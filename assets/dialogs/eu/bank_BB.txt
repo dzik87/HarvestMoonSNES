@@ -1,317 +1,317 @@
-@@ sDialogEU_043F @@
+@@ sDialog_0x043F @@
 ........Uummm,well,I can't  answer now. If it's sunny...will you come to<NEXT>
 the mountain on Sunday?     Before it gets dark....I'll be waiting for you there.<END>
 
-@@ sDialogEU_0440 @@
+@@ sDialog_0x0440 @@
 Ah,........well,I....       sorry but I can't answer youright now....<NEXT>
 I'm visiting the livestock  dealer's house so please go there if it's sunny.<NEXT>
 I'm expecting you.<END>
 
-@@ sDialogEU_0441 @@
+@@ sDialog_0x0441 @@
 .........Huh? Really? Well, I've got to talk to my      grandpa....<NEXT>
 If it's sunny on Saturday,  please go to the mountain   again,all right?<NEXT>
 I'll be waiting for you frommorning so come as early as you can.<END>
 
-@@ sDialogEU_0442 @@
+@@ sDialog_0x0442 @@
 It moo's...........<END>
 
-@@ sDialogEU_0443 @@
+@@ sDialog_0x0443 @@
 Hey,I made this overall.    Isn't it cute?<END>
 
-@@ sDialogEU_0444 @@
+@@ sDialog_0x0444 @@
  Money <NUM 7 62>0G<END>
 
-@@ sDialogEU_0445 @@
+@@ sDialog_0x0445 @@
  Cow     <NUM 2 63>                  Chicken <NUM 2 64><END>
 
-@@ sDialogEU_0446 @@
+@@ sDialog_0x0446 @@
  Stamina <NUM 3 65><END>
 
-@@ sDialogEU_0447 @@
+@@ sDialog_0x0447 @@
  Cow's best affection rate   <VAR 4 36> <NUM 3 66><END>
 
-@@ sDialogEU_0448 @@
+@@ sDialog_0x0448 @@
  Maria's love <NUM 3 67><END>
 
-@@ sDialogEU_0449 @@
+@@ sDialog_0x0449 @@
  Ann's love   <NUM 3 68><END>
 
-@@ sDialogEU_044A @@
+@@ sDialog_0x044A @@
  Nina's love  <NUM 3 69><END>
 
-@@ sDialogEU_044B @@
+@@ sDialog_0x044B @@
  Ellen's love <NUM 3 70><END>
 
-@@ sDialogEU_044C @@
+@@ sDialog_0x044C @@
  Eve's love   <NUM 3 71><END>
 
-@@ sDialogEU_044D @@
+@@ sDialog_0x044D @@
  Amount of shipped tomatoes  <NUM 3 72><END>
 
-@@ sDialogEU_044E @@
+@@ sDialog_0x044E @@
  Amount of shipped corn      <NUM 3 73><END>
 
-@@ sDialogEU_044F @@
+@@ sDialog_0x044F @@
  Amount of shipped potatoes  <NUM 3 74><END>
 
-@@ sDialogEU_0450 @@
+@@ sDialog_0x0450 @@
  Amount of shipped turnips   <NUM 3 75><END>
 
-@@ sDialogEU_0451 @@
+@@ sDialog_0x0451 @@
  Wood house<END>
 
-@@ sDialogEU_0452 @@
+@@ sDialog_0x0452 @@
  Super wood house<END>
 
-@@ sDialogEU_0453 @@
+@@ sDialog_0x0453 @@
  Super deluxe great          wood house<END>
 
-@@ sDialogEU_0454 @@
+@@ sDialog_0x0454 @@
  Happiness rate <NUM 3 76><END>
 
-@@ sDialogEU_0455 @@
+@@ sDialog_0x0455 @@
 Florist's crops note<NEXT>
  "tomato, corn"              "turnip, potato"            "grass"<OPT 3>
 
-@@ sDialogEU_0456 @@
+@@ sDialog_0x0456 @@
 Tomato and corn seeds must  be planted in summer.       They never grow when<NEXT>
 planted in other seasons.   Have even more vegetables bywatering after the harvest.<NEXT>
 Tomatoes grow quicker. Die  in autumn. Shipping rate:<NEXT>
 Tomato/1 piece 100G         Corn/1 piece   120G<END>
 
-@@ sDialogEU_0457 @@
+@@ sDialog_0x0457 @@
 Turnip and potato seeds mustbe planted in spring.       They grow quicker than<NEXT>
 tomatoes and corn.Turnips   are a quick grower.         Only one harvest per year.<NEXT>
 Shipping rate:              Turnip/1 piece 60G          Potato/1 piece 80G<END>
 
-@@ sDialogEU_0458 @@
+@@ sDialog_0x0458 @@
 Grass seeds must be planted from spring to summer and   cut by autumn.<NEXT>
 Don't water it.Grass doesn'tmake money but it is        important as feed to<NEXT>
 livestock.<END>
 
-@@ sDialogEU_0459 @@
+@@ sDialog_0x0459 @@
 Livestock note:<NEXT>
  "Cow"          "Chicken"    "Milk"         "Egg"        "Grass"<OPT 5>
 
-@@ sDialogEU_045A @@
+@@ sDialog_0x045A @@
 Cows on sale are young ones that can't milk.They take 21days to grow large<NEXT>
 enough for milking.         The key is to keep them awayfrom sickness.<NEXT>
 Don't forget to feed them.  Don't let them out in bad   weather.<NEXT>
 Nothing works when they get wet in the morning.<NEXT>
 They don't produce milk     for a while when they get   sick or are in a bad mood.<END>
 
-@@ sDialogEU_045B @@
+@@ sDialog_0x045B @@
 Equip the milker and press  the Y button when facing a  cow to milk-once a day.<NEXT>
 A cow's affection rate      increases when it's brushed or talked to.<NEXT>
 Cows you devote your        affection to can produce    middle-sized and<NEXT>
 large-sized milk.<END>
 
-@@ sDialogEU_045C @@
+@@ sDialog_0x045C @@
 Cows eat well-grown grass.  Young grass does not satisfya cow's hunger,so be<NEXT>
 careful. Cut grass makes    fodder. It's feed in rainy  days and winter.<NEXT>
 Don't run out of it.<END>
 
-@@ sDialogEU_045D @@
+@@ sDialog_0x045D @@
 Chickens lay one egg a day. They won't lay eggs for 3   days if you don't feed them<NEXT>
 or they get wet in the rain.They could be blown away    when you let them outside<NEXT>
 during hurricanes or        possibly eaten by wild dogs.<END>
 
-@@ sDialogEU_045E @@
+@@ sDialog_0x045E @@
 Eggs become chicks in 3 dayswhen you incubate them. No  feed is necessary for<NEXT>
 chicks. Chicks grow to      chickens in 7 days.         If you increase the amount<NEXT>
 of chickens, the feed will  run out so be careful.<END>
 
-@@ sDialogEU_045F @@
+@@ sDialog_0x045F @@
 "Lessons of Love"<NEXT>
  Present        Conversation Festival       Diary        Marriage<OPT 5>
 
-@@ sDialogEU_0460 @@
+@@ sDialog_0x0460 @@
 Most portable things can be presents. Every girl has a  different taste so observe<NEXT>
 their reactions. Expensive  presents don't work all the time.<END>
 
-@@ sDialogEU_0461 @@
+@@ sDialog_0x0461 @@
 It's important to talk to a girl you love as much as    possible.<END>
 
-@@ sDialogEU_0462 @@
+@@ sDialog_0x0462 @@
 Festivals are the best      opportunity! Girls are      sometimes at different<NEXT>
 places depending on the     festival. Talk to her the   day before and check out<NEXT>
 where she's going the next  day.Perfume can be lucky...<END>
 
-@@ sDialogEU_0463 @@
+@@ sDialog_0x0463 @@
 A girl's impression of you  can be found in the diary inher room.<NEXT>
 Don't look too often.       Try your best to capture herheart!<END>
 
-@@ sDialogEU_0464 @@
+@@ sDialog_0x0464 @@
 Propose marriage with a bluefeather. When a girl's good impression rate gets high,<NEXT>
 check out the peddler on    Sunday.You need to enlarge  your house to get married<NEXT>
 too.<END>
 
-@@ sDialogEU_0465 @@
+@@ sDialog_0x0465 @@
 I see,Ellen. She's behind   the pen on Saturdays.       She's at the public<NEXT>
 square during Star Night    Festival night. For a       present,flowers are nice<NEXT>
 but milk milked by you or anegg will please her,too.<END>
 
-@@ sDialogEU_0466 @@
+@@ sDialog_0x0466 @@
 Eve..hmm... Go to the bar asmany times as you can and goto the mountain<NEXT>
 on Saturdays and Sundays.   For a present,flowers or    berries are good.<NEXT>
 She doesn't like fish so    don't give it to her.<END>
 
-@@ sDialogEU_0467 @@
+@@ sDialog_0x0467 @@
 Sweetheart......Stay happy  forever.<END>
 
-@@ sDialogEU_0468 @@
+@@ sDialog_0x0468 @@
 Hey,darling....I would like a baby. How about you?<END>
 
-@@ sDialogEU_0469 @@
+@@ sDialog_0x0469 @@
 .........Honey,you work too hard. I want you to be with me more.<END>
 
-@@ sDialogEU_046A @@
+@@ sDialog_0x046A @@
  <VAR 9 37>,<NUM 2 77><VAR 2 38> of <VAR 6 39>.   Money <NUM 7 78>0G<END>
 
-@@ sDialogEU_046B @@
+@@ sDialog_0x046B @@
  <VAR 9 40>,<NUM 2 79><VAR 2 41> of <VAR 6 42>.   It's 6 o'clock now.<NEXT>
  Going to have a good day    today!                      Money <NUM 7 80>0G<END>
 
-@@ sDialogEU_046C @@
+@@ sDialog_0x046C @@
  <VAR 9 43>,<NUM 2 81><VAR 2 44> of <VAR 6 45>.   It's 7 o'clock now.         Money <NUM 7 82>0G<END>
 
-@@ sDialogEU_046D @@
+@@ sDialog_0x046D @@
  <VAR 9 46>,<NUM 2 83><VAR 2 47> of <VAR 6 48>.   It's 8 o'clock now.         Money <NUM 7 84>0G<END>
 
-@@ sDialogEU_046E @@
+@@ sDialog_0x046E @@
  <VAR 9 49>,<NUM 2 85><VAR 2 50> of <VAR 6 51>.   It's 9 o'clock now.         Money <NUM 7 86>0G<END>
 
-@@ sDialogEU_046F @@
+@@ sDialog_0x046F @@
  <VAR 9 52>,<NUM 2 87><VAR 2 53> of <VAR 6 54>.   It's 10 o'clock now.        Money <NUM 7 88>0G<END>
 
-@@ sDialogEU_0470 @@
+@@ sDialog_0x0470 @@
  <VAR 9 55>,<NUM 2 89><VAR 2 56> of <VAR 6 57>.   It's 11 o'clock now. I'm    hungry now.<NEXT>
  Money <NUM 7 90>0G<END>
 
-@@ sDialogEU_0471 @@
+@@ sDialog_0x0471 @@
  <VAR 9 58>,<NUM 2 91><VAR 2 59> of <VAR 6 60>.   It's 12 o'clock now.        I'm charged.<NEXT>
  Money <NUM 7 92>0G<END>
 
-@@ sDialogEU_0472 @@
+@@ sDialog_0x0472 @@
  <VAR 9 61>,<NUM 2 93><VAR 2 62> of <VAR 6 63>.   It's 1 o'clock now.         Money <NUM 7 94>0G<END>
 
-@@ sDialogEU_0473 @@
+@@ sDialog_0x0473 @@
  <VAR 9 64>,<NUM 2 95><VAR 2 65> of <VAR 6 66>.   It's 2 o'clock now.         Money <NUM 7 96>0G<END>
 
-@@ sDialogEU_0474 @@
+@@ sDialog_0x0474 @@
  <VAR 9 67>,<NUM 2 97><VAR 2 68> of <VAR 6 69>.   It's 3 o'clock now. Didn't  I forget to ship something<NEXT>
  Money <NUM 7 98>0G<END>
 
-@@ sDialogEU_0475 @@
+@@ sDialog_0x0475 @@
  <VAR 9 70>,<NUM 2 99><VAR 2 71> of <VAR 6 72>.   It's 4 o'clock now. Shipper is coming here soon.<NEXT>
  Money <NUM 7 100>0G<END>
 
-@@ sDialogEU_0476 @@
+@@ sDialog_0x0476 @@
  <VAR 9 73>,<NUM 2 101><VAR 2 74> of <VAR 6 75>.   It's 5 o'clock now. I'm     tired now.<NEXT>
  Money <NUM 7 102>0G<END>
 
-@@ sDialogEU_0477 @@
+@@ sDialog_0x0477 @@
  <VAR 9 76>,<NUM 2 103><VAR 2 77> of <VAR 6 78>.   It's 6 o'clock now. I'm     going home now and going<NEXT>
  to bed.                     Money <NUM 7 104>0G<END>
 
-@@ sDialogEU_0478 @@
+@@ sDialog_0x0478 @@
  <VAR 9 79>,<NUM 2 105><VAR 2 80> of <VAR 6 81>.   It's 5 o'clock now. I could be scolded if I went home<NEXT>
  late.                       Money <NUM 7 106>0G<END>
 
-@@ sDialogEU_0479 @@
+@@ sDialog_0x0479 @@
 Hello, Mr. <VAR 4 82> I've got a  notice from your father thismorning.<NEXT>
 He says he will be back hereby the end of summer next   year.<NEXT>
 He's so worried about how   you live here so make him   feel at ease then.<END>
 
-@@ sDialogEU_047A @@
+@@ sDialog_0x047A @@
 Hello. Your parents are     coming tomorrow at last.    They will be surprised<NEXT>
 to see this ranch.<END>
 
-@@ sDialogEU_047B @@
+@@ sDialog_0x047B @@
 ...........Really,you still need to be trained more.<END>
 
-@@ sDialogEU_047C @@
+@@ sDialog_0x047C @@
 It's kind of disappointing  when the weather is not goodon Sunday.<END>
 
-@@ sDialogEU_047D @@
+@@ sDialog_0x047D @@
 Honey, the shop is closed   because it's Saturday today.<END>
 
-@@ sDialogEU_047E @@
+@@ sDialog_0x047E @@
 Equip the axe and use it in front of the spring in the  mountain and then. ........<END>
 
-@@ sDialogEU_047F @@
+@@ sDialog_0x047F @@
 Hey,how are you doing? I'm  making a great thing now!   It'll be completed around<NEXT>
 the 20th so come see it at  the shop then.<END>
 
-@@ sDialogEU_0480 @@
+@@ sDialog_0x0480 @@
 Darling,will you hold our   child sometimes?<END>
 
-@@ sDialogEU_0481 @@
+@@ sDialog_0x0481 @@
 Look. He is crawling now!<END>
 
-@@ sDialogEU_0482 @@
+@@ sDialog_0x0482 @@
 This child grows pretty     quickly.Just a while ago he started to speak words.<END>
 
-@@ sDialogEU_0483 @@
+@@ sDialog_0x0483 @@
  Ranch master rate <NUM 3 107>       Still a long way to go.<END>
 
-@@ sDialogEU_0484 @@
+@@ sDialog_0x0484 @@
 He is very active so I have to watch him all the time.<END>
 
-@@ sDialogEU_0485 @@
+@@ sDialog_0x0485 @@
 Darling,please take care of yourself.<END>
 
-@@ sDialogEU_0486 @@
+@@ sDialog_0x0486 @@
 I heard an awful sound from here this morning.  Are you all right?<NEXT>
 Has anything strange        happened? Check it out.<END>
 
-@@ sDialogEU_0487 @@
+@@ sDialog_0x0487 @@
 You said what? You were     supposed to sell it,weren't you? Now I'm leaving.<END>
 
-@@ sDialogEU_0488 @@
+@@ sDialog_0x0488 @@
  Ranch master rate <NUM 3 108>       Try harder.<END>
 
-@@ sDialogEU_0489 @@
+@@ sDialog_0x0489 @@
  Ranch master rate <NUM 3 109>       Come on,you are so close!<END>
 
-@@ sDialogEU_048A @@
+@@ sDialog_0x048A @@
  Ranch master rate <NUM 3 110>       Great! But try to be the    best rancher!<END>
 
-@@ sDialogEU_048B @@
+@@ sDialog_0x048B @@
  Ranch master rate <NUM 3 111>       Congratulations! You are    the perfect rancher now!<END>
 
-@@ sDialogEU_048C @@
+@@ sDialog_0x048C @@
  Ranch developing rate <NUM 3 112>%<END>
 
-@@ sDialogEU_048D @@
+@@ sDialog_0x048D @@
 How is P-chan doing?        I wonder if it's doing OK?<END>
 
-@@ sDialogEU_048E @@
+@@ sDialog_0x048E @@
 Money is not the only thing in life. Look at various    things.<END>
 
-@@ sDialogEU_048F @@
+@@ sDialog_0x048F @@
 The strange looking ornamentof a chicken looks like it  can be broken with a tool.<END>
 
-@@ sDialogEU_0490 @@
+@@ sDialog_0x0490 @@
 What a beautiful flower!<END>
 
-@@ sDialogEU_0491 @@
+@@ sDialog_0x0491 @@
 Hello,you should eat a lot  today. No,it doesn't mean   anything.<END>
 
-@@ sDialogEU_0492 @@
+@@ sDialog_0x0492 @@
 Has Nina made something likea flower garden at the      ranch? Has she?<END>
 
-@@ sDialogEU_0493 @@
+@@ sDialog_0x0493 @@
 Darling,didn't you forget   to paint the door?<END>
 
-@@ sDialogEU_0494 @@
+@@ sDialog_0x0494 @@
 Maria seems to be doing     well. Yes,she brought me a  cake early this morning.<END>
 
-@@ sDialogEU_0495 @@
+@@ sDialog_0x0495 @@
 Are you getting along well  with your wife? Don't argue,OK?<END>
 
-@@ sDialogEU_0496 @@
+@@ sDialog_0x0496 @@
 I got a cake from the       florist's wife. I'm so glad.It's like a dream to me.<END>
 
-@@ sDialogEU_0497 @@
+@@ sDialog_0x0497 @@
 Oh my goodness! No,no,no,   nothing like that! You know,something like... thanks.<END>

@@ -12,19 +12,19 @@ sCompressedTiles_9AAEAB:
     incbin "../../../../assets/gfx/tiles/sCompressedTiles_9AAEAB.bin"
 
 sCompressedTiles_9ABF97:
-    incbin "../../../../assets/gfx/tiles/sCompressedTiles_9ABF97.bin"
+    incbin "../../../../assets/gfx/tiles/!{REGDIR}sCompressedTiles_9ABF97.bin"
 
 sCompressedTiles_9AC489:
-    incbin "../../../../assets/gfx/tiles/sCompressedTiles_9AC489.bin"
+    incbin "../../../../assets/gfx/tiles/!{REGDIR}sCompressedTiles_9AC489.bin"
 
 sCompressedTiles_9ACB41:
-    incbin "../../../../assets/gfx/tiles/sCompressedTiles_9ACB41.bin"
+    incbin "../../../../assets/gfx/tiles/!{REGDIR}sCompressedTiles_9ACB41.bin"
 
 sCompressedTiles_9AD357:
-    incbin "../../../../assets/gfx/tiles/sCompressedTiles_9AD357.bin"
+    incbin "../../../../assets/gfx/tiles/!{REGDIR}sCompressedTiles_9AD357.bin"
 
 sCompressedTiles_9AE02D:
     incbin "../../../../assets/gfx/tiles/sCompressedTiles_9AE02D.bin"
 
 Padding_9A0000:
-    fill 2332
+    fill align $8000
