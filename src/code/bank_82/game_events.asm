@@ -573,9 +573,9 @@ fNextDayHandler:
     %CheckFlag(event4, $2000)
     BNE +                                                      ;8285BB|D025    |8285E2;
     SEP #$20                                                   ;8285BD|E220    |      ;
-    LDA.W $09A3                                                ;8285BF|ADA309  |0009A3;
+    LDA.W $09A3+!DE_RAM_SHIFT                              ;8285BF|ADA309  |0009A3;
     INC A                                                      ;8285C2|1A      |      ;
-    STA.W $09A3                                                ;8285C3|8DA309  |0009A3;
+    STA.W $09A3+!DE_RAM_SHIFT                              ;8285C3|8DA309  |0009A3;
     CMP.B #$03                                                 ;8285C6|C903    |      ;
     BNE +                                                      ;8285C8|D018    |8285E2;
     REP #$20                                                   ;8285CA|C220    |      ;
@@ -588,9 +588,9 @@ fNextDayHandler:
     %CheckFlag(event4, $8000)
     BNE +                                                      ;8285F4|D025    |82861B;
     SEP #$20                                                   ;8285F6|E220    |      ;
-    LDA.W $09A3                                                ;8285F8|ADA309  |0009A3;
+    LDA.W $09A3+!DE_RAM_SHIFT                              ;8285F8|ADA309  |0009A3;
     INC A                                                      ;8285FB|1A      |      ;
-    STA.W $09A3                                                ;8285FC|8DA309  |0009A3;
+    STA.W $09A3+!DE_RAM_SHIFT                              ;8285FC|8DA309  |0009A3;
     CMP.B #$03                                                 ;8285FF|C903    |      ;
     BNE +                                                      ;828601|D018    |82861B;
     REP #$20                                                   ;828603|C220    |      ;
@@ -603,9 +603,9 @@ fNextDayHandler:
     %CheckFlag(event5, $0002)
     BNE +                                                      ;82862D|D025    |828654;
     SEP #$20                                                   ;82862F|E220    |      ;
-    LDA.W $09A3                                                ;828631|ADA309  |0009A3;
+    LDA.W $09A3+!DE_RAM_SHIFT                              ;828631|ADA309  |0009A3;
     INC A                                                      ;828634|1A      |      ;
-    STA.W $09A3                                                ;828635|8DA309  |0009A3;
+    STA.W $09A3+!DE_RAM_SHIFT                              ;828635|8DA309  |0009A3;
     CMP.B #$03                                                 ;828638|C903    |      ;
     BNE +                                                      ;82863A|D018    |828654;
     REP #$20                                                   ;82863C|C220    |      ;
@@ -618,9 +618,9 @@ fNextDayHandler:
     %CheckFlag(event5, $0008)
     BNE +                                                      ;828666|D025    |82868D;
     SEP #$20                                                   ;828668|E220    |      ;
-    LDA.W $09A3                                                ;82866A|ADA309  |0009A3;
+    LDA.W $09A3+!DE_RAM_SHIFT                              ;82866A|ADA309  |0009A3;
     INC A                                                      ;82866D|1A      |      ;
-    STA.W $09A3                                                ;82866E|8DA309  |0009A3;
+    STA.W $09A3+!DE_RAM_SHIFT                              ;82866E|8DA309  |0009A3;
     CMP.B #$03                                                 ;828671|C903    |      ;
     BNE +                                                      ;828673|D018    |82868D;
     REP #$20                                                   ;828675|C220    |      ;
@@ -633,9 +633,9 @@ fNextDayHandler:
     %CheckFlag(event5, $0020)
     BNE +                                                      ;82869F|D025    |8286C6;
     SEP #$20                                                   ;8286A1|E220    |      ;
-    LDA.W $09A3                                                ;8286A3|ADA309  |0009A3;
+    LDA.W $09A3+!DE_RAM_SHIFT                              ;8286A3|ADA309  |0009A3;
     INC A                                                      ;8286A6|1A      |      ;
-    STA.W $09A3                                                ;8286A7|8DA309  |0009A3;
+    STA.W $09A3+!DE_RAM_SHIFT                              ;8286A7|8DA309  |0009A3;
     CMP.B #$03                                                 ;8286AA|C903    |      ;
     BNE +                                                      ;8286AC|D018    |8286C6;
     REP #$20                                                   ;8286AE|C220    |      ;
@@ -664,7 +664,7 @@ fNextDayHandler:
     SEP #$20                                                   ;828706|E220    |      ;
     LDA.B #$00                                                 ;828708|A900    |      ;
     XBA                                                        ;82870A|EB      |      ;
-    LDA.W $098E                                                ;82870B|AD8E09  |00098E;
+    LDA.W $098E+!DE_RAM_SHIFT                              ;82870B|AD8E09  |00098E;
     JSL.L fGameEngine_SaveGame                                 ;82870E|228EB683|83B68E;
  
 .skipToEndGame:
@@ -957,28 +957,61 @@ fWriteSeasonWeekdayAndDayOrdinal:
     ASL A                                                      ;8289E5|0A      |      ;
     ASL A                                                      ;8289E6|0A      |      ; * 16
     TAX                                                        ;8289E7|AA      |      ;
+    if !REGION_DE
+    LDA.L $828B03,X                                        ;8289E8|BF038B82|      ;
+    else
     LDA.L aSeasonString,X                                      ;8289E8|BFD98A82|828AD9;
+    endif
     STA.W strcNames.wSeason                                    ;8289EC|8DB308  |0008B3;
     INX                                                        ;8289EF|E8      |      ;
     INX                                                        ;8289F0|E8      |      ;
+    if !REGION_DE
+    LDA.L $828B03,X                                        ;8289F1|BF038B82|      ;
+    else
     LDA.L aSeasonString,X                                      ;8289F1|BFD98A82|828AD9;
+    endif
     STA.W strcNames.wSeason+2                                  ;8289F5|8DB508  |0008B5;
     INX                                                        ;8289F8|E8      |      ;
     INX                                                        ;8289F9|E8      |      ;
+    if !REGION_DE
+    LDA.L $828B03,X                                        ;8289FA|BF038B82|      ;
+    else
     LDA.L aSeasonString,X                                      ;8289FA|BFD98A82|828AD9;
+    endif
     STA.W strcNames.wSeason+4                                  ;8289FE|8DB708  |0008B7;
     INX                                                        ;828A01|E8      |      ;
     INX                                                        ;828A02|E8      |      ;
+    if !REGION_DE
+    LDA.L $828B03,X                                        ;828A03|BF038B82|      ;
+    else
     LDA.L aSeasonString,X                                      ;828A03|BFD98A82|828AD9;
+    endif
     STA.W strcNames.wSeason+6                                  ;828A07|8DB908  |0008B9;
     INX                                                        ;828A0A|E8      |      ;
     INX                                                        ;828A0B|E8      |      ;
+    if !REGION_DE
+    LDA.L $828B03,X                                        ;828A0C|BF038B82|      ;
+    else
     LDA.L aSeasonString,X                                      ;828A0C|BFD98A82|828AD9;
+    endif
     STA.W strcNames.wSeason+8                                  ;828A10|8DBB08  |0008BB;
     INX                                                        ;828A13|E8      |      ;
     INX                                                        ;828A14|E8      |      ;
+    if !REGION_DE
+    LDA.L $828B03,X                                        ;828A15|BF038B82|      ;
+    STA.W strcNames.wSeason+10                             ;828A19|8DBD08  |      ;
+    INX                                                    ;828A1C|E8      |      ;
+    INX                                                    ;828A1D|E8      |      ;
+    LDA.L $828B03,X                                        ;828A1E|BF038B82|      ;
+    STA.W strcNames.wWeekday                               ;828A22|8DBF08  |      ;
+    INX                                                    ;828A25|E8      |      ;
+    INX                                                    ;828A26|E8      |      ;
+    LDA.L $828B03,X                                        ;828A27|BF038B82|      ;
+    STA.W strcNames.wWeekday+2                             ;828A2B|8DC108  |      ;
+    else
     LDA.L aSeasonString,X                                      ;828A15|BFD98A82|828AD9;
     STA.W strcNames.wSeason+10                                 ;828A19|8DBD08  |0008BD;
+    endif
     SEP #$20                                                   ;828A1C|E220    |      ;
     LDA.B #$00                                                 ;828A1E|A900    |      ;
     XBA                                                        ;828A20|EB      |      ;
@@ -991,49 +1024,104 @@ fWriteSeasonWeekdayAndDayOrdinal:
     ASL A                                                      ;828A2B|0A      |      ;
     TAX                                                        ;828A2C|AA      |      ;
     LDA.L aWeekdayString,X                                     ;828A2D|BF198B82|828B19;
+    if !REGION_DE
+    STA.W strcNames.wWeekday+4                             ;828A43|8DC308  |      ;
+    INX                                                    ;828A46|E8      |      ;
+    INX                                                    ;828A47|E8      |      ;
+    LDA.L aWeekdayString,X                                 ;828A48|BF838B82|      ;
+    STA.W strcNames.wWeekday+6                             ;828A4C|8DC508  |      ;
+    else
     STA.W strcNames.wWeekday                                   ;828A31|8DBF08  |0008BF;
+    endif
     INX                                                        ;828A34|E8      |      ;
     INX                                                        ;828A35|E8      |      ;
     LDA.L aWeekdayString,X                                     ;828A36|BF198B82|828B19;
+    if !REGION_DE
+    STA.W strcNames.wWeekday+8                             ;828A55|8DC708  |      ;
+    else
     STA.W strcNames.wWeekday+2                                 ;828A3A|8DC108  |0008C1;
+    endif
     INX                                                        ;828A3D|E8      |      ;
     INX                                                        ;828A3E|E8      |      ;
     LDA.L aWeekdayString,X                                     ;828A3F|BF198B82|828B19;
+    if !REGION_DE
+    STA.W strcNames.wWeekday+10                            ;828A5E|8DC908  |      ;
+    else
     STA.W strcNames.wWeekday+4                                 ;828A43|8DC308  |0008C3;
+    endif
     INX                                                        ;828A46|E8      |      ;
     INX                                                        ;828A47|E8      |      ;
     LDA.L aWeekdayString,X                                     ;828A48|BF198B82|828B19;
+    if !REGION_DE
+    STA.W strcNames.wWeekday+12                            ;828A67|8DCB08  |      ;
+    else
     STA.W strcNames.wWeekday+6                                 ;828A4C|8DC508  |0008C5;
+    endif
     INX                                                        ;828A4F|E8      |      ;
     INX                                                        ;828A50|E8      |      ;
     LDA.L aWeekdayString,X                                     ;828A51|BF198B82|828B19;
+    if !REGION_DE
+    STA.W strcNames.wWeekday+14                            ;828A70|8DCD08  |      ;
+    else
     STA.W strcNames.wWeekday+8                                 ;828A55|8DC708  |0008C7;
+    endif
     INX                                                        ;828A58|E8      |      ;
     INX                                                        ;828A59|E8      |      ;
     LDA.L aWeekdayString,X                                     ;828A5A|BF198B82|828B19;
+    if !REGION_DE
+    STA.W strcNames.wWeekday+16                            ;828A79|8DCF08  |      ;
+    else
     STA.W strcNames.wWeekday+10                                ;828A5E|8DC908  |0008C9;
+    endif
     INX                                                        ;828A61|E8      |      ;
     INX                                                        ;828A62|E8      |      ;
     LDA.L aWeekdayString,X                                     ;828A63|BF198B82|828B19;
+    if !REGION_DE
+    STA.W $08D1                                            ;828A82|8DD108  |      ;
+    else
     STA.W strcNames.wWeekday+12                                ;828A67|8DCB08  |0008CB;
+    endif
     INX                                                        ;828A6A|E8      |      ;
     INX                                                        ;828A6B|E8      |      ;
     LDA.L aWeekdayString,X                                     ;828A6C|BF198B82|828B19;
+    if !REGION_DE
+    STA.W $08D3                                            ;828A8B|8DD308  |      ;
+    else
     STA.W strcNames.wWeekday+14                                ;828A70|8DCD08  |0008CD;
+    endif
     INX                                                        ;828A73|E8      |      ;
     INX                                                        ;828A74|E8      |      ;
     LDA.L aWeekdayString,X                                     ;828A75|BF198B82|828B19;
+    if !REGION_DE
+    STA.W $08D5                                            ;828A94|8DD508  |      ;
+    else
     STA.W strcNames.wWeekday+16                                ;828A79|8DCF08  |0008CF;
+    endif
     SEP #$20                                                   ;828A7C|E220    |      ;
     LDA.B #$00                                                 ;828A7E|A900    |      ;
     XBA                                                        ;828A80|EB      |      ;
     LDA.L nCurrentDay                                          ;828A81|AF1B1F7F|7F1F1B;
+    if !REGION_DE
+    REP #$30                                               ;828AA0|C230    |      ;
+    CMP.W #$0001                                           ;828AA2|C90100  |      ;
+    BEQ .first                                             ;828AA5|F01E    |828AC5;
+    CMP.W #$0002                                           ;828AA7|C90200  |      ;
+    BEQ .nd                                                ;828AAA|F020    |828ACC;
+    CMP.W #$0003                                           ;828AAC|C90300  |      ;
+    BEQ .rd                                                ;828AAF|F022    |828AD3;
+    CMP.W #$0015                                           ;828AB1|C91500  |      ;
+    BEQ .first                                             ;828AB4|F00F    |828AC5;
+    CMP.W #$0016                                           ;828AB6|C91600  |      ;
+    BEQ .nd                                                ;828AB9|F011    |828ACC;
+    CMP.W #$0017                                           ;828ABB|C91700  |      ;
+    else
     REP #$20                                                   ;828A85|C220    |      ;
     CMP.W #$0001                                               ;828A87|C90100  |      ;
     BEQ .first                                                 ;828A8A|F00F    |828A9B;
     CMP.W #$0002                                               ;828A8C|C90200  |      ;
     BEQ .nd                                                    ;828A8F|F011    |828AA2;
     CMP.W #$0003                                               ;828A91|C90300  |      ;
+    endif
     BEQ .rd                                                    ;828A94|F013    |828AA9;
     LDX.W #$000C                                               ;828A96|A20C00  |      ;
     BRA .loadordinal                                           ;828A99|8015    |828AB0;
@@ -1059,18 +1147,34 @@ fWriteSeasonWeekdayAndDayOrdinal:
  
 .loadordinal:
     REP #$30                                                   ;828AB0|C230    |      ;
+    if !REGION_DE
+    LDA.L $828C63,X                                        ;828ADC|BF638C82|      ;
+    else
     LDA.L aDayOrdinalString,X                                  ;828AB2|BFF98B82|828BF9;
+    endif
     STA.W strcNames.wDayOrdinal                                ;828AB6|8DD108  |0008D1;
     INX                                                        ;828AB9|E8      |      ;
     INX                                                        ;828ABA|E8      |      ;
+    if !REGION_DE
+    LDA.L $828C63,X                                        ;828AE5|BF638C82|      ;
+    else
     LDA.L aDayOrdinalString,X                                  ;828ABB|BFF98B82|828BF9;
+    endif
     STA.W strcNames.wDayOrdinal+2                              ;828ABF|8DD308  |0008D3;
     RTL                                                        ;828AC2|6B      |      ;
  
  
 aUnused_828AC3:
     db $69,$01,$CB,$01,$15,$01,$27,$01,$29,$01,$3C,$01         ;828AC3|        |      ;
+    if !REGION_DE
+    db $78,$02,$6C,$01,$AA,$01,$38,$01,$E4,$00,$1F,$00,$11,$00,$45,$00
+    db $07,$00,$0B,$00,$08,$00,$0D,$00,$06,$00,$2C,$00,$0E,$00,$0C,$00
+    db $0C,$00,$04,$00,$11,$00,$B1,$00,$B1,$00,$21,$00,$04,$00,$11,$00
+    db $01,$00,$12,$00,$13,$00,$B1,$00,$B1,$00,$30,$00,$08,$00,$0D,$00
+    db $13,$00,$04,$00,$11,$00,$B1,$00,$B1,$00
+    else
     db $78,$02,$6C,$01,$AA,$01,$38,$01,$E4,$00                 ;828ACF|        |      ;
+    endif
  
 aSeasonString:
     dw $002C,$000F,$0011,$0008,$000D,$0006                     ;828AD9|        |      ; 0x04 * [string[16]]
@@ -1081,6 +1185,289 @@ aSeasonString:
     dw $0000,$0000                                             ;828B15|        |      ;
  
 aWeekdayString:
+    if !REGION_DE
+    BIT.W $0E00                                            ;828B83|2C000E  |      ;
+    BRK #$0D                                               ;828B86|000D    |      ;
+    BRK #$0D                                               ;828B88|000D    |      ;
+    BRK #$13                                               ;828B8A|0013    |      ;
+    BRK #$00                                               ;828B8C|0000    |      ;
+    BRK #$06                                               ;828B8E|0006    |      ;
+    BRK #$B1                                               ;828B90|00B1    |      ;
+    BRK #$B1                                               ;828B92|00B1    |      ;
+    BRK #$B1                                               ;828B94|00B1    |      ;
+    BRK #$00                                               ;828B96|0000    |      ;
+    BRK #$00                                               ;828B98|0000    |      ;
+    BRK #$00                                               ;828B9A|0000    |      ;
+    BRK #$00                                               ;828B9C|0000    |      ;
+    BRK #$00                                               ;828B9E|0000    |      ;
+    BRK #$00                                               ;828BA0|0000    |      ;
+    BRK #$26                                               ;828BA2|0026    |      ;
+    BRK #$0E                                               ;828BA4|000E    |      ;
+    BRK #$0D                                               ;828BA6|000D    |      ;
+    BRK #$13                                               ;828BA8|0013    |      ;
+    BRK #$00                                               ;828BAA|0000    |      ;
+    BRK #$06                                               ;828BAC|0006    |      ;
+    BRK #$B1                                               ;828BAE|00B1    |      ;
+    BRK #$B1                                               ;828BB0|00B1    |      ;
+    BRK #$B1                                               ;828BB2|00B1    |      ;
+    BRK #$B1                                               ;828BB4|00B1    |      ;
+    BRK #$00                                               ;828BB6|0000    |      ;
+    BRK #$00                                               ;828BB8|0000    |      ;
+    BRK #$00                                               ;828BBA|0000    |      ;
+    BRK #$00                                               ;828BBC|0000    |      ;
+    BRK #$00                                               ;828BBE|0000    |      ;
+    BRK #$00                                               ;828BC0|0000    |      ;
+    BRK #$1D                                               ;828BC2|001D    |      ;
+    BRK #$08                                               ;828BC4|0008    |      ;
+    BRK #$04                                               ;828BC6|0004    |      ;
+    BRK #$0D                                               ;828BC8|000D    |      ;
+    BRK #$12                                               ;828BCA|0012    |      ;
+    BRK #$13                                               ;828BCC|0013    |      ;
+    BRK #$00                                               ;828BCE|0000    |      ;
+    BRK #$06                                               ;828BD0|0006    |      ;
+    BRK #$B1                                               ;828BD2|00B1    |      ;
+    BRK #$B1                                               ;828BD4|00B1    |      ;
+    BRK #$00                                               ;828BD6|0000    |      ;
+    BRK #$00                                               ;828BD8|0000    |      ;
+    BRK #$00                                               ;828BDA|0000    |      ;
+    BRK #$00                                               ;828BDC|0000    |      ;
+    BRK #$00                                               ;828BDE|0000    |      ;
+    BRK #$00                                               ;828BE0|0000    |      ;
+    BRK #$26                                               ;828BE2|0026    |      ;
+    BRK #$08                                               ;828BE4|0008    |      ;
+    BRK #$13                                               ;828BE6|0013    |      ;
+    BRK #$13                                               ;828BE8|0013    |      ;
+    BRK #$16                                               ;828BEA|0016    |      ;
+    BRK #$0E                                               ;828BEC|000E    |      ;
+    BRK #$02                                               ;828BEE|0002    |      ;
+    BRK #$07                                               ;828BF0|0007    |      ;
+    BRK #$B1                                               ;828BF2|00B1    |      ;
+    BRK #$B1                                               ;828BF4|00B1    |      ;
+    BRK #$00                                               ;828BF6|0000    |      ;
+    BRK #$00                                               ;828BF8|0000    |      ;
+    BRK #$00                                               ;828BFA|0000    |      ;
+    BRK #$00                                               ;828BFC|0000    |      ;
+    BRK #$00                                               ;828BFE|0000    |      ;
+    BRK #$00                                               ;828C00|0000    |      ;
+    BRK #$1D                                               ;828C02|001D    |      ;
+    BRK #$0E                                               ;828C04|000E    |      ;
+    BRK #$0D                                               ;828C06|000D    |      ;
+    BRK #$0D                                               ;828C08|000D    |      ;
+    BRK #$04                                               ;828C0A|0004    |      ;
+    BRK #$11                                               ;828C0C|0011    |      ;
+    BRK #$12                                               ;828C0E|0012    |      ;
+    BRK #$13                                               ;828C10|0013    |      ;
+    BRK #$00                                               ;828C12|0000    |      ;
+    BRK #$06                                               ;828C14|0006    |      ;
+    BRK #$00                                               ;828C16|0000    |      ;
+    BRK #$00                                               ;828C18|0000    |      ;
+    BRK #$00                                               ;828C1A|0000    |      ;
+    BRK #$00                                               ;828C1C|0000    |      ;
+    BRK #$00                                               ;828C1E|0000    |      ;
+    BRK #$00                                               ;828C20|0000    |      ;
+    BRK #$1F                                               ;828C22|001F    |      ;
+    BRK #$11                                               ;828C24|0011    |      ;
+    BRK #$04                                               ;828C26|0004    |      ;
+    BRK #$08                                               ;828C28|0008    |      ;
+    BRK #$13                                               ;828C2A|0013    |      ;
+    BRK #$00                                               ;828C2C|0000    |      ;
+    BRK #$06                                               ;828C2E|0006    |      ;
+    BRK #$B1                                               ;828C30|00B1    |      ;
+    BRK #$B1                                               ;828C32|00B1    |      ;
+    BRK #$B1                                               ;828C34|00B1    |      ;
+    BRK #$00                                               ;828C36|0000    |      ;
+    BRK #$00                                               ;828C38|0000    |      ;
+    BRK #$00                                               ;828C3A|0000    |      ;
+    BRK #$00                                               ;828C3C|0000    |      ;
+    BRK #$00                                               ;828C3E|0000    |      ;
+    BRK #$00                                               ;828C40|0000    |      ;
+    BRK #$2C                                               ;828C42|002C    |      ;
+    BRK #$0E                                               ;828C44|000E    |      ;
+    BRK #$0D                                               ;828C46|000D    |      ;
+    BRK #$0D                                               ;828C48|000D    |      ;
+    BRK #$00                                               ;828C4A|0000    |      ;
+    BRK #$01                                               ;828C4C|0001    |      ;
+    BRK #$04                                               ;828C4E|0004    |      ;
+    BRK #$0D                                               ;828C50|000D    |      ;
+    BRK #$03                                               ;828C52|0003    |      ;
+    BRK #$B1                                               ;828C54|00B1    |      ;
+    BRK #$00                                               ;828C56|0000    |      ;
+    BRK #$00                                               ;828C58|0000    |      ;
+    BRK #$00                                               ;828C5A|0000    |      ;
+    BRK #$00                                               ;828C5C|0000    |      ;
+    BRK #$00                                               ;828C5E|0000    |      ;
+    BRK #$00                                               ;828C60|0000    |      ;
+    BRK #$12                                               ;828C62|0012    |      ;
+    BRK #$13                                               ;828C64|0013    |      ;
+    BRK #$0D                                               ;828C66|000D    |      ;
+    BRK #$03                                               ;828C68|0003    |      ;
+    BRK #$11                                               ;828C6A|0011    |      ;
+    BRK #$03                                               ;828C6C|0003    |      ;
+    BRK #$13                                               ;828C6E|0013    |      ;
+    BRK #$07                                               ;828C70|0007    |      ;
+    BRK #$00                                               ;828C72|0000    |      ;
+    BRK #$04                                               ;828C74|0004    |      ;
+    BRK #$08                                               ;828C76|0008    |      ;
+    BRK #$0C                                               ;828C78|000C    |      ;
+    BRK #$0C                                               ;828C7A|000C    |      ;
+    BRK #$0C                                               ;828C7C|000C    |      ;
+    BRK #$0C                                               ;828C7E|000C    |      ;
+    BRK #$0C                                               ;828C80|000C    |      ;
+    BRK #$0C                                               ;828C82|000C    |      ;
+    BRK #$0C                                               ;828C84|000C    |      ;
+    BRK #$00                                               ;828C86|0000    |      ;
+    BRK #$04                                               ;828C88|0004    |      ;
+    BRK #$08                                               ;828C8A|0008    |      ;
+    BRK #$0C                                               ;828C8C|000C    |      ;
+    BRK #$0C                                               ;828C8E|000C    |      ;
+    BRK #$0C                                               ;828C90|000C    |      ;
+    BRK #$0C                                               ;828C92|000C    |      ;
+    BRK #$0C                                               ;828C94|000C    |      ;
+    BRK #$0C                                               ;828C96|000C    |      ;
+    BRK #$0C                                               ;828C98|000C    |      ;
+    BRK #$00                                               ;828C9A|0000    |      ;
+    BRK #$04                                               ;828C9C|0004    |      ;
+    BRK #$08                                               ;828C9E|0008    |      ;
+    BRK #$0C                                               ;828CA0|000C    |      ;
+    BRK #$0C                                               ;828CA2|000C    |      ;
+    BRK #$0C                                               ;828CA4|000C    |      ;
+    BRK #$0C                                               ;828CA6|000C    |      ;
+    BRK #$0C                                               ;828CA8|000C    |      ;
+    BRK #$0C                                               ;828CAA|000C    |      ;
+    BRK #$0C                                               ;828CAC|000C    |      ;
+    BRK #$E2                                               ;828CAE|00E2    |      ;
+    JSR.W $10C2                                            ;828CB0|20C210  |8210C2;
+    LDA.W #$EB00                                           ;828CB3|A900EB  |      ;
+    LDA.L $7F1F19                                          ;828CB6|AF191F7F|      ;
+    REP #$20                                               ;828CBA|C220    |      ;
+    ASL A                                                  ;828CBC|0A      |      ;
+    ASL A                                                  ;828CBD|0A      |      ;
+    ASL A                                                  ;828CBE|0A      |      ;
+    ASL A                                                  ;828CBF|0A      |      ;
+    TAX                                                    ;828CC0|AA      |      ;
+    LDA.L aSeasonString,X                                  ;828CC1|BF438B82|      ;
+    STA.W strcNames.wSeason                                ;828CC5|8DB308  |      ;
+    INX                                                    ;828CC8|E8      |      ;
+    INX                                                    ;828CC9|E8      |      ;
+    LDA.L aSeasonString,X                                  ;828CCA|BF438B82|      ;
+    STA.W strcNames.wSeason+2                              ;828CCE|8DB508  |      ;
+    INX                                                    ;828CD1|E8      |      ;
+    INX                                                    ;828CD2|E8      |      ;
+    LDA.L aSeasonString,X                                  ;828CD3|BF438B82|      ;
+    STA.W strcNames.wSeason+4                              ;828CD7|8DB708  |      ;
+    INX                                                    ;828CDA|E8      |      ;
+    INX                                                    ;828CDB|E8      |      ;
+    LDA.L aSeasonString,X                                  ;828CDC|BF438B82|      ;
+    STA.W strcNames.wSeason+6                              ;828CE0|8DB908  |      ;
+    INX                                                    ;828CE3|E8      |      ;
+    INX                                                    ;828CE4|E8      |      ;
+    LDA.L aSeasonString,X                                  ;828CE5|BF438B82|      ;
+    STA.W strcNames.wSeason+8                              ;828CE9|8DBB08  |      ;
+    INX                                                    ;828CEC|E8      |      ;
+    INX                                                    ;828CED|E8      |      ;
+    LDA.L aSeasonString,X                                  ;828CEE|BF438B82|      ;
+    STA.W strcNames.wSeason+10                             ;828CF2|8DBD08  |      ;
+    INX                                                    ;828CF5|E8      |      ;
+    INX                                                    ;828CF6|E8      |      ;
+    LDA.L aSeasonString,X                                  ;828CF7|BF438B82|      ;
+    STA.W strcNames.wWeekday                               ;828CFB|8DBF08  |      ;
+    INX                                                    ;828CFE|E8      |      ;
+    INX                                                    ;828CFF|E8      |      ;
+    LDA.L aSeasonString,X                                  ;828D00|BF438B82|      ;
+    STA.W strcNames.wWeekday+2                             ;828D04|8DC108  |      ;
+    SEP #$20                                               ;828D07|E220    |      ;
+    LDA.B #$00                                             ;828D09|A900    |      ;
+aDayOrdinalString:
+    XBA                                                    ;828D0B|EB      |      ;
+    LDA.L $7F1F1A                                          ;828D0C|AF1A1F7F|      ;
+    REP #$20                                               ;828D10|C220    |      ;
+    ASL A                                                  ;828D12|0A      |      ;
+    ASL A                                                  ;828D13|0A      |      ;
+    ASL A                                                  ;828D14|0A      |      ;
+    ASL A                                                  ;828D15|0A      |      ;
+    ASL A                                                  ;828D16|0A      |      ;
+    TAX                                                    ;828D17|AA      |      ;
+    LDA.L aWeekdayString,X                                 ;828D18|BF838B82|      ;
+    STA.W strcNames.wWeekday+4                             ;828D1C|8DC308  |      ;
+    INX                                                    ;828D1F|E8      |      ;
+    INX                                                    ;828D20|E8      |      ;
+    LDA.L aWeekdayString,X                                 ;828D21|BF838B82|      ;
+    STA.W strcNames.wWeekday+6                             ;828D25|8DC508  |      ;
+    INX                                                    ;828D28|E8      |      ;
+    INX                                                    ;828D29|E8      |      ;
+    LDA.L aWeekdayString,X                                 ;828D2A|BF838B82|      ;
+    STA.W strcNames.wWeekday+8                             ;828D2E|8DC708  |      ;
+    INX                                                    ;828D31|E8      |      ;
+    INX                                                    ;828D32|E8      |      ;
+    LDA.L aWeekdayString,X                                 ;828D33|BF838B82|      ;
+    STA.W strcNames.wWeekday+10                            ;828D37|8DC908  |      ;
+    INX                                                    ;828D3A|E8      |      ;
+    INX                                                    ;828D3B|E8      |      ;
+    LDA.L aWeekdayString,X                                 ;828D3C|BF838B82|      ;
+    STA.W strcNames.wWeekday+12                            ;828D40|8DCB08  |      ;
+    INX                                                    ;828D43|E8      |      ;
+    INX                                                    ;828D44|E8      |      ;
+    LDA.L aWeekdayString,X                                 ;828D45|BF838B82|      ;
+    STA.W strcNames.wWeekday+14                            ;828D49|8DCD08  |      ;
+    INX                                                    ;828D4C|E8      |      ;
+    INX                                                    ;828D4D|E8      |      ;
+    LDA.L aWeekdayString,X                                 ;828D4E|BF838B82|      ;
+    STA.W strcNames.wWeekday+16                            ;828D52|8DCF08  |      ;
+    INX                                                    ;828D55|E8      |      ;
+    INX                                                    ;828D56|E8      |      ;
+    LDA.L aWeekdayString,X                                 ;828D57|BF838B82|      ;
+    STA.W $08D1                                            ;828D5B|8DD108  |      ;
+    INX                                                    ;828D5E|E8      |      ;
+    INX                                                    ;828D5F|E8      |      ;
+    LDA.L aWeekdayString,X                                 ;828D60|BF838B82|      ;
+    STA.W $08D3                                            ;828D64|8DD308  |      ;
+    INX                                                    ;828D67|E8      |      ;
+    INX                                                    ;828D68|E8      |      ;
+    LDA.L aWeekdayString,X                                 ;828D69|BF838B82|      ;
+    STA.W $08D5                                            ;828D6D|8DD508  |      ;
+    SEP #$20                                               ;828D70|E220    |      ;
+    LDA.B #$00                                             ;828D72|A900    |      ;
+    XBA                                                    ;828D74|EB      |      ;
+    LDA.L $7F1F1B                                          ;828D75|AF1B1F7F|      ;
+    REP #$30                                               ;828D79|C230    |      ;
+    CMP.W #$0001                                           ;828D7B|C90100  |      ;
+    BEQ .de_828D9E                                         ;828D7E|F01E    |828D9E;
+    CMP.W #$0002                                           ;828D80|C90200  |      ;
+    BEQ .de_828DA5                                         ;828D83|F020    |828DA5;
+    CMP.W #$0003                                           ;828D85|C90300  |      ;
+    BEQ .de_828DAC                                         ;828D88|F022    |828DAC;
+    CMP.W #$0015                                           ;828D8A|C91500  |      ;
+    BEQ .de_828D9E                                         ;828D8D|F00F    |828D9E;
+    CMP.W #$0016                                           ;828D8F|C91600  |      ;
+    BEQ .de_828DA5                                         ;828D92|F011    |828DA5;
+    CMP.W #$0017                                           ;828D94|C91700  |      ;
+    BEQ .de_828DAC                                         ;828D97|F013    |828DAC;
+    LDX.W #$000C                                           ;828D99|A20C00  |      ;
+    BRA .de_828DB3                                         ;828D9C|8015    |828DB3;
+.de_828D9E:
+    REP #$30                                               ;828D9E|C230    |      ;
+    LDX.W #$0000                                           ;828DA0|A20000  |      ;
+    BRA .de_828DB3                                         ;828DA3|800E    |828DB3;
+.de_828DA5:
+    REP #$30                                               ;828DA5|C230    |      ;
+    LDX.W #$0004                                           ;828DA7|A20400  |      ;
+    BRA .de_828DB3                                         ;828DAA|8007    |828DB3;
+.de_828DAC:
+    REP #$30                                               ;828DAC|C230    |      ;
+    LDX.W #$0008                                           ;828DAE|A20800  |      ;
+    BRA .de_828DB3                                         ;828DB1|8000    |828DB3;
+.de_828DB3:
+    REP #$30                                               ;828DB3|C230    |      ;
+    LDA.L $828C63,X                                        ;828DB5|BF638C82|      ;
+    STA.W strcNames.wDayOrdinal                            ;828DB9|8DD708  |      ;
+    INX                                                    ;828DBC|E8      |      ;
+    INX                                                    ;828DBD|E8      |      ;
+    LDA.L $828C63,X                                        ;828DBE|BF638C82|      ;
+    STA.W strcNames.wDayOrdinal+2                          ;828DC2|8DD908  |      ;
+    RTL                                                    ;828DC5|6B      |      ;
+fWeatherForecast_828C09:
+    REP #$30                                               ;828DC6|C230    |      ;
+    else
     dw $002C,$0014,$000D,$0003,$0000,$0018                     ;828B19|        |      ; 0x07 * [string[32]]
     dw $00B1,$00B1,$00B1,$0000,$0000,$0000                     ;828B25|        |      ;
     dw $0000,$0000,$0000,$0000,$0026,$000E                     ;828B31|        |      ;
@@ -1107,6 +1494,7 @@ aDayOrdinalString:
  
 fWeatherForecast_828C09:
     REP #$30                                                   ;828C09|C230    |      ;
+    endif
     STZ.W strcDialogDisplay.mapFlags                           ;828C0B|9C9601  |000196;
     SEP #$20                                                   ;828C0E|E220    |      ;
     LDA.B #$00                                                 ;828C10|A900    |      ;
@@ -1574,7 +1962,11 @@ fCore_FindBestLove:
     STA.W strcNames.wMostLovedGirl                             ;828F95|8DA108  |0008A1;
     LDA.W #$0015                                               ;828F98|A91500  |      ;
     STA.W strcNames.wMostLovedGirl+2                           ;828F9B|8DA308  |0008A3;
+    if !REGION_DE
+    LDA.W #$0000                                           ;82915B|A90000  |      ;
+    else
     LDA.W #$0004                                               ;828F9E|A90400  |      ;
+    endif
     STA.W strcNames.wMostLovedGirl+4                           ;828FA1|8DA508  |0008A5;
     LDA.W #!DIALOG_SPACE                                               
     STA.W strcNames.wMostLovedGirl+6                           ;828FA7|8DA708  |0008A7;

@@ -11,6 +11,13 @@ Requires asar 1.91 (`asar.exe` on Windows). Provide its path via `--asar`, the `
 `tools/build.py` creates the output file as 2 MB of zeros, runs asar with `-werror --no-title-check --fix-checksum=off`
 and verifies the hashes. Diagnosing a mismatch: `python tools/verify.py build/HarvestMoon.sfc --rom original.sfc`.
 
+## DE build (code banks $80-$85)
+`python3 tools/build.py --region DE --out build/HarvestMoonDE.sfc` assembles the same sources with `-DREGION_DE=1` and
+verifies only banks $80-$85 against `tests/expected.json` (key `DE`). The DE graphics/dialog banks are not part of the
+tree yet, so the output is a partial ROM. A change in a shared (non-patch) line is checked against both regions;
+keep `+!DE_RAM_SHIFT` on hex literals that point into WRAM above `$08D1`.
+Tools for working with the DE patches: `tools/analysis/align_regions.py` (coverage report), `tools/analysis/disasm65816.py`.
+
 ## CI (`.github/workflows/build.yml`)
 Builds asar from source (tag `v1.91`, cached), assembles the US ROM, compares size/CRC32/MD5/SHA-1 and exposes
 the result in run annotations and as the `HarvestMoon-US` artifact.

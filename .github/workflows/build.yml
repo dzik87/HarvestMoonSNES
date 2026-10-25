@@ -74,12 +74,23 @@ jobs:
           set -o pipefail
           python3 tools/build.py --region US -v 2>&1 | tee build-us.log
 
+      - name: Build and verify (DE code banks)
+        run: |
+          set -o pipefail
+          python3 tools/build.py --region DE --out build/HarvestMoonDE.sfc -v 2>&1 | tee build-de.log
+
       - name: Report result
         if: always()
         run: |
           MSG=$(tail -n 25 build-us.log 2>/dev/null | sed ':a;N;$!ba;s/\n/%0A/g')
           echo "::notice title=build-us log::${MSG}"
+          MSGDE=$(tail -n 8 build-de.log 2>/dev/null | sed ':a;N;$!ba;s/\n/%0A/g')
+          echo "::notice title=build-de log::${MSGDE}"
           {
+            echo "### Build DE (banks 80-85)"
+            echo '```'
+            tail -n 8 build-de.log 2>/dev/null || echo "no log"
+            echo '```'
             echo "### Build US"
             echo '```'
             tail -n 25 build-us.log 2>/dev/null || echo "no log"

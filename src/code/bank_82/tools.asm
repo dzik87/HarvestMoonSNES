@@ -92,7 +92,11 @@ fToolUsedSound_PlayOnToolChange:
 nToolSoundData_829054:
     db $00,$00,$00,$06,$14,$12,$06,$11,$0F,$06,$17,$17         ;829054|        |      ; 0x1C * [n8 nIndex, n8 nVal1, n8 nVal2]
     db $06,$11,$15,$06,$1B,$1B,$06,$1B,$1B,$06,$1B,$1B         ;829060|        |      ;
+    if !REGION_DE
+    db $06,$1B,$1B,$06,$00,$00,$06,$00,$00,$06,$00,$00
+    else
     db $06,$1B,$1B,$06,$00,$00,$06,$00,$00,$06,$00,$19         ;82906C|        |      ;
+    endif
     db $06,$1B,$1B,$06,$00,$00,$06,$00,$00,$06,$00,$00         ;829078|        |      ;
     db $07,$28,$28,$06,$14,$13,$06,$11,$10,$06,$18,$18         ;829084|        |      ;
     db $06,$11,$16,$07,$28,$28,$00,$00,$00,$00,$00,$00         ;829090|        |      ;
@@ -114,7 +118,11 @@ fToolUsedAnimationHandler:
     LDA.W strcPlayerData.toolEquipped                          ;8290C3|AD2109  |000921;
     ASL A                                                      ;8290C6|0A      |      ;
     TAX                                                        ;8290C7|AA      |      ;
+    if !REGION_DE
+    JSR.W (aToolUsedAnimationTable,X)                      ;829285|FC48A7  |      ;
+    else
     JSR.W (aToolUsedAnimationTable,X)                          ;8290C8|FC8BA5  |82A58B;
+    endif
     BRA .return                                                ;8290CB|800F    |8290DC;
  
  
@@ -410,7 +418,11 @@ fToolUsedActionHandler:
     LDA.W strcPlayerData.toolEquipped                          ;829267|AD2109  |000921;
     ASL A                                                      ;82926A|0A      |      ;
     TAX                                                        ;82926B|AA      |      ;
+    if !REGION_DE
+    JSR.W ($A780,X)                                        ;829429|FC80A7  |      ;
+    else
     JSR.W (aToolUsedActionTable,X)                             ;82926C|FCC3A5  |82A5C3;
+    endif
     REP #$20                                                   ;82926F|C220    |      ;
     %SetFlag(daily1, $0040)
     RTL                                                        ;82927C|6B      |      ;
@@ -555,16 +567,16 @@ fToolUsedAction0x01_Sickle:
     STA.W nUnknownY                                            ;8293A0|8D8209  |000982;
     REP #$30                                                   ;8293A3|C230    |      ;
     LDA.W #$00C1                                               ;8293A5|A9C100  |      ;
-    STA.W $097A                                                ;8293A8|8D7A09  |00097A;
+    STA.W $097A+!DE_RAM_SHIFT                              ;8293A8|8D7A09  |00097A;
     LDA.W #$0000                                               ;8293AB|A90000  |      ;
-    STA.W $097E                                                ;8293AE|8D7E09  |00097E;
+    STA.W $097E+!DE_RAM_SHIFT                              ;8293AE|8D7E09  |00097E;
     SEP #$20                                                   ;8293B1|E220    |      ;
     LDA.B #$03                                                 ;8293B3|A903    |      ;
-    STA.W $0974                                                ;8293B5|8D7409  |000974;
+    STA.W $0974+!DE_RAM_SHIFT                              ;8293B5|8D7409  |000974;
     LDA.B #$00                                                 ;8293B8|A900    |      ;
-    STA.W $0975                                                ;8293BA|8D7509  |000975;
+    STA.W $0975+!DE_RAM_SHIFT                              ;8293BA|8D7509  |000975;
     LDA.B #$00                                                 ;8293BD|A900    |      ;
-    STA.W $0976                                                ;8293BF|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;8293BF|8D7609  |000976;
     JSL.L fObjectSlots_Allocate                                      ;8293C2|2200A581|81A500;
     BRA .label5                                                ;8293C6|803B    |829403;
  
@@ -580,16 +592,16 @@ fToolUsedAction0x01_Sickle:
     STA.W nUnknownY                                            ;8293DD|8D8209  |000982;
     REP #$30                                                   ;8293E0|C230    |      ;
     LDA.W #$00B7                                               ;8293E2|A9B700  |      ;
-    STA.W $097A                                                ;8293E5|8D7A09  |00097A;
+    STA.W $097A+!DE_RAM_SHIFT                              ;8293E5|8D7A09  |00097A;
     LDA.W #$0000                                               ;8293E8|A90000  |      ;
-    STA.W $097E                                                ;8293EB|8D7E09  |00097E;
+    STA.W $097E+!DE_RAM_SHIFT                              ;8293EB|8D7E09  |00097E;
     SEP #$20                                                   ;8293EE|E220    |      ;
     LDA.B #$03                                                 ;8293F0|A903    |      ;
-    STA.W $0974                                                ;8293F2|8D7409  |000974;
+    STA.W $0974+!DE_RAM_SHIFT                              ;8293F2|8D7409  |000974;
     LDA.B #$00                                                 ;8293F5|A900    |      ;
-    STA.W $0975                                                ;8293F7|8D7509  |000975;
+    STA.W $0975+!DE_RAM_SHIFT                              ;8293F7|8D7509  |000975;
     LDA.B #$00                                                 ;8293FA|A900    |      ;
-    STA.W $0976                                                ;8293FC|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;8293FC|8D7609  |000976;
     JSL.L fObjectSlots_Allocate                                      ;8293FF|2200A581|81A500;
  
 .label5:
@@ -790,16 +802,16 @@ fToolUsedAction0x03_Hammer:
     STA.W nUnknownY                                            ;82960A|8D8209  |000982;
     REP #$30                                                   ;82960D|C230    |      ;
     LDA.W #$00C8                                               ;82960F|A9C800  |      ;
-    STA.W $097A                                                ;829612|8D7A09  |00097A;
+    STA.W $097A+!DE_RAM_SHIFT                              ;829612|8D7A09  |00097A;
     LDA.W #$0000                                               ;829615|A90000  |      ;
-    STA.W $097E                                                ;829618|8D7E09  |00097E;
+    STA.W $097E+!DE_RAM_SHIFT                              ;829618|8D7E09  |00097E;
     SEP #$20                                                   ;82961B|E220    |      ;
     LDA.B #$03                                                 ;82961D|A903    |      ;
-    STA.W $0974                                                ;82961F|8D7409  |000974;
+    STA.W $0974+!DE_RAM_SHIFT                              ;82961F|8D7409  |000974;
     LDA.B #$00                                                 ;829622|A900    |      ;
-    STA.W $0975                                                ;829624|8D7509  |000975;
+    STA.W $0975+!DE_RAM_SHIFT                              ;829624|8D7509  |000975;
     LDA.B #$00                                                 ;829627|A900    |      ;
-    STA.W $0976                                                ;829629|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;829629|8D7609  |000976;
     JSL.L fObjectSlots_Allocate                                      ;82962C|2200A581|81A500;
     JMP.W .return                                              ;829630|4C2F97  |82972F;
  
@@ -886,16 +898,16 @@ fToolUsedAction0x03_Hammer:
     STA.W nUnknownY                                            ;8296D6|8D8209  |000982;
     REP #$30                                                   ;8296D9|C230    |      ;
     LDA.W #$00C9                                               ;8296DB|A9C900  |      ;
-    STA.W $097A                                                ;8296DE|8D7A09  |00097A;
+    STA.W $097A+!DE_RAM_SHIFT                              ;8296DE|8D7A09  |00097A;
     LDA.W #$0000                                               ;8296E1|A90000  |      ;
-    STA.W $097E                                                ;8296E4|8D7E09  |00097E;
+    STA.W $097E+!DE_RAM_SHIFT                              ;8296E4|8D7E09  |00097E;
     SEP #$20                                                   ;8296E7|E220    |      ;
     LDA.B #$03                                                 ;8296E9|A903    |      ;
-    STA.W $0974                                                ;8296EB|8D7409  |000974;
+    STA.W $0974+!DE_RAM_SHIFT                              ;8296EB|8D7409  |000974;
     LDA.B #$00                                                 ;8296EE|A900    |      ;
-    STA.W $0975                                                ;8296F0|8D7509  |000975;
+    STA.W $0975+!DE_RAM_SHIFT                              ;8296F0|8D7509  |000975;
     LDA.B #$00                                                 ;8296F3|A900    |      ;
-    STA.W $0976                                                ;8296F5|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;8296F5|8D7609  |000976;
     JSL.L fObjectSlots_Allocate                                      ;8296F8|2200A581|81A500;
     BRA .return                                                ;8296FC|8031    |82972F;
  
@@ -908,16 +920,16 @@ fToolUsedAction0x03_Hammer:
     STA.W nUnknownY                                            ;829709|8D8209  |000982;
     REP #$30                                                   ;82970C|C230    |      ;
     LDA.W #$00CB                                               ;82970E|A9CB00  |      ;
-    STA.W $097A                                                ;829711|8D7A09  |00097A;
+    STA.W $097A+!DE_RAM_SHIFT                              ;829711|8D7A09  |00097A;
     LDA.W #$0000                                               ;829714|A90000  |      ;
-    STA.W $097E                                                ;829717|8D7E09  |00097E;
+    STA.W $097E+!DE_RAM_SHIFT                              ;829717|8D7E09  |00097E;
     SEP #$20                                                   ;82971A|E220    |      ;
     LDA.B #$03                                                 ;82971C|A903    |      ;
-    STA.W $0974                                                ;82971E|8D7409  |000974;
+    STA.W $0974+!DE_RAM_SHIFT                              ;82971E|8D7409  |000974;
     LDA.B #$00                                                 ;829721|A900    |      ;
-    STA.W $0975                                                ;829723|8D7509  |000975;
+    STA.W $0975+!DE_RAM_SHIFT                              ;829723|8D7509  |000975;
     LDA.B #$00                                                 ;829726|A900    |      ;
-    STA.W $0976                                                ;829728|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;829728|8D7609  |000976;
     JSL.L fObjectSlots_Allocate                                      ;82972B|2200A581|81A500;
  
 .return:
@@ -939,7 +951,15 @@ fToolUsedAction0x03_Hammer:
     REP #$30                                                   ;829752|C230    |      ;
     %CheckFlag(daily2, !DFLAGS2_BROKECHICKENSTATUE)
     BNE .return                                                ;82975B|D0D2    |82972F;
+    if !REGION_DE
+    REP #$30                                               ;82991A|C230    |      ;
+    LDA.L $7F1F5C                                          ;82991C|AF5C1F7F|      ;
+    ORA.W #$0080                                           ;829920|098000  |      ;
+    STA.L $7F1F5C                                          ;829923|8F5C1F7F|      ;
+    REP #$20                                               ;829927|C220    |      ;
+    else
     REP #$20                                                   ;82975D|C220    |      ;
+    endif
     LDA.W #$0015                                               ;82975F|A91500  |      ;
     LDX.W #$0000                                               ;829762|A20000  |      ;
     LDY.W #$0016                                               ;829765|A01600  |      ;
@@ -965,8 +985,12 @@ fToolUsedAction0x03_Hammer:
     LDX.W #$0000                                               ;8297A3|A20000  |      ;
     LDY.W #$001F                                               ;8297A6|A01F00  |      ;
     JSL.L fAI_StartSlotScriptAtFrontTile                                    ;8297A9|22F88084|8480F8;
+    if !REGION_DE
+    ; (nothing in DE)
+    else
     REP #$30                                                   ;8297AD|C230    |      ;
     %SetFlag(daily2, !DFLAGS2_BROKECHICKENSTATUE)
+    endif
     JMP.W .return                                              ;8297BA|4C2F97  |82972F;
  
  
@@ -1109,16 +1133,16 @@ fToolUsedAction0x04_Axe:
     STA.W nUnknownY                                            ;8298E7|8D8209  |000982;
     REP #$30                                                   ;8298EA|C230    |      ;
     LDA.W #$00B8                                               ;8298EC|A9B800  |      ;
-    STA.W $097A                                                ;8298EF|8D7A09  |00097A;
+    STA.W $097A+!DE_RAM_SHIFT                              ;8298EF|8D7A09  |00097A;
     LDA.W #$0000                                               ;8298F2|A90000  |      ;
-    STA.W $097E                                                ;8298F5|8D7E09  |00097E;
+    STA.W $097E+!DE_RAM_SHIFT                              ;8298F5|8D7E09  |00097E;
     SEP #$20                                                   ;8298F8|E220    |      ;
     LDA.B #$03                                                 ;8298FA|A903    |      ;
-    STA.W $0974                                                ;8298FC|8D7409  |000974;
+    STA.W $0974+!DE_RAM_SHIFT                              ;8298FC|8D7409  |000974;
     LDA.B #$00                                                 ;8298FF|A900    |      ;
-    STA.W $0975                                                ;829901|8D7509  |000975;
+    STA.W $0975+!DE_RAM_SHIFT                              ;829901|8D7509  |000975;
     LDA.B #$00                                                 ;829904|A900    |      ;
-    STA.W $0976                                                ;829906|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;829906|8D7609  |000976;
     JSL.L fObjectSlots_Allocate                                      ;829909|2200A581|81A500;
     REP #$20                                                   ;82990D|C220    |      ;
     LDA.W #$0006                                               ;82990F|A90600  |      ;
@@ -1134,16 +1158,16 @@ fToolUsedAction0x04_Axe:
     STA.W nUnknownY                                            ;829923|8D8209  |000982;
     REP #$30                                                   ;829926|C230    |      ;
     LDA.W #$00CB                                               ;829928|A9CB00  |      ;
-    STA.W $097A                                                ;82992B|8D7A09  |00097A;
+    STA.W $097A+!DE_RAM_SHIFT                              ;82992B|8D7A09  |00097A;
     LDA.W #$0000                                               ;82992E|A90000  |      ;
-    STA.W $097E                                                ;829931|8D7E09  |00097E;
+    STA.W $097E+!DE_RAM_SHIFT                              ;829931|8D7E09  |00097E;
     SEP #$20                                                   ;829934|E220    |      ;
     LDA.B #$03                                                 ;829936|A903    |      ;
-    STA.W $0974                                                ;829938|8D7409  |000974;
+    STA.W $0974+!DE_RAM_SHIFT                              ;829938|8D7409  |000974;
     LDA.B #$00                                                 ;82993B|A900    |      ;
-    STA.W $0975                                                ;82993D|8D7509  |000975;
+    STA.W $0975+!DE_RAM_SHIFT                              ;82993D|8D7509  |000975;
     LDA.B #$00                                                 ;829940|A900    |      ;
-    STA.W $0976                                                ;829942|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;829942|8D7609  |000976;
     JSL.L fObjectSlots_Allocate                                      ;829945|2200A581|81A500;
     BRA .return                                                ;829949|803E    |829989;
  
@@ -1646,16 +1670,16 @@ fToolUsedAction0x11_GoldenSickle:
     STA.W nUnknownY                                            ;829DBE|8D8209  |000982;
     REP #$30                                                   ;829DC1|C230    |      ;
     LDA.W #$00C1                                               ;829DC3|A9C100  |      ;
-    STA.W $097A                                                ;829DC6|8D7A09  |00097A;
+    STA.W $097A+!DE_RAM_SHIFT                              ;829DC6|8D7A09  |00097A;
     LDA.W #$0000                                               ;829DC9|A90000  |      ;
-    STA.W $097E                                                ;829DCC|8D7E09  |00097E;
+    STA.W $097E+!DE_RAM_SHIFT                              ;829DCC|8D7E09  |00097E;
     SEP #$20                                                   ;829DCF|E220    |      ;
     LDA.B #$03                                                 ;829DD1|A903    |      ;
-    STA.W $0974                                                ;829DD3|8D7409  |000974;
+    STA.W $0974+!DE_RAM_SHIFT                              ;829DD3|8D7409  |000974;
     LDA.B #$00                                                 ;829DD6|A900    |      ;
-    STA.W $0975                                                ;829DD8|8D7509  |000975;
+    STA.W $0975+!DE_RAM_SHIFT                              ;829DD8|8D7509  |000975;
     LDA.B #$00                                                 ;829DDB|A900    |      ;
-    STA.W $0976                                                ;829DDD|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;829DDD|8D7609  |000976;
     JSL.L fObjectSlots_Allocate                                      ;829DE0|2200A581|81A500;
     BRA .label5                                                ;829DE4|803B    |829E21;
  
@@ -1671,16 +1695,16 @@ fToolUsedAction0x11_GoldenSickle:
     STA.W nUnknownY                                            ;829DFB|8D8209  |000982;
     REP #$30                                                   ;829DFE|C230    |      ;
     LDA.W #$00B7                                               ;829E00|A9B700  |      ;
-    STA.W $097A                                                ;829E03|8D7A09  |00097A;
+    STA.W $097A+!DE_RAM_SHIFT                              ;829E03|8D7A09  |00097A;
     LDA.W #$0000                                               ;829E06|A90000  |      ;
-    STA.W $097E                                                ;829E09|8D7E09  |00097E;
+    STA.W $097E+!DE_RAM_SHIFT                              ;829E09|8D7E09  |00097E;
     SEP #$20                                                   ;829E0C|E220    |      ;
     LDA.B #$03                                                 ;829E0E|A903    |      ;
-    STA.W $0974                                                ;829E10|8D7409  |000974;
+    STA.W $0974+!DE_RAM_SHIFT                              ;829E10|8D7409  |000974;
     LDA.B #$00                                                 ;829E13|A900    |      ;
-    STA.W $0975                                                ;829E15|8D7509  |000975;
+    STA.W $0975+!DE_RAM_SHIFT                              ;829E15|8D7509  |000975;
     LDA.B #$00                                                 ;829E18|A900    |      ;
-    STA.W $0976                                                ;829E1A|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;829E1A|8D7609  |000976;
     JSL.L fObjectSlots_Allocate                                      ;829E1D|2200A581|81A500;
  
 .label5:
@@ -1908,16 +1932,16 @@ fToolUsedAction0x13_GolderHammer:
     STA.W nUnknownY                                            ;82A052|8D8209  |000982;
     REP #$30                                                   ;82A055|C230    |      ;
     LDA.W #$00C8                                               ;82A057|A9C800  |      ;
-    STA.W $097A                                                ;82A05A|8D7A09  |00097A;
+    STA.W $097A+!DE_RAM_SHIFT                              ;82A05A|8D7A09  |00097A;
     LDA.W #$0000                                               ;82A05D|A90000  |      ;
-    STA.W $097E                                                ;82A060|8D7E09  |00097E;
+    STA.W $097E+!DE_RAM_SHIFT                              ;82A060|8D7E09  |00097E;
     SEP #$20                                                   ;82A063|E220    |      ;
     LDA.B #$03                                                 ;82A065|A903    |      ;
-    STA.W $0974                                                ;82A067|8D7409  |000974;
+    STA.W $0974+!DE_RAM_SHIFT                              ;82A067|8D7409  |000974;
     LDA.B #$00                                                 ;82A06A|A900    |      ;
-    STA.W $0975                                                ;82A06C|8D7509  |000975;
+    STA.W $0975+!DE_RAM_SHIFT                              ;82A06C|8D7509  |000975;
     LDA.B #$00                                                 ;82A06F|A900    |      ;
-    STA.W $0976                                                ;82A071|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;82A071|8D7609  |000976;
     JSL.L fObjectSlots_Allocate                                      ;82A074|2200A581|81A500;
     JMP.W .loop                                                ;82A078|4C31A1  |82A131;
  
@@ -1993,16 +2017,16 @@ fToolUsedAction0x13_GolderHammer:
     STA.W nUnknownY                                            ;82A10B|8D8209  |000982;
     REP #$30                                                   ;82A10E|C230    |      ;
     LDA.W #$00C9                                               ;82A110|A9C900  |      ;
-    STA.W $097A                                                ;82A113|8D7A09  |00097A;
+    STA.W $097A+!DE_RAM_SHIFT                              ;82A113|8D7A09  |00097A;
     LDA.W #$0000                                               ;82A116|A90000  |      ;
-    STA.W $097E                                                ;82A119|8D7E09  |00097E;
+    STA.W $097E+!DE_RAM_SHIFT                              ;82A119|8D7E09  |00097E;
     SEP #$20                                                   ;82A11C|E220    |      ;
     LDA.B #$03                                                 ;82A11E|A903    |      ;
-    STA.W $0974                                                ;82A120|8D7409  |000974;
+    STA.W $0974+!DE_RAM_SHIFT                              ;82A120|8D7409  |000974;
     LDA.B #$00                                                 ;82A123|A900    |      ;
-    STA.W $0975                                                ;82A125|8D7509  |000975;
+    STA.W $0975+!DE_RAM_SHIFT                              ;82A125|8D7509  |000975;
     LDA.B #$00                                                 ;82A128|A900    |      ;
-    STA.W $0976                                                ;82A12A|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;82A12A|8D7609  |000976;
     JSL.L fObjectSlots_Allocate                                      ;82A12D|2200A581|81A500;
  
 .loop:
@@ -2024,7 +2048,15 @@ fToolUsedAction0x13_GolderHammer:
     REP #$30                                                   ;82A154|C230    |      ;
     %CheckFlag(daily2, $0080)
     BNE .loop                                                  ;82A15D|D0D2    |82A131;
+    if !REGION_DE
+    REP #$30                                               ;82A31C|C230    |      ;
+    LDA.L $7F1F5C                                          ;82A31E|AF5C1F7F|      ;
+    ORA.W #$0080                                           ;82A322|098000  |      ;
+    STA.L $7F1F5C                                          ;82A325|8F5C1F7F|      ;
+    REP #$20                                               ;82A329|C220    |      ;
+    else
     REP #$20                                                   ;82A15F|C220    |      ;
+    endif
     LDA.W #$0015                                               ;82A161|A91500  |      ;
     LDX.W #$0000                                               ;82A164|A20000  |      ;
     LDY.W #$0016                                               ;82A167|A01600  |      ;
@@ -2050,8 +2082,12 @@ fToolUsedAction0x13_GolderHammer:
     LDX.W #$0000                                               ;82A1A5|A20000  |      ;
     LDY.W #$001F                                               ;82A1A8|A01F00  |      ;
     JSL.L fAI_StartSlotScriptAtFrontTile                                    ;82A1AB|22F88084|8480F8;
+    if !REGION_DE
+    ; (nothing in DE)
+    else
     REP #$30                                                   ;82A1AF|C230    |      ;
     %SetFlag(daily2, $0080)
+    endif
     JMP.W .loop                                                ;82A1BC|4C31A1  |82A131;
  
  
@@ -2177,16 +2213,16 @@ fToolUsedAction0x14_GoldenAxe:
     STA.W nUnknownY                                            ;82A2C8|8D8209  |000982;
     REP #$30                                                   ;82A2CB|C230    |      ;
     LDA.W #$00B8                                               ;82A2CD|A9B800  |      ;
-    STA.W $097A                                                ;82A2D0|8D7A09  |00097A;
+    STA.W $097A+!DE_RAM_SHIFT                              ;82A2D0|8D7A09  |00097A;
     LDA.W #$0000                                               ;82A2D3|A90000  |      ;
-    STA.W $097E                                                ;82A2D6|8D7E09  |00097E;
+    STA.W $097E+!DE_RAM_SHIFT                              ;82A2D6|8D7E09  |00097E;
     SEP #$20                                                   ;82A2D9|E220    |      ;
     LDA.B #$03                                                 ;82A2DB|A903    |      ;
-    STA.W $0974                                                ;82A2DD|8D7409  |000974;
+    STA.W $0974+!DE_RAM_SHIFT                              ;82A2DD|8D7409  |000974;
     LDA.B #$00                                                 ;82A2E0|A900    |      ;
-    STA.W $0975                                                ;82A2E2|8D7509  |000975;
+    STA.W $0975+!DE_RAM_SHIFT                              ;82A2E2|8D7509  |000975;
     LDA.B #$00                                                 ;82A2E5|A900    |      ;
-    STA.W $0976                                                ;82A2E7|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;82A2E7|8D7609  |000976;
     JSL.L fObjectSlots_Allocate                                      ;82A2EA|2200A581|81A500;
     REP #$20                                                   ;82A2EE|C220    |      ;
     LDA.W #$0006                                               ;82A2F0|A90600  |      ;
@@ -2362,16 +2398,16 @@ fToolUsedAction0x19_ChickenFeed:
     STA.W nUnknownY                                            ;82A47E|8D8209  |000982;
     REP #$30                                                   ;82A481|C230    |      ;
     LDA.W #$00C4                                               ;82A483|A9C400  |      ;
-    STA.W $097A                                                ;82A486|8D7A09  |00097A;
+    STA.W $097A+!DE_RAM_SHIFT                              ;82A486|8D7A09  |00097A;
     LDA.W #$0000                                               ;82A489|A90000  |      ;
-    STA.W $097E                                                ;82A48C|8D7E09  |00097E;
+    STA.W $097E+!DE_RAM_SHIFT                              ;82A48C|8D7E09  |00097E;
     SEP #$20                                                   ;82A48F|E220    |      ;
     LDA.B #$03                                                 ;82A491|A903    |      ;
-    STA.W $0974                                                ;82A493|8D7409  |000974;
+    STA.W $0974+!DE_RAM_SHIFT                              ;82A493|8D7409  |000974;
     LDA.B #$00                                                 ;82A496|A900    |      ;
-    STA.W $0975                                                ;82A498|8D7509  |000975;
+    STA.W $0975+!DE_RAM_SHIFT                              ;82A498|8D7509  |000975;
     LDA.B #$00                                                 ;82A49B|A900    |      ;
-    STA.W $0976                                                ;82A49D|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;82A49D|8D7609  |000976;
     JSL.L fObjectSlots_Allocate                                      ;82A4A0|2200A581|81A500;
  
 .label2:
@@ -2433,16 +2469,16 @@ fToolUsedAction0x1A_CowFeed:
     STA.W nUnknownY                                            ;82A52C|8D8209  |000982;
     REP #$30                                                   ;82A52F|C230    |      ;
     LDA.W #$00C4                                               ;82A531|A9C400  |      ;
-    STA.W $097A                                                ;82A534|8D7A09  |00097A;
+    STA.W $097A+!DE_RAM_SHIFT                              ;82A534|8D7A09  |00097A;
     LDA.W #$0000                                               ;82A537|A90000  |      ;
-    STA.W $097E                                                ;82A53A|8D7E09  |00097E;
+    STA.W $097E+!DE_RAM_SHIFT                              ;82A53A|8D7E09  |00097E;
     SEP #$20                                                   ;82A53D|E220    |      ;
     LDA.B #$03                                                 ;82A53F|A903    |      ;
-    STA.W $0974                                                ;82A541|8D7409  |000974;
+    STA.W $0974+!DE_RAM_SHIFT                              ;82A541|8D7409  |000974;
     LDA.B #$00                                                 ;82A544|A900    |      ;
-    STA.W $0975                                                ;82A546|8D7509  |000975;
+    STA.W $0975+!DE_RAM_SHIFT                              ;82A546|8D7509  |000975;
     LDA.B #$00                                                 ;82A549|A900    |      ;
-    STA.W $0976                                                ;82A54B|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;82A54B|8D7609  |000976;
     JSL.L fObjectSlots_Allocate                                      ;82A54E|2200A581|81A500;
  
 .label2:
@@ -2464,6 +2500,65 @@ nCowFeedFlagsTable:
     dw $0040,$0080,$0100,$0200,$0400,$0800                     ;82A57D|        |      ;
     dw $1000                                                   ;82A589|        |      ;
 aToolUsedAnimationTable:
+    if !REGION_DE
+    dw fToolUsedAnimation0x00_Empty
+    dw fToolUsedAnimation0x01_Sickle
+    dw fToolUsedAnimation0x02_Plow
+    dw fToolUsedAnimation0x03_Hammer
+    dw fToolUsedAnimation0x04_Axe
+    dw fToolUsedAnimation0x05_CornSeedBag
+    dw fToolUsedAnimation0x06_TomatoSeedBag
+    dw fToolUsedAnimation0x07_PotatoSeedBag
+    dw fToolUsedAnimation0x08_TurnipSeedBag
+    dw fToolUsedAnimation0x09_CowMedicine
+    dw fToolUsedAnimation0x0A_MiraclePotion
+    dw fToolUsedAnimation0x0B_Bell
+    dw fToolUsedAnimation0x0C_GrassSeedBag
+    dw fToolUsedAnimation0x0D_Paint
+    dw fToolUsedAnimation0x0E_Milker
+    dw fToolUsedAnimation0x0F_Brush
+    dw fToolUsedAnimation0x10_WateringCan
+    dw fToolUsedAnimation0x11_GoldenSickle
+    dw fToolUsedAnimation0x12_GoldenPlow
+    dw fToolUsedAnimation0x13_GoldenHammer
+    dw fToolUsedAnimation0x14_GoldenAxe
+    dw fToolUsedAnimation0x15_Sprinkler
+    dw fToolUsedAnimation0x16_BeanstalkSeed
+    dw fToolUsedAnimation0x17_BlueDiamond
+    dw fToolUsedAnimation0x18_BlueFeather
+    dw fToolUsedAnimation0x19_ChickenFood
+    dw fToolUsedAnimation0x1A_CowFood
+    dw fToolUsedAnimation0x1B_FishingPole
+    dw fToolUsedAction0x00_Empty
+    dw fToolUsedAction0x01_Sickle
+    dw fToolUsedAction0x02_Plow
+    dw fToolUsedAction0x03_Hammer
+    dw fToolUsedAction0x04_Axe
+    dw fToolUsedAction0x05_CornSeedBag
+    dw fToolUsedAction0x06_TomatoSeedBag
+    dw fToolUsedAction0x07_PotatoSeedBag
+    dw fToolUsedAction0x08_TurnipSeedBag
+    dw fToolUsedAction0x09_CowMedicine
+    dw fToolUsedAction0x0A_MiraclePotion
+    dw fToolUsedAction0x0B_Bell
+    dw fToolUsedAction0x0C_GrassSeedBag
+    dw fToolUsedAction0x0D_Paint
+    dw fToolUsedAction0x0E_Milker
+    dw fToolUsedAction0x0F_Brush
+    dw fToolUsedAction0x10_WateringCan
+    dw fToolUsedAction0x11_GoldenSickle
+    dw fToolUsedAction0x12_GoldenPlow
+    dw fToolUsedAction0x13_GolderHammer
+    dw fToolUsedAction0x14_GoldenAxe
+    dw fToolUsedAction0x15_Sprinkler
+    dw fToolUsedAction0x16_BeanstalkSeed
+    dw fToolUsedAction0x17_BlueDiamond
+    dw fToolUsedAction0x18_BlueFeather
+    dw fToolUsedAction0x19_ChickenFeed
+    dw fToolUsedAction0x1A_CowFeed
+    dw fToolUsedAction0x1B_FishingPole
+    aToolUsedActionTable = $82A748
+    else
     dw fToolUsedAnimation0x00_Empty                            ;82A58B|        |8290DD; 0x1C * [ptr16]
     dw fToolUsedAnimation0x01_Sickle                           ;82A58D|        |8290DE;
     dw fToolUsedAnimation0x02_Plow                             ;82A58F|        |8290EC;
@@ -2521,3 +2616,4 @@ aToolUsedActionTable:
     dw fToolUsedAction0x19_ChickenFeed                         ;82A5F5|        |82A414;
     dw fToolUsedAction0x1A_CowFeed                             ;82A5F7|        |82A4C2;
     dw fToolUsedAction0x1B_FishingPole                         ;82A5F9|        |82A570;
+    endif

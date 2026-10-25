@@ -192,7 +192,11 @@ fMainMenu_StartHowToPlayDemo:
     BNE +                                                      ;82D39D|D007    |82D3A6;
     SEP #$20                                                   ;82D39F|E220    |      ;
     STZ.B $00                                                  ;82D3A1|6400    |000000;
+    if !REGION_DE
+    JMP.W $D504                                            ;82D560|4C04D5  |82D504;
+    else
     JMP.W $D347                                                ;82D3A3|4C47D3  |82D347;
+    endif
  
  
   + REP #$30                                                   ;82D3A6|C230    |      ;

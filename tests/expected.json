@@ -4,5 +4,15 @@
     "crc32": "F829129E",
     "md5": "c9bf36a816b6d54aed79d43a6c45111a",
     "sha1": "a64a5634429a4f5341868a40c220d7be89fda70a"
+  },
+  "DE": {
+    "banks": [
+      "80",
+      "85"
+    ],
+    "size": 196608,
+    "crc32": "512C3F29",
+    "md5": "1ef13cafa794a27c1f984880ac2bb3f6",
+    "sha1": "b4bc335aba611bd2cc36934a2dadecf76e391940"
   }
 }

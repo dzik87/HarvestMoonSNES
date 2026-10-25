@@ -884,13 +884,13 @@ fObjectSlots_UpdateAll:
   + SEP #$20                                                   ;81A39F|E220    |      ;
     LDY.W #$0000                                               ;81A3A1|A00000  |      ;
     LDA.B [ptrUnknown0x07],Y                                   ;81A3A4|B707    |000007;
-    STA.W $0974                                                ;81A3A6|8D7409  |000974;
+    STA.W $0974+!DE_RAM_SHIFT                              ;81A3A6|8D7409  |000974;
     LDY.W #$0001                                               ;81A3A9|A00100  |      ;
     LDA.B [ptrUnknown0x07],Y                                   ;81A3AC|B707    |000007;
-    STA.W $0975                                                ;81A3AE|8D7509  |000975;
+    STA.W $0975+!DE_RAM_SHIFT                              ;81A3AE|8D7509  |000975;
     LDY.W #$0002                                               ;81A3B1|A00200  |      ;
     LDA.B [ptrUnknown0x07],Y                                   ;81A3B4|B707    |000007;
-    STA.W $0976                                                ;81A3B6|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;81A3B6|8D7609  |000976;
     LDY.W #$0003                                               ;81A3B9|A00300  |      ;
     LDA.B [ptrUnknown0x07],Y                                   ;81A3BC|B707    |000007;
     STA.W nCarriedItemId                                       ;81A3BE|8D8409  |000984;
@@ -901,13 +901,13 @@ fObjectSlots_UpdateAll:
     STA.B strcObject.gameObjectIdx                             ;81A3CB|85A5    |0000A5;
     LDY.W #$0006                                               ;81A3CD|A00600  |      ;
     LDA.B [ptrUnknown0x07],Y                                   ;81A3D0|B707    |000007;
-    STA.W $097A                                                ;81A3D2|8D7A09  |00097A;
+    STA.W $097A+!DE_RAM_SHIFT                              ;81A3D2|8D7A09  |00097A;
     LDY.W #$0008                                               ;81A3D5|A00800  |      ;
     LDA.B [ptrUnknown0x07],Y                                   ;81A3D8|B707    |000007;
-    STA.W $097C                                                ;81A3DA|8D7C09  |00097C;
+    STA.W $097C+!DE_RAM_SHIFT                              ;81A3DA|8D7C09  |00097C;
     LDY.W #$000A                                               ;81A3DD|A00A00  |      ;
     LDA.B [ptrUnknown0x07],Y                                   ;81A3E0|B707    |000007;
-    STA.W $097E                                                ;81A3E2|8D7E09  |00097E;
+    STA.W $097E+!DE_RAM_SHIFT                              ;81A3E2|8D7E09  |00097E;
     LDY.W #$000C                                               ;81A3E5|A00C00  |      ;
     LDA.B [ptrUnknown0x07],Y                                   ;81A3E8|B707    |000007;
     STA.W nUnknownX                                            ;81A3EA|8D8009  |000980;
@@ -925,7 +925,7 @@ fObjectSlots_UpdateAll:
   + CMP.W #$FFFF                                               ;81A405|C9FFFF  |      ;
     BEQ .caseFFFF                                              ;81A408|F027    |81A431;
     SEP #$20                                                   ;81A40A|E220    |      ;
-    LDA.W $0974                                                ;81A40C|AD7409  |000974;
+    LDA.W $0974+!DE_RAM_SHIFT                              ;81A40C|AD7409  |000974;
     AND.B #$04                                                 ;81A40F|2904    |      ;
     BNE +                                                      ;81A411|D004    |81A417;
     JML.L .caseFFFD                                            ;81A413|5CB2A481|81A4B2;
@@ -940,7 +940,7 @@ fObjectSlots_UpdateAll:
     STA.B strcObject.gameObjectIdx                             ;81A41E|85A5    |0000A5;
     JSL.L fObject_Destroy                                ;81A420|22A28185|8581A2;
     SEP #$20                                                   ;81A424|E220    |      ;
-    LDA.W $0974                                                ;81A426|AD7409  |000974;
+    LDA.W $0974+!DE_RAM_SHIFT                              ;81A426|AD7409  |000974;
     AND.B #$02                                                 ;81A429|2902    |      ;
     BEQ .caseFFFF                                              ;81A42B|F004    |81A431;
     JSL.L fObjectSlots_FreeCurrent                                      ;81A42D|22F1A481|81A4F1;
@@ -959,10 +959,10 @@ fObjectSlots_UpdateAll:
     JSR.W (pSubrutineTable_81A58B,X)                           ;81A444|FC8BA5  |81A58B;
     SEP #$20                                                   ;81A447|E220    |      ;
     LDY.W #$0000                                               ;81A449|A00000  |      ;
-    LDA.W $0974                                                ;81A44C|AD7409  |000974;
+    LDA.W $0974+!DE_RAM_SHIFT                              ;81A44C|AD7409  |000974;
     STA.B [ptrUnknown0x07],Y                                   ;81A44F|9707    |000007;
     LDY.W #$0002                                               ;81A451|A00200  |      ;
-    LDA.W $0976                                                ;81A454|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;81A454|AD7609  |000976;
     STA.B [ptrUnknown0x07],Y                                   ;81A457|9707    |000007;
     LDY.W #$0003                                               ;81A459|A00300  |      ;
     LDA.W nCarriedItemId                                       ;81A45C|AD8409  |000984;
@@ -973,13 +973,13 @@ fObjectSlots_UpdateAll:
     STA.B [ptrUnknown0x07],Y                                   ;81A469|9707    |000007;
     STA.B strcObject.gameObjectIdx                             ;81A46B|85A5    |0000A5;
     LDY.W #$0006                                               ;81A46D|A00600  |      ;
-    LDA.W $097A                                                ;81A470|AD7A09  |00097A;
+    LDA.W $097A+!DE_RAM_SHIFT                              ;81A470|AD7A09  |00097A;
     STA.B [ptrUnknown0x07],Y                                   ;81A473|9707    |000007;
     LDY.W #$0008                                               ;81A475|A00800  |      ;
-    LDA.W $097C                                                ;81A478|AD7C09  |00097C;
+    LDA.W $097C+!DE_RAM_SHIFT                              ;81A478|AD7C09  |00097C;
     STA.B [ptrUnknown0x07],Y                                   ;81A47B|9707    |000007;
     LDY.W #$000A                                               ;81A47D|A00A00  |      ;
-    LDA.W $097E                                                ;81A480|AD7E09  |00097E;
+    LDA.W $097E+!DE_RAM_SHIFT                              ;81A480|AD7E09  |00097E;
     STA.B [ptrUnknown0x07],Y                                   ;81A483|9707    |000007;
     STA.B strcObject.flip                                      ;81A485|859F    |00009F;
     LDY.W #$000C                                               ;81A487|A00C00  |      ;
@@ -991,8 +991,8 @@ fObjectSlots_UpdateAll:
     STA.B [ptrUnknown0x07],Y                                   ;81A497|9707    |000007;
     STA.B strcObject.posY                                      ;81A499|859D    |00009D;
     JSL.L fObject_UpdatePositionAndFlip                                ;81A49B|22B98085|8580B9;
-    LDA.W $097A                                                ;81A49F|AD7A09  |00097A;
-    CMP.W $097C                                                ;81A4A2|CD7C09  |00097C;
+    LDA.W $097A+!DE_RAM_SHIFT                              ;81A49F|AD7A09  |00097A;
+    CMP.W $097C+!DE_RAM_SHIFT                              ;81A4A2|CD7C09  |00097C;
     BEQ .caseFFFD                                              ;81A4A5|F00B    |81A4B2;
     STA.B strcObject.spriteTableIdx                            ;81A4A7|85A1    |0000A1;
     LDY.W #$0008                                               ;81A4A9|A00800  |      ;
@@ -1045,7 +1045,7 @@ fObjectSlots_FreeCurrent:
     LDY.W #$0000                                               ;81A4F5|A00000  |      ;
     LDA.B #$00                                                 ;81A4F8|A900    |      ;
     STA.B [ptrUnknown0x07],Y                                   ;81A4FA|9707    |000007;
-    STZ.W $0974                                                ;81A4FC|9C7409  |000974;
+    STZ.W $0974+!DE_RAM_SHIFT                              ;81A4FC|9C7409  |000974;
     RTL                                                        ;81A4FF|6B      |      ;
  
  
@@ -1077,26 +1077,26 @@ fObjectSlots_Allocate:
  
   + SEP #$20                                                   ;81A52A|E220    |      ;
     LDY.W #$0000                                               ;81A52C|A00000  |      ;
-    LDA.W $0974                                                ;81A52F|AD7409  |000974;
+    LDA.W $0974+!DE_RAM_SHIFT                              ;81A52F|AD7409  |000974;
     STA.B [ptrUnknown0x07],Y                                   ;81A532|9707    |000007;
     LDY.W #$0001                                               ;81A534|A00100  |      ;
-    LDA.W $0975                                                ;81A537|AD7509  |000975;
+    LDA.W $0975+!DE_RAM_SHIFT                              ;81A537|AD7509  |000975;
     STA.B [ptrUnknown0x07],Y                                   ;81A53A|9707    |000007;
     LDY.W #$0002                                               ;81A53C|A00200  |      ;
-    LDA.W $0976                                                ;81A53F|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;81A53F|AD7609  |000976;
     STA.B [ptrUnknown0x07],Y                                   ;81A542|9707    |000007;
     LDY.W #$0003                                               ;81A544|A00300  |      ;
     LDA.W nCarriedItemId                                       ;81A547|AD8409  |000984;
     STA.B [ptrUnknown0x07],Y                                   ;81A54A|9707    |000007;
     REP #$20                                                   ;81A54C|C220    |      ;
     LDY.W #$0006                                               ;81A54E|A00600  |      ;
-    LDA.W $097A                                                ;81A551|AD7A09  |00097A;
+    LDA.W $097A+!DE_RAM_SHIFT                              ;81A551|AD7A09  |00097A;
     STA.B [ptrUnknown0x07],Y                                   ;81A554|9707    |000007;
     LDY.W #$0008                                               ;81A556|A00800  |      ;
     STA.B [ptrUnknown0x07],Y                                   ;81A559|9707    |000007;
     STA.B strcObject.spriteTableIdx                            ;81A55B|85A1    |0000A1;
     LDY.W #$000A                                               ;81A55D|A00A00  |      ;
-    LDA.W $097E                                                ;81A560|AD7E09  |00097E;
+    LDA.W $097E+!DE_RAM_SHIFT                              ;81A560|AD7E09  |00097E;
     STA.B [ptrUnknown0x07],Y                                   ;81A563|9707    |000007;
     STA.B strcObject.flip                                      ;81A565|859F    |00009F;
     LDY.W #$000C                                               ;81A567|A00C00  |      ;
@@ -1177,7 +1177,7 @@ fTileScript_Start:
     LDA.L pTable_81B963,X                                      ;81A5F4|BF63B981|81B963;
     STA.B ptrUnknown0xCF+2                                     ;81A5F8|85D1    |0000D1;
     SEP #$20                                                   ;81A5FA|E220    |      ;
-    STZ.W $0989                                                ;81A5FC|9C8909  |000989;
+    STZ.W $0989+!DE_RAM_SHIFT                              ;81A5FC|9C8909  |000989;
     RTL                                                        ;81A5FF|6B      |      ;
  
  
@@ -1192,7 +1192,7 @@ fTileScript_Update:
  
  
   + SEP #$20                                                   ;81A60E|E220    |      ;
-    LDA.W $0989                                                ;81A610|AD8909  |000989;
+    LDA.W $0989+!DE_RAM_SHIFT                              ;81A610|AD8909  |000989;
     BNE .dec                                                   ;81A613|D044    |81A659;
     REP #$20                                                   ;81A615|C220    |      ;
     LDA.B [ptrUnknown0xCF]                                     ;81A617|A7CF    |0000CF;
@@ -1223,7 +1223,7 @@ fTileScript_Update:
     INY                                                        ;81A63D|C8      |      ;
     INY                                                        ;81A63E|C8      |      ;
     LDA.B [ptrUnknown0xCF],Y                                   ;81A63F|B7CF    |0000CF;
-    STA.W $0989                                                ;81A641|8D8909  |000989;
+    STA.W $0989+!DE_RAM_SHIFT                              ;81A641|8D8909  |000989;
     REP #$20                                                   ;81A644|C220    |      ;
     PLY                                                        ;81A646|7A      |      ;
     PLX                                                        ;81A647|FA      |      ;
@@ -1238,7 +1238,7 @@ fTileScript_Update:
  
  
 .dec:
-    DEC.W $0989                                                ;81A659|CE8909  |000989;
+    DEC.W $0989+!DE_RAM_SHIFT                              ;81A659|CE8909  |000989;
  
 .return:
     RTL                                                        ;81A65C|6B      |      ;
@@ -1384,7 +1384,11 @@ fMap_QueueTilePatternVRAMUpload:
  
 .label5:
     REP #$20                                                   ;81A730|C220    |      ;
+    if !REGION_DE
+    LDA.W #$A115                                           ;81A746|A915A1  |      ;
+    else
     LDA.W #$A096                                               ;81A732|A996A0  |      ;
+    endif
     STA.B ptrTemp0x72                                          ;81A735|8572    |000072;
     STA.B ptrUnknown0x75                                       ;81A737|8575    |000075;
     SEP #$20                                                   ;81A739|E220    |      ;
@@ -1600,7 +1604,11 @@ fMap_CalcTilemapBufferOffset:
     ASL A                                                      ;81A890|0A      |      ;
     STA.B strcVariables.n16Temp2                               ;81A891|8580    |000080;
     REP #$20                                                   ;81A893|C220    |      ;
+    if !REGION_DE
+    LDA.W #$A115                                           ;81A8A9|A915A1  |      ;
+    else
     LDA.W #$A096                                               ;81A895|A996A0  |      ;
+    endif
     CLC                                                        ;81A898|18      |      ;
     ADC.B strcVariables.n16Temp1                               ;81A899|657E    |00007E;
     STA.B ptrTemp0x72                                          ;81A89B|8572    |000072;
@@ -1705,7 +1713,11 @@ fMap_CalcTilemapBufferOffset:
     INY                                                        ;81A941|C8      |      ;
     CPY.B strcVariables.n16Temp3                               ;81A942|C482    |000082;
     BEQ +                                                      ;81A944|F003    |81A949;
+    if !REGION_DE
+    JMP.W $A8D4                                            ;81A95A|4CD4A8  |81A8D4;
+    else
     JMP.W $A8C0                                                ;81A946|4CC0A8  |81A8C0;
+    endif
  
  
   + RTL                                                        ;81A949|6B      |      ;
@@ -3163,7 +3175,11 @@ fShed_DrawItemPatternByFlag:
  
 .case0:
     REP #$20                                                   ;81B2D3|C220    |      ;
+    if !REGION_DE
+    LDA.W #$BE23                                           ;81B2E9|A923BE  |      ;
+    else
     LDA.W #$BE0F                                               ;81B2D5|A90FBE  |      ;
+    endif
     STA.B ptrTemp0x72                                          ;81B2D8|8572    |000072;
     SEP #$20                                                   ;81B2DA|E220    |      ;
     LDA.B #$81                                                 ;81B2DC|A981    |      ;
@@ -3173,7 +3189,11 @@ fShed_DrawItemPatternByFlag:
  
 .case1:
     REP #$20                                                   ;81B2E2|C220    |      ;
+    if !REGION_DE
+    LDA.W #$BF03                                           ;81B2F8|A903BF  |      ;
+    else
     LDA.W #$BEEF                                               ;81B2E4|A9EFBE  |      ;
+    endif
     STA.B ptrTemp0x72                                          ;81B2E7|8572    |000072;
     SEP #$20                                                   ;81B2E9|E220    |      ;
     LDA.B #$81                                                 ;81B2EB|A981    |      ;
@@ -3183,7 +3203,11 @@ fShed_DrawItemPatternByFlag:
  
 .case2:
     REP #$20                                                   ;81B2F1|C220    |      ;
+    if !REGION_DE
+    LDA.W #$BF3B                                           ;81B307|A93BBF  |      ;
+    else
     LDA.W #$BF27                                               ;81B2F3|A927BF  |      ;
+    endif
     STA.B ptrTemp0x72                                          ;81B2F6|8572    |000072;
     SEP #$20                                                   ;81B2F8|E220    |      ;
     LDA.B #$81                                                 ;81B2FA|A981    |      ;
@@ -3193,7 +3217,11 @@ fShed_DrawItemPatternByFlag:
  
 .case4:
     REP #$20                                                   ;81B300|C220    |      ;
+    if !REGION_DE
+    LDA.W #$BF83                                           ;81B316|A983BF  |      ;
+    else
     LDA.W #$BF6F                                               ;81B302|A96FBF  |      ;
+    endif
     STA.B ptrTemp0x72                                          ;81B305|8572    |000072;
     SEP #$20                                                   ;81B307|E220    |      ;
     LDA.B #$81                                                 ;81B309|A981    |      ;

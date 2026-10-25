@@ -65,4 +65,4 @@ Label names refer to the current sources; see `docs/naming/*.csv` for old -> new
 - `tools/gfx/tilemap_codec.py` decompresses and re-encodes all 137 labelled blobs byte-for-byte (`tests/test_tilemap_codec.py`).
 - Former layout issues are fixed: the tail of `sCompressedTiles_99DCBD` was moved out of `Padding_990000`, and the blobs at $A5CB05 and $9FD4DA have their own labels.
 - Naming fixed: `sCompressedTiles_*` blobs are tile graphics and `sCompressedTilemap_*` blobs are BG name tables; the original labels had them swapped (see `docs/formats/tilemap-compression.md`).
-- Remaining: `sCompressedTilemap_A69996` is followed by ~4 KB of uncompressed data.
+- The ~4 KB that follow `sCompressedTilemap_A69996` are a raw 64x32 BG name table (statistics: 32% consecutive-tile pairs, 29% vertical +16 pairs, tile ids < 766, trailing zero words); it is now labeled `sCharactermap_A6A096` ($A6A096). Its last 40 bytes (zeros) were hidden under `Padding_A60000`. No code reference by label was found (likely reached through a computed pointer).

@@ -362,7 +362,11 @@ fInput_Case04_State1:
     LDA.W strcJoypad1.newInput                                 ;84C2CC|AD2801  |000128;
     BIT.W #!JOYPAD_START                                               
     BEQ .justReturn                                            ;84C2D2|F003    |84C2D7;
+    if !REGION_DE
+    JMP.W $C2F4                                            ;84C2F0|4CF4C2  |84C2F4;
+    else
     JMP.W $C2D8                                                ;84C2D4|4CD8C2  |84C2D8;
+    endif
  
  
 .justReturn:
@@ -416,9 +420,9 @@ fInput_Case04_State7_ToggleChoice:
  
 .label1:
     SEP #$20                                                   ;84C32D|E220    |      ;
-    LDA.W $098E                                                ;84C32F|AD8E09  |00098E;
+    LDA.W $098E+!DE_RAM_SHIFT                              ;84C32F|AD8E09  |00098E;
     EOR.B #$01                                                 ;84C332|4901    |      ;
-    STA.W $098E                                                ;84C334|8D8E09  |00098E;
+    STA.W $098E+!DE_RAM_SHIFT                              ;84C334|8D8E09  |00098E;
     LDA.B #$01                                                 ;84C337|A901    |      ;
     STA.B strcVariables.u8Unk97                                ;84C339|8597    |000097;
     SEP #$20                                                   ;84C33B|E220    |      ;
@@ -491,9 +495,9 @@ fInput_Case04_State8_LoadChoice:
  
 .label1:
     SEP #$20                                                   ;84C3AF|E220    |      ;
-    LDA.W $098E                                                ;84C3B1|AD8E09  |00098E;
+    LDA.W $098E+!DE_RAM_SHIFT                              ;84C3B1|AD8E09  |00098E;
     EOR.B #$01                                                 ;84C3B4|4901    |      ;
-    STA.W $098E                                                ;84C3B6|8D8E09  |00098E;
+    STA.W $098E+!DE_RAM_SHIFT                              ;84C3B6|8D8E09  |00098E;
     LDA.B #$01                                                 ;84C3B9|A901    |      ;
     STA.B strcVariables.u8Unk97                                ;84C3BB|8597    |000097;
     SEP #$20                                                   ;84C3BD|E220    |      ;
@@ -524,7 +528,7 @@ fInput_Case04_State8_LoadChoice:
     SEP #$20                                                   ;84C3E9|E220    |      ;
     LDA.B #$00                                                 ;84C3EB|A900    |      ;
     XBA                                                        ;84C3ED|EB      |      ;
-    LDA.W $098E                                                ;84C3EE|AD8E09  |00098E;
+    LDA.W $098E+!DE_RAM_SHIFT                              ;84C3EE|AD8E09  |00098E;
     JSL.L fGameEngine_LoadContinue                             ;84C3F1|2245BA83|83BA45;
     REP #$30                                                   ;84C3F5|C230    |      ;
     CPX.W #$0000                                               ;84C3F7|E00000  |      ;
@@ -1904,12 +1908,12 @@ fInput_Handler_case06:
     AND.B #!DFLAGS_ENDDIALOG                                                 
     BEQ .justReturn                                            ;84CEDB|F027    |84CF04;
     REP #$30                                                   ;84CEDD|C230    |      ;
-    LDA.W $09B1                                                ;84CEDF|ADB109  |0009B1;
+    LDA.W $09B1+!DE_RAM_SHIFT                              ;84CEDF|ADB109  |0009B1;
     INC A                                                      ;84CEE2|1A      |      ;
-    STA.W $09B1                                                ;84CEE3|8DB109  |0009B1;
+    STA.W $09B1+!DE_RAM_SHIFT                              ;84CEE3|8DB109  |0009B1;
     CMP.W #$0078                                               ;84CEE6|C97800  |      ;
     BNE .justReturn                                            ;84CEE9|D019    |84CF04;
-    STZ.W $09B1                                                ;84CEEB|9CB109  |0009B1;
+    STZ.W $09B1+!DE_RAM_SHIFT                              ;84CEEB|9CB109  |0009B1;
     JSL.L fDialog_EndDialogRestoreScroll                               ;84CEEE|22F99383|8393F9;
     SEP #$20                                                   ;84CEF2|E220    |      ;
     LDA.B #$01                                                 ;84CEF4|A901    |      ;

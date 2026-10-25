@@ -250,7 +250,7 @@ fAreaEvents_Farm:
     REP #$30                                                   ;83CCD4|C230    |      ;
     %AIExecute($0000, $0019, $0000)
     SEP #$20                                                   ;83CCE3|E220    |      ;
-    STZ.W $09A3                                                ;83CCE5|9CA309  |0009A3;
+    STZ.W $09A3+!DE_RAM_SHIFT                              ;83CCE5|9CA309  |0009A3;
     RTS                                                        ;83CCE8|60      |      ;
  
  
@@ -271,7 +271,7 @@ fAreaEvents_Farm:
     REP #$30                                                   ;83CD23|C230    |      ;
     %AIExecute($0000, $001A, $0000)
     SEP #$20                                                   ;83CD32|E220    |      ;
-    STZ.W $09A3                                                ;83CD34|9CA309  |0009A3;
+    STZ.W $09A3+!DE_RAM_SHIFT                              ;83CD34|9CA309  |0009A3;
     RTS                                                        ;83CD37|60      |      ;
  
  
@@ -294,7 +294,7 @@ fAreaEvents_Farm:
     REP #$30                                                   ;83CD7B|C230    |      ;
     %AIExecute($0000, $001B, $0000)
     SEP #$20                                                   ;83CD8A|E220    |      ;
-    STZ.W $09A3                                                ;83CD8C|9CA309  |0009A3;
+    STZ.W $09A3+!DE_RAM_SHIFT                              ;83CD8C|9CA309  |0009A3;
     RTS                                                        ;83CD8F|60      |      ;
  
  
@@ -319,7 +319,7 @@ fAreaEvents_Farm:
     REP #$30                                                   ;83CDDC|C230    |      ;
     %AIExecute($0000, $001C, $0000)
     SEP #$20                                                   ;83CDEB|E220    |      ;
-    STZ.W $09A3                                                ;83CDED|9CA309  |0009A3;
+    STZ.W $09A3+!DE_RAM_SHIFT                              ;83CDED|9CA309  |0009A3;
     RTS                                                        ;83CDF0|60      |      ;
  
  
@@ -346,7 +346,7 @@ fAreaEvents_Farm:
     REP #$30                                                   ;83CE46|C230    |      ;
     %AIExecute($0000, $001D, $0000)
     SEP #$20                                                   ;83CE55|E220    |      ;
-    STZ.W $09A3                                                ;83CE57|9CA309  |0009A3;
+    STZ.W $09A3+!DE_RAM_SHIFT                              ;83CE57|9CA309  |0009A3;
     RTS                                                        ;83CE5A|60      |      ;
  
  
@@ -767,21 +767,21 @@ fAreaEvents_Town:
     STZ.B strcVariables.n16Temp1                               ;83D33A|647E    |00007E;
     SEP #$20                                                   ;83D33C|E220    |      ;
     LDA.B #$00                                                 ;83D33E|A900    |      ;
-    STA.W $09A4                                                ;83D340|8DA409  |0009A4;
+    STA.W $09A4+!DE_RAM_SHIFT                              ;83D340|8DA409  |0009A4;
     LDA.B #$01                                                 ;83D343|A901    |      ;
-    STA.W $09A5                                                ;83D345|8DA509  |0009A5;
+    STA.W $09A5+!DE_RAM_SHIFT                              ;83D345|8DA509  |0009A5;
     LDA.B #$02                                                 ;83D348|A902    |      ;
-    STA.W $09A6                                                ;83D34A|8DA609  |0009A6;
+    STA.W $09A6+!DE_RAM_SHIFT                              ;83D34A|8DA609  |0009A6;
     LDA.B #$03                                                 ;83D34D|A903    |      ;
-    STA.W $09A7                                                ;83D34F|8DA709  |0009A7;
+    STA.W $09A7+!DE_RAM_SHIFT                              ;83D34F|8DA709  |0009A7;
     LDA.B #$04                                                 ;83D352|A904    |      ;
-    STA.W $09A8                                                ;83D354|8DA809  |0009A8;
+    STA.W $09A8+!DE_RAM_SHIFT                              ;83D354|8DA809  |0009A8;
     LDA.B #$05                                                 ;83D357|A905    |      ;
-    STA.W $09A9                                                ;83D359|8DA909  |0009A9;
+    STA.W $09A9+!DE_RAM_SHIFT                              ;83D359|8DA909  |0009A9;
     LDA.B #$00                                                 ;83D35C|A900    |      ;
-    STA.W $09AA                                                ;83D35E|8DAA09  |0009AA;
+    STA.W $09AA+!DE_RAM_SHIFT                              ;83D35E|8DAA09  |0009AA;
     LDA.B #$00                                                 ;83D361|A900    |      ;
-    STA.W $09AB                                                ;83D363|8DAB09  |0009AB;
+    STA.W $09AB+!DE_RAM_SHIFT                              ;83D363|8DAB09  |0009AB;
     LDY.W #$0000                                               ;83D366|A00000  |      ;
  
   - SEP #$20                                                   ;83D369|E220    |      ;
@@ -789,7 +789,7 @@ fAreaEvents_Town:
     PHY                                                        ;83D36D|5A      |      ;
     TYX                                                        ;83D36E|BB      |      ;
     STY.B strcVariables.n16Temp4                               ;83D36F|8484    |000084;
-    LDA.W $09A4,X                                              ;83D371|BDA409  |0009A4;
+    LDA.W $09A4+!DE_RAM_SHIFT,X                            ;83D371|BDA409  |0009A4;
     STA.B strcVariables.n8Temp4                                ;83D374|8595    |000095;
     SEP #$20                                                   ;83D376|E220    |      ;
     LDA.B #$08                                                 ;83D378|A908    |      ;
@@ -803,18 +803,18 @@ fAreaEvents_Town:
     TAX                                                        ;83D388|AA      |      ;
     STX.B strcVariables.n16Unk86                               ;83D389|8686    |000086;
     SEP #$20                                                   ;83D38B|E220    |      ;
-    LDA.W $09A4,X                                              ;83D38D|BDA409  |0009A4;
+    LDA.W $09A4+!DE_RAM_SHIFT,X                            ;83D38D|BDA409  |0009A4;
     LDX.B strcVariables.n16Temp4                               ;83D390|A684    |000084;
-    STA.W $09A4,X                                              ;83D392|9DA409  |0009A4;
+    STA.W $09A4+!DE_RAM_SHIFT,X                            ;83D392|9DA409  |0009A4;
     LDA.B strcVariables.n8Temp4                                ;83D395|A595    |000095;
     LDX.B strcVariables.n16Unk86                               ;83D397|A686    |000086;
-    STA.W $09A4,X                                              ;83D399|9DA409  |0009A4;
+    STA.W $09A4+!DE_RAM_SHIFT,X                            ;83D399|9DA409  |0009A4;
     PLY                                                        ;83D39C|7A      |      ;
     INY                                                        ;83D39D|C8      |      ;
     CPY.W #$0007                                               ;83D39E|C00700  |      ;
     BNE -                                                      ;83D3A1|D0C6    |83D369;
     SEP #$20                                                   ;83D3A3|E220    |      ;
-    STZ.W $09A2                                                ;83D3A5|9CA209  |0009A2;
+    STZ.W $09A2+!DE_RAM_SHIFT                              ;83D3A5|9CA209  |0009A2;
     REP #$30                                                   ;83D3A8|C230    |      ;
     %AIExecute($0000, $0028, $0002)
     RTS                                                        ;83D3B7|60      |      ;
@@ -3439,7 +3439,7 @@ fAreaEvents_Endings:
 .ending04:
     SEP #$20                                                   ;83EDD3|E220    |      ;
     REP #$10                                                   ;83EDD5|C210    |      ;
-    LDA.W $09B5                                                ;83EDD7|ADB509  |0009B5;
+    LDA.W $09B5+!DE_RAM_SHIFT                              ;83EDD7|ADB509  |0009B5;
     CMP.B #$C0                                                 ;83EDDA|C9C0    |      ;
     BCC .ending05                                              ;83EDDC|9018    |83EDF6;
     REP #$30                                                   ;83EDDE|C230    |      ;
@@ -3715,29 +3715,29 @@ fAreaEvents_Endings:
 .ending14:
     REP #$30                                                   ;83F0E3|C230    |      ;
     LDA.L nLove_Maria                                          ;83F0E5|AF1F1F7F|7F1F1F;
-    STA.W $09B3                                                ;83F0E9|8DB309  |0009B3;
+    STA.W $09B3+!DE_RAM_SHIFT                              ;83F0E9|8DB309  |0009B3;
     CMP.L nLove_Ann                                            ;83F0EC|CF211F7F|7F1F21;
     BCS +                                                      ;83F0F0|B007    |83F0F9;
     LDA.L nLove_Ann                                            ;83F0F2|AF211F7F|7F1F21;
-    STA.W $09B3                                                ;83F0F6|8DB309  |0009B3;
+    STA.W $09B3+!DE_RAM_SHIFT                              ;83F0F6|8DB309  |0009B3;
  
   + REP #$30                                                   ;83F0F9|C230    |      ;
     CMP.L nLove_Nina                                           ;83F0FB|CF231F7F|7F1F23;
     BCS +                                                      ;83F0FF|B007    |83F108;
     LDA.L nLove_Nina                                           ;83F101|AF231F7F|7F1F23;
-    STA.W $09B3                                                ;83F105|8DB309  |0009B3;
+    STA.W $09B3+!DE_RAM_SHIFT                              ;83F105|8DB309  |0009B3;
  
   + REP #$30                                                   ;83F108|C230    |      ;
     CMP.L nLove_Ellen                                          ;83F10A|CF251F7F|7F1F25;
     BCS +                                                      ;83F10E|B007    |83F117;
     LDA.L nLove_Ellen                                          ;83F110|AF251F7F|7F1F25;
-    STA.W $09B3                                                ;83F114|8DB309  |0009B3;
+    STA.W $09B3+!DE_RAM_SHIFT                              ;83F114|8DB309  |0009B3;
  
   + REP #$30                                                   ;83F117|C230    |      ;
     CMP.L nLove_Eve                                            ;83F119|CF271F7F|7F1F27;
     BCS +                                                      ;83F11D|B007    |83F126;
     LDA.L nLove_Eve                                            ;83F11F|AF271F7F|7F1F27;
-    STA.W $09B3                                                ;83F123|8DB309  |0009B3;
+    STA.W $09B3+!DE_RAM_SHIFT                              ;83F123|8DB309  |0009B3;
  
   + REP #$30                                                   ;83F126|C230    |      ;
     %AIExecute($0000, $0046, $0000)
@@ -4128,7 +4128,7 @@ fAreaInit_HouseHelper:
     STA.L nEndingStep                                          ;83F4FB|8F471F7F|7F1F47;
     SEP #$20                                                   ;83F4FF|E220    |      ;
     REP #$10                                                   ;83F501|C210    |      ;
-    STZ.W $09B5                                                ;83F503|9CB509  |0009B5;
+    STZ.W $09B5+!DE_RAM_SHIFT                              ;83F503|9CB509  |0009B5;
     REP #$20                                                   ;83F506|C220    |      ;
     LDA.W #!DIALOG_SPACE                                               
     STA.W strcNames.wCurrentCow                                ;83F50B|8D8908  |000889;
@@ -4149,14 +4149,14 @@ fAreaInit_HouseHelper:
     BEQ .label2                                                ;83F52D|F044    |83F573;
     LDY.W #$0004                                               ;83F52F|A00400  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83F532|B772    |000072;
-    CMP.W $09B5                                                ;83F534|CDB509  |0009B5;
+    CMP.W $09B5+!DE_RAM_SHIFT                              ;83F534|CDB509  |0009B5;
     BCS .label1                                                ;83F537|B002    |83F53B;
     BRA .label2                                                ;83F539|8038    |83F573;
  
  
 .label1:
     SEP #$20                                                   ;83F53B|E220    |      ;
-    STA.W $09B5                                                ;83F53D|8DB509  |0009B5;
+    STA.W $09B5+!DE_RAM_SHIFT                              ;83F53D|8DB509  |0009B5;
     SEP #$20                                                   ;83F540|E220    |      ;
     LDA.B #$00                                                 ;83F542|A900    |      ;
     XBA                                                        ;83F544|EB      |      ;
