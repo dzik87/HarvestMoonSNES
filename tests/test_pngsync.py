@@ -82,81 +82,249 @@ def test_tail_fields():
         check(P.join_tail(meta) == tail, f"tail round trip {tail[:4].hex()}")
 
 
-def make_tree(tmp, labels):
-    for sub in ("assets/gfx/tiles", "src/data/gfx/tiles", "assets/gfx/palettes"):
-        (tmp / sub).mkdir(parents=True)
-    shutil.copy(ROOT / "src/data/gfx/tiles/bank_92.asm", tmp / "src/data/gfx/tiles/bank_92.asm")
-    for l in labels:
-        shutil.copy(ROOT / "assets/gfx/tiles" / f"{l}.bin", tmp / "assets/gfx/tiles" / f"{l}.bin")
-    pad = tmp / "assets/gfx/tiles/Padding_920000.bin"
-    return pad
+def clone_tree(tmp, drop_sources=False):
+    """scratch copy of everything pngsync reads: assets/gfx (sources + generated .bin), assets/objects, the map table, bank asm."""
+    shutil.copytree(ROOT / "assets/gfx", tmp / "assets/gfx", ignore=shutil.ignore_patterns("*.pal"))
+    shutil.copytree(ROOT / "assets/objects", tmp / "assets/objects")
+    (tmp / "src/code/bank_80").mkdir(parents=True)
+    shutil.copy(ROOT / "src/code/bank_80/tilemaps.asm", tmp / "src/code/bank_80/tilemaps.asm")
+    shutil.copytree(ROOT / "src/data/gfx", tmp / "src/data/gfx")
+    if drop_sources:
+        for r in ("", "eu/", "de/", "jp/"):
+            base = tmp / "assets/gfx/png" / r
+            shutil.rmtree(base / "screens", ignore_errors=True)
+            for k in ("tiles", "sprites"):
+                for f in (base / k).glob("*.png"):
+                    f.unlink()
+        shutil.rmtree(tmp / "assets/gfx/png/frames", ignore_errors=True)
+    return tmp
 
 
-def bank_total(tmp):
-    org, sized = BB.sizes_from_asm(tmp / "src/data/gfx/tiles/bank_92.asm", tmp / "assets/gfx/tiles")
-    return sum(s for _, s in sized)
+def bank_totals(tmp):
+    out = {}
+    for f in sorted((tmp / "src/data/gfx/tiles").glob("bank_*.asm")):
+        org, sized = BB.sizes_from_asm(f, tmp / "assets/gfx/tiles")
+        out[f.name] = sum(s for _, s in sized)
+    return out
+
+
+def edit_png(path, fn):
+    """fn(pixel access, width, height) mutates the pixels of an indexed PNG in place (keeps PLTE / tRNS)."""
+    from PIL import Image
+    im = Image.open(path)
+    fn(im.load(), im.width, im.height)
+    im.save(path, transparency=im.info.get("transparency"))
+
+
+def test_roundtrip_every_blob_every_region():
+    """.bin -> composed images + remainder sheets -> rebuilt bytes: bit exact for every blob of US, EU, DE and JP, the images
+    are not allowed to contradict each other, and nothing is left over."""
+    with tempfile.TemporaryDirectory() as d:
+        tmp = clone_tree(Path(d), drop_sources=True)
+        for region in P.REGIONS:
+            n = P.export_composed(tmp, region)
+            check(n > 0, f"{region}: exported blobs")
+            rc = P.cmd_check(ns(region=region), tmp)
+            check(rc == 0, f"{region}: sources rebuilt from the images equal the .bin of every blob")
+        # the freshly exported sources equal the committed ones (the export is deterministic and canonical)
+        diff = []
+        for sub in ("screens", "frames", "tiles", "sprites", "eu", "de", "jp"):
+            a, b = ROOT / "assets/gfx/png" / sub, tmp / "assets/gfx/png" / sub
+            for f in sorted(a.rglob("*.png")):
+                if (b / f.relative_to(a)).read_bytes() != f.read_bytes():
+                    diff.append(str(f.relative_to(ROOT)))
+        check(not diff, f"committed composed sources are the canonical export ({diff[:3]})")
 
 
 def test_import_flow():
-    labels = ["sCompressedTiles_928000", "sCompressedTiles_9282CB", "sCompressedTiles_929D10",
-              "sCompressedTiles_92BB03", "sCompressedTiles_92D3AB"]
+    """edit a sprite frame and a name table screen, import: both reach the right tiles / blocks, other images that show the same
+    tiles follow, check passes, growth needs --allow-resize and keeps every bank at $8000 bytes."""
+    import composed as CO
     with tempfile.TemporaryDirectory() as d:
-        tmp = Path(d)
-        make_tree(tmp, labels)
-        # the copied bank asm lists only blobs of bank $92, which is what we copied
-        a = ns()
-        P.cmd_export(a, tmp)
-        check(P.cmd_check(a, tmp) == 0, "fresh export must pass check")
-        check(P.cmd_import(a, tmp) == 0, "import of unchanged sources")
-        before = (tmp / "assets/gfx/tiles/sCompressedTiles_9282CB.bin").read_bytes()
-        check(bank_total(tmp) == BB.BANK, "bank size before")
+        tmp = clone_tree(Path(d))
+        before = {p.name: p.read_bytes() for p in (tmp / "assets/gfx/sprites").glob("*.bin")}
+        check(P.cmd_import(ns(), tmp) == 0, "import of unchanged sources")
+        check(all(p.read_bytes() == before[p.name] for p in (tmp / "assets/gfx/sprites").glob("*.bin")), "unchanged import keeps the bytes")
+        totals = bank_totals(tmp)
+        check(set(totals.values()) == {BB.BANK}, "banks are full before")
 
-        # shrink: blank graphic -> stream is padded with zeros, layout unchanged
-        from PIL import Image
-        b = P.Blob("tiles", "sCompressedTiles_9282CB", tmp)
-        for f in b.art.glob("t_*.png"):
-            f.unlink()                                          # every unit blank -> all-zero graphic
-        P.cmd_import(ns(label=[b.label]), tmp)
-        check(P.parse_ranges(P.read_meta(b)["unit_blank"]) == set(range(64)), "import refreshes unit_blank after deleting all units")
-        after = b.bin.read_bytes()
-        check(len(after) == len(before) and after != before, "shrunk blob keeps its size")
-        check(P.cmd_check(ns(), tmp) == 0, "check after shrink")
-        check(bank_total(tmp) == BB.BANK, "bank size after shrink")
+        # 1. one pixel of the first frame of object 0
+        fr = sorted((tmp / "assets/gfx/png/frames/obj_0000").glob("f_*.png"))[0]
+        spot = []
 
-        # grow: noisy graphic -> refused without the flag, padding adjusted with it
+        def paint(px, w, h):
+            for y in range(h):
+                for x in range(w):
+                    v = px[x, y]
+                    if v & 15 and not spot:
+                        px[x, y] = (v & 0xF0) | ((v & 15) % 15 + 1)
+                        spot.append((x, y, v & 15, px[x, y] & 15))
+        edit_png(fr, paint)
+        # 2. a block of the spring farm screen
+        scr = tmp / "assets/gfx/png/screens/sCharactermap_A18000__sFarmSpringMap.png"
+
+        def paint2(px, w, h):
+            for y in range(64, 80):
+                for x in range(64, 80):
+                    v = px[x, y]
+                    if v & 15:
+                        px[x, y] = (v & 0xF0) | ((v & 15) % 15 + 1)
+        edit_png(scr, paint2)
+        want_bins = {p.name: p.read_bytes() for p in (tmp / "assets/gfx/tiles").glob("*.bin")}
+        check(P.cmd_import(ns(allow_resize=True), tmp) == 0, "import of edited images")
+        after = {p.name: p.read_bytes() for p in (tmp / "assets/gfx/tiles").glob("*.bin")}
+        check(after != want_bins, "tile blob changed")
+        check(P.cmd_check(ns(), tmp) == 0, "check after import")
+        check(set(bank_totals(tmp).values()) == {BB.BANK}, "banks are still $8000 bytes")
+        # the sprite pixel landed exactly there, nowhere else (re-render the frame from the new bank)
+        ctx = CO.get_ctx(tmp, "us")
+        S = ctx.S
+        sh = S.Sheets(tmp / "assets/gfx/sprites")
+        x, y, old, new = spot[0]
+        data = S.ObjectData()
+        bank, _ = data.list_ptr(0)
+        fp = int(fr.stem[2:], 16)
+        w, h, ox, oy, pix = S.render_frame(sh, data.frame(bank, fp))
+        check(pix[y * w + x] & 15 == new, "edited sprite pixel is in the rebuilt bank")
+        _, _, got = P.load_png(fr)
+        check(got == pix, "the frame image equals the render of the new bank (re-exported)")
+
+        # 3. growth: noise on a name table screen
         rnd = random.Random(5)
-        for u in range(24):                                     # noisy units 0-23 (3 unit rows)
-            im = Image.new("P", (16, 16))
-            im.putdata([rnd.randrange(16) for _ in range(256)])
-            im.putpalette([0] * 48)
-            im.save(b.art / P.unit_name(b, u))
+        scr2 = tmp / "assets/gfx/png/screens/sCharactermap_A18000__sFarmSpringMap.png"
+
+        def noise(px, w, h):                                    # flip-symmetric function of the tile pixel: consistent for every cell
+            for y in range(0, 160):
+                for x in range(0, 160):
+                    v = px[x, y]
+                    if v & 15:
+                        mx, my = min(x % 8, 7 - x % 8), min(y % 8, 7 - y % 8)
+                        px[x, y] = (v & 0xF0) | ((v & 15) * 5 + mx * 3 + my * 7) % 15 + 1
+        edit_png(scr2, noise)
+        sizes = {p.name: len(p.read_bytes()) for p in (tmp / "assets/gfx/tiles").glob("*.bin")}
         try:
-            P.cmd_import(ns(label=[b.label]), tmp)
+            P.cmd_import(ns(), tmp)
             check(False, "growth must be refused without --allow-resize")
         except SystemExit:
             pass
-        P.cmd_import(ns(label=[b.label], allow_resize=True), tmp)
-        check(len(b.bin.read_bytes()) > len(before), "blob grew")
-        check(bank_total(tmp) == BB.BANK, "bank size after growth is still 0x8000")
+        P.cmd_import(ns(allow_resize=True), tmp)
+        check(any(len(p.read_bytes()) > sizes[p.name] for p in (tmp / "assets/gfx/tiles").glob("*.bin")), "a blob grew")
+        check(set(bank_totals(tmp).values()) == {BB.BANK}, "banks are still $8000 bytes after growth")
         check(P.cmd_check(ns(), tmp) == 0, "check after growth")
-        # bad index
-        meta = P.read_meta(b)
-        meta["bpp"] = 2
-        try:
-            P.source_payload(b, meta)
-            check(False, "index above 2bpp range must be rejected")
-        except ValueError:
-            pass
-        # a deleted unit file without refreshing the manifest must fail the check (it would silently become zeros)
-        victim = b.art / P.unit_name(b, 5)
-        saved = victim.read_bytes()
+
+
+def find_shared_block_frames(ctx):
+    """two frames of different objects whose sole-covered components use the same tile id: (frameA, kA, frameB, kB)."""
+    seen = {}
+    for fr in ctx.frames:
+        for k, c in enumerate(fr.comps):
+            rects = [p for j, p in enumerate(fr.pos) if j != k and abs(p[0] - fr.pos[k][0]) < 16 and abs(p[1] - fr.pos[k][1]) < 16]
+            if rects or (c.tile >> 8) >= 10 or c.hflip or c.vflip:
+                continue
+            if c.tile in seen and seen[c.tile][0].obj != fr.obj:
+                return seen[c.tile] + (fr, k)
+            seen.setdefault(c.tile, (fr, k))
+    return None
+
+
+def test_conflicts_and_errors():
+    """contradicting edits of a shared block / tile, a wrong palette row, a remainder pixel under an image: reported, not written."""
+    import composed as CO
+    with tempfile.TemporaryDirectory() as d:
+        tmp = clone_tree(Path(d))
+        ctx = CO.get_ctx(tmp, "us")
+        A, ka, B, kb = find_shared_block_frames(ctx)
+        check(A is not None, "two frames share a sprite block")
+        bins = {p.name: p.read_bytes() for p in (tmp / "assets/gfx/sprites").glob("*.bin")}
+
+        def setpix(fr, k, val):
+            cx, cy = fr.pos[k]
+
+            def f(px, w, h):
+                px[cx + 3, cy + 5] = (fr.comps[k].palette << 4) | val if val else 0
+            edit_png(fr.path, f)
+        old = P.load_png(A.path)[2][A.pos[ka][1] * A.w + A.pos[ka][0] + 3 + 5 * A.w] & 15
+        setpix(A, ka, (old + 1) % 15 + 1)
+        setpix(B, kb, (old + 2) % 15 + 1)
+        check(P.cmd_import(ns(), tmp) == 1, "import reports contradicting edits of a shared sprite block")
+        check({p.name: p.read_bytes() for p in (tmp / "assets/gfx/sprites").glob("*.bin")} == bins, "nothing written on conflict")
+        check(P.cmd_check(ns(), tmp) == 1, "check reports the contradiction between the two frame images")
+        # equal edits are fine
+        setpix(B, kb, (old + 1) % 15 + 1)
+        check(P.cmd_import(ns(), tmp) == 0, "identical edits of the shared block are accepted")
+        check(P.cmd_check(ns(), tmp) == 0, "check passes after the images agree")
+
+    with tempfile.TemporaryDirectory() as d:
+        tmp = clone_tree(Path(d))
+        # wrong palette row in a frame
+        fr = sorted((tmp / "assets/gfx/png/frames/obj_0000").glob("f_*.png"))[0]
+
+        def wrong(px, w, h):
+            for y in range(h):
+                for x in range(w):
+                    if px[x, y] & 15:
+                        px[x, y] = ((px[x, y] >> 4) ^ 1) << 4 | ((px[x, y] & 15) % 15 + 1)
+                        return
+        edit_png(fr, wrong)
+        check(P.cmd_check(ns(), tmp) == 1, "check: a colour from another palette row is an error")
+        check(P.cmd_import(ns(), tmp) == 1, "import: a colour from another palette row is an error")
+    with tempfile.TemporaryDirectory() as d:
+        tmp = clone_tree(Path(d))
+        # a remainder pixel where an image defines the pixel
+        b = P.Blob("sprites", "Sprites_888000", tmp)
+        w, h, pix = P.load_png(b.art)
+        claims = CO.claims_for(CO.get_ctx(tmp, "us"))
+        i = next(i for i, c in enumerate(claims.val["Sprites_888000"]) if c != CO.UNC)
+        edit_png(b.art, lambda px, w_, h_: px.__setitem__((i % 128, i // 128), 5))
+        check(P.cmd_check(ns(label=["Sprites_888000"]), tmp) == 1, "check: remainder pixel under an image is an error")
+    with tempfile.TemporaryDirectory() as d:
+        tmp = clone_tree(Path(d))
+        # missing image file
+        victim = sorted((tmp / "assets/gfx/png/screens").glob("*.png"))[0]
         victim.unlink()
-        check(P.cmd_check(ns(), tmp) == 1, "check detects a unit file missing from the directory")
-        victim.write_bytes(saved)
-        check(P.cmd_check(ns(), tmp) == 0, "check passes again after restoring the unit")
-        (b.art / "t_9999.png").write_bytes(saved)
-        check(P.cmd_check(ns(), tmp) == 1, "check rejects a unit index beyond the blob")
-        (b.art / "t_9999.png").unlink()
+        check(P.cmd_check(ns(), tmp) == 1, "check: a missing screen is an error")
+
+
+def test_screen_transform_with_flips():
+    """a cell shown with flips / another palette is written back un-flipped (synthetic name table)."""
+    import composed as CO
+    lab = "sCompressedTiles_TEST"
+    sheet = bytearray(CO.W * 16)
+    for y in range(8):
+        for x in range(8):
+            sheet[y * CO.W + 8 + x] = 1 + (y * 8 + x) % 15      # tile 1
+    words = [1, 1 | 0x4000 | 3 << 10, 1 | 0x8000 | 5 << 10, 1 | 0xC000]
+    targets = [(lab, 1) if n == 1 else None for n in range(1024)]
+    scr = CO.Screen("t", "t", 4, words, [(0x2000, lab)], [(0, 0, 0)] * 128, targets)
+
+    class Ctx:
+        blobs = {lab: 1}
+    img = CO.render_screen(scr, {lab: sheet})
+    claims = CO.Claims({lab: len(sheet)})
+    CO.screen_claims(Ctx, scr, scr.width, scr.height, img, claims)
+    check(not claims.errors, f"all four views of one tile agree ({claims.errors[:1]})")
+    check(all(claims.val[lab][y * CO.W + 8 + x] == sheet[y * CO.W + 8 + x] for y in range(8) for x in range(8)),
+          "un-flipped pixels equal the sheet for hflip / vflip / palette views")
+    # an edit in the hflip + palette 3 view (cell 1) lands on the mirrored pixel of the tile
+    edited = bytearray(img)
+    edited[0 * scr.width + 8] = (3 << 4) | 9
+    claims = CO.Claims({lab: len(sheet)})
+    CO.screen_claims(Ctx, scr, scr.width, scr.height, bytes(edited), claims, base=img)
+    check(not claims.errors and claims.val[lab][0 * CO.W + 8 + 7] == 9, f"edit through an hflip view hits the mirrored pixel ({claims.errors[:1]})")
+    check(sum(1 for v in claims.val[lab] if v != CO.UNC) == 1, "only the edited pixel is claimed")
+    # the same pixel edited differently through two views of the shared tile is a conflict
+    edited[0 * scr.width + 8] = (3 << 4) | 9
+    edited[0 * scr.width + 7 - 0 + 0] = edited[0 * scr.width + 7]                 # (placeholder: cell 0 untouched)
+    edited[0 * scr.width + 0 + 7] = 4                                             # cell 0 (plain view): tile column 7 row 0
+    claims = CO.Claims({lab: len(sheet)})
+    CO.screen_claims(Ctx, scr, scr.width, scr.height, bytes(edited), claims, base=img)
+    check(claims.errors and "conflict" in claims.errors[0], f"contradicting edits of one tile pixel are a conflict ({claims.errors[:1]})")
+    # wrong palette row for the entry (palette 3 selected, row 4 used)
+    edited = bytearray(img)
+    edited[0 * scr.width + 8] = (4 << 4) | 9
+    claims = CO.Claims({lab: len(sheet)})
+    CO.screen_claims(Ctx, scr, scr.width, scr.height, bytes(edited), claims, base=img)
+    check(claims.errors and "palette row" in claims.errors[0], "wrong palette row is rejected")
 
 
 def test_real_blobs():
@@ -261,12 +429,11 @@ def test_sprite_cell_formula():
 
 
 def test_png_palettes_are_real_colours():
-    """every committed PNG carries the 16 colours of palette.sub in its PLTE; the pixel data is independent of them."""
+    """every committed remainder sheet carries the 16 colours of palette.sub in its PLTE; the pixel data is independent of them."""
     n = nconf = 0
     for b in P.blobs(kind="tiles") + P.blobs(kind="sprites"):
         meta = P.read_meta(b)
-        first = next(b.art.glob("*_*.png"))                     # PLTE is identical in every unit of a blob
-        pal, trns = png_palette(first)
+        pal, trns = png_palette(b.art)
         if "palette" not in meta:
             check(meta.get("palette_confidence") == "none", f"{b.label}: no palette and not flagged 'none'")
             continue
@@ -305,78 +472,50 @@ def test_assembled_sprites_use_obj_palette():
 
 
 def test_palette_is_ignored_by_import():
-    """re-colouring every unit PNG (new PLTE, no tRNS) must not change a single byte of the rebuilt .bin."""
+    """re-colouring every image (new PLTE, no tRNS) must not change a single byte of the rebuilt .bin."""
     from PIL import Image
     rnd = random.Random(11)
-    for label in ("sCompressedTiles_92D3AB", "Sprites_888000"):
-        kind = "tiles" if label.startswith("sCompressed") else "sprites"
-        b = P.Blob(kind, label)
-        want = b.bin.read_bytes()
-        meta = P.read_meta(b)
-        units = {}
-        for i in sorted(P.load_units(b, meta)):
-            im = Image.open(b.art / P.unit_name(b, i))
-            im.putpalette([rnd.randrange(256) for _ in range(48)])
+    with tempfile.TemporaryDirectory() as d:
+        tmp = clone_tree(Path(d))
+        for p in sorted((tmp / "assets/gfx/png").rglob("*.png")):
+            if p.parts[-2] not in ("screens", "tiles", "sprites", "frames") and not p.parent.name.startswith("obj_"):
+                continue
+            im = Image.open(p)
+            im.putpalette([rnd.randrange(256) for _ in range(768)])
             im.info.pop("transparency", None)
-            units[i] = im.tobytes()
-        ucols, urows = P.unit_geometry(meta)
-        w, h, pix = P.paste_units(units, ucols, urows)
-        raw = P.encode_sheet(pix, w, h, 4, meta["tiles_per_row"], meta["raw_size"])
-        got = P.C.compress(raw) + P.join_tail(meta) if b.compressed else raw
-        check(got == want, f"{label}: bytes depend on the PNG palette")
-
-
-def test_units_roundtrip_and_layout():
-    """sheet <-> 16x16 units: round trip, row-major unit order, sprite id = unit index, blank list syntax."""
-    rnd = random.Random(21)
-    raw = bytes(rnd.randrange(256) for _ in range(8192))
-    w, h, pix = P.decode_sheet(raw, 4, 16)
-    ucols, urows = P.unit_geometry({"bpp": 4, "tiles_per_row": 16, "raw_size": 8192})
-    check((ucols, urows) == (8, 8), "8192-byte blob = 8x8 units")
-    units = P.cut_units(pix, w, h, ucols, urows)
-    w2, h2, pix2 = P.paste_units(dict(enumerate(units)), ucols, urows)
-    check((w2, h2, pix2) == (w, h, pix), "units paste back into the sheet")
-    check(units[9][0:16] == bytes(pix[16 * 128 + 16:16 * 128 + 32]), "unit 9 = column 1, row 1 of the sheet")
-    # odd tile row count (e.g. 3 rows of 16 tiles) is padded to a full unit row
-    check(P.unit_geometry({"bpp": 4, "tiles_per_row": 16, "raw_size": 32 * 48}) == (8, 2), "odd tile rows round up")
-    for idxs in ({0, 1, 2, 5}, set(), {7}, set(range(64)), {3, 4, 10, 11, 12}):
-        check(P.parse_ranges(P.ranges_text(idxs)) == idxs, f"range text round trip {sorted(idxs)[:4]}")
-    # sprite id -> unit index (docs/formats/sprite-assembly.md): sheet block*128 px + (n >> 3) * 16, x = (n & 7) * 16
-    for tid in (0, 1, 8, 63, 64, 130, 255):
-        blk, n = (tid >> 6) & 3, tid & 63
-        x, y = (n & 7) * 16, blk * 128 + (n >> 3) * 16
-        check((y // 16) * 8 + x // 16 == tid & 0xFF, f"sprite id {tid:02X} is unit {tid & 0xFF}")
-
-
-def test_unit_sheet_view():
-    """pngsync sheet renders a blob from its units; the pixels equal the sheet decoded from the .bin."""
-    b = P.Blob("tiles", "sCompressedTiles_92D3AB")
-    img = P.render_unit_sheet(b)
-    raw, _ = P.read_raw(b)
-    w, h, pix = P.decode_sheet(raw, 4, 16)
-    check(img.size == (w, h), "unit sheet is 128x128")
-    big = P.render_unit_sheet(b, 2, grid=True)
-    check(big.size == (w * 2, h * 2), "scaled sheet")
+            im.save(p, "PNG")
+        check(P.cmd_check(ns(), tmp) == 0, "bytes do not depend on the PLTE of any composed image")
 
 
 def test_export_writes_palette():
-    """export in a scratch tree: PLTE = colours of the mapped sub-palette, sidecar keys, bytes unchanged."""
-    labels = ["sCompressedTiles_92D3AB"]
+    """export in a scratch tree: remainder sheet PLTE = colours of the mapped sub-palette, sidecar keys, sprite colour 0 transparent."""
     with tempfile.TemporaryDirectory() as d:
-        tmp = Path(d)
-        make_tree(tmp, labels)
-        shutil.copy(ROOT / "assets/gfx/palette_map.json", tmp / "assets/gfx/palette_map.json")
-        for pid in {P.palette_map()["blobs"][l]["palette"]["id"] for l in labels}:
-            shutil.copy(ROOT / "assets/gfx/palettes" / f"{pid}.json", tmp / "assets/gfx/palettes" / f"{pid}.json")
-        P.cmd_export(ns(label=labels), tmp)
-        b = P.Blob("tiles", labels[0], tmp)
+        tmp = clone_tree(Path(d), drop_sources=True)
+        P.export_composed(tmp, "us")
+        label = "sCompressedTiles_92D3AB"
+        b = P.Blob("tiles", label, tmp)
         meta = P.read_meta(b)
-        ent = P.palette_map()["blobs"][labels[0]]
+        ent = P.palette_map()["blobs"][label]
         check(meta["palette"] == {"id": ent["palette"]["id"], "sub": ent["palette"]["sub"]}, "sidecar palette")
         check(meta["palette_confidence"] == ent["confidence"], "sidecar confidence")
-        pal, _ = png_palette(next(b.art.glob("t_*.png")))
+        pal, _ = png_palette(b.art)
         check(pal[:16] == P.load_view_palette(meta["palette"], 4, tmp), "exported PLTE")
-        check(P.cmd_check(ns(label=labels), tmp) == 0, "check after export with palette")
+        pal, trns = png_palette(P.Blob("sprites", "Sprites_888000", tmp).art)
+        check(trns == 0, "sprite remainder sheets have transparent colour 0")
+        fpal, ftrns = png_palette(tmp / "assets/gfx/png/frames/obj_0000" / sorted(p.name for p in (tmp / "assets/gfx/png/frames/obj_0000").glob("f_*.png"))[0])
+        check(fpal[:128] == [c for p in PM.sprite_palettes(0) for c in p], "frame PLTE = day OBJ palette")
+        check(P.cmd_check(ns(), tmp) == 0, "check after export with palette")
+
+
+def test_sheet_command_matches_bins():
+    """pngsync sheet renders the sheet built from the composed sources: pixels equal the sheet decoded from the .bin."""
+    for label, kind in (("sCompressedTiles_92D3AB", "tiles"), ("Sprites_898000", "sprites")):
+        b = P.Blob(kind, label)
+        img = P.render_built_sheet(b)
+        raw, _ = P.read_raw(b)
+        w, h, pix = P.decode_sheet(raw, 4, 16)
+        check(img.size == (w, h), f"{label}: sheet size")
+        check(P.render_built_sheet(b, 2, grid=True).size == (w * 2, h * 2), f"{label}: scaled sheet")
 
 
 def main():
