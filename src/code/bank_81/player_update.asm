@@ -3912,7 +3912,7 @@ fPlayerInteraction0x53:
     LDX.W #$0000                                               ;81F808|A20000  |      ;
     LDY.W #$0000                                               ;81F80B|A00000  |      ;
     JSL.L fStoreTileOnFrontOfPlayerAtDistance                  ;81F80E|224ED181|81D14E;
-    %SetCurrentCarriedItemDirect(!EITEM_GOLDAXE)
+    %SetCurrentCarriedItemDirect(!CITEM_EGG)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     REP #$30                                                   ;81F82C|C230    |      ;

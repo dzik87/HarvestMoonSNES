@@ -36,6 +36,7 @@
 ; Carry items               $00091D
 !CITEM_NONE                 =   $00
 !CITEM_FISH                 =   $07
+!CITEM_EGG                  =   $14
 
 
 ; Weather forecast          $00098C

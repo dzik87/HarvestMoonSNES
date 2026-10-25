@@ -5278,7 +5278,7 @@ fAIAction0x34:
     CLC                                                        ;84AB04|18      |      ;
     ADC.W #$0001                                               ;84AB05|690100  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;84AB08|97CC    |0000CC;
-    %SetCurrentCarriedItemDirect(!EITEM_POTATOSEED)
+    %SetCurrentCarriedItemDirect(!CITEM_FISH)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     RTS                                                        ;84AB18|60      |      ;
  
