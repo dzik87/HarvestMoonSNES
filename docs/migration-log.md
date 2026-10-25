@@ -1,34 +1,33 @@
-# Dziennik migracji
+# Migration log
 
-## Stan wyjściowy (przed przebudową)
-- Źródłem prawdy był eksport z DiztinGUIsh 2.5.0.0 (`ASMUS` itd.), a `cleanup.bat` + parsery regexowe nadpisywały `ASM\SOURCE`.
-- Build US był bit-identyczny z oryginałem (MD5 `c9bf36a816b6d54aed79d43a6c45111a`), bez automatycznej weryfikacji.
-- Kod 65816 (US): ok. 38 tys. instrukcji; 1594 etykiet, z czego ok. 316 z „Unknown" w nazwie i 381 automatycznych.
+## Initial state (before the overhaul)
+- The source of truth was a DiztinGUIsh 2.5.0.0 export (`ASMUS` etc.), and `cleanup.bat` + regex parsers overwrote `ASM\SOURCE`.
+- The US build was bit-identical to the original (MD5 `c9bf36a816b6d54aed79d43a6c45111a`), with no automated verification.
+- 65816 code (US): about 38k instructions; 1594 labels, of which about 316 have "Unknown" in the name and 381 are automatic.
 
-## Zrobione
-| Faza | Opis | Weryfikacja |
+## Done
+| Phase | Description | Verification |
 |---|---|---|
-| 0 | `tools/build.py`, `tools/verify.py`, CI, `.gitattributes` | hash US zgodny |
-| 1a | przeniesienie plików do `src/` bez zmian treści | hash US zgodny |
-| 1b | podział banków 80–85 na moduły (konkatenacja == oryginał) | hash US zgodny |
-| 2 | skrypty AI (US): 7622 surowych adresów → etykiety (`<skrypt>_Lnnn`) | hash US zgodny |
-| 2c | skrypty AI (US) podzielone na 72 pliki per skrypt + 3 nagłówki banków (konkatenacja == oryginał) | hash US zgodny |
-| 2b | dokumentacja 90 komend AICMD z handlerów interpretera (`docs/ai/commands/*.yml` → `docs/ai/commands.md`) | wyrywkowa weryfikacja w kodzie; bez zmian w źródłach |
+| 0 | `tools/build.py`, `tools/verify.py`, CI, `.gitattributes` | US hash matches |
+| 1a | files moved into `src/` with unchanged content | US hash matches |
+| 1b | banks 80–85 split into modules (concatenation == original) | US hash matches |
+| 2 | AI scripts (US): 7622 raw addresses → labels (`<script>_Lnnn`) | US hash matches |
+| 2c | AI scripts (US) split into 72 per-script files + 3 bank headers (concatenation == original) | US hash matches |
+| 2b | documentation of 90 AICMD commands from the interpreter handlers (`docs/ai/commands/*.yml` → `docs/ai/commands.md`) | spot-checked against the code; no source changes |
 
-## Stan wersji regionalnych (z analizy przed migracją)
-| Region | Kod 80–84 | Uwagi |
+## Regional versions (from the pre-migration analysis)
+| Region | Code 80–84 | Notes |
 |---|---|---|
-| US | pełny, nazwany | baza |
-| EU | pełny eksport z Diz | bez nazw z US |
-| JP | bank 80 pełny, 81–84 częściowo | dialogi w AA–AC |
-| DE | brak (same `db`) | wymaga disassemblera od zera |
+| US | complete, named | base |
+| EU | full Diz export | without the US names |
+| JP | bank 80 complete, 81–84 partial | dialogs in AA–AC |
+| DE | none (only `db`) | needs a disassembly from scratch |
 
-Skrypty AI i dialogi istnieją w repo dla wszystkich czterech regionów; migracja etykiet (faza 2) objęła na razie tylko US.
-Narzędzie `tools/migration/ai_labels.py` jest przygotowane do użycia na pozostałych regionach po dodaniu ich buildów.
+AI scripts and dialogs exist in the repo for all four regions; label migration (phase 2) so far covers US only.
+`tools/migration/ai_labels.py` is ready to be used on the other regions once their builds are added.
 
-## Znane uwagi z analizy komend AICMD (do poprawek w commands.asm)
-- `AICMD0x26`/`0x27` emitują bajt `$28` (aliasy 0x28 w tablicy handlerów), nieużywane w skryptach US.
-- `0x42` ignoruje argument adresu i zawsze dodaje do `nMoney`; `0x41` ogranicza wynik do 0..999.
-- `0x14`/`0x23`: `aAISetMask` to maska 1<<n na flagach gry, nie maska przycisków.
-- Opisy w YAML nie mają polskich znaków diakrytycznych (do ujednolicenia przy redakcji).
-- Poziom pewności „probable" oznacza wnioskowanie z kodu, bez testu w emulatorze.
+## Findings from the AICMD analysis (to be fixed in commands.asm)
+- `AICMD0x26`/`0x27` emit the byte `$28` (aliases of 0x28 in the handler table) and are unused in US scripts.
+- `0x42` ignores the address argument and always adds to `nMoney`; `0x41` clamps the result to 0..999.
+- `0x14`/`0x23`: `aAISetMask` is a 1<<n mask on game flags, not a button mask.
+- "Probable" confidence means inferred from code, not tested in an emulator.

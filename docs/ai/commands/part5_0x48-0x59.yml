@@ -6,13 +6,13 @@
   confidence: confirmed
   length_bytes: 7
   params:
-    - {name: pAddress, offset: 1, size: 3, type: ram_ptr, meaning: "24-bitowy adres docelowy (little endian, bank w 3. bajcie)"}
-    - {name: n24Value, offset: 4, size: 3, type: n24, meaning: "wartosc 24-bitowa zapisywana pod [pAddress]: bajty 0-1 jako word, bajt 2 jako byte pod pAddress+2"}
-  summary: "Zapisuje wartosc 24-bit pod 24-bitowy adres (odpowiednik 0x47 SetValue8 dla n24)."
-  details: "Handler czyta adres do ptrTemp0x72 (word + bank), nastepnie word wartosci zapisuje przez STA [ptrTemp0x72] (16 bit) i bajt banku wartosci przez STA [ptrTemp0x72],Y z Y=2. Wskaznik ptrAIActionData przesuwa o 1+2+1+2+1 = 7. Nie blokuje, nie zmienia przeplywu. Komenda nie jest uzywana w zadnym skrypcie (US)."
+    - {name: pAddress, offset: 1, size: 3, type: ram_ptr, meaning: "24-bit target address (little endian, bank in the 3rd byte)"}
+    - {name: n24Value, offset: 4, size: 3, type: n24, meaning: "24-bit value written to [pAddress]: bytes 0-1 as a word, byte 2 as a byte at pAddress+2"}
+  summary: "Writes a 24-bit value to a 24-bit address (the n24 counterpart of 0x47 SetValue8)."
+  details: "The handler reads the address into ptrTemp0x72 (word + bank), then writes the value word with STA [ptrTemp0x72] (16-bit) and the value bank byte with STA [ptrTemp0x72],Y with Y=2. It advances ptrAIActionData by 1+2+1+2+1 = 7. It does not block and does not change the flow. The command is not used in any script (US)."
   ram_touched: [ptrAIActionData, ptrTemp0x72]
   calls: []
-  open_questions: "Makro nazywa oba argumenty nUnknown1/nUnknown2 - powinno byc (pAddress, n24Value). Nieuzywana w skryptach, wiec brak potwierdzenia praktycznego."
+  open_questions: "The macro names both arguments nUnknown1/nUnknown2 - it should be (pAddress, n24Value). Not used in scripts, so there is no practical confirmation."
 
 - opcode: 0x49
   macro: AICMD0x49
@@ -22,12 +22,12 @@
   confidence: probable
   length_bytes: 3
   params:
-    - {name: pPointerB3, offset: 1, size: 2, type: script_ptr, meaning: "16-bitowy wskaznik (bank $B3) do tabeli danych sprite/flip indeksowanej kierunkiem; trafia do obiektu AI +0x33 (pDataAddress)"}
-  summary: "Ustawia tabele danych sprite obiektu AI i od razu wybiera wpis zgodny z aktualnym kierunkiem gracza (wariant 0x2B z indeksem = strcPlayer.direction)."
-  details: "Zapisuje pPointerB3 do obiektu AI +0x33. Do obiektu +0x02 (nDataIndex) wpisuje mlodszy bajt strcPlayer.direction. Ustawia flagi obiektu +0x01 |= 0x03. Woła fAI_Unknown848895 z ptrTemp0x72 = pDataAddress:B3, co ladowuje z tabeli (3 bajty na wpis, index*3) word do obiektu +0x16 (spriteTableIdx) oraz bajt*64 do +0x14 (flip). Na koncu obiekt +0x10 += 1 (przerwanie wykonywania skryptu do nastepnej klatki). Uzywane w skryptach psa/konia (B3 General) przed 0x2E i petla UpdateDog. Roznica wzgledem 0x2B - indeks pochodzi z kierunku gracza, nie z argumentu."
+    - {name: pPointerB3, offset: 1, size: 2, type: script_ptr, meaning: "16-bit pointer (bank $B3) to a sprite/flip data table indexed by direction; stored in the AI object +0x33 (pDataAddress)"}
+  summary: "Sets the sprite data table of the AI object and immediately selects the entry matching the player's current direction (the 0x2B variant with index = strcPlayer.direction)."
+  details: "Writes pPointerB3 to the AI object +0x33. Writes the low byte of strcPlayer.direction to the object +0x02 (nDataIndex). Sets the object flags +0x01 |= 0x03. Calls fAI_Unknown848895 with ptrTemp0x72 = pDataAddress:B3, which loads from the table (3 bytes per entry, index*3) a word into the object +0x16 (spriteTableIdx) and a byte*64 into +0x14 (flip). At the end the object +0x10 += 1 (script execution is interrupted until the next frame). Used in dog/horse scripts (B3 General) before 0x2E and the UpdateDog loop. Difference from 0x2B - the index comes from the player's direction, not from an argument."
   ram_touched: [ptrAIActionData, ptrAIUnknown0xCC, strcPlayer.direction, ptrTemp0x72]
   calls: [fAI_Unknown848895]
-  open_questions: "Dokladne znaczenie bitow flag +0x01 (0x03) nie jest w pelni ustalone - z fAI_Unknown848286 wynika, ze bit0 = obiekt rysowany/aktywny, bit1/bit2 wybieraja wariant aktualizacji obiektu. Nazwa jest propozycja opisowa."
+  open_questions: "The exact meaning of the +0x01 flag bits (0x03) is not fully established - fAI_Unknown848286 indicates that bit0 = object drawn/active, bit1/bit2 select the object update variant. The name is a descriptive proposal."
 
 - opcode: 0x4A
   macro: AICMD0x4A
@@ -37,11 +37,11 @@
   confidence: probable
   length_bytes: 1
   params: []
-  summary: "Jesli gracz stoi przy obiekcie i nacisnie A (z pustymi rekami), podnosi obiekt - dezaktywuje go i daje graczowi nosony przedmiot id 8."
-  details: "Przesuwa wskaznik o 1 i sprawdza warunki (kazdy niespelniony - wyjscie z obj+0x10 += 1, czyli oddanie klatki): flaga bliskosci obj+0x0C != 0 (ustawiana przez fGameEngine_DirectionHandler83AD91 gdy gracz jest w promieniu 0x19 px), akcja gracza nie jest USINGTOOL/SHOWTOOL/WHISTLEHORSE/WHISTLEDOG/17, strcPlayer.flags nie ma bitu 0x0004 (EATINGMEAL) ani DOGHUGGING, daily4 bity 0x0006 wyzerowane, strcJoypad1.newInput ma A, strcPlayerData.carryItemId == 0. Gdy wszystko OK - obj+0x00 = 0 (obiekt nieaktywny, skrypt przestaje byc wykonywany), obj+0x01 |= 0x40 (ukryty), obj+0x10 += 1, carryItemId = 8 (makro SetCurrentCarriedItemDirect(!EITEM_TURNIPSEED) - wartosc z przestrzeni carryItemId, nazwa EITEM jest mylaca), akcja gracza = PACTION_ITEMONHAND. W skryptach uzywana w petli '4A; Jump na 4A' (B3 General L038, B4 WaterImp)."
+  summary: "If the player stands next to the object and presses A (with empty hands), picks the object up - deactivates it and gives the player the carried item id 8."
+  details: "Advances the pointer by 1 and checks the conditions (any unmet condition exits with obj+0x10 += 1, i.e. yields the frame): proximity flag obj+0x0C != 0 (set by fGameEngine_DirectionHandler83AD91 when the player is within a radius of 0x19 px), the player action is not USINGTOOL/SHOWTOOL/WHISTLEHORSE/WHISTLEDOG/17, strcPlayer.flags does not have bit 0x0004 (EATINGMEAL) or DOGHUGGING, daily4 bits 0x0006 are cleared, strcJoypad1.newInput has A, strcPlayerData.carryItemId == 0. When everything is OK - obj+0x00 = 0 (object inactive, the script stops being executed), obj+0x01 |= 0x40 (hidden), obj+0x10 += 1, carryItemId = 8 (macro SetCurrentCarriedItemDirect(!EITEM_TURNIPSEED) - a value from the carryItemId space, the EITEM name is misleading), player action = PACTION_ITEMONHAND. Used in scripts in the loop '4A; Jump to 4A' (B3 General L038, B4 WaterImp)."
   ram_touched: [ptrAIActionData, ptrAIUnknown0xCC, strcPlayer.action, strcPlayer.flags, strcFlags.daily4, strcJoypad1.newInput, strcPlayerData.carryItemId]
   calls: []
-  open_questions: "Id przedmiotu 8 w carryItemId nie ma nazwy w CITEM_* (jest tylko CITEM_FISH=7); makro uzywa !EITEM_TURNIPSEED z innej przestrzeni - do poprawy na stala CITEM. Co fizycznie podnosi (skrypty B4 0x12 / WaterImp) nie zostalo ustalone."
+  open_questions: "Item id 8 in carryItemId has no name in CITEM_* (only CITEM_FISH=7 exists); the macro uses !EITEM_TURNIPSEED from a different space - should be fixed to a CITEM constant. What is physically picked up (scripts B4 0x12 / WaterImp) has not been established."
 
 - opcode: 0x4B
   macro: AICMD0x4B
@@ -51,14 +51,14 @@
   confidence: probable
   length_bytes: 6
   params:
-    - {name: nTileId, offset: 1, size: 1, type: n8, meaning: "id kafla wpisywanego do mapy obiektow biezacego obszaru (np. $C3)"}
-    - {name: nPosX, offset: 2, size: 2, type: n16, meaning: "pozycja X w pikselach (kafel = 16 px, X>>4)"}
-    - {name: nPosY, offset: 4, size: 2, type: n16, meaning: "pozycja Y w pikselach (Y & $FFF0 jako wiersz)"}
-  summary: "Podmienia kafel w biezacej mapie obiektow (sCurrentObjectMap) na podanych wspolrzednych."
-  details: "Handler odklada na stos kafel, X, Y, odtwarza je do A/X/Y i woła fMap_UpdateCurrentTilemap, ktore przez fObjectEngine_ConvertCoordsToOffset liczy offset (zalezny od strcDialogDisplay.mapMultiWidth) i zapisuje bajt do sCurrentObjectMap ($0009B6 + offset). Nie blokuje. Odpowiednik 0x58 ReplaceFarmTile, ale dla mapy biezacej a nie farmy. Uzycie w B4 skrypt 0x14 (po 0x2A, przed 0x3E SetCarryItem)."
+    - {name: nTileId, offset: 1, size: 1, type: n8, meaning: "id of the tile written to the object map of the current area (e.g. $C3)"}
+    - {name: nPosX, offset: 2, size: 2, type: n16, meaning: "X position in pixels (tile = 16 px, X>>4)"}
+    - {name: nPosY, offset: 4, size: 2, type: n16, meaning: "Y position in pixels (Y & $FFF0 as the row)"}
+  summary: "Replaces a tile in the current object map (sCurrentObjectMap) at the given coordinates."
+  details: "The handler pushes the tile, X, Y onto the stack, restores them to A/X/Y and calls fMap_UpdateCurrentTilemap, which uses fObjectEngine_ConvertCoordsToOffset to compute the offset (dependent on strcDialogDisplay.mapMultiWidth) and writes the byte to sCurrentObjectMap ($0009B6 + offset). Does not block. Counterpart of 0x58 ReplaceFarmTile, but for the current map rather than the farm. Used in B4 script 0x14 (after 0x2A, before 0x3E SetCarryItem)."
   ram_touched: [ptrAIActionData, sCurrentObjectMap, strcDialogDisplay.mapMultiWidth]
   calls: [fMap_UpdateCurrentTilemap, fObjectEngine_ConvertCoordsToOffset]
-  open_questions: "Dokladna semantyka sCurrentObjectMap (jaka warstwa/mapa) nie sprawdzona; wynik zalezy od mapMultiWidth ustawionego wczesniej (0x58 ustawia go na 4 i nie przywraca)."
+  open_questions: "The exact semantics of sCurrentObjectMap (which layer/map) were not checked; the result depends on mapMultiWidth set earlier (0x58 sets it to 4 and does not restore it)."
 
 - opcode: 0x4C
   macro: AICMD0x4C
@@ -68,11 +68,11 @@
   confidence: probable
   length_bytes: 1
   params: []
-  summary: "Ustawia bit 0x02 w bajcie stanu obiektu AI (+0x00); obiekt przestaje blokowac gracza w detekcji kolizji."
-  details: "Wykonuje obj+0x00 |= 0x02. W fGameEngine_DirectionHandler83AD91 (kolizja gracza z obiektami AI) obiekt z tym bitem nadal dostaje flage bliskosci +0x0C = 1, ale nie ustawia n16Unk8C (znacznik blokady ruchu), wiec gracz moze przez niego przejsc. Nie blokuje wykonywania skryptu, nie zmienia przeplywu. Uzywana w skryptach kur (B3 General, po 0x2E)."
+  summary: "Sets bit 0x02 in the AI object state byte (+0x00); the object no longer blocks the player in collision detection."
+  details: "Executes obj+0x00 |= 0x02. In fGameEngine_DirectionHandler83AD91 (player collision with AI objects) an object with this bit still receives the proximity flag +0x0C = 1, but does not set n16Unk8C (movement block marker), so the player can pass through it. Does not block script execution, does not change the flow. Used in chicken scripts (B3 General, after 0x2E)."
   ram_touched: [ptrAIActionData, ptrAIUnknown0xCC]
   calls: []
-  open_questions: "Wniosek o 'nieblokujacym' wynika z analizy fragmentu 83AE5B-83AE7F; nie zweryfikowano pozostalych miejsc czytajacych bit 0x02 obj+0x00."
+  open_questions: "The conclusion that it is 'non-blocking' comes from analysis of the fragment 83AE5B-83AE7F; other places reading bit 0x02 of obj+0x00 were not verified."
 
 - opcode: 0x4D
   macro: AICMD0x4D_JumpIfBlueFeatherUsed
@@ -82,12 +82,12 @@
   confidence: confirmed
   length_bytes: 3
   params:
-    - {name: pNextAction, offset: 1, size: 2, type: script_ptr, meaning: "adres skoku (ten sam bank co skrypt), wykonywany gdy gracz uzyl Niebieskiego Piora przy obiekcie"}
-  summary: "Skok warunkowy: jesli gracz jest przy obiekcie i uzyl Niebieskiego Piora (flaga daily3 0x0040), obiekt odwraca sie do gracza i skrypt skacze pod pNextAction."
-  details: "Warunki: obj+0x0C != 0 (gracz w poblizu), strcPlayer.action != USINGTOOL, strcFlags.daily3 & 0x0040 (ustawiana tylko przez fToolUsedAction0x18_BlueFeather, zerowana co klatke w petli AI). Jesli nie spelnione - przesuwa wskaznik o 3 (pomija adres) i kontynuuje bez oddawania klatki. Jesli spelnione - ptrAIActionData = pNextAction; obj+0x08 = obj+0x07, obj+0x03 = obj+0x04 = obj+0x0C = 0; obj+0x02 (kierunek/indeks) = strcPlayer.direction XOR 1 (obrot twarza do gracza); przeladowuje sprite przez fAI_Unknown848895 z tabeli pDataAddress (+0x33, bank B3); obj+0x01 |= 0x14 (zatrzymanie ruchu); obj+0x10 += 1 (oddanie klatki). Uzywana 133 razy, glownie w skryptach NPC (np. B3 skrypt 0x01) przed dialogiem."
+    - {name: pNextAction, offset: 1, size: 2, type: script_ptr, meaning: "jump address (same bank as the script), executed when the player used the Blue Feather next to the object"}
+  summary: "Conditional jump: if the player is next to the object and used the Blue Feather (flag daily3 0x0040), the object turns to face the player and the script jumps to pNextAction."
+  details: "Conditions: obj+0x0C != 0 (player nearby), strcPlayer.action != USINGTOOL, strcFlags.daily3 & 0x0040 (set only by fToolUsedAction0x18_BlueFeather, cleared every frame in the AI loop). If not met - advances the pointer by 3 (skips the address) and continues without yielding the frame. If met - ptrAIActionData = pNextAction; obj+0x08 = obj+0x07, obj+0x03 = obj+0x04 = obj+0x0C = 0; obj+0x02 (direction/index) = strcPlayer.direction XOR 1 (turns face to the player); reloads the sprite via fAI_Unknown848895 from the pDataAddress table (+0x33, bank B3); obj+0x01 |= 0x14 (stops movement); obj+0x10 += 1 (yields the frame). Used 133 times, mainly in NPC scripts (e.g. B3 script 0x01) before a dialog."
   ram_touched: [ptrAIActionData, ptrAIUnknown0xCC, strcPlayer.action, strcPlayer.direction, strcFlags.daily3]
   calls: [fAI_Unknown848895]
-  open_questions: "Znaczenie bajtow obiektu +0x03/+0x04/+0x07/+0x08 (prawdopodobnie liczniki/kierunek ruchu NPC) nie ustalone."
+  open_questions: "The meaning of the object bytes +0x03/+0x04/+0x07/+0x08 (probably NPC movement counters/direction) has not been established."
 
 - opcode: 0x4E
   macro: AICMD0x4E_EnableTileInteractions
@@ -97,8 +97,8 @@
   confidence: confirmed
   length_bytes: 1
   params: []
-  summary: "Czysci flage daily2 0x0008 - przywraca interakcje z kaflami wylaczone przez 0x40."
-  details: "Wykonuje UnsetFlag(daily2, 0x0008). Flaga ta jest ustawiana przez 0x40 DisableTileInteractions i sprawdzana m.in. w fUnknown_82AC61 (bank 82, obsluga obiektow/kafli pod kursorem) oraz w sound.asm. Nie blokuje. Uzywana w B4 na koncu sekwencji (po 0x07 SetPlayerDirection)."
+  summary: "Clears flag daily2 0x0008 - restores tile interactions disabled by 0x40."
+  details: "Executes UnsetFlag(daily2, 0x0008). This flag is set by 0x40 DisableTileInteractions and checked, among others, in fUnknown_82AC61 (bank 82, handling of objects/tiles under the cursor) and in sound.asm. Does not block. Used in B4 at the end of a sequence (after 0x07 SetPlayerDirection)."
   ram_touched: [ptrAIActionData, strcFlags.daily2]
   calls: []
   open_questions: null
@@ -111,11 +111,11 @@
   confidence: confirmed
   length_bytes: 1
   params: []
-  summary: "Ustawia flage daily4 0x8000, ktora blokuje uzycie narzedzia przyciskiem Y."
-  details: "Wykonuje SetFlag(daily4, 0x8000). Jedyny konsument: fInput_SetPlayerAction0x0A (input.asm, 84CDBF) - gdy flaga ustawiona, nacisniecie Y nie uruchamia akcji USINGTOOL. Nie blokuje. Uzywana 27 razy, zwykle w parze '4F; 50' na poczatku eventow."
+  summary: "Sets flag daily4 0x8000, which blocks tool use with the Y button."
+  details: "Executes SetFlag(daily4, 0x8000). The only consumer: fInput_SetPlayerAction0x0A (input.asm, 84CDBF) - when the flag is set, pressing Y does not start the USINGTOOL action. Does not block. Used 27 times, usually in the pair '4F; 50' at the start of events."
   ram_touched: [ptrAIActionData, strcFlags.daily4]
   calls: []
-  open_questions: "Nie znaleziono miejsca czyszczacego bit 0x8000 daily4 (prawdopodobnie reset dnia/obszaru). Bezposrednio po RTS handlera (84BB65-84BBD9) lezy nieoznaczony, nieosiagalny kod (odlozenie toolEquipped/toolSecond do strcShedItems i wyzerowanie ich) - nie nalezy do komendy 0x4F, brak referencji do niego; osierocona rutyna do osobnej etykiety lub usuniecia."
+  open_questions: "No place that clears bit 0x8000 of daily4 was found (probably a day/area reset). Immediately after the handler's RTS (84BB65-84BBD9) lies unlabeled, unreachable code (storing toolEquipped/toolSecond into strcShedItems and zeroing them) - it does not belong to command 0x4F and has no references to it; an orphaned routine, to be given its own label or removed."
 
 - opcode: 0x50
   macro: AICMD0x50
@@ -125,11 +125,11 @@
   confidence: probable
   length_bytes: 1
   params: []
-  summary: "Odklada to, co gracz niesie lub przytula (przedmiot, kura, pies) i resetuje sprite gracza do kierunku."
-  details: "Gdy carryItemId == 0x25 lub 0x26 (kura): pobiera dane kury indeks = nAiArg - 0x24 (fGameEngine_GetChickenData), ustawia chicken.mapID = 0x28, czysci CHICKENSTATUS_HELDBYPLAYER (0x20), wpisuje pozycje z aGameEngine_AddChickenPositionsData[idx*4] (X, +0x10) i [idx*4+2] (Y), zeruje carryItemId. Dla innego niesionego przedmiotu: tylko zeruje carryItemId. Gdy carryItemId == 0 i ustawiona PFLAGS_DOGHUGGING: czysci flage, ustawia nDogAreaId = bajt z $7F1F19, nDogX = 0x0078, nDogY = 0x01A8. We wszystkich galeziach z niesionym przedmiotem lub kura oraz z psem ustawia strcObjectData.spriteIdx = strcPlayer.direction. Brak animacji, bez oddawania klatki. Uzywana 66 razy (poczatek eventow)."
+  summary: "Puts down whatever the player is carrying or hugging (item, chicken, dog) and resets the player sprite to the direction."
+  details: "When carryItemId == 0x25 or 0x26 (chicken): fetches the chicken data with index = nAiArg - 0x24 (fGameEngine_GetChickenData), sets chicken.mapID = 0x28, clears CHICKENSTATUS_HELDBYPLAYER (0x20), writes the position from aGameEngine_AddChickenPositionsData[idx*4] (X, +0x10) and [idx*4+2] (Y), zeroes carryItemId. For any other carried item: only zeroes carryItemId. When carryItemId == 0 and PFLAGS_DOGHUGGING is set: clears the flag, sets nDogAreaId = the byte from $7F1F19, nDogX = 0x0078, nDogY = 0x01A8. In all branches with a carried item or chicken and with the dog it sets strcObjectData.spriteIdx = strcPlayer.direction. No animation, does not yield the frame. Used 66 times (start of events)."
   ram_touched: [ptrAIActionData, strcPlayerData.carryItemId, strcPlayerData.nAiArg, strcPlayer.flags, strcPlayer.direction, strcObjectData.spriteIdx, nDogAreaId, nDogX, nDogY, nCurrentSeasonID, strcChickenData]
   calls: [fGameEngine_GetChickenData]
-  open_questions: "nDogAreaId jest wypelniane bajtem z nCurrentSeasonID ($7F1F19) - albo etykieta RAM jest bledna, albo to rzeczywiscie niezwykle przypisanie; do weryfikacji. Wartosc mapID kury 0x28 przyjeta jako id obszaru kurnika (nie sprawdzone w enumach)."
+  open_questions: "nDogAreaId is filled with the byte from nCurrentSeasonID ($7F1F19) - either the RAM label is wrong, or this is indeed an unusual assignment; to be verified. The chicken mapID value 0x28 is assumed to be the chicken coop area id (not checked in the enums)."
 
 - opcode: 0x51
   macro: AICMD0x51
@@ -139,11 +139,11 @@
   confidence: probable
   length_bytes: 1
   params: []
-  summary: "Wariant 0x50: oddaje kure do kurnika, usuwa carry 0x29 i puszcza psa, ale nie rusza innych przedmiotow i nie resetuje sprite'a gracza."
-  details: "carryItemId 0x25/0x26: ta sama obsluga kury co w 0x50 (mapID 0x28, czysci flage 0x20, pozycja z tabeli, carryItemId = 0). carryItemId == 0x29: tylko zeruje carryItemId. Inny niesiony przedmiot: nic nie robi. carryItemId == 0 i PFLAGS_DOGHUGGING: czysci flage, ustawia nDogAreaId/nDogX/nDogY jak w 0x50. Nie ustawia strcObjectData.spriteIdx. Uzyta raz (B4 A62E, w parze '4F; 51')."
+  summary: "Variant of 0x50: returns the chicken to the coop, removes carry 0x29 and lets go of the dog, but does not touch other items and does not reset the player sprite."
+  details: "carryItemId 0x25/0x26: same chicken handling as in 0x50 (mapID 0x28, clears flag 0x20, position from the table, carryItemId = 0). carryItemId == 0x29: only zeroes carryItemId. Any other carried item: does nothing. carryItemId == 0 and PFLAGS_DOGHUGGING: clears the flag, sets nDogAreaId/nDogX/nDogY as in 0x50. Does not set strcObjectData.spriteIdx. Used once (B4 A62E, in the pair '4F; 51')."
   ram_touched: [ptrAIActionData, strcPlayerData.carryItemId, strcPlayerData.nAiArg, strcPlayer.flags, nDogAreaId, nDogX, nDogY, nCurrentSeasonID, strcChickenData]
   calls: [fGameEngine_GetChickenData]
-  open_questions: "Co oznacza carryItemId 0x29 (nie ma w enumach CITEM) i dlaczego jest zerowany bez zmiany sprite'a - nieustalone. Nazwa propozycja."
+  open_questions: "What carryItemId 0x29 means (it is not in the CITEM enums) and why it is zeroed without changing the sprite - not established. The name is a proposal."
 
 - opcode: 0x52
   macro: AICMD0x52
@@ -153,11 +153,11 @@
   confidence: probable
   length_bytes: 1
   params: []
-  summary: "Jak 0x4A (podniesienie obiektu przyciskiem A przy obiekcie), ale zamiast nadawac przedmiot ustawia flage daily4 0x0002 uruchamiajaca event po animacji podnoszenia."
-  details: "Te same warunki wejsciowe co w 0x4A z dwiema roznicami: nie sprawdza PACTION_17, wymaga PFLAGS_EATINGMEAL=0, DOGHUGGING=0, carryItemId == 0, daily4 & 0x0006 == 0, nacisniete A, obj+0x0C != 0. Przy spelnieniu: obj+0x00 = 0, obj+0x01 |= 0x40 (obiekt znika), obj+0x10 += 1, daily4 |= 0x0002. Nie ustawia akcji gracza ani carryItemId. Flage odczytuje fPlayerAction0x1A (player_actions.asm 81C0B5): po animacji (sprite 0xF2+kierunek) przy daily4 & 0x0004 == 0 woła AIExecute(arg 0x14, skrypt 0x45, sub 0), czyli uruchamia skrypt AI 0x45 (B5). Uzyta raz (B5 skrypt 0x45 L018)."
+  summary: "Like 0x4A (picking up an object with the A button next to it), but instead of granting an item it sets flag daily4 0x0002, which triggers an event after the pick-up animation."
+  details: "The same entry conditions as in 0x4A with two differences: it does not check PACTION_17, it requires PFLAGS_EATINGMEAL=0, DOGHUGGING=0, carryItemId == 0, daily4 & 0x0006 == 0, A pressed, obj+0x0C != 0. When met: obj+0x00 = 0, obj+0x01 |= 0x40 (the object disappears), obj+0x10 += 1, daily4 |= 0x0002. It does not set the player action or carryItemId. The flag is read by fPlayerAction0x1A (player_actions.asm 81C0B5): after the animation (sprite 0xF2+direction), when daily4 & 0x0004 == 0, it calls AIExecute(arg 0x14, script 0x45, sub 0), i.e. it starts AI script 0x45 (B5). Used once (B5 script 0x45 L018)."
   ram_touched: [ptrAIActionData, ptrAIUnknown0xCC, strcPlayer.action, strcPlayer.flags, strcFlags.daily4, strcJoypad1.newInput, strcPlayerData.carryItemId]
   calls: []
-  open_questions: "Nie ustalono co fizycznie podnosi gracz w skrypcie 0x45 ani kto ustawia akcje 0x1A po tej komendzie. Nazwa propozycja opisowa."
+  open_questions: "It was not established what the player physically picks up in script 0x45, nor who sets action 0x1A after this command. The name is a descriptive proposal."
 
 - opcode: 0x53
   macro: AICMD0x53
@@ -167,11 +167,11 @@
   confidence: probable
   length_bytes: 1
   params: []
-  summary: "Jak 0x52, ale ustawia flage daily4 0x0004 (wybiera drugi wariant eventu po podniesieniu)."
-  details: "Identyczne warunki jak 0x52. Przy spelnieniu: obj+0x00 = 0, obj+0x01 |= 0x40, obj+0x10 += 1, daily4 |= 0x0004. fPlayerAction0x1A przy daily4 & 0x0004 uruchamia AIExecute(arg 0x15, skrypt 0x45, sub 3) zamiast sub 0, po czym czysci daily4 0x0006. Uzyta raz (B5 skrypt 0x45 L061)."
+  summary: "Like 0x52, but sets flag daily4 0x0004 (selects the second event variant after the pick-up)."
+  details: "Identical conditions to 0x52. When met: obj+0x00 = 0, obj+0x01 |= 0x40, obj+0x10 += 1, daily4 |= 0x0004. When daily4 & 0x0004, fPlayerAction0x1A starts AIExecute(arg 0x15, script 0x45, sub 3) instead of sub 0, and then clears daily4 0x0006. Used once (B5 script 0x45 L061)."
   ram_touched: [ptrAIActionData, ptrAIUnknown0xCC, strcPlayer.action, strcPlayer.flags, strcFlags.daily4, strcJoypad1.newInput, strcPlayerData.carryItemId]
   calls: []
-  open_questions: "Jak w 0x52 - tresc eventu skryptu 0x45 sub 3 nie przeanalizowana."
+  open_questions: "As in 0x52 - the event content of script 0x45 sub 3 has not been analyzed."
 
 - opcode: 0x54
   macro: AICMD0x54_ShowDialog
@@ -181,13 +181,13 @@
   confidence: probable
   length_bytes: 4
   params:
-    - {name: nDialogId, offset: 1, size: 2, type: n16, meaning: "indeks dialogu przekazywany w X do fDialog_DialogHandler"}
-    - {name: nUnknown2, offset: 3, size: 1, type: unknown, meaning: "zapisywany do strcDialogDisplay.dialogUnk191 (w skryptach zawsze $01)"}
-  summary: "Wyswietla dialog w trybie 6 obslugi wejscia (zamyka sie samoczynnie po zakonczeniu, bez wejscia gracza) - wariant 0x1C/0x1D."
-  details: "Identyczny z 0x1C/0x1D poza: strcDialogDisplay.mapUnk19A = 6 (zamiast 2) i dodatkowo zerowanie $09B1 (16 bit). W fInput_Handler tryb 6 (fInput_Handler_case06): po ustawieniu flagi ENDDIALOG zlicza klatki w $09B1 do 0x78 (120), wywoluje fDialog_Unknown_8393F9, ustawia mapUnk19A i maskuje przycisk A - czyli dialog zamyka sie sam po ok. 2 s. Po wywolaniu fDialog_DialogHandler obj+0x10 += 1 (oddanie klatki). Uzywana 37 razy w B5 (sceny/festiwale)."
+    - {name: nDialogId, offset: 1, size: 2, type: n16, meaning: "dialog index passed in X to fDialog_DialogHandler"}
+    - {name: nUnknown2, offset: 3, size: 1, type: unknown, meaning: "stored to strcDialogDisplay.dialogUnk191 (always $01 in scripts)"}
+  summary: "Shows a dialog in input handler mode 6 (closes by itself when finished, without player input) - a variant of 0x1C/0x1D."
+  details: "Identical to 0x1C/0x1D except: strcDialogDisplay.mapUnk19A = 6 (instead of 2) and additionally zeroing of $09B1 (16-bit). In fInput_Handler mode 6 (fInput_Handler_case06): after the ENDDIALOG flag is set, it counts frames in $09B1 up to 0x78 (120), calls fDialog_Unknown_8393F9, sets mapUnk19A and masks the A button - so the dialog closes by itself after about 2 s. After calling fDialog_DialogHandler, obj+0x10 += 1 (yields the frame). Used 37 times in B5 (scenes/festivals)."
   ram_touched: [ptrAIActionData, strcDialogDisplay.dialogUnk191, strcDialogDisplay.mapUnk19A, strcDialogDisplay.dialogId, strcDialogDisplay.dialogFlags, "$09B1"]
   calls: [fDialog_DialogHandler]
-  open_questions: "Znaczenie nUnknown2 (dialogUnk191) nadal nieznane - w dialog.asm modyfikowane w kilku miejscach. Nazwa 'AutoClose' wynika z analizy case06 w input.asm; nie potwierdzono w grze."
+  open_questions: "The meaning of nUnknown2 (dialogUnk191) is still unknown - it is modified in several places in dialog.asm. The name 'AutoClose' comes from analysis of case06 in input.asm; not confirmed in game."
 
 - opcode: 0x55
   macro: AICMD0x55_JumpIfFlagNotSet
@@ -197,11 +197,11 @@
   confidence: confirmed
   length_bytes: 7
   params:
-    - {name: pAddress, offset: 1, size: 3, type: ram_ptr, meaning: "24-bitowy adres 16-bitowego slowa flag (np. strcFlags.event6)"}
-    - {name: nFlagsIndex, offset: 4, size: 1, type: flag, meaning: "numer bitu 0-15 (maska z aAICheckFlags: 1<<n)"}
-    - {name: pNextAction, offset: 5, size: 2, type: script_ptr, meaning: "adres skoku (ten sam bank co skrypt), gdy bit jest wyzerowany"}
-  summary: "Skacze pod pNextAction, jesli bit nFlagsIndex w slowie pod pAddress NIE jest ustawiony (negacja 0x14 JumpIfFlagSet)."
-  details: "Czyta adres do ptrTemp0x72, indeks bitu przez tabele aAICheckFlags (identyczna z aAISetMask uzywana przez 0x14), wykonuje LDA [ptrTemp0x72] AND maska. Jesli wynik != 0 - przesuwa wskaznik o 7 (pomija adres skoku, nastepna komenda); jesli == 0 - ptrAIActionData = pNextAction. Nie blokuje. Uzywana 34 razy (strcFlags.event1/event2/event6/unknown1)."
+    - {name: pAddress, offset: 1, size: 3, type: ram_ptr, meaning: "24-bit address of a 16-bit flag word (e.g. strcFlags.event6)"}
+    - {name: nFlagsIndex, offset: 4, size: 1, type: flag, meaning: "bit number 0-15 (mask from aAICheckFlags: 1<<n)"}
+    - {name: pNextAction, offset: 5, size: 2, type: script_ptr, meaning: "jump address (same bank as the script), when the bit is cleared"}
+  summary: "Jumps to pNextAction if bit nFlagsIndex in the word at pAddress is NOT set (negation of 0x14 JumpIfFlagSet)."
+  details: "Reads the address into ptrTemp0x72, the bit index via the aAICheckFlags table (identical to aAISetMask used by 0x14), executes LDA [ptrTemp0x72] AND mask. If the result != 0 - advances the pointer by 7 (skips the jump address, next command); if == 0 - ptrAIActionData = pNextAction. Does not block. Used 34 times (strcFlags.event1/event2/event6/unknown1)."
   ram_touched: [ptrAIActionData, ptrTemp0x72, strcVariables.n16Temp1]
   calls: []
   open_questions: null
@@ -214,8 +214,8 @@
   confidence: confirmed
   length_bytes: 1
   params: []
-  summary: "Jesli gracz ma wyposazone narzedzie, uruchamia jego uzycie (animacja i efekt), tak jak po nacisnieciu Y."
-  details: "Gdy strcPlayerData.toolEquipped != 0: akcja gracza = PACTION_USINGTOOL i JSL fToolUsedAnimationHandler. Handler animacji sprawdza PFLAGS_OUTOFSTAMINA (jesli tak - sprite 0x4D i PACTION_TIRED), w przeciwnym razie przez aToolUsedAnimationTable wywoluje rutyne dla biezacego narzedzia. Gdy brak narzedzia nic nie robi. Nie oddaje klatki. Uzywana 99 razy (sceny z uzyciem narzedzia, np. podlewanie, kopanie)."
+  summary: "If the player has a tool equipped, starts its use (animation and effect), as after pressing Y."
+  details: "When strcPlayerData.toolEquipped != 0: player action = PACTION_USINGTOOL and JSL fToolUsedAnimationHandler. The animation handler checks PFLAGS_OUTOFSTAMINA (if set - sprite 0x4D and PACTION_TIRED), otherwise it calls the routine for the current tool via aToolUsedAnimationTable. When there is no tool it does nothing. Does not yield the frame. Used 99 times (scenes with tool use, e.g. watering, digging)."
   ram_touched: [ptrAIActionData, strcPlayerData.toolEquipped, strcPlayer.action, strcPlayerData.unkCounter91B]
   calls: [fToolUsedAnimationHandler]
   open_questions: null
@@ -228,9 +228,9 @@
   confidence: confirmed
   length_bytes: 2
   params:
-    - {name: nStamina, offset: 1, size: 1, type: n8, meaning: "wartosc ze znakiem (int8) dodawana do aktualnej energii gracza; ujemna zmniejsza, w skryptach uzywane dodatnie 20 i 30"}
-  summary: "Zmienia energie gracza o podana wartosc ze znakiem przez fPlayerEnergyHandler."
-  details: "Wartosc trafia w A do fPlayerEnergyHandler (sign-extended). Procedura: pomijana, gdy daily4 & 0x0008; energy ($918) += wartosc; <= 0 - energy = 0, PFLAGS_OUTOFSTAMINA, sprite 0x4D, PACTION_TIRED; >= stamina ($917, maksimum) - energy = stamina i czyszczenie OUTOFSTAMINA; w przeciwnym razie zwykle dodanie. Aktualizuje tez $096C (liczba/ikona paska energii). Nie blokuje."
+    - {name: nStamina, offset: 1, size: 1, type: n8, meaning: "signed value (int8) added to the player's current energy; a negative value decreases it, scripts use positive 20 and 30"}
+  summary: "Changes the player's energy by the given signed value via fPlayerEnergyHandler."
+  details: "The value goes in A to fPlayerEnergyHandler (sign-extended). Procedure: skipped when daily4 & 0x0008; energy ($918) += value; <= 0 - energy = 0, PFLAGS_OUTOFSTAMINA, sprite 0x4D, PACTION_TIRED; >= stamina ($917, maximum) - energy = stamina and OUTOFSTAMINA is cleared; otherwise a plain addition. Also updates $096C (count/icon of the energy bar). Does not block."
   ram_touched: [ptrAIActionData, strcPlayerData.energy, strcPlayerData.stamina, strcPlayer.flags, strcPlayer.action, strcObjectData.spriteIdx, strcFlags.daily4]
   calls: [fPlayerEnergyHandler]
   open_questions: null
@@ -243,11 +243,11 @@
   confidence: confirmed
   length_bytes: 6
   params:
-    - {name: nTileId, offset: 1, size: 1, type: n8, meaning: "id kafla wpisywanego do mapy farmy"}
-    - {name: nPosX, offset: 2, size: 2, type: n16, meaning: "pozycja X w pikselach (X>>4 = kolumna kafla)"}
-    - {name: nPosY, offset: 4, size: 2, type: n16, meaning: "pozycja Y w pikselach (Y & $FFF0 = wiersz)"}
-  summary: "Podmienia kafel w sFarmTilemap ($7EA4E6) na podanych wspolrzednych."
-  details: "Odklada argumenty na stos i odtwarza jako A/X/Y, woła fMap_UpdateFarmTilemapCoords: ustawia strcDialogDisplay.mapMultiWidth = 4, liczy offset przez fObjectEngine_ConvertCoordsToOffset i zapisuje kafel do sFarmTilemap,X. Nie blokuje. Uzywana 545 razy (sekwencje budowy/zmiany farmy, B5). Efekt uboczny: mapMultiWidth zostaje 4."
+    - {name: nTileId, offset: 1, size: 1, type: n8, meaning: "id of the tile written to the farm map"}
+    - {name: nPosX, offset: 2, size: 2, type: n16, meaning: "X position in pixels (X>>4 = tile column)"}
+    - {name: nPosY, offset: 4, size: 2, type: n16, meaning: "Y position in pixels (Y & $FFF0 = row)"}
+  summary: "Replaces a tile in sFarmTilemap ($7EA4E6) at the given coordinates."
+  details: "Pushes the arguments onto the stack and restores them as A/X/Y, calls fMap_UpdateFarmTilemapCoords: sets strcDialogDisplay.mapMultiWidth = 4, computes the offset via fObjectEngine_ConvertCoordsToOffset and writes the tile to sFarmTilemap,X. Does not block. Used 545 times (farm construction/change sequences, B5). Side effect: mapMultiWidth remains 4."
   ram_touched: [ptrAIActionData, sFarmTilemap, strcDialogDisplay.mapMultiWidth]
   calls: [fMap_UpdateFarmTilemapCoords, fObjectEngine_ConvertCoordsToOffset]
   open_questions: null
@@ -260,8 +260,8 @@
   confidence: confirmed
   length_bytes: 1
   params: []
-  summary: "Ustawia akcje gracza PACTION_SWAPTOOL - zamiana narzedzia biezacego z drugim."
-  details: "Przesuwa wskaznik o 1 i ustawia strcPlayer.action = PACTION_SWAPTOOL (0x1C). fPlayerAction0x1C (81C061) po zakonczeniu animacji (PFLAGS_ANIMATING) zamienia toolEquipped <-> toolSecond, wola fToolUsedSound_Unknown828FF3 i wraca do PACTION_NONE. Nie oddaje klatki w samej komendzie, efekt dzieje sie w kolejnych klatkach akcji gracza."
+  summary: "Sets the player action PACTION_SWAPTOOL - swaps the current tool with the second one."
+  details: "Advances the pointer by 1 and sets strcPlayer.action = PACTION_SWAPTOOL (0x1C). fPlayerAction0x1C (81C061), after the animation finishes (PFLAGS_ANIMATING), swaps toolEquipped <-> toolSecond, calls fToolUsedSound_Unknown828FF3 and returns to PACTION_NONE. Does not yield the frame within the command itself; the effect happens in subsequent frames of the player action."
   ram_touched: [ptrAIActionData, strcPlayer.action, strcPlayerData.toolEquipped, strcPlayerData.toolSecond]
   calls: []
   open_questions: null

@@ -34,7 +34,7 @@ jobs:
                   -DASAR_GEN_EXE_TEST=OFF -DASAR_GEN_DLL_TEST=OFF
             cmake --build "$RUNNER_TEMP/asar/build" --target asar-standalone --parallel
             BIN=$(find "$RUNNER_TEMP/asar/build" -type f -name asar -perm -u+x | head -n1)
-            test -n "$BIN" || { echo "nie znaleziono binarki asar"; find "$RUNNER_TEMP/asar/build" -maxdepth 3 | head -40; exit 1; }
+            test -n "$BIN" || { echo "asar binary not found"; find "$RUNNER_TEMP/asar/build" -maxdepth 3 | head -40; exit 1; }
             mkdir -p tools/bin
             cp "$BIN" tools/bin/asar
             chmod +x tools/bin/asar
@@ -44,7 +44,7 @@ jobs:
         if: failure()
         run: |
           {
-            echo "### Błąd budowy asara"
+            echo "### asar build failure"
             echo '```'
             tail -n 40 asar-build.log || true
             echo '```'
@@ -63,7 +63,7 @@ jobs:
           {
             echo "### Build US"
             echo '```'
-            tail -n 25 build-us.log 2>/dev/null || echo "brak logu"
+            tail -n 25 build-us.log 2>/dev/null || echo "no log"
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
 

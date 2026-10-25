@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
-"""Buduje ROM z zrodel przy uzyciu asara i (domyslnie) weryfikuje wynik.
+"""Builds the ROM from source with asar and (by default) verifies the result.
 
-Uzycie:
+Usage:
     python tools/build.py [--region US] [--asar SCIEZKA] [--out build/HarvestMoon.sfc]
                           [--no-verify] [-v]
 
-Lokalizacja asara (kolejnosc): --asar, zmienna ASAR, tools/bin/asar(.exe), PATH.
+asar lookup order: --asar, ASAR environment variable, tools/bin/asar(.exe), PATH.
 
-Plik wyjsciowy jest tworzony od zera jako 2 MB zer (rozmiar kartridza), a asar
-nanosi na niego kod i dane (--no-title-check, bo pusty plik nie ma naglowka;
---fix-checksum=off, bo suma kontrolna pochodzi z naglowka w zrodlach). Dzieki temu wynik nie zalezy od poprzedniego buildu,
-a nieuzywane banki BC-BF maja deterministyczne wypelnienie zerami (jak w oryginale).
+The output file is created from scratch as 2 MB of zeros (cartridge size) and asar
+patches code and data into it (--no-title-check because an empty file has no header;
+--fix-checksum=off because the checksum comes from the header in the sources). The result
+therefore does not depend on a previous build, and the unused banks BC-BF are deterministically
+zero-filled (as in the original).
 """
 import argparse
 import os
@@ -21,7 +22,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 ROM_SIZE = 0x200000
-MAIN = {"US": "src/main.asm"}  # kolejne regiony beda dodawane wraz z migracja
+MAIN = {"US": "src/main.asm"}  # more regions will be added as the migration progresses
 
 
 def find_asar(explicit):
@@ -34,7 +35,7 @@ def find_asar(explicit):
     found = shutil.which("asar")
     if found:
         return found
-    sys.exit("Nie znaleziono asara. Podaj --asar, ustaw ASAR lub umiesc plik w tools/bin/.")
+    sys.exit("asar not found. Pass --asar, set ASAR or place the binary in tools/bin/.")
 
 
 def main() -> int:
@@ -58,12 +59,12 @@ def main() -> int:
     print("+", " ".join(cmd))
     rc = subprocess.run(cmd, cwd=ROOT).returncode
     if rc != 0:
-        print(f"asar zakonczyl sie bledem (kod {rc})", file=sys.stderr)
+        print(f"asar failed (exit code {rc})", file=sys.stderr)
         return rc
 
     size = out.stat().st_size
     if size != ROM_SIZE:
-        print(f"UWAGA: rozmiar ROM = {size}, oczekiwano {ROM_SIZE}", file=sys.stderr)
+        print(f"WARNING: ROM size = {size}, expected {ROM_SIZE}", file=sys.stderr)
 
     if args.no_verify:
         return 0

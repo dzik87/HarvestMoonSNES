@@ -1,30 +1,30 @@
-# Układ projektu i mapa ROM (LoROM, 2 MB)
+# Project layout and ROM map (LoROM, 2 MB)
 
-Mapowanie: LoROM, 64 banki po 32 KB ($80–$BF). Nagłówek i wektory: `src/code/header.asm` ($80FFB0).
+Mapping: LoROM, 64 banks of 32 KB ($80–$BF). Header and vectors: `src/code/header.asm` ($80FFB0).
 
-| Banki | Zawartość | Źródło |
+| Banks | Contents | Source |
 |---|---|---|
-| $80–$85 | kod 65816 (rdzeń, paleta, narzędzia, dźwięk, silnik gry, mapy, AI, wejście) | `src/code/bank_8x/` |
-| $86–$87 | dane obiektów | `src/data/objects/` |
-| $88–$91 | grafika sprite'ów | `src/data/gfx/sprites/` |
-| $92–$A0 | grafika kafli | `src/data/gfx/tiles/` |
-| $A1–$A6 | grafika postaci | `src/data/gfx/characters/` |
-| $A7 | tilemapy | `src/data/tilemaps/` |
-| $A8–$A9 | palety | `src/data/gfx/palettes/` |
-| $AA–$AC | dialogi JP (puste w US/EU/DE) | `src/data/dialogs/jp/` |
-| $AD–$B2 | audio (zawartość wygląda na program i dane SPC700 — do potwierdzenia) | `src/data/audio/` |
-| $B3–$B5 | skrypty AI (US: jeden plik na skrypt, `src/ai/us/scripts/`) | `src/ai/<region>/` |
-| $B6–$BB | dialogi US/EU/DE | `src/data/dialogs/<region>/` |
-| $BC–$BF | nieużywane (zera) | — |
+| $80–$85 | 65816 code (core, palette, tools, sound, game engine, maps, AI, input) | `src/code/bank_8x/` |
+| $86–$87 | object data | `src/data/objects/` |
+| $88–$91 | sprite graphics | `src/data/gfx/sprites/` |
+| $92–$A0 | tile graphics | `src/data/gfx/tiles/` |
+| $A1–$A6 | character graphics | `src/data/gfx/characters/` |
+| $A7 | tilemaps | `src/data/tilemaps/` |
+| $A8–$A9 | palettes | `src/data/gfx/palettes/` |
+| $AA–$AC | JP dialogs (empty in US/EU/DE) | `src/data/dialogs/jp/` |
+| $AD–$B2 | audio (content looks like SPC700 program and data — to be confirmed) | `src/data/audio/` |
+| $B3–$B5 | AI scripts (US: one file per script, `src/ai/us/scripts/`) | `src/ai/<region>/` |
+| $B6–$BB | US/EU/DE dialogs | `src/data/dialogs/<region>/` |
+| $BC–$BF | unused (zeros) | — |
 
-## Moduły kodu
+## Code modules
 
-Podział banków 80–85 jest bezstratny (konkatenacja modułów daje dokładnie dawny plik banku).
-Granice wynikają z `notes.txt` (banki 80, 82, 83, 84) oraz z klastrów nazw etykiet (81, 85).
-Nazwy modułów są robocze i mogą się zmieniać wraz z postępem nazewnictwa kodu.
-Każdy moduł (poza pierwszym w banku) zaczyna się komentarzem z adresem startu.
+The split of banks 80–85 is lossless (concatenating the modules gives exactly the former bank file).
+Boundaries come from `notes.txt` (banks 80, 82, 83, 84) and from label-name clusters (81, 85).
+Module names are provisional and may change as code naming progresses.
+Every module (except the first in a bank) starts with a comment giving its start address.
 
-## Konwencje nazw
+## Naming conventions
 
-Prefiksy: `f` procedura, `a` tablica danych, `p` wskaźnik, `s` struktura/dane złożone, `n` liczba/stała,
-`strc` struktura RAM. Etykiety automatyczne z DiztinGUIsh (`DATA8_xxxxxx` itp.) są stopniowo zastępowane.
+Prefixes: `f` routine, `a` data array, `p` pointer, `s` structure/complex data, `n` number/constant,
+`strc` RAM structure. Automatic DiztinGUIsh labels (`DATA8_xxxxxx` etc.) are being replaced gradually.

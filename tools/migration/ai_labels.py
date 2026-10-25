@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
-"""Jednorazowa migracja: surowe adresy w skryptach AI -> etykiety.
+"""One-off migration: raw addresses in AI scripts -> labels.
 
-Dla kazdego wywolania %AICMD...(...) argumenty typu wskaznik (parametry p* oraz
-0x2F/0x49) zapisane jako literaly $B3xxxx-$B5xxxx sa zamieniane na etykiety.
-Etykiety powstaja na poczatku docelowej linii (lub zastepuja etykiete
-automatyczna z DiztinGUIsh, np. DATA8_B48020). Nazwa nowej etykiety:
-    <etykieta-skryptu>_L<NNN>      (numeracja rosnaca wg adresu w obrebie skryptu)
+For every %AICMD...(...) call, pointer-type arguments (parameters p* and
+0x2F/0x49) written as literals $B3xxxx-$B5xxxx are replaced by labels.
+Labels are created at the start of the target line (or replace an automatic
+DiztinGUIsh label, e.g. DATA8_B48020). New label name:
+    <script-label>_L<NNN>      (numbering ascending by address within the script)
 
-Wynik kompilacji pozostaje bit-identyczny (adres etykiety == wczesniejszy literal).
+The build output stays bit-identical (label address == earlier literal).
+Only the region directory passed on the command line is modified.
 
-Uzycie: python tools/migration/ai_labels.py src/ai/us [--dry]
+Usage: python tools/migration/ai_labels.py src/ai/us [--dry]
 """
 import re, sys, glob, collections
 from pathlib import Path
@@ -34,7 +35,7 @@ def main():
     files = sorted(d.glob('bank_B*.asm'))
     data = {f: f.read_text().split('\n') for f in files}
 
-    # 1. adresy linii i definicje etykiet
+    # 1. line addresses and label definitions
     line_addr = {}   # (file, idx) -> addr
     labels = []      # (addr, name, file, idx)
     for f, lines in data.items():
@@ -49,7 +50,7 @@ def main():
     first_at = {}
     for a, n, f, i in labels: first_at.setdefault(a, (n, f, i))
 
-    # 2. cele
+    # 2. targets
     def is_ptr(name, p):
         return p.startswith('p') or (name in ('AICMD0x2F', 'AICMD0x49') and p == 'nUnknown1')
     targets = set()
@@ -60,7 +61,7 @@ def main():
             for p, a in zip(defs[m.group(2)], split_args(m.group(3))):
                 t = LIT.match(a)
                 if t and is_ptr(m.group(2), p): targets.add(t.group(1))
-    # 3. wlasciciel = ostatnia nie-automatyczna etykieta <= adres
+    # 3. owner = last non-automatic label <= address
     named = sorted((a, n) for a, n, f, i in labels if not AUTO.match(n) and a)
     import bisect
     keys = [a for a, _ in named]
@@ -75,7 +76,7 @@ def main():
     rename_auto = {first_at[t][0]: newname[t] for t in targets
                    if t in first_at and AUTO.match(first_at[t][0])}
     to_insert = collections.defaultdict(list)  # (file, idx) -> [names]
-    # indeks: adres -> pierwsza linia, ktora go "zaczyna" (komentarz ;ADDR na tej linii)
+    # index: address -> first line that "starts" it (;ADDR comment on that line)
     start_line = {}
     for f, lines in data.items():
         for i, l in enumerate(lines):
@@ -86,7 +87,7 @@ def main():
         f, i = start_line[t]
         to_insert[(f, i)].append(newname[t])
 
-    # 4. zastosuj
+    # 4. apply
     changed = 0
     out = {}
     for f, lines in data.items():
@@ -110,9 +111,9 @@ def main():
                         if old in l: l = re.sub(r'\b%s\b' % re.escape(old), nn, l)
             res.append(l)
         out[f] = '\n'.join(res)
-    print(f'cele: {len(targets)}, argumenty zamienione: {changed}, '
-          f'nowe etykiety: {sum(len(v) for v in to_insert.values())}, przemianowane auto: {len(rename_auto)}')
-    # referencje do przemianowanych etykiet poza katalogiem AI
+    print(f'targets: {len(targets)}, arguments replaced: {changed}, '
+          f'new labels: {sum(len(v) for v in to_insert.values())}, renamed auto: {len(rename_auto)}')
+    # references to renamed labels outside the AI directory
     if not dry:
         for f, t in out.items(): f.write_text(t)
         for p in Path('src').rglob('*.asm'):
@@ -120,7 +121,7 @@ def main():
             s = p.read_text(); o = s
             for old, nn in rename_auto.items():
                 s = re.sub(r'\b%s\b' % re.escape(old), nn, s)
-            if s != o: p.write_text(s); print('zaktualizowano referencje w', p)
+            if s != o: p.write_text(s); print('updated references in', p)
 
 
 if __name__ == '__main__':

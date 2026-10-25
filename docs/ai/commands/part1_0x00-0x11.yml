@@ -6,13 +6,13 @@
   confidence: confirmed
   length_bytes: 3
   params:
-    - {name: nMusicTrackId, offset: 1, size: 1, type: n8, meaning: "Id utworu zapisywany do strcAudio.trackId ($7E:0110). Wartosci w skryptach np. $07, $09, $0E."}
-    - {name: nUnused, offset: 2, size: 1, type: n8, meaning: "Ignorowany przez handler (wskaznik jest tylko przesuwany). W skryptach US zawsze $B4 (numer banku skryptu) - 91 uzyc, 2 uzycia z $00."}
-  summary: "Ustawia zadany utwor muzyczny w strcAudio.trackId."
-  details: "Handler przesuwa ptrAIActionData o 1, czyta bajt i zapisuje go do strcAudio.trackId, po czym przesuwa wskaznik jeszcze o 2 (lacznie 3 bajty). Nie wola procedur audio i nie blokuje - sama zmiana utworu nastepuje dopiero gdy silnik audio porowna trackId z trackIdCopy ($7E:0117), np. w fAudioUnknown_8382C6 / fAudioUnknown_838380 lub po komendzie 0x0E."
+    - {name: nMusicTrackId, offset: 1, size: 1, type: n8, meaning: "Track id stored to strcAudio.trackId ($7E:0110). Values seen in scripts, e.g. $07, $09, $0E."}
+    - {name: nUnused, offset: 2, size: 1, type: n8, meaning: "Ignored by the handler (the pointer is only advanced). In US scripts it is always $B4 (the script bank number) - 91 uses, 2 uses with $00."}
+  summary: "Sets the requested music track in strcAudio.trackId."
+  details: "The handler advances ptrAIActionData by 1, reads a byte and stores it to strcAudio.trackId, then advances the pointer by another 2 (3 bytes in total). It does not call any audio routines and does not block - the track change itself only happens once the audio engine compares trackId with trackIdCopy ($7E:0117), e.g. in fAudioUnknown_8382C6 / fAudioUnknown_838380 or after command 0x0E."
   ram_touched: [strcAudio.trackId, ptrAIActionData]
   calls: []
-  open_questions: "Drugi argument jest ignorowany; wartosc $B4 wyglada na pozostalosc po numerze banku skryptu. Brak enuma na id utworow."
+  open_questions: "The second argument is ignored; the value $B4 looks like a leftover of the script bank number. There is no enum for the track ids."
 
 - opcode: 0x01
   macro: AICMD0x01_UnfreezeTime
@@ -22,11 +22,11 @@
   confidence: confirmed
   length_bytes: 1
   params: []
-  summary: "Wznawia uplyw czasu w grze (nTimeState = 1)."
-  details: "Zapisuje 1 do nTimeState ($7E:0973; 00 = stop, 01 = bieg), kasuje bit $0001 w strcFlags.daily2 oraz ustawia bit $0020 w strcDialogDisplay.mapFlags ($7E:0196). Para z komenda 0x02 (odwrotne operacje). Nie blokuje."
+  summary: "Resumes the passage of in-game time (nTimeState = 1)."
+  details: "Writes 1 to nTimeState ($7E:0973; 00 = stopped, 01 = running), clears bit $0001 in strcFlags.daily2 and sets bit $0020 in strcDialogDisplay.mapFlags ($7E:0196). Paired with command 0x02 (inverse operations). Does not block."
   ram_touched: [nTimeState, strcFlags.daily2, strcDialogDisplay.mapFlags, ptrAIActionData]
   calls: []
-  open_questions: "Dokladne znaczenie bitu $0020 w mapFlags (AFLAGS_UNK0020) i bitu $0001 w daily2 nieustalone - wiadomo tylko, ze sa przelaczane razem z nTimeState."
+  open_questions: "The exact meaning of bit $0020 in mapFlags (AFLAGS_UNK0020) and bit $0001 in daily2 is not determined - it is only known that they are toggled together with nTimeState."
 
 - opcode: 0x02
   macro: AICMD0x02_FreezeTime
@@ -36,11 +36,11 @@
   confidence: confirmed
   length_bytes: 1
   params: []
-  summary: "Zatrzymuje uplyw czasu w grze (nTimeState = 0)."
-  details: "Zapisuje 0 do nTimeState, ustawia bit $0001 w strcFlags.daily2 i kasuje bit $0020 w strcDialogDisplay.mapFlags. Odwrotnosc komendy 0x01. Nie blokuje. Najczesciej uzywana komenda w skryptach (ok. 94 uzyc)."
+  summary: "Stops the passage of in-game time (nTimeState = 0)."
+  details: "Writes 0 to nTimeState, sets bit $0001 in strcFlags.daily2 and clears bit $0020 in strcDialogDisplay.mapFlags. Inverse of command 0x01. Does not block. The most frequently used command in scripts (about 94 uses)."
   ram_touched: [nTimeState, strcFlags.daily2, strcDialogDisplay.mapFlags, ptrAIActionData]
   calls: []
-  open_questions: "Jak w 0x01 - semantyka bitow daily2 $0001 i mapFlags $0020."
+  open_questions: "Same as 0x01 - the semantics of daily2 bit $0001 and mapFlags bit $0020."
 
 - opcode: 0x03
   macro: AICMD0x03_SetHour
@@ -50,12 +50,12 @@
   confidence: probable
   length_bytes: 2
   params:
-    - {name: nCurrentTimeID, offset: 1, size: 1, type: n8, meaning: "Wartosc zapisywana do nCurrentTimeID ($7F:1F1C). W skryptach spotykane $07, $11, $12 (wygladaja na godziny 7/17/18)."}
-  summary: "Ustawia nCurrentTimeID na podana wartosc."
-  details: "Zapisuje bajt argumentu (long, 8-bit) do nCurrentTimeID. Nie rusza nInGameHourCounter ani nInGameMinuteCounter, nie wola zadnych procedur, nie blokuje."
+    - {name: nCurrentTimeID, offset: 1, size: 1, type: n8, meaning: "Value stored to nCurrentTimeID ($7F:1F1C). Values seen in scripts: $07, $11, $12 (they look like the hours 7/17/18)."}
+  summary: "Sets nCurrentTimeID to the given value."
+  details: "Writes the argument byte (long addressing, 8-bit) to nCurrentTimeID. Does not touch nInGameHourCounter or nInGameMinuteCounter, calls no routines, does not block."
   ram_touched: [nCurrentTimeID, ptrAIActionData]
   calls: []
-  open_questions: "Czy nCurrentTimeID to dokladnie godzina czy indeks pory dnia - nazwa makra SetHour jest przypuszczeniem; z handlera wynika tylko zapis do nCurrentTimeID."
+  open_questions: "Whether nCurrentTimeID is exactly the hour or a time-of-day index is unknown - the macro name SetHour is a guess; the handler only shows a write to nCurrentTimeID."
 
 - opcode: 0x04
   macro: AICMD0x04_Nop
@@ -65,8 +65,8 @@
   confidence: confirmed
   length_bytes: 1
   params: []
-  summary: "Pusta komenda (NOP) - tylko przesuwa wskaznik o 1 bajt."
-  details: "Handler wykonuje wylacznie ptrAIActionData += 1. Brak innych efektow. Literowka w nazwie makra: Emtpy -> Empty."
+  summary: "Empty command (NOP) - only advances the pointer by 1 byte."
+  details: "The handler performs only ptrAIActionData += 1. No other effects. Typo in the macro name: Emtpy -> Empty."
   ram_touched: [ptrAIActionData]
   calls: []
   open_questions: null
@@ -79,13 +79,13 @@
   confidence: confirmed
   length_bytes: 5
   params:
-    - {name: nDestinationX, offset: 1, size: 2, type: n16, meaning: "Wspolrzedna X (piksele mapy) - zapisywana do strcDialogDisplay.mapDestX ($7E:017D) oraz strcPlayer.posX ($D6)."}
-    - {name: nDestinationY, offset: 3, size: 2, type: n16, meaning: "Wspolrzedna Y - zapisywana do strcDialogDisplay.mapDestY ($7E:017F) oraz strcPlayer.posY ($D8)."}
-  summary: "Ustawia pozycje gracza i pozycje docelowa transferu mapy na (X, Y)."
-  details: "Handler (A 16-bit) czyta dwa slowa po kolei i zapisuje kazde do pary: pole mapDest* w strcDialogDisplay oraz biezaca pozycje gracza strcPlayer.posX/posY. Nie blokuje."
+    - {name: nDestinationX, offset: 1, size: 2, type: n16, meaning: "X coordinate (map pixels) - stored to strcDialogDisplay.mapDestX ($7E:017D) and strcPlayer.posX ($D6)."}
+    - {name: nDestinationY, offset: 3, size: 2, type: n16, meaning: "Y coordinate - stored to strcDialogDisplay.mapDestY ($7E:017F) and strcPlayer.posY ($D8)."}
+  summary: "Sets the player position and the map transfer destination position to (X, Y)."
+  details: "The handler (16-bit A) reads two words in sequence and stores each to a pair: the mapDest* field in strcDialogDisplay and the current player position strcPlayer.posX/posY. Does not block."
   ram_touched: [strcDialogDisplay.mapDestX, strcDialogDisplay.mapDestY, strcPlayer.posX, strcPlayer.posY, ptrAIActionData]
   calls: []
-  open_questions: "Jednostka (piksel vs. kafelek): wartosci w skryptach np. 264,312 / 128,440 wskazuja na piksele, ale nie zweryfikowano w kodzie renderowania."
+  open_questions: "Unit (pixel vs. tile): values in scripts, e.g. 264,312 / 128,440, point to pixels, but this was not verified in the rendering code."
 
 - opcode: 0x06
   macro: AICMD0x06_SetDestinationArea
@@ -95,9 +95,9 @@
   confidence: confirmed
   length_bytes: 2
   params:
-    - {name: nAreaId, offset: 1, size: 1, type: enum, meaning: "Id obszaru (enumy !AREA_* z enums.asm, np. !AREA_COOP, !AREA_COWBARN, !AREA_ENDINGxx) zapisywany do nDestinationAreaId ($7E:098B)."}
-  summary: "Ustawia docelowy obszar (mape), a skrypt oddaje sterowanie na 1 klatke."
-  details: "Zapisuje bajt do nDestinationAreaId. Dodatkowo zwieksza 16-bitowy licznik oczekiwania slotu skryptu (offset +$10 w strukturze 64 B pod ptrAIUnknown0xCC) o 1, czyli petla skryptu zatrzymuje ten slot na kolejna klatke (wait 1). Samo wczytanie mapy dzieje sie poza komenda."
+    - {name: nAreaId, offset: 1, size: 1, type: enum, meaning: "Area id (!AREA_* enums from enums.asm, e.g. !AREA_COOP, !AREA_COWBARN, !AREA_ENDINGxx) stored to nDestinationAreaId ($7E:098B)."}
+  summary: "Sets the destination area (map) and the script yields for 1 frame."
+  details: "Writes the byte to nDestinationAreaId. Additionally increments the 16-bit wait counter of the script slot (offset +$10 in the 64-byte structure at ptrAIUnknown0xCC) by 1, so the script loop holds this slot for the next frame (wait 1). The map load itself happens outside the command."
   ram_touched: [nDestinationAreaId, ptrAIActionData, "slot[+0x10] (wait counter)"]
   calls: []
   open_questions: null
@@ -110,9 +110,9 @@
   confidence: confirmed
   length_bytes: 2
   params:
-    - {name: nPlayerDirection, offset: 1, size: 1, type: enum, meaning: "Kierunek gracza, enum !PDIR_* (DOWN=0, UP=1, LEFT=2, RIGHT=3). Rozszerzany do 16 bitow."}
-  summary: "Ustawia kierunek patrzenia gracza."
-  details: "Bajt argumentu (z zerowanym starszym bajtem) trafia do strcPlayer.direction ($DA), strcObjectData.direction ($7E:0911) oraz strcObjectData.spriteIdx ($7E:0901), czyli ustawia tez indeks sprite'a obiektu gracza na wartosc kierunku. Nie blokuje."
+    - {name: nPlayerDirection, offset: 1, size: 1, type: enum, meaning: "Player direction, !PDIR_* enum (DOWN=0, UP=1, LEFT=2, RIGHT=3). Extended to 16 bits."}
+  summary: "Sets the direction the player is facing."
+  details: "The argument byte (with the high byte zeroed) goes to strcPlayer.direction ($DA), strcObjectData.direction ($7E:0911) and strcObjectData.spriteIdx ($7E:0901), i.e. it also sets the sprite index of the player object to the direction value. Does not block."
   ram_touched: [strcPlayer.direction, strcObjectData.direction, strcObjectData.spriteIdx, ptrAIActionData]
   calls: []
   open_questions: null
@@ -125,8 +125,8 @@
   confidence: confirmed
   length_bytes: 1
   params: []
-  summary: "Odbiera graczowi sterowanie (kasuje PFLAGS_USERCONTROL) i zeruje wejscie sterowane przez AI."
-  details: "Kasuje flage !PFLAGS_USERCONTROL ($4000) w strcPlayer.flags oraz zeruje strcAiControlData.input ($7E:08FD) i strcAiControlData.counter ($7E:08FF), dzieki czemu skrypt moze potem sterowac graczem komendami typu 0x39/0x3A (walk/run for time). Odwrotnosc komendy 0x11. Nie blokuje."
+  summary: "Takes control away from the player (clears PFLAGS_USERCONTROL) and zeroes the AI-driven input."
+  details: "Clears the flag !PFLAGS_USERCONTROL ($4000) in strcPlayer.flags and zeroes strcAiControlData.input ($7E:08FD) and strcAiControlData.counter ($7E:08FF), so that the script can then drive the player with commands such as 0x39/0x3A (walk/run for time). Inverse of command 0x11. Does not block."
   ram_touched: [strcPlayer.flags, strcAiControlData.input, strcAiControlData.counter, ptrAIActionData]
   calls: []
   open_questions: null
@@ -139,13 +139,13 @@
   confidence: confirmed
   length_bytes: 4
   params:
-    - {name: nDataIndex, offset: 1, size: 1, type: n8, meaning: "Indeks docelowego slotu skryptu (struktura 64 B pod $7E:B586 + idx*64, 49 slotow). Zapisywany tez w nowym slocie na offsecie +$3F."}
-    - {name: pNextAction, offset: 2, size: 2, type: script_ptr, meaning: "Adres 16-bit poczatku skryptu w tym samym banku co biezacy skrypt (bank kopiowany z offsetu +$32 biezacego slotu)."}
-  summary: "Uruchamia rownolegly skrypt w innym slocie (nDataIndex), zaczynajacy sie od pNextAction; biezacy skrypt idzie dalej."
-  details: "Zapamietuje biezacy slot (ptrAIUnknown0xCC -> ptrTemp0x72), przez fAI_SetCCPointer przelacza ptrAIUnknown0xCC na slot nDataIndex, kopiuje do niego bank (+$32), zapisuje 16-bitowy wskaznik do +$30, wola fAI_Unknown8488D4 (inicjalizacja slotu: active=1, flagi=0, liczniki, pozycja 0 itd.), zapisuje nDataIndex w +$3F i przywraca poprzedni slot. Potem ptrAIActionData += 4 calosci. Nie blokuje. Nowy slot zacznie sie wykonywac w petli slotow (w tej samej klatce jesli jego indeks jest wiekszy)."
+    - {name: nDataIndex, offset: 1, size: 1, type: n8, meaning: "Index of the target script slot (64-byte structure at $7E:B586 + idx*64, 49 slots). Also stored in the new slot at offset +$3F."}
+    - {name: pNextAction, offset: 2, size: 2, type: script_ptr, meaning: "16-bit address of the script start in the same bank as the current script (the bank is copied from offset +$32 of the current slot)."}
+  summary: "Starts a parallel script in another slot (nDataIndex), beginning at pNextAction; the current script continues."
+  details: "Remembers the current slot (ptrAIUnknown0xCC -> ptrTemp0x72), switches ptrAIUnknown0xCC to slot nDataIndex through fAI_SetCCPointer, copies the bank into it (+$32), stores the 16-bit pointer to +$30, calls fAI_Unknown8488D4 (slot initialization: active=1, flags=0, counters, position 0, etc.), stores nDataIndex in +$3F and restores the previous slot. Then ptrAIActionData += 4 in total. Does not block. The new slot starts executing in the slot loop (in the same frame if its index is greater)."
   ram_touched: [ptrAIUnknown0xCC, ptrTemp0x72, ptrAIActionData, "slot[nDataIndex]: +0 +1 +3..+6 +0C +0F +10 +12 +14 +1A +1C +30 +32 +3F"]
   calls: [fAI_SetCCPointer, fAI_Unknown8488D4]
-  open_questions: "Znaczenie wszystkich pol slotu resetowanych w fAI_Unknown8488D4 (strcAIUnknown.unkXX) nie jest w pelni opisane; nie sprawdzono, co dzieje sie gdy slot docelowy jest juz aktywny (jest nadpisywany bez sprawdzenia)."
+  open_questions: "The meaning of all slot fields reset in fAI_Unknown8488D4 (strcAIUnknown.unkXX) is not fully described; what happens when the target slot is already active was not checked (it is overwritten without a check)."
 
 - opcode: 0x0A
   macro: AICMD0x0A_ScreenFadein
@@ -155,12 +155,12 @@
   confidence: confirmed
   length_bytes: 2
   params:
-    - {name: nUnused, offset: 1, size: 1, type: unknown, meaning: "Ignorowany przez handler (wskaznik tylko przesuwany). We wszystkich uzyciach rowny $01."}
-  summary: "Plynnie rozjasnia ekran (fade-in) od jasnosci 3 do 15; blokuje do konca."
-  details: "Ustawia n8Temp1=3 (jasnosc startowa), n8Temp2=3 (liczba klatek na krok), n8Temp3=$0F (jasnosc docelowa) i wola fCore_ScreenFadein, ktora w petli czeka na NMI (okolo 12 krokow po 3 klatki) i na koncu ustawia flage daily1 $8000. Blokuje cale wykonanie az do konca fade'u. Odpowiednik 0x0F."
+    - {name: nUnused, offset: 1, size: 1, type: unknown, meaning: "Ignored by the handler (the pointer is only advanced). Equal to $01 in all uses."}
+  summary: "Smoothly brightens the screen (fade-in) from brightness 3 to 15; blocks until finished."
+  details: "Sets n8Temp1=3 (start brightness), n8Temp2=3 (frames per step), n8Temp3=$0F (target brightness) and calls fCore_ScreenFadein, which waits for NMI in a loop (about 12 steps of 3 frames) and finally sets daily1 flag $8000. Blocks all execution until the fade ends. Counterpart of 0x0F."
   ram_touched: [strcVariables.n8Temp1, strcVariables.n8Temp2, strcVariables.n8Temp3, strcSystem.nBrightness, strcSystem.nBrightnessStep, strcFlags.daily1, ptrAIActionData]
   calls: [fCore_ScreenFadein]
-  open_questions: "Znaczenie bitu daily1 $8000 (prawdopodobnie 'ekran widoczny') - wiadomo tylko, ze fade-in go ustawia, a fade-out kasuje."
+  open_questions: "The meaning of daily1 bit $8000 (probably 'screen visible') - it is only known that fade-in sets it and fade-out clears it."
 
 - opcode: 0x0B
   macro: AICMD0x0B_SetScriptFlag
@@ -170,12 +170,12 @@
   confidence: confirmed
   length_bytes: 2
   params:
-    - {name: nFlagBit, offset: 1, size: 1, type: flag, meaning: "Numer bitu 0-15 w 16-bitowym globalnym polu flag skryptow $7F:1F7A (maska z tablicy aAISetMask)."}
-  summary: "Ustawia bit nFlagBit w globalnym polu flag skryptow $7F:1F7A (synchronizacja miedzy slotami)."
-  details: "Pobiera maske 1<<n z aAISetMask i robi OR do $7F:1F7A. Pole jest zerowane przy nowej grze (83ACC8) i przy wczytaniu mapy (809927). Uzywane w parze z 0x0C (czekanie na flage), np. skrypt glowny czeka az skrypty potomne (uruchomione 0x09) ustawia swoje bity."
+    - {name: nFlagBit, offset: 1, size: 1, type: flag, meaning: "Bit number 0-15 in the 16-bit global script flag field $7F:1F7A (mask taken from the aAISetMask table)."}
+  summary: "Sets bit nFlagBit in the global script flag field $7F:1F7A (synchronization between slots)."
+  details: "Fetches the mask 1<<n from aAISetMask and ORs it into $7F:1F7A. The field is zeroed on a new game (83ACC8) and on map load (809927). Used together with 0x0C (wait for flag), e.g. the main script waits until the child scripts (started with 0x09) set their bits."
   ram_touched: ["$7F1F7A", ptrAIActionData]
   calls: []
-  open_questions: "Brak symbolu RAM dla $7F:1F7A - warto dodac do ram.asm (np. nAIScriptFlags). Zakres n >15 daje odczyt poza tablica aAISetMask."
+  open_questions: "There is no RAM symbol for $7F:1F7A - it should be added to ram.asm (e.g. nAIScriptFlags). A value of n > 15 reads outside the aAISetMask table."
 
 - opcode: 0x0C
   macro: AICMD0x0C_WaitForScriptFlag
@@ -185,9 +185,9 @@
   confidence: confirmed
   length_bytes: 2
   params:
-    - {name: nFlagBit, offset: 1, size: 1, type: flag, meaning: "Numer bitu 0-15 w $7F:1F7A (jak w 0x0B)."}
-  summary: "Czeka (klatka po klatce) az bit nFlagBit w $7F:1F7A bedzie ustawiony, po czym idzie dalej."
-  details: "Testuje AND maska,$7F:1F7A. Jesli bit ustawiony: ptrAIActionData += 1 (lacznie 2 bajty) i skrypt biegnie dalej. Jesli nie: cofa wskaznik na bajt opcode (ptr -1 po wczesniejszym +1) i zwieksza licznik oczekiwania slotu (+$10) o 1, czyli slot oddaje sterowanie na klatke i komenda jest ponawiana - petla oczekiwania. Nie kasuje bitu."
+    - {name: nFlagBit, offset: 1, size: 1, type: flag, meaning: "Bit number 0-15 in $7F:1F7A (as in 0x0B)."}
+  summary: "Waits (frame by frame) until bit nFlagBit in $7F:1F7A is set, then continues."
+  details: "Tests AND mask,$7F:1F7A. If the bit is set: ptrAIActionData += 1 (2 bytes in total) and the script continues. If not: moves the pointer back to the opcode byte (ptr -1 after the earlier +1) and increments the slot wait counter (+$10) by 1, so the slot yields for a frame and the command is repeated - a wait loop. Does not clear the bit."
   ram_touched: ["$7F1F7A", ptrAIActionData, "slot[+0x10] (wait counter)"]
   calls: []
   open_questions: null
@@ -200,15 +200,15 @@
   confidence: probable
   length_bytes: 5
   params:
-    - {name: nDeltaX, offset: 1, size: 1, type: n8, meaning: "Ze znakiem (np. $FF = -1, $FE = -2): przesuniecie X na krok. Zapis do slot+$03."}
-    - {name: nDeltaY, offset: 2, size: 1, type: n8, meaning: "Ze znakiem: przesuniecie Y na krok. Zapis do slot+$04."}
-    - {name: nDuration, offset: 3, size: 1, type: n8, meaning: "Zapis (8-bit) do slot+$10 = licznik oczekiwania slotu: liczba klatek, przez ktore skrypt czeka (np. $10, $A0, $30), czyli czas trwania ruchu."}
-    - {name: nStepFrames, offset: 4, size: 1, type: n8, meaning: "Co ile klatek wykonywany jest krok (zapis do slot+$05 i slot+$06). 1 = ruch co klatke, wieksze = wolniej."}
-  summary: "Ustawia wektor ruchu obiektu skryptu (dx, dy) oraz tempo i czas, i czeka na jego zakonczenie."
-  details: "Zapisuje cztery bajty do slotu: +3 (dx), +4 (dy), +$10 (czas), +5 i +6 (okres kroku, +6 to licznik biezacy), po czym ustawia bit $20 w slot+1 (flaga ruchu). W fAI_Unknown848331 (wolane co klatke z fAI_Unknown848286 gdy flaga $20 ustawiona) licznik +6 jest zmniejszany, a po dojsciu do 0 przeladowywany z +5 i do pozycji slotu (+$1A X, +$1C Y) dodawane jest dx/dy rozszerzone znakiem do 16 bitow. Poniewaz +$10 jest niezerowe, slot czeka nDuration klatek. Flaga $20 nie jest kasowana przez ten kod, wiec ruch trwa do nastepnego 0x0D (np. z dx=dy=0)."
+    - {name: nDeltaX, offset: 1, size: 1, type: n8, meaning: "Signed (e.g. $FF = -1, $FE = -2): X displacement per step. Stored to slot+$03."}
+    - {name: nDeltaY, offset: 2, size: 1, type: n8, meaning: "Signed: Y displacement per step. Stored to slot+$04."}
+    - {name: nDuration, offset: 3, size: 1, type: n8, meaning: "Stored (8-bit) to slot+$10 = slot wait counter: the number of frames the script waits (e.g. $10, $A0, $30), i.e. the duration of the movement."}
+    - {name: nStepFrames, offset: 4, size: 1, type: n8, meaning: "Number of frames between steps (stored to slot+$05 and slot+$06). 1 = move every frame, larger = slower."}
+  summary: "Sets the movement vector (dx, dy) of the script object together with its speed and duration, and waits for it to finish."
+  details: "Stores four bytes to the slot: +3 (dx), +4 (dy), +$10 (duration), +5 and +6 (step period, +6 is the current counter), then sets bit $20 in slot+1 (movement flag). In fAI_Unknown848331 (called every frame from fAI_Unknown848286 when flag $20 is set) the counter +6 is decremented, and when it reaches 0 it is reloaded from +5 and dx/dy, sign-extended to 16 bits, is added to the slot position (+$1A X, +$1C Y). Because +$10 is non-zero, the slot waits nDuration frames. Flag $20 is not cleared by this code, so the movement continues until the next 0x0D (e.g. with dx=dy=0)."
   ram_touched: ["slot[+0x01] flags", "slot[+0x03] dx", "slot[+0x04] dy", "slot[+0x05] step", "slot[+0x06] step counter", "slot[+0x10] wait counter", ptrAIActionData]
   calls: []
-  open_questions: "Interpretacja oparta na fAI_Unknown848331 i uzyciu w skryptach (np. (1,0,$10,1)); jednostka pozycji slotu (piksele) nie zweryfikowana; nie ustalono czy dotyczy tylko NPC czy tez gracza ani czy bajt starszy +$11 jest zawsze 0. Makro ma nazwy nUnknown1-4 do przemianowania."
+  open_questions: "The interpretation is based on fAI_Unknown848331 and on usage in scripts (e.g. (1,0,$10,1)); the unit of the slot position (pixels) is not verified; it is not established whether this applies only to NPCs or also to the player, nor whether the high byte +$11 is always 0. The macro has parameter names nUnknown1-4 to be renamed."
 
 - opcode: 0x0E
   macro: AICMD0x0E
@@ -218,12 +218,12 @@
   confidence: probable
   length_bytes: 2
   params:
-    - {name: nUnused, offset: 1, size: 1, type: unknown, meaning: "Ignorowany przez handler (ptr += 2). Komenda nie wystepuje w skryptach US (B3/B4/B5), wiec wartosc nieznana."}
-  summary: "Wola fAudioUnknown_838401: jesli zadany trackId rozni sie od odtwarzanego, wysyla do APU komende przejscia utworu."
-  details: "Przesuwa ptrAIActionData o 2 i wola fAudioUnknown_838401: porownuje strcAudio.trackId z trackIdCopy ($7E:0117); gdy rozne i trackIdCopy != 0, ustawia strcAudio.unk112=1, unk113=$40 i wola fAudioUnknown_838D8B, ktora przez porty APUIO0-3 wysyla do SPC komende (1, parametr $40 - prawdopodobnie fade/zmiana utworu). Moze blokowac na handshake z APU. Razem z 0x00 (ustawienie trackId) tworzy pare 'ustaw utwor -> zastosuj'."
+    - {name: nUnused, offset: 1, size: 1, type: unknown, meaning: "Ignored by the handler (ptr += 2). The command does not occur in US scripts (B3/B4/B5), so the value is unknown."}
+  summary: "Calls fAudioUnknown_838401: if the requested trackId differs from the one being played, sends a track change command to the APU."
+  details: "Advances ptrAIActionData by 2 and calls fAudioUnknown_838401: it compares strcAudio.trackId with trackIdCopy ($7E:0117); when they differ and trackIdCopy != 0, it sets strcAudio.unk112=1, unk113=$40 and calls fAudioUnknown_838D8B, which sends a command (1, parameter $40 - probably fade/track change) to the SPC through the APUIO0-3 ports. May block on the handshake with the APU. Together with 0x00 (setting trackId) it forms the pair 'set track -> apply'."
   ram_touched: [strcAudio.trackId, strcAudio.trackIdCopy, strcAudio.unk112, strcAudio.unk113, ptrAIActionData]
   calls: [fAudioUnknown_838401, fAudioUnknown_838D8B]
-  open_questions: "Dokladna semantyka komendy APU (1/$40) i fAudioUnknown_838D8B nie przeanalizowana (sam fade-out? start nowego utworu?); komenda nie jest uzywana w skryptach US, wiec nie da sie potwierdzic kontekstem. Nazwa to hipoteza."
+  open_questions: "The exact semantics of the APU command (1/$40) and of fAudioUnknown_838D8B were not analyzed (fade-out only? start of a new track?); the command is not used in US scripts, so it cannot be confirmed from context. The name is a hypothesis."
 
 - opcode: 0x0F
   macro: AICMD0x0F_ScreenFadeout
@@ -233,9 +233,9 @@
   confidence: confirmed
   length_bytes: 2
   params:
-    - {name: nUnused, offset: 1, size: 1, type: unknown, meaning: "Ignorowany przez handler (wskaznik tylko przesuwany). We wszystkich uzyciach rowny $01."}
-  summary: "Plynnie sciemnia ekran (fade-out) od jasnosci 15 do 0; blokuje do konca."
-  details: "Ustawia n8Temp1=$0F (start), n8Temp2=3 (klatki na krok), n8Temp3=0 (cel) i wola fCore_ScreenFadeout (petla z czekaniem na NMI), ktora na koncu kasuje flage daily1 $8000. Blokuje wykonanie do konca fade'u. Odpowiednik 0x0A."
+    - {name: nUnused, offset: 1, size: 1, type: unknown, meaning: "Ignored by the handler (the pointer is only advanced). Equal to $01 in all uses."}
+  summary: "Smoothly darkens the screen (fade-out) from brightness 15 to 0; blocks until finished."
+  details: "Sets n8Temp1=$0F (start), n8Temp2=3 (frames per step), n8Temp3=0 (target) and calls fCore_ScreenFadeout (a loop waiting for NMI), which finally clears daily1 flag $8000. Blocks execution until the fade ends. Counterpart of 0x0A."
   ram_touched: [strcVariables.n8Temp1, strcVariables.n8Temp2, strcVariables.n8Temp3, strcSystem.nBrightness, strcSystem.nBrightnessStep, strcFlags.daily1, ptrAIActionData]
   calls: [fCore_ScreenFadeout]
   open_questions: null
@@ -248,8 +248,8 @@
   confidence: confirmed
   length_bytes: 1
   params: []
-  summary: "Konczy skrypt biezacego slotu (slot nieaktywny) bez przesuwania wskaznika."
-  details: "Zapisuje 0 do slot+$00 (flaga aktywnosci) i zwieksza licznik oczekiwania slot+$10 o 1. ptrAIActionData nie jest zmieniany. Slot przestaje byc wykonywany przez petle slotow."
+  summary: "Ends the script of the current slot (slot becomes inactive) without advancing the pointer."
+  details: "Writes 0 to slot+$00 (active flag) and increments the wait counter slot+$10 by 1. ptrAIActionData is not changed. The slot is no longer executed by the slot loop."
   ram_touched: ["slot[+0x00] active", "slot[+0x10] wait counter"]
   calls: []
   open_questions: null
@@ -262,8 +262,8 @@
   confidence: confirmed
   length_bytes: 1
   params: []
-  summary: "Oddaje graczowi sterowanie (ustawia PFLAGS_USERCONTROL)."
-  details: "Ustawia flage !PFLAGS_USERCONTROL ($4000) w strcPlayer.flags. Odwrotnosc komendy 0x08. Nie blokuje."
+  summary: "Gives control back to the player (sets PFLAGS_USERCONTROL)."
+  details: "Sets the flag !PFLAGS_USERCONTROL ($4000) in strcPlayer.flags. Inverse of command 0x08. Does not block."
   ram_touched: [strcPlayer.flags, ptrAIActionData]
   calls: []
   open_questions: null

@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Jednorazowa migracja: dzieli src/ai/<region>/bank_B3..B5.asm na pliki per skrypt.
+"""One-off migration: splits src/ai/<region>/bank_B3..B5.asm into per-script files.
 
-Granice = etykiety wejsciowe skryptow (pAIScripting0xNN[_Nazwa]). Poczatek banku (ORG, tabele
-wskaznikow) trafia do pliku 'head_B3.asm' itd. Podzial jest bezstratny: konkatenacja plikow
-(w kolejnosci) daje dokladnie dawny plik banku. Generuje tez plik include 'scripts.asm'.
+Boundaries = script entry labels (pAIScripting0xNN[_Name]). The start of a bank (ORG, pointer
+tables) goes to 'head_B3.asm' etc. The split is lossless: concatenating the files
+(in order) gives exactly the former bank file. Also generates the include file 'scripts.asm'.
 
-Uzycie: python tools/migration/split_ai.py src/ai/us
+Usage: python tools/migration/split_ai.py src/ai/us
 """
 import re, sys
 from pathlib import Path
@@ -39,6 +39,6 @@ for bank in ('B3', 'B4', 'B5'):
     joined = ''.join(parts)
     assert joined == text, f'podzial banku {bank} nie jest bezstratny'
     src.unlink()
-    print(f'{bank}: {len(names)} plikow')
+    print(f'{bank}: {len(names)} files')
 (d / 'scripts.asm').write_text('; Skrypty AI - kolejnosc plikow odpowiada kolejnosci w ROM.\n' + ''.join(f'    incsrc "{p}"\n' for p in includes))
 print('OK, include:', d / 'scripts.asm')
