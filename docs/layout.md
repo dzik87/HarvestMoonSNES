@@ -17,6 +17,13 @@ Mapping: LoROM, 64 banks of 32 KB ($80–$BF). Header and vectors: `src/code/hea
 | $B6–$BB | US/EU/DE dialogs | `src/data/dialogs/<region>/` |
 | $BC–$BF | unused (zeros) | — |
 
+## Graphics sources
+
+The `.bin` files under `assets/gfx/{tiles,sprites,characters}/` (banks $88-$A6) are generated artefacts. The sources are PNG sheets
+(`assets/gfx/png/`) and name-table text (`assets/gfx/tilemaps/`), converted by `tools/gfx/pngsync.py`; CI verifies they
+reproduce the `.bin` files bit-exactly. Palettes ($A8-$A9: `assets/gfx/palettes/`) and fonts (`assets/fonts/`) have their own
+PNG/JSON sources. See `docs/formats/graphics-png.md`.
+
 ## Code modules
 
 The split of banks 80–85 is lossless (concatenating the modules gives exactly the former bank file).

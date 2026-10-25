@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Editing pipeline for compressed graphics blobs (assets/gfx/{tiles,characters}/sCompressed*.bin).
+"""Low level tool for compressed graphics blobs (raw export, exactness check).
+
+SUPERSEDED for editing by tools/gfx/pngsync.py (PNG / text sources for ALL graphics, `check` in CI, docs/formats/graphics-png.md);
+use `pngsync.py export|import|check` for modding. `verify` here stays in CI as an independent codec check.
+
+Original description: editing pipeline for compressed graphics blobs (assets/gfx/{tiles,characters}/sCompressed*.bin).
 
   export [--png] [--out DIR]   decompress every blob to DIR/<label>.raw (default build/gfx_export), optionally PNG sheets
   import --label L --raw F     recompress a raw file (or --png F --bpp N) and write assets/gfx/.../L.bin
