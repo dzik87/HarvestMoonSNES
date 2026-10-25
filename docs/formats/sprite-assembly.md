@@ -135,14 +135,14 @@ python3 tests/test_spriteexport.py
 ```
 
 `check` (CI step "Check asset sources") re-parses every `index.json` and requires: the steps/timers equal the animation list read from
-`src/data/objects/bank_86.asm`/`bank_87.asm`; every frame's components equal the data bank (including derived fields); the image
+`assets/objects/bank_86`/`bank_87` (the sources of the object data, `docs/formats/object-data.md` section 10); every frame's components equal the data bank (including derived fields); the image
 list equals a fresh render; every frame PNG and every `contact.png` equals a fresh re-render pixel for pixel (palette ignored); no stray
 files; the top-level index lists all 1104 objects. It never writes. The contact sheet labels use a built-in 3x5 pixel font so that the
 output does not depend on the Pillow version.
 
 **Reverse direction.** The ROM bytes are *not* generated from this folder: editing an exported PNG or JSON does nothing to the build, and `check` will
 report the difference (the folder is derived output, like `pngsync.py preview`). To change a sprite, edit the tile sheet PNG
-(`assets/gfx/png/sprites/*.png`, `docs/formats/graphics-png.md`) and re-run `export`; to change the layout of a frame edit `src/data/objects/bank_8x.asm`.
+(`assets/gfx/png/sprites/*.png`, `docs/formats/graphics-png.md`) and re-run `export`; to change the layout of a frame edit `assets/objects/bank_8x/frames.txt`.
 A PNG -> component re-import (finding tile ids for edited pixels, allocating unused blocks, re-pointing frames) is future work; the JSON already
 carries everything that is needed (`tile`, `x`, `y`, `attr`, and the sheet position of each tile). To regenerate after any change of
 the sheets or the object data: `export`, then commit the folder.

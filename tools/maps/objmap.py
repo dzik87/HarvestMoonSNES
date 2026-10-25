@@ -1,53 +1,27 @@
-#!/usr/bin/env python3
-"""Object map converter (bank $A7): `dw` dumps <-> editable JSON grids, byte-exact.
+"""Object maps (bank $A7): editable JSON grids -> generated assembly, byte-exact.
 
-Each sObjectMap_* is a row-major grid of 1-byte object/tile ids (the dump stores them as `dw` pairs).
-The row stride is 16 * mapMultiWidth tiles (header byte 3 of the area, see fObjectEngine_ConvertCoordsToOffset);
-widths per map come from tools/maps/map_dims.json (derived from the area header table, 3 maps are not
-referenced and their width is an assumption - the bytes are unaffected either way).
+Each sObjectMap_* is a row-major grid of 1-byte object/tile ids.  The row stride is 16 * mapMultiWidth tiles
+(header byte 3 of the area, see fObjectEngine_ConvertCoordsToOffset); widths per map come from
+tools/maps/map_dims.json (derived from the area header table, 3 maps are not referenced and their width is an
+assumption - the bytes are unaffected either way).  The assets/maps/*.json files are the only source: the
+assembly (build/gen/maps/bank_A7.asm, included by src/main.asm) is generated and not committed.
 
 Commands:
-  extract   src/data/tilemaps/bank_A7.asm -> assets/maps/<label>.json  {"label","address","width","height","rows":["A1 A1 ..",...]}
-  emit-asm  assets/maps/*.json -> src/data/tilemaps/bank_A7.asm  (canonical `db` rows + zero padding)
-  check     JSON <-> current asm bytes must be identical (used by CI)
+  build     assets/maps/*.json -> build/gen/maps/bank_A7.asm  (maps in address order, canonical `db` rows, zero padding)
+  check     JSON files are consistent: contiguous addresses from $A78000, sizes = width*height, bank not overflown
+            (with --rom <US rom>: the maps also equal the ROM bytes)
+  extract   ROM dump -> assets/maps/<label>.json  {"label","address","width","height","areas","rows":["A1 A1 ..",...]}
+            (label/address/size list is taken from the existing JSON files; ROM is a tool input only)
 """
-import argparse, json, re, sys
+import argparse, json, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-ASM = ROOT / "src" / "data" / "tilemaps" / "bank_A7.asm"
+GEN = ROOT / "build" / "gen" / "maps" / "bank_A7.asm"
 ASSETS = ROOT / "assets" / "maps"
 DIMS = json.loads((Path(__file__).parent / "map_dims.json").read_text())
 BANK = 0x8000
 ORG = 0xA78000
-
-
-def parse_asm(path):
-    """-> ([(label, address, bytes)], padding_bytes)"""
-    text = path.read_text(encoding="utf-8")
-    blocks, cur, pad = [], None, None
-    addr = ORG
-    for line in text.splitlines():
-        line = re.sub(r";.*", "", line).rstrip()
-        m = re.match(r"^([A-Za-z_]\w*):$", line)
-        if m:
-            if m.group(1).startswith("Padding_"):
-                cur = None; pad = bytearray()
-            else:
-                cur = [m.group(1), addr, bytearray()]; blocks.append(cur)
-            continue
-        m = re.match(r"^\s*fill (\d+)$", line)
-        if m:
-            pad.extend(bytes(int(m.group(1)))); addr += int(m.group(1)); continue
-        m = re.match(r"^\s*(dw|db) (.*)$", line)
-        if m:
-            vals = [int(x, 16) for x in re.findall(r"\$([0-9A-Fa-f]+)", m.group(2))]
-            if m.group(1) == "dw":
-                data = b"".join(v.to_bytes(2, "little") for v in vals)
-            else:
-                data = bytes(vals)
-            (cur[2] if cur is not None else pad).extend(data); addr += len(data)
-    return [(l, a, bytes(b)) for l, a, b in blocks], bytes(pad or b"")
 
 
 def to_json(label, address, data):
@@ -65,54 +39,88 @@ def from_json(doc):
     return data
 
 
-def cmd_extract(a):
-    blocks, pad = parse_asm(ASM)
-    if any(pad):
-        raise SystemExit("padding is not zero")
-    ASSETS.mkdir(parents=True, exist_ok=True)
-    for label, address, data in blocks:
-        (ASSETS / f"{label}.json").write_text(json.dumps(to_json(label, address, data), indent=1) + "\n", encoding="utf-8", newline="\n")
-    print(f"extracted {len(blocks)} maps")
+def load_docs():
+    """All map JSON documents in address order."""
+    docs = [json.loads(p.read_text(encoding="utf-8")) for p in sorted(ASSETS.glob("*.json"))]
+    docs.sort(key=lambda d: int(d["address"].lstrip("$"), 16))
+    return docs
 
 
-def load_all(order):
-    return [(l, from_json(json.loads((ASSETS / f"{l}.json").read_text()))) for l in order]
+def problems(docs):
+    errs, addr = [], ORG
+    for d in docs:
+        a = int(d["address"].lstrip("$"), 16)
+        try:
+            data = from_json(d)
+        except ValueError as e:
+            errs.append(str(e)); continue
+        if a != addr:
+            errs.append(f"{d['label']}: address ${a:06X} expected ${addr:06X} (maps must be contiguous)")
+        if d["label"] not in DIMS or DIMS[d["label"]]["width"] != d["width"]:
+            errs.append(f"{d['label']}: width differs from tools/maps/map_dims.json")
+        addr = a + len(data)
+    if addr > ORG + BANK:
+        errs.append("maps overflow bank $A7")
+    return errs
 
 
-def cmd_emit(a):
-    blocks, _ = parse_asm(ASM)
-    maps = load_all([l for l, _, _ in blocks])
-    lines = ["; Object maps (bank $A7) - generated by tools/maps/objmap.py emit-asm from assets/maps/*.json", "", f"    ORG ${ORG:06X}", ""]
+def cmd_build(a):
+    docs = load_docs()
+    errs = problems(docs)
+    if errs:
+        print("\n".join(errs)); return 1
+    lines = ["; Object maps (bank $A7) - generated by tools/maps/objmap.py build from assets/maps/*.json (do not edit; not committed)", "",
+             f"    ORG ${ORG:06X}", ""]
     total = 0
-    for label, data in maps:
-        lines.append(f"{label}:")
-        w = DIMS[label]["width"]
+    for d in docs:
+        data = from_json(d)
+        lines.append(f"{d['label']}:")
+        w = d["width"]
         for k in range(0, len(data), w):
             lines.append("    db " + ",".join("$%02X" % b for b in data[k:k + w]))
         lines.append(""); total += len(data)
     lines += ["Padding_A70000:", f"    fill {BANK - total}", ""]
-    ASM.write_text("\n".join(lines), encoding="utf-8", newline="\n")
-    print(f"wrote {ASM.name} ({total} bytes of maps)")
+    GEN.parent.mkdir(parents=True, exist_ok=True)
+    GEN.write_text("\n".join(lines), encoding="utf-8", newline="\n")
+    print(f"objmap: wrote {GEN.relative_to(ROOT)} ({len(docs)} maps, {total} bytes)")
+    return 0
+
+
+def cmd_extract(a):
+    if not a.rom:
+        raise SystemExit("extract needs --rom <US rom>")
+    rom = Path(a.rom).read_bytes()
+    base = (ORG >> 16) - 0x80
+    bank = rom[base * BANK:(base + 1) * BANK]
+    for d in load_docs():
+        off = int(d["address"].lstrip("$"), 16) - ORG
+        n = d["width"] * d["height"]
+        (ASSETS / f"{d['label']}.json").write_text(json.dumps(to_json(d["label"], ORG + off, bank[off:off + n]), indent=1) + "\n", encoding="utf-8", newline="\n")
+    print("extracted maps")
+    return 0
 
 
 def cmd_check(a):
-    blocks, pad = parse_asm(ASM)
-    bad = 0
-    for label, address, data in blocks:
-        p = ASSETS / f"{label}.json"
-        if not p.exists() or from_json(json.loads(p.read_text())) != data:
-            print("MISMATCH", label); bad += 1
-    if sum(len(d) for _, _, d in blocks) + len(pad) != BANK:
-        print("bank size mismatch"); bad += 1
-    print("map check:", "FAILED" if bad else f"OK ({len(blocks)} maps)")
-    return 1 if bad else 0
+    docs = load_docs()
+    errs = problems(docs)
+    if a.rom:
+        rom = Path(a.rom).read_bytes()
+        bank = rom[((ORG >> 16) - 0x80) * BANK:][:BANK]
+        for d in docs:
+            off = int(d["address"].lstrip("$"), 16) - ORG
+            if bank[off:off + d["width"] * d["height"]] != from_json(d):
+                errs.append(f"{d['label']}: differs from the ROM")
+    print("\n".join(errs))
+    print("map check:", "FAILED" if errs else f"OK ({len(docs)} maps)")
+    return 1 if errs else 0
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("cmd", choices=["extract", "emit-asm", "check"])
+    ap.add_argument("cmd", choices=["build", "check", "extract"])
+    ap.add_argument("--rom")
     a = ap.parse_args()
-    return {"extract": cmd_extract, "emit-asm": cmd_emit, "check": cmd_check}[a.cmd](a) or 0
+    return {"build": cmd_build, "check": cmd_check, "extract": cmd_extract}[a.cmd](a) or 0
 
 
 if __name__ == "__main__":

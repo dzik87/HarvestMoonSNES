@@ -77,3 +77,18 @@ releases run the same scripts, see `docs/regions-ai.md`.
 - `tools/build.py --region EU|DE|JP` builds and verifies the complete ROM (`tests/expected.json` keys EU, DE, JP now hold full-ROM hashes; the partial
   bank-range keys and `*-AI` keys were dropped).
 
+
+## Data moved out of `src/` (object banks and object maps)
+- Object animation banks $86/$87 (`src/data/objects/bank_86.asm`, `bank_87.asm`, 1.37 MB of `db`/`dw` text) became structured sources in `assets/objects/bank_8x/`
+  (`bank.json`, 1,104 `objects/NNNN.json`, `frames.txt`, about 170 KB); the assembly is generated into `build/gen/objects/` by `tools/objects/objdata.py build`
+  (run by `tools/build_assets.py`); label names and pointer symbolism are unchanged. The sources were extracted from the former asm and verified against the US ROM dump
+  (`objdata.py check --rom`); the asm files are no longer committed.
+- Object maps (bank $A7): `src/data/tilemaps/bank_A7.asm` is no longer committed; `assets/maps/*.json` is the only source and `tools/maps/objmap.py build`
+  writes `build/gen/maps/bank_A7.asm`.
+- Removed as provably unused one-off migration scripts (no references anywhere in the repository, their inputs/outputs are long gone): `tools/migration/ai_labels.py`
+  (AI raw addresses -> labels, done in phase 2), `tools/migration/split_ai.py` (per-script AI split, phase 2c).
+- Inventory of the remaining committed assembly under `src/`: hand-written/disassembled code (`src/code`, `src/ai`, `src/common`, `src/main.asm`, `src/code/header.asm`,
+  `src/code/region_targets.asm`) is kept; `src/data/dialogs/macros.asm` is a macro file; pending conversion by the graphics and audio work (not touched here):
+  `src/data/gfx/**/bank_*.asm` (sprites, tiles, characters, palettes wrappers) and `src/data/audio/bank_AD..B2.asm`.
+- Kept although old: `tools/migration/{apply_renames,ai_wram80,aicmd_names,region_labels,region_patch}.py` (referenced from docs/tests), `tools/gfx/gfxpipe.py` (CI `verify` step and docs),
+  `docs/naming/*.csv` (old -> new label maps referenced from the docs).

@@ -1,15 +1,19 @@
-#!/usr/bin/env python3
-"""Structural model of the object/sprite animation data in banks $86 and $87.
+"""Object/sprite animation data of banks $86 and $87: editable sources <-> assembler input.
 
-The data lives in ``src/data/objects/bank_86.asm`` and ``bank_87.asm`` as
-``db``/``dw`` dumps.  This tool
+The sources live in ``assets/objects/bank_86`` and ``bank_87`` (see docs/formats/object-data.md):
 
-  * assembles those dumps back into the exact bank bytes (``parse_asm``),
+  bank.json          slot table (64 OAM tile numbers) and the first object index of the bank
+  objects/NNNN.json  one animation list per object index: steps = [frame id, timer]
+  frames.txt         every frame (components: tile,x,y,attr) in ROM order
+
+``build`` turns them into ``build/gen/objects/bank_XX.asm`` (labels and symbolic pointers, the file
+``src/main.asm`` includes); no object data is committed under ``src/``.  Besides that the tool
+
+  * extracts the sources from the original data (``extract`` from a ROM dump or from the legacy
+    ``db``/``dw`` assembly dumps, ``parse_asm``),
   * builds a structural model of each bank (``build_model``),
-  * re-serialises the model with a fresh layout pass and compares it with the
-    original bytes (``check``),
-  * prints statistics (``analyze``), and
-  * proposes systematic names for the generic labels (``names``).
+  * re-serialises the model with a fresh layout pass and compares it with the assembled bytes (``check``),
+  * prints statistics (``analyze``).
 
 Format summary (see docs/formats/object-data.md for evidence):
 
@@ -22,19 +26,23 @@ Format summary (see docs/formats/object-data.md for evidence):
   tail        $00 padding up to $FFFF
 
 Usage:
+  python3 tools/objects/objdata.py build                    # sources -> build/gen/objects/bank_XX.asm
+  python3 tools/objects/objdata.py check [--rom US.sfc]     # sources are consistent (and equal the ROM banks)
+  python3 tools/objects/objdata.py extract --rom US.sfc     # ROM dump -> sources (overwrites assets/objects)
+  python3 tools/objects/objdata.py extract --asm            # legacy src/data/objects/*.asm -> sources
   python3 tools/objects/objdata.py analyze
-  python3 tools/objects/objdata.py check
-  python3 tools/objects/objdata.py names [--out docs/naming/H_objects_86_87.csv]
 """
 import argparse
 import collections
-import csv
+import json
 import os
 import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-DATA_DIR = os.path.join(ROOT, 'src', 'data', 'objects')
+SRC_DIR_LEGACY = os.path.join(ROOT, 'src', 'data', 'objects')   # legacy db/dw dumps (extract --asm only)
+OBJ_DIR = os.path.join(ROOT, 'assets', 'objects')
+GEN_DIR = os.path.join(ROOT, 'build', 'gen', 'objects')
 SRC_DIR = os.path.join(ROOT, 'src')
 BANKS = {0x86: 'bank_86.asm', 0x87: 'bank_87.asm'}
 BANK_SIZE = 0x8000
@@ -138,8 +146,8 @@ def parse_asm(path, bank):
     return out
 
 
-def load_banks():
-    return {b: parse_asm(os.path.join(DATA_DIR, f), b) for b, f in BANKS.items()}
+def load_legacy_asm_banks():
+    return {b: parse_asm(os.path.join(SRC_DIR_LEGACY, f), b) for b, f in BANKS.items()}
 
 
 # --------------------------------------------------------------------------
@@ -449,27 +457,6 @@ def build_model(asm):
     return m
 
 
-# --------------------------------------------------------------------------
-# Commands
-# --------------------------------------------------------------------------
-def cmd_check(_args):
-    bad = 0
-    for bank, asm in load_banks().items():
-        model = build_model(asm)
-        out = model.serialize()
-        orig = bytes(asm.data)
-        if out == orig:
-            print('bank $%02X: OK, %d bytes reproduced exactly (%d nodes)'
-                  % (bank, len(orig), len(model.nodes)))
-        else:
-            bad += 1
-            first = next((i for i in range(min(len(out), len(orig))) if out[i] != orig[i]),
-                         min(len(out), len(orig)))
-            print('bank $%02X: MISMATCH at offset %#x (model %d bytes, source %d bytes)'
-                  % (bank, BASE + first, len(out), len(orig)))
-    return 1 if bad else 0
-
-
 def cmd_analyze(_args):
     banks = load_banks()
     for bank, asm in banks.items():
@@ -538,149 +525,354 @@ def cmd_analyze(_args):
     return 0
 
 
-# ---- naming ---------------------------------------------------------------
-def collect_src_words():
-    words = set()
-    for dp, _dn, fns in os.walk(SRC_DIR):
-        for fn in fns:
-            if fn.endswith(('.asm', '.inc', '.s')):
-                with open(os.path.join(dp, fn), encoding='utf-8', errors='replace') as fh:
-                    for line in fh:
-                        words.update(re.findall(r'[A-Za-z_][A-Za-z0-9_]*', line.split(';', 1)[0]))
-    return words
+# --------------------------------------------------------------------------
+# Editable sources (assets/objects) <-> bank bytes / assembly
+# --------------------------------------------------------------------------
+FRAME_ID_RE = re.compile(r'^[0-9A-Za-z_]+$')
+HEX_RE = re.compile(r'^[0-9A-Fa-f]+$')
 
 
-def propose_names():
-    """Return rows (old, new, confidence, reason)."""
-    rows = []
-    for bank, asm in load_banks().items():
-        m = build_model(asm)
-        obj_base = 0 if bank == 0x86 else OBJ_SPLIT
-        users = collections.Counter()
-        for nd in m.nodes:
-            if nd.kind == 'AnimList':
-                for r, _ in nd.steps:
-                    if r.node is not None:
-                        users[id(r.node)] += 1
-        for nd in m.nodes:
-            if not nd.labels:
-                continue
-            old = nd.labels[0]
-            hx = '%02X%04X' % (bank, nd.addr)
-            if nd.kind == 'SlotTable':
-                new = 'aObjSlotOamTile_' + hx
-                if bank == 0x86:
-                    conf = 'high'
-                    why = ('64 u16 values indexed by tile slot: OAM tile number of the slot '
-                           '(also source-row multiplier for the slot DMA); read by '
-                           'fObject_RenderAll and fObject_ProcessTileLoadQueue')
-                else:
-                    conf = 'medium'
-                    why = ('Byte-identical copy of the bank $86 slot table; no code reads it '
-                           '(engine always uses $868000)')
-            elif nd.kind == 'ListTable':
-                new = 'aObjAnimListPtrs_%02X' % bank
-                conf = 'medium'
-                why = ('%d u16 pointers (one per object index%s) to animation lists in this bank'
-                       % (len(nd.refs), '' if bank == 0x86 else ' minus $262'))
-            elif nd.kind == 'AnimList':
-                if nd.indices:
-                    idx = obj_base + nd.indices[0]
-                    new = 'aObjAnimList_%04X' % idx
-                    conf = 'high'
-                    why = ('Animation list (3-byte steps: frame ptr + timer, $0000 = loop) '
-                           'for object index $%04X' % idx)
-                    if len(nd.indices) > 1:
-                        why += '; shared by %d indices' % len(nd.indices)
-                else:
-                    new = 'aObjAnimListUnref_' + hx
-                    conf = 'low'
-                    why = 'Animation list not reachable from the pointer table'
-            elif nd.kind == 'Frame':
-                if nd.referenced:
-                    new = 'aObjFrame_' + hx
-                    conf = 'high'
-                    why = ('Animation frame, %d component(s) of 5 bytes; pointed to by %d '
-                           'animation step(s)' % (len(nd.comps), users[id(nd)]))
-                else:
-                    new = 'aObjFrameUnref_' + hx
-                    conf = 'medium'
-                    why = ('Frame-shaped data (%d component(s)) with no pointer to it; '
-                           'structural inference only' % len(nd.comps))
-            elif nd.kind == 'Padding':
-                new = 'aObjPadding_' + hx
-                conf = 'high'
-                why = 'Zero fill up to the end of the bank'
+class BankSource:
+    """Parsed editable source of one bank.
+
+    ``slot``    list of 64 words
+    ``first``   object index of the first list of the bank
+    ``objects`` list of (name or None, [(frame id, timer)]) in object-index order
+    ``entries`` ROM-ordered list: ('frame', id, [(tile, x, y, attr)], referenced) or ('raw', bytes)
+    """
+
+    def __init__(self, bank):
+        self.bank = bank
+        self.slot = []
+        self.first = 0
+        self.objects = []
+        self.entries = []
+
+
+def frame_label(fid):
+    return 'aObjFrame_' + fid
+
+
+def _bank_dir(bank, root=None):
+    return os.path.join(root or OBJ_DIR, 'bank_%02X' % bank)
+
+
+def _signed(v):
+    return v - 256 if v >= 128 else v
+
+
+def format_frame_line(fid, comps):
+    return '%s: %s' % (fid, ' '.join('%04X,%d,%d,%02X' % (t, _signed(x), _signed(y), a)
+                                      for t, x, y, a in comps))
+
+
+def parse_frames_text(text, where='frames.txt'):
+    entries = []
+    for n, raw in enumerate(text.splitlines(), 1):
+        line = raw.split(';', 1)[0].strip()
+        if not line:
+            continue
+        if line.startswith('raw '):
+            h = ''.join(line[4:].split())
+            if not HEX_RE.match(h) or len(h) % 2:
+                raise ValueError('%s:%d: bad raw bytes' % (where, n))
+            entries.append(('raw', bytes.fromhex(h)))
+            continue
+        fid, sep, rest = line.partition(':')
+        fid = fid.strip()
+        if not sep or not FRAME_ID_RE.match(fid):
+            raise ValueError('%s:%d: expected "<frame id>: tile,x,y,attr ..."' % (where, n))
+        comps = []
+        for tok in rest.split():
+            f = tok.split(',')
+            if len(f) != 4:
+                raise ValueError('%s:%d: bad component %r' % (where, n, tok))
+            tile, x, y, attr = int(f[0], 16), int(f[1]), int(f[2]), int(f[3], 16)
+            if not (0 <= tile < 0x10000 and -128 <= x < 256 and -128 <= y < 256 and 0 <= attr < 256):
+                raise ValueError('%s:%d: component out of range %r' % (where, n, tok))
+            comps.append((tile, x & 0xFF, y & 0xFF, attr))
+        if not 1 <= len(comps) <= 16:
+            raise ValueError('%s:%d: frame %s needs 1..16 components' % (where, n, fid))
+        entries.append(('frame', fid, comps, not fid.startswith('U')))
+    return entries
+
+
+FRAMES_HEADER = '''; Object animation frames of bank ${bank:02X}, in ROM order (generated layout: the order of this file is the order of the bytes).
+; One frame per line:  <id>: <component> <component> ...      component = tile,x,y,attr
+;   id        label suffix: the frame is emitted as label aObjFrame_<id> (any [A-Za-z0-9_]+; animation steps refer to it).
+;             Ids starting with U are frames that no animation step uses (dead data).
+;   tile      hex, id of the 16x16 sprite (sprite bank $88 + (tile >> 8), see docs/formats/object-data.md)
+;   x,y       signed decimal pixel offsets from the object origin
+;   attr      hex: bits 0-2 palette, bit 4 vertical flip, bit 5 horizontal flip
+; "raw <hex bytes>" emits bytes that belong to no frame (kept verbatim).
+'''
+
+
+def read_sources(bank, root=None):
+    d = _bank_dir(bank, root)
+    src = BankSource(bank)
+    with open(os.path.join(d, 'bank.json'), encoding='utf-8') as fh:
+        meta = json.load(fh)
+    src.slot = [int(v, 16) if isinstance(v, str) else v for v in meta['slot_table']]
+    src.first = int(meta['first_object_index'], 16)
+    if len(src.slot) != SLOT_COUNT:
+        raise ValueError('bank %02X: slot table needs %d entries' % (bank, SLOT_COUNT))
+    names = sorted(fn for fn in os.listdir(os.path.join(d, 'objects')) if fn.endswith('.json'))
+    for k, fn in enumerate(names):
+        if fn != '%04X.json' % (src.first + k):
+            raise ValueError('bank %02X: object files must be contiguous from %04X (found %s at position %d)'
+                             % (bank, src.first, fn, k))
+        with open(os.path.join(d, 'objects', fn), encoding='utf-8') as fh:
+            doc = json.load(fh)
+        steps = [(str(f), int(t)) for f, t in doc['steps']]
+        if not steps:
+            raise ValueError('%s: empty animation list (the engine would hang)' % fn)
+        for f, t in steps:
+            if not 0 <= t <= 255:
+                raise ValueError('%s: timer %d out of range' % (fn, t))
+        src.objects.append((doc.get('name'), steps))
+    with open(os.path.join(d, 'frames.txt'), encoding='utf-8') as fh:
+        src.entries = parse_frames_text(fh.read(), os.path.join(d, 'frames.txt'))
+    ids = [e[1] for e in src.entries if e[0] == 'frame']
+    if len(ids) != len(set(ids)):
+        raise ValueError('bank %02X: duplicate frame ids' % bank)
+    known = set(ids)
+    for k, (_n, steps) in enumerate(src.objects):
+        for f, _t in steps:
+            if f not in known:
+                raise ValueError('bank %02X object %04X: unknown frame id %s' % (bank, src.first + k, f))
+    return src
+
+
+def layout(src):
+    """-> (data bytes, labels name->offset, label->pointer symbolic refs not needed) for a BankSource."""
+    labels = collections.OrderedDict()
+    pos = BASE
+    labels['aObjSlotOamTile_%02X8000' % src.bank] = pos
+    pos += 2 * len(src.slot)
+    labels['aObjAnimListPtrs_%02X' % src.bank] = pos
+    pos += 2 * len(src.objects)
+    list_addr = []
+    for k, (_n, steps) in enumerate(src.objects):
+        labels['aObjAnimList_%04X' % (src.first + k)] = pos
+        list_addr.append(pos)
+        pos += 3 * len(steps) + 2
+    frame_addr = {}
+    for e in src.entries:
+        if e[0] == 'frame':
+            frame_addr[e[1]] = pos
+            labels[frame_label(e[1])] = pos
+            pos += 1 + 5 * len(e[2])
+        else:
+            pos += len(e[1])
+    if pos > BASE + BANK_SIZE:
+        raise ValueError('bank %02X overflows by %d bytes' % (src.bank, pos - BASE - BANK_SIZE))
+    labels['aObjPadding_%02X%04X' % (src.bank, pos)] = pos
+    out = bytearray()
+    for w in src.slot:
+        out += w.to_bytes(2, 'little')
+    for a in list_addr:
+        out += a.to_bytes(2, 'little')
+    for _n, steps in src.objects:
+        for f, t in steps:
+            out += frame_addr[f].to_bytes(2, 'little')
+            out.append(t)
+        out += b'\0\0'
+    for e in src.entries:
+        if e[0] == 'frame':
+            out.append(len(e[2]))
+            for tile, x, y, attr in e[2]:
+                out += tile.to_bytes(2, 'little') + bytes((x, y, attr))
+        else:
+            out += e[1]
+    out += bytes(BASE + BANK_SIZE - (BASE + len(out)))
+    return bytes(out), labels, pos
+
+
+def source_to_asmbank(src):
+    data, labels, _ = layout(src)
+    ab = AsmBank(src.bank, (src.bank << 16) | BASE)
+    ab.data = bytearray(data)
+    ab.labels = labels
+    return ab
+
+
+def load_banks(root=None):
+    """Both banks assembled from the editable sources (objects with .data and .labels)."""
+    return {b: source_to_asmbank(read_sources(b, root)) for b in BANKS}
+
+
+def emit_asm(src):
+    data, labels, pad_start = layout(src)
+    lines = ['; Object animation data of bank $%02X - generated by tools/objects/objdata.py build from assets/objects/bank_%02X/' % (src.bank, src.bank),
+             '; (do not edit; not committed)', '', '    ORG $%02X%04X' % (src.bank, BASE), '']
+    lines.append('aObjSlotOamTile_%02X8000:' % src.bank)
+    for i in range(0, len(src.slot), 8):
+        lines.append('    dw ' + ','.join('$%04X' % w for w in src.slot[i:i + 8]))
+    lines.append('aObjAnimListPtrs_%02X:' % src.bank)
+    for k in range(len(src.objects)):
+        lines.append('    dw aObjAnimList_%04X' % (src.first + k))
+    for k, (name, steps) in enumerate(src.objects):
+        lines.append('aObjAnimList_%04X:%s' % (src.first + k, ('   ; ' + name) if name else ''))
+        for f, t in steps:
+            lines.append('    dw %s : db $%02X' % (frame_label(f), t))
+        lines.append('    dw $0000')
+    for e in src.entries:
+        if e[0] == 'frame':
+            lines.append('%s:' % frame_label(e[1]))
+            lines.append('    db $%02X' % len(e[2]))
+            for tile, x, y, attr in e[2]:
+                lines.append('    dw $%04X : db $%02X,$%02X,$%02X' % (tile, x, y, attr))
+        else:
+            lines.append('    db ' + ','.join('$%02X' % b for b in e[1]))
+    lines.append('aObjPadding_%02X%04X:' % (src.bank, pad_start))
+    lines.append('    fill $%04X' % (BASE + BANK_SIZE - pad_start))
+    lines.append('')
+    return '\n'.join(lines)
+
+
+def model_to_source(m, labels_hint=None):
+    """Convert a validated Model (from build_model) to a BankSource with canonical ids."""
+    src = BankSource(m.bank)
+    tbl = next(n for n in m.nodes if n.kind == 'ListTable')
+    src.slot = list(m.nodes[0].words)
+    src.first = 0 if m.bank == 0x86 else OBJ_SPLIT
+    fid = {}
+    for n in m.nodes:
+        if n.kind == 'Frame':
+            fid[id(n)] = ('' if n.referenced else 'U') + '%02X%04X' % (m.bank, n.addr)
+    prev = -1
+    for i, r in enumerate(tbl.refs):
+        al = r.node
+        if al is None or al.indices != [i]:
+            raise ValueError('bank %02X: object index %d does not own a distinct list' % (m.bank, i))
+        if al.addr <= prev:
+            raise ValueError('bank %02X: lists are not in object-index order' % m.bank)
+        prev = al.addr
+        src.objects.append((None, [(fid[id(rr.node)], t) for rr, t in al.steps]))
+    for n in m.nodes:
+        if n.kind == 'Frame':
+            src.entries.append(('frame', fid[id(n)], list(n.comps), n.referenced))
+        elif n.kind in ('Filler', 'Opaque'):
+            src.entries.append(('raw', bytes(n.data) if n.kind == 'Opaque' else bytes(n.fill for _ in range(n.length))))
+        elif n.kind == 'Padding':
+            if n is not m.nodes[-1]:
+                raise ValueError('bank %02X: padding inside the bank' % m.bank)
+    return src
+
+
+def write_sources(src, root=None):
+    d = _bank_dir(src.bank, root)
+    os.makedirs(os.path.join(d, 'objects'), exist_ok=True)
+    for fn in os.listdir(os.path.join(d, 'objects')):
+        os.remove(os.path.join(d, 'objects', fn))
+    meta = {'bank': '$%02X' % src.bank, 'first_object_index': '%04X' % src.first,
+            'slot_table': ['%04X' % w for w in src.slot]}
+    with open(os.path.join(d, 'bank.json'), 'w', encoding='utf-8', newline='\n') as fh:
+        fh.write('{\n "bank": "%s",\n "first_object_index": "%s",\n "slot_table": [\n' % (meta['bank'], meta['first_object_index']))
+        rows = [', '.join('"%s"' % v for v in meta['slot_table'][i:i + 8]) for i in range(0, len(src.slot), 8)]
+        fh.write('  ' + ',\n  '.join(rows) + '\n ]\n}\n')
+    for k, (name, steps) in enumerate(src.objects):
+        with open(os.path.join(d, 'objects', '%04X.json' % (src.first + k)), 'w', encoding='utf-8', newline='\n') as fh:
+            fh.write('{\n')
+            if name:
+                fh.write(' "name": %s,\n' % json.dumps(name))
+            fh.write(' "steps": [\n' + ',\n'.join('  ["%s", %d]' % (f, t) for f, t in steps) + '\n ]\n}\n')
+    with open(os.path.join(d, 'frames.txt'), 'w', encoding='utf-8', newline='\n') as fh:
+        fh.write(FRAMES_HEADER.format(bank=src.bank))
+        for e in src.entries:
+            if e[0] == 'frame':
+                fh.write(format_frame_line(e[1], e[2]) + '\n')
             else:
-                new = 'aObjUnknown_' + hx
-                conf = 'low'
-                why = 'Bytes not covered by the structural model'
-            if new != old:                  # idempotent after the renames are applied
-                rows.append((old, new, conf, why))
-        # A label that sits one byte before a Padding node (bank $87: the last
-        # byte of the final frame was emitted under the padding label).
-        by_addr = {nd.addr: nd for nd in m.nodes}
-        for name, off in m.stray_labels:
-            nd = by_addr.get(off + 1)
-            if nd is not None and nd.kind == 'Padding':
-                rows.append((name, 'aObjPadding_%02X%04X' % (bank, nd.addr), 'low',
-                             'Zero fill to the end of the bank; the current label is 1 byte '
-                             'early ($%02X%04X is the attribute byte of the preceding frame) - '
-                             'move the label to $%02X%04X when renaming'
-                             % (bank, off, bank, nd.addr)))
-            else:
-                print('warning: label %s at $%02X%04X is not on a node boundary; no name proposed'
-                      % (name, bank, off), file=sys.stderr)
-    return rows
+                fh.write('raw ' + e[1].hex().upper() + '\n')
 
 
-def validate_names(rows):
-    errors = []
-    olds = {r[0] for r in rows}
-    seen = collections.Counter(r[1] for r in rows)
-    words = collect_src_words()
-    for old, new, _c, _w in rows:
-        if not NAME_RE.match(new):
-            errors.append('invalid identifier: ' + new)
-        if re.search(r'_L\d+$', new):
-            errors.append('ends with _L###: ' + new)
-        if seen[new] > 1:
-            errors.append('duplicate new name: ' + new)
-        if new in words and new not in olds:
-            errors.append('collides with existing identifier: ' + new)
-        if new == old:
-            errors.append('no-op rename: ' + old)
-    return errors
+def rom_bank(rom_path, bank):
+    with open(rom_path, 'rb') as fh:
+        rom = fh.read()
+    off = (bank - 0x80) * BANK_SIZE
+    ab = AsmBank(bank, (bank << 16) | BASE)
+    ab.data = bytearray(rom[off:off + BANK_SIZE])
+    return ab
 
 
-def cmd_names(args):
-    rows = propose_names()
-    errs = validate_names(rows)
-    if errs:
-        for e in errs[:20]:
-            print('ERROR: ' + e, file=sys.stderr)
-        return 1
-    out = args.out or os.path.join(ROOT, 'docs', 'naming', 'H_objects_86_87.csv')
-    os.makedirs(os.path.dirname(out), exist_ok=True)
-    with open(out, 'w', newline='', encoding='utf-8') as fh:
-        w = csv.writer(fh, lineterminator='\n')
-        w.writerow(['old', 'new', 'confidence', 'reason'])
-        w.writerows(rows)
-    conf = collections.Counter(r[2] for r in rows)
-    print('wrote %d rows to %s (%s)' % (len(rows), os.path.relpath(out, ROOT),
-                                        ', '.join('%s=%d' % kv for kv in sorted(conf.items()))))
+# --------------------------------------------------------------------------
+# Commands
+# --------------------------------------------------------------------------
+def cmd_build(_args):
+    os.makedirs(GEN_DIR, exist_ok=True)
+    for b in BANKS:
+        text = emit_asm(read_sources(b))
+        with open(os.path.join(GEN_DIR, 'bank_%02X.asm' % b), 'w', encoding='utf-8', newline='\n') as fh:
+            fh.write(text)
+    print('objdata: wrote build/gen/objects/bank_86.asm, bank_87.asm')
     return 0
+
+
+def cmd_extract(args):
+    if args.rom:
+        banks = {b: rom_bank(args.rom, b) for b in BANKS}
+    elif args.asm:
+        banks = load_legacy_asm_banks()
+    else:
+        print('extract needs --rom <US rom> or --asm', file=sys.stderr)
+        return 2
+    for b, asm in banks.items():
+        m = build_model(asm)
+        src = model_to_source(m)
+        if source_to_asmbank(src).data != asm.data:
+            print('bank $%02X: sources do not reproduce the input bytes' % b, file=sys.stderr)
+            return 1
+        write_sources(src)
+        print('bank $%02X: %d objects, %d frame entries written to %s'
+              % (b, len(src.objects), len(src.entries), os.path.relpath(_bank_dir(b), ROOT)))
+    return 0
+
+
+def cmd_check(args):
+    bad = 0
+    for bank, asm in load_banks().items():
+        model = build_model(asm)
+        out = model.serialize()
+        orig = bytes(asm.data)
+        if out == orig and len(orig) == BANK_SIZE:
+            print('bank $%02X: OK, %d bytes reproduced exactly (%d nodes)'
+                  % (bank, len(orig), len(model.nodes)))
+        else:
+            bad += 1
+            first = next((i for i in range(min(len(out), len(orig))) if out[i] != orig[i]),
+                         min(len(out), len(orig)))
+            print('bank $%02X: MISMATCH at offset %#x (model %d bytes, source %d bytes)'
+                  % (bank, BASE + first, len(out), len(orig)))
+        src = read_sources(bank)
+        # sources must be canonical: re-extracting the assembled bytes gives the same text
+        again = model_to_source(model)
+        if [e for e in again.entries] != [e for e in src.entries] or again.objects != [(None, s) for _n, s in src.objects]:
+            print('bank $%02X: note: the source differs from the structure inferred from its bytes '
+                  '(frame ids / order edited, dead frames, shared frames); this is fine' % bank)
+        if getattr(args, 'rom', None):
+            ref = bytes(rom_bank(args.rom, bank).data)
+            if ref != orig:
+                bad += 1
+                first = next(i for i in range(BANK_SIZE) if ref[i] != orig[i])
+                print('bank $%02X: differs from %s at offset %#x' % (bank, args.rom, BASE + first))
+            else:
+                print('bank $%02X: identical to the ROM dump' % bank)
+    return 1 if bad else 0
 
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     sub = ap.add_subparsers(dest='cmd', required=True)
     sub.add_parser('analyze')
-    sub.add_parser('check')
-    p = sub.add_parser('names')
-    p.add_argument('--out')
+    sub.add_parser('build')
+    p = sub.add_parser('check')
+    p.add_argument('--rom', help='also compare the assembled banks with this US ROM dump')
+    p = sub.add_parser('extract')
+    p.add_argument('--rom', help='US ROM dump (tool input only)')
+    p.add_argument('--asm', action='store_true', help='legacy src/data/objects/*.asm dumps')
     args = ap.parse_args(argv)
-    return {'analyze': cmd_analyze, 'check': cmd_check, 'names': cmd_names}[args.cmd](args)
+    return {'analyze': cmd_analyze, 'build': cmd_build, 'check': cmd_check, 'extract': cmd_extract}[args.cmd](args)
 
 
 if __name__ == '__main__':
