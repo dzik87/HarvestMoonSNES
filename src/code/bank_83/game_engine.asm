@@ -43,7 +43,7 @@ fGameEngine_SetDefaults:
     LDA.B #$00                                                 ;83AA2F|A900    |      ;
     STA.L nPowerBerryEaten                                     ;83AA31|8F361F7F|7F1F36;
     LDA.B #$00                                                 ;83AA35|A900    |      ;
-    STA.W $09A3+!DE_RAM_SHIFT                              ;83AA37|8DA309  |0009A3;
+    STA.W $09A3+!RAM_SHIFT                                 ;83AA37|8DA309  |0009A3;
     LDA.B #$00                                                 ;83AA3A|A900    |      ;
     STA.W strcStockData.unkCow                                 ;83AA3C|8D3709  |000937;
     STZ.W strcPlayerData.toolSecond                            ;83AA3F|9C2309  |000923;
@@ -233,8 +233,8 @@ fGameEngine_FirstNight:
     STZ.B ptrUnknown0xCF                                       ;83AC4A|64CF    |0000CF;
     SEP #$20                                                   ;83AC4C|E220    |      ;
     STZ.B ptrUnknown0xCF+2                                     ;83AC4E|64D1    |0000D1;
-    STZ.W $098A+!DE_RAM_SHIFT                              ;83AC50|9C8A09  |00098A;
-    STZ.W $0972+!DE_RAM_SHIFT                              ;83AC53|9C7209  |000972;
+    STZ.W $098A+!RAM_SHIFT                                 ;83AC50|9C8A09  |00098A;
+    STZ.W $0972+!RAM_SHIFT                                 ;83AC53|9C7209  |000972;
     REP #$20                                                   ;83AC56|C220    |      ;
     STZ.B strcPlayer.posX                                      ;83AC58|64D6    |0000D6;
     STZ.B strcPlayer.posY                                      ;83AC5A|64D8    |0000D8;
@@ -301,9 +301,9 @@ fGameEngine_FirstNight:
     STZ.W strcPlayerData.nAiArg                                ;83AD1F|9C2009  |000920;
     STZ.W strcStockData.unkAnyTool                             ;83AD22|9C6B09  |00096B;
     SEP #$20                                                   ;83AD25|E220    |      ;
-    STZ.W $098F+!DE_RAM_SHIFT                              ;83AD27|9C8F09  |00098F;
+    STZ.W $098F+!RAM_SHIFT                                 ;83AD27|9C8F09  |00098F;
     SEP #$20                                                   ;83AD2A|E220    |      ;
-    STZ.W $096C+!DE_RAM_SHIFT                              ;83AD2C|9C6C09  |00096C;
+    STZ.W $096C+!RAM_SHIFT                                 ;83AD2C|9C6C09  |00096C;
     STZ.W strcPlayerData.toolSound                             ;83AD2F|9C2209  |000922;
     SEP #$20                                                   ;83AD32|E220    |      ;
     STZ.W strcAudio.trackId                                    ;83AD34|9C1001  |000110;
@@ -1249,7 +1249,7 @@ fGameEngine_LoadGame:
     STA.L nPowerBerryEaten                                     ;83B39D|8F361F7F|7F1F36;
     LDY.W #$0018                                               ;83B3A1|A01800  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83B3A4|B772    |000072;
-    STA.W $09A3+!DE_RAM_SHIFT                              ;83B3A6|8DA309  |0009A3;
+    STA.W $09A3+!RAM_SHIFT                                 ;83B3A6|8DA309  |0009A3;
     LDY.W #$0019                                               ;83B3A9|A01900  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83B3AC|B772    |000072;
     STA.W strcStockData.unkCow                                 ;83B3AE|8D3709  |000937;
@@ -1628,7 +1628,7 @@ fGameEngine_SaveGame:
     LDA.L nPowerBerryEaten                                     ;83B779|AF361F7F|7F1F36;
     STA.B [ptrTemp0x72],Y                                      ;83B77D|9772    |000072;
     LDY.W #$0018                                               ;83B77F|A01800  |      ;
-    LDA.W $09A3+!DE_RAM_SHIFT                              ;83B782|ADA309  |0009A3;
+    LDA.W $09A3+!RAM_SHIFT                                 ;83B782|ADA309  |0009A3;
     STA.B [ptrTemp0x72],Y                                      ;83B785|9772    |000072;
     LDY.W #$0019                                               ;83B787|A01900  |      ;
     LDA.W strcStockData.unkCow                                 ;83B78A|AD3709  |000937;
@@ -1981,7 +1981,7 @@ fGameEngine_LoadContinue:
 fGameEngine_SaveCheck:
     SEP #$20                                                   ;83BAD4|E220    |      ;
     REP #$10                                                   ;83BAD6|C210    |      ;
-    STZ.W $098E+!DE_RAM_SHIFT                              ;83BAD8|9C8E09  |00098E;
+    STZ.W $098E+!RAM_SHIFT                                 ;83BAD8|9C8E09  |00098E;
     REP #$20                                                   ;83BADB|C220    |      ;
     %UnsetFlag(daily4, $0800)
     STZ.B strcVariables.n16Temp3                               ;83BAE8|6482    |000082;
@@ -2130,7 +2130,7 @@ fGameEngine_SaveCheck:
     CMP.B #$01                                                 ;83BC0E|C901    |      ;
     BNE .justReturn                                            ;83BC10|D047    |83BC59;
     LDA.B #$01                                                 ;83BC12|A901    |      ;
-    STA.W $098E+!DE_RAM_SHIFT                              ;83BC14|8D8E09  |00098E;
+    STA.W $098E+!RAM_SHIFT                                 ;83BC14|8D8E09  |00098E;
     BRA .justReturn                                            ;83BC17|8040    |83BC59;
  
  

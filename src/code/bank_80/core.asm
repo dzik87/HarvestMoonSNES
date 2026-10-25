@@ -415,7 +415,13 @@ fCore_SetSecondChildName:
     dw $0000,$00F0                                             ;808424|        |      ;
  
 fCore_InterruptIRQ5:
+    if !REGION_JP
+    SEP #$20
+    REP #$10
+    SEI
+    else
     SEI                                                        ;808428|78      |      ;
+    endif
     CLC                                                        ;808429|18      |      ;
     XCE                                                        ;80842A|FB      |      ;
     REP #$30                                                   ;80842B|C230    |      ;
@@ -424,9 +430,13 @@ fCore_InterruptIRQ5:
     LDA.W #$0000                                               ;808431|A90000  |      ;
     TCD                                                        ;808434|5B      |      ;
     SEP #$30                                                   ;808435|E230    |      ;
+    if !REGION_JP
+    STZ.W SNES_NMITIMEN
+    else
     STZ.W SNES_NMITIMEN                                        ;808437|9C0042  |004200;
     STZ.W SNES_MDMAEN                                          ;80843A|9C0B42  |00420B;
     STZ.W SNES_HDMAEN                                          ;80843D|9C0C42  |00420C;
+    endif
     LDA.B #$FF                                                 ;808440|A9FF    |      ;
     STA.W SNES_WRIO                                            ;808442|8D0142  |004201;
     STZ.W SNES_WRMPYA                                          ;808445|9C0242  |004202;
@@ -1392,10 +1402,10 @@ fCore_InitializeScreenStatus:
 fCore_ManageGraphicsPresets:
     PHP                                                        ;808C59|08      |      ;
     SEP #$30                                                   ;808C5A|E230    |      ;
-    STA.L $8019B6+!DE_RAM_SHIFT                            ;808C5C|8FB61980|8019B6;
+    STA.L $8019B6+!RAM_SHIFT                               ;808C5C|8FB61980|8019B6;
     TAX                                                        ;808C60|AA      |      ;
     LDA.L Table_OBSEL_Presets,X                                ;808C61|BF448B80|808B44;
-    STA.L $8019B7+!DE_RAM_SHIFT                            ;808C65|8FB71980|8019B7;
+    STA.L $8019B7+!RAM_SHIFT                               ;808C65|8FB71980|8019B7;
     STA.L SNES_OBSEL                                           ;808C69|8F012100|002101;
     XBA                                                        ;808C6D|EB      |      ;
     REP #$20                                                   ;808C6E|C220    |      ;
@@ -1405,51 +1415,51 @@ fCore_ManageGraphicsPresets:
     ASL A                                                      ;808C75|0A      |      ;
     ASL A                                                      ;808C76|0A      |      ;
     ASL A                                                      ;808C77|0A      |      ;
-    STA.L $8019EA+!DE_RAM_SHIFT                            ;808C78|8FEA1980|8019EA;
+    STA.L $8019EA+!RAM_SHIFT                               ;808C78|8FEA1980|8019EA;
     SEP #$20                                                   ;808C7C|E220    |      ;
     LDA.L Table_BGMODE_Presets,X                               ;808C7E|BF4F8B80|808B4F;
-    STA.L $8019B8+!DE_RAM_SHIFT                            ;808C82|8FB81980|8019B8;
+    STA.L $8019B8+!RAM_SHIFT                               ;808C82|8FB81980|8019B8;
     STA.L SNES_BGMODE                                          ;808C86|8F052100|002105;
-    STZ.W $19E2+!DE_RAM_SHIFT                              ;808C8A|9CE219  |0019E2;
-    STZ.W $19E4+!DE_RAM_SHIFT                              ;808C8D|9CE419  |0019E4;
-    STZ.W $19E6+!DE_RAM_SHIFT                              ;808C90|9CE619  |0019E6;
-    STZ.W $19E8+!DE_RAM_SHIFT                              ;808C93|9CE819  |0019E8;
+    STZ.W $19E2+!RAM_SHIFT                                 ;808C8A|9CE219  |0019E2;
+    STZ.W $19E4+!RAM_SHIFT                                 ;808C8D|9CE419  |0019E4;
+    STZ.W $19E6+!RAM_SHIFT                                 ;808C90|9CE619  |0019E6;
+    STZ.W $19E8+!RAM_SHIFT                                 ;808C93|9CE819  |0019E8;
     LDA.L Table_BG1SC_Presets,X                                ;808C96|BF5A8B80|808B5A;
-    STA.L $8019BA+!DE_RAM_SHIFT                            ;808C9A|8FBA1980|8019BA;
+    STA.L $8019BA+!RAM_SHIFT                               ;808C9A|8FBA1980|8019BA;
     STA.L SNES_BG1SC                                           ;808C9E|8F072100|002107;
     AND.B #$FC                                                 ;808CA2|29FC    |      ;
-    STA.L $8019E3+!DE_RAM_SHIFT                            ;808CA4|8FE31980|8019E3;
+    STA.L $8019E3+!RAM_SHIFT                               ;808CA4|8FE31980|8019E3;
     LDA.L Table_BG2SC_Presets,X                                ;808CA8|BF658B80|808B65;
-    STA.L $8019BB+!DE_RAM_SHIFT                            ;808CAC|8FBB1980|8019BB;
+    STA.L $8019BB+!RAM_SHIFT                               ;808CAC|8FBB1980|8019BB;
     STA.L SNES_BG2SC                                           ;808CB0|8F082100|002108;
     AND.B #$FC                                                 ;808CB4|29FC    |      ;
-    STA.L $8019E5+!DE_RAM_SHIFT                            ;808CB6|8FE51980|8019E5;
+    STA.L $8019E5+!RAM_SHIFT                               ;808CB6|8FE51980|8019E5;
     LDA.L Table_BG3SC_Presets,X                                ;808CBA|BF708B80|808B70;
-    STA.L $8019BC+!DE_RAM_SHIFT                            ;808CBE|8FBC1980|8019BC;
+    STA.L $8019BC+!RAM_SHIFT                               ;808CBE|8FBC1980|8019BC;
     STA.L SNES_BG3SC                                           ;808CC2|8F092100|002109;
     AND.B #$FC                                                 ;808CC6|29FC    |      ;
-    STA.L $8019E7+!DE_RAM_SHIFT                            ;808CC8|8FE71980|8019E7;
+    STA.L $8019E7+!RAM_SHIFT                               ;808CC8|8FE71980|8019E7;
     LDA.L Table_BG4SC_Presets,X                                ;808CCC|BF7B8B80|808B7B;
-    STA.L $8019BD+!DE_RAM_SHIFT                            ;808CD0|8FBD1980|8019BD;
+    STA.L $8019BD+!RAM_SHIFT                               ;808CD0|8FBD1980|8019BD;
     STA.L SNES_BG4SC                                           ;808CD4|8F0A2100|00210A;
     AND.B #$FC                                                 ;808CD8|29FC    |      ;
-    STA.L $8019E9+!DE_RAM_SHIFT                            ;808CDA|8FE91980|8019E9;
+    STA.L $8019E9+!RAM_SHIFT                               ;808CDA|8FE91980|8019E9;
     LDA.L Table_BG12NBA_Presets,X                              ;808CDE|BF868B80|808B86;
-    STA.L $8019BE+!DE_RAM_SHIFT                            ;808CE2|8FBE1980|8019BE;
+    STA.L $8019BE+!RAM_SHIFT                               ;808CE2|8FBE1980|8019BE;
     STA.L SNES_BG12NBA                                         ;808CE6|8F0B2100|00210B;
     LDA.L Table_BG34NBA_Presets,X                              ;808CEA|BF918B80|808B91;
-    STA.L $8019BF+!DE_RAM_SHIFT                            ;808CEE|8FBF1980|8019BF;
+    STA.L $8019BF+!RAM_SHIFT                               ;808CEE|8FBF1980|8019BF;
     STA.L SNES_BG34NBA                                         ;808CF2|8F0C2100|00210C;
     REP #$20                                                   ;808CF6|C220    |      ;
     LDA.W #$0000                                               ;808CF8|A90000  |      ;
-    STA.L $8019C0+!DE_RAM_SHIFT                            ;808CFB|8FC01980|8019C0;
-    STA.L $8019C2+!DE_RAM_SHIFT                            ;808CFF|8FC21980|8019C2;
-    STA.L $8019C4+!DE_RAM_SHIFT                            ;808D03|8FC41980|8019C4;
-    STA.L $8019C6+!DE_RAM_SHIFT                            ;808D07|8FC61980|8019C6;
-    STA.L $8019C8+!DE_RAM_SHIFT                            ;808D0B|8FC81980|8019C8;
-    STA.L $8019CA+!DE_RAM_SHIFT                            ;808D0F|8FCA1980|8019CA;
-    STA.L $8019CC+!DE_RAM_SHIFT                            ;808D13|8FCC1980|8019CC;
-    STA.L $8019CE+!DE_RAM_SHIFT                            ;808D17|8FCE1980|8019CE;
+    STA.L $8019C0+!RAM_SHIFT                               ;808CFB|8FC01980|8019C0;
+    STA.L $8019C2+!RAM_SHIFT                               ;808CFF|8FC21980|8019C2;
+    STA.L $8019C4+!RAM_SHIFT                               ;808D03|8FC41980|8019C4;
+    STA.L $8019C6+!RAM_SHIFT                               ;808D07|8FC61980|8019C6;
+    STA.L $8019C8+!RAM_SHIFT                               ;808D0B|8FC81980|8019C8;
+    STA.L $8019CA+!RAM_SHIFT                               ;808D0F|8FCA1980|8019CA;
+    STA.L $8019CC+!RAM_SHIFT                               ;808D13|8FCC1980|8019CC;
+    STA.L $8019CE+!RAM_SHIFT                               ;808D17|8FCE1980|8019CE;
     SEP #$20                                                   ;808D1B|E220    |      ;
     BIT.B strcSystem.INIDISP                                   ;808D1D|2424    |000024;
     BPL +                                                      ;808D1F|101A    |808D3B;
@@ -1466,58 +1476,58 @@ fCore_ManageGraphicsPresets:
     BNE -                                                      ;808D38|D0EA    |808D24;
     PLX                                                        ;808D3A|FA      |      ;
  
-  + STA.L $8019D0+!DE_RAM_SHIFT                            ;808D3B|8FD01980|8019D0;
+  + STA.L $8019D0+!RAM_SHIFT                               ;808D3B|8FD01980|8019D0;
     STA.L SNES_M7SEL                                           ;808D3F|8F1A2100|00211A;
     LDA.L Table_W12SEL_Presets,X                               ;808D43|BFE98B80|808BE9;
-    STA.L $8019D1+!DE_RAM_SHIFT                            ;808D47|8FD11980|8019D1;
+    STA.L $8019D1+!RAM_SHIFT                               ;808D47|8FD11980|8019D1;
     STA.L SNES_W12SEL                                          ;808D4B|8F232100|002123;
     LDA.L Table_W34SEL_Presets,X                               ;808D4F|BFF48B80|808BF4;
-    STA.L $8019D2+!DE_RAM_SHIFT                            ;808D53|8FD21980|8019D2;
+    STA.L $8019D2+!RAM_SHIFT                               ;808D53|8FD21980|8019D2;
     STA.L SNES_W34SEL                                          ;808D57|8F242100|002124;
     LDA.L Table_WOBJSEL_Presets,X                              ;808D5B|BFFF8B80|808BFF;
-    STA.L $8019D3+!DE_RAM_SHIFT                            ;808D5F|8FD31980|8019D3;
+    STA.L $8019D3+!RAM_SHIFT                               ;808D5F|8FD31980|8019D3;
     STA.L SNES_WOBJSEL                                         ;808D63|8F252100|002125;
     LDA.L Table_WBGLOG_Presets,X                               ;808D67|BF368C80|808C36;
-    STA.L $8019D8+!DE_RAM_SHIFT                            ;808D6B|8FD81980|8019D8;
+    STA.L $8019D8+!RAM_SHIFT                               ;808D6B|8FD81980|8019D8;
     STA.L SNES_WBGLOG                                          ;808D6F|8F2A2100|00212A;
     LDA.L Table_WOBJLOG_Presets,X                              ;808D73|BF418C80|808C41;
-    STA.L $8019D9+!DE_RAM_SHIFT                            ;808D77|8FD91980|8019D9;
+    STA.L $8019D9+!RAM_SHIFT                               ;808D77|8FD91980|8019D9;
     STA.L SNES_WOBJLOG                                         ;808D7B|8F2B2100|00212B;
     LDA.L Table_WH0_Presets,X                                  ;808D7F|BF0A8C80|808C0A;
-    STA.L $8019D4+!DE_RAM_SHIFT                            ;808D83|8FD41980|8019D4;
+    STA.L $8019D4+!RAM_SHIFT                               ;808D83|8FD41980|8019D4;
     STA.L SNES_WH0                                             ;808D87|8F262100|002126;
     LDA.L Table_WH1_Presets,X                                  ;808D8B|BF158C80|808C15;
-    STA.L $8019D5+!DE_RAM_SHIFT                            ;808D8F|8FD51980|8019D5;
+    STA.L $8019D5+!RAM_SHIFT                               ;808D8F|8FD51980|8019D5;
     STA.L SNES_WH1                                             ;808D93|8F272100|002127;
     LDA.L Table_WH2_Presets,X                                  ;808D97|BF208C80|808C20;
-    STA.L $8019D6+!DE_RAM_SHIFT                            ;808D9B|8FD61980|8019D6;
+    STA.L $8019D6+!RAM_SHIFT                               ;808D9B|8FD61980|8019D6;
     STA.L SNES_WH2                                             ;808D9F|8F282100|002128;
     LDA.L Table_WH3_Presets,X                                  ;808DA3|BF2B8C80|808C2B;
-    STA.L $8019D7+!DE_RAM_SHIFT                            ;808DA7|8FD71980|8019D7;
+    STA.L $8019D7+!RAM_SHIFT                               ;808DA7|8FD71980|8019D7;
     STA.L SNES_WH3                                             ;808DAB|8F292100|002129;
     LDA.L Table_TM_Presets,X                                   ;808DAF|BF9C8B80|808B9C;
-    STA.L $8019DA+!DE_RAM_SHIFT                            ;808DB3|8FDA1980|8019DA;
+    STA.L $8019DA+!RAM_SHIFT                               ;808DB3|8FDA1980|8019DA;
     STA.L SNES_TM                                              ;808DB7|8F2C2100|00212C;
     LDA.L Table_TS_Presets,X                                   ;808DBB|BFA78B80|808BA7;
-    STA.L $8019DB+!DE_RAM_SHIFT                            ;808DBF|8FDB1980|8019DB;
+    STA.L $8019DB+!RAM_SHIFT                               ;808DBF|8FDB1980|8019DB;
     STA.L SNES_TS                                              ;808DC3|8F2D2100|00212D;
     LDA.L Table_TMW_Presets,X                                  ;808DC7|BFB28B80|808BB2;
-    STA.L $8019DC+!DE_RAM_SHIFT                            ;808DCB|8FDC1980|8019DC;
+    STA.L $8019DC+!RAM_SHIFT                               ;808DCB|8FDC1980|8019DC;
     STA.L SNES_TMW                                             ;808DCF|8F2E2100|00212E;
     LDA.L Table_TSW_Presets,X                                  ;808DD3|BFBD8B80|808BBD;
-    STA.L $8019DD+!DE_RAM_SHIFT                            ;808DD7|8FDD1980|8019DD;
+    STA.L $8019DD+!RAM_SHIFT                               ;808DD7|8FDD1980|8019DD;
     STA.L SNES_TSW                                             ;808DDB|8F2F2100|00212F;
     LDA.L Table_CGWSEL_Presets,X                               ;808DDF|BFC88B80|808BC8;
-    STA.L $8019DE+!DE_RAM_SHIFT                            ;808DE3|8FDE1980|8019DE;
+    STA.L $8019DE+!RAM_SHIFT                               ;808DE3|8FDE1980|8019DE;
     STA.L SNES_CGWSEL                                          ;808DE7|8F302100|002130;
     LDA.L Table_CGADSUB_Presets,X                              ;808DEB|BFD38B80|808BD3;
-    STA.L $8019DF+!DE_RAM_SHIFT                            ;808DEF|8FDF1980|8019DF;
+    STA.L $8019DF+!RAM_SHIFT                               ;808DEF|8FDF1980|8019DF;
     STA.L SNES_CGADSUB                                         ;808DF3|8F312100|002131;
     LDA.B #$E0                                                 ;808DF7|A9E0    |      ;
-    STA.L $8019E0+!DE_RAM_SHIFT                            ;808DF9|8FE01980|8019E0;
+    STA.L $8019E0+!RAM_SHIFT                               ;808DF9|8FE01980|8019E0;
     STA.L SNES_COLDATA                                         ;808DFD|8F322100|002132;
     LDA.L Table_SETINI_Presets,X                               ;808E01|BFDE8B80|808BDE;
-    STA.L $8019E1+!DE_RAM_SHIFT                            ;808E05|8FE11980|8019E1;
+    STA.L $8019E1+!RAM_SHIFT                               ;808E05|8FE11980|8019E1;
     STA.L SNES_SETINI                                          ;808E09|8F332100|002133;
     PLP                                                        ;808E0D|28      |      ;
     RTL                                                        ;808E0E|6B      |      ;

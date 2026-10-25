@@ -44,5 +44,25 @@
     "crc32": "E9B5776F",
     "md5": "b26d1070003fe1674aa8ea499ec27711",
     "sha1": "a34eca99bfe8b634df05db6a7de1cde056c29375"
+  },
+  "EU": {
+    "banks": [
+      "80",
+      "85"
+    ],
+    "size": 196608,
+    "crc32": "D0383D72",
+    "md5": "1fe2244f817afd5f3e086af71ba54d85",
+    "sha1": "5d5f57b9033ef9ff8c5b6b9ee8fb303a0b47a445"
+  },
+  "JP": {
+    "banks": [
+      "80",
+      "85"
+    ],
+    "size": 196608,
+    "crc32": "044C47C0",
+    "md5": "a773ab274e31137102d29ed661f99ef2",
+    "sha1": "abb943e06a46f01e9d4f5ece754cc9dc728fe403"
   }
 }

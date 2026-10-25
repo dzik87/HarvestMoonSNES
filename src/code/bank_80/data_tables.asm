@@ -257,6 +257,24 @@ pSubrutineTable_80BEEC:
     dw PTR16_80FFFF                                            ;80BF18|        |80FFFF;
     dw $FFFF                                                   ;80BF1A|        |      ;
     dw PTR16_80FFFF                                            ;80BF1C|        |80FFFF;
+    if !REGION_JP
+    dw $CADC
+    dw $CB2E
+    dw $CB80
+    dw $CBD2
+    dw $FFFF
+    dw L_80FFFF
+    dw $CC90
+    dw $CCE2
+    dw $CD34
+    dw $CD86
+    dw $FFFF
+    dw L_80FFFF
+    dw $CE44
+    dw $CE96
+    dw L_80CFC3
+    dw $CF3A
+    else
     dw fPaletteAnim_TownSpring_DancingS1_EggFestival_T1                                       ;80BF1E|        |80CADE;
     dw fPaletteAnim_TownSpring_T2                                       ;80BF20|        |80CB30;
     dw fPaletteAnim_TownSpring_T3                                       ;80BF22|        |80CB82;
@@ -273,6 +291,7 @@ pSubrutineTable_80BEEC:
     dw fPaletteAnim_TownFall_T2                                       ;80BF38|        |80CE98;
     dw fPaletteAnim_TownFall_T3                                       ;80BF3A|        |80CEEA;
     dw fPaletteAnim_TownFall_T4                                       ;80BF3C|        |80CF3C;
+    endif
     dw $FFFF                                                   ;80BF3E|        |      ;
     dw PTR16_80FFFF                                            ;80BF40|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF42|        |80FFFF;
@@ -281,7 +300,11 @@ pSubrutineTable_80BEEC:
     dw fPaletteAnim_TownWinter_T4                                       ;80BF48|        |80CFFA;
     dw $FFFF                                                   ;80BF4A|        |      ;
     dw PTR16_80FFFF                                            ;80BF4C|        |80FFFF;
+    if !REGION_JP
+    dw $CADC
+    else
     dw fPaletteAnim_TownSpring_DancingS1_EggFestival_T1                                       ;80BF4E|        |80CADE;
+    endif
     dw PTR16_80FFFF                                            ;80BF50|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF52|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF54|        |80FFFF;
@@ -293,13 +316,21 @@ pSubrutineTable_80BEEC:
     dw PTR16_80FFFF                                            ;80BF60|        |80FFFF;
     dw $FFFF                                                   ;80BF62|        |      ;
     dw PTR16_80FFFF                                            ;80BF64|        |80FFFF;
+    if !REGION_JP
+    dw $CE44
+    else
     dw fPaletteAnim_TownFall_NYPublicSquare_T1                                       ;80BF66|        |80CE46;
+    endif
     dw PTR16_80FFFF                                            ;80BF68|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF6A|        |80FFFF;
     dw fPaletteAnim_NYPublicSquare_T4                                       ;80BF6C|        |80DAB4;
     dw $FFFF                                                   ;80BF6E|        |      ;
     dw PTR16_80FFFF                                            ;80BF70|        |80FFFF;
+    if !REGION_JP
+    dw $CADC
+    else
     dw fPaletteAnim_TownSpring_DancingS1_EggFestival_T1                                       ;80BF72|        |80CADE;
+    endif
     dw PTR16_80FFFF                                            ;80BF74|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF76|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF78|        |80FFFF;
@@ -330,6 +361,35 @@ pSubrutineTable_80BEEC:
     dw $FFFF                                                   ;80BFAA|        |      ;
     dw PTR16_80FFFF                                            ;80BFAC|        |80FFFF;
     dw fPaletteAnim_WoodsSpring_T1                                       ;80BFAE|        |80D067;
+    if !REGION_JP
+    dw $D123
+    dw $D1E1
+    dw $D29F
+    dw $FFFF
+    dw L_80FFFF
+    dw L_80D30D
+    dw $D400
+    dw $D4BE
+    dw $D561
+    dw $FFFF
+    dw L_80FFFF
+    dw $D604
+    dw $D6F8
+    dw $D7EC
+    dw $D88F
+    dw $FFFF
+    dw L_80FFFF
+    dw $D932
+    dw $D969
+    dw $D9A0
+    dw $D9D7
+    dw $FFFF
+    dw L_80FFFF
+    dw $D932
+    dw $D969
+    dw $D9A0
+    dw $D9D7
+    else
     dw fPaletteAnim_WoodsSpring_T2                                       ;80BFB0|        |80D125;
     dw fPaletteAnim_WoodsSpring_T3                                       ;80BFB2|        |80D1E3;
     dw fPaletteAnim_WoodsSpring_T4                                       ;80BFB4|        |80D2A1;
@@ -357,6 +417,7 @@ pSubrutineTable_80BEEC:
     dw fPaletteAnim_WoodsWinter_NYSpa_T2                                       ;80BFE0|        |80D96B;
     dw fPaletteAnim_WoodsWinter_NYSpa_T3                                       ;80BFE2|        |80D9A2;
     dw fPaletteAnim_WoodsWinter_NYSpa_T4                                       ;80BFE4|        |80D9D9;
+    endif
     dw $FFFF                                                   ;80BFE6|        |      ;
     dw fPaletteAnim_House1_House2_House3_All                                       ;80BFE8|        |80C792;
     dw fPaletteAnim_House1_House2_House3_All                                       ;80BFEA|        |80C792;
@@ -530,25 +591,41 @@ pSubrutineTable_80BEEC:
     dw PTR16_80FFFF                                            ;80C13A|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C13C|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C13E|        |80FFFF;
+    if !REGION_JP
+    dw $DA0E
+    else
     dw fPaletteAnim_MountainTopAllSeasonsAndNY_T4                                       ;80C140|        |80DA10;
+    endif
     dw $FFFF                                                   ;80C142|        |      ;
     dw PTR16_80FFFF                                            ;80C144|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C146|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C148|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C14A|        |80FFFF;
+    if !REGION_JP
+    dw $DA0E
+    else
     dw fPaletteAnim_MountainTopAllSeasonsAndNY_T4                                       ;80C14C|        |80DA10;
+    endif
     dw $FFFF                                                   ;80C14E|        |      ;
     dw PTR16_80FFFF                                            ;80C150|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C152|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C154|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C156|        |80FFFF;
+    if !REGION_JP
+    dw $DA0E
+    else
     dw fPaletteAnim_MountainTopAllSeasonsAndNY_T4                                       ;80C158|        |80DA10;
+    endif
     dw $FFFF                                                   ;80C15A|        |      ;
     dw PTR16_80FFFF                                            ;80C15C|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C15E|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C160|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C162|        |80FFFF;
+    if !REGION_JP
+    dw $DA0E
+    else
     dw fPaletteAnim_MountainTopAllSeasonsAndNY_T4                                       ;80C164|        |80DA10;
+    endif
     dw $FFFF                                                   ;80C166|        |      ;
     dw PTR16_80FFFF                                            ;80C168|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C16A|        |80FFFF;
@@ -578,7 +655,11 @@ pSubrutineTable_80BEEC:
     dw PTR16_80FFFF                                            ;80C19A|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C19C|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C19E|        |80FFFF;
+    if !REGION_JP
+    dw $DA0E
+    else
     dw fPaletteAnim_MountainTopAllSeasonsAndNY_T4                                       ;80C1A0|        |80DA10;
+    endif
     dw $FFFF                                                   ;80C1A2|        |      ;
     dw PTR16_80FFFF                                            ;80C1A4|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C1A6|        |80FFFF;
@@ -812,7 +893,7 @@ pSubrutineTable_80BEEC:
 fPaletteAnim_FarmSpring_FarmSummer_T01:
     REP #$20                                                   ;80C36C|C220    |      ;
     SEP #$10                                                   ;80C36E|E210    |      ;
-    LDA.W #$DD5B                                               ;80C370|A95BDD  |      ;
+    LDA.W #Table_80DD5B                                    ;80C370|A95BDD  |      ;
     STA.B ptrTemp0x72                                          ;80C373|8572    |000072;
     SEP #$20                                                   ;80C375|E220    |      ;
     LDA.B #$80                                                 ;80C377|A980    |      ;
@@ -824,7 +905,7 @@ fPaletteAnim_FarmSpring_FarmSummer_T01:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C383|22488E80|808E48;
     REP #$20                                                   ;80C387|C220    |      ;
     SEP #$10                                                   ;80C389|E210    |      ;
-    LDA.W #$DD78                                               ;80C38B|A978DD  |      ;
+    LDA.W #aPaletteAnimScript_FarmSpring_FarmSummer_T01_Slot5 ;80C38B|A978DD  |      ;
     STA.B ptrTemp0x72                                          ;80C38E|8572    |000072;
     SEP #$20                                                   ;80C390|E220    |      ;
     LDA.B #$80                                                 ;80C392|A980    |      ;
@@ -836,7 +917,7 @@ fPaletteAnim_FarmSpring_FarmSummer_T01:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C39E|22488E80|808E48;
     REP #$20                                                   ;80C3A2|C220    |      ;
     SEP #$10                                                   ;80C3A4|E210    |      ;
-    LDA.W #$DD95                                               ;80C3A6|A995DD  |      ;
+    LDA.W #aPaletteAnimScript_FarmSpring_FarmSummer_T01_Slot6 ;80C3A6|A995DD  |      ;
     STA.B ptrTemp0x72                                          ;80C3A9|8572    |000072;
     SEP #$20                                                   ;80C3AB|E220    |      ;
     LDA.B #$80                                                 ;80C3AD|A980    |      ;
@@ -848,7 +929,7 @@ fPaletteAnim_FarmSpring_FarmSummer_T01:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C3B9|22488E80|808E48;
     REP #$20                                                   ;80C3BD|C220    |      ;
     SEP #$10                                                   ;80C3BF|E210    |      ;
-    LDA.W #$DDB2                                               ;80C3C1|A9B2DD  |      ;
+    LDA.W #aPaletteAnimScript_FarmSpring_FarmSummer_T01_Slot7 ;80C3C1|A9B2DD  |      ;
     STA.B ptrTemp0x72                                          ;80C3C4|8572    |000072;
     SEP #$20                                                   ;80C3C6|E220    |      ;
     LDA.B #$80                                                 ;80C3C8|A980    |      ;
@@ -864,7 +945,7 @@ fPaletteAnim_FarmSpring_FarmSummer_T01:
 fPaletteAnim_FarmSpring_FarmSummer_T2:
     REP #$20                                                   ;80C3D9|C220    |      ;
     SEP #$10                                                   ;80C3DB|E210    |      ;
-    LDA.W #$DDCF                                               ;80C3DD|A9CFDD  |      ;
+    LDA.W #aPaletteAnimScript_FarmSpring_FarmSummer_T2_Slot4 ;80C3DD|A9CFDD  |      ;
     STA.B ptrTemp0x72                                          ;80C3E0|8572    |000072;
     SEP #$20                                                   ;80C3E2|E220    |      ;
     LDA.B #$80                                                 ;80C3E4|A980    |      ;
@@ -876,7 +957,7 @@ fPaletteAnim_FarmSpring_FarmSummer_T2:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C3F0|22488E80|808E48;
     REP #$20                                                   ;80C3F4|C220    |      ;
     SEP #$10                                                   ;80C3F6|E210    |      ;
-    LDA.W #$DDEC                                               ;80C3F8|A9ECDD  |      ;
+    LDA.W #aPaletteAnimScript_FarmSpring_FarmSummer_T2_Slot5 ;80C3F8|A9ECDD  |      ;
     STA.B ptrTemp0x72                                          ;80C3FB|8572    |000072;
     SEP #$20                                                   ;80C3FD|E220    |      ;
     LDA.B #$80                                                 ;80C3FF|A980    |      ;
@@ -888,7 +969,7 @@ fPaletteAnim_FarmSpring_FarmSummer_T2:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C40B|22488E80|808E48;
     REP #$20                                                   ;80C40F|C220    |      ;
     SEP #$10                                                   ;80C411|E210    |      ;
-    LDA.W #$DE09                                               ;80C413|A909DE  |      ;
+    LDA.W #aPaletteAnimScript_FarmSpring_FarmSummer_T2_Slot6 ;80C413|A909DE  |      ;
     STA.B ptrTemp0x72                                          ;80C416|8572    |000072;
     SEP #$20                                                   ;80C418|E220    |      ;
     LDA.B #$80                                                 ;80C41A|A980    |      ;
@@ -900,7 +981,7 @@ fPaletteAnim_FarmSpring_FarmSummer_T2:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C426|22488E80|808E48;
     REP #$20                                                   ;80C42A|C220    |      ;
     SEP #$10                                                   ;80C42C|E210    |      ;
-    LDA.W #$DE26                                               ;80C42E|A926DE  |      ;
+    LDA.W #aPaletteAnimScript_FarmSpring_FarmSummer_T2_Slot7 ;80C42E|A926DE  |      ;
     STA.B ptrTemp0x72                                          ;80C431|8572    |000072;
     SEP #$20                                                   ;80C433|E220    |      ;
     LDA.B #$80                                                 ;80C435|A980    |      ;
@@ -916,7 +997,7 @@ fPaletteAnim_FarmSpring_FarmSummer_T2:
 fPaletteAnim_FarmSpring_FarmSummer_T3:
     REP #$20                                                   ;80C446|C220    |      ;
     SEP #$10                                                   ;80C448|E210    |      ;
-    LDA.W #$DE43                                               ;80C44A|A943DE  |      ;
+    LDA.W #aPaletteAnimScript_FarmSpring_FarmSummer_T3_Slot4 ;80C44A|A943DE  |      ;
     STA.B ptrTemp0x72                                          ;80C44D|8572    |000072;
     SEP #$20                                                   ;80C44F|E220    |      ;
     LDA.B #$80                                                 ;80C451|A980    |      ;
@@ -928,7 +1009,7 @@ fPaletteAnim_FarmSpring_FarmSummer_T3:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C45D|22488E80|808E48;
     REP #$20                                                   ;80C461|C220    |      ;
     SEP #$10                                                   ;80C463|E210    |      ;
-    LDA.W #$DE60                                               ;80C465|A960DE  |      ;
+    LDA.W #aPaletteAnimScript_FarmSpring_FarmSummer_T3_Slot5 ;80C465|A960DE  |      ;
     STA.B ptrTemp0x72                                          ;80C468|8572    |000072;
     SEP #$20                                                   ;80C46A|E220    |      ;
     LDA.B #$80                                                 ;80C46C|A980    |      ;
@@ -940,7 +1021,7 @@ fPaletteAnim_FarmSpring_FarmSummer_T3:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C478|22488E80|808E48;
     REP #$20                                                   ;80C47C|C220    |      ;
     SEP #$10                                                   ;80C47E|E210    |      ;
-    LDA.W #$DE7D                                               ;80C480|A97DDE  |      ;
+    LDA.W #aPaletteAnimScript_FarmSpring_FarmSummer_T3_Slot6 ;80C480|A97DDE  |      ;
     STA.B ptrTemp0x72                                          ;80C483|8572    |000072;
     SEP #$20                                                   ;80C485|E220    |      ;
     LDA.B #$80                                                 ;80C487|A980    |      ;
@@ -952,7 +1033,7 @@ fPaletteAnim_FarmSpring_FarmSummer_T3:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C493|22488E80|808E48;
     REP #$20                                                   ;80C497|C220    |      ;
     SEP #$10                                                   ;80C499|E210    |      ;
-    LDA.W #$DE9A                                               ;80C49B|A99ADE  |      ;
+    LDA.W #aPaletteAnimScript_FarmSpring_FarmSummer_T3_Slot7 ;80C49B|A99ADE  |      ;
     STA.B ptrTemp0x72                                          ;80C49E|8572    |000072;
     SEP #$20                                                   ;80C4A0|E220    |      ;
     LDA.B #$80                                                 ;80C4A2|A980    |      ;
@@ -968,7 +1049,7 @@ fPaletteAnim_FarmSpring_FarmSummer_T3:
 fPaletteAnim_FarmSpring_FarmSummer_T4:
     REP #$20                                                   ;80C4B3|C220    |      ;
     SEP #$10                                                   ;80C4B5|E210    |      ;
-    LDA.W #$DEB7                                               ;80C4B7|A9B7DE  |      ;
+    LDA.W #aPaletteAnimScript_FarmSpring_FarmSummer_T4_Slot4 ;80C4B7|A9B7DE  |      ;
     STA.B ptrTemp0x72                                          ;80C4BA|8572    |000072;
     SEP #$20                                                   ;80C4BC|E220    |      ;
     LDA.B #$80                                                 ;80C4BE|A980    |      ;
@@ -980,7 +1061,7 @@ fPaletteAnim_FarmSpring_FarmSummer_T4:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C4CA|22488E80|808E48;
     REP #$20                                                   ;80C4CE|C220    |      ;
     SEP #$10                                                   ;80C4D0|E210    |      ;
-    LDA.W #$DED4                                               ;80C4D2|A9D4DE  |      ;
+    LDA.W #aPaletteAnimScript_FarmSpring_FarmSummer_T4_Slot5 ;80C4D2|A9D4DE  |      ;
     STA.B ptrTemp0x72                                          ;80C4D5|8572    |000072;
     SEP #$20                                                   ;80C4D7|E220    |      ;
     LDA.B #$80                                                 ;80C4D9|A980    |      ;
@@ -992,7 +1073,7 @@ fPaletteAnim_FarmSpring_FarmSummer_T4:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C4E5|22488E80|808E48;
     REP #$20                                                   ;80C4E9|C220    |      ;
     SEP #$10                                                   ;80C4EB|E210    |      ;
-    LDA.W #$DEF1                                               ;80C4ED|A9F1DE  |      ;
+    LDA.W #aPaletteAnimScript_FarmSpring_FarmSummer_T4_Slot6 ;80C4ED|A9F1DE  |      ;
     STA.B ptrTemp0x72                                          ;80C4F0|8572    |000072;
     SEP #$20                                                   ;80C4F2|E220    |      ;
     LDA.B #$80                                                 ;80C4F4|A980    |      ;
@@ -1004,7 +1085,7 @@ fPaletteAnim_FarmSpring_FarmSummer_T4:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C500|22488E80|808E48;
     REP #$20                                                   ;80C504|C220    |      ;
     SEP #$10                                                   ;80C506|E210    |      ;
-    LDA.W #$DF0E                                               ;80C508|A90EDF  |      ;
+    LDA.W #aPaletteAnimScript_FarmSpring_FarmSummer_T4_Slot7 ;80C508|A90EDF  |      ;
     STA.B ptrTemp0x72                                          ;80C50B|8572    |000072;
     SEP #$20                                                   ;80C50D|E220    |      ;
     LDA.B #$80                                                 ;80C50F|A980    |      ;
@@ -1020,7 +1101,7 @@ fPaletteAnim_FarmSpring_FarmSummer_T4:
 fPaletteAnim_FarmFall_T01:
     REP #$20                                                   ;80C520|C220    |      ;
     SEP #$10                                                   ;80C522|E210    |      ;
-    LDA.W #$DF2B                                               ;80C524|A92BDF  |      ;
+    LDA.W #aPaletteAnimScript_FarmFall_T01_Slot4           ;80C524|A92BDF  |      ;
     STA.B ptrTemp0x72                                          ;80C527|8572    |000072;
     SEP #$20                                                   ;80C529|E220    |      ;
     LDA.B #$80                                                 ;80C52B|A980    |      ;
@@ -1032,7 +1113,7 @@ fPaletteAnim_FarmFall_T01:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C537|22488E80|808E48;
     REP #$20                                                   ;80C53B|C220    |      ;
     SEP #$10                                                   ;80C53D|E210    |      ;
-    LDA.W #$DF48                                               ;80C53F|A948DF  |      ;
+    LDA.W #aPaletteAnimScript_FarmFall_T01_Slot5           ;80C53F|A948DF  |      ;
     STA.B ptrTemp0x72                                          ;80C542|8572    |000072;
     SEP #$20                                                   ;80C544|E220    |      ;
     LDA.B #$80                                                 ;80C546|A980    |      ;
@@ -1044,7 +1125,7 @@ fPaletteAnim_FarmFall_T01:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C552|22488E80|808E48;
     REP #$20                                                   ;80C556|C220    |      ;
     SEP #$10                                                   ;80C558|E210    |      ;
-    LDA.W #$DF65                                               ;80C55A|A965DF  |      ;
+    LDA.W #aPaletteAnimScript_FarmFall_T01_Slot6           ;80C55A|A965DF  |      ;
     STA.B ptrTemp0x72                                          ;80C55D|8572    |000072;
     SEP #$20                                                   ;80C55F|E220    |      ;
     LDA.B #$80                                                 ;80C561|A980    |      ;
@@ -1056,7 +1137,7 @@ fPaletteAnim_FarmFall_T01:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C56D|22488E80|808E48;
     REP #$20                                                   ;80C571|C220    |      ;
     SEP #$10                                                   ;80C573|E210    |      ;
-    LDA.W #$DF82                                               ;80C575|A982DF  |      ;
+    LDA.W #aPaletteAnimScript_FarmFall_T01_Slot7           ;80C575|A982DF  |      ;
     STA.B ptrTemp0x72                                          ;80C578|8572    |000072;
     SEP #$20                                                   ;80C57A|E220    |      ;
     LDA.B #$80                                                 ;80C57C|A980    |      ;
@@ -1072,7 +1153,7 @@ fPaletteAnim_FarmFall_T01:
 fPaletteAnim_FarmFall_T2:
     REP #$20                                                   ;80C58D|C220    |      ;
     SEP #$10                                                   ;80C58F|E210    |      ;
-    LDA.W #$DF9F                                               ;80C591|A99FDF  |      ;
+    LDA.W #aPaletteAnimScript_FarmFall_T2_Slot4            ;80C591|A99FDF  |      ;
     STA.B ptrTemp0x72                                          ;80C594|8572    |000072;
     SEP #$20                                                   ;80C596|E220    |      ;
     LDA.B #$80                                                 ;80C598|A980    |      ;
@@ -1084,7 +1165,7 @@ fPaletteAnim_FarmFall_T2:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C5A4|22488E80|808E48;
     REP #$20                                                   ;80C5A8|C220    |      ;
     SEP #$10                                                   ;80C5AA|E210    |      ;
-    LDA.W #$DFBC                                               ;80C5AC|A9BCDF  |      ;
+    LDA.W #aPaletteAnimScript_FarmFall_T2_Slot5            ;80C5AC|A9BCDF  |      ;
     STA.B ptrTemp0x72                                          ;80C5AF|8572    |000072;
     SEP #$20                                                   ;80C5B1|E220    |      ;
     LDA.B #$80                                                 ;80C5B3|A980    |      ;
@@ -1096,7 +1177,7 @@ fPaletteAnim_FarmFall_T2:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C5BF|22488E80|808E48;
     REP #$20                                                   ;80C5C3|C220    |      ;
     SEP #$10                                                   ;80C5C5|E210    |      ;
-    LDA.W #$DFD9                                               ;80C5C7|A9D9DF  |      ;
+    LDA.W #aPaletteAnimScript_FarmFall_T2_Slot6            ;80C5C7|A9D9DF  |      ;
     STA.B ptrTemp0x72                                          ;80C5CA|8572    |000072;
     SEP #$20                                                   ;80C5CC|E220    |      ;
     LDA.B #$80                                                 ;80C5CE|A980    |      ;
@@ -1108,7 +1189,7 @@ fPaletteAnim_FarmFall_T2:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C5DA|22488E80|808E48;
     REP #$20                                                   ;80C5DE|C220    |      ;
     SEP #$10                                                   ;80C5E0|E210    |      ;
-    LDA.W #$DFF6                                               ;80C5E2|A9F6DF  |      ;
+    LDA.W #aPaletteAnimScript_FarmFall_T2_Slot7            ;80C5E2|A9F6DF  |      ;
     STA.B ptrTemp0x72                                          ;80C5E5|8572    |000072;
     SEP #$20                                                   ;80C5E7|E220    |      ;
     LDA.B #$80                                                 ;80C5E9|A980    |      ;
@@ -1124,7 +1205,7 @@ fPaletteAnim_FarmFall_T2:
 fPaletteAnim_FarmFall_T3:
     REP #$20                                                   ;80C5FA|C220    |      ;
     SEP #$10                                                   ;80C5FC|E210    |      ;
-    LDA.W #$E013                                               ;80C5FE|A913E0  |      ;
+    LDA.W #aPaletteAnimScript_FarmFall_T3_Slot4            ;80C5FE|A913E0  |      ;
     STA.B ptrTemp0x72                                          ;80C601|8572    |000072;
     SEP #$20                                                   ;80C603|E220    |      ;
     LDA.B #$80                                                 ;80C605|A980    |      ;
@@ -1136,7 +1217,7 @@ fPaletteAnim_FarmFall_T3:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C611|22488E80|808E48;
     REP #$20                                                   ;80C615|C220    |      ;
     SEP #$10                                                   ;80C617|E210    |      ;
-    LDA.W #$E030                                               ;80C619|A930E0  |      ;
+    LDA.W #aPaletteAnimScript_FarmFall_T3_Slot5            ;80C619|A930E0  |      ;
     STA.B ptrTemp0x72                                          ;80C61C|8572    |000072;
     SEP #$20                                                   ;80C61E|E220    |      ;
     LDA.B #$80                                                 ;80C620|A980    |      ;
@@ -1148,7 +1229,7 @@ fPaletteAnim_FarmFall_T3:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C62C|22488E80|808E48;
     REP #$20                                                   ;80C630|C220    |      ;
     SEP #$10                                                   ;80C632|E210    |      ;
-    LDA.W #$E04D                                               ;80C634|A94DE0  |      ;
+    LDA.W #aPaletteAnimScript_FarmFall_T3_Slot6            ;80C634|A94DE0  |      ;
     STA.B ptrTemp0x72                                          ;80C637|8572    |000072;
     SEP #$20                                                   ;80C639|E220    |      ;
     LDA.B #$80                                                 ;80C63B|A980    |      ;
@@ -1160,7 +1241,7 @@ fPaletteAnim_FarmFall_T3:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C647|22488E80|808E48;
     REP #$20                                                   ;80C64B|C220    |      ;
     SEP #$10                                                   ;80C64D|E210    |      ;
-    LDA.W #$E06A                                               ;80C64F|A96AE0  |      ;
+    LDA.W #aPaletteAnimScript_FarmFall_T3_Slot7            ;80C64F|A96AE0  |      ;
     STA.B ptrTemp0x72                                          ;80C652|8572    |000072;
     SEP #$20                                                   ;80C654|E220    |      ;
     LDA.B #$80                                                 ;80C656|A980    |      ;
@@ -1176,7 +1257,7 @@ fPaletteAnim_FarmFall_T3:
 fPaletteAnim_FarmFall_T4:
     REP #$20                                                   ;80C667|C220    |      ;
     SEP #$10                                                   ;80C669|E210    |      ;
-    LDA.W #$E087                                               ;80C66B|A987E0  |      ;
+    LDA.W #aPaletteAnimScript_FarmFall_T4_Slot4            ;80C66B|A987E0  |      ;
     STA.B ptrTemp0x72                                          ;80C66E|8572    |000072;
     SEP #$20                                                   ;80C670|E220    |      ;
     LDA.B #$80                                                 ;80C672|A980    |      ;
@@ -1188,7 +1269,7 @@ fPaletteAnim_FarmFall_T4:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C67E|22488E80|808E48;
     REP #$20                                                   ;80C682|C220    |      ;
     SEP #$10                                                   ;80C684|E210    |      ;
-    LDA.W #$E0A4                                               ;80C686|A9A4E0  |      ;
+    LDA.W #aPaletteAnimScript_FarmFall_T4_Slot5            ;80C686|A9A4E0  |      ;
     STA.B ptrTemp0x72                                          ;80C689|8572    |000072;
     SEP #$20                                                   ;80C68B|E220    |      ;
     LDA.B #$80                                                 ;80C68D|A980    |      ;
@@ -1200,7 +1281,7 @@ fPaletteAnim_FarmFall_T4:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C699|22488E80|808E48;
     REP #$20                                                   ;80C69D|C220    |      ;
     SEP #$10                                                   ;80C69F|E210    |      ;
-    LDA.W #$E0C1                                               ;80C6A1|A9C1E0  |      ;
+    LDA.W #aPaletteAnimScript_FarmFall_T4_Slot6            ;80C6A1|A9C1E0  |      ;
     STA.B ptrTemp0x72                                          ;80C6A4|8572    |000072;
     SEP #$20                                                   ;80C6A6|E220    |      ;
     LDA.B #$80                                                 ;80C6A8|A980    |      ;
@@ -1212,7 +1293,7 @@ fPaletteAnim_FarmFall_T4:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C6B4|22488E80|808E48;
     REP #$20                                                   ;80C6B8|C220    |      ;
     SEP #$10                                                   ;80C6BA|E210    |      ;
-    LDA.W #$E0DE                                               ;80C6BC|A9DEE0  |      ;
+    LDA.W #aPaletteAnimScript_FarmFall_T4_Slot7            ;80C6BC|A9DEE0  |      ;
     STA.B ptrTemp0x72                                          ;80C6BF|8572    |000072;
     SEP #$20                                                   ;80C6C1|E220    |      ;
     LDA.B #$80                                                 ;80C6C3|A980    |      ;
@@ -1228,7 +1309,7 @@ fPaletteAnim_FarmFall_T4:
 fPaletteAnim_ImpUnderground_All:
     REP #$20                                                   ;80C6D4|C220    |      ;
     SEP #$10                                                   ;80C6D6|E210    |      ;
-    LDA.W #$E0FB                                               ;80C6D8|A9FBE0  |      ;
+    LDA.W #aPaletteAnimScript_ImpUnderground_All_Slot4     ;80C6D8|A9FBE0  |      ;
     STA.B ptrTemp0x72                                          ;80C6DB|8572    |000072;
     SEP #$20                                                   ;80C6DD|E220    |      ;
     LDA.B #$80                                                 ;80C6DF|A980    |      ;
@@ -1240,7 +1321,7 @@ fPaletteAnim_ImpUnderground_All:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C6EB|22488E80|808E48;
     REP #$20                                                   ;80C6EF|C220    |      ;
     SEP #$10                                                   ;80C6F1|E210    |      ;
-    LDA.W #$E10C                                               ;80C6F3|A90CE1  |      ;
+    LDA.W #aPaletteAnimScript_ImpUnderground_All_Slot5     ;80C6F3|A90CE1  |      ;
     STA.B ptrTemp0x72                                          ;80C6F6|8572    |000072;
     SEP #$20                                                   ;80C6F8|E220    |      ;
     LDA.B #$80                                                 ;80C6FA|A980    |      ;
@@ -1252,7 +1333,7 @@ fPaletteAnim_ImpUnderground_All:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C706|22488E80|808E48;
     REP #$20                                                   ;80C70A|C220    |      ;
     SEP #$10                                                   ;80C70C|E210    |      ;
-    LDA.W #$E11D                                               ;80C70E|A91DE1  |      ;
+    LDA.W #aPaletteAnimScript_ImpUnderground_All_Slot6     ;80C70E|A91DE1  |      ;
     STA.B ptrTemp0x72                                          ;80C711|8572    |000072;
     SEP #$20                                                   ;80C713|E220    |      ;
     LDA.B #$80                                                 ;80C715|A980    |      ;
@@ -1264,7 +1345,7 @@ fPaletteAnim_ImpUnderground_All:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C721|22488E80|808E48;
     REP #$20                                                   ;80C725|C220    |      ;
     SEP #$10                                                   ;80C727|E210    |      ;
-    LDA.W #$E12E                                               ;80C729|A92EE1  |      ;
+    LDA.W #aPaletteAnimScript_ImpUnderground_All_Slot7     ;80C729|A92EE1  |      ;
     STA.B ptrTemp0x72                                          ;80C72C|8572    |000072;
     SEP #$20                                                   ;80C72E|E220    |      ;
     LDA.B #$80                                                 ;80C730|A980    |      ;
@@ -1276,7 +1357,7 @@ fPaletteAnim_ImpUnderground_All:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C73C|22488E80|808E48;
     REP #$20                                                   ;80C740|C220    |      ;
     SEP #$10                                                   ;80C742|E210    |      ;
-    LDA.W #$E13F                                               ;80C744|A93FE1  |      ;
+    LDA.W #aPaletteAnimScript_ImpUnderground_All_Slot8     ;80C744|A93FE1  |      ;
     STA.B ptrTemp0x72                                          ;80C747|8572    |000072;
     SEP #$20                                                   ;80C749|E220    |      ;
     LDA.B #$80                                                 ;80C74B|A980    |      ;
@@ -1288,7 +1369,7 @@ fPaletteAnim_ImpUnderground_All:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C757|22488E80|808E48;
     REP #$20                                                   ;80C75B|C220    |      ;
     SEP #$10                                                   ;80C75D|E210    |      ;
-    LDA.W #$E150                                               ;80C75F|A950E1  |      ;
+    LDA.W #aPaletteAnimScript_ImpUnderground_All_Slot9     ;80C75F|A950E1  |      ;
     STA.B ptrTemp0x72                                          ;80C762|8572    |000072;
     SEP #$20                                                   ;80C764|E220    |      ;
     LDA.B #$80                                                 ;80C766|A980    |      ;
@@ -1300,7 +1381,7 @@ fPaletteAnim_ImpUnderground_All:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C772|22488E80|808E48;
     REP #$20                                                   ;80C776|C220    |      ;
     SEP #$10                                                   ;80C778|E210    |      ;
-    LDA.W #$E161                                               ;80C77A|A961E1  |      ;
+    LDA.W #aPaletteAnimScript_ImpUnderground_All_Slot10    ;80C77A|A961E1  |      ;
     STA.B ptrTemp0x72                                          ;80C77D|8572    |000072;
     SEP #$20                                                   ;80C77F|E220    |      ;
     LDA.B #$80                                                 ;80C781|A980    |      ;
@@ -1316,7 +1397,7 @@ fPaletteAnim_ImpUnderground_All:
 fPaletteAnim_House1_House2_House3_All:
     REP #$20                                                   ;80C792|C220    |      ;
     SEP #$10                                                   ;80C794|E210    |      ;
-    LDA.W #$E172                                               ;80C796|A972E1  |      ;
+    LDA.W #aPaletteAnimScript_House1_House2_House3_All_Slot4 ;80C796|A972E1  |      ;
     STA.B ptrTemp0x72                                          ;80C799|8572    |000072;
     SEP #$20                                                   ;80C79B|E220    |      ;
     LDA.B #$80                                                 ;80C79D|A980    |      ;
@@ -1328,7 +1409,7 @@ fPaletteAnim_House1_House2_House3_All:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C7A9|22488E80|808E48;
     REP #$20                                                   ;80C7AD|C220    |      ;
     SEP #$10                                                   ;80C7AF|E210    |      ;
-    LDA.W #$E17D                                               ;80C7B1|A97DE1  |      ;
+    LDA.W #aPaletteAnimScript_House1_House2_House3_All_Slot5 ;80C7B1|A97DE1  |      ;
     STA.B ptrTemp0x72                                          ;80C7B4|8572    |000072;
     SEP #$20                                                   ;80C7B6|E220    |      ;
     LDA.B #$80                                                 ;80C7B8|A980    |      ;
@@ -1340,7 +1421,7 @@ fPaletteAnim_House1_House2_House3_All:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C7C4|22488E80|808E48;
     REP #$20                                                   ;80C7C8|C220    |      ;
     SEP #$10                                                   ;80C7CA|E210    |      ;
-    LDA.W #$E188                                               ;80C7CC|A988E1  |      ;
+    LDA.W #aPaletteAnimScript_House1_House2_House3_All_Slot6 ;80C7CC|A988E1  |      ;
     STA.B ptrTemp0x72                                          ;80C7CF|8572    |000072;
     SEP #$20                                                   ;80C7D1|E220    |      ;
     LDA.B #$80                                                 ;80C7D3|A980    |      ;
@@ -1352,7 +1433,7 @@ fPaletteAnim_House1_House2_House3_All:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C7DF|22488E80|808E48;
     REP #$20                                                   ;80C7E3|C220    |      ;
     SEP #$10                                                   ;80C7E5|E210    |      ;
-    LDA.W #$E193                                               ;80C7E7|A993E1  |      ;
+    LDA.W #aPaletteAnimScript_House1_House2_House3_All_Slot7 ;80C7E7|A993E1  |      ;
     STA.B ptrTemp0x72                                          ;80C7EA|8572    |000072;
     SEP #$20                                                   ;80C7EC|E220    |      ;
     LDA.B #$80                                                 ;80C7EE|A980    |      ;
@@ -1368,7 +1449,7 @@ fPaletteAnim_House1_House2_House3_All:
 fPaletteAnim_MajorHouse_T1234:
     REP #$20                                                   ;80C7FF|C220    |      ;
     SEP #$10                                                   ;80C801|E210    |      ;
-    LDA.W #$E19E                                               ;80C803|A99EE1  |      ;
+    LDA.W #aPaletteAnimScript_MajorHouse_T1234_Slot4       ;80C803|A99EE1  |      ;
     STA.B ptrTemp0x72                                          ;80C806|8572    |000072;
     SEP #$20                                                   ;80C808|E220    |      ;
     LDA.B #$80                                                 ;80C80A|A980    |      ;
@@ -1380,7 +1461,7 @@ fPaletteAnim_MajorHouse_T1234:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C816|22488E80|808E48;
     REP #$20                                                   ;80C81A|C220    |      ;
     SEP #$10                                                   ;80C81C|E210    |      ;
-    LDA.W #$E1A9                                               ;80C81E|A9A9E1  |      ;
+    LDA.W #aPaletteAnimScript_MajorHouse_T1234_Slot5       ;80C81E|A9A9E1  |      ;
     STA.B ptrTemp0x72                                          ;80C821|8572    |000072;
     SEP #$20                                                   ;80C823|E220    |      ;
     LDA.B #$80                                                 ;80C825|A980    |      ;
@@ -1392,7 +1473,7 @@ fPaletteAnim_MajorHouse_T1234:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C831|22488E80|808E48;
     REP #$20                                                   ;80C835|C220    |      ;
     SEP #$10                                                   ;80C837|E210    |      ;
-    LDA.W #$E1B4                                               ;80C839|A9B4E1  |      ;
+    LDA.W #aPaletteAnimScript_MajorHouse_T1234_Slot6       ;80C839|A9B4E1  |      ;
     STA.B ptrTemp0x72                                          ;80C83C|8572    |000072;
     SEP #$20                                                   ;80C83E|E220    |      ;
     LDA.B #$80                                                 ;80C840|A980    |      ;
@@ -1404,7 +1485,7 @@ fPaletteAnim_MajorHouse_T1234:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C84C|22488E80|808E48;
     REP #$20                                                   ;80C850|C220    |      ;
     SEP #$10                                                   ;80C852|E210    |      ;
-    LDA.W #$E1BF                                               ;80C854|A9BFE1  |      ;
+    LDA.W #aPaletteAnimScript_MajorHouse_T1234_Slot7       ;80C854|A9BFE1  |      ;
     STA.B ptrTemp0x72                                          ;80C857|8572    |000072;
     SEP #$20                                                   ;80C859|E220    |      ;
     LDA.B #$80                                                 ;80C85B|A980    |      ;
@@ -1420,7 +1501,7 @@ fPaletteAnim_MajorHouse_T1234:
 fPaletteAnim_Church_T1234:
     REP #$20                                                   ;80C86C|C220    |      ;
     SEP #$10                                                   ;80C86E|E210    |      ;
-    LDA.W #$E1CA                                               ;80C870|A9CAE1  |      ;
+    LDA.W #aPaletteAnimScript_Church_T1234_Slot4           ;80C870|A9CAE1  |      ;
     STA.B ptrTemp0x72                                          ;80C873|8572    |000072;
     SEP #$20                                                   ;80C875|E220    |      ;
     LDA.B #$80                                                 ;80C877|A980    |      ;
@@ -1432,7 +1513,7 @@ fPaletteAnim_Church_T1234:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C883|22488E80|808E48;
     REP #$20                                                   ;80C887|C220    |      ;
     SEP #$10                                                   ;80C889|E210    |      ;
-    LDA.W #$E1DB                                               ;80C88B|A9DBE1  |      ;
+    LDA.W #aPaletteAnimScript_Church_T1234_Slot5           ;80C88B|A9DBE1  |      ;
     STA.B ptrTemp0x72                                          ;80C88E|8572    |000072;
     SEP #$20                                                   ;80C890|E220    |      ;
     LDA.B #$80                                                 ;80C892|A980    |      ;
@@ -1444,7 +1525,7 @@ fPaletteAnim_Church_T1234:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C89E|22488E80|808E48;
     REP #$20                                                   ;80C8A2|C220    |      ;
     SEP #$10                                                   ;80C8A4|E210    |      ;
-    LDA.W #$E1EC                                               ;80C8A6|A9ECE1  |      ;
+    LDA.W #aPaletteAnimScript_Church_T1234_Slot6           ;80C8A6|A9ECE1  |      ;
     STA.B ptrTemp0x72                                          ;80C8A9|8572    |000072;
     SEP #$20                                                   ;80C8AB|E220    |      ;
     LDA.B #$80                                                 ;80C8AD|A980    |      ;
@@ -1456,7 +1537,7 @@ fPaletteAnim_Church_T1234:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C8B9|22488E80|808E48;
     REP #$20                                                   ;80C8BD|C220    |      ;
     SEP #$10                                                   ;80C8BF|E210    |      ;
-    LDA.W #$E1FD                                               ;80C8C1|A9FDE1  |      ;
+    LDA.W #aPaletteAnimScript_Church_T1234_Slot7           ;80C8C1|A9FDE1  |      ;
     STA.B ptrTemp0x72                                          ;80C8C4|8572    |000072;
     SEP #$20                                                   ;80C8C6|E220    |      ;
     LDA.B #$80                                                 ;80C8C8|A980    |      ;
@@ -1468,7 +1549,7 @@ fPaletteAnim_Church_T1234:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C8D4|22488E80|808E48;
     REP #$20                                                   ;80C8D8|C220    |      ;
     SEP #$10                                                   ;80C8DA|E210    |      ;
-    LDA.W #$E20E                                               ;80C8DC|A90EE2  |      ;
+    LDA.W #aPaletteAnimScript_Church_T1234_Slot8           ;80C8DC|A90EE2  |      ;
     STA.B ptrTemp0x72                                          ;80C8DF|8572    |000072;
     SEP #$20                                                   ;80C8E1|E220    |      ;
     LDA.B #$80                                                 ;80C8E3|A980    |      ;
@@ -1480,7 +1561,7 @@ fPaletteAnim_Church_T1234:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C8EF|22488E80|808E48;
     REP #$20                                                   ;80C8F3|C220    |      ;
     SEP #$10                                                   ;80C8F5|E210    |      ;
-    LDA.W #$E21F                                               ;80C8F7|A91FE2  |      ;
+    LDA.W #aPaletteAnimScript_Church_T1234_Slot9           ;80C8F7|A91FE2  |      ;
     STA.B ptrTemp0x72                                          ;80C8FA|8572    |000072;
     SEP #$20                                                   ;80C8FC|E220    |      ;
     LDA.B #$80                                                 ;80C8FE|A980    |      ;
@@ -1492,7 +1573,7 @@ fPaletteAnim_Church_T1234:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C90A|22488E80|808E48;
     REP #$20                                                   ;80C90E|C220    |      ;
     SEP #$10                                                   ;80C910|E210    |      ;
-    LDA.W #$E230                                               ;80C912|A930E2  |      ;
+    LDA.W #aPaletteAnimScript_Church_T1234_Slot10          ;80C912|A930E2  |      ;
     STA.B ptrTemp0x72                                          ;80C915|8572    |000072;
     SEP #$20                                                   ;80C917|E220    |      ;
     LDA.B #$80                                                 ;80C919|A980    |      ;
@@ -1504,7 +1585,7 @@ fPaletteAnim_Church_T1234:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C925|22488E80|808E48;
     REP #$20                                                   ;80C929|C220    |      ;
     SEP #$10                                                   ;80C92B|E210    |      ;
-    LDA.W #$E241                                               ;80C92D|A941E2  |      ;
+    LDA.W #aPaletteAnimScript_Church_T1234_Slot11          ;80C92D|A941E2  |      ;
     STA.B ptrTemp0x72                                          ;80C930|8572    |000072;
     SEP #$20                                                   ;80C932|E220    |      ;
     LDA.B #$80                                                 ;80C934|A980    |      ;
@@ -1520,7 +1601,7 @@ fPaletteAnim_Church_T1234:
 fPaletteAnim_FloristBedroom_T1234:
     REP #$20                                                   ;80C945|C220    |      ;
     SEP #$10                                                   ;80C947|E210    |      ;
-    LDA.W #$E252                                               ;80C949|A952E2  |      ;
+    LDA.W #aPaletteAnimScript_FloristBedroom_T1234_Slot4   ;80C949|A952E2  |      ;
     STA.B ptrTemp0x72                                          ;80C94C|8572    |000072;
     SEP #$20                                                   ;80C94E|E220    |      ;
     LDA.B #$80                                                 ;80C950|A980    |      ;
@@ -1532,7 +1613,7 @@ fPaletteAnim_FloristBedroom_T1234:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C95C|22488E80|808E48;
     REP #$20                                                   ;80C960|C220    |      ;
     SEP #$10                                                   ;80C962|E210    |      ;
-    LDA.W #$E25D                                               ;80C964|A95DE2  |      ;
+    LDA.W #aPaletteAnimScript_FloristBedroom_T1234_Slot5   ;80C964|A95DE2  |      ;
     STA.B ptrTemp0x72                                          ;80C967|8572    |000072;
     SEP #$20                                                   ;80C969|E220    |      ;
     LDA.B #$80                                                 ;80C96B|A980    |      ;
@@ -1544,7 +1625,7 @@ fPaletteAnim_FloristBedroom_T1234:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C977|22488E80|808E48;
     REP #$20                                                   ;80C97B|C220    |      ;
     SEP #$10                                                   ;80C97D|E210    |      ;
-    LDA.W #$E268                                               ;80C97F|A968E2  |      ;
+    LDA.W #aPaletteAnimScript_FloristBedroom_T1234_Slot6   ;80C97F|A968E2  |      ;
     STA.B ptrTemp0x72                                          ;80C982|8572    |000072;
     SEP #$20                                                   ;80C984|E220    |      ;
     LDA.B #$80                                                 ;80C986|A980    |      ;
@@ -1556,7 +1637,7 @@ fPaletteAnim_FloristBedroom_T1234:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C992|22488E80|808E48;
     REP #$20                                                   ;80C996|C220    |      ;
     SEP #$10                                                   ;80C998|E210    |      ;
-    LDA.W #$E273                                               ;80C99A|A973E2  |      ;
+    LDA.W #aPaletteAnimScript_FloristBedroom_T1234_Slot7   ;80C99A|A973E2  |      ;
     STA.B ptrTemp0x72                                          ;80C99D|8572    |000072;
     SEP #$20                                                   ;80C99F|E220    |      ;
     LDA.B #$80                                                 ;80C9A1|A980    |      ;
@@ -1572,7 +1653,7 @@ fPaletteAnim_FloristBedroom_T1234:
 fPaletteAnim_BarBedroom_T1234:
     REP #$20                                                   ;80C9B2|C220    |      ;
     SEP #$10                                                   ;80C9B4|E210    |      ;
-    LDA.W #$E27E                                               ;80C9B6|A97EE2  |      ;
+    LDA.W #aPaletteAnimScript_BarBedroom_T1234_Slot4       ;80C9B6|A97EE2  |      ;
     STA.B ptrTemp0x72                                          ;80C9B9|8572    |000072;
     SEP #$20                                                   ;80C9BB|E220    |      ;
     LDA.B #$80                                                 ;80C9BD|A980    |      ;
@@ -1584,7 +1665,7 @@ fPaletteAnim_BarBedroom_T1234:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C9C9|22488E80|808E48;
     REP #$20                                                   ;80C9CD|C220    |      ;
     SEP #$10                                                   ;80C9CF|E210    |      ;
-    LDA.W #$E289                                               ;80C9D1|A989E2  |      ;
+    LDA.W #aPaletteAnimScript_BarBedroom_T1234_Slot5       ;80C9D1|A989E2  |      ;
     STA.B ptrTemp0x72                                          ;80C9D4|8572    |000072;
     SEP #$20                                                   ;80C9D6|E220    |      ;
     LDA.B #$80                                                 ;80C9D8|A980    |      ;
@@ -1596,7 +1677,7 @@ fPaletteAnim_BarBedroom_T1234:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C9E4|22488E80|808E48;
     REP #$20                                                   ;80C9E8|C220    |      ;
     SEP #$10                                                   ;80C9EA|E210    |      ;
-    LDA.W #$E294                                               ;80C9EC|A994E2  |      ;
+    LDA.W #aPaletteAnimScript_BarBedroom_T1234_Slot6       ;80C9EC|A994E2  |      ;
     STA.B ptrTemp0x72                                          ;80C9EF|8572    |000072;
     SEP #$20                                                   ;80C9F1|E220    |      ;
     LDA.B #$80                                                 ;80C9F3|A980    |      ;
@@ -1608,7 +1689,7 @@ fPaletteAnim_BarBedroom_T1234:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80C9FF|22488E80|808E48;
     REP #$20                                                   ;80CA03|C220    |      ;
     SEP #$10                                                   ;80CA05|E210    |      ;
-    LDA.W #$E29F                                               ;80CA07|A99FE2  |      ;
+    LDA.W #aPaletteAnimScript_BarBedroom_T1234_Slot7       ;80CA07|A99FE2  |      ;
     STA.B ptrTemp0x72                                          ;80CA0A|8572    |000072;
     SEP #$20                                                   ;80CA0C|E220    |      ;
     LDA.B #$80                                                 ;80CA0E|A980    |      ;
@@ -1624,7 +1705,7 @@ fPaletteAnim_BarBedroom_T1234:
 fPaletteAnim_ToolsShopBedroom_T1234:
     REP #$20                                                   ;80CA1F|C220    |      ;
     SEP #$10                                                   ;80CA21|E210    |      ;
-    LDA.W #$E2AA                                               ;80CA23|A9AAE2  |      ;
+    LDA.W #aPaletteAnimScript_ToolsShopBedroom_T1234_Slot4 ;80CA23|A9AAE2  |      ;
     STA.B ptrTemp0x72                                          ;80CA26|8572    |000072;
     SEP #$20                                                   ;80CA28|E220    |      ;
     LDA.B #$80                                                 ;80CA2A|A980    |      ;
@@ -1636,7 +1717,7 @@ fPaletteAnim_ToolsShopBedroom_T1234:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80CA36|22488E80|808E48;
     REP #$20                                                   ;80CA3A|C220    |      ;
     SEP #$10                                                   ;80CA3C|E210    |      ;
-    LDA.W #$E2B5                                               ;80CA3E|A9B5E2  |      ;
+    LDA.W #aPaletteAnimScript_ToolsShopBedroom_T1234_Slot5 ;80CA3E|A9B5E2  |      ;
     STA.B ptrTemp0x72                                          ;80CA41|8572    |000072;
     SEP #$20                                                   ;80CA43|E220    |      ;
     LDA.B #$80                                                 ;80CA45|A980    |      ;
@@ -1648,7 +1729,7 @@ fPaletteAnim_ToolsShopBedroom_T1234:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80CA51|22488E80|808E48;
     REP #$20                                                   ;80CA55|C220    |      ;
     SEP #$10                                                   ;80CA57|E210    |      ;
-    LDA.W #$E2C0                                               ;80CA59|A9C0E2  |      ;
+    LDA.W #aPaletteAnimScript_ToolsShopBedroom_T1234_Slot6 ;80CA59|A9C0E2  |      ;
     STA.B ptrTemp0x72                                          ;80CA5C|8572    |000072;
     SEP #$20                                                   ;80CA5E|E220    |      ;
     LDA.B #$80                                                 ;80CA60|A980    |      ;
@@ -1660,7 +1741,7 @@ fPaletteAnim_ToolsShopBedroom_T1234:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80CA6C|22488E80|808E48;
     REP #$20                                                   ;80CA70|C220    |      ;
     SEP #$10                                                   ;80CA72|E210    |      ;
-    LDA.W #$E2CB                                               ;80CA74|A9CBE2  |      ;
+    LDA.W #aPaletteAnimScript_ToolsShopBedroom_T1234_Slot7 ;80CA74|A9CBE2  |      ;
     STA.B ptrTemp0x72                                          ;80CA77|8572    |000072;
     SEP #$20                                                   ;80CA79|E220    |      ;
     LDA.B #$80                                                 ;80CA7B|A980    |      ;
@@ -1676,7 +1757,7 @@ fPaletteAnim_ToolsShopBedroom_T1234:
 fPaletteAnim_AnimalShop_T1234:
     REP #$20                                                   ;80CA8C|C220    |      ;
     SEP #$10                                                   ;80CA8E|E210    |      ;
-    LDA.W #$E2D6                                               ;80CA90|A9D6E2  |      ;
+    LDA.W #aPaletteAnimScript_AnimalShop_T1234_Slot4       ;80CA90|A9D6E2  |      ;
     STA.B ptrTemp0x72                                          ;80CA93|8572    |000072;
     SEP #$20                                                   ;80CA95|E220    |      ;
     LDA.B #$80                                                 ;80CA97|A980    |      ;
@@ -1685,6 +1766,600 @@ fPaletteAnim_AnimalShop_T1234:
     LDA.B #$0D                                                 ;80CA9D|A90D    |      ;
     LDX.B #$04                                                 ;80CA9F|A204    |      ;
     LDY.B #$02                                                 ;80CAA1|A002    |      ;
+    if !REGION_JP
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E2DF
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0E
+    LDX.B #$05
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E2EA
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0F
+    LDX.B #$06
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    RTS
+    REP #$20
+    SEP #$10
+    LDA.W #$E2F5
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$06
+    LDX.B #$04
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E303
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0E
+    LDX.B #$05
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E311
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0F
+    LDX.B #$06
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    RTS
+    REP #$20
+    SEP #$10
+    LDA.W #$E31F
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$06
+    LDX.B #$04
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E32D
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0E
+    LDX.B #$05
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E33B
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0F
+    LDX.B #$06
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    RTS
+    REP #$20
+    SEP #$10
+    LDA.W #$E349
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$06
+    LDX.B #$04
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E357
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0E
+    LDX.B #$05
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E365
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0F
+    LDX.B #$06
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    RTS
+    REP #$20
+    SEP #$10
+    LDA.W #$E373
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$06
+    LDX.B #$04
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E381
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0E
+    LDX.B #$05
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E38F
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0F
+    LDX.B #$06
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E4ED
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$03
+    LDX.B #$07
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E4FE
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$04
+    LDX.B #$08
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E50F
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$05
+    LDX.B #$09
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E520
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$07
+    LDX.B #$0A
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    RTS
+    REP #$20
+    SEP #$10
+    LDA.W #$E39D
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$06
+    LDX.B #$04
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E3AB
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0E
+    LDX.B #$05
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E3B9
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0F
+    LDX.B #$06
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    RTS
+    REP #$20
+    SEP #$10
+    LDA.W #$E3C7
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$06
+    LDX.B #$04
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E3D5
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0E
+    LDX.B #$05
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E3E3
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0F
+    LDX.B #$06
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    RTS
+    REP #$20
+    SEP #$10
+    LDA.W #$E3F1
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$06
+    LDX.B #$04
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E3FF
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0E
+    LDX.B #$05
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E40D
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0F
+    LDX.B #$06
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    RTS
+    REP #$20
+    SEP #$10
+    LDA.W #$E41B
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$06
+    LDX.B #$04
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E429
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0E
+    LDX.B #$05
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E437
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0F
+    LDX.B #$06
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E531
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$03
+    LDX.B #$07
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E542
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$04
+    LDX.B #$08
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E553
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$05
+    LDX.B #$09
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E564
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$07
+    LDX.B #$0A
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    RTS
+    REP #$20
+    SEP #$10
+    LDA.W #$E445
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$06
+    LDX.B #$04
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E453
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0E
+    LDX.B #$05
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E461
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0F
+    LDX.B #$06
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    RTS
+    REP #$20
+    SEP #$10
+    LDA.W #$E46F
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$06
+    LDX.B #$04
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E47D
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0E
+    LDX.B #$05
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E48B
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0F
+    LDX.B #$06
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    RTS
+    REP #$20
+    SEP #$10
+    LDA.W #$E499
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$06
+    LDX.B #$04
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E4A7
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0E
+    LDX.B #$05
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E4B5
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0F
+    LDX.B #$06
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    RTS
+    REP #$20
+    SEP #$10
+    LDA.W #$E4C3
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$06
+    LDX.B #$04
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E4D1
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0E
+    LDX.B #$05
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E4DF
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0F
+    LDX.B #$06
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E575
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$03
+    LDX.B #$07
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E586
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$04
+    LDX.B #$08
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E597
+    else
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80CAA3|22488E80|808E48;
     REP #$20                                                   ;80CAA7|C220    |      ;
     SEP #$10                                                   ;80CAA9|E210    |      ;
@@ -2313,6 +2988,7 @@ fPaletteAnim_TownFall_T4:
     REP #$20                                                   ;80CFC3|C220    |      ;
     SEP #$10                                                   ;80CFC5|E210    |      ;
     LDA.W #$E599                                               ;80CFC7|A999E5  |      ;
+    endif
     STA.B ptrTemp0x72                                          ;80CFCA|8572    |000072;
     SEP #$20                                                   ;80CFCC|E220    |      ;
     LDA.B #$80                                                 ;80CFCE|A980    |      ;
@@ -2324,7 +3000,7 @@ fPaletteAnim_TownFall_T4:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80CFDA|22488E80|808E48;
     REP #$20                                                   ;80CFDE|C220    |      ;
     SEP #$10                                                   ;80CFE0|E210    |      ;
-    LDA.W #$E5AA                                               ;80CFE2|A9AAE5  |      ;
+    LDA.W #aPaletteAnim_Row2Col07_80E5AA                   ;80CFE2|A9AAE5  |      ;
     STA.B ptrTemp0x72                                          ;80CFE5|8572    |000072;
     SEP #$20                                                   ;80CFE7|E220    |      ;
     LDA.B #$80                                                 ;80CFE9|A980    |      ;
@@ -2340,7 +3016,7 @@ fPaletteAnim_TownFall_T4:
 fPaletteAnim_TownWinter_T4:
     REP #$20                                                   ;80CFFA|C220    |      ;
     SEP #$10                                                   ;80CFFC|E210    |      ;
-    LDA.W #$E5BB                                               ;80CFFE|A9BBE5  |      ;
+    LDA.W #aPaletteAnim_Row2Col03_80E5BB                   ;80CFFE|A9BBE5  |      ;
     STA.B ptrTemp0x72                                          ;80D001|8572    |000072;
     SEP #$20                                                   ;80D003|E220    |      ;
     LDA.B #$80                                                 ;80D005|A980    |      ;
@@ -2352,7 +3028,7 @@ fPaletteAnim_TownWinter_T4:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80D011|22488E80|808E48;
     REP #$20                                                   ;80D015|C220    |      ;
     SEP #$10                                                   ;80D017|E210    |      ;
-    LDA.W #$E5CC                                               ;80D019|A9CCE5  |      ;
+    LDA.W #aPaletteAnim_Row2Col04_80E5CC                   ;80D019|A9CCE5  |      ;
     STA.B ptrTemp0x72                                          ;80D01C|8572    |000072;
     SEP #$20                                                   ;80D01E|E220    |      ;
     LDA.B #$80                                                 ;80D020|A980    |      ;
@@ -2364,7 +3040,7 @@ fPaletteAnim_TownWinter_T4:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80D02C|22488E80|808E48;
     REP #$20                                                   ;80D030|C220    |      ;
     SEP #$10                                                   ;80D032|E210    |      ;
-    LDA.W #$E5DD                                               ;80D034|A9DDE5  |      ;
+    LDA.W #aPaletteAnim_Row2Col05_80E5DD                   ;80D034|A9DDE5  |      ;
     STA.B ptrTemp0x72                                          ;80D037|8572    |000072;
     SEP #$20                                                   ;80D039|E220    |      ;
     LDA.B #$80                                                 ;80D03B|A980    |      ;
@@ -2376,7 +3052,7 @@ fPaletteAnim_TownWinter_T4:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80D047|22488E80|808E48;
     REP #$20                                                   ;80D04B|C220    |      ;
     SEP #$10                                                   ;80D04D|E210    |      ;
-    LDA.W #$E5EE                                               ;80D04F|A9EEE5  |      ;
+    LDA.W #aPaletteAnim_Row2Col07_80E5EE                   ;80D04F|A9EEE5  |      ;
     STA.B ptrTemp0x72                                          ;80D052|8572    |000072;
     SEP #$20                                                   ;80D054|E220    |      ;
     LDA.B #$80                                                 ;80D056|A980    |      ;
@@ -2392,7 +3068,7 @@ fPaletteAnim_TownWinter_T4:
 fPaletteAnim_WoodsSpring_T1:
     REP #$20                                                   ;80D067|C220    |      ;
     SEP #$10                                                   ;80D069|E210    |      ;
-    LDA.W #$E5FF                                               ;80D06B|A9FFE5  |      ;
+    LDA.W #aPaletteAnim_Row3Col08_80E5FF                   ;80D06B|A9FFE5  |      ;
     STA.B ptrTemp0x72                                          ;80D06E|8572    |000072;
     SEP #$20                                                   ;80D070|E220    |      ;
     LDA.B #$80                                                 ;80D072|A980    |      ;
@@ -2404,7 +3080,7 @@ fPaletteAnim_WoodsSpring_T1:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80D07E|22488E80|808E48;
     REP #$20                                                   ;80D082|C220    |      ;
     SEP #$10                                                   ;80D084|E210    |      ;
-    LDA.W #$E616                                               ;80D086|A916E6  |      ;
+    LDA.W #aPaletteAnim_Row3Col09_80E616                   ;80D086|A916E6  |      ;
     STA.B ptrTemp0x72                                          ;80D089|8572    |000072;
     SEP #$20                                                   ;80D08B|E220    |      ;
     LDA.B #$80                                                 ;80D08D|A980    |      ;
@@ -2416,7 +3092,7 @@ fPaletteAnim_WoodsSpring_T1:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80D099|22488E80|808E48;
     REP #$20                                                   ;80D09D|C220    |      ;
     SEP #$10                                                   ;80D09F|E210    |      ;
-    LDA.W #$E62D                                               ;80D0A1|A92DE6  |      ;
+    LDA.W #aPaletteAnim_Row3Col0A_80E62D                   ;80D0A1|A92DE6  |      ;
     STA.B ptrTemp0x72                                          ;80D0A4|8572    |000072;
     SEP #$20                                                   ;80D0A6|E220    |      ;
     LDA.B #$80                                                 ;80D0A8|A980    |      ;
@@ -2428,7 +3104,7 @@ fPaletteAnim_WoodsSpring_T1:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80D0B4|22488E80|808E48;
     REP #$20                                                   ;80D0B8|C220    |      ;
     SEP #$10                                                   ;80D0BA|E210    |      ;
-    LDA.W #$E644                                               ;80D0BC|A944E6  |      ;
+    LDA.W #aPaletteAnim_Row3Col0B_80E644                   ;80D0BC|A944E6  |      ;
     STA.B ptrTemp0x72                                          ;80D0BF|8572    |000072;
     SEP #$20                                                   ;80D0C1|E220    |      ;
     LDA.B #$80                                                 ;80D0C3|A980    |      ;
@@ -2437,6 +3113,510 @@ fPaletteAnim_WoodsSpring_T1:
     LDA.B #$0B                                                 ;80D0C9|A90B    |      ;
     LDX.B #$07                                                 ;80D0CB|A207    |      ;
     LDY.B #$03                                                 ;80D0CD|A003    |      ;
+    if !REGION_JP
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E659
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0C
+    LDX.B #$08
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$EB4A
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0A
+    LDX.B #$09
+    LDY.B #$04
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$EB5B
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0B
+    LDX.B #$0A
+    LDY.B #$04
+    JSL.L fCore_Store0x72To0x42AtIndex
+    RTS
+    REP #$20
+    SEP #$10
+    LDA.W #$E670
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$08
+    LDX.B #$04
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E687
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$09
+    LDX.B #$05
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E69E
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0A
+    LDX.B #$06
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E6B5
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0B
+    LDX.B #$07
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E6CC
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0C
+    LDX.B #$08
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$EB6C
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0A
+    LDX.B #$09
+    LDY.B #$04
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$EB7D
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0B
+    LDX.B #$0A
+    LDY.B #$04
+    JSL.L fCore_Store0x72To0x42AtIndex
+    RTS
+    REP #$20
+    SEP #$10
+    LDA.W #$E6E3
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$08
+    LDX.B #$04
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E6FA
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$09
+    LDX.B #$05
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E711
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0A
+    LDX.B #$06
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E728
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0B
+    LDX.B #$07
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E73F
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0C
+    LDX.B #$08
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$EB8E
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0A
+    LDX.B #$09
+    LDY.B #$04
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$EB9F
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0B
+    LDX.B #$0A
+    LDY.B #$04
+    JSL.L fCore_Store0x72To0x42AtIndex
+    RTS
+    REP #$20
+    SEP #$10
+    LDA.W #$E756
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$08
+    LDX.B #$04
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E76D
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$09
+    LDX.B #$05
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E784
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0A
+    LDX.B #$06
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E79B
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0B
+    LDX.B #$07
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$EBB0
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0A
+    LDX.B #$08
+    LDY.B #$04
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$EBC1
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0B
+    LDX.B #$09
+    LDY.B #$04
+    JSL.L fCore_Store0x72To0x42AtIndex
+    RTS
+    REP #$20
+    SEP #$10
+    LDA.W #$E7B2
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$08
+    LDX.B #$04
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E7C9
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$09
+    LDX.B #$05
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E7E0
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0A
+    LDX.B #$06
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E7F7
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0B
+    LDX.B #$07
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E80E
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0C
+    LDX.B #$08
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$EBD2
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0A
+    LDX.B #$09
+    LDY.B #$04
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$EBE3
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0B
+    LDX.B #$0A
+    LDY.B #$04
+    JSL.L fCore_Store0x72To0x42AtIndex
+    RTS
+    REP #$20
+    SEP #$10
+    LDA.W #$E825
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$08
+    LDX.B #$04
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E83C
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$09
+    LDX.B #$05
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E853
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0A
+    LDX.B #$06
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E86A
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0B
+    LDX.B #$07
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E881
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0C
+    LDX.B #$08
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$EBF4
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0A
+    LDX.B #$09
+    LDY.B #$04
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$EC05
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0B
+    LDX.B #$0A
+    LDY.B #$04
+    JSL.L fCore_Store0x72To0x42AtIndex
+    RTS
+    REP #$20
+    SEP #$10
+    LDA.W #$E898
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$08
+    LDX.B #$04
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E8AF
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$09
+    LDX.B #$05
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E8C6
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0A
+    LDX.B #$06
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E8DD
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0B
+    LDX.B #$07
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$EC16
+    else
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80D0CF|22488E80|808E48;
     REP #$20                                                   ;80D0D3|C220    |      ;
     SEP #$10                                                   ;80D0D5|E210    |      ;
@@ -2705,6 +3885,7 @@ fPaletteAnim_WoodsSpring_T4:
     REP #$20                                                   ;80D30D|C220    |      ;
     SEP #$10                                                   ;80D30F|E210    |      ;
     LDA.W #$EBB2                                               ;80D311|A9B2EB  |      ;
+    endif
     STA.B ptrTemp0x72                                          ;80D314|8572    |000072;
     SEP #$20                                                   ;80D316|E220    |      ;
     LDA.B #$80                                                 ;80D318|A980    |      ;
@@ -2713,6 +3894,74 @@ fPaletteAnim_WoodsSpring_T4:
     LDA.B #$0A                                                 ;80D31E|A90A    |      ;
     LDX.B #$08                                                 ;80D320|A208    |      ;
     LDY.B #$04                                                 ;80D322|A004    |      ;
+    if !REGION_JP
+    JSL.L fCore_Store0x72To0x42AtIndex
+fPaletteAnim_WoodsSummer_T2:
+    REP #$20
+    SEP #$10
+    LDA.W #$EC27
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0B
+    LDX.B #$09
+    LDY.B #$04
+    JSL.L fCore_Store0x72To0x42AtIndex
+    RTS
+    REP #$20
+    SEP #$10
+    LDA.W #$E8F4
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$08
+    LDX.B #$04
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E90B
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$09
+    LDX.B #$05
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E922
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0A
+    LDX.B #$06
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E939
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0B
+    LDX.B #$07
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$EC38
+    else
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80D324|22488E80|808E48;
     REP #$20                                                   ;80D328|C220    |      ;
     SEP #$10                                                   ;80D32A|E210    |      ;
@@ -3221,6 +4470,7 @@ fPaletteAnim_WoodsFall_T2:
     REP #$20                                                   ;80D766|C220    |      ;
     SEP #$10                                                   ;80D768|E210    |      ;
     LDA.W #$EA4F                                               ;80D76A|A94FEA  |      ;
+    endif
     STA.B ptrTemp0x72                                          ;80D76D|8572    |000072;
     SEP #$20                                                   ;80D76F|E220    |      ;
     LDA.B #$80                                                 ;80D771|A980    |      ;
@@ -3228,11 +4478,20 @@ fPaletteAnim_WoodsFall_T2:
     SEP #$20                                                   ;80D775|E220    |      ;
     LDA.B #$0A                                                 ;80D777|A90A    |      ;
     LDX.B #$08                                                 ;80D779|A208    |      ;
+    if !REGION_JP
+    LDY.B #$04
+    JSL.L fCore_Store0x72To0x42AtIndex
+    else
     LDY.B #$03                                                 ;80D77B|A003    |      ;
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80D77D|22488E80|808E48;
+    endif
     REP #$20                                                   ;80D781|C220    |      ;
     SEP #$10                                                   ;80D783|E210    |      ;
+    if !REGION_JP
+    LDA.W #$EC49
+    else
     LDA.W #$EA66                                               ;80D785|A966EA  |      ;
+    endif
     STA.B ptrTemp0x72                                          ;80D788|8572    |000072;
     SEP #$20                                                   ;80D78A|E220    |      ;
     LDA.B #$80                                                 ;80D78C|A980    |      ;
@@ -3240,22 +4499,491 @@ fPaletteAnim_WoodsFall_T2:
     SEP #$20                                                   ;80D790|E220    |      ;
     LDA.B #$0B                                                 ;80D792|A90B    |      ;
     LDX.B #$09                                                 ;80D794|A209    |      ;
+    if !REGION_JP
+    LDY.B #$04
+    JSL.L fCore_Store0x72To0x42AtIndex
+    RTS
+    REP #$20
+    SEP #$10
+    LDA.W #$E950
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$06
+    LDX.B #$04
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E967
+    else
     LDY.B #$03                                                 ;80D796|A003    |      ;
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80D798|22488E80|808E48;
     REP #$20                                                   ;80D79C|C220    |      ;
     SEP #$10                                                   ;80D79E|E210    |      ;
     LDA.W #$EA7D                                               ;80D7A0|A97DEA  |      ;
+    endif
     STA.B ptrTemp0x72                                          ;80D7A3|8572    |000072;
     SEP #$20                                                   ;80D7A5|E220    |      ;
     LDA.B #$80                                                 ;80D7A7|A980    |      ;
     STA.B ptrTemp0x72+2                                        ;80D7A9|8574    |000074;
     SEP #$20                                                   ;80D7AB|E220    |      ;
+    if !REGION_JP
+    LDA.B #$07
+    LDX.B #$05
+    else
     LDA.B #$0C                                                 ;80D7AD|A90C    |      ;
     LDX.B #$0A                                                 ;80D7AF|A20A    |      ;
+    endif
     LDY.B #$03                                                 ;80D7B1|A003    |      ;
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80D7B3|22488E80|808E48;
     REP #$20                                                   ;80D7B7|C220    |      ;
     SEP #$10                                                   ;80D7B9|E210    |      ;
+    if !REGION_JP
+    LDA.W #$E97E
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$08
+    LDX.B #$06
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E995
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$09
+    LDX.B #$07
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E9AC
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0A
+    LDX.B #$08
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E9C3
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0B
+    LDX.B #$09
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$E9DA
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0C
+    LDX.B #$0A
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$EC5A
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0A
+    LDX.B #$0B
+    LDY.B #$04
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$EC6B
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0B
+    LDX.B #$0C
+    LDY.B #$04
+    JSL.L fCore_Store0x72To0x42AtIndex
+    RTS
+    REP #$20
+    SEP #$10
+    LDA.W #$E9F1
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$06
+    LDX.B #$04
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$EA08
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$07
+    LDX.B #$05
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$EA1F
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$08
+    LDX.B #$06
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$EA36
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$09
+    LDX.B #$07
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$EA4D
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0A
+    LDX.B #$08
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$EA64
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0B
+    LDX.B #$09
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$EA7B
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0C
+    LDX.B #$0A
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$EC7C
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0A
+    LDX.B #$0B
+    LDY.B #$04
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$EC8D
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0B
+    LDX.B #$0C
+    LDY.B #$04
+    JSL.L fCore_Store0x72To0x42AtIndex
+    RTS
+    REP #$20
+    SEP #$10
+    LDA.W #$EA92
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$08
+    LDX.B #$04
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$EAA9
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$09
+    LDX.B #$05
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$EAC0
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0A
+    LDX.B #$06
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$EAD7
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0B
+    LDX.B #$07
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$EC9E
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0A
+    LDX.B #$08
+    LDY.B #$04
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$ECAF
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0B
+    LDX.B #$09
+    LDY.B #$04
+    JSL.L fCore_Store0x72To0x42AtIndex
+    RTS
+    REP #$20
+    SEP #$10
+    LDA.W #$EAEE
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$08
+    LDX.B #$04
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$EB05
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$09
+    LDX.B #$05
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$EB1C
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0A
+    LDX.B #$06
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$EB33
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0B
+    LDX.B #$07
+    LDY.B #$03
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$ECC0
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0A
+    LDX.B #$08
+    LDY.B #$04
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$ECD1
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0B
+    LDX.B #$09
+    LDY.B #$04
+    JSL.L fCore_Store0x72To0x42AtIndex
+    RTS
+    REP #$20
+    SEP #$10
+    LDA.W #$ECE2
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0A
+    LDX.B #$04
+    LDY.B #$04
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$ECF3
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0B
+    LDX.B #$05
+    LDY.B #$04
+    JSL.L fCore_Store0x72To0x42AtIndex
+    RTS
+    REP #$20
+    SEP #$10
+    LDA.W #$ED04
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0A
+    LDX.B #$04
+    LDY.B #$04
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$ED15
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0B
+    LDX.B #$05
+    LDY.B #$04
+    JSL.L fCore_Store0x72To0x42AtIndex
+    RTS
+    REP #$20
+    SEP #$10
+    LDA.W #$ED26
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0A
+    LDX.B #$04
+    LDY.B #$04
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$ED37
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0B
+    LDX.B #$05
+    LDY.B #$04
+    JSL.L fCore_Store0x72To0x42AtIndex
+    RTS
+    REP #$20
+    SEP #$10
+    LDA.W #$ED48
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0A
+    LDX.B #$04
+    LDY.B #$04
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$ED59
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$80
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0B
+    LDX.B #$05
+    LDY.B #$04
+    JSL.L fCore_Store0x72To0x42AtIndex
+    RTS
+    REP #$20
+    SEP #$10
+    LDA.W #$ED6A
+    else
     LDA.W #$EC7E                                               ;80D7BB|A97EEC  |      ;
     STA.B ptrTemp0x72                                          ;80D7BE|8572    |000072;
     SEP #$20                                                   ;80D7C0|E220    |      ;
@@ -3549,6 +5277,7 @@ fPaletteAnim_MountainTopAllSeasonsAndNY_T4:
     REP #$20                                                   ;80DA10|C220    |      ;
     SEP #$10                                                   ;80DA12|E210    |      ;
     LDA.W #$ED6C                                               ;80DA14|A96CED  |      ;
+    endif
     STA.B ptrTemp0x72                                          ;80DA17|8572    |000072;
     SEP #$20                                                   ;80DA19|E220    |      ;
     LDA.B #$80                                                 ;80DA1B|A980    |      ;
@@ -3560,7 +5289,7 @@ fPaletteAnim_MountainTopAllSeasonsAndNY_T4:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80DA27|22488E80|808E48;
     REP #$20                                                   ;80DA2B|C220    |      ;
     SEP #$10                                                   ;80DA2D|E210    |      ;
-    LDA.W #$ED83                                               ;80DA2F|A983ED  |      ;
+    LDA.W #aPaletteAnim_Row4Col05_80ED83                   ;80DA2F|A983ED  |      ;
     STA.B ptrTemp0x72                                          ;80DA32|8572    |000072;
     SEP #$20                                                   ;80DA34|E220    |      ;
     LDA.B #$80                                                 ;80DA36|A980    |      ;
@@ -3576,7 +5305,7 @@ fPaletteAnim_MountainTopAllSeasonsAndNY_T4:
 fPaletteAnim_GoldChicken_All:
     REP #$20                                                   ;80DA47|C220    |      ;
     SEP #$10                                                   ;80DA49|E210    |      ;
-    LDA.W #$ED9A                                               ;80DA4B|A99AED  |      ;
+    LDA.W #aPaletteAnim_Row4Col0B_80ED9A                   ;80DA4B|A99AED  |      ;
     STA.B ptrTemp0x72                                          ;80DA4E|8572    |000072;
     SEP #$20                                                   ;80DA50|E220    |      ;
     LDA.B #$80                                                 ;80DA52|A980    |      ;
@@ -3588,7 +5317,7 @@ fPaletteAnim_GoldChicken_All:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80DA5E|22488E80|808E48;
     REP #$20                                                   ;80DA62|C220    |      ;
     SEP #$10                                                   ;80DA64|E210    |      ;
-    LDA.W #$EDAB                                               ;80DA66|A9ABED  |      ;
+    LDA.W #aPaletteAnim_Row4Col0C_80EDAB                   ;80DA66|A9ABED  |      ;
     STA.B ptrTemp0x72                                          ;80DA69|8572    |000072;
     SEP #$20                                                   ;80DA6B|E220    |      ;
     LDA.B #$80                                                 ;80DA6D|A980    |      ;
@@ -3600,7 +5329,7 @@ fPaletteAnim_GoldChicken_All:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80DA79|22488E80|808E48;
     REP #$20                                                   ;80DA7D|C220    |      ;
     SEP #$10                                                   ;80DA7F|E210    |      ;
-    LDA.W #$EDBC                                               ;80DA81|A9BCED  |      ;
+    LDA.W #aPaletteAnim_Row4Col0D_80EDBC                   ;80DA81|A9BCED  |      ;
     STA.B ptrTemp0x72                                          ;80DA84|8572    |000072;
     SEP #$20                                                   ;80DA86|E220    |      ;
     LDA.B #$80                                                 ;80DA88|A980    |      ;
@@ -3612,7 +5341,7 @@ fPaletteAnim_GoldChicken_All:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80DA94|22488E80|808E48;
     REP #$20                                                   ;80DA98|C220    |      ;
     SEP #$10                                                   ;80DA9A|E210    |      ;
-    LDA.W #$EDCD                                               ;80DA9C|A9CDED  |      ;
+    LDA.W #aPaletteAnim_Row4Col0E_80EDCD                   ;80DA9C|A9CDED  |      ;
     STA.B ptrTemp0x72                                          ;80DA9F|8572    |000072;
     SEP #$20                                                   ;80DAA1|E220    |      ;
     LDA.B #$80                                                 ;80DAA3|A980    |      ;
@@ -3628,7 +5357,7 @@ fPaletteAnim_GoldChicken_All:
 fPaletteAnim_NYPublicSquare_T4:
     REP #$20                                                   ;80DAB4|C220    |      ;
     SEP #$10                                                   ;80DAB6|E210    |      ;
-    LDA.W #$EDDE                                               ;80DAB8|A9DEED  |      ;
+    LDA.W #aPaletteAnim_Row4Col0C_80EDDE                   ;80DAB8|A9DEED  |      ;
     STA.B ptrTemp0x72                                          ;80DABB|8572    |000072;
     SEP #$20                                                   ;80DABD|E220    |      ;
     LDA.B #$80                                                 ;80DABF|A980    |      ;
@@ -3640,7 +5369,7 @@ fPaletteAnim_NYPublicSquare_T4:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80DACB|22488E80|808E48;
     REP #$20                                                   ;80DACF|C220    |      ;
     SEP #$10                                                   ;80DAD1|E210    |      ;
-    LDA.W #$EDEC                                               ;80DAD3|A9ECED  |      ;
+    LDA.W #aPaletteAnim_Row4Col0D_80EDEC                   ;80DAD3|A9ECED  |      ;
     STA.B ptrTemp0x72                                          ;80DAD6|8572    |000072;
     SEP #$20                                                   ;80DAD8|E220    |      ;
     LDA.B #$80                                                 ;80DADA|A980    |      ;
@@ -3652,7 +5381,7 @@ fPaletteAnim_NYPublicSquare_T4:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80DAE6|22488E80|808E48;
     REP #$20                                                   ;80DAEA|C220    |      ;
     SEP #$10                                                   ;80DAEC|E210    |      ;
-    LDA.W #$EDFA                                               ;80DAEE|A9FAED  |      ;
+    LDA.W #aPaletteAnim_Row4Col0E_80EDFA                   ;80DAEE|A9FAED  |      ;
     STA.B ptrTemp0x72                                          ;80DAF1|8572    |000072;
     SEP #$20                                                   ;80DAF3|E220    |      ;
     LDA.B #$80                                                 ;80DAF5|A980    |      ;
@@ -3668,7 +5397,7 @@ fPaletteAnim_NYPublicSquare_T4:
 fPaletteAnim_FortuneTeller_T1234:
     REP #$20                                                   ;80DB06|C220    |      ;
     SEP #$10                                                   ;80DB08|E210    |      ;
-    LDA.W #$EE08                                               ;80DB0A|A908EE  |      ;
+    LDA.W #aPaletteAnim_Row1Col07_80EE08                   ;80DB0A|A908EE  |      ;
     STA.B ptrTemp0x72                                          ;80DB0D|8572    |000072;
     SEP #$20                                                   ;80DB0F|E220    |      ;
     LDA.B #$80                                                 ;80DB11|A980    |      ;
@@ -3680,7 +5409,7 @@ fPaletteAnim_FortuneTeller_T1234:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80DB1D|22488E80|808E48;
     REP #$20                                                   ;80DB21|C220    |      ;
     SEP #$10                                                   ;80DB23|E210    |      ;
-    LDA.W #$EE16                                               ;80DB25|A916EE  |      ;
+    LDA.W #aPaletteAnim_Row1Col08_80EE16                   ;80DB25|A916EE  |      ;
     STA.B ptrTemp0x72                                          ;80DB28|8572    |000072;
     SEP #$20                                                   ;80DB2A|E220    |      ;
     LDA.B #$80                                                 ;80DB2C|A980    |      ;
@@ -3692,7 +5421,7 @@ fPaletteAnim_FortuneTeller_T1234:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80DB38|22488E80|808E48;
     REP #$20                                                   ;80DB3C|C220    |      ;
     SEP #$10                                                   ;80DB3E|E210    |      ;
-    LDA.W #$EE24                                               ;80DB40|A924EE  |      ;
+    LDA.W #aPaletteAnim_Row1Col0D_80EE24                   ;80DB40|A924EE  |      ;
     STA.B ptrTemp0x72                                          ;80DB43|8572    |000072;
     SEP #$20                                                   ;80DB45|E220    |      ;
     LDA.B #$80                                                 ;80DB47|A980    |      ;
@@ -3704,7 +5433,7 @@ fPaletteAnim_FortuneTeller_T1234:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80DB53|22488E80|808E48;
     REP #$20                                                   ;80DB57|C220    |      ;
     SEP #$10                                                   ;80DB59|E210    |      ;
-    LDA.W #$EE32                                               ;80DB5B|A932EE  |      ;
+    LDA.W #aPaletteAnim_Row1Col0E_80EE32                   ;80DB5B|A932EE  |      ;
     STA.B ptrTemp0x72                                          ;80DB5E|8572    |000072;
     SEP #$20                                                   ;80DB60|E220    |      ;
     LDA.B #$80                                                 ;80DB62|A980    |      ;
@@ -3716,7 +5445,7 @@ fPaletteAnim_FortuneTeller_T1234:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80DB6E|22488E80|808E48;
     REP #$20                                                   ;80DB72|C220    |      ;
     SEP #$10                                                   ;80DB74|E210    |      ;
-    LDA.W #$EE40                                               ;80DB76|A940EE  |      ;
+    LDA.W #aPaletteAnim_Row3Col06_80EE40                   ;80DB76|A940EE  |      ;
     STA.B ptrTemp0x72                                          ;80DB79|8572    |000072;
     SEP #$20                                                   ;80DB7B|E220    |      ;
     LDA.B #$80                                                 ;80DB7D|A980    |      ;
@@ -3728,7 +5457,7 @@ fPaletteAnim_FortuneTeller_T1234:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80DB89|22488E80|808E48;
     REP #$20                                                   ;80DB8D|C220    |      ;
     SEP #$10                                                   ;80DB8F|E210    |      ;
-    LDA.W #$EE4E                                               ;80DB91|A94EEE  |      ;
+    LDA.W #aPaletteAnim_Row3Col09_80EE4E                   ;80DB91|A94EEE  |      ;
     STA.B ptrTemp0x72                                          ;80DB94|8572    |000072;
     SEP #$20                                                   ;80DB96|E220    |      ;
     LDA.B #$80                                                 ;80DB98|A980    |      ;
@@ -3740,7 +5469,7 @@ fPaletteAnim_FortuneTeller_T1234:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80DBA4|22488E80|808E48;
     REP #$20                                                   ;80DBA8|C220    |      ;
     SEP #$10                                                   ;80DBAA|E210    |      ;
-    LDA.W #$EE5C                                               ;80DBAC|A95CEE  |      ;
+    LDA.W #aPaletteAnim_Row3Col0A_80EE5C                   ;80DBAC|A95CEE  |      ;
     STA.B ptrTemp0x72                                          ;80DBAF|8572    |000072;
     SEP #$20                                                   ;80DBB1|E220    |      ;
     LDA.B #$80                                                 ;80DBB3|A980    |      ;
@@ -3752,7 +5481,7 @@ fPaletteAnim_FortuneTeller_T1234:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80DBBF|22488E80|808E48;
     REP #$20                                                   ;80DBC3|C220    |      ;
     SEP #$10                                                   ;80DBC5|E210    |      ;
-    LDA.W #$EE6A                                               ;80DBC7|A96AEE  |      ;
+    LDA.W #aPaletteAnim_Row3Col0B_80EE6A                   ;80DBC7|A96AEE  |      ;
     STA.B ptrTemp0x72                                          ;80DBCA|8572    |000072;
     SEP #$20                                                   ;80DBCC|E220    |      ;
     LDA.B #$80                                                 ;80DBCE|A980    |      ;
@@ -3764,7 +5493,7 @@ fPaletteAnim_FortuneTeller_T1234:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80DBDA|22488E80|808E48;
     REP #$20                                                   ;80DBDE|C220    |      ;
     SEP #$10                                                   ;80DBE0|E210    |      ;
-    LDA.W #$EE78                                               ;80DBE2|A978EE  |      ;
+    LDA.W #aPaletteAnim_Row3Col0C_80EE78                   ;80DBE2|A978EE  |      ;
     STA.B ptrTemp0x72                                          ;80DBE5|8572    |000072;
     SEP #$20                                                   ;80DBE7|E220    |      ;
     LDA.B #$80                                                 ;80DBE9|A980    |      ;
@@ -3776,7 +5505,7 @@ fPaletteAnim_FortuneTeller_T1234:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80DBF5|22488E80|808E48;
     REP #$20                                                   ;80DBF9|C220    |      ;
     SEP #$10                                                   ;80DBFB|E210    |      ;
-    LDA.W #$EE86                                               ;80DBFD|A986EE  |      ;
+    LDA.W #aPaletteAnim_Row3Col0D_80EE86                   ;80DBFD|A986EE  |      ;
     STA.B ptrTemp0x72                                          ;80DC00|8572    |000072;
     SEP #$20                                                   ;80DC02|E220    |      ;
     LDA.B #$80                                                 ;80DC04|A980    |      ;
@@ -3788,7 +5517,7 @@ fPaletteAnim_FortuneTeller_T1234:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80DC10|22488E80|808E48;
     REP #$20                                                   ;80DC14|C220    |      ;
     SEP #$10                                                   ;80DC16|E210    |      ;
-    LDA.W #$EE94                                               ;80DC18|A994EE  |      ;
+    LDA.W #aPaletteAnim_Row3Col0E_80EE94                   ;80DC18|A994EE  |      ;
     STA.B ptrTemp0x72                                          ;80DC1B|8572    |000072;
     SEP #$20                                                   ;80DC1D|E220    |      ;
     LDA.B #$80                                                 ;80DC1F|A980    |      ;
@@ -3804,7 +5533,7 @@ fPaletteAnim_FortuneTeller_T1234:
 fPaletteAnim_DancingS2_T1:
     REP #$20                                                   ;80DC30|C220    |      ;
     SEP #$10                                                   ;80DC32|E210    |      ;
-    LDA.W #$E447                                               ;80DC34|A947E4  |      ;
+    LDA.W #aPaletteAnimScript_TownFall_NYPublicSquare_T1_Slot4 ;80DC34|A947E4  |      ;
     STA.B ptrTemp0x72                                          ;80DC37|8572    |000072;
     SEP #$20                                                   ;80DC39|E220    |      ;
     LDA.B #$80                                                 ;80DC3B|A980    |      ;
@@ -3816,7 +5545,7 @@ fPaletteAnim_DancingS2_T1:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80DC47|22488E80|808E48;
     REP #$20                                                   ;80DC4B|C220    |      ;
     SEP #$10                                                   ;80DC4D|E210    |      ;
-    LDA.W #$E455                                               ;80DC4F|A955E4  |      ;
+    LDA.W #aPaletteAnim_Row2Col0E_80E455                   ;80DC4F|A955E4  |      ;
     STA.B ptrTemp0x72                                          ;80DC52|8572    |000072;
     SEP #$20                                                   ;80DC54|E220    |      ;
     LDA.B #$80                                                 ;80DC56|A980    |      ;
@@ -3828,7 +5557,7 @@ fPaletteAnim_DancingS2_T1:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80DC62|22488E80|808E48;
     REP #$20                                                   ;80DC66|C220    |      ;
     SEP #$10                                                   ;80DC68|E210    |      ;
-    LDA.W #$E463                                               ;80DC6A|A963E4  |      ;
+    LDA.W #aPaletteAnim_Row2Col0F_80E463                   ;80DC6A|A963E4  |      ;
     STA.B ptrTemp0x72                                          ;80DC6D|8572    |000072;
     SEP #$20                                                   ;80DC6F|E220    |      ;
     LDA.B #$80                                                 ;80DC71|A980    |      ;
@@ -3840,7 +5569,7 @@ fPaletteAnim_DancingS2_T1:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80DC7D|22488E80|808E48;
     REP #$20                                                   ;80DC81|C220    |      ;
     SEP #$10                                                   ;80DC83|E210    |      ;
-    LDA.W #$EEA2                                               ;80DC85|A9A2EE  |      ;
+    LDA.W #aPaletteAnim_Row6Col0C_80EEA2                   ;80DC85|A9A2EE  |      ;
     STA.B ptrTemp0x72                                          ;80DC88|8572    |000072;
     SEP #$20                                                   ;80DC8A|E220    |      ;
     LDA.B #$80                                                 ;80DC8C|A980    |      ;
@@ -3852,7 +5581,7 @@ fPaletteAnim_DancingS2_T1:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80DC98|22488E80|808E48;
     REP #$20                                                   ;80DC9C|C220    |      ;
     SEP #$10                                                   ;80DC9E|E210    |      ;
-    LDA.W #$EEB3                                               ;80DCA0|A9B3EE  |      ;
+    LDA.W #aPaletteAnim_Row6Col0D_80EEB3                   ;80DCA0|A9B3EE  |      ;
     STA.B ptrTemp0x72                                          ;80DCA3|8572    |000072;
     SEP #$20                                                   ;80DCA5|E220    |      ;
     LDA.B #$80                                                 ;80DCA7|A980    |      ;
@@ -3864,7 +5593,7 @@ fPaletteAnim_DancingS2_T1:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80DCB3|22488E80|808E48;
     REP #$20                                                   ;80DCB7|C220    |      ;
     SEP #$10                                                   ;80DCB9|E210    |      ;
-    LDA.W #$EEC4                                               ;80DCBB|A9C4EE  |      ;
+    LDA.W #aPaletteAnim_Row6Col0F_80EEC4                   ;80DCBB|A9C4EE  |      ;
     STA.B ptrTemp0x72                                          ;80DCBE|8572    |000072;
     SEP #$20                                                   ;80DCC0|E220    |      ;
     LDA.B #$80                                                 ;80DCC2|A980    |      ;
@@ -3876,7 +5605,7 @@ fPaletteAnim_DancingS2_T1:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80DCCE|22488E80|808E48;
     REP #$20                                                   ;80DCD2|C220    |      ;
     SEP #$10                                                   ;80DCD4|E210    |      ;
-    LDA.W #$EED5                                               ;80DCD6|A9D5EE  |      ;
+    LDA.W #aPaletteAnim_Row6Col05_80EED5                   ;80DCD6|A9D5EE  |      ;
     STA.B ptrTemp0x72                                          ;80DCD9|8572    |000072;
     SEP #$20                                                   ;80DCDB|E220    |      ;
     LDA.B #$80                                                 ;80DCDD|A980    |      ;
@@ -3888,7 +5617,7 @@ fPaletteAnim_DancingS2_T1:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80DCE9|22488E80|808E48;
     REP #$20                                                   ;80DCED|C220    |      ;
     SEP #$10                                                   ;80DCEF|E210    |      ;
-    LDA.W #$EEEC                                               ;80DCF1|A9ECEE  |      ;
+    LDA.W #aPaletteAnim_Row6Col0E_80EEEC                   ;80DCF1|A9ECEE  |      ;
     STA.B ptrTemp0x72                                          ;80DCF4|8572    |000072;
     SEP #$20                                                   ;80DCF6|E220    |      ;
     LDA.B #$80                                                 ;80DCF8|A980    |      ;
@@ -3904,7 +5633,7 @@ fPaletteAnim_DancingS2_T1:
 fPaletteAnim_RestaurantBedroom_T1234:
     REP #$20                                                   ;80DD09|C220    |      ;
     SEP #$10                                                   ;80DD0B|E210    |      ;
-    LDA.W #$EF06                                               ;80DD0D|A906EF  |      ;
+    LDA.W #aPaletteAnim_Row2Col07_80EF06                   ;80DD0D|A906EF  |      ;
     STA.B ptrTemp0x72                                          ;80DD10|8572    |000072;
     SEP #$20                                                   ;80DD12|E220    |      ;
     LDA.B #$80                                                 ;80DD14|A980    |      ;
@@ -3916,7 +5645,7 @@ fPaletteAnim_RestaurantBedroom_T1234:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80DD20|22488E80|808E48;
     REP #$20                                                   ;80DD24|C220    |      ;
     SEP #$10                                                   ;80DD26|E210    |      ;
-    LDA.W #$EF11                                               ;80DD28|A911EF  |      ;
+    LDA.W #aPaletteAnim_Row2Col0D_80EF11                   ;80DD28|A911EF  |      ;
     STA.B ptrTemp0x72                                          ;80DD2B|8572    |000072;
     SEP #$20                                                   ;80DD2D|E220    |      ;
     LDA.B #$80                                                 ;80DD2F|A980    |      ;
@@ -3928,7 +5657,7 @@ fPaletteAnim_RestaurantBedroom_T1234:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80DD3B|22488E80|808E48;
     REP #$20                                                   ;80DD3F|C220    |      ;
     SEP #$10                                                   ;80DD41|E210    |      ;
-    LDA.W #$EF1C                                               ;80DD43|A91CEF  |      ;
+    LDA.W #aPaletteAnim_Row2Col0E_80EF1C                   ;80DD43|A91CEF  |      ;
     STA.B ptrTemp0x72                                          ;80DD46|8572    |000072;
     SEP #$20                                                   ;80DD48|E220    |      ;
     LDA.B #$80                                                 ;80DD4A|A980    |      ;

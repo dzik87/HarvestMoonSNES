@@ -1114,7 +1114,7 @@ fPlayerAction0x03:
     STA.W strcAudio.reg115                                     ;81C8B8|8D1501  |000115;
     JSL.L fAudioSetRegister2to0A                               ;81C8BB|22328383|838332;
     SEP #$20                                                   ;81C8BF|E220    |      ;
-    STZ.W $0971+!DE_RAM_SHIFT                              ;81C8C1|9C7109  |000971;
+    STZ.W $0971+!RAM_SHIFT                                 ;81C8C1|9C7109  |000971;
     BRA .label4                                                ;81C8C4|805D    |81C923;
  
  
@@ -1178,9 +1178,9 @@ fPlayerAction0x03:
  
 .label5:
     SEP #$20                                                   ;81C937|E220    |      ;
-    LDA.W $0971+!DE_RAM_SHIFT                              ;81C939|AD7109  |000971;
+    LDA.W $0971+!RAM_SHIFT                                 ;81C939|AD7109  |000971;
     EOR.B #$01                                                 ;81C93C|4901    |      ;
-    STA.W $0971+!DE_RAM_SHIFT                              ;81C93E|8D7109  |000971;
+    STA.W $0971+!RAM_SHIFT                                 ;81C93E|8D7109  |000971;
     BEQ .label7                                                ;81C941|F00E    |81C951;
     LDA.B #$02                                                 ;81C943|A902    |      ;
     STA.B strcMap.unk1E                                        ;81C945|851E    |00001E;
@@ -2152,13 +2152,13 @@ fPlayerEnergyHandler:
  
 .label7:
     TYA                                                        ;81D109|98      |      ;
-    STA.W $096C+!DE_RAM_SHIFT                              ;81D10A|8D6C09  |00096C;
+    STA.W $096C+!RAM_SHIFT                                 ;81D10A|8D6C09  |00096C;
     BRA .return                                                ;81D10D|803C    |81D14B;
  
  
 .label8:
     SEP #$30                                                   ;81D10F|E230    |      ;
-    LDA.W $096C+!DE_RAM_SHIFT                              ;81D111|AD6C09  |00096C;
+    LDA.W $096C+!RAM_SHIFT                                 ;81D111|AD6C09  |00096C;
     CMP.B #$03                                                 ;81D114|C903    |      ;
     BEQ .return                                                ;81D116|F033    |81D14B;
     LDY.B #$00                                                 ;81D118|A000    |      ;
@@ -2166,7 +2166,7 @@ fPlayerEnergyHandler:
  
 .loop2:
     LSR A                                                      ;81D11D|4A      |      ;
-    CPY.W $096C+!DE_RAM_SHIFT                              ;81D11E|CC6C09  |00096C;
+    CPY.W $096C+!RAM_SHIFT                                 ;81D11E|CC6C09  |00096C;
     BEQ .label9                                                ;81D121|F003    |81D126;
     INY                                                        ;81D123|C8      |      ;
     BRA .loop2                                                 ;81D124|80F7    |81D11D;
@@ -2181,15 +2181,15 @@ fPlayerEnergyHandler:
 .label10:
     LDA.B #$00                                                 ;81D12D|A900    |      ;
     XBA                                                        ;81D12F|EB      |      ;
-    LDA.W $096C+!DE_RAM_SHIFT                              ;81D130|AD6C09  |00096C;
+    LDA.W $096C+!RAM_SHIFT                                 ;81D130|AD6C09  |00096C;
     CLC                                                        ;81D133|18      |      ;
     ADC.B #$4A                                                 ;81D134|694A    |      ;
     REP #$20                                                   ;81D136|C220    |      ;
     STA.W strcObjectData.spriteIdx                             ;81D138|8D0109  |000901;
     SEP #$20                                                   ;81D13B|E220    |      ;
-    LDA.W $096C+!DE_RAM_SHIFT                              ;81D13D|AD6C09  |00096C;
+    LDA.W $096C+!RAM_SHIFT                                 ;81D13D|AD6C09  |00096C;
     INC A                                                      ;81D140|1A      |      ;
-    STA.W $096C+!DE_RAM_SHIFT                              ;81D141|8D6C09  |00096C;
+    STA.W $096C+!RAM_SHIFT                                 ;81D141|8D6C09  |00096C;
     %SetPlayerAction(!PACTION_TIRED)
  
 .return:

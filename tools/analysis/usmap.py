@@ -65,25 +65,31 @@ def _data_len(m):
 def parse_module(rel):
     path = CODE_DIR / rel
     lines = []
-    in_de = False   # inside the DE half of an `if !REGION_DE ... else ... endif` patch block
+    stack = []   # one entry per open `if !REGION_..` block: True while inside a region branch, False in its `else`
     for i, text in enumerate(path.read_text(encoding="utf-8").split("\n")):
         ln = Line(rel, i, text)
         s = text.strip()
-        if s == "if !REGION_DE":
-            in_de = True
+        if s.startswith("if ") and "!REGION_" in s:
+            stack.append(True)
             ln.kind = "directive"
             lines.append(ln)
             continue
-        if in_de and s == "else":
-            in_de = False
+        if stack and s.startswith("elseif ") and "!REGION_" in s:
+            stack[-1] = True
             ln.kind = "directive"
             lines.append(ln)
             continue
-        if s == "endif":
+        if stack and s == "else" and stack[-1]:
+            stack[-1] = False
             ln.kind = "directive"
             lines.append(ln)
             continue
-        if in_de:
+        if stack and s == "endif":
+            stack.pop()
+            ln.kind = "directive"
+            lines.append(ln)
+            continue
+        if any(stack):
             ln.kind = "skip"
             lines.append(ln)
             continue

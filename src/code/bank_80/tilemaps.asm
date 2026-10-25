@@ -658,6 +658,10 @@ sStarNightFestivalSquareMap:
     dw $6000                                                   ;80ACB8|        |      ;
     if !REGION_DE
     dl $A58340
+    elseif !REGION_EU
+    dl $A5831C
+    elseif !REGION_JP
+    dl $A583B3
     else
     dl sCompressedTilemap_A58327                          ;80ACBA|        |A58327;
     endif
@@ -776,6 +780,10 @@ sStarNightFestivalSpaMap:
     dw $6000                                                   ;80ADEE|        |      ;
     if !REGION_DE
     dl $A59EC9
+    elseif !REGION_EU
+    dl $A59E00
+    elseif !REGION_JP
+    dl $A59EF4
     else
     dl sCompressedTilemap_A59E0B                          ;80ADF0|        |A59E0B;
     endif
@@ -946,6 +954,8 @@ sToolShedMap:
     dw $0000,$0000,$0000,$0000,$2000                           ;80AFB2|        |      ;
     if !REGION_DE
     dl $9ADFE2
+    elseif !REGION_JP
+    dl $9AE5A2
     else
     dl sCompressedTiles_9AE02D                               ;80AFBC|        |9AE02D;
     endif
@@ -956,6 +966,14 @@ sToolShedMap:
     dl $A59C50
     dw $6000
     dl $A58B62
+    elseif !REGION_EU
+    dl $A59BFD
+    dw $6000
+    dl $A58B3E
+    elseif !REGION_JP
+    dl $A59C77
+    dw $6000
+    dl $A58BD5
     else
     dl sCompressedTilemap_A59C08                          ;80AFC6|        |A59C08;
     dw $6000                                                   ;80AFC9|        |      ;
@@ -971,6 +989,10 @@ sBarnMap:
     dw $6000                                                   ;80AFE2|        |      ;
     if !REGION_DE
     dl $A5C58B
+    elseif !REGION_EU
+    dl $A5C4C2
+    elseif !REGION_JP
+    dl $A5C5B6
     else
     dl sCompressedTilemap_A5C4CD                          ;80AFE4|        |A5C4CD;
     endif
@@ -984,6 +1006,10 @@ sCoopMap:
     dw $6000                                                   ;80AFFB|        |      ;
     if !REGION_DE
     dl $A5C316
+    elseif !REGION_EU
+    dl $A5C24D
+    elseif !REGION_JP
+    dl $A5C341
     else
     dl sCompressedTilemap_A5C258                          ;80AFFD|        |A5C258;
     endif
@@ -1015,6 +1041,14 @@ sMap_80B032:
     dl $9B9F50
     dw $6000
     dl $A5B6F9
+    elseif !REGION_EU
+    dl sCompressedTiles_9B9F53
+    dw $6000
+    dl $A5B630
+    elseif !REGION_JP
+    dl $9BA260
+    dw $6000
+    dl $A5B724
     else
     dl sCompressedTiles_9B9F53                               ;80B043|        |9B9F53;
     dw $6000                                                   ;80B046|        |      ;
@@ -1030,6 +1064,14 @@ sMap_80B04B:
     dl $9B86AA
     dw $6000
     dl $A5A75E
+    elseif !REGION_EU
+    dl sCompressedTiles_9B86AD
+    dw $6000
+    dl $A5A695
+    elseif !REGION_JP
+    dl $9B89BA
+    dw $6000
+    dl $A5A789
     else
     dl sCompressedTiles_9B86AD                               ;80B05C|        |9B86AD;
     dw $6000                                                   ;80B05F|        |      ;
@@ -1095,6 +1137,8 @@ sSummitSpringMap:
     dw $0000,$0000,$0000,$0100,$2000                           ;80B0F7|        |      ;
     if !REGION_DE
     dl $9BB76A
+    elseif !REGION_JP
+    dl $9BBA7A
     else
     dl sCompressedTiles_9BB76D                               ;80B101|        |9BB76D;
     endif
@@ -1105,6 +1149,14 @@ sSummitSpringMap:
     dl $A5BA01
     dw $7000
     dl $A5ADD5
+    elseif !REGION_EU
+    dl $A5B938
+    dw $7000
+    dl $A5AD0C
+    elseif !REGION_JP
+    dl $A5BA2C
+    dw $7000
+    dl $A5AE00
     else
     dl sCompressedTilemap_A5B943                          ;80B10B|        |A5B943;
     dw $7000                                                   ;80B10E|        |      ;
@@ -1118,6 +1170,8 @@ sSummitSummerMap:
     dw $0000,$0000,$0000,$0100,$2000                           ;80B11A|        |      ;
     if !REGION_DE
     dl $9BB76A
+    elseif !REGION_JP
+    dl $9BBA7A
     else
     dl sCompressedTiles_9BB76D                               ;80B124|        |9BB76D;
     endif
@@ -1128,6 +1182,14 @@ sSummitSummerMap:
     dl $A5BA01
     dw $7000
     dl $A5ADD5
+    elseif !REGION_EU
+    dl $A5B938
+    dw $7000
+    dl $A5AD0C
+    elseif !REGION_JP
+    dl $A5BA2C
+    dw $7000
+    dl $A5AE00
     else
     dl sCompressedTilemap_A5B943                          ;80B12E|        |A5B943;
     dw $7000                                                   ;80B131|        |      ;
@@ -1141,6 +1203,8 @@ sSummitFallMap:
     dw $0000,$0000,$0000,$0100,$2000                           ;80B13D|        |      ;
     if !REGION_DE
     dl $9BB76A
+    elseif !REGION_JP
+    dl $9BBA7A
     else
     dl sCompressedTiles_9BB76D                               ;80B147|        |9BB76D;
     endif
@@ -1151,6 +1215,14 @@ sSummitFallMap:
     dl $A5BA01
     dw $7000
     dl $A5ADD5
+    elseif !REGION_EU
+    dl $A5B938
+    dw $7000
+    dl $A5AD0C
+    elseif !REGION_JP
+    dl $A5BA2C
+    dw $7000
+    dl $A5AE00
     else
     dl sCompressedTilemap_A5B943                          ;80B151|        |A5B943;
     dw $7000                                                   ;80B154|        |      ;
@@ -1164,6 +1236,8 @@ sSummitWinterMap:
     dw $0000,$0000,$0000,$0100,$2000                           ;80B160|        |      ;
     if !REGION_DE
     dl $9BCF8C
+    elseif !REGION_JP
+    dl $9BD29C
     else
     dl sCompressedTiles_9BCF8F                               ;80B16A|        |9BCF8F;
     endif
@@ -1174,6 +1248,14 @@ sSummitWinterMap:
     dl $A5BA01
     dw $7000
     dl $A5ADD5
+    elseif !REGION_EU
+    dl $A5B938
+    dw $7000
+    dl $A5AD0C
+    elseif !REGION_JP
+    dl $A5BA2C
+    dw $7000
+    dl $A5AE00
     else
     dl sCompressedTilemap_A5B943                          ;80B174|        |A5B943;
     dw $7000                                                   ;80B177|        |      ;
@@ -1187,6 +1269,8 @@ sMap_80B17C:
     dw $0000,$0000,$0000,$0100,$2000                           ;80B183|        |      ;
     if !REGION_DE
     dl $9BB76A
+    elseif !REGION_JP
+    dl $9BBA7A
     else
     dl sCompressedTiles_9BB76D                               ;80B18D|        |9BB76D;
     endif
@@ -1197,6 +1281,14 @@ sMap_80B17C:
     dl $A5BA01
     dw $7000
     dl $A5B100
+    elseif !REGION_EU
+    dl $A5B938
+    dw $7000
+    dl $A5B037
+    elseif !REGION_JP
+    dl $A5BA2C
+    dw $7000
+    dl $A5B12B
     else
     dl sCompressedTilemap_A5B943                          ;80B197|        |A5B943;
     dw $7000                                                   ;80B19A|        |      ;
@@ -1210,6 +1302,8 @@ sMap_80B19F:
     dw $0000,$0000,$0000,$0100,$2000                           ;80B1A6|        |      ;
     if !REGION_DE
     dl $9BB76A
+    elseif !REGION_JP
+    dl $9BBA7A
     else
     dl sCompressedTiles_9BB76D                               ;80B1B0|        |9BB76D;
     endif
@@ -1220,6 +1314,14 @@ sMap_80B19F:
     dl $A5BA01
     dw $7000
     dl $A5B100
+    elseif !REGION_EU
+    dl $A5B938
+    dw $7000
+    dl $A5B037
+    elseif !REGION_JP
+    dl $A5BA2C
+    dw $7000
+    dl $A5B12B
     else
     dl sCompressedTilemap_A5B943                          ;80B1BA|        |A5B943;
     dw $7000                                                   ;80B1BD|        |      ;
@@ -1233,6 +1335,8 @@ sMap_80B1C2:
     dw $0000,$0000,$0000,$0100,$2000                           ;80B1C9|        |      ;
     if !REGION_DE
     dl $9BB76A
+    elseif !REGION_JP
+    dl $9BBA7A
     else
     dl sCompressedTiles_9BB76D                               ;80B1D3|        |9BB76D;
     endif
@@ -1243,6 +1347,14 @@ sMap_80B1C2:
     dl $A5B100
     dw $6000
     dl $A5BA01
+    elseif !REGION_EU
+    dl $A5B037
+    dw $6000
+    dl $A5B938
+    elseif !REGION_JP
+    dl $A5B12B
+    dw $6000
+    dl $A5BA2C
     else
     dl sCompressedTilemap_A5B042                          ;80B1DD|        |A5B042;
     dw $6000                                                   ;80B1E0|        |      ;
@@ -1256,6 +1368,8 @@ sMap_80B1E5:
     dw $0000,$0000,$0000,$0100,$2000                           ;80B1EC|        |      ;
     if !REGION_DE
     dl $9BCF8C
+    elseif !REGION_JP
+    dl $9BD29C
     else
     dl sCompressedTiles_9BCF8F                               ;80B1F6|        |9BCF8F;
     endif
@@ -1266,6 +1380,14 @@ sMap_80B1E5:
     dl $A5BA01
     dw $7000
     dl $A5B100
+    elseif !REGION_EU
+    dl $A5B938
+    dw $7000
+    dl $A5B037
+    elseif !REGION_JP
+    dl $A5BA2C
+    dw $7000
+    dl $A5B12B
     else
     dl sCompressedTilemap_A5B943                          ;80B200|        |A5B943;
     dw $7000                                                   ;80B203|        |      ;
@@ -1279,6 +1401,8 @@ sStarNightFestivalMountainTopMap:
     dw $0000,$0000,$0000,$0100,$2000                           ;80B20F|        |      ;
     if !REGION_DE
     dl $9BCF8C
+    elseif !REGION_JP
+    dl $9BD29C
     else
     dl sCompressedTiles_9BCF8F                               ;80B219|        |9BCF8F;
     endif
@@ -1289,6 +1413,14 @@ sStarNightFestivalMountainTopMap:
     dl $A5BA01
     dw $7000
     dl $A5B41F
+    elseif !REGION_EU
+    dl $A5B938
+    dw $7000
+    dl $A5B356
+    elseif !REGION_JP
+    dl $A5BA2C
+    dw $7000
+    dl $A5B44A
     else
     dl sCompressedTilemap_A5B943                          ;80B223|        |A5B943;
     dw $7000                                                   ;80B226|        |      ;
@@ -1302,6 +1434,8 @@ sNewYearsFestivalMap:
     dw $0000,$0000,$0000,$0100,$2000                           ;80B232|        |      ;
     if !REGION_DE
     dl $9BB76A
+    elseif !REGION_JP
+    dl $9BBA7A
     else
     dl sCompressedTiles_9BB76D                               ;80B23C|        |9BB76D;
     endif
@@ -1312,6 +1446,14 @@ sNewYearsFestivalMap:
     dl $A5BA01
     dw $7000
     dl $A5ADD5
+    elseif !REGION_EU
+    dl $A5B938
+    dw $7000
+    dl $A5AD0C
+    elseif !REGION_JP
+    dl $A5BA2C
+    dw $7000
+    dl $A5AE00
     else
     dl sCompressedTilemap_A5B943                          ;80B246|        |A5B943;
     dw $7000                                                   ;80B249|        |      ;
@@ -1325,6 +1467,8 @@ sMap_80B24E:
     dw $0000,$0000,$0000,$0100,$2000                           ;80B255|        |      ;
     if !REGION_DE
     dl $9BB76A
+    elseif !REGION_JP
+    dl $9BBA7A
     else
     dl sCompressedTiles_9BB76D                               ;80B25F|        |9BB76D;
     endif
@@ -1335,6 +1479,14 @@ sMap_80B24E:
     dl $A5BE48
     dw $7000
     dl $A5ADD5
+    elseif !REGION_EU
+    dl $A5BD7F
+    dw $7000
+    dl $A5AD0C
+    elseif !REGION_JP
+    dl $A5BE73
+    dw $7000
+    dl $A5AE00
     else
     dl sCompressedTilemap_A5BD8A                               ;80B269|        |A5BD8A;
     dw $7000                                                   ;80B26C|        |      ;
@@ -1363,6 +1515,10 @@ sMap_80B28A:
     dw $6000                                                   ;80B2A8|        |      ;
     if !REGION_DE
     dl $A5E308
+    elseif !REGION_EU
+    dl $A5E242
+    elseif !REGION_JP
+    dl $A5E263
     else
     dl sCompressedTilemap_A5E253                          ;80B2AA|        |A5E253;
     endif
@@ -1380,6 +1536,10 @@ sMap_80B2AD:
     dw $6000                                                   ;80B2CB|        |      ;
     if !REGION_DE
     dl $A5E683
+    elseif !REGION_EU
+    dl $A5E5BD
+    elseif !REGION_JP
+    dl $A5E5DE
     else
     dl sCompressedTilemap_A5E5CE                          ;80B2CD|        |A5E5CE;
     endif
@@ -1397,6 +1557,10 @@ sMap_80B2D0:
     dw $6000                                                   ;80B2EE|        |      ;
     if !REGION_DE
     dl $A5EA2C
+    elseif !REGION_EU
+    dl $A5E966
+    elseif !REGION_JP
+    dl $A5E987
     else
     dl sCompressedTilemap_A5E977                          ;80B2F0|        |A5E977;
     endif
@@ -1414,6 +1578,10 @@ sMap_80B2F3:
     dw $6000                                                   ;80B311|        |      ;
     if !REGION_DE
     dl $A5EDB0
+    elseif !REGION_EU
+    dl $A5ECEA
+    elseif !REGION_JP
+    dl $A5ED0B
     else
     dl sCompressedTilemap_A5ECFB                          ;80B313|        |A5ECFB;
     endif
@@ -1431,6 +1599,10 @@ sMap_80B316:
     dw $6000                                                   ;80B334|        |      ;
     if !REGION_DE
     dl $A5F726
+    elseif !REGION_EU
+    dl $A5F660
+    elseif !REGION_JP
+    dl $A5F681
     else
     dl sCompressedTilemap_A5F671                          ;80B336|        |A5F671;
     endif
@@ -1448,6 +1620,10 @@ sMap_80B339:
     dw $6000                                                   ;80B357|        |      ;
     if !REGION_DE
     dl $A5FA11
+    elseif !REGION_EU
+    dl $A5F94B
+    elseif !REGION_JP
+    dl $A5F96C
     else
     dl sCompressedTilemap_A5F95C                          ;80B359|        |A5F95C;
     endif
@@ -1465,6 +1641,10 @@ sMap_80B35C:
     dw $6000                                                   ;80B37A|        |      ;
     if !REGION_DE
     dl $A5FC83
+    elseif !REGION_EU
+    dl $A5FBBD
+    elseif !REGION_JP
+    dl $A5FBDE
     else
     dl sCompressedTilemap_A5FBCE                          ;80B37C|        |A5FBCE;
     endif
@@ -1547,6 +1727,10 @@ sMap_80B42E:
     dw $6000                                                   ;80B44C|        |      ;
     if !REGION_DE
     dl $A5F10E
+    elseif !REGION_EU
+    dl $A5F048
+    elseif !REGION_JP
+    dl $A5F069
     else
     dl sCompressedTilemap_A5F059                          ;80B44E|        |A5F059;
     endif
@@ -1564,6 +1748,10 @@ sMap_80B451:
     dw $6000                                                   ;80B46F|        |      ;
     if !REGION_DE
     dl $A5F50F
+    elseif !REGION_EU
+    dl $A5F449
+    elseif !REGION_JP
+    dl $A5F46A
     else
     dl sCompressedTilemap_A5F45A                          ;80B471|        |A5F45A;
     endif
@@ -1639,7 +1827,11 @@ sMap_80B514:
     dw $4000                                                   ;80B52D|        |      ;
     dl sCompressedTiles_A088E9                               ;80B52F|        |A088E9;
     dw $6000                                                   ;80B532|        |      ;
+    if !REGION_JP
+    dl $A6968D
+    else
     dl sCompressedTilemap_A694EE                          ;80B534|        |A694EE;
+    endif
  
 sMap_80B537:
     db $05                                                     ;80B537|        |      ;
@@ -1654,7 +1846,11 @@ sMap_80B537:
     dw $5000                                                   ;80B555|        |      ;
     dl sCompressedTiles_A0E682                               ;80B557|        |A0E682;
     dw $6000                                                   ;80B55A|        |      ;
+    if !REGION_JP
+    dl $A6968D
+    else
     dl sCompressedTilemap_A694EE                          ;80B55C|        |A694EE;
+    endif
  
 sMap_80B55F:
     db $05                                                     ;80B55F|        |      ;
@@ -1669,7 +1865,11 @@ sMap_80B55F:
     dw $5000                                                   ;80B57D|        |      ;
     dl sCompressedTiles_A0AB1E                               ;80B57F|        |A0AB1E;
     dw $6000                                                   ;80B582|        |      ;
+    if !REGION_JP
+    dl $A6968D
+    else
     dl sCompressedTilemap_A694EE                          ;80B584|        |A694EE;
+    endif
  
 sMap_80B587:
     db $05                                                     ;80B587|        |      ;
@@ -1684,7 +1884,11 @@ sMap_80B587:
     dw $5000                                                   ;80B5A5|        |      ;
     dl sCompressedTiles_A09232                               ;80B5A7|        |A09232;
     dw $6000                                                   ;80B5AA|        |      ;
+    if !REGION_JP
+    dl $A6968D
+    else
     dl sCompressedTilemap_A694EE                          ;80B5AC|        |A694EE;
+    endif
  
 sMap_80B5AF:
     db $05                                                     ;80B5AF|        |      ;
@@ -1699,6 +1903,8 @@ sMap_80B5AF:
     dw $6000                                                   ;80B5CD|        |      ;
     if !REGION_DE
     dl $A69A15
+    elseif !REGION_JP
+    dl $A6A07D
     else
     dl sCompressedTilemap_A69996                          ;80B5CF|        |A69996;
     endif
@@ -1716,6 +1922,8 @@ sMap_80B5D2:
     dw $6000                                                   ;80B5F0|        |      ;
     if !REGION_DE
     dl $A69A15
+    elseif !REGION_JP
+    dl $A6A07D
     else
     dl sCompressedTilemap_A69996                          ;80B5F2|        |A69996;
     endif
@@ -1733,6 +1941,8 @@ sMap_80B5F5:
     dw $6000                                                   ;80B613|        |      ;
     if !REGION_DE
     dl $A69A15
+    elseif !REGION_JP
+    dl $A6A07D
     else
     dl sCompressedTilemap_A69996                          ;80B615|        |A69996;
     endif
@@ -1752,6 +1962,8 @@ sMap_80B618:
     dw $6000                                                   ;80B63B|        |      ;
     if !REGION_DE
     dl $A69A15
+    elseif !REGION_JP
+    dl $A6A07D
     else
     dl sCompressedTilemap_A69996                          ;80B63D|        |A69996;
     endif
@@ -1783,6 +1995,22 @@ sHeavySnowOverlay:
     dl $9B843E
     dw $7000
     dl $A5A493
+    elseif !REGION_EU
+    dl $A5C94A
+sHeavySnowOverlay:
+    db $01,$02,$01,$01
+    dw $5000
+    dl sCompressedTiles_9B8441
+    dw $7000
+    dl $A5A3CA
+    elseif !REGION_JP
+    dl $A5CA3E
+sHeavySnowOverlay:
+    db $01,$02,$01,$01
+    dw $5000
+    dl $9B874E
+    dw $7000
+    dl $A5A4BE
     else
     dl sCompressedTilemap_A5C955                          ;80B667|        |A5C955;
  
@@ -1819,6 +2047,46 @@ sNatsumeLogo:
     dl $9FEF63
     dw $6000
     dl $A5DF39
+    elseif !REGION_EU
+    dl $9F9509
+    dw $4000
+    dl $9FAB44
+    dw $5000
+    dl $9FC13A
+    dw $6000
+    dl $A5CD7D
+    dw $7000
+    dl $A5D447
+sHarvestMoonLogo:
+    db $02,$02,$00,$01
+    dw $6000
+    dl $A5D945
+sNatsumeLogo:
+    db $02,$02,$01,$01
+    dw $2000
+    dl $9FF043
+    dw $6000
+    dl $A5DE73
+    elseif !REGION_JP
+    dl $9F9540
+    dw $4000
+    dl $9FABB5
+    dw $5000
+    dl $9FC352
+    dw $6000
+    dl $A5CE71
+    dw $7000
+    dl $A5D53B
+sHarvestMoonLogo:
+    db $02,$02,$00,$01
+    dw $6000
+    dl $A5DA39
+sNatsumeLogo:
+    db $02,$02,$01,$01
+    dw $2000
+    dl $9FF445
+    dw $6000
+    dl $A5DF61
     else
     dl sCompressedTiles_9F946C                               ;80B683|        |9F946C;
     dw $4000                                                   ;80B686|        |      ;
@@ -1848,6 +2116,13 @@ sMenuScreenBackgrounds:
     dw $2000                                                   ;80B6B5|        |      ;
     dl sCompressedTiles_9ABF97                               ;80B6B7|        |9ABF97;
     dw $3000                                                   ;80B6BA|        |      ;
+    if !REGION_JP
+    dl $9AC85E
+    dw $4000
+    dl $9ACF5A
+    dw $5000
+    dl $9AD8B2
+    else
     dl sCompressedTiles_9AC489                               ;80B6BC|        |9AC489;
     dw $4000                                                   ;80B6BF|        |      ;
     if !REGION_DE
@@ -1859,11 +2134,16 @@ sMenuScreenBackgrounds:
     dw $5000                                                   ;80B6C4|        |      ;
     dl sCompressedTiles_9AD357                               ;80B6C6|        |9AD357;
     endif
+    endif
     dw $1000                                                   ;80B6C9|        |      ;
     dl sCompressedTilemap_A58000                          ;80B6CB|        |A58000;
     dw $6000                                                   ;80B6CE|        |      ;
     if !REGION_DE
     dl $A59757
+    elseif !REGION_EU
+    dl $A59704
+    elseif !REGION_JP
+    dl $A59801
     else
     dl sCompressedTilemap_A5970F                          ;80B6D0|        |A5970F;
     endif
@@ -1873,6 +2153,17 @@ sMenuCharacters:
     dw $2000                                                   ;80B6D7|        |      ;
     dl sCompressedTiles_9ABF97                               ;80B6D9|        |9ABF97;
     dw $3000                                                   ;80B6DC|        |      ;
+    if !REGION_JP
+    dl $9AC85E
+    dw $4000
+    dl $9ACF5A
+    dw $5000
+    dl $9AD8B2
+    dw $1000
+    dl $A58E1A
+    dw $6000
+    dl $A59801
+    else
     dl sCompressedTiles_9AC489                               ;80B6DE|        |9AC489;
     dw $4000                                                   ;80B6E1|        |      ;
     if !REGION_DE
@@ -1883,6 +2174,14 @@ sMenuCharacters:
     dl $A58DA7
     dw $6000
     dl $A59757
+    elseif !REGION_EU
+    dl sCompressedTiles_9ACB41
+    dw $5000
+    dl sCompressedTiles_9AD357
+    dw $1000
+    dl $A58D83
+    dw $6000
+    dl $A59704
     else
     dl sCompressedTiles_9ACB41                               ;80B6E3|        |9ACB41;
     dw $5000                                                   ;80B6E6|        |      ;
@@ -1891,6 +2190,7 @@ sMenuCharacters:
     dl sCompressedTilemap_A58D8E                          ;80B6ED|        |A58D8E;
     dw $6000                                                   ;80B6F0|        |      ;
     dl sCompressedTilemap_A5970F                          ;80B6F2|        |A5970F;
+    endif
     endif
  
 aScreenTransitionTable:
