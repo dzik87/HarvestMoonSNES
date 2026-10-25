@@ -1,0 +1,723 @@
+@@ sDialogDE_026A @@
+Hicks... entschuldigung,    hicks..., mir geht es nicht so gut! Ich muß es wohl mit<NEXT>
+Würde essen, ob ich will    oder nicht! Habe ich recht?<END>
+
+@@ sDialogDE_026B @@
+Taraaa! Das ist die         verbesserte Erntemaschine.  Schalte sie ein.<NEXT>
+ O.K.!                       Nein!<OPT 2>
+
+@@ sDialogDE_026C @@
+Verflixt!<END>
+
+@@ sDialogDE_026D @@
+...Haha... haha! Ich habe   den Saft probiert und sehe  jetzt Regenwürmer fliegen!<END>
+
+@@ sDialogDE_026E @@
+Morgen steigt das           Kometenfest. Frage die Leutenach den verschiedenen<NEXT>
+Veranstaltungsplätzen.<END>
+
+@@ sDialogDE_026F @@
+Das ist ein Traubensaft. Er ist süß und sehr lecker!    Willst Du mal probieren?<NEXT>
+ Natürlich!                  Lieber nicht!<OPT 2>
+
+@@ sDialogDE_0270 @@
+Ja, das sind die Geschenke  der Mutter Erde!<END>
+
+@@ sDialogDE_0271 @@
+Du bist nicht sehr höflich, oder?<END>
+
+@@ sDialogDE_0272 @@
+Morgen ist das Blumenfest.  Ich höre früher mit der     Arbeit auf. Wenn Du Vieh<NEXT>
+hast, solltest Du Dich      vorher darum kümmern. Um    drei Uhr geht der Spaß los.<NEXT>
+Ich werde aber vorher noch  die Waren aus der Sammelbox abholen, wenn Du etwas zu<NEXT>
+verkaufen hast. Tschüß!<END>
+
+@@ sDialogDE_0273 @@
+Freut Euch Ihr Leut! Das    Eierfestival steht uns      bevor!!!<NEXT>
+Das Wetter ist gut und      alle sind recht             herzlich eingeladen!<END>
+
+@@ sDialogDE_0274 @@
+Morgen ist das Eierfestival.Um drei Uhr werde ich auf   dem Marktplatz sein.<NEXT>
+Füttere Dein Vieh, bevor Du auf das Fest kommst! Ich    werde aber vorher noch die<NEXT>
+Waren aus der Sammelbox     abholen, wenn Du etwas zu   verkaufen hast. Tschüß!<END>
+
+@@ sDialogDE_0275 @@
+Das ist ein Bohneneintopf.  Möchtest Du probieren?<NEXT>
+ Gerne!                      Nein!<OPT 2>
+
+@@ sDialogDE_0276 @@
+Das ist wirklich nahrhaft.<END>
+
+@@ sDialogDE_0277 @@
+Das ist drei Jahre alter    Beerensaft. Möchtest Du     davon kosten?<NEXT>
+ Jawoll!                     Nein danke!<OPT 2>
+
+@@ sDialogDE_0278 @@
+Mein Großvater liebt diesen Saft.<END>
+
+@@ sDialogDE_0279 @@
+Was? Du verträgst meinen    Saft nicht?<END>
+
+@@ sDialogDE_027A @@
+Solche Momente sollte man   sich immer bewahren.<END>
+
+@@ sDialogDE_027B @@
+Das ist meine Ultra-Spezial-Erntemaschine! Du scheinst  mir nicht zu glauben.<NEXT>
+Traue Dich und schalte sie  doch ein!<NEXT>
+ Einschalten!                Bin ich verrückt?<OPT 2>
+
+@@ sDialogDE_027C @@
+Es geht nicht darum, ob Du  es magst oder nicht.<END>
+
+@@ sDialogDE_027D @@
+Frische Zutaten sind nötig, um ein leckeres Mahl zu     bereiten.<END>
+
+@@ sDialogDE_027E @@
+Gute Reisbällchen und       Knödel. Das wird Dir sicher schmecken!<END>
+
+@@ sDialogDE_027F @@
+Glückwunsch!!!<END>
+
+@@ sDialogDE_0280 @@
+Du wirst bald ein Baby      haben!<END>
+
+@@ sDialogDE_0281 @@
+Hoho, schau Dir dieses Baby an. Es ist ein wirklich     hübsches Kind!<END>
+
+@@ sDialogDE_0282 @@
+Ich habe einen tollen       Partner. Du solltest Dir    auch jemanden suchen.<END>
+
+@@ sDialogDE_0283 @@
+Ich möchte mit jemand       anderem tanzen...<END>
+
+@@ sDialogDE_0284 @@
+Ein junger Mann sollte mit  einer jungen Frau tanzen.<END>
+
+@@ sDialogDE_0285 @@
+Bring mir mehr Saft!<END>
+
+@@ sDialogDE_0286 @@
+War das lecker?<END>
+
+@@ sDialogDE_0287 @@
+Ich möchte nicht mit Dir    tanzen!<END>
+
+@@ sDialogDE_0288 @@
+Yeah, ich möchte mit Maria  tanzen!<END>
+
+@@ sDialogDE_0289 @@
+Am Neujahrsfest solltest Du Dich von dem alten Jahr     verabschieden.<END>
+
+@@ sDialogDE_028A @@
+Es ist zwar nur ein Tanz, es kann aber auch mehr        bedeuten.<END>
+
+@@ sDialogDE_028B @@
+Wen forderst Du zum Tanz    auf?<END>
+
+@@ sDialogDE_028C @@
+Du kannst es nicht mehr     rückgängig machen. Treffe   Deine Wahl also sehr<NEXT>
+sorgfältig!<END>
+
+@@ sDialogDE_028D @@
+Morgen ist das              Erntedankfest. Die ganze    Stadt riecht nach frisch<NEXT>
+gebackenem Kuchen. Das wird ein Riesenspaß!!!<END>
+
+@@ sDialogDE_028E @@
+Morgen ist das              Erntedankfest. Es ist für   alle diejenigen, die das<NEXT>
+ganze Jahr über schwer      arbeiten. Du solltest mal   vorbeischauen, wenn Du Lust<NEXT>
+hast!<END>
+
+@@ sDialogDE_028F @@
+Die Frauen schenken ihren   Geliebten leckere Kuchen.   Ich bin sicher, daß auch Du<NEXT>
+in die Stadt kommen wirst!<END>
+
+@@ sDialogDE_0290 @@
+Ich gehe zu Bett. Gute      Nacht!<END>
+
+@@ sDialogDE_0291 @@
+Das ist etwas ganz Feines!  Möchtest Du mal probieren?<NEXT>
+ Klar!                       Nein!<OPT 2>
+
+@@ sDialogDE_0292 @@
+Heute ist Erntedankfest.    Ich möchte Dir danken, daß  Du so schwer für mich<NEXT>
+arbeitest, Schatz!<END>
+
+@@ sDialogDE_0293 @@
+Bitte mache so weiter!<END>
+
+@@ sDialogDE_0294 @@
+Ich bin ein                 Zappelphilipp...<END>
+
+@@ sDialogDE_0295 @@
+Dum, dum, dum...<END>
+
+@@ sDialogDE_0296 @@
+Ellen ist eine gute Köchin  und kümmert sich auch um dasVieh. Sie ist wirklich ein<NEXT>
+nettes Mädchen, findest Du  nicht?<END>
+
+@@ sDialogDE_0297 @@
+Die Kuchen meiner Frau sind gut, aber die meiner Tochternoch viel besser!<END>
+
+@@ sDialogDE_0298 @@
+Ich habe den Kuchen wieder  anbrennen lassen!<END>
+
+@@ sDialogDE_0299 @@
+Was soll ich bloß tun?<END>
+
+@@ sDialogDE_029A @@
+Anns Kuchen werden doch     nicht explodieren, oder?<END>
+
+@@ sDialogDE_029B @@
+Jedes Jahr bekomme ich von  Maria einen Kuchen.<END>
+
+@@ sDialogDE_029C @@
+Yeah, ich habe einen Kuchen von Maria!<END>
+
+@@ sDialogDE_029D @@
+Wenn ich erst einmal älter  bin, werden auch meine      Kuchen gelingen.<END>
+
+@@ sDialogDE_029E @@
+Hi, das ist für Dich. Ich   hoffe Du magst es.<END>
+
+@@ sDialogDE_029F @@
+Danke, daß Du jeden Tag so  fleißig arbeitest.<END>
+
+@@ sDialogDE_02A0 @@
+Hallo!<END>
+
+@@ sDialogDE_02A1 @@
+Ich weiß nicht, ob es Dir   schmecken wird. <END>
+
+@@ sDialogDE_02A2 @@
+Möchtest Du zur Sicherheit  etwas Medizin?<END>
+
+@@ sDialogDE_02A3 @@
+Mein Vater schaut sich meineKuchen immer genau an, bevorer sie ißt.<END>
+
+@@ sDialogDE_02A4 @@
+Hier bitteschön, ein ganz   spezieller Kräuterkuchen.<END>
+
+@@ sDialogDE_02A5 @@
+Er sieht zwar nicht         besonders gut aus, ist aber lecker!<END>
+
+@@ sDialogDE_02A6 @@
+Meine Mutter läuft seit     heute früh mit einem Kuchen in den Händen herum.<END>
+
+@@ sDialogDE_02A7 @@
+Ich habe viel Milch und Eierverwendet!<END>
+
+@@ sDialogDE_02A8 @@
+Ich backe gute Kuchen.<END>
+
+@@ sDialogDE_02A9 @@
+Du denkst wohl ich bin doof,oder? ......... wie Du      meinst.<END>
+
+@@ sDialogDE_02AA @@
+Das ist ein Kuchen mit      eingelegten Beeren.<END>
+
+@@ sDialogDE_02AB @@
+Hoffentlich bekommst Du     keinen Schwips!<END>
+
+@@ sDialogDE_02AC @@
+Morgen ist das Kometenfest. Der Himmel wird wunderbar   klar sein. Man kann dann<NEXT>
+alle Sterne und Kometen     sehen.<END>
+
+@@ sDialogDE_02AD @@
+Beim Kometenfest kannst Du  in der Nacht den schönsten  aller Sterne sehen.<END>
+
+@@ sDialogDE_02AE @@
+Schau Dir den Himmel an.    Morgen wird eine wundervolleNacht.<END>
+
+@@ sDialogDE_02AF @@
+Ich gehe in die Kirche, um  auf der Orgel zu spielen.<END>
+
+@@ sDialogDE_02B0 @@
+Morgen? Hehe, ich weiß einenfaszinierenden Platz!<END>
+
+@@ sDialogDE_02B1 @@
+Ich werde den Sternen ganz  nahe sein!<END>
+
+@@ sDialogDE_02B2 @@
+Wir werden auf dem          Marktplatz beten. Wie       romantisch!<END>
+
+@@ sDialogDE_02B3 @@
+Ich warte morgen auf Dich!<END>
+
+@@ sDialogDE_02B4 @@
+Ich gehe dorthin, wo ich am Kometenfest immer hingehe!<END>
+
+@@ sDialogDE_02B5 @@
+Morgen ist das Kometenfest  und ich gehe dorthin, wo ichimmer hingehe! Komme mich<NEXT>
+dort doch besuchen!<END>
+
+@@ sDialogDE_02B6 @@
+Heute ist das Kometenfest.  Wo soll ich hingehen?<NEXT>
+ Marktplatz    Bergspitze    Kirche        Quelle        Bar<OPT 5>
+
+@@ sDialogDE_02B7 @@
+So, Ihr lieben Leute, laßt  uns die Sterne anbeten.<END>
+
+@@ sDialogDE_02B8 @@
+Das Licht der Sterne ist    viele Millionen Jahre alt.  Das ist wirklich ein<NEXT>
+faszinierendes Ereignis!<END>
+
+@@ sDialogDE_02B9 @@
+Mögen meine Geschäfte besserlaufen...<END>
+
+@@ sDialogDE_02BA @@
+Soll ich Dein Horoskop      erstellen?<NEXT>
+ Sicher!                     Lieber nicht!<OPT 2>
+
+@@ sDialogDE_02BB @@
+Das Mädchen, daß an Deiner  Seite stehen wird, heißt    <VAR 5 19>!<END>
+
+@@ sDialogDE_02BC @@
+Wirklich? Du interessierst  Dich nicht für Deine        Zukunft?<END>
+
+@@ sDialogDE_02BD @@
+Wenn ich meine Augen        schließe, stelle ich mir    vor, ich würde im Himmel<NEXT>
+auf dem Kometen durch das   All reiten.<END>
+
+@@ sDialogDE_02BE @@
+Was ich mir gewünscht habe? Das bleibt mein Geheimnis!<END>
+
+@@ sDialogDE_02BF @@
+Die Sterne scheinen immer.  Man kann sie am Tag zwar    nicht sehen, weil es auf<NEXT>
+der Erde zu hell ist,       dennoch sind sie da. So ist es mit der Wahrheit und mit<NEXT>
+der Liebe, die immer präsentsind, auch wenn man es nichtmerkt.<END>
+
+@@ sDialogDE_02C0 @@
+Manchmal funktioniert es    trotz aller Liebe nicht.    Dann hilft nur noch beten.<END>
+
+@@ sDialogDE_02C1 @@
+Ich bin etwas müde...<END>
+
+@@ sDialogDE_02C2 @@
+Zzzzzzz.....<END>
+
+@@ sDialogDE_02C3 @@
+Heute nacht werde ich       bestimmt gut träumen!<END>
+
+@@ sDialogDE_02C4 @@
+Ich wünschte, wir könnten   auch im nächsten Jahr etwas Zeit miteinander verbringen.<END>
+
+@@ sDialogDE_02C5 @@
+Zum Wohl! Freut Euch des    Lebens!!!<END>
+
+@@ sDialogDE_02C6 @@
+Singt nun ein Lied!<END>
+
+@@ sDialogDE_02C7 @@
+Ich bin heute abend hier    und... Zufall, Zufall,...   sie ist auch hier!<END>
+
+@@ sDialogDE_02C8 @@
+Ah, guten Abend! Nina?      Sie geht immer alleine fort.Wo geht sie nur hin?<END>
+
+@@ sDialogDE_02C9 @@
+Erfreut Euch an der         Schönheit des nächtlichen   Himmels und trinkt Eure<NEXT>
+Gläser leer!<END>
+
+@@ sDialogDE_02CA @@
+Hallo! Na, hast Du Spaß an  diesem Fest? Ist das nicht  ein tolles Ereignis?<END>
+
+@@ sDialogDE_02CB @@
+Hast Du das gesehen? Ich    sehe jedes Jahr einen       Kometen. Erzähle niemandem<NEXT>
+von diesem Ort. Das bleibt  ein Geheimnis zwischen uns. O.K.?<END>
+
+@@ sDialogDE_02CC @@
+Hast Du Dir etwas gewünscht?Nina hat sich auch etwas    gewünscht, aber das soll<NEXT>
+ein Geheimnis bleiben.<END>
+
+@@ sDialogDE_02CD @@
+Ich genieße es, die Sterne  zu beobachten. Das ist fast wie im Paradies.<END>
+
+@@ sDialogDE_02CE @@
+Mögen wir in Frieden        zusammenleben. Laßt uns nun beten.<END>
+
+@@ sDialogDE_02CF @@
+Am Anfang des neuen Jahres  solltest Du Dir auch neue   Ziele gesetzt haben!<END>
+
+@@ sDialogDE_02D0 @@
+Möge die Erde uns auch      dieses Jahr wieder          zahlreiche Geschenke machen.<END>
+
+@@ sDialogDE_02D1 @@
+Dieses Jahr werde ich sie   fragen, oder vielleicht dochnicht? Ich weiß nicht recht!<END>
+
+@@ sDialogDE_02D2 @@
+Hoffentlich gehen meine     Geschäfte dieses Jahr gut!<END>
+
+@@ sDialogDE_02D3 @@
+Ich werde Dir nun Deine     Zukunft prophezeien!<NEXT>
+ Ja!                         Laß mal gut sein!<OPT 2>
+
+@@ sDialogDE_02D4 @@
+Ziehe eine Karte Deiner     Wahl!<NEXT>
+ Oben                        Mitte                       Unten<OPT 3>
+
+@@ sDialogDE_02D5 @@
+"Großartiges Glück"         Tolle Ernte! Alles wird     wunderbar laufen!<END>
+
+@@ sDialogDE_02D6 @@
+"Glück"                     Gute Ernte! Eine Person wirdsich zu Dir gesellen!<END>
+
+@@ sDialogDE_02D7 @@
+"Unheil"                    Deine Zukunft sieht nicht   gerade rosig aus!<END>
+
+@@ sDialogDE_02D8 @@
+Dann eben nicht!<END>
+
+@@ sDialogDE_02D9 @@
+Hmmm, dieses Jahr sieht gut für Dich aus!<END>
+
+@@ sDialogDE_02DA @@
+Möge dieses Jahr ein gutes  für Dich werden.<END>
+
+@@ sDialogDE_02DB @@
+Zum Jahresbeginn sollten wirden ersten Sonnenaufgang    miterleben.<END>
+
+@@ sDialogDE_02DC @@
+Tu Dein Bestes!<END>
+
+@@ sDialogDE_02DD @@
+Wir veranstalten die große  Eiersuche! Die Regeln sind  leicht zu verstehen. Die<NEXT>
+Person, die das Ei mit der  gleichen Farbe findet, wie  ich sie zeige, gewinnt.<NEXT>
+Kann das Spiel beginnen?<NEXT>
+ Ich bin bereit!             Nein!<OPT 2>
+
+@@ sDialogDE_02DE @@
+Auf geht's! Hier die erste  Farbe!<END>
+
+@@ sDialogDE_02DF @@
+Schnell! Die Zeit ist fast  vorüber!<END>
+
+@@ sDialogDE_02E0 @@
+Diese Kinder werden mich    nicht besiegen.<END>
+
+@@ sDialogDE_02E1 @@
+Was ist der Preis? Saft?<END>
+
+@@ sDialogDE_02E2 @@
+Der Gewinner bekommt den    großen Preis!<END>
+
+@@ sDialogDE_02E3 @@
+Kinder benötigen ein        Handicap!<END>
+
+@@ sDialogDE_02E4 @@
+Ich will dieses Jahr        gewinnen!<END>
+
+@@ sDialogDE_02E5 @@
+Ich habe gehört, der erste  Preis ist der Samen einer   seltenen Blume!<END>
+
+@@ sDialogDE_02E6 @@
+Wenn <VAR 4 20> hier wäre, hätte  die Suche gleich ein Ende.<END>
+
+@@ sDialogDE_02E7 @@
+Ja, das ist die gleiche     Farbe. Ein Punkt für Dich.  Hier die nächste Farbe!<END>
+
+@@ sDialogDE_02E8 @@
+O.K., das Spiel ist zu Ende.Ich verkünde nun den        Gewinner. Alle herhören!<END>
+
+@@ sDialogDE_02E9 @@
+Bingo! Das war richtig. Nun das nächste Ei!<END>
+
+@@ sDialogDE_02EA @@
+Der diesjährige Gewinner    unseres Eiersuchwettbewerbs ist: <VAR 4 21>!<END>
+
+@@ sDialogDE_02EB @@
+Der erste Preis ist Futter  für einen ganzen Monat. Ich liefere Dir das Futter<NEXT>
+direkt auf die Farm!<END>
+
+@@ sDialogDE_02EC @@
+Glückwunsch! Ich liefere DirDeinen Preis nach Hause!<END>
+
+@@ sDialogDE_02ED @@
+Laßt uns dieses Jahr alle   wieder fleißig sein!<END>
+
+@@ sDialogDE_02EE @@
+Wie bescheiden Du doch bist,junger Mann!<END>
+
+@@ sDialogDE_02EF @@
+Puh, ich habe es leider     nicht geschafft!<END>
+
+@@ sDialogDE_02F0 @@
+Hicks... hätte nicht her... hicks... kommen sollen...<END>
+
+@@ sDialogDE_02F1 @@
+Schnauf!<END>
+
+@@ sDialogDE_02F2 @@
+Sprich mich nicht an, ich   bin völlig außer Atem!<END>
+
+@@ sDialogDE_02F3 @@
+Hey, das sind ja gar keine  Blumensamen!<END>
+
+@@ sDialogDE_02F4 @@
+Für den Körper ist es gut,  sich sportlich zu betätigen.<END>
+
+@@ sDialogDE_02F5 @@
+Neujahrsfest!!! Laßt uns denersten Sonnenaufgang        anschauen!<END>
+
+@@ sDialogDE_02F6 @@
+Das sind Grassamen. Gras    wächst auch ohne            Bewässerung. Es kostet<NEXT>
+500G. Willst Du Samen       kaufen?<NEXT>
+ Natürlich!                  Nein, danke!                             Geld <NUM 7 21>0G<OPT 2>
+
+@@ sDialogDE_02F7 @@
+Danke! Ich liefere es in    Deinen Schuppen.<END>
+
+@@ sDialogDE_02F8 @@
+Vielen Dank!<END>
+
+@@ sDialogDE_02F9 @@
+Du hast nicht genug Geld, umDir das leisten zu können.<END>
+
+@@ sDialogDE_02FA @@
+Danke! Besuche mich bald    wieder!<END>
+
+@@ sDialogDE_02FB @@
+Willst Du Kühe kaufen? Dann gebe ich Dir diese Glocke.  Kühe folgen dem Klang der<NEXT>
+Glocke. Wende die Glocke    aber nicht zu oft an, da sieDich müde macht. Ich werde<NEXT>
+das Vieh und die Glocke     bringen.<END>
+
+@@ sDialogDE_02FC @@
+Das ist die Farbe für das   Haus. Sie kostet 1500G.     Möchtest Du sie kaufen?<NEXT>
+ Ja!                         Nein, viel zu teuer!                     Geld <NUM 7 22>0G<OPT 2>
+
+@@ sDialogDE_02FD @@
+Danke! Ich bringe Dir die   Ware in Deinen Schuppen.<END>
+
+@@ sDialogDE_02FE @@
+Schade, das ist gute Ware!<END>
+
+@@ sDialogDE_02FF @@
+Oh, bei Dir herrscht Ebbe   in der Kasse!<END>
+
+@@ sDialogDE_0300 @@
+Aha, Dein Pferd ist         ausgewachsen. Ich habe      Satteltaschen angefertigt.<NEXT>
+Werfe Deine Ernte in die    Satteltaschen. Die Ernte    wird dann, wie auch bei der<NEXT>
+Sammelbox, automatisch      abgeholt.                   Ist das nicht toll?<END>
+
+@@ sDialogDE_0301 @@
+Das ist Medizin für die     Kühe. Ist Dein Vieh krank?  Benutze diese Medizin nur<NEXT>
+für kranke Tiere. Der Preis ist ...mmmmmh...sagen wir   mal 1000G.<NEXT>
+ Kaufen!                     Nicht kaufen!                            Geld <NUM 7 23>0G<OPT 2>
+
+@@ sDialogDE_0302 @@
+Ich liefere es in Deinen    Schuppen!<END>
+
+@@ sDialogDE_0303 @@
+Aha!<END>
+
+@@ sDialogDE_0304 @@
+Tja, mein Lieber, ohne Geld ist hier leider nichts zu   holen. Komme wieder, wenn<NEXT>
+Du Deine Kasse aufgefüllt   hast.<END>
+
+@@ sDialogDE_0305 @@
+Hallo, womit kann ich       dienen?<NEXT>
+ Kuh kaufen    Kuh verkaufen Huhn kaufen                 Huhn verkaufen<OPT 4>
+
+@@ sDialogDE_0306 @@
+Du brauchst mehr Gras, um   Vieh halten zu können.<END>
+
+@@ sDialogDE_0307 @@
+Eine Kuh kostet 5000G.      Willst Du eine?<NEXT>
+ Ja, natürlich!              Nö!                                      Geld <NUM 7 24>0G<OPT 2>
+
+@@ sDialogDE_0308 @@
+Wird direkt in den Stall    geliefert!<END>
+
+@@ sDialogDE_0309 @@
+Wenn Du Kühe verkaufen      möchtest, sag mir Bescheid!<END>
+
+@@ sDialogDE_030A @@
+Ein Huhn kostet 1000G.      Verlockendes Angebot, nicht wahr?<NEXT>
+ Kaufen!                     Nicht kaufen!                            Geld <NUM 7 25>0G<OPT 2>
+
+@@ sDialogDE_030B @@
+O.K., ich hole es später ab.Laß es heute am             Eingangspferch Deiner Farm.<END>
+
+@@ sDialogDE_030C @@
+Hey, ich habe die Kuh in denStall gebracht. Paß gut auf sie auf!<NEXT>
+Zuerst solltest Du ihr einenNamen geben.  Tschölerö!<END>
+
+@@ sDialogDE_030D @@
+Hey, das ist nicht das      richtige Wetter, um eine Kuhzu verkaufen. Komm ein<NEXT>
+anderes Mal wieder.<END>
+
+@@ sDialogDE_030E @@
+Ich gebe Dir <NUM 4 26>0G. Willst Du verkaufen?<NEXT>
+ Verkaufen!                  Nicht verkaufen!                         Geld <NUM 7 27>0G<OPT 2>
+
+@@ sDialogDE_030F @@
+O.K.! Ich nehme das Vieh    mit!<END>
+
+@@ sDialogDE_0310 @@
+Das Tier muß erst noch ein  wenig wachsen.<END>
+
+@@ sDialogDE_0311 @@
+Es ist draußen. Nimm es     einfach mit. Es frißt       draußen Gras.<NEXT>
+Hältst Du es im Stall,      mußt Du regelmäßig füttern.<END>
+
+@@ sDialogDE_0312 @@
+Das ist eine superpraktischeMelkmaschine. Sie kostet nur1800G.<NEXT>
+ Muß ich haben!              Vielleicht später!                       Geld <NUM 7 28>0G<OPT 2>
+
+@@ sDialogDE_0313 @@
+Tut mir leid, das kaufe     ich nicht.<END>
+
+@@ sDialogDE_0314 @@
+Das ist eine Bürste. Kühe   sind zufrieden, wenn man siedamit einmal am Tag<NEXT>
+bürstet. Die Bürste kostet  800G.<NEXT>
+ Kaufen!                     Nicht kaufen!                            Geld <NUM 7 29>0G<OPT 2>
+
+@@ sDialogDE_0315 @@
+Möge diese arme Kuh in      Frieden ruhen!<END>
+
+@@ sDialogDE_0316 @@
+Du Versager!!! Ich habe Dir gesagt, daß man Kühe gut    pflegen muß! Wenn Deine<NEXT>
+Kühe krank werden, mußt Du  ihnen Medizin geben.<END>
+
+@@ sDialogDE_0317 @@
+Großartig! Ein Kalb wurde   geboren. Ich muß ihm einen  Namen geben.<END>
+
+@@ sDialogDE_0318 @@
+Was? ... ein Pferd!         Gut, es bekommt einen       Namen.<END>
+
+@@ sDialogDE_0319 @@
+Gib dem Hund einen Namen.<END>
+
+@@ sDialogDE_031A @@
+Für Deine Ware gebe ich     Dir <NUM 7 30>0G!<NEXT>
+Ich hinterlege Dir          morgen die Summe!<END>
+
+@@ sDialogDE_031B @@
+Heute nichts zu verkaufen?  O.K., bis morgen!!!<END>
+
+@@ sDialogDE_031C @@
+Geschäftszeiten             Wochentags:                 7:00 - 17:00 Uhr<NEXT>
+Wochenende & Ferien:        Geschlossen<END>
+
+@@ sDialogDE_031D @@
+Wirf nichts in die Quelle   hinein.<END>
+
+@@ sDialogDE_031E @@
+Hallo, junger Mann! Ich bin die Göttin der Quelle. Ich  habe eine Frage an Dich.<NEXT>
+Hast Du diese goldene Axt indie Quelle geworfen?<NEXT>
+ Ja!                         Nein!<OPT 2>
+
+@@ sDialogDE_031F @@
+Du lügst! Diese Axt gehört  Dir!!! Ich weiß alles!      Wiedersehen!!!<END>
+
+@@ sDialogDE_0320 @@
+Du scheinst ein ehrlicher   Mensch zu sein! Ich gebe Dirdiese goldene Axt! Nein, Du<NEXT>
+brauchst mir nicht zu       danken. Ich bin froh, einen ehrlichen Menschen<NEXT>
+getroffen zu haben. Fahre   nun mit Deiner Arbeit fort!<END>
+
+@@ sDialogDE_0321 @@
+Kann ich mir bitte Deinen   Hammer ausleihen?<NEXT>
+ Ja, selbstverständlich!     Nein!<OPT 2>
+
+@@ sDialogDE_0322 @@
+Danke, ich werde ihm ein    wenig mehr Kraft verleihen!<END>
+
+@@ sDialogDE_0323 @@
+Nein? Zu Dir komme ich nichtmehr!<END>
+
+@@ sDialogDE_0324 @@
+Du kannst Dein Feld vor dem Frühling pflügen. Doch wenn der Frühling da ist, kann<NEXT>
+es Schäden an Deinem Feld   geben.<END>
+
+@@ sDialogDE_0325 @@
+Wie geht's? Ist Deine Farm  schon gewachsen?<END>
+
+@@ sDialogDE_0326 @@
+Du kannst hier raus!<END>
+
+@@ sDialogDE_0327 @@
+Setzt Du auch die Sichel ausDeinem Schuppen ein? Wie    funktioniert sie?<NEXT>
+ Sehr gut!                   Ich benutze sie selten!<OPT 2>
+
+@@ sDialogDE_0328 @@
+Ich habe sie angefertigt.   Ich werde sie noch besser   machen. Du wirst schon<NEXT>
+sehen...<END>
+
+@@ sDialogDE_0329 @@
+Wirklich nicht? Du solltest sie aber öfter einsetzen!<END>
+
+@@ sDialogDE_032A @@
+Bis demnächst!!!<END>
+
+@@ sDialogDE_032B @@
+Essen... ich brauche etwas  zu essen...<END>
+
+@@ sDialogDE_032C @@
+Einen Pilz... Ich hätte gerneinen Pilz...<END>
+
+@@ sDialogDE_032D @@
+Puh, vielen Dank. Jetzt     fühle ich mich besser. Ich  hatte drei Tage lang nichts<NEXT>
+mehr zwischen den Zähnen!   Ich möchte Dir zum Dank     etwas geben. Schaue morgen<NEXT>
+in Deinem Schuppen nach.<END>
+
+@@ sDialogDE_032E @@
+Das ist ein giftiger Pilz!  Der kann Dich umbringen!!!<END>
+
+@@ sDialogDE_032F @@
+Einen Pilz... Ich möchte    nichts anderes als einen    Pilz...<END>
+
+@@ sDialogDE_0330 @@
+Hör auf damit!!! Dieser Hasegehört mir. Was tust Du mit ihm?<NEXT>
+ Freilassen!                 Nur spielen!<OPT 2>
+
+@@ sDialogDE_0331 @@
+Für 1000G kannst Du ihn     kaufen.<NEXT>
+ Kaufen!                     Nicht kaufen!                            Geld <NUM 7 31>0G<OPT 2>
+
+@@ sDialogDE_0332 @@
+Alles klar! Tschüß!!!<END>
+
+@@ sDialogDE_0333 @@
+Ich sehe, Du bist ein netterKerl. Ich möchte aber kein  Geld. Jeder lebt auf seine<NEXT>
+Weise...<END>
+
+@@ sDialogDE_0334 @@
+Ich kann Dir diesen Hasen   leider nicht geben!<END>
+
+@@ sDialogDE_0335 @@
+Ich bin der Geist der       Quelle. Du hast mir meinen  Fisch zurückgegeben. Du<NEXT>
+bist ein guter Mann! Nimm   dies zum Dank!<END>
+
+@@ sDialogDE_0336 @@
+Ah, der erste Mensch, den   ich seit Jahrzehnten sehe.  Sag mal, Menschlein,<NEXT>
+arbeitest Du auch hart?<NEXT>
+ Ja, sicher!                 Hmmmm!<OPT 2>
+
+@@ sDialogDE_0337 @@
+Nimm dies als Geschenk. Du  kannst es teuer verkaufen.  Sei gut zu den Menschen und<NEXT>
+arbeite hart!<END>
+
+@@ sDialogDE_0338 @@
+Gehe so schnell wie möglich nach Hause!<END>
+
+@@ sDialogDE_0339 @@
+Danke, daß Du es wieder     blühen läßt. Nie zuvor hat  jemand diese Pflanze<NEXT>
+eingepflanzt. Ich bin       glücklich und möchte Dir zumDank etwas schenken.<END>
+
+@@ sDialogDE_033A @@
+Die Blume und ich werden    bald wieder verschwinden.   Doch ich will von nun an<NEXT>
+immer an Dich denken und fürDein Glück beten.<END>
+
+@@ sDialogDE_033B @@
+Dies ist magischer Staub. Erbewirkt, daß eine Kuh kalbt.Außerdem beinhaltet er eine<NEXT>
+Medizin, die für das        Wohlbefinden der Kuh sorgt. Willst Du ihn kaufen? Er<NEXT>
+kostet allerdings 4000G!<NEXT>
+ Kaufen!                     Nicht kaufen!                            Geld <NUM 7 32>0G<OPT 2>
+
+@@ sDialogDE_033C @@
+Das sind Tomatensamen. Nach der Ernte wachsen sie wiedernach. Allerdings mußt Du<NEXT>
+sie immer gut gießen. Sie   kosten 300G.<NEXT>
+ Kaufen!                     Nicht kaufen!                            Geld <NUM 7 33>0G<OPT 2>
+
+@@ sDialogDE_033D @@
+Das sind Kartoffelsamen. Du kannst sie ernten, sobald   die Blätter schön groß<NEXT>
+sind. Die Samen kosten      200G.<NEXT>
+ Kaufen!                     Nicht kaufen!                            Geld <NUM 7 34>0G<OPT 2>

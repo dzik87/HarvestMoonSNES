@@ -1,0 +1,782 @@
+@@ sDialogEU_01A5 @@
+I feel my body becoming a   little heavier.<END>
+
+@@ sDialogEU_01A6 @@
+I wonder if it will be a boyor a girl.<END>
+
+@@ sDialogEU_01A7 @@
+I know.I won't walk around  so much.<END>
+
+@@ sDialogEU_01A8 @@
+I feel strange that I'm     going to have a baby soon.<END>
+
+@@ sDialogEU_01A9 @@
+Get out of my way, get out!<END>
+
+@@ sDialogEU_01AA @@
+I'm OK,honey.Don't worry.   Please go to work.<NEXT>
+ Really?                     No, no, no<OPT 2>
+
+@@ sDialogEU_01AB @@
+I'll do alright.<END>
+
+@@ sDialogEU_01AC @@
+Are you with me? Thank you.<END>
+
+@@ sDialogEU_01AD @@
+uugh..uugh...<END>
+
+@@ sDialogEU_01AE @@
+Oh my God,the baby is       coming!<END>
+
+@@ sDialogEU_01AF @@
+Faltering,faltering.<END>
+
+@@ sDialogEU_01B0 @@
+Take it easy.<END>
+
+@@ sDialogEU_01B1 @@
+Don't be walking about.<END>
+
+@@ sDialogEU_01B2 @@
+I guess I've got to be old  enough to be able to see my great grandchild.<END>
+
+@@ sDialogEU_01B3 @@
+Waah-waah...<END>
+
+@@ sDialogEU_01B4 @@
+Ho-ho-ho...It's a very      healthy baby boy.<END>
+
+@@ sDialogEU_01B5 @@
+Great!<END>
+
+@@ sDialogEU_01B6 @@
+Phew...I haven't been this  nervous for years.<END>
+
+@@ sDialogEU_01B7 @@
+Yes, he looks like Nina.    Well...but he has your eyes,maybe.<END>
+
+@@ sDialogEU_01B8 @@
+It reminds me of when Nina  was born.<END>
+
+@@ sDialogEU_01B9 @@
+It reminds me of when Eve   was born.<END>
+
+@@ sDialogEU_01BA @@
+Darling, please name him.<END>
+
+@@ sDialogEU_01BB @@
+Thank you, honey. I'm so    happy.<END>
+
+@@ sDialogEU_01BC @@
+ <VAR 9 16>,<NUM 2 12><VAR 2 17> of <VAR 6 18>.   Our baby was born.<END>
+
+@@ sDialogEU_01BD @@
+What? A present? I'm so gladthat you remembered the     anniversary.<END>
+
+@@ sDialogEU_01BE @@
+La-la-la<END>
+
+@@ sDialogEU_01BF @@
+ <VAR 9 19>,<NUM 2 13><VAR 2 20> of <VAR 6 21>.   We got married today.<END>
+
+@@ sDialogEU_01C0 @@
+Dah...<END>
+
+@@ sDialogEU_01C1 @@
+Da-da...<END>
+
+@@ sDialogEU_01C2 @@
+Boo-boo...<END>
+
+@@ sDialogEU_01C3 @@
+This is "Blue feather of    happiness."Well,happiness   is different for each<NEXT>
+one though.                 Right now, it's only 1000G!<NEXT>
+ Buy it                      Don't buy it                 Money <NUM 7 14>0G<OPT 2>
+
+@@ sDialogEU_01C4 @@
+God bless you!<END>
+
+@@ sDialogEU_01C5 @@
+Yes, you should consider    carefully because it's a bigchoice in life.<END>
+
+@@ sDialogEU_01C6 @@
+Don't be silly,I'm married.<END>
+
+@@ sDialogEU_01C7 @@
+Who are you playing a joke  on,young man?<END>
+
+@@ sDialogEU_01C8 @@
+That's it! Come on!<END>
+
+@@ sDialogEU_01C9 @@
+Hey, you are giving it to a wrong person.<END>
+
+@@ sDialogEU_01CA @@
+You have to give it to the  girl you love, OK? To the   girl you want to marry.<END>
+
+@@ sDialogEU_01CB @@
+Wow,the blue feather!       Show it to me.<END>
+
+@@ sDialogEU_01CC @@
+Good morning. Please excuse me for bothering you so     early in the morning<NEXT>
+but have you seen Maria?    When I woke up,her bed was  empty. Oh Lord,now that<NEXT>
+she's not here,then,where   on earth is she now? Please!Will you look for her<NEXT>
+with me?<END>
+
+@@ sDialogEU_01CD @@
+Oh,Maria! Your dad was      wrong.Please,please come    back to me!<END>
+
+@@ sDialogEU_01CE @@
+She is usually a quiet girl but...reason? Ho-ho-ho,     it's her father's<NEXT>
+fault.I'm sorry to trouble  you,but please look for her.<END>
+
+@@ sDialogEU_01CF @@
+It seems Maria and her      father argued over you.<END>
+
+@@ sDialogEU_01D0 @@
+I think Maria went up to themountain.She said she       wanted to go there alone.<END>
+
+@@ sDialogEU_01D1 @@
+Where did Maria go? She wentto...exactly northeast.     You'll see a pond there.<END>
+
+@@ sDialogEU_01D2 @@
+Don't rush.How about        praying for a while?<END>
+
+@@ sDialogEU_01D3 @@
+Hello.A girl? No, I haven't seen any.<END>
+
+@@ sDialogEU_01D4 @@
+Hi.What do you want today?  What? Are you looking for   a girl?<END>
+
+@@ sDialogEU_01D5 @@
+Uumm,n-no,I don't know.     I sure don't know,really.   She's not hiding behind<NEXT>
+the bed.<END>
+
+@@ sDialogEU_01D6 @@
+I'm sorry..I'm...going home.Hey,thank you.<END>
+
+@@ sDialogEU_01D7 @@
+What's going on here,hey,   you?<END>
+
+@@ sDialogEU_01D8 @@
+Ho-ho-ho,Maria is in the    back room. She is my        daughter.<NEXT>
+She does the same thing as  me. She's just a little     sulky.<END>
+
+@@ sDialogEU_01D9 @@
+How rude!<END>
+
+@@ sDialogEU_01DA @@
+I don't like this smell so  much.<END>
+
+@@ sDialogEU_01DB @@
+Hey,have you seen my        weathercock?                The one on the top of<NEXT>
+my roof.                    It was blown away by the    strong wind last night.<NEXT>
+I suppose it came here      but please let me know if   you find it.<END>
+
+@@ sDialogEU_01DC @@
+I made that weathercock for my wife so it's just like a memento for Ann.<NEXT>
+She's usually cheerful but  now she's so depressed.<END>
+
+@@ sDialogEU_01DD @@
+The direction in which the  weathercock went...somewhereyou can keep away from the<NEXT>
+rain...and the key word is  chicken!<END>
+
+@@ sDialogEU_01DE @@
+You can't find it...aha...<END>
+
+@@ sDialogEU_01DF @@
+She came back home in such ahurry,went into her room    right away, and still<NEXT>
+stays there.<END>
+
+@@ sDialogEU_01E0 @@
+That's a tradition in this  area called "Blue feather ofhappiness."<NEXT>
+Use it when you make a      marriage proposal to        someone.<END>
+
+@@ sDialogEU_01E1 @@
+I'm not hanging on to my    memory but it's so precious for me.<NEXT>
+....Thank you!<END>
+
+@@ sDialogEU_01E2 @@
+How nice the young people   are! Yes,I want her to be   cheerful all the time. Sure.<END>
+
+@@ sDialogEU_01E3 @@
+Nina hasn't been back since she went to the mountain to find an herb.<NEXT>
+Please look for her!<END>
+
+@@ sDialogEU_01E4 @@
+Her Dad is out taking care  of her mother.<END>
+
+@@ sDialogEU_01E5 @@
+.....Herb.... A grass with  a tiny little white         flower...<END>
+
+@@ sDialogEU_01E6 @@
+Mmmm,a girl fell down in a  dark, small place. Go get   her right away before<NEXT>
+it's too late.<END>
+
+@@ sDialogEU_01E7 @@
+...Thank you.Good.Mom will  be better with this.<END>
+
+@@ sDialogEU_01E8 @@
+....No,I can't move any     more.<END>
+
+@@ sDialogEU_01E9 @@
+Heh-heh,Nina always wants   to make up to everyone so   it must be hard for you<NEXT>
+to take care of her.<END>
+
+@@ sDialogEU_01EA @@
+What have you done this     time? They all are pretty   angry.<END>
+
+@@ sDialogEU_01EB @@
+My P-chan is gone. If you   see her, please let me know.Promise me.<END>
+
+@@ sDialogEU_01EC @@
+Recently a cute customer    came here.<END>
+
+@@ sDialogEU_01ED @@
+Ellen's bird flew away so   she is pretty depressed.<END>
+
+@@ sDialogEU_01EE @@
+Aha...<END>
+
+@@ sDialogEU_01EF @@
+Which direction did the bluebird go? Well,I think I     saw it flying up towards<NEXT>
+the mountain.<END>
+
+@@ sDialogEU_01F0 @@
+Ellen depends on you,       doesn't she?                Look after her.<END>
+
+@@ sDialogEU_01F1 @@
+I'm sorry...I'm OK now.     I was ....always...cheered  up and never thought<NEXT>
+of P-chan.                  She's free now...good bye,  P-chan...take care...thank<NEXT>
+you for everything you've   done for me.<END>
+
+@@ sDialogEU_01F2 @@
+Thank you for looking for mybird.<END>
+
+@@ sDialogEU_01F3 @@
+...You recently....no,      nothing...<END>
+
+@@ sDialogEU_01F4 @@
+...What? I'm very busy!<END>
+
+@@ sDialogEU_01F5 @@
+Good God! The old hunter is locked in the cave!<END>
+
+@@ sDialogEU_01F6 @@
+Please,help my grandpa!<END>
+
+@@ sDialogEU_01F7 @@
+We've got to save him as    soon as possible.<END>
+
+@@ sDialogEU_01F8 @@
+We can't go forward because the inside of the cave has  collapsed.<END>
+
+@@ sDialogEU_01F9 @@
+So glad you made it! He's a promising young man.<END>
+
+@@ sDialogEU_01FA @@
+Have you got a hammer?      Hammer!?<END>
+
+@@ sDialogEU_01FB @@
+Who? Eve? They say her      grandfather was in trouble  in the mountain so<NEXT>
+they are still over there.<END>
+
+@@ sDialogEU_01FC @@
+Groan...ouch... It's you... Phew,I'm too old now...     If something happens to me,<NEXT>
+look after Eve.<END>
+
+@@ sDialogEU_01FD @@
+Grandpa! ...I am so glad to see that you are alright.<END>
+
+@@ sDialogEU_01FE @@
+I could have gotten out of  there by myself.<END>
+
+@@ sDialogEU_01FF @@
+Grandpa...you scared me to  death.....Please don't be   unreasonable any more.<NEXT>
+....Come down to the town.<END>
+
+@@ sDialogEU_0200 @@
+Thank you.<END>
+
+@@ sDialogEU_0201 @@
+Well,the Flower Festival is tomorrow.The whole town is  covered with the good<NEXT>
+smell of flowers. Everybody,let's get together at the   public square at 3 o'clock.<END>
+
+@@ sDialogEU_0202 @@
+The Flower Festival is...   once upon a time...         The Goddess of Land was<NEXT>
+trying to cheer up a girl   who had lost her boyfriend. She made the flowers<NEXT>
+bloom for the first time.   Before that,there were no   flowers at all.<END>
+
+@@ sDialogEU_0203 @@
+We'll be selling wonderful  things at the festival      tomorrow so look forward<NEXT>
+to it.<END>
+
+@@ sDialogEU_0204 @@
+I'm really giving her a     present this year.<END>
+
+@@ sDialogEU_0205 @@
+God has taught us that the  heart is for appreciating   flowers and to being<NEXT>
+open and relaxed.<END>
+
+@@ sDialogEU_0206 @@
+It's the Flower Festival    tomorrow. It also celebratesthe spring to come.<END>
+
+@@ sDialogEU_0207 @@
+It's the Flower Festival    tomorrow.It's good to relax once in a while.<END>
+
+@@ sDialogEU_0208 @@
+It's the Flower Festival    tomorrow.I love it the best of all the festivals.<END>
+
+@@ sDialogEU_0209 @@
+Don't buy all that unusual  stuff at the festival.<END>
+
+@@ sDialogEU_020A @@
+Heh,I love festivals.I am   looking forward to it.<END>
+
+@@ sDialogEU_020B @@
+No one has to go to the     festival but please join us tomorrow.<END>
+
+@@ sDialogEU_020C @@
+We are selling bottles of   some wonderful perfume      today.<NEXT>
+Please pick up what you     like.<END>
+
+@@ sDialogEU_020D @@
+That's made of "Rose"       flowers.Smells sweet and    romantic,doesn't it?<NEXT>
+It costs 1000G. Do you want it?<NEXT>
+ Yes                         No                           Money <NUM 7 15>0G<OPT 2>
+
+@@ sDialogEU_020E @@
+It's made of "Lilac"        flowers. Its fragrance is   mild and elegant, isn't it?<NEXT>
+It costs 1000G. Do you want to buy it?<NEXT>
+ Yes                         No                           Money <NUM 7 16>0G<OPT 2>
+
+@@ sDialogEU_020F @@
+It's made of "Violet"       flowers.Its fragrance makes you feel refreshed.<NEXT>
+It's 1000G. Do you want to  buy it?<NEXT>
+ Yes                         No                           Money <NUM 7 17>0G<OPT 2>
+
+@@ sDialogEU_0210 @@
+Thank you very much.        Please be careful not to    drop and break it.<END>
+
+@@ sDialogEU_0211 @@
+I see.I'm a little          disappointed.<END>
+
+@@ sDialogEU_0212 @@
+Wow,thanks a lot. Mmmm,it   smells so good.<END>
+
+@@ sDialogEU_0213 @@
+Oh no,Mister,you don't      have enough money.<END>
+
+@@ sDialogEU_0214 @@
+I have a very rare product  this time. It's said to be  truly the only<NEXT>
+one of its kind in the      world...It's called "seed ofsnow flower."<NEXT>
+It costs 2000G.             Do you want to buy it?<NEXT>
+ Buy it                      Not this time                Money <NUM 7 18>0G<OPT 2>
+
+@@ sDialogEU_0215 @@
+Well,I'll deliver it to     your shed.Use it in winter  at the mountaintop.<END>
+
+@@ sDialogEU_0216 @@
+I'm a bit disappointed.     I can't guarantee I'll have it next time though.<END>
+
+@@ sDialogEU_0217 @@
+Fragrance makes people feel calm and relaxed.<END>
+
+@@ sDialogEU_0218 @@
+When it comes down to it,   I can't buy it.<END>
+
+@@ sDialogEU_0219 @@
+I feel calm when I see      flowers. I mean it.<END>
+
+@@ sDialogEU_021A @@
+I want to buy a bottle of   perfume for my sister.<END>
+
+@@ sDialogEU_021B @@
+The fragrance of soap is    the best for girls.<END>
+
+@@ sDialogEU_021C @@
+They say it's the statue of the Goddess of Land.<END>
+
+@@ sDialogEU_021D @@
+Goddess of Land lives in themountain and she is very    friendly.<NEXT>
+Grandma told me so..... but I wonder if it's true.<END>
+
+@@ sDialogEU_021E @@
+They say that the Goddess ofLand lives in a small       spring.<END>
+
+@@ sDialogEU_021F @@
+Think carefully about the   girls' tastes and choose a  present.<END>
+
+@@ sDialogEU_0220 @@
+My heart warms up with the  joys of spring  when it's   filled with the smell<NEXT>
+of flowers.<END>
+
+@@ sDialogEU_0221 @@
+Flowers soften people's     minds.May everybody have a  gentle mind.<END>
+
+@@ sDialogEU_0222 @@
+Flowers are one of the most wonderful gifts from God.<END>
+
+@@ sDialogEU_0223 @@
+Let's dance later, darling.<END>
+
+@@ sDialogEU_0224 @@
+Dad wanders like that every year.<END>
+
+@@ sDialogEU_0225 @@
+Let see...I don't have a    character to fit the        flowers.<END>
+
+@@ sDialogEU_0226 @@
+He probably likes the type  of girl who is fond of      flowers.<END>
+
+@@ sDialogEU_0227 @@
+I'm not sure but it might beneat to work on a machine tomake perfume.<END>
+
+@@ sDialogEU_0228 @@
+Flowers cover the whole     town.I am so happy! Hey,are you happy?<END>
+
+@@ sDialogEU_0229 @@
+Say,happy?                  Come on! You've got to be  cheerier!<END>
+
+@@ sDialogEU_022A @@
+In Heaven,I suppose there   are blooming flowers        everywhere such as on the<NEXT>
+water,and in the wind.<END>
+
+@@ sDialogEU_022B @@
+Hey,I can dance much better now.<END>
+
+@@ sDialogEU_022C @@
+Too much perfume.It makes   me dizzy.<END>
+
+@@ sDialogEU_022D @@
+Do you believe the story of the Goddess that made       flowers bloom?<NEXT>
+Isn't it romantic?<END>
+
+@@ sDialogEU_022E @@
+I wonder if men are not veryinterested in this kind of  festival?<END>
+
+@@ sDialogEU_022F @@
+It's good to be merry at a  festival sometimes.<END>
+
+@@ sDialogEU_0230 @@
+Heh-heh,I could get relaxed with the smell of flowers.<END>
+
+@@ sDialogEU_0231 @@
+God's got a little sense of humor.If it's supposed to   cheer people up,<NEXT>
+wine would be much better.  Don't you think?<END>
+
+@@ sDialogEU_0232 @@
+What? You say I'm much      prettier than flowers?      You didn't say so? ...What?<END>
+
+@@ sDialogEU_0233 @@
+You,I won't forgive you if  you pick up another girl.<END>
+
+@@ sDialogEU_0234 @@
+Can we start dancing now?   If you haven't done all the things you want to do,<NEXT>
+hurry up and do them right  now.<NEXT>
+ Let's dance                 Hold on<OPT 2>
+
+@@ sDialogEU_0235 @@
+Now pick up your partner.<END>
+
+@@ sDialogEU_0236 @@
+If you have some more to do,hurry up.<END>
+
+@@ sDialogEU_0237 @@
+Now here comes this year's  Harvest Festival. Ladies andgentlemen,have you decided<NEXT>
+what to take to the         festival? The festival is   held at the public<NEXT>
+square tomorrow. It ends at 3:00pm so don't be late.<END>
+
+@@ sDialogEU_0238 @@
+It's the Harvest Festival   tomorrow.<END>
+
+@@ sDialogEU_0239 @@
+Have you decided what to    take to the festival? I wantto complete my machine<NEXT>
+and present it in public.<END>
+
+@@ sDialogEU_023A @@
+Well,what's good?I wonder ifherbs or spices will be  OK.<END>
+
+@@ sDialogEU_023B @@
+I will take something very  delicious tomorrow so pleaselook forward to it.<END>
+
+@@ sDialogEU_023C @@
+It's Harvest Festival       tomorrow. I love singing anddancing.It's exciting.<END>
+
+@@ sDialogEU_023D @@
+We'll have the Harvest      Festival tomorrow, right?   Autumn has already been<NEXT>
+here.<END>
+
+@@ sDialogEU_023E @@
+The Harvest Festival is for celebrating the year's      harvest.<END>
+
+@@ sDialogEU_023F @@
+Please bring foods to eat   for the great harvest stew.<END>
+
+@@ sDialogEU_0240 @@
+The Harvest Festival is     tomorrow. Stop work early   and come to the<NEXT>
+public square at 3:00pm.    If you have livestock,      you should feed them<NEXT>
+beforehand...and bring      something to put in the     stew. Good-bye.<END>
+
+@@ sDialogEU_0241 @@
+Welcome.Put what you        brought in the stew now.<END>
+
+@@ sDialogEU_0242 @@
+Oh no,you didn't bring      anything.  Alright.<END>
+
+@@ sDialogEU_0243 @@
+Now,wait until it's done.<END>
+
+@@ sDialogEU_0244 @@
+It's your stew.             Eat it with gratitude.<END>
+
+@@ sDialogEU_0245 @@
+Mine was flowers.It was     fairly good.<END>
+
+@@ sDialogEU_0246 @@
+It was delicious.You know,  I don't have a wife.        No, I'm not saying Ann's<NEXT>
+dishes are bad. In fact,    they taste pretty good      once you get used to them.<END>
+
+@@ sDialogEU_0247 @@
+Are you cutting grass? You  can cut it by autumn so try to cut as much as you can.<NEXT>
+Otherwise,you will panic if you don't have feed to give to the cows and chickens.<END>
+
+@@ sDialogEU_0248 @@
+I'm 100% happy only if I    could taste when I eat good stuff.<END>
+
+@@ sDialogEU_0249 @@
+I'm stuffed!<END>
+
+@@ sDialogEU_024A @@
+Good-day,today! Here are    some famous dumplings from  the North!<NEXT>
+Do you want some?           It's 300G.<NEXT>
+ Buy                         Don't Buy                    Money <NUM 7 19>0G<OPT 2>
+
+@@ sDialogEU_024B @@
+Good-day,today!             Here are some rice balls    made from 100% Starshine<NEXT>
+rice. They are fresh and    warm. Do you want some?     It's 200G.<NEXT>
+ Buy                         Don't buy                    Money <NUM 7 20>0G<OPT 2>
+
+@@ sDialogEU_024C @@
+Thank you. Be careful not toget addicted.<END>
+
+@@ sDialogEU_024D @@
+Don't say no. Just one bite,it makes you 100% happy.<END>
+
+@@ sDialogEU_024E @@
+I can't bring anything      this year. It's such hard   work to find rare seeds.<END>
+
+@@ sDialogEU_024F @@
+The fruits of the Southern  Country taste good,but they smell strong and I don't<NEXT>
+like that.<END>
+
+@@ sDialogEU_0250 @@
+I can't dance very well yet.<END>
+
+@@ sDialogEU_0251 @@
+Dancing will start pretty   soon.<END>
+
+@@ sDialogEU_0252 @@
+Even if you don't believe inGod, it's good to keep      gratitude in your mind.<NEXT>
+ Yes                         No<OPT 2>
+
+@@ sDialogEU_0253 @@
+Even if you don't believe inGod,it's good to be         grateful.<END>
+
+@@ sDialogEU_0254 @@
+Yes,the Goddess of Land     exists for sure.<END>
+
+@@ sDialogEU_0255 @@
+I thought it would be OK    this time...<END>
+
+@@ sDialogEU_0256 @@
+Hey, please! Eat this!<NEXT>
+ OK                          I don't want it<OPT 2>
+
+@@ sDialogEU_0257 @@
+Thank you. You are so nice.<END>
+
+@@ sDialogEU_0258 @@
+Waaa!<END>
+
+@@ sDialogEU_0259 @@
+I made this pumpkin pie.    Do you want to try some?<NEXT>
+ Yes                         No<OPT 2>
+
+@@ sDialogEU_025A @@
+This year's pumpkins are    sweet,aren't they?<END>
+
+@@ sDialogEU_025B @@
+Oh yeah? This pumpkin pie   has received  praise though.<END>
+
+@@ sDialogEU_025C @@
+I give you a special        souvenir "Clock" for free.  You can find the time with<NEXT>
+the Select Button.<END>
+
+@@ sDialogEU_025D @@
+I think it's important to   thank the land and the sun  as well as celebrate<NEXT>
+the harvest.<END>
+
+@@ sDialogEU_025E @@
+Taraah, it's an Auto        Harvesting Machine! Switch  it on.<NEXT>
+ Push                        No<OPT 2>
+
+@@ sDialogEU_025F @@
+Sorry,failed.<END>
+
+@@ sDialogEU_0260 @@
+What are you afraid of?<END>
+
+@@ sDialogEU_0261 @@
+...No,this isn't right.<END>
+
+@@ sDialogEU_0262 @@
+Tastes good,huh? It's calledthe fruit of the full-moon  plant.<NEXT>
+It's moistured,soft,and     melts in the mouth like ice cream.It's my favorite.<END>
+
+@@ sDialogEU_0263 @@
+I'll pick it up the first   thing in the morning for    you....<END>
+
+@@ sDialogEU_0264 @@
+This is a special meat pie Imade.Want a bite?<NEXT>
+ Yes                         No<OPT 2>
+
+@@ sDialogEU_0265 @@
+You make everything you eat seem delicious so it's worthcooking for you.<END>
+
+@@ sDialogEU_0266 @@
+Allright. It's pretty good  though..<END>
+
+@@ sDialogEU_0267 @@
+It's the berry juice I made last year. It's one of the  gifts from the earth.<NEXT>
+Want to try?<NEXT>
+ Yes                         No<OPT 2>
+
+@@ sDialogEU_0268 @@
+If you think you are a man, drink up!<END>
+
+@@ sDialogEU_0269 @@
+It's really good though...<END>
+
+@@ sDialogEU_026A @@
+....oof,sorry.I don't feel  good...no,no,no...          I have to eat it with<NEXT>
+gratitude even if there's   something strange in it.    Right?<END>
+
+@@ sDialogEU_026B @@
+Taraaa!Improved Auto        Harvesting Machine! Turn it on!<NEXT>
+ OK                          No<OPT 2>
+
+@@ sDialogEU_026C @@
+...Weird.<END>
+
+@@ sDialogEU_026D @@
+....Ha-ha-ha-ha-ha!Yes,I hadjuice and now I can see     butterflies flying.<END>
+
+@@ sDialogEU_026E @@
+It's the Star Night Festivaltomorrow. There are a coupleof places for it so you<NEXT>
+should ask the townsfolk to decide where to go.<END>
+
+@@ sDialogEU_026F @@
+It's the wild grape juice.  It's sweet and good. Want totry?<NEXT>
+ Yes                         No<OPT 2>
+
+@@ sDialogEU_0270 @@
+Cheers for gifts from the   earth!<END>
+
+@@ sDialogEU_0271 @@
+You are not very sociable,  are you?<END>
+
+@@ sDialogEU_0272 @@
+It's the Flower Festival    tomorrow. I'll stop work    earlier and come to the<NEXT>
+public square at 3:00.      If you have livestock,you'd better feed them before<NEXT>
+the festival.I'll definitelypick up the shipping goods  in the box<NEXT>
+if you put them in it.      Good-bye.<END>
+
+@@ sDialogEU_0273 @@
+This is information of an   event. We'll have the annualEgg Festival.<NEXT>
+The weather is very good.   Ladies and gentlemen,you arecordially invited<NEXT>
+to take part.<END>
+
+@@ sDialogEU_0274 @@
+The Egg Festival's tomorrow.I'll stop work earlier and  come to the public<NEXT>
+square by 3:00.If you have  livestock,you'd better feed them before the festival.<NEXT>
+I'll definitely pick up the shipping goods in the box ifyou put them in it.<NEXT>
+Good-bye.<END>
+
+@@ sDialogEU_0275 @@
+It's the kidney pie I'm     proud of.  Won't you try    it?<NEXT>
+ Yes                         No<OPT 2>
+
+@@ sDialogEU_0276 @@
+It's very nourishing        though.<END>
+
+@@ sDialogEU_0277 @@
+It's the 3-year-old berry   juice.Smells good,huh?      Do you want it?<NEXT>
+ Yes                         No<OPT 2>
+
+@@ sDialogEU_0278 @@
+It's my grandpa's favorite  juice.<END>
+
+@@ sDialogEU_0279 @@
+What? Can't you drink my    juice!?<END>
+
+@@ sDialogEU_027A @@
+May we be able to have      pleasant moments forever.<END>
+
+@@ sDialogEU_027B @@
+This is it! Ultra Special   Auto Harvesting Machine!!!  .....Hey,you don't seem to<NEXT>
+trust me.Don't say a word,  just turn it on! On!<NEXT>
+ Push                        I'd never push<OPT 2>
+
+@@ sDialogEU_027C @@
+It's not whether you like itor not.<END>
+
+@@ sDialogEU_027D @@
+Fresh ingredients and       affection are necessary to  make dishes delicious!<END>
+
+@@ sDialogEU_027E @@
+Tasty rice balls and        dumplings! Won't you try    some? They are all<NEXT>
+delicious!<END>
+
+@@ sDialogEU_027F @@
+Congratulations!<END>
+
+@@ sDialogEU_0280 @@
+You are going to have a babypretty soon.<END>
+
+@@ sDialogEU_0281 @@
+Ho-ho,look at this baby.    It's a cute baby boy.<END>
+
+@@ sDialogEU_0282 @@
+Oh,I have my partner. You'd better try to find one for  you.<END>
+
+@@ sDialogEU_0283 @@
+I...I want to dance with    someone else.<END>
+
+@@ sDialogEU_0284 @@
+A young man should dance    with a young girl.<END>
+
+@@ sDialogEU_0285 @@
+Bring me more juice!<END>
+
+@@ sDialogEU_0286 @@
+Was it delicious?<END>
+
+@@ sDialogEU_0287 @@
+No,I want to dance with     someone else,not you.<END>
+
+@@ sDialogEU_0288 @@
+Yeah,I want to dance with   Maria!<END>
+
+@@ sDialogEU_0289 @@
+It's the New Year's festivaltomorrow. You should say thelast hello of this year. <END>
+
+@@ sDialogEU_028A @@
+It's just a dance but it    means more because you      choose your partner here.<END>
+
+@@ sDialogEU_028B @@
+Who are you going to ask to dance? You are going to     ....no,forget it.<END>
+
+@@ sDialogEU_028C @@
+You can never cancel it. So choose carefully so you     won't regret.<END>

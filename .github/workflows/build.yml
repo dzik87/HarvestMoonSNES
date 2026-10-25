@@ -50,10 +50,11 @@ jobs:
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Check palette assets
+      - name: Check asset sources
         run: |
           pip install pillow
           python3 tools/gfx/palette.py check
+          python3 tools/dialogs/dialog.py check
 
       - name: Build and verify (US)
         run: |

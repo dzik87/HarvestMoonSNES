@@ -1,0 +1,781 @@
+@@ sDialogDE_0182 @@
+Auch ich werde mein Bestes  geben.<END>
+
+@@ sDialogDE_0183 @@
+Ich werde mich um das Haus  kümmern.<END>
+
+@@ sDialogDE_0184 @@
+Seltsam, der Himmel sieht   aus wie immer. Aber der Windund die Luft scheinen sich<NEXT>
+irgendwie verändert zu      haben.<END>
+
+@@ sDialogDE_0185 @@
+Ich werde alles tun, um Dir helfen zu können.<END>
+
+@@ sDialogDE_0186 @@
+Ich werde mich auch um      dieses Werkzeug kümmern.    Keine Angst, ich mache es<NEXT>
+nicht kaputt.<END>
+
+@@ sDialogDE_0187 @@
+"Automatische Milch-        & Yoghurt-Maschine"         Ich wünschte, bis zum<NEXT>
+Frühling wäre sie fertig...<END>
+
+@@ sDialogDE_0188 @@
+Die Zeit vergeht wie im     Flug. Mir kommt es vor, als hätte ich Dich erst vor ein<NEXT>
+paar Tagen kennengelernt!<END>
+
+@@ sDialogDE_0189 @@
+Das Wetter ist wunderbar.   Laß uns auf der Bergspitze  ein Picknick machen.<END>
+
+@@ sDialogDE_018A @@
+La-la-la-la-la...           Der Himmel ist so herrlich  blau. Ich fühle mich<NEXT>
+sensationell gut!<END>
+
+@@ sDialogDE_018B @@
+Ich träume manchmal davon,  die mysteriöse Blume aus denBergen auf der Farm<NEXT>
+anzupflanzen.<END>
+
+@@ sDialogDE_018C @@
+Guten Morgen, mein Schatz.  Vor unserer Tür hat gerade  ein kleiner Spatz gespielt.<NEXT>
+Das war schön anzusehen!<END>
+
+@@ sDialogDE_018D @@
+Unser Pferd scheint         von einem Vollblüter        abzustammen.<NEXT>
+Meinst Du nicht             auch?<END>
+
+@@ sDialogDE_018E @@
+<VAR 4 14> scheint ein            Vollblutpferd zu sein. Es   hat Temperament, findest<NEXT>
+Du nicht auch?<END>
+
+@@ sDialogDE_018F @@
+Ach, der Frühling ist       einfach wunderbar!<END>
+
+@@ sDialogDE_0190 @@
+Ich fange an, mich an das   Leben hier zu gewöhnen. Mit Dir an meiner Seite bin ich<NEXT>
+auch nicht einsam.<END>
+
+@@ sDialogDE_0191 @@
+In den Bergen gibt es viele Tiere. Macht Dich das nicht glücklich?<END>
+
+@@ sDialogDE_0192 @@
+Was soll ich heute abend    kochen?<END>
+
+@@ sDialogDE_0193 @@
+Schatz, arbeite gut!<END>
+
+@@ sDialogDE_0194 @@
+Auf einer Farm gibt es keineSonntage!<END>
+
+@@ sDialogDE_0195 @@
+Es ist warm. Ein schöner    Sonntag.<END>
+
+@@ sDialogDE_0196 @@
+Arbeitest Du an einem       solchen Tag?<END>
+
+@@ sDialogDE_0197 @@
+Es schüttet wie aus Kübeln. Paß auf, daß Du Dich nicht  erkältest.<END>
+
+@@ sDialogDE_0198 @@
+Schnee, Schnee, Schnee! Ich kann den Frühling kaum      erwarten!<END>
+
+@@ sDialogDE_0199 @@
+Es ist so ruhig. Als ob die Zeit stehenbleiben würde.<END>
+
+@@ sDialogDE_019A @@
+Ich gehe zurück in das Haus meiner Eltern.<END>
+
+@@ sDialogDE_019B @@
+Du kommst, um mich zu holen?...... Sorry.<END>
+
+@@ sDialogDE_019C @@
+Ich bin nicht mehr böse!    Nur noch ein wenig...<END>
+
+@@ sDialogDE_019D @@
+Whaaaa, ich habe Dich       vermißt!<END>
+
+@@ sDialogDE_019E @@
+O.K., ich komme zurück.<END>
+
+@@ sDialogDE_019F @@
+Weißt Du, warum ich böse aufDich war? Weil Du mich immeralleine läßt.<NEXT>
+Du.... Fiesling!<END>
+
+@@ sDialogDE_01A0 @@
+Hey, Schatz! Wollen wir     unser Haus in einer schönen Farbe streichen?<END>
+
+@@ sDialogDE_01A1 @@
+Das ist ein schönes Haus    geworden.<END>
+
+@@ sDialogDE_01A2 @@
+Naja, hmmm... also...       ähmmm... Ich glaube, ich binschwanger!<END>
+
+@@ sDialogDE_01A3 @@
+Es dauert noch, bis es auf  die Welt kommen wird.<END>
+
+@@ sDialogDE_01A4 @@
+Denkst Du Dir einen Namen   für das Baby aus?<END>
+
+@@ sDialogDE_01A5 @@
+Ich merke, wie ich langsam  dicker werde.<END>
+
+@@ sDialogDE_01A6 @@
+Ob es ein Junge oder ein    Mädchen wird?<END>
+
+@@ sDialogDE_01A7 @@
+Ich werde nicht mehr soviel herumlaufen.<END>
+
+@@ sDialogDE_01A8 @@
+Seltsames Gefühl, ein Baby  zu bekommen und Mutter zu   werden.<END>
+
+@@ sDialogDE_01A9 @@
+Geh mir aus dem Weg,        verschwinde!<END>
+
+@@ sDialogDE_01AA @@
+Alles in Ordnung! Keine     Sorge! Gehe bitte arbeiten.<NEXT>
+ Wirklich?                   Nein!<OPT 2>
+
+@@ sDialogDE_01AB @@
+Ich komme schon zurecht!<END>
+
+@@ sDialogDE_01AC @@
+Bleibst Du bei mir? Danke!<END>
+
+@@ sDialogDE_01AD @@
+uugh..uugh...<END>
+
+@@ sDialogDE_01AE @@
+Oh mein Gott, das Baby, es  kommt!<END>
+
+@@ sDialogDE_01AF @@
+Erstaunlich!<END>
+
+@@ sDialogDE_01B0 @@
+Bleib ruhig!<END>
+
+@@ sDialogDE_01B1 @@
+Entspann Dich ein wenig!<END>
+
+@@ sDialogDE_01B2 @@
+Wenn ich alt sein werde,    kann ich die Kindheit meinerEnkel noch miterleben.<END>
+
+@@ sDialogDE_01B3 @@
+Whaa... whaa...<END>
+
+@@ sDialogDE_01B4 @@
+Ho-ho-ho... Das scheint ein gesundes Kind zu sein.<END>
+
+@@ sDialogDE_01B5 @@
+Großartig!!!<END>
+
+@@ sDialogDE_01B6 @@
+Puh... so nervös war ich    noch nie.<END>
+
+@@ sDialogDE_01B7 @@
+Es erinnert mich etwas an   Nina. Zumindest hat er die  gleiche Augenfarbe.<END>
+
+@@ sDialogDE_01B8 @@
+Das erinnert mich an Ninas  Geburt.<END>
+
+@@ sDialogDE_01B9 @@
+Das erinnert mich Eves      Geburt!<END>
+
+@@ sDialogDE_01BA @@
+Schatz, bitte gib dem       Kind einen Namen.<END>
+
+@@ sDialogDE_01BB @@
+Danke, ich bin ja so        glücklich.<END>
+
+@@ sDialogDE_01BC @@
+<VAR 10 15> <NUM 2 12>/<VAR 8 16>      Unser Kind wurde geboren.<END>
+
+@@ sDialogDE_01BD @@
+Was? Ein Geschenk? Schön,   daß Du an den Geburtstag    denkst.<END>
+
+@@ sDialogDE_01BE @@
+La-la-la...<END>
+
+@@ sDialogDE_01BF @@
+<VAR 10 17> <NUM 2 13>/<VAR 8 18>      Heute haben wir geheiratet.<END>
+
+@@ sDialogDE_01C0 @@
+Da...<END>
+
+@@ sDialogDE_01C1 @@
+Dada...<END>
+
+@@ sDialogDE_01C2 @@
+Bu-bu...<END>
+
+@@ sDialogDE_01C3 @@
+Das ist die "Blaue Feder desGlücks". Glück bedeutet für jeden etwas anderes. Sie<NEXT>
+kostet nur 1000G!<NEXT>
+ Kaufen!                     Nicht kaufen!                            Geld <NUM 7 14>0G<OPT 2>
+
+@@ sDialogDE_01C4 @@
+Gott segne Dich!<END>
+
+@@ sDialogDE_01C5 @@
+Überlege es Dir gut, es ist eine wichtige Entscheidung.<END>
+
+@@ sDialogDE_01C6 @@
+Rede nicht so ein Zeug, ich bin verheiratet.<END>
+
+@@ sDialogDE_01C7 @@
+Wem willst Du einen Scherz  spielen, junger Mann?<END>
+
+@@ sDialogDE_01C8 @@
+Das ist es! Auf geht's!<END>
+
+@@ sDialogDE_01C9 @@
+Hey, Du gibst sie der       falschen Person.<END>
+
+@@ sDialogDE_01CA @@
+Du mußt sie dem Mädchen     geben, das Du liebst, O.K.? Dem Mädchen, das Du<NEXT>
+heiraten möchtest!<END>
+
+@@ sDialogDE_01CB @@
+Wow, die blaue Feder! Zeig  sie mir!<END>
+
+@@ sDialogDE_01CC @@
+Guten Morgen! Tut mir leid, so früh stören zu müssen.   Hast Du vielleicht Maria<NEXT>
+gesehen? Als ich aufwachte, war sie fort. Wo um         Himmelswillen kann sie<NEXT>
+nur stecken? Ich mache mir  Sorgen! Kannst Du mit mir   nach ihr suchen? Bitte!!!<END>
+
+@@ sDialogDE_01CD @@
+Oh, Maria! Dein Vater hatte Unrecht! Bitte komm zu mir  zurück!<END>
+
+@@ sDialogDE_01CE @@
+Sie ist normalerweise so einruhiges Mädchen. Es tut mir leid, Dich damit belästigen<NEXT>
+zu müssen, aber gib bitte   gut auf sie acht.<END>
+
+@@ sDialogDE_01CF @@
+Maria und ihr Vater scheinensich deinetwegen gestritten zu haben.<END>
+
+@@ sDialogDE_01D0 @@
+Ich denke, Maria ist in den Bergen. Sie wollte ein wenigalleine sein.<END>
+
+@@ sDialogDE_01D1 @@
+Wo Maria hin ist? Sie ist innordöstliche Richtung       gelaufen. Dort gibt es<NEXT>
+einen kleinen Teich.<END>
+
+@@ sDialogDE_01D2 @@
+Nicht so hurtig! Wie wäre esmit einem Gebet?<END>
+
+@@ sDialogDE_01D3 @@
+Hallo! Ein Mädchen? Nein,   ich habe niemanden gesehen.<END>
+
+@@ sDialogDE_01D4 @@
+Holerö! Was ist Dein Begehr?Du suchst nach einem        Mädchen?<END>
+
+@@ sDialogDE_01D5 @@
+N-nein, ich weiß von nichts!Ich weiß echt nichts! Sie   hat sich nicht hinter dem<NEXT>
+Bett versteckt!<END>
+
+@@ sDialogDE_01D6 @@
+Es tut mir leid, ... ich    gehe nach Hause. Hey, danke!<END>
+
+@@ sDialogDE_01D7 @@
+Was ist denn hier los?<END>
+
+@@ sDialogDE_01D8 @@
+Hohoho, Maria ist im        Hinterzimmer. Sie ist meine Tochter. Sie macht genau<NEXT>
+das gleiche wie ich. Sie istein wenig eingeschnappt.<END>
+
+@@ sDialogDE_01D9 @@
+Wie unverschämt!<END>
+
+@@ sDialogDE_01DA @@
+Ich mag diesen Geruch nicht!<END>
+
+@@ sDialogDE_01DB @@
+Hey, kennst Du meinen       Wetterhahn? Er war auf      meinem Dach befestigt.<NEXT>
+Letzte Nacht wurde er von   dem Sturm weggeweht. Sag es mir, wenn Du ihn finden<NEXT>
+solltest.<END>
+
+@@ sDialogDE_01DC @@
+Ich habe diesen Wetterhahn  für meine Frau angefertigt. Es ist ein<NEXT>
+Erinnerungsstück. Meine Frauist sehr, sehr traurig.<END>
+
+@@ sDialogDE_01DD @@
+Wo sich der Wetterhahn      befindet? Dort, wo Du Schutzvor dem Regen findest. Das<NEXT>
+Schlüsselwort lautet "Huhn".<END>
+
+@@ sDialogDE_01DE @@
+Du kannst ihn nicht finden  ... aha...<END>
+
+@@ sDialogDE_01DF @@
+Sie kam in großer Hast      zurück, rannte in ihr Zimmerund ist seitdem nicht mehr<NEXT>
+herausgekommen.<END>
+
+@@ sDialogDE_01E0 @@
+Die "Blaue Feder des Glücks"ist in dieser Gegend ein    traditioneller Gegenstand.<NEXT>
+Setze die Feder ein, wenn Dueinem Mädchen einen         Heiratsantrag machen<NEXT>
+möchtest.<END>
+
+@@ sDialogDE_01E1 @@
+Das ist für mich ein sehr   wertvoller Gegenstand!      ... Vielen Dank!<END>
+
+@@ sDialogDE_01E2 @@
+Ich wünsche ihr ein         glückliches Leben. Das      wünsche ich ihr von ganzem<NEXT>
+Herzen!<END>
+
+@@ sDialogDE_01E3 @@
+Nina ist nicht              zurückgekommen. Sie wollte  in den Bergen nach einem<NEXT>
+Kraut suchen. Bitte sieh    nach ihr!<END>
+
+@@ sDialogDE_01E4 @@
+Ihr Vater kümmert sich um   die besorgte Mutter.<END>
+
+@@ sDialogDE_01E5 @@
+... Kraut... Eine Pflanze,  mit einer kleinen weißen    Blüte...<END>
+
+@@ sDialogDE_01E6 @@
+Hmmm, ein Mädchen ist in    eine dunkle Grube gefallen. Schau nach ihr, bevor es zu<NEXT>
+spät ist.<END>
+
+@@ sDialogDE_01E7 @@
+Danke, das wird Mutter      wieder auf die Beine        bringen.<END>
+
+@@ sDialogDE_01E8 @@
+Nein, ich kann keinen       Schritt weiter.<END>
+
+@@ sDialogDE_01E9 @@
+Hey, Nina ist kein einfachesMädchen. Es ist nicht       leicht, sie im Auge zu<NEXT>
+behalten.<END>
+
+@@ sDialogDE_01EA @@
+Was hast Du dieses Mal      angestellt? Alle sind       mächtig böse.<END>
+
+@@ sDialogDE_01EB @@
+Laila, mein kleines         Vögelchen, ist verschwunden.Wenn Du sie findest, dann<NEXT>
+sage mir gleich Bescheid!<END>
+
+@@ sDialogDE_01EC @@
+Vor kurzem war hier ein sehrschlauer Kunde.<END>
+
+@@ sDialogDE_01ED @@
+Ellens Vogel ist            verschwunden und nun ist sieschrecklich traurig.<END>
+
+@@ sDialogDE_01EE @@
+Aha...<END>
+
+@@ sDialogDE_01EF @@
+Wohin der blaue Vogel       geflogen ist? Ich glaube, erist auf den Berg geflattert.<END>
+
+@@ sDialogDE_01F0 @@
+Ellen verläßt sich auf Dich,nicht wahr? Schau mal nach  ihr!<END>
+
+@@ sDialogDE_01F1 @@
+Mir geht es jetzt wieder    gut. Ich habe zu selten     an... Laila gedacht.<NEXT>
+Sie ist jetzt frei, meine   gute Laila. Ich danke Dir,  für alles, was Du für mich<NEXT>
+getan hast.<END>
+
+@@ sDialogDE_01F2 @@
+Danke, daß Du nach meinem   Vogel gesucht hast.<END>
+
+@@ sDialogDE_01F3 @@
+Du ähmmm, ... also, ... ach,nichts...<END>
+
+@@ sDialogDE_01F4 @@
+Was denn? Ich bin sehr      beschäftigt.<END>
+
+@@ sDialogDE_01F5 @@
+Gute Güte! Der alte Jäger   ist in der Höhle            eingeschlossen.<END>
+
+@@ sDialogDE_01F6 @@
+Bitte hilf meinem Großvater!<END>
+
+@@ sDialogDE_01F7 @@
+Wir müssen ihn so bald wie  möglich herausholen.<END>
+
+@@ sDialogDE_01F8 @@
+Wir kommen nicht voran, die Höhle ist eingestürzt.<END>
+
+@@ sDialogDE_01F9 @@
+Du hast es geschafft, Du    Teufelskerl!<END>
+
+@@ sDialogDE_01FA @@
+Hast Du einen Hammer?<END>
+
+@@ sDialogDE_01FB @@
+Eva, sie sagen, daß Dein    Großvater in den Bergen in  Schwierigkeiten ist. Sie<NEXT>
+sind noch dort.<END>
+
+@@ sDialogDE_01FC @@
+Grummel, grummel...         Ach, Du bist es. Ich werde  langsam wirklich alt. Wenn<NEXT>
+mir etwas geschieht, mußt   Du Dich um meine kleine Eva kümmern.<END>
+
+@@ sDialogDE_01FD @@
+Großvater! Ich bin so       glücklich, daß Dir nichts   geschehen ist.<END>
+
+@@ sDialogDE_01FE @@
+Ich hätte das auch alleine  geschafft.<END>
+
+@@ sDialogDE_01FF @@
+Großvater, Du hast mich fastzu Tode erschreckt. Paß in  Zukunft besser auf Dich<NEXT>
+auf!!!<END>
+
+@@ sDialogDE_0200 @@
+Vielen Dank!<END>
+
+@@ sDialogDE_0201 @@
+Morgen ist das Blumenfest.  Die ganze Stadt wird nach   Blumen duften. Wir treffen<NEXT>
+uns alle auf dem Marktplatz.Um drei Uhr!<END>
+
+@@ sDialogDE_0202 @@
+Das Blumenfest wird zu Ehrender Blumengöttin gefeiert.  Sie wollte vor langer Zeit<NEXT>
+ein Mädchen aufheitern, das auf tragische Weise ihren   Verlobten verlor.<NEXT>
+Die Göttin erschuf die      Blumen, um das Herz des     Mädchens mit Hoffnung und<NEXT>
+Glück zu füllen.<END>
+
+@@ sDialogDE_0203 @@
+Wir verkaufen während des   Festes tolle Sachen. Freu   Dich auf morgen!<END>
+
+@@ sDialogDE_0204 @@
+Dieses Jahr bekommt sie     wirklich ein Geschenk von   mir!<END>
+
+@@ sDialogDE_0205 @@
+Das Herz eines Menschen ist fähig, die Schönheit der    Blumen zu sehen und das<NEXT>
+beflügelt seine Seele!<END>
+
+@@ sDialogDE_0206 @@
+Morgen ist das Blumenfest.  Es ist auch ein Fest, um denFrühling zu begrüßen.<END>
+
+@@ sDialogDE_0207 @@
+Morgen ist das Blumenfest.  Es kann Dir etwas           Abwechslung vom Alltag<NEXT>
+bringen.<END>
+
+@@ sDialogDE_0208 @@
+Morgen ist das Blumenfest.  Ich finde, es ist das       schönste Fest überhaupt.<END>
+
+@@ sDialogDE_0209 @@
+Kauf nicht jeden Ramsch auf dem Fest!<END>
+
+@@ sDialogDE_020A @@
+Hey, ich liebe Feste. Ich   freue mich schon so darauf.<END>
+
+@@ sDialogDE_020B @@
+Keiner wird gezwungen. Aber es wäre schön, wenn Du      morgen das Fest besuchst.<END>
+
+@@ sDialogDE_020C @@
+Wir verkaufen heute         wunderbar duftende Parfums. Nimm, was Du gerne hast.<END>
+
+@@ sDialogDE_020D @@
+Das hier ist ein            Rosenextrakt. Es riecht     süßlich und romantisch,<NEXT>
+nicht wahr? Es kostet 1000G.Möchtest Du es kaufen?<NEXT>
+ Ja, gerne!                  Nein, danke!                             Geld <NUM 7 15>0G<OPT 2>
+
+@@ sDialogDE_020E @@
+Das hier ist ein            Lilienextrakt. Ein milder   und sehr eleganter Duft.<NEXT>
+Es kostet nur 1000G.        Möchtest Du es kaufen?<NEXT>
+ Jawoll!                     Nö!                                      Geld <NUM 7 16>0G<OPT 2>
+
+@@ sDialogDE_020F @@
+Dieser Duft ist ein         Veilchenextrakt. Der Duft   ist sehr erfrischend,<NEXT>
+findest Du nicht? Es kostet nur 1000G. Möchtest Du es   kaufen?<NEXT>
+ Ich nehme es!               Nein, lieber nicht!                      Geld <NUM 7 17>0G<OPT 2>
+
+@@ sDialogDE_0210 @@
+Vielen Dank. Laß es nicht   fallen.<END>
+
+@@ sDialogDE_0211 @@
+Ich verstehe!<END>
+
+@@ sDialogDE_0212 @@
+Wow, vielen Dank. Mmmm, das riecht aber gut!!!<END>
+
+@@ sDialogDE_0213 @@
+Tut mir leid, Du hast nicht genug Geld.<END>
+
+@@ sDialogDE_0214 @@
+Ich habe hier eine seltene  Kostbarkeit. Das einzige    Exemplar auf der ganzen<NEXT>
+weiten Welt. Man nennt es   "Samen der Schneeblume". Es kostet lediglich 2000G.<NEXT>
+Möchtest Du es kaufen?<NEXT>
+ Ja, gerne!                  Nicht heute!                             Geld <NUM 7 18>0G<OPT 2>
+
+@@ sDialogDE_0215 @@
+Ich liefere es in Deine     Scheune. Pflanze es im      Winter auf der Bergspitze.<END>
+
+@@ sDialogDE_0216 @@
+Das ist aber schade! Ich    kann Dir nicht versprechen, daß ich die Samen nächstes<NEXT>
+Mal noch auf Lager habe.<END>
+
+@@ sDialogDE_0217 @@
+Der Duft beruhigt und       entspannt die Leute.<END>
+
+@@ sDialogDE_0218 @@
+Ich bin Pleite!             Jetzt kann ich kein         Parfüm kaufen.<END>
+
+@@ sDialogDE_0219 @@
+Ich fühle mich viel         entspannter, wenn ich den   Duft der Blumen rieche.<END>
+
+@@ sDialogDE_021A @@
+Ich möchte ein Parfum für   meine Schwester kaufen.<END>
+
+@@ sDialogDE_021B @@
+Mädchen stehen auf den      Geruch der Seife.<END>
+
+@@ sDialogDE_021C @@
+Man sagt, dies sei die      Statue der Göttin der Erde.<END>
+
+@@ sDialogDE_021D @@
+Die Göttin der Erde lebt in den Bergen und ist sehr     freundlich. Das sagt<NEXT>
+zumindest meine Großmutter.<END>
+
+@@ sDialogDE_021E @@
+Die Göttin der Erde lebt in einem kleinen See.<END>
+
+@@ sDialogDE_021F @@
+Überlege gut und wähle dann ein Geschenk.<END>
+
+@@ sDialogDE_0220 @@
+Im Frühling geht es mir     immer gut. Besonders dann,  wenn die Luft mit dem Duft<NEXT>
+blühender Blumen            geschwängert ist.<END>
+
+@@ sDialogDE_0221 @@
+Ich habe mal ein Buch über  Blumen gelesen. Dort steht, daß der Duft der Blumen<NEXT>
+besondere Wirkung auf den   Menschen hat.<END>
+
+@@ sDialogDE_0222 @@
+Blumen sind ein Geschenk derGötter an die Menschen.<END>
+
+@@ sDialogDE_0223 @@
+Laß uns später tanzen,      Süßer!<END>
+
+@@ sDialogDE_0224 @@
+Vater wandert jedes Jahr.<END>
+
+@@ sDialogDE_0225 @@
+Ich bin nicht begabt genug, um die Blumen richtig zu    pflegen.<END>
+
+@@ sDialogDE_0226 @@
+Er mag bestimmt Mädchen, diemit Pflanzen umgehen können.<END>
+
+@@ sDialogDE_0227 @@
+Vielleicht sollte man an    einer Maschine arbeiten, dieParfums herstellen kann?<END>
+
+@@ sDialogDE_0228 @@
+Die Blumen sind in der      ganzen Stadt zu sehen. Ich  bin ja so glücklich, Du<NEXT>
+auch?<END>
+
+@@ sDialogDE_0229 @@
+Bist Du auch so froh?<END>
+
+@@ sDialogDE_022A @@
+Im Himmel gibt es sicher    überall Blumen. So weit das Auge reicht.<END>
+
+@@ sDialogDE_022B @@
+Hey, ich kann schon viel    besser tanzen.<END>
+
+@@ sDialogDE_022C @@
+Zuviel Parfum! Das macht    mich verrückt!<END>
+
+@@ sDialogDE_022D @@
+Glaubst Du die Geschichte   von der Blumengöttin? Ist   doch romantisch, oder?<END>
+
+@@ sDialogDE_022E @@
+Ob Männer dieses Fest nicht so sehr mögen wie wir       Frauen?<END>
+
+@@ sDialogDE_022F @@
+An einem solchen Fest sollteman ausgelassen sein.<END>
+
+@@ sDialogDE_0230 @@
+Der Duft der Blumen macht   mich fast betrunken.<END>
+
+@@ sDialogDE_0231 @@
+Ein wundervoller Tag für eingrandioses Fest. Ich bin    begeistert. Alle Menschen<NEXT>
+sind gut gelaunt und lachen.<END>
+
+@@ sDialogDE_0232 @@
+Wie? Ich soll hübscher als  die schönste Blume sein?    Meinst Du das im Ernst?<END>
+
+@@ sDialogDE_0233 @@
+Ich werde Dir nicht         verzeihen, wenn Du ein      anderes Mädchen zum Tanz<NEXT>
+aufforderst.<END>
+
+@@ sDialogDE_0234 @@
+Wollen wir nun endlich mit  dem Tanz beginnen? Wenn Du  noch etwas zu erledigen<NEXT>
+hast, dann tue es jetzt.<NEXT>
+ Tanzbein schwingen!         Noch nicht!<OPT 2>
+
+@@ sDialogDE_0235 @@
+Wähle Deinen Tanzpartner.<END>
+
+@@ sDialogDE_0236 @@
+Beeile Dich, wenn Du noch   etwas zu tun hast!<END>
+
+@@ sDialogDE_0237 @@
+Morgen steigt wieder unser  alljährliches Erntedankfest.Alle sind herzlich<NEXT>
+eingeladen, daran           teilzunehmen. Morgen auf    dem Marktplatz wird<NEXT>
+ordentlich gefeiert. Um dreiUhr ist das Fest schon      vorbei, also komm nicht zu<NEXT>
+spät!<END>
+
+@@ sDialogDE_0238 @@
+Morgen ist das              Erntedankfest!<END>
+
+@@ sDialogDE_0239 @@
+Weißt Du schon, was Du zum  Fest mitbringst? Ich werde  meine Maschine<NEXT>
+fertigstellen und sie der   Öffentlichkeit präsentieren.<END>
+
+@@ sDialogDE_023A @@
+Ob Kräuter und Gewürze O.K. sind?<END>
+
+@@ sDialogDE_023B @@
+Ich werde etwas Leckeres    mitbringen, also freue Dich schon einmal auf morgen.<END>
+
+@@ sDialogDE_023C @@
+Morgen ist das              Erntedankfest. Ich bin schonganz aufgeregt!<END>
+
+@@ sDialogDE_023D @@
+Morgen ist das              Erntedankfest, nicht wahr?<END>
+
+@@ sDialogDE_023E @@
+Mit diesem Fest danken wird für die gute Ernte!<END>
+
+@@ sDialogDE_023F @@
+Bringt Speisen mit, damit   wir richtig feiern können!<END>
+
+@@ sDialogDE_0240 @@
+Morgen ist das              Erntedankfest. Ich werde    früher mit der Arbeit<NEXT>
+aufhören. Wenn Du Vieh hast,solltest Du es vorher       versorgen. Um drei Uhr<NEXT>
+steigt dann das große       Spektakel. Tschüß!<END>
+
+@@ sDialogDE_0241 @@
+Willkommen! Gib Deine       Mitbringsel in den großen   Topf!<END>
+
+@@ sDialogDE_0242 @@
+Oh, Du hast ja gar nichts   mitgebracht!<END>
+
+@@ sDialogDE_0243 @@
+Warte bis es fertig ist!<END>
+
+@@ sDialogDE_0244 @@
+Das ist Dein Eintopf! Iß ihnmit Genuß!<END>
+
+@@ sDialogDE_0245 @@
+Hmmmm! Das war ja richtig   lecker!<END>
+
+@@ sDialogDE_0246 @@
+Dieser Eintopf ist          hervorragend! Ich bin nicht verheiratet und da gibt es<NEXT>
+nicht oft was Leckeres zu   schnabbeln! Wahrlich nicht  oft!!!<END>
+
+@@ sDialogDE_0247 @@
+Hast Du schon Gras gemäht?  Du kannst das Gras auch im  Herbst mähen. Heu ist<NEXT>
+wichtig für die Tiere. Hast Du nicht genug gemäht, hast Du kein Futter. Lege Dir<NEXT>
+also einen großen Vorrat an!<END>
+
+@@ sDialogDE_0248 @@
+Ich bin ein echter          Feinschmecker!<END>
+
+@@ sDialogDE_0249 @@
+Ich bin satt!<END>
+
+@@ sDialogDE_024A @@
+Hier gibt es die besten     Reisbällchen der ganzen     Stadt. Sie sind lecker und<NEXT>
+warm. Möchtest Du sie       probieren? Sie kosten nur   läppische 300G.<NEXT>
+ Her mit den Bällchen!       Pfui!                                    Geld <NUM 7 19>0G<OPT 2>
+
+@@ sDialogDE_024B @@
+Guten Tag! Hier gibt es     leckere Reisbällchen.       Sie sind frisch und warm.<NEXT>
+Möchtest Du sie probieren?  Sie kosten nur 200G.<NEXT>
+ Kaufen!                     Pfui!                                    Geld <NUM 7 20>0G<OPT 2>
+
+@@ sDialogDE_024C @@
+Bitteschön, laß es Dir      schmecken!<END>
+
+@@ sDialogDE_024D @@
+Probier doch die Bällchen.  Sie machen Dich glücklich!<END>
+
+@@ sDialogDE_024E @@
+Ich kann dieses Jahr nichts anbieten. Seltene Samen sindschwer zu finden.<END>
+
+@@ sDialogDE_024F @@
+Die Früchte aus dem Süden   schmecken gut, haben jedoch einen sehr strengen Geruch.<NEXT>
+Das mag ich überhaupt nicht!<END>
+
+@@ sDialogDE_0250 @@
+Ich kann nicht sehr gut     tanzen.<END>
+
+@@ sDialogDE_0251 @@
+Gleich beginnt der Tanz.<END>
+
+@@ sDialogDE_0252 @@
+Das Leben ist unser         kostbarstes Gut!<NEXT>
+ Ja!                         Nein!<OPT 2>
+
+@@ sDialogDE_0253 @@
+Es ist gut, den Glauben     nicht zu verlieren!<END>
+
+@@ sDialogDE_0254 @@
+Ich bin mir sicher, daß die Göttin der Erde existiert.<END>
+
+@@ sDialogDE_0255 @@
+Diesmal, glaube ich, ist es in Ordnung...<END>
+
+@@ sDialogDE_0256 @@
+Hallo! Probiere dies hier!<NEXT>
+ O.K.!                       Lieber nicht!<OPT 2>
+
+@@ sDialogDE_0257 @@
+Bitteschön!<END>
+
+@@ sDialogDE_0258 @@
+Whaaaa!<END>
+
+@@ sDialogDE_0259 @@
+Ich habe diesen Kürbiskuchengebacken. Möchtest Du ihn   probieren?<NEXT>
+ Ja, gerne!                  Nein!<OPT 2>
+
+@@ sDialogDE_025A @@
+Dieses Jahr sind die        Kürbisse süß, nicht wahr?<END>
+
+@@ sDialogDE_025B @@
+Dieser Kürbiskuchen ist     wirklich ein Hochgenuß!<END>
+
+@@ sDialogDE_025C @@
+Ich schenke Dir eine tolle  Uhr! Du kannst die Uhrzeit  ablesen, indem Du den<NEXT>
+SELECT-Knopf drückst.<END>
+
+@@ sDialogDE_025D @@
+Es ist wichtig, der Erde,   der Sonne und dem Regen am  Erntedankfest zu huldigen.<END>
+
+@@ sDialogDE_025E @@
+Taraaa, das ist die         automatische Erntemaschine. Schalte sie ruhig ein...<NEXT>
+ Einschalten!                Lieber nicht!<OPT 2>
+
+@@ sDialogDE_025F @@
+Ups, das war wohl nichts!<END>
+
+@@ sDialogDE_0260 @@
+Was hat Dich erschrocken?<END>
+
+@@ sDialogDE_0261 @@
+Nein, ... das scheint nicht in Ordnung zu sein...<END>
+
+@@ sDialogDE_0262 @@
+Schmeckt's? Man nennt es dieFrucht der Vollmondpflanze! Diese Frucht zergeht im<NEXT>
+Mund wie Butter in der      prallen Sommersonne.<END>
+
+@@ sDialogDE_0263 @@
+Morgens ist es in den Bergenam schönsten...<END>
+
+@@ sDialogDE_0264 @@
+Dies ist ein ganz speziellerKuchen, den ich gebacken    habe.<NEXT>
+Möchtest Du ihn probieren?<NEXT>
+ Au ja!                      Nö!<OPT 2>
+
+@@ sDialogDE_0265 @@
+Es macht wirklich großen    Spaß, für Dich zu kochen!<END>
+
+@@ sDialogDE_0266 @@
+Wenn Du nicht willst...<END>
+
+@@ sDialogDE_0267 @@
+Das ist ein Beerensaft, den ich bereits im letzten Jahr gebraut habe. Möchtest Du<NEXT>
+ihn probieren?<NEXT>
+ Warum nicht?                Nein!<OPT 2>
+
+@@ sDialogDE_0268 @@
+Wenn Du ein Mann bist, dann trink aus!<END>
+
+@@ sDialogDE_0269 @@
+Es ist wirklich gut!<END>

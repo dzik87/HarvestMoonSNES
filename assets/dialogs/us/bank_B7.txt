@@ -1,0 +1,727 @@
+@@ sDialogUS_0x00D2 @@
+My uncle liked you. Please  make friends with him.OK?<NEXT>
+ OK                          No<OPT 2>
+
+@@ sDialogUS_0x00D3 @@
+Really? I'm glad. Please    excuse him for being        meddlesome.<NEXT>
+I guess he gets that from   my mother.<END>
+
+@@ sDialogUS_0x00D4 @@
+He's strict but basically a good person.<END>
+
+@@ sDialogUS_0x00D5 @@
+Oh no, you are too soaked.  You might catch a cold      unless you dry yourself<NEXT>
+soon.<END>
+
+@@ sDialogUS_0x00D6 @@
+Oh,come on,Dad.Let's go homenow.<END>
+
+@@ sDialogUS_0x00D7 @@
+Otherwise Mom will get      really mad at you.<END>
+
+@@ sDialogUS_0x00D8 @@
+Will you taste my new cake  when it's baked?<END>
+
+@@ sDialogUS_0x00D9 @@
+Hey,I baked a new cake.     Will you have a bite?<NEXT>
+ Yes                         No<OPT 2>
+
+@@ sDialogUS_0x00DA @@
+Is it good? It's a          cheesecake. Do you think    it's good enough to sell<NEXT>
+at the shop?<END>
+
+@@ sDialogUS_0x00DB @@
+You look pretty busy.       I hope everything's well    with you.<END>
+
+@@ sDialogUS_0x00DC @@
+Oh,what a coincidence to    meet you here.<NEXT>
+ Yes                         No<OPT 2>
+
+@@ sDialogUS_0x00DD @@
+Tee-hee...<END>
+
+@@ sDialogUS_0x00DE @@
+Wow,what a coincidence.     Hey,were you waiting for    me here?<NEXT>
+Titter...I'm waiting for youat the bar.<END>
+
+@@ sDialogUS_0x00DF @@
+Hi.I just came to shop.     Sorry,but I'm in too much ofa hurry to see you.<END>
+
+@@ sDialogUS_0x00E0 @@
+You came here in this rain? I'm so glad.<END>
+
+@@ sDialogUS_0x00E1 @@
+Grand-pa is so strict...<END>
+
+@@ sDialogUS_0x00E2 @@
+You are pretty daring,      aren't you? Shall I wash    your back?<NEXT>
+ Yes                         N..N..No<OPT 2>
+
+@@ sDialogUS_0x00E3 @@
+Hey, I'm just kidding.<END>
+
+@@ sDialogUS_0x00E4 @@
+Hee-hee, I won't do it.<END>
+
+@@ sDialogUS_0x00E5 @@
+Hi. You look fine today.<END>
+
+@@ sDialogUS_0x00E6 @@
+It's my home made fruit     juice. Do you want it?<NEXT>
+ Yes                         No thank you<OPT 2>
+
+@@ sDialogUS_0x00E7 @@
+Tee-hee...I'll kiss you if  you can drink it. <END>
+
+@@ sDialogUS_0x00E8 @@
+Why are you here at this    bar? ...Aha, you want to    see me.<END>
+
+@@ sDialogUS_0x00E9 @@
+It doesn't get cool at      night.<END>
+
+@@ sDialogUS_0x00EA @@
+Thanks a lot for today.<END>
+
+@@ sDialogUS_0x00EB @@
+I don't like to be alone.<END>
+
+@@ sDialogUS_0x00EC @@
+I sometimes go to the       mountains to gather some    berries.<END>
+
+@@ sDialogUS_0x00ED @@
+Wasn't it cold outside?     When it's cold, you better  drink and warm you body<NEXT>
+from the inside.<END>
+
+@@ sDialogUS_0x00EE @@
+I saw you at the ranch the  other day. You didn't noticeme because you were working.<END>
+
+@@ sDialogUS_0x00EF @@
+I couldn't stand to be alonein that huge place. Don't   you feel lonely there?<NEXT>
+ Sometimes                   Not at all<OPT 2>
+
+@@ sDialogUS_0x00F0 @@
+It's much better to have    someone around me and say   "yeah," when I say "<NEXT>
+the weather is fine."       Feel secure, don't you ?    I think it's better than<NEXT>
+being alone. Right?<END>
+
+@@ sDialogUS_0x00F1 @@
+Sure, you can live alone butit's just like breathing,   you know? It's lonely...<END>
+
+@@ sDialogUS_0x00F2 @@
+Hello. You are the one who  is supposed to work at this ranch today.<NEXT>
+What's your name?<END>
+
+@@ sDialogUS_0x00F3 @@
+Mr.<VAR 4 9>,I'm in charge of    shipping here. I come here  every evening to pick up<NEXT>
+stuff you put in the        shipping box. Nice to meet  you.<NEXT>
+Oh yeah, ask anything you   want to people in town.     It will help you.<END>
+
+@@ sDialogUS_0x00F4 @@
+Hello. Where are you        from?...You are managing theranch alone, separately<NEXT>
+from your parents? Great!   There's nothing here in the ranch, is there?...for<NEXT>
+practice? You have wonderfulparents.<END>
+
+@@ sDialogUS_0x00F5 @@
+Hi, How do you do? I'm the  mayor of this town. It's a  pleasure to meet you.<NEXT>
+There are some tools left inthe shed that your          grandfather used to use.<NEXT>
+And a book on how to use    them,too.<END>
+
+@@ sDialogUS_0x00F6 @@
+Your grandfather helped me  in those days. If you have  any  problems, don't<NEXT>
+hesitate to talk to me.     Well,you should get some    rest when you get back home.<END>
+
+@@ sDialogUS_0x00F7 @@
+How do you do? Hard,isn't   it? But don't give up..................Oh,yeah<NEXT>
+I have a daughter....she maybe at the church.<END>
+
+@@ sDialogUS_0x00F8 @@
+She is a cute girl with longhair.<END>
+
+@@ sDialogUS_0x00F9 @@
+I haven't seen you before.  Did you come to that ranch? I'm Maria.<NEXT>
+Nice meeting you.<END>
+
+@@ sDialogUS_0x00FA @@
+It may be hard at first but don't give up.<END>
+
+@@ sDialogUS_0x00FB @@
+I've heard something!       I've heard a faint sound of laughter behind the trees<NEXT>
+in the ranch. And some      people talking,too!         ...What was that?<END>
+
+@@ sDialogUS_0x00FC @@
+He..Hello.<END>
+
+@@ sDialogUS_0x00FD @@
+How do you do? I'm the      priest of this church.      Ask questions to people at<NEXT>
+the shop. They know many    things. And for the rest,   check the signboards.<END>
+
+@@ sDialogUS_0x00FE @@
+You'll have a plenty of     challenges but things will  be better for sure.<NEXT>
+Please stick to it.<END>
+
+@@ sDialogUS_0x00FF @@
+This year is over today.    What was your year like?<NEXT>
+Well,this town will be in a festive mood tomorrow       because lots of people<NEXT>
+are going to the top to see the sun rise.<END>
+
+@@ sDialogUS_0x0100 @@
+"Shipping box for livestock"After talking at the shop,  put livestock in here.<NEXT>
+Livestock Dealer<END>
+
+@@ sDialogUS_0x0101 @@
+Tools are in the shed and   the pen. Pick them up with  A button to get equipped.<NEXT>
+To use them, push Y button.<END>
+
+@@ sDialogUS_0x0102 @@
+Unfortunately, there's      nothing for sale here but   there will be soon.<NEXT>
+So please drop by in a      while.<END>
+
+@@ sDialogUS_0x0103 @@
+Heh, you are the owner of   the ranch. I'm Ann.         Nice to meet you.<END>
+
+@@ sDialogUS_0x0104 @@
+Stamina decreases when you  use tools. Eat food or      sleep in the bed to<NEXT>
+recover.<END>
+
+@@ sDialogUS_0x0105 @@
+You went to the ranch,      didn't you? If you are      going to raise crops there,<NEXT>
+I'll give this to you.      It's a watering can.        It's for getting water<NEXT>
+from the pond. I'll bring itto your shed.<END>
+
+@@ sDialogUS_0x0106 @@
+Vegetable seeds will be in  soon so come again soon.<END>
+
+@@ sDialogUS_0x0107 @@
+How do you do? I'm Nina.    These crops must be sowed   during a certain season.<NEXT>
+They won't germinate unless you sow them in the proper  season.<END>
+
+@@ sDialogUS_0x0108 @@
+And you have to plow the    ground well to make it a    field.<END>
+
+@@ sDialogUS_0x0109 @@
+Welcome. You'd better eat   everyday, you know. Stamina is key.<END>
+
+@@ sDialogUS_0x010A @@
+It must be hard, I know, buttry your best.<END>
+
+@@ sDialogUS_0x010B @@
+Puff...hic..Have I seen you before?<END>
+
+@@ sDialogUS_0x010C @@
+Hey,son! You have to have a meadow to buy livestock.    Not only for cows<NEXT>
+but also for chickens.      I have some grass left so   use it to raise them.<NEXT>
+I'll bring it to your shed. Talk to me over the counter when you want to buy<NEXT>
+livestock.<END>
+
+@@ sDialogUS_0x010D @@
+First,you must have a       plenty of grass when you    raise livestock.<NEXT>
+Beginners should start off  with chickens.<END>
+
+@@ sDialogUS_0x010E @@
+Howdy! I put those cows in  the pen and gave those bellsfor free.<NEXT>
+Well,first thing to do is toname them with affection.Take good care of them!<END>
+
+@@ sDialogUS_0x010F @@
+Hello. I'm a wandering      peddler.I don't have        anything to sell right<NEXT>
+now though. If you want to  sell something, bring it to me so I can buy it.<END>
+
+@@ sDialogUS_0x0110 @@
+Girls in this town are all  cute and good-natured so it may be fun to be here.<END>
+
+@@ sDialogUS_0x0111 @@
+Hohoho...Mister, you don't  know what to begin with,do  you?<NEXT>
+First,you must learn how to use those tools with the    book in the shed.<NEXT>
+The rest, ask the florist   about the crops  and the    livestock dealer about<NEXT>
+livestock.<END>
+
+@@ sDialogUS_0x0112 @@
+Don't overextend yourself.  When you are tired, just go to bed earlier.<NEXT>
+The healthy body is your    precious asset. Try your    best to become an<NEXT>
+independent rancher.<END>
+
+@@ sDialogUS_0x0113 @@
+Mrs.Fortune-teller's words  always prove right.  Just   like the weather fore<NEXT>
+cast on TV.<END>
+
+@@ sDialogUS_0x0114 @@
+Oh,hi,I'm Ellen. Nice       meeting you.<END>
+
+@@ sDialogUS_0x0115 @@
+What? Are you the heir of   the ranch? I wonder if you  can manage it.<NEXT>
+Young men these days have   little guts.<END>
+
+@@ sDialogUS_0x0116 @@
+Hello. The bar is closed    today. It's usually open    except Sunday though.<END>
+
+@@ sDialogUS_0x0117 @@
+Are you going back to the   ranch?<NEXT>
+ Yes                         Not yet<OPT 2>
+
+@@ sDialogUS_0x0118 @@
+Then,I'll give you a lift.  I'm a trainee of shipping   too.<NEXT>
+Let's do our best to achieveeach other's goal.          With grit!<END>
+
+@@ sDialogUS_0x0119 @@
+OK.Let me know when you go  home.<END>
+
+@@ sDialogUS_0x011A @@
+I suggest you listen to     the villagers a little more.<END>
+
+@@ sDialogUS_0x011B @@
+You've come to that haunted ranch? Tee,hee...good luck. I'm Eve,nice to meet you.<NEXT>
+Here you are, it's from me.<END>
+
+@@ sDialogUS_0x011C @@
+The best thing to recover   from fatigue is to relax.<END>
+
+@@ sDialogUS_0x011D @@
+Welcome.Make yourself at    home.<END>
+
+@@ sDialogUS_0x011E @@
+That's Eve,the drawing card of this bar. Isn't she      pretty?<NEXT>
+That's because she is my    niece.<END>
+
+@@ sDialogUS_0x011F @@
+No...I'm still fine.<END>
+
+@@ sDialogUS_0x0120 @@
+Good evening. I'm a fan of  Eve's,you know.<END>
+
+@@ sDialogUS_0x0121 @@
+Eve works at night so I     suppose she kinda misses    people her age.<NEXT>
+Mr.<VAR 4 10>,right? Will you comehere as much as you can?<END>
+
+@@ sDialogUS_0x0122 @@
+Eve lost her parents and hergrandfather who is a hunter brought her up.<NEXT>
+Her grandfather locks       himself in the mountain and hardly comes down to the<NEXT>
+town.<END>
+
+@@ sDialogUS_0x0123 @@
+She may miss him too...but  she's always cheerful.      Such a nice girl.<END>
+
+@@ sDialogUS_0x0124 @@
+Koro! Wait!<END>
+
+@@ sDialogUS_0x0125 @@
+Puff-puff...Don't run       suddenly.Oh,you.You are the Mr. Rancher<NEXT>
+everybody's talking about.  Well,excuse me,..will you   please keep this dog<NEXT>
+for me? My house is a       grocery store so my mom     doesn't allow me to keep<NEXT>
+this dog...so,please!<END>
+
+@@ sDialogUS_0x0126 @@
+Thank you very much! You    have a new house,<VAR 4 11>       You've got to be a<NEXT>
+good boy. Take care.<END>
+
+@@ sDialogUS_0x0127 @@
+Hey,you are a newcomer      here. Really,a rancher?     That's something.<NEXT>
+For a young boy like you.<END>
+
+@@ sDialogUS_0x0128 @@
+We are carpenters. Please   come to us when you want to enlarge your house.<END>
+
+@@ sDialogUS_0x0129 @@
+For the extension of your   house,please call us when   you have enough wood<NEXT>
+for it. See, there's a sign by the house.Check it out.<END>
+
+@@ sDialogUS_0x012A @@
+Now it's an extension       campaign. If you can enlargeyour house by the end of<NEXT>
+summer, you will get a      special gift for free.<END>
+
+@@ sDialogUS_0x012B @@
+I'm an angler. I live in    perfect freedom.            You' better forget your<NEXT>
+work and spend some quiet   time, once in a while,      enjoying things like<NEXT>
+fishing.<END>
+
+@@ sDialogUS_0x012C @@
+I'll prepare a fishing rod  for you next time.<END>
+
+@@ sDialogUS_0x012D @@
+Hi,what's up?. How's your   work going?<END>
+
+@@ sDialogUS_0x012E @@
+You can gather materials by chopping logs in the        mountain.<END>
+
+@@ sDialogUS_0x012F @@
+You can also use materials  for the fence so you should always gather them.<END>
+
+@@ sDialogUS_0x0130 @@
+Do you want to enlarge your house?<NEXT>
+ Yes                         No<OPT 2>
+
+@@ sDialogUS_0x0131 @@
+OK.I'll be at the ranch     tomorrow.<END>
+
+@@ sDialogUS_0x0132 @@
+Let me know whenever you    want to do it.<END>
+
+@@ sDialogUS_0x0133 @@
+How do you like living in   the "Super Deluxe Great Log House"? Isn't it great?<END>
+
+@@ sDialogUS_0x0134 @@
+It costs 5000G to enlarge   your house. Take it?<NEXT>
+ Yes                         No                           Money <NUM 7 8>0G<OPT 2>
+
+@@ sDialogUS_0x0135 @@
+Alright.We'll start off     tomorrow.<END>
+
+@@ sDialogUS_0x0136 @@
+Oh...OK.Call me again any   time.<END>
+
+@@ sDialogUS_0x0137 @@
+Oh my God! There's not      enough materials. Hey,listento me very carefully!<NEXT>
+We don't want to do         half-finished work!         We can't start without<NEXT>
+enough materials.           You'll see what you need on that sign there so getting<NEXT>
+them is the first thing     to do.Bye.<END>
+
+@@ sDialogUS_0x0138 @@
+Chop stumps with an axe to  make them materials.It      takes you about 6 hits<NEXT>
+to chop them down.<END>
+
+@@ sDialogUS_0x0139 @@
+Hee-hee,look forward to it. <END>
+
+@@ sDialogUS_0x013A @@
+I'll build a terrific one!  Look forward to it.<END>
+
+@@ sDialogUS_0x013B @@
+It costs 10000G to enlarge  your house. Take it?<NEXT>
+ Yes                         No                           Money <NUM 7 9>0G<OPT 2>
+
+@@ sDialogUS_0x013C @@
+Oh no,just do what you have to do.OK?<END>
+
+@@ sDialogUS_0x013D @@
+Look,isn't it an excellent  house? It's called "Super   Log House."<END>
+
+@@ sDialogUS_0x013E @@
+What's happened to Eve      tonight?<END>
+
+@@ sDialogUS_0x013F @@
+Nina's mother collapsed fromfever. I can't sell tools   while Dad is out<NEXT>
+nursing her.<END>
+
+@@ sDialogUS_0x0140 @@
+It's finished! Look at this the "Super Deluxe Great Log House"!!<NEXT>
+Even if I do fall in love   with it.See you.<END>
+
+@@ sDialogUS_0x0141 @@
+Say,I've heard of a rare    seed.It grows to be a tall  bean tree that reaches<NEXT>
+all the way to the sky.     I want to see it.<END>
+
+@@ sDialogUS_0x0142 @@
+Hi!I was scared by the      earthquake  this morning.   Come up to the mountain<NEXT>
+after checking out the      ranch.<END>
+
+@@ sDialogUS_0x0143 @@
+.....Do you like...Nina?<END>
+
+@@ sDialogUS_0x0144 @@
+Today is the last day of    this year. It seems long    enough but at the same<NEXT>
+time,it flies by quickly    too.<END>
+
+@@ sDialogUS_0x0145 @@
+Scheduled date has already  passed now.  I have to let  them in the shed right away.<END>
+
+@@ sDialogUS_0x0146 @@
+Hey,the long winter is      finally over. Animals looks so happy when springs<NEXT>
+comes too.<END>
+
+@@ sDialogUS_0x0147 @@
+...yeah,I'm OK.I just felt  dizzy...<END>
+
+@@ sDialogUS_0x0148 @@
+I'm a wandering hawker.     Today,I have very rare      berries.<NEXT>
+Take one bite,and you'll be full of vitality.This is a  special offer,<NEXT>
+I can exchange some for a   chicken over there.<NEXT>
+ Exchange                    Not exchange<OPT 2>
+
+@@ sDialogUS_0x0149 @@
+I'm a wandering hawker.     Today,I have a very rare    bean seed.<NEXT>
+You'll see the wonder when  you plant it in the soil.   I can exchange it with one<NEXT>
+of your cows.               It's a bargain.<NEXT>
+ Exchange                    Not exchange<OPT 2>
+
+@@ sDialogUS_0x014A @@
+Well then,this cow is now   mine. The hawker is glad.   See you.<END>
+
+@@ sDialogUS_0x014B @@
+OK,this cow is mine now.    I've put the seed in you    shed.<NEXT>
+Plant it on the top of the  mountain. Something good    will definitely happen.<NEXT>
+See you.<END>
+
+@@ sDialogUS_0x014C @@
+You are a hardhearted       customer.I'm a wandering    hawker.<NEXT>
+This hawker is very sad.    Good-bye.<END>
+
+@@ sDialogUS_0x014D @@
+I'm a peddler of the wind.  This is the seed of a tree  that grows money.<NEXT>
+Plant it in the ground,     you'll be surprised.Mister, you're buying something<NEXT>
+good. It's only 20000G.<NEXT>
+ Buy it                      Not buy it                   Money <NUM 7 10>0G<OPT 2>
+
+@@ sDialogUS_0x014E @@
+Now,I've planted it.        Mister,look forward to      today.<END>
+
+@@ sDialogUS_0x014F @@
+Are you sure? I guarantee   that you will regret this   for the rest of your life.<END>
+
+@@ sDialogUS_0x0150 @@
+Hey, it's tough when the    weather is gloomy.<END>
+
+@@ sDialogUS_0x0151 @@
+I'm busy, busy.<END>
+
+@@ sDialogUS_0x0152 @@
+It's the way back. It's     connected to the world here below.<END>
+
+@@ sDialogUS_0x0153 @@
+Good Lord, what's happening here? Hey, Is your place    alright?<END>
+
+@@ sDialogUS_0x0154 @@
+They say a hurricane is     coming here tomorrow.<END>
+
+@@ sDialogUS_0x0155 @@
+The wind is blowing harder  and that makes me scared.<END>
+
+@@ sDialogUS_0x0156 @@
+Oh well, the sky looks      threatening. We'll probably have a hurricane tomorrow.<END>
+
+@@ sDialogUS_0x0157 @@
+I don't know why but I get  excited when something like a hurricane comes.Don't you?<END>
+
+@@ sDialogUS_0x0158 @@
+The wind is blowing harder  now. I don't like           hurricanes.<END>
+
+@@ sDialogUS_0x0159 @@
+Rain is OK but not          hurricane. Because it blows flowers away.<END>
+
+@@ sDialogUS_0x015A @@
+You'd better pray to God    that there is no damage fromthe hurricane. Trust me.<END>
+
+@@ sDialogUS_0x015B @@
+Hey,son,the hurricane is    getting near. Have you put  your livestock in the pen?<NEXT>
+ Sure                        I Forgot<OPT 2>
+
+@@ sDialogUS_0x015C @@
+You know what to do even if you are young.<END>
+
+@@ sDialogUS_0x015D @@
+Are you an idiot? What are  you doing here? Go home and put them in the<NEXT>
+penright now.<END>
+
+@@ sDialogUS_0x015E @@
+What are you hanging around here for? Don't you know a  hurricane is coming?<END>
+
+@@ sDialogUS_0x015F @@
+Have you put the livestock  in the pen? Let's lock the  doors later and go to bed.<END>
+
+@@ sDialogUS_0x0160 @@
+It's impossible to go out   today.<END>
+
+@@ sDialogUS_0x0161 @@
+Thank God that there was    only slight damage from the hurricane.<END>
+
+@@ sDialogUS_0x0162 @@
+I think the precious        weather-cock was blown away.<END>
+
+@@ sDialogUS_0x0163 @@
+I'm glad everybody is fine.<END>
+
+@@ sDialogUS_0x0164 @@
+Is your ranch alright?<END>
+
+@@ sDialogUS_0x0165 @@
+That was awful. Yes, ours   is alright.<END>
+
+@@ sDialogUS_0x0166 @@
+Let's look around the ranch.There will be trouble if thefences are broken.<END>
+
+@@ sDialogUS_0x0167 @@
+The earthquake last night   registered 4 on the richter scale.<NEXT>
+The damage is not serious.<END>
+
+@@ sDialogUS_0x0168 @@
+You'd better inspect here   and there.<END>
+
+@@ sDialogUS_0x0169 @@
+What? An earthquake?        I didn't notice it.<END>
+
+@@ sDialogUS_0x016A @@
+I wonder how my grandpa is  doing. There are a lot of   areas to collapse spots<NEXT>
+in the mountain so I'm      worried about him.<END>
+
+@@ sDialogUS_0x016B @@
+I was surprised.Is your     ranch alright?<END>
+
+@@ sDialogUS_0x016C @@
+Cows are simple. So don't   keep them out on the ground when it rains, snows,<NEXT>
+and a hurricane comes.<END>
+
+@@ sDialogUS_0x016D @@
+It seems there are changes  everywhere caused by the    earthquake.<NEXT>
+We were just talking of     going to look around.<END>
+
+@@ sDialogUS_0x016E @@
+The big rock out there      collapsed by the earthquake.Did you know that?<END>
+
+@@ sDialogUS_0x016F @@
+Oh yes,I was pretty         surprised.<END>
+
+@@ sDialogUS_0x0170 @@
+Hey,listen, we can go       through the rock.<END>
+
+@@ sDialogUS_0x0171 @@
+It might be able to go to   the end of the ranch faster through here.<NEXT>
+But time still goes on.<END>
+
+@@ sDialogUS_0x0172 @@
+Have you seen a mole?It     scares the cows sometimes.  You'd better kick it<NEXT>
+out of the fence right away.<END>
+
+@@ sDialogUS_0x0173 @@
+I'm happy....<END>
+
+@@ sDialogUS_0x0174 @@
+Well,I haven't thought aboutit yet...<END>
+
+@@ sDialogUS_0x0175 @@
+...Are you sure? Me?<END>
+
+@@ sDialogUS_0x0176 @@
+You're kidding...<END>
+
+@@ sDialogUS_0x0177 @@
+Yes! You!<END>
+
+@@ sDialogUS_0x0178 @@
+I'm afraid it's too early...<END>
+
+@@ sDialogUS_0x0179 @@
+What? ......Yes.<END>
+
+@@ sDialogUS_0x017A @@
+It's all too sudden so I    don't know what to do...<END>
+
+@@ sDialogUS_0x017B @@
+Titter...alright. I say OK.<END>
+
+@@ sDialogUS_0x017C @@
+Well, It's still too early.<END>
+
+@@ sDialogUS_0x017D @@
+Good morning....da-darling. Be happy together from      now on.<END>
+
+@@ sDialogUS_0x017E @@
+ <VAR 9 12>,<NUM 2 11><VAR 2 13> of <VAR 6 14>.<END>
+
+@@ sDialogUS_0x017F @@
+Don't be too late.<END>
+
+@@ sDialogUS_0x0180 @@
+Thank you for your trouble, darling.<END>
+
+@@ sDialogUS_0x0181 @@
+Please work hard today,too.<END>
+
+@@ sDialogUS_0x0182 @@
+I've got to do my best todayalso.<END>
+
+@@ sDialogUS_0x0183 @@
+I'll work hard to give the  house a good shine.<END>
+
+@@ sDialogUS_0x0184 @@
+It's strange. It's the same sky but the wind and the airfeel different.<END>
+
+@@ sDialogUS_0x0185 @@
+I'll try my best to make    something that will help    you.<END>
+
+@@ sDialogUS_0x0186 @@
+I'll take care of those     tools too.                  .....Don't worry.<NEXT>
+I won't break any.<END>
+
+@@ sDialogUS_0x0187 @@
+"Auto Milking & Yogurt-Maker: Special Version"          I wish it would be<NEXT>
+finished by spring...<END>
+
+@@ sDialogUS_0x0188 @@
+Time goes by really quickly.I feel like I met you only afew days ago.<END>
+
+@@ sDialogUS_0x0189 @@
+The weather is beautiful.   Let's go on a picnic to the mountain top soon.<END>
+
+@@ sDialogUS_0x018A @@
+La-la-la-la-la...           The sky is blue. I somehow  feel cheerful.<END>
+
+@@ sDialogUS_0x018B @@
+That mysterious flower in   the mountain,someday I'm    dreaming of growing them<NEXT>
+at the ranch.<END>
+
+@@ sDialogUS_0x018C @@
+Good morning, sweetheart.   There was a sparrow playing in front of our house<NEXT>
+some minutes ago.           It was so cute.<END>
+
+@@ sDialogUS_0x018D @@
+I want to cook delicious    meals for you every day.<END>
+
+@@ sDialogUS_0x018E @@
+<VAR 4 15> may be the descended ofa Thoroughbred.             Don't you think so?<NEXT>
+It has a pretty fine coat   of hair.<END>
+
+@@ sDialogUS_0x018F @@
+Yes,spring is wonderful.<END>
+
+@@ sDialogUS_0x0190 @@
+Gradually I am getting used to living here. What? Am I  lonely?<NEXT>
+Oh,come on,you are here     beside me.<END>
+
+@@ sDialogUS_0x0191 @@
+There are many kinds of     animals in the mountain.    Doesnt' that give you<NEXT>
+comfort?<END>
+
+@@ sDialogUS_0x0192 @@
+What should I cook this     evening?<END>
+
+@@ sDialogUS_0x0193 @@
+Honey, please work well.<END>
+
+@@ sDialogUS_0x0194 @@
+There are no Sundays at     ranch.<END>
+
+@@ sDialogUS_0x0195 @@
+It's warm. Such a           comfortable Sunday.<END>
+
+@@ sDialogUS_0x0196 @@
+Do you work on a day like   this?<END>
+
+@@ sDialogUS_0x0197 @@
+It's raining so hard        outside. You might catch    cold.<END>
+
+@@ sDialogUS_0x0198 @@
+What snow! I can hardly waitfor spring.<END>
+
+@@ sDialogUS_0x0199 @@
+It's so quiet. Just like    time stops.<END>
+
+@@ sDialogUS_0x019A @@
+I'm going back to my        parents' home!<END>
+
+@@ sDialogUS_0x019B @@
+You came to pick me up?     ......Sorry.<END>
+
+@@ sDialogUS_0x019C @@
+I am not angry any more!    Only a little...<END>
+
+@@ sDialogUS_0x019D @@
+Waaa,I missed you.<END>
+
+@@ sDialogUS_0x019E @@
+OK,I'll be back. To be      honest, I was sorry.<END>
+
+@@ sDialogUS_0x019F @@
+You don't know why I get madat you, do you? It's becauseyou always leave me alone.<END>
+
+@@ sDialogUS_0x01A0 @@
+Hey,darling,shall we paint  our house in a beautiful    color?<END>
+
+@@ sDialogUS_0x01A1 @@
+It has become a pretty      house.<END>

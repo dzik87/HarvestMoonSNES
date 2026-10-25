@@ -1,0 +1,727 @@
+@@ sDialogUS_0x0000 @@
+Hello, this is the weather  forecast for tomorrow.      It'll be sunny and calm<NEXT>
+for the whole day tomorrow.<END>
+
+@@ sDialogUS_0x0001 @@
+It's been hot recently.     The weather forecast for    tomorrow is fair.<END>
+
+@@ sDialogUS_0x0002 @@
+The autumn mountains are    beautifully colored  The skywill be clear and blue<NEXT>
+tomorrow.<END>
+
+@@ sDialogUS_0x0003 @@
+It's getting colder day by  day but how are you doing?  It'll be fair tomorrow.<END>
+
+@@ sDialogUS_0x0004 @@
+Hello. The weather forecast for tomorrow is that it'll  begin to rain at midnight<NEXT>
+and will be rainy for the   whole day.<END>
+
+@@ sDialogUS_0x0005 @@
+This is the weather forecastfor tomorrow. It'll start torain hard in the morning<NEXT>
+with lightening in some     places.<END>
+
+@@ sDialogUS_0x0006 @@
+It's getting cooler         everyday. It'll be raining  for the whole day tomorrow.<END>
+
+@@ sDialogUS_0x0007 @@
+It's pretty cold now.       The weather forecast for    tomorrow is snow.<END>
+
+@@ sDialogUS_0x0008 @@
+Here's the hurricane        information. The hurricane  is becoming stronger and<NEXT>
+is getting nearer. Please   don't forget to keep all thelivestock inside!<END>
+
+@@ sDialogUS_0x0009 @@
+Latest funds                         <NUM 7 1>0G<NEXT>
+Cow     <NUM 2 2>                  Chicken <NUM 2 3><NEXT>
+Dog     <VAR 4 1>                Horse   <VAR 4 2><END>
+
+@@ sDialogUS_0x000A @@
+Shall I write in my diary   before I go to bed?<NEXT>
+ Yes                         No<OPT 2>
+
+@@ sDialogUS_0x000B @@
+I'll work hard again        tomorrow.<END>
+
+@@ sDialogUS_0x000C @@
+ I'm going to bed.           Oh, I've got something      to do.<OPT 2>
+
+@@ sDialogUS_0x000D @@
+Good night.<END>
+
+@@ sDialogUS_0x000E @@
+"Allocated land for the     annex of the house"<NEXT>
+Necessary Materials                  <NUM 3 4>piece<END>
+
+@@ sDialogUS_0x000F @@
+"Sickle"                    Cut the grass to make feed! <NEXT>
+It's the feed for cows and  chickens. I would be thrown into a pinch if<NEXT>
+it's gone.<END>
+
+@@ sDialogUS_0x0010 @@
+"Hoe"                       Plow the ground to make a   field.<NEXT>
+Raise vegetables in the     field.<NEXT>
+Try various ways to make thefield.<END>
+
+@@ sDialogUS_0x0011 @@
+"Axe"                       Split logs to make lumber.  Lumber is useful.<NEXT>
+Focus on one point and hit. Don't enter the control pad.<END>
+
+@@ sDialogUS_0x0012 @@
+"Hammer"                    Breaks rocks and breaks     fences down.<NEXT>
+Big rocks can be knocked    down when focusing on one   spot.<NEXT>
+Don't ever enter the        control pad.<END>
+
+@@ sDialogUS_0x0013 @@
+"Watering can"              Water the crops. Once a day.No watering is necessary<NEXT>
+on rainy days.              Dip up water at a well or a pond when it runs out.<END>
+
+@@ sDialogUS_0x0014 @@
+"Milker"                    Milk cows and ship the milk.<END>
+
+@@ sDialogUS_0x0015 @@
+"Brush"                     Brushing raises the cows'   level of affection.<NEXT>
+A cow with High affection   gives a lot of milk.<END>
+
+@@ sDialogUS_0x0016 @@
+"Bell"                      A tool used to herd cows.   Look at the cows carefully<NEXT>
+and move them properly.<END>
+
+@@ sDialogUS_0x0017 @@
+"Vegetable seeds"           Sowing season is different. Ask the florist for the<NEXT>
+proper season.              Seeds must be sown in the   field. They won't bud<NEXT>
+without watering.<END>
+
+@@ sDialogUS_0x0018 @@
+"Grass seeds"               Sow the field from spring tosummer.<NEXT>
+It grows without watering.  The Meadow must be ready forraising cows and chickens.<NEXT>
+Grass is ready for mowing   when it turns a deep green.<END>
+
+@@ sDialogUS_0x0019 @@
+"Paint"                     Paint the house right.<END>
+
+@@ sDialogUS_0x001A @@
+No, don't tell me you are   working on New Years' Day.  Just relax today.<END>
+
+@@ sDialogUS_0x001B @@
+Latest materials                     <NUM 3 5>piece           Split logs and collect them.<END>
+
+@@ sDialogUS_0x001C @@
+Feed                                 <NUM 3 6>piece           Mow grass to make more feed.<END>
+
+@@ sDialogUS_0x001D @@
+Oh yes, I've nailed down thedoor to prepare for the     hurricane.<END>
+
+@@ sDialogUS_0x001E @@
+ Neighbor town               Back hill<END>
+
+@@ sDialogUS_0x001F @@
+ to the top<END>
+
+@@ sDialogUS_0x0020 @@
+Get undressed here.<END>
+
+@@ sDialogUS_0x0021 @@
+Dangerous! Easy to collapse!<END>
+
+@@ sDialogUS_0x0022 @@
+workman's House Call us for annex & extension<NEXT>
+Closed on weekends and      holidays.<END>
+
+@@ sDialogUS_0x0023 @@
+Found the diary!<NEXT>
+ Read                        Not read<OPT 2>
+
+@@ sDialogUS_0x0024 @@
+"Myths of Gods"             There are lots of difficult books.<END>
+
+@@ sDialogUS_0x0025 @@
+"History & Myths"           There's a lot others too.<END>
+
+@@ sDialogUS_0x0026 @@
+"Simple lessons from God"   "Happiness lies in life"<END>
+
+@@ sDialogUS_0x0027 @@
+"Plants"                    "Artistic Flowers"<END>
+
+@@ sDialogUS_0x0028 @@
+"Cocktails: Best 100"       "How to make berry juice"<END>
+
+@@ sDialogUS_0x0029 @@
+"Tasty Cakes"               "Dishes for today"<END>
+
+@@ sDialogUS_0x002A @@
+"Get into invention"        "Daily life and groceries"<END>
+
+@@ sDialogUS_0x002B @@
+"Encyclopedia of fortune    telling "<NEXT>
+"Heart pounding             compatibility of partner"<END>
+
+@@ sDialogUS_0x002C @@
+"House and living"          "We are carpenters"<END>
+
+@@ sDialogUS_0x002D @@
+"We're closed"<END>
+
+@@ sDialogUS_0x002E @@
+"We're preparing"<END>
+
+@@ sDialogUS_0x002F @@
+Yes,<VAR 4 3>, good girl         You look fine today.<END>
+
+@@ sDialogUS_0x0030 @@
+<VAR 4 4> looks cranky.<END>
+
+@@ sDialogUS_0x0031 @@
+<VAR 4 5> is sick!               I've got to give ....       medicine right away!<END>
+
+@@ sDialogUS_0x0032 @@
+<NUM 2 7> more days for delivery.  Come on <VAR 4 6>.<END>
+
+@@ sDialogUS_0x0033 @@
+I can't open it.It's locked.<END>
+
+@@ sDialogUS_0x0034 @@
+I can't open it.            something's stuck.<END>
+
+@@ sDialogUS_0x0035 @@
+Hey, how's it going?        Don't work too hard.        Just take time.<END>
+
+@@ sDialogUS_0x0036 @@
+Ask the florist for flowers and ask the livestock delaerfor livestock.<NEXT>
+Better ask Mrs.             Fortune-teller for girls.<END>
+
+@@ sDialogUS_0x0037 @@
+Don't hang around.          Listen to the priest.<END>
+
+@@ sDialogUS_0x0038 @@
+You are off today,          aren't you?<NEXT>
+We can't keep it up all the time.<END>
+
+@@ sDialogUS_0x0039 @@
+People in town talk         differently according to theweather, day, and season.<END>
+
+@@ sDialogUS_0x003A @@
+Everybody has different     ideas on what happiness     means,right?<NEXT>
+I guess the best thing is   to do what you want to do.  But it's probably not<NEXT>
+real happiness when you     annoy someone or are blamed.<END>
+
+@@ sDialogUS_0x003B @@
+You are working so hard.    You should have a chat with your friends or go to<NEXT>
+mountains...                to relax once in a while.<END>
+
+@@ sDialogUS_0x003C @@
+This church is dedicated to the God of the crops.       I suggest you pray<NEXT>
+faithfully.<END>
+
+@@ sDialogUS_0x003D @@
+I like taking my time       reading books.That's one of my happiest times.<END>
+
+@@ sDialogUS_0x003E @@
+Have you heard of the water imp? Someone has seen it in the pond of the mountain.<END>
+
+@@ sDialogUS_0x003F @@
+Don't think it's OK to do   bad things if it's not      discovered.<NEXT>
+No one is perfect. We all   make mistakes.              That's the way we are.<NEXT>
+But it's wrong to not feel  guilty about what you've    done wrong.<END>
+
+@@ sDialogUS_0x0040 @@
+I wonder if our daughter Anncan get married living like that.<END>
+
+@@ sDialogUS_0x0041 @@
+Hi, how's your work going?  There are some wild dogs,   so you should fix the fence.<END>
+
+@@ sDialogUS_0x0042 @@
+I believe God exists.       You believe it, don't you?<END>
+
+@@ sDialogUS_0x0043 @@
+Hey, it's strange. She is   always here by now.<NEXT>
+.....oh no,                 it's nothing at all.<END>
+
+@@ sDialogUS_0x0044 @@
+Hi. Are you taking a walk   too? It's important to get afew days off.<NEXT>
+Working hard till late at   night will drive you crazy, mentally and physically.<END>
+
+@@ sDialogUS_0x0045 @@
+I just can't help myself    worrying about Ann so much. Mr. <VAR 4 7>, you are of the<NEXT>
+same generation as Ann.     What do you think of her?   ....oh, sorry.<NEXT>
+Maybe I'm a little confused.<END>
+
+@@ sDialogUS_0x0046 @@
+Hello. You always look fine.The bag of seed for sowing. It's convenient to buy<NEXT>
+a few bags at once.<END>
+
+@@ sDialogUS_0x0047 @@
+Grass grows in Autumn so youdon't have to mow much      before Winter.<END>
+
+@@ sDialogUS_0x0048 @@
+May everyone give kindness  to everyone else....<END>
+
+@@ sDialogUS_0x0049 @@
+....<END>
+
+@@ sDialogUS_0x004A @@
+What? The shop is closed on Saturdays. So I'm bathing inthe sun. Nice,huh?<END>
+
+@@ sDialogUS_0x004B @@
+It's kind of dark on rainy  days....feels slightly      lonely,doesn't it?<NEXT>
+But the rain is good when itcomes to producing crops.<END>
+
+@@ sDialogUS_0x004C @@
+What a coincidence. Are you having a meal here today?<END>
+
+@@ sDialogUS_0x004D @@
+It's not easy to work       steadily but it's           worthwhile.<END>
+
+@@ sDialogUS_0x004E @@
+Hope business will be       better,it will be better   ....<NEXT>
+What? Isn't it the God of   business? Oh,well.<END>
+
+@@ sDialogUS_0x004F @@
+It's good to bathe in the   sun. Eat well and work hard.Good health is the<NEXT>
+foundation of happiness.<END>
+
+@@ sDialogUS_0x0050 @@
+Eat something when you are  tired. Our cakes are the    best to get more energy.<END>
+
+@@ sDialogUS_0x0051 @@
+Howdy,young boys! What's up?....hic.<END>
+
+@@ sDialogUS_0x0052 @@
+...hic,working like a dog   is not the only way to live.<END>
+
+@@ sDialogUS_0x0053 @@
+It's my routine to take a   walk on Sundays so it's OK  with me.<END>
+
+@@ sDialogUS_0x0054 @@
+Oh no,it started raining    now...gee, I was going to   work.<NEXT>
+Well,I can do nothing but   stay home today.<END>
+
+@@ sDialogUS_0x0055 @@
+What are you saying?        It doesn't matter if It     rains to do our work here!<END>
+
+@@ sDialogUS_0x0056 @@
+ulp...soooo...great!        She's out.I can relax as    much as<NEXT>
+I want,yeah.<END>
+
+@@ sDialogUS_0x0057 @@
+You can be calm inside the  church.Not many people here,you know.<NEXT>
+It's crowded on holidays    though.<END>
+
+@@ sDialogUS_0x0058 @@
+I felt time went by slowly  when I was young.           Now time goes by too fast<NEXT>
+and one year seems short.   It's strange,really.<END>
+
+@@ sDialogUS_0x0059 @@
+Have sympathy for people.   When you are kind to people,they give you<NEXT>
+kindness in return.         Animals are the same as us  for sure.<END>
+
+@@ sDialogUS_0x005A @@
+It's not necessarily right  or wrong. Daily incidents   are neither.<NEXT>
+It's up to you,really.<END>
+
+@@ sDialogUS_0x005B @@
+I know it won't consume yourstamina on a rainy day but  you should be off.<NEXT>
+Really.<END>
+
+@@ sDialogUS_0x005C @@
+It's tough to take care of  cows.Take good care of them so that they do not<NEXT>
+get sick.My note is right   there so read it carefully  so you can avoid any<NEXT>
+diseases.<END>
+
+@@ sDialogUS_0x005D @@
+Hey,do your hens lay eggs?  Put them in the cage.       And feed them every day.<NEXT>
+They won't lay eggs for     3days after you miss a      feeding.<END>
+
+@@ sDialogUS_0x005E @@
+Hey,young boy! Put your     livestock inside the pen    before the weather gets<NEXT>
+worse!<END>
+
+@@ sDialogUS_0x005F @@
+You know,cows give you more milk when you take good careof them with love.<NEXT>
+..hey,are you listening to  me? They will like you and  good calves will be born<NEXT>
+...listen to me,boy!<END>
+
+@@ sDialogUS_0x0060 @@
+You can't redo your life.   You might not have the      second chance.<NEXT>
+Think before you act.<END>
+
+@@ sDialogUS_0x0061 @@
+Are you asking if I don't goto church? God is everywhereand He is nowhere,<NEXT>
+you know.                   Hee-hee-hee.<END>
+
+@@ sDialogUS_0x0062 @@
+There's a useful book over  there, about girls,I wrote  it.Better read it.<END>
+
+@@ sDialogUS_0x0063 @@
+I'm also a midwife.You know,the mayor's daughter Maria  and the grocery shop<NEXT>
+owner's daughter Ann        I delivered them all.<END>
+
+@@ sDialogUS_0x0064 @@
+Grown-ups always make rule  telling us to do this,do    that,don't do this,<NEXT>
+don't do that.What hard workit is being a child.<END>
+
+@@ sDialogUS_0x0065 @@
+Hmmm...is he in love with   Maria's sister? ....it can'tbe.<END>
+
+@@ sDialogUS_0x0066 @@
+We can gather many things inthe mountain.I want to sell them but they won't allow<NEXT>
+a little kid to go to the   mountains alone.<END>
+
+@@ sDialogUS_0x0067 @@
+Please,please!              I've got a date.<END>
+
+@@ sDialogUS_0x0068 @@
+You'd better read the book  written by Mrs.             Fortune-teller many times.<NEXT>
+It's pretty hard to capture a girl's heart.<END>
+
+@@ sDialogUS_0x0069 @@
+Yeah, welcome. Make yourselfat home.<END>
+
+@@ sDialogUS_0x006A @@
+Things girls like are       flowers and sweets,right?<NEXT>
+I'm saving money to buy a   present for Maria.<END>
+
+@@ sDialogUS_0x006B @@
+I love Maria.I wish she     would be my bride in the    future.<END>
+
+@@ sDialogUS_0x006C @@
+I always pray that I can be a grown-up very quickly.<END>
+
+@@ sDialogUS_0x006D @@
+It's not a date! It's not a date! Just a walk,that's    all!<END>
+
+@@ sDialogUS_0x006E @@
+Oh yes,put crops in the     shipping box so I can       collect them.<END>
+
+@@ sDialogUS_0x006F @@
+You can't use the tool when you lose your stamina but   you can carry things a<NEXT>
+round.<END>
+
+@@ sDialogUS_0x0070 @@
+Well, a drink after work is the best.<END>
+
+@@ sDialogUS_0x0071 @@
+Things you can't ship are   flowers,animals,and         perishables like cakes.<NEXT>
+Don't put those things in   the box.<END>
+
+@@ sDialogUS_0x0072 @@
+Even if you put shipping    goods in the box at night,  they won't last till<NEXT>
+the morning.So wasteful.<END>
+
+@@ sDialogUS_0x0073 @@
+I collect shipping goods    even in the shed so please  don't worry.<END>
+
+@@ sDialogUS_0x0074 @@
+Shall we watch the weather  forecast? You'd better put  the livestock inside right<NEXT>
+after you find out it's     raining.<END>
+
+@@ sDialogUS_0x0075 @@
+It would be much easier to  live if it was true that Godbrings you happiness.<END>
+
+@@ sDialogUS_0x0076 @@
+Anything can happen in our  lives. Just in case,you'd   better save money.<END>
+
+@@ sDialogUS_0x0077 @@
+I know money is important   but the most important thingis love,you know,<NEXT>
+LOVE! Don't you think so?<END>
+
+@@ sDialogUS_0x0078 @@
+I'm a wandering peddler.    But I don't often sell      anything to anyone.<NEXT>
+If there's anything you wantto sell, just put them on   that table over there.<END>
+
+@@ sDialogUS_0x0079 @@
+Fences are easy to break    after rain and snow.<NEXT>
+Please make new fences afterknocking the broken fences  down.<END>
+
+@@ sDialogUS_0x007A @@
+I live in the mountains     hunting animals.<NEXT>
+Eve always tells me to come down to the town but I won'tchange my life style.<END>
+
+@@ sDialogUS_0x007B @@
+Have you heard of           "Power Berry"?  Eat it and  you'll gain a little energy.<END>
+
+@@ sDialogUS_0x007C @@
+When it rains, you must keepoff the top of the mountain,because it is dangerous.<END>
+
+@@ sDialogUS_0x007D @@
+Some mushrooms are          poisonous,so be careful.<END>
+
+@@ sDialogUS_0x007E @@
+Hey,do you want to fish?<NEXT>
+ Yes                         No<OPT 2>
+
+@@ sDialogUS_0x007F @@
+OK,you can use my fishing   rod. Use Y button.<END>
+
+@@ sDialogUS_0x0080 @@
+No,this is pretty good. It  tastes good and sells at a  high price.<END>
+
+@@ sDialogUS_0x0081 @@
+Visit us again.<END>
+
+@@ sDialogUS_0x0082 @@
+Hello.It's a fine day today.<END>
+
+@@ sDialogUS_0x0083 @@
+It's been hot every day but how are you doing?<END>
+
+@@ sDialogUS_0x0084 @@
+I somehow love the autumn   scenery.<END>
+
+@@ sDialogUS_0x0085 @@
+Hope it'll be spring soon.<END>
+
+@@ sDialogUS_0x0086 @@
+Do you believe in God?<NEXT>
+ Yes                         No<OPT 2>
+
+@@ sDialogUS_0x0087 @@
+Really? It's unusual these  days. Please come to the    church on Sunday.<END>
+
+@@ sDialogUS_0x0088 @@
+It's not whether God exists or not,it's more a "belief" that counts,I think.<END>
+
+@@ sDialogUS_0x0089 @@
+Please take care of yourselfnot to be worn down by the  summer heat.<END>
+
+@@ sDialogUS_0x008A @@
+....Excuse me, do you love  kids?<NEXT>
+ I love kids.                Not really.<OPT 2>
+
+@@ sDialogUS_0x008B @@
+I love kids too. My dream isto live with a lot of kids  around me.<END>
+
+@@ sDialogUS_0x008C @@
+...Oh.<END>
+
+@@ sDialogUS_0x008D @@
+It's pretty cold so please  take care of yourself not tocatch a cold.<END>
+
+@@ sDialogUS_0x008E @@
+Oh,you have come to listen  to the priest.<NEXT>
+ Yes                         No<OPT 2>
+
+@@ sDialogUS_0x008F @@
+You are devout.<END>
+
+@@ sDialogUS_0x0090 @@
+No? then,why are you here?  Oh,to pray?<END>
+
+@@ sDialogUS_0x0091 @@
+It's a welcome rain. We havea lot of rain here in       spring.<END>
+
+@@ sDialogUS_0x0092 @@
+Uum...well...can I come overto your ranch some day soon?<END>
+
+@@ sDialogUS_0x0093 @@
+Aren't you lonely living in that big place?<NEXT>
+ A little lonely             No,not at all<OPT 2>
+
+@@ sDialogUS_0x0094 @@
+Uum..well...yes, if...no,   nothing....g-good-by.<END>
+
+@@ sDialogUS_0x0095 @@
+I..see...sorry,I didn't     mean to ask you anything    personal.<END>
+
+@@ sDialogUS_0x0096 @@
+I'm going to make great     tools like my dad!<END>
+
+@@ sDialogUS_0x0097 @@
+It'll be showcased at the   shop one of these days so   please try it.<NEXT>
+ Hum                         I don't want it<OPT 2>
+
+@@ sDialogUS_0x0098 @@
+Trust me.<END>
+
+@@ sDialogUS_0x0099 @@
+You don't trust me, do you?<END>
+
+@@ sDialogUS_0x009A @@
+It seems a little different from the plan I had but...nobig deal.<END>
+
+@@ sDialogUS_0x009B @@
+Aren't I acting like a girl?<NEXT>
+ No,not at all              Not that bad<OPT 2>
+
+@@ sDialogUS_0x009C @@
+How outspoken you are!<END>
+
+@@ sDialogUS_0x009D @@
+My dad always tells me to   act like a girl but I wonderexactly what acting<NEXT>
+like a girl means.<END>
+
+@@ sDialogUS_0x009E @@
+Well...I don't know why     but...it feels good in      spring.<NEXT>
+I go like "OK,it's show     time!"<END>
+
+@@ sDialogUS_0x009F @@
+I love summer though it's   hot.<END>
+
+@@ sDialogUS_0x00A0 @@
+well,constant effort is     important,you know. They saysuccess comes from<NEXT>
+failure.<END>
+
+@@ sDialogUS_0x00A1 @@
+It looks cold outside.It    turns white when you breatheout,doesn't it?<END>
+
+@@ sDialogUS_0x00A2 @@
+Ho hum...it's boring,       isn't it?<NEXT>
+ Yes                         Not really<OPT 2>
+
+@@ sDialogUS_0x00A3 @@
+It is,hum? I'm so sleepy... ho hum...<END>
+
+@@ sDialogUS_0x00A4 @@
+Gee,you are so serious.<END>
+
+@@ sDialogUS_0x00A5 @@
+Yes,I feel relaxed          outside...I haven't been outfor a while.<END>
+
+@@ sDialogUS_0x00A6 @@
+No idea comes out under thisheat!<END>
+
+@@ sDialogUS_0x00A7 @@
+Let's do our best,shall we? <END>
+
+@@ sDialogUS_0x00A8 @@
+The mountain is covered withsnow by now.<END>
+
+@@ sDialogUS_0x00A9 @@
+I hate rain.It feels        depressing.I like when it   pours.<END>
+
+@@ sDialogUS_0x00AA @@
+...My dad tells me to get   married so often....        He would be all by himself<NEXT>
+if I got married to         someone...                  Doesn't he realize that?<END>
+
+@@ sDialogUS_0x00AB @@
+Hello! Hey, look at this!   This is the automatic       pudding maker!<NEXT>
+I've put eggs and milk in   here. Now all you have to dois turn it on.Do it!<NEXT>
+ Push                        I don't want to do<OPT 2>
+
+@@ sDialogUS_0x00AC @@
+It smells wonderful,doesn't it?<END>
+
+@@ sDialogUS_0x00AD @@
+You say it's much quicker tomake pudding without the    machine? Oh no...don'<NEXT>
+t you have a dream?<END>
+
+@@ sDialogUS_0x00AE @@
+I love Spring when all the  flowers start to bloom.<END>
+
+@@ sDialogUS_0x00AF @@
+Hello. Do you like flowers?<NEXT>
+ Yes                         Not really<OPT 2>
+
+@@ sDialogUS_0x00B0 @@
+Yeah,Nina loves them too!<END>
+
+@@ sDialogUS_0x00B1 @@
+ugh...<END>
+
+@@ sDialogUS_0x00B2 @@
+Autumn to Winter is an off  season for us because       there's nothing to sell.<END>
+
+@@ sDialogUS_0x00B3 @@
+Do you believe that there   is a flower which blooms    in Winter?<NEXT>
+ Yes                         You're kidding?<OPT 2>
+
+@@ sDialogUS_0x00B4 @@
+It must be beautiful.<END>
+
+@@ sDialogUS_0x00B5 @@
+Let me tell you the code forthe flower in our shop.     It is "I like you a lot!"<END>
+
+@@ sDialogUS_0x00B6 @@
+Hey,I guess she would be    happy if you gave the flowerto the girl you like.<END>
+
+@@ sDialogUS_0x00B7 @@
+The mountains this season   are beautiful. There are    many fruits and nuts,too...<END>
+
+@@ sDialogUS_0x00B8 @@
+It's deserted in Winter.But we can't experience the joysof Spring without Winter.<END>
+
+@@ sDialogUS_0x00B9 @@
+The herb in the inner part  of the cave works well for  fever and headache<NEXT>
+when you boil it.<END>
+
+@@ sDialogUS_0x00BA @@
+The flower sold at the shop is what we raise here.<END>
+
+@@ sDialogUS_0x00BB @@
+I'm collecting fallen leavesto make manure for the      flowers.<END>
+
+@@ sDialogUS_0x00BC @@
+Plants are alive under the  snow.Isn't it wonderful?<NEXT>
+ Wonderful                   So?<OPT 2>
+
+@@ sDialogUS_0x00BD @@
+Human,animals,and plants    are all alive.<END>
+
+@@ sDialogUS_0x00BE @@
+So great!<END>
+
+@@ sDialogUS_0x00BF @@
+I know you are busy working but please try to come to   the festival.<END>
+
+@@ sDialogUS_0x00C0 @@
+I kind of like rainy days.  Leaves look happy when it   rains.<END>
+
+@@ sDialogUS_0x00C1 @@
+Flowers can be edible and   used for medicinal purposes as well as making us feel<NEXT>
+comfortable.But I don't pickthem when I don't need them.<NEXT>
+I believe they want to live too.<END>
+
+@@ sDialogUS_0x00C2 @@
+I heard there was the       "Secret Garden" in the      ranch. Is it so?<NEXT>
+I want to go see it.<NEXT>
+ OK                          I don't want to go.<OPT 2>
+
+@@ sDialogUS_0x00C3 @@
+Wow,I can hardly wait.<END>
+
+@@ sDialogUS_0x00C4 @@
+How mean!                   Forget it!<END>
+
+@@ sDialogUS_0x00C5 @@
+Hello,you always look fine. <END>
+
+@@ sDialogUS_0x00C6 @@
+I have a little bird. Her   name is P-chan. She sings   beautifully.<END>
+
+@@ sDialogUS_0x00C7 @@
+Hey,do you like sweets?<NEXT>
+ I love them                 Not really<OPT 2>
+
+@@ sDialogUS_0x00C8 @@
+Really? I'm good at making  sweets.I hope I can cook    you something someday.<END>
+
+@@ sDialogUS_0x00C9 @@
+I'm sorry.<END>
+
+@@ sDialogUS_0x00CA @@
+The stillness of Winter     makes me calm down so       I love it.<END>
+
+@@ sDialogUS_0x00CB @@
+Hey,do you like animals?<NEXT>
+ I love them                 I don't like them<OPT 2>
+
+@@ sDialogUS_0x00CC @@
+Yes? I love animals too.<END>
+
+@@ sDialogUS_0x00CD @@
+You are lying. animals dont take to people who don't    like them.<END>
+
+@@ sDialogUS_0x00CE @@
+<VAR 4 8> would bark at wild dogswhen they come here. Check  if the fence is broken.<END>
+
+@@ sDialogUS_0x00CF @@
+It's hard to look after     animals.We always must be   careful so they dont<NEXT>
+get sick....                I feel just like a mother   who is taking care of her<NEXT>
+children.<END>
+
+@@ sDialogUS_0x00D0 @@
+You are always running      around,aren't you? You look fine even if it's cold<NEXT>
+outside.<END>
+
+@@ sDialogUS_0x00D1 @@
+I hope my dad stays healthy at all times.<END>

@@ -1,0 +1,780 @@
+@@ sDialogUS_0x0356 @@
+Turnip? Good shape,isn't it? I'm buying it for 120G but is it OK?<NEXT>
+ Yes                         No                           Money <NUM 7 52>0G<OPT 2>
+
+@@ sDialogUS_0x0357 @@
+Isn't it a fresh egg? I'm   buying it for 100G but is itOK?<NEXT>
+ Yes                         No                           Money <NUM 7 53>0G<OPT 2>
+
+@@ sDialogUS_0x0358 @@
+Mushroom. How about 200G    for it?<NEXT>
+ Yes                         No                           Money <NUM 7 54>0G<OPT 2>
+
+@@ sDialogUS_0x0359 @@
+It's a poisonous mushroom.  It can be a medicine when   it's compounded well.<NEXT>
+How about 300G for it?<NEXT>
+ Yes                         No                           Money <NUM 7 55>0G<OPT 2>
+
+@@ sDialogUS_0x035A @@
+Oh yes,it's a good herb.    Well, how about 200G for it?<NEXT>
+ Yes                         No                           Money <NUM 7 56>0G<OPT 2>
+
+@@ sDialogUS_0x035B @@
+Ah, it's a berry of wild    grape. Smells good. How     about 200G for it?<NEXT>
+ Yes                         No                           Money <NUM 7 57>0G<OPT 2>
+
+@@ sDialogUS_0x035C @@
+Oh boy, it's a tropical     fruit,isn't it? How about   300G for it?<NEXT>
+ Yes                         No                           Money <NUM 7 58>0G<OPT 2>
+
+@@ sDialogUS_0x035D @@
+Ah,what a rare thing! It's aberry of Fullmoon Plant.    I'm buying it for<NEXT>
+600G but how about it?<NEXT>
+ Yes                         No                           Money <NUM 7 59>0G<OPT 2>
+
+@@ sDialogUS_0x035E @@
+It's a very fresh fish. I'm buying it for 300G but how  about it?<NEXT>
+ Yes                         No                           Money <NUM 7 60>0G<OPT 2>
+
+@@ sDialogUS_0x035F @@
+Sleeping.<END>
+
+@@ sDialogUS_0x0360 @@
+Good Lord! This is a Golden Egg! I never expected to seeit with my own eyes...<NEXT>
+Alright,5000! No,10000G for it! Will you please,        please sell it to me?<NEXT>
+Yes,yes,living longer means something for sure.<END>
+
+@@ sDialogUS_0x0361 @@
+Darling,aren't you going to the festival?<END>
+
+@@ sDialogUS_0x0362 @@
+It's good to be at a        festival like this for a    change.<END>
+
+@@ sDialogUS_0x0363 @@
+I know you are busy but     let's go to the festival.<END>
+
+@@ sDialogUS_0x0364 @@
+The tradition from hundreds years ago seem nice,        I guess.<END>
+
+@@ sDialogUS_0x0365 @@
+Have you had too much       beverage? .....I think I    have had enough.<END>
+
+@@ sDialogUS_0x0366 @@
+Mushroom!<NEXT>
+ Eat                         Don't eat<OPT 2>
+
+@@ sDialogUS_0x0367 @@
+It looks a little           dangerous.<NEXT>
+ Eat                         Don't eat<OPT 2>
+
+@@ sDialogUS_0x0368 @@
+It's the berry of wild      grape!<NEXT>
+ Eat                         Don't eat<OPT 2>
+
+@@ sDialogUS_0x0369 @@
+....Something smells so     strong<NEXT>
+ Eat                         Don't eat<OPT 2>
+
+@@ sDialogUS_0x036A @@
+It smells sweet and nice.<NEXT>
+ Eat                         Don't eat<OPT 2>
+
+@@ sDialogUS_0x036B @@
+Cake<NEXT>
+ Eat                         Don't eat<OPT 2>
+
+@@ sDialogUS_0x036C @@
+Fish!<NEXT>
+ Eat                         Don't eat<OPT 2>
+
+@@ sDialogUS_0x036D @@
+I've got a berry of Power   Tree!<END>
+
+@@ sDialogUS_0x036E @@
+The main tap of gas is off!<END>
+
+@@ sDialogUS_0x036F @@
+It's burning.<END>
+
+@@ sDialogUS_0x0370 @@
+Sniff-sniff..good smell.<END>
+
+@@ sDialogUS_0x0371 @@
+The flier is in. Do you wantto read it?<NEXT>
+ Yes                         No<OPT 2>
+
+@@ sDialogUS_0x0372 @@
+For recovery of stamina     ...Spa in the mountains.<END>
+
+@@ sDialogUS_0x0373 @@
+Vacation in Autumn! Mushroomgathering in the mountains  covered with autumn leaves<NEXT>
+The yum-yum at the mountain top! Fullmoon Plant!!<END>
+
+@@ sDialogUS_0x0374 @@
+10th of Winter Month is     Thanksgiving! For           Thanksgiving,<NEXT>
+don't forget our            "Smiling Mark" eggs and     milks!<END>
+
+@@ sDialogUS_0x0375 @@
+23rd of Spring Month is the Flower Festival! Enjoy      various fragrances.<END>
+
+@@ sDialogUS_0x0376 @@
+That's my home made pickled vegetables in salted rice   bran.<END>
+
+@@ sDialogUS_0x0377 @@
+That's Eve's home made berryjuice.<END>
+
+@@ sDialogUS_0x0378 @@
+You are such a restless guy!<END>
+
+@@ sDialogUS_0x0379 @@
+Everything is all right!<END>
+
+@@ sDialogUS_0x037A @@
+I come to the church at     least once in a year.<END>
+
+@@ sDialogUS_0x037B @@
+It looks like an artificial flower.<END>
+
+@@ sDialogUS_0x037C @@
+I looks like an ornament of a chicken but what is it?   It interests me.<END>
+
+@@ sDialogUS_0x037D @@
+What are you looking for?<END>
+
+@@ sDialogUS_0x037E @@
+Ah,that's a photo of my     wife.<END>
+
+@@ sDialogUS_0x037F @@
+Hey,don't touch it without  permission!<END>
+
+@@ sDialogUS_0x0380 @@
+That's my grandchild's piggybank.<END>
+
+@@ sDialogUS_0x0381 @@
+Eve brought that juice here,saying "drink it with your  grandfather."<END>
+
+@@ sDialogUS_0x0382 @@
+What's written in it?<END>
+
+@@ sDialogUS_0x0383 @@
+It's too heavy to pick up...yes,looks pretty spooky.<END>
+
+@@ sDialogUS_0x0384 @@
+It's a prize from the Egg   Festival. It's a charm to   protect from disasters,<NEXT>
+they say.<END>
+
+@@ sDialogUS_0x0385 @@
+It's a very old organ.<END>
+
+@@ sDialogUS_0x0386 @@
+Now,let's pray here.<END>
+
+@@ sDialogUS_0x0387 @@
+ Quality: Sulfur spring      Benefits: rheumatism        recovery of stamina<END>
+
+@@ sDialogUS_0x0388 @@
+Nothing in there.<END>
+
+@@ sDialogUS_0x0389 @@
+Confirm the origin of fire!<END>
+
+@@ sDialogUS_0x038A @@
+<NUM 2 61><VAR 2 25> of <VAR 6 26>Month,        <VAR 4 27> rests here quietly.<NEXT>
+Let's pray her soul may restin peace today.<END>
+
+@@ sDialogUS_0x038B @@
+Old ladies get cold easily  so I keep the fireplace     burning all the time.<END>
+
+@@ sDialogUS_0x038C @@
+"Notice" Slippery and       dangerous. This road is     temporarily closed today.<END>
+
+@@ sDialogUS_0x038D @@
+Not this!<END>
+
+@@ sDialogUS_0x038E @@
+What? Heard something?<END>
+
+@@ sDialogUS_0x038F @@
+The winner of this year's   Egg Festival is...          the livestock dealer!<END>
+
+@@ sDialogUS_0x0390 @@
+Beep! Time is up! Next egg.<END>
+
+@@ sDialogUS_0x0391 @@
+It's late so we'd better go home now.<END>
+
+@@ sDialogUS_0x0392 @@
+Better go home now.<END>
+
+@@ sDialogUS_0x0393 @@
+The mountain top is a       mysterious place. I         recommend you plant a<NEXT>
+different seed over there   when you get one.<END>
+
+@@ sDialogUS_0x0394 @@
+It is said that a happy     flower blooms when you eat aberry of Power Tree.<NEXT>
+It won't even die in winter.<END>
+
+@@ sDialogUS_0x0395 @@
+Are you working hard? You   know, No food for lazy      workers, right?<END>
+
+@@ sDialogUS_0x0396 @@
+Ah, you! Working too hard isnot good for your health,   you know.<END>
+
+@@ sDialogUS_0x0397 @@
+Day like today, it's good tothink of your life a little seriously.<NEXT>
+...Oh no, I shouldn't do    that...I've complained a    little unconsciously<NEXT>
+but...well, that's what     I do, anyway.<END>
+
+@@ sDialogUS_0x0398 @@
+You won't die without money.Money is not necessary to   live a full life.<END>
+
+@@ sDialogUS_0x0399 @@
+This weather makes me feel  depressed. It's boring...I  want to sleep in winter.<END>
+
+@@ sDialogUS_0x039A @@
+Hey,warm up your body..     don't catch a cold.<END>
+
+@@ sDialogUS_0x039B @@
+It's cold outside,isn't it? I have a fireplace inthe    back room so warm yourself.<END>
+
+@@ sDialogUS_0x039C @@
+In winter,I make some       flowers to decorate the     shop. I want to make the<NEXT>
+shop look nice with them.<END>
+
+@@ sDialogUS_0x039D @@
+It's hard to shovel snow butit feels good to exercise inthe morning when it snows.<END>
+
+@@ sDialogUS_0x039E @@
+I don't like the coldness ofwinter but I like the smell of snow.<NEXT>
+You can smell it before it  starts snowing, can't you?  It's like,yes it will be<NEXT>
+snowing tomorrow.           I like that.<END>
+
+@@ sDialogUS_0x039F @@
+They say it a gift from the workman.<END>
+
+@@ sDialogUS_0x03A0 @@
+You are not so busy in      winter,are you? You should  gather materials, then.<END>
+
+@@ sDialogUS_0x03A1 @@
+Welcome.<END>
+
+@@ sDialogUS_0x03A2 @@
+"Shipping Box"               Pick up in the evening.                      Shippers<END>
+
+@@ sDialogUS_0x03A3 @@
+Ah! This is a chicken       feather?!<END>
+
+@@ sDialogUS_0x03A4 @@
+"Secret Garden" No entry    allowed!<END>
+
+@@ sDialogUS_0x03A5 @@
+Events of the year          1st of Spring Month          New Year's Festival<NEXT>
+23rd of Spring Month         Flower Festival<NEXT>
+12th of Autumn Month         Harvest Festival<NEXT>
+20th of Autumn Month         Egg Festival<NEXT>
+10th of Winter Month         Thanksgiving Festival<NEXT>
+24th of Winter Month         Star Night Festival<END>
+
+@@ sDialogUS_0x03A6 @@
+ ♥<END>
+
+@@ sDialogUS_0x03A7 @@
+ ♥♥<END>
+
+@@ sDialogUS_0x03A8 @@
+ ♥♥♥<END>
+
+@@ sDialogUS_0x03A9 @@
+ ♥♥♥♥<END>
+
+@@ sDialogUS_0x03AA @@
+ ♥♥♥♥♥<END>
+
+@@ sDialogUS_0x03AB @@
+ ♥♥♥♥♥♥<END>
+
+@@ sDialogUS_0x03AC @@
+ ♥♥♥♥♥♥♥<END>
+
+@@ sDialogUS_0x03AD @@
+ ♥♥♥♥♥♥♥♥<END>
+
+@@ sDialogUS_0x03AE @@
+ ♥♥♥♥♥♥♥♥♥<END>
+
+@@ sDialogUS_0x03AF @@
+ ♥♥♥♥♥♥♥♥♥♥<END>
+
+@@ sDialogUS_0x03B0 @@
+......Th-thank you.<END>
+
+@@ sDialogUS_0x03B1 @@
+Don't pick up herbs without thinking what they are for.<END>
+
+@@ sDialogUS_0x03B2 @@
+Thank you. It looks         delicious.<END>
+
+@@ sDialogUS_0x03B3 @@
+Thank you. Now I can bake a cake with it.<END>
+
+@@ sDialogUS_0x03B4 @@
+Are you playing a nasty     trick on me?<END>
+
+@@ sDialogUS_0x03B5 @@
+So glad. Are you giving me  this neat present?          Thank you.<END>
+
+@@ sDialogUS_0x03B6 @@
+You can't take care of them if you buy a lot of them at a time. Drop by later again.<END>
+
+@@ sDialogUS_0x03B7 @@
+Being crowded makes         livestock stressed. That's  enough for now,you know.<END>
+
+@@ sDialogUS_0x03B8 @@
+I don't want it.<END>
+
+@@ sDialogUS_0x03B9 @@
+I could be in trouble.<END>
+
+@@ sDialogUS_0x03BA @@
+What is this?<END>
+
+@@ sDialogUS_0x03BB @@
+What? I can't take this kindof stuff.<END>
+
+@@ sDialogUS_0x03BC @@
+What? Do you give it to me?<END>
+
+@@ sDialogUS_0x03BD @@
+Put things you want to sell on the table.<END>
+
+@@ sDialogUS_0x03BE @@
+Hi. It's getting colder whenit rains. In winter,grass   will freeze so you'd better<NEXT>
+weed them now.<END>
+
+@@ sDialogUS_0x03BF @@
+Ah,Mr. <VAR 4 28>                 You want to....well....to   Maria...anyway,good luck.<END>
+
+@@ sDialogUS_0x03C0 @@
+Is Maria doing OK?          Let me know if you are in   trouble.<END>
+
+@@ sDialogUS_0x03C1 @@
+Oh, Hello. Maria often talksabout you lately.<END>
+
+@@ sDialogUS_0x03C2 @@
+After all,a girl is happiestwhen she is with someone shelikes. Me?<NEXT>
+Of course,I'm happy.<END>
+
+@@ sDialogUS_0x03C3 @@
+Mr. ..., you come here oftenbut you don't want to have achat with me,do you?<NEXT>
+I see... maybe it's Ann?<END>
+
+@@ sDialogUS_0x03C4 @@
+How's Ann doing? Is she     working well as a good wife?I'm so very worried<NEXT>
+about her...<END>
+
+@@ sDialogUS_0x03C5 @@
+Nina likes sweets,such as   cakes and berries of        Fullmoon Plant.<NEXT>
+I like that one.<END>
+
+@@ sDialogUS_0x03C6 @@
+Ho-ho-ho,how's Nina doing?  Doesn't she bother you by   saying something selfish?<END>
+
+@@ sDialogUS_0x03C7 @@
+If you want a wife,choose a girl who likes children.    Girls like that can have<NEXT>
+many children.<END>
+
+@@ sDialogUS_0x03C8 @@
+What? You look a little     heavier,don't yout?         Ellen is just like me,<NEXT>
+she is not only a pretty    girl but also can cook very well.<END>
+
+@@ sDialogUS_0x03C9 @@
+Oh well,a lot of things     happen while you are alive. You just couldn't go<NEXT>
+through your life if you gotmad at everything.<END>
+
+@@ sDialogUS_0x03CA @@
+Hey you,you carry your jokesto far.<END>
+
+@@ sDialogUS_0x03CB @@
+When I think of people who  cheat and who are cheated,  I suppose being cheated<NEXT>
+is kind of happier than     cheating someone.           I do think so.<END>
+
+@@ sDialogUS_0x03CC @@
+The most important thing in life is probably having     someone you love beside you.<END>
+
+@@ sDialogUS_0x03CD @@
+Have you heard of Blue      Feather? Grandma never tellsme what it is,<NEXT>
+saying kids don't need to   know .<END>
+
+@@ sDialogUS_0x03CE @@
+Female psychology is        complicated.<END>
+
+@@ sDialogUS_0x03CF @@
+It's pretty hard to move    cows as you intend. Well,it takes time and guts to do<NEXT>
+it properly. I'm now the cowmaster. I want to show you  my  bell skills<END>
+
+@@ sDialogUS_0x03D0 @@
+I won't be dealing livestocktoday. They could become    sick outside on a day<NEXT>
+like today. Some other time.<END>
+
+@@ sDialogUS_0x03D1 @@
+When you see the sunset at  the top of the mountain,    don't you feel like it's<NEXT>
+saying something to you?<END>
+
+@@ sDialogUS_0x03D2 @@
+Eve is a kind girl. She     comes here often to be in mycompany.<NEXT>
+But she talks about nothing but you recently.<END>
+
+@@ sDialogUS_0x03D3 @@
+How's Eve doing? Oh,I see.  That's good. She easily     becomes lonely.<END>
+
+@@ sDialogUS_0x03D4 @@
+Sister Pink would scold you if you picked too much      flowers and plants.<END>
+
+@@ sDialogUS_0x03D5 @@
+A big house is necessary if you want to get married.<END>
+
+@@ sDialogUS_0x03D6 @@
+You can gather logs in      winter too.<END>
+
+@@ sDialogUS_0x03D7 @@
+Howdy! Why don't you have a juice party at home         sometimes?<END>
+
+@@ sDialogUS_0x03D8 @@
+You got married and work    harder. It's not a bad thingbut she gets in a bad<NEXT>
+mood when you come home     late.<END>
+
+@@ sDialogUS_0x03D9 @@
+Hey,happy man!!<END>
+
+@@ sDialogUS_0x03DA @@
+You are married to a cute   wife,huh? If you want kids, you have to move to<NEXT>
+a bigger house.<END>
+
+@@ sDialogUS_0x03DB @@
+Have you seen the rare berrythat grows at the top of themountain?<END>
+
+@@ sDialogUS_0x03DC @@
+The festival ends at 3:00 soyou must go by then.        The sky is colored red<NEXT>
+by the sun at 3:00.<END>
+
+@@ sDialogUS_0x03DD @@
+Our customers are different monthly. Some people have   never been here.<END>
+
+@@ sDialogUS_0x03DE @@
+Hi,how's Eve doing?         Business has been down sincewe lost our drawing card.<END>
+
+@@ sDialogUS_0x03DF @@
+Why don't adults cry? Is it because there is nothing to cry about,<NEXT>
+or is it because people     become stronger?<END>
+
+@@ sDialogUS_0x03E0 @@
+It's boring because Maria's gone.<END>
+
+@@ sDialogUS_0x03E1 @@
+The hardest thing to controlis love between man and     woman.<END>
+
+@@ sDialogUS_0x03E2 @@
+Yes,marriage is wonderful.  Should I bravely ask her to marry me?<END>
+
+@@ sDialogUS_0x03E3 @@
+You'd better go home to yourwife.<END>
+
+@@ sDialogUS_0x03E4 @@
+Don't make your wife cry.   Go home earlier.<END>
+
+@@ sDialogUS_0x03E5 @@
+Will you tell it to only    your dad secretly? Which    girl are you most<NEXT>
+interes ted in now?<NEXT>
+ Maria          Ann          Nina           Ellen        Eve<OPT 5>
+
+@@ sDialogUS_0x03E6 @@
+aha,Maria. She's at church on Saturdays and Sundays.   Flower is the best present.<NEXT>
+Man has to be active.       Come on. Hee-hee-hee.<END>
+
+@@ sDialogUS_0x03E7 @@
+Oh,Ann. She goes alone to   the spa on Star Night       Festival day.<NEXT>
+The Lucky day is Saturday.  She likes any presents      except mushrooms.<END>
+
+@@ sDialogUS_0x03E8 @@
+Hey,Nina. She goes picking  herbs on Saturdays and to   the mountains on Sunday.<NEXT>
+She likes sweets. Don't pickflowers for her.<END>
+
+@@ sDialogUS_0x03E9 @@
+Hey,your face is becoming   better looking.<END>
+
+@@ sDialogUS_0x03EA @@
+You'd better listen to the  old preacher.<END>
+
+@@ sDialogUS_0x03EB @@
+Your children can rely on meas well,no problem!<END>
+
+@@ sDialogUS_0x03EC @@
+This year is coming to a    close.<END>
+
+@@ sDialogUS_0x03ED @@
+We are happy to live in     health this whole year.<END>
+
+@@ sDialogUS_0x03EE @@
+You should pick a target fornext year.<END>
+
+@@ sDialogUS_0x03EF @@
+Spring is finally returning.We'll sell seeds again at   the shop so dropby.<END>
+
+@@ sDialogUS_0x03F0 @@
+Spring is New Year in this  area. 1st day of Spring is  New Year's Day.<END>
+
+@@ sDialogUS_0x03F1 @@
+I hope it will be a good    year for both of us.<END>
+
+@@ sDialogUS_0x03F2 @@
+The prize of the Egg        Festival is different every year.<NEXT>
+What will they give this    year?<END>
+
+@@ sDialogUS_0x03F3 @@
+The Egg Festival will be    held at the public square   tomorrow.<END>
+
+@@ sDialogUS_0x03F4 @@
+I will win again at the Egg Festival tomorrow.<END>
+
+@@ sDialogUS_0x03F5 @@
+My annual event at the      beginning of the year is to go see the first sunrise.<END>
+
+@@ sDialogUS_0x03F6 @@
+Hello! Was it a good year   for you? Try our best next  year too.<END>
+
+@@ sDialogUS_0x03F7 @@
+The fisherman will be back  here soon from a warm place.<END>
+
+@@ sDialogUS_0x03F8 @@
+This year is closing soon.  I wish to become better eachyear but...<NEXT>
+It's a hard thing to        achieve.<END>
+
+@@ sDialogUS_0x03F9 @@
+.....this year is ending.   I'll develop and complete a great machine next year.<END>
+
+@@ sDialogUS_0x03FA @@
+The smell of the dirt is    getting stronger as snow    melts. Spring is near.<END>
+
+@@ sDialogUS_0x03FB @@
+Snow gave us a hard time butwill miss seeing the snow.<END>
+
+@@ sDialogUS_0x03FC @@
+Now tonight is the last     night of the year. Let's    have a party. Cheers!<END>
+
+@@ sDialogUS_0x03FD @@
+This is the last juice to   drink seeing snow this year.Well,we can drink<NEXT>
+juice again seeing flowers  soon.<END>
+
+@@ sDialogUS_0x03FE @@
+I'd better go home and rest now. I'm going up to the    mountain top to see the<NEXT>
+first sunrise.<END>
+
+@@ sDialogUS_0x03FF @@
+Thank you very much for     everything this year. I'll  do my best next year too.<END>
+
+@@ sDialogUS_0x0400 @@
+Ah,Mr.<VAR 4 29>,is your field andmeadow all right?<END>
+
+@@ sDialogUS_0x0401 @@
+It's important for a human  to overcome difficulties.<END>
+
+@@ sDialogUS_0x0402 @@
+Such a hard time you had!   But experience teaches you alot.<END>
+
+@@ sDialogUS_0x0403 @@
+Vitality is important for   men to work outside.<END>
+
+@@ sDialogUS_0x0404 @@
+The shop is open at 5:00 so please come.<END>
+
+@@ sDialogUS_0x0405 @@
+Everybody will come to      church to pray tomorrow.<END>
+
+@@ sDialogUS_0x0406 @@
+I'll do the first           fortune-telling at the      mountain top.<END>
+
+@@ sDialogUS_0x0407 @@
+winter is a good time to be friends with livestock.     Well,with girls too.<END>
+
+@@ sDialogUS_0x0408 @@
+There's not a lot of thing  to eat in the mountains in  winter so all the animals<NEXT>
+are in desperate to survive.<END>
+
+@@ sDialogUS_0x0409 @@
+You need lots of wood in    winter. Chop plenty of wood before the winter.<END>
+
+@@ sDialogUS_0x040A @@
+Umm,I can't get out when    you are there. ....You closeyou eyes so get out first?<NEXT>
+Liar. ??????<END>
+
+@@ sDialogUS_0x040B @@
+Not many people come here.  I wonder why.<END>
+
+@@ sDialogUS_0x040C @@
+A very little light from    above reaches the ground.   Those herbs over there<NEXT>
+lives only with it.<END>
+
+@@ sDialogUS_0x040D @@
+Nina's dream is to live     surrounded by flowers.<END>
+
+@@ sDialogUS_0x040E @@
+Not just flowers,I love themall like weeds and     vegetable.<NEXT>
+I want to do garden forever.<END>
+
+@@ sDialogUS_0x040F @@
+I love church because it    seems to wash my mind.<END>
+
+@@ sDialogUS_0x0410 @@
+Please do your best  work.<END>
+
+@@ sDialogUS_0x0411 @@
+Are you all right? I feel   ease knowing no one was     hurt.<NEXT>
+But... that makes us feel   the fear of the nature.<END>
+
+@@ sDialogUS_0x0412 @@
+Hey,why don't you surprise  us by saying something      decent.<END>
+
+@@ sDialogUS_0x0413 @@
+I was terrified. It was my  first earthquake.<END>
+
+@@ sDialogUS_0x0414 @@
+Did you see the rock up     there collapsed?<END>
+
+@@ sDialogUS_0x0415 @@
+I've heard that there is a  mysterious spring in this   mountain.<NEXT>
+It is......I don't remember the place.<END>
+
+@@ sDialogUS_0x0416 @@
+I don't like winter because it feels kind of lonely.<END>
+
+@@ sDialogUS_0x0417 @@
+Because of the hurricane,   there's a leak in the roof. They are fixing it now.<END>
+
+@@ sDialogUS_0x0418 @@
+Uum,I want an egg.<END>
+
+@@ sDialogUS_0x0419 @@
+sob...I won't ask you any   more. You idiot!<END>
+
+@@ sDialogUS_0x041A @@
+Thank you. This is...the    money I saved. Bye.<END>
+
+@@ sDialogUS_0x041B @@
+I want an egg. I want just  one egg.,so please!<END>
+
+@@ sDialogUS_0x041C @@
+"Stable"<END>
+
+@@ sDialogUS_0x041D @@
+Celebration of <VAR 4 30>'s       birthday. It's been a year  now. Time goes too fast.<END>
+
+@@ sDialogUS_0x041E @@
+Wow,cake                   <VAR 4 31>'s birthday,isn't it?<END>
+
+@@ sDialogUS_0x041F @@
+It's warm enough now. What anice day.<END>
+
+@@ sDialogUS_0x0420 @@
+Various disasters can happenin summer so you better     watch the weather<NEXT>
+forecast every day.<END>
+
+@@ sDialogUS_0x0421 @@
+It's autumn...the sky is    high.<END>
+
+@@ sDialogUS_0x0422 @@
+I hope I'll be able to cook better step by step.        ......please be patient.<END>
+
+@@ sDialogUS_0x0423 @@
+I wish I had had trained a  little to be a wife.<END>
+
+@@ sDialogUS_0x0424 @@
+It's spring! Spring!        Let's plant seeds!<END>
+
+@@ sDialogUS_0x0425 @@
+Morning. It's so nice and   bright today.<END>
+
+@@ sDialogUS_0x0426 @@
+I hear wild dogs sometimes  come around here. It's      dangerous to keep fences<NEXT>
+broken.<END>
+
+@@ sDialogUS_0x0427 @@
+When it rains, we have to   put <VAR 4 32> inside the house.<END>
+
+@@ sDialogUS_0x0428 @@
+Darling, please take        <VAR 4 33> or <VAR 4 34>                for a walk sometimes.<END>
+
+@@ sDialogUS_0x0429 @@
+I want to ride on <VAR 4 35>.<END>
+
+@@ sDialogUS_0x042A @@
+Ah,things like temparature  of this place make it       suitable for making<NEXT>
+berry juice.<END>
+
+@@ sDialogUS_0x042B @@
+This one is wild grape      juice. This is bayberry,    and this is cowberry.<NEXT>
+My uncle gave them to me.   I want to share them with   other people if possible.<END>
+
+@@ sDialogUS_0x042C @@
+This is the one I made in   spring. We can drink it     soon.<END>
+
+@@ sDialogUS_0x042D @@
+I won't play with machines  for the time being.         I'm going to stay at home.<END>
+
+@@ sDialogUS_0x042E @@
+It snows a lot so those     fences are often broken.<END>
+
+@@ sDialogUS_0x042F @@
+I hope spring will come     soon.<END>
+
+@@ sDialogUS_0x0430 @@
+We are not busy working so Iwant to gather people here  to have a party.<END>
+
+@@ sDialogUS_0x0431 @@
+Say,the sound of burning    wood and the smell of the   smoke make you nostalgic,<NEXT>
+don't they?<END>
+
+@@ sDialogUS_0x0432 @@
+All the grass on the ground is gone. It looks lonesome.<END>
+
+@@ sDialogUS_0x0433 @@
+Hey,it's just hit my mind   but there are as many peopleas there are stars,right?<NEXT>
+So the probability of       meeting a certain person is basically one out of<NEXT>
+millions. So I really thank God for having you at that  ranch.<END>
+
+@@ sDialogUS_0x0434 @@
+Will those stars still shinewhen we become really old?<END>
+
+@@ sDialogUS_0x0435 @@
+Good evening. If.. if you   are interested,won't you go see the stars with<NEXT>
+me after this?<END>
+
+@@ sDialogUS_0x0436 @@
+May everybody be happy and  may you be fine all the     time...<NEXT>
+OK,let's go home after      seeing those stars as we do every year.<END>
+
+@@ sDialogUS_0x0437 @@
+I'm glad that you are here. Now let's have a toast!     I want to spend time with<NEXT>
+you next year too if        possible.<END>
+
+@@ sDialogUS_0x0438 @@
+HoneyAh,you are late. We are     having a wonderful time.    Come and join us.<END>
+
+@@ sDialogUS_0x0439 @@
+.........................HeyI look forward to the       shooting star every year<NEXT>
+but with you I feel much    happier.<END>
+
+@@ sDialogUS_0x043A @@
+.......Next year,the year   after that......may I be    able to see stars with<NEXT>
+you like this.<END>
+
+@@ sDialogUS_0x043B @@
+......Say,we don't often seesomeone late at night like  this,especially<NEXT>
+at a place like here....... Not like me but I'm kind of nervous....<NEXT>
+.......Hey,are you          listening to me?<END>
+
+@@ sDialogUS_0x043C @@
+hmmm,it feels good. This is the best spot to see stars.<END>
+
+@@ sDialogUS_0x043D @@
+Thank you but I can't answeryou right now. If it's      sunny,I'll be waiting<NEXT>
+for you at the church at    noon on Saturday.<END>
