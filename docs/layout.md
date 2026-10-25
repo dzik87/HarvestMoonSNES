@@ -23,6 +23,8 @@ The `.bin` files under `assets/gfx/{tiles,sprites,characters}/` (banks $88-$A6) 
 (`assets/gfx/png/`) and name-table text (`assets/gfx/tilemaps/`), converted by `tools/gfx/pngsync.py`; CI verifies they
 reproduce the `.bin` files bit-exactly. Palettes ($A8-$A9: `assets/gfx/palettes/`) and fonts (`assets/fonts/`) have their own
 PNG/JSON sources. See `docs/formats/graphics-png.md`.
+The object animation frames assembled from the sprite banks (`assets/gfx/png/sprites_assembled/`) are derived output of
+`tools/objects/spriteexport.py` (`docs/formats/sprite-assembly.md`); CI checks them against the object data.
 
 ## Code modules
 

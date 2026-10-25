@@ -1,0 +1,23 @@
+{
+  "object": 708,
+  "bank": "$87",
+  "list": "$8787D2",
+  "lists": [
+    {
+      "id": 0,
+      "steps": [
+        {"step": 0, "frame": "$87A1BD", "timer": 255, "image": 0, "png": "l0_f00.png"}
+      ]
+    }
+  ],
+  "images": [
+    {"png": "l0_f00.png", "size": [16, 32], "origin": [8, 25]}
+  ],
+  "frames": [
+    {"addr": "$87A1BD", "image": 0, "png": "l0_f00.png", "origin": [8, 25], "size": [16, 32],
+      "components": [
+        {"tile": 2176, "x": -8, "y": -25, "attr": 0, "sheet": "Sprites_908000", "sx": 0, "sy": 256, "palette": 0, "hflip": false, "vflip": false},
+        {"tile": 2184, "x": -8, "y": -9, "attr": 0, "sheet": "Sprites_908000", "sx": 0, "sy": 272, "palette": 0, "hflip": false, "vflip": false}
+      ]}
+  ]
+}

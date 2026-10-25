@@ -1,0 +1,54 @@
+{
+  "object": 38,
+  "bank": "$86",
+  "list": "$86876A",
+  "lists": [
+    {
+      "id": 0,
+      "steps": [
+        {"step": 0, "frame": "$86A88C", "timer": 16, "image": 0, "png": "l0_f00.png"},
+        {"step": 1, "frame": "$86A8AB", "timer": 16, "image": 1, "png": "l0_f01.png"},
+        {"step": 2, "frame": "$86A8CA", "timer": 16, "image": 2, "png": "l0_f02.png"},
+        {"step": 3, "frame": "$86A88C", "timer": 16, "image": 0, "png": "l0_f00.png"},
+        {"step": 4, "frame": "$86A8AB", "timer": 16, "image": 1, "png": "l0_f01.png"},
+        {"step": 5, "frame": "$86A8CA", "timer": 16, "image": 2, "png": "l0_f02.png"},
+        {"step": 6, "frame": "$86A88C", "timer": 16, "image": 0, "png": "l0_f00.png"},
+        {"step": 7, "frame": "$86A88C", "timer": 255, "image": 0, "png": "l0_f00.png"}
+      ]
+    }
+  ],
+  "images": [
+    {"png": "l0_f00.png", "size": [37, 56], "origin": [13, 50]},
+    {"png": "l0_f01.png", "size": [36, 58], "origin": [12, 52]},
+    {"png": "l0_f02.png", "size": [35, 60], "origin": [11, 54]}
+  ],
+  "frames": [
+    {"addr": "$86A88C", "image": 0, "png": "l0_f00.png", "origin": [13, 50], "size": [37, 56],
+      "components": [
+        {"tile": 150, "x": -8, "y": -10, "attr": 4, "sheet": "Sprites_888000", "sx": 96, "sy": 288, "palette": 4, "hflip": false, "vflip": false},
+        {"tile": 142, "x": -8, "y": -26, "attr": 4, "sheet": "Sprites_888000", "sx": 96, "sy": 272, "palette": 4, "hflip": false, "vflip": false},
+        {"tile": 144, "x": 8, "y": -18, "attr": 4, "sheet": "Sprites_888000", "sx": 0, "sy": 288, "palette": 4, "hflip": false, "vflip": false},
+        {"tile": 156, "x": -13, "y": -34, "attr": 6, "sheet": "Sprites_888000", "sx": 64, "sy": 304, "palette": 6, "hflip": false, "vflip": false},
+        {"tile": 157, "x": 0, "y": -42, "attr": 6, "sheet": "Sprites_888000", "sx": 80, "sy": 304, "palette": 6, "hflip": false, "vflip": false},
+        {"tile": 158, "x": -8, "y": -50, "attr": 6, "sheet": "Sprites_888000", "sx": 96, "sy": 304, "palette": 6, "hflip": false, "vflip": false}
+      ]},
+    {"addr": "$86A8AB", "image": 1, "png": "l0_f01.png", "origin": [12, 52], "size": [36, 58],
+      "components": [
+        {"tile": 150, "x": -8, "y": -10, "attr": 4, "sheet": "Sprites_888000", "sx": 96, "sy": 288, "palette": 4, "hflip": false, "vflip": false},
+        {"tile": 142, "x": -8, "y": -26, "attr": 4, "sheet": "Sprites_888000", "sx": 96, "sy": 272, "palette": 4, "hflip": false, "vflip": false},
+        {"tile": 144, "x": 8, "y": -18, "attr": 4, "sheet": "Sprites_888000", "sx": 0, "sy": 288, "palette": 4, "hflip": false, "vflip": false},
+        {"tile": 157, "x": -10, "y": -36, "attr": 6, "sheet": "Sprites_888000", "sx": 80, "sy": 304, "palette": 6, "hflip": false, "vflip": false},
+        {"tile": 158, "x": -1, "y": -46, "attr": 6, "sheet": "Sprites_888000", "sx": 96, "sy": 304, "palette": 6, "hflip": false, "vflip": false},
+        {"tile": 156, "x": -12, "y": -52, "attr": 6, "sheet": "Sprites_888000", "sx": 64, "sy": 304, "palette": 6, "hflip": false, "vflip": false}
+      ]},
+    {"addr": "$86A8CA", "image": 2, "png": "l0_f02.png", "origin": [11, 54], "size": [35, 60],
+      "components": [
+        {"tile": 150, "x": -8, "y": -10, "attr": 4, "sheet": "Sprites_888000", "sx": 96, "sy": 288, "palette": 4, "hflip": false, "vflip": false},
+        {"tile": 142, "x": -8, "y": -26, "attr": 4, "sheet": "Sprites_888000", "sx": 96, "sy": 272, "palette": 4, "hflip": false, "vflip": false},
+        {"tile": 144, "x": 8, "y": -18, "attr": 4, "sheet": "Sprites_888000", "sx": 0, "sy": 288, "palette": 4, "hflip": false, "vflip": false},
+        {"tile": 158, "x": -11, "y": -37, "attr": 6, "sheet": "Sprites_888000", "sx": 96, "sy": 304, "palette": 6, "hflip": false, "vflip": false},
+        {"tile": 156, "x": 0, "y": -46, "attr": 6, "sheet": "Sprites_888000", "sx": 64, "sy": 304, "palette": 6, "hflip": false, "vflip": false},
+        {"tile": 157, "x": -8, "y": -54, "attr": 6, "sheet": "Sprites_888000", "sx": 80, "sy": 304, "palette": 6, "hflip": false, "vflip": false}
+      ]}
+  ]
+}

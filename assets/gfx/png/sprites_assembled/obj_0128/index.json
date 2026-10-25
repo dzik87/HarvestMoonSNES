@@ -1,0 +1,29 @@
+{
+  "object": 296,
+  "bank": "$86",
+  "list": "$869649",
+  "lists": [
+    {
+      "id": 0,
+      "steps": [
+        {"step": 0, "frame": "$86C8D0", "timer": 12, "image": 0, "png": "l0_f00.png"},
+        {"step": 1, "frame": "$86C8FA", "timer": 4, "image": 1, "png": "l0_f01.png"},
+        {"step": 2, "frame": "$86C8FA", "timer": 255, "image": 1, "png": "l0_f01.png"}
+      ]
+    }
+  ],
+  "images": [
+    {"png": "l0_f00.png", "size": [16, 16], "origin": [8, 28]},
+    {"png": "l0_f01.png", "size": [16, 16], "origin": [26, 21]}
+  ],
+  "frames": [
+    {"addr": "$86C8D0", "image": 0, "png": "l0_f00.png", "origin": [8, 28], "size": [16, 16],
+      "components": [
+        {"tile": 1180, "x": -8, "y": -28, "attr": 7, "sheet": "Sprites_8C8000", "sx": 64, "sy": 304, "palette": 7, "hflip": false, "vflip": false}
+      ]},
+    {"addr": "$86C8FA", "image": 1, "png": "l0_f01.png", "origin": [26, 21], "size": [16, 16],
+      "components": [
+        {"tile": 1180, "x": -26, "y": -21, "attr": 7, "sheet": "Sprites_8C8000", "sx": 64, "sy": 304, "palette": 7, "hflip": false, "vflip": false}
+      ]}
+  ]
+}

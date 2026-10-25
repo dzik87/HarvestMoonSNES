@@ -1,0 +1,41 @@
+{
+  "object": 430,
+  "bank": "$86",
+  "list": "$869D85",
+  "lists": [
+    {
+      "id": 0,
+      "steps": [
+        {"step": 0, "frame": "$86D2D2", "timer": 22, "image": 0, "png": "l0_f00.png"},
+        {"step": 1, "frame": "$86D2C2", "timer": 22, "image": 1, "png": "l0_f01.png"},
+        {"step": 2, "frame": "$86D2E2", "timer": 22, "image": 2, "png": "l0_f02.png"},
+        {"step": 3, "frame": "$86D2C2", "timer": 22, "image": 1, "png": "l0_f01.png"}
+      ]
+    }
+  ],
+  "images": [
+    {"png": "l0_f00.png", "size": [32, 32], "origin": [8, 23]},
+    {"png": "l0_f01.png", "size": [32, 32], "origin": [8, 24]},
+    {"png": "l0_f02.png", "size": [32, 32], "origin": [8, 23]}
+  ],
+  "frames": [
+    {"addr": "$86D2D2", "image": 0, "png": "l0_f00.png", "origin": [8, 23], "size": [32, 32],
+      "components": [
+        {"tile": 1417, "x": -8, "y": -7, "attr": 5, "sheet": "Sprites_8D8000", "sx": 16, "sy": 272, "palette": 5, "hflip": false, "vflip": false},
+        {"tile": 1409, "x": -8, "y": -23, "attr": 5, "sheet": "Sprites_8D8000", "sx": 16, "sy": 256, "palette": 5, "hflip": false, "vflip": false},
+        {"tile": 1411, "x": 8, "y": -14, "attr": 5, "sheet": "Sprites_8D8000", "sx": 48, "sy": 256, "palette": 5, "hflip": false, "vflip": false}
+      ]},
+    {"addr": "$86D2C2", "image": 1, "png": "l0_f01.png", "origin": [8, 24], "size": [32, 32],
+      "components": [
+        {"tile": 1416, "x": -8, "y": -8, "attr": 5, "sheet": "Sprites_8D8000", "sx": 0, "sy": 272, "palette": 5, "hflip": false, "vflip": false},
+        {"tile": 1408, "x": -8, "y": -24, "attr": 5, "sheet": "Sprites_8D8000", "sx": 0, "sy": 256, "palette": 5, "hflip": false, "vflip": false},
+        {"tile": 1411, "x": 8, "y": -16, "attr": 5, "sheet": "Sprites_8D8000", "sx": 48, "sy": 256, "palette": 5, "hflip": false, "vflip": false}
+      ]},
+    {"addr": "$86D2E2", "image": 2, "png": "l0_f02.png", "origin": [8, 23], "size": [32, 32],
+      "components": [
+        {"tile": 1418, "x": -8, "y": -7, "attr": 5, "sheet": "Sprites_8D8000", "sx": 32, "sy": 272, "palette": 5, "hflip": false, "vflip": false},
+        {"tile": 1410, "x": -8, "y": -23, "attr": 5, "sheet": "Sprites_8D8000", "sx": 32, "sy": 256, "palette": 5, "hflip": false, "vflip": false},
+        {"tile": 1411, "x": 8, "y": -15, "attr": 5, "sheet": "Sprites_8D8000", "sx": 48, "sy": 256, "palette": 5, "hflip": false, "vflip": false}
+      ]}
+  ]
+}
