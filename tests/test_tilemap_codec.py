@@ -11,17 +11,10 @@ import tilemap_codec as tc  # noqa: E402
 # Data files that contain sCompressed* labels.
 GFX_GLOB = os.path.join(ROOT, 'src', 'data', 'gfx', '*', '*.asm')
 
-# Blobs that are followed (inside the same label span) by further data.
-# label -> list of (offset, description). Each hidden blob must decompress and
-# the chain must end exactly at the end of the label span (or in zero padding).
-HIDDEN = {
-    'sCompressedCharactermap_A5C955': 'second blob at +432 = $A5CB05 (dialog box GFX)',
-    'sCompressedTilemap_9FC04C': 'second blob at +5262 = $9FD4DA (unlabeled)',
-}
 # Label span continues with non-compressed data after the blob (not a blob).
 TRAILING_DATA = {'sCompressedCharactermap_A69996'}
-# Last 2 bytes of the blob sit under the following Padding_ label.
-SPILL = {'sCompressedTilemap_99DCBD': 2}
+HIDDEN = {}
+SPILL = {}
 
 VALID_SIZES = {0x800, 0x1000, 0x1800, 0x2000, 0x8000}
 

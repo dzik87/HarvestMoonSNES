@@ -56,6 +56,9 @@ sCompressedCharactermap_A5C4CD:
 sCompressedCharactermap_A5C955:
     incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A5C955.bin"
 
+sCompressedCharactermap_A5CB05:
+    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A5CB05.bin"
+
 sCompressedCharactermap_A5CD88:
     incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A5CD88.bin"
 

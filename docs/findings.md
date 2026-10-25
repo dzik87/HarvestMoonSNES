@@ -62,7 +62,6 @@ Label names refer to the current sources; see `docs/naming/*.csv` for old -> new
 
 ## Graphics compression (banks $92-$A0, $A4-$A6)
 - Okumura-style LZSS (2048-byte ring, matches 3..34 bytes), 4-byte header; see `docs/formats/tilemap-compression.md`.
-- `tools/gfx/tilemap_codec.py` decompresses and re-encodes all 135 labelled blobs byte-for-byte (`tests/test_tilemap_codec.py`).
-- Data layout issues in the disassembly: the last 2 bytes of `sCompressedTilemap_99DCBD` sit under `Padding_990000`;
-  blobs at $A5CB05 (dialog box graphics, 4096 bytes) and $9FD4DA (8192 bytes) have no label of their own;
-  `sCompressedCharactermap_A69996` is followed by ~4 KB of uncompressed data.
+- `tools/gfx/tilemap_codec.py` decompresses and re-encodes all 137 labelled blobs byte-for-byte (`tests/test_tilemap_codec.py`).
+- Former layout issues are fixed: the tail of `sCompressedTilemap_99DCBD` was moved out of `Padding_990000`, and the blobs at $A5CB05 and $9FD4DA have their own labels.
+- Remaining: `sCompressedCharactermap_A69996` is followed by ~4 KB of uncompressed data.

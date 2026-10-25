@@ -14,6 +14,9 @@ sCompressedTilemap_9FAA75:
 sCompressedTilemap_9FC04C:
     incbin "../../../../assets/gfx/tiles/sCompressedTilemap_9FC04C.bin"
 
+sCompressedTilemap_9FD4DA:
+    incbin "../../../../assets/gfx/tiles/sCompressedTilemap_9FD4DA.bin"
+
 sCompressedTilemap_9FEF97:
     incbin "../../../../assets/gfx/tiles/sCompressedTilemap_9FEF97.bin"
 
