@@ -440,6 +440,11 @@ def build():
         pal_id, slot = day_palette(areas[pa]["bg_palettes"])
         overlay = pa in (0x57, 0x58, 0x59, 0x5A)
         subs = b["areas"][pa]["subs"]
+        if not overlay:                      # all areas that show the blob with the same palette decide the dominant sub-palette
+            subs = Counter()
+            for a in with_use:
+                if day_palette(areas[a]["bg_palettes"])[0] == pal_id:
+                    subs.update(b["areas"][a]["subs"])
         total = sum(subs.values())
         if overlay:
             pal_id, slot = day_palette(areas[0]["bg_palettes"])

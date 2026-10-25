@@ -18,5 +18,6 @@
     "sub": 0
   },
   "palette_confidence": "medium",
-  "palette_note": "weather overlay: drawn with sub-palette 0 of whichever outdoor map is active (FARMSPRING day shown); only colours 12-15 are used and the weather code rewrites them by palette-animation scripts ($8097A8-$809853)"
+  "palette_note": "weather overlay: drawn with sub-palette 0 of whichever outdoor map is active (FARMSPRING day shown); only colours 12-15 are used and the weather code rewrites them by palette-animation scripts ($8097A8-$809853)",
+  "tiles_row_guessed": 224
 }

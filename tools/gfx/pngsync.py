@@ -628,6 +628,12 @@ def cmd_check(a, root=ROOT):
                 if p.is_file() and p not in want:
                     print(f"FAIL orphan composed image: {p.relative_to(root)}")
                     bad += 1
+        for b in sel:
+            if b.kind == "tiles":
+                m = read_meta(b)
+                if m.get("tiles_row_guessed") == m["raw_size"] // 32:
+                    print(f"NOTE {b.label}: no name table shows this blob, palette row {m.get('palette', {}).get('sub', 0)} is a guess "
+                          f"(confidence {m.get('palette_confidence')})")
         # name table width sanity: a table laid out with the wrong row length shows unrelated tiles side by side
         own = None if region == "us" else {x.label for x in sel if x.kind == "tilemaps"}
         sheets = composed.decode_sheets(ctx, composed.load_sheets(ctx))
@@ -875,8 +881,20 @@ def render_built_sheet(b, scale=1, grid=False):
     from PIL import Image
     meta = read_meta(b)
     w, h, pix = decode_sheet(source_payload(b, meta), 4, 16)
+    if b.kind == "tiles" and meta.get("palette"):
+        import composed
+        ctx = composed.get_ctx(b.root, getattr(b, "region", "us"))
+        rws, _ = composed.sheet_rows(ctx, b.label)          # every tile in the palette row of the name tables that show it
+        pix = bytearray(pix)
+        for t, r in enumerate(rws):
+            for y in range(8):
+                o = ((t // 16) * 8 + y) * w + (t % 16) * 8
+                pix[o:o + 8] = bytes(v | r << 4 for v in pix[o:o + 8])
+        pix = bytes(pix)
+        pal = view_palette128(meta["palette"]["id"], b.root)
+    else:
+        pal = load_view_palette(meta["palette"], 4, b.root) if meta.get("palette") else grayscale_palette(4)
     img = Image.frombytes("P", (w, h), pix)
-    pal = load_view_palette(meta["palette"], 4, b.root) if meta.get("palette") else grayscale_palette(4)
     img.putpalette([c for rgb in pal for c in rgb])
     rgba = img.convert("RGBA")
     if b.kind == "sprites" and meta.get("palette"):

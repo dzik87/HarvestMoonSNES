@@ -23,5 +23,12 @@
     1,
     2,
     5
-  ]
+  ],
+  "tile_rows_multi": {
+    "0": [
+      5,
+      4
+    ]
+  },
+  "tiles_row_guessed": 144
 }

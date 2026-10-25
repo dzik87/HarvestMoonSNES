@@ -109,6 +109,35 @@ tile-set VRAM address, which reproduces the farm map exactly) and every tile she
 * Name tables: `.map.txt` has `columns` 16-bit hex words per row (32, 64 or 128, see "Name table width"), a blank line after every
   32 rows, no comments. Entry = tile 0-9, palette 10-12, priority 13, H flip 14, V flip 15.
 
+### Palette rows of the tile sheets
+
+A tile blob has no palette of its own: **every name table cell picks its own CGRAM row** (entry bits 10-12), so the same blob can look different in
+different maps (`sCompressedTiles_95D6E2`, the house interior set, is shown with rows 1, 2 and 3 by `A4945C`, `A49745` and `A49B84`). The remainder sheets
+(`assets/gfx/png/tiles/*.png`) and `pngsync.py sheet` therefore colour **every tile with the row it is shown with in the name tables** (most used row;
+the PNG has the 128 colours of the blob's palette `palette.id`, pixel = row << 4 | colour; the build ignores bits 4-6, the colour index is what counts).
+Sidecar keys: `tile_rows_multi` = tiles that are shown with more than one row (`{"tile": [rows, most used first]}`), `tiles_row_guessed` = number
+of tiles no name table shows (these use `palette.sub`, a guess; `palette_confidence` says how good, `low` = no tile is referenced). Blobs whose
+rows are all guessed (no static name table references them): `sCompressedTiles_9FD4DA` (Japanese title logo left in the US ROM),
+`A09232`, `A0AB1E`, `A0E682` (cave tile sets used by name tables that the game writes at run time); they are drawn with `palette.sub` and
+`pngsync.py check` prints a NOTE for each.  The primary `sub` of a blob is the row with the most cells over *all* areas that show it with the same palette
+(`palette_map.py`); `95D6E2` therefore moved from sub 2 (house 1 only, 6 cells, medium) to **sub 1 (36 of 54 cells, high)**; rows 1/2 are both used,
+the per-tile rows are exact.
+
+### Seasons
+
+Seasonal variants are different tile blobs for the same name table, so each combination gets its own screen image (`screens/<table>__<map>.png`);
+maps whose blobs are the same share one image (spring / summer of the farm, road and summit use the same blobs):
+
+| Map | Spring | Summer | Fall | Winter |
+|---|---|---|---|---|
+| Farm (`A18000`) | `92D3AB 938000 939E8E` | same as spring | `9282CB 929D10 92BB03` | `93B736 93D049 93E12B` |
+| Town (`A38000`) | `97B45F 998000 999A74` | `97B45F 97CD20 97E7A2` | `97B45F 988000 989A52` | `99DCBD 9A8000 9A9921` |
+| Mountain (`A28000`) | `9DE7CE 9E8000 9D8000` | `9CCBA3 9CE37D 9D8000` | `9D991C 9DB15E 9DCE31` | `9E9EDC 9EB75D 9ED208` |
+| Road (`A4CFAB`) | `98CC6B` | same | same | `98E41D` |
+| Summit (`A5B943`, `A5AD17`) | `9BB76D 9C8000` | same | same | `9BCF8F 9C965F` |
+
+Blob names are `sCompressedTiles_<id>` (sets are loaded at VRAM $2000 / $3000 / $4000 in this order).
+
 ### Name table width
 
 A name table is a flat list of 16-bit entries; the row length (`columns` in the sidecar) decides how it is drawn into the `screens/` image

@@ -18,9 +18,10 @@
     "sub": 0
   },
   "palette_confidence": "high",
-  "palette_note": "sub-palette 0 covers 2948 of 3314 name-table cells; per-tile sub-palettes 0/1 (tile_subs)",
+  "palette_note": "sub-palette 0 covers 5988 of 6390 name-table cells; per-tile sub-palettes 0/1 (tile_subs)",
   "palette_subs_used": [
     0,
     1
-  ]
+  ],
+  "tiles_row_guessed": 48
 }

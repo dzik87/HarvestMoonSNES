@@ -14,5 +14,6 @@
     "sub": 7
   },
   "palette_confidence": "low",
-  "palette_note": "Japanese title logo (wooden board kanji) left in the US ROM; no map loads it. Title screen palette and the sub-palette that the US logo tiles of area $5C use are assumed"
+  "palette_note": "Japanese title logo (wooden board kanji) left in the US ROM; no map loads it. Title screen palette and the sub-palette that the US logo tiles of area $5C use are assumed",
+  "tiles_row_guessed": 256
 }

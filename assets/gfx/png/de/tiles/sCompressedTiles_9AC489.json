@@ -18,5 +18,28 @@
     "sub": 0
   },
   "palette_confidence": "high",
-  "palette_note": "sub-palette 0 covers 232 of 232 name-table cells"
+  "palette_note": "sub-palette 0 covers 232 of 232 name-table cells",
+  "tile_rows_multi": {
+    "38": [
+      1,
+      0
+    ],
+    "54": [
+      1,
+      0
+    ],
+    "57": [
+      1,
+      0
+    ],
+    "69": [
+      1,
+      0
+    ],
+    "85": [
+      1,
+      0
+    ]
+  },
+  "tiles_row_guessed": 4
 }

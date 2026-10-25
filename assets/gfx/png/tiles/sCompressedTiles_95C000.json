@@ -18,7 +18,7 @@
     "sub": 1
   },
   "palette_confidence": "high",
-  "palette_note": "sub-palette 1 covers 510 of 1018 name-table cells; per-tile sub-palettes 1/2/3 (tile_subs)",
+  "palette_note": "sub-palette 1 covers 2048 of 4042 name-table cells; per-tile sub-palettes 1/2/3 (tile_subs)",
   "palette_subs_used": [
     1,
     2,
@@ -30,5 +30,24 @@
       "sub": 2,
       "area_name": "HOUSE3"
     }
-  ]
+  ],
+  "tile_rows_multi": {
+    "88": [
+      1,
+      2
+    ],
+    "89": [
+      1,
+      2
+    ],
+    "104": [
+      1,
+      2
+    ],
+    "105": [
+      1,
+      2
+    ]
+  },
+  "tiles_row_guessed": 10
 }

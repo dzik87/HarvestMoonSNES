@@ -616,7 +616,7 @@ def remainder(ctx, label):
     w, h, pix = P.load_png(b.art)
     if (w, h) != (W, sheet_height(meta)):
         raise ValueError(f"{b.rel(b.art)}: PNG is {w}x{h}, expected {W}x{sheet_height(meta)} (dimensions are fixed)")
-    return pix
+    return pix.translate(LOW)                   # tile sheets: bits 4-6 = palette row of the tile (viewing aid, ignored)
 
 
 def build_sheet(ctx, label, claims):
@@ -692,6 +692,29 @@ def save_sprite_png(S, path, w, h, pix, flat):
     S.save_png(S.make_png(w, h, pix, flat), path)
 
 
+def tile_rows(ctx):
+    """{tile blob label: {tile number: [palette rows, most used first]}} from the name table cells of all screens (a tile is drawn with the
+    row of the cell that shows it: one blob can be shown with different rows by different tables)."""
+    from collections import Counter
+    cnt = {}
+    for scr in ctx.screens:
+        for w in scr.words:
+            t = scr.targets[w & 0x3FF]
+            if t is not None and t[0].startswith("sCompressedTiles_"):
+                cnt.setdefault(t[0], {}).setdefault(t[1], Counter())[(w >> 10) & 7] += 1
+    return {lab: {n: [r for r, _ in sorted(c.items(), key=lambda x: (-x[1], x[0]))] for n, c in d.items()} for lab, d in cnt.items()}
+
+
+def sheet_rows(ctx, label, rows=None):
+    """palette row per tile of a tile blob's sheet: (list of rows, number of tiles whose row is only guessed)."""
+    meta = ctx.meta(label)
+    guess = (meta.get("palette") or {}).get("sub", 0)
+    used = (rows if rows is not None else tile_rows(ctx)).get(label, {})
+    n = meta["raw_size"] // 32
+    out = [used[t][0] if t in used else guess for t in range(n)]
+    return out, sum(1 for t in range(n) if t not in used)
+
+
 def export_images(ctx, raws, remove_stale=True):
     """write screens, frames and remainder sheets for the given raw payloads ({label: raw})."""
     sheets = decode_sheets(ctx, raws)
@@ -717,12 +740,32 @@ def export_images(ctx, raws, remove_stale=True):
     claims = collect_claims(ctx, {k: v[:3] for k, v in imgs.items()})
     if claims.errors:
         raise AssertionError("export produced contradicting images:\n  " + "\n  ".join(claims.errors))
+    rows_all = tile_rows(ctx)
     for lab, b in ctx.blobs.items():
         meta = ctx.meta(lab)
         val = claims.val.get(lab)
         pix = sheets[lab]
         rem = bytes(pix) if val is None else bytes(0 if c != UNC else v for v, c in zip(pix, val))
-        pal = P.load_view_palette(meta["palette"], 4, ctx.root) if meta.get("palette") else P.grayscale_palette(4)
+        if b.kind == "tiles" and meta.get("palette"):
+            # game colours: pixel = (palette row of the tile) << 4 | colour, row from the name tables that show the tile
+            rws, guessed = sheet_rows(ctx, lab, rows_all)
+            tpr = W // 8
+            rem = bytearray(rem)
+            for t, r in enumerate(rws):
+                for y in range(8):
+                    o = ((t // tpr) * 8 + y) * W + (t % tpr) * 8
+                    rem[o:o + 8] = bytes(v | r << 4 for v in rem[o:o + 8])
+            rem = bytes(rem)
+            pal = P.view_palette128(meta["palette"]["id"], ctx.root)
+            multi = {str(t): r[:3] for t, r in sorted(rows_all.get(lab, {}).items()) if len(r) > 1}
+            meta.pop("tile_rows_multi", None)
+            meta.pop("tiles_row_guessed", None)
+            if multi:
+                meta["tile_rows_multi"] = multi
+            meta["tiles_row_guessed"] = guessed
+            P.write_meta(b, meta)
+        else:
+            pal = P.load_view_palette(meta["palette"], 4, ctx.root) if meta.get("palette") else P.grayscale_palette(4)
         P.save_png(b.art, W, sheet_height(meta), rem, pal, transparent0=(b.kind == "sprites" and "palette" in meta))
     return claims
 
