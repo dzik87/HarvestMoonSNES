@@ -102,76 +102,159 @@ def decompress(data, offset=0):
 
 
 # --------------------------------------------------------------------------
-# Encoder
+# Encoder (Okumura LZSS, N=2048, F=34, threshold 2)
 # --------------------------------------------------------------------------
+#
+# The original blobs were produced by Haruhiko Okumura's classic LZSS.C
+# (binary-search-tree match finder) with N=2048, F=34, THRESHOLD=2, ring buffer
+# pre-filled with $00 and initial write position N-F = $7DE. Reproducing its
+# tree-based tie-breaking makes compress() byte-exact for every blob in the ROM.
+
+_N = WINDOW_SIZE
+_F = MAX_MATCH
+_TH = MIN_MATCH - 1
+_NIL = _N
+
 
 def compress(data, header_word2=0):
-    """Encode `data` (1..65535 bytes, or exactly 65536) into the format.
+    """Encode `data` (1..65536 bytes) into the game's format.
 
-    Greedy longest-match LZSS using the same ring buffer model as the decoder.
-    This is a VALID encoder (decompress(compress(x))[0] == x) but it does NOT
-    reproduce the original game blobs byte for byte; the original compressed
-    blobs stay the source of truth in the repository.
+    Byte-exact with the original encoder: compress(decompress(blob)[0]) ==
+    blob[:consumed] for every blob in the game (header_word2 is always 0 there).
+    A length of exactly 65536 is stored as a size word of 0.
     """
     size = len(data)
     if size == 0 or size > 0x10000:
         raise ValueError("size must be in 1..65536")
-    hdr = bytes([size & 0xFF, (size >> 8) & 0xFF,
-                 header_word2 & 0xFF, (header_word2 >> 8) & 0xFF])
-    window = bytearray(WINDOW_SIZE)
-    wpos = WINDOW_START
-    items = []   # ('L', byte) or ('M', src, length)
-    i = 0
-    while i < size:
-        best_len, best_src = 0, 0
-        limit = min(MAX_MATCH, size - i)
-        if limit >= MIN_MATCH:
-            for s in range(WINDOW_SIZE):
-                # simulate the copy including overlap with freshly written data
-                tmp = window
-                w = wpos
-                ln = 0
-                sp = s
-                # copy-on-write view for overlap
-                saved = []
-                while ln < limit and tmp[sp] == data[i + ln]:
-                    saved.append((w, tmp[w]))
-                    tmp[w] = data[i + ln]
-                    w = (w + 1) & WINDOW_MASK
-                    sp = (sp + 1) & WINDOW_MASK
-                    ln += 1
-                for idx, old in reversed(saved):
-                    tmp[idx] = old
-                if ln > best_len:
-                    best_len, best_src = ln, s
-                    if ln == limit:
-                        break
-        if best_len >= MIN_MATCH:
-            items.append(('M', best_src, best_len))
-            for k in range(best_len):
-                window[wpos] = data[i + k]
-                wpos = (wpos + 1) & WINDOW_MASK
-            i += best_len
-        else:
-            items.append(('L', data[i]))
-            window[wpos] = data[i]
-            wpos = (wpos + 1) & WINDOW_MASK
-            i += 1
-    out = bytearray(hdr)
-    for g in range(0, len(items), 8):
-        group = items[g:g + 8]
-        flag = 0
-        body = bytearray()
-        for bit, it in enumerate(group):
-            if it[0] == 'L':
-                flag |= 1 << bit
-                body.append(it[1])
+    N, F, TH, NIL = _N, _F, _TH, _NIL
+    tb = [0] * (N + F - 1)
+    lson = [NIL] * (N + 1)
+    rson = [NIL] * (N + 257)
+    dad = [NIL] * (N + 1)
+    st = [0, 0]   # match_position, match_length
+
+    def ins(r):
+        cmp_ = 1
+        p = N + 1 + tb[r]
+        rson[r] = lson[r] = NIL
+        st[1] = 0
+        while True:
+            if cmp_ >= 0:
+                if rson[p] != NIL:
+                    p = rson[p]
+                else:
+                    rson[p] = r
+                    dad[r] = p
+                    return
             else:
-                _, s, ln = it
-                body.append(s & 0xFF)
-                body.append(((s >> 3) & 0xE0) | (ln - MIN_MATCH))
-        out.append(flag)
-        out += body
+                if lson[p] != NIL:
+                    p = lson[p]
+                else:
+                    lson[p] = r
+                    dad[r] = p
+                    return
+            i = 1
+            while i < F:
+                cmp_ = tb[r + i] - tb[p + i]
+                if cmp_ != 0:
+                    break
+                i += 1
+            if i > st[1]:
+                st[0] = p
+                st[1] = i
+                if i >= F:
+                    break
+        dad[r] = dad[p]
+        lson[r] = lson[p]
+        rson[r] = rson[p]
+        dad[lson[p]] = r
+        dad[rson[p]] = r
+        if rson[dad[p]] == p:
+            rson[dad[p]] = r
+        else:
+            lson[dad[p]] = r
+        dad[p] = NIL
+
+    def dele(p):
+        if dad[p] == NIL:
+            return
+        if rson[p] == NIL:
+            q = lson[p]
+        elif lson[p] == NIL:
+            q = rson[p]
+        else:
+            q = lson[p]
+            if rson[q] != NIL:
+                while rson[q] != NIL:
+                    q = rson[q]
+                rson[dad[q]] = lson[q]
+                dad[lson[q]] = dad[q]
+                lson[q] = lson[p]
+                dad[lson[p]] = q
+            rson[q] = rson[p]
+            dad[rson[p]] = q
+        dad[q] = dad[p]
+        if rson[dad[p]] == p:
+            rson[dad[p]] = q
+        else:
+            lson[dad[p]] = q
+        dad[p] = NIL
+
+    out = bytearray([size & 0xFF, (size >> 8) & 0xFF,
+                     header_word2 & 0xFF, (header_word2 >> 8) & 0xFF])
+    inp = 0
+    s = 0
+    r = N - F
+    ln = 0
+    while ln < F and inp < size:
+        tb[r + ln] = data[inp]
+        inp += 1
+        ln += 1
+    for i in range(1, F + 1):
+        ins(r - i)
+    ins(r)
+    code = bytearray([0])
+    mask = 1
+    while True:
+        if st[1] > ln:
+            st[1] = ln
+        if st[1] <= TH:
+            st[1] = 1
+            code[0] |= mask
+            code.append(tb[r])
+        else:
+            code.append(st[0] & 0xFF)
+            code.append(((st[0] >> 3) & 0xE0) | (st[1] - TH - 1))
+        mask <<= 1
+        if mask == 256:
+            out += code
+            code = bytearray([0])
+            mask = 1
+        last = st[1]
+        i = 0
+        while i < last and inp < size:
+            c = data[inp]
+            inp += 1
+            dele(s)
+            tb[s] = c
+            if s < F - 1:
+                tb[s + N] = c
+            s = (s + 1) & (N - 1)
+            r = (r + 1) & (N - 1)
+            ins(r)
+            i += 1
+        while i < last:
+            i += 1
+            dele(s)
+            s = (s + 1) & (N - 1)
+            r = (r + 1) & (N - 1)
+            ln -= 1
+            if ln:
+                ins(r)
+        if ln <= 0:
+            break
+    if len(code) > 1 or mask != 1:
+        out += code
     return bytes(out)
 
 
@@ -233,6 +316,7 @@ def main(argv):
     d.add_argument('--prefix', default='sCompressed',
                    help='only labels with this prefix (default sCompressed)')
     args = ap.parse_args(argv)
+    spans = parse_asm_blobs(args.asmfile)
     blobs = parse_asm_blobs(args.asmfile, tail=64)
     os.makedirs(args.outdir, exist_ok=True)
     count = 0
@@ -247,7 +331,7 @@ def main(argv):
         with open(os.path.join(args.outdir, label + '.bin'), 'wb') as f:
             f.write(out)
         print('%s: %d -> %d bytes (consumed %d)'
-              % (label, len(blob), len(out), used))
+              % (label, len(spans[label]), len(out), used))
         count += 1
     print('%d blob(s) written to %s' % (count, args.outdir))
     return 0

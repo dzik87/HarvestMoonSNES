@@ -58,3 +58,10 @@ Label names refer to the current sources; see `docs/naming/*.csv` for old -> new
 - `!PDIR_LEFT`/`!PDIR_RIGHT` ($02/$03) may be swapped relative to the actual input handling (to be confirmed).
 - `aGameObjectIndexOffsets` carries a "BUG should be $510" note in the source.
 - Three identical 16-entry `1<<n` word tables exist (`aEngineUnknown_83CA78`, `aUnusedTable_83E74D`, `Table_858C7F`).
+
+## Graphics compression (banks $92-$A0, $A4-$A6)
+- Okumura-style LZSS (2048-byte ring, matches 3..34 bytes), 4-byte header; see `docs/formats/tilemap-compression.md`.
+- `tools/gfx/tilemap_codec.py` decompresses and re-encodes all 135 labelled blobs byte-for-byte (`tests/test_tilemap_codec.py`).
+- Data layout issues in the disassembly: the last 2 bytes of `sCompressedTilemap_99DCBD` sit under `Padding_990000`;
+  blobs at $A5CB05 (dialog box graphics, 4096 bytes) and $9FD4DA (8192 bytes) have no label of their own;
+  `sCompressedCharactermap_A69996` is followed by ~4 KB of uncompressed data.

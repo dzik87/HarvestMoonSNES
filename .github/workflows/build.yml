@@ -55,6 +55,7 @@ jobs:
           pip install pillow
           python3 tools/gfx/palette.py check
           python3 tools/dialogs/dialog.py check
+          python3 tests/test_tilemap_codec.py
 
       - name: Build and verify (US)
         run: |
