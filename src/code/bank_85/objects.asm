@@ -1373,18 +1373,7 @@ fReturnWithPullA_858BCE:
     RTS                                                        ;858BCF|60      |      ;
  
  
-Table_858BD0:
-    dw $0001,$0004,$0010,$0040,$0100,$0400                     ;858BD0|        |      ;
-    dw $1000,$4000                                             ;858BDC|        |      ;
- 
-aGameObjectIndexOffsets:
-    dw $0000,$0024,$0048,$006C,$0090,$00B4                     ;858BE0|        |      ;
-    dw $00D8,$00FC,$0120,$0144,$0168,$018C                     ;858BEC|        |      ;
-    dw $01B0,$01D4,$01F8,$021C,$0240,$0264                     ;858BF8|        |      ;
-    dw $0288,$02AC,$02D0,$02F4,$0318,$033C                     ;858C04|        |      ;
-    dw $0360,$0384,$03A8,$03CC,$03F0,$0414                     ;858C10|        |      ;
-    dw $0438,$045C,$0480,$04A4,$04C8,$04EC                     ;858C1C|        |      ;
-    dw $0540,$0534,$0558,$057C                                 ;858C28|        |      ; BUG - should be $510
+    incsrc "../../../build/gen/blocks/game_object_offsets.asm"
  
 fObject_AcquireTileSlot:
     REP #$30                                                   ;858C30|C230    |      ;

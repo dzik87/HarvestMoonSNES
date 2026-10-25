@@ -1317,78 +1317,9 @@ fCore_StartTransfer:
 DMA_Channels_Flag_Table:
     db $01,$02,$04,$08,$10,$20,$40,$80                         ;808B3C|        |      ;
  
-Table_OBSEL_Presets:
-    db $60,$60,$60,$60,$60,$60,$03,$03,$03,$03,$63             ;808B44|        |      ;
- 
-Table_BGMODE_Presets:
-    db $09,$09,$09,$09,$09,$09,$09,$09,$09,$09,$09             ;808B4F|        |      ;
- 
-Table_BG1SC_Presets:
-    db $63,$63,$63,$63,$13,$13,$51,$51,$51,$51,$51             ;808B5A|        |      ;
- 
-Table_BG2SC_Presets:
-    db $72,$72,$72,$73,$63,$63,$59,$59,$59,$59,$59             ;808B65|        |      ;
- 
-Table_BG3SC_Presets:
-    db $7A,$7A,$7A,$7A,$7A,$7A,$09,$09,$0A,$0A,$09             ;808B70|        |      ;
- 
-Table_BG4SC_Presets:
-    db $7C,$7C,$7C,$7C,$7C,$7C,$70,$70,$70,$70,$70             ;808B7B|        |      ;
- 
-Table_BG12NBA_Presets:
-    db $22,$22,$22,$22,$22,$22,$11,$11,$11,$11,$11             ;808B86|        |      ;
- 
-Table_BG34NBA_Presets:
-    db $55,$55,$55,$55,$55,$22,$00,$00,$00,$00,$00             ;808B91|        |      ;
- 
-Table_TM_Presets:
-    db $15,$17,$17,$17,$17,$17,$13,$13,$13,$13,$15             ;808B9C|        |      ;
- 
-Table_TS_Presets:
-    db $02,$00,$00,$00,$00,$00,$04,$04,$04,$04,$00             ;808BA7|        |      ;
- 
-Table_TMW_Presets:
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00             ;808BB2|        |      ;
- 
-Table_TSW_Presets:
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00             ;808BBD|        |      ;
- 
-Table_CGWSEL_Presets:
-    db $02,$02,$02,$02,$02,$02,$00,$02,$02,$02,$00             ;808BC8|        |      ;
- 
-Table_CGADSUB_Presets:
-    db $73,$73,$73,$73,$73,$73,$00,$53,$13,$53,$00             ;808BD3|        |      ;
- 
-Table_SETINI_Presets:
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00             ;808BDE|        |      ;
- 
-Table_W12SEL_Presets:
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00             ;808BE9|        |      ;
- 
-Table_W34SEL_Presets:
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00             ;808BF4|        |      ;
- 
-Table_WOBJSEL_Presets:
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00             ;808BFF|        |      ;
- 
-Table_WH0_Presets:
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00             ;808C0A|        |      ;
- 
-Table_WH1_Presets:
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00             ;808C15|        |      ;
- 
-Table_WH2_Presets:
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00             ;808C20|        |      ;
- 
-Table_WH3_Presets:
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00             ;808C2B|        |      ;
- 
-Table_WBGLOG_Presets:
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00             ;808C36|        |      ;
- 
-Table_WOBJLOG_Presets:
-    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00             ;808C41|        |      ;
- 
+; Graphics presets Table_<REG>_Presets (generated from assets/gfx/presets.csv by tools/gfx/presets.py, docs/formats/data-tables.md)
+    incsrc "../../../build/gen/tables/gfx_presets.asm"
+
 fCore_InitializeScreenStatus:
     PHP                                                        ;808C4C|08      |      ;
     REP #$10                                                   ;808C4D|C210    |      ;

@@ -90,8 +90,7 @@ def clone_tree(tmp, drop_sources=False):
     shutil.copytree(ROOT / "assets/gfx", tmp / "assets/gfx", ignore=shutil.ignore_patterns("*.pal"))
     shutil.copytree(ROOT / "assets/objects", tmp / "assets/objects")
     (tmp / "src/code/bank_80").mkdir(parents=True)
-    for f in ("core.asm",):
-        shutil.copy(ROOT / "src/code/bank_80" / f, tmp / "src/code/bank_80" / f)
+    shutil.copy(ROOT / "assets/gfx/presets.csv", tmp / "assets/gfx/presets.csv")
     (tmp / "assets/areas").mkdir(parents=True)
     for f in ("areas.csv", "area_gfx.json"):
         shutil.copy(ROOT / "assets/areas" / f, tmp / "assets/areas" / f)

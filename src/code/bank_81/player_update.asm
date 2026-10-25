@@ -1,14 +1,6 @@
 ; Bank $81 module "player_update" - starts at $81D510
  
-aWeatherDialogId:
-    dw $0000,$0001,$0002,$0003,$0004,$0005                     ;81D510|        |      ; 0x0C * [n16 nSpring, n16 nSummer, n16 nFall, n16 nWinter]
-    dw $0006,$FFFF,$FFFF,$FFFF,$FFFF,$0007                     ;81D51C|        |      ;
-    dw $FFFF,$0008,$FFFF,$FFFF,$FFFF,$FFFF                     ;81D528|        |      ;
-    dw $FFFF,$0167,$0201,$FFFF,$FFFF,$FFFF                     ;81D534|        |      ;
-    dw $FFFF,$FFFF,$0237,$FFFF,$FFFF,$FFFF                     ;81D540|        |      ;
-    dw $FFFF,$028D,$FFFF,$FFFF,$FFFF,$02AC                     ;81D54C|        |      ;
-    dw $FFFF,$FFFF,$FFFF,$00FF,$FFFF,$FFFF                     ;81D558|        |      ;
-    dw $0273,$FFFF,$FFFF,$0049,$FFFF,$FFFF                     ;81D564|        |      ;
+    incsrc "../../../build/gen/blocks/weather_dialog_ids.asm"
  
 fPlayerInteraction_Handler:
     SEP #$20                                                   ;81D570|E220    |      ;
@@ -31,95 +23,7 @@ fPlayerInteraction_Handler:
 .skipToNextDay:
     JMP.W fPlayerAction_Handler                                ;81D590|4CD3BF  |81BFD3;
  
-.aJumpTable:
-    dw fPlayerInteraction0x00                                  ;81D593|        |81D643; 0x58 * [ptr16]
-    dw fPlayerInteraction0x01_WoodStorage                      ;81D595|        |81D644;
-    dw fPlayerInteraction0x02                                  ;81D597|        |81D66F;
-    dw fPlayerInteraction0x03                                  ;81D599|        |81D670;
-    dw fPlayerInteraction0x04                                  ;81D59B|        |81D6E1;
-    dw fPlayerInteraction0x05                                  ;81D59D|        |81D6E2;
-    dw fPlayerInteraction0x06                                  ;81D59F|        |81D6F8;
-    dw fPlayerInteraction0x07                                  ;81D5A1|        |81D70E;
-    dw fPlayerInteraction0x08                                  ;81D5A3|        |81D70F;
-    dw fPlayerInteraction0x09                                  ;81D5A5|        |81D710;
-    dw fPlayerInteraction0x0A                                  ;81D5A7|        |81D711;
-    dw fPlayerInteraction0x0B                                  ;81D5A9|        |81D712;
-    dw fPlayerInteraction0x0C                                  ;81D5AB|        |81D713;
-    dw fPlayerInteraction0x0D                                  ;81D5AD|        |81D714;
-    dw fPlayerInteraction0x0E                                  ;81D5AF|        |81D715;
-    dw fPlayerInteraction0x0F                                  ;81D5B1|        |81D716;
-    dw fPlayerInteraction0x10_PlayerDiary                      ;81D5B3|        |81D7C5;
-    dw fPlayerInteraction0x11                                  ;81D5B5|        |81D979;
-    dw fPlayerInteraction0x12                                  ;81D5B7|        |81D9CC;
-    dw fPlayerInteraction0x13                                  ;81D5B9|        |81DA82;
-    dw fPlayerInteraction0x14                                  ;81D5BB|        |81DB38;
-    dw fPlayerInteraction0x15_FeedStorage                      ;81D5BD|        |81DBA1;
-    dw fPlayerInteraction0x16                                  ;81D5BF|        |81DBCC;
-    dw fPlayerInteraction0x17                                  ;81D5C1|        |81DBCD;
-    dw fPlayerInteraction0x18                                  ;81D5C3|        |81DBCE;
-    dw fPlayerInteraction0x19                                  ;81D5C5|        |81DBCF;
-    dw fPlayerInteraction0x1A                                  ;81D5C7|        |81DBD0;
-    dw fPlayerInteraction0x1B                                  ;81D5C9|        |81DBD1;
-    dw fPlayerInteraction0x1C                                  ;81D5CB|        |81DBD2;
-    dw fPlayerInteraction0x1D                                  ;81D5CD|        |81DBD3;
-    dw fPlayerInteraction0x1E                                  ;81D5CF|        |81DBF0;
-    dw fPlayerInteraction0x1F                                  ;81D5D1|        |81DC57;
-    dw fPlayerInteraction0x20                                  ;81D5D3|        |81DC58;
-    dw fPlayerInteraction0x21                                  ;81D5D5|        |81DC59;
-    dw fPlayerInteraction0x22                                  ;81D5D7|        |81DC5A;
-    dw fPlayerInteraction0x23                                  ;81D5D9|        |81DC5B;
-    dw fPlayerInteraction0x24                                  ;81D5DB|        |81DC5C;
-    dw fPlayerInteraction0x25                                  ;81D5DD|        |81DC5D;
-    dw fPlayerInteraction0x26_MariaDiary                       ;81D5DF|        |81DC5E;
-    dw fPlayerInteraction0x27                                  ;81D5E1|        |81DCCE;
-    dw fPlayerInteraction0x28                                  ;81D5E3|        |81DCF3;
-    dw fPlayerInteraction0x29                                  ;81D5E5|        |81DD18;
-    dw fPlayerInteraction0x2A                                  ;81D5E7|        |81DD3D;
-    dw fPlayerInteraction0x2B                                  ;81D5E9|        |81DD62;
-    dw fPlayerInteraction0x2C                                  ;81D5EB|        |81DD87;
-    dw fPlayerInteraction0x2D_NinaDiary                        ;81D5ED|        |81DDAC;
-    dw fPlayerInteraction0x2E_AnimalNPC                        ;81D5EF|        |81DE1C;
-    dw fPlayerInteraction0x2F                                  ;81D5F1|        |81E245;
-    dw fPlayerInteraction0x30                                  ;81D5F3|        |81E26A;
-    dw fPlayerInteraction0x31                                  ;81D5F5|        |81E28F;
-    dw fPlayerInteraction0x32                                  ;81D5F7|        |81E2B4;
-    dw fPlayerInteraction0x33_EllenDiary                       ;81D5F9|        |81E2D9;
-    dw fPlayerInteraction0x34                                  ;81D5FB|        |81E349;
-    dw fPlayerInteraction0x35                                  ;81D5FD|        |81E36E;
-    dw fPlayerInteraction0x36_AnnDiary                         ;81D5FF|        |81E394;
-    dw fPlayerInteraction0x37                                  ;81D601|        |81E404;
-    dw fPlayerInteraction0x38                                  ;81D603|        |81E429;
-    dw fPlayerInteraction0x39                                  ;81D605|        |81E44E;
-    dw fPlayerInteraction0x3A                                  ;81D607|        |81E473;
-    dw fPlayerInteraction0x3B                                  ;81D609|        |81E498;
-    dw fPlayerInteraction0x3C                                  ;81D60B|        |81E4BD;
-    dw fPlayerInteraction0x3D                                  ;81D60D|        |81E4E2;
-    dw fPlayerInteraction0x3E                                  ;81D60F|        |81E507;
-    dw fPlayerInteraction0x3F_EveDiary                         ;81D611|        |81E52C;
-    dw fPlayerInteraction0x40_LessonsOfLove                    ;81D613|        |81E59C;
-    dw fPlayerInteraction0x41_HotSprings                       ;81D615|        |81E6C3;
-    dw fPlayerInteraction0x42                                  ;81D617|        |81E6EA;
-    dw fPlayerInteraction0x43                                  ;81D619|        |81E79E;
-    dw fPlayerInteraction0x44                                  ;81D61B|        |81EBD5;
-    dw fPlayerInteraction0x45                                  ;81D61D|        |81EFAD;
-    dw fPlayerInteraction0x46                                  ;81D61F|        |81F061;
-    dw fPlayerInteraction0x47                                  ;81D621|        |81F121;
-    dw fPlayerInteraction0x48                                  ;81D623|        |81F2DA;
-    dw fPlayerInteraction0x49                                  ;81D625|        |81F40E;
-    dw fPlayerInteraction0x4A                                  ;81D627|        |81F490;
-    dw fPlayerInteraction0x4B                                  ;81D629|        |81F4AD;
-    dw fPlayerInteraction0x4C                                  ;81D62B|        |81F4CA;
-    dw fPlayerInteraction0x4D                                  ;81D62D|        |81F4E6;
-    dw fPlayerInteraction0x4E                                  ;81D62F|        |81F502;
-    dw fPlayerInteraction0x4F                                  ;81D631|        |81F51E;
-    dw fPlayerInteraction0x50                                  ;81D633|        |81F53A;
-    dw fPlayerInteraction0x51                                  ;81D635|        |81F5B0;
-    dw fPlayerInteraction0x52                                  ;81D637|        |81F6D7;
-    dw fPlayerInteraction0x53                                  ;81D639|        |81F7FF;
-    dw fPlayerInteraction0x54_FloristNotebook                  ;81D63B|        |81F86A;
-    dw fPlayerInteraction0x55_AnimalNotebook                   ;81D63D|        |81F942;
-    dw fPlayerInteraction0x56                                  ;81D63F|        |81FA69;
-    dw fPlayerInteraction0x57                                  ;81D641|        |81FA84;
+    incsrc "../../../build/gen/blocks/player_update_jump_table.asm"
  
 fPlayerInteraction0x00:
     RTS                                                        ;81D643|60      |      ;
@@ -4248,14 +4152,6 @@ fPlayerInteraction0x57:
     RTS                                                        ;81FAB3|60      |      ;
  
  
-aPlayerInteraction_SetFlags:
-    dw $0001,$0002,$0004,$0008,$0010,$0020                     ;81FAB4|        |      ;
-    dw $0040,$0080,$0100,$0200,$0400,$0800                     ;81FAC0|        |      ;
-    dw $1000,$2000,$4000,$8000                                 ;81FACC|        |      ;
- 
-aPlayerInteraction_ResetFlags:
-    dw $FFFE,$FFFD,$FFFB,$FFF7,$FFEF,$FFDF                     ;81FAD4|        |      ;
-    dw $FFBF,$FF7F,$FEFF,$FDFF,$FBFF,$F7FF                     ;81FAE0|        |      ;
-    dw $EFFF,$DFFF,$BFFF,$7FFF                                 ;81FAEC|        |      ;
+    incsrc "../../../build/gen/blocks/player_interaction_flags.asm"
  
     pad $81FFFF

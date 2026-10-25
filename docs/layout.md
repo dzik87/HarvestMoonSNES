@@ -41,10 +41,18 @@ The tables that used to sit between the routines are generated too (formats: `do
 | `bank_83/dialog.asm` | font page pointers, option / number / text variable tables, `aDialogPointers` | `dialogs/number_vars.csv`, `dialogs/<region>/{text_vars.csv,text_tables.json}`, font blobs, dialog texts | `tools/dialogs/texttables.py` |
 | `src/ai` | script pointer list, script slot tables, NPC sprite tables | `ai/scripts.json`, `ai/npc_sprite_tables.txt` | `tools/ai/aidata.py` |
 
-Still data inside `src/code` (not moved yet): `bank_80/data_tables.asm` (palette index tables, presets, ... about 1650 data lines), `bank_81/items_misc.asm` (item tables, about 1700 data lines),
-`bank_81/player_actions.asm`, `bank_82/tools.asm`, `system.asm`, `interaction_data.asm`, and small tables embedded in `game_events.asm`, `map_engine.asm`, `ai_engine.asm`, `core.asm`
-(jump tables and per-routine lookup tables interleaved with the code that reads them; the jump/pointer tables of the command handlers are code-adjacent by nature).
-The AI script bodies stay in `src/ai` on purpose (a readable script DSL).
+The remaining data tables of the code banks are generated as **data blocks** (`tools/data/datablocks.py`, `assets/tables/blocks/*.tbl`, inventory and formats in `docs/formats/data-tables.md`):
+palette index/animation tables and scripts (`bank_80/data_tables.asm`), tile scripts, carried item tables and item handler pointers (`bank_81/items_misc.asm`), love ranges and the player action jump table
+(`bank_81/player_actions.asm`), player update tables, event/tool/system/interaction tables (`bank_82`), area event jump table, farm animal positions, the AI command table and game object offsets.
+The PPU graphics presets of `core.asm` are `assets/gfx/presets.csv` (`tools/gfx/presets.py`).
+
+### What stays in `src/` and why
+- All instructions (`src/code/bank_80..85`), the macros/constants (`src/common`), the header and vector files, `src/main.asm`: code.
+- The AI script bodies (`src/ai/us/scripts/script_*.asm` and `src/ai/commands.asm`): the script DSL (macro calls), see above.
+- Data runs shorter than 5 rows that sit directly in front of the routine that reads them (single constants, 1-4 row lookup tables, inline `db` operands after a `JSR`/`JSL`) and
+  data that is part of a code stream (inline arguments, `pad` lines, region patch blocks that mix code and data); moving them would add an include per few bytes without making them any more editable.
+- The `.tbl` blocks are still asm-like text (labels, `db/dw/dl`, release `if` blocks) rather than CSV: their column meaning is not decoded yet (see the open items in `docs/formats/data-tables.md`);
+  the tables whose columns are known (areas, menus, dialog engine tables, graphics presets, AI heads) have named-column sources.
 
 ## Graphics sources
 

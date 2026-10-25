@@ -359,16 +359,13 @@ _BG_PRESETS = {}
 def bg_chr_base(root, map_label, dest):
     """VRAM word address of tile 0 of the BG that shows the name table uploaded to `dest` by map `map_label`: the map header's graphic
     preset (first byte, only maps that have one) selects BGnSC (name table address) and BG12NBA / BG34NBA (character base) in
-    src/code/bank_80/core.asm.  None when the map has no preset byte or no BG uses that address (callers fall back to the first tile set)."""
+    assets/gfx/presets.csv.  None when the map has no preset byte or no BG uses that address (callers fall back to the first tile set)."""
     key = str(root)
     if key not in _BG_PRESETS:
-        core = (Path(root) / "src/code/bank_80/core.asm").read_text(encoding="utf-8", errors="replace")
-
-        def tab(name):
-            m = re.search(name + r":\s*db ([^;\n]+)", core)
-            return [int(x.strip()[1:], 16) for x in m.group(1).split(",")]
-        sc = [tab(f"Table_BG{i}SC_Presets") for i in range(1, 5)]
-        n12, n34 = tab("Table_BG12NBA_Presets"), tab("Table_BG34NBA_Presets")
+        import presets as PR
+        pt = PR.load(root)
+        sc = [pt[f"BG{i}SC"] for i in range(1, 5)]
+        n12, n34 = pt["BG12NBA"], pt["BG34NBA"]
         _, desc = AD.load_gfx(root)
         pres = {lab: d.get("preset") for lab, d in desc.items()}
         _BG_PRESETS[key] = (sc, n12, n34, pres)
