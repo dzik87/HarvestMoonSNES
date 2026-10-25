@@ -183,11 +183,16 @@ _LABEL_RE = re.compile(r'^([A-Za-z_][A-Za-z0-9_.]*):')
 _HEX_RE = re.compile(r'\$([0-9A-Fa-f]{1,2})\b')
 
 
-def parse_asm_blobs(path):
+def parse_asm_blobs(path, tail=0):
     """Return {label: bytes} for a src/data/... .asm file.
 
     Each label owns every `db $..` byte up to the next label (or EOF).
     `;` comments are stripped. Labels without data map to b''.
+
+    If `tail` > 0, up to that many bytes of the data that follows a label
+    (i.e. the start of the next label's bytes) are appended to its blob. This
+    is needed because a blob's last bytes may sit under the following
+    `Padding_XXXXXX` label (see docs/formats/tilemap-compression.md, quirks).
     """
     blobs = {}
     cur = None
@@ -210,6 +215,11 @@ def parse_asm_blobs(path):
                     buf.append(int(h, 16))
     if cur is not None:
         blobs[cur] = bytes(buf)
+    if tail > 0:
+        labels = list(blobs)
+        for i in range(len(labels) - 1):
+            nxt = blobs[labels[i + 1]]
+            blobs[labels[i]] += nxt[:tail]
     return blobs
 
 
@@ -223,7 +233,7 @@ def main(argv):
     d.add_argument('--prefix', default='sCompressed',
                    help='only labels with this prefix (default sCompressed)')
     args = ap.parse_args(argv)
-    blobs = parse_asm_blobs(args.asmfile)
+    blobs = parse_asm_blobs(args.asmfile, tail=64)
     os.makedirs(args.outdir, exist_ok=True)
     count = 0
     for label, blob in blobs.items():
@@ -236,8 +246,8 @@ def main(argv):
             continue
         with open(os.path.join(args.outdir, label + '.bin'), 'wb') as f:
             f.write(out)
-        print('%s: %d -> %d bytes (consumed %d of %d)'
-              % (label, len(blob), len(out), used, len(blob)))
+        print('%s: %d -> %d bytes (consumed %d)'
+              % (label, len(blob), len(out), used))
         count += 1
     print('%d blob(s) written to %s' % (count, args.outdir))
     return 0
