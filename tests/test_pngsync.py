@@ -88,7 +88,6 @@ def clone_tree(tmp, drop_sources=False):
     shutil.copytree(ROOT / "assets/objects", tmp / "assets/objects")
     (tmp / "src/code/bank_80").mkdir(parents=True)
     shutil.copy(ROOT / "src/code/bank_80/tilemaps.asm", tmp / "src/code/bank_80/tilemaps.asm")
-    shutil.copytree(ROOT / "src/data/gfx", tmp / "src/data/gfx")
     if drop_sources:
         for r in ("", "eu/", "de/", "jp/"):
             base = tmp / "assets/gfx/png" / r
@@ -101,11 +100,30 @@ def clone_tree(tmp, drop_sources=False):
 
 
 def bank_totals(tmp):
-    out = {}
-    for f in sorted((tmp / "src/data/gfx/tiles").glob("bank_*.asm")):
-        org, sized = BB.sizes_from_asm(f, tmp / "assets/gfx/tiles")
-        out[f.name] = sum(s for _, s in sized)
-    return out
+    """{(kind, bank): size} of every graphics bank of the layout of a scratch tree (must stay $8000)."""
+    sys.path.insert(0, str(ROOT / "tools" / "data"))
+    import gfxbanks
+    return {(k, bank): sum(s for _, s in gfxbanks.bank_sizes(tmp, k, bank, b)) for k, banks in gfxbanks.load_layout(tmp).items()
+            for bank, b in banks.items() if k != "palettes"}
+
+
+_SHARED = []
+
+
+import contextlib  # noqa: E402
+
+
+@contextlib.contextmanager
+def shared():
+    yield shared_tree()
+
+
+def shared_tree():
+    """one scratch copy of the repository state shared by the tests that edit and import (each test leaves it consistent)."""
+    if not _SHARED:
+        d = tempfile.mkdtemp()
+        _SHARED.append(clone_tree(Path(d)))
+    return _SHARED[0]
 
 
 def edit_png(path, fn):
@@ -116,6 +134,23 @@ def edit_png(path, fn):
     im.save(path, transparency=im.info.get("transparency"))
 
 
+def check_exported_palettes(tmp):
+    """export in a scratch tree: remainder sheet PLTE = colours of the mapped sub-palette, sidecar keys, sprite colour 0 transparent."""
+    label = "sCompressedTiles_92D3AB"
+    b = P.Blob("tiles", label, tmp)
+    meta = P.read_meta(b)
+    ent = P.palette_map()["blobs"][label]
+    check(meta["palette"] == {"id": ent["palette"]["id"], "sub": ent["palette"]["sub"]}, "sidecar palette")
+    check(meta["palette_confidence"] == ent["confidence"], "sidecar confidence")
+    pal, _ = png_palette(b.art)
+    check(pal[:16] == P.load_view_palette(meta["palette"], 4, tmp), "exported PLTE")
+    pal, trns = png_palette(P.Blob("sprites", "Sprites_888000", tmp).art)
+    check(trns == 0, "sprite remainder sheets have transparent colour 0")
+    first = sorted((tmp / "assets/gfx/png/frames/obj_0000").glob("f_*.png"))[0]
+    fpal, ftrns = png_palette(first)
+    check(fpal[:128] == [c for p in PM.sprite_palettes(0) for c in p], "frame PLTE = day OBJ palette")
+
+
 def test_roundtrip_every_blob_every_region():
     """.bin -> composed images + remainder sheets -> rebuilt bytes: bit exact for every blob of US, EU, DE and JP, the images
     are not allowed to contradict each other, and nothing is left over."""
@@ -124,6 +159,8 @@ def test_roundtrip_every_blob_every_region():
         for region in P.REGIONS:
             n = P.export_composed(tmp, region)
             check(n > 0, f"{region}: exported blobs")
+            if region == "us":
+                check_exported_palettes(tmp)
             rc = P.cmd_check(ns(region=region), tmp)
             check(rc == 0, f"{region}: sources rebuilt from the images equal the .bin of every blob")
         # the freshly exported sources equal the committed ones (the export is deterministic and canonical)
@@ -140,8 +177,7 @@ def test_import_flow():
     """edit a sprite frame and a name table screen, import: both reach the right tiles / blocks, other images that show the same
     tiles follow, check passes, growth needs --allow-resize and keeps every bank at $8000 bytes."""
     import composed as CO
-    with tempfile.TemporaryDirectory() as d:
-        tmp = clone_tree(Path(d))
+    with shared() as tmp:
         before = {p.name: p.read_bytes() for p in (tmp / "assets/gfx/sprites").glob("*.bin")}
         check(P.cmd_import(ns(), tmp) == 0, "import of unchanged sources")
         check(all(p.read_bytes() == before[p.name] for p in (tmp / "assets/gfx/sprites").glob("*.bin")), "unchanged import keeps the bytes")
@@ -230,8 +266,7 @@ def find_shared_block_frames(ctx):
 def test_conflicts_and_errors():
     """contradicting edits of a shared block / tile, a wrong palette row, a remainder pixel under an image: reported, not written."""
     import composed as CO
-    with tempfile.TemporaryDirectory() as d:
-        tmp = clone_tree(Path(d))
+    with shared() as tmp:
         ctx = CO.get_ctx(tmp, "us")
         A, ka, B, kb = find_shared_block_frames(ctx)
         check(A is not None, "two frames share a sprite block")
@@ -254,10 +289,10 @@ def test_conflicts_and_errors():
         check(P.cmd_import(ns(), tmp) == 0, "identical edits of the shared block are accepted")
         check(P.cmd_check(ns(), tmp) == 0, "check passes after the images agree")
 
-    with tempfile.TemporaryDirectory() as d:
-        tmp = clone_tree(Path(d))
+    with shared() as tmp:
         # wrong palette row in a frame
         fr = sorted((tmp / "assets/gfx/png/frames/obj_0000").glob("f_*.png"))[0]
+        saved_fr = fr.read_bytes()
 
         def wrong(px, w, h):
             for y in range(h):
@@ -268,21 +303,24 @@ def test_conflicts_and_errors():
         edit_png(fr, wrong)
         check(P.cmd_check(ns(), tmp) == 1, "check: a colour from another palette row is an error")
         check(P.cmd_import(ns(), tmp) == 1, "import: a colour from another palette row is an error")
-    with tempfile.TemporaryDirectory() as d:
-        tmp = clone_tree(Path(d))
+        fr.write_bytes(saved_fr)
+    with shared() as tmp:
         # a remainder pixel where an image defines the pixel
         b = P.Blob("sprites", "Sprites_888000", tmp)
+        saved_rem = b.art.read_bytes()
         w, h, pix = P.load_png(b.art)
         claims = CO.claims_for(CO.get_ctx(tmp, "us"))
         i = next(i for i, c in enumerate(claims.val["Sprites_888000"]) if c != CO.UNC)
         edit_png(b.art, lambda px, w_, h_: px.__setitem__((i % 128, i // 128), 5))
         check(P.cmd_check(ns(label=["Sprites_888000"]), tmp) == 1, "check: remainder pixel under an image is an error")
-    with tempfile.TemporaryDirectory() as d:
-        tmp = clone_tree(Path(d))
+        b.art.write_bytes(saved_rem)
+    with shared() as tmp:
         # missing image file
         victim = sorted((tmp / "assets/gfx/png/screens").glob("*.png"))[0]
+        saved_v = victim.read_bytes()
         victim.unlink()
         check(P.cmd_check(ns(), tmp) == 1, "check: a missing screen is an error")
+        victim.write_bytes(saved_v)
 
 
 def test_screen_transform_with_flips():
@@ -403,6 +441,27 @@ def test_name_table_rule():
         PM._RAW.update(old)
 
 
+def test_name_table_width_check():
+    """a wrong row length is caught by `check` (continuity metric) and the suggested widths match the committed sidecars."""
+    import composed
+    tmp = shared_tree()
+    meta_path = tmp / "assets/gfx/tilemaps/sCompressedTilemap_A48A2D.json"
+    good = meta_path.read_text()
+    check('"columns": 64' in good, "A48A2D is a 64 column table")
+    try:
+        meta_path.write_text(good.replace('"columns": 64', '"columns": 32'))
+        composed.reset()
+        ctx = composed.get_ctx(tmp, "us", None)
+        sheets = composed.decode_sheets(ctx, composed.load_sheets(ctx))
+        cur, sug, sc, _ = composed.table_widths(ctx, sheets, {"sCompressedTilemap_A48A2D"})["sCompressedTilemap_A48A2D"]
+        check(cur == 32 and sug == 64, f"wrong width not detected: {cur} {sug}")
+        check(sc[32] - sc[64] > composed.WIDTH_FAIL, f"seam ratios too close: {sc}")
+        check(composed.default_columns(4096) == 64 and composed.default_columns(16384) == 128, "size defaults")
+    finally:
+        meta_path.write_text(good)
+        composed.reset()
+
+
 def test_sprite_cell_formula():
     """the sprite id -> tile position used for per-sprite previews equals the slot table of bank $86 (docs: object-data.md)."""
     import objdata as O
@@ -475,8 +534,7 @@ def test_palette_is_ignored_by_import():
     """re-colouring every image (new PLTE, no tRNS) must not change a single byte of the rebuilt .bin."""
     from PIL import Image
     rnd = random.Random(11)
-    with tempfile.TemporaryDirectory() as d:
-        tmp = clone_tree(Path(d))
+    with shared() as tmp:
         for p in sorted((tmp / "assets/gfx/png").rglob("*.png")):
             if p.parts[-2] not in ("screens", "tiles", "sprites", "frames") and not p.parent.name.startswith("obj_"):
                 continue
@@ -485,26 +543,6 @@ def test_palette_is_ignored_by_import():
             im.info.pop("transparency", None)
             im.save(p, "PNG")
         check(P.cmd_check(ns(), tmp) == 0, "bytes do not depend on the PLTE of any composed image")
-
-
-def test_export_writes_palette():
-    """export in a scratch tree: remainder sheet PLTE = colours of the mapped sub-palette, sidecar keys, sprite colour 0 transparent."""
-    with tempfile.TemporaryDirectory() as d:
-        tmp = clone_tree(Path(d), drop_sources=True)
-        P.export_composed(tmp, "us")
-        label = "sCompressedTiles_92D3AB"
-        b = P.Blob("tiles", label, tmp)
-        meta = P.read_meta(b)
-        ent = P.palette_map()["blobs"][label]
-        check(meta["palette"] == {"id": ent["palette"]["id"], "sub": ent["palette"]["sub"]}, "sidecar palette")
-        check(meta["palette_confidence"] == ent["confidence"], "sidecar confidence")
-        pal, _ = png_palette(b.art)
-        check(pal[:16] == P.load_view_palette(meta["palette"], 4, tmp), "exported PLTE")
-        pal, trns = png_palette(P.Blob("sprites", "Sprites_888000", tmp).art)
-        check(trns == 0, "sprite remainder sheets have transparent colour 0")
-        fpal, ftrns = png_palette(tmp / "assets/gfx/png/frames/obj_0000" / sorted(p.name for p in (tmp / "assets/gfx/png/frames/obj_0000").glob("f_*.png"))[0])
-        check(fpal[:128] == [c for p in PM.sprite_palettes(0) for c in p], "frame PLTE = day OBJ palette")
-        check(P.cmd_check(ns(), tmp) == 0, "check after export with palette")
 
 
 def test_sheet_command_matches_bins():
@@ -519,10 +557,14 @@ def test_sheet_command_matches_bins():
 
 
 def main():
-    for name, fn in sorted(globals().items()):
-        if name.startswith("test_"):
-            fn()
-            print("ran", name)
+    try:
+        for name, fn in sorted(globals().items()):
+            if name.startswith("test_"):
+                fn()
+                print("ran", name)
+    finally:
+        for t in _SHARED:
+            shutil.rmtree(t.parent if False else t, ignore_errors=True)
     print("FAILED" if FAILS else "ALL TESTS PASSED")
     return 1 if FAILS else 0
 

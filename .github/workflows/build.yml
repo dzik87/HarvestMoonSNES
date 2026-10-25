@@ -49,6 +49,7 @@ jobs:
           python3 tools/maps/objmap.py check
           python3 tools/objects/objdata.py check
           python3 tools/data/bankbin.py check
+          python3 tools/data/gfxbanks.py check
           python3 tools/gfx/gfxpipe.py verify
           python3 tools/fonts/font.py check
           python3 tests/test_font.py

@@ -6,6 +6,7 @@ Sources (committed)                                   -> generated, git-ignored 
   assets/fonts/us/glyph_*.png + glyphs.json            -> assets/gfx/tiles/sFontGlyphs_*.bin             (tools/fonts/font.py build)
   assets/gfx/png/{frames,screens,tiles,sprites}/ composed PNGs + <label>.json -> assets/gfx/{tiles,sprites}/*.bin  (tools/gfx/pngsync.py build)
   assets/gfx/tilemaps/*.map.txt + sidecar JSON         -> assets/gfx/characters/*.bin                    (tools/gfx/pngsync.py build)
+  assets/gfx/banks.json (bank layout)                  -> build/gen/gfx/<kind>/bank_XX.asm               (tools/data/gfxbanks.py build)
 
   assets/objects/bank_8{6,7}/ (bank.json, objects/*.json, frames.txt) -> build/gen/objects/bank_8{6,7}.asm (tools/objects/objdata.py build)
   assets/maps/*.json                                   -> build/gen/maps/bank_A7.asm                     (tools/maps/objmap.py build)
@@ -23,6 +24,7 @@ STEPS = [
     ("palettes", [sys.executable, "tools/gfx/palette.py", "pack"]),
     ("font tables", [sys.executable, "tools/fonts/font.py", "build", "--region", "us", "--write-assets"]),
     ("graphics blobs", [sys.executable, "tools/gfx/pngsync.py", "build", "--region", "all"]),
+    ("graphics bank asm", [sys.executable, "tools/data/gfxbanks.py", "build"]),
     ("audio blobs", [sys.executable, "tools/audio/audioconv.py", "build", "-q"]),
     ("dialog banks", [sys.executable, "tools/dialogs/dialog.py", "build"]),
     ("object animation banks", [sys.executable, "tools/objects/objdata.py", "build"]),

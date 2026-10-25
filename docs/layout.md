@@ -6,11 +6,11 @@ Mapping: LoROM, 64 banks of 32 KB ($80–$BF). Header and vectors: `src/code/hea
 |---|---|---|
 | $80–$85 | 65816 code (core, palette, tools, sound, game engine, maps, AI, input) | `src/code/bank_8x/` |
 | $86–$87 | object animation data | `assets/objects/bank_8x/` (generated asm: `build/gen/objects/`) |
-| $88–$91 | sprite graphics | `src/data/gfx/sprites/` |
-| $92–$A0 | tile graphics | `src/data/gfx/tiles/` |
-| $A1–$A6 | character graphics | `src/data/gfx/characters/` |
+| $88–$91 | sprite graphics | `assets/gfx/banks.json` (generated asm: `build/gen/gfx/sprites/`) |
+| $92–$A0 | tile graphics | `assets/gfx/banks.json` (generated asm: `build/gen/gfx/tiles/`) |
+| $A1–$A6 | character graphics | `assets/gfx/banks.json` (generated asm: `build/gen/gfx/characters/`) |
 | $A7 | object maps | `assets/maps/*.json` (generated asm: `build/gen/maps/bank_A7.asm`) |
-| $A8–$A9 | palettes | `src/data/gfx/palettes/` |
+| $A8–$A9 | palettes | `assets/gfx/banks.json` (generated asm: `build/gen/gfx/palettes/`) |
 | $AA–$AC | JP dialogs (empty in US/EU/DE) | `assets/dialogs/jp/*.txt` (generated asm) |
 | $AD–$B2 | audio (content looks like SPC700 program and data — to be confirmed) | `src/data/audio/` |
 | $B3–$B5 | AI scripts (one file per script, `src/ai/us/scripts/`; EU/DE/JP as `if !REGION_xx` blocks, `docs/regions-ai.md`) | `src/ai/` |
@@ -21,8 +21,9 @@ Mapping: LoROM, 64 banks of 32 KB ($80–$BF). Header and vectors: `src/code/hea
 
 Only code: `src/code`, `src/ai`, `src/common`, `src/main.asm` and the region/header files. Data is built from the editable sources under `assets/`
 into git-ignored `build/gen/` (dialogs, object animation banks, object maps) or `assets/**` (`.bin`/`.pal`), see `docs/workflow.md`.
-Still committed as assembly under `src/data/` (pending, owned by the graphics and audio work): `src/data/gfx/{sprites,tiles,characters,palettes}/bank_*.asm`
-(label + `incbin` wrappers of the generated graphic blobs) and `src/data/audio/bank_*.asm` (wrappers of the audio blobs); `src/data/dialogs/macros.asm` is a macro file (code).
+The graphics banks ($88-$A6, $A8-$A9) are generated too: `assets/gfx/banks.json` lists per bank the ORG, the blobs in ROM order (`*` = included through `!{REGDIR}`, a release has its own version) and the
+trailing padding; `tools/data/gfxbanks.py build` (step "graphics bank asm" of `tools/build_assets.py`) writes `build/gen/gfx/<kind>/bank_XX.asm` (label + `incbin` + `fill`), which `src/main.asm` includes.
+Still committed as assembly under `src/data/` (pending, owned by the audio work): `src/data/audio/bank_*.asm` (wrappers of the audio blobs); `src/data/dialogs/macros.asm` is a macro file (code).
 
 ## Graphics sources
 

@@ -2,9 +2,7 @@
 """Raw data banks (`db` dumps) <-> binary assets included with incbin, byte-exact.
 
 Groups (source dir -> asset dir):
-  sprites     src/data/gfx/sprites/bank_*.asm     -> assets/gfx/sprites/<label>.bin
-  tiles       src/data/gfx/tiles/bank_*.asm       -> assets/gfx/tiles/<label>.bin      (compressed blobs, kept as stored)
-  characters  src/data/gfx/characters/bank_*.asm  -> assets/gfx/characters/<label>.bin (compressed blobs, kept as stored)
+  (the graphics banks are generated from assets/gfx/banks.json by tools/data/gfxbanks.py and no longer handled here)
   audio       src/data/audio/bank_*.asm           -> assets/audio/<label>.bin           (SPC700 program/data)
 
 Every label becomes one .bin; the generated .asm keeps ORG and labels (so code references are unchanged) and
@@ -19,9 +17,6 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 GROUPS = {
-    "sprites": (ROOT / "src/data/gfx/sprites", ROOT / "assets/gfx/sprites"),
-    "tiles": (ROOT / "src/data/gfx/tiles", ROOT / "assets/gfx/tiles"),
-    "characters": (ROOT / "src/data/gfx/characters", ROOT / "assets/gfx/characters"),
     "audio": (ROOT / "src/data/audio", ROOT / "assets/audio"),
 }
 BANK = 0x8000

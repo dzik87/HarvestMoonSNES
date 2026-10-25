@@ -6,7 +6,7 @@
   "raw_size": 4096,
   "format": "bg_name_table",
   "entries": 2048,
-  "columns": 32,
+  "columns": 64,
   "vram_word_dest": [
     "$6000"
   ],

@@ -23,7 +23,7 @@ CI (GitHub Actions) builds asar from the submodule, assembles the ROM and compar
 | `src/common/` | SNES registers, RAM map, structures, enums, code macros |
 | `src/code/bank_80 … bank_85/` | 65816 code split into thematic modules; EU/DE/JP code as `if !REGION_xx` patch blocks (switch and WRAM layout: `src/common/region.asm`) |
 | `src/ai/` | AI script interpreter: command definitions (`commands.asm`), region support (`region.asm`), US scripts (`us/`, EU/DE/JP as `if !REGION_xx` blocks) |
-| `src/data/` | include wrappers of the graphics and audio blobs; everything else is generated from `assets/` into `build/gen/` |
+| `src/data/` | include wrappers of the audio blobs (pending); everything else, graphics bank wrappers included, is generated from `assets/` into `build/gen/` |
 | `assets/audio/` | audio sources: BRR samples as WAV + JSON, songs and SFX as text, the SPC700 driver as assembler source (`tools/audio/audioconv.py`) |
 | `assets/objects/`, `assets/maps/` | object animation data (banks $86/$87) and object maps (bank $A7): the editable sources, see `docs/formats/object-data.md` |
 | `assets/gfx/png/`, `assets/gfx/tilemaps/` | graphics sources: composed indexed PNGs (sprite frames in `frames/`, name tables rendered with their tiles in `screens/`, remainder sheets) and name-table text (edit these, then `tools/gfx/pngsync.py import`, which splits the images back into tiles / sprite blocks; whole sheets: `pngsync.py sheet`) |
