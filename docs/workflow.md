@@ -21,3 +21,6 @@ the result in run annotations and as the `HarvestMoon-US` artifact.
   assembler includes with `incbin`. CI runs `palette.py check` before the build.
 - Editing a palette: change the JSON, run `python tools/gfx/palette.py pack`, commit both files. The ROM hash will of
   course change after an intentional edit; update `tests/expected.json` only for deliberate modifications.
+- `tilemap_codec.py` — LZSS codec for the compressed tilemap/charactermap blobs (see `docs/formats/tilemap-compression.md`).
+- `tiles.py` — raw 2/4/8bpp SNES tile data <-> indexed PNG sheets (`to-png`, `from-png`), lossless for any data.
+- `dialogs/dialog.py` — dialog word streams <-> editable text (`assets/dialogs/<region>/`), all regions.
