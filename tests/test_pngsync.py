@@ -151,7 +151,7 @@ def test_import_flow():
 def test_real_blobs():
     allb = P.blobs()
     kinds = {k: sum(1 for b in allb if b.kind == k) for k in P.KINDS}
-    check(kinds == {"tiles": 77, "sprites": 10, "tilemaps": 63}, f"blob inventory {kinds}")
+    check(kinds == {"tiles": 77, "sprites": 10, "tilemaps": 64}, f"blob inventory {kinds}")
     check(P.cmd_check(ns()) == 0, "all committed .bin files must be reproducible from PNG / text")
     conf = {}
     for b in allb:
