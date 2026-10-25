@@ -1,11 +1,11 @@
  
 pAIScripting0x0F_StarNightFestival:
-    dw DATA8_B48020                                            ;B48000|        |B48020;
-    dw DATA8_B48075                                            ;B48002|        |B48075;
-    dw DATA8_B4820E                                            ;B48004|        |B4820E;
-    dw DATA8_B48400                                            ;B48006|        |B48400;
-    dw DATA8_B485C6                                            ;B48008|        |B485C6;
-    dw DATA8_B486E8                                            ;B4800A|        |B486E8;
+    dw pAIScripting0x0F_StarNightFestival_Data01                                            ;B48000|        |B48020;
+    dw pAIScripting0x0F_StarNightFestival_Data02                                            ;B48002|        |B48075;
+    dw pAIScripting0x0F_StarNightFestival_Data03                                            ;B48004|        |B4820E;
+    dw pAIScripting0x0F_StarNightFestival_Data04                                            ;B48006|        |B48400;
+    dw pAIScripting0x0F_StarNightFestival_Data05                                            ;B48008|        |B485C6;
+    dw pAIScripting0x0F_StarNightFestival_Data06                                            ;B4800A|        |B486E8;
     dw pAIScripting0x10_WoodsPondEvent                         ;B4800C|        |B487B8;
     dw pAIScripting0x10_WoodsPondEvent                         ;B4800E|        |B487B8;
     dw pAIScripting0x10_WoodsPondEvent                         ;B48010|        |B487B8;
@@ -17,7 +17,7 @@ pAIScripting0x0F_StarNightFestival:
     dw pAIScripting0x10_WoodsPondEvent                         ;B4801C|        |B487B8;
     dw pAIScripting0x10_WoodsPondEvent                         ;B4801E|        |B487B8;
  
-DATA8_B48020:
+pAIScripting0x0F_StarNightFestival_Data01:
  
     %AICMD0x4F_DisableToolUse()                                               ;B48020
     %AICMD0x50()                                               ;B48021
@@ -57,7 +57,7 @@ pAIScripting0x0F_StarNightFestival_L005:
     %AICMD0x10_End()                                           ;B48074
 
 
-DATA8_B48075:
+pAIScripting0x0F_StarNightFestival_Data02:
  
     %AICMD0x4F_DisableToolUse()                                               ;B48075
     %AICMD0x50()                                               ;B48076
@@ -198,7 +198,7 @@ pAIScripting0x0F_StarNightFestival_L036:
     %AICMD0x12_Jump(pAIScripting0x0F_StarNightFestival_L031)                                   ;B4820B
 
 
-DATA8_B4820E:
+pAIScripting0x0F_StarNightFestival_Data03:
  
     %AICMD0x4F_DisableToolUse()                                               ;B4820E
     %AICMD0x50()                                               ;B4820F
@@ -367,7 +367,7 @@ pAIScripting0x0F_StarNightFestival_L068:
     %AICMD0x12_Jump(pAIScripting0x0F_StarNightFestival_L063)                                   ;B483FD
 
 
-DATA8_B48400:
+pAIScripting0x0F_StarNightFestival_Data04:
  
     %AICMD0x4F_DisableToolUse()                                               ;B48400
     %AICMD0x50()                                               ;B48401
@@ -515,7 +515,7 @@ pAIScripting0x0F_StarNightFestival_L101:
     %AICMD0x12_Jump(pAIScripting0x0F_StarNightFestival_L095)                                   ;B485C3
 
 
-DATA8_B485C6:
+pAIScripting0x0F_StarNightFestival_Data05:
  
     %AICMD0x4F_DisableToolUse()                                               ;B485C6
     %AICMD0x50()                                               ;B485C7
@@ -606,7 +606,7 @@ pAIScripting0x0F_StarNightFestival_L115:
     %AICMD0x12_Jump(pAIScripting0x0F_StarNightFestival_L111)                                   ;B486E5
 
 
-DATA8_B486E8:
+pAIScripting0x0F_StarNightFestival_Data06:
     %AICMD0x4F_DisableToolUse()                                               ;B486E8
     %AICMD0x50()                                               ;B486E9
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B486EA

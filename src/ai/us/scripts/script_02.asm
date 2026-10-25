@@ -1,11 +1,11 @@
 
 
 pAIScripting0x02:
-    dw DATA8_B3AE23                                            ;B3AE03|        |B3AE23;
-    dw DATA8_B3B44A                                            ;B3AE05|        |B3B44A;
-    dw DATA8_B3B4E3                                            ;B3AE07|        |B3B4E3;
-    dw DATA8_B3B6E1                                            ;B3AE09|        |B3B6E1;
-    dw DATA8_B3B8D2                                            ;B3AE0B|        |B3B8D2;
+    dw pAIScripting0x02_Data01                                            ;B3AE03|        |B3AE23;
+    dw pAIScripting0x02_Data02                                            ;B3AE05|        |B3B44A;
+    dw pAIScripting0x02_Data03                                            ;B3AE07|        |B3B4E3;
+    dw pAIScripting0x02_Data04                                            ;B3AE09|        |B3B6E1;
+    dw pAIScripting0x02_Data05                                            ;B3AE0B|        |B3B8D2;
     dw pAIScripting0x03                                        ;B3AE0D|        |B3BA39;
     dw pAIScripting0x03                                        ;B3AE0F|        |B3BA39;
     dw pAIScripting0x03                                        ;B3AE11|        |B3BA39;
@@ -18,7 +18,7 @@ pAIScripting0x02:
     dw pAIScripting0x03                                        ;B3AE1F|        |B3BA39;
     dw pAIScripting0x03                                        ;B3AE21|        |B3BA39;
  
-DATA8_B3AE23:
+pAIScripting0x02_Data01:
  
     %AICMD0x11_EnableUserControl()                             ;B3AE23
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, pAIScripting0x02_L001)     ;B3AE24
@@ -499,7 +499,7 @@ pAIScripting0x02_L127:
     %AICMD0x10_End()                                           ;B3B449
 
 
-DATA8_B3B44A:
+pAIScripting0x02_Data02:
  
     %AICMD0x11_EnableUserControl()                             ;B3B44A
     %AICMD0x09_StartScript($01, pAIScripting0x02_L129)                                   ;B3B44B
@@ -555,7 +555,7 @@ pAIScripting0x02_L142:
     %AICMD0x12_Jump(pAIScripting0x02_L137)                                   ;B3B4E0
 
 
-DATA8_B3B4E3:
+pAIScripting0x02_Data03:
  
     %AICMD0x11_EnableUserControl()                             ;B3B4E3
     %AICMD0x09_StartScript($01, pAIScripting0x02_L146)                                   ;B3B4E4
@@ -709,7 +709,7 @@ pAIScripting0x02_L179:
     %AICMD0x12_Jump(pAIScripting0x02_L165)                                   ;B3B6DE
 
 
-DATA8_B3B6E1:
+pAIScripting0x02_Data04:
  
     %AICMD0x11_EnableUserControl()                             ;B3B6E1
     %AICMD0x09_StartScript($01, pAIScripting0x02_L183)                                   ;B3B6E2
@@ -862,7 +862,7 @@ pAIScripting0x02_L216:
     %AICMD0x10_End()                                           ;B3B8D1
 
 
-DATA8_B3B8D2:
+pAIScripting0x02_Data05:
     %AICMD0x11_EnableUserControl()                             ;B3B8D2
     %AICMD0x12_Jump(pAIScripting0x02_L218)                                   ;B3B8D3
 pAIScripting0x02_L217:

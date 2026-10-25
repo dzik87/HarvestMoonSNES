@@ -3,12 +3,12 @@
  
  
 pAIScripting0x0F_StarNightFestival:
-    dw DATA8_B48020                                            ;B48000|        |B48020;
-    dw DATA8_B48075                                            ;B48002|        |B48075;
-    dw DATA8_B4820E                                            ;B48004|        |B4820E;
-    dw DATA8_B48400                                            ;B48006|        |B48400;
-    dw DATA8_B485C6                                            ;B48008|        |B485C6;
-    dw DATA8_B486E8                                            ;B4800A|        |B486E8;
+    dw pAIScripting0x0F_StarNightFestival_Data01                                            ;B48000|        |B48020;
+    dw pAIScripting0x0F_StarNightFestival_Data02                                            ;B48002|        |B48075;
+    dw pAIScripting0x0F_StarNightFestival_Data03                                            ;B48004|        |B4820E;
+    dw pAIScripting0x0F_StarNightFestival_Data04                                            ;B48006|        |B48400;
+    dw pAIScripting0x0F_StarNightFestival_Data05                                            ;B48008|        |B485C6;
+    dw pAIScripting0x0F_StarNightFestival_Data06                                            ;B4800A|        |B486E8;
     dw pAIScripting0x10_WoodsPondEvent                         ;B4800C|        |B487B8;
     dw pAIScripting0x10_WoodsPondEvent                         ;B4800E|        |B487B8;
     dw pAIScripting0x10_WoodsPondEvent                         ;B48010|        |B487B8;
@@ -20,7 +20,7 @@ pAIScripting0x0F_StarNightFestival:
     dw pAIScripting0x10_WoodsPondEvent                         ;B4801C|        |B487B8;
     dw pAIScripting0x10_WoodsPondEvent                         ;B4801E|        |B487B8;
  
-DATA8_B48020:
+pAIScripting0x0F_StarNightFestival_Data01:
  
     %AICMD0x4F_DisableToolUse()                                               ;B48020
     %AICMD0x50()                                               ;B48021
@@ -55,7 +55,7 @@ DATA8_B48020:
     %AICMD0x10_End()                                           ;B48074
 
 
-DATA8_B48075:
+pAIScripting0x0F_StarNightFestival_Data02:
  
     %AICMD0x4F_DisableToolUse()                                               ;B48075
     %AICMD0x50()                                               ;B48076
@@ -165,7 +165,7 @@ DATA8_B48075:
     %AICMD0x12_Jump($B481BC)                                   ;B4820B
 
 
-DATA8_B4820E:
+pAIScripting0x0F_StarNightFestival_Data03:
  
     %AICMD0x4F_DisableToolUse()                                               ;B4820E
     %AICMD0x50()                                               ;B4820F
@@ -302,7 +302,7 @@ DATA8_B4820E:
     %AICMD0x12_Jump($B4835D)                                   ;B483FD
 
 
-DATA8_B48400:
+pAIScripting0x0F_StarNightFestival_Data04:
  
     %AICMD0x4F_DisableToolUse()                                               ;B48400
     %AICMD0x50()                                               ;B48401
@@ -417,7 +417,7 @@ DATA8_B48400:
     %AICMD0x12_Jump($B4854E)                                   ;B485C3
 
 
-DATA8_B485C6:
+pAIScripting0x0F_StarNightFestival_Data05:
  
     %AICMD0x4F_DisableToolUse()                                               ;B485C6
     %AICMD0x50()                                               ;B485C7
@@ -494,7 +494,7 @@ DATA8_B485C6:
     %AICMD0x12_Jump($B486BE)                                   ;B486E5
 
 
-DATA8_B486E8:
+pAIScripting0x0F_StarNightFestival_Data06:
  
     %AICMD0x4F_DisableToolUse()                                               ;B486E8
     %AICMD0x50()                                               ;B486E9
@@ -594,7 +594,7 @@ AI_WaterImp:
 
 
 pAIScripting0x11:
-    dw DATA8_B48838                                            ;B48818|        |B48838;
+    dw pAIScripting0x11_Data01                                            ;B48818|        |B48838;
     dw pAIScripting0x12                                        ;B4881A|        |B488A0;
     dw pAIScripting0x12                                        ;B4881C|        |B488A0;
     dw pAIScripting0x12                                        ;B4881E|        |B488A0;
@@ -611,7 +611,7 @@ pAIScripting0x11:
     dw pAIScripting0x12                                        ;B48834|        |B488A0;
     dw pAIScripting0x12                                        ;B48836|        |B488A0;
  
-DATA8_B48838:
+pAIScripting0x11_Data01:
  
     %AICMD0x50()                                               ;B48838
     %AICMD0x09_StartScript($01, $B4886C)                                   ;B48839
@@ -652,7 +652,7 @@ DATA8_B48838:
 
 
 pAIScripting0x12:
-    dw DATA8_B488C0                                            ;B488A0|        |B488C0;
+    dw pAIScripting0x12_Data01                                            ;B488A0|        |B488C0;
     dw pAIScripting0x13                                        ;B488A2|        |B4892A;
     dw pAIScripting0x13                                        ;B488A4|        |B4892A;
     dw pAIScripting0x13                                        ;B488A6|        |B4892A;
@@ -669,7 +669,7 @@ pAIScripting0x12:
     dw pAIScripting0x13                                        ;B488BC|        |B4892A;
     dw pAIScripting0x13                                        ;B488BE|        |B4892A;
  
-DATA8_B488C0:
+pAIScripting0x12_Data01:
  
     %AICMD0x50()                                               ;B488C0
     %AICMD0x00_SetMusic($0A, $B4)                              ;B488C1
@@ -705,7 +705,7 @@ DATA8_B488C0:
 
 
 pAIScripting0x13:
-    dw DATA8_B4894A                                            ;B4892A|        |B4894A;
+    dw pAIScripting0x13_Data01                                            ;B4892A|        |B4894A;
     dw pAIScripting0x14                                        ;B4892C|        |B489D2;
     dw pAIScripting0x14                                        ;B4892E|        |B489D2;
     dw pAIScripting0x14                                        ;B48930|        |B489D2;
@@ -722,7 +722,7 @@ pAIScripting0x13:
     dw pAIScripting0x14                                        ;B48946|        |B489D2;
     dw pAIScripting0x14                                        ;B48948|        |B489D2;
  
-DATA8_B4894A:
+pAIScripting0x13_Data01:
  
     %AICMD0x50()                                               ;B4894A
     %AICMD0x08_EnableAIControl()                               ;B4894B
@@ -766,10 +766,10 @@ DATA8_B4894A:
 
 
 pAIScripting0x14:
-    dw DATA8_B489F2                                            ;B489D2|        |B489F2;
-    dw DATA8_B48AAB                                            ;B489D4|        |B48AAB;
-    dw DATA8_B48B00                                            ;B489D6|        |B48B00;
-    dw DATA8_B48B9B                                            ;B489D8|        |B48B9B;
+    dw pAIScripting0x14_Data01                                            ;B489D2|        |B489F2;
+    dw pAIScripting0x14_Data02                                            ;B489D4|        |B48AAB;
+    dw pAIScripting0x14_Data03                                            ;B489D6|        |B48B00;
+    dw pAIScripting0x14_Data04                                            ;B489D8|        |B48B9B;
     dw DATA8_B48BDE                                            ;B489DA|        |B48BDE;
     dw pAIScripting0x15                                        ;B489DC|        |B48C25;
     dw pAIScripting0x15                                        ;B489DE|        |B48C25;
@@ -783,7 +783,7 @@ pAIScripting0x14:
     dw pAIScripting0x15                                        ;B489EE|        |B48C25;
     dw pAIScripting0x15                                        ;B489F0|        |B48C25;
  
-DATA8_B489F2:
+pAIScripting0x14_Data01:
  
     %AICMD0x50()                                               ;B489F2
     %AICMD0x01_UnfreezeTime()                                  ;B489F3
@@ -846,7 +846,7 @@ DATA8_B489F2:
     %AICMD0x10_End()                                           ;B48AAA
 
 
-DATA8_B48AAB:
+pAIScripting0x14_Data02:
  
     %AICMD0x4F_DisableToolUse()                                               ;B48AAB
     %AICMD0x50()                                               ;B48AAC
@@ -877,7 +877,7 @@ DATA8_B48AAB:
     %AICMD0x12_Jump($B48AFA)                                   ;B48AFD
 
 
-DATA8_B48B00:
+pAIScripting0x14_Data03:
  
     %AICMD0x4F_DisableToolUse()                                               ;B48B00
     %AICMD0x50()                                               ;B48B01
@@ -927,7 +927,7 @@ DATA8_B48B00:
     %AICMD0x10_End()                                           ;B48B9A
 
 
-DATA8_B48B9B:
+pAIScripting0x14_Data04:
  
     %AICMD0x4F_DisableToolUse()                                               ;B48B9B
     %AICMD0x50()                                               ;B48B9C
@@ -977,7 +977,7 @@ DATA8_B48BDE:
 
 
 pAIScripting0x15:
-    dw DATA8_B48C45                                            ;B48C25|        |B48C45;
+    dw pAIScripting0x15_Data01                                            ;B48C25|        |B48C45;
     dw pAIScripting0x16                                        ;B48C27|        |B48D38;
     dw pAIScripting0x16                                        ;B48C29|        |B48D38;
     dw pAIScripting0x16                                        ;B48C2B|        |B48D38;
@@ -994,7 +994,7 @@ pAIScripting0x15:
     dw pAIScripting0x16                                        ;B48C41|        |B48D38;
     dw pAIScripting0x16                                        ;B48C43|        |B48D38;
  
-DATA8_B48C45:
+pAIScripting0x15_Data01:
  
     %AICMD0x05_SetTransferPosition(184, 360)                   ;B48C45
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B48C4A
@@ -1064,7 +1064,7 @@ DATA8_B48C45:
 
 
 pAIScripting0x16:
-    dw DATA8_B48D58                                            ;B48D38|        |B48D58;
+    dw pAIScripting0x16_Data01                                            ;B48D38|        |B48D58;
     dw pAIScripting0x17                                        ;B48D3A|        |B48E05;
     dw pAIScripting0x17                                        ;B48D3C|        |B48E05;
     dw pAIScripting0x17                                        ;B48D3E|        |B48E05;
@@ -1081,7 +1081,7 @@ pAIScripting0x16:
     dw pAIScripting0x17                                        ;B48D54|        |B48E05;
     dw pAIScripting0x17                                        ;B48D56|        |B48E05;
  
-DATA8_B48D58:
+pAIScripting0x16_Data01:
  
     %AICMD0x50()                                               ;B48D58
     %AICMD0x08_EnableAIControl()                               ;B48D59
@@ -1132,7 +1132,7 @@ DATA8_B48D58:
 
 
 pAIScripting0x17:
-    dw DATA8_B48E25                                            ;B48E05|        |B48E25;
+    dw pAIScripting0x17_Data01                                            ;B48E05|        |B48E25;
     dw pAIScripting0x18                                        ;B48E07|        |B48EC5;
     dw pAIScripting0x18                                        ;B48E09|        |B48EC5;
     dw pAIScripting0x18                                        ;B48E0B|        |B48EC5;
@@ -1149,7 +1149,7 @@ pAIScripting0x17:
     dw pAIScripting0x18                                        ;B48E21|        |B48EC5;
     dw pAIScripting0x18                                        ;B48E23|        |B48EC5;
  
-DATA8_B48E25:
+pAIScripting0x17_Data01:
  
     %AICMD0x00_SetMusic($0A, $B4)                              ;B48E25
     %AICMD0x08_EnableAIControl()                               ;B48E28
@@ -1199,7 +1199,7 @@ DATA8_B48E25:
 
 
 pAIScripting0x18:
-    dw DATA8_B48EE5                                            ;B48EC5|        |B48EE5;
+    dw pAIScripting0x18_Data01                                            ;B48EC5|        |B48EE5;
     dw pAIScripting0x19                                        ;B48EC7|        |B48F95;
     dw pAIScripting0x19                                        ;B48EC9|        |B48F95;
     dw pAIScripting0x19                                        ;B48ECB|        |B48F95;
@@ -1216,7 +1216,7 @@ pAIScripting0x18:
     dw pAIScripting0x19                                        ;B48EE1|        |B48F95;
     dw pAIScripting0x19                                        ;B48EE3|        |B48F95;
  
-DATA8_B48EE5:
+pAIScripting0x18_Data01:
  
     %AICMD0x09_StartScript($01, $B48EF9)                                   ;B48EE5
     %AICMD0x38_WaitForFadeIn()                                               ;B48EE9
@@ -1262,8 +1262,8 @@ DATA8_B48EE5:
 
 
 pAIScripting0x19:
-    dw DATA8_B48FB5                                            ;B48F95|        |B48FB5;
-    dw DATA8_B48FDE                                            ;B48F97|        |B48FDE;
+    dw pAIScripting0x19_Data01                                            ;B48F95|        |B48FB5;
+    dw pAIScripting0x19_Data02                                            ;B48F97|        |B48FDE;
     dw pAIScripting0x1A                                        ;B48F99|        |B490D3;
     dw pAIScripting0x1A                                        ;B48F9B|        |B490D3;
     dw pAIScripting0x1A                                        ;B48F9D|        |B490D3;
@@ -1279,7 +1279,7 @@ pAIScripting0x19:
     dw pAIScripting0x1A                                        ;B48FB1|        |B490D3;
     dw pAIScripting0x1A                                        ;B48FB3|        |B490D3;
  
-DATA8_B48FB5:
+pAIScripting0x19_Data01:
  
     %AICMD0x50()                                               ;B48FB5
     %AICMD0x08_EnableAIControl()                               ;B48FB6
@@ -1298,7 +1298,7 @@ DATA8_B48FB5:
     %AICMD0x10_End()                                           ;B48FDD
 
 
-DATA8_B48FDE:
+pAIScripting0x19_Data02:
  
     %AICMD0x50()                                               ;B48FDE
     %AICMD0x00_SetMusic($0E, $B4)                              ;B48FDF
@@ -1376,8 +1376,8 @@ DATA8_B48FDE:
 
 
 pAIScripting0x1A:
-    dw DATA8_B490F3                                            ;B490D3|        |B490F3;
-    dw DATA8_B4911C                                            ;B490D5|        |B4911C;
+    dw pAIScripting0x1A_Data01                                            ;B490D3|        |B490F3;
+    dw pAIScripting0x1A_Data02                                            ;B490D5|        |B4911C;
     dw pAIScripting0x1B                                        ;B490D7|        |B491B3;
     dw pAIScripting0x1B                                        ;B490D9|        |B491B3;
     dw pAIScripting0x1B                                        ;B490DB|        |B491B3;
@@ -1393,7 +1393,7 @@ pAIScripting0x1A:
     dw pAIScripting0x1B                                        ;B490EF|        |B491B3;
     dw pAIScripting0x1B                                        ;B490F1|        |B491B3;
  
-DATA8_B490F3:
+pAIScripting0x1A_Data01:
  
     %AICMD0x50()                                               ;B490F3
     %AICMD0x08_EnableAIControl()                               ;B490F4
@@ -1412,7 +1412,7 @@ DATA8_B490F3:
     %AICMD0x10_End()                                           ;B4911B
 
 
-DATA8_B4911C:
+pAIScripting0x1A_Data02:
  
     %AICMD0x50()                                               ;B4911C
     %AICMD0x00_SetMusic($0E, $B4)                              ;B4911D
@@ -1465,8 +1465,8 @@ DATA8_B4911C:
 
 
 pAIScripting0x1B:
-    dw DATA8_B491D3                                            ;B491B3|        |B491D3;
-    dw DATA8_B49210                                            ;B491B5|        |B49210;
+    dw pAIScripting0x1B_Data01                                            ;B491B3|        |B491D3;
+    dw pAIScripting0x1B_Data02                                            ;B491B5|        |B49210;
     dw pAIScripting0x1C                                        ;B491B7|        |B492D2;
     dw pAIScripting0x1C                                        ;B491B9|        |B492D2;
     dw pAIScripting0x1C                                        ;B491BB|        |B492D2;
@@ -1482,7 +1482,7 @@ pAIScripting0x1B:
     dw pAIScripting0x1C                                        ;B491CF|        |B492D2;
     dw pAIScripting0x1C                                        ;B491D1|        |B492D2;
  
-DATA8_B491D3:
+pAIScripting0x1B_Data01:
  
     %AICMD0x50()                                               ;B491D3
     %AICMD0x08_EnableAIControl()                               ;B491D4
@@ -1507,7 +1507,7 @@ DATA8_B491D3:
     %AICMD0x10_End()                                           ;B4920F
 
 
-DATA8_B49210:
+pAIScripting0x1B_Data02:
  
     %AICMD0x00_SetMusic($0E, $B4)                              ;B49210
     %AICMD0x09_StartScript($01, $B49221)                                   ;B49213
@@ -1567,9 +1567,9 @@ DATA8_B49210:
 
 
 pAIScripting0x1C:
-    dw DATA8_B492F2                                            ;B492D2|        |B492F2;
-    dw DATA8_B4931D                                            ;B492D4|        |B4931D;
-    dw DATA8_B49401                                            ;B492D6|        |B49401;
+    dw pAIScripting0x1C_Data01                                            ;B492D2|        |B492F2;
+    dw pAIScripting0x1C_Data02                                            ;B492D4|        |B4931D;
+    dw pAIScripting0x1C_Data03                                            ;B492D6|        |B49401;
     dw pAIScripting0x1D                                        ;B492D8|        |B4943C;
     dw pAIScripting0x1D                                        ;B492DA|        |B4943C;
     dw pAIScripting0x1D                                        ;B492DC|        |B4943C;
@@ -1584,7 +1584,7 @@ pAIScripting0x1C:
     dw pAIScripting0x1D                                        ;B492EE|        |B4943C;
     dw pAIScripting0x1D                                        ;B492F0|        |B4943C;
  
-DATA8_B492F2:
+pAIScripting0x1C_Data01:
  
     %AICMD0x50()                                               ;B492F2
     %AICMD0x08_EnableAIControl()                               ;B492F3
@@ -1604,7 +1604,7 @@ DATA8_B492F2:
     %AICMD0x10_End()                                           ;B4931C
 
 
-DATA8_B4931D:
+pAIScripting0x1C_Data02:
  
     %AICMD0x00_SetMusic($0E, $B4)                              ;B4931D
     %AICMD0x09_StartScript($0A, $B49326)                                   ;B49320
@@ -1669,7 +1669,7 @@ DATA8_B4931D:
     %AICMD0x10_End()                                           ;B49400
 
 
-DATA8_B49401:
+pAIScripting0x1C_Data03:
  
     %AICMD0x50()                                               ;B49401
     %AICMD0x02_FreezeTime()                                    ;B49402
@@ -1697,10 +1697,10 @@ DATA8_B49401:
 
 
 pAIScripting0x1D:
-    dw DATA8_B4945C                                            ;B4943C|        |B4945C;
-    dw DATA8_B49499                                            ;B4943E|        |B49499;
-    dw DATA8_B49513                                            ;B49440|        |B49513;
-    dw DATA8_B4958B                                            ;B49442|        |B4958B;
+    dw pAIScripting0x1D_Data01                                            ;B4943C|        |B4945C;
+    dw pAIScripting0x1D_Data02                                            ;B4943E|        |B49499;
+    dw pAIScripting0x1D_Data03                                            ;B49440|        |B49513;
+    dw pAIScripting0x1D_Data04                                            ;B49442|        |B4958B;
     dw pAIScripting0x1E                                        ;B49444|        |B4967A;
     dw pAIScripting0x1E                                        ;B49446|        |B4967A;
     dw pAIScripting0x1E                                        ;B49448|        |B4967A;
@@ -1714,7 +1714,7 @@ pAIScripting0x1D:
     dw pAIScripting0x1E                                        ;B49458|        |B4967A;
     dw pAIScripting0x1E                                        ;B4945A|        |B4967A;
  
-DATA8_B4945C:
+pAIScripting0x1D_Data01:
  
     %AICMD0x50()                                               ;B4945C
     %AICMD0x08_EnableAIControl()                               ;B4945D
@@ -1739,7 +1739,7 @@ DATA8_B4945C:
     %AICMD0x10_End()                                           ;B49498
 
 
-DATA8_B49499:
+pAIScripting0x1D_Data02:
  
     %AICMD0x09_StartScript($01, $B494B1)                                   ;B49499
     %AICMD0x09_StartScript($02, $B494C6)                                   ;B4949D
@@ -1773,7 +1773,7 @@ DATA8_B49499:
     %AICMD0x12_Jump($B49506)                                   ;B49510
 
 
-DATA8_B49513:
+pAIScripting0x1D_Data03:
  
     %AICMD0x50()                                               ;B49513
     %AICMD0x00_SetMusic($0E, $B4)                              ;B49514
@@ -1810,7 +1810,7 @@ DATA8_B49513:
     %AICMD0x12_Jump($B4957C)                                   ;B49588
 
 
-DATA8_B4958B:
+pAIScripting0x1D_Data04:
  
     %AICMD0x50()                                               ;B4958B
     %AICMD0x08_EnableAIControl()                               ;B4958C
@@ -1888,7 +1888,7 @@ DATA8_B4958B:
 
 
 pAIScripting0x1E:
-    dw DATA8_B4969A                                            ;B4967A|        |B4969A;
+    dw pAIScripting0x1E_Data01                                            ;B4967A|        |B4969A;
     dw pAIScripting0x1F                                        ;B4967C|        |B49A3F;
     dw pAIScripting0x1F                                        ;B4967E|        |B49A3F;
     dw pAIScripting0x1F                                        ;B49680|        |B49A3F;
@@ -1905,7 +1905,7 @@ pAIScripting0x1E:
     dw pAIScripting0x1F                                        ;B49696|        |B49A3F;
     dw pAIScripting0x1F                                        ;B49698|        |B49A3F;
  
-DATA8_B4969A:
+pAIScripting0x1E_Data01:
  
     %AICMD0x50()                                               ;B4969A
     %AICMD0x00_SetMusic($18, $B4)                              ;B4969B
@@ -2149,9 +2149,9 @@ DATA8_B4969A:
 
 
 pAIScripting0x1F:
-    dw DATA8_B49A5F                                            ;B49A3F|        |B49A5F;
-    dw DATA8_B49C2A                                            ;B49A41|        |B49C2A;
-    dw DATA8_B49DD5                                            ;B49A43|        |B49DD5;
+    dw pAIScripting0x1F_Data01                                            ;B49A3F|        |B49A5F;
+    dw pAIScripting0x1F_Data02                                            ;B49A41|        |B49C2A;
+    dw pAIScripting0x1F_Data03                                            ;B49A43|        |B49DD5;
     dw pAIScripting0x20                                        ;B49A45|        |B49E31;
     dw pAIScripting0x20                                        ;B49A47|        |B49E31;
     dw pAIScripting0x20                                        ;B49A49|        |B49E31;
@@ -2166,7 +2166,7 @@ pAIScripting0x1F:
     dw pAIScripting0x20                                        ;B49A5B|        |B49E31;
     dw pAIScripting0x20                                        ;B49A5D|        |B49E31;
  
-DATA8_B49A5F:
+pAIScripting0x1F_Data01:
  
     %AICMD0x50()                                               ;B49A5F
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $0D)       ;B49A60
@@ -2276,7 +2276,7 @@ DATA8_B49A5F:
     %AICMD0x12_Jump($B49C1D)                                   ;B49C27
 
 
-DATA8_B49C2A:
+pAIScripting0x1F_Data02:
  
     %AICMD0x50()                                               ;B49C2A
     %AICMD0x00_SetMusic($0B, $B4)                              ;B49C2B
@@ -2387,7 +2387,7 @@ DATA8_B49C2A:
     %AICMD0x12_Jump($B49DC8)                                   ;B49DD2
 
 
-DATA8_B49DD5:
+pAIScripting0x1F_Data03:
  
     %AICMD0x50()                                               ;B49DD5
     %AICMD0x08_EnableAIControl()                               ;B49DD6
@@ -2416,7 +2416,7 @@ DATA8_B49DD5:
 
 
 pAIScripting0x20:
-    dw DATA8_B49E51                                            ;B49E31|        |B49E51;
+    dw pAIScripting0x20_Data01                                            ;B49E31|        |B49E51;
     dw pAIScripting0x21                                        ;B49E33|        |B49F13;
     dw pAIScripting0x21                                        ;B49E35|        |B49F13;
     dw pAIScripting0x21                                        ;B49E37|        |B49F13;
@@ -2433,7 +2433,7 @@ pAIScripting0x20:
     dw pAIScripting0x21                                        ;B49E4D|        |B49F13;
     dw pAIScripting0x21                                        ;B49E4F|        |B49F13;
  
-DATA8_B49E51:
+pAIScripting0x20_Data01:
  
     %AICMD0x50()                                               ;B49E51
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B49E52
@@ -2495,7 +2495,7 @@ DATA8_B49E51:
 
 
 pAIScripting0x21:
-    dw DATA8_B49F33                                            ;B49F13|        |B49F33;
+    dw pAIScripting0x21_Data01                                            ;B49F13|        |B49F33;
     dw pAIScripting0x22                                        ;B49F15|        |B49FD8;
     dw pAIScripting0x22                                        ;B49F17|        |B49FD8;
     dw pAIScripting0x22                                        ;B49F19|        |B49FD8;
@@ -2512,7 +2512,7 @@ pAIScripting0x21:
     dw pAIScripting0x22                                        ;B49F2F|        |B49FD8;
     dw pAIScripting0x22                                        ;B49F31|        |B49FD8;
  
-DATA8_B49F33:
+pAIScripting0x21_Data01:
  
     %AICMD0x09_StartScript($13, $B49FB3)                                   ;B49F33
     %AICMD0x10_End()                                           ;B49F37
@@ -2565,24 +2565,24 @@ DATA8_B49F33:
 
 
 pAIScripting0x22:
-    dw DATA8_B49FF8                                            ;B49FD8|        |B49FF8;
-    dw DATA8_B4A045                                            ;B49FDA|        |B4A045;
-    dw DATA8_B4A091                                            ;B49FDC|        |B4A091;
+    dw pAIScripting0x22_Data01                                            ;B49FD8|        |B49FF8;
+    dw pAIScripting0x22_Data02                                            ;B49FDA|        |B4A045;
+    dw pAIScripting0x22_Data03                                            ;B49FDC|        |B4A091;
     dw DATA8_B4A0B6                                            ;B49FDE|        |B4A0B6;
     dw DATA8_B4A0D2                                            ;B49FE0|        |B4A0D2;
     dw DATA8_B4A11E                                            ;B49FE2|        |B4A11E;
     dw DATA8_B4A141                                            ;B49FE4|        |B4A141;
     dw DATA8_B4A1BC                                            ;B49FE6|        |B4A1BC;
-    dw DATA8_B4A1D8                                            ;B49FE8|        |B4A1D8;
-    dw DATA8_B4A278                                            ;B49FEA|        |B4A278;
-    dw DATA8_B4A297                                            ;B49FEC|        |B4A297;
-    dw DATA8_B4A301                                            ;B49FEE|        |B4A301;
-    dw DATA8_B4A321                                            ;B49FF0|        |B4A321;
+    dw pAIScripting0x22_Data04                                            ;B49FE8|        |B4A1D8;
+    dw pAIScripting0x22_Data05                                            ;B49FEA|        |B4A278;
+    dw pAIScripting0x22_Data06                                            ;B49FEC|        |B4A297;
+    dw pAIScripting0x22_Data07                                            ;B49FEE|        |B4A301;
+    dw pAIScripting0x22_Data08                                            ;B49FF0|        |B4A321;
     dw pAIScripting0x23                                        ;B49FF2|        |B4A37F;
     dw pAIScripting0x23                                        ;B49FF4|        |B4A37F;
     dw pAIScripting0x23                                        ;B49FF6|        |B4A37F;
  
-DATA8_B49FF8:
+pAIScripting0x22_Data01:
  
     %AICMD0x50()                                               ;B49FF8
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B49FF9
@@ -2612,7 +2612,7 @@ DATA8_B49FF8:
     %AICMD0x10_End()                                           ;B4A044
 
 
-DATA8_B4A045:
+pAIScripting0x22_Data02:
  
     %AICMD0x50()                                               ;B4A045
     %AICMD0x05_SetTransferPosition(136, 120)                   ;B4A046
@@ -2642,7 +2642,7 @@ DATA8_B4A045:
     %AICMD0x10_End()                                           ;B4A090
 
 
-DATA8_B4A091:
+pAIScripting0x22_Data03:
  
     %AICMD0x50()                                               ;B4A091
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $00, $B4A0B6)   ;B4A092
@@ -2764,7 +2764,7 @@ DATA8_B4A1BC:
     %AICMD0x12_Jump($B4A1CB)                                   ;B4A1D5
 
 
-DATA8_B4A1D8:
+pAIScripting0x22_Data04:
  
     %AICMD0x50()                                               ;B4A1D8
     %AICMD0x08_EnableAIControl()                               ;B4A1D9
@@ -2819,7 +2819,7 @@ DATA8_B4A1D8:
     %AICMD0x12_Jump($B4A272)                                   ;B4A275
 
 
-DATA8_B4A278:
+pAIScripting0x22_Data05:
  
     %AICMD0x50()                                               ;B4A278
     %AICMD0x09_StartScript($01, $B4A27F)                                   ;B4A279
@@ -2833,7 +2833,7 @@ DATA8_B4A278:
     %AICMD0x12_Jump($B4A28A)                                   ;B4A294
 
 
-DATA8_B4A297:
+pAIScripting0x22_Data06:
  
     %AICMD0x50()                                               ;B4A297
     %AICMD0x08_EnableAIControl()                               ;B4A298
@@ -2871,7 +2871,7 @@ DATA8_B4A297:
     %AICMD0x12_Jump($B4A2FB)                                   ;B4A2FE
 
 
-DATA8_B4A301:
+pAIScripting0x22_Data07:
  
     %AICMD0x50()                                               ;B4A301
     %AICMD0x09_StartScript($01, $B4A308)                                   ;B4A302
@@ -2885,7 +2885,7 @@ DATA8_B4A301:
     %AICMD0x12_Jump($B4A310)                                   ;B4A31E
 
 
-DATA8_B4A321:
+pAIScripting0x22_Data08:
  
     %AICMD0x50()                                               ;B4A321
     %AICMD0x08_EnableAIControl()                               ;B4A322
@@ -2920,7 +2920,7 @@ DATA8_B4A321:
 
 
 pAIScripting0x23:
-    dw DATA8_B4A39F                                            ;B4A37F|        |B4A39F;
+    dw pAIScripting0x23_Data01                                            ;B4A37F|        |B4A39F;
     dw pAIScripting0x24                                        ;B4A381|        |B4A455;
     dw pAIScripting0x24                                        ;B4A383|        |B4A455;
     dw pAIScripting0x24                                        ;B4A385|        |B4A455;
@@ -2937,7 +2937,7 @@ pAIScripting0x23:
     dw pAIScripting0x24                                        ;B4A39B|        |B4A455;
     dw pAIScripting0x24                                        ;B4A39D|        |B4A455;
  
-DATA8_B4A39F:
+pAIScripting0x23_Data01:
  
     %AICMD0x09_StartScript($0C, $B4A3B7)                                   ;B4A39F
     %AICMD0x09_StartScript($0D, $B4A3F1)                                   ;B4A3A3
@@ -2991,10 +2991,10 @@ DATA8_B4A39F:
 
 
 pAIScripting0x24:
-    dw DATA8_B4A475                                            ;B4A455|        |B4A475;
-    dw DATA8_B4A531                                            ;B4A457|        |B4A531;
-    dw DATA8_B4A55D                                            ;B4A459|        |B4A55D;
-    dw DATA8_B4A589                                            ;B4A45B|        |B4A589;
+    dw pAIScripting0x24_Data01                                            ;B4A455|        |B4A475;
+    dw pAIScripting0x24_Data02                                            ;B4A457|        |B4A531;
+    dw pAIScripting0x24_Data03                                            ;B4A459|        |B4A55D;
+    dw pAIScripting0x24_Data04                                            ;B4A45B|        |B4A589;
     dw pAIScripting0x25                                        ;B4A45D|        |B4A5B5;
     dw pAIScripting0x25                                        ;B4A45F|        |B4A5B5;
     dw pAIScripting0x25                                        ;B4A461|        |B4A5B5;
@@ -3008,7 +3008,7 @@ pAIScripting0x24:
     dw pAIScripting0x25                                        ;B4A471|        |B4A5B5;
     dw pAIScripting0x25                                        ;B4A473|        |B4A5B5;
  
-DATA8_B4A475:
+pAIScripting0x24_Data01:
  
     %AICMD0x08_EnableAIControl()                               ;B4A475
     %AICMD0x1A($FFF8, $01A8, $B382AC, $02)                     ;B4A476
@@ -3063,7 +3063,7 @@ DATA8_B4A475:
     %AICMD0x10_End()                                           ;B4A530
 
 
-DATA8_B4A531:
+pAIScripting0x24_Data02:
  
     %AICMD0x08_EnableAIControl()                               ;B4A531
     %AICMD0x1A($FFF8, $01A8, $B38318, $02)                     ;B4A532
@@ -3081,7 +3081,7 @@ DATA8_B4A531:
     %AICMD0x10_End()                                           ;B4A55C
 
 
-DATA8_B4A55D:
+pAIScripting0x24_Data03:
  
     %AICMD0x08_EnableAIControl()                               ;B4A55D
     %AICMD0x1A($FFF8, $01A8, $B38240, $02)                     ;B4A55E
@@ -3099,7 +3099,7 @@ DATA8_B4A55D:
     %AICMD0x10_End()                                           ;B4A588
 
 
-DATA8_B4A589:
+pAIScripting0x24_Data04:
  
     %AICMD0x08_EnableAIControl()                               ;B4A589
     %AICMD0x1A($FFF8, $01A8, $B38240, $02)                     ;B4A58A
@@ -3118,7 +3118,7 @@ DATA8_B4A589:
 
 
 pAIScripting0x25:
-    dw DATA8_B4A5D5                                            ;B4A5B5|        |B4A5D5;
+    dw pAIScripting0x25_Data01                                            ;B4A5B5|        |B4A5D5;
     dw pAIScripting0x26                                        ;B4A5B7|        |B4A60D;
     dw pAIScripting0x26                                        ;B4A5B9|        |B4A60D;
     dw pAIScripting0x26                                        ;B4A5BB|        |B4A60D;
@@ -3135,7 +3135,7 @@ pAIScripting0x25:
     dw pAIScripting0x26                                        ;B4A5D1|        |B4A60D;
     dw pAIScripting0x26                                        ;B4A5D3|        |B4A60D;
  
-DATA8_B4A5D5:
+pAIScripting0x25_Data01:
  
     %AICMD0x02_FreezeTime()                                    ;B4A5D5
     %AICMD0x05_SetTransferPosition(136, 344)                   ;B4A5D6
@@ -3160,8 +3160,8 @@ DATA8_B4A5D5:
 
 
 pAIScripting0x26:
-    dw DATA8_B4A62D                                            ;B4A60D|        |B4A62D;
-    dw DATA8_B4B48E                                            ;B4A60F|        |B4B48E;
+    dw pAIScripting0x26_Data01                                            ;B4A60D|        |B4A62D;
+    dw pAIScripting0x26_Data02                                            ;B4A60F|        |B4B48E;
     dw pAIScripting0x27                                        ;B4A611|        |B4B65E;
     dw pAIScripting0x27                                        ;B4A613|        |B4B65E;
     dw pAIScripting0x27                                        ;B4A615|        |B4B65E;
@@ -3177,7 +3177,7 @@ pAIScripting0x26:
     dw pAIScripting0x27                                        ;B4A629|        |B4B65E;
     dw pAIScripting0x27                                        ;B4A62B|        |B4B65E;
  
-DATA8_B4A62D:
+pAIScripting0x26_Data01:
  
     %AICMD0x4F_DisableToolUse()                                               ;B4A62D
     %AICMD0x51()                                               ;B4A62E
@@ -4088,7 +4088,7 @@ DATA8_B4A62D:
     %AICMD0x12_Jump($B4B444)                                   ;B4B48B
 
 
-DATA8_B4B48E:
+pAIScripting0x26_Data02:
  
     %AICMD0x4F_DisableToolUse()                                               ;B4B48E
     %AICMD0x50()                                               ;B4B48F
@@ -4214,10 +4214,10 @@ DATA8_B4B48E:
 
 
 pAIScripting0x27:
-    dw DATA8_B4B67E                                            ;B4B65E|        |B4B67E;
-    dw DATA8_B4B947                                            ;B4B660|        |B4B947;
-    dw DATA8_B4B9C2                                            ;B4B662|        |B4B9C2;
-    dw DATA8_B4BA8E                                            ;B4B664|        |B4BA8E;
+    dw pAIScripting0x27_Data01                                            ;B4B65E|        |B4B67E;
+    dw pAIScripting0x27_Data02                                            ;B4B660|        |B4B947;
+    dw pAIScripting0x27_Data03                                            ;B4B662|        |B4B9C2;
+    dw pAIScripting0x27_Data04                                            ;B4B664|        |B4BA8E;
     dw pAIScripting0x28                                        ;B4B666|        |B4BACB;
     dw pAIScripting0x28                                        ;B4B668|        |B4BACB;
     dw pAIScripting0x28                                        ;B4B66A|        |B4BACB;
@@ -4231,7 +4231,7 @@ pAIScripting0x27:
     dw pAIScripting0x28                                        ;B4B67A|        |B4BACB;
     dw pAIScripting0x28                                        ;B4B67C|        |B4BACB;
  
-DATA8_B4B67E:
+pAIScripting0x27_Data01:
  
     %AICMD0x4F_DisableToolUse()                                               ;B4B67E
     %AICMD0x50()                                               ;B4B67F
@@ -4403,7 +4403,7 @@ DATA8_B4B67E:
     %AICMD0x12_Jump($B4B69C)                                   ;B4B944
 
 
-DATA8_B4B947:
+pAIScripting0x27_Data02:
  
     %AICMD0x4F_DisableToolUse()                                               ;B4B947
     %AICMD0x50()                                               ;B4B948
@@ -4442,7 +4442,7 @@ DATA8_B4B947:
     %AICMD0x12_Jump($B4B984)                                   ;B4B9BF
 
 
-DATA8_B4B9C2:
+pAIScripting0x27_Data03:
  
     %AICMD0x4F_DisableToolUse()                                               ;B4B9C2
     %AICMD0x50()                                               ;B4B9C3
@@ -4496,7 +4496,7 @@ DATA8_B4B9C2:
     %AICMD0x12_Jump($B4BA46)                                   ;B4BA8B
 
 
-DATA8_B4BA8E:
+pAIScripting0x27_Data04:
  
     %AICMD0x4F_DisableToolUse()                                               ;B4BA8E
     %AICMD0x50()                                               ;B4BA8F
@@ -4518,10 +4518,10 @@ DATA8_B4BA8E:
 
 
 pAIScripting0x28:
-    dw DATA8_B4BAEB                                            ;B4BACB|        |B4BAEB;
-    dw DATA8_B4BB06                                            ;B4BACD|        |B4BB06;
-    dw DATA8_B4BD19                                            ;B4BACF|        |B4BD19;
-    dw DATA8_B4C3AC                                            ;B4BAD1|        |B4C3AC;
+    dw pAIScripting0x28_Data01                                            ;B4BACB|        |B4BAEB;
+    dw pAIScripting0x28_Data02                                            ;B4BACD|        |B4BB06;
+    dw pAIScripting0x28_Data03                                            ;B4BACF|        |B4BD19;
+    dw pAIScripting0x28_Data04                                            ;B4BAD1|        |B4C3AC;
     dw pAIScripting0x29                                        ;B4BAD3|        |B4C427;
     dw pAIScripting0x29                                        ;B4BAD5|        |B4C427;
     dw pAIScripting0x29                                        ;B4BAD7|        |B4C427;
@@ -4535,7 +4535,7 @@ pAIScripting0x28:
     dw pAIScripting0x29                                        ;B4BAE7|        |B4C427;
     dw pAIScripting0x29                                        ;B4BAE9|        |B4C427;
  
-DATA8_B4BAEB:
+pAIScripting0x28_Data01:
  
     %AICMD0x4F_DisableToolUse()                                               ;B4BAEB
     %AICMD0x50()                                               ;B4BAEC
@@ -4551,7 +4551,7 @@ DATA8_B4BAEB:
     %AICMD0x10_End()                                           ;B4BB05
 
 
-DATA8_B4BB06:
+pAIScripting0x28_Data02:
  
     %AICMD0x4F_DisableToolUse()                                               ;B4BB06
     %AICMD0x50()                                               ;B4BB07
@@ -4707,7 +4707,7 @@ DATA8_B4BB06:
     %AICMD0x12_Jump($B4BCFD)                                   ;B4BD16
 
 
-DATA8_B4BD19:
+pAIScripting0x28_Data03:
  
     %AICMD0x4F_DisableToolUse()                                               ;B4BD19
     %AICMD0x50()                                               ;B4BD1A
@@ -5101,7 +5101,7 @@ DATA8_B4BD19:
     %AICMD0x10_End()                                           ;B4C3AB
 
 
-DATA8_B4C3AC:
+pAIScripting0x28_Data04:
  
     %AICMD0x4F_DisableToolUse()                                               ;B4C3AC
     %AICMD0x50()                                               ;B4C3AD
@@ -5143,7 +5143,7 @@ DATA8_B4C3AC:
 
 
 pAIScripting0x29:
-    dw DATA8_B4C447                                            ;B4C427|        |B4C447;
+    dw pAIScripting0x29_Data01                                            ;B4C427|        |B4C447;
     dw pAIScripting0x2A                                        ;B4C429|        |B4C4B8;
     dw pAIScripting0x2A                                        ;B4C42B|        |B4C4B8;
     dw pAIScripting0x2A                                        ;B4C42D|        |B4C4B8;
@@ -5160,7 +5160,7 @@ pAIScripting0x29:
     dw pAIScripting0x2A                                        ;B4C443|        |B4C4B8;
     dw pAIScripting0x2A                                        ;B4C445|        |B4C4B8;
  
-DATA8_B4C447:
+pAIScripting0x29_Data01:
  
     %AICMD0x09_StartScript($01, $B4C44D)                                   ;B4C447
     %AICMD0x38_WaitForFadeIn()                                               ;B4C44B
@@ -5192,7 +5192,7 @@ DATA8_B4C447:
 
 
 pAIScripting0x2A:
-    dw DATA8_B4C4D8                                            ;B4C4B8|        |B4C4D8;
+    dw pAIScripting0x2A_Data01                                            ;B4C4B8|        |B4C4D8;
     dw pAIScripting0x2B                                        ;B4C4BA|        |B4C504;
     dw pAIScripting0x2B                                        ;B4C4BC|        |B4C504;
     dw pAIScripting0x2B                                        ;B4C4BE|        |B4C504;
@@ -5209,7 +5209,7 @@ pAIScripting0x2A:
     dw pAIScripting0x2B                                        ;B4C4D4|        |B4C504;
     dw pAIScripting0x2B                                        ;B4C4D6|        |B4C504;
  
-DATA8_B4C4D8:
+pAIScripting0x2A_Data01:
  
     %AICMD0x1A($0218, $0078, $B387A4, $00)                     ;B4C4D8
     %AICMD0x13_Wait(1)                                         ;B4C4E0
@@ -5225,7 +5225,7 @@ DATA8_B4C4D8:
 
 
 pAIScripting0x2B:
-    dw DATA8_B4C524                                            ;B4C504|        |B4C524;
+    dw pAIScripting0x2B_Data01                                            ;B4C504|        |B4C524;
     dw pAIScripting0x2C                                        ;B4C506|        |B4C548;
     dw pAIScripting0x2C                                        ;B4C508|        |B4C548;
     dw pAIScripting0x2C                                        ;B4C50A|        |B4C548;
@@ -5242,7 +5242,7 @@ pAIScripting0x2B:
     dw pAIScripting0x2C                                        ;B4C520|        |B4C548;
     dw pAIScripting0x2C                                        ;B4C522|        |B4C548;
  
-DATA8_B4C524:
+pAIScripting0x2B_Data01:
  
     %AICMD0x1A($0088, $0098, $B38798, $00)                     ;B4C524
     %AICMD0x13_Wait(1)                                         ;B4C52C
@@ -5256,7 +5256,7 @@ DATA8_B4C524:
 
 
 pAIScripting0x2C:
-    dw DATA8_B4C568                                            ;B4C548|        |B4C568;
+    dw pAIScripting0x2C_Data01                                            ;B4C548|        |B4C568;
     dw pAIScripting0x2D                                        ;B4C54A|        |B4C584;
     dw pAIScripting0x2D                                        ;B4C54C|        |B4C584;
     dw pAIScripting0x2D                                        ;B4C54E|        |B4C584;
@@ -5273,7 +5273,7 @@ pAIScripting0x2C:
     dw pAIScripting0x2D                                        ;B4C564|        |B4C584;
     dw pAIScripting0x2D                                        ;B4C566|        |B4C584;
  
-DATA8_B4C568:
+pAIScripting0x2C_Data01:
  
     %AICMD0x1A($0228, $0258, $B387B0, $00)                     ;B4C568
     %AICMD0x13_Wait(60)                                        ;B4C570
@@ -5285,7 +5285,7 @@ DATA8_B4C568:
 
 
 pAIScripting0x2D:
-    dw DATA8_B4C5A4                                            ;B4C584|        |B4C5A4;
+    dw pAIScripting0x2D_Data01                                            ;B4C584|        |B4C5A4;
     dw pAIScripting0x2E                                        ;B4C586|        |B4C5F4;
     dw pAIScripting0x2E                                        ;B4C588|        |B4C5F4;
     dw pAIScripting0x2E                                        ;B4C58A|        |B4C5F4;
@@ -5302,7 +5302,7 @@ pAIScripting0x2D:
     dw pAIScripting0x2E                                        ;B4C5A0|        |B4C5F4;
     dw pAIScripting0x2E                                        ;B4C5A2|        |B4C5F4;
  
-DATA8_B4C5A4:
+pAIScripting0x2D_Data01:
  
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B4C5A4
     %AICMD0x09_StartScript($01, $B4C5B2)                                   ;B4C5A6
@@ -5326,7 +5326,7 @@ DATA8_B4C5A4:
 
 
 pAIScripting0x2E:
-    dw DATA8_B4C614                                            ;B4C5F4|        |B4C614;
+    dw pAIScripting0x2E_Data01                                            ;B4C5F4|        |B4C614;
     dw pAIScripting0x2F                                        ;B4C5F6|        |B4C6F1;
     dw pAIScripting0x2F                                        ;B4C5F8|        |B4C6F1;
     dw pAIScripting0x2F                                        ;B4C5FA|        |B4C6F1;
@@ -5343,7 +5343,7 @@ pAIScripting0x2E:
     dw pAIScripting0x2F                                        ;B4C610|        |B4C6F1;
     dw pAIScripting0x2F                                        ;B4C612|        |B4C6F1;
  
-DATA8_B4C614:
+pAIScripting0x2E_Data01:
  
     %AICMD0x00_SetMusic($01, $B4)                              ;B4C614
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $02)       ;B4C617
@@ -5409,7 +5409,7 @@ DATA8_B4C614:
 
 
 pAIScripting0x2F:
-    dw DATA8_B4C711                                            ;B4C6F1|        |B4C711;
+    dw pAIScripting0x2F_Data01                                            ;B4C6F1|        |B4C711;
     dw pAIScripting0x30                                        ;B4C6F3|        |B4C7C3;
     dw pAIScripting0x30                                        ;B4C6F5|        |B4C7C3;
     dw pAIScripting0x30                                        ;B4C6F7|        |B4C7C3;
@@ -5426,7 +5426,7 @@ pAIScripting0x2F:
     dw pAIScripting0x30                                        ;B4C70D|        |B4C7C3;
     dw pAIScripting0x30                                        ;B4C70F|        |B4C7C3;
  
-DATA8_B4C711:
+pAIScripting0x2F_Data01:
  
     %AICMD0x00_SetMusic($11, $B4)                              ;B4C711
     %AICMD0x02_FreezeTime()                                    ;B4C714
@@ -5487,7 +5487,7 @@ DATA8_B4C711:
 
 
 pAIScripting0x30:
-    dw DATA8_B4C7E3                                            ;B4C7C3|        |B4C7E3;
+    dw pAIScripting0x30_Data01                                            ;B4C7C3|        |B4C7E3;
     dw pAIScripting0x31                                        ;B4C7C5|        |B4C9F9;
     dw pAIScripting0x31                                        ;B4C7C7|        |B4C9F9;
     dw pAIScripting0x31                                        ;B4C7C9|        |B4C9F9;
@@ -5504,7 +5504,7 @@ pAIScripting0x30:
     dw pAIScripting0x31                                        ;B4C7DF|        |B4C9F9;
     dw pAIScripting0x31                                        ;B4C7E1|        |B4C9F9;
  
-DATA8_B4C7E3:
+pAIScripting0x30_Data01:
  
     %AICMD0x00_SetMusic($10, $B4)                              ;B4C7E3
     %AICMD0x02_FreezeTime()                                    ;B4C7E6
@@ -5654,7 +5654,7 @@ DATA8_B4C7E3:
 
 
 pAIScripting0x31:
-    dw DATA8_B4CA19                                            ;B4C9F9|        |B4CA19;
+    dw pAIScripting0x31_Data01                                            ;B4C9F9|        |B4CA19;
     dw pAIScripting0x32                                        ;B4C9FB|        |B4CB3F;
     dw pAIScripting0x32                                        ;B4C9FD|        |B4CB3F;
     dw pAIScripting0x32                                        ;B4C9FF|        |B4CB3F;
@@ -5671,7 +5671,7 @@ pAIScripting0x31:
     dw pAIScripting0x32                                        ;B4CA15|        |B4CB3F;
     dw pAIScripting0x32                                        ;B4CA17|        |B4CB3F;
  
-DATA8_B4CA19:
+pAIScripting0x31_Data01:
  
     %AICMD0x00_SetMusic($10, $B4)                              ;B4CA19
     %AICMD0x05_SetTransferPosition(65520, 104)                 ;B4CA1C
@@ -5763,7 +5763,7 @@ DATA8_B4CA19:
 
 
 pAIScripting0x32:
-    dw DATA8_B4CB5F                                            ;B4CB3F|        |B4CB5F;
+    dw pAIScripting0x32_Data01                                            ;B4CB3F|        |B4CB5F;
     dw pAIScripting0x33                                        ;B4CB41|        |B4CD56;
     dw pAIScripting0x33                                        ;B4CB43|        |B4CD56;
     dw pAIScripting0x33                                        ;B4CB45|        |B4CD56;
@@ -5780,7 +5780,7 @@ pAIScripting0x32:
     dw pAIScripting0x33                                        ;B4CB5B|        |B4CD56;
     dw pAIScripting0x33                                        ;B4CB5D|        |B4CD56;
  
-DATA8_B4CB5F:
+pAIScripting0x32_Data01:
  
     %AICMD0x00_SetMusic($10, $B4)                              ;B4CB5F
     %AICMD0x02_FreezeTime()                                    ;B4CB62
@@ -5922,7 +5922,7 @@ DATA8_B4CB5F:
 
 
 pAIScripting0x33:
-    dw DATA8_B4CD76                                            ;B4CD56|        |B4CD76;
+    dw pAIScripting0x33_Data01                                            ;B4CD56|        |B4CD76;
     dw pAIScripting0x34                                        ;B4CD58|        |B4CECA;
     dw pAIScripting0x34                                        ;B4CD5A|        |B4CECA;
     dw pAIScripting0x34                                        ;B4CD5C|        |B4CECA;
@@ -5939,7 +5939,7 @@ pAIScripting0x33:
     dw pAIScripting0x34                                        ;B4CD72|        |B4CECA;
     dw pAIScripting0x34                                        ;B4CD74|        |B4CECA;
  
-DATA8_B4CD76:
+pAIScripting0x33_Data01:
  
     %AICMD0x00_SetMusic($10, $B4)                              ;B4CD76
     %AICMD0x02_FreezeTime()                                    ;B4CD79
@@ -6039,7 +6039,7 @@ DATA8_B4CD76:
 
 
 pAIScripting0x34:
-    dw DATA8_B4CEEA                                            ;B4CECA|        |B4CEEA;
+    dw pAIScripting0x34_Data01                                            ;B4CECA|        |B4CEEA;
     dw pAIScripting0x35                                        ;B4CECC|        |B4D011;
     dw pAIScripting0x35                                        ;B4CECE|        |B4D011;
     dw pAIScripting0x35                                        ;B4CED0|        |B4D011;
@@ -6056,7 +6056,7 @@ pAIScripting0x34:
     dw pAIScripting0x35                                        ;B4CEE6|        |B4D011;
     dw pAIScripting0x35                                        ;B4CEE8|        |B4D011;
  
-DATA8_B4CEEA:
+pAIScripting0x34_Data01:
  
     %AICMD0x47_SetValue8($800901, 16)                          ;B4CEEA
     %AICMD0x47_SetValue8($800906, 5)                           ;B4CEEF
@@ -6158,7 +6158,7 @@ DATA8_B4CEEA:
 
 
 pAIScripting0x35:
-    dw DATA8_B4D031                                            ;B4D011|        |B4D031;
+    dw pAIScripting0x35_Data01                                            ;B4D011|        |B4D031;
     dw pAIScripting0x36                                        ;B4D013|        |B4D160;
     dw pAIScripting0x36                                        ;B4D015|        |B4D160;
     dw pAIScripting0x36                                        ;B4D017|        |B4D160;
@@ -6175,7 +6175,7 @@ pAIScripting0x35:
     dw pAIScripting0x36                                        ;B4D02D|        |B4D160;
     dw pAIScripting0x36                                        ;B4D02F|        |B4D160;
  
-DATA8_B4D031:
+pAIScripting0x35_Data01:
  
     %AICMD0x47_SetValue8($800901, 21)                          ;B4D031
     %AICMD0x00_SetMusic($10, $B4)                              ;B4D036
@@ -6277,7 +6277,7 @@ DATA8_B4D031:
 
 
 pAIScripting0x36:
-    dw DATA8_B4D180                                            ;B4D160|        |B4D180;
+    dw pAIScripting0x36_Data01                                            ;B4D160|        |B4D180;
     dw pAIScripting0x37                                        ;B4D162|        |B4D2CC;
     dw pAIScripting0x37                                        ;B4D164|        |B4D2CC;
     dw pAIScripting0x37                                        ;B4D166|        |B4D2CC;
@@ -6294,7 +6294,7 @@ pAIScripting0x36:
     dw pAIScripting0x37                                        ;B4D17C|        |B4D2CC;
     dw pAIScripting0x37                                        ;B4D17E|        |B4D2CC;
  
-DATA8_B4D180:
+pAIScripting0x36_Data01:
  
     %AICMD0x00_SetMusic($10, $B4)                              ;B4D180
     %AICMD0x02_FreezeTime()                                    ;B4D183
@@ -6403,7 +6403,7 @@ DATA8_B4D180:
 
 
 pAIScripting0x37:
-    dw DATA8_B4D2EC                                            ;B4D2CC|        |B4D2EC;
+    dw pAIScripting0x37_Data01                                            ;B4D2CC|        |B4D2EC;
     dw pAIScripting0x38                                        ;B4D2CE|        |B4D447;
     dw pAIScripting0x38                                        ;B4D2D0|        |B4D447;
     dw pAIScripting0x38                                        ;B4D2D2|        |B4D447;
@@ -6420,7 +6420,7 @@ pAIScripting0x37:
     dw pAIScripting0x38                                        ;B4D2E8|        |B4D447;
     dw pAIScripting0x38                                        ;B4D2EA|        |B4D447;
  
-DATA8_B4D2EC:
+pAIScripting0x37_Data01:
  
     %AICMD0x47_SetValue8($800901, 16)                          ;B4D2EC
     %AICMD0x47_SetValue8($800906, 5)                           ;B4D2F1
@@ -6533,7 +6533,7 @@ DATA8_B4D2EC:
 
 
 pAIScripting0x38:
-    dw DATA8_B4D467                                            ;B4D447|        |B4D467;
+    dw pAIScripting0x38_Data01                                            ;B4D447|        |B4D467;
     dw pAIScripting0x39                                        ;B4D449|        |B4D531;
     dw pAIScripting0x39                                        ;B4D44B|        |B4D531;
     dw pAIScripting0x39                                        ;B4D44D|        |B4D531;
@@ -6550,7 +6550,7 @@ pAIScripting0x38:
     dw pAIScripting0x39                                        ;B4D463|        |B4D531;
     dw pAIScripting0x39                                        ;B4D465|        |B4D531;
  
-DATA8_B4D467:
+pAIScripting0x38_Data01:
  
     %AICMD0x00_SetMusic($10, $B4)                              ;B4D467
     %AICMD0x02_FreezeTime()                                    ;B4D46A
@@ -6616,7 +6616,7 @@ DATA8_B4D467:
 
 
 pAIScripting0x39:
-    dw DATA8_B4D551                                            ;B4D531|        |B4D551;
+    dw pAIScripting0x39_Data01                                            ;B4D531|        |B4D551;
     dw pAIScripting0x3A                                        ;B4D533|        |B4D772;
     dw pAIScripting0x3A                                        ;B4D535|        |B4D772;
     dw pAIScripting0x3A                                        ;B4D537|        |B4D772;
@@ -6633,7 +6633,7 @@ pAIScripting0x39:
     dw pAIScripting0x3A                                        ;B4D54D|        |B4D772;
     dw pAIScripting0x3A                                        ;B4D54F|        |B4D772;
  
-DATA8_B4D551:
+pAIScripting0x39_Data01:
  
     %AICMD0x00_SetMusic($10, $B4)                              ;B4D551
     %AICMD0x02_FreezeTime()                                    ;B4D554
@@ -6790,8 +6790,8 @@ DATA8_B4D551:
 
 
 pAIScripting0x3A:
-    dw DATA8_B4D792                                            ;B4D772|        |B4D792;
-    dw DATA8_B4D863                                            ;B4D774|        |B4D863;
+    dw pAIScripting0x3A_Data01                                            ;B4D772|        |B4D792;
+    dw pAIScripting0x3A_Data02                                            ;B4D774|        |B4D863;
     dw pAIScripting0x3B                                        ;B4D776|        |B4DA22;
     dw pAIScripting0x3B                                        ;B4D778|        |B4DA22;
     dw pAIScripting0x3B                                        ;B4D77A|        |B4DA22;
@@ -6807,7 +6807,7 @@ pAIScripting0x3A:
     dw pAIScripting0x3B                                        ;B4D78E|        |B4DA22;
     dw pAIScripting0x3B                                        ;B4D790|        |B4DA22;
  
-DATA8_B4D792:
+pAIScripting0x3A_Data01:
  
     %AICMD0x00_SetMusic($10, $B4)                              ;B4D792
     %AICMD0x02_FreezeTime()                                    ;B4D795
@@ -6875,7 +6875,7 @@ DATA8_B4D792:
     %AICMD0x12_Jump($B4D85D)                                   ;B4D860
 
 
-DATA8_B4D863:
+pAIScripting0x3A_Data02:
  
     %AICMD0x00_SetMusic($10, $B4)                              ;B4D863
     %AICMD0x02_FreezeTime()                                    ;B4D866
@@ -7003,8 +7003,8 @@ DATA8_B4D863:
 
 
 pAIScripting0x3B:
-    dw DATA8_B4DA42                                            ;B4DA22|        |B4DA42;
-    dw DATA8_B4DB0A                                            ;B4DA24|        |B4DB0A;
+    dw pAIScripting0x3B_Data01                                            ;B4DA22|        |B4DA42;
+    dw pAIScripting0x3B_Data02                                            ;B4DA24|        |B4DB0A;
     dw pAIScripting0x3C                                        ;B4DA26|        |B4DCCD;
     dw pAIScripting0x3C                                        ;B4DA28|        |B4DCCD;
     dw pAIScripting0x3C                                        ;B4DA2A|        |B4DCCD;
@@ -7020,7 +7020,7 @@ pAIScripting0x3B:
     dw pAIScripting0x3C                                        ;B4DA3E|        |B4DCCD;
     dw pAIScripting0x3C                                        ;B4DA40|        |B4DCCD;
  
-DATA8_B4DA42:
+pAIScripting0x3B_Data01:
  
     %AICMD0x00_SetMusic($10, $B4)                              ;B4DA42
     %AICMD0x02_FreezeTime()                                    ;B4DA45
@@ -7084,7 +7084,7 @@ DATA8_B4DA42:
     %AICMD0x12_Jump($B4DB04)                                   ;B4DB07
 
 
-DATA8_B4DB0A:
+pAIScripting0x3B_Data02:
  
     %AICMD0x00_SetMusic($10, $B4)                              ;B4DB0A
     %AICMD0x02_FreezeTime()                                    ;B4DB0D
@@ -7210,8 +7210,8 @@ DATA8_B4DB0A:
 
 
 pAIScripting0x3C:
-    dw DATA8_B4DCED                                            ;B4DCCD|        |B4DCED;
-    dw DATA8_B4DE3E                                            ;B4DCCF|        |B4DE3E;
+    dw pAIScripting0x3C_Data01                                            ;B4DCCD|        |B4DCED;
+    dw pAIScripting0x3C_Data02                                            ;B4DCCF|        |B4DE3E;
     dw pAIScripting0x3D                                        ;B4DCD1|        |B4DF94;
     dw pAIScripting0x3D                                        ;B4DCD3|        |B4DF94;
     dw pAIScripting0x3D                                        ;B4DCD5|        |B4DF94;
@@ -7227,7 +7227,7 @@ pAIScripting0x3C:
     dw pAIScripting0x3D                                        ;B4DCE9|        |B4DF94;
     dw pAIScripting0x3D                                        ;B4DCEB|        |B4DF94;
  
-DATA8_B4DCED:
+pAIScripting0x3C_Data01:
  
     %AICMD0x00_SetMusic($10, $B4)                              ;B4DCED
     %AICMD0x02_FreezeTime()                                    ;B4DCF0
@@ -7327,7 +7327,7 @@ DATA8_B4DCED:
     %AICMD0x12_Jump($B4DE38)                                   ;B4DE3B
 
 
-DATA8_B4DE3E:
+pAIScripting0x3C_Data02:
  
     %AICMD0x00_SetMusic($10, $B4)                              ;B4DE3E
     %AICMD0x02_FreezeTime()                                    ;B4DE41
@@ -7433,8 +7433,8 @@ DATA8_B4DE3E:
 
 
 pAIScripting0x3D:
-    dw DATA8_B4DFB4                                            ;B4DF94|        |B4DFB4;
-    dw DATA8_B4E0F8                                            ;B4DF96|        |B4E0F8;
+    dw pAIScripting0x3D_Data01                                            ;B4DF94|        |B4DFB4;
+    dw pAIScripting0x3D_Data02                                            ;B4DF96|        |B4E0F8;
     dw pAIScripting0x3E                                        ;B4DF98|        |B4E200;
     dw pAIScripting0x3E                                        ;B4DF9A|        |B4E200;
     dw pAIScripting0x3E                                        ;B4DF9C|        |B4E200;
@@ -7450,7 +7450,7 @@ pAIScripting0x3D:
     dw pAIScripting0x3E                                        ;B4DFB0|        |B4E200;
     dw pAIScripting0x3E                                        ;B4DFB2|        |B4E200;
  
-DATA8_B4DFB4:
+pAIScripting0x3D_Data01:
  
     %AICMD0x00_SetMusic($10, $B4)                              ;B4DFB4
     %AICMD0x02_FreezeTime()                                    ;B4DFB7
@@ -7547,7 +7547,7 @@ DATA8_B4DFB4:
     %AICMD0x12_Jump($B4E0E7)                                   ;B4E0F5
 
 
-DATA8_B4E0F8:
+pAIScripting0x3D_Data02:
  
     %AICMD0x00_SetMusic($10, $B4)                              ;B4E0F8
     %AICMD0x02_FreezeTime()                                    ;B4E0FB
@@ -7629,7 +7629,7 @@ DATA8_B4E0F8:
 
 
 pAIScripting0x3E:
-    dw DATA8_B4E220                                            ;B4E200|        |B4E220;
+    dw pAIScripting0x3E_Data01                                            ;B4E200|        |B4E220;
     dw pAIScripting0x3F                                        ;B4E202|        |B4E3FF;
     dw pAIScripting0x3F                                        ;B4E204|        |B4E3FF;
     dw pAIScripting0x3F                                        ;B4E206|        |B4E3FF;
@@ -7646,7 +7646,7 @@ pAIScripting0x3E:
     dw pAIScripting0x3F                                        ;B4E21C|        |B4E3FF;
     dw pAIScripting0x3F                                        ;B4E21E|        |B4E3FF;
  
-DATA8_B4E220:
+pAIScripting0x3E_Data01:
  
     %AICMD0x00_SetMusic($10, $B4)                              ;B4E220
     %AICMD0x02_FreezeTime()                                    ;B4E223
@@ -7785,7 +7785,7 @@ DATA8_B4E220:
 
 
 pAIScripting0x3F:
-    dw DATA8_B4E41F                                            ;B4E3FF|        |B4E41F;
+    dw pAIScripting0x3F_Data01                                            ;B4E3FF|        |B4E41F;
     dw pAIScripting0x40                                        ;B4E401|        |B4E5F4;
     dw pAIScripting0x40                                        ;B4E403|        |B4E5F4;
     dw pAIScripting0x40                                        ;B4E405|        |B4E5F4;
@@ -7802,7 +7802,7 @@ pAIScripting0x3F:
     dw pAIScripting0x40                                        ;B4E41B|        |B4E5F4;
     dw pAIScripting0x40                                        ;B4E41D|        |B4E5F4;
  
-DATA8_B4E41F:
+pAIScripting0x3F_Data01:
  
     %AICMD0x00_SetMusic($10, $B4)                              ;B4E41F
     %AICMD0x02_FreezeTime()                                    ;B4E422
@@ -7944,7 +7944,7 @@ DATA8_B4E41F:
 
 
 pAIScripting0x40:
-    dw DATA8_B4E614                                            ;B4E5F4|        |B4E614;
+    dw pAIScripting0x40_Data01                                            ;B4E5F4|        |B4E614;
     dw pAIScripting0x41                                        ;B4E5F6|        |B4E7AF;
     dw pAIScripting0x41                                        ;B4E5F8|        |B4E7AF;
     dw pAIScripting0x41                                        ;B4E5FA|        |B4E7AF;
@@ -7961,7 +7961,7 @@ pAIScripting0x40:
     dw pAIScripting0x41                                        ;B4E610|        |B4E7AF;
     dw pAIScripting0x41                                        ;B4E612|        |B4E7AF;
  
-DATA8_B4E614:
+pAIScripting0x40_Data01:
  
     %AICMD0x00_SetMusic($10, $B4)                              ;B4E614
     %AICMD0x02_FreezeTime()                                    ;B4E617
@@ -8085,7 +8085,7 @@ DATA8_B4E614:
 
 
 pAIScripting0x41:
-    dw DATA8_B4E7CF                                            ;B4E7AF|        |B4E7CF;
+    dw pAIScripting0x41_Data01                                            ;B4E7AF|        |B4E7CF;
     dw pAIScripting0x42                                        ;B4E7B1|        |B4E989;
     dw pAIScripting0x42                                        ;B4E7B3|        |B4E989;
     dw pAIScripting0x42                                        ;B4E7B5|        |B4E989;
@@ -8102,7 +8102,7 @@ pAIScripting0x41:
     dw pAIScripting0x42                                        ;B4E7CB|        |B4E989;
     dw pAIScripting0x42                                        ;B4E7CD|        |B4E989;
  
-DATA8_B4E7CF:
+pAIScripting0x41_Data01:
  
     %AICMD0x47_SetValue8($800901, 2)                           ;B4E7CF
     %AICMD0x00_SetMusic($10, $B4)                              ;B4E7D4
@@ -8231,24 +8231,24 @@ DATA8_B4E7CF:
 
 
 pAIScripting0x42:
-    dw DATA8_B4E9A9                                            ;B4E989|        |B4E9A9;
-    dw DATA8_B4EBA1                                            ;B4E98B|        |B4EBA1;
-    dw DATA8_B4ECB4                                            ;B4E98D|        |B4ECB4;
-    dw DATA8_B4ECB4                                            ;B4E98F|        |B4ECB4;
-    dw DATA8_B4ECB4                                            ;B4E991|        |B4ECB4;
-    dw DATA8_B4ECB4                                            ;B4E993|        |B4ECB4;
-    dw DATA8_B4ECB4                                            ;B4E995|        |B4ECB4;
-    dw DATA8_B4ECB4                                            ;B4E997|        |B4ECB4;
-    dw DATA8_B4ECB4                                            ;B4E999|        |B4ECB4;
-    dw DATA8_B4ECB4                                            ;B4E99B|        |B4ECB4;
-    dw DATA8_B4ECB4                                            ;B4E99D|        |B4ECB4;
-    dw DATA8_B4ECB4                                            ;B4E99F|        |B4ECB4;
-    dw DATA8_B4ECB4                                            ;B4E9A1|        |B4ECB4;
-    dw DATA8_B4ECB4                                            ;B4E9A3|        |B4ECB4;
-    dw DATA8_B4ECB4                                            ;B4E9A5|        |B4ECB4;
-    dw DATA8_B4ECB4                                            ;B4E9A7|        |B4ECB4;
+    dw pAIScripting0x42_Data01                                            ;B4E989|        |B4E9A9;
+    dw pAIScripting0x42_Data02                                            ;B4E98B|        |B4EBA1;
+    dw pAIScripting0x42_Data03                                            ;B4E98D|        |B4ECB4;
+    dw pAIScripting0x42_Data03                                            ;B4E98F|        |B4ECB4;
+    dw pAIScripting0x42_Data03                                            ;B4E991|        |B4ECB4;
+    dw pAIScripting0x42_Data03                                            ;B4E993|        |B4ECB4;
+    dw pAIScripting0x42_Data03                                            ;B4E995|        |B4ECB4;
+    dw pAIScripting0x42_Data03                                            ;B4E997|        |B4ECB4;
+    dw pAIScripting0x42_Data03                                            ;B4E999|        |B4ECB4;
+    dw pAIScripting0x42_Data03                                            ;B4E99B|        |B4ECB4;
+    dw pAIScripting0x42_Data03                                            ;B4E99D|        |B4ECB4;
+    dw pAIScripting0x42_Data03                                            ;B4E99F|        |B4ECB4;
+    dw pAIScripting0x42_Data03                                            ;B4E9A1|        |B4ECB4;
+    dw pAIScripting0x42_Data03                                            ;B4E9A3|        |B4ECB4;
+    dw pAIScripting0x42_Data03                                            ;B4E9A5|        |B4ECB4;
+    dw pAIScripting0x42_Data03                                            ;B4E9A7|        |B4ECB4;
  
-DATA8_B4E9A9:
+pAIScripting0x42_Data01:
  
     %AICMD0x00_SetMusic($10, $B4)                              ;B4E9A9
     %AICMD0x02_FreezeTime()                                    ;B4E9AC
@@ -8389,7 +8389,7 @@ DATA8_B4E9A9:
     %AICMD0x12_Jump($B4EB9B)                                   ;B4EB9E
 
 
-DATA8_B4EBA1:
+pAIScripting0x42_Data02:
  
     %AICMD0x00_SetMusic($10, $B4)                              ;B4EBA1
     %AICMD0x02_FreezeTime()                                    ;B4EBA4
@@ -8465,7 +8465,7 @@ DATA8_B4EBA1:
     %AICMD0x12_Jump($B4ECAE)                                   ;B4ECB1
 
 
-DATA8_B4ECB4:
+pAIScripting0x42_Data03:
  
     %AICMD0x00_SetMusic($00, $00)                              ;B4ECB4
 

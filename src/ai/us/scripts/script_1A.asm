@@ -1,8 +1,8 @@
 
 
 pAIScripting0x1A:
-    dw DATA8_B490F3                                            ;B490D3|        |B490F3;
-    dw DATA8_B4911C                                            ;B490D5|        |B4911C;
+    dw pAIScripting0x1A_Data01                                            ;B490D3|        |B490F3;
+    dw pAIScripting0x1A_Data02                                            ;B490D5|        |B4911C;
     dw pAIScripting0x1B                                        ;B490D7|        |B491B3;
     dw pAIScripting0x1B                                        ;B490D9|        |B491B3;
     dw pAIScripting0x1B                                        ;B490DB|        |B491B3;
@@ -18,7 +18,7 @@ pAIScripting0x1A:
     dw pAIScripting0x1B                                        ;B490EF|        |B491B3;
     dw pAIScripting0x1B                                        ;B490F1|        |B491B3;
  
-DATA8_B490F3:
+pAIScripting0x1A_Data01:
  
     %AICMD0x50()                                               ;B490F3
     %AICMD0x08_EnableAIControl()                               ;B490F4
@@ -38,7 +38,7 @@ pAIScripting0x1A_L001:
     %AICMD0x10_End()                                           ;B4911B
 
 
-DATA8_B4911C:
+pAIScripting0x1A_Data02:
     %AICMD0x50()                                               ;B4911C
     %AICMD0x00_SetMusic($0E, $B4)                              ;B4911D
     %AICMD0x02_FreezeTime()                                    ;B49120

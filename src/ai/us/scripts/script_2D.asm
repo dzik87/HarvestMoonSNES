@@ -1,7 +1,7 @@
 
 
 pAIScripting0x2D:
-    dw DATA8_B4C5A4                                            ;B4C584|        |B4C5A4;
+    dw pAIScripting0x2D_Data01                                            ;B4C584|        |B4C5A4;
     dw pAIScripting0x2E                                        ;B4C586|        |B4C5F4;
     dw pAIScripting0x2E                                        ;B4C588|        |B4C5F4;
     dw pAIScripting0x2E                                        ;B4C58A|        |B4C5F4;
@@ -18,7 +18,7 @@ pAIScripting0x2D:
     dw pAIScripting0x2E                                        ;B4C5A0|        |B4C5F4;
     dw pAIScripting0x2E                                        ;B4C5A2|        |B4C5F4;
  
-DATA8_B4C5A4:
+pAIScripting0x2D_Data01:
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B4C5A4
     %AICMD0x09_StartScript($01, pAIScripting0x2D_L002)                                   ;B4C5A6
     %AICMD0x11_EnableUserControl()                             ;B4C5AA

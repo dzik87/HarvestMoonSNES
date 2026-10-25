@@ -1,13 +1,13 @@
 
 
 pAIScripting0x06:
-    dw DATA8_B3D467                                            ;B3D447|        |B3D467;
-    dw DATA8_B3D59D                                            ;B3D449|        |B3D59D;
-    dw DATA8_B3D5E3                                            ;B3D44B|        |B3D5E3;
-    dw DATA8_B3D6CF                                            ;B3D44D|        |B3D6CF;
-    dw DATA8_B3D7C9                                            ;B3D44F|        |B3D7C9;
-    dw DATA8_B3D90E                                            ;B3D451|        |B3D90E;
-    dw DATA8_B3D99B                                            ;B3D453|        |B3D99B;
+    dw pAIScripting0x06_Data01                                            ;B3D447|        |B3D467;
+    dw pAIScripting0x06_Data02                                            ;B3D449|        |B3D59D;
+    dw pAIScripting0x06_Data03                                            ;B3D44B|        |B3D5E3;
+    dw pAIScripting0x06_Data04                                            ;B3D44D|        |B3D6CF;
+    dw pAIScripting0x06_Data05                                            ;B3D44F|        |B3D7C9;
+    dw pAIScripting0x06_Data06                                            ;B3D451|        |B3D90E;
+    dw pAIScripting0x06_Data07                                            ;B3D453|        |B3D99B;
     dw pAIScripting0x07                                        ;B3D455|        |B3D9F7;
     dw pAIScripting0x07                                        ;B3D457|        |B3D9F7;
     dw pAIScripting0x07                                        ;B3D459|        |B3D9F7;
@@ -18,7 +18,7 @@ pAIScripting0x06:
     dw pAIScripting0x07                                        ;B3D463|        |B3D9F7;
     dw pAIScripting0x07                                        ;B3D465|        |B3D9F7;
  
-DATA8_B3D467:
+pAIScripting0x06_Data01:
  
     %AICMD0x11_EnableUserControl()                             ;B3D467
     %AICMD0x09_StartScript($01, pAIScripting0x06_L004)                                   ;B3D468
@@ -114,7 +114,7 @@ pAIScripting0x06_L025:
     %AICMD0x12_Jump(pAIScripting0x06_L017)                                   ;B3D59A
 
 
-DATA8_B3D59D:
+pAIScripting0x06_Data02:
  
     %AICMD0x11_EnableUserControl()                             ;B3D59D
     %AICMD0x09_StartScript($01, pAIScripting0x06_L027)                                   ;B3D59E
@@ -142,7 +142,7 @@ pAIScripting0x06_L032:
     %AICMD0x12_Jump(pAIScripting0x06_L028)                                   ;B3D5E0
 
 
-DATA8_B3D5E3:
+pAIScripting0x06_Data03:
  
     %AICMD0x11_EnableUserControl()                             ;B3D5E3
     %AICMD0x09_StartScript($01, pAIScripting0x06_L036)                                   ;B3D5E4
@@ -217,7 +217,7 @@ pAIScripting0x06_L051:
     %AICMD0x12_Jump(pAIScripting0x06_L043)                                   ;B3D6CC
 
 
-DATA8_B3D6CF:
+pAIScripting0x06_Data04:
  
     %AICMD0x11_EnableUserControl()                             ;B3D6CF
     %AICMD0x09_StartScript($01, pAIScripting0x06_L055)                                   ;B3D6D0
@@ -294,7 +294,7 @@ pAIScripting0x06_L070:
     %AICMD0x12_Jump(pAIScripting0x06_L062)                                   ;B3D7C6
 
 
-DATA8_B3D7C9:
+pAIScripting0x06_Data05:
  
     %AICMD0x11_EnableUserControl()                             ;B3D7C9
     %AICMD0x09_StartScript($01, pAIScripting0x06_L076)                                   ;B3D7CA
@@ -392,7 +392,7 @@ pAIScripting0x06_L095:
     %AICMD0x12_Jump(pAIScripting0x06_L086)                                   ;B3D90B
 
 
-DATA8_B3D90E:
+pAIScripting0x06_Data06:
  
     %AICMD0x11_EnableUserControl()                             ;B3D90E
     %AICMD0x09_StartScript($01, pAIScripting0x06_L097)                                   ;B3D90F
@@ -443,7 +443,7 @@ pAIScripting0x06_L109:
     %AICMD0x10_End()                                           ;B3D99A
 
 
-DATA8_B3D99B:
+pAIScripting0x06_Data07:
     %AICMD0x11_EnableUserControl()                             ;B3D99B
     %AICMD0x09_StartScript($01, pAIScripting0x06_L111)                                   ;B3D99C
 pAIScripting0x06_L110:

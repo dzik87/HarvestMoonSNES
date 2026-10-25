@@ -1,7 +1,7 @@
 
 
 pAIScripting0x16:
-    dw DATA8_B48D58                                            ;B48D38|        |B48D58;
+    dw pAIScripting0x16_Data01                                            ;B48D38|        |B48D58;
     dw pAIScripting0x17                                        ;B48D3A|        |B48E05;
     dw pAIScripting0x17                                        ;B48D3C|        |B48E05;
     dw pAIScripting0x17                                        ;B48D3E|        |B48E05;
@@ -18,7 +18,7 @@ pAIScripting0x16:
     dw pAIScripting0x17                                        ;B48D54|        |B48E05;
     dw pAIScripting0x17                                        ;B48D56|        |B48E05;
  
-DATA8_B48D58:
+pAIScripting0x16_Data01:
     %AICMD0x50()                                               ;B48D58
     %AICMD0x08_EnableAIControl()                               ;B48D59
     %AICMD0x09_StartScript($01, pAIScripting0x16_L001)                                   ;B48D5A

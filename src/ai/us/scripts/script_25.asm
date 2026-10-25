@@ -1,7 +1,7 @@
 
 
 pAIScripting0x25:
-    dw DATA8_B4A5D5                                            ;B4A5B5|        |B4A5D5;
+    dw pAIScripting0x25_Data01                                            ;B4A5B5|        |B4A5D5;
     dw pAIScripting0x26                                        ;B4A5B7|        |B4A60D;
     dw pAIScripting0x26                                        ;B4A5B9|        |B4A60D;
     dw pAIScripting0x26                                        ;B4A5BB|        |B4A60D;
@@ -18,7 +18,7 @@ pAIScripting0x25:
     dw pAIScripting0x26                                        ;B4A5D1|        |B4A60D;
     dw pAIScripting0x26                                        ;B4A5D3|        |B4A60D;
  
-DATA8_B4A5D5:
+pAIScripting0x25_Data01:
     %AICMD0x02_FreezeTime()                                    ;B4A5D5
     %AICMD0x05_SetTransferPosition(136, 344)                   ;B4A5D6
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B4A5DB

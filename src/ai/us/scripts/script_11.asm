@@ -1,7 +1,7 @@
 
 
 pAIScripting0x11:
-    dw DATA8_B48838                                            ;B48818|        |B48838;
+    dw pAIScripting0x11_Data01                                            ;B48818|        |B48838;
     dw pAIScripting0x12                                        ;B4881A|        |B488A0;
     dw pAIScripting0x12                                        ;B4881C|        |B488A0;
     dw pAIScripting0x12                                        ;B4881E|        |B488A0;
@@ -18,7 +18,7 @@ pAIScripting0x11:
     dw pAIScripting0x12                                        ;B48834|        |B488A0;
     dw pAIScripting0x12                                        ;B48836|        |B488A0;
  
-DATA8_B48838:
+pAIScripting0x11_Data01:
     %AICMD0x50()                                               ;B48838
     %AICMD0x09_StartScript($01, pAIScripting0x11_L003)                                   ;B48839
     %AICMD0x38_WaitForFadeIn()                                               ;B4883D

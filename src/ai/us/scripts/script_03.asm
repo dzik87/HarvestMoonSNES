@@ -1,9 +1,9 @@
 
 
 pAIScripting0x03:
-    dw DATA8_B3BA59                                            ;B3BA39|        |B3BA59;
-    dw DATA8_B3BD2D                                            ;B3BA3B|        |B3BD2D;
-    dw DATA8_B3C1E4                                            ;B3BA3D|        |B3C1E4;
+    dw pAIScripting0x03_Data01                                            ;B3BA39|        |B3BA59;
+    dw pAIScripting0x03_Data02                                            ;B3BA3B|        |B3BD2D;
+    dw pAIScripting0x03_Data03                                            ;B3BA3D|        |B3C1E4;
     dw pAIScripting0x04                                        ;B3BA3F|        |B3C507;
     dw pAIScripting0x04                                        ;B3BA41|        |B3C507;
     dw pAIScripting0x04                                        ;B3BA43|        |B3C507;
@@ -18,7 +18,7 @@ pAIScripting0x03:
     dw pAIScripting0x04                                        ;B3BA55|        |B3C507;
     dw pAIScripting0x04                                        ;B3BA57|        |B3C507;
  
-DATA8_B3BA59:
+pAIScripting0x03_Data01:
  
     %AICMD0x11_EnableUserControl()                             ;B3BA59
     %AICMD0x09_StartScript($01, pAIScripting0x03_L011)                                   ;B3BA5A
@@ -238,7 +238,7 @@ pAIScripting0x03_L059:
     %AICMD0x12_Jump(pAIScripting0x03_L051)                                   ;B3BD2A
 
 
-DATA8_B3BD2D:
+pAIScripting0x03_Data02:
  
     %AICMD0x11_EnableUserControl()                             ;B3BD2D
     %AICMD0x09_StartScript($01, pAIScripting0x03_L065)                                   ;B3BD2E
@@ -598,7 +598,7 @@ pAIScripting0x03_L147:
     %AICMD0x12_Jump(pAIScripting0x03_L137)                                   ;B3C1E1
 
 
-DATA8_B3C1E4:
+pAIScripting0x03_Data03:
     %AICMD0x11_EnableUserControl()                             ;B3C1E4
     %AICMD0x09_StartScript($01, pAIScripting0x03_L199)                                   ;B3C1E5
     %AICMD0x14_JumpIfFlagSet(strcFlags.event5, $04, pAIScripting0x03_L149)   ;B3C1E9

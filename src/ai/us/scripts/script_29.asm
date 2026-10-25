@@ -1,7 +1,7 @@
 
 
 pAIScripting0x29:
-    dw DATA8_B4C447                                            ;B4C427|        |B4C447;
+    dw pAIScripting0x29_Data01                                            ;B4C427|        |B4C447;
     dw pAIScripting0x2A                                        ;B4C429|        |B4C4B8;
     dw pAIScripting0x2A                                        ;B4C42B|        |B4C4B8;
     dw pAIScripting0x2A                                        ;B4C42D|        |B4C4B8;
@@ -18,7 +18,7 @@ pAIScripting0x29:
     dw pAIScripting0x2A                                        ;B4C443|        |B4C4B8;
     dw pAIScripting0x2A                                        ;B4C445|        |B4C4B8;
  
-DATA8_B4C447:
+pAIScripting0x29_Data01:
     %AICMD0x09_StartScript($01, pAIScripting0x29_L001)                                   ;B4C447
     %AICMD0x38_WaitForFadeIn()                                               ;B4C44B
     %AICMD0x10_End()                                           ;B4C44C

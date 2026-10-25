@@ -1,9 +1,9 @@
 
 
 pAIScripting0x1F:
-    dw DATA8_B49A5F                                            ;B49A3F|        |B49A5F;
-    dw DATA8_B49C2A                                            ;B49A41|        |B49C2A;
-    dw DATA8_B49DD5                                            ;B49A43|        |B49DD5;
+    dw pAIScripting0x1F_Data01                                            ;B49A3F|        |B49A5F;
+    dw pAIScripting0x1F_Data02                                            ;B49A41|        |B49C2A;
+    dw pAIScripting0x1F_Data03                                            ;B49A43|        |B49DD5;
     dw pAIScripting0x20                                        ;B49A45|        |B49E31;
     dw pAIScripting0x20                                        ;B49A47|        |B49E31;
     dw pAIScripting0x20                                        ;B49A49|        |B49E31;
@@ -18,7 +18,7 @@ pAIScripting0x1F:
     dw pAIScripting0x20                                        ;B49A5B|        |B49E31;
     dw pAIScripting0x20                                        ;B49A5D|        |B49E31;
  
-DATA8_B49A5F:
+pAIScripting0x1F_Data01:
  
     %AICMD0x50()                                               ;B49A5F
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $0D)       ;B49A60
@@ -171,7 +171,7 @@ pAIScripting0x1F_L043:
     %AICMD0x12_Jump(pAIScripting0x1F_L042)                                   ;B49C27
 
 
-DATA8_B49C2A:
+pAIScripting0x1F_Data02:
  
     %AICMD0x50()                                               ;B49C2A
     %AICMD0x00_SetMusic($0B, $B4)                              ;B49C2B
@@ -325,7 +325,7 @@ pAIScripting0x1F_L086:
     %AICMD0x12_Jump(pAIScripting0x1F_L085)                                   ;B49DD2
 
 
-DATA8_B49DD5:
+pAIScripting0x1F_Data03:
     %AICMD0x50()                                               ;B49DD5
     %AICMD0x08_EnableAIControl()                               ;B49DD6
     %AICMD0x05_SetTransferPosition(296, 104)                   ;B49DD7

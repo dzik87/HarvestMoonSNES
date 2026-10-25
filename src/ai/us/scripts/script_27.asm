@@ -1,10 +1,10 @@
 
 
 pAIScripting0x27:
-    dw DATA8_B4B67E                                            ;B4B65E|        |B4B67E;
-    dw DATA8_B4B947                                            ;B4B660|        |B4B947;
-    dw DATA8_B4B9C2                                            ;B4B662|        |B4B9C2;
-    dw DATA8_B4BA8E                                            ;B4B664|        |B4BA8E;
+    dw pAIScripting0x27_Data01                                            ;B4B65E|        |B4B67E;
+    dw pAIScripting0x27_Data02                                            ;B4B660|        |B4B947;
+    dw pAIScripting0x27_Data03                                            ;B4B662|        |B4B9C2;
+    dw pAIScripting0x27_Data04                                            ;B4B664|        |B4BA8E;
     dw pAIScripting0x28                                        ;B4B666|        |B4BACB;
     dw pAIScripting0x28                                        ;B4B668|        |B4BACB;
     dw pAIScripting0x28                                        ;B4B66A|        |B4BACB;
@@ -18,7 +18,7 @@ pAIScripting0x27:
     dw pAIScripting0x28                                        ;B4B67A|        |B4BACB;
     dw pAIScripting0x28                                        ;B4B67C|        |B4BACB;
  
-DATA8_B4B67E:
+pAIScripting0x27_Data01:
  
     %AICMD0x4F_DisableToolUse()                                               ;B4B67E
     %AICMD0x50()                                               ;B4B67F
@@ -246,7 +246,7 @@ pAIScripting0x27_L056:
     %AICMD0x12_Jump(pAIScripting0x27_L002)                                   ;B4B944
 
 
-DATA8_B4B947:
+pAIScripting0x27_Data02:
  
     %AICMD0x4F_DisableToolUse()                                               ;B4B947
     %AICMD0x50()                                               ;B4B948
@@ -294,7 +294,7 @@ pAIScripting0x27_L065:
     %AICMD0x12_Jump(pAIScripting0x27_L059)                                   ;B4B9BF
 
 
-DATA8_B4B9C2:
+pAIScripting0x27_Data03:
  
     %AICMD0x4F_DisableToolUse()                                               ;B4B9C2
     %AICMD0x50()                                               ;B4B9C3
@@ -366,7 +366,7 @@ pAIScripting0x27_L083:
     %AICMD0x12_Jump(pAIScripting0x27_L079)                                   ;B4BA8B
 
 
-DATA8_B4BA8E:
+pAIScripting0x27_Data04:
     %AICMD0x4F_DisableToolUse()                                               ;B4BA8E
     %AICMD0x50()                                               ;B4BA8F
     %AICMD0x09_StartScript($01, pAIScripting0x27_L084)                                   ;B4BA90

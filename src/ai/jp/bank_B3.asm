@@ -1936,139 +1936,139 @@ aAIScriptingData:
  
 pAIScripting0x00_General:
     dw DATA8_B38CC8                                            ;B38BB8|        |B38CC8;
-    dw DATA8_B38CD0                                            ;B38BBA|        |B38CD0;
-    dw DATA8_B38CDE                                            ;B38BBC|        |B38CDE;
-    dw DATA8_B38CEB                                            ;B38BBE|        |B38CEB;
-    dw DATA8_B38CF8                                            ;B38BC0|        |B38CF8;
-    dw DATA8_B38D05                                            ;B38BC2|        |B38D05;
-    dw DATA8_B38D12                                            ;B38BC4|        |B38D12;
-    dw DATA8_B38D1F                                            ;B38BC6|        |B38D1F;
-    dw DATA8_B38D2C                                            ;B38BC8|        |B38D2C;
-    dw DATA8_B38D39                                            ;B38BCA|        |B38D39;
-    dw DATA8_B38D46                                            ;B38BCC|        |B38D46;
-    dw DATA8_B38D50                                            ;B38BCE|        |B38D50;
-    dw DATA8_B38D5A                                            ;B38BD0|        |B38D5A;
-    dw DATA8_B38D67                                            ;B38BD2|        |B38D67;
-    dw DATA8_B38D74                                            ;B38BD4|        |B38D74;
-    dw DATA8_B38D81                                            ;B38BD6|        |B38D81;
-    dw DATA8_B38D8E                                            ;B38BD8|        |B38D8E;
-    dw DATA8_B38D9B                                            ;B38BDA|        |B38D9B;
-    dw DATA8_B38DB0                                            ;B38BDC|        |B38DB0;
-    dw DATA8_B38DBC                                            ;B38BDE|        |B38DBC;
-    dw DATA8_B38DD1                                            ;B38BE0|        |B38DD1;
-    dw DATA8_B38DE5                                            ;B38BE2|        |B38DE5;
-    dw DATA8_B38DF3                                            ;B38BE4|        |B38DF3;
-    dw DATA8_B38DFC                                            ;B38BE6|        |B38DFC;
-    dw DATA8_B38E09                                            ;B38BE8|        |B38E09;
-    dw DATA8_B38E1E                                            ;B38BEA|        |B38E1E;
-    dw DATA8_B38E33                                            ;B38BEC|        |B38E33;
-    dw DATA8_B38E48                                            ;B38BEE|        |B38E48;
-    dw DATA8_B38E5D                                            ;B38BF0|        |B38E5D;
-    dw DATA8_B38E72                                            ;B38BF2|        |B38E72;
-    dw DATA8_B38E80                                            ;B38BF4|        |B38E80;
-    dw DATA8_B38E94                                            ;B38BF6|        |B38E94;
-    dw DATA8_B38E9C                                            ;B38BF8|        |B38E9C;
+    dw pAIScripting0x00_General_Data01                                            ;B38BBA|        |B38CD0;
+    dw pAIScripting0x00_General_Data02                                            ;B38BBC|        |B38CDE;
+    dw pAIScripting0x00_General_Data03                                            ;B38BBE|        |B38CEB;
+    dw pAIScripting0x00_General_Data04                                            ;B38BC0|        |B38CF8;
+    dw pAIScripting0x00_General_Data05                                            ;B38BC2|        |B38D05;
+    dw pAIScripting0x00_General_Data06                                            ;B38BC4|        |B38D12;
+    dw pAIScripting0x00_General_Data07                                            ;B38BC6|        |B38D1F;
+    dw pAIScripting0x00_General_Data08                                            ;B38BC8|        |B38D2C;
+    dw pAIScripting0x00_General_Data09                                            ;B38BCA|        |B38D39;
+    dw pAIScripting0x00_General_Data10                                            ;B38BCC|        |B38D46;
+    dw pAIScripting0x00_General_Data11                                            ;B38BCE|        |B38D50;
+    dw pAIScripting0x00_General_Data12                                            ;B38BD0|        |B38D5A;
+    dw pAIScripting0x00_General_Data13                                            ;B38BD2|        |B38D67;
+    dw pAIScripting0x00_General_Data14                                            ;B38BD4|        |B38D74;
+    dw pAIScripting0x00_General_Data15                                            ;B38BD6|        |B38D81;
+    dw pAIScripting0x00_General_Data16                                            ;B38BD8|        |B38D8E;
+    dw pAIScripting0x00_General_Data17                                            ;B38BDA|        |B38D9B;
+    dw pAIScripting0x00_General_Data18                                            ;B38BDC|        |B38DB0;
+    dw pAIScripting0x00_General_Data19                                            ;B38BDE|        |B38DBC;
+    dw pAIScripting0x00_General_Data20                                            ;B38BE0|        |B38DD1;
+    dw pAIScripting0x00_General_Data21                                            ;B38BE2|        |B38DE5;
+    dw pAIScripting0x00_General_Data22                                            ;B38BE4|        |B38DF3;
+    dw pAIScripting0x00_General_Data23                                            ;B38BE6|        |B38DFC;
+    dw pAIScripting0x00_General_Data24                                            ;B38BE8|        |B38E09;
+    dw pAIScripting0x00_General_Data25                                            ;B38BEA|        |B38E1E;
+    dw pAIScripting0x00_General_Data26                                            ;B38BEC|        |B38E33;
+    dw pAIScripting0x00_General_Data27                                            ;B38BEE|        |B38E48;
+    dw pAIScripting0x00_General_Data28                                            ;B38BF0|        |B38E5D;
+    dw pAIScripting0x00_General_Data29                                            ;B38BF2|        |B38E72;
+    dw pAIScripting0x00_General_Data30                                            ;B38BF4|        |B38E80;
+    dw pAIScripting0x00_General_Data31                                            ;B38BF6|        |B38E94;
+    dw pAIScripting0x00_General_Data32                                            ;B38BF8|        |B38E9C;
     dw DATA8_B38EAA                                            ;B38BFA|        |B38EAA;
-    dw DATA8_B38ECC                                            ;B38BFC|        |B38ECC;
-    dw DATA8_B38EE0                                            ;B38BFE|        |B38EE0;
-    dw DATA8_B38EEF                                            ;B38C00|        |B38EEF;
-    dw DATA8_B38F03                                            ;B38C02|        |B38F03;
+    dw pAIScripting0x00_General_Data33                                            ;B38BFC|        |B38ECC;
+    dw pAIScripting0x00_General_Data34                                            ;B38BFE|        |B38EE0;
+    dw pAIScripting0x00_General_Data35                                            ;B38C00|        |B38EEF;
+    dw pAIScripting0x00_General_Data36                                            ;B38C02|        |B38F03;
     dw DATA8_B38F11                                            ;B38C04|        |B38F11;
-    dw DATA8_B38F38                                            ;B38C06|        |B38F38;
-    dw DATA8_B38F43                                            ;B38C08|        |B38F43;
-    dw DATA8_B38F50                                            ;B38C0A|        |B38F50;
-    dw DATA8_B38F5D                                            ;B38C0C|        |B38F5D;
-    dw DATA8_B38F6A                                            ;B38C0E|        |B38F6A;
-    dw DATA8_B38F77                                            ;B38C10|        |B38F77;
-    dw DATA8_B38F85                                            ;B38C12|        |B38F85;
-    dw DATA8_B38F99                                            ;B38C14|        |B38F99;
-    dw DATA8_B38FA2                                            ;B38C16|        |B38FA2;
-    dw DATA8_B38FAF                                            ;B38C18|        |B38FAF;
-    dw DATA8_B38FC3                                            ;B38C1A|        |B38FC3;
-    dw DATA8_B38FD0                                            ;B38C1C|        |B38FD0;
-    dw DATA8_B38FDB                                            ;B38C1E|        |B38FDB;
-    dw DATA8_B38FE8                                            ;B38C20|        |B38FE8;
-    dw DATA8_B38FF5                                            ;B38C22|        |B38FF5;
-    dw DATA8_B39001                                            ;B38C24|        |B39001;
-    dw DATA8_B3900F                                            ;B38C26|        |B3900F;
-    dw DATA8_B3901D                                            ;B38C28|        |B3901D;
-    dw DATA8_B39031                                            ;B38C2A|        |B39031;
-    dw DATA8_B39045                                            ;B38C2C|        |B39045;
-    dw DATA8_B3904E                                            ;B38C2E|        |B3904E;
-    dw DATA8_B39057                                            ;B38C30|        |B39057;
-    dw DATA8_B3905D                                            ;B38C32|        |B3905D;
-    dw DATA8_B39063                                            ;B38C34|        |B39063;
-    dw DATA8_B39069                                            ;B38C36|        |B39069;
-    dw DATA8_B3906F                                            ;B38C38|        |B3906F;
-    dw DATA8_B39075                                            ;B38C3A|        |B39075;
-    dw DATA8_B3907B                                            ;B38C3C|        |B3907B;
-    dw DATA8_B39081                                            ;B38C3E|        |B39081;
-    dw DATA8_B39087                                            ;B38C40|        |B39087;
-    dw DATA8_B3908D                                            ;B38C42|        |B3908D;
-    dw DATA8_B39093                                            ;B38C44|        |B39093;
-    dw DATA8_B39099                                            ;B38C46|        |B39099;
-    dw DATA8_B3909F                                            ;B38C48|        |B3909F;
-    dw DATA8_B390A5                                            ;B38C4A|        |B390A5;
-    dw DATA8_B390AB                                            ;B38C4C|        |B390AB;
-    dw DATA8_B390B1                                            ;B38C4E|        |B390B1;
-    dw DATA8_B390B7                                            ;B38C50|        |B390B7;
-    dw DATA8_B390BD                                            ;B38C52|        |B390BD;
-    dw DATA8_B390C3                                            ;B38C54|        |B390C3;
-    dw DATA8_B390C9                                            ;B38C56|        |B390C9;
-    dw DATA8_B390CF                                            ;B38C58|        |B390CF;
-    dw DATA8_B390D5                                            ;B38C5A|        |B390D5;
-    dw DATA8_B390DB                                            ;B38C5C|        |B390DB;
-    dw DATA8_B390E1                                            ;B38C5E|        |B390E1;
-    dw DATA8_B390E7                                            ;B38C60|        |B390E7;
-    dw DATA8_B390ED                                            ;B38C62|        |B390ED;
-    dw DATA8_B390F3                                            ;B38C64|        |B390F3;
-    dw DATA8_B390F9                                            ;B38C66|        |B390F9;
-    dw DATA8_B390FF                                            ;B38C68|        |B390FF;
-    dw DATA8_B39105                                            ;B38C6A|        |B39105;
-    dw DATA8_B3910B                                            ;B38C6C|        |B3910B;
-    dw DATA8_B39111                                            ;B38C6E|        |B39111;
-    dw DATA8_B39117                                            ;B38C70|        |B39117;
-    dw DATA8_B3911D                                            ;B38C72|        |B3911D;
-    dw DATA8_B39123                                            ;B38C74|        |B39123;
-    dw DATA8_B39129                                            ;B38C76|        |B39129;
-    dw DATA8_B3913A                                            ;B38C78|        |B3913A;
-    dw DATA8_B39147                                            ;B38C7A|        |B39147;
-    dw DATA8_B39154                                            ;B38C7C|        |B39154;
-    dw DATA8_B39161                                            ;B38C7E|        |B39161;
-    dw DATA8_B3916E                                            ;B38C80|        |B3916E;
-    dw DATA8_B3917B                                            ;B38C82|        |B3917B;
-    dw DATA8_B39188                                            ;B38C84|        |B39188;
-    dw DATA8_B39195                                            ;B38C86|        |B39195;
-    dw DATA8_B391A2                                            ;B38C88|        |B391A2;
-    dw DATA8_B391AC                                            ;B38C8A|        |B391AC;
-    dw DATA8_B391B6                                            ;B38C8C|        |B391B6;
-    dw DATA8_B391C0                                            ;B38C8E|        |B391C0;
-    dw DATA8_B391CA                                            ;B38C90|        |B391CA;
-    dw DATA8_B391D0                                            ;B38C92|        |B391D0;
-    dw DATA8_B391D6                                            ;B38C94|        |B391D6;
-    dw DATA8_B391DC                                            ;B38C96|        |B391DC;
-    dw DATA8_B391E2                                            ;B38C98|        |B391E2;
-    dw DATA8_B391E8                                            ;B38C9A|        |B391E8;
-    dw DATA8_B391EE                                            ;B38C9C|        |B391EE;
-    dw DATA8_B391F4                                            ;B38C9E|        |B391F4;
-    dw DATA8_B391FA                                            ;B38CA0|        |B391FA;
-    dw DATA8_B39200                                            ;B38CA2|        |B39200;
-    dw DATA8_B39206                                            ;B38CA4|        |B39206;
-    dw DATA8_B3920C                                            ;B38CA6|        |B3920C;
-    dw DATA8_B39212                                            ;B38CA8|        |B39212;
-    dw DATA8_B39218                                            ;B38CAA|        |B39218;
-    dw DATA8_B3921E                                            ;B38CAC|        |B3921E;
-    dw DATA8_B39224                                            ;B38CAE|        |B39224;
-    dw DATA8_B3922A                                            ;B38CB0|        |B3922A;
-    dw DATA8_B39241                                            ;B38CB2|        |B39241;
-    dw DATA8_B39250                                            ;B38CB4|        |B39250;
-    dw DATA8_B392B3                                            ;B38CB6|        |B392B3;
-    dw DATA8_B392D0                                            ;B38CB8|        |B392D0;
-    dw DATA8_B392D6                                            ;B38CBA|        |B392D6;
-    dw DATA8_B392DF                                            ;B38CBC|        |B392DF;
-    dw DATA8_B392EC                                            ;B38CBE|        |B392EC;
-    dw DATA8_B392F9                                            ;B38CC0|        |B392F9;
-    dw DATA8_B39306                                            ;B38CC2|        |B39306;
+    dw pAIScripting0x00_General_Data37                                            ;B38C06|        |B38F38;
+    dw pAIScripting0x00_General_Data38                                            ;B38C08|        |B38F43;
+    dw pAIScripting0x00_General_Data39                                            ;B38C0A|        |B38F50;
+    dw pAIScripting0x00_General_Data40                                            ;B38C0C|        |B38F5D;
+    dw pAIScripting0x00_General_Data41                                            ;B38C0E|        |B38F6A;
+    dw pAIScripting0x00_General_Data42                                            ;B38C10|        |B38F77;
+    dw pAIScripting0x00_General_Data43                                            ;B38C12|        |B38F85;
+    dw pAIScripting0x00_General_Data44                                            ;B38C14|        |B38F99;
+    dw pAIScripting0x00_General_Data45                                            ;B38C16|        |B38FA2;
+    dw pAIScripting0x00_General_Data46                                            ;B38C18|        |B38FAF;
+    dw pAIScripting0x00_General_Data47                                            ;B38C1A|        |B38FC3;
+    dw pAIScripting0x00_General_Data48                                            ;B38C1C|        |B38FD0;
+    dw pAIScripting0x00_General_Data49                                            ;B38C1E|        |B38FDB;
+    dw pAIScripting0x00_General_Data50                                            ;B38C20|        |B38FE8;
+    dw pAIScripting0x00_General_Data51                                            ;B38C22|        |B38FF5;
+    dw pAIScripting0x00_General_Data52                                            ;B38C24|        |B39001;
+    dw pAIScripting0x00_General_Data53                                            ;B38C26|        |B3900F;
+    dw pAIScripting0x00_General_Data54                                            ;B38C28|        |B3901D;
+    dw pAIScripting0x00_General_Data55                                            ;B38C2A|        |B39031;
+    dw pAIScripting0x00_General_Data56                                            ;B38C2C|        |B39045;
+    dw pAIScripting0x00_General_Data57                                            ;B38C2E|        |B3904E;
+    dw pAIScripting0x00_General_Data58                                            ;B38C30|        |B39057;
+    dw pAIScripting0x00_General_Data59                                            ;B38C32|        |B3905D;
+    dw pAIScripting0x00_General_Data60                                            ;B38C34|        |B39063;
+    dw pAIScripting0x00_General_Data61                                            ;B38C36|        |B39069;
+    dw pAIScripting0x00_General_Data62                                            ;B38C38|        |B3906F;
+    dw pAIScripting0x00_General_Data63                                            ;B38C3A|        |B39075;
+    dw pAIScripting0x00_General_Data64                                            ;B38C3C|        |B3907B;
+    dw pAIScripting0x00_General_Data65                                            ;B38C3E|        |B39081;
+    dw pAIScripting0x00_General_Data66                                            ;B38C40|        |B39087;
+    dw pAIScripting0x00_General_Data67                                            ;B38C42|        |B3908D;
+    dw pAIScripting0x00_General_Data68                                            ;B38C44|        |B39093;
+    dw pAIScripting0x00_General_Data69                                            ;B38C46|        |B39099;
+    dw pAIScripting0x00_General_Data70                                            ;B38C48|        |B3909F;
+    dw pAIScripting0x00_General_Data71                                            ;B38C4A|        |B390A5;
+    dw pAIScripting0x00_General_Data72                                            ;B38C4C|        |B390AB;
+    dw pAIScripting0x00_General_Data73                                            ;B38C4E|        |B390B1;
+    dw pAIScripting0x00_General_Data74                                            ;B38C50|        |B390B7;
+    dw pAIScripting0x00_General_Data75                                            ;B38C52|        |B390BD;
+    dw pAIScripting0x00_General_Data76                                            ;B38C54|        |B390C3;
+    dw pAIScripting0x00_General_Data77                                            ;B38C56|        |B390C9;
+    dw pAIScripting0x00_General_Data78                                            ;B38C58|        |B390CF;
+    dw pAIScripting0x00_General_Data79                                            ;B38C5A|        |B390D5;
+    dw pAIScripting0x00_General_Data80                                            ;B38C5C|        |B390DB;
+    dw pAIScripting0x00_General_Data81                                            ;B38C5E|        |B390E1;
+    dw pAIScripting0x00_General_Data82                                            ;B38C60|        |B390E7;
+    dw pAIScripting0x00_General_Data83                                            ;B38C62|        |B390ED;
+    dw pAIScripting0x00_General_Data84                                            ;B38C64|        |B390F3;
+    dw pAIScripting0x00_General_Data85                                            ;B38C66|        |B390F9;
+    dw pAIScripting0x00_General_Data86                                            ;B38C68|        |B390FF;
+    dw pAIScripting0x00_General_Data87                                            ;B38C6A|        |B39105;
+    dw pAIScripting0x00_General_Data88                                            ;B38C6C|        |B3910B;
+    dw pAIScripting0x00_General_Data89                                            ;B38C6E|        |B39111;
+    dw pAIScripting0x00_General_Data90                                            ;B38C70|        |B39117;
+    dw pAIScripting0x00_General_Data91                                            ;B38C72|        |B3911D;
+    dw pAIScripting0x00_General_Data92                                            ;B38C74|        |B39123;
+    dw pAIScripting0x00_General_Data93                                            ;B38C76|        |B39129;
+    dw pAIScripting0x00_General_Data94                                            ;B38C78|        |B3913A;
+    dw pAIScripting0x00_General_Data95                                            ;B38C7A|        |B39147;
+    dw pAIScripting0x00_General_Data96                                            ;B38C7C|        |B39154;
+    dw pAIScripting0x00_General_Data97                                            ;B38C7E|        |B39161;
+    dw pAIScripting0x00_General_Data98                                            ;B38C80|        |B3916E;
+    dw pAIScripting0x00_General_Data99                                            ;B38C82|        |B3917B;
+    dw pAIScripting0x00_General_Data100                                            ;B38C84|        |B39188;
+    dw pAIScripting0x00_General_Data101                                            ;B38C86|        |B39195;
+    dw pAIScripting0x00_General_Data102                                            ;B38C88|        |B391A2;
+    dw pAIScripting0x00_General_Data103                                            ;B38C8A|        |B391AC;
+    dw pAIScripting0x00_General_Data104                                            ;B38C8C|        |B391B6;
+    dw pAIScripting0x00_General_Data105                                            ;B38C8E|        |B391C0;
+    dw pAIScripting0x00_General_Data106                                            ;B38C90|        |B391CA;
+    dw pAIScripting0x00_General_Data107                                            ;B38C92|        |B391D0;
+    dw pAIScripting0x00_General_Data108                                            ;B38C94|        |B391D6;
+    dw pAIScripting0x00_General_Data109                                            ;B38C96|        |B391DC;
+    dw pAIScripting0x00_General_Data110                                            ;B38C98|        |B391E2;
+    dw pAIScripting0x00_General_Data111                                            ;B38C9A|        |B391E8;
+    dw pAIScripting0x00_General_Data112                                            ;B38C9C|        |B391EE;
+    dw pAIScripting0x00_General_Data113                                            ;B38C9E|        |B391F4;
+    dw pAIScripting0x00_General_Data114                                            ;B38CA0|        |B391FA;
+    dw pAIScripting0x00_General_Data115                                            ;B38CA2|        |B39200;
+    dw pAIScripting0x00_General_Data116                                            ;B38CA4|        |B39206;
+    dw pAIScripting0x00_General_Data117                                            ;B38CA6|        |B3920C;
+    dw pAIScripting0x00_General_Data118                                            ;B38CA8|        |B39212;
+    dw pAIScripting0x00_General_Data119                                            ;B38CAA|        |B39218;
+    dw pAIScripting0x00_General_Data120                                            ;B38CAC|        |B3921E;
+    dw pAIScripting0x00_General_Data121                                            ;B38CAE|        |B39224;
+    dw pAIScripting0x00_General_Data122                                            ;B38CB0|        |B3922A;
+    dw pAIScripting0x00_General_Data123                                            ;B38CB2|        |B39241;
+    dw pAIScripting0x00_General_Data124                                            ;B38CB4|        |B39250;
+    dw pAIScripting0x00_General_Data125                                            ;B38CB6|        |B392B3;
+    dw pAIScripting0x00_General_Data126                                            ;B38CB8|        |B392D0;
+    dw pAIScripting0x00_General_Data127                                            ;B38CBA|        |B392D6;
+    dw pAIScripting0x00_General_Data128                                            ;B38CBC|        |B392DF;
+    dw pAIScripting0x00_General_Data129                                            ;B38CBE|        |B392EC;
+    dw pAIScripting0x00_General_Data130                                            ;B38CC0|        |B392F9;
+    dw pAIScripting0x00_General_Data131                                            ;B38CC2|        |B39306;
     dw DATA8_B39313                                            ;B38CC4|        |B39313;
     dw DATA8_B39313                                            ;B38CC6|        |B39313;
  
@@ -2079,7 +2079,7 @@ DATA8_B38CC8:
     %AICMD0x12_Jump($B38CCC)                                   ;B38CCD
 
 
-DATA8_B38CD0:
+pAIScripting0x00_General_Data01:
  
     %AICMD0x2B($B38150, $00)                                   ;B38CD0
     %AICMD0x2E($01, $B38150, $10)                              ;B38CD4
@@ -2088,7 +2088,7 @@ DATA8_B38CD0:
     %AICMD0x12_Jump($B38CDA)                                   ;B38CDB
 
 
-DATA8_B38CDE:
+pAIScripting0x00_General_Data02:
  
     %AICMD0x2B($B38144, $00)                                   ;B38CDE
     %AICMD0x2E($01, $B38144, $10)                              ;B38CE2
@@ -2096,7 +2096,7 @@ DATA8_B38CDE:
     %AICMD0x12_Jump($B38CE7)                                   ;B38CE8
 
 
-DATA8_B38CEB:
+pAIScripting0x00_General_Data03:
  
     %AICMD0x2B($B386C0, $00)                                   ;B38CEB
     %AICMD0x2E($01, $B386CC, $10)                              ;B38CEF
@@ -2104,7 +2104,7 @@ DATA8_B38CEB:
     %AICMD0x12_Jump($B38CF4)                                   ;B38CF5
 
 
-DATA8_B38CF8:
+pAIScripting0x00_General_Data04:
  
     %AICMD0x2B($B386A8, $00)                                   ;B38CF8
     %AICMD0x2E($01, $B386B4, $10)                              ;B38CFC
@@ -2112,7 +2112,7 @@ DATA8_B38CF8:
     %AICMD0x12_Jump($B38D01)                                   ;B38D02
 
 
-DATA8_B38D05:
+pAIScripting0x00_General_Data05:
  
     %AICMD0x2B($B380FC, $00)                                   ;B38D05
     %AICMD0x2E($01, $B38108, $10)                              ;B38D09
@@ -2120,7 +2120,7 @@ DATA8_B38D05:
     %AICMD0x12_Jump($B38D0E)                                   ;B38D0F
 
 
-DATA8_B38D12:
+pAIScripting0x00_General_Data06:
  
     %AICMD0x2B($B38708, $00)                                   ;B38D12
     %AICMD0x2E($01, $B38714, $10)                              ;B38D16
@@ -2128,7 +2128,7 @@ DATA8_B38D12:
     %AICMD0x12_Jump($B38D1B)                                   ;B38D1C
 
 
-DATA8_B38D1F:
+pAIScripting0x00_General_Data07:
  
     %AICMD0x2B($B386D8, $00)                                   ;B38D1F
     %AICMD0x2E($02, $B386E4, $10)                              ;B38D23
@@ -2136,7 +2136,7 @@ DATA8_B38D1F:
     %AICMD0x12_Jump($B38D28)                                   ;B38D29
 
 
-DATA8_B38D2C:
+pAIScripting0x00_General_Data08:
  
     %AICMD0x2B($B386F0, $00)                                   ;B38D2C
     %AICMD0x2E($02, $B386FC, $10)                              ;B38D30
@@ -2144,7 +2144,7 @@ DATA8_B38D2C:
     %AICMD0x12_Jump($B38D35)                                   ;B38D36
 
 
-DATA8_B38D39:
+pAIScripting0x00_General_Data09:
  
     %AICMD0x2B($B3872C, $00)                                   ;B38D39
     %AICMD0x2E($01, $B3872C, $10)                              ;B38D3D
@@ -2152,21 +2152,21 @@ DATA8_B38D39:
     %AICMD0x12_Jump($B38D42)                                   ;B38D43
 
 
-DATA8_B38D46:
+pAIScripting0x00_General_Data10:
  
     %AICMD0x1B($019D, $01)                                     ;B38D46
     %AICMD0x13_Wait(60)                                        ;B38D4A
     %AICMD0x12_Jump($B38D09)                                   ;B38D4D
 
 
-DATA8_B38D50:
+pAIScripting0x00_General_Data11:
  
     %AICMD0x1B($019D, $00)                                     ;B38D50
     %AICMD0x13_Wait(60)                                        ;B38D54
     %AICMD0x12_Jump($B38D09)                                   ;B38D57
 
 
-DATA8_B38D5A:
+pAIScripting0x00_General_Data12:
  
     %AICMD0x1B($01A4, $00)                                     ;B38D5A
     %AICMD0x13_Wait(60)                                        ;B38D5E
@@ -2174,7 +2174,7 @@ DATA8_B38D5A:
     %AICMD0x12_Jump($B38D09)                                   ;B38D64
 
 
-DATA8_B38D67:
+pAIScripting0x00_General_Data13:
  
     %AICMD0x1B($01A8, $00)                                     ;B38D67
     %AICMD0x13_Wait(60)                                        ;B38D6B
@@ -2182,7 +2182,7 @@ DATA8_B38D67:
     %AICMD0x12_Jump($B38D09)                                   ;B38D71
 
 
-DATA8_B38D74:
+pAIScripting0x00_General_Data14:
  
     %AICMD0x1B($0191, $01)                                     ;B38D74
     %AICMD0x13_Wait(60)                                        ;B38D78
@@ -2190,7 +2190,7 @@ DATA8_B38D74:
     %AICMD0x12_Jump($B38D09)                                   ;B38D7E
 
 
-DATA8_B38D81:
+pAIScripting0x00_General_Data15:
  
     %AICMD0x1B($0191, $00)                                     ;B38D81
     %AICMD0x13_Wait(60)                                        ;B38D85
@@ -2198,7 +2198,7 @@ DATA8_B38D81:
     %AICMD0x12_Jump($B38D09)                                   ;B38D8B
 
 
-DATA8_B38D8E:
+pAIScripting0x00_General_Data16:
  
     %AICMD0x2B($B3812C, $00)                                   ;B38D8E
     %AICMD0x2E($01, $B38138, $10)                              ;B38D92
@@ -2206,7 +2206,7 @@ DATA8_B38D8E:
     %AICMD0x12_Jump($B38D97)                                   ;B38D98
 
 
-DATA8_B38D9B:
+pAIScripting0x00_General_Data17:
  
     %AICMD0x2B($B38114, $00)                                   ;B38D9B
     %AICMD0x2E($01, $B38120, $10)                              ;B38D9F
@@ -2216,7 +2216,7 @@ DATA8_B38D9B:
     %AICMD0x12_Jump($B38DAC)                                   ;B38DAD
 
 
-DATA8_B38DB0:
+pAIScripting0x00_General_Data18:
  
     %AICMD0x49($B38114)                                        ;B38DB0
     %AICMD0x2E($01, $B38120, $10)                              ;B38DB3
@@ -2224,7 +2224,7 @@ DATA8_B38DB0:
     %AICMD0x12_Jump($B38DB8)                                   ;B38DB9
 
 
-DATA8_B38DBC:
+pAIScripting0x00_General_Data19:
  
     %AICMD0x2B($B38768, $00)                                   ;B38DBC
     %AICMD0x2E($01, $B38774, $10)                              ;B38DC0
@@ -2234,7 +2234,7 @@ DATA8_B38DBC:
     %AICMD0x12_Jump($B38DCD)                                   ;B38DCE
 
 
-DATA8_B38DD1:
+pAIScripting0x00_General_Data20:
  
     %AICMD0x49($B3812C)                                        ;B38DD1
     %AICMD0x2E($01, $B38138, $10)                              ;B38DD4
@@ -2244,14 +2244,14 @@ DATA8_B38DD1:
     %AICMD0x12_Jump($B38DE1)                                   ;B38DE2
 
 
-DATA8_B38DE5:
+pAIScripting0x00_General_Data21:
  
     %AICMD0x1A($0048, $0058, $B387BC, $00)                     ;B38DE5
     %AICMD0x13_Wait(1)                                         ;B38DED
     %AICMD0x12_Jump($B38DED)                                   ;B38DF0
 
 
-DATA8_B38DF3:
+pAIScripting0x00_General_Data22:
  
     %AICMD0x1B($0119, $00)                                     ;B38DF3
     %AICMD0x13_Wait(32)                                        ;B38DF7
@@ -2259,7 +2259,7 @@ DATA8_B38DF3:
     %AICMD0x10_End()                                           ;B38DFB
 
 
-DATA8_B38DFC:
+pAIScripting0x00_General_Data23:
  
     %AICMD0x2B($B38900, $00)                                   ;B38DFC
     %AICMD0x2E($01, $B386CC, $10)                              ;B38E00
@@ -2267,7 +2267,7 @@ DATA8_B38DFC:
     %AICMD0x12_Jump($B38E05)                                   ;B38E06
 
 
-DATA8_B38E09:
+pAIScripting0x00_General_Data24:
  
     %AICMD0x1A($0068, $0168, $B38114, $00)                     ;B38E09
     %AICMD0x22($20, $20, $01, $B38120, $10)                    ;B38E11
@@ -2275,7 +2275,7 @@ DATA8_B38E09:
     %AICMD0x12_Jump($B38E18)                                   ;B38E1B
 
 
-DATA8_B38E1E:
+pAIScripting0x00_General_Data25:
  
     %AICMD0x1A($00F8, $01D8, $B3812C, $00)                     ;B38E1E
     %AICMD0x22($20, $20, $01, $B38138, $10)                    ;B38E26
@@ -2283,7 +2283,7 @@ DATA8_B38E1E:
     %AICMD0x12_Jump($B38E2D)                                   ;B38E30
 
 
-DATA8_B38E33:
+pAIScripting0x00_General_Data26:
  
     %AICMD0x1A($0108, $0168, $B380FC, $00)                     ;B38E33
     %AICMD0x22($20, $20, $01, $B38108, $10)                    ;B38E3B
@@ -2291,7 +2291,7 @@ DATA8_B38E33:
     %AICMD0x12_Jump($B38E42)                                   ;B38E45
 
 
-DATA8_B38E48:
+pAIScripting0x00_General_Data27:
  
     %AICMD0x1A($01E8, $0188, $B386A8, $00)                     ;B38E48
     %AICMD0x22($20, $20, $01, $B386B4, $10)                    ;B38E50
@@ -2299,7 +2299,7 @@ DATA8_B38E48:
     %AICMD0x12_Jump($B38E57)                                   ;B38E5A
 
 
-DATA8_B38E5D:
+pAIScripting0x00_General_Data28:
  
     %AICMD0x1A($00B8, $01B8, $B386C0, $00)                     ;B38E5D
     %AICMD0x22($20, $20, $01, $B386CC, $10)                    ;B38E65
@@ -2307,14 +2307,14 @@ DATA8_B38E5D:
     %AICMD0x12_Jump($B38E6C)                                   ;B38E6F
 
 
-DATA8_B38E72:
+pAIScripting0x00_General_Data29:
  
     %AICMD0x1A($0088, $0168, $B38318, $01)                     ;B38E72
     %AICMD0x13_Wait(1)                                         ;B38E7A
     %AICMD0x12_Jump($B38E7A)                                   ;B38E7D
 
 
-DATA8_B38E80:
+pAIScripting0x00_General_Data30:
  
     %AICMD0x1B($0297, $00)                                     ;B38E80
     %AICMD0x0D($00, $01, $40, $01)                             ;B38E84
@@ -2324,14 +2324,14 @@ DATA8_B38E80:
     %AICMD0x10_End()                                           ;B38E93
 
 
-DATA8_B38E94:
+pAIScripting0x00_General_Data31:
  
     %AICMD0x2B($B38720, $00)                                   ;B38E94
     %AICMD0x4A()                                               ;B38E98
     %AICMD0x12_Jump($B38E98)                                   ;B38E99
 
 
-DATA8_B38E9C:
+pAIScripting0x00_General_Data32:
  
     %AICMD0x1A($0078, $01C8, $B3836C, $03)                     ;B38E9C
     %AICMD0x13_Wait(1)                                         ;B38EA4
@@ -2349,7 +2349,7 @@ DATA8_B38EAA:
     %AICMD0x12_Jump($B38EC6)                                   ;B38EC9
 
 
-DATA8_B38ECC:
+pAIScripting0x00_General_Data33:
  
     %AICMD0x1B($01A7, $00)                                     ;B38ECC
     %AICMD0x0D($00, $FF, $20, $01)                             ;B38ED0
@@ -2359,7 +2359,7 @@ DATA8_B38ECC:
     %AICMD0x10_End()                                           ;B38EDF
 
 
-DATA8_B38EE0:
+pAIScripting0x00_General_Data34:
  
     %AICMD0x1A($0020, $01D8, $B38378, $03)                     ;B38EE0
     %AICMD0x0D($FF, $00, $40, $01)                             ;B38EE8
@@ -2367,7 +2367,7 @@ DATA8_B38EE0:
     %AICMD0x10_End()                                           ;B38EEE
 
 
-DATA8_B38EEF:
+pAIScripting0x00_General_Data35:
  
     %AICMD0x1B($0213, $00)                                     ;B38EEF
     %AICMD0x0D($00, $FF, $20, $01)                             ;B38EF3
@@ -2377,7 +2377,7 @@ DATA8_B38EEF:
     %AICMD0x10_End()                                           ;B38F02
 
 
-DATA8_B38F03:
+pAIScripting0x00_General_Data36:
  
     %AICMD0x1A($00D8, $0148, $B386C0, $00)                     ;B38F03
     %AICMD0x13_Wait(1)                                         ;B38F0B
@@ -2396,7 +2396,7 @@ DATA8_B38F11:
     %AICMD0x12_Jump($B38F32)                                   ;B38F35
 
 
-DATA8_B38F38:
+pAIScripting0x00_General_Data37:
  
     %AICMD0x1B($0275, $00)                                     ;B38F38
     %AICMD0x0D($FF, $00, $40, $01)                             ;B38F3C
@@ -2404,7 +2404,7 @@ DATA8_B38F38:
     %AICMD0x10_End()                                           ;B38F42
 
 
-DATA8_B38F43:
+pAIScripting0x00_General_Data38:
  
     %AICMD0x1B($0206, $00)                                     ;B38F43
     %AICMD0x13_Wait(60)                                        ;B38F47
@@ -2412,7 +2412,7 @@ DATA8_B38F43:
     %AICMD0x12_Jump($B38DD4)                                   ;B38F4D
 
 
-DATA8_B38F50:
+pAIScripting0x00_General_Data39:
  
     %AICMD0x1B($0207, $00)                                     ;B38F50
     %AICMD0x13_Wait(60)                                        ;B38F54
@@ -2420,7 +2420,7 @@ DATA8_B38F50:
     %AICMD0x12_Jump($B38DD4)                                   ;B38F5A
 
 
-DATA8_B38F5D:
+pAIScripting0x00_General_Data40:
  
     %AICMD0x1B($0208, $01)                                     ;B38F5D
     %AICMD0x13_Wait(60)                                        ;B38F61
@@ -2428,7 +2428,7 @@ DATA8_B38F5D:
     %AICMD0x12_Jump($B38DD4)                                   ;B38F67
 
 
-DATA8_B38F6A:
+pAIScripting0x00_General_Data41:
  
     %AICMD0x1B($0208, $00)                                     ;B38F6A
     %AICMD0x13_Wait(60)                                        ;B38F6E
@@ -2436,14 +2436,14 @@ DATA8_B38F6A:
     %AICMD0x12_Jump($B38DD4)                                   ;B38F74
 
 
-DATA8_B38F77:
+pAIScripting0x00_General_Data42:
  
     %AICMD0x1A($0088, $0168, $B38240, $01)                     ;B38F77
     %AICMD0x13_Wait(1)                                         ;B38F7F
     %AICMD0x12_Jump($B38F7F)                                   ;B38F82
 
 
-DATA8_B38F85:
+pAIScripting0x00_General_Data43:
  
     %AICMD0x1B($025B, $00)                                     ;B38F85
     %AICMD0x0D($00, $01, $40, $01)                             ;B38F89
@@ -2453,14 +2453,14 @@ DATA8_B38F85:
     %AICMD0x10_End()                                           ;B38F98
 
 
-DATA8_B38F99:
+pAIScripting0x00_General_Data44:
  
     %AICMD0x09_StartScript($09, $B39313)                                   ;B38F99
     %AICMD0x09_StartScript($0A, $B3933D)                                   ;B38F9D
     %AICMD0x10_End()                                           ;B38FA1
 
 
-DATA8_B38FA2:
+pAIScripting0x00_General_Data45:
  
     %AICMD0x2B($B388AC, $00)                                   ;B38FA2
     %AICMD0x2E($01, $B386B4, $10)                              ;B38FA6
@@ -2468,7 +2468,7 @@ DATA8_B38FA2:
     %AICMD0x12_Jump($B38FAB)                                   ;B38FAC
 
 
-DATA8_B38FAF:
+pAIScripting0x00_General_Data46:
  
     %AICMD0x2B($B38504, $00)                                   ;B38FAF
     %AICMD0x1B($0321, $00)                                     ;B38FB3
@@ -2478,7 +2478,7 @@ DATA8_B38FAF:
     %AICMD0x12_Jump($B38FBF)                                   ;B38FC0
 
 
-DATA8_B38FC3:
+pAIScripting0x00_General_Data47:
  
     %AICMD0x2B($B38504, $00)                                   ;B38FC3
     %AICMD0x2E($01, $B38504, $10)                              ;B38FC7
@@ -2486,7 +2486,7 @@ DATA8_B38FC3:
     %AICMD0x12_Jump($B38FCC)                                   ;B38FCD
 
 
-DATA8_B38FD0:
+pAIScripting0x00_General_Data48:
  
     %AICMD0x2B($B384F8, $02)                                   ;B38FD0
     %AICMD0x0D($01, $00, $40, $02)                             ;B38FD4
@@ -2494,7 +2494,7 @@ DATA8_B38FD0:
     %AICMD0x10_End()                                           ;B38FDA
 
 
-DATA8_B38FDB:
+pAIScripting0x00_General_Data49:
  
     %AICMD0x1A($0268, $0178, $B38738, $00)                     ;B38FDB
     %AICMD0x13_Wait(64)                                        ;B38FE3
@@ -2502,7 +2502,7 @@ DATA8_B38FDB:
     %AICMD0x10_End()                                           ;B38FE7
 
 
-DATA8_B38FE8:
+pAIScripting0x00_General_Data50:
  
     %AICMD0x1A($0268, $0178, $B38744, $00)                     ;B38FE8
     %AICMD0x13_Wait(64)                                        ;B38FF0
@@ -2510,28 +2510,28 @@ DATA8_B38FE8:
     %AICMD0x10_End()                                           ;B38FF4
 
 
-DATA8_B38FF5:
+pAIScripting0x00_General_Data51:
  
     %AICMD0x1A($0268, $0178, $B38750, $00)                     ;B38FF5
     %AICMD0x34()                                               ;B38FFD
     %AICMD0x12_Jump($B38FFD)                                   ;B38FFE
 
 
-DATA8_B39001:
+pAIScripting0x00_General_Data52:
  
     %AICMD0x1A($0088, $0168, $B38234, $01)                     ;B39001
     %AICMD0x13_Wait(1)                                         ;B39009
     %AICMD0x12_Jump($B39009)                                   ;B3900C
 
 
-DATA8_B3900F:
+pAIScripting0x00_General_Data53:
  
     %AICMD0x1A($0078, $0178, $B38234, $01)                     ;B3900F
     %AICMD0x13_Wait(1)                                         ;B39017
     %AICMD0x12_Jump($B39017)                                   ;B3901A
 
 
-DATA8_B3901D:
+pAIScripting0x00_General_Data54:
  
     %AICMD0x1B($025B, $00)                                     ;B3901D
     %AICMD0x0D($00, $01, $40, $01)                             ;B39021
@@ -2541,7 +2541,7 @@ DATA8_B3901D:
     %AICMD0x10_End()                                           ;B39030
 
 
-DATA8_B39031:
+pAIScripting0x00_General_Data55:
  
     %AICMD0x1B($025B, $00)                                     ;B39031
     %AICMD0x0D($00, $01, $40, $01)                             ;B39035
@@ -2551,7 +2551,7 @@ DATA8_B39031:
     %AICMD0x10_End()                                           ;B39044
 
 
-DATA8_B39045:
+pAIScripting0x00_General_Data56:
  
     %AICMD0x2B($B387F8, $00)                                   ;B39045
     %AICMD0x13_Wait(60)                                        ;B39049
@@ -2559,7 +2559,7 @@ DATA8_B39045:
     %AICMD0x10_End()                                           ;B3904D
 
 
-DATA8_B3904E:
+pAIScripting0x00_General_Data57:
  
     %AICMD0x2B($B38804, $00)                                   ;B3904E
     %AICMD0x13_Wait(60)                                        ;B39052
@@ -2567,217 +2567,217 @@ DATA8_B3904E:
     %AICMD0x10_End()                                           ;B39056
 
 
-DATA8_B39057:
+pAIScripting0x00_General_Data58:
  
     %AICMD0x2F($B38114)                                        ;B39057
     %AICMD0x12_Jump($B38D9F)                                   ;B3905A
 
 
-DATA8_B3905D:
+pAIScripting0x00_General_Data59:
  
     %AICMD0x2F($B38960)                                        ;B3905D
     %AICMD0x12_Jump($B38DAC)                                   ;B39060
 
 
-DATA8_B39063:
+pAIScripting0x00_General_Data60:
  
     %AICMD0x2F($B38954)                                        ;B39063
     %AICMD0x12_Jump($B38DAC)                                   ;B39066
 
 
-DATA8_B39069:
+pAIScripting0x00_General_Data61:
  
     %AICMD0x2F($B38114)                                        ;B39069
     %AICMD0x12_Jump($B38DA7)                                   ;B3906C
 
 
-DATA8_B3906F:
+pAIScripting0x00_General_Data62:
  
     %AICMD0x2F($B3896C)                                        ;B3906F
     %AICMD0x12_Jump($B38DAC)                                   ;B39072
 
 
-DATA8_B39075:
+pAIScripting0x00_General_Data63:
  
     %AICMD0x2F($B38978)                                        ;B39075
     %AICMD0x12_Jump($B38DAC)                                   ;B39078
 
 
-DATA8_B3907B:
+pAIScripting0x00_General_Data64:
  
     %AICMD0x2F($B38984)                                        ;B3907B
     %AICMD0x12_Jump($B38DAC)                                   ;B3907E
 
 
-DATA8_B39081:
+pAIScripting0x00_General_Data65:
  
     %AICMD0x2F($B38990)                                        ;B39081
     %AICMD0x12_Jump($B38DAC)                                   ;B39084
 
 
-DATA8_B39087:
+pAIScripting0x00_General_Data66:
  
     %AICMD0x2F($B3899C)                                        ;B39087
     %AICMD0x12_Jump($B38DAC)                                   ;B3908A
 
 
-DATA8_B3908D:
+pAIScripting0x00_General_Data67:
  
     %AICMD0x2F($B389A8)                                        ;B3908D
     %AICMD0x12_Jump($B38DAC)                                   ;B39090
 
 
-DATA8_B39093:
+pAIScripting0x00_General_Data68:
  
     %AICMD0x2F($B389B4)                                        ;B39093
     %AICMD0x12_Jump($B38DAC)                                   ;B39096
 
 
-DATA8_B39099:
+pAIScripting0x00_General_Data69:
  
     %AICMD0x2F($B389C0)                                        ;B39099
     %AICMD0x12_Jump($B38DAC)                                   ;B3909C
 
 
-DATA8_B3909F:
+pAIScripting0x00_General_Data70:
  
     %AICMD0x2F($B389CC)                                        ;B3909F
     %AICMD0x12_Jump($B38DAC)                                   ;B390A2
 
 
-DATA8_B390A5:
+pAIScripting0x00_General_Data71:
  
     %AICMD0x2F($B389D8)                                        ;B390A5
     %AICMD0x12_Jump($B38DAC)                                   ;B390A8
 
 
-DATA8_B390AB:
+pAIScripting0x00_General_Data72:
  
     %AICMD0x2F($B38768)                                        ;B390AB
     %AICMD0x12_Jump($B38DC8)                                   ;B390AE
 
 
-DATA8_B390B1:
+pAIScripting0x00_General_Data73:
  
     %AICMD0x2F($B3812C)                                        ;B390B1
     %AICMD0x12_Jump($B38DD4)                                   ;B390B4
 
 
-DATA8_B390B7:
+pAIScripting0x00_General_Data74:
  
     %AICMD0x2F($B3812C)                                        ;B390B7
     %AICMD0x12_Jump($B38DDC)                                   ;B390BA
 
 
-DATA8_B390BD:
+pAIScripting0x00_General_Data75:
  
     %AICMD0x2F($B389FC)                                        ;B390BD
     %AICMD0x12_Jump($B38DE1)                                   ;B390C0
 
 
-DATA8_B390C3:
+pAIScripting0x00_General_Data76:
  
     %AICMD0x2F($B38A08)                                        ;B390C3
     %AICMD0x12_Jump($B38DE1)                                   ;B390C6
 
 
-DATA8_B390C9:
+pAIScripting0x00_General_Data77:
  
     %AICMD0x2F($B38A14)                                        ;B390C9
     %AICMD0x12_Jump($B38DE1)                                   ;B390CC
 
 
-DATA8_B390CF:
+pAIScripting0x00_General_Data78:
  
     %AICMD0x2F($B38A20)                                        ;B390CF
     %AICMD0x12_Jump($B38DE1)                                   ;B390D2
 
 
-DATA8_B390D5:
+pAIScripting0x00_General_Data79:
  
     %AICMD0x2F($B38858)                                        ;B390D5
     %AICMD0x12_Jump($B38D0E)                                   ;B390D8
 
 
-DATA8_B390DB:
+pAIScripting0x00_General_Data80:
  
     %AICMD0x2F($B38864)                                        ;B390DB
     %AICMD0x12_Jump($B38D0E)                                   ;B390DE
 
 
-DATA8_B390E1:
+pAIScripting0x00_General_Data81:
  
     %AICMD0x2F($B38870)                                        ;B390E1
     %AICMD0x12_Jump($B38D0E)                                   ;B390E4
 
 
-DATA8_B390E7:
+pAIScripting0x00_General_Data82:
  
     %AICMD0x2F($B3887C)                                        ;B390E7
     %AICMD0x12_Jump($B38D0E)                                   ;B390EA
 
 
-DATA8_B390ED:
+pAIScripting0x00_General_Data83:
  
     %AICMD0x2F($B38888)                                        ;B390ED
     %AICMD0x12_Jump($B38D0E)                                   ;B390F0
 
 
-DATA8_B390F3:
+pAIScripting0x00_General_Data84:
  
     %AICMD0x2F($B38894)                                        ;B390F3
     %AICMD0x12_Jump($B38CC8)                                   ;B390F6
 
 
-DATA8_B390F9:
+pAIScripting0x00_General_Data85:
  
     %AICMD0x2F($B388A0)                                        ;B390F9
     %AICMD0x12_Jump($B38CC8)                                   ;B390FC
 
 
-DATA8_B390FF:
+pAIScripting0x00_General_Data86:
  
     %AICMD0x2F($B388AC)                                        ;B390FF
     %AICMD0x12_Jump($B38CC8)                                   ;B39102
 
 
-DATA8_B39105:
+pAIScripting0x00_General_Data87:
  
     %AICMD0x2F($B388DC)                                        ;B39105
     %AICMD0x12_Jump($B38CC8)                                   ;B39108
 
 
-DATA8_B3910B:
+pAIScripting0x00_General_Data88:
  
     %AICMD0x2F($B388F4)                                        ;B3910B
     %AICMD0x12_Jump($B38CC8)                                   ;B3910E
 
 
-DATA8_B39111:
+pAIScripting0x00_General_Data89:
  
     %AICMD0x2F($B38900)                                        ;B39111
     %AICMD0x12_Jump($B38CC8)                                   ;B39114
 
 
-DATA8_B39117:
+pAIScripting0x00_General_Data90:
  
     %AICMD0x2F($B3893C)                                        ;B39117
     %AICMD0x12_Jump($B38CE7)                                   ;B3911A
 
 
-DATA8_B3911D:
+pAIScripting0x00_General_Data91:
  
     %AICMD0x2F($B38144)                                        ;B3911D
     %AICMD0x12_Jump($B38CE2)                                   ;B39120
 
 
-DATA8_B39123:
+pAIScripting0x00_General_Data92:
  
     %AICMD0x2F($B380FC)                                        ;B39123
     %AICMD0x12_Jump($B38D09)                                   ;B39126
 
 
-DATA8_B39129:
+pAIScripting0x00_General_Data93:
  
     %AICMD0x2B($B38A2C, $00)                                   ;B39129
     %AICMD0x1F($B39133)                                        ;B3912D
@@ -2786,7 +2786,7 @@ DATA8_B39129:
     %AICMD0x12_Jump($B3912D)                                   ;B39137
 
 
-DATA8_B3913A:
+pAIScripting0x00_General_Data94:
  
     %AICMD0x1B($01CB, $01)                                     ;B3913A
     %AICMD0x13_Wait(60)                                        ;B3913E
@@ -2794,7 +2794,7 @@ DATA8_B3913A:
     %AICMD0x12_Jump($B38CFC)                                   ;B39144
 
 
-DATA8_B39147:
+pAIScripting0x00_General_Data95:
  
     %AICMD0x1B($01CB, $00)                                     ;B39147
     %AICMD0x13_Wait(60)                                        ;B3914B
@@ -2802,7 +2802,7 @@ DATA8_B39147:
     %AICMD0x12_Jump($B38CFC)                                   ;B39151
 
 
-DATA8_B39154:
+pAIScripting0x00_General_Data96:
  
     %AICMD0x1B($01CB, $01)                                     ;B39154
     %AICMD0x13_Wait(60)                                        ;B39158
@@ -2810,7 +2810,7 @@ DATA8_B39154:
     %AICMD0x12_Jump($B38CFC)                                   ;B3915E
 
 
-DATA8_B39161:
+pAIScripting0x00_General_Data97:
  
     %AICMD0x1B($01CB, $00)                                     ;B39161
     %AICMD0x13_Wait(60)                                        ;B39165
@@ -2818,7 +2818,7 @@ DATA8_B39161:
     %AICMD0x12_Jump($B38CFC)                                   ;B3916B
 
 
-DATA8_B3916E:
+pAIScripting0x00_General_Data98:
  
     %AICMD0x1B($01BF, $01)                                     ;B3916E
     %AICMD0x13_Wait(60)                                        ;B39172
@@ -2826,7 +2826,7 @@ DATA8_B3916E:
     %AICMD0x12_Jump($B38CEF)                                   ;B39178
 
 
-DATA8_B3917B:
+pAIScripting0x00_General_Data99:
  
     %AICMD0x1B($01BF, $00)                                     ;B3917B
     %AICMD0x13_Wait(60)                                        ;B3917F
@@ -2834,7 +2834,7 @@ DATA8_B3917B:
     %AICMD0x12_Jump($B38CEF)                                   ;B39185
 
 
-DATA8_B39188:
+pAIScripting0x00_General_Data100:
  
     %AICMD0x1B($01BF, $01)                                     ;B39188
     %AICMD0x13_Wait(60)                                        ;B3918C
@@ -2842,7 +2842,7 @@ DATA8_B39188:
     %AICMD0x12_Jump($B38CEF)                                   ;B39192
 
 
-DATA8_B39195:
+pAIScripting0x00_General_Data101:
  
     %AICMD0x1B($01BF, $00)                                     ;B39195
     %AICMD0x13_Wait(60)                                        ;B39199
@@ -2850,131 +2850,131 @@ DATA8_B39195:
     %AICMD0x12_Jump($B38CEF)                                   ;B3919F
 
 
-DATA8_B391A2:
+pAIScripting0x00_General_Data102:
  
     %AICMD0x1B($01C7, $01)                                     ;B391A2
     %AICMD0x13_Wait(60)                                        ;B391A6
     %AICMD0x12_Jump($B38CFC)                                   ;B391A9
 
 
-DATA8_B391AC:
+pAIScripting0x00_General_Data103:
  
     %AICMD0x1B($01C7, $00)                                     ;B391AC
     %AICMD0x13_Wait(60)                                        ;B391B0
     %AICMD0x12_Jump($B38CFC)                                   ;B391B3
 
 
-DATA8_B391B6:
+pAIScripting0x00_General_Data104:
  
     %AICMD0x1B($01BC, $01)                                     ;B391B6
     %AICMD0x13_Wait(60)                                        ;B391BA
     %AICMD0x12_Jump($B38CEF)                                   ;B391BD
 
 
-DATA8_B391C0:
+pAIScripting0x00_General_Data105:
  
     %AICMD0x1B($01BC, $00)                                     ;B391C0
     %AICMD0x13_Wait(60)                                        ;B391C4
     %AICMD0x12_Jump($B38CEF)                                   ;B391C7
 
 
-DATA8_B391CA:
+pAIScripting0x00_General_Data106:
  
     %AICMD0x2F($B386D8)                                        ;B391CA
     %AICMD0x12_Jump($B38D23)                                   ;B391CD
 
 
-DATA8_B391D0:
+pAIScripting0x00_General_Data107:
  
     %AICMD0x2F($B38810)                                        ;B391D0
     %AICMD0x12_Jump($B38D28)                                   ;B391D3
 
 
-DATA8_B391D6:
+pAIScripting0x00_General_Data108:
  
     %AICMD0x2F($B3881C)                                        ;B391D6
     %AICMD0x12_Jump($B38D28)                                   ;B391D9
 
 
-DATA8_B391DC:
+pAIScripting0x00_General_Data109:
  
     %AICMD0x2F($B38828)                                        ;B391DC
     %AICMD0x12_Jump($B38D28)                                   ;B391DF
 
 
-DATA8_B391E2:
+pAIScripting0x00_General_Data110:
  
     %AICMD0x2F($B38708)                                        ;B391E2
     %AICMD0x12_Jump($B38D16)                                   ;B391E5
 
 
-DATA8_B391E8:
+pAIScripting0x00_General_Data111:
  
     %AICMD0x2F($B38834)                                        ;B391E8
     %AICMD0x12_Jump($B38D1B)                                   ;B391EB
 
 
-DATA8_B391EE:
+pAIScripting0x00_General_Data112:
  
     %AICMD0x2F($B38840)                                        ;B391EE
     %AICMD0x12_Jump($B38D1B)                                   ;B391F1
 
 
-DATA8_B391F4:
+pAIScripting0x00_General_Data113:
  
     %AICMD0x2F($B3884C)                                        ;B391F4
     %AICMD0x12_Jump($B38D1B)                                   ;B391F7
 
 
-DATA8_B391FA:
+pAIScripting0x00_General_Data114:
  
     %AICMD0x2F($B386A8)                                        ;B391FA
     %AICMD0x12_Jump($B38CFC)                                   ;B391FD
 
 
-DATA8_B39200:
+pAIScripting0x00_General_Data115:
  
     %AICMD0x2F($B388B8)                                        ;B39200
     %AICMD0x12_Jump($B38D01)                                   ;B39203
 
 
-DATA8_B39206:
+pAIScripting0x00_General_Data116:
  
     %AICMD0x2F($B388C4)                                        ;B39206
     %AICMD0x12_Jump($B38D01)                                   ;B39209
 
 
-DATA8_B3920C:
+pAIScripting0x00_General_Data117:
  
     %AICMD0x2F($B388D0)                                        ;B3920C
     %AICMD0x12_Jump($B38D01)                                   ;B3920F
 
 
-DATA8_B39212:
+pAIScripting0x00_General_Data118:
  
     %AICMD0x2F($B386C0)                                        ;B39212
     %AICMD0x12_Jump($B38CEF)                                   ;B39215
 
 
-DATA8_B39218:
+pAIScripting0x00_General_Data119:
  
     %AICMD0x2F($B388DC)                                        ;B39218
     %AICMD0x12_Jump($B38CF4)                                   ;B3921B
 
 
-DATA8_B3921E:
+pAIScripting0x00_General_Data120:
  
     %AICMD0x2F($B388E8)                                        ;B3921E
     %AICMD0x12_Jump($B38CF4)                                   ;B39221
 
 
-DATA8_B39224:
+pAIScripting0x00_General_Data121:
  
     %AICMD0x2F($B38918)                                        ;B39224
     %AICMD0x12_Jump($B38CF4)                                   ;B39227
 
 
-DATA8_B3922A:
+pAIScripting0x00_General_Data122:
  
     %AICMD0x1A($FFE0, $01D8, $B383B4, $02)                     ;B3922A
     %AICMD0x0D($01, $00, $40, $01)                             ;B39232
@@ -2983,7 +2983,7 @@ DATA8_B3922A:
     %AICMD0x12_Jump($B3923B)                                   ;B3923E
 
 
-DATA8_B39241:
+pAIScripting0x00_General_Data123:
  
     %AICMD0x1A($0020, $01D8, $B383B4, $03)                     ;B39241
     %AICMD0x0D($FF, $00, $40, $01)                             ;B39249
@@ -2991,7 +2991,7 @@ DATA8_B39241:
     %AICMD0x10_End()                                           ;B3924F
 
 
-DATA8_B39250:
+pAIScripting0x00_General_Data124:
  
     %AICMD0x1A($01A8, $0328, $B387C8, $00)                     ;B39250
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 0, $B39270)     ;B39258
@@ -3020,7 +3020,7 @@ DATA8_B39250:
     %AICMD0x12_Jump($B392AD)                                   ;B392B0
 
 
-DATA8_B392B3:
+pAIScripting0x00_General_Data125:
  
     %AICMD0x1A($0018, $0048, $B387C8, $00)                     ;B392B3
     %AICMD0x1F($B392C1)                                        ;B392BB
@@ -3032,13 +3032,13 @@ DATA8_B392B3:
     %AICMD0x10_End()                                           ;B392CF
 
 
-DATA8_B392D0:
+pAIScripting0x00_General_Data126:
  
     %AICMD0x2F($B38768)                                        ;B392D0
     %AICMD0x12_Jump($B38DC0)                                   ;B392D3
 
 
-DATA8_B392D6:
+pAIScripting0x00_General_Data127:
  
     %AICMD0x1B($0325, $00)                                     ;B392D6
     %AICMD0x13_Wait(60)                                        ;B392DA
@@ -3046,7 +3046,7 @@ DATA8_B392D6:
     %AICMD0x10_End()                                           ;B392DE
 
 
-DATA8_B392DF:
+pAIScripting0x00_General_Data128:
  
     %AICMD0x1B($01B9, $00)                                     ;B392DF
     %AICMD0x13_Wait(60)                                        ;B392E3
@@ -3054,7 +3054,7 @@ DATA8_B392DF:
     %AICMD0x12_Jump($B38D30)                                   ;B392E9
 
 
-DATA8_B392EC:
+pAIScripting0x00_General_Data129:
  
     %AICMD0x1B($01B8, $00)                                     ;B392EC
     %AICMD0x13_Wait(60)                                        ;B392F0
@@ -3062,7 +3062,7 @@ DATA8_B392EC:
     %AICMD0x12_Jump($B38D30)                                   ;B392F6
 
 
-DATA8_B392F9:
+pAIScripting0x00_General_Data130:
  
     %AICMD0x1B($01B2, $01)                                     ;B392F9
     %AICMD0x13_Wait(60)                                        ;B392FD
@@ -3070,7 +3070,7 @@ DATA8_B392F9:
     %AICMD0x12_Jump($B38D30)                                   ;B39303
 
 
-DATA8_B39306:
+pAIScripting0x00_General_Data131:
  
     %AICMD0x1B($01B2, $00)                                     ;B39306
     %AICMD0x13_Wait(60)                                        ;B3930A
@@ -3099,24 +3099,24 @@ DATA8_B39313:
 
 
 pAIScripting0x01:
-    dw DATA8_B39379                                            ;B39359|        |B39379;
-    dw DATA8_B39D05                                            ;B3935B|        |B39D05;
-    dw DATA8_B39F3E                                            ;B3935D|        |B39F3E;
-    dw DATA8_B3A086                                            ;B3935F|        |B3A086;
-    dw DATA8_B3A162                                            ;B39361|        |B3A162;
-    dw DATA8_B3A438                                            ;B39363|        |B3A438;
-    dw DATA8_B3A5B1                                            ;B39365|        |B3A5B1;
-    dw DATA8_B3A727                                            ;B39367|        |B3A727;
-    dw DATA8_B3A81B                                            ;B39369|        |B3A81B;
-    dw DATA8_B3AD24                                            ;B3936B|        |B3AD24;
-    dw DATA8_B3ADB1                                            ;B3936D|        |B3ADB1;
+    dw pAIScripting0x01_Data01                                            ;B39359|        |B39379;
+    dw pAIScripting0x01_Data02                                            ;B3935B|        |B39D05;
+    dw pAIScripting0x01_Data03                                            ;B3935D|        |B39F3E;
+    dw pAIScripting0x01_Data04                                            ;B3935F|        |B3A086;
+    dw pAIScripting0x01_Data05                                            ;B39361|        |B3A162;
+    dw pAIScripting0x01_Data06                                            ;B39363|        |B3A438;
+    dw pAIScripting0x01_Data07                                            ;B39365|        |B3A5B1;
+    dw pAIScripting0x01_Data08                                            ;B39367|        |B3A727;
+    dw pAIScripting0x01_Data09                                            ;B39369|        |B3A81B;
+    dw pAIScripting0x01_Data10                                            ;B3936B|        |B3AD24;
+    dw pAIScripting0x01_Data11                                            ;B3936D|        |B3ADB1;
     dw pAIScripting0x02                                        ;B3936F|        |B3AE03;
     dw pAIScripting0x02                                        ;B39371|        |B3AE03;
     dw pAIScripting0x02                                        ;B39373|        |B3AE03;
     dw pAIScripting0x02                                        ;B39375|        |B3AE03;
     dw pAIScripting0x02                                        ;B39377|        |B3AE03;
  
-DATA8_B39379:
+pAIScripting0x01_Data01:
  
     %AICMD0x11_EnableUserControl()                             ;B39379
     %AICMD0x09_StartScript($01, $B393CE)                                   ;B3937A
@@ -3671,7 +3671,7 @@ DATA8_B39379:
     %AICMD0x12_Jump($B39CF8)                                   ;B39D02
 
 
-DATA8_B39D05:
+pAIScripting0x01_Data02:
  
     %AICMD0x11_EnableUserControl()                             ;B39D05
     %AICMD0x09_StartScript($01, $B39D14)                                   ;B39D06
@@ -3803,7 +3803,7 @@ DATA8_B39D05:
     %AICMD0x12_Jump($B39E32)                                   ;B39F3B
 
 
-DATA8_B39F3E:
+pAIScripting0x01_Data03:
  
     %AICMD0x11_EnableUserControl()                             ;B39F3E
     %AICMD0x09_StartScript($01, $B39F49)                                   ;B39F3F
@@ -3886,7 +3886,7 @@ DATA8_B39F3E:
     %AICMD0x12_Jump($B39F51)                                   ;B3A083
 
 
-DATA8_B3A086:
+pAIScripting0x01_Data04:
  
     %AICMD0x11_EnableUserControl()                             ;B3A086
     %AICMD0x09_StartScript($01, $B3A091)                                   ;B3A087
@@ -3941,7 +3941,7 @@ DATA8_B3A086:
     %AICMD0x12_Jump($B3A099)                                   ;B3A15F
 
 
-DATA8_B3A162:
+pAIScripting0x01_Data05:
  
     %AICMD0x11_EnableUserControl()                             ;B3A162
     %AICMD0x09_StartScript($01, $B3A17E)                                   ;B3A163
@@ -4113,7 +4113,7 @@ DATA8_B3A162:
     %AICMD0x12_Jump($B3A289)                                   ;B3A435
 
 
-DATA8_B3A438:
+pAIScripting0x01_Data06:
  
     %AICMD0x11_EnableUserControl()                             ;B3A438
     %AICMD0x09_StartScript($01, $B3A459)                                   ;B3A439
@@ -4207,7 +4207,7 @@ DATA8_B3A438:
     %AICMD0x12_Jump($B3A5AB)                                   ;B3A5AE
 
 
-DATA8_B3A5B1:
+pAIScripting0x01_Data07:
  
     %AICMD0x11_EnableUserControl()                             ;B3A5B1
     %AICMD0x09_StartScript($01, $B3A5BC)                                   ;B3A5B2
@@ -4302,7 +4302,7 @@ DATA8_B3A5B1:
     %AICMD0x12_Jump($B3A5C4)                                   ;B3A724
 
 
-DATA8_B3A727:
+pAIScripting0x01_Data08:
  
     %AICMD0x11_EnableUserControl()                             ;B3A727
     %AICMD0x09_StartScript($01, $B3A732)                                   ;B3A728
@@ -4365,7 +4365,7 @@ DATA8_B3A727:
     %AICMD0x12_Jump($B3A73A)                                   ;B3A818
 
 
-DATA8_B3A81B:
+pAIScripting0x01_Data09:
  
     %AICMD0x11_EnableUserControl()                             ;B3A81B
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $09, $B3A850)   ;B3A81C
@@ -4641,7 +4641,7 @@ DATA8_B3A81B:
     %AICMD0x10_End()                                           ;B3AD23
 
 
-DATA8_B3AD24:
+pAIScripting0x01_Data10:
  
     %AICMD0x11_EnableUserControl()                             ;B3AD24
     %AICMD0x09_StartScript($01, $B3AD2F)                                   ;B3AD25
@@ -4679,7 +4679,7 @@ DATA8_B3AD24:
     %AICMD0x12_Jump($B3AD37)                                   ;B3ADAE
 
 
-DATA8_B3ADB1:
+pAIScripting0x01_Data11:
  
     %AICMD0x11_EnableUserControl()                             ;B3ADB1
     %AICMD0x09_StartScript($01, $B3ADC4)                                   ;B3ADB2
@@ -4705,11 +4705,11 @@ DATA8_B3ADB1:
 
 
 pAIScripting0x02:
-    dw DATA8_B3AE23                                            ;B3AE03|        |B3AE23;
-    dw DATA8_B3B44A                                            ;B3AE05|        |B3B44A;
-    dw DATA8_B3B4E3                                            ;B3AE07|        |B3B4E3;
-    dw DATA8_B3B6E1                                            ;B3AE09|        |B3B6E1;
-    dw DATA8_B3B8D2                                            ;B3AE0B|        |B3B8D2;
+    dw pAIScripting0x02_Data01                                            ;B3AE03|        |B3AE23;
+    dw pAIScripting0x02_Data02                                            ;B3AE05|        |B3B44A;
+    dw pAIScripting0x02_Data03                                            ;B3AE07|        |B3B4E3;
+    dw pAIScripting0x02_Data04                                            ;B3AE09|        |B3B6E1;
+    dw pAIScripting0x02_Data05                                            ;B3AE0B|        |B3B8D2;
     dw pAIScripting0x03                                        ;B3AE0D|        |B3BA39;
     dw pAIScripting0x03                                        ;B3AE0F|        |B3BA39;
     dw pAIScripting0x03                                        ;B3AE11|        |B3BA39;
@@ -4722,7 +4722,7 @@ pAIScripting0x02:
     dw pAIScripting0x03                                        ;B3AE1F|        |B3BA39;
     dw pAIScripting0x03                                        ;B3AE21|        |B3BA39;
  
-DATA8_B3AE23:
+pAIScripting0x02_Data01:
  
     %AICMD0x11_EnableUserControl()                             ;B3AE23
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 2, $B3AE36)     ;B3AE24
@@ -5076,7 +5076,7 @@ DATA8_B3AE23:
     %AICMD0x10_End()                                           ;B3B449
 
 
-DATA8_B3B44A:
+pAIScripting0x02_Data02:
  
     %AICMD0x11_EnableUserControl()                             ;B3B44A
     %AICMD0x09_StartScript($01, $B3B459)                                   ;B3B44B
@@ -5117,7 +5117,7 @@ DATA8_B3B44A:
     %AICMD0x12_Jump($B3B4A6)                                   ;B3B4E0
 
 
-DATA8_B3B4E3:
+pAIScripting0x02_Data03:
  
     %AICMD0x11_EnableUserControl()                             ;B3B4E3
     %AICMD0x09_StartScript($01, $B3B50A)                                   ;B3B4E4
@@ -5234,7 +5234,7 @@ DATA8_B3B4E3:
     %AICMD0x12_Jump($B3B5E1)                                   ;B3B6DE
 
 
-DATA8_B3B6E1:
+pAIScripting0x02_Data04:
  
     %AICMD0x11_EnableUserControl()                             ;B3B6E1
     %AICMD0x09_StartScript($01, $B3B70F)                                   ;B3B6E2
@@ -5350,7 +5350,7 @@ DATA8_B3B6E1:
     %AICMD0x10_End()                                           ;B3B8D1
 
 
-DATA8_B3B8D2:
+pAIScripting0x02_Data05:
  
     %AICMD0x11_EnableUserControl()                             ;B3B8D2
     %AICMD0x12_Jump($B3B8DC)                                   ;B3B8D3
@@ -5435,9 +5435,9 @@ DATA8_B3B8D2:
 
 
 pAIScripting0x03:
-    dw DATA8_B3BA59                                            ;B3BA39|        |B3BA59;
-    dw DATA8_B3BD2D                                            ;B3BA3B|        |B3BD2D;
-    dw DATA8_B3C1E4                                            ;B3BA3D|        |B3C1E4;
+    dw pAIScripting0x03_Data01                                            ;B3BA39|        |B3BA59;
+    dw pAIScripting0x03_Data02                                            ;B3BA3B|        |B3BD2D;
+    dw pAIScripting0x03_Data03                                            ;B3BA3D|        |B3C1E4;
     dw pAIScripting0x04                                        ;B3BA3F|        |B3C507;
     dw pAIScripting0x04                                        ;B3BA41|        |B3C507;
     dw pAIScripting0x04                                        ;B3BA43|        |B3C507;
@@ -5452,7 +5452,7 @@ pAIScripting0x03:
     dw pAIScripting0x04                                        ;B3BA55|        |B3C507;
     dw pAIScripting0x04                                        ;B3BA57|        |B3C507;
  
-DATA8_B3BA59:
+pAIScripting0x03_Data01:
  
     %AICMD0x11_EnableUserControl()                             ;B3BA59
     %AICMD0x09_StartScript($01, $B3BB19)                                   ;B3BA5A
@@ -5613,7 +5613,7 @@ DATA8_B3BA59:
     %AICMD0x12_Jump($B3BCC9)                                   ;B3BD2A
 
 
-DATA8_B3BD2D:
+pAIScripting0x03_Data02:
  
     %AICMD0x11_EnableUserControl()                             ;B3BD2D
     %AICMD0x09_StartScript($01, $B3BD7A)                                   ;B3BD2E
@@ -5885,7 +5885,7 @@ DATA8_B3BD2D:
     %AICMD0x12_Jump($B3C12F)                                   ;B3C1E1
 
 
-DATA8_B3C1E4:
+pAIScripting0x03_Data03:
  
     %AICMD0x11_EnableUserControl()                             ;B3C1E4
     %AICMD0x09_StartScript($01, $B3C482)                                   ;B3C1E5
@@ -6071,14 +6071,14 @@ DATA8_B3C1E4:
 
 
 pAIScripting0x04:
-    dw DATA8_B3C527                                            ;B3C507|        |B3C527;
-    dw DATA8_B3C6AE                                            ;B3C509|        |B3C6AE;
-    dw DATA8_B3C6FE                                            ;B3C50B|        |B3C6FE;
-    dw DATA8_B3C810                                            ;B3C50D|        |B3C810;
-    dw DATA8_B3C92A                                            ;B3C50F|        |B3C92A;
-    dw DATA8_B3CA98                                            ;B3C511|        |B3CA98;
-    dw DATA8_B3CB60                                            ;B3C513|        |B3CB60;
-    dw DATA8_B3CBA5                                            ;B3C515|        |B3CBA5;
+    dw pAIScripting0x04_Data01                                            ;B3C507|        |B3C527;
+    dw pAIScripting0x04_Data02                                            ;B3C509|        |B3C6AE;
+    dw pAIScripting0x04_Data03                                            ;B3C50B|        |B3C6FE;
+    dw pAIScripting0x04_Data04                                            ;B3C50D|        |B3C810;
+    dw pAIScripting0x04_Data05                                            ;B3C50F|        |B3C92A;
+    dw pAIScripting0x04_Data06                                            ;B3C511|        |B3CA98;
+    dw pAIScripting0x04_Data07                                            ;B3C513|        |B3CB60;
+    dw pAIScripting0x04_Data08                                            ;B3C515|        |B3CBA5;
     dw pAIScripting0x05                                        ;B3C517|        |B3CC71;
     dw pAIScripting0x05                                        ;B3C519|        |B3CC71;
     dw pAIScripting0x05                                        ;B3C51B|        |B3CC71;
@@ -6088,7 +6088,7 @@ pAIScripting0x04:
     dw pAIScripting0x05                                        ;B3C523|        |B3CC71;
     dw pAIScripting0x05                                        ;B3C525|        |B3CC71;
  
-DATA8_B3C527:
+pAIScripting0x04_Data01:
  
     %AICMD0x11_EnableUserControl()                             ;B3C527
     %AICMD0x09_StartScript($01, $B3C54E)                                   ;B3C528
@@ -6177,7 +6177,7 @@ DATA8_B3C527:
     %AICMD0x12_Jump($B3C608)                                   ;B3C6AB
 
 
-DATA8_B3C6AE:
+pAIScripting0x04_Data02:
  
     %AICMD0x11_EnableUserControl()                             ;B3C6AE
     %AICMD0x09_StartScript($01, $B3C6B9)                                   ;B3C6AF
@@ -6201,7 +6201,7 @@ DATA8_B3C6AE:
     %AICMD0x12_Jump($B3C6C1)                                   ;B3C6FB
 
 
-DATA8_B3C6FE:
+pAIScripting0x04_Data03:
  
     %AICMD0x11_EnableUserControl()                             ;B3C6FE
     %AICMD0x09_StartScript($01, $B3C721)                                   ;B3C6FF
@@ -6264,7 +6264,7 @@ DATA8_B3C6FE:
     %AICMD0x12_Jump($B3C763)                                   ;B3C80D
 
 
-DATA8_B3C810:
+pAIScripting0x04_Data04:
  
     %AICMD0x11_EnableUserControl()                             ;B3C810
     %AICMD0x09_StartScript($01, $B3C82C)                                   ;B3C811
@@ -6329,7 +6329,7 @@ DATA8_B3C810:
     %AICMD0x12_Jump($B3C883)                                   ;B3C927
 
 
-DATA8_B3C92A:
+pAIScripting0x04_Data05:
  
     %AICMD0x11_EnableUserControl()                             ;B3C92A
     %AICMD0x09_StartScript($01, $B3C96A)                                   ;B3C92B
@@ -6412,7 +6412,7 @@ DATA8_B3C92A:
     %AICMD0x12_Jump($B3C9DC)                                   ;B3CA95
 
 
-DATA8_B3CA98:
+pAIScripting0x04_Data06:
  
     %AICMD0x09_StartScript($01, $B3CAA6)                                   ;B3CA98
     %AICMD0x09_StartScript($02, $B3CB29)                                   ;B3CA9C
@@ -6463,7 +6463,7 @@ DATA8_B3CA98:
     %AICMD0x12_Jump($B3CB31)                                   ;B3CB5D
 
 
-DATA8_B3CB60:
+pAIScripting0x04_Data07:
  
     %AICMD0x09_StartScript($01, $B3CB6A)                                   ;B3CB60
     %AICMD0x13_Wait(1)                                         ;B3CB64
@@ -6484,7 +6484,7 @@ DATA8_B3CB60:
     %AICMD0x12_Jump($B3CB72)                                   ;B3CBA2
 
 
-DATA8_B3CBA5:
+pAIScripting0x04_Data08:
  
     %AICMD0x11_EnableUserControl()                             ;B3CBA5
     %AICMD0x09_StartScript($01, $B3CBEC)                                   ;B3CBA6
@@ -6539,7 +6539,7 @@ DATA8_B3CBA5:
 
 
 pAIScripting0x05:
-    dw DATA8_B3CC91                                            ;B3CC71|        |B3CC91;
+    dw pAIScripting0x05_Data01                                            ;B3CC71|        |B3CC91;
     dw pAIScripting0x06                                        ;B3CC73|        |B3D447;
     dw pAIScripting0x06                                        ;B3CC75|        |B3D447;
     dw pAIScripting0x06                                        ;B3CC77|        |B3D447;
@@ -6556,7 +6556,7 @@ pAIScripting0x05:
     dw pAIScripting0x06                                        ;B3CC8D|        |B3D447;
     dw pAIScripting0x06                                        ;B3CC8F|        |B3D447;
  
-DATA8_B3CC91:
+pAIScripting0x05_Data01:
  
     %AICMD0x11_EnableUserControl()                             ;B3CC91
     %AICMD0x09_StartScript($01, $B3CCDB)                                   ;B3CC92
@@ -6986,13 +6986,13 @@ DATA8_B3CC91:
 
 
 pAIScripting0x06:
-    dw DATA8_B3D467                                            ;B3D447|        |B3D467;
-    dw DATA8_B3D59D                                            ;B3D449|        |B3D59D;
-    dw DATA8_B3D5E3                                            ;B3D44B|        |B3D5E3;
-    dw DATA8_B3D6CF                                            ;B3D44D|        |B3D6CF;
-    dw DATA8_B3D7C9                                            ;B3D44F|        |B3D7C9;
-    dw DATA8_B3D90E                                            ;B3D451|        |B3D90E;
-    dw DATA8_B3D99B                                            ;B3D453|        |B3D99B;
+    dw pAIScripting0x06_Data01                                            ;B3D447|        |B3D467;
+    dw pAIScripting0x06_Data02                                            ;B3D449|        |B3D59D;
+    dw pAIScripting0x06_Data03                                            ;B3D44B|        |B3D5E3;
+    dw pAIScripting0x06_Data04                                            ;B3D44D|        |B3D6CF;
+    dw pAIScripting0x06_Data05                                            ;B3D44F|        |B3D7C9;
+    dw pAIScripting0x06_Data06                                            ;B3D451|        |B3D90E;
+    dw pAIScripting0x06_Data07                                            ;B3D453|        |B3D99B;
     dw pAIScripting0x07                                        ;B3D455|        |B3D9F7;
     dw pAIScripting0x07                                        ;B3D457|        |B3D9F7;
     dw pAIScripting0x07                                        ;B3D459|        |B3D9F7;
@@ -7003,7 +7003,7 @@ pAIScripting0x06:
     dw pAIScripting0x07                                        ;B3D463|        |B3D9F7;
     dw pAIScripting0x07                                        ;B3D465|        |B3D9F7;
  
-DATA8_B3D467:
+pAIScripting0x06_Data01:
  
     %AICMD0x11_EnableUserControl()                             ;B3D467
     %AICMD0x09_StartScript($01, $B3D48E)                                   ;B3D468
@@ -7074,7 +7074,7 @@ DATA8_B3D467:
     %AICMD0x12_Jump($B3D513)                                   ;B3D59A
 
 
-DATA8_B3D59D:
+pAIScripting0x06_Data02:
  
     %AICMD0x11_EnableUserControl()                             ;B3D59D
     %AICMD0x09_StartScript($01, $B3D5A8)                                   ;B3D59E
@@ -7095,7 +7095,7 @@ DATA8_B3D59D:
     %AICMD0x12_Jump($B3D5B0)                                   ;B3D5E0
 
 
-DATA8_B3D5E3:
+pAIScripting0x06_Data03:
  
     %AICMD0x11_EnableUserControl()                             ;B3D5E3
     %AICMD0x09_StartScript($01, $B3D606)                                   ;B3D5E4
@@ -7151,7 +7151,7 @@ DATA8_B3D5E3:
     %AICMD0x12_Jump($B3D64C)                                   ;B3D6CC
 
 
-DATA8_B3D6CF:
+pAIScripting0x06_Data04:
  
     %AICMD0x11_EnableUserControl()                             ;B3D6CF
     %AICMD0x09_StartScript($01, $B3D6EB)                                   ;B3D6D0
@@ -7209,7 +7209,7 @@ DATA8_B3D6CF:
     %AICMD0x12_Jump($B3D738)                                   ;B3D7C6
 
 
-DATA8_B3D7C9:
+pAIScripting0x06_Data05:
  
     %AICMD0x11_EnableUserControl()                             ;B3D7C9
     %AICMD0x09_StartScript($01, $B3D805)                                   ;B3D7CA
@@ -7282,7 +7282,7 @@ DATA8_B3D7C9:
     %AICMD0x12_Jump($B3D866)                                   ;B3D90B
 
 
-DATA8_B3D90E:
+pAIScripting0x06_Data06:
  
     %AICMD0x11_EnableUserControl()                             ;B3D90E
     %AICMD0x09_StartScript($01, $B3D91D)                                   ;B3D90F
@@ -7319,7 +7319,7 @@ DATA8_B3D90E:
     %AICMD0x10_End()                                           ;B3D99A
 
 
-DATA8_B3D99B:
+pAIScripting0x06_Data07:
  
     %AICMD0x11_EnableUserControl()                             ;B3D99B
     %AICMD0x09_StartScript($01, $B3D9A6)                                   ;B3D99C
@@ -7347,14 +7347,14 @@ DATA8_B3D99B:
 
 
 pAIScripting0x07:
-    dw DATA8_B3DA17                                            ;B3D9F7|        |B3DA17;
-    dw DATA8_B3DB72                                            ;B3D9F9|        |B3DB72;
-    dw DATA8_B3DBD5                                            ;B3D9FB|        |B3DBD5;
-    dw DATA8_B3DCD1                                            ;B3D9FD|        |B3DCD1;
-    dw DATA8_B3DDC7                                            ;B3D9FF|        |B3DDC7;
-    dw DATA8_B3DF0F                                            ;B3DA01|        |B3DF0F;
-    dw DATA8_B3DFCE                                            ;B3DA03|        |B3DFCE;
-    dw DATA8_B3E037                                            ;B3DA05|        |B3E037;
+    dw pAIScripting0x07_Data01                                            ;B3D9F7|        |B3DA17;
+    dw pAIScripting0x07_Data02                                            ;B3D9F9|        |B3DB72;
+    dw pAIScripting0x07_Data03                                            ;B3D9FB|        |B3DBD5;
+    dw pAIScripting0x07_Data04                                            ;B3D9FD|        |B3DCD1;
+    dw pAIScripting0x07_Data05                                            ;B3D9FF|        |B3DDC7;
+    dw pAIScripting0x07_Data06                                            ;B3DA01|        |B3DF0F;
+    dw pAIScripting0x07_Data07                                            ;B3DA03|        |B3DFCE;
+    dw pAIScripting0x07_Data08                                            ;B3DA05|        |B3E037;
     dw pAIScripting0x08                                        ;B3DA07|        |B3E0BF;
     dw pAIScripting0x08                                        ;B3DA09|        |B3E0BF;
     dw pAIScripting0x08                                        ;B3DA0B|        |B3E0BF;
@@ -7364,7 +7364,7 @@ pAIScripting0x07:
     dw pAIScripting0x08                                        ;B3DA13|        |B3E0BF;
     dw pAIScripting0x08                                        ;B3DA15|        |B3E0BF;
  
-DATA8_B3DA17:
+pAIScripting0x07_Data01:
  
     %AICMD0x11_EnableUserControl()                             ;B3DA17
     %AICMD0x09_StartScript($01, $B3DA3E)                                   ;B3DA18
@@ -7446,7 +7446,7 @@ DATA8_B3DA17:
     %AICMD0x12_Jump($B3DAF6)                                   ;B3DB6F
 
 
-DATA8_B3DB72:
+pAIScripting0x07_Data02:
  
     %AICMD0x11_EnableUserControl()                             ;B3DB72
     %AICMD0x09_StartScript($01, $B3DB7D)                                   ;B3DB73
@@ -7474,7 +7474,7 @@ DATA8_B3DB72:
     %AICMD0x12_Jump($B3DB85)                                   ;B3DBD2
 
 
-DATA8_B3DBD5:
+pAIScripting0x07_Data03:
  
     %AICMD0x11_EnableUserControl()                             ;B3DBD5
     %AICMD0x09_StartScript($01, $B3DBF8)                                   ;B3DBD6
@@ -7535,7 +7535,7 @@ DATA8_B3DBD5:
     %AICMD0x12_Jump($B3DC55)                                   ;B3DCCE
 
 
-DATA8_B3DCD1:
+pAIScripting0x07_Data04:
  
     %AICMD0x11_EnableUserControl()                             ;B3DCD1
     %AICMD0x09_StartScript($01, $B3DCED)                                   ;B3DCD2
@@ -7595,7 +7595,7 @@ DATA8_B3DCD1:
     %AICMD0x12_Jump($B3DD4A)                                   ;B3DDC4
 
 
-DATA8_B3DDC7:
+pAIScripting0x07_Data05:
  
     %AICMD0x11_EnableUserControl()                             ;B3DDC7
     %AICMD0x09_StartScript($01, $B3DE07)                                   ;B3DDC8
@@ -7673,7 +7673,7 @@ DATA8_B3DDC7:
     %AICMD0x12_Jump($B3DE99)                                   ;B3DF0C
 
 
-DATA8_B3DF0F:
+pAIScripting0x07_Data06:
  
     %AICMD0x11_EnableUserControl()                             ;B3DF0F
     %AICMD0x09_StartScript($01, $B3DF1E)                                   ;B3DF10
@@ -7723,7 +7723,7 @@ DATA8_B3DF0F:
     %AICMD0x12_Jump($B3DF9A)                                   ;B3DFCB
 
 
-DATA8_B3DFCE:
+pAIScripting0x07_Data07:
  
     %AICMD0x11_EnableUserControl()                             ;B3DFCE
     %AICMD0x09_StartScript($01, $B3DFD9)                                   ;B3DFCF
@@ -7753,7 +7753,7 @@ DATA8_B3DFCE:
     %AICMD0x12_Jump($B3DFE1)                                   ;B3E034
 
 
-DATA8_B3E037:
+pAIScripting0x07_Data08:
  
     %AICMD0x11_EnableUserControl()                             ;B3E037
     %AICMD0x09_StartScript($01, $B3E083)                                   ;B3E038
@@ -7792,14 +7792,14 @@ DATA8_B3E037:
 
 
 pAIScripting0x08:
-    dw DATA8_B3E0DF                                            ;B3E0BF|        |B3E0DF;
-    dw DATA8_B3E1C9                                            ;B3E0C1|        |B3E1C9;
-    dw DATA8_B3E232                                            ;B3E0C3|        |B3E232;
-    dw DATA8_B3E31F                                            ;B3E0C5|        |B3E31F;
-    dw DATA8_B3E413                                            ;B3E0C7|        |B3E413;
-    dw DATA8_B3E4ED                                            ;B3E0C9|        |B3E4ED;
-    dw DATA8_B3E560                                            ;B3E0CB|        |B3E560;
-    dw DATA8_B3E59A                                            ;B3E0CD|        |B3E59A;
+    dw pAIScripting0x08_Data01                                            ;B3E0BF|        |B3E0DF;
+    dw pAIScripting0x08_Data02                                            ;B3E0C1|        |B3E1C9;
+    dw pAIScripting0x08_Data03                                            ;B3E0C3|        |B3E232;
+    dw pAIScripting0x08_Data04                                            ;B3E0C5|        |B3E31F;
+    dw pAIScripting0x08_Data05                                            ;B3E0C7|        |B3E413;
+    dw pAIScripting0x08_Data06                                            ;B3E0C9|        |B3E4ED;
+    dw pAIScripting0x08_Data07                                            ;B3E0CB|        |B3E560;
+    dw pAIScripting0x08_Data08                                            ;B3E0CD|        |B3E59A;
     dw pAIScripting0x09                                        ;B3E0CF|        |B3E603;
     dw pAIScripting0x09                                        ;B3E0D1|        |B3E603;
     dw pAIScripting0x09                                        ;B3E0D3|        |B3E603;
@@ -7809,7 +7809,7 @@ pAIScripting0x08:
     dw pAIScripting0x09                                        ;B3E0DB|        |B3E603;
     dw pAIScripting0x09                                        ;B3E0DD|        |B3E603;
  
-DATA8_B3E0DF:
+pAIScripting0x08_Data01:
  
     %AICMD0x11_EnableUserControl()                             ;B3E0DF
     %AICMD0x09_StartScript($01, $B3E102)                                   ;B3E0E0
@@ -7863,7 +7863,7 @@ DATA8_B3E0DF:
     %AICMD0x12_Jump($B3E137)                                   ;B3E1C6
 
 
-DATA8_B3E1C9:
+pAIScripting0x08_Data02:
  
     %AICMD0x11_EnableUserControl()                             ;B3E1C9
     %AICMD0x09_StartScript($01, $B3E1D8)                                   ;B3E1CA
@@ -7892,7 +7892,7 @@ DATA8_B3E1C9:
     %AICMD0x12_Jump($B3E20D)                                   ;B3E22F
 
 
-DATA8_B3E232:
+pAIScripting0x08_Data03:
  
     %AICMD0x11_EnableUserControl()                             ;B3E232
     %AICMD0x09_StartScript($01, $B3E255)                                   ;B3E233
@@ -7947,7 +7947,7 @@ DATA8_B3E232:
     %AICMD0x12_Jump($B3E28D)                                   ;B3E31C
 
 
-DATA8_B3E31F:
+pAIScripting0x08_Data04:
  
     %AICMD0x11_EnableUserControl()                             ;B3E31F
     %AICMD0x09_StartScript($01, $B3E33B)                                   ;B3E320
@@ -8003,7 +8003,7 @@ DATA8_B3E31F:
     %AICMD0x12_Jump($B3E37A)                                   ;B3E410
 
 
-DATA8_B3E413:
+pAIScripting0x08_Data05:
  
     %AICMD0x11_EnableUserControl()                             ;B3E413
     %AICMD0x09_StartScript($01, $B3E453)                                   ;B3E414
@@ -8057,7 +8057,7 @@ DATA8_B3E413:
     %AICMD0x12_Jump($B3E4AD)                                   ;B3E4EA
 
 
-DATA8_B3E4ED:
+pAIScripting0x08_Data06:
  
     %AICMD0x11_EnableUserControl()                             ;B3E4ED
     %AICMD0x09_StartScript($01, $B3E4FE)                                   ;B3E4EE
@@ -8089,7 +8089,7 @@ DATA8_B3E4ED:
     %AICMD0x10_End()                                           ;B3E55F
 
 
-DATA8_B3E560:
+pAIScripting0x08_Data07:
  
     %AICMD0x11_EnableUserControl()                             ;B3E560
     %AICMD0x09_StartScript($01, $B3E56D)                                   ;B3E561
@@ -8108,7 +8108,7 @@ DATA8_B3E560:
     %AICMD0x12_Jump($B3E575)                                   ;B3E597
 
 
-DATA8_B3E59A:
+pAIScripting0x08_Data08:
  
     %AICMD0x11_EnableUserControl()                             ;B3E59A
     %AICMD0x09_StartScript($01, $B3E5D6)                                   ;B3E59B
@@ -8138,7 +8138,7 @@ DATA8_B3E59A:
 
 
 pAIScripting0x09:
-    dw DATA8_B3E623                                            ;B3E603|        |B3E623;
+    dw pAIScripting0x09_Data01                                            ;B3E603|        |B3E623;
     dw pAIScripting0x0A                                        ;B3E605|        |B3E83B;
     dw pAIScripting0x0A                                        ;B3E607|        |B3E83B;
     dw pAIScripting0x0A                                        ;B3E609|        |B3E83B;
@@ -8155,7 +8155,7 @@ pAIScripting0x09:
     dw pAIScripting0x0A                                        ;B3E61F|        |B3E83B;
     dw pAIScripting0x0A                                        ;B3E621|        |B3E83B;
  
-DATA8_B3E623:
+pAIScripting0x09_Data01:
  
     %AICMD0x40_DisableTileInteractions()                       ;B3E623
     %AICMD0x02_FreezeTime()                                    ;B3E624
@@ -8300,12 +8300,12 @@ DATA8_B3E623:
 
 
 pAIScripting0x0A:
-    dw DATA8_B3E85B                                            ;B3E83B|        |B3E85B;
-    dw DATA8_B3E89A                                            ;B3E83D|        |B3E89A;
-    dw DATA8_B3E8C8                                            ;B3E83F|        |B3E8C8;
-    dw DATA8_B3E90B                                            ;B3E841|        |B3E90B;
-    dw DATA8_B3E982                                            ;B3E843|        |B3E982;
-    dw DATA8_B3E9AE                                            ;B3E845|        |B3E9AE;
+    dw pAIScripting0x0A_Data01                                            ;B3E83B|        |B3E85B;
+    dw pAIScripting0x0A_Data02                                            ;B3E83D|        |B3E89A;
+    dw pAIScripting0x0A_Data03                                            ;B3E83F|        |B3E8C8;
+    dw pAIScripting0x0A_Data04                                            ;B3E841|        |B3E90B;
+    dw pAIScripting0x0A_Data05                                            ;B3E843|        |B3E982;
+    dw pAIScripting0x0A_Data06                                            ;B3E845|        |B3E9AE;
     dw pAIScripting0x0B                                        ;B3E847|        |B3E9DA;
     dw pAIScripting0x0B                                        ;B3E849|        |B3E9DA;
     dw pAIScripting0x0B                                        ;B3E84B|        |B3E9DA;
@@ -8317,7 +8317,7 @@ pAIScripting0x0A:
     dw pAIScripting0x0B                                        ;B3E857|        |B3E9DA;
     dw pAIScripting0x0B                                        ;B3E859|        |B3E9DA;
  
-DATA8_B3E85B:
+pAIScripting0x0A_Data01:
  
     %AICMD0x4F_DisableToolUse()                                               ;B3E85B
     %AICMD0x50()                                               ;B3E85C
@@ -8343,7 +8343,7 @@ DATA8_B3E85B:
     %AICMD0x10_End()                                           ;B3E899
 
 
-DATA8_B3E89A:
+pAIScripting0x0A_Data02:
  
     %AICMD0x4F_DisableToolUse()                                               ;B3E89A
     %AICMD0x50()                                               ;B3E89B
@@ -8365,7 +8365,7 @@ DATA8_B3E89A:
     %AICMD0x10_End()                                           ;B3E8C7
 
 
-DATA8_B3E8C8:
+pAIScripting0x0A_Data03:
  
     %AICMD0x4F_DisableToolUse()                                               ;B3E8C8
     %AICMD0x50()                                               ;B3E8C9
@@ -8393,7 +8393,7 @@ DATA8_B3E8C8:
     %AICMD0x10_End()                                           ;B3E90A
 
 
-DATA8_B3E90B:
+pAIScripting0x0A_Data04:
  
     %AICMD0x4F_DisableToolUse()                                               ;B3E90B
     %AICMD0x50()                                               ;B3E90C
@@ -8434,7 +8434,7 @@ DATA8_B3E90B:
     %AICMD0x10_End()                                           ;B3E981
 
 
-DATA8_B3E982:
+pAIScripting0x0A_Data05:
  
     %AICMD0x02_FreezeTime()                                    ;B3E982
     %AICMD0x08_EnableAIControl()                               ;B3E983
@@ -8453,7 +8453,7 @@ DATA8_B3E982:
     %AICMD0x10_End()                                           ;B3E9AD
 
 
-DATA8_B3E9AE:
+pAIScripting0x0A_Data06:
  
     %AICMD0x02_FreezeTime()                                    ;B3E9AE
     %AICMD0x08_EnableAIControl()                               ;B3E9AF
@@ -8473,24 +8473,24 @@ DATA8_B3E9AE:
 
 
 pAIScripting0x0B:
-    dw DATA8_B3E9FA                                            ;B3E9DA|        |B3E9FA;
-    dw DATA8_B3EB5C                                            ;B3E9DC|        |B3EB5C;
-    dw DATA8_B3EB83                                            ;B3E9DE|        |B3EB83;
-    dw DATA8_B3EBB2                                            ;B3E9E0|        |B3EBB2;
-    dw DATA8_B3EC2D                                            ;B3E9E2|        |B3EC2D;
-    dw DATA8_B3EC8D                                            ;B3E9E4|        |B3EC8D;
-    dw DATA8_B3ECE2                                            ;B3E9E6|        |B3ECE2;
-    dw DATA8_B3ED39                                            ;B3E9E8|        |B3ED39;
-    dw DATA8_B3EE1A                                            ;B3E9EA|        |B3EE1A;
-    dw DATA8_B3EE1A                                            ;B3E9EC|        |B3EE1A;
+    dw pAIScripting0x0B_Data01                                            ;B3E9DA|        |B3E9FA;
+    dw pAIScripting0x0B_Data02                                            ;B3E9DC|        |B3EB5C;
+    dw pAIScripting0x0B_Data03                                            ;B3E9DE|        |B3EB83;
+    dw pAIScripting0x0B_Data04                                            ;B3E9E0|        |B3EBB2;
+    dw pAIScripting0x0B_Data05                                            ;B3E9E2|        |B3EC2D;
+    dw pAIScripting0x0B_Data06                                            ;B3E9E4|        |B3EC8D;
+    dw pAIScripting0x0B_Data07                                            ;B3E9E6|        |B3ECE2;
+    dw pAIScripting0x0B_Data08                                            ;B3E9E8|        |B3ED39;
+    dw pAIScripting0x0B_Data09                                            ;B3E9EA|        |B3EE1A;
+    dw pAIScripting0x0B_Data09                                            ;B3E9EC|        |B3EE1A;
     dw AI_HouseExtensionCampain                                ;B3E9EE|        |B3EEEA;
-    dw DATA8_B3EF0A                                            ;B3E9F0|        |B3EF0A;
-    dw DATA8_B3EF2E                                            ;B3E9F2|        |B3EF2E;
+    dw pAIScripting0x0B_Data10                                            ;B3E9F0|        |B3EF0A;
+    dw pAIScripting0x0B_Data11                                            ;B3E9F2|        |B3EF2E;
     dw pAIScripting0x0C_DogEvent                               ;B3E9F4|        |B3EF5A;
     dw pAIScripting0x0C_DogEvent                               ;B3E9F6|        |B3EF5A;
     dw pAIScripting0x0C_DogEvent                               ;B3E9F8|        |B3EF5A;
  
-DATA8_B3E9FA:
+pAIScripting0x0B_Data01:
  
     %AICMD0x02_FreezeTime()                                    ;B3E9FA
     %AICMD0x03_SetHour($07)                                    ;B3E9FB
@@ -8580,7 +8580,7 @@ DATA8_B3E9FA:
     %AICMD0x12_Jump($B3EB00)                                   ;B3EB59
 
 
-DATA8_B3EB5C:
+pAIScripting0x0B_Data02:
  
     %AICMD0x09_StartScript($01, $B3EB61)                                   ;B3EB5C
     %AICMD0x10_End()                                           ;B3EB60
@@ -8595,7 +8595,7 @@ DATA8_B3EB5C:
     %AICMD0x12_Jump($B3EB6F)                                   ;B3EB80
 
 
-DATA8_B3EB83:
+pAIScripting0x0B_Data03:
  
     %AICMD0x09_StartScript($01, $B3EB88)                                   ;B3EB83
     %AICMD0x10_End()                                           ;B3EB87
@@ -8612,7 +8612,7 @@ DATA8_B3EB83:
     %AICMD0x12_Jump($B3EB96)                                   ;B3EBAF
 
 
-DATA8_B3EBB2:
+pAIScripting0x0B_Data04:
  
     %AICMD0x09_StartScript($01, $B3EBBB)                                   ;B3EBB2
     %AICMD0x09_StartScript($02, $B3EBE2)                                   ;B3EBB6
@@ -8649,7 +8649,7 @@ DATA8_B3EBB2:
     %AICMD0x10_End()                                           ;B3EC2C
 
 
-DATA8_B3EC2D:
+pAIScripting0x0B_Data05:
  
     %AICMD0x09_StartScript($01, $B3EC3A)                                   ;B3EC2D
     %AICMD0x09_StartScript($02, $B3EC67)                                   ;B3EC31
@@ -8678,7 +8678,7 @@ DATA8_B3EC2D:
     %AICMD0x12_Jump($B3EC87)                                   ;B3EC8A
 
 
-DATA8_B3EC8D:
+pAIScripting0x0B_Data06:
  
     %AICMD0x09_StartScript($01, $B3EC96)                                   ;B3EC8D
     %AICMD0x09_StartScript($02, $B3ECC0)                                   ;B3EC91
@@ -8705,7 +8705,7 @@ DATA8_B3EC8D:
     %AICMD0x12_Jump($B3ECCE)                                   ;B3ECDF
 
 
-DATA8_B3ECE2:
+pAIScripting0x0B_Data07:
  
     %AICMD0x09_StartScript($01, $B3ECE7)                                   ;B3ECE2
     %AICMD0x10_End()                                           ;B3ECE6
@@ -8733,7 +8733,7 @@ DATA8_B3ECE2:
     %AICMD0x10_End()                                           ;B3ED38
 
 
-DATA8_B3ED39:
+pAIScripting0x0B_Data08:
  
     %AICMD0x09_StartScript($01, $B3ED52)                                   ;B3ED39
     %AICMD0x09_StartScript($02, $B3ED7A)                                   ;B3ED3D
@@ -8795,7 +8795,7 @@ DATA8_B3ED39:
     %AICMD0x12_Jump($B3EE0D)                                   ;B3EE17
 
 
-DATA8_B3EE1A:
+pAIScripting0x0B_Data09:
  
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B3EE1A
     %AICMD0x08_EnableAIControl()                               ;B3EE1C
@@ -8864,7 +8864,7 @@ AI_HouseExtensionCampain:
     %AICMD0x12_Jump($B3EEFD)                                   ;B3EF07
 
 
-DATA8_B3EF0A:
+pAIScripting0x0B_Data10:
  
     %AICMD0x02_FreezeTime()                                    ;B3EF0A
     %AICMD0x05_SetTransferPosition(136, 296)                   ;B3EF0B
@@ -8882,7 +8882,7 @@ DATA8_B3EF0A:
     %AICMD0x10_End()                                           ;B3EF2D
 
 
-DATA8_B3EF2E:
+pAIScripting0x0B_Data11:
  
     %AICMD0x09_StartScript($01, $B3EF33)                                   ;B3EF2E
     %AICMD0x10_End()                                           ;B3EF32
@@ -8999,7 +8999,7 @@ AI_EllenSayGoodbye:
 
 pAIScripting0x0D_CrossRoadsEvents:
     dw AI_ObtainHorse                                          ;B3F068|        |B3F088;
-    dw DATA8_B3F0A9                                            ;B3F06A|        |B3F0A9;
+    dw pAIScripting0x0D_CrossRoadsEvents_Data01                                            ;B3F06A|        |B3F0A9;
     dw pAIScripting0x0E                                        ;B3F06C|        |B3F0E6;
     dw pAIScripting0x0E                                        ;B3F06E|        |B3F0E6;
     dw pAIScripting0x0E                                        ;B3F070|        |B3F0E6;
@@ -9031,7 +9031,7 @@ AI_ObtainHorse:
     %AICMD0x10_End()                                           ;B3F0A8
 
 
-DATA8_B3F0A9:
+pAIScripting0x0D_CrossRoadsEvents_Data01:
  
     %AICMD0x50()                                               ;B3F0A9
     %AICMD0x02_FreezeTime()                                    ;B3F0AA
@@ -9056,24 +9056,24 @@ DATA8_B3F0A9:
 
 
 pAIScripting0x0E:
-    dw DATA8_B3F106                                            ;B3F0E6|        |B3F106;
-    dw DATA8_B3FDD4                                            ;B3F0E8|        |B3FDD4;
-    dw DATA8_B3FFA4                                            ;B3F0EA|        |B3FFA4;
-    dw DATA8_B3FFA4                                            ;B3F0EC|        |B3FFA4;
-    dw DATA8_B3FFA4                                            ;B3F0EE|        |B3FFA4;
-    dw DATA8_B3FFA4                                            ;B3F0F0|        |B3FFA4;
-    dw DATA8_B3FFA4                                            ;B3F0F2|        |B3FFA4;
-    dw DATA8_B3FFA4                                            ;B3F0F4|        |B3FFA4;
-    dw DATA8_B3FFA4                                            ;B3F0F6|        |B3FFA4;
-    dw DATA8_B3FFA4                                            ;B3F0F8|        |B3FFA4;
-    dw DATA8_B3FFA4                                            ;B3F0FA|        |B3FFA4;
-    dw DATA8_B3FFA4                                            ;B3F0FC|        |B3FFA4;
-    dw DATA8_B3FFA4                                            ;B3F0FE|        |B3FFA4;
-    dw DATA8_B3FFA4                                            ;B3F100|        |B3FFA4;
-    dw DATA8_B3FFA4                                            ;B3F102|        |B3FFA4;
-    dw DATA8_B3FFA4                                            ;B3F104|        |B3FFA4;
+    dw pAIScripting0x0E_Data01                                            ;B3F0E6|        |B3F106;
+    dw pAIScripting0x0E_Data02                                            ;B3F0E8|        |B3FDD4;
+    dw pAIScripting0x0E_Data03                                            ;B3F0EA|        |B3FFA4;
+    dw pAIScripting0x0E_Data03                                            ;B3F0EC|        |B3FFA4;
+    dw pAIScripting0x0E_Data03                                            ;B3F0EE|        |B3FFA4;
+    dw pAIScripting0x0E_Data03                                            ;B3F0F0|        |B3FFA4;
+    dw pAIScripting0x0E_Data03                                            ;B3F0F2|        |B3FFA4;
+    dw pAIScripting0x0E_Data03                                            ;B3F0F4|        |B3FFA4;
+    dw pAIScripting0x0E_Data03                                            ;B3F0F6|        |B3FFA4;
+    dw pAIScripting0x0E_Data03                                            ;B3F0F8|        |B3FFA4;
+    dw pAIScripting0x0E_Data03                                            ;B3F0FA|        |B3FFA4;
+    dw pAIScripting0x0E_Data03                                            ;B3F0FC|        |B3FFA4;
+    dw pAIScripting0x0E_Data03                                            ;B3F0FE|        |B3FFA4;
+    dw pAIScripting0x0E_Data03                                            ;B3F100|        |B3FFA4;
+    dw pAIScripting0x0E_Data03                                            ;B3F102|        |B3FFA4;
+    dw pAIScripting0x0E_Data03                                            ;B3F104|        |B3FFA4;
  
-DATA8_B3F106:
+pAIScripting0x0E_Data01:
  
     %AICMD0x4F_DisableToolUse()                                               ;B3F106
     %AICMD0x50()                                               ;B3F107
@@ -9817,7 +9817,7 @@ DATA8_B3F106:
     %AICMD0x12_Jump($B3FD8A)                                   ;B3FDD1
 
 
-DATA8_B3FDD4:
+pAIScripting0x0E_Data02:
  
     %AICMD0x4F_DisableToolUse()                                               ;B3FDD4
     %AICMD0x50()                                               ;B3FDD5
@@ -9942,7 +9942,7 @@ DATA8_B3FDD4:
     %AICMD0x10_End()                                           ;B3FFA3
 
 
-DATA8_B3FFA4:
+pAIScripting0x0E_Data03:
  
     %AICMD0x00_SetMusic($00, $00)                              ;B3FFA4
 

@@ -1,7 +1,7 @@
 
 
 pAIScripting0x13:
-    dw DATA8_B4894A                                            ;B4892A|        |B4894A;
+    dw pAIScripting0x13_Data01                                            ;B4892A|        |B4894A;
     dw pAIScripting0x14                                        ;B4892C|        |B489D2;
     dw pAIScripting0x14                                        ;B4892E|        |B489D2;
     dw pAIScripting0x14                                        ;B48930|        |B489D2;
@@ -18,7 +18,7 @@ pAIScripting0x13:
     dw pAIScripting0x14                                        ;B48946|        |B489D2;
     dw pAIScripting0x14                                        ;B48948|        |B489D2;
  
-DATA8_B4894A:
+pAIScripting0x13_Data01:
     %AICMD0x50()                                               ;B4894A
     %AICMD0x08_EnableAIControl()                               ;B4894B
     %AICMD0x09_StartScript($01, pAIScripting0x13_L001)                                   ;B4894C

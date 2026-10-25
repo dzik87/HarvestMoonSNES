@@ -1,7 +1,7 @@
 
 
 pAIScripting0x37:
-    dw DATA8_B4D2EC                                            ;B4D2CC|        |B4D2EC;
+    dw pAIScripting0x37_Data01                                            ;B4D2CC|        |B4D2EC;
     dw pAIScripting0x38                                        ;B4D2CE|        |B4D447;
     dw pAIScripting0x38                                        ;B4D2D0|        |B4D447;
     dw pAIScripting0x38                                        ;B4D2D2|        |B4D447;
@@ -18,7 +18,7 @@ pAIScripting0x37:
     dw pAIScripting0x38                                        ;B4D2E8|        |B4D447;
     dw pAIScripting0x38                                        ;B4D2EA|        |B4D447;
  
-DATA8_B4D2EC:
+pAIScripting0x37_Data01:
     %AICMD0x47_SetValue8($800921, 16)                          ;B4D2EC
     %AICMD0x47_SetValue8($800926, 5)                           ;B4D2F1
     %AICMD0x00_SetMusic($10, $B4)                              ;B4D2F6

@@ -1,8 +1,8 @@
 
 
 pAIScripting0x3A:
-    dw DATA8_B4D792                                            ;B4D772|        |B4D792;
-    dw DATA8_B4D863                                            ;B4D774|        |B4D863;
+    dw pAIScripting0x3A_Data01                                            ;B4D772|        |B4D792;
+    dw pAIScripting0x3A_Data02                                            ;B4D774|        |B4D863;
     dw pAIScripting0x3B                                        ;B4D776|        |B4DA22;
     dw pAIScripting0x3B                                        ;B4D778|        |B4DA22;
     dw pAIScripting0x3B                                        ;B4D77A|        |B4DA22;
@@ -18,7 +18,7 @@ pAIScripting0x3A:
     dw pAIScripting0x3B                                        ;B4D78E|        |B4DA22;
     dw pAIScripting0x3B                                        ;B4D790|        |B4DA22;
  
-DATA8_B4D792:
+pAIScripting0x3A_Data01:
  
     %AICMD0x00_SetMusic($10, $B4)                              ;B4D792
     %AICMD0x02_FreezeTime()                                    ;B4D795
@@ -90,7 +90,7 @@ pAIScripting0x3A_L004:
     %AICMD0x12_Jump(pAIScripting0x3A_L004)                                   ;B4D860
 
 
-DATA8_B4D863:
+pAIScripting0x3A_Data02:
     %AICMD0x00_SetMusic($10, $B4)                              ;B4D863
     %AICMD0x02_FreezeTime()                                    ;B4D866
     %AICMD0x03_SetHour($07)                                    ;B4D867

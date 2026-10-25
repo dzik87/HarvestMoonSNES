@@ -1,24 +1,24 @@
 
 
 pAIScripting0x22:
-    dw DATA8_B49FF8                                            ;B49FD8|        |B49FF8;
-    dw DATA8_B4A045                                            ;B49FDA|        |B4A045;
-    dw DATA8_B4A091                                            ;B49FDC|        |B4A091;
+    dw pAIScripting0x22_Data01                                            ;B49FD8|        |B49FF8;
+    dw pAIScripting0x22_Data02                                            ;B49FDA|        |B4A045;
+    dw pAIScripting0x22_Data03                                            ;B49FDC|        |B4A091;
     dw pAIScripting0x22_L003                                            ;B49FDE|        |B4A0B6;
     dw pAIScripting0x22_L007                                            ;B49FE0|        |B4A0D2;
     dw pAIScripting0x22_L010                                            ;B49FE2|        |B4A11E;
     dw pAIScripting0x22_L014                                            ;B49FE4|        |B4A141;
     dw pAIScripting0x22_L017                                            ;B49FE6|        |B4A1BC;
-    dw DATA8_B4A1D8                                            ;B49FE8|        |B4A1D8;
-    dw DATA8_B4A278                                            ;B49FEA|        |B4A278;
-    dw DATA8_B4A297                                            ;B49FEC|        |B4A297;
-    dw DATA8_B4A301                                            ;B49FEE|        |B4A301;
-    dw DATA8_B4A321                                            ;B49FF0|        |B4A321;
+    dw pAIScripting0x22_Data04                                            ;B49FE8|        |B4A1D8;
+    dw pAIScripting0x22_Data05                                            ;B49FEA|        |B4A278;
+    dw pAIScripting0x22_Data06                                            ;B49FEC|        |B4A297;
+    dw pAIScripting0x22_Data07                                            ;B49FEE|        |B4A301;
+    dw pAIScripting0x22_Data08                                            ;B49FF0|        |B4A321;
     dw pAIScripting0x23                                        ;B49FF2|        |B4A37F;
     dw pAIScripting0x23                                        ;B49FF4|        |B4A37F;
     dw pAIScripting0x23                                        ;B49FF6|        |B4A37F;
  
-DATA8_B49FF8:
+pAIScripting0x22_Data01:
  
     %AICMD0x50()                                               ;B49FF8
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B49FF9
@@ -49,7 +49,7 @@ pAIScripting0x22_L001:
     %AICMD0x10_End()                                           ;B4A044
 
 
-DATA8_B4A045:
+pAIScripting0x22_Data02:
  
     %AICMD0x50()                                               ;B4A045
     %AICMD0x05_SetTransferPosition(136, 120)                   ;B4A046
@@ -80,7 +80,7 @@ pAIScripting0x22_L002:
     %AICMD0x10_End()                                           ;B4A090
 
 
-DATA8_B4A091:
+pAIScripting0x22_Data03:
  
     %AICMD0x50()                                               ;B4A091
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $00, pAIScripting0x22_L003)   ;B4A092
@@ -215,7 +215,7 @@ pAIScripting0x22_L020:
     %AICMD0x12_Jump(pAIScripting0x22_L019)                                   ;B4A1D5
 
 
-DATA8_B4A1D8:
+pAIScripting0x22_Data04:
  
     %AICMD0x50()                                               ;B4A1D8
     %AICMD0x08_EnableAIControl()                               ;B4A1D9
@@ -272,7 +272,7 @@ pAIScripting0x22_L022:
     %AICMD0x12_Jump(pAIScripting0x22_L022)                                   ;B4A275
 
 
-DATA8_B4A278:
+pAIScripting0x22_Data05:
  
     %AICMD0x50()                                               ;B4A278
     %AICMD0x09_StartScript($01, pAIScripting0x22_L023)                                   ;B4A279
@@ -289,7 +289,7 @@ pAIScripting0x22_L025:
     %AICMD0x12_Jump(pAIScripting0x22_L024)                                   ;B4A294
 
 
-DATA8_B4A297:
+pAIScripting0x22_Data06:
  
     %AICMD0x50()                                               ;B4A297
     %AICMD0x08_EnableAIControl()                               ;B4A298
@@ -329,7 +329,7 @@ pAIScripting0x22_L027:
     %AICMD0x12_Jump(pAIScripting0x22_L027)                                   ;B4A2FE
 
 
-DATA8_B4A301:
+pAIScripting0x22_Data07:
  
     %AICMD0x50()                                               ;B4A301
     %AICMD0x09_StartScript($01, pAIScripting0x22_L028)                                   ;B4A302
@@ -346,7 +346,7 @@ pAIScripting0x22_L030:
     %AICMD0x12_Jump(pAIScripting0x22_L029)                                   ;B4A31E
 
 
-DATA8_B4A321:
+pAIScripting0x22_Data08:
     %AICMD0x50()                                               ;B4A321
     %AICMD0x08_EnableAIControl()                               ;B4A322
     %AICMD0x09_StartScript($01, pAIScripting0x22_L031)                                   ;B4A323

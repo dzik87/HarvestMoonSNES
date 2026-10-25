@@ -1,8 +1,8 @@
 
 
 pAIScripting0x26:
-    dw DATA8_B4A62D                                            ;B4A60D|        |B4A62D;
-    dw DATA8_B4B48E                                            ;B4A60F|        |B4B48E;
+    dw pAIScripting0x26_Data01                                            ;B4A60D|        |B4A62D;
+    dw pAIScripting0x26_Data02                                            ;B4A60F|        |B4B48E;
     dw pAIScripting0x27                                        ;B4A611|        |B4B65E;
     dw pAIScripting0x27                                        ;B4A613|        |B4B65E;
     dw pAIScripting0x27                                        ;B4A615|        |B4B65E;
@@ -18,7 +18,7 @@ pAIScripting0x26:
     dw pAIScripting0x27                                        ;B4A629|        |B4B65E;
     dw pAIScripting0x27                                        ;B4A62B|        |B4B65E;
  
-DATA8_B4A62D:
+pAIScripting0x26_Data01:
  
     %AICMD0x4F_DisableToolUse()                                               ;B4A62D
     %AICMD0x51()                                               ;B4A62E
@@ -1113,7 +1113,7 @@ pAIScripting0x26_L184:
     %AICMD0x12_Jump(pAIScripting0x26_L184)                                   ;B4B48B
 
 
-DATA8_B4B48E:
+pAIScripting0x26_Data02:
     %AICMD0x4F_DisableToolUse()                                               ;B4B48E
     %AICMD0x50()                                               ;B4B48F
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B4B490

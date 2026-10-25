@@ -1,7 +1,7 @@
 
 
 pAIScripting0x31:
-    dw DATA8_B4CA19                                            ;B4C9F9|        |B4CA19;
+    dw pAIScripting0x31_Data01                                            ;B4C9F9|        |B4CA19;
     dw pAIScripting0x32                                        ;B4C9FB|        |B4CB3F;
     dw pAIScripting0x32                                        ;B4C9FD|        |B4CB3F;
     dw pAIScripting0x32                                        ;B4C9FF|        |B4CB3F;
@@ -18,7 +18,7 @@ pAIScripting0x31:
     dw pAIScripting0x32                                        ;B4CA15|        |B4CB3F;
     dw pAIScripting0x32                                        ;B4CA17|        |B4CB3F;
  
-DATA8_B4CA19:
+pAIScripting0x31_Data01:
     %AICMD0x00_SetMusic($10, $B4)                              ;B4CA19
     %AICMD0x05_SetTransferPosition(65520, 104)                 ;B4CA1C
     %AICMD0x02_FreezeTime()                                    ;B4CA21

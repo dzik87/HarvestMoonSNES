@@ -1,12 +1,12 @@
 
 
 pAIScripting0x0A:
-    dw DATA8_B3E85B                                            ;B3E83B|        |B3E85B;
-    dw DATA8_B3E89A                                            ;B3E83D|        |B3E89A;
-    dw DATA8_B3E8C8                                            ;B3E83F|        |B3E8C8;
-    dw DATA8_B3E90B                                            ;B3E841|        |B3E90B;
-    dw DATA8_B3E982                                            ;B3E843|        |B3E982;
-    dw DATA8_B3E9AE                                            ;B3E845|        |B3E9AE;
+    dw pAIScripting0x0A_Data01                                            ;B3E83B|        |B3E85B;
+    dw pAIScripting0x0A_Data02                                            ;B3E83D|        |B3E89A;
+    dw pAIScripting0x0A_Data03                                            ;B3E83F|        |B3E8C8;
+    dw pAIScripting0x0A_Data04                                            ;B3E841|        |B3E90B;
+    dw pAIScripting0x0A_Data05                                            ;B3E843|        |B3E982;
+    dw pAIScripting0x0A_Data06                                            ;B3E845|        |B3E9AE;
     dw pAIScripting0x0B                                        ;B3E847|        |B3E9DA;
     dw pAIScripting0x0B                                        ;B3E849|        |B3E9DA;
     dw pAIScripting0x0B                                        ;B3E84B|        |B3E9DA;
@@ -18,7 +18,7 @@ pAIScripting0x0A:
     dw pAIScripting0x0B                                        ;B3E857|        |B3E9DA;
     dw pAIScripting0x0B                                        ;B3E859|        |B3E9DA;
  
-DATA8_B3E85B:
+pAIScripting0x0A_Data01:
  
     %AICMD0x4F_DisableToolUse()                                               ;B3E85B
     %AICMD0x50()                                               ;B3E85C
@@ -45,7 +45,7 @@ pAIScripting0x0A_L001:
     %AICMD0x10_End()                                           ;B3E899
 
 
-DATA8_B3E89A:
+pAIScripting0x0A_Data02:
  
     %AICMD0x4F_DisableToolUse()                                               ;B3E89A
     %AICMD0x50()                                               ;B3E89B
@@ -68,7 +68,7 @@ pAIScripting0x0A_L002:
     %AICMD0x10_End()                                           ;B3E8C7
 
 
-DATA8_B3E8C8:
+pAIScripting0x0A_Data03:
  
     %AICMD0x4F_DisableToolUse()                                               ;B3E8C8
     %AICMD0x50()                                               ;B3E8C9
@@ -97,7 +97,7 @@ pAIScripting0x0A_L003:
     %AICMD0x10_End()                                           ;B3E90A
 
 
-DATA8_B3E90B:
+pAIScripting0x0A_Data04:
  
     %AICMD0x4F_DisableToolUse()                                               ;B3E90B
     %AICMD0x50()                                               ;B3E90C
@@ -140,7 +140,7 @@ pAIScripting0x0A_L005:
     %AICMD0x10_End()                                           ;B3E981
 
 
-DATA8_B3E982:
+pAIScripting0x0A_Data05:
  
     %AICMD0x02_FreezeTime()                                    ;B3E982
     %AICMD0x08_EnableAIControl()                               ;B3E983
@@ -160,7 +160,7 @@ pAIScripting0x0A_L006:
     %AICMD0x10_End()                                           ;B3E9AD
 
 
-DATA8_B3E9AE:
+pAIScripting0x0A_Data06:
     %AICMD0x02_FreezeTime()                                    ;B3E9AE
     %AICMD0x08_EnableAIControl()                               ;B3E9AF
     %AICMD0x09_StartScript($01, pAIScripting0x0A_L007)                                   ;B3E9B0

@@ -1,24 +1,24 @@
 
 
 pAIScripting0x01:
-    dw DATA8_B39379                                            ;B39359|        |B39379;
-    dw DATA8_B39D05                                            ;B3935B|        |B39D05;
-    dw DATA8_B39F3E                                            ;B3935D|        |B39F3E;
-    dw DATA8_B3A086                                            ;B3935F|        |B3A086;
-    dw DATA8_B3A162                                            ;B39361|        |B3A162;
-    dw DATA8_B3A438                                            ;B39363|        |B3A438;
-    dw DATA8_B3A5B1                                            ;B39365|        |B3A5B1;
-    dw DATA8_B3A727                                            ;B39367|        |B3A727;
-    dw DATA8_B3A81B                                            ;B39369|        |B3A81B;
-    dw DATA8_B3AD24                                            ;B3936B|        |B3AD24;
-    dw DATA8_B3ADB1                                            ;B3936D|        |B3ADB1;
+    dw pAIScripting0x01_Data01                                            ;B39359|        |B39379;
+    dw pAIScripting0x01_Data02                                            ;B3935B|        |B39D05;
+    dw pAIScripting0x01_Data03                                            ;B3935D|        |B39F3E;
+    dw pAIScripting0x01_Data04                                            ;B3935F|        |B3A086;
+    dw pAIScripting0x01_Data05                                            ;B39361|        |B3A162;
+    dw pAIScripting0x01_Data06                                            ;B39363|        |B3A438;
+    dw pAIScripting0x01_Data07                                            ;B39365|        |B3A5B1;
+    dw pAIScripting0x01_Data08                                            ;B39367|        |B3A727;
+    dw pAIScripting0x01_Data09                                            ;B39369|        |B3A81B;
+    dw pAIScripting0x01_Data10                                            ;B3936B|        |B3AD24;
+    dw pAIScripting0x01_Data11                                            ;B3936D|        |B3ADB1;
     dw pAIScripting0x02                                        ;B3936F|        |B3AE03;
     dw pAIScripting0x02                                        ;B39371|        |B3AE03;
     dw pAIScripting0x02                                        ;B39373|        |B3AE03;
     dw pAIScripting0x02                                        ;B39375|        |B3AE03;
     dw pAIScripting0x02                                        ;B39377|        |B3AE03;
  
-DATA8_B39379:
+pAIScripting0x01_Data01:
  
     %AICMD0x11_EnableUserControl()                             ;B39379
     %AICMD0x09_StartScript($01, pAIScripting0x01_L007)                                   ;B3937A
@@ -748,7 +748,7 @@ pAIScripting0x01_L175:
     %AICMD0x12_Jump(pAIScripting0x01_L174)                                   ;B39D02
 
 
-DATA8_B39D05:
+pAIScripting0x01_Data02:
  
     %AICMD0x11_EnableUserControl()                             ;B39D05
     %AICMD0x09_StartScript($01, pAIScripting0x01_L177)                                   ;B39D06
@@ -925,7 +925,7 @@ pAIScripting0x01_L220:
     %AICMD0x12_Jump(pAIScripting0x01_L200)                                   ;B39F3B
 
 
-DATA8_B39F3E:
+pAIScripting0x01_Data03:
  
     %AICMD0x11_EnableUserControl()                             ;B39F3E
     %AICMD0x09_StartScript($01, pAIScripting0x01_L222)                                   ;B39F3F
@@ -1033,7 +1033,7 @@ pAIScripting0x01_L245:
     %AICMD0x12_Jump(pAIScripting0x01_L223)                                   ;B3A083
 
 
-DATA8_B3A086:
+pAIScripting0x01_Data04:
  
     %AICMD0x11_EnableUserControl()                             ;B3A086
     %AICMD0x09_StartScript($01, pAIScripting0x01_L247)                                   ;B3A087
@@ -1103,7 +1103,7 @@ pAIScripting0x01_L260:
     %AICMD0x12_Jump(pAIScripting0x01_L248)                                   ;B3A15F
 
 
-DATA8_B3A162:
+pAIScripting0x01_Data05:
  
     %AICMD0x11_EnableUserControl()                             ;B3A162
     %AICMD0x09_StartScript($01, pAIScripting0x01_L264)                                   ;B3A163
@@ -1329,7 +1329,7 @@ pAIScripting0x01_L314:
     %AICMD0x12_Jump(pAIScripting0x01_L284)                                   ;B3A435
 
 
-DATA8_B3A438:
+pAIScripting0x01_Data06:
  
     %AICMD0x11_EnableUserControl()                             ;B3A438
     %AICMD0x09_StartScript($01, pAIScripting0x01_L316)                                   ;B3A439
@@ -1453,7 +1453,7 @@ pAIScripting0x01_L344:
     %AICMD0x12_Jump(pAIScripting0x01_L344)                                   ;B3A5AE
 
 
-DATA8_B3A5B1:
+pAIScripting0x01_Data07:
  
     %AICMD0x11_EnableUserControl()                             ;B3A5B1
     %AICMD0x09_StartScript($01, pAIScripting0x01_L346)                                   ;B3A5B2
@@ -1571,7 +1571,7 @@ pAIScripting0x01_L367:
     %AICMD0x12_Jump(pAIScripting0x01_L347)                                   ;B3A724
 
 
-DATA8_B3A727:
+pAIScripting0x01_Data08:
  
     %AICMD0x11_EnableUserControl()                             ;B3A727
     %AICMD0x09_StartScript($01, pAIScripting0x01_L369)                                   ;B3A728
@@ -1651,7 +1651,7 @@ pAIScripting0x01_L384:
     %AICMD0x12_Jump(pAIScripting0x01_L370)                                   ;B3A818
 
 
-DATA8_B3A81B:
+pAIScripting0x01_Data09:
  
     %AICMD0x11_EnableUserControl()                             ;B3A81B
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $09, pAIScripting0x01_L385)   ;B3A81C
@@ -2011,7 +2011,7 @@ pAIScripting0x01_L468:
     %AICMD0x10_End()                                           ;B3AD23
 
 
-DATA8_B3AD24:
+pAIScripting0x01_Data10:
  
     %AICMD0x11_EnableUserControl()                             ;B3AD24
     %AICMD0x09_StartScript($01, pAIScripting0x01_L470)                                   ;B3AD25
@@ -2061,7 +2061,7 @@ pAIScripting0x01_L480:
     %AICMD0x12_Jump(pAIScripting0x01_L471)                                   ;B3ADAE
 
 
-DATA8_B3ADB1:
+pAIScripting0x01_Data11:
     %AICMD0x11_EnableUserControl()                             ;B3ADB1
     %AICMD0x09_StartScript($01, pAIScripting0x01_L482)                                   ;B3ADB2
     %AICMD0x09_StartScript($02, pAIScripting0x01_L485)                                   ;B3ADB6

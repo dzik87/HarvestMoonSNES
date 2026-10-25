@@ -1,7 +1,7 @@
 
 
 pAIScripting0x41:
-    dw DATA8_B4E7CF                                            ;B4E7AF|        |B4E7CF;
+    dw pAIScripting0x41_Data01                                            ;B4E7AF|        |B4E7CF;
     dw pAIScripting0x42                                        ;B4E7B1|        |B4E989;
     dw pAIScripting0x42                                        ;B4E7B3|        |B4E989;
     dw pAIScripting0x42                                        ;B4E7B5|        |B4E989;
@@ -18,7 +18,7 @@ pAIScripting0x41:
     dw pAIScripting0x42                                        ;B4E7CB|        |B4E989;
     dw pAIScripting0x42                                        ;B4E7CD|        |B4E989;
  
-DATA8_B4E7CF:
+pAIScripting0x41_Data01:
     %AICMD0x47_SetValue8($800921, 2)                           ;B4E7CF
     %AICMD0x00_SetMusic($10, $B4)                              ;B4E7D4
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $03)       ;B4E7D7

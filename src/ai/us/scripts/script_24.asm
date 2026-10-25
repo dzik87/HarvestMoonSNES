@@ -1,10 +1,10 @@
 
 
 pAIScripting0x24:
-    dw DATA8_B4A475                                            ;B4A455|        |B4A475;
-    dw DATA8_B4A531                                            ;B4A457|        |B4A531;
-    dw DATA8_B4A55D                                            ;B4A459|        |B4A55D;
-    dw DATA8_B4A589                                            ;B4A45B|        |B4A589;
+    dw pAIScripting0x24_Data01                                            ;B4A455|        |B4A475;
+    dw pAIScripting0x24_Data02                                            ;B4A457|        |B4A531;
+    dw pAIScripting0x24_Data03                                            ;B4A459|        |B4A55D;
+    dw pAIScripting0x24_Data04                                            ;B4A45B|        |B4A589;
     dw pAIScripting0x25                                        ;B4A45D|        |B4A5B5;
     dw pAIScripting0x25                                        ;B4A45F|        |B4A5B5;
     dw pAIScripting0x25                                        ;B4A461|        |B4A5B5;
@@ -18,7 +18,7 @@ pAIScripting0x24:
     dw pAIScripting0x25                                        ;B4A471|        |B4A5B5;
     dw pAIScripting0x25                                        ;B4A473|        |B4A5B5;
  
-DATA8_B4A475:
+pAIScripting0x24_Data01:
  
     %AICMD0x08_EnableAIControl()                               ;B4A475
     %AICMD0x1A($FFF8, $01A8, aAIScriptingData_L037, $02)                     ;B4A476
@@ -82,7 +82,7 @@ pAIScripting0x24_L009:
     %AICMD0x10_End()                                           ;B4A530
 
 
-DATA8_B4A531:
+pAIScripting0x24_Data02:
  
     %AICMD0x08_EnableAIControl()                               ;B4A531
     %AICMD0x1A($FFF8, $01A8, aAIScriptingData_L046, $02)                     ;B4A532
@@ -100,7 +100,7 @@ DATA8_B4A531:
     %AICMD0x10_End()                                           ;B4A55C
 
 
-DATA8_B4A55D:
+pAIScripting0x24_Data03:
  
     %AICMD0x08_EnableAIControl()                               ;B4A55D
     %AICMD0x1A($FFF8, $01A8, aAIScriptingData_L028, $02)                     ;B4A55E
@@ -118,7 +118,7 @@ DATA8_B4A55D:
     %AICMD0x10_End()                                           ;B4A588
 
 
-DATA8_B4A589:
+pAIScripting0x24_Data04:
     %AICMD0x08_EnableAIControl()                               ;B4A589
     %AICMD0x1A($FFF8, $01A8, aAIScriptingData_L028, $02)                     ;B4A58A
     %AICMD0x38_WaitForFadeIn()                                               ;B4A592

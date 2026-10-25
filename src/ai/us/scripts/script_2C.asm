@@ -1,7 +1,7 @@
 
 
 pAIScripting0x2C:
-    dw DATA8_B4C568                                            ;B4C548|        |B4C568;
+    dw pAIScripting0x2C_Data01                                            ;B4C548|        |B4C568;
     dw pAIScripting0x2D                                        ;B4C54A|        |B4C584;
     dw pAIScripting0x2D                                        ;B4C54C|        |B4C584;
     dw pAIScripting0x2D                                        ;B4C54E|        |B4C584;
@@ -18,7 +18,7 @@ pAIScripting0x2C:
     dw pAIScripting0x2D                                        ;B4C564|        |B4C584;
     dw pAIScripting0x2D                                        ;B4C566|        |B4C584;
  
-DATA8_B4C568:
+pAIScripting0x2C_Data01:
     %AICMD0x1A($0228, $0258, aAIScriptingData_L134, $00)                     ;B4C568
     %AICMD0x13_Wait(60)                                        ;B4C570
     %AICMD0x1B($0307, $01)                                     ;B4C573

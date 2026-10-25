@@ -1,10 +1,10 @@
 
 
 pAIScripting0x28:
-    dw DATA8_B4BAEB                                            ;B4BACB|        |B4BAEB;
-    dw DATA8_B4BB06                                            ;B4BACD|        |B4BB06;
-    dw DATA8_B4BD19                                            ;B4BACF|        |B4BD19;
-    dw DATA8_B4C3AC                                            ;B4BAD1|        |B4C3AC;
+    dw pAIScripting0x28_Data01                                            ;B4BACB|        |B4BAEB;
+    dw pAIScripting0x28_Data02                                            ;B4BACD|        |B4BB06;
+    dw pAIScripting0x28_Data03                                            ;B4BACF|        |B4BD19;
+    dw pAIScripting0x28_Data04                                            ;B4BAD1|        |B4C3AC;
     dw pAIScripting0x29                                        ;B4BAD3|        |B4C427;
     dw pAIScripting0x29                                        ;B4BAD5|        |B4C427;
     dw pAIScripting0x29                                        ;B4BAD7|        |B4C427;
@@ -18,7 +18,7 @@ pAIScripting0x28:
     dw pAIScripting0x29                                        ;B4BAE7|        |B4C427;
     dw pAIScripting0x29                                        ;B4BAE9|        |B4C427;
  
-DATA8_B4BAEB:
+pAIScripting0x28_Data01:
  
     %AICMD0x4F_DisableToolUse()                                               ;B4BAEB
     %AICMD0x50()                                               ;B4BAEC
@@ -34,7 +34,7 @@ DATA8_B4BAEB:
     %AICMD0x10_End()                                           ;B4BB05
 
 
-DATA8_B4BB06:
+pAIScripting0x28_Data02:
  
     %AICMD0x4F_DisableToolUse()                                               ;B4BB06
     %AICMD0x50()                                               ;B4BB07
@@ -236,7 +236,7 @@ pAIScripting0x28_L046:
     %AICMD0x12_Jump(pAIScripting0x28_L044)                                   ;B4BD16
 
 
-DATA8_B4BD19:
+pAIScripting0x28_Data03:
  
     %AICMD0x4F_DisableToolUse()                                               ;B4BD19
     %AICMD0x50()                                               ;B4BD1A
@@ -752,7 +752,7 @@ pAIScripting0x28_L168:
     %AICMD0x10_End()                                           ;B4C3AB
 
 
-DATA8_B4C3AC:
+pAIScripting0x28_Data04:
     %AICMD0x4F_DisableToolUse()                                               ;B4C3AC
     %AICMD0x50()                                               ;B4C3AD
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B4C3AE

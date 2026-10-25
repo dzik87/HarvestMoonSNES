@@ -1,11 +1,11 @@
 
 
 pAIScripting0x44:
-    dw DATA8_B597F1                                            ;B597D1|        |B597F1;
-    dw DATA8_B599EB                                            ;B597D3|        |B599EB;
-    dw DATA8_B59BE3                                            ;B597D5|        |B59BE3;
-    dw DATA8_B59DD3                                            ;B597D7|        |B59DD3;
-    dw DATA8_B59FCA                                            ;B597D9|        |B59FCA;
+    dw pAIScripting0x44_Data01                                            ;B597D1|        |B597F1;
+    dw pAIScripting0x44_Data02                                            ;B597D3|        |B599EB;
+    dw pAIScripting0x44_Data03                                            ;B597D5|        |B59BE3;
+    dw pAIScripting0x44_Data04                                            ;B597D7|        |B59DD3;
+    dw pAIScripting0x44_Data05                                            ;B597D9|        |B59FCA;
     dw pAIScripting0x45                                        ;B597DB|        |B5A1E5;
     dw pAIScripting0x45                                        ;B597DD|        |B5A1E5;
     dw pAIScripting0x45                                        ;B597DF|        |B5A1E5;
@@ -18,7 +18,7 @@ pAIScripting0x44:
     dw pAIScripting0x45                                        ;B597ED|        |B5A1E5;
     dw pAIScripting0x45                                        ;B597EF|        |B5A1E5;
  
-DATA8_B597F1:
+pAIScripting0x44_Data01:
  
     %AICMD0x14_JumpIfFlagSet($800196, $01, pAIScripting0x44_L028)            ;B597F1
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 6, 10, pAIScripting0x44_L028)  ;B597F8
@@ -151,7 +151,7 @@ pAIScripting0x44_L028:
     %AICMD0x10_End()                                           ;B599EA
 
 
-DATA8_B599EB:
+pAIScripting0x44_Data02:
  
     %AICMD0x14_JumpIfFlagSet($800196, $01, pAIScripting0x44_L055)            ;B599EB
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 6, 10, pAIScripting0x44_L055)  ;B599F2
@@ -285,7 +285,7 @@ pAIScripting0x44_L057:
     %AICMD0x12_Jump(pAIScripting0x44_L057)                                   ;B59BE0
 
 
-DATA8_B59BE3:
+pAIScripting0x44_Data03:
  
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x44_L085)     ;B59BE3
     %AICMD0x14_JumpIfFlagSet($800196, $01, pAIScripting0x44_L085)            ;B59BEA
@@ -416,7 +416,7 @@ pAIScripting0x44_L085:
     %AICMD0x10_End()                                           ;B59DD2
 
 
-DATA8_B59DD3:
+pAIScripting0x44_Data04:
  
     %AICMD0x14_JumpIfFlagSet($800196, $01, pAIScripting0x44_L114)            ;B59DD3
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x44_L114)     ;B59DDA
@@ -550,7 +550,7 @@ pAIScripting0x44_L114:
     %AICMD0x10_End()                                           ;B59FC9
 
 
-DATA8_B59FCA:
+pAIScripting0x44_Data05:
     %AICMD0x14_JumpIfFlagSet($800196, $01, pAIScripting0x44_L142)            ;B59FCA
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x44_L142)     ;B59FD1
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 6, 10, pAIScripting0x44_L142)  ;B59FD8

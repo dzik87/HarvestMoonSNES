@@ -1,7 +1,7 @@
 
 
 pAIScripting0x09:
-    dw DATA8_B3E623                                            ;B3E603|        |B3E623;
+    dw pAIScripting0x09_Data01                                            ;B3E603|        |B3E623;
     dw pAIScripting0x0A                                        ;B3E605|        |B3E83B;
     dw pAIScripting0x0A                                        ;B3E607|        |B3E83B;
     dw pAIScripting0x0A                                        ;B3E609|        |B3E83B;
@@ -18,7 +18,7 @@ pAIScripting0x09:
     dw pAIScripting0x0A                                        ;B3E61F|        |B3E83B;
     dw pAIScripting0x0A                                        ;B3E621|        |B3E83B;
  
-DATA8_B3E623:
+pAIScripting0x09_Data01:
     %AICMD0x40_DisableTileInteractions()                       ;B3E623
     %AICMD0x02_FreezeTime()                                    ;B3E624
     %AICMD0x05_SetTransferPosition(96, 120)                    ;B3E625

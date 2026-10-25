@@ -1,8 +1,8 @@
 
 
 pAIScripting0x19:
-    dw DATA8_B48FB5                                            ;B48F95|        |B48FB5;
-    dw DATA8_B48FDE                                            ;B48F97|        |B48FDE;
+    dw pAIScripting0x19_Data01                                            ;B48F95|        |B48FB5;
+    dw pAIScripting0x19_Data02                                            ;B48F97|        |B48FDE;
     dw pAIScripting0x1A                                        ;B48F99|        |B490D3;
     dw pAIScripting0x1A                                        ;B48F9B|        |B490D3;
     dw pAIScripting0x1A                                        ;B48F9D|        |B490D3;
@@ -18,7 +18,7 @@ pAIScripting0x19:
     dw pAIScripting0x1A                                        ;B48FB1|        |B490D3;
     dw pAIScripting0x1A                                        ;B48FB3|        |B490D3;
  
-DATA8_B48FB5:
+pAIScripting0x19_Data01:
  
     %AICMD0x50()                                               ;B48FB5
     %AICMD0x08_EnableAIControl()                               ;B48FB6
@@ -38,7 +38,7 @@ pAIScripting0x19_L001:
     %AICMD0x10_End()                                           ;B48FDD
 
 
-DATA8_B48FDE:
+pAIScripting0x19_Data02:
     %AICMD0x50()                                               ;B48FDE
     %AICMD0x00_SetMusic($0E, $B4)                              ;B48FDF
     %AICMD0x08_EnableAIControl()                               ;B48FE2

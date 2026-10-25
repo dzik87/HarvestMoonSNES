@@ -1,14 +1,14 @@
 
 
 pAIScripting0x07:
-    dw DATA8_B3DA17                                            ;B3D9F7|        |B3DA17;
-    dw DATA8_B3DB72                                            ;B3D9F9|        |B3DB72;
-    dw DATA8_B3DBD5                                            ;B3D9FB|        |B3DBD5;
-    dw DATA8_B3DCD1                                            ;B3D9FD|        |B3DCD1;
-    dw DATA8_B3DDC7                                            ;B3D9FF|        |B3DDC7;
-    dw DATA8_B3DF0F                                            ;B3DA01|        |B3DF0F;
-    dw DATA8_B3DFCE                                            ;B3DA03|        |B3DFCE;
-    dw DATA8_B3E037                                            ;B3DA05|        |B3E037;
+    dw pAIScripting0x07_Data01                                            ;B3D9F7|        |B3DA17;
+    dw pAIScripting0x07_Data02                                            ;B3D9F9|        |B3DB72;
+    dw pAIScripting0x07_Data03                                            ;B3D9FB|        |B3DBD5;
+    dw pAIScripting0x07_Data04                                            ;B3D9FD|        |B3DCD1;
+    dw pAIScripting0x07_Data05                                            ;B3D9FF|        |B3DDC7;
+    dw pAIScripting0x07_Data06                                            ;B3DA01|        |B3DF0F;
+    dw pAIScripting0x07_Data07                                            ;B3DA03|        |B3DFCE;
+    dw pAIScripting0x07_Data08                                            ;B3DA05|        |B3E037;
     dw pAIScripting0x08                                        ;B3DA07|        |B3E0BF;
     dw pAIScripting0x08                                        ;B3DA09|        |B3E0BF;
     dw pAIScripting0x08                                        ;B3DA0B|        |B3E0BF;
@@ -18,7 +18,7 @@ pAIScripting0x07:
     dw pAIScripting0x08                                        ;B3DA13|        |B3E0BF;
     dw pAIScripting0x08                                        ;B3DA15|        |B3E0BF;
  
-DATA8_B3DA17:
+pAIScripting0x07_Data01:
  
     %AICMD0x11_EnableUserControl()                             ;B3DA17
     %AICMD0x09_StartScript($01, pAIScripting0x07_L004)                                   ;B3DA18
@@ -129,7 +129,7 @@ pAIScripting0x07_L029:
     %AICMD0x12_Jump(pAIScripting0x07_L021)                                   ;B3DB6F
 
 
-DATA8_B3DB72:
+pAIScripting0x07_Data02:
  
     %AICMD0x11_EnableUserControl()                             ;B3DB72
     %AICMD0x09_StartScript($01, pAIScripting0x07_L031)                                   ;B3DB73
@@ -166,7 +166,7 @@ pAIScripting0x07_L038:
     %AICMD0x12_Jump(pAIScripting0x07_L032)                                   ;B3DBD2
 
 
-DATA8_B3DBD5:
+pAIScripting0x07_Data03:
  
     %AICMD0x11_EnableUserControl()                             ;B3DBD5
     %AICMD0x09_StartScript($01, pAIScripting0x07_L042)                                   ;B3DBD6
@@ -247,7 +247,7 @@ pAIScripting0x07_L058:
     %AICMD0x12_Jump(pAIScripting0x07_L050)                                   ;B3DCCE
 
 
-DATA8_B3DCD1:
+pAIScripting0x07_Data04:
  
     %AICMD0x11_EnableUserControl()                             ;B3DCD1
     %AICMD0x09_StartScript($01, pAIScripting0x07_L062)                                   ;B3DCD2
@@ -327,7 +327,7 @@ pAIScripting0x07_L078:
     %AICMD0x12_Jump(pAIScripting0x07_L070)                                   ;B3DDC4
 
 
-DATA8_B3DDC7:
+pAIScripting0x07_Data05:
  
     %AICMD0x11_EnableUserControl()                             ;B3DDC7
     %AICMD0x09_StartScript($01, pAIScripting0x07_L084)                                   ;B3DDC8
@@ -433,7 +433,7 @@ pAIScripting0x07_L106:
     %AICMD0x12_Jump(pAIScripting0x07_L098)                                   ;B3DF0C
 
 
-DATA8_B3DF0F:
+pAIScripting0x07_Data06:
  
     %AICMD0x11_EnableUserControl()                             ;B3DF0F
     %AICMD0x09_StartScript($01, pAIScripting0x07_L108)                                   ;B3DF10
@@ -499,7 +499,7 @@ pAIScripting0x07_L122:
     %AICMD0x12_Jump(pAIScripting0x07_L118)                                   ;B3DFCB
 
 
-DATA8_B3DFCE:
+pAIScripting0x07_Data07:
  
     %AICMD0x11_EnableUserControl()                             ;B3DFCE
     %AICMD0x09_StartScript($01, pAIScripting0x07_L124)                                   ;B3DFCF
@@ -537,7 +537,7 @@ pAIScripting0x07_L130:
     %AICMD0x12_Jump(pAIScripting0x07_L125)                                   ;B3E034
 
 
-DATA8_B3E037:
+pAIScripting0x07_Data08:
     %AICMD0x11_EnableUserControl()                             ;B3E037
     %AICMD0x09_StartScript($01, pAIScripting0x07_L138)                                   ;B3E038
     %AICMD0x09_StartScript($02, pAIScripting0x07_L132)                                   ;B3E03C

@@ -1,7 +1,7 @@
 
 
 pAIScripting0x20:
-    dw DATA8_B49E51                                            ;B49E31|        |B49E51;
+    dw pAIScripting0x20_Data01                                            ;B49E31|        |B49E51;
     dw pAIScripting0x21                                        ;B49E33|        |B49F13;
     dw pAIScripting0x21                                        ;B49E35|        |B49F13;
     dw pAIScripting0x21                                        ;B49E37|        |B49F13;
@@ -18,7 +18,7 @@ pAIScripting0x20:
     dw pAIScripting0x21                                        ;B49E4D|        |B49F13;
     dw pAIScripting0x21                                        ;B49E4F|        |B49F13;
  
-DATA8_B49E51:
+pAIScripting0x20_Data01:
     %AICMD0x50()                                               ;B49E51
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B49E52
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $02)       ;B49E57

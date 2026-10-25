@@ -3,9 +3,9 @@
  
  
 pAIScripting0x0F_StarNightFestival:
-    dw DATA8_B48020                                            ;B48000|        |B48020;
-    dw DATA8_B48075                                            ;B48002|        |B48075;
-    dw DATA8_B4820E                                            ;B48004|        |B4820E;
+    dw pAIScripting0x0F_StarNightFestival_Data01                                            ;B48000|        |B48020;
+    dw pAIScripting0x0F_StarNightFestival_Data02                                            ;B48002|        |B48075;
+    dw pAIScripting0x0F_StarNightFestival_Data03                                            ;B48004|        |B4820E;
     dw DATA8_B48402                                            ;B48006|        |B48402;
     dw DATA8_B485C8                                            ;B48008|        |B485C8;
     dw DATA8_B486EA                                            ;B4800A|        |B486EA;
@@ -20,7 +20,7 @@ pAIScripting0x0F_StarNightFestival:
     dw pAIScripting0x10_WoodsPondEvent                         ;B4801C|        |B487BA;
     dw pAIScripting0x10_WoodsPondEvent                         ;B4801E|        |B487BA;
  
-DATA8_B48020:
+pAIScripting0x0F_StarNightFestival_Data01:
  
     %AICMD0x4F_DisableToolUse()                                               ;B48020
     %AICMD0x50()                                               ;B48021
@@ -55,7 +55,7 @@ DATA8_B48020:
     %AICMD0x10_End()                                           ;B48074
 
 
-DATA8_B48075:
+pAIScripting0x0F_StarNightFestival_Data02:
  
     %AICMD0x4F_DisableToolUse()                                               ;B48075
     %AICMD0x50()                                               ;B48076
@@ -165,7 +165,7 @@ DATA8_B48075:
     %AICMD0x12_Jump($B481BC)                                   ;B4820B
 
 
-DATA8_B4820E:
+pAIScripting0x0F_StarNightFestival_Data03:
  
     %AICMD0x4F_DisableToolUse()                                               ;B4820E
     %AICMD0x50()                                               ;B4820F

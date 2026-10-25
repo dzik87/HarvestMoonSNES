@@ -1,10 +1,10 @@
 
 
 pAIScripting0x1D:
-    dw DATA8_B4945C                                            ;B4943C|        |B4945C;
-    dw DATA8_B49499                                            ;B4943E|        |B49499;
-    dw DATA8_B49513                                            ;B49440|        |B49513;
-    dw DATA8_B4958B                                            ;B49442|        |B4958B;
+    dw pAIScripting0x1D_Data01                                            ;B4943C|        |B4945C;
+    dw pAIScripting0x1D_Data02                                            ;B4943E|        |B49499;
+    dw pAIScripting0x1D_Data03                                            ;B49440|        |B49513;
+    dw pAIScripting0x1D_Data04                                            ;B49442|        |B4958B;
     dw pAIScripting0x1E                                        ;B49444|        |B4967A;
     dw pAIScripting0x1E                                        ;B49446|        |B4967A;
     dw pAIScripting0x1E                                        ;B49448|        |B4967A;
@@ -18,7 +18,7 @@ pAIScripting0x1D:
     dw pAIScripting0x1E                                        ;B49458|        |B4967A;
     dw pAIScripting0x1E                                        ;B4945A|        |B4967A;
  
-DATA8_B4945C:
+pAIScripting0x1D_Data01:
  
     %AICMD0x50()                                               ;B4945C
     %AICMD0x08_EnableAIControl()                               ;B4945D
@@ -44,7 +44,7 @@ pAIScripting0x1D_L001:
     %AICMD0x10_End()                                           ;B49498
 
 
-DATA8_B49499:
+pAIScripting0x1D_Data02:
  
     %AICMD0x09_StartScript($01, pAIScripting0x1D_L003)                                   ;B49499
     %AICMD0x09_StartScript($02, pAIScripting0x1D_L006)                                   ;B4949D
@@ -91,7 +91,7 @@ pAIScripting0x1D_L014:
     %AICMD0x12_Jump(pAIScripting0x1D_L013)                                   ;B49510
 
 
-DATA8_B49513:
+pAIScripting0x1D_Data03:
  
     %AICMD0x50()                                               ;B49513
     %AICMD0x00_SetMusic($0E, $B4)                              ;B49514
@@ -139,7 +139,7 @@ pAIScripting0x1D_L025:
     %AICMD0x12_Jump(pAIScripting0x1D_L024)                                   ;B49588
 
 
-DATA8_B4958B:
+pAIScripting0x1D_Data04:
     %AICMD0x50()                                               ;B4958B
     %AICMD0x08_EnableAIControl()                               ;B4958C
     %AICMD0x09_StartScript($01, pAIScripting0x1D_L026)                                   ;B4958D

@@ -3,11 +3,11 @@
  
  
 pAIScripting0x43:
-    dw DATA8_B58020                                            ;B58000|        |B58020;
-    dw DATA8_B584DA                                            ;B58002|        |B584DA;
-    dw DATA8_B58990                                            ;B58004|        |B58990;
-    dw DATA8_B58E4E                                            ;B58006|        |B58E4E;
-    dw DATA8_B59313                                            ;B58008|        |B59313;
+    dw pAIScripting0x43_Data01                                            ;B58000|        |B58020;
+    dw pAIScripting0x43_Data02                                            ;B58002|        |B584DA;
+    dw pAIScripting0x43_Data03                                            ;B58004|        |B58990;
+    dw pAIScripting0x43_Data04                                            ;B58006|        |B58E4E;
+    dw pAIScripting0x43_Data05                                            ;B58008|        |B59313;
     dw pAIScripting0x44                                        ;B5800A|        |B597D1;
     dw pAIScripting0x44                                        ;B5800C|        |B597D1;
     dw pAIScripting0x44                                        ;B5800E|        |B597D1;
@@ -20,7 +20,7 @@ pAIScripting0x43:
     dw pAIScripting0x44                                        ;B5801C|        |B597D1;
     dw pAIScripting0x44                                        ;B5801E|        |B597D1;
  
-DATA8_B58020:
+pAIScripting0x43_Data01:
  
     %AICMD0x14_JumpIfFlagSet($800196, $01, $B58036)            ;B58020
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B58036)     ;B58027
@@ -272,7 +272,7 @@ DATA8_B58020:
     %AICMD0x10_End()                                           ;B584D9
 
 
-DATA8_B584DA:
+pAIScripting0x43_Data02:
  
     %AICMD0x14_JumpIfFlagSet($800196, $01, $B584F0)            ;B584DA
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B584F0)     ;B584E1
@@ -524,7 +524,7 @@ DATA8_B584DA:
     %AICMD0x10_End()                                           ;B5898F
 
 
-DATA8_B58990:
+pAIScripting0x43_Data03:
  
     %AICMD0x14_JumpIfFlagSet($800196, $01, $B589A6)            ;B58990
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B589A6)     ;B58997
@@ -777,7 +777,7 @@ DATA8_B58990:
     %AICMD0x10_End()                                           ;B58E4D
 
 
-DATA8_B58E4E:
+pAIScripting0x43_Data04:
  
     %AICMD0x14_JumpIfFlagSet($800196, $01, $B58E64)            ;B58E4E
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B58E64)     ;B58E55
@@ -1032,7 +1032,7 @@ DATA8_B58E4E:
     %AICMD0x10_End()                                           ;B59312
 
 
-DATA8_B59313:
+pAIScripting0x43_Data05:
  
     %AICMD0x14_JumpIfFlagSet($800196, $01, $B59329)            ;B59313
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B59329)     ;B5931A
@@ -1285,11 +1285,11 @@ DATA8_B59313:
 
 
 pAIScripting0x44:
-    dw DATA8_B597F1                                            ;B597D1|        |B597F1;
-    dw DATA8_B599EB                                            ;B597D3|        |B599EB;
-    dw DATA8_B59BE3                                            ;B597D5|        |B59BE3;
-    dw DATA8_B59DD3                                            ;B597D7|        |B59DD3;
-    dw DATA8_B59FCA                                            ;B597D9|        |B59FCA;
+    dw pAIScripting0x44_Data01                                            ;B597D1|        |B597F1;
+    dw pAIScripting0x44_Data02                                            ;B597D3|        |B599EB;
+    dw pAIScripting0x44_Data03                                            ;B597D5|        |B59BE3;
+    dw pAIScripting0x44_Data04                                            ;B597D7|        |B59DD3;
+    dw pAIScripting0x44_Data05                                            ;B597D9|        |B59FCA;
     dw pAIScripting0x45                                        ;B597DB|        |B5A1E5;
     dw pAIScripting0x45                                        ;B597DD|        |B5A1E5;
     dw pAIScripting0x45                                        ;B597DF|        |B5A1E5;
@@ -1302,7 +1302,7 @@ pAIScripting0x44:
     dw pAIScripting0x45                                        ;B597ED|        |B5A1E5;
     dw pAIScripting0x45                                        ;B597EF|        |B5A1E5;
  
-DATA8_B597F1:
+pAIScripting0x44_Data01:
  
     %AICMD0x14_JumpIfFlagSet($800196, $01, $B599EA)            ;B597F1
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 6, 10, $B599EA)  ;B597F8
@@ -1407,7 +1407,7 @@ DATA8_B597F1:
     %AICMD0x10_End()                                           ;B599EA
 
 
-DATA8_B599EB:
+pAIScripting0x44_Data02:
  
     %AICMD0x14_JumpIfFlagSet($800196, $01, $B59BD4)            ;B599EB
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 6, 10, $B59BD4)  ;B599F2
@@ -1512,7 +1512,7 @@ DATA8_B599EB:
     %AICMD0x12_Jump($B59BDD)                                   ;B59BE0
 
 
-DATA8_B59BE3:
+pAIScripting0x44_Data03:
  
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B59DD2)     ;B59BE3
     %AICMD0x14_JumpIfFlagSet($800196, $01, $B59DD2)            ;B59BEA
@@ -1615,7 +1615,7 @@ DATA8_B59BE3:
     %AICMD0x10_End()                                           ;B59DD2
 
 
-DATA8_B59DD3:
+pAIScripting0x44_Data04:
  
     %AICMD0x14_JumpIfFlagSet($800196, $01, $B59FC9)            ;B59DD3
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B59FC9)     ;B59DDA
@@ -1720,7 +1720,7 @@ DATA8_B59DD3:
     %AICMD0x10_End()                                           ;B59FC9
 
 
-DATA8_B59FCA:
+pAIScripting0x44_Data05:
  
     %AICMD0x14_JumpIfFlagSet($800196, $01, $B5A1C8)            ;B59FCA
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B5A1C8)     ;B59FD1
@@ -1833,12 +1833,12 @@ DATA8_B59FCA:
 
 
 pAIScripting0x45:
-    dw DATA8_B5A205                                            ;B5A1E5|        |B5A205;
-    dw DATA8_B5A2FD                                            ;B5A1E7|        |B5A2FD;
-    dw DATA8_B5A407                                            ;B5A1E9|        |B5A407;
-    dw DATA8_B5A484                                            ;B5A1EB|        |B5A484;
-    dw DATA8_B5A57C                                            ;B5A1ED|        |B5A57C;
-    dw DATA8_B5A686                                            ;B5A1EF|        |B5A686;
+    dw pAIScripting0x45_Data01                                            ;B5A1E5|        |B5A205;
+    dw pAIScripting0x45_Data02                                            ;B5A1E7|        |B5A2FD;
+    dw pAIScripting0x45_Data03                                            ;B5A1E9|        |B5A407;
+    dw pAIScripting0x45_Data04                                            ;B5A1EB|        |B5A484;
+    dw pAIScripting0x45_Data05                                            ;B5A1ED|        |B5A57C;
+    dw pAIScripting0x45_Data06                                            ;B5A1EF|        |B5A686;
     dw pAIScripting0x46                                        ;B5A1F1|        |B5A703;
     dw pAIScripting0x46                                        ;B5A1F3|        |B5A703;
     dw pAIScripting0x46                                        ;B5A1F5|        |B5A703;
@@ -1850,7 +1850,7 @@ pAIScripting0x45:
     dw pAIScripting0x46                                        ;B5A201|        |B5A703;
     dw pAIScripting0x46                                        ;B5A203|        |B5A703;
  
-DATA8_B5A205:
+pAIScripting0x45_Data01:
  
     %AICMD0x14_JumpIfFlagSet($800196, $01, $B5A21B)            ;B5A205
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B5A21B)     ;B5A20C
@@ -1906,7 +1906,7 @@ DATA8_B5A205:
     %AICMD0x12_Jump($B5A2F9)                                   ;B5A2FA
 
 
-DATA8_B5A2FD:
+pAIScripting0x45_Data02:
  
     %AICMD0x45_JumpIfBetween16(nFirstChildAge, 0, 89, $B5A406) ;B5A2FD
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, $B5A32D)   ;B5A307
@@ -1954,7 +1954,7 @@ DATA8_B5A2FD:
     %AICMD0x10_End()                                           ;B5A406
 
 
-DATA8_B5A407:
+pAIScripting0x45_Data03:
  
     %AICMD0x45_JumpIfBetween16(nFirstChildAge, 0, 89, $B5A440) ;B5A407
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, $B5A437)   ;B5A411
@@ -1981,7 +1981,7 @@ DATA8_B5A407:
     %AICMD0x12_Jump($B5A47C)                                   ;B5A481
 
 
-DATA8_B5A484:
+pAIScripting0x45_Data04:
  
     %AICMD0x14_JumpIfFlagSet($800196, $01, $B5A49A)            ;B5A484
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, $B5A49A)     ;B5A48B
@@ -2037,7 +2037,7 @@ DATA8_B5A484:
     %AICMD0x12_Jump($B5A578)                                   ;B5A579
 
 
-DATA8_B5A57C:
+pAIScripting0x45_Data05:
  
     %AICMD0x45_JumpIfBetween16(nSecondChildAge, 0, 89, $B5A685);B5A57C
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, $B5A5AC)   ;B5A586
@@ -2085,7 +2085,7 @@ DATA8_B5A57C:
     %AICMD0x10_End()                                           ;B5A685
 
 
-DATA8_B5A686:
+pAIScripting0x45_Data06:
  
     %AICMD0x45_JumpIfBetween16(nSecondChildAge, 0, 89, $B5A6BF);B5A686
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, $B5A6B6)   ;B5A690
@@ -2113,24 +2113,24 @@ DATA8_B5A686:
 
 
 pAIScripting0x46:
-    dw DATA8_B5A723                                            ;B5A703|        |B5A723;
-    dw DATA8_B5A73D                                            ;B5A705|        |B5A73D;
-    dw DATA8_B5A757                                            ;B5A707|        |B5A757;
-    dw DATA8_B5A771                                            ;B5A709|        |B5A771;
-    dw DATA8_B5A78B                                            ;B5A70B|        |B5A78B;
-    dw DATA8_B5A7A5                                            ;B5A70D|        |B5A7A5;
-    dw DATA8_B5A7BF                                            ;B5A70F|        |B5A7BF;
-    dw DATA8_B5A7D9                                            ;B5A711|        |B5A7D9;
-    dw DATA8_B5A7F3                                            ;B5A713|        |B5A7F3;
-    dw DATA8_B5A80D                                            ;B5A715|        |B5A80D;
-    dw DATA8_B5A827                                            ;B5A717|        |B5A827;
-    dw DATA8_B5A841                                            ;B5A719|        |B5A841;
-    dw DATA8_B5A85D                                            ;B5A71B|        |B5A85D;
+    dw pAIScripting0x46_Data01                                            ;B5A703|        |B5A723;
+    dw pAIScripting0x46_Data02                                            ;B5A705|        |B5A73D;
+    dw pAIScripting0x46_Data03                                            ;B5A707|        |B5A757;
+    dw pAIScripting0x46_Data04                                            ;B5A709|        |B5A771;
+    dw pAIScripting0x46_Data05                                            ;B5A70B|        |B5A78B;
+    dw pAIScripting0x46_Data06                                            ;B5A70D|        |B5A7A5;
+    dw pAIScripting0x46_Data07                                            ;B5A70F|        |B5A7BF;
+    dw pAIScripting0x46_Data08                                            ;B5A711|        |B5A7D9;
+    dw pAIScripting0x46_Data09                                            ;B5A713|        |B5A7F3;
+    dw pAIScripting0x46_Data10                                            ;B5A715|        |B5A80D;
+    dw pAIScripting0x46_Data11                                            ;B5A717|        |B5A827;
+    dw pAIScripting0x46_Data12                                            ;B5A719|        |B5A841;
+    dw pAIScripting0x46_Data13                                            ;B5A71B|        |B5A85D;
     dw pAIScripting0x47_HowToPlay                              ;B5A71D|        |B5AC72;
     dw pAIScripting0x47_HowToPlay                              ;B5A71F|        |B5AC72;
     dw pAIScripting0x47_HowToPlay                              ;B5A721|        |B5AC72;
  
-DATA8_B5A723:
+pAIScripting0x46_Data01:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A723
     %AICMD0x02_FreezeTime()                                    ;B5A726
@@ -2146,7 +2146,7 @@ DATA8_B5A723:
     %AICMD0x10_End()                                           ;B5A73C
 
 
-DATA8_B5A73D:
+pAIScripting0x46_Data02:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A73D
     %AICMD0x02_FreezeTime()                                    ;B5A740
@@ -2162,7 +2162,7 @@ DATA8_B5A73D:
     %AICMD0x10_End()                                           ;B5A756
 
 
-DATA8_B5A757:
+pAIScripting0x46_Data03:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A757
     %AICMD0x02_FreezeTime()                                    ;B5A75A
@@ -2178,7 +2178,7 @@ DATA8_B5A757:
     %AICMD0x10_End()                                           ;B5A770
 
 
-DATA8_B5A771:
+pAIScripting0x46_Data04:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A771
     %AICMD0x02_FreezeTime()                                    ;B5A774
@@ -2194,7 +2194,7 @@ DATA8_B5A771:
     %AICMD0x10_End()                                           ;B5A78A
 
 
-DATA8_B5A78B:
+pAIScripting0x46_Data05:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A78B
     %AICMD0x02_FreezeTime()                                    ;B5A78E
@@ -2210,7 +2210,7 @@ DATA8_B5A78B:
     %AICMD0x10_End()                                           ;B5A7A4
 
 
-DATA8_B5A7A5:
+pAIScripting0x46_Data06:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A7A5
     %AICMD0x02_FreezeTime()                                    ;B5A7A8
@@ -2226,7 +2226,7 @@ DATA8_B5A7A5:
     %AICMD0x10_End()                                           ;B5A7BE
 
 
-DATA8_B5A7BF:
+pAIScripting0x46_Data07:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A7BF
     %AICMD0x02_FreezeTime()                                    ;B5A7C2
@@ -2242,7 +2242,7 @@ DATA8_B5A7BF:
     %AICMD0x10_End()                                           ;B5A7D8
 
 
-DATA8_B5A7D9:
+pAIScripting0x46_Data08:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A7D9
     %AICMD0x02_FreezeTime()                                    ;B5A7DC
@@ -2258,7 +2258,7 @@ DATA8_B5A7D9:
     %AICMD0x10_End()                                           ;B5A7F2
 
 
-DATA8_B5A7F3:
+pAIScripting0x46_Data09:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A7F3
     %AICMD0x02_FreezeTime()                                    ;B5A7F6
@@ -2274,7 +2274,7 @@ DATA8_B5A7F3:
     %AICMD0x10_End()                                           ;B5A80C
 
 
-DATA8_B5A80D:
+pAIScripting0x46_Data10:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A80D
     %AICMD0x02_FreezeTime()                                    ;B5A810
@@ -2290,7 +2290,7 @@ DATA8_B5A80D:
     %AICMD0x10_End()                                           ;B5A826
 
 
-DATA8_B5A827:
+pAIScripting0x46_Data11:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A827
     %AICMD0x02_FreezeTime()                                    ;B5A82A
@@ -2306,7 +2306,7 @@ DATA8_B5A827:
     %AICMD0x10_End()                                           ;B5A840
 
 
-DATA8_B5A841:
+pAIScripting0x46_Data12:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A841
     %AICMD0x4F_DisableToolUse()                                               ;B5A844
@@ -2324,7 +2324,7 @@ DATA8_B5A841:
     %AICMD0x10_End()                                           ;B5A85C
 
 
-DATA8_B5A85D:
+pAIScripting0x46_Data13:
  
     %AICMD0x00_SetMusic($0E, $B4)                              ;B5A85D
     %AICMD0x01_UnfreezeTime()                                  ;B5A860

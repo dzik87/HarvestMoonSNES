@@ -1,7 +1,7 @@
 
 
 pAIScripting0x17:
-    dw DATA8_B48E25                                            ;B48E05|        |B48E25;
+    dw pAIScripting0x17_Data01                                            ;B48E05|        |B48E25;
     dw pAIScripting0x18                                        ;B48E07|        |B48EC5;
     dw pAIScripting0x18                                        ;B48E09|        |B48EC5;
     dw pAIScripting0x18                                        ;B48E0B|        |B48EC5;
@@ -18,7 +18,7 @@ pAIScripting0x17:
     dw pAIScripting0x18                                        ;B48E21|        |B48EC5;
     dw pAIScripting0x18                                        ;B48E23|        |B48EC5;
  
-DATA8_B48E25:
+pAIScripting0x17_Data01:
     %AICMD0x00_SetMusic($0A, $B4)                              ;B48E25
     %AICMD0x08_EnableAIControl()                               ;B48E28
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B48E29

@@ -1,12 +1,12 @@
 
 
 pAIScripting0x45:
-    dw DATA8_B5A205                                            ;B5A1E5|        |B5A205;
-    dw DATA8_B5A2FD                                            ;B5A1E7|        |B5A2FD;
-    dw DATA8_B5A407                                            ;B5A1E9|        |B5A407;
-    dw DATA8_B5A484                                            ;B5A1EB|        |B5A484;
-    dw DATA8_B5A57C                                            ;B5A1ED|        |B5A57C;
-    dw DATA8_B5A686                                            ;B5A1EF|        |B5A686;
+    dw pAIScripting0x45_Data01                                            ;B5A1E5|        |B5A205;
+    dw pAIScripting0x45_Data02                                            ;B5A1E7|        |B5A2FD;
+    dw pAIScripting0x45_Data03                                            ;B5A1E9|        |B5A407;
+    dw pAIScripting0x45_Data04                                            ;B5A1EB|        |B5A484;
+    dw pAIScripting0x45_Data05                                            ;B5A1ED|        |B5A57C;
+    dw pAIScripting0x45_Data06                                            ;B5A1EF|        |B5A686;
     dw pAIScripting0x46                                        ;B5A1F1|        |B5A703;
     dw pAIScripting0x46                                        ;B5A1F3|        |B5A703;
     dw pAIScripting0x46                                        ;B5A1F5|        |B5A703;
@@ -18,7 +18,7 @@ pAIScripting0x45:
     dw pAIScripting0x46                                        ;B5A201|        |B5A703;
     dw pAIScripting0x46                                        ;B5A203|        |B5A703;
  
-DATA8_B5A205:
+pAIScripting0x45_Data01:
  
     %AICMD0x14_JumpIfFlagSet($800196, $01, pAIScripting0x45_L001)            ;B5A205
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x45_L001)     ;B5A20C
@@ -92,7 +92,7 @@ pAIScripting0x45_L018:
     %AICMD0x12_Jump(pAIScripting0x45_L018)                                   ;B5A2FA
 
 
-DATA8_B5A2FD:
+pAIScripting0x45_Data02:
  
     %AICMD0x45_JumpIfBetween16(nFirstChildAge, 0, 89, pAIScripting0x45_L034) ;B5A2FD
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, pAIScripting0x45_L019)   ;B5A307
@@ -156,7 +156,7 @@ pAIScripting0x45_L034:
     %AICMD0x10_End()                                           ;B5A406
 
 
-DATA8_B5A407:
+pAIScripting0x45_Data03:
  
     %AICMD0x45_JumpIfBetween16(nFirstChildAge, 0, 89, pAIScripting0x45_L040) ;B5A407
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, pAIScripting0x45_L035)   ;B5A411
@@ -192,7 +192,7 @@ pAIScripting0x45_L043:
     %AICMD0x12_Jump(pAIScripting0x45_L043)                                   ;B5A481
 
 
-DATA8_B5A484:
+pAIScripting0x45_Data04:
  
     %AICMD0x14_JumpIfFlagSet($800196, $01, pAIScripting0x45_L044)            ;B5A484
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x45_L044)     ;B5A48B
@@ -266,7 +266,7 @@ pAIScripting0x45_L061:
     %AICMD0x12_Jump(pAIScripting0x45_L061)                                   ;B5A579
 
 
-DATA8_B5A57C:
+pAIScripting0x45_Data05:
  
     %AICMD0x45_JumpIfBetween16(nSecondChildAge, 0, 89, pAIScripting0x45_L077);B5A57C
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, pAIScripting0x45_L062)   ;B5A586
@@ -330,7 +330,7 @@ pAIScripting0x45_L077:
     %AICMD0x10_End()                                           ;B5A685
 
 
-DATA8_B5A686:
+pAIScripting0x45_Data06:
     %AICMD0x45_JumpIfBetween16(nSecondChildAge, 0, 89, pAIScripting0x45_L083);B5A686
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, pAIScripting0x45_L078)   ;B5A690
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x45_L079)   ;B5A697

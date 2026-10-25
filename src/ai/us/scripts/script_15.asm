@@ -1,7 +1,7 @@
 
 
 pAIScripting0x15:
-    dw DATA8_B48C45                                            ;B48C25|        |B48C45;
+    dw pAIScripting0x15_Data01                                            ;B48C25|        |B48C45;
     dw pAIScripting0x16                                        ;B48C27|        |B48D38;
     dw pAIScripting0x16                                        ;B48C29|        |B48D38;
     dw pAIScripting0x16                                        ;B48C2B|        |B48D38;
@@ -18,7 +18,7 @@ pAIScripting0x15:
     dw pAIScripting0x16                                        ;B48C41|        |B48D38;
     dw pAIScripting0x16                                        ;B48C43|        |B48D38;
  
-DATA8_B48C45:
+pAIScripting0x15_Data01:
     %AICMD0x05_SetTransferPosition(184, 360)                   ;B48C45
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B48C4A
     %AICMD0x08_EnableAIControl()                               ;B48C4C

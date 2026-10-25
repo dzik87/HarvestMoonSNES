@@ -1,24 +1,24 @@
 
 
 pAIScripting0x46:
-    dw DATA8_B5A723                                            ;B5A703|        |B5A723;
-    dw DATA8_B5A73D                                            ;B5A705|        |B5A73D;
-    dw DATA8_B5A757                                            ;B5A707|        |B5A757;
-    dw DATA8_B5A771                                            ;B5A709|        |B5A771;
-    dw DATA8_B5A78B                                            ;B5A70B|        |B5A78B;
-    dw DATA8_B5A7A5                                            ;B5A70D|        |B5A7A5;
-    dw DATA8_B5A7BF                                            ;B5A70F|        |B5A7BF;
-    dw DATA8_B5A7D9                                            ;B5A711|        |B5A7D9;
-    dw DATA8_B5A7F3                                            ;B5A713|        |B5A7F3;
-    dw DATA8_B5A80D                                            ;B5A715|        |B5A80D;
-    dw DATA8_B5A827                                            ;B5A717|        |B5A827;
-    dw DATA8_B5A841                                            ;B5A719|        |B5A841;
-    dw DATA8_B5A85D                                            ;B5A71B|        |B5A85D;
+    dw pAIScripting0x46_Data01                                            ;B5A703|        |B5A723;
+    dw pAIScripting0x46_Data02                                            ;B5A705|        |B5A73D;
+    dw pAIScripting0x46_Data03                                            ;B5A707|        |B5A757;
+    dw pAIScripting0x46_Data04                                            ;B5A709|        |B5A771;
+    dw pAIScripting0x46_Data05                                            ;B5A70B|        |B5A78B;
+    dw pAIScripting0x46_Data06                                            ;B5A70D|        |B5A7A5;
+    dw pAIScripting0x46_Data07                                            ;B5A70F|        |B5A7BF;
+    dw pAIScripting0x46_Data08                                            ;B5A711|        |B5A7D9;
+    dw pAIScripting0x46_Data09                                            ;B5A713|        |B5A7F3;
+    dw pAIScripting0x46_Data10                                            ;B5A715|        |B5A80D;
+    dw pAIScripting0x46_Data11                                            ;B5A717|        |B5A827;
+    dw pAIScripting0x46_Data12                                            ;B5A719|        |B5A841;
+    dw pAIScripting0x46_Data13                                            ;B5A71B|        |B5A85D;
     dw pAIScripting0x47_HowToPlay                              ;B5A71D|        |B5AC6E;
     dw pAIScripting0x47_HowToPlay                              ;B5A71F|        |B5AC6E;
     dw pAIScripting0x47_HowToPlay                              ;B5A721|        |B5AC6E;
  
-DATA8_B5A723:
+pAIScripting0x46_Data01:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A723
     %AICMD0x02_FreezeTime()                                    ;B5A726
@@ -34,7 +34,7 @@ DATA8_B5A723:
     %AICMD0x10_End()                                           ;B5A73C
 
 
-DATA8_B5A73D:
+pAIScripting0x46_Data02:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A73D
     %AICMD0x02_FreezeTime()                                    ;B5A740
@@ -50,7 +50,7 @@ DATA8_B5A73D:
     %AICMD0x10_End()                                           ;B5A756
 
 
-DATA8_B5A757:
+pAIScripting0x46_Data03:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A757
     %AICMD0x02_FreezeTime()                                    ;B5A75A
@@ -66,7 +66,7 @@ DATA8_B5A757:
     %AICMD0x10_End()                                           ;B5A770
 
 
-DATA8_B5A771:
+pAIScripting0x46_Data04:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A771
     %AICMD0x02_FreezeTime()                                    ;B5A774
@@ -82,7 +82,7 @@ DATA8_B5A771:
     %AICMD0x10_End()                                           ;B5A78A
 
 
-DATA8_B5A78B:
+pAIScripting0x46_Data05:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A78B
     %AICMD0x02_FreezeTime()                                    ;B5A78E
@@ -98,7 +98,7 @@ DATA8_B5A78B:
     %AICMD0x10_End()                                           ;B5A7A4
 
 
-DATA8_B5A7A5:
+pAIScripting0x46_Data06:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A7A5
     %AICMD0x02_FreezeTime()                                    ;B5A7A8
@@ -114,7 +114,7 @@ DATA8_B5A7A5:
     %AICMD0x10_End()                                           ;B5A7BE
 
 
-DATA8_B5A7BF:
+pAIScripting0x46_Data07:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A7BF
     %AICMD0x02_FreezeTime()                                    ;B5A7C2
@@ -130,7 +130,7 @@ DATA8_B5A7BF:
     %AICMD0x10_End()                                           ;B5A7D8
 
 
-DATA8_B5A7D9:
+pAIScripting0x46_Data08:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A7D9
     %AICMD0x02_FreezeTime()                                    ;B5A7DC
@@ -146,7 +146,7 @@ DATA8_B5A7D9:
     %AICMD0x10_End()                                           ;B5A7F2
 
 
-DATA8_B5A7F3:
+pAIScripting0x46_Data09:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A7F3
     %AICMD0x02_FreezeTime()                                    ;B5A7F6
@@ -162,7 +162,7 @@ DATA8_B5A7F3:
     %AICMD0x10_End()                                           ;B5A80C
 
 
-DATA8_B5A80D:
+pAIScripting0x46_Data10:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A80D
     %AICMD0x02_FreezeTime()                                    ;B5A810
@@ -178,7 +178,7 @@ DATA8_B5A80D:
     %AICMD0x10_End()                                           ;B5A826
 
 
-DATA8_B5A827:
+pAIScripting0x46_Data11:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A827
     %AICMD0x02_FreezeTime()                                    ;B5A82A
@@ -194,7 +194,7 @@ DATA8_B5A827:
     %AICMD0x10_End()                                           ;B5A840
 
 
-DATA8_B5A841:
+pAIScripting0x46_Data12:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A841
     %AICMD0x4F_DisableToolUse()                                               ;B5A844
@@ -212,7 +212,7 @@ DATA8_B5A841:
     %AICMD0x10_End()                                           ;B5A85C
 
 
-DATA8_B5A85D:
+pAIScripting0x46_Data13:
     %AICMD0x00_SetMusic($0E, $B4)                              ;B5A85D
     %AICMD0x01_UnfreezeTime()                                  ;B5A860
     %AICMD0x03_SetHour($10)                                    ;B5A861

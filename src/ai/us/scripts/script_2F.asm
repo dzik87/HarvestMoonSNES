@@ -1,7 +1,7 @@
 
 
 pAIScripting0x2F:
-    dw DATA8_B4C711                                            ;B4C6F1|        |B4C711;
+    dw pAIScripting0x2F_Data01                                            ;B4C6F1|        |B4C711;
     dw pAIScripting0x30                                        ;B4C6F3|        |B4C7C3;
     dw pAIScripting0x30                                        ;B4C6F5|        |B4C7C3;
     dw pAIScripting0x30                                        ;B4C6F7|        |B4C7C3;
@@ -18,7 +18,7 @@ pAIScripting0x2F:
     dw pAIScripting0x30                                        ;B4C70D|        |B4C7C3;
     dw pAIScripting0x30                                        ;B4C70F|        |B4C7C3;
  
-DATA8_B4C711:
+pAIScripting0x2F_Data01:
     %AICMD0x00_SetMusic($11, $B4)                              ;B4C711
     %AICMD0x02_FreezeTime()                                    ;B4C714
     %AICMD0x03_SetHour($06)                                    ;B4C715

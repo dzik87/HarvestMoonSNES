@@ -1,7 +1,7 @@
 
 
 pAIScripting0x12:
-    dw DATA8_B488C0                                            ;B488A0|        |B488C0;
+    dw pAIScripting0x12_Data01                                            ;B488A0|        |B488C0;
     dw pAIScripting0x13                                        ;B488A2|        |B4892A;
     dw pAIScripting0x13                                        ;B488A4|        |B4892A;
     dw pAIScripting0x13                                        ;B488A6|        |B4892A;
@@ -18,7 +18,7 @@ pAIScripting0x12:
     dw pAIScripting0x13                                        ;B488BC|        |B4892A;
     dw pAIScripting0x13                                        ;B488BE|        |B4892A;
  
-DATA8_B488C0:
+pAIScripting0x12_Data01:
     %AICMD0x50()                                               ;B488C0
     %AICMD0x00_SetMusic($0A, $B4)                              ;B488C1
     %AICMD0x08_EnableAIControl()                               ;B488C4

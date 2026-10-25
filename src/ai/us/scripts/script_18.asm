@@ -1,7 +1,7 @@
 
 
 pAIScripting0x18:
-    dw DATA8_B48EE5                                            ;B48EC5|        |B48EE5;
+    dw pAIScripting0x18_Data01                                            ;B48EC5|        |B48EE5;
     dw pAIScripting0x19                                        ;B48EC7|        |B48F95;
     dw pAIScripting0x19                                        ;B48EC9|        |B48F95;
     dw pAIScripting0x19                                        ;B48ECB|        |B48F95;
@@ -18,7 +18,7 @@ pAIScripting0x18:
     dw pAIScripting0x19                                        ;B48EE1|        |B48F95;
     dw pAIScripting0x19                                        ;B48EE3|        |B48F95;
  
-DATA8_B48EE5:
+pAIScripting0x18_Data01:
     %AICMD0x09_StartScript($01, pAIScripting0x18_L003)                                   ;B48EE5
     %AICMD0x38_WaitForFadeIn()                                               ;B48EE9
     %AICMD0x10_End()                                           ;B48EEA

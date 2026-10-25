@@ -1,8 +1,8 @@
 
 
 pAIScripting0x1B:
-    dw DATA8_B491D3                                            ;B491B3|        |B491D3;
-    dw DATA8_B49210                                            ;B491B5|        |B49210;
+    dw pAIScripting0x1B_Data01                                            ;B491B3|        |B491D3;
+    dw pAIScripting0x1B_Data02                                            ;B491B5|        |B49210;
     dw pAIScripting0x1C                                        ;B491B7|        |B492D2;
     dw pAIScripting0x1C                                        ;B491B9|        |B492D2;
     dw pAIScripting0x1C                                        ;B491BB|        |B492D2;
@@ -18,7 +18,7 @@ pAIScripting0x1B:
     dw pAIScripting0x1C                                        ;B491CF|        |B492D2;
     dw pAIScripting0x1C                                        ;B491D1|        |B492D2;
  
-DATA8_B491D3:
+pAIScripting0x1B_Data01:
  
     %AICMD0x50()                                               ;B491D3
     %AICMD0x08_EnableAIControl()                               ;B491D4
@@ -44,7 +44,7 @@ pAIScripting0x1B_L001:
     %AICMD0x10_End()                                           ;B4920F
 
 
-DATA8_B49210:
+pAIScripting0x1B_Data02:
     %AICMD0x00_SetMusic($0E, $B4)                              ;B49210
     %AICMD0x09_StartScript($01, pAIScripting0x1B_L003)                                   ;B49213
     %AICMD0x38_WaitForFadeIn()                                               ;B49217

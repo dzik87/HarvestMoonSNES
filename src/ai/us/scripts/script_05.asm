@@ -1,7 +1,7 @@
 
 
 pAIScripting0x05:
-    dw DATA8_B3CC91                                            ;B3CC71|        |B3CC91;
+    dw pAIScripting0x05_Data01                                            ;B3CC71|        |B3CC91;
     dw pAIScripting0x06                                        ;B3CC73|        |B3D447;
     dw pAIScripting0x06                                        ;B3CC75|        |B3D447;
     dw pAIScripting0x06                                        ;B3CC77|        |B3D447;
@@ -18,7 +18,7 @@ pAIScripting0x05:
     dw pAIScripting0x06                                        ;B3CC8D|        |B3D447;
     dw pAIScripting0x06                                        ;B3CC8F|        |B3D447;
  
-DATA8_B3CC91:
+pAIScripting0x05_Data01:
     %AICMD0x11_EnableUserControl()                             ;B3CC91
     %AICMD0x09_StartScript($01, pAIScripting0x05_L005)                                   ;B3CC92
     %AICMD0x09_StartScript($02, pAIScripting0x05_L017)                                   ;B3CC96

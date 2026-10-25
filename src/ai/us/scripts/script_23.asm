@@ -1,7 +1,7 @@
 
 
 pAIScripting0x23:
-    dw DATA8_B4A39F                                            ;B4A37F|        |B4A39F;
+    dw pAIScripting0x23_Data01                                            ;B4A37F|        |B4A39F;
     dw pAIScripting0x24                                        ;B4A381|        |B4A455;
     dw pAIScripting0x24                                        ;B4A383|        |B4A455;
     dw pAIScripting0x24                                        ;B4A385|        |B4A455;
@@ -18,7 +18,7 @@ pAIScripting0x23:
     dw pAIScripting0x24                                        ;B4A39B|        |B4A455;
     dw pAIScripting0x24                                        ;B4A39D|        |B4A455;
  
-DATA8_B4A39F:
+pAIScripting0x23_Data01:
     %AICMD0x09_StartScript($0C, pAIScripting0x23_L001)                                   ;B4A39F
     %AICMD0x09_StartScript($0D, pAIScripting0x23_L002)                                   ;B4A3A3
     %AICMD0x09_StartScript($0E, pAIScripting0x23_L003)                                   ;B4A3A7

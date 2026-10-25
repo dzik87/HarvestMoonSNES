@@ -2,7 +2,7 @@
 
 pAIScripting0x0D_CrossRoadsEvents:
     dw AI_ObtainHorse                                          ;B3F068|        |B3F088;
-    dw DATA8_B3F0A9                                            ;B3F06A|        |B3F0A9;
+    dw pAIScripting0x0D_CrossRoadsEvents_Data01                                            ;B3F06A|        |B3F0A9;
     dw pAIScripting0x0E                                        ;B3F06C|        |B3F0E6;
     dw pAIScripting0x0E                                        ;B3F06E|        |B3F0E6;
     dw pAIScripting0x0E                                        ;B3F070|        |B3F0E6;
@@ -35,7 +35,7 @@ AI_ObtainHorse_L001:
     %AICMD0x10_End()                                           ;B3F0A8
 
 
-DATA8_B3F0A9:
+pAIScripting0x0D_CrossRoadsEvents_Data01:
     %AICMD0x50()                                               ;B3F0A9
     %AICMD0x02_FreezeTime()                                    ;B3F0AA
     %AICMD0x08_EnableAIControl()                               ;B3F0AB

@@ -1,7 +1,7 @@
 
 
 pAIScripting0x21:
-    dw DATA8_B49F33                                            ;B49F13|        |B49F33;
+    dw pAIScripting0x21_Data01                                            ;B49F13|        |B49F33;
     dw pAIScripting0x22                                        ;B49F15|        |B49FD8;
     dw pAIScripting0x22                                        ;B49F17|        |B49FD8;
     dw pAIScripting0x22                                        ;B49F19|        |B49FD8;
@@ -18,7 +18,7 @@ pAIScripting0x21:
     dw pAIScripting0x22                                        ;B49F2F|        |B49FD8;
     dw pAIScripting0x22                                        ;B49F31|        |B49FD8;
  
-DATA8_B49F33:
+pAIScripting0x21_Data01:
     %AICMD0x09_StartScript($13, pAIScripting0x21_L009)                                   ;B49F33
     %AICMD0x10_End()                                           ;B49F37
 pAIScripting0x21_L001:

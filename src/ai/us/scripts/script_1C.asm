@@ -1,9 +1,9 @@
 
 
 pAIScripting0x1C:
-    dw DATA8_B492F2                                            ;B492D2|        |B492F2;
-    dw DATA8_B4931D                                            ;B492D4|        |B4931D;
-    dw DATA8_B49401                                            ;B492D6|        |B49401;
+    dw pAIScripting0x1C_Data01                                            ;B492D2|        |B492F2;
+    dw pAIScripting0x1C_Data02                                            ;B492D4|        |B4931D;
+    dw pAIScripting0x1C_Data03                                            ;B492D6|        |B49401;
     dw pAIScripting0x1D                                        ;B492D8|        |B4943C;
     dw pAIScripting0x1D                                        ;B492DA|        |B4943C;
     dw pAIScripting0x1D                                        ;B492DC|        |B4943C;
@@ -18,7 +18,7 @@ pAIScripting0x1C:
     dw pAIScripting0x1D                                        ;B492EE|        |B4943C;
     dw pAIScripting0x1D                                        ;B492F0|        |B4943C;
  
-DATA8_B492F2:
+pAIScripting0x1C_Data01:
  
     %AICMD0x50()                                               ;B492F2
     %AICMD0x08_EnableAIControl()                               ;B492F3
@@ -39,7 +39,7 @@ pAIScripting0x1C_L001:
     %AICMD0x10_End()                                           ;B4931C
 
 
-DATA8_B4931D:
+pAIScripting0x1C_Data02:
  
     %AICMD0x00_SetMusic($0E, $B4)                              ;B4931D
     %AICMD0x09_StartScript($0A, pAIScripting0x1C_L002)                                   ;B49320
@@ -114,7 +114,7 @@ pAIScripting0x1C_L011:
     %AICMD0x10_End()                                           ;B49400
 
 
-DATA8_B49401:
+pAIScripting0x1C_Data03:
     %AICMD0x50()                                               ;B49401
     %AICMD0x02_FreezeTime()                                    ;B49402
     %AICMD0x08_EnableAIControl()                               ;B49403

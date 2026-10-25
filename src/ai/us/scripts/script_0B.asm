@@ -1,24 +1,24 @@
 
 
 pAIScripting0x0B:
-    dw DATA8_B3E9FA                                            ;B3E9DA|        |B3E9FA;
-    dw DATA8_B3EB5C                                            ;B3E9DC|        |B3EB5C;
-    dw DATA8_B3EB83                                            ;B3E9DE|        |B3EB83;
-    dw DATA8_B3EBB2                                            ;B3E9E0|        |B3EBB2;
-    dw DATA8_B3EC2D                                            ;B3E9E2|        |B3EC2D;
-    dw DATA8_B3EC8D                                            ;B3E9E4|        |B3EC8D;
-    dw DATA8_B3ECE2                                            ;B3E9E6|        |B3ECE2;
-    dw DATA8_B3ED39                                            ;B3E9E8|        |B3ED39;
-    dw DATA8_B3EE1A                                            ;B3E9EA|        |B3EE1A;
-    dw DATA8_B3EE1A                                            ;B3E9EC|        |B3EE1A;
+    dw pAIScripting0x0B_Data01                                            ;B3E9DA|        |B3E9FA;
+    dw pAIScripting0x0B_Data02                                            ;B3E9DC|        |B3EB5C;
+    dw pAIScripting0x0B_Data03                                            ;B3E9DE|        |B3EB83;
+    dw pAIScripting0x0B_Data04                                            ;B3E9E0|        |B3EBB2;
+    dw pAIScripting0x0B_Data05                                            ;B3E9E2|        |B3EC2D;
+    dw pAIScripting0x0B_Data06                                            ;B3E9E4|        |B3EC8D;
+    dw pAIScripting0x0B_Data07                                            ;B3E9E6|        |B3ECE2;
+    dw pAIScripting0x0B_Data08                                            ;B3E9E8|        |B3ED39;
+    dw pAIScripting0x0B_Data09                                            ;B3E9EA|        |B3EE1A;
+    dw pAIScripting0x0B_Data09                                            ;B3E9EC|        |B3EE1A;
     dw AI_HouseExtensionCampain                                ;B3E9EE|        |B3EEEA;
-    dw DATA8_B3EF0A                                            ;B3E9F0|        |B3EF0A;
-    dw DATA8_B3EF2E                                            ;B3E9F2|        |B3EF2E;
+    dw pAIScripting0x0B_Data10                                            ;B3E9F0|        |B3EF0A;
+    dw pAIScripting0x0B_Data11                                            ;B3E9F2|        |B3EF2E;
     dw pAIScripting0x0C_DogEvent                               ;B3E9F4|        |B3EF5A;
     dw pAIScripting0x0C_DogEvent                               ;B3E9F6|        |B3EF5A;
     dw pAIScripting0x0C_DogEvent                               ;B3E9F8|        |B3EF5A;
  
-DATA8_B3E9FA:
+pAIScripting0x0B_Data01:
  
     %AICMD0x02_FreezeTime()                                    ;B3E9FA
     %AICMD0x03_SetHour($07)                                    ;B3E9FB
@@ -141,7 +141,7 @@ pAIScripting0x0B_L033:
     %AICMD0x12_Jump(pAIScripting0x0B_L029)                                   ;B3EB59
 
 
-DATA8_B3EB5C:
+pAIScripting0x0B_Data02:
  
     %AICMD0x09_StartScript($01, pAIScripting0x0B_L034)                                   ;B3EB5C
     %AICMD0x10_End()                                           ;B3EB60
@@ -161,7 +161,7 @@ pAIScripting0x0B_L038:
     %AICMD0x12_Jump(pAIScripting0x0B_L036)                                   ;B3EB80
 
 
-DATA8_B3EB83:
+pAIScripting0x0B_Data03:
  
     %AICMD0x09_StartScript($01, pAIScripting0x0B_L039)                                   ;B3EB83
     %AICMD0x10_End()                                           ;B3EB87
@@ -183,7 +183,7 @@ pAIScripting0x0B_L043:
     %AICMD0x12_Jump(pAIScripting0x0B_L041)                                   ;B3EBAF
 
 
-DATA8_B3EBB2:
+pAIScripting0x0B_Data04:
  
     %AICMD0x09_StartScript($01, pAIScripting0x0B_L044)                                   ;B3EBB2
     %AICMD0x09_StartScript($02, pAIScripting0x0B_L049)                                   ;B3EBB6
@@ -231,7 +231,7 @@ pAIScripting0x0B_L054:
     %AICMD0x10_End()                                           ;B3EC2C
 
 
-DATA8_B3EC2D:
+pAIScripting0x0B_Data05:
  
     %AICMD0x09_StartScript($01, pAIScripting0x0B_L055)                                   ;B3EC2D
     %AICMD0x09_StartScript($02, pAIScripting0x0B_L060)                                   ;B3EC31
@@ -270,7 +270,7 @@ pAIScripting0x0B_L064:
     %AICMD0x12_Jump(pAIScripting0x0B_L064)                                   ;B3EC8A
 
 
-DATA8_B3EC8D:
+pAIScripting0x0B_Data06:
  
     %AICMD0x09_StartScript($01, pAIScripting0x0B_L065)                                   ;B3EC8D
     %AICMD0x09_StartScript($02, pAIScripting0x0B_L070)                                   ;B3EC91
@@ -307,7 +307,7 @@ pAIScripting0x0B_L074:
     %AICMD0x12_Jump(pAIScripting0x0B_L072)                                   ;B3ECDF
 
 
-DATA8_B3ECE2:
+pAIScripting0x0B_Data07:
  
     %AICMD0x09_StartScript($01, pAIScripting0x0B_L075)                                   ;B3ECE2
     %AICMD0x10_End()                                           ;B3ECE6
@@ -341,7 +341,7 @@ pAIScripting0x0B_L080:
     %AICMD0x10_End()                                           ;B3ED38
 
 
-DATA8_B3ED39:
+pAIScripting0x0B_Data08:
  
     %AICMD0x09_StartScript($01, pAIScripting0x0B_L081)                                   ;B3ED39
     %AICMD0x09_StartScript($02, pAIScripting0x0B_L086)                                   ;B3ED3D
@@ -429,7 +429,7 @@ pAIScripting0x0B_L106:
     %AICMD0x12_Jump(pAIScripting0x0B_L105)                                   ;B3EE17
 
 
-DATA8_B3EE1A:
+pAIScripting0x0B_Data09:
  
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B3EE1A
     %AICMD0x08_EnableAIControl()                               ;B3EE1C
@@ -525,7 +525,7 @@ AI_HouseExtensionCampain_L004:
     %AICMD0x12_Jump(AI_HouseExtensionCampain_L003)                                   ;B3EF07
 
 
-DATA8_B3EF0A:
+pAIScripting0x0B_Data10:
  
     %AICMD0x02_FreezeTime()                                    ;B3EF0A
     %AICMD0x05_SetTransferPosition(136, 296)                   ;B3EF0B
@@ -544,7 +544,7 @@ AI_HouseExtensionCampain_L005:
     %AICMD0x10_End()                                           ;B3EF2D
 
 
-DATA8_B3EF2E:
+pAIScripting0x0B_Data11:
     %AICMD0x09_StartScript($01, AI_HouseExtensionCampain_L006)                                   ;B3EF2E
     %AICMD0x10_End()                                           ;B3EF32
 AI_HouseExtensionCampain_L006:
