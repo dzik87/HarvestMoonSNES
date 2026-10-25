@@ -1,0 +1,19 @@
+{
+  "label": "Screen_Barn",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/Screen_Barn.bin",
+  "compression": "lzss",
+  "raw_size": 4096,
+  "legacy_label": "sCompressedTilemap_A5C4CD",
+  "format": "bg_name_table",
+  "entries": 2048,
+  "columns": 32,
+  "vram_word_dest": [
+    "$6000"
+  ],
+  "map_entries": 1,
+  "first_map": "sBarnMap",
+  "tile_sets": [
+    "Tiles_BarnCoop@$2000"
+  ]
+}

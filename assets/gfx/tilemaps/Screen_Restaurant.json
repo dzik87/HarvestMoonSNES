@@ -1,0 +1,19 @@
+{
+  "label": "Screen_Restaurant",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/Screen_Restaurant.bin",
+  "compression": "lzss",
+  "raw_size": 4096,
+  "legacy_label": "sCompressedTilemap_A4B3D1",
+  "format": "bg_name_table",
+  "entries": 2048,
+  "columns": 32,
+  "vram_word_dest": [
+    "$6000"
+  ],
+  "map_entries": 2,
+  "first_map": "sRestaurantMap",
+  "tile_sets": [
+    "Tiles_Restaurant@$3000"
+  ]
+}

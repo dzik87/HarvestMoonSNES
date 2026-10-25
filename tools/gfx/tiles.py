@@ -99,7 +99,7 @@ def selftest():
     n = 0
     for f in sorted((root / "src" / "data" / "gfx").glob("*/*.asm")):
         for label, blob in C.parse_asm_blobs(str(f), tail=64).items():
-            if not label.startswith("sCompressed"):
+            if not label.startswith(("Tiles_", "Screen_")):
                 continue
             out, _ = C.decompress(blob)
             for bpp in (2, 4):

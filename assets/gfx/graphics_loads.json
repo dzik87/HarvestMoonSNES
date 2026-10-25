@@ -1,0 +1,8607 @@
+{
+ "format": 1,
+ "generated_by": "tools/gfx/graphics_loads.py build",
+ "blobs": {
+  "Sprites_888000": {
+   "kind": "sprites",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "object frame components: sprite id >> 8 = bank - $88, uploaded by the OAM / object code",
+     "note": "OBJ character data"
+    }
+   ],
+   "status": "indexed"
+  },
+  "Sprites_898000": {
+   "kind": "sprites",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "object frame components: sprite id >> 8 = bank - $88, uploaded by the OAM / object code",
+     "note": "OBJ character data"
+    }
+   ],
+   "status": "indexed"
+  },
+  "Sprites_8A8000": {
+   "kind": "sprites",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "object frame components: sprite id >> 8 = bank - $88, uploaded by the OAM / object code",
+     "note": "OBJ character data"
+    }
+   ],
+   "status": "indexed"
+  },
+  "Sprites_8B8000": {
+   "kind": "sprites",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "object frame components: sprite id >> 8 = bank - $88, uploaded by the OAM / object code",
+     "note": "OBJ character data"
+    }
+   ],
+   "status": "indexed"
+  },
+  "Sprites_8C8000": {
+   "kind": "sprites",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "object frame components: sprite id >> 8 = bank - $88, uploaded by the OAM / object code",
+     "note": "OBJ character data"
+    }
+   ],
+   "status": "indexed"
+  },
+  "Sprites_8D8000": {
+   "kind": "sprites",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "object frame components: sprite id >> 8 = bank - $88, uploaded by the OAM / object code",
+     "note": "OBJ character data"
+    }
+   ],
+   "status": "indexed"
+  },
+  "Sprites_8E8000": {
+   "kind": "sprites",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "object frame components: sprite id >> 8 = bank - $88, uploaded by the OAM / object code",
+     "note": "OBJ character data"
+    }
+   ],
+   "status": "indexed"
+  },
+  "Sprites_8F8000": {
+   "kind": "sprites",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "object frame components: sprite id >> 8 = bank - $88, uploaded by the OAM / object code",
+     "note": "OBJ character data"
+    }
+   ],
+   "status": "indexed"
+  },
+  "Sprites_908000": {
+   "kind": "sprites",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "object frame components: sprite id >> 8 = bank - $88, uploaded by the OAM / object code",
+     "note": "OBJ character data"
+    }
+   ],
+   "status": "indexed"
+  },
+  "Sprites_918000": {
+   "kind": "sprites",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "object frame components: sprite id >> 8 = bank - $88, uploaded by the OAM / object code",
+     "note": "OBJ character data"
+    }
+   ],
+   "status": "indexed"
+  },
+  "Tiles_Overlay_Rain": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sRainOverlay",
+     "areas": [
+      87
+     ],
+     "vram_word": "$5000",
+     "as": "tiles",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Farm_Fall_0": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sFarmFallMap",
+     "areas": [
+      2
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x01"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Farm_Fall_1": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sFarmFallMap",
+     "areas": [
+      2
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x01"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Farm_Fall_2": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sFarmFallMap",
+     "areas": [
+      2
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x01"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Farm_SpringSummer_0": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sFarmSpringMap",
+     "areas": [
+      0
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x0B"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sFarmSummerMap",
+     "areas": [
+      1
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x06"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B28A",
+     "areas": [
+      61
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B2AD",
+     "areas": [
+      62
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B2D0",
+     "areas": [
+      63
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B2F3",
+     "areas": [
+      64
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B316",
+     "areas": [
+      65
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B35C",
+     "areas": [
+      67
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B37F",
+     "areas": [
+      68
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B3A2",
+     "areas": [
+      69
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B3C5",
+     "areas": [
+      70
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B3E8",
+     "areas": [
+      71
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B42E",
+     "areas": [
+      73
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B451",
+     "areas": [
+      74
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Farm_SpringSummer_1": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sFarmSpringMap",
+     "areas": [
+      0
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x0B"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sFarmSummerMap",
+     "areas": [
+      1
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x06"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B28A",
+     "areas": [
+      61
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B2AD",
+     "areas": [
+      62
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B2D0",
+     "areas": [
+      63
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B2F3",
+     "areas": [
+      64
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B316",
+     "areas": [
+      65
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B35C",
+     "areas": [
+      67
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B37F",
+     "areas": [
+      68
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B3A2",
+     "areas": [
+      69
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B3C5",
+     "areas": [
+      70
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B3E8",
+     "areas": [
+      71
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B42E",
+     "areas": [
+      73
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B451",
+     "areas": [
+      74
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Farm_SpringSummer_2": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sFarmSpringMap",
+     "areas": [
+      0
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x0B"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sFarmSummerMap",
+     "areas": [
+      1
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x06"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B28A",
+     "areas": [
+      61
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B2AD",
+     "areas": [
+      62
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B2D0",
+     "areas": [
+      63
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B2F3",
+     "areas": [
+      64
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B316",
+     "areas": [
+      65
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B35C",
+     "areas": [
+      67
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B37F",
+     "areas": [
+      68
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B3A2",
+     "areas": [
+      69
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B3C5",
+     "areas": [
+      70
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B3E8",
+     "areas": [
+      71
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B42E",
+     "areas": [
+      73
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B451",
+     "areas": [
+      74
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Farm_Winter_0": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sFarmWinterMap",
+     "areas": [
+      3
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x0E"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Farm_Winter_1": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sFarmWinterMap",
+     "areas": [
+      3
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x0E"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Farm_Winter_2": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sFarmWinterMap",
+     "areas": [
+      3
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x0E"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_MountainCave": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sElfTunnelMap",
+     "areas": [
+      42
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x12"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMountainCaveMap",
+     "areas": [
+      41
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x12"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "sFontGlyphs_0x00": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aLetterGlyphsPointers (src/code/bank_83/dialog.asm): glyph table n of the font, index = font page",
+     "note": "glyph data read by the text renderer"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sFontGlyphs_0x01": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aLetterGlyphsPointers (src/code/bank_83/dialog.asm): glyph table n of the font, index = font page",
+     "note": "glyph data read by the text renderer"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sFontGlyphs_0x02": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aLetterGlyphsPointers (src/code/bank_83/dialog.asm): glyph table n of the font, index = font page",
+     "note": "glyph data read by the text renderer"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sFontGlyphs_0x03": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aLetterGlyphsPointers (src/code/bank_83/dialog.asm): glyph table n of the font, index = font page",
+     "note": "glyph data read by the text renderer"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sFontGlyphs_0x04": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aLetterGlyphsPointers (src/code/bank_83/dialog.asm): glyph table n of the font, index = font page",
+     "note": "glyph data read by the text renderer"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sFontGlyphs_0x05": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aLetterGlyphsPointers (src/code/bank_83/dialog.asm): glyph table n of the font, index = font page",
+     "note": "glyph data read by the text renderer"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sFontGlyphs_0x06": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aLetterGlyphsPointers (src/code/bank_83/dialog.asm): glyph table n of the font, index = font page",
+     "note": "glyph data read by the text renderer"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sFontGlyphs_0x07": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aLetterGlyphsPointers (src/code/bank_83/dialog.asm): glyph table n of the font, index = font page",
+     "note": "glyph data read by the text renderer"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sFontGlyphs_0x08": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aLetterGlyphsPointers (src/code/bank_83/dialog.asm): glyph table n of the font, index = font page",
+     "note": "glyph data read by the text renderer"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sFontGlyphs_0x09": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aLetterGlyphsPointers (src/code/bank_83/dialog.asm): glyph table n of the font, index = font page",
+     "note": "glyph data read by the text renderer"
+    }
+   ],
+   "status": "indexed"
+  },
+  "Tiles_House_0": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sHouseMap",
+     "areas": [
+      21
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x13"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sHouseUpgrade1Map",
+     "areas": [
+      22
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x13"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sHouseUpgrade2Map",
+     "areas": [
+      23
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x13"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_House_1": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sHouseMap",
+     "areas": [
+      21
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x13"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sHouseUpgrade1Map",
+     "areas": [
+      22
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x13"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sHouseUpgrade2Map",
+     "areas": [
+      23
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x13"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_MayorHouse": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMayorHouseHallMap",
+     "areas": [
+      25
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x15"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMayorHouseMap",
+     "areas": [
+      24
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x15"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMayorHouseMariaRoomMap",
+     "areas": [
+      26
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x15"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Church": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sChurchMap",
+     "areas": [
+      27
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x16"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_FlowerShop": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sFlowerShopMap",
+     "areas": [
+      28
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x17"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sFlowerShopRoomMap",
+     "areas": [
+      29
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x17"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Bar": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sBarMap",
+     "areas": [
+      30
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sBarRoomMap",
+     "areas": [
+      31
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Restaurant": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sRestaurantMap",
+     "areas": [
+      32
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x19"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sRestaurantRoomMap",
+     "areas": [
+      33
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x19"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_GeneralStore": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sGeneralStoreMap",
+     "areas": [
+      34
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x1A"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sGeneralStoreRoomMap",
+     "areas": [
+      35
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x1A"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_AnimalShop": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sAnimalShopMap",
+     "areas": [
+      36
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x1B"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_FortuneTellerHouse": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sFortuneTellerHouseMap",
+     "areas": [
+      37
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x1C"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Overlay_Clouds": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sCloudsOverlay",
+     "areas": [
+      88
+     ],
+     "vram_word": "$5000",
+     "as": "tiles",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Town_SpringToFall_0": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sEggFestivalMap",
+     "areas": [
+      11
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x3F"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sFlowerFestivalMap",
+     "areas": [
+      8
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x3B"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sHarvestFestivalMap",
+     "areas": [
+      9
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x22"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B064",
+     "areas": [
+      45
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x3A"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B087",
+     "areas": [
+      46
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x1D"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B0AA",
+     "areas": [
+      47
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x21"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B339",
+     "areas": [
+      66
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sTownFallMap",
+     "areas": [
+      6
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x21"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sTownSpringMap",
+     "areas": [
+      4
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x3A"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sTownSummerMap",
+     "areas": [
+      5
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x1D"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Town_Summer_1": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B087",
+     "areas": [
+      46
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x1D"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B339",
+     "areas": [
+      66
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sTownSummerMap",
+     "areas": [
+      5
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x1D"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Town_Summer_2": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B087",
+     "areas": [
+      46
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x1D"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B339",
+     "areas": [
+      66
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sTownSummerMap",
+     "areas": [
+      5
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x1D"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Town_Fall_1": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sEggFestivalMap",
+     "areas": [
+      11
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x3F"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sHarvestFestivalMap",
+     "areas": [
+      9
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x22"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B0AA",
+     "areas": [
+      47
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x21"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sTownFallMap",
+     "areas": [
+      6
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x21"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Town_Fall_2": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B0AA",
+     "areas": [
+      47
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x21"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sTownFallMap",
+     "areas": [
+      6
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x21"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_HarvestFestival_2": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sHarvestFestivalMap",
+     "areas": [
+      9
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x22"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Road_SpringToFall": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B271",
+     "areas": [
+      60
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sRoadFallMap",
+     "areas": [
+      14
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x2C"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sRoadSpringMap",
+     "areas": [
+      12
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x27"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sRoadSummerMap",
+     "areas": [
+      13
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x36"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Road_Winter": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sRoadWinterMap",
+     "areas": [
+      15
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x31"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Town_Spring_1": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sFlowerFestivalMap",
+     "areas": [
+      8
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x3B"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B064",
+     "areas": [
+      45
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x3A"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sTownSpringMap",
+     "areas": [
+      4
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x3A"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Town_Spring_2": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B064",
+     "areas": [
+      45
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x3A"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sTownSpringMap",
+     "areas": [
+      4
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x3A"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_FlowerFestival_2": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sFlowerFestivalMap",
+     "areas": [
+      8
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x3B"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_EggFestival_2": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sEggFestivalMap",
+     "areas": [
+      11
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x3F"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Town_Winter_0": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B0CD",
+     "areas": [
+      48
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x40"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sStarNightFestivalSquareMap",
+     "areas": [
+      10
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sTownWinterMap",
+     "areas": [
+      7
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x40"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Town_Winter_1": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B0CD",
+     "areas": [
+      48
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x40"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sStarNightFestivalSquareMap",
+     "areas": [
+      10
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sTownWinterMap",
+     "areas": [
+      7
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x40"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Town_Winter_2": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B0CD",
+     "areas": [
+      48
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x40"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sTownWinterMap",
+     "areas": [
+      7
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x40"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_StarNightFestivalSquare_2": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sStarNightFestivalSquareMap",
+     "areas": [
+      10
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Menu_0": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMenuCharacters",
+     "areas": [
+      95
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x46"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMenuScreenBackgrounds",
+     "areas": [
+      94
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x46"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Menu_1": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMenuCharacters",
+     "areas": [
+      95
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x46"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMenuScreenBackgrounds",
+     "areas": [
+      94
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x46"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Menu_2": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMenuCharacters",
+     "areas": [
+      95
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x46"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMenuScreenBackgrounds",
+     "areas": [
+      94
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x46"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Menu_3": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMenuCharacters",
+     "areas": [
+      95
+     ],
+     "vram_word": "$5000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x46"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMenuScreenBackgrounds",
+     "areas": [
+      94
+     ],
+     "vram_word": "$5000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x46"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_ToolShed_0": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sToolShedMap",
+     "areas": [
+      38
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x47"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_ToolShed_1": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sToolShedMap",
+     "areas": [
+      38
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x47"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Overlay_HeavySnow": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sHeavySnowOverlay",
+     "areas": [
+      90
+     ],
+     "vram_word": "$5000",
+     "as": "tiles",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_GoldChicken": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B04B",
+     "areas": [
+      44
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x48"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_WorksmanHouse": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B032",
+     "areas": [
+      43
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x49"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Summit_SpringToFall_0": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B17C",
+     "areas": [
+      53
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x53"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B19F",
+     "areas": [
+      54
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x4E"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B1C2",
+     "areas": [
+      55
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x4A"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B24E",
+     "areas": [
+      59
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x53"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sNewYearsFestivalMap",
+     "areas": [
+      58
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x52"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sSummitFallMap",
+     "areas": [
+      51
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x4A"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sSummitSpringMap",
+     "areas": [
+      49
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x53"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sSummitSummerMap",
+     "areas": [
+      50
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x4E"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Summit_Winter_0": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B1E5",
+     "areas": [
+      56
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x57"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sStarNightFestivalMountainTopMap",
+     "areas": [
+      57
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sSummitWinterMap",
+     "areas": [
+      52
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x57"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Summit_SpringToFall_1": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B17C",
+     "areas": [
+      53
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x53"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B19F",
+     "areas": [
+      54
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x4E"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B1C2",
+     "areas": [
+      55
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x4A"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B24E",
+     "areas": [
+      59
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x53"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sNewYearsFestivalMap",
+     "areas": [
+      58
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x52"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sSummitFallMap",
+     "areas": [
+      51
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x4A"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sSummitSpringMap",
+     "areas": [
+      49
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x53"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sSummitSummerMap",
+     "areas": [
+      50
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x4E"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Summit_Winter_1": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B1E5",
+     "areas": [
+      56
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x57"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sStarNightFestivalMountainTopMap",
+     "areas": [
+      57
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sSummitWinterMap",
+     "areas": [
+      52
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x57"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_BarnCoop": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sBarnMap",
+     "areas": [
+      39
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x5B"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sCoopMap",
+     "areas": [
+      40
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x5B"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "sFontGlyphs_Dialog": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "code",
+     "function": "fDialog_LoadDialogBoxGraphics / fDialog_ReloadFontTiles",
+     "file": "src/code/bank_83/dialog.asm",
+     "vram": "$5000 ($800 / $600 words)",
+     "note": "raw 4bpp font tiles of the dialog window (BG3 char base)"
+    }
+   ],
+   "status": "code"
+  },
+  "Tiles_Mountain_Summer_0": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B40B",
+     "areas": [
+      72
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMountainSummerMap",
+     "areas": [
+      17
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x5C"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Mountain_Summer_1": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B40B",
+     "areas": [
+      72
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMountainSummerMap",
+     "areas": [
+      17
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x5C"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Mountain_SpringSummer_2": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B40B",
+     "areas": [
+      72
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMountainSpring",
+     "areas": [
+      16
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x64"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMountainSummerMap",
+     "areas": [
+      17
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x5C"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Mountain_Fall_0": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMountainFallMap",
+     "areas": [
+      18
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x60"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Mountain_Fall_1": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMountainFallMap",
+     "areas": [
+      18
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x60"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Mountain_Fall_2": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMountainFallMap",
+     "areas": [
+      18
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x60"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Mountain_Spring_0": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMountainSpring",
+     "areas": [
+      16
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x64"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Mountain_Spring_1": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMountainSpring",
+     "areas": [
+      16
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x64"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Overlay_Snow": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sSnowOverlay",
+     "areas": [
+      89
+     ],
+     "vram_word": "$5000",
+     "as": "tiles",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Mountain_Winter_0": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMountainWinterMap",
+     "areas": [
+      19
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x68"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sStarNightFestivalSpaMap",
+     "areas": [
+      20
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Mountain_Winter_1": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMountainWinterMap",
+     "areas": [
+      19
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x68"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sStarNightFestivalSpaMap",
+     "areas": [
+      20
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Mountain_Winter_2": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMountainWinterMap",
+     "areas": [
+      19
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x68"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sStarNightFestivalSpaMap",
+     "areas": [
+      20
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Credits_0": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B474",
+     "areas": [
+      75
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B49C",
+     "areas": [
+      76
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B4C4",
+     "areas": [
+      77
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B4EC",
+     "areas": [
+      78
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B514",
+     "areas": [
+      79
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B537",
+     "areas": [
+      80
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B55F",
+     "areas": [
+      81
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B587",
+     "areas": [
+      82
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B5AF",
+     "areas": [
+      83
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B5D2",
+     "areas": [
+      84
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B5F5",
+     "areas": [
+      85
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B618",
+     "areas": [
+      86
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_IntroFarmScroll_0": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sIntroFarmScrool",
+     "areas": [
+      91
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x6C"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_IntroFarmScroll_1": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sIntroFarmScrool",
+     "areas": [
+      91
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x6C"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_IntroFarmScroll_2": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sIntroFarmScrool",
+     "areas": [
+      91
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x6C"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_IntroFarmScroll_3": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sIntroFarmScrool",
+     "areas": [
+      91
+     ],
+     "vram_word": "$5000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x6C"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Unused_TitleLogoJapanese": {
+   "kind": "tiles",
+   "loaders": [],
+   "unused": "no map entry and no code references it (Japanese title logo graphics left in the US ROM)",
+   "status": "unused"
+  },
+  "Tiles_NatsumeLogo": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sNatsumeLogo",
+     "areas": [
+      93
+     ],
+     "vram_word": "$2000",
+     "as": "tiles",
+     "palette": [
+      "sPalette_0x6D"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Credits_1": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B474",
+     "areas": [
+      75
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B49C",
+     "areas": [
+      76
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B4C4",
+     "areas": [
+      77
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B4EC",
+     "areas": [
+      78
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B514",
+     "areas": [
+      79
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B537",
+     "areas": [
+      80
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B55F",
+     "areas": [
+      81
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B587",
+     "areas": [
+      82
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B5AF",
+     "areas": [
+      83
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B5D2",
+     "areas": [
+      84
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B5F5",
+     "areas": [
+      85
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B618",
+     "areas": [
+      86
+     ],
+     "vram_word": "$3000",
+     "as": "tiles",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Credits_2": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B474",
+     "areas": [
+      75
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B49C",
+     "areas": [
+      76
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B4C4",
+     "areas": [
+      77
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B4EC",
+     "areas": [
+      78
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B514",
+     "areas": [
+      79
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B537",
+     "areas": [
+      80
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B55F",
+     "areas": [
+      81
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B587",
+     "areas": [
+      82
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B5AF",
+     "areas": [
+      83
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B5D2",
+     "areas": [
+      84
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B5F5",
+     "areas": [
+      85
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B618",
+     "areas": [
+      86
+     ],
+     "vram_word": "$4000",
+     "as": "tiles",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Credits_3": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B474",
+     "areas": [
+      75
+     ],
+     "vram_word": "$5000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B49C",
+     "areas": [
+      76
+     ],
+     "vram_word": "$5000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B4C4",
+     "areas": [
+      77
+     ],
+     "vram_word": "$5000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B4EC",
+     "areas": [
+      78
+     ],
+     "vram_word": "$5000",
+     "as": "tiles",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B587",
+     "areas": [
+      82
+     ],
+     "vram_word": "$5000",
+     "as": "tiles",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Unk51_3": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B55F",
+     "areas": [
+      81
+     ],
+     "vram_word": "$5000",
+     "as": "tiles",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_Unk56_3": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B618",
+     "areas": [
+      86
+     ],
+     "vram_word": "$5000",
+     "as": "tiles",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Tiles_DriveToTown_3": {
+   "kind": "tiles",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B537",
+     "areas": [
+      80
+     ],
+     "vram_word": "$5000",
+     "as": "tiles",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "ScreenRaw_Farm": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sFarmFallMap",
+     "areas": [
+      2
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x01"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sFarmSpringMap",
+     "areas": [
+      0
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x0B"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sFarmSummerMap",
+     "areas": [
+      1
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x06"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sFarmWinterMap",
+     "areas": [
+      3
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x0E"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "ScreenRaw_Mountain": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMountainFallMap",
+     "areas": [
+      18
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x60"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMountainSpring",
+     "areas": [
+      16
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x64"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMountainSummerMap",
+     "areas": [
+      17
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x5C"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMountainWinterMap",
+     "areas": [
+      19
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x68"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "ScreenRaw_Town": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B064",
+     "areas": [
+      45
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x3A"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B087",
+     "areas": [
+      46
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x1D"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B0AA",
+     "areas": [
+      47
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x21"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B0CD",
+     "areas": [
+      48
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x40"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sTownFallMap",
+     "areas": [
+      6
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x21"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sTownSpringMap",
+     "areas": [
+      4
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x3A"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sTownSummerMap",
+     "areas": [
+      5
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x1D"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sTownWinterMap",
+     "areas": [
+      7
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x40"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_Overlay_Rain": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sRainOverlay",
+     "areas": [
+      87
+     ],
+     "vram_word": "$7000",
+     "as": "name_table",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_ElfTunnel": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sElfTunnelMap",
+     "areas": [
+      42
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x12"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_MountainCave": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMountainCaveMap",
+     "areas": [
+      41
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x12"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_House_Upgrade1": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sHouseUpgrade1Map",
+     "areas": [
+      22
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x13"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_House_Upgrade2": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sHouseUpgrade2Map",
+     "areas": [
+      23
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x13"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_House": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sHouseMap",
+     "areas": [
+      21
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x13"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_MayorHouse": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMayorHouseHallMap",
+     "areas": [
+      25
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x15"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMayorHouseMap",
+     "areas": [
+      24
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x15"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMayorHouseMariaRoomMap",
+     "areas": [
+      26
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x15"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_Church": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sChurchMap",
+     "areas": [
+      27
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x16"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_FlowerShop": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sFlowerShopMap",
+     "areas": [
+      28
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x17"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sFlowerShopRoomMap",
+     "areas": [
+      29
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x17"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_Bar": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sBarMap",
+     "areas": [
+      30
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sBarRoomMap",
+     "areas": [
+      31
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_Restaurant": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sRestaurantMap",
+     "areas": [
+      32
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x19"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sRestaurantRoomMap",
+     "areas": [
+      33
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x19"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_GeneralStore": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sGeneralStoreMap",
+     "areas": [
+      34
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x1A"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sGeneralStoreRoomMap",
+     "areas": [
+      35
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x1A"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_AnimalShop": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sAnimalShopMap",
+     "areas": [
+      36
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x1B"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_FortuneTellerHouse": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sFortuneTellerHouseMap",
+     "areas": [
+      37
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x1C"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_Overlay_Clouds": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sCloudsOverlay",
+     "areas": [
+      88
+     ],
+     "vram_word": "$7000",
+     "as": "name_table",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_HarvestFestival": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sHarvestFestivalMap",
+     "areas": [
+      9
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x22"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_Road": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sRoadFallMap",
+     "areas": [
+      14
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x2C"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sRoadSpringMap",
+     "areas": [
+      12
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x27"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sRoadSummerMap",
+     "areas": [
+      13
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x36"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sRoadWinterMap",
+     "areas": [
+      15
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x31"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_FlowerFestival": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sFlowerFestivalMap",
+     "areas": [
+      8
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x3B"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_EggFestival": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sEggFestivalMap",
+     "areas": [
+      11
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x3F"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_Menu_Backgrounds": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMenuScreenBackgrounds",
+     "areas": [
+      94
+     ],
+     "vram_word": "$1000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x46"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_StarNightFestivalSquare": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sStarNightFestivalSquareMap",
+     "areas": [
+      10
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_ToolShed": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sToolShedMap",
+     "areas": [
+      38
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x47"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_Menu_Characters": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMenuCharacters",
+     "areas": [
+      95
+     ],
+     "vram_word": "$1000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x46"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_Menu_BackgroundPattern": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMenuCharacters",
+     "areas": [
+      95
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x46"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMenuScreenBackgrounds",
+     "areas": [
+      94
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x46"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_ToolShed_Layer2": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sToolShedMap",
+     "areas": [
+      38
+     ],
+     "vram_word": "$7000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x47"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_StarNightFestivalSpa": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sStarNightFestivalSpaMap",
+     "areas": [
+      20
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_Overlay_HeavySnow": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sHeavySnowOverlay",
+     "areas": [
+      90
+     ],
+     "vram_word": "$7000",
+     "as": "name_table",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_GoldChicken": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B04B",
+     "areas": [
+      44
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x48"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_Summit_Layer2": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B24E",
+     "areas": [
+      59
+     ],
+     "vram_word": "$7000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x53"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sNewYearsFestivalMap",
+     "areas": [
+      58
+     ],
+     "vram_word": "$7000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x52"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sSummitFallMap",
+     "areas": [
+      51
+     ],
+     "vram_word": "$7000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x4A"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sSummitSpringMap",
+     "areas": [
+      49
+     ],
+     "vram_word": "$7000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x53"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sSummitSummerMap",
+     "areas": [
+      50
+     ],
+     "vram_word": "$7000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x4E"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sSummitWinterMap",
+     "areas": [
+      52
+     ],
+     "vram_word": "$7000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x57"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_MountainTop2_Layer2": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B17C",
+     "areas": [
+      53
+     ],
+     "vram_word": "$7000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x53"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B19F",
+     "areas": [
+      54
+     ],
+     "vram_word": "$7000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x4E"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B1C2",
+     "areas": [
+      55
+     ],
+     "vram_word": "$7000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x4A"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B1E5",
+     "areas": [
+      56
+     ],
+     "vram_word": "$7000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x57"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_StarNightFestivalMountainTop_Layer2": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sStarNightFestivalMountainTopMap",
+     "areas": [
+      57
+     ],
+     "vram_word": "$7000",
+     "as": "name_table",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_WorksmanHouse": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B032",
+     "areas": [
+      43
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x49"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_Summit": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B17C",
+     "areas": [
+      53
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x53"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B19F",
+     "areas": [
+      54
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x4E"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B1C2",
+     "areas": [
+      55
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x4A"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B1E5",
+     "areas": [
+      56
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x57"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sNewYearsFestivalMap",
+     "areas": [
+      58
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x52"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sStarNightFestivalMountainTopMap",
+     "areas": [
+      57
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sSummitFallMap",
+     "areas": [
+      51
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x4A"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sSummitSpringMap",
+     "areas": [
+      49
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x53"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sSummitSummerMap",
+     "areas": [
+      50
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x4E"
+     ]
+    },
+    {
+     "via": "map table",
+     "map": "sSummitWinterMap",
+     "areas": [
+      52
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x57"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_MountainTopBean": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B24E",
+     "areas": [
+      59
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x53"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_Coop": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sCoopMap",
+     "areas": [
+      40
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x5B"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_Barn": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sBarnMap",
+     "areas": [
+      39
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x5B"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_Overlay_Snow": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sSnowOverlay",
+     "areas": [
+      89
+     ],
+     "vram_word": "$7000",
+     "as": "name_table",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_DialogBox": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "code",
+     "function": "fDialog_LoadDialogBoxGraphics",
+     "file": "src/code/bank_83/dialog.asm",
+     "vram": "$7800 (BG3 name table words, $400 words)",
+     "note": "decompressed to $7E2000, region specific blob"
+    }
+   ],
+   "status": "code"
+  },
+  "Screen_IntroFarmScroll_BG1": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sIntroFarmScrool",
+     "areas": [
+      91
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x6C"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_IntroFarmScroll_BG2": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sIntroFarmScrool",
+     "areas": [
+      91
+     ],
+     "vram_word": "$7000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x6C"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_Title_HarvestMoonLogo": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sHarvestMoonLogo",
+     "areas": [
+      92
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x6C"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_Title_NatsumeLogo": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sNatsumeLogo",
+     "areas": [
+      93
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": [
+      "sPalette_0x6D"
+     ]
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_Ending00": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B28A",
+     "areas": [
+      61
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_Ending01": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B2AD",
+     "areas": [
+      62
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_Ending02": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B2D0",
+     "areas": [
+      63
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_Ending03": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B2F3",
+     "areas": [
+      64
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_Ending12": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B42E",
+     "areas": [
+      73
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_Ending13": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B451",
+     "areas": [
+      74
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_Ending04": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B316",
+     "areas": [
+      65
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_Ending05": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B339",
+     "areas": [
+      66
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_Ending06": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B35C",
+     "areas": [
+      67
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_Ending07": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B37F",
+     "areas": [
+      68
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_Ending08": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B3A2",
+     "areas": [
+      69
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_Ending09": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B3C5",
+     "areas": [
+      70
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_Ending10": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B3E8",
+     "areas": [
+      71
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_Ending11": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B40B",
+     "areas": [
+      72
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_Intro": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B271",
+     "areas": [
+      60
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_Credits_0to3": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B474",
+     "areas": [
+      75
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B49C",
+     "areas": [
+      76
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B4C4",
+     "areas": [
+      77
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B4EC",
+     "areas": [
+      78
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_Credits4_DriveToTown": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B514",
+     "areas": [
+      79
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B537",
+     "areas": [
+      80
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B55F",
+     "areas": [
+      81
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B587",
+     "areas": [
+      82
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "Screen_Unk53to56": {
+   "kind": "characters",
+   "loaders": [
+    {
+     "via": "map table",
+     "map": "sMap_80B5AF",
+     "areas": [
+      83
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B5D2",
+     "areas": [
+      84
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B5F5",
+     "areas": [
+      85
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": []
+    },
+    {
+     "via": "map table",
+     "map": "sMap_80B618",
+     "areas": [
+      86
+     ],
+     "vram_word": "$6000",
+     "as": "name_table",
+     "palette": []
+    }
+   ],
+   "status": "map table"
+  },
+  "ScreenRaw_Unk_A6A096": {
+   "kind": "characters",
+   "loaders": [],
+   "unused": "raw 64x32 name table; no label or literal address in the code; found hidden under bank padding",
+   "status": "unused"
+  },
+  "sPalette_0x00": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x01": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x02": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x03": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x04": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x05": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x06": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x07": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x08": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x09": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x0A": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x0B": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x0C": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x0D": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x0E": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x0F": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x10": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x11": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x12": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x13": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x14": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x15": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x16": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x17": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x18": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x19": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x1A": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x1B": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x1C": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x1D": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x1E": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x1F": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x20": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x21": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x22": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x23": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x24": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x25": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x26": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x27": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x28": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x29": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x2A": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x2B": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x2C": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x2D": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x2E": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x2F": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x30": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x31": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x32": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x33": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x34": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x35": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x36": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x37": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x38": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x39": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x3A": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x3B": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x3C": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x3D": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x3E": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x3F": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x40": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x41": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x42": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x43": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x44": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x45": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x46": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x47": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x48": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x49": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x4A": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x4B": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x4C": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x4D": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x4E": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x4F": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x50": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x51": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x52": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x53": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x54": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x55": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x56": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x57": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x58": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x59": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x5A": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x5B": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x5C": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x5D": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x5E": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x5F": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x60": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x61": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x62": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x63": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x64": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x65": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x66": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x67": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x68": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x69": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x6A": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x6B": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x6C": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x6D": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x6E": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x6F": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x70": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x71": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x72": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x73": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  },
+  "sPalette_0x74": {
+   "kind": "palettes",
+   "loaders": [
+    {
+     "via": "index",
+     "how": "aPalettes (src/code/bank_80/data_tables.asm): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls",
+     "note": "CGRAM"
+    }
+   ],
+   "status": "indexed"
+  }
+ },
+ "maps": {
+  "sAnimalShopMap": {
+   "areas": [
+    36
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_AnimalShop",
+     "vram_word": "$3000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_AnimalShop",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x1B"
+   ]
+  },
+  "sBarMap": {
+   "areas": [
+    30
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Bar",
+     "vram_word": "$3000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Bar",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": []
+  },
+  "sBarRoomMap": {
+   "areas": [
+    31
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Bar",
+     "vram_word": "$3000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Bar",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": []
+  },
+  "sBarnMap": {
+   "areas": [
+    39
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_BarnCoop",
+     "vram_word": "$2000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Barn",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x5B"
+   ]
+  },
+  "sChurchMap": {
+   "areas": [
+    27
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Church",
+     "vram_word": "$2000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Church",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x16"
+   ]
+  },
+  "sCloudsOverlay": {
+   "areas": [
+    88
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Overlay_Clouds",
+     "vram_word": "$5000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Overlay_Clouds",
+     "vram_word": "$7000",
+     "chr_base": null
+    }
+   ],
+   "palette": []
+  },
+  "sCoopMap": {
+   "areas": [
+    40
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_BarnCoop",
+     "vram_word": "$2000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Coop",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x5B"
+   ]
+  },
+  "sEggFestivalMap": {
+   "areas": [
+    11
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Town_SpringToFall_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Town_Fall_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_EggFestival_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_EggFestival",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x3F"
+   ]
+  },
+  "sElfTunnelMap": {
+   "areas": [
+    42
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_MountainCave",
+     "vram_word": "$2000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_ElfTunnel",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x12"
+   ]
+  },
+  "sFarmFallMap": {
+   "areas": [
+    2
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Farm_Fall_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Farm_Fall_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Farm_Fall_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "ScreenRaw_Farm",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x01"
+   ]
+  },
+  "sFarmSpringMap": {
+   "areas": [
+    0
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Farm_SpringSummer_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Farm_SpringSummer_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Farm_SpringSummer_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "ScreenRaw_Farm",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x0B"
+   ]
+  },
+  "sFarmSummerMap": {
+   "areas": [
+    1
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Farm_SpringSummer_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Farm_SpringSummer_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Farm_SpringSummer_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "ScreenRaw_Farm",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x06"
+   ]
+  },
+  "sFarmWinterMap": {
+   "areas": [
+    3
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Farm_Winter_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Farm_Winter_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Farm_Winter_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "ScreenRaw_Farm",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x0E"
+   ]
+  },
+  "sFlowerFestivalMap": {
+   "areas": [
+    8
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Town_SpringToFall_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Town_Spring_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_FlowerFestival_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_FlowerFestival",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x3B"
+   ]
+  },
+  "sFlowerShopMap": {
+   "areas": [
+    28
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_FlowerShop",
+     "vram_word": "$3000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_FlowerShop",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x17"
+   ]
+  },
+  "sFlowerShopRoomMap": {
+   "areas": [
+    29
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_FlowerShop",
+     "vram_word": "$3000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_FlowerShop",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x17"
+   ]
+  },
+  "sFortuneTellerHouseMap": {
+   "areas": [
+    37
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_FortuneTellerHouse",
+     "vram_word": "$3000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_FortuneTellerHouse",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x1C"
+   ]
+  },
+  "sGeneralStoreMap": {
+   "areas": [
+    34
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_GeneralStore",
+     "vram_word": "$3000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_GeneralStore",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x1A"
+   ]
+  },
+  "sGeneralStoreRoomMap": {
+   "areas": [
+    35
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_GeneralStore",
+     "vram_word": "$3000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_GeneralStore",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x1A"
+   ]
+  },
+  "sHarvestFestivalMap": {
+   "areas": [
+    9
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Town_SpringToFall_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Town_Fall_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_HarvestFestival_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_HarvestFestival",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x22"
+   ]
+  },
+  "sHarvestMoonLogo": {
+   "areas": [
+    92
+   ],
+   "tiles": [],
+   "name_tables": [
+    {
+     "blob": "Screen_Title_HarvestMoonLogo",
+     "vram_word": "$6000",
+     "chr_base": null
+    }
+   ],
+   "palette": [
+    "sPalette_0x6C"
+   ]
+  },
+  "sHeavySnowOverlay": {
+   "areas": [
+    90
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Overlay_HeavySnow",
+     "vram_word": "$5000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Overlay_HeavySnow",
+     "vram_word": "$7000",
+     "chr_base": null
+    }
+   ],
+   "palette": []
+  },
+  "sHouseMap": {
+   "areas": [
+    21
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_House_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_House_1",
+     "vram_word": "$3000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_House",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x13"
+   ]
+  },
+  "sHouseUpgrade1Map": {
+   "areas": [
+    22
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_House_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_House_1",
+     "vram_word": "$3000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_House_Upgrade1",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x13"
+   ]
+  },
+  "sHouseUpgrade2Map": {
+   "areas": [
+    23
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_House_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_House_1",
+     "vram_word": "$3000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_House_Upgrade2",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x13"
+   ]
+  },
+  "sIntroFarmScrool": {
+   "areas": [
+    91
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_IntroFarmScroll_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_IntroFarmScroll_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_IntroFarmScroll_2",
+     "vram_word": "$4000"
+    },
+    {
+     "blob": "Tiles_IntroFarmScroll_3",
+     "vram_word": "$5000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_IntroFarmScroll_BG1",
+     "vram_word": "$6000",
+     "chr_base": null
+    },
+    {
+     "blob": "Screen_IntroFarmScroll_BG2",
+     "vram_word": "$7000",
+     "chr_base": null
+    }
+   ],
+   "palette": [
+    "sPalette_0x6C"
+   ]
+  },
+  "sMap_80B032": {
+   "areas": [
+    43
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_WorksmanHouse",
+     "vram_word": "$2000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_WorksmanHouse",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x49"
+   ]
+  },
+  "sMap_80B04B": {
+   "areas": [
+    44
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_GoldChicken",
+     "vram_word": "$2000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_GoldChicken",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x48"
+   ]
+  },
+  "sMap_80B064": {
+   "areas": [
+    45
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Town_SpringToFall_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Town_Spring_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Town_Spring_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "ScreenRaw_Town",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x3A"
+   ]
+  },
+  "sMap_80B087": {
+   "areas": [
+    46
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Town_SpringToFall_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Town_Summer_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Town_Summer_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "ScreenRaw_Town",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x1D"
+   ]
+  },
+  "sMap_80B0AA": {
+   "areas": [
+    47
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Town_SpringToFall_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Town_Fall_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Town_Fall_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "ScreenRaw_Town",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x21"
+   ]
+  },
+  "sMap_80B0CD": {
+   "areas": [
+    48
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Town_Winter_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Town_Winter_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Town_Winter_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "ScreenRaw_Town",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x40"
+   ]
+  },
+  "sMap_80B17C": {
+   "areas": [
+    53
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Summit_SpringToFall_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Summit_SpringToFall_1",
+     "vram_word": "$3000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Summit",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    },
+    {
+     "blob": "Screen_MountainTop2_Layer2",
+     "vram_word": "$7000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x53"
+   ]
+  },
+  "sMap_80B19F": {
+   "areas": [
+    54
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Summit_SpringToFall_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Summit_SpringToFall_1",
+     "vram_word": "$3000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Summit",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    },
+    {
+     "blob": "Screen_MountainTop2_Layer2",
+     "vram_word": "$7000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x4E"
+   ]
+  },
+  "sMap_80B1C2": {
+   "areas": [
+    55
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Summit_SpringToFall_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Summit_SpringToFall_1",
+     "vram_word": "$3000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Summit",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    },
+    {
+     "blob": "Screen_MountainTop2_Layer2",
+     "vram_word": "$7000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x4A"
+   ]
+  },
+  "sMap_80B1E5": {
+   "areas": [
+    56
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Summit_Winter_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Summit_Winter_1",
+     "vram_word": "$3000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Summit",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    },
+    {
+     "blob": "Screen_MountainTop2_Layer2",
+     "vram_word": "$7000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x57"
+   ]
+  },
+  "sMap_80B24E": {
+   "areas": [
+    59
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Summit_SpringToFall_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Summit_SpringToFall_1",
+     "vram_word": "$3000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Summit_Layer2",
+     "vram_word": "$7000",
+     "chr_base": "$2000"
+    },
+    {
+     "blob": "Screen_MountainTopBean",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x53"
+   ]
+  },
+  "sMap_80B271": {
+   "areas": [
+    60
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Road_SpringToFall",
+     "vram_word": "$2000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Intro",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": []
+  },
+  "sMap_80B28A": {
+   "areas": [
+    61
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Farm_SpringSummer_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Farm_SpringSummer_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Farm_SpringSummer_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Ending00",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": []
+  },
+  "sMap_80B2AD": {
+   "areas": [
+    62
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Farm_SpringSummer_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Farm_SpringSummer_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Farm_SpringSummer_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Ending01",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": []
+  },
+  "sMap_80B2D0": {
+   "areas": [
+    63
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Farm_SpringSummer_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Farm_SpringSummer_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Farm_SpringSummer_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Ending02",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": []
+  },
+  "sMap_80B2F3": {
+   "areas": [
+    64
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Farm_SpringSummer_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Farm_SpringSummer_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Farm_SpringSummer_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Ending03",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": []
+  },
+  "sMap_80B316": {
+   "areas": [
+    65
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Farm_SpringSummer_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Farm_SpringSummer_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Farm_SpringSummer_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Ending04",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": []
+  },
+  "sMap_80B339": {
+   "areas": [
+    66
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Town_SpringToFall_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Town_Summer_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Town_Summer_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Ending05",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": []
+  },
+  "sMap_80B35C": {
+   "areas": [
+    67
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Farm_SpringSummer_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Farm_SpringSummer_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Farm_SpringSummer_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Ending06",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": []
+  },
+  "sMap_80B37F": {
+   "areas": [
+    68
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Farm_SpringSummer_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Farm_SpringSummer_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Farm_SpringSummer_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Ending07",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": []
+  },
+  "sMap_80B3A2": {
+   "areas": [
+    69
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Farm_SpringSummer_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Farm_SpringSummer_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Farm_SpringSummer_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Ending08",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": []
+  },
+  "sMap_80B3C5": {
+   "areas": [
+    70
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Farm_SpringSummer_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Farm_SpringSummer_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Farm_SpringSummer_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Ending09",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": []
+  },
+  "sMap_80B3E8": {
+   "areas": [
+    71
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Farm_SpringSummer_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Farm_SpringSummer_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Farm_SpringSummer_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Ending10",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": []
+  },
+  "sMap_80B40B": {
+   "areas": [
+    72
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Mountain_SpringSummer_2",
+     "vram_word": "$4000"
+    },
+    {
+     "blob": "Tiles_Mountain_Summer_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Mountain_Summer_1",
+     "vram_word": "$3000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Ending11",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": []
+  },
+  "sMap_80B42E": {
+   "areas": [
+    73
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Farm_SpringSummer_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Farm_SpringSummer_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Farm_SpringSummer_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Ending12",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": []
+  },
+  "sMap_80B451": {
+   "areas": [
+    74
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Farm_SpringSummer_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Farm_SpringSummer_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Farm_SpringSummer_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Ending13",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": []
+  },
+  "sMap_80B474": {
+   "areas": [
+    75
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Credits_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Credits_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Credits_2",
+     "vram_word": "$4000"
+    },
+    {
+     "blob": "Tiles_Credits_3",
+     "vram_word": "$5000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Credits_0to3",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": []
+  },
+  "sMap_80B49C": {
+   "areas": [
+    76
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Credits_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Credits_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Credits_2",
+     "vram_word": "$4000"
+    },
+    {
+     "blob": "Tiles_Credits_3",
+     "vram_word": "$5000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Credits_0to3",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": []
+  },
+  "sMap_80B4C4": {
+   "areas": [
+    77
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Credits_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Credits_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Credits_2",
+     "vram_word": "$4000"
+    },
+    {
+     "blob": "Tiles_Credits_3",
+     "vram_word": "$5000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Credits_0to3",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": []
+  },
+  "sMap_80B4EC": {
+   "areas": [
+    78
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Credits_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Credits_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Credits_2",
+     "vram_word": "$4000"
+    },
+    {
+     "blob": "Tiles_Credits_3",
+     "vram_word": "$5000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Credits_0to3",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": []
+  },
+  "sMap_80B514": {
+   "areas": [
+    79
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Credits_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Credits_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Credits_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Credits4_DriveToTown",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": []
+  },
+  "sMap_80B537": {
+   "areas": [
+    80
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Credits_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Credits_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Credits_2",
+     "vram_word": "$4000"
+    },
+    {
+     "blob": "Tiles_DriveToTown_3",
+     "vram_word": "$5000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Credits4_DriveToTown",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": []
+  },
+  "sMap_80B55F": {
+   "areas": [
+    81
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Credits_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Credits_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Credits_2",
+     "vram_word": "$4000"
+    },
+    {
+     "blob": "Tiles_Unk51_3",
+     "vram_word": "$5000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Credits4_DriveToTown",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": []
+  },
+  "sMap_80B587": {
+   "areas": [
+    82
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Credits_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Credits_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Credits_2",
+     "vram_word": "$4000"
+    },
+    {
+     "blob": "Tiles_Credits_3",
+     "vram_word": "$5000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Credits4_DriveToTown",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": []
+  },
+  "sMap_80B5AF": {
+   "areas": [
+    83
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Credits_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Credits_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Credits_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Unk53to56",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": []
+  },
+  "sMap_80B5D2": {
+   "areas": [
+    84
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Credits_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Credits_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Credits_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Unk53to56",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": []
+  },
+  "sMap_80B5F5": {
+   "areas": [
+    85
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Credits_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Credits_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Credits_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Unk53to56",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": []
+  },
+  "sMap_80B618": {
+   "areas": [
+    86
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Credits_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Credits_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Credits_2",
+     "vram_word": "$4000"
+    },
+    {
+     "blob": "Tiles_Unk56_3",
+     "vram_word": "$5000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Unk53to56",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": []
+  },
+  "sMayorHouseHallMap": {
+   "areas": [
+    25
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_MayorHouse",
+     "vram_word": "$2000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_MayorHouse",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x15"
+   ]
+  },
+  "sMayorHouseMap": {
+   "areas": [
+    24
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_MayorHouse",
+     "vram_word": "$2000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_MayorHouse",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x15"
+   ]
+  },
+  "sMayorHouseMariaRoomMap": {
+   "areas": [
+    26
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_MayorHouse",
+     "vram_word": "$2000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_MayorHouse",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x15"
+   ]
+  },
+  "sMenuCharacters": {
+   "areas": [
+    95
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Menu_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Menu_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Menu_2",
+     "vram_word": "$4000"
+    },
+    {
+     "blob": "Tiles_Menu_3",
+     "vram_word": "$5000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Menu_BackgroundPattern",
+     "vram_word": "$6000",
+     "chr_base": null
+    },
+    {
+     "blob": "Screen_Menu_Characters",
+     "vram_word": "$1000",
+     "chr_base": null
+    }
+   ],
+   "palette": [
+    "sPalette_0x46"
+   ]
+  },
+  "sMenuScreenBackgrounds": {
+   "areas": [
+    94
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Menu_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Menu_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Menu_2",
+     "vram_word": "$4000"
+    },
+    {
+     "blob": "Tiles_Menu_3",
+     "vram_word": "$5000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Menu_Backgrounds",
+     "vram_word": "$1000",
+     "chr_base": null
+    },
+    {
+     "blob": "Screen_Menu_BackgroundPattern",
+     "vram_word": "$6000",
+     "chr_base": null
+    }
+   ],
+   "palette": [
+    "sPalette_0x46"
+   ]
+  },
+  "sMountainCaveMap": {
+   "areas": [
+    41
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_MountainCave",
+     "vram_word": "$2000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_MountainCave",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x12"
+   ]
+  },
+  "sMountainFallMap": {
+   "areas": [
+    18
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Mountain_Fall_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Mountain_Fall_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Mountain_Fall_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "ScreenRaw_Mountain",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x60"
+   ]
+  },
+  "sMountainSpring": {
+   "areas": [
+    16
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Mountain_Spring_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Mountain_Spring_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Mountain_SpringSummer_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "ScreenRaw_Mountain",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x64"
+   ]
+  },
+  "sMountainSummerMap": {
+   "areas": [
+    17
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Mountain_SpringSummer_2",
+     "vram_word": "$4000"
+    },
+    {
+     "blob": "Tiles_Mountain_Summer_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Mountain_Summer_1",
+     "vram_word": "$3000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "ScreenRaw_Mountain",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x5C"
+   ]
+  },
+  "sMountainWinterMap": {
+   "areas": [
+    19
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Mountain_Winter_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Mountain_Winter_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Mountain_Winter_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "ScreenRaw_Mountain",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x68"
+   ]
+  },
+  "sNatsumeLogo": {
+   "areas": [
+    93
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_NatsumeLogo",
+     "vram_word": "$2000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Title_NatsumeLogo",
+     "vram_word": "$6000",
+     "chr_base": null
+    }
+   ],
+   "palette": [
+    "sPalette_0x6D"
+   ]
+  },
+  "sNewYearsFestivalMap": {
+   "areas": [
+    58
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Summit_SpringToFall_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Summit_SpringToFall_1",
+     "vram_word": "$3000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Summit",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    },
+    {
+     "blob": "Screen_Summit_Layer2",
+     "vram_word": "$7000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x52"
+   ]
+  },
+  "sRainOverlay": {
+   "areas": [
+    87
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Overlay_Rain",
+     "vram_word": "$5000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Overlay_Rain",
+     "vram_word": "$7000",
+     "chr_base": null
+    }
+   ],
+   "palette": []
+  },
+  "sRestaurantMap": {
+   "areas": [
+    32
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Restaurant",
+     "vram_word": "$3000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Restaurant",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x19"
+   ]
+  },
+  "sRestaurantRoomMap": {
+   "areas": [
+    33
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Restaurant",
+     "vram_word": "$3000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Restaurant",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x19"
+   ]
+  },
+  "sRoadFallMap": {
+   "areas": [
+    14
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Road_SpringToFall",
+     "vram_word": "$2000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Road",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x2C"
+   ]
+  },
+  "sRoadSpringMap": {
+   "areas": [
+    12
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Road_SpringToFall",
+     "vram_word": "$2000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Road",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x27"
+   ]
+  },
+  "sRoadSummerMap": {
+   "areas": [
+    13
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Road_SpringToFall",
+     "vram_word": "$2000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Road",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x36"
+   ]
+  },
+  "sRoadWinterMap": {
+   "areas": [
+    15
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Road_Winter",
+     "vram_word": "$2000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Road",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x31"
+   ]
+  },
+  "sSnowOverlay": {
+   "areas": [
+    89
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Overlay_Snow",
+     "vram_word": "$5000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Overlay_Snow",
+     "vram_word": "$7000",
+     "chr_base": null
+    }
+   ],
+   "palette": []
+  },
+  "sStarNightFestivalMountainTopMap": {
+   "areas": [
+    57
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Summit_Winter_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Summit_Winter_1",
+     "vram_word": "$3000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Summit",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    },
+    {
+     "blob": "Screen_StarNightFestivalMountainTop_Layer2",
+     "vram_word": "$7000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": []
+  },
+  "sStarNightFestivalSpaMap": {
+   "areas": [
+    20
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Mountain_Winter_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Mountain_Winter_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Mountain_Winter_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_StarNightFestivalSpa",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": []
+  },
+  "sStarNightFestivalSquareMap": {
+   "areas": [
+    10
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Town_Winter_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Town_Winter_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_StarNightFestivalSquare_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_StarNightFestivalSquare",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": []
+  },
+  "sSummitFallMap": {
+   "areas": [
+    51
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Summit_SpringToFall_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Summit_SpringToFall_1",
+     "vram_word": "$3000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Summit",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    },
+    {
+     "blob": "Screen_Summit_Layer2",
+     "vram_word": "$7000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x4A"
+   ]
+  },
+  "sSummitSpringMap": {
+   "areas": [
+    49
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Summit_SpringToFall_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Summit_SpringToFall_1",
+     "vram_word": "$3000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Summit",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    },
+    {
+     "blob": "Screen_Summit_Layer2",
+     "vram_word": "$7000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x53"
+   ]
+  },
+  "sSummitSummerMap": {
+   "areas": [
+    50
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Summit_SpringToFall_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Summit_SpringToFall_1",
+     "vram_word": "$3000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Summit",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    },
+    {
+     "blob": "Screen_Summit_Layer2",
+     "vram_word": "$7000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x4E"
+   ]
+  },
+  "sSummitWinterMap": {
+   "areas": [
+    52
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Summit_Winter_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Summit_Winter_1",
+     "vram_word": "$3000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_Summit",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    },
+    {
+     "blob": "Screen_Summit_Layer2",
+     "vram_word": "$7000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x57"
+   ]
+  },
+  "sToolShedMap": {
+   "areas": [
+    38
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_ToolShed_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_ToolShed_1",
+     "vram_word": "$3000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "Screen_ToolShed_Layer2",
+     "vram_word": "$7000",
+     "chr_base": "$2000"
+    },
+    {
+     "blob": "Screen_ToolShed",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x47"
+   ]
+  },
+  "sTownFallMap": {
+   "areas": [
+    6
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Town_SpringToFall_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Town_Fall_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Town_Fall_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "ScreenRaw_Town",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x21"
+   ]
+  },
+  "sTownSpringMap": {
+   "areas": [
+    4
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Town_SpringToFall_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Town_Spring_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Town_Spring_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "ScreenRaw_Town",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x3A"
+   ]
+  },
+  "sTownSummerMap": {
+   "areas": [
+    5
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Town_SpringToFall_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Town_Summer_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Town_Summer_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "ScreenRaw_Town",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x1D"
+   ]
+  },
+  "sTownWinterMap": {
+   "areas": [
+    7
+   ],
+   "tiles": [
+    {
+     "blob": "Tiles_Town_Winter_0",
+     "vram_word": "$2000"
+    },
+    {
+     "blob": "Tiles_Town_Winter_1",
+     "vram_word": "$3000"
+    },
+    {
+     "blob": "Tiles_Town_Winter_2",
+     "vram_word": "$4000"
+    }
+   ],
+   "name_tables": [
+    {
+     "blob": "ScreenRaw_Town",
+     "vram_word": "$6000",
+     "chr_base": "$2000"
+    }
+   ],
+   "palette": [
+    "sPalette_0x40"
+   ]
+  }
+ }
+}

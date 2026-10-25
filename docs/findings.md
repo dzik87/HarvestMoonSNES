@@ -67,11 +67,11 @@ Label names refer to the current sources; see `docs/naming/*.csv` for old -> new
   `docs/formats/graphics-palettes.md`, `assets/gfx/palette_map.json`.
 - Presets 6-10 of `fCore_ManageGraphicsPresets` are never selected; map headers use presets 0, 1, 2, 5, screens use 3 and 4.
 - Weather overlays have no palette of their own: they use pixel values 12-15 of row 0, which the weather code overwrites by palette animation.
-- `sCompressedTiles_9FD4DA` is a Japanese title logo that no US map loads.
+- `Tiles_Unused_TitleLogoJapanese` is a Japanese title logo that no US map loads.
 
 ## Graphics compression (banks $92-$A0, $A4-$A6)
 - Okumura-style LZSS (2048-byte ring, matches 3..34 bytes), 4-byte header; see `docs/formats/tilemap-compression.md`.
 - `tools/gfx/tilemap_codec.py` decompresses and re-encodes all 137 labelled blobs byte-for-byte (`tests/test_tilemap_codec.py`).
-- Former layout issues are fixed: the tail of `sCompressedTiles_99DCBD` was moved out of `Padding_990000`, and the blobs at $A5CB05 and $9FD4DA have their own labels.
+- Former layout issues are fixed: the tail of `Tiles_Town_Winter_0` was moved out of `Padding_990000`, and the blobs at $A5CB05 and $9FD4DA have their own labels.
 - Naming fixed: `sCompressedTiles_*` blobs are tile graphics and `sCompressedTilemap_*` blobs are BG name tables; the original labels had them swapped (see `docs/formats/tilemap-compression.md`).
-- The ~4 KB that follow `sCompressedTilemap_A69996` are a raw 64x32 BG name table (statistics: 32% consecutive-tile pairs, 29% vertical +16 pairs, tile ids < 766, trailing zero words); it is now labeled `sCharactermap_A6A096` ($A6A096). Its last 40 bytes (zeros) were hidden under `Padding_A60000`. No code reference by label was found (likely reached through a computed pointer).
+- The ~4 KB that follow `Screen_Unk53to56` are a raw 64x32 BG name table (statistics: 32% consecutive-tile pairs, 29% vertical +16 pairs, tile ids < 766, trailing zero words); it is now labeled `ScreenRaw_Unk_A6A096` ($A6A096). Its last 40 bytes (zeros) were hidden under `Padding_A60000`. No code reference by label was found (likely reached through a computed pointer).

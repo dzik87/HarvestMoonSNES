@@ -1,0 +1,20 @@
+{
+  "label": "Screen_House_Upgrade1",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/Screen_House_Upgrade1.bin",
+  "compression": "lzss",
+  "raw_size": 2048,
+  "legacy_label": "sCompressedTilemap_A4945C",
+  "format": "bg_name_table",
+  "entries": 1024,
+  "columns": 32,
+  "vram_word_dest": [
+    "$6000"
+  ],
+  "map_entries": 1,
+  "first_map": "sHouseUpgrade1Map",
+  "tile_sets": [
+    "Tiles_House_0@$2000",
+    "Tiles_House_1@$3000"
+  ]
+}

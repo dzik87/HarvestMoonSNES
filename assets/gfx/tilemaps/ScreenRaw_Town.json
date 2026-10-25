@@ -1,0 +1,21 @@
+{
+  "label": "ScreenRaw_Town",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/ScreenRaw_Town.bin",
+  "compression": "none",
+  "raw_size": 32768,
+  "legacy_label": "sCharactermap_A38000",
+  "format": "bg_name_table",
+  "entries": 16384,
+  "columns": 128,
+  "vram_word_dest": [
+    "$6000"
+  ],
+  "map_entries": 8,
+  "first_map": "sTownSpringMap",
+  "tile_sets": [
+    "Tiles_Town_SpringToFall_0@$2000",
+    "Tiles_Town_Spring_1@$3000",
+    "Tiles_Town_Spring_2@$4000"
+  ]
+}

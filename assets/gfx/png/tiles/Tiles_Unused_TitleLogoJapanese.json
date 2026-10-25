@@ -1,0 +1,20 @@
+{
+  "label": "Tiles_Unused_TitleLogoJapanese",
+  "kind": "tiles",
+  "bin": "assets/gfx/tiles/Tiles_Unused_TitleLogoJapanese.bin",
+  "compression": "lzss",
+  "raw_size": 8192,
+  "legacy_label": "sCompressedTiles_9FD4DA",
+  "format": "snes_planar_tiles",
+  "bpp": 4,
+  "bpp_confidence": "high",
+  "bpp_note": "4bpp: planes 0-1 and 2-3 are strongly correlated and the sheet reads as coherent graphics",
+  "tiles_per_row": 16,
+  "palette": {
+    "id": "sPalette_0x6C",
+    "sub": 7
+  },
+  "palette_confidence": "low",
+  "palette_note": "Japanese title logo (wooden board kanji) left in the US ROM; no map loads it. Title screen palette and the sub-palette that the US logo tiles of area $5C use are assumed",
+  "tiles_row_guessed": 256
+}

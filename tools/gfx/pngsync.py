@@ -32,6 +32,7 @@ trailing padding of the bank in assets/gfx/banks.json (error if the bank is full
 """
 import argparse
 import fnmatch
+import csv
 import json
 import os
 import re
@@ -57,10 +58,10 @@ class Kind:
 
 
 KINDS = {
-    "tiles": Kind("tiles", "assets/gfx/tiles", ("sCompressedTiles_",), "assets/gfx/png/tiles", ".png", "sCompressedTiles_"),
+    "tiles": Kind("tiles", "assets/gfx/tiles", ("Tiles_",), "assets/gfx/png/tiles", ".png", "Tiles_"),
     "sprites": Kind("sprites", "assets/gfx/sprites", ("Sprites_",), "assets/gfx/png/sprites", ".png"),
-    "tilemaps": Kind("tilemaps", "assets/gfx/characters", ("sCompressedTilemap_", "sCharactermap_"), "assets/gfx/tilemaps",
-                     ".map.txt", "sCompressedTilemap_"),
+    "tilemaps": Kind("tilemaps", "assets/gfx/characters", ("Screen_", "ScreenRaw_"), "assets/gfx/tilemaps",
+                     ".map.txt", "Screen_"),
 }
 LAYOUT_KIND = {"tiles": "tiles", "sprites": "sprites", "tilemaps": "characters"}     # kind -> group in assets/gfx/banks.json
 
@@ -68,12 +69,12 @@ LAYOUT_KIND = {"tiles": "tiles", "sprites": "sprites", "tilemaps": "characters"}
 # plane-correlation statistics and by looking at the rendered sheets.  Blobs whose planes 2-3 are empty or that hold only a
 # few tiles cannot be told apart from 2bpp by statistics alone; they were checked by eye (all read correctly as 4bpp).
 VISUALLY_VERIFIED = {
-    "sCompressedTiles_928000": "rain overlay", "sCompressedTiles_97B11A": "falling leaves overlay",
-    "sCompressedTiles_9B8441": "weather overlay", "sCompressedTiles_9E9C6D": "snow overlay",
-    "sCompressedTiles_9ABF97": "Latin font sheet", "sCompressedTiles_9AC489": "kana/digit font sheet",
-    "sCompressedTiles_9ACB41": "kana/kanji font sheet", "sCompressedTiles_9B8000": "UI text tiles",
-    "sCompressedTiles_9EEB3D": "Latin lower-case font sheet", "sCompressedTiles_A08000": "kanji sheet",
-    "sCompressedTiles_A088E9": "kanji sheet", "sCompressedTiles_9FEF97": "publisher logo",
+    "Tiles_Overlay_Rain": "rain overlay", "Tiles_Overlay_Clouds": "falling leaves overlay",
+    "Tiles_Overlay_HeavySnow": "weather overlay", "Tiles_Overlay_Snow": "snow overlay",
+    "Tiles_Menu_0": "Latin font sheet", "Tiles_Menu_1": "kana/digit font sheet",
+    "Tiles_Menu_2": "kana/kanji font sheet", "Tiles_ToolShed_1": "UI text tiles",
+    "Tiles_Credits_0": "Latin lower-case font sheet", "Tiles_Credits_1": "kanji sheet",
+    "Tiles_Credits_2": "kanji sheet", "Tiles_NatsumeLogo": "publisher logo",
 }
 
 
@@ -353,7 +354,7 @@ def map_table(root=ROOT):
         if m:
             last = m.group(1).split(",")[-1].strip()
             continue
-        m = re.match(r"^\s*(?:\+\s*)?dl (s\w+)", l)
+        m = re.match(r"^\s*(?:\+\s*)?dl ([A-Za-z_]\w+)", l)
         if m and cur and last and last.startswith("$"):
             maps[cur].append((int(last[1:], 16), m.group(1)))
     info = {}
@@ -415,8 +416,21 @@ def usage(b):
     if b.kind == "tilemaps":
         _, _, pairs = info[0]
         out["first_map"] = info[0][1]
-        out["tile_sets"] = [f"{l}@${d:04X}" for d, l in pairs if l.startswith(("sCompressedTiles_", "Sprites_"))]
+        out["tile_sets"] = [f"{l}@${d:04X}" for d, l in pairs if l.startswith(("Tiles_", "Sprites_"))]
     return out
+
+
+_LEGACY = {}
+
+
+def legacy_label(label, root=ROOT):
+    """address-based label this blob had before it was named (docs/naming/K3_gfx_names.csv), '' if none."""
+    key = str(root)
+    if key not in _LEGACY:
+        p = Path(root) / "docs/naming/K3_gfx_names.csv"
+        rows = list(csv.DictReader(p.open(encoding="utf-8"))) if p.exists() else []
+        _LEGACY[key] = {r["new"]: r["old"] for r in rows}
+    return _LEGACY[key].get(label, "")
 
 
 def read_raw(b):
@@ -441,6 +455,8 @@ def export_blob(b, raw=None, tail=None, old=None):
         old = read_meta(b) if b.meta.exists() else {}
     meta = {"label": b.label, "kind": b.kind, "bin": b.rel(b.bin), "compression": "lzss" if b.compressed else "none",
             "raw_size": len(raw)}
+    if legacy_label(b.label, b.root):
+        meta["legacy_label"] = legacy_label(b.label, b.root)
     if b.kind == "tilemaps":
         import composed
         columns = old.get("columns", composed.default_columns(len(raw) // 2))
@@ -507,7 +523,7 @@ def export_region_from_rom(a, root=ROOT):
             export_blob(b)
             labels.append(e.label)
             n += 1
-    tl = [l for l in labels if l.startswith("sCompressedTiles_")]
+    tl = [l for l in labels if l.startswith("Tiles_")]
     if tl:
         export_composed(root, a.region, tl)
     print(f"exported {n} {a.region.upper()} specific blobs")
@@ -521,7 +537,7 @@ def export_composed(root, region, labels=None):
     if labels is None:
         labels = [b.label for b in blobs(root, None, None, from_sources=True, region=region) if b.kind != "tilemaps"]
     for lab in labels:
-        export_blob(Blob("tiles" if lab.startswith("sCompressedTiles_") else "sprites", lab, root, region))
+        export_blob(Blob("tiles" if lab.startswith("Tiles_") else "sprites", lab, root, region))
     ctx = composed.get_ctx(root, region, labels)
     raws = composed.load_sheets(ctx)
     composed.export_images(ctx, raws)
@@ -851,7 +867,7 @@ def cmd_preview(a, root=ROOT):
         for ent in u["tile_sets"]:
             lab, dest = ent.split("@$")
             dest = int(dest, 16)
-            tb = Blob("tiles", lab, root) if lab.startswith("sCompressedTiles_") else Blob("sprites", lab, root)
+            tb = Blob("tiles", lab, root) if lab.startswith("Tiles_") else Blob("sprites", lab, root)
             sets[dest], _ = read_raw(tb)
             base = dest if base is None else min(base, dest)
         raw, _ = read_raw(b)

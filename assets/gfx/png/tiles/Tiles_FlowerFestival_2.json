@@ -1,0 +1,33 @@
+{
+  "label": "Tiles_FlowerFestival_2",
+  "kind": "tiles",
+  "bin": "assets/gfx/tiles/Tiles_FlowerFestival_2.bin",
+  "compression": "lzss",
+  "raw_size": 8192,
+  "legacy_label": "sCompressedTiles_99AEC3",
+  "format": "snes_planar_tiles",
+  "bpp": 4,
+  "bpp_confidence": "high",
+  "bpp_note": "4bpp: planes 0-1 and 2-3 are strongly correlated and the sheet reads as coherent graphics",
+  "tiles_per_row": 16,
+  "vram_word_dest": [
+    "$4000"
+  ],
+  "map_entries": 1,
+  "palette": {
+    "id": "sPalette_0x3B",
+    "sub": 5
+  },
+  "palette_confidence": "high",
+  "palette_note": "sub-palette 5 covers 200 of 582 name-table cells; per-tile sub-palettes 1/2/3/4/5/6/7 (tile_subs)",
+  "palette_subs_used": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "tiles_row_guessed": 134
+}

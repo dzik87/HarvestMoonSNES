@@ -1,0 +1,20 @@
+{
+  "label": "Screen_ToolShed",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/Screen_ToolShed.bin",
+  "compression": "lzss",
+  "raw_size": 2048,
+  "legacy_label": "sCompressedTilemap_A58B49",
+  "format": "bg_name_table",
+  "entries": 1024,
+  "columns": 32,
+  "vram_word_dest": [
+    "$6000"
+  ],
+  "map_entries": 1,
+  "first_map": "sToolShedMap",
+  "tile_sets": [
+    "Tiles_ToolShed_0@$2000",
+    "Tiles_ToolShed_1@$3000"
+  ]
+}

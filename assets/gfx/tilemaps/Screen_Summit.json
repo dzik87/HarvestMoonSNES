@@ -1,0 +1,20 @@
+{
+  "label": "Screen_Summit",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/Screen_Summit.bin",
+  "compression": "lzss",
+  "raw_size": 4096,
+  "legacy_label": "sCompressedTilemap_A5B943",
+  "format": "bg_name_table",
+  "entries": 2048,
+  "columns": 32,
+  "vram_word_dest": [
+    "$6000"
+  ],
+  "map_entries": 10,
+  "first_map": "sSummitSpringMap",
+  "tile_sets": [
+    "Tiles_Summit_SpringToFall_0@$2000",
+    "Tiles_Summit_SpringToFall_1@$3000"
+  ]
+}

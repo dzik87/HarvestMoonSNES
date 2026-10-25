@@ -23,9 +23,9 @@ draw, not the raw sheets:
 
 ```
 assets/gfx/png/frames/obj_0004/f_A53D.png         object animation frame (banks $86/$87, 2,621 images; unreferenced frames in frames/unreferenced/)
-assets/gfx/png/screens/sCompressedTilemap_A4CFAB.png   BG name table rendered with its tile sets (77 US + 24 regional images)
+assets/gfx/png/screens/Screen_Road.png   BG name table rendered with its tile sets (77 US + 24 regional images)
 assets/gfx/png/sprites/Sprites_888000.png          remainder sheet of a sprite bank   (10)
-assets/gfx/png/tiles/sCompressedTiles_92D3AB.png   remainder sheet of a tile blob     (77)
+assets/gfx/png/tiles/Tiles_Farm_SpringSummer_0.png   remainder sheet of a tile blob     (77)
 assets/gfx/png/<eu|de|jp>/{screens,tiles}/         the same for the blobs that differ from US
 ```
 
@@ -64,7 +64,7 @@ assets/gfx/png/<eu|de|jp>/{screens,tiles}/         the same for the blobs that d
 
 Findings made while building this:
 * The three `sCharactermap_*` blobs in banks $A1-$A3 are **not** character graphics but raw (uncompressed) name tables of
-  the big world maps: 128 entries per row (`sCharactermap_A18000` = the farm, 128x128 tiles, $8000 bytes; `A28000` is
+  the big world maps: 128 entries per row (`ScreenRaw_Farm` = the farm, 128x128 tiles, $8000 bytes; `A28000` is
   $5FC0 bytes, the mountain). There is no raw character graphics data in the US ROM; all tile graphics are LZSS blobs.
 * All graphics read as **4bpp** (the 4 VRAM slots $2000-$5000 are $1000 words = 8192 bytes = 256 4bpp tiles apart).
   Name tables use VRAM $6000/$7000/$1000.
@@ -73,7 +73,7 @@ Findings made while building this:
 
 ```
 python3 tools/build_assets.py                                             # once after cloning: generate the .bin files
-python3 tools/gfx/pngsync.py import --label sCompressedTiles_92D3AB    # after editing the PNG: re-encode, update sidecar/padding
+python3 tools/gfx/pngsync.py import --label Tiles_Farm_SpringSummer_0    # after editing the PNG: re-encode, update sidecar/padding
 python3 tools/build.py                                                    # regenerates assets and rebuilds; ROM hash changes (intended)
 ```
 
@@ -112,13 +112,13 @@ tile-set VRAM address, which reproduces the farm map exactly) and every tile she
 ### Palette rows of the tile sheets
 
 A tile blob has no palette of its own: **every name table cell picks its own CGRAM row** (entry bits 10-12), so the same blob can look different in
-different maps (`sCompressedTiles_95D6E2`, the house interior set, is shown with rows 1, 2 and 3 by `A4945C`, `A49745` and `A49B84`). The remainder sheets
+different maps (`Tiles_House_1`, the house interior set, is shown with rows 1, 2 and 3 by `A4945C`, `A49745` and `A49B84`). The remainder sheets
 (`assets/gfx/png/tiles/*.png`) and `pngsync.py sheet` therefore colour **every tile with the row it is shown with in the name tables** (most used row;
 the PNG has the 128 colours of the blob's palette `palette.id`, pixel = row << 4 | colour; the build ignores bits 4-6, the colour index is what counts).
 Sidecar keys: `tile_rows_multi` = tiles that are shown with more than one row (`{"tile": [rows, most used first]}`), `tiles_row_guessed` = number
 of tiles no name table shows (these use `palette.sub`, a guess; `palette_confidence` says how good, `low` = no tile is referenced). Blobs whose
-rows are all guessed (no static name table references them): `sCompressedTiles_9FD4DA` (Japanese title logo left in the US ROM),
-`A09232`, `A0AB1E`, `A0E682` (cave tile sets used by name tables that the game writes at run time); they are drawn with `palette.sub` and
+rows are all guessed (no static name table references them): `Tiles_Unused_TitleLogoJapanese` (Japanese title logo left in the US ROM),
+(`Tiles_Credits_3`, `Tiles_Unk51_3` and `Tiles_DriveToTown_3` are NOT unused: the map table loads them to VRAM $5000 - see `docs/formats/graphics-loading.md` - only no static name table cell shows their tiles); they are drawn with `palette.sub` and
 `pngsync.py check` prints a NOTE for each.  The primary `sub` of a blob is the row with the most cells over *all* areas that show it with the same palette
 (`palette_map.py`); `95D6E2` therefore moved from sub 2 (house 1 only, 6 cells, medium) to **sub 1 (36 of 54 cells, high)**; rows 1/2 are both used,
 the per-tile rows are exact.
@@ -146,7 +146,7 @@ and how `.map.txt` is wrapped. It never changes the `.bin` (entry order is the s
 * **Engine.** The map loader (`src/code/bank_80/tilemaps.asm`) uploads the big name tables row by row with a stride taken from
   `nTable_80AA68[strcDialogDisplay.mapMultiWidth]` = `$40 / $80 / $100` bytes = **32 / 64 / 128 entries per row**, and the table size from
   `nTable_80AA72` = `$1000 / $2000 / $4000` bytes. So row-major maps of 32, 64 and 128 entries per row exist (32x64, 64x64, 128x64+).
-  `sCharactermap_A18000/A28000/A38000` and `sCompressedTilemap_A4DC7E` use 128. The BG tilemaps loaded by the `.tilemaps` path are
+  `ScreenRaw_Farm/A28000/A38000` and `Screen_EggFestival` use 128. The BG tilemaps loaded by the `.tilemaps` path are
   decompressed to `$7E2000` and DMA'd linearly (`$2000` bytes) to the VRAM address of the map header, so the file order is the order in VRAM.
 * **Image continuity** (`pngsync.py widths`, also part of `check`). Every table is rendered with each of 32, 64 and 128 columns and the
   *seam ratio* is computed: the share of differing neighbour pixels across 8x8 cell borders divided by the share inside cells. A correct layout
@@ -154,7 +154,7 @@ and how `.map.txt` is wrapped. It never changes the `.bin` (entry order is the s
   were drawn 32 wide by mistake: `A48A2D` 1.52 -> 1.02, `A49745` 1.40 -> 1.03, `A4D379` 1.25 -> 1.10).
 * **Rule.** Default by size (`composed.default_columns`): 4096 entries = 64, 8192 and more = 128, otherwise 32. A different width is used only
   when it is at least 0.05 more continuous than the default. Tables that are blank or not shown with any tile set keep the default
-  (`sCharactermap_A6A096` is a raw 64x32 name table, `KNOWN_COLUMNS`). Regional tables take the width of the US table with the same label.
+  (`ScreenRaw_Unk_A6A096` is a raw 64x32 name table, `KNOWN_COLUMNS`). Regional tables take the width of the US table with the same label.
 * **Check.** `pngsync.py check` fails when a table's declared width is more than 0.15 worse than the best candidate, so a wrong `columns`
   cannot be committed unnoticed. `pngsync.py widths [--region R] [--write]` prints the scores and, with `--write`, stores the suggestion
   (then `export` rewraps the `.map.txt` and redraws the screens).
@@ -164,77 +164,77 @@ widths equal the US one):
 
 | Table | Entries | Layout | Seam | Regional copies | Note |
 |---|---|---|---|---|---|
-| `sCharactermap_A18000` | 16384 | 128 x 128 | 0.99 | US only |  |
-| `sCharactermap_A28000` | 12256 | 128 x 96 | 1.04 | US only |  |
-| `sCharactermap_A38000` | 16384 | 128 x 128 | 1.12 | US only | weak metric |
-| `sCharactermap_A6A096` | 2048 | 64 x 32 | - | US only | no tile set: size / content default |
-| `sCompressedTilemap_A48000` | 2048 | 32 x 64 | 0.00 | US only | blank, size default |
-| `sCompressedTilemap_A481AE` | 3072 | 32 x 96 | 1.03 | US only |  |
-| `sCompressedTilemap_A48A2D` | 4096 | 64 x 64 | 1.02 | US only |  |
-| `sCompressedTilemap_A4945C` | 1024 | 32 x 32 | 1.17 | US only | weak metric |
-| `sCompressedTilemap_A49745` | 2048 | 64 x 32 | 1.03 | US only |  |
-| `sCompressedTilemap_A49B84` | 1024 | 32 x 32 | 1.20 | US only | weak metric |
-| `sCompressedTilemap_A49E2E` | 4096 | 64 x 64 | 1.01 | US only |  |
-| `sCompressedTilemap_A4A597` | 2048 | 32 x 64 | 1.37 | US only | metric high, image checked by eye |
-| `sCompressedTilemap_A4AA99` | 2048 | 32 x 64 | 0.00 | US only | blank, size default |
-| `sCompressedTilemap_A4AE95` | 2048 | 32 x 64 | 0.00 | US only | blank, size default |
-| `sCompressedTilemap_A4B3D1` | 2048 | 32 x 64 | 0.00 | US only | blank, size default |
-| `sCompressedTilemap_A4B8E0` | 2048 | 32 x 64 | 0.00 | US only | blank, size default |
-| `sCompressedTilemap_A4BCC1` | 1024 | 32 x 32 | 0.00 | US only | blank, size default |
-| `sCompressedTilemap_A4C065` | 1024 | 32 x 32 | 0.00 | US only | blank, size default |
-| `sCompressedTilemap_A4C3E2` | 2048 | 32 x 64 | 0.00 | US only | blank, size default |
-| `sCompressedTilemap_A4C5DE` | 4096 | 64 x 64 | 1.09 | US only |  |
-| `sCompressedTilemap_A4CFAB` | 1024 | 32 x 32 | 1.00 | US only |  |
-| `sCompressedTilemap_A4D379` | 4096 | 64 x 64 | 1.10 | US only |  |
-| `sCompressedTilemap_A4DC7E` | 16384 | 128 x 128 | 1.13 | US only | weak metric |
-| `sCompressedTilemap_A58000` | 4096 | 32 x 128 | 1.09 | de,eu,jp |  |
-| `sCompressedTilemap_A58327` | 4096 | 64 x 64 | 1.13 | US only | weak metric |
-| `sCompressedTilemap_A58B49` | 1024 | 32 x 32 | 1.15 | US only | weak metric |
-| `sCompressedTilemap_A58D8E` | 4096 | 64 x 64 | 1.11 | de,jp |  |
-| `sCompressedTilemap_A5970F` | 4096 | 64 x 64 | 3.09 | jp | metric high, image checked by eye |
-| `sCompressedTilemap_A59C08` | 2048 | 32 x 64 | 1.12 | de,jp | weak metric |
-| `sCompressedTilemap_A59E0B` | 1024 | 32 x 32 | 1.16 | US only | weak metric |
-| `sCompressedTilemap_A5A3D5` | 2048 | 32 x 64 | 0.37 | US only |  |
-| `sCompressedTilemap_A5A6A0` | 3072 | 32 x 96 | 1.14 | US only | weak metric |
-| `sCompressedTilemap_A5AD17` | 2048 | 32 x 64 | 1.00 | US only |  |
-| `sCompressedTilemap_A5B042` | 2048 | 32 x 64 | 1.01 | US only |  |
-| `sCompressedTilemap_A5B361` | 2048 | 32 x 64 | 0.99 | US only |  |
-| `sCompressedTilemap_A5B63B` | 1024 | 32 x 32 | 1.03 | US only |  |
-| `sCompressedTilemap_A5B943` | 2048 | 32 x 64 | 1.07 | US only |  |
-| `sCompressedTilemap_A5BD8A` | 2048 | 32 x 64 | 1.05 | US only |  |
-| `sCompressedTilemap_A5C258` | 1024 | 32 x 32 | 0.93 | US only |  |
-| `sCompressedTilemap_A5C4CD` | 2048 | 32 x 64 | 1.02 | US only |  |
-| `sCompressedTilemap_A5C955` | 2048 | 32 x 64 | 0.00 | US only | blank, size default |
-| `sCompressedTilemap_A5CB05` | 2048 | 32 x 64 | - | US only | no tile set: size / content default |
-| `sCompressedTilemap_A5CD88` | 4096 | 64 x 64 | 1.21 | de,eu,jp | weak metric |
-| `sCompressedTilemap_A5D44C` | 4096 | 64 x 64 | 1.21 | US only | weak metric |
-| `sCompressedTilemap_A5D94A` | 4096 | 64 x 64 | - | de,eu,jp | no tile set: size / content default |
-| `sCompressedTilemap_A5DE84` | 4096 | 64 x 64 | 0.97 | jp |  |
-| `sCompressedTilemap_A5E253` | 1024 | 32 x 32 | 1.07 | US only |  |
-| `sCompressedTilemap_A5E5CE` | 1024 | 32 x 32 | 1.10 | US only |  |
-| `sCompressedTilemap_A5E977` | 1024 | 32 x 32 | 1.10 | US only |  |
-| `sCompressedTilemap_A5ECFB` | 1024 | 32 x 32 | 1.00 | US only |  |
-| `sCompressedTilemap_A5F059` | 1024 | 32 x 32 | 1.11 | US only |  |
-| `sCompressedTilemap_A5F45A` | 1024 | 32 x 32 | 1.36 | US only | metric high, image checked by eye |
-| `sCompressedTilemap_A5F671` | 1024 | 32 x 32 | 1.04 | US only |  |
-| `sCompressedTilemap_A5F95C` | 1024 | 32 x 32 | 1.14 | US only | weak metric |
-| `sCompressedTilemap_A5FBCE` | 1024 | 32 x 32 | 0.99 | US only |  |
-| `sCompressedTilemap_A68000` | 1024 | 32 x 32 | 1.01 | US only |  |
-| `sCompressedTilemap_A68229` | 1024 | 32 x 32 | 0.99 | US only |  |
-| `sCompressedTilemap_A68433` | 1024 | 32 x 32 | 0.92 | US only |  |
-| `sCompressedTilemap_A6867E` | 1024 | 32 x 32 | 0.98 | US only |  |
-| `sCompressedTilemap_A68864` | 1024 | 32 x 32 | 1.06 | US only |  |
-| `sCompressedTilemap_A68DCF` | 1024 | 32 x 32 | 0.99 | US only |  |
-| `sCompressedTilemap_A690A6` | 4096 | 64 x 64 | 0.72 | jp |  |
-| `sCompressedTilemap_A694EE` | 4096 | 64 x 64 | 0.77 | de,jp |  |
-| `sCompressedTilemap_A69996` | 4096 | 64 x 64 | 0.65 | US only |  |
+| `ScreenRaw_Farm` | 16384 | 128 x 128 | 0.99 | US only |  |
+| `ScreenRaw_Mountain` | 12256 | 128 x 96 | 1.04 | US only |  |
+| `ScreenRaw_Town` | 16384 | 128 x 128 | 1.12 | US only | weak metric |
+| `ScreenRaw_Unk_A6A096` | 2048 | 64 x 32 | - | US only | no tile set: size / content default |
+| `Screen_Overlay_Rain` | 2048 | 32 x 64 | 0.00 | US only | blank, size default |
+| `Screen_ElfTunnel` | 3072 | 32 x 96 | 1.03 | US only |  |
+| `Screen_MountainCave` | 4096 | 64 x 64 | 1.02 | US only |  |
+| `Screen_House_Upgrade1` | 1024 | 32 x 32 | 1.17 | US only | weak metric |
+| `Screen_House_Upgrade2` | 2048 | 64 x 32 | 1.03 | US only |  |
+| `Screen_House` | 1024 | 32 x 32 | 1.20 | US only | weak metric |
+| `Screen_MayorHouse` | 4096 | 64 x 64 | 1.01 | US only |  |
+| `Screen_Church` | 2048 | 32 x 64 | 1.37 | US only | metric high, image checked by eye |
+| `Screen_FlowerShop` | 2048 | 32 x 64 | 0.00 | US only | blank, size default |
+| `Screen_Bar` | 2048 | 32 x 64 | 0.00 | US only | blank, size default |
+| `Screen_Restaurant` | 2048 | 32 x 64 | 0.00 | US only | blank, size default |
+| `Screen_GeneralStore` | 2048 | 32 x 64 | 0.00 | US only | blank, size default |
+| `Screen_AnimalShop` | 1024 | 32 x 32 | 0.00 | US only | blank, size default |
+| `Screen_FortuneTellerHouse` | 1024 | 32 x 32 | 0.00 | US only | blank, size default |
+| `Screen_Overlay_Clouds` | 2048 | 32 x 64 | 0.00 | US only | blank, size default |
+| `Screen_HarvestFestival` | 4096 | 64 x 64 | 1.09 | US only |  |
+| `Screen_Road` | 1024 | 32 x 32 | 1.00 | US only |  |
+| `Screen_FlowerFestival` | 4096 | 64 x 64 | 1.10 | US only |  |
+| `Screen_EggFestival` | 16384 | 128 x 128 | 1.13 | US only | weak metric |
+| `Screen_Menu_Backgrounds` | 4096 | 32 x 128 | 1.09 | de,eu,jp |  |
+| `Screen_StarNightFestivalSquare` | 4096 | 64 x 64 | 1.13 | US only | weak metric |
+| `Screen_ToolShed` | 1024 | 32 x 32 | 1.15 | US only | weak metric |
+| `Screen_Menu_Characters` | 4096 | 64 x 64 | 1.11 | de,jp |  |
+| `Screen_Menu_BackgroundPattern` | 4096 | 64 x 64 | 3.09 | jp | metric high, image checked by eye |
+| `Screen_ToolShed_Layer2` | 2048 | 32 x 64 | 1.12 | de,jp | weak metric |
+| `Screen_StarNightFestivalSpa` | 1024 | 32 x 32 | 1.16 | US only | weak metric |
+| `Screen_Overlay_HeavySnow` | 2048 | 32 x 64 | 0.37 | US only |  |
+| `Screen_GoldChicken` | 3072 | 32 x 96 | 1.14 | US only | weak metric |
+| `Screen_Summit_Layer2` | 2048 | 32 x 64 | 1.00 | US only |  |
+| `Screen_MountainTop2_Layer2` | 2048 | 32 x 64 | 1.01 | US only |  |
+| `Screen_StarNightFestivalMountainTop_Layer2` | 2048 | 32 x 64 | 0.99 | US only |  |
+| `Screen_WorksmanHouse` | 1024 | 32 x 32 | 1.03 | US only |  |
+| `Screen_Summit` | 2048 | 32 x 64 | 1.07 | US only |  |
+| `Screen_MountainTopBean` | 2048 | 32 x 64 | 1.05 | US only |  |
+| `Screen_Coop` | 1024 | 32 x 32 | 0.93 | US only |  |
+| `Screen_Barn` | 2048 | 32 x 64 | 1.02 | US only |  |
+| `Screen_Overlay_Snow` | 2048 | 32 x 64 | 0.00 | US only | blank, size default |
+| `Screen_DialogBox` | 2048 | 32 x 64 | - | US only | no tile set: size / content default |
+| `Screen_IntroFarmScroll_BG1` | 4096 | 64 x 64 | 1.21 | de,eu,jp | weak metric |
+| `Screen_IntroFarmScroll_BG2` | 4096 | 64 x 64 | 1.21 | US only | weak metric |
+| `Screen_Title_HarvestMoonLogo` | 4096 | 64 x 64 | - | de,eu,jp | no tile set: size / content default |
+| `Screen_Title_NatsumeLogo` | 4096 | 64 x 64 | 0.97 | jp |  |
+| `Screen_Ending00` | 1024 | 32 x 32 | 1.07 | US only |  |
+| `Screen_Ending01` | 1024 | 32 x 32 | 1.10 | US only |  |
+| `Screen_Ending02` | 1024 | 32 x 32 | 1.10 | US only |  |
+| `Screen_Ending03` | 1024 | 32 x 32 | 1.00 | US only |  |
+| `Screen_Ending12` | 1024 | 32 x 32 | 1.11 | US only |  |
+| `Screen_Ending13` | 1024 | 32 x 32 | 1.36 | US only | metric high, image checked by eye |
+| `Screen_Ending04` | 1024 | 32 x 32 | 1.04 | US only |  |
+| `Screen_Ending05` | 1024 | 32 x 32 | 1.14 | US only | weak metric |
+| `Screen_Ending06` | 1024 | 32 x 32 | 0.99 | US only |  |
+| `Screen_Ending07` | 1024 | 32 x 32 | 1.01 | US only |  |
+| `Screen_Ending08` | 1024 | 32 x 32 | 0.99 | US only |  |
+| `Screen_Ending09` | 1024 | 32 x 32 | 0.92 | US only |  |
+| `Screen_Ending10` | 1024 | 32 x 32 | 0.98 | US only |  |
+| `Screen_Ending11` | 1024 | 32 x 32 | 1.06 | US only |  |
+| `Screen_Intro` | 1024 | 32 x 32 | 0.99 | US only |  |
+| `Screen_Credits_0to3` | 4096 | 64 x 64 | 0.72 | jp |  |
+| `Screen_Credits4_DriveToTown` | 4096 | 64 x 64 | 0.77 | de,jp |  |
+| `Screen_Unk53to56` | 4096 | 64 x 64 | 0.65 | US only |  |
 
 Still doubtful (cannot be decided from the picture alone):
 
-* `sCompressedTilemap_A5970F` (4096): a repeating pattern of very different tiles with logo blocks; no layout is smooth, 64 is the best
+* `Screen_Menu_BackgroundPattern` (4096): a repeating pattern of very different tiles with logo blocks; no layout is smooth, 64 is the best
   and the picture reads correctly by eye (the metric is not meaningful for it).
-* `sCompressedTilemap_A4A597`, `sCompressedTilemap_A5F45A`: high metric at every width, but the pictures read correctly (church interior, 32x64).
-* `sCompressedTilemap_A58000` (menu backgrounds, 4096): 32 x 128 scores 1.09, 64 wide 1.16, and a VRAM-paged 64x64 (four 32x32 screens) 1.08.
+* `Screen_Church`, `Screen_Ending13`: high metric at every width, but the pictures read correctly (church interior, 32x64).
+* `Screen_Menu_Backgrounds` (menu backgrounds, 4096): 32 x 128 scores 1.09, 64 wide 1.16, and a VRAM-paged 64x64 (four 32x32 screens) 1.08.
   None is smooth; the table probably mixes several sub-pictures. It is stored with 32 columns (0.07 better than the 64-column default,
   which is above the 0.05 margin); revisit when the menu code is understood.
 * Tables that are blank (all cells empty), `A59C08`, `A5A3D5`, `A5C4CD`, `A5AD17`..`A5BD8A` (2048 entries): 32 and 64 columns score the same; the

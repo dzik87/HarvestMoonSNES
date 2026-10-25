@@ -1,0 +1,19 @@
+{
+  "label": "Screen_MayorHouse",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/Screen_MayorHouse.bin",
+  "compression": "lzss",
+  "raw_size": 8192,
+  "legacy_label": "sCompressedTilemap_A49E2E",
+  "format": "bg_name_table",
+  "entries": 4096,
+  "columns": 64,
+  "vram_word_dest": [
+    "$6000"
+  ],
+  "map_entries": 3,
+  "first_map": "sMayorHouseMap",
+  "tile_sets": [
+    "Tiles_MayorHouse@$2000"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "label": "Screen_StarNightFestivalMountainTop_Layer2",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/Screen_StarNightFestivalMountainTop_Layer2.bin",
+  "compression": "lzss",
+  "raw_size": 4096,
+  "legacy_label": "sCompressedTilemap_A5B361",
+  "format": "bg_name_table",
+  "entries": 2048,
+  "columns": 32,
+  "vram_word_dest": [
+    "$7000"
+  ],
+  "map_entries": 1,
+  "first_map": "sStarNightFestivalMountainTopMap",
+  "tile_sets": [
+    "Tiles_Summit_Winter_0@$2000",
+    "Tiles_Summit_Winter_1@$3000"
+  ]
+}

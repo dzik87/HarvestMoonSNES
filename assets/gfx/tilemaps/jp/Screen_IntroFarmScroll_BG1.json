@@ -1,0 +1,22 @@
+{
+  "label": "Screen_IntroFarmScroll_BG1",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/jp/Screen_IntroFarmScroll_BG1.bin",
+  "compression": "lzss",
+  "raw_size": 8192,
+  "legacy_label": "sCompressedTilemap_A5CD88",
+  "format": "bg_name_table",
+  "entries": 4096,
+  "columns": 64,
+  "vram_word_dest": [
+    "$6000"
+  ],
+  "map_entries": 1,
+  "first_map": "sIntroFarmScrool",
+  "tile_sets": [
+    "Tiles_IntroFarmScroll_0@$2000",
+    "Tiles_IntroFarmScroll_1@$3000",
+    "Tiles_IntroFarmScroll_2@$4000",
+    "Tiles_IntroFarmScroll_3@$5000"
+  ]
+}

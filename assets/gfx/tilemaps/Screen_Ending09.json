@@ -1,0 +1,21 @@
+{
+  "label": "Screen_Ending09",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/Screen_Ending09.bin",
+  "compression": "lzss",
+  "raw_size": 2048,
+  "legacy_label": "sCompressedTilemap_A68433",
+  "format": "bg_name_table",
+  "entries": 1024,
+  "columns": 32,
+  "vram_word_dest": [
+    "$6000"
+  ],
+  "map_entries": 1,
+  "first_map": "sMap_80B3C5",
+  "tile_sets": [
+    "Tiles_Farm_SpringSummer_0@$2000",
+    "Tiles_Farm_SpringSummer_1@$3000",
+    "Tiles_Farm_SpringSummer_2@$4000"
+  ]
+}

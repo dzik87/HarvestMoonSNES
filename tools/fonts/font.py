@@ -2,7 +2,7 @@
 """Font converter: ROM font glyph tables <-> one editable PNG per glyph, byte-exact round trip.
 
 Format (details and evidence in docs/formats/font.md):
-  * The font is stored in 11 tables of 4096 bytes (sFontGlyphs_0x00..0x09 plus the unreferenced sFontGlyphs_UNK),
+  * The font is stored in 11 tables of 4096 bytes (sFontGlyphs_0x00..0x09 plus the dialog font tiles sFontGlyphs_Dialog),
     64 glyphs per table.  Glyph id = dialog word value; table = id >> 6, index = id & $3F.
   * A glyph is 16x16 pixels, 2bpp SNES planar: four 8x8 tiles of 16 bytes
         TL = base, TR = base + $10, BL = base + $100, BR = base + $110,   base = (idx & 7) * 32 + (idx >> 3) * 512
@@ -32,10 +32,10 @@ REGIONS = ("us", "eu", "de", "jp")
 
 TABLE_SIZE = 0x1000
 GLYPHS_PER_TABLE = 64
-N_TABLES = 11                    # 0..9 are referenced by aLetterGlyphsPointers, 10 = sFontGlyphs_UNK
+N_TABLES = 11                    # 0..9 are referenced by aLetterGlyphsPointers, 10 = sFontGlyphs_Dialog (loaded by the dialog code)
 N_GLYPHS = N_TABLES * GLYPHS_PER_TABLE
 TABLE_ADDR = [0x949843 + 0x1000 * i for i in range(6)] + [0x958000 + 0x1000 * i for i in range(4)] + [0x9CBBA3]
-TABLE_NAME = ["sFontGlyphs_0x%02X" % i for i in range(10)] + ["sFontGlyphs_UNK"]
+TABLE_NAME = ["sFontGlyphs_0x%02X" % i for i in range(10)] + ["sFontGlyphs_Dialog"]
 # 10 x ptr24 of aLetterGlyphsPointers (identical bytes in all four regions), used to sanity check a ROM
 POINTER_TABLE = b"".join(a.to_bytes(3, "little") for a in TABLE_ADDR[:10])
 NARROW_IDS = list(range(0xBC, 0xC6)) + [0x270]    # JP engine draws these 8 px wide (type 0), all others 16 px

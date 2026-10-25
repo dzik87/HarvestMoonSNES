@@ -1,0 +1,22 @@
+{
+  "label": "Screen_Menu_Backgrounds",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/eu/Screen_Menu_Backgrounds.bin",
+  "compression": "lzss",
+  "raw_size": 8192,
+  "legacy_label": "sCompressedTilemap_A58000",
+  "format": "bg_name_table",
+  "entries": 4096,
+  "columns": 32,
+  "vram_word_dest": [
+    "$1000"
+  ],
+  "map_entries": 1,
+  "first_map": "sMenuScreenBackgrounds",
+  "tile_sets": [
+    "Tiles_Menu_0@$2000",
+    "Tiles_Menu_1@$3000",
+    "Tiles_Menu_2@$4000",
+    "Tiles_Menu_3@$5000"
+  ]
+}

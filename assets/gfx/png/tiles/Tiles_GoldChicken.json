@@ -1,0 +1,104 @@
+{
+  "label": "Tiles_GoldChicken",
+  "kind": "tiles",
+  "bin": "assets/gfx/tiles/Tiles_GoldChicken.bin",
+  "compression": "lzss",
+  "raw_size": 8192,
+  "legacy_label": "sCompressedTiles_9B86AD",
+  "format": "snes_planar_tiles",
+  "bpp": 4,
+  "bpp_confidence": "high",
+  "bpp_note": "4bpp: planes 0-1 and 2-3 are strongly correlated and the sheet reads as coherent graphics",
+  "tiles_per_row": 16,
+  "vram_word_dest": [
+    "$2000"
+  ],
+  "map_entries": 1,
+  "palette": {
+    "id": "sPalette_0x48",
+    "sub": 2
+  },
+  "palette_confidence": "high",
+  "palette_note": "sub-palette 2 covers 1356 of 3070 name-table cells; per-tile sub-palettes 1/2/3/4/5/6/7 (tile_subs)",
+  "palette_subs_used": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "tile_rows_multi": {
+    "2": [
+      4,
+      5,
+      7
+    ],
+    "3": [
+      4,
+      7,
+      5
+    ],
+    "5": [
+      4,
+      5,
+      7
+    ],
+    "18": [
+      4,
+      5,
+      7
+    ],
+    "19": [
+      4,
+      5,
+      7
+    ],
+    "34": [
+      3,
+      4
+    ],
+    "35": [
+      5,
+      7
+    ],
+    "51": [
+      5,
+      7
+    ],
+    "84": [
+      5,
+      4
+    ],
+    "93": [
+      3,
+      4
+    ],
+    "151": [
+      4,
+      3
+    ],
+    "167": [
+      4,
+      3
+    ],
+    "183": [
+      4,
+      3
+    ],
+    "199": [
+      4,
+      3
+    ],
+    "248": [
+      3,
+      4
+    ],
+    "255": [
+      3,
+      4
+    ]
+  },
+  "tiles_row_guessed": 19
+}

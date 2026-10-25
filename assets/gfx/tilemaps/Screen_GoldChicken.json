@@ -1,0 +1,19 @@
+{
+  "label": "Screen_GoldChicken",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/Screen_GoldChicken.bin",
+  "compression": "lzss",
+  "raw_size": 6144,
+  "legacy_label": "sCompressedTilemap_A5A6A0",
+  "format": "bg_name_table",
+  "entries": 3072,
+  "columns": 32,
+  "vram_word_dest": [
+    "$6000"
+  ],
+  "map_entries": 1,
+  "first_map": "sMap_80B04B",
+  "tile_sets": [
+    "Tiles_GoldChicken@$2000"
+  ]
+}

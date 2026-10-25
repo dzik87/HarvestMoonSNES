@@ -111,7 +111,7 @@
   },
   {
    "table": 10,
-   "label": "sFontGlyphs_UNK",
+   "label": "sFontGlyphs_Dialog",
    "cpu_address": "$9CBBA3",
    "first_id": "0280",
    "last_id": "02BF",
