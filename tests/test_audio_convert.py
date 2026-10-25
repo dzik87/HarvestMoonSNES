@@ -228,6 +228,30 @@ def test_midi():
     check(mid[:4] == b"MThd" and mid.count(b"MTrk") >= 5, "MIDI export structure")
 
 
+def test_spcmatch():
+    """A song snapshot with different runtime state (and a stale sample slot) is still recognised and compared as static-equal."""
+    blobs, _, info = audioconv.build_all()
+    state = audioconv.spc_boot_state(blobs, info)
+    gens = {}
+    for lab, tid in audioconv._spc_track_labels(info["man"]).items():
+        g = audioconv.parse_spc(audioconv.write_spc(audioconv.spc_for_track(state, blobs, info, tid), lab))
+        g["blob"] = blobs[lab]
+        gens[lab] = g
+    town = audioconv.parse_spc(audioconv.write_spc(audioconv.spc_for_track(state, blobs, info, 5), "x"))
+    ram = bytearray(town["ram"])
+    ram[0x00:0xF0] = bytes(range(240))                      # direct page = runtime state
+    ram[0x1500 + 4 * 6:0x1500 + 4 * 6 + 4] = bytes([0x2F, 0xB2, 0xEB, 0xB9])   # stale directory slot from an earlier song
+    ram[0xE000:0xE100] = bytes(256)                         # echo buffer
+    town["ram"] = bytes(ram)
+    m = audioconv.spc_match(town, gens)
+    check(m["label"] == "sAudioTrack_Town", "song identified by track data: %s" % m["label"])
+    check(not m["driver_diff"] and not m["sfx_diff"] and not m["dir_diff"] and not m["sample_diff"], "static data equal")
+    check(m["extra_slots"] == [6], "stale slot reported")
+    ram[0x19F4] ^= 0xFF
+    town["ram"] = bytes(ram)
+    check(audioconv.spc_match(town, gens)["label"] != "sAudioTrack_Town", "a corrupted track blob is not matched")
+
+
 def test_spc():
     import shutil
     import subprocess
@@ -260,6 +284,14 @@ def test_spc():
         check(ram[pos:pos + sizes[lab]] == blobs[lab][:sizes[lab]], "track sample %d in RAM at %04X" % (sid, pos))
         pos += (sizes[lab] + 2) // 3 * 3
     check(f["dsp"][0x5D] == 0x15, "DSP DIR register = $15 (sample directory page)")
+    # the driver copies whole 3-byte chunks: the ROM bytes after a sample (the next blob, or padding) land in RAM too
+    sid0 = man["common_samples"][0]
+    lab0 = entries[sid0]["label"]
+    if sizes[lab0] % 3:
+        nxt = blobs["sAudioSample_Id03"] if lab0 == "sAudioSample_Id00" else b""
+        end = 0x1FF4 + sizes[lab0] if man["common_samples"].index(sid0) == 0 else None
+        if end and nxt:
+            check(bytes(ram[end:end + (-sizes[lab0]) % 3]) == nxt[:(-sizes[lab0]) % 3], "chunk tail = following ROM bytes")
     dir0 = struct.unpack_from("<HH", ram, 0x1500)
     check(dir0[0] == 0x65F4, "directory slot 0 starts at the first track sample (%04X)" % dir0[0])
     check(spc.spc_out[3] in (0, 1, 4, 8), "SPC left in a defined handshake state")
@@ -279,7 +311,7 @@ def test_spc():
 
 
 def main():
-    tests = [test_brr_decoder, test_brr_encoder, test_wav_io, test_spcasm, test_trackfmt, test_sources_build, test_midi, test_spc]
+    tests = [test_brr_decoder, test_brr_encoder, test_wav_io, test_spcasm, test_trackfmt, test_sources_build, test_midi, test_spc, test_spcmatch]
     for t in tests:
         before = len(failures)
         t()
