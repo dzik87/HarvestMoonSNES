@@ -14,14 +14,14 @@ sFontGlyphs_0x08:
 sFontGlyphs_0x09:
     incbin "../../../../assets/gfx/tiles/sFontGlyphs_0x09.bin"
 
-sCompressedTilemap_95C000:
-    incbin "../../../../assets/gfx/tiles/sCompressedTilemap_95C000.bin"
+sCompressedTiles_95C000:
+    incbin "../../../../assets/gfx/tiles/sCompressedTiles_95C000.bin"
 
-sCompressedTilemap_95D6E2:
-    incbin "../../../../assets/gfx/tiles/sCompressedTilemap_95D6E2.bin"
+sCompressedTiles_95D6E2:
+    incbin "../../../../assets/gfx/tiles/sCompressedTiles_95D6E2.bin"
 
-sCompressedTilemap_95E8A3:
-    incbin "../../../../assets/gfx/tiles/sCompressedTilemap_95E8A3.bin"
+sCompressedTiles_95E8A3:
+    incbin "../../../../assets/gfx/tiles/sCompressedTiles_95E8A3.bin"
 
 Padding_950000:
     fill 82

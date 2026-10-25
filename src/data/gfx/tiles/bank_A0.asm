@@ -2,23 +2,23 @@
 
     ORG $A08000
 
-sCompressedTilemap_A08000:
-    incbin "../../../../assets/gfx/tiles/sCompressedTilemap_A08000.bin"
+sCompressedTiles_A08000:
+    incbin "../../../../assets/gfx/tiles/sCompressedTiles_A08000.bin"
 
-sCompressedTilemap_A088E9:
-    incbin "../../../../assets/gfx/tiles/sCompressedTilemap_A088E9.bin"
+sCompressedTiles_A088E9:
+    incbin "../../../../assets/gfx/tiles/sCompressedTiles_A088E9.bin"
 
-sCompressedTilemap_A09232:
-    incbin "../../../../assets/gfx/tiles/sCompressedTilemap_A09232.bin"
+sCompressedTiles_A09232:
+    incbin "../../../../assets/gfx/tiles/sCompressedTiles_A09232.bin"
 
-sCompressedTilemap_A0AB1E:
-    incbin "../../../../assets/gfx/tiles/sCompressedTilemap_A0AB1E.bin"
+sCompressedTiles_A0AB1E:
+    incbin "../../../../assets/gfx/tiles/sCompressedTiles_A0AB1E.bin"
 
-sCompressedTilemap_A0CAAF:
-    incbin "../../../../assets/gfx/tiles/sCompressedTilemap_A0CAAF.bin"
+sCompressedTiles_A0CAAF:
+    incbin "../../../../assets/gfx/tiles/sCompressedTiles_A0CAAF.bin"
 
-sCompressedTilemap_A0E682:
-    incbin "../../../../assets/gfx/tiles/sCompressedTilemap_A0E682.bin"
+sCompressedTiles_A0E682:
+    incbin "../../../../assets/gfx/tiles/sCompressedTiles_A0E682.bin"
 
 Padding_A00000:
     fill 822

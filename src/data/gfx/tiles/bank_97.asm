@@ -2,23 +2,23 @@
 
     ORG $978000
 
-sCompressedTilemap_978000:
-    incbin "../../../../assets/gfx/tiles/sCompressedTilemap_978000.bin"
+sCompressedTiles_978000:
+    incbin "../../../../assets/gfx/tiles/sCompressedTiles_978000.bin"
 
-sCompressedTilemap_979A88:
-    incbin "../../../../assets/gfx/tiles/sCompressedTilemap_979A88.bin"
+sCompressedTiles_979A88:
+    incbin "../../../../assets/gfx/tiles/sCompressedTiles_979A88.bin"
 
-sCompressedTilemap_97B11A:
-    incbin "../../../../assets/gfx/tiles/sCompressedTilemap_97B11A.bin"
+sCompressedTiles_97B11A:
+    incbin "../../../../assets/gfx/tiles/sCompressedTiles_97B11A.bin"
 
-sCompressedTilemap_97B45F:
-    incbin "../../../../assets/gfx/tiles/sCompressedTilemap_97B45F.bin"
+sCompressedTiles_97B45F:
+    incbin "../../../../assets/gfx/tiles/sCompressedTiles_97B45F.bin"
 
-sCompressedTilemap_97CD20:
-    incbin "../../../../assets/gfx/tiles/sCompressedTilemap_97CD20.bin"
+sCompressedTiles_97CD20:
+    incbin "../../../../assets/gfx/tiles/sCompressedTiles_97CD20.bin"
 
-sCompressedTilemap_97E7A2:
-    incbin "../../../../assets/gfx/tiles/sCompressedTilemap_97E7A2.bin"
+sCompressedTiles_97E7A2:
+    incbin "../../../../assets/gfx/tiles/sCompressedTiles_97E7A2.bin"
 
 Padding_970000:
     fill 974

@@ -2,101 +2,101 @@
 
     ORG $A58000
 
-sCompressedCharactermap_A58000:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A58000.bin"
+sCompressedTilemap_A58000:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A58000.bin"
 
-sCompressedCharactermap_A58327:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A58327.bin"
+sCompressedTilemap_A58327:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A58327.bin"
 
-sCompressedCharactermap_A58B49:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A58B49.bin"
+sCompressedTilemap_A58B49:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A58B49.bin"
 
-sCompressedCharactermap_A58D8E:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A58D8E.bin"
+sCompressedTilemap_A58D8E:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A58D8E.bin"
 
-sCompressedCharactermap_A5970F:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A5970F.bin"
+sCompressedTilemap_A5970F:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A5970F.bin"
 
-sCompressedCharactermap_A59C08:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A59C08.bin"
+sCompressedTilemap_A59C08:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A59C08.bin"
 
-sCompressedCharactermap_A59E0B:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A59E0B.bin"
+sCompressedTilemap_A59E0B:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A59E0B.bin"
 
-sCompressedCharactermap_A5A3D5:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A5A3D5.bin"
+sCompressedTilemap_A5A3D5:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A5A3D5.bin"
 
-sCompressedCharactermap_A5A6A0:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A5A6A0.bin"
+sCompressedTilemap_A5A6A0:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A5A6A0.bin"
 
-sCompressedCharactermap_A5AD17:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A5AD17.bin"
+sCompressedTilemap_A5AD17:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A5AD17.bin"
 
-sCompressedCharactermap_A5B042:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A5B042.bin"
+sCompressedTilemap_A5B042:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A5B042.bin"
 
-sCompressedCharactermap_A5B361:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A5B361.bin"
+sCompressedTilemap_A5B361:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A5B361.bin"
 
-sCompressedCharactermap_A5B63B:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A5B63B.bin"
+sCompressedTilemap_A5B63B:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A5B63B.bin"
 
-sCompressedCharactermap_A5B943:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A5B943.bin"
+sCompressedTilemap_A5B943:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A5B943.bin"
 
 sCompressedTilemap_A5BD8A:
     incbin "../../../../assets/gfx/characters/sCompressedTilemap_A5BD8A.bin"
 
-sCompressedCharactermap_A5C258:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A5C258.bin"
+sCompressedTilemap_A5C258:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A5C258.bin"
 
-sCompressedCharactermap_A5C4CD:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A5C4CD.bin"
+sCompressedTilemap_A5C4CD:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A5C4CD.bin"
 
-sCompressedCharactermap_A5C955:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A5C955.bin"
+sCompressedTilemap_A5C955:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A5C955.bin"
 
-sCompressedCharactermap_A5CB05:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A5CB05.bin"
+sCompressedTilemap_A5CB05:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A5CB05.bin"
 
-sCompressedCharactermap_A5CD88:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A5CD88.bin"
+sCompressedTilemap_A5CD88:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A5CD88.bin"
 
-sCompressedCharactermap_A5D44C:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A5D44C.bin"
+sCompressedTilemap_A5D44C:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A5D44C.bin"
 
-sCompressedCharactermap_A5D94A:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A5D94A.bin"
+sCompressedTilemap_A5D94A:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A5D94A.bin"
 
-sCompressedCharactermap_A5DE84:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A5DE84.bin"
+sCompressedTilemap_A5DE84:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A5DE84.bin"
 
-sCompressedCharactermap_A5E253:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A5E253.bin"
+sCompressedTilemap_A5E253:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A5E253.bin"
 
-sCompressedCharactermap_A5E5CE:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A5E5CE.bin"
+sCompressedTilemap_A5E5CE:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A5E5CE.bin"
 
-sCompressedCharactermap_A5E977:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A5E977.bin"
+sCompressedTilemap_A5E977:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A5E977.bin"
 
-sCompressedCharactermap_A5ECFB:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A5ECFB.bin"
+sCompressedTilemap_A5ECFB:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A5ECFB.bin"
 
-sCompressedCharactermap_A5F059:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A5F059.bin"
+sCompressedTilemap_A5F059:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A5F059.bin"
 
-sCompressedCharactermap_A5F45A:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A5F45A.bin"
+sCompressedTilemap_A5F45A:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A5F45A.bin"
 
-sCompressedCharactermap_A5F671:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A5F671.bin"
+sCompressedTilemap_A5F671:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A5F671.bin"
 
-sCompressedCharactermap_A5F95C:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A5F95C.bin"
+sCompressedTilemap_A5F95C:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A5F95C.bin"
 
-sCompressedCharactermap_A5FBCE:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A5FBCE.bin"
+sCompressedTilemap_A5FBCE:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A5FBCE.bin"
 
 Padding_A50000:
     fill 368

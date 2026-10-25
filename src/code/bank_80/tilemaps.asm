@@ -520,11 +520,11 @@ sFarmSpringMap:
   + dw $0300                                                   ;80AB49|        |      ; OBJ_clamp_down
  
   + dw $2000                                                   ;80AB4B|        |      ; Destination in VRAM 1
-    dl sCompressedTilemap_92D3AB                               ;80AB4D|        |92D3AB; Compressed Location 1
+    dl sCompressedTiles_92D3AB                               ;80AB4D|        |92D3AB; Compressed Location 1
     dw $3000                                                   ;80AB50|        |      ; Destination in VRAM 2
-    dl sCompressedTilemap_938000                               ;80AB52|        |938000; Compressed Location 2
+    dl sCompressedTiles_938000                               ;80AB52|        |938000; Compressed Location 2
     dw $4000                                                   ;80AB55|        |      ; Destination in VRAM 3
-    dl sCompressedTilemap_939E8E                               ;80AB57|        |939E8E; Compressed Location 3
+    dl sCompressedTiles_939E8E                               ;80AB57|        |939E8E; Compressed Location 3
     dw $6000                                                   ;80AB5A|        |      ; Destination in VRAM
     dl sCharactermap_A18000                                    ;80AB5C|        |A18000; Compressed Location
  
@@ -533,11 +533,11 @@ sFarmSummerMap:
     dw !AFLAGS_RAWCHARMAP|!AFLAGS_UNK0080|!AFLAGS_FOR0040|!AFLAGS_UNK0020                                                   
     db $04,$04,$03,$01                                         ;80AB62|        |      ;
     dw $0000,$0300,$0000,$0300,$2000                           ;80AB66|        |      ;
-    dl sCompressedTilemap_92D3AB                               ;80AB70|        |92D3AB;
+    dl sCompressedTiles_92D3AB                               ;80AB70|        |92D3AB;
     dw $3000                                                   ;80AB73|        |      ;
-    dl sCompressedTilemap_938000                               ;80AB75|        |938000;
+    dl sCompressedTiles_938000                               ;80AB75|        |938000;
     dw $4000                                                   ;80AB78|        |      ;
-    dl sCompressedTilemap_939E8E                               ;80AB7A|        |939E8E;
+    dl sCompressedTiles_939E8E                               ;80AB7A|        |939E8E;
     dw $6000                                                   ;80AB7D|        |      ;
     dl sCharactermap_A18000                                    ;80AB7F|        |A18000;
  
@@ -546,11 +546,11 @@ sFarmFallMap:
     dw !AFLAGS_RAWCHARMAP|!AFLAGS_UNK0080|!AFLAGS_FOR0040|!AFLAGS_UNK0020                                                   
     db $04,$04,$03,$01                                         ;80AB85|        |      ;
     dw $0000,$0300,$0000,$0300,$2000                           ;80AB89|        |      ;
-    dl sCompressedTilemap_9282CB                               ;80AB93|        |9282CB;
+    dl sCompressedTiles_9282CB                               ;80AB93|        |9282CB;
     dw $3000                                                   ;80AB96|        |      ;
-    dl sCompressedTilemap_929D10                               ;80AB98|        |929D10;
+    dl sCompressedTiles_929D10                               ;80AB98|        |929D10;
     dw $4000                                                   ;80AB9B|        |      ;
-    dl sCompressedTilemap_92BB03                               ;80AB9D|        |92BB03;
+    dl sCompressedTiles_92BB03                               ;80AB9D|        |92BB03;
     dw $6000                                                   ;80ABA0|        |      ;
     dl sCharactermap_A18000                                    ;80ABA2|        |A18000;
  
@@ -559,11 +559,11 @@ sFarmWinterMap:
     dw !AFLAGS_RAWCHARMAP|!AFLAGS_UNK0080|!AFLAGS_FOR0040|!AFLAGS_UNK0020                                                   
     db $04,$04,$03,$01                                         ;80ABA8|        |      ;
     dw $0000,$0300,$0000,$0300,$2000                           ;80ABAC|        |      ;
-    dl sCompressedTilemap_93B736                               ;80ABB6|        |93B736;
+    dl sCompressedTiles_93B736                               ;80ABB6|        |93B736;
     dw $3000                                                   ;80ABB9|        |      ;
-    dl sCompressedTilemap_93D049                               ;80ABBB|        |93D049;
+    dl sCompressedTiles_93D049                               ;80ABBB|        |93D049;
     dw $4000                                                   ;80ABBE|        |      ;
-    dl sCompressedTilemap_93E12B                               ;80ABC0|        |93E12B;
+    dl sCompressedTiles_93E12B                               ;80ABC0|        |93E12B;
     dw $6000                                                   ;80ABC3|        |      ;
     dl sCharactermap_A18000                                    ;80ABC5|        |A18000;
  
@@ -572,11 +572,11 @@ sTownSpringMap:
     dw !AFLAGS_RAWCHARMAP|!AFLAGS_FOR0040|!AFLAGS_UNK0020                                                   
     db $04,$04,$03,$01                                         ;80ABCB|        |      ;
     dw $0000,$0200,$0000,$0300,$2000                           ;80ABCF|        |      ;
-    dl sCompressedTilemap_97B45F                               ;80ABD9|        |97B45F;
+    dl sCompressedTiles_97B45F                               ;80ABD9|        |97B45F;
     dw $3000                                                   ;80ABDC|        |      ;
-    dl sCompressedTilemap_998000                               ;80ABDE|        |998000;
+    dl sCompressedTiles_998000                               ;80ABDE|        |998000;
     dw $4000                                                   ;80ABE1|        |      ;
-    dl sCompressedTilemap_999A74                               ;80ABE3|        |999A74;
+    dl sCompressedTiles_999A74                               ;80ABE3|        |999A74;
     dw $6000                                                   ;80ABE6|        |      ;
     dl sCharactermap_A38000                                    ;80ABE8|        |A38000;
  
@@ -585,11 +585,11 @@ sTownSummerMap:
     dw !AFLAGS_RAWCHARMAP|!AFLAGS_FOR0040|!AFLAGS_UNK0020                                                   
     db $04,$04,$03,$01                                         ;80ABEE|        |      ;
     dw $0000,$0200,$0000,$0300,$2000                           ;80ABF2|        |      ;
-    dl sCompressedTilemap_97B45F                               ;80ABFC|        |97B45F;
+    dl sCompressedTiles_97B45F                               ;80ABFC|        |97B45F;
     dw $3000                                                   ;80ABFF|        |      ;
-    dl sCompressedTilemap_97CD20                               ;80AC01|        |97CD20;
+    dl sCompressedTiles_97CD20                               ;80AC01|        |97CD20;
     dw $4000                                                   ;80AC04|        |      ;
-    dl sCompressedTilemap_97E7A2                               ;80AC06|        |97E7A2;
+    dl sCompressedTiles_97E7A2                               ;80AC06|        |97E7A2;
     dw $6000                                                   ;80AC09|        |      ;
     dl sCharactermap_A38000                                    ;80AC0B|        |A38000;
  
@@ -598,11 +598,11 @@ sTownFallMap:
     dw !AFLAGS_RAWCHARMAP|!AFLAGS_FOR0040|!AFLAGS_UNK0020                                                   
     db $04,$04,$03,$01                                         ;80AC11|        |      ;
     dw $0000,$0200,$0000,$0300,$2000                           ;80AC15|        |      ;
-    dl sCompressedTilemap_97B45F                               ;80AC1F|        |97B45F;
+    dl sCompressedTiles_97B45F                               ;80AC1F|        |97B45F;
     dw $3000                                                   ;80AC22|        |      ;
-    dl sCompressedTilemap_988000                               ;80AC24|        |988000;
+    dl sCompressedTiles_988000                               ;80AC24|        |988000;
     dw $4000                                                   ;80AC27|        |      ;
-    dl sCompressedTilemap_989A52                               ;80AC29|        |989A52;
+    dl sCompressedTiles_989A52                               ;80AC29|        |989A52;
     dw $6000                                                   ;80AC2C|        |      ;
     dl sCharactermap_A38000                                    ;80AC2E|        |A38000;
  
@@ -611,11 +611,11 @@ sTownWinterMap:
     dw !AFLAGS_RAWCHARMAP|!AFLAGS_FOR0040|!AFLAGS_UNK0020                                                   
     db $04,$04,$03,$01                                         ;80AC34|        |      ;
     dw $0000,$0200,$0000,$0300,$2000                           ;80AC38|        |      ;
-    dl sCompressedTilemap_99DCBD                               ;80AC42|        |99DCBD;
+    dl sCompressedTiles_99DCBD                               ;80AC42|        |99DCBD;
     dw $3000                                                   ;80AC45|        |      ;
-    dl sCompressedTilemap_9A8000                               ;80AC47|        |9A8000;
+    dl sCompressedTiles_9A8000                               ;80AC47|        |9A8000;
     dw $4000                                                   ;80AC4A|        |      ;
-    dl sCompressedTilemap_9A9921                               ;80AC4C|        |9A9921;
+    dl sCompressedTiles_9A9921                               ;80AC4C|        |9A9921;
     dw $6000                                                   ;80AC4F|        |      ;
     dl sCharactermap_A38000                                    ;80AC51|        |A38000;
  
@@ -624,99 +624,99 @@ sFlowerFestivalMap:
     dw !AFLAGS_FOR0040|!AFLAGS_UNK0020                                                   
     db $02,$02,$03,$01                                         ;80AC57|        |      ;
     dw $0000,$0100,$0000,$0100,$2000                           ;80AC5B|        |      ;
-    dl sCompressedTilemap_97B45F                               ;80AC65|        |97B45F;
+    dl sCompressedTiles_97B45F                               ;80AC65|        |97B45F;
     dw $3000                                                   ;80AC68|        |      ;
-    dl sCompressedTilemap_998000                               ;80AC6A|        |998000;
+    dl sCompressedTiles_998000                               ;80AC6A|        |998000;
     dw $4000                                                   ;80AC6D|        |      ;
-    dl sCompressedTilemap_99AEC3                               ;80AC6F|        |99AEC3;
+    dl sCompressedTiles_99AEC3                               ;80AC6F|        |99AEC3;
     dw $6000                                                   ;80AC72|        |      ;
-    dl sCompressedCharactermap_A4D379                          ;80AC74|        |A4D379;
+    dl sCompressedTilemap_A4D379                          ;80AC74|        |A4D379;
  
 sHarvestFestivalMap:
     db $00                                                     ;80AC77|        |      ;
     dw !AFLAGS_FOR0040|!AFLAGS_UNK0020                                                   
     db $02,$02,$03,$01                                         ;80AC7A|        |      ;
     dw $0000,$0100,$0000,$0100,$2000                           ;80AC7E|        |      ;
-    dl sCompressedTilemap_97B45F                               ;80AC88|        |97B45F;
+    dl sCompressedTiles_97B45F                               ;80AC88|        |97B45F;
     dw $3000                                                   ;80AC8B|        |      ;
-    dl sCompressedTilemap_988000                               ;80AC8D|        |988000;
+    dl sCompressedTiles_988000                               ;80AC8D|        |988000;
     dw $4000                                                   ;80AC90|        |      ;
-    dl sCompressedTilemap_98AEDB                               ;80AC92|        |98AEDB;
+    dl sCompressedTiles_98AEDB                               ;80AC92|        |98AEDB;
     dw $6000                                                   ;80AC95|        |      ;
-    dl sCompressedCharactermap_A4C5DE                          ;80AC97|        |A4C5DE;
+    dl sCompressedTilemap_A4C5DE                          ;80AC97|        |A4C5DE;
  
 sStarNightFestivalSquareMap:
     db $00                                                     ;80AC9A|        |      ;
     dw !AFLAGS_FOR0040|!AFLAGS_UNK0020                                                   
     db $02,$02,$03,$01                                         ;80AC9D|        |      ;
     dw $0000,$0100,$0000,$0100,$2000                           ;80ACA1|        |      ;
-    dl sCompressedTilemap_99DCBD                               ;80ACAB|        |99DCBD;
+    dl sCompressedTiles_99DCBD                               ;80ACAB|        |99DCBD;
     dw $3000                                                   ;80ACAE|        |      ;
-    dl sCompressedTilemap_9A8000                               ;80ACB0|        |9A8000;
+    dl sCompressedTiles_9A8000                               ;80ACB0|        |9A8000;
     dw $4000                                                   ;80ACB3|        |      ;
-    dl sCompressedTilemap_9AAEAB                               ;80ACB5|        |9AAEAB;
+    dl sCompressedTiles_9AAEAB                               ;80ACB5|        |9AAEAB;
     dw $6000                                                   ;80ACB8|        |      ;
-    dl sCompressedCharactermap_A58327                          ;80ACBA|        |A58327;
+    dl sCompressedTilemap_A58327                          ;80ACBA|        |A58327;
  
 sEggFestivalMap:
     db $00                                                     ;80ACBD|        |      ;
     dw !AFLAGS_FOR0040|!AFLAGS_UNK0020                                                   
     db $04,$04,$03,$01                                         ;80ACC0|        |      ;
     dw $0000,$0200,$0000,$0300,$2000                           ;80ACC4|        |      ;
-    dl sCompressedTilemap_97B45F                               ;80ACCE|        |97B45F;
+    dl sCompressedTiles_97B45F                               ;80ACCE|        |97B45F;
     dw $3000                                                   ;80ACD1|        |      ;
-    dl sCompressedTilemap_988000                               ;80ACD3|        |988000;
+    dl sCompressedTiles_988000                               ;80ACD3|        |988000;
     dw $4000                                                   ;80ACD6|        |      ;
-    dl sCompressedTilemap_99C3F2                               ;80ACD8|        |99C3F2;
+    dl sCompressedTiles_99C3F2                               ;80ACD8|        |99C3F2;
     dw $6000                                                   ;80ACDB|        |      ;
-    dl sCompressedCharactermap_A4DC7E                          ;80ACDD|        |A4DC7E;
+    dl sCompressedTilemap_A4DC7E                          ;80ACDD|        |A4DC7E;
  
 sRoadSpringMap:
     db $00                                                     ;80ACE0|        |      ;
     dw !AFLAGS_FOR0040|!AFLAGS_UNK0020                                                   
     db $01,$01,$01,$01                                         ;80ACE3|        |      ;
     dw $0000,$0000,$0000,$0000,$2000                           ;80ACE7|        |      ;
-    dl sCompressedTilemap_98CC6B                               ;80ACF1|        |98CC6B;
+    dl sCompressedTiles_98CC6B                               ;80ACF1|        |98CC6B;
     dw $6000                                                   ;80ACF4|        |      ;
-    dl sCompressedCharactermap_A4CFAB                          ;80ACF6|        |A4CFAB;
+    dl sCompressedTilemap_A4CFAB                          ;80ACF6|        |A4CFAB;
  
 sRoadSummerMap:
     db $00                                                     ;80ACF9|        |      ;
     dw !AFLAGS_FOR0040|!AFLAGS_UNK0020                                                   
     db $01,$01,$01,$01                                         ;80ACFC|        |      ;
     dw $0000,$0000,$0000,$0000,$2000                           ;80AD00|        |      ;
-    dl sCompressedTilemap_98CC6B                               ;80AD0A|        |98CC6B;
+    dl sCompressedTiles_98CC6B                               ;80AD0A|        |98CC6B;
     dw $6000                                                   ;80AD0D|        |      ;
-    dl sCompressedCharactermap_A4CFAB                          ;80AD0F|        |A4CFAB;
+    dl sCompressedTilemap_A4CFAB                          ;80AD0F|        |A4CFAB;
  
 sRoadFallMap:
     db $00                                                     ;80AD12|        |      ;
     dw !AFLAGS_FOR0040|!AFLAGS_UNK0020                                                   
     db $01,$01,$01,$01                                         ;80AD15|        |      ;
     dw $0000,$0000,$0000,$0000,$2000                           ;80AD19|        |      ;
-    dl sCompressedTilemap_98CC6B                               ;80AD23|        |98CC6B;
+    dl sCompressedTiles_98CC6B                               ;80AD23|        |98CC6B;
     dw $6000                                                   ;80AD26|        |      ;
-    dl sCompressedCharactermap_A4CFAB                          ;80AD28|        |A4CFAB;
+    dl sCompressedTilemap_A4CFAB                          ;80AD28|        |A4CFAB;
  
 sRoadWinterMap:
     db $00                                                     ;80AD2B|        |      ;
     dw !AFLAGS_FOR0040|!AFLAGS_UNK0020                                                   
     db $01,$01,$01,$01                                         ;80AD2E|        |      ;
     dw $0000,$0000,$0000,$0000,$2000                           ;80AD32|        |      ;
-    dl sCompressedTilemap_98E41D                               ;80AD3C|        |98E41D;
+    dl sCompressedTiles_98E41D                               ;80AD3C|        |98E41D;
     dw $6000                                                   ;80AD3F|        |      ;
-    dl sCompressedCharactermap_A4CFAB                          ;80AD41|        |A4CFAB;
+    dl sCompressedTilemap_A4CFAB                          ;80AD41|        |A4CFAB;
  
 sMountainSpring:
     db $00                                                     ;80AD44|        |      ;
     dw !AFLAGS_RAWCHARMAP|!AFLAGS_UNK0080|!AFLAGS_FOR0040|!AFLAGS_UNK0020                                                   
     db $04,$04,$03,$01                                         ;80AD47|        |      ;
     dw $0000,$0200,$0000,$0200,$2000                           ;80AD4B|        |      ;
-    dl sCompressedTilemap_9DE7CE                               ;80AD55|        |9DE7CE;
+    dl sCompressedTiles_9DE7CE                               ;80AD55|        |9DE7CE;
     dw $3000                                                   ;80AD58|        |      ;
-    dl sCompressedTilemap_9E8000                               ;80AD5A|        |9E8000;
+    dl sCompressedTiles_9E8000                               ;80AD5A|        |9E8000;
     dw $4000                                                   ;80AD5D|        |      ;
-    dl sCompressedTilemap_9D8000                               ;80AD5F|        |9D8000;
+    dl sCompressedTiles_9D8000                               ;80AD5F|        |9D8000;
     dw $6000                                                   ;80AD62|        |      ;
     dl sCharactermap_A28000                                    ;80AD64|        |A28000;
  
@@ -725,11 +725,11 @@ sMountainSummerMap:
     dw !AFLAGS_RAWCHARMAP|!AFLAGS_UNK0080|!AFLAGS_FOR0040|!AFLAGS_UNK0020                                                   
     db $04,$04,$03,$01                                         ;80AD6A|        |      ;
     dw $0000,$0200,$0000,$0200,$2000                           ;80AD6E|        |      ;
-    dl sCompressedTilemap_9CCBA3                               ;80AD78|        |9CCBA3;
+    dl sCompressedTiles_9CCBA3                               ;80AD78|        |9CCBA3;
     dw $3000                                                   ;80AD7B|        |      ;
-    dl sCompressedTilemap_9CE37D                               ;80AD7D|        |9CE37D;
+    dl sCompressedTiles_9CE37D                               ;80AD7D|        |9CE37D;
     dw $4000                                                   ;80AD80|        |      ;
-    dl sCompressedTilemap_9D8000                               ;80AD82|        |9D8000;
+    dl sCompressedTiles_9D8000                               ;80AD82|        |9D8000;
     dw $6000                                                   ;80AD85|        |      ;
     dl sCharactermap_A28000                                    ;80AD87|        |A28000;
  
@@ -738,11 +738,11 @@ sMountainFallMap:
     dw !AFLAGS_RAWCHARMAP|!AFLAGS_UNK0080|!AFLAGS_FOR0040|!AFLAGS_UNK0020                                                   
     db $04,$04,$03,$01                                         ;80AD8D|        |      ;
     dw $0000,$0200,$0000,$0200,$2000                           ;80AD91|        |      ;
-    dl sCompressedTilemap_9D991C                               ;80AD9B|        |9D991C;
+    dl sCompressedTiles_9D991C                               ;80AD9B|        |9D991C;
     dw $3000                                                   ;80AD9E|        |      ;
-    dl sCompressedTilemap_9DB15E                               ;80ADA0|        |9DB15E;
+    dl sCompressedTiles_9DB15E                               ;80ADA0|        |9DB15E;
     dw $4000                                                   ;80ADA3|        |      ;
-    dl sCompressedTilemap_9DCE31                               ;80ADA5|        |9DCE31;
+    dl sCompressedTiles_9DCE31                               ;80ADA5|        |9DCE31;
     dw $6000                                                   ;80ADA8|        |      ;
     dl sCharactermap_A28000                                    ;80ADAA|        |A28000;
  
@@ -751,11 +751,11 @@ sMountainWinterMap:
     dw !AFLAGS_RAWCHARMAP|!AFLAGS_UNK0080|!AFLAGS_FOR0040|!AFLAGS_UNK0020                                                   
     db $04,$04,$03,$01                                         ;80ADB0|        |      ;
     dw $0000,$0200,$0000,$0200,$2000                           ;80ADB4|        |      ;
-    dl sCompressedTilemap_9E9EDC                               ;80ADBE|        |9E9EDC;
+    dl sCompressedTiles_9E9EDC                               ;80ADBE|        |9E9EDC;
     dw $3000                                                   ;80ADC1|        |      ;
-    dl sCompressedTilemap_9EB75D                               ;80ADC3|        |9EB75D;
+    dl sCompressedTiles_9EB75D                               ;80ADC3|        |9EB75D;
     dw $4000                                                   ;80ADC6|        |      ;
-    dl sCompressedTilemap_9ED208                               ;80ADC8|        |9ED208;
+    dl sCompressedTiles_9ED208                               ;80ADC8|        |9ED208;
     dw $6000                                                   ;80ADCB|        |      ;
     dl sCharactermap_A28000                                    ;80ADCD|        |A28000;
  
@@ -764,250 +764,250 @@ sStarNightFestivalSpaMap:
     dw !AFLAGS_UNK0080|!AFLAGS_FOR0040|!AFLAGS_UNK0020                                                   
     db $01,$01,$03,$01                                         ;80ADD3|        |      ;
     dw $0000,$0000,$0000,$0000,$2000                           ;80ADD7|        |      ;
-    dl sCompressedTilemap_9E9EDC                               ;80ADE1|        |9E9EDC;
+    dl sCompressedTiles_9E9EDC                               ;80ADE1|        |9E9EDC;
     dw $3000                                                   ;80ADE4|        |      ;
-    dl sCompressedTilemap_9EB75D                               ;80ADE6|        |9EB75D;
+    dl sCompressedTiles_9EB75D                               ;80ADE6|        |9EB75D;
     dw $4000                                                   ;80ADE9|        |      ;
-    dl sCompressedTilemap_9ED208                               ;80ADEB|        |9ED208;
+    dl sCompressedTiles_9ED208                               ;80ADEB|        |9ED208;
     dw $6000                                                   ;80ADEE|        |      ;
-    dl sCompressedCharactermap_A59E0B                          ;80ADF0|        |A59E0B;
+    dl sCompressedTilemap_A59E0B                          ;80ADF0|        |A59E0B;
  
 sHouseMap:
     db $00                                                     ;80ADF3|        |      ;
     dw !AFLAGS_NONE                                                   
     db $01,$01,$02,$01                                         ;80ADF6|        |      ;
     dw $0000,$0000,$0000,$0000,$2000                           ;80ADFA|        |      ;
-    dl sCompressedTilemap_95C000                               ;80AE04|        |95C000;
+    dl sCompressedTiles_95C000                               ;80AE04|        |95C000;
     dw $3000                                                   ;80AE07|        |      ;
-    dl sCompressedTilemap_95D6E2                               ;80AE09|        |95D6E2;
+    dl sCompressedTiles_95D6E2                               ;80AE09|        |95D6E2;
     dw $6000                                                   ;80AE0C|        |      ;
-    dl sCompressedCharactermap_A49B84                          ;80AE0E|        |A49B84;
+    dl sCompressedTilemap_A49B84                          ;80AE0E|        |A49B84;
  
 sHouseUpgrade1Map:
     db $00                                                     ;80AE11|        |      ;
     dw !AFLAGS_NONE                                                   
     db $01,$01,$02,$01                                         ;80AE14|        |      ;
     dw $0000,$0000,$0000,$0000,$2000                           ;80AE18|        |      ;
-    dl sCompressedTilemap_95C000                               ;80AE22|        |95C000;
+    dl sCompressedTiles_95C000                               ;80AE22|        |95C000;
     dw $3000                                                   ;80AE25|        |      ;
-    dl sCompressedTilemap_95D6E2                               ;80AE27|        |95D6E2;
+    dl sCompressedTiles_95D6E2                               ;80AE27|        |95D6E2;
     dw $6000                                                   ;80AE2A|        |      ;
-    dl sCompressedCharactermap_A4945C                          ;80AE2C|        |A4945C;
+    dl sCompressedTilemap_A4945C                          ;80AE2C|        |A4945C;
  
 sHouseUpgrade2Map:
     db $00                                                     ;80AE2F|        |      ;
     dw !AFLAGS_NONE                                                   
     db $02,$01,$02,$01                                         ;80AE32|        |      ;
     dw $0000,$00A0,$0000,$0000,$2000                           ;80AE36|        |      ;
-    dl sCompressedTilemap_95C000                               ;80AE40|        |95C000;
+    dl sCompressedTiles_95C000                               ;80AE40|        |95C000;
     dw $3000                                                   ;80AE43|        |      ;
-    dl sCompressedTilemap_95D6E2                               ;80AE45|        |95D6E2;
+    dl sCompressedTiles_95D6E2                               ;80AE45|        |95D6E2;
     dw $6000                                                   ;80AE48|        |      ;
-    dl sCompressedCharactermap_A49745                          ;80AE4A|        |A49745;
+    dl sCompressedTilemap_A49745                          ;80AE4A|        |A49745;
  
 sMayorHouseMap:
     db $00                                                     ;80AE4D|        |      ;
     dw !AFLAGS_NONE                                                   
     db $02,$02,$01,$01                                         ;80AE50|        |      ;
     dw $0010,$00C0,$0000,$0000,$2000                           ;80AE54|        |      ;
-    dl sCompressedTilemap_95E8A3                               ;80AE5E|        |95E8A3;
+    dl sCompressedTiles_95E8A3                               ;80AE5E|        |95E8A3;
     dw $6000                                                   ;80AE61|        |      ;
-    dl sCompressedCharactermap_A49E2E                          ;80AE63|        |A49E2E;
+    dl sCompressedTilemap_A49E2E                          ;80AE63|        |A49E2E;
  
 sMayorHouseHallMap:
     db $00                                                     ;80AE66|        |      ;
     dw !AFLAGS_NONE                                                   
     db $02,$02,$01,$01                                         ;80AE69|        |      ;
     dw $0100,$0100,$0100,$0100,$2000                           ;80AE6D|        |      ;
-    dl sCompressedTilemap_95E8A3                               ;80AE77|        |95E8A3;
+    dl sCompressedTiles_95E8A3                               ;80AE77|        |95E8A3;
     dw $6000                                                   ;80AE7A|        |      ;
-    dl sCompressedCharactermap_A49E2E                          ;80AE7C|        |A49E2E;
+    dl sCompressedTilemap_A49E2E                          ;80AE7C|        |A49E2E;
  
 sMayorHouseMariaRoomMap:
     db $00                                                     ;80AE7F|        |      ;
     dw !AFLAGS_NONE                                                   
     db $02,$02,$01,$01                                         ;80AE82|        |      ;
     dw $0000,$0000,$0100,$0100,$2000                           ;80AE86|        |      ;
-    dl sCompressedTilemap_95E8A3                               ;80AE90|        |95E8A3;
+    dl sCompressedTiles_95E8A3                               ;80AE90|        |95E8A3;
     dw $6000                                                   ;80AE93|        |      ;
-    dl sCompressedCharactermap_A49E2E                          ;80AE95|        |A49E2E;
+    dl sCompressedTilemap_A49E2E                          ;80AE95|        |A49E2E;
  
 sChurchMap:
     db $00                                                     ;80AE98|        |      ;
     dw !AFLAGS_NONE                                                   
     db $01,$02,$01,$01                                         ;80AE9B|        |      ;
     dw $0000,$0000,$0000,$0100,$2000                           ;80AE9F|        |      ;
-    dl sCompressedTilemap_968000                               ;80AEA9|        |968000;
+    dl sCompressedTiles_968000                               ;80AEA9|        |968000;
     dw $6000                                                   ;80AEAC|        |      ;
-    dl sCompressedCharactermap_A4A597                          ;80AEAE|        |A4A597;
+    dl sCompressedTilemap_A4A597                          ;80AEAE|        |A4A597;
  
 sFlowerShopMap:
     db $00                                                     ;80AEB1|        |      ;
     dw !AFLAGS_NONE                                                   
     db $01,$02,$01,$01                                         ;80AEB4|        |      ;
     dw $0000,$0000,$0100,$0100,$3000                           ;80AEB8|        |      ;
-    dl sCompressedTilemap_969437                               ;80AEC2|        |969437;
+    dl sCompressedTiles_969437                               ;80AEC2|        |969437;
     dw $6000                                                   ;80AEC5|        |      ;
-    dl sCompressedCharactermap_A4AA99                          ;80AEC7|        |A4AA99;
+    dl sCompressedTilemap_A4AA99                          ;80AEC7|        |A4AA99;
  
 sFlowerShopRoomMap:
     db $00                                                     ;80AECA|        |      ;
     dw !AFLAGS_NONE                                                   
     db $01,$02,$01,$01                                         ;80AECD|        |      ;
     dw $0000,$0000,$0000,$0000,$3000                           ;80AED1|        |      ;
-    dl sCompressedTilemap_969437                               ;80AEDB|        |969437;
+    dl sCompressedTiles_969437                               ;80AEDB|        |969437;
     dw $6000                                                   ;80AEDE|        |      ;
-    dl sCompressedCharactermap_A4AA99                          ;80AEE0|        |A4AA99;
+    dl sCompressedTilemap_A4AA99                          ;80AEE0|        |A4AA99;
  
 sBarMap:
     db $00                                                     ;80AEE3|        |      ;
     dw !AFLAGS_NONE                                                   
     db $01,$02,$01,$01                                         ;80AEE6|        |      ;
     dw $0000,$0000,$0100,$0100,$3000                           ;80AEEA|        |      ;
-    dl sCompressedTilemap_96AD11                               ;80AEF4|        |96AD11;
+    dl sCompressedTiles_96AD11                               ;80AEF4|        |96AD11;
     dw $6000                                                   ;80AEF7|        |      ;
-    dl sCompressedCharactermap_A4AE95                          ;80AEF9|        |A4AE95;
+    dl sCompressedTilemap_A4AE95                          ;80AEF9|        |A4AE95;
  
 sBarRoomMap:
     db $00                                                     ;80AEFC|        |      ;
     dw !AFLAGS_NONE                                                   
     db $01,$02,$01,$01                                         ;80AEFF|        |      ;
     dw $0000,$0000,$0000,$0000,$3000                           ;80AF03|        |      ;
-    dl sCompressedTilemap_96AD11                               ;80AF0D|        |96AD11;
+    dl sCompressedTiles_96AD11                               ;80AF0D|        |96AD11;
     dw $6000                                                   ;80AF10|        |      ;
-    dl sCompressedCharactermap_A4AE95                          ;80AF12|        |A4AE95;
+    dl sCompressedTilemap_A4AE95                          ;80AF12|        |A4AE95;
  
 sRestaurantMap:
     db $00                                                     ;80AF15|        |      ;
     dw !AFLAGS_NONE                                                   
     db $01,$02,$01,$01                                         ;80AF18|        |      ;
     dw $0000,$0000,$0100,$0100,$3000                           ;80AF1C|        |      ;
-    dl sCompressedTilemap_96C489                               ;80AF26|        |96C489;
+    dl sCompressedTiles_96C489                               ;80AF26|        |96C489;
     dw $6000                                                   ;80AF29|        |      ;
-    dl sCompressedCharactermap_A4B3D1                          ;80AF2B|        |A4B3D1;
+    dl sCompressedTilemap_A4B3D1                          ;80AF2B|        |A4B3D1;
  
 sRestaurantRoomMap:
     db $00                                                     ;80AF2E|        |      ;
     dw !AFLAGS_NONE                                                   
     db $01,$02,$01,$01                                         ;80AF31|        |      ;
     dw $0000,$0000,$0000,$0000,$3000                           ;80AF35|        |      ;
-    dl sCompressedTilemap_96C489                               ;80AF3F|        |96C489;
+    dl sCompressedTiles_96C489                               ;80AF3F|        |96C489;
     dw $6000                                                   ;80AF42|        |      ;
-    dl sCompressedCharactermap_A4B3D1                          ;80AF44|        |A4B3D1;
+    dl sCompressedTilemap_A4B3D1                          ;80AF44|        |A4B3D1;
  
 sGeneralStoreMap:
     db $00                                                     ;80AF47|        |      ;
     dw !AFLAGS_NONE                                                   
     db $01,$02,$01,$01                                         ;80AF4A|        |      ;
     dw $0000,$0000,$0100,$0100,$3000                           ;80AF4E|        |      ;
-    dl sCompressedTilemap_96DC6D                               ;80AF58|        |96DC6D;
+    dl sCompressedTiles_96DC6D                               ;80AF58|        |96DC6D;
     dw $6000                                                   ;80AF5B|        |      ;
-    dl sCompressedCharactermap_A4B8E0                          ;80AF5D|        |A4B8E0;
+    dl sCompressedTilemap_A4B8E0                          ;80AF5D|        |A4B8E0;
  
 sGeneralStoreRoomMap:
     db $00                                                     ;80AF60|        |      ;
     dw !AFLAGS_NONE                                                   
     db $01,$02,$01,$01                                         ;80AF63|        |      ;
     dw $0000,$0000,$0000,$0000,$3000                           ;80AF67|        |      ;
-    dl sCompressedTilemap_96DC6D                               ;80AF71|        |96DC6D;
+    dl sCompressedTiles_96DC6D                               ;80AF71|        |96DC6D;
     dw $6000                                                   ;80AF74|        |      ;
-    dl sCompressedCharactermap_A4B8E0                          ;80AF76|        |A4B8E0;
+    dl sCompressedTilemap_A4B8E0                          ;80AF76|        |A4B8E0;
  
 sAnimalShopMap:
     db $00                                                     ;80AF79|        |      ;
     dw !AFLAGS_NONE                                                   
     db $01,$01,$01,$01                                         ;80AF7C|        |      ;
     dw $0000,$0000,$0000,$0000,$3000                           ;80AF80|        |      ;
-    dl sCompressedTilemap_978000                               ;80AF8A|        |978000;
+    dl sCompressedTiles_978000                               ;80AF8A|        |978000;
     dw $6000                                                   ;80AF8D|        |      ;
-    dl sCompressedCharactermap_A4BCC1                          ;80AF8F|        |A4BCC1;
+    dl sCompressedTilemap_A4BCC1                          ;80AF8F|        |A4BCC1;
  
 sFortuneTellerHouseMap:
     db $00                                                     ;80AF92|        |      ;
     dw !AFLAGS_NONE                                                   
     db $01,$01,$01,$01                                         ;80AF95|        |      ;
     dw $0000,$0000,$0000,$0000,$3000                           ;80AF99|        |      ;
-    dl sCompressedTilemap_979A88                               ;80AFA3|        |979A88;
+    dl sCompressedTiles_979A88                               ;80AFA3|        |979A88;
     dw $6000                                                   ;80AFA6|        |      ;
-    dl sCompressedCharactermap_A4C065                          ;80AFA8|        |A4C065;
+    dl sCompressedTilemap_A4C065                          ;80AFA8|        |A4C065;
  
 sToolShedMap:
     db $02                                                     ;80AFAB|        |      ;
     dw !AFLAGS_NONE                                                   
     db $01,$01,$02,$02                                         ;80AFAE|        |      ;
     dw $0000,$0000,$0000,$0000,$2000                           ;80AFB2|        |      ;
-    dl sCompressedTilemap_9AE02D                               ;80AFBC|        |9AE02D;
+    dl sCompressedTiles_9AE02D                               ;80AFBC|        |9AE02D;
     dw $3000                                                   ;80AFBF|        |      ;
-    dl sCompressedTilemap_9B8000                               ;80AFC1|        |9B8000;
+    dl sCompressedTiles_9B8000                               ;80AFC1|        |9B8000;
     dw $7000                                                   ;80AFC4|        |      ;
-    dl sCompressedCharactermap_A59C08                          ;80AFC6|        |A59C08;
+    dl sCompressedTilemap_A59C08                          ;80AFC6|        |A59C08;
     dw $6000                                                   ;80AFC9|        |      ;
-    dl sCompressedCharactermap_A58B49                          ;80AFCB|        |A58B49;
+    dl sCompressedTilemap_A58B49                          ;80AFCB|        |A58B49;
  
 sBarnMap:
     db $00                                                     ;80AFCE|        |      ;
     dw !AFLAGS_NONE                                                   
     db $01,$02,$01,$01                                         ;80AFD1|        |      ;
     dw $0000,$0000,$0000,$00A0,$2000                           ;80AFD5|        |      ;
-    dl sCompressedTilemap_9CA40C                               ;80AFDF|        |9CA40C;
+    dl sCompressedTiles_9CA40C                               ;80AFDF|        |9CA40C;
     dw $6000                                                   ;80AFE2|        |      ;
-    dl sCompressedCharactermap_A5C4CD                          ;80AFE4|        |A5C4CD;
+    dl sCompressedTilemap_A5C4CD                          ;80AFE4|        |A5C4CD;
  
 sCoopMap:
     db $00                                                     ;80AFE7|        |      ;
     dw !AFLAGS_NONE                                                   
     db $01,$01,$01,$01                                         ;80AFEA|        |      ;
     dw $0000,$0000,$0000,$0000,$2000                           ;80AFEE|        |      ;
-    dl sCompressedTilemap_9CA40C                               ;80AFF8|        |9CA40C;
+    dl sCompressedTiles_9CA40C                               ;80AFF8|        |9CA40C;
     dw $6000                                                   ;80AFFB|        |      ;
-    dl sCompressedCharactermap_A5C258                          ;80AFFD|        |A5C258;
+    dl sCompressedTilemap_A5C258                          ;80AFFD|        |A5C258;
  
 sMountainCaveMap:
     db $00                                                     ;80B000|        |      ;
     dw !AFLAGS_UNK0020                                                   
     db $02,$02,$01,$01                                         ;80B003|        |      ;
     dw $0000,$0100,$0000,$0100,$2000                           ;80B007|        |      ;
-    dl sCompressedTilemap_948000                               ;80B011|        |948000;
+    dl sCompressedTiles_948000                               ;80B011|        |948000;
     dw $6000                                                   ;80B014|        |      ;
-    dl sCompressedCharactermap_A48A2D                          ;80B016|        |A48A2D;
+    dl sCompressedTilemap_A48A2D                          ;80B016|        |A48A2D;
  
 sElfTunnelMap:
     db $00                                                     ;80B019|        |      ;
     dw !AFLAGS_UNK0020                                                   
     db $01,$03,$01,$01                                         ;80B01C|        |      ;
     dw $0000,$0000,$0000,$0200,$2000                           ;80B020|        |      ;
-    dl sCompressedTilemap_948000                               ;80B02A|        |948000;
+    dl sCompressedTiles_948000                               ;80B02A|        |948000;
     dw $6000                                                   ;80B02D|        |      ;
-    dl sCompressedCharactermap_A481AE                          ;80B02F|        |A481AE;
+    dl sCompressedTilemap_A481AE                          ;80B02F|        |A481AE;
  
 sMap_80B032:
     db $00                                                     ;80B032|        |      ;
     dw !AFLAGS_NONE                                                   
     db $01,$01,$01,$01                                         ;80B035|        |      ;
     dw $0000,$0000,$0000,$0000,$2000                           ;80B039|        |      ;
-    dl sCompressedTilemap_9B9F53                               ;80B043|        |9B9F53;
+    dl sCompressedTiles_9B9F53                               ;80B043|        |9B9F53;
     dw $6000                                                   ;80B046|        |      ;
-    dl sCompressedCharactermap_A5B63B                          ;80B048|        |A5B63B;
+    dl sCompressedTilemap_A5B63B                          ;80B048|        |A5B63B;
  
 sMap_80B04B:
     db $00                                                     ;80B04B|        |      ;
     dw !AFLAGS_NONE                                                   
     db $01,$03,$01,$01                                         ;80B04E|        |      ;
     dw $0000,$0000,$0000,$0200,$2000                           ;80B052|        |      ;
-    dl sCompressedTilemap_9B86AD                               ;80B05C|        |9B86AD;
+    dl sCompressedTiles_9B86AD                               ;80B05C|        |9B86AD;
     dw $6000                                                   ;80B05F|        |      ;
-    dl sCompressedCharactermap_A5A6A0                          ;80B061|        |A5A6A0;
+    dl sCompressedTilemap_A5A6A0                          ;80B061|        |A5A6A0;
  
 sMap_80B064:
     db $00                                                     ;80B064|        |      ;
     dw !AFLAGS_NONE                                                   
     db $01,$02,$03,$01                                         ;80B067|        |      ;
     dw $0000,$0000,$0000,$0100,$2000                           ;80B06B|        |      ;
-    dl sCompressedTilemap_97B45F                               ;80B075|        |97B45F;
+    dl sCompressedTiles_97B45F                               ;80B075|        |97B45F;
     dw $3000                                                   ;80B078|        |      ;
-    dl sCompressedTilemap_998000                               ;80B07A|        |998000;
+    dl sCompressedTiles_998000                               ;80B07A|        |998000;
     dw $4000                                                   ;80B07D|        |      ;
-    dl sCompressedTilemap_999A74                               ;80B07F|        |999A74;
+    dl sCompressedTiles_999A74                               ;80B07F|        |999A74;
     dw $6000                                                   ;80B082|        |      ;
     dl sCharactermap_A38000                                    ;80B084|        |A38000;
  
@@ -1016,11 +1016,11 @@ sMap_80B087:
     dw !AFLAGS_NONE                                                   
     db $01,$02,$03,$01                                         ;80B08A|        |      ;
     dw $0000,$0000,$0000,$0100,$2000                           ;80B08E|        |      ;
-    dl sCompressedTilemap_97B45F                               ;80B098|        |97B45F;
+    dl sCompressedTiles_97B45F                               ;80B098|        |97B45F;
     dw $3000                                                   ;80B09B|        |      ;
-    dl sCompressedTilemap_97CD20                               ;80B09D|        |97CD20;
+    dl sCompressedTiles_97CD20                               ;80B09D|        |97CD20;
     dw $4000                                                   ;80B0A0|        |      ;
-    dl sCompressedTilemap_97E7A2                               ;80B0A2|        |97E7A2;
+    dl sCompressedTiles_97E7A2                               ;80B0A2|        |97E7A2;
     dw $6000                                                   ;80B0A5|        |      ;
     dl sCharactermap_A38000                                    ;80B0A7|        |A38000;
  
@@ -1029,11 +1029,11 @@ sMap_80B0AA:
     dw !AFLAGS_NONE                                                   
     db $01,$02,$03,$01                                         ;80B0AD|        |      ;
     dw $0000,$0000,$0000,$0100,$2000                           ;80B0B1|        |      ;
-    dl sCompressedTilemap_97B45F                               ;80B0BB|        |97B45F;
+    dl sCompressedTiles_97B45F                               ;80B0BB|        |97B45F;
     dw $3000                                                   ;80B0BE|        |      ;
-    dl sCompressedTilemap_988000                               ;80B0C0|        |988000;
+    dl sCompressedTiles_988000                               ;80B0C0|        |988000;
     dw $4000                                                   ;80B0C3|        |      ;
-    dl sCompressedTilemap_989A52                               ;80B0C5|        |989A52;
+    dl sCompressedTiles_989A52                               ;80B0C5|        |989A52;
     dw $6000                                                   ;80B0C8|        |      ;
     dl sCharactermap_A38000                                    ;80B0CA|        |A38000;
  
@@ -1042,11 +1042,11 @@ sMap_80B0CD:
     dw !AFLAGS_NONE                                                   
     db $01,$02,$03,$01                                         ;80B0D0|        |      ;
     dw $0000,$0000,$0000,$0100,$2000                           ;80B0D4|        |      ;
-    dl sCompressedTilemap_99DCBD                               ;80B0DE|        |99DCBD;
+    dl sCompressedTiles_99DCBD                               ;80B0DE|        |99DCBD;
     dw $3000                                                   ;80B0E1|        |      ;
-    dl sCompressedTilemap_9A8000                               ;80B0E3|        |9A8000;
+    dl sCompressedTiles_9A8000                               ;80B0E3|        |9A8000;
     dw $4000                                                   ;80B0E6|        |      ;
-    dl sCompressedTilemap_9A9921                               ;80B0E8|        |9A9921;
+    dl sCompressedTiles_9A9921                               ;80B0E8|        |9A9921;
     dw $6000                                                   ;80B0EB|        |      ;
     dl sCharactermap_A38000                                    ;80B0ED|        |A38000;
  
@@ -1055,591 +1055,591 @@ sSummitSpringMap:
     dw !AFLAGS_UNK0020                                                   
     db $01,$02,$02,$02                                         ;80B0F3|        |      ;
     dw $0000,$0000,$0000,$0100,$2000                           ;80B0F7|        |      ;
-    dl sCompressedTilemap_9BB76D                               ;80B101|        |9BB76D;
+    dl sCompressedTiles_9BB76D                               ;80B101|        |9BB76D;
     dw $3000                                                   ;80B104|        |      ;
-    dl sCompressedTilemap_9C8000                               ;80B106|        |9C8000;
+    dl sCompressedTiles_9C8000                               ;80B106|        |9C8000;
     dw $6000                                                   ;80B109|        |      ;
-    dl sCompressedCharactermap_A5B943                          ;80B10B|        |A5B943;
+    dl sCompressedTilemap_A5B943                          ;80B10B|        |A5B943;
     dw $7000                                                   ;80B10E|        |      ;
-    dl sCompressedCharactermap_A5AD17                          ;80B110|        |A5AD17;
+    dl sCompressedTilemap_A5AD17                          ;80B110|        |A5AD17;
  
 sSummitSummerMap:
     db $01                                                     ;80B113|        |      ;
     dw !AFLAGS_UNK0020                                                   
     db $01,$02,$02,$02                                         ;80B116|        |      ;
     dw $0000,$0000,$0000,$0100,$2000                           ;80B11A|        |      ;
-    dl sCompressedTilemap_9BB76D                               ;80B124|        |9BB76D;
+    dl sCompressedTiles_9BB76D                               ;80B124|        |9BB76D;
     dw $3000                                                   ;80B127|        |      ;
-    dl sCompressedTilemap_9C8000                               ;80B129|        |9C8000;
+    dl sCompressedTiles_9C8000                               ;80B129|        |9C8000;
     dw $6000                                                   ;80B12C|        |      ;
-    dl sCompressedCharactermap_A5B943                          ;80B12E|        |A5B943;
+    dl sCompressedTilemap_A5B943                          ;80B12E|        |A5B943;
     dw $7000                                                   ;80B131|        |      ;
-    dl sCompressedCharactermap_A5AD17                          ;80B133|        |A5AD17;
+    dl sCompressedTilemap_A5AD17                          ;80B133|        |A5AD17;
  
 sSummitFallMap:
     db $01                                                     ;80B136|        |      ;
     dw !AFLAGS_UNK0020                                                   
     db $01,$02,$02,$02                                         ;80B139|        |      ;
     dw $0000,$0000,$0000,$0100,$2000                           ;80B13D|        |      ;
-    dl sCompressedTilemap_9BB76D                               ;80B147|        |9BB76D;
+    dl sCompressedTiles_9BB76D                               ;80B147|        |9BB76D;
     dw $3000                                                   ;80B14A|        |      ;
-    dl sCompressedTilemap_9C8000                               ;80B14C|        |9C8000;
+    dl sCompressedTiles_9C8000                               ;80B14C|        |9C8000;
     dw $6000                                                   ;80B14F|        |      ;
-    dl sCompressedCharactermap_A5B943                          ;80B151|        |A5B943;
+    dl sCompressedTilemap_A5B943                          ;80B151|        |A5B943;
     dw $7000                                                   ;80B154|        |      ;
-    dl sCompressedCharactermap_A5AD17                          ;80B156|        |A5AD17;
+    dl sCompressedTilemap_A5AD17                          ;80B156|        |A5AD17;
  
 sSummitWinterMap:
     db $01                                                     ;80B159|        |      ;
     dw !AFLAGS_UNK0020                                                   
     db $01,$02,$02,$02                                         ;80B15C|        |      ;
     dw $0000,$0000,$0000,$0100,$2000                           ;80B160|        |      ;
-    dl sCompressedTilemap_9BCF8F                               ;80B16A|        |9BCF8F;
+    dl sCompressedTiles_9BCF8F                               ;80B16A|        |9BCF8F;
     dw $3000                                                   ;80B16D|        |      ;
-    dl sCompressedTilemap_9C965F                               ;80B16F|        |9C965F;
+    dl sCompressedTiles_9C965F                               ;80B16F|        |9C965F;
     dw $6000                                                   ;80B172|        |      ;
-    dl sCompressedCharactermap_A5B943                          ;80B174|        |A5B943;
+    dl sCompressedTilemap_A5B943                          ;80B174|        |A5B943;
     dw $7000                                                   ;80B177|        |      ;
-    dl sCompressedCharactermap_A5AD17                          ;80B179|        |A5AD17;
+    dl sCompressedTilemap_A5AD17                          ;80B179|        |A5AD17;
  
 sMap_80B17C:
     db $01                                                     ;80B17C|        |      ;
     dw !AFLAGS_UNK0020                                                   
     db $01,$02,$02,$02                                         ;80B17F|        |      ;
     dw $0000,$0000,$0000,$0100,$2000                           ;80B183|        |      ;
-    dl sCompressedTilemap_9BB76D                               ;80B18D|        |9BB76D;
+    dl sCompressedTiles_9BB76D                               ;80B18D|        |9BB76D;
     dw $3000                                                   ;80B190|        |      ;
-    dl sCompressedTilemap_9C8000                               ;80B192|        |9C8000;
+    dl sCompressedTiles_9C8000                               ;80B192|        |9C8000;
     dw $6000                                                   ;80B195|        |      ;
-    dl sCompressedCharactermap_A5B943                          ;80B197|        |A5B943;
+    dl sCompressedTilemap_A5B943                          ;80B197|        |A5B943;
     dw $7000                                                   ;80B19A|        |      ;
-    dl sCompressedCharactermap_A5B042                          ;80B19C|        |A5B042;
+    dl sCompressedTilemap_A5B042                          ;80B19C|        |A5B042;
  
 sMap_80B19F:
     db $01                                                     ;80B19F|        |      ;
     dw !AFLAGS_UNK0020                                                   
     db $01,$02,$02,$02                                         ;80B1A2|        |      ;
     dw $0000,$0000,$0000,$0100,$2000                           ;80B1A6|        |      ;
-    dl sCompressedTilemap_9BB76D                               ;80B1B0|        |9BB76D;
+    dl sCompressedTiles_9BB76D                               ;80B1B0|        |9BB76D;
     dw $3000                                                   ;80B1B3|        |      ;
-    dl sCompressedTilemap_9C8000                               ;80B1B5|        |9C8000;
+    dl sCompressedTiles_9C8000                               ;80B1B5|        |9C8000;
     dw $6000                                                   ;80B1B8|        |      ;
-    dl sCompressedCharactermap_A5B943                          ;80B1BA|        |A5B943;
+    dl sCompressedTilemap_A5B943                          ;80B1BA|        |A5B943;
     dw $7000                                                   ;80B1BD|        |      ;
-    dl sCompressedCharactermap_A5B042                          ;80B1BF|        |A5B042;
+    dl sCompressedTilemap_A5B042                          ;80B1BF|        |A5B042;
  
 sMap_80B1C2:
     db $01                                                     ;80B1C2|        |      ;
     dw !AFLAGS_UNK0020                                                   
     db $01,$02,$02,$02                                         ;80B1C5|        |      ;
     dw $0000,$0000,$0000,$0100,$2000                           ;80B1C9|        |      ;
-    dl sCompressedTilemap_9BB76D                               ;80B1D3|        |9BB76D;
+    dl sCompressedTiles_9BB76D                               ;80B1D3|        |9BB76D;
     dw $3000                                                   ;80B1D6|        |      ;
-    dl sCompressedTilemap_9C8000                               ;80B1D8|        |9C8000;
+    dl sCompressedTiles_9C8000                               ;80B1D8|        |9C8000;
     dw $7000                                                   ;80B1DB|        |      ;
-    dl sCompressedCharactermap_A5B042                          ;80B1DD|        |A5B042;
+    dl sCompressedTilemap_A5B042                          ;80B1DD|        |A5B042;
     dw $6000                                                   ;80B1E0|        |      ;
-    dl sCompressedCharactermap_A5B943                          ;80B1E2|        |A5B943;
+    dl sCompressedTilemap_A5B943                          ;80B1E2|        |A5B943;
  
 sMap_80B1E5:
     db $01                                                     ;80B1E5|        |      ;
     dw !AFLAGS_UNK0020                                                   
     db $01,$02,$02,$02                                         ;80B1E8|        |      ;
     dw $0000,$0000,$0000,$0100,$2000                           ;80B1EC|        |      ;
-    dl sCompressedTilemap_9BCF8F                               ;80B1F6|        |9BCF8F;
+    dl sCompressedTiles_9BCF8F                               ;80B1F6|        |9BCF8F;
     dw $3000                                                   ;80B1F9|        |      ;
-    dl sCompressedTilemap_9C965F                               ;80B1FB|        |9C965F;
+    dl sCompressedTiles_9C965F                               ;80B1FB|        |9C965F;
     dw $6000                                                   ;80B1FE|        |      ;
-    dl sCompressedCharactermap_A5B943                          ;80B200|        |A5B943;
+    dl sCompressedTilemap_A5B943                          ;80B200|        |A5B943;
     dw $7000                                                   ;80B203|        |      ;
-    dl sCompressedCharactermap_A5B042                          ;80B205|        |A5B042;
+    dl sCompressedTilemap_A5B042                          ;80B205|        |A5B042;
  
 sStarNightFestivalMountainTopMap:
     db $01                                                     ;80B208|        |      ;
     dw !AFLAGS_UNK0020                                                   
     db $01,$02,$02,$02                                         ;80B20B|        |      ;
     dw $0000,$0000,$0000,$0100,$2000                           ;80B20F|        |      ;
-    dl sCompressedTilemap_9BCF8F                               ;80B219|        |9BCF8F;
+    dl sCompressedTiles_9BCF8F                               ;80B219|        |9BCF8F;
     dw $3000                                                   ;80B21C|        |      ;
-    dl sCompressedTilemap_9C965F                               ;80B21E|        |9C965F;
+    dl sCompressedTiles_9C965F                               ;80B21E|        |9C965F;
     dw $6000                                                   ;80B221|        |      ;
-    dl sCompressedCharactermap_A5B943                          ;80B223|        |A5B943;
+    dl sCompressedTilemap_A5B943                          ;80B223|        |A5B943;
     dw $7000                                                   ;80B226|        |      ;
-    dl sCompressedCharactermap_A5B361                          ;80B228|        |A5B361;
+    dl sCompressedTilemap_A5B361                          ;80B228|        |A5B361;
  
 sNewYearsFestivalMap:
     db $01                                                     ;80B22B|        |      ;
     dw !AFLAGS_UNK0020                                                   
     db $01,$02,$02,$02                                         ;80B22E|        |      ;
     dw $0000,$0000,$0000,$0100,$2000                           ;80B232|        |      ;
-    dl sCompressedTilemap_9BB76D                               ;80B23C|        |9BB76D;
+    dl sCompressedTiles_9BB76D                               ;80B23C|        |9BB76D;
     dw $3000                                                   ;80B23F|        |      ;
-    dl sCompressedTilemap_9C8000                               ;80B241|        |9C8000;
+    dl sCompressedTiles_9C8000                               ;80B241|        |9C8000;
     dw $6000                                                   ;80B244|        |      ;
-    dl sCompressedCharactermap_A5B943                          ;80B246|        |A5B943;
+    dl sCompressedTilemap_A5B943                          ;80B246|        |A5B943;
     dw $7000                                                   ;80B249|        |      ;
-    dl sCompressedCharactermap_A5AD17                          ;80B24B|        |A5AD17;
+    dl sCompressedTilemap_A5AD17                          ;80B24B|        |A5AD17;
  
 sMap_80B24E:
     db $01                                                     ;80B24E|        |      ;
     dw !AFLAGS_UNK0020                                                   
     db $01,$02,$02,$02                                         ;80B251|        |      ;
     dw $0000,$0000,$0000,$0100,$2000                           ;80B255|        |      ;
-    dl sCompressedTilemap_9BB76D                               ;80B25F|        |9BB76D;
+    dl sCompressedTiles_9BB76D                               ;80B25F|        |9BB76D;
     dw $3000                                                   ;80B262|        |      ;
-    dl sCompressedTilemap_9C8000                               ;80B264|        |9C8000;
+    dl sCompressedTiles_9C8000                               ;80B264|        |9C8000;
     dw $6000                                                   ;80B267|        |      ;
     dl sCompressedTilemap_A5BD8A                               ;80B269|        |A5BD8A;
     dw $7000                                                   ;80B26C|        |      ;
-    dl sCompressedCharactermap_A5AD17                          ;80B26E|        |A5AD17;
+    dl sCompressedTilemap_A5AD17                          ;80B26E|        |A5AD17;
  
 sMap_80B271:
     db $00                                                     ;80B271|        |      ;
     dw !AFLAGS_NONE                                                   
     db $01,$01,$01,$01                                         ;80B274|        |      ;
     dw $0000,$0000,$0000,$0000,$2000                           ;80B278|        |      ;
-    dl sCompressedTilemap_98CC6B                               ;80B282|        |98CC6B;
+    dl sCompressedTiles_98CC6B                               ;80B282|        |98CC6B;
     dw $6000                                                   ;80B285|        |      ;
-    dl sCompressedCharactermap_A68DCF                          ;80B287|        |A68DCF;
+    dl sCompressedTilemap_A68DCF                          ;80B287|        |A68DCF;
  
 sMap_80B28A:
     db $00                                                     ;80B28A|        |      ;
     dw !AFLAGS_NONE                                                   
     db $01,$01,$03,$01                                         ;80B28D|        |      ;
     dw $0000,$0000,$0000,$0000,$2000                           ;80B291|        |      ;
-    dl sCompressedTilemap_92D3AB                               ;80B29B|        |92D3AB;
+    dl sCompressedTiles_92D3AB                               ;80B29B|        |92D3AB;
     dw $3000                                                   ;80B29E|        |      ;
-    dl sCompressedTilemap_938000                               ;80B2A0|        |938000;
+    dl sCompressedTiles_938000                               ;80B2A0|        |938000;
     dw $4000                                                   ;80B2A3|        |      ;
-    dl sCompressedTilemap_939E8E                               ;80B2A5|        |939E8E;
+    dl sCompressedTiles_939E8E                               ;80B2A5|        |939E8E;
     dw $6000                                                   ;80B2A8|        |      ;
-    dl sCompressedCharactermap_A5E253                          ;80B2AA|        |A5E253;
+    dl sCompressedTilemap_A5E253                          ;80B2AA|        |A5E253;
  
 sMap_80B2AD:
     db $00                                                     ;80B2AD|        |      ;
     dw !AFLAGS_NONE                                                   
     db $01,$01,$03,$01                                         ;80B2B0|        |      ;
     dw $0000,$0000,$0000,$0000,$2000                           ;80B2B4|        |      ;
-    dl sCompressedTilemap_92D3AB                               ;80B2BE|        |92D3AB;
+    dl sCompressedTiles_92D3AB                               ;80B2BE|        |92D3AB;
     dw $3000                                                   ;80B2C1|        |      ;
-    dl sCompressedTilemap_938000                               ;80B2C3|        |938000;
+    dl sCompressedTiles_938000                               ;80B2C3|        |938000;
     dw $4000                                                   ;80B2C6|        |      ;
-    dl sCompressedTilemap_939E8E                               ;80B2C8|        |939E8E;
+    dl sCompressedTiles_939E8E                               ;80B2C8|        |939E8E;
     dw $6000                                                   ;80B2CB|        |      ;
-    dl sCompressedCharactermap_A5E5CE                          ;80B2CD|        |A5E5CE;
+    dl sCompressedTilemap_A5E5CE                          ;80B2CD|        |A5E5CE;
  
 sMap_80B2D0:
     db $00                                                     ;80B2D0|        |      ;
     dw !AFLAGS_NONE                                                   
     db $01,$01,$03,$01                                         ;80B2D3|        |      ;
     dw $0000,$0000,$0000,$0000,$2000                           ;80B2D7|        |      ;
-    dl sCompressedTilemap_92D3AB                               ;80B2E1|        |92D3AB;
+    dl sCompressedTiles_92D3AB                               ;80B2E1|        |92D3AB;
     dw $3000                                                   ;80B2E4|        |      ;
-    dl sCompressedTilemap_938000                               ;80B2E6|        |938000;
+    dl sCompressedTiles_938000                               ;80B2E6|        |938000;
     dw $4000                                                   ;80B2E9|        |      ;
-    dl sCompressedTilemap_939E8E                               ;80B2EB|        |939E8E;
+    dl sCompressedTiles_939E8E                               ;80B2EB|        |939E8E;
     dw $6000                                                   ;80B2EE|        |      ;
-    dl sCompressedCharactermap_A5E977                          ;80B2F0|        |A5E977;
+    dl sCompressedTilemap_A5E977                          ;80B2F0|        |A5E977;
  
 sMap_80B2F3:
     db $00                                                     ;80B2F3|        |      ;
     dw !AFLAGS_NONE                                                   
     db $01,$01,$03,$01                                         ;80B2F6|        |      ;
     dw $0000,$0000,$0000,$0000,$2000                           ;80B2FA|        |      ;
-    dl sCompressedTilemap_92D3AB                               ;80B304|        |92D3AB;
+    dl sCompressedTiles_92D3AB                               ;80B304|        |92D3AB;
     dw $3000                                                   ;80B307|        |      ;
-    dl sCompressedTilemap_938000                               ;80B309|        |938000;
+    dl sCompressedTiles_938000                               ;80B309|        |938000;
     dw $4000                                                   ;80B30C|        |      ;
-    dl sCompressedTilemap_939E8E                               ;80B30E|        |939E8E;
+    dl sCompressedTiles_939E8E                               ;80B30E|        |939E8E;
     dw $6000                                                   ;80B311|        |      ;
-    dl sCompressedCharactermap_A5ECFB                          ;80B313|        |A5ECFB;
+    dl sCompressedTilemap_A5ECFB                          ;80B313|        |A5ECFB;
  
 sMap_80B316:
     db $00                                                     ;80B316|        |      ;
     dw !AFLAGS_NONE                                                   
     db $01,$01,$03,$01                                         ;80B319|        |      ;
     dw $0000,$0000,$0000,$0000,$2000                           ;80B31D|        |      ;
-    dl sCompressedTilemap_92D3AB                               ;80B327|        |92D3AB;
+    dl sCompressedTiles_92D3AB                               ;80B327|        |92D3AB;
     dw $3000                                                   ;80B32A|        |      ;
-    dl sCompressedTilemap_938000                               ;80B32C|        |938000;
+    dl sCompressedTiles_938000                               ;80B32C|        |938000;
     dw $4000                                                   ;80B32F|        |      ;
-    dl sCompressedTilemap_939E8E                               ;80B331|        |939E8E;
+    dl sCompressedTiles_939E8E                               ;80B331|        |939E8E;
     dw $6000                                                   ;80B334|        |      ;
-    dl sCompressedCharactermap_A5F671                          ;80B336|        |A5F671;
+    dl sCompressedTilemap_A5F671                          ;80B336|        |A5F671;
  
 sMap_80B339:
     db $00                                                     ;80B339|        |      ;
     dw !AFLAGS_NONE                                                   
     db $01,$01,$03,$01                                         ;80B33C|        |      ;
     dw $0000,$0000,$0000,$0000,$2000                           ;80B340|        |      ;
-    dl sCompressedTilemap_97B45F                               ;80B34A|        |97B45F;
+    dl sCompressedTiles_97B45F                               ;80B34A|        |97B45F;
     dw $3000                                                   ;80B34D|        |      ;
-    dl sCompressedTilemap_97CD20                               ;80B34F|        |97CD20;
+    dl sCompressedTiles_97CD20                               ;80B34F|        |97CD20;
     dw $4000                                                   ;80B352|        |      ;
-    dl sCompressedTilemap_97E7A2                               ;80B354|        |97E7A2;
+    dl sCompressedTiles_97E7A2                               ;80B354|        |97E7A2;
     dw $6000                                                   ;80B357|        |      ;
-    dl sCompressedCharactermap_A5F95C                          ;80B359|        |A5F95C;
+    dl sCompressedTilemap_A5F95C                          ;80B359|        |A5F95C;
  
 sMap_80B35C:
     db $00                                                     ;80B35C|        |      ;
     dw !AFLAGS_NONE                                                   
     db $01,$01,$03,$01                                         ;80B35F|        |      ;
     dw $0000,$0000,$0000,$0000,$2000                           ;80B363|        |      ;
-    dl sCompressedTilemap_92D3AB                               ;80B36D|        |92D3AB;
+    dl sCompressedTiles_92D3AB                               ;80B36D|        |92D3AB;
     dw $3000                                                   ;80B370|        |      ;
-    dl sCompressedTilemap_938000                               ;80B372|        |938000;
+    dl sCompressedTiles_938000                               ;80B372|        |938000;
     dw $4000                                                   ;80B375|        |      ;
-    dl sCompressedTilemap_939E8E                               ;80B377|        |939E8E;
+    dl sCompressedTiles_939E8E                               ;80B377|        |939E8E;
     dw $6000                                                   ;80B37A|        |      ;
-    dl sCompressedCharactermap_A5FBCE                          ;80B37C|        |A5FBCE;
+    dl sCompressedTilemap_A5FBCE                          ;80B37C|        |A5FBCE;
  
 sMap_80B37F:
     db $00                                                     ;80B37F|        |      ;
     dw !AFLAGS_NONE                                                   
     db $01,$01,$03,$01                                         ;80B382|        |      ;
     dw $0000,$0000,$0000,$0000,$2000                           ;80B386|        |      ;
-    dl sCompressedTilemap_92D3AB                               ;80B390|        |92D3AB;
+    dl sCompressedTiles_92D3AB                               ;80B390|        |92D3AB;
     dw $3000                                                   ;80B393|        |      ;
-    dl sCompressedTilemap_938000                               ;80B395|        |938000;
+    dl sCompressedTiles_938000                               ;80B395|        |938000;
     dw $4000                                                   ;80B398|        |      ;
-    dl sCompressedTilemap_939E8E                               ;80B39A|        |939E8E;
+    dl sCompressedTiles_939E8E                               ;80B39A|        |939E8E;
     dw $6000                                                   ;80B39D|        |      ;
-    dl sCompressedCharactermap_A68000                          ;80B39F|        |A68000;
+    dl sCompressedTilemap_A68000                          ;80B39F|        |A68000;
  
 sMap_80B3A2:
     db $00                                                     ;80B3A2|        |      ;
     dw !AFLAGS_NONE                                                   
     db $01,$01,$03,$01                                         ;80B3A5|        |      ;
     dw $0000,$0000,$0000,$0000,$2000                           ;80B3A9|        |      ;
-    dl sCompressedTilemap_92D3AB                               ;80B3B3|        |92D3AB;
+    dl sCompressedTiles_92D3AB                               ;80B3B3|        |92D3AB;
     dw $3000                                                   ;80B3B6|        |      ;
-    dl sCompressedTilemap_938000                               ;80B3B8|        |938000;
+    dl sCompressedTiles_938000                               ;80B3B8|        |938000;
     dw $4000                                                   ;80B3BB|        |      ;
-    dl sCompressedTilemap_939E8E                               ;80B3BD|        |939E8E;
+    dl sCompressedTiles_939E8E                               ;80B3BD|        |939E8E;
     dw $6000                                                   ;80B3C0|        |      ;
-    dl sCompressedCharactermap_A68229                          ;80B3C2|        |A68229;
+    dl sCompressedTilemap_A68229                          ;80B3C2|        |A68229;
  
 sMap_80B3C5:
     db $00                                                     ;80B3C5|        |      ;
     dw !AFLAGS_NONE                                                   
     db $01,$01,$03,$01                                         ;80B3C8|        |      ;
     dw $0000,$0000,$0000,$0000,$2000                           ;80B3CC|        |      ;
-    dl sCompressedTilemap_92D3AB                               ;80B3D6|        |92D3AB;
+    dl sCompressedTiles_92D3AB                               ;80B3D6|        |92D3AB;
     dw $3000                                                   ;80B3D9|        |      ;
-    dl sCompressedTilemap_938000                               ;80B3DB|        |938000;
+    dl sCompressedTiles_938000                               ;80B3DB|        |938000;
     dw $4000                                                   ;80B3DE|        |      ;
-    dl sCompressedTilemap_939E8E                               ;80B3E0|        |939E8E;
+    dl sCompressedTiles_939E8E                               ;80B3E0|        |939E8E;
     dw $6000                                                   ;80B3E3|        |      ;
-    dl sCompressedCharactermap_A68433                          ;80B3E5|        |A68433;
+    dl sCompressedTilemap_A68433                          ;80B3E5|        |A68433;
  
 sMap_80B3E8:
     db $00                                                     ;80B3E8|        |      ;
     dw !AFLAGS_NONE                                                   
     db $01,$01,$03,$01                                         ;80B3EB|        |      ;
     dw $0000,$0000,$0000,$0000,$2000                           ;80B3EF|        |      ;
-    dl sCompressedTilemap_92D3AB                               ;80B3F9|        |92D3AB;
+    dl sCompressedTiles_92D3AB                               ;80B3F9|        |92D3AB;
     dw $3000                                                   ;80B3FC|        |      ;
-    dl sCompressedTilemap_938000                               ;80B3FE|        |938000;
+    dl sCompressedTiles_938000                               ;80B3FE|        |938000;
     dw $4000                                                   ;80B401|        |      ;
-    dl sCompressedTilemap_939E8E                               ;80B403|        |939E8E;
+    dl sCompressedTiles_939E8E                               ;80B403|        |939E8E;
     dw $6000                                                   ;80B406|        |      ;
-    dl sCompressedCharactermap_A6867E                          ;80B408|        |A6867E;
+    dl sCompressedTilemap_A6867E                          ;80B408|        |A6867E;
  
 sMap_80B40B:
     db $00                                                     ;80B40B|        |      ;
     dw !AFLAGS_NONE                                                   
     db $01,$01,$03,$01                                         ;80B40E|        |      ;
     dw $0000,$0000,$0000,$0000,$2000                           ;80B412|        |      ;
-    dl sCompressedTilemap_9CCBA3                               ;80B41C|        |9CCBA3;
+    dl sCompressedTiles_9CCBA3                               ;80B41C|        |9CCBA3;
     dw $3000                                                   ;80B41F|        |      ;
-    dl sCompressedTilemap_9CE37D                               ;80B421|        |9CE37D;
+    dl sCompressedTiles_9CE37D                               ;80B421|        |9CE37D;
     dw $4000                                                   ;80B424|        |      ;
-    dl sCompressedTilemap_9D8000                               ;80B426|        |9D8000;
+    dl sCompressedTiles_9D8000                               ;80B426|        |9D8000;
     dw $6000                                                   ;80B429|        |      ;
-    dl sCompressedCharactermap_A68864                          ;80B42B|        |A68864;
+    dl sCompressedTilemap_A68864                          ;80B42B|        |A68864;
  
 sMap_80B42E:
     db $00                                                     ;80B42E|        |      ;
     dw !AFLAGS_NONE                                                   
     db $01,$01,$03,$01                                         ;80B431|        |      ;
     dw $0000,$0000,$0000,$0000,$2000                           ;80B435|        |      ;
-    dl sCompressedTilemap_92D3AB                               ;80B43F|        |92D3AB;
+    dl sCompressedTiles_92D3AB                               ;80B43F|        |92D3AB;
     dw $3000                                                   ;80B442|        |      ;
-    dl sCompressedTilemap_938000                               ;80B444|        |938000;
+    dl sCompressedTiles_938000                               ;80B444|        |938000;
     dw $4000                                                   ;80B447|        |      ;
-    dl sCompressedTilemap_939E8E                               ;80B449|        |939E8E;
+    dl sCompressedTiles_939E8E                               ;80B449|        |939E8E;
     dw $6000                                                   ;80B44C|        |      ;
-    dl sCompressedCharactermap_A5F059                          ;80B44E|        |A5F059;
+    dl sCompressedTilemap_A5F059                          ;80B44E|        |A5F059;
  
 sMap_80B451:
     db $00                                                     ;80B451|        |      ;
     dw !AFLAGS_NONE                                                   
     db $01,$01,$03,$01                                         ;80B454|        |      ;
     dw $0000,$0000,$0000,$0000,$2000                           ;80B458|        |      ;
-    dl sCompressedTilemap_92D3AB                               ;80B462|        |92D3AB;
+    dl sCompressedTiles_92D3AB                               ;80B462|        |92D3AB;
     dw $3000                                                   ;80B465|        |      ;
-    dl sCompressedTilemap_938000                               ;80B467|        |938000;
+    dl sCompressedTiles_938000                               ;80B467|        |938000;
     dw $4000                                                   ;80B46A|        |      ;
-    dl sCompressedTilemap_939E8E                               ;80B46C|        |939E8E;
+    dl sCompressedTiles_939E8E                               ;80B46C|        |939E8E;
     dw $6000                                                   ;80B46F|        |      ;
-    dl sCompressedCharactermap_A5F45A                          ;80B471|        |A5F45A;
+    dl sCompressedTilemap_A5F45A                          ;80B471|        |A5F45A;
  
 sMap_80B474:
     db $05                                                     ;80B474|        |      ;
     dw !AFLAGS_NONE                                                   
     db $02,$02,$04,$01                                         ;80B477|        |      ;
     dw $0000,$0100,$0000,$0100,$2000                           ;80B47B|        |      ;
-    dl sCompressedTilemap_9EEB3D                               ;80B485|        |9EEB3D;
+    dl sCompressedTiles_9EEB3D                               ;80B485|        |9EEB3D;
     dw $3000                                                   ;80B488|        |      ;
-    dl sCompressedTilemap_A08000                               ;80B48A|        |A08000;
+    dl sCompressedTiles_A08000                               ;80B48A|        |A08000;
     dw $4000                                                   ;80B48D|        |      ;
-    dl sCompressedTilemap_A088E9                               ;80B48F|        |A088E9;
+    dl sCompressedTiles_A088E9                               ;80B48F|        |A088E9;
     dw $5000                                                   ;80B492|        |      ;
-    dl sCompressedTilemap_A09232                               ;80B494|        |A09232;
+    dl sCompressedTiles_A09232                               ;80B494|        |A09232;
     dw $6000                                                   ;80B497|        |      ;
-    dl sCompressedCharactermap_A690A6                          ;80B499|        |A690A6;
+    dl sCompressedTilemap_A690A6                          ;80B499|        |A690A6;
  
 sMap_80B49C:
     db $05                                                     ;80B49C|        |      ;
     dw !AFLAGS_NONE                                                   
     db $02,$02,$04,$01                                         ;80B49F|        |      ;
     dw $0000,$0100,$0000,$0100,$2000                           ;80B4A3|        |      ;
-    dl sCompressedTilemap_9EEB3D                               ;80B4AD|        |9EEB3D;
+    dl sCompressedTiles_9EEB3D                               ;80B4AD|        |9EEB3D;
     dw $3000                                                   ;80B4B0|        |      ;
-    dl sCompressedTilemap_A08000                               ;80B4B2|        |A08000;
+    dl sCompressedTiles_A08000                               ;80B4B2|        |A08000;
     dw $4000                                                   ;80B4B5|        |      ;
-    dl sCompressedTilemap_A088E9                               ;80B4B7|        |A088E9;
+    dl sCompressedTiles_A088E9                               ;80B4B7|        |A088E9;
     dw $5000                                                   ;80B4BA|        |      ;
-    dl sCompressedTilemap_A09232                               ;80B4BC|        |A09232;
+    dl sCompressedTiles_A09232                               ;80B4BC|        |A09232;
     dw $6000                                                   ;80B4BF|        |      ;
-    dl sCompressedCharactermap_A690A6                          ;80B4C1|        |A690A6;
+    dl sCompressedTilemap_A690A6                          ;80B4C1|        |A690A6;
  
 sMap_80B4C4:
     db $05                                                     ;80B4C4|        |      ;
     dw !AFLAGS_NONE                                                   
     db $02,$02,$04,$01                                         ;80B4C7|        |      ;
     dw $0000,$0100,$0000,$0100,$2000                           ;80B4CB|        |      ;
-    dl sCompressedTilemap_9EEB3D                               ;80B4D5|        |9EEB3D;
+    dl sCompressedTiles_9EEB3D                               ;80B4D5|        |9EEB3D;
     dw $3000                                                   ;80B4D8|        |      ;
-    dl sCompressedTilemap_A08000                               ;80B4DA|        |A08000;
+    dl sCompressedTiles_A08000                               ;80B4DA|        |A08000;
     dw $4000                                                   ;80B4DD|        |      ;
-    dl sCompressedTilemap_A088E9                               ;80B4DF|        |A088E9;
+    dl sCompressedTiles_A088E9                               ;80B4DF|        |A088E9;
     dw $5000                                                   ;80B4E2|        |      ;
-    dl sCompressedTilemap_A09232                               ;80B4E4|        |A09232;
+    dl sCompressedTiles_A09232                               ;80B4E4|        |A09232;
     dw $6000                                                   ;80B4E7|        |      ;
-    dl sCompressedCharactermap_A690A6                          ;80B4E9|        |A690A6;
+    dl sCompressedTilemap_A690A6                          ;80B4E9|        |A690A6;
  
 sMap_80B4EC:
     db $05                                                     ;80B4EC|        |      ;
     dw !AFLAGS_NONE                                                   
     db $02,$02,$04,$01                                         ;80B4EF|        |      ;
     dw $0000,$0100,$0000,$0100,$2000                           ;80B4F3|        |      ;
-    dl sCompressedTilemap_9EEB3D                               ;80B4FD|        |9EEB3D;
+    dl sCompressedTiles_9EEB3D                               ;80B4FD|        |9EEB3D;
     dw $3000                                                   ;80B500|        |      ;
-    dl sCompressedTilemap_A08000                               ;80B502|        |A08000;
+    dl sCompressedTiles_A08000                               ;80B502|        |A08000;
     dw $4000                                                   ;80B505|        |      ;
-    dl sCompressedTilemap_A088E9                               ;80B507|        |A088E9;
+    dl sCompressedTiles_A088E9                               ;80B507|        |A088E9;
     dw $5000                                                   ;80B50A|        |      ;
-    dl sCompressedTilemap_A09232                               ;80B50C|        |A09232;
+    dl sCompressedTiles_A09232                               ;80B50C|        |A09232;
     dw $6000                                                   ;80B50F|        |      ;
-    dl sCompressedCharactermap_A690A6                          ;80B511|        |A690A6;
+    dl sCompressedTilemap_A690A6                          ;80B511|        |A690A6;
  
 sMap_80B514:
     db $05                                                     ;80B514|        |      ;
     dw !AFLAGS_NONE                                                   
     db $02,$02,$03,$01                                         ;80B517|        |      ;
     dw $0000,$0100,$0000,$0100,$2000                           ;80B51B|        |      ;
-    dl sCompressedTilemap_9EEB3D                               ;80B525|        |9EEB3D;
+    dl sCompressedTiles_9EEB3D                               ;80B525|        |9EEB3D;
     dw $3000                                                   ;80B528|        |      ;
-    dl sCompressedTilemap_A08000                               ;80B52A|        |A08000;
+    dl sCompressedTiles_A08000                               ;80B52A|        |A08000;
     dw $4000                                                   ;80B52D|        |      ;
-    dl sCompressedTilemap_A088E9                               ;80B52F|        |A088E9;
+    dl sCompressedTiles_A088E9                               ;80B52F|        |A088E9;
     dw $6000                                                   ;80B532|        |      ;
-    dl sCompressedCharactermap_A694EE                          ;80B534|        |A694EE;
+    dl sCompressedTilemap_A694EE                          ;80B534|        |A694EE;
  
 sMap_80B537:
     db $05                                                     ;80B537|        |      ;
     dw !AFLAGS_NONE                                                   
     db $02,$02,$04,$01                                         ;80B53A|        |      ;
     dw $0000,$0100,$0000,$0100,$2000                           ;80B53E|        |      ;
-    dl sCompressedTilemap_9EEB3D                               ;80B548|        |9EEB3D;
+    dl sCompressedTiles_9EEB3D                               ;80B548|        |9EEB3D;
     dw $3000                                                   ;80B54B|        |      ;
-    dl sCompressedTilemap_A08000                               ;80B54D|        |A08000;
+    dl sCompressedTiles_A08000                               ;80B54D|        |A08000;
     dw $4000                                                   ;80B550|        |      ;
-    dl sCompressedTilemap_A088E9                               ;80B552|        |A088E9;
+    dl sCompressedTiles_A088E9                               ;80B552|        |A088E9;
     dw $5000                                                   ;80B555|        |      ;
-    dl sCompressedTilemap_A0E682                               ;80B557|        |A0E682;
+    dl sCompressedTiles_A0E682                               ;80B557|        |A0E682;
     dw $6000                                                   ;80B55A|        |      ;
-    dl sCompressedCharactermap_A694EE                          ;80B55C|        |A694EE;
+    dl sCompressedTilemap_A694EE                          ;80B55C|        |A694EE;
  
 sMap_80B55F:
     db $05                                                     ;80B55F|        |      ;
     dw !AFLAGS_NONE                                                   
     db $02,$02,$04,$01                                         ;80B562|        |      ;
     dw $0000,$0100,$0000,$0100,$2000                           ;80B566|        |      ;
-    dl sCompressedTilemap_9EEB3D                               ;80B570|        |9EEB3D;
+    dl sCompressedTiles_9EEB3D                               ;80B570|        |9EEB3D;
     dw $3000                                                   ;80B573|        |      ;
-    dl sCompressedTilemap_A08000                               ;80B575|        |A08000;
+    dl sCompressedTiles_A08000                               ;80B575|        |A08000;
     dw $4000                                                   ;80B578|        |      ;
-    dl sCompressedTilemap_A088E9                               ;80B57A|        |A088E9;
+    dl sCompressedTiles_A088E9                               ;80B57A|        |A088E9;
     dw $5000                                                   ;80B57D|        |      ;
-    dl sCompressedTilemap_A0AB1E                               ;80B57F|        |A0AB1E;
+    dl sCompressedTiles_A0AB1E                               ;80B57F|        |A0AB1E;
     dw $6000                                                   ;80B582|        |      ;
-    dl sCompressedCharactermap_A694EE                          ;80B584|        |A694EE;
+    dl sCompressedTilemap_A694EE                          ;80B584|        |A694EE;
  
 sMap_80B587:
     db $05                                                     ;80B587|        |      ;
     dw !AFLAGS_NONE                                                   
     db $02,$02,$04,$01                                         ;80B58A|        |      ;
     dw $0000,$0100,$0000,$0100,$2000                           ;80B58E|        |      ;
-    dl sCompressedTilemap_9EEB3D                               ;80B598|        |9EEB3D;
+    dl sCompressedTiles_9EEB3D                               ;80B598|        |9EEB3D;
     dw $3000                                                   ;80B59B|        |      ;
-    dl sCompressedTilemap_A08000                               ;80B59D|        |A08000;
+    dl sCompressedTiles_A08000                               ;80B59D|        |A08000;
     dw $4000                                                   ;80B5A0|        |      ;
-    dl sCompressedTilemap_A088E9                               ;80B5A2|        |A088E9;
+    dl sCompressedTiles_A088E9                               ;80B5A2|        |A088E9;
     dw $5000                                                   ;80B5A5|        |      ;
-    dl sCompressedTilemap_A09232                               ;80B5A7|        |A09232;
+    dl sCompressedTiles_A09232                               ;80B5A7|        |A09232;
     dw $6000                                                   ;80B5AA|        |      ;
-    dl sCompressedCharactermap_A694EE                          ;80B5AC|        |A694EE;
+    dl sCompressedTilemap_A694EE                          ;80B5AC|        |A694EE;
  
 sMap_80B5AF:
     db $05                                                     ;80B5AF|        |      ;
     dw !AFLAGS_NONE                                                   
     db $02,$02,$03,$01                                         ;80B5B2|        |      ;
     dw $0000,$0100,$0000,$0100,$2000                           ;80B5B6|        |      ;
-    dl sCompressedTilemap_9EEB3D                               ;80B5C0|        |9EEB3D;
+    dl sCompressedTiles_9EEB3D                               ;80B5C0|        |9EEB3D;
     dw $3000                                                   ;80B5C3|        |      ;
-    dl sCompressedTilemap_A08000                               ;80B5C5|        |A08000;
+    dl sCompressedTiles_A08000                               ;80B5C5|        |A08000;
     dw $4000                                                   ;80B5C8|        |      ;
-    dl sCompressedTilemap_A088E9                               ;80B5CA|        |A088E9;
+    dl sCompressedTiles_A088E9                               ;80B5CA|        |A088E9;
     dw $6000                                                   ;80B5CD|        |      ;
-    dl sCompressedCharactermap_A69996                          ;80B5CF|        |A69996;
+    dl sCompressedTilemap_A69996                          ;80B5CF|        |A69996;
  
 sMap_80B5D2:
     db $05                                                     ;80B5D2|        |      ;
     dw !AFLAGS_NONE                                                   
     db $02,$02,$03,$01                                         ;80B5D5|        |      ;
     dw $0000,$0100,$0000,$0100,$2000                           ;80B5D9|        |      ;
-    dl sCompressedTilemap_9EEB3D                               ;80B5E3|        |9EEB3D;
+    dl sCompressedTiles_9EEB3D                               ;80B5E3|        |9EEB3D;
     dw $3000                                                   ;80B5E6|        |      ;
-    dl sCompressedTilemap_A08000                               ;80B5E8|        |A08000;
+    dl sCompressedTiles_A08000                               ;80B5E8|        |A08000;
     dw $4000                                                   ;80B5EB|        |      ;
-    dl sCompressedTilemap_A088E9                               ;80B5ED|        |A088E9;
+    dl sCompressedTiles_A088E9                               ;80B5ED|        |A088E9;
     dw $6000                                                   ;80B5F0|        |      ;
-    dl sCompressedCharactermap_A69996                          ;80B5F2|        |A69996;
+    dl sCompressedTilemap_A69996                          ;80B5F2|        |A69996;
  
 sMap_80B5F5:
     db $05                                                     ;80B5F5|        |      ;
     dw !AFLAGS_NONE                                                   
     db $02,$02,$03,$01                                         ;80B5F8|        |      ;
     dw $0000,$0100,$0000,$0100,$2000                           ;80B5FC|        |      ;
-    dl sCompressedTilemap_9EEB3D                               ;80B606|        |9EEB3D;
+    dl sCompressedTiles_9EEB3D                               ;80B606|        |9EEB3D;
     dw $3000                                                   ;80B609|        |      ;
-    dl sCompressedTilemap_A08000                               ;80B60B|        |A08000;
+    dl sCompressedTiles_A08000                               ;80B60B|        |A08000;
     dw $4000                                                   ;80B60E|        |      ;
-    dl sCompressedTilemap_A088E9                               ;80B610|        |A088E9;
+    dl sCompressedTiles_A088E9                               ;80B610|        |A088E9;
     dw $6000                                                   ;80B613|        |      ;
-    dl sCompressedCharactermap_A69996                          ;80B615|        |A69996;
+    dl sCompressedTilemap_A69996                          ;80B615|        |A69996;
  
 sMap_80B618:
     db $05                                                     ;80B618|        |      ;
     dw !AFLAGS_NONE                                                   
     db $02,$02,$04,$01                                         ;80B61B|        |      ;
     dw $0000,$0100,$0000,$0100,$2000                           ;80B61F|        |      ;
-    dl sCompressedTilemap_9EEB3D                               ;80B629|        |9EEB3D;
+    dl sCompressedTiles_9EEB3D                               ;80B629|        |9EEB3D;
     dw $3000                                                   ;80B62C|        |      ;
-    dl sCompressedTilemap_A08000                               ;80B62E|        |A08000;
+    dl sCompressedTiles_A08000                               ;80B62E|        |A08000;
     dw $4000                                                   ;80B631|        |      ;
-    dl sCompressedTilemap_A088E9                               ;80B633|        |A088E9;
+    dl sCompressedTiles_A088E9                               ;80B633|        |A088E9;
     dw $5000                                                   ;80B636|        |      ;
-    dl sCompressedTilemap_A0CAAF                               ;80B638|        |A0CAAF;
+    dl sCompressedTiles_A0CAAF                               ;80B638|        |A0CAAF;
     dw $6000                                                   ;80B63B|        |      ;
-    dl sCompressedCharactermap_A69996                          ;80B63D|        |A69996;
+    dl sCompressedTilemap_A69996                          ;80B63D|        |A69996;
  
 sRainOverlay:
     db $01,$02,$01,$01                                         ;80B640|        |      ;
     dw $5000                                                   ;80B644|        |      ;
-    dl sCompressedTilemap_928000                               ;80B646|        |928000;
+    dl sCompressedTiles_928000                               ;80B646|        |928000;
     dw $7000                                                   ;80B649|        |      ;
-    dl sCompressedCharactermap_A48000                          ;80B64B|        |A48000;
+    dl sCompressedTilemap_A48000                          ;80B64B|        |A48000;
  
 sCloudsOverlay:
     db $01,$02,$01,$01                                         ;80B64E|        |      ;
     dw $5000                                                   ;80B652|        |      ;
-    dl sCompressedTilemap_97B11A                               ;80B654|        |97B11A;
+    dl sCompressedTiles_97B11A                               ;80B654|        |97B11A;
     dw $7000                                                   ;80B657|        |      ;
-    dl sCompressedCharactermap_A4C3E2                          ;80B659|        |A4C3E2;
+    dl sCompressedTilemap_A4C3E2                          ;80B659|        |A4C3E2;
  
 sSnowOverlay:
     db $01,$02,$01,$01                                         ;80B65C|        |      ;
     dw $5000                                                   ;80B660|        |      ;
-    dl sCompressedTilemap_9E9C6D                               ;80B662|        |9E9C6D;
+    dl sCompressedTiles_9E9C6D                               ;80B662|        |9E9C6D;
     dw $7000                                                   ;80B665|        |      ;
-    dl sCompressedCharactermap_A5C955                          ;80B667|        |A5C955;
+    dl sCompressedTilemap_A5C955                          ;80B667|        |A5C955;
  
 sHeavySnowOverlay:
     db $01,$02,$01,$01                                         ;80B66A|        |      ;
     dw $5000                                                   ;80B66E|        |      ;
-    dl sCompressedTilemap_9B8441                               ;80B670|        |9B8441;
+    dl sCompressedTiles_9B8441                               ;80B670|        |9B8441;
     dw $7000                                                   ;80B673|        |      ;
-    dl sCompressedCharactermap_A5A3D5                          ;80B675|        |A5A3D5;
+    dl sCompressedTilemap_A5A3D5                          ;80B675|        |A5A3D5;
  
 sIntroFarmScrool:
     db $02,$02,$04,$02                                         ;80B678|        |      ;
     dw $2000                                                   ;80B67C|        |      ;
-    dl sCompressedTilemap_9F8000                               ;80B67E|        |9F8000;
+    dl sCompressedTiles_9F8000                               ;80B67E|        |9F8000;
     dw $3000                                                   ;80B681|        |      ;
-    dl sCompressedTilemap_9F946C                               ;80B683|        |9F946C;
+    dl sCompressedTiles_9F946C                               ;80B683|        |9F946C;
     dw $4000                                                   ;80B686|        |      ;
-    dl sCompressedTilemap_9FAA75                               ;80B688|        |9FAA75;
+    dl sCompressedTiles_9FAA75                               ;80B688|        |9FAA75;
     dw $5000                                                   ;80B68B|        |      ;
-    dl sCompressedTilemap_9FC04C                               ;80B68D|        |9FC04C;
+    dl sCompressedTiles_9FC04C                               ;80B68D|        |9FC04C;
     dw $6000                                                   ;80B690|        |      ;
-    dl sCompressedCharactermap_A5CD88                          ;80B692|        |A5CD88;
+    dl sCompressedTilemap_A5CD88                          ;80B692|        |A5CD88;
     dw $7000                                                   ;80B695|        |      ;
-    dl sCompressedCharactermap_A5D44C                          ;80B697|        |A5D44C;
+    dl sCompressedTilemap_A5D44C                          ;80B697|        |A5D44C;
  
 sHarvestMoonLogo:
     db $02,$02,$00,$01                                         ;80B69A|        |      ;
     dw $6000                                                   ;80B69E|        |      ;
-    dl sCompressedCharactermap_A5D94A                          ;80B6A0|        |A5D94A;
+    dl sCompressedTilemap_A5D94A                          ;80B6A0|        |A5D94A;
  
 sNatsumeLogo:
     db $02,$02,$01,$01                                         ;80B6A3|        |      ;
     dw $2000                                                   ;80B6A7|        |      ;
-    dl sCompressedTilemap_9FEF97                               ;80B6A9|        |9FEF97;
+    dl sCompressedTiles_9FEF97                               ;80B6A9|        |9FEF97;
     dw $6000                                                   ;80B6AC|        |      ;
-    dl sCompressedCharactermap_A5DE84                          ;80B6AE|        |A5DE84;
+    dl sCompressedTilemap_A5DE84                          ;80B6AE|        |A5DE84;
  
 sMenuScreenBackgrounds:
     db $02,$02,$04,$02                                         ;80B6B1|        |      ;
     dw $2000                                                   ;80B6B5|        |      ;
-    dl sCompressedTilemap_9ABF97                               ;80B6B7|        |9ABF97;
+    dl sCompressedTiles_9ABF97                               ;80B6B7|        |9ABF97;
     dw $3000                                                   ;80B6BA|        |      ;
-    dl sCompressedTilemap_9AC489                               ;80B6BC|        |9AC489;
+    dl sCompressedTiles_9AC489                               ;80B6BC|        |9AC489;
     dw $4000                                                   ;80B6BF|        |      ;
-    dl sCompressedTilemap_9ACB41                               ;80B6C1|        |9ACB41;
+    dl sCompressedTiles_9ACB41                               ;80B6C1|        |9ACB41;
     dw $5000                                                   ;80B6C4|        |      ;
-    dl sCompressedTilemap_9AD357                               ;80B6C6|        |9AD357;
+    dl sCompressedTiles_9AD357                               ;80B6C6|        |9AD357;
     dw $1000                                                   ;80B6C9|        |      ;
-    dl sCompressedCharactermap_A58000                          ;80B6CB|        |A58000;
+    dl sCompressedTilemap_A58000                          ;80B6CB|        |A58000;
     dw $6000                                                   ;80B6CE|        |      ;
-    dl sCompressedCharactermap_A5970F                          ;80B6D0|        |A5970F;
+    dl sCompressedTilemap_A5970F                          ;80B6D0|        |A5970F;
  
 sMenuCharacters:
     db $02,$02,$04,$02                                         ;80B6D3|        |      ;
     dw $2000                                                   ;80B6D7|        |      ;
-    dl sCompressedTilemap_9ABF97                               ;80B6D9|        |9ABF97;
+    dl sCompressedTiles_9ABF97                               ;80B6D9|        |9ABF97;
     dw $3000                                                   ;80B6DC|        |      ;
-    dl sCompressedTilemap_9AC489                               ;80B6DE|        |9AC489;
+    dl sCompressedTiles_9AC489                               ;80B6DE|        |9AC489;
     dw $4000                                                   ;80B6E1|        |      ;
-    dl sCompressedTilemap_9ACB41                               ;80B6E3|        |9ACB41;
+    dl sCompressedTiles_9ACB41                               ;80B6E3|        |9ACB41;
     dw $5000                                                   ;80B6E6|        |      ;
-    dl sCompressedTilemap_9AD357                               ;80B6E8|        |9AD357;
+    dl sCompressedTiles_9AD357                               ;80B6E8|        |9AD357;
     dw $1000                                                   ;80B6EB|        |      ;
-    dl sCompressedCharactermap_A58D8E                          ;80B6ED|        |A58D8E;
+    dl sCompressedTilemap_A58D8E                          ;80B6ED|        |A58D8E;
     dw $6000                                                   ;80B6F0|        |      ;
-    dl sCompressedCharactermap_A5970F                          ;80B6F2|        |A5970F;
+    dl sCompressedTilemap_A5970F                          ;80B6F2|        |A5970F;
  
 aScreenTransitionTable:
     db $0C,$00,$00,$01                                         ;80B6F5|        |      ; 0x3B * [n8 nTransitionDestination, n8 nUnknown, n8 nIndex0xCF, n8 nFlags, n16 nDestX, n16 nDestY]

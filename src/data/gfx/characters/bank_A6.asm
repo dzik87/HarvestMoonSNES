@@ -2,32 +2,32 @@
 
     ORG $A68000
 
-sCompressedCharactermap_A68000:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A68000.bin"
+sCompressedTilemap_A68000:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A68000.bin"
 
-sCompressedCharactermap_A68229:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A68229.bin"
+sCompressedTilemap_A68229:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A68229.bin"
 
-sCompressedCharactermap_A68433:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A68433.bin"
+sCompressedTilemap_A68433:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A68433.bin"
 
-sCompressedCharactermap_A6867E:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A6867E.bin"
+sCompressedTilemap_A6867E:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A6867E.bin"
 
-sCompressedCharactermap_A68864:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A68864.bin"
+sCompressedTilemap_A68864:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A68864.bin"
 
-sCompressedCharactermap_A68DCF:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A68DCF.bin"
+sCompressedTilemap_A68DCF:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A68DCF.bin"
 
-sCompressedCharactermap_A690A6:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A690A6.bin"
+sCompressedTilemap_A690A6:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A690A6.bin"
 
-sCompressedCharactermap_A694EE:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A694EE.bin"
+sCompressedTilemap_A694EE:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A694EE.bin"
 
-sCompressedCharactermap_A69996:
-    incbin "../../../../assets/gfx/characters/sCompressedCharactermap_A69996.bin"
+sCompressedTilemap_A69996:
+    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A69996.bin"
 
 Padding_A60000:
     fill 20370

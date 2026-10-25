@@ -2,8 +2,8 @@
 
     ORG $948000
 
-sCompressedTilemap_948000:
-    incbin "../../../../assets/gfx/tiles/sCompressedTilemap_948000.bin"
+sCompressedTiles_948000:
+    incbin "../../../../assets/gfx/tiles/sCompressedTiles_948000.bin"
 
 sFontGlyphs_0x00:
     incbin "../../../../assets/gfx/tiles/sFontGlyphs_0x00.bin"

@@ -12,7 +12,7 @@ import tilemap_codec as tc  # noqa: E402
 GFX_GLOB = os.path.join(ROOT, 'src', 'data', 'gfx', '*', '*.asm')
 
 # Label span continues with non-compressed data after the blob (not a blob).
-TRAILING_DATA = {'sCompressedCharactermap_A69996'}
+TRAILING_DATA = {'sCompressedTilemap_A69996'}
 HIDDEN = {}
 SPILL = {}
 
@@ -120,8 +120,8 @@ def test_game_blobs():
 def test_parse():
     path = os.path.join(ROOT, 'src', 'data', 'gfx', 'tiles', 'bank_92.asm')
     blobs = tc.parse_asm_blobs(path)
-    check('sCompressedTilemap_928000' in blobs, 'label missing')
-    check(blobs['sCompressedTilemap_928000'][:8] ==
+    check('sCompressedTiles_928000' in blobs, 'label missing')
+    check(blobs['sCompressedTiles_928000'][:8] ==
           bytes([0, 0x20, 0, 0, 0, 0xBC, 0xFF, 0xFF]), 'first bytes')
 
 
