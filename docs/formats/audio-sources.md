@@ -27,6 +27,9 @@ Tests: `tests/test_audio_convert.py`, `tests/test_spc700.py`.
 | `audioconv.py check` | validates every source: WAV <-> BRR is lossless, text round trips, driver reassembles, limits |
 | `audioconv.py midi [--out DIR] [labels]` | export songs as Standard MIDI Files (viewing / rough editing, **export only**) |
 | `audioconv.py wav [--out DIR]` | decode the generated sample blobs to WAV files (for listening) |
+| `audioconv.py spc [--track LABEL ...\|--all\|--sfx N ...] [--out DIR]` | generated `.spc` snapshots (default `build/spc/`, git-ignored): see section 7 |
+| `audioconv.py render SPC_OR_DIR [--format wav\|mp3] [--seconds N] [--out DIR]` | `.spc` -> WAV/MP3 with `ffmpeg` (needs libgme), default `build/render/` |
+| `audioconv.py spcdiff A.spc B.spc` | compare two snapshots per memory region (generated vs. an emulator dump) |
 | `audioconv.py extract` | one-time conversion of the original blobs into the sources (already done; kept for reference) |
 
 ## 1. Samples (`samples/<label>.wav` + `.json`)
@@ -165,7 +168,48 @@ the sidecars and `audio.json` and included at the same place (same labels, same 
 the number of table entries (26 tracks, 40 samples, 50 SFX), the SFX upload size `$3F2`, the driver upload size `$0FD6` and the
 common sample ids' consumers. Adding a *new* track or sample id therefore needs code changes; replacing contents does not.
 
-## 6. What is not source-level yet
+## 6. SPC snapshots for listening and interop (generated, never committed)
+
+`python3 tools/audio/audioconv.py spc --all` writes one `.spc` file (v0.30, ID666 title/game tags from our labels, no foreign
+data) per song into `build/spc/`; `--track sAudioTrack_Spring` selects songs, `--sfx 14` makes a snapshot that starts sound
+effect 14. Any SPC player works (SPCPlay, foobar2000 + Game Music Emu, VLC, `ffmpeg`/`gme` based tools, snes_spc, emulators).
+With an `ffmpeg` built with libgme (the default Linux builds are), `audioconv.py render build/spc --format mp3` makes listening
+copies in `build/render/`.
+
+How the snapshot is made: `tools/audio/spcemu.py` is a small SPC700 emulator (CPU, ports, timers, DSP register file). The
+real driver from `driver/sAudioSpcDriver.spc.asm` is loaded at `$0500` and started; a host object plays the 65816 side of the
+protocol of `docs/audio.md` section 4 with exactly the command sequence of the game: command `$0B` (stereo), command 2 for each
+common sample, command 1 (SFX block), then per song command 4 (slot 0), command 5 (track data), command 3 for every sample of the
+track plus sample `$06`, and command 8 (start, fade-in). The state is saved at the moment the start command is acknowledged,
+so RAM (driver, sample directory, instrument records, SFX block, song, samples), the 128 DSP registers and PC/A/X/Y/PSW/SP all come
+from the driver itself and playback begins at the start of the song. (A detail this exposed: the driver advances its sample
+pointers by whole 3-byte chunks, so a sample whose size is not a multiple of 3 occupies one byte more than its size.)
+
+The emulator has no audio output and is not cycle exact (only the timers advance); it is a state generator.
+Correctness is checked in two ways: `tests/test_audio_convert.py` re-parses the generated file and compares driver, SFX block,
+song and every sample in RAM with our sources, and (if available) renders it through libgme and requires sound; all 25 songs and
+sample SFX render audibly. **Validation against real hardware state is still open**: when you have SPC dumps of the same songs from
+an emulator, run `audioconv.py spcdiff theirs.spc ours.spc`; the regions that must match are the driver, SFX block, song data,
+sample directory and samples, whereas direct-page and instrument-record bytes legitimately differ with the moment of the dump.
+
+Optional comparison material (not part of the repository, never commit it): rips of the soundtrack (MP3/SPC collections on the
+web), and SNES music tools such as the ones on snesmusic.org. They are third-party works and only useful to compare what you hear
+with the output of `render`.
+
+### Why SPC is derived, not the source
+
+* An SPC is a **moment**: the 64 KiB SPC RAM, the DSP registers and the CPU registers at one instant of one playback. The ROM does not
+  contain such an image; the 65816 uploads the driver, the SFX block, samples and the song in pieces. The song blob, the
+  sample table, the track table, the size tables and the sample bytes in ROM cannot be recovered from a snapshot (samples are
+  relocated and rounded to 3-byte chunks, tables live in 65816 code, only the pieces needed by one song are present, and run-time
+  state is mixed into the same memory).
+* The ROM must be rebuilt **byte for byte**; the sources (WAV + sidecar, song text, driver listing) map onto the ROM layout one to one,
+  an SPC does not.
+* Editing: a snapshot has no structure to edit (a song is just bytes in RAM), WAV/JSON and the song text do.
+* Interop is still covered: the SPC (and, via ffmpeg, WAV/MP3) is produced on demand in one command, so any SPC tool can be used to
+  listen to, compare or analyse the result. Treat it as an output, like the built ROM.
+
+## 7. What is not source-level yet
 
 * Nothing in the audio data is binary any more. The two things only documented by name are the semantics of several
   stream-command parameters (`docs/audio.md`, marked [I]) and the driver internals (labels are address based).

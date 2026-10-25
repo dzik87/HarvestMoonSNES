@@ -408,7 +408,7 @@ similar. Range values are <= 12 everywhere except 4 blocks (ids `$11`, `$12`, `$
   slot `$0E`). Verified: for all 50 SFX the `$E0` operand equals `aAudioSfxSampleIdTable[sfx]` when that is non-zero, otherwise
   it is one of the common samples. [C]
 
-Capacity check [C]: the common set uses 17680 bytes (limit 17920). The largest sample set of a track that is actually used
+Capacity check [C]: the common set uses 17680 bytes of sample data (limit 17920); the driver advances its region pointers by whole 3-byte chunks, so the real footprint is up to 2 bytes per sample larger (17683 here; verified by running the driver, `audioconv.py spc`). The largest sample set of a track that is actually used
 (TrollsCave, id 15) is 21216 bytes including the extra sample `$06` and ends at `$B8D4`; the never-played table entry 0 would end at
 `$CD64`. Both are below the echo buffer at `$D700`. The engine does not bounds-check the regions.
 

@@ -228,8 +228,58 @@ def test_midi():
     check(mid[:4] == b"MThd" and mid.count(b"MTrk") >= 5, "MIDI export structure")
 
 
+def test_spc():
+    import shutil
+    import subprocess
+    import tempfile
+    blobs, _, info = audioconv.build_all()
+    state = audioconv.spc_boot_state(blobs, info)
+    spc = audioconv.spc_for_track(state, blobs, info, 1)               # Spring, 4 sample ids
+    data = audioconv.write_spc(spc, "sAudioTrack_Spring")
+    check(len(data) == audioconv.SPC_SIZE, "SPC file size %d" % len(data))
+    f = audioconv.parse_spc(data)
+    ram, man = f["ram"], info["man"]
+    check(f["title"] == "sAudioTrack_Spring" and f["game"].startswith("Harvest Moon"), "ID666 tags")
+    drv = blobs["sAudioSpcDriver"]
+    same = [i for i in range(len(drv)) if ram[0x500 + i] != drv[i]]
+    check(all(0x14B8 <= 0x500 + i < 0x14D2 for i in same), "driver code/tables in RAM unchanged except the slot-id table")
+    check(f["pc"] >= 0x500 and f["pc"] < 0x500 + len(drv), "PC inside the driver (%04X)" % f["pc"])
+    check(ram[0x19F4:0x19F4 + len(blobs["sAudioTrack_Spring"])] == blobs["sAudioTrack_Spring"], "track data at SPC $19F4")
+    check(ram[0x1600:0x1600 + 1010] == info["sfx"], "SFX block at SPC $1600")
+    entries = {i: m for m in info["metas"].values() for i in m["sample_ids"]}
+    sizes = info["sizes"]
+    pos = 0x1FF4
+    for sid in man["common_samples"]:
+        if sid:
+            lab = entries[sid]["label"]
+            check(ram[pos:pos + sizes[lab]] == blobs[lab][:sizes[lab]], "common sample %d in RAM at %04X" % (sid, pos))
+            pos += (sizes[lab] + 2) // 3 * 3          # the driver advances by whole 3-byte chunks
+    pos = 0x65F4
+    for sid in man["tracks"][1]["samples"] + [6]:
+        lab = entries[sid]["label"]
+        check(ram[pos:pos + sizes[lab]] == blobs[lab][:sizes[lab]], "track sample %d in RAM at %04X" % (sid, pos))
+        pos += (sizes[lab] + 2) // 3 * 3
+    check(f["dsp"][0x5D] == 0x15, "DSP DIR register = $15 (sample directory page)")
+    dir0 = struct.unpack_from("<HH", ram, 0x1500)
+    check(dir0[0] == 0x65F4, "directory slot 0 starts at the first track sample (%04X)" % dir0[0])
+    check(spc.spc_out[3] in (0, 1, 4, 8), "SPC left in a defined handshake state")
+    # SFX snapshot
+    sx = audioconv.parse_spc(audioconv.write_spc(audioconv.spc_for_sfx(state, blobs, info, 3), "SFX 03"))
+    check(sx["ram"][0x1600:0x1600 + 1010] == info["sfx"], "SFX snapshot carries the SFX block")
+    # optional: render with ffmpeg+libgme when present
+    ff = shutil.which("ffmpeg")
+    if ff and b"libgme" in subprocess.run([ff, "-hide_banner", "-demuxers"], capture_output=True).stdout:
+        with tempfile.TemporaryDirectory() as td:
+            open(os.path.join(td, "t.spc"), "wb").write(data)
+            r = subprocess.run([ff, "-v", "error", "-y", "-i", os.path.join(td, "t.spc"), "-t", "8", os.path.join(td, "t.wav")], capture_output=True)
+            check(r.returncode == 0, "ffmpeg renders the SPC")
+            raw = open(os.path.join(td, "t.wav"), "rb").read()[44:]
+            vals = struct.unpack("<%dh" % (len(raw) // 2), raw)
+            check(max(abs(v) for v in vals) > 2000, "rendered SPC is not silent")
+
+
 def main():
-    tests = [test_brr_decoder, test_brr_encoder, test_wav_io, test_spcasm, test_trackfmt, test_sources_build, test_midi]
+    tests = [test_brr_decoder, test_brr_encoder, test_wav_io, test_spcasm, test_trackfmt, test_sources_build, test_midi, test_spc]
     for t in tests:
         before = len(failures)
         t()
