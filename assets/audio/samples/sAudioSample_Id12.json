@@ -1,0 +1,16 @@
+{
+  "label": "sAudioSample_Id12",
+  "sample_ids": [12],
+  "loop": true,
+  "loop_start": 912,
+  "adsr1": 255,
+  "adsr2": 233,
+  "gain": 184,
+  "tuning_int": 1,
+  "tuning_frac": 224,
+  "pad_byte": 255,
+  "canon": "ff+r-",
+  "overrides": {
+    "0": "0 0 0000"
+  }
+}

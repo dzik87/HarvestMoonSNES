@@ -1,0 +1,665 @@
+#!/usr/bin/env python3
+"""Audio asset converter: editable sources <-> the binary blobs that are included with `incbin`.
+
+Sources (committed, assets/audio/):
+  audio.json                       track table (track id -> blob + sample ids), SFX sample ids, common sample list
+  samples/<label>.wav + .json      BRR samples as 16-bit mono PCM + sample-table fields / loop / encoder overrides
+  tracks/<label>.track.txt         songs as N-SPC style text (tools/audio/trackfmt.py)
+  sfx/sfx.sfx.txt                  the SFX block uploaded to SPC $1600 (same stream syntax, 50 streams)
+  driver/sAudioSpcDriver.spc.asm   the SPC700 sound engine as assembler source (tools/audio/spcasm.py)
+
+Generated (git-ignored):
+  assets/audio/<label>.bin          one blob per label, included by src/data/audio/bank_*.asm
+  src/data/audio/audio_tables.inc   aAudioSampleSize / aAudioTrackDataSizeTable / sAudioData1_838F83 / sAudioSampleData /
+                                    aAudioSfxSampleIdTable / aAudioSampleLookupTable (included by code/bank_83/audio.asm)
+
+Commands:
+  build                regenerate the blobs and the table include from the sources (tools/build_assets.py runs this)
+  check                validate the sources (lossless WAV/BRR, track text, driver, tables); exit code 1 on problems
+  extract [--bins DIR] one-time conversion of existing blobs (+ tables in audio.asm / audio_tables.inc) into sources
+  midi [--out DIR] [labels...]   export tracks as Standard MIDI files (rough view only, the text is the source of truth)
+  wav [--out DIR]      decode the generated sample blobs to WAV files (for listening; sources already contain WAVs)
+"""
+import argparse
+import json
+import math
+import os
+import re
+import struct
+import sys
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+import brr  # noqa: E402
+import spcasm  # noqa: E402
+import trackfmt  # noqa: E402
+
+ROOT = HERE.parents[1]
+AUDIO = ROOT / "assets" / "audio"
+SAMPLES = AUDIO / "samples"
+TRACKS = AUDIO / "tracks"
+SFXDIR = AUDIO / "sfx"
+DRIVER_DIR = AUDIO / "driver"
+MANIFEST = AUDIO / "audio.json"
+TABLES_INC = ROOT / "src" / "data" / "audio" / "audio_tables.inc"
+DRIVER_LABEL = "sAudioSpcDriver"
+DRIVER_SRC = DRIVER_DIR / (DRIVER_LABEL + ".spc.asm")
+SFX_SRC = SFXDIR / "sfx.sfx.txt"
+SFX_BASE = 0x1600
+SFX_COUNT = 50
+SFX_LABEL_TAIL = "sAudioSample_Id39"       # the SFX block lives in the tail of this blob
+SAMPLE_RATE = 32000
+DRIVER_BASE = 0x0500
+
+
+class ConvError(Exception):
+    pass
+
+
+# ---------------------------------------------------------------------------
+# small helpers
+# ---------------------------------------------------------------------------
+def write_if_changed(path, data):
+    path = Path(path)
+    if isinstance(data, str):
+        data = data.encode("utf-8")
+    if path.exists() and path.read_bytes() == data:
+        return False
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(data)
+    return True
+
+
+def ceil16(n):
+    return (n + 15) // 16 * 16
+
+
+def fmt_override(v):
+    if isinstance(v, (bytes, bytearray)):
+        return "raw:" + bytes(v).hex()
+    r, f, mask = v
+    return "%d %d %04x" % (r, f, mask)
+
+
+def parse_override(s):
+    if s.startswith("raw:"):
+        b = bytes.fromhex(s[4:])
+        if len(b) != 9:
+            raise ConvError("raw override must be 9 bytes")
+        return b
+    r, f, mask = s.split()
+    return (int(r), int(f), int(mask, 16))
+
+
+SAMPLE_KEYS = ["label", "sample_ids", "loop", "loop_start", "unused_loop_offset", "adsr1", "adsr2", "gain",
+               "tuning_int", "tuning_frac", "pad_byte", "append", "canon"]
+
+
+def dump_sample_json(meta):
+    lines = ["{"]
+    items = []
+    for k in SAMPLE_KEYS:
+        if k in meta:
+            items.append('  "%s": %s' % (k, json.dumps(meta[k])))
+    ov = meta.get("overrides", {})
+    if ov:
+        body = ",\n".join('    "%d": "%s"' % (k, v) for k, v in sorted(ov.items(), key=lambda kv: int(kv[0])))
+        items.append('  "overrides": {\n%s\n  }' % body)
+    else:
+        items.append('  "overrides": {}')
+    lines.append(",\n".join(items))
+    lines.append("}")
+    return "\n".join(lines) + "\n"
+
+
+def sample_files(label):
+    return SAMPLES / (label + ".wav"), SAMPLES / (label + ".json")
+
+
+def load_sample_meta():
+    metas = {}
+    for f in sorted(SAMPLES.glob("*.json")):
+        m = json.loads(f.read_text())
+        m["overrides"] = {int(k): parse_override(v) for k, v in m.get("overrides", {}).items()}
+        if m["label"] != f.stem:
+            raise ConvError("%s: label %r does not match the file name" % (f.name, m["label"]))
+        metas[m["label"]] = m
+    return metas
+
+
+# ---------------------------------------------------------------------------
+# samples
+# ---------------------------------------------------------------------------
+def sample_loop_offset(meta):
+    if meta["loop"]:
+        return meta["loop_start"] // 16 * 9
+    return meta["unused_loop_offset"]
+
+
+def build_sample(meta, pcm=None, stats=None):
+    """-> BRR bytes including the padding up to a multiple of 16 (= the aAudioSampleSize value)."""
+    label = meta["label"]
+    if pcm is None:
+        wav, _ = sample_files(label)
+        pcm, _rate, _loop = brr.from_wav(wav.read_bytes())
+    if len(pcm) % 16:
+        pcm = list(pcm) + [0] * (16 - len(pcm) % 16)
+    if len(pcm) == 0:
+        raise ConvError("%s: empty WAV" % label)
+    if meta["loop"]:
+        ls = meta["loop_start"]
+        if ls % 16 or not 0 <= ls < len(pcm):
+            raise ConvError("%s: loop_start %d must be a multiple of 16 inside the sample (%d samples)" % (label, ls, len(pcm)))
+    data = brr.encode(pcm, loop=meta["loop"], loop_block=(meta["loop_start"] // 16 if meta["loop"] else None),
+                      rule=meta.get("canon", brr.DEFAULT_RULE), overrides=meta.get("overrides"), stats=stats)
+    return data + bytes([meta.get("pad_byte", 0xFF)]) * (ceil16(len(data)) - len(data))
+
+
+def extract_sample(label, sample_ids, entry, blob, size, tail_bytes):
+    """Original blob -> (meta, pcm).  `entry` is the sample table entry, `size` the aAudioSampleSize value."""
+    import audio_map
+    info = audio_map.brr_info(blob, size, entry["loop"])
+    if not info["valid"]:
+        raise ConvError("%s: not a valid BRR sample (%s)" % (label, info.get("why")))
+    nb = info["end_block"] + 1
+    brr_bytes = blob[:nb * 9]
+    pcm = brr.decode(brr_bytes, nb)
+    loop = bool(brr_bytes[(nb - 1) * 9] & 2)
+    pad = blob[nb * 9:size]
+    if len(set(pad)) > 1:
+        raise ConvError("%s: padding is not a constant byte" % label)
+    flags = [brr_bytes[k * 9] & 3 for k in range(nb)]
+    want = [2 if loop else 0] * (nb - 1) + [(2 if loop else 0) | 1]
+    if flags != want:
+        raise ConvError("%s: unexpected block flags" % label)
+    meta = {"label": label, "sample_ids": sample_ids, "loop": loop}
+    if loop:
+        if entry["loop"] % 9 or entry["loop"] // 9 >= nb:
+            raise ConvError("%s: loop offset is not a block boundary" % label)
+        meta["loop_start"] = entry["loop"] // 9 * 16
+    else:
+        meta["unused_loop_offset"] = entry["loop"]
+    meta.update(adsr1=entry["adsr1"], adsr2=entry["adsr2"], gain=entry["gain"], tuning_int=entry["tune_hi"],
+                tuning_frac=entry["tune_lo"], pad_byte=pad[0] if pad else 0xFF)
+    if tail_bytes:
+        meta["append"] = {"source": "sfx", "bytes": tail_bytes}
+    # choose the canonical rule with the fewest per-block overrides
+    best = None
+    for rule in brr.CANON_RULES:
+        order = brr.canon_order(rule)
+        ov = {}
+        o1 = o2 = 0
+        for k in range(nb):
+            tgt = pcm[k * 16:(k + 1) * 16]
+            r = brr.block_override(brr_bytes[k * 9:(k + 1) * 9], tgt, o1, o2, order)
+            if r is not None:
+                ov[k] = r
+            o1, o2 = tgt[15], tgt[14]
+        if best is None or len(ov) < len(best[1]):
+            best = (rule, ov)
+    meta["canon"] = best[0]
+    meta["overrides"] = {k: fmt_override(v) for k, v in best[1].items()}
+    return meta, pcm
+
+
+def wav_bytes(meta, pcm):
+    loop = (meta["loop_start"], len(pcm) - 1) if meta["loop"] else None
+    return brr.to_wav(pcm, SAMPLE_RATE, loop)
+
+
+# ---------------------------------------------------------------------------
+# manifest / tables
+# ---------------------------------------------------------------------------
+def load_manifest():
+    return json.loads(MANIFEST.read_text())
+
+
+def dump_manifest(man):
+    out = ["{", '  "comment": "Track table (track id -> blob label + sample ids in slot order), SFX sample ids and the common sample list; '
+           'see docs/formats/audio-sources.md",', '  "tracks": [']
+    out.append(",\n".join('    {"id": %d, "blob": "%s", "samples": %s}' % (t["id"], t["blob"], json.dumps(t["samples"])) for t in man["tracks"]))
+    out.append("  ],")
+    out.append('  "sfx_sample_ids": %s,' % json.dumps(man["sfx_sample_ids"]))
+    out.append('  "common_samples": %s' % json.dumps(man["common_samples"]))
+    out.append("}")
+    return "\n".join(out) + "\n"
+
+
+def gen_tables(man, metas, blobs, sizes):
+    """The 65816-side tables as asar source (the data that used to be hand-written in code/bank_83/audio.asm)."""
+    ids = {}
+    for m in metas.values():
+        for i in m["sample_ids"]:
+            ids[i] = m
+    n = max(ids) + 1
+    if sorted(ids) != list(range(n)):
+        raise ConvError("sample ids are not contiguous 0..%d" % (n - 1))
+    out = ["; Generated by tools/audio/audioconv.py build from assets/audio (do not edit; git-ignored)", ""]
+
+    def words(label, vals, per=6):
+        out.append(label + ":")
+        for i in range(0, len(vals), per):
+            out.append("    dw " + ",".join("$%04X" % v for v in vals[i:i + per]))
+        out.append("")
+    words("aAudioSampleSize", [sizes[ids[i]["label"]] for i in range(n)])
+    words("aAudioTrackDataSizeTable", [len(blobs[t["blob"]]) for t in man["tracks"]])
+    out.append("sAudioData1_838F83:   ; 0x1A * [ptr24 pAudioTrack, 11 * n8 sample id]")
+    for t in man["tracks"]:
+        sm = list(t["samples"]) + [0] * (11 - len(t["samples"]))
+        if len(sm) != 11:
+            raise ConvError("track %d has more than 11 samples" % t["id"])
+        out.append("    dl %s" % t["blob"])
+        out.append("    db " + ",".join("$%02X" % x for x in sm))
+    out.append("")
+    out.append("sAudioSampleData:   ; 0x28 * [n16 loop offset, n8 ADSR1, n8 ADSR2, n8 GAIN, n8 tuning int, n8 tuning frac, ptr24 BRR data]")
+    for i in range(n):
+        m = ids[i]
+        out.append("    dw $%04X" % sample_loop_offset(m))
+        out.append("    db $%02X,$%02X,$%02X,$%02X,$%02X" % (m["adsr1"], m["adsr2"], m["gain"], m["tuning_int"], m["tuning_frac"]))
+        out.append("    dl %s" % m["label"])
+    out.append("")
+    out.append("aAudioSfxSampleIdTable:")
+    s = man["sfx_sample_ids"]
+    for i in range(0, len(s), 12):
+        out.append("    db " + ",".join("$%02X" % x for x in s[i:i + 12]))
+    out.append("")
+    out.append("aAudioSampleLookupTable:")
+    out.append("    db " + ",".join("$%02X" % x for x in man["common_samples"]))
+    return "\n".join(out) + "\n"
+
+
+# ---------------------------------------------------------------------------
+# build
+# ---------------------------------------------------------------------------
+def assemble_driver():
+    org, data = spcasm.assemble(DRIVER_SRC.read_text())
+    if org != DRIVER_BASE:
+        raise ConvError("driver ORG must be $%04X" % DRIVER_BASE)
+    return data
+
+
+def assemble_sfx():
+    return trackfmt.assemble(SFX_SRC.read_text(), kind="sfx", base=SFX_BASE)
+
+
+def build_all(quiet=False):
+    """-> ({label: bytes}, tables text, info).  Pure function of the sources."""
+    man = load_manifest()
+    metas = load_sample_meta()
+    blobs = {}
+    sizes = {}
+    sfx = assemble_sfx()
+    for label, meta in metas.items():
+        data = build_sample(meta)
+        sizes[label] = len(data)
+        ap = meta.get("append")
+        if ap:
+            if ap["source"] != "sfx":
+                raise ConvError("%s: unknown append source" % label)
+            if any(sfx[ap["bytes"]:]):
+                raise ConvError("the SFX block must end in zero bytes after byte %d" % ap["bytes"])
+            data += sfx[:ap["bytes"]]
+        blobs[label] = data
+    for t in man["tracks"]:
+        label = t["blob"]
+        if label in blobs:
+            continue
+        f = TRACKS / (label + ".track.txt")
+        blobs[label] = trackfmt.assemble(f.read_text(), kind="track")
+    blobs[DRIVER_LABEL] = assemble_driver()
+    tables = gen_tables(man, metas, blobs, sizes)
+    return blobs, tables, dict(sfx=sfx, metas=metas, man=man, sizes=sizes)
+
+
+def cmd_build(a):
+    blobs, tables, _ = build_all()
+    changed = 0
+    for label, data in sorted(blobs.items()):
+        changed += write_if_changed(AUDIO / (label + ".bin"), data)
+    changed += write_if_changed(TABLES_INC, tables)
+    if not a.quiet:
+        print("audioconv build: %d blobs + table include (%d files written)" % (len(blobs), changed))
+    return 0
+
+
+# ---------------------------------------------------------------------------
+# extract (one-time conversion)
+# ---------------------------------------------------------------------------
+def cmd_extract(a):
+    import audio_map
+    bins = Path(a.bins) if a.bins else AUDIO
+    p = audio_map.load()
+    SAMPLES.mkdir(parents=True, exist_ok=True)
+    TRACKS.mkdir(parents=True, exist_ok=True)
+    SFXDIR.mkdir(parents=True, exist_ok=True)
+    DRIVER_DIR.mkdir(parents=True, exist_ok=True)
+
+    def blob(label):
+        return (bins / (label + ".bin")).read_bytes()
+    # samples
+    by_label = {}
+    for i, s in enumerate(p.samples):
+        by_label.setdefault(s["label"], []).append(i)
+    for label, ids in by_label.items():
+        e = p.samples[ids[0]]
+        for j in ids[1:]:
+            if p.samples[j] != e or p.sample_size[j] != p.sample_size[ids[0]]:
+                raise ConvError("%s: table entries of ids %s differ" % (label, ids))
+        data = blob(label)
+        size = p.sample_size[ids[0]]
+        tail = len(data) - size
+        if tail < 0:
+            raise ConvError("%s: blob shorter than its size" % label)
+        meta, pcm = extract_sample(label, ids, e, data, size, tail if tail else 0)
+        wavf, jsonf = sample_files(label)
+        write_if_changed(wavf, wav_bytes(meta, pcm))
+        write_if_changed(jsonf, dump_sample_json(meta))
+    # SFX block
+    sfxb = audio_map.sfx_block(p)
+    text = trackfmt.to_text(sfxb, [
+        "SFX block uploaded to SPC $%04X by command 1 (%d bytes): %d stream pointers, then the streams." % (SFX_BASE, len(sfxb), SFX_COUNT),
+        "Streams use the music stream syntax; `instrument` takes a sample id here and `noise` replaces perc21.",
+        "Format: docs/formats/audio-sources.md (tools/audio/trackfmt.py)."], kind="sfx", base=SFX_BASE)
+    write_if_changed(SFX_SRC, text)
+    # tracks
+    seen = {}
+    for i, t in enumerate(p.track_table):
+        seen.setdefault(t["label"], []).append(i)
+    for label in seen:
+        data = blob(label)
+        txt = trackfmt.to_text(data, [
+            "%s - song data (song list, patterns, voice streams); pointers are labels." % label,
+            "Format: docs/formats/audio-sources.md (tools/audio/trackfmt.py)."], kind="track")
+        write_if_changed(TRACKS / (label + ".track.txt"), txt)
+    # manifest
+    man = {"tracks": [{"id": i, "blob": t["label"], "samples": [x for x in t["samples"] if x] if True else []}
+                      for i, t in enumerate(p.track_table)],
+           "sfx_sample_ids": list(p.sfx_sample), "common_samples": list(parse_common(p))}
+    write_if_changed(MANIFEST, dump_manifest(man))
+    # driver
+    drv = blob(DRIVER_LABEL)
+    eng = audio_map.Engine(drv)
+    roots = [DRIVER_BASE] + eng.handler_table() + eng.cmd_jump_table()
+    src = spcasm.to_source(drv, DRIVER_BASE, roots, DRIVER_TABLES, [
+        "; Harvest Moon (SNES) SPC700 sound driver, N-SPC family, loaded to SPC RAM $0500 by the boot upload (4054 bytes).",
+        "; Assembled by tools/audio/spcasm.py (syntax = tools/audio/spc700.py listing syntax + labels). Analysis: docs/audio.md.",
+        "; Tables: command jump table $1053 (13 words), stream command handlers $13E0 (27 words), parameter counts $141E,",
+        ";         pitch table $143D, pan table $1457, FIR sets $146C, gate/velocity tables $14A0/$14A8, slot ids $14B8.",
+        ""])
+    write_if_changed(DRIVER_SRC, src)
+    print("extracted %d sample sources, %d tracks, SFX block, driver (%d lines)" % (len(by_label), len(seen), len(src.splitlines())))
+    return 0
+
+
+DRIVER_TABLES = [(0x1053, 13), (0x13E0, 27), (0x143D, 13)]
+
+
+def parse_common(p):
+    return p.common_raw
+
+
+# ---------------------------------------------------------------------------
+# check
+# ---------------------------------------------------------------------------
+def cmd_check(a):
+    problems = []
+
+    def bad(msg):
+        problems.append(msg)
+        print("FAIL " + msg)
+
+    def ok(msg):
+        if a.verbose:
+            print("ok   " + msg)
+    try:
+        blobs, tables, info = build_all()
+    except (ConvError, trackfmt.FormatError, spcasm.AsmError, OSError, ValueError, KeyError) as e:
+        print("FAIL build: %s" % e)
+        return 1
+    metas, man, sfx = info["metas"], info["man"], info["sfx"]
+    # samples: unchanged WAV must decode back exactly; overrides must all be live
+    nover = nblocks = 0
+    for label, meta in sorted(metas.items()):
+        wav, _ = sample_files(label)
+        pcm, rate, loop = brr.from_wav(wav.read_bytes())
+        if len(pcm) % 16:
+            bad("%s: WAV length %d is not a multiple of 16 samples (padded with silence when building)" % (label, len(pcm)))
+        stats = {}
+        data = build_sample(meta, stats=stats)
+        nb = len(pcm) // 16
+        dec = brr.decode(data[:nb * 9], nb)
+        if dec != list(pcm[:nb * 16]):
+            lossy = stats.get("lossy", 0)
+            bad("%s: encoded BRR does not decode to the WAV (%d lossy blocks) - edited sample; informational for modders" % (label, lossy))
+        else:
+            ok("%s: BRR decodes to the WAV bit-exactly" % label)
+        if meta["loop"]:
+            if data[(nb - 1) * 9] & 3 != 3:
+                bad("%s: loop sample must end with loop+end flags" % label)
+        if rate != SAMPLE_RATE:
+            ok("%s: WAV rate %d differs from the nominal %d (ignored)" % (label, rate, SAMPLE_RATE))
+        nover += len(meta["overrides"])
+        nblocks += nb
+        if len(data) >= 0x10000:
+            bad("%s: sample larger than 64 KiB" % label)
+        if sample_loop_offset(meta) > 0xFFFF:
+            bad("%s: loop offset out of range" % label)
+        # round trip of the edit path: re-encoding the decoded data must reproduce the same bytes
+        again = build_sample(meta, pcm=dec)
+        if again != data:
+            bad("%s: build is not idempotent" % label)
+    ok("%d samples, %d blocks, %d per-block overrides" % (len(metas), nblocks, nover))
+    # tracks: text -> bytes -> text must be stable, size limits
+    for t in man["tracks"]:
+        label = t["blob"]
+        if label not in blobs:
+            bad("track %d: unknown blob %s" % (t["id"], label)); continue
+        data = blobs[label]
+        if len(data) > 0x600:
+            bad("%s: %d bytes exceeds the $600-byte track area" % (label, len(data)))
+        for sid in t["samples"]:
+            if sid not in {i for m in metas.values() for i in m["sample_ids"]}:
+                bad("track %d references unknown sample id %d" % (t["id"], sid))
+        txt = trackfmt.to_text(data, [], kind="track")
+        if trackfmt.assemble(txt) != data:
+            bad("%s: text round trip failed" % label)
+    ok("%d track blobs" % len({t["blob"] for t in man["tracks"]}))
+    # SFX
+    if len(sfx) > 0x3F4:
+        bad("SFX block is %d bytes, larger than the $3F4 bytes between $1600 and the track base" % len(sfx))
+    if trackfmt.assemble(trackfmt.to_text(sfx, [], kind="sfx", base=SFX_BASE), kind="sfx", base=SFX_BASE) != sfx:
+        bad("SFX text round trip failed")
+    # driver: parameter counts must agree with the command table of the text format
+    drv = blobs[DRIVER_LABEL]
+    pc = [drv[0x141E - DRIVER_BASE + i] for i in range(27)]
+    if pc != [trackfmt.COMMANDS[0xE0 + i][1] for i in range(27)]:
+        bad("trackfmt.COMMANDS parameter counts differ from the driver table at $141E")
+    if len(drv) != 0x0FD6:
+        ok("driver size %d (code/bank_80/core.asm uploads $0FD6 bytes: update it when the size changes)" % len(drv))
+    # SPC700 assembler source must be in canonical form (disassembler fixed point)
+    import audio_map
+    eng = audio_map.Engine(drv)
+    again = spcasm.to_source(drv, DRIVER_BASE, [DRIVER_BASE] + eng.handler_table() + eng.cmd_jump_table(), DRIVER_TABLES, [])
+    if spcasm.assemble(again)[1] != drv:
+        bad("driver disassembly does not reassemble")
+    # sample-table consistency with the engine's region capacity is checked by tools/audio/audio_map.py --check
+    print("audioconv check: %s" % ("FAILED (%d)" % len(problems) if problems else "OK"))
+    return 1 if problems else 0
+
+
+# ---------------------------------------------------------------------------
+# wav (from blobs)
+# ---------------------------------------------------------------------------
+def cmd_wav(a):
+    import audio_map
+    p = audio_map.load()
+    out = Path(a.out)
+    out.mkdir(parents=True, exist_ok=True)
+    done = set()
+    for i, s in enumerate(p.samples):
+        if i == 0 or s["label"] in done:
+            continue
+        done.add(s["label"])
+        data = p.labels[s["label"]]["path"].read_bytes()
+        info = audio_map.brr_info(data, p.sample_size[i], s["loop"])
+        nb = info["end_block"] + 1
+        pcm = brr.decode(data[:nb * 9], nb)
+        loop = (s["loop"] // 9 * 16, len(pcm) - 1) if info.get("loop_flag") else None
+        (out / (s["label"] + ".wav")).write_bytes(brr.to_wav(pcm, SAMPLE_RATE, loop))
+    print("wrote %d WAV files to %s" % (len(done), out))
+    return 0
+
+
+# ---------------------------------------------------------------------------
+# midi export
+# ---------------------------------------------------------------------------
+GATE = [0x32, 0xB2, 0xBF, 0xCB, 0xD8, 0xE5, 0xF2, 0xFC]
+VEL = [0x19, 0x32, 0x4C, 0x65, 0x72, 0x7F, 0x8C, 0x98, 0xA5, 0xB2, 0xBF, 0xCB, 0xD8, 0xE5, 0xF2, 0xFC]
+PPQ = 48                                   # one quarter note = 48 song ticks (an assumption, the notes use multiples of 12)
+
+
+def _vlq(v):
+    b = [v & 0x7F]
+    v >>= 7
+    while v:
+        b.append(0x80 | (v & 0x7F))
+        v >>= 7
+    return bytes(reversed(b))
+
+
+def track_to_midi(data):
+    """Rough Standard MIDI File (format 1) of a track blob; every voice becomes one MIDI track/channel."""
+    atoms, roles, starts = trackfmt.disassemble(data, "track", 0)
+    by_off = {x.off: x for x in atoms}
+    order = sorted(by_off)
+    # token streams by start offset
+    def stream(off):
+        toks = []
+        i = order.index(off)
+        while True:
+            at = by_off[order[i]]
+            toks.append(at)
+            if at.kind == "tok" and at.text == "end":
+                return toks
+            i += 1
+    # follow the song list until the first jump
+    pats = []
+    pos = 0
+    while pos in by_off:
+        at = by_off[pos]
+        if at.kind == "pattern":
+            pats.append(at.ptr); pos += 2
+        else:
+            break
+    tempo = [27]
+    events = [[] for _ in range(8)]
+    t0 = 0
+    for pp in pats:
+        ptrs = by_off[pp].ptr
+        longest = 0
+        for v in range(8):
+            if not ptrs[v]:
+                continue
+            st = {"t": t0, "len": 1, "gate": 7, "vel": 15, "tr": 0, "vtr": 0, "base": 0}
+            ev = events[v]
+
+            def run(off, depth=0):
+                for at in stream(off):
+                    tx = at.text
+                    if at.kind != "tok":
+                        continue
+                    if isinstance(tx, tuple):                       # call
+                        for _ in range(max(tx[1], 1)):
+                            run(at.ptr, depth + 1)
+                        continue
+                    w = tx.split()
+                    h = w[0]
+                    if h == "end":
+                        return
+                    if h[0] == "L" and h[1:2].isdigit():
+                        m = re.match(r"L(\d+)(?::G(\d)V(\d+))?", h)
+                        st["len"] = int(m.group(1))
+                        if m.group(2) is not None:
+                            st["gate"], st["vel"] = int(m.group(2)), int(m.group(3))
+                    elif trackfmt.note_byte(h) is not None:
+                        key = 24 + (trackfmt.note_byte(h) - 0x80) + st["tr"] + st["vtr"]
+                        dur = st["len"]
+                        on = st["t"]
+                        off_t = on + max(1, dur * GATE[st["gate"]] // 256)
+                        ev.append((on, 0x90, max(0, min(127, key)), max(1, VEL[st["vel"]] // 2)))
+                        ev.append((off_t, 0x80, max(0, min(127, key)), 0))
+                        st["t"] += dur
+                    elif h in ("rest", "tie"):
+                        st["t"] += st["len"]
+                    elif re.match(r"perc\d+$", h):
+                        key = 35 + int(h[4:])
+                        ev.append((st["t"], 0x99, key, 90))
+                        ev.append((st["t"] + max(1, st["len"] // 2), 0x89, key, 0))
+                        st["t"] += st["len"]
+                    elif h == "instrument":
+                        ev.append((st["t"], 0xC0, int(w[1][1:], 16) & 0x7F, None))
+                    elif h == "volume":
+                        ev.append((st["t"], 0xB0, 7, int(w[1][1:], 16) >> 1))
+                    elif h == "pan":
+                        ev.append((st["t"], 0xB0, 10, min(127, int(w[1][1:], 16) * 127 // 20)))
+                    elif h == "tempo":
+                        tempo[0] = int(w[1][1:], 16)
+                    elif h == "transpose":
+                        st["tr"] = struct.unpack("b", bytes([int(w[1][1:], 16)]))[0]
+                    elif h == "voicetranspose":
+                        st["vtr"] = struct.unpack("b", bytes([int(w[1][1:], 16)]))[0]
+            run(ptrs[v])
+            longest = max(longest, st["t"] - t0)
+        t0 += longest
+    tick_rate = max(tempo[0], 1) * 500.0 / 256.0                      # song ticks per second (timer 0 = 2 ms, 8.8 accumulator)
+    usec_q = int(1_000_000 * PPQ / tick_rate)
+    chunks = []
+    meta = _vlq(0) + b"\xFF\x51\x03" + usec_q.to_bytes(3, "big") + _vlq(0) + b"\xFF\x2F\x00"
+    chunks.append(b"MTrk" + struct.pack(">I", len(meta)) + meta)
+    for v in range(8):
+        if not events[v]:
+            continue
+        evs = sorted(events[v], key=lambda e: (e[0], 0 if e[1] & 0xF0 == 0x80 else 1))
+        body = b""
+        last = 0
+        for t, st_, d1, d2 in evs:
+            ch = v if (st_ & 0x0F) != 9 else 9
+            status = (st_ & 0xF0) | ch
+            body += _vlq(t - last) + bytes([status, d1] + ([] if d2 is None else [d2]))
+            last = t
+        body += _vlq(0) + b"\xFF\x2F\x00"
+        chunks.append(b"MTrk" + struct.pack(">I", len(body)) + body)
+    return b"MThd" + struct.pack(">IHHH", 6, 1, len(chunks), PPQ) + b"".join(chunks)
+
+
+def cmd_midi(a):
+    out = Path(a.out)
+    out.mkdir(parents=True, exist_ok=True)
+    labels = a.labels or sorted(f.name[:-len(".track.txt")] for f in TRACKS.glob("*.track.txt"))
+    for label in labels:
+        data = trackfmt.assemble((TRACKS / (label + ".track.txt")).read_text())
+        (out / (label + ".mid")).write_bytes(track_to_midi(data))
+    print("wrote %d MIDI files to %s" % (len(labels), out))
+    return 0
+
+
+def main(argv=None):
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    sub = ap.add_subparsers(dest="cmd", required=True)
+    s = sub.add_parser("build"); s.add_argument("-q", "--quiet", action="store_true"); s.set_defaults(fn=cmd_build)
+    s = sub.add_parser("check"); s.add_argument("-v", "--verbose", action="store_true"); s.set_defaults(fn=cmd_check)
+    s = sub.add_parser("extract"); s.add_argument("--bins", help="directory with the original <label>.bin files (default assets/audio)")
+    s.set_defaults(fn=cmd_extract)
+    s = sub.add_parser("midi"); s.add_argument("--out", default="build/midi"); s.add_argument("labels", nargs="*"); s.set_defaults(fn=cmd_midi)
+    s = sub.add_parser("wav"); s.add_argument("--out", default="build/wav"); s.set_defaults(fn=cmd_wav)
+    a = ap.parse_args(argv)
+    try:
+        return a.fn(a) or 0
+    except (ConvError, trackfmt.FormatError, spcasm.AsmError) as e:
+        print("audioconv: %s" % e, file=sys.stderr)
+        return 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

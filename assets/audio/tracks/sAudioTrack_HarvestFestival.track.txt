@@ -1,0 +1,198 @@
+; sAudioTrack_HarvestFestival - song data (song list, patterns, voice streams); pointers are labels.
+; Format: docs/formats/audio-sources.md (tools/audio/trackfmt.py).
+
+songlist:
+    pattern pat0
+    jump songlist 255
+    songend
+
+pat0:
+    voices pat0_v0 pat0_v1 pat0_v2 pat0_v3 pat0_v4 pat0_v5 - -
+
+pat0_v0:
+    percbase $0B
+    echo $FC $5A $5A
+    echoparams $05 $3C $01
+    tempo $13
+    volume $96
+    pan $0A
+    instrument $00
+    finetune $40
+    L36:G7V15 A3 L12 rest L36 C4 L12 rest L24 E4 L12 rest L6 D4 E4 L24 D4 C4    ; t=0
+    call sub0 2
+    L36 A3 L12 rest L36 C4 L12 rest L24 E4 L12 rest L6 D4 E4 L24 D4 C4
+    call sub0 2
+    call sub1 1
+    rest rest
+    call sub2 1
+    L96 C5 end
+
+pat0_v1:
+    instrument $02
+    volume $80
+    pan $0A
+    voicetranspose $FF
+    finetune $C3
+    vibrato $00 $05 $14
+    L12 rest L6:G7V15 C5 B4 L12 C5 D5 E5 L36 A4    ; t=0
+    call sub3 1
+    L12 rest L6 C5 B4 L12 C5 D5 E5 L36 A4
+    call sub3 1
+    instrument $01
+    volume $80
+    voicetranspose $F4
+    finetune $78
+    L36 G#5 C5 L24 D#5
+    call sub4 3
+    L96 D#6 L12 C6 L6 G#5 rest L12 A#5 L6 F5 rest L12 C6 L6 G#5 rest L12 A#5 L6 F5 rest
+    call sub5 2
+    D#5 D#5 G#5 L30 rest L12 D#5 L6 G#5 L30 rest L12 C6 L6 G#5 rest L12 A#5 L6 F5 rest L12 C6
+    L6 G#5 rest L12 A#5 L6 F5 rest D#5 D#5 G#5 L30 rest L12 D#5 L6 G#5 L24 rest L6 rest
+
+pat0_v2:
+    instrument $03
+    volume $B4
+    voicetranspose $F4
+    finetune $00
+    pan $0A
+    L12 rest L6:G7V15 A4 rest A4 L30 rest L6 C5 rest C5 L18 rest L12 rest L6 E5 rest E5 rest    ; t=0
+    D5 E5 L12 F5 E5 D5 C5    ; t=132
+    instrument $01
+    volume $80
+    voicetranspose $F4
+    finetune $78
+    call sub6 2
+    instrument $03
+    volume $B4
+    voicetranspose $F4
+    finetune $00
+    call sub7 1
+    instrument $01
+    volume $80
+    voicetranspose $F4
+    finetune $78
+    call sub6 2
+    call sub8 1
+    call sub9 3
+    L96 C#6
+    call sub10 3
+    D#6
+
+pat0_v3:
+    instrument $00
+    volume $64
+    pan $0A
+    voicetranspose $00
+    finetune $54
+    vibrato $00 $05 $0A
+    L12 rest L36:G7V15 A3 L12 rest L36 C4 L12 rest L24 E4 L12 rest L6 D4 E4 L24 D4 C4    ; t=0
+    call sub0 2
+    L36 A3 L12 rest L36 C4 L12 rest L24 E4 L12 rest L6 D4 E4 L24 D4 C4
+    call sub0 2
+    call sub1 1
+    rest rest
+    call sub2 1
+    L84 C5
+
+pat0_v4:
+    instrument $02
+    volume $80
+    pan $0C
+    voicetranspose $17
+    finetune $C3
+    L6:G7V15 A2 rest E3 rest A2 rest E3 rest A2 rest E3 rest A2 rest E3 rest A2 rest E3 rest    ; t=0
+    A2 rest E3 rest A2 rest E3 rest A2 rest E3 rest    ; t=120
+    call sub11 2
+    call sub12 2
+    call sub11 2
+    call sub1 1
+    rest rest rest
+    instrument $04
+    volume $66
+    pan $00
+    voicetranspose $FF
+    finetune $BE
+    panfade $60 $14
+    L6 C5 F5 C6 D#5 G#5 F5 A#5 G#5 C5 F5 C6 D#5 G#5 F5 A#5 G#5
+    panfade $60 $00
+    C5 D#5 G#5 F5 A#5 G#5 D#5 G#5 C5 D#5 G#5 F5 A#5 G#5 D#5 G#5
+    call sub13 3
+
+pat0_v5:
+    instrument $03
+    volume $C8
+    voicetranspose $E8
+    finetune $00
+    pan $0A
+    L12 rest L9:G7V15 A4 L3 rest L9 A4 L27 rest L9 C5 L3 rest L9 C5 L15 rest L12 rest L9 E5    ; t=0
+    L3 rest L9 E5 L3 rest L6 D5 E5 L12 F5 E5 D5 C5    ; t=117
+    instrument $01
+    volume $40
+    voicetranspose $F4
+    finetune $96
+    rest L6 F#4 rest L8 A#4 L4 rest L6 C#5 rest L45 D#5 L15 rest L6 F#4 rest L8 A#4 L4 rest    ; t=192
+    L6 C#5 rest L45 D#5 L3 rest    ; t=324
+    instrument $03
+    volume $B4
+    voicetranspose $E8
+    finetune $00
+    call sub7 1
+    instrument $01
+    volume $41
+    voicetranspose $F4
+    finetune $96
+    rest L6 F#4 rest L8 A#4 L4 rest L6 C#5 rest L45 D#5 L15 rest L6 F#4 rest L8 A#4 L4 rest
+    L6 C#5 rest L45 D#5 L15 rest
+    call sub8 1
+    call sub9 3
+    L96 C#6
+    call sub10 3
+    L84 D#6 end
+
+sub0:
+    L6 F#3 L30 rest L48 D#3 L12 rest end    ; t=0
+
+sub1:
+    L96 rest rest rest rest rest end    ; t=0
+
+sub2:
+    L84 rest L6 G#4 C5 L84 C#5 L12 C#5 C5 L72 G#4 L6 G#4 C5 L84 C#5 L12 C#5 C5 L72 D#5 L6 G#4    ; t=0
+    C5 L84 C#5 L12 C#5 C5 L72 G#4 L6 G#4 C5 L84 C#5 L12 C#5 end    ; t=474
+
+sub3:
+    L12 G5 F5 E5 F5 L48 E5 L12 C#5 A#4 C#5 L24 D#5 L36 F#4 L12 C#5 A#4 C#5 L60 D#5 end    ; t=0
+
+sub4:
+    L96 A#5 L36 G#5 C5 L24 D#5 end    ; t=0
+
+sub5:
+    L12 D#5 L6 G#5 L30 rest L12 D#5 L6 G#5 L30 rest L12 C6 L6 G#5 rest L12 A#5 L6 F5 rest L12    ; t=0
+    C6 L6 G#5 rest L12 A#5 L6 F5 rest end    ; t=144
+
+sub6:
+    L6 F#4 rest L8 A#4 L4 rest L6 C#5 rest L45 D#5 L15 rest end    ; t=0
+
+sub7:
+    L12 rest L6 A4 rest A4 L30 rest L6 C5 rest C5 L18 rest L12 rest L6 E5 rest E5 rest D5 E5    ; t=0
+    L12 F5 G5 F5 E5 end    ; t=144
+
+sub8:
+    L12 G#5 C5 C#5 C5 G#5 C5 C#5 C5 A#5 D5 D#5 D5 A#5 D5 D#5 D5 end    ; t=0
+
+sub9:
+    G#5 C5 C#5 C5 G#5 C5 C#5 C5 A#5 D5 D#5 D5 A#5 D5 D#5 D5 end    ; t=0
+
+sub10:
+    D#6 C#6 end    ; t=0
+
+sub11:
+    F#2 rest C#3 rest F#2 rest C#3 rest L12 D#2 L6 A#2 rest L12 D#2 L6 A#2 rest end    ; t=0
+
+sub12:
+    A2 rest E3 rest A2 rest E3 rest A2 rest E3 rest A2 rest E3 rest end    ; t=0
+
+sub13:
+    panfade $60 $14
+    C5 F5 C6 D#5 G#5 F5 A#5 G#5 C5 F5 C6 D#5 G#5 F5 A#5 G#5    ; t=0
+    panfade $60 $00
+    C5 D#5 G#5 F5 A#5 G#5 D#5 G#5 C5 D#5 G#5 F5 A#5 G#5 D#5 G#5 end    ; t=0

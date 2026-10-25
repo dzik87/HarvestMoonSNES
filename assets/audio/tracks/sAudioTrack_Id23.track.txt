@@ -1,0 +1,68 @@
+; sAudioTrack_Id23 - song data (song list, patterns, voice streams); pointers are labels.
+; Format: docs/formats/audio-sources.md (tools/audio/trackfmt.py).
+
+songlist:
+    pattern pat0
+    jump songlist 255
+    songend
+
+pat0:
+    voices pat0_v0 pat0_v1 pat0_v2 pat0_v3 pat0_v4 pat0_v5 - -
+
+pat0_v0:
+    percbase $0B
+    echo $FF $5A $5A
+    echoparams $05 $3C $01
+    tempo $13
+    voicetranspose $0C
+    finetune $00
+    volume $B4
+    instrument $00
+    pan $0F
+    vibrato $00 $14 $14
+    L6:G7V15 G2 L84 G2 L48 tie L3 rest end    ; t=0
+
+pat0_v1:
+    instrument $00
+    volume $82
+    voicetranspose $0C
+    finetune $0C
+    pan $0E
+    vibrato $00 $14 $1E
+    L3 rest L6:G7V15 G2 L84 G2 L48 tie    ; t=0
+
+pat0_v2:
+    instrument $00
+    volume $B4
+    voicetranspose $09
+    finetune $00
+    pan $05
+    vibrato $00 $14 $14
+    L6:G7V15 G2 L84 G2 L48 tie L3 rest    ; t=0
+
+pat0_v3:
+    instrument $00
+    volume $82
+    voicetranspose $09
+    finetune $0C
+    pan $06
+    vibrato $00 $14 $1E
+    L3 rest L6:G7V15 G2 L84 G2 L48 tie    ; t=0
+
+pat0_v4:
+    instrument $00
+    volume $B4
+    voicetranspose $10
+    finetune $00
+    pan $0B
+    vibrato $00 $14 $14
+    L6:G7V15 G2 L84 G2 L48 tie L3 rest    ; t=0
+
+pat0_v5:
+    instrument $00
+    volume $82
+    voicetranspose $10
+    finetune $0C
+    pan $09
+    vibrato $00 $14 $1E
+    L3 rest L6:G7V15 G2 L84 G2 L48 tie end    ; t=0

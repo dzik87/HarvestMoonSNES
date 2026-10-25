@@ -1,0 +1,33 @@
+{
+  "comment": "Track table (track id -> blob label + sample ids in slot order), SFX sample ids and the common sample list; see docs/formats/audio-sources.md",
+  "tracks": [
+    {"id": 0, "blob": "sAudioTrack_Spring", "samples": [7, 3, 1, 12, 5, 38, 36]},
+    {"id": 1, "blob": "sAudioTrack_Spring", "samples": [7, 3, 1, 12]},
+    {"id": 2, "blob": "sAudioTrack_Summer", "samples": [1, 5]},
+    {"id": 3, "blob": "sAudioTrack_HarvestFestival", "samples": [3, 7, 1, 22, 5]},
+    {"id": 4, "blob": "sAudioTrack_Winter", "samples": [3, 7, 1]},
+    {"id": 5, "blob": "sAudioTrack_Id05", "samples": [5, 1, 7]},
+    {"id": 6, "blob": "sAudioTrack_Mountain", "samples": [3, 7, 1]},
+    {"id": 7, "blob": "sAudioTrack_Fall", "samples": [1, 4, 12, 8]},
+    {"id": 8, "blob": "sAudioTrack_Dance", "samples": [1, 7, 22]},
+    {"id": 9, "blob": "sAudioTrack_Church", "samples": [2]},
+    {"id": 10, "blob": "sAudioTrack_NamingScreen", "samples": [5, 7]},
+    {"id": 11, "blob": "sAudioTrack_Title", "samples": [5, 1, 7]},
+    {"id": 12, "blob": "sAudioTrack_Id12", "samples": [5, 7, 1]},
+    {"id": 13, "blob": "sAudioTrack_EggFestival", "samples": [5, 1, 8]},
+    {"id": 14, "blob": "sAudioTrack_StarNightFestival", "samples": [5]},
+    {"id": 15, "blob": "sAudioTrack_TrollsCave", "samples": [5, 11, 1, 8]},
+    {"id": 16, "blob": "sAudioTrack_Ending", "samples": [5, 1, 12]},
+    {"id": 17, "blob": "sAudioTrack_BadEnding", "samples": [5, 3, 7]},
+    {"id": 18, "blob": "sAudioTrack_Opening", "samples": [4, 3, 7, 11]},
+    {"id": 19, "blob": "sAudioTrack_Rain", "samples": [13]},
+    {"id": 20, "blob": "sAudioTrack_Id20", "samples": [13]},
+    {"id": 21, "blob": "sAudioTrack_Id21", "samples": [21, 13, 24]},
+    {"id": 22, "blob": "sAudioTrack_Hurricane", "samples": [16]},
+    {"id": 23, "blob": "sAudioTrack_Id23", "samples": [29]},
+    {"id": 24, "blob": "sAudioTrack_Bell", "samples": [29]},
+    {"id": 25, "blob": "sAudioTrack_Id25", "samples": [19, 21]}
+  ],
+  "sfx_sample_ids": [0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 13, 19, 29, 38, 0, 0, 0, 0, 16, 35, 35, 0, 0, 36, 13, 0, 37, 30, 30, 39, 33, 20, 14, 20, 20, 28, 31, 20, 17, 15, 18, 16, 17, 17, 17, 7, 38, 6],
+  "common_samples": [23, 24, 25, 26, 21, 6, 10, 0, 0, 0]
+}
