@@ -8,7 +8,12 @@
 Workflow for editing: `export --png`, edit the PNG (indexed colour, same size), `import --label L --png edited.png`,
 then rebuild; CI/`tools/build.py` confirms the new hash. Only blobs that decompress to the stored size can be
 re-imported unchanged in size; the header size field is recomputed by the encoder.
-The bitplane depth of each blob is not yet verified against the game code: PNG export defaults to 4bpp (use --bpp).
+Blob kinds (found by inspecting the decompressed data, see docs/formats/tilemap-compression.md):
+  sCompressedTilemap_*      (assets/gfx/tiles)       tile graphics, rendered correctly as 4bpp (default of --bpp); the one
+                                                     4096-byte exception (sCompressedTilemap_928000, rain overlay) is likely 2bpp
+  sCompressedCharactermap_* (assets/gfx/characters)  16-bit BG name-table entries (tile 0-9, palette 10-12, priority 13,
+                                                     H/V flip 14/15), NOT tile graphics: `export` writes them as .raw plus a
+                                                     readable .map.txt (32 entries per row); PNG sheets are produced for tile blobs only
 Blobs with trailing data inside their label span (see docs/findings.md) keep that tail when re-imported.
 """
 import argparse, sys
@@ -31,13 +36,21 @@ def blobs():
             yield p
 
 
+def name_table_text(raw):
+    """16-bit little-endian BG name-table entries, 32 per row, as hex words."""
+    words = [raw[i] | raw[i + 1] << 8 for i in range(0, len(raw) - 1, 2)]
+    return "".join(" ".join(f"{w:04X}" for w in words[i:i + 32]) + "\n" for i in range(0, len(words), 32))
+
+
 def cmd_export(a):
     out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
     n = 0
     for p in blobs():
         raw, used = C.decompress(p.read_bytes() + PAD)
         (out / f"{p.stem}.raw").write_bytes(raw)
-        if a.png:
+        if "Charactermap" in p.stem:
+            (out / f"{p.stem}.map.txt").write_text(name_table_text(raw))
+        elif a.png:
             T.to_image(raw, a.bpp, 16).save(out / f"{p.stem}.png")
         n += 1
     print(f"exported {n} blobs to {out}")
