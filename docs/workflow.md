@@ -27,3 +27,8 @@ the result in run annotations and as the `HarvestMoon-US` artifact.
 - `maps/objmap.py` — object maps (bank $A7) <-> JSON grids in `assets/maps/`; widths in `tools/maps/map_dims.json`.
 - `data/bankbin.py` — sprite, tile, character and audio banks: one `.bin` per label in `assets/`, included with `incbin` (labels unchanged).
 - `gfx/gfxpipe.py` — export compressed blobs to raw/PNG, re-import edited PNG (recompress, size must stay equal), verify exact re-encode.
+- `fonts/font.py` — font glyphs: one 16x16 2bpp indexed PNG per glyph in `assets/fonts/<region>/glyph_XXXX.png`
+  (id = dialog word, `glyphs.json` maps ids to characters). Edit a PNG (pixel value = SNES colour index: 0/1 baked background
+  dither, 2/3 letter), run `python tools/fonts/font.py build --region us --write-assets` to regenerate the
+  `assets/gfx/tiles/sFontGlyphs_*.bin` tables included by the ROM, then `font.py seal` to refresh the recorded hashes. Format: `docs/formats/font.md`.
+- `objects/objdata.py` — banks $86/$87 object animation data model (analyze/check/names); format: `docs/formats/object-data.md`.
