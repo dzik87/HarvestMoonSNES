@@ -18,8 +18,9 @@ Commands:
 
 PNG format: indexed (mode P), pixel value = (OBJ palette number << 4) | colour index, so 128 palette entries (8 OBJ palettes
 of 16 colours); every value whose low nibble is 0 is transparent (tRNS).  The PLTE chunk is only a viewing aid and is ignored
-by `check`: it comes from a pluggable function (see `grayscale_palettes`; pass --palette-module FILE exposing
-`sprite_palettes(object_index) -> 8 lists of 16 (r, g, b)` to colour the output).  The image is the bounding box of the
+by `check`: it comes from a pluggable function (default `game_palettes`: the real day OBJ palette sPalette_0x6F; pass
+--palette-module FILE exposing `sprite_palettes(object_index) -> 8 lists of 16 (r, g, b)` to use other colours, or use
+`grayscale_palettes`).  The image is the bounding box of the
 components; "origin" in the index is the object origin inside the image (flip-free, as stored in the data).
 """
 import argparse
@@ -58,9 +59,15 @@ def grayscale_palettes(object_index):
     return [[(c * 17,) * 3 for c in range(16)] for _ in range(8)]
 
 
+def game_palettes(object_index):
+    """Default palette provider: the day OBJ palette (sPalette_0x6F), see docs/formats/graphics-palettes.md."""
+    import palette_map
+    return palette_map.sprite_palettes(object_index)
+
+
 def load_palette_provider(module_path):
     if not module_path:
-        return grayscale_palettes
+        return game_palettes
     spec = importlib.util.spec_from_file_location("sprite_palette_provider", module_path)
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
