@@ -1,0 +1,8 @@
+{"tables": [
+ {"label": "nTable_80AA68", "type": "dw", "per_line": 5, "count": 5,
+  "doc": "Indexed by the room width multiplier (strcDialogDisplay.mapMultiWidth 0-4); stored to strcMap.pCurrent+2 by fTileMap_MapChangeHandler.",
+  "values": ["$0000", "$0040", "$0080", "$0100", "$0100"]},
+ {"label": "nTable_80AA72", "type": "dw", "per_line": 5, "count": 5,
+  "doc": "Indexed by the room width multiplier (0-4); stored to strcMap.unk1C by fTileMap_MapChangeHandler.",
+  "values": ["$0000", "$1000", "$2000", "$4000", "$4000"]}
+]}

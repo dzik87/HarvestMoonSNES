@@ -202,7 +202,7 @@ size and all following addresses) differs. That is the design of the unified tre
 
 * **One label per blob in all releases.** A blob keeps its US label (`Tiles_Menu_1`, `sFontGlyphs_0x01`, ...). In a
   release its address is simply different, the assembler relocates every reference. The pointers in the map table
-  (`src/code/bank_80/tilemaps.asm`) used to be raw addresses in `if !REGION_xx` blocks (about 50 blocks); they are now the plain label,
+  (now `assets/areas/area_gfx.json`) used to be raw addresses in `if !REGION_xx` blocks (about 50 blocks); they are now the plain label,
   and the blocks are gone (`tools/migration/region_labels.py`).
 * **Shared stays shared.** A blob that is identical in every release has one source (`assets/gfx/png/tiles/<label>/`, `assets/gfx/tilemaps/<label>.map.txt`).
   A blob that differs in at least one release is included as `incbin "../../../../assets/gfx/tiles/!{REGDIR}<label>.bin"`; `!REGDIR` is
@@ -351,7 +351,7 @@ in both EU and DE (`!REGION_EUDE`).
 - **Palette animation:** three large JP specific data scripts after `fPaletteAnim_AnimalShop_T1234` and
   `fPaletteAnim_WoodsSpring_T1` (about 1500 data lines), palette animation table pointers (`pSubrutineTable_80BEEC`).
 - **Endings:** `fAreaEvents_Endings` sets the ending step to `$1C` instead of `$20` and does not clear the daily flag.
-- **Maps/tilemaps:** the map table in `src/code/bank_80/tilemaps.asm` points to the language specific graphics by label (no patch blocks any more, see "Regional data banks").
+- **Maps/tilemaps:** the area graphics descriptors in `assets/areas/area_gfx.json` points to the language specific graphics by label (no patch blocks any more, see "Regional data banks").
 - **Tools and objects:** tool animation tables and handlers (`fToolUsedActionHandler`, `fToolUsedAnimationHandler`),
   ranch development and weather damage object-map routines.
 

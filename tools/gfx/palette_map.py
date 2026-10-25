@@ -26,6 +26,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools" / "gfx"))
 sys.path.insert(0, str(ROOT / "tools" / "objects"))
+sys.path.insert(0, str(ROOT / "tools" / "maps"))
+import areadata as AD  # noqa: E402
 import tilemap_codec as C  # noqa: E402
 
 OUT = ROOT / "assets" / "gfx" / "palette_map.json"
@@ -171,68 +173,18 @@ def parse_presets():
 
 
 def parse_maps():
-    """tilemaps.asm -> (area id -> map label, {map label: decoded map}).  Decoding follows fTileMap_MapChangeHandler."""
-    lines = us_lines(read_lines("src/code/bank_80/tilemaps.asm"))
-    area_labels = [t for t in table_after(lines, "aTileMapData", "dw")]
-    body = {}
-    cur = None
-    start = next(i for i, l in enumerate(lines) if l.startswith(area_labels[0] + ":"))
-    for l in lines[start:]:
-        m = re.match(r"^([A-Za-z_]\w*):", l)
-        if m:
-            cur = m.group(1)
-            body.setdefault(cur, [])
-            continue
-        if cur:
-            body[cur].append(l)
+    """assets/maps/{areas.csv,area_gfx.json} -> (area id -> map label, {map label: decoded map}).  Fields follow fTileMap_MapChangeHandler."""
+    area_labels, desc = AD.load_gfx(ROOT)
     maps = {}
     for area, label in enumerate(area_labels):
-        if label not in body:
-            raise ValueError(f"map {label} not found")
-        raw = []                                  # bytes: int, or ("L", label, k) for pointers, None for expressions
-        for size, tok in data_items(body[label]):
-            if tok.startswith("$") or tok.isdigit():
-                v = num(tok)
-                raw += [(v >> (8 * k)) & 0xFF for k in range(size)]
-            elif size == 3:
-                raw += [("L", tok, k) for k in range(3)]
-            else:
-                raw += [None] * size
-        pos = 0
-
-        def u8():
-            nonlocal pos
-            v = raw[pos]
-            pos += 1
-            if not isinstance(v, int):
-                raise ValueError(f"{label}: non-numeric byte at {pos - 1}")
-            return v
-
-        def u16():
-            return u8() | u8() << 8
-
-        def ptr():
-            nonlocal pos
-            t = raw[pos:pos + 3]
-            pos += 3
-            if not all(isinstance(x, tuple) and x[1] == t[0][1] for x in t):
-                raise ValueError(f"{label}: expected a 24-bit label at {pos - 3}")
-            return t[0][1]
-
+        d = desc[label]
         m = {"label": label, "area": area}
         if area < 0x57:
-            m["preset"] = u8()
-            pos += 2                              # flags word (expression)
-            m["width"], m["height"] = u8(), u8()
-        else:
-            m["width"], m["height"] = u8(), u8()
-        nt, nc = u8(), u8()
-        if area < 0x57:
-            pos += 8                              # camera clamps
-        m["tiles"] = [(u16(), ptr()) for _ in range(nt)]
-        m["nametables"] = [(u16(), ptr()) for _ in range(nc)]
-        if pos != len(raw):
-            raise ValueError(f"{label}: {len(raw) - pos} unparsed bytes")
+            m["preset"] = d["preset"]
+        m["width"], m["height"] = d["room_w"], d["room_h"]
+        nt = d["tilemaps"]
+        loads = [(AD.hexval(v), blob) for v, blob in d["loads"]]
+        m["tiles"], m["nametables"] = loads[:nt], loads[nt:]
         maps[label] = m
     return area_labels, maps
 

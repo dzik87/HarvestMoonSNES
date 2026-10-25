@@ -1,0 +1,10 @@
+{
+ "_doc": "Release specific values of the dialog text tables (tools/dialogs/texttables.py).  option_vram: aTextDataTableFFFE, the VRAM word address stored in strcDialogDisplay.dialogUnk185 for the selected answer (0-4) of an <OPT n> selection menu.",
+ "option_vram": [
+  "$5010",
+  "$5170",
+  "$5350",
+  "$5070",
+  "$5250"
+ ]
+}
