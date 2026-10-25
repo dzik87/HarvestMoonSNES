@@ -1,22 +1,6 @@
 
 
-pAIScripting0x17:
-    dw pAIScripting0x17_Data01                                            ;B48E05|        |B48E25;
-    dw pAIScripting0x18                                        ;B48E07|        |B48EC5;
-    dw pAIScripting0x18                                        ;B48E09|        |B48EC5;
-    dw pAIScripting0x18                                        ;B48E0B|        |B48EC5;
-    dw pAIScripting0x18                                        ;B48E0D|        |B48EC5;
-    dw pAIScripting0x18                                        ;B48E0F|        |B48EC5;
-    dw pAIScripting0x18                                        ;B48E11|        |B48EC5;
-    dw pAIScripting0x18                                        ;B48E13|        |B48EC5;
-    dw pAIScripting0x18                                        ;B48E15|        |B48EC5;
-    dw pAIScripting0x18                                        ;B48E17|        |B48EC5;
-    dw pAIScripting0x18                                        ;B48E19|        |B48EC5;
-    dw pAIScripting0x18                                        ;B48E1B|        |B48EC5;
-    dw pAIScripting0x18                                        ;B48E1D|        |B48EC5;
-    dw pAIScripting0x18                                        ;B48E1F|        |B48EC5;
-    dw pAIScripting0x18                                        ;B48E21|        |B48EC5;
-    dw pAIScripting0x18                                        ;B48E23|        |B48EC5;
+    incsrc "../../../../build/gen/ai/slots_17.asm"
  
 pAIScripting0x17_Data01:
     %AICMD0x00_SetMusic($0A, $B4)                              ;B48E25

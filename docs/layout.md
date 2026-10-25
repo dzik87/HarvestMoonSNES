@@ -13,7 +13,7 @@ Mapping: LoROM, 64 banks of 32 KB ($80–$BF). Header and vectors: `src/code/hea
 | $A8–$A9 | palettes | `assets/gfx/banks.json` (generated asm: `build/gen/gfx/palettes/`) |
 | $AA–$AC | JP dialogs (empty in US/EU/DE) | `assets/dialogs/jp/*.txt` (generated asm) |
 | $AD–$B2 | audio (content looks like SPC700 program and data — to be confirmed) | `assets/audio/banks.json` (generated asm: `build/gen/audio/`) |
-| $B3–$B5 | AI scripts (one file per script, `src/ai/us/scripts/`; EU/DE/JP as `if !REGION_xx` blocks, `docs/regions-ai.md`) | `src/ai/` |
+| $B3–$B5 | AI scripts: bodies = script DSL (one file per script, `src/ai/us/scripts/`; EU/DE/JP as `if !REGION_xx` blocks, `docs/regions-ai.md`); script pointer list, slot tables and NPC sprite tables are data | `src/ai/` (DSL) + `assets/ai/{scripts.json,npc_sprite_tables.txt}` (generated asm: `build/gen/ai/`) |
 | $B6–$BB | US/EU/DE dialogs (empty in JP) | `assets/dialogs/<region>/*.txt` (generated asm) |
 | $BC–$BF | unused (zeros) | — |
 
@@ -24,6 +24,8 @@ into git-ignored `build/gen/` (dialogs, object animation banks, object maps) or 
 The graphics banks ($88-$A6, $A8-$A9) are generated too: `assets/gfx/banks.json` lists per bank the ORG, the blobs in ROM order (`*` = included through `!{REGDIR}`, a release has its own version) and the
 trailing padding; `tools/data/gfxbanks.py build` (step "graphics bank asm" of `tools/build_assets.py`) writes `build/gen/gfx/<kind>/bank_XX.asm` (label + `incbin` + `fill`), which `src/main.asm` includes.
 The audio banks ($AD-$B2) work the same way: `assets/audio/banks.json` (ORG and blob labels in ROM order; every bank ends with `fill align $8000`) -> `build/gen/audio/bank_XX.asm`, written by `tools/audio/audioconv.py build` together with `build/gen/audio/audio_tables.inc` (the 65816-side sample/track tables included by `src/code/bank_83/audio.asm`).
+The AI banks ($B3-$B5): `tools/ai/aidata.py build` writes `build/gen/ai/head_B3..B5.asm` (ORG, `ppAIScriptingList`, the 214 NPC sprite tables) and `slots_NN.asm` (the entry-point table at the start of every script) from `assets/ai/`.
+The script bodies themselves (`%AICMD...` macro calls) stay in `src/ai/us/scripts/` on purpose: they already are a readable high-level script language (code in a DSL), region differences are `if !REGION_xx` blocks inside it, `docs/regions-ai.md`.
 The only file under `src/data/` is `src/data/dialogs/macros.asm`, a macro file (code).
 
 ## Graphics sources

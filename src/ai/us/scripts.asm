@@ -1,5 +1,6 @@
-; Skrypty AI - kolejnosc plikow odpowiada kolejnosci w ROM.
-    incsrc "scripts/head_B3.asm"
+; AI scripts - the file order is the ROM order.  The bank heads (ORG, script pointer list, NPC sprite tables) and the slot table
+; at the start of every script are generated from assets/ai/ (tools/ai/aidata.py) into build/gen/ai/.
+    incsrc "../../../build/gen/ai/head_B3.asm"
     incsrc "scripts/script_00_General.asm"
     incsrc "scripts/script_01.asm"
     incsrc "scripts/script_02.asm"
@@ -15,7 +16,7 @@
     incsrc "scripts/script_0C_DogEvent.asm"
     incsrc "scripts/script_0D_CrossRoadsEvents.asm"
     incsrc "scripts/script_0E.asm"
-    incsrc "scripts/head_B4.asm"
+    incsrc "../../../build/gen/ai/head_B4.asm"
     incsrc "scripts/script_0F_StarNightFestival.asm"
     incsrc "scripts/script_10_WoodsPondEvent.asm"
     incsrc "scripts/script_11.asm"
@@ -68,7 +69,7 @@
     incsrc "scripts/script_40.asm"
     incsrc "scripts/script_41.asm"
     incsrc "scripts/script_42.asm"
-    incsrc "scripts/head_B5.asm"
+    incsrc "../../../build/gen/ai/head_B5.asm"
     incsrc "scripts/script_43.asm"
     incsrc "scripts/script_44.asm"
     incsrc "scripts/script_45.asm"

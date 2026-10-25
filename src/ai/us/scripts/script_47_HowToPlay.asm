@@ -1,38 +1,6 @@
 
 
-pAIScripting0x47_HowToPlay:
-    dw pAIScripting0x47_HowToPlay_Data01                                            ;B5AC6E|        |B5ACAE;
-    dw pAIScripting0x47_HowToPlay_Data02                                            ;B5AC70|        |B5ACDE;
-    dw pAIScripting0x47_HowToPlay_Data03                                            ;B5AC72|        |B5AD25;
-    dw pAIScripting0x47_HowToPlay_Data04                                            ;B5AC74|        |B5AFF9;
-    dw pAIScripting0x47_HowToPlay_Data05                                            ;B5AC76|        |B5B050;
-    dw pAIScripting0x47_HowToPlay_Data06                                            ;B5AC78|        |B5B261;
-    dw pAIScripting0x47_HowToPlay_Data07                                            ;B5AC7A|        |B5B2B8;
-    dw pAIScripting0x47_HowToPlay_Data08                                            ;B5AC7C|        |B5B501;
-    dw pAIScripting0x47_HowToPlay_Data09                                            ;B5AC7E|        |B5B834;
-    dw pAIScripting0x47_HowToPlay_Data10                                            ;B5AC80|        |B5B87B;
-    dw pAIScripting0x47_HowToPlay_Data11                                            ;B5AC82|        |B5BBFA;
-    dw pAIScripting0x47_HowToPlay_Data12                                            ;B5AC84|        |B5BC45;
-    dw pAIScripting0x47_HowToPlay_Data13                                            ;B5AC86|        |B5BEDE;
-    dw pAIScripting0x47_HowToPlay_Data14                                            ;B5AC88|        |B5BF1A;
-    dw pAIScripting0x47_HowToPlay_Data15                                            ;B5AC8A|        |B5C1BD;
-    dw pAIScripting0x47_HowToPlay_Data16                                            ;B5AC8C|        |B5C442;
-    dw pAIScripting0x47_HowToPlay_Data17                                            ;B5AC8E|        |B5C489;
-    dw pAIScripting0x47_HowToPlay_Data18                                            ;B5AC90|        |B5C4BA;
-    dw pAIScripting0x47_HowToPlay_Data19                                            ;B5AC92|        |B5C5D3;
-    dw pAIScripting0x47_HowToPlay_Data20                                            ;B5AC94|        |B5C608;
-    dw pAIScripting0x47_HowToPlay_Data21                                            ;B5AC96|        |B5C648;
-    dw pAIScripting0x47_HowToPlay_Data22                                            ;B5AC98|        |B5C679;
-    dw pAIScripting0x47_HowToPlay_Data23                                            ;B5AC9A|        |B5C793;
-    dw pAIScripting0x47_HowToPlay_Data24                                            ;B5AC9C|        |B5C7DE;
-    dw pAIScripting0x47_HowToPlay_Data25                                            ;B5AC9E|        |B5C8AF;
-    dw pAIScripting0x47_HowToPlay_Data26                                            ;B5ACA0|        |B5C8EE;
-    dw pAIScripting0x47_HowToPlay_Data27                                            ;B5ACA2|        |B5CA00;
-    dw pAIScripting0x47_HowToPlay_Data28                                            ;B5ACA4|        |B5CA3D;
-    dw pAIScripting0x47_HowToPlay_Data29                                            ;B5ACA6|        |B5CAA2;
-    dw pAIScripting0x47_HowToPlay_Data30                                            ;B5ACA8|        |B5CB13;
-    dw pAIScripting0x47_HowToPlay_Data31                                            ;B5ACAA|        |B5CB69;
-    dw pAIScripting0x47_HowToPlay_Data31                                            ;B5ACAC|        |B5CB69;
+    incsrc "../../../../build/gen/ai/slots_47.asm"
  
 pAIScripting0x47_HowToPlay_Data01:
  

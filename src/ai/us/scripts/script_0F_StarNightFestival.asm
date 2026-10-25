@@ -1,21 +1,5 @@
  
-pAIScripting0x0F_StarNightFestival:
-    dw pAIScripting0x0F_StarNightFestival_Data01                                            ;B48000|        |B48020;
-    dw pAIScripting0x0F_StarNightFestival_Data02                                            ;B48002|        |B48075;
-    dw pAIScripting0x0F_StarNightFestival_Data03                                            ;B48004|        |B4820E;
-    dw pAIScripting0x0F_StarNightFestival_Data04                                            ;B48006|        |B48400;
-    dw pAIScripting0x0F_StarNightFestival_Data05                                            ;B48008|        |B485C6;
-    dw pAIScripting0x0F_StarNightFestival_Data06                                            ;B4800A|        |B486E8;
-    dw pAIScripting0x10_WoodsPondEvent                         ;B4800C|        |B487B8;
-    dw pAIScripting0x10_WoodsPondEvent                         ;B4800E|        |B487B8;
-    dw pAIScripting0x10_WoodsPondEvent                         ;B48010|        |B487B8;
-    dw pAIScripting0x10_WoodsPondEvent                         ;B48012|        |B487B8;
-    dw pAIScripting0x10_WoodsPondEvent                         ;B48014|        |B487B8;
-    dw pAIScripting0x10_WoodsPondEvent                         ;B48016|        |B487B8;
-    dw pAIScripting0x10_WoodsPondEvent                         ;B48018|        |B487B8;
-    dw pAIScripting0x10_WoodsPondEvent                         ;B4801A|        |B487B8;
-    dw pAIScripting0x10_WoodsPondEvent                         ;B4801C|        |B487B8;
-    dw pAIScripting0x10_WoodsPondEvent                         ;B4801E|        |B487B8;
+    incsrc "../../../../build/gen/ai/slots_0F.asm"
  
 pAIScripting0x0F_StarNightFestival_Data01:
  

@@ -1,22 +1,6 @@
 
 
-pAIScripting0x0C_DogEvent:
-    dw AI_ObtainDog                                            ;B3EF5A|        |B3EF7A;
-    dw AI_EllenSayGoodbye                                      ;B3EF5C|        |B3EFF3;
-    dw pAIScripting0x0D_CrossRoadsEvents                       ;B3EF5E|        |B3F068;
-    dw pAIScripting0x0D_CrossRoadsEvents                       ;B3EF60|        |B3F068;
-    dw pAIScripting0x0D_CrossRoadsEvents                       ;B3EF62|        |B3F068;
-    dw pAIScripting0x0D_CrossRoadsEvents                       ;B3EF64|        |B3F068;
-    dw pAIScripting0x0D_CrossRoadsEvents                       ;B3EF66|        |B3F068;
-    dw pAIScripting0x0D_CrossRoadsEvents                       ;B3EF68|        |B3F068;
-    dw pAIScripting0x0D_CrossRoadsEvents                       ;B3EF6A|        |B3F068;
-    dw pAIScripting0x0D_CrossRoadsEvents                       ;B3EF6C|        |B3F068;
-    dw pAIScripting0x0D_CrossRoadsEvents                       ;B3EF6E|        |B3F068;
-    dw pAIScripting0x0D_CrossRoadsEvents                       ;B3EF70|        |B3F068;
-    dw pAIScripting0x0D_CrossRoadsEvents                       ;B3EF72|        |B3F068;
-    dw pAIScripting0x0D_CrossRoadsEvents                       ;B3EF74|        |B3F068;
-    dw pAIScripting0x0D_CrossRoadsEvents                       ;B3EF76|        |B3F068;
-    dw pAIScripting0x0D_CrossRoadsEvents                       ;B3EF78|        |B3F068;
+    incsrc "../../../../build/gen/ai/slots_0C.asm"
  
 AI_ObtainDog:
  

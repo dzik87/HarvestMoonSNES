@@ -1,21 +1,5 @@
  
-pAIScripting0x43:
-    dw pAIScripting0x43_Data01                                            ;B58000|        |B58020;
-    dw pAIScripting0x43_Data02                                            ;B58002|        |B584DA;
-    dw pAIScripting0x43_Data03                                            ;B58004|        |B58990;
-    dw pAIScripting0x43_Data04                                            ;B58006|        |B58E4E;
-    dw pAIScripting0x43_Data05                                            ;B58008|        |B59313;
-    dw pAIScripting0x44                                        ;B5800A|        |B597D1;
-    dw pAIScripting0x44                                        ;B5800C|        |B597D1;
-    dw pAIScripting0x44                                        ;B5800E|        |B597D1;
-    dw pAIScripting0x44                                        ;B58010|        |B597D1;
-    dw pAIScripting0x44                                        ;B58012|        |B597D1;
-    dw pAIScripting0x44                                        ;B58014|        |B597D1;
-    dw pAIScripting0x44                                        ;B58016|        |B597D1;
-    dw pAIScripting0x44                                        ;B58018|        |B597D1;
-    dw pAIScripting0x44                                        ;B5801A|        |B597D1;
-    dw pAIScripting0x44                                        ;B5801C|        |B597D1;
-    dw pAIScripting0x44                                        ;B5801E|        |B597D1;
+    incsrc "../../../../build/gen/ai/slots_43.asm"
  
 pAIScripting0x43_Data01:
  

@@ -1,22 +1,6 @@
 
 
-pAIScripting0x2A:
-    dw pAIScripting0x2A_Data01                                            ;B4C4B8|        |B4C4D8;
-    dw pAIScripting0x2B                                        ;B4C4BA|        |B4C504;
-    dw pAIScripting0x2B                                        ;B4C4BC|        |B4C504;
-    dw pAIScripting0x2B                                        ;B4C4BE|        |B4C504;
-    dw pAIScripting0x2B                                        ;B4C4C0|        |B4C504;
-    dw pAIScripting0x2B                                        ;B4C4C2|        |B4C504;
-    dw pAIScripting0x2B                                        ;B4C4C4|        |B4C504;
-    dw pAIScripting0x2B                                        ;B4C4C6|        |B4C504;
-    dw pAIScripting0x2B                                        ;B4C4C8|        |B4C504;
-    dw pAIScripting0x2B                                        ;B4C4CA|        |B4C504;
-    dw pAIScripting0x2B                                        ;B4C4CC|        |B4C504;
-    dw pAIScripting0x2B                                        ;B4C4CE|        |B4C504;
-    dw pAIScripting0x2B                                        ;B4C4D0|        |B4C504;
-    dw pAIScripting0x2B                                        ;B4C4D2|        |B4C504;
-    dw pAIScripting0x2B                                        ;B4C4D4|        |B4C504;
-    dw pAIScripting0x2B                                        ;B4C4D6|        |B4C504;
+    incsrc "../../../../build/gen/ai/slots_2A.asm"
  
 pAIScripting0x2A_Data01:
     %AICMD0x1A($0218, $0078, aAIScriptingData_L133, $00)                     ;B4C4D8

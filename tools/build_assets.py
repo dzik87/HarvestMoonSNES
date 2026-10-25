@@ -11,6 +11,8 @@ Sources (committed)                                   -> generated, git-ignored 
   assets/objects/bank_8{6,7}/ (bank.json, objects/*.json, frames.txt) -> build/gen/objects/bank_8{6,7}.asm (tools/objects/objdata.py build)
   assets/maps/*.json                                   -> build/gen/maps/bank_A7.asm                     (tools/maps/objmap.py build)
 
+  assets/ai/{scripts.json,npc_sprite_tables.txt}      -> build/gen/ai/{head_B3..B5,slots_NN}.asm       (tools/ai/aidata.py build)
+
   assets/audio/{samples,tracks,sfx,driver}/*, audio.json, banks.json -> assets/audio/*.bin + build/gen/audio/{bank_XX.asm,audio_tables.inc} (tools/audio/audioconv.py build)
 
 `tools/build.py` runs this script before asar; run it by hand before the tests/checks that read the generated files.
@@ -30,6 +32,7 @@ STEPS = [
     ("dialog banks", [sys.executable, "tools/dialogs/dialog.py", "build"]),
     ("object animation banks", [sys.executable, "tools/objects/objdata.py", "build"]),
     ("object maps", [sys.executable, "tools/maps/objmap.py", "build"]),
+    ("AI script heads", [sys.executable, "tools/ai/aidata.py", "build"]),
 ]
 for _r in ("eu", "de", "jp"):
     STEPS.insert(2, (f"font tables {_r}", [sys.executable, "tools/fonts/font.py", "build", "--region", _r, "--write-assets"]))

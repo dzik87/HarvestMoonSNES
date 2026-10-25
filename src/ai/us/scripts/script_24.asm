@@ -1,22 +1,6 @@
 
 
-pAIScripting0x24:
-    dw pAIScripting0x24_Data01                                            ;B4A455|        |B4A475;
-    dw pAIScripting0x24_Data02                                            ;B4A457|        |B4A531;
-    dw pAIScripting0x24_Data03                                            ;B4A459|        |B4A55D;
-    dw pAIScripting0x24_Data04                                            ;B4A45B|        |B4A589;
-    dw pAIScripting0x25                                        ;B4A45D|        |B4A5B5;
-    dw pAIScripting0x25                                        ;B4A45F|        |B4A5B5;
-    dw pAIScripting0x25                                        ;B4A461|        |B4A5B5;
-    dw pAIScripting0x25                                        ;B4A463|        |B4A5B5;
-    dw pAIScripting0x25                                        ;B4A465|        |B4A5B5;
-    dw pAIScripting0x25                                        ;B4A467|        |B4A5B5;
-    dw pAIScripting0x25                                        ;B4A469|        |B4A5B5;
-    dw pAIScripting0x25                                        ;B4A46B|        |B4A5B5;
-    dw pAIScripting0x25                                        ;B4A46D|        |B4A5B5;
-    dw pAIScripting0x25                                        ;B4A46F|        |B4A5B5;
-    dw pAIScripting0x25                                        ;B4A471|        |B4A5B5;
-    dw pAIScripting0x25                                        ;B4A473|        |B4A5B5;
+    incsrc "../../../../build/gen/ai/slots_24.asm"
  
 pAIScripting0x24_Data01:
  

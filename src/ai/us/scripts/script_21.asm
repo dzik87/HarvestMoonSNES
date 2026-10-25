@@ -1,22 +1,6 @@
 
 
-pAIScripting0x21:
-    dw pAIScripting0x21_Data01                                            ;B49F13|        |B49F33;
-    dw pAIScripting0x22                                        ;B49F15|        |B49FD8;
-    dw pAIScripting0x22                                        ;B49F17|        |B49FD8;
-    dw pAIScripting0x22                                        ;B49F19|        |B49FD8;
-    dw pAIScripting0x22                                        ;B49F1B|        |B49FD8;
-    dw pAIScripting0x22                                        ;B49F1D|        |B49FD8;
-    dw pAIScripting0x22                                        ;B49F1F|        |B49FD8;
-    dw pAIScripting0x22                                        ;B49F21|        |B49FD8;
-    dw pAIScripting0x22                                        ;B49F23|        |B49FD8;
-    dw pAIScripting0x22                                        ;B49F25|        |B49FD8;
-    dw pAIScripting0x22                                        ;B49F27|        |B49FD8;
-    dw pAIScripting0x22                                        ;B49F29|        |B49FD8;
-    dw pAIScripting0x22                                        ;B49F2B|        |B49FD8;
-    dw pAIScripting0x22                                        ;B49F2D|        |B49FD8;
-    dw pAIScripting0x22                                        ;B49F2F|        |B49FD8;
-    dw pAIScripting0x22                                        ;B49F31|        |B49FD8;
+    incsrc "../../../../build/gen/ai/slots_21.asm"
  
 pAIScripting0x21_Data01:
     %AICMD0x09_StartScript($13, pAIScripting0x21_L009)                                   ;B49F33

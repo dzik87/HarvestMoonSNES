@@ -1,22 +1,6 @@
 
 
-pAIScripting0x28:
-    dw pAIScripting0x28_Data01                                            ;B4BACB|        |B4BAEB;
-    dw pAIScripting0x28_Data02                                            ;B4BACD|        |B4BB06;
-    dw pAIScripting0x28_Data03                                            ;B4BACF|        |B4BD19;
-    dw pAIScripting0x28_Data04                                            ;B4BAD1|        |B4C3AC;
-    dw pAIScripting0x29                                        ;B4BAD3|        |B4C427;
-    dw pAIScripting0x29                                        ;B4BAD5|        |B4C427;
-    dw pAIScripting0x29                                        ;B4BAD7|        |B4C427;
-    dw pAIScripting0x29                                        ;B4BAD9|        |B4C427;
-    dw pAIScripting0x29                                        ;B4BADB|        |B4C427;
-    dw pAIScripting0x29                                        ;B4BADD|        |B4C427;
-    dw pAIScripting0x29                                        ;B4BADF|        |B4C427;
-    dw pAIScripting0x29                                        ;B4BAE1|        |B4C427;
-    dw pAIScripting0x29                                        ;B4BAE3|        |B4C427;
-    dw pAIScripting0x29                                        ;B4BAE5|        |B4C427;
-    dw pAIScripting0x29                                        ;B4BAE7|        |B4C427;
-    dw pAIScripting0x29                                        ;B4BAE9|        |B4C427;
+    incsrc "../../../../build/gen/ai/slots_28.asm"
  
 pAIScripting0x28_Data01:
  

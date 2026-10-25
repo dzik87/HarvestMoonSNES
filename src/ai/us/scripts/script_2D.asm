@@ -1,22 +1,6 @@
 
 
-pAIScripting0x2D:
-    dw pAIScripting0x2D_Data01                                            ;B4C584|        |B4C5A4;
-    dw pAIScripting0x2E                                        ;B4C586|        |B4C5F4;
-    dw pAIScripting0x2E                                        ;B4C588|        |B4C5F4;
-    dw pAIScripting0x2E                                        ;B4C58A|        |B4C5F4;
-    dw pAIScripting0x2E                                        ;B4C58C|        |B4C5F4;
-    dw pAIScripting0x2E                                        ;B4C58E|        |B4C5F4;
-    dw pAIScripting0x2E                                        ;B4C590|        |B4C5F4;
-    dw pAIScripting0x2E                                        ;B4C592|        |B4C5F4;
-    dw pAIScripting0x2E                                        ;B4C594|        |B4C5F4;
-    dw pAIScripting0x2E                                        ;B4C596|        |B4C5F4;
-    dw pAIScripting0x2E                                        ;B4C598|        |B4C5F4;
-    dw pAIScripting0x2E                                        ;B4C59A|        |B4C5F4;
-    dw pAIScripting0x2E                                        ;B4C59C|        |B4C5F4;
-    dw pAIScripting0x2E                                        ;B4C59E|        |B4C5F4;
-    dw pAIScripting0x2E                                        ;B4C5A0|        |B4C5F4;
-    dw pAIScripting0x2E                                        ;B4C5A2|        |B4C5F4;
+    incsrc "../../../../build/gen/ai/slots_2D.asm"
  
 pAIScripting0x2D_Data01:
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B4C5A4

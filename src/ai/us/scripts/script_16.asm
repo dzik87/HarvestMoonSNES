@@ -1,22 +1,6 @@
 
 
-pAIScripting0x16:
-    dw pAIScripting0x16_Data01                                            ;B48D38|        |B48D58;
-    dw pAIScripting0x17                                        ;B48D3A|        |B48E05;
-    dw pAIScripting0x17                                        ;B48D3C|        |B48E05;
-    dw pAIScripting0x17                                        ;B48D3E|        |B48E05;
-    dw pAIScripting0x17                                        ;B48D40|        |B48E05;
-    dw pAIScripting0x17                                        ;B48D42|        |B48E05;
-    dw pAIScripting0x17                                        ;B48D44|        |B48E05;
-    dw pAIScripting0x17                                        ;B48D46|        |B48E05;
-    dw pAIScripting0x17                                        ;B48D48|        |B48E05;
-    dw pAIScripting0x17                                        ;B48D4A|        |B48E05;
-    dw pAIScripting0x17                                        ;B48D4C|        |B48E05;
-    dw pAIScripting0x17                                        ;B48D4E|        |B48E05;
-    dw pAIScripting0x17                                        ;B48D50|        |B48E05;
-    dw pAIScripting0x17                                        ;B48D52|        |B48E05;
-    dw pAIScripting0x17                                        ;B48D54|        |B48E05;
-    dw pAIScripting0x17                                        ;B48D56|        |B48E05;
+    incsrc "../../../../build/gen/ai/slots_16.asm"
  
 pAIScripting0x16_Data01:
     %AICMD0x50()                                               ;B48D58
