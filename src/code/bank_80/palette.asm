@@ -1,7 +1,7 @@
 ; Bank $80 module "palette" - starts at $808FC7
  
  
-fPalette_Unknown808FC7:
+fPalette_SetNextHourPalette:
     SEP #$20                                                   ;808FC7|E220    |      ;
     REP #$10                                                   ;808FC9|C210    |      ;
     STA.W strcPalette.nextHourIdx                              ;808FCB|8D7C01  |00017C;
@@ -264,7 +264,7 @@ fPalette_ZeroNextPalletePtr:
     RTL                                                        ;80916E|6B      |      ;
  
  
-fPalette_Unknown80916F:
+fPalette_WriteColorToBuffer:
     REP #$30                                                   ;80916F|C230    |      ; A: nValue, X: nColorIndex, Y: nOffsetindex (32Y+2X)
     STA.B strcVariables.n16Temp3                               ;809171|8582    |000082;
     STY.B strcVariables.n16Temp1                               ;809173|847E    |00007E;
@@ -800,7 +800,7 @@ fPalette_AdjustTimePalette:
     CMP.B #$FF                                                 ;809543|C9FF    |      ;
     BEQ +                                                      ;809545|F00B    |809552;
     PHA                                                        ;809547|48      |      ;
-    JSL.L fPalette_Unknown808FC7                               ;809548|22C78F80|808FC7;
+    JSL.L fPalette_SetNextHourPalette                               ;809548|22C78F80|808FC7;
     SEP #$20                                                   ;80954C|E220    |      ;
     PLA                                                        ;80954E|68      |      ;
     STA.W strcPalette.nextIdx                                  ;80954F|8D7B01  |00017B;

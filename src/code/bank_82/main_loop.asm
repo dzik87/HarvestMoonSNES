@@ -96,9 +96,9 @@ fMainMenu_AutoHowToPlay:
     JSL.L fCore_ZeroVRAM                                       ;82D4F4|22468880|808846;
     JSL.L fCore_ZeroCGRAM                                      ;82D4F8|22808980|808980;
     JSL.L fCore_Zero0x42Ptr                                    ;82D4FC|22AB8F80|808FAB;
-    JSL.L fUnknown_Zero7EA220                                  ;82D500|22D78E85|858ED7;
+    JSL.L fObject_InitTileCache                                  ;82D500|22D78E85|858ED7;
     JSL.L fObject_ClearGameObject                              ;82D504|220F8285|85820F;
-    JSL.L fUnknown_Zero07Ptr                                   ;82D508|22C7A481|81A4C7;
+    JSL.L fObjectSlots_ClearAll                                   ;82D508|22C7A481|81A4C7;
     JSL.L fAI_ZeroCCPtr                                        ;82D50C|22008084|848000;
     JSL.L fObjectMap_LoadDefaultFarm                           ;82D510|225AA682|82A65A;
     REP #$20                                                   ;82D514|C220    |      ;
@@ -298,16 +298,16 @@ fMainMenu_PrepareHowToPlay:
     JSL.L fGame_TimeHandler                                    ;82D6E2|22008082|828000;
     JSL.L fDialog_IterateText                                  ;82D6E6|221C9583|83951C;
     JSL.L fPallete_ChangeHandler                               ;82D6EA|220C9080|80900C;
-    JSL.L fCore_Unknown808E69                                  ;82D6EE|22698E80|808E69;
+    JSL.L fPalette_ProcessColorAnimSlots                                  ;82D6EE|22698E80|808E69;
     JSL.L fInput_Handler                                       ;82D6F2|2234C084|84C034;
-    JSL.L fUnknown_81A383                                      ;82D6F6|2283A381|81A383;
-    JSL.L fUnknownSubrutineHandler_81BFB7                      ;82D6FA|22B7BF81|81BFB7;
+    JSL.L fObjectSlots_UpdateAll                                      ;82D6F6|2283A381|81A383;
+    JSL.L fPlayer_UpdateHandler                      ;82D6FA|22B7BF81|81BFB7;
     JSL.L fGraphics_MapScrool                                  ;82D6FE|22B39580|8095B3;
     JSL.L fAI_HowToPlaySetup                                   ;82D702|226F8184|84816F;
-    JSL.L fUnknownCF_81A600                                    ;82D706|2200A681|81A600;
-    JSL.L fObject_Unknown8582C7                                ;82D70A|22C78285|8582C7;
-    JSL.L fUnknown_858CB2                                      ;82D70E|22B28C85|858CB2;
-    JSL.L fUnknown_8583E0                                      ;82D712|22E08385|8583E0;
+    JSL.L fTileScript_Update                                    ;82D706|2200A681|81A600;
+    JSL.L fObject_UpdateAllAnimations                                ;82D70A|22C78285|8582C7;
+    JSL.L fObject_ProcessTileLoadQueue                                      ;82D70E|22B28C85|858CB2;
+    JSL.L fObject_RenderAll                                      ;82D712|22E08385|8583E0;
     REP #$20                                                   ;82D716|C220    |      ;
     %CheckFlag(daily2, $0004)
     BNE fUnknown_82D731                                        ;82D71F|D010    |82D731;
@@ -416,7 +416,7 @@ fUnknown_82D80D:
     SEP #$20                                                   ;82D80D|E220    |      ;
     LDA.B $00                                                  ;82D80F|A500    |000000;
     BEQ fUnknown_82D80D                                        ;82D811|F0FA    |82D80D;
-    JSL.L fCore_Unknown808E69                                  ;82D813|22698E80|808E69;
+    JSL.L fPalette_ProcessColorAnimSlots                                  ;82D813|22698E80|808E69;
     JSL.L fInput_Handler                                       ;82D817|2234C084|84C034;
     SEP #$20                                                   ;82D81B|E220    |      ;
     LDA.B strcVariables.n8Temp4                                ;82D81D|A595    |000095;
@@ -514,9 +514,9 @@ fUnknown_82D8B0:
     JSL.L fCore_ZeroVRAM                                       ;82D8B2|22468880|808846;
     JSL.L fCore_ZeroCGRAM                                      ;82D8B6|22808980|808980;
     JSL.L fCore_Zero0x42Ptr                                    ;82D8BA|22AB8F80|808FAB;
-    JSL.L fUnknown_Zero7EA220                                  ;82D8BE|22D78E85|858ED7;
+    JSL.L fObject_InitTileCache                                  ;82D8BE|22D78E85|858ED7;
     JSL.L fObject_ClearGameObject                              ;82D8C2|220F8285|85820F;
-    JSL.L fUnknown_Zero07Ptr                                   ;82D8C6|22C7A481|81A4C7;
+    JSL.L fObjectSlots_ClearAll                                   ;82D8C6|22C7A481|81A4C7;
     JSL.L fAI_ZeroCCPtr                                        ;82D8CA|22008084|848000;
     REP #$20                                                   ;82D8CE|C220    |      ;
     %SetPlayerFlag(!PFLAGS_ACTIVE)
@@ -536,9 +536,9 @@ fUnknown_82D8B0:
     LDA.W nDestinationAreaId                                   ;82D914|AD8B09  |00098B;
     STA.B strcMap.loadAreaId                                   ;82D917|8522    |000022;
     JSL.L fAudioEngine_MapMusicHandler                         ;82D919|22DE9580|8095DE;
-    JSL.L fAudioUnknown_83841F                                 ;82D91D|221F8483|83841F;
-    JSL.L fAudioUnknown_8383A4                                 ;82D921|22A48383|8383A4;
-    JSL.L fAudioUnknown_838380                                 ;82D925|22808383|838380;
+    JSL.L fAudio_FadeOutOnTrackChangeFast                                 ;82D91D|221F8483|83841F;
+    JSL.L fAudio_LoadPendingTrack                                 ;82D921|22A48383|8383A4;
+    JSL.L fAudio_StartPendingTrack                                 ;82D925|22808383|838380;
     SEP #$20                                                   ;82D929|E220    |      ;
     LDA.W strcAudio.trackId                                    ;82D92B|AD1001  |000110;
     STA.W strcAudio.trackIdCopy                                ;82D92E|8D1701  |000117;
@@ -559,16 +559,16 @@ fUnknown_82D8B0:
     JSL.L fGame_TimeHandler                                    ;82D954|22008082|828000;
     JSL.L fDialog_IterateText                                  ;82D958|221C9583|83951C;
     JSL.L fPallete_ChangeHandler                               ;82D95C|220C9080|80900C;
-    JSL.L fCore_Unknown808E69                                  ;82D960|22698E80|808E69;
+    JSL.L fPalette_ProcessColorAnimSlots                                  ;82D960|22698E80|808E69;
     JSL.L fInput_Handler                                       ;82D964|2234C084|84C034;
-    JSL.L fUnknown_81A383                                      ;82D968|2283A381|81A383;
-    JSL.L fUnknownSubrutineHandler_81BFB7                      ;82D96C|22B7BF81|81BFB7;
+    JSL.L fObjectSlots_UpdateAll                                      ;82D968|2283A381|81A383;
+    JSL.L fPlayer_UpdateHandler                      ;82D96C|22B7BF81|81BFB7;
     JSL.L fGraphics_MapScrool                                  ;82D970|22B39580|8095B3;
     JSL.L fAI_HowToPlaySetup                                   ;82D974|226F8184|84816F;
-    JSL.L fUnknownCF_81A600                                    ;82D978|2200A681|81A600;
-    JSL.L fObject_Unknown8582C7                                ;82D97C|22C78285|8582C7;
-    JSL.L fUnknown_858CB2                                      ;82D980|22B28C85|858CB2;
-    JSL.L fUnknown_8583E0                                      ;82D984|22E08385|8583E0;
+    JSL.L fTileScript_Update                                    ;82D978|2200A681|81A600;
+    JSL.L fObject_UpdateAllAnimations                                ;82D97C|22C78285|8582C7;
+    JSL.L fObject_ProcessTileLoadQueue                                      ;82D980|22B28C85|858CB2;
+    JSL.L fObject_RenderAll                                      ;82D984|22E08385|8583E0;
     REP #$20                                                   ;82D988|C220    |      ;
     %CheckFlag(daily2, $0004)
     BNE +                                                      ;82D991|D020    |82D9B3;
@@ -611,9 +611,9 @@ fUnknown_82D8B0:
     JSL.L fCore_ZeroVRAM                                       ;82D9DC|22468880|808846;
     JSL.L fCore_ZeroCGRAM                                      ;82D9E0|22808980|808980;
     JSL.L fCore_Zero0x42Ptr                                    ;82D9E4|22AB8F80|808FAB;
-    JSL.L fUnknown_Zero7EA220                                  ;82D9E8|22D78E85|858ED7;
+    JSL.L fObject_InitTileCache                                  ;82D9E8|22D78E85|858ED7;
     JSL.L fObject_ClearGameObject                              ;82D9EC|220F8285|85820F;
-    JSL.L fUnknown_Zero07Ptr                                   ;82D9F0|22C7A481|81A4C7;
+    JSL.L fObjectSlots_ClearAll                                   ;82D9F0|22C7A481|81A4C7;
     JSL.L fAI_ZeroCCPtr                                        ;82D9F4|22008084|848000;
     SEP #$20                                                   ;82D9F8|E220    |      ;
     LDA.B #$5B                                                 ;82D9FA|A95B    |      ;
@@ -648,9 +648,9 @@ fUnknown_82D8B0:
     LDA.W #$0100                                               ;82DA46|A90001  |      ;
     STA.W strcBGScrool.BG2VerOffs                              ;82DA49|8D4201  |000142;
     JSL.L fAudioEngine_MapMusicHandler                         ;82DA4C|22DE9580|8095DE;
-    JSL.L fAudioUnknown_83841F                                 ;82DA50|221F8483|83841F;
-    JSL.L fAudioUnknown_8383A4                                 ;82DA54|22A48383|8383A4;
-    JSL.L fAudioUnknown_838380                                 ;82DA58|22808383|838380;
+    JSL.L fAudio_FadeOutOnTrackChangeFast                                 ;82DA50|221F8483|83841F;
+    JSL.L fAudio_LoadPendingTrack                                 ;82DA54|22A48383|8383A4;
+    JSL.L fAudio_StartPendingTrack                                 ;82DA58|22808383|838380;
     SEP #$20                                                   ;82DA5C|E220    |      ;
     LDA.W strcAudio.trackId                                    ;82DA5E|AD1001  |000110;
     STA.W strcAudio.trackIdCopy                                ;82DA61|8D1701  |000117;
@@ -739,7 +739,7 @@ fUnknown_82DAF5:
     LDA.B #$5C                                                 ;82DAF7|A95C    |      ;
     STA.B strcMap.loadAreaId                                   ;82DAF9|8522    |000022;
     JSL.L fAudioEngine_MapMusicHandler                         ;82DAFB|22DE9580|8095DE;
-    JSL.L fAudioUnknown_838401                                 ;82DAFF|22018483|838401;
+    JSL.L fAudio_FadeOutOnTrackChangeSlow                                 ;82DAFF|22018483|838401;
     SEP #$20                                                   ;82DB03|E220    |      ;
     LDA.B #$0F                                                 ;82DB05|A90F    |      ;
     STA.B strcVariables.n8Temp1                                ;82DB07|8592    |000092;
@@ -755,9 +755,9 @@ fUnknown_82DAF5:
     JSL.L fCore_ZeroVRAM                                       ;82DB21|22468880|808846;
     JSL.L fCore_ZeroCGRAM                                      ;82DB25|22808980|808980;
     JSL.L fCore_Zero0x42Ptr                                    ;82DB29|22AB8F80|808FAB;
-    JSL.L fUnknown_Zero7EA220                                  ;82DB2D|22D78E85|858ED7;
+    JSL.L fObject_InitTileCache                                  ;82DB2D|22D78E85|858ED7;
     JSL.L fObject_ClearGameObject                              ;82DB31|220F8285|85820F;
-    JSL.L fUnknown_Zero07Ptr                                   ;82DB35|22C7A481|81A4C7;
+    JSL.L fObjectSlots_ClearAll                                   ;82DB35|22C7A481|81A4C7;
     JSL.L fAI_ZeroCCPtr                                        ;82DB39|22008084|848000;
     REP #$20                                                   ;82DB3D|C220    |      ;
     STZ.B strcPlayer.posX                                      ;82DB3F|64D6    |0000D6;
@@ -799,7 +799,7 @@ fUnknown_82DB8E:
     LDA.B #$5C                                                 ;82DB90|A95C    |      ;
     STA.B strcMap.loadAreaId                                   ;82DB92|8522    |000022;
     JSL.L fAudioEngine_MapMusicHandler                         ;82DB94|22DE9580|8095DE;
-    JSL.L fAudioUnknown_838401                                 ;82DB98|22018483|838401;
+    JSL.L fAudio_FadeOutOnTrackChangeSlow                                 ;82DB98|22018483|838401;
     SEP #$20                                                   ;82DB9C|E220    |      ;
     LDA.B #$0F                                                 ;82DB9E|A90F    |      ;
     STA.B strcVariables.n8Temp1                                ;82DBA0|8592    |000092;
@@ -823,9 +823,9 @@ fUnknown_82DBB2:
     STZ.W strcDialogDisplay.mapDestY                           ;82DBC9|9C7F01  |00017F;
     STZ.W strcDialogDisplay.mapFlags                           ;82DBCC|9C9601  |000196;
     JSL.L fTileMap_MapChangeHandler                            ;82DBCF|22C6A780|80A7C6;
-    JSL.L fAudioUnknown_83841F                                 ;82DBD3|221F8483|83841F;
-    JSL.L fAudioUnknown_8383A4                                 ;82DBD7|22A48383|8383A4;
-    JSL.L fAudioUnknown_838380                                 ;82DBDB|22808383|838380;
+    JSL.L fAudio_FadeOutOnTrackChangeFast                                 ;82DBD3|221F8483|83841F;
+    JSL.L fAudio_LoadPendingTrack                                 ;82DBD7|22A48383|8383A4;
+    JSL.L fAudio_StartPendingTrack                                 ;82DBDB|22808383|838380;
     SEP #$20                                                   ;82DBDF|E220    |      ;
     LDA.W strcAudio.trackId                                    ;82DBE1|AD1001  |000110;
     STA.W strcAudio.trackIdCopy                                ;82DBE4|8D1701  |000117;
@@ -1191,7 +1191,7 @@ fUnknown_82DEC5:
     LDA.B #$5C                                                 ;82DEC7|A95C    |      ;
     STA.B strcMap.loadAreaId                                   ;82DEC9|8522    |000022;
     JSL.L fAudioEngine_MapMusicHandler                         ;82DECB|22DE9580|8095DE;
-    JSL.L fAudioUnknown_838401                                 ;82DECF|22018483|838401;
+    JSL.L fAudio_FadeOutOnTrackChangeSlow                                 ;82DECF|22018483|838401;
     SEP #$20                                                   ;82DED3|E220    |      ;
     LDA.B #$0F                                                 ;82DED5|A90F    |      ;
     STA.B strcVariables.n8Temp1                                ;82DED7|8592    |000092;
@@ -1242,9 +1242,9 @@ fUnknown_82DEC5:
     STA.B ptrTemp0x72+2                                        ;82DF4A|8574    |000074;
     JSL.L fCore_PrepareTransfer                                ;82DF4C|22338A80|808A33;
     JSL.L fCore_StartPreparedTransfer                          ;82DF50|22B28A80|808AB2;
-    JSL.L fAudioUnknown_83841F                                 ;82DF54|221F8483|83841F;
-    JSL.L fAudioUnknown_8383A4                                 ;82DF58|22A48383|8383A4;
-    JSL.L fAudioUnknown_838380                                 ;82DF5C|22808383|838380;
+    JSL.L fAudio_FadeOutOnTrackChangeFast                                 ;82DF54|221F8483|83841F;
+    JSL.L fAudio_LoadPendingTrack                                 ;82DF58|22A48383|8383A4;
+    JSL.L fAudio_StartPendingTrack                                 ;82DF5C|22808383|838380;
     SEP #$20                                                   ;82DF60|E220    |      ;
     LDA.W strcAudio.trackId                                    ;82DF62|AD1001  |000110;
     STA.W strcAudio.trackIdCopy                                ;82DF65|8D1701  |000117;
@@ -1272,7 +1272,7 @@ fUnknown_82DF92:
     LDA.B #$5E                                                 ;82DF94|A95E    |      ;
     STA.B strcMap.loadAreaId                                   ;82DF96|8522    |000022;
     JSL.L fAudioEngine_MapMusicHandler                         ;82DF98|22DE9580|8095DE;
-    JSL.L fAudioUnknown_838401                                 ;82DF9C|22018483|838401;
+    JSL.L fAudio_FadeOutOnTrackChangeSlow                                 ;82DF9C|22018483|838401;
     SEP #$20                                                   ;82DFA0|E220    |      ;
     LDA.B #$0F                                                 ;82DFA2|A90F    |      ;
     STA.B strcVariables.n8Temp1                                ;82DFA4|8592    |000092;
@@ -1392,9 +1392,9 @@ fUnknown_82E07F:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82E0B1|22488E80|808E48;
  
 fUnknown_82E0B5:
-    JSL.L fAudioUnknown_83841F                                 ;82E0B5|221F8483|83841F;
-    JSL.L fAudioUnknown_8383A4                                 ;82E0B9|22A48383|8383A4;
-    JSL.L fAudioUnknown_838380                                 ;82E0BD|22808383|838380;
+    JSL.L fAudio_FadeOutOnTrackChangeFast                                 ;82E0B5|221F8483|83841F;
+    JSL.L fAudio_LoadPendingTrack                                 ;82E0B9|22A48383|8383A4;
+    JSL.L fAudio_StartPendingTrack                                 ;82E0BD|22808383|838380;
     SEP #$20                                                   ;82E0C1|E220    |      ;
     LDA.W strcAudio.trackId                                    ;82E0C3|AD1001  |000110;
     STA.W strcAudio.trackIdCopy                                ;82E0C6|8D1701  |000117;
@@ -1420,7 +1420,7 @@ fUnknown_82E0EB:
     REP #$20                                                   ;82E0F1|C220    |      ;
     LDA.W #$1800                                               ;82E0F3|A90018  |      ;
     STA.B $C7                                                  ;82E0F6|85C7    |0000C7;
-    JSL.L fCore_Unknown808E69                                  ;82E0F8|22698E80|808E69;
+    JSL.L fPalette_ProcessColorAnimSlots                                  ;82E0F8|22698E80|808E69;
     JSL.L fInput_Handler                                       ;82E0FC|2234C084|84C034;
     SEP #$20                                                   ;82E100|E220    |      ;
     LDA.B strcVariables.u8Unk97                                ;82E102|A597    |000097;
@@ -1557,7 +1557,7 @@ fUnknown_82E1F1:
     LDA.B #$5E                                                 ;82E1F3|A95E    |      ;
     STA.B strcMap.loadAreaId                                   ;82E1F5|8522    |000022;
     JSL.L fAudioEngine_MapMusicHandler                         ;82E1F7|22DE9580|8095DE;
-    JSL.L fAudioUnknown_838401                                 ;82E1FB|22018483|838401;
+    JSL.L fAudio_FadeOutOnTrackChangeSlow                                 ;82E1FB|22018483|838401;
     SEP #$20                                                   ;82E1FF|E220    |      ;
     LDA.B #$0F                                                 ;82E201|A90F    |      ;
     STA.B strcVariables.n8Temp1                                ;82E203|8592    |000092;
@@ -1668,9 +1668,9 @@ fUnknown_82E1F1:
     STZ.W strcBGScrool.BG2VerOffs                              ;82E2F8|9C4201  |000142;
     STZ.W strcBGScrool.BG3HorOffs                              ;82E2FB|9C4401  |000144;
     STZ.W strcBGScrool.BG3VerOffs                              ;82E2FE|9C4601  |000146;
-    JSL.L fAudioUnknown_83841F                                 ;82E301|221F8483|83841F;
-    JSL.L fAudioUnknown_8383A4                                 ;82E305|22A48383|8383A4;
-    JSL.L fAudioUnknown_838380                                 ;82E309|22808383|838380;
+    JSL.L fAudio_FadeOutOnTrackChangeFast                                 ;82E301|221F8483|83841F;
+    JSL.L fAudio_LoadPendingTrack                                 ;82E305|22A48383|8383A4;
+    JSL.L fAudio_StartPendingTrack                                 ;82E309|22808383|838380;
     SEP #$20                                                   ;82E30D|E220    |      ;
     LDA.W strcAudio.trackId                                    ;82E30F|AD1001  |000110;
     STA.W strcAudio.trackIdCopy                                ;82E312|8D1701  |000117;
@@ -1696,7 +1696,7 @@ fUnknown_82E337:
     REP #$20                                                   ;82E33D|C220    |      ;
     LDA.W #$1800                                               ;82E33F|A90018  |      ;
     STA.B $C7                                                  ;82E342|85C7    |0000C7;
-    JSL.L fCore_Unknown808E69                                  ;82E344|22698E80|808E69;
+    JSL.L fPalette_ProcessColorAnimSlots                                  ;82E344|22698E80|808E69;
     JSL.L fInput_Handler                                       ;82E348|2234C084|84C034;
     SEP #$20                                                   ;82E34C|E220    |      ;
     LDA.B strcVariables.u8Unk97                                ;82E34E|A597    |000097;
@@ -1857,7 +1857,7 @@ fUnknown_82E405:
     LDA.W strcDialogDisplay.dialogFlags                        ;82E479|AD9B01  |00019B;
     AND.B #~!DFLAGS_NUMERICVAR                                                 
     STA.W strcDialogDisplay.dialogFlags                        ;82E47E|8D9B01  |00019B;
-    JSL.L fDialog_Unknown_8397A6                               ;82E481|22A69783|8397A6;
+    JSL.L fDialog_DrawNumericVarDigit                               ;82E481|22A69783|8397A6;
     JSL.L fCore_StartTransfer                                  ;82E485|22F08A80|808AF0;
     REP #$30                                                   ;82E489|C230    |      ;
     LDA.L strcDialogDisplay.dialogUnk185+$20000                ;82E48B|AF850180|800185;
@@ -1913,7 +1913,7 @@ fUnknown_82E405:
     LDA.W strcDialogDisplay.dialogFlags                        ;82E50A|AD9B01  |00019B;
     AND.B #~!DFLAGS_NUMERICVAR                                                 
     STA.W strcDialogDisplay.dialogFlags                        ;82E50F|8D9B01  |00019B;
-    JSL.L fDialog_Unknown_8397A6                               ;82E512|22A69783|8397A6;
+    JSL.L fDialog_DrawNumericVarDigit                               ;82E512|22A69783|8397A6;
     JSL.L fCore_StartTransfer                                  ;82E516|22F08A80|808AF0;
     REP #$30                                                   ;82E51A|C230    |      ;
     PLX                                                        ;82E51C|FA      |      ;
@@ -1925,7 +1925,7 @@ fUnknown_82E405:
     SEP #$20                                                   ;82E52A|E220    |      ;
     LDA.B #$00                                                 ;82E52C|A900    |      ;
     STA.W strcDialogDisplay.dialogVarSize                      ;82E52E|8D8C01  |00018C;
-    JSL.L fDialog_Unknown_8397A6                               ;82E531|22A69783|8397A6;
+    JSL.L fDialog_DrawNumericVarDigit                               ;82E531|22A69783|8397A6;
     JSL.L fCore_StartTransfer                                  ;82E535|22F08A80|808AF0;
     REP #$30                                                   ;82E539|C230    |      ;
     JSL.L fWriteSeasonWeekdayAndDayOrdinal                     ;82E53B|22D68982|8289D6;

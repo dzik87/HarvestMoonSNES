@@ -6,7 +6,7 @@ fScreen_NameInput:
     LDA.B #!AREA_NAMEINPUT                                                 
     STA.B strcMap.loadAreaId                                   ;82E810|8522    |000022;
     JSL.L fAudioEngine_MapMusicHandler                         ;82E812|22DE9580|8095DE;
-    JSL.L fAudioUnknown_838401                                 ;82E816|22018483|838401;
+    JSL.L fAudio_FadeOutOnTrackChangeSlow                                 ;82E816|22018483|838401;
     SEP #$20                                                   ;82E81A|E220    |      ;
     LDA.B #$0F                                                 ;82E81C|A90F    |      ;
     STA.B strcVariables.n8Temp1                                ;82E81E|8592    |000092;
@@ -18,7 +18,7 @@ fScreen_NameInput:
     JSL.L fCore_SetForceBlank                                  ;82E82C|220F8E80|808E0F;
     JSL.L fCore_ZeroVRAM                                       ;82E830|22468880|808846;
     JSL.L fCore_Zero0x42Ptr                                    ;82E834|22AB8F80|808FAB;
-    JSL.L fUnknown_Zero7EA220                                  ;82E838|22D78E85|858ED7;
+    JSL.L fObject_InitTileCache                                  ;82E838|22D78E85|858ED7;
     JSL.L fObject_ClearGameObject                              ;82E83C|220F8285|85820F;
     REP #$20                                                   ;82E840|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;82E842|AD9601  |000196;
@@ -66,7 +66,7 @@ fScreen_NameInput:
     STA.B ptrTemp0x72+2                                        ;82E8AA|8574    |000074;
     JSL.L fCore_PrepareTransfer                                ;82E8AC|22338A80|808A33;
     JSL.L fCore_StartTransfer                                  ;82E8B0|22F08A80|808AF0;
-    JSL.L fUnknown_Zero07Ptr                                   ;82E8B4|22C7A481|81A4C7;
+    JSL.L fObjectSlots_ClearAll                                   ;82E8B4|22C7A481|81A4C7;
     REP #$20                                                   ;82E8B8|C220    |      ;
     LDA.W #$0219                                               ;82E8BA|A91902  |      ;
     STA.B strcObject.spriteTableIdx                            ;82E8BD|85A1    |0000A1;
@@ -81,7 +81,7 @@ fScreen_NameInput:
     STA.B strcObject.posY                                      ;82E8D5|859D    |00009D;
     STA.W strcMenuData.posY                                    ;82E8D7|8D9D09  |00099D;
     STZ.B strcObject.unkA3                                     ;82E8DA|64A3    |0000A3;
-    JSL.L fUnknown_858000                                      ;82E8DC|22008085|858000;
+    JSL.L fObject_Create                                      ;82E8DC|22008085|858000;
     REP #$20                                                   ;82E8E0|C220    |      ;
     LDA.B strcObject.gameObjectIdx                             ;82E8E2|A5A5    |0000A5;
     STA.W strcMenuData.gameObjectIdx                           ;82E8E4|8D9509  |000995;
@@ -94,9 +94,9 @@ fScreen_NameInput:
     STZ.W strcBGScrool.BG2VerOffs                              ;82E8FA|9C4201  |000142;
     STZ.W strcBGScrool.BG3HorOffs                              ;82E8FD|9C4401  |000144;
     STZ.W strcBGScrool.BG3VerOffs                              ;82E900|9C4601  |000146;
-    JSL.L fAudioUnknown_83841F                                 ;82E903|221F8483|83841F;
-    JSL.L fAudioUnknown_8383A4                                 ;82E907|22A48383|8383A4;
-    JSL.L fAudioUnknown_838380                                 ;82E90B|22808383|838380;
+    JSL.L fAudio_FadeOutOnTrackChangeFast                                 ;82E903|221F8483|83841F;
+    JSL.L fAudio_LoadPendingTrack                                 ;82E907|22A48383|8383A4;
+    JSL.L fAudio_StartPendingTrack                                 ;82E90B|22808383|838380;
     SEP #$20                                                   ;82E90F|E220    |      ;
     LDA.W strcAudio.trackId                                    ;82E911|AD1001  |000110;
     STA.W strcAudio.trackIdCopy                                ;82E914|8D1701  |000117;
@@ -172,10 +172,10 @@ fScreen_NameInput:
     STA.B strcObject.posY                                      ;82E9AF|859D    |00009D;
     LDA.W strcMenuData.gameObjectIdx                           ;82E9B1|AD9509  |000995;
     STA.B strcObject.gameObjectIdx                             ;82E9B4|85A5    |0000A5;
-    JSL.L fObject_Unknown8580B9                                ;82E9B6|22B98085|8580B9;
-    JSL.L fObject_Unknown8582C7                                ;82E9BA|22C78285|8582C7;
-    JSL.L fUnknown_858CB2                                      ;82E9BE|22B28C85|858CB2;
-    JSL.L fUnknown_8583E0                                      ;82E9C2|22E08385|8583E0;
+    JSL.L fObject_UpdatePositionAndFlip                                ;82E9B6|22B98085|8580B9;
+    JSL.L fObject_UpdateAllAnimations                                ;82E9BA|22C78285|8582C7;
+    JSL.L fObject_ProcessTileLoadQueue                                      ;82E9BE|22B28C85|858CB2;
+    JSL.L fObject_RenderAll                                      ;82E9C2|22E08385|8583E0;
     SEP #$20                                                   ;82E9C6|E220    |      ;
     STZ.B $00                                                  ;82E9C8|6400    |000000;
     JML.L $82E95F                                              ;82E9CA|5C5FE982|82E95F;

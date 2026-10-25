@@ -8,7 +8,7 @@ fCore_GameStart:
     LDA.B #!AREA_HOUSE1                                                 
     STA.B strcMap.loadAreaId                                   ;808006|8522    |000022;
     JSL.L fAudioEngine_MapMusicHandler                         ;808008|22DE9580|8095DE;
-    JSL.L fAudioUnknown_838401                                 ;80800C|22018483|838401;
+    JSL.L fAudio_FadeOutOnTrackChangeSlow                                 ;80800C|22018483|838401;
     SEP #$20                                                   ;808010|E220    |      ;
     LDA.B #$0F                                                 ;808012|A90F    |      ;
     STA.B strcVariables.n8Temp1                                ;808014|8592    |000092;
@@ -37,7 +37,7 @@ fCore_GameStart:
     LDA.B #$15                                                 ;808055|A915    |      ;
     STA.W nDestinationAreaId                                   ;808057|8D8B09  |00098B;
     JSL.L fCore_FindBestLove                                   ;80805A|22C68E82|828EC6;
-    JSL.L fUnknown_8096D3                                      ;80805E|22D39680|8096D3;
+    JSL.L fMap_ResetAndLoadDestinationArea                                      ;80805E|22D39680|8096D3;
     REP #$20                                                   ;808062|C220    |      ;
     %CheckFlag(event3, $0001)
     BEQ fCore_MainLoop                                         ;80806B|F016    |808083;
@@ -66,16 +66,16 @@ fCore_MainLoop:
     JSL.L fGame_TimeHandler                                    ;8080A3|22008082|828000;
     JSL.L fDialog_IterateText                                  ;8080A7|221C9583|83951C;
     JSL.L fPallete_ChangeHandler                               ;8080AB|220C9080|80900C;
-    JSL.L fCore_Unknown808E69                                  ;8080AF|22698E80|808E69;
+    JSL.L fPalette_ProcessColorAnimSlots                                  ;8080AF|22698E80|808E69;
     JSL.L fInput_Handler                                       ;8080B3|2234C084|84C034;
-    JSL.L fUnknown_81A383                                      ;8080B7|2283A381|81A383;
-    JSL.L fUnknownSubrutineHandler_81BFB7                      ;8080BB|22B7BF81|81BFB7;
+    JSL.L fObjectSlots_UpdateAll                                      ;8080B7|2283A381|81A383;
+    JSL.L fPlayer_UpdateHandler                      ;8080BB|22B7BF81|81BFB7;
     JSL.L fGraphics_MapScrool                                  ;8080BF|22B39580|8095B3;
     JSL.L fAI_HowToPlaySetup                                   ;8080C3|226F8184|84816F;
-    JSL.L fUnknownCF_81A600                                    ;8080C7|2200A681|81A600;
-    JSL.L fObject_Unknown8582C7                                ;8080CB|22C78285|8582C7;
-    JSL.L fUnknown_858CB2                                      ;8080CF|22B28C85|858CB2;
-    JSL.L fUnknown_8583E0                                      ;8080D3|22E08385|8583E0;
+    JSL.L fTileScript_Update                                    ;8080C7|2200A681|81A600;
+    JSL.L fObject_UpdateAllAnimations                                ;8080CB|22C78285|8582C7;
+    JSL.L fObject_ProcessTileLoadQueue                                      ;8080CF|22B28C85|858CB2;
+    JSL.L fObject_RenderAll                                      ;8080D3|22E08385|8583E0;
     SEP #$20                                                   ;8080D7|E220    |      ;
     STZ.B $00                                                  ;8080D9|6400    |000000;
     JMP.W fCore_MainLoop                                       ;8080DB|4C8380  |808083;
@@ -589,14 +589,14 @@ fCore_InterruptIRQ5:
     JSL.L fAudio_UploadData                                    ;8085FC|223D8483|83843D;
     SEP #$20                                                   ;808600|E220    |      ;
     LDA.B #$00                                                 ;808602|A900    |      ;
-    JSL.L fAudioUnknown_838E32                                 ;808604|22328E83|838E32;
-    JSL.L fAudio_PlayAudio_Unknown838598                       ;808608|22988583|838598;
-    JSL.L fAudioUnknown_8384D3                                 ;80860C|22D38483|8384D3;
+    JSL.L fAudio_SendCommand0B                                 ;808604|22328E83|838E32;
+    JSL.L fAudio_LoadCommonSamples                       ;808608|22988583|838598;
+    JSL.L fAudio_UploadSpcDataBlock_B2D120                                 ;80860C|22D38483|8384D3;
     JSL.L fCore_InitializeScreenStatus                         ;808610|224C8C80|808C4C;
     JSL.L fCore_ZeroVRAM                                       ;808614|22468880|808846;
     JSL.L fCore_ZeroOAM                                        ;808618|22878880|808887;
     JSL.L fCore_ZeroCGRAM                                      ;80861C|22808980|808980;
-    JSL.L fUnknown_Zero7EA220                                  ;808620|22D78E85|858ED7;
+    JSL.L fObject_InitTileCache                                  ;808620|22D78E85|858ED7;
     JSL.L fObject_ClearGameObject                              ;808624|220F8285|85820F;
     JSL.L fGameEngine_SaveCheck                                ;808628|22D4BA83|83BAD4;
     SEP #$20                                                   ;80862C|E220    |      ;
@@ -706,7 +706,7 @@ fCore_UpdateGFX:
     STA.W SNES_MDMAEN                                          ;8086C0|8D0B42  |00420B;
     STZ.B $9A                                                  ;8086C3|649A    |00009A;
     STZ.W SNES_MDMAEN                                          ;8086C5|9C0B42  |00420B;
-    JSL.L fUnknown_858E57                                      ;8086C8|22578E85|858E57;
+    JSL.L fObject_ExecuteTileDmaQueue                                      ;8086C8|22578E85|858E57;
     STZ.B $9A                                                  ;8086CC|649A    |00009A;
     STZ.W SNES_MDMAEN                                          ;8086CE|9C0B42  |00420B;
  
@@ -1583,7 +1583,7 @@ fCore_Store0x72To0x42AtIndex:
     RTL                                                        ;808E68|6B      |      ;
  
  
-fCore_Unknown808E69:
+fPalette_ProcessColorAnimSlots:
     REP #$30                                                   ;808E69|C230    |      ;
     SEP #$20                                                   ;808E6B|E220    |      ;
     STZ.B strcVariables.n8Temp1                                ;808E6D|6492    |000092;
@@ -1664,7 +1664,7 @@ fCore_Unknown808E69:
     LDA.B [ptrTemp0x72]                                        ;808EE7|A772    |000072;
     PLX                                                        ;808EE9|FA      |      ;
     PLY                                                        ;808EEA|7A      |      ;
-    JSL.L fPalette_Unknown80916F                               ;808EEB|226F9180|80916F;
+    JSL.L fPalette_WriteColorToBuffer                               ;808EEB|226F9180|80916F;
     REP #$30                                                   ;808EEF|C230    |      ;
     PLY                                                        ;808EF1|7A      |      ;
     PHY                                                        ;808EF2|5A      |      ;

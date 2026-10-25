@@ -97,7 +97,7 @@ macro AICMD0x0D(nUnknown1, nUnknown2, nUnknown3, nUnknown4)
     
 endmacro
 
-; AI command 0x0E - Calls fAudioUnknown_838401: if the requested trackId differs from the one being played, sends a track change command to the APU. [probable]
+; AI command 0x0E - Calls fAudio_FadeOutOnTrackChangeSlow: if the requested trackId differs from the one being played, sends a track change command to the APU. [probable]
 macro AICMD0x0E(nUnknown1)
     db $0E
     db <nUnknown1>

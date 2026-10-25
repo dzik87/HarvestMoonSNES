@@ -232,23 +232,23 @@ aMapPalettesId:
     db $6B,$6C,$6B,$6C,$6B,$6C,$FF,$FF,$FF,$FF,$FF,$FF         ;80BED4|        |      ;
     db $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF         ;80BEE0|        |      ;
 pSubrutineTable_80BEEC:
-    dw subUnknown_80C36C                                       ;80BEEC|        |80C36C; 0x60 * [ptr16, ptr16, ptr16, ptr16, ptr16, n16]
-    dw subUnknown_80C36C                                       ;80BEEE|        |80C36C;
-    dw subUnknown_80C3D9                                       ;80BEF0|        |80C3D9;
-    dw subUnknown_80C446                                       ;80BEF2|        |80C446;
-    dw subUnknown_80C4B3                                       ;80BEF4|        |80C4B3;
+    dw fPaletteAnim_FarmSpring_FarmSummer_T01                                       ;80BEEC|        |80C36C; 0x60 * [ptr16, ptr16, ptr16, ptr16, ptr16, n16]
+    dw fPaletteAnim_FarmSpring_FarmSummer_T01                                       ;80BEEE|        |80C36C;
+    dw fPaletteAnim_FarmSpring_FarmSummer_T2                                       ;80BEF0|        |80C3D9;
+    dw fPaletteAnim_FarmSpring_FarmSummer_T3                                       ;80BEF2|        |80C446;
+    dw fPaletteAnim_FarmSpring_FarmSummer_T4                                       ;80BEF4|        |80C4B3;
     dw $FFFF                                                   ;80BEF6|        |      ;
-    dw subUnknown_80C36C                                       ;80BEF8|        |80C36C;
-    dw subUnknown_80C36C                                       ;80BEFA|        |80C36C;
-    dw subUnknown_80C3D9                                       ;80BEFC|        |80C3D9;
-    dw subUnknown_80C446                                       ;80BEFE|        |80C446;
-    dw subUnknown_80C4B3                                       ;80BF00|        |80C4B3;
+    dw fPaletteAnim_FarmSpring_FarmSummer_T01                                       ;80BEF8|        |80C36C;
+    dw fPaletteAnim_FarmSpring_FarmSummer_T01                                       ;80BEFA|        |80C36C;
+    dw fPaletteAnim_FarmSpring_FarmSummer_T2                                       ;80BEFC|        |80C3D9;
+    dw fPaletteAnim_FarmSpring_FarmSummer_T3                                       ;80BEFE|        |80C446;
+    dw fPaletteAnim_FarmSpring_FarmSummer_T4                                       ;80BF00|        |80C4B3;
     dw $FFFF                                                   ;80BF02|        |      ;
-    dw subUnknown_80C520                                       ;80BF04|        |80C520;
-    dw subUnknown_80C520                                       ;80BF06|        |80C520;
-    dw subUnknown_80C58D                                       ;80BF08|        |80C58D;
-    dw subUnknown_80C5FA                                       ;80BF0A|        |80C5FA;
-    dw subUnknown_80C667                                       ;80BF0C|        |80C667;
+    dw fPaletteAnim_FarmFall_T01                                       ;80BF04|        |80C520;
+    dw fPaletteAnim_FarmFall_T01                                       ;80BF06|        |80C520;
+    dw fPaletteAnim_FarmFall_T2                                       ;80BF08|        |80C58D;
+    dw fPaletteAnim_FarmFall_T3                                       ;80BF0A|        |80C5FA;
+    dw fPaletteAnim_FarmFall_T4                                       ;80BF0C|        |80C667;
     dw $FFFF                                                   ;80BF0E|        |      ;
     dw PTR16_80FFFF                                            ;80BF10|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF12|        |80FFFF;
@@ -257,49 +257,49 @@ pSubrutineTable_80BEEC:
     dw PTR16_80FFFF                                            ;80BF18|        |80FFFF;
     dw $FFFF                                                   ;80BF1A|        |      ;
     dw PTR16_80FFFF                                            ;80BF1C|        |80FFFF;
-    dw subUnknown_80CADE                                       ;80BF1E|        |80CADE;
-    dw subUnknown_80CB30                                       ;80BF20|        |80CB30;
-    dw subUnknown_80CB82                                       ;80BF22|        |80CB82;
-    dw subUnknown_80CBD4                                       ;80BF24|        |80CBD4;
+    dw fPaletteAnim_TownSpring_DancingS1_EggFestival_T1                                       ;80BF1E|        |80CADE;
+    dw fPaletteAnim_TownSpring_T2                                       ;80BF20|        |80CB30;
+    dw fPaletteAnim_TownSpring_T3                                       ;80BF22|        |80CB82;
+    dw fPaletteAnim_TownSpring_T4                                       ;80BF24|        |80CBD4;
     dw $FFFF                                                   ;80BF26|        |      ;
     dw PTR16_80FFFF                                            ;80BF28|        |80FFFF;
-    dw subUnknown_80CC92                                       ;80BF2A|        |80CC92;
-    dw subUnknown_80CCE4                                       ;80BF2C|        |80CCE4;
-    dw subUnknown_80CD36                                       ;80BF2E|        |80CD36;
-    dw subUnknown_80CD88                                       ;80BF30|        |80CD88;
+    dw fPaletteAnim_TownSummer_T1                                       ;80BF2A|        |80CC92;
+    dw fPaletteAnim_TownSummer_T2                                       ;80BF2C|        |80CCE4;
+    dw fPaletteAnim_TownSummer_T3                                       ;80BF2E|        |80CD36;
+    dw fPaletteAnim_TownSummer_T4                                       ;80BF30|        |80CD88;
     dw $FFFF                                                   ;80BF32|        |      ;
     dw PTR16_80FFFF                                            ;80BF34|        |80FFFF;
-    dw subUnknown_80CE46                                       ;80BF36|        |80CE46;
-    dw subUnknown_80CE98                                       ;80BF38|        |80CE98;
-    dw subUnknown_80CEEA                                       ;80BF3A|        |80CEEA;
-    dw subUnknown_80CF3C                                       ;80BF3C|        |80CF3C;
+    dw fPaletteAnim_TownFall_NYPublicSquare_T1                                       ;80BF36|        |80CE46;
+    dw fPaletteAnim_TownFall_T2                                       ;80BF38|        |80CE98;
+    dw fPaletteAnim_TownFall_T3                                       ;80BF3A|        |80CEEA;
+    dw fPaletteAnim_TownFall_T4                                       ;80BF3C|        |80CF3C;
     dw $FFFF                                                   ;80BF3E|        |      ;
     dw PTR16_80FFFF                                            ;80BF40|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF42|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF44|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF46|        |80FFFF;
-    dw subUnknown_80CFFA                                       ;80BF48|        |80CFFA;
+    dw fPaletteAnim_TownWinter_T4                                       ;80BF48|        |80CFFA;
     dw $FFFF                                                   ;80BF4A|        |      ;
     dw PTR16_80FFFF                                            ;80BF4C|        |80FFFF;
-    dw subUnknown_80CADE                                       ;80BF4E|        |80CADE;
+    dw fPaletteAnim_TownSpring_DancingS1_EggFestival_T1                                       ;80BF4E|        |80CADE;
     dw PTR16_80FFFF                                            ;80BF50|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF52|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF54|        |80FFFF;
     dw $FFFF                                                   ;80BF56|        |      ;
     dw PTR16_80FFFF                                            ;80BF58|        |80FFFF;
-    dw subUnknown_80DC30                                       ;80BF5A|        |80DC30;
+    dw fPaletteAnim_DancingS2_T1                                       ;80BF5A|        |80DC30;
     dw PTR16_80FFFF                                            ;80BF5C|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF5E|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF60|        |80FFFF;
     dw $FFFF                                                   ;80BF62|        |      ;
     dw PTR16_80FFFF                                            ;80BF64|        |80FFFF;
-    dw subUnknown_80CE46                                       ;80BF66|        |80CE46;
+    dw fPaletteAnim_TownFall_NYPublicSquare_T1                                       ;80BF66|        |80CE46;
     dw PTR16_80FFFF                                            ;80BF68|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF6A|        |80FFFF;
-    dw subUnknown_80DAB4                                       ;80BF6C|        |80DAB4;
+    dw fPaletteAnim_NYPublicSquare_T4                                       ;80BF6C|        |80DAB4;
     dw $FFFF                                                   ;80BF6E|        |      ;
     dw PTR16_80FFFF                                            ;80BF70|        |80FFFF;
-    dw subUnknown_80CADE                                       ;80BF72|        |80CADE;
+    dw fPaletteAnim_TownSpring_DancingS1_EggFestival_T1                                       ;80BF72|        |80CADE;
     dw PTR16_80FFFF                                            ;80BF74|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF76|        |80FFFF;
     dw PTR16_80FFFF                                            ;80BF78|        |80FFFF;
@@ -329,58 +329,58 @@ pSubrutineTable_80BEEC:
     dw PTR16_80FFFF                                            ;80BFA8|        |80FFFF;
     dw $FFFF                                                   ;80BFAA|        |      ;
     dw PTR16_80FFFF                                            ;80BFAC|        |80FFFF;
-    dw subUnknown_80D067                                       ;80BFAE|        |80D067;
-    dw subUnknown_80D125                                       ;80BFB0|        |80D125;
-    dw subUnknown_80D1E3                                       ;80BFB2|        |80D1E3;
-    dw subUnknown_80D2A1                                       ;80BFB4|        |80D2A1;
+    dw fPaletteAnim_WoodsSpring_T1                                       ;80BFAE|        |80D067;
+    dw fPaletteAnim_WoodsSpring_T2                                       ;80BFB0|        |80D125;
+    dw fPaletteAnim_WoodsSpring_T3                                       ;80BFB2|        |80D1E3;
+    dw fPaletteAnim_WoodsSpring_T4                                       ;80BFB4|        |80D2A1;
     dw $FFFF                                                   ;80BFB6|        |      ;
     dw PTR16_80FFFF                                            ;80BFB8|        |80FFFF;
-    dw subUnknown_80D344                                       ;80BFBA|        |80D344;
-    dw subUnknown_80D402                                       ;80BFBC|        |80D402;
-    dw subUnknown_80D4C0                                       ;80BFBE|        |80D4C0;
-    dw subUnknown_80D563                                       ;80BFC0|        |80D563;
+    dw fPaletteAnim_WoodsSummer_T1                                       ;80BFBA|        |80D344;
+    dw fPaletteAnim_WoodsSummer_T2                                       ;80BFBC|        |80D402;
+    dw fPaletteAnim_WoodsSummer_T3                                       ;80BFBE|        |80D4C0;
+    dw fPaletteAnim_WoodsSummer_T4                                       ;80BFC0|        |80D563;
     dw $FFFF                                                   ;80BFC2|        |      ;
     dw PTR16_80FFFF                                            ;80BFC4|        |80FFFF;
-    dw subUnknown_80D606                                       ;80BFC6|        |80D606;
-    dw subUnknown_80D6FA                                       ;80BFC8|        |80D6FA;
-    dw subUnknown_80D7EE                                       ;80BFCA|        |80D7EE;
-    dw subUnknown_80D891                                       ;80BFCC|        |80D891;
+    dw fPaletteAnim_WoodsFall_T1                                       ;80BFC6|        |80D606;
+    dw fPaletteAnim_WoodsFall_T2                                       ;80BFC8|        |80D6FA;
+    dw fPaletteAnim_WoodsFall_T3                                       ;80BFCA|        |80D7EE;
+    dw fPaletteAnim_WoodsFall_T4                                       ;80BFCC|        |80D891;
     dw $FFFF                                                   ;80BFCE|        |      ;
     dw PTR16_80FFFF                                            ;80BFD0|        |80FFFF;
-    dw subUnknown_80D934                                       ;80BFD2|        |80D934;
-    dw subUnknown_80D96B                                       ;80BFD4|        |80D96B;
-    dw subUnknown_80D9A2                                       ;80BFD6|        |80D9A2;
-    dw subUnknown_80D9D9                                       ;80BFD8|        |80D9D9;
+    dw fPaletteAnim_WoodsWinter_NYSpa_T1                                       ;80BFD2|        |80D934;
+    dw fPaletteAnim_WoodsWinter_NYSpa_T2                                       ;80BFD4|        |80D96B;
+    dw fPaletteAnim_WoodsWinter_NYSpa_T3                                       ;80BFD6|        |80D9A2;
+    dw fPaletteAnim_WoodsWinter_NYSpa_T4                                       ;80BFD8|        |80D9D9;
     dw $FFFF                                                   ;80BFDA|        |      ;
     dw PTR16_80FFFF                                            ;80BFDC|        |80FFFF;
-    dw subUnknown_80D934                                       ;80BFDE|        |80D934;
-    dw subUnknown_80D96B                                       ;80BFE0|        |80D96B;
-    dw subUnknown_80D9A2                                       ;80BFE2|        |80D9A2;
-    dw subUnknown_80D9D9                                       ;80BFE4|        |80D9D9;
+    dw fPaletteAnim_WoodsWinter_NYSpa_T1                                       ;80BFDE|        |80D934;
+    dw fPaletteAnim_WoodsWinter_NYSpa_T2                                       ;80BFE0|        |80D96B;
+    dw fPaletteAnim_WoodsWinter_NYSpa_T3                                       ;80BFE2|        |80D9A2;
+    dw fPaletteAnim_WoodsWinter_NYSpa_T4                                       ;80BFE4|        |80D9D9;
     dw $FFFF                                                   ;80BFE6|        |      ;
-    dw subUnknown_80C792                                       ;80BFE8|        |80C792;
-    dw subUnknown_80C792                                       ;80BFEA|        |80C792;
-    dw subUnknown_80C792                                       ;80BFEC|        |80C792;
-    dw subUnknown_80C792                                       ;80BFEE|        |80C792;
-    dw subUnknown_80C792                                       ;80BFF0|        |80C792;
+    dw fPaletteAnim_House1_House2_House3_All                                       ;80BFE8|        |80C792;
+    dw fPaletteAnim_House1_House2_House3_All                                       ;80BFEA|        |80C792;
+    dw fPaletteAnim_House1_House2_House3_All                                       ;80BFEC|        |80C792;
+    dw fPaletteAnim_House1_House2_House3_All                                       ;80BFEE|        |80C792;
+    dw fPaletteAnim_House1_House2_House3_All                                       ;80BFF0|        |80C792;
     dw $0001                                                   ;80BFF2|        |      ;
-    dw subUnknown_80C792                                       ;80BFF4|        |80C792;
-    dw subUnknown_80C792                                       ;80BFF6|        |80C792;
-    dw subUnknown_80C792                                       ;80BFF8|        |80C792;
-    dw subUnknown_80C792                                       ;80BFFA|        |80C792;
-    dw subUnknown_80C792                                       ;80BFFC|        |80C792;
+    dw fPaletteAnim_House1_House2_House3_All                                       ;80BFF4|        |80C792;
+    dw fPaletteAnim_House1_House2_House3_All                                       ;80BFF6|        |80C792;
+    dw fPaletteAnim_House1_House2_House3_All                                       ;80BFF8|        |80C792;
+    dw fPaletteAnim_House1_House2_House3_All                                       ;80BFFA|        |80C792;
+    dw fPaletteAnim_House1_House2_House3_All                                       ;80BFFC|        |80C792;
     dw $0001                                                   ;80BFFE|        |      ;
-    dw subUnknown_80C792                                       ;80C000|        |80C792;
-    dw subUnknown_80C792                                       ;80C002|        |80C792;
-    dw subUnknown_80C792                                       ;80C004|        |80C792;
-    dw subUnknown_80C792                                       ;80C006|        |80C792;
-    dw subUnknown_80C792                                       ;80C008|        |80C792;
+    dw fPaletteAnim_House1_House2_House3_All                                       ;80C000|        |80C792;
+    dw fPaletteAnim_House1_House2_House3_All                                       ;80C002|        |80C792;
+    dw fPaletteAnim_House1_House2_House3_All                                       ;80C004|        |80C792;
+    dw fPaletteAnim_House1_House2_House3_All                                       ;80C006|        |80C792;
+    dw fPaletteAnim_House1_House2_House3_All                                       ;80C008|        |80C792;
     dw $0001                                                   ;80C00A|        |      ;
     dw PTR16_80FFFF                                            ;80C00C|        |80FFFF;
-    dw subUnknown_80C7FF                                       ;80C00E|        |80C7FF;
-    dw subUnknown_80C7FF                                       ;80C010|        |80C7FF;
-    dw subUnknown_80C7FF                                       ;80C012|        |80C7FF;
-    dw subUnknown_80C7FF                                       ;80C014|        |80C7FF;
+    dw fPaletteAnim_MajorHouse_T1234                                       ;80C00E|        |80C7FF;
+    dw fPaletteAnim_MajorHouse_T1234                                       ;80C010|        |80C7FF;
+    dw fPaletteAnim_MajorHouse_T1234                                       ;80C012|        |80C7FF;
+    dw fPaletteAnim_MajorHouse_T1234                                       ;80C014|        |80C7FF;
     dw $0001                                                   ;80C016|        |      ;
     dw PTR16_80FFFF                                            ;80C018|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C01A|        |80FFFF;
@@ -395,10 +395,10 @@ pSubrutineTable_80BEEC:
     dw PTR16_80FFFF                                            ;80C02C|        |80FFFF;
     dw $0001                                                   ;80C02E|        |      ;
     dw PTR16_80FFFF                                            ;80C030|        |80FFFF;
-    dw subUnknown_80C86C                                       ;80C032|        |80C86C;
-    dw subUnknown_80C86C                                       ;80C034|        |80C86C;
-    dw subUnknown_80C86C                                       ;80C036|        |80C86C;
-    dw subUnknown_80C86C                                       ;80C038|        |80C86C;
+    dw fPaletteAnim_Church_T1234                                       ;80C032|        |80C86C;
+    dw fPaletteAnim_Church_T1234                                       ;80C034|        |80C86C;
+    dw fPaletteAnim_Church_T1234                                       ;80C036|        |80C86C;
+    dw fPaletteAnim_Church_T1234                                       ;80C038|        |80C86C;
     dw $FFFF                                                   ;80C03A|        |      ;
     dw PTR16_80FFFF                                            ;80C03C|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C03E|        |80FFFF;
@@ -407,10 +407,10 @@ pSubrutineTable_80BEEC:
     dw PTR16_80FFFF                                            ;80C044|        |80FFFF;
     dw $0001                                                   ;80C046|        |      ;
     dw PTR16_80FFFF                                            ;80C048|        |80FFFF;
-    dw subUnknown_80C945                                       ;80C04A|        |80C945;
-    dw subUnknown_80C945                                       ;80C04C|        |80C945;
-    dw subUnknown_80C945                                       ;80C04E|        |80C945;
-    dw subUnknown_80C945                                       ;80C050|        |80C945;
+    dw fPaletteAnim_FloristBedroom_T1234                                       ;80C04A|        |80C945;
+    dw fPaletteAnim_FloristBedroom_T1234                                       ;80C04C|        |80C945;
+    dw fPaletteAnim_FloristBedroom_T1234                                       ;80C04E|        |80C945;
+    dw fPaletteAnim_FloristBedroom_T1234                                       ;80C050|        |80C945;
     dw $0001                                                   ;80C052|        |      ;
     dw PTR16_80FFFF                                            ;80C054|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C056|        |80FFFF;
@@ -419,10 +419,10 @@ pSubrutineTable_80BEEC:
     dw PTR16_80FFFF                                            ;80C05C|        |80FFFF;
     dw $0001                                                   ;80C05E|        |      ;
     dw PTR16_80FFFF                                            ;80C060|        |80FFFF;
-    dw subUnknown_80C9B2                                       ;80C062|        |80C9B2;
-    dw subUnknown_80C9B2                                       ;80C064|        |80C9B2;
-    dw subUnknown_80C9B2                                       ;80C066|        |80C9B2;
-    dw subUnknown_80C9B2                                       ;80C068|        |80C9B2;
+    dw fPaletteAnim_BarBedroom_T1234                                       ;80C062|        |80C9B2;
+    dw fPaletteAnim_BarBedroom_T1234                                       ;80C064|        |80C9B2;
+    dw fPaletteAnim_BarBedroom_T1234                                       ;80C066|        |80C9B2;
+    dw fPaletteAnim_BarBedroom_T1234                                       ;80C068|        |80C9B2;
     dw $0001                                                   ;80C06A|        |      ;
     dw PTR16_80FFFF                                            ;80C06C|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C06E|        |80FFFF;
@@ -431,10 +431,10 @@ pSubrutineTable_80BEEC:
     dw PTR16_80FFFF                                            ;80C074|        |80FFFF;
     dw $0001                                                   ;80C076|        |      ;
     dw PTR16_80FFFF                                            ;80C078|        |80FFFF;
-    dw subUnknown_80DD09                                       ;80C07A|        |80DD09;
-    dw subUnknown_80DD09                                       ;80C07C|        |80DD09;
-    dw subUnknown_80DD09                                       ;80C07E|        |80DD09;
-    dw subUnknown_80DD09                                       ;80C080|        |80DD09;
+    dw fPaletteAnim_RestaurantBedroom_T1234                                       ;80C07A|        |80DD09;
+    dw fPaletteAnim_RestaurantBedroom_T1234                                       ;80C07C|        |80DD09;
+    dw fPaletteAnim_RestaurantBedroom_T1234                                       ;80C07E|        |80DD09;
+    dw fPaletteAnim_RestaurantBedroom_T1234                                       ;80C080|        |80DD09;
     dw $0001                                                   ;80C082|        |      ;
     dw PTR16_80FFFF                                            ;80C084|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C086|        |80FFFF;
@@ -443,22 +443,22 @@ pSubrutineTable_80BEEC:
     dw PTR16_80FFFF                                            ;80C08C|        |80FFFF;
     dw $0001                                                   ;80C08E|        |      ;
     dw PTR16_80FFFF                                            ;80C090|        |80FFFF;
-    dw subUnknown_80CA1F                                       ;80C092|        |80CA1F;
-    dw subUnknown_80CA1F                                       ;80C094|        |80CA1F;
-    dw subUnknown_80CA1F                                       ;80C096|        |80CA1F;
-    dw subUnknown_80CA1F                                       ;80C098|        |80CA1F;
+    dw fPaletteAnim_ToolsShopBedroom_T1234                                       ;80C092|        |80CA1F;
+    dw fPaletteAnim_ToolsShopBedroom_T1234                                       ;80C094|        |80CA1F;
+    dw fPaletteAnim_ToolsShopBedroom_T1234                                       ;80C096|        |80CA1F;
+    dw fPaletteAnim_ToolsShopBedroom_T1234                                       ;80C098|        |80CA1F;
     dw $0001                                                   ;80C09A|        |      ;
     dw PTR16_80FFFF                                            ;80C09C|        |80FFFF;
-    dw subUnknown_80CA8C                                       ;80C09E|        |80CA8C;
-    dw subUnknown_80CA8C                                       ;80C0A0|        |80CA8C;
-    dw subUnknown_80CA8C                                       ;80C0A2|        |80CA8C;
-    dw subUnknown_80CA8C                                       ;80C0A4|        |80CA8C;
+    dw fPaletteAnim_AnimalShop_T1234                                       ;80C09E|        |80CA8C;
+    dw fPaletteAnim_AnimalShop_T1234                                       ;80C0A0|        |80CA8C;
+    dw fPaletteAnim_AnimalShop_T1234                                       ;80C0A2|        |80CA8C;
+    dw fPaletteAnim_AnimalShop_T1234                                       ;80C0A4|        |80CA8C;
     dw $0001                                                   ;80C0A6|        |      ;
     dw PTR16_80FFFF                                            ;80C0A8|        |80FFFF;
-    dw subUnknown_80DB06                                       ;80C0AA|        |80DB06;
-    dw subUnknown_80DB06                                       ;80C0AC|        |80DB06;
-    dw subUnknown_80DB06                                       ;80C0AE|        |80DB06;
-    dw subUnknown_80DB06                                       ;80C0B0|        |80DB06;
+    dw fPaletteAnim_FortuneTeller_T1234                                       ;80C0AA|        |80DB06;
+    dw fPaletteAnim_FortuneTeller_T1234                                       ;80C0AC|        |80DB06;
+    dw fPaletteAnim_FortuneTeller_T1234                                       ;80C0AE|        |80DB06;
+    dw fPaletteAnim_FortuneTeller_T1234                                       ;80C0B0|        |80DB06;
     dw $FFFF                                                   ;80C0B2|        |      ;
     dw PTR16_80FFFF                                            ;80C0B4|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C0B6|        |80FFFF;
@@ -484,11 +484,11 @@ pSubrutineTable_80BEEC:
     dw PTR16_80FFFF                                            ;80C0DE|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C0E0|        |80FFFF;
     dw $FFFF                                                   ;80C0E2|        |      ;
-    dw subUnknown_80C6D4                                       ;80C0E4|        |80C6D4;
-    dw subUnknown_80C6D4                                       ;80C0E6|        |80C6D4;
-    dw subUnknown_80C6D4                                       ;80C0E8|        |80C6D4;
-    dw subUnknown_80C6D4                                       ;80C0EA|        |80C6D4;
-    dw subUnknown_80C6D4                                       ;80C0EC|        |80C6D4;
+    dw fPaletteAnim_ImpUnderground_All                                       ;80C0E4|        |80C6D4;
+    dw fPaletteAnim_ImpUnderground_All                                       ;80C0E6|        |80C6D4;
+    dw fPaletteAnim_ImpUnderground_All                                       ;80C0E8|        |80C6D4;
+    dw fPaletteAnim_ImpUnderground_All                                       ;80C0EA|        |80C6D4;
+    dw fPaletteAnim_ImpUnderground_All                                       ;80C0EC|        |80C6D4;
     dw $FFFF                                                   ;80C0EE|        |      ;
     dw PTR16_80FFFF                                            ;80C0F0|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C0F2|        |80FFFF;
@@ -496,11 +496,11 @@ pSubrutineTable_80BEEC:
     dw PTR16_80FFFF                                            ;80C0F6|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C0F8|        |80FFFF;
     dw $FFFF                                                   ;80C0FA|        |      ;
-    dw subUnknown_80DA47                                       ;80C0FC|        |80DA47;
-    dw subUnknown_80DA47                                       ;80C0FE|        |80DA47;
-    dw subUnknown_80DA47                                       ;80C100|        |80DA47;
-    dw subUnknown_80DA47                                       ;80C102|        |80DA47;
-    dw subUnknown_80DA47                                       ;80C104|        |80DA47;
+    dw fPaletteAnim_GoldChicken_All                                       ;80C0FC|        |80DA47;
+    dw fPaletteAnim_GoldChicken_All                                       ;80C0FE|        |80DA47;
+    dw fPaletteAnim_GoldChicken_All                                       ;80C100|        |80DA47;
+    dw fPaletteAnim_GoldChicken_All                                       ;80C102|        |80DA47;
+    dw fPaletteAnim_GoldChicken_All                                       ;80C104|        |80DA47;
     dw $FFFF                                                   ;80C106|        |      ;
     dw PTR16_80FFFF                                            ;80C108|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C10A|        |80FFFF;
@@ -530,25 +530,25 @@ pSubrutineTable_80BEEC:
     dw PTR16_80FFFF                                            ;80C13A|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C13C|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C13E|        |80FFFF;
-    dw subUnknown_80DA10                                       ;80C140|        |80DA10;
+    dw fPaletteAnim_MountainTopAllSeasonsAndNY_T4                                       ;80C140|        |80DA10;
     dw $FFFF                                                   ;80C142|        |      ;
     dw PTR16_80FFFF                                            ;80C144|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C146|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C148|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C14A|        |80FFFF;
-    dw subUnknown_80DA10                                       ;80C14C|        |80DA10;
+    dw fPaletteAnim_MountainTopAllSeasonsAndNY_T4                                       ;80C14C|        |80DA10;
     dw $FFFF                                                   ;80C14E|        |      ;
     dw PTR16_80FFFF                                            ;80C150|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C152|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C154|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C156|        |80FFFF;
-    dw subUnknown_80DA10                                       ;80C158|        |80DA10;
+    dw fPaletteAnim_MountainTopAllSeasonsAndNY_T4                                       ;80C158|        |80DA10;
     dw $FFFF                                                   ;80C15A|        |      ;
     dw PTR16_80FFFF                                            ;80C15C|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C15E|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C160|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C162|        |80FFFF;
-    dw subUnknown_80DA10                                       ;80C164|        |80DA10;
+    dw fPaletteAnim_MountainTopAllSeasonsAndNY_T4                                       ;80C164|        |80DA10;
     dw $FFFF                                                   ;80C166|        |      ;
     dw PTR16_80FFFF                                            ;80C168|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C16A|        |80FFFF;
@@ -578,7 +578,7 @@ pSubrutineTable_80BEEC:
     dw PTR16_80FFFF                                            ;80C19A|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C19C|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C19E|        |80FFFF;
-    dw subUnknown_80DA10                                       ;80C1A0|        |80DA10;
+    dw fPaletteAnim_MountainTopAllSeasonsAndNY_T4                                       ;80C1A0|        |80DA10;
     dw $FFFF                                                   ;80C1A2|        |      ;
     dw PTR16_80FFFF                                            ;80C1A4|        |80FFFF;
     dw PTR16_80FFFF                                            ;80C1A6|        |80FFFF;
@@ -809,7 +809,7 @@ pSubrutineTable_80BEEC:
     dw PTR16_80FFFF                                            ;80C368|        |80FFFF;
     dw $FFFF                                                   ;80C36A|        |      ;
  
-subUnknown_80C36C:
+fPaletteAnim_FarmSpring_FarmSummer_T01:
     REP #$20                                                   ;80C36C|C220    |      ;
     SEP #$10                                                   ;80C36E|E210    |      ;
     LDA.W #$DD5B                                               ;80C370|A95BDD  |      ;
@@ -861,7 +861,7 @@ subUnknown_80C36C:
     RTS                                                        ;80C3D8|60      |      ;
  
  
-subUnknown_80C3D9:
+fPaletteAnim_FarmSpring_FarmSummer_T2:
     REP #$20                                                   ;80C3D9|C220    |      ;
     SEP #$10                                                   ;80C3DB|E210    |      ;
     LDA.W #$DDCF                                               ;80C3DD|A9CFDD  |      ;
@@ -913,7 +913,7 @@ subUnknown_80C3D9:
     RTS                                                        ;80C445|60      |      ;
  
  
-subUnknown_80C446:
+fPaletteAnim_FarmSpring_FarmSummer_T3:
     REP #$20                                                   ;80C446|C220    |      ;
     SEP #$10                                                   ;80C448|E210    |      ;
     LDA.W #$DE43                                               ;80C44A|A943DE  |      ;
@@ -965,7 +965,7 @@ subUnknown_80C446:
     RTS                                                        ;80C4B2|60      |      ;
  
  
-subUnknown_80C4B3:
+fPaletteAnim_FarmSpring_FarmSummer_T4:
     REP #$20                                                   ;80C4B3|C220    |      ;
     SEP #$10                                                   ;80C4B5|E210    |      ;
     LDA.W #$DEB7                                               ;80C4B7|A9B7DE  |      ;
@@ -1017,7 +1017,7 @@ subUnknown_80C4B3:
     RTS                                                        ;80C51F|60      |      ;
  
  
-subUnknown_80C520:
+fPaletteAnim_FarmFall_T01:
     REP #$20                                                   ;80C520|C220    |      ;
     SEP #$10                                                   ;80C522|E210    |      ;
     LDA.W #$DF2B                                               ;80C524|A92BDF  |      ;
@@ -1069,7 +1069,7 @@ subUnknown_80C520:
     RTS                                                        ;80C58C|60      |      ;
  
  
-subUnknown_80C58D:
+fPaletteAnim_FarmFall_T2:
     REP #$20                                                   ;80C58D|C220    |      ;
     SEP #$10                                                   ;80C58F|E210    |      ;
     LDA.W #$DF9F                                               ;80C591|A99FDF  |      ;
@@ -1121,7 +1121,7 @@ subUnknown_80C58D:
     RTS                                                        ;80C5F9|60      |      ;
  
  
-subUnknown_80C5FA:
+fPaletteAnim_FarmFall_T3:
     REP #$20                                                   ;80C5FA|C220    |      ;
     SEP #$10                                                   ;80C5FC|E210    |      ;
     LDA.W #$E013                                               ;80C5FE|A913E0  |      ;
@@ -1173,7 +1173,7 @@ subUnknown_80C5FA:
     RTS                                                        ;80C666|60      |      ;
  
  
-subUnknown_80C667:
+fPaletteAnim_FarmFall_T4:
     REP #$20                                                   ;80C667|C220    |      ;
     SEP #$10                                                   ;80C669|E210    |      ;
     LDA.W #$E087                                               ;80C66B|A987E0  |      ;
@@ -1225,7 +1225,7 @@ subUnknown_80C667:
     RTS                                                        ;80C6D3|60      |      ;
  
  
-subUnknown_80C6D4:
+fPaletteAnim_ImpUnderground_All:
     REP #$20                                                   ;80C6D4|C220    |      ;
     SEP #$10                                                   ;80C6D6|E210    |      ;
     LDA.W #$E0FB                                               ;80C6D8|A9FBE0  |      ;
@@ -1313,7 +1313,7 @@ subUnknown_80C6D4:
     RTS                                                        ;80C791|60      |      ;
  
  
-subUnknown_80C792:
+fPaletteAnim_House1_House2_House3_All:
     REP #$20                                                   ;80C792|C220    |      ;
     SEP #$10                                                   ;80C794|E210    |      ;
     LDA.W #$E172                                               ;80C796|A972E1  |      ;
@@ -1365,7 +1365,7 @@ subUnknown_80C792:
     RTS                                                        ;80C7FE|60      |      ;
  
  
-subUnknown_80C7FF:
+fPaletteAnim_MajorHouse_T1234:
     REP #$20                                                   ;80C7FF|C220    |      ;
     SEP #$10                                                   ;80C801|E210    |      ;
     LDA.W #$E19E                                               ;80C803|A99EE1  |      ;
@@ -1417,7 +1417,7 @@ subUnknown_80C7FF:
     RTS                                                        ;80C86B|60      |      ;
  
  
-subUnknown_80C86C:
+fPaletteAnim_Church_T1234:
     REP #$20                                                   ;80C86C|C220    |      ;
     SEP #$10                                                   ;80C86E|E210    |      ;
     LDA.W #$E1CA                                               ;80C870|A9CAE1  |      ;
@@ -1517,7 +1517,7 @@ subUnknown_80C86C:
     RTS                                                        ;80C944|60      |      ;
  
  
-subUnknown_80C945:
+fPaletteAnim_FloristBedroom_T1234:
     REP #$20                                                   ;80C945|C220    |      ;
     SEP #$10                                                   ;80C947|E210    |      ;
     LDA.W #$E252                                               ;80C949|A952E2  |      ;
@@ -1569,7 +1569,7 @@ subUnknown_80C945:
     RTS                                                        ;80C9B1|60      |      ;
  
  
-subUnknown_80C9B2:
+fPaletteAnim_BarBedroom_T1234:
     REP #$20                                                   ;80C9B2|C220    |      ;
     SEP #$10                                                   ;80C9B4|E210    |      ;
     LDA.W #$E27E                                               ;80C9B6|A97EE2  |      ;
@@ -1621,7 +1621,7 @@ subUnknown_80C9B2:
     RTS                                                        ;80CA1E|60      |      ;
  
  
-subUnknown_80CA1F:
+fPaletteAnim_ToolsShopBedroom_T1234:
     REP #$20                                                   ;80CA1F|C220    |      ;
     SEP #$10                                                   ;80CA21|E210    |      ;
     LDA.W #$E2AA                                               ;80CA23|A9AAE2  |      ;
@@ -1673,7 +1673,7 @@ subUnknown_80CA1F:
     RTS                                                        ;80CA8B|60      |      ;
  
  
-subUnknown_80CA8C:
+fPaletteAnim_AnimalShop_T1234:
     REP #$20                                                   ;80CA8C|C220    |      ;
     SEP #$10                                                   ;80CA8E|E210    |      ;
     LDA.W #$E2D6                                               ;80CA90|A9D6E2  |      ;
@@ -1713,7 +1713,7 @@ subUnknown_80CA8C:
     RTS                                                        ;80CADD|60      |      ;
  
  
-subUnknown_80CADE:
+fPaletteAnim_TownSpring_DancingS1_EggFestival_T1:
     REP #$20                                                   ;80CADE|C220    |      ;
     SEP #$10                                                   ;80CAE0|E210    |      ;
     LDA.W #$E2F7                                               ;80CAE2|A9F7E2  |      ;
@@ -1753,7 +1753,7 @@ subUnknown_80CADE:
     RTS                                                        ;80CB2F|60      |      ;
  
  
-subUnknown_80CB30:
+fPaletteAnim_TownSpring_T2:
     REP #$20                                                   ;80CB30|C220    |      ;
     SEP #$10                                                   ;80CB32|E210    |      ;
     LDA.W #$E321                                               ;80CB34|A921E3  |      ;
@@ -1793,7 +1793,7 @@ subUnknown_80CB30:
     RTS                                                        ;80CB81|60      |      ;
  
  
-subUnknown_80CB82:
+fPaletteAnim_TownSpring_T3:
     REP #$20                                                   ;80CB82|C220    |      ;
     SEP #$10                                                   ;80CB84|E210    |      ;
     LDA.W #$E34B                                               ;80CB86|A94BE3  |      ;
@@ -1833,7 +1833,7 @@ subUnknown_80CB82:
     RTS                                                        ;80CBD3|60      |      ;
  
  
-subUnknown_80CBD4:
+fPaletteAnim_TownSpring_T4:
     REP #$20                                                   ;80CBD4|C220    |      ;
     SEP #$10                                                   ;80CBD6|E210    |      ;
     LDA.W #$E375                                               ;80CBD8|A975E3  |      ;
@@ -1921,7 +1921,7 @@ subUnknown_80CBD4:
     RTS                                                        ;80CC91|60      |      ;
  
  
-subUnknown_80CC92:
+fPaletteAnim_TownSummer_T1:
     REP #$20                                                   ;80CC92|C220    |      ;
     SEP #$10                                                   ;80CC94|E210    |      ;
     LDA.W #$E39F                                               ;80CC96|A99FE3  |      ;
@@ -1961,7 +1961,7 @@ subUnknown_80CC92:
     RTS                                                        ;80CCE3|60      |      ;
  
  
-subUnknown_80CCE4:
+fPaletteAnim_TownSummer_T2:
     REP #$20                                                   ;80CCE4|C220    |      ;
     SEP #$10                                                   ;80CCE6|E210    |      ;
     LDA.W #$E3C9                                               ;80CCE8|A9C9E3  |      ;
@@ -2001,7 +2001,7 @@ subUnknown_80CCE4:
     RTS                                                        ;80CD35|60      |      ;
  
  
-subUnknown_80CD36:
+fPaletteAnim_TownSummer_T3:
     REP #$20                                                   ;80CD36|C220    |      ;
     SEP #$10                                                   ;80CD38|E210    |      ;
     LDA.W #$E3F3                                               ;80CD3A|A9F3E3  |      ;
@@ -2041,7 +2041,7 @@ subUnknown_80CD36:
     RTS                                                        ;80CD87|60      |      ;
  
  
-subUnknown_80CD88:
+fPaletteAnim_TownSummer_T4:
     REP #$20                                                   ;80CD88|C220    |      ;
     SEP #$10                                                   ;80CD8A|E210    |      ;
     LDA.W #$E41D                                               ;80CD8C|A91DE4  |      ;
@@ -2129,7 +2129,7 @@ subUnknown_80CD88:
     RTS                                                        ;80CE45|60      |      ;
  
  
-subUnknown_80CE46:
+fPaletteAnim_TownFall_NYPublicSquare_T1:
     REP #$20                                                   ;80CE46|C220    |      ;
     SEP #$10                                                   ;80CE48|E210    |      ;
     LDA.W #$E447                                               ;80CE4A|A947E4  |      ;
@@ -2169,7 +2169,7 @@ subUnknown_80CE46:
     RTS                                                        ;80CE97|60      |      ;
  
  
-subUnknown_80CE98:
+fPaletteAnim_TownFall_T2:
     REP #$20                                                   ;80CE98|C220    |      ;
     SEP #$10                                                   ;80CE9A|E210    |      ;
     LDA.W #$E471                                               ;80CE9C|A971E4  |      ;
@@ -2209,7 +2209,7 @@ subUnknown_80CE98:
     RTS                                                        ;80CEE9|60      |      ;
  
  
-subUnknown_80CEEA:
+fPaletteAnim_TownFall_T3:
     REP #$20                                                   ;80CEEA|C220    |      ;
     SEP #$10                                                   ;80CEEC|E210    |      ;
     LDA.W #$E49B                                               ;80CEEE|A99BE4  |      ;
@@ -2249,7 +2249,7 @@ subUnknown_80CEEA:
     RTS                                                        ;80CF3B|60      |      ;
  
  
-subUnknown_80CF3C:
+fPaletteAnim_TownFall_T4:
     REP #$20                                                   ;80CF3C|C220    |      ;
     SEP #$10                                                   ;80CF3E|E210    |      ;
     LDA.W #$E4C5                                               ;80CF40|A9C5E4  |      ;
@@ -2337,7 +2337,7 @@ subUnknown_80CF3C:
     RTS                                                        ;80CFF9|60      |      ;
  
  
-subUnknown_80CFFA:
+fPaletteAnim_TownWinter_T4:
     REP #$20                                                   ;80CFFA|C220    |      ;
     SEP #$10                                                   ;80CFFC|E210    |      ;
     LDA.W #$E5BB                                               ;80CFFE|A9BBE5  |      ;
@@ -2389,7 +2389,7 @@ subUnknown_80CFFA:
     RTS                                                        ;80D066|60      |      ;
  
  
-subUnknown_80D067:
+fPaletteAnim_WoodsSpring_T1:
     REP #$20                                                   ;80D067|C220    |      ;
     SEP #$10                                                   ;80D069|E210    |      ;
     LDA.W #$E5FF                                               ;80D06B|A9FFE5  |      ;
@@ -2477,7 +2477,7 @@ subUnknown_80D067:
     RTS                                                        ;80D124|60      |      ;
  
  
-subUnknown_80D125:
+fPaletteAnim_WoodsSpring_T2:
     REP #$20                                                   ;80D125|C220    |      ;
     SEP #$10                                                   ;80D127|E210    |      ;
     LDA.W #$E672                                               ;80D129|A972E6  |      ;
@@ -2565,7 +2565,7 @@ subUnknown_80D125:
     RTS                                                        ;80D1E2|60      |      ;
  
  
-subUnknown_80D1E3:
+fPaletteAnim_WoodsSpring_T3:
     REP #$20                                                   ;80D1E3|C220    |      ;
     SEP #$10                                                   ;80D1E5|E210    |      ;
     LDA.W #$E6E5                                               ;80D1E7|A9E5E6  |      ;
@@ -2653,7 +2653,7 @@ subUnknown_80D1E3:
     RTS                                                        ;80D2A0|60      |      ;
  
  
-subUnknown_80D2A1:
+fPaletteAnim_WoodsSpring_T4:
     REP #$20                                                   ;80D2A1|C220    |      ;
     SEP #$10                                                   ;80D2A3|E210    |      ;
     LDA.W #$E758                                               ;80D2A5|A958E7  |      ;
@@ -2729,7 +2729,7 @@ subUnknown_80D2A1:
     RTS                                                        ;80D343|60      |      ;
  
  
-subUnknown_80D344:
+fPaletteAnim_WoodsSummer_T1:
     REP #$20                                                   ;80D344|C220    |      ;
     SEP #$10                                                   ;80D346|E210    |      ;
     LDA.W #$E7B4                                               ;80D348|A9B4E7  |      ;
@@ -2817,7 +2817,7 @@ subUnknown_80D344:
     RTS                                                        ;80D401|60      |      ;
  
  
-subUnknown_80D402:
+fPaletteAnim_WoodsSummer_T2:
     REP #$20                                                   ;80D402|C220    |      ;
     SEP #$10                                                   ;80D404|E210    |      ;
     LDA.W #$E827                                               ;80D406|A927E8  |      ;
@@ -2905,7 +2905,7 @@ subUnknown_80D402:
     RTS                                                        ;80D4BF|60      |      ;
  
  
-subUnknown_80D4C0:
+fPaletteAnim_WoodsSummer_T3:
     REP #$20                                                   ;80D4C0|C220    |      ;
     SEP #$10                                                   ;80D4C2|E210    |      ;
     LDA.W #$E89A                                               ;80D4C4|A99AE8  |      ;
@@ -2981,7 +2981,7 @@ subUnknown_80D4C0:
     RTS                                                        ;80D562|60      |      ;
  
  
-subUnknown_80D563:
+fPaletteAnim_WoodsSummer_T4:
     REP #$20                                                   ;80D563|C220    |      ;
     SEP #$10                                                   ;80D565|E210    |      ;
     LDA.W #$E8F6                                               ;80D567|A9F6E8  |      ;
@@ -3057,7 +3057,7 @@ subUnknown_80D563:
     RTS                                                        ;80D605|60      |      ;
  
  
-subUnknown_80D606:
+fPaletteAnim_WoodsFall_T1:
     REP #$20                                                   ;80D606|C220    |      ;
     SEP #$10                                                   ;80D608|E210    |      ;
     LDA.W #$E952                                               ;80D60A|A952E9  |      ;
@@ -3169,7 +3169,7 @@ subUnknown_80D606:
     RTS                                                        ;80D6F9|60      |      ;
  
  
-subUnknown_80D6FA:
+fPaletteAnim_WoodsFall_T2:
     REP #$20                                                   ;80D6FA|C220    |      ;
     SEP #$10                                                   ;80D6FC|E210    |      ;
     LDA.W #$E9F3                                               ;80D6FE|A9F3E9  |      ;
@@ -3281,7 +3281,7 @@ subUnknown_80D6FA:
     RTS                                                        ;80D7ED|60      |      ;
  
  
-subUnknown_80D7EE:
+fPaletteAnim_WoodsFall_T3:
     REP #$20                                                   ;80D7EE|C220    |      ;
     SEP #$10                                                   ;80D7F0|E210    |      ;
     LDA.W #$EA94                                               ;80D7F2|A994EA  |      ;
@@ -3357,7 +3357,7 @@ subUnknown_80D7EE:
     RTS                                                        ;80D890|60      |      ;
  
  
-subUnknown_80D891:
+fPaletteAnim_WoodsFall_T4:
     REP #$20                                                   ;80D891|C220    |      ;
     SEP #$10                                                   ;80D893|E210    |      ;
     LDA.W #$EAF0                                               ;80D895|A9F0EA  |      ;
@@ -3433,7 +3433,7 @@ subUnknown_80D891:
     RTS                                                        ;80D933|60      |      ;
  
  
-subUnknown_80D934:
+fPaletteAnim_WoodsWinter_NYSpa_T1:
     REP #$20                                                   ;80D934|C220    |      ;
     SEP #$10                                                   ;80D936|E210    |      ;
     LDA.W #$ECE4                                               ;80D938|A9E4EC  |      ;
@@ -3461,7 +3461,7 @@ subUnknown_80D934:
     RTS                                                        ;80D96A|60      |      ;
  
  
-subUnknown_80D96B:
+fPaletteAnim_WoodsWinter_NYSpa_T2:
     REP #$20                                                   ;80D96B|C220    |      ;
     SEP #$10                                                   ;80D96D|E210    |      ;
     LDA.W #$ED06                                               ;80D96F|A906ED  |      ;
@@ -3489,7 +3489,7 @@ subUnknown_80D96B:
     RTS                                                        ;80D9A1|60      |      ;
  
  
-subUnknown_80D9A2:
+fPaletteAnim_WoodsWinter_NYSpa_T3:
     REP #$20                                                   ;80D9A2|C220    |      ;
     SEP #$10                                                   ;80D9A4|E210    |      ;
     LDA.W #$ED28                                               ;80D9A6|A928ED  |      ;
@@ -3517,7 +3517,7 @@ subUnknown_80D9A2:
     RTS                                                        ;80D9D8|60      |      ;
  
  
-subUnknown_80D9D9:
+fPaletteAnim_WoodsWinter_NYSpa_T4:
     REP #$20                                                   ;80D9D9|C220    |      ;
     SEP #$10                                                   ;80D9DB|E210    |      ;
     LDA.W #$ED4A                                               ;80D9DD|A94AED  |      ;
@@ -3545,7 +3545,7 @@ subUnknown_80D9D9:
     RTS                                                        ;80DA0F|60      |      ;
  
  
-subUnknown_80DA10:
+fPaletteAnim_MountainTopAllSeasonsAndNY_T4:
     REP #$20                                                   ;80DA10|C220    |      ;
     SEP #$10                                                   ;80DA12|E210    |      ;
     LDA.W #$ED6C                                               ;80DA14|A96CED  |      ;
@@ -3573,7 +3573,7 @@ subUnknown_80DA10:
     RTS                                                        ;80DA46|60      |      ;
  
  
-subUnknown_80DA47:
+fPaletteAnim_GoldChicken_All:
     REP #$20                                                   ;80DA47|C220    |      ;
     SEP #$10                                                   ;80DA49|E210    |      ;
     LDA.W #$ED9A                                               ;80DA4B|A99AED  |      ;
@@ -3625,7 +3625,7 @@ subUnknown_80DA47:
     RTS                                                        ;80DAB3|60      |      ;
  
  
-subUnknown_80DAB4:
+fPaletteAnim_NYPublicSquare_T4:
     REP #$20                                                   ;80DAB4|C220    |      ;
     SEP #$10                                                   ;80DAB6|E210    |      ;
     LDA.W #$EDDE                                               ;80DAB8|A9DEED  |      ;
@@ -3665,7 +3665,7 @@ subUnknown_80DAB4:
     RTS                                                        ;80DB05|60      |      ;
  
  
-subUnknown_80DB06:
+fPaletteAnim_FortuneTeller_T1234:
     REP #$20                                                   ;80DB06|C220    |      ;
     SEP #$10                                                   ;80DB08|E210    |      ;
     LDA.W #$EE08                                               ;80DB0A|A908EE  |      ;
@@ -3801,7 +3801,7 @@ subUnknown_80DB06:
     RTS                                                        ;80DC2F|60      |      ;
  
  
-subUnknown_80DC30:
+fPaletteAnim_DancingS2_T1:
     REP #$20                                                   ;80DC30|C220    |      ;
     SEP #$10                                                   ;80DC32|E210    |      ;
     LDA.W #$E447                                               ;80DC34|A947E4  |      ;
@@ -3901,7 +3901,7 @@ subUnknown_80DC30:
     RTS                                                        ;80DD08|60      |      ;
  
  
-subUnknown_80DD09:
+fPaletteAnim_RestaurantBedroom_T1234:
     REP #$20                                                   ;80DD09|C220    |      ;
     SEP #$10                                                   ;80DD0B|E210    |      ;
     LDA.W #$EF06                                               ;80DD0D|A906EF  |      ;
@@ -3947,1296 +3947,1296 @@ Table_80DD5B:
     dw $FFFE                                                   ;80DD73|        |      ;
     dl Table_80DD5B                                            ;80DD75|        |80DD5B;
  
-DATA24_80DD78:
+aPaletteAnimScript_FarmSpring_FarmSummer_T01_Slot5:
     dl $106AD2,$106A8E,$105E0D,$106AD2                         ;80DD78|        |      ;
     dl $103A11,$106AD2,$105E0D,$106A8E                         ;80DD84|        |      ;
     dw $FFFE                                                   ;80DD90|        |      ;
-    dl DATA24_80DD78                                           ;80DD92|        |80DD78;
+    dl aPaletteAnimScript_FarmSpring_FarmSummer_T01_Slot5                                           ;80DD92|        |80DD78;
  
-DATA24_80DD95:
+aPaletteAnimScript_FarmSpring_FarmSummer_T01_Slot6:
     dl $106A8E,$105E0D,$106AD2,$103A11                         ;80DD95|        |      ;
     dl $105E0D,$103A11,$106AD2,$105E0D                         ;80DDA1|        |      ;
     dw $FFFE                                                   ;80DDAD|        |      ;
-    dl DATA24_80DD95                                           ;80DDAF|        |80DD95;
+    dl aPaletteAnimScript_FarmSpring_FarmSummer_T01_Slot6                                           ;80DDAF|        |80DD95;
  
-DATA24_80DDB2:
+aPaletteAnimScript_FarmSpring_FarmSummer_T01_Slot7:
     dl $105E0D,$106AD2,$104253,$105E0D                         ;80DDB2|        |      ;
     dl $106A8E,$105E0D,$104253,$106AD2                         ;80DDBE|        |      ;
     dw $FFFE                                                   ;80DDCA|        |      ;
-    dl DATA24_80DDB2                                           ;80DDCC|        |80DDB2;
+    dl aPaletteAnimScript_FarmSpring_FarmSummer_T01_Slot7                                           ;80DDCC|        |80DDB2;
  
-DATA24_80DDCF:
+aPaletteAnimScript_FarmSpring_FarmSummer_T2_Slot4:
     dl $10539D,$102E12,$101DFB,$101D94                         ;80DDCF|        |      ;
     dl $102EFE,$101D94,$101DFB,$102E12                         ;80DDDB|        |      ;
     dw $FFFE                                                   ;80DDE7|        |      ;
-    dl DATA24_80DDCF                                           ;80DDE9|        |80DDCF;
+    dl aPaletteAnimScript_FarmSpring_FarmSummer_T2_Slot4                                           ;80DDE9|        |80DDCF;
  
-DATA24_80DDEC:
+aPaletteAnimScript_FarmSpring_FarmSummer_T2_Slot5:
     dl $102EFE,$101DFB,$101D94,$102EFE                         ;80DDEC|        |      ;
     dl $102E12,$102EFE,$101D94,$101DFB                         ;80DDF8|        |      ;
     dw $FFFE                                                   ;80DE04|        |      ;
-    dl DATA24_80DDEC                                           ;80DE06|        |80DDEC;
+    dl aPaletteAnimScript_FarmSpring_FarmSummer_T2_Slot5                                           ;80DE06|        |80DDEC;
  
-DATA24_80DE09:
+aPaletteAnimScript_FarmSpring_FarmSummer_T2_Slot6:
     dl $101DFB,$101D94,$102EFE,$102E12                         ;80DE09|        |      ;
     dl $101D94,$102E12,$102EFE,$101D94                         ;80DE15|        |      ;
     dw $FFFE                                                   ;80DE21|        |      ;
-    dl DATA24_80DE09                                           ;80DE23|        |80DE09;
+    dl aPaletteAnimScript_FarmSpring_FarmSummer_T2_Slot6                                           ;80DE23|        |80DE09;
  
-DATA24_80DE26:
+aPaletteAnimScript_FarmSpring_FarmSummer_T2_Slot7:
     dl $101D94,$102EFE,$102E74,$101DFB                         ;80DE26|        |      ;
     dl $101DFB,$101DFB,$102E74,$102EFE                         ;80DE32|        |      ;
     dw $FFFE                                                   ;80DE3E|        |      ;
-    dl DATA24_80DE26                                           ;80DE40|        |80DE26;
+    dl aPaletteAnimScript_FarmSpring_FarmSummer_T2_Slot7                                           ;80DE40|        |80DE26;
  
-DATA24_80DE43:
+aPaletteAnimScript_FarmSpring_FarmSummer_T3_Slot4:
     dl $105A52,$10314C,$10356B,$102908                         ;80DE43|        |      ;
     dl $105A52,$102908,$10356B,$10314C                         ;80DE4F|        |      ;
     dw $FFFE                                                   ;80DE5B|        |      ;
-    dl DATA24_80DE43                                           ;80DE5D|        |80DE43;
+    dl aPaletteAnimScript_FarmSpring_FarmSummer_T3_Slot4                                           ;80DE5D|        |80DE43;
  
-DATA24_80DE60:
+aPaletteAnimScript_FarmSpring_FarmSummer_T3_Slot5:
     dl $1045EF,$1049EF,$102908,$105A52                         ;80DE60|        |      ;
     dl $10314C,$105A52,$102908,$1049EF                         ;80DE6C|        |      ;
     dw $FFFE                                                   ;80DE78|        |      ;
-    dl DATA24_80DE60                                           ;80DE7A|        |80DE60;
+    dl aPaletteAnimScript_FarmSpring_FarmSummer_T3_Slot5                                           ;80DE7A|        |80DE60;
  
-DATA24_80DE7D:
+aPaletteAnimScript_FarmSpring_FarmSummer_T3_Slot6:
     dl $10356B,$10394A,$105A52,$10314C                         ;80DE7D|        |      ;
     dl $102908,$10314C,$105A52,$10394A                         ;80DE89|        |      ;
     dw $FFFE                                                   ;80DE95|        |      ;
-    dl DATA24_80DE7D                                           ;80DE97|        |80DE7D;
+    dl aPaletteAnimScript_FarmSpring_FarmSummer_T3_Slot6                                           ;80DE97|        |80DE7D;
  
-DATA24_80DE9A:
+aPaletteAnimScript_FarmSpring_FarmSummer_T3_Slot7:
     dl $102908,$105A52,$10314C,$10356B                         ;80DE9A|        |      ;
     dl $10356B,$10356B,$10314C,$105A52                         ;80DEA6|        |      ;
     dw $FFFE                                                   ;80DEB2|        |      ;
-    dl DATA24_80DE9A                                           ;80DEB4|        |80DE9A;
+    dl aPaletteAnimScript_FarmSpring_FarmSummer_T3_Slot7                                           ;80DEB4|        |80DE9A;
  
-DATA24_80DEB7:
+aPaletteAnimScript_FarmSpring_FarmSummer_T4_Slot4:
     dl $10456B,$101CE7,$1028E7,$102908                         ;80DEB7|        |      ;
     dl $10456B,$102908,$1028E7,$101CE7                         ;80DEC3|        |      ;
     dw $FFFE                                                   ;80DECF|        |      ;
-    dl DATA24_80DEB7                                           ;80DED1|        |80DEB7;
+    dl aPaletteAnimScript_FarmSpring_FarmSummer_T4_Slot4                                           ;80DED1|        |80DEB7;
  
-DATA24_80DED4:
+aPaletteAnimScript_FarmSpring_FarmSummer_T4_Slot5:
     dl $103508,$103508,$1028E7,$102908                         ;80DED4|        |      ;
     dl $10456B,$102908,$1028E7,$103508                         ;80DEE0|        |      ;
     dw $FFFE                                                   ;80DEEC|        |      ;
-    dl DATA24_80DED4                                           ;80DEEE|        |80DED4;
+    dl aPaletteAnimScript_FarmSpring_FarmSummer_T4_Slot5                                           ;80DEEE|        |80DED4;
  
-DATA24_80DEF1:
+aPaletteAnimScript_FarmSpring_FarmSummer_T4_Slot6:
     dl $1028E7,$1028E7,$10456B,$101CE7                         ;80DEF1|        |      ;
     dl $10290B,$101CE7,$10456B,$1028E7                         ;80DEFD|        |      ;
     dw $FFFE                                                   ;80DF09|        |      ;
-    dl DATA24_80DEF1                                           ;80DF0B|        |80DEF1;
+    dl aPaletteAnimScript_FarmSpring_FarmSummer_T4_Slot6                                           ;80DF0B|        |80DEF1;
  
-DATA24_80DF0E:
+aPaletteAnimScript_FarmSpring_FarmSummer_T4_Slot7:
     dl $1028C5,$10456B,$103508,$1028E7                         ;80DF0E|        |      ;
     dl $101CE7,$1028E7,$103508,$10456B                         ;80DF1A|        |      ;
     dw $FFFE                                                   ;80DF26|        |      ;
-    dl DATA24_80DF0E                                           ;80DF28|        |80DF0E;
+    dl aPaletteAnimScript_FarmSpring_FarmSummer_T4_Slot7                                           ;80DF28|        |80DF0E;
  
-DATA24_80DF2B:
+aPaletteAnimScript_FarmFall_T01_Slot4:
     dl $107F99,$10320F,$105A8E,$10524D                         ;80DF2B|        |      ;
     dl $1062D2,$10524D,$105A8E,$10320F                         ;80DF37|        |      ;
     dw $FFFE                                                   ;80DF43|        |      ;
-    dl DATA24_80DF2B                                           ;80DF45|        |80DF2B;
+    dl aPaletteAnimScript_FarmFall_T01_Slot4                                           ;80DF45|        |80DF2B;
  
-DATA24_80DF48:
+aPaletteAnimScript_FarmFall_T01_Slot5:
     dl $1062D2,$105A8E,$10524D,$1062D2                         ;80DF48|        |      ;
     dl $10320F,$1062D2,$10524D,$105A8E                         ;80DF54|        |      ;
     dw $FFFE                                                   ;80DF60|        |      ;
-    dl DATA24_80DF48                                           ;80DF62|        |80DF48;
+    dl aPaletteAnimScript_FarmFall_T01_Slot5                                           ;80DF62|        |80DF48;
  
-DATA24_80DF65:
+aPaletteAnimScript_FarmFall_T01_Slot6:
     dl $105A8E,$10524D,$1062D2,$10320F                         ;80DF65|        |      ;
     dl $105A8E,$10320F,$1062D2,$10524D                         ;80DF71|        |      ;
     dw $FFFE                                                   ;80DF7D|        |      ;
-    dl DATA24_80DF65                                           ;80DF7F|        |80DF65;
+    dl aPaletteAnimScript_FarmFall_T01_Slot6                                           ;80DF7F|        |80DF65;
  
-DATA24_80DF82:
+aPaletteAnimScript_FarmFall_T01_Slot7:
     dl $10524D,$1062D2,$10320F,$105A8E                         ;80DF82|        |      ;
     dl $10524D,$105A8E,$10320F,$1062D2                         ;80DF8E|        |      ;
     dw $FFFE                                                   ;80DF9A|        |      ;
-    dl DATA24_80DF82                                           ;80DF9C|        |80DF82;
+    dl aPaletteAnimScript_FarmFall_T01_Slot7                                           ;80DF9C|        |80DF82;
  
-DATA24_80DF9F:
+aPaletteAnimScript_FarmFall_T2_Slot4:
     dl $1023FE,$102298,$1011DB,$10029B                         ;80DF9F|        |      ;
     dl $10031F,$10029B,$1011DB,$102298                         ;80DFAB|        |      ;
     dw $FFFE                                                   ;80DFB7|        |      ;
-    dl DATA24_80DF9F                                           ;80DFB9|        |80DF9F;
+    dl aPaletteAnimScript_FarmFall_T2_Slot4                                           ;80DFB9|        |80DF9F;
  
-DATA24_80DFBC:
+aPaletteAnimScript_FarmFall_T2_Slot5:
     dl $10031F,$1011DC,$1001B6,$10031F                         ;80DFBC|        |      ;
     dl $102276,$10031F,$1001B6,$1011DC                         ;80DFC8|        |      ;
     dw $FFFE                                                   ;80DFD4|        |      ;
-    dl DATA24_80DFBC                                           ;80DFD6|        |80DFBC;
+    dl aPaletteAnimScript_FarmFall_T2_Slot5                                           ;80DFD6|        |80DFBC;
  
-DATA24_80DFD9:
+aPaletteAnimScript_FarmFall_T2_Slot6:
     dl $1011DB,$1001B6,$10031F,$102276                         ;80DFD9|        |      ;
     dl $10125F,$102276,$10031F,$1001B6                         ;80DFE5|        |      ;
     dw $FFFE                                                   ;80DFF1|        |      ;
-    dl DATA24_80DFD9                                           ;80DFF3|        |80DFD9;
+    dl aPaletteAnimScript_FarmFall_T2_Slot6                                           ;80DFF3|        |80DFD9;
  
-DATA24_80DFF6:
+aPaletteAnimScript_FarmFall_T2_Slot7:
     dl $1001B6,$10031F,$102276,$1011DB                         ;80DFF6|        |      ;
     dl $1001B6,$1011DB,$102276,$10031F                         ;80E002|        |      ;
     dw $FFFE                                                   ;80E00E|        |      ;
-    dl DATA24_80DFF6                                           ;80E010|        |80DFF6;
+    dl aPaletteAnimScript_FarmFall_T2_Slot7                                           ;80E010|        |80DFF6;
  
-DATA24_80E013:
+aPaletteAnimScript_FarmFall_T3_Slot4:
     dl $1051CD,$10216B,$10496B,$104587                         ;80E013|        |      ;
     dl $1051CD,$104587,$10496B,$10216B                         ;80E01F|        |      ;
     dw $FFFE                                                   ;80E02B|        |      ;
-    dl DATA24_80E013                                           ;80E02D|        |80E013;
+    dl aPaletteAnimScript_FarmFall_T3_Slot4                                           ;80E02D|        |80E013;
  
-DATA24_80E030:
+aPaletteAnimScript_FarmFall_T3_Slot5:
     dl $10496B,$10496B,$104587,$1051CD                         ;80E030|        |      ;
     dl $10216B,$1051CD,$104587,$10496B                         ;80E03C|        |      ;
     dw $FFFE                                                   ;80E048|        |      ;
-    dl DATA24_80E030                                           ;80E04A|        |80E030;
+    dl aPaletteAnimScript_FarmFall_T3_Slot5                                           ;80E04A|        |80E030;
  
-DATA24_80E04D:
+aPaletteAnimScript_FarmFall_T3_Slot6:
     dl $1011DB,$1001B6,$10031F,$102276                         ;80E04D|        |      ;
     dl $10125F,$102276,$10031F,$1001B6                         ;80E059|        |      ;
     dw $FFFE                                                   ;80E065|        |      ;
-    dl DATA24_80E04D                                           ;80E067|        |80E04D;
+    dl aPaletteAnimScript_FarmFall_T3_Slot6                                           ;80E067|        |80E04D;
  
-DATA24_80E06A:
+aPaletteAnimScript_FarmFall_T3_Slot7:
     dl $103507,$1051CD,$10216B,$10696B                         ;80E06A|        |      ;
     dl $104587,$10496B,$10216B,$1051CD                         ;80E076|        |      ;
     dw $FFFE                                                   ;80E082|        |      ;
-    dl DATA24_80E06A                                           ;80E084|        |80E06A;
+    dl aPaletteAnimScript_FarmFall_T3_Slot7                                           ;80E084|        |80E06A;
  
-DATA24_80E087:
+aPaletteAnimScript_FarmFall_T4_Slot4:
     dl $106140,$1020C6,$104104,$1030C0                         ;80E087|        |      ;
     dl $104564,$1030C0,$104104,$1020C6                         ;80E093|        |      ;
     dw $FFFE                                                   ;80E09F|        |      ;
-    dl DATA24_80E087                                           ;80E0A1|        |80E087;
+    dl aPaletteAnimScript_FarmFall_T4_Slot4                                           ;80E0A1|        |80E087;
  
-DATA24_80E0A4:
+aPaletteAnimScript_FarmFall_T4_Slot5:
     dl $104564,$104104,$1030C0,$104564                         ;80E0A4|        |      ;
     dl $1020C6,$104564,$1030C0,$104104                         ;80E0B0|        |      ;
     dw $FFFE                                                   ;80E0BC|        |      ;
-    dl DATA24_80E0A4                                           ;80E0BE|        |80E0A4;
+    dl aPaletteAnimScript_FarmFall_T4_Slot5                                           ;80E0BE|        |80E0A4;
  
-DATA24_80E0C1:
+aPaletteAnimScript_FarmFall_T4_Slot6:
     dl $104104,$1030C0,$104564,$1020C6                         ;80E0C1|        |      ;
     dl $104104,$1020C6,$104564,$1030C0                         ;80E0CD|        |      ;
     dw $FFFE                                                   ;80E0D9|        |      ;
-    dl DATA24_80E0C1                                           ;80E0DB|        |80E0C1;
+    dl aPaletteAnimScript_FarmFall_T4_Slot6                                           ;80E0DB|        |80E0C1;
  
-DATA24_80E0DE:
+aPaletteAnimScript_FarmFall_T4_Slot7:
     dl $1030C0,$104564,$1020C6,$104104                         ;80E0DE|        |      ;
     dl $1030C0,$104104,$1020C6,$104564                         ;80E0EA|        |      ;
     dw $FFFE                                                   ;80E0F6|        |      ;
-    dl DATA24_80E0DE                                           ;80E0F8|        |80E0DE;
+    dl aPaletteAnimScript_FarmFall_T4_Slot7                                           ;80E0F8|        |80E0DE;
  
-DATA24_80E0FB:
+aPaletteAnimScript_ImpUnderground_All_Slot4:
     dl $080150,$080153,$080150,$080153                         ;80E0FB|        |      ;
     dw $FFFE                                                   ;80E107|        |      ;
-    dl DATA24_80E0FB                                           ;80E109|        |80E0FB;
+    dl aPaletteAnimScript_ImpUnderground_All_Slot4                                           ;80E109|        |80E0FB;
  
-DATA24_80E10C:
+aPaletteAnimScript_ImpUnderground_All_Slot5:
     dl $0809D7,$0809D9,$0809D7,$0809D9                         ;80E10C|        |      ;
     dw $FFFE                                                   ;80E118|        |      ;
-    dl DATA24_80E10C                                           ;80E11A|        |80E10C;
+    dl aPaletteAnimScript_ImpUnderground_All_Slot5                                           ;80E11A|        |80E10C;
  
-DATA24_80E11D:
+aPaletteAnimScript_ImpUnderground_All_Slot6:
     dl $08029F,$08039F,$08029F,$08039F                         ;80E11D|        |      ;
     dw $FFFE                                                   ;80E129|        |      ;
-    dl DATA24_80E11D                                           ;80E12B|        |80E11D;
+    dl aPaletteAnimScript_ImpUnderground_All_Slot6                                           ;80E12B|        |80E11D;
  
-DATA24_80E12E:
+aPaletteAnimScript_ImpUnderground_All_Slot7:
     dl $08019C,$08029F,$08019C,$08029F                         ;80E12E|        |      ;
     dw $FFFE                                                   ;80E13A|        |      ;
-    dl DATA24_80E12E                                           ;80E13C|        |80E12E;
+    dl aPaletteAnimScript_ImpUnderground_All_Slot7                                           ;80E13C|        |80E12E;
  
-DATA24_80E13F:
+aPaletteAnimScript_ImpUnderground_All_Slot8:
     dl $080138,$08019C,$080138,$08019C                         ;80E13F|        |      ;
     dw $FFFE                                                   ;80E14B|        |      ;
-    dl DATA24_80E13F                                           ;80E14D|        |80E13F;
+    dl aPaletteAnimScript_ImpUnderground_All_Slot8                                           ;80E14D|        |80E13F;
  
-DATA24_80E150:
+aPaletteAnimScript_ImpUnderground_All_Slot9:
     dl $0800EA,$08011C,$0800EA,$0800EA                         ;80E150|        |      ;
     dw $FFFE                                                   ;80E15C|        |      ;
-    dl DATA24_80E150                                           ;80E15E|        |80E150;
+    dl aPaletteAnimScript_ImpUnderground_All_Slot9                                           ;80E15E|        |80E150;
  
-DATA24_80E161:
+aPaletteAnimScript_ImpUnderground_All_Slot10:
     dl $08012D,$08012D,$08012D,$08013B                         ;80E161|        |      ;
     dw $FFFE                                                   ;80E16D|        |      ;
-    dl DATA24_80E161                                           ;80E16F|        |80E161;
+    dl aPaletteAnimScript_ImpUnderground_All_Slot10                                           ;80E16F|        |80E161;
  
-DATA24_80E172:
+aPaletteAnimScript_House1_House2_House3_All_Slot4:
     dl $080048,$08000C                                         ;80E172|        |      ;
     dw $FFFE                                                   ;80E178|        |      ;
-    dl DATA24_80E172                                           ;80E17A|        |80E172;
+    dl aPaletteAnimScript_House1_House2_House3_All_Slot4                                           ;80E17A|        |80E172;
  
-DATA24_80E17D:
+aPaletteAnimScript_House1_House2_House3_All_Slot5:
     dl $080017,$08001A                                         ;80E17D|        |      ;
     dw $FFFE                                                   ;80E183|        |      ;
-    dl DATA24_80E17D                                           ;80E185|        |80E17D;
+    dl aPaletteAnimScript_House1_House2_House3_All_Slot5                                           ;80E185|        |80E17D;
  
-DATA24_80E188:
+aPaletteAnimScript_House1_House2_House3_All_Slot6:
     dl $08001F,$08017F                                         ;80E188|        |      ;
     dw $FFFE                                                   ;80E18E|        |      ;
-    dl DATA24_80E188                                           ;80E190|        |80E188;
+    dl aPaletteAnimScript_House1_House2_House3_All_Slot6                                           ;80E190|        |80E188;
  
-DATA24_80E193:
+aPaletteAnimScript_House1_House2_House3_All_Slot7:
     dl $0801B4,$080219                                         ;80E193|        |      ;
     dw $FFFE                                                   ;80E199|        |      ;
-    dl DATA24_80E193                                           ;80E19B|        |80E193;
+    dl aPaletteAnimScript_House1_House2_House3_All_Slot7                                           ;80E19B|        |80E193;
  
-DATA24_80E19E:
+aPaletteAnimScript_MajorHouse_T1234_Slot4:
     dl $08004C,$080052                                         ;80E19E|        |      ;
     dw $FFFE                                                   ;80E1A4|        |      ;
-    dl DATA24_80E19E                                           ;80E1A6|        |80E19E;
+    dl aPaletteAnimScript_MajorHouse_T1234_Slot4                                           ;80E1A6|        |80E19E;
  
-DATA24_80E1A9:
+aPaletteAnimScript_MajorHouse_T1234_Slot5:
     dl $0802BF,$08017F                                         ;80E1A9|        |      ;
     dw $FFFE                                                   ;80E1AF|        |      ;
-    dl DATA24_80E1A9                                           ;80E1B1|        |80E1A9;
+    dl aPaletteAnimScript_MajorHouse_T1234_Slot5                                           ;80E1B1|        |80E1A9;
  
-DATA24_80E1B4:
+aPaletteAnimScript_MajorHouse_T1234_Slot6:
     dl $08009F,$08035F                                         ;80E1B4|        |      ;
     dw $FFFE                                                   ;80E1BA|        |      ;
-    dl DATA24_80E1B4                                           ;80E1BC|        |80E1B4;
+    dl aPaletteAnimScript_MajorHouse_T1234_Slot6                                           ;80E1BC|        |80E1B4;
  
-DATA24_80E1BF:
+aPaletteAnimScript_MajorHouse_T1234_Slot7:
     dl $08029F,$08039F                                         ;80E1BF|        |      ;
     dw $FFFE                                                   ;80E1C5|        |      ;
-    dl DATA24_80E1BF                                           ;80E1C7|        |80E1BF;
+    dl aPaletteAnimScript_MajorHouse_T1234_Slot7                                           ;80E1C7|        |80E1BF;
  
-DATA24_80E1CA:
+aPaletteAnimScript_Church_T1234_Slot4:
     dl $08218D,$082E10,$082E10,$082E10                         ;80E1CA|        |      ;
     dw $FFFE                                                   ;80E1D6|        |      ;
-    dl DATA24_80E1CA                                           ;80E1D8|        |80E1CA;
+    dl aPaletteAnimScript_Church_T1234_Slot4                                           ;80E1D8|        |80E1CA;
  
-DATA24_80E1DB:
+aPaletteAnimScript_Church_T1234_Slot5:
     dl $085F9C,$085F7B,$084AF9,$085F7B                         ;80E1DB|        |      ;
     dw $FFFE                                                   ;80E1E7|        |      ;
-    dl DATA24_80E1DB                                           ;80E1E9|        |80E1DB;
+    dl aPaletteAnimScript_Church_T1234_Slot5                                           ;80E1E9|        |80E1DB;
  
-DATA24_80E1EC:
+aPaletteAnimScript_Church_T1234_Slot6:
     dl $084AF9,$084AF9,$08261F,$084AF9                         ;80E1EC|        |      ;
     dw $FFFE                                                   ;80E1F8|        |      ;
-    dl DATA24_80E1EC                                           ;80E1FA|        |80E1EC;
+    dl aPaletteAnimScript_Church_T1234_Slot6                                           ;80E1FA|        |80E1EC;
  
-DATA24_80E1FD:
+aPaletteAnimScript_Church_T1234_Slot7:
     dl $08261F,$08261F,$08053E,$08261F                         ;80E1FD|        |      ;
     dw $FFFE                                                   ;80E209|        |      ;
-    dl DATA24_80E1FD                                           ;80E20B|        |80E1FD;
+    dl aPaletteAnimScript_Church_T1234_Slot7                                           ;80E20B|        |80E1FD;
  
-DATA24_80E20E:
+aPaletteAnimScript_Church_T1234_Slot8:
     dl $08053E,$08261F,$084AF9,$08261F                         ;80E20E|        |      ;
     dw $FFFE                                                   ;80E21A|        |      ;
-    dl DATA24_80E20E                                           ;80E21C|        |80E20E;
+    dl aPaletteAnimScript_Church_T1234_Slot8                                           ;80E21C|        |80E20E;
  
-DATA24_80E21F:
+aPaletteAnimScript_Church_T1234_Slot9:
     dl $08261F,$084AF9,$084AF9,$084AF9                         ;80E21F|        |      ;
     dw $FFFE                                                   ;80E22B|        |      ;
-    dl DATA24_80E21F                                           ;80E22D|        |80E21F;
+    dl aPaletteAnimScript_Church_T1234_Slot9                                           ;80E22D|        |80E21F;
  
-DATA24_80E230:
+aPaletteAnimScript_Church_T1234_Slot10:
     dl $0803BF,$08261F,$0803BF,$08261F                         ;80E230|        |      ;
     dw $FFFE                                                   ;80E23C|        |      ;
-    dl DATA24_80E230                                           ;80E23E|        |80E230;
+    dl aPaletteAnimScript_Church_T1234_Slot10                                           ;80E23E|        |80E230;
  
-DATA24_80E241:
+aPaletteAnimScript_Church_T1234_Slot11:
     dl $0803BF,$08261F,$08053E,$08261F                         ;80E241|        |      ;
     dw $FFFE                                                   ;80E24D|        |      ;
-    dl DATA24_80E241                                           ;80E24F|        |80E241;
+    dl aPaletteAnimScript_Church_T1234_Slot11                                           ;80E24F|        |80E241;
  
-DATA24_80E252:
+aPaletteAnimScript_FloristBedroom_T1234_Slot4:
     dl $08123F,$0806BF                                         ;80E252|        |      ;
     dw $FFFE                                                   ;80E258|        |      ;
-    dl DATA24_80E252                                           ;80E25A|        |80E252;
+    dl aPaletteAnimScript_FloristBedroom_T1234_Slot4                                           ;80E25A|        |80E252;
  
-DATA24_80E25D:
+aPaletteAnimScript_FloristBedroom_T1234_Slot5:
     dl $080048,$08004D                                         ;80E25D|        |      ;
     dw $FFFE                                                   ;80E263|        |      ;
-    dl DATA24_80E25D                                           ;80E265|        |80E25D;
+    dl aPaletteAnimScript_FloristBedroom_T1234_Slot5                                           ;80E265|        |80E25D;
  
-DATA24_80E268:
+aPaletteAnimScript_FloristBedroom_T1234_Slot6:
     dl $08021F,$08013A                                         ;80E268|        |      ;
     dw $FFFE                                                   ;80E26E|        |      ;
-    dl DATA24_80E268                                           ;80E270|        |80E268;
+    dl aPaletteAnimScript_FloristBedroom_T1234_Slot6                                           ;80E270|        |80E268;
  
-DATA24_80E273:
+aPaletteAnimScript_FloristBedroom_T1234_Slot7:
     dl $0800FA,$08033F                                         ;80E273|        |      ;
     dw $FFFE                                                   ;80E279|        |      ;
-    dl DATA24_80E273                                           ;80E27B|        |80E273;
+    dl aPaletteAnimScript_FloristBedroom_T1234_Slot7                                           ;80E27B|        |80E273;
  
-DATA24_80E27E:
+aPaletteAnimScript_BarBedroom_T1234_Slot4:
     dl $080048,$08004F                                         ;80E27E|        |      ;
     dw $FFFE                                                   ;80E284|        |      ;
-    dl DATA24_80E27E                                           ;80E286|        |80E27E;
+    dl aPaletteAnimScript_BarBedroom_T1234_Slot4                                           ;80E286|        |80E27E;
  
-DATA24_80E289:
+aPaletteAnimScript_BarBedroom_T1234_Slot5:
     dl $081E9A,$081F1F                                         ;80E289|        |      ;
     dw $FFFE                                                   ;80E28F|        |      ;
-    dl DATA24_80E289                                           ;80E291|        |80E289;
+    dl aPaletteAnimScript_BarBedroom_T1234_Slot5                                           ;80E291|        |80E289;
  
-DATA24_80E294:
+aPaletteAnimScript_BarBedroom_T1234_Slot6:
     dl $08021F,$080037                                         ;80E294|        |      ;
     dw $FFFE                                                   ;80E29A|        |      ;
-    dl DATA24_80E294                                           ;80E29C|        |80E294;
+    dl aPaletteAnimScript_BarBedroom_T1234_Slot6                                           ;80E29C|        |80E294;
  
-DATA24_80E29F:
+aPaletteAnimScript_BarBedroom_T1234_Slot7:
     dl $080019,$080025                                         ;80E29F|        |      ;
     dw $FFFE                                                   ;80E2A5|        |      ;
-    dl DATA24_80E29F                                           ;80E2A7|        |80E29F;
+    dl aPaletteAnimScript_BarBedroom_T1234_Slot7                                           ;80E2A7|        |80E29F;
  
-DATA24_80E2AA:
+aPaletteAnimScript_ToolsShopBedroom_T1234_Slot4:
     dl $082E7F,$08233F                                         ;80E2AA|        |      ;
     dw $FFFE                                                   ;80E2B0|        |      ;
-    dl DATA24_80E2AA                                           ;80E2B2|        |80E2AA;
+    dl aPaletteAnimScript_ToolsShopBedroom_T1234_Slot4                                           ;80E2B2|        |80E2AA;
  
-DATA24_80E2B5:
+aPaletteAnimScript_ToolsShopBedroom_T1234_Slot5:
     dl $080088,$08008C                                         ;80E2B5|        |      ;
     dw $FFFE                                                   ;80E2BB|        |      ;
-    dl DATA24_80E2B5                                           ;80E2BD|        |80E2B5;
+    dl aPaletteAnimScript_ToolsShopBedroom_T1234_Slot5                                           ;80E2BD|        |80E2B5;
  
-DATA24_80E2C0:
+aPaletteAnimScript_ToolsShopBedroom_T1234_Slot6:
     dl $08009D,$08029F                                         ;80E2C0|        |      ;
     dw $FFFE                                                   ;80E2C6|        |      ;
-    dl DATA24_80E2C0                                           ;80E2C8|        |80E2C0;
+    dl aPaletteAnimScript_ToolsShopBedroom_T1234_Slot6                                           ;80E2C8|        |80E2C0;
  
-DATA24_80E2CB:
+aPaletteAnimScript_ToolsShopBedroom_T1234_Slot7:
     dl $08021F,$08011F                                         ;80E2CB|        |      ;
     dw $FFFE                                                   ;80E2D1|        |      ;
-    dl DATA24_80E2CB                                           ;80E2D3|        |80E2CB;
+    dl aPaletteAnimScript_ToolsShopBedroom_T1234_Slot7                                           ;80E2D3|        |80E2CB;
  
-DATA24_80E2D6:
+aPaletteAnimScript_AnimalShop_T1234_Slot4:
     dl $080090,$08009C                                         ;80E2D6|        |      ;
     dw $FFFE                                                   ;80E2DC|        |      ;
-    dl DATA24_80E2D6                                           ;80E2DE|        |80E2D6;
+    dl aPaletteAnimScript_AnimalShop_T1234_Slot4                                           ;80E2DE|        |80E2D6;
  
-DATA24_80E2E1:
+aPaletteAnimScript_AnimalShop_T1234_Slot5:
     dl $0801DE,$0802BF                                         ;80E2E1|        |      ;
     dw $FFFE                                                   ;80E2E7|        |      ;
-    dl DATA24_80E2E1                                           ;80E2E9|        |80E2E1;
+    dl aPaletteAnimScript_AnimalShop_T1234_Slot5                                           ;80E2E9|        |80E2E1;
  
-DATA24_80E2EC:
+aPaletteAnimScript_AnimalShop_T1234_Slot6:
     dl $08004F,$0800D0                                         ;80E2EC|        |      ;
     dw $FFFE                                                   ;80E2F2|        |      ;
-    dl DATA24_80E2EC                                           ;80E2F4|        |80E2EC;
+    dl aPaletteAnimScript_AnimalShop_T1234_Slot6                                           ;80E2F4|        |80E2EC;
  
-DATA24_80E2F7:
+aPaletteAnimScript_TownSpring_DancingS1_EggFestival_T1_Slot4:
     dl $105E0F,$104A54,$107F17                                 ;80E2F7|        |      ;
     dw $FFFE                                                   ;80E300|        |      ;
-    dl DATA24_80E2F7                                           ;80E302|        |80E2F7;
+    dl aPaletteAnimScript_TownSpring_DancingS1_EggFestival_T1_Slot4                                           ;80E302|        |80E2F7;
  
-DATA24_80E305:
+aPaletteAnimScript_TownSpring_DancingS1_EggFestival_T1_Slot5:
     dl $104A54,$107F17,$105E0F                                 ;80E305|        |      ;
     dw $FFFE                                                   ;80E30E|        |      ;
-    dl DATA24_80E305                                           ;80E310|        |80E305;
+    dl aPaletteAnimScript_TownSpring_DancingS1_EggFestival_T1_Slot5                                           ;80E310|        |80E305;
  
-DATA24_80E313:
+aPaletteAnimScript_TownSpring_DancingS1_EggFestival_T1_Slot6:
     dl $107F17,$105E0F,$104A54                                 ;80E313|        |      ;
     dw $FFFE                                                   ;80E31C|        |      ;
-    dl DATA24_80E313                                           ;80E31E|        |80E313;
+    dl aPaletteAnimScript_TownSpring_DancingS1_EggFestival_T1_Slot6                                           ;80E31E|        |80E313;
  
-DATA24_80E321:
+aPaletteAnimScript_TownSpring_T2_Slot4:
     dl $104213,$104257,$1056FC                                 ;80E321|        |      ;
     dw $FFFE                                                   ;80E32A|        |      ;
-    dl DATA24_80E321                                           ;80E32C|        |80E321;
+    dl aPaletteAnimScript_TownSpring_T2_Slot4                                           ;80E32C|        |80E321;
  
-DATA24_80E32F:
+aPaletteAnimScript_TownSpring_T2_Slot5:
     dl $104257,$1056FC,$104213                                 ;80E32F|        |      ;
     dw $FFFE                                                   ;80E338|        |      ;
-    dl DATA24_80E32F                                           ;80E33A|        |80E32F;
+    dl aPaletteAnimScript_TownSpring_T2_Slot5                                           ;80E33A|        |80E32F;
  
-DATA24_80E33D:
+aPaletteAnimScript_TownSpring_T2_Slot6:
     dl $1056FC,$104213,$104257                                 ;80E33D|        |      ;
     dw $FFFE                                                   ;80E346|        |      ;
-    dl DATA24_80E33D                                           ;80E348|        |80E33D;
+    dl aPaletteAnimScript_TownSpring_T2_Slot6                                           ;80E348|        |80E33D;
  
-DATA24_80E34B:
+aPaletteAnimScript_TownSpring_T3_Slot4:
     dl $103D4A,$103D4A,$10458C                                 ;80E34B|        |      ;
     dw $FFFE                                                   ;80E354|        |      ;
-    dl DATA24_80E34B                                           ;80E356|        |80E34B;
+    dl aPaletteAnimScript_TownSpring_T3_Slot4                                           ;80E356|        |80E34B;
  
-DATA24_80E359:
+aPaletteAnimScript_TownSpring_T3_Slot5:
     dl $103D4A,$10458C,$103D4A                                 ;80E359|        |      ;
     dw $FFFE                                                   ;80E362|        |      ;
-    dl DATA24_80E359                                           ;80E364|        |80E359;
+    dl aPaletteAnimScript_TownSpring_T3_Slot5                                           ;80E364|        |80E359;
  
-DATA24_80E367:
+aPaletteAnimScript_TownSpring_T3_Slot6:
     dl $10458C,$103D4A,$103D4A                                 ;80E367|        |      ;
     dw $FFFE                                                   ;80E370|        |      ;
-    dl DATA24_80E367                                           ;80E372|        |80E367;
+    dl aPaletteAnimScript_TownSpring_T3_Slot6                                           ;80E372|        |80E367;
  
-DATA24_80E375:
+aPaletteAnimScript_TownSpring_T4_Slot4:
     dl $103129,$102908,$10316B                                 ;80E375|        |      ;
     dw $FFFE                                                   ;80E37E|        |      ;
-    dl DATA24_80E375                                           ;80E380|        |80E375;
+    dl aPaletteAnimScript_TownSpring_T4_Slot4                                           ;80E380|        |80E375;
  
-DATA24_80E383:
+aPaletteAnimScript_TownSpring_T4_Slot5:
     dl $102908,$10316B,$103129                                 ;80E383|        |      ;
     dw $FFFE                                                   ;80E38C|        |      ;
-    dl DATA24_80E383                                           ;80E38E|        |80E383;
+    dl aPaletteAnimScript_TownSpring_T4_Slot5                                           ;80E38E|        |80E383;
  
-DATA24_80E391:
+aPaletteAnimScript_TownSpring_T4_Slot6:
     dl $10316B,$103129,$102908                                 ;80E391|        |      ;
     dw $FFFE                                                   ;80E39A|        |      ;
-    dl DATA24_80E391                                           ;80E39C|        |80E391;
+    dl aPaletteAnimScript_TownSpring_T4_Slot6                                           ;80E39C|        |80E391;
  
-DATA24_80E39F:
+aPaletteAnimScript_TownSummer_T1_Slot4:
     dl $106250,$107271,$107F79                                 ;80E39F|        |      ;
     dw $FFFE                                                   ;80E3A8|        |      ;
-    dl DATA24_80E39F                                           ;80E3AA|        |80E39F;
+    dl aPaletteAnimScript_TownSummer_T1_Slot4                                           ;80E3AA|        |80E39F;
  
-DATA24_80E3AD:
+aPaletteAnimScript_TownSummer_T1_Slot5:
     dl $107271,$107F79,$106250                                 ;80E3AD|        |      ;
     dw $FFFE                                                   ;80E3B6|        |      ;
-    dl DATA24_80E3AD                                           ;80E3B8|        |80E3AD;
+    dl aPaletteAnimScript_TownSummer_T1_Slot5                                           ;80E3B8|        |80E3AD;
  
-DATA24_80E3BB:
+aPaletteAnimScript_TownSummer_T1_Slot6:
     dl $107F79,$106250,$107271                                 ;80E3BB|        |      ;
     dw $FFFE                                                   ;80E3C4|        |      ;
-    dl DATA24_80E3BB                                           ;80E3C6|        |80E3BB;
+    dl aPaletteAnimScript_TownSummer_T1_Slot6                                           ;80E3C6|        |80E3BB;
  
-DATA24_80E3C9:
+aPaletteAnimScript_TownSummer_T2_Slot4:
     dl $105E78,$105654,$107F19                                 ;80E3C9|        |      ;
     dw $FFFE                                                   ;80E3D2|        |      ;
-    dl DATA24_80E3C9                                           ;80E3D4|        |80E3C9;
+    dl aPaletteAnimScript_TownSummer_T2_Slot4                                           ;80E3D4|        |80E3C9;
  
-DATA24_80E3D7:
+aPaletteAnimScript_TownSummer_T2_Slot5:
     dl $105654,$107F19,$105E78                                 ;80E3D7|        |      ;
     dw $FFFE                                                   ;80E3E0|        |      ;
-    dl DATA24_80E3D7                                           ;80E3E2|        |80E3D7;
+    dl aPaletteAnimScript_TownSummer_T2_Slot5                                           ;80E3E2|        |80E3D7;
  
-DATA24_80E3E5:
+aPaletteAnimScript_TownSummer_T2_Slot6:
     dl $107F19,$105E78,$105654                                 ;80E3E5|        |      ;
     dw $FFFE                                                   ;80E3EE|        |      ;
-    dl DATA24_80E3E5                                           ;80E3F0|        |80E3E5;
+    dl aPaletteAnimScript_TownSummer_T2_Slot6                                           ;80E3F0|        |80E3E5;
  
-DATA24_80E3F3:
+aPaletteAnimScript_TownSummer_T3_Slot4:
     dl $103D4A,$103D4A,$10458C                                 ;80E3F3|        |      ;
     dw $FFFE                                                   ;80E3FC|        |      ;
-    dl DATA24_80E3F3                                           ;80E3FE|        |80E3F3;
+    dl aPaletteAnimScript_TownSummer_T3_Slot4                                           ;80E3FE|        |80E3F3;
  
-DATA24_80E401:
+aPaletteAnimScript_TownSummer_T3_Slot5:
     dl $103D4A,$10458C,$103D4A                                 ;80E401|        |      ;
     dw $FFFE                                                   ;80E40A|        |      ;
-    dl DATA24_80E401                                           ;80E40C|        |80E401;
+    dl aPaletteAnimScript_TownSummer_T3_Slot5                                           ;80E40C|        |80E401;
  
-DATA24_80E40F:
+aPaletteAnimScript_TownSummer_T3_Slot6:
     dl $10458C,$103D4A,$103D4A                                 ;80E40F|        |      ;
     dw $FFFE                                                   ;80E418|        |      ;
-    dl DATA24_80E40F                                           ;80E41A|        |80E40F;
+    dl aPaletteAnimScript_TownSummer_T3_Slot6                                           ;80E41A|        |80E40F;
  
-DATA24_80E41D:
+aPaletteAnimScript_TownSummer_T4_Slot4:
     dl $1030E7,$1030E7,$103529                                 ;80E41D|        |      ;
     dw $FFFE                                                   ;80E426|        |      ;
-    dl DATA24_80E41D                                           ;80E428|        |80E41D;
+    dl aPaletteAnimScript_TownSummer_T4_Slot4                                           ;80E428|        |80E41D;
  
-DATA24_80E42B:
+aPaletteAnimScript_TownSummer_T4_Slot5:
     dl $1030E7,$103529,$1030E7                                 ;80E42B|        |      ;
     dw $FFFE                                                   ;80E434|        |      ;
-    dl DATA24_80E42B                                           ;80E436|        |80E42B;
+    dl aPaletteAnimScript_TownSummer_T4_Slot5                                           ;80E436|        |80E42B;
  
-DATA24_80E439:
+aPaletteAnimScript_TownSummer_T4_Slot6:
     dl $103529,$1030E7,$1030E7                                 ;80E439|        |      ;
     dw $FFFE                                                   ;80E442|        |      ;
-    dl DATA24_80E439                                           ;80E444|        |80E439;
+    dl aPaletteAnimScript_TownSummer_T4_Slot6                                           ;80E444|        |80E439;
  
-DATA24_80E447:
+aPaletteAnimScript_TownFall_NYPublicSquare_T1_Slot4:
     dl $104A91,$1062CE,$106374                                 ;80E447|        |      ;
     dw $FFFE                                                   ;80E450|        |      ;
-    dl DATA24_80E447                                           ;80E452|        |80E447;
+    dl aPaletteAnimScript_TownFall_NYPublicSquare_T1_Slot4                                           ;80E452|        |80E447;
  
-DATA24_80E455:
+aPaletteAnim_Row2Col0E_80E455:
     dl $1062CE,$106374,$104A91                                 ;80E455|        |      ;
     dw $FFFE                                                   ;80E45E|        |      ;
-    dl DATA24_80E455                                           ;80E460|        |80E455;
+    dl aPaletteAnim_Row2Col0E_80E455                                           ;80E460|        |80E455;
  
-DATA24_80E463:
+aPaletteAnim_Row2Col0F_80E463:
     dl $106374,$104A91,$1062CE                                 ;80E463|        |      ;
     dw $FFFE                                                   ;80E46C|        |      ;
-    dl DATA24_80E463                                           ;80E46E|        |80E463;
+    dl aPaletteAnim_Row2Col0F_80E463                                           ;80E46E|        |80E463;
  
-DATA24_80E471:
+aPaletteAnim_Row2Col06_80E471:
     dl $103694,$103254,$103AFC                                 ;80E471|        |      ;
     dw $FFFE                                                   ;80E47A|        |      ;
-    dl DATA24_80E471                                           ;80E47C|        |80E471;
+    dl aPaletteAnim_Row2Col06_80E471                                           ;80E47C|        |80E471;
  
-DATA24_80E47F:
+aPaletteAnim_Row2Col0E_80E47F:
     dl $103254,$103AFC,$103694                                 ;80E47F|        |      ;
     dw $FFFE                                                   ;80E488|        |      ;
-    dl DATA24_80E47F                                           ;80E48A|        |80E47F;
+    dl aPaletteAnim_Row2Col0E_80E47F                                           ;80E48A|        |80E47F;
  
-DATA24_80E48D:
+aPaletteAnim_Row2Col0F_80E48D:
     dl $103AEC,$103694,$103254                                 ;80E48D|        |      ;
     dw $FFFE                                                   ;80E496|        |      ;
-    dl DATA24_80E48D                                           ;80E498|        |80E48D;
+    dl aPaletteAnim_Row2Col0F_80E48D                                           ;80E498|        |80E48D;
  
-DATA24_80E49B:
+aPaletteAnim_Row2Col06_80E49B:
     dl $102DCB,$102DCB,$10360E                                 ;80E49B|        |      ;
     dw $FFFE                                                   ;80E4A4|        |      ;
-    dl DATA24_80E49B                                           ;80E4A6|        |80E49B;
+    dl aPaletteAnim_Row2Col06_80E49B                                           ;80E4A6|        |80E49B;
  
-DATA24_80E4A9:
+aPaletteAnim_Row2Col0E_80E4A9:
     dl $102DCB,$10360E,$102DCB                                 ;80E4A9|        |      ;
     dw $FFFE                                                   ;80E4B2|        |      ;
-    dl DATA24_80E4A9                                           ;80E4B4|        |80E4A9;
+    dl aPaletteAnim_Row2Col0E_80E4A9                                           ;80E4B4|        |80E4A9;
  
-DATA24_80E4B7:
+aPaletteAnim_Row2Col0F_80E4B7:
     dl $10360E,$102DCB,$102DCB                                 ;80E4B7|        |      ;
     dw $FFFE                                                   ;80E4C0|        |      ;
-    dl DATA24_80E4B7                                           ;80E4C2|        |80E4B7;
+    dl aPaletteAnim_Row2Col0F_80E4B7                                           ;80E4C2|        |80E4B7;
  
-DATA24_80E4C5:
+aPaletteAnim_Row2Col06_80E4C5:
     dl $1030E7,$103127,$10356A                                 ;80E4C5|        |      ;
     dw $FFFE                                                   ;80E4CE|        |      ;
-    dl DATA24_80E4C5                                           ;80E4D0|        |80E4C5;
+    dl aPaletteAnim_Row2Col06_80E4C5                                           ;80E4D0|        |80E4C5;
  
-DATA24_80E4D3:
+aPaletteAnim_Row2Col0E_80E4D3:
     dl $103127,$10356A,$1030E7                                 ;80E4D3|        |      ;
     dw $FFFE                                                   ;80E4DC|        |      ;
-    dl DATA24_80E4D3                                           ;80E4DE|        |80E4D3;
+    dl aPaletteAnim_Row2Col0E_80E4D3                                           ;80E4DE|        |80E4D3;
  
-DATA24_80E4E1:
+aPaletteAnim_Row2Col0F_80E4E1:
     dl $10356A,$1030E7,$103127                                 ;80E4E1|        |      ;
     dw $FFFE                                                   ;80E4EA|        |      ;
-    dl DATA24_80E4E1                                           ;80E4EC|        |80E4E1;
+    dl aPaletteAnim_Row2Col0F_80E4E1                                           ;80E4EC|        |80E4E1;
  
-DATA24_80E4EF:
+aPaletteAnim_Row2Col03_80E4EF:
     dl $0A2162,$0A2190,$1025D2,$0A2190                         ;80E4EF|        |      ;
     dw $FFFE                                                   ;80E4FB|        |      ;
-    dl DATA24_80E4EF                                           ;80E4FD|        |80E4EF;
+    dl aPaletteAnim_Row2Col03_80E4EF                                           ;80E4FD|        |80E4EF;
  
-DATA24_80E500:
+aPaletteAnim_Row2Col04_80E500:
     dl $0A0E58,$0A129A,$1016DC,$0A129A                         ;80E500|        |      ;
     dw $FFFE                                                   ;80E50C|        |      ;
-    dl DATA24_80E500                                           ;80E50E|        |80E500;
+    dl aPaletteAnim_Row2Col04_80E500                                           ;80E50E|        |80E500;
  
-DATA24_80E511:
+aPaletteAnim_Row2Col05_80E511:
     dl $0A377D,$0A479F,$1053DF,$0A479F                         ;80E511|        |      ;
     dw $FFFE                                                   ;80E51D|        |      ;
-    dl DATA24_80E511                                           ;80E51F|        |80E511;
+    dl aPaletteAnim_Row2Col05_80E511                                           ;80E51F|        |80E511;
  
-DATA24_80E522:
+aPaletteAnim_Row2Col07_80E522:
     dl $0A092C,$0A116F,$1011B1,$0A116F                         ;80E522|        |      ;
     dw $FFFE                                                   ;80E52E|        |      ;
-    dl DATA24_80E522                                           ;80E530|        |80E522;
+    dl aPaletteAnim_Row2Col07_80E522                                           ;80E530|        |80E522;
  
-DATA24_80E533:
+aPaletteAnim_Row2Col03_80E533:
     dl $0A0D8E,$0A0DB1,$100DB4,$0A0DB1                         ;80E533|        |      ;
     dw $FFFE                                                   ;80E53F|        |      ;
-    dl DATA24_80E533                                           ;80E541|        |80E533;
+    dl aPaletteAnim_Row2Col03_80E533                                           ;80E541|        |80E533;
  
-DATA24_80E544:
+aPaletteAnim_Row2Col04_80E544:
     dl $0A36D7,$0A3719,$10377F,$0A3719                         ;80E544|        |      ;
     dw $FFFE                                                   ;80E550|        |      ;
-    dl DATA24_80E544                                           ;80E552|        |80E544;
+    dl aPaletteAnim_Row2Col04_80E544                                           ;80E552|        |80E544;
  
-DATA24_80E555:
+aPaletteAnim_Row2Col05_80E555:
     dl $0A27DE,$0A3FFF,$1053FF,$0A3FFF                         ;80E555|        |      ;
     dw $FFFE                                                   ;80E561|        |      ;
-    dl DATA24_80E555                                           ;80E563|        |80E555;
+    dl aPaletteAnim_Row2Col05_80E555                                           ;80E563|        |80E555;
  
-DATA24_80E566:
+aPaletteAnim_Row2Col07_80E566:
     dl $0A196E,$0A1970,$101992,$0A1970                         ;80E566|        |      ;
     dw $FFFE                                                   ;80E572|        |      ;
-    dl DATA24_80E566                                           ;80E574|        |80E566;
+    dl aPaletteAnim_Row2Col07_80E566                                           ;80E574|        |80E566;
  
-DATA24_80E577:
+aPaletteAnim_Row2Col03_80E577:
     dl $0A150A,$0A1D4F,$101D90,$0A1D4F                         ;80E577|        |      ;
     dw $FFFE                                                   ;80E583|        |      ;
-    dl DATA24_80E577                                           ;80E585|        |80E577;
+    dl aPaletteAnim_Row2Col03_80E577                                           ;80E585|        |80E577;
  
-DATA24_80E588:
+aPaletteAnim_Row2Col04_80E588:
     dl $0A0A18,$0A0A1C,$100A9F,$0A0A1C                         ;80E588|        |      ;
     dw $FFFE                                                   ;80E594|        |      ;
-    dl DATA24_80E588                                           ;80E596|        |80E588;
+    dl aPaletteAnim_Row2Col04_80E588                                           ;80E596|        |80E588;
  
-DATA24_80E599:
+aPaletteAnim_Row2Col05_80E599:
     dl $0A2F7C,$0A2FBE,$104BDF,$0A2FBE                         ;80E599|        |      ;
     dw $FFFE                                                   ;80E5A5|        |      ;
-    dl DATA24_80E599                                           ;80E5A7|        |80E599;
+    dl aPaletteAnim_Row2Col05_80E599                                           ;80E5A7|        |80E599;
  
-DATA24_80E5AA:
+aPaletteAnim_Row2Col07_80E5AA:
     dl $0A090C,$0A116E,$101190,$0A116E                         ;80E5AA|        |      ;
     dw $FFFE                                                   ;80E5B6|        |      ;
-    dl DATA24_80E5AA                                           ;80E5B8|        |80E5AA;
+    dl aPaletteAnim_Row2Col07_80E5AA                                           ;80E5B8|        |80E5AA;
  
-DATA24_80E5BB:
+aPaletteAnim_Row2Col03_80E5BB:
     dl $0A1CE8,$0A210A,$10216F,$0A210A                         ;80E5BB|        |      ;
     dw $FFFE                                                   ;80E5C7|        |      ;
-    dl DATA24_80E5BB                                           ;80E5C9|        |80E5BB;
+    dl aPaletteAnim_Row2Col03_80E5BB                                           ;80E5C9|        |80E5BB;
  
-DATA24_80E5CC:
+aPaletteAnim_Row2Col04_80E5CC:
     dl $0A29F3,$0A2A19,$10327B,$0A2A19                         ;80E5CC|        |      ;
     dw $FFFE                                                   ;80E5D8|        |      ;
-    dl DATA24_80E5CC                                           ;80E5DA|        |80E5CC;
+    dl aPaletteAnim_Row2Col04_80E5CC                                           ;80E5DA|        |80E5CC;
  
-DATA24_80E5DD:
+aPaletteAnim_Row2Col05_80E5DD:
     dl $0A3EB8,$0A3F3D,$10437F,$0A3F3D                         ;80E5DD|        |      ;
     dw $FFFE                                                   ;80E5E9|        |      ;
-    dl DATA24_80E5DD                                           ;80E5EB|        |80E5DD;
+    dl aPaletteAnim_Row2Col05_80E5DD                                           ;80E5EB|        |80E5DD;
  
-DATA24_80E5EE:
+aPaletteAnim_Row2Col07_80E5EE:
     dl $0A1D6C,$0A218E,$1025AF,$0A218E                         ;80E5EE|        |      ;
     dw $FFFE                                                   ;80E5FA|        |      ;
-    dl DATA24_80E5EE                                           ;80E5FC|        |80E5EE;
+    dl aPaletteAnim_Row2Col07_80E5EE                                           ;80E5FC|        |80E5EE;
  
-DATA24_80E5FF:
+aPaletteAnim_Row3Col08_80E5FF:
     dl $107F3B,$106EB5,$0F5E2E,$1051F0                         ;80E5FF|        |      ;
     dl $0C5233,$106EB7                                         ;80E60B|        |      ;
     dw $FFFE                                                   ;80E611|        |      ;
-    dl DATA24_80E5FF                                           ;80E613|        |80E5FF;
+    dl aPaletteAnim_Row3Col08_80E5FF                                           ;80E613|        |80E5FF;
  
-DATA24_80E616:
+aPaletteAnim_Row3Col09_80E616:
     dl $106EB7,$105E2E,$0F51F0,$107F39                         ;80E616|        |      ;
     dl $0C51F0,$105233                                         ;80E622|        |      ;
     dw $FFFE                                                   ;80E628|        |      ;
-    dl DATA24_80E616                                           ;80E62A|        |80E616;
+    dl aPaletteAnim_Row3Col09_80E616                                           ;80E62A|        |80E616;
  
-DATA24_80E62D:
+aPaletteAnim_Row3Col0A_80E62D:
     dl $105E2E,$1051F0,$0F7F3B,$106EB7                         ;80E62D|        |      ;
     dl $0C7F39,$104DD1                                         ;80E639|        |      ;
     dw $FFFE                                                   ;80E63F|        |      ;
-    dl DATA24_80E62D                                           ;80E641|        |80E62D;
+    dl aPaletteAnim_Row3Col0A_80E62D                                           ;80E641|        |80E62D;
  
-DATA24_80E644:
+aPaletteAnim_Row3Col0B_80E644:
     dl $1051F0,$107F39,$0F6EB7,$105E2E                         ;80E644|        |      ;
     dl $0C6EB7,$107F39                                         ;80E650|        |      ;
     dw $FFFE                                                   ;80E656|        |      ;
-    dl DATA24_80E644                                           ;80E658|        |80E644;
+    dl aPaletteAnim_Row3Col0B_80E644                                           ;80E658|        |80E644;
  
-DATA24_80E65B:
+aPaletteAnim_Row3Col0C_80E65B:
     dl $1041F0,$103DF1,$0F4211,$1041F1                         ;80E65B|        |      ;
     dl $0C4211,$103DF1                                         ;80E667|        |      ;
     dw $FFFE                                                   ;80E66D|        |      ;
-    dl DATA24_80E65B                                           ;80E66F|        |80E65B;
+    dl aPaletteAnim_Row3Col0C_80E65B                                           ;80E66F|        |80E65B;
  
-DATA24_80E672:
+aPaletteAnim_Row3Col08_80E672:
     dl $10537B,$1042BB,$0F3234,$103233                         ;80E672|        |      ;
     dl $0C3234,$1042BB                                         ;80E67E|        |      ;
     dw $FFFE                                                   ;80E684|        |      ;
-    dl DATA24_80E672                                           ;80E686|        |80E672;
+    dl aPaletteAnim_Row3Col08_80E672                                           ;80E686|        |80E672;
  
-DATA24_80E689:
+aPaletteAnim_Row3Col09_80E689:
     dl $1042B8,$103234,$0F3233,$1042DB                         ;80E689|        |      ;
     dl $0C3233,$103234                                         ;80E695|        |      ;
     dw $FFFE                                                   ;80E69B|        |      ;
-    dl DATA24_80E689                                           ;80E69D|        |80E689;
+    dl aPaletteAnim_Row3Col09_80E689                                           ;80E69D|        |80E689;
  
-DATA24_80E6A0:
+aPaletteAnim_Row3Col0A_80E6A0:
     dl $103234,$103233,$0F42DB,$1032B8                         ;80E6A0|        |      ;
     dl $0C42DB,$103233                                         ;80E6AC|        |      ;
     dw $FFFE                                                   ;80E6B2|        |      ;
-    dl DATA24_80E6A0                                           ;80E6B4|        |80E6A0;
+    dl aPaletteAnim_Row3Col0A_80E6A0                                           ;80E6B4|        |80E6A0;
  
-DATA24_80E6B7:
+aPaletteAnim_Row3Col0B_80E6B7:
     dl $103233,$1042DB,$0F32B8,$103234                         ;80E6B7|        |      ;
     dl $0C32B8,$1042DB                                         ;80E6C3|        |      ;
     dw $FFFE                                                   ;80E6C9|        |      ;
-    dl DATA24_80E6B7                                           ;80E6CB|        |80E6B7;
+    dl aPaletteAnim_Row3Col0B_80E6B7                                           ;80E6CB|        |80E6B7;
  
-DATA24_80E6CE:
+aPaletteAnim_Row3Col0C_80E6CE:
     dl $1021B1,$1025D1,$0F29D1,$103234                         ;80E6CE|        |      ;
     dl $0C29D1,$1025D1                                         ;80E6DA|        |      ;
     dw $FFFE                                                   ;80E6E0|        |      ;
-    dl DATA24_80E6CE                                           ;80E6E2|        |80E6CE;
+    dl aPaletteAnim_Row3Col0C_80E6CE                                           ;80E6E2|        |80E6CE;
  
-DATA24_80E6E5:
+aPaletteAnim_Row3Col08_80E6E5:
     dl $103213,$101D8C,$0F29CF,$102E11                         ;80E6E5|        |      ;
     dl $0C29CF,$101D8C                                         ;80E6F1|        |      ;
     dw $FFFE                                                   ;80E6F7|        |      ;
-    dl DATA24_80E6E5                                           ;80E6F9|        |80E6E5;
+    dl aPaletteAnim_Row3Col08_80E6E5                                           ;80E6F9|        |80E6E5;
  
-DATA24_80E6FC:
+aPaletteAnim_Row3Col09_80E6FC:
     dl $102DF1,$103233,$0F1D8C,$1029CF                         ;80E6FC|        |      ;
     dl $0C1D8C,$103233                                         ;80E708|        |      ;
     dw $FFFE                                                   ;80E70E|        |      ;
-    dl DATA24_80E6FC                                           ;80E710|        |80E6FC;
+    dl aPaletteAnim_Row3Col09_80E6FC                                           ;80E710|        |80E6FC;
  
-DATA24_80E713:
+aPaletteAnim_Row3Col0A_80E713:
     dl $1021AF,$102E11,$0F3233,$101D8C                         ;80E713|        |      ;
     dl $0C3233,$102E11                                         ;80E71F|        |      ;
     dw $FFFE                                                   ;80E725|        |      ;
-    dl DATA24_80E713                                           ;80E727|        |80E713;
+    dl aPaletteAnim_Row3Col0A_80E713                                           ;80E727|        |80E713;
  
-DATA24_80E72A:
+aPaletteAnim_Row3Col0B_80E72A:
     dl $101D6C,$1029CF,$0F2E11,$103233                         ;80E72A|        |      ;
     dl $0C2E11,$1029CF                                         ;80E736|        |      ;
     dw $FFFE                                                   ;80E73C|        |      ;
-    dl DATA24_80E72A                                           ;80E73E|        |80E72A;
+    dl aPaletteAnim_Row3Col0B_80E72A                                           ;80E73E|        |80E72A;
  
-DATA24_80E741:
+aPaletteAnim_Row3Col0C_80E741:
     dl $101D4C,$101D4C,$0F214C,$10214C                         ;80E741|        |      ;
     dl $0C214C,$101D4C                                         ;80E74D|        |      ;
     dw $FFFE                                                   ;80E753|        |      ;
-    dl DATA24_80E741                                           ;80E755|        |80E741;
+    dl aPaletteAnim_Row3Col0C_80E741                                           ;80E755|        |80E741;
  
-DATA24_80E758:
+aPaletteAnim_Row3Col08_80E758:
     dl $10218B,$10192A,$0F1D4B,$101D4B                         ;80E758|        |      ;
     dl $0C1D4B,$10192A                                         ;80E764|        |      ;
     dw $FFFE                                                   ;80E76A|        |      ;
-    dl DATA24_80E758                                           ;80E76C|        |80E758;
+    dl aPaletteAnim_Row3Col08_80E758                                           ;80E76C|        |80E758;
  
-DATA24_80E76F:
+aPaletteAnim_Row3Col09_80E76F:
     dl $101D4B,$10216B,$0F192A,$101D4B                         ;80E76F|        |      ;
     dl $0C192A,$10216B                                         ;80E77B|        |      ;
     dw $FFFE                                                   ;80E781|        |      ;
-    dl DATA24_80E76F                                           ;80E783|        |80E76F;
+    dl aPaletteAnim_Row3Col09_80E76F                                           ;80E783|        |80E76F;
  
-DATA24_80E786:
+aPaletteAnim_Row3Col0A_80E786:
     dl $101D2A,$101D48,$0F214B,$10192A                         ;80E786|        |      ;
     dl $0C214B,$101D48                                         ;80E792|        |      ;
     dw $FFFE                                                   ;80E798|        |      ;
-    dl DATA24_80E786                                           ;80E79A|        |80E786;
+    dl aPaletteAnim_Row3Col0A_80E786                                           ;80E79A|        |80E786;
  
-DATA24_80E79D:
+aPaletteAnim_Row3Col0B_80E79D:
     dl $101928,$101D4B,$0F1D4B,$101D6B                         ;80E79D|        |      ;
     dl $0C1D4B,$101D4B                                         ;80E7A9|        |      ;
     dw $FFFE                                                   ;80E7AF|        |      ;
-    dl DATA24_80E79D                                           ;80E7B1|        |80E79D;
+    dl aPaletteAnim_Row3Col0B_80E79D                                           ;80E7B1|        |80E79D;
  
-DATA24_80E7B4:
+aPaletteAnim_Row3Col08_80E7B4:
     dl $107F52,$105D66,$0F7D86,$107E4B                         ;80E7B4|        |      ;
     dl $0C7D86,$105D66                                         ;80E7C0|        |      ;
     dw $FFFE                                                   ;80E7C6|        |      ;
-    dl DATA24_80E7B4                                           ;80E7C8|        |80E7B4;
+    dl aPaletteAnim_Row3Col08_80E7B4                                           ;80E7C8|        |80E7B4;
  
-DATA24_80E7CB:
+aPaletteAnim_Row3Col09_80E7CB:
     dl $107E4B,$104F32,$0F5D66,$107D86                         ;80E7CB|        |      ;
     dl $0C5D66,$107F32                                         ;80E7D7|        |      ;
     dw $FFFE                                                   ;80E7DD|        |      ;
-    dl DATA24_80E7CB                                           ;80E7DF|        |80E7CB;
+    dl aPaletteAnim_Row3Col09_80E7CB                                           ;80E7DF|        |80E7CB;
  
-DATA24_80E7E2:
+aPaletteAnim_Row3Col0A_80E7E2:
     dl $107D86,$107E4B,$0F7F32,$105D66                         ;80E7E2|        |      ;
     dl $0C7F32,$107E4B                                         ;80E7EE|        |      ;
     dw $FFFE                                                   ;80E7F4|        |      ;
-    dl DATA24_80E7E2                                           ;80E7F6|        |80E7E2;
+    dl aPaletteAnim_Row3Col0A_80E7E2                                           ;80E7F6|        |80E7E2;
  
-DATA24_80E7F9:
+aPaletteAnim_Row3Col0B_80E7F9:
     dl $105D66,$107D86,$0F7E4B,$107F32                         ;80E7F9|        |      ;
     dl $0C7E4B,$107D86                                         ;80E805|        |      ;
     dw $FFFE                                                   ;80E80B|        |      ;
-    dl DATA24_80E7F9                                           ;80E80D|        |80E7F9;
+    dl aPaletteAnim_Row3Col0B_80E7F9                                           ;80E80D|        |80E7F9;
  
-DATA24_80E810:
+aPaletteAnim_Row3Col0C_80E810:
     dl $105D66,$106186,$0F6586,$1069A6                         ;80E810|        |      ;
     dl $0C6586,$106186                                         ;80E81C|        |      ;
     dw $FFFE                                                   ;80E822|        |      ;
-    dl DATA24_80E810                                           ;80E824|        |80E810;
+    dl aPaletteAnim_Row3Col0C_80E810                                           ;80E824|        |80E810;
  
-DATA24_80E827:
+aPaletteAnim_Row3Col08_80E827:
     dl $103F9E,$10169E,$0F1218,$101174                         ;80E827|        |      ;
     dl $0C1218,$10169E                                         ;80E833|        |      ;
     dw $FFFE                                                   ;80E839|        |      ;
-    dl DATA24_80E827                                           ;80E83B|        |80E827;
+    dl aPaletteAnim_Row3Col08_80E827                                           ;80E83B|        |80E827;
  
-DATA24_80E83E:
+aPaletteAnim_Row3Col09_80E83E:
     dl $10169E,$101218,$0F1174,$102AFA                         ;80E83E|        |      ;
     dl $0C1174,$101218                                         ;80E84A|        |      ;
     dw $FFFE                                                   ;80E850|        |      ;
-    dl DATA24_80E83E                                           ;80E852|        |80E83E;
+    dl aPaletteAnim_Row3Col09_80E83E                                           ;80E852|        |80E83E;
  
-DATA24_80E855:
+aPaletteAnim_Row3Col0A_80E855:
     dl $101218,$101174,$0F3F9E,$10169E                         ;80E855|        |      ;
     dl $0C3F9E,$101174                                         ;80E861|        |      ;
     dw $FFFE                                                   ;80E867|        |      ;
-    dl DATA24_80E855                                           ;80E869|        |80E855;
+    dl aPaletteAnim_Row3Col0A_80E855                                           ;80E869|        |80E855;
  
-DATA24_80E86C:
+aPaletteAnim_Row3Col0B_80E86C:
     dl $101174,$10267B,$0F169E,$101218                         ;80E86C|        |      ;
     dl $0C169E,$10267B                                         ;80E878|        |      ;
     dw $FFFE                                                   ;80E87E|        |      ;
-    dl DATA24_80E86C                                           ;80E880|        |80E86C;
+    dl aPaletteAnim_Row3Col0B_80E86C                                           ;80E880|        |80E86C;
  
-DATA24_80E883:
+aPaletteAnim_Row3Col0C_80E883:
     dl $101DB1,$101DB2,$0F1DB3,$101DB3                         ;80E883|        |      ;
     dl $0C1DB3,$101DB2                                         ;80E88F|        |      ;
     dw $FFFE                                                   ;80E895|        |      ;
-    dl DATA24_80E883                                           ;80E897|        |80E883;
+    dl aPaletteAnim_Row3Col0C_80E883                                           ;80E897|        |80E883;
  
-DATA24_80E89A:
+aPaletteAnim_Row3Col08_80E89A:
     dl $100DB3,$1009B3,$0F0991,$100172                         ;80E89A|        |      ;
     dl $0C0991,$1009B3                                         ;80E8A6|        |      ;
     dw $FFFE                                                   ;80E8AC|        |      ;
-    dl DATA24_80E89A                                           ;80E8AE|        |80E89A;
+    dl aPaletteAnim_Row3Col08_80E89A                                           ;80E8AE|        |80E89A;
  
-DATA24_80E8B1:
+aPaletteAnim_Row3Col09_80E8B1:
     dl $1009B3,$100991,$0F0172,$100DB3                         ;80E8B1|        |      ;
     dl $0C0172,$100991                                         ;80E8BD|        |      ;
     dw $FFFE                                                   ;80E8C3|        |      ;
-    dl DATA24_80E8B1                                           ;80E8C5|        |80E8B1;
+    dl aPaletteAnim_Row3Col09_80E8B1                                           ;80E8C5|        |80E8B1;
  
-DATA24_80E8C8:
+aPaletteAnim_Row3Col0A_80E8C8:
     dl $100991,$100172,$0F0DB3,$1009B3                         ;80E8C8|        |      ;
     dl $0C0DB3,$100172                                         ;80E8D4|        |      ;
     dw $FFFE                                                   ;80E8DA|        |      ;
-    dl DATA24_80E8C8                                           ;80E8DC|        |80E8C8;
+    dl aPaletteAnim_Row3Col0A_80E8C8                                           ;80E8DC|        |80E8C8;
  
-DATA24_80E8DF:
+aPaletteAnim_Row3Col0B_80E8DF:
     dl $100172,$100DB3,$0F09B3,$100991                         ;80E8DF|        |      ;
     dl $0C09B3,$100DB3                                         ;80E8EB|        |      ;
     dw $FFFE                                                   ;80E8F1|        |      ;
-    dl DATA24_80E8DF                                           ;80E8F3|        |80E8DF;
+    dl aPaletteAnim_Row3Col0B_80E8DF                                           ;80E8F3|        |80E8DF;
  
-DATA24_80E8F6:
+aPaletteAnim_Row3Col08_80E8F6:
     dl $10194E,$10110C,$0F110B,$10110B                         ;80E8F6|        |      ;
     dl $0C110B,$10110C                                         ;80E902|        |      ;
     dw $FFFE                                                   ;80E908|        |      ;
-    dl DATA24_80E8F6                                           ;80E90A|        |80E8F6;
+    dl aPaletteAnim_Row3Col08_80E8F6                                           ;80E90A|        |80E8F6;
  
-DATA24_80E90D:
+aPaletteAnim_Row3Col09_80E90D:
     dl $10110C,$10110B,$0F110B,$10194E                         ;80E90D|        |      ;
     dl $0C110B,$10110B                                         ;80E919|        |      ;
     dw $FFFE                                                   ;80E91F|        |      ;
-    dl DATA24_80E90D                                           ;80E921|        |80E90D;
+    dl aPaletteAnim_Row3Col09_80E90D                                           ;80E921|        |80E90D;
  
-DATA24_80E924:
+aPaletteAnim_Row3Col0A_80E924:
     dl $10110B,$10110B,$0F194E,$10110C                         ;80E924|        |      ;
     dl $0C194E,$10110B                                         ;80E930|        |      ;
     dw $FFFE                                                   ;80E936|        |      ;
-    dl DATA24_80E924                                           ;80E938|        |80E924;
+    dl aPaletteAnim_Row3Col0A_80E924                                           ;80E938|        |80E924;
  
-DATA24_80E93B:
+aPaletteAnim_Row3Col0B_80E93B:
     dl $10110B,$10194E,$0F110C,$10110B                         ;80E93B|        |      ;
     dl $0C110C,$10194E                                         ;80E947|        |      ;
     dw $FFFE                                                   ;80E94D|        |      ;
-    dl DATA24_80E93B                                           ;80E94F|        |80E93B;
+    dl aPaletteAnim_Row3Col0B_80E93B                                           ;80E94F|        |80E93B;
  
-DATA24_80E952:
+aPaletteAnim_Row3Col06_80E952:
     dl $1021AC,$101D8B,$0F0D2B,$100D2B                         ;80E952|        |      ;
     dl $0C0D2B,$101D8B                                         ;80E95E|        |      ;
     dw $FFFE                                                   ;80E964|        |      ;
-    dl DATA24_80E952                                           ;80E966|        |80E952;
+    dl aPaletteAnim_Row3Col06_80E952                                           ;80E966|        |80E952;
  
-DATA24_80E969:
+aPaletteAnim_Row3Col07_80E969:
     dl $100D2B,$100D2B,$0F1D8B,$1021AC                         ;80E969|        |      ;
     dl $0C1D8B,$100D2B                                         ;80E975|        |      ;
     dw $FFFE                                                   ;80E97B|        |      ;
-    dl DATA24_80E969                                           ;80E97D|        |80E969;
+    dl aPaletteAnim_Row3Col07_80E969                                           ;80E97D|        |80E969;
  
-DATA24_80E980:
+aPaletteAnim_Row3Col08_80E980:
     dl $1032FE,$1021EE,$0F29D1,$102214                         ;80E980|        |      ;
     dl $0C29D1,$1021EE                                         ;80E98C|        |      ;
     dw $FFFE                                                   ;80E992|        |      ;
-    dl DATA24_80E980                                           ;80E994|        |80E980;
+    dl aPaletteAnim_Row3Col08_80E980                                           ;80E994|        |80E980;
  
-DATA24_80E997:
+aPaletteAnim_Row3Col09_80E997:
     dl $1029F5,$102E76,$0F21EE,$1029D1                         ;80E997|        |      ;
     dl $0C21EE,$102E76                                         ;80E9A3|        |      ;
     dw $FFFE                                                   ;80E9A9|        |      ;
-    dl DATA24_80E997                                           ;80E9AB|        |80E997;
+    dl aPaletteAnim_Row3Col09_80E997                                           ;80E9AB|        |80E997;
  
-DATA24_80E9AE:
+aPaletteAnim_Row3Col0A_80E9AE:
     dl $1015F4,$103214,$0F2E33,$1021EE                         ;80E9AE|        |      ;
     dl $0C2E33,$103214                                         ;80E9BA|        |      ;
     dw $FFFE                                                   ;80E9C0|        |      ;
-    dl DATA24_80E9AE                                           ;80E9C2|        |80E9AE;
+    dl aPaletteAnim_Row3Col0A_80E9AE                                           ;80E9C2|        |80E9AE;
  
-DATA24_80E9C5:
+aPaletteAnim_Row3Col0B_80E9C5:
     dl $101DD3,$1029D1,$0F2E34,$101DD1                         ;80E9C5|        |      ;
     dl $0C2E34,$1029D1                                         ;80E9D1|        |      ;
     dw $FFFE                                                   ;80E9D7|        |      ;
-    dl DATA24_80E9C5                                           ;80E9D9|        |80E9C5;
+    dl aPaletteAnim_Row3Col0B_80E9C5                                           ;80E9D9|        |80E9C5;
  
-DATA24_80E9DC:
+aPaletteAnim_Row3Col0C_80E9DC:
     dl $1025EF,$1025CE,$0F25AE,$1025AD                         ;80E9DC|        |      ;
     dl $0C25AE,$1025CE                                         ;80E9E8|        |      ;
     dw $FFFE                                                   ;80E9EE|        |      ;
-    dl DATA24_80E9DC                                           ;80E9F0|        |80E9DC;
+    dl aPaletteAnim_Row3Col0C_80E9DC                                           ;80E9F0|        |80E9DC;
  
-DATA24_80E9F3:
+aPaletteAnim_Row3Col06_80E9F3:
     dl $10214E,$101D4F,$0F1DB4,$101DB4                         ;80E9F3|        |      ;
     dl $0C1DB4,$101D4F                                         ;80E9FF|        |      ;
     dw $FFFE                                                   ;80EA05|        |      ;
-    dl DATA24_80E9F3                                           ;80EA07|        |80E9F3;
+    dl aPaletteAnim_Row3Col06_80E9F3                                           ;80EA07|        |80E9F3;
  
-DATA24_80EA0A:
+aPaletteAnim_Row3Col07_80EA0A:
     dl $101DB4,$101D72,$0F1D72,$101D4F                         ;80EA0A|        |      ;
     dl $0C1D72,$101D72                                         ;80EA16|        |      ;
     dw $FFFE                                                   ;80EA1C|        |      ;
-    dl DATA24_80EA0A                                           ;80EA1E|        |80EA0A;
+    dl aPaletteAnim_Row3Col07_80EA0A                                           ;80EA1E|        |80EA0A;
  
-DATA24_80EA21:
+aPaletteAnim_Row3Col08_80EA21:
     dl $10377F,$1021B0,$0F161C,$101A59                         ;80EA21|        |      ;
     dl $0C161C,$1021B0                                         ;80EA2D|        |      ;
     dw $FFFE                                                   ;80EA33|        |      ;
-    dl DATA24_80EA21                                           ;80EA35|        |80EA21;
+    dl aPaletteAnim_Row3Col08_80EA21                                           ;80EA35|        |80EA21;
  
-DATA24_80EA38:
+aPaletteAnim_Row3Col09_80EA38:
     dl $101A59,$101A9B,$0F21B0,$10161C                         ;80EA38|        |      ;
     dl $0C21B0,$101A9B                                         ;80EA44|        |      ;
     dw $FFFE                                                   ;80EA4A|        |      ;
-    dl DATA24_80EA38                                           ;80EA4C|        |80EA38;
+    dl aPaletteAnim_Row3Col09_80EA38                                           ;80EA4C|        |80EA38;
  
-DATA24_80EA4F:
+aPaletteAnim_Row3Col0A_80EA4F:
     dl $10161C,$101A59,$0F1B1F,$1021B0                         ;80EA4F|        |      ;
     dl $0C1B1F,$101A59                                         ;80EA5B|        |      ;
     dw $FFFE                                                   ;80EA61|        |      ;
-    dl DATA24_80EA4F                                           ;80EA63|        |80EA4F;
+    dl aPaletteAnim_Row3Col0A_80EA4F                                           ;80EA63|        |80EA4F;
  
-DATA24_80EA66:
+aPaletteAnim_Row3Col0B_80EA66:
     dl $100994,$10161C,$0F1A59,$101A9B                         ;80EA66|        |      ;
     dl $0C1A59,$10161C                                         ;80EA72|        |      ;
     dw $FFFE                                                   ;80EA78|        |      ;
-    dl DATA24_80EA66                                           ;80EA7A|        |80EA66;
+    dl aPaletteAnim_Row3Col0B_80EA66                                           ;80EA7A|        |80EA66;
  
-DATA24_80EA7D:
+aPaletteAnim_Row3Col0C_80EA7D:
     dl $102190,$1021B0,$0F2191,$1021B1                         ;80EA7D|        |      ;
     dl $0C2191,$1021B0                                         ;80EA89|        |      ;
     dw $FFFE                                                   ;80EA8F|        |      ;
-    dl DATA24_80EA7D                                           ;80EA91|        |80EA7D;
+    dl aPaletteAnim_Row3Col0C_80EA7D                                           ;80EA91|        |80EA7D;
  
-DATA24_80EA94:
+aPaletteAnim_Row3Col08_80EA94:
     dl $101D4C,$10218E,$0F21B0,$1021B2                         ;80EA94|        |      ;
     dl $0C21B0,$10218E                                         ;80EAA0|        |      ;
     dw $FFFE                                                   ;80EAA6|        |      ;
-    dl DATA24_80EA94                                           ;80EAA8|        |80EA94;
+    dl aPaletteAnim_Row3Col08_80EA94                                           ;80EAA8|        |80EA94;
  
-DATA24_80EAAB:
+aPaletteAnim_Row3Col09_80EAAB:
     dl $1021B2,$101D4C,$0F218E,$1021B0                         ;80EAAB|        |      ;
     dl $0C218E,$101D4C                                         ;80EAB7|        |      ;
     dw $FFFE                                                   ;80EABD|        |      ;
-    dl DATA24_80EAAB                                           ;80EABF|        |80EAAB;
+    dl aPaletteAnim_Row3Col09_80EAAB                                           ;80EABF|        |80EAAB;
  
-DATA24_80EAC2:
+aPaletteAnim_Row3Col0A_80EAC2:
     dl $1021B0,$1021B2,$0F1D4C,$10218E                         ;80EAC2|        |      ;
     dl $0C1D4C,$1021B2                                         ;80EACE|        |      ;
     dw $FFFE                                                   ;80EAD4|        |      ;
-    dl DATA24_80EAC2                                           ;80EAD6|        |80EAC2;
+    dl aPaletteAnim_Row3Col0A_80EAC2                                           ;80EAD6|        |80EAC2;
  
-DATA24_80EAD9:
+aPaletteAnim_Row3Col0B_80EAD9:
     dl $10218E,$1021B0,$0F21B2,$101D4C                         ;80EAD9|        |      ;
     dl $0C21B2,$1021B0                                         ;80EAE5|        |      ;
     dw $FFFE                                                   ;80EAEB|        |      ;
-    dl DATA24_80EAD9                                           ;80EAED|        |80EAD9;
+    dl aPaletteAnim_Row3Col0B_80EAD9                                           ;80EAED|        |80EAD9;
  
-DATA24_80EAF0:
+aPaletteAnim_Row3Col08_80EAF0:
     dl $101D6C,$101509,$0F1D2C,$101D4C                         ;80EAF0|        |      ;
     dl $0C1D2C,$101509                                         ;80EAFC|        |      ;
     dw $FFFE                                                   ;80EB02|        |      ;
-    dl DATA24_80EAF0                                           ;80EB04|        |80EAF0;
+    dl aPaletteAnim_Row3Col08_80EAF0                                           ;80EB04|        |80EAF0;
  
-DATA24_80EB07:
+aPaletteAnim_Row3Col09_80EB07:
     dl $101D4C,$101D6C,$0F1509,$101D2C                         ;80EB07|        |      ;
     dl $0C1509,$101D6C                                         ;80EB13|        |      ;
     dw $FFFE                                                   ;80EB19|        |      ;
-    dl DATA24_80EB07                                           ;80EB1B|        |80EB07;
+    dl aPaletteAnim_Row3Col09_80EB07                                           ;80EB1B|        |80EB07;
  
-DATA24_80EB1E:
+aPaletteAnim_Row3Col0A_80EB1E:
     dl $101D2C,$101D4C,$0F1D6C,$101509                         ;80EB1E|        |      ;
     dl $0C1D6C,$101D4C                                         ;80EB2A|        |      ;
     dw $FFFE                                                   ;80EB30|        |      ;
-    dl DATA24_80EB1E                                           ;80EB32|        |80EB1E;
+    dl aPaletteAnim_Row3Col0A_80EB1E                                           ;80EB32|        |80EB1E;
  
-DATA24_80EB35:
+aPaletteAnim_Row3Col0B_80EB35:
     dl $101509,$101D2C,$0F1D4C,$101D6C                         ;80EB35|        |      ;
     dl $0C1D4C,$101D2C                                         ;80EB41|        |      ;
     dw $FFFE                                                   ;80EB47|        |      ;
-    dl DATA24_80EB35                                           ;80EB49|        |80EB35;
+    dl aPaletteAnim_Row3Col0B_80EB35                                           ;80EB49|        |80EB35;
  
-DATA24_80EB4C:
+aPaletteAnim_Row4Col0A_80EB4C:
     dl $1077DB,$107398,$107398,$107398                         ;80EB4C|        |      ;
     dw $FFFE                                                   ;80EB58|        |      ;
-    dl DATA24_80EB4C                                           ;80EB5A|        |80EB4C;
+    dl aPaletteAnim_Row4Col0A_80EB4C                                           ;80EB5A|        |80EB4C;
  
-DATA24_80EB5D:
+aPaletteAnim_Row4Col0B_80EB5D:
     dl $107398,$107398,$1077DB,$107398                         ;80EB5D|        |      ;
     dw $FFFE                                                   ;80EB69|        |      ;
-    dl DATA24_80EB5D                                           ;80EB6B|        |80EB5D;
+    dl aPaletteAnim_Row4Col0B_80EB5D                                           ;80EB6B|        |80EB5D;
  
-DATA24_80EB6E:
+aPaletteAnim_Row4Col0A_80EB6E:
     dl $105F7D,$104B3B,$104B3B,$104B3B                         ;80EB6E|        |      ;
     dw $FFFE                                                   ;80EB7A|        |      ;
-    dl DATA24_80EB6E                                           ;80EB7C|        |80EB6E;
+    dl aPaletteAnim_Row4Col0A_80EB6E                                           ;80EB7C|        |80EB6E;
  
-DATA24_80EB7F:
+aPaletteAnim_Row4Col0B_80EB7F:
     dl $104B3B,$104B3B,$105F7D,$104B3B                         ;80EB7F|        |      ;
     dw $FFFE                                                   ;80EB8B|        |      ;
-    dl DATA24_80EB7F                                           ;80EB8D|        |80EB7F;
+    dl aPaletteAnim_Row4Col0B_80EB7F                                           ;80EB8D|        |80EB7F;
  
-DATA24_80EB90:
+aPaletteAnim_Row4Col0A_80EB90:
     dl $103295,$102E52,$102E52,$102E52                         ;80EB90|        |      ;
     dw $FFFE                                                   ;80EB9C|        |      ;
-    dl DATA24_80EB90                                           ;80EB9E|        |80EB90;
+    dl aPaletteAnim_Row4Col0A_80EB90                                           ;80EB9E|        |80EB90;
  
-DATA24_80EBA1:
+aPaletteAnim_Row4Col0B_80EBA1:
     dl $102E52,$102E52,$103295,$102E52                         ;80EBA1|        |      ;
     dw $FFFE                                                   ;80EBAD|        |      ;
-    dl DATA24_80EBA1                                           ;80EBAF|        |80EBA1;
+    dl aPaletteAnim_Row4Col0B_80EBA1                                           ;80EBAF|        |80EBA1;
  
-DATA24_80EBB2:
+aPaletteAnim_Row4Col0A_80EBB2:
     dl $10314A,$102D29,$102D29,$102D29                         ;80EBB2|        |      ;
     dw $FFFE                                                   ;80EBBE|        |      ;
-    dl DATA24_80EBB2                                           ;80EBC0|        |80EBB2;
+    dl aPaletteAnim_Row4Col0A_80EBB2                                           ;80EBC0|        |80EBB2;
  
-DATA24_80EBC3:
+aPaletteAnim_Row4Col0B_80EBC3:
     dl $102D29,$102D29,$10314A,$102D29                         ;80EBC3|        |      ;
     dw $FFFE                                                   ;80EBCF|        |      ;
-    dl DATA24_80EBC3                                           ;80EBD1|        |80EBC3;
+    dl aPaletteAnim_Row4Col0B_80EBC3                                           ;80EBD1|        |80EBC3;
  
-DATA24_80EBD4:
+aPaletteAnim_Row4Col0A_80EBD4:
     dl $107799,$106334,$106334,$106334                         ;80EBD4|        |      ;
     dw $FFFE                                                   ;80EBE0|        |      ;
-    dl DATA24_80EBD4                                           ;80EBE2|        |80EBD4;
+    dl aPaletteAnim_Row4Col0A_80EBD4                                           ;80EBE2|        |80EBD4;
  
-DATA24_80EBE5:
+aPaletteAnim_Row4Col0B_80EBE5:
     dl $106334,$106334,$1077DB,$106334                         ;80EBE5|        |      ;
     dw $FFFE                                                   ;80EBF1|        |      ;
-    dl DATA24_80EBE5                                           ;80EBF3|        |80EBE5;
+    dl aPaletteAnim_Row4Col0B_80EBE5                                           ;80EBF3|        |80EBE5;
  
-DATA24_80EBF6:
+aPaletteAnim_Row4Col0A_80EBF6:
     dl $10677E,$10471C,$10471C,$10471C                         ;80EBF6|        |      ;
     dw $FFFE                                                   ;80EC02|        |      ;
-    dl DATA24_80EBF6                                           ;80EC04|        |80EBF6;
+    dl aPaletteAnim_Row4Col0A_80EBF6                                           ;80EC04|        |80EBF6;
  
-DATA24_80EC07:
+aPaletteAnim_Row4Col0B_80EC07:
     dl $10471C,$10471C,$10677E,$10471C                         ;80EC07|        |      ;
     dw $FFFE                                                   ;80EC13|        |      ;
-    dl DATA24_80EC07                                           ;80EC15|        |80EC07;
+    dl aPaletteAnim_Row4Col0B_80EC07                                           ;80EC15|        |80EC07;
  
-DATA24_80EC18:
+aPaletteAnim_Row4Col0A_80EC18:
     dl $105694,$104E31,$104E31,$104E31                         ;80EC18|        |      ;
     dw $FFFE                                                   ;80EC24|        |      ;
-    dl DATA24_80EC18                                           ;80EC26|        |80EC18;
+    dl aPaletteAnim_Row4Col0A_80EC18                                           ;80EC26|        |80EC18;
  
-DATA24_80EC29:
+aPaletteAnim_Row4Col0B_80EC29:
     dl $104E31,$104E31,$105694,$104E31                         ;80EC29|        |      ;
     dw $FFFE                                                   ;80EC35|        |      ;
-    dl DATA24_80EC29                                           ;80EC37|        |80EC29;
+    dl aPaletteAnim_Row4Col0B_80EC29                                           ;80EC37|        |80EC29;
  
-DATA24_80EC3A:
+aPaletteAnim_Row4Col0A_80EC3A:
     dl $10498C,$10414A,$10414A,$10414A                         ;80EC3A|        |      ;
     dw $FFFE                                                   ;80EC46|        |      ;
-    dl DATA24_80EC3A                                           ;80EC48|        |80EC3A;
+    dl aPaletteAnim_Row4Col0A_80EC3A                                           ;80EC48|        |80EC3A;
  
-DATA24_80EC4B:
+aPaletteAnim_Row4Col0B_80EC4B:
     dl $10414A,$10414A,$10498C,$10414A                         ;80EC4B|        |      ;
     dw $FFFE                                                   ;80EC57|        |      ;
-    dl DATA24_80EC4B                                           ;80EC59|        |80EC4B;
+    dl aPaletteAnim_Row4Col0B_80EC4B                                           ;80EC59|        |80EC4B;
  
-DATA24_80EC5C:
+aPaletteAnim_Row4Col0A_80EC5C:
     dl $107376,$106334,$106334,$106334                         ;80EC5C|        |      ;
     dw $FFFE                                                   ;80EC68|        |      ;
-    dl DATA24_80EC5C                                           ;80EC6A|        |80EC5C;
+    dl aPaletteAnim_Row4Col0A_80EC5C                                           ;80EC6A|        |80EC5C;
  
-DATA24_80EC6D:
+aPaletteAnim_Row4Col0B_80EC6D:
     dl $106334,$106334,$107376,$106334                         ;80EC6D|        |      ;
     dw $FFFE                                                   ;80EC79|        |      ;
-    dl DATA24_80EC6D                                           ;80EC7B|        |80EC6D;
+    dl aPaletteAnim_Row4Col0B_80EC6D                                           ;80EC7B|        |80EC6D;
  
-DATA24_80EC7E:
+aPaletteAnim_Row4Col0A_80EC7E:
     dl $10537F,$1042FB,$1042FB,$1042FB                         ;80EC7E|        |      ;
     dw $FFFE                                                   ;80EC8A|        |      ;
-    dl DATA24_80EC7E                                           ;80EC8C|        |80EC7E;
+    dl aPaletteAnim_Row4Col0A_80EC7E                                           ;80EC8C|        |80EC7E;
  
-DATA24_80EC8F:
+aPaletteAnim_Row4Col0B_80EC8F:
     dl $1042FB,$1042FB,$10537F,$1042FB                         ;80EC8F|        |      ;
     dw $FFFE                                                   ;80EC9B|        |      ;
-    dl DATA24_80EC8F                                           ;80EC9D|        |80EC8F;
+    dl aPaletteAnim_Row4Col0B_80EC8F                                           ;80EC9D|        |80EC8F;
  
-DATA24_80ECA0:
+aPaletteAnim_Row4Col0A_80ECA0:
     dl $104671,$103E31,$103E31,$103E31                         ;80ECA0|        |      ;
     dw $FFFE                                                   ;80ECAC|        |      ;
-    dl DATA24_80ECA0                                           ;80ECAE|        |80ECA0;
+    dl aPaletteAnim_Row4Col0A_80ECA0                                           ;80ECAE|        |80ECA0;
  
-DATA24_80ECB1:
+aPaletteAnim_Row4Col0B_80ECB1:
     dl $103E31,$103E31,$104671,$103E31                         ;80ECB1|        |      ;
     dw $FFFE                                                   ;80ECBD|        |      ;
-    dl DATA24_80ECB1                                           ;80ECBF|        |80ECB1;
+    dl aPaletteAnim_Row4Col0B_80ECB1                                           ;80ECBF|        |80ECB1;
  
-DATA24_80ECC2:
+aPaletteAnim_Row4Col0A_80ECC2:
     dl $10316A,$102D49,$102D49,$102D49                         ;80ECC2|        |      ;
     dw $FFFE                                                   ;80ECCE|        |      ;
-    dl DATA24_80ECC2                                           ;80ECD0|        |80ECC2;
+    dl aPaletteAnim_Row4Col0A_80ECC2                                           ;80ECD0|        |80ECC2;
     dl $102D49,$102D49,$10316A,$102D49                         ;80ECD3|        |      ;
     dw $FFFE                                                   ;80ECDF|        |      ;
-    dl DATA24_80ECC2                                           ;80ECE1|        |80ECC2;
+    dl aPaletteAnim_Row4Col0A_80ECC2                                           ;80ECE1|        |80ECC2;
  
-DATA24_80ECE4:
+aPaletteAnim_Row4Col0A_80ECE4:
     dl $10779B,$107377,$107377,$107377                         ;80ECE4|        |      ;
     dw $FFFE                                                   ;80ECF0|        |      ;
-    dl DATA24_80ECE4                                           ;80ECF2|        |80ECE4;
+    dl aPaletteAnim_Row4Col0A_80ECE4                                           ;80ECF2|        |80ECE4;
  
-DATA24_80ECF5:
+aPaletteAnim_Row4Col0B_80ECF5:
     dl $107377,$107377,$10779B,$107377                         ;80ECF5|        |      ;
     dw $FFFE                                                   ;80ED01|        |      ;
-    dl DATA24_80ECF5                                           ;80ED03|        |80ECF5;
+    dl aPaletteAnim_Row4Col0B_80ECF5                                           ;80ED03|        |80ECF5;
  
-DATA24_80ED06:
+aPaletteAnim_Row4Col0A_80ED06:
     dl $106F59,$106B37,$106B37,$106B37                         ;80ED06|        |      ;
     dw $FFFE                                                   ;80ED12|        |      ;
-    dl DATA24_80ED06                                           ;80ED14|        |80ED06;
+    dl aPaletteAnim_Row4Col0A_80ED06                                           ;80ED14|        |80ED06;
  
-DATA24_80ED17:
+aPaletteAnim_Row4Col0B_80ED17:
     dl $106B37,$106B37,$106F59,$106B37                         ;80ED17|        |      ;
     dw $FFFE                                                   ;80ED23|        |      ;
-    dl DATA24_80ED17                                           ;80ED25|        |80ED17;
+    dl aPaletteAnim_Row4Col0B_80ED17                                           ;80ED25|        |80ED17;
  
-DATA24_80ED28:
+aPaletteAnim_Row4Col0A_80ED28:
     dl $105AB5,$105273,$105273,$105273                         ;80ED28|        |      ;
     dw $FFFE                                                   ;80ED34|        |      ;
-    dl DATA24_80ED28                                           ;80ED36|        |80ED28;
+    dl aPaletteAnim_Row4Col0A_80ED28                                           ;80ED36|        |80ED28;
  
-DATA24_80ED39:
+aPaletteAnim_Row4Col0B_80ED39:
     dl $105273,$105273,$105AB5,$105273                         ;80ED39|        |      ;
     dw $FFFE                                                   ;80ED45|        |      ;
-    dl DATA24_80ED39                                           ;80ED47|        |80ED39;
+    dl aPaletteAnim_Row4Col0B_80ED39                                           ;80ED47|        |80ED39;
  
-DATA24_80ED4A:
+aPaletteAnim_Row4Col0A_80ED4A:
     dl $104DEE,$1045CE,$1045CE,$1045CE                         ;80ED4A|        |      ;
     dw $FFFE                                                   ;80ED56|        |      ;
-    dl DATA24_80ED4A                                           ;80ED58|        |80ED4A;
+    dl aPaletteAnim_Row4Col0A_80ED4A                                           ;80ED58|        |80ED4A;
  
-DATA24_80ED5B:
+aPaletteAnim_Row4Col0B_80ED5B:
     dl $1045CE,$1045CE,$104DEE,$1045CE                         ;80ED5B|        |      ;
     dw $FFFE                                                   ;80ED67|        |      ;
-    dl DATA24_80ED5B                                           ;80ED69|        |80ED5B;
+    dl aPaletteAnim_Row4Col0B_80ED5B                                           ;80ED69|        |80ED5B;
  
-DATA24_80ED6C:
+aPaletteAnim_Row4Col03_80ED6C:
     dl $0C5185,$0C61E8,$0C6E4C,$0C7F0C                         ;80ED6C|        |      ;
     dl $0C6E4C,$0C61E8                                         ;80ED78|        |      ;
     dw $FFFE                                                   ;80ED7E|        |      ;
-    dl DATA24_80ED6C                                           ;80ED80|        |80ED6C;
+    dl aPaletteAnim_Row4Col03_80ED6C                                           ;80ED80|        |80ED6C;
  
-DATA24_80ED83:
+aPaletteAnim_Row4Col05_80ED83:
     dl $0C69E7,$0C7988,$0C69E7,$0C6167                         ;80ED83|        |      ;
     dl $0C69E7,$0C7988                                         ;80ED8F|        |      ;
     dw $FFFE                                                   ;80ED95|        |      ;
-    dl DATA24_80ED83                                           ;80ED97|        |80ED83;
+    dl aPaletteAnim_Row4Col05_80ED83                                           ;80ED97|        |80ED83;
  
-DATA24_80ED9A:
+aPaletteAnim_Row4Col0B_80ED9A:
     dl $0F7E2C,$0F7F97,$0F7F53,$0F7EE7                         ;80ED9A|        |      ;
     dw $FFFE                                                   ;80EDA6|        |      ;
-    dl DATA24_80ED9A                                           ;80EDA8|        |80ED9A;
+    dl aPaletteAnim_Row4Col0B_80ED9A                                           ;80EDA8|        |80ED9A;
  
-DATA24_80EDAB:
+aPaletteAnim_Row4Col0C_80EDAB:
     dl $0F7EEF,$0F7E2C,$0F7F97,$0F7F53                         ;80EDAB|        |      ;
     dw $FFFE                                                   ;80EDB7|        |      ;
-    dl DATA24_80EDAB                                           ;80EDB9|        |80EDAB;
+    dl aPaletteAnim_Row4Col0C_80EDAB                                           ;80EDB9|        |80EDAB;
  
-DATA24_80EDBC:
+aPaletteAnim_Row4Col0D_80EDBC:
     dl $0F7F53,$0F7EEF,$0F7E2C,$0F7F97                         ;80EDBC|        |      ;
     dw $FFFE                                                   ;80EDC8|        |      ;
-    dl DATA24_80EDBC                                           ;80EDCA|        |80EDBC;
+    dl aPaletteAnim_Row4Col0D_80EDBC                                           ;80EDCA|        |80EDBC;
  
-DATA24_80EDCD:
+aPaletteAnim_Row4Col0E_80EDCD:
     dl $0F7F97,$0F7F53,$0F7EE7,$0F7E2C                         ;80EDCD|        |      ;
     dw $FFFE                                                   ;80EDD9|        |      ;
-    dl DATA24_80EDCD                                           ;80EDDB|        |80EDCD;
+    dl aPaletteAnim_Row4Col0E_80EDCD                                           ;80EDDB|        |80EDCD;
  
-DATA24_80EDDE:
+aPaletteAnim_Row4Col0C_80EDDE:
     dl $0F0070,$0F0E5F,$0F03FF                                 ;80EDDE|        |      ;
     dw $FFFE                                                   ;80EDE7|        |      ;
-    dl DATA24_80EDDE                                           ;80EDE9|        |80EDDE;
+    dl aPaletteAnim_Row4Col0C_80EDDE                                           ;80EDE9|        |80EDDE;
  
-DATA24_80EDEC:
+aPaletteAnim_Row4Col0D_80EDEC:
     dl $0F0E5F,$0F0070,$0F03FF                                 ;80EDEC|        |      ;
     dw $FFFE                                                   ;80EDF5|        |      ;
-    dl DATA24_80EDEC                                           ;80EDF7|        |80EDEC;
+    dl aPaletteAnim_Row4Col0D_80EDEC                                           ;80EDF7|        |80EDEC;
  
-DATA24_80EDFA:
+aPaletteAnim_Row4Col0E_80EDFA:
     dl $0F03FF,$0F0E5F,$0F0070                                 ;80EDFA|        |      ;
     dw $FFFE                                                   ;80EE03|        |      ;
-    dl DATA24_80EDFA                                           ;80EE05|        |80EDFA;
+    dl aPaletteAnim_Row4Col0E_80EDFA                                           ;80EE05|        |80EDFA;
  
-DATA24_80EE08:
+aPaletteAnim_Row1Col07_80EE08:
     dl $08000C,$08000A,$080009                                 ;80EE08|        |      ;
     dw $FFFE                                                   ;80EE11|        |      ;
-    dl DATA24_80EE08                                           ;80EE13|        |80EE08;
+    dl aPaletteAnim_Row1Col07_80EE08                                           ;80EE13|        |80EE08;
  
-DATA24_80EE16:
+aPaletteAnim_Row1Col08_80EE16:
     dl $08000A,$0800D8,$08027E                                 ;80EE16|        |      ;
     dw $FFFE                                                   ;80EE1F|        |      ;
-    dl DATA24_80EE16                                           ;80EE21|        |80EE16;
+    dl aPaletteAnim_Row1Col08_80EE16                                           ;80EE21|        |80EE16;
  
-DATA24_80EE24:
+aPaletteAnim_Row1Col0D_80EE24:
     dl $08017F,$08029F,$0800D2                                 ;80EE24|        |      ;
     dw $FFFE                                                   ;80EE2D|        |      ;
-    dl DATA24_80EE24                                           ;80EE2F|        |80EE24;
+    dl aPaletteAnim_Row1Col0D_80EE24                                           ;80EE2F|        |80EE24;
  
-DATA24_80EE32:
+aPaletteAnim_Row1Col0E_80EE32:
     dl $08031F,$08035F,$0803FF                                 ;80EE32|        |      ;
     dw $FFFE                                                   ;80EE3B|        |      ;
-    dl DATA24_80EE32                                           ;80EE3D|        |80EE32;
+    dl aPaletteAnim_Row1Col0E_80EE32                                           ;80EE3D|        |80EE32;
  
-DATA24_80EE40:
+aPaletteAnim_Row3Col06_80EE40:
     dl $102279,$10229B,$1022DC                                 ;80EE40|        |      ;
     dw $FFFE                                                   ;80EE49|        |      ;
-    dl DATA24_80EE40                                           ;80EE4B|        |80EE40;
+    dl aPaletteAnim_Row3Col06_80EE40                                           ;80EE4B|        |80EE40;
  
-DATA24_80EE4E:
+aPaletteAnim_Row3Col09_80EE4E:
     dl $100854,$1008DE,$1008DC                                 ;80EE4E|        |      ;
     dw $FFFE                                                   ;80EE57|        |      ;
-    dl DATA24_80EE4E                                           ;80EE59|        |80EE4E;
+    dl aPaletteAnim_Row3Col09_80EE4E                                           ;80EE59|        |80EE4E;
  
-DATA24_80EE5C:
+aPaletteAnim_Row3Col0A_80EE5C:
     dl $10089D,$1008DE,$10091F                                 ;80EE5C|        |      ;
     dw $FFFE                                                   ;80EE65|        |      ;
-    dl DATA24_80EE5C                                           ;80EE67|        |80EE5C;
+    dl aPaletteAnim_Row3Col0A_80EE5C                                           ;80EE67|        |80EE5C;
  
-DATA24_80EE6A:
+aPaletteAnim_Row3Col0B_80EE6A:
     dl $1008DF,$1008DF,$100A1F                                 ;80EE6A|        |      ;
     dw $FFFE                                                   ;80EE73|        |      ;
-    dl DATA24_80EE6A                                           ;80EE75|        |80EE6A;
+    dl aPaletteAnim_Row3Col0B_80EE6A                                           ;80EE75|        |80EE6A;
  
-DATA24_80EE78:
+aPaletteAnim_Row3Col0C_80EE78:
     dl $1008DF,$100A3F,$100A9F                                 ;80EE78|        |      ;
     dw $FFFE                                                   ;80EE81|        |      ;
-    dl DATA24_80EE78                                           ;80EE83|        |80EE78;
+    dl aPaletteAnim_Row3Col0C_80EE78                                           ;80EE83|        |80EE78;
  
-DATA24_80EE86:
+aPaletteAnim_Row3Col0D_80EE86:
     dl $10029F,$10029F,$10031F                                 ;80EE86|        |      ;
     dw $FFFE                                                   ;80EE8F|        |      ;
-    dl DATA24_80EE86                                           ;80EE91|        |80EE86;
+    dl aPaletteAnim_Row3Col0D_80EE86                                           ;80EE91|        |80EE86;
  
-DATA24_80EE94:
+aPaletteAnim_Row3Col0E_80EE94:
     dl $10035F,$1003DF,$1003FF                                 ;80EE94|        |      ;
     dw $FFFE                                                   ;80EE9D|        |      ;
-    dl DATA24_80EE94                                           ;80EE9F|        |80EE94;
+    dl aPaletteAnim_Row3Col0E_80EE94                                           ;80EE9F|        |80EE94;
  
-DATA24_80EEA2:
+aPaletteAnim_Row6Col0C_80EEA2:
     dl $0C0A3C,$0C00DB,$0C00DF,$0C00DF                         ;80EEA2|        |      ;
     dw $FFFE                                                   ;80EEAE|        |      ;
-    dl DATA24_80EEA2                                           ;80EEB0|        |80EEA2;
+    dl aPaletteAnim_Row6Col0C_80EEA2                                           ;80EEB0|        |80EEA2;
  
-DATA24_80EEB3:
+aPaletteAnim_Row6Col0D_80EEB3:
     dl $0C09B3,$0C11FF,$0C0A5F,$0C125F                         ;80EEB3|        |      ;
     dw $FFFE                                                   ;80EEBF|        |      ;
-    dl DATA24_80EEB3                                           ;80EEC1|        |80EEB3;
+    dl aPaletteAnim_Row6Col0D_80EEB3                                           ;80EEC1|        |80EEB3;
  
-DATA24_80EEC4:
+aPaletteAnim_Row6Col0F_80EEC4:
     dl $0C0992,$0C0A15,$0C023A,$0C133F                         ;80EEC4|        |      ;
     dw $FFFE                                                   ;80EED0|        |      ;
-    dl DATA24_80EEC4                                           ;80EED2|        |80EEC4;
+    dl aPaletteAnim_Row6Col0F_80EEC4                                           ;80EED2|        |80EEC4;
  
-DATA24_80EED5:
+aPaletteAnim_Row6Col05_80EED5:
     dl $102A98,$10433D,$102A98,$104F7F                         ;80EED5|        |      ;
     dl $104F5F,$10433D                                         ;80EEE1|        |      ;
     dw $FFFE                                                   ;80EEE7|        |      ;
-    dl DATA24_80EED5                                           ;80EEE9|        |80EED5;
+    dl aPaletteAnim_Row6Col05_80EED5                                           ;80EEE9|        |80EED5;
  
-DATA24_80EEEC:
+aPaletteAnim_Row6Col0E_80EEEC:
     dl $1042FA,$102A98,$1042FA,$102ADB                         ;80EEEC|        |      ;
     dl $10371C,$102A98,$102ADB                                 ;80EEF8|        |      ;
     dw $FFFE                                                   ;80EF01|        |      ;
-    dl DATA24_80EEEC                                           ;80EF03|        |80EEEC;
+    dl aPaletteAnim_Row6Col0E_80EEEC                                           ;80EF03|        |80EEEC;
  
-DATA24_80EF06:
+aPaletteAnim_Row2Col07_80EF06:
     dl $080049,$08004C                                         ;80EF06|        |      ;
     dw $FFFE                                                   ;80EF0C|        |      ;
-    dl DATA24_80EF06                                           ;80EF0E|        |80EF06;
+    dl aPaletteAnim_Row2Col07_80EF06                                           ;80EF0E|        |80EF06;
  
-DATA24_80EF11:
+aPaletteAnim_Row2Col0D_80EF11:
     dl $080037,$08013D                                         ;80EF11|        |      ;
     dw $FFFE                                                   ;80EF17|        |      ;
-    dl DATA24_80EF11                                           ;80EF19|        |80EF11;
+    dl aPaletteAnim_Row2Col0D_80EF11                                           ;80EF19|        |80EF11;
  
-DATA24_80EF1C:
+aPaletteAnim_Row2Col0E_80EF1C:
     dl $08025F,$0802DF                                         ;80EF1C|        |      ;
     dw $FFFE                                                   ;80EF22|        |      ;
-    dl DATA24_80EF1C                                           ;80EF24|        |80EF1C;
+    dl aPaletteAnim_Row2Col0E_80EF1C                                           ;80EF24|        |80EF1C;
  
     pad $80FFB0

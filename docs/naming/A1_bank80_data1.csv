@@ -1,0 +1,146 @@
+old,new,confidence,reason
+subUnknown_80C36C,fPaletteAnim_FarmSpring_FarmSummer_T01,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80C3D9,fPaletteAnim_FarmSpring_FarmSummer_T2,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80C446,fPaletteAnim_FarmSpring_FarmSummer_T3,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80C4B3,fPaletteAnim_FarmSpring_FarmSummer_T4,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80C520,fPaletteAnim_FarmFall_T01,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80C58D,fPaletteAnim_FarmFall_T2,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80C5FA,fPaletteAnim_FarmFall_T3,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80C667,fPaletteAnim_FarmFall_T4,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80C6D4,fPaletteAnim_ImpUnderground_All,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80C792,fPaletteAnim_House1_House2_House3_All,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80C7FF,fPaletteAnim_MajorHouse_T1234,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80C86C,fPaletteAnim_Church_T1234,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80C945,fPaletteAnim_FloristBedroom_T1234,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80C9B2,fPaletteAnim_BarBedroom_T1234,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80CA1F,fPaletteAnim_ToolsShopBedroom_T1234,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80CA8C,fPaletteAnim_AnimalShop_T1234,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80CADE,fPaletteAnim_TownSpring_DancingS1_EggFestival_T1,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80CB30,fPaletteAnim_TownSpring_T2,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80CB82,fPaletteAnim_TownSpring_T3,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80CBD4,fPaletteAnim_TownSpring_T4,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80CC92,fPaletteAnim_TownSummer_T1,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80CCE4,fPaletteAnim_TownSummer_T2,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80CD36,fPaletteAnim_TownSummer_T3,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80CD88,fPaletteAnim_TownSummer_T4,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80CE46,fPaletteAnim_TownFall_NYPublicSquare_T1,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80CE98,fPaletteAnim_TownFall_T2,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80CEEA,fPaletteAnim_TownFall_T3,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80CF3C,fPaletteAnim_TownFall_T4,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80CFFA,fPaletteAnim_TownWinter_T4,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80D067,fPaletteAnim_WoodsSpring_T1,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80D125,fPaletteAnim_WoodsSpring_T2,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80D1E3,fPaletteAnim_WoodsSpring_T3,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80D2A1,fPaletteAnim_WoodsSpring_T4,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80D344,fPaletteAnim_WoodsSummer_T1,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80D402,fPaletteAnim_WoodsSummer_T2,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80D4C0,fPaletteAnim_WoodsSummer_T3,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80D563,fPaletteAnim_WoodsSummer_T4,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80D606,fPaletteAnim_WoodsFall_T1,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80D6FA,fPaletteAnim_WoodsFall_T2,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80D7EE,fPaletteAnim_WoodsFall_T3,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80D891,fPaletteAnim_WoodsFall_T4,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80D934,fPaletteAnim_WoodsWinter_NYSpa_T1,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80D96B,fPaletteAnim_WoodsWinter_NYSpa_T2,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80D9A2,fPaletteAnim_WoodsWinter_NYSpa_T3,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80D9D9,fPaletteAnim_WoodsWinter_NYSpa_T4,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80DA10,fPaletteAnim_MountainTopAllSeasonsAndNY_T4,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80DA47,fPaletteAnim_GoldChicken_All,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80DAB4,fPaletteAnim_NYPublicSquare_T4,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80DB06,fPaletteAnim_FortuneTeller_T1234,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80DC30,fPaletteAnim_DancingS2_T1,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+subUnknown_80DD09,fPaletteAnim_RestaurantBedroom_T1234,high,Palette animation setup routine: registers colour-cycle scripts into animation slots for these areas and time-of-day slots (selected via pSubrutineTable_80BEEC).
+DATA24_80DD78,aPaletteAnimScript_FarmSpring_FarmSummer_T01_Slot5,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80DD95,aPaletteAnimScript_FarmSpring_FarmSummer_T01_Slot6,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80DDB2,aPaletteAnimScript_FarmSpring_FarmSummer_T01_Slot7,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80DDCF,aPaletteAnimScript_FarmSpring_FarmSummer_T2_Slot4,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80DDEC,aPaletteAnimScript_FarmSpring_FarmSummer_T2_Slot5,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80DE09,aPaletteAnimScript_FarmSpring_FarmSummer_T2_Slot6,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80DE26,aPaletteAnimScript_FarmSpring_FarmSummer_T2_Slot7,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80DE43,aPaletteAnimScript_FarmSpring_FarmSummer_T3_Slot4,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80DE60,aPaletteAnimScript_FarmSpring_FarmSummer_T3_Slot5,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80DE7D,aPaletteAnimScript_FarmSpring_FarmSummer_T3_Slot6,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80DE9A,aPaletteAnimScript_FarmSpring_FarmSummer_T3_Slot7,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80DEB7,aPaletteAnimScript_FarmSpring_FarmSummer_T4_Slot4,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80DED4,aPaletteAnimScript_FarmSpring_FarmSummer_T4_Slot5,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80DEF1,aPaletteAnimScript_FarmSpring_FarmSummer_T4_Slot6,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80DF0E,aPaletteAnimScript_FarmSpring_FarmSummer_T4_Slot7,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80DF2B,aPaletteAnimScript_FarmFall_T01_Slot4,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80DF48,aPaletteAnimScript_FarmFall_T01_Slot5,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80DF65,aPaletteAnimScript_FarmFall_T01_Slot6,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80DF82,aPaletteAnimScript_FarmFall_T01_Slot7,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80DF9F,aPaletteAnimScript_FarmFall_T2_Slot4,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80DFBC,aPaletteAnimScript_FarmFall_T2_Slot5,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80DFD9,aPaletteAnimScript_FarmFall_T2_Slot6,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80DFF6,aPaletteAnimScript_FarmFall_T2_Slot7,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E013,aPaletteAnimScript_FarmFall_T3_Slot4,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E030,aPaletteAnimScript_FarmFall_T3_Slot5,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E04D,aPaletteAnimScript_FarmFall_T3_Slot6,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E06A,aPaletteAnimScript_FarmFall_T3_Slot7,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E087,aPaletteAnimScript_FarmFall_T4_Slot4,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E0A4,aPaletteAnimScript_FarmFall_T4_Slot5,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E0C1,aPaletteAnimScript_FarmFall_T4_Slot6,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E0DE,aPaletteAnimScript_FarmFall_T4_Slot7,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E0FB,aPaletteAnimScript_ImpUnderground_All_Slot4,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E10C,aPaletteAnimScript_ImpUnderground_All_Slot5,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E11D,aPaletteAnimScript_ImpUnderground_All_Slot6,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E12E,aPaletteAnimScript_ImpUnderground_All_Slot7,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E13F,aPaletteAnimScript_ImpUnderground_All_Slot8,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E150,aPaletteAnimScript_ImpUnderground_All_Slot9,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E161,aPaletteAnimScript_ImpUnderground_All_Slot10,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E172,aPaletteAnimScript_House1_House2_House3_All_Slot4,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E17D,aPaletteAnimScript_House1_House2_House3_All_Slot5,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E188,aPaletteAnimScript_House1_House2_House3_All_Slot6,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E193,aPaletteAnimScript_House1_House2_House3_All_Slot7,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E19E,aPaletteAnimScript_MajorHouse_T1234_Slot4,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E1A9,aPaletteAnimScript_MajorHouse_T1234_Slot5,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E1B4,aPaletteAnimScript_MajorHouse_T1234_Slot6,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E1BF,aPaletteAnimScript_MajorHouse_T1234_Slot7,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E1CA,aPaletteAnimScript_Church_T1234_Slot4,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E1DB,aPaletteAnimScript_Church_T1234_Slot5,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E1EC,aPaletteAnimScript_Church_T1234_Slot6,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E1FD,aPaletteAnimScript_Church_T1234_Slot7,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E20E,aPaletteAnimScript_Church_T1234_Slot8,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E21F,aPaletteAnimScript_Church_T1234_Slot9,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E230,aPaletteAnimScript_Church_T1234_Slot10,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E241,aPaletteAnimScript_Church_T1234_Slot11,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E252,aPaletteAnimScript_FloristBedroom_T1234_Slot4,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E25D,aPaletteAnimScript_FloristBedroom_T1234_Slot5,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E268,aPaletteAnimScript_FloristBedroom_T1234_Slot6,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E273,aPaletteAnimScript_FloristBedroom_T1234_Slot7,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E27E,aPaletteAnimScript_BarBedroom_T1234_Slot4,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E289,aPaletteAnimScript_BarBedroom_T1234_Slot5,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E294,aPaletteAnimScript_BarBedroom_T1234_Slot6,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E29F,aPaletteAnimScript_BarBedroom_T1234_Slot7,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E2AA,aPaletteAnimScript_ToolsShopBedroom_T1234_Slot4,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E2B5,aPaletteAnimScript_ToolsShopBedroom_T1234_Slot5,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E2C0,aPaletteAnimScript_ToolsShopBedroom_T1234_Slot6,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E2CB,aPaletteAnimScript_ToolsShopBedroom_T1234_Slot7,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E2D6,aPaletteAnimScript_AnimalShop_T1234_Slot4,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E2E1,aPaletteAnimScript_AnimalShop_T1234_Slot5,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E2EC,aPaletteAnimScript_AnimalShop_T1234_Slot6,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E2F7,aPaletteAnimScript_TownSpring_DancingS1_EggFestival_T1_Slot4,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E305,aPaletteAnimScript_TownSpring_DancingS1_EggFestival_T1_Slot5,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E313,aPaletteAnimScript_TownSpring_DancingS1_EggFestival_T1_Slot6,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E321,aPaletteAnimScript_TownSpring_T2_Slot4,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E32F,aPaletteAnimScript_TownSpring_T2_Slot5,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E33D,aPaletteAnimScript_TownSpring_T2_Slot6,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E34B,aPaletteAnimScript_TownSpring_T3_Slot4,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E359,aPaletteAnimScript_TownSpring_T3_Slot5,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E367,aPaletteAnimScript_TownSpring_T3_Slot6,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E375,aPaletteAnimScript_TownSpring_T4_Slot4,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E383,aPaletteAnimScript_TownSpring_T4_Slot5,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E391,aPaletteAnimScript_TownSpring_T4_Slot6,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E39F,aPaletteAnimScript_TownSummer_T1_Slot4,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E3AD,aPaletteAnimScript_TownSummer_T1_Slot5,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E3BB,aPaletteAnimScript_TownSummer_T1_Slot6,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E3C9,aPaletteAnimScript_TownSummer_T2_Slot4,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E3D7,aPaletteAnimScript_TownSummer_T2_Slot5,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E3E5,aPaletteAnimScript_TownSummer_T2_Slot6,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E3F3,aPaletteAnimScript_TownSummer_T3_Slot4,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E401,aPaletteAnimScript_TownSummer_T3_Slot5,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E40F,aPaletteAnimScript_TownSummer_T3_Slot6,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E41D,aPaletteAnimScript_TownSummer_T4_Slot4,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E42B,aPaletteAnimScript_TownSummer_T4_Slot5,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E439,aPaletteAnimScript_TownSummer_T4_Slot6,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."
+DATA24_80E447,aPaletteAnimScript_TownFall_NYPublicSquare_T1_Slot4,high,"Palette colour-cycle script: dw colour + db duration entries, $FFFE terminator followed by dl loop-back pointer."

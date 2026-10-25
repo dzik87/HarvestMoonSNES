@@ -71,7 +71,7 @@ fToolUsedSound_Unknown828FF3:
     LDA.L nToolSoundData_80B8CD,X                              ;82902C|BFCDB880|80B8CD;
     INC A                                                      ;829030|1A      |      ;
     STA.W strcAudio.index                                      ;829031|8D0301  |000103;
-    JSL.L fAudioUnknown_83833E                                 ;829034|223E8383|83833E;
+    JSL.L fAudio_PrepareSoundEffectSample                                 ;829034|223E8383|83833E;
  
   + SEP #$20                                                   ;829038|E220    |      ;
     REP #$10                                                   ;82903A|C210    |      ;
@@ -80,7 +80,7 @@ fToolUsedSound_Unknown828FF3:
     LDA.L nToolSoundData_829054,X                              ;82903E|BF549082|829054;
     BEQ .return                                                ;829042|F007    |82904B;
     STA.W strcAudio.reg114                                     ;829044|8D1401  |000114;
-    JSL.L fAudioUnknown_83833E                                 ;829047|223E8383|83833E;
+    JSL.L fAudio_PrepareSoundEffectSample                                 ;829047|223E8383|83833E;
  
 .return:
     SEP #$20                                                   ;82904B|E220    |      ;
@@ -565,7 +565,7 @@ fToolUsedAction0x01_Sickle:
     STA.W $0975                                                ;8293BA|8D7509  |000975;
     LDA.B #$00                                                 ;8293BD|A900    |      ;
     STA.W $0976                                                ;8293BF|8D7609  |000976;
-    JSL.L fUnknown_81A500                                      ;8293C2|2200A581|81A500;
+    JSL.L fObjectSlots_Allocate                                      ;8293C2|2200A581|81A500;
     BRA .label5                                                ;8293C6|803B    |829403;
  
  
@@ -590,7 +590,7 @@ fToolUsedAction0x01_Sickle:
     STA.W $0975                                                ;8293F7|8D7509  |000975;
     LDA.B #$00                                                 ;8293FA|A900    |      ;
     STA.W $0976                                                ;8293FC|8D7609  |000976;
-    JSL.L fUnknown_81A500                                      ;8293FF|2200A581|81A500;
+    JSL.L fObjectSlots_Allocate                                      ;8293FF|2200A581|81A500;
  
 .label5:
     SEP #$20                                                   ;829403|E220    |      ;
@@ -610,7 +610,7 @@ fToolUsedAction0x01_Sickle:
     LDA.W #$0012                                               ;82942D|A91200  |      ;
     LDX.W #$0000                                               ;829430|A20000  |      ;
     LDY.W #$0032                                               ;829433|A03200  |      ;
-    JSL.L fAI_Unknown8480F8                                    ;829436|22F88084|8480F8;
+    JSL.L fAI_StartSlotScriptAtFrontTile                                    ;829436|22F88084|8480F8;
     REP #$30                                                   ;82943A|C230    |      ;
     LDA.W #$0002                                               ;82943C|A90200  |      ;
     JSL.L fGameEngine_AddHappiness                             ;82943F|2282B283|83B282;
@@ -652,7 +652,7 @@ fToolUsedAction0x02_Plow:
     LDA.W #$0011                                               ;8294A3|A91100  |      ;
     LDX.W #$0000                                               ;8294A6|A20000  |      ;
     LDY.W #$0030                                               ;8294A9|A03000  |      ;
-    JSL.L fAI_Unknown8480F8                                    ;8294AC|22F88084|8480F8;
+    JSL.L fAI_StartSlotScriptAtFrontTile                                    ;8294AC|22F88084|8480F8;
     SEP #$20                                                   ;8294B0|E220    |      ;
     STZ.W strcStockData.unkMole                                ;8294B2|9C3A09  |00093A;
     REP #$20                                                   ;8294B5|C220    |      ;
@@ -675,7 +675,7 @@ fToolUsedAction0x02_Plow:
     LDA.W #$000F                                               ;8294F0|A90F00  |      ;
     LDX.W #$0000                                               ;8294F3|A20000  |      ;
     LDY.W #$003A                                               ;8294F6|A03A00  |      ;
-    JSL.L fAI_Unknown8480F8                                    ;8294F9|22F88084|8480F8; AI spawn coin
+    JSL.L fAI_StartSlotScriptAtFrontTile                                    ;8294F9|22F88084|8480F8; AI spawn coin
     REP #$20                                                   ;8294FD|C220    |      ;
     LDA.W #$0001                                               ;8294FF|A90100  |      ;
     STA.B ptrTemp0x72                                          ;829502|8572    |000072;
@@ -697,7 +697,7 @@ fToolUsedAction0x02_Plow:
     LDA.W #$000F                                               ;82952A|A90F00  |      ;
     LDX.W #$0000                                               ;82952D|A20000  |      ;
     LDY.W #$003B                                               ;829530|A03B00  |      ;
-    JSL.L fAI_Unknown8480F8                                    ;829533|22F88084|8480F8; AI for spawning money bag
+    JSL.L fAI_StartSlotScriptAtFrontTile                                    ;829533|22F88084|8480F8; AI for spawning money bag
     REP #$20                                                   ;829537|C220    |      ;
     LDA.W #$0005                                               ;829539|A90500  |      ;
     STA.B ptrTemp0x72                                          ;82953C|8572    |000072;
@@ -736,7 +736,7 @@ fToolUsedAction0x02_Plow:
     LDA.W #$0010                                               ;8295A1|A91000  |      ;
     LDX.W #$0000                                               ;8295A4|A20000  |      ;
     LDY.W #$001F                                               ;8295A7|A01F00  |      ;
-    JSL.L fAI_Unknown8480F8                                    ;8295AA|22F88084|8480F8;
+    JSL.L fAI_StartSlotScriptAtFrontTile                                    ;8295AA|22F88084|8480F8;
     BRA .return                                                ;8295AE|8000    |8295B0;
  
  
@@ -800,7 +800,7 @@ fToolUsedAction0x03_Hammer:
     STA.W $0975                                                ;829624|8D7509  |000975;
     LDA.B #$00                                                 ;829627|A900    |      ;
     STA.W $0976                                                ;829629|8D7609  |000976;
-    JSL.L fUnknown_81A500                                      ;82962C|2200A581|81A500;
+    JSL.L fObjectSlots_Allocate                                      ;82962C|2200A581|81A500;
     JMP.W .return                                              ;829630|4C2F97  |82972F;
  
  
@@ -896,7 +896,7 @@ fToolUsedAction0x03_Hammer:
     STA.W $0975                                                ;8296F0|8D7509  |000975;
     LDA.B #$00                                                 ;8296F3|A900    |      ;
     STA.W $0976                                                ;8296F5|8D7609  |000976;
-    JSL.L fUnknown_81A500                                      ;8296F8|2200A581|81A500;
+    JSL.L fObjectSlots_Allocate                                      ;8296F8|2200A581|81A500;
     BRA .return                                                ;8296FC|8031    |82972F;
  
  
@@ -918,7 +918,7 @@ fToolUsedAction0x03_Hammer:
     STA.W $0975                                                ;829723|8D7509  |000975;
     LDA.B #$00                                                 ;829726|A900    |      ;
     STA.W $0976                                                ;829728|8D7609  |000976;
-    JSL.L fUnknown_81A500                                      ;82972B|2200A581|81A500;
+    JSL.L fObjectSlots_Allocate                                      ;82972B|2200A581|81A500;
  
 .return:
     %SetPlayerAction(!PACTION_NONE)
@@ -943,7 +943,7 @@ fToolUsedAction0x03_Hammer:
     LDA.W #$0015                                               ;82975F|A91500  |      ;
     LDX.W #$0000                                               ;829762|A20000  |      ;
     LDY.W #$0016                                               ;829765|A01600  |      ;
-    JSL.L fAI_Unknown84803F                                    ;829768|223F8084|84803F; AI spawn power berry
+    JSL.L fAI_SetSlotScript                                    ;829768|223F8084|84803F; AI spawn power berry
     SEP #$20                                                   ;82976C|E220    |      ;
     LDA.B #$04                                                 ;82976E|A904    |      ;
     JSL.L fCore_GetRandomNumber                                ;829770|22F98980|8089F9;
@@ -964,7 +964,7 @@ fToolUsedAction0x03_Hammer:
     LDA.W #$0010                                               ;8297A0|A91000  |      ;
     LDX.W #$0000                                               ;8297A3|A20000  |      ;
     LDY.W #$001F                                               ;8297A6|A01F00  |      ;
-    JSL.L fAI_Unknown8480F8                                    ;8297A9|22F88084|8480F8;
+    JSL.L fAI_StartSlotScriptAtFrontTile                                    ;8297A9|22F88084|8480F8;
     REP #$30                                                   ;8297AD|C230    |      ;
     %SetFlag(daily2, !DFLAGS2_BROKECHICKENSTATUE)
     JMP.W .return                                              ;8297BA|4C2F97  |82972F;
@@ -1066,7 +1066,7 @@ fToolUsedAction0x04_Axe:
     LDA.W #$0010                                               ;829892|A91000  |      ;
     LDX.W #$0000                                               ;829895|A20000  |      ;
     LDY.W #$001F                                               ;829898|A01F00  |      ;
-    JSL.L fAI_Unknown8480F8                                    ;82989B|22F88084|8480F8;
+    JSL.L fAI_StartSlotScriptAtFrontTile                                    ;82989B|22F88084|8480F8;
     REP #$30                                                   ;82989F|C230    |      ;
     LDA.W nTileInFrontOfPlayerX                                ;8298A1|AD8509  |000985;
     SEC                                                        ;8298A4|38      |      ;
@@ -1119,7 +1119,7 @@ fToolUsedAction0x04_Axe:
     STA.W $0975                                                ;829901|8D7509  |000975;
     LDA.B #$00                                                 ;829904|A900    |      ;
     STA.W $0976                                                ;829906|8D7609  |000976;
-    JSL.L fUnknown_81A500                                      ;829909|2200A581|81A500;
+    JSL.L fObjectSlots_Allocate                                      ;829909|2200A581|81A500;
     REP #$20                                                   ;82990D|C220    |      ;
     LDA.W #$0006                                               ;82990F|A90600  |      ;
     JSL.L fGameEngine_AddWood                                  ;829912|2224B283|83B224;
@@ -1144,7 +1144,7 @@ fToolUsedAction0x04_Axe:
     STA.W $0975                                                ;82993D|8D7509  |000975;
     LDA.B #$00                                                 ;829940|A900    |      ;
     STA.W $0976                                                ;829942|8D7609  |000976;
-    JSL.L fUnknown_81A500                                      ;829945|2200A581|81A500;
+    JSL.L fObjectSlots_Allocate                                      ;829945|2200A581|81A500;
     BRA .return                                                ;829949|803E    |829989;
  
  
@@ -1656,7 +1656,7 @@ fToolUsedAction0x11_GoldenSickle:
     STA.W $0975                                                ;829DD8|8D7509  |000975;
     LDA.B #$00                                                 ;829DDB|A900    |      ;
     STA.W $0976                                                ;829DDD|8D7609  |000976;
-    JSL.L fUnknown_81A500                                      ;829DE0|2200A581|81A500;
+    JSL.L fObjectSlots_Allocate                                      ;829DE0|2200A581|81A500;
     BRA .label5                                                ;829DE4|803B    |829E21;
  
  
@@ -1681,7 +1681,7 @@ fToolUsedAction0x11_GoldenSickle:
     STA.W $0975                                                ;829E15|8D7509  |000975;
     LDA.B #$00                                                 ;829E18|A900    |      ;
     STA.W $0976                                                ;829E1A|8D7609  |000976;
-    JSL.L fUnknown_81A500                                      ;829E1D|2200A581|81A500;
+    JSL.L fObjectSlots_Allocate                                      ;829E1D|2200A581|81A500;
  
 .label5:
     SEP #$20                                                   ;829E21|E220    |      ;
@@ -1701,7 +1701,7 @@ fToolUsedAction0x11_GoldenSickle:
     LDA.W #$0012                                               ;829E4B|A91200  |      ;
     LDX.W #$0000                                               ;829E4E|A20000  |      ;
     LDY.W #$0032                                               ;829E51|A03200  |      ;
-    JSL.L fAI_Unknown8480F8                                    ;829E54|22F88084|8480F8;
+    JSL.L fAI_StartSlotScriptAtFrontTile                                    ;829E54|22F88084|8480F8;
     REP #$30                                                   ;829E58|C230    |      ;
     LDA.W #$0002                                               ;829E5A|A90200  |      ;
     JSL.L fGameEngine_AddHappiness                             ;829E5D|2282B283|83B282;
@@ -1757,7 +1757,7 @@ fToolUsedAction0x12_GoldenPlow:
     LDA.W #$0011                                               ;829EDB|A91100  |      ;
     LDX.W #$0000                                               ;829EDE|A20000  |      ;
     LDY.W #$0030                                               ;829EE1|A03000  |      ;
-    JSL.L fAI_Unknown8480F8                                    ;829EE4|22F88084|8480F8;
+    JSL.L fAI_StartSlotScriptAtFrontTile                                    ;829EE4|22F88084|8480F8;
     REP #$20                                                   ;829EE8|C220    |      ;
     %SetFlag(daily1, $1000)
     JMP.W .label6                                              ;829EF5|4CE39F  |829FE3;
@@ -1778,7 +1778,7 @@ fToolUsedAction0x12_GoldenPlow:
     LDA.W #$000F                                               ;829F23|A90F00  |      ;
     LDX.W #$0000                                               ;829F26|A20000  |      ;
     LDY.W #$003A                                               ;829F29|A03A00  |      ;
-    JSL.L fAI_Unknown8480F8                                    ;829F2C|22F88084|8480F8;
+    JSL.L fAI_StartSlotScriptAtFrontTile                                    ;829F2C|22F88084|8480F8;
     REP #$20                                                   ;829F30|C220    |      ;
     LDA.W #$0001                                               ;829F32|A90100  |      ;
     STA.B ptrTemp0x72                                          ;829F35|8572    |000072;
@@ -1800,7 +1800,7 @@ fToolUsedAction0x12_GoldenPlow:
     LDA.W #$000F                                               ;829F5D|A90F00  |      ;
     LDX.W #$0000                                               ;829F60|A20000  |      ;
     LDY.W #$003B                                               ;829F63|A03B00  |      ;
-    JSL.L fAI_Unknown8480F8                                    ;829F66|22F88084|8480F8;
+    JSL.L fAI_StartSlotScriptAtFrontTile                                    ;829F66|22F88084|8480F8;
     REP #$20                                                   ;829F6A|C220    |      ;
     LDA.W #$0005                                               ;829F6C|A90500  |      ;
     STA.B ptrTemp0x72                                          ;829F6F|8572    |000072;
@@ -1839,7 +1839,7 @@ fToolUsedAction0x12_GoldenPlow:
     LDA.W #$0010                                               ;829FD4|A91000  |      ;
     LDX.W #$0000                                               ;829FD7|A20000  |      ;
     LDY.W #$001F                                               ;829FDA|A01F00  |      ;
-    JSL.L fAI_Unknown8480F8                                    ;829FDD|22F88084|8480F8;
+    JSL.L fAI_StartSlotScriptAtFrontTile                                    ;829FDD|22F88084|8480F8;
     BRA .label6                                                ;829FE1|8000    |829FE3;
  
  
@@ -1918,7 +1918,7 @@ fToolUsedAction0x13_GolderHammer:
     STA.W $0975                                                ;82A06C|8D7509  |000975;
     LDA.B #$00                                                 ;82A06F|A900    |      ;
     STA.W $0976                                                ;82A071|8D7609  |000976;
-    JSL.L fUnknown_81A500                                      ;82A074|2200A581|81A500;
+    JSL.L fObjectSlots_Allocate                                      ;82A074|2200A581|81A500;
     JMP.W .loop                                                ;82A078|4C31A1  |82A131;
  
  
@@ -2003,7 +2003,7 @@ fToolUsedAction0x13_GolderHammer:
     STA.W $0975                                                ;82A125|8D7509  |000975;
     LDA.B #$00                                                 ;82A128|A900    |      ;
     STA.W $0976                                                ;82A12A|8D7609  |000976;
-    JSL.L fUnknown_81A500                                      ;82A12D|2200A581|81A500;
+    JSL.L fObjectSlots_Allocate                                      ;82A12D|2200A581|81A500;
  
 .loop:
     %SetPlayerAction(!PACTION_NONE)
@@ -2028,7 +2028,7 @@ fToolUsedAction0x13_GolderHammer:
     LDA.W #$0015                                               ;82A161|A91500  |      ;
     LDX.W #$0000                                               ;82A164|A20000  |      ;
     LDY.W #$0016                                               ;82A167|A01600  |      ;
-    JSL.L fAI_Unknown84803F                                    ;82A16A|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;82A16A|223F8084|84803F;
     SEP #$20                                                   ;82A16E|E220    |      ;
     LDA.B #$04                                                 ;82A170|A904    |      ;
     JSL.L fCore_GetRandomNumber                                ;82A172|22F98980|8089F9;
@@ -2049,7 +2049,7 @@ fToolUsedAction0x13_GolderHammer:
     LDA.W #$0010                                               ;82A1A2|A91000  |      ;
     LDX.W #$0000                                               ;82A1A5|A20000  |      ;
     LDY.W #$001F                                               ;82A1A8|A01F00  |      ;
-    JSL.L fAI_Unknown8480F8                                    ;82A1AB|22F88084|8480F8;
+    JSL.L fAI_StartSlotScriptAtFrontTile                                    ;82A1AB|22F88084|8480F8;
     REP #$30                                                   ;82A1AF|C230    |      ;
     %SetFlag(daily2, $0080)
     JMP.W .loop                                                ;82A1BC|4C31A1  |82A131;
@@ -2135,7 +2135,7 @@ fToolUsedAction0x14_GoldenAxe:
     LDA.W #$0010                                               ;82A273|A91000  |      ;
     LDX.W #$0000                                               ;82A276|A20000  |      ;
     LDY.W #$001F                                               ;82A279|A01F00  |      ;
-    JSL.L fAI_Unknown8480F8                                    ;82A27C|22F88084|8480F8;
+    JSL.L fAI_StartSlotScriptAtFrontTile                                    ;82A27C|22F88084|8480F8;
     REP #$30                                                   ;82A280|C230    |      ;
     LDA.W nTileInFrontOfPlayerX                                ;82A282|AD8509  |000985;
     SEC                                                        ;82A285|38      |      ;
@@ -2187,7 +2187,7 @@ fToolUsedAction0x14_GoldenAxe:
     STA.W $0975                                                ;82A2E2|8D7509  |000975;
     LDA.B #$00                                                 ;82A2E5|A900    |      ;
     STA.W $0976                                                ;82A2E7|8D7609  |000976;
-    JSL.L fUnknown_81A500                                      ;82A2EA|2200A581|81A500;
+    JSL.L fObjectSlots_Allocate                                      ;82A2EA|2200A581|81A500;
     REP #$20                                                   ;82A2EE|C220    |      ;
     LDA.W #$0006                                               ;82A2F0|A90600  |      ;
     JSL.L fGameEngine_AddWood                                  ;82A2F3|2224B283|83B224;
@@ -2266,7 +2266,7 @@ fToolUsedAction0x16_BeanstalkSeed:
     REP #$30                                                   ;82A389|C230    |      ;
     %SetFlag(event3, $0200)
     LDA.W #$0042                                               ;82A396|A94200  |      ;
-    JSL.L fUnknownCF_SetPointer                                ;82A399|22E1A581|81A5E1;
+    JSL.L fTileScript_Start                                ;82A399|22E1A581|81A5E1;
     SEP #$20                                                   ;82A39D|E220    |      ;
     STZ.W strcPlayerData.toolEquipped                          ;82A39F|9C2109  |000921;
  
@@ -2372,7 +2372,7 @@ fToolUsedAction0x19_ChickenFeed:
     STA.W $0975                                                ;82A498|8D7509  |000975;
     LDA.B #$00                                                 ;82A49B|A900    |      ;
     STA.W $0976                                                ;82A49D|8D7609  |000976;
-    JSL.L fUnknown_81A500                                      ;82A4A0|2200A581|81A500;
+    JSL.L fObjectSlots_Allocate                                      ;82A4A0|2200A581|81A500;
  
 .label2:
     %DecreaseStock(leftChickenFood)
@@ -2443,7 +2443,7 @@ fToolUsedAction0x1A_CowFeed:
     STA.W $0975                                                ;82A546|8D7509  |000975;
     LDA.B #$00                                                 ;82A549|A900    |      ;
     STA.W $0976                                                ;82A54B|8D7609  |000976;
-    JSL.L fUnknown_81A500                                      ;82A54E|2200A581|81A500;
+    JSL.L fObjectSlots_Allocate                                      ;82A54E|2200A581|81A500;
  
 .label2:
     %DecreaseStock(leftCowFood)

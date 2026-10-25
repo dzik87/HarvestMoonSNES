@@ -2,96 +2,96 @@
  
 pItemCarriedTable_8196AF:
     dl EMPTY_FFFFFF                                            ;8196AF|        |FFFFFF; 0x5B * [ptr24]
-    dl DATA24_819876                                           ;8196B2|        |819876;
-    dl DATA24_81989A                                           ;8196B5|        |81989A;
-    dl DATA24_8198BE                                           ;8196B8|        |8198BE;
-    dl DATA24_8198E2                                           ;8196BB|        |8198E2;
-    dl DATA24_819906                                           ;8196BE|        |819906;
-    dl DATA24_81992A                                           ;8196C1|        |81992A;
-    dl DATA24_81994E                                           ;8196C4|        |81994E;
-    dl DATA24_819972                                           ;8196C7|        |819972;
-    dl DATA24_819996                                           ;8196CA|        |819996;
-    dl DATA24_8199BA                                           ;8196CD|        |8199BA;
-    dl DATA24_819996                                           ;8196D0|        |819996;
-    dl DATA24_819996                                           ;8196D3|        |819996;
-    dl DATA24_8199DE                                           ;8196D6|        |8199DE;
-    dl DATA24_819A02                                           ;8196D9|        |819A02;
-    dl DATA24_819A26                                           ;8196DC|        |819A26;
-    dl DATA24_819A4A                                           ;8196DF|        |819A4A;
-    dl DATA24_819A6E                                           ;8196E2|        |819A6E;
-    dl DATA24_819A92                                           ;8196E5|        |819A92;
-    dl DATA24_819AB6                                           ;8196E8|        |819AB6;
-    dl DATA24_819ADA                                           ;8196EB|        |819ADA;
-    dl DATA24_819AFE                                           ;8196EE|        |819AFE;
-    dl DATA24_819B22                                           ;8196F1|        |819B22;
-    dl DATA24_819B46                                           ;8196F4|        |819B46;
-    dl DATA24_819B6A                                           ;8196F7|        |819B6A;
-    dl DATA24_819FA2                                           ;8196FA|        |819FA2;
-    dl DATA24_819B8E                                           ;8196FD|        |819B8E;
-    dl DATA24_819BB2                                           ;819700|        |819BB2;
-    dl DATA24_819BD6                                           ;819703|        |819BD6;
-    dl DATA24_819BFA                                           ;819706|        |819BFA;
-    dl DATA24_819C1E                                           ;819709|        |819C1E;
-    dl DATA24_819C42                                           ;81970C|        |819C42;
-    dl DATA24_819C66                                           ;81970F|        |819C66;
-    dl DATA24_819C8A                                           ;819712|        |819C8A;
-    dl DATA24_819CAE                                           ;819715|        |819CAE;
-    dl DATA24_819CD2                                           ;819718|        |819CD2;
-    dl DATA24_819CF6                                           ;81971B|        |819CF6;
-    dl DATA24_819D1A                                           ;81971E|        |819D1A;
-    dl DATA24_819D3E                                           ;819721|        |819D3E;
-    dl DATA24_819D62                                           ;819724|        |819D62;
-    dl DATA24_819D86                                           ;819727|        |819D86;
-    dl DATA24_819DAA                                           ;81972A|        |819DAA;
-    dl DATA24_819DCE                                           ;81972D|        |819DCE;
-    dl DATA24_819DE0                                           ;819730|        |819DE0;
-    dl DATA24_819DF2                                           ;819733|        |819DF2;
-    dl DATA24_819E04                                           ;819736|        |819E04;
-    dl DATA24_819E16                                           ;819739|        |819E16;
-    dl DATA24_819E28                                           ;81973C|        |819E28;
-    dl DATA24_819E3A                                           ;81973F|        |819E3A;
-    dl DATA24_819E4C                                           ;819742|        |819E4C;
-    dl DATA24_819E5E                                           ;819745|        |819E5E;
-    dl DATA24_819E70                                           ;819748|        |819E70;
-    dl DATA24_819E82                                           ;81974B|        |819E82;
-    dl DATA24_819E94                                           ;81974E|        |819E94;
-    dl DATA24_819EA6                                           ;819751|        |819EA6;
-    dl DATA24_819EB8                                           ;819754|        |819EB8;
-    dl DATA24_819ECA                                           ;819757|        |819ECA;
-    dl DATA24_819EDC                                           ;81975A|        |819EDC;
-    dl DATA24_819EEE                                           ;81975D|        |819EEE;
-    dl DATA24_819F00                                           ;819760|        |819F00;
-    dl DATA24_819F12                                           ;819763|        |819F12;
-    dl DATA24_819F24                                           ;819766|        |819F24;
-    dl DATA24_819F36                                           ;819769|        |819F36;
-    dl DATA24_819F48                                           ;81976C|        |819F48;
-    dl DATA24_819F5A                                           ;81976F|        |819F5A;
-    dl DATA24_819F6C                                           ;819772|        |819F6C;
-    dl DATA24_819F7E                                           ;819775|        |819F7E;
-    dl DATA24_819F90                                           ;819778|        |819F90;
-    dl DATA24_819E94                                           ;81977B|        |819E94;
-    dl DATA24_819E16                                           ;81977E|        |819E16;
-    dl DATA24_819E28                                           ;819781|        |819E28;
-    dl DATA24_819E3A                                           ;819784|        |819E3A;
-    dl DATA24_819E4C                                           ;819787|        |819E4C;
-    dl DATA24_819FA2                                           ;81978A|        |819FA2;
-    dl DATA24_819EA6                                           ;81978D|        |819EA6;
-    dl DATA24_819EB8                                           ;819790|        |819EB8;
-    dl DATA24_819ECA                                           ;819793|        |819ECA;
-    dl DATA24_819EEE                                           ;819796|        |819EEE;
-    dl DATA24_819F00                                           ;819799|        |819F00;
-    dl DATA24_819F12                                           ;81979C|        |819F12;
-    dl DATA24_819F24                                           ;81979F|        |819F24;
-    dl DATA24_819F36                                           ;8197A2|        |819F36;
-    dl DATA24_819E5E                                           ;8197A5|        |819E5E;
-    dl DATA24_819E70                                           ;8197A8|        |819E70;
-    dl DATA24_819F7E                                           ;8197AB|        |819F7E;
-    dl DATA24_819F90                                           ;8197AE|        |819F90;
-    dl DATA24_81992A                                           ;8197B1|        |81992A;
-    dl DATA24_819A26                                           ;8197B4|        |819A26;
-    dl DATA24_819BB2                                           ;8197B7|        |819BB2;
-    dl DATA24_819BD6                                           ;8197BA|        |819BD6;
-    dl DATA24_819BFA                                           ;8197BD|        |819BFA;
+    dl aItemCarriedFrames_01_Mushroom                                           ;8196B2|        |819876;
+    dl aItemCarriedFrames_02_PoisonMushroom                                           ;8196B5|        |81989A;
+    dl aItemCarriedFrames_03_WildGrape                                           ;8196B8|        |8198BE;
+    dl aItemCarriedFrames_04_BerryStrongSmell                                           ;8196BB|        |8198E2;
+    dl aItemCarriedFrames_05_MoonFlower                                           ;8196BE|        |819906;
+    dl aItemCarriedFrames_06_Cake                                           ;8196C1|        |81992A;
+    dl aItemCarriedFrames_07_Fish                                           ;8196C4|        |81994E;
+    dl aItemCarriedFrames_08_PowerBerry                                           ;8196C7|        |819972;
+    dl aItemCarriedFrames_09                                           ;8196CA|        |819996;
+    dl aItemCarriedFrames_0A                                           ;8196CD|        |8199BA;
+    dl aItemCarriedFrames_09                                           ;8196D0|        |819996;
+    dl aItemCarriedFrames_09                                           ;8196D3|        |819996;
+    dl aItemCarriedFrames_0D                                           ;8196D6|        |8199DE;
+    dl aItemCarriedFrames_0E                                           ;8196D9|        |819A02;
+    dl aItemCarriedFrames_0F                                           ;8196DC|        |819A26;
+    dl aItemCarriedFrames_10_Corn                                           ;8196DF|        |819A4A;
+    dl aItemCarriedFrames_11_Tomato                                           ;8196E2|        |819A6E;
+    dl aItemCarriedFrames_12_Potato                                           ;8196E5|        |819A92;
+    dl aItemCarriedFrames_13_Turnip                                           ;8196E8|        |819AB6;
+    dl aItemCarriedFrames_14_Egg                                           ;8196EB|        |819ADA;
+    dl aItemCarriedFrames_15_SmallMilk                                           ;8196EE|        |819AFE;
+    dl aItemCarriedFrames_16_MediumMilk                                           ;8196F1|        |819B22;
+    dl aItemCarriedFrames_17_LargeMilk                                           ;8196F4|        |819B46;
+    dl aItemCarriedFrames_18_Herb                                           ;8196F7|        |819B6A;
+    dl aItemCarriedFrames_19_Flower                                           ;8196FA|        |819FA2;
+    dl aItemCarriedFrames_1A_Feed                                           ;8196FD|        |819B8E;
+    dl aItemCarriedFrames_1B_GreenPerfume                                           ;819700|        |819BB2;
+    dl aItemCarriedFrames_1C_RedPerfume                                           ;819703|        |819BD6;
+    dl aItemCarriedFrames_1D_BluePerfume                                           ;819706|        |819BFA;
+    dl aItemCarriedFrames_1E_RedEgg                                           ;819709|        |819C1E;
+    dl aItemCarriedFrames_1F_LightPurpleEgg                                           ;81970C|        |819C42;
+    dl aItemCarriedFrames_20_BlueEgg                                           ;81970F|        |819C66;
+    dl aItemCarriedFrames_21_PurpleEgg                                           ;819712|        |819C8A;
+    dl aItemCarriedFrames_22_GreenEgg                                           ;819715|        |819CAE;
+    dl aItemCarriedFrames_23_YellowEgg                                           ;819718|        |819CD2;
+    dl aItemCarriedFrames_24_ChickenWindMeasured                                           ;81971B|        |819CF6;
+    dl aItemCarriedFrames_25_Chicken                                           ;81971E|        |819D1A;
+    dl aItemCarriedFrames_26_Chick                                           ;819721|        |819D3E;
+    dl aItemCarriedFrames_27                                           ;819724|        |819D62;
+    dl aItemCarriedFrames_28                                           ;819727|        |819D86;
+    dl aItemCarriedFrames_29_Mole                                           ;81972A|        |819DAA;
+    dl aItemCarriedFrames_2A                                           ;81972D|        |819DCE;
+    dl aItemCarriedFrames_2B                                           ;819730|        |819DE0;
+    dl aItemCarriedFrames_2C                                           ;819733|        |819DF2;
+    dl aItemCarriedFrames_2D                                           ;819736|        |819E04;
+    dl aItemCarriedFrames_2E                                           ;819739|        |819E16;
+    dl aItemCarriedFrames_2F                                           ;81973C|        |819E28;
+    dl aItemCarriedFrames_30                                           ;81973F|        |819E3A;
+    dl aItemCarriedFrames_31                                           ;819742|        |819E4C;
+    dl aItemCarriedFrames_32                                           ;819745|        |819E5E;
+    dl aItemCarriedFrames_33                                           ;819748|        |819E70;
+    dl aItemCarriedFrames_34                                           ;81974B|        |819E82;
+    dl aItemCarriedFrames_35                                           ;81974E|        |819E94;
+    dl aItemCarriedFrames_36                                           ;819751|        |819EA6;
+    dl aItemCarriedFrames_37                                           ;819754|        |819EB8;
+    dl aItemCarriedFrames_38                                           ;819757|        |819ECA;
+    dl aItemCarriedFrames_39                                           ;81975A|        |819EDC;
+    dl aItemCarriedFrames_3A                                           ;81975D|        |819EEE;
+    dl aItemCarriedFrames_3B                                           ;819760|        |819F00;
+    dl aItemCarriedFrames_3C                                           ;819763|        |819F12;
+    dl aItemCarriedFrames_3D                                           ;819766|        |819F24;
+    dl aItemCarriedFrames_3E                                           ;819769|        |819F36;
+    dl aItemCarriedFrames_3F                                           ;81976C|        |819F48;
+    dl aItemCarriedFrames_40                                           ;81976F|        |819F5A;
+    dl aItemCarriedFrames_41                                           ;819772|        |819F6C;
+    dl aItemCarriedFrames_42                                           ;819775|        |819F7E;
+    dl aItemCarriedFrames_43                                           ;819778|        |819F90;
+    dl aItemCarriedFrames_35                                           ;81977B|        |819E94;
+    dl aItemCarriedFrames_2E                                           ;81977E|        |819E16;
+    dl aItemCarriedFrames_2F                                           ;819781|        |819E28;
+    dl aItemCarriedFrames_30                                           ;819784|        |819E3A;
+    dl aItemCarriedFrames_31                                           ;819787|        |819E4C;
+    dl aItemCarriedFrames_19_Flower                                           ;81978A|        |819FA2;
+    dl aItemCarriedFrames_36                                           ;81978D|        |819EA6;
+    dl aItemCarriedFrames_37                                           ;819790|        |819EB8;
+    dl aItemCarriedFrames_38                                           ;819793|        |819ECA;
+    dl aItemCarriedFrames_3A                                           ;819796|        |819EEE;
+    dl aItemCarriedFrames_3B                                           ;819799|        |819F00;
+    dl aItemCarriedFrames_3C                                           ;81979C|        |819F12;
+    dl aItemCarriedFrames_3D                                           ;81979F|        |819F24;
+    dl aItemCarriedFrames_3E                                           ;8197A2|        |819F36;
+    dl aItemCarriedFrames_32                                           ;8197A5|        |819E5E;
+    dl aItemCarriedFrames_33                                           ;8197A8|        |819E70;
+    dl aItemCarriedFrames_42                                           ;8197AB|        |819F7E;
+    dl aItemCarriedFrames_43                                           ;8197AE|        |819F90;
+    dl aItemCarriedFrames_06_Cake                                           ;8197B1|        |81992A;
+    dl aItemCarriedFrames_0F                                           ;8197B4|        |819A26;
+    dl aItemCarriedFrames_1B_GreenPerfume                                           ;8197B7|        |819BB2;
+    dl aItemCarriedFrames_1C_RedPerfume                                           ;8197BA|        |819BD6;
+    dl aItemCarriedFrames_1D_BluePerfume                                           ;8197BD|        |819BFA;
  
 pItemCarriedSubrutines:
     dw $FFFF                                                   ;8197C0|        |      ; 0x5B * [ptr16]
@@ -186,365 +186,365 @@ pItemCarriedSubrutines:
     dw subItemCarried_0x59                                     ;819872|        |8187BB; 59
     dw subItemCarried_0x5A                                     ;819874|        |8187BF; 5A
  
-DATA24_819876:
+aItemCarriedFrames_01_Mushroom:
     dl $0000F6                                                 ;819876|        |      ;
     db $A2,$03,$00,$9C,$03,$00,$9D,$03,$00,$9E,$03,$01         ;819879|        |      ;
     db $9E,$03,$00,$9F,$03,$00,$A0,$03,$00,$A1,$03,$01         ;819885|        |      ;
     db $A1,$03,$00,$06,$01,$00,$A3,$03,$00                     ;819891|        |      ;
  
-DATA24_81989A:
+aItemCarriedFrames_02_PoisonMushroom:
     dl $0000F7                                                 ;81989A|        |      ;
     db $AA,$03,$00,$A4,$03,$00,$A5,$03,$00,$A6,$03,$01         ;81989D|        |      ;
     db $A6,$03,$00,$A7,$03,$00,$A8,$03,$00,$A9,$03,$01         ;8198A9|        |      ;
     db $A9,$03,$00,$07,$01,$00,$AB,$03,$00                     ;8198B5|        |      ;
  
-DATA24_8198BE:
+aItemCarriedFrames_03_WildGrape:
     dl $0000F4                                                 ;8198BE|        |      ;
     db $92,$03,$00,$8C,$03,$00,$8D,$03,$00,$8E,$03,$01         ;8198C1|        |      ;
     db $8E,$03,$00,$8F,$03,$00,$90,$03,$00,$91,$03,$01         ;8198CD|        |      ;
     db $91,$03,$00,$04,$01,$00,$93,$03,$00                     ;8198D9|        |      ;
  
-DATA24_8198E2:
+aItemCarriedFrames_04_BerryStrongSmell:
     dl $0000F5                                                 ;8198E2|        |      ;
     db $9A,$03,$00,$94,$03,$00,$95,$03,$00,$96,$03,$01         ;8198E5|        |      ;
     db $96,$03,$00,$97,$03,$00,$98,$03,$00,$99,$03,$01         ;8198F1|        |      ;
     db $99,$03,$00,$05,$01,$00,$9B,$03,$00                     ;8198FD|        |      ;
  
-DATA24_819906:
+aItemCarriedFrames_05_MoonFlower:
     dl $0000F8                                                 ;819906|        |      ;
     db $B2,$03,$00,$AC,$03,$00,$AD,$03,$00,$AE,$03,$01         ;819909|        |      ;
     db $AE,$03,$00,$AF,$03,$00,$B0,$03,$00,$B1,$03,$01         ;819915|        |      ;
     db $B1,$03,$00,$08,$01,$00,$B3,$03,$00                     ;819921|        |      ;
  
-DATA24_81992A:
+aItemCarriedFrames_06_Cake:
     dl $0000F9                                                 ;81992A|        |      ;
     db $BA,$03,$00,$B4,$03,$00,$B5,$03,$00,$B6,$03,$01         ;81992D|        |      ;
     db $B6,$03,$00,$B7,$03,$00,$B8,$03,$00,$B9,$03,$01         ;819939|        |      ;
     db $B9,$03,$00,$09,$01,$00,$BB,$03,$00                     ;819945|        |      ;
  
-DATA24_81994E:
+aItemCarriedFrames_07_Fish:
     dl $0000BB                                                 ;81994E|        |      ;
     db $2C,$04,$00,$26,$04,$00,$27,$04,$00,$28,$04,$01         ;819951|        |      ;
     db $28,$04,$00,$29,$04,$00,$2A,$04,$00,$2B,$04,$01         ;81995D|        |      ;
     db $2B,$04,$00,$BA,$00,$00,$2D,$04,$00                     ;819969|        |      ;
  
-DATA24_819972:
+aItemCarriedFrames_08_PowerBerry:
     dl $000000                                                 ;819972|        |      ;
     db $0C,$04,$00,$09,$04,$00,$0A,$04,$00,$0B,$04,$01         ;819975|        |      ;
     db $0B,$04,$00,$00,$00,$00,$00,$00,$00,$00,$00,$01         ;819981|        |      ;
     db $00,$00,$00,$0D,$04,$00,$00,$00,$00                     ;81998D|        |      ;
  
-DATA24_819996:
+aItemCarriedFrames_09:
     dl $0000E8                                                 ;819996|        |      ;
     db $29,$01,$00,$23,$01,$00,$24,$01,$00,$25,$01,$01         ;819999|        |      ;
     db $25,$01,$00,$26,$01,$00,$27,$01,$00,$28,$01,$01         ;8199A5|        |      ;
     db $28,$01,$00,$B7,$00,$00,$2A,$01,$00                     ;8199B1|        |      ;
  
-DATA24_8199BA:
+aItemCarriedFrames_0A:
     dl $0000E9                                                 ;8199BA|        |      ;
     db $31,$01,$00,$2B,$01,$00,$2C,$01,$00,$2D,$01,$01         ;8199BD|        |      ;
     db $2D,$01,$00,$2E,$01,$00,$2F,$01,$00,$30,$01,$01         ;8199C9|        |      ;
     db $30,$01,$00,$B7,$00,$00,$32,$01,$00                     ;8199D5|        |      ;
  
-DATA24_8199DE:
+aItemCarriedFrames_0D:
     dl $0000EA                                                 ;8199DE|        |      ;
     db $21,$01,$00,$1B,$01,$00,$1C,$01,$00,$1D,$01,$01         ;8199E1|        |      ;
     db $1D,$01,$00,$1E,$01,$00,$1F,$01,$00,$20,$01,$01         ;8199ED|        |      ;
     db $20,$01,$00,$C8,$00,$00,$22,$01,$00                     ;8199F9|        |      ;
  
-DATA24_819A02:
+aItemCarriedFrames_0E:
     dl $0000EB                                                 ;819A02|        |      ;
     db $39,$01,$00,$33,$01,$00,$34,$01,$00,$35,$01,$01         ;819A05|        |      ;
     db $35,$01,$00,$36,$01,$00,$37,$01,$00,$38,$01,$01         ;819A11|        |      ;
     db $38,$01,$00,$C8,$00,$00,$3A,$01,$00                     ;819A1D|        |      ;
  
-DATA24_819A26:
+aItemCarriedFrames_0F:
     dl $0000E7                                                 ;819A26|        |      ;
     db $41,$01,$00,$3B,$01,$00,$3C,$01,$00,$3D,$01,$01         ;819A29|        |      ;
     db $3D,$01,$00,$3E,$01,$00,$3F,$01,$00,$40,$01,$01         ;819A35|        |      ;
     db $40,$01,$00,$00,$00,$00,$42,$01,$00                     ;819A41|        |      ;
  
-DATA24_819A4A:
+aItemCarriedFrames_10_Corn:
     dl $0000EC                                                 ;819A4A|        |      ;
     db $58,$03,$00,$52,$03,$00,$53,$03,$00,$54,$03,$01         ;819A4D|        |      ;
     db $54,$03,$00,$55,$03,$00,$56,$03,$00,$57,$03,$01         ;819A59|        |      ;
     db $57,$03,$00,$FC,$00,$00,$59,$03,$00                     ;819A65|        |      ;
  
-DATA24_819A6E:
+aItemCarriedFrames_11_Tomato:
     dl $0000ED                                                 ;819A6E|        |      ;
     db $60,$03,$00,$5A,$03,$00,$5B,$03,$00,$5C,$03,$01         ;819A71|        |      ;
     db $5C,$03,$00,$5D,$03,$00,$5E,$03,$00,$5F,$03,$01         ;819A7D|        |      ;
     db $5F,$03,$00,$FD,$00,$00,$61,$03,$00                     ;819A89|        |      ;
  
-DATA24_819A92:
+aItemCarriedFrames_12_Potato:
     dl $0000EF                                                 ;819A92|        |      ;
     db $70,$03,$00,$6A,$03,$00,$6B,$03,$00,$6C,$03,$01         ;819A95|        |      ;
     db $6C,$03,$00,$6D,$03,$00,$6E,$03,$00,$6F,$03,$01         ;819AA1|        |      ;
     db $6F,$03,$00,$FF,$00,$00,$71,$03,$00                     ;819AAD|        |      ;
  
-DATA24_819AB6:
+aItemCarriedFrames_13_Turnip:
     dl $0000EE                                                 ;819AB6|        |      ;
     db $68,$03,$00,$62,$03,$00,$63,$03,$00,$64,$03,$01         ;819AB9|        |      ;
     db $64,$03,$00,$65,$03,$00,$66,$03,$00,$67,$03,$01         ;819AC5|        |      ;
     db $67,$03,$00,$FE,$00,$00,$69,$03,$00                     ;819AD1|        |      ;
  
-DATA24_819ADA:
+aItemCarriedFrames_14_Egg:
     dl $0000F3                                                 ;819ADA|        |      ;
     db $8A,$03,$00,$84,$03,$00,$85,$03,$00,$86,$03,$01         ;819ADD|        |      ;
     db $86,$03,$00,$87,$03,$00,$88,$03,$00,$89,$03,$01         ;819AE9|        |      ;
     db $89,$03,$00,$03,$01,$00,$8B,$03,$00                     ;819AF5|        |      ;
  
-DATA24_819AFE:
+aItemCarriedFrames_15_SmallMilk:
     dl $0000F2                                                 ;819AFE|        |      ;
     db $82,$03,$00,$7E,$03,$00,$7E,$03,$00,$7E,$03,$01         ;819B01|        |      ;
     db $7E,$03,$00,$7F,$03,$00,$80,$03,$00,$81,$03,$01         ;819B0D|        |      ;
     db $81,$03,$00,$02,$01,$00,$83,$03,$00                     ;819B19|        |      ;
  
-DATA24_819B22:
+aItemCarriedFrames_16_MediumMilk:
     dl $0000F1                                                 ;819B22|        |      ;
     db $7C,$03,$00,$78,$03,$00,$78,$03,$00,$78,$03,$01         ;819B25|        |      ;
     db $78,$03,$00,$79,$03,$00,$7A,$03,$00,$7B,$03,$01         ;819B31|        |      ;
     db $7B,$03,$00,$01,$01,$00,$7D,$03,$00                     ;819B3D|        |      ;
  
-DATA24_819B46:
+aItemCarriedFrames_17_LargeMilk:
     dl $0000F0                                                 ;819B46|        |      ;
     db $76,$03,$00,$72,$03,$00,$72,$03,$00,$72,$03,$01         ;819B49|        |      ;
     db $72,$03,$00,$73,$03,$00,$74,$03,$00,$75,$03,$01         ;819B55|        |      ;
     db $75,$03,$00,$00,$01,$00,$77,$03,$00                     ;819B61|        |      ;
  
-DATA24_819B6A:
+aItemCarriedFrames_18_Herb:
     dl $0000FA                                                 ;819B6A|        |      ;
     db $C2,$03,$00,$BC,$03,$00,$BD,$03,$00,$BE,$03,$01         ;819B6D|        |      ;
     db $BE,$03,$00,$BF,$03,$00,$C0,$03,$00,$C1,$03,$01         ;819B79|        |      ;
     db $C1,$03,$00,$0A,$01,$00,$C3,$03,$00                     ;819B85|        |      ;
  
-DATA24_819B8E:
+aItemCarriedFrames_1A_Feed:
     dl $0000C3                                                 ;819B8E|        |      ;
     db $34,$04,$00,$2E,$04,$00,$2F,$04,$00,$30,$04,$01         ;819B91|        |      ;
     db $30,$04,$00,$31,$04,$00,$32,$04,$00,$33,$04,$01         ;819B9D|        |      ;
     db $33,$04,$00,$C4,$00,$00,$35,$04,$00                     ;819BA9|        |      ;
  
-DATA24_819BB2:
+aItemCarriedFrames_1B_GreenPerfume:
     dl $00010B                                                 ;819BB2|        |      ;
     db $D0,$03,$00,$CC,$03,$00,$CC,$03,$00,$CC,$03,$01         ;819BB5|        |      ;
     db $CC,$03,$00,$CD,$03,$00,$CE,$03,$00,$CF,$03,$01         ;819BC1|        |      ;
     db $CF,$03,$00,$13,$01,$00,$00,$00,$00                     ;819BCD|        |      ;
  
-DATA24_819BD6:
+aItemCarriedFrames_1C_RedPerfume:
     dl $00010C                                                 ;819BD6|        |      ;
     db $D8,$03,$00,$D4,$03,$00,$D4,$03,$00,$D4,$03,$01         ;819BD9|        |      ;
     db $D4,$03,$00,$D5,$03,$00,$D6,$03,$00,$D7,$03,$01         ;819BE5|        |      ;
     db $D7,$03,$00,$14,$01,$00,$00,$00,$00                     ;819BF1|        |      ;
  
-DATA24_819BFA:
+aItemCarriedFrames_1D_BluePerfume:
     dl $00010D                                                 ;819BFA|        |      ;
     db $E0,$03,$00,$DC,$03,$00,$DC,$03,$00,$DC,$03,$01         ;819BFD|        |      ;
     db $DC,$03,$00,$DD,$03,$00,$DE,$03,$00,$DF,$03,$01         ;819C09|        |      ;
     db $DF,$03,$00,$15,$01,$00,$00,$00,$00                     ;819C15|        |      ;
  
-DATA24_819C1E:
+aItemCarriedFrames_1E_RedEgg:
     dl $00010E                                                 ;819C1E|        |      ;
     db $E7,$03,$00,$E1,$03,$00,$E2,$03,$00,$E3,$03,$01         ;819C21|        |      ;
     db $E3,$03,$00,$E4,$03,$00,$E5,$03,$00,$E6,$03,$01         ;819C2D|        |      ;
     db $E6,$03,$00,$03,$01,$00,$E8,$03,$00                     ;819C39|        |      ;
  
-DATA24_819C42:
+aItemCarriedFrames_1F_LightPurpleEgg:
     dl $00010F                                                 ;819C42|        |      ;
     db $EF,$03,$00,$E9,$03,$00,$EA,$03,$00,$EB,$03,$01         ;819C45|        |      ;
     db $EB,$03,$00,$EC,$03,$00,$ED,$03,$00,$EE,$03,$01         ;819C51|        |      ;
     db $EE,$03,$00,$03,$01,$00,$F0,$03,$00                     ;819C5D|        |      ;
  
-DATA24_819C66:
+aItemCarriedFrames_20_BlueEgg:
     dl $000110                                                 ;819C66|        |      ;
     db $F7,$03,$00,$F1,$03,$00,$F2,$03,$00,$F3,$03,$01         ;819C69|        |      ;
     db $F3,$03,$00,$F4,$03,$00,$F5,$03,$00,$F6,$03,$01         ;819C75|        |      ;
     db $F6,$03,$00,$03,$01,$00,$F8,$03,$00                     ;819C81|        |      ;
  
-DATA24_819C8A:
+aItemCarriedFrames_21_PurpleEgg:
     dl $000111                                                 ;819C8A|        |      ;
     db $FF,$03,$00,$F9,$03,$00,$FA,$03,$00,$FB,$03,$01         ;819C8D|        |      ;
     db $FB,$03,$00,$FC,$03,$00,$FD,$03,$00,$FE,$03,$01         ;819C99|        |      ;
     db $FE,$03,$00,$03,$01,$00,$00,$04,$00                     ;819CA5|        |      ;
  
-DATA24_819CAE:
+aItemCarriedFrames_22_GreenEgg:
     dl $000112                                                 ;819CAE|        |      ;
     db $07,$04,$00,$01,$04,$00,$02,$04,$00,$03,$04,$01         ;819CB1|        |      ;
     db $03,$04,$00,$04,$04,$00,$05,$04,$00,$06,$04,$01         ;819CBD|        |      ;
     db $06,$04,$00,$03,$01,$00,$08,$04,$00                     ;819CC9|        |      ;
  
-DATA24_819CD2:
+aItemCarriedFrames_23_YellowEgg:
     dl $0003D3                                                 ;819CD2|        |      ;
     db $D2,$03,$00,$D1,$03,$00,$D1,$03,$00,$D1,$03,$01         ;819CD5|        |      ;
     db $D1,$03,$00,$00,$00,$00,$00,$00,$00,$00,$00,$01         ;819CE1|        |      ;
     db $00,$00,$00,$00,$00,$00,$00,$00,$00                     ;819CED|        |      ;
  
-DATA24_819CF6:
+aItemCarriedFrames_24_ChickenWindMeasured:
     dl $000117                                                 ;819CF6|        |      ;
     db $BD,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$01         ;819CF9|        |      ;
     db $00,$00,$00,$00,$00,$00,$BC,$00,$00,$00,$00,$01         ;819D05|        |      ;
     db $00,$00,$00,$00,$00,$00,$00,$00,$00                     ;819D11|        |      ;
  
-DATA24_819D1A:
+aItemCarriedFrames_25_Chicken:
     dl $000212                                                 ;819D1A|        |      ;
     db $14,$04,$00,$0E,$04,$00,$0F,$04,$00,$10,$04,$01         ;819D1D|        |      ;
     db $10,$04,$00,$11,$04,$00,$12,$04,$00,$13,$04,$01         ;819D29|        |      ;
     db $13,$04,$00,$00,$00,$00,$15,$04,$00                     ;819D35|        |      ;
  
-DATA24_819D3E:
+aItemCarriedFrames_26_Chick:
     dl $000217                                                 ;819D3E|        |      ;
     db $1C,$04,$00,$16,$04,$00,$17,$04,$00,$18,$04,$01         ;819D41|        |      ;
     db $18,$04,$00,$19,$04,$00,$1A,$04,$00,$1B,$04,$01         ;819D4D|        |      ;
     db $1B,$04,$00,$00,$00,$00,$1D,$04,$00                     ;819D59|        |      ;
  
-DATA24_819D62:
+aItemCarriedFrames_27:
     dl $0001D9                                                 ;819D62|        |      ;
     db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$01         ;819D65|        |      ;
     db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$01         ;819D71|        |      ;
     db $00,$00,$00,$00,$00,$00,$00,$00,$00                     ;819D7D|        |      ;
  
-DATA24_819D86:
+aItemCarriedFrames_28:
     dl $0000E5                                                 ;819D86|        |      ;
     db $26,$01,$00,$20,$01,$00,$21,$01,$00,$22,$01,$01         ;819D89|        |      ;
     db $22,$01,$00,$23,$01,$00,$24,$01,$00,$25,$01,$01         ;819D95|        |      ;
     db $25,$01,$00,$B4,$00,$00,$27,$01,$00                     ;819DA1|        |      ;
  
-DATA24_819DAA:
+aItemCarriedFrames_29_Mole:
     dl $000326                                                 ;819DAA|        |      ;
     db $24,$04,$00,$1E,$04,$00,$1F,$04,$00,$20,$04,$01         ;819DAD|        |      ;
     db $20,$04,$00,$21,$04,$00,$22,$04,$00,$23,$04,$01         ;819DB9|        |      ;
     db $23,$04,$00,$00,$00,$00,$25,$04,$00                     ;819DC5|        |      ;
  
-DATA24_819DCE:
+aItemCarriedFrames_2A:
     dl $0000D8                                                 ;819DCE|        |      ;
     db $D8,$00,$00,$67,$01,$00,$68,$01,$00,$69,$01,$01         ;819DD1|        |      ;
     db $69,$01,$00                                             ;819DDD|        |      ;
  
-DATA24_819DE0:
+aItemCarriedFrames_2B:
     dl $0000D9                                                 ;819DE0|        |      ;
     db $D9,$00,$00,$6A,$01,$00,$6B,$01,$00,$6C,$01,$01         ;819DE3|        |      ;
     db $6C,$01,$00                                             ;819DEF|        |      ;
  
-DATA24_819DF2:
+aItemCarriedFrames_2C:
     dl $0000DA                                                 ;819DF2|        |      ;
     db $DA,$00,$00,$6D,$01,$00,$6E,$01,$00,$6F,$01,$01         ;819DF5|        |      ;
     db $6F,$01,$00                                             ;819E01|        |      ;
  
-DATA24_819E04:
+aItemCarriedFrames_2D:
     dl $0000DB                                                 ;819E04|        |      ;
     db $DB,$00,$00,$70,$01,$00,$71,$01,$00,$72,$01,$01         ;819E07|        |      ;
     db $72,$01,$00                                             ;819E13|        |      ;
  
-DATA24_819E16:
+aItemCarriedFrames_2E:
     dl $0000D0                                                 ;819E16|        |      ;
     db $D0,$00,$00,$4F,$01,$00,$50,$01,$00,$51,$01,$01         ;819E19|        |      ;
     db $51,$01,$00                                             ;819E25|        |      ;
  
-DATA24_819E28:
+aItemCarriedFrames_2F:
     dl $0000D1                                                 ;819E28|        |      ;
     db $D1,$00,$00,$52,$01,$00,$53,$01,$00,$54,$01,$01         ;819E2B|        |      ;
     db $54,$01,$00                                             ;819E37|        |      ;
  
-DATA24_819E3A:
+aItemCarriedFrames_30:
     dl $0000D2                                                 ;819E3A|        |      ;
     db $D2,$00,$00,$55,$01,$00,$56,$01,$00,$57,$01,$01         ;819E3D|        |      ;
     db $57,$01,$00                                             ;819E49|        |      ;
  
-DATA24_819E4C:
+aItemCarriedFrames_31:
     dl $0000D3                                                 ;819E4C|        |      ;
     db $D3,$00,$00,$58,$01,$00,$59,$01,$00,$5A,$01,$01         ;819E4F|        |      ;
     db $5A,$01,$00                                             ;819E5B|        |      ;
  
-DATA24_819E5E:
+aItemCarriedFrames_32:
     dl $0000CC                                                 ;819E5E|        |      ;
     db $CC,$00,$00,$43,$01,$00,$44,$01,$00,$45,$01,$01         ;819E61|        |      ;
     db $45,$01,$00                                             ;819E6D|        |      ;
  
-DATA24_819E70:
+aItemCarriedFrames_33:
     dl $0000CD                                                 ;819E70|        |      ;
     db $CD,$00,$00,$46,$01,$00,$47,$01,$00,$48,$01,$01         ;819E73|        |      ;
     db $48,$01,$00                                             ;819E7F|        |      ;
  
-DATA24_819E82:
+aItemCarriedFrames_34:
     dl $0000CE                                                 ;819E82|        |      ;
     db $CE,$00,$00,$49,$01,$00,$4A,$01,$00,$4B,$01,$01         ;819E85|        |      ;
     db $4B,$01,$00                                             ;819E91|        |      ;
  
-DATA24_819E94:
+aItemCarriedFrames_35:
     dl $0000CF                                                 ;819E94|        |      ;
     db $CF,$00,$00,$4C,$01,$00,$4D,$01,$00,$4E,$01,$01         ;819E97|        |      ;
     db $4E,$01,$00                                             ;819EA3|        |      ;
  
-DATA24_819EA6:
+aItemCarriedFrames_36:
     dl $0000D4                                                 ;819EA6|        |      ;
     db $D4,$00,$00,$5B,$01,$00,$5C,$01,$00,$5D,$01,$01         ;819EA9|        |      ;
     db $5D,$01,$00                                             ;819EB5|        |      ;
  
-DATA24_819EB8:
+aItemCarriedFrames_37:
     dl $0000D5                                                 ;819EB8|        |      ;
     db $D5,$00,$00,$5E,$01,$00,$5F,$01,$00,$60,$01,$01         ;819EBB|        |      ;
     db $60,$01,$00                                             ;819EC7|        |      ;
  
-DATA24_819ECA:
+aItemCarriedFrames_38:
     dl $0000D6                                                 ;819ECA|        |      ;
     db $D6,$00,$00,$61,$01,$00,$62,$01,$00,$63,$01,$01         ;819ECD|        |      ;
     db $63,$01,$00                                             ;819ED9|        |      ;
  
-DATA24_819EDC:
+aItemCarriedFrames_39:
     dl $0000D7                                                 ;819EDC|        |      ;
     db $D7,$00,$00,$64,$01,$00,$65,$01,$00,$66,$01,$01         ;819EDF|        |      ;
     db $66,$01,$00                                             ;819EEB|        |      ;
  
-DATA24_819EEE:
+aItemCarriedFrames_3A:
     dl $0000E0                                                 ;819EEE|        |      ;
     db $E0,$00,$00,$7C,$01,$00,$7D,$01,$00,$7E,$01,$01         ;819EF1|        |      ;
     db $7E,$01,$00                                             ;819EFD|        |      ;
  
-DATA24_819F00:
+aItemCarriedFrames_3B:
     dl $0000E1                                                 ;819F00|        |      ;
     db $E1,$00,$00,$7F,$01,$00,$80,$01,$00,$81,$01,$01         ;819F03|        |      ;
     db $81,$01,$00                                             ;819F0F|        |      ;
  
-DATA24_819F12:
+aItemCarriedFrames_3C:
     dl $0000E3                                                 ;819F12|        |      ;
     db $E3,$00,$00,$85,$01,$00,$86,$01,$00,$87,$01,$01         ;819F15|        |      ;
     db $87,$01,$00                                             ;819F21|        |      ;
  
-DATA24_819F24:
+aItemCarriedFrames_3D:
     dl $0000E2                                                 ;819F24|        |      ;
     db $E2,$00,$00,$82,$01,$00,$83,$01,$00,$84,$01,$01         ;819F27|        |      ;
     db $84,$01,$00                                             ;819F33|        |      ;
  
-DATA24_819F36:
+aItemCarriedFrames_3E:
     dl $0000DF                                                 ;819F36|        |      ;
     db $DF,$00,$00,$79,$01,$00,$7A,$01,$00,$7B,$01,$01         ;819F39|        |      ;
     db $7B,$01,$00                                             ;819F45|        |      ;
  
-DATA24_819F48:
+aItemCarriedFrames_3F:
     dl $0000E4                                                 ;819F48|        |      ;
     db $E4,$00,$00,$89,$01,$00,$89,$01,$00,$89,$01,$01         ;819F4B|        |      ;
     db $89,$01,$00                                             ;819F57|        |      ;
  
-DATA24_819F5A:
+aItemCarriedFrames_40:
     dl $0000E5                                                 ;819F5A|        |      ;
     db $E5,$00,$00,$8A,$01,$00,$8A,$01,$00,$8A,$01,$01         ;819F5D|        |      ;
     db $8A,$01,$00                                             ;819F69|        |      ;
  
-DATA24_819F6C:
+aItemCarriedFrames_41:
     dl $0000DC                                                 ;819F6C|        |      ;
     db $DC,$00,$00,$88,$01,$00,$88,$01,$00,$88,$01,$01         ;819F6F|        |      ;
     db $88,$01,$00                                             ;819F7B|        |      ;
  
-DATA24_819F7E:
+aItemCarriedFrames_42:
     dl $0000DE                                                 ;819F7E|        |      ;
     db $DE,$00,$00,$76,$01,$00,$77,$01,$00,$78,$01,$01         ;819F81|        |      ;
     db $78,$01,$00                                             ;819F8D|        |      ;
  
-DATA24_819F90:
+aItemCarriedFrames_43:
     dl $0000DD                                                 ;819F90|        |      ;
     db $DD,$00,$00,$73,$01,$00,$74,$01,$00,$75,$01,$01         ;819F93|        |      ;
     db $75,$01,$00                                             ;819F9F|        |      ;
  
-DATA24_819FA2:
+aItemCarriedFrames_19_Flower:
     dl $0000FB                                                 ;819FA2|        |      ;
     db $CA,$03,$00,$C4,$03,$00,$C5,$03,$00,$C6,$03,$01         ;819FA5|        |      ;
     db $C6,$03,$00,$C7,$03,$00,$C8,$03,$00,$C9,$03,$01         ;819FB1|        |      ;
@@ -858,12 +858,12 @@ nSoundItemCarriedTable_81A308:
     db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00         ;81A350|        |      ;
     db $00,$00,$00,$01,$00,$00,$00                             ;81A35C|        |      ;
  
-nUnknownXYTable:
+aFixedDropPositionsXY:
     dw $0218,$0208,$01A8,$00D2,$02E8,$00F2                     ;81A363|        |      ; n16 x, n16 y
     dw $0318,$0252,$00E8,$0322,$0298,$0372                     ;81A36F|        |      ;
     dw $02B0,$0170,$0068,$0250                                 ;81A37B|        |      ;
  
-fUnknown_81A383:
+fObjectSlots_UpdateAll:
     REP #$30                                                   ;81A383|C230    |      ;
     LDA.W #$B4E6                                               ;81A385|A9E6B4  |      ;
     STA.B ptrUnknown0x07                                       ;81A388|8507    |000007;
@@ -938,12 +938,12 @@ fUnknown_81A383:
     REP #$20                                                   ;81A419|C220    |      ;
     LDA.W nGameObjectIdx                                       ;81A41B|AD7809  |000978;
     STA.B strcObject.gameObjectIdx                             ;81A41E|85A5    |0000A5;
-    JSL.L fObject_Unknown8581A2                                ;81A420|22A28185|8581A2;
+    JSL.L fObject_Destroy                                ;81A420|22A28185|8581A2;
     SEP #$20                                                   ;81A424|E220    |      ;
     LDA.W $0974                                                ;81A426|AD7409  |000974;
     AND.B #$02                                                 ;81A429|2902    |      ;
     BEQ .caseFFFF                                              ;81A42B|F004    |81A431;
-    JSL.L fUnknown_81A4F1                                      ;81A42D|22F1A481|81A4F1;
+    JSL.L fObjectSlots_FreeCurrent                                      ;81A42D|22F1A481|81A4F1;
  
 .caseFFFF:
     SEP #$20                                                   ;81A431|E220    |      ;
@@ -990,14 +990,14 @@ fUnknown_81A383:
     LDA.W nUnknownY                                            ;81A494|AD8209  |000982;
     STA.B [ptrUnknown0x07],Y                                   ;81A497|9707    |000007;
     STA.B strcObject.posY                                      ;81A499|859D    |00009D;
-    JSL.L fObject_Unknown8580B9                                ;81A49B|22B98085|8580B9;
+    JSL.L fObject_UpdatePositionAndFlip                                ;81A49B|22B98085|8580B9;
     LDA.W $097A                                                ;81A49F|AD7A09  |00097A;
     CMP.W $097C                                                ;81A4A2|CD7C09  |00097C;
     BEQ .caseFFFD                                              ;81A4A5|F00B    |81A4B2;
     STA.B strcObject.spriteTableIdx                            ;81A4A7|85A1    |0000A1;
     LDY.W #$0008                                               ;81A4A9|A00800  |      ;
     STA.B [ptrUnknown0x07],Y                                   ;81A4AC|9707    |000007;
-    JSL.L fObject_Unknown858100                                ;81A4AE|22008185|858100;
+    JSL.L fObject_Replace                                ;81A4AE|22008185|858100;
  
 .caseFFFD:
     REP #$30                                                   ;81A4B2|C230    |      ;
@@ -1015,7 +1015,7 @@ fUnknown_81A383:
   + RTL                                                        ;81A4C6|6B      |      ;
  
  
-fUnknown_Zero07Ptr:
+fObjectSlots_ClearAll:
     REP #$30                                                   ;81A4C7|C230    |      ;
     LDA.W #$B4E6                                               ;81A4C9|A9E6B4  |      ;
     STA.B ptrUnknown0x07                                       ;81A4CC|8507    |000007;
@@ -1039,7 +1039,7 @@ fUnknown_Zero07Ptr:
     RTL                                                        ;81A4F0|6B      |      ;
  
  
-fUnknown_81A4F1:
+fObjectSlots_FreeCurrent:
     SEP #$20                                                   ;81A4F1|E220    |      ;
     REP #$10                                                   ;81A4F3|C210    |      ;
     LDY.W #$0000                                               ;81A4F5|A00000  |      ;
@@ -1049,7 +1049,7 @@ fUnknown_81A4F1:
     RTL                                                        ;81A4FF|6B      |      ;
  
  
-fUnknown_81A500:
+fObjectSlots_Allocate:
     REP #$30                                                   ;81A500|C230    |      ;
     LDA.W #$B4E6                                               ;81A502|A9E6B4  |      ;
     STA.B ptrUnknown0x07                                       ;81A505|8507    |000007;
@@ -1108,7 +1108,7 @@ fUnknown_81A500:
     STA.B [ptrUnknown0x07],Y                                   ;81A577|9707    |000007;
     STA.B strcObject.posY                                      ;81A579|859D    |00009D;
     STZ.B strcObject.unkA3                                     ;81A57B|64A3    |0000A3;
-    JSL.L fUnknown_858000                                      ;81A57D|22008085|858000;
+    JSL.L fObject_Create                                      ;81A57D|22008085|858000;
     REP #$30                                                   ;81A581|C230    |      ;
     LDY.W #$0004                                               ;81A583|A00400  |      ;
     LDA.B strcObject.gameObjectIdx                             ;81A586|A5A5    |0000A5;
@@ -1118,9 +1118,9 @@ fUnknown_81A500:
  
 pSubrutineTable_81A58B:
     dw $FFFF                                                   ;81A58B|        |      ;
-    dw subUnknown81A58B_0x01                                   ;81A58D|        |81809A;
+    dw fItemCarried_RunHandler                                   ;81A58D|        |81809A;
  
-fUnknownCF_81A58F:
+fPlayer_LeaveSnowFootprint:
     SEP #$20                                                   ;81A58F|E220    |      ;
     REP #$10                                                   ;81A591|C210    |      ;
     LDA.L nCurrentSeasonID                                     ;81A593|AF191F7F|7F1F19;
@@ -1156,13 +1156,13 @@ fUnknownCF_81A58F:
     LDA.W #$0011                                               ;81A5D3|A91100  |      ;
     LDX.W strcObjectData.playerX                               ;81A5D6|AE0709  |000907;
     LDY.W strcObjectData.playerY                               ;81A5D9|AC0909  |000909;
-    JSL.L fUnknown_81A6C1                                      ;81A5DC|22C1A681|81A6C1;
+    JSL.L fMap_QueueTilePatternVRAMUpload                                      ;81A5DC|22C1A681|81A6C1;
  
 .return:
     RTL                                                        ;81A5E0|6B      |      ;
  
  
-fUnknownCF_SetPointer:
+fTileScript_Start:
     REP #$30                                                   ;81A5E1|C230    |      ; A: nIndex
     STA.B strcVariables.n16Temp1                               ;81A5E3|857E    |00007E;
     ASL A                                                      ;81A5E5|0A      |      ;
@@ -1181,7 +1181,7 @@ fUnknownCF_SetPointer:
     RTL                                                        ;81A5FF|6B      |      ;
  
  
-fUnknownCF_81A600:
+fTileScript_Update:
     REP #$30                                                   ;81A600|C230    |      ;
     LDA.B ptrUnknown0xCF                                       ;81A602|A5CF    |0000CF;
     BNE +                                                      ;81A604|D008    |81A60E;
@@ -1283,7 +1283,7 @@ fSetTileAtCoords:
   + PHY                                                        ;81A692|5A      |      ;
     PHX                                                        ;81A693|DA      |      ;
     PHA                                                        ;81A694|48      |      ;
-    JSL.L fUnknown_81A6C1                                      ;81A695|22C1A681|81A6C1;
+    JSL.L fMap_QueueTilePatternVRAMUpload                                      ;81A695|22C1A681|81A6C1;
     REP #$30                                                   ;81A699|C230    |      ;
     PLA                                                        ;81A69B|68      |      ;
     PLX                                                        ;81A69C|FA      |      ;
@@ -1291,10 +1291,10 @@ fSetTileAtCoords:
     PHY                                                        ;81A69E|5A      |      ;
     PHX                                                        ;81A69F|DA      |      ;
     PHA                                                        ;81A6A0|48      |      ;
-    JSL.L fUnknown_81A83A                                      ;81A6A1|223AA881|81A83A;
+    JSL.L fMap_CalcTilemapBufferOffset                                      ;81A6A1|223AA881|81A83A;
     REP #$30                                                   ;81A6A5|C230    |      ;
     PLA                                                        ;81A6A7|68      |      ;
-    JSL.L fUnknown_81A801                                      ;81A6A8|2201A881|81A801;
+    JSL.L fMap_GetTilePatternInfo                                      ;81A6A8|2201A881|81A801;
     REP #$30                                                   ;81A6AC|C230    |      ;
     PLX                                                        ;81A6AE|FA      |      ;
     PLY                                                        ;81A6AF|7A      |      ;
@@ -1310,7 +1310,7 @@ fSetTileAtCoords:
     RTL                                                        ;81A6C0|6B      |      ;
  
  
-fUnknown_81A6C1:
+fMap_QueueTilePatternVRAMUpload:
     REP #$30                                                   ;81A6C1|C230    |      ; A: nArg, X: nPosX, Y: nPosY
     PHA                                                        ;81A6C3|48      |      ;
     TXA                                                        ;81A6C4|8A      |      ;
@@ -1393,7 +1393,7 @@ fUnknown_81A6C1:
     STA.B ptrUnknown0x75+2                                     ;81A73F|8577    |000077;
     REP #$20                                                   ;81A741|C220    |      ;
     PLA                                                        ;81A743|68      |      ;
-    JSL.L fUnknown_81A801                                      ;81A744|2201A881|81A801;
+    JSL.L fMap_GetTilePatternInfo                                      ;81A744|2201A881|81A801;
     REP #$20                                                   ;81A748|C220    |      ;
     LDA.B strcVariables.n16Temp2                               ;81A74A|A580    |000080;
     ASL A                                                      ;81A74C|0A      |      ;
@@ -1476,12 +1476,12 @@ fUnknown_81A6C1:
     RTL                                                        ;81A7CD|6B      |      ;
  
  
-fUnknown_81A7CE:
+fMap_DrawTilePatternAt:
     REP #$30                                                   ;81A7CE|C230    |      ; A: nArg1, X: nArg2, Y: nArg3
     PHY                                                        ;81A7D0|5A      |      ;
     PHX                                                        ;81A7D1|DA      |      ;
     PHA                                                        ;81A7D2|48      |      ;
-    JSL.L fUnknown_81A801                                      ;81A7D3|2201A881|81A801;
+    JSL.L fMap_GetTilePatternInfo                                      ;81A7D3|2201A881|81A801;
     REP #$30                                                   ;81A7D7|C230    |      ;
     PLA                                                        ;81A7D9|68      |      ;
     PLX                                                        ;81A7DA|FA      |      ;
@@ -1489,10 +1489,10 @@ fUnknown_81A7CE:
     PHY                                                        ;81A7DC|5A      |      ;
     PHX                                                        ;81A7DD|DA      |      ;
     PHA                                                        ;81A7DE|48      |      ;
-    JSL.L fUnknown_81A83A                                      ;81A7DF|223AA881|81A83A;
+    JSL.L fMap_CalcTilemapBufferOffset                                      ;81A7DF|223AA881|81A83A;
     REP #$30                                                   ;81A7E3|C230    |      ;
     PLA                                                        ;81A7E5|68      |      ;
-    JSL.L fUnknown_81A801                                      ;81A7E6|2201A881|81A801;
+    JSL.L fMap_GetTilePatternInfo                                      ;81A7E6|2201A881|81A801;
     REP #$30                                                   ;81A7EA|C230    |      ;
     PLX                                                        ;81A7EC|FA      |      ;
     PLY                                                        ;81A7ED|7A      |      ;
@@ -1508,7 +1508,7 @@ fUnknown_81A7CE:
   + RTL                                                        ;81A800|6B      |      ;
  
  
-fUnknown_81A801:
+fMap_GetTilePatternInfo:
     REP #$30                                                   ;81A801|C230    |      ; A: nIndex, return $7E, $82, $80, $84
     STA.B strcVariables.n16Temp1                               ;81A803|857E    |00007E;
     ASL A                                                      ;81A805|0A      |      ;
@@ -1542,7 +1542,7 @@ fUnknown_81A801:
     RTL                                                        ;81A839|6B      |      ;
  
  
-fUnknown_81A83A:
+fMap_CalcTilemapBufferOffset:
     REP #$30                                                   ;81A83A|C230    |      ; A: nIndex
     PHA                                                        ;81A83C|48      |      ;
     TXA                                                        ;81A83D|8A      |      ;
@@ -1593,7 +1593,7 @@ fUnknown_81A83A:
     ADC.B strcVariables.n16Temp2                               ;81A882|6580    |000080;
     STA.B strcVariables.n16Unk86                               ;81A884|8586    |000086;
     PLA                                                        ;81A886|68      |      ;
-    JSL.L fUnknown_81A801                                      ;81A887|2201A881|81A801;
+    JSL.L fMap_GetTilePatternInfo                                      ;81A887|2201A881|81A801;
     REP #$20                                                   ;81A88B|C220    |      ;
     LDA.B strcVariables.n16Temp2                               ;81A88D|A580    |000080;
     ASL A                                                      ;81A88F|0A      |      ;
@@ -1711,7 +1711,7 @@ fUnknown_81A83A:
   + RTL                                                        ;81A949|6B      |      ;
  
  
-fUnknown_81A94A:
+fShed_PlaceEquippedTool:
     SEP #$20                                                   ;81A94A|E220    |      ;
     REP #$10                                                   ;81A94C|C210    |      ;
     LDA.W strcPlayerData.toolSecond                            ;81A94E|AD2309  |000923;
@@ -1927,7 +1927,7 @@ fItemSub81A9F6_0x00to0x03:
     PHA                                                        ;81AACA|48      |      ;
     PHX                                                        ;81AACB|DA      |      ;
     PHY                                                        ;81AACC|5A      |      ;
-    JSL.L fUnknown_81A7CE                                      ;81AACD|22CEA781|81A7CE;
+    JSL.L fMap_DrawTilePatternAt                                      ;81AACD|22CEA781|81A7CE;
     REP #$30                                                   ;81AAD1|C230    |      ;
     PLY                                                        ;81AAD3|7A      |      ;
     PLX                                                        ;81AAD4|FA      |      ;
@@ -1944,7 +1944,7 @@ fItemSub81A9F6_0x00to0x03:
     PHA                                                        ;81AAEE|48      |      ;
     PHX                                                        ;81AAEF|DA      |      ;
     PHY                                                        ;81AAF0|5A      |      ;
-    JSL.L fUnknown_81A7CE                                      ;81AAF1|22CEA781|81A7CE;
+    JSL.L fMap_DrawTilePatternAt                                      ;81AAF1|22CEA781|81A7CE;
     REP #$30                                                   ;81AAF5|C230    |      ;
     PLY                                                        ;81AAF7|7A      |      ;
     PLX                                                        ;81AAF8|FA      |      ;
@@ -1962,7 +1962,7 @@ fItemSub81A9F6_0x00to0x03:
     PHA                                                        ;81AB14|48      |      ;
     PHX                                                        ;81AB15|DA      |      ;
     PHY                                                        ;81AB16|5A      |      ;
-    JSL.L fUnknown_81A7CE                                      ;81AB17|22CEA781|81A7CE;
+    JSL.L fMap_DrawTilePatternAt                                      ;81AB17|22CEA781|81A7CE;
     REP #$30                                                   ;81AB1B|C230    |      ;
     PLY                                                        ;81AB1D|7A      |      ;
     PLX                                                        ;81AB1E|FA      |      ;
@@ -1982,7 +1982,7 @@ fItemSub81A9F6_0x00to0x03:
     PHA                                                        ;81AB3C|48      |      ;
     PHX                                                        ;81AB3D|DA      |      ;
     PHY                                                        ;81AB3E|5A      |      ;
-    JSL.L fUnknown_81A7CE                                      ;81AB3F|22CEA781|81A7CE;
+    JSL.L fMap_DrawTilePatternAt                                      ;81AB3F|22CEA781|81A7CE;
     REP #$30                                                   ;81AB43|C230    |      ;
     PLY                                                        ;81AB45|7A      |      ;
     PLX                                                        ;81AB46|FA      |      ;
@@ -2018,7 +2018,7 @@ fItemSub81A9F6_0x00to0x03:
     PHA                                                        ;81AB76|48      |      ;
     PHX                                                        ;81AB77|DA      |      ;
     PHY                                                        ;81AB78|5A      |      ;
-    JSL.L fUnknown_81A7CE                                      ;81AB79|22CEA781|81A7CE;
+    JSL.L fMap_DrawTilePatternAt                                      ;81AB79|22CEA781|81A7CE;
     REP #$30                                                   ;81AB7D|C230    |      ;
     PLY                                                        ;81AB7F|7A      |      ;
     PLX                                                        ;81AB80|FA      |      ;
@@ -2042,7 +2042,7 @@ fItemSub81A9F6_0x00to0x03:
     PHA                                                        ;81ABA8|48      |      ;
     PHX                                                        ;81ABA9|DA      |      ;
     PHY                                                        ;81ABAA|5A      |      ;
-    JSL.L fUnknown_81A7CE                                      ;81ABAB|22CEA781|81A7CE;
+    JSL.L fMap_DrawTilePatternAt                                      ;81ABAB|22CEA781|81A7CE;
     REP #$30                                                   ;81ABAF|C230    |      ;
     PLY                                                        ;81ABB1|7A      |      ;
     PLX                                                        ;81ABB2|FA      |      ;
@@ -2059,7 +2059,7 @@ fItemSub81A9F6_0x00to0x03:
     PHA                                                        ;81ABCC|48      |      ;
     PHX                                                        ;81ABCD|DA      |      ;
     PHY                                                        ;81ABCE|5A      |      ;
-    JSL.L fUnknown_81A7CE                                      ;81ABCF|22CEA781|81A7CE;
+    JSL.L fMap_DrawTilePatternAt                                      ;81ABCF|22CEA781|81A7CE;
     REP #$30                                                   ;81ABD3|C230    |      ;
     PLY                                                        ;81ABD5|7A      |      ;
     PLX                                                        ;81ABD6|FA      |      ;
@@ -2076,7 +2076,7 @@ fItemSub81A9F6_0x00to0x03:
     PHA                                                        ;81ABF0|48      |      ;
     PHX                                                        ;81ABF1|DA      |      ;
     PHY                                                        ;81ABF2|5A      |      ;
-    JSL.L fUnknown_81A7CE                                      ;81ABF3|22CEA781|81A7CE;
+    JSL.L fMap_DrawTilePatternAt                                      ;81ABF3|22CEA781|81A7CE;
     REP #$30                                                   ;81ABF7|C230    |      ;
     PLY                                                        ;81ABF9|7A      |      ;
     PLX                                                        ;81ABFA|FA      |      ;
@@ -2093,7 +2093,7 @@ fItemSub81A9F6_0x00to0x03:
     PHA                                                        ;81AC14|48      |      ;
     PHX                                                        ;81AC15|DA      |      ;
     PHY                                                        ;81AC16|5A      |      ;
-    JSL.L fUnknown_81A7CE                                      ;81AC17|22CEA781|81A7CE;
+    JSL.L fMap_DrawTilePatternAt                                      ;81AC17|22CEA781|81A7CE;
     REP #$30                                                   ;81AC1B|C230    |      ;
     PLY                                                        ;81AC1D|7A      |      ;
     PLX                                                        ;81AC1E|FA      |      ;
@@ -2110,7 +2110,7 @@ fItemSub81A9F6_0x00to0x03:
     PHA                                                        ;81AC38|48      |      ;
     PHX                                                        ;81AC39|DA      |      ;
     PHY                                                        ;81AC3A|5A      |      ;
-    JSL.L fUnknown_81A7CE                                      ;81AC3B|22CEA781|81A7CE;
+    JSL.L fMap_DrawTilePatternAt                                      ;81AC3B|22CEA781|81A7CE;
     REP #$30                                                   ;81AC3F|C230    |      ;
     PLY                                                        ;81AC41|7A      |      ;
     PLX                                                        ;81AC42|FA      |      ;
@@ -2194,7 +2194,7 @@ fItemSub81A9F6_0x10to0x13:
     PHA                                                        ;81ACA6|48      |      ;
     PHX                                                        ;81ACA7|DA      |      ;
     PHY                                                        ;81ACA8|5A      |      ;
-    JSL.L fUnknown_81A7CE                                      ;81ACA9|22CEA781|81A7CE;
+    JSL.L fMap_DrawTilePatternAt                                      ;81ACA9|22CEA781|81A7CE;
     REP #$30                                                   ;81ACAD|C230    |      ;
     PLY                                                        ;81ACAF|7A      |      ;
     PLX                                                        ;81ACB0|FA      |      ;
@@ -2209,7 +2209,7 @@ fItemSub81A9F6_0x10to0x13:
     LDA.W #$00E2                                               ;81ACB9|A9E200  |      ;
     LDX.W #$0180                                               ;81ACBC|A28001  |      ;
     LDY.W #$0020                                               ;81ACBF|A02000  |      ;
-    JSL.L fUnknown_81A7CE                                      ;81ACC2|22CEA781|81A7CE;
+    JSL.L fMap_DrawTilePatternAt                                      ;81ACC2|22CEA781|81A7CE;
     BRA .loop                                                  ;81ACC6|80CA    |81AC92;
  
     RTS                                                        ;81ACC8|60      |      ;
@@ -2231,7 +2231,7 @@ fItemSub81A9F6_0x15:
     LDA.W #$00EE                                               ;81ACD6|A9EE00  |      ;
     LDX.W #$0070                                               ;81ACD9|A27000  |      ;
     LDY.W #$00C0                                               ;81ACDC|A0C000  |      ;
-    JSL.L fUnknown_81A7CE                                      ;81ACDF|22CEA781|81A7CE;
+    JSL.L fMap_DrawTilePatternAt                                      ;81ACDF|22CEA781|81A7CE;
  
   + REP #$30                                                   ;81ACE3|C230    |      ;
     %CheckFlag(event5, $1000)
@@ -2239,7 +2239,7 @@ fItemSub81A9F6_0x15:
     LDA.W #$00FD                                               ;81ACEE|A9FD00  |      ;
     LDX.W #$0090                                               ;81ACF1|A29000  |      ;
     LDY.W #$0040                                               ;81ACF4|A04000  |      ;
-    JSL.L fUnknown_81A7CE                                      ;81ACF7|22CEA781|81A7CE;
+    JSL.L fMap_DrawTilePatternAt                                      ;81ACF7|22CEA781|81A7CE;
     REP #$30                                                   ;81ACFB|C230    |      ;
     LDA.W #$00D7                                               ;81ACFD|A9D700  |      ;
     LDX.W #$0090                                               ;81AD00|A29000  |      ;
@@ -2252,7 +2252,7 @@ fItemSub81A9F6_0x15:
     LDA.W #$00FE                                               ;81AD15|A9FE00  |      ;
     LDX.W #$00A0                                               ;81AD18|A2A000  |      ;
     LDY.W #$0030                                               ;81AD1B|A03000  |      ;
-    JSL.L fUnknown_81A7CE                                      ;81AD1E|22CEA781|81A7CE;
+    JSL.L fMap_DrawTilePatternAt                                      ;81AD1E|22CEA781|81A7CE;
  
   + RTS                                                        ;81AD22|60      |      ;
  
@@ -2265,7 +2265,7 @@ fItemSub81A9F6_0x16:
     LDA.W #$00EE                                               ;81AD2D|A9EE00  |      ;
     LDX.W #$0070                                               ;81AD30|A27000  |      ;
     LDY.W #$00C0                                               ;81AD33|A0C000  |      ;
-    JSL.L fUnknown_81A7CE                                      ;81AD36|22CEA781|81A7CE;
+    JSL.L fMap_DrawTilePatternAt                                      ;81AD36|22CEA781|81A7CE;
  
   + REP #$30                                                   ;81AD3A|C230    |      ;
     %CheckFlag(event5, $1000)
@@ -2273,7 +2273,7 @@ fItemSub81A9F6_0x16:
     LDA.W #$00FD                                               ;81AD45|A9FD00  |      ;
     LDX.W #$0090                                               ;81AD48|A29000  |      ;
     LDY.W #$0040                                               ;81AD4B|A04000  |      ;
-    JSL.L fUnknown_81A7CE                                      ;81AD4E|22CEA781|81A7CE;
+    JSL.L fMap_DrawTilePatternAt                                      ;81AD4E|22CEA781|81A7CE;
     REP #$30                                                   ;81AD52|C230    |      ;
     LDA.W #$00D7                                               ;81AD54|A9D700  |      ;
     LDX.W #$0090                                               ;81AD57|A29000  |      ;
@@ -2286,7 +2286,7 @@ fItemSub81A9F6_0x16:
     LDA.W #$00FE                                               ;81AD6C|A9FE00  |      ;
     LDX.W #$00A0                                               ;81AD6F|A2A000  |      ;
     LDY.W #$0030                                               ;81AD72|A03000  |      ;
-    JSL.L fUnknown_81A7CE                                      ;81AD75|22CEA781|81A7CE;
+    JSL.L fMap_DrawTilePatternAt                                      ;81AD75|22CEA781|81A7CE;
  
   + RTS                                                        ;81AD79|60      |      ;
  
@@ -2299,7 +2299,7 @@ fItemSub81A9F6_0x17:
     LDA.W #$00EE                                               ;81AD84|A9EE00  |      ;
     LDX.W #$0070                                               ;81AD87|A27000  |      ;
     LDY.W #$00C0                                               ;81AD8A|A0C000  |      ;
-    JSL.L fUnknown_81A7CE                                      ;81AD8D|22CEA781|81A7CE;
+    JSL.L fMap_DrawTilePatternAt                                      ;81AD8D|22CEA781|81A7CE;
  
   + REP #$30                                                   ;81AD91|C230    |      ;
     %CheckFlag(event5, $1000)
@@ -2307,7 +2307,7 @@ fItemSub81A9F6_0x17:
     LDA.W #$00FD                                               ;81AD9C|A9FD00  |      ;
     LDX.W #$0140                                               ;81AD9F|A24001  |      ;
     LDY.W #$0050                                               ;81ADA2|A05000  |      ;
-    JSL.L fUnknown_81A7CE                                      ;81ADA5|22CEA781|81A7CE;
+    JSL.L fMap_DrawTilePatternAt                                      ;81ADA5|22CEA781|81A7CE;
     REP #$30                                                   ;81ADA9|C230    |      ;
     LDA.W #$00D7                                               ;81ADAB|A9D700  |      ;
     LDX.W #$0140                                               ;81ADAE|A24001  |      ;
@@ -2320,7 +2320,7 @@ fItemSub81A9F6_0x17:
     LDA.W #$00FE                                               ;81ADC3|A9FE00  |      ;
     LDX.W #$0150                                               ;81ADC6|A25001  |      ;
     LDY.W #$0040                                               ;81ADC9|A04000  |      ;
-    JSL.L fUnknown_81A7CE                                      ;81ADCC|22CEA781|81A7CE;
+    JSL.L fMap_DrawTilePatternAt                                      ;81ADCC|22CEA781|81A7CE;
  
   + RTS                                                        ;81ADD0|60      |      ;
  
@@ -2364,7 +2364,7 @@ fItemSub81A9F6_0x1C:
     INC A                                                      ;81ADF9|1A      |      ;
     LDX.W #$0001                                               ;81ADFA|A20100  |      ;
     LDY.W #$0002                                               ;81ADFD|A00200  |      ;
-    JSR.W fUnknown_81B2BB                                      ;81AE00|20BBB2  |81B2BB;
+    JSR.W fShed_DrawItemPatternByFlag                                      ;81AE00|20BBB2  |81B2BB;
     REP #$30                                                   ;81AE03|C230    |      ;
     PLY                                                        ;81AE05|7A      |      ;
     INY                                                        ;81AE06|C8      |      ;
@@ -2388,7 +2388,7 @@ fItemSub81A9F6_0x1C:
     INC A                                                      ;81AE22|1A      |      ;
     LDX.W #$0001                                               ;81AE23|A20100  |      ;
     LDY.W #$0002                                               ;81AE26|A00200  |      ;
-    JSR.W fUnknown_81B2BB                                      ;81AE29|20BBB2  |81B2BB;
+    JSR.W fShed_DrawItemPatternByFlag                                      ;81AE29|20BBB2  |81B2BB;
     REP #$30                                                   ;81AE2C|C230    |      ;
     PLY                                                        ;81AE2E|7A      |      ;
     INY                                                        ;81AE2F|C8      |      ;
@@ -2404,7 +2404,7 @@ fItemSub81A9F6_0x1C:
     LDA.W #$0005                                               ;81AE43|A90500  |      ;
     LDX.W #$0001                                               ;81AE46|A20100  |      ;
     LDY.W #$0002                                               ;81AE49|A00200  |      ;
-    JSR.W fUnknown_81B2BB                                      ;81AE4C|20BBB2  |81B2BB;
+    JSR.W fShed_DrawItemPatternByFlag                                      ;81AE4C|20BBB2  |81B2BB;
  
 .exit:
     SEP #$20                                                   ;81AE4F|E220    |      ;
@@ -2418,7 +2418,7 @@ fItemSub81A9F6_0x1C:
     LDA.W #$0006                                               ;81AE5D|A90600  |      ;
     LDX.W #$0001                                               ;81AE60|A20100  |      ;
     LDY.W #$0000                                               ;81AE63|A00000  |      ;
-    JSR.W fUnknown_81B2BB                                      ;81AE66|20BBB2  |81B2BB;
+    JSR.W fShed_DrawItemPatternByFlag                                      ;81AE66|20BBB2  |81B2BB;
  
 .return:
     RTS                                                        ;81AE69|60      |      ;
@@ -2466,7 +2466,7 @@ fItemSub81A9F6_0x22:
     LDA.W #$0001                                               ;81AE9A|A90100  |      ;
     LDX.W #$0002                                               ;81AE9D|A20200  |      ;
     LDY.W #$0000                                               ;81AEA0|A00000  |      ;
-    JSR.W fUnknown_81B2BB                                      ;81AEA3|20BBB2  |81B2BB;
+    JSR.W fShed_DrawItemPatternByFlag                                      ;81AEA3|20BBB2  |81B2BB;
  
 .milker:
     SEP #$20                                                   ;81AEA6|E220    |      ;
@@ -2480,7 +2480,7 @@ fItemSub81A9F6_0x22:
     LDA.W #$0002                                               ;81AEB8|A90200  |      ;
     LDX.W #$0002                                               ;81AEBB|A20200  |      ;
     LDY.W #$0000                                               ;81AEBE|A00000  |      ;
-    JSR.W fUnknown_81B2BB                                      ;81AEC1|20BBB2  |81B2BB;
+    JSR.W fShed_DrawItemPatternByFlag                                      ;81AEC1|20BBB2  |81B2BB;
  
 .brush:
     SEP #$20                                                   ;81AEC4|E220    |      ;
@@ -2494,7 +2494,7 @@ fItemSub81A9F6_0x22:
     LDA.W #$0003                                               ;81AED6|A90300  |      ;
     LDX.W #$0002                                               ;81AED9|A20200  |      ;
     LDY.W #$0000                                               ;81AEDC|A00000  |      ;
-    JSR.W fUnknown_81B2BB                                      ;81AEDF|20BBB2  |81B2BB;
+    JSR.W fShed_DrawItemPatternByFlag                                      ;81AEDF|20BBB2  |81B2BB;
  
 .goldSickle:
     SEP #$20                                                   ;81AEE2|E220    |      ;
@@ -2511,7 +2511,7 @@ fItemSub81A9F6_0x22:
     LDA.W #$0004                                               ;81AEFF|A90400  |      ;
     LDX.W #$0002                                               ;81AF02|A20200  |      ;
     LDY.W #$0000                                               ;81AF05|A00000  |      ;
-    JSR.W fUnknown_81B2BB                                      ;81AF08|20BBB2  |81B2BB;
+    JSR.W fShed_DrawItemPatternByFlag                                      ;81AF08|20BBB2  |81B2BB;
  
 .goldPlow:
     SEP #$20                                                   ;81AF0B|E220    |      ;
@@ -2528,7 +2528,7 @@ fItemSub81A9F6_0x22:
     LDA.W #$0005                                               ;81AF28|A90500  |      ;
     LDX.W #$0002                                               ;81AF2B|A20200  |      ;
     LDY.W #$0000                                               ;81AF2E|A00000  |      ;
-    JSR.W fUnknown_81B2BB                                      ;81AF31|20BBB2  |81B2BB;
+    JSR.W fShed_DrawItemPatternByFlag                                      ;81AF31|20BBB2  |81B2BB;
  
 .goldHammer:
     SEP #$20                                                   ;81AF34|E220    |      ;
@@ -2545,7 +2545,7 @@ fItemSub81A9F6_0x22:
     LDA.W #$0006                                               ;81AF51|A90600  |      ;
     LDX.W #$0002                                               ;81AF54|A20200  |      ;
     LDY.W #$0000                                               ;81AF57|A00000  |      ;
-    JSR.W fUnknown_81B2BB                                      ;81AF5A|20BBB2  |81B2BB;
+    JSR.W fShed_DrawItemPatternByFlag                                      ;81AF5A|20BBB2  |81B2BB;
  
 .goldAxe:
     SEP #$20                                                   ;81AF5D|E220    |      ;
@@ -2562,7 +2562,7 @@ fItemSub81A9F6_0x22:
     LDA.W #$0007                                               ;81AF7A|A90700  |      ;
     LDX.W #$0002                                               ;81AF7D|A20200  |      ;
     LDY.W #$0000                                               ;81AF80|A00000  |      ;
-    JSR.W fUnknown_81B2BB                                      ;81AF83|20BBB2  |81B2BB;
+    JSR.W fShed_DrawItemPatternByFlag                                      ;81AF83|20BBB2  |81B2BB;
  
 .sprinkler:
     SEP #$20                                                   ;81AF86|E220    |      ;
@@ -2588,7 +2588,7 @@ fItemSub81A9F6_0x22:
     LDA.W #$0008                                               ;81AFB2|A90800  |      ;
     LDX.W #$0002                                               ;81AFB5|A20200  |      ;
     LDY.W #$0000                                               ;81AFB8|A00000  |      ;
-    JSR.W fUnknown_81B2BB                                      ;81AFBB|20BBB2  |81B2BB;
+    JSR.W fShed_DrawItemPatternByFlag                                      ;81AFBB|20BBB2  |81B2BB;
  
 .return:
     RTS                                                        ;81AFBE|60      |      ;
@@ -2626,7 +2626,7 @@ fItemSub81A9F6_0x24:
     LDA.W #$0001                                               ;81AFFC|A90100  |      ;
     LDX.W #$0003                                               ;81AFFF|A20300  |      ;
     LDY.W #$0000                                               ;81B002|A00000  |      ;
-    JSR.W fUnknown_81B2BB                                      ;81B005|20BBB2  |81B2BB;
+    JSR.W fShed_DrawItemPatternByFlag                                      ;81B005|20BBB2  |81B2BB;
  
 .cowMedicine:
     SEP #$20                                                   ;81B008|E220    |      ;
@@ -2640,7 +2640,7 @@ fItemSub81A9F6_0x24:
     LDA.W #$0002                                               ;81B01A|A90200  |      ;
     LDX.W #$0003                                               ;81B01D|A20300  |      ;
     LDY.W #$0000                                               ;81B020|A00000  |      ;
-    JSR.W fUnknown_81B2BB                                      ;81B023|20BBB2  |81B2BB;
+    JSR.W fShed_DrawItemPatternByFlag                                      ;81B023|20BBB2  |81B2BB;
  
 .chickenFeed:
     SEP #$20                                                   ;81B026|E220    |      ;
@@ -2654,7 +2654,7 @@ fItemSub81A9F6_0x24:
     LDA.W #$0003                                               ;81B038|A90300  |      ;
     LDX.W #$0003                                               ;81B03B|A20300  |      ;
     LDY.W #$0000                                               ;81B03E|A00000  |      ;
-    JSR.W fUnknown_81B2BB                                      ;81B041|20BBB2  |81B2BB;
+    JSR.W fShed_DrawItemPatternByFlag                                      ;81B041|20BBB2  |81B2BB;
  
 .cowFeed:
     SEP #$20                                                   ;81B044|E220    |      ;
@@ -2668,7 +2668,7 @@ fItemSub81A9F6_0x24:
     LDA.W #$0004                                               ;81B056|A90400  |      ;
     LDX.W #$0003                                               ;81B059|A20300  |      ;
     LDY.W #$0000                                               ;81B05C|A00000  |      ;
-    JSR.W fUnknown_81B2BB                                      ;81B05F|20BBB2  |81B2BB;
+    JSR.W fShed_DrawItemPatternByFlag                                      ;81B05F|20BBB2  |81B2BB;
  
 .return:
     RTS                                                        ;81B062|60      |      ;
@@ -2689,7 +2689,7 @@ fItemSub81A9F6_0x26:
     INC A                                                      ;81B06D|1A      |      ;
     LDX.W #$0000                                               ;81B06E|A20000  |      ;
     LDY.W #$0001                                               ;81B071|A00100  |      ;
-    JSR.W fUnknown_81B2BB                                      ;81B074|20BBB2  |81B2BB;
+    JSR.W fShed_DrawItemPatternByFlag                                      ;81B074|20BBB2  |81B2BB;
     REP #$30                                                   ;81B077|C230    |      ;
     PLY                                                        ;81B079|7A      |      ;
     INY                                                        ;81B07A|C8      |      ;
@@ -2707,7 +2707,7 @@ fItemSub81A9F6_0x26:
     PHA                                                        ;81B097|48      |      ;
     PHX                                                        ;81B098|DA      |      ;
     PHY                                                        ;81B099|5A      |      ;
-    JSL.L fUnknown_81A7CE                                      ;81B09A|22CEA781|81A7CE;
+    JSL.L fMap_DrawTilePatternAt                                      ;81B09A|22CEA781|81A7CE;
     REP #$30                                                   ;81B09E|C230    |      ;
     PLY                                                        ;81B0A0|7A      |      ;
     PLX                                                        ;81B0A1|FA      |      ;
@@ -2723,7 +2723,7 @@ fItemSub81A9F6_0x27:
     LDA.W #$001A                                               ;81B0AA|A91A00  |      ;
     LDX.W #$0000                                               ;81B0AD|A20000  |      ;
     LDY.W #$0001                                               ;81B0B0|A00100  |      ;
-    JSR.W fUnknown_81B2BB                                      ;81B0B3|20BBB2  |81B2BB;
+    JSR.W fShed_DrawItemPatternByFlag                                      ;81B0B3|20BBB2  |81B2BB;
     REP #$30                                                   ;81B0B6|C230    |      ;
     LDY.W #$0000                                               ;81B0B8|A00000  |      ;
  
@@ -2740,16 +2740,16 @@ fItemSub81A9F6_0x27:
     ASL A                                                      ;81B0CB|0A      |      ;
     ASL A                                                      ;81B0CC|0A      |      ;
     TAX                                                        ;81B0CD|AA      |      ;
-    LDA.L DATA32_81B0ED,X                                      ;81B0CE|BFEDB081|81B0ED;
+    LDA.L aCowFeedPositionsXY,X                                      ;81B0CE|BFEDB081|81B0ED;
     PHA                                                        ;81B0D2|48      |      ;
     INX                                                        ;81B0D3|E8      |      ;
     INX                                                        ;81B0D4|E8      |      ;
-    LDA.L DATA32_81B0ED,X                                      ;81B0D5|BFEDB081|81B0ED;
+    LDA.L aCowFeedPositionsXY,X                                      ;81B0D5|BFEDB081|81B0ED;
     PHA                                                        ;81B0D9|48      |      ;
     LDA.W #$0099                                               ;81B0DA|A99900  |      ;
     PLY                                                        ;81B0DD|7A      |      ;
     PLX                                                        ;81B0DE|FA      |      ;
-    JSL.L fUnknown_81A7CE                                      ;81B0DF|22CEA781|81A7CE;
+    JSL.L fMap_DrawTilePatternAt                                      ;81B0DF|22CEA781|81A7CE;
  
   + REP #$30                                                   ;81B0E3|C230    |      ;
     PLY                                                        ;81B0E5|7A      |      ;
@@ -2759,7 +2759,7 @@ fItemSub81A9F6_0x27:
     RTS                                                        ;81B0EC|60      |      ;
  
  
-DATA32_81B0ED:
+aCowFeedPositionsXY:
     dd $01180088,$00F80088,$00D80088                           ;81B0ED|        |      ;
     dd $00980088,$00780088,$00580088                           ;81B0F9|        |      ;
     dd $01180058,$00F80058,$00D80058                           ;81B105|        |      ;
@@ -2771,7 +2771,7 @@ fItemSub81A9F6_0x28:
     LDA.W #$0019                                               ;81B123|A91900  |      ;
     LDX.W #$0000                                               ;81B126|A20000  |      ;
     LDY.W #$0001                                               ;81B129|A00100  |      ;
-    JSR.W fUnknown_81B2BB                                      ;81B12C|20BBB2  |81B2BB;
+    JSR.W fShed_DrawItemPatternByFlag                                      ;81B12C|20BBB2  |81B2BB;
     REP #$30                                                   ;81B12F|C230    |      ;
     REP #$30                                                   ;81B131|C230    |      ;
     LDY.W #$0000                                               ;81B133|A00000  |      ;
@@ -2788,16 +2788,16 @@ fItemSub81A9F6_0x28:
     ASL A                                                      ;81B146|0A      |      ;
     ASL A                                                      ;81B147|0A      |      ;
     TAX                                                        ;81B148|AA      |      ;
-    LDA.L DATA32_81B19F,X                                      ;81B149|BF9FB181|81B19F;
+    LDA.L aChickenFeedPositionsXY,X                                      ;81B149|BF9FB181|81B19F;
     PHA                                                        ;81B14D|48      |      ;
     INX                                                        ;81B14E|E8      |      ;
     INX                                                        ;81B14F|E8      |      ;
-    LDA.L DATA32_81B19F,X                                      ;81B150|BF9FB181|81B19F;
+    LDA.L aChickenFeedPositionsXY,X                                      ;81B150|BF9FB181|81B19F;
     PHA                                                        ;81B154|48      |      ;
     LDA.W #$0099                                               ;81B155|A99900  |      ;
     PLY                                                        ;81B158|7A      |      ;
     PLX                                                        ;81B159|FA      |      ;
-    JSL.L fUnknown_81A7CE                                      ;81B15A|22CEA781|81A7CE;
+    JSL.L fMap_DrawTilePatternAt                                      ;81B15A|22CEA781|81A7CE;
  
   + REP #$30                                                   ;81B15E|C230    |      ;
     PLY                                                        ;81B160|7A      |      ;
@@ -2812,7 +2812,7 @@ fItemSub81A9F6_0x28:
     TYA                                                        ;81B16F|98      |      ;
     ASL A                                                      ;81B170|0A      |      ;
     TAX                                                        ;81B171|AA      |      ;
-    LDA.L nMaskUnknown_81BF97,X                                ;81B172|BF97BF81|81BF97;
+    LDA.L aBitMask16,X                                ;81B172|BF97BF81|81BF97;
     AND.L nEggInCoopFlags                                      ;81B176|2F451F7F|7F1F45;
     BEQ +                                                      ;81B17A|F019    |81B195;
     TYA                                                        ;81B17C|98      |      ;
@@ -2828,7 +2828,7 @@ fItemSub81A9F6_0x28:
     LDA.W #$00F1                                               ;81B18C|A9F100  |      ;
     PLY                                                        ;81B18F|7A      |      ;
     PLX                                                        ;81B190|FA      |      ;
-    JSL.L fUnknown_81A7CE                                      ;81B191|22CEA781|81A7CE;
+    JSL.L fMap_DrawTilePatternAt                                      ;81B191|22CEA781|81A7CE;
  
   + REP #$30                                                   ;81B195|C230    |      ;
     PLY                                                        ;81B197|7A      |      ;
@@ -2838,7 +2838,7 @@ fItemSub81A9F6_0x28:
     RTS                                                        ;81B19E|60      |      ;
  
  
-DATA32_81B19F:
+aChickenFeedPositionsXY:
     dd $00200020,$00200030,$00200040                           ;81B19F|        |      ;
     dd $00200050,$00200060,$00200070                           ;81B1AB|        |      ;
     dd $00200080,$00200090,$002000A0                           ;81B1B7|        |      ;
@@ -2854,7 +2854,7 @@ fItemSub81A9F6_0x29:
     PHA                                                        ;81B1E3|48      |      ;
     PHX                                                        ;81B1E4|DA      |      ;
     PHY                                                        ;81B1E5|5A      |      ;
-    JSL.L fUnknown_81A7CE                                      ;81B1E6|22CEA781|81A7CE;
+    JSL.L fMap_DrawTilePatternAt                                      ;81B1E6|22CEA781|81A7CE;
     REP #$30                                                   ;81B1EA|C230    |      ;
     PLY                                                        ;81B1EC|7A      |      ;
     PLX                                                        ;81B1ED|FA      |      ;
@@ -2866,7 +2866,7 @@ fItemSub81A9F6_0x29:
     PHA                                                        ;81B1FA|48      |      ;
     PHX                                                        ;81B1FB|DA      |      ;
     PHY                                                        ;81B1FC|5A      |      ;
-    JSL.L fUnknown_81A7CE                                      ;81B1FD|22CEA781|81A7CE;
+    JSL.L fMap_DrawTilePatternAt                                      ;81B1FD|22CEA781|81A7CE;
     REP #$30                                                   ;81B201|C230    |      ;
     PLY                                                        ;81B203|7A      |      ;
     PLX                                                        ;81B204|FA      |      ;
@@ -2878,7 +2878,7 @@ fItemSub81A9F6_0x29:
     PHA                                                        ;81B211|48      |      ;
     PHX                                                        ;81B212|DA      |      ;
     PHY                                                        ;81B213|5A      |      ;
-    JSL.L fUnknown_81A7CE                                      ;81B214|22CEA781|81A7CE;
+    JSL.L fMap_DrawTilePatternAt                                      ;81B214|22CEA781|81A7CE;
     REP #$30                                                   ;81B218|C230    |      ;
     PLY                                                        ;81B21A|7A      |      ;
     PLX                                                        ;81B21B|FA      |      ;
@@ -2901,7 +2901,7 @@ fItemSub81A9F6_0x2A:
     PHA                                                        ;81B235|48      |      ;
     PHX                                                        ;81B236|DA      |      ;
     PHY                                                        ;81B237|5A      |      ;
-    JSL.L fUnknown_81A7CE                                      ;81B238|22CEA781|81A7CE;
+    JSL.L fMap_DrawTilePatternAt                                      ;81B238|22CEA781|81A7CE;
     REP #$30                                                   ;81B23C|C230    |      ;
     PLY                                                        ;81B23E|7A      |      ;
     PLX                                                        ;81B23F|FA      |      ;
@@ -2914,7 +2914,7 @@ fItemSub81A9F6_0x2A:
     PHA                                                        ;81B250|48      |      ;
     PHX                                                        ;81B251|DA      |      ;
     PHY                                                        ;81B252|5A      |      ;
-    JSL.L fUnknown_81A7CE                                      ;81B253|22CEA781|81A7CE;
+    JSL.L fMap_DrawTilePatternAt                                      ;81B253|22CEA781|81A7CE;
     REP #$30                                                   ;81B257|C230    |      ;
     PLY                                                        ;81B259|7A      |      ;
     PLX                                                        ;81B25A|FA      |      ;
@@ -2982,7 +2982,7 @@ fItemSub81A9F6_0x37:
     LDA.W #$009B                                               ;81B285|A99B00  |      ;
     LDX.W #$0080                                               ;81B288|A28000  |      ;
     LDY.W #$0110                                               ;81B28B|A01001  |      ;
-    JSL.L fUnknown_81A7CE                                      ;81B28E|22CEA781|81A7CE;
+    JSL.L fMap_DrawTilePatternAt                                      ;81B28E|22CEA781|81A7CE;
  
 .return:
     RTS                                                        ;81B292|60      |      ;
@@ -3148,7 +3148,7 @@ fItemSub81A9F6_0x5F:
     RTS                                                        ;81B2BA|60      |      ;
  
  
-fUnknown_81B2BB:
+fShed_DrawItemPatternByFlag:
     REP #$30                                                   ;81B2BB|C230    |      ; A: nArg, X: nArg, Y: nArg
     PHY                                                        ;81B2BD|5A      |      ;
     PHA                                                        ;81B2BE|48      |      ;
@@ -3256,7 +3256,7 @@ fUnknown_81B2BB:
     LDA.B [ptrTemp0x72],Y                                      ;81B35A|B772    |000072;
     PLY                                                        ;81B35C|7A      |      ;
     PLX                                                        ;81B35D|FA      |      ;
-    JSL.L fUnknown_81A7CE                                      ;81B35E|22CEA781|81A7CE;
+    JSL.L fMap_DrawTilePatternAt                                      ;81B35E|22CEA781|81A7CE;
  
 .return:
     RTS                                                        ;81B362|60      |      ;
@@ -3777,418 +3777,418 @@ Table_81B363:
     db $00,$00                                                 ;81B95F|        |      ;
     dw $0000                                                   ;81B961|        |      ;
 pTable_81B963:
-    dl DATA8_81BA3E                                            ;81B963|        |81BA3E; 0x49 * [ptr24]
-    dl DATA8_81BA5C                                            ;81B966|        |81BA5C;
-    dl DATA8_81BA6F                                            ;81B969|        |81BA6F;
-    dl DATA8_81BA82                                            ;81B96C|        |81BA82;
-    dl DATA8_81BA8B                                            ;81B96F|        |81BA8B;
-    dl DATA8_81BA9E                                            ;81B972|        |81BA9E;
-    dl DATA8_81BAB1                                            ;81B975|        |81BAB1;
-    dl DATA8_81BABA                                            ;81B978|        |81BABA;
-    dl DATA8_81BAC3                                            ;81B97B|        |81BAC3;
-    dl DATA8_81BACC                                            ;81B97E|        |81BACC;
-    dl DATA8_81BADF                                            ;81B981|        |81BADF;
-    dl DATA8_81BAE8                                            ;81B984|        |81BAE8;
-    dl DATA8_81BAF1                                            ;81B987|        |81BAF1;
-    dl DATA8_81BB04                                            ;81B98A|        |81BB04;
-    dl DATA8_81BB0D                                            ;81B98D|        |81BB0D;
-    dl DATA8_81BB16                                            ;81B990|        |81BB16;
-    dl DATA8_81BB1F                                            ;81B993|        |81BB1F;
-    dl DATA8_81BB28                                            ;81B996|        |81BB28;
-    dl DATA8_81BB31                                            ;81B999|        |81BB31;
-    dl DATA8_81BB3A                                            ;81B99C|        |81BB3A;
-    dl DATA8_81BB43                                            ;81B99F|        |81BB43;
-    dl DATA8_81BB4C                                            ;81B9A2|        |81BB4C;
-    dl DATA8_81BB63                                            ;81B9A5|        |81BB63;
-    dl DATA8_81BB6C                                            ;81B9A8|        |81BB6C;
-    dl DATA8_81BB75                                            ;81B9AB|        |81BB75;
-    dl DATA8_81BB7E                                            ;81B9AE|        |81BB7E;
-    dl DATA8_81BB87                                            ;81B9B1|        |81BB87;
-    dl DATA8_81BB90                                            ;81B9B4|        |81BB90;
-    dl DATA8_81BB99                                            ;81B9B7|        |81BB99;
-    dl DATA8_81BBA2                                            ;81B9BA|        |81BBA2;
-    dl DATA8_81BBAB                                            ;81B9BD|        |81BBAB;
-    dl DATA8_81BBB4                                            ;81B9C0|        |81BBB4;
-    dl DATA8_81BBBD                                            ;81B9C3|        |81BBBD;
-    dl DATA8_81BBC6                                            ;81B9C6|        |81BBC6;
-    dl DATA8_81BBCF                                            ;81B9C9|        |81BBCF;
-    dl DATA8_81BBD8                                            ;81B9CC|        |81BBD8;
-    dl DATA8_81BBE1                                            ;81B9CF|        |81BBE1;
-    dl DATA8_81BBF1                                            ;81B9D2|        |81BBF1;
-    dl DATA8_81BC01                                            ;81B9D5|        |81BC01;
-    dl DATA8_81BC11                                            ;81B9D8|        |81BC11;
-    dl DATA8_81BC2F                                            ;81B9DB|        |81BC2F;
-    dl DATA8_81BC42                                            ;81B9DE|        |81BC42;
-    dl DATA8_81BC55                                            ;81B9E1|        |81BC55;
-    dl DATA8_81BC5E                                            ;81B9E4|        |81BC5E;
-    dl DATA8_81BC71                                            ;81B9E7|        |81BC71;
-    dl DATA8_81BC84                                            ;81B9EA|        |81BC84;
-    dl DATA8_81BC8D                                            ;81B9ED|        |81BC8D;
-    dl DATA8_81BC96                                            ;81B9F0|        |81BC96;
-    dl DATA8_81BC9F                                            ;81B9F3|        |81BC9F;
-    dl DATA8_81BCB2                                            ;81B9F6|        |81BCB2;
-    dl DATA8_81BCBB                                            ;81B9F9|        |81BCBB;
-    dl DATA8_81BCC4                                            ;81B9FC|        |81BCC4;
-    dl DATA8_81BCD7                                            ;81B9FF|        |81BCD7;
-    dl DATA8_81BCF5                                            ;81BA02|        |81BCF5;
-    dl DATA8_81BD08                                            ;81BA05|        |81BD08;
-    dl DATA8_81BD1B                                            ;81BA08|        |81BD1B;
-    dl DATA8_81BD24                                            ;81BA0B|        |81BD24;
-    dl DATA8_81BD37                                            ;81BA0E|        |81BD37;
-    dl DATA8_81BD4A                                            ;81BA11|        |81BD4A;
-    dl DATA8_81BD53                                            ;81BA14|        |81BD53;
-    dl DATA8_81BD5C                                            ;81BA17|        |81BD5C;
-    dl DATA8_81BD65                                            ;81BA1A|        |81BD65;
-    dl DATA8_81BD78                                            ;81BA1D|        |81BD78;
-    dl DATA8_81BD81                                            ;81BA20|        |81BD81;
-    dl DATA8_81BD8A                                            ;81BA23|        |81BD8A;
-    dl DATA8_81BD9D                                            ;81BA26|        |81BD9D;
-    dl DATA8_81BDBB                                            ;81BA29|        |81BDBB;
-    dl DATA8_81BDC4                                            ;81BA2C|        |81BDC4;
-    dl DATA8_81BDCD                                            ;81BA2F|        |81BDCD;
-    dl DATA8_81BDEB                                            ;81BA32|        |81BDEB;
-    dl DATA8_81BDF4                                            ;81BA35|        |81BDF4;
-    dl DATA8_81BDFD                                            ;81BA38|        |81BDFD;
-    dl DATA8_81BE06                                            ;81BA3B|        |81BE06;
+    dl aTileScript_00                                            ;81B963|        |81BA3E; 0x49 * [ptr24]
+    dl aTileScript_01                                            ;81B966|        |81BA5C;
+    dl aTileScript_02                                            ;81B969|        |81BA6F;
+    dl aTileScript_03                                            ;81B96C|        |81BA82;
+    dl aTileScript_04                                            ;81B96F|        |81BA8B;
+    dl aTileScript_05                                            ;81B972|        |81BA9E;
+    dl aTileScript_06                                            ;81B975|        |81BAB1;
+    dl aTileScript_07                                            ;81B978|        |81BABA;
+    dl aTileScript_08                                            ;81B97B|        |81BAC3;
+    dl aTileScript_09                                            ;81B97E|        |81BACC;
+    dl aTileScript_0A                                            ;81B981|        |81BADF;
+    dl aTileScript_0B                                            ;81B984|        |81BAE8;
+    dl aTileScript_0C                                            ;81B987|        |81BAF1;
+    dl aTileScript_0D                                            ;81B98A|        |81BB04;
+    dl aTileScript_0E                                            ;81B98D|        |81BB0D;
+    dl aTileScript_0F                                            ;81B990|        |81BB16;
+    dl aTileScript_10                                            ;81B993|        |81BB1F;
+    dl aTileScript_11                                            ;81B996|        |81BB28;
+    dl aTileScript_12                                            ;81B999|        |81BB31;
+    dl aTileScript_13                                            ;81B99C|        |81BB3A;
+    dl aTileScript_14                                            ;81B99F|        |81BB43;
+    dl aTileScript_15                                            ;81B9A2|        |81BB4C;
+    dl aTileScript_16                                            ;81B9A5|        |81BB63;
+    dl aTileScript_17                                            ;81B9A8|        |81BB6C;
+    dl aTileScript_18                                            ;81B9AB|        |81BB75;
+    dl aTileScript_19                                            ;81B9AE|        |81BB7E;
+    dl aTileScript_1A                                            ;81B9B1|        |81BB87;
+    dl aTileScript_1B                                            ;81B9B4|        |81BB90;
+    dl aTileScript_1C                                            ;81B9B7|        |81BB99;
+    dl aTileScript_1D                                            ;81B9BA|        |81BBA2;
+    dl aTileScript_1E                                            ;81B9BD|        |81BBAB;
+    dl aTileScript_1F                                            ;81B9C0|        |81BBB4;
+    dl aTileScript_20                                            ;81B9C3|        |81BBBD;
+    dl aTileScript_21                                            ;81B9C6|        |81BBC6;
+    dl aTileScript_22                                            ;81B9C9|        |81BBCF;
+    dl aTileScript_23                                            ;81B9CC|        |81BBD8;
+    dl aTileScript_24                                            ;81B9CF|        |81BBE1;
+    dl aTileScript_25                                            ;81B9D2|        |81BBF1;
+    dl aTileScript_26                                            ;81B9D5|        |81BC01;
+    dl aTileScript_27                                            ;81B9D8|        |81BC11;
+    dl aTileScript_28                                            ;81B9DB|        |81BC2F;
+    dl aTileScript_29                                            ;81B9DE|        |81BC42;
+    dl aTileScript_2A                                            ;81B9E1|        |81BC55;
+    dl aTileScript_2B                                            ;81B9E4|        |81BC5E;
+    dl aTileScript_2C                                            ;81B9E7|        |81BC71;
+    dl aTileScript_2D                                            ;81B9EA|        |81BC84;
+    dl aTileScript_2E                                            ;81B9ED|        |81BC8D;
+    dl aTileScript_2F                                            ;81B9F0|        |81BC96;
+    dl aTileScript_30                                            ;81B9F3|        |81BC9F;
+    dl aTileScript_31                                            ;81B9F6|        |81BCB2;
+    dl aTileScript_32                                            ;81B9F9|        |81BCBB;
+    dl aTileScript_33                                            ;81B9FC|        |81BCC4;
+    dl aTileScript_34                                            ;81B9FF|        |81BCD7;
+    dl aTileScript_35                                            ;81BA02|        |81BCF5;
+    dl aTileScript_36                                            ;81BA05|        |81BD08;
+    dl aTileScript_37                                            ;81BA08|        |81BD1B;
+    dl aTileScript_38                                            ;81BA0B|        |81BD24;
+    dl aTileScript_39                                            ;81BA0E|        |81BD37;
+    dl aTileScript_3A                                            ;81BA11|        |81BD4A;
+    dl aTileScript_3B                                            ;81BA14|        |81BD53;
+    dl aTileScript_3C                                            ;81BA17|        |81BD5C;
+    dl aTileScript_3D                                            ;81BA1A|        |81BD65;
+    dl aTileScript_3E                                            ;81BA1D|        |81BD78;
+    dl aTileScript_3F                                            ;81BA20|        |81BD81;
+    dl aTileScript_40                                            ;81BA23|        |81BD8A;
+    dl aTileScript_41                                            ;81BA26|        |81BD9D;
+    dl aTileScript_42                                            ;81BA29|        |81BDBB;
+    dl aTileScript_43                                            ;81BA2C|        |81BDC4;
+    dl aTileScript_44                                            ;81BA2F|        |81BDCD;
+    dl aTileScript_45                                            ;81BA32|        |81BDEB;
+    dl aTileScript_46                                            ;81BA35|        |81BDF4;
+    dl aTileScript_47                                            ;81BA38|        |81BDFD;
+    dl aTileScript_48                                            ;81BA3B|        |81BE06;
  
-DATA8_81BA3E:
+aTileScript_00:
     db $61,$00,$B0,$00,$40,$00,$20,$62,$00,$B0,$00,$40         ;81BA3E|        |      ; FFFF ends, FFFE followed by ptr24 (loops)
     db $00,$10,$61,$00,$B0,$00,$40,$00,$20,$63,$00,$B0         ;81BA4A|        |      ;
     db $00,$40,$00,$30                                         ;81BA56|        |      ;
     dw $FFFF                                                   ;81BA5A|        |      ;
  
-DATA8_81BA5C:
+aTileScript_01:
     db $64,$00,$B0,$00,$40,$00,$06,$65,$00,$B0,$00,$40         ;81BA5C|        |      ;
     db $00,$06,$FE,$FF                                         ;81BA68|        |      ;
-    dl DATA8_81BA5C                                            ;81BA6C|        |81BA5C;
+    dl aTileScript_01                                            ;81BA6C|        |81BA5C;
  
-DATA8_81BA6F:
+aTileScript_02:
     db $66,$00,$B0,$00,$40,$00,$06,$67,$00,$B0,$00,$40         ;81BA6F|        |      ;
     db $00,$06                                                 ;81BA7B|        |      ;
     dw $FFFE                                                   ;81BA7D|        |      ;
-    dl DATA8_81BA6F                                            ;81BA7F|        |81BA6F;
+    dl aTileScript_02                                            ;81BA7F|        |81BA6F;
  
-DATA8_81BA82:
+aTileScript_03:
     db $68,$00,$B0,$00,$40,$00,$04                             ;81BA82|        |      ;
     dw $FFFF                                                   ;81BA89|        |      ;
  
-DATA8_81BA8B:
+aTileScript_04:
     db $69,$00,$B0,$00,$40,$00,$06,$6A,$00,$B0,$00,$40         ;81BA8B|        |      ;
     db $00,$06                                                 ;81BA97|        |      ;
     dw $FFFE                                                   ;81BA99|        |      ;
-    dl DATA8_81BA8B                                            ;81BA9B|        |81BA8B;
+    dl aTileScript_04                                            ;81BA9B|        |81BA8B;
  
-DATA8_81BA9E:
+aTileScript_05:
     db $6B,$00,$B0,$00,$40,$00,$06,$6C,$00,$B0,$00,$40         ;81BA9E|        |      ;
     db $00,$06                                                 ;81BAAA|        |      ;
     dw $FFFE                                                   ;81BAAC|        |      ;
-    dl DATA8_81BA9E                                            ;81BAAE|        |81BA9E;
+    dl aTileScript_05                                            ;81BAAE|        |81BA9E;
  
-DATA8_81BAB1:
+aTileScript_06:
     db $6D,$00,$B0,$00,$40,$00,$04                             ;81BAB1|        |      ;
     dw $FFFF                                                   ;81BAB8|        |      ;
  
-DATA8_81BABA:
+aTileScript_07:
     db $6E,$00,$B0,$00,$40,$00,$04                             ;81BABA|        |      ;
     dw $FFFF                                                   ;81BAC1|        |      ;
  
-DATA8_81BAC3:
+aTileScript_08:
     db $6F,$00,$B0,$00,$40,$00,$04                             ;81BAC3|        |      ;
     dw $FFFF                                                   ;81BACA|        |      ;
  
-DATA8_81BACC:
+aTileScript_09:
     db $70,$00,$B0,$00,$40,$00,$06,$71,$00,$B0,$00,$40         ;81BACC|        |      ;
     db $00,$06                                                 ;81BAD8|        |      ;
     dw $FFFE                                                   ;81BADA|        |      ;
-    dl DATA8_81BACC                                            ;81BADC|        |81BACC;
+    dl aTileScript_09                                            ;81BADC|        |81BACC;
  
-DATA8_81BADF:
+aTileScript_0A:
     db $72,$00,$B0,$00,$40,$00,$04                             ;81BADF|        |      ;
     dw $FFFF                                                   ;81BAE6|        |      ;
  
-DATA8_81BAE8:
+aTileScript_0B:
     db $6E,$00,$B0,$00,$40,$00,$04                             ;81BAE8|        |      ;
     dw $FFFF                                                   ;81BAEF|        |      ;
  
-DATA8_81BAF1:
+aTileScript_0C:
     db $73,$00,$B0,$00,$40,$00,$06,$74,$00,$B0,$00,$40         ;81BAF1|        |      ;
     db $00,$06                                                 ;81BAFD|        |      ;
     dw $FFFE                                                   ;81BAFF|        |      ;
-    dl DATA8_81BAF1                                            ;81BB01|        |81BAF1;
+    dl aTileScript_0C                                            ;81BB01|        |81BAF1;
  
-DATA8_81BB04:
+aTileScript_0D:
     db $02,$00,$80,$00,$30,$01,$00                             ;81BB04|        |      ;
     dw $FFFF                                                   ;81BB0B|        |      ;
  
-DATA8_81BB0D:
+aTileScript_0E:
     db $04,$00,$40,$01,$40,$01,$00                             ;81BB0D|        |      ;
     dw $FFFF                                                   ;81BB14|        |      ;
  
-DATA8_81BB16:
+aTileScript_0F:
     db $06,$00,$C0,$01,$40,$01,$00                             ;81BB16|        |      ;
     dw $FFFF                                                   ;81BB1D|        |      ;
  
-DATA8_81BB1F:
+aTileScript_10:
     db $08,$00,$A0,$01,$C0,$01,$00                             ;81BB1F|        |      ;
     dw $FFFF                                                   ;81BB26|        |      ;
  
-DATA8_81BB28:
+aTileScript_11:
     db $0A,$00,$70,$00,$90,$01,$00                             ;81BB28|        |      ;
     dw $FFFF                                                   ;81BB2F|        |      ;
  
-DATA8_81BB31:
+aTileScript_12:
     db $09,$00,$70,$00,$90,$01,$00                             ;81BB31|        |      ;
     dw $FFFF                                                   ;81BB38|        |      ;
  
-DATA8_81BB3A:
+aTileScript_13:
     db $DC,$00,$00,$02,$00,$02,$00                             ;81BB3A|        |      ;
     dw $FFFF                                                   ;81BB41|        |      ;
  
-DATA8_81BB43:
+aTileScript_14:
     db $A4,$00,$90,$00,$70,$00,$00                             ;81BB43|        |      ;
     dw $FFFF                                                   ;81BB4A|        |      ;
  
-DATA8_81BB4C:
+aTileScript_15:
     db $AB,$00,$60,$01,$70,$00,$08,$AC,$00,$60,$01,$70         ;81BB4C|        |      ;
     db $00,$08,$AD,$00,$60,$01,$70,$00,$08                     ;81BB58|        |      ;
     dw $FFFF                                                   ;81BB61|        |      ;
  
-DATA8_81BB63:
+aTileScript_16:
     db $A6,$00,$50,$02,$C0,$00,$00                             ;81BB63|        |      ;
     dw $FFFF                                                   ;81BB6A|        |      ;
  
-DATA8_81BB6C:
+aTileScript_17:
     db $A6,$00,$90,$00,$40,$03,$00                             ;81BB6C|        |      ;
     dw $FFFF                                                   ;81BB73|        |      ;
  
-DATA8_81BB75:
+aTileScript_18:
     db $A6,$00,$10,$01,$40,$03,$00                             ;81BB75|        |      ;
     dw $FFFF                                                   ;81BB7C|        |      ;
  
-DATA8_81BB7E:
+aTileScript_19:
     db $A6,$00,$90,$01,$40,$03,$00                             ;81BB7E|        |      ;
     dw $FFFF                                                   ;81BB85|        |      ;
  
-DATA8_81BB87:
+aTileScript_1A:
     db $AF,$00,$50,$02,$50,$03,$00                             ;81BB87|        |      ;
     dw $FFFF                                                   ;81BB8E|        |      ;
  
-DATA8_81BB90:
+aTileScript_1B:
     db $B1,$00,$40,$02,$40,$02,$00                             ;81BB90|        |      ;
     dw $FFFF                                                   ;81BB97|        |      ;
  
-DATA8_81BB99:
+aTileScript_1C:
     db $B3,$00,$90,$00,$20,$00,$00                             ;81BB99|        |      ;
     dw $FFFF                                                   ;81BBA0|        |      ;
  
-DATA8_81BBA2:
+aTileScript_1D:
     db $B4,$00,$90,$00,$30,$01,$00                             ;81BBA2|        |      ;
     dw $FFFF                                                   ;81BBA9|        |      ;
  
-DATA8_81BBAB:
+aTileScript_1E:
     db $B6,$00,$60,$00,$20,$01,$00                             ;81BBAB|        |      ;
     dw $FFFF                                                   ;81BBB2|        |      ;
  
-DATA8_81BBB4:
+aTileScript_1F:
     db $D5,$00,$50,$00,$20,$00,$00                             ;81BBB4|        |      ;
     dw $FFFF                                                   ;81BBBB|        |      ;
  
-DATA8_81BBBD:
+aTileScript_20:
     db $C4,$00,$60,$00,$20,$01,$00                             ;81BBBD|        |      ;
     dw $FFFF                                                   ;81BBC4|        |      ;
  
-DATA8_81BBC6:
+aTileScript_21:
     db $C9,$00,$60,$00,$20,$01,$00                             ;81BBC6|        |      ;
     dw $FFFF                                                   ;81BBCD|        |      ;
  
-DATA8_81BBCF:
+aTileScript_22:
     db $C2,$00,$80,$00,$20,$01,$00                             ;81BBCF|        |      ;
     dw $FFFF                                                   ;81BBD6|        |      ;
  
-DATA8_81BBD8:
+aTileScript_23:
     db $77,$00,$70,$00,$20,$00,$00                             ;81BBD8|        |      ;
     dw $FFFF                                                   ;81BBDF|        |      ;
  
-DATA8_81BBE1:
+aTileScript_24:
     db $0B,$00,$80,$00,$D0,$01,$08,$0C,$00,$80,$00,$D0         ;81BBE1|        |      ;
     db $01,$08                                                 ;81BBED|        |      ;
     dw $FFFF                                                   ;81BBEF|        |      ;
  
-DATA8_81BBF1:
+aTileScript_25:
     db $A1,$00,$00,$00,$50,$01,$08,$A2,$00,$00,$00,$50         ;81BBF1|        |      ;
     db $01,$08                                                 ;81BBFD|        |      ;
     dw $FFFF                                                   ;81BBFF|        |      ;
  
-DATA8_81BC01:
+aTileScript_26:
     db $A1,$00,$00,$00,$B0,$00,$08,$A2,$00,$00,$00,$B0         ;81BC01|        |      ;
     db $00,$08                                                 ;81BC0D|        |      ;
     dw $FFFF                                                   ;81BC0F|        |      ;
  
-DATA8_81BC11:
+aTileScript_27:
     db $61,$00,$B0,$00,$40,$00,$20,$62,$00,$B0,$00,$40         ;81BC11|        |      ;
     db $00,$10,$61,$00,$B0,$00,$40,$00,$20,$63,$00,$B0         ;81BC1D|        |      ;
     db $00,$40,$00,$30                                         ;81BC29|        |      ;
     dw $FFFF                                                   ;81BC2D|        |      ;
  
-DATA8_81BC2F:
+aTileScript_28:
     db $64,$00,$B0,$00,$40,$00,$06,$65,$00,$B0,$00,$40         ;81BC2F|        |      ;
     db $00,$06                                                 ;81BC3B|        |      ;
     dw $FFFE                                                   ;81BC3D|        |      ;
-    dl DATA8_81BC2F                                            ;81BC3F|        |81BC2F;
+    dl aTileScript_28                                            ;81BC3F|        |81BC2F;
  
-DATA8_81BC42:
+aTileScript_29:
     db $66,$00,$B0,$00,$40,$00,$06,$67,$00,$B0,$00,$40         ;81BC42|        |      ;
     db $00,$06                                                 ;81BC4E|        |      ;
     dw $FFFE                                                   ;81BC50|        |      ;
-    dl DATA8_81BC42                                            ;81BC52|        |81BC42;
+    dl aTileScript_29                                            ;81BC52|        |81BC42;
  
-DATA8_81BC55:
+aTileScript_2A:
     db $68,$00,$B0,$00,$40,$00,$04                             ;81BC55|        |      ;
     dw $FFFF                                                   ;81BC5C|        |      ;
  
-DATA8_81BC5E:
+aTileScript_2B:
     db $69,$00,$B0,$00,$40,$00,$06,$6A,$00,$B0,$00,$40         ;81BC5E|        |      ;
     db $00,$06                                                 ;81BC6A|        |      ;
     dw $FFFE                                                   ;81BC6C|        |      ;
-    dl DATA8_81BC5E                                            ;81BC6E|        |81BC5E;
+    dl aTileScript_2B                                            ;81BC6E|        |81BC5E;
  
-DATA8_81BC71:
+aTileScript_2C:
     db $6B,$00,$B0,$00,$40,$00,$06,$6C,$00,$B0,$00,$40         ;81BC71|        |      ;
     db $00,$06                                                 ;81BC7D|        |      ;
     dw $FFFE                                                   ;81BC7F|        |      ;
-    dl DATA8_81BC71                                            ;81BC81|        |81BC71;
+    dl aTileScript_2C                                            ;81BC81|        |81BC71;
  
-DATA8_81BC84:
+aTileScript_2D:
     db $6D,$00,$B0,$00,$40,$00,$04                             ;81BC84|        |      ;
     dw $FFFF                                                   ;81BC8B|        |      ;
  
-DATA8_81BC8D:
+aTileScript_2E:
     db $6E,$00,$B0,$00,$40,$00,$04                             ;81BC8D|        |      ;
     dw $FFFF                                                   ;81BC94|        |      ;
  
-DATA8_81BC96:
+aTileScript_2F:
     db $6F,$00,$B0,$00,$40,$00,$04                             ;81BC96|        |      ;
     dw $FFFF                                                   ;81BC9D|        |      ;
  
-DATA8_81BC9F:
+aTileScript_30:
     db $70,$00,$B0,$00,$40,$00,$06,$71,$00,$B0,$00,$40         ;81BC9F|        |      ;
     db $00,$06                                                 ;81BCAB|        |      ;
     dw $FFFE                                                   ;81BCAD|        |      ;
-    dl DATA8_81BC9F                                            ;81BCAF|        |81BC9F;
+    dl aTileScript_30                                            ;81BCAF|        |81BC9F;
  
-DATA8_81BCB2:
+aTileScript_31:
     db $72,$00,$B0,$00,$40,$00,$04                             ;81BCB2|        |      ;
     dw $FFFF                                                   ;81BCB9|        |      ;
  
-DATA8_81BCBB:
+aTileScript_32:
     db $6E,$00,$B0,$00,$40,$00,$04                             ;81BCBB|        |      ;
     dw $FFFF                                                   ;81BCC2|        |      ;
  
-DATA8_81BCC4:
+aTileScript_33:
     db $73,$00,$B0,$00,$40,$00,$06,$74,$00,$B0,$00,$40         ;81BCC4|        |      ;
     db $00,$06                                                 ;81BCD0|        |      ;
     dw $FFFE                                                   ;81BCD2|        |      ;
-    dl DATA8_81BCC4                                            ;81BCD4|        |81BCC4;
+    dl aTileScript_33                                            ;81BCD4|        |81BCC4;
  
-DATA8_81BCD7:
+aTileScript_34:
     db $61,$00,$C0,$00,$40,$00,$20,$62,$00,$C0,$00,$40         ;81BCD7|        |      ;
     db $00,$10,$61,$00,$C0,$00,$40,$00,$20,$63,$00,$C0         ;81BCE3|        |      ;
     db $00,$40,$00,$30                                         ;81BCEF|        |      ;
     dw $FFFF                                                   ;81BCF3|        |      ;
  
-DATA8_81BCF5:
+aTileScript_35:
     db $64,$00,$C0,$00,$40,$00,$06,$65,$00,$C0,$00,$40         ;81BCF5|        |      ;
     db $00,$06                                                 ;81BD01|        |      ;
     dw $FFFE                                                   ;81BD03|        |      ;
-    dl DATA8_81BCF5                                            ;81BD05|        |81BCF5;
+    dl aTileScript_35                                            ;81BD05|        |81BCF5;
  
-DATA8_81BD08:
+aTileScript_36:
     db $66,$00,$C0,$00,$40,$00,$06,$67,$00,$C0,$00,$40         ;81BD08|        |      ;
     db $00,$06                                                 ;81BD14|        |      ;
     dw $FFFE                                                   ;81BD16|        |      ;
-    dl DATA8_81BD08                                            ;81BD18|        |81BD08;
+    dl aTileScript_36                                            ;81BD18|        |81BD08;
  
-DATA8_81BD1B:
+aTileScript_37:
     db $68,$00,$C0,$00,$40,$00,$04                             ;81BD1B|        |      ;
     dw $FFFF                                                   ;81BD22|        |      ;
  
-DATA8_81BD24:
+aTileScript_38:
     db $69,$00,$C0,$00,$40,$00,$06,$6A,$00,$C0,$00,$40         ;81BD24|        |      ;
     db $00,$06                                                 ;81BD30|        |      ;
     dw $FFFE                                                   ;81BD32|        |      ;
-    dl DATA8_81BD24                                            ;81BD34|        |81BD24;
+    dl aTileScript_38                                            ;81BD34|        |81BD24;
  
-DATA8_81BD37:
+aTileScript_39:
     db $6B,$00,$C0,$00,$40,$00,$06,$6C,$00,$C0,$00,$40         ;81BD37|        |      ;
     db $00,$06                                                 ;81BD43|        |      ;
     dw $FFFE                                                   ;81BD45|        |      ;
-    dl DATA8_81BD37                                            ;81BD47|        |81BD37;
+    dl aTileScript_39                                            ;81BD47|        |81BD37;
  
-DATA8_81BD4A:
+aTileScript_3A:
     db $6D,$00,$C0,$00,$40,$00,$04                             ;81BD4A|        |      ;
     dw $FFFF                                                   ;81BD51|        |      ;
  
-DATA8_81BD53:
+aTileScript_3B:
     db $6E,$00,$C0,$00,$40,$00,$04                             ;81BD53|        |      ;
     dw $FFFF                                                   ;81BD5A|        |      ;
  
-DATA8_81BD5C:
+aTileScript_3C:
     db $6F,$00,$C0,$00,$40,$00,$04                             ;81BD5C|        |      ;
     dw $FFFF                                                   ;81BD63|        |      ;
  
-DATA8_81BD65:
+aTileScript_3D:
     db $70,$00,$C0,$00,$40,$00,$06,$71,$00,$C0,$00,$40         ;81BD65|        |      ;
     db $00,$06                                                 ;81BD71|        |      ;
     dw $FFFE                                                   ;81BD73|        |      ;
-    dl DATA8_81BD65                                            ;81BD75|        |81BD65;
+    dl aTileScript_3D                                            ;81BD75|        |81BD65;
  
-DATA8_81BD78:
+aTileScript_3E:
     db $72,$00,$C0,$00,$40,$00,$04                             ;81BD78|        |      ;
     dw $FFFF                                                   ;81BD7F|        |      ;
  
-DATA8_81BD81:
+aTileScript_3F:
     db $6E,$00,$C0,$00,$40,$00,$04                             ;81BD81|        |      ;
     dw $FFFF                                                   ;81BD88|        |      ;
  
-DATA8_81BD8A:
+aTileScript_40:
     db $73,$00,$C0,$00,$40,$00,$06,$74,$00,$C0,$00,$40         ;81BD8A|        |      ;
     db $00,$06                                                 ;81BD96|        |      ;
     dw $FFFE                                                   ;81BD98|        |      ;
-    dl DATA8_81BD8A                                            ;81BD9A|        |81BD8A;
+    dl aTileScript_40                                            ;81BD9A|        |81BD8A;
  
-DATA8_81BD9D:
+aTileScript_41:
     db $E6,$00,$80,$00,$10,$01,$06,$E7,$00,$80,$00,$10         ;81BD9D|        |      ;
     db $01,$06,$E8,$00,$80,$00,$10,$01,$06,$E9,$00,$80         ;81BDA9|        |      ;
     db $00,$10,$01,$06                                         ;81BDB5|        |      ;
     dw $FFFF                                                   ;81BDB9|        |      ;
  
-DATA8_81BDBB:
+aTileScript_42:
     db $F3,$00,$80,$00,$10,$01,$06                             ;81BDBB|        |      ;
     dw $FFFF                                                   ;81BDC2|        |      ;
  
-DATA8_81BDC4:
+aTileScript_43:
     db $F4,$00,$40,$00,$70,$00,$00                             ;81BDC4|        |      ;
     dw $FFFF                                                   ;81BDCB|        |      ;
  
-DATA8_81BDCD:
+aTileScript_44:
     db $56,$00,$20,$01,$40,$01,$08,$55,$00,$20,$01,$40         ;81BDCD|        |      ;
     db $01,$08,$57,$00,$20,$01,$40,$01,$08,$55,$00,$20         ;81BDD9|        |      ;
     db $01,$40,$01,$08                                         ;81BDE5|        |      ;
     dw $FFFF                                                   ;81BDE9|        |      ;
  
-DATA8_81BDEB:
+aTileScript_45:
     db $FA,$00,$10,$01,$F0,$00,$08                             ;81BDEB|        |      ;
     dw $FFFF                                                   ;81BDF2|        |      ;
  
-DATA8_81BDF4:
+aTileScript_46:
     db $75,$00,$B0,$00,$40,$00,$04                             ;81BDF4|        |      ;
     dw $FFFF                                                   ;81BDFB|        |      ;
  
-DATA8_81BDFD:
+aTileScript_47:
     db $75,$00,$B0,$00,$40,$00,$04                             ;81BDFD|        |      ;
     dw $FFFF                                                   ;81BE04|        |      ;
  
-DATA8_81BE06:
+aTileScript_48:
     db $75,$00,$C0,$00,$40,$00,$04                             ;81BE06|        |      ;
     dw $FFFF                                                   ;81BE0D|        |      ;
  
@@ -4292,7 +4292,7 @@ nCarriedItemTable_81BE0F:
     dw $0020,$00A0,$00D8                                       ;81BF8F|        |      ;
     db $03,$02                                                 ;81BF95|        |      ;
  
-nMaskUnknown_81BF97:
+aBitMask16:
     dw $0001,$0002,$0004,$0008,$0010,$0020                     ;81BF97|        |      ; 16 * [n16]
     dw $0040,$0080,$0100,$0200,$0400,$0800                     ;81BFA3|        |      ;
     dw $1000,$2000,$4000,$8000                                 ;81BFAF|        |      ;

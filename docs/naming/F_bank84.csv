@@ -1,0 +1,45 @@
+old,new,confidence,reason
+fAI_Unknown848020,fAI_DeactivateSlotAndObject,medium,Clears slot active byte and frees its game object via fObject_Unknown8581A2.
+fAI_Unknown84803F,fAI_SetSlotScript,medium,Selects script pppAISelector[nIndex][nSubindex] into slot +30/+32 and resets timers.
+fAI_Unknown8480F8,fAI_StartSlotScriptAtFrontTile,medium,Like SetupAreaScripting but also stores slot type at +3F and places slot at tile in front of player.
+fAI_Unknown848286,fAI_UpdateSlotMovementAndObject,medium,Per-frame slot update calling wander and step handlers then copying pos/flip/object idx to strcObject.
+fAI_Unknown848331,fAI_UpdateSlotStepMove,medium,Flag $20 step mover that counts down slot +6 and moves by dx/dy.
+fAI_Unknown8483CC,fAI_UpdateSlotWander,medium,Flag $08 wandering logic comparing counters and range per docs.
+fAI_Unknown848895,fAI_LoadSlotSpriteFromDirTable,medium,Reads 3-byte entry (word sprite and byte flip) indexed by slot nDataIndex into +16 and +14.
+fAI_Unknown8488D4,fAI_ResetSlotFull,medium,Marks slot active and clears flags timers position object idx and flip.
+fAI_Unknown848961,fAI_ResetSlotKeepObject,medium,Marks slot active with flags=1 and clears timers while keeping position and object.
+fUnknown_ToFarm,fAIAction0x31_CowDefaultPath,low,Common continuation of cow update when no special cow state at +0E applies.
+fUnknown_84A46E,fAIAction0x31_CowUpdateTail,low,Cow update tail choosing between animation/steering branches and timer increment.
+fUnknown_DirectionJump,fAIAction0x31_CowAdvanceTimer,medium,Increments slot timer word at +10 and returns shared by direction setters.
+fUnkonown_84A498,fAIAction0x31_CowState0xE0,low,Handles slot state $E0 setting payout by cow happiness thresholds and interaction $43.
+fUnknown_84A540,fAIAction0x31_CowReturnToBarn,medium,Handles state $E1 putting cow in cowbarn map $27 at its stall position.
+fUnknown_84A595,fAIAction0x31_CowSendOutside,low,Sets cow map to current season id and position $148/$178.
+fUnknown_84A5D4,fCow_AddHappiness,high,Adds signed A to strcCowData.happiness byte clamped to 0..255.
+fUnknown_84A607,fAIAction0x31_CowAnimThenFacePlayerDir,low,Sets cow animation by status then picks facing from player direction.
+fUnknown_84A740,fAIAction0x31_CowAnimThenSteerToPlayer,low,Sets cow animation by status then steers by delta to player position.
+fUnknown_playerDirDown,fAIAction0x31_CowSetDirDown,medium,Stores direction bit $01 into slot +0F.
+fUnknown_playerDirUp,fAIAction0x31_CowSetDirUp,medium,Stores direction bit $02 into slot +0F.
+fUnknown_playerDirLeft,fAIAction0x31_CowSetDirLeft,medium,Stores direction bit $04 into slot +0F.
+fUnknown_playerDirRight,fAIAction0x31_CowSetDirRight,medium,Stores direction bit $08 into slot +0F.
+fInput_Unknown84C157,fNameInput_SelectCharTable0,medium,"Name entry A on menu item 1 sets tableSelector 0 and BG1 scroll 0,0."
+fInput_Unknown84C17E,fNameInput_SelectCharTable1,medium,Name entry A on menu item 2 sets tableSelector 1 and BG1 hscroll $100.
+fInput_Unknown84C1A8,fNameInput_SelectCharTable2,medium,Name entry A on menu item 3 sets tableSelector 2 and BG1 vscroll $100.
+fInput_Unknown84C1D2,fNameInput_SelectCharTable3,low,Name entry item 4 sets tableSelector 3 only if a name has been entered.
+fInput_Unknown84C2B4,fInput_Case04_State1,low,Case04 input state 1 runs AI joypad handler and START moves to state 9.
+fInput_Unknown84C2FE,fInput_Case04_State7_ToggleChoice,medium,Up/down toggles $098E choice and B/A set n8Temp3 to 1/2.
+fInput_Unkown84C380,fInput_Case04_State8_LoadChoice,medium,Up/down toggles $098E and A calls fGameEngine_LoadContinue.
+fInput_Unknown84C428,fInput_Case04_StartToState6,low,Case04 states 2 and 3 wait for START then enter state 6.
+fInput_Unknown84C458,fInput_Case04_State5_ThreeWayChoice,medium,Up/down changes nUnknownFlags09D in range 0..2 and A confirms.
+fInput_Unknown84C57A,fInput_Case03_ConfirmSelection,medium,A in case03 grid menu opens dialog from aDialogDialogPointerIndexes by cursor.
+fInput_Unknown84C5D1,fInput_Case03_CursorDown,high,Down moves cursor dialoUnk18A within 11-entry column with wrap.
+fInput_Unknown84C612,fInput_Case03_CursorUp,high,Up moves cursor dialoUnk18A within 11-entry column with wrap.
+fInput_Unknown84C651,fInput_Case03_CursorRight,high,Right adds 11 to cursor to jump to second column.
+fInput_Unknown84C684,fInput_Case03_CursorLeft,high,Left subtracts 11 from cursor to return to first column.
+fInput_Unknown84CD16,fInput_IsObjectDirectionBlocked,medium,Probes movement in object direction via direction handlers returning 1 if blocked else 0.
+fInput_DialogUnk20,fInput_DialogHoldAFastText,low,While A held sets dialoUnk189 to 4 for flag DFLAGS_UNK02.
+fInput_Unknown84CFCC,fInput_DialogOptions_Confirm,high,A on dialog options plays sound and ends dialog returning mapUnk19A=1.
+fInput_Unknown84CFEA,fInput_DialogOptions_Down,high,Down moves dialog option answer within three-row columns with wrap.
+fInput_Unknown84D036,fInput_DialogOptions_ResetBlink,high,Shared exit zeroing dialogBlinkTimer after option cursor move.
+fInput_Unknown84D03A,fInput_DialogOptions_Up,high,Up moves dialog option answer within three-row columns with wrap.
+fInput_Unknown84D08E,fInput_DialogOptions_Right,high,Right moves option answer by 3 to the second column.
+fInput_Unknown84D0F4,fInput_DialogOptions_Left,high,Left moves option answer by 3 to the first column.

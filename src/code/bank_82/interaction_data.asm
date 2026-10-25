@@ -143,9 +143,9 @@ fUnknown_82D1C0:
     JSL.L fCore_ZeroVRAM                                       ;82D2F3|22468880|808846;
     JSL.L fCore_ZeroCGRAM                                      ;82D2F7|22808980|808980;
     JSL.L fCore_Zero0x42Ptr                                    ;82D2FB|22AB8F80|808FAB;
-    JSL.L fUnknown_Zero7EA220                                  ;82D2FF|22D78E85|858ED7;
+    JSL.L fObject_InitTileCache                                  ;82D2FF|22D78E85|858ED7;
     JSL.L fObject_ClearGameObject                              ;82D303|220F8285|85820F;
-    JSL.L fUnknown_Zero07Ptr                                   ;82D307|22C7A481|81A4C7;
+    JSL.L fObjectSlots_ClearAll                                   ;82D307|22C7A481|81A4C7;
     JSL.L fAI_ZeroCCPtr                                        ;82D30B|22008084|848000;
     JSL.L fObjectMap_LoadDefaultFarm                           ;82D30F|225AA682|82A65A;
     REP #$20                                                   ;82D313|C220    |      ;
@@ -177,16 +177,16 @@ fUnknown_82D1C0:
     JSL.L fGame_TimeHandler                                    ;82D360|22008082|828000;
     JSL.L fDialog_IterateText                                  ;82D364|221C9583|83951C;
     JSL.L fPallete_ChangeHandler                               ;82D368|220C9080|80900C;
-    JSL.L fCore_Unknown808E69                                  ;82D36C|22698E80|808E69;
+    JSL.L fPalette_ProcessColorAnimSlots                                  ;82D36C|22698E80|808E69;
     JSL.L fInput_Handler                                       ;82D370|2234C084|84C034;
-    JSL.L fUnknown_81A383                                      ;82D374|2283A381|81A383;
-    JSL.L fUnknownSubrutineHandler_81BFB7                      ;82D378|22B7BF81|81BFB7;
+    JSL.L fObjectSlots_UpdateAll                                      ;82D374|2283A381|81A383;
+    JSL.L fPlayer_UpdateHandler                      ;82D378|22B7BF81|81BFB7;
     JSL.L fGraphics_MapScrool                                  ;82D37C|22B39580|8095B3;
     JSL.L fAI_HowToPlaySetup                                   ;82D380|226F8184|84816F;
-    JSL.L fUnknownCF_81A600                                    ;82D384|2200A681|81A600;
-    JSL.L fObject_Unknown8582C7                                ;82D388|22C78285|8582C7;
-    JSL.L fUnknown_858CB2                                      ;82D38C|22B28C85|858CB2;
-    JSL.L fUnknown_8583E0                                      ;82D390|22E08385|8583E0;
+    JSL.L fTileScript_Update                                    ;82D384|2200A681|81A600;
+    JSL.L fObject_UpdateAllAnimations                                ;82D388|22C78285|8582C7;
+    JSL.L fObject_ProcessTileLoadQueue                                      ;82D38C|22B28C85|858CB2;
+    JSL.L fObject_RenderAll                                      ;82D390|22E08385|8583E0;
     REP #$20                                                   ;82D394|C220    |      ;
     %CheckFlag(daily2, $0004)
     BNE +                                                      ;82D39D|D007    |82D3A6;

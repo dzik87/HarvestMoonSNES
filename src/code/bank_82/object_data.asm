@@ -79,7 +79,7 @@ fUnknown_82B0A7:
     REP #$30                                                   ;82B0A7|C230    |      ;
     STX.B strcVariables.n16Unk8E                               ;82B0A9|868E    |00008E;
     STY.B strcVariables.n16Unk90                               ;82B0AB|8490    |000090;
-    JSL.L fUnknown_81A801                                      ;82B0AD|2201A881|81A801;
+    JSL.L fMap_GetTilePatternInfo                                      ;82B0AD|2201A881|81A801;
     REP #$30                                                   ;82B0B1|C230    |      ;
     LDA.W #$F500                                               ;82B0B3|A900F5  |      ;
     STA.B ptrTemp0x72                                          ;82B0B6|8572    |000072;

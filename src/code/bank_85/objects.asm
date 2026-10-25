@@ -2,7 +2,7 @@
     ORG $858000
  
  
-fUnknown_858000:
+fObject_Create:
     REP #$20                                                   ;858000|C220    |      ;
     LDA.B strcObject.spriteTableIdx                            ;858002|A5A1    |0000A1;
     CMP.W #$0262                                               ;858004|C96202  |      ; game object indexes above 0x262 are located at bank 87
@@ -105,7 +105,7 @@ fReturn_8580B8:
     RTL                                                        ;8580B8|6B      |      ; FIXME: I want to be .return
  
  
-fObject_Unknown8580B9:
+fObject_UpdatePositionAndFlip:
     REP #$20                                                   ;8580B9|C220    |      ;
     LDA.B strcObject.spriteTableIdx                            ;8580BB|A5A1    |0000A1;
     CMP.W #$0262                                               ;8580BD|C96202  |      ;
@@ -148,7 +148,7 @@ fObject_Unknown8580B9:
     RTL                                                        ;8580FF|6B      |      ;
  
  
-fObject_Unknown858100:
+fObject_Replace:
     REP #$30                                                   ;858100|C230    |      ;
     REP #$20                                                   ;858102|C220    |      ;
     LDA.B strcObject.spriteTableIdx                            ;858104|A5A1    |0000A1;
@@ -174,10 +174,10 @@ fObject_Unknown858100:
     TAX                                                        ;858122|AA      |      ;
     LDA.L aGameObjectIndexOffsets,X                            ;858123|BFE08B85|858BE0;
     STA.B strcObject.gameObjectIdxOffs                         ;858127|85A9    |0000A9;
-    JSR.W fUnknown_858B7B                                      ;858129|207B8B  |858B7B;
+    JSR.W fObject_CheckComponentsPending                                      ;858129|207B8B  |858B7B;
     LDA.B strcObject.bankAddress                               ;85812C|A5AF    |0000AF;
     BNE fReturn_8580B8                                         ;85812E|D088    |8580B8; BUG - should be .return in this function rather than previous one since we are out of function scope
-    JSR.W fUnknown_858B41                                      ;858130|20418B  |858B41;
+    JSR.W fObject_ReleaseSpriteTiles                                      ;858130|20418B  |858B41;
     REP #$30                                                   ;858133|C230    |      ;
     LDY.B strcObject.gameObjectIdx                             ;858135|A4A5    |0000A5;
     LDX.B strcObject.gameObjectIdxOffs                         ;858137|A6A9    |0000A9;
@@ -235,20 +235,20 @@ fObject_Unknown858100:
     RTL                                                        ;8581A1|6B      |      ;
  
  
-fObject_Unknown8581A2:
+fObject_Destroy:
     REP #$30                                                   ;8581A2|C230    |      ;
     LDA.B strcObject.gameObjectIdx                             ;8581A4|A5A5    |0000A5;
     ASL A                                                      ;8581A6|0A      |      ;
     TAX                                                        ;8581A7|AA      |      ;
     LDA.L aGameObjectIndexOffsets,X                            ;8581A8|BFE08B85|858BE0;
     STA.B strcObject.gameObjectIdxOffs                         ;8581AC|85A9    |0000A9;
-    JSR.W fUnknown_858B7B                                      ;8581AE|207B8B  |858B7B;
+    JSR.W fObject_CheckComponentsPending                                      ;8581AE|207B8B  |858B7B;
     LDA.B strcObject.bankAddress                               ;8581B1|A5AF    |0000AF;
     BEQ +                                                      ;8581B3|F003    |8581B8;
     JMP.W fReturn_8580B8                                       ;8581B5|4CB880  |8580B8; BUG - should be .return in this function rather than JUMP to other RTL
  
  
-  + JSR.W fUnknown_858B41                                      ;8581B8|20418B  |858B41;
+  + JSR.W fObject_ReleaseSpriteTiles                                      ;8581B8|20418B  |858B41;
     REP #$30                                                   ;8581BB|C230    |      ;
     LDX.B strcObject.gameObjectIdxOffs                         ;8581BD|A6A9    |0000A9;
     REP #$30                                                   ;8581BF|C230    |      ;
@@ -381,11 +381,11 @@ fObject_ClearGameObject:
 .exit:
     REP #$20                                                   ;8582BF|C220    |      ;
     STZ.B strcPlayer.unkDC                                     ;8582C1|64DC    |0000DC;
-    JSR.W fUnknown_858647                                      ;8582C3|204786  |858647;
+    JSR.W fObject_ClearOamBuffer_Init                                      ;8582C3|204786  |858647;
     RTL                                                        ;8582C6|6B      |      ;
  
  
-fObject_Unknown8582C7:
+fObject_UpdateAllAnimations:
     REP #$30                                                   ;8582C7|C230    |      ;
     STZ.B strcObject.gameObjectIdxOffs                         ;8582C9|64A9    |0000A9;
     STZ.B strcObject.unkAB                                     ;8582CB|64AB    |0000AB;
@@ -430,10 +430,10 @@ fObject_Unknown8582C7:
     LDA.W strcGameObject.objectDataPointer+2,X                 ;858305|BDAE01  |0001AE;
     BNE .label5                                                ;858308|D03F    |858349;
     REP #$20                                                   ;85830A|C220    |      ;
-    JSR.W fUnknown_858B7B                                      ;85830C|207B8B  |858B7B;
+    JSR.W fObject_CheckComponentsPending                                      ;85830C|207B8B  |858B7B;
     LDA.B strcObject.bankAddress                               ;85830F|A5AF    |0000AF;
     BNE .loop2                                                 ;858311|D0C1    |8582D4;
-    JSR.W fUnknown_858B41                                      ;858313|20418B  |858B41;
+    JSR.W fObject_ReleaseSpriteTiles                                      ;858313|20418B  |858B41;
     REP #$30                                                   ;858316|C230    |      ;
     LDX.B strcObject.gameObjectIdxOffs                         ;858318|A6A9    |0000A9;
     LDA.W strcGameObject.objectListPointer+2,X                 ;85831A|BDAA01  |0001AA;
@@ -469,7 +469,7 @@ fObject_Unknown8582C7:
     CMP.B #$FE                                                 ;85834E|C9FE    |      ;
     BNE .label6                                                ;858350|D010    |858362;
     REP #$20                                                   ;858352|C220    |      ;
-    JSR.W fUnknown_858B41                                      ;858354|20418B  |858B41;
+    JSR.W fObject_ReleaseSpriteTiles                                      ;858354|20418B  |858B41;
     REP #$30                                                   ;858357|C230    |      ;
     LDA.W #$0000                                               ;858359|A90000  |      ;
     STA.W strcGameObject.initailized,X                         ;85835C|9D9C01  |00019C;
@@ -494,7 +494,7 @@ fObject_Unknown8582C7:
     RTL                                                        ;858376|6B      |      ;
  
  
-fObject_Unknown858377:
+fObject_BuildDrawOrderByY:
     REP #$30                                                   ;858377|C230    |      ;
     LDA.W strcObjectData.gameObjectIdx                         ;858379|AD0509  |000905;
     ASL A                                                      ;85837C|0A      |      ;
@@ -557,7 +557,7 @@ fObject_Unknown858377:
     RTS                                                        ;8583DF|60      |      ;
  
  
-fUnknown_8583E0:
+fObject_RenderAll:
     REP #$30                                                   ;8583E0|C230    |      ;
     REP #$20                                                   ;8583E2|C220    |      ;
     LDA.B strcObject.spriteTableIdx                            ;8583E4|A5A1    |0000A1;
@@ -578,8 +578,8 @@ fUnknown_8583E0:
  
 .label2:
     REP #$30                                                   ;8583FD|C230    |      ;
-    JSR.W fUnknown_858896                                      ;8583FF|209688  |858896;
-    JSR.W fObject_Unknown858377                                ;858402|207783  |858377;
+    JSR.W fObject_ClearOamBuffer_Frame                                      ;8583FF|209688  |858896;
+    JSR.W fObject_BuildDrawOrderByY                                ;858402|207783  |858377;
     REP #$30                                                   ;858405|C230    |      ;
     SEP #$20                                                   ;858407|E220    |      ;
     LDA.B #$00                                                 ;858409|A900    |      ;
@@ -614,7 +614,7 @@ fUnknown_8583E0:
     STA.B strcObject.gameObjectIdxOffs                         ;85843B|85A9    |0000A9;
     CPY.B strcPlayer.unkDC                                     ;85843D|C4DC    |0000DC;
     BNE .label3                                                ;85843F|D0E1    |858422;
-    JMP.W fUnknown_8585F4                                      ;858441|4CF485  |8585F4;
+    JMP.W fObject_SetupOamDma                                      ;858441|4CF485  |8585F4;
  
  
 .exit:
@@ -706,7 +706,7 @@ fUnknown_8583E0:
 .label11:
     XBA                                                        ;8584D1|EB      |      ;
     REP #$20                                                   ;8584D2|C220    |      ;
-    JSR.W fUnknown_858BB0                                      ;8584D4|20B08B  |858BB0;
+    JSR.W fObject_FlipOffsetX                                      ;8584D4|20B08B  |858BB0;
     CLC                                                        ;8584D7|18      |      ;
     ADC.B strcObject.posX                                      ;8584D8|659B    |00009B;
     SEC                                                        ;8584DA|38      |      ;
@@ -730,7 +730,7 @@ fUnknown_8583E0:
 .label13:
     XBA                                                        ;8584F2|EB      |      ;
     REP #$20                                                   ;8584F3|C220    |      ;
-    JSR.W fUnknown_858BBC                                      ;8584F5|20BC8B  |858BBC;
+    JSR.W fObject_FlipOffsetY                                      ;8584F5|20BC8B  |858BBC;
     CLC                                                        ;8584F8|18      |      ;
     ADC.B strcObject.posY                                      ;8584F9|659D    |00009D;
     SEC                                                        ;8584FB|38      |      ;
@@ -869,7 +869,7 @@ fUnknown_8583E0:
     JMP.W .label7                                              ;8585F1|4CA384  |8584A3;
  
  
-fUnknown_8585F4:
+fObject_SetupOamDma:
     REP #$30                                                   ;8585F4|C230    |      ;
     LDA.B strcObject.bankAddress                               ;8585F6|A5AF    |0000AF;
     STA.W $084A                                                ;8585F8|8D4A08  |00084A;
@@ -901,7 +901,7 @@ Table_858637:
     dw $FFFC,$FFF3,$FFCF,$FF3F,$FCFF,$F3FF                     ;858637|        |      ;
     dw $CFFF,$3FFF                                             ;858643|        |      ;
  
-fUnknown_858647:
+fObject_ClearOamBuffer_Init:
     REP #$30                                                   ;858647|C230    |      ;
     LDA.W #$F0F0                                               ;858649|A9F0F0  |      ;
     STA.L DMASpriteOBJQueue                                    ;85864C|8F00A07E|7EA000;
@@ -1054,7 +1054,7 @@ fUnknown_858647:
     RTS                                                        ;858895|60      |      ;
  
  
-fUnknown_858896:
+fObject_ClearOamBuffer_Frame:
     REP #$30                                                   ;858896|C230    |      ;
     LDA.W #$F0F0                                               ;858898|A9F0F0  |      ;
     STA.L DMASpriteOBJQueue                                    ;85889B|8F00A07E|7EA000;
@@ -1240,7 +1240,7 @@ fObject_ParseObjectData:
     REP #$30                                                   ;858B18|C230    |      ;
     PHX                                                        ;858B1A|DA      |      ;
     PHY                                                        ;858B1B|5A      |      ;
-    JSR.W fUnknown_858C30                                      ;858B1C|20308C  |858C30;
+    JSR.W fObject_AcquireTileSlot                                      ;858B1C|20308C  |858C30;
     REP #$30                                                   ;858B1F|C230    |      ;
     PLY                                                        ;858B21|7A      |      ;
     PLX                                                        ;858B22|FA      |      ;
@@ -1265,7 +1265,7 @@ fObject_ParseObjectData:
     RTS                                                        ;858B40|60      |      ;
  
  
-fUnknown_858B41:
+fObject_ReleaseSpriteTiles:
     REP #$30                                                   ;858B41|C230    |      ;
     LDX.B strcObject.gameObjectIdxOffs                         ;858B43|A6A9    |0000A9;
     SEP #$20                                                   ;858B45|E220    |      ;
@@ -1288,7 +1288,7 @@ fUnknown_858B41:
     STA.W strcGameObject.components,X                          ;858B64|9DB001  |0001B0;
     PHY                                                        ;858B67|5A      |      ;
     PHX                                                        ;858B68|DA      |      ;
-    JSR.W fUnknown_858C9F                                      ;858B69|209F8C  |858C9F;
+    JSR.W fObject_ReleaseTileSlot                                      ;858B69|209F8C  |858C9F;
     SEP #$20                                                   ;858B6C|E220    |      ;
     REP #$10                                                   ;858B6E|C210    |      ;
     PLX                                                        ;858B70|FA      |      ;
@@ -1305,7 +1305,7 @@ fUnknown_858B41:
     RTS                                                        ;858B7A|60      |      ;
  
  
-fUnknown_858B7B:
+fObject_CheckComponentsPending:
     REP #$10                                                   ;858B7B|C210    |      ;
     LDX.B strcObject.gameObjectIdxOffs                         ;858B7D|A6A9    |0000A9;
     SEP #$20                                                   ;858B7F|E220    |      ;
@@ -1344,22 +1344,22 @@ fUnknown_858B7B:
     RTS                                                        ;858BAF|60      |      ;
  
  
-fUnknown_858BB0:
+fObject_FlipOffsetX:
     REP #$30                                                   ;858BB0|C230    |      ;
     PHA                                                        ;858BB2|48      |      ;
     LDA.B strcObject.flip                                      ;858BB3|A59F    |00009F;
     AND.W #$0040                                               ;858BB5|294000  |      ;
     BEQ fReturnWithPullA_858BCE                                ;858BB8|F014    |858BCE;
-    BRA fUnknown_858BC4                                        ;858BBA|8008    |858BC4;
+    BRA fObject_NegateOffsetMinus16                                        ;858BBA|8008    |858BC4;
  
  
-fUnknown_858BBC:
+fObject_FlipOffsetY:
     PHA                                                        ;858BBC|48      |      ;
     LDA.B strcObject.flip                                      ;858BBD|A59F    |00009F;
     AND.W #$0080                                               ;858BBF|298000  |      ;
     BEQ fReturnWithPullA_858BCE                                ;858BC2|F00A    |858BCE;
  
-fUnknown_858BC4:
+fObject_NegateOffsetMinus16:
     PLA                                                        ;858BC4|68      |      ;
     EOR.W #$FFFF                                               ;858BC5|49FFFF  |      ;
     INC A                                                      ;858BC8|1A      |      ;
@@ -1386,7 +1386,7 @@ aGameObjectIndexOffsets:
     dw $0438,$045C,$0480,$04A4,$04C8,$04EC                     ;858C1C|        |      ;
     dw $0540,$0534,$0558,$057C                                 ;858C28|        |      ; BUG - should be $510
  
-fUnknown_858C30:
+fObject_AcquireTileSlot:
     REP #$30                                                   ;858C30|C230    |      ;
     SEP #$20                                                   ;858C32|E220    |      ;
     LDX.B strcObject.pData                                     ;858C34|A6B3    |0000B3;
@@ -1438,7 +1438,7 @@ Table_858C7F:
     dw $0040,$0080,$0100,$0200,$0400,$0800                     ;858C8B|        |      ;
     dw $1000,$2000,$4000,$8000                                 ;858C97|        |      ;
  
-fUnknown_858C9F:
+fObject_ReleaseTileSlot:
     REP #$30                                                   ;858C9F|C230    |      ;
     LDA.B strcObject.pData                                     ;858CA1|A5B3    |0000B3;
     ASL A                                                      ;858CA3|0A      |      ;
@@ -1452,7 +1452,7 @@ fUnknown_858C9F:
     RTS                                                        ;858CB1|60      |      ;
  
  
-fUnknown_858CB2:
+fObject_ProcessTileLoadQueue:
     SEP #$20                                                   ;858CB2|E220    |      ;
     LDA.B #$80                                                 ;858CB4|A980    |      ;
     STA.B ptrObjectData+2                                      ;858CB6|857A    |00007A;
@@ -1593,7 +1593,7 @@ fUnknown_858CB2:
     LDA.B $C3                                                  ;858DAA|A5C3    |0000C3;
     ASL A                                                      ;858DAC|0A      |      ;
     TAX                                                        ;858DAD|AA      |      ;
-    LDA.L aUnknown_858E47,X                                    ;858DAE|BF478E85|858E47;
+    LDA.L aObject_TileBlockSourceOffsets,X                                    ;858DAE|BF478E85|858E47;
     STA.B $C3                                                  ;858DB2|85C3    |0000C3;
     LDA.B $C1                                                  ;858DB4|A5C1    |0000C1;
     ASL A                                                      ;858DB6|0A      |      ;
@@ -1679,11 +1679,11 @@ fUnknown_858CB2:
     RTL                                                        ;858E46|6B      |      ;
  
  
-aUnknown_858E47:
+aObject_TileBlockSourceOffsets:
     dw $0000,$2000,$4000,$6000,$8000,$A000                     ;858E47|        |      ; 0x08 * [n16]
     dw $C000,$E000                                             ;858E53|        |      ;
  
-fUnknown_858E57:
+fObject_ExecuteTileDmaQueue:
     SEP #$20                                                   ;858E57|E220    |      ;
     LDA.B #$80                                                 ;858E59|A980    |      ;
     STA.W SNES_VMAIN                                           ;858E5B|8D1521  |002115;
@@ -1739,7 +1739,7 @@ fUnknown_858E57:
     RTL                                                        ;858ED6|6B      |      ;
  
  
-fUnknown_Zero7EA220:
+fObject_InitTileCache:
     REP #$30                                                   ;858ED7|C230    |      ;
     LDA.W #$FFFF                                               ;858ED9|A9FFFF  |      ;
     STA.L DMAtoVRAMData                                        ;858EDC|8F20A47E|7EA420;

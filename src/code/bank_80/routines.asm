@@ -199,7 +199,7 @@ fAudioEngine_MapChangeHandler:
     LDA.W nDestinationAreaId                                   ;80969E|AD8B09  |00098B;
     STA.B strcMap.loadAreaId                                   ;8096A1|8522    |000022;
     JSL.L fAudioEngine_MapMusicHandler                         ;8096A3|22DE9580|8095DE;
-    JSL.L fAudioUnknown_838401                                 ;8096A7|22018483|838401;
+    JSL.L fAudio_FadeOutOnTrackChangeSlow                                 ;8096A7|22018483|838401;
  
 .label2:
     REP #$20                                                   ;8096AB|C220    |      ;
@@ -219,7 +219,7 @@ fAudioEngine_MapChangeHandler:
     JSL.L fCore_ScreenFadeout                                  ;8096CB|220A8880|80880A;
     JSL.L fCore_SetForceBlank                                  ;8096CF|220F8E80|808E0F;
  
-fUnknown_8096D3:
+fMap_ResetAndLoadDestinationArea:
     REP #$30                                                   ;8096D3|C230    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;8096D5|AD9601  |000196;
     AND.W #$3FDE                                               ;8096D8|29DE3F  |      ;
@@ -231,9 +231,9 @@ fUnknown_8096D3:
     JSL.L fCore_ZeroVRAMatOffset                               ;8096F7|22BC8980|8089BC;
     JSL.L fCore_Zero0x42Ptr                                    ;8096FB|22AB8F80|808FAB;
     JSL.L fPalette_ZeroNextPalletePtr                          ;8096FF|22669180|809166;
-    JSL.L fUnknown_Zero7EA220                                  ;809703|22D78E85|858ED7;
+    JSL.L fObject_InitTileCache                                  ;809703|22D78E85|858ED7;
     JSL.L fObject_ClearGameObject                              ;809707|220F8285|85820F;
-    JSL.L fUnknown_Zero07Ptr                                   ;80970B|22C7A481|81A4C7;
+    JSL.L fObjectSlots_ClearAll                                   ;80970B|22C7A481|81A4C7;
     JSL.L fAI_ZeroCCPtr                                        ;80970F|22008084|848000;
     SEP #$20                                                   ;809713|E220    |      ;
     LDA.W nDestinationAreaId                                   ;809715|AD8B09  |00098B;
@@ -432,7 +432,7 @@ fMap_SetupArea:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;8098A4|22488E80|808E48;
  
 .label8:
-    JSL.L fDialog_Unknown_8392BB                               ;8098A8|22BB9283|8392BB;
+    JSL.L fDialog_LoadDialogBoxGraphics                               ;8098A8|22BB9283|8392BB;
     SEP #$20                                                   ;8098AC|E220    |      ;
     PLA                                                        ;8098AE|68      |      ;
     STA.B strcMap.loadAreaId                                   ;8098AF|8522    |000022;
@@ -442,7 +442,7 @@ fMap_SetupArea:
     JSL.L fPalette_PrepareSpritePalette                        ;8098BD|22299380|809329;
     JSL.L fSubrutinesExecute_809553                            ;8098C1|22539580|809553;
     JSL.L fPalette_LoadMapPallete                              ;8098C5|22419280|809241;
-    JSL.L fCore_Unknown808E69                                  ;8098C9|22698E80|808E69;
+    JSL.L fPalette_ProcessColorAnimSlots                                  ;8098C9|22698E80|808E69;
     SEP #$20                                                   ;8098CD|E220    |      ;
     REP #$10                                                   ;8098CF|C210    |      ;
     LDA.B #$00                                                 ;8098D1|A900    |      ;
@@ -507,7 +507,7 @@ fMap_SetupArea:
     STA.W nCarriedItemId                                       ;809977|8D8409  |000984;
     REP #$20                                                   ;80997A|C220    |      ;
     LDY.W #$0001                                               ;80997C|A00100  |      ;
-    JSL.L fUnknown_8180B7                                      ;80997F|22B78081|8180B7;
+    JSL.L fItemCarried_LoadPoseData                                      ;80997F|22B78081|8180B7;
     LDA.W strcObjectData.camX                                  ;809983|AD0B09  |00090B;
     STA.W nUnknownX                                            ;809986|8D8009  |000980;
     LDA.W strcObjectData.camY                                  ;809989|AD0D09  |00090D;
@@ -519,7 +519,7 @@ fMap_SetupArea:
     STA.W $0975                                                ;809998|8D7509  |000975;
     LDA.B #$02                                                 ;80999B|A902    |      ;
     STA.W $0976                                                ;80999D|8D7609  |000976;
-    JSL.L fUnknown_81A500                                      ;8099A0|2200A581|81A500;
+    JSL.L fObjectSlots_Allocate                                      ;8099A0|2200A581|81A500;
     REP #$30                                                   ;8099A4|C230    |      ;
     LDA.W #$0014                                               ;8099A6|A91400  |      ;
     CLC                                                        ;8099A9|18      |      ;
@@ -541,18 +541,18 @@ fMap_SetupArea:
     %UnsetPlayerFlag(!PFLAGS_HOLDINGITEM)
  
 .label12:
-    JSL.L fUnknown_81CFA0                                      ;8099CD|22A0CF81|81CFA0;
-    JSL.L fUnknownSubrutineHandler_81BFB7                      ;8099D1|22B7BF81|81BFB7;
+    JSL.L fPlayer_InitSpriteObject                                      ;8099CD|22A0CF81|81CFA0;
+    JSL.L fPlayer_UpdateHandler                      ;8099D1|22B7BF81|81BFB7;
     REP #$30                                                   ;8099D5|C230    |      ;
     %CheckFlag(daily3, $0002)
     BNE .label13                                               ;8099DE|D004    |8099E4;
-    JSL.L fGameEngine_ChichenUnknown83C296                     ;8099E0|2296C283|83C296;
+    JSL.L fGameEngine_SpawnChickensOnMap                     ;8099E0|2296C283|83C296;
  
 .label13:
     %SetPlayerAction(!PACTION_NONE)
-    JSL.L fAudioUnknown_83841F                                 ;8099EB|221F8483|83841F;
-    JSL.L fAudioUnknown_8383A4                                 ;8099EF|22A48383|8383A4;
-    JSL.L fAudioUnknown_838380                                 ;8099F3|22808383|838380;
+    JSL.L fAudio_FadeOutOnTrackChangeFast                                 ;8099EB|221F8483|83841F;
+    JSL.L fAudio_LoadPendingTrack                                 ;8099EF|22A48383|8383A4;
+    JSL.L fAudio_StartPendingTrack                                 ;8099F3|22808383|838380;
     JSL.L fToolUsedSound_Unknown828FF3                         ;8099F7|22F38F82|828FF3;
     SEP #$20                                                   ;8099FB|E220    |      ;
     LDA.W strcAudio.trackId                                    ;8099FD|AD1001  |000110;
@@ -561,22 +561,22 @@ fMap_SetupArea:
     REP #$20                                                   ;809A07|C220    |      ;
     LDA.W #$1800                                               ;809A09|A90018  |      ;
     STA.B $C7                                                  ;809A0C|85C7    |0000C7;
-    JSL.L fUnknown_81A383                                      ;809A0E|2283A381|81A383;
+    JSL.L fObjectSlots_UpdateAll                                      ;809A0E|2283A381|81A383;
     JSL.L fAI_HowToPlaySetup                                   ;809A12|226F8184|84816F;
-    JSL.L fObject_Unknown8582C7                                ;809A16|22C78285|8582C7;
-    JSL.L fUnknown_858CB2                                      ;809A1A|22B28C85|858CB2;
-    JSL.L fUnknown_8583E0                                      ;809A1E|22E08385|8583E0;
+    JSL.L fObject_UpdateAllAnimations                                ;809A16|22C78285|8582C7;
+    JSL.L fObject_ProcessTileLoadQueue                                      ;809A1A|22B28C85|858CB2;
+    JSL.L fObject_RenderAll                                      ;809A1E|22E08385|8583E0;
     SEP #$20                                                   ;809A22|E220    |      ;
     STZ.B $00                                                  ;809A24|6400    |000000;
     JSL.L fCore_WaitForNextNMI                                 ;809A26|22458680|808645;
     REP #$20                                                   ;809A2A|C220    |      ;
     LDA.W #$1800                                               ;809A2C|A90018  |      ;
     STA.B $C7                                                  ;809A2F|85C7    |0000C7;
-    JSL.L fUnknown_81A383                                      ;809A31|2283A381|81A383;
+    JSL.L fObjectSlots_UpdateAll                                      ;809A31|2283A381|81A383;
     JSL.L fAI_HowToPlaySetup                                   ;809A35|226F8184|84816F;
-    JSL.L fObject_Unknown8582C7                                ;809A39|22C78285|8582C7;
-    JSL.L fUnknown_858CB2                                      ;809A3D|22B28C85|858CB2;
-    JSL.L fUnknown_8583E0                                      ;809A41|22E08385|8583E0;
+    JSL.L fObject_UpdateAllAnimations                                ;809A39|22C78285|8582C7;
+    JSL.L fObject_ProcessTileLoadQueue                                      ;809A3D|22B28C85|858CB2;
+    JSL.L fObject_RenderAll                                      ;809A41|22E08385|8583E0;
     SEP #$20                                                   ;809A45|E220    |      ;
     STZ.B $00                                                  ;809A47|6400    |000000;
     JSL.L fCore_WaitForNextNMI                                 ;809A49|22458680|808645;
@@ -861,7 +861,7 @@ fMapChangeHandler_809A64:
  
  
 .label23:
-    JSL.L fUnknownCF_SetPointer                                ;809C56|22E1A581|81A5E1;
+    JSL.L fTileScript_Start                                ;809C56|22E1A581|81A5E1;
     JMP.W .return                                              ;809C5A|4C0A9D  |809D0A;
  
  
@@ -1162,7 +1162,7 @@ fMapChangeHandler_809A64:
     RTL                                                        ;809EBB|6B      |      ;
  
  
-fUnknown_809EBC:
+fCamera_UpdateFromPlayerPos:
     REP #$30                                                   ;809EBC|C230    |      ;
     LDA.B strcPlayer.posX                                      ;809EBE|A5D6    |0000D6;
     SEC                                                        ;809EC0|38      |      ;
@@ -1266,7 +1266,7 @@ fUnknown_809EBC:
     RTL                                                        ;809F60|6B      |      ;
  
  
-fUnknown_809F61:
+fCamera_UpdateBG2Scroll:
     SEP #$20                                                   ;809F61|E220    |      ;
     REP #$10                                                   ;809F63|C210    |      ;
     LDA.B strcMap.loadAreaId                                   ;809F65|A522    |000022;
@@ -1475,7 +1475,7 @@ fUnknown_809F61:
     RTL                                                        ;80A0AA|6B      |      ;
  
  
-fUnknown_80A0AB:
+fCamera_ScrollDownStep:
     REP #$30                                                   ;80A0AB|C230    |      ;
     LDA.B strcCamera.cameraY                                   ;80A0AD|A5F7    |0000F7;
     STA.W strcBGScrool.BG1VerOffs                              ;80A0AF|8D3E01  |00013E;
@@ -1502,13 +1502,13 @@ fUnknown_80A0AB:
     SEC                                                        ;80A0D7|38      |      ;
     SBC.B #$08                                                 ;80A0D8|E908    |      ;
     STA.B strcMap.unk21                                        ;80A0DA|8521    |000021;
-    JSL.L fUnknown_80A18D                                      ;80A0DC|228DA180|80A18D;
+    JSL.L fMap_StreamRowDown                                      ;80A0DC|228DA180|80A18D;
  
 .return:
     RTL                                                        ;80A0E0|6B      |      ;
  
  
-fUnknown_80A0E1:
+fCamera_ScrollUpStep:
     REP #$30                                                   ;80A0E1|C230    |      ;
     LDA.B strcCamera.cameraY                                   ;80A0E3|A5F7    |0000F7;
     STA.W strcBGScrool.BG1VerOffs                              ;80A0E5|8D3E01  |00013E;
@@ -1538,13 +1538,13 @@ fUnknown_80A0E1:
     CLC                                                        ;80A112|18      |      ;
     ADC.B strcMap.unk21                                        ;80A113|6521    |000021;
     STA.B strcMap.unk21                                        ;80A115|8521    |000021;
-    JSL.L fUnknown_80A308                                      ;80A117|2208A380|80A308;
+    JSL.L fMap_StreamRowUp                                      ;80A117|2208A380|80A308;
  
 .return:
     RTL                                                        ;80A11B|6B      |      ;
  
  
-fUnknown_80A11C:
+fCamera_ScrollRightStep:
     REP #$30                                                   ;80A11C|C230    |      ;
     LDA.B strcCamera.cameraX                                   ;80A11E|A5F5    |0000F5;
     STA.W strcBGScrool.BG1HorOffs                              ;80A120|8D3C01  |00013C;
@@ -1571,13 +1571,13 @@ fUnknown_80A11C:
     SEC                                                        ;80A148|38      |      ;
     SBC.B #$08                                                 ;80A149|E908    |      ;
     STA.B strcMap.unk20                                        ;80A14B|8520    |000020;
-    JSL.L fUnknown_80A481                                      ;80A14D|2281A480|80A481;
+    JSL.L fMap_StreamColumnRight                                      ;80A14D|2281A480|80A481;
  
 .return:
     RTL                                                        ;80A151|6B      |      ;
  
  
-fUnknown_80A152:
+fCamera_ScrollLeftStep:
     REP #$30                                                   ;80A152|C230    |      ;
     LDA.B strcCamera.cameraX                                   ;80A154|A5F5    |0000F5;
     STA.W strcBGScrool.BG1HorOffs                              ;80A156|8D3C01  |00013C;
@@ -1607,13 +1607,13 @@ fUnknown_80A152:
     CLC                                                        ;80A183|18      |      ;
     ADC.B strcMap.unk20                                        ;80A184|6520    |000020;
     STA.B strcMap.unk20                                        ;80A186|8520    |000020;
-    JSL.L fUnknown_80A617                                      ;80A188|2217A680|80A617;
+    JSL.L fMap_StreamColumnLeft                                      ;80A188|2217A680|80A617;
  
 .return:
     RTL                                                        ;80A18C|6B      |      ;
  
  
-fUnknown_80A18D:
+fMap_StreamRowDown:
     REP #$30                                                   ;80A18D|C230    |      ;
     LDA.B strcMap.unk12                                        ;80A18F|A512    |000012;
     CMP.W #$0020                                               ;80A191|C92000  |      ;
@@ -1828,7 +1828,7 @@ fUnknown_80A18D:
     RTL                                                        ;80A307|6B      |      ;
  
  
-fUnknown_80A308:
+fMap_StreamRowUp:
     REP #$30                                                   ;80A308|C230    |      ;
     LDA.B strcMap.unk12                                        ;80A30A|A512    |000012;
     CMP.W #$0020                                               ;80A30C|C92000  |      ;
@@ -2042,7 +2042,7 @@ fUnknown_80A308:
     RTL                                                        ;80A480|6B      |      ;
  
  
-fUnknown_80A481:
+fMap_StreamColumnRight:
     REP #$30                                                   ;80A481|C230    |      ;
     LDA.B strcMap.unk16                                        ;80A483|A516    |000016;
     CMP.W #$1000                                               ;80A485|C90010  |      ;
@@ -2269,7 +2269,7 @@ fUnknown_80A481:
     RTL                                                        ;80A616|6B      |      ;
  
  
-fUnknown_80A617:
+fMap_StreamColumnLeft:
     REP #$30                                                   ;80A617|C230    |      ;
     LDA.B strcMap.unk16                                        ;80A619|A516    |000016;
     CMP.W #$1000                                               ;80A61B|C90010  |      ;

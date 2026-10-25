@@ -1,6 +1,6 @@
 ; Bank $83 module "dialog" - starts at $8392BB
  
-fDialog_Unknown_8392BB:
+fDialog_LoadDialogBoxGraphics:
     REP #$30                                                   ;8392BB|C230    |      ;
     REP #$20                                                   ;8392BD|C220    |      ;
     LDA.W #$CB05                                               ;8392BF|A905CB  |      ;
@@ -51,7 +51,7 @@ fDialog_Unknown_8392BB:
     RTL                                                        ;83932C|6B      |      ;
  
  
-fDialog_Unknown_83932D:
+fDialog_ReloadFontTiles:
     SEP #$20                                                   ;83932D|E220    |      ;
     LDA.B #$06                                                 ;83932F|A906    |      ;
     STA.B strcSystem.arrayIndex                                ;839331|8527    |000027;
@@ -147,7 +147,7 @@ fDialog_DialogHandler:
     RTL                                                        ;8393F8|6B      |      ;
  
  
-fDialog_Unknown_8393F9:
+fDialog_EndDialogRestoreScroll:
     SEP #$20                                                   ;8393F9|E220    |      ;
     REP #$10                                                   ;8393FB|C210    |      ;
     STZ.W strcDialogDisplay.dialogFlags                        ;8393FD|9C9B01  |00019B;
@@ -171,7 +171,7 @@ fDialog_Unknown_8393F9:
     CLC                                                        ;83941B|18      |      ;
     ADC.B strcVariables.n16Temp1                               ;83941C|657E    |00007E;
     STA.W strcBGScrool.BG3VerOffs                              ;83941E|8D4601  |000146;
-    JSL.L fDialog_Unknown_83932D                               ;839421|222D9383|83932D;
+    JSL.L fDialog_ReloadFontTiles                               ;839421|222D9383|83932D;
     REP #$20                                                   ;839425|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;839427|AD9601  |000196;
     AND.W #$0020                                               ;83942A|292000  |      ;
@@ -186,30 +186,30 @@ fDialog_Unknown_8393F9:
     RTL                                                        ;839446|6B      |      ;
  
  
-fDialog_Unknown_839447:
+fDialog_AnimateBlinkIconLong:
     REP #$30                                                   ;839447|C230    |      ;
-    JSR.W fDialog_Unknown_839495                               ;839449|209594  |839495;
+    JSR.W fDialog_AnimateBlinkIcon                               ;839449|209594  |839495;
     RTL                                                        ;83944C|6B      |      ;
  
  
-aDialogUnknown_83944D:
+aDialogUnused_83944D:
     db $10,$50,$70,$51,$50,$53,$70,$50,$50,$52                 ;83944D|        |      ;
  
-aDialogUnknown_839457:
+aDialogBlinkIconTiles_Frame0:
     dw $21A0,$21A1,$21B0,$21B1                                 ;839457|        |      ;
  
-aDialogUnknown_83945F:
+aDialogBlinkIconTiles_Frame1:
     dw $21A2,$21A3,$21B2,$21B3                                 ;83945F|        |      ;
  
 aDialogDialogPointerIndexes_839467:
     dw $000F,$0010,$0011,$0012,$0013,$0014                     ;839467|        |      ; 0x0B * [n16 nDialogPointerIndex]
     dw $0015,$0016,$0017,$0018,$0019                           ;839473|        |      ;
  
-aDialogUnknown_83947D:
+aDialogBlinkIconVramAddrByLine:
     dw $7088,$70C8,$7108,$7148,$7188,$71C8                     ;83947D|        |      ;
     dw $7208,$7248,$7288,$72C8,$7308,$7090                     ;839489|        |      ;
  
-fDialog_Unknown_839495:
+fDialog_AnimateBlinkIcon:
     REP #$30                                                   ;839495|C230    |      ;
     STA.B strcVariables.n16Temp1                               ;839497|857E    |00007E;
     LDA.W strcDialogDisplay.dialogBlinkTimer                   ;839499|AD8B01  |00018B;
@@ -228,13 +228,13 @@ fDialog_Unknown_839495:
     BNE +                                                      ;8394B7|D00B    |8394C4;
     REP #$20                                                   ;8394B9|C220    |      ;
     LDA.W #$0000                                               ;8394BB|A90000  |      ;
-    JSL.L fDialog_Unknown_8394D7                               ;8394BE|22D79483|8394D7;
+    JSL.L fDialog_DrawBlinkIconFrame                               ;8394BE|22D79483|8394D7;
     BRA .return                                                ;8394C2|8009    |8394CD;
  
  
   + REP #$20                                                   ;8394C4|C220    |      ;
     LDA.W #$0001                                               ;8394C6|A90100  |      ;
-    JSL.L fDialog_Unknown_8394D7                               ;8394C9|22D79483|8394D7;
+    JSL.L fDialog_DrawBlinkIconFrame                               ;8394C9|22D79483|8394D7;
  
 .return:
     SEP #$20                                                   ;8394CD|E220    |      ;
@@ -244,7 +244,7 @@ fDialog_Unknown_839495:
     RTS                                                        ;8394D6|60      |      ;
  
  
-fDialog_Unknown_8394D7:
+fDialog_DrawBlinkIconFrame:
     REP #$30                                                   ;8394D7|C230    |      ;
     PHA                                                        ;8394D9|48      |      ;
     SEP #$20                                                   ;8394DA|E220    |      ;
@@ -259,7 +259,7 @@ fDialog_Unknown_8394D7:
   + REP #$20                                                   ;8394EA|C220    |      ;
     ASL A                                                      ;8394EC|0A      |      ;
     TAX                                                        ;8394ED|AA      |      ;
-    LDA.L aDialogUnknown_83947D,X                              ;8394EE|BF7D9483|83947D;
+    LDA.L aDialogBlinkIconVramAddrByLine,X                              ;8394EE|BF7D9483|83947D;
     TAX                                                        ;8394F2|AA      |      ;
     REP #$20                                                   ;8394F3|C220    |      ;
     PLA                                                        ;8394F5|68      |      ;
@@ -282,7 +282,7 @@ fDialog_Unknown_8394D7:
     STA.B ptrTemp0x72+2                                        ;839515|8574    |000074; $72 = 0x83945F
  
 .return:
-    JSL.L fGraphicsUnknown_8381B7                              ;839517|22B78183|8381B7;
+    JSL.L fGraphics_WriteTilemap2x2                              ;839517|22B78183|8381B7;
     RTL                                                        ;83951B|6B      |      ;
  
  
@@ -292,7 +292,7 @@ fDialog_IterateText:
     LDA.W strcDialogDisplay.dialogFlags                        ;839520|AD9B01  |00019B;
     AND.B #!DFLAGS_UNK20                                                 
     BEQ +                                                      ;839525|F003    |83952A;
-    JMP.W fDialog_Unknown_839447                               ;839527|4C4794  |839447;
+    JMP.W fDialog_AnimateBlinkIconLong                               ;839527|4C4794  |839447;
  
  
   + LDA.W strcDialogDisplay.dialogFlags                        ;83952A|AD9B01  |00019B;
@@ -396,7 +396,7 @@ fDialog_IterateText:
     LDA.W strcDialogDisplay.fontGlyphType                      ;8395DE|AD9001  |000190;
     REP #$30                                                   ;8395E1|C230    |      ;
     TAX                                                        ;8395E3|AA      |      ;
-    JSR.W fDialog_Unknown839838                                ;8395E4|203898  |839838;
+    JSR.W fDialog_AdvanceGlyphDestination                                ;8395E4|203898  |839838;
  
 .return:
     SEP #$20                                                   ;8395E7|E220    |      ;
@@ -429,7 +429,7 @@ fDialog_IterateText:
     STA.W strcDialogDisplay.dialogCurrentOffset                ;839613|8D8701  |000187; nCurrentTextIndex++
     REP #$30                                                   ;839616|C230    |      ;
     LDX.W #$0001                                               ;839618|A20100  |      ;
-    JSR.W fDialog_Unknown839838                                ;83961B|203898  |839838;
+    JSR.W fDialog_AdvanceGlyphDestination                                ;83961B|203898  |839838;
     JMP.W .getCurrentLetter                                    ;83961E|4C3495  |839534;
  
  
@@ -485,7 +485,7 @@ fDialog_IterateText:
     LDA.W strcDialogDisplay.dialogVarSize                      ;83967C|AD8C01  |00018C;
     DEC A                                                      ;83967F|3A      |      ;
     STA.W strcDialogDisplay.dialogVarSize                      ;839680|8D8C01  |00018C;
-    JSL.L fDialog_Unknown_8397A6                               ;839683|22A69783|8397A6;
+    JSL.L fDialog_DrawNumericVarDigit                               ;839683|22A69783|8397A6;
     SEP #$20                                                   ;839687|E220    |      ;
     STZ.W strcDialogDisplay.fontGlyphType                      ;839689|9C9001  |000190;
     SEP #$20                                                   ;83968C|E220    |      ;
@@ -640,7 +640,7 @@ fDialog_NextScreenHandler:
     RTS                                                        ;8397A5|60      |      ;
  
  
-fDialog_Unknown_8397A6:
+fDialog_DrawNumericVarDigit:
     SEP #$20                                                   ;8397A6|E220    |      ;
     REP #$10                                                   ;8397A8|C210    |      ;
     LDA.B #$00                                                 ;8397AA|A900    |      ;
@@ -719,7 +719,7 @@ fDialog_TransferGlyph:
     RTL                                                        ;839837|6B      |      ;
  
  
-fDialog_Unknown839838:
+fDialog_AdvanceGlyphDestination:
     REP #$30                                                   ;839838|C230    |      ;
     LDX.W #$0000                                               ;83983A|A20000  |      ; X = 0
     TXA                                                        ;83983D|8A      |      ; X -> A

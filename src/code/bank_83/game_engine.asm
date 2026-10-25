@@ -528,7 +528,7 @@ fGameEngine_DirectionHandler83AD91:
     RTL                                                        ;83AEC2|6B      |      ;
  
  
-fGameEngine_Unknown83AEC3:
+fGameEngine_CheckDirectionalOverlap:
     REP #$30                                                   ;83AEC3|C230    |      ; A: nIndex
     ASL A                                                      ;83AEC5|0A      |      ;
     TAX                                                        ;83AEC6|AA      |      ;
@@ -636,7 +636,7 @@ fGameEngine_DirectionHandler83AF37:
     PHA                                                        ;83AF57|48      |      ;
     TAY                                                        ;83AF58|A8      |      ;
     LDA.W #$0000                                               ;83AF59|A90000  |      ;
-    JSR.W fGameEngine_Unknown83B0F6                            ;83AF5C|20F6B0  |83B0F6;
+    JSR.W fGameEngine_CheckTileCollision                            ;83AF5C|20F6B0  |83B0F6;
     REP #$20                                                   ;83AF5F|C220    |      ;
     PLY                                                        ;83AF61|7A      |      ;
     PHA                                                        ;83AF62|48      |      ;
@@ -647,7 +647,7 @@ fGameEngine_DirectionHandler83AF37:
     ADC.W #$0006                                               ;83AF69|690600  |      ;
     TAX                                                        ;83AF6C|AA      |      ;
     LDA.W #$0001                                               ;83AF6D|A90100  |      ;
-    JSR.W fGameEngine_Unknown83B0F6                            ;83AF70|20F6B0  |83B0F6;
+    JSR.W fGameEngine_CheckTileCollision                            ;83AF70|20F6B0  |83B0F6;
     REP #$20                                                   ;83AF73|C220    |      ;
     STA.B strcVariables.n16Temp1                               ;83AF75|857E    |00007E;
     PLY                                                        ;83AF77|7A      |      ;
@@ -698,7 +698,7 @@ fGameEngine_DirectionHandler83AF37:
     PHA                                                        ;83AFBF|48      |      ;
     TAY                                                        ;83AFC0|A8      |      ;
     LDA.W #$0000                                               ;83AFC1|A90000  |      ;
-    JSR.W fGameEngine_Unknown83B0F6                            ;83AFC4|20F6B0  |83B0F6;
+    JSR.W fGameEngine_CheckTileCollision                            ;83AFC4|20F6B0  |83B0F6;
     REP #$20                                                   ;83AFC7|C220    |      ;
     PLY                                                        ;83AFC9|7A      |      ;
     PHA                                                        ;83AFCA|48      |      ;
@@ -709,7 +709,7 @@ fGameEngine_DirectionHandler83AF37:
     ADC.W #$0006                                               ;83AFD1|690600  |      ;
     TAX                                                        ;83AFD4|AA      |      ;
     LDA.W #$0001                                               ;83AFD5|A90100  |      ;
-    JSR.W fGameEngine_Unknown83B0F6                            ;83AFD8|20F6B0  |83B0F6;
+    JSR.W fGameEngine_CheckTileCollision                            ;83AFD8|20F6B0  |83B0F6;
     REP #$20                                                   ;83AFDB|C220    |      ;
     STA.B strcVariables.n16Temp1                               ;83AFDD|857E    |00007E;
     PLY                                                        ;83AFDF|7A      |      ;
@@ -760,7 +760,7 @@ fGameEngine_DirectionHandler83AF37:
     SBC.W #$0006                                               ;83B025|E90600  |      ;
     TAY                                                        ;83B028|A8      |      ;
     LDA.W #$0000                                               ;83B029|A90000  |      ;
-    JSR.W fGameEngine_Unknown83B0F6                            ;83B02C|20F6B0  |83B0F6;
+    JSR.W fGameEngine_CheckTileCollision                            ;83B02C|20F6B0  |83B0F6;
     REP #$20                                                   ;83B02F|C220    |      ;
     PLX                                                        ;83B031|FA      |      ;
     PHA                                                        ;83B032|48      |      ;
@@ -771,7 +771,7 @@ fGameEngine_DirectionHandler83AF37:
     ADC.W #$0006                                               ;83B039|690600  |      ;
     TAY                                                        ;83B03C|A8      |      ;
     LDA.W #$0001                                               ;83B03D|A90100  |      ;
-    JSR.W fGameEngine_Unknown83B0F6                            ;83B040|20F6B0  |83B0F6;
+    JSR.W fGameEngine_CheckTileCollision                            ;83B040|20F6B0  |83B0F6;
     REP #$20                                                   ;83B043|C220    |      ;
     STA.B strcVariables.n16Temp1                               ;83B045|857E    |00007E;
     PLX                                                        ;83B047|FA      |      ;
@@ -822,7 +822,7 @@ fGameEngine_DirectionHandler83AF37:
     SBC.W #$0006                                               ;83B08B|E90600  |      ;
     TAY                                                        ;83B08E|A8      |      ;
     LDA.W #$0000                                               ;83B08F|A90000  |      ;
-    JSR.W fGameEngine_Unknown83B0F6                            ;83B092|20F6B0  |83B0F6;
+    JSR.W fGameEngine_CheckTileCollision                            ;83B092|20F6B0  |83B0F6;
     REP #$20                                                   ;83B095|C220    |      ;
     PLX                                                        ;83B097|FA      |      ;
     PHA                                                        ;83B098|48      |      ;
@@ -833,7 +833,7 @@ fGameEngine_DirectionHandler83AF37:
     ADC.W #$0006                                               ;83B09F|690600  |      ;
     TAY                                                        ;83B0A2|A8      |      ;
     LDA.W #$0001                                               ;83B0A3|A90100  |      ;
-    JSR.W fGameEngine_Unknown83B0F6                            ;83B0A6|20F6B0  |83B0F6;
+    JSR.W fGameEngine_CheckTileCollision                            ;83B0A6|20F6B0  |83B0F6;
     REP #$20                                                   ;83B0A9|C220    |      ;
     STA.B strcVariables.n16Temp1                               ;83B0AB|857E    |00007E;
     PLX                                                        ;83B0AD|FA      |      ;
@@ -887,7 +887,7 @@ fGameEngine_Unused83B0E6:
     RTL                                                        ;83B0F5|6B      |      ;
  
  
-fGameEngine_Unknown83B0F6:
+fGameEngine_CheckTileCollision:
     REP #$30                                                   ;83B0F6|C230    |      ; return A: nStatus
     PHA                                                        ;83B0F8|48      |      ;
     STX.B strcVariables.n16Unk86                               ;83B0F9|8686    |000086;
@@ -2166,7 +2166,7 @@ fGameEngine_SaveCheck:
     RTL                                                        ;83BC59|6B      |      ;
  
  
-fGameEngine_AnimalsUnknown83BC5A:
+fGameEngine_AnimalsDailyUpdate:
     REP #$30                                                   ;83BC5A|C230    |      ;
     %CheckFlag(daily4, $0001)
     BEQ +                                                      ;83BC63|F003    |83BC68;
@@ -2263,7 +2263,7 @@ fGameEngine_AnimalsUnknown83BC5A:
 .label3:
     REP #$20                                                   ;83BD10|C220    |      ;
     LDA.W #$FFF8                                               ;83BD12|A9F8FF  |      ;
-    JSL.L fUnknown_84A5D4                                      ;83BD15|22D4A584|84A5D4;
+    JSL.L fCow_AddHappiness                                      ;83BD15|22D4A584|84A5D4;
     REP #$30                                                   ;83BD19|C230    |      ;
     LDY.W #$0004                                               ;83BD1B|A00400  |      ;
     BRA .label7                                                ;83BD1E|8030    |83BD50;
@@ -2272,7 +2272,7 @@ fGameEngine_AnimalsUnknown83BC5A:
 .label4:
     REP #$20                                                   ;83BD20|C220    |      ;
     LDA.W #$FFF0                                               ;83BD22|A9F0FF  |      ;
-    JSL.L fUnknown_84A5D4                                      ;83BD25|22D4A584|84A5D4;
+    JSL.L fCow_AddHappiness                                      ;83BD25|22D4A584|84A5D4;
     REP #$30                                                   ;83BD29|C230    |      ;
     LDY.W #$0002                                               ;83BD2B|A00200  |      ;
     BRA .label7                                                ;83BD2E|8020    |83BD50;
@@ -2281,7 +2281,7 @@ fGameEngine_AnimalsUnknown83BC5A:
 .label5:
     REP #$20                                                   ;83BD30|C220    |      ;
     LDA.W #$FFE8                                               ;83BD32|A9E8FF  |      ;
-    JSL.L fUnknown_84A5D4                                      ;83BD35|22D4A584|84A5D4;
+    JSL.L fCow_AddHappiness                                      ;83BD35|22D4A584|84A5D4;
     REP #$30                                                   ;83BD39|C230    |      ;
     LDY.W #$0002                                               ;83BD3B|A00200  |      ;
     BRA .label7                                                ;83BD3E|8010    |83BD50;
@@ -2290,7 +2290,7 @@ fGameEngine_AnimalsUnknown83BC5A:
 .label6:
     REP #$20                                                   ;83BD40|C220    |      ;
     LDA.W #$FFF8                                               ;83BD42|A9F8FF  |      ;
-    JSL.L fUnknown_84A5D4                                      ;83BD45|22D4A584|84A5D4;
+    JSL.L fCow_AddHappiness                                      ;83BD45|22D4A584|84A5D4;
     REP #$30                                                   ;83BD49|C230    |      ;
     LDY.W #$0008                                               ;83BD4B|A00800  |      ;
     BRA .label7                                                ;83BD4E|8000    |83BD50;
@@ -2326,7 +2326,7 @@ fGameEngine_AnimalsUnknown83BC5A:
     STA.B [ptrTemp0x72],Y                                      ;83BD8A|9772    |000072;
     REP #$20                                                   ;83BD8C|C220    |      ;
     LDA.W #$FFF4                                               ;83BD8E|A9F4FF  |      ;
-    JSL.L fUnknown_84A5D4                                      ;83BD91|22D4A584|84A5D4;
+    JSL.L fCow_AddHappiness                                      ;83BD91|22D4A584|84A5D4;
     REP #$30                                                   ;83BD95|C230    |      ;
     LDA.W #$FFE2                                               ;83BD97|A9E2FF  |      ;
     JSL.L fGameEngine_AddHappiness                             ;83BD9A|2282B283|83B282;
@@ -2352,7 +2352,7 @@ fGameEngine_AnimalsUnknown83BC5A:
     BNE .label9                                                ;83BDC9|D00B    |83BDD6;
     REP #$20                                                   ;83BDCB|C220    |      ;
     LDA.W #$FFF8                                               ;83BDCD|A9F8FF  |      ;
-    JSL.L fUnknown_84A5D4                                      ;83BDD0|22D4A584|84A5D4;
+    JSL.L fCow_AddHappiness                                      ;83BDD0|22D4A584|84A5D4;
     BRA .label10                                               ;83BDD4|8015    |83BDEB;
  
  
@@ -2395,7 +2395,7 @@ fGameEngine_AnimalsUnknown83BC5A:
     STA.B [ptrTemp0x72],Y                                      ;83BE21|9772    |000072;
     REP #$20                                                   ;83BE23|C220    |      ;
     LDA.W #$FFE2                                               ;83BE25|A9E2FF  |      ;
-    JSL.L fUnknown_84A5D4                                      ;83BE28|22D4A584|84A5D4;
+    JSL.L fCow_AddHappiness                                      ;83BE28|22D4A584|84A5D4;
     BRA .label12                                               ;83BE2C|8011    |83BE3F;
  
  
@@ -2921,7 +2921,7 @@ fGameEngine_AnimalsUnknown83BC5A:
     TXA                                                        ;83C23A|8A      |      ;
     ASL A                                                      ;83C23B|0A      |      ;
     TAX                                                        ;83C23C|AA      |      ;
-    LDA.L aEngineUnknown_83CA78,X                              ;83C23D|BF78CA83|83CA78;
+    LDA.L aGameEngine_ChickenEggBitMask,X                              ;83C23D|BF78CA83|83CA78;
     ORA.L nEggInCoopFlags                                      ;83C241|0F451F7F|7F1F45;
     STA.L nEggInCoopFlags                                      ;83C245|8F451F7F|7F1F45;
     REP #$20                                                   ;83C249|C220    |      ;
@@ -2966,7 +2966,7 @@ fGameEngine_AnimalsUnknown83BC5A:
     RTL                                                        ;83C295|6B      |      ;
  
  
-fGameEngine_ChichenUnknown83C296:
+fGameEngine_SpawnChickensOnMap:
     REP #$30                                                   ;83C296|C230    |      ;
     LDX.W #$0000                                               ;83C298|A20000  |      ;
  
@@ -3131,7 +3131,7 @@ fGameEngine_ChichenUnknown83C296:
     ADC.W #$0024                                               ;83C391|692400  |      ;
     LDX.W #$0000                                               ;83C394|A20000  |      ;
     LDY.W #$0000                                               ;83C397|A00000  |      ;
-    JSL.L fAI_Unknown8480F8                                    ;83C39A|22F88084|8480F8;
+    JSL.L fAI_StartSlotScriptAtFrontTile                                    ;83C39A|22F88084|8480F8;
     SEP #$20                                                   ;83C39E|E220    |      ;
     REP #$10                                                   ;83C3A0|C210    |      ;
     LDY.W #$0000                                               ;83C3A2|A00000  |      ;
@@ -3152,7 +3152,7 @@ fGameEngine_ChichenUnknown83C296:
     ADC.W #$0024                                               ;83C3BA|692400  |      ;
     LDX.W #$0000                                               ;83C3BD|A20000  |      ;
     LDY.W #$0001                                               ;83C3C0|A00100  |      ;
-    JSL.L fAI_Unknown8480F8                                    ;83C3C3|22F88084|8480F8;
+    JSL.L fAI_StartSlotScriptAtFrontTile                                    ;83C3C3|22F88084|8480F8;
     BRA .label12                                               ;83C3C7|8038    |83C401;
  
  
@@ -3168,7 +3168,7 @@ fGameEngine_ChichenUnknown83C296:
     ADC.W #$0024                                               ;83C3D8|692400  |      ;
     LDX.W #$0000                                               ;83C3DB|A20000  |      ;
     LDY.W #$0002                                               ;83C3DE|A00200  |      ;
-    JSL.L fAI_Unknown8480F8                                    ;83C3E1|22F88084|8480F8;
+    JSL.L fAI_StartSlotScriptAtFrontTile                                    ;83C3E1|22F88084|8480F8;
     REP #$30                                                   ;83C3E5|C230    |      ;
     PLA                                                        ;83C3E7|68      |      ;
     PHA                                                        ;83C3E8|48      |      ;
@@ -3185,7 +3185,7 @@ fGameEngine_ChichenUnknown83C296:
     ADC.W #$0024                                               ;83C3F4|692400  |      ;
     LDX.W #$0000                                               ;83C3F7|A20000  |      ;
     LDY.W #$005F                                               ;83C3FA|A05F00  |      ;
-    JSL.L fAI_Unknown8480F8                                    ;83C3FD|22F88084|8480F8;
+    JSL.L fAI_StartSlotScriptAtFrontTile                                    ;83C3FD|22F88084|8480F8;
  
 .label12:
     REP #$30                                                   ;83C401|C230    |      ;
@@ -3406,7 +3406,7 @@ fGameEngine_ChichenUnknown83C296:
     CLC                                                        ;83C55B|18      |      ;
     ADC.W #$0018                                               ;83C55C|691800  |      ;
     LDX.W #$0000                                               ;83C55F|A20000  |      ;
-    JSL.L fAI_Unknown8480F8                                    ;83C562|22F88084|8480F8;
+    JSL.L fAI_StartSlotScriptAtFrontTile                                    ;83C562|22F88084|8480F8;
     REP #$30                                                   ;83C566|C230    |      ;
     PLA                                                        ;83C568|68      |      ;
     PHA                                                        ;83C569|48      |      ;
@@ -3444,7 +3444,7 @@ fGameEngine_ChichenUnknown83C296:
     CLC                                                        ;83C59F|18      |      ;
     ADC.W #$0018                                               ;83C5A0|691800  |      ;
     LDX.W #$0000                                               ;83C5A3|A20000  |      ;
-    JSL.L fAI_Unknown8480F8                                    ;83C5A6|22F88084|8480F8;
+    JSL.L fAI_StartSlotScriptAtFrontTile                                    ;83C5A6|22F88084|8480F8;
     REP #$30                                                   ;83C5AA|C230    |      ;
     PLA                                                        ;83C5AC|68      |      ;
     PHA                                                        ;83C5AD|48      |      ;
@@ -3522,7 +3522,7 @@ fGameEngine_ChichenUnknown83C296:
     CLC                                                        ;83C627|18      |      ;
     ADC.W #$0018                                               ;83C628|691800  |      ;
     LDX.W #$0000                                               ;83C62B|A20000  |      ;
-    JSL.L fAI_Unknown8480F8                                    ;83C62E|22F88084|8480F8;
+    JSL.L fAI_StartSlotScriptAtFrontTile                                    ;83C62E|22F88084|8480F8;
     REP #$30                                                   ;83C632|C230    |      ;
     PLA                                                        ;83C634|68      |      ;
     PHA                                                        ;83C635|48      |      ;
@@ -3672,7 +3672,7 @@ fGameEngine_ChichenUnknown83C296:
     LDA.W #$0016                                               ;83C719|A91600  |      ;
     LDX.W #$0000                                               ;83C71C|A20000  |      ;
     LDY.W #$0011                                               ;83C71F|A01100  |      ;
-    JSL.L fAI_Unknown8480F8                                    ;83C722|22F88084|8480F8;
+    JSL.L fAI_StartSlotScriptAtFrontTile                                    ;83C722|22F88084|8480F8;
     REP #$20                                                   ;83C726|C220    |      ;
     LDA.W #$0001                                               ;83C728|A90100  |      ;
     STA.L $7F1F58                                              ;83C72B|8F581F7F|7F1F58;
@@ -3799,7 +3799,7 @@ fGameEngine_ChichenUnknown83C296:
   + REP #$30                                                   ;83C7F5|C230    |      ;
     LDA.W #$0017                                               ;83C7F7|A91700  |      ;
     LDX.W #$0000                                               ;83C7FA|A20000  |      ;
-    JSL.L fAI_Unknown8480F8                                    ;83C7FD|22F88084|8480F8;
+    JSL.L fAI_StartSlotScriptAtFrontTile                                    ;83C7FD|22F88084|8480F8;
     SEP #$20                                                   ;83C801|E220    |      ;
     STZ.W strcStockData.unkHorse                               ;83C803|9C3909  |000939;
  
@@ -4124,7 +4124,7 @@ aGameEngine_AddCowPositionsData:
     dw $0038,$0096,$0038,$0076,$0038,$0056                     ;83CA68|        |      ;
     dw $00D8,$0158                                             ;83CA74|        |      ;
  
-aEngineUnknown_83CA78:
+aGameEngine_ChickenEggBitMask:
     dw $0001,$0002,$0004,$0008,$0010,$0020                     ;83CA78|        |      ;
     dw $0040,$0080,$0100,$0200,$0400,$0800                     ;83CA84|        |      ;
     dw $1000,$2000,$4000,$8000                                 ;83CA90|        |      ;

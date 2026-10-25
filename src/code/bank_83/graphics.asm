@@ -47,7 +47,7 @@ fGraphicsTransferData:
     RTL                                                        ;8381B6|6B      |      ;
  
  
-fGraphicsUnknown_8381B7:
+fGraphics_WriteTilemap2x2:
     SEP #$20                                                   ;8381B7|E220    |      ; X: nArg1, $72: ptr24
     REP #$10                                                   ;8381B9|C210    |      ;
     LDA.B #$06                                                 ;8381BB|A906    |      ;

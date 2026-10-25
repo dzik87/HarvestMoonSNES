@@ -58,7 +58,7 @@ fGame_TimeHandler:
     SEP #$20                                                   ;82807A|E220    |      ;
     LDA.B #$FF                                                 ;82807C|A9FF    |      ;
     STA.W strcAudio.trackIdCopy                                ;82807E|8D1701  |000117;
-    JSL.L fAudioUnknown_838401                                 ;828081|22018483|838401;
+    JSL.L fAudio_FadeOutOnTrackChangeSlow                                 ;828081|22018483|838401;
     SEP #$20                                                   ;828085|E220    |      ;
     LDA.B #$FF                                                 ;828087|A9FF    |      ;
     STA.W strcAudio.trackId                                    ;828089|8D1001  |000110;
@@ -196,7 +196,7 @@ fEvents_ShippingSceneDialog:
     LDA.W #$0006                                               ;8281A5|A90600  |      ;
     LDX.W #$0000                                               ;8281A8|A20000  |      ;
     LDY.W #$0027                                               ;8281AB|A02700  |      ;
-    JSL.L fAI_Unknown84803F                                    ;8281AE|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;8281AE|223F8084|84803F;
     REP #$20                                                   ;8281B2|C220    |      ;
     %UnsetFlag(daily1, $0400)
  
@@ -376,7 +376,7 @@ fNextDayHandler:
     STA.L nCurrentDay                                          ;8282F8|8F1B1F7F|7F1F1B;
     LDA.B #$FF                                                 ;8282FC|A9FF    |      ;
     STA.W strcAudio.trackIdCopy                                ;8282FE|8D1701  |000117;
-    JSL.L fAudioUnknown_838401                                 ;828301|22018483|838401;
+    JSL.L fAudio_FadeOutOnTrackChangeSlow                                 ;828301|22018483|838401;
     SEP #$20                                                   ;828305|E220    |      ;
     LDA.B #$0F                                                 ;828307|A90F    |      ;
     STA.B strcVariables.n8Temp1                                ;828309|8592    |000092;
@@ -422,7 +422,7 @@ fNextDayHandler:
     JSL.L fWriteSeasonWeekdayAndDayOrdinal                     ;828394|22D68982|8289D6;
     JSL.L fObjectMap_Unknown82A811                             ;828398|2211A882|82A811;
     JSL.L fUnknown_828209                                      ;82839C|22098282|828209;
-    JSL.L fGameEngine_AnimalsUnknown83BC5A                     ;8283A0|225ABC83|83BC5A;
+    JSL.L fGameEngine_AnimalsDailyUpdate                     ;8283A0|225ABC83|83BC5A;
     JSL.L fWeatherRandomizer                                   ;8283A4|22F98C82|828CF9;
     JSL.L fCore_FindBestLove                                   ;8283A8|22C68E82|828EC6;
     JSL.L fUnknown_828790                                      ;8283AC|22908782|828790;
@@ -694,7 +694,7 @@ fNextDayHandler:
     SEP #$20                                                   ;828757|E220    |      ;
     LDA.B #$15                                                 ;828759|A915    |      ;
     STA.W nDestinationAreaId                                   ;82875B|8D8B09  |00098B;
-    JSL.L fUnknown_8096D3                                      ;82875E|22D39680|8096D3;
+    JSL.L fMap_ResetAndLoadDestinationArea                                      ;82875E|22D39680|8096D3;
     SEP #$20                                                   ;828762|E220    |      ;
     REP #$10                                                   ;828764|C210    |      ;
     LDA.B #$14                                                 ;828766|A914    |      ;

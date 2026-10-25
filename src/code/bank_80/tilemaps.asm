@@ -256,7 +256,7 @@ fTileMap_MapChangeHandler:
 .label13:
     REP #$30                                                   ;80A977|C230    |      ;
     PHA                                                        ;80A979|48      |      ;
-    JSR.W fTileMap_Unknown80AA38                               ;80A97A|2038AA  |80AA38;
+    JSR.W fTileMap_UploadRowToVRAM                               ;80A97A|2038AA  |80AA38;
     REP #$30                                                   ;80A97D|C230    |      ;
     LDA.B strcVariables.n16Temp1                               ;80A97F|A57E    |00007E;
     CLC                                                        ;80A981|18      |      ;
@@ -276,7 +276,7 @@ fTileMap_MapChangeHandler:
  
 .label14:
     LDY.W #$0040                                               ;80A99C|A04000  |      ;
-    JSR.W fTileMap_Unknown80AA38                               ;80A99F|2038AA  |80AA38;
+    JSR.W fTileMap_UploadRowToVRAM                               ;80A99F|2038AA  |80AA38;
  
 .label15:
     REP #$30                                                   ;80A9A2|C230    |      ;
@@ -343,8 +343,8 @@ fTileMap_MapChangeHandler:
     CLC                                                        ;80AA06|18      |      ;
     ADC.B strcMap.unk1E                                        ;80AA07|651E    |00001E;
     STA.B strcPlayer.posX                                      ;80AA09|85D6    |0000D6;
-    JSL.L fUnknown_809EBC                                      ;80AA0B|22BC9E80|809EBC;
-    JSL.L fUnknown_80A11C                                      ;80AA0F|221CA180|80A11C;
+    JSL.L fCamera_UpdateFromPlayerPos                                      ;80AA0B|22BC9E80|809EBC;
+    JSL.L fCamera_ScrollRightStep                                      ;80AA0F|221CA180|80A11C;
     JSL.L fCore_StartTransfer                                  ;80AA13|22F08A80|808AF0;
     BRA .destinationX                                          ;80AA17|80E2    |80A9FB;
  
@@ -358,8 +358,8 @@ fTileMap_MapChangeHandler:
     CLC                                                        ;80AA24|18      |      ;
     ADC.B strcMap.unk1E                                        ;80AA25|651E    |00001E;
     STA.B strcPlayer.posY                                      ;80AA27|85D8    |0000D8;
-    JSL.L fUnknown_809EBC                                      ;80AA29|22BC9E80|809EBC;
-    JSL.L fUnknown_80A0AB                                      ;80AA2D|22ABA080|80A0AB;
+    JSL.L fCamera_UpdateFromPlayerPos                                      ;80AA29|22BC9E80|809EBC;
+    JSL.L fCamera_ScrollDownStep                                      ;80AA2D|22ABA080|80A0AB;
     JSL.L fCore_StartTransfer                                  ;80AA31|22F08A80|808AF0;
     BRA .destinationY                                          ;80AA35|80E2    |80AA19;
  
@@ -368,7 +368,7 @@ fTileMap_MapChangeHandler:
     RTL                                                        ;80AA37|6B      |      ;
  
  
-fTileMap_Unknown80AA38:
+fTileMap_UploadRowToVRAM:
     REP #$30                                                   ;80AA38|C230    |      ;
     PHX                                                        ;80AA3A|DA      |      ;
     PHY                                                        ;80AA3B|5A      |      ;

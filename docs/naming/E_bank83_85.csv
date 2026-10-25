@@ -1,0 +1,63 @@
+old,new,confidence,reason
+fAudioUnknown_8382C6,fAudio_PlayTrackThenResumeMapMusic,medium,Fades out and loads track A then waits 180 frames and restores map music
+fAudioUnknown_8382FE,fAudio_PlaySoundEffectAndWait,high,A=sfx id X=param Y=wait frames; loads sfx sample then sends play command
+fAudioUnknown_83833E,fAudio_PrepareSoundEffectSample,medium,Frees sample slots from index and loads the sample required by sfx id via SFX sample table
+fAudioUnknown_838380,fAudio_StartPendingTrack,medium,If new track id differs from playing one sends start-track SPC command and clears toolId
+fAudioUnknown_8383A4,fAudio_LoadPendingTrack,medium,Unloads old samples then uploads new track data and its samples and primes sfx index
+fAudioUnknown_838401,fAudio_FadeOutOnTrackChangeSlow,medium,Sends fade-out command (param $40) when track id changed and old track was playing
+fAudioUnknown_83841F,fAudio_FadeOutOnTrackChangeFast,medium,Same as slow variant but fade parameter $10
+fAudioUnknown_8384D3,fAudio_UploadSpcDataBlock_B2D120,low,SPC command 1 uploads a $3F2-byte block from $B2D120 in 3-byte chunks (purpose unclear)
+fAudio_PlayAudio_Unknown838598,fAudio_LoadCommonSamples,medium,SPC command 2 uploads the 10 samples listed in aAudioSampleLookupTable at boot
+fAudioUnknown_83878C,fAudio_LoadTrackSamples,medium,Builds strcAudio.list from the 11 sample ids of the track entry and uploads each via command 3
+fAudioUnknown_8389C7,fAudio_FreeSamplesFromSlot,medium,SPC command 4 frees sample slots from A onward and zeroes strcAudio.list tail
+fAudioUnknown_838A26,fAudio_UploadTrackData,medium,SPC command 5 uploads track music data using size from aAudioTrackDataSize
+fAudioUnknown_838AFF,fAudio_LoadSfxSample,medium,SPC command 3 appends sample for reg114 sfx id to list and uploads its 10-byte descriptor and data
+fAudioUnknown_838D39,fAudio_SendStartTrackCommand,medium,Waits for idle APU then SPC command 8 with unk111 and unk113
+fAudioUnknown_838D8B,fAudio_SendFadeOutCommand,medium,If APU busy sends SPC command 9 with unk112 and unk113
+fAudioUnknown_838DDF,fAudio_SendPlaySfxCommand,medium,SPC command $0A passes reg114 reg115 reg116 (sfx id and params)
+fAudioUnknown_838E32,fAudio_SendCommand0B,low,SPC command $0B with A as parameter called once at boot with 0
+fAudioUnknown_838E8B,fAudio_SendSpcCommand,high,Handshake routine that sends command byte from n8Temp1 to APU ports
+fAudioUnknown_838EC9,fAudio_ReadSpcStatusBits0And4,low,Waits for stable port 3 then returns APUIO0 AND $11
+fAudioUnknown_838EE4,fAudio_ReadSpcStatusBit4,low,Waits for stable port 3 then returns APUIO0 AND $10
+aAudioUnknown_838F4F,aAudioTrackDataSizeTable,medium,Words indexed by trackId*2; size in bytes sent as ceil(size/3) chunks of 3 bytes
+aAudioUnknown_83927F,aAudioSfxSampleIdTable,medium,Bytes indexed by sfx id (reg114) giving sample id to load or 0 for none
+fDialog_Unknown_8392BB,fDialog_LoadDialogBoxGraphics,medium,Decompresses tilemap to VRAM $7800 and DMAs $1000 bytes of font tiles to VRAM $5000
+fDialog_Unknown_83932D,fDialog_ReloadFontTiles,medium,DMAs $C00 bytes of font tile data from $9CBBA3 to VRAM $5000
+fDialog_Unknown_8393F9,fDialog_EndDialogRestoreScroll,medium,Clears dialog flags restores BG3 vertical scroll and reloads font tiles; counterpart of dialog start
+fDialog_Unknown_839447,fDialog_AnimateBlinkIconLong,medium,JSL wrapper around blink icon animation used from fDialog_IterateText
+aDialogUnknown_83944D,aDialogUnused_83944D,low,10 bytes with no references
+aDialogUnknown_839457,aDialogBlinkIconTiles_Frame0,medium,2x2 tile words $21A0-$21B1 for blink icon frame 0
+aDialogUnknown_83945F,aDialogBlinkIconTiles_Frame1,medium,2x2 tile words $21A2-$21B3 for blink icon frame 1
+aDialogUnknown_83947D,aDialogBlinkIconVramAddrByLine,medium,Word VRAM tilemap addresses indexed by dialog line count (capped at 11)
+fDialog_Unknown_839495,fDialog_AnimateBlinkIcon,medium,Toggles blink state every $14 frames and draws matching icon frame
+fDialog_Unknown_8394D7,fDialog_DrawBlinkIconFrame,medium,Draws 2x2 icon frame A at VRAM address from line table
+fDialog_Unknown_8397A6,fDialog_DrawNumericVarDigit,medium,Extracts one decimal digit of numeric var by repeated subtraction of pTextAmmountTable and draws glyph
+fDialog_Unknown839838,fDialog_AdvanceGlyphDestination,medium,Advances glyph VRAM destination by 8 and wraps at $80 boundary
+fGameEngine_Unknown83AEC3,fGameEngine_CheckDirectionalOverlap,low,A=direction 0-3 offsets last position and tests if within 12 px of player position
+fGameEngine_Unknown83B0F6,fGameEngine_CheckTileCollision,medium,Probes collision at X Y via fUnknown_82AC61 and returns status bits for player movement handler
+fGameEngine_AnimalsUnknown83BC5A,fGameEngine_AnimalsDailyUpdate,medium,Called from new day sequence; loops cows then chickens updating feed state and death
+fGameEngine_ChichenUnknown83C296,fGameEngine_SpawnChickensOnMap,medium,Loops 13 chickens and spawns AI objects for those whose stored area matches current map
+aEngineUnknown_83CA78,aGameEngine_ChickenEggBitMask,medium,Words 1<<n indexed by chicken index to set nEggInCoopFlags
+fGraphicsUnknown_8381B7,fGraphics_WriteTilemap2x2,medium,DMAs 2 tiles on two tilemap rows at VRAM X and X+$20 from ptr at $72
+fAreaEvents_MountainTopUnknown,fAreaEvents_MountainTopSpringDay1,medium,Runs AI script only when season is spring and day is 1
+fUnknown_858000,fObject_Create,medium,Allocates a free game object slot and initializes sprite pos and animation list
+fObject_Unknown8580B9,fObject_UpdatePositionAndFlip,medium,Updates flip and position of an initialized game object
+fObject_Unknown858100,fObject_Replace,medium,Re-initializes existing object index with new sprite table index and animation data
+fObject_Unknown8581A2,fObject_Destroy,medium,Releases sprite tiles and clears initialized flag of object
+fObject_Unknown8582C7,fObject_UpdateAllAnimations,medium,Per-frame loop over objects that decrements frame timers and advances animation list
+fObject_Unknown858377,fObject_BuildDrawOrderByY,medium,Builds draw order list at $084C by sorting objects by Y position
+fUnknown_8583E0,fObject_RenderAll,medium,Sorts objects and builds OAM shadow entries from components
+fUnknown_8585F4,fObject_SetupOamDma,medium,Stores sprite count and configures DMA channel 4 to copy $220 bytes to OAM
+fUnknown_858647,fObject_ClearOamBuffer_Init,medium,Fills OAM shadow buffer with $F0F0 hiding all sprites; used on object reset
+fUnknown_858896,fObject_ClearOamBuffer_Frame,medium,Same OAM shadow clear called at start of each render pass
+fUnknown_858B41,fObject_ReleaseSpriteTiles,medium,Decrements tile cache refcount of every loaded component of the object
+fUnknown_858B7B,fObject_CheckComponentsPending,medium,Returns $FFFF in bankAddress if any component tile not yet loaded
+fUnknown_858BB0,fObject_FlipOffsetX,medium,Negates component X offset when flip bit $40 is set
+fUnknown_858BBC,fObject_FlipOffsetY,medium,Negates component Y offset when flip bit $80 is set
+fUnknown_858BC4,fObject_NegateOffsetMinus16,medium,Shared tail computing -offset-16 for flipped component
+fUnknown_858C30,fObject_AcquireTileSlot,medium,Looks up sprite tile in cache table $7F0F00 and bumps refcount or queues a load request
+fUnknown_858C9F,fObject_ReleaseTileSlot,medium,Decrements refcount of a sprite tile cache slot
+fUnknown_858CB2,fObject_ProcessTileLoadQueue,medium,Assigns cache slots to queued tile requests and builds VRAM DMA entries
+aUnknown_858E47,aObject_TileBlockSourceOffsets,medium,Eight words $0000 to $E000 step $2000 used to compute source address of tile data
+fUnknown_858E57,fObject_ExecuteTileDmaQueue,medium,Runs queued DMA transfers of sprite tiles to VRAM until $FFFF terminator
+fUnknown_Zero7EA220,fObject_InitTileCache,medium,Resets tile request queue refcounts and slot lookup table to empty

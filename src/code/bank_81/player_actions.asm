@@ -1,11 +1,11 @@
 ; Bank $81 module "player_actions" - starts at $81BFB7
  
-fUnknownSubrutineHandler_81BFB7:
+fPlayer_UpdateHandler:
     SEP #$20                                                   ;81BFB7|E220    |      ;
     REP #$10                                                   ;81BFB9|C210    |      ;
     %CheckPlayerFlags(!PFLAGS_ACTIVE)
     BNE +                                                      ;81BFC2|D003    |81BFC7;
-    JMP.W fUnknown_81C002                                      ;81BFC4|4C02C0  |81C002;
+    JMP.W fPlayerAction_CheckIdle                                      ;81BFC4|4C02C0  |81C002;
  
  
   + %CheckPlayerFlags(!PFLAGS_INTERACTING)
@@ -39,22 +39,22 @@ fPlayerAction0x00:
  
  
   + CMP.W #$000E                                               ;81BFFA|C90E00  |      ;
-    BNE fUnknown_81C002                                        ;81BFFD|D003    |81C002;
-    JMP.W fUnknown_81C83B                                      ;81BFFF|4C3BC8  |81C83B;
+    BNE fPlayerAction_CheckIdle                                        ;81BFFD|D003    |81C002;
+    JMP.W fPlayerAction0x0E                                      ;81BFFF|4C3BC8  |81C83B;
  
  
-fUnknown_81C002:
+fPlayerAction_CheckIdle:
     %CheckPlayerAction(!PACTION_NONE)
     BNE fPlayerAction0x19                                      ;81C009|D003    |81C00E;
-    JMP.W fUnknown_81C556                                      ;81C00B|4C56C5  |81C556;
+    JMP.W fPlayerAction_IdleHandler                                      ;81C00B|4C56C5  |81C556;
  
  
 fPlayerAction0x19:
     SEP #$20                                                   ;81C00E|E220    |      ;
     STZ.W strcPlayerData.lastExcercise                         ;81C010|9C2509  |000925;
  
-fUnknown_81C013:
-    JSL.L fUnknown_809F61                                      ;81C013|22619F80|809F61;
+fPlayerAction_Finish:
+    JSL.L fCamera_UpdateBG2Scroll                                      ;81C013|22619F80|809F61;
     REP #$20                                                   ;81C017|C220    |      ;
     LDA.W #$0000                                               ;81C019|A90000  |      ;
     STA.B strcMap.unk1E                                        ;81C01C|851E    |00001E;
@@ -113,7 +113,7 @@ fPlayerAction0x1C:
     STA.W strcObjectData.spriteIdx                             ;81C087|8D0109  |000901;
  
 .label2:
-    JSR.W fUnknown_81CFE6                                      ;81C08A|20E6CF  |81CFE6;
+    JSR.W fPlayer_UpdateSpriteObject                                      ;81C08A|20E6CF  |81CFE6;
     REP #$30                                                   ;81C08D|C230    |      ;
     LDA.W strcObjectData.exist                                 ;81C08F|AD1509  |000915;
     CMP.W #$FFFF                                               ;81C092|C9FFFF  |      ;
@@ -129,7 +129,7 @@ fPlayerAction0x1C:
     JSL.L fToolUsedSound_Unknown828FF3                         ;81C0AE|22F38F82|828FF3;
  
 .exit:
-    JMP.W fUnknown_81C002                                      ;81C0B2|4C02C0  |81C002;
+    JMP.W fPlayerAction_CheckIdle                                      ;81C0B2|4C02C0  |81C002;
  
  
 fPlayerAction0x1A:
@@ -139,7 +139,7 @@ fPlayerAction0x1A:
     CLC                                                        ;81C0BC|18      |      ;
     ADC.B strcPlayer.direction                                 ;81C0BD|65DA    |0000DA;
     STA.W strcObjectData.spriteIdx                             ;81C0BF|8D0109  |000901;
-    JSR.W fUnknown_81CFE6                                      ;81C0C2|20E6CF  |81CFE6;
+    JSR.W fPlayer_UpdateSpriteObject                                      ;81C0C2|20E6CF  |81CFE6;
     REP #$20                                                   ;81C0C5|C220    |      ;
     LDA.W strcObjectData.exist                                 ;81C0C7|AD1509  |000915;
     CMP.W #$FFFF                                               ;81C0CA|C9FFFF  |      ;
@@ -162,7 +162,7 @@ fPlayerAction0x1A:
     %UnsetFlag(daily4, $0006)
  
 .exit:
-    JMP.W fUnknown_81C002                                      ;81C10E|4C02C0  |81C002;
+    JMP.W fPlayerAction_CheckIdle                                      ;81C10E|4C02C0  |81C002;
  
  
 fPlayerAction0x17:
@@ -178,8 +178,8 @@ fPlayerAction0x17:
     SEP #$20                                                   ;81C126|E220    |      ;
     LDA.B #$01                                                 ;81C128|A901    |      ;
     STA.B strcMap.unk1E                                        ;81C12A|851E    |00001E;
-    JSR.W fUnknown_81CB77                                      ;81C12C|2077CB  |81CB77;
-    JSR.W fUnknown_81CFE6                                      ;81C12F|20E6CF  |81CFE6;
+    JSR.W fPlayer_MoveInDirection                                      ;81C12C|2077CB  |81CB77;
+    JSR.W fPlayer_UpdateSpriteObject                                      ;81C12F|20E6CF  |81CFE6;
     REP #$20                                                   ;81C132|C220    |      ;
     LDA.W strcObjectData.exist                                 ;81C134|AD1509  |000915;
     CMP.W #$FFFF                                               ;81C137|C9FFFF  |      ;
@@ -189,7 +189,7 @@ fPlayerAction0x17:
     %SetFlag(daily2, $0020)
  
 .exit:
-    JMP.W fUnknown_81C002                                      ;81C150|4C02C0  |81C002;
+    JMP.W fPlayerAction_CheckIdle                                      ;81C150|4C02C0  |81C002;
  
  
 fPlayerAction0x18:
@@ -205,8 +205,8 @@ fPlayerAction0x18:
     SEP #$20                                                   ;81C168|E220    |      ;
     LDA.B #$01                                                 ;81C16A|A901    |      ;
     STA.B strcMap.unk1E                                        ;81C16C|851E    |00001E;
-    JSR.W fUnknown_81CB77                                      ;81C16E|2077CB  |81CB77;
-    JSR.W fUnknown_81CFE6                                      ;81C171|20E6CF  |81CFE6;
+    JSR.W fPlayer_MoveInDirection                                      ;81C16E|2077CB  |81CB77;
+    JSR.W fPlayer_UpdateSpriteObject                                      ;81C171|20E6CF  |81CFE6;
     REP #$20                                                   ;81C174|C220    |      ;
     LDA.W strcObjectData.exist                                 ;81C176|AD1509  |000915;
     CMP.W #$FFFF                                               ;81C179|C9FFFF  |      ;
@@ -217,7 +217,7 @@ fPlayerAction0x18:
     %SetFlag(daily2, $0800)
  
 .exit:
-    JMP.W fUnknown_81C002                                      ;81C19E|4C02C0  |81C002;
+    JMP.W fPlayerAction_CheckIdle                                      ;81C19E|4C02C0  |81C002;
  
  
 fPlayerAction0x16:
@@ -227,7 +227,7 @@ fPlayerAction0x16:
     CLC                                                        ;81C1A8|18      |      ;
     ADC.B strcPlayer.direction                                 ;81C1A9|65DA    |0000DA;
     STA.W strcObjectData.spriteIdx                             ;81C1AB|8D0109  |000901;
-    JSR.W fUnknown_81CFE6                                      ;81C1AE|20E6CF  |81CFE6;
+    JSR.W fPlayer_UpdateSpriteObject                                      ;81C1AE|20E6CF  |81CFE6;
     REP #$20                                                   ;81C1B1|C220    |      ;
     LDA.W strcObjectData.exist                                 ;81C1B3|AD1509  |000915;
     CMP.W #$FFFF                                               ;81C1B6|C9FFFF  |      ;
@@ -241,7 +241,7 @@ fPlayerAction0x16:
     LDA.W #$0016                                               ;81C1D2|A91600  |      ;
     LDX.W #$0000                                               ;81C1D5|A20000  |      ;
     LDY.W #$0012                                               ;81C1D8|A01200  |      ;
-    JSL.L fAI_Unknown8480F8                                    ;81C1DB|22F88084|8480F8;
+    JSL.L fAI_StartSlotScriptAtFrontTile                                    ;81C1DB|22F88084|8480F8;
     REP #$20                                                   ;81C1DF|C220    |      ;
     LDA.W #$0001                                               ;81C1E1|A90100  |      ;
     STA.L $7F1F58                                              ;81C1E4|8F581F7F|7F1F58;
@@ -249,7 +249,7 @@ fPlayerAction0x16:
     STZ.W strcStockData.unkDog                                 ;81C1EA|9C3809  |000938;
  
 .exit:
-    JMP.W fUnknown_81C002                                      ;81C1ED|4C02C0  |81C002;
+    JMP.W fPlayerAction_CheckIdle                                      ;81C1ED|4C02C0  |81C002;
  
  
 fPlayerAction0x15:
@@ -257,7 +257,7 @@ fPlayerAction0x15:
     REP #$30                                                   ;81C1F2|C230    |      ;
     LDA.W #$00CC                                               ;81C1F4|A9CC00  |      ;
     STA.W strcObjectData.spriteIdx                             ;81C1F7|8D0109  |000901;
-    JSR.W fUnknown_81CFE6                                      ;81C1FA|20E6CF  |81CFE6;
+    JSR.W fPlayer_UpdateSpriteObject                                      ;81C1FA|20E6CF  |81CFE6;
     REP #$20                                                   ;81C1FD|C220    |      ;
     LDA.W strcObjectData.exist                                 ;81C1FF|AD1509  |000915;
     CMP.W #$FFFF                                               ;81C202|C9FFFF  |      ;
@@ -265,7 +265,7 @@ fPlayerAction0x15:
     %SetPlayerAction(!PACTION_DRUNK)
  
 .exit:
-    JMP.W fUnknown_81C002                                      ;81C20E|4C02C0  |81C002;
+    JMP.W fPlayerAction_CheckIdle                                      ;81C20E|4C02C0  |81C002;
  
  
 fPlayerAction0x14:
@@ -273,7 +273,7 @@ fPlayerAction0x14:
     REP #$30                                                   ;81C213|C230    |      ;
     LDA.W #$008F                                               ;81C215|A98F00  |      ;
     STA.W strcObjectData.spriteIdx                             ;81C218|8D0109  |000901;
-    JSR.W fUnknown_81CFE6                                      ;81C21B|20E6CF  |81CFE6;
+    JSR.W fPlayer_UpdateSpriteObject                                      ;81C21B|20E6CF  |81CFE6;
     REP #$20                                                   ;81C21E|C220    |      ;
     LDA.W strcObjectData.exist                                 ;81C220|AD1509  |000915;
     CMP.W #$FFFF                                               ;81C223|C9FFFF  |      ;
@@ -281,7 +281,7 @@ fPlayerAction0x14:
     %SetPlayerAction(!PACTION_NONE)
  
 .exit:
-    JMP.W fUnknown_81C002                                      ;81C22F|4C02C0  |81C002;
+    JMP.W fPlayerAction_CheckIdle                                      ;81C22F|4C02C0  |81C002;
  
  
 fPlayerAction0x0F:
@@ -289,8 +289,8 @@ fPlayerAction0x0F:
     REP #$30                                                   ;81C234|C230    |      ;
     LDA.W #$0088                                               ;81C236|A98800  |      ;
     STA.W strcObjectData.spriteIdx                             ;81C239|8D0109  |000901;
-    JSR.W fUnknown_81CFE6                                      ;81C23C|20E6CF  |81CFE6;
-    JMP.W fUnknown_81C002                                      ;81C23F|4C02C0  |81C002;
+    JSR.W fPlayer_UpdateSpriteObject                                      ;81C23C|20E6CF  |81CFE6;
+    JMP.W fPlayerAction_CheckIdle                                      ;81C23F|4C02C0  |81C002;
  
  
 fPlayerAction0x10:
@@ -298,7 +298,7 @@ fPlayerAction0x10:
     REP #$30                                                   ;81C244|C230    |      ;
     LDA.W #$0089                                               ;81C246|A98900  |      ;
     STA.W strcObjectData.spriteIdx                             ;81C249|8D0109  |000901;
-    JSR.W fUnknown_81CFE6                                      ;81C24C|20E6CF  |81CFE6;
+    JSR.W fPlayer_UpdateSpriteObject                                      ;81C24C|20E6CF  |81CFE6;
     REP #$20                                                   ;81C24F|C220    |      ;
     LDA.W strcObjectData.exist                                 ;81C251|AD1509  |000915;
     CMP.W #$FFFF                                               ;81C254|C9FFFF  |      ;
@@ -306,7 +306,7 @@ fPlayerAction0x10:
     %SetPlayerAction(!PACTION_FISHING)
  
 .exit:
-    JMP.W fUnknown_81C002                                      ;81C260|4C02C0  |81C002;
+    JMP.W fPlayerAction_CheckIdle                                      ;81C260|4C02C0  |81C002;
  
  
 fPlayerAction0x11_Fishing:
@@ -324,8 +324,8 @@ fPlayerAction0x11_Fishing:
   + REP #$30                                                   ;81C280|C230    |      ;
     LDA.W #$008E                                               ;81C282|A98E00  |      ;
     STA.W strcObjectData.spriteIdx                             ;81C285|8D0109  |000901;
-    JSR.W fUnknown_81CFE6                                      ;81C288|20E6CF  |81CFE6;
-    JMP.W fUnknown_81C002                                      ;81C28B|4C02C0  |81C002;
+    JSR.W fPlayer_UpdateSpriteObject                                      ;81C288|20E6CF  |81CFE6;
+    JMP.W fPlayerAction_CheckIdle                                      ;81C28B|4C02C0  |81C002;
  
  
 fPlayerAction0x12_FishingBite:
@@ -333,7 +333,7 @@ fPlayerAction0x12_FishingBite:
     REP #$30                                                   ;81C290|C230    |      ;
     LDA.W #$008A                                               ;81C292|A98A00  |      ;
     STA.W strcObjectData.spriteIdx                             ;81C295|8D0109  |000901;
-    JSR.W fUnknown_81CFE6                                      ;81C298|20E6CF  |81CFE6;
+    JSR.W fPlayer_UpdateSpriteObject                                      ;81C298|20E6CF  |81CFE6;
     REP #$20                                                   ;81C29B|C220    |      ;
     LDA.W strcObjectData.exist                                 ;81C29D|AD1509  |000915;
     CMP.W #$FFFF                                               ;81C2A0|C9FFFF  |      ;
@@ -341,12 +341,12 @@ fPlayerAction0x12_FishingBite:
     %SetPlayerAction(!PACTION_FISHING)
  
 .exit:
-    JMP.W fUnknown_81C002                                      ;81C2AC|4C02C0  |81C002;
+    JMP.W fPlayerAction_CheckIdle                                      ;81C2AC|4C02C0  |81C002;
  
  
 fPlayerAction0x13:
     REP #$30                                                   ;81C2AF|C230    |      ;
-    JSR.W fUnknown_81CFE6                                      ;81C2B1|20E6CF  |81CFE6;
+    JSR.W fPlayer_UpdateSpriteObject                                      ;81C2B1|20E6CF  |81CFE6;
     REP #$20                                                   ;81C2B4|C220    |      ;
     LDA.W strcObjectData.exist                                 ;81C2B6|AD1509  |000915;
     CMP.W #$FFFF                                               ;81C2B9|C9FFFF  |      ;
@@ -362,7 +362,7 @@ fPlayerAction0x13:
     BEQ .label1                                                ;81C2D7|F009    |81C2E2;
     REP #$30                                                   ;81C2D9|C230    |      ;
     LDA.W #$0014                                               ;81C2DB|A91400  |      ;
-    JSL.L fAI_Unknown848020                                    ;81C2DE|22208084|848020;
+    JSL.L fAI_DeactivateSlotAndObject                                    ;81C2DE|22208084|848020;
  
 .label1:
     REP #$30                                                   ;81C2E2|C230    |      ;
@@ -392,7 +392,7 @@ fPlayerAction0x13:
  
  
 .exit:
-    JMP.W fUnknown_81C002                                      ;81C330|4C02C0  |81C002;
+    JMP.W fPlayerAction_CheckIdle                                      ;81C330|4C02C0  |81C002;
  
  
 fPlayerAction0x1B:
@@ -404,7 +404,7 @@ fPlayerAction0x1B:
     CLC                                                        ;81C347|18      |      ;
     ADC.B strcPlayer.direction                                 ;81C348|65DA    |0000DA;
     STA.W strcObjectData.spriteIdx                             ;81C34A|8D0109  |000901;
-    JSR.W fUnknown_81CFE6                                      ;81C34D|20E6CF  |81CFE6;
+    JSR.W fPlayer_UpdateSpriteObject                                      ;81C34D|20E6CF  |81CFE6;
     REP #$20                                                   ;81C350|C220    |      ;
     LDA.W strcObjectData.exist                                 ;81C352|AD1509  |000915;
     CMP.W #$FFFF                                               ;81C355|C9FFFF  |      ;
@@ -412,7 +412,7 @@ fPlayerAction0x1B:
     %SetPlayerAction(!PACTION_NONE)
  
 .exit:
-    JMP.W fUnknown_81C002                                      ;81C361|4C02C0  |81C002;
+    JMP.W fPlayerAction_CheckIdle                                      ;81C361|4C02C0  |81C002;
  
  
 fPlayerAction0x0D:
@@ -424,7 +424,7 @@ fPlayerAction0x0D:
     CLC                                                        ;81C378|18      |      ;
     ADC.B strcPlayer.direction                                 ;81C379|65DA    |0000DA;
     STA.W strcObjectData.spriteIdx                             ;81C37B|8D0109  |000901;
-    JSR.W fUnknown_81CFE6                                      ;81C37E|20E6CF  |81CFE6;
+    JSR.W fPlayer_UpdateSpriteObject                                      ;81C37E|20E6CF  |81CFE6;
     REP #$20                                                   ;81C381|C220    |      ;
     LDA.W strcObjectData.exist                                 ;81C383|AD1509  |000915;
     CMP.W #$FFFF                                               ;81C386|C9FFFF  |      ;
@@ -432,7 +432,7 @@ fPlayerAction0x0D:
     %SetPlayerAction(!PACTION_NONE)
  
 .exit:
-    JMP.W fUnknown_81C002                                      ;81C392|4C02C0  |81C002;
+    JMP.W fPlayerAction_CheckIdle                                      ;81C392|4C02C0  |81C002;
  
  
 fPlayerAction0x0C_SelectDialog:
@@ -603,7 +603,7 @@ fPlayerAction0x0C_SelectDialog:
     JSL.L fDialog_DialogHandler                                ;81C4C6|225F9383|83935F;
  
 .continue:
-    JSR.W fUnknown_81CFE6                                      ;81C4CA|20E6CF  |81CFE6;
+    JSR.W fPlayer_UpdateSpriteObject                                      ;81C4CA|20E6CF  |81CFE6;
     REP #$30                                                   ;81C4CD|C230    |      ;
     LDA.W strcObjectData.exist                                 ;81C4CF|AD1509  |000915;
     CMP.W #$FFFF                                               ;81C4D2|C9FFFF  |      ;
@@ -614,7 +614,7 @@ fPlayerAction0x0C_SelectDialog:
     %SetPlayerAction(!PACTION_NONE)
  
 .exit:
-    JMP.W fUnknown_81C002                                      ;81C4E9|4C02C0  |81C002;
+    JMP.W fPlayerAction_CheckIdle                                      ;81C4E9|4C02C0  |81C002;
  
  
 fPlayerAction0x0B:
@@ -627,7 +627,7 @@ fPlayerAction0x0B:
   + %SetPlayerFlag(!PFLAGS_ANIMATING)
  
 .label1:
-    JSR.W fUnknown_81CFE6                                      ;81C503|20E6CF  |81CFE6;
+    JSR.W fPlayer_UpdateSpriteObject                                      ;81C503|20E6CF  |81CFE6;
     REP #$20                                                   ;81C506|C220    |      ;
     LDA.W strcObjectData.exist                                 ;81C508|AD1509  |000915;
     CMP.W #$FFFF                                               ;81C50B|C9FFFF  |      ;
@@ -635,7 +635,7 @@ fPlayerAction0x0B:
     %SetPlayerAction(!PACTION_NONE)
  
 .exit:
-    JMP.W fUnknown_81C002                                      ;81C517|4C02C0  |81C002;
+    JMP.W fPlayerAction_CheckIdle                                      ;81C517|4C02C0  |81C002;
  
  
 fPlayerAction0x0A:
@@ -648,7 +648,7 @@ fPlayerAction0x0A:
   + %SetPlayerFlag(!PFLAGS_ANIMATING)
  
 .label1:
-    JSR.W fUnknown_81CFE6                                      ;81C531|20E6CF  |81CFE6;
+    JSR.W fPlayer_UpdateSpriteObject                                      ;81C531|20E6CF  |81CFE6;
     REP #$20                                                   ;81C534|C220    |      ;
     LDA.W strcObjectData.exist                                 ;81C536|AD1509  |000915;
     CMP.W #$FFFF                                               ;81C539|C9FFFF  |      ;
@@ -664,10 +664,10 @@ fPlayerAction0x0A:
     JSL.L fToolUsedSound_Unknown828FB1                         ;81C54F|22B18F82|828FB1;
  
 .exit:
-    JMP.W fUnknown_81C002                                      ;81C553|4C02C0  |81C002;
+    JMP.W fPlayerAction_CheckIdle                                      ;81C553|4C02C0  |81C002;
  
  
-fUnknown_81C556:
+fPlayerAction_IdleHandler:
     REP #$30                                                   ;81C556|C230    |      ;
     %UnsetPlayerFlag(!PFLAGS_ANIMATING)
     %CheckPlayerFlags(!PFLAGS_KNEEING)
@@ -802,17 +802,17 @@ fUnknown_81C556:
  
  
 .exit1:
-    JSR.W fUnknown_81CFE6                                      ;81C65C|20E6CF  |81CFE6;
-    JMP.W fUnknown_81C013                                      ;81C65F|4C13C0  |81C013;
+    JSR.W fPlayer_UpdateSpriteObject                                      ;81C65C|20E6CF  |81CFE6;
+    JMP.W fPlayerAction_Finish                                      ;81C65F|4C13C0  |81C013;
  
  
 .exit2:
-    JSR.W fUnknown_81CFE6                                      ;81C662|20E6CF  |81CFE6;
+    JSR.W fPlayer_UpdateSpriteObject                                      ;81C662|20E6CF  |81CFE6;
     JMP.W fPlayerAction0x19                                    ;81C665|4C0EC0  |81C00E;
  
  
 .exit3:
-    JSR.W fUnknown_81CFE6                                      ;81C668|20E6CF  |81CFE6;
+    JSR.W fPlayer_UpdateSpriteObject                                      ;81C668|20E6CF  |81CFE6;
     JMP.W fPlayerAction0x19                                    ;81C66B|4C0EC0  |81C00E;
  
  
@@ -874,7 +874,7 @@ fPlayerAction_Walk:
     SEP #$20                                                   ;81C6E0|E220    |      ;
     LDA.B #$03                                                 ;81C6E2|A903    |      ;
     STA.B strcMap.unk1E                                        ;81C6E4|851E    |00001E;
-    JMP.W fUnknown_81C806                                      ;81C6E6|4C06C8  |81C806;
+    JMP.W fPlayerAction_Run_StepSound                                      ;81C6E6|4C06C8  |81C806;
  
  
 .label3:
@@ -914,7 +914,7 @@ fPlayerAction_Walk:
  
  
 .exit:
-    JSR.W fUnknown_81CB77                                      ;81C722|2077CB  |81CB77;
+    JSR.W fPlayer_MoveInDirection                                      ;81C722|2077CB  |81CB77;
     %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;81C72C|E220    |      ;
     REP #$10                                                   ;81C72E|C210    |      ;
@@ -970,7 +970,7 @@ fPlayerAction_Run:
     SEP #$20                                                   ;81C79F|E220    |      ;
     LDA.B #$02                                                 ;81C7A1|A902    |      ;
     STA.B strcMap.unk1E                                        ;81C7A3|851E    |00001E;
-    BRA fUnknown_81C806                                        ;81C7A5|805F    |81C806;
+    BRA fPlayerAction_Run_StepSound                                        ;81C7A5|805F    |81C806;
  
  
 .label1:
@@ -982,7 +982,7 @@ fPlayerAction_Run:
     SEP #$20                                                   ;81C7B2|E220    |      ;
     LDA.B #$02                                                 ;81C7B4|A902    |      ;
     STA.B strcMap.unk1E                                        ;81C7B6|851E    |00001E;
-    BRA fUnknown_81C806                                        ;81C7B8|804C    |81C806;
+    BRA fPlayerAction_Run_StepSound                                        ;81C7B8|804C    |81C806;
  
  
 .label2:
@@ -994,7 +994,7 @@ fPlayerAction_Run:
     SEP #$20                                                   ;81C7C5|E220    |      ;
     LDA.B #$03                                                 ;81C7C7|A903    |      ;
     STA.B strcMap.unk1E                                        ;81C7C9|851E    |00001E;
-    BRA fUnknown_81C806                                        ;81C7CB|8039    |81C806;
+    BRA fPlayerAction_Run_StepSound                                        ;81C7CB|8039    |81C806;
  
  
 .label3:
@@ -1033,7 +1033,7 @@ fPlayerAction_Run:
     BRA fHelper_81C827                                         ;81C804|8021    |81C827;
  
  
-fUnknown_81C806:
+fPlayerAction_Run_StepSound:
     SEP #$20                                                   ;81C806|E220    |      ;
     REP #$10                                                   ;81C808|C210    |      ;
     LDA.W strcPlayerData.unkCounter91A                         ;81C80A|AD1A09  |00091A;
@@ -1050,7 +1050,7 @@ fUnknown_81C806:
     JSL.L fAudioSetRegister2to0A                               ;81C823|22328383|838332;
  
 fHelper_81C827:
-    JSR.W fUnknown_81CB77                                      ;81C827|2077CB  |81CB77;
+    JSR.W fPlayer_MoveInDirection                                      ;81C827|2077CB  |81CB77;
  
 fHelper_81C82A:
     %SetPlayerAction(!PACTION_NONE)
@@ -1060,7 +1060,7 @@ fHelper_81C82A:
     JMP.W fPlayerAction0x19                                    ;81C838|4C0EC0  |81C00E;
  
  
-fUnknown_81C83B:
+fPlayerAction0x0E:
     REP #$30                                                   ;81C83B|C230    |      ;
     %UnsetPlayerFlag(!PFLAGS_ANIMATING)
     REP #$30                                                   ;81C849|C230    |      ;
@@ -1069,7 +1069,7 @@ fUnknown_81C83B:
     SEP #$20                                                   ;81C851|E220    |      ;
     LDA.B #$01                                                 ;81C853|A901    |      ;
     STA.B strcMap.unk1E                                        ;81C855|851E    |00001E;
-    JSR.W fUnknown_81CB77                                      ;81C857|2077CB  |81CB77;
+    JSR.W fPlayer_MoveInDirection                                      ;81C857|2077CB  |81CB77;
     %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;81C861|E220    |      ;
     REP #$10                                                   ;81C863|C210    |      ;
@@ -1194,8 +1194,8 @@ fPlayerAction0x03:
     STA.B strcMap.unk1E                                        ;81C94F|851E    |00001E;
  
 .label7:
-    JSR.W fUnknown_81CB77                                      ;81C951|2077CB  |81CB77;
-    JSR.W fUnknown_81CFE6                                      ;81C954|20E6CF  |81CFE6;
+    JSR.W fPlayer_MoveInDirection                                      ;81C951|2077CB  |81CB77;
+    JSR.W fPlayer_UpdateSpriteObject                                      ;81C954|20E6CF  |81CFE6;
     REP #$30                                                   ;81C957|C230    |      ;
     LDA.W strcObjectData.exist                                 ;81C959|AD1509  |000915;
     CMP.W #$FFFF                                               ;81C95C|C9FFFF  |      ;
@@ -1216,7 +1216,7 @@ fPlayerAction0x03:
     %UnsetPlayerFlag(!PFLAGS_INSPRINGS)
  
 .exit2:
-    JMP.W fUnknown_81C002                                      ;81C98E|4C02C0  |81C002;
+    JMP.W fPlayerAction_CheckIdle                                      ;81C98E|4C02C0  |81C002;
  
  
 fPlayerAction0x04:
@@ -1232,10 +1232,10 @@ fPlayerAction0x04:
     CLC                                                        ;81C9AD|18      |      ;
     ADC.B strcPlayer.direction                                 ;81C9AE|65DA    |0000DA;
     STA.W strcObjectData.spriteIdx                             ;81C9B0|8D0109  |000901;
-    JSL.L fUnknown_818000                                      ;81C9B3|22008081|818000;
+    JSL.L fItemCarried_Begin                                      ;81C9B3|22008081|818000;
  
 .label1:
-    JSR.W fUnknown_81CFE6                                      ;81C9B7|20E6CF  |81CFE6;
+    JSR.W fPlayer_UpdateSpriteObject                                      ;81C9B7|20E6CF  |81CFE6;
     REP #$20                                                   ;81C9BA|C220    |      ;
     LDA.W strcObjectData.exist                                 ;81C9BC|AD1509  |000915;
     CMP.W #$FFFF                                               ;81C9BF|C9FFFF  |      ;
@@ -1247,7 +1247,7 @@ fPlayerAction0x04:
     STA.W strcPlayerData.carryItemIdPrev                       ;81C9D9|8D1E09  |00091E;
  
 .exit:
-    JMP.W fUnknown_81C002                                      ;81C9DC|4C02C0  |81C002;
+    JMP.W fPlayerAction_CheckIdle                                      ;81C9DC|4C02C0  |81C002;
  
  
 fPlayerAction0x05:
@@ -1272,7 +1272,7 @@ fPlayerAction0x05:
     JSL.L fAudioSetRegister2to0A                               ;81CA0F|22328383|838332;
  
 .label1:
-    JSR.W fUnknown_81CFE6                                      ;81CA13|20E6CF  |81CFE6;
+    JSR.W fPlayer_UpdateSpriteObject                                      ;81CA13|20E6CF  |81CFE6;
     REP #$20                                                   ;81CA16|C220    |      ;
     LDA.W strcObjectData.exist                                 ;81CA18|AD1509  |000915;
     CMP.W #$FFFF                                               ;81CA1B|C9FFFF  |      ;
@@ -1281,7 +1281,7 @@ fPlayerAction0x05:
     %UnsetPlayerFlag(!PFLAGS_HOLDINGITEM)
  
 .exit:
-    JMP.W fUnknown_81C002                                      ;81CA33|4C02C0  |81C002;
+    JMP.W fPlayerAction_CheckIdle                                      ;81CA33|4C02C0  |81C002;
  
  
 fPlayerAction0x08:
@@ -1303,7 +1303,7 @@ fPlayerAction0x08:
     STA.W strcObjectData.spriteIdx                             ;81CA5D|8D0109  |000901;
  
 .skip:
-    JSR.W fUnknown_81CFE6                                      ;81CA60|20E6CF  |81CFE6;
+    JSR.W fPlayer_UpdateSpriteObject                                      ;81CA60|20E6CF  |81CFE6;
     REP #$20                                                   ;81CA63|C220    |      ;
     LDA.W strcObjectData.exist                                 ;81CA65|AD1509  |000915;
     CMP.W #$FFFF                                               ;81CA68|C9FFFF  |      ;
@@ -1367,7 +1367,7 @@ fPlayerAction0x08:
  
  
 .exit:
-    JMP.W fUnknown_81C002                                      ;81CB11|4C02C0  |81C002;
+    JMP.W fPlayerAction_CheckIdle                                      ;81CB11|4C02C0  |81C002;
  
  
 fPlayerAction_EatMeal:
@@ -1386,14 +1386,14 @@ fPlayerAction_EatMeal:
     STA.W strcObjectData.spriteIdx                             ;81CB35|8D0109  |000901;
  
 .skip:
-    JSR.W fUnknown_81CFE6                                      ;81CB38|20E6CF  |81CFE6;
+    JSR.W fPlayer_UpdateSpriteObject                                      ;81CB38|20E6CF  |81CFE6;
     REP #$20                                                   ;81CB3B|C220    |      ;
     LDA.W strcObjectData.exist                                 ;81CB3D|AD1509  |000915;
     CMP.W #$FFFF                                               ;81CB40|C9FFFF  |      ;
     BNE .exit                                                  ;81CB43|D016    |81CB5B;
     %SetPlayerAction(!PACTION_NONE)
     %UnsetPlayerFlag(!PFLAGS_EATINGMEAL)
-    JMP.W fUnknown_81C002                                      ;81CB58|4C02C0  |81C002;
+    JMP.W fPlayerAction_CheckIdle                                      ;81CB58|4C02C0  |81C002;
  
  
 .exit:
@@ -1402,7 +1402,7 @@ fPlayerAction_EatMeal:
  
 fPlayerAction0x09:
     REP #$30                                                   ;81CB5E|C230    |      ;
-    JSR.W fUnknown_81CFE6                                      ;81CB60|20E6CF  |81CFE6;
+    JSR.W fPlayer_UpdateSpriteObject                                      ;81CB60|20E6CF  |81CFE6;
     REP #$20                                                   ;81CB63|C220    |      ;
     LDA.W strcObjectData.exist                                 ;81CB65|AD1509  |000915;
     CMP.W #$FFFF                                               ;81CB68|C9FFFF  |      ;
@@ -1410,11 +1410,11 @@ fPlayerAction0x09:
     %SetPlayerAction(!PACTION_NONE)
  
 .exit:
-    JMP.W fUnknown_81C013                                      ;81CB74|4C13C0  |81C013;
+    JMP.W fPlayerAction_Finish                                      ;81CB74|4C13C0  |81C013;
  
  
-fUnknown_81CB77:
-    JSR.W fUnknown_81CFE6                                      ;81CB77|20E6CF  |81CFE6;
+fPlayer_MoveInDirection:
+    JSR.W fPlayer_UpdateSpriteObject                                      ;81CB77|20E6CF  |81CFE6;
     REP #$20                                                   ;81CB7A|C220    |      ;
     LDA.B strcPlayer.direction                                 ;81CB7C|A5DA    |0000DA;
     CMP.W #!PDIR_DOWN                                               
@@ -1515,8 +1515,8 @@ fUnknown_81CB77:
     CLC                                                        ;81CC32|18      |      ;
     ADC.B strcMap.unk1E                                        ;81CC33|651E    |00001E;
     STA.B strcPlayer.posY                                      ;81CC35|85D8    |0000D8;
-    JSL.L fUnknown_809EBC                                      ;81CC37|22BC9E80|809EBC;
-    JSL.L fUnknown_80A0AB                                      ;81CC3B|22ABA080|80A0AB;
+    JSL.L fCamera_UpdateFromPlayerPos                                      ;81CC37|22BC9E80|809EBC;
+    JSL.L fCamera_ScrollDownStep                                      ;81CC3B|22ABA080|80A0AB;
     JMP.W .exit                                                ;81CC3F|4C2BCE  |81CE2B;
  
  
@@ -1598,8 +1598,8 @@ fUnknown_81CB77:
     SEC                                                        ;81CCD6|38      |      ;
     SBC.B strcMap.unk1E                                        ;81CCD7|E51E    |00001E;
     STA.B strcPlayer.posY                                      ;81CCD9|85D8    |0000D8;
-    JSL.L fUnknown_809EBC                                      ;81CCDB|22BC9E80|809EBC;
-    JSL.L fUnknown_80A0E1                                      ;81CCDF|22E1A080|80A0E1;
+    JSL.L fCamera_UpdateFromPlayerPos                                      ;81CCDB|22BC9E80|809EBC;
+    JSL.L fCamera_ScrollUpStep                                      ;81CCDF|22E1A080|80A0E1;
     JMP.W .exit                                                ;81CCE3|4C2BCE  |81CE2B;
  
  
@@ -1681,8 +1681,8 @@ fUnknown_81CB77:
     CLC                                                        ;81CD7A|18      |      ;
     ADC.B strcMap.unk1E                                        ;81CD7B|651E    |00001E;
     STA.B strcPlayer.posX                                      ;81CD7D|85D6    |0000D6;
-    JSL.L fUnknown_809EBC                                      ;81CD7F|22BC9E80|809EBC;
-    JSL.L fUnknown_80A11C                                      ;81CD83|221CA180|80A11C;
+    JSL.L fCamera_UpdateFromPlayerPos                                      ;81CD7F|22BC9E80|809EBC;
+    JSL.L fCamera_ScrollRightStep                                      ;81CD83|221CA180|80A11C;
     JMP.W .exit                                                ;81CD87|4C2BCE  |81CE2B;
  
  
@@ -1764,8 +1764,8 @@ fUnknown_81CB77:
     SEC                                                        ;81CE1E|38      |      ;
     SBC.B strcMap.unk1E                                        ;81CE1F|E51E    |00001E;
     STA.B strcPlayer.posX                                      ;81CE21|85D6    |0000D6;
-    JSL.L fUnknown_809EBC                                      ;81CE23|22BC9E80|809EBC;
-    JSL.L fUnknown_80A152                                      ;81CE27|2252A180|80A152;
+    JSL.L fCamera_UpdateFromPlayerPos                                      ;81CE23|22BC9E80|809EBC;
+    JSL.L fCamera_ScrollLeftStep                                      ;81CE27|2252A180|80A152;
  
 .exit:
     SEP #$20                                                   ;81CE2B|E220    |      ;
@@ -1776,7 +1776,7 @@ fUnknown_81CB77:
     LDA.W strcPlayerData.unkCounter919                         ;81CE36|AD1909  |000919;
     CMP.B #$08                                                 ;81CE39|C908    |      ;
     BNE .return                                                ;81CE3B|D015    |81CE52;
-    JSL.L fUnknownCF_81A58F                                    ;81CE3D|228FA581|81A58F;
+    JSL.L fPlayer_LeaveSnowFootprint                                    ;81CE3D|228FA581|81A58F;
     REP #$20                                                   ;81CE41|C220    |      ;
     LDA.B strcPlayer.posX                                      ;81CE43|A5D6    |0000D6;
     STA.W strcObjectData.playerX                               ;81CE45|8D0709  |000907;
@@ -1963,7 +1963,7 @@ fUnknown_81CB77:
     JMP.W .down                                                ;81CF9D|4C9ECB  |81CB9E;
  
  
-fUnknown_81CFA0:
+fPlayer_InitSpriteObject:
     REP #$30                                                   ;81CFA0|C230    |      ;
     LDA.W strcObjectData.spriteIdx                             ;81CFA2|AD0109  |000901;
     STA.W strcObjectData.spriteIdxOld                          ;81CFA5|8D0309  |000903;
@@ -1995,14 +1995,14 @@ fUnknown_81CFA0:
     STA.B strcObject.posX                                      ;81CFD4|859B    |00009B;
     LDA.B strcPlayer.posY                                      ;81CFD6|A5D8    |0000D8;
     STA.B strcObject.posY                                      ;81CFD8|859D    |00009D;
-    JSL.L fUnknown_858000                                      ;81CFDA|22008085|858000;
+    JSL.L fObject_Create                                      ;81CFDA|22008085|858000;
     REP #$20                                                   ;81CFDE|C220    |      ;
     LDA.B strcObject.gameObjectIdx                             ;81CFE0|A5A5    |0000A5;
     STA.W strcObjectData.gameObjectIdx                         ;81CFE2|8D0509  |000905;
     RTL                                                        ;81CFE5|6B      |      ;
  
  
-fUnknown_81CFE6:
+fPlayer_UpdateSpriteObject:
     REP #$30                                                   ;81CFE6|C230    |      ;
     LDA.W strcObjectData.gameObjectIdx                         ;81CFE8|AD0509  |000905;
     STA.B strcObject.gameObjectIdx                             ;81CFEB|85A5    |0000A5;
@@ -2012,7 +2012,7 @@ fUnknown_81CFE6:
     STA.B strcObject.posY                                      ;81CFF3|859D    |00009D;
     LDA.W strcObjectData.flip                                  ;81CFF5|AD0F09  |00090F;
     STA.B strcObject.flip                                      ;81CFF8|859F    |00009F;
-    JSL.L fObject_Unknown8580B9                                ;81CFFA|22B98085|8580B9;
+    JSL.L fObject_UpdatePositionAndFlip                                ;81CFFA|22B98085|8580B9;
     REP #$20                                                   ;81CFFE|C220    |      ;
     LDA.W strcObjectData.spriteIdx                             ;81D000|AD0109  |000901;
     CMP.W strcObjectData.spriteIdxOld                          ;81D003|CD0309  |000903;
@@ -2042,14 +2042,14 @@ fUnknown_81CFE6:
     STA.B strcObject.flip                                      ;81D02E|859F    |00009F;
     LDA.W strcObjectData.gameObjectIdx                         ;81D030|AD0509  |000905;
     STA.B strcObject.gameObjectIdx                             ;81D033|85A5    |0000A5;
-    JSL.L fObject_Unknown858100                                ;81D035|22008185|858100;
+    JSL.L fObject_Replace                                ;81D035|22008185|858100;
  
 .exit:
-    JSR.W fUnknown_81D03D                                      ;81D039|203DD0  |81D03D;
+    JSR.W fPlayer_RefreshObjectExists                                      ;81D039|203DD0  |81D03D;
     RTS                                                        ;81D03C|60      |      ;
  
  
-fUnknown_81D03D:
+fPlayer_RefreshObjectExists:
     REP #$30                                                   ;81D03D|C230    |      ;
     LDA.W strcObjectData.gameObjectIdx                         ;81D03F|AD0509  |000905;
     STA.B strcObject.gameObjectIdx                             ;81D042|85A5    |0000A5;

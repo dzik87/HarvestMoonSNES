@@ -1,0 +1,69 @@
+old,new,confidence,reason
+fUnknown_8280AA,fEvents_NoonMealCheck,medium,Called on each hour change; at time id 0x0C it updates stamina and randomly makes the player eat a meal.
+fWeatherUnknown_8281C0,fWeather_SetForecastDialogIndex,high,Maps nWeatherForecast through a 12-byte table to nWeatherDialogIdIndex with map flag overrides.
+fUnknown_828209,fObjectMap_ApplyHuricaneDamageByMapFlags,medium,Picks a damage type 0-3 from mapFlags bits and calls fObjectMap_HuricaneDamage at start of day.
+fUnknown_828790,fEvents_UpdateMarriageAndChildGrowth,high,Daily update of married-days counter and first and second child age with related event flags.
+fUnknown_82D1C0,fMainMenu_StartHowToPlayDemo,medium,Title menu state 0x0A: resets game state and runs the How To Play AI script then returns to title state 9.
+fUnknown_82D731,fMainMenu_HowToPlayCleanup,medium,Clears chicken data and reloads the farm after the How To Play demo ends.
+fUnknown_82D750,fMainMenu_SetStateReturnToTitle,medium,Sets title state machine to state 9 and jumps to the end-of-frame handler.
+fUnknown_82D75E,fMainMenu_TitleScreenInit,medium,Entered via JML from the reset routine; initializes title screen graphics and enters the state loop.
+fUnknown_82D80D,fMainMenu_StateLoop,high,Waits for NMI flag then runs handlers and dispatches on strcVariables.n8Temp4 state id.
+fUnknown_82D871,fMainMenu_EndFrame,medium,Clears frame flag and counts idle frames; at 600 starts the auto How To Play demo.
+fUnknown_82D883,fMainMenu_StateInitialDelay,medium,Title state 0: waits 120 frames then fades out and moves to state 1.
+fUnknown_82D8B0,fMainMenu_StateOpeningDemo,medium,Title state 1: resets engine and plays the intro AI script scene before the logo.
+fUnknown_82DA8C,fMainMenu_StateLogoScrollHorizontal,medium,Title state 2: scrolls BG1 and BG2 horizontally for 60 frames then goes to state 3.
+fUnknown_82DAC9,fMainMenu_StateLogoScrollDiagonal,medium,Title state 3: scrolls BG layers until BG1 vertical offset reaches zero then goes to state 6 setup.
+fUnknown_82DAF5,fMainMenu_StateReinitTitleScreen,medium,Title state 9: full reload of title graphics and palette after How To Play or demo.
+fUnknown_82DB8E,fMainMenu_StateSkipToTitleScreen,medium,Title state 6: entered on START; reloads music and fades then shows title screen.
+fUnknown_82DBB2,fMainMenu_ShowTitleScreen,medium,Common tail that resets scroll and loads area 0x5C title map then fades in and sets state 4.
+fUnknown_82DC0D,fMainMenu_StateTitleStartCursorAnim,medium,Title state 4: after 60 frames installs palette animation scripts for the menu items then state 5.
+fUnknown_82DD8C,fMainMenu_StateTitleMenuInput,medium,Title state 5: scrolls BG2 and swaps highlighted menu item palette animations on cursor change.
+fUnknown_82DEC5,fMainMenu_ReturnToTitleFromSlotSelect,medium,Rebuilds the title screen (areas 0x5B and 0x5C) after backing out of a slot select screen.
+fUnknown_82DF92,fMainMenu_StateNewGameSlotSelect,medium,Title state 7: builds save slot screen whose confirm leads to fStartNewGame.
+fUnknown_82E07F,fMainMenu_NewGameSlotSelect_InitCursorSlot2,medium,Installs slot highlight palette animations with the cursor on slot 2.
+fUnknown_82E0B5,fMainMenu_NewGameSlotSelect_FadeIn,medium,Starts audio unblanks the screen and fades in the new game slot select screen.
+fUnknown_82E0EB,fMainMenu_NewGameSlotSelect_WaitFrame,medium,Per-frame wait and input handling loop for the new game slot select screen.
+fUnknown_82E16B,fMainMenu_NewGameSlotSelect_MoveCursorSlot2,medium,Cursor moved to slot 2: reloads slot info and swaps palette animations.
+fUnknown_82E1BD,fMainMenu_NewGameSlotSelect_FrameTail,medium,Animates BG2 scroll and checks result: 1 back to title or 2 fStartNewGame.
+fUnknown_82E1F1,fMainMenu_StateLoadGameSlotSelect,medium,Title state 8: builds save slot screen whose confirm leads to fLoadAndStartGame.
+fUnknown_82E337,fMainMenu_LoadGameSlotSelect_WaitFrame,medium,Per-frame wait and input handling loop for the load game slot select screen.
+fUnknown_82E39B,fMainMenu_LoadGameSlotSelect_MoveCursorSlot2,medium,Cursor moved to slot 2 in load screen: swaps highlight palette animations.
+fUnknown_82E3D1,fMainMenu_LoadGameSlotSelect_FrameTail,medium,Animates BG2 scroll and checks result: 1 back to title or 2 fLoadAndStartGame.
+fUnknown_82E405,fMainMenu_DrawSaveSlotInfo,high,JSR routine drawing player name year season and day for a save slot or the empty frame if no save.
+fUnknown_82E5E7,fMainMenu_DrawEmptySaveSlot,medium,Draws the empty-slot tile frame rows for a slot when fGameEngine_LoadContinue finds no valid save.
+fMenuUnknown_82EB57,fMenu_LoadNameInputCursorPos,high,Sets strcMenuData.posX and posY from the name input grid cell menuIdx.
+fMenuUnknown_82EBAC,fMenu_GetNameInputCellField,high,Returns one byte field (neighbor index or char code or action) of the current name input grid cell.
+aUnknown_82F258,aMainMenu_SlotFrameVramAddr,medium,Eight VRAM tilemap word addresses where the slot frame tile runs are drawn.
+aUnknown_82F268,aMainMenu_SlotFrameTileStart,medium,Eight starting tilemap words (tile with attributes) for each slot frame run.
+aUnknown_82F278,aMainMenu_SlotInfoTextVramAddr,medium,Per slot four VRAM addresses for name year season and day text.
+aUnknown_82F288,aMainMenu_SlotFrameRunLength,medium,Eight repeat counts for each slot frame tile run.
+aUnknown_82F2A4,aMainMenu_PalAnimLogoA,medium,Palette animation script (dw color and db delay triplets) that falls into its loop entry.
+DATA24_82F2AD,aMainMenu_PalAnimLogoA_Loop,medium,Loop tail of palette animation script A: one color then 0xFFFE and loop pointer to itself.
+aUnknown_82F2B5,aMainMenu_PalAnimLogoB,medium,Palette animation script (dw color and db delay triplets) that falls into its loop entry.
+DATA24_82F2C1,aMainMenu_PalAnimLogoB_Loop,medium,Loop tail of palette animation script B: one color then 0xFFFE and loop pointer to itself.
+aUnknown_82F2C9,aMainMenu_PalAnimItemHighlighted,medium,Blinking palette animation script applied to the currently selected title menu item.
+aUnknown_82F2DA,aMainMenu_PalAnimItemNormal,medium,Static single color palette script for unselected title menu items.
+aUnknown_82F2E2,aMainMenu_PalAnimSlotHighlighted,medium,Blinking palette animation script for the selected save slot.
+aUnknown_82F2F9,aMainMenu_PalAnimSlotNormal,medium,Static single color palette script for the unselected save slot.
+fUnknown_82B060,fMap_FillCurrentTilemapRect,high,Fills a width by height rectangle of 16px tiles in sCurrentObjectMap with tile id A.
+fUnknown_82B0A7,fMap_StampTemplateToCurrentTilemap,medium,Copies a block of tile ids from template data at $A7F500 into sCurrentObjectMap using size from fUnknown_81A801.
+fUnknown_82B12F,fObjectEngine_AlignCoordsTo16_Unused,high,Unused routine that masks X and Y down to a multiple of 16.
+fObjectMap_Unknown82A811,fObjectMap_UpdateFarmTilesNewDay,medium,Scans sFarmTilemap each new day and grows or withers grass and weeds by season; copies map at winter day 1.
+fUnknown_82EA15,fScreen_NameInput_BlinkCursor,high,Toggles blink of the underscore glyph at the current name entry position using dialogBlinkTimer.
+fTextUnknown_82EA60,fScreen_NameInput_DrawLetterAtCursor,high,Draws glyph A at the VRAM position of the current nameEntryIdx.
+fUnknown_82EA80,fScreen_NameInput_DrawEmptyNameSlots,medium,Draws the placeholder glyph 0xA8 in all four name letter positions.
+fUnknown_82EAB4,fScreen_NameInput_DrawNameBox,medium,DMAs four tile columns forming the name box frame to VRAM.
+nUnknown_82EB49,nScreen_NameInput_BoxVramAddr,medium,VRAM start address of the name box tiles.
+nUnknown_82EB4B,nScreen_NameInput_BoxTileStart,medium,First tilemap word value used when drawing the name box.
+aUnknown_82EB4D,aScreen_NameInput_LetterVramAddr,high,Four VRAM addresses of the name letter positions indexed by nameEntryIdx.
+nUnknown82EB55,nScreen_NameInput_BoxTileCount,medium,Number of tile columns drawn for the name box.
+fUnknown_82AC61,fObjectEngine_GetObjectPropertyByDirSeason,medium,Looks up object type at X Y in the map object property table and returns field A gated by facing direction and season masks.
+fUnknown_82AD0E,fPlayer_InteractWithFrontObject,medium,Dispatches on object type of the tile in front: pick up item or warp or dialog or interaction script.
+fUnknown_82AF00,fObjectMap_ConnectAdjacentObjectTiles,medium,Selects connected tile variant for objects 0x73-0x79 from a 4-neighbor bitmask table.
+fUnknown_82E742,fMainMenu_DrawSaveSlotFrames,medium,Draws the slot window frames by DMAing tile runs described by the slot frame tables to VRAM.
+fToolUsedSound_Unknown828FB1,fToolUsedSound_PlayToolHit,medium,Plays tool sound from nToolSoundData using equipped tool and toolSound surface result.
+fToolUsedSound_Unknown828FF3,fToolUsedSound_PlayOnToolChange,medium,Plays tool sounds when equipped tool differs from strcAudio.toolId then stores new tool id.
+fToolUsedUnknown_82927D,fToolUsed_StoreSoundForFrontTile,high,Finds tile in front of player and stores fSound_GetToolSound result into strcPlayerData.toolSound.
+fToolusedUnknown_8292A0,fToolUsed_GetSoundForFrontTile,high,Finds tile in front of player and returns fSound_GetToolSound result.
+fToolUsedUnknown_8292BC,fToolUsed_GetSoundForFrontTileMode,medium,Same as front tile sound lookup but with distance mode taken from A plus one.
+fToolUsedUnknown_8292D6,fToolUsed_GetSoundForTileOffset,medium,Looks up tile offset pair from nFindTileArgsTable and returns tool sound for that tile.

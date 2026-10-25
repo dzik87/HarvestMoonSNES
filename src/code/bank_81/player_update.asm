@@ -163,13 +163,13 @@ fPlayerInteraction0x03:
     LDA.L nToolSoundData_80B8CD,X                              ;81D692|BFCDB880|80B8CD;
     INC A                                                      ;81D696|1A      |      ;
     STA.W strcAudio.index                                      ;81D697|8D0301  |000103;
-    JSL.L fAudioUnknown_83833E                                 ;81D69A|223E8383|83833E;
+    JSL.L fAudio_PrepareSoundEffectSample                                 ;81D69A|223E8383|83833E;
     JSL.L fAudioSetRegister2to0A                               ;81D69E|22328383|838332;
     REP #$20                                                   ;81D6A2|C220    |      ;
     %SetFlag(daily1, $0010)
     REP #$20                                                   ;81D6AF|C220    |      ;
     LDA.W #$0044                                               ;81D6B1|A94400  |      ;
-    JSL.L fUnknownCF_SetPointer                                ;81D6B4|22E1A581|81A5E1;
+    JSL.L fTileScript_Start                                ;81D6B4|22E1A581|81A5E1;
     SEP #$20                                                   ;81D6B8|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81D6BA|EE6F09  |00096F;
     BRA .return                                                ;81D6BD|8021    |81D6E0;
@@ -196,7 +196,7 @@ fPlayerInteraction0x04:
 fPlayerInteraction0x05:
     REP #$20                                                   ;81D6E2|C220    |      ;
     LDA.W #$0011                                               ;81D6E4|A91100  |      ;
-    JSL.L fUnknownCF_SetPointer                                ;81D6E7|22E1A581|81A5E1;
+    JSL.L fTileScript_Start                                ;81D6E7|22E1A581|81A5E1;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     RTS                                                        ;81D6F7|60      |      ;
  
@@ -204,7 +204,7 @@ fPlayerInteraction0x05:
 fPlayerInteraction0x06:
     REP #$20                                                   ;81D6F8|C220    |      ;
     LDA.W #$0012                                               ;81D6FA|A91200  |      ;
-    JSL.L fUnknownCF_SetPointer                                ;81D6FD|22E1A581|81A5E1;
+    JSL.L fTileScript_Start                                ;81D6FD|22E1A581|81A5E1;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     RTS                                                        ;81D70D|60      |      ;
  
@@ -255,7 +255,7 @@ fPlayerInteraction0x0F:
     AND.W #$0010                                               ;81D733|291000  |      ;
     BNE +                                                      ;81D736|D007    |81D73F;
     LDA.W #$0000                                               ;81D738|A90000  |      ;
-    JSL.L fUnknownCF_SetPointer                                ;81D73B|22E1A581|81A5E1;
+    JSL.L fTileScript_Start                                ;81D73B|22E1A581|81A5E1;
  
   + SEP #$20                                                   ;81D73F|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81D741|EE6F09  |00096F;
@@ -298,7 +298,7 @@ fPlayerInteraction0x0F:
     LDA.W nWeatherDialogIdIndex                                ;81D789|AD9009  |000990;
     INC A                                                      ;81D78C|1A      |      ;
     REP #$20                                                   ;81D78D|C220    |      ;
-    JSL.L fUnknownCF_SetPointer                                ;81D78F|22E1A581|81A5E1;
+    JSL.L fTileScript_Start                                ;81D78F|22E1A581|81A5E1;
     SEP #$20                                                   ;81D793|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81D795|EE6F09  |00096F;
     BRA .return                                                ;81D798|802A    |81D7C4;
@@ -311,7 +311,7 @@ fPlayerInteraction0x0F:
     BEQ .return                                                ;81D7A1|F021    |81D7C4;
     REP #$20                                                   ;81D7A3|C220    |      ;
     LDA.W #$0046                                               ;81D7A5|A94600  |      ;
-    JSL.L fUnknownCF_SetPointer                                ;81D7A8|22E1A581|81A5E1;
+    JSL.L fTileScript_Start                                ;81D7A8|22E1A581|81A5E1;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     %UnsetPlayerFlag(!PFLAGS_SITTING)
  
@@ -445,7 +445,7 @@ fPlayerInteraction0x10_PlayerDiary:
     REP #$30                                                   ;81D8E5|C230    |      ;
     LDA.W #$004E                                               ;81D8E7|A94E00  |      ;
     STA.W strcObjectData.spriteIdx                             ;81D8EA|8D0109  |000901;
-    JSR.W fUnknown_81CFE6                                      ;81D8ED|20E6CF  |81CFE6;
+    JSR.W fPlayer_UpdateSpriteObject                                      ;81D8ED|20E6CF  |81CFE6;
     SEP #$20                                                   ;81D8F0|E220    |      ;
     LDA.W nTimeState                                           ;81D8F2|AD7309  |000973;
     ORA.B #$02                                                 ;81D8F5|0902    |      ;
@@ -475,7 +475,7 @@ fPlayerInteraction0x10_PlayerDiary:
     REP #$30                                                   ;81D946|C230    |      ;
     LDA.W #$004E                                               ;81D948|A94E00  |      ;
     STA.W strcObjectData.spriteIdx                             ;81D94B|8D0109  |000901;
-    JSR.W fUnknown_81CFE6                                      ;81D94E|20E6CF  |81CFE6;
+    JSR.W fPlayer_UpdateSpriteObject                                      ;81D94E|20E6CF  |81CFE6;
     JMP.W .justReturn                                          ;81D951|4C6BD9  |81D96B;
  
  
@@ -542,7 +542,7 @@ fPlayerInteraction0x12:
     AND.W #$0010                                               ;81D9E9|291000  |      ;
     BNE +                                                      ;81D9EC|D007    |81D9F5;
     LDA.W #$0027                                               ;81D9EE|A92700  |      ;
-    JSL.L fUnknownCF_SetPointer                                ;81D9F1|22E1A581|81A5E1;
+    JSL.L fTileScript_Start                                ;81D9F1|22E1A581|81A5E1;
  
   + SEP #$20                                                   ;81D9F5|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81D9F7|EE6F09  |00096F;
@@ -590,7 +590,7 @@ fPlayerInteraction0x12:
     REP #$20                                                   ;81DA46|C220    |      ;
     CLC                                                        ;81DA48|18      |      ;
     ADC.W #$0027                                               ;81DA49|692700  |      ;
-    JSL.L fUnknownCF_SetPointer                                ;81DA4C|22E1A581|81A5E1;
+    JSL.L fTileScript_Start                                ;81DA4C|22E1A581|81A5E1;
     SEP #$20                                                   ;81DA50|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81DA52|EE6F09  |00096F;
     BRA .return                                                ;81DA55|802A    |81DA81;
@@ -603,7 +603,7 @@ fPlayerInteraction0x12:
     BEQ .return                                                ;81DA5E|F021    |81DA81;
     REP #$20                                                   ;81DA60|C220    |      ;
     LDA.W #$0047                                               ;81DA62|A94700  |      ;
-    JSL.L fUnknownCF_SetPointer                                ;81DA65|22E1A581|81A5E1;
+    JSL.L fTileScript_Start                                ;81DA65|22E1A581|81A5E1;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     %UnsetPlayerFlag(!PFLAGS_SITTING)
  
@@ -625,7 +625,7 @@ fPlayerInteraction0x13:
     AND.W #$0010                                               ;81DA9F|291000  |      ;
     BNE +                                                      ;81DAA2|D007    |81DAAB;
     LDA.W #$0034                                               ;81DAA4|A93400  |      ;
-    JSL.L fUnknownCF_SetPointer                                ;81DAA7|22E1A581|81A5E1;
+    JSL.L fTileScript_Start                                ;81DAA7|22E1A581|81A5E1;
  
   + SEP #$20                                                   ;81DAAB|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81DAAD|EE6F09  |00096F;
@@ -673,7 +673,7 @@ fPlayerInteraction0x13:
     REP #$20                                                   ;81DAFC|C220    |      ;
     CLC                                                        ;81DAFE|18      |      ;
     ADC.W #$0034                                               ;81DAFF|693400  |      ;
-    JSL.L fUnknownCF_SetPointer                                ;81DB02|22E1A581|81A5E1;
+    JSL.L fTileScript_Start                                ;81DB02|22E1A581|81A5E1;
     SEP #$20                                                   ;81DB06|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81DB08|EE6F09  |00096F;
     BRA .return                                                ;81DB0B|802A    |81DB37;
@@ -686,7 +686,7 @@ fPlayerInteraction0x13:
     BEQ .return                                                ;81DB14|F021    |81DB37;
     REP #$20                                                   ;81DB16|C220    |      ;
     LDA.W #$0048                                               ;81DB18|A94800  |      ;
-    JSL.L fUnknownCF_SetPointer                                ;81DB1B|22E1A581|81A5E1;
+    JSL.L fTileScript_Start                                ;81DB1B|22E1A581|81A5E1;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     %UnsetPlayerFlag(!PFLAGS_SITTING)
  
@@ -1466,7 +1466,7 @@ fPlayerInteraction0x2E_AnimalNPC:
  
  
 .return2:
-    JSL.L fDialog_Unknown_8393F9                               ;81E222|22F99383|8393F9;
+    JSL.L fDialog_EndDialogRestoreScroll                               ;81E222|22F99383|8393F9;
     SEP #$20                                                   ;81E226|E220    |      ;
     LDA.B #$01                                                 ;81E228|A901    |      ;
     STA.W strcDialogDisplay.mapUnk19A                          ;81E22A|8D9A01  |00019A;
@@ -1573,7 +1573,7 @@ fPlayerInteraction0x35:
     LDA.B #$24                                                 ;81E372|A924    |      ;
     LDX.W #$0007                                               ;81E374|A20700  |      ;
     LDY.W #$0078                                               ;81E377|A07800  |      ;
-    JSL.L fAudioUnknown_8382FE                                 ;81E37A|22FE8283|8382FE;
+    JSL.L fAudio_PlaySoundEffectAndWait                                 ;81E37A|22FE8283|8382FE;
     SEP #$20                                                   ;81E37E|E220    |      ;
     STZ.W strcAudio.toolId                                     ;81E380|9C1901  |000119;
     JSL.L fToolUsedSound_Unknown828FF3                         ;81E383|22F38F82|828FF3;
@@ -1857,7 +1857,7 @@ fPlayerInteraction0x40_LessonsOfLove:
  
  
 .return:
-    JSL.L fDialog_Unknown_8393F9                               ;81E6A0|22F99383|8393F9;
+    JSL.L fDialog_EndDialogRestoreScroll                               ;81E6A0|22F99383|8393F9;
     SEP #$20                                                   ;81E6A4|E220    |      ;
     LDA.B #$01                                                 ;81E6A6|A901    |      ;
     STA.W strcDialogDisplay.mapUnk19A                          ;81E6A8|8D9A01  |00019A;
@@ -2195,7 +2195,7 @@ fPlayerInteraction0x43:
     JSL.L fGameEngine_AddProfit                                ;81E979|22C9B183|83B1C9;
     REP #$20                                                   ;81E97D|C220    |      ;
     LDA.W #$0007                                               ;81E97F|A90700  |      ;
-    JSL.L fAI_Unknown848020                                    ;81E982|22208084|848020;
+    JSL.L fAI_DeactivateSlotAndObject                                    ;81E982|22208084|848020;
     REP #$20                                                   ;81E986|C220    |      ;
     %AIExecute($0007, $0000, $0023)
     SEP #$20                                                   ;81E995|E220    |      ;
@@ -2204,7 +2204,7 @@ fPlayerInteraction0x43:
     LDA.W $09A0                                                ;81E99A|ADA009  |0009A0;
     LDX.W #$0000                                               ;81E99D|A20000  |      ;
     LDY.W #$0022                                               ;81E9A0|A02200  |      ;
-    JSL.L fAI_Unknown84803F                                    ;81E9A3|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;81E9A3|223F8084|84803F;
     SEP #$20                                                   ;81E9A7|E220    |      ;
     LDA.B #$00                                                 ;81E9A9|A900    |      ;
     XBA                                                        ;81E9AB|EB      |      ;
@@ -2261,7 +2261,7 @@ fPlayerInteraction0x43:
  
   + REP #$20                                                   ;81EA1D|C220    |      ;
     LDA.W #$0007                                               ;81EA1F|A90700  |      ;
-    JSL.L fAI_Unknown848020                                    ;81EA22|22208084|848020;
+    JSL.L fAI_DeactivateSlotAndObject                                    ;81EA22|22208084|848020;
     REP #$20                                                   ;81EA26|C220    |      ;
     %AIExecute($0007, $0000, $0023)
     SEP #$20                                                   ;81EA35|E220    |      ;
@@ -2373,7 +2373,7 @@ fPlayerInteraction0x43:
  
   + REP #$20                                                   ;81EB13|C220    |      ;
     LDA.W #$0008                                               ;81EB15|A90800  |      ;
-    JSL.L fAI_Unknown848020                                    ;81EB18|22208084|848020;
+    JSL.L fAI_DeactivateSlotAndObject                                    ;81EB18|22208084|848020;
     REP #$20                                                   ;81EB1C|C220    |      ;
     %AIExecute($0008, $0000, $007D)
     SEP #$20                                                   ;81EB2B|E220    |      ;
@@ -2382,7 +2382,7 @@ fPlayerInteraction0x43:
     LDA.W $09A0                                                ;81EB30|ADA009  |0009A0;
     LDX.W #$0000                                               ;81EB33|A20000  |      ;
     LDY.W #$0022                                               ;81EB36|A02200  |      ;
-    JSL.L fAI_Unknown84803F                                    ;81EB39|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;81EB39|223F8084|84803F;
     SEP #$20                                                   ;81EB3D|E220    |      ;
     LDA.B #$00                                                 ;81EB3F|A900    |      ;
     XBA                                                        ;81EB41|EB      |      ;
@@ -2424,7 +2424,7 @@ fPlayerInteraction0x43:
  
   + REP #$20                                                   ;81EB9B|C220    |      ;
     LDA.W #$0008                                               ;81EB9D|A90800  |      ;
-    JSL.L fAI_Unknown848020                                    ;81EBA0|22208084|848020;
+    JSL.L fAI_DeactivateSlotAndObject                                    ;81EBA0|22208084|848020;
     REP #$20                                                   ;81EBA4|C220    |      ;
     %AIExecute($0008, $0000, $007D)
     SEP #$20                                                   ;81EBB3|E220    |      ;
@@ -2630,7 +2630,7 @@ fPlayerInteraction0x44:
     JSL.L fGameEngine_AddProfit                                ;81ED3C|22C9B183|83B1C9;
     REP #$20                                                   ;81ED40|C220    |      ;
     LDA.W #$0007                                               ;81ED42|A90700  |      ;
-    JSL.L fAI_Unknown848020                                    ;81ED45|22208084|848020;
+    JSL.L fAI_DeactivateSlotAndObject                                    ;81ED45|22208084|848020;
     REP #$20                                                   ;81ED49|C220    |      ;
     %AIExecute($0007, $0000, $0023)
     SEP #$20                                                   ;81ED58|E220    |      ;
@@ -2639,7 +2639,7 @@ fPlayerInteraction0x44:
     LDA.W $09A1                                                ;81ED5D|ADA109  |0009A1;
     LDX.W #$0000                                               ;81ED60|A20000  |      ;
     LDY.W #$0024                                               ;81ED63|A02400  |      ;
-    JSL.L fAI_Unknown84803F                                    ;81ED66|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;81ED66|223F8084|84803F;
     SEP #$20                                                   ;81ED6A|E220    |      ;
     LDA.B #$00                                                 ;81ED6C|A900    |      ;
     XBA                                                        ;81ED6E|EB      |      ;
@@ -2696,7 +2696,7 @@ fPlayerInteraction0x44:
  
   + REP #$20                                                   ;81EDE0|C220    |      ;
     LDA.W #$0007                                               ;81EDE2|A90700  |      ;
-    JSL.L fAI_Unknown848020                                    ;81EDE5|22208084|848020;
+    JSL.L fAI_DeactivateSlotAndObject                                    ;81EDE5|22208084|848020;
     REP #$20                                                   ;81EDE9|C220    |      ;
     %AIExecute($0007, $0000, $0023)
     SEP #$20                                                   ;81EDF8|E220    |      ;
@@ -2808,7 +2808,7 @@ fPlayerInteraction0x44:
  
   + REP #$20                                                   ;81EED6|C220    |      ;
     LDA.W #$0008                                               ;81EED8|A90800  |      ;
-    JSL.L fAI_Unknown848020                                    ;81EEDB|22208084|848020;
+    JSL.L fAI_DeactivateSlotAndObject                                    ;81EEDB|22208084|848020;
     REP #$20                                                   ;81EEDF|C220    |      ;
     %AIExecute($0008, $0000, $007D)
     SEP #$20                                                   ;81EEEE|E220    |      ;
@@ -2817,7 +2817,7 @@ fPlayerInteraction0x44:
     LDA.W $09A1                                                ;81EEF3|ADA109  |0009A1;
     LDX.W #$0000                                               ;81EEF6|A20000  |      ;
     LDY.W #$0024                                               ;81EEF9|A02400  |      ;
-    JSL.L fAI_Unknown84803F                                    ;81EEFC|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;81EEFC|223F8084|84803F;
     SEP #$20                                                   ;81EF00|E220    |      ;
     LDA.B #$00                                                 ;81EF02|A900    |      ;
     XBA                                                        ;81EF04|EB      |      ;
@@ -2848,7 +2848,7 @@ fPlayerInteraction0x44:
     LDA.W #$0010                                               ;81EF41|A91000  |      ;
     LDX.W #$0000                                               ;81EF44|A20000  |      ;
     LDY.W #$001F                                               ;81EF47|A01F00  |      ;
-    JSL.L fAI_Unknown8480F8                                    ;81EF4A|22F88084|8480F8;
+    JSL.L fAI_StartSlotScriptAtFrontTile                                    ;81EF4A|22F88084|8480F8;
     REP #$30                                                   ;81EF4E|C230    |      ;
     LDA.W #$FFEC                                               ;81EF50|A9ECFF  |      ;
     JSL.L fGameEngine_AddHappiness                             ;81EF53|2282B283|83B282;
@@ -2867,7 +2867,7 @@ fPlayerInteraction0x44:
  
   + REP #$20                                                   ;81EF73|C220    |      ;
     LDA.W #$0008                                               ;81EF75|A90800  |      ;
-    JSL.L fAI_Unknown848020                                    ;81EF78|22208084|848020;
+    JSL.L fAI_DeactivateSlotAndObject                                    ;81EF78|22208084|848020;
     REP #$20                                                   ;81EF7C|C220    |      ;
     %AIExecute($0008, $0000, $007D)
     SEP #$20                                                   ;81EF8B|E220    |      ;
@@ -3044,7 +3044,7 @@ fPlayerInteraction0x46:
  
   + REP #$20                                                   ;81F0DE|C220    |      ;
     LDA.W #$0006                                               ;81F0E0|A90600  |      ;
-    JSL.L fAI_Unknown848020                                    ;81F0E3|22208084|848020;
+    JSL.L fAI_DeactivateSlotAndObject                                    ;81F0E3|22208084|848020;
     REP #$20                                                   ;81F0E7|C220    |      ;
     %AIExecute($0006, $0000, $0027)
     SEP #$20                                                   ;81F0F6|E220    |      ;
@@ -3169,7 +3169,7 @@ fPlayerInteraction0x47:
     LDA.W #$0009                                               ;81F1DC|A90900  |      ;
     LDX.W #$0000                                               ;81F1DF|A20000  |      ;
     LDY.W #$002D                                               ;81F1E2|A02D00  |      ;
-    JSL.L fAI_Unknown84803F                                    ;81F1E5|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;81F1E5|223F8084|84803F;
     SEP #$20                                                   ;81F1E9|E220    |      ;
     LDA.B #$02                                                 ;81F1EB|A902    |      ;
     STA.W nPlayerInteractionArg1                               ;81F1ED|8D6F09  |00096F;
@@ -3377,12 +3377,12 @@ fPlayerInteraction0x48:
     LDA.W #$0009                                               ;81F395|A90900  |      ;
     LDX.W #$0000                                               ;81F398|A20000  |      ;
     LDY.W #$0038                                               ;81F39B|A03800  |      ;
-    JSL.L fAI_Unknown84803F                                    ;81F39E|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;81F39E|223F8084|84803F;
     REP #$20                                                   ;81F3A2|C220    |      ;
     LDA.W #$000A                                               ;81F3A4|A90A00  |      ;
     LDX.W #$0000                                               ;81F3A7|A20000  |      ;
     LDY.W #$0039                                               ;81F3AA|A03900  |      ;
-    JSL.L fAI_Unknown84803F                                    ;81F3AD|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;81F3AD|223F8084|84803F;
     SEP #$20                                                   ;81F3B1|E220    |      ;
     LDA.B #$02                                                 ;81F3B3|A902    |      ;
     STA.W nPlayerInteractionArg1                               ;81F3B5|8D6F09  |00096F;
@@ -3414,12 +3414,12 @@ fPlayerInteraction0x48:
     LDA.W #$0009                                               ;81F3E7|A90900  |      ;
     LDX.W #$0000                                               ;81F3EA|A20000  |      ;
     LDY.W #$0038                                               ;81F3ED|A03800  |      ;
-    JSL.L fAI_Unknown84803F                                    ;81F3F0|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;81F3F0|223F8084|84803F;
     REP #$20                                                   ;81F3F4|C220    |      ;
     LDA.W #$000A                                               ;81F3F6|A90A00  |      ;
     LDX.W #$0000                                               ;81F3F9|A20000  |      ;
     LDY.W #$0039                                               ;81F3FC|A03900  |      ;
-    JSL.L fAI_Unknown84803F                                    ;81F3FF|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;81F3FF|223F8084|84803F;
     SEP #$20                                                   ;81F403|E220    |      ;
     LDA.B #$02                                                 ;81F405|A902    |      ;
     STA.W nPlayerInteractionArg1                               ;81F407|8D6F09  |00096F;
@@ -3472,7 +3472,7 @@ fPlayerInteraction0x49:
     LDA.W #$000B                                               ;81F45A|A90B00  |      ;
     LDX.W #$0000                                               ;81F45D|A20000  |      ;
     LDY.W #$001E                                               ;81F460|A01E00  |      ;
-    JSL.L fAI_Unknown84803F                                    ;81F463|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;81F463|223F8084|84803F;
     SEP #$20                                                   ;81F467|E220    |      ;
     LDA.B #$02                                                 ;81F469|A902    |      ;
     STA.W nPlayerInteractionArg1                               ;81F46B|8D6F09  |00096F;
@@ -3729,7 +3729,7 @@ fPlayerInteraction0x51:
     REP #$30                                                   ;81F67E|C230    |      ;
     LDA.W #$0030                                               ;81F680|A93000  |      ;
     STA.W strcObjectData.spriteIdx                             ;81F683|8D0109  |000901;
-    JSR.W fUnknown_81CFE6                                      ;81F686|20E6CF  |81CFE6;
+    JSR.W fPlayer_UpdateSpriteObject                                      ;81F686|20E6CF  |81CFE6;
     REP #$30                                                   ;81F689|C230    |      ;
     LDA.W #$0001                                               ;81F68B|A90100  |      ;
     JSL.L fGameEngine_AddHappiness                             ;81F68E|2282B283|83B282;
@@ -3869,7 +3869,7 @@ fPlayerInteraction0x52:
     REP #$30                                                   ;81F7A6|C230    |      ;
     LDA.W #$00FB                                               ;81F7A8|A9FB00  |      ;
     STA.W strcObjectData.spriteIdx                             ;81F7AB|8D0109  |000901;
-    JSR.W fUnknown_81CFE6                                      ;81F7AE|20E6CF  |81CFE6;
+    JSR.W fPlayer_UpdateSpriteObject                                      ;81F7AE|20E6CF  |81CFE6;
     REP #$30                                                   ;81F7B1|C230    |      ;
     LDA.W #$0003                                               ;81F7B3|A90300  |      ;
     JSL.L fGameEngine_AddHappiness                             ;81F7B6|2282B283|83B282;
@@ -4042,7 +4042,7 @@ fPlayerInteraction0x54_FloristNotebook:
  
  
 .return:
-    JSL.L fDialog_Unknown_8393F9                               ;81F91F|22F99383|8393F9;
+    JSL.L fDialog_EndDialogRestoreScroll                               ;81F91F|22F99383|8393F9;
     SEP #$20                                                   ;81F923|E220    |      ;
     LDA.B #$01                                                 ;81F925|A901    |      ;
     STA.W strcDialogDisplay.mapUnk19A                          ;81F927|8D9A01  |00019A;
@@ -4166,7 +4166,7 @@ fPlayerInteraction0x55_AnimalNotebook:
  
  
 .return:
-    JSL.L fDialog_Unknown_8393F9                               ;81FA46|22F99383|8393F9;
+    JSL.L fDialog_EndDialogRestoreScroll                               ;81FA46|22F99383|8393F9;
     SEP #$20                                                   ;81FA4A|E220    |      ;
     LDA.B #$01                                                 ;81FA4C|A901    |      ;
     STA.W strcDialogDisplay.mapUnk19A                          ;81FA4E|8D9A01  |00019A;

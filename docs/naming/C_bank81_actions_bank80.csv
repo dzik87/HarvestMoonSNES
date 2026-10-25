@@ -1,0 +1,69 @@
+old,new,confidence,reason
+fUnknown_818000,fItemCarried_Begin,medium,Initialises carry state ($0974-$0976) and carried item then sets pose and front tile.
+subUnknown81A58B_0x01,fItemCarried_RunHandler,medium,Per-frame callback in pSubrutineTable_81A58B that dispatches pItemCarriedSubrutines by carried item id.
+fUnknown_8180B7,fItemCarried_LoadPoseData,high,Y selects a 3-byte entry (word anim id plus byte shifted left 6) from the per-item pItemCarriedTable_8196AF pose table into $097A/$097E.
+fEggFestivalUnknown_818337,fEggFestival_DiscardEgg,medium,Frees the carried egg object and clears carry and holding state without further effect.
+fEggFestivalUnknown_81835E,fEggFestival_SetEggFlag0040,low,Sets unknown1 flag $0040 after an egg event; exact meaning unclear.
+fEggFestivalUnknown_WrongEgg,fEggFestival_WrongEggDialog,medium,Sets tile $FC drops the egg and shows dialog $038D.
+fUnknown_8187C3,fItemCarriedTool_EquipFromShed,medium,Equips the tool (id minus $29) and clears its bit in the shed item rows.
+fUnknown_81883A,fItemCarried_PhaseDispatch_Animal,high,Phase dispatcher ($0976) for carried chicken chick and mole.
+fUnknown_818855,fItemCarried_PhaseDispatch_Forage,medium,Phase dispatcher for found forage items with found dialog consume and sell phases.
+fUnknown_81889A,fItemCarried_PhaseDispatch_NoSell,medium,Phase dispatcher using only phases 0 2 3 4 for carried ids 0D 0E 57.
+fUnknown_8188BC,fItemCarried_PhaseDispatch_Feed,high,Phase dispatcher for carried feed.
+fUnknown_8188E5,fItemCarried_PhaseDispatch_Produce,medium,Full phase dispatcher for shippable produce eggs milk herbs and flowers.
+fUnknown_818923,fItemCarried_PhaseDispatch_Buyable,high,Phase dispatcher for items carried from shop shelves (buy prompt answer finish).
+fItemBuy_Unknown81893F,fItemBuy_ShowPurchaseDialog,high,Phase 0 opens the buy dialog from aDialogsData_BuyItems and sets phase 1.
+fItemBuy_Unknown818989,fItemBuy_HandleAnswer,high,Phase 1 reads the dialog answer and either charges the price or declines.
+fUnknown_818A44,fItemBuy_SetPhaseWaitDialog,medium,Sets phase 2 and returns.
+fItemBuy_Unknown818A4E,fItemBuy_ShowDeclineDialog,medium,Shows the decline or cannot-afford dialog entry then returns the item.
+fUnknown_818A94,fItemBuy_WaitDialogClose,high,Phase 2 waits for the dialog to finish then returns item to shelf.
+fItemBuy_Unknown818AA0,fItemBuy_ReturnItemToShelf,medium,Removes carried object and restores the shelf tile taken from the buy table.
+fUnknown_818B19,fItemBuy_FinishPurchase,medium,Phase 3 waits for dialog then frees object unless item is a perfume and sets phase $FF.
+fItemFound_Unknown818B6B,fItemFound_ShowFoundDialog,high,Phase 0 shows found-item dialog from aFoundItemData and sets phase 1.
+fUnknown_818C0C,fItemFound_DeclineConsume,high,Answer no keeps holding the found item and sets phase 2.
+fUnknown_818C24,fItemCarried_CarryLoop_NoSell,medium,Phase 2 carry loop for the no-sell group including drop handling.
+fUnknown_818D38,fItemCarried_PutDown_NoSell,medium,Phase 3 put-down for the no-sell group checking bin and target tiles.
+fItemShipped_Unknown818DAB,fItemShipped_SetBinTileAndRelease,medium,Writes the bin tile from aDialogData_ShippingProfit and releases the carried object.
+fUnknown_818DEC,fItemCarried_StartDropAtTarget,low,Loads a target x/y from nUnknownXYTable sets sprite $CA and phase 4.
+fUnknown_818E16,fItemCarried_ClearObjectSlot,medium,Calls fUnknown_81A4F1 to free the carried object slot and returns.
+fUnknown_818E1B,fItemCarriedAnimal_PutDown,high,Writes area and tile position into the chicken record and respawns the animal AI.
+fUnknown_818E98,fItemCarriedFeed_PutDown,medium,Put-down of feed marking cow feed flags in the cow barn then shipped handling.
+fItemSell_Unknown818F2A,fItemSell_ShowPriceDialog,high,Phase 5 shows the sell dialog from aDialogData_SellItems and sets phase 6.
+fItemSell_Unknown818F5A,fItemSell_HandleAnswer,high,Phase 6 reads the answer and adds profit for the sold item.
+fUnknown_818FD7,fItemSell_ShowCancelDialog,medium,Shows dialog $0303 after the player declines selling then resumes carrying.
+fUnknown_818FEA,fItemSell_ResumeCarry,medium,Restores holding pose and sets phase 2 after declined sale.
+fUnknown_819010,fItemCarried_StartHolding,medium,Phase 0 sets hold pose index 1 and moves to phase 2.
+fUnknown_819021,fItemCarried_DestroyAndRelease,medium,Phase 8 frees object clears carried item and player action.
+fUnknown_819049,fItemCarried_CarryLoop,medium,Phase 2 carry loop for general items branching on jump action.
+fUnknown_819063,fItemCarried_CarryLoop_ActionJump,medium,Carry loop branch when player action is jump sets pose 1.
+fUnknown_819078,fItemCarried_CarryLoop_ActionOther,medium,Carry loop branch for other actions sets pose $0B once.
+fItemSell_Unknown8190AA,fItemCarried_HandleDropAction,medium,Handles the drop action deciding between selling shipping or put-down.
+fUnknown_81917E,fItemCarried_BeginPutDown,medium,Sets put-down pose from direction and enters phase 3.
+fItemShipped_Unknown819195,fItemShipped_DropInBin,medium,Item dropped against the bin adds shipping profit if allowed.
+fUnknown_819220,fItemCarried_SetPhaseFinish,high,Sets phase 8.
+fUnknown_819228,fItemCarriedAnimal_CarryLoop,medium,Phase 2 carry loop for animals including drop target checks.
+fUnknown_819379,fItemCarried_PutDown,medium,Phase 3 put-down selecting area-specific handling.
+fUnknown_81944F,fItemShipped_StartCowBarnScript,medium,Starts script pointer $25 after shipping in the cow barn and sets phase 7.
+fUnknown_819473,fItemShipped_StartCoopScript,medium,Starts script pointer $26 after shipping in the coop and sets phase 7.
+fUnknown_819497,fItemCarried_PlaceEggInIncubator,medium,Carried id $14 (egg) put at tile $F7 in coop spawns a chicken and adds happiness.
+fUnknown_81953F,fItemCarried_PutDown_Outdoor,medium,Put-down handling for non-farm areas checking pond tiles.
+fUnknown_819590,fItemCarried_PutDown_LowAreas,medium,Put-down handling for areas below TownSpring checking target tiles F0 F9-FD.
+fUnknown_819631,fItemCarried_ThrowToTarget,medium,Uses A as index into nUnknownXYTable and starts throw to that target (phase 4).
+fUnknown_81965B,fItemCarried_DropInFront,medium,Default drop of the item on the tile in front and sets phase 4.
+fUnknown_81968F,fItemCarried_PhaseClearSlot,medium,Phase 4 frees the carried object slot.
+fUnknown_819695,fItemCarried_PhaseWaitScriptEnd,medium,Phase 7 waits for the $CF script pointer to clear then reactivates the player.
+fCore_Unknown808E69,fPalette_ProcessColorAnimSlots,medium,Steps 16 pointer slots at $42 of colour+delay entries writing colours into palette buffers and queues CGRAM DMA.
+fPalette_Unknown808FC7,fPalette_SetNextHourPalette,high,Stores next hour palette index and sets ptrPaletteNext from aPalettes or $7F0B00 at night.
+fPalette_Unknown80916F,fPalette_WriteColorToBuffer,high,Writes a colour word at row Y column X into $7F0900 or $7F0B00 buffer.
+fUnknown_8096D3,fMap_ResetAndLoadDestinationArea,medium,Clears VRAM/object/AI state and loads nDestinationAreaId.
+fUnknown_809EBC,fCamera_UpdateFromPlayerPos,medium,Computes camera and screen offset from player position with clamping.
+fUnknown_809F61,fCamera_UpdateBG2Scroll,medium,Sets BG2 scroll offsets from camera for parallax depending on area.
+fUnknown_80A0AB,fCamera_ScrollDownStep,medium,Updates BG1 vertical scroll and streams a new row after 8 pixels (down).
+fUnknown_80A0E1,fCamera_ScrollUpStep,medium,Updates BG1 vertical scroll and streams a new row after 8 pixels (up).
+fUnknown_80A11C,fCamera_ScrollRightStep,medium,Updates BG1 horizontal scroll and streams a new column (right).
+fUnknown_80A152,fCamera_ScrollLeftStep,medium,Updates BG1 horizontal scroll and streams a new column (left).
+fUnknown_80A18D,fMap_StreamRowDown,medium,Copies a map tile row into buffers and queues two VRAM DMAs while scrolling down.
+fUnknown_80A308,fMap_StreamRowUp,medium,Copies a map tile row into buffers and queues two VRAM DMAs while scrolling up.
+fUnknown_80A481,fMap_StreamColumnRight,medium,Copies a map tile column and queues VRAM DMAs while scrolling right.
+fUnknown_80A617,fMap_StreamColumnLeft,medium,Copies a map tile column and queues VRAM DMAs while scrolling left.
+fTileMap_Unknown80AA38,fTileMap_UploadRowToVRAM,low,Queues a VRAM transfer of tilemap data from $7E2000 plus offset in n16Temp1.

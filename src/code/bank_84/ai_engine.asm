@@ -22,7 +22,7 @@ fAI_ZeroCCPtr:
     RTL                                                        ;84801F|6B      |      ;
  
  
-fAI_Unknown848020:
+fAI_DeactivateSlotAndObject:
     REP #$30                                                   ;848020|C230    |      ;
     JSL.L fAI_SetCCPointer                                     ;848022|227C8884|84887C;
     SEP #$20                                                   ;848026|E220    |      ;
@@ -34,11 +34,11 @@ fAI_Unknown848020:
     LDY.W #$0012                                               ;848033|A01200  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;848036|B7CC    |0000CC;
     STA.B strcObject.gameObjectIdx                             ;848038|85A5    |0000A5;
-    JSL.L fObject_Unknown8581A2                                ;84803A|22A28185|8581A2;
+    JSL.L fObject_Destroy                                ;84803A|22A28185|8581A2;
     RTL                                                        ;84803E|6B      |      ;
  
  
-fAI_Unknown84803F:
+fAI_SetSlotScript:
     REP #$30                                                   ;84803F|C230    |      ; A: nArg1, X: nIndex, Y: nSubindex
     JSL.L fAI_SetCCPointer                                     ;848041|227C8884|84887C; $0xCC = 7EB586 + A * 64
     REP #$30                                                   ;848045|C230    |      ;
@@ -81,7 +81,7 @@ fAI_Unknown84803F:
     LDY.W #$0032                                               ;84808C|A03200  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;84808F|97CC    |0000CC;
     STA.B ptrAIActionData+2                                    ;848091|85CB    |0000CB;
-    JSR.W fAI_Unknown848961                                    ;848093|206189  |848961;
+    JSR.W fAI_ResetSlotKeepObject                                    ;848093|206189  |848961;
     RTL                                                        ;848096|6B      |      ;
  
  
@@ -127,7 +127,7 @@ fAI_SetupAreaScripting:
     REP #$10                                                   ;8480E1|C210    |      ;
     LDY.W #$0032                                               ;8480E3|A03200  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;8480E6|97CC    |0000CC;
-    JSR.W fAI_Unknown8488D4                                    ;8480E8|20D488  |8488D4;
+    JSR.W fAI_ResetSlotFull                                    ;8480E8|20D488  |8488D4;
     REP #$30                                                   ;8480EB|C230    |      ;
     PLA                                                        ;8480ED|68      |      ;
     SEP #$20                                                   ;8480EE|E220    |      ;
@@ -137,7 +137,7 @@ fAI_SetupAreaScripting:
     RTL                                                        ;8480F7|6B      |      ;
  
  
-fAI_Unknown8480F8:
+fAI_StartSlotScriptAtFrontTile:
     REP #$30                                                   ;8480F8|C230    |      ; A: nArg1, X: nIndex, Y: nSubindex
     PHA                                                        ;8480FA|48      |      ;
     JSL.L fAI_SetCCPointer                                     ;8480FB|227C8884|84887C; $0xCC = 7EB586 + A * 64
@@ -179,7 +179,7 @@ fAI_Unknown8480F8:
     REP #$10                                                   ;848142|C210    |      ;
     LDY.W #$0032                                               ;848144|A03200  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;848147|97CC    |0000CC;
-    JSR.W fAI_Unknown8488D4                                    ;848149|20D488  |8488D4;
+    JSR.W fAI_ResetSlotFull                                    ;848149|20D488  |8488D4;
     REP #$30                                                   ;84814C|C230    |      ;
     PLA                                                        ;84814E|68      |      ;
     SEP #$20                                                   ;84814F|E220    |      ;
@@ -278,7 +278,7 @@ fAI_HowToPlaySetup:
     LDA.B [ptrAIUnknown0xCC],Y                                 ;848200|B7CC    |0000CC;
     AND.B #$01                                                 ;848202|2901    |      ;
     BEQ .label6                                                ;848204|F003    |848209;
-    JSR.W fAI_Unknown848286                                    ;848206|208682  |848286;
+    JSR.W fAI_UpdateSlotMovementAndObject                                    ;848206|208682  |848286;
  
 .label6:
     REP #$30                                                   ;848209|C230    |      ;
@@ -333,7 +333,7 @@ fAI_ExecuteAiAction:
     RTS                                                        ;848285|60      |      ;
  
  
-fAI_Unknown848286:
+fAI_UpdateSlotMovementAndObject:
     REP #$30                                                   ;848286|C230    |      ;
     SEP #$20                                                   ;848288|E220    |      ;
     REP #$10                                                   ;84828A|C210    |      ;
@@ -341,8 +341,8 @@ fAI_Unknown848286:
     LDA.B [ptrAIUnknown0xCC],Y                                 ;84828F|B7CC    |0000CC;
     AND.B #$10                                                 ;848291|2910    |      ;
     BNE +                                                      ;848293|D006    |84829B;
-    JSR.W fAI_Unknown8483CC                                    ;848295|20CC83  |8483CC;
-    JSR.W fAI_Unknown848331                                    ;848298|203183  |848331;
+    JSR.W fAI_UpdateSlotWander                                    ;848295|20CC83  |8483CC;
+    JSR.W fAI_UpdateSlotStepMove                                    ;848298|203183  |848331;
  
   + REP #$30                                                   ;84829B|C230    |      ;
     LDY.W #$0012                                               ;84829D|A01200  |      ;
@@ -372,12 +372,12 @@ fAI_Unknown848286:
     LDA.B [ptrAIUnknown0xCC],Y                                 ;8482D3|B7CC    |0000CC;
     AND.B #$04                                                 ;8482D5|2904    |      ;
     BNE .label2                                                ;8482D7|D017    |8482F0;
-    JSL.L fObject_Unknown8580B9                                ;8482D9|22B98085|8580B9;
+    JSL.L fObject_UpdatePositionAndFlip                                ;8482D9|22B98085|8580B9;
     BRA .return                                                ;8482DD|802F    |84830E;
  
  
 .label1:
-    JSL.L fUnknown_858000                                      ;8482DF|22008085|858000;
+    JSL.L fObject_Create                                      ;8482DF|22008085|858000;
     REP #$30                                                   ;8482E3|C230    |      ;
     LDA.B strcObject.gameObjectIdx                             ;8482E5|A5A5    |0000A5;
     REP #$30                                                   ;8482E7|C230    |      ;
@@ -396,12 +396,12 @@ fAI_Unknown848286:
     LDA.B [ptrAIUnknown0xCC],Y                                 ;8482FE|B7CC    |0000CC;
     CMP.B strcVariables.n16Temp1                               ;848300|C57E    |00007E;
     BEQ .return                                                ;848302|F00A    |84830E;
-    JSL.L fObject_Unknown858100                                ;848304|22008185|858100;
+    JSL.L fObject_Replace                                ;848304|22008185|858100;
     BRA .return                                                ;848308|8004    |84830E;
  
  
 .label3:
-    JSL.L fObject_Unknown8581A2                                ;84830A|22A28185|8581A2;
+    JSL.L fObject_Destroy                                ;84830A|22A28185|8581A2;
  
 .return:
     REP #$30                                                   ;84830E|C230    |      ;
@@ -422,7 +422,7 @@ fAI_Unknown848286:
     RTS                                                        ;848330|60      |      ;
  
  
-fAI_Unknown848331:
+fAI_UpdateSlotStepMove:
     REP #$30                                                   ;848331|C230    |      ;
     SEP #$20                                                   ;848333|E220    |      ;
     REP #$10                                                   ;848335|C210    |      ;
@@ -511,7 +511,7 @@ fAI_Unknown848331:
     RTS                                                        ;8483CB|60      |      ;
  
  
-fAI_Unknown8483CC:
+fAI_UpdateSlotWander:
     REP #$30                                                   ;8483CC|C230    |      ;
     SEP #$20                                                   ;8483CE|E220    |      ;
     LDY.W #$0001                                               ;8483D0|A00100  |      ;
@@ -929,7 +929,7 @@ fAI_Unknown8483CC:
     SEP #$20                                                   ;8486D3|E220    |      ;
     LDA.B #$B3                                                 ;8486D5|A9B3    |      ;
     STA.B ptrTemp0x72+2                                        ;8486D7|8574    |000074;
-    JSL.L fAI_Unknown848895                                    ;8486D9|22958884|848895;
+    JSL.L fAI_LoadSlotSpriteFromDirTable                                    ;8486D9|22958884|848895;
     SEP #$20                                                   ;8486DD|E220    |      ;
     REP #$10                                                   ;8486DF|C210    |      ;
     LDY.W #$0001                                               ;8486E1|A00100  |      ;
@@ -950,7 +950,7 @@ fAI_Unknown8483CC:
     SEP #$20                                                   ;8486FD|E220    |      ;
     LDA.B #$B3                                                 ;8486FF|A9B3    |      ;
     STA.B ptrTemp0x72+2                                        ;848701|8574    |000074;
-    JSL.L fAI_Unknown848895                                    ;848703|22958884|848895;
+    JSL.L fAI_LoadSlotSpriteFromDirTable                                    ;848703|22958884|848895;
     SEP #$20                                                   ;848707|E220    |      ;
     REP #$10                                                   ;848709|C210    |      ;
     LDY.W #$0001                                               ;84870B|A00100  |      ;
@@ -1093,7 +1093,7 @@ fAI_Unknown8483CC:
     LDY.W #$0002                                               ;848806|A00200  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;848809|B7CC    |0000CC;
     REP #$20                                                   ;84880B|C220    |      ;
-    JSL.L fGameEngine_Unknown83AEC3                            ;84880D|22C3AE83|83AEC3;
+    JSL.L fGameEngine_CheckDirectionalOverlap                            ;84880D|22C3AE83|83AEC3;
     CMP.W #$0000                                               ;848811|C90000  |      ;
     BNE .return                                                ;848814|D001    |848817;
  
@@ -1175,7 +1175,7 @@ fAI_SetCCPointer:
     RTL                                                        ;848894|6B      |      ;
  
  
-fAI_Unknown848895:
+fAI_LoadSlotSpriteFromDirTable:
     REP #$30                                                   ;848895|C230    |      ;
     SEP #$20                                                   ;848897|E220    |      ;
     LDA.B #$00                                                 ;848899|A900    |      ;
@@ -1216,7 +1216,7 @@ fAI_Unknown848895:
     RTL                                                        ;8488D3|6B      |      ;
  
  
-fAI_Unknown8488D4:
+fAI_ResetSlotFull:
     REP #$30                                                   ;8488D4|C230    |      ;
     SEP #$20                                                   ;8488D6|E220    |      ;
     REP #$10                                                   ;8488D8|C210    |      ;
@@ -1281,7 +1281,7 @@ fAI_Unknown8488D4:
     RTS                                                        ;848960|60      |      ;
  
  
-fAI_Unknown848961:
+fAI_ResetSlotKeepObject:
     REP #$30                                                   ;848961|C230    |      ;
     SEP #$20                                                   ;848963|E220    |      ;
     REP #$10                                                   ;848965|C210    |      ;
@@ -1471,7 +1471,7 @@ fAIAction0x09:
     REP #$30                                                   ;848B56|C230    |      ;
     LDY.W #$0030                                               ;848B58|A03000  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;848B5B|97CC    |0000CC;
-    JSR.W fAI_Unknown8488D4                                    ;848B5D|20D488  |8488D4;
+    JSR.W fAI_ResetSlotFull                                    ;848B5D|20D488  |8488D4;
     SEP #$20                                                   ;848B60|E220    |      ;
     PLA                                                        ;848B62|68      |      ;
     SEP #$20                                                   ;848B63|E220    |      ;
@@ -1603,7 +1603,7 @@ fAIAction0x0D:
 fAIAction0x0E:
     REP #$30                                                   ;848CA8|C230    |      ;
     %AIMoveAction($0002)
-    JSL.L fAudioUnknown_838401                                 ;848CB4|22018483|838401;
+    JSL.L fAudio_FadeOutOnTrackChangeSlow                                 ;848CB4|22018483|838401;
     RTS                                                        ;848CB8|60      |      ;
  
  
@@ -1865,7 +1865,7 @@ fAIAction0x1A:
     SEP #$20                                                   ;848F83|E220    |      ;
     LDA.B #$B3                                                 ;848F85|A9B3    |      ;
     STA.B ptrTemp0x72+2                                        ;848F87|8574    |000074;
-    JSL.L fAI_Unknown848895                                    ;848F89|22958884|848895;
+    JSL.L fAI_LoadSlotSpriteFromDirTable                                    ;848F89|22958884|848895;
     REP #$30                                                   ;848F8D|C230    |      ;
     LDY.W #$0010                                               ;848F8F|A01000  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;848F92|B7CC    |0000CC;
@@ -2049,7 +2049,7 @@ fAIAction0x1F:
     SEP #$20                                                   ;84913C|E220    |      ;
     LDA.B #$B3                                                 ;84913E|A9B3    |      ;
     STA.B ptrTemp0x72+2                                        ;849140|8574    |000074;
-    JSL.L fAI_Unknown848895                                    ;849142|22958884|848895;
+    JSL.L fAI_LoadSlotSpriteFromDirTable                                    ;849142|22958884|848895;
     SEP #$20                                                   ;849146|E220    |      ;
     REP #$10                                                   ;849148|C210    |      ;
     LDY.W #$0001                                               ;84914A|A00100  |      ;
@@ -2260,7 +2260,7 @@ fAIAction0x24_NextHourPalette:
     %AIMoveAction($0001)
     SEP #$20                                                   ;849362|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;849364|A7C9    |0000C9;
-    JSL.L fPalette_Unknown808FC7                               ;849366|22C78F80|808FC7;
+    JSL.L fPalette_SetNextHourPalette                               ;849366|22C78F80|808FC7;
     %AIMoveAction($0001)
     RTS                                                        ;849374|60      |      ;
  
@@ -2290,7 +2290,7 @@ fAIAction0x25:
     LDY.W #$0012                                               ;8493B1|A01200  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;8493B4|B7CC    |0000CC;
     STA.B strcObject.gameObjectIdx                             ;8493B6|85A5    |0000A5;
-    JSL.L fObject_Unknown8581A2                                ;8493B8|22A28185|8581A2;
+    JSL.L fObject_Destroy                                ;8493B8|22A28185|8581A2;
     REP #$20                                                   ;8493BC|C220    |      ;
     LDA.B ptrTemp0x72                                          ;8493BE|A572    |000072;
     STA.B ptrAIUnknown0xCC                                     ;8493C0|85CC    |0000CC;
@@ -2454,7 +2454,7 @@ fAIAction0x2A:
     REP #$30                                                   ;849553|C230    |      ;
     %AIMoveAction($0001)
     LDA.B [ptrAIActionData]                                    ;84955F|A7C9    |0000C9;
-    JSL.L fUnknownCF_SetPointer                                ;849561|22E1A581|81A5E1;
+    JSL.L fTileScript_Start                                ;849561|22E1A581|81A5E1;
     %AIMoveAction($0002)
     REP #$30                                                   ;84956F|C230    |      ;
     LDY.W #$0010                                               ;849571|A01000  |      ;
@@ -2496,7 +2496,7 @@ fAIAction0x2B:
     SEP #$20                                                   ;8495D0|E220    |      ;
     LDA.B #$B3                                                 ;8495D2|A9B3    |      ;
     STA.B ptrTemp0x72+2                                        ;8495D4|8574    |000074;
-    JSL.L fAI_Unknown848895                                    ;8495D6|22958884|848895;
+    JSL.L fAI_LoadSlotSpriteFromDirTable                                    ;8495D6|22958884|848895;
     REP #$30                                                   ;8495DA|C230    |      ;
     LDY.W #$0010                                               ;8495DC|A01000  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;8495DF|B7CC    |0000CC;
@@ -2523,7 +2523,7 @@ fAIAction0x2C:
     PLX                                                        ;849617|FA      |      ;
     SEP #$20                                                   ;849618|E220    |      ;
     PLA                                                        ;84961A|68      |      ;
-    JSL.L fAudioUnknown_8382FE                                 ;84961B|22FE8283|8382FE;
+    JSL.L fAudio_PlaySoundEffectAndWait                                 ;84961B|22FE8283|8382FE;
     SEP #$20                                                   ;84961F|E220    |      ;
     STZ.W strcAudio.toolId                                     ;849621|9C1901  |000119;
     JSL.L fToolUsedSound_Unknown828FF3                         ;849624|22F38F82|828FF3;
@@ -2633,7 +2633,7 @@ fAIAction0x2D:
     SEP #$20                                                   ;849716|E220    |      ;
     LDA.B #$B3                                                 ;849718|A9B3    |      ;
     STA.B ptrTemp0x72+2                                        ;84971A|8574    |000074;
-    JSL.L fAI_Unknown848895                                    ;84971C|22958884|848895;
+    JSL.L fAI_LoadSlotSpriteFromDirTable                                    ;84971C|22958884|848895;
     SEP #$20                                                   ;849720|E220    |      ;
     REP #$10                                                   ;849722|C210    |      ;
     LDY.W #$0001                                               ;849724|A00100  |      ;
@@ -2743,7 +2743,7 @@ fAIAction0x2F:
     SEP #$20                                                   ;849838|E220    |      ;
     LDA.B #$B3                                                 ;84983A|A9B3    |      ;
     STA.B ptrTemp0x72+2                                        ;84983C|8574    |000074;
-    JSL.L fAI_Unknown848895                                    ;84983E|22958884|848895;
+    JSL.L fAI_LoadSlotSpriteFromDirTable                                    ;84983E|22958884|848895;
     SEP #$20                                                   ;849842|E220    |      ;
     REP #$10                                                   ;849844|C210    |      ;
     LDY.W #$0001                                               ;849846|A00100  |      ;
@@ -2984,7 +2984,7 @@ fAIAction0x30_UpdateChicken:
     REP #$20                                                   ;849A14|C220    |      ;
     LDX.W #$0000                                               ;849A16|A20000  |      ;
     LDY.W #$005D                                               ;849A19|A05D00  |      ;
-    JSL.L fAI_Unknown84803F                                    ;849A1C|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;849A1C|223F8084|84803F;
     JMP.W .label2                                              ;849A20|4C419A  |849A41;
  
  
@@ -2999,7 +2999,7 @@ fAIAction0x30_UpdateChicken:
     REP #$20                                                   ;849A32|C220    |      ;
     LDX.W #$0000                                               ;849A34|A20000  |      ;
     LDY.W #$005C                                               ;849A37|A05C00  |      ;
-    JSL.L fAI_Unknown84803F                                    ;849A3A|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;849A3A|223F8084|84803F;
     JMP.W .label2                                              ;849A3E|4C419A  |849A41;
  
  
@@ -3099,28 +3099,28 @@ fAIAction0x31_UpdateCow:
     LDA.B [ptrAIUnknown0xCC],Y                                 ;849B1D|B7CC    |0000CC;
     CMP.B #$C2                                                 ;849B1F|C9C2    |      ;
     BNE +                                                      ;849B21|D003    |849B26;
-    JMP.W fUnknown_84A595                                      ;849B23|4C95A5  |84A595;
+    JMP.W fAIAction0x31_CowSendOutside                                      ;849B23|4C95A5  |84A595;
  
  
   + SEP #$20                                                   ;849B26|E220    |      ;
     LDA.B strcMap.loadAreaId                                   ;849B28|A522    |000022;
     CMP.B #!AREA_TOWNSPRING                                                 
-    BCS fUnknown_ToFarm                                        ;849B2C|B017    |849B45;
+    BCS fAIAction0x31_CowDefaultPath                                        ;849B2C|B017    |849B45;
     SEP #$20                                                   ;849B2E|E220    |      ;
     REP #$10                                                   ;849B30|C210    |      ;
     LDY.W #$000E                                               ;849B32|A00E00  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;849B35|B7CC    |0000CC;
     CMP.B #$E0                                                 ;849B37|C9E0    |      ;
     BNE +                                                      ;849B39|D003    |849B3E;
-    JMP.W fUnkonown_84A498                                     ;849B3B|4C98A4  |84A498;
+    JMP.W fAIAction0x31_CowState0xE0                                     ;849B3B|4C98A4  |84A498;
  
  
   + CMP.B #$E1                                                 ;849B3E|C9E1    |      ;
-    BNE fUnknown_ToFarm                                        ;849B40|D003    |849B45;
-    JMP.W fUnknown_84A540                                      ;849B42|4C40A5  |84A540;
+    BNE fAIAction0x31_CowDefaultPath                                        ;849B40|D003    |849B45;
+    JMP.W fAIAction0x31_CowReturnToBarn                                      ;849B42|4C40A5  |84A540;
  
  
-fUnknown_ToFarm:
+fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;849B45|E220    |      ;
     REP #$10                                                   ;849B47|C210    |      ;
     LDY.W #$000C                                               ;849B49|A00C00  |      ;
@@ -3290,7 +3290,7 @@ fUnknown_ToFarm:
     STA.B [ptrTemp0x72],Y                                      ;849C8D|9772    |000072;
     REP #$20                                                   ;849C8F|C220    |      ;
     LDA.W #$0001                                               ;849C91|A90100  |      ;
-    JSL.L fUnknown_84A5D4                                      ;849C94|22D4A584|84A5D4;
+    JSL.L fCow_AddHappiness                                      ;849C94|22D4A584|84A5D4;
     SEP #$20                                                   ;849C98|E220    |      ;
     REP #$10                                                   ;849C9A|C210    |      ;
     LDY.W #$0000                                               ;849C9C|A00000  |      ;
@@ -3387,8 +3387,8 @@ fUnknown_ToFarm:
  
  
 .jump1:
-    JSL.L fAI_Unknown84803F                                    ;849D3F|223F8084|84803F;
-    JMP.W fUnknown_84A46E                                      ;849D43|4C6EA4  |84A46E;
+    JSL.L fAI_SetSlotScript                                    ;849D3F|223F8084|84803F;
+    JMP.W fAIAction0x31_CowUpdateTail                                      ;849D43|4C6EA4  |84A46E;
  
  
 .label13:
@@ -3454,8 +3454,8 @@ fUnknown_ToFarm:
  
  
 .jump2:
-    JSL.L fAI_Unknown84803F                                    ;849DB7|223F8084|84803F;
-    JMP.W fUnknown_84A46E                                      ;849DBB|4C6EA4  |84A46E;
+    JSL.L fAI_SetSlotScript                                    ;849DB7|223F8084|84803F;
+    JMP.W fAIAction0x31_CowUpdateTail                                      ;849DBB|4C6EA4  |84A46E;
  
  
 .label18:
@@ -3565,7 +3565,7 @@ fUnknown_ToFarm:
     STA.B [ptrTemp0x72],Y                                      ;849E88|9772    |000072;
     REP #$20                                                   ;849E8A|C220    |      ;
     LDA.W #$000A                                               ;849E8C|A90A00  |      ;
-    JSL.L fUnknown_84A5D4                                      ;849E8F|22D4A584|84A5D4;
+    JSL.L fCow_AddHappiness                                      ;849E8F|22D4A584|84A5D4;
     SEP #$20                                                   ;849E93|E220    |      ;
     LDY.W #$0003                                               ;849E95|A00300  |      ;
     LDA.B #$15                                                 ;849E98|A915    |      ;
@@ -3594,7 +3594,7 @@ fUnknown_ToFarm:
     STA.B [ptrTemp0x72],Y                                      ;849EC5|9772    |000072;
     REP #$20                                                   ;849EC7|C220    |      ;
     LDA.W #$0003                                               ;849EC9|A90300  |      ;
-    JSL.L fUnknown_84A5D4                                      ;849ECC|22D4A584|84A5D4;
+    JSL.L fCow_AddHappiness                                      ;849ECC|22D4A584|84A5D4;
     SEP #$20                                                   ;849ED0|E220    |      ;
     REP #$10                                                   ;849ED2|C210    |      ;
     LDY.W #$0000                                               ;849ED4|A00000  |      ;
@@ -3717,7 +3717,7 @@ fUnknown_ToFarm:
     LDA.B [ptrAIUnknown0xCC],Y                                 ;849F9D|B7CC    |0000CC;
     LDX.W #$0000                                               ;849F9F|A20000  |      ;
     LDY.B strcVariables.n16Temp1                               ;849FA2|A47E    |00007E;
-    JSL.L fAI_Unknown84803F                                    ;849FA4|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;849FA4|223F8084|84803F;
     SEP #$20                                                   ;849FA8|E220    |      ;
     LDY.W #$0005                                               ;849FAA|A00500  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;849FAD|B772    |000072;
@@ -3867,7 +3867,7 @@ fUnknown_ToFarm:
  
  
 .jump4:
-    JSL.L fAI_Unknown84803F                                    ;84A0B5|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;84A0B5|223F8084|84803F;
  
 .continue:
     SEP #$20                                                   ;84A0B9|E220    |      ;
@@ -3890,7 +3890,7 @@ fUnknown_ToFarm:
     JMP.W .label38                                             ;84A0D6|4CDCA0  |84A0DC;
  
  
-  + JMP.W fUnknown_84A46E                                      ;84A0D9|4C6EA4  |84A46E;
+  + JMP.W fAIAction0x31_CowUpdateTail                                      ;84A0D9|4C6EA4  |84A46E;
  
  
 .label38:
@@ -3911,7 +3911,7 @@ fUnknown_ToFarm:
     BEQ .label39                                               ;84A0F6|F007    |84A0FF;
     INC A                                                      ;84A0F8|1A      |      ;
     STA.W strcStockData.unkEachCow,X                           ;84A0F9|9D5309  |000953;
-    JMP.W fUnknown_84A46E                                      ;84A0FC|4C6EA4  |84A46E;
+    JMP.W fAIAction0x31_CowUpdateTail                                      ;84A0FC|4C6EA4  |84A46E;
  
  
 .label39:
@@ -3952,8 +3952,8 @@ fUnknown_ToFarm:
     REP #$20                                                   ;84A139|C220    |      ;
     LDX.W #$0000                                               ;84A13B|A20000  |      ;
     LDY.W #$0078                                               ;84A13E|A07800  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84A141|223F8084|84803F;
-    JMP.W fUnknown_84A46E                                      ;84A145|4C6EA4  |84A46E;
+    JSL.L fAI_SetSlotScript                                    ;84A141|223F8084|84803F;
+    JMP.W fAIAction0x31_CowUpdateTail                                      ;84A145|4C6EA4  |84A46E;
  
  
 .label41:
@@ -3974,8 +3974,8 @@ fUnknown_ToFarm:
     REP #$20                                                   ;84A164|C220    |      ;
     LDX.W #$0000                                               ;84A166|A20000  |      ;
     LDY.W #$0079                                               ;84A169|A07900  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84A16C|223F8084|84803F;
-    JMP.W fUnknown_84A46E                                      ;84A170|4C6EA4  |84A46E;
+    JSL.L fAI_SetSlotScript                                    ;84A16C|223F8084|84803F;
+    JMP.W fAIAction0x31_CowUpdateTail                                      ;84A170|4C6EA4  |84A46E;
  
  
 .label42:
@@ -3996,8 +3996,8 @@ fUnknown_ToFarm:
     REP #$20                                                   ;84A18F|C220    |      ;
     LDX.W #$0000                                               ;84A191|A20000  |      ;
     LDY.W #$007A                                               ;84A194|A07A00  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84A197|223F8084|84803F;
-    JMP.W fUnknown_84A46E                                      ;84A19B|4C6EA4  |84A46E;
+    JSL.L fAI_SetSlotScript                                    ;84A197|223F8084|84803F;
+    JMP.W fAIAction0x31_CowUpdateTail                                      ;84A19B|4C6EA4  |84A46E;
  
  
 .label43:
@@ -4018,8 +4018,8 @@ fUnknown_ToFarm:
     REP #$20                                                   ;84A1BA|C220    |      ;
     LDX.W #$0000                                               ;84A1BC|A20000  |      ;
     LDY.W #$007B                                               ;84A1BF|A07B00  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84A1C2|223F8084|84803F;
-    JMP.W fUnknown_84A46E                                      ;84A1C6|4C6EA4  |84A46E;
+    JSL.L fAI_SetSlotScript                                    ;84A1C2|223F8084|84803F;
+    JMP.W fAIAction0x31_CowUpdateTail                                      ;84A1C6|4C6EA4  |84A46E;
  
  
 .label44:
@@ -4040,7 +4040,7 @@ fUnknown_ToFarm:
     BEQ +                                                      ;84A1E3|F007    |84A1EC;
     INC A                                                      ;84A1E5|1A      |      ;
     STA.W strcStockData.unkEachCow,X                           ;84A1E6|9D5309  |000953;
-    JMP.W fUnknown_84A46E                                      ;84A1E9|4C6EA4  |84A46E;
+    JMP.W fAIAction0x31_CowUpdateTail                                      ;84A1E9|4C6EA4  |84A46E;
  
  
   + REP #$30                                                   ;84A1EC|C230    |      ;
@@ -4080,8 +4080,8 @@ fUnknown_ToFarm:
     REP #$20                                                   ;84A226|C220    |      ;
     LDX.W #$0000                                               ;84A228|A20000  |      ;
     LDY.W #$0074                                               ;84A22B|A07400  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84A22E|223F8084|84803F;
-    JMP.W fUnknown_84A46E                                      ;84A232|4C6EA4  |84A46E;
+    JSL.L fAI_SetSlotScript                                    ;84A22E|223F8084|84803F;
+    JMP.W fAIAction0x31_CowUpdateTail                                      ;84A232|4C6EA4  |84A46E;
  
  
 .label46:
@@ -4102,8 +4102,8 @@ fUnknown_ToFarm:
     REP #$20                                                   ;84A251|C220    |      ;
     LDX.W #$0000                                               ;84A253|A20000  |      ;
     LDY.W #$0076                                               ;84A256|A07600  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84A259|223F8084|84803F;
-    JMP.W fUnknown_84A46E                                      ;84A25D|4C6EA4  |84A46E;
+    JSL.L fAI_SetSlotScript                                    ;84A259|223F8084|84803F;
+    JMP.W fAIAction0x31_CowUpdateTail                                      ;84A25D|4C6EA4  |84A46E;
  
  
 .label47:
@@ -4124,8 +4124,8 @@ fUnknown_ToFarm:
     REP #$20                                                   ;84A27C|C220    |      ;
     LDX.W #$0000                                               ;84A27E|A20000  |      ;
     LDY.W #$0077                                               ;84A281|A07700  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84A284|223F8084|84803F;
-    JMP.W fUnknown_84A46E                                      ;84A288|4C6EA4  |84A46E;
+    JSL.L fAI_SetSlotScript                                    ;84A284|223F8084|84803F;
+    JMP.W fAIAction0x31_CowUpdateTail                                      ;84A288|4C6EA4  |84A46E;
  
  
 .label48:
@@ -4146,8 +4146,8 @@ fUnknown_ToFarm:
     REP #$20                                                   ;84A2A7|C220    |      ;
     LDX.W #$0000                                               ;84A2A9|A20000  |      ;
     LDY.W #$0075                                               ;84A2AC|A07500  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84A2AF|223F8084|84803F;
-    JMP.W fUnknown_84A46E                                      ;84A2B3|4C6EA4  |84A46E;
+    JSL.L fAI_SetSlotScript                                    ;84A2AF|223F8084|84803F;
+    JMP.W fAIAction0x31_CowUpdateTail                                      ;84A2B3|4C6EA4  |84A46E;
  
  
 .label49:
@@ -4168,7 +4168,7 @@ fUnknown_ToFarm:
     BEQ +                                                      ;84A2D0|F007    |84A2D9;
     INC A                                                      ;84A2D2|1A      |      ;
     STA.W strcStockData.unkEachCow,X                           ;84A2D3|9D5309  |000953;
-    JMP.W fUnknown_84A46E                                      ;84A2D6|4C6EA4  |84A46E;
+    JMP.W fAIAction0x31_CowUpdateTail                                      ;84A2D6|4C6EA4  |84A46E;
  
  
   + REP #$30                                                   ;84A2D9|C230    |      ;
@@ -4178,7 +4178,7 @@ fUnknown_ToFarm:
     LDA.B [ptrTemp0x72],Y                                      ;84A2E3|B772    |000072;
     AND.B #$40                                                 ;84A2E5|2940    |      ;
     BEQ +                                                      ;84A2E7|F003    |84A2EC;
-    JMP.W fUnknown_84A46E                                      ;84A2E9|4C6EA4  |84A46E;
+    JMP.W fAIAction0x31_CowUpdateTail                                      ;84A2E9|4C6EA4  |84A46E;
  
  
   + REP #$30                                                   ;84A2EC|C230    |      ;
@@ -4239,8 +4239,8 @@ fUnknown_ToFarm:
     REP #$20                                                   ;84A345|C220    |      ;
     TXY                                                        ;84A347|9B      |      ;
     LDX.W #$0000                                               ;84A348|A20000  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84A34B|223F8084|84803F;
-    JMP.W fUnknown_84A46E                                      ;84A34F|4C6EA4  |84A46E;
+    JSL.L fAI_SetSlotScript                                    ;84A34B|223F8084|84803F;
+    JMP.W fAIAction0x31_CowUpdateTail                                      ;84A34F|4C6EA4  |84A46E;
  
  
 .label53:
@@ -4281,8 +4281,8 @@ fUnknown_ToFarm:
     REP #$20                                                   ;84A38C|C220    |      ;
     TXY                                                        ;84A38E|9B      |      ;
     LDX.W #$0000                                               ;84A38F|A20000  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84A392|223F8084|84803F;
-    JMP.W fUnknown_84A46E                                      ;84A396|4C6EA4  |84A46E;
+    JSL.L fAI_SetSlotScript                                    ;84A392|223F8084|84803F;
+    JMP.W fAIAction0x31_CowUpdateTail                                      ;84A396|4C6EA4  |84A46E;
  
  
 .label56:
@@ -4323,8 +4323,8 @@ fUnknown_ToFarm:
     REP #$20                                                   ;84A3D3|C220    |      ;
     TXY                                                        ;84A3D5|9B      |      ;
     LDX.W #$0000                                               ;84A3D6|A20000  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84A3D9|223F8084|84803F;
-    JMP.W fUnknown_84A46E                                      ;84A3DD|4C6EA4  |84A46E;
+    JSL.L fAI_SetSlotScript                                    ;84A3D9|223F8084|84803F;
+    JMP.W fAIAction0x31_CowUpdateTail                                      ;84A3DD|4C6EA4  |84A46E;
  
  
 .label59:
@@ -4365,8 +4365,8 @@ fUnknown_ToFarm:
     REP #$20                                                   ;84A41A|C220    |      ;
     TXY                                                        ;84A41C|9B      |      ;
     LDX.W #$0000                                               ;84A41D|A20000  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84A420|223F8084|84803F;
-    JMP.W fUnknown_84A46E                                      ;84A424|4C6EA4  |84A46E;
+    JSL.L fAI_SetSlotScript                                    ;84A420|223F8084|84803F;
+    JMP.W fAIAction0x31_CowUpdateTail                                      ;84A424|4C6EA4  |84A46E;
  
  
 .label62:
@@ -4407,26 +4407,26 @@ fUnknown_ToFarm:
     REP #$20                                                   ;84A461|C220    |      ;
     TXY                                                        ;84A463|9B      |      ;
     LDX.W #$0000                                               ;84A464|A20000  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84A467|223F8084|84803F;
-    JMP.W fUnknown_84A46E                                      ;84A46B|4C6EA4  |84A46E;
+    JSL.L fAI_SetSlotScript                                    ;84A467|223F8084|84803F;
+    JMP.W fAIAction0x31_CowUpdateTail                                      ;84A46B|4C6EA4  |84A46E;
  
  
-fUnknown_84A46E:
+fAIAction0x31_CowUpdateTail:
     REP #$30                                                   ;84A46E|C230    |      ;
     %CheckFlag(daily1, $0010)
     BEQ +                                                      ;84A477|F003    |84A47C;
-    JMP.W fUnknown_84A740                                      ;84A479|4C40A7  |84A740;
+    JMP.W fAIAction0x31_CowAnimThenSteerToPlayer                                      ;84A479|4C40A7  |84A740;
  
  
   + SEP #$20                                                   ;84A47C|E220    |      ;
     REP #$10                                                   ;84A47E|C210    |      ;
     LDY.W #$000C                                               ;84A480|A00C00  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;84A483|B7CC    |0000CC;
-    BEQ fUnknown_DirectionJump                                 ;84A485|F003    |84A48A;
-    JMP.W fUnknown_84A607                                      ;84A487|4C07A6  |84A607;
+    BEQ fAIAction0x31_CowAdvanceTimer                                 ;84A485|F003    |84A48A;
+    JMP.W fAIAction0x31_CowAnimThenFacePlayerDir                                      ;84A487|4C07A6  |84A607;
  
  
-fUnknown_DirectionJump:
+fAIAction0x31_CowAdvanceTimer:
     REP #$30                                                   ;84A48A|C230    |      ;
     LDY.W #$0010                                               ;84A48C|A01000  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;84A48F|B7CC    |0000CC;
@@ -4436,11 +4436,11 @@ fUnknown_DirectionJump:
     RTS                                                        ;84A497|60      |      ;
  
  
-fUnkonown_84A498:
+fAIAction0x31_CowState0xE0:
     REP #$30                                                   ;84A498|C230    |      ;
     %CheckFlag(daily1, $0004)
     BNE +                                                      ;84A4A1|D003    |84A4A6;
-    JMP.W fUnknown_ToFarm                                      ;84A4A3|4C459B  |849B45;
+    JMP.W fAIAction0x31_CowDefaultPath                                      ;84A4A3|4C459B  |849B45;
  
  
   + %UnsetFlag(daily1, $0004)
@@ -4501,10 +4501,10 @@ fUnkonown_84A498:
     REP #$10                                                   ;84A536|C210    |      ;
     LDY.W #$0001                                               ;84A538|A00100  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;84A53B|97CC    |0000CC;
-    JMP.W fUnknown_84A46E                                      ;84A53D|4C6EA4  |84A46E;
+    JMP.W fAIAction0x31_CowUpdateTail                                      ;84A53D|4C6EA4  |84A46E;
  
  
-fUnknown_84A540:
+fAIAction0x31_CowReturnToBarn:
     SEP #$20                                                   ;84A540|E220    |      ;
     REP #$10                                                   ;84A542|C210    |      ;
     LDY.W #$0000                                               ;84A544|A00000  |      ;
@@ -4542,10 +4542,10 @@ fUnknown_84A540:
     LDY.W #$000A                                               ;84A589|A00A00  |      ;
     LDA.L aGameEngine_AddCowPositionsData,X                    ;84A58C|BF44CA83|83CA44;
     STA.B [ptrTemp0x72],Y                                      ;84A590|9772    |000072;
-    JMP.W fUnknown_84A46E                                      ;84A592|4C6EA4  |84A46E;
+    JMP.W fAIAction0x31_CowUpdateTail                                      ;84A592|4C6EA4  |84A46E;
  
  
-fUnknown_84A595:
+fAIAction0x31_CowSendOutside:
     SEP #$20                                                   ;84A595|E220    |      ;
     REP #$10                                                   ;84A597|C210    |      ;
     LDY.W #$0000                                               ;84A599|A00000  |      ;
@@ -4571,10 +4571,10 @@ fUnknown_84A595:
     LDY.W #$000A                                               ;84A5C9|A00A00  |      ;
     LDA.W #$0178                                               ;84A5CC|A97801  |      ;
     STA.B [ptrTemp0x72],Y                                      ;84A5CF|9772    |000072;
-    JMP.W fUnknown_84A46E                                      ;84A5D1|4C6EA4  |84A46E;
+    JMP.W fAIAction0x31_CowUpdateTail                                      ;84A5D1|4C6EA4  |84A46E;
  
  
-fUnknown_84A5D4:
+fCow_AddHappiness:
     REP #$30                                                   ;84A5D4|C230    |      ;
     STA.B strcVariables.n16Temp1                               ;84A5D6|857E    |00007E;
     LDA.W #$0000                                               ;84A5D8|A90000  |      ;
@@ -4609,7 +4609,7 @@ fUnknown_84A5D4:
   + RTL                                                        ;84A606|6B      |      ;
  
  
-fUnknown_84A607:
+fAIAction0x31_CowAnimThenFacePlayerDir:
     SEP #$20                                                   ;84A607|E220    |      ;
     REP #$10                                                   ;84A609|C210    |      ;
     LDY.W #$0001                                               ;84A60B|A00100  |      ;
@@ -4680,7 +4680,7 @@ fUnknown_84A607:
     REP #$20                                                   ;84A67D|C220    |      ;
     LDX.W #$0000                                               ;84A67F|A20000  |      ;
     LDY.W #$0078                                               ;84A682|A07800  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84A685|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;84A685|223F8084|84803F;
     JMP.W .label77                                             ;84A689|4C0EA7  |84A70E;
  
  
@@ -4705,7 +4705,7 @@ fUnknown_84A607:
     REP #$20                                                   ;84A6AF|C220    |      ;
     LDX.W #$0000                                               ;84A6B1|A20000  |      ;
     LDY.W #$0074                                               ;84A6B4|A07400  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84A6B7|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;84A6B7|223F8084|84803F;
     BRA .label77                                               ;84A6BB|8051    |84A70E;
  
  
@@ -4753,7 +4753,7 @@ fUnknown_84A607:
     REP #$20                                                   ;84A704|C220    |      ;
     TXY                                                        ;84A706|9B      |      ;
     LDX.W #$0000                                               ;84A707|A20000  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84A70A|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;84A70A|223F8084|84803F;
  
 .label77:
     REP #$30                                                   ;84A70E|C230    |      ;
@@ -4761,31 +4761,31 @@ fUnknown_84A607:
     LDA.B strcPlayer.direction                                 ;84A712|A5DA    |0000DA;
     CMP.W #!PDIR_DOWN                                               
     BNE +                                                      ;84A717|D003    |84A71C;
-    JMP.W fUnknown_playerDirDown                               ;84A719|4CD7A8  |84A8D7;
+    JMP.W fAIAction0x31_CowSetDirDown                               ;84A719|4CD7A8  |84A8D7;
  
  
   + REP #$30                                                   ;84A71C|C230    |      ;
     LDA.B strcPlayer.direction                                 ;84A71E|A5DA    |0000DA;
     CMP.W #!PDIR_UP                                               
     BNE +                                                      ;84A723|D003    |84A728;
-    JMP.W fUnknown_playerDirUp                                 ;84A725|4CE5A8  |84A8E5;
+    JMP.W fAIAction0x31_CowSetDirUp                                 ;84A725|4CE5A8  |84A8E5;
  
  
   + REP #$30                                                   ;84A728|C230    |      ;
     LDA.B strcPlayer.direction                                 ;84A72A|A5DA    |0000DA;
     CMP.W #!PDIR_LEFT                                               
     BNE +                                                      ;84A72F|D003    |84A734;
-    JMP.W fUnknown_playerDirLeft                               ;84A731|4CF3A8  |84A8F3;
+    JMP.W fAIAction0x31_CowSetDirLeft                               ;84A731|4CF3A8  |84A8F3;
  
  
   + REP #$30                                                   ;84A734|C230    |      ;
     LDA.B strcPlayer.direction                                 ;84A736|A5DA    |0000DA;
     CMP.W #!PDIR_RIGHT                                               
-    BNE fUnknown_84A740                                        ;84A73B|D003    |84A740;
-    JMP.W fUnknown_playerDirRight                              ;84A73D|4C01A9  |84A901;
+    BNE fAIAction0x31_CowAnimThenSteerToPlayer                                        ;84A73B|D003    |84A740;
+    JMP.W fAIAction0x31_CowSetDirRight                              ;84A73D|4C01A9  |84A901;
  
  
-fUnknown_84A740:
+fAIAction0x31_CowAnimThenSteerToPlayer:
     SEP #$20                                                   ;84A740|E220    |      ;
     REP #$10                                                   ;84A742|C210    |      ;
     LDY.W #$0001                                               ;84A744|A00100  |      ;
@@ -4856,7 +4856,7 @@ fUnknown_84A740:
     REP #$20                                                   ;84A7B6|C220    |      ;
     LDX.W #$0000                                               ;84A7B8|A20000  |      ;
     LDY.W #$0078                                               ;84A7BB|A07800  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84A7BE|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;84A7BE|223F8084|84803F;
     JMP.W .label83                                             ;84A7C2|4C4AA8  |84A84A;
  
  
@@ -4881,7 +4881,7 @@ fUnknown_84A740:
     REP #$20                                                   ;84A7E8|C220    |      ;
     LDX.W #$0000                                               ;84A7EA|A20000  |      ;
     LDY.W #$0074                                               ;84A7ED|A07400  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84A7F0|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;84A7F0|223F8084|84803F;
     BRA .label83                                               ;84A7F4|8054    |84A84A;
  
  
@@ -4932,7 +4932,7 @@ fUnknown_84A740:
     REP #$20                                                   ;84A840|C220    |      ;
     TXY                                                        ;84A842|9B      |      ;
     LDX.W #$0000                                               ;84A843|A20000  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84A846|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;84A846|223F8084|84803F;
  
 .label83:
     REP #$30                                                   ;84A84A|C230    |      ;
@@ -4991,8 +4991,8 @@ fUnknown_84A740:
     BNE .label87                                               ;84A8A8|D01D    |84A8C7;
     REP #$20                                                   ;84A8AA|C220    |      ;
     LDA.B strcVariables.n16Temp3                               ;84A8AC|A582    |000082;
-    BEQ fUnknown_playerDirRight                                ;84A8AE|F051    |84A901;
-    BRA fUnknown_playerDirLeft                                 ;84A8B0|8041    |84A8F3;
+    BEQ fAIAction0x31_CowSetDirRight                                ;84A8AE|F051    |84A901;
+    BRA fAIAction0x31_CowSetDirLeft                                 ;84A8B0|8041    |84A8F3;
  
  
 .label86:
@@ -5004,58 +5004,58 @@ fUnknown_84A740:
     BNE .label88                                               ;84A8BD|D010    |84A8CF;
     REP #$20                                                   ;84A8BF|C220    |      ;
     LDA.B strcVariables.n16Temp4                               ;84A8C1|A584    |000084;
-    BEQ fUnknown_playerDirUp                                   ;84A8C3|F020    |84A8E5;
-    BRA fUnknown_playerDirDown                                 ;84A8C5|8010    |84A8D7;
+    BEQ fAIAction0x31_CowSetDirUp                                   ;84A8C3|F020    |84A8E5;
+    BRA fAIAction0x31_CowSetDirDown                                 ;84A8C5|8010    |84A8D7;
  
  
 .label87:
     REP #$20                                                   ;84A8C7|C220    |      ;
     LDA.B strcVariables.n16Temp3                               ;84A8C9|A582    |000082;
-    BEQ fUnknown_playerDirLeft                                 ;84A8CB|F026    |84A8F3;
-    BRA fUnknown_playerDirRight                                ;84A8CD|8032    |84A901;
+    BEQ fAIAction0x31_CowSetDirLeft                                 ;84A8CB|F026    |84A8F3;
+    BRA fAIAction0x31_CowSetDirRight                                ;84A8CD|8032    |84A901;
  
  
 .label88:
     REP #$20                                                   ;84A8CF|C220    |      ;
     LDA.B strcVariables.n16Temp4                               ;84A8D1|A584    |000084;
-    BEQ fUnknown_playerDirDown                                 ;84A8D3|F002    |84A8D7;
-    BRA fUnknown_playerDirUp                                   ;84A8D5|800E    |84A8E5;
+    BEQ fAIAction0x31_CowSetDirDown                                 ;84A8D3|F002    |84A8D7;
+    BRA fAIAction0x31_CowSetDirUp                                   ;84A8D5|800E    |84A8E5;
  
  
-fUnknown_playerDirDown:
+fAIAction0x31_CowSetDirDown:
     SEP #$20                                                   ;84A8D7|E220    |      ;
     REP #$10                                                   ;84A8D9|C210    |      ;
     LDY.W #$000F                                               ;84A8DB|A00F00  |      ;
     LDA.B #$01                                                 ;84A8DE|A901    |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;84A8E0|97CC    |0000CC;
-    JMP.W fUnknown_DirectionJump                               ;84A8E2|4C8AA4  |84A48A;
+    JMP.W fAIAction0x31_CowAdvanceTimer                               ;84A8E2|4C8AA4  |84A48A;
  
  
-fUnknown_playerDirUp:
+fAIAction0x31_CowSetDirUp:
     SEP #$20                                                   ;84A8E5|E220    |      ;
     REP #$10                                                   ;84A8E7|C210    |      ;
     LDY.W #$000F                                               ;84A8E9|A00F00  |      ;
     LDA.B #$02                                                 ;84A8EC|A902    |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;84A8EE|97CC    |0000CC;
-    JMP.W fUnknown_DirectionJump                               ;84A8F0|4C8AA4  |84A48A;
+    JMP.W fAIAction0x31_CowAdvanceTimer                               ;84A8F0|4C8AA4  |84A48A;
  
  
-fUnknown_playerDirLeft:
+fAIAction0x31_CowSetDirLeft:
     SEP #$20                                                   ;84A8F3|E220    |      ;
     REP #$10                                                   ;84A8F5|C210    |      ;
     LDY.W #$000F                                               ;84A8F7|A00F00  |      ;
     LDA.B #$04                                                 ;84A8FA|A904    |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;84A8FC|97CC    |0000CC;
-    JMP.W fUnknown_DirectionJump                               ;84A8FE|4C8AA4  |84A48A;
+    JMP.W fAIAction0x31_CowAdvanceTimer                               ;84A8FE|4C8AA4  |84A48A;
  
  
-fUnknown_playerDirRight:
+fAIAction0x31_CowSetDirRight:
     SEP #$20                                                   ;84A901|E220    |      ;
     REP #$10                                                   ;84A903|C210    |      ;
     LDY.W #$000F                                               ;84A905|A00F00  |      ;
     LDA.B #$08                                                 ;84A908|A908    |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;84A90A|97CC    |0000CC;
-    JMP.W fUnknown_DirectionJump                               ;84A90C|4C8AA4  |84A48A;
+    JMP.W fAIAction0x31_CowAdvanceTimer                               ;84A90C|4C8AA4  |84A48A;
  
  
 fAIAction0x32:
@@ -5191,7 +5191,7 @@ fAIAction0x33_UpdateMole:
     LDA.W #$0011                                               ;84AA42|A91100  |      ;
     LDX.W #$0000                                               ;84AA45|A20000  |      ;
     LDY.W #$0081                                               ;84AA48|A08100  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84AA4B|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;84AA4B|223F8084|84803F;
  
 .return:
     REP #$30                                                   ;84AA4F|C230    |      ;
@@ -5318,7 +5318,7 @@ fAIAction0x35_UpdateHorse:
     LDA.W #$0017                                               ;84AB63|A91700  |      ;
     LDX.W #$0000                                               ;84AB66|A20000  |      ;
     LDY.W #$0080                                               ;84AB69|A08000  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84AB6C|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;84AB6C|223F8084|84803F;
     JMP.W .label8                                              ;84AB70|4C88AD  |84AD88;
  
  
@@ -5375,7 +5375,7 @@ fAIAction0x35_UpdateHorse:
  
  
 .break:
-    JSL.L fAI_Unknown84803F                                    ;84ABCE|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;84ABCE|223F8084|84803F;
     REP #$30                                                   ;84ABD2|C230    |      ;
     %UnsetFlag(daily2, $0040)
  
@@ -5538,7 +5538,7 @@ fAIAction0x35_UpdateHorse:
     LDA.W #$0017                                               ;84AD30|A91700  |      ;
     LDX.W #$0000                                               ;84AD33|A20000  |      ;
     LDY.W #$004B                                               ;84AD36|A04B00  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84AD39|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;84AD39|223F8084|84803F;
     JMP.W .label8                                              ;84AD3D|4C88AD  |84AD88;
  
  
@@ -5547,7 +5547,7 @@ fAIAction0x35_UpdateHorse:
     LDA.W #$0017                                               ;84AD42|A91700  |      ;
     LDX.W #$0000                                               ;84AD45|A20000  |      ;
     LDY.W #$004D                                               ;84AD48|A04D00  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84AD4B|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;84AD4B|223F8084|84803F;
     JMP.W .label8                                              ;84AD4F|4C88AD  |84AD88;
  
  
@@ -5556,7 +5556,7 @@ fAIAction0x35_UpdateHorse:
     LDA.W #$0017                                               ;84AD54|A91700  |      ;
     LDX.W #$0000                                               ;84AD57|A20000  |      ;
     LDY.W #$004E                                               ;84AD5A|A04E00  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84AD5D|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;84AD5D|223F8084|84803F;
     JMP.W .label8                                              ;84AD61|4C88AD  |84AD88;
  
  
@@ -5565,7 +5565,7 @@ fAIAction0x35_UpdateHorse:
     LDA.W #$0017                                               ;84AD66|A91700  |      ;
     LDX.W #$0000                                               ;84AD69|A20000  |      ;
     LDY.W #$004F                                               ;84AD6C|A04F00  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84AD6F|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;84AD6F|223F8084|84803F;
     JMP.W .label8                                              ;84AD73|4C88AD  |84AD88;
  
  
@@ -5574,7 +5574,7 @@ fAIAction0x35_UpdateHorse:
     LDA.W #$0017                                               ;84AD78|A91700  |      ;
     LDX.W #$0000                                               ;84AD7B|A20000  |      ;
     LDY.W #$0050                                               ;84AD7E|A05000  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84AD81|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;84AD81|223F8084|84803F;
     JMP.W .label8                                              ;84AD85|4C88AD  |84AD88;
  
  
@@ -5657,7 +5657,7 @@ fAIAction0x35_UpdateHorse:
     REP #$20                                                   ;84AE27|C220    |      ;
     LDX.W #$0000                                               ;84AE29|A20000  |      ;
     LDY.W #$004C                                               ;84AE2C|A04C00  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84AE2F|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;84AE2F|223F8084|84803F;
     BRA .label12                                               ;84AE33|8034    |84AE69;
  
  
@@ -5683,7 +5683,7 @@ fAIAction0x35_UpdateHorse:
     REP #$20                                                   ;84AE5B|C220    |      ;
     LDX.W #$0000                                               ;84AE5D|A20000  |      ;
     LDY.W #$004A                                               ;84AE60|A04A00  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84AE63|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;84AE63|223F8084|84803F;
     BRA .label12                                               ;84AE67|8000    |84AE69;
  
  
@@ -5952,7 +5952,7 @@ fAIAction0x36_UpdateDog:
     LDA.W #$0016                                               ;84B05E|A91600  |      ;
     LDX.W #$0000                                               ;84B061|A20000  |      ;
     LDY.W #$003D                                               ;84B064|A03D00  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84B067|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;84B067|223F8084|84803F;
     REP #$30                                                   ;84B06B|C230    |      ;
     LDA.L $7F1F58                                              ;84B06D|AF581F7F|7F1F58;
     AND.W #$FFFE                                               ;84B071|29FEFF  |      ;
@@ -5990,7 +5990,7 @@ fAIAction0x36_UpdateDog:
     LDA.W #$0016                                               ;84B0AB|A91600  |      ;
     LDX.W #$0000                                               ;84B0AE|A20000  |      ;
     LDY.W #$003E                                               ;84B0B1|A03E00  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84B0B4|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;84B0B4|223F8084|84803F;
     BRA .loop                                                  ;84B0B8|80DC    |84B096;
  
  
@@ -5999,7 +5999,7 @@ fAIAction0x36_UpdateDog:
     LDA.W #$0016                                               ;84B0BC|A91600  |      ;
     LDX.W #$0000                                               ;84B0BF|A20000  |      ;
     LDY.W #$0040                                               ;84B0C2|A04000  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84B0C5|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;84B0C5|223F8084|84803F;
     BRA .loop                                                  ;84B0C9|80CB    |84B096;
  
  
@@ -6008,7 +6008,7 @@ fAIAction0x36_UpdateDog:
     LDA.W #$0016                                               ;84B0CD|A91600  |      ;
     LDX.W #$0000                                               ;84B0D0|A20000  |      ;
     LDY.W #$0040                                               ;84B0D3|A04000  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84B0D6|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;84B0D6|223F8084|84803F;
     BRA .loop                                                  ;84B0DA|80BA    |84B096;
  
  
@@ -6017,7 +6017,7 @@ fAIAction0x36_UpdateDog:
     LDA.W #$0016                                               ;84B0DE|A91600  |      ;
     LDX.W #$0000                                               ;84B0E1|A20000  |      ;
     LDY.W #$0047                                               ;84B0E4|A04700  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84B0E7|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;84B0E7|223F8084|84803F;
     BRA .loop                                                  ;84B0EB|80A9    |84B096;
  
  
@@ -6026,7 +6026,7 @@ fAIAction0x36_UpdateDog:
     LDA.W #$0016                                               ;84B0EF|A91600  |      ;
     LDX.W #$0000                                               ;84B0F2|A20000  |      ;
     LDY.W #$0048                                               ;84B0F5|A04800  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84B0F8|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;84B0F8|223F8084|84803F;
     BRA .loop                                                  ;84B0FC|8098    |84B096;
  
  
@@ -6050,7 +6050,7 @@ fAIAction0x36_UpdateDog:
     LDA.W #$0016                                               ;84B119|A91600  |      ;
     LDX.W #$0000                                               ;84B11C|A20000  |      ;
     LDY.W #$003C                                               ;84B11F|A03C00  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84B122|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;84B122|223F8084|84803F;
     REP #$30                                                   ;84B126|C230    |      ;
     LDA.L $7F1F58                                              ;84B128|AF581F7F|7F1F58;
     AND.W #$FFFD                                               ;84B12C|29FDFF  |      ;
@@ -6064,7 +6064,7 @@ fAIAction0x36_UpdateDog:
     LDA.W #$0016                                               ;84B13B|A91600  |      ;
     LDX.W #$0000                                               ;84B13E|A20000  |      ;
     LDY.W #$0041                                               ;84B141|A04100  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84B144|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;84B144|223F8084|84803F;
     REP #$30                                                   ;84B148|C230    |      ;
     LDA.L $7F1F58                                              ;84B14A|AF581F7F|7F1F58;
     AND.W #$FFFD                                               ;84B14E|29FDFF  |      ;
@@ -6078,7 +6078,7 @@ fAIAction0x36_UpdateDog:
     LDA.W #$0016                                               ;84B15D|A91600  |      ;
     LDX.W #$0000                                               ;84B160|A20000  |      ;
     LDY.W #$0049                                               ;84B163|A04900  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84B166|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;84B166|223F8084|84803F;
     JMP.W .label24                                             ;84B16A|4C5CB2  |84B25C;
  
  
@@ -6087,7 +6087,7 @@ fAIAction0x36_UpdateDog:
     LDA.W #$0016                                               ;84B16F|A91600  |      ;
     LDX.W #$0000                                               ;84B172|A20000  |      ;
     LDY.W #$0044                                               ;84B175|A04400  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84B178|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;84B178|223F8084|84803F;
     JMP.W .label24                                             ;84B17C|4C5CB2  |84B25C;
  
  
@@ -6109,7 +6109,7 @@ fAIAction0x36_UpdateDog:
     LDA.W #$0016                                               ;84B196|A91600  |      ;
     LDX.W #$0000                                               ;84B199|A20000  |      ;
     LDY.W #$003D                                               ;84B19C|A03D00  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84B19F|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;84B19F|223F8084|84803F;
     REP #$30                                                   ;84B1A3|C230    |      ;
     LDA.L $7F1F58                                              ;84B1A5|AF581F7F|7F1F58;
     AND.W #$FFFB                                               ;84B1A9|29FBFF  |      ;
@@ -6123,7 +6123,7 @@ fAIAction0x36_UpdateDog:
     LDA.W #$0016                                               ;84B1B8|A91600  |      ;
     LDX.W #$0000                                               ;84B1BB|A20000  |      ;
     LDY.W #$0045                                               ;84B1BE|A04500  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84B1C1|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;84B1C1|223F8084|84803F;
     REP #$30                                                   ;84B1C5|C230    |      ;
     LDA.L $7F1F58                                              ;84B1C7|AF581F7F|7F1F58;
     AND.W #$FFFB                                               ;84B1CB|29FBFF  |      ;
@@ -6137,7 +6137,7 @@ fAIAction0x36_UpdateDog:
     LDA.W #$0016                                               ;84B1DA|A91600  |      ;
     LDX.W #$0000                                               ;84B1DD|A20000  |      ;
     LDY.W #$0043                                               ;84B1E0|A04300  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84B1E3|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;84B1E3|223F8084|84803F;
     JMP.W .label24                                             ;84B1E7|4C5CB2  |84B25C;
  
  
@@ -6157,7 +6157,7 @@ fAIAction0x36_UpdateDog:
     LDA.W #$0016                                               ;84B1FD|A91600  |      ;
     LDX.W #$0000                                               ;84B200|A20000  |      ;
     LDY.W #$0041                                               ;84B203|A04100  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84B206|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;84B206|223F8084|84803F;
     REP #$30                                                   ;84B20A|C230    |      ;
     LDA.L $7F1F58                                              ;84B20C|AF581F7F|7F1F58;
     AND.W #$FFF7                                               ;84B210|29F7FF  |      ;
@@ -6171,7 +6171,7 @@ fAIAction0x36_UpdateDog:
     LDA.W #$0016                                               ;84B21E|A91600  |      ;
     LDX.W #$0000                                               ;84B221|A20000  |      ;
     LDY.W #$0046                                               ;84B224|A04600  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84B227|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;84B227|223F8084|84803F;
     BRA .label24                                               ;84B22B|802F    |84B25C;
  
  
@@ -6188,7 +6188,7 @@ fAIAction0x36_UpdateDog:
     LDA.W #$0016                                               ;84B23C|A91600  |      ;
     LDX.W #$0000                                               ;84B23F|A20000  |      ;
     LDY.W #$003C                                               ;84B242|A03C00  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84B245|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;84B245|223F8084|84803F;
     REP #$30                                                   ;84B249|C230    |      ;
     LDA.L $7F1F58                                              ;84B24B|AF581F7F|7F1F58;
     AND.W #$FFEF                                               ;84B24F|29EFFF  |      ;
@@ -6238,7 +6238,7 @@ fAIAction0x36_UpdateDog:
     REP #$20                                                   ;84B2A2|C220    |      ;
     LDX.W #$0000                                               ;84B2A4|A20000  |      ;
     LDY.W #$003F                                               ;84B2A7|A03F00  |      ;
-    JSL.L fAI_Unknown84803F                                    ;84B2AA|223F8084|84803F;
+    JSL.L fAI_SetSlotScript                                    ;84B2AA|223F8084|84803F;
     REP #$30                                                   ;84B2AE|C230    |      ;
     STZ.B strcVariables.n16Temp3                               ;84B2B0|6482    |000082;
     STZ.B strcVariables.n16Temp4                               ;84B2B2|6484    |000084;
@@ -6343,7 +6343,7 @@ fAIAction0x37:
     LDY.W #$0012                                               ;84B359|A01200  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;84B35C|B7CC    |0000CC;
     STA.B strcObject.gameObjectIdx                             ;84B35E|85A5    |0000A5;
-    JSL.L fObject_Unknown8581A2                                ;84B360|22A28185|8581A2;
+    JSL.L fObject_Destroy                                ;84B360|22A28185|8581A2;
     RTS                                                        ;84B364|60      |      ;
  
  
@@ -6868,7 +6868,7 @@ fAIAction0x49:
     SEP #$20                                                   ;84B924|E220    |      ;
     LDA.B #$B3                                                 ;84B926|A9B3    |      ;
     STA.B ptrTemp0x72+2                                        ;84B928|8574    |000074;
-    JSL.L fAI_Unknown848895                                    ;84B92A|22958884|848895;
+    JSL.L fAI_LoadSlotSpriteFromDirTable                                    ;84B92A|22958884|848895;
     REP #$30                                                   ;84B92E|C230    |      ;
     LDY.W #$0010                                               ;84B930|A01000  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;84B933|B7CC    |0000CC;
@@ -7074,7 +7074,7 @@ fAIAction0x4D:
     SEP #$20                                                   ;84BAFA|E220    |      ;
     LDA.B #$B3                                                 ;84BAFC|A9B3    |      ;
     STA.B ptrTemp0x72+2                                        ;84BAFE|8574    |000074;
-    JSL.L fAI_Unknown848895                                    ;84BB00|22958884|848895;
+    JSL.L fAI_LoadSlotSpriteFromDirTable                                    ;84BB00|22958884|848895;
     SEP #$20                                                   ;84BB04|E220    |      ;
     REP #$10                                                   ;84BB06|C210    |      ;
     LDY.W #$0001                                               ;84BB08|A00100  |      ;

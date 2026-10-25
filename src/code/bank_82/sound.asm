@@ -850,7 +850,7 @@ fUnknown_82AF00:
   + REP #$30                                                   ;82AFFF|C230    |      ;
     LDX.B strcVariables.n16Temp3                               ;82B001|A682    |000082;
     LDY.B strcVariables.n16Temp4                               ;82B003|A484    |000084;
-    JSL.L fUnknown_81A83A                                      ;82B005|223AA881|81A83A;
+    JSL.L fMap_CalcTilemapBufferOffset                                      ;82B005|223AA881|81A83A;
  
 .caseA0:
     REP #$30                                                   ;82B009|C230    |      ;

@@ -71,7 +71,7 @@ fMapEngine_AreaEvents:
     dw fAreaEvents_MountainTop                                 ;83CB17|        |83E586;
     dw fAreaEvents_MountainTop                                 ;83CB19|        |83E586;
     dw fAreaEvents_SNF_MountainTop                             ;83CB1B|        |83E632;
-    dw fAreaEvents_MountainTopUnknown                          ;83CB1D|        |83E690;
+    dw fAreaEvents_MountainTopSpringDay1                          ;83CB1D|        |83E690;
     dw fAreaEvents_MountainTopBean                             ;83CB1F|        |83E74C;
     dw fAreaEvents_Intro                                       ;83CB21|        |83E76D;
     dw fAreaEvents_Endings                                     ;83CB23|        |83EBA6;
@@ -1915,7 +1915,7 @@ fAreaEvents_House:
     LDA.W #$0010                                               ;83DF3A|A91000  |      ;
     LDX.W #$0000                                               ;83DF3D|A20000  |      ;
     LDY.W #$001F                                               ;83DF40|A01F00  |      ;
-    JSL.L fAI_Unknown8480F8                                    ;83DF43|22F88084|8480F8;
+    JSL.L fAI_StartSlotScriptAtFrontTile                                    ;83DF43|22F88084|8480F8;
  
   + REP #$30                                                   ;83DF47|C230    |      ;
     %CheckFlag(event6, $0080)
@@ -1927,7 +1927,7 @@ fAreaEvents_House:
     %UnsetFlag(event6, $0080)
     SEP #$20                                                   ;83DF60|E220    |      ;
     LDA.B #$19                                                 ;83DF62|A919    |      ;
-    JSL.L fAudioUnknown_8382C6                                 ;83DF64|22C68283|8382C6;
+    JSL.L fAudio_PlayTrackThenResumeMapMusic                                 ;83DF64|22C68283|8382C6;
     SEP #$20                                                   ;83DF68|E220    |      ;
     REP #$10                                                   ;83DF6A|C210    |      ;
     LDA.B #$02                                                 ;83DF6C|A902    |      ;
@@ -1990,7 +1990,7 @@ fAreaEvents_House:
     %UnsetFlag(event6, $0100)
     SEP #$20                                                   ;83E00E|E220    |      ;
     LDA.B #$15                                                 ;83E010|A915    |      ;
-    JSL.L fAudioUnknown_8382C6                                 ;83E012|22C68283|8382C6;
+    JSL.L fAudio_PlayTrackThenResumeMapMusic                                 ;83E012|22C68283|8382C6;
  
   + REP #$30                                                   ;83E016|C230    |      ;
     %CheckFlag(event6, $0200)
@@ -2001,13 +2001,13 @@ fAreaEvents_House:
     LDA.B #$22                                                 ;83E030|A922    |      ;
     LDX.W #$0007                                               ;83E032|A20700  |      ;
     LDY.W #$0014                                               ;83E035|A01400  |      ;
-    JSL.L fAudioUnknown_8382FE                                 ;83E038|22FE8283|8382FE;
+    JSL.L fAudio_PlaySoundEffectAndWait                                 ;83E038|22FE8283|8382FE;
     SEP #$20                                                   ;83E03C|E220    |      ;
     REP #$10                                                   ;83E03E|C210    |      ;
     LDA.B #$22                                                 ;83E040|A922    |      ;
     LDX.W #$0007                                               ;83E042|A20700  |      ;
     LDY.W #$001E                                               ;83E045|A01E00  |      ;
-    JSL.L fAudioUnknown_8382FE                                 ;83E048|22FE8283|8382FE;
+    JSL.L fAudio_PlaySoundEffectAndWait                                 ;83E048|22FE8283|8382FE;
  
   + REP #$30                                                   ;83E04C|C230    |      ;
     %CheckFlag(event6, $0020)
@@ -2017,7 +2017,7 @@ fAreaEvents_House:
     LDA.B #$20                                                 ;83E05B|A920    |      ;
     LDX.W #$0007                                               ;83E05D|A20700  |      ;
     LDY.W #$003C                                               ;83E060|A03C00  |      ;
-    JSL.L fAudioUnknown_8382FE                                 ;83E063|22FE8283|8382FE;
+    JSL.L fAudio_PlaySoundEffectAndWait                                 ;83E063|22FE8283|8382FE;
     REP #$30                                                   ;83E067|C230    |      ;
     %UnsetFlag(event6, $0020)
  
@@ -2435,7 +2435,7 @@ fAreaEvents_Mine:
     LDA.W #$0010                                               ;83E4E2|A91000  |      ;
     LDX.W #$0000                                               ;83E4E5|A20000  |      ;
     LDY.W #$001F                                               ;83E4E8|A01F00  |      ;
-    JSL.L fAI_Unknown8480F8                                    ;83E4EB|22F88084|8480F8;
+    JSL.L fAI_StartSlotScriptAtFrontTile                                    ;83E4EB|22F88084|8480F8;
  
   + REP #$30                                                   ;83E4EF|C230    |      ;
     LDA.B strcPlayer.posY                                      ;83E4F1|A5D8    |0000D8;
@@ -2599,7 +2599,7 @@ fAreaEvents_SNF_Spa:
     RTS                                                        ;83E68F|60      |      ;
  
  
-fAreaEvents_MountainTopUnknown:
+fAreaEvents_MountainTopSpringDay1:
     SEP #$20                                                   ;83E690|E220    |      ;
     REP #$10                                                   ;83E692|C210    |      ;
     LDA.L nCurrentSeasonID                                     ;83E694|AF191F7F|7F1F19;

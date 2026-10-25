@@ -1,16 +1,16 @@
 ; Bank $83 module "audio" - starts at $8382C6
  
  
-fAudioUnknown_8382C6:
+fAudio_PlayTrackThenResumeMapMusic:
     SEP #$20                                                   ;8382C6|E220    |      ;
     REP #$10                                                   ;8382C8|C210    |      ;
     PHA                                                        ;8382CA|48      |      ;
-    JSL.L fAudioUnknown_83841F                                 ;8382CB|221F8483|83841F;
+    JSL.L fAudio_FadeOutOnTrackChangeFast                                 ;8382CB|221F8483|83841F;
     SEP #$20                                                   ;8382CF|E220    |      ;
     PLA                                                        ;8382D1|68      |      ;
     STA.W strcAudio.trackId                                    ;8382D2|8D1001  |000110;
-    JSL.L fAudioUnknown_8383A4                                 ;8382D5|22A48383|8383A4;
-    JSL.L fAudioUnknown_838380                                 ;8382D9|22808383|838380;
+    JSL.L fAudio_LoadPendingTrack                                 ;8382D5|22A48383|8383A4;
+    JSL.L fAudio_StartPendingTrack                                 ;8382D9|22808383|838380;
     SEP #$20                                                   ;8382DD|E220    |      ;
     LDA.W strcAudio.trackId                                    ;8382DF|AD1001  |000110;
     STA.W strcAudio.trackIdCopy                                ;8382E2|8D1701  |000117;
@@ -21,11 +21,11 @@ fAudioUnknown_8382C6:
     LDA.W nDestinationAreaId                                   ;8382F0|AD8B09  |00098B;
     STA.B strcMap.loadAreaId                                   ;8382F3|8522    |000022;
     JSL.L fAudioEngine_MapMusicHandler                         ;8382F5|22DE9580|8095DE;
-    JSL.L fAudioUnknown_838401                                 ;8382F9|22018483|838401;
+    JSL.L fAudio_FadeOutOnTrackChangeSlow                                 ;8382F9|22018483|838401;
     RTL                                                        ;8382FD|6B      |      ;
  
  
-fAudioUnknown_8382FE:
+fAudio_PlaySoundEffectAndWait:
     SEP #$20                                                   ;8382FE|E220    |      ;
     REP #$10                                                   ;838300|C210    |      ;
     STA.W strcAudio.reg114                                     ;838302|8D1401  |000114;
@@ -43,7 +43,7 @@ fAudioUnknown_8382FE:
     LDA.L nToolSoundData_80B8CD,X                              ;838319|BFCDB880|80B8CD;
     INC A                                                      ;83831D|1A      |      ;
     STA.W strcAudio.index                                      ;83831E|8D0301  |000103;
-    JSL.L fAudioUnknown_83833E                                 ;838321|223E8383|83833E;
+    JSL.L fAudio_PrepareSoundEffectSample                                 ;838321|223E8383|83833E;
     JSL.L fAudioSetRegister2to0A                               ;838325|22328383|838332;
     REP #$30                                                   ;838329|C230    |      ;
     PLY                                                        ;83832B|7A      |      ;
@@ -56,11 +56,11 @@ fAudioSetRegister2to0A:
     SEP #$20                                                   ;838332|E220    |      ;
     LDA.B #$0A                                                 ;838334|A90A    |      ;
     STA.W strcAudio.reg116                                     ;838336|8D1601  |000116;
-    JSL.L fAudioUnknown_838DDF                                 ;838339|22DF8D83|838DDF;
+    JSL.L fAudio_SendPlaySfxCommand                                 ;838339|22DF8D83|838DDF;
     RTL                                                        ;83833D|6B      |      ;
  
  
-fAudioUnknown_83833E:
+fAudio_PrepareSoundEffectSample:
     SEP #$20                                                   ;83833E|E220    |      ;
     LDA.B #$00                                                 ;838340|A900    |      ;
     XBA                                                        ;838342|EB      |      ;
@@ -74,7 +74,7 @@ fAudioUnknown_83833E:
     TXA                                                        ;838352|8A      |      ;
     INC A                                                      ;838353|1A      |      ;
     SEP #$20                                                   ;838354|E220    |      ;
-    JSL.L fAudioUnknown_8389C7                                 ;838356|22C78983|8389C7;
+    JSL.L fAudio_FreeSamplesFromSlot                                 ;838356|22C78983|8389C7;
     JSL.L fCore_WaitForNextNMI                                 ;83835A|22458680|808645;
  
   + SEP #$20                                                   ;83835E|E220    |      ;
@@ -84,9 +84,9 @@ fAudioUnknown_83833E:
     REP #$20                                                   ;838366|C220    |      ;
     TAX                                                        ;838368|AA      |      ;
     SEP #$20                                                   ;838369|E220    |      ;
-    LDA.L aAudioUnknown_83927F,X                               ;83836B|BF7F9283|83927F;
+    LDA.L aAudioSfxSampleIdTable,X                               ;83836B|BF7F9283|83927F;
     BEQ +                                                      ;83836F|F004    |838375;
-    JSL.L fAudioUnknown_838AFF                                 ;838371|22FF8A83|838AFF;
+    JSL.L fAudio_LoadSfxSample                                 ;838371|22FF8A83|838AFF;
  
   + RTL                                                        ;838375|6B      |      ;
  
@@ -99,7 +99,7 @@ fAudioUnused_838376:
     RTL                                                        ;83837F|6B      |      ;
  
  
-fAudioUnknown_838380:
+fAudio_StartPendingTrack:
     SEP #$20                                                   ;838380|E220    |      ;
     LDA.W strcAudio.trackId                                    ;838382|AD1001  |000110;
     BEQ +                                                      ;838385|F017    |83839E;
@@ -111,27 +111,27 @@ fAudioUnknown_838380:
     STA.W strcAudio.unk111                                     ;838392|8D1101  |000111;
     LDA.B #$40                                                 ;838395|A940    |      ;
     STA.W strcAudio.unk113                                     ;838397|8D1301  |000113;
-    JSL.L fAudioUnknown_838D39                                 ;83839A|22398D83|838D39;
+    JSL.L fAudio_SendStartTrackCommand                                 ;83839A|22398D83|838D39;
  
   + SEP #$20                                                   ;83839E|E220    |      ;
     STZ.W strcAudio.toolId                                     ;8383A0|9C1901  |000119;
     RTL                                                        ;8383A3|6B      |      ;
  
  
-fAudioUnknown_8383A4:
+fAudio_LoadPendingTrack:
     SEP #$20                                                   ;8383A4|E220    |      ;
     LDA.W strcAudio.trackId                                    ;8383A6|AD1001  |000110;
     CMP.W strcAudio.trackIdCopy                                ;8383A9|CD1701  |000117;
     BEQ +                                                      ;8383AC|F022    |8383D0;
     LDA.B #$00                                                 ;8383AE|A900    |      ;
-    JSL.L fAudioUnknown_8389C7                                 ;8383B0|22C78983|8389C7;
+    JSL.L fAudio_FreeSamplesFromSlot                                 ;8383B0|22C78983|8389C7;
     SEP #$20                                                   ;8383B4|E220    |      ;
     LDA.W strcAudio.trackId                                    ;8383B6|AD1001  |000110;
     BEQ +                                                      ;8383B9|F015    |8383D0;
     CMP.B #$FF                                                 ;8383BB|C9FF    |      ;
     BEQ +                                                      ;8383BD|F011    |8383D0;
-    JSL.L fAudioUnknown_838A26                                 ;8383BF|22268A83|838A26;
-    JSL.L fAudioUnknown_83878C                                 ;8383C3|228C8783|83878C;
+    JSL.L fAudio_UploadTrackData                                 ;8383BF|22268A83|838A26;
+    JSL.L fAudio_LoadTrackSamples                                 ;8383C3|228C8783|83878C;
     BRA +                                                      ;8383C7|8007    |8383D0;
  
     SEP #$20                                                   ;8383C9|E220    |      ;
@@ -158,13 +158,13 @@ fAudioUnknown_8383A4:
     SEP #$20                                                   ;8383F3|E220    |      ;
     LDA.L nToolSoundData_80B8CD,X                              ;8383F5|BFCDB880|80B8CD;
     STA.W strcAudio.index                                      ;8383F9|8D0301  |000103;
-    JSL.L fAudioUnknown_83833E                                 ;8383FC|223E8383|83833E;
+    JSL.L fAudio_PrepareSoundEffectSample                                 ;8383FC|223E8383|83833E;
  
 fAudioReturn_838400:
     RTL                                                        ;838400|6B      |      ; FIXME: I want to be .return
  
  
-fAudioUnknown_838401:
+fAudio_FadeOutOnTrackChangeSlow:
     SEP #$20                                                   ;838401|E220    |      ;
     LDA.W strcAudio.trackId                                    ;838403|AD1001  |000110;
     CMP.W strcAudio.trackIdCopy                                ;838406|CD1701  |000117;
@@ -175,13 +175,13 @@ fAudioUnknown_838401:
     STA.W strcAudio.unk112                                     ;838412|8D1201  |000112;
     LDA.B #$40                                                 ;838415|A940    |      ;
     STA.W strcAudio.unk113                                     ;838417|8D1301  |000113;
-    JSL.L fAudioUnknown_838D8B                                 ;83841A|228B8D83|838D8B;
+    JSL.L fAudio_SendFadeOutCommand                                 ;83841A|228B8D83|838D8B;
  
 .return:
     RTL                                                        ;83841E|6B      |      ;
  
  
-fAudioUnknown_83841F:
+fAudio_FadeOutOnTrackChangeFast:
     SEP #$20                                                   ;83841F|E220    |      ;
     LDA.W strcAudio.trackId                                    ;838421|AD1001  |000110;
     CMP.W strcAudio.trackIdCopy                                ;838424|CD1701  |000117;
@@ -192,7 +192,7 @@ fAudioUnknown_83841F:
     STA.W strcAudio.unk112                                     ;838430|8D1201  |000112;
     LDA.B #$10                                                 ;838433|A910    |      ;
     STA.W strcAudio.unk113                                     ;838435|8D1301  |000113;
-    JSL.L fAudioUnknown_838D8B                                 ;838438|228B8D83|838D8B;
+    JSL.L fAudio_SendFadeOutCommand                                 ;838438|228B8D83|838D8B;
  
 .return:
     RTL                                                        ;83843C|6B      |      ;
@@ -286,12 +286,12 @@ fAudio_UploadData:
     RTL                                                        ;8384D2|6B      |      ;
  
  
-fAudioUnknown_8384D3:
+fAudio_UploadSpcDataBlock_B2D120:
     SEP #$20                                                   ;8384D3|E220    |      ;
     REP #$10                                                   ;8384D5|C210    |      ;
     LDA.B #$01                                                 ;8384D7|A901    |      ;
     STA.B strcVariables.n8Temp1                                ;8384D9|8592    |000092;
-    JSR.W fAudioUnknown_838E8B                                 ;8384DB|208B8E  |838E8B;
+    JSR.W fAudio_SendSpcCommand                                 ;8384DB|208B8E  |838E8B;
  
 .wait1:
     SEP #$20                                                   ;8384DE|E220    |      ;
@@ -385,7 +385,7 @@ fAudioUnknown_8384D3:
     RTL                                                        ;838597|6B      |      ;
  
  
-fAudio_PlayAudio_Unknown838598:
+fAudio_LoadCommonSamples:
     SEP #$20                                                   ;838598|E220    |      ; X: nAudioId (0x00 - 0x09)
     REP #$10                                                   ;83859A|C210    |      ;
     LDX.W #$0000                                               ;83859C|A20000  |      ;
@@ -403,7 +403,7 @@ fAudio_PlayAudio_Unknown838598:
   + SEP #$20                                                   ;8385B0|E220    |      ;
     LDA.B #$02                                                 ;8385B2|A902    |      ;
     STA.B strcVariables.n8Temp1                                ;8385B4|8592    |000092;
-    JSR.W fAudioUnknown_838E8B                                 ;8385B6|208B8E  |838E8B;
+    JSR.W fAudio_SendSpcCommand                                 ;8385B6|208B8E  |838E8B;
  
 .wait1:
     SEP #$20                                                   ;8385B9|E220    |      ;
@@ -645,7 +645,7 @@ fAudio_PlayAudio_Unknown838598:
     RTL                                                        ;83878B|6B      |      ;
  
  
-fAudioUnknown_83878C:
+fAudio_LoadTrackSamples:
     SEP #$20                                                   ;83878C|E220    |      ;
     REP #$10                                                   ;83878E|C210    |      ;
     LDX.W #$0000                                               ;838790|A20000  |      ;
@@ -699,7 +699,7 @@ fAudioUnknown_83878C:
     SEP #$20                                                   ;8387E7|E220    |      ;
     LDA.B #$03                                                 ;8387E9|A903    |      ;
     STA.B strcVariables.n8Temp1                                ;8387EB|8592    |000092;
-    JSR.W fAudioUnknown_838E8B                                 ;8387ED|208B8E  |838E8B;
+    JSR.W fAudio_SendSpcCommand                                 ;8387ED|208B8E  |838E8B;
  
 .wait1:
     SEP #$20                                                   ;8387F0|E220    |      ;
@@ -945,21 +945,21 @@ fAudioUnknown_83878C:
     RTL                                                        ;8389C6|6B      |      ;
  
  
-fAudioUnknown_8389C7:
+fAudio_FreeSamplesFromSlot:
     SEP #$20                                                   ;8389C7|E220    |      ;
     PHA                                                        ;8389C9|48      |      ;
     STA.B strcVariables.n8Temp3                                ;8389CA|8594    |000094;
  
   - LDA.B strcVariables.n8Temp3                                ;8389CC|A594    |000094;
     BNE .label1                                                ;8389CE|D005    |8389D5;
-    JSR.W fAudioUnknown_838EC9                                 ;8389D0|20C98E  |838EC9;
+    JSR.W fAudio_ReadSpcStatusBits0And4                                 ;8389D0|20C98E  |838EC9;
     BNE -                                                      ;8389D3|D0F7    |8389CC;
  
 .label1:
     REP #$10                                                   ;8389D5|C210    |      ;
     LDA.B #$04                                                 ;8389D7|A904    |      ;
     STA.B strcVariables.n8Temp1                                ;8389D9|8592    |000092;
-    JSR.W fAudioUnknown_838E8B                                 ;8389DB|208B8E  |838E8B;
+    JSR.W fAudio_SendSpcCommand                                 ;8389DB|208B8E  |838E8B;
  
 .wait1:
     SEP #$20                                                   ;8389DE|E220    |      ;
@@ -1002,12 +1002,12 @@ fAudioUnknown_8389C7:
     RTL                                                        ;838A25|6B      |      ;
  
  
-fAudioUnknown_838A26:
+fAudio_UploadTrackData:
     SEP #$20                                                   ;838A26|E220    |      ;
     REP #$10                                                   ;838A28|C210    |      ;
     LDA.B #$05                                                 ;838A2A|A905    |      ;
     STA.B strcVariables.n8Temp1                                ;838A2C|8592    |000092;
-    JSR.W fAudioUnknown_838E8B                                 ;838A2E|208B8E  |838E8B;
+    JSR.W fAudio_SendSpcCommand                                 ;838A2E|208B8E  |838E8B;
  
 .wait1:
     SEP #$20                                                   ;838A31|E220    |      ;
@@ -1025,7 +1025,7 @@ fAudioUnknown_838A26:
     ASL A                                                      ;838A4C|0A      |      ;
     REP #$20                                                   ;838A4D|C220    |      ;
     TAX                                                        ;838A4F|AA      |      ;
-    LDA.L aAudioUnknown_838F4F,X                               ;838A50|BF4F8F83|838F4F;
+    LDA.L aAudioTrackDataSizeTable,X                               ;838A50|BF4F8F83|838F4F;
     STA.B strcVariables.n16Temp1                               ;838A54|857E    |00007E;
     LDA.W #$0003                                               ;838A56|A90300  |      ;
     STA.B strcVariables.n16Temp2                               ;838A59|8580    |000080;
@@ -1113,13 +1113,13 @@ fAudioUnknown_838A26:
     RTL                                                        ;838AFE|6B      |      ;
  
  
-fAudioUnknown_838AFF:
+fAudio_LoadSfxSample:
     SEP #$20                                                   ;838AFF|E220    |      ;
     REP #$10                                                   ;838B01|C210    |      ;
     LDX.W #$0000                                               ;838B03|A20000  |      ;
     LDA.B #$03                                                 ;838B06|A903    |      ;
     STA.B strcVariables.n8Temp1                                ;838B08|8592    |000092;
-    JSR.W fAudioUnknown_838E8B                                 ;838B0A|208B8E  |838E8B;
+    JSR.W fAudio_SendSpcCommand                                 ;838B0A|208B8E  |838E8B;
  
 .wait1:
     SEP #$20                                                   ;838B0D|E220    |      ;
@@ -1135,7 +1135,7 @@ fAudioUnknown_838AFF:
     XBA                                                        ;838B24|EB      |      ;
     LDA.W strcAudio.reg114                                     ;838B25|AD1401  |000114;
     TAX                                                        ;838B28|AA      |      ;
-    LDA.L aAudioUnknown_83927F,X                               ;838B29|BF7F9283|83927F;
+    LDA.L aAudioSfxSampleIdTable,X                               ;838B29|BF7F9283|83927F;
     STA.B strcVariables.n8Temp3                                ;838B2D|8594    |000094;
     LDA.W strcAudio.index                                      ;838B2F|AD0301  |000103;
     TAX                                                        ;838B32|AA      |      ;
@@ -1401,13 +1401,13 @@ fAudioUnused_838CF3:
     RTL                                                        ;838D38|6B      |      ;
  
  
-fAudioUnknown_838D39:
-    JSR.W fAudioUnknown_838EC9                                 ;838D39|20C98E  |838EC9;
-    BNE fAudioUnknown_838D39                                   ;838D3C|D0FB    |838D39;
+fAudio_SendStartTrackCommand:
+    JSR.W fAudio_ReadSpcStatusBits0And4                                 ;838D39|20C98E  |838EC9;
+    BNE fAudio_SendStartTrackCommand                                   ;838D3C|D0FB    |838D39;
     SEP #$20                                                   ;838D3E|E220    |      ;
     LDA.B #$08                                                 ;838D40|A908    |      ;
     STA.B strcVariables.n8Temp1                                ;838D42|8592    |000092;
-    JSR.W fAudioUnknown_838E8B                                 ;838D44|208B8E  |838E8B;
+    JSR.W fAudio_SendSpcCommand                                 ;838D44|208B8E  |838E8B;
  
   - SEP #$20                                                   ;838D47|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838D49|AD4321  |002143;
@@ -1442,14 +1442,14 @@ fAudioUnknown_838D39:
     RTL                                                        ;838D8A|6B      |      ;
  
  
-fAudioUnknown_838D8B:
+fAudio_SendFadeOutCommand:
     SEP #$20                                                   ;838D8B|E220    |      ;
-    JSR.W fAudioUnknown_838EC9                                 ;838D8D|20C98E  |838EC9;
+    JSR.W fAudio_ReadSpcStatusBits0And4                                 ;838D8D|20C98E  |838EC9;
     BEQ .return                                                ;838D90|F04C    |838DDE;
     SEP #$20                                                   ;838D92|E220    |      ;
     LDA.B #$09                                                 ;838D94|A909    |      ;
     STA.B strcVariables.n8Temp1                                ;838D96|8592    |000092;
-    JSR.W fAudioUnknown_838E8B                                 ;838D98|208B8E  |838E8B;
+    JSR.W fAudio_SendSpcCommand                                 ;838D98|208B8E  |838E8B;
  
   - SEP #$20                                                   ;838D9B|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838D9D|AD4321  |002143;
@@ -1486,13 +1486,13 @@ fAudioUnknown_838D8B:
     RTL                                                        ;838DDE|6B      |      ;
  
  
-fAudioUnknown_838DDF:
-    JSR.W fAudioUnknown_838EE4                                 ;838DDF|20E48E  |838EE4; A: nArg1
+fAudio_SendPlaySfxCommand:
+    JSR.W fAudio_ReadSpcStatusBit4                                 ;838DDF|20E48E  |838EE4; A: nArg1
     BNE .return                                                ;838DE2|D04D    |838E31;
     SEP #$20                                                   ;838DE4|E220    |      ;
     LDA.B #$0A                                                 ;838DE6|A90A    |      ;
     STA.B strcVariables.n8Temp1                                ;838DE8|8592    |000092;
-    JSR.W fAudioUnknown_838E8B                                 ;838DEA|208B8E  |838E8B;
+    JSR.W fAudio_SendSpcCommand                                 ;838DEA|208B8E  |838E8B;
  
   - SEP #$20                                                   ;838DED|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838DEF|AD4321  |002143;
@@ -1527,13 +1527,13 @@ fAudioUnknown_838DDF:
     RTL                                                        ;838E31|6B      |      ;
  
  
-fAudioUnknown_838E32:
+fAudio_SendCommand0B:
     SEP #$20                                                   ;838E32|E220    |      ;
     STA.B strcVariables.n8Temp3                                ;838E34|8594    |000094;
     REP #$10                                                   ;838E36|C210    |      ;
     LDA.B #$0B                                                 ;838E38|A90B    |      ;
     STA.B strcVariables.n8Temp1                                ;838E3A|8592    |000092;
-    JSR.W fAudioUnknown_838E8B                                 ;838E3C|208B8E  |838E8B;
+    JSR.W fAudio_SendSpcCommand                                 ;838E3C|208B8E  |838E8B;
  
   - SEP #$20                                                   ;838E3F|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838E41|AD4321  |002143;
@@ -1570,17 +1570,17 @@ fAudioUnknown_838E32:
     REP #$10                                                   ;838E81|C210    |      ;
     LDA.B #$0C                                                 ;838E83|A90C    |      ;
     STA.B strcVariables.n8Temp1                                ;838E85|8592    |000092;
-    JSR.W fAudioUnknown_838E8B                                 ;838E87|208B8E  |838E8B;
+    JSR.W fAudio_SendSpcCommand                                 ;838E87|208B8E  |838E8B;
     RTL                                                        ;838E8A|6B      |      ;
  
  
-fAudioUnknown_838E8B:
+fAudio_SendSpcCommand:
     SEP #$20                                                   ;838E8B|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838E8D|AD4321  |002143;
     STA.B strcVariables.n8Temp2                                ;838E90|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838E92|AD4321  |002143;
     CMP.B strcVariables.n8Temp2                                ;838E95|C593    |000093;
-    BNE fAudioUnknown_838E8B                                   ;838E97|D0F2    |838E8B;
+    BNE fAudio_SendSpcCommand                                   ;838E97|D0F2    |838E8B;
  
   - LDA.B #$01                                                 ;838E99|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838E9B|CD4321  |002143;
@@ -1608,31 +1608,31 @@ fAudioUnknown_838E8B:
     RTS                                                        ;838EC8|60      |      ;
  
  
-fAudioUnknown_838EC9:
+fAudio_ReadSpcStatusBits0And4:
     SEP #$20                                                   ;838EC9|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838ECB|AD4321  |002143;
     STA.B strcVariables.n8Temp2                                ;838ECE|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838ED0|AD4321  |002143;
     CMP.B strcVariables.n8Temp2                                ;838ED3|C593    |000093;
-    BNE fAudioUnknown_838EC9                                   ;838ED5|D0F2    |838EC9;
+    BNE fAudio_ReadSpcStatusBits0And4                                   ;838ED5|D0F2    |838EC9;
     LDA.B #$01                                                 ;838ED7|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838ED9|CD4321  |002143;
-    BNE fAudioUnknown_838EC9                                   ;838EDC|D0EB    |838EC9;
+    BNE fAudio_ReadSpcStatusBits0And4                                   ;838EDC|D0EB    |838EC9;
     LDA.W SNES_APUIO0                                          ;838EDE|AD4021  |002140;
     AND.B #$11                                                 ;838EE1|2911    |      ;
     RTS                                                        ;838EE3|60      |      ;
  
  
-fAudioUnknown_838EE4:
+fAudio_ReadSpcStatusBit4:
     SEP #$20                                                   ;838EE4|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838EE6|AD4321  |002143;
     STA.B strcVariables.n8Temp2                                ;838EE9|8593    |000093;
     LDA.W SNES_APUIO3                                          ;838EEB|AD4321  |002143;
     CMP.B strcVariables.n8Temp2                                ;838EEE|C593    |000093;
-    BNE fAudioUnknown_838EE4                                   ;838EF0|D0F2    |838EE4;
+    BNE fAudio_ReadSpcStatusBit4                                   ;838EF0|D0F2    |838EE4;
     LDA.B #$01                                                 ;838EF2|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838EF4|CD4321  |002143;
-    BNE fAudioUnknown_838EE4                                   ;838EF7|D0EB    |838EE4;
+    BNE fAudio_ReadSpcStatusBit4                                   ;838EF7|D0EB    |838EE4;
     LDA.W SNES_APUIO0                                          ;838EF9|AD4021  |002140;
     AND.B #$10                                                 ;838EFC|2910    |      ;
     RTS                                                        ;838EFE|60      |      ;
@@ -1647,7 +1647,7 @@ aAudioSampleSize:
     dw $0F90,$0BB0,$0BB0,$0BB0,$0BB0,$07C0                     ;838F3B|        |      ;
     dw $1380,$0340,$07C0,$1F30                                 ;838F47|        |      ;
  
-aAudioUnknown_838F4F:
+aAudioTrackDataSizeTable:
     dw $02EC,$02EC,$0272,$03AB,$02B6,$0443                     ;838F4F|        |      ;
     dw $0399,$02AD,$01F6,$0260,$019A,$018E                     ;838F5B|        |      ;
     dw $01D1,$0293,$023D,$02F2,$0435,$0113                     ;838F67|        |      ;
@@ -1791,7 +1791,7 @@ sAudioSampleData:
     db $26,$1F,$FF,$E0,$B8,$01,$E0                             ;839275|        |      ;
     dl sAudioTrack_B2B1F0                                      ;83927C|        |B2B1F0;
  
-aAudioUnknown_83927F:
+aAudioSfxSampleIdTable:
     db $00,$00,$00,$05,$00,$00,$00,$00,$00,$00,$00,$00         ;83927F|        |      ;
     db $0D,$13,$1D,$26,$00,$00,$00,$00,$10,$23,$23,$00         ;83928B|        |      ;
     db $00,$24,$0D,$00,$25,$1E,$1E,$27,$21,$14,$0E,$14         ;839297|        |      ;
