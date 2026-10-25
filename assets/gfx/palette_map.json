@@ -1,0 +1,8482 @@
+{
+ "format": 1,
+ "generated_by": "tools/gfx/palette_map.py build (do not edit by hand)",
+ "doc": "docs/formats/graphics-palettes.md",
+ "slots": [
+  "night/early (<7)",
+  "day (7-14)",
+  "evening (15-16)",
+  "dusk (17)",
+  "night (>=18)"
+ ],
+ "aPalettes": [
+  "sPalette_0x0A",
+  "sPalette_0x0B",
+  "sPalette_0x0C",
+  "sPalette_0x05",
+  "sPalette_0x06",
+  "sPalette_0x07",
+  "sPalette_0x08",
+  "sPalette_0x09",
+  "sPalette_0x00",
+  "sPalette_0x01",
+  "sPalette_0x02",
+  "sPalette_0x03",
+  "sPalette_0x04",
+  "sPalette_0x0D",
+  "sPalette_0x0E",
+  "sPalette_0x0F",
+  "sPalette_0x10",
+  "sPalette_0x11",
+  "sPalette_0x3A",
+  "sPalette_0x3C",
+  "sPalette_0x3D",
+  "sPalette_0x3E",
+  "sPalette_0x1D",
+  "sPalette_0x1E",
+  "sPalette_0x1F",
+  "sPalette_0x20",
+  "sPalette_0x21",
+  "sPalette_0x23",
+  "sPalette_0x24",
+  "sPalette_0x25",
+  "sPalette_0x40",
+  "sPalette_0x41",
+  "sPalette_0x42",
+  "sPalette_0x43",
+  "sPalette_0x3B",
+  "sPalette_0x22",
+  "sPalette_0x45",
+  "sPalette_0x44",
+  "sPalette_0x3F",
+  "sPalette_0x26",
+  "sPalette_0x27",
+  "sPalette_0x28",
+  "sPalette_0x29",
+  "sPalette_0x2A",
+  "sPalette_0x35",
+  "sPalette_0x36",
+  "sPalette_0x37",
+  "sPalette_0x38",
+  "sPalette_0x39",
+  "sPalette_0x2B",
+  "sPalette_0x2C",
+  "sPalette_0x2D",
+  "sPalette_0x2E",
+  "sPalette_0x2F",
+  "sPalette_0x30",
+  "sPalette_0x31",
+  "sPalette_0x32",
+  "sPalette_0x33",
+  "sPalette_0x34",
+  "sPalette_0x64",
+  "sPalette_0x65",
+  "sPalette_0x66",
+  "sPalette_0x67",
+  "sPalette_0x5C",
+  "sPalette_0x5D",
+  "sPalette_0x5E",
+  "sPalette_0x5F",
+  "sPalette_0x60",
+  "sPalette_0x61",
+  "sPalette_0x62",
+  "sPalette_0x63",
+  "sPalette_0x68",
+  "sPalette_0x69",
+  "sPalette_0x6A",
+  "sPalette_0x6B",
+  "sPalette_0x13",
+  "sPalette_0x14",
+  "sPalette_0x15",
+  "sPalette_0x16",
+  "sPalette_0x17",
+  "sPalette_0x18",
+  "sPalette_0x19",
+  "sPalette_0x1A",
+  "sPalette_0x1B",
+  "sPalette_0x1C",
+  "sPalette_0x47",
+  "sPalette_0x5B",
+  "sPalette_0x12",
+  "sPalette_0x49",
+  "sPalette_0x48",
+  "sPalette_0x53",
+  "sPalette_0x54",
+  "sPalette_0x55",
+  "sPalette_0x56",
+  "sPalette_0x4E",
+  "sPalette_0x4F",
+  "sPalette_0x50",
+  "sPalette_0x51",
+  "sPalette_0x4A",
+  "sPalette_0x4B",
+  "sPalette_0x4C",
+  "sPalette_0x4D",
+  "sPalette_0x57",
+  "sPalette_0x58",
+  "sPalette_0x59",
+  "sPalette_0x5A",
+  "sPalette_0x52",
+  "sPalette_0x6F",
+  "sPalette_0x70",
+  "sPalette_0x6C",
+  "sPalette_0x6D",
+  "sPalette_0x46",
+  "sPalette_0x6E",
+  "sPalette_0x71",
+  "sPalette_0x72",
+  "sPalette_0x73",
+  "sPalette_0x74"
+ ],
+ "areas": {
+  "0": {
+   "name": "FARMSPRING",
+   "map": "sFarmSpringMap",
+   "preset": 0,
+   "bg_palettes": [
+    "sPalette_0x0A",
+    "sPalette_0x0B",
+    "sPalette_0x0C",
+    "sPalette_0x08",
+    "sPalette_0x09"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "1": {
+   "name": "FARMSUMMER",
+   "map": "sFarmSummerMap",
+   "preset": 0,
+   "bg_palettes": [
+    "sPalette_0x05",
+    "sPalette_0x06",
+    "sPalette_0x07",
+    "sPalette_0x08",
+    "sPalette_0x09"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "2": {
+   "name": "FARMFALL",
+   "map": "sFarmFallMap",
+   "preset": 0,
+   "bg_palettes": [
+    "sPalette_0x00",
+    "sPalette_0x01",
+    "sPalette_0x02",
+    "sPalette_0x03",
+    "sPalette_0x04"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "3": {
+   "name": "FARMWINTER",
+   "map": "sFarmWinterMap",
+   "preset": 0,
+   "bg_palettes": [
+    "sPalette_0x0D",
+    "sPalette_0x0E",
+    "sPalette_0x0F",
+    "sPalette_0x10",
+    "sPalette_0x11"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "4": {
+   "name": "TOWNSPRING",
+   "map": "sTownSpringMap",
+   "preset": 0,
+   "bg_palettes": [
+    null,
+    "sPalette_0x3A",
+    "sPalette_0x3C",
+    "sPalette_0x3D",
+    "sPalette_0x3E"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "5": {
+   "name": "TOWNSUMMER",
+   "map": "sTownSummerMap",
+   "preset": 0,
+   "bg_palettes": [
+    null,
+    "sPalette_0x1D",
+    "sPalette_0x1E",
+    "sPalette_0x1F",
+    "sPalette_0x20"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "6": {
+   "name": "TOWNFALL",
+   "map": "sTownFallMap",
+   "preset": 0,
+   "bg_palettes": [
+    null,
+    "sPalette_0x21",
+    "sPalette_0x23",
+    "sPalette_0x24",
+    "sPalette_0x25"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "7": {
+   "name": "TOWNWINTER",
+   "map": "sTownWinterMap",
+   "preset": 0,
+   "bg_palettes": [
+    null,
+    "sPalette_0x40",
+    "sPalette_0x41",
+    "sPalette_0x42",
+    "sPalette_0x43"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "8": {
+   "name": "DANCINGS1",
+   "map": "sFlowerFestivalMap",
+   "preset": 0,
+   "bg_palettes": [
+    null,
+    "sPalette_0x3B",
+    "sPalette_0x3B",
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x6F"
+   ]
+  },
+  "9": {
+   "name": "DANCINGS2",
+   "map": "sHarvestFestivalMap",
+   "preset": 0,
+   "bg_palettes": [
+    null,
+    "sPalette_0x22",
+    "sPalette_0x22",
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x6F"
+   ]
+  },
+  "10": {
+   "name": "NY_PUBLICSQUARE",
+   "map": "sStarNightFestivalSquareMap",
+   "preset": 0,
+   "bg_palettes": [
+    null,
+    null,
+    null,
+    "sPalette_0x45",
+    "sPalette_0x44"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "11": {
+   "name": "EGGFESTIVAL",
+   "map": "sEggFestivalMap",
+   "preset": 0,
+   "bg_palettes": [
+    null,
+    "sPalette_0x3F",
+    null,
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x6F"
+   ]
+  },
+  "12": {
+   "name": "CROSSROADSPRING",
+   "map": "sRoadSpringMap",
+   "preset": 0,
+   "bg_palettes": [
+    "sPalette_0x26",
+    "sPalette_0x27",
+    "sPalette_0x28",
+    "sPalette_0x29",
+    "sPalette_0x2A"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "13": {
+   "name": "CROSSROADSUMMER",
+   "map": "sRoadSummerMap",
+   "preset": 0,
+   "bg_palettes": [
+    "sPalette_0x35",
+    "sPalette_0x36",
+    "sPalette_0x37",
+    "sPalette_0x38",
+    "sPalette_0x39"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "14": {
+   "name": "CROSSROADFALL",
+   "map": "sRoadFallMap",
+   "preset": 0,
+   "bg_palettes": [
+    "sPalette_0x2B",
+    "sPalette_0x2C",
+    "sPalette_0x2D",
+    "sPalette_0x2E",
+    "sPalette_0x2F"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "15": {
+   "name": "CROSSROADWINTER",
+   "map": "sRoadWinterMap",
+   "preset": 0,
+   "bg_palettes": [
+    "sPalette_0x30",
+    "sPalette_0x31",
+    "sPalette_0x32",
+    "sPalette_0x33",
+    "sPalette_0x34"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "16": {
+   "name": "WOODSSPRING",
+   "map": "sMountainSpring",
+   "preset": 0,
+   "bg_palettes": [
+    null,
+    "sPalette_0x64",
+    "sPalette_0x65",
+    "sPalette_0x66",
+    "sPalette_0x67"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "17": {
+   "name": "WOODSSUMMER",
+   "map": "sMountainSummerMap",
+   "preset": 0,
+   "bg_palettes": [
+    null,
+    "sPalette_0x5C",
+    "sPalette_0x5D",
+    "sPalette_0x5E",
+    "sPalette_0x5F"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "18": {
+   "name": "WOODSFALL",
+   "map": "sMountainFallMap",
+   "preset": 0,
+   "bg_palettes": [
+    null,
+    "sPalette_0x60",
+    "sPalette_0x61",
+    "sPalette_0x62",
+    "sPalette_0x63"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "19": {
+   "name": "WOODSWINTER",
+   "map": "sMountainWinterMap",
+   "preset": 0,
+   "bg_palettes": [
+    null,
+    "sPalette_0x68",
+    "sPalette_0x69",
+    "sPalette_0x6A",
+    "sPalette_0x6B"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "20": {
+   "name": "NY_SPA",
+   "map": "sStarNightFestivalSpaMap",
+   "preset": 0,
+   "bg_palettes": [
+    null,
+    null,
+    null,
+    null,
+    "sPalette_0x6B"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x6F"
+   ]
+  },
+  "21": {
+   "name": "HOUSE1",
+   "map": "sHouseMap",
+   "preset": 0,
+   "bg_palettes": [
+    "sPalette_0x13",
+    "sPalette_0x13",
+    "sPalette_0x13",
+    "sPalette_0x13",
+    "sPalette_0x13"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x6F"
+   ]
+  },
+  "22": {
+   "name": "HOUSE2",
+   "map": "sHouseUpgrade1Map",
+   "preset": 0,
+   "bg_palettes": [
+    "sPalette_0x13",
+    "sPalette_0x13",
+    "sPalette_0x13",
+    "sPalette_0x13",
+    "sPalette_0x13"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x6F"
+   ]
+  },
+  "23": {
+   "name": "HOUSE3",
+   "map": "sHouseUpgrade2Map",
+   "preset": 0,
+   "bg_palettes": [
+    "sPalette_0x13",
+    "sPalette_0x13",
+    "sPalette_0x13",
+    "sPalette_0x13",
+    "sPalette_0x13"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x6F"
+   ]
+  },
+  "24": {
+   "name": "MAJORHOUSE",
+   "map": "sMayorHouseMap",
+   "preset": 0,
+   "bg_palettes": [
+    null,
+    "sPalette_0x15",
+    "sPalette_0x15",
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x6F"
+   ]
+  },
+  "25": {
+   "name": "MAJORCORRIDOR",
+   "map": "sMayorHouseHallMap",
+   "preset": 0,
+   "bg_palettes": [
+    null,
+    "sPalette_0x15",
+    "sPalette_0x15",
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x6F"
+   ]
+  },
+  "26": {
+   "name": "MAJORBEDROOM",
+   "map": "sMayorHouseMariaRoomMap",
+   "preset": 0,
+   "bg_palettes": [
+    null,
+    "sPalette_0x15",
+    "sPalette_0x15",
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x6F"
+   ]
+  },
+  "27": {
+   "name": "CHURCH",
+   "map": "sChurchMap",
+   "preset": 0,
+   "bg_palettes": [
+    null,
+    "sPalette_0x16",
+    "sPalette_0x16",
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x6F"
+   ]
+  },
+  "28": {
+   "name": "FLORIST",
+   "map": "sFlowerShopMap",
+   "preset": 0,
+   "bg_palettes": [
+    null,
+    "sPalette_0x17",
+    "sPalette_0x17",
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x6F"
+   ]
+  },
+  "29": {
+   "name": "FLORISTBEDROOM",
+   "map": "sFlowerShopRoomMap",
+   "preset": 0,
+   "bg_palettes": [
+    null,
+    "sPalette_0x17",
+    "sPalette_0x17",
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x6F"
+   ]
+  },
+  "30": {
+   "name": "BAR",
+   "map": "sBarMap",
+   "preset": 0,
+   "bg_palettes": [
+    null,
+    null,
+    null,
+    "sPalette_0x18",
+    "sPalette_0x18"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x6F"
+   ]
+  },
+  "31": {
+   "name": "BARBEDROOM",
+   "map": "sBarRoomMap",
+   "preset": 0,
+   "bg_palettes": [
+    null,
+    null,
+    null,
+    "sPalette_0x18",
+    "sPalette_0x18"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x6F"
+   ]
+  },
+  "32": {
+   "name": "RESTAURANT",
+   "map": "sRestaurantMap",
+   "preset": 0,
+   "bg_palettes": [
+    null,
+    "sPalette_0x19",
+    "sPalette_0x19",
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x6F"
+   ]
+  },
+  "33": {
+   "name": "RESTAURANTBEDROOM",
+   "map": "sRestaurantRoomMap",
+   "preset": 0,
+   "bg_palettes": [
+    null,
+    "sPalette_0x19",
+    "sPalette_0x19",
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x6F"
+   ]
+  },
+  "34": {
+   "name": "TOOLSSHOP",
+   "map": "sGeneralStoreMap",
+   "preset": 0,
+   "bg_palettes": [
+    null,
+    "sPalette_0x1A",
+    "sPalette_0x1A",
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x6F"
+   ]
+  },
+  "35": {
+   "name": "TOOLSSHOPBEDROOM",
+   "map": "sGeneralStoreRoomMap",
+   "preset": 0,
+   "bg_palettes": [
+    null,
+    "sPalette_0x1A",
+    "sPalette_0x1A",
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x6F"
+   ]
+  },
+  "36": {
+   "name": "ANIMALSHOP",
+   "map": "sAnimalShopMap",
+   "preset": 0,
+   "bg_palettes": [
+    null,
+    "sPalette_0x1B",
+    "sPalette_0x1B",
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x6F"
+   ]
+  },
+  "37": {
+   "name": "FORTUNETELLER",
+   "map": "sFortuneTellerHouseMap",
+   "preset": 0,
+   "bg_palettes": [
+    null,
+    "sPalette_0x1C",
+    "sPalette_0x1C",
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x6F"
+   ]
+  },
+  "38": {
+   "name": "SHED",
+   "map": "sToolShedMap",
+   "preset": 2,
+   "bg_palettes": [
+    "sPalette_0x47",
+    "sPalette_0x47",
+    "sPalette_0x47",
+    "sPalette_0x47",
+    "sPalette_0x47"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x6F"
+   ]
+  },
+  "39": {
+   "name": "COWBARN",
+   "map": "sBarnMap",
+   "preset": 0,
+   "bg_palettes": [
+    "sPalette_0x5B",
+    "sPalette_0x5B",
+    "sPalette_0x5B",
+    "sPalette_0x5B",
+    "sPalette_0x5B"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x6F"
+   ]
+  },
+  "40": {
+   "name": "COOP",
+   "map": "sCoopMap",
+   "preset": 0,
+   "bg_palettes": [
+    "sPalette_0x5B",
+    "sPalette_0x5B",
+    "sPalette_0x5B",
+    "sPalette_0x5B",
+    "sPalette_0x5B"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x6F"
+   ]
+  },
+  "41": {
+   "name": "WOODSCAVE",
+   "map": "sMountainCaveMap",
+   "preset": 0,
+   "bg_palettes": [
+    null,
+    "sPalette_0x12",
+    "sPalette_0x12",
+    "sPalette_0x12",
+    "sPalette_0x12"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x70",
+    "sPalette_0x70"
+   ]
+  },
+  "42": {
+   "name": "IMPUNDERGROUND",
+   "map": "sElfTunnelMap",
+   "preset": 0,
+   "bg_palettes": [
+    "sPalette_0x12",
+    "sPalette_0x12",
+    "sPalette_0x12",
+    "sPalette_0x12",
+    "sPalette_0x12"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x70",
+    "sPalette_0x70"
+   ]
+  },
+  "43": {
+   "name": "WORKSMANHOUSE",
+   "map": "sMap_80B032",
+   "preset": 0,
+   "bg_palettes": [
+    null,
+    "sPalette_0x49",
+    "sPalette_0x49",
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x6F"
+   ]
+  },
+  "44": {
+   "name": "GOLDCHICKEN",
+   "map": "sMap_80B04B",
+   "preset": 0,
+   "bg_palettes": [
+    null,
+    "sPalette_0x48",
+    null,
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x6F"
+   ]
+  },
+  "45": {
+   "name": "WEDDINGSPRING",
+   "map": "sMap_80B064",
+   "preset": 0,
+   "bg_palettes": [
+    null,
+    "sPalette_0x3A",
+    null,
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x6F"
+   ]
+  },
+  "46": {
+   "name": "WEDDINGSUMMER",
+   "map": "sMap_80B087",
+   "preset": 0,
+   "bg_palettes": [
+    null,
+    "sPalette_0x1D",
+    null,
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x6F"
+   ]
+  },
+  "47": {
+   "name": "WEDDINGFALL",
+   "map": "sMap_80B0AA",
+   "preset": 0,
+   "bg_palettes": [
+    null,
+    "sPalette_0x21",
+    null,
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x6F"
+   ]
+  },
+  "48": {
+   "name": "WEDDINGWINTER",
+   "map": "sMap_80B0CD",
+   "preset": 0,
+   "bg_palettes": [
+    null,
+    "sPalette_0x40",
+    null,
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x6F"
+   ]
+  },
+  "49": {
+   "name": "MOUNTAINTOPSPRING",
+   "map": "sSummitSpringMap",
+   "preset": 1,
+   "bg_palettes": [
+    null,
+    "sPalette_0x53",
+    "sPalette_0x54",
+    "sPalette_0x55",
+    "sPalette_0x56"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "50": {
+   "name": "MOUNTAINTOPSUMMER",
+   "map": "sSummitSummerMap",
+   "preset": 1,
+   "bg_palettes": [
+    null,
+    "sPalette_0x4E",
+    "sPalette_0x4F",
+    "sPalette_0x50",
+    "sPalette_0x51"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "51": {
+   "name": "MOUNTAINTOPFALL",
+   "map": "sSummitFallMap",
+   "preset": 1,
+   "bg_palettes": [
+    null,
+    "sPalette_0x4A",
+    "sPalette_0x4B",
+    "sPalette_0x4C",
+    "sPalette_0x4D"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "52": {
+   "name": "MOUNTAINTOPWINTER",
+   "map": "sSummitWinterMap",
+   "preset": 1,
+   "bg_palettes": [
+    null,
+    "sPalette_0x57",
+    "sPalette_0x58",
+    "sPalette_0x59",
+    "sPalette_0x5A"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "53": {
+   "name": "MOUNTAINTOP2SPRING",
+   "map": "sMap_80B17C",
+   "preset": 1,
+   "bg_palettes": [
+    null,
+    "sPalette_0x53",
+    "sPalette_0x54",
+    "sPalette_0x55",
+    "sPalette_0x56"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "54": {
+   "name": "MNTTOPENDINGSUMMER",
+   "map": "sMap_80B19F",
+   "preset": 1,
+   "bg_palettes": [
+    null,
+    "sPalette_0x4E",
+    "sPalette_0x4F",
+    "sPalette_0x50",
+    "sPalette_0x51"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "55": {
+   "name": "MOUNTAINTOP2FALL",
+   "map": "sMap_80B1C2",
+   "preset": 1,
+   "bg_palettes": [
+    null,
+    "sPalette_0x4A",
+    "sPalette_0x4B",
+    "sPalette_0x4C",
+    "sPalette_0x4D"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "56": {
+   "name": "MOUNTAINTOP2WINTER",
+   "map": "sMap_80B1E5",
+   "preset": 1,
+   "bg_palettes": [
+    null,
+    "sPalette_0x57",
+    "sPalette_0x58",
+    "sPalette_0x59",
+    "sPalette_0x5A"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "57": {
+   "name": "NY_MOUNTAINTOP",
+   "map": "sStarNightFestivalMountainTopMap",
+   "preset": 1,
+   "bg_palettes": [
+    null,
+    null,
+    null,
+    null,
+    "sPalette_0x5A"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "58": {
+   "name": "MOUNTAINTOPSUNRISE",
+   "map": "sNewYearsFestivalMap",
+   "preset": 1,
+   "bg_palettes": [
+    "sPalette_0x5A",
+    "sPalette_0x52",
+    "sPalette_0x52",
+    "sPalette_0x52",
+    "sPalette_0x52"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x6F"
+   ]
+  },
+  "59": {
+   "name": "MOUNTAINTOPBEAN",
+   "map": "sMap_80B24E",
+   "preset": 1,
+   "bg_palettes": [
+    null,
+    "sPalette_0x53",
+    "sPalette_0x54",
+    "sPalette_0x55",
+    "sPalette_0x56"
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "60": {
+   "name": "INTRO",
+   "map": "sMap_80B271",
+   "preset": 0,
+   "bg_palettes": [
+    "sPalette_0x27",
+    null,
+    null,
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "61": {
+   "name": "ENDING00",
+   "map": "sMap_80B28A",
+   "preset": 0,
+   "bg_palettes": [
+    "sPalette_0x06",
+    null,
+    null,
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "62": {
+   "name": "ENDING01",
+   "map": "sMap_80B2AD",
+   "preset": 0,
+   "bg_palettes": [
+    "sPalette_0x06",
+    null,
+    null,
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "63": {
+   "name": "ENDING02",
+   "map": "sMap_80B2D0",
+   "preset": 0,
+   "bg_palettes": [
+    "sPalette_0x06",
+    null,
+    null,
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "64": {
+   "name": "ENDING03",
+   "map": "sMap_80B2F3",
+   "preset": 0,
+   "bg_palettes": [
+    "sPalette_0x06",
+    null,
+    null,
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "65": {
+   "name": "ENDING04",
+   "map": "sMap_80B316",
+   "preset": 0,
+   "bg_palettes": [
+    "sPalette_0x06",
+    null,
+    null,
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "66": {
+   "name": "ENDING05",
+   "map": "sMap_80B339",
+   "preset": 0,
+   "bg_palettes": [
+    "sPalette_0x1D",
+    null,
+    null,
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "67": {
+   "name": "ENDING06",
+   "map": "sMap_80B35C",
+   "preset": 0,
+   "bg_palettes": [
+    "sPalette_0x06",
+    null,
+    null,
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "68": {
+   "name": "ENDING07",
+   "map": "sMap_80B37F",
+   "preset": 0,
+   "bg_palettes": [
+    "sPalette_0x06",
+    null,
+    null,
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "69": {
+   "name": "ENDING08",
+   "map": "sMap_80B3A2",
+   "preset": 0,
+   "bg_palettes": [
+    "sPalette_0x06",
+    null,
+    null,
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "70": {
+   "name": "ENDING09",
+   "map": "sMap_80B3C5",
+   "preset": 0,
+   "bg_palettes": [
+    "sPalette_0x06",
+    null,
+    null,
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "71": {
+   "name": "ENDING10",
+   "map": "sMap_80B3E8",
+   "preset": 0,
+   "bg_palettes": [
+    "sPalette_0x06",
+    null,
+    null,
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "72": {
+   "name": "ENDING11",
+   "map": "sMap_80B40B",
+   "preset": 0,
+   "bg_palettes": [
+    "sPalette_0x5C",
+    null,
+    null,
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "73": {
+   "name": "ENDING12",
+   "map": "sMap_80B42E",
+   "preset": 0,
+   "bg_palettes": [
+    "sPalette_0x06",
+    null,
+    null,
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "74": {
+   "name": "ENDING13",
+   "map": "sMap_80B451",
+   "preset": 0,
+   "bg_palettes": [
+    "sPalette_0x06",
+    null,
+    null,
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes",
+   "obj_palettes": [
+    "sPalette_0x6F",
+    "sPalette_0x70"
+   ]
+  },
+  "75": {
+   "name": "CREDITS0",
+   "map": "sMap_80B474",
+   "preset": 5,
+   "bg_palettes": [
+    "sPalette_0x6E",
+    null,
+    null,
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes"
+  },
+  "76": {
+   "name": "CREDITS1",
+   "map": "sMap_80B49C",
+   "preset": 5,
+   "bg_palettes": [
+    "sPalette_0x6E",
+    null,
+    null,
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes"
+  },
+  "77": {
+   "name": "CREDITS2",
+   "map": "sMap_80B4C4",
+   "preset": 5,
+   "bg_palettes": [
+    "sPalette_0x6E",
+    null,
+    null,
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes"
+  },
+  "78": {
+   "name": "CREDITS3",
+   "map": "sMap_80B4EC",
+   "preset": 5,
+   "bg_palettes": [
+    "sPalette_0x6E",
+    null,
+    null,
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes"
+  },
+  "79": {
+   "name": "CREDITS4",
+   "map": "sMap_80B514",
+   "preset": 5,
+   "bg_palettes": [
+    "sPalette_0x6E",
+    null,
+    null,
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes"
+  },
+  "80": {
+   "name": "DRIVETOTOWN",
+   "map": "sMap_80B537",
+   "preset": 5,
+   "bg_palettes": [
+    "sPalette_0x6E",
+    null,
+    null,
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes"
+  },
+  "81": {
+   "name": "UNKNOWN51",
+   "map": "sMap_80B55F",
+   "preset": 5,
+   "bg_palettes": [
+    "sPalette_0x6E",
+    null,
+    null,
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes"
+  },
+  "82": {
+   "name": "UNKNOWN52",
+   "map": "sMap_80B587",
+   "preset": 5,
+   "bg_palettes": [
+    "sPalette_0x6E",
+    null,
+    null,
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes"
+  },
+  "83": {
+   "name": "UNKNOWN53",
+   "map": "sMap_80B5AF",
+   "preset": 5,
+   "bg_palettes": [
+    "sPalette_0x6E",
+    null,
+    null,
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes"
+  },
+  "84": {
+   "name": "UNKNOWN54",
+   "map": "sMap_80B5D2",
+   "preset": 5,
+   "bg_palettes": [
+    "sPalette_0x6E",
+    null,
+    null,
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes"
+  },
+  "85": {
+   "name": "UNKNOWN55",
+   "map": "sMap_80B5F5",
+   "preset": 5,
+   "bg_palettes": [
+    "sPalette_0x6E",
+    null,
+    null,
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes"
+  },
+  "86": {
+   "name": "UNKNOWN56",
+   "map": "sMap_80B618",
+   "preset": 5,
+   "bg_palettes": [
+    "sPalette_0x6E",
+    null,
+    null,
+    null,
+    null
+   ],
+   "palette_via": "aMapPalettesIndexes"
+  },
+  "87": {
+   "name": "RAIN_OVERLAY",
+   "map": "sRainOverlay",
+   "preset": null,
+   "bg_palettes": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "palette_via": "none: weather overlay, uses the palette of the host map"
+  },
+  "88": {
+   "name": "CLOUDS_OVERLAY",
+   "map": "sCloudsOverlay",
+   "preset": null,
+   "bg_palettes": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "palette_via": "none: weather overlay, uses the palette of the host map"
+  },
+  "89": {
+   "name": "SNOW_OVERLAY",
+   "map": "sSnowOverlay",
+   "preset": null,
+   "bg_palettes": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "palette_via": "none: weather overlay, uses the palette of the host map"
+  },
+  "90": {
+   "name": "HEAVYSNOW_OVERLAY",
+   "map": "sHeavySnowOverlay",
+   "preset": null,
+   "bg_palettes": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "palette_via": "none: weather overlay, uses the palette of the host map"
+  },
+  "91": {
+   "name": "TITLE_INTRO_FARM",
+   "map": "sIntroFarmScrool",
+   "preset": 3,
+   "bg_palettes": [
+    null,
+    "sPalette_0x6C",
+    null,
+    null,
+    null
+   ],
+   "palette_via": "fPalette_LoadFirstHalf(aPalettes[$6D]) at $82DA07, $82DB5B, $82DF29"
+  },
+  "92": {
+   "name": "TITLE_LOGO",
+   "map": "sHarvestMoonLogo",
+   "preset": 3,
+   "bg_palettes": [
+    null,
+    "sPalette_0x6C",
+    null,
+    null,
+    null
+   ],
+   "palette_via": "fPalette_LoadFirstHalf(aPalettes[$6D]) at $82DF29"
+  },
+  "93": {
+   "name": "NATSUME_LOGO",
+   "map": "sNatsumeLogo",
+   "preset": 3,
+   "bg_palettes": [
+    null,
+    "sPalette_0x6D",
+    null,
+    null,
+    null
+   ],
+   "palette_via": "fPalette_LoadFirstHalf(aPalettes[$6E]) at $82D7AD"
+  },
+  "94": {
+   "name": "MENU_BACKGROUNDS",
+   "map": "sMenuScreenBackgrounds",
+   "preset": 4,
+   "bg_palettes": [
+    null,
+    "sPalette_0x46",
+    null,
+    null,
+    null
+   ],
+   "palette_via": "fPalette_LoadFirstHalf(aPalettes[$6F]) at $82DFCB, $82E22A"
+  },
+  "95": {
+   "name": "MENU_CHARACTERS",
+   "map": "sMenuCharacters",
+   "preset": 4,
+   "bg_palettes": [
+    null,
+    "sPalette_0x46",
+    null,
+    null,
+    null
+   ],
+   "palette_via": "fPalette_LoadFirstHalf(aPalettes[$6F]) at $82E866"
+  }
+ },
+ "blobs": {
+  "sCompressedTiles_928000": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x0B",
+    "sub": 0,
+    "area": 87,
+    "slot": "fixed (explicit load)"
+   },
+   "confidence": "medium",
+   "note": "weather overlay: drawn with sub-palette 0 of whichever outdoor map is active (FARMSPRING day shown); only colours 12-15 are used and the weather code rewrites them by palette-animation scripts ($8097A8-$809853)",
+   "subs_used": [
+    0
+   ],
+   "tile_subs": "................................................................................................................................000000000000000000000000000.000000000000000.0.0.................................................................................",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 87,
+     "name": "RAIN_OVERLAY",
+     "preset": null,
+     "vram": "$5000",
+     "bg": [
+      2
+     ],
+     "sub_cells": {
+      "0": 2048
+     },
+     "bg_palettes": [
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9282CB": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x01",
+    "sub": 1,
+    "area": 2,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 315 of 555 name-table cells; per-tile sub-palettes 1/2/5 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    5
+   ],
+   "tile_subs": ".122..2.1...11111222....1...1.111222....1..11.11.2.2....11111.11.2..2...11115555.2......11115555..222222111155..11111111111155.........111.............111.............111.............111......1111............1111............1111........11..1111........1...",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 2,
+     "name": "FARMFALL",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 315,
+      "2": 68,
+      "5": 172
+     },
+     "bg_palettes": [
+      "sPalette_0x00",
+      "sPalette_0x01",
+      "sPalette_0x02",
+      "sPalette_0x03",
+      "sPalette_0x04"
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_929D10": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x01",
+    "sub": 1,
+    "area": 2,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 9214 of 11111 name-table cells; per-tile sub-palettes 1/2/4/5 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    4,
+    5
+   ],
+   "tile_subs": ".11111115511....111.11115511....11....114444....11....124444..........11444411........1144441.......111122222211....111122222222....222222222212....222222222221..22222222........22222242......................................................................",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 2,
+     "name": "FARMFALL",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 9214,
+      "2": 1745,
+      "4": 124,
+      "5": 28
+     },
+     "bg_palettes": [
+      "sPalette_0x00",
+      "sPalette_0x01",
+      "sPalette_0x02",
+      "sPalette_0x03",
+      "sPalette_0x04"
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_92BB03": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x01",
+    "sub": 2,
+    "area": 2,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 2 covers 2024 of 4709 name-table cells; per-tile sub-palettes 1/2/3/4/5 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "tile_subs": "5555355555555555555555555555555555333555555544225533355555554422555555554555555.5555555555555555555555155555555555555515555555553555.3555555555555555..555555555555555.555555444.55555.55555544455555553.5555444555555535555533355555553555554445555555355555444",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 2,
+     "name": "FARMFALL",
+     "preset": 0,
+     "vram": "$4000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 21,
+      "2": 2024,
+      "3": 608,
+      "4": 1556,
+      "5": 500
+     },
+     "bg_palettes": [
+      "sPalette_0x00",
+      "sPalette_0x01",
+      "sPalette_0x02",
+      "sPalette_0x03",
+      "sPalette_0x04"
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_92D3AB": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x0B",
+    "sub": 1,
+    "area": 0,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 315 of 555 name-table cells; per-tile sub-palettes 1/2/5 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    5
+   ],
+   "tile_subs": ".122..2.1...11111222....1...1.111222....1..1151172.2....1111151172..2...1111555572......11115555.7222222111155..11111111111155..557775.111......5575555111......5575555111......5555575111......1111............1111............1111........11661111........1766",
+   "alternatives": [
+    {
+     "id": "sPalette_0x06",
+     "sub": 1,
+     "area": 1,
+     "area_name": "FARMSUMMER"
+    },
+    {
+     "id": "sPalette_0x06",
+     "sub": 5,
+     "area": 63,
+     "area_name": "ENDING02"
+    },
+    {
+     "id": "sPalette_0x06",
+     "sub": 6,
+     "area": 65,
+     "area_name": "ENDING04"
+    },
+    {
+     "id": "sPalette_0x06",
+     "sub": 2,
+     "area": 67,
+     "area_name": "ENDING06"
+    }
+   ],
+   "used_by": [
+    {
+     "area": 0,
+     "name": "FARMSPRING",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 315,
+      "2": 68,
+      "5": 172
+     },
+     "bg_palettes": [
+      "sPalette_0x0A",
+      "sPalette_0x0B",
+      "sPalette_0x0C",
+      "sPalette_0x08",
+      "sPalette_0x09"
+     ]
+    },
+    {
+     "area": 1,
+     "name": "FARMSUMMER",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 315,
+      "2": 68,
+      "5": 172
+     },
+     "bg_palettes": [
+      "sPalette_0x05",
+      "sPalette_0x06",
+      "sPalette_0x07",
+      "sPalette_0x08",
+      "sPalette_0x09"
+     ]
+    },
+    {
+     "area": 61,
+     "name": "ENDING00",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 186,
+      "5": 80
+     },
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 62,
+     "name": "ENDING01",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 146,
+      "5": 80
+     },
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 63,
+     "name": "ENDING02",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 120,
+      "5": 132,
+      "7": 12
+     },
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 64,
+     "name": "ENDING03",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 34,
+      "5": 34
+     },
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 65,
+     "name": "ENDING04",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 12,
+      "2": 30,
+      "5": 8,
+      "6": 96
+     },
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 67,
+     "name": "ENDING06",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 8,
+      "2": 34,
+      "5": 8
+     },
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 68,
+     "name": "ENDING07",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 8,
+      "2": 34,
+      "5": 8
+     },
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 69,
+     "name": "ENDING08",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 29,
+      "5": 49
+     },
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 70,
+     "name": "ENDING09",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "5": 34
+     },
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 71,
+     "name": "ENDING10",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "5": 34
+     },
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 73,
+     "name": "ENDING12",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 136,
+      "5": 110,
+      "7": 16
+     },
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 74,
+     "name": "ENDING13",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 46,
+      "5": 69,
+      "7": 12
+     },
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_938000": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x0B",
+    "sub": 1,
+    "area": 0,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 9214 of 11111 name-table cells; per-tile sub-palettes 1/2/4/5 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    4,
+    5
+   ],
+   "tile_subs": ".111111155111111111.11115511111.11....114444111.11....124444111111....114444111.11....1144441.1.....111122222211....111122222222..22222222222212..22222222222221..22222222..2222..22222242....222222....222222222222....2222222222222222........22222222........",
+   "alternatives": [
+    {
+     "id": "sPalette_0x06",
+     "sub": 1,
+     "area": 1,
+     "area_name": "FARMSUMMER"
+    }
+   ],
+   "used_by": [
+    {
+     "area": 0,
+     "name": "FARMSPRING",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 9214,
+      "2": 1745,
+      "4": 124,
+      "5": 28
+     },
+     "bg_palettes": [
+      "sPalette_0x0A",
+      "sPalette_0x0B",
+      "sPalette_0x0C",
+      "sPalette_0x08",
+      "sPalette_0x09"
+     ]
+    },
+    {
+     "area": 1,
+     "name": "FARMSUMMER",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 9214,
+      "2": 1745,
+      "4": 124,
+      "5": 28
+     },
+     "bg_palettes": [
+      "sPalette_0x05",
+      "sPalette_0x06",
+      "sPalette_0x07",
+      "sPalette_0x08",
+      "sPalette_0x09"
+     ]
+    },
+    {
+     "area": 61,
+     "name": "ENDING00",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 638,
+      "5": 16
+     },
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 62,
+     "name": "ENDING01",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 614,
+      "5": 16
+     },
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 63,
+     "name": "ENDING02",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 596,
+      "5": 12
+     },
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 64,
+     "name": "ENDING03",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 700,
+      "2": 32,
+      "4": 44
+     },
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 65,
+     "name": "ENDING04",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 698,
+      "2": 84,
+      "3": 72,
+      "4": 16
+     },
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 67,
+     "name": "ENDING06",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 582,
+      "2": 40,
+      "3": 300,
+      "4": 16
+     },
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 68,
+     "name": "ENDING07",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 630,
+      "2": 328,
+      "4": 16
+     },
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 69,
+     "name": "ENDING08",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 682,
+      "2": 256,
+      "5": 8
+     },
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 70,
+     "name": "ENDING09",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 658,
+      "2": 240,
+      "4": 44
+     },
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 71,
+     "name": "ENDING10",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 666,
+      "2": 244,
+      "4": 44
+     },
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 73,
+     "name": "ENDING12",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 579,
+      "5": 12
+     },
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 74,
+     "name": "ENDING13",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 115
+     },
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_939E8E": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x0B",
+    "sub": 2,
+    "area": 0,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 2 covers 2024 of 4709 name-table cells; per-tile sub-palettes 1/2/3/4/5 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "tile_subs": "5555355555555555555555555555555555333555555544225533355555554422555555554555555.5555555555555555555555155555555555555515555555553555.3555555555555555.55555555555555555555555444555555555555544455555553.5555444555555535555533355555553555554445555555355555444",
+   "alternatives": [
+    {
+     "id": "sPalette_0x06",
+     "sub": 2,
+     "area": 1,
+     "area_name": "FARMSUMMER"
+    },
+    {
+     "id": "sPalette_0x06",
+     "sub": 5,
+     "area": 61,
+     "area_name": "ENDING00"
+    }
+   ],
+   "used_by": [
+    {
+     "area": 0,
+     "name": "FARMSPRING",
+     "preset": 0,
+     "vram": "$4000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 21,
+      "2": 2024,
+      "3": 608,
+      "4": 1556,
+      "5": 500
+     },
+     "bg_palettes": [
+      "sPalette_0x0A",
+      "sPalette_0x0B",
+      "sPalette_0x0C",
+      "sPalette_0x08",
+      "sPalette_0x09"
+     ]
+    },
+    {
+     "area": 1,
+     "name": "FARMSUMMER",
+     "preset": 0,
+     "vram": "$4000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 21,
+      "2": 2024,
+      "3": 608,
+      "4": 1556,
+      "5": 500
+     },
+     "bg_palettes": [
+      "sPalette_0x05",
+      "sPalette_0x06",
+      "sPalette_0x07",
+      "sPalette_0x08",
+      "sPalette_0x09"
+     ]
+    },
+    {
+     "area": 61,
+     "name": "ENDING00",
+     "preset": 0,
+     "vram": "$4000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 8,
+      "5": 96
+     },
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 62,
+     "name": "ENDING01",
+     "preset": 0,
+     "vram": "$4000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 8,
+      "2": 24,
+      "5": 136
+     },
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 63,
+     "name": "ENDING02",
+     "preset": 0,
+     "vram": "$4000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 8,
+      "5": 100,
+      "7": 44
+     },
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 64,
+     "name": "ENDING03",
+     "preset": 0,
+     "vram": "$4000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 8,
+      "2": 56,
+      "3": 32,
+      "4": 4,
+      "5": 80
+     },
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 65,
+     "name": "ENDING04",
+     "preset": 0,
+     "vram": "$4000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "2": 8
+     },
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 67,
+     "name": "ENDING06",
+     "preset": 0,
+     "vram": "$4000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "2": 32,
+      "4": 4
+     },
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 68,
+     "name": "ENDING07",
+     "preset": 0,
+     "vram": "$4000",
+     "bg": [],
+     "sub_cells": {},
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 69,
+     "name": "ENDING08",
+     "preset": 0,
+     "vram": "$4000",
+     "bg": [],
+     "sub_cells": {},
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 70,
+     "name": "ENDING09",
+     "preset": 0,
+     "vram": "$4000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "2": 32,
+      "3": 16
+     },
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 71,
+     "name": "ENDING10",
+     "preset": 0,
+     "vram": "$4000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "2": 36
+     },
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 73,
+     "name": "ENDING12",
+     "preset": 0,
+     "vram": "$4000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 13,
+      "5": 116,
+      "7": 42
+     },
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 74,
+     "name": "ENDING13",
+     "preset": 0,
+     "vram": "$4000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 6,
+      "5": 732,
+      "7": 44
+     },
+     "bg_palettes": [
+      "sPalette_0x06",
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_93B736": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x0E",
+    "sub": 1,
+    "area": 3,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 315 of 555 name-table cells; per-tile sub-palettes 1/2/5 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    5
+   ],
+   "tile_subs": ".122..2.1...11111222....1...1.111222....1..11.11.2.2....11111.11.2..2...11115555.2......11115555..222222111155..11111111111155.........111.............111.............111.............111......1111............1111............1111........11..1111........1...",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 3,
+     "name": "FARMWINTER",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 315,
+      "2": 68,
+      "5": 172
+     },
+     "bg_palettes": [
+      "sPalette_0x0D",
+      "sPalette_0x0E",
+      "sPalette_0x0F",
+      "sPalette_0x10",
+      "sPalette_0x11"
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_93D049": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x0E",
+    "sub": 1,
+    "area": 3,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 9214 of 11111 name-table cells; per-tile sub-palettes 1/2/4/5 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    4,
+    5
+   ],
+   "tile_subs": ".11111115511....111.11115511....11....114444....11....124444..........11444411........1144441.......111122222211....111122222222....222222222212....222222222221..22222222........22222242......................................................................",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 3,
+     "name": "FARMWINTER",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 9214,
+      "2": 1745,
+      "4": 124,
+      "5": 28
+     },
+     "bg_palettes": [
+      "sPalette_0x0D",
+      "sPalette_0x0E",
+      "sPalette_0x0F",
+      "sPalette_0x10",
+      "sPalette_0x11"
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_93E12B": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x0E",
+    "sub": 2,
+    "area": 3,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 2 covers 2024 of 4709 name-table cells; per-tile sub-palettes 1/2/3/4/5 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "tile_subs": "5555355555555555555555555555555555333555555544225533355555554422555555554555555.5555555555555555555555155555555555555515555555553555.3555555555555555..555555555555555.555555444.55555.55555544455555553.5555444555555535555533355555553555554445555555355555444",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 3,
+     "name": "FARMWINTER",
+     "preset": 0,
+     "vram": "$4000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 21,
+      "2": 2024,
+      "3": 608,
+      "4": 1556,
+      "5": 500
+     },
+     "bg_palettes": [
+      "sPalette_0x0D",
+      "sPalette_0x0E",
+      "sPalette_0x0F",
+      "sPalette_0x10",
+      "sPalette_0x11"
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_948000": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x12",
+    "sub": 1,
+    "area": 41,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 4064 of 4096 name-table cells; per-tile sub-palettes 1/2/3 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    3
+   ],
+   "tile_subs": ".1111112222111111111111111111.1111111111111111111111111111111111111111111111111111111111111111111111..111111111122111111111111112211...1111111111111...1111111112211...1111111332211...1111111331111.111111111111111.1111111111133111111111111113311111111111111",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 41,
+     "name": "WOODSCAVE",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 4064,
+      "2": 4,
+      "3": 28
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x12",
+      "sPalette_0x12",
+      "sPalette_0x12",
+      "sPalette_0x12"
+     ]
+    },
+    {
+     "area": 42,
+     "name": "IMPUNDERGROUND",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 3000,
+      "2": 40,
+      "3": 32
+     },
+     "bg_palettes": [
+      "sPalette_0x12",
+      "sPalette_0x12",
+      "sPalette_0x12",
+      "sPalette_0x12",
+      "sPalette_0x12"
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_95C000": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x13",
+    "sub": 1,
+    "area": 21,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 510 of 1018 name-table cells; per-tile sub-palettes 1/2/3 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    3
+   ],
+   "tile_subs": ".112222222222222111222222222222222221111222222222222111122223333222222222233222222222222112211333333222211222222111122223322222222222222331.222222221111..11222222222222..111111222222221111111222222222221.11.12222222211.1221.22222222111233212222222211333333",
+   "alternatives": [
+    {
+     "id": "sPalette_0x13",
+     "sub": 2,
+     "area": 23,
+     "area_name": "HOUSE3"
+    }
+   ],
+   "used_by": [
+    {
+     "area": 21,
+     "name": "HOUSE1",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 510,
+      "2": 474,
+      "3": 34
+     },
+     "bg_palettes": [
+      "sPalette_0x13",
+      "sPalette_0x13",
+      "sPalette_0x13",
+      "sPalette_0x13",
+      "sPalette_0x13"
+     ]
+    },
+    {
+     "area": 22,
+     "name": "HOUSE2",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 598,
+      "2": 386,
+      "3": 28
+     },
+     "bg_palettes": [
+      "sPalette_0x13",
+      "sPalette_0x13",
+      "sPalette_0x13",
+      "sPalette_0x13",
+      "sPalette_0x13"
+     ]
+    },
+    {
+     "area": 23,
+     "name": "HOUSE3",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 940,
+      "2": 1044,
+      "3": 28
+     },
+     "bg_palettes": [
+      "sPalette_0x13",
+      "sPalette_0x13",
+      "sPalette_0x13",
+      "sPalette_0x13",
+      "sPalette_0x13"
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_95D6E2": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x13",
+    "sub": 2,
+    "area": 21,
+    "slot": "day (7-14)"
+   },
+   "confidence": "medium",
+   "note": "only 6 name-table cell(s) reference this sheet; sub-palette 2",
+   "subs_used": [
+    2
+   ],
+   "tile_subs": "........................................................................................................111.............11...........2222............2211.......1111............1111............................................................................",
+   "alternatives": [
+    {
+     "id": "sPalette_0x13",
+     "sub": 1,
+     "area": 22,
+     "area_name": "HOUSE2"
+    }
+   ],
+   "used_by": [
+    {
+     "area": 21,
+     "name": "HOUSE1",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "2": 6
+     },
+     "bg_palettes": [
+      "sPalette_0x13",
+      "sPalette_0x13",
+      "sPalette_0x13",
+      "sPalette_0x13",
+      "sPalette_0x13"
+     ]
+    },
+    {
+     "area": 22,
+     "name": "HOUSE2",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 6,
+      "2": 6
+     },
+     "bg_palettes": [
+      "sPalette_0x13",
+      "sPalette_0x13",
+      "sPalette_0x13",
+      "sPalette_0x13",
+      "sPalette_0x13"
+     ]
+    },
+    {
+     "area": 23,
+     "name": "HOUSE3",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 30,
+      "2": 6
+     },
+     "bg_palettes": [
+      "sPalette_0x13",
+      "sPalette_0x13",
+      "sPalette_0x13",
+      "sPalette_0x13",
+      "sPalette_0x13"
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_95E8A3": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x15",
+    "sub": 1,
+    "area": 24,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 3940 of 4096 name-table cells; per-tile sub-palettes 1/2 (tile_subs)",
+   "subs_used": [
+    1,
+    2
+   ],
+   "tile_subs": ".111111111111111111111111111111121211111111111112121111111111111212111111111222222222222111122222222222211112222222222221111222222222222111111111121211111111.1111.221.111111.11.2222211.1111.11221112211.111.11222..1211.111111221111111.1111112222211111111111",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 24,
+     "name": "MAJORHOUSE",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 3940,
+      "2": 156
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x15",
+      "sPalette_0x15",
+      null,
+      null
+     ]
+    },
+    {
+     "area": 25,
+     "name": "MAJORCORRIDOR",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 3940,
+      "2": 156
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x15",
+      "sPalette_0x15",
+      null,
+      null
+     ]
+    },
+    {
+     "area": 26,
+     "name": "MAJORBEDROOM",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 3940,
+      "2": 156
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x15",
+      "sPalette_0x15",
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_968000": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x16",
+    "sub": 1,
+    "area": 27,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 1024 of 2048 name-table cells; per-tile sub-palettes 1/2/3/4/5 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "tile_subs": ".444..1411113333444411141111333311111111111133331444111114..333344455511144.33334445551114413333444444111141333311441111114133331144111111....1411441411141111141144.44444..44442444..444411444424444..42222144124444144222211111144.444222211111122444422221111",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 27,
+     "name": "CHURCH",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 1024,
+      "2": 40,
+      "3": 48,
+      "4": 924,
+      "5": 12
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x16",
+      "sPalette_0x16",
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_969437": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x17",
+    "sub": 1,
+    "area": 28,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 1031 of 2048 name-table cells; per-tile sub-palettes 1/2/3 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    3
+   ],
+   "tile_subs": ".112222221122222.211222112222222.211111112222222221111111222222222111111122222222222222222222222222222222222222222222222222222222222222211.222..2.2222221.2222..22222211222222..22222222121122..2222112212......22222222........22332222..22222211332222..2222..",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 28,
+     "name": "FLORIST",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 1031,
+      "2": 1013,
+      "3": 4
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x17",
+      "sPalette_0x17",
+      null,
+      null
+     ]
+    },
+    {
+     "area": 29,
+     "name": "FLORISTBEDROOM",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 1031,
+      "2": 1013,
+      "3": 4
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x17",
+      "sPalette_0x17",
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_96AD11": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x18",
+    "sub": 1,
+    "area": 30,
+    "slot": "dusk (17)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 1039 of 2048 name-table cells; per-tile sub-palettes 1/2 (tile_subs)",
+   "subs_used": [
+    1,
+    2
+   ],
+   "tile_subs": ".112211222211111111222222222211111122222122221111122222221221111112222222122111111111111.2222222111111222222.22211111122222..222111111222222.2111122112222222212222211222222221222221111222.2212222222.222222211222222222222222222112222221111222211222222111122",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 30,
+     "name": "BAR",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 1039,
+      "2": 1009
+     },
+     "bg_palettes": [
+      null,
+      null,
+      null,
+      "sPalette_0x18",
+      "sPalette_0x18"
+     ]
+    },
+    {
+     "area": 31,
+     "name": "BARBEDROOM",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 1039,
+      "2": 1009
+     },
+     "bg_palettes": [
+      null,
+      null,
+      null,
+      "sPalette_0x18",
+      "sPalette_0x18"
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_96C489": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x19",
+    "sub": 1,
+    "area": 32,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 1158 of 2048 name-table cells; per-tile sub-palettes 1/2 (tile_subs)",
+   "subs_used": [
+    1,
+    2
+   ],
+   "tile_subs": ".1111112222111111112111222222111111222221222211111222222211111111122222221111.1111111111.222211111111111.111211111111111111121..111111111111.211112211221111221222221122.22.221222221111222.221.222222.22212...12222....22122.2211112222221111221111222222111122",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 32,
+     "name": "RESTAURANT",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 1158,
+      "2": 890
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x19",
+      "sPalette_0x19",
+      null,
+      null
+     ]
+    },
+    {
+     "area": 33,
+     "name": "RESTAURANTBEDROOM",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 1158,
+      "2": 890
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x19",
+      "sPalette_0x19",
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_96DC6D": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x1A",
+    "sub": 1,
+    "area": 34,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 1031 of 2048 name-table cells; per-tile sub-palettes 1/2 (tile_subs)",
+   "subs_used": [
+    1,
+    2
+   ],
+   "tile_subs": ".112222221122222.211222112222222.211111112222222221111111222222222111111122222222222222222222222222222222222222222222222222222222222222211.222..222222221.2222..22222211222222..22222222121122..2222112212......22222222........22..22....22222211..22..........",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 34,
+     "name": "TOOLSSHOP",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 1031,
+      "2": 1017
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x1A",
+      "sPalette_0x1A",
+      null,
+      null
+     ]
+    },
+    {
+     "area": 35,
+     "name": "TOOLSSHOPBEDROOM",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 1031,
+      "2": 1017
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x1A",
+      "sPalette_0x1A",
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_978000": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x1B",
+    "sub": 1,
+    "area": 36,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 786 of 1024 name-table cells; per-tile sub-palettes 1/2 (tile_subs)",
+   "subs_used": [
+    1,
+    2
+   ],
+   "tile_subs": ".1111111221.222211111111222222222222111122221222222211112222122.222211112222.222222211112222222222222111222222222..221112222222212222122.1..222211..2222...2222222222222...222222222112211.2222222221111112222221111111111222222..........222222..........222112",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 36,
+     "name": "ANIMALSHOP",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 786,
+      "2": 238
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x1B",
+      "sPalette_0x1B",
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_979A88": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x1C",
+    "sub": 2,
+    "area": 37,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 2 covers 636 of 1024 name-table cells; per-tile sub-palettes 1/2/3 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    3
+   ],
+   "tile_subs": ".122..1111222222331133111122222233113322222222..333333222222..223333331111.22222333333222222222222222222222211222.2222222222222222222.22222222222222222222..12222222....222212222222....2222.2222222....222222222222....2222222222222222222222222222222222222222",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 37,
+     "name": "FORTUNETELLER",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 362,
+      "2": 636,
+      "3": 26
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x1C",
+      "sPalette_0x1C",
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_97B11A": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x0B",
+    "sub": 0,
+    "area": 88,
+    "slot": "fixed (explicit load)"
+   },
+   "confidence": "medium",
+   "note": "weather overlay: drawn with sub-palette 0 of whichever outdoor map is active (FARMSPRING day shown); only colours 12-15 are used and the weather code rewrites them by palette-animation scripts ($8097A8-$809853)",
+   "subs_used": [
+    0
+   ],
+   "tile_subs": "................................................................................................................................00.00.0.000..0..0000..000000000.0.....000000000..0000.............0.............................................................",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 88,
+     "name": "CLOUDS_OVERLAY",
+     "preset": null,
+     "vram": "$5000",
+     "bg": [
+      2
+     ],
+     "sub_cells": {
+      "0": 400
+     },
+     "bg_palettes": [
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_97B45F": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x3A",
+    "sub": 3,
+    "area": 4,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 3 covers 656 of 1115 name-table cells; per-tile sub-palettes 1/3 (tile_subs)",
+   "subs_used": [
+    1,
+    3
+   ],
+   "tile_subs": ".11111333111333311111111333333331111111.3333333311111111113333331111111113313333.1111111133331331131133113333.113333333333333...33333333331133.333333333331133333333333.3.1111313333331333311111333333133331111.333333133331111.3311..133331111...33..33333..11.",
+   "alternatives": [
+    {
+     "id": "sPalette_0x1D",
+     "sub": 3,
+     "area": 5,
+     "area_name": "TOWNSUMMER"
+    },
+    {
+     "id": "sPalette_0x21",
+     "sub": 3,
+     "area": 6,
+     "area_name": "TOWNFALL"
+    },
+    {
+     "id": "sPalette_0x3F",
+     "sub": 3,
+     "area": 11,
+     "area_name": "EGGFESTIVAL"
+    }
+   ],
+   "used_by": [
+    {
+     "area": 4,
+     "name": "TOWNSPRING",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 459,
+      "3": 656
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x3A",
+      "sPalette_0x3C",
+      "sPalette_0x3D",
+      "sPalette_0x3E"
+     ]
+    },
+    {
+     "area": 5,
+     "name": "TOWNSUMMER",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 459,
+      "3": 656
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x1D",
+      "sPalette_0x1E",
+      "sPalette_0x1F",
+      "sPalette_0x20"
+     ]
+    },
+    {
+     "area": 6,
+     "name": "TOWNFALL",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 459,
+      "3": 656
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x21",
+      "sPalette_0x23",
+      "sPalette_0x24",
+      "sPalette_0x25"
+     ]
+    },
+    {
+     "area": 8,
+     "name": "DANCINGS1",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [],
+     "sub_cells": {},
+     "bg_palettes": [
+      null,
+      "sPalette_0x3B",
+      "sPalette_0x3B",
+      null,
+      null
+     ]
+    },
+    {
+     "area": 9,
+     "name": "DANCINGS2",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [],
+     "sub_cells": {},
+     "bg_palettes": [
+      null,
+      "sPalette_0x22",
+      "sPalette_0x22",
+      null,
+      null
+     ]
+    },
+    {
+     "area": 11,
+     "name": "EGGFESTIVAL",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 455,
+      "3": 656
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x3F",
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 45,
+     "name": "WEDDINGSPRING",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 459,
+      "3": 656
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x3A",
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 46,
+     "name": "WEDDINGSUMMER",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 459,
+      "3": 656
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x1D",
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 47,
+     "name": "WEDDINGFALL",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 459,
+      "3": 656
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x21",
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 66,
+     "name": "ENDING05",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 10,
+      "3": 90
+     },
+     "bg_palettes": [
+      "sPalette_0x1D",
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_97CD20": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x1D",
+    "sub": 1,
+    "area": 5,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 7844 of 9970 name-table cells; per-tile sub-palettes 1/2/3/4 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    3,
+    4
+   ],
+   "tile_subs": ".11111111111.11.111111111111.111.1111111.1112222.11111111.112222.111122211112222111122221111222211444444111111111111.3222222111122.22211222211112222221122223311222222212222331122222221222233112233..3333333322333333333312111133333331112211113313333...11..2.",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 5,
+     "name": "TOWNSUMMER",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 7844,
+      "2": 2024,
+      "3": 64,
+      "4": 38
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x1D",
+      "sPalette_0x1E",
+      "sPalette_0x1F",
+      "sPalette_0x20"
+     ]
+    },
+    {
+     "area": 46,
+     "name": "WEDDINGSUMMER",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 7844,
+      "2": 2024,
+      "3": 64,
+      "4": 38
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x1D",
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 66,
+     "name": "ENDING05",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 848
+     },
+     "bg_palettes": [
+      "sPalette_0x1D",
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_97E7A2": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x1D",
+    "sub": 1,
+    "area": 5,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 744 of 1200 name-table cells; per-tile sub-palettes 1/3/4/5/6 (tile_subs)",
+   "subs_used": [
+    1,
+    3,
+    4,
+    5,
+    6
+   ],
+   "tile_subs": ".11111144144444411111114444444441111111.114444111111111.11444411555555551144441115555555114444445555555566444441555555556644444155555551........55555.55........55555...........55533.55........55533.55........55533.55........1111..55........1111..44........",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 5,
+     "name": "TOWNSUMMER",
+     "preset": 0,
+     "vram": "$4000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 744,
+      "3": 12,
+      "4": 324,
+      "5": 104,
+      "6": 16
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x1D",
+      "sPalette_0x1E",
+      "sPalette_0x1F",
+      "sPalette_0x20"
+     ]
+    },
+    {
+     "area": 46,
+     "name": "WEDDINGSUMMER",
+     "preset": 0,
+     "vram": "$4000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 744,
+      "3": 12,
+      "4": 324,
+      "5": 104,
+      "6": 16
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x1D",
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 66,
+     "name": "ENDING05",
+     "preset": 0,
+     "vram": "$4000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 76
+     },
+     "bg_palettes": [
+      "sPalette_0x1D",
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_988000": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x21",
+    "sub": 1,
+    "area": 6,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 7844 of 9970 name-table cells; per-tile sub-palettes 1/2/3/4 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    3,
+    4
+   ],
+   "tile_subs": ".11111111111.11.111111111111.111.1111111.1112222.11111111.112222.111122211112222111122221111222211444444111111111111.3222222111122222211222211112222221122223311222222212222331122222221222233112233333333333322333333333312111133333331112211113313333...11..2.",
+   "alternatives": [
+    {
+     "id": "sPalette_0x22",
+     "sub": 1,
+     "area": 9,
+     "area_name": "DANCINGS2"
+    },
+    {
+     "id": "sPalette_0x3F",
+     "sub": 1,
+     "area": 11,
+     "area_name": "EGGFESTIVAL"
+    }
+   ],
+   "used_by": [
+    {
+     "area": 6,
+     "name": "TOWNFALL",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 7844,
+      "2": 2024,
+      "3": 64,
+      "4": 38
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x21",
+      "sPalette_0x23",
+      "sPalette_0x24",
+      "sPalette_0x25"
+     ]
+    },
+    {
+     "area": 9,
+     "name": "DANCINGS2",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 2208,
+      "2": 1250,
+      "4": 32
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x22",
+      "sPalette_0x22",
+      null,
+      null
+     ]
+    },
+    {
+     "area": 11,
+     "name": "EGGFESTIVAL",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 7832,
+      "2": 1948,
+      "3": 64,
+      "4": 38
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x3F",
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 47,
+     "name": "WEDDINGFALL",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 7844,
+      "2": 2024,
+      "3": 64,
+      "4": 38
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x21",
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_989A52": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x21",
+    "sub": 1,
+    "area": 6,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 744 of 1200 name-table cells; per-tile sub-palettes 1/3/4/5/6 (tile_subs)",
+   "subs_used": [
+    1,
+    3,
+    4,
+    5,
+    6
+   ],
+   "tile_subs": ".11111144144444411111114444444441111111.114444111111111.11444411555555551144441115555555114444445555555566444441555555556644444155555551........55555.55........55555...........55533.55........55533.55........55533.55........1111..55........1111..44........",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 6,
+     "name": "TOWNFALL",
+     "preset": 0,
+     "vram": "$4000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 744,
+      "3": 12,
+      "4": 324,
+      "5": 104,
+      "6": 16
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x21",
+      "sPalette_0x23",
+      "sPalette_0x24",
+      "sPalette_0x25"
+     ]
+    },
+    {
+     "area": 47,
+     "name": "WEDDINGFALL",
+     "preset": 0,
+     "vram": "$4000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 744,
+      "3": 12,
+      "4": 324,
+      "5": 104,
+      "6": 16
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x21",
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_98AEDB": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x22",
+    "sub": 1,
+    "area": 9,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 168 of 606 name-table cells; per-tile sub-palettes 1/2/4/5/6/7 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    4,
+    5,
+    6,
+    7
+   ],
+   "tile_subs": ".....11441...444..1..114..444444.....11.5544441.......1.5544441.7777777711....11777777771.....447777777722....417777777722....41777755.166666622777755556666662277775555666666222222555566666622222255226666662222225522776666627777222277772222777722447777222.",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 9,
+     "name": "DANCINGS2",
+     "preset": 0,
+     "vram": "$4000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 168,
+      "2": 80,
+      "4": 164,
+      "5": 22,
+      "6": 38,
+      "7": 134
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x22",
+      "sPalette_0x22",
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_98CC6B": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x27",
+    "sub": 1,
+    "area": 12,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 472 of 1024 name-table cells; per-tile sub-palettes 1/2/3/4/5/6/7 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "tile_subs": ".166331166633111116333136666311111333313636.31113311111166333133..1111122211..33..3..112222266663444441122226666444444112222633611..22666666666611..226665655666444466665555556744443366555555576666666755555557666666675555555766661166755555766666116667777766",
+   "alternatives": [
+    {
+     "id": "sPalette_0x36",
+     "sub": 1,
+     "area": 13,
+     "area_name": "CROSSROADSUMMER"
+    },
+    {
+     "id": "sPalette_0x2C",
+     "sub": 1,
+     "area": 14,
+     "area_name": "CROSSROADFALL"
+    }
+   ],
+   "used_by": [
+    {
+     "area": 12,
+     "name": "CROSSROADSPRING",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 472,
+      "2": 66,
+      "3": 144,
+      "4": 19,
+      "5": 88,
+      "6": 210,
+      "7": 25
+     },
+     "bg_palettes": [
+      "sPalette_0x26",
+      "sPalette_0x27",
+      "sPalette_0x28",
+      "sPalette_0x29",
+      "sPalette_0x2A"
+     ]
+    },
+    {
+     "area": 13,
+     "name": "CROSSROADSUMMER",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 472,
+      "2": 66,
+      "3": 144,
+      "4": 19,
+      "5": 88,
+      "6": 210,
+      "7": 25
+     },
+     "bg_palettes": [
+      "sPalette_0x35",
+      "sPalette_0x36",
+      "sPalette_0x37",
+      "sPalette_0x38",
+      "sPalette_0x39"
+     ]
+    },
+    {
+     "area": 14,
+     "name": "CROSSROADFALL",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 472,
+      "2": 66,
+      "3": 144,
+      "4": 19,
+      "5": 88,
+      "6": 210,
+      "7": 25
+     },
+     "bg_palettes": [
+      "sPalette_0x2B",
+      "sPalette_0x2C",
+      "sPalette_0x2D",
+      "sPalette_0x2E",
+      "sPalette_0x2F"
+     ]
+    },
+    {
+     "area": 60,
+     "name": "INTRO",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 406,
+      "2": 96,
+      "3": 87,
+      "4": 19,
+      "5": 97,
+      "6": 287,
+      "7": 32
+     },
+     "bg_palettes": [
+      "sPalette_0x27",
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_98E41D": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x31",
+    "sub": 1,
+    "area": 15,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 472 of 1024 name-table cells; per-tile sub-palettes 1/2/3/4/5/6/7 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "tile_subs": ".166331166633111116333136666311111333313636.31113311111166333133..1111122211..33..3..112222266663444441122226666444444112222633611..22666666666611..226665655666444466665555556744443366555555576666666755555557666666675555555766661166755555766666116667777766",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 15,
+     "name": "CROSSROADWINTER",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 472,
+      "2": 66,
+      "3": 144,
+      "4": 19,
+      "5": 88,
+      "6": 210,
+      "7": 25
+     },
+     "bg_palettes": [
+      "sPalette_0x30",
+      "sPalette_0x31",
+      "sPalette_0x32",
+      "sPalette_0x33",
+      "sPalette_0x34"
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_998000": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x3A",
+    "sub": 1,
+    "area": 4,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 7844 of 9970 name-table cells; per-tile sub-palettes 1/2/3/4 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    3,
+    4
+   ],
+   "tile_subs": ".11111111111.11.111111111111.111.1111111.1112222.11111111.112222.111122211112222111122221111222211444444111111111111.3222222111122.22211222211112222221122223311222222212222331122222221222233112233333333333322333333333312111133333331112211113313333...11..2.",
+   "alternatives": [
+    {
+     "id": "sPalette_0x3B",
+     "sub": 1,
+     "area": 8,
+     "area_name": "DANCINGS1"
+    }
+   ],
+   "used_by": [
+    {
+     "area": 4,
+     "name": "TOWNSPRING",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 7844,
+      "2": 2024,
+      "3": 64,
+      "4": 38
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x3A",
+      "sPalette_0x3C",
+      "sPalette_0x3D",
+      "sPalette_0x3E"
+     ]
+    },
+    {
+     "area": 8,
+     "name": "DANCINGS1",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 2234,
+      "2": 1108,
+      "3": 140,
+      "4": 32
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x3B",
+      "sPalette_0x3B",
+      null,
+      null
+     ]
+    },
+    {
+     "area": 45,
+     "name": "WEDDINGSPRING",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 7844,
+      "2": 2024,
+      "3": 64,
+      "4": 38
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x3A",
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_999A74": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x3A",
+    "sub": 1,
+    "area": 4,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 744 of 1200 name-table cells; per-tile sub-palettes 1/3/4/5/6 (tile_subs)",
+   "subs_used": [
+    1,
+    3,
+    4,
+    5,
+    6
+   ],
+   "tile_subs": ".11111144144444411111114444444441111111.114444111111111.11444411555555551144441115555555114444445555555566444441555555556644444155555551........55555.55........55555...........55533.55........55533.55........55533.55........1111..55........1111..44........",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 4,
+     "name": "TOWNSPRING",
+     "preset": 0,
+     "vram": "$4000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 744,
+      "3": 12,
+      "4": 324,
+      "5": 104,
+      "6": 16
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x3A",
+      "sPalette_0x3C",
+      "sPalette_0x3D",
+      "sPalette_0x3E"
+     ]
+    },
+    {
+     "area": 45,
+     "name": "WEDDINGSPRING",
+     "preset": 0,
+     "vram": "$4000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 744,
+      "3": 12,
+      "4": 324,
+      "5": 104,
+      "6": 16
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x3A",
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_99AEC3": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x3B",
+    "sub": 5,
+    "area": 8,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 5 covers 200 of 582 name-table cells; per-tile sub-palettes 1/2/3/4/5/6/7 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "tile_subs": "..1..11441...444..1..114..444444.....11...444411.....11...44441..666666.11....11.666666.1.....4466............4166............41.......1.7777.55........77777755........77777755........77777755........77777733........55225533........552255........44222255..",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 8,
+     "name": "DANCINGS1",
+     "preset": 0,
+     "vram": "$4000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 158,
+      "2": 8,
+      "3": 8,
+      "4": 164,
+      "5": 200,
+      "6": 16,
+      "7": 28
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x3B",
+      "sPalette_0x3B",
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_99C3F2": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x3F",
+    "sub": 1,
+    "area": 11,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 773 of 1292 name-table cells; per-tile sub-palettes 1/3/4/5/6/7 (tile_subs)",
+   "subs_used": [
+    1,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "tile_subs": ".11111144144444411111114444444441111111.114444111111111.1144441.5555555511444411.55555551144444455555555..44444155555555..444441555555517777777755555.55777777.755555...7777776655533.557777776655533.55........55533.55........1111..55..66....1111..44..66....",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 11,
+     "name": "EGGFESTIVAL",
+     "preset": 0,
+     "vram": "$4000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 773,
+      "3": 12,
+      "4": 324,
+      "5": 104,
+      "6": 36,
+      "7": 43
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x3F",
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_99DCBD": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x40",
+    "sub": 3,
+    "area": 7,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 3 covers 656 of 1115 name-table cells; per-tile sub-palettes 1/3 (tile_subs)",
+   "subs_used": [
+    1,
+    3
+   ],
+   "tile_subs": ".11111333111..33111111113333..331111111.3333333311111111113333331111111113313333.1111111133331331131133113333.113333333333333...33333333331133.333333333331133333333333.3.1111313333331333311111333333133331111.333333133331111.3311..133331111...33..33333..11.",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 7,
+     "name": "TOWNWINTER",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 459,
+      "3": 656
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x40",
+      "sPalette_0x41",
+      "sPalette_0x42",
+      "sPalette_0x43"
+     ]
+    },
+    {
+     "area": 10,
+     "name": "NY_PUBLICSQUARE",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [],
+     "sub_cells": {},
+     "bg_palettes": [
+      null,
+      null,
+      null,
+      "sPalette_0x45",
+      "sPalette_0x44"
+     ]
+    },
+    {
+     "area": 48,
+     "name": "WEDDINGWINTER",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 459,
+      "3": 656
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x40",
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9A8000": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x40",
+    "sub": 1,
+    "area": 7,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 7844 of 9970 name-table cells; per-tile sub-palettes 1/2/3/4 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    3,
+    4
+   ],
+   "tile_subs": ".11111111111.11.111111111111.111.1111111.1112222.11111111.112222.111122211112222111122221111222211444444111111111111.3222222111122.22211222211112222221122223311222222212222331122222221222233112233..3333333322333333333312111133333331112211113313333...11..2.",
+   "alternatives": [
+    {
+     "id": "sPalette_0x45",
+     "sub": 1,
+     "area": 10,
+     "area_name": "NY_PUBLICSQUARE"
+    }
+   ],
+   "used_by": [
+    {
+     "area": 7,
+     "name": "TOWNWINTER",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 7844,
+      "2": 2024,
+      "3": 64,
+      "4": 38
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x40",
+      "sPalette_0x41",
+      "sPalette_0x42",
+      "sPalette_0x43"
+     ]
+    },
+    {
+     "area": 10,
+     "name": "NY_PUBLICSQUARE",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 2218,
+      "2": 1416,
+      "4": 24
+     },
+     "bg_palettes": [
+      null,
+      null,
+      null,
+      "sPalette_0x45",
+      "sPalette_0x44"
+     ]
+    },
+    {
+     "area": 48,
+     "name": "WEDDINGWINTER",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 7844,
+      "2": 2024,
+      "3": 64,
+      "4": 38
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x40",
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9A9921": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x40",
+    "sub": 1,
+    "area": 7,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 744 of 1200 name-table cells; per-tile sub-palettes 1/3/4/5/6 (tile_subs)",
+   "subs_used": [
+    1,
+    3,
+    4,
+    5,
+    6
+   ],
+   "tile_subs": ".11111144144444411111114444444441111111.114444111111111.11444411555555551144441115555555114444445555555566444441555555556644444155555551........55555.55........55555...........55533.55........55533.55........55533.55........1111..55........1111..44........",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 7,
+     "name": "TOWNWINTER",
+     "preset": 0,
+     "vram": "$4000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 744,
+      "3": 12,
+      "4": 324,
+      "5": 104,
+      "6": 16
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x40",
+      "sPalette_0x41",
+      "sPalette_0x42",
+      "sPalette_0x43"
+     ]
+    },
+    {
+     "area": 48,
+     "name": "WEDDINGWINTER",
+     "preset": 0,
+     "vram": "$4000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 744,
+      "3": 12,
+      "4": 324,
+      "5": 104,
+      "6": 16
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x40",
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9AAEAB": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x45",
+    "sub": 1,
+    "area": 10,
+    "slot": "dusk (17)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 236 of 438 name-table cells; per-tile sub-palettes 1/4/7 (tile_subs)",
+   "subs_used": [
+    1,
+    4,
+    7
+   ],
+   "tile_subs": ".111.11441...444.111.114..444444111..11...44441.111..11...44441.........11.4..11........1.....44..............41..............41.......1777777..........777777..........777777..........777777..........777777........................................44........",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 10,
+     "name": "NY_PUBLICSQUARE",
+     "preset": 0,
+     "vram": "$4000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 236,
+      "4": 172,
+      "7": 30
+     },
+     "bg_palettes": [
+      null,
+      null,
+      null,
+      "sPalette_0x45",
+      "sPalette_0x44"
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9ABF97": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x46",
+    "sub": 1,
+    "area": 94,
+    "slot": "fixed (explicit load)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 104 of 148 name-table cells; per-tile sub-palettes 0/1 (tile_subs)",
+   "subs_used": [
+    0,
+    1
+   ],
+   "tile_subs": "..01000010000000..0000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010001000000000001000101000000000001000001000100000000000001010000000000000....000000000000....0000000000000000..00000000000000..",
+   "alternatives": [
+    {
+     "id": "sPalette_0x46",
+     "sub": 0,
+     "area": 95,
+     "area_name": "MENU_CHARACTERS"
+    }
+   ],
+   "used_by": [
+    {
+     "area": 94,
+     "name": "MENU_BACKGROUNDS",
+     "preset": 4,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "0": 44,
+      "1": 104
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x46",
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 95,
+     "name": "MENU_CHARACTERS",
+     "preset": 4,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "0": 248
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x46",
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9AC489": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x46",
+    "sub": 0,
+    "area": 95,
+    "slot": "fixed (explicit load)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 0 covers 232 of 232 name-table cells",
+   "subs_used": [
+    0
+   ],
+   "tile_subs": "000000000000000000000000000000000000............0000............000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 94,
+     "name": "MENU_BACKGROUNDS",
+     "preset": 4,
+     "vram": "$3000",
+     "bg": [],
+     "sub_cells": {},
+     "bg_palettes": [
+      null,
+      "sPalette_0x46",
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 95,
+     "name": "MENU_CHARACTERS",
+     "preset": 4,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "0": 232
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x46",
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9ACB41": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x46",
+    "sub": 0,
+    "area": 94,
+    "slot": "fixed (explicit load)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 0 covers 1592 of 1722 name-table cells; per-tile sub-palettes 0/1 (tile_subs)",
+   "subs_used": [
+    0,
+    1
+   ],
+   "tile_subs": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000..00000000000000..00000000000000000000000000000000000000..00....0.0000000.00...10.00....000000000000....000000000000",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 94,
+     "name": "MENU_BACKGROUNDS",
+     "preset": 4,
+     "vram": "$4000",
+     "bg": [
+      1,
+      2
+     ],
+     "sub_cells": {
+      "0": 1592,
+      "1": 130
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x46",
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 95,
+     "name": "MENU_CHARACTERS",
+     "preset": 4,
+     "vram": "$4000",
+     "bg": [
+      1,
+      2
+     ],
+     "sub_cells": {
+      "0": 2148,
+      "1": 24
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x46",
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9AD357": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x46",
+    "sub": 0,
+    "area": 94,
+    "slot": "fixed (explicit load)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 0 covers 2948 of 3314 name-table cells; per-tile sub-palettes 0/1 (tile_subs)",
+   "subs_used": [
+    0,
+    1
+   ],
+   "tile_subs": "....................................................................000000000000....000000000000000000000000000000000000000000000000000000000000000000000000000000000000001111110000000000111111000111000000000000000000000000000000..00000000000000000000000000",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 94,
+     "name": "MENU_BACKGROUNDS",
+     "preset": 4,
+     "vram": "$5000",
+     "bg": [
+      1,
+      2
+     ],
+     "sub_cells": {
+      "0": 2948,
+      "1": 366
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x46",
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 95,
+     "name": "MENU_CHARACTERS",
+     "preset": 4,
+     "vram": "$5000",
+     "bg": [
+      1,
+      2
+     ],
+     "sub_cells": {
+      "0": 3040,
+      "1": 36
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x46",
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9AE02D": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x47",
+    "sub": 1,
+    "area": 38,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 1024 of 1024 name-table cells",
+   "subs_used": [
+    1
+   ],
+   "tile_subs": ".11111111111111111111111111111111111111.111111111111111111.11.11..11111111111.11..111111..111.....111111........1.111111..........................................................................11..1111........11..1111......................................",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 38,
+     "name": "SHED",
+     "preset": 2,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 1024
+     },
+     "bg_palettes": [
+      "sPalette_0x47",
+      "sPalette_0x47",
+      "sPalette_0x47",
+      "sPalette_0x47",
+      "sPalette_0x47"
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9B8000": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x47",
+    "sub": 0,
+    "area": 38,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 0 covers 520 of 520 name-table cells",
+   "subs_used": [
+    0
+   ],
+   "tile_subs": ".0..........000000..........00000000000...000000000000000000000000..00000.......000000000...............................................................................................................................................0000.000........0000..00",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 38,
+     "name": "SHED",
+     "preset": 2,
+     "vram": "$3000",
+     "bg": [
+      2
+     ],
+     "sub_cells": {
+      "0": 520
+     },
+     "bg_palettes": [
+      "sPalette_0x47",
+      "sPalette_0x47",
+      "sPalette_0x47",
+      "sPalette_0x47",
+      "sPalette_0x47"
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9B8441": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x0B",
+    "sub": 0,
+    "area": 90,
+    "slot": "fixed (explicit load)"
+   },
+   "confidence": "medium",
+   "note": "weather overlay: drawn with sub-palette 0 of whichever outdoor map is active (FARMSPRING day shown); only colours 12-15 are used and the weather code rewrites them by palette-animation scripts ($8097A8-$809853)",
+   "subs_used": [
+    0
+   ],
+   "tile_subs": "0.0...0.............00.00.0......0.0..0..............00.0..0....................................................................................................................................................................................................",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 90,
+     "name": "HEAVYSNOW_OVERLAY",
+     "preset": null,
+     "vram": "$5000",
+     "bg": [
+      2
+     ],
+     "sub_cells": {
+      "0": 157
+     },
+     "bg_palettes": [
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9B86AD": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x48",
+    "sub": 2,
+    "area": 44,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 2 covers 1356 of 3070 name-table cells; per-tile sub-palettes 1/2/3/4/5/6/7 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "tile_subs": ".2444446.244222244442246.2442222443542.644442222443542.64444222241224422111552224422552.1115532244222222111513334422222211121...55222222444444....222224444444564444422444444445444442244444444.44444..44444444.4444.225444444552444222.445555662442124.32666663",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 44,
+     "name": "GOLDCHICKEN",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 50,
+      "2": 1356,
+      "3": 71,
+      "4": 1330,
+      "5": 182,
+      "6": 24,
+      "7": 57
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x48",
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9B9F53": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x49",
+    "sub": 2,
+    "area": 43,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 2 covers 564 of 1024 name-table cells; per-tile sub-palettes 1/2 (tile_subs)",
+   "subs_used": [
+    1,
+    2
+   ],
+   "tile_subs": ".11111111111111121111112121111112222.111112111112222211112211111.22.222111111111.2..21111111111111111.211111111112221.111111111112121221111122221112112222.12222111211222..211..111211211..222221111111222222222111111122222222211111112222222221222111222222222",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 43,
+     "name": "WORKSMANHOUSE",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 460,
+      "2": 564
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x49",
+      "sPalette_0x49",
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9BB76D": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x53",
+    "sub": 4,
+    "area": 49,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 4 covers 2048 of 2367 name-table cells; per-tile sub-palettes 1/2/4 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    4
+   ],
+   "tile_subs": ".4444444444.444444444444444.444444444444444...224444444411111.22444444441121211144444444112111114444444.121111.144444444.1111111444444441111111.44444444....1.11444444444444444444444444444444444444444444444444444444444444441144444444444444114444444444444444",
+   "alternatives": [
+    {
+     "id": "sPalette_0x4E",
+     "sub": 4,
+     "area": 50,
+     "area_name": "MOUNTAINTOPSUMMER"
+    },
+    {
+     "id": "sPalette_0x4A",
+     "sub": 4,
+     "area": 51,
+     "area_name": "MOUNTAINTOPFALL"
+    },
+    {
+     "id": "sPalette_0x52",
+     "sub": 4,
+     "area": 58,
+     "area_name": "MOUNTAINTOPSUNRISE"
+    }
+   ],
+   "used_by": [
+    {
+     "area": 49,
+     "name": "MOUNTAINTOPSPRING",
+     "preset": 1,
+     "vram": "$2000",
+     "bg": [
+      1,
+      2
+     ],
+     "sub_cells": {
+      "1": 119,
+      "2": 200,
+      "4": 2048
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x53",
+      "sPalette_0x54",
+      "sPalette_0x55",
+      "sPalette_0x56"
+     ]
+    },
+    {
+     "area": 50,
+     "name": "MOUNTAINTOPSUMMER",
+     "preset": 1,
+     "vram": "$2000",
+     "bg": [
+      1,
+      2
+     ],
+     "sub_cells": {
+      "1": 119,
+      "2": 200,
+      "4": 2048
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x4E",
+      "sPalette_0x4F",
+      "sPalette_0x50",
+      "sPalette_0x51"
+     ]
+    },
+    {
+     "area": 51,
+     "name": "MOUNTAINTOPFALL",
+     "preset": 1,
+     "vram": "$2000",
+     "bg": [
+      1,
+      2
+     ],
+     "sub_cells": {
+      "1": 119,
+      "2": 200,
+      "4": 2048
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x4A",
+      "sPalette_0x4B",
+      "sPalette_0x4C",
+      "sPalette_0x4D"
+     ]
+    },
+    {
+     "area": 53,
+     "name": "MOUNTAINTOP2SPRING",
+     "preset": 1,
+     "vram": "$2000",
+     "bg": [
+      1,
+      2
+     ],
+     "sub_cells": {
+      "1": 119,
+      "2": 200,
+      "4": 2040
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x53",
+      "sPalette_0x54",
+      "sPalette_0x55",
+      "sPalette_0x56"
+     ]
+    },
+    {
+     "area": 54,
+     "name": "MNTTOPENDINGSUMMER",
+     "preset": 1,
+     "vram": "$2000",
+     "bg": [
+      1,
+      2
+     ],
+     "sub_cells": {
+      "1": 119,
+      "2": 200,
+      "4": 2040
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x4E",
+      "sPalette_0x4F",
+      "sPalette_0x50",
+      "sPalette_0x51"
+     ]
+    },
+    {
+     "area": 55,
+     "name": "MOUNTAINTOP2FALL",
+     "preset": 1,
+     "vram": "$2000",
+     "bg": [
+      1,
+      2
+     ],
+     "sub_cells": {
+      "1": 119,
+      "2": 200,
+      "4": 2040
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x4A",
+      "sPalette_0x4B",
+      "sPalette_0x4C",
+      "sPalette_0x4D"
+     ]
+    },
+    {
+     "area": 58,
+     "name": "MOUNTAINTOPSUNRISE",
+     "preset": 1,
+     "vram": "$2000",
+     "bg": [
+      1,
+      2
+     ],
+     "sub_cells": {
+      "1": 119,
+      "2": 200,
+      "4": 2048
+     },
+     "bg_palettes": [
+      "sPalette_0x5A",
+      "sPalette_0x52",
+      "sPalette_0x52",
+      "sPalette_0x52",
+      "sPalette_0x52"
+     ]
+    },
+    {
+     "area": 59,
+     "name": "MOUNTAINTOPBEAN",
+     "preset": 1,
+     "vram": "$2000",
+     "bg": [
+      1,
+      2
+     ],
+     "sub_cells": {
+      "1": 97,
+      "2": 178,
+      "3": 5,
+      "4": 2048
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x53",
+      "sPalette_0x54",
+      "sPalette_0x55",
+      "sPalette_0x56"
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9BCF8F": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x57",
+    "sub": 4,
+    "area": 52,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 4 covers 2048 of 2367 name-table cells; per-tile sub-palettes 1/2/4 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    4
+   ],
+   "tile_subs": ".4444444444.444444444444444.444444444444444...224444444411111.22444444441121211144444444112.111144444444121111.144444444.1111111444444441111111.44444444....1.11444444444444444444444444444444444444444444444444444444444444441144444444444444114444444444444444",
+   "alternatives": [
+    {
+     "id": "sPalette_0x5A",
+     "sub": 4,
+     "area": 57,
+     "area_name": "NY_MOUNTAINTOP"
+    }
+   ],
+   "used_by": [
+    {
+     "area": 52,
+     "name": "MOUNTAINTOPWINTER",
+     "preset": 1,
+     "vram": "$2000",
+     "bg": [
+      1,
+      2
+     ],
+     "sub_cells": {
+      "1": 119,
+      "2": 200,
+      "4": 2048
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x57",
+      "sPalette_0x58",
+      "sPalette_0x59",
+      "sPalette_0x5A"
+     ]
+    },
+    {
+     "area": 56,
+     "name": "MOUNTAINTOP2WINTER",
+     "preset": 1,
+     "vram": "$2000",
+     "bg": [
+      1,
+      2
+     ],
+     "sub_cells": {
+      "1": 119,
+      "2": 200,
+      "4": 2040
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x57",
+      "sPalette_0x58",
+      "sPalette_0x59",
+      "sPalette_0x5A"
+     ]
+    },
+    {
+     "area": 57,
+     "name": "NY_MOUNTAINTOP",
+     "preset": 1,
+     "vram": "$2000",
+     "bg": [
+      1,
+      2
+     ],
+     "sub_cells": {
+      "1": 119,
+      "2": 200,
+      "4": 2048
+     },
+     "bg_palettes": [
+      null,
+      null,
+      null,
+      null,
+      "sPalette_0x5A"
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9C8000": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x53",
+    "sub": 1,
+    "area": 49,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 414 of 496 name-table cells; per-tile sub-palettes 1/2 (tile_subs)",
+   "subs_used": [
+    1,
+    2
+   ],
+   "tile_subs": "444211111111111144421111111111114422111111111111.2.211111111.......111111.111.1111111..1111111.11111111111......1111111..........33333333333....333333333333.....333333333333....333333333333....333333333333....333333..........333333.......22.333333.......22",
+   "alternatives": [
+    {
+     "id": "sPalette_0x4E",
+     "sub": 1,
+     "area": 50,
+     "area_name": "MOUNTAINTOPSUMMER"
+    },
+    {
+     "id": "sPalette_0x4A",
+     "sub": 1,
+     "area": 51,
+     "area_name": "MOUNTAINTOPFALL"
+    },
+    {
+     "id": "sPalette_0x52",
+     "sub": 1,
+     "area": 58,
+     "area_name": "MOUNTAINTOPSUNRISE"
+    }
+   ],
+   "used_by": [
+    {
+     "area": 49,
+     "name": "MOUNTAINTOPSPRING",
+     "preset": 1,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 414,
+      "2": 82
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x53",
+      "sPalette_0x54",
+      "sPalette_0x55",
+      "sPalette_0x56"
+     ]
+    },
+    {
+     "area": 50,
+     "name": "MOUNTAINTOPSUMMER",
+     "preset": 1,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 414,
+      "2": 82
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x4E",
+      "sPalette_0x4F",
+      "sPalette_0x50",
+      "sPalette_0x51"
+     ]
+    },
+    {
+     "area": 51,
+     "name": "MOUNTAINTOPFALL",
+     "preset": 1,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 414,
+      "2": 82
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x4A",
+      "sPalette_0x4B",
+      "sPalette_0x4C",
+      "sPalette_0x4D"
+     ]
+    },
+    {
+     "area": 53,
+     "name": "MOUNTAINTOP2SPRING",
+     "preset": 1,
+     "vram": "$3000",
+     "bg": [
+      1,
+      2
+     ],
+     "sub_cells": {
+      "1": 414,
+      "2": 82,
+      "4": 8
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x53",
+      "sPalette_0x54",
+      "sPalette_0x55",
+      "sPalette_0x56"
+     ]
+    },
+    {
+     "area": 54,
+     "name": "MNTTOPENDINGSUMMER",
+     "preset": 1,
+     "vram": "$3000",
+     "bg": [
+      1,
+      2
+     ],
+     "sub_cells": {
+      "1": 414,
+      "2": 82,
+      "4": 8
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x4E",
+      "sPalette_0x4F",
+      "sPalette_0x50",
+      "sPalette_0x51"
+     ]
+    },
+    {
+     "area": 55,
+     "name": "MOUNTAINTOP2FALL",
+     "preset": 1,
+     "vram": "$3000",
+     "bg": [
+      1,
+      2
+     ],
+     "sub_cells": {
+      "1": 414,
+      "2": 82,
+      "4": 8
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x4A",
+      "sPalette_0x4B",
+      "sPalette_0x4C",
+      "sPalette_0x4D"
+     ]
+    },
+    {
+     "area": 58,
+     "name": "MOUNTAINTOPSUNRISE",
+     "preset": 1,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 414,
+      "2": 82
+     },
+     "bg_palettes": [
+      "sPalette_0x5A",
+      "sPalette_0x52",
+      "sPalette_0x52",
+      "sPalette_0x52",
+      "sPalette_0x52"
+     ]
+    },
+    {
+     "area": 59,
+     "name": "MOUNTAINTOPBEAN",
+     "preset": 1,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 416,
+      "2": 78,
+      "3": 175
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x53",
+      "sPalette_0x54",
+      "sPalette_0x55",
+      "sPalette_0x56"
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9C965F": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x57",
+    "sub": 1,
+    "area": 52,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 414 of 496 name-table cells; per-tile sub-palettes 1/2 (tile_subs)",
+   "subs_used": [
+    1,
+    2
+   ],
+   "tile_subs": "444211111111111144421111111111114422111111111111.2.211111111.......111111.111.1111111..1111111.11111111111......1111111.......................................................................................................................22..............22",
+   "alternatives": [
+    {
+     "id": "sPalette_0x5A",
+     "sub": 1,
+     "area": 57,
+     "area_name": "NY_MOUNTAINTOP"
+    }
+   ],
+   "used_by": [
+    {
+     "area": 52,
+     "name": "MOUNTAINTOPWINTER",
+     "preset": 1,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 414,
+      "2": 82
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x57",
+      "sPalette_0x58",
+      "sPalette_0x59",
+      "sPalette_0x5A"
+     ]
+    },
+    {
+     "area": 56,
+     "name": "MOUNTAINTOP2WINTER",
+     "preset": 1,
+     "vram": "$3000",
+     "bg": [
+      1,
+      2
+     ],
+     "sub_cells": {
+      "1": 414,
+      "2": 82,
+      "4": 8
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x57",
+      "sPalette_0x58",
+      "sPalette_0x59",
+      "sPalette_0x5A"
+     ]
+    },
+    {
+     "area": 57,
+     "name": "NY_MOUNTAINTOP",
+     "preset": 1,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 414,
+      "2": 82
+     },
+     "bg_palettes": [
+      null,
+      null,
+      null,
+      null,
+      "sPalette_0x5A"
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9CA40C": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x5B",
+    "sub": 2,
+    "area": 39,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 2 covers 1330 of 2048 name-table cells; per-tile sub-palettes 1/2/4 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    4
+   ],
+   "tile_subs": ".2222222.....22.24222222...222..222222222.2222..224422222.222...22.422222222....2222222222.....222222222222111..22242222222111..22.4..2....111..22.2..2....111..22222222....2222222.2222....222.22222.4..222222.2222..4..222222.22222.2..222222222222....2222222",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 39,
+     "name": "COWBARN",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 12,
+      "2": 1330,
+      "4": 706
+     },
+     "bg_palettes": [
+      "sPalette_0x5B",
+      "sPalette_0x5B",
+      "sPalette_0x5B",
+      "sPalette_0x5B",
+      "sPalette_0x5B"
+     ]
+    },
+    {
+     "area": 40,
+     "name": "COOP",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 12,
+      "2": 816,
+      "4": 196
+     },
+     "bg_palettes": [
+      "sPalette_0x5B",
+      "sPalette_0x5B",
+      "sPalette_0x5B",
+      "sPalette_0x5B",
+      "sPalette_0x5B"
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9CCBA3": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x5C",
+    "sub": 1,
+    "area": 17,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 1811 of 2047 name-table cells; per-tile sub-palettes 1/2/5/6 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    5,
+    6
+   ],
+   "tile_subs": "..111111111......111..11..1111111.111111..111...11111111..111111111111..2221111.112111..22......11.111111.......111111111........11.111112......1111111112........11111112666666..11111112666666..1111111166666651111111116666665111111111......22.11111........",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 17,
+     "name": "WOODSSUMMER",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 1811,
+      "2": 154,
+      "5": 2,
+      "6": 80
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x5C",
+      "sPalette_0x5D",
+      "sPalette_0x5E",
+      "sPalette_0x5F"
+     ]
+    },
+    {
+     "area": 72,
+     "name": "ENDING11",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 282,
+      "2": 11,
+      "6": 8
+     },
+     "bg_palettes": [
+      "sPalette_0x5C",
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9CE37D": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x5C",
+    "sub": 2,
+    "area": 17,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 2 covers 6424 of 6513 name-table cells; per-tile sub-palettes 1/2/3 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    3
+   ],
+   "tile_subs": ".2222222222222222222222222222222222222.222222222222222222222222222222222222222222222222222222222222222222222222222222222222.22112222222222222211.22222.2222.22222233333332222222223333333322211.12333333333222..123333333332.....23333333322.....23333333322...2",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 17,
+     "name": "WOODSSUMMER",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 31,
+      "2": 6424,
+      "3": 58
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x5C",
+      "sPalette_0x5D",
+      "sPalette_0x5E",
+      "sPalette_0x5F"
+     ]
+    },
+    {
+     "area": 72,
+     "name": "ENDING11",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 12,
+      "2": 517,
+      "3": 47,
+      "4": 4
+     },
+     "bg_palettes": [
+      "sPalette_0x5C",
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9D8000": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x64",
+    "sub": 5,
+    "area": 16,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 5 covers 400 of 619 name-table cells; per-tile sub-palettes 2/3/4/5 (tile_subs)",
+   "subs_used": [
+    2,
+    3,
+    4,
+    5
+   ],
+   "tile_subs": ".244444445553333.244445555552222.4444455555533334444444.555522224444444.2222..44.44444..2222..444444444.....444444444444444444444444444444444444444444..4444444.444444444444444.5555555544.4444.5555555544.4444.5555555544.4444.555555554444444.........4444444.",
+   "alternatives": [
+    {
+     "id": "sPalette_0x5C",
+     "sub": 5,
+     "area": 17,
+     "area_name": "WOODSSUMMER"
+    }
+   ],
+   "used_by": [
+    {
+     "area": 16,
+     "name": "WOODSSPRING",
+     "preset": 0,
+     "vram": "$4000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "2": 28,
+      "3": 14,
+      "4": 177,
+      "5": 400
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x64",
+      "sPalette_0x65",
+      "sPalette_0x66",
+      "sPalette_0x67"
+     ]
+    },
+    {
+     "area": 17,
+     "name": "WOODSSUMMER",
+     "preset": 0,
+     "vram": "$4000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "2": 28,
+      "3": 14,
+      "4": 177,
+      "5": 400
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x5C",
+      "sPalette_0x5D",
+      "sPalette_0x5E",
+      "sPalette_0x5F"
+     ]
+    },
+    {
+     "area": 72,
+     "name": "ENDING11",
+     "preset": 0,
+     "vram": "$4000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "2": 18,
+      "3": 8,
+      "4": 25,
+      "5": 83
+     },
+     "bg_palettes": [
+      "sPalette_0x5C",
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9D991C": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x60",
+    "sub": 1,
+    "area": 18,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 1811 of 2047 name-table cells; per-tile sub-palettes 1/2/5/6 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    5,
+    6
+   ],
+   "tile_subs": "..111111111......111..11..1111111.111111..111...11111111..111111111111..2221111.112111..22......11.111111.......111111111........11.111112......1111111112........11111112666666..11111112666666..1111111166666651111111116666665111111111......22.11111........",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 18,
+     "name": "WOODSFALL",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 1811,
+      "2": 154,
+      "5": 2,
+      "6": 80
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x60",
+      "sPalette_0x61",
+      "sPalette_0x62",
+      "sPalette_0x63"
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9DB15E": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x60",
+    "sub": 2,
+    "area": 18,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 2 covers 6424 of 6513 name-table cells; per-tile sub-palettes 1/2/3 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    3
+   ],
+   "tile_subs": ".2222222222222222222222222222222222222.222222222222222222222222222222222222222222222222222222222222222222222222222222222222.22112222222222222211.22222.2222.22222233333332222222223333333322211.12333333333222..123333333332.....23333333322.....23333333322...2",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 18,
+     "name": "WOODSFALL",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 31,
+      "2": 6424,
+      "3": 58
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x60",
+      "sPalette_0x61",
+      "sPalette_0x62",
+      "sPalette_0x63"
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9DCE31": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x60",
+    "sub": 5,
+    "area": 18,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 5 covers 400 of 619 name-table cells; per-tile sub-palettes 2/3/4/5 (tile_subs)",
+   "subs_used": [
+    2,
+    3,
+    4,
+    5
+   ],
+   "tile_subs": ".244444445553333.244445555552222.4444455555533334444444.555522224444444.2222..44.44444..2222..444444444.....444444444444444444444444444444444444444444..4444444.444444444444444.5555555544.4444.5555555544.4444.5555555544.4444.555555554444444.........4444444.",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 18,
+     "name": "WOODSFALL",
+     "preset": 0,
+     "vram": "$4000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "2": 28,
+      "3": 14,
+      "4": 177,
+      "5": 400
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x60",
+      "sPalette_0x61",
+      "sPalette_0x62",
+      "sPalette_0x63"
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9DE7CE": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x64",
+    "sub": 1,
+    "area": 16,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 1811 of 2047 name-table cells; per-tile sub-palettes 1/2/5/6 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    5,
+    6
+   ],
+   "tile_subs": "..111111111......111..11..1111111.111111..111...11111111..111111111111..2221111.112111..22......11.111111.......111111111........11.111112......1111111112........11111112666666..11111112666666..1111111166666651111111116666665111111111......22.11111........",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 16,
+     "name": "WOODSSPRING",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 1811,
+      "2": 154,
+      "5": 2,
+      "6": 80
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x64",
+      "sPalette_0x65",
+      "sPalette_0x66",
+      "sPalette_0x67"
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9E8000": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x64",
+    "sub": 2,
+    "area": 16,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 2 covers 6424 of 6513 name-table cells; per-tile sub-palettes 1/2/3 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    3
+   ],
+   "tile_subs": ".2222222222222222222222222222222222222.222222222222222222222222222222222222222222222222222222222222222222222222222222222222.22112222222222222211.22222.2222.22222233333332222222223333333322211.12333333333222..123333333332.....23333333322.....23333333322...2",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 16,
+     "name": "WOODSSPRING",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 31,
+      "2": 6424,
+      "3": 58
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x64",
+      "sPalette_0x65",
+      "sPalette_0x66",
+      "sPalette_0x67"
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9E9C6D": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x0B",
+    "sub": 0,
+    "area": 89,
+    "slot": "fixed (explicit load)"
+   },
+   "confidence": "medium",
+   "note": "weather overlay: drawn with sub-palette 0 of whichever outdoor map is active (FARMSPRING day shown); only colours 12-15 are used and the weather code rewrites them by palette-animation scripts ($8097A8-$809853)",
+   "subs_used": [
+    0
+   ],
+   "tile_subs": "................................................................................................................................00000000000000000000000000000000................................................................................................",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 89,
+     "name": "SNOW_OVERLAY",
+     "preset": null,
+     "vram": "$5000",
+     "bg": [
+      2
+     ],
+     "sub_cells": {
+      "0": 2048
+     },
+     "bg_palettes": [
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9E9EDC": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x68",
+    "sub": 1,
+    "area": 19,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 1 covers 1811 of 2047 name-table cells; per-tile sub-palettes 1/2/5/6 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    5,
+    6
+   ],
+   "tile_subs": "..111111111......111..11..1111111.111111..111...11111111..111111111111..2221111.112111..22......11.111111.......111111111........11.111112......1111111112........11111112666666..11111112666666..1111111166666651111111116666665111111111......22.11111........",
+   "alternatives": [
+    {
+     "id": "sPalette_0x6B",
+     "sub": 1,
+     "area": 20,
+     "area_name": "NY_SPA"
+    }
+   ],
+   "used_by": [
+    {
+     "area": 19,
+     "name": "WOODSWINTER",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 1811,
+      "2": 154,
+      "5": 2,
+      "6": 80
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x68",
+      "sPalette_0x69",
+      "sPalette_0x6A",
+      "sPalette_0x6B"
+     ]
+    },
+    {
+     "area": 20,
+     "name": "NY_SPA",
+     "preset": 0,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 255,
+      "2": 10
+     },
+     "bg_palettes": [
+      null,
+      null,
+      null,
+      null,
+      "sPalette_0x6B"
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9EB75D": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x68",
+    "sub": 2,
+    "area": 19,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 2 covers 6424 of 6513 name-table cells; per-tile sub-palettes 1/2/3 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    3
+   ],
+   "tile_subs": ".2222222222222222222222222222222222222.222222222222222222222222222222222222222222222222222222222222222222222222222222222222.22112222222222222211.22222.2222.22222233333332222222223333333322211.12333333333222..123333333332.....23333333322.....23333333322...2",
+   "alternatives": [
+    {
+     "id": "sPalette_0x6B",
+     "sub": 2,
+     "area": 20,
+     "area_name": "NY_SPA"
+    }
+   ],
+   "used_by": [
+    {
+     "area": 19,
+     "name": "WOODSWINTER",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 31,
+      "2": 6424,
+      "3": 58
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x68",
+      "sPalette_0x69",
+      "sPalette_0x6A",
+      "sPalette_0x6B"
+     ]
+    },
+    {
+     "area": 20,
+     "name": "NY_SPA",
+     "preset": 0,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 9,
+      "2": 532
+     },
+     "bg_palettes": [
+      null,
+      null,
+      null,
+      null,
+      "sPalette_0x6B"
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9ED208": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x68",
+    "sub": 5,
+    "area": 19,
+    "slot": "day (7-14)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 5 covers 400 of 619 name-table cells; per-tile sub-palettes 2/3/4/5 (tile_subs)",
+   "subs_used": [
+    2,
+    3,
+    4,
+    5
+   ],
+   "tile_subs": ".244444445553333.244445555552222.4444455555533334444444.555522224444444.2222..44.44444..2222..444444444.....444444444444444444444444444444444444444444..4444444.444444444444444.5555555544.4444.5555555544.4444.5555555544.4444.555555554444444.........4444444.",
+   "alternatives": [
+    {
+     "id": "sPalette_0x6B",
+     "sub": 4,
+     "area": 20,
+     "area_name": "NY_SPA"
+    }
+   ],
+   "used_by": [
+    {
+     "area": 19,
+     "name": "WOODSWINTER",
+     "preset": 0,
+     "vram": "$4000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "2": 28,
+      "3": 14,
+      "4": 177,
+      "5": 400
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x68",
+      "sPalette_0x69",
+      "sPalette_0x6A",
+      "sPalette_0x6B"
+     ]
+    },
+    {
+     "area": 20,
+     "name": "NY_SPA",
+     "preset": 0,
+     "vram": "$4000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "4": 146,
+      "5": 67
+     },
+     "bg_palettes": [
+      null,
+      null,
+      null,
+      null,
+      "sPalette_0x6B"
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9EEB3D": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x6E",
+    "sub": 0,
+    "area": 75,
+    "slot": "night/early (<7)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 0 covers 468 of 468 name-table cells",
+   "subs_used": [
+    0
+   ],
+   "tile_subs": "..0...0...0...0.0.0.0.0.0.0.0.0...0.0.0.........0.0.0.0.0.0.0.0.......0.........0.0.0.0.0.0.0.0.....0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0...0.0.0.0.0.0.0...0.0.0.0.0.0.0.0...0.0...0.0.0.0.....0.0.0.0.0...0.00..000...0.0.0.0000000.",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 75,
+     "name": "CREDITS0",
+     "preset": 5,
+     "vram": "$2000",
+     "bg": [
+      2
+     ],
+     "sub_cells": {
+      "0": 468
+     },
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 76,
+     "name": "CREDITS1",
+     "preset": 5,
+     "vram": "$2000",
+     "bg": [
+      2
+     ],
+     "sub_cells": {
+      "0": 468
+     },
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 77,
+     "name": "CREDITS2",
+     "preset": 5,
+     "vram": "$2000",
+     "bg": [
+      2
+     ],
+     "sub_cells": {
+      "0": 468
+     },
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 78,
+     "name": "CREDITS3",
+     "preset": 5,
+     "vram": "$2000",
+     "bg": [
+      2
+     ],
+     "sub_cells": {
+      "0": 468
+     },
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 79,
+     "name": "CREDITS4",
+     "preset": 5,
+     "vram": "$2000",
+     "bg": [
+      2
+     ],
+     "sub_cells": {
+      "0": 341
+     },
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 80,
+     "name": "DRIVETOTOWN",
+     "preset": 5,
+     "vram": "$2000",
+     "bg": [
+      2
+     ],
+     "sub_cells": {
+      "0": 341
+     },
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 81,
+     "name": "UNKNOWN51",
+     "preset": 5,
+     "vram": "$2000",
+     "bg": [
+      2
+     ],
+     "sub_cells": {
+      "0": 341
+     },
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 82,
+     "name": "UNKNOWN52",
+     "preset": 5,
+     "vram": "$2000",
+     "bg": [
+      2
+     ],
+     "sub_cells": {
+      "0": 341
+     },
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 83,
+     "name": "UNKNOWN53",
+     "preset": 5,
+     "vram": "$2000",
+     "bg": [
+      2
+     ],
+     "sub_cells": {
+      "0": 142
+     },
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 84,
+     "name": "UNKNOWN54",
+     "preset": 5,
+     "vram": "$2000",
+     "bg": [
+      2
+     ],
+     "sub_cells": {
+      "0": 142
+     },
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 85,
+     "name": "UNKNOWN55",
+     "preset": 5,
+     "vram": "$2000",
+     "bg": [
+      2
+     ],
+     "sub_cells": {
+      "0": 142
+     },
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 86,
+     "name": "UNKNOWN56",
+     "preset": 5,
+     "vram": "$2000",
+     "bg": [
+      2
+     ],
+     "sub_cells": {
+      "0": 142
+     },
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9F8000": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x6C",
+    "sub": 6,
+    "area": 91,
+    "slot": "fixed (explicit load)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 6 covers 342 of 485 name-table cells; per-tile sub-palettes 0/1/3/4/5/6 (tile_subs)",
+   "subs_used": [
+    0,
+    1,
+    3,
+    4,
+    5,
+    6
+   ],
+   "tile_subs": "..44443333333333....343333333333....443333333773..1.443.333337771111....333337771111..11111111111111..44111111144444446600000004444444666666666466664466666666646666446666666664....446666666664....446656666664555544666666666555444466666666566666666666666666",
+   "alternatives": [
+    {
+     "id": "sPalette_0x6C",
+     "sub": 7,
+     "area": 92,
+     "area_name": "TITLE_LOGO"
+    }
+   ],
+   "used_by": [
+    {
+     "area": 91,
+     "name": "TITLE_INTRO_FARM",
+     "preset": 3,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "0": 7,
+      "1": 30,
+      "3": 44,
+      "4": 53,
+      "5": 9,
+      "6": 342
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x6C",
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 92,
+     "name": "TITLE_LOGO",
+     "preset": 3,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "7": 8
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x6C",
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9F946C": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x6C",
+    "sub": 4,
+    "area": 91,
+    "slot": "fixed (explicit load)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 4 covers 52 of 156 name-table cells; per-tile sub-palettes 1/2/3/4/5/6 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "tile_subs": "77777777777777227777777777777722222222222222222722222222222222272222221177777777222222227777777711111111..322777444444444424427744444444443333334444444..53333334444444..63333333333444233333333..........333333..........3446357777777777344445777777.721666666",
+   "alternatives": [
+    {
+     "id": "sPalette_0x6C",
+     "sub": 7,
+     "area": 92,
+     "area_name": "TITLE_LOGO"
+    }
+   ],
+   "used_by": [
+    {
+     "area": 91,
+     "name": "TITLE_INTRO_FARM",
+     "preset": 3,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 12,
+      "2": 40,
+      "3": 41,
+      "4": 52,
+      "5": 3,
+      "6": 8
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x6C",
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 92,
+     "name": "TITLE_LOGO",
+     "preset": 3,
+     "vram": "$3000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "2": 34,
+      "7": 93
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x6C",
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9FAA75": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x6C",
+    "sub": 4,
+    "area": 91,
+    "slot": "fixed (explicit load)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 4 covers 210 of 418 name-table cells; per-tile sub-palettes 1/2/3/4/5/6 (tile_subs)",
+   "subs_used": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "tile_subs": "777777777777777777777777777777777777777777777777777777777777777.77777777777777777777777777777777.333333.1....4..333333333.3363..3333333332335...445556....446...445556....446.774444444444445.774444444444445.774455555555445.7744555554444477776666666666667777",
+   "alternatives": [
+    {
+     "id": "sPalette_0x6C",
+     "sub": 7,
+     "area": 92,
+     "area_name": "TITLE_LOGO"
+    }
+   ],
+   "used_by": [
+    {
+     "area": 91,
+     "name": "TITLE_INTRO_FARM",
+     "preset": 3,
+     "vram": "$4000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "1": 1,
+      "2": 1,
+      "3": 41,
+      "4": 210,
+      "5": 88,
+      "6": 77
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x6C",
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 92,
+     "name": "TITLE_LOGO",
+     "preset": 3,
+     "vram": "$4000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "7": 111
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x6C",
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9FC04C": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x6C",
+    "sub": 2,
+    "area": 91,
+    "slot": "fixed (explicit load)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 2 covers 3840 of 3840 name-table cells",
+   "subs_used": [
+    2
+   ],
+   "tile_subs": "77777777777777.7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777722222222222222222222222222222222777222222222222272227222222222222222772222222222222222222222227722222222222222272222772222222277",
+   "alternatives": [
+    {
+     "id": "sPalette_0x6C",
+     "sub": 7,
+     "area": 92,
+     "area_name": "TITLE_LOGO"
+    }
+   ],
+   "used_by": [
+    {
+     "area": 91,
+     "name": "TITLE_INTRO_FARM",
+     "preset": 3,
+     "vram": "$5000",
+     "bg": [
+      2
+     ],
+     "sub_cells": {
+      "2": 3840
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x6C",
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 92,
+     "name": "TITLE_LOGO",
+     "preset": 3,
+     "vram": "$5000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "7": 141
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x6C",
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9FEF97": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x6D",
+    "sub": 0,
+    "area": 93,
+    "slot": "fixed (explicit load)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 0 covers 4096 of 4096 name-table cells",
+   "subs_used": [
+    0
+   ],
+   "tile_subs": "0.00000000000000..00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000..00000000000000..00000000000000000000000000....000000000000....000000000000....000000000000....00000000........00000000........",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 93,
+     "name": "NATSUME_LOGO",
+     "preset": 3,
+     "vram": "$2000",
+     "bg": [
+      1
+     ],
+     "sub_cells": {
+      "0": 4096
+     },
+     "bg_palettes": [
+      null,
+      "sPalette_0x6D",
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_A08000": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x6E",
+    "sub": 0,
+    "area": 83,
+    "slot": "night/early (<7)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 0 covers 74 of 74 name-table cells",
+   "subs_used": [
+    0
+   ],
+   "tile_subs": "00000000000000..00000000000000..0000000000000000000000..0000000000..............00..............................................................................................................................................................................",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 75,
+     "name": "CREDITS0",
+     "preset": 5,
+     "vram": "$3000",
+     "bg": [],
+     "sub_cells": {},
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 76,
+     "name": "CREDITS1",
+     "preset": 5,
+     "vram": "$3000",
+     "bg": [],
+     "sub_cells": {},
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 77,
+     "name": "CREDITS2",
+     "preset": 5,
+     "vram": "$3000",
+     "bg": [],
+     "sub_cells": {},
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 78,
+     "name": "CREDITS3",
+     "preset": 5,
+     "vram": "$3000",
+     "bg": [],
+     "sub_cells": {},
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 79,
+     "name": "CREDITS4",
+     "preset": 5,
+     "vram": "$3000",
+     "bg": [],
+     "sub_cells": {},
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 80,
+     "name": "DRIVETOTOWN",
+     "preset": 5,
+     "vram": "$3000",
+     "bg": [],
+     "sub_cells": {},
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 81,
+     "name": "UNKNOWN51",
+     "preset": 5,
+     "vram": "$3000",
+     "bg": [],
+     "sub_cells": {},
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 82,
+     "name": "UNKNOWN52",
+     "preset": 5,
+     "vram": "$3000",
+     "bg": [],
+     "sub_cells": {},
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 83,
+     "name": "UNKNOWN53",
+     "preset": 5,
+     "vram": "$3000",
+     "bg": [
+      2
+     ],
+     "sub_cells": {
+      "0": 74
+     },
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 84,
+     "name": "UNKNOWN54",
+     "preset": 5,
+     "vram": "$3000",
+     "bg": [
+      2
+     ],
+     "sub_cells": {
+      "0": 74
+     },
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 85,
+     "name": "UNKNOWN55",
+     "preset": 5,
+     "vram": "$3000",
+     "bg": [
+      2
+     ],
+     "sub_cells": {
+      "0": 74
+     },
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 86,
+     "name": "UNKNOWN56",
+     "preset": 5,
+     "vram": "$3000",
+     "bg": [
+      2
+     ],
+     "sub_cells": {
+      "0": 74
+     },
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_A088E9": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x6E",
+    "sub": 0,
+    "area": 83,
+    "slot": "night/early (<7)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 0 covers 60 of 60 name-table cells",
+   "subs_used": [
+    0
+   ],
+   "tile_subs": "......................................00000000........00000000......00..............00..................00..............00......00..............00..............................................................................00000000000000000000000000000000",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 75,
+     "name": "CREDITS0",
+     "preset": 5,
+     "vram": "$4000",
+     "bg": [],
+     "sub_cells": {},
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 76,
+     "name": "CREDITS1",
+     "preset": 5,
+     "vram": "$4000",
+     "bg": [],
+     "sub_cells": {},
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 77,
+     "name": "CREDITS2",
+     "preset": 5,
+     "vram": "$4000",
+     "bg": [],
+     "sub_cells": {},
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 78,
+     "name": "CREDITS3",
+     "preset": 5,
+     "vram": "$4000",
+     "bg": [],
+     "sub_cells": {},
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 79,
+     "name": "CREDITS4",
+     "preset": 5,
+     "vram": "$4000",
+     "bg": [],
+     "sub_cells": {},
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 80,
+     "name": "DRIVETOTOWN",
+     "preset": 5,
+     "vram": "$4000",
+     "bg": [],
+     "sub_cells": {},
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 81,
+     "name": "UNKNOWN51",
+     "preset": 5,
+     "vram": "$4000",
+     "bg": [],
+     "sub_cells": {},
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 82,
+     "name": "UNKNOWN52",
+     "preset": 5,
+     "vram": "$4000",
+     "bg": [],
+     "sub_cells": {},
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 83,
+     "name": "UNKNOWN53",
+     "preset": 5,
+     "vram": "$4000",
+     "bg": [
+      2
+     ],
+     "sub_cells": {
+      "0": 60
+     },
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 84,
+     "name": "UNKNOWN54",
+     "preset": 5,
+     "vram": "$4000",
+     "bg": [
+      2
+     ],
+     "sub_cells": {
+      "0": 60
+     },
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 85,
+     "name": "UNKNOWN55",
+     "preset": 5,
+     "vram": "$4000",
+     "bg": [
+      2
+     ],
+     "sub_cells": {
+      "0": 60
+     },
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 86,
+     "name": "UNKNOWN56",
+     "preset": 5,
+     "vram": "$4000",
+     "bg": [
+      2
+     ],
+     "sub_cells": {
+      "0": 60
+     },
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_A09232": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x6E",
+    "sub": 0,
+    "area": 75,
+    "slot": "night/early (<7)"
+   },
+   "confidence": "low",
+   "note": "no static BG name table references this sheet (its name table is written at run time); sub-palette 0 assumed",
+   "subs_used": [],
+   "tile_subs": "................................................................................................................................................................................................................................................................",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 75,
+     "name": "CREDITS0",
+     "preset": 5,
+     "vram": "$5000",
+     "bg": [],
+     "sub_cells": {},
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 76,
+     "name": "CREDITS1",
+     "preset": 5,
+     "vram": "$5000",
+     "bg": [],
+     "sub_cells": {},
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 77,
+     "name": "CREDITS2",
+     "preset": 5,
+     "vram": "$5000",
+     "bg": [],
+     "sub_cells": {},
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 78,
+     "name": "CREDITS3",
+     "preset": 5,
+     "vram": "$5000",
+     "bg": [],
+     "sub_cells": {},
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    },
+    {
+     "area": 82,
+     "name": "UNKNOWN52",
+     "preset": 5,
+     "vram": "$5000",
+     "bg": [],
+     "sub_cells": {},
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_A0AB1E": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x6E",
+    "sub": 0,
+    "area": 81,
+    "slot": "night/early (<7)"
+   },
+   "confidence": "low",
+   "note": "no static BG name table references this sheet (its name table is written at run time); sub-palette 0 assumed",
+   "subs_used": [],
+   "tile_subs": "................................................................................................................................................................................................................................................................",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 81,
+     "name": "UNKNOWN51",
+     "preset": 5,
+     "vram": "$5000",
+     "bg": [],
+     "sub_cells": {},
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_A0CAAF": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x6E",
+    "sub": 3,
+    "area": 86,
+    "slot": "night/early (<7)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 3 covers 224 of 236 name-table cells; per-tile sub-palettes 0/3 (tile_subs)",
+   "subs_used": [
+    0,
+    3
+   ],
+   "tile_subs": "33333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333000000..........000000..........",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 86,
+     "name": "UNKNOWN56",
+     "preset": 5,
+     "vram": "$5000",
+     "bg": [
+      2
+     ],
+     "sub_cells": {
+      "0": 12,
+      "3": 224
+     },
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_A0E682": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x6E",
+    "sub": 0,
+    "area": 80,
+    "slot": "night/early (<7)"
+   },
+   "confidence": "low",
+   "note": "no static BG name table references this sheet (its name table is written at run time); sub-palette 0 assumed",
+   "subs_used": [],
+   "tile_subs": "................................................................................................................................................................................................................................................................",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 80,
+     "name": "DRIVETOTOWN",
+     "preset": 5,
+     "vram": "$5000",
+     "bg": [],
+     "sub_cells": {},
+     "bg_palettes": [
+      "sPalette_0x6E",
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "sCompressedTiles_9FD4DA": {
+   "kind": "tiles",
+   "palette": {
+    "id": "sPalette_0x6C",
+    "sub": 7,
+    "area": 92,
+    "slot": "fixed (explicit load)"
+   },
+   "confidence": "low",
+   "note": "Japanese title logo (wooden board kanji) left in the US ROM; no map loads it. Title screen palette and the sub-palette that the US logo tiles of area $5C use are assumed",
+   "alternatives": []
+  },
+  "Sprites_888000": {
+   "kind": "sprites",
+   "palette": {
+    "id": "sPalette_0x6F",
+    "sub": 4,
+    "area": null,
+    "slot": "OBJ day (aMapPalettesId)"
+   },
+   "confidence": "high",
+   "note": "OAM palette row of 481 of 527 object components is 4; the rest use rows 3, 5, 6",
+   "subs_used": [
+    3,
+    4,
+    5,
+    6
+   ],
+   "components_per_row": {
+    "3": 9,
+    "4": 481,
+    "5": 20,
+    "6": 17
+   },
+   "sprite_rows": "44.444..4444444.444.4.44444.4444444.4444.444444444444444444444444.44444444444444.4.4444444444444.44.4444.44444444444466644444...44444444444.4.4444444.4.4444666..444444..444444....4.4.....44...4444444.444444434444444544444445444455..44445.5.55543...55.44...",
+   "multi_row_sprites": {},
+   "alternatives": [
+    {
+     "id": "sPalette_0x70",
+     "sub": 4,
+     "note": "same row, night palette (from 18:00)"
+    },
+    {
+     "id": "sPalette_0x71",
+     "sub": 4,
+     "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    },
+    {
+     "id": "sPalette_0x72",
+     "sub": 4,
+     "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    },
+    {
+     "id": "sPalette_0x73",
+     "sub": 4,
+     "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    }
+   ]
+  },
+  "Sprites_898000": {
+   "kind": "sprites",
+   "palette": {
+    "id": "sPalette_0x6F",
+    "sub": 4,
+    "area": null,
+    "slot": "OBJ day (aMapPalettesId)"
+   },
+   "confidence": "high",
+   "note": "OAM palette row of 321 of 321 object components is 4; the rest use rows none",
+   "subs_used": [
+    4
+   ],
+   "components_per_row": {
+    "4": 321
+   },
+   "sprite_rows": "4444444444444444444444444444444444444444444444444444444.4444444444.4444444.444444444444444444444444444444444444444444444444444444444444.444444.4444444444444444444444444444444444444444444444444.444444444444444444444444444444444444444444444444444444444444444",
+   "multi_row_sprites": {},
+   "alternatives": [
+    {
+     "id": "sPalette_0x70",
+     "sub": 4,
+     "note": "same row, night palette (from 18:00)"
+    },
+    {
+     "id": "sPalette_0x71",
+     "sub": 4,
+     "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    },
+    {
+     "id": "sPalette_0x72",
+     "sub": 4,
+     "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    },
+    {
+     "id": "sPalette_0x73",
+     "sub": 4,
+     "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    }
+   ]
+  },
+  "Sprites_8A8000": {
+   "kind": "sprites",
+   "palette": {
+    "id": "sPalette_0x6F",
+    "sub": 4,
+    "area": null,
+    "slot": "OBJ day (aMapPalettesId)"
+   },
+   "confidence": "high",
+   "note": "OAM palette row of 282 of 282 object components is 4; the rest use rows none",
+   "subs_used": [
+    4
+   ],
+   "components_per_row": {
+    "4": 282
+   },
+   "sprite_rows": "444.4444444444444.4444444444444444444444444444444444444.4444.44.44444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444.444.4.4.....",
+   "multi_row_sprites": {},
+   "alternatives": [
+    {
+     "id": "sPalette_0x70",
+     "sub": 4,
+     "note": "same row, night palette (from 18:00)"
+    },
+    {
+     "id": "sPalette_0x71",
+     "sub": 4,
+     "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    },
+    {
+     "id": "sPalette_0x72",
+     "sub": 4,
+     "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    },
+    {
+     "id": "sPalette_0x73",
+     "sub": 4,
+     "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    }
+   ]
+  },
+  "Sprites_8B8000": {
+   "kind": "sprites",
+   "palette": {
+    "id": "sPalette_0x6F",
+    "sub": 4,
+    "area": null,
+    "slot": "OBJ day (aMapPalettesId)"
+   },
+   "confidence": "high",
+   "note": "OAM palette row of 371 of 374 object components is 4; the rest use rows 6, 7",
+   "subs_used": [
+    4,
+    6,
+    7
+   ],
+   "components_per_row": {
+    "4": 371,
+    "6": 2,
+    "7": 1
+   },
+   "sprite_rows": "444444444444444444444444444444444444444444444444446.76444444444.4.4.44444444.4444444444444444444444444444444444444444444444444444.444444444..4.44444444444444444444444444444444444444444444444444444444.4444444444444444444444.44444444444444444................",
+   "multi_row_sprites": {},
+   "alternatives": [
+    {
+     "id": "sPalette_0x70",
+     "sub": 4,
+     "note": "same row, night palette (from 18:00)"
+    },
+    {
+     "id": "sPalette_0x71",
+     "sub": 4,
+     "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    },
+    {
+     "id": "sPalette_0x72",
+     "sub": 4,
+     "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    },
+    {
+     "id": "sPalette_0x73",
+     "sub": 4,
+     "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    }
+   ]
+  },
+  "Sprites_8C8000": {
+   "kind": "sprites",
+   "palette": {
+    "id": "sPalette_0x6F",
+    "sub": 7,
+    "area": null,
+    "slot": "OBJ day (aMapPalettesId)"
+   },
+   "confidence": "high",
+   "note": "OAM palette row of 341 of 928 object components is 7; the rest use rows 0, 1, 3, 4, 5, 6",
+   "subs_used": [
+    0,
+    1,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "components_per_row": {
+    "0": 65,
+    "1": 1,
+    "3": 17,
+    "4": 98,
+    "5": 79,
+    "6": 327,
+    "7": 341
+   },
+   "sprite_rows": "4444444444444444444444444444444444444444444444444444444444444.........56......6666666666666666664444..667777....66666676666666..66467775466666664666666606.67767..664467....6666........7.......77775555777755557777776777777767000736000007.75644046.767777.577",
+   "multi_row_sprites": {
+    "98": {
+     "0": 4,
+     "6": 1
+    },
+    "A6": {
+     "6": 17,
+     "7": 1
+    },
+    "B8": {
+     "0": 2,
+     "4": 2,
+     "6": 1,
+     "7": 3
+    },
+    "E3": {
+     "1": 1,
+     "7": 16
+    }
+   },
+   "alternatives": [
+    {
+     "id": "sPalette_0x70",
+     "sub": 7,
+     "note": "same row, night palette (from 18:00)"
+    },
+    {
+     "id": "sPalette_0x71",
+     "sub": 7,
+     "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    },
+    {
+     "id": "sPalette_0x72",
+     "sub": 7,
+     "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    },
+    {
+     "id": "sPalette_0x73",
+     "sub": 7,
+     "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    }
+   ]
+  },
+  "Sprites_8D8000": {
+   "kind": "sprites",
+   "palette": {
+    "id": "sPalette_0x6F",
+    "sub": 5,
+    "area": null,
+    "slot": "OBJ day (aMapPalettesId)"
+   },
+   "confidence": "high",
+   "note": "OAM palette row of 385 of 385 object components is 5; the rest use rows none",
+   "subs_used": [
+    5
+   ],
+   "components_per_row": {
+    "5": 385
+   },
+   "sprite_rows": "55555555555555555555555555555555555555555555555555555.5555555.5555.5555555.5555555555555555555555555555555555555555555.5..555555555555555555555555..5555555555555555555555555555555555555555555555555555555555555555555555555...5.55555555555555.555555555555555",
+   "multi_row_sprites": {},
+   "alternatives": [
+    {
+     "id": "sPalette_0x70",
+     "sub": 5,
+     "note": "same row, night palette (from 18:00)"
+    },
+    {
+     "id": "sPalette_0x71",
+     "sub": 5,
+     "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    },
+    {
+     "id": "sPalette_0x72",
+     "sub": 5,
+     "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    },
+    {
+     "id": "sPalette_0x73",
+     "sub": 5,
+     "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    }
+   ]
+  },
+  "Sprites_8E8000": {
+   "kind": "sprites",
+   "palette": {
+    "id": "sPalette_0x6F",
+    "sub": 5,
+    "area": null,
+    "slot": "OBJ day (aMapPalettesId)"
+   },
+   "confidence": "high",
+   "note": "OAM palette row of 209 of 363 object components is 5; the rest use rows 4",
+   "subs_used": [
+    4,
+    5
+   ],
+   "components_per_row": {
+    "4": 154,
+    "5": 209
+   },
+   "sprite_rows": ".55555555555555555555555555555555555555555555555555555555.......555555555555555555555555555555555555555555555555555555555555555544444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444445555444455555555555555555544",
+   "multi_row_sprites": {},
+   "alternatives": [
+    {
+     "id": "sPalette_0x70",
+     "sub": 5,
+     "note": "same row, night palette (from 18:00)"
+    },
+    {
+     "id": "sPalette_0x71",
+     "sub": 5,
+     "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    },
+    {
+     "id": "sPalette_0x72",
+     "sub": 5,
+     "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    },
+    {
+     "id": "sPalette_0x73",
+     "sub": 5,
+     "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    }
+   ]
+  },
+  "Sprites_8F8000": {
+   "kind": "sprites",
+   "palette": {
+    "id": "sPalette_0x6F",
+    "sub": 4,
+    "area": null,
+    "slot": "OBJ day (aMapPalettesId)"
+   },
+   "confidence": "high",
+   "note": "OAM palette row of 180 of 364 object components is 4; the rest use rows 1, 2, 3, 5",
+   "subs_used": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "components_per_row": {
+    "1": 84,
+    "2": 89,
+    "3": 8,
+    "4": 180,
+    "5": 3
+   },
+   "sprite_rows": "111111111111111111111111111111111111111111111111411.44444114444444434..244434.32222222322222223222322222.22222222223222222232222444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444222.2.2222222221111..22111154",
+   "multi_row_sprites": {},
+   "alternatives": [
+    {
+     "id": "sPalette_0x70",
+     "sub": 4,
+     "note": "same row, night palette (from 18:00)"
+    },
+    {
+     "id": "sPalette_0x71",
+     "sub": 4,
+     "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    },
+    {
+     "id": "sPalette_0x72",
+     "sub": 4,
+     "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    },
+    {
+     "id": "sPalette_0x73",
+     "sub": 4,
+     "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    }
+   ]
+  },
+  "Sprites_908000": {
+   "kind": "sprites",
+   "palette": {
+    "id": "sPalette_0x6F",
+    "sub": 1,
+    "area": null,
+    "slot": "OBJ day (aMapPalettesId)"
+   },
+   "confidence": "high",
+   "note": "OAM palette row of 166 of 396 object components is 1; the rest use rows 0, 2, 3, 4",
+   "subs_used": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "components_per_row": {
+    "0": 44,
+    "1": 166,
+    "2": 22,
+    "3": 88,
+    "4": 76
+   },
+   "sprite_rows": "111111.1111111114444444144444411111111111111111.1111111111111111114444411144444111111111111111111111111.1111111.11111100111111..00000004000000.4000002220000022222222244444444444444444444.44...333333333333333333333333333333333333333333333333333.333.3.....3.",
+   "multi_row_sprites": {},
+   "alternatives": [
+    {
+     "id": "sPalette_0x70",
+     "sub": 1,
+     "note": "same row, night palette (from 18:00)"
+    },
+    {
+     "id": "sPalette_0x71",
+     "sub": 1,
+     "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    },
+    {
+     "id": "sPalette_0x72",
+     "sub": 1,
+     "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    },
+    {
+     "id": "sPalette_0x73",
+     "sub": 1,
+     "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    }
+   ]
+  },
+  "Sprites_918000": {
+   "kind": "sprites",
+   "palette": {
+    "id": "sPalette_0x6F",
+    "sub": 3,
+    "area": null,
+    "slot": "OBJ day (aMapPalettesId)"
+   },
+   "confidence": "high",
+   "note": "OAM palette row of 83 of 314 object components is 3; the rest use rows 0, 1, 2, 4, 5, 6, 7",
+   "subs_used": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "components_per_row": {
+    "0": 10,
+    "1": 21,
+    "2": 18,
+    "3": 83,
+    "4": 23,
+    "5": 50,
+    "6": 71,
+    "7": 38
+   },
+   "sprite_rows": "5555555555555055555555550.555555055555555557771133.4434655555566777777777777777777776666................................0.......4.44333344443.333333333333333333333333331333333133333331333.3331114112204111122055002221550022666666666666664...66664.4.2222444.",
+   "multi_row_sprites": {
+    "35": {
+     "3": 3,
+     "4": 1
+    }
+   },
+   "alternatives": [
+    {
+     "id": "sPalette_0x70",
+     "sub": 3,
+     "note": "same row, night palette (from 18:00)"
+    },
+    {
+     "id": "sPalette_0x71",
+     "sub": 3,
+     "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    },
+    {
+     "id": "sPalette_0x72",
+     "sub": 3,
+     "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    },
+    {
+     "id": "sPalette_0x73",
+     "sub": 3,
+     "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    }
+   ]
+  }
+ }
+}

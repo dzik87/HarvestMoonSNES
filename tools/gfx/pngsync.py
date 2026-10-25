@@ -5,7 +5,8 @@ that the assembler includes (assets/gfx/{tiles,sprites,characters}/*.bin) must b
   export  [--label PAT]...   .bin -> PNG / text + JSON sidecar   (use once, or after changing the pipeline)
   import  [--label PAT]...   PNG / text -> .bin                  (the modding step; then rebuild with tools/build.py)
   check   [--label PAT]...   PNG / text -> bytes must equal the committed .bin for every blob (CI), exit 1 otherwise
-  preview [--label PAT]... [--out DIR]   render BG name tables with their tile sets to DIR (default build/gfx_preview)
+  preview [--label PAT]... [--out DIR]   render BG name tables with their tile sets (in game colours) to DIR (default
+                                          build/gfx_preview), tile sheets and sprite banks with a palette per tile to DIR/sheets
 
 Blob kinds (PAT is an fnmatch pattern on the label, e.g. 'sCompressedTiles_9*' or 'Sprites_88*'; default: all):
   tiles      assets/gfx/tiles/sCompressedTiles_*.bin      LZSS-compressed 4bpp tile graphics -> assets/gfx/png/tiles/<label>.png
@@ -16,7 +17,9 @@ Every blob has a <label>.json sidecar next to its PNG / text file (bpp, bpp_conf
 raw_size, trailing bytes of the label span, VRAM destination).  Details: docs/formats/graphics-png.md.
 
 PNG rules: indexed colour (mode P), fixed dimensions, pixel value = SNES colour index (must stay < 2^bpp); the palette
-stored in the PNG is only a viewing aid and is ignored on import.  Name tables: 16-bit hex words, `columns` per row
+stored in the PNG (PLTE) is only a viewing aid and is ignored on import: `export` fills it with the real 16 colours of the
+sub-palette the blob is displayed with (assets/gfx/palette_map.json, docs/formats/graphics-palettes.md); index 0 of sprite
+sheets is marked transparent (tRNS).  Name tables: 16-bit hex words, `columns` per row
 (sidecar: 32, or 128 for the raw sCharactermap_* world maps), a blank line after every 32 rows; free to edit, the number of words must not change.
 
 `import` refuses to change the size of the blob in the ROM unless --allow-resize is given: a shorter compressed stream is
@@ -33,6 +36,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools" / "gfx"))
 import tilemap_codec as C  # noqa: E402
+from palette_map import us_lines  # noqa: E402
 
 PAD = bytes(64)            # lets decompress() read past the end of a blob that is the last thing in its file
 BANK = 0x8000
@@ -127,20 +131,66 @@ def grayscale_palette(bpp):
     return [(i * 255 // (n - 1),) * 3 for i in range(n)]
 
 
-def load_view_palette(spec, bpp):
+_PALETTE_JSON = {}
+_PALETTE_MAP = {}
+MAX_ALTERNATIVES = 6
+
+
+def palette_colors(pal_id, root=ROOT):
+    """sPalette_0xNN -> 256 '#RRGGBB' strings (assets/gfx/palettes)."""
+    key = (str(root), pal_id)
+    if key not in _PALETTE_JSON:
+        _PALETTE_JSON[key] = json.loads((Path(root) / "assets/gfx/palettes" / f"{pal_id}.json").read_text())["colors"]
+    return _PALETTE_JSON[key]
+
+
+def hex_rgb(c):
+    return tuple(int(c[i:i + 2], 16) for i in (1, 3, 5))
+
+
+def load_view_palette(spec, bpp, root=ROOT):
     """sidecar "palette": {"id": "sPalette_0x05", "sub": 3} -> list of RGB for the PNG viewing palette."""
-    colors = json.loads((ROOT / "assets/gfx/palettes" / f"{spec['id']}.json").read_text())["colors"]
+    colors = palette_colors(spec["id"], root)
     n = 1 << bpp
     sub = spec.get("sub", 0)
-    return [tuple(int(c[i:i + 2], 16) for i in (1, 3, 5)) for c in colors[sub * n:(sub + 1) * n]]
+    return [hex_rgb(c) for c in colors[sub * n:(sub + 1) * n]]
 
 
-def save_png(path, width, height, pix, palette):
+def palette_map(root=ROOT):
+    """assets/gfx/palette_map.json ({} when absent, e.g. in a reduced test tree); derived by tools/gfx/palette_map.py."""
+    key = str(root)
+    if key not in _PALETTE_MAP:
+        p = Path(root) / "assets/gfx/palette_map.json"
+        _PALETTE_MAP[key] = json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
+    return _PALETTE_MAP[key]
+
+
+def palette_fields(b, old):
+    """sidecar keys describing the palette of blob b: from the palette map, else kept from the old sidecar."""
+    ent = palette_map(b.root).get("blobs", {}).get(b.label)
+    if ent and ent["palette"].get("id"):
+        out = {"palette": {"id": ent["palette"]["id"], "sub": ent["palette"]["sub"]},
+               "palette_confidence": ent["confidence"], "palette_note": ent["note"]}
+        if len(ent.get("subs_used", [])) > 1:
+            out["palette_subs_used"] = ent["subs_used"]
+        alts = [{k: v for k, v in a.items() if k != "area"} for a in ent.get("alternatives", [])]
+        if alts:
+            out["palette_alternatives"] = alts[:MAX_ALTERNATIVES]
+            if len(alts) > MAX_ALTERNATIVES:
+                out["palette_alternatives_total"] = len(alts)
+        return out
+    if ent:                                                   # known blob without a palette (no evidence)
+        return {"palette_confidence": ent["confidence"], "palette_note": ent["note"]}
+    return {k: old[k] for k in ("palette",) if old.get(k)}
+
+
+def save_png(path, width, height, pix, palette, transparent0=False):
     from PIL import Image
     img = Image.frombytes("P", (width, height), pix)
     img.putpalette([c for rgb in palette for c in rgb])
     path.parent.mkdir(parents=True, exist_ok=True)
-    img.save(path, "PNG", optimize=True, compress_level=9)       # Pillow writes no timestamps -> deterministic
+    extra = {"transparency": 0} if transparent0 else {}        # tRNS: index 0 of OBJ palettes is transparent
+    img.save(path, "PNG", optimize=True, compress_level=9, **extra)   # Pillow writes no timestamps -> deterministic
 
 
 def load_png(path):
@@ -268,7 +318,7 @@ def map_table(root=ROOT):
     global _MAP_INFO
     if _MAP_INFO is not None and Path(root) == ROOT:
         return _MAP_INFO
-    text = (Path(root) / "src/code/bank_80/tilemaps.asm").read_text(encoding="utf-8", errors="replace").splitlines()
+    text = us_lines((Path(root) / "src/code/bank_80/tilemaps.asm").read_text(encoding="utf-8", errors="replace").splitlines())
     start = next(i for i, l in enumerate(text) if re.match(r"^sFarmSpringMap:", l))
     maps, cur, last = {}, None, None
     for l in text[start:]:
@@ -337,12 +387,16 @@ def export_blob(b):
         tpr = old.get("tiles_per_row", 16)
         meta.update({"format": "snes_planar_tiles", "bpp": 4, "bpp_confidence": conf, "bpp_note": note, "tiles_per_row": tpr})
         w, h, pix = decode_sheet(raw, 4, tpr)
-        pal = load_view_palette(old["palette"], 4) if old.get("palette") else grayscale_palette(4)
-        save_png(b.art, w, h, pix, pal)
+        pf = palette_fields(b, old)
+        pal = load_view_palette(pf["palette"], 4, b.root) if pf.get("palette") else grayscale_palette(4)
+        save_png(b.art, w, h, pix, pal, transparent0=(b.kind == "sprites" and "palette" in pf))
+        meta.update(usage(b))
+        meta.update(split_tail(tail))
+        meta.update(pf)
+        write_meta(b, meta)
+        return meta
     meta.update(usage(b))
     meta.update(split_tail(tail))
-    if old.get("palette"):
-        meta["palette"] = old["palette"]
     write_meta(b, meta)
     return meta
 
@@ -473,8 +527,23 @@ def cmd_import(a, root=ROOT):
     return 0
 
 
-def render_nametable(raw, tile_sets, base_word, columns):
-    """grayscale preview of a name table; tile_sets = {vram_word_dest: raw tile data}; palette bits are ignored."""
+def view_palette128(pal_id, root=ROOT):
+    """first 8 sub-palettes (128 colours) of a palette as RGB triples; CGRAM rows 0-7 of a BG or OBJ palette."""
+    return [hex_rgb(c) for c in palette_colors(pal_id, root)[:128]]
+
+
+def map_palette_id(map_label, root=ROOT):
+    """sPalette id that the BGs of map `map_label` are shown with (day slot), from palette_map.json; None if unknown."""
+    for ent in palette_map(root).get("areas", {}).values():
+        if ent["map"] == map_label:
+            slots = ent["bg_palettes"]
+            return slots[1] or next((x for x in slots if x), None)
+    return None
+
+
+def render_nametable(raw, tile_sets, base_word, columns, palette=None):
+    """preview of a name table; tile_sets = {vram_word_dest: raw tile data}.  With `palette` (128 RGB triples) the palette
+    bits of every entry select the sub-palette (game colours); without it the image is grayscale."""
     from PIL import Image
     vram = bytearray(0x20000)
     for dest, data in tile_sets.items():
@@ -483,13 +552,15 @@ def render_nametable(raw, tile_sets, base_word, columns):
     rows = (len(words) + columns - 1) // columns
     cache = {}
     img = Image.new("P", (columns * 8, rows * 8), 0)
-    img.putpalette([c for rgb in grayscale_palette(4) for c in rgb])
+    img.putpalette([c for rgb in (palette or grayscale_palette(4)) for c in rgb])
     for i, w in enumerate(words):
-        key = w & 0xC3FF
+        key = w & (0xDFFF if palette else 0xC3FF)
         t = cache.get(key)
         if t is None:
             off = (base_word + (w & 0x3FF) * 16) * 2
             tw, th, pix = decode_sheet(bytes(vram[off:off + 32]) if off + 32 <= len(vram) else bytes(32), 4, 1)
+            if palette:
+                pix = bytes(v + 16 * (w >> 10 & 7) for v in pix)
             t = Image.frombytes("P", (8, 8), pix)
             if w & 0x4000:
                 t = t.transpose(Image.FLIP_LEFT_RIGHT)
@@ -498,6 +569,52 @@ def render_nametable(raw, tile_sets, base_word, columns):
             cache[key] = t
         img.paste(t, ((i % columns) * 8, (i // columns) * 8))
     return img
+
+
+def tile_sub_map(b, meta, root=ROOT):
+    """per-8x8-tile sub-palette list (index = tile number in the sheet, None = unknown) from palette_map.json."""
+    ent = palette_map(root).get("blobs", {}).get(b.label)
+    if not ent or not ent["palette"].get("id"):
+        return None
+    primary = ent["palette"]["sub"]
+    n = meta["raw_size"] // 32
+    tpr = meta["tiles_per_row"]
+    subs = []
+    if b.kind == "tiles":
+        s = ent.get("tile_subs", "")
+        subs = [int(s[t]) if t < len(s) and s[t] != "." else primary for t in range(n)]
+    else:                                       # sprite bank: 16x16 sprites, id = block*64 + (row%16)//2*8 + col//2
+        s = ent.get("sprite_rows", "")
+        for t in range(n):
+            tx, ty = t % tpr, t // tpr
+            cid = (ty // 16) * 64 + ((ty % 16) // 2) * 8 + tx // 2
+            subs.append(int(s[cid]) if cid < len(s) and s[cid] != "." else primary)
+    return subs
+
+
+def render_sheet(b, meta, root=ROOT):
+    """tile sheet / sprite bank in game colours: every tile gets the sub-palette recorded in palette_map.json.  RGBA, index 0
+    transparent for sprites."""
+    from PIL import Image
+    ent = palette_map(root)["blobs"][b.label]
+    raw, _ = read_raw(b)
+    tpr = meta["tiles_per_row"]
+    w, h, pix = decode_sheet(raw, 4, tpr)
+    subs = tile_sub_map(b, meta, root)
+    out = bytearray(len(pix))
+    for t, sub in enumerate(subs):
+        ox, oy = (t % tpr) * 8, (t // tpr) * 8
+        for y in range(8):
+            o = (oy + y) * w + ox
+            out[o:o + 8] = bytes(v + 16 * sub for v in pix[o:o + 8])
+    img = Image.frombytes("P", (w, h), bytes(out))
+    pal = view_palette128(ent["palette"]["id"], root)
+    img.putpalette([c for rgb in pal for c in rgb])
+    rgba = img.convert("RGBA")
+    if b.kind == "sprites":
+        mask = Image.frombytes("L", (w, h), bytes(0 if v % 16 == 0 else 255 for v in out))
+        rgba.putalpha(mask)
+    return rgba
 
 
 def cmd_preview(a, root=ROOT):
@@ -518,9 +635,23 @@ def cmd_preview(a, root=ROOT):
             sets[dest], _ = read_raw(tb)
             base = dest if base is None else min(base, dest)
         raw, _ = read_raw(b)
-        render_nametable(raw, sets, base, meta.get("columns", 32)).save(out / f"{b.label}.png", optimize=True)
+        pid = map_palette_id(u["first_map"], root)
+        pal = view_palette128(pid, root) if pid else None
+        render_nametable(raw, sets, base, meta.get("columns", 32), pal).save(out / f"{b.label}.png", optimize=True)
         n += 1
-    print(f"wrote {n} previews to {out} (grayscale, palette bits ignored, char base = lowest tile-set VRAM address)")
+    print(f"wrote {n} name table previews to {out} (" + ("palette bits applied with the day palette of the first map using the table"
+          if palette_map(root) else "grayscale, no palette map") + ", char base = lowest tile-set VRAM address)")
+    m = 0
+    for b in blobs(root, a.label):
+        if b.kind == "tilemaps":
+            continue
+        meta = read_meta(b)
+        if tile_sub_map(b, meta, root) is None:
+            continue
+        (out / "sheets").mkdir(exist_ok=True)
+        render_sheet(b, meta, root).save(out / "sheets" / f"{b.label}.png", optimize=True)
+        m += 1
+    print(f"wrote {m} coloured sheets to {out / 'sheets'} (sub-palette per tile / per sprite, from assets/gfx/palette_map.json)")
     return 0
 
 

@@ -12,5 +12,11 @@
   "vram_word_dest": [
     "$5000"
   ],
-  "map_entries": 1
+  "map_entries": 1,
+  "palette": {
+    "id": "sPalette_0x0B",
+    "sub": 0
+  },
+  "palette_confidence": "medium",
+  "palette_note": "weather overlay: drawn with sub-palette 0 of whichever outdoor map is active (FARMSPRING day shown); only colours 12-15 are used and the weather code rewrites them by palette-animation scripts ($8097A8-$809853)"
 }

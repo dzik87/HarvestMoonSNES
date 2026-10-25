@@ -11,7 +11,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "tools" / "gfx"))
 sys.path.insert(0, str(ROOT / "tools" / "data"))
+sys.path.insert(0, str(ROOT / "tools" / "objects"))
 import pngsync as P  # noqa: E402
+import palette_map as PM  # noqa: E402
 import tiles as T  # noqa: E402
 import bankbin as BB  # noqa: E402
 
@@ -159,6 +161,150 @@ def test_real_blobs():
         if b.kind != "tilemaps":
             conf[m["bpp_confidence"]] = conf.get(m["bpp_confidence"], 0) + 1
     print("bpp confidence:", conf)
+
+
+def png_palette(path):
+    """(PLTE as list of RGB triples, tRNS bytes or None) of a PNG file."""
+    from PIL import Image
+    im = Image.open(path)
+    raw = im.getpalette()
+    pal = [tuple(raw[i:i + 3]) for i in range(0, len(raw), 3)]
+    return pal, im.info.get("transparency")
+
+
+def test_palette_map_matches_sources():
+    cur = PM.build()
+    check(PM.OUT.read_text(encoding="utf-8") == PM.dumps(cur), "assets/gfx/palette_map.json is stale (run tools/gfx/palette_map.py build)")
+    check(PM.doc_table_ok(cur), "table in docs/formats/graphics-palettes.md is stale (run tools/gfx/palette_map.py table)")
+    check(PM.main(["check"]) == 0, "palette_map.py check")
+
+
+def test_palette_tables():
+    a_pal, idx, ids = PM.parse_palette_tables()
+    check(len(a_pal) == 0x75 and len(set(a_pal)) == 0x75, "aPalettes: 0x75 distinct labels")
+    check(a_pal[:3] == ["sPalette_0x0A", "sPalette_0x0B", "sPalette_0x0C"] and a_pal[0x6B] == "sPalette_0x6F", "aPalettes order")
+    check(len(idx) == 6 * 0x60, "aMapPalettesIndexes has 6 bytes for each of the 0x60 areas")
+    check(idx[:6] == [0, 1, 2, 6, 7, 0xFF], "FarmSpring slots")
+    check(ids[:4] == [0x6B, 0x6C, 0x6B, 0x6C], "aMapPalettesId day/night pairs")
+    areas, maps = PM.parse_maps()
+    check(len(areas) == 0x60 and areas[0] == "sFarmSpringMap" and areas[0x57] == "sRainOverlay", "aTileMapData order")
+    m = maps["sFarmSpringMap"]
+    check(m["preset"] == 0 and [d for d, _ in m["tiles"]] == [0x2000, 0x3000, 0x4000] and m["nametables"] == [(0x6000, "sCharactermap_A18000")],
+          "decoded FarmSpring map entry")
+    check(maps["sRainOverlay"]["tiles"] == [(0x5000, "sCompressedTiles_928000")], "overlay maps have no preset header")
+    pre = PM.parse_presets()
+    lay, mode = PM.bg_layout(pre, 0)
+    check(mode == 1 and lay[1]["map_addr"] == 0x6000 and lay[2]["map_addr"] == 0x7000 and lay[1]["char_base"] == 0x2000
+          and lay[3]["bpp"] == 2, "preset 0 BG geometry")
+    lines = ["a", "if !REGION_DE", "b", "else", "c", "endif", "d"]
+    check(PM.us_lines(lines) == ["a", "c", "d"], "us_lines keeps the else branch")
+
+
+def test_name_table_rule():
+    """bits 10-12 of a name table word select the sub-palette of the tile it points to (synthetic sheet)."""
+    old = dict(PM._RAW)
+    try:
+        tile = bytes([1]) + bytes(31)
+        PM._RAW["T1"] = bytes(32) + tile + tile            # tile 0 empty, tiles 1 and 2 not
+        nt = b"".join(w.to_bytes(2, "little") for w in (1 | 3 << 10, 1 | 3 << 10, 2 | 5 << 10, 0 | 7 << 10, 1 | 3 << 10 | 0x4000))
+        PM._RAW["N1"] = nt
+        layout, _ = PM.bg_layout(PM.parse_presets(), 0)
+        m = {"tiles": [(0x2000, "T1")], "nametables": [(0x6000, "N1")]}
+        use, bgs, notes = PM.analyse_map(m, layout)
+        check(dict(use["T1"][1]) == {3: 3} and dict(use["T1"][2]) == {5: 1} and 0 not in use["T1"], f"synthetic name table use {dict(use['T1'])}")
+        check(bgs["T1"] == {1}, "name table at $6000 belongs to BG1 in preset 0")
+    finally:
+        PM._RAW.clear()
+        PM._RAW.update(old)
+
+
+def test_sprite_cell_formula():
+    """the sprite id -> tile position used for per-sprite previews equals the slot table of bank $86 (docs: object-data.md)."""
+    import objdata as O
+    d = bytes(O.load_banks()[0x86].data)
+    for n in range(64):
+        v = d[2 * n] | d[2 * n + 1] << 8
+        check(v == (n & 7) * 2 + (n >> 3) * 0x20, f"slot table entry {n}")
+    ent = {"palette": {"id": "sPalette_0x6F", "sub": 4}, "kind": "sprites",
+           "sprite_rows": "".join(str(i % 8) for i in range(256))}
+    b = P.Blob("sprites", "Sprites_888000")
+    meta = {"raw_size": 32768, "tiles_per_row": 16}
+    saved = P.palette_map()
+    P._PALETTE_MAP[str(P.ROOT)] = {"blobs": {"Sprites_888000": ent}}
+    try:
+        subs = P.tile_sub_map(b, meta)
+        for sid in (0, 1, 7, 8, 63, 64, 130, 255):
+            blk, n = sid >> 6, sid & 63
+            for dx, dy in ((0, 0), (1, 0), (0, 1), (1, 1)):
+                v = (n & 7) * 2 + (n >> 3) * 0x20 + dx + dy * 16        # tile index inside the $2000-byte block
+                t = blk * 256 + v
+                check(subs[t] == sid % 8, f"sprite {sid} tile ({dx},{dy}) -> sheet tile {t}")
+    finally:
+        P._PALETTE_MAP[str(P.ROOT)] = saved
+
+
+def test_png_palettes_are_real_colours():
+    """every committed PNG carries the 16 colours of palette.sub in its PLTE; the pixel data is independent of them."""
+    n = nconf = 0
+    for b in P.blobs(kind="tiles") + P.blobs(kind="sprites"):
+        meta = P.read_meta(b)
+        pal, trns = png_palette(b.art)
+        if "palette" not in meta:
+            check(meta.get("palette_confidence") == "none", f"{b.label}: no palette and not flagged 'none'")
+            continue
+        want = P.load_view_palette(meta["palette"], 4)
+        check(pal[:16] == want, f"{b.label}: PLTE differs from {meta['palette']}")
+        check(meta["palette_confidence"] in ("high", "medium", "low"), f"{b.label}: confidence")
+        if b.kind == "sprites":
+            check(trns == 0, f"{b.label}: index 0 must be transparent")
+        else:
+            check(trns is None, f"{b.label}: BG sheets are opaque")
+        check(meta["palette"]["sub"] in range(8), f"{b.label}: sub-palette 0-7")
+        n += 1
+        nconf += meta["palette_confidence"] == "high"
+    check(n >= 86, f"{n} blobs have a palette")
+    print(f"palettes: {n} blobs coloured, {nconf} with high confidence")
+
+
+def test_palette_is_ignored_by_import():
+    """re-colouring the PNG (new PLTE, no tRNS) must not change a single byte of the rebuilt .bin."""
+    from PIL import Image
+    rnd = random.Random(11)
+    for label in ("sCompressedTiles_92D3AB", "Sprites_888000"):
+        kind = "tiles" if label.startswith("sCompressed") else "sprites"
+        b = P.Blob(kind, label)
+        want = b.bin.read_bytes()
+        with tempfile.TemporaryDirectory() as d:
+            im = Image.open(b.art)
+            im.putpalette([rnd.randrange(256) for _ in range(48)])
+            im.info.pop("transparency", None)
+            art = Path(d) / "x.png"
+            im.save(art, "PNG")
+            w, h, pix = P.load_png(art)
+            meta = P.read_meta(b)
+            raw = P.encode_sheet(pix, w, h, 4, meta["tiles_per_row"], meta["raw_size"])
+            got = P.C.compress(raw) + P.join_tail(meta) if b.compressed else raw
+            check(got == want, f"{label}: bytes depend on the PNG palette")
+
+
+def test_export_writes_palette():
+    """export in a scratch tree: PLTE = colours of the mapped sub-palette, sidecar keys, bytes unchanged."""
+    labels = ["sCompressedTiles_92D3AB"]
+    with tempfile.TemporaryDirectory() as d:
+        tmp = Path(d)
+        make_tree(tmp, labels)
+        shutil.copy(ROOT / "assets/gfx/palette_map.json", tmp / "assets/gfx/palette_map.json")
+        for pid in {P.palette_map()["blobs"][l]["palette"]["id"] for l in labels}:
+            shutil.copy(ROOT / "assets/gfx/palettes" / f"{pid}.json", tmp / "assets/gfx/palettes" / f"{pid}.json")
+        P.cmd_export(ns(label=labels), tmp)
+        b = P.Blob("tiles", labels[0], tmp)
+        meta = P.read_meta(b)
+        ent = P.palette_map()["blobs"][labels[0]]
+        check(meta["palette"] == {"id": ent["palette"]["id"], "sub": ent["palette"]["sub"]}, "sidecar palette")
+        check(meta["palette_confidence"] == ent["confidence"], "sidecar confidence")
+        pal, _ = png_palette(b.art)
+        check(pal[:16] == P.load_view_palette(meta["palette"], 4, tmp), "exported PLTE")
+        check(P.cmd_check(ns(label=labels), tmp) == 0, "check after export with palette")
 
 
 def main():

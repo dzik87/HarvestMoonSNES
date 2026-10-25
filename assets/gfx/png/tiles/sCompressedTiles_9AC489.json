@@ -12,5 +12,11 @@
   "vram_word_dest": [
     "$3000"
   ],
-  "map_entries": 2
+  "map_entries": 2,
+  "palette": {
+    "id": "sPalette_0x46",
+    "sub": 0
+  },
+  "palette_confidence": "high",
+  "palette_note": "sub-palette 0 covers 232 of 232 name-table cells"
 }

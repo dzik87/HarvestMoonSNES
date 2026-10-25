@@ -69,6 +69,7 @@ jobs:
           python3 tests/test_disasm65816.py
           python3 tests/test_bytealign.py
           python3 tools/gfx/tiles.py selftest
+          python3 tools/gfx/palette_map.py check
           python3 tools/gfx/pngsync.py check
           python3 tests/test_pngsync.py
 

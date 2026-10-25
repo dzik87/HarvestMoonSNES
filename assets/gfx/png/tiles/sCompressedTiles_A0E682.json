@@ -13,5 +13,11 @@
     "$5000"
   ],
   "map_entries": 1,
-  "tail_zeros": 1
+  "tail_zeros": 1,
+  "palette": {
+    "id": "sPalette_0x6E",
+    "sub": 0
+  },
+  "palette_confidence": "low",
+  "palette_note": "no static BG name table references this sheet (its name table is written at run time); sub-palette 0 assumed"
 }

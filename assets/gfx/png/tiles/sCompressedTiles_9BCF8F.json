@@ -13,5 +13,23 @@
     "$2000"
   ],
   "map_entries": 3,
-  "tail_zeros": 1
+  "tail_zeros": 1,
+  "palette": {
+    "id": "sPalette_0x57",
+    "sub": 4
+  },
+  "palette_confidence": "high",
+  "palette_note": "sub-palette 4 covers 2048 of 2367 name-table cells; per-tile sub-palettes 1/2/4 (tile_subs)",
+  "palette_subs_used": [
+    1,
+    2,
+    4
+  ],
+  "palette_alternatives": [
+    {
+      "id": "sPalette_0x5A",
+      "sub": 4,
+      "area_name": "NY_MOUNTAINTOP"
+    }
+  ]
 }

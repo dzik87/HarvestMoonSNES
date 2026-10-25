@@ -13,5 +13,15 @@
     "$2000"
   ],
   "map_entries": 3,
-  "tail_zeros": 1
+  "tail_zeros": 1,
+  "palette": {
+    "id": "sPalette_0x15",
+    "sub": 1
+  },
+  "palette_confidence": "high",
+  "palette_note": "sub-palette 1 covers 3940 of 4096 name-table cells; per-tile sub-palettes 1/2 (tile_subs)",
+  "palette_subs_used": [
+    1,
+    2
+  ]
 }
