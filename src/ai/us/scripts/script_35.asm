@@ -19,7 +19,7 @@ pAIScripting0x35:
     dw pAIScripting0x36                                        ;B4D02F|        |B4D160;
  
 pAIScripting0x35_Data01:
-    %AICMD0x47_SetValue8($800921, 21)                          ;B4D031
+    %AICMD0x47_SetValue8(wram80(strcPlayerData.toolEquipped), 21)                          ;B4D031
     %AICMD0x00_SetMusic($10, $B4)                              ;B4D036
     %AICMD0x02_FreezeTime()                                    ;B4D039
     %AICMD0x03_SetHour($06)                                    ;B4D03A

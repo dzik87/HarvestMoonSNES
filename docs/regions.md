@@ -76,7 +76,8 @@ Large counts in code banks usually mean shifted code, not necessarily different 
 - Code banks $80-$84 differ in every region; EU and DE share most of their changes against US (bank $81 and $84 differ by about
   the same amount), JP differs mainly in $80, $82 and $83.
 - Graphics that differ per language are concentrated in $9A, $9B, $9F, $A5 and $A6 (text/title/menu graphics).
-- AI script banks $B3-$B5: EU/DE differ from US in $B3-$B4; JP in $B5.
+- AI script banks $B3-$B5: EU/DE differ from US in $B3-$B4; JP in $B5. At command level these are 3 (EU/DE) or 1 (JP)
+  changed commands plus relocation and a WRAM shift: see [`regions-ai.md`](regions-ai.md).
 - Dialog banks differ everywhere (different text), JP additionally has its text in $AA-$AC.
 Next step for the unified tree: DE code banks $80-$85 are done (see below); EU and JP code are next, then the
 differing graphics, dialog and AI banks.

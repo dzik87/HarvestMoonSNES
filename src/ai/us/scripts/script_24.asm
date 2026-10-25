@@ -28,12 +28,12 @@ pAIScripting0x24_Data01:
     %AICMD0x1B($027B, $01)                                     ;B4A485
     %AICMD0x0D($01, $00, $80, $01)                             ;B4A489
     %AICMD0x13_Wait(30)                                        ;B4A48E
-    %AICMD0x15_JumpIfEquals8($80098C, 6, pAIScripting0x24_L001)              ;B4A491
-    %AICMD0x15_JumpIfEquals8($80098C, 7, pAIScripting0x24_L002)              ;B4A498
-    %AICMD0x15_JumpIfEquals8($80098C, 8, pAIScripting0x24_L003)              ;B4A49F
-    %AICMD0x15_JumpIfEquals8($80098C, 9, pAIScripting0x24_L004)              ;B4A4A6
-    %AICMD0x15_JumpIfEquals8($80098C, 10, pAIScripting0x24_L005)             ;B4A4AD
-    %AICMD0x15_JumpIfEquals8($80098C, 11, pAIScripting0x24_L006)             ;B4A4B4
+    %AICMD0x15_JumpIfEquals8(wram80(nWeatherForecast), 6, pAIScripting0x24_L001)              ;B4A491
+    %AICMD0x15_JumpIfEquals8(wram80(nWeatherForecast), 7, pAIScripting0x24_L002)              ;B4A498
+    %AICMD0x15_JumpIfEquals8(wram80(nWeatherForecast), 8, pAIScripting0x24_L003)              ;B4A49F
+    %AICMD0x15_JumpIfEquals8(wram80(nWeatherForecast), 9, pAIScripting0x24_L004)              ;B4A4A6
+    %AICMD0x15_JumpIfEquals8(wram80(nWeatherForecast), 10, pAIScripting0x24_L005)             ;B4A4AD
+    %AICMD0x15_JumpIfEquals8(wram80(nWeatherForecast), 11, pAIScripting0x24_L006)             ;B4A4B4
     %AICMD0x12_Jump(pAIScripting0x24_L007)                                   ;B4A4BB
 pAIScripting0x24_L001:
     %AICMD0x1C_ShowDialog($0272, $00)                          ;B4A4BE

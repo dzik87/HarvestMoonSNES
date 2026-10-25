@@ -36,8 +36,8 @@ pAIScripting0x45_L003:
     %AICMD0x13_Wait(1)                                         ;B5A24E
     %AICMD0x12_Jump(pAIScripting0x45_L003)                                   ;B5A251
 pAIScripting0x45_L004:
-    %AICMD0x15_JumpIfEquals8($80091E, 6, pAIScripting0x45_L005)              ;B5A254
-    %AICMD0x16_JumpIfBetween8($80091E, 9, 12, pAIScripting0x45_L007)         ;B5A25B
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.carryItemIdPrev), 6, pAIScripting0x45_L005)              ;B5A254
+    %AICMD0x16_JumpIfBetween8(wram80(strcPlayerData.carryItemIdPrev), 9, 12, pAIScripting0x45_L007)         ;B5A25B
     %AICMD0x1C_ShowDialog($01C2, $00)                          ;B5A263
     %AICMD0x12_Jump(pAIScripting0x45_L002)                                   ;B5A267
 pAIScripting0x45_L005:
@@ -210,8 +210,8 @@ pAIScripting0x45_L046:
     %AICMD0x13_Wait(1)                                         ;B5A4CD
     %AICMD0x12_Jump(pAIScripting0x45_L046)                                   ;B5A4D0
 pAIScripting0x45_L047:
-    %AICMD0x15_JumpIfEquals8($80091E, 6, pAIScripting0x45_L048)              ;B5A4D3
-    %AICMD0x16_JumpIfBetween8($80091E, 9, 12, pAIScripting0x45_L050)         ;B5A4DA
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.carryItemIdPrev), 6, pAIScripting0x45_L048)              ;B5A4D3
+    %AICMD0x16_JumpIfBetween8(wram80(strcPlayerData.carryItemIdPrev), 9, 12, pAIScripting0x45_L050)         ;B5A4DA
     %AICMD0x1C_ShowDialog($01C2, $00)                          ;B5A4E2
     %AICMD0x12_Jump(pAIScripting0x45_L045)                                   ;B5A4E6
 pAIScripting0x45_L048:

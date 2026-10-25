@@ -50,14 +50,14 @@ pAIScripting0x15_L005:
     %AICMD0x12_Jump(pAIScripting0x15_L012)                                   ;B48C8C
 pAIScripting0x15_L006:
     %AICMD0x1C_ShowDialog($0328, $00)                          ;B48C8F
-    %AICMD0x15_JumpIfEquals8($800921, 1, pAIScripting0x15_L007)              ;B48C93
-    %AICMD0x15_JumpIfEquals8($800923, 1, pAIScripting0x15_L008)              ;B48C9A
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.toolEquipped), 1, pAIScripting0x15_L007)              ;B48C93
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.toolSecond), 1, pAIScripting0x15_L008)              ;B48C9A
     %AICMD0x12_Jump(pAIScripting0x15_L009)                                   ;B48CA1
 pAIScripting0x15_L007:
-    %AICMD0x47_SetValue8($800921, 0)                           ;B48CA4
+    %AICMD0x47_SetValue8(wram80(strcPlayerData.toolEquipped), 0)                           ;B48CA4
     %AICMD0x12_Jump(pAIScripting0x15_L009)                                   ;B48CA9
 pAIScripting0x15_L008:
-    %AICMD0x47_SetValue8($800923, 0)                           ;B48CAC
+    %AICMD0x47_SetValue8(wram80(strcPlayerData.toolSecond), 0)                           ;B48CAC
     %AICMD0x12_Jump(pAIScripting0x15_L009)                                   ;B48CB1
 pAIScripting0x15_L009:
     %AICMD0x28_ClearBit(strcShedItems.row1, $00)                        ;B48CB4

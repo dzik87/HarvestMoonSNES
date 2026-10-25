@@ -43,8 +43,8 @@ pAIScripting0x18_L006:
     %AICMD0x1C_ShowDialog($032B, $00)                          ;B48F28
     %AICMD0x12_Jump(pAIScripting0x18_L005)                                   ;B48F2C
 pAIScripting0x18_L007:
-    %AICMD0x15_JumpIfEquals8($80091E, 1, pAIScripting0x18_L008)              ;B48F2F
-    %AICMD0x15_JumpIfEquals8($80091E, 2, pAIScripting0x18_L009)              ;B48F36
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.carryItemIdPrev), 1, pAIScripting0x18_L008)              ;B48F2F
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.carryItemIdPrev), 2, pAIScripting0x18_L009)              ;B48F36
     %AICMD0x1C_ShowDialog($032F, $00)                          ;B48F3D
     %AICMD0x12_Jump(pAIScripting0x18_L004)                                   ;B48F41
 pAIScripting0x18_L008:

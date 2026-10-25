@@ -18,6 +18,7 @@
 | 2b | documentation of 90 AICMD commands from the interpreter handlers (`docs/ai/commands/*.yml` → `docs/ai/commands.md`) | spot-checked against the code; no source changes |
 | 5 | DE code banks $80-$85: 65816 disassembler, US/DE alignment, 173 `if !REGION_DE` patch blocks, WRAM shift `!DE_RAM_SHIFT`, DE header; `tools/build.py --region DE` | US hash matches; DE banks $80-$85 hash matches (`tests/expected.json`, key `DE`) |
 
+| 6 | AI scripts per region: 459 raw `$80xxxx` operands -> `wram80(label)`, EU/DE/JP as 4 `if !REGION_xx` blocks on the US scripts (`src/ai/region.asm`), raw `src/ai/{de,eu,jp}` dumps removed, `tools/analysis/aidiff.py` | US hash matches; EU/DE/JP banks $B3-$B5 match (`EU-AI`, `DE-AI`, `JP-AI`) |
 
 ## Regional versions (from the pre-migration analysis)
 | Region | Code 80–84 | Notes |
@@ -27,8 +28,8 @@
 | JP | bank 80 complete, 81–84 partial | dialogs in AA–AC |
 | DE | banks $80-$85 done: patch blocks on the US source (`if !REGION_DE`), byte-identical to the DE ROM | see `docs/regions.md`; data banks of DE not yet in the tree |
 
-AI scripts and dialogs exist in the repo for all four regions; label migration (phase 2) so far covers US only.
-`tools/migration/ai_labels.py` is ready to be used on the other regions once their builds are added.
+Dialogs exist in the repo for all four regions. The AI scripts of EU/DE/JP are no longer separate dumps (phase 6): the four
+releases run the same scripts, see `docs/regions-ai.md`.
 
 ## Findings from the AICMD analysis (to be fixed in commands.asm)
 - `AICMD0x26`/`0x27` emit the byte `$28` (aliases of 0x28 in the handler table) and are unused in US scripts.

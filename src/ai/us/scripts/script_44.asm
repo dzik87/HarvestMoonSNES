@@ -34,14 +34,14 @@ pAIScripting0x44_L002:
     %AICMD0x2D_JumpOnInteract(pAIScripting0x44_L012, pAIScripting0x44_L003)                               ;B59836
     %AICMD0x12_Jump(pAIScripting0x44_L002)                                   ;B5983B
 pAIScripting0x44_L003:
-    %AICMD0x15_JumpIfEquals8($80091E, 2, pAIScripting0x44_L004)              ;B5983E
-    %AICMD0x16_JumpIfBetween8($80091E, 1, 5, pAIScripting0x44_L005)          ;B59845
-    %AICMD0x15_JumpIfEquals8($80091E, 7, pAIScripting0x44_L005)              ;B5984D
-    %AICMD0x16_JumpIfBetween8($80091E, 16, 23, pAIScripting0x44_L005)        ;B59854
-    %AICMD0x15_JumpIfEquals8($80091E, 25, pAIScripting0x44_L006)             ;B5985C
-    %AICMD0x15_JumpIfEquals8($80091E, 73, pAIScripting0x44_L006)             ;B59863
-    %AICMD0x15_JumpIfEquals8($80091E, 6, pAIScripting0x44_L008)              ;B5986A
-    %AICMD0x16_JumpIfBetween8($80091E, 9, 12, pAIScripting0x44_L007)         ;B59871
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.carryItemIdPrev), 2, pAIScripting0x44_L004)              ;B5983E
+    %AICMD0x16_JumpIfBetween8(wram80(strcPlayerData.carryItemIdPrev), 1, 5, pAIScripting0x44_L005)          ;B59845
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.carryItemIdPrev), 7, pAIScripting0x44_L005)              ;B5984D
+    %AICMD0x16_JumpIfBetween8(wram80(strcPlayerData.carryItemIdPrev), 16, 23, pAIScripting0x44_L005)        ;B59854
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.carryItemIdPrev), 25, pAIScripting0x44_L006)             ;B5985C
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.carryItemIdPrev), 73, pAIScripting0x44_L006)             ;B59863
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.carryItemIdPrev), 6, pAIScripting0x44_L008)              ;B5986A
+    %AICMD0x16_JumpIfBetween8(wram80(strcPlayerData.carryItemIdPrev), 9, 12, pAIScripting0x44_L007)         ;B59871
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B59879
     %AICMD0x12_Jump(pAIScripting0x44_L002)                                   ;B5987D
 pAIScripting0x44_L004:
@@ -83,7 +83,7 @@ pAIScripting0x44_L011:
     %AICMD0x12_Jump(pAIScripting0x44_L002)                                   ;B59908
 pAIScripting0x44_L012:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $04, pAIScripting0x44_L013)   ;B5990B
-    %AICMD0x15_JumpIfEquals8($80098C, 3, pAIScripting0x44_L014)              ;B59912
+    %AICMD0x15_JumpIfEquals8(wram80(nWeatherForecast), 3, pAIScripting0x44_L014)              ;B59912
     %AICMD0x14_JumpIfFlagSet($800196, $04, pAIScripting0x44_L015)            ;B59919
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $05, pAIScripting0x44_L013)   ;B59920
     %AICMD0x45_JumpIfBetween16(nLove_Maria, 200, 220, pAIScripting0x44_L016) ;B59927
@@ -168,13 +168,13 @@ pAIScripting0x44_L030:
     %AICMD0x2D_JumpOnInteract(pAIScripting0x44_L039, pAIScripting0x44_L031)                               ;B59A34
     %AICMD0x12_Jump(pAIScripting0x44_L030)                                   ;B59A39
 pAIScripting0x44_L031:
-    %AICMD0x15_JumpIfEquals8($80091E, 2, pAIScripting0x44_L032)              ;B59A3C
-    %AICMD0x16_JumpIfBetween8($80091E, 3, 7, pAIScripting0x44_L034)          ;B59A43
-    %AICMD0x16_JumpIfBetween8($80091E, 16, 23, pAIScripting0x44_L034)        ;B59A4B
-    %AICMD0x15_JumpIfEquals8($80091E, 6, pAIScripting0x44_L035)              ;B59A53
-    %AICMD0x15_JumpIfEquals8($80091E, 25, pAIScripting0x44_L033)             ;B59A5A
-    %AICMD0x15_JumpIfEquals8($80091E, 73, pAIScripting0x44_L033)             ;B59A61
-    %AICMD0x16_JumpIfBetween8($80091E, 9, 12, pAIScripting0x44_L032)         ;B59A68
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.carryItemIdPrev), 2, pAIScripting0x44_L032)              ;B59A3C
+    %AICMD0x16_JumpIfBetween8(wram80(strcPlayerData.carryItemIdPrev), 3, 7, pAIScripting0x44_L034)          ;B59A43
+    %AICMD0x16_JumpIfBetween8(wram80(strcPlayerData.carryItemIdPrev), 16, 23, pAIScripting0x44_L034)        ;B59A4B
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.carryItemIdPrev), 6, pAIScripting0x44_L035)              ;B59A53
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.carryItemIdPrev), 25, pAIScripting0x44_L033)             ;B59A5A
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.carryItemIdPrev), 73, pAIScripting0x44_L033)             ;B59A61
+    %AICMD0x16_JumpIfBetween8(wram80(strcPlayerData.carryItemIdPrev), 9, 12, pAIScripting0x44_L032)         ;B59A68
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B59A70
     %AICMD0x12_Jump(pAIScripting0x44_L030)                                   ;B59A74
 pAIScripting0x44_L032:
@@ -212,7 +212,7 @@ pAIScripting0x44_L038:
     %AICMD0x12_Jump(pAIScripting0x44_L030)                                   ;B59AF2
 pAIScripting0x44_L039:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $04, pAIScripting0x44_L040)   ;B59AF5
-    %AICMD0x15_JumpIfEquals8($80098C, 3, pAIScripting0x44_L041)              ;B59AFC
+    %AICMD0x15_JumpIfEquals8(wram80(nWeatherForecast), 3, pAIScripting0x44_L041)              ;B59AFC
     %AICMD0x14_JumpIfFlagSet($800196, $04, pAIScripting0x44_L042)            ;B59B03
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $05, pAIScripting0x44_L040)   ;B59B0A
     %AICMD0x45_JumpIfBetween16(nLove_Ann, 200, 220, pAIScripting0x44_L043)   ;B59B11
@@ -301,13 +301,13 @@ pAIScripting0x44_L059:
     %AICMD0x2D_JumpOnInteract(pAIScripting0x44_L069, pAIScripting0x44_L060)                               ;B59C28
     %AICMD0x12_Jump(pAIScripting0x44_L059)                                   ;B59C2D
 pAIScripting0x44_L060:
-    %AICMD0x16_JumpIfBetween8($80091E, 1, 4, pAIScripting0x44_L063)          ;B59C30
-    %AICMD0x16_JumpIfBetween8($80091E, 16, 23, pAIScripting0x44_L063)        ;B59C38
-    %AICMD0x16_JumpIfBetween8($80091E, 9, 12, pAIScripting0x44_L064)         ;B59C40
-    %AICMD0x15_JumpIfEquals8($80091E, 6, pAIScripting0x44_L065)              ;B59C48
-    %AICMD0x15_JumpIfEquals8($80091E, 5, pAIScripting0x44_L065)              ;B59C4F
-    %AICMD0x15_JumpIfEquals8($80091E, 25, pAIScripting0x44_L061)             ;B59C56
-    %AICMD0x15_JumpIfEquals8($80091E, 73, pAIScripting0x44_L062)             ;B59C5D
+    %AICMD0x16_JumpIfBetween8(wram80(strcPlayerData.carryItemIdPrev), 1, 4, pAIScripting0x44_L063)          ;B59C30
+    %AICMD0x16_JumpIfBetween8(wram80(strcPlayerData.carryItemIdPrev), 16, 23, pAIScripting0x44_L063)        ;B59C38
+    %AICMD0x16_JumpIfBetween8(wram80(strcPlayerData.carryItemIdPrev), 9, 12, pAIScripting0x44_L064)         ;B59C40
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.carryItemIdPrev), 6, pAIScripting0x44_L065)              ;B59C48
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.carryItemIdPrev), 5, pAIScripting0x44_L065)              ;B59C4F
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.carryItemIdPrev), 25, pAIScripting0x44_L061)             ;B59C56
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.carryItemIdPrev), 73, pAIScripting0x44_L062)             ;B59C5D
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B59C64
     %AICMD0x12_Jump(pAIScripting0x44_L059)                                   ;B59C68
 pAIScripting0x44_L061:
@@ -349,7 +349,7 @@ pAIScripting0x44_L068:
     %AICMD0x12_Jump(pAIScripting0x44_L059)                                   ;B59CF3
 pAIScripting0x44_L069:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $04, pAIScripting0x44_L070)   ;B59CF6
-    %AICMD0x15_JumpIfEquals8($80098C, 3, pAIScripting0x44_L071)              ;B59CFD
+    %AICMD0x15_JumpIfEquals8(wram80(nWeatherForecast), 3, pAIScripting0x44_L071)              ;B59CFD
     %AICMD0x14_JumpIfFlagSet($800196, $04, pAIScripting0x44_L072)            ;B59D04
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $05, pAIScripting0x44_L070)   ;B59D0B
     %AICMD0x45_JumpIfBetween16(nLove_Nina, 200, 220, pAIScripting0x44_L073)  ;B59D12
@@ -431,14 +431,14 @@ pAIScripting0x44_L087:
     %AICMD0x2D_JumpOnInteract(pAIScripting0x44_L098, pAIScripting0x44_L088)                               ;B59E10
     %AICMD0x12_Jump(pAIScripting0x44_L087)                                   ;B59E15
 pAIScripting0x44_L088:
-    %AICMD0x15_JumpIfEquals8($80091E, 2, pAIScripting0x44_L089)              ;B59E18
-    %AICMD0x16_JumpIfBetween8($80091E, 1, 7, pAIScripting0x44_L090)          ;B59E1F
-    %AICMD0x16_JumpIfBetween8($80091E, 16, 19, pAIScripting0x44_L090)        ;B59E27
-    %AICMD0x15_JumpIfEquals8($80091E, 25, pAIScripting0x44_L091)             ;B59E2F
-    %AICMD0x15_JumpIfEquals8($80091E, 73, pAIScripting0x44_L091)             ;B59E36
-    %AICMD0x15_JumpIfEquals8($80091E, 6, pAIScripting0x44_L094)              ;B59E3D
-    %AICMD0x16_JumpIfBetween8($80091E, 20, 23, pAIScripting0x44_L092)        ;B59E44
-    %AICMD0x16_JumpIfBetween8($80091E, 9, 12, pAIScripting0x44_L093)         ;B59E4C
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.carryItemIdPrev), 2, pAIScripting0x44_L089)              ;B59E18
+    %AICMD0x16_JumpIfBetween8(wram80(strcPlayerData.carryItemIdPrev), 1, 7, pAIScripting0x44_L090)          ;B59E1F
+    %AICMD0x16_JumpIfBetween8(wram80(strcPlayerData.carryItemIdPrev), 16, 19, pAIScripting0x44_L090)        ;B59E27
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.carryItemIdPrev), 25, pAIScripting0x44_L091)             ;B59E2F
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.carryItemIdPrev), 73, pAIScripting0x44_L091)             ;B59E36
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.carryItemIdPrev), 6, pAIScripting0x44_L094)              ;B59E3D
+    %AICMD0x16_JumpIfBetween8(wram80(strcPlayerData.carryItemIdPrev), 20, 23, pAIScripting0x44_L092)        ;B59E44
+    %AICMD0x16_JumpIfBetween8(wram80(strcPlayerData.carryItemIdPrev), 9, 12, pAIScripting0x44_L093)         ;B59E4C
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B59E54
     %AICMD0x12_Jump(pAIScripting0x44_L087)                                   ;B59E58
 pAIScripting0x44_L089:
@@ -483,7 +483,7 @@ pAIScripting0x44_L097:
     %AICMD0x12_Jump(pAIScripting0x44_L087)                                   ;B59EEA
 pAIScripting0x44_L098:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $04, pAIScripting0x44_L099)   ;B59EED
-    %AICMD0x15_JumpIfEquals8($80098C, 3, pAIScripting0x44_L100)              ;B59EF4
+    %AICMD0x15_JumpIfEquals8(wram80(nWeatherForecast), 3, pAIScripting0x44_L100)              ;B59EF4
     %AICMD0x14_JumpIfFlagSet($800196, $04, pAIScripting0x44_L101)            ;B59EFB
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $05, pAIScripting0x44_L099)   ;B59F02
     %AICMD0x45_JumpIfBetween16(nLove_Ellen, 200, 220, pAIScripting0x44_L102) ;B59F09
@@ -567,14 +567,14 @@ pAIScripting0x44_L116:
     %AICMD0x2D_JumpOnInteract(pAIScripting0x44_L126, pAIScripting0x44_L117)                               ;B5A017
     %AICMD0x12_Jump(pAIScripting0x44_L116)                                   ;B5A01C
 pAIScripting0x44_L117:
-    %AICMD0x15_JumpIfEquals8($80091E, 2, pAIScripting0x44_L118)              ;B5A01F
-    %AICMD0x15_JumpIfEquals8($80091E, 7, pAIScripting0x44_L118)              ;B5A026
-    %AICMD0x16_JumpIfBetween8($80091E, 1, 5, pAIScripting0x44_L119)          ;B5A02D
-    %AICMD0x16_JumpIfBetween8($80091E, 16, 23, pAIScripting0x44_L119)        ;B5A035
-    %AICMD0x15_JumpIfEquals8($80091E, 6, pAIScripting0x44_L120)              ;B5A03D
-    %AICMD0x15_JumpIfEquals8($80091E, 25, pAIScripting0x44_L121)             ;B5A044
-    %AICMD0x15_JumpIfEquals8($80091E, 73, pAIScripting0x44_L121)             ;B5A04B
-    %AICMD0x16_JumpIfBetween8($80091E, 9, 12, pAIScripting0x44_L122)         ;B5A052
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.carryItemIdPrev), 2, pAIScripting0x44_L118)              ;B5A01F
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.carryItemIdPrev), 7, pAIScripting0x44_L118)              ;B5A026
+    %AICMD0x16_JumpIfBetween8(wram80(strcPlayerData.carryItemIdPrev), 1, 5, pAIScripting0x44_L119)          ;B5A02D
+    %AICMD0x16_JumpIfBetween8(wram80(strcPlayerData.carryItemIdPrev), 16, 23, pAIScripting0x44_L119)        ;B5A035
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.carryItemIdPrev), 6, pAIScripting0x44_L120)              ;B5A03D
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.carryItemIdPrev), 25, pAIScripting0x44_L121)             ;B5A044
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.carryItemIdPrev), 73, pAIScripting0x44_L121)             ;B5A04B
+    %AICMD0x16_JumpIfBetween8(wram80(strcPlayerData.carryItemIdPrev), 9, 12, pAIScripting0x44_L122)         ;B5A052
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B5A05A
     %AICMD0x12_Jump(pAIScripting0x44_L116)                                   ;B5A05E
 pAIScripting0x44_L118:
@@ -616,7 +616,7 @@ pAIScripting0x44_L125:
     %AICMD0x12_Jump(pAIScripting0x44_L116)                                   ;B5A0E9
 pAIScripting0x44_L126:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $04, pAIScripting0x44_L127)   ;B5A0EC
-    %AICMD0x15_JumpIfEquals8($80098C, 3, pAIScripting0x44_L128)              ;B5A0F3
+    %AICMD0x15_JumpIfEquals8(wram80(nWeatherForecast), 3, pAIScripting0x44_L128)              ;B5A0F3
     %AICMD0x14_JumpIfFlagSet($800196, $04, pAIScripting0x44_L129)            ;B5A0FA
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $05, pAIScripting0x44_L127)   ;B5A101
     %AICMD0x45_JumpIfBetween16(nLove_Eve, 200, 220, pAIScripting0x44_L130)   ;B5A108

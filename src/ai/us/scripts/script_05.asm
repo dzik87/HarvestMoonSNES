@@ -51,7 +51,7 @@ pAIScripting0x05_L007:
     %AICMD0x1C_ShowDialog($01C9, $00)                          ;B3CCEE
     %AICMD0x12_Jump(pAIScripting0x05_L006)                                   ;B3CCF2
 pAIScripting0x05_L008:
-    %AICMD0x16_JumpIfBetween8($80091E, 9, 12, pAIScripting0x05_L009)         ;B3CCF5
+    %AICMD0x16_JumpIfBetween8(wram80(strcPlayerData.carryItemIdPrev), 9, 12, pAIScripting0x05_L009)         ;B3CCF5
     %AICMD0x1C_ShowDialog($03BC, $00)                          ;B3CCFD
     %AICMD0x12_Jump(pAIScripting0x05_L006)                                   ;B3CD01
 pAIScripting0x05_L009:
@@ -118,7 +118,7 @@ pAIScripting0x05_L024:
     %AICMD0x2D_JumpOnInteract(pAIScripting0x05_L027, pAIScripting0x05_L025)                               ;B3CDCC
     %AICMD0x12_Jump(pAIScripting0x05_L024)                                   ;B3CDD1
 pAIScripting0x05_L025:
-    %AICMD0x16_JumpIfBetween8($80091E, 9, 12, pAIScripting0x05_L026)         ;B3CDD4
+    %AICMD0x16_JumpIfBetween8(wram80(strcPlayerData.carryItemIdPrev), 9, 12, pAIScripting0x05_L026)         ;B3CDD4
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3CDDC
     %AICMD0x1B($026B, $00)                                     ;B3CDE0
     %AICMD0x12_Jump(pAIScripting0x05_L024)                                   ;B3CDE4
@@ -149,7 +149,7 @@ pAIScripting0x05_L031:
     %AICMD0x2D_JumpOnInteract(pAIScripting0x05_L034, pAIScripting0x05_L032)                               ;B3CE42
     %AICMD0x12_Jump(pAIScripting0x05_L031)                                   ;B3CE47
 pAIScripting0x05_L032:
-    %AICMD0x16_JumpIfBetween8($80091E, 9, 12, pAIScripting0x05_L033)         ;B3CE4A
+    %AICMD0x16_JumpIfBetween8(wram80(strcPlayerData.carryItemIdPrev), 9, 12, pAIScripting0x05_L033)         ;B3CE4A
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3CE52
     %AICMD0x1B($028A, $00)                                     ;B3CE56
     %AICMD0x12_Jump(pAIScripting0x05_L031)                                   ;B3CE5A
@@ -179,7 +179,7 @@ pAIScripting0x05_L038:
     %AICMD0x2D_JumpOnInteract(pAIScripting0x05_L041, pAIScripting0x05_L039)                               ;B3CEB0
     %AICMD0x12_Jump(pAIScripting0x05_L038)                                   ;B3CEB5
 pAIScripting0x05_L039:
-    %AICMD0x16_JumpIfBetween8($80091E, 9, 12, pAIScripting0x05_L040)         ;B3CEB8
+    %AICMD0x16_JumpIfBetween8(wram80(strcPlayerData.carryItemIdPrev), 9, 12, pAIScripting0x05_L040)         ;B3CEB8
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3CEC0
     %AICMD0x1B($0296, $00)                                     ;B3CEC4
     %AICMD0x12_Jump(pAIScripting0x05_L038)                                   ;B3CEC8
@@ -230,7 +230,7 @@ pAIScripting0x05_L048:
     %AICMD0x2D_JumpOnInteract(pAIScripting0x05_L051, pAIScripting0x05_L049)                               ;B3CF7F
     %AICMD0x12_Jump(pAIScripting0x05_L048)                                   ;B3CF84
 pAIScripting0x05_L049:
-    %AICMD0x16_JumpIfBetween8($80091E, 9, 12, pAIScripting0x05_L050)         ;B3CF87
+    %AICMD0x16_JumpIfBetween8(wram80(strcPlayerData.carryItemIdPrev), 9, 12, pAIScripting0x05_L050)         ;B3CF87
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3CF8F
     %AICMD0x1B($02AB, $00)                                     ;B3CF93
     %AICMD0x12_Jump(pAIScripting0x05_L048)                                   ;B3CF97
@@ -285,7 +285,7 @@ pAIScripting0x05_L059:
     %AICMD0x2D_JumpOnInteract(pAIScripting0x05_L062, pAIScripting0x05_L060)                               ;B3D059
     %AICMD0x12_Jump(pAIScripting0x05_L059)                                   ;B3D05E
 pAIScripting0x05_L060:
-    %AICMD0x16_JumpIfBetween8($80091E, 9, 12, pAIScripting0x05_L061)         ;B3D061
+    %AICMD0x16_JumpIfBetween8(wram80(strcPlayerData.carryItemIdPrev), 9, 12, pAIScripting0x05_L061)         ;B3D061
     %AICMD0x1C_ShowDialog($03BC, $00)                          ;B3D069
     %AICMD0x12_Jump(pAIScripting0x05_L059)                                   ;B3D06D
 pAIScripting0x05_L061:
@@ -337,7 +337,7 @@ pAIScripting0x05_L070:
     %AICMD0x2D_JumpOnInteract(pAIScripting0x05_L073, pAIScripting0x05_L071)                               ;B3D119
     %AICMD0x12_Jump(pAIScripting0x05_L070)                                   ;B3D11E
 pAIScripting0x05_L071:
-    %AICMD0x16_JumpIfBetween8($80091E, 9, 12, pAIScripting0x05_L072)         ;B3D121
+    %AICMD0x16_JumpIfBetween8(wram80(strcPlayerData.carryItemIdPrev), 9, 12, pAIScripting0x05_L072)         ;B3D121
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3D129
     %AICMD0x12_Jump(pAIScripting0x05_L070)                                   ;B3D12D
 pAIScripting0x05_L072:
@@ -434,14 +434,14 @@ pAIScripting0x05_L095:
     %AICMD0x1C_ShowDialog($017C, $00)                          ;B3D257
     %AICMD0x12_Jump(pAIScripting0x05_L091)                                   ;B3D25B
 pAIScripting0x05_L096:
-    %AICMD0x15_JumpIfEquals8($80091E, 2, pAIScripting0x05_L097)              ;B3D25E
-    %AICMD0x15_JumpIfEquals8($80091E, 7, pAIScripting0x05_L097)              ;B3D265
-    %AICMD0x16_JumpIfBetween8($80091E, 1, 5, pAIScripting0x05_L098)          ;B3D26C
-    %AICMD0x16_JumpIfBetween8($80091E, 16, 23, pAIScripting0x05_L098)        ;B3D274
-    %AICMD0x15_JumpIfEquals8($80091E, 73, pAIScripting0x05_L099)             ;B3D27C
-    %AICMD0x15_JumpIfEquals8($80091E, 25, pAIScripting0x05_L099)             ;B3D283
-    %AICMD0x15_JumpIfEquals8($80091E, 6, pAIScripting0x05_L099)              ;B3D28A
-    %AICMD0x16_JumpIfBetween8($80091E, 9, 12, pAIScripting0x05_L100)         ;B3D291
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.carryItemIdPrev), 2, pAIScripting0x05_L097)              ;B3D25E
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.carryItemIdPrev), 7, pAIScripting0x05_L097)              ;B3D265
+    %AICMD0x16_JumpIfBetween8(wram80(strcPlayerData.carryItemIdPrev), 1, 5, pAIScripting0x05_L098)          ;B3D26C
+    %AICMD0x16_JumpIfBetween8(wram80(strcPlayerData.carryItemIdPrev), 16, 23, pAIScripting0x05_L098)        ;B3D274
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.carryItemIdPrev), 73, pAIScripting0x05_L099)             ;B3D27C
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.carryItemIdPrev), 25, pAIScripting0x05_L099)             ;B3D283
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.carryItemIdPrev), 6, pAIScripting0x05_L099)              ;B3D28A
+    %AICMD0x16_JumpIfBetween8(wram80(strcPlayerData.carryItemIdPrev), 9, 12, pAIScripting0x05_L100)         ;B3D291
     %AICMD0x1C_ShowDialog($0200, $00)                          ;B3D299
     %AICMD0x12_Jump(pAIScripting0x05_L091)                                   ;B3D29D
 pAIScripting0x05_L097:

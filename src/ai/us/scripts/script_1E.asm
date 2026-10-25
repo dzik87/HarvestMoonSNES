@@ -69,7 +69,7 @@ pAIScripting0x1E_L005:
     %AICMD0x24_NextHourPalette($74)                            ;B4972D
     %AICMD0x13_Wait(180)                                       ;B4972F
     %AICMD0x1C_ShowDialog($01BF, $00)                          ;B49732
-    %AICMD0x47_SetValue8($800973, 3)                           ;B49736
+    %AICMD0x47_SetValue8(wram80(nTimeState), 3)                           ;B49736
     %AICMD0x10_End()                                           ;B4973B
 pAIScripting0x1E_L006:
     %AICMD0x1A($0168, $0098, aAIScriptingData_L204, $00)                     ;B4973C

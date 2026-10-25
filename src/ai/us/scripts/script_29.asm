@@ -30,7 +30,7 @@ pAIScripting0x29_L002:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 18, 24, pAIScripting0x29_L005) ;B4C461
     %AICMD0x12_Jump(pAIScripting0x29_L002)                                   ;B4C469
 pAIScripting0x29_L003:
-    %AICMD0x15_JumpIfEquals8($80091E, 20, pAIScripting0x29_L006)             ;B4C46C
+    %AICMD0x15_JumpIfEquals8(wram80(strcPlayerData.carryItemIdPrev), 20, pAIScripting0x29_L006)             ;B4C46C
     %AICMD0x1C_ShowDialog($041B, $00)                          ;B4C473
     %AICMD0x12_Jump(pAIScripting0x29_L002)                                   ;B4C477
 pAIScripting0x29_L004:
