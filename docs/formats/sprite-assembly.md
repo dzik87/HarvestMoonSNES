@@ -4,8 +4,8 @@ Status legend as in `object-data.md`: **[C]** confirmed from engine code (routin
 the tool, **[I]** inferred, **[V]** confirmed visually (rendered output looks like the expected sprite).
 
 This note explains how a frame *component* of the object data (banks $86/$87, `object-data.md` section 6) turns into pixels of the
-sprite tile banks `$88-$91` (the raw sheets `assets/gfx/png/sprites/Sprites_88..91*`), and documents the exported, assembled
-frames in `assets/gfx/png/sprites_assembled/` produced by `tools/objects/spriteexport.py`.
+sprite tile banks `$88-$91` (the source units `assets/gfx/png/sprites/Sprites_88..91*/s_NNNN.png`, one 16x16 PNG per sprite block), and documents the
+assembled frames that `tools/objects/spriteexport.py` renders on demand into `build/sprites_assembled/` (derived output, never committed).
 
 ## 1. From tile id to pixels [C]
 
@@ -24,7 +24,7 @@ in VRAM (`$858D6D-$858E1B`):
 | byte offset | `T * $20` (hardware multiplier `WRMPYA/B`, `$858DBE-$858DD2`) `+ $8000` (`$858DD8`) | address of the first 8x8 tile of the sprite |
 | DMA | `fObject_ExecuteTileDmaQueue` (`$858E57`): two transfers of `$40` bytes, from `src` and `src + $200` (`$858E88`, `$858EB0`) to VRAM word `V` and `V + $100` (`$858EA5`) | tiles `T`, `T+1` (top half) and `T+16`, `T+17` (bottom half) of the 16-tiles-per-row sheet |
 
-So in the sheet PNG (128 px wide, 16 tiles per row, 512 px high; `docs/formats/graphics-png.md`) the component's 16x16 block is at
+So in the sprite bank sheet (128 px wide, 16 tiles per row, 512 px high; `docs/formats/graphics-png.md`) the component's 16x16 block is at
 
 ```
 sheet  = Sprites_{$88 + (id >> 8)}8000
@@ -32,7 +32,11 @@ blk    = (id >> 6) & 3
 n      = id & $3F
 pixel x = (n & 7) * 16
 pixel y = blk * 128 + (n >> 3) * 16          (blk = 8 KB block = 16 tile rows = 128 px)
+unit   = (id & $FF)                          (source file Sprites_{sheet}8000/s_{unit:04d}.png; unit = (y / 16) * 8 + x / 16 = blk * 64 + n)
 ```
+
+The source of truth is therefore exactly one PNG per tile id: `s_NNNN.png` of bank `$88 + k` is tile id `k * $100 + NNNN`. A sprite block that is all zero has no file
+(`unit_blank` in the bank's `manifest.json`).
 
 Each sprite bank is `4 blocks * 64 sprites = 256` 16x16 sprites; the ten banks hold 2560 sprite blocks, ids `$0000-$09FF`
 (highest id used in the data: `$09FE`, i.e. bank `$91`; 2315 distinct ids occur, all ten banks are used) [D]. `tests/test_spriteexport.py` re-derives the four DMA tiles
@@ -92,10 +96,10 @@ which is what the tool does. [C]
 
 ## 2. Exported files
 
-`python3 tools/objects/spriteexport.py export` writes (default `assets/gfx/png/sprites_assembled/`, about 6 MB, 4832 files):
+`python3 tools/objects/spriteexport.py export` writes (default `build/sprites_assembled/`, about 6 MB, 4832 files; git-ignored, rendered from the unit PNGs and the object data):
 
 ```
-sprites_assembled/
+build/sprites_assembled/
   index.json                     all objects: index, directory, bank, steps / frames / images
   obj_XXXX/                      one directory per object index $0000-$044F (1104)
     index.json                   steps (frame + timer), frames (components), images
@@ -123,7 +127,7 @@ sprites_assembled/
 | `lists[0].steps[]` | `step`, `frame` (24-bit address), `timer` (raw byte; `$FF` = hold forever, see object-data.md section 5), `image`, `png` |
 | `images[]` | `png`, `size [w, h]`, `origin [x, y]` (object origin inside the image) |
 | `frames[]` | `addr`, `image`, `png`, `origin`, `size`, `components[]` |
-| `components[]` | **source data**: `tile`, `x`, `y` (signed), `attr`; **derived** (for readers, recomputed by `check`): `sheet`, `sx`, `sy` (position of the 16x16 block in the sprite sheet PNG), `palette`, `hflip`, `vflip` |
+| `components[]` | **source data**: `tile`, `x`, `y` (signed), `attr`; **derived** (for readers, recomputed by `check`): `sheet`, `sx`, `sy` (position of the 16x16 block in the 128x512 sprite bank sheet; the unit file is `s_{(id & $FF):04d}.png`), `palette`, `hflip`, `vflip` |
 
 ## 3. Commands and checks
 
@@ -134,20 +138,20 @@ python3 tools/objects/spriteexport.py show   OBJECT [--frame N] [--scale S] [--o
 python3 tests/test_spriteexport.py
 ```
 
-`check` (CI step "Check asset sources") re-parses every `index.json` and requires: the steps/timers equal the animation list read from
+`check` (CI step "Check asset sources"; run it on a fresh `export`, or let `tests/test_spriteexport.py` do both in a temp dir) re-parses every `index.json` and requires: the steps/timers equal the animation list read from
 `assets/objects/bank_86`/`bank_87` (the sources of the object data, `docs/formats/object-data.md` section 10); every frame's components equal the data bank (including derived fields); the image
 list equals a fresh render; every frame PNG and every `contact.png` equals a fresh re-render pixel for pixel (palette ignored); no stray
 files; the top-level index lists all 1104 objects. It never writes. The contact sheet labels use a built-in 3x5 pixel font so that the
 output does not depend on the Pillow version.
 
 **Reverse direction.** The ROM bytes are *not* generated from this folder: editing an exported PNG or JSON does nothing to the build, and `check` will
-report the difference (the folder is derived output, like `pngsync.py preview`). To change a sprite, edit the tile sheet PNG
-(`assets/gfx/png/sprites/*.png`, `docs/formats/graphics-png.md`) and re-run `export`; to change the layout of a frame edit `assets/objects/bank_8x/frames.txt`.
+report the difference (the folder is derived output, like `pngsync.py preview`). To change a sprite, edit its unit PNG
+(`assets/gfx/png/sprites/<bank>/s_NNNN.png`, `docs/formats/graphics-png.md`) and re-run `export`; to change the layout of a frame edit `assets/objects/bank_8x/frames.txt`.
 A PNG -> component re-import (finding tile ids for edited pixels, allocating unused blocks, re-pointing frames) is future work; the JSON already
 carries everything that is needed (`tile`, `x`, `y`, `attr`, and the sheet position of each tile). To regenerate after any change of
-the sheets or the object data: `export`, then commit the folder.
+the sprite units or the object data: re-run `export` (nothing is committed).
 
-If the size of the folder ever becomes a problem, `export --no-frames` keeps only `index.json` + `contact.png` (about 3.3 MB) and the frames are regenerated on demand.
+`export --no-frames` writes only `index.json` + `contact.png` (about 3.3 MB); `show OBJECT` renders one object's contact sheet or frame to `build/`.
 
 ## 4. Visual verification [V]
 

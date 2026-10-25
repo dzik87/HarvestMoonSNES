@@ -114,10 +114,10 @@ def test_import_flow():
         # shrink: blank graphic -> stream is padded with zeros, layout unchanged
         from PIL import Image
         b = P.Blob("tiles", "sCompressedTiles_9282CB", tmp)
-        im = Image.open(b.art)
-        im.paste(0, (0, 0, im.width, im.height))
-        im.save(b.art)
+        for f in b.art.glob("t_*.png"):
+            f.unlink()                                          # every unit blank -> all-zero graphic
         P.cmd_import(ns(label=[b.label]), tmp)
+        check(P.parse_ranges(P.read_meta(b)["unit_blank"]) == set(range(64)), "import refreshes unit_blank after deleting all units")
         after = b.bin.read_bytes()
         check(len(after) == len(before) and after != before, "shrunk blob keeps its size")
         check(P.cmd_check(ns(), tmp) == 0, "check after shrink")
@@ -125,11 +125,11 @@ def test_import_flow():
 
         # grow: noisy graphic -> refused without the flag, padding adjusted with it
         rnd = random.Random(5)
-        px = im.load()
-        for y in range(48):
-            for x in range(im.width):
-                px[x, y] = rnd.randrange(16)
-        im.save(b.art)
+        for u in range(24):                                     # noisy units 0-23 (3 unit rows)
+            im = Image.new("P", (16, 16))
+            im.putdata([rnd.randrange(16) for _ in range(256)])
+            im.putpalette([0] * 48)
+            im.save(b.art / P.unit_name(b, u))
         try:
             P.cmd_import(ns(label=[b.label]), tmp)
             check(False, "growth must be refused without --allow-resize")
@@ -142,12 +142,21 @@ def test_import_flow():
         # bad index
         meta = P.read_meta(b)
         meta["bpp"] = 2
-        P.write_meta(b, meta)
         try:
             P.source_payload(b, meta)
             check(False, "index above 2bpp range must be rejected")
         except ValueError:
             pass
+        # a deleted unit file without refreshing the manifest must fail the check (it would silently become zeros)
+        victim = b.art / P.unit_name(b, 5)
+        saved = victim.read_bytes()
+        victim.unlink()
+        check(P.cmd_check(ns(), tmp) == 1, "check detects a unit file missing from the directory")
+        victim.write_bytes(saved)
+        check(P.cmd_check(ns(), tmp) == 0, "check passes again after restoring the unit")
+        (b.art / "t_9999.png").write_bytes(saved)
+        check(P.cmd_check(ns(), tmp) == 1, "check rejects a unit index beyond the blob")
+        (b.art / "t_9999.png").unlink()
 
 
 def test_real_blobs():
@@ -256,7 +265,8 @@ def test_png_palettes_are_real_colours():
     n = nconf = 0
     for b in P.blobs(kind="tiles") + P.blobs(kind="sprites"):
         meta = P.read_meta(b)
-        pal, trns = png_palette(b.art)
+        first = next(b.art.glob("*_*.png"))                     # PLTE is identical in every unit of a blob
+        pal, trns = png_palette(first)
         if "palette" not in meta:
             check(meta.get("palette_confidence") == "none", f"{b.label}: no palette and not flagged 'none'")
             continue
@@ -275,39 +285,78 @@ def test_png_palettes_are_real_colours():
 
 
 def test_assembled_sprites_use_obj_palette():
-    """the assembled object sprites (tools/objects/spriteexport.py) carry the day OBJ palette: pixel = (row << 4) | colour."""
+    """the assembled object sprites (tools/objects/spriteexport.py, rendered into a temp dir) carry the day OBJ palette:
+    pixel = (row << 4) | colour."""
+    import spriteexport as SE
     pals = PM.sprite_palettes(0)
     check(len(pals) == 8 and all(len(p) == 16 for p in pals), "sprite_palettes shape")
     check(pals[4] == P.load_view_palette({"id": "sPalette_0x6F", "sub": 4}, 4), "OBJ row 4 of sPalette_0x6F")
     flat = [c for p in pals for c in p]
     n = 0
-    for path in sorted((ROOT / "assets/gfx/png/sprites_assembled").glob("obj_000*/l0_f0*.png")):
+    tmp = tempfile.mkdtemp()
+    SE.main(["export", "--out", tmp] + [a for i in range(4) for a in ("--object", str(i))])
+    for path in sorted(Path(tmp).glob("obj_000*/l0_f0*.png")):
         pal, trns = png_palette(path)
         check(pal[:128] == flat, f"{path.parent.name}/{path.name}: PLTE is not the OBJ palette")
         check(isinstance(trns, bytes) and all(trns[i] == 0 for i in range(0, min(len(trns), 128), 16)), f"{path.name}: colour 0 of every row transparent")
         n += 1
+    shutil.rmtree(tmp)
     check(n > 0, "assembled sprite PNGs found")
 
 
 def test_palette_is_ignored_by_import():
-    """re-colouring the PNG (new PLTE, no tRNS) must not change a single byte of the rebuilt .bin."""
+    """re-colouring every unit PNG (new PLTE, no tRNS) must not change a single byte of the rebuilt .bin."""
     from PIL import Image
     rnd = random.Random(11)
     for label in ("sCompressedTiles_92D3AB", "Sprites_888000"):
         kind = "tiles" if label.startswith("sCompressed") else "sprites"
         b = P.Blob(kind, label)
         want = b.bin.read_bytes()
-        with tempfile.TemporaryDirectory() as d:
-            im = Image.open(b.art)
+        meta = P.read_meta(b)
+        units = {}
+        for i in sorted(P.load_units(b, meta)):
+            im = Image.open(b.art / P.unit_name(b, i))
             im.putpalette([rnd.randrange(256) for _ in range(48)])
             im.info.pop("transparency", None)
-            art = Path(d) / "x.png"
-            im.save(art, "PNG")
-            w, h, pix = P.load_png(art)
-            meta = P.read_meta(b)
-            raw = P.encode_sheet(pix, w, h, 4, meta["tiles_per_row"], meta["raw_size"])
-            got = P.C.compress(raw) + P.join_tail(meta) if b.compressed else raw
-            check(got == want, f"{label}: bytes depend on the PNG palette")
+            units[i] = im.tobytes()
+        ucols, urows = P.unit_geometry(meta)
+        w, h, pix = P.paste_units(units, ucols, urows)
+        raw = P.encode_sheet(pix, w, h, 4, meta["tiles_per_row"], meta["raw_size"])
+        got = P.C.compress(raw) + P.join_tail(meta) if b.compressed else raw
+        check(got == want, f"{label}: bytes depend on the PNG palette")
+
+
+def test_units_roundtrip_and_layout():
+    """sheet <-> 16x16 units: round trip, row-major unit order, sprite id = unit index, blank list syntax."""
+    rnd = random.Random(21)
+    raw = bytes(rnd.randrange(256) for _ in range(8192))
+    w, h, pix = P.decode_sheet(raw, 4, 16)
+    ucols, urows = P.unit_geometry({"bpp": 4, "tiles_per_row": 16, "raw_size": 8192})
+    check((ucols, urows) == (8, 8), "8192-byte blob = 8x8 units")
+    units = P.cut_units(pix, w, h, ucols, urows)
+    w2, h2, pix2 = P.paste_units(dict(enumerate(units)), ucols, urows)
+    check((w2, h2, pix2) == (w, h, pix), "units paste back into the sheet")
+    check(units[9][0:16] == bytes(pix[16 * 128 + 16:16 * 128 + 32]), "unit 9 = column 1, row 1 of the sheet")
+    # odd tile row count (e.g. 3 rows of 16 tiles) is padded to a full unit row
+    check(P.unit_geometry({"bpp": 4, "tiles_per_row": 16, "raw_size": 32 * 48}) == (8, 2), "odd tile rows round up")
+    for idxs in ({0, 1, 2, 5}, set(), {7}, set(range(64)), {3, 4, 10, 11, 12}):
+        check(P.parse_ranges(P.ranges_text(idxs)) == idxs, f"range text round trip {sorted(idxs)[:4]}")
+    # sprite id -> unit index (docs/formats/sprite-assembly.md): sheet block*128 px + (n >> 3) * 16, x = (n & 7) * 16
+    for tid in (0, 1, 8, 63, 64, 130, 255):
+        blk, n = (tid >> 6) & 3, tid & 63
+        x, y = (n & 7) * 16, blk * 128 + (n >> 3) * 16
+        check((y // 16) * 8 + x // 16 == tid & 0xFF, f"sprite id {tid:02X} is unit {tid & 0xFF}")
+
+
+def test_unit_sheet_view():
+    """pngsync sheet renders a blob from its units; the pixels equal the sheet decoded from the .bin."""
+    b = P.Blob("tiles", "sCompressedTiles_92D3AB")
+    img = P.render_unit_sheet(b)
+    raw, _ = P.read_raw(b)
+    w, h, pix = P.decode_sheet(raw, 4, 16)
+    check(img.size == (w, h), "unit sheet is 128x128")
+    big = P.render_unit_sheet(b, 2, grid=True)
+    check(big.size == (w * 2, h * 2), "scaled sheet")
 
 
 def test_export_writes_palette():
@@ -325,7 +374,7 @@ def test_export_writes_palette():
         ent = P.palette_map()["blobs"][labels[0]]
         check(meta["palette"] == {"id": ent["palette"]["id"], "sub": ent["palette"]["sub"]}, "sidecar palette")
         check(meta["palette_confidence"] == ent["confidence"], "sidecar confidence")
-        pal, _ = png_palette(b.art)
+        pal, _ = png_palette(next(b.art.glob("t_*.png")))
         check(pal[:16] == P.load_view_palette(meta["palette"], 4, tmp), "exported PLTE")
         check(P.cmd_check(ns(label=labels), tmp) == 0, "check after export with palette")
 

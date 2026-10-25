@@ -4,7 +4,7 @@
 Sources (committed)                                   -> generated, git-ignored files
   assets/gfx/palettes/sPalette_0xNN.json               -> assets/gfx/palettes/sPalette_0xNN.pal          (tools/gfx/palette.py pack)
   assets/fonts/us/glyph_*.png + glyphs.json            -> assets/gfx/tiles/sFontGlyphs_*.bin             (tools/fonts/font.py build)
-  assets/gfx/png/{tiles,sprites}/*.png + sidecar JSON  -> assets/gfx/{tiles,sprites}/*.bin               (tools/gfx/pngsync.py build)
+  assets/gfx/png/{tiles,sprites}/<label>/*.png + manifest.json -> assets/gfx/{tiles,sprites}/*.bin      (tools/gfx/pngsync.py build)
   assets/gfx/tilemaps/*.map.txt + sidecar JSON         -> assets/gfx/characters/*.bin                    (tools/gfx/pngsync.py build)
 
   assets/objects/bank_8{6,7}/ (bank.json, objects/*.json, frames.txt) -> build/gen/objects/bank_8{6,7}.asm (tools/objects/objdata.py build)

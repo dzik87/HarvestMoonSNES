@@ -126,7 +126,7 @@ roofs, water, pink trees on the town square); the weather overlays confirm the r
 * A sheet usually mixes several rows (a map sheet uses 1-7). The PNG shows the primary row; `pngsync.py preview` writes game-colour
   versions with the right row per 8x8 tile / per 16x16 sprite to `build/gfx_preview/sheets/` and the name tables with their
   palette bits applied to `build/gfx_preview/`. Neither is committed.
-* The assembled object sprites (`assets/gfx/png/sprites_assembled/`, `tools/objects/spriteexport.py`) keep the OBJ row in the high nibble
+* The assembled object sprites (`build/sprites_assembled/`, rendered by `tools/objects/spriteexport.py`) keep the OBJ row in the high nibble
   of the pixel value, so their 128-entry PLTE is simply the 8 rows of `sPalette_0x6F` (`palette_map.sprite_palettes()`).
 * Sidecar keys: `palette` (`id`, `sub`), `palette_confidence` (`high`, `medium`, `low`, see below), `palette_note`, `palette_subs_used`,
   `palette_alternatives` (up to 6, the full list is in `palette_map.json`).

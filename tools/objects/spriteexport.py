@@ -9,7 +9,7 @@ docs/formats/sprite-assembly.md for the evidence.
 Commands:
   export [--object N]... [--out DIR] [--no-frames] [--palette-module FILE]
         write, per object, <out>/obj_XXXX/index.json (steps, timers, frames, component offsets), l0_fNN.png (one PNG per distinct
-        frame image) and contact.png; plus <out>/index.json (all objects).  Default out: assets/gfx/png/sprites_assembled
+        frame image) and contact.png; plus <out>/index.json (all objects).  Default out: build/sprites_assembled (derived, never committed)
   check [--object N]... [--out DIR]
         re-parse the JSON indexes and verify them against the object data banks, and every PNG (frames and contact sheet)
         against a fresh re-render; exit 1 on any difference.  Never writes.  (CI)
@@ -37,8 +37,7 @@ sys.path.insert(0, str(ROOT / "tools" / "gfx"))
 import objdata as od  # noqa: E402
 import pngsync as PS  # noqa: E402
 
-OUT_DIR = ROOT / "assets" / "gfx" / "png" / "sprites_assembled"
-SPRITE_DIR = ROOT / "assets" / "gfx" / "sprites"
+OUT_DIR = ROOT / "build" / "sprites_assembled"          # derived output: rendered on demand, never committed
 FIRST_SPRITE_BANK = 0x88
 SPRITE_BANKS = 10                 # $88-$91
 SHEET_W = 128                     # sprite sheets: 16 tiles per row, 512 px high
@@ -87,15 +86,16 @@ def make_palette(pals):
 # Sprite sheets
 # --------------------------------------------------------------------------------------------------------------------
 class Sheets:
-    """The ten raw 4bpp sprite banks as 128x512 index arrays; sprite16() cuts out one 16x16 component."""
+    """The ten sprite banks, read from their 16x16 unit PNGs (assets/gfx/png/sprites/<label>/s_NNNN.png); sprite16() cuts out
+    one 16x16 component.  A sprite id & $FF is the unit index of the bank (block * 64 + slot), absent units are all zero."""
 
-    def __init__(self, sprite_dir=SPRITE_DIR):
-        self.pix = []
+    def __init__(self, root=ROOT):
+        self.units = []
         for b in range(SPRITE_BANKS):
-            raw = (sprite_dir / ("Sprites_%02X8000.bin" % (FIRST_SPRITE_BANK + b))).read_bytes()
-            w, h, pix = PS.decode_sheet(raw, 4, 16)
-            assert (w, h) == (SHEET_W, 512)
-            self.pix.append(pix)
+            blob = PS.Blob("sprites", "Sprites_%02X8000" % (FIRST_SPRITE_BANK + b), root)
+            meta = PS.read_meta(blob)
+            assert (meta["unit_columns"], meta["unit_count"]) == (8, 256)
+            self.units.append(PS.load_units(blob, meta))
         self.cache = {}
 
     @staticmethod
@@ -110,12 +110,9 @@ class Sheets:
         """16x16 pixel rows (list of 16 bytes objects) for a tile id; all zero for ids outside the ten banks."""
         r = self.cache.get(tile_id)
         if r is None:
-            sheet, x0, y0 = self.locate(tile_id)
-            if sheet >= SPRITE_BANKS:
-                r = [bytes(SPR)] * SPR
-            else:
-                pix = self.pix[sheet]
-                r = [bytes(pix[(y0 + y) * SHEET_W + x0:(y0 + y) * SHEET_W + x0 + SPR]) for y in range(SPR)]
+            sheet = tile_id >> 8
+            data = self.units[sheet].get(tile_id & 0xFF) if sheet < SPRITE_BANKS else None
+            r = [bytes(data[y * SPR:(y + 1) * SPR]) if data else bytes(SPR) for y in range(SPR)]
             self.cache[tile_id] = r
         return r
 

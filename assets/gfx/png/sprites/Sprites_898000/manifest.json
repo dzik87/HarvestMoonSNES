@@ -1,0 +1,45 @@
+{
+  "label": "Sprites_898000",
+  "kind": "sprites",
+  "bin": "assets/gfx/sprites/Sprites_898000.bin",
+  "compression": "none",
+  "raw_size": 32768,
+  "format": "snes_planar_tiles",
+  "bpp": 4,
+  "bpp_confidence": "high",
+  "bpp_note": "OBJ tiles in the standard 4bpp layout; plane correlation and sheet appearance confirm it",
+  "tiles_per_row": 16,
+  "unit_size": 16,
+  "unit_prefix": "s",
+  "unit_columns": 8,
+  "unit_count": 256,
+  "unit_blank": "135,142",
+  "palette": {
+    "id": "sPalette_0x6F",
+    "sub": 4
+  },
+  "palette_confidence": "high",
+  "palette_note": "OAM palette row of 321 of 321 object components is 4; the rest use rows none",
+  "palette_alternatives": [
+    {
+      "id": "sPalette_0x70",
+      "sub": 4,
+      "note": "same row, night palette (from 18:00)"
+    },
+    {
+      "id": "sPalette_0x71",
+      "sub": 4,
+      "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    },
+    {
+      "id": "sPalette_0x72",
+      "sub": 4,
+      "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    },
+    {
+      "id": "sPalette_0x73",
+      "sub": 4,
+      "note": "event palette (daily3 flags $0080/$0100/$0200)"
+    }
+  ]
+}
