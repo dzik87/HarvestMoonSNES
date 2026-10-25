@@ -2805,7 +2805,7 @@ fItemCarried_PlaceEggInIncubator:
     SEP #$20                                                   ;819497|E220    |      ;
     REP #$10                                                   ;819499|C210    |      ;
     LDA.W strcPlayerData.carryItemId                           ;81949B|AD1D09  |00091D;
-    CMP.B #!EITEM_GOLDAXE                                                 
+    CMP.B #!CITEM_EGG                                                 
     BEQ +                                                      ;8194A0|F003    |8194A5;
     JMP.W fItemCarried_PutDown_Outdoor                                      ;8194A2|4C3F95  |81953F;
  

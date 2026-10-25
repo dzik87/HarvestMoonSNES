@@ -52,8 +52,8 @@ Label names refer to the current sources; see `docs/naming/*.csv` for old -> new
 - `AICMD0x26`/`0x27` emit `$28` (aliases of 0x28); unused in US scripts.
 - `AICMD0x42` ignores its address operand and always adds to `nMoney`; `0x41` clamps to 0..999.
 - `0x14`/`0x23`: `aAISetMask` is a `1<<n` mask on game flags, not a button mask.
-- `0x34` writes `!EITEM_POTATOSEED` ($07) while carried-item id $07 is a fish: the two enums are mixed up.
-- `fItemCarried_PlaceEggInIncubator` compares the carried-item id against `!EITEM_GOLDAXE` ($14) which is the egg's carried id.
+- `0x34` wrote `!EITEM_POTATOSEED` ($07) although carried-item id $07 is a fish; fixed in source by using `!CITEM_FISH` (same value).
+- Carried-item id $14 is the egg; the egg code used `!EITEM_GOLDAXE`. Fixed in source with the new `!CITEM_EGG` (same value).
 - `0x50`/`0x51` store the season byte into `nDogAreaId`; `0x58` leaves `mapMultiWidth` = 4.
 - Dead code after the `0x4F` handler's RTS ($84BB65-$84BBD9).
 - `!PDIR_LEFT`/`!PDIR_RIGHT` ($02/$03) may be swapped relative to the actual input handling (to be confirmed).
