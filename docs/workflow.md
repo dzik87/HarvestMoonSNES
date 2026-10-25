@@ -24,3 +24,4 @@ the result in run annotations and as the `HarvestMoon-US` artifact.
 - `tilemap_codec.py` — LZSS codec for the compressed tilemap/charactermap blobs (see `docs/formats/tilemap-compression.md`).
 - `tiles.py` — raw 2/4/8bpp SNES tile data <-> indexed PNG sheets (`to-png`, `from-png`), lossless for any data.
 - `dialogs/dialog.py` — dialog word streams <-> editable text (`assets/dialogs/<region>/`), all regions.
+- `maps/objmap.py` — object maps (bank $A7) <-> JSON grids in `assets/maps/`; widths in `tools/maps/map_dims.json`.
