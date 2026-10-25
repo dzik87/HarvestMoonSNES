@@ -9,13 +9,8 @@
 ; (!DE_RAM_SHIFT, WRAM from $08D1 up is 6 bytes higher) through src/common/ram.asm / structures.asm.
 ;
 ; JP: the AI scripts address the same variables 32 bytes lower (from $0917 up; measured on all 459 such operands).
-; The common RAM map does not describe the JP layout yet, so the shift is applied here; once ram.asm and
-; structures.asm carry it, set !AI_JP_WRAM_DELTA to 0.
-!REGION_EU ?= 0
-!REGION_JP ?= 0
+; The common RAM map (src/common/region.asm, !RAM_SHIFT = -32 for JP, labels and `+!DE_RAM_SHIFT` literals) carries
+; this shift now, so no extra delta is applied here.
 !AI_JP_WRAM_DELTA = 0
-if !REGION_JP
-    !AI_JP_WRAM_DELTA = -32
-endif
 
 function wram80(a) = $800000|select(greaterequal(a&$FFFF,$0917),(a&$FFFF)+!AI_JP_WRAM_DELTA,a&$FFFF)

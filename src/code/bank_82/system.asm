@@ -2,6 +2,23 @@
  
  
 nSystemTranferData_82E666:
+    if !REGION_JP
+    db $FF,$02,$FF,$02,$26,$03,$27,$03,$26,$00,$27,$00
+    db $02,$00,$03,$00,$A8,$03,$A9,$03,$24,$03,$25,$03
+    db $FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02
+    db $FF,$02,$FF,$02,$36,$03,$37,$03,$36,$00,$37,$00
+    db $12,$00,$13,$00,$B8,$03,$B9,$03,$34,$03,$35,$03
+    db $FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02
+    db $FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02
+    db $FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02
+    db $FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02
+    db $A8,$03,$A9,$03,$24,$03,$25,$03,$CE,$00,$CF,$00
+    db $8C,$02,$8D,$02,$8E,$00,$8F,$00,$6C,$00,$6D,$00
+    db $2A,$00,$2B,$00,$AA,$00,$AB,$00,$FF,$02,$FF,$02
+    db $B8,$03,$B9,$03,$34,$03,$35,$03,$DE,$00,$DF,$00
+    db $9C,$02,$9D,$02,$9E,$00,$9F,$00,$7C,$00,$7D,$00
+    db $3A,$00,$3B,$00,$BA,$00,$BB,$00,$FF,$02,$FF,$02
+    else
     if !REGION_DE
     db $FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02
     db $FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02
@@ -19,7 +36,6 @@ nSystemTranferData_82E666:
     db $FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$36,$00,$7E,$00
     db $96,$00,$B0,$00,$FF,$02,$1A,$00,$96,$00,$B0,$00,$BC,$00,$B8,$00
     db $76,$00,$92,$00,$FF,$02,$FF,$02
-    nSystemTranferData_82E6D2 = $82E79B
     else
     db $FF,$02,$FF,$02,$2C,$00,$6E,$00,$C2,$00,$FF,$02         ;82E666|        |      ; 0x03 * [0x24 bytes]
     db $08,$00,$86,$00,$66,$00,$A8,$00,$C6,$00,$FF,$02         ;82E672|        |      ;
@@ -39,11 +55,11 @@ nSystemTranferData_82E6D2:
     db $96,$00,$76,$00,$B8,$00,$D6,$00,$FF,$02,$FF,$02         ;82E702|        |      ;
     endif
     db $FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02         ;82E70E|        |      ;
+    endif
     db $FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02         ;82E71A|        |      ;
     db $FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02         ;82E726|        |      ;
     if !REGION_DE
     db $FF,$02,$FF,$02,$C8,$10,$08,$12
-    aSystemTransferArgument = $82E8B7
     else
     db $FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02         ;82E732|        |      ;
  
@@ -122,7 +138,11 @@ fMainMenu_DrawSaveSlotFrames:
     PLX                                                        ;82E7D0|FA      |      ;
     PLY                                                        ;82E7D1|7A      |      ;
     INY                                                        ;82E7D2|C8      |      ;
+    if !REGION_JP
+    LDA.L aMainMenu_SlotFrameRunLength,X
+    else
     LDA.L aMainMenu_SlotFrameRunLength,X                                    ;82E7D3|BF88F282|82F288;
+    endif
     STA.B strcVariables.n16Unk88                               ;82E7D7|8588    |000088;
     CPY.B strcVariables.n16Unk88                               ;82E7D9|C488    |000088;
     BNE -                                                      ;82E7DB|D087    |82E764;
@@ -130,8 +150,10 @@ fMainMenu_DrawSaveSlotFrames:
     INX                                                        ;82E7DE|E8      |      ;
     CPX.W #$0010                                               ;82E7DF|E01000  |      ;
     BEQ .justReturn                                            ;82E7E2|F004    |82E7E8;
-    if !REGION_DE
-    JML.L $82E8C4                                          ;82E961|5CC4E882|82E8C4;
+    if !REGION_EUDE
+    JML.L L_82E747
+    elseif !REGION_JP
+    JML.L L_82E747
     else
     JML.L $82E747                                              ;82E7E4|5C47E782|82E747;
     endif
@@ -145,7 +167,7 @@ fLoadAndStartGame:
     SEP #$20                                                   ;82E7E9|E220    |      ;
     LDA.B #$00                                                 ;82E7EB|A900    |      ;
     XBA                                                        ;82E7ED|EB      |      ;
-    LDA.W $098E+!DE_RAM_SHIFT                              ;82E7EE|AD8E09  |00098E;
+    LDA.W $098E+!RAM_SHIFT                                 ;82E7EE|AD8E09  |00098E;
     JSL.L fGameEngine_LoadGame                                 ;82E7F1|22B1B283|83B2B1;
     JML.L fCore_GameStart                                      ;82E7F5|5C008080|808000;
  

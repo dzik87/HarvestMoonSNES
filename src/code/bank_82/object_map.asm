@@ -81,7 +81,7 @@ fObjectMap_LoadDefaultFarm:
  
 fObjectMap_LoadFarm:
     REP #$30                                                   ;82A682|C230    |      ;
-    LDA.W #$09B6+!DE_RAM_SHIFT                             ;82A684|A9B609  |      ;
+    LDA.W #$09B6+!RAM_SHIFT                                ;82A684|A9B609  |      ;
     STA.B ptrTemp0x72                                          ;82A687|8572    |000072;
     SEP #$20                                                   ;82A689|E220    |      ;
     LDA.B #$80                                                 ;82A68B|A980    |      ;
@@ -314,8 +314,10 @@ fObjectMap_HuricaneDamage:
     TAX                                                        ;82A7F9|AA      |      ;
     CPX.W #$0400                                               ;82A7FA|E00004  |      ;
     BEQ +                                                      ;82A7FD|F003    |82A802;
-    if !REGION_DE
-    JMP.W $A8E7                                            ;82A9BC|4CE7A8  |82A8E7;
+    if !REGION_EUDE
+    JMP.W L_82A72A
+    elseif !REGION_JP
+    JMP.W L_82A72A
     else
     JMP.W $A72A                                                ;82A7FF|4C2AA7  |82A72A;
     endif
@@ -327,8 +329,10 @@ fObjectMap_HuricaneDamage:
     TAY                                                        ;82A807|A8      |      ;
     CPY.W #$0400                                               ;82A808|C00004  |      ;
     BEQ .return                                                ;82A80B|F003    |82A810;
-    if !REGION_DE
-    JMP.W $A8E4                                            ;82A9CA|4CE4A8  |82A8E4;
+    if !REGION_EUDE
+    JMP.W L_82A727
+    elseif !REGION_JP
+    JMP.W L_82A727
     else
     JMP.W $A727                                                ;82A80D|4C27A7  |82A727;
     endif
@@ -621,8 +625,10 @@ fObjectMap_EatingGrass:
     TAX                                                        ;82A9F4|AA      |      ;
     CPX.W #$0400                                               ;82A9F5|E00004  |      ;
     BEQ +                                                      ;82A9F8|F003    |82A9FD;
-    if !REGION_DE
-    JMP.W $AB71                                            ;82ABB7|4C71AB  |82AB71;
+    if !REGION_EUDE
+    JMP.W L_82A9B4
+    elseif !REGION_JP
+    JMP.W L_82A9B4
     else
     JMP.W $A9B4                                                ;82A9FA|4CB4A9  |82A9B4;
     endif
@@ -634,8 +640,10 @@ fObjectMap_EatingGrass:
     TAY                                                        ;82AA02|A8      |      ;
     CPY.W #$0400                                               ;82AA03|C00004  |      ;
     BEQ .justReturn                                            ;82AA06|F003    |82AA0B;
-    if !REGION_DE
-    JMP.W $AB6E                                            ;82ABC5|4C6EAB  |82AB6E;
+    if !REGION_EUDE
+    JMP.W L_82A9B1
+    elseif !REGION_JP
+    JMP.W L_82A9B1
     else
     JMP.W $A9B1                                                ;82AA08|4CB1A9  |82A9B1;
     endif
@@ -690,8 +698,10 @@ fObjectMap_CalculateRanchDev:
     TAX                                                        ;82AA59|AA      |      ;
     CPX.W #$0400                                               ;82AA5A|E00004  |      ;
     BEQ +                                                      ;82AA5D|F003    |82AA62;
-    if !REGION_DE
-    JMP.W $ABE1                                            ;82AC1C|4CE1AB  |82ABE1;
+    if !REGION_EUDE
+    JMP.W L_82AA24
+    elseif !REGION_JP
+    JMP.W L_82AA24
     else
     JMP.W $AA24                                                ;82AA5F|4C24AA  |82AA24;
     endif
@@ -703,8 +713,10 @@ fObjectMap_CalculateRanchDev:
     TAY                                                        ;82AA67|A8      |      ;
     CPY.W #$0400                                               ;82AA68|C00004  |      ;
     BEQ .justReturn                                            ;82AA6B|F003    |82AA70;
-    if !REGION_DE
-    JMP.W $ABDE                                            ;82AC2A|4CDEAB  |82ABDE;
+    if !REGION_EUDE
+    JMP.W L_82AA21
+    elseif !REGION_JP
+    JMP.W L_82AA21
     else
     JMP.W $AA21                                                ;82AA6D|4C21AA  |82AA21;
     endif

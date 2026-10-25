@@ -305,7 +305,7 @@ fMap_SetupArea:
     JSL.L fTileMap_MapChangeHandler                            ;809793|22C6A780|80A7C6;
     REP #$20                                                   ;809797|C220    |      ;
     SEP #$10                                                   ;809799|E210    |      ;
-    LDA.W #$B9D7                                               ;80979B|A9D7B9  |      ;
+    LDA.W #sData42_80B9D7                                  ;80979B|A9D7B9  |      ;
     STA.B ptrTemp0x72                                          ;80979E|8572    |000072;
     SEP #$20                                                   ;8097A0|E220    |      ;
     LDA.B #$80                                                 ;8097A2|A980    |      ;
@@ -317,7 +317,7 @@ fMap_SetupArea:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;8097AE|22488E80|808E48;
     REP #$20                                                   ;8097B2|C220    |      ;
     SEP #$10                                                   ;8097B4|E210    |      ;
-    LDA.W #$B9DC                                               ;8097B6|A9DCB9  |      ;
+    LDA.W #sData42_80B9DC                                  ;8097B6|A9DCB9  |      ;
     STA.B ptrTemp0x72                                          ;8097B9|8572    |000072;
     SEP #$20                                                   ;8097BB|E220    |      ;
     LDA.B #$80                                                 ;8097BD|A980    |      ;
@@ -329,7 +329,7 @@ fMap_SetupArea:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;8097C9|22488E80|808E48;
     REP #$20                                                   ;8097CD|C220    |      ;
     SEP #$10                                                   ;8097CF|E210    |      ;
-    LDA.W #$B9E2                                               ;8097D1|A9E2B9  |      ;
+    LDA.W #sData42_80B9E2                                  ;8097D1|A9E2B9  |      ;
     STA.B ptrTemp0x72                                          ;8097D4|8572    |000072;
     SEP #$20                                                   ;8097D6|E220    |      ;
     LDA.B #$80                                                 ;8097D8|A980    |      ;
@@ -341,7 +341,7 @@ fMap_SetupArea:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;8097E4|22488E80|808E48;
     REP #$20                                                   ;8097E8|C220    |      ;
     SEP #$10                                                   ;8097EA|E210    |      ;
-    LDA.W #$B9DF                                               ;8097EC|A9DFB9  |      ;
+    LDA.W #sData42_80B9DF                                  ;8097EC|A9DFB9  |      ;
     STA.B ptrTemp0x72                                          ;8097EF|8572    |000072;
     SEP #$20                                                   ;8097F1|E220    |      ;
     LDA.B #$80                                                 ;8097F3|A980    |      ;
@@ -384,7 +384,7 @@ fMap_SetupArea:
     JSL.L fTileMap_MapChangeHandler                            ;809838|22C6A780|80A7C6;
     REP #$20                                                   ;80983C|C220    |      ;
     SEP #$10                                                   ;80983E|E210    |      ;
-    LDA.W #$B9EA                                               ;809840|A9EAB9  |      ;
+    LDA.W #sData42_80B9EA                                  ;809840|A9EAB9  |      ;
     STA.B ptrTemp0x72                                          ;809843|8572    |000072;
     SEP #$20                                                   ;809845|E220    |      ;
     LDA.B #$80                                                 ;809847|A980    |      ;
@@ -396,7 +396,7 @@ fMap_SetupArea:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;809853|22488E80|808E48;
     REP #$20                                                   ;809857|C220    |      ;
     SEP #$10                                                   ;809859|E210    |      ;
-    LDA.W #$B9EF                                               ;80985B|A9EFB9  |      ;
+    LDA.W #sData42_80B9EF                                  ;80985B|A9EFB9  |      ;
     STA.B ptrTemp0x72                                          ;80985E|8572    |000072;
     SEP #$20                                                   ;809860|E220    |      ;
     LDA.B #$80                                                 ;809862|A980    |      ;
@@ -408,7 +408,7 @@ fMap_SetupArea:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80986E|22488E80|808E48;
     REP #$20                                                   ;809872|C220    |      ;
     SEP #$10                                                   ;809874|E210    |      ;
-    LDA.W #$B9F2                                               ;809876|A9F2B9  |      ;
+    LDA.W #sData42_80B9F2                                  ;809876|A9F2B9  |      ;
     STA.B ptrTemp0x72                                          ;809879|8572    |000072;
     SEP #$20                                                   ;80987B|E220    |      ;
     LDA.B #$80                                                 ;80987D|A980    |      ;
@@ -420,7 +420,7 @@ fMap_SetupArea:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;809889|22488E80|808E48;
     REP #$20                                                   ;80988D|C220    |      ;
     SEP #$10                                                   ;80988F|E210    |      ;
-    LDA.W #$B9F5                                               ;809891|A9F5B9  |      ;
+    LDA.W #sData42_80B9F5                                  ;809891|A9F5B9  |      ;
     STA.B ptrTemp0x72                                          ;809894|8572    |000072;
     SEP #$20                                                   ;809896|E220    |      ;
     LDA.B #$80                                                 ;809898|A980    |      ;
@@ -486,7 +486,7 @@ fMap_SetupArea:
     LDA.B strcPlayer.posY                                      ;809933|A5D8    |0000D8;
     STA.W strcObjectData.playerY                               ;809935|8D0909  |000909;
     SEP #$20                                                   ;809938|E220    |      ;
-    STZ.W $098A+!DE_RAM_SHIFT                              ;80993A|9C8A09  |00098A;
+    STZ.W $098A+!RAM_SHIFT                                 ;80993A|9C8A09  |00098A;
     STZ.W strcPlayerData.unkCounter919                         ;80993D|9C1909  |000919;
     %UnsetPlayerFlag(!PFLAGS_INTRANSITION)
     REP #$20                                                   ;80994C|C220    |      ;
@@ -514,11 +514,11 @@ fMap_SetupArea:
     STA.W nUnknownY                                            ;80998C|8D8209  |000982;
     SEP #$20                                                   ;80998F|E220    |      ;
     LDA.B #$01                                                 ;809991|A901    |      ;
-    STA.W $0974+!DE_RAM_SHIFT                              ;809993|8D7409  |000974;
+    STA.W $0974+!RAM_SHIFT                                 ;809993|8D7409  |000974;
     LDA.B #$01                                                 ;809996|A901    |      ;
-    STA.W $0975+!DE_RAM_SHIFT                              ;809998|8D7509  |000975;
+    STA.W $0975+!RAM_SHIFT                                 ;809998|8D7509  |000975;
     LDA.B #$02                                                 ;80999B|A902    |      ;
-    STA.W $0976+!DE_RAM_SHIFT                              ;80999D|8D7609  |000976;
+    STA.W $0976+!RAM_SHIFT                                 ;80999D|8D7609  |000976;
     JSL.L fObjectSlots_Allocate                                      ;8099A0|2200A581|81A500;
     REP #$30                                                   ;8099A4|C230    |      ;
     LDA.W #$0014                                               ;8099A6|A91400  |      ;
@@ -661,7 +661,7 @@ fMapChangeHandler_809A64:
     %SetPlayerAction(!PACTION_NONE)
     %SetPlayerFlag(!PFLAGS_INTRANSITION)
     SEP #$20                                                   ;809AE3|E220    |      ;
-    LDA.W $098A+!DE_RAM_SHIFT                              ;809AE5|AD8A09  |00098A;
+    LDA.W $098A+!RAM_SHIFT                                 ;809AE5|AD8A09  |00098A;
     CMP.B #$01                                                 ;809AE8|C901    |      ;
     BNE .label8                                                ;809AEA|D003    |809AEF;
     JMP.W .label24                                             ;809AEC|4C5D9C  |809C5D;
@@ -675,7 +675,7 @@ fMapChangeHandler_809A64:
  
 .label9:
     INC A                                                      ;809AF6|1A      |      ;
-    STA.W $098A+!DE_RAM_SHIFT                              ;809AF7|8D8A09  |00098A;
+    STA.W $098A+!RAM_SHIFT                                 ;809AF7|8D8A09  |00098A;
     REP #$20                                                   ;809AFA|C220    |      ;
     LDA.W $0878                                                ;809AFC|AD7808  |000878;
     ASL A                                                      ;809AFF|0A      |      ;
@@ -836,7 +836,7 @@ fMapChangeHandler_809A64:
     STZ.W $0878                                                ;809C22|9C7808  |000878;
     STZ.W $087A                                                ;809C25|9C7A08  |00087A;
     SEP #$20                                                   ;809C28|E220    |      ;
-    STZ.W $098A+!DE_RAM_SHIFT                              ;809C2A|9C8A09  |00098A;
+    STZ.W $098A+!RAM_SHIFT                                 ;809C2A|9C8A09  |00098A;
     JMP.W .return                                              ;809C2D|4C0A9D  |809D0A;
  
  
@@ -874,11 +874,11 @@ fMapChangeHandler_809A64:
  
 .label25:
     SEP #$20                                                   ;809C67|E220    |      ;
-    LDA.W $098A+!DE_RAM_SHIFT                              ;809C69|AD8A09  |00098A;
+    LDA.W $098A+!RAM_SHIFT                                 ;809C69|AD8A09  |00098A;
     CMP.B #$0D                                                 ;809C6C|C90D    |      ;
     BEQ .destinationFarm                                       ;809C6E|F063    |809CD3;
     INC A                                                      ;809C70|1A      |      ;
-    STA.W $098A+!DE_RAM_SHIFT                              ;809C71|8D8A09  |00098A;
+    STA.W $098A+!RAM_SHIFT                                 ;809C71|8D8A09  |00098A;
     %SetPlayerAction(!PACTION_WALK)
     REP #$20                                                   ;809C7B|C220    |      ;
     LDA.B strcPlayer.direction                                 ;809C7D|A5DA    |0000DA;

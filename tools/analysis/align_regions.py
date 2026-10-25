@@ -1,22 +1,22 @@
 #!/usr/bin/env python3
-"""Align the DE code banks ($80-$85) against the US source and report how much of the code is shared.
+"""Align the code banks ($80-$85) of a regional ROM against the US source and report how much of the code is shared.
 
-The DE ROM is only an input of this tool (never stored in the repository). The US ROM is either given with --us
-or built from src/ with asar (tools/bin/asar). Method:
+The regional ROMs (EU, DE, JP) are only inputs of this tool (never stored in the repository). The US ROM is either
+given with --us or built from src/ with asar (tools/bin/asar). Method:
 
-  1. Per bank the DE bytes are aligned with the US bytes (anchor based diff, `bytealign.py`). Equal blocks and
-     same-length replacements give a byte-exact US->DE address map.
+  1. Per bank the regional bytes are aligned with the US bytes (anchor based diff, `bytealign.py`). Equal blocks and
+     same-length replacements give a byte-exact US->region address map.
   2. Every line of the US source (see `usmap.py`) is classified:
-       same    - all bytes identical in DE
+       same    - all bytes identical in the region
        reloc   - only operand bytes differ and the difference is explained by the symbolic operand
-                 (code shifted: label targets; RAM block shifted by +6 from $7E08D1; branch distances)
-       diff    - anything else: the line needs a DE specific variant
+                 (code shifted: label targets; RAM block shifted, see `RamMap`; branch distances)
+       diff    - anything else: the line needs a region specific variant
   3. Statistics per bank and per function (global label) are printed or written to docs/regions.md.
 
-The same machinery is used by tools/migration/de_patch.py to create the `if !REGION_DE` patch blocks.
+The same machinery is used by tools/migration/region_patch.py to create the `if !REGION_xx` patch blocks.
 
 Usage:
-    python tools/analysis/align_regions.py --de "Harvest Moon (Germany).sfc" [--us US.sfc] [--md docs/regions.md]
+    python tools/analysis/align_regions.py [--eu EU.sfc] [--de DE.sfc] [--jp JP.sfc] [--us US.sfc] [--md docs/regions.md]
 """
 import argparse
 import os
@@ -36,11 +36,54 @@ from disasm65816 import _OPS, lorom_off  # noqa: E402
 ROOT = Path(__file__).resolve().parent.parent.parent
 BANKS = range(0x80, 0x86)
 
-# DE inserted 6 bytes into the WRAM name block (the weekday names are longer); everything from $7E08D1 up to the
-# DMA queues moves up by 6 bytes. Found by operand statistics of the aligned code (see docs/regions.md).
+# The WRAM name block ($7E0881-$7E08FC, strcNames) has a different layout in some regions; everything above it
+# up to the DMA queues ($7E2000) moves by a constant (from $7E08D1, JP: from $7E08D5 = strcNames.wPlayer). Found by operand statistics of the aligned code
+# (see docs/regions.md). `RamMap` describes this per region.
 RAM_SHIFT_START = 0x08D1
 RAM_SHIFT_END = 0x2000
-RAM_SHIFT = 6
+
+
+class RamMap:
+    """US <-> region mapping of 16 bit WRAM offsets.
+
+    US offsets in [start, end) are `delta` bytes higher in the region. Region offsets that lie in a `grey`
+    range have no US counterpart (fields that only exist in that region)."""
+
+    def __init__(self, delta=0, start=RAM_SHIFT_START, end=RAM_SHIFT_END, grey=()):
+        self.delta, self.start, self.end, self.grey = delta, start, end, tuple(grey)
+
+    def us2reg(self, v):
+        return v + self.delta if self.start <= v < self.end else v
+
+    def reg2us(self, v):
+        """US offset for region offset `v`, None if the offset has no US counterpart."""
+        if any(a <= v < b for a, b in self.grey):
+            return None
+        if self.delta and self.start + self.delta <= v < self.end + self.delta:
+            return v - self.delta
+        return v
+
+    def us_shifted(self, v):
+        return self.delta != 0 and self.start <= v < self.end
+
+
+REGION_RAM = {
+    "US": RamMap(0),
+    "EU": RamMap(0),
+    # DE: the weekday names are 6 bytes longer (strcNames.wWeekday); WRAM from $08D1 is 6 bytes higher
+    "DE": RamMap(6, grey=((0x08D1, 0x08D7),)),
+    # JP: names are 1-4 kanji words (girl 8, season 2, weekday 2 bytes, no day ordinal); WRAM from $08D1 is 32 bytes lower
+    "JP": RamMap(-32, start=0x08D5, grey=((0x08A9, 0x08B5),)),
+}
+RAM = REGION_RAM["US"]
+REGION_ROM_NAMES = {"EU": "Europe", "DE": "Germany", "JP": "Japan"}
+
+
+def set_region(name):
+    """Select the RAM layout used by the classification helpers below."""
+    global RAM
+    RAM = REGION_RAM[name]
+
 
 ADDR_MODES_16 = {"abs", "absx", "absy", "absind", "absindx", "absindl", "pea"}
 DP_MODES = {"dp", "dpx", "dpy", "ind", "indx", "indy", "indl", "indly", "sr", "sry", "pei"}
@@ -171,10 +214,8 @@ class Aligner:
 
 
 def ram_expected(v):
-    """Expected DE value of a US WRAM address (low 16 bit of bank $7E / DB=$7E)."""
-    if RAM_SHIFT_START <= v < RAM_SHIFT_END:
-        return v + RAM_SHIFT
-    return v
+    """Expected region value of a US WRAM address (low 16 bit of bank $7E / DB=$7E)."""
+    return RAM.us2reg(v)
 
 
 def is_wram_long(v):
@@ -184,8 +225,7 @@ def is_wram_long(v):
 
 
 def long_ram_expected(v):
-    off = v & 0xFFFF
-    return v + RAM_SHIFT if RAM_SHIFT_START <= off < RAM_SHIFT_END else v
+    return (v & ~0xFFFF) | RAM.us2reg(v & 0xFFFF)
 
 
 def split_items(rest):
@@ -328,12 +368,18 @@ def classify_data(al, ln, de):
             t = None
         if a == b:
             if t is not None and t & ((1 << (8 * size)) - 1) != v:
-                return "diff"   # the symbol moves but DE kept the old value
+                return "diff"   # the symbol moves but the region kept the old value
+            if sym and "!RAM_SHIFT" in it and ((kind == "dw" and ram_expected(v) != v and v < 0x2000) or
+                                                (kind == "dl" and is_wram_long(v) and long_ram_expected(v) != v)):
+                return "diff"   # marked as moving with the RAM shift, but not in this region
             continue
         if sym and t is not None and (t & ((1 << (8 * size)) - 1)) == dv:
             status = "reloc" if status == "same" else status
             continue
         if sym and kind == "dw" and dv == ram_expected(v) and v < 0x2000:
+            status = "reloc" if status == "same" else status
+            continue
+        if sym and kind == "dl" and is_wram_long(v) and dv == long_ram_expected(v):
             status = "reloc" if status == "same" else status
             continue
         if not sym and ((kind == "dl" and is_wram_long(v) and dv == long_ram_expected(v)) or
@@ -505,58 +551,90 @@ def report(al, lines, status):
     return rows
 
 
-def count_blocks():
-    """Number of `if !REGION_DE` patch blocks per bank in the current sources."""
-    out = Counter()
-    for rel in usmap.MODULE_ORDER:
-        n = (usmap.CODE_DIR / rel).read_text(encoding="utf-8").count("\n    if !REGION_DE\n")
-        out[int(rel[5:7], 16)] += n
+def cond_regions(cond):
+    """Regions named by a patch block condition such as `!REGION_EUDE` or `!REGION_DE || !REGION_JP`."""
+    out = set()
+    for name in re.findall(r"!REGION_(\w+)", cond):
+        for k in range(0, len(name), 2):
+            out.add(name[k:k + 2])
+    out.discard("US")
     return out
 
 
-MARK_BEGIN = "<!-- DE-ALIGN-BEGIN (generated by tools/analysis/align_regions.py --md) -->"
-MARK_END = "<!-- DE-ALIGN-END -->"
+def count_blocks():
+    """Number of patch blocks per bank and region in the current sources (a block counts for every region that has
+    a branch of its own in it; nested blocks count separately)."""
+    out = defaultdict(Counter)
+    for rel in usmap.MODULE_ORDER:
+        bank = int(rel[5:7], 16)
+        stack = []
+        for text in (usmap.CODE_DIR / rel).read_text(encoding="utf-8").split("\n"):
+            s = text.strip()
+            if s.startswith("if ") and "!REGION_" in s:
+                stack.append(cond_regions(s))
+            elif s.startswith("elseif ") and stack:
+                stack[-1] |= cond_regions(s)
+            elif s == "endif" and stack:
+                for r in stack.pop():
+                    out[r][bank] += 1
+    return out
 
 
-def markdown(rows, blocks):
-    tot = sum(r["bytes"] for r in rows)
-    ts = sum(r["same"] for r in rows)
-    tr = sum(r["reloc"] for r in rows)
-    td = sum(r["diff"] for r in rows)
-    out = [MARK_BEGIN, "",
-           "| Bank | Source bytes | Identical to DE | Identical after relocation | DE specific | Global labels (with DE changes) | DE patch blocks |",
-           "|---|---|---|---|---|---|---|"]
-    for r in rows:
-        out.append("| ${b:02X} | {bytes} | {same} ({ps:.1f}%) | {reloc} ({pr:.1f}%) | {diff} ({pd:.1f}%) | {labels} ({changed}) | {nb} |".format(
-            b=r["bank"], bytes=r["bytes"], same=r["same"], reloc=r["reloc"], diff=r["diff"], labels=r["labels"],
-            changed=r["changed"], ps=100 * r["same"] / r["bytes"], pr=100 * r["reloc"] / r["bytes"],
-            pd=100 * r["diff"] / r["bytes"], nb=blocks.get(r["bank"], 0)))
-    out.append("| **Total** | {} | {} ({:.1f}%) | {} ({:.1f}%) | {} ({:.1f}%) | | {} |".format(
-        tot, ts, 100 * ts / tot, tr, 100 * tr / tot, td, 100 * td / tot, sum(blocks.values())))
+MARK_BEGIN = "<!-- ALIGN-BEGIN (generated by tools/analysis/align_regions.py --md) -->"
+MARK_END = "<!-- ALIGN-END -->"
+
+
+def markdown(all_rows, blocks):
+    """all_rows: {region: rows}; blocks: {region: Counter(bank -> n)}."""
+    out = [MARK_BEGIN]
+    for reg, rows in all_rows.items():
+        tot = sum(r["bytes"] for r in rows)
+        ts = sum(r["same"] for r in rows)
+        tr = sum(r["reloc"] for r in rows)
+        td = sum(r["diff"] for r in rows)
+        bl = blocks.get(reg, Counter())
+        out += ["", "### %s" % reg, "",
+                "| Bank | Source bytes | Identical to %s | Identical after relocation | %s specific | Global labels (with %s changes) | Patch blocks |" % (reg, reg, reg),
+                "|---|---|---|---|---|---|---|"]
+        for r in rows:
+            out.append("| ${b:02X} | {bytes} | {same} ({ps:.1f}%) | {reloc} ({pr:.1f}%) | {diff} ({pd:.1f}%) | {labels} ({changed}) | {nb} |".format(
+                b=r["bank"], bytes=r["bytes"], same=r["same"], reloc=r["reloc"], diff=r["diff"], labels=r["labels"],
+                changed=r["changed"], ps=100 * r["same"] / r["bytes"], pr=100 * r["reloc"] / r["bytes"],
+                pd=100 * r["diff"] / r["bytes"], nb=bl.get(r["bank"], 0)))
+        out.append("| **Total** | {} | {} ({:.1f}%) | {} ({:.1f}%) | {} ({:.1f}%) | | {} |".format(
+            tot, ts, 100 * ts / tot, tr, 100 * tr / tot, td, 100 * td / tot, sum(bl.values())))
     out += ["", MARK_END]
     return "\n".join(out)
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--de", required=True, type=Path)
+    for r in ("eu", "de", "jp"):
+        ap.add_argument("--" + r, type=Path, help="%s ROM dump (tool input only)" % r.upper())
     ap.add_argument("--us", type=Path)
-    ap.add_argument("--md", type=Path, help="replace the generated coverage table (between the DE-ALIGN markers) in this file")
+    ap.add_argument("--md", type=Path, help="replace the generated coverage tables (between the ALIGN markers) in this file")
     args = ap.parse_args()
-    de = args.de.read_bytes()
+    roms = {r.upper(): getattr(args, r).read_bytes() for r in ("eu", "de", "jp") if getattr(args, r)}
+    if not roms:
+        ap.error("give at least one of --eu --de --jp")
     if args.us:
         us = args.us.read_bytes()
     else:
         us, _ = build_us_rom()
-    al = Aligner(us, de)
     lines = usmap.load_us_source(us)
-    status = classify_lines(al, lines, de)
-    rows = report(al, lines, status)
     blocks = count_blocks()
-    print("bank  bytes    same   reloc    diff  labels(changed) patch blocks")
-    for r in rows:
-        print("${bank:02X} {bytes:7d} {same:7d} {reloc:7d} {diff:7d}  {labels}({changed})  {nb}".format(nb=blocks.get(r["bank"], 0), **r))
-    md = markdown(rows, blocks)
+    all_rows = {}
+    for reg, rom in roms.items():
+        set_region(reg)
+        al = Aligner(us, rom)
+        status = classify_lines(al, lines, rom)
+        rows = all_rows[reg] = report(al, lines, status)
+        print(reg)
+        print("bank  bytes    same   reloc    diff  labels(changed) patch blocks")
+        for r in rows:
+            print("${bank:02X} {bytes:7d} {same:7d} {reloc:7d} {diff:7d}  {labels}({changed})  {nb}".format(
+                nb=blocks[reg].get(r["bank"], 0), **r))
+    md = markdown(all_rows, blocks)
     if args.md:
         text = args.md.read_text(encoding="utf-8")
         if MARK_BEGIN in text:

@@ -2786,8 +2786,8 @@ fAIAction0x30_UpdateChicken:
     LDA.B [ptrAIUnknown0xCC],Y                                 ;849898|B7CC    |0000CC;
     CMP.B #$E0                                                 ;84989A|C9E0    |      ;
     BNE .loop                                                  ;84989C|D003    |8498A1;
-    if !REGION_DE
-    JMP.W .label3                                          ;84989E|4C4F9A  |849A4F;
+    if !REGION_EUDE
+    JMP.W .label3
     else
     JMP.W .label3                                              ;84989E|4C4F9A  |849A4F;
     endif
@@ -3018,14 +3018,14 @@ fAIAction0x30_UpdateChicken:
  
  
 .label3:
-    if !REGION_DE
-    REP #$30                                               ;849A4F|C230    |      ;
-    LDA.L $7F1F5A                                          ;849A51|AF5A1F7F|      ;
-    AND.W #$0002                                           ;849A55|290200  |      ;
-    BEQ .de_849A5D                                         ;849A58|F003    |849A5D;
-    JMP.W .label2                                          ;849A5A|4C419A  |849A41;
-.de_849A5D:
-    SEP #$20                                               ;849A5D|E220    |      ;
+    if !REGION_EUDE
+    REP #$30
+    LDA.L $7F1F5A
+    AND.W #$0002
+    BEQ .r_849A4F_1
+    JMP.W .label2
+.r_849A4F_1:
+    SEP #$20
     else
     SEP #$20                                                   ;849A4F|E220    |      ;
     endif
@@ -3054,7 +3054,7 @@ fAIAction0x30_UpdateChicken:
     REP #$10                                                   ;849A8B|C210    |      ;
     LDY.W #$003F                                               ;849A8D|A03F00  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;849A90|B7CC    |0000CC;
-    STA.W $09A1+!DE_RAM_SHIFT                              ;849A92|8DA109  |0009A1;
+    STA.W $09A1+!RAM_SHIFT                                 ;849A92|8DA109  |0009A1;
     SEP #$20                                                   ;849A95|E220    |      ;
     LDA.B #$44                                                 ;849A97|A944    |      ;
     STA.W nPlayerInteractionIndex                              ;849A99|8D6E09  |00096E;
@@ -3126,8 +3126,8 @@ fAIAction0x31_UpdateCow:
     LDA.B [ptrAIUnknown0xCC],Y                                 ;849B35|B7CC    |0000CC;
     CMP.B #$E0                                                 ;849B37|C9E0    |      ;
     BNE +                                                      ;849B39|D003    |849B3E;
-    if !REGION_DE
-    JMP.W fAIAction0x31_CowState0xE0                       ;849B49|4CA6A4  |84A4A6;
+    if !REGION_EUDE
+    JMP.W fAIAction0x31_CowState0xE0
     else
     JMP.W fAIAction0x31_CowState0xE0                                     ;849B3B|4C98A4  |84A498;
     endif
@@ -4455,14 +4455,14 @@ fAIAction0x31_CowAdvanceTimer:
  
  
 fAIAction0x31_CowState0xE0:
-    if !REGION_DE
-    REP #$30                                               ;84A4A6|C230    |      ;
-    LDA.L $7F1F5A                                          ;84A4A8|AF5A1F7F|      ;
-    AND.W #$0002                                           ;84A4AC|290200  |      ;
-    BEQ .de_84A4B4                                         ;84A4AF|F003    |84A4B4;
-    JMP.W fAIAction0x31_CowUpdateTail                      ;84A4B1|4C7CA4  |84A47C;
-.de_84A4B4:
-    REP #$30                                               ;84A4B4|C230    |      ;
+    if !REGION_EUDE
+    REP #$30
+    LDA.L $7F1F5A
+    AND.W #$0002
+    BEQ .r_84A498_1
+    JMP.W fAIAction0x31_CowUpdateTail
+.r_84A498_1:
+    REP #$30
     else
     REP #$30                                                   ;84A498|C230    |      ;
     endif
@@ -4507,7 +4507,7 @@ fAIAction0x31_CowState0xE0:
     REP #$10                                                   ;84A4F7|C210    |      ;
     LDY.W #$003F                                               ;84A4F9|A03F00  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;84A4FC|B7CC    |0000CC;
-    STA.W $09A0+!DE_RAM_SHIFT                              ;84A4FE|8DA009  |0009A0;
+    STA.W $09A0+!RAM_SHIFT                                 ;84A4FE|8DA009  |0009A0;
     SEP #$20                                                   ;84A501|E220    |      ;
     LDA.B #$43                                                 ;84A503|A943    |      ;
     STA.W nPlayerInteractionIndex                              ;84A505|8D6E09  |00096E;
@@ -7568,7 +7568,7 @@ fAIAction0x54_ShowDialog:
     LDA.B [ptrAIActionData]                                    ;84BEF3|A7C9    |0000C9;
     STA.W strcDialogDisplay.dialogUnk191                       ;84BEF5|8D9101  |000191;
     REP #$20                                                   ;84BEF8|C220    |      ;
-    STZ.W $09B1+!DE_RAM_SHIFT                              ;84BEFA|9CB109  |0009B1;
+    STZ.W $09B1+!RAM_SHIFT                                 ;84BEFA|9CB109  |0009B1;
     SEP #$20                                                   ;84BEFD|E220    |      ;
     LDA.B #$06                                                 ;84BEFF|A906    |      ;
     STA.W strcDialogDisplay.mapUnk19A                          ;84BF01|8D9A01  |00019A;

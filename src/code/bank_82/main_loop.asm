@@ -315,8 +315,10 @@ fMainMenu_PrepareHowToPlay:
     BNE fMainMenu_HowToPlayCleanup                                        ;82D728|D007    |82D731;
     SEP #$20                                                   ;82D72A|E220    |      ;
     STZ.B $00                                                  ;82D72C|6400    |000000;
-    if !REGION_DE
-    JMP.W $D886                                            ;82D8EB|4C86D8  |82D886;
+    if !REGION_EUDE
+    JMP.W L_82D6C9
+    elseif !REGION_JP
+    JMP.W L_82D6C9
     else
     JMP.W $D6C9                                                ;82D72E|4CC9D6  |82D6C9;
     endif
@@ -370,8 +372,8 @@ fMainMenu_TitleScreenInit:
     LDA.B #$03                                                 ;82D790|A903    |      ;
     JSL.L fCore_ManageGraphicsPresets                          ;82D792|22598C80|808C59;
     JSL.L fCore_SetForceBlank                                  ;82D796|220F8E80|808E0F;
-    if !REGION_DE
-    JSL.L fCore_ZeroVRAM                                   ;82D957|22468880|808846;
+    if !REGION_EUDE
+    JSL.L fCore_ZeroVRAM
     else
     JSL.L fCore_ZeroVRAM                                       ;82D79A|22468880|808846;
     SEP #$20                                                   ;82D79E|E220    |      ;
@@ -500,8 +502,8 @@ fMainMenu_StateInitialDelay:
     REP #$30                                                   ;82D88B|C230    |      ;
     PLY                                                        ;82D88D|7A      |      ;
     INY                                                        ;82D88E|C8      |      ;
-    if !REGION_DE
-    CPY.W #$0001                                           ;82D9EA|C00100  |      ;
+    if !REGION_EUDE
+    CPY.W #$0001
     else
     CPY.W #$0078                                               ;82D88F|C07800  |      ;
     endif
@@ -586,8 +588,10 @@ fMainMenu_StateOpeningDemo:
     BNE +                                                      ;82D991|D020    |82D9B3;
     SEP #$20                                                   ;82D993|E220    |      ;
     STZ.B $00                                                  ;82D995|6400    |000000;
-    if !REGION_DE
-    JMP.W $DA9A                                            ;82DAF2|4C9ADA  |82DA9A;
+    if !REGION_EUDE
+    JMP.W L_82D93F
+    elseif !REGION_JP
+    JMP.W L_82D93F
     else
     JMP.W $D93F                                                ;82D997|4C3FD9  |82D93F;
     endif
@@ -888,11 +892,7 @@ fMainMenu_StateTitleStartCursorAnim:
   + JSL.L fCore_Zero0x42Ptr                                    ;82DC32|22AB8F80|808FAB;
     REP #$20                                                   ;82DC36|C220    |      ;
     SEP #$10                                                   ;82DC38|E210    |      ;
-    if !REGION_DE
-    LDA.W #$F459                                           ;82DD95|A959F4  |      ;
-    else
-    LDA.W #$F2A4                                               ;82DC3A|A9A4F2  |      ;
-    endif
+    LDA.W #aMainMenu_PalAnimLogoA                          ;82DC3A|A9A4F2  |      ;
     STA.B ptrTemp0x72                                          ;82DC3D|8572    |000072;
     SEP #$20                                                   ;82DC3F|E220    |      ;
     LDA.B #$82                                                 ;82DC41|A982    |      ;
@@ -904,11 +904,7 @@ fMainMenu_StateTitleStartCursorAnim:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82DC4D|22488E80|808E48;
     REP #$20                                                   ;82DC51|C220    |      ;
     SEP #$10                                                   ;82DC53|E210    |      ;
-    if !REGION_DE
-    LDA.W #$F46A                                           ;82DDB0|A96AF4  |      ;
-    else
-    LDA.W #$F2B5                                               ;82DC55|A9B5F2  |      ;
-    endif
+    LDA.W #aMainMenu_PalAnimLogoB                          ;82DC55|A9B5F2  |      ;
     STA.B ptrTemp0x72                                          ;82DC58|8572    |000072;
     SEP #$20                                                   ;82DC5A|E220    |      ;
     LDA.B #$82                                                 ;82DC5C|A982    |      ;
@@ -927,16 +923,128 @@ fMainMenu_StateTitleStartCursorAnim:
  
   + CMP.B #$02                                                 ;82DC79|C902    |      ;
     BNE +                                                      ;82DC7B|D004    |82DC81;
+    if !REGION_JP
+.case02:
+    JML.L $82DB12
+  + REP #$20
+    SEP #$10
+    LDA.W #$F034
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$82
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0D
+    LDX.B #$06
+    LDY.B #$07
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$F045
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$82
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0F
+    LDX.B #$07
+    LDY.B #$07
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$F045
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$82
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$09
+    LDX.B #$08
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    JML.L L_82DD80
+.case01:
+    REP #$20
+    SEP #$10
+    LDA.W #$F045
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$82
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0D
+    LDX.B #$06
+    LDY.B #$07
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$F034
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$82
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0F
+    LDX.B #$07
+    LDY.B #$07
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$F045
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$82
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$09
+    LDX.B #$08
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    JML.L L_82DD80
+    REP #$20
+    SEP #$10
+    LDA.W #$F045
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$82
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0D
+    LDX.B #$06
+    LDY.B #$07
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$F045
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$82
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$0F
+    LDX.B #$07
+    LDY.B #$07
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$F034
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$82
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$09
+    LDX.B #$08
+    LDY.B #$02
+    JSL.L fCore_Store0x72To0x42AtIndex
+    JML.L L_82DD80
+    else
     JML.L .case02                                              ;82DC7D|5C2BDD82|82DD2B;
  
  
   + REP #$20                                                   ;82DC81|C220    |      ;
     SEP #$10                                                   ;82DC83|E210    |      ;
-    if !REGION_DE
-    LDA.W #$F47E                                           ;82DDE0|A97EF4  |      ;
-    else
-    LDA.W #$F2C9                                               ;82DC85|A9C9F2  |      ;
-    endif
+    LDA.W #aMainMenu_PalAnimItemHighlighted                ;82DC85|A9C9F2  |      ;
     STA.B ptrTemp0x72                                          ;82DC88|8572    |000072;
     SEP #$20                                                   ;82DC8A|E220    |      ;
     LDA.B #$82                                                 ;82DC8C|A982    |      ;
@@ -948,11 +1056,7 @@ fMainMenu_StateTitleStartCursorAnim:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82DC98|22488E80|808E48;
     REP #$20                                                   ;82DC9C|C220    |      ;
     SEP #$10                                                   ;82DC9E|E210    |      ;
-    if !REGION_DE
-    LDA.W #$F48F                                           ;82DDFB|A98FF4  |      ;
-    else
-    LDA.W #$F2DA                                               ;82DCA0|A9DAF2  |      ;
-    endif
+    LDA.W #aMainMenu_PalAnimItemNormal                     ;82DCA0|A9DAF2  |      ;
     STA.B ptrTemp0x72                                          ;82DCA3|8572    |000072;
     SEP #$20                                                   ;82DCA5|E220    |      ;
     LDA.B #$82                                                 ;82DCA7|A982    |      ;
@@ -964,11 +1068,7 @@ fMainMenu_StateTitleStartCursorAnim:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82DCB3|22488E80|808E48;
     REP #$20                                                   ;82DCB7|C220    |      ;
     SEP #$10                                                   ;82DCB9|E210    |      ;
-    if !REGION_DE
-    LDA.W #$F48F                                           ;82DE16|A98FF4  |      ;
-    else
-    LDA.W #$F2DA                                               ;82DCBB|A9DAF2  |      ;
-    endif
+    LDA.W #aMainMenu_PalAnimItemNormal                     ;82DCBB|A9DAF2  |      ;
     STA.B ptrTemp0x72                                          ;82DCBE|8572    |000072;
     SEP #$20                                                   ;82DCC0|E220    |      ;
     LDA.B #$82                                                 ;82DCC2|A982    |      ;
@@ -978,21 +1078,17 @@ fMainMenu_StateTitleStartCursorAnim:
     LDX.B #$08                                                 ;82DCCA|A208    |      ;
     LDY.B #$02                                                 ;82DCCC|A002    |      ;
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82DCCE|22488E80|808E48;
-    if !REGION_DE
-    JML.L $82DEDB                                          ;82DE2D|5CDBDE82|82DEDB;
-.case01:
-    REP #$20                                               ;82DE31|C220    |      ;
-    SEP #$10                                               ;82DE33|E210    |      ;
-    LDA.W #$F48F                                           ;82DE35|A98FF4  |      ;
+    if !REGION_EUDE
+    JML.L L_82DD80
     else
     JML.L $82DD80                                              ;82DCD2|5C80DD82|82DD80;
+    endif
  
  
 .case01:
     REP #$20                                                   ;82DCD6|C220    |      ;
     SEP #$10                                                   ;82DCD8|E210    |      ;
-    LDA.W #$F2DA                                               ;82DCDA|A9DAF2  |      ;
-    endif
+    LDA.W #aMainMenu_PalAnimItemNormal                     ;82DCDA|A9DAF2  |      ;
     STA.B ptrTemp0x72                                          ;82DCDD|8572    |000072;
     SEP #$20                                                   ;82DCDF|E220    |      ;
     LDA.B #$82                                                 ;82DCE1|A982    |      ;
@@ -1004,11 +1100,7 @@ fMainMenu_StateTitleStartCursorAnim:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82DCED|22488E80|808E48;
     REP #$20                                                   ;82DCF1|C220    |      ;
     SEP #$10                                                   ;82DCF3|E210    |      ;
-    if !REGION_DE
-    LDA.W #$F47E                                           ;82DE50|A97EF4  |      ;
-    else
-    LDA.W #$F2C9                                               ;82DCF5|A9C9F2  |      ;
-    endif
+    LDA.W #aMainMenu_PalAnimItemHighlighted                ;82DCF5|A9C9F2  |      ;
     STA.B ptrTemp0x72                                          ;82DCF8|8572    |000072;
     SEP #$20                                                   ;82DCFA|E220    |      ;
     LDA.B #$82                                                 ;82DCFC|A982    |      ;
@@ -1020,11 +1112,7 @@ fMainMenu_StateTitleStartCursorAnim:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82DD08|22488E80|808E48;
     REP #$20                                                   ;82DD0C|C220    |      ;
     SEP #$10                                                   ;82DD0E|E210    |      ;
-    if !REGION_DE
-    LDA.W #$F48F                                           ;82DE6B|A98FF4  |      ;
-    else
-    LDA.W #$F2DA                                               ;82DD10|A9DAF2  |      ;
-    endif
+    LDA.W #aMainMenu_PalAnimItemNormal                     ;82DD10|A9DAF2  |      ;
     STA.B ptrTemp0x72                                          ;82DD13|8572    |000072;
     SEP #$20                                                   ;82DD15|E220    |      ;
     LDA.B #$82                                                 ;82DD17|A982    |      ;
@@ -1034,21 +1122,17 @@ fMainMenu_StateTitleStartCursorAnim:
     LDX.B #$08                                                 ;82DD1F|A208    |      ;
     LDY.B #$02                                                 ;82DD21|A002    |      ;
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82DD23|22488E80|808E48;
-    if !REGION_DE
-    JML.L $82DEDB                                          ;82DE82|5CDBDE82|82DEDB;
-.case02:
-    REP #$20                                               ;82DE86|C220    |      ;
-    SEP #$10                                               ;82DE88|E210    |      ;
-    LDA.W #$F48F                                           ;82DE8A|A98FF4  |      ;
+    if !REGION_EUDE
+    JML.L L_82DD80
     else
     JML.L $82DD80                                              ;82DD27|5C80DD82|82DD80;
+    endif
  
  
 .case02:
     REP #$20                                                   ;82DD2B|C220    |      ;
     SEP #$10                                                   ;82DD2D|E210    |      ;
-    LDA.W #$F2DA                                               ;82DD2F|A9DAF2  |      ;
-    endif
+    LDA.W #aMainMenu_PalAnimItemNormal                     ;82DD2F|A9DAF2  |      ;
     STA.B ptrTemp0x72                                          ;82DD32|8572    |000072;
     SEP #$20                                                   ;82DD34|E220    |      ;
     LDA.B #$82                                                 ;82DD36|A982    |      ;
@@ -1060,11 +1144,7 @@ fMainMenu_StateTitleStartCursorAnim:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82DD42|22488E80|808E48;
     REP #$20                                                   ;82DD46|C220    |      ;
     SEP #$10                                                   ;82DD48|E210    |      ;
-    if !REGION_DE
-    LDA.W #$F48F                                           ;82DEA5|A98FF4  |      ;
-    else
-    LDA.W #$F2DA                                               ;82DD4A|A9DAF2  |      ;
-    endif
+    LDA.W #aMainMenu_PalAnimItemNormal                     ;82DD4A|A9DAF2  |      ;
     STA.B ptrTemp0x72                                          ;82DD4D|8572    |000072;
     SEP #$20                                                   ;82DD4F|E220    |      ;
     LDA.B #$82                                                 ;82DD51|A982    |      ;
@@ -1076,11 +1156,7 @@ fMainMenu_StateTitleStartCursorAnim:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82DD5D|22488E80|808E48;
     REP #$20                                                   ;82DD61|C220    |      ;
     SEP #$10                                                   ;82DD63|E210    |      ;
-    if !REGION_DE
-    LDA.W #$F47E                                           ;82DEC0|A97EF4  |      ;
-    else
-    LDA.W #$F2C9                                               ;82DD65|A9C9F2  |      ;
-    endif
+    LDA.W #aMainMenu_PalAnimItemHighlighted                ;82DD65|A9C9F2  |      ;
     STA.B ptrTemp0x72                                          ;82DD68|8572    |000072;
     SEP #$20                                                   ;82DD6A|E220    |      ;
     LDA.B #$82                                                 ;82DD6C|A982    |      ;
@@ -1090,10 +1166,11 @@ fMainMenu_StateTitleStartCursorAnim:
     LDX.B #$08                                                 ;82DD74|A208    |      ;
     LDY.B #$02                                                 ;82DD76|A002    |      ;
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82DD78|22488E80|808E48;
-    if !REGION_DE
-    JML.L $82DEDB                                          ;82DED7|5CDBDE82|82DEDB;
+    if !REGION_EUDE
+    JML.L L_82DD80
     else
     JML.L $82DD80                                              ;82DD7C|5C80DD82|82DD80;
+    endif
     endif
  
  
@@ -1135,11 +1212,7 @@ fMainMenu_StateTitleMenuInput:
  
   + REP #$20                                                   ;82DDBE|C220    |      ;
     SEP #$10                                                   ;82DDC0|E210    |      ;
-    if !REGION_DE
-    LDA.W #$F47E                                           ;82DF1D|A97EF4  |      ;
-    else
-    LDA.W #$F2C9                                               ;82DDC2|A9C9F2  |      ;
-    endif
+    LDA.W #aMainMenu_PalAnimItemHighlighted                ;82DDC2|A9C9F2  |      ;
     STA.B ptrTemp0x72                                          ;82DDC5|8572    |000072;
     SEP #$20                                                   ;82DDC7|E220    |      ;
     LDA.B #$82                                                 ;82DDC9|A982    |      ;
@@ -1151,11 +1224,7 @@ fMainMenu_StateTitleMenuInput:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82DDD5|22488E80|808E48;
     REP #$20                                                   ;82DDD9|C220    |      ;
     SEP #$10                                                   ;82DDDB|E210    |      ;
-    if !REGION_DE
-    LDA.W #$F48F                                           ;82DF38|A98FF4  |      ;
-    else
-    LDA.W #$F2DA                                               ;82DDDD|A9DAF2  |      ;
-    endif
+    LDA.W #aMainMenu_PalAnimItemNormal                     ;82DDDD|A9DAF2  |      ;
     STA.B ptrTemp0x72                                          ;82DDE0|8572    |000072;
     SEP #$20                                                   ;82DDE2|E220    |      ;
     LDA.B #$82                                                 ;82DDE4|A982    |      ;
@@ -1167,11 +1236,7 @@ fMainMenu_StateTitleMenuInput:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82DDF0|22488E80|808E48;
     REP #$20                                                   ;82DDF4|C220    |      ;
     SEP #$10                                                   ;82DDF6|E210    |      ;
-    if !REGION_DE
-    LDA.W #$F48F                                           ;82DF53|A98FF4  |      ;
-    else
-    LDA.W #$F2DA                                               ;82DDF8|A9DAF2  |      ;
-    endif
+    LDA.W #aMainMenu_PalAnimItemNormal                     ;82DDF8|A9DAF2  |      ;
     STA.B ptrTemp0x72                                          ;82DDFB|8572    |000072;
     SEP #$20                                                   ;82DDFD|E220    |      ;
     LDA.B #$82                                                 ;82DDFF|A982    |      ;
@@ -1187,11 +1252,7 @@ fMainMenu_StateTitleMenuInput:
 .case01:
     REP #$20                                                   ;82DE13|C220    |      ;
     SEP #$10                                                   ;82DE15|E210    |      ;
-    if !REGION_DE
-    LDA.W #$F48F                                           ;82DF72|A98FF4  |      ;
-    else
-    LDA.W #$F2DA                                               ;82DE17|A9DAF2  |      ;
-    endif
+    LDA.W #aMainMenu_PalAnimItemNormal                     ;82DE17|A9DAF2  |      ;
     STA.B ptrTemp0x72                                          ;82DE1A|8572    |000072;
     SEP #$20                                                   ;82DE1C|E220    |      ;
     LDA.B #$82                                                 ;82DE1E|A982    |      ;
@@ -1203,11 +1264,7 @@ fMainMenu_StateTitleMenuInput:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82DE2A|22488E80|808E48;
     REP #$20                                                   ;82DE2E|C220    |      ;
     SEP #$10                                                   ;82DE30|E210    |      ;
-    if !REGION_DE
-    LDA.W #$F47E                                           ;82DF8D|A97EF4  |      ;
-    else
-    LDA.W #$F2C9                                               ;82DE32|A9C9F2  |      ;
-    endif
+    LDA.W #aMainMenu_PalAnimItemHighlighted                ;82DE32|A9C9F2  |      ;
     STA.B ptrTemp0x72                                          ;82DE35|8572    |000072;
     SEP #$20                                                   ;82DE37|E220    |      ;
     LDA.B #$82                                                 ;82DE39|A982    |      ;
@@ -1219,11 +1276,7 @@ fMainMenu_StateTitleMenuInput:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82DE45|22488E80|808E48;
     REP #$20                                                   ;82DE49|C220    |      ;
     SEP #$10                                                   ;82DE4B|E210    |      ;
-    if !REGION_DE
-    LDA.W #$F48F                                           ;82DFA8|A98FF4  |      ;
-    else
-    LDA.W #$F2DA                                               ;82DE4D|A9DAF2  |      ;
-    endif
+    LDA.W #aMainMenu_PalAnimItemNormal                     ;82DE4D|A9DAF2  |      ;
     STA.B ptrTemp0x72                                          ;82DE50|8572    |000072;
     SEP #$20                                                   ;82DE52|E220    |      ;
     LDA.B #$82                                                 ;82DE54|A982    |      ;
@@ -1239,11 +1292,7 @@ fMainMenu_StateTitleMenuInput:
 .case02:
     REP #$20                                                   ;82DE68|C220    |      ;
     SEP #$10                                                   ;82DE6A|E210    |      ;
-    if !REGION_DE
-    LDA.W #$F48F                                           ;82DFC7|A98FF4  |      ;
-    else
-    LDA.W #$F2DA                                               ;82DE6C|A9DAF2  |      ;
-    endif
+    LDA.W #aMainMenu_PalAnimItemNormal                     ;82DE6C|A9DAF2  |      ;
     STA.B ptrTemp0x72                                          ;82DE6F|8572    |000072;
     SEP #$20                                                   ;82DE71|E220    |      ;
     LDA.B #$82                                                 ;82DE73|A982    |      ;
@@ -1255,11 +1304,7 @@ fMainMenu_StateTitleMenuInput:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82DE7F|22488E80|808E48;
     REP #$20                                                   ;82DE83|C220    |      ;
     SEP #$10                                                   ;82DE85|E210    |      ;
-    if !REGION_DE
-    LDA.W #$F48F                                           ;82DFE2|A98FF4  |      ;
-    else
-    LDA.W #$F2DA                                               ;82DE87|A9DAF2  |      ;
-    endif
+    LDA.W #aMainMenu_PalAnimItemNormal                     ;82DE87|A9DAF2  |      ;
     STA.B ptrTemp0x72                                          ;82DE8A|8572    |000072;
     SEP #$20                                                   ;82DE8C|E220    |      ;
     LDA.B #$82                                                 ;82DE8E|A982    |      ;
@@ -1271,11 +1316,7 @@ fMainMenu_StateTitleMenuInput:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82DE9A|22488E80|808E48;
     REP #$20                                                   ;82DE9E|C220    |      ;
     SEP #$10                                                   ;82DEA0|E210    |      ;
-    if !REGION_DE
-    LDA.W #$F47E                                           ;82DFFD|A97EF4  |      ;
-    else
-    LDA.W #$F2C9                                               ;82DEA2|A9C9F2  |      ;
-    endif
+    LDA.W #aMainMenu_PalAnimItemHighlighted                ;82DEA2|A9C9F2  |      ;
     STA.B ptrTemp0x72                                          ;82DEA5|8572    |000072;
     SEP #$20                                                   ;82DEA7|E220    |      ;
     LDA.B #$82                                                 ;82DEA9|A982    |      ;
@@ -1434,25 +1475,27 @@ fMainMenu_StateNewGameSlotSelect:
     SEP #$20                                                   ;82E027|E220    |      ;
     LDA.B #$00                                                 ;82E029|A900    |      ;
     XBA                                                        ;82E02B|EB      |      ;
-    LDA.W $098E+!DE_RAM_SHIFT                              ;82E02C|AD8E09  |00098E;
+    LDA.W $098E+!RAM_SHIFT                                 ;82E02C|AD8E09  |00098E;
     JSL.L fGameEngine_LoadContinue                             ;82E02F|2245BA83|83BA45;
     REP #$30                                                   ;82E033|C230    |      ;
     CPX.W #$0000                                               ;82E035|E00000  |      ;
+    if !REGION_JP
+    BEQ L_82E03A
+    LDA.W #$0100
+    STA.W strcBGScrool.BG1HorOffs
+    else
     BEQ +                                                      ;82E038|F000    |82E03A;
+    endif
  
   + SEP #$20                                                   ;82E03A|E220    |      ;
-    LDA.W $098E+!DE_RAM_SHIFT                              ;82E03C|AD8E09  |00098E;
+    LDA.W $098E+!RAM_SHIFT                                 ;82E03C|AD8E09  |00098E;
     BEQ +                                                      ;82E03F|F004    |82E045;
     JML.L fMainMenu_NewGameSlotSelect_InitCursorSlot2                                      ;82E041|5C7FE082|82E07F;
  
  
   + REP #$20                                                   ;82E045|C220    |      ;
     SEP #$10                                                   ;82E047|E210    |      ;
-    if !REGION_DE
-    LDA.W #$F497                                           ;82E1A4|A997F4  |      ;
-    else
-    LDA.W #$F2E2                                               ;82E049|A9E2F2  |      ;
-    endif
+    LDA.W #aMainMenu_PalAnimSlotHighlighted                ;82E049|A9E2F2  |      ;
     STA.B ptrTemp0x72                                          ;82E04C|8572    |000072;
     SEP #$20                                                   ;82E04E|E220    |      ;
     LDA.B #$82                                                 ;82E050|A982    |      ;
@@ -1464,11 +1507,7 @@ fMainMenu_StateNewGameSlotSelect:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82E05C|22488E80|808E48;
     REP #$20                                                   ;82E060|C220    |      ;
     SEP #$10                                                   ;82E062|E210    |      ;
-    if !REGION_DE
-    LDA.W #$F4AE                                           ;82E1BF|A9AEF4  |      ;
-    else
-    LDA.W #$F2F9                                               ;82E064|A9F9F2  |      ;
-    endif
+    LDA.W #aMainMenu_PalAnimSlotNormal                     ;82E064|A9F9F2  |      ;
     STA.B ptrTemp0x72                                          ;82E067|8572    |000072;
     SEP #$20                                                   ;82E069|E220    |      ;
     LDA.B #$82                                                 ;82E06B|A982    |      ;
@@ -1484,11 +1523,7 @@ fMainMenu_StateNewGameSlotSelect:
 fMainMenu_NewGameSlotSelect_InitCursorSlot2:
     REP #$20                                                   ;82E07F|C220    |      ;
     SEP #$10                                                   ;82E081|E210    |      ;
-    if !REGION_DE
-    LDA.W #$F4AE                                           ;82E1DE|A9AEF4  |      ;
-    else
-    LDA.W #$F2F9                                               ;82E083|A9F9F2  |      ;
-    endif
+    LDA.W #aMainMenu_PalAnimSlotNormal                     ;82E083|A9F9F2  |      ;
     STA.B ptrTemp0x72                                          ;82E086|8572    |000072;
     SEP #$20                                                   ;82E088|E220    |      ;
     LDA.B #$82                                                 ;82E08A|A982    |      ;
@@ -1500,11 +1535,7 @@ fMainMenu_NewGameSlotSelect_InitCursorSlot2:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82E096|22488E80|808E48;
     REP #$20                                                   ;82E09A|C220    |      ;
     SEP #$10                                                   ;82E09C|E210    |      ;
-    if !REGION_DE
-    LDA.W #$F497                                           ;82E1F9|A997F4  |      ;
-    else
-    LDA.W #$F2E2                                               ;82E09E|A9E2F2  |      ;
-    endif
+    LDA.W #aMainMenu_PalAnimSlotHighlighted                ;82E09E|A9E2F2  |      ;
     STA.B ptrTemp0x72                                          ;82E0A1|8572    |000072;
     SEP #$20                                                   ;82E0A3|E220    |      ;
     LDA.B #$82                                                 ;82E0A5|A982    |      ;
@@ -1553,17 +1584,67 @@ fMainMenu_NewGameSlotSelect_WaitFrame:
  
  
   + STZ.B strcVariables.u8Unk97                                ;82E10A|6497    |000097;
-    LDA.W $098E+!DE_RAM_SHIFT                              ;82E10C|AD8E09  |00098E;
+    LDA.W $098E+!RAM_SHIFT                                 ;82E10C|AD8E09  |00098E;
     BEQ +                                                      ;82E10F|F004    |82E115;
+    if !REGION_EU
+    JML.L $82E154
+  + REP #$20
+    LDA.W #$0000
+    JSL.L fGameEngine_LoadContinue
+    REP #$30
+    CPX.W #$0000
+    BEQ .r_82E111_1
+    BRA .r_82E111_2
+.r_82E111_1:
+    REP #$30
+    LDA.W #$0000
+    STA.W strcBGScrool.BG1HorOffs
+    BRA .r_82E111_2
+.r_82E111_2:
+    REP #$20
+    SEP #$10
+    LDA.W #$F2CB
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$82
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$06
+    LDX.B #$04
+    LDY.B #$00
+    JSL.L fCore_Store0x72To0x42AtIndex
+    REP #$20
+    SEP #$10
+    LDA.W #$F2E2
+    STA.B ptrTemp0x72
+    SEP #$20
+    LDA.B #$82
+    STA.B ptrTemp0x72+2
+    SEP #$20
+    LDA.B #$06
+    LDX.B #$05
+    LDY.B #$01
+    JSL.L fCore_Store0x72To0x42AtIndex
+    JML.L fMainMenu_NewGameSlotSelect_FrameTail
+    REP #$20
+    LDA.W #$0001
+    else
     JML.L fMainMenu_NewGameSlotSelect_MoveCursorSlot2                                      ;82E111|5C6BE182|82E16B;
  
  
   + REP #$20                                                   ;82E115|C220    |      ;
     LDA.W #$0000                                               ;82E117|A90000  |      ;
+    endif
     JSL.L fGameEngine_LoadContinue                             ;82E11A|2245BA83|83BA45;
     REP #$30                                                   ;82E11E|C230    |      ;
     CPX.W #$0000                                               ;82E120|E00000  |      ;
+    if !REGION_JP
+    BEQ L_82E127
+    LDA.W #$0100
+    STA.W strcBGScrool.BG1HorOffs
+    else
     BEQ +                                                      ;82E123|F002    |82E127;
+    endif
     BRA .label2                                                ;82E125|800A    |82E131;
  
  
@@ -1576,10 +1657,10 @@ fMainMenu_NewGameSlotSelect_WaitFrame:
 .label2:
     REP #$20                                                   ;82E131|C220    |      ;
     SEP #$10                                                   ;82E133|E210    |      ;
-    if !REGION_DE
-    LDA.W #$F497                                           ;82E290|A997F4  |      ;
+    if !REGION_EU
+    LDA.W #$F2E2
     else
-    LDA.W #$F2E2                                               ;82E135|A9E2F2  |      ;
+    LDA.W #aMainMenu_PalAnimSlotHighlighted                ;82E135|A9E2F2  |      ;
     endif
     STA.B ptrTemp0x72                                          ;82E138|8572    |000072;
     SEP #$20                                                   ;82E13A|E220    |      ;
@@ -1592,11 +1673,11 @@ fMainMenu_NewGameSlotSelect_WaitFrame:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82E148|22488E80|808E48;
     REP #$20                                                   ;82E14C|C220    |      ;
     SEP #$10                                                   ;82E14E|E210    |      ;
-    if !REGION_DE
-    LDA.W #$F4AE                                           ;82E2AB|A9AEF4  |      ;
+    if !REGION_EU
+.label1:
+    LDA.W #$F2CB
     else
-    LDA.W #$F2F9                                               ;82E150|A9F9F2  |      ;
-    endif
+    LDA.W #aMainMenu_PalAnimSlotNormal                     ;82E150|A9F9F2  |      ;
     STA.B ptrTemp0x72                                          ;82E153|8572    |000072;
     SEP #$20                                                   ;82E155|E220    |      ;
     LDA.B #$82                                                 ;82E157|A982    |      ;
@@ -1615,7 +1696,13 @@ fMainMenu_NewGameSlotSelect_MoveCursorSlot2:
     JSL.L fGameEngine_LoadContinue                             ;82E170|2245BA83|83BA45;
     REP #$30                                                   ;82E174|C230    |      ;
     CPX.W #$0000                                               ;82E176|E00000  |      ;
+    if !REGION_JP
+    BEQ L_82E17D
+    LDA.W #$0100
+    STA.W strcBGScrool.BG1HorOffs
+    else
     BEQ +                                                      ;82E179|F002    |82E17D;
+    endif
     BRA .label1                                                ;82E17B|800A    |82E187;
  
  
@@ -1628,11 +1715,7 @@ fMainMenu_NewGameSlotSelect_MoveCursorSlot2:
 .label1:
     REP #$20                                                   ;82E187|C220    |      ;
     SEP #$10                                                   ;82E189|E210    |      ;
-    if !REGION_DE
-    LDA.W #$F4AE                                           ;82E2E6|A9AEF4  |      ;
-    else
-    LDA.W #$F2F9                                               ;82E18B|A9F9F2  |      ;
-    endif
+    LDA.W #aMainMenu_PalAnimSlotNormal                     ;82E18B|A9F9F2  |      ;
     STA.B ptrTemp0x72                                          ;82E18E|8572    |000072;
     SEP #$20                                                   ;82E190|E220    |      ;
     LDA.B #$82                                                 ;82E192|A982    |      ;
@@ -1644,10 +1727,7 @@ fMainMenu_NewGameSlotSelect_MoveCursorSlot2:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82E19E|22488E80|808E48;
     REP #$20                                                   ;82E1A2|C220    |      ;
     SEP #$10                                                   ;82E1A4|E210    |      ;
-    if !REGION_DE
-    LDA.W #$F497                                           ;82E301|A997F4  |      ;
-    else
-    LDA.W #$F2E2                                               ;82E1A6|A9E2F2  |      ;
+    LDA.W #aMainMenu_PalAnimSlotHighlighted                ;82E1A6|A9E2F2  |      ;
     endif
     STA.B ptrTemp0x72                                          ;82E1A9|8572    |000072;
     SEP #$20                                                   ;82E1AB|E220    |      ;
@@ -1742,18 +1822,14 @@ fMainMenu_StateLoadGameSlotSelect:
     JSR.W fMainMenu_DrawSaveSlotInfo                                      ;82E26B|2005E4  |82E405;
     JSL.L fCore_Zero0x42Ptr                                    ;82E26E|22AB8F80|808FAB;
     SEP #$20                                                   ;82E272|E220    |      ;
-    LDA.W $098E+!DE_RAM_SHIFT                              ;82E274|AD8E09  |00098E;
+    LDA.W $098E+!RAM_SHIFT                                 ;82E274|AD8E09  |00098E;
     BEQ +                                                      ;82E277|F004    |82E27D;
     JML.L .label1                                              ;82E279|5CB7E282|82E2B7;
  
  
   + REP #$20                                                   ;82E27D|C220    |      ;
     SEP #$10                                                   ;82E27F|E210    |      ;
-    if !REGION_DE
-    LDA.W #$F497                                           ;82E3DC|A997F4  |      ;
-    else
-    LDA.W #$F2E2                                               ;82E281|A9E2F2  |      ;
-    endif
+    LDA.W #aMainMenu_PalAnimSlotHighlighted                ;82E281|A9E2F2  |      ;
     STA.B ptrTemp0x72                                          ;82E284|8572    |000072;
     SEP #$20                                                   ;82E286|E220    |      ;
     LDA.B #$82                                                 ;82E288|A982    |      ;
@@ -1765,11 +1841,7 @@ fMainMenu_StateLoadGameSlotSelect:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82E294|22488E80|808E48;
     REP #$20                                                   ;82E298|C220    |      ;
     SEP #$10                                                   ;82E29A|E210    |      ;
-    if !REGION_DE
-    LDA.W #$F4AE                                           ;82E3F7|A9AEF4  |      ;
-    else
-    LDA.W #$F2F9                                               ;82E29C|A9F9F2  |      ;
-    endif
+    LDA.W #aMainMenu_PalAnimSlotNormal                     ;82E29C|A9F9F2  |      ;
     STA.B ptrTemp0x72                                          ;82E29F|8572    |000072;
     SEP #$20                                                   ;82E2A1|E220    |      ;
     LDA.B #$82                                                 ;82E2A3|A982    |      ;
@@ -1785,11 +1857,7 @@ fMainMenu_StateLoadGameSlotSelect:
 .label1:
     REP #$20                                                   ;82E2B7|C220    |      ;
     SEP #$10                                                   ;82E2B9|E210    |      ;
-    if !REGION_DE
-    LDA.W #$F4AE                                           ;82E416|A9AEF4  |      ;
-    else
-    LDA.W #$F2F9                                               ;82E2BB|A9F9F2  |      ;
-    endif
+    LDA.W #aMainMenu_PalAnimSlotNormal                     ;82E2BB|A9F9F2  |      ;
     STA.B ptrTemp0x72                                          ;82E2BE|8572    |000072;
     SEP #$20                                                   ;82E2C0|E220    |      ;
     LDA.B #$82                                                 ;82E2C2|A982    |      ;
@@ -1801,11 +1869,7 @@ fMainMenu_StateLoadGameSlotSelect:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82E2CE|22488E80|808E48;
     REP #$20                                                   ;82E2D2|C220    |      ;
     SEP #$10                                                   ;82E2D4|E210    |      ;
-    if !REGION_DE
-    LDA.W #$F497                                           ;82E431|A997F4  |      ;
-    else
-    LDA.W #$F2E2                                               ;82E2D6|A9E2F2  |      ;
-    endif
+    LDA.W #aMainMenu_PalAnimSlotHighlighted                ;82E2D6|A9E2F2  |      ;
     STA.B ptrTemp0x72                                          ;82E2D9|8572    |000072;
     SEP #$20                                                   ;82E2DB|E220    |      ;
     LDA.B #$82                                                 ;82E2DD|A982    |      ;
@@ -1861,18 +1925,14 @@ fMainMenu_LoadGameSlotSelect_WaitFrame:
  
  
   + STZ.B strcVariables.u8Unk97                                ;82E356|6497    |000097;
-    LDA.W $098E+!DE_RAM_SHIFT                              ;82E358|AD8E09  |00098E;
+    LDA.W $098E+!RAM_SHIFT                                 ;82E358|AD8E09  |00098E;
     BEQ +                                                      ;82E35B|F004    |82E361;
     JML.L fMainMenu_LoadGameSlotSelect_MoveCursorSlot2                                      ;82E35D|5C9BE382|82E39B;
  
  
   + REP #$20                                                   ;82E361|C220    |      ;
     SEP #$10                                                   ;82E363|E210    |      ;
-    if !REGION_DE
-    LDA.W #$F497                                           ;82E4C0|A997F4  |      ;
-    else
-    LDA.W #$F2E2                                               ;82E365|A9E2F2  |      ;
-    endif
+    LDA.W #aMainMenu_PalAnimSlotHighlighted                ;82E365|A9E2F2  |      ;
     STA.B ptrTemp0x72                                          ;82E368|8572    |000072;
     SEP #$20                                                   ;82E36A|E220    |      ;
     LDA.B #$82                                                 ;82E36C|A982    |      ;
@@ -1884,11 +1944,7 @@ fMainMenu_LoadGameSlotSelect_WaitFrame:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82E378|22488E80|808E48;
     REP #$20                                                   ;82E37C|C220    |      ;
     SEP #$10                                                   ;82E37E|E210    |      ;
-    if !REGION_DE
-    LDA.W #$F4AE                                           ;82E4DB|A9AEF4  |      ;
-    else
-    LDA.W #$F2F9                                               ;82E380|A9F9F2  |      ;
-    endif
+    LDA.W #aMainMenu_PalAnimSlotNormal                     ;82E380|A9F9F2  |      ;
     STA.B ptrTemp0x72                                          ;82E383|8572    |000072;
     SEP #$20                                                   ;82E385|E220    |      ;
     LDA.B #$82                                                 ;82E387|A982    |      ;
@@ -1904,11 +1960,7 @@ fMainMenu_LoadGameSlotSelect_WaitFrame:
 fMainMenu_LoadGameSlotSelect_MoveCursorSlot2:
     REP #$20                                                   ;82E39B|C220    |      ;
     SEP #$10                                                   ;82E39D|E210    |      ;
-    if !REGION_DE
-    LDA.W #$F4AE                                           ;82E4FA|A9AEF4  |      ;
-    else
-    LDA.W #$F2F9                                               ;82E39F|A9F9F2  |      ;
-    endif
+    LDA.W #aMainMenu_PalAnimSlotNormal                     ;82E39F|A9F9F2  |      ;
     STA.B ptrTemp0x72                                          ;82E3A2|8572    |000072;
     SEP #$20                                                   ;82E3A4|E220    |      ;
     LDA.B #$82                                                 ;82E3A6|A982    |      ;
@@ -1920,11 +1972,7 @@ fMainMenu_LoadGameSlotSelect_MoveCursorSlot2:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82E3B2|22488E80|808E48;
     REP #$20                                                   ;82E3B6|C220    |      ;
     SEP #$10                                                   ;82E3B8|E210    |      ;
-    if !REGION_DE
-    LDA.W #$F497                                           ;82E515|A997F4  |      ;
-    else
-    LDA.W #$F2E2                                               ;82E3BA|A9E2F2  |      ;
-    endif
+    LDA.W #aMainMenu_PalAnimSlotHighlighted                ;82E3BA|A9E2F2  |      ;
     STA.B ptrTemp0x72                                          ;82E3BD|8572    |000072;
     SEP #$20                                                   ;82E3BF|E220    |      ;
     LDA.B #$82                                                 ;82E3C1|A982    |      ;
@@ -1998,13 +2046,21 @@ fMainMenu_DrawSaveSlotInfo:
     LDA.B #$00                                                 ;82E433|A900    |      ;
     XBA                                                        ;82E435|EB      |      ;
     LDA.W strcNames.sPlayer,X                                  ;82E436|BD8108  |000881;
+    if !REGION_JP
+    LDX.W #$0001
+    else
     LDX.W #$0000                                               ;82E439|A20000  |      ;
+    endif
     JSL.L fDialog_TransferGlyph                                ;82E43C|22239883|839823;
     JSL.L fCore_StartTransfer                                  ;82E440|22F08A80|808AF0;
     REP #$30                                                   ;82E444|C230    |      ;
     LDA.B strcVariables.n16Temp3                               ;82E446|A582    |000082;
     CLC                                                        ;82E448|18      |      ;
+    if !REGION_JP
+    ADC.W #$0010
+    else
     ADC.W #$0008                                               ;82E449|690800  |      ;
+    endif
     STA.B strcVariables.n16Temp3                               ;82E44C|8582    |000082;
     PLX                                                        ;82E44E|FA      |      ;
     INX                                                        ;82E44F|E8      |      ;
@@ -2030,10 +2086,27 @@ fMainMenu_DrawSaveSlotInfo:
     AND.B #~!DFLAGS_NUMERICVAR                                                 
     STA.W strcDialogDisplay.dialogFlags                        ;82E47E|8D9B01  |00019B;
     JSL.L fDialog_DrawNumericVarDigit                               ;82E481|22A69783|8397A6;
+    if !REGION_JP
+    JSL.L fCore_StartTransfer
+    REP #$30
+    JSL.L fWriteSeasonWeekdayAndDayOrdinal
+    REP #$20
+    PLX
+    INX
+    INX
+    LDA.L aMainMenu_SlotInfoTextVramAddr,X
+    PHX
+    STA.L strcDialogDisplay.dialogUnk185+$20000
+    LDA.W $08B1
+    LDX.W #$0001
+    JSL.L fDialog_TransferGlyph
+    JSL.L fCore_StartTransfer
+    REP #$30
+    else
     JSL.L fCore_StartTransfer                                  ;82E485|22F08A80|808AF0;
     REP #$30                                                   ;82E489|C230    |      ;
     if !REGION_DE
-    ; (nothing in DE)
+    ; (no code in this region)
     else
     LDA.L strcDialogDisplay.dialogUnk185+$20000                ;82E48B|AF850180|800185;
     CLC                                                        ;82E48F|18      |      ;
@@ -2072,6 +2145,7 @@ fMainMenu_DrawSaveSlotInfo:
     JSL.L fCore_StartTransfer                                  ;82E4E3|22F08A80|808AF0;
     REP #$30                                                   ;82E4E7|C230    |      ;
     endif
+    endif
     PLX                                                        ;82E4E9|FA      |      ;
     INX                                                        ;82E4EA|E8      |      ;
     INX                                                        ;82E4EB|E8      |      ;
@@ -2093,8 +2167,12 @@ fMainMenu_DrawSaveSlotInfo:
     JSL.L fCore_StartTransfer                                  ;82E516|22F08A80|808AF0;
     REP #$30                                                   ;82E51A|C230    |      ;
     PLX                                                        ;82E51C|FA      |      ;
+    if !REGION_JP
+    LDA.L aMainMenu_SlotInfoTextVramAddr,X
+    else
     LDA.L aMainMenu_SlotInfoTextVramAddr,X                                    ;82E51D|BF78F282|82F278;
     PHX                                                        ;82E521|DA      |      ;
+    endif
     CLC                                                        ;82E522|18      |      ;
     ADC.W #$0008                                               ;82E523|690800  |      ;
     STA.L strcDialogDisplay.dialogUnk185+$20000                ;82E526|8F850180|800185;
@@ -2102,11 +2180,14 @@ fMainMenu_DrawSaveSlotInfo:
     LDA.B #$00                                                 ;82E52C|A900    |      ;
     STA.W strcDialogDisplay.dialogVarSize                      ;82E52E|8D8C01  |00018C;
     JSL.L fDialog_DrawNumericVarDigit                               ;82E531|22A69783|8397A6;
+    if !REGION_JP
+    JSL.L fCore_StartTransfer
+    else
     JSL.L fCore_StartTransfer                                  ;82E535|22F08A80|808AF0;
     REP #$30                                                   ;82E539|C230    |      ;
     JSL.L fWriteSeasonWeekdayAndDayOrdinal                     ;82E53B|22D68982|8289D6;
-    if !REGION_DE
-    REP #$30                                               ;82E63C|C230    |      ;
+    if !REGION_EUDE
+    REP #$30
     else
     REP #$20                                                   ;82E53F|C220    |      ;
     endif
@@ -2163,29 +2244,30 @@ fMainMenu_DrawSaveSlotInfo:
     LDA.W strcNames.wSeason+10                                 ;82E5D8|ADBD08  |0008BD;
     LDX.W #$0000                                               ;82E5DB|A20000  |      ;
     if !REGION_DE
-    JSL.L fDialog_TransferGlyph                            ;82E6DB|222F9883|83982F;
-    JSL.L fCore_StartTransfer                              ;82E6DF|22F08A80|808AF0;
-    REP #$30                                               ;82E6E3|C230    |      ;
-    LDA.L $800185                                          ;82E6E5|AF850180|      ;
-    CLC                                                    ;82E6E9|18      |      ;
-    ADC.W #$0008                                           ;82E6EA|690800  |      ;
-    STA.L $800185                                          ;82E6ED|8F850180|      ;
-    LDA.W strcNames.wWeekday                               ;82E6F1|ADBF08  |      ;
-    LDX.W #$0000                                           ;82E6F4|A20000  |      ;
-    JSL.L fDialog_TransferGlyph                            ;82E6F7|222F9883|83982F;
-    JSL.L fCore_StartTransfer                              ;82E6FB|22F08A80|808AF0;
-    REP #$30                                               ;82E6FF|C230    |      ;
-    LDA.L $800185                                          ;82E701|AF850180|      ;
-    CLC                                                    ;82E705|18      |      ;
-    ADC.W #$0008                                           ;82E706|690800  |      ;
-    STA.L $800185                                          ;82E709|8F850180|      ;
-    LDA.W strcNames.wWeekday+2                             ;82E70D|ADC108  |      ;
-    LDX.W #$0000                                           ;82E710|A20000  |      ;
-    JSL.L fDialog_TransferGlyph                            ;82E713|222F9883|83982F;
+    JSL.L fDialog_TransferGlyph
+    JSL.L fCore_StartTransfer
+    REP #$30
+    LDA.L strcDialogDisplay.dialogUnk185+$20000
+    CLC
+    ADC.W #$0008
+    STA.L strcDialogDisplay.dialogUnk185+$20000
+    LDA.W strcNames.wWeekday
+    LDX.W #$0000
+    JSL.L fDialog_TransferGlyph
+    JSL.L fCore_StartTransfer
+    REP #$30
+    LDA.L strcDialogDisplay.dialogUnk185+$20000
+    CLC
+    ADC.W #$0008
+    STA.L strcDialogDisplay.dialogUnk185+$20000
+    LDA.W strcNames.wWeekday+2
+    LDX.W #$0000
+    JSL.L fDialog_TransferGlyph
     else
     JSL.L fDialog_TransferGlyph                                ;82E5DE|22239883|839823;
     endif
     JSL.L fCore_StartTransfer                                  ;82E5E2|22F08A80|808AF0;
+    endif
     RTS                                                        ;82E5E6|60      |      ; GIGAEND
  
  
@@ -2194,7 +2276,7 @@ fMainMenu_DrawEmptySaveSlot:
     ASL A                                                      ;82E5E9|0A      |      ;
     TAX                                                        ;82E5EA|AA      |      ;
     if !REGION_DE
-    LDA.L $82E8BB,X                                        ;82E720|BFBBE882|      ;
+    LDA.L $82E8BB,X
     else
     LDA.L aSystemTransferArgument,X                            ;82E5EB|BF3EE782|82E73E; X = A * 2
     endif
@@ -2210,7 +2292,7 @@ fMainMenu_DrawEmptySaveSlot:
     LDA.B strcVariables.n16Temp4                               ;82E5FF|A584    |000084; A = Arg2
     BEQ +                                                      ;82E601|F005    |82E608;
     if !REGION_DE
-    LDA.W #$0090                                           ;82E738|A99000  |      ;
+    LDA.W #$0090
     else
     LDA.W #$006C                                               ;82E603|A96C00  |      ; A = 0x6C (default)
     endif
@@ -2228,11 +2310,7 @@ fMainMenu_DrawEmptySaveSlot:
     LDA.B #$18                                                 ;82E618|A918    |      ;
     STA.B strcSystem.destinationRegister                       ;82E61A|8529    |000029; $29 = 0x18
     REP #$20                                                   ;82E61C|C220    |      ;
-    if !REGION_DE
-    LDA.W #$E79B                                           ;82E753|A99BE7  |      ;
-    else
-    LDA.W #$E666                                               ;82E61E|A966E6  |      ;
-    endif
+    LDA.W #nSystemTranferData_82E666                       ;82E61E|A966E6  |      ;
     CLC                                                        ;82E621|18      |      ;
     ADC.B strcVariables.n16Temp1                               ;82E622|657E    |00007E; A = 0xE666 / 0xE666 + 0x6C
     STA.B ptrTemp0x72                                          ;82E624|8572    |000072;
@@ -2258,7 +2336,7 @@ fMainMenu_DrawEmptySaveSlot:
     PLA                                                        ;82E64A|68      |      ; A = 0
     INC A                                                      ;82E64B|1A      |      ; A++
     if !REGION_DE
-    CMP.W #$0004                                           ;82E781|C90400  |      ;
+    CMP.W #$0004
     else
     CMP.W #$0003                                               ;82E64C|C90300  |      ;
     endif
