@@ -19,6 +19,9 @@ Commands:
   extract [--bins DIR] one-time conversion of existing blobs (+ tables in audio.asm / audio_tables.inc) into sources
   midi [--out DIR] [labels...]   export tracks as Standard MIDI files (rough view only, the text is the source of truth)
   wav [--out DIR]      decode the generated sample blobs to WAV files (for listening; sources already contain WAVs)
+  spc [--track LABEL|--all|--sfx N] [--out DIR]   generated .spc snapshots (derived listening/interop format, not a source)
+  render [--format wav|mp3] [--seconds N] ...      .spc -> audio with ffmpeg (libgme) when available
+  spcdiff A.spc B.spc  compare two snapshots (e.g. an emulator dump against a generated one) per memory region
 """
 import argparse
 import json
@@ -644,6 +647,170 @@ def cmd_midi(a):
     return 0
 
 
+# ---------------------------------------------------------------------------
+# SPC snapshots (derived format): the real driver is run on tools/audio/spcemu.py with the game's upload protocol
+# ---------------------------------------------------------------------------
+SPC_HEADER = b"SNES-SPC700 Sound File Data v0.30\x1a\x1a"
+SPC_SIZE = 0x10200
+
+
+def _sample_command(host, cmd, sid, entries, blobs):
+    m = entries[sid]
+    brr_bytes = blobs[m["label"]][:entries["_sizes"][m["label"]]]
+    host.command(cmd, [(sid, sample_loop_offset(m) & 0xFF, sample_loop_offset(m) >> 8),
+                       (m["adsr1"], m["adsr2"], m["gain"]), (m["tuning_int"], m["tuning_frac"], 0)], ack=4, data=brr_bytes)
+
+
+def spc_boot_state(blobs, info):
+    """Emulator + host after the boot sequence of the game (driver upload, mono/stereo, common samples, SFX block)."""
+    import spcemu
+    man, metas = info["man"], info["metas"]
+    entries = {i: m for m in metas.values() for i in m["sample_ids"]}
+    entries["_sizes"] = info["sizes"]
+    spc = spcemu.Spc()
+    drv = blobs[DRIVER_LABEL]
+    spc.ram[DRIVER_BASE:DRIVER_BASE + len(drv)] = drv
+    spc.pc = DRIVER_BASE
+    host = spcemu.Host(spc)
+    host.command(0x0B, [(0, 0, 0)], ack=8)
+    for sid in man["common_samples"]:
+        if sid:
+            _sample_command(host, 2, sid, entries, blobs)
+    host.command(1, [], ack=4, data=info["sfx"])
+    return spc, host, entries
+
+
+def spc_for_track(state, blobs, info, track_id):
+    import copy
+    spc, host, entries = copy.deepcopy(state)
+    host.spc = spc
+    man = info["man"]
+    t = man["tracks"][track_id]
+    host.command(4, [(0, 0, 0)], ack=8)
+    host.command(5, [], ack=4, data=blobs[t["blob"]])
+    for sid in list(t["samples"]) + [6]:
+        _sample_command(host, 3, sid, entries, blobs)
+    host.command(8, [(1, 0x40, 0)], ack=8)
+    return spc
+
+
+def spc_for_sfx(state, blobs, info, sfx_id, voice=6):
+    import copy
+    spc, host, entries = copy.deepcopy(state)
+    host.spc = spc
+    sid = info["man"]["sfx_sample_ids"][sfx_id]
+    if sid:
+        _sample_command(host, 3, sid, entries, blobs)
+    host.command(0x0A, [(sfx_id, voice, 0x0A)], ack=8)
+    return spc
+
+
+def _field(text, n):
+    return text.encode("ascii", "replace")[:n].ljust(n, b"\0")
+
+
+def write_spc(spc, title, game="Harvest Moon (SNES)", comment="", seconds=180, fade_ms=5000):
+    """Serialise an emulator state as a v0.30 .spc file with an ID666 text tag."""
+    ram = bytearray(spc.ram)
+    for i in range(4):
+        ram[0xF4 + i] = spc.cpu_in[i]
+    ram[0xF2] = spc.dspaddr
+    ram[0xF3] = spc.dsp[spc.dspaddr & 0x7F]
+    ram[0xFD:0x100] = b"\0\0\0"
+    h = bytearray(SPC_HEADER)
+    h += bytes([26, 30])                                    # ID666 tag present, version minor 30
+    h += struct.pack("<HBBBBB", spc.pc, spc.a, spc.x, spc.y, spc.get_psw(), spc.sp) + b"\0\0"
+    tag = _field(title, 32) + _field(game, 32) + _field("audioconv", 16) + _field(comment, 32) + _field("", 11)
+    tag += _field("%d" % seconds, 3) + _field("%d" % fade_ms, 5) + _field("", 32) + bytes([0, 0]) + bytes(45)
+    h += tag
+    assert len(h) == 0x100, len(h)
+    return bytes(h) + bytes(ram) + bytes(spc.dsp) + bytes(64) + bytes(64)
+
+
+def parse_spc(data):
+    """-> dict(pc, a, x, y, psw, sp, ram, dsp, title, game) of a v0.30 .spc file (validates the layout)."""
+    if len(data) < SPC_SIZE or data[:27] != SPC_HEADER[:27] or data[0x21:0x23] != b"\x1a\x1a":
+        raise ConvError("not an SPC file")
+    pc, a, x, y, psw, sp = struct.unpack_from("<HBBBBB", data, 0x25)
+    return dict(pc=pc, a=a, x=x, y=y, psw=psw, sp=sp, ram=data[0x100:0x10100], dsp=data[0x10100:0x10180],
+                title=data[0x2E:0x4E].rstrip(b"\0").decode("ascii"), game=data[0x4E:0x6E].rstrip(b"\0").decode("ascii"))
+
+
+def cmd_spc(a):
+    blobs, _tables, info = build_all()
+    man = info["man"]
+    out = Path(a.out)
+    out.mkdir(parents=True, exist_ok=True)
+    state = spc_boot_state(blobs, info)
+    jobs = []
+    if a.sfx is not None:
+        for n in a.sfx:
+            jobs.append(("sfx_%02d" % n, "SFX %02d" % n, lambda n=n: spc_for_sfx(state, blobs, info, n)))
+    else:
+        by_label = {}
+        for t in man["tracks"]:
+            by_label[t["blob"]] = t["id"]                    # the highest id with that blob (id 1 for Spring: the one played)
+        labels = sorted(by_label) if a.all or not a.track else a.track
+        for lab in labels:
+            if lab not in by_label:
+                raise ConvError("unknown track %s" % lab)
+            tid = by_label[lab]
+            jobs.append((lab, "%s (track id %d)" % (lab, tid), lambda tid=tid: spc_for_track(state, blobs, info, tid)))
+    for name, title, fn in jobs:
+        spc = fn()
+        (out / (name + ".spc")).write_bytes(write_spc(spc, title, comment="generated by tools/audio/audioconv.py"))
+    print("wrote %d SPC files to %s" % (len(jobs), out))
+    return 0
+
+
+SPC_REGIONS = [(0x0000, 0x00F0, "direct page"), (0x0100, 0x0200, "stack / voice scratch"), (0x0200, 0x0400, "per-voice tables"),
+               (0x0400, 0x0500, "instrument records"), (0x0500, 0x14D6, "driver"), (0x1500, 0x1600, "sample directory"),
+               (0x1600, 0x19F4, "SFX block"), (0x19F4, 0x1FF4, "track data"), (0x1FF4, 0x65F4, "common samples"),
+               (0x65F4, 0xD700, "track samples"), (0xD700, 0x10000, "echo buffer / unused")]
+
+
+def cmd_spcdiff(a):
+    """Compare two .spc files (e.g. one dumped from an emulator vs one generated here) region by region."""
+    x = parse_spc(Path(a.a).read_bytes())
+    y = parse_spc(Path(a.b).read_bytes())
+    print("PC %04X/%04X  A %02X/%02X  X %02X/%02X  Y %02X/%02X  PSW %02X/%02X  SP %02X/%02X" % (
+        x["pc"], y["pc"], x["a"], y["a"], x["x"], y["x"], x["y"], y["y"], x["psw"], y["psw"], x["sp"], y["sp"]))
+    for lo, hi, name in SPC_REGIONS:
+        d = [i for i in range(lo, hi) if x["ram"][i] != y["ram"][i]]
+        runs = []
+        for i in d:
+            if runs and i == runs[-1][1] + 1:
+                runs[-1][1] = i
+            else:
+                runs.append([i, i])
+        print("%-24s $%04X-$%04X  %6d differing bytes%s" % (name, lo, hi - 1, len(d), "  e.g. " + ", ".join("$%04X-$%04X" % tuple(r) for r in runs[:4]) if d else ""))
+    dd = [i for i in range(128) if x["dsp"][i] != y["dsp"][i]]
+    print("DSP registers differing: %s" % (", ".join("$%02X" % i for i in dd) or "none"))
+    return 0
+
+
+def cmd_render(a):
+    import shutil
+    import subprocess
+    ff = shutil.which("ffmpeg")
+    if not ff:
+        raise ConvError("ffmpeg not found (needs a build with libgme); alternatives are listed in docs/formats/audio-sources.md")
+    out = Path(a.out)
+    out.mkdir(parents=True, exist_ok=True)
+    src = Path(a.spc)
+    files = sorted(src.glob("*.spc")) if src.is_dir() else [src]
+    for f in files:
+        dst = out / (f.stem + "." + a.format)
+        cmd = [ff, "-v", "error", "-y", "-i", str(f), "-t", str(a.seconds)]
+        if a.format == "mp3":
+            cmd += ["-codec:a", "libmp3lame", "-q:a", "4"]
+        r = subprocess.run(cmd + [str(dst)], capture_output=True, text=True)
+        if r.returncode:
+            raise ConvError("ffmpeg failed for %s: %s" % (f.name, r.stderr.strip()[:200]))
+    print("rendered %d file(s) to %s" % (len(files), out))
+    return 0
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -653,6 +820,11 @@ def main(argv=None):
     s.set_defaults(fn=cmd_extract)
     s = sub.add_parser("midi"); s.add_argument("--out", default="build/midi"); s.add_argument("labels", nargs="*"); s.set_defaults(fn=cmd_midi)
     s = sub.add_parser("wav"); s.add_argument("--out", default="build/wav"); s.set_defaults(fn=cmd_wav)
+    s = sub.add_parser("spc"); s.add_argument("--out", default="build/spc"); s.add_argument("--track", action="append", metavar="LABEL")
+    s.add_argument("--all", action="store_true"); s.add_argument("--sfx", type=int, action="append", metavar="N"); s.set_defaults(fn=cmd_spc)
+    s = sub.add_parser("spcdiff"); s.add_argument("a"); s.add_argument("b"); s.set_defaults(fn=cmd_spcdiff)
+    s = sub.add_parser("render"); s.add_argument("spc", help=".spc file or directory"); s.add_argument("--out", default="build/render")
+    s.add_argument("--format", choices=["wav", "mp3"], default="wav"); s.add_argument("--seconds", type=int, default=60); s.set_defaults(fn=cmd_render)
     a = ap.parse_args(argv)
     try:
         return a.fn(a) or 0
