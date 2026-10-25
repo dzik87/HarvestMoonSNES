@@ -56,8 +56,8 @@ def test_engine_constants(banks, ms):
     check(len(t87.refs) == 0x1EE, 'bank $87 has $1EE object indices')
     src = open(os.path.join(ROOT, 'src', 'code', 'bank_85', 'objects.asm'), encoding='utf-8').read()
     for pat in (r'CMP\.W #\$0262', r'SBC\.W #\$0262', r'ADC\.W #\$0003', r'ADC\.W #\$0005',
-                r'ADC\.W #\$0024', r'CMP\.B #\$FE', r'CMP\.B #\$FF', r'LDA\.L aObjectsList1,X',
-                r'LDA\.L aObjectsList2,X'):
+                r'ADC\.W #\$0024', r'CMP\.B #\$FE', r'CMP\.B #\$FF', r'LDA\.L aObjAnimListPtrs_86,X',
+                r'LDA\.L aObjAnimListPtrs_87,X'):
         check(re.search(pat, src), 'objects.asm still contains ' + pat)
     check(banks[0x86].data[:0x80] == banks[0x87].data[:0x80], 'slot tables of both banks are identical')
     slot = ms[0x86].nodes[0].words
