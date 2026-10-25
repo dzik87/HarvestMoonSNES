@@ -87,12 +87,12 @@ def us_layout(bank, root=ROOT):
             continue
         m = re.match(r'^incbin "([^"]+)"$', line)
         if m:
-            asset = (f.parent / m.group(1)).resolve()
+            asset = (f.parent / m.group(1).replace("!{REGDIR}", "")).resolve()
             out.append(Entry(label, kind_of(label), asset.stat().st_size, group, asset))
             continue
-        m = re.match(r"^fill (\d+)$", line)
+        m = re.match(r"^fill (\d+|align \$8000)$", line)
         if m:
-            out.append(Entry(label, "padding", int(m.group(1)), group, None))
+            out.append(Entry(label, "padding", int(m.group(1)) if m.group(1).isdigit() else 0, group, None))
     return out
 
 

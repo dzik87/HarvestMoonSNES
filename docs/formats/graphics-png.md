@@ -91,3 +91,9 @@ PNG looks: the conversion is lossless for any bytes and any bpp.
 | Title/menu/text graphics inside code or object data | graphics not stored as the blobs above (e.g. anything generated at run time, object animation data in banks $86/$87 which only references sprite tiles) have no image form |
 | Per-object / per-animation sprite sheets | done as derived output (not an editable source): `tools/objects/spriteexport.py` composes every object frame into `assets/gfx/png/sprites_assembled/`, see `docs/formats/sprite-assembly.md`; PNG -> tiles re-import of assembled frames is future work |
 | Time-of-day palettes | PNGs and previews use the day slot of the first area using a blob; the other slots of every area are in `palette_map.json` (`areas`) |
+
+## Regional versions
+
+Blobs that differ in the EU, DE or JP release have their own sources next to the shared ones: `assets/gfx/png/<region>/tiles/<label>.png` (+ `.json`),
+`assets/gfx/tilemaps/<region>/<label>.map.txt`. The label is the US label of the corresponding blob. Use `pngsync.py export|import|check|build --region eu|de|jp`;
+the generated `.bin` lands in `assets/gfx/{tiles,characters}/<region>/`. See `docs/regions.md`, "Regional data banks".

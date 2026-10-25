@@ -3,7 +3,7 @@
     ORG $9B8000
 
 sCompressedTiles_9B8000:
-    incbin "../../../../assets/gfx/tiles/sCompressedTiles_9B8000.bin"
+    incbin "../../../../assets/gfx/tiles/!{REGDIR}sCompressedTiles_9B8000.bin"
 
 sCompressedTiles_9B8441:
     incbin "../../../../assets/gfx/tiles/sCompressedTiles_9B8441.bin"
@@ -21,4 +21,4 @@ sCompressedTiles_9BCF8F:
     incbin "../../../../assets/gfx/tiles/sCompressedTiles_9BCF8F.bin"
 
 Padding_9B0000:
-    fill 6426
+    fill align $8000

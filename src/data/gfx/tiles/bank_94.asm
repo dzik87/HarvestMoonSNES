@@ -6,13 +6,13 @@ sCompressedTiles_948000:
     incbin "../../../../assets/gfx/tiles/sCompressedTiles_948000.bin"
 
 sFontGlyphs_0x00:
-    incbin "../../../../assets/gfx/tiles/sFontGlyphs_0x00.bin"
+    incbin "../../../../assets/gfx/tiles/!{REGDIR}sFontGlyphs_0x00.bin"
 
 sFontGlyphs_0x01:
-    incbin "../../../../assets/gfx/tiles/sFontGlyphs_0x01.bin"
+    incbin "../../../../assets/gfx/tiles/!{REGDIR}sFontGlyphs_0x01.bin"
 
 sFontGlyphs_0x02:
-    incbin "../../../../assets/gfx/tiles/sFontGlyphs_0x02.bin"
+    incbin "../../../../assets/gfx/tiles/!{REGDIR}sFontGlyphs_0x02.bin"
 
 sFontGlyphs_0x03:
     incbin "../../../../assets/gfx/tiles/sFontGlyphs_0x03.bin"
@@ -24,4 +24,4 @@ sFontGlyphs_0x05:
     incbin "../../../../assets/gfx/tiles/sFontGlyphs_0x05.bin"
 
 Padding_940000:
-    fill 1981
+    fill align $8000

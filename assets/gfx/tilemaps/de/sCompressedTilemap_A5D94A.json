@@ -1,0 +1,16 @@
+{
+  "label": "sCompressedTilemap_A5D94A",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/de/sCompressedTilemap_A5D94A.bin",
+  "compression": "lzss",
+  "raw_size": 8192,
+  "format": "bg_name_table",
+  "entries": 4096,
+  "columns": 32,
+  "vram_word_dest": [
+    "$6000"
+  ],
+  "map_entries": 1,
+  "first_map": "sHarvestMoonLogo",
+  "tile_sets": []
+}

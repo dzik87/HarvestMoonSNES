@@ -18,7 +18,7 @@ sCompressedTiles_9ED208:
     incbin "../../../../assets/gfx/tiles/sCompressedTiles_9ED208.bin"
 
 sCompressedTiles_9EEB3D:
-    incbin "../../../../assets/gfx/tiles/sCompressedTiles_9EEB3D.bin"
+    incbin "../../../../assets/gfx/tiles/!{REGDIR}sCompressedTiles_9EEB3D.bin"
 
 Padding_9E0000:
-    fill 4142
+    fill align $8000

@@ -303,9 +303,7 @@ def cmd_build(a):
         sys.exit("error: %s does not exist (run extract first)" % src)
     tables = glyphs_to_tables(load_png_dir(src))
     if a.write_assets:
-        if a.region != "us":
-            sys.exit("error: --write-assets is only valid for --region us")
-        out = ASSETS_TILES
+        out = ASSETS_TILES if a.region == "us" else ASSETS_TILES / a.region     # eu/de/jp: assets/gfx/tiles/<region>/
     else:
         out = Path(a.out) if a.out else BUILD_DIR / a.region
     out.mkdir(parents=True, exist_ok=True)

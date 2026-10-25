@@ -1,0 +1,20 @@
+{
+  "label": "sCompressedTilemap_A694EE",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/jp/sCompressedTilemap_A694EE.bin",
+  "compression": "lzss",
+  "raw_size": 8192,
+  "format": "bg_name_table",
+  "entries": 4096,
+  "columns": 32,
+  "vram_word_dest": [
+    "$6000"
+  ],
+  "map_entries": 4,
+  "first_map": "sMap_80B514",
+  "tile_sets": [
+    "sCompressedTiles_9EEB3D@$2000",
+    "sCompressedTiles_A08000@$3000",
+    "sCompressedTiles_A088E9@$4000"
+  ]
+}

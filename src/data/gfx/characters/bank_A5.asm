@@ -3,7 +3,7 @@
     ORG $A58000
 
 sCompressedTilemap_A58000:
-    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A58000.bin"
+    incbin "../../../../assets/gfx/characters/!{REGDIR}sCompressedTilemap_A58000.bin"
 
 sCompressedTilemap_A58327:
     incbin "../../../../assets/gfx/characters/sCompressedTilemap_A58327.bin"
@@ -12,13 +12,13 @@ sCompressedTilemap_A58B49:
     incbin "../../../../assets/gfx/characters/sCompressedTilemap_A58B49.bin"
 
 sCompressedTilemap_A58D8E:
-    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A58D8E.bin"
+    incbin "../../../../assets/gfx/characters/!{REGDIR}sCompressedTilemap_A58D8E.bin"
 
 sCompressedTilemap_A5970F:
-    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A5970F.bin"
+    incbin "../../../../assets/gfx/characters/!{REGDIR}sCompressedTilemap_A5970F.bin"
 
 sCompressedTilemap_A59C08:
-    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A59C08.bin"
+    incbin "../../../../assets/gfx/characters/!{REGDIR}sCompressedTilemap_A59C08.bin"
 
 sCompressedTilemap_A59E0B:
     incbin "../../../../assets/gfx/characters/sCompressedTilemap_A59E0B.bin"
@@ -60,16 +60,16 @@ sCompressedTilemap_A5CB05:
     incbin "../../../../assets/gfx/characters/sCompressedTilemap_A5CB05.bin"
 
 sCompressedTilemap_A5CD88:
-    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A5CD88.bin"
+    incbin "../../../../assets/gfx/characters/!{REGDIR}sCompressedTilemap_A5CD88.bin"
 
 sCompressedTilemap_A5D44C:
     incbin "../../../../assets/gfx/characters/sCompressedTilemap_A5D44C.bin"
 
 sCompressedTilemap_A5D94A:
-    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A5D94A.bin"
+    incbin "../../../../assets/gfx/characters/!{REGDIR}sCompressedTilemap_A5D94A.bin"
 
 sCompressedTilemap_A5DE84:
-    incbin "../../../../assets/gfx/characters/sCompressedTilemap_A5DE84.bin"
+    incbin "../../../../assets/gfx/characters/!{REGDIR}sCompressedTilemap_A5DE84.bin"
 
 sCompressedTilemap_A5E253:
     incbin "../../../../assets/gfx/characters/sCompressedTilemap_A5E253.bin"
@@ -99,4 +99,4 @@ sCompressedTilemap_A5FBCE:
     incbin "../../../../assets/gfx/characters/sCompressedTilemap_A5FBCE.bin"
 
 Padding_A50000:
-    fill 368
+    fill align $8000

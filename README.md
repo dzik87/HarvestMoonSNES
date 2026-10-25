@@ -7,7 +7,7 @@ Overriding rule: the build output must be **bit-identical** to the original ROM.
 ## Quick start
 
 ```
-python tools/build.py                    # generates .bin/.pal assets from PNG/JSON sources, builds, verifies hashes (asar: --asar, $ASAR or tools/bin/)
+python tools/build.py [--region EU|DE|JP]  # generates .bin/.pal assets from PNG/JSON sources, builds, verifies hashes (asar: --asar, $ASAR or tools/bin/)
 python tools/build_assets.py             # only generate the assets (needed before running individual checks/tests)
 python tools/verify.py build/HarvestMoon.sfc --rom "original.sfc"   # per-bank diff report
 ```
@@ -32,7 +32,7 @@ CI (GitHub Actions) builds asar from source, assembles the ROM and compares the 
 Graphics modding (PNG -> ROM): [`docs/formats/graphics-png.md`](docs/formats/graphics-png.md); palette of every graphic: [`docs/formats/graphics-palettes.md`](docs/formats/graphics-palettes.md).
 Assembled object sprites / animation frames (derived PNGs + JSON, `tools/objects/spriteexport.py`): [`docs/formats/sprite-assembly.md`](docs/formats/sprite-assembly.md).
 
-Differences between the releases: [`docs/regions.md`](docs/regions.md) (code banks $80-$85, byte-exact EU/DE/JP builds via `tools/build.py --region EU|DE|JP`), [`docs/regions-ai.md`](docs/regions-ai.md) (AI scripts, command level).
+Differences between the releases: [`docs/regions.md`](docs/regions.md) (code, graphics, fonts, palettes and dialogs; the complete EU/DE/JP ROMs are built bit-identically via `tools/build.py --region EU|DE|JP`), [`docs/regions-ai.md`](docs/regions-ai.md) (AI scripts, command level).
 
 Details: [`docs/layout.md`](docs/layout.md), [`docs/workflow.md`](docs/workflow.md),
 [`docs/migration-log.md`](docs/migration-log.md).

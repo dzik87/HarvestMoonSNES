@@ -42,10 +42,10 @@ def parse_bank(path):
             cur[1].extend(int(x, 16) for x in re.findall(r"\$([0-9A-Fa-f]{2})", m.group(1))); continue
         m = re.match(r'^\s*incbin "([^"]+)"$', line)
         if m and cur is not None:
-            cur[2].append(("incbin", m.group(1))); continue
-        m = re.match(r"^\s*fill (\d+)$", line)
+            cur[2].append(("incbin", m.group(1).replace("!{REGDIR}", ""))); continue
+        m = re.match(r"^\s*fill (\d+|align \$8000)$", line)
         if m and cur is not None:
-            cur[2].append(("fill", int(m.group(1))))
+            cur[2].append(("fill", int(m.group(1)) if m.group(1).isdigit() else -1))   # -1: `fill align $8000` (rest of the bank)
     return org, blocks
 
 
@@ -95,10 +95,14 @@ def sizes_from_asm(f, assets):
         kind, arg = extra[0]
         n = arg if kind == "fill" else (assets / Path(arg).name).stat().st_size
         out.append((label, n))
+    if out and out[-1][1] < 0:                                   # `fill align $8000`: whatever the blobs leave of the bank
+        out[-1] = (out[-1][0], BANK - sum(n for _, n in out[:-1]))
     return org, out
 
 
 def cmd_emit(a):
+    if a.group in (None, "tiles", "characters"):
+        sys.exit("emit-asm would drop the regional `!{REGDIR}` includes and `fill align` of the tile/character banks; edit them by hand")
     for g in groups(a.group):
         src, assets = GROUPS[g]
         for f in sorted(src.glob("bank_*.asm")):

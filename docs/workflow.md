@@ -11,15 +11,15 @@ Requires asar 1.91 (`asar.exe` on Windows). Provide its path via `--asar`, the `
 `tools/build.py` creates the output file as 2 MB of zeros, runs asar with `-werror --no-title-check --fix-checksum=off`
 and verifies the hashes. Diagnosing a mismatch: `python tools/verify.py build/HarvestMoon.sfc --rom original.sfc`.
 
-## Regional builds (code banks $80-$85)
+## Regional builds (complete ROMs)
 `python3 tools/build.py --region EU|DE|JP --out build/HarvestMoonXX.sfc` assembles the same sources with `-DREGION_xx=1` and
-verifies banks $80-$85 (and the AI banks $B3-$B5) against `tests/expected.json` (keys `EU`, `DE`, `JP`, `<REGION>-AI`). The other
-banks are not part of the regional trees yet, so the output is a partial ROM. A change in a shared (non-patch) line is checked
-against all regions; keep `+!RAM_SHIFT` on hex literals that point into WRAM above `$08D1` and prefer label names for code pointers.
+builds the complete ROM and verifies size/CRC32/MD5/SHA-1 against `tests/expected.json` (keys `EU`, `DE`, `JP`). Graphics, fonts,
+palettes and dialogs of the release come from the per-release assets (`docs/regions.md`, "Regional data banks"); `tools/build_assets.py` generates all of them.
+A change in a shared (non-patch) line is checked against all regions; keep `+!RAM_SHIFT` on hex literals that point into WRAM above `$08D1` and prefer label names for code pointers.
 Region switch and RAM layout: `src/common/region.asm`, details in `docs/regions.md`.
 Tools: `tools/analysis/align_regions.py` (coverage report, `--md docs/regions.md`), `tools/analysis/disasm65816.py`,
 `tools/migration/region_patch.py` (regenerates all patch blocks from the ROM dumps: `--eu --de --jp`, ROMs are tool inputs only;
-`--write-expected` refreshes the hashes). After editing US code that is inside a patch block, edit the `else` branch (US text) and
+`--write-expected` stores the full-ROM hashes). After editing US code that is inside a patch block, edit the `else` branch (US text) and
 check all regions; regenerating with the tool is also possible (it starts from the US text).
 
 ## CI (`.github/workflows/build.yml`)
@@ -34,13 +34,15 @@ the result in run annotations and as the `HarvestMoon-US` artifact.
   course change after an intentional edit; update `tests/expected.json` only for deliberate modifications.
 - `tilemap_codec.py` — LZSS codec for the compressed tilemap/charactermap blobs (see `docs/formats/tilemap-compression.md`).
 - `tiles.py` — reference implementation of raw 2/4/8bpp SNES tile data <-> indexed PNG sheets (`to-png`, `from-png`), lossless for any data.
-- `dialogs/dialog.py` — dialog word streams <-> editable text (`assets/dialogs/<region>/`), all regions.
+- `dialogs/dialog.py` — dialog texts (`assets/dialogs/<region>/bank_XX.txt`, the only source) -> generated `build/gen/dialogs/<region>/bank_XX.asm` (`build`), `check`; all regions.
 - `maps/objmap.py` — object maps (bank $A7) <-> JSON grids in `assets/maps/`; widths in `tools/maps/map_dims.json`.
 - `build_assets.py` — generates every `incbin`'d binary that has an editable source (`assets/gfx/palettes/*.pal`, `assets/gfx/{tiles,sprites,characters}/*.bin` incl. the font tables) from the PNG/text/JSON sources; run by `tools/build.py` before asar. These generated files are git-ignored; run `python3 tools/build_assets.py` by hand before the checks/tests that read them.
+- `data/regionbanks.py` — blob level inventory of the regional data banks (which blob of EU/DE/JP is region specific); `analysis/region_diff.py --data-ranges` lists the differing byte ranges.
 - `data/bankbin.py` — sprite, tile, character and audio banks: one `.bin` per label in `assets/`, included with `incbin` (labels unchanged); audio `.bin` files are still committed sources.
 - `gfx/pngsync.py` — **graphics sources**: `assets/gfx/png/{tiles,sprites}/<label>.png` (indexed 4bpp sheets) and `assets/gfx/tilemaps/<label>.map.txt`
   (BG name tables) with a `<label>.json` sidecar each are the source of truth for all 150 graphic blobs; `export` / `import` / `check` / `preview`.
   `build` writes the (git-ignored) `assets/gfx/{tiles,sprites,characters}/*.bin` that the assembler includes from the sources, `import` re-encodes edited sources and updates sidecar/padding (a longer compressed stream needs `--allow-resize`),
+  `--region eu|de|jp` (export/build/import/check) handles the blobs that differ from US (`assets/gfx/png/<region>/`, `assets/gfx/tilemaps/<region>/`, generated `.bin` in `assets/gfx/{tiles,characters}/<region>/`), `build --region all` is what `build_assets.py` runs;
   `check` asserts that the sources rebuild to the generated `.bin`; the ROM hash check in CI proves they equal the original ROM data. Modder workflow, constraints and what is not convertible yet: `docs/formats/graphics-png.md`.
 - `gfx/gfxpipe.py` — older low-level helper (raw export, exact re-encode `verify`); superseded by `pngsync.py` for editing.
 - `fonts/font.py` — font glyphs: one 16x16 2bpp indexed PNG per glyph in `assets/fonts/<region>/glyph_XXXX.png`

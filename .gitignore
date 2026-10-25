@@ -11,3 +11,8 @@ assets/gfx/palettes/*.pal
 assets/gfx/tiles/*.bin
 assets/gfx/characters/*.bin
 assets/gfx/sprites/*.bin
+assets/gfx/tiles/*/*.bin
+assets/gfx/characters/*/*.bin
+assets/gfx/sprites/*/*.bin
+assets/gfx/palettes/*/*.pal
+build/
