@@ -1,0 +1,20 @@
+{
+  "label": "sCompressedTilemap_A4D379",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/sCompressedTilemap_A4D379.bin",
+  "compression": "lzss",
+  "raw_size": 8192,
+  "format": "bg_name_table",
+  "entries": 4096,
+  "columns": 32,
+  "vram_word_dest": [
+    "$6000"
+  ],
+  "map_entries": 1,
+  "first_map": "sFlowerFestivalMap",
+  "tile_sets": [
+    "sCompressedTiles_97B45F@$2000",
+    "sCompressedTiles_998000@$3000",
+    "sCompressedTiles_99AEC3@$4000"
+  ]
+}

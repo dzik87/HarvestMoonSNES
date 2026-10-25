@@ -1,0 +1,18 @@
+{
+  "label": "sCompressedTilemap_A49E2E",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/sCompressedTilemap_A49E2E.bin",
+  "compression": "lzss",
+  "raw_size": 8192,
+  "format": "bg_name_table",
+  "entries": 4096,
+  "columns": 32,
+  "vram_word_dest": [
+    "$6000"
+  ],
+  "map_entries": 3,
+  "first_map": "sMayorHouseMap",
+  "tile_sets": [
+    "sCompressedTiles_95E8A3@$2000"
+  ]
+}

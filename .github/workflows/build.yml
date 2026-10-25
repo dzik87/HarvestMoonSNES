@@ -65,6 +65,8 @@ jobs:
           python3 tests/test_objdata.py
           python3 tests/test_tilemap_codec.py
           python3 tools/gfx/tiles.py selftest
+          python3 tools/gfx/pngsync.py check
+          python3 tests/test_pngsync.py
 
       - name: Build and verify (US)
         run: |

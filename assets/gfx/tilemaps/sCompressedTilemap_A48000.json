@@ -1,0 +1,18 @@
+{
+  "label": "sCompressedTilemap_A48000",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/sCompressedTilemap_A48000.bin",
+  "compression": "lzss",
+  "raw_size": 4096,
+  "format": "bg_name_table",
+  "entries": 2048,
+  "columns": 32,
+  "vram_word_dest": [
+    "$7000"
+  ],
+  "map_entries": 1,
+  "first_map": "sRainOverlay",
+  "tile_sets": [
+    "sCompressedTiles_928000@$5000"
+  ]
+}

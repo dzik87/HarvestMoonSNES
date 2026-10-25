@@ -1,0 +1,18 @@
+{
+  "label": "sCompressedTilemap_A4CFAB",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/sCompressedTilemap_A4CFAB.bin",
+  "compression": "lzss",
+  "raw_size": 2048,
+  "format": "bg_name_table",
+  "entries": 1024,
+  "columns": 32,
+  "vram_word_dest": [
+    "$6000"
+  ],
+  "map_entries": 4,
+  "first_map": "sRoadSpringMap",
+  "tile_sets": [
+    "sCompressedTiles_98CC6B@$2000"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "label": "sCompressedTilemap_A4B3D1",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/sCompressedTilemap_A4B3D1.bin",
+  "compression": "lzss",
+  "raw_size": 4096,
+  "format": "bg_name_table",
+  "entries": 2048,
+  "columns": 32,
+  "vram_word_dest": [
+    "$6000"
+  ],
+  "map_entries": 2,
+  "first_map": "sRestaurantMap",
+  "tile_sets": [
+    "sCompressedTiles_96C489@$3000"
+  ]
+}

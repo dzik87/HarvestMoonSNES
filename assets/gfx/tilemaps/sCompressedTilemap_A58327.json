@@ -1,0 +1,20 @@
+{
+  "label": "sCompressedTilemap_A58327",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/sCompressedTilemap_A58327.bin",
+  "compression": "lzss",
+  "raw_size": 8192,
+  "format": "bg_name_table",
+  "entries": 4096,
+  "columns": 32,
+  "vram_word_dest": [
+    "$6000"
+  ],
+  "map_entries": 1,
+  "first_map": "sStarNightFestivalSquareMap",
+  "tile_sets": [
+    "sCompressedTiles_99DCBD@$2000",
+    "sCompressedTiles_9A8000@$3000",
+    "sCompressedTiles_9AAEAB@$4000"
+  ]
+}

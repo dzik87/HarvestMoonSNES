@@ -1,0 +1,20 @@
+{
+  "label": "sCompressedTilemap_A5F059",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/sCompressedTilemap_A5F059.bin",
+  "compression": "lzss",
+  "raw_size": 2048,
+  "format": "bg_name_table",
+  "entries": 1024,
+  "columns": 32,
+  "vram_word_dest": [
+    "$6000"
+  ],
+  "map_entries": 1,
+  "first_map": "sMap_80B42E",
+  "tile_sets": [
+    "sCompressedTiles_92D3AB@$2000",
+    "sCompressedTiles_938000@$3000",
+    "sCompressedTiles_939E8E@$4000"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "label": "sCharactermap_A38000",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/sCharactermap_A38000.bin",
+  "compression": "none",
+  "raw_size": 32768,
+  "format": "bg_name_table",
+  "entries": 16384,
+  "columns": 128,
+  "vram_word_dest": [
+    "$6000"
+  ],
+  "map_entries": 8,
+  "first_map": "sTownSpringMap",
+  "tile_sets": [
+    "sCompressedTiles_97B45F@$2000",
+    "sCompressedTiles_998000@$3000",
+    "sCompressedTiles_999A74@$4000"
+  ]
+}
