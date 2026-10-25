@@ -63,6 +63,8 @@ jobs:
           python3 tests/test_spc700.py
           python3 tools/audio/audio_map.py --check
           python3 tests/test_objdata.py
+          python3 tools/objects/spriteexport.py check
+          python3 tests/test_spriteexport.py
           python3 tests/test_tilemap_codec.py
           python3 tests/test_disasm65816.py
           python3 tests/test_bytealign.py

@@ -1,0 +1,47 @@
+{
+  "object": 74,
+  "bank": "$86",
+  "list": "$8689F5",
+  "lists": [
+    {
+      "id": 0,
+      "steps": [
+        {"step": 0, "frame": "$86ADB8", "timer": 16, "image": 0, "png": "l0_f00.png"},
+        {"step": 1, "frame": "$86ADC3", "timer": 8, "image": 1, "png": "l0_f01.png"},
+        {"step": 2, "frame": "$86ADCE", "timer": 12, "image": 2, "png": "l0_f02.png"},
+        {"step": 3, "frame": "$86ADE3", "timer": 8, "image": 3, "png": "l0_f03.png"},
+        {"step": 4, "frame": "$86ADE3", "timer": 255, "image": 3, "png": "l0_f03.png"}
+      ]
+    }
+  ],
+  "images": [
+    {"png": "l0_f00.png", "size": [16, 32], "origin": [8, 26]},
+    {"png": "l0_f01.png", "size": [16, 32], "origin": [8, 21]},
+    {"png": "l0_f02.png", "size": [32, 32], "origin": [16, 14]},
+    {"png": "l0_f03.png", "size": [16, 32], "origin": [8, 19]}
+  ],
+  "frames": [
+    {"addr": "$86ADB8", "image": 0, "png": "l0_f00.png", "origin": [8, 26], "size": [16, 32],
+      "components": [
+        {"tile": 339, "x": -8, "y": -26, "attr": 4, "sheet": "Sprites_898000", "sx": 48, "sy": 160, "palette": 4, "hflip": false, "vflip": false},
+        {"tile": 347, "x": -8, "y": -10, "attr": 4, "sheet": "Sprites_898000", "sx": 48, "sy": 176, "palette": 4, "hflip": false, "vflip": false}
+      ]},
+    {"addr": "$86ADC3", "image": 1, "png": "l0_f01.png", "origin": [8, 21], "size": [16, 32],
+      "components": [
+        {"tile": 348, "x": -8, "y": -5, "attr": 4, "sheet": "Sprites_898000", "sx": 64, "sy": 176, "palette": 4, "hflip": false, "vflip": false},
+        {"tile": 340, "x": -8, "y": -21, "attr": 4, "sheet": "Sprites_898000", "sx": 64, "sy": 160, "palette": 4, "hflip": false, "vflip": false}
+      ]},
+    {"addr": "$86ADCE", "image": 2, "png": "l0_f02.png", "origin": [16, 14], "size": [32, 32],
+      "components": [
+        {"tile": 349, "x": -16, "y": 2, "attr": 4, "sheet": "Sprites_898000", "sx": 80, "sy": 176, "palette": 4, "hflip": false, "vflip": false},
+        {"tile": 350, "x": 0, "y": 2, "attr": 4, "sheet": "Sprites_898000", "sx": 96, "sy": 176, "palette": 4, "hflip": false, "vflip": false},
+        {"tile": 341, "x": -16, "y": -14, "attr": 4, "sheet": "Sprites_898000", "sx": 80, "sy": 160, "palette": 4, "hflip": false, "vflip": false},
+        {"tile": 342, "x": 0, "y": -14, "attr": 4, "sheet": "Sprites_898000", "sx": 96, "sy": 160, "palette": 4, "hflip": false, "vflip": false}
+      ]},
+    {"addr": "$86ADE3", "image": 3, "png": "l0_f03.png", "origin": [8, 19], "size": [16, 32],
+      "components": [
+        {"tile": 351, "x": -8, "y": -3, "attr": 4, "sheet": "Sprites_898000", "sx": 112, "sy": 176, "palette": 4, "hflip": false, "vflip": false},
+        {"tile": 343, "x": -8, "y": -19, "attr": 4, "sheet": "Sprites_898000", "sx": 112, "sy": 160, "palette": 4, "hflip": false, "vflip": false}
+      ]}
+  ]
+}

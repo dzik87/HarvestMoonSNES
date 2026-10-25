@@ -29,6 +29,7 @@ CI (GitHub Actions) builds asar from source, assembles the ROM and compares the 
 | `tests/` | reference hash values |
 
 Graphics modding (PNG -> ROM): [`docs/formats/graphics-png.md`](docs/formats/graphics-png.md).
+Assembled object sprites / animation frames (derived PNGs + JSON, `tools/objects/spriteexport.py`): [`docs/formats/sprite-assembly.md`](docs/formats/sprite-assembly.md).
 
 Details: [`docs/layout.md`](docs/layout.md), [`docs/workflow.md`](docs/workflow.md),
 [`docs/migration-log.md`](docs/migration-log.md).

@@ -1,0 +1,22 @@
+{
+  "object": 768,
+  "bank": "$87",
+  "list": "$8789FD",
+  "lists": [
+    {
+      "id": 0,
+      "steps": [
+        {"step": 0, "frame": "$87A569", "timer": 255, "image": 0, "png": "l0_f00.png"}
+      ]
+    }
+  ],
+  "images": [
+    {"png": "l0_f00.png", "size": [16, 16], "origin": [8, 11]}
+  ],
+  "frames": [
+    {"addr": "$87A569", "image": 0, "png": "l0_f00.png", "origin": [8, 11], "size": [16, 16],
+      "components": [
+        {"tile": 2293, "x": -8, "y": -11, "attr": 3, "sheet": "Sprites_908000", "sx": 80, "sy": 480, "palette": 3, "hflip": false, "vflip": false}
+      ]}
+  ]
+}

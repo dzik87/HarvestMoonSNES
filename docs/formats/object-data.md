@@ -5,7 +5,7 @@ Status legend: **[C]** confirmed from the engine code (routine + address given),
 both banks parse without exceptions), **[I]** inferred / interpretation, not proven by code.
 
 Tooling: `tools/objects/objdata.py` (`analyze`, `check`, `names`), tests in
-`tests/test_objdata.py`, proposed label names in `docs/naming/H_objects_86_87.csv`.
+`tests/test_objdata.py`; how components map to pixels and the exported frame images: `docs/formats/sprite-assembly.md`, proposed label names in `docs/naming/H_objects_86_87.csv`.
 All offsets below are 16-bit offsets inside the bank unless a full `$BBAAAA` address is given.
 
 ## 1. Overview

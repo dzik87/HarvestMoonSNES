@@ -1,0 +1,39 @@
+{
+  "object": 494,
+  "bank": "$86",
+  "list": "$86A078",
+  "lists": [
+    {
+      "id": 0,
+      "steps": [
+        {"step": 0, "frame": "$86D8E9", "timer": 20, "image": 0, "png": "l0_f00.png"},
+        {"step": 1, "frame": "$86D8F4", "timer": 16, "image": 1, "png": "l0_f01.png"},
+        {"step": 2, "frame": "$86D8E9", "timer": 15, "image": 0, "png": "l0_f00.png"},
+        {"step": 3, "frame": "$86D8F4", "timer": 13, "image": 1, "png": "l0_f01.png"},
+        {"step": 4, "frame": "$86D841", "timer": 255, "image": 2, "png": "l0_f02.png"}
+      ]
+    }
+  ],
+  "images": [
+    {"png": "l0_f00.png", "size": [32, 16], "origin": [17, 10]},
+    {"png": "l0_f01.png", "size": [32, 16], "origin": [17, 10]},
+    {"png": "l0_f02.png", "size": [32, 16], "origin": [17, 9]}
+  ],
+  "frames": [
+    {"addr": "$86D8E9", "image": 0, "png": "l0_f00.png", "origin": [17, 10], "size": [32, 16],
+      "components": [
+        {"tile": 1577, "x": -1, "y": -10, "attr": 5, "sheet": "Sprites_8E8000", "sx": 16, "sy": 80, "palette": 5, "hflip": false, "vflip": false},
+        {"tile": 1578, "x": -17, "y": -10, "attr": 5, "sheet": "Sprites_8E8000", "sx": 32, "sy": 80, "palette": 5, "hflip": false, "vflip": false}
+      ]},
+    {"addr": "$86D8F4", "image": 1, "png": "l0_f01.png", "origin": [17, 10], "size": [32, 16],
+      "components": [
+        {"tile": 1576, "x": -17, "y": -10, "attr": 5, "sheet": "Sprites_8E8000", "sx": 0, "sy": 80, "palette": 5, "hflip": false, "vflip": false},
+        {"tile": 1577, "x": -1, "y": -10, "attr": 5, "sheet": "Sprites_8E8000", "sx": 16, "sy": 80, "palette": 5, "hflip": false, "vflip": false}
+      ]},
+    {"addr": "$86D841", "image": 2, "png": "l0_f02.png", "origin": [17, 9], "size": [32, 16],
+      "components": [
+        {"tile": 1646, "x": -17, "y": -9, "attr": 5, "sheet": "Sprites_8E8000", "sx": 96, "sy": 208, "palette": 5, "hflip": false, "vflip": false},
+        {"tile": 1647, "x": -1, "y": -9, "attr": 5, "sheet": "Sprites_8E8000", "sx": 112, "sy": 208, "palette": 5, "hflip": false, "vflip": false}
+      ]}
+  ]
+}
