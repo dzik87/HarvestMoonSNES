@@ -25,3 +25,4 @@ the result in run annotations and as the `HarvestMoon-US` artifact.
 - `tiles.py` — raw 2/4/8bpp SNES tile data <-> indexed PNG sheets (`to-png`, `from-png`), lossless for any data.
 - `dialogs/dialog.py` — dialog word streams <-> editable text (`assets/dialogs/<region>/`), all regions.
 - `maps/objmap.py` — object maps (bank $A7) <-> JSON grids in `assets/maps/`; widths in `tools/maps/map_dims.json`.
+- `data/bankbin.py` — sprite, tile, character and audio banks: one `.bin` per label in `assets/`, included with `incbin` (labels unchanged).
