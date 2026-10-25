@@ -200,7 +200,7 @@ The inventory (`tools/analysis/region_diff.py --data-ranges`, blob level: `tools
 data bank of every release contains **the same blobs in the same order as US**; only the content of some blobs (and with it their
 size and all following addresses) differs. That is the design of the unified tree:
 
-* **One label per blob in all releases.** A blob keeps its US label (`sCompressedTiles_9AC489`, `sFontGlyphs_0x01`, ...). In a
+* **One label per blob in all releases.** A blob keeps its US label (`Tiles_Menu_1`, `sFontGlyphs_0x01`, ...). In a
   release its address is simply different, the assembler relocates every reference. The pointers in the map table
   (`src/code/bank_80/tilemaps.asm`) used to be raw addresses in `if !REGION_xx` blocks (about 50 blocks); they are now the plain label,
   and the blocks are gone (`tools/migration/region_labels.py`).
@@ -266,45 +266,45 @@ Region specific blobs (label = the corresponding US blob; address and size in th
 | $94 | JP | `sFontGlyphs_0x01` | $94:A843 | 4096 | $94:A843 | 4096 |
 | $94 | JP | `sFontGlyphs_0x02` | $94:B843 | 4096 | $94:B843 | 4096 |
 | $95 | JP | `sFontGlyphs_0x09` | $95:B000 | 4096 | $95:B000 | 4096 |
-| $9A | DE | `sCompressedTiles_9AC489` | $9A:C489 | 1645 | $9A:C489 | 1720 |
-| $9A | JP | `sCompressedTiles_9ABF97` | $9A:BF97 | 2247 | $9A:BF97 | 1266 |
-| $9A | JP | `sCompressedTiles_9AC489` | $9A:C85E | 1788 | $9A:C489 | 1720 |
-| $9A | JP | `sCompressedTiles_9ACB41` | $9A:CF5A | 2392 | $9A:CB41 | 2070 |
-| $9A | JP | `sCompressedTiles_9AD357` | $9A:D8B2 | 3312 | $9A:D357 | 3286 |
-| $9B | DE | `sCompressedTiles_9B8000` | $9B:8000 | 1086 | $9B:8000 | 1089 |
-| $9B | JP | `sCompressedTiles_9B8000` | $9B:8000 | 1870 | $9B:8000 | 1089 |
-| $9E | JP | `sCompressedTiles_9EEB3D` | $9E:EB3D | 1921 | $9E:EB3D | 1172 |
-| $9F | EU | `sCompressedTiles_9F8000` | $9F:8000 | 5385 | $9F:8000 | 5228 |
-| $9F | EU | `sCompressedTiles_9F946C` | $9F:9509 | 5691 | $9F:946C | 5641 |
-| $9F | EU | `sCompressedTiles_9FAA75` | $9F:AB44 | 5622 | $9F:AA75 | 5591 |
-| $9F | EU | `sCompressedTiles_9FC04C` | $9F:C13A | 5196 | $9F:C04C | 5262 |
-| $9F | DE | `sCompressedTiles_9F8000` | $9F:8000 | 5385 | $9F:8000 | 5228 |
-| $9F | DE | `sCompressedTiles_9F946C` | $9F:9509 | 5467 | $9F:946C | 5641 |
-| $9F | DE | `sCompressedTiles_9FAA75` | $9F:AA64 | 5622 | $9F:AA75 | 5591 |
-| $9F | DE | `sCompressedTiles_9FC04C` | $9F:C05A | 5196 | $9F:C04C | 5262 |
-| $9F | JP | `sCompressedTiles_9F8000` | $9F:8000 | 5440 | $9F:8000 | 5228 |
-| $9F | JP | `sCompressedTiles_9F946C` | $9F:9540 | 5749 | $9F:946C | 5641 |
-| $9F | JP | `sCompressedTiles_9FAA75` | $9F:ABB5 | 6045 | $9F:AA75 | 5591 |
-| $9F | JP | `sCompressedTiles_9FC04C` | $9F:C352 | 5686 | $9F:C04C | 5262 |
-| $9F | JP | `sCompressedTiles_9FEF97` | $9F:F445 | 2427 | $9F:EF97 | 2131 |
-| $A5 | EU | `sCompressedTilemap_A58000` | $A5:8000 | 796 | $A5:8000 | 807 |
-| $A5 | EU | `sCompressedTilemap_A5CD88` | $A5:CD7D | 1738 | $A5:CD88 | 1732 |
-| $A5 | EU | `sCompressedTilemap_A5D94A` | $A5:D945 | 1326 | $A5:D94A | 1338 |
-| $A5 | DE | `sCompressedTilemap_A58000` | $A5:8000 | 832 | $A5:8000 | 807 |
-| $A5 | DE | `sCompressedTilemap_A58D8E` | $A5:8DA7 | 2480 | $A5:8D8E | 2433 |
-| $A5 | DE | `sCompressedTilemap_A59C08` | $A5:9C50 | 633 | $A5:9C08 | 515 |
-| $A5 | DE | `sCompressedTilemap_A5CD88` | $A5:CE46 | 1738 | $A5:CD88 | 1732 |
-| $A5 | DE | `sCompressedTilemap_A5D94A` | $A5:DA0E | 1323 | $A5:D94A | 1338 |
-| $A5 | JP | `sCompressedTilemap_A58000` | $A5:8000 | 947 | $A5:8000 | 807 |
-| $A5 | JP | `sCompressedTilemap_A58D8E` | $A5:8E1A | 2535 | $A5:8D8E | 2433 |
-| $A5 | JP | `sCompressedTilemap_A5970F` | $A5:9801 | 1142 | $A5:970F | 1273 |
-| $A5 | JP | `sCompressedTilemap_A59C08` | $A5:9C77 | 637 | $A5:9C08 | 515 |
-| $A5 | JP | `sCompressedTilemap_A5CD88` | $A5:CE71 | 1738 | $A5:CD88 | 1732 |
-| $A5 | JP | `sCompressedTilemap_A5D94A` | $A5:DA39 | 1320 | $A5:D94A | 1338 |
-| $A5 | JP | `sCompressedTilemap_A5DE84` | $A5:DF61 | 770 | $A5:DE84 | 975 |
-| $A6 | DE | `sCompressedTilemap_A694EE` | $A6:94EE | 1319 | $A6:94EE | 1192 |
-| $A6 | JP | `sCompressedTilemap_A690A6` | $A6:90A6 | 1511 | $A6:90A6 | 1096 |
-| $A6 | JP | `sCompressedTilemap_A694EE` | $A6:968D | 2544 | $A6:94EE | 1192 |
+| $9A | DE | `Tiles_Menu_1` | $9A:C489 | 1645 | $9A:C489 | 1720 |
+| $9A | JP | `Tiles_Menu_0` | $9A:BF97 | 2247 | $9A:BF97 | 1266 |
+| $9A | JP | `Tiles_Menu_1` | $9A:C85E | 1788 | $9A:C489 | 1720 |
+| $9A | JP | `Tiles_Menu_2` | $9A:CF5A | 2392 | $9A:CB41 | 2070 |
+| $9A | JP | `Tiles_Menu_3` | $9A:D8B2 | 3312 | $9A:D357 | 3286 |
+| $9B | DE | `Tiles_ToolShed_1` | $9B:8000 | 1086 | $9B:8000 | 1089 |
+| $9B | JP | `Tiles_ToolShed_1` | $9B:8000 | 1870 | $9B:8000 | 1089 |
+| $9E | JP | `Tiles_Credits_0` | $9E:EB3D | 1921 | $9E:EB3D | 1172 |
+| $9F | EU | `Tiles_IntroFarmScroll_0` | $9F:8000 | 5385 | $9F:8000 | 5228 |
+| $9F | EU | `Tiles_IntroFarmScroll_1` | $9F:9509 | 5691 | $9F:946C | 5641 |
+| $9F | EU | `Tiles_IntroFarmScroll_2` | $9F:AB44 | 5622 | $9F:AA75 | 5591 |
+| $9F | EU | `Tiles_IntroFarmScroll_3` | $9F:C13A | 5196 | $9F:C04C | 5262 |
+| $9F | DE | `Tiles_IntroFarmScroll_0` | $9F:8000 | 5385 | $9F:8000 | 5228 |
+| $9F | DE | `Tiles_IntroFarmScroll_1` | $9F:9509 | 5467 | $9F:946C | 5641 |
+| $9F | DE | `Tiles_IntroFarmScroll_2` | $9F:AA64 | 5622 | $9F:AA75 | 5591 |
+| $9F | DE | `Tiles_IntroFarmScroll_3` | $9F:C05A | 5196 | $9F:C04C | 5262 |
+| $9F | JP | `Tiles_IntroFarmScroll_0` | $9F:8000 | 5440 | $9F:8000 | 5228 |
+| $9F | JP | `Tiles_IntroFarmScroll_1` | $9F:9540 | 5749 | $9F:946C | 5641 |
+| $9F | JP | `Tiles_IntroFarmScroll_2` | $9F:ABB5 | 6045 | $9F:AA75 | 5591 |
+| $9F | JP | `Tiles_IntroFarmScroll_3` | $9F:C352 | 5686 | $9F:C04C | 5262 |
+| $9F | JP | `Tiles_NatsumeLogo` | $9F:F445 | 2427 | $9F:EF97 | 2131 |
+| $A5 | EU | `Screen_Menu_Backgrounds` | $A5:8000 | 796 | $A5:8000 | 807 |
+| $A5 | EU | `Screen_IntroFarmScroll_BG1` | $A5:CD7D | 1738 | $A5:CD88 | 1732 |
+| $A5 | EU | `Screen_Title_HarvestMoonLogo` | $A5:D945 | 1326 | $A5:D94A | 1338 |
+| $A5 | DE | `Screen_Menu_Backgrounds` | $A5:8000 | 832 | $A5:8000 | 807 |
+| $A5 | DE | `Screen_Menu_Characters` | $A5:8DA7 | 2480 | $A5:8D8E | 2433 |
+| $A5 | DE | `Screen_ToolShed_Layer2` | $A5:9C50 | 633 | $A5:9C08 | 515 |
+| $A5 | DE | `Screen_IntroFarmScroll_BG1` | $A5:CE46 | 1738 | $A5:CD88 | 1732 |
+| $A5 | DE | `Screen_Title_HarvestMoonLogo` | $A5:DA0E | 1323 | $A5:D94A | 1338 |
+| $A5 | JP | `Screen_Menu_Backgrounds` | $A5:8000 | 947 | $A5:8000 | 807 |
+| $A5 | JP | `Screen_Menu_Characters` | $A5:8E1A | 2535 | $A5:8D8E | 2433 |
+| $A5 | JP | `Screen_Menu_BackgroundPattern` | $A5:9801 | 1142 | $A5:970F | 1273 |
+| $A5 | JP | `Screen_ToolShed_Layer2` | $A5:9C77 | 637 | $A5:9C08 | 515 |
+| $A5 | JP | `Screen_IntroFarmScroll_BG1` | $A5:CE71 | 1738 | $A5:CD88 | 1732 |
+| $A5 | JP | `Screen_Title_HarvestMoonLogo` | $A5:DA39 | 1320 | $A5:D94A | 1338 |
+| $A5 | JP | `Screen_Title_NatsumeLogo` | $A5:DF61 | 770 | $A5:DE84 | 975 |
+| $A6 | DE | `Screen_Credits4_DriveToTown` | $A6:94EE | 1319 | $A6:94EE | 1192 |
+| $A6 | JP | `Screen_Credits_0to3` | $A6:90A6 | 1511 | $A6:90A6 | 1096 |
+| $A6 | JP | `Screen_Credits4_DriveToTown` | $A6:968D | 2544 | $A6:94EE | 1192 |
 
 Notes: EU differs from US only in a few font tables, the language specific graphics of $9F and three name tables of $A5. DE and JP
 additionally translate the title/menu graphics ($9A, $9B, $A5, $A6); JP replaces the Latin fonts by kana/kanji tables and has

@@ -100,7 +100,7 @@ counter, return if zero, then store into the ring. Instruction-level mapping:
 
 ## Examples (real blobs)
 
-`sCompressedTiles_928000` (`$928000`), start of stream:
+`Tiles_Overlay_Rain` (`$928000`), start of stream:
 
 ```
 00 20 00 00   header: n = $2000 (8192 bytes)
@@ -112,7 +112,7 @@ FF FF         src=$7FF len=34
 ...
 ```
 
-`sCompressedTiles_92BB03`:
+`Tiles_Farm_Fall_2`:
 
 ```
 00 20 00 00   n = $2000
@@ -149,14 +149,14 @@ decoder also accepts streams from other encoders.)
 * The bytes of a blob after the last token are not part of the stream. In the
   ROM they are bank-end padding (`$00`).
 * **Formerly hidden blobs** are now labeled and stored as separate assets:
-  `sCompressedTilemap_A5CB05` ($A5CB05, 4096 bytes, the dialog box graphics)
-  and `sCompressedTiles_9FD4DA` ($9FD4DA, 8192 bytes; no label-based code
+  `Screen_DialogBox` ($A5CB05, 4096 bytes, the dialog box graphics)
+  and `Tiles_Unused_TitleLogoJapanese` ($9FD4DA, 8192 bytes; no label-based code
   reference found, presumably reached through a computed or raw pointer). The last
-  2 bytes of `sCompressedTiles_99DCBD` (`00 00`, a final back-reference) used to
+  2 bytes of `Tiles_Town_Winter_0` (`00 00`, a final back-reference) used to
   sit under `Padding_990000`; they now belong to the blob and the padding label
   starts 2 bytes later.
-* The 4056 bytes that used to follow `sCompressedTilemap_A69996` inside its label span (starting `44 56 44 56` at +1792)
-  are a raw 64x32 BG name table, now the separate blob `sCharactermap_A6A096` ($A6A096, 4096 bytes including 40 zero
+* The 4056 bytes that used to follow `Screen_Unk53to56` inside its label span (starting `44 56 44 56` at +1792)
+  are a raw 64x32 BG name table, now the separate blob `ScreenRaw_Unk_A6A096` ($A6A096, 4096 bytes including 40 zero
   bytes that were hidden under `Padding_A60000`).
 
 ## Statistics
@@ -201,5 +201,5 @@ original labels used the opposite of the usual SNES terminology (tile graphics w
 The directory `assets/gfx/characters` (banks $A1-$A6) also holds non-compressed character graphics, so it keeps its name.
 `gfxpipe.py export` writes name tables as readable `.map.txt` files (32, 64 or 128 entries per row, see `docs/formats/graphics-png.md`, "Name table width") and PNG
 sheets only for tile blobs. The bitplane depth of individual tile blobs was verified visually on
-samples only; the 4096-byte `sCompressedTiles_928000` (rain overlay, 83% zero 16-byte blocks) is
+samples only; the 4096-byte `Tiles_Overlay_Rain` (rain overlay, 83% zero 16-byte blocks) is
 likely 2bpp.

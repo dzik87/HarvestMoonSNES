@@ -1,0 +1,17 @@
+{
+  "label": "Screen_Title_HarvestMoonLogo",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/eu/Screen_Title_HarvestMoonLogo.bin",
+  "compression": "lzss",
+  "raw_size": 8192,
+  "legacy_label": "sCompressedTilemap_A5D94A",
+  "format": "bg_name_table",
+  "entries": 4096,
+  "columns": 64,
+  "vram_word_dest": [
+    "$6000"
+  ],
+  "map_entries": 1,
+  "first_map": "sHarvestMoonLogo",
+  "tile_sets": []
+}

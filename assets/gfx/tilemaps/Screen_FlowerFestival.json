@@ -1,0 +1,21 @@
+{
+  "label": "Screen_FlowerFestival",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/Screen_FlowerFestival.bin",
+  "compression": "lzss",
+  "raw_size": 8192,
+  "legacy_label": "sCompressedTilemap_A4D379",
+  "format": "bg_name_table",
+  "entries": 4096,
+  "columns": 64,
+  "vram_word_dest": [
+    "$6000"
+  ],
+  "map_entries": 1,
+  "first_map": "sFlowerFestivalMap",
+  "tile_sets": [
+    "Tiles_Town_SpringToFall_0@$2000",
+    "Tiles_Town_Spring_1@$3000",
+    "Tiles_FlowerFestival_2@$4000"
+  ]
+}

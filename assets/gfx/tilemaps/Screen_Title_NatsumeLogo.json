@@ -1,0 +1,19 @@
+{
+  "label": "Screen_Title_NatsumeLogo",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/Screen_Title_NatsumeLogo.bin",
+  "compression": "lzss",
+  "raw_size": 8192,
+  "legacy_label": "sCompressedTilemap_A5DE84",
+  "format": "bg_name_table",
+  "entries": 4096,
+  "columns": 64,
+  "vram_word_dest": [
+    "$6000"
+  ],
+  "map_entries": 1,
+  "first_map": "sNatsumeLogo",
+  "tile_sets": [
+    "Tiles_NatsumeLogo@$2000"
+  ]
+}

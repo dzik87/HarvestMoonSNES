@@ -1,0 +1,93 @@
+{
+  "label": "Tiles_Summit_SpringToFall_0",
+  "kind": "tiles",
+  "bin": "assets/gfx/tiles/Tiles_Summit_SpringToFall_0.bin",
+  "compression": "lzss",
+  "raw_size": 8192,
+  "legacy_label": "sCompressedTiles_9BB76D",
+  "format": "snes_planar_tiles",
+  "bpp": 4,
+  "bpp_confidence": "high",
+  "bpp_note": "4bpp: planes 0-1 and 2-3 are strongly correlated and the sheet reads as coherent graphics",
+  "tiles_per_row": 16,
+  "vram_word_dest": [
+    "$2000"
+  ],
+  "map_entries": 8,
+  "palette": {
+    "id": "sPalette_0x53",
+    "sub": 4
+  },
+  "palette_confidence": "high",
+  "palette_note": "sub-palette 4 covers 6136 of 7054 name-table cells; per-tile sub-palettes 1/2/3/4 (tile_subs)",
+  "palette_subs_used": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "palette_alternatives": [
+    {
+      "id": "sPalette_0x4E",
+      "sub": 4,
+      "area_name": "MOUNTAINTOPSUMMER"
+    },
+    {
+      "id": "sPalette_0x4A",
+      "sub": 4,
+      "area_name": "MOUNTAINTOPFALL"
+    },
+    {
+      "id": "sPalette_0x52",
+      "sub": 4,
+      "area_name": "MOUNTAINTOPSUNRISE"
+    }
+  ],
+  "tile_rows_multi": {
+    "0": [
+      1,
+      3
+    ],
+    "46": [
+      2,
+      1,
+      3
+    ],
+    "47": [
+      2,
+      1
+    ],
+    "62": [
+      2,
+      1
+    ],
+    "63": [
+      2,
+      1,
+      3
+    ],
+    "74": [
+      2,
+      1,
+      3
+    ],
+    "76": [
+      2,
+      1
+    ],
+    "90": [
+      2,
+      1,
+      3
+    ],
+    "105": [
+      2,
+      1
+    ],
+    "139": [
+      1,
+      2
+    ]
+  },
+  "tiles_row_guessed": 14
+}

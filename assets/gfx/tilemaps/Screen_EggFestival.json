@@ -1,0 +1,21 @@
+{
+  "label": "Screen_EggFestival",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/Screen_EggFestival.bin",
+  "compression": "lzss",
+  "raw_size": 32768,
+  "legacy_label": "sCompressedTilemap_A4DC7E",
+  "format": "bg_name_table",
+  "entries": 16384,
+  "columns": 128,
+  "vram_word_dest": [
+    "$6000"
+  ],
+  "map_entries": 1,
+  "first_map": "sEggFestivalMap",
+  "tile_sets": [
+    "Tiles_Town_SpringToFall_0@$2000",
+    "Tiles_Town_Fall_1@$3000",
+    "Tiles_EggFestival_2@$4000"
+  ]
+}

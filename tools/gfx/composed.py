@@ -30,14 +30,14 @@ UNC = 255                                   # claim array: no image determines t
 LOW = bytes(v & 15 for v in range(256))
 BAD = [bytes(1 if (v & 15) and (v >> 4) != p else 0 for v in range(256)) for p in range(8)]    # colour set but wrong palette row
 ADD = [bytes(v | (p << 4) for v in range(256)) for p in range(8)]
-TILE_PREFIX = ("sCompressedTiles_", "Sprites_")
+TILE_PREFIX = ("Tiles_", "Sprites_")
 MAX_ERRORS = 40
 SPRITE_BANKS = 10
 FIRST_BANK = 0x88
 
 
 def kind_of(label):
-    return "tiles" if label.startswith("sCompressedTiles_") else "sprites"
+    return "tiles" if label.startswith("Tiles_") else "sprites"
 
 
 def png_root(root, region):
@@ -200,7 +200,7 @@ class Ctx:
         info = P.map_table(self.root)
         out = []
         for table in sorted(info):
-            if not table.startswith(("sCompressedTilemap_", "sCharactermap_")):
+            if not table.startswith(("Screen_", "ScreenRaw_")):
                 continue
             combos = {}
             for dest, mlabel, pairs in info[table]:
@@ -351,7 +351,7 @@ WIDTH_FAIL = 0.15                # `check`: declared width worse than the best c
 WIDTH_BAD = 1.3                  # seam ratio above this: the table still looks wrong whatever the width
 
 
-KNOWN_COLUMNS = {"sCharactermap_A6A096": 64}      # not shown with any tile set: layout known from its content (a raw 64x32 BG name table)
+KNOWN_COLUMNS = {"ScreenRaw_Unk_A6A096": 64}      # not shown with any tile set: layout known from its content (a raw 64x32 BG name table)
 
 
 def default_columns(entries):
@@ -700,7 +700,7 @@ def tile_rows(ctx):
     for scr in ctx.screens:
         for w in scr.words:
             t = scr.targets[w & 0x3FF]
-            if t is not None and t[0].startswith("sCompressedTiles_"):
+            if t is not None and t[0].startswith("Tiles_"):
                 cnt.setdefault(t[0], {}).setdefault(t[1], Counter())[(w >> 10) & 7] += 1
     return {lab: {n: [r for r, _ in sorted(c.items(), key=lambda x: (-x[1], x[0]))] for n, c in d.items()} for lab, d in cnt.items()}
 

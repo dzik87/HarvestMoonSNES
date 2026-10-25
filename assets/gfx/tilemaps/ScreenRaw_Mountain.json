@@ -1,0 +1,21 @@
+{
+  "label": "ScreenRaw_Mountain",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/ScreenRaw_Mountain.bin",
+  "compression": "none",
+  "raw_size": 24512,
+  "legacy_label": "sCharactermap_A28000",
+  "format": "bg_name_table",
+  "entries": 12256,
+  "columns": 128,
+  "vram_word_dest": [
+    "$6000"
+  ],
+  "map_entries": 4,
+  "first_map": "sMountainSpring",
+  "tile_sets": [
+    "Tiles_Mountain_Spring_0@$2000",
+    "Tiles_Mountain_Spring_1@$3000",
+    "Tiles_Mountain_SpringSummer_2@$4000"
+  ]
+}

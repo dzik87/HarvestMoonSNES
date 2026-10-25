@@ -137,7 +137,7 @@ def edit_png(path, fn):
 
 def check_exported_palettes(tmp):
     """export in a scratch tree: remainder sheet PLTE = colours of the mapped sub-palette, sidecar keys, sprite colour 0 transparent."""
-    label = "sCompressedTiles_92D3AB"
+    label = "Tiles_Farm_SpringSummer_0"
     b = P.Blob("tiles", label, tmp)
     meta = P.read_meta(b)
     ent = P.palette_map()["blobs"][label]
@@ -198,7 +198,7 @@ def test_import_flow():
                         spot.append((x, y, v & 15, px[x, y] & 15))
         edit_png(fr, paint)
         # 2. a block of the spring farm screen
-        scr = tmp / "assets/gfx/png/screens/sCharactermap_A18000__sFarmSpringMap.png"
+        scr = tmp / "assets/gfx/png/screens/ScreenRaw_Farm__sFarmSpringMap.png"
 
         def paint2(px, w, h):
             for y in range(64, 80):
@@ -228,7 +228,7 @@ def test_import_flow():
 
         # 3. growth: noise on a name table screen
         rnd = random.Random(5)
-        scr2 = tmp / "assets/gfx/png/screens/sCharactermap_A18000__sFarmSpringMap.png"
+        scr2 = tmp / "assets/gfx/png/screens/ScreenRaw_Farm__sFarmSpringMap.png"
 
         def noise(px, w, h):                                    # flip-symmetric function of the tile pixel: consistent for every cell
             for y in range(0, 160):
@@ -327,7 +327,7 @@ def test_conflicts_and_errors():
 def test_screen_transform_with_flips():
     """a cell shown with flips / another palette is written back un-flipped (synthetic name table)."""
     import composed as CO
-    lab = "sCompressedTiles_TEST"
+    lab = "Tiles_TEST"
     sheet = bytearray(CO.W * 16)
     for y in range(8):
         for x in range(8):
@@ -405,9 +405,9 @@ def test_palette_tables():
     areas, maps = PM.parse_maps()
     check(len(areas) == 0x60 and areas[0] == "sFarmSpringMap" and areas[0x57] == "sRainOverlay", "aTileMapData order")
     m = maps["sFarmSpringMap"]
-    check(m["preset"] == 0 and [d for d, _ in m["tiles"]] == [0x2000, 0x3000, 0x4000] and m["nametables"] == [(0x6000, "sCharactermap_A18000")],
+    check(m["preset"] == 0 and [d for d, _ in m["tiles"]] == [0x2000, 0x3000, 0x4000] and m["nametables"] == [(0x6000, "ScreenRaw_Farm")],
           "decoded FarmSpring map entry")
-    check(maps["sRainOverlay"]["tiles"] == [(0x5000, "sCompressedTiles_928000")], "overlay maps have no preset header")
+    check(maps["sRainOverlay"]["tiles"] == [(0x5000, "Tiles_Overlay_Rain")], "overlay maps have no preset header")
     pre = PM.parse_presets()
     lay, mode = PM.bg_layout(pre, 0)
     check(mode == 1 and lay[1]["map_addr"] == 0x6000 and lay[2]["map_addr"] == 0x7000 and lay[1]["char_base"] == 0x2000
@@ -446,7 +446,7 @@ def test_name_table_width_check():
     """a wrong row length is caught by `check` (continuity metric) and the suggested widths match the committed sidecars."""
     import composed
     tmp = shared_tree()
-    meta_path = tmp / "assets/gfx/tilemaps/sCompressedTilemap_A48A2D.json"
+    meta_path = tmp / "assets/gfx/tilemaps/Screen_MountainCave.json"
     good = meta_path.read_text()
     check('"columns": 64' in good, "A48A2D is a 64 column table")
     try:
@@ -454,7 +454,7 @@ def test_name_table_width_check():
         composed.reset()
         ctx = composed.get_ctx(tmp, "us", None)
         sheets = composed.decode_sheets(ctx, composed.load_sheets(ctx))
-        cur, sug, sc, _ = composed.table_widths(ctx, sheets, {"sCompressedTilemap_A48A2D"})["sCompressedTilemap_A48A2D"]
+        cur, sug, sc, _ = composed.table_widths(ctx, sheets, {"Screen_MountainCave"})["Screen_MountainCave"]
         check(cur == 32 and sug == 64, f"wrong width not detected: {cur} {sug}")
         check(sc[32] - sc[64] > composed.WIDTH_FAIL, f"seam ratios too close: {sc}")
         check(composed.default_columns(4096) == 64 and composed.default_columns(16384) == 128, "size defaults")
@@ -550,7 +550,7 @@ def test_palette_is_ignored_by_import():
 
 def test_sheet_command_matches_bins():
     """pngsync sheet renders the sheet built from the composed sources: pixels equal the sheet decoded from the .bin."""
-    for label, kind in (("sCompressedTiles_92D3AB", "tiles"), ("Sprites_898000", "sprites")):
+    for label, kind in (("Tiles_Farm_SpringSummer_0", "tiles"), ("Sprites_898000", "sprites")):
         b = P.Blob(kind, label)
         img = P.render_built_sheet(b)
         raw, _ = P.read_raw(b)

@@ -1,0 +1,21 @@
+{
+  "label": "Screen_HarvestFestival",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/Screen_HarvestFestival.bin",
+  "compression": "lzss",
+  "raw_size": 8192,
+  "legacy_label": "sCompressedTilemap_A4C5DE",
+  "format": "bg_name_table",
+  "entries": 4096,
+  "columns": 64,
+  "vram_word_dest": [
+    "$6000"
+  ],
+  "map_entries": 1,
+  "first_map": "sHarvestFestivalMap",
+  "tile_sets": [
+    "Tiles_Town_SpringToFall_0@$2000",
+    "Tiles_Town_Fall_1@$3000",
+    "Tiles_HarvestFestival_2@$4000"
+  ]
+}

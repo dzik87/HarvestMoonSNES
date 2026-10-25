@@ -39,7 +39,7 @@ class Entry:
 
     @property
     def compressed(self):
-        return self.label.startswith(("sCompressedTiles_", "sCompressedTilemap_"))
+        return self.label.startswith(("Tiles_", "Screen_"))
 
     def __repr__(self):
         return f"Entry({self.label}, {self.kind}, {self.size})"
@@ -59,11 +59,11 @@ def kind_of(label):
         return "padding"
     if label.startswith("sFontGlyphs_"):
         return "font"
-    if label.startswith("sCompressedTiles_"):
+    if label.startswith("Tiles_"):
         return "tiles"
-    if label.startswith("sCompressedTilemap_"):
+    if label.startswith("Screen_"):
         return "tilemap"
-    if label.startswith("sCharactermap_"):
+    if label.startswith("ScreenRaw_"):
         return "charmap"
     if label.startswith("Sprites_"):
         return "sprites"

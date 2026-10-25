@@ -9,7 +9,7 @@ Pure Python 3, no dependencies.
 
 CLI:
     python tools/gfx/tilemap_codec.py decompress <asmfile> [--outdir DIR]
-        [--prefix sCompressed]
+        [--prefix PREFIX]
 """
 import os
 import re
@@ -318,8 +318,8 @@ def main(argv):
     d = sub.add_parser('decompress', help='decompress every blob of an .asm file')
     d.add_argument('asmfile')
     d.add_argument('--outdir', default='.')
-    d.add_argument('--prefix', default='sCompressed',
-                   help='only labels with this prefix (default sCompressed)')
+    d.add_argument('--prefix', default='',
+                   help='only labels with this prefix (default: all)')
     args = ap.parse_args(argv)
     spans = parse_asm_blobs(args.asmfile)
     blobs = parse_asm_blobs(args.asmfile, tail=64)

@@ -11,7 +11,7 @@ import tilemap_codec as tc  # noqa: E402
 # Data files that contain sCompressed* labels.
 
 # Label span continues with non-compressed data after the blob (not a blob).
-TRAILING_DATA = {'sCompressedTilemap_A69996'}
+TRAILING_DATA = {'Screen_Unk53to56'}
 HIDDEN = {}
 SPILL = {}
 
@@ -30,7 +30,7 @@ def load_blobs():
             names = [x.lstrip('*') for x in b['blobs']]
             datas = [open(os.path.join(ROOT, 'assets', 'gfx', kind, n + '.bin'), 'rb').read() for n in names]
             for i, (n, d) in enumerate(zip(names, datas)):
-                if n.startswith('sCompressed'):
+                if n.startswith(('Tiles_', 'Screen_')):
                     nxt = b''.join(datas[i + 1:])[:64]
                     blobs.append((n, d, d + nxt))
     return blobs
@@ -125,8 +125,8 @@ def test_game_blobs():
 
 def test_parse():
     blobs = {l: d for l, d, _ in load_blobs()}
-    check('sCompressedTiles_928000' in blobs, 'label missing')
-    check(blobs['sCompressedTiles_928000'][:8] ==
+    check('Tiles_Overlay_Rain' in blobs, 'label missing')
+    check(blobs['Tiles_Overlay_Rain'][:8] ==
           bytes([0, 0x20, 0, 0, 0, 0xBC, 0xFF, 0xFF]), 'first bytes')
 
 

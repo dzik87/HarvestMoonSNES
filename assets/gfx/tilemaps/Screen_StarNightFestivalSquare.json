@@ -1,0 +1,21 @@
+{
+  "label": "Screen_StarNightFestivalSquare",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/Screen_StarNightFestivalSquare.bin",
+  "compression": "lzss",
+  "raw_size": 8192,
+  "legacy_label": "sCompressedTilemap_A58327",
+  "format": "bg_name_table",
+  "entries": 4096,
+  "columns": 64,
+  "vram_word_dest": [
+    "$6000"
+  ],
+  "map_entries": 1,
+  "first_map": "sStarNightFestivalSquareMap",
+  "tile_sets": [
+    "Tiles_Town_Winter_0@$2000",
+    "Tiles_Town_Winter_1@$3000",
+    "Tiles_StarNightFestivalSquare_2@$4000"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "label": "Screen_StarNightFestivalSpa",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/Screen_StarNightFestivalSpa.bin",
+  "compression": "lzss",
+  "raw_size": 2048,
+  "legacy_label": "sCompressedTilemap_A59E0B",
+  "format": "bg_name_table",
+  "entries": 1024,
+  "columns": 32,
+  "vram_word_dest": [
+    "$6000"
+  ],
+  "map_entries": 1,
+  "first_map": "sStarNightFestivalSpaMap",
+  "tile_sets": [
+    "Tiles_Mountain_Winter_0@$2000",
+    "Tiles_Mountain_Winter_1@$3000",
+    "Tiles_Mountain_Winter_2@$4000"
+  ]
+}

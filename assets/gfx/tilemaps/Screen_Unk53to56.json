@@ -1,0 +1,21 @@
+{
+  "label": "Screen_Unk53to56",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/Screen_Unk53to56.bin",
+  "compression": "lzss",
+  "raw_size": 8192,
+  "legacy_label": "sCompressedTilemap_A69996",
+  "format": "bg_name_table",
+  "entries": 4096,
+  "columns": 64,
+  "vram_word_dest": [
+    "$6000"
+  ],
+  "map_entries": 4,
+  "first_map": "sMap_80B5AF",
+  "tile_sets": [
+    "Tiles_Credits_0@$2000",
+    "Tiles_Credits_1@$3000",
+    "Tiles_Credits_2@$4000"
+  ]
+}

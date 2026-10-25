@@ -1,0 +1,21 @@
+{
+  "label": "ScreenRaw_Farm",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/ScreenRaw_Farm.bin",
+  "compression": "none",
+  "raw_size": 32768,
+  "legacy_label": "sCharactermap_A18000",
+  "format": "bg_name_table",
+  "entries": 16384,
+  "columns": 128,
+  "vram_word_dest": [
+    "$6000"
+  ],
+  "map_entries": 4,
+  "first_map": "sFarmSpringMap",
+  "tile_sets": [
+    "Tiles_Farm_SpringSummer_0@$2000",
+    "Tiles_Farm_SpringSummer_1@$3000",
+    "Tiles_Farm_SpringSummer_2@$4000"
+  ]
+}

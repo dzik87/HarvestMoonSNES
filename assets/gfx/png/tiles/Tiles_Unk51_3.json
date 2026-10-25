@@ -1,0 +1,24 @@
+{
+  "label": "Tiles_Unk51_3",
+  "kind": "tiles",
+  "bin": "assets/gfx/tiles/Tiles_Unk51_3.bin",
+  "compression": "lzss",
+  "raw_size": 8192,
+  "legacy_label": "sCompressedTiles_A0AB1E",
+  "format": "snes_planar_tiles",
+  "bpp": 4,
+  "bpp_confidence": "high",
+  "bpp_note": "4bpp: planes 0-1 and 2-3 are strongly correlated and the sheet reads as coherent graphics",
+  "tiles_per_row": 16,
+  "vram_word_dest": [
+    "$5000"
+  ],
+  "map_entries": 1,
+  "palette": {
+    "id": "sPalette_0x6E",
+    "sub": 0
+  },
+  "palette_confidence": "low",
+  "palette_note": "no static BG name table references this sheet (its name table is written at run time); sub-palette 0 assumed",
+  "tiles_row_guessed": 256
+}

@@ -1,0 +1,115 @@
+{
+  "label": "Tiles_Farm_SpringSummer_1",
+  "kind": "tiles",
+  "bin": "assets/gfx/tiles/Tiles_Farm_SpringSummer_1.bin",
+  "compression": "lzss",
+  "raw_size": 8192,
+  "legacy_label": "sCompressedTiles_938000",
+  "format": "snes_planar_tiles",
+  "bpp": 4,
+  "bpp_confidence": "high",
+  "bpp_note": "4bpp: planes 0-1 and 2-3 are strongly correlated and the sheet reads as coherent graphics",
+  "tiles_per_row": 16,
+  "vram_word_dest": [
+    "$3000"
+  ],
+  "map_entries": 14,
+  "palette": {
+    "id": "sPalette_0x0B",
+    "sub": 1
+  },
+  "palette_confidence": "high",
+  "palette_note": "sub-palette 1 covers 9214 of 11111 name-table cells; per-tile sub-palettes 1/2/4/5 (tile_subs)",
+  "palette_subs_used": [
+    1,
+    2,
+    4,
+    5
+  ],
+  "palette_alternatives": [
+    {
+      "id": "sPalette_0x06",
+      "sub": 1,
+      "area_name": "FARMSUMMER"
+    }
+  ],
+  "tile_rows_multi": {
+    "12": [
+      1,
+      3
+    ],
+    "13": [
+      1,
+      2,
+      3
+    ],
+    "14": [
+      1,
+      3,
+      2
+    ],
+    "15": [
+      1,
+      2,
+      3
+    ],
+    "28": [
+      3,
+      1,
+      2
+    ],
+    "29": [
+      3,
+      1,
+      2
+    ],
+    "30": [
+      3,
+      1,
+      2
+    ],
+    "44": [
+      3,
+      1
+    ],
+    "45": [
+      3,
+      1,
+      2
+    ],
+    "46": [
+      3,
+      1,
+      2
+    ],
+    "60": [
+      1,
+      3
+    ],
+    "61": [
+      3,
+      1
+    ],
+    "62": [
+      1,
+      3
+    ],
+    "63": [
+      1,
+      3
+    ],
+    "166": [
+      2,
+      1
+    ],
+    "180": [
+      2,
+      1
+    ],
+    "182": [
+      2,
+      1
+    ]
+  },
+  "tiles_row_guessed": 69
+}

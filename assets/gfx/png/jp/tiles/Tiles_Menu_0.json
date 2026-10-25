@@ -1,0 +1,162 @@
+{
+  "label": "Tiles_Menu_0",
+  "kind": "tiles",
+  "bin": "assets/gfx/tiles/jp/Tiles_Menu_0.bin",
+  "compression": "lzss",
+  "raw_size": 8192,
+  "legacy_label": "sCompressedTiles_9ABF97",
+  "format": "snes_planar_tiles",
+  "bpp": 4,
+  "bpp_confidence": "high",
+  "bpp_note": "Latin font sheet; planes 2-3 empty (indices < 4); reads correctly as 4bpp, 2bpp reading is garbled (checked by eye)",
+  "tiles_per_row": 16,
+  "vram_word_dest": [
+    "$2000"
+  ],
+  "map_entries": 2,
+  "palette": {
+    "id": "sPalette_0x46",
+    "sub": 0
+  },
+  "palette_confidence": "high",
+  "palette_note": "sub-palette 0 covers 292 of 396 name-table cells; per-tile sub-palettes 0/1 (tile_subs)",
+  "palette_subs_used": [
+    0,
+    1
+  ],
+  "tile_rows_multi": {
+    "0": [
+      0,
+      1
+    ],
+    "2": [
+      1,
+      0
+    ],
+    "3": [
+      1,
+      0
+    ],
+    "14": [
+      0,
+      1
+    ],
+    "15": [
+      0,
+      1
+    ],
+    "18": [
+      1,
+      0
+    ],
+    "19": [
+      1,
+      0
+    ],
+    "30": [
+      0,
+      1
+    ],
+    "31": [
+      0,
+      1
+    ],
+    "36": [
+      0,
+      1
+    ],
+    "37": [
+      0,
+      1
+    ],
+    "38": [
+      0,
+      1
+    ],
+    "39": [
+      0,
+      1
+    ],
+    "40": [
+      0,
+      1
+    ],
+    "41": [
+      0,
+      1
+    ],
+    "52": [
+      0,
+      1
+    ],
+    "53": [
+      0,
+      1
+    ],
+    "54": [
+      0,
+      1
+    ],
+    "55": [
+      0,
+      1
+    ],
+    "56": [
+      0,
+      1
+    ],
+    "57": [
+      0,
+      1
+    ],
+    "108": [
+      0,
+      1
+    ],
+    "109": [
+      0,
+      1
+    ],
+    "124": [
+      0,
+      1
+    ],
+    "125": [
+      0,
+      1
+    ],
+    "168": [
+      0,
+      1
+    ],
+    "169": [
+      0,
+      1
+    ],
+    "170": [
+      0,
+      1
+    ],
+    "171": [
+      0,
+      1
+    ],
+    "184": [
+      0,
+      1
+    ],
+    "185": [
+      0,
+      1
+    ],
+    "186": [
+      0,
+      1
+    ],
+    "187": [
+      0,
+      1
+    ]
+  },
+  "tiles_row_guessed": 3
+}

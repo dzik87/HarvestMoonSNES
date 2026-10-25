@@ -15,7 +15,7 @@ then rebuild; CI/`tools/build.py` confirms the new hash. Only blobs that decompr
 re-imported unchanged in size; the header size field is recomputed by the encoder.
 Blob kinds (found by inspecting the decompressed data, see docs/formats/tilemap-compression.md):
   sCompressedTiles_*        (assets/gfx/tiles)       tile graphics, rendered correctly as 4bpp (default of --bpp); the one
-                                                     4096-byte exception (sCompressedTiles_928000, rain overlay) is likely 2bpp
+                                                     4096-byte exception (Tiles_Overlay_Rain, rain overlay) is likely 2bpp
   sCompressedTilemap_*      (assets/gfx/characters)  16-bit BG name-table entries (tile 0-9, palette 10-12, priority 13,
                                                      H/V flip 14/15), NOT tile graphics: `export` writes them as .raw plus a
                                                      readable .map.txt (32 entries per row); PNG sheets are produced for tile blobs only
@@ -37,7 +37,7 @@ PAD = bytes(64)  # a blob's last bytes may sit under the following zero `Padding
 
 def blobs():
     for d in DIRS:
-        for p in sorted(d.glob("sCompressed*.bin")):
+        for p in sorted(d.glob("Tiles_*.bin")) + sorted(d.glob("Screen_*.bin")):
             yield p
 
 
@@ -53,7 +53,7 @@ def cmd_export(a):
     for p in blobs():
         raw, used = C.decompress(p.read_bytes() + PAD)
         (out / f"{p.stem}.raw").write_bytes(raw)
-        if p.stem.startswith("sCompressedTilemap_"):
+        if p.stem.startswith("Screen_"):
             (out / f"{p.stem}.map.txt").write_text(name_table_text(raw))
         elif a.png:
             T.to_image(raw, a.bpp, 16).save(out / f"{p.stem}.png")

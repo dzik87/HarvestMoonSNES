@@ -1,7 +1,7 @@
 # Font format (dialog glyph tables)
 
 Tool: `tools/fonts/font.py`. Editable source: `assets/fonts/<region>/glyph_<ID>.png` + `glyphs.json`
-(regions `us`, `eu`, `de`, `jp`). Binary output: `sFontGlyphs_0x00..0x09.bin` and `sFontGlyphs_UNK.bin`
+(regions `us`, `eu`, `de`, `jp`). Binary output: `sFontGlyphs_0x00..0x09.bin` and `sFontGlyphs_Dialog.bin`
 (US: `assets/gfx/tiles/`).
 
 ## Storage
@@ -10,7 +10,7 @@ Tool: `tools/fonts/font.py`. Editable source: `assets/fonts/<region>/glyph_<ID>.
 |---|---|---|---|
 | 0-5 | `sFontGlyphs_0x00`..`0x05` | `$949843` + `$1000` * n (bank $94) | `$000`-`$17F` |
 | 6-9 | `sFontGlyphs_0x06`..`0x09` | `$958000`, `$959000`, `$95A000`, `$95B000` | `$180`-`$27F` |
-| 10 | `sFontGlyphs_UNK` | `$9CBBA3` | `$280`-`$2BF` (not referenced by any code) |
+| 10 | `sFontGlyphs_Dialog` | `$9CBBA3` | `$280`-`$2BF` (dialog font tiles: DMA'd to VRAM $5000 by fDialog_LoadDialogBoxGraphics and fDialog_ReloadFontTiles) |
 
 Each table is exactly 4096 bytes = 64 glyphs; no padding or unused bytes. The addresses are the same in all four
 regions (the 10-entry pointer table `aLetterGlyphsPointers` is byte-identical in US, EU, DE and JP; the tool refuses

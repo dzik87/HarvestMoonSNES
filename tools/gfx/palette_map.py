@@ -52,7 +52,7 @@ INHERIT_TILES = {0x5C: 0x5B}
 
 # tile blobs of the US ROM that no map entry loads: label -> (area whose palette is assumed, reason)
 UNREFERENCED_HINTS = {
-    "sCompressedTiles_9FD4DA": (0x5C, "Japanese title logo (wooden board kanji) left in the US ROM; no map loads it. Title screen palette "
+    "Tiles_Unused_TitleLogoJapanese": (0x5C, "Japanese title logo (wooden board kanji) left in the US ROM; no map loads it. Title screen palette "
                                       "and the sub-palette that the US logo tiles of area $5C use are assumed"),
 }
 
@@ -251,7 +251,7 @@ def blob_raw(label):
         p = ROOT / "assets" / "gfx" / d / f"{label}.bin"
         if p.exists():
             data = p.read_bytes()
-            if label.startswith(("sCompressedTiles_", "sCompressedTilemap_")):
+            if label.startswith(("Tiles_", "Screen_")):
                 data = C.decompress(data + PAD)[0]
             _RAW[label] = data
             return data
@@ -454,7 +454,7 @@ def build():
             pa_note = None
         if not subs:
             sub, share, conf = 0, 0.0, "low"
-            note = "no static BG name table references this sheet (its name table is written at run time); sub-palette 0 assumed"
+            note = "no static BG name table references this sheet (the map table loads it, but no static name table cell shows its tiles); sub-palette 0 assumed"
         else:
             sub = dominant(subs)
             share = subs[sub] / total
@@ -492,7 +492,7 @@ def build():
                       "used_by": used_by}
 
     # ---- tile blobs that no map loads ----------------------------------------------------------------------------
-    for p in sorted((ROOT / "assets/gfx/tiles").glob("sCompressedTiles_*.bin")):
+    for p in sorted((ROOT / "assets/gfx/tiles").glob("Tiles_*.bin")):
         lab = p.stem
         if lab in blobs:
             continue

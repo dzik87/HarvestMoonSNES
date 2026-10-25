@@ -33,21 +33,21 @@
  },
  "tiles": {
   "92": {"org": "$928000", "pad": 4534, "blobs": [
-    "sCompressedTiles_928000",
-    "sCompressedTiles_9282CB",
-    "sCompressedTiles_929D10",
-    "sCompressedTiles_92BB03",
-    "sCompressedTiles_92D3AB"
+    "Tiles_Overlay_Rain",
+    "Tiles_Farm_Fall_0",
+    "Tiles_Farm_Fall_1",
+    "Tiles_Farm_Fall_2",
+    "Tiles_Farm_SpringSummer_0"
   ]},
   "93": {"org": "$938000", "pad": 2236, "blobs": [
-    "sCompressedTiles_938000",
-    "sCompressedTiles_939E8E",
-    "sCompressedTiles_93B736",
-    "sCompressedTiles_93D049",
-    "sCompressedTiles_93E12B"
+    "Tiles_Farm_SpringSummer_1",
+    "Tiles_Farm_SpringSummer_2",
+    "Tiles_Farm_Winter_0",
+    "Tiles_Farm_Winter_1",
+    "Tiles_Farm_Winter_2"
   ]},
   "94": {"org": "$948000", "pad": "align", "blobs": [
-    "sCompressedTiles_948000",
+    "Tiles_MountainCave",
     "*sFontGlyphs_0x00",
     "*sFontGlyphs_0x01",
     "*sFontGlyphs_0x02",
@@ -60,173 +60,173 @@
     "sFontGlyphs_0x07",
     "sFontGlyphs_0x08",
     "*sFontGlyphs_0x09",
-    "sCompressedTiles_95C000",
-    "sCompressedTiles_95D6E2",
-    "sCompressedTiles_95E8A3"
+    "Tiles_House_0",
+    "Tiles_House_1",
+    "Tiles_MayorHouse"
   ]},
   "96": {"org": "$968000", "pad": 2724, "blobs": [
-    "sCompressedTiles_968000",
-    "sCompressedTiles_969437",
-    "sCompressedTiles_96AD11",
-    "sCompressedTiles_96C489",
-    "sCompressedTiles_96DC6D"
+    "Tiles_Church",
+    "Tiles_FlowerShop",
+    "Tiles_Bar",
+    "Tiles_Restaurant",
+    "Tiles_GeneralStore"
   ]},
   "97": {"org": "$978000", "pad": 974, "blobs": [
-    "sCompressedTiles_978000",
-    "sCompressedTiles_979A88",
-    "sCompressedTiles_97B11A",
-    "sCompressedTiles_97B45F",
-    "sCompressedTiles_97CD20",
-    "sCompressedTiles_97E7A2"
+    "Tiles_AnimalShop",
+    "Tiles_FortuneTellerHouse",
+    "Tiles_Overlay_Clouds",
+    "Tiles_Town_SpringToFall_0",
+    "Tiles_Town_Summer_1",
+    "Tiles_Town_Summer_2"
   ]},
   "98": {"org": "$988000", "pad": 1666, "blobs": [
-    "sCompressedTiles_988000",
-    "sCompressedTiles_989A52",
-    "sCompressedTiles_98AEDB",
-    "sCompressedTiles_98CC6B",
-    "sCompressedTiles_98E41D"
+    "Tiles_Town_Fall_1",
+    "Tiles_Town_Fall_2",
+    "Tiles_HarvestFestival_2",
+    "Tiles_Road_SpringToFall",
+    "Tiles_Road_Winter"
   ]},
   "99": {"org": "$998000", "pad": 3786, "blobs": [
-    "sCompressedTiles_998000",
-    "sCompressedTiles_999A74",
-    "sCompressedTiles_99AEC3",
-    "sCompressedTiles_99C3F2",
-    "sCompressedTiles_99DCBD"
+    "Tiles_Town_Spring_1",
+    "Tiles_Town_Spring_2",
+    "Tiles_FlowerFestival_2",
+    "Tiles_EggFestival_2",
+    "Tiles_Town_Winter_0"
   ]},
   "9A": {"org": "$9A8000", "pad": "align", "blobs": [
-    "sCompressedTiles_9A8000",
-    "sCompressedTiles_9A9921",
-    "sCompressedTiles_9AAEAB",
-    "*sCompressedTiles_9ABF97",
-    "*sCompressedTiles_9AC489",
-    "*sCompressedTiles_9ACB41",
-    "*sCompressedTiles_9AD357",
-    "sCompressedTiles_9AE02D"
+    "Tiles_Town_Winter_1",
+    "Tiles_Town_Winter_2",
+    "Tiles_StarNightFestivalSquare_2",
+    "*Tiles_Menu_0",
+    "*Tiles_Menu_1",
+    "*Tiles_Menu_2",
+    "*Tiles_Menu_3",
+    "Tiles_ToolShed_0"
   ]},
   "9B": {"org": "$9B8000", "pad": "align", "blobs": [
-    "*sCompressedTiles_9B8000",
-    "sCompressedTiles_9B8441",
-    "sCompressedTiles_9B86AD",
-    "sCompressedTiles_9B9F53",
-    "sCompressedTiles_9BB76D",
-    "sCompressedTiles_9BCF8F"
+    "*Tiles_ToolShed_1",
+    "Tiles_Overlay_HeavySnow",
+    "Tiles_GoldChicken",
+    "Tiles_WorksmanHouse",
+    "Tiles_Summit_SpringToFall_0",
+    "Tiles_Summit_Winter_0"
   ]},
   "9C": {"org": "$9C8000", "pad": 74, "blobs": [
-    "sCompressedTiles_9C8000",
-    "sCompressedTiles_9C965F",
-    "sCompressedTiles_9CA40C",
-    "sFontGlyphs_UNK",
-    "sCompressedTiles_9CCBA3",
-    "sCompressedTiles_9CE37D"
+    "Tiles_Summit_SpringToFall_1",
+    "Tiles_Summit_Winter_1",
+    "Tiles_BarnCoop",
+    "sFontGlyphs_Dialog",
+    "Tiles_Mountain_Summer_0",
+    "Tiles_Mountain_Summer_1"
   ]},
   "9D": {"org": "$9D8000", "pad": 88, "blobs": [
-    "sCompressedTiles_9D8000",
-    "sCompressedTiles_9D991C",
-    "sCompressedTiles_9DB15E",
-    "sCompressedTiles_9DCE31",
-    "sCompressedTiles_9DE7CE"
+    "Tiles_Mountain_SpringSummer_2",
+    "Tiles_Mountain_Fall_0",
+    "Tiles_Mountain_Fall_1",
+    "Tiles_Mountain_Fall_2",
+    "Tiles_Mountain_Spring_0"
   ]},
   "9E": {"org": "$9E8000", "pad": "align", "blobs": [
-    "sCompressedTiles_9E8000",
-    "sCompressedTiles_9E9C6D",
-    "sCompressedTiles_9E9EDC",
-    "sCompressedTiles_9EB75D",
-    "sCompressedTiles_9ED208",
-    "*sCompressedTiles_9EEB3D"
+    "Tiles_Mountain_Spring_1",
+    "Tiles_Overlay_Snow",
+    "Tiles_Mountain_Winter_0",
+    "Tiles_Mountain_Winter_1",
+    "Tiles_Mountain_Winter_2",
+    "*Tiles_Credits_0"
   ]},
   "9F": {"org": "$9F8000", "pad": "align", "blobs": [
-    "*sCompressedTiles_9F8000",
-    "*sCompressedTiles_9F946C",
-    "*sCompressedTiles_9FAA75",
-    "*sCompressedTiles_9FC04C",
-    "sCompressedTiles_9FD4DA",
-    "*sCompressedTiles_9FEF97"
+    "*Tiles_IntroFarmScroll_0",
+    "*Tiles_IntroFarmScroll_1",
+    "*Tiles_IntroFarmScroll_2",
+    "*Tiles_IntroFarmScroll_3",
+    "Tiles_Unused_TitleLogoJapanese",
+    "*Tiles_NatsumeLogo"
   ]},
   "A0": {"org": "$A08000", "pad": 822, "blobs": [
-    "sCompressedTiles_A08000",
-    "sCompressedTiles_A088E9",
-    "sCompressedTiles_A09232",
-    "sCompressedTiles_A0AB1E",
-    "sCompressedTiles_A0CAAF",
-    "sCompressedTiles_A0E682"
+    "Tiles_Credits_1",
+    "Tiles_Credits_2",
+    "Tiles_Credits_3",
+    "Tiles_Unk51_3",
+    "Tiles_Unk56_3",
+    "Tiles_DriveToTown_3"
   ]}
  },
  "characters": {
   "A1": {"org": "$A18000", "pad": null, "blobs": [
-    "sCharactermap_A18000"
+    "ScreenRaw_Farm"
   ]},
   "A2": {"org": "$A28000", "pad": 8256, "blobs": [
-    "sCharactermap_A28000"
+    "ScreenRaw_Mountain"
   ]},
   "A3": {"org": "$A38000", "pad": null, "blobs": [
-    "sCharactermap_A38000"
+    "ScreenRaw_Town"
   ]},
   "A4": {"org": "$A48000", "pad": 738, "blobs": [
-    "sCompressedTilemap_A48000",
-    "sCompressedTilemap_A481AE",
-    "sCompressedTilemap_A48A2D",
-    "sCompressedTilemap_A4945C",
-    "sCompressedTilemap_A49745",
-    "sCompressedTilemap_A49B84",
-    "sCompressedTilemap_A49E2E",
-    "sCompressedTilemap_A4A597",
-    "sCompressedTilemap_A4AA99",
-    "sCompressedTilemap_A4AE95",
-    "sCompressedTilemap_A4B3D1",
-    "sCompressedTilemap_A4B8E0",
-    "sCompressedTilemap_A4BCC1",
-    "sCompressedTilemap_A4C065",
-    "sCompressedTilemap_A4C3E2",
-    "sCompressedTilemap_A4C5DE",
-    "sCompressedTilemap_A4CFAB",
-    "sCompressedTilemap_A4D379",
-    "sCompressedTilemap_A4DC7E"
+    "Screen_Overlay_Rain",
+    "Screen_ElfTunnel",
+    "Screen_MountainCave",
+    "Screen_House_Upgrade1",
+    "Screen_House_Upgrade2",
+    "Screen_House",
+    "Screen_MayorHouse",
+    "Screen_Church",
+    "Screen_FlowerShop",
+    "Screen_Bar",
+    "Screen_Restaurant",
+    "Screen_GeneralStore",
+    "Screen_AnimalShop",
+    "Screen_FortuneTellerHouse",
+    "Screen_Overlay_Clouds",
+    "Screen_HarvestFestival",
+    "Screen_Road",
+    "Screen_FlowerFestival",
+    "Screen_EggFestival"
   ]},
   "A5": {"org": "$A58000", "pad": "align", "blobs": [
-    "*sCompressedTilemap_A58000",
-    "sCompressedTilemap_A58327",
-    "sCompressedTilemap_A58B49",
-    "*sCompressedTilemap_A58D8E",
-    "*sCompressedTilemap_A5970F",
-    "*sCompressedTilemap_A59C08",
-    "sCompressedTilemap_A59E0B",
-    "sCompressedTilemap_A5A3D5",
-    "sCompressedTilemap_A5A6A0",
-    "sCompressedTilemap_A5AD17",
-    "sCompressedTilemap_A5B042",
-    "sCompressedTilemap_A5B361",
-    "sCompressedTilemap_A5B63B",
-    "sCompressedTilemap_A5B943",
-    "sCompressedTilemap_A5BD8A",
-    "sCompressedTilemap_A5C258",
-    "sCompressedTilemap_A5C4CD",
-    "sCompressedTilemap_A5C955",
-    "sCompressedTilemap_A5CB05",
-    "*sCompressedTilemap_A5CD88",
-    "sCompressedTilemap_A5D44C",
-    "*sCompressedTilemap_A5D94A",
-    "*sCompressedTilemap_A5DE84",
-    "sCompressedTilemap_A5E253",
-    "sCompressedTilemap_A5E5CE",
-    "sCompressedTilemap_A5E977",
-    "sCompressedTilemap_A5ECFB",
-    "sCompressedTilemap_A5F059",
-    "sCompressedTilemap_A5F45A",
-    "sCompressedTilemap_A5F671",
-    "sCompressedTilemap_A5F95C",
-    "sCompressedTilemap_A5FBCE"
+    "*Screen_Menu_Backgrounds",
+    "Screen_StarNightFestivalSquare",
+    "Screen_ToolShed",
+    "*Screen_Menu_Characters",
+    "*Screen_Menu_BackgroundPattern",
+    "*Screen_ToolShed_Layer2",
+    "Screen_StarNightFestivalSpa",
+    "Screen_Overlay_HeavySnow",
+    "Screen_GoldChicken",
+    "Screen_Summit_Layer2",
+    "Screen_MountainTop2_Layer2",
+    "Screen_StarNightFestivalMountainTop_Layer2",
+    "Screen_WorksmanHouse",
+    "Screen_Summit",
+    "Screen_MountainTopBean",
+    "Screen_Coop",
+    "Screen_Barn",
+    "Screen_Overlay_Snow",
+    "Screen_DialogBox",
+    "*Screen_IntroFarmScroll_BG1",
+    "Screen_IntroFarmScroll_BG2",
+    "*Screen_Title_HarvestMoonLogo",
+    "*Screen_Title_NatsumeLogo",
+    "Screen_Ending00",
+    "Screen_Ending01",
+    "Screen_Ending02",
+    "Screen_Ending03",
+    "Screen_Ending12",
+    "Screen_Ending13",
+    "Screen_Ending04",
+    "Screen_Ending05",
+    "Screen_Ending06"
   ]},
   "A6": {"org": "$A68000", "pad": "align", "blobs": [
-    "sCompressedTilemap_A68000",
-    "sCompressedTilemap_A68229",
-    "sCompressedTilemap_A68433",
-    "sCompressedTilemap_A6867E",
-    "sCompressedTilemap_A68864",
-    "sCompressedTilemap_A68DCF",
-    "*sCompressedTilemap_A690A6",
-    "*sCompressedTilemap_A694EE",
-    "sCompressedTilemap_A69996",
-    "sCharactermap_A6A096"
+    "Screen_Ending07",
+    "Screen_Ending08",
+    "Screen_Ending09",
+    "Screen_Ending10",
+    "Screen_Ending11",
+    "Screen_Intro",
+    "*Screen_Credits_0to3",
+    "*Screen_Credits4_DriveToTown",
+    "Screen_Unk53to56",
+    "ScreenRaw_Unk_A6A096"
   ]}
  },
  "palettes": {

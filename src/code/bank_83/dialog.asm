@@ -3,20 +3,12 @@
 fDialog_LoadDialogBoxGraphics:
     REP #$30                                                   ;8392BB|C230    |      ;
     REP #$20                                                   ;8392BD|C220    |      ;
-    if !REGION_DE
-    LDA.W #$CBC3
-    elseif !REGION_EU
-    LDA.W #$CAFA
-    elseif !REGION_JP
-    LDA.W #$CBEE
-    else
-    LDA.W #$CB05                                               ;8392BF|A905CB  |      ;
-    endif
+    LDA.W #Screen_DialogBox                                    ;8392BF; region specific blob, label moves with the layout
     STA.B ptrTemp0x72                                          ;8392C2|8572    |000072;
     LDA.W #$2000                                               ;8392C4|A90020  |      ;
     STA.B ptrUnknown0x75                                       ;8392C7|8575    |000075;
     SEP #$20                                                   ;8392C9|E220    |      ;
-    LDA.B #$A5                                                 ;8392CB|A9A5    |      ;
+    LDA.B #Screen_DialogBox>>16                                ;8392CB|A9A5    |      ;
     STA.B ptrTemp0x72+2                                        ;8392CD|8574    |000074;
     LDA.B #$7E                                                 ;8392CF|A97E    |      ;
     STA.B ptrUnknown0x75+2                                     ;8392D1|8577    |000077;
@@ -47,10 +39,10 @@ fDialog_LoadDialogBoxGraphics:
     LDA.W #$5000                                               ;83930D|A90050  |      ;
     TAX                                                        ;839310|AA      |      ;
     LDY.W #$1000                                               ;839311|A00010  |      ;
-    LDA.W #$BBA3                                               ;839314|A9A3BB  |      ;
+    LDA.W #sFontGlyphs_Dialog                                    ;839314|A9A3BB  |      ;
     STA.B ptrTemp0x72                                          ;839317|8572    |000072;
     SEP #$20                                                   ;839319|E220    |      ;
-    LDA.B #$9C                                                 ;83931B|A99C    |      ;
+    LDA.B #sFontGlyphs_Dialog>>16                                ;83931B|A99C    |      ;
     STA.B ptrTemp0x72+2                                        ;83931D|8574    |000074;
     REP #$20                                                   ;83931F|C220    |      ;
     LDA.W #$0080                                               ;839321|A98000  |      ;
@@ -69,10 +61,10 @@ fDialog_ReloadFontTiles:
     LDA.W #$5000                                               ;839339|A90050  |      ;
     TAX                                                        ;83933C|AA      |      ;
     LDY.W #$0C00                                               ;83933D|A0000C  |      ;
-    LDA.W #$BBA3                                               ;839340|A9A3BB  |      ;
+    LDA.W #sFontGlyphs_Dialog                                    ;839340|A9A3BB  |      ;
     STA.B ptrTemp0x72                                          ;839343|8572    |000072;
     SEP #$20                                                   ;839345|E220    |      ;
-    LDA.B #$9C                                                 ;839347|A99C    |      ;
+    LDA.B #sFontGlyphs_Dialog>>16                                ;839347|A99C    |      ;
     STA.B ptrTemp0x72+2                                        ;839349|8574    |000074;
     REP #$20                                                   ;83934B|C220    |      ;
     LDA.W #$0080                                               ;83934D|A98000  |      ;

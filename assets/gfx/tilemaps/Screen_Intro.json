@@ -1,0 +1,19 @@
+{
+  "label": "Screen_Intro",
+  "kind": "tilemaps",
+  "bin": "assets/gfx/characters/Screen_Intro.bin",
+  "compression": "lzss",
+  "raw_size": 2048,
+  "legacy_label": "sCompressedTilemap_A68DCF",
+  "format": "bg_name_table",
+  "entries": 1024,
+  "columns": 32,
+  "vram_word_dest": [
+    "$6000"
+  ],
+  "map_entries": 1,
+  "first_map": "sMap_80B271",
+  "tile_sets": [
+    "Tiles_Road_SpringToFall@$2000"
+  ]
+}
