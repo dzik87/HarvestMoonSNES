@@ -12,5 +12,17 @@
   "vram_word_dest": [
     "$4000"
   ],
-  "map_entries": 1
+  "map_entries": 1,
+  "palette": {
+    "id": "sPalette_0x60",
+    "sub": 5
+  },
+  "palette_confidence": "high",
+  "palette_note": "sub-palette 5 covers 400 of 619 name-table cells; per-tile sub-palettes 2/3/4/5 (tile_subs)",
+  "palette_subs_used": [
+    2,
+    3,
+    4,
+    5
+  ]
 }

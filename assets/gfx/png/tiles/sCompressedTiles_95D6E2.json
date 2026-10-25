@@ -12,5 +12,18 @@
   "vram_word_dest": [
     "$3000"
   ],
-  "map_entries": 3
+  "map_entries": 3,
+  "palette": {
+    "id": "sPalette_0x13",
+    "sub": 2
+  },
+  "palette_confidence": "medium",
+  "palette_note": "only 6 name-table cell(s) reference this sheet; sub-palette 2",
+  "palette_alternatives": [
+    {
+      "id": "sPalette_0x13",
+      "sub": 1,
+      "area_name": "HOUSE2"
+    }
+  ]
 }

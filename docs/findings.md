@@ -60,6 +60,15 @@ Label names refer to the current sources; see `docs/naming/*.csv` for old -> new
 - `aGameObjectIndexOffsets` carries a "BUG should be $510" note in the source.
 - Three identical 16-entry `1<<n` word tables exist (`aEngineUnknown_83CA78`, `aUnusedTable_83E74D`, `Table_858C7F`).
 
+## Palettes (bank 80, banks $A8-$A9)
+- Only rows 0-7 (first `$100` bytes) of each 512-byte `sPalette_*` are used: BG rows 0-7 from the area's time slot palette
+  (`aMapPalettesIndexes`, 5 slots per area), OBJ rows 0-7 from `aMapPalettesId` (`sPalette_0x6F` day / `0x70` night). The code indexes
+  `aPalettes`, whose order differs from the label numbers. Rows 8-15 are rainbow filler. Details and per-blob mapping:
+  `docs/formats/graphics-palettes.md`, `assets/gfx/palette_map.json`.
+- Presets 6-10 of `fCore_ManageGraphicsPresets` are never selected; map headers use presets 0, 1, 2, 5, screens use 3 and 4.
+- Weather overlays have no palette of their own: they use pixel values 12-15 of row 0, which the weather code overwrites by palette animation.
+- `sCompressedTiles_9FD4DA` is a Japanese title logo that no US map loads.
+
 ## Graphics compression (banks $92-$A0, $A4-$A6)
 - Okumura-style LZSS (2048-byte ring, matches 3..34 bytes), 4-byte header; see `docs/formats/tilemap-compression.md`.
 - `tools/gfx/tilemap_codec.py` decompresses and re-encodes all 137 labelled blobs byte-for-byte (`tests/test_tilemap_codec.py`).

@@ -12,5 +12,33 @@
   "vram_word_dest": [
     "$2000"
   ],
-  "map_entries": 8
+  "map_entries": 8,
+  "palette": {
+    "id": "sPalette_0x53",
+    "sub": 4
+  },
+  "palette_confidence": "high",
+  "palette_note": "sub-palette 4 covers 2048 of 2367 name-table cells; per-tile sub-palettes 1/2/4 (tile_subs)",
+  "palette_subs_used": [
+    1,
+    2,
+    4
+  ],
+  "palette_alternatives": [
+    {
+      "id": "sPalette_0x4E",
+      "sub": 4,
+      "area_name": "MOUNTAINTOPSUMMER"
+    },
+    {
+      "id": "sPalette_0x4A",
+      "sub": 4,
+      "area_name": "MOUNTAINTOPFALL"
+    },
+    {
+      "id": "sPalette_0x52",
+      "sub": 4,
+      "area_name": "MOUNTAINTOPSUNRISE"
+    }
+  ]
 }

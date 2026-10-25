@@ -12,5 +12,32 @@
   "vram_word_dest": [
     "$2000"
   ],
-  "map_entries": 4
+  "map_entries": 4,
+  "palette": {
+    "id": "sPalette_0x27",
+    "sub": 1
+  },
+  "palette_confidence": "high",
+  "palette_note": "sub-palette 1 covers 472 of 1024 name-table cells; per-tile sub-palettes 1/2/3/4/5/6/7 (tile_subs)",
+  "palette_subs_used": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "palette_alternatives": [
+    {
+      "id": "sPalette_0x36",
+      "sub": 1,
+      "area_name": "CROSSROADSUMMER"
+    },
+    {
+      "id": "sPalette_0x2C",
+      "sub": 1,
+      "area_name": "CROSSROADFALL"
+    }
+  ]
 }

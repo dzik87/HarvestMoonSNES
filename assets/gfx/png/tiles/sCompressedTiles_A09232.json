@@ -12,5 +12,11 @@
   "vram_word_dest": [
     "$5000"
   ],
-  "map_entries": 5
+  "map_entries": 5,
+  "palette": {
+    "id": "sPalette_0x6E",
+    "sub": 0
+  },
+  "palette_confidence": "low",
+  "palette_note": "no static BG name table references this sheet (its name table is written at run time); sub-palette 0 assumed"
 }
