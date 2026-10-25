@@ -98,8 +98,8 @@ def test_export_check_and_tamper():
         out = tmp / "sa"
         check(S.main(["export", "--out", str(out)]) == 0, "export runs")
         check(S.main(["check", "--out", str(out)]) == 0, "check passes on a fresh export")
-        # the committed export must be current
-        check(S.main(["check"]) == 0, "committed assets/gfx/png/sprites_assembled passes check")
+        pristine = tmp / "pristine"
+        shutil.copytree(out, pristine)
         # tamper with a PNG pixel
         from PIL import Image
         p = out / "obj_0000" / "l0_f00.png"
@@ -110,7 +110,7 @@ def test_export_check_and_tamper():
         im2.putpalette(im.getpalette())
         im2.save(p)
         check(S.main(["check", "--out", str(out), "--object", "0"]) == 1, "check detects a changed PNG pixel")
-        shutil.copy(ROOT / "assets/gfx/png/sprites_assembled/obj_0000/l0_f00.png", p)
+        shutil.copy(pristine / "obj_0000" / "l0_f00.png", p)
         check(S.main(["check", "--out", str(out), "--object", "0"]) == 0, "check passes again after restoring")
         # tamper with a component in the JSON
         jp = out / "obj_0004" / "index.json"
@@ -119,7 +119,7 @@ def test_export_check_and_tamper():
         jp.write_text(S.dump_json(j))
         check(S.main(["check", "--out", str(out), "--object", "4"]) == 1, "check detects a component change in JSON")
         # tamper with a timer
-        j = json.loads((ROOT / "assets/gfx/png/sprites_assembled/obj_0004/index.json").read_text())
+        j = json.loads((pristine / "obj_0004" / "index.json").read_text())
         j["lists"][0]["steps"][0]["timer"] ^= 1
         jp.write_text(S.dump_json(j))
         check(S.main(["check", "--out", str(out), "--object", "4"]) == 1, "check detects a changed timer")
@@ -128,6 +128,23 @@ def test_export_check_and_tamper():
         check(S.main(["check", "--out", str(out), "--object", "1"]) == 1, "check detects a missing contact sheet")
     finally:
         shutil.rmtree(tmp)
+
+
+def test_sheets_read_unit_pngs():
+    """Sheets() cuts the 16x16 block of an id from the unit PNGs; it must equal the block of the sheet decoded from the
+    sources (units pasted into the 128x512 sheet, tile id -> position formula of the engine)."""
+    import pngsync as PS
+    sh = S.Sheets()
+    for bank in (0, 3, 9):
+        blob = PS.Blob("sprites", "Sprites_%02X8000" % (0x88 + bank))
+        meta = PS.read_meta(blob)
+        raw = PS.source_payload(blob, meta)
+        w, h, pix = PS.decode_sheet(raw, 4, 16)
+        for tid in (bank * 256 + k for k in (0, 1, 8, 63, 64, 130, 255)):
+            _, x0, y0 = S.Sheets.locate(tid)
+            expect = [bytes(pix[(y0 + y) * w + x0:(y0 + y) * w + x0 + 16]) for y in range(16)]
+            check(sh.sprite16(tid) == expect, "sprite id %04X: unit PNG block differs from the sheet position" % tid)
+    check(sh.sprite16(0x0A00) == [bytes(16)] * 16, "ids beyond bank $91 are empty")
 
 
 def test_counts():

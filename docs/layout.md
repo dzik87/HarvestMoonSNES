@@ -27,13 +27,13 @@ Still committed as assembly under `src/data/` (pending, owned by the graphics an
 ## Graphics sources
 
 The `.bin` files under `assets/gfx/{tiles,sprites,characters}/` (banks $88-$A6) and the `.pal` files under `assets/gfx/palettes/` are generated, git-ignored build products
-(`tools/build_assets.py`, run by `tools/build.py`). The sources are PNG sheets
-(`assets/gfx/png/`), name-table text (`assets/gfx/tilemaps/`) and palette JSON, converted by `tools/gfx/pngsync.py` / `palette.py`; the ROM hash check in CI proves the generated
+(`tools/build_assets.py`, run by `tools/build.py`). The sources are 16x16 unit PNGs, one directory per blob
+(`assets/gfx/png/<kind>/<label>/`), name-table text (`assets/gfx/tilemaps/`) and palette JSON, converted by `tools/gfx/pngsync.py` / `palette.py`; the ROM hash check in CI proves the generated
 files are bit-identical to the original data. Audio blobs (`assets/audio/*.bin`) are still committed binaries. Palettes ($A8-$A9: `assets/gfx/palettes/`) and fonts (`assets/fonts/`) have their own
 PNG/JSON sources. See `docs/formats/graphics-png.md`; which palette each sheet is displayed with (PNG viewing palette, `assets/gfx/palette_map.json`):
 `docs/formats/graphics-palettes.md`.
-The object animation frames assembled from the sprite banks (`assets/gfx/png/sprites_assembled/`) are derived output of
-`tools/objects/spriteexport.py` (`docs/formats/sprite-assembly.md`); CI checks them against the object data.
+The object animation frames assembled from the sprite banks are rendered on demand into `build/sprites_assembled/` (never committed) by
+`tools/objects/spriteexport.py` (`docs/formats/sprite-assembly.md`); CI exports and checks them against the object data.
 
 ## Code modules
 
