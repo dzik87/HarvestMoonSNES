@@ -198,6 +198,14 @@ def test_palette_tables():
           and lay[3]["bpp"] == 2, "preset 0 BG geometry")
     lines = ["a", "if !REGION_DE", "b", "else", "c", "endif", "d"]
     check(PM.us_lines(lines) == ["a", "c", "d"], "us_lines keeps the else branch")
+    nested = ["a", "if !REGION_JP", "b", "elseif !REGION_EU", "c", "else", "d", "if !REGION_DE", "e", "else", "f", "endif", "endif", "g"]
+    check(PM.us_lines(nested) == ["a", "d", "f", "g"], "us_lines: elseif / nested blocks")
+    check(PM.us_lines(["if !REGION_US", "x", "else", "y", "endif"]) == ["x"], "us_lines: !REGION_US is true")
+    try:
+        PM.us_lines(["if !FOO", "x", "endif"])
+        check(False, "unknown condition must be rejected")
+    except ValueError:
+        pass
 
 
 def test_name_table_rule():
@@ -264,6 +272,21 @@ def test_png_palettes_are_real_colours():
         nconf += meta["palette_confidence"] == "high"
     check(n >= 86, f"{n} blobs have a palette")
     print(f"palettes: {n} blobs coloured, {nconf} with high confidence")
+
+
+def test_assembled_sprites_use_obj_palette():
+    """the assembled object sprites (tools/objects/spriteexport.py) carry the day OBJ palette: pixel = (row << 4) | colour."""
+    pals = PM.sprite_palettes(0)
+    check(len(pals) == 8 and all(len(p) == 16 for p in pals), "sprite_palettes shape")
+    check(pals[4] == P.load_view_palette({"id": "sPalette_0x6F", "sub": 4}, 4), "OBJ row 4 of sPalette_0x6F")
+    flat = [c for p in pals for c in p]
+    n = 0
+    for path in sorted((ROOT / "assets/gfx/png/sprites_assembled").glob("obj_000*/l0_f0*.png")):
+        pal, trns = png_palette(path)
+        check(pal[:128] == flat, f"{path.parent.name}/{path.name}: PLTE is not the OBJ palette")
+        check(isinstance(trns, bytes) and all(trns[i] == 0 for i in range(0, min(len(trns), 128), 16)), f"{path.name}: colour 0 of every row transparent")
+        n += 1
+    check(n > 0, "assembled sprite PNGs found")
 
 
 def test_palette_is_ignored_by_import():

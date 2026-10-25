@@ -111,9 +111,10 @@ sprites_assembled/
   (1327 distinct pixel blocks across all objects; not shared between objects to keep every folder self-contained).
 * **PNG format**: indexed, size = bounding box of the components (so the image is *not* trimmed to its content, which keeps it reversible).
   Pixel value = `(OBJ palette number << 4) | colour index`, 128 palette entries, **every value whose colour index is 0 is transparent** (tRNS).
-  The embedded palette is a grayscale placeholder produced by `grayscale_palettes()`; the real colours depend on the CGRAM contents at run time
-  (preset, season, `assets/gfx/palettes/`). Palette provider is pluggable: `--palette-module FILE` with `sprite_palettes(object_index)` returning 8 lists of 16
-  `(r, g, b)` tuples; a later pass is meant to wire `assets/gfx/palette_map.json` there. The palette of a PNG never influences `check`.
+  The embedded palette is the real **day OBJ palette** `sPalette_0x6F` (rows 0-7, `aMapPalettesId` `$6B`; see `docs/formats/graphics-palettes.md` section 4:
+  the code takes the OBJ row from bits 0-2 of the component attribute, which is what the pixel value's high nibble keeps), provided by `palette_map.sprite_palettes()`.
+  Not applied: the night palette (`sPalette_0x70`), the event palettes `0x71-0x73` and the run-time patches of OBJ row 7 (colours 10-12, season) and row 3 (colours 8-10, wife's dress).
+  The provider is pluggable: `--palette-module FILE` with `sprite_palettes(object_index)` returning 8 lists of 16 `(r, g, b)` tuples. The palette of a PNG never influences `check`.
 * **index.json** (per object):
 
 | Key | Meaning |
@@ -169,9 +170,9 @@ Objects with an empty (all-transparent) frame image, effects, particles and smal
 
 ## 5. Open points
 
-* **Colours**: grayscale until the palette map is wired; one palette per component (`attr & 7`) is preserved in the pixel values, so
-  a provider can colour a frame exactly. The mapping object -> CGRAM contents (which palette sets are loaded for which object) is not known.
+* **Colours**: day OBJ palette `sPalette_0x6F` for every object (all areas that have objects use `$6B` by day / `$6C` by night in `aMapPalettesId`); one palette per
+  component (`attr & 7`) is preserved in the pixel values, so another provider can colour a frame exactly (night, events, seasonal patches of rows 7 and 3).
 * `mapCurrentPresetId << 4` is ORed into the OAM attribute (`$8585A4`). With the map presets 0-2 it only changes priority; any preset >= 4
   (non-map screens) would set flip bits, so objects presumably are not used there (not verified).
-* Presets 6-9 select an 8x8 "small" size (OBSEL `$03`); how (if) objects are shown on those screens is not examined.
+* Presets 6-10 select an 8x8 "small" size (OBSEL `$03`/`$63`) but are never selected by any map header or call (`docs/formats/graphics-palettes.md` section 3).
 * The 7 unreferenced frames are exported (`unreferenced/`) but their purpose is unknown. Ids beyond bank `$91` do not occur (the tool would render them empty).

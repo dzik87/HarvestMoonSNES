@@ -71,23 +71,35 @@ def read_lines(rel):
 
 
 def us_lines(lines):
-    """drop the `if !REGION_DE` branch (the base is US); `else` branch kept."""
-    out, state = [], None
+    """keep what the US build assembles: `if !REGION_x / elseif !REGION_y / else / endif` blocks (nestable) are evaluated with
+    !REGION_US = 1 and !REGION_EU/DE/JP/EUDE = 0 (src/common/region.asm); any other condition is an error."""
+    val = {"US": 1, "EU": 0, "DE": 0, "JP": 0, "EUDE": 0}
+    out, stack = [], []                        # stack entries: [parent active, branch taken yet, this branch active]
     for l in lines:
         s = l.split(";")[0].strip()
-        if re.match(r"if\s+!REGION_DE\b", s):
-            state = "skip"
+        m = re.match(r"(if|elseif)\s+(.*)$", s)
+        if m:
+            c = re.fullmatch(r"!REGION_(\w+)", m.group(2).strip())
+            if not c or c.group(1) not in val:
+                raise ValueError(f"unsupported assembler condition: {s!r}")
+            cond = bool(val[c.group(1)])
+            if m.group(1) == "if":
+                parent = all(e[2] for e in stack)
+                stack.append([parent, cond, cond])
+            else:
+                e = stack[-1]
+                e[2] = (not e[1]) and cond
+                e[1] = e[1] or cond
             continue
-        if re.match(r"if\b", s):
-            state = "keep"
+        if re.match(r"else\b", s) and stack:
+            e = stack[-1]
+            e[2] = not e[1]
+            e[1] = True
             continue
-        if re.match(r"else\b", s) and state:
-            state = "keep" if state == "skip" else "skip"
+        if re.match(r"endif\b", s) and stack:
+            stack.pop()
             continue
-        if re.match(r"endif\b", s):
-            state = None
-            continue
-        if state != "skip":
+        if all(e[2] for e in stack):
             out.append(l)
     return out
 
@@ -564,6 +576,16 @@ def doc_table_ok(d):
     if TABLE_BEGIN not in t or TABLE_END not in t:
         return False
     return t.split(TABLE_BEGIN)[1].split(TABLE_END)[0].strip() == markdown_table(d).strip()
+
+
+def sprite_palettes(object_index=None):
+    """The 8 OBJ sub-palettes (lists of 16 RGB tuples) objects are drawn with by day: row r of `obj_palettes[0]` of area 0
+    (aMapPalettesId $6B = sPalette_0x6F).  Same signature as the `--palette-module` hook of tools/objects/spriteexport.py;
+    the seasonal patches of OBJ row 7 / row 3 (docs/formats/graphics-palettes.md section 4) are not applied."""
+    pid = load()["areas"]["0"]["obj_palettes"][0]
+    cols = json.loads((ROOT / "assets" / "gfx" / "palettes" / f"{pid}.json").read_text(encoding="utf-8"))["colors"]
+    rgb = [tuple(int(c[i:i + 2], 16) for i in (1, 3, 5)) for c in cols[:128]]
+    return [rgb[r * 16:(r + 1) * 16] for r in range(8)]
 
 
 def dumps(d):
