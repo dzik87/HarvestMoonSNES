@@ -148,18 +148,13 @@ decoder also accepts streams from other encoders.)
   of zero bytes at the start of a blob.
 * The bytes of a blob after the last token are not part of the stream. In the
   ROM they are bank-end padding (`$00`).
-* **Data layout issue in the disassembly:** the last 2 bytes of
-  `sCompressedTilemap_99DCBD` (`00 00`, a final back-reference) are located under
-  the `Padding_990000` label at `$99F134`; the blob really ends at `$99F136`. The
-  label `Padding_990000` should start 2 bytes later. Tests handle this via
-  `parse_asm_blobs(path, tail=N)`, which appends the first bytes of the following
-  label.
-* **Unlabeled blobs inside other labels** (reachable only via a raw address):
-  `$A5CB05` (4096 bytes, the dialog box graphics, inside
-  `sCompressedCharactermap_A5C955`, +432) and `$9FD4DA` (8192 bytes, inside
-  `sCompressedTilemap_9FC04C`, +5262; no code reference found by label, so
-  presumably referenced through a computed or raw pointer). They should get their
-  own labels when the data files are split.
+* **Formerly hidden blobs** are now labeled and stored as separate assets:
+  `sCompressedCharactermap_A5CB05` ($A5CB05, 4096 bytes, the dialog box graphics)
+  and `sCompressedTilemap_9FD4DA` ($9FD4DA, 8192 bytes; no label-based code
+  reference found, presumably reached through a computed or raw pointer). The last
+  2 bytes of `sCompressedTilemap_99DCBD` (`00 00`, a final back-reference) used to
+  sit under `Padding_990000`; they now belong to the blob and the padding label
+  starts 2 bytes later.
 * `sCompressedCharactermap_A69996` is followed, inside the same label span, by
   4056 bytes of other (non-compressed) data starting `44 56 44 56` at +1792.
 
@@ -169,8 +164,8 @@ Counted by `tests/test_tilemap_codec.py` (source: `src/data/gfx/*/*.asm`):
 
 | Item                                   | Value            |
 |----------------------------------------|------------------|
-| Labeled `sCompressed*` blobs           | 135 (77 Tilemap, 58 Charactermap) |
-| Additional unlabeled blobs             | 2                |
+| Labeled `sCompressed*` blobs           | 137 (78 Tilemap, 59 Charactermap) |
+| Additional unlabeled blobs             | 0                |
 | Total blobs                            | 137              |
 | Compressed bytes (streams only)        | 485,289          |
 | Decompressed bytes                     | 921,600          |

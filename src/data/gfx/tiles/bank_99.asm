@@ -18,4 +18,4 @@ sCompressedTilemap_99DCBD:
     incbin "../../../../assets/gfx/tiles/sCompressedTilemap_99DCBD.bin"
 
 Padding_990000:
-    fill 3788
+    fill 3786
