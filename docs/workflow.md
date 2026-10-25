@@ -22,6 +22,13 @@ Tools: `tools/analysis/align_regions.py` (coverage report, `--md docs/regions.md
 `--write-expected` stores the full-ROM hashes). After editing US code that is inside a patch block, edit the `else` branch (US text) and
 check all regions; regenerating with the tool is also possible (it starts from the US text).
 
+## Audio preview (`.github/workflows/audio.yml`)
+
+Rendering SPC and MP3 copies of all songs and sound effects is slow, so it is not part of the ROM build. The separate
+`audio-preview` workflow runs only when `assets/audio/**` or `tools/audio/**` change (or by hand via *Run workflow*, with an
+optional length in seconds) and publishes the result as the `HarvestMoon-audio-listen` artifact (14 days, never committed).
+Locally: `python3 tools/audio/audioconv.py spc --all --out build/listen/spc`, then `audioconv.py render build/listen/spc --format mp3`.
+
 ## CI (`.github/workflows/build.yml`)
 Builds asar from the `third_party/asar` submodule (tag `v1.91`, cached), assembles the US ROM, compares size/CRC32/MD5/SHA-1 and exposes
 the result in run annotations and as the `HarvestMoon-US` artifact.

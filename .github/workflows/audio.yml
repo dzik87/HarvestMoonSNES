@@ -1,0 +1,48 @@
+name: audio-preview
+
+# Renders SPC + MP3 listening copies of all songs and sound effects.
+# Runs only when audio sources change (or by hand), never as part of the ROM build.
+# The output is a workflow artifact; it is not committed.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'assets/audio/**'
+      - 'tools/audio/**'
+      - '.github/workflows/audio.yml'
+  workflow_dispatch:
+    inputs:
+      seconds:
+        description: 'Length of each MP3 in seconds'
+        required: false
+        default: '90'
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install ffmpeg
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+
+      - name: Test audio tools
+        run: python3 tests/test_audio_convert.py
+
+      - name: Generate SPC snapshots (songs and SFX)
+        run: |
+          python3 tools/audio/audioconv.py spc --all --out build/listen/spc
+          python3 tools/audio/audioconv.py spc --out build/listen/spc $(seq 1 49 | sed 's/^/--sfx /')
+
+      - name: Render MP3
+        run: python3 tools/audio/audioconv.py render build/listen/spc --out build/listen/mp3 --format mp3 --seconds "${{ github.event.inputs.seconds || '90' }}"
+
+      - name: Upload audio for listening
+        uses: actions/upload-artifact@v4
+        with:
+          name: HarvestMoon-audio-listen
+          path: |
+            build/listen/spc
+            build/listen/mp3
+          retention-days: 14
