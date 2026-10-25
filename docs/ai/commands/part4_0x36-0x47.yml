@@ -6,11 +6,11 @@
   confidence: probable
   length_bytes: 1
   params: []
-  summary: "Jeden tick logiki psa: kopiuje pozycje slotu AI do nDogX/nDogY, obsluguje przytulenie/podniesienie psa, losowe zachowania w bezruchu i bieg do gracza po gwizdnieciu."
-  details: "Handler przesuwa ptrAIActionData o 1 (kolejna komenda to zwykle Jump z powrotem na UpdateDog - patrz B38DAC/B38DAD, wiec petla). Kopiuje slowa slotu AI ([ptrAIUnknown0xCC]+0x1A i +0x1C) do nDogX/nDogY. (1) Hug: jesli bajt slotu +0x0C != 0 oraz gracz NIE: uzywa narzedzia/pokazuje narzedzie/gwizdze na konia lub psa/je posilku/jedzie konno/ma action $17 lub ITEMONHAND/niesie przedmiot (carryItemId), flaga daily4 $0006 wyczyszczona, nowo wcisniete A (strcJoypad1.newInput) i brak PFLAGS_DOGHUGGING, to zeruje bajt +0x00 slotu (dezaktywacja slotu), ustawia bit $40 w +0x01, ustawia PFLAGS_DOGHUGGING i inkrementuje nDogHugs. (2) Idle: strcStockData.unkDog liczy klatki do $78 (120), po czym zeruje sie i maszyna stanow w $7F1F58 (bity $01,$02,$04,$08,$10, sprawdzane w tej kolejnosci) z losowa (strcPlayer.lastRandomNumber) szansa uruchamia podskrypt psa przez fAI_Unknown84803F(A=$16, X=0, Y=$3C..$49) i zmienia stan; progi losowania np. $40/$80/$C0 dla stanu $01, $2A/$54/$7E/$A8 dla stanu $02. (3) Gwizdniecie (flaga daily4 $0010, ustawiana w fPlayerAction0x1B_WhistleDog i czyszczona w koncowce fAI_Unknown848020-owej rutyny): zeruje unkDog, ustawia bity $28 w +0x01, uruchamia podskrypt Y=slot[+0x3F] (X=0), liczy |dx|,|dy| miedzy slotem a graczem, ustawia [+0x08]=$20 i kierunek ruchu w [+0x0F] jako maske bitowa (1=dol,2=gora,4=prawo,8=lewo - kolejnosc jak aAIJoypadInput) wedlug wiekszej osi. Na koncu (jesli brak gwizdniecia) inkrementuje licznik [+0x10]. Nie blokuje."
+  summary: "One tick of the dog logic: copies the AI slot position to nDogX/nDogY, handles hugging/picking up the dog, random idle behaviors and running to the player after a whistle."
+  details: "The handler advances ptrAIActionData by 1 (the next command is usually a Jump back to UpdateDog - see B38DAC/B38DAD, so a loop). It copies the AI slot words ([ptrAIUnknown0xCC]+0x1A and +0x1C) to nDogX/nDogY. (1) Hug: if slot byte +0x0C != 0 and the player is NOT: using a tool / showing a tool / whistling for the horse or dog / eating a meal / riding a horse / in action $17 or ITEMONHAND / carrying an item (carryItemId), the flag daily4 $0006 is clear, A is newly pressed (strcJoypad1.newInput) and there is no PFLAGS_DOGHUGGING, then it clears slot byte +0x00 (slot deactivation), sets bit $40 in +0x01, sets PFLAGS_DOGHUGGING and increments nDogHugs. (2) Idle: strcStockData.unkDog counts frames up to $78 (120), then is cleared and a state machine in $7F1F58 (bits $01,$02,$04,$08,$10, checked in that order) starts a dog subscript with a random chance (strcPlayer.lastRandomNumber) via fAI_Unknown84803F(A=$16, X=0, Y=$3C..$49) and changes the state; the random thresholds are e.g. $40/$80/$C0 for state $01, $2A/$54/$7E/$A8 for state $02. (3) Whistle (flag daily4 $0010, set in fPlayerAction0x1B_WhistleDog and cleared at the end of the fAI_Unknown848020-style routine): clears unkDog, sets bits $28 in +0x01, starts subscript Y=slot[+0x3F] (X=0), computes |dx|,|dy| between the slot and the player, sets [+0x08]=$20 and the movement direction in [+0x0F] as a bit mask (1=down,2=up,4=right,8=left - same order as aAIJoypadInput) according to the larger axis. At the end (if there was no whistle) it increments the counter [+0x10]. It does not block."
   ram_touched: [ptrAIActionData, ptrAIUnknown0xCC, nDogX, nDogY, nDogHugs, strcStockData.unkDog, "$7F1F58", strcPlayer.action, strcPlayer.flags, strcPlayer.lastRandomNumber, strcPlayer.posX, strcPlayer.posY, strcPlayerData.carryItemId, strcJoypad1.newInput, "strcFlags.daily4"]
   calls: [fAI_Unknown84803F]
-  open_questions: "Znaczenie bitow stanu $7F1F58 (prawdopodobnie: 1=stoi, 2=siedzi/lezy itd.), indeksow podskryptow $3C-$49, $3F i bajtow slotu +0x08/+0x0C/+0x0F nie ustalone bez analizy podskryptow w B38xxx. Nie wiadomo czy bajt +0x0C oznacza 'pies da sie podniesc' (tylko wnioskowanie). Do potwierdzenia, czy wykonywana jest jedna komenda na klatke na slot (wtedy UpdateDog+Jump = tick co 2 klatki)."
+  open_questions: "The meaning of the bits of state $7F1F58 (probably: 1=standing, 2=sitting/lying etc.), of the subscript indices $3C-$49, $3F and of slot bytes +0x08/+0x0C/+0x0F is not determined without analyzing the subscripts in B38xxx. It is not known whether byte +0x0C means 'the dog can be picked up' (inference only). To be confirmed whether one command is executed per frame per slot (in which case UpdateDog+Jump = a tick every 2 frames)."
 
 - opcode: 0x37
   macro: AICMD0x37
@@ -20,11 +20,11 @@
   confidence: probable
   length_bytes: 1
   params: []
-  summary: "Usuwa/dezaktywuje obiekt gry powiazany ze slotem AI (indeks z pola +0x12 slotu)."
-  details: "Przesuwa wskaznik o 1, wczytuje slowo [ptrAIUnknown0xCC]+0x12 do strcObject.gameObjectIdx i wola fObject_Unknown8581A2. Ta procedura wyznacza offset obiektu z aGameObjectIndexOffsets, sprawdza komponenty (fUnknown_858B7B), zwalnia je (fUnknown_858B41 -> fUnknown_858C9F dekrementuje licznik w $7EA320+idx*4) i zeruje strcGameObject.initailized. Identyczna sekwencja jest w fAI_Unknown848020 (tam dodatkowo zerowany bajt +0x00 slotu), wiec 0x37 to wariant 'usun obiekt, ale nie dezaktywuj slotu'. W skryptach wystepuje tuz przed %AICMD0x10_End() (np. B38DFA, B38E92). Nie blokuje."
+  summary: "Removes/deactivates the game object associated with the AI slot (index from slot field +0x12)."
+  details: "Advances the pointer by 1, loads the word [ptrAIUnknown0xCC]+0x12 into strcObject.gameObjectIdx and calls fObject_Unknown8581A2. That routine determines the object offset from aGameObjectIndexOffsets, checks the components (fUnknown_858B7B), releases them (fUnknown_858B41 -> fUnknown_858C9F decrements the counter at $7EA320+idx*4) and clears strcGameObject.initailized. An identical sequence is in fAI_Unknown848020 (where byte +0x00 of the slot is additionally cleared), so 0x37 is the variant 'remove the object, but do not deactivate the slot'. In scripts it appears right before %AICMD0x10_End() (e.g. B38DFA, B38E92). It does not block."
   ram_touched: [ptrAIActionData, ptrAIUnknown0xCC, strcObject.gameObjectIdx, strcObject.gameObjectIdxOffs, strcObject.bankAddress, strcGameObject.initailized, strcGameObject.components]
   calls: [fObject_Unknown8581A2]
-  open_questions: "Dokladna semantyka fObject_Unknown8581A2 (np. sciezka z strcObject.bankAddress != 0 skacze do innego RTL - komentarz w kodzie wskazuje na bug) oraz to, jaki typ obiektu jest w slocie +0x12 (sprite NPC/zwierzecia)."
+  open_questions: "The exact semantics of fObject_Unknown8581A2 (e.g. the path with strcObject.bankAddress != 0 jumps to a different RTL - a comment in the code points to a bug) and what type of object is in slot +0x12 (NPC/animal sprite)."
 
 - opcode: 0x38
   macro: AICMD0x38_WaitForFadeIn
@@ -34,11 +34,11 @@
   confidence: confirmed
   length_bytes: 1
   params: []
-  summary: "Blokuje skrypt do chwili, gdy ustawiona jest flaga daily1 $8000 (ekran w pelni rozjasniony po fade-in)."
-  details: "Jesli strcFlags.daily1 & $8000 != 0, przesuwa wskaznik o 1 i konczy (skrypt idzie dalej). W przeciwnym razie NIE przesuwa wskaznika (komenda wykonuje sie ponownie w nastepnej klatce) i tylko inkrementuje bajt/slowo [ptrAIUnknown0xCC]+0x10. Flaga $8000 jest ustawiana na koncu fCore_ScreenFadein (po osiagnieciu docelowej jasnosci) i czyszczona na koncu fCore_ScreenFadeout; inne miejsca ja czytaja (input.asm - np. obsluga START). Typowy wzorzec w skryptach: 0x06 SetDestinationArea, 0x38, 0x0B, 0x0C."
+  summary: "Blocks the script until the flag daily1 $8000 is set (screen fully brightened after fade-in)."
+  details: "If strcFlags.daily1 & $8000 != 0, it advances the pointer by 1 and finishes (the script proceeds). Otherwise it does NOT advance the pointer (the command is executed again in the next frame) and only increments the byte/word [ptrAIUnknown0xCC]+0x10. The flag $8000 is set at the end of fCore_ScreenFadein (after the target brightness is reached) and cleared at the end of fCore_ScreenFadeout; other places read it (input.asm - e.g. START handling). Typical pattern in scripts: 0x06 SetDestinationArea, 0x38, 0x0B, 0x0C."
   ram_touched: ["strcFlags.daily1", ptrAIActionData, ptrAIUnknown0xCC]
   calls: []
-  open_questions: "Nazwa pola slotu +0x10 (licznik klatek skryptu?) niepotwierdzona."
+  open_questions: "The name of slot field +0x10 (script frame counter?) is not confirmed."
 
 - opcode: 0x39
   macro: AICMD0x39_WalkForTime
@@ -48,13 +48,13 @@
   confidence: confirmed
   length_bytes: 4
   params:
-    - {name: nInputIndex, offset: 1, size: 1, type: enum, meaning: "Indeks w aAIJoypadInput ($84B4D2): 0=DOWN($0400), 1=UP($0800), 2=RIGHT($0100), 3=LEFT($0200), 4=B($8000); enumy !AIINPUT_*. Wartosci >4 czytaja poza tablica (niezdefiniowane)."}
-    - {name: nAmount, offset: 2, size: 2, type: n16, meaning: "Czas trwania w klatkach (licznik strcAiControlData.counter); wejscie jest aktywne ok. nAmount+1 wywolan handlera."}
-  summary: "Symuluje wcisniecie kierunku (pad) na zadana liczbe klatek i czeka az minie; gracz idzie."
-  details: "Wejscie 1 (gdy PFLAGS_AISTEERING w strcPlayer.flags zgaszona): ORuje maske pada z tablicy do strcAiControlData.input, wpisuje nAmount do strcAiControlData.counter, cofa wskaznik na poczatek komendy (komenda sie powtarza), inkrementuje [+0x10] slotu i ustawia PFLAGS_AISTEERING (fInput_AIJoypadHandler czyta strcAiControlData.input). Kolejne wywolania (flaga ustawiona): jesli counter != 0 - dekrementuje i inkrementuje [+0x10], blokujac. Gdy counter == 0: zeruje input i counter, zdejmuje PFLAGS_AISTEERING, ustawia strcPlayer.action = PACTION_NONE i przesuwa wskaznik o 4 (nastepna komenda). Blokuje na ~nAmount klatek."
+    - {name: nInputIndex, offset: 1, size: 1, type: enum, meaning: "Index into aAIJoypadInput ($84B4D2): 0=DOWN($0400), 1=UP($0800), 2=RIGHT($0100), 3=LEFT($0200), 4=B($8000); enums !AIINPUT_*. Values >4 read beyond the table (undefined)."}
+    - {name: nAmount, offset: 2, size: 2, type: n16, meaning: "Duration in frames (counter strcAiControlData.counter); the input is active for approx. nAmount+1 handler calls."}
+  summary: "Simulates pressing a direction (pad) for the given number of frames and waits until it elapses; the player walks."
+  details: "Input 1 (when PFLAGS_AISTEERING in strcPlayer.flags is clear): ORs the pad mask from the table into strcAiControlData.input, writes nAmount to strcAiControlData.counter, moves the pointer back to the start of the command (the command repeats), increments [+0x10] of the slot and sets PFLAGS_AISTEERING (fInput_AIJoypadHandler reads strcAiControlData.input). Subsequent calls (flag set): if counter != 0 - decrements it and increments [+0x10], blocking. When counter == 0: clears input and counter, clears PFLAGS_AISTEERING, sets strcPlayer.action = PACTION_NONE and advances the pointer by 4 (next command). Blocks for ~nAmount frames."
   ram_touched: [ptrAIActionData, ptrAIUnknown0xCC, strcAiControlData.input, strcAiControlData.counter, strcPlayer.flags, strcPlayer.action]
   calls: []
-  open_questions: "Czy wejscie jest uwzgledniane w klatce inicjalizacji zalezy od kolejnosci w petli glownej (nie badane). Brak walidacji nInputIndex."
+  open_questions: "Whether the input is taken into account in the initialization frame depends on the order in the main loop (not investigated). There is no validation of nInputIndex."
 
 - opcode: 0x3A
   macro: AICMD0x3A_RunForTime
@@ -64,10 +64,10 @@
   confidence: confirmed
   length_bytes: 4
   params:
-    - {name: nInputIndex, offset: 1, size: 1, type: enum, meaning: "Jak w 0x39: indeks kierunku w aAIJoypadInput (!AIINPUT_*)."}
-    - {name: nAmount, offset: 2, size: 2, type: n16, meaning: "Czas trwania w klatkach (strcAiControlData.counter)."}
-  summary: "Jak 0x39, ale dodatkowo wciska B (bieg)."
-  details: "Identyczna logika jak 0x39, z ta roznica, ze przy inicjalizacji do strcAiControlData.input ORowana jest takze maska z indeksu 4 tablicy (X=8 -> $8000 = JOYPAD_B). Ten sam mechanizm PFLAGS_AISTEERING + counter, po zakonczeniu zerowanie inputu, action=PACTION_NONE i przesuniecie wskaznika o 4. Blokuje."
+    - {name: nInputIndex, offset: 1, size: 1, type: enum, meaning: "As in 0x39: direction index into aAIJoypadInput (!AIINPUT_*)."}
+    - {name: nAmount, offset: 2, size: 2, type: n16, meaning: "Duration in frames (strcAiControlData.counter)."}
+  summary: "Like 0x39, but additionally presses B (run)."
+  details: "Identical logic to 0x39, with the difference that during initialization the mask from table index 4 (X=8 -> $8000 = JOYPAD_B) is also ORed into strcAiControlData.input. The same PFLAGS_AISTEERING + counter mechanism; on completion the input is cleared, action=PACTION_NONE and the pointer is advanced by 4. Blocks."
   ram_touched: [ptrAIActionData, ptrAIUnknown0xCC, strcAiControlData.input, strcAiControlData.counter, strcPlayer.flags, strcPlayer.action]
   calls: []
   open_questions: null
@@ -80,12 +80,12 @@
   confidence: probable
   length_bytes: 2
   params:
-    - {name: nCarryItemId, offset: 1, size: 1, type: n8, meaning: "Id przenoszonego przedmiotu zapisywany do strcPlayerData.carryItemId ($091D). Uzywane wartosci: $24,$14,$12,$01,$06 (enum !CITEM_* ma tylko NONE=0 i FISH=7)."}
-  summary: "Ustawia przenoszony przedmiot i flage PFLAGS_HOLDINGITEM (gracz niesie przedmiot bez animacji podnoszenia)."
-  details: "Wczytuje bajt argumentu do strcPlayerData.carryItemId, przesuwa wskaznik o 2 i ustawia bit PFLAGS_HOLDINGITEM ($0002) w strcPlayer.flags. W odroznieniu od 0x3E nie zmienia strcPlayer.action. W skryptach uzywane na poczatku scen (np. B49133 przed 0x38 i marszem, potem 0x3F wyrzuca przedmiot). Nie blokuje."
+    - {name: nCarryItemId, offset: 1, size: 1, type: n8, meaning: "Id of the carried item stored in strcPlayerData.carryItemId ($091D). Values used: $24,$14,$12,$01,$06 (the !CITEM_* enum has only NONE=0 and FISH=7)."}
+  summary: "Sets the carried item and the PFLAGS_HOLDINGITEM flag (the player carries an item without a pick-up animation)."
+  details: "Loads the argument byte into strcPlayerData.carryItemId, advances the pointer by 2 and sets the bit PFLAGS_HOLDINGITEM ($0002) in strcPlayer.flags. Unlike 0x3E it does not change strcPlayer.action. Used in scripts at the start of scenes (e.g. B49133 before 0x38 and a walk, then 0x3F throws the item). It does not block."
   ram_touched: [ptrAIActionData, strcPlayerData.carryItemId, strcPlayer.flags]
   calls: []
-  open_questions: "Brak nazw dla id przedmiotow noszonych poza NONE/FISH. Nazwa 'bez animacji' to wnioskowanie z roznicy wzgledem 0x3E (action ITEMONHAND)."
+  open_questions: "No names for carried item ids other than NONE/FISH. The name 'without animation' is an inference from the difference relative to 0x3E (action ITEMONHAND)."
 
 - opcode: 0x3C
   macro: AICMD0x3C
@@ -95,11 +95,11 @@
   confidence: probable
   length_bytes: 1
   params: []
-  summary: "Teleportuje gracza do domu (nDestinationAreaId=$15=AREA_HOUSE1) z flaga wymuszonego teleportu i ustawia flage daily4 $0020."
-  details: "Przesuwa wskaznik o 1, zapisuje $15 (AREA_HOUSE1) do nDestinationAreaId ($098B), ORuje $4000 (AFLAGS_FORCETELEPORT) w strcDialogDisplay.mapFlags i ustawia strcFlags.daily4 |= $0020. Flaga daily4 $0020 jest czytana w kodzie bank_83 przy wyborze skryptu AI (%AIExecute($0000,$000A,3) vs inny) - wskazuje na 'dzien zakonczony/wrocono do domu z eventu'. Wystepuje na koncu skryptow eventowych tuz przed 0x10 End (np. B3EF1A, B3FFA2). Nie blokuje."
+  summary: "Teleports the player home (nDestinationAreaId=$15=AREA_HOUSE1) with the forced teleport flag and sets the flag daily4 $0020."
+  details: "Advances the pointer by 1, writes $15 (AREA_HOUSE1) to nDestinationAreaId ($098B), ORs $4000 (AFLAGS_FORCETELEPORT) into strcDialogDisplay.mapFlags and sets strcFlags.daily4 |= $0020. The flag daily4 $0020 is read in bank_83 code when selecting an AI script (%AIExecute($0000,$000A,3) vs another one) - it indicates 'day ended / returned home from an event'. Appears at the end of event scripts right before 0x10 End (e.g. B3EF1A, B3FFA2). It does not block."
   ram_touched: [ptrAIActionData, nDestinationAreaId, strcDialogDisplay.mapFlags, "strcFlags.daily4"]
   calls: []
-  open_questions: "Dokladne znaczenie daily4 $0020 (jedyny czytelnik: wybor skryptu w game_engine/map_engine ok. 83E30C) - nazwa 'TeleportToHouse' dotyczy tylko area $15."
+  open_questions: "The exact meaning of daily4 $0020 (the only reader: script selection in game_engine/map_engine around 83E30C) - the name 'TeleportToHouse' applies only to area $15."
 
 - opcode: 0x3D
   macro: AICMD0x3D_TeleportToArea
@@ -109,9 +109,9 @@
   confidence: confirmed
   length_bytes: 2
   params:
-    - {name: nAreaId, offset: 1, size: 1, type: enum, meaning: "Id mapy/obszaru (enum !AREA_*) zapisywany do nDestinationAreaId ($098B)."}
-  summary: "Ustawia docelowy obszar i wymusza teleport (AFLAGS_FORCETELEPORT)."
-  details: "Wczytuje bajt do nDestinationAreaId, przesuwa wskaznik o 2 i ORuje $4000 (AFLAGS_FORCETELEPORT) w strcDialogDisplay.mapFlags; faktyczna zmiana mapy nastepuje w silniku map. Nie blokuje. W odroznieniu od 0x3C nie rusza daily4."
+    - {name: nAreaId, offset: 1, size: 1, type: enum, meaning: "Map/area id (enum !AREA_*) stored in nDestinationAreaId ($098B)."}
+  summary: "Sets the destination area and forces a teleport (AFLAGS_FORCETELEPORT)."
+  details: "Loads the byte into nDestinationAreaId, advances the pointer by 2 and ORs $4000 (AFLAGS_FORCETELEPORT) into strcDialogDisplay.mapFlags; the actual map change happens in the map engine. It does not block. Unlike 0x3C it does not touch daily4."
   ram_touched: [ptrAIActionData, nDestinationAreaId, strcDialogDisplay.mapFlags]
   calls: []
   open_questions: null
@@ -124,12 +124,12 @@
   confidence: probable
   length_bytes: 2
   params:
-    - {name: nCarryItemId, offset: 1, size: 1, type: n8, meaning: "Id przenoszonego przedmiotu do strcPlayerData.carryItemId ($091D); uzywane m.in. $23,$06,$16,$14,$25,$17,$10,$11,$12,$13,$2D,$2C,$09."}
-  summary: "Ustawia przenoszony przedmiot i uruchamia akcje gracza PACTION_ITEMONHAND (pozowanie/podniesienie przedmiotu)."
-  details: "Wczytuje bajt do strcPlayerData.carryItemId, przesuwa wskaznik o 2 i ustawia strcPlayer.action = PACTION_ITEMONHAND ($0004). Rozni sie od 0x3B tym, ze uruchamia akcje zamiast ustawiac PFLAGS_HOLDINGITEM. Nie blokuje samo w sobie (animacje obsluguje silnik gracza; skrypty zwykle dodaja potem Wait)."
+    - {name: nCarryItemId, offset: 1, size: 1, type: n8, meaning: "Id of the carried item stored in strcPlayerData.carryItemId ($091D); values used include $23,$06,$16,$14,$25,$17,$10,$11,$12,$13,$2D,$2C,$09."}
+  summary: "Sets the carried item and starts the player action PACTION_ITEMONHAND (pose/picking up an item)."
+  details: "Loads the byte into strcPlayerData.carryItemId, advances the pointer by 2 and sets strcPlayer.action = PACTION_ITEMONHAND ($0004). Differs from 0x3B in that it starts an action instead of setting PFLAGS_HOLDINGITEM. It does not block by itself (animations are handled by the player engine; scripts usually add a Wait afterwards)."
   ram_touched: [ptrAIActionData, strcPlayerData.carryItemId, strcPlayer.action]
   calls: []
-  open_questions: "Efekt wizualny PACTION_ITEMONHAND wnioskowany z nazwy enumu, nie z analizy fPlayerAction."
+  open_questions: "The visual effect of PACTION_ITEMONHAND is inferred from the enum name, not from analysis of fPlayerAction."
 
 - opcode: 0x3F
   macro: AICMD0x3F_ThrowCarriedItem
@@ -139,8 +139,8 @@
   confidence: confirmed
   length_bytes: 1
   params: []
-  summary: "Ustawia akcje gracza PACTION_DROPITEM (rzut/odlozenie noszonego przedmiotu)."
-  details: "Przesuwa wskaznik o 1 i zapisuje strcPlayer.action = PACTION_DROPITEM ($0005). Nie czysci carryItemId sam - robi to silnik akcji gracza. W skryptach po marszu z przedmiotem (B4913C, B4A68F, B4CA63). Nie blokuje."
+  summary: "Sets the player action PACTION_DROPITEM (throwing/putting down the carried item)."
+  details: "Advances the pointer by 1 and writes strcPlayer.action = PACTION_DROPITEM ($0005). It does not clear carryItemId itself - the player action engine does that. In scripts after a walk with an item (B4913C, B4A68F, B4CA63). It does not block."
   ram_touched: [ptrAIActionData, strcPlayer.action]
   calls: []
   open_questions: null
@@ -153,11 +153,11 @@
   confidence: probable
   length_bytes: 1
   params: []
-  summary: "Ustawia flage strcFlags.daily2 $0008, ktora wylacza sprawdzanie obiektu/kafla pod graczem."
-  details: "Przesuwa wskaznik o 1 i ORuje $0008 w strcFlags.daily2. Flaga jest czytana m.in. w fUnknown_82AC61 (przed fObjectEngine_GetObjectAtCoords - przy ustawionej omija wyszukiwanie obiektu pod wspolrzednymi). Nie blokuje."
+  summary: "Sets the flag strcFlags.daily2 $0008, which disables checking the object/tile under the player."
+  details: "Advances the pointer by 1 and ORs $0008 into strcFlags.daily2. The flag is read e.g. in fUnknown_82AC61 (before fObjectEngine_GetObjectAtCoords - when set, it skips the object lookup at the coordinates). It does not block."
   ram_touched: [ptrAIActionData, "strcFlags.daily2"]
   calls: []
-  open_questions: "Nie ustalono wszystkich czytelnikow flagi ani miejsca jej czyszczenia (fAI_* czyszczace maja tylko $0400 w daily2). Pelna lista efektow nieznana."
+  open_questions: "Not all readers of the flag nor the place where it is cleared were determined (the clearing fAI_* routines only clear $0400 in daily2). The full list of effects is unknown."
 
 - opcode: 0x41
   macro: AICMD0x41_AddValue16
@@ -167,10 +167,10 @@
   confidence: confirmed
   length_bytes: 6
   params:
-    - {name: pAddress, offset: 1, size: 3, type: ram_ptr, meaning: "Adres 24-bit slowa 16-bit w pamieci (np. nLove_Ann, $80xxxx = lustro WRAM)."}
-    - {name: n16Value, offset: 4, size: 2, type: n16, meaning: "Wartosc dodawana (interpretowana ze znakiem, np. -2 = $FFFE)."}
-  summary: "Dodaje n16Value do slowa pod pAddress z nasyceniem do zakresu 0..999."
-  details: "Wczytuje adres do ptrTemp0x72 (3 bajty) i wartosc do strcVariables.n16Temp1, wykonuje [addr] += wartosc (16-bit). Jesli wynik ujemny (bit 15) zapisuje 0; jesli >= $03E7 zapisuje $03E7 (999). Przesuwa wskaznik o 6. Nie blokuje."
+    - {name: pAddress, offset: 1, size: 3, type: ram_ptr, meaning: "24-bit address of a 16-bit word in memory (e.g. nLove_Ann, $80xxxx = WRAM mirror)."}
+    - {name: n16Value, offset: 4, size: 2, type: n16, meaning: "Value to add (interpreted as signed, e.g. -2 = $FFFE)."}
+  summary: "Adds n16Value to the word at pAddress, saturating to the range 0..999."
+  details: "Loads the address into ptrTemp0x72 (3 bytes) and the value into strcVariables.n16Temp1, performs [addr] += value (16-bit). If the result is negative (bit 15) it stores 0; if >= $03E7 it stores $03E7 (999). Advances the pointer by 6. It does not block."
   ram_touched: [ptrAIActionData, ptrTemp0x72, strcVariables.n16Temp1, "[pAddress]"]
   calls: []
   open_questions: null
@@ -183,13 +183,13 @@
   confidence: confirmed
   length_bytes: 7
   params:
-    - {name: pAddress, offset: 1, size: 3, type: ram_ptr, meaning: "Czytany, ale ignorowany przez handler (ptrTemp0x72 jest zaraz nadpisywany wartoscia). Skrypty zawsze podaja nMoney."}
-    - {name: n24Value, offset: 4, size: 3, type: n24, meaning: "Kwota 24-bit ze znakiem dodawana do pieniedzy gracza (np. -2000, 1000, 2)."}
-  summary: "Dodaje n24Value do nMoney ($7F1F04) przez fGameEngine_AddProfit; przy ujemnym wyniku zeruje pieniadze."
-  details: "Handler wczytuje adres do ptrTemp0x72 po czym wczytuje wartosc do tego samego ptrTemp0x72 (24 bit), wiec adres z komendy nie ma wplywu - cel jest zawsze nMoney. Wola fGameEngine_AddProfit (83B1C9): dodaje 24-bit, limit gorny 999999 ($0F423F), przy wyniku ujemnym zwraca A=1 bez zapisu. Gdy A != 0 handler zeruje nMoney (24-bit). Przesuwa wskaznik o 7. Nie blokuje."
+    - {name: pAddress, offset: 1, size: 3, type: ram_ptr, meaning: "Read but ignored by the handler (ptrTemp0x72 is immediately overwritten with the value). Scripts always supply nMoney."}
+    - {name: n24Value, offset: 4, size: 3, type: n24, meaning: "Signed 24-bit amount added to the player's money (e.g. -2000, 1000, 2)."}
+  summary: "Adds n24Value to nMoney ($7F1F04) via fGameEngine_AddProfit; if the result is negative, sets the money to zero."
+  details: "The handler loads the address into ptrTemp0x72 and then loads the value into the same ptrTemp0x72 (24-bit), so the address from the command has no effect - the target is always nMoney. It calls fGameEngine_AddProfit (83B1C9): adds the 24-bit value, upper limit 999999 ($0F423F), and on a negative result returns A=1 without storing. When A != 0 the handler clears nMoney (24-bit). Advances the pointer by 7. It does not block."
   ram_touched: [ptrAIActionData, ptrTemp0x72, nMoney]
   calls: [fGameEngine_AddProfit]
-  open_questions: "Interpretacja BEQ po JSL opiera sie na tym, ze REP #$20 nie zmienia flagi Z (A=1 z AddProfit -> zerowanie)."
+  open_questions: "The interpretation of BEQ after JSL relies on REP #$20 not changing the Z flag (A=1 from AddProfit -> clearing)."
 
 - opcode: 0x43
   macro: AICMD0x43_JumpIfEqual16
@@ -199,11 +199,11 @@
   confidence: confirmed
   length_bytes: 8
   params:
-    - {name: pAddress, offset: 1, size: 3, type: ram_ptr, meaning: "Adres 24-bit slowa 16-bit do porownania (np. $8000D4 = strcPlayer.action, nFirstChildAge)."}
-    - {name: n16Value, offset: 4, size: 2, type: n16, meaning: "Wartosc porownywana (rownosc)."}
-    - {name: pNextAction, offset: 6, size: 2, type: script_ptr, meaning: "Adres 16-bit celu skoku w biezacym banku skryptu (bank bierze z ptrAIActionData+2)."}
-  summary: "Skacze do pNextAction, jesli slowo 16-bit pod pAddress rowna sie n16Value."
-  details: "Czyta adres i wartosc, porownuje 16-bit [pAddress] z wartoscia. Rowne: ptrAIActionData (16 bit) = pNextAction. Rozne: przesuwa wskaznik o 2 (za pNextAction), czyli dlugosc 8. Nie blokuje."
+    - {name: pAddress, offset: 1, size: 3, type: ram_ptr, meaning: "24-bit address of a 16-bit word to compare (e.g. $8000D4 = strcPlayer.action, nFirstChildAge)."}
+    - {name: n16Value, offset: 4, size: 2, type: n16, meaning: "Value to compare against (equality)."}
+    - {name: pNextAction, offset: 6, size: 2, type: script_ptr, meaning: "16-bit jump target address in the current script bank (the bank is taken from ptrAIActionData+2)."}
+  summary: "Jumps to pNextAction if the 16-bit word at pAddress equals n16Value."
+  details: "Reads the address and the value, compares the 16-bit [pAddress] with the value. Equal: ptrAIActionData (16-bit) = pNextAction. Not equal: advances the pointer by 2 (past pNextAction), so the length is 8. It does not block."
   ram_touched: [ptrAIActionData, ptrTemp0x72, strcVariables.n16Temp1, "[pAddress]"]
   calls: []
   open_questions: null
@@ -216,11 +216,11 @@
   confidence: confirmed
   length_bytes: 9
   params:
-    - {name: pAddress, offset: 1, size: 3, type: ram_ptr, meaning: "Adres 24-bit wartosci 24-bit (3 bajty w pamieci)."}
-    - {name: n24Value, offset: 4, size: 3, type: n24, meaning: "Wartosc porownywana (rownosc, bajty: word + bank)."}
-    - {name: pNextAction, offset: 7, size: 2, type: script_ptr, meaning: "Adres 16-bit celu skoku w biezacym banku skryptu."}
-  summary: "Skacze do pNextAction, jesli 24-bitowa wartosc pod pAddress rowna sie n24Value."
-  details: "Porownuje 16-bit [pAddress] z mlodsza polowa, a nastepnie bajt [pAddress+2] z najstarszym bajtem. Obie rowne: ptrAIActionData = pNextAction; w przeciwnym razie przesuniecie o 2 (dlugosc 9). Nie blokuje. Nieuzywane w znanych skryptach US."
+    - {name: pAddress, offset: 1, size: 3, type: ram_ptr, meaning: "24-bit address of a 24-bit value (3 bytes in memory)."}
+    - {name: n24Value, offset: 4, size: 3, type: n24, meaning: "Value to compare against (equality, bytes: word + bank)."}
+    - {name: pNextAction, offset: 7, size: 2, type: script_ptr, meaning: "16-bit jump target address in the current script bank."}
+  summary: "Jumps to pNextAction if the 24-bit value at pAddress equals n24Value."
+  details: "Compares the 16-bit [pAddress] with the lower half, and then the byte [pAddress+2] with the highest byte. Both equal: ptrAIActionData = pNextAction; otherwise advance by 2 (length 9). It does not block. Not used in the known US scripts."
   ram_touched: [ptrAIActionData, ptrTemp0x72, strcVariables.n16Temp1, strcVariables.n16Temp2, "[pAddress]"]
   calls: []
   open_questions: null
@@ -233,15 +233,15 @@
   confidence: confirmed
   length_bytes: 10
   params:
-    - {name: pAddress, offset: 1, size: 3, type: ram_ptr, meaning: "Adres 24-bit slowa 16-bit."}
-    - {name: nMin, offset: 4, size: 2, type: n16, meaning: "Dolna granica, wlacznie (porownanie bez znaku)."}
-    - {name: nMax, offset: 6, size: 2, type: n16, meaning: "Gorna granica, wlacznie (handler liczy nMax+1 i testuje wartosc < nMax+1)."}
-    - {name: pNextAction, offset: 8, size: 2, type: script_ptr, meaning: "Adres 16-bit celu skoku w biezacym banku skryptu."}
-  summary: "Skacze do pNextAction, jesli nMin <= [pAddress] <= nMax (16-bit bez znaku)."
-  details: "Warunek: [addr] >= nMin (BCC pomija) oraz [addr] < nMax+1 (BCS pomija). Spelniony: ptrAIActionData = pNextAction; nie: przesuniecie o 2 (dlugosc 10). Nie blokuje."
+    - {name: pAddress, offset: 1, size: 3, type: ram_ptr, meaning: "24-bit address of a 16-bit word."}
+    - {name: nMin, offset: 4, size: 2, type: n16, meaning: "Lower bound, inclusive (unsigned comparison)."}
+    - {name: nMax, offset: 6, size: 2, type: n16, meaning: "Upper bound, inclusive (the handler computes nMax+1 and tests value < nMax+1)."}
+    - {name: pNextAction, offset: 8, size: 2, type: script_ptr, meaning: "16-bit jump target address in the current script bank."}
+  summary: "Jumps to pNextAction if nMin <= [pAddress] <= nMax (16-bit unsigned)."
+  details: "Condition: [addr] >= nMin (BCC skips) and [addr] < nMax+1 (BCS skips). Satisfied: ptrAIActionData = pNextAction; not satisfied: advance by 2 (length 10). It does not block."
   ram_touched: [ptrAIActionData, ptrTemp0x72, strcVariables.n16Temp1, strcVariables.n16Temp2, "[pAddress]"]
   calls: []
-  open_questions: "Przy nMax = $FFFF nMax+1 przepelnia sie do 0 i skok nigdy nie zachodzi (edge case)."
+  open_questions: "With nMax = $FFFF, nMax+1 overflows to 0 and the jump never happens (edge case)."
 
 - opcode: 0x46
   macro: AICMD0x46_JumpIfBetween24
@@ -251,15 +251,15 @@
   confidence: confirmed
   length_bytes: 12
   params:
-    - {name: pAddress, offset: 1, size: 3, type: ram_ptr, meaning: "Adres 24-bit wartosci 24-bit (np. nMoney)."}
-    - {name: nMin, offset: 4, size: 3, type: n24, meaning: "Dolna granica, wlacznie (porownanie 24-bit bez znaku)."}
-    - {name: nMax, offset: 7, size: 3, type: n24, meaning: "Gorna granica, wlacznie (handler liczy nMax+1)."}
-    - {name: pNextAction, offset: 10, size: 2, type: script_ptr, meaning: "Adres 16-bit celu skoku w biezacym banku skryptu."}
-  summary: "Skacze do pNextAction, jesli nMin <= wartosc24[pAddress] <= nMax."
-  details: "Porownanie 24-bit przez CMP (word) + SBC (bank) z propagacja przeniesienia, dla dolnej granicy (BCC = mniejsze) i dla nMax+1 (BCS = wieksze/rowne = brak skoku). Spelniony: ptrAIActionData = pNextAction; inaczej +2 (dlugosc 12). Uzywane z nMoney (np. 0..99, 1000..9999). Nie blokuje."
+    - {name: pAddress, offset: 1, size: 3, type: ram_ptr, meaning: "24-bit address of a 24-bit value (e.g. nMoney)."}
+    - {name: nMin, offset: 4, size: 3, type: n24, meaning: "Lower bound, inclusive (24-bit unsigned comparison)."}
+    - {name: nMax, offset: 7, size: 3, type: n24, meaning: "Upper bound, inclusive (the handler computes nMax+1)."}
+    - {name: pNextAction, offset: 10, size: 2, type: script_ptr, meaning: "16-bit jump target address in the current script bank."}
+  summary: "Jumps to pNextAction if nMin <= value24[pAddress] <= nMax."
+  details: "24-bit comparison via CMP (word) + SBC (bank) with carry propagation, for the lower bound (BCC = less) and for nMax+1 (BCS = greater/equal = no jump). Satisfied: ptrAIActionData = pNextAction; otherwise +2 (length 12). Used with nMoney (e.g. 0..99, 1000..9999). It does not block."
   ram_touched: [ptrAIActionData, ptrTemp0x72, strcVariables.n16Temp1, strcVariables.n16Temp2, strcVariables.n16Temp3, strcVariables.n16Temp4, "[pAddress]"]
   calls: []
-  open_questions: "Przy nMax = $FFFFFF nMax+1 przepelnia sie (edge case, w skryptach nieuzywane)."
+  open_questions: "With nMax = $FFFFFF, nMax+1 overflows (edge case, unused in scripts)."
 
 - opcode: 0x47
   macro: AICMD0x47_SetValue8
@@ -269,10 +269,10 @@
   confidence: confirmed
   length_bytes: 5
   params:
-    - {name: pAddress, offset: 1, size: 3, type: ram_ptr, meaning: "Adres 24-bit docelowego bajtu (np. nCurrentSeasonID, $80019A, $800921)."}
-    - {name: n8Value, offset: 4, size: 1, type: n8, meaning: "Wartosc zapisywana."}
-  summary: "Zapisuje bajt n8Value pod adres pAddress."
-  details: "Wczytuje adres do ptrTemp0x72 (3 bajty), zapisuje 8-bitowo bajt argumentu przez STA [ptrTemp0x72], przesuwa wskaznik o 5. Brak ograniczen/nasycenia. Nie blokuje."
+    - {name: pAddress, offset: 1, size: 3, type: ram_ptr, meaning: "24-bit address of the target byte (e.g. nCurrentSeasonID, $80019A, $800921)."}
+    - {name: n8Value, offset: 4, size: 1, type: n8, meaning: "Value to store."}
+  summary: "Writes the byte n8Value to the address pAddress."
+  details: "Loads the address into ptrTemp0x72 (3 bytes), writes the argument byte with an 8-bit store via STA [ptrTemp0x72], advances the pointer by 5. No limits/saturation. It does not block."
   ram_touched: [ptrAIActionData, ptrTemp0x72, "[pAddress]"]
   calls: []
   open_questions: null
