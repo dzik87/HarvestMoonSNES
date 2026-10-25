@@ -1,0 +1,21 @@
+{"blocks": [
+ {"name": "palette_anim_scripts", "site": "src/code/bank_80/data_tables.asm"},
+ {"name": "palette_tables", "site": "src/code/bank_80/data_tables.asm"},
+ {"name": "carried_items", "site": "src/code/bank_81/items_misc.asm"},
+ {"name": "item_subroutines", "site": "src/code/bank_81/items_misc.asm"},
+ {"name": "tile_scripts", "site": "src/code/bank_81/items_misc.asm"},
+ {"name": "love_ranges", "site": "src/code/bank_81/player_actions.asm"},
+ {"name": "player_action_jump_table", "site": "src/code/bank_81/player_actions.asm"},
+ {"name": "player_interaction_flags", "site": "src/code/bank_81/player_update.asm"},
+ {"name": "player_update_jump_table", "site": "src/code/bank_81/player_update.asm"},
+ {"name": "weather_dialog_ids", "site": "src/code/bank_81/player_update.asm"},
+ {"name": "day_event_tables", "site": "src/code/bank_82/game_events.asm"},
+ {"name": "interaction_items", "site": "src/code/bank_82/interaction_data.asm"},
+ {"name": "system_transfer_data", "site": "src/code/bank_82/system.asm"},
+ {"name": "tool_action_tables", "site": "src/code/bank_82/tools.asm"},
+ {"name": "tool_sound_data_82", "site": "src/code/bank_82/tools.asm"},
+ {"name": "farm_animal_positions", "site": "src/code/bank_83/game_engine.asm"},
+ {"name": "area_events_jump_table", "site": "src/code/bank_83/map_engine.asm"},
+ {"name": "ai_action_tables", "site": "src/code/bank_84/ai_engine.asm"},
+ {"name": "game_object_offsets", "site": "src/code/bank_85/objects.asm"}
+]}

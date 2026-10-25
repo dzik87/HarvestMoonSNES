@@ -1,0 +1,862 @@
+pItemCarriedTable_8196AF:
+    dl EMPTY_FFFFFF   ; 0x5B * [ptr24]
+    dl aItemCarriedFrames_01_Mushroom
+    dl aItemCarriedFrames_02_PoisonMushroom
+    dl aItemCarriedFrames_03_WildGrape
+    dl aItemCarriedFrames_04_BerryStrongSmell
+    dl aItemCarriedFrames_05_MoonFlower
+    dl aItemCarriedFrames_06_Cake
+    dl aItemCarriedFrames_07_Fish
+    dl aItemCarriedFrames_08_PowerBerry
+    dl aItemCarriedFrames_09
+    dl aItemCarriedFrames_0A
+    dl aItemCarriedFrames_09
+    dl aItemCarriedFrames_09
+    dl aItemCarriedFrames_0D
+    dl aItemCarriedFrames_0E
+    dl aItemCarriedFrames_0F
+    dl aItemCarriedFrames_10_Corn
+    dl aItemCarriedFrames_11_Tomato
+    dl aItemCarriedFrames_12_Potato
+    dl aItemCarriedFrames_13_Turnip
+    dl aItemCarriedFrames_14_Egg
+    dl aItemCarriedFrames_15_SmallMilk
+    dl aItemCarriedFrames_16_MediumMilk
+    dl aItemCarriedFrames_17_LargeMilk
+    dl aItemCarriedFrames_18_Herb
+    dl aItemCarriedFrames_19_Flower
+    dl aItemCarriedFrames_1A_Feed
+    dl aItemCarriedFrames_1B_GreenPerfume
+    dl aItemCarriedFrames_1C_RedPerfume
+    dl aItemCarriedFrames_1D_BluePerfume
+    dl aItemCarriedFrames_1E_RedEgg
+    dl aItemCarriedFrames_1F_LightPurpleEgg
+    dl aItemCarriedFrames_20_BlueEgg
+    dl aItemCarriedFrames_21_PurpleEgg
+    dl aItemCarriedFrames_22_GreenEgg
+    dl aItemCarriedFrames_23_YellowEgg
+    dl aItemCarriedFrames_24_ChickenWindMeasured
+    dl aItemCarriedFrames_25_Chicken
+    dl aItemCarriedFrames_26_Chick
+    dl aItemCarriedFrames_27
+    dl aItemCarriedFrames_28
+    dl aItemCarriedFrames_29_Mole
+    dl aItemCarriedFrames_2A
+    dl aItemCarriedFrames_2B
+    dl aItemCarriedFrames_2C
+    dl aItemCarriedFrames_2D
+    dl aItemCarriedFrames_2E
+    dl aItemCarriedFrames_2F
+    dl aItemCarriedFrames_30
+    dl aItemCarriedFrames_31
+    dl aItemCarriedFrames_32
+    dl aItemCarriedFrames_33
+    dl aItemCarriedFrames_34
+    dl aItemCarriedFrames_35
+    dl aItemCarriedFrames_36
+    dl aItemCarriedFrames_37
+    dl aItemCarriedFrames_38
+    dl aItemCarriedFrames_39
+    dl aItemCarriedFrames_3A
+    dl aItemCarriedFrames_3B
+    dl aItemCarriedFrames_3C
+    dl aItemCarriedFrames_3D
+    dl aItemCarriedFrames_3E
+    dl aItemCarriedFrames_3F
+    dl aItemCarriedFrames_40
+    dl aItemCarriedFrames_41
+    dl aItemCarriedFrames_42
+    dl aItemCarriedFrames_43
+    dl aItemCarriedFrames_35
+    dl aItemCarriedFrames_2E
+    dl aItemCarriedFrames_2F
+    dl aItemCarriedFrames_30
+    dl aItemCarriedFrames_31
+    dl aItemCarriedFrames_19_Flower
+    dl aItemCarriedFrames_36
+    dl aItemCarriedFrames_37
+    dl aItemCarriedFrames_38
+    dl aItemCarriedFrames_3A
+    dl aItemCarriedFrames_3B
+    dl aItemCarriedFrames_3C
+    dl aItemCarriedFrames_3D
+    dl aItemCarriedFrames_3E
+    dl aItemCarriedFrames_32
+    dl aItemCarriedFrames_33
+    dl aItemCarriedFrames_42
+    dl aItemCarriedFrames_43
+    dl aItemCarriedFrames_06_Cake
+    dl aItemCarriedFrames_0F
+    dl aItemCarriedFrames_1B_GreenPerfume
+    dl aItemCarriedFrames_1C_RedPerfume
+    dl aItemCarriedFrames_1D_BluePerfume
+
+pItemCarriedSubrutines:
+    dw $FFFF   ; 0x5B * [ptr16]
+    dw subItemCarried_Mushroom   ; 01
+    dw subItemCarried_PoisonMushroom   ; 02
+    dw subItemCarried_WildGrape   ; 03
+    dw subItemCarried_BerryStrongSmell   ; 04
+    dw subItemCarried_MoonFlower   ; 05
+    dw subItemCarried_Cake   ; 06
+    dw subItemCarried_Fish   ; 07
+    dw subItemCarried_PowerBerry   ; 08
+    dw subItemCarried_Bush   ; 09
+    dw subItemCarried_Bush2   ; 0A
+    dw subItemCarried_Bush   ; 0B
+    dw subItemCarried_Bush   ; 0C
+    dw subItemCarried_0x0D   ; 0D
+    dw subItemCarried_0x0E   ; 0E
+    dw subItemCarried_0x57   ; 0F
+    dw subItemCarried_Corn   ; 10
+    dw subItemCarried_Tomato   ; 11
+    dw subItemCarried_Potato   ; 12
+    dw subItemCarried_Turnip   ; 13
+    dw subItemCarried_Egg   ; 14
+    dw subItemCarried_SmallMilk   ; 15
+    dw subItemCarried_MediumMilk   ; 16
+    dw subItemCarried_LargeMilk   ; 17
+    dw subItemCarried_Herb   ; 18
+    dw subItemCarried_Flower   ; 19
+    dw subItemCarried_Feed   ; 1A
+    dw subItemCarried_GreenPerfume   ; 1B
+    dw subItemCarried_RedPerfume   ; 1C
+    dw subItemCarried_BluePerfume   ; 1D
+    dw subItemCarried_RedEgg   ; 1E
+    dw subItemCarried_LightPurpleEgg   ; 1F
+    dw subItemCarried_BlueEgg   ; 20
+    dw subItemCarried_PurpleEgg   ; 21
+    dw subItemCarried_GreenEgg   ; 22
+    dw subItemCarried_YellowEgg   ; 23
+    dw subItemCarried_ChickenWindMeasured   ; 24
+    dw subItemCarried_Chicken   ; 25
+    dw subItemCarried_Chick   ; 26
+    dw subItemCarried_0x27   ; 27
+    dw subItemCarried_0x28   ; 28
+    dw subItemCarried_Mole   ; 29
+    dw subItemCarried_0x2A   ; 2A
+    dw subItemCarried_0x2B   ; 2B
+    dw subItemCarried_0x2C   ; 2C
+    dw subItemCarried_0x2D   ; 2D
+    dw subItemCarried_0x2E   ; 2E
+    dw subItemCarried_0x2F   ; 2F
+    dw subItemCarried_0x30   ; 30
+    dw subItemCarried_0x31   ; 31
+    dw subItemCarried_0x32   ; 32
+    dw subItemCarried_0x33   ; 33
+    dw subItemCarried_0x34   ; 34
+    dw subItemCarried_0x35   ; 35
+    dw subItemCarried_0x36   ; 36
+    dw subItemCarried_0x37   ; 37
+    dw subItemCarried_0x38   ; 38
+    dw subItemCarried_0x39   ; 39
+    dw subItemCarried_0x3A   ; 3A
+    dw subItemCarried_0x3B   ; 3B
+    dw subItemCarried_0x3C   ; 3C
+    dw subItemCarried_0x3D   ; 3D
+    dw subItemCarried_0x3E   ; 3E
+    dw subItemCarried_0x3F   ; 3F
+    dw subItemCarried_0x40   ; 40
+    dw subItemCarried_0x41   ; 41
+    dw subItemCarried_0x42   ; 42
+    dw subItemCarried_0x43   ; 43
+    dw subItemCarried_0x44   ; 44
+    dw subItemCarried_0x45   ; 45
+    dw subItemCarried_0x46   ; 46
+    dw subItemCarried_0x47   ; 47
+    dw subItemCarried_0x48   ; 48
+    dw subItemCarried_0x49   ; 49
+    dw subItemCarried_0x4A   ; 4A
+    dw subItemCarried_0x4B   ; 4B
+    dw subItemCarried_0x4C   ; 4C
+    dw subItemCarried_0x4D   ; 4D
+    dw subItemCarried_0x4E   ; 4E
+    dw subItemCarried_0x4F   ; 4F
+    dw subItemCarried_0x50   ; 50
+    dw subItemCarried_0x51   ; 51
+    dw subItemCarried_0x52   ; 52
+    dw subItemCarried_0x53   ; 53
+    dw subItemCarried_0x54   ; 54
+    dw subItemCarried_0x55   ; 55
+    dw subItemCarried_0x56   ; 56
+    dw subItemCarried_0x57   ; 57
+    dw subItemCarried_0x58   ; 58
+    dw subItemCarried_0x59   ; 59
+    dw subItemCarried_0x5A   ; 5A
+
+aItemCarriedFrames_01_Mushroom:
+    dl $0000F6
+    db $A2,$03,$00,$9C,$03,$00,$9D,$03,$00,$9E,$03,$01
+    db $9E,$03,$00,$9F,$03,$00,$A0,$03,$00,$A1,$03,$01
+    db $A1,$03,$00,$06,$01,$00,$A3,$03,$00
+
+aItemCarriedFrames_02_PoisonMushroom:
+    dl $0000F7
+    db $AA,$03,$00,$A4,$03,$00,$A5,$03,$00,$A6,$03,$01
+    db $A6,$03,$00,$A7,$03,$00,$A8,$03,$00,$A9,$03,$01
+    db $A9,$03,$00,$07,$01,$00,$AB,$03,$00
+
+aItemCarriedFrames_03_WildGrape:
+    dl $0000F4
+    db $92,$03,$00,$8C,$03,$00,$8D,$03,$00,$8E,$03,$01
+    db $8E,$03,$00,$8F,$03,$00,$90,$03,$00,$91,$03,$01
+    db $91,$03,$00,$04,$01,$00,$93,$03,$00
+
+aItemCarriedFrames_04_BerryStrongSmell:
+    dl $0000F5
+    db $9A,$03,$00,$94,$03,$00,$95,$03,$00,$96,$03,$01
+    db $96,$03,$00,$97,$03,$00,$98,$03,$00,$99,$03,$01
+    db $99,$03,$00,$05,$01,$00,$9B,$03,$00
+
+aItemCarriedFrames_05_MoonFlower:
+    dl $0000F8
+    db $B2,$03,$00,$AC,$03,$00,$AD,$03,$00,$AE,$03,$01
+    db $AE,$03,$00,$AF,$03,$00,$B0,$03,$00,$B1,$03,$01
+    db $B1,$03,$00,$08,$01,$00,$B3,$03,$00
+
+aItemCarriedFrames_06_Cake:
+    dl $0000F9
+    db $BA,$03,$00,$B4,$03,$00,$B5,$03,$00,$B6,$03,$01
+    db $B6,$03,$00,$B7,$03,$00,$B8,$03,$00,$B9,$03,$01
+    db $B9,$03,$00,$09,$01,$00,$BB,$03,$00
+
+aItemCarriedFrames_07_Fish:
+    dl $0000BB
+    db $2C,$04,$00,$26,$04,$00,$27,$04,$00,$28,$04,$01
+    db $28,$04,$00,$29,$04,$00,$2A,$04,$00,$2B,$04,$01
+    db $2B,$04,$00,$BA,$00,$00,$2D,$04,$00
+
+aItemCarriedFrames_08_PowerBerry:
+    dl $000000
+    db $0C,$04,$00,$09,$04,$00,$0A,$04,$00,$0B,$04,$01
+    db $0B,$04,$00,$00,$00,$00,$00,$00,$00,$00,$00,$01
+    db $00,$00,$00,$0D,$04,$00,$00,$00,$00
+
+aItemCarriedFrames_09:
+    dl $0000E8
+    db $29,$01,$00,$23,$01,$00,$24,$01,$00,$25,$01,$01
+    db $25,$01,$00,$26,$01,$00,$27,$01,$00,$28,$01,$01
+    db $28,$01,$00,$B7,$00,$00,$2A,$01,$00
+
+aItemCarriedFrames_0A:
+    dl $0000E9
+    db $31,$01,$00,$2B,$01,$00,$2C,$01,$00,$2D,$01,$01
+    db $2D,$01,$00,$2E,$01,$00,$2F,$01,$00,$30,$01,$01
+    db $30,$01,$00,$B7,$00,$00,$32,$01,$00
+
+aItemCarriedFrames_0D:
+    dl $0000EA
+    db $21,$01,$00,$1B,$01,$00,$1C,$01,$00,$1D,$01,$01
+    db $1D,$01,$00,$1E,$01,$00,$1F,$01,$00,$20,$01,$01
+    db $20,$01,$00,$C8,$00,$00,$22,$01,$00
+
+aItemCarriedFrames_0E:
+    dl $0000EB
+    db $39,$01,$00,$33,$01,$00,$34,$01,$00,$35,$01,$01
+    db $35,$01,$00,$36,$01,$00,$37,$01,$00,$38,$01,$01
+    db $38,$01,$00,$C8,$00,$00,$3A,$01,$00
+
+aItemCarriedFrames_0F:
+    dl $0000E7
+    db $41,$01,$00,$3B,$01,$00,$3C,$01,$00,$3D,$01,$01
+    db $3D,$01,$00,$3E,$01,$00,$3F,$01,$00,$40,$01,$01
+    db $40,$01,$00,$00,$00,$00,$42,$01,$00
+
+aItemCarriedFrames_10_Corn:
+    dl $0000EC
+    db $58,$03,$00,$52,$03,$00,$53,$03,$00,$54,$03,$01
+    db $54,$03,$00,$55,$03,$00,$56,$03,$00,$57,$03,$01
+    db $57,$03,$00,$FC,$00,$00,$59,$03,$00
+
+aItemCarriedFrames_11_Tomato:
+    dl $0000ED
+    db $60,$03,$00,$5A,$03,$00,$5B,$03,$00,$5C,$03,$01
+    db $5C,$03,$00,$5D,$03,$00,$5E,$03,$00,$5F,$03,$01
+    db $5F,$03,$00,$FD,$00,$00,$61,$03,$00
+
+aItemCarriedFrames_12_Potato:
+    dl $0000EF
+    db $70,$03,$00,$6A,$03,$00,$6B,$03,$00,$6C,$03,$01
+    db $6C,$03,$00,$6D,$03,$00,$6E,$03,$00,$6F,$03,$01
+    db $6F,$03,$00,$FF,$00,$00,$71,$03,$00
+
+aItemCarriedFrames_13_Turnip:
+    dl $0000EE
+    db $68,$03,$00,$62,$03,$00,$63,$03,$00,$64,$03,$01
+    db $64,$03,$00,$65,$03,$00,$66,$03,$00,$67,$03,$01
+    db $67,$03,$00,$FE,$00,$00,$69,$03,$00
+
+aItemCarriedFrames_14_Egg:
+    dl $0000F3
+    db $8A,$03,$00,$84,$03,$00,$85,$03,$00,$86,$03,$01
+    db $86,$03,$00,$87,$03,$00,$88,$03,$00,$89,$03,$01
+    db $89,$03,$00,$03,$01,$00,$8B,$03,$00
+
+aItemCarriedFrames_15_SmallMilk:
+    dl $0000F2
+    db $82,$03,$00,$7E,$03,$00,$7E,$03,$00,$7E,$03,$01
+    db $7E,$03,$00,$7F,$03,$00,$80,$03,$00,$81,$03,$01
+    db $81,$03,$00,$02,$01,$00,$83,$03,$00
+
+aItemCarriedFrames_16_MediumMilk:
+    dl $0000F1
+    db $7C,$03,$00,$78,$03,$00,$78,$03,$00,$78,$03,$01
+    db $78,$03,$00,$79,$03,$00,$7A,$03,$00,$7B,$03,$01
+    db $7B,$03,$00,$01,$01,$00,$7D,$03,$00
+
+aItemCarriedFrames_17_LargeMilk:
+    dl $0000F0
+    db $76,$03,$00,$72,$03,$00,$72,$03,$00,$72,$03,$01
+    db $72,$03,$00,$73,$03,$00,$74,$03,$00,$75,$03,$01
+    db $75,$03,$00,$00,$01,$00,$77,$03,$00
+
+aItemCarriedFrames_18_Herb:
+    dl $0000FA
+    db $C2,$03,$00,$BC,$03,$00,$BD,$03,$00,$BE,$03,$01
+    db $BE,$03,$00,$BF,$03,$00,$C0,$03,$00,$C1,$03,$01
+    db $C1,$03,$00,$0A,$01,$00,$C3,$03,$00
+
+aItemCarriedFrames_1A_Feed:
+    dl $0000C3
+    db $34,$04,$00,$2E,$04,$00,$2F,$04,$00,$30,$04,$01
+    db $30,$04,$00,$31,$04,$00,$32,$04,$00,$33,$04,$01
+    db $33,$04,$00,$C4,$00,$00,$35,$04,$00
+
+aItemCarriedFrames_1B_GreenPerfume:
+    dl $00010B
+    db $D0,$03,$00,$CC,$03,$00,$CC,$03,$00,$CC,$03,$01
+    db $CC,$03,$00,$CD,$03,$00,$CE,$03,$00,$CF,$03,$01
+    db $CF,$03,$00,$13,$01,$00,$00,$00,$00
+
+aItemCarriedFrames_1C_RedPerfume:
+    dl $00010C
+    db $D8,$03,$00,$D4,$03,$00,$D4,$03,$00,$D4,$03,$01
+    db $D4,$03,$00,$D5,$03,$00,$D6,$03,$00,$D7,$03,$01
+    db $D7,$03,$00,$14,$01,$00,$00,$00,$00
+
+aItemCarriedFrames_1D_BluePerfume:
+    dl $00010D
+    db $E0,$03,$00,$DC,$03,$00,$DC,$03,$00,$DC,$03,$01
+    db $DC,$03,$00,$DD,$03,$00,$DE,$03,$00,$DF,$03,$01
+    db $DF,$03,$00,$15,$01,$00,$00,$00,$00
+
+aItemCarriedFrames_1E_RedEgg:
+    dl $00010E
+    db $E7,$03,$00,$E1,$03,$00,$E2,$03,$00,$E3,$03,$01
+    db $E3,$03,$00,$E4,$03,$00,$E5,$03,$00,$E6,$03,$01
+    db $E6,$03,$00,$03,$01,$00,$E8,$03,$00
+
+aItemCarriedFrames_1F_LightPurpleEgg:
+    dl $00010F
+    db $EF,$03,$00,$E9,$03,$00,$EA,$03,$00,$EB,$03,$01
+    db $EB,$03,$00,$EC,$03,$00,$ED,$03,$00,$EE,$03,$01
+    db $EE,$03,$00,$03,$01,$00,$F0,$03,$00
+
+aItemCarriedFrames_20_BlueEgg:
+    dl $000110
+    db $F7,$03,$00,$F1,$03,$00,$F2,$03,$00,$F3,$03,$01
+    db $F3,$03,$00,$F4,$03,$00,$F5,$03,$00,$F6,$03,$01
+    db $F6,$03,$00,$03,$01,$00,$F8,$03,$00
+
+aItemCarriedFrames_21_PurpleEgg:
+    dl $000111
+    db $FF,$03,$00,$F9,$03,$00,$FA,$03,$00,$FB,$03,$01
+    db $FB,$03,$00,$FC,$03,$00,$FD,$03,$00,$FE,$03,$01
+    db $FE,$03,$00,$03,$01,$00,$00,$04,$00
+
+aItemCarriedFrames_22_GreenEgg:
+    dl $000112
+    db $07,$04,$00,$01,$04,$00,$02,$04,$00,$03,$04,$01
+    db $03,$04,$00,$04,$04,$00,$05,$04,$00,$06,$04,$01
+    db $06,$04,$00,$03,$01,$00,$08,$04,$00
+
+aItemCarriedFrames_23_YellowEgg:
+    dl $0003D3
+    db $D2,$03,$00,$D1,$03,$00,$D1,$03,$00,$D1,$03,$01
+    db $D1,$03,$00,$00,$00,$00,$00,$00,$00,$00,$00,$01
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00
+
+aItemCarriedFrames_24_ChickenWindMeasured:
+    dl $000117
+    db $BD,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$01
+    db $00,$00,$00,$00,$00,$00,$BC,$00,$00,$00,$00,$01
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00
+
+aItemCarriedFrames_25_Chicken:
+    dl $000212
+    db $14,$04,$00,$0E,$04,$00,$0F,$04,$00,$10,$04,$01
+    db $10,$04,$00,$11,$04,$00,$12,$04,$00,$13,$04,$01
+    db $13,$04,$00,$00,$00,$00,$15,$04,$00
+
+aItemCarriedFrames_26_Chick:
+    dl $000217
+    db $1C,$04,$00,$16,$04,$00,$17,$04,$00,$18,$04,$01
+    db $18,$04,$00,$19,$04,$00,$1A,$04,$00,$1B,$04,$01
+    db $1B,$04,$00,$00,$00,$00,$1D,$04,$00
+
+aItemCarriedFrames_27:
+    dl $0001D9
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$01
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$01
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00
+
+aItemCarriedFrames_28:
+    dl $0000E5
+    db $26,$01,$00,$20,$01,$00,$21,$01,$00,$22,$01,$01
+    db $22,$01,$00,$23,$01,$00,$24,$01,$00,$25,$01,$01
+    db $25,$01,$00,$B4,$00,$00,$27,$01,$00
+
+aItemCarriedFrames_29_Mole:
+    dl $000326
+    db $24,$04,$00,$1E,$04,$00,$1F,$04,$00,$20,$04,$01
+    db $20,$04,$00,$21,$04,$00,$22,$04,$00,$23,$04,$01
+    db $23,$04,$00,$00,$00,$00,$25,$04,$00
+
+aItemCarriedFrames_2A:
+    dl $0000D8
+    db $D8,$00,$00,$67,$01,$00,$68,$01,$00,$69,$01,$01
+    db $69,$01,$00
+
+aItemCarriedFrames_2B:
+    dl $0000D9
+    db $D9,$00,$00,$6A,$01,$00,$6B,$01,$00,$6C,$01,$01
+    db $6C,$01,$00
+
+aItemCarriedFrames_2C:
+    dl $0000DA
+    db $DA,$00,$00,$6D,$01,$00,$6E,$01,$00,$6F,$01,$01
+    db $6F,$01,$00
+
+aItemCarriedFrames_2D:
+    dl $0000DB
+    db $DB,$00,$00,$70,$01,$00,$71,$01,$00,$72,$01,$01
+    db $72,$01,$00
+
+aItemCarriedFrames_2E:
+    dl $0000D0
+    db $D0,$00,$00,$4F,$01,$00,$50,$01,$00,$51,$01,$01
+    db $51,$01,$00
+
+aItemCarriedFrames_2F:
+    dl $0000D1
+    db $D1,$00,$00,$52,$01,$00,$53,$01,$00,$54,$01,$01
+    db $54,$01,$00
+
+aItemCarriedFrames_30:
+    dl $0000D2
+    db $D2,$00,$00,$55,$01,$00,$56,$01,$00,$57,$01,$01
+    db $57,$01,$00
+
+aItemCarriedFrames_31:
+    dl $0000D3
+    db $D3,$00,$00,$58,$01,$00,$59,$01,$00,$5A,$01,$01
+    db $5A,$01,$00
+
+aItemCarriedFrames_32:
+    dl $0000CC
+    db $CC,$00,$00,$43,$01,$00,$44,$01,$00,$45,$01,$01
+    db $45,$01,$00
+
+aItemCarriedFrames_33:
+    dl $0000CD
+    db $CD,$00,$00,$46,$01,$00,$47,$01,$00,$48,$01,$01
+    db $48,$01,$00
+
+aItemCarriedFrames_34:
+    dl $0000CE
+    db $CE,$00,$00,$49,$01,$00,$4A,$01,$00,$4B,$01,$01
+    db $4B,$01,$00
+
+aItemCarriedFrames_35:
+    dl $0000CF
+    db $CF,$00,$00,$4C,$01,$00,$4D,$01,$00,$4E,$01,$01
+    db $4E,$01,$00
+
+aItemCarriedFrames_36:
+    dl $0000D4
+    db $D4,$00,$00,$5B,$01,$00,$5C,$01,$00,$5D,$01,$01
+    db $5D,$01,$00
+
+aItemCarriedFrames_37:
+    dl $0000D5
+    db $D5,$00,$00,$5E,$01,$00,$5F,$01,$00,$60,$01,$01
+    db $60,$01,$00
+
+aItemCarriedFrames_38:
+    dl $0000D6
+    db $D6,$00,$00,$61,$01,$00,$62,$01,$00,$63,$01,$01
+    db $63,$01,$00
+
+aItemCarriedFrames_39:
+    dl $0000D7
+    db $D7,$00,$00,$64,$01,$00,$65,$01,$00,$66,$01,$01
+    db $66,$01,$00
+
+aItemCarriedFrames_3A:
+    dl $0000E0
+    db $E0,$00,$00,$7C,$01,$00,$7D,$01,$00,$7E,$01,$01
+    db $7E,$01,$00
+
+aItemCarriedFrames_3B:
+    dl $0000E1
+    db $E1,$00,$00,$7F,$01,$00,$80,$01,$00,$81,$01,$01
+    db $81,$01,$00
+
+aItemCarriedFrames_3C:
+    dl $0000E3
+    db $E3,$00,$00,$85,$01,$00,$86,$01,$00,$87,$01,$01
+    db $87,$01,$00
+
+aItemCarriedFrames_3D:
+    dl $0000E2
+    db $E2,$00,$00,$82,$01,$00,$83,$01,$00,$84,$01,$01
+    db $84,$01,$00
+
+aItemCarriedFrames_3E:
+    dl $0000DF
+    db $DF,$00,$00,$79,$01,$00,$7A,$01,$00,$7B,$01,$01
+    db $7B,$01,$00
+
+aItemCarriedFrames_3F:
+    dl $0000E4
+    db $E4,$00,$00,$89,$01,$00,$89,$01,$00,$89,$01,$01
+    db $89,$01,$00
+
+aItemCarriedFrames_40:
+    dl $0000E5
+    db $E5,$00,$00,$8A,$01,$00,$8A,$01,$00,$8A,$01,$01
+    db $8A,$01,$00
+
+aItemCarriedFrames_41:
+    dl $0000DC
+    db $DC,$00,$00,$88,$01,$00,$88,$01,$00,$88,$01,$01
+    db $88,$01,$00
+
+aItemCarriedFrames_42:
+    dl $0000DE
+    db $DE,$00,$00,$76,$01,$00,$77,$01,$00,$78,$01,$01
+    db $78,$01,$00
+
+aItemCarriedFrames_43:
+    dl $0000DD
+    db $DD,$00,$00,$73,$01,$00,$74,$01,$00,$75,$01,$01
+    db $75,$01,$00
+
+aItemCarriedFrames_19_Flower:
+    dl $0000FB
+    db $CA,$03,$00,$C4,$03,$00,$C5,$03,$00,$C6,$03,$01
+    db $C6,$03,$00,$C7,$03,$00,$C8,$03,$00,$C9,$03,$01
+    db $C9,$03,$00,$0A,$01,$00,$CB,$03,$00
+
+aFoundItemData:
+    dw $0366   ; 0x08 * [n16 nDialogId, n8 nEnergyIncrease] ; Mushroom
+    db $0A
+    dw $0367   ; Poisonous mushroom
+    db $F6
+    dw $0368   ; Berry of wild grape
+    db $0A
+    dw $0369   ; Tropical fruit
+    db $0A
+    dw $036A   ; Berry of Fullmoon Plant
+    db $32
+    dw $036B   ; Cake
+    db $32
+    dw $036C   ; Fish
+    db $0A
+    dw $036D   ; Power berry
+    db $0A
+
+aDialogData_ShippingProfit:
+    db $00,$00,$00,$0F,$00,$14,$00,$0F,$00,$14,$00,$3C   ; 0x5B * [n8 nUnk, n8 nProfit]
+    db $00,$00,$00,$1E,$00,$00,$00,$00,$00,$00,$00,$00
+    db $00,$00,$10,$00,$10,$00,$14,$00,$00,$0C,$00,$0A
+    db $00,$08,$00,$06,$00,$05,$00,$0F,$00,$19,$00,$23
+    db $00,$14,$00,$00,$99,$00,$00,$00,$00,$00,$00,$00
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+    db $00,$00,$00,$00,$00,$00,$14,$00,$00,$00,$00,$00
+    db $00,$00
+
+aDialogData_SellItems:
+    dw $0000   ; 0x5B * [n16 nDialogId, n8 nProfit]
+    db $00
+    dw $0358   ; Mushroom
+    db $14
+    dw $0359   ; Poisonous mushroom
+    db $1E
+    dw $035B   ; Berry of wild grape
+    db $14
+    dw $035C   ; Tropical fruit
+    db $1E
+    dw $035D   ; Berry of Fullmoon Plant
+    db $3C
+    dw $0313   ; Cake
+    db $00
+    dw $035E   ; Fish
+    db $1E
+    dw $0000   ; Power berry
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0353   ; Corn
+    db $18
+    dw $0354   ; Tomato
+    db $14
+    dw $0355   ; Potato
+    db $10
+    dw $0356   ; Turnip
+    db $0C
+    dw $0357   ; Egg
+    db $0A
+    dw $0350   ; Small milk
+    db $14
+    dw $0351   ; Medium milk
+    db $1E
+    dw $0352   ; Large milk
+    db $28
+    dw $035A   ; Herb
+    db $14
+    dw $0313   ; Flower
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0313
+    db $00
+    dw $0313
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+    dw $0000
+    db $00
+
+aDialogsData_BuyItems:
+    dw $02F6,$02F7,$0211,$02F9   ; 0x16 *[n16 nDescriptionDialogId, n16 nAnswer1DialogId (yes), n16 nAnswer2DialogId (no), n16 nTooPoorDialogId, n8 nUnknown, n24 nCost]; Grass seeds
+    db $BB
+    dl $FFFFCE
+    dw $033F,$02F7,$0211,$02F9   ; Corn seeds
+    db $B7
+    dl $FFFFE2
+    dw $033C,$02F7,$0211,$02F9   ; Tomato seeds
+    db $B8
+    dl $FFFFE2
+    dw $033D,$02F7,$0211,$02F9   ; Potato seeds
+    db $B9
+    dl $FFFFEC
+    dw $033E,$02F7,$0211,$02F9   ; Turnip seeds
+    db $BA
+    dl $FFFFEC
+    dw $0340,$02F8,$0211,$02F9   ; Flower
+    db $BC
+    dl $FFFFE2
+    dw $02FC,$02FD,$02FE,$02FF   ; Paint
+    db $D1
+    dl $FFFF6A
+    dw $0312,$02FD,$02FE,$02FF   ; Milker
+    db $D0
+    dl $FFFF4C
+    dw $0314,$02FD,$02FE,$02FF   ; Brush
+    db $CF
+    dl $FFFFB0
+    dw $0344,$02FD,$02FE,$02FF   ; Super sickle
+    db $CA
+    dl $FFFF38
+    dw $0345,$02FD,$02FE,$02FF   ; Super hoe
+    db $CB
+    dl $FFFF38
+    dw $0346,$02FD,$02FE,$02FF   ; Super hammer
+    db $CC
+    dl $FFFF38
+    dw $0347,$02FD,$02FE,$02FF   ; Super axe
+    db $CD
+    dl $FFFF38
+    dw $0343,$02FD,$02FE,$02FF   ; Sprinkler
+    db $CE
+    dl $FFFF38
+    dw $0301,$0302,$0303,$0304   ; Cow medicine
+    db $D7
+    dl $FFFF9C
+    dw $033B,$0302,$0303,$0304   ; Miracle potion
+    db $D6
+    dl $FFFE70
+    dw $0342,$0308,$0303,$0304   ; Chicken feed
+    db $D9
+    dl $FFFFE2
+    dw $0341,$0308,$0303,$0304   ; Cow feed
+    db $D8
+    dl $FFFFC4
+    dw $0348,$0349,$034A,$02FF   ; Cake
+    db $C5
+    dl $FFFFCE
+    dw $020E,$0210,$0211,$02F9   ; Lilac fragrance
+    db $F8
+    dl $FFFF9C
+    dw $020D,$0210,$0211,$02F9   ; Rose fragrance
+    db $F7
+    dl $FFFF9C
+    dw $020F,$0210,$0211,$02F9   ; Violet fragrance
+    db $F9
+    dl $FFFF9C
+
+nItemCarriedIndexForTilemap:
+    db $00,$01,$01,$01,$01,$03,$00,$00,$00,$02,$02,$02   ; 0x5B * [n8]
+    db $01,$02,$02,$02,$4C,$32,$07,$07,$2E,$00,$00,$00
+    db $20,$01,$00,$12,$12,$12,$00,$00,$00,$00,$00,$00
+    db $00,$00,$00,$00,$00,$00,$2A,$2B,$2B,$2D,$2A,$2B
+    db $2B,$2D,$2A,$2B,$2B,$2C,$2A,$2B,$2B,$2C,$2A,$2B
+    db $2B,$2D,$2C,$2B,$2A,$2B,$2E,$2E,$00,$00,$00,$00
+    db $00,$21,$21,$21,$21,$20,$20,$20,$20,$20,$22,$22
+    db $22,$22,$22,$00,$12,$12,$12
+
+nSoundItemCarriedTable_81A308:
+    db $00,$01,$01,$01,$01,$01,$00,$00,$01,$01,$01,$01   ; 0x5B * [n8]
+    db $01,$01,$01,$01,$01,$01,$01,$01,$00,$00,$00,$00
+    db $01,$01,$01,$00,$00,$00,$00,$00,$00,$00,$00,$00
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+    db $00,$00,$00,$01,$00,$00,$00
+
+aFixedDropPositionsXY:
+    dw $0218,$0208,$01A8,$00D2,$02E8,$00F2   ; n16 x, n16 y
+    dw $0318,$0252,$00E8,$0322,$0298,$0372
+    dw $02B0,$0170,$0068,$0250

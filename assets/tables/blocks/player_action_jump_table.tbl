@@ -1,0 +1,30 @@
+aPlayerAction_JumpTable:
+    dw fPlayerAction0x00   ; 0x1D * [ptr16]
+    dw fPlayerAction0x00
+    dw fPlayerAction0x00
+    dw fPlayerAction0x03
+    dw fPlayerAction0x04
+    dw fPlayerAction0x05
+    dw fPlayerAction0x00
+    dw fPlayerAction0x00
+    dw fPlayerAction0x08
+    dw fPlayerAction0x09
+    dw fPlayerAction0x0A
+    dw fPlayerAction0x0B
+    dw fPlayerAction0x0C_SelectDialog
+    dw fPlayerAction0x0D
+    dw fPlayerAction0x00
+    dw fPlayerAction0x0F
+    dw fPlayerAction0x10
+    dw fPlayerAction0x11_Fishing
+    dw fPlayerAction0x12_FishingBite
+    dw fPlayerAction0x13
+    dw fPlayerAction0x14
+    dw fPlayerAction0x15
+    dw fPlayerAction0x16
+    dw fPlayerAction0x17
+    dw fPlayerAction0x18
+    dw fPlayerAction0x19
+    dw fPlayerAction0x1A
+    dw fPlayerAction0x1B
+    dw fPlayerAction0x1C

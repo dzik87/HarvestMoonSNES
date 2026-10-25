@@ -1,0 +1,14 @@
+.e_Summer30thDay:
+    db $00,$1E,$00,$00   ; Season index based
+
+.e_Unknown1:
+    db $06,$0A,$0A,$00   ; Season index based
+
+.e_Unknown2:
+    db $00,$00,$00,$03   ; Season index based
+
+.e_Summer29thDay:
+    db $00,$1E,$00,$00   ; Season index based
+
+.e_Winter7thDay:
+    db $00,$00,$00,$08   ; Season index based

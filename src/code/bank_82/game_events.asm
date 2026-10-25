@@ -1649,20 +1649,7 @@ fWeatherRandomizer:
     RTL                                                        ;828EB1|6B      |      ;
  
  
-.e_Summer30thDay:
-    db $00,$1E,$00,$00                                         ;828EB2|        |      ; Season index based
- 
-.e_Unknown1:
-    db $06,$0A,$0A,$00                                         ;828EB6|        |      ; Season index based
- 
-.e_Unknown2:
-    db $00,$00,$00,$03                                         ;828EBA|        |      ; Season index based
- 
-.e_Summer29thDay:
-    db $00,$1E,$00,$00                                         ;828EBE|        |      ; Season index based
- 
-.e_Winter7thDay:
-    db $00,$00,$00,$08                                         ;828EC2|        |      ; Season index based
+    incsrc "../../../build/gen/blocks/day_event_tables.asm"
  
 fCore_FindBestLove:
     REP #$30                                                   ;828EC6|C230    |      ;

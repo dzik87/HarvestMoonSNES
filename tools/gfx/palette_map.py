@@ -28,6 +28,7 @@ sys.path.insert(0, str(ROOT / "tools" / "gfx"))
 sys.path.insert(0, str(ROOT / "tools" / "objects"))
 sys.path.insert(0, str(ROOT / "tools" / "maps"))
 import areadata as AD  # noqa: E402
+sys.path.insert(0, str(ROOT / "tools" / "gfx"))
 import spritebanks as SB  # noqa: E402
 import tilemap_codec as C  # noqa: E402
 
@@ -155,7 +156,7 @@ def num(tok):
 
 
 def parse_palette_tables():
-    lines = us_lines(read_lines("src/code/bank_80/data_tables.asm"))
+    lines = us_lines(read_lines("assets/tables/blocks/palette_tables.tbl"))
     a_pal = table_after(lines, "aPalettes", "dl")
     idx = [num(t) for t in table_after(lines, "aMapPalettesIndexes", "db")]
     ids = [num(t) for t in table_after(lines, "aMapPalettesId", "db")]
@@ -163,14 +164,9 @@ def parse_palette_tables():
 
 
 def parse_presets():
-    """Table_*_Presets of core.asm -> {name: [value per preset]}."""
-    lines = read_lines("src/code/bank_80/core.asm")
-    out = {}
-    for i, l in enumerate(lines):
-        m = re.match(r"^Table_(\w+)_Presets:", l)
-        if m:
-            out[m.group(1)] = [num(t) for t in table_after(lines, f"Table_{m.group(1)}_Presets", "db")]
-    return out
+    """assets/gfx/presets.csv -> {register: [value per preset]}."""
+    import presets
+    return presets.load(ROOT)
 
 
 def parse_maps():

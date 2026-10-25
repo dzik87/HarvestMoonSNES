@@ -4110,21 +4110,4 @@ fGameEngine_CowUnused83C9E5:
     RTL                                                        ;83CA0F|6B      |      ;
  
  
-aGameEngine_AddChickenPositionsData:
-    dw $0018,$0048,$0038,$0058,$0048,$0098                     ;83CA10|        |      ; 0x0D * [n16 nPosX, n16 nPoxY]
-    dw $0058,$0078,$0068,$00A8,$0078,$0088                     ;83CA1C|        |      ;
-    dw $0088,$0058,$0098,$0098,$00A8,$0078                     ;83CA28|        |      ;
-    dw $00B8,$00A8,$00C8,$0068,$00D8,$0088                     ;83CA34|        |      ;
-    dw $0028,$00A8                                             ;83CA40|        |      ;
- 
-aGameEngine_AddCowPositionsData:
-    dw $00A8,$0116,$00A8,$00F6,$00A8,$00D6                     ;83CA44|        |      ; 0x0D * [n16 nPosX, n16 nPoxY]
-    dw $00A8,$0096,$00A8,$0076,$00A8,$0056                     ;83CA50|        |      ;
-    dw $0038,$0116,$0038,$00F6,$0038,$00D6                     ;83CA5C|        |      ;
-    dw $0038,$0096,$0038,$0076,$0038,$0056                     ;83CA68|        |      ;
-    dw $00D8,$0158                                             ;83CA74|        |      ;
- 
-aGameEngine_ChickenEggBitMask:
-    dw $0001,$0002,$0004,$0008,$0010,$0020                     ;83CA78|        |      ;
-    dw $0040,$0080,$0100,$0200,$0400,$0800                     ;83CA84|        |      ;
-    dw $1000,$2000,$4000,$8000                                 ;83CA90|        |      ;
+    incsrc "../../../build/gen/blocks/farm_animal_positions.asm"

@@ -52,6 +52,8 @@ jobs:
           python3 tools/maps/areadata.py check
           python3 tools/data/smalltables.py check
           python3 tools/menu/nameinput.py check
+          python3 tools/data/datablocks.py check
+          python3 tools/gfx/presets.py check
           python3 tools/dialogs/texttables.py check
           python3 tools/data/gfxbanks.py check
           python3 tools/gfx/graphics_loads.py check
