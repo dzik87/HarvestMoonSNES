@@ -2,6 +2,11 @@
 """Per-bank comparison of the regional ROMs against the US ROM (statistics only; no ROM data is stored).
 
 Usage: python tools/analysis/region_diff.py --us US.sfc --eu EU.sfc --de DE.sfc --jp JP.sfc [--md docs/regions.md]
+                                            [--data-ranges]
+
+--data-ranges lists, for every DATA bank (everything except the code banks $80-$85 and the AI banks $B3-$B5) and release,
+the contiguous byte ranges that differ from US (ranges closer than 32 bytes are merged), i.e. the work list for the
+unified data tree (blob level: tools/data/regionbanks.py).
 
 For every LoROM bank ($80-$BF) and region it reports the number of differing bytes (same offset) and the
 number of contiguous differing runs. Code that shifted position shows up as a high diff count even when the logic
@@ -25,13 +30,51 @@ def runs(a, b):
     return diff, cnt
 
 
+CODE_BANKS = set(range(0x80, 0x86)) | {0xB3, 0xB4, 0xB5}
+
+
+def diff_ranges(a, b, merge=32):
+    """[(start, end)] of the differing byte ranges (offsets), merged when closer than `merge` bytes."""
+    out = []
+    for i in range(min(len(a), len(b))):
+        if a[i] != b[i]:
+            if out and i - out[-1][1] < merge:
+                out[-1][1] = i + 1
+            else:
+                out.append([i, i + 1])
+    return out
+
+
+def data_ranges(rom):
+    lines = ["# Differing ranges in the data banks (against US)", "",
+             "Banks $80-$85 (code) and $B3-$B5 (AI scripts) are covered by the patch blocks; every other bank not listed is "
+             "byte-identical in all releases (including the header area, `$FFxx` vectors and padding).", ""]
+    for bank in range(0x86, 0xC0):
+        if bank in CODE_BANKS:
+            continue
+        o = (bank - 0x80) * BANK
+        cells = []
+        for r in ("eu", "de", "jp"):
+            rg = diff_ranges(rom["us"][o:o + BANK], rom[r][o:o + BANK])
+            if rg:
+                n = sum(e - s for s, e in rg)
+                cells.append(f"{r.upper()}: {n} bytes in {len(rg)} ranges, ${0x8000 + rg[0][0]:04X}-${0x8000 + rg[-1][1] - 1:04X}")
+        if cells:
+            lines.append(f"- ${bank:02X}: " + "; ".join(cells))
+    return "\n".join(lines) + "\n"
+
+
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument("--data-ranges", action="store_true")
     for r in ("us", "eu", "de", "jp"):
         ap.add_argument("--" + r, required=True, type=Path)
     ap.add_argument("--md", type=Path)
     args = ap.parse_args()
     rom = {r: getattr(args, r).read_bytes() for r in ("us", "eu", "de", "jp")}
+    if args.data_ranges:
+        print(data_ranges(rom))
+        return 0
     rows = []
     for b in range(64):
         o = b * BANK
