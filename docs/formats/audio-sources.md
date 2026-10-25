@@ -32,6 +32,7 @@ Tests: `tests/test_audio_convert.py`, `tests/test_spc700.py`.
 | `audioconv.py spc [--track LABEL ...\|--all\|--sfx N ...] [--out DIR]` | generated `.spc` snapshots (default `build/spc/`, git-ignored): see section 7 |
 | `audioconv.py render SPC_OR_DIR [--format wav\|mp3] [--seconds N] [--out DIR]` | `.spc` -> WAV/MP3 with `ffmpeg` (needs libgme), default `build/render/` |
 | `audioconv.py spcdiff A.spc B.spc` | compare two snapshots per memory region (generated vs. an emulator dump) |
+| `audioconv.py spcmatch DUMPS...` | identify foreign `.spc` dumps by RAM content and compare their static data with the generated songs (results: `audio.md` section 12) |
 | `audioconv.py extract` | one-time conversion of the original blobs into the sources (already done; kept for reference) |
 
 ## 1. Samples (`samples/<label>.wav` + `.json`)
@@ -190,9 +191,7 @@ pointers by whole 3-byte chunks, so a sample whose size is not a multiple of 3 o
 The emulator has no audio output and is not cycle exact (only the timers advance); it is a state generator.
 Correctness is checked in two ways: `tests/test_audio_convert.py` re-parses the generated file and compares driver, SFX block,
 song and every sample in RAM with our sources, and (if available) renders it through libgme and requires sound; all 25 songs and
-sample SFX render audibly. **Validation against real hardware state is still open**: when you have SPC dumps of the same songs from
-an emulator, run `audioconv.py spcdiff theirs.spc ours.spc`; the regions that must match are the driver, SFX block, song data,
-sample directory and samples, whereas direct-page and instrument-record bytes legitimately differ with the moment of the dump.
+sample SFX render audibly. **Validation against real emulator dumps is done** for all 20 named songs (`audioconv.py spcmatch`, results in `audio.md` section 12): track blob, driver, SFX block, directory entries and BRR samples are byte-identical to the dumps, whereas direct-page, voice-table, instrument-record, stale-slot and echo bytes legitimately differ with the moment of the dump. `audioconv.py spcdiff theirs.spc ours.spc` gives the per-region view for a single pair.
 
 Optional comparison material (not part of the repository, never commit it): rips of the soundtrack (MP3/SPC collections on the
 web), and SNES music tools such as the ones on snesmusic.org. They are third-party works and only useful to compare what you hear

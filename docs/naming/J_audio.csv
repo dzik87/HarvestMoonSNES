@@ -1,6 +1,6 @@
 old,new,confidence,reason
 sAudioTrack_AD8000,sAudioSpcDriver,high,Role established from the SPC700 driver analysis (docs/audio.md)
-sAudioTrack_AD9AA7,sAudioTrack_Id05,high,Role established from the SPC700 driver analysis (docs/audio.md)
+sAudioTrack_AD9AA7,sAudioTrack_Town,high,Song name confirmed by matching the RAM of a user-supplied emulator dump of the Town theme with this blob (docs/audio.md, SPC validation)
 sAudioTrack_ADA3A8,sAudioTrack_Id12,high,Role established from the SPC700 driver analysis (docs/audio.md)
 sAudioTrack_ADC1A8,sAudioTrack_Id20,high,Role established from the SPC700 driver analysis (docs/audio.md)
 sAudioTrack_ADC228,sAudioTrack_Id21,high,Role established from the SPC700 driver analysis (docs/audio.md)

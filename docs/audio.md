@@ -44,7 +44,7 @@ There are 65 blobs (not 71). Every blob is referenced from code, none is unused.
 | `sAudioTrack_Winter` | $AD:92C2 | 694 ($2B6) | track data | track id 4; cmd 5 -> SPC $19F4; sample ids $03,$07,$01 |
 | `sAudioTrack_TrollsCave` | $AD:9578 | 754 ($2F2) | track data | track id 15; cmd 5 -> SPC $19F4; sample ids $05,$0B,$01,$08 |
 | `sAudioTrack_StarNightFestival` | $AD:986A | 573 ($23D) | track data | track id 14; cmd 5 -> SPC $19F4; sample ids $05 |
-| `sAudioTrack_Id05` | $AD:9AA7 | 1091 ($443) | track data | track id 5; cmd 5 -> SPC $19F4; sample ids $05,$01,$07 |
+| `sAudioTrack_Town` | $AD:9AA7 | 1091 ($443) | track data | track id 5; cmd 5 -> SPC $19F4; sample ids $05,$01,$07 |
 | `sAudioTrack_BadEnding` | $AD:9EEA | 275 ($113) | track data | track id 17; cmd 5 -> SPC $19F4; sample ids $05,$03,$07 |
 | `sAudioTrack_HarvestFestival` | $AD:9FFD | 939 ($3AB) | track data | track id 3; cmd 5 -> SPC $19F4; sample ids $03,$07,$01,$16,$05 |
 | `sAudioTrack_Id12` | $AD:A3A8 | 465 ($1D1) | track data | track id 12; cmd 5 -> SPC $19F4; sample ids $05,$07,$01 |
@@ -168,7 +168,7 @@ Track ids: `aAudioTrackDataSizeTable` and `sAudioData1_838F83` have 26 entries (
 | 2 | `sAudioTrack_Summer` | $AD:B44A | 626 | $01, $05 | 1 | 6 |
 | 3 | `sAudioTrack_HarvestFestival` | $AD:9FFD | 939 | $03, $07, $01, $16, $05 | 1 | 6 |
 | 4 | `sAudioTrack_Winter` | $AD:92C2 | 694 | $03, $07, $01 | 1 | 6 |
-| 5 | `sAudioTrack_Id05` | $AD:9AA7 | 1091 | $05, $01, $07 | 1 | 6 |
+| 5 | `sAudioTrack_Town` | $AD:9AA7 | 1091 | $05, $01, $07 | 1 | 6 |
 | 6 | `sAudioTrack_Mountain` | $AD:AC0E | 921 | $03, $07, $01 | 1 | 6 |
 | 7 | `sAudioTrack_Fall` | $AD:AFA7 | 685 | $01, $04, $0C, $08 | 1 | 6 |
 | 8 | `sAudioTrack_Dance` | $AD:B254 | 502 | $01, $07, $16 | 1 | 6 |
@@ -609,6 +609,7 @@ sounds for `length * gate / 256` ticks of its `length`. Exact BPM was not derive
   `audio_map` checks.
 - `tools/audio/audioconv.py` (+ `brr.py`, `trackfmt.py`, `spcasm.py`) - builds the blobs and tables from the editable sources
   (`build`), validates them (`check`), exports MIDI/WAV. Formats and workflow: `formats/audio-sources.md`.
+- `audioconv.py spcmatch DUMPS...` - identify foreign `.spc` dumps by RAM content and compare their static data (section 12).
 - `tests/test_audio_convert.py` - BRR decoder against an independent implementation, exact/lossy encoder, WAV I/O, SPC700
   assembler round trip of all 256 opcodes, track text format, build of the whole audio set.
 
@@ -636,11 +637,67 @@ Reproduce the disassembly of the dispatcher (after `python tools/build_assets.py
 - **Pitch/tuning maths.** The tuning pair and the pitch table are used as an 8.8 multiplier, but the exact formula
   (`$0E7A-$0F05`) was only skimmed. Vibrato/tremolo/pitch-envelope parameter order is [I].
 - **Echo.** Delay 5 (10 KB buffer `$D700-$FEFF`) is used by every track; no check for other values was done.
-- **Track names.** The names in the generated labels (`Spring`, `Church`, ...) come from earlier annotation, not from the
-  data; ids 5, 12, 20, 21, 23, 25 are unnamed. Nothing here verifies which in-game situation plays which id
+- **Track names.** All 20 song labels that have a name (`Spring`, `Church`, ... `Town`, `Rain`) are confirmed by emulator dumps (section 12); ids 12, 20,
+  21, 23, 25 are unnamed (no dump covers them). Nothing here verifies which in-game situation plays which id
   (`fAudioEngine_MapMusicHandler` and `pAudioEngine_MapMusic` select ids per map and season).
 - **Sample/BRR labels.** 39 of the 65 `sAudioTrack_*` labels are BRR samples and one is the engine. They should be renamed
   (`sAudioEngine_*`, `sAudioSample_*`) in a separate change; only the addresses are certain.
 - **Two stray bytes.** Track `ADC52D` has one trailing `00`; every SFX stream has one trailing `00`. Harmless, but they are the only
   bytes not accounted for by the format description.
 - **Other regions.** JP/EU/DE audio blobs were not compared.
+
+## 12. Validation against real emulator dumps
+
+`audioconv.py spcmatch DUMPS...` identifies foreign `.spc` snapshots (here: 20 rips taken from running the US game in an
+emulator; they are reference material and are never committed) by RAM content and compares them with the snapshot that
+`audioconv.py spc` generates for the same song. A dump is matched to a song when the whole track blob is found at SPC `$19F4`,
+not by file name. The comparison splits the 64 KiB into static data, which must be identical, and runtime state, which is
+only reported.
+
+| Dump (song name in the file) | Our label | Track id | Static data | Notes |
+|---|---|---|---|---|
+| Opening | `sAudioTrack_Opening` | 18 | identical | echo not yet configured (EVOL 0, FLG $20): dump taken before the engine ran its echo setup |
+| Title | `sAudioTrack_Title` | 11 | identical | |
+| Naming Screen | `sAudioTrack_NamingScreen` | 10 | identical | |
+| Town | `sAudioTrack_Town` | 5 | identical | label was `Id05` before; renamed because of this match |
+| Mountain | `sAudioTrack_Mountain` | 6 | identical | |
+| Church | `sAudioTrack_Church` | 9 | identical | |
+| Spring | `sAudioTrack_Spring` | 0 and 1 | identical | ids 0 and 1 share the blob |
+| Dance | `sAudioTrack_Dance` | 8 | identical | |
+| Summer | `sAudioTrack_Summer` | 2 | identical | |
+| Egg Festival | `sAudioTrack_EggFestival` | 13 | identical | |
+| Fall | `sAudioTrack_Fall` | 7 | identical | |
+| Harvest Festival | `sAudioTrack_HarvestFestival` | 3 | identical | |
+| Winter | `sAudioTrack_Winter` | 4 | identical | echo volume $3C instead of $5A |
+| Star Night Festival | `sAudioTrack_StarNightFestival` | 14 | identical | |
+| Bell | `sAudioTrack_Bell` | 24 | identical | |
+| Trolls Cave | `sAudioTrack_TrollsCave` | 15 | identical | |
+| Ending | `sAudioTrack_Ending` | 16 | identical | |
+| Bad Ending | `sAudioTrack_BadEnding` | 17 | identical | |
+| Hurricane | `sAudioTrack_Hurricane` | 22 | identical | uses a different FIR filter set (the other 19 dumps use the standard set) |
+| Rain | `sAudioTrack_Rain` | 19 | identical | |
+
+"Identical" means, for every dump: the track blob (100 % of the bytes), the SPC700 driver (`$0500-$14B7`), the SFX block
+(`$1600-$19F3`), the sample directory entries of the song's samples and the BRR data of the common samples and of the song's
+samples. The remaining differences are all runtime state and are expected:
+
+- **Driver `$14B8-$14C9`** (the slot-id table) and the **direct page, stack, per-voice tables `$0200-$03FF`**: live state at the
+  moment of the snapshot.
+- **Stale sample slots.** Dumps were taken after other songs had been played, so directory slots and BRR data above the current
+  song's samples still hold the previous songs' samples (1-6 extra slots per dump, listed as `stale-slots`). The instrument
+  records `$0400-$04FF` behave the same way, and records that were never written hold `$FF` in the dumps and `$00` in ours (RAM
+  power-on pattern of the emulator that made the dumps, not driver behaviour).
+- **Track data tail** `$19F4+len ... $1FF3` and the **echo buffer** `$D700-$FFFF`: leftovers of earlier songs / audio output.
+- **DSP.** All dumps have ESA $D7, EDL 5 and DIR $15 (as documented), MVOL $6E, EFB $3C, FLG $00 and a song-specific EON/EVOL.
+  Our snapshots are taken right after the start command, before the engine has run its echo setup, so ESA/EDL/FLG/EON/EVOL
+  differ; the driver sets them within the first tens of thousands of SPC700 steps after the snapshot is loaded in a player.
+
+**Findings that changed the generator.** The first comparison showed one differing byte at the end of every sample whose
+size is not a multiple of 3: the driver copies whole 3-byte chunks, so the one or two ROM bytes after the sample (the first
+bytes of the next blob in the same bank, or the bank padding after the last blob) are copied into SPC RAM as well. The
+generated snapshots now feed those bytes; with that all 20 dumps agree with ours.
+
+**What this proves about the sources.** The track blobs, the driver, the SFX block and the samples built from
+`assets/audio` equal what the real game puts into SPC RAM, so the editable sources (WAV/JSON, track text, driver listing)
+round-trip to the data the engine actually plays. It does not validate the SPC700 emulator's output (rendered audio), which
+no dump contains.

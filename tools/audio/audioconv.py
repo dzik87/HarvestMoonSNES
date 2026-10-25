@@ -22,6 +22,7 @@ Commands:
   wav [--out DIR]      decode the generated sample blobs to WAV files (for listening; sources already contain WAVs)
   spc [--track LABEL|--all|--sfx N] [--out DIR]   generated .spc snapshots (derived listening/interop format, not a source)
   render [--format wav|mp3] [--seconds N] ...      .spc -> audio with ffmpeg (libgme) when available
+  spcmatch DUMPS...    identify foreign .spc dumps by RAM content and compare their static data with our generated songs
   spcdiff A.spc B.spc  compare two snapshots (e.g. an emulator dump against a generated one) per memory region
 """
 import argparse
@@ -692,6 +693,8 @@ SPC_SIZE = 0x10200
 def _sample_command(host, cmd, sid, entries, blobs):
     m = entries[sid]
     brr_bytes = blobs[m["label"]][:entries["_sizes"][m["label"]]]
+    # the driver copies whole 3-byte chunks, so the 0-2 ROM bytes that follow the sample land in SPC RAM as well
+    brr_bytes += entries["_next"].get(m["label"], b"")[:-len(brr_bytes) % 3]
     host.command(cmd, [(sid, sample_loop_offset(m) & 0xFF, sample_loop_offset(m) >> 8),
                        (m["adsr1"], m["adsr2"], m["gain"]), (m["tuning_int"], m["tuning_frac"], 0)], ack=4, data=brr_bytes)
 
@@ -702,6 +705,10 @@ def spc_boot_state(blobs, info):
     man, metas = info["man"], info["metas"]
     entries = {i: m for m in metas.values() for i in m["sample_ids"]}
     entries["_sizes"] = info["sizes"]
+    entries["_next"] = {}
+    for bank in json.loads(BANKS.read_text()).values():                  # the bytes after the last blob of a bank are padding
+        order = bank["blobs"]
+        entries["_next"].update({x: blobs[y] for x, y in zip(order, order[1:])})
     spc = spcemu.Spc()
     drv = blobs[DRIVER_LABEL]
     spc.ram[DRIVER_BASE:DRIVER_BASE + len(drv)] = drv
@@ -824,6 +831,76 @@ def cmd_spcdiff(a):
     return 0
 
 
+def _spc_track_labels(man):
+    by = {}
+    for t in man["tracks"]:
+        by[t["blob"]] = t["id"]
+    return by
+
+
+def _dir_slots(ram):
+    """Sample directory slots that are in use: [(slot, start, loop)] (start 0 = empty)."""
+    return [(i,) + struct.unpack_from("<HH", ram, 0x1500 + 4 * i) for i in range(64) if struct.unpack_from("<H", ram, 0x1500 + 4 * i)[0]]
+
+
+def spc_match(user, gen_by_label):
+    """Identify the song of a foreign .spc by RAM content and compare it with the generated snapshot of that song.
+    Static data must be identical; runtime state (direct page, voice tables, echo buffer, DSP, stale slots) is reported only."""
+    r = user["ram"]
+    best = None
+    for lab, g in gen_by_label.items():
+        blob = g["blob"]
+        n = sum(1 for i, b in enumerate(blob) if r[0x19F4 + i] == b)
+        if n == len(blob) and (best is None or len(blob) > len(gen_by_label[best]["blob"])):
+            best = lab
+    res = dict(label=best)
+    if best is None:
+        return res
+    g = gen_by_label[best]
+    gr = g["ram"]
+    res["driver_diff"] = [i for i in range(0x500, 0x14B8) if r[i] != gr[i]]       # $14B8.. are runtime slot ids
+    res["sfx_diff"] = sum(1 for i in range(0x1600, 0x19F4) if r[i] != gr[i])
+    res["dir_diff"] = [s for s in _dir_slots(gr) if (s[0],) + struct.unpack_from("<HH", r, 0x1500 + 4 * s[0]) != s]
+    res["extra_slots"] = [s[0] for s in _dir_slots(r) if s[0] not in [t[0] for t in _dir_slots(gr)]]
+    end = max([s[1] for s in _dir_slots(gr)] + [0x65F4])
+    last = max(_dir_slots(gr), key=lambda s: s[1])[1]
+    res["sample_diff"] = sum(1 for i in range(0x1FF4, last) if r[i] != gr[i])
+    res["echo"] = tuple(user["dsp"][k] for k in (0x6D, 0x7D, 0x6C))
+    return res
+
+
+def cmd_spcmatch(a):
+    """Match foreign .spc dumps (e.g. emulator rips) to our songs by RAM content and report static-data agreement."""
+    blobs, _t, info = build_all()
+    man = info["man"]
+    state = spc_boot_state(blobs, info)
+    gens = {}
+    for lab, tid in _spc_track_labels(man).items():
+        s = spc_for_track(state, blobs, info, tid)
+        data = write_spc(s, lab)
+        g = parse_spc(data)
+        g["blob"] = blobs[lab]
+        gens[lab] = g
+    files = []
+    for p in a.paths:
+        p = Path(p)
+        files += sorted(p.glob("*.spc")) if p.is_dir() else [p]
+    bad = 0
+    for f in files:
+        u = parse_spc(f.read_bytes())
+        m = spc_match(u, gens)
+        if m["label"] is None:
+            print("%-28s NO MATCH" % f.name)
+            bad += 1
+            continue
+        ok = not m["driver_diff"] and not m["sfx_diff"] and not m["dir_diff"] and not m["sample_diff"]
+        bad += not ok
+        print("%-28s %-30s driver:%d sfx:%d dir:%d samples:%d stale-slots:%s ESA/EDL/FLG:%s %s" % (
+            f.name, m["label"], len(m["driver_diff"]), m["sfx_diff"], len(m["dir_diff"]), m["sample_diff"],
+            m["extra_slots"] or "-", "/".join("%02X" % x for x in m["echo"]), "OK" if ok else "DIFF"))
+    return 1 if bad else 0
+
+
 def cmd_render(a):
     import shutil
     import subprocess
@@ -858,6 +935,7 @@ def main(argv=None):
     s = sub.add_parser("spc"); s.add_argument("--out", default="build/spc"); s.add_argument("--track", action="append", metavar="LABEL")
     s.add_argument("--all", action="store_true"); s.add_argument("--sfx", type=int, action="append", metavar="N"); s.set_defaults(fn=cmd_spc)
     s = sub.add_parser("spcdiff"); s.add_argument("a"); s.add_argument("b"); s.set_defaults(fn=cmd_spcdiff)
+    s = sub.add_parser("spcmatch"); s.add_argument("paths", nargs="+", help=".spc files or directories (foreign dumps, never committed)"); s.set_defaults(fn=cmd_spcmatch)
     s = sub.add_parser("render"); s.add_argument("spc", help=".spc file or directory"); s.add_argument("--out", default="build/render")
     s.add_argument("--format", choices=["wav", "mp3"], default="wav"); s.add_argument("--seconds", type=int, default=60); s.set_defaults(fn=cmd_render)
     a = ap.parse_args(argv)

@@ -1,4 +1,4 @@
-; sAudioTrack_Id05 - song data (song list, patterns, voice streams); pointers are labels.
+; sAudioTrack_Town - song data (song list, patterns, voice streams); pointers are labels.
 ; Format: docs/formats/audio-sources.md (tools/audio/trackfmt.py).
 
 songlist:
