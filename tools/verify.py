@@ -64,6 +64,10 @@ def main() -> int:
         return 2
 
     built = args.rom.read_bytes()
+    scope = expected.get("banks")   # e.g. ["80", "85"]: only these LoROM banks are compared (partial regions)
+    if scope:
+        lo, hi = int(scope[0], 16) - 0x80, int(scope[1], 16) - 0x80
+        built = built[lo * BANK:(hi + 1) * BANK]
     got = digests(built)
     ok = True
     for key in ("size", "crc32", "md5", "sha1"):
@@ -73,10 +77,14 @@ def main() -> int:
 
     if not ok and args.ref and args.ref.is_file():
         print("\ndifferences versus the original:")
-        for line in bank_report(built, args.ref.read_bytes()):
+        ref = args.ref.read_bytes()
+        if scope:
+            ref = ref[lo * BANK:(hi + 1) * BANK]
+        for line in bank_report(built, ref):
             print("  " + line)
 
-    print(f"\n[{args.region}] " + ("ROM MATCHES ORIGINAL" if ok else "ROM MISMATCH"))
+    what = f"ROM MATCHES ORIGINAL" + (f" (banks ${scope[0]}-${scope[1]} only)" if scope else "")
+    print(f"\n[{args.region}] " + (what if ok else "ROM MISMATCH"))
     return 0 if ok else 1
 
 

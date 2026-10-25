@@ -1,6 +1,15 @@
     ; HarvestMoon is LOROM
     lorom
     
+    ; Region selection. The US build is the default; `-DREGION_DE=1` (tools/build.py --region DE) switches the
+    ; `if !REGION_DE` patch blocks in banks $80-$85 to the German code.
+    !REGION_DE ?= 0
+    if !REGION_DE
+        !DE_RAM_SHIFT = 6   ; DE: WRAM from $7E08D1 up is 6 bytes higher (longer weekday names)
+    else
+        !DE_RAM_SHIFT = 0
+    endif
+
     ; Default padding value
     padbyte $00
     
@@ -129,3 +138,4 @@
     incsrc "code/bank_84/ai_engine.asm"
     incsrc "code/bank_84/input.asm"
     incsrc "code/bank_85/objects.asm"
+    incsrc "code/de_targets.asm"

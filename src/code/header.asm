@@ -2,8 +2,13 @@
     ORG $80FFB0
 
 ; HEADER
-    db "E9"                                                    ; ASCII maker code
-    db "AYWE"                                                  ; ASCII game code
+    if !REGION_DE
+        db "01"                                                ; ASCII maker code (DE)
+        db "AYWD"                                              ; ASCII game code (DE)
+    else
+        db "E9"                                                ; ASCII maker code
+        db "AYWE"                                              ; ASCII game code
+    endif
     db $00,$00,$00,$00,$00,$00                                 ; Reserved, should be zero
     db $00                                                     ; Expansion flash size: 1 << N kilobytes
     db $00                                                     ; Expansion RAM size: 1 << N kilobytes - for GSU?
@@ -14,13 +19,22 @@
     db $02                                                     ; Chipset (Indicates if a cartridge contains extra RAM, a battery, and/or a coprocessor)
     db $0B                                                     ; ROM size: 1<<N kilobytes, rounded up (so 8=256KB, 12=4096KB and so on)
     db $03                                                     ; RAM size: 1<<N kilobytes (so 1=2KB, 5=32KB, and so on)
-    db $01                                                     ; Country (Implies NTSC/PAL)
+    if !REGION_DE
+        db $09                                                 ; Country (DE)
+    else
+        db $01                                                 ; Country (Implies NTSC/PAL)
+    endif
     db $33                                                     ; Developer ID
     db $00                                                     ; ROM version (0 = first)
  
 RomChecksum:
-    dw $81C3                                                   ; Checksum complement (Checksum ^ $FFFF)
-    dw $7E3C                                                   ; Checksum
+    if !REGION_DE
+        dw $0975                                               ; Checksum complement (Checksum ^ $FFFF) (DE)
+        dw $F68A                                               ; Checksum (DE)
+    else
+        dw $81C3                                               ; Checksum complement (Checksum ^ $FFFF)
+        dw $7E3C                                               ; Checksum
+    endif
     
     dw fCore_InterruptReturn
     dw fCore_InterruptReturn

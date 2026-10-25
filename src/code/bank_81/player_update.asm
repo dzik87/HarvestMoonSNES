@@ -796,9 +796,9 @@ fPlayerInteraction0x1D:
     REP #$30                                                   ;81DBD3|C230    |      ;
     LDA.W #$00FB                                               ;81DBD5|A9FB00  |      ;
     LDX.W #$02E0                                               ;81DBD8|A2E002  |      ;
-    STX.W $09AD                                                ;81DBDB|8EAD09  |0009AD;
+    STX.W $09AD+!DE_RAM_SHIFT                              ;81DBDB|8EAD09  |0009AD;
     LDY.W #$01A0                                               ;81DBDE|A0A001  |      ;
-    STY.W $09AF                                                ;81DBE1|8CAF09  |0009AF;
+    STY.W $09AF+!DE_RAM_SHIFT                              ;81DBE1|8CAF09  |0009AF;
     JSL.L fSetTileAtCoords                                     ;81DBE4|2288A681|81A688;
     REP #$30                                                   ;81DBE8|C230    |      ;
     LDA.W #$0000                                               ;81DBEA|A90000  |      ;
@@ -1900,10 +1900,19 @@ fPlayerInteraction0x42:
     INC.W nPlayerInteractionArg2                               ;81E721|EE7009  |000970;
     LDA.W nPlayerInteractionArg2                               ;81E724|AD7009  |000970;
     CMP.B #$20                                                 ;81E727|C920    |      ;
+    if !REGION_DE
+    BEQ .de_81E742                                         ;81E73D|F003    |81E742;
+    JMP.W .return                                          ;81E73F|4CD4E7  |81E7D4;
+.de_81E742:
+    LDA.B #$01                                             ;81E742|A901    |      ;
+    STA.W nPlayerInteractionArg1                           ;81E744|8D7509  |      ;
+    JMP.W .return                                          ;81E747|4CD4E7  |81E7D4;
+    else
     BNE .return                                                ;81E729|D072    |81E79D;
     LDA.B #$01                                                 ;81E72B|A901    |      ;
     STA.W nPlayerInteractionArg1                               ;81E72D|8D6F09  |00096F;
     BRA .return                                                ;81E730|806B    |81E79D;
+    endif
  
  
 .case1:
@@ -1911,8 +1920,16 @@ fPlayerInteraction0x42:
     LDX.W #$030C                                               ;81E734|A20C03  |      ;
     LDA.L strcShedItems.row2                                   ;81E737|AF011F7F|7F1F01;
     AND.B #$04                                                 ;81E73B|2904    |      ;
+    if !REGION_DE
+    BNE L_81E768                                           ;81E755|D011    |81E768;
+    LDA.W strcPlayerData.toolEquipped                      ;81E757|AD2709  |      ;
+    CMP.B #$0B                                             ;81E75A|C90B    |      ;
+    BEQ L_81E768                                           ;81E75C|F00A    |81E768;
+    LDA.W strcPlayerData.toolSecond                        ;81E75E|AD2909  |      ;
+    else
     BNE +                                                      ;81E73D|D00A    |81E749;
     LDA.W strcPlayerData.toolEquipped                          ;81E73F|AD2109  |000921;
+    endif
     CMP.B #!EITEM_BELL                                                 
     BEQ +                                                      ;81E744|F003    |81E749;
     LDX.W #$010E                                               ;81E746|A20E01  |      ;
@@ -1941,7 +1958,21 @@ fPlayerInteraction0x42:
     LDA.B #$03                                                 ;81E770|A903    |      ;
     STA.W nPlayerInteractionArg1                               ;81E772|8D6F09  |00096F;
     LDA.B #$01                                                 ;81E775|A901    |      ;
+    if !REGION_DE
+    STA.W strcMenuData.nameDestinationIdx                  ;81E796|8DA509  |      ;
+    SEP #$20                                               ;81E799|E220    |      ;
+    LDA.L $7F1F01                                          ;81E79B|AF011F7F|      ;
+    AND.B #$04                                             ;81E79F|2904    |      ;
+    BNE L_81E7BB                                           ;81E7A1|D018    |81E7BB;
+    LDA.W strcPlayerData.toolEquipped                      ;81E7A3|AD2709  |      ;
+    CMP.B #$0B                                             ;81E7A6|C90B    |      ;
+    BEQ L_81E7BB                                           ;81E7A8|F011    |81E7BB;
+    LDA.W strcPlayerData.toolSecond                        ;81E7AA|AD2909  |      ;
+    CMP.B #$0B                                             ;81E7AD|C90B    |      ;
+    BEQ L_81E7BB                                           ;81E7AF|F00A    |81E7BB;
+    else
     STA.W strcMenuData.nameDestinationIdx                      ;81E777|8D9F09  |00099F;
+    endif
     LDA.L strcShedItems.row2                                   ;81E77A|AF011F7F|7F1F01;
     ORA.B #$04                                                 ;81E77E|0904    |      ;
     STA.L strcShedItems.row2                                   ;81E780|8F011F7F|7F1F01;
@@ -2022,7 +2053,7 @@ fPlayerInteraction0x43:
     SEP #$20                                                   ;81E7F2|E220    |      ;
     LDA.B #$00                                                 ;81E7F4|A900    |      ;
     XBA                                                        ;81E7F6|EB      |      ;
-    LDA.W $09A0                                                ;81E7F7|ADA009  |0009A0;
+    LDA.W $09A0+!DE_RAM_SHIFT                              ;81E7F7|ADA009  |0009A0;
     SEC                                                        ;81E7FA|38      |      ;
     SBC.B #$18                                                 ;81E7FB|E918    |      ;
     REP #$20                                                   ;81E7FD|C220    |      ;
@@ -2038,7 +2069,11 @@ fPlayerInteraction0x43:
     SEP #$20                                                   ;81E814|E220    |      ;
     LDA.L nCurrentYearID                                       ;81E816|AF181F7F|7F1F18;
     BEQ .failCheck                                             ;81E81A|F031    |81E84D;
+    if !REGION_DE
+    REP #$20                                               ;81E853|C220    |      ;
+    else
     REP #$30                                                   ;81E81C|C230    |      ;
+    endif
     %CheckFlag(event2, $8000)
     BNE .failCheck                                             ;81E825|D026    |81E84D;
     REP #$20                                                   ;81E827|C220    |      ;
@@ -2078,7 +2113,7 @@ fPlayerInteraction0x43:
     SEP #$20                                                   ;81E887|E220    |      ;
     LDA.B #$00                                                 ;81E889|A900    |      ;
     XBA                                                        ;81E88B|EB      |      ;
-    LDA.W $09A0                                                ;81E88C|ADA009  |0009A0;
+    LDA.W $09A0+!DE_RAM_SHIFT                              ;81E88C|ADA009  |0009A0;
     SEC                                                        ;81E88F|38      |      ;
     SBC.B #$18                                                 ;81E890|E918    |      ;
     REP #$20                                                   ;81E892|C220    |      ;
@@ -2201,14 +2236,14 @@ fPlayerInteraction0x43:
     SEP #$20                                                   ;81E995|E220    |      ;
     LDA.B #$00                                                 ;81E997|A900    |      ;
     XBA                                                        ;81E999|EB      |      ;
-    LDA.W $09A0                                                ;81E99A|ADA009  |0009A0;
+    LDA.W $09A0+!DE_RAM_SHIFT                              ;81E99A|ADA009  |0009A0;
     LDX.W #$0000                                               ;81E99D|A20000  |      ;
     LDY.W #$0022                                               ;81E9A0|A02200  |      ;
     JSL.L fAI_SetSlotScript                                    ;81E9A3|223F8084|84803F;
     SEP #$20                                                   ;81E9A7|E220    |      ;
     LDA.B #$00                                                 ;81E9A9|A900    |      ;
     XBA                                                        ;81E9AB|EB      |      ;
-    LDA.W $09A0                                                ;81E9AC|ADA009  |0009A0;
+    LDA.W $09A0+!DE_RAM_SHIFT                              ;81E9AC|ADA009  |0009A0;
     SEC                                                        ;81E9AF|38      |      ;
     SBC.B #$18                                                 ;81E9B0|E918    |      ;
     REP #$20                                                   ;81E9B2|C220    |      ;
@@ -2290,7 +2325,7 @@ fPlayerInteraction0x43:
   + SEP #$20                                                   ;81EA6B|E220    |      ;
     LDA.B #$00                                                 ;81EA6D|A900    |      ;
     XBA                                                        ;81EA6F|EB      |      ;
-    LDA.W $09A0                                                ;81EA70|ADA009  |0009A0;
+    LDA.W $09A0+!DE_RAM_SHIFT                              ;81EA70|ADA009  |0009A0;
     JSL.L fAI_SetCCPointer                                     ;81EA73|227C8884|84887C;
     SEP #$20                                                   ;81EA77|E220    |      ;
     REP #$10                                                   ;81EA79|C210    |      ;
@@ -2379,14 +2414,14 @@ fPlayerInteraction0x43:
     SEP #$20                                                   ;81EB2B|E220    |      ;
     LDA.B #$00                                                 ;81EB2D|A900    |      ;
     XBA                                                        ;81EB2F|EB      |      ;
-    LDA.W $09A0                                                ;81EB30|ADA009  |0009A0;
+    LDA.W $09A0+!DE_RAM_SHIFT                              ;81EB30|ADA009  |0009A0;
     LDX.W #$0000                                               ;81EB33|A20000  |      ;
     LDY.W #$0022                                               ;81EB36|A02200  |      ;
     JSL.L fAI_SetSlotScript                                    ;81EB39|223F8084|84803F;
     SEP #$20                                                   ;81EB3D|E220    |      ;
     LDA.B #$00                                                 ;81EB3F|A900    |      ;
     XBA                                                        ;81EB41|EB      |      ;
-    LDA.W $09A0                                                ;81EB42|ADA009  |0009A0;
+    LDA.W $09A0+!DE_RAM_SHIFT                              ;81EB42|ADA009  |0009A0;
     SEC                                                        ;81EB45|38      |      ;
     SBC.B #$18                                                 ;81EB46|E918    |      ;
     REP #$20                                                   ;81EB48|C220    |      ;
@@ -2515,7 +2550,11 @@ fPlayerInteraction0x44:
     LDA.L nCurrentSeasonID                                     ;81EC2B|AF191F7F|7F1F19;
     CMP.B #!SEASON_FALL                                                 
     BNE .loop                                                  ;81EC31|D031    |81EC64;
+    if !REGION_DE
+    REP #$20                                               ;81EC6A|C220    |      ;
+    else
     REP #$30                                                   ;81EC33|C230    |      ;
+    endif
     %CheckFlag(event2, $4000)
     BNE .loop                                                  ;81EC3C|D026    |81EC64;
     REP #$20                                                   ;81EC3E|C220    |      ;
@@ -2636,14 +2675,14 @@ fPlayerInteraction0x44:
     SEP #$20                                                   ;81ED58|E220    |      ;
     LDA.B #$00                                                 ;81ED5A|A900    |      ;
     XBA                                                        ;81ED5C|EB      |      ;
-    LDA.W $09A1                                                ;81ED5D|ADA109  |0009A1;
+    LDA.W $09A1+!DE_RAM_SHIFT                              ;81ED5D|ADA109  |0009A1;
     LDX.W #$0000                                               ;81ED60|A20000  |      ;
     LDY.W #$0024                                               ;81ED63|A02400  |      ;
     JSL.L fAI_SetSlotScript                                    ;81ED66|223F8084|84803F;
     SEP #$20                                                   ;81ED6A|E220    |      ;
     LDA.B #$00                                                 ;81ED6C|A900    |      ;
     XBA                                                        ;81ED6E|EB      |      ;
-    LDA.W $09A1                                                ;81ED6F|ADA109  |0009A1;
+    LDA.W $09A1+!DE_RAM_SHIFT                              ;81ED6F|ADA109  |0009A1;
     SEC                                                        ;81ED72|38      |      ;
     SBC.B #$24                                                 ;81ED73|E924    |      ;
     REP #$20                                                   ;81ED75|C220    |      ;
@@ -2725,7 +2764,7 @@ fPlayerInteraction0x44:
   + SEP #$20                                                   ;81EE2E|E220    |      ;
     LDA.B #$00                                                 ;81EE30|A900    |      ;
     XBA                                                        ;81EE32|EB      |      ;
-    LDA.W $09A1                                                ;81EE33|ADA109  |0009A1;
+    LDA.W $09A1+!DE_RAM_SHIFT                              ;81EE33|ADA109  |0009A1;
     JSL.L fAI_SetCCPointer                                     ;81EE36|227C8884|84887C;
     SEP #$20                                                   ;81EE3A|E220    |      ;
     REP #$10                                                   ;81EE3C|C210    |      ;
@@ -2814,14 +2853,14 @@ fPlayerInteraction0x44:
     SEP #$20                                                   ;81EEEE|E220    |      ;
     LDA.B #$00                                                 ;81EEF0|A900    |      ;
     XBA                                                        ;81EEF2|EB      |      ;
-    LDA.W $09A1                                                ;81EEF3|ADA109  |0009A1;
+    LDA.W $09A1+!DE_RAM_SHIFT                              ;81EEF3|ADA109  |0009A1;
     LDX.W #$0000                                               ;81EEF6|A20000  |      ;
     LDY.W #$0024                                               ;81EEF9|A02400  |      ;
     JSL.L fAI_SetSlotScript                                    ;81EEFC|223F8084|84803F;
     SEP #$20                                                   ;81EF00|E220    |      ;
     LDA.B #$00                                                 ;81EF02|A900    |      ;
     XBA                                                        ;81EF04|EB      |      ;
-    LDA.W $09A1                                                ;81EF05|ADA109  |0009A1;
+    LDA.W $09A1+!DE_RAM_SHIFT                              ;81EF05|ADA109  |0009A1;
     SEC                                                        ;81EF08|38      |      ;
     SBC.B #$24                                                 ;81EF09|E924    |      ;
     REP #$20                                                   ;81EF0B|C220    |      ;
@@ -3500,9 +3539,9 @@ fPlayerInteraction0x4A:
     REP #$30                                                   ;81F490|C230    |      ;
     LDA.W #$00FB                                               ;81F492|A9FB00  |      ;
     LDX.W #$0010                                               ;81F495|A21000  |      ;
-    STX.W $09AD                                                ;81F498|8EAD09  |0009AD;
+    STX.W $09AD+!DE_RAM_SHIFT                              ;81F498|8EAD09  |0009AD;
     LDY.W #$0030                                               ;81F49B|A03000  |      ;
-    STY.W $09AF                                                ;81F49E|8CAF09  |0009AF;
+    STY.W $09AF+!DE_RAM_SHIFT                              ;81F49E|8CAF09  |0009AF;
     JSL.L fSetTileAtCoords                                     ;81F4A1|2288A681|81A688;
     REP #$30                                                   ;81F4A5|C230    |      ;
     LDA.W #$0001                                               ;81F4A7|A90100  |      ;
@@ -3513,9 +3552,9 @@ fPlayerInteraction0x4B:
     REP #$30                                                   ;81F4AD|C230    |      ;
     LDA.W #$00FB                                               ;81F4AF|A9FB00  |      ;
     LDX.W #$00B0                                               ;81F4B2|A2B000  |      ;
-    STX.W $09AD                                                ;81F4B5|8EAD09  |0009AD;
+    STX.W $09AD+!DE_RAM_SHIFT                              ;81F4B5|8EAD09  |0009AD;
     LDY.W #$0090                                               ;81F4B8|A09000  |      ;
-    STY.W $09AF                                                ;81F4BB|8CAF09  |0009AF;
+    STY.W $09AF+!DE_RAM_SHIFT                              ;81F4BB|8CAF09  |0009AF;
     JSL.L fSetTileAtCoords                                     ;81F4BE|2288A681|81A688;
     REP #$30                                                   ;81F4C2|C230    |      ;
     LDA.W #$0002                                               ;81F4C4|A90200  |      ;
@@ -3526,9 +3565,9 @@ fPlayerInteraction0x4C:
     REP #$30                                                   ;81F4CA|C230    |      ;
     LDA.W #$00FB                                               ;81F4CC|A9FB00  |      ;
     LDX.W #$01C0                                               ;81F4CF|A2C001  |      ;
-    STX.W $09AD                                                ;81F4D2|8EAD09  |0009AD;
+    STX.W $09AD+!DE_RAM_SHIFT                              ;81F4D2|8EAD09  |0009AD;
     LDY.W #$0050                                               ;81F4D5|A05000  |      ;
-    STY.W $09AF                                                ;81F4D8|8CAF09  |0009AF;
+    STY.W $09AF+!DE_RAM_SHIFT                              ;81F4D8|8CAF09  |0009AF;
     JSL.L fSetTileAtCoords                                     ;81F4DB|2288A681|81A688;
     REP #$30                                                   ;81F4DF|C230    |      ;
     LDA.W #$0003                                               ;81F4E1|A90300  |      ;
@@ -3539,9 +3578,9 @@ fPlayerInteraction0x4D:
     REP #$30                                                   ;81F4E6|C230    |      ;
     LDA.W #$00FB                                               ;81F4E8|A9FB00  |      ;
     LDX.W #$02A0                                               ;81F4EB|A2A002  |      ;
-    STX.W $09AD                                                ;81F4EE|8EAD09  |0009AD;
+    STX.W $09AD+!DE_RAM_SHIFT                              ;81F4EE|8EAD09  |0009AD;
     LDY.W #$0030                                               ;81F4F1|A03000  |      ;
-    STY.W $09AF                                                ;81F4F4|8CAF09  |0009AF;
+    STY.W $09AF+!DE_RAM_SHIFT                              ;81F4F4|8CAF09  |0009AF;
     JSL.L fSetTileAtCoords                                     ;81F4F7|2288A681|81A688;
     REP #$30                                                   ;81F4FB|C230    |      ;
     LDA.W #$0004                                               ;81F4FD|A90400  |      ;
@@ -3552,9 +3591,9 @@ fPlayerInteraction0x4E:
     REP #$30                                                   ;81F502|C230    |      ;
     LDA.W #$00FB                                               ;81F504|A9FB00  |      ;
     LDX.W #$0050                                               ;81F507|A25000  |      ;
-    STX.W $09AD                                                ;81F50A|8EAD09  |0009AD;
+    STX.W $09AD+!DE_RAM_SHIFT                              ;81F50A|8EAD09  |0009AD;
     LDY.W #$02C0                                               ;81F50D|A0C002  |      ;
-    STY.W $09AF                                                ;81F510|8CAF09  |0009AF;
+    STY.W $09AF+!DE_RAM_SHIFT                              ;81F510|8CAF09  |0009AF;
     JSL.L fSetTileAtCoords                                     ;81F513|2288A681|81A688;
     REP #$30                                                   ;81F517|C230    |      ;
     LDA.W #$0005                                               ;81F519|A90500  |      ;
@@ -3565,9 +3604,9 @@ fPlayerInteraction0x4F:
     REP #$30                                                   ;81F51E|C230    |      ;
     LDA.W #$00FB                                               ;81F520|A9FB00  |      ;
     LDX.W #$0210                                               ;81F523|A21002  |      ;
-    STX.W $09AD                                                ;81F526|8EAD09  |0009AD;
+    STX.W $09AD+!DE_RAM_SHIFT                              ;81F526|8EAD09  |0009AD;
     LDY.W #$0250                                               ;81F529|A05002  |      ;
-    STY.W $09AF                                                ;81F52C|8CAF09  |0009AF;
+    STY.W $09AF+!DE_RAM_SHIFT                              ;81F52C|8CAF09  |0009AF;
     JSL.L fSetTileAtCoords                                     ;81F52F|2288A681|81A688;
     REP #$30                                                   ;81F533|C230    |      ;
     LDA.W #$0006                                               ;81F535|A90600  |      ;
@@ -3578,9 +3617,9 @@ fPlayerInteraction0x50:
     REP #$30                                                   ;81F53A|C230    |      ;
     LDA.W #$00FB                                               ;81F53C|A9FB00  |      ;
     LDX.W #$0210                                               ;81F53F|A21002  |      ;
-    STX.W $09AD                                                ;81F542|8EAD09  |0009AD;
+    STX.W $09AD+!DE_RAM_SHIFT                              ;81F542|8EAD09  |0009AD;
     LDY.W #$0330                                               ;81F545|A03003  |      ;
-    STY.W $09AF                                                ;81F548|8CAF09  |0009AF;
+    STY.W $09AF+!DE_RAM_SHIFT                              ;81F548|8CAF09  |0009AF;
     JSL.L fSetTileAtCoords                                     ;81F54B|2288A681|81A688;
     REP #$30                                                   ;81F54F|C230    |      ;
     LDA.W #$0007                                               ;81F551|A90700  |      ;
@@ -3591,7 +3630,7 @@ fPlayerInteraction_Return:
     REP #$30                                                   ;81F556|C230    |      ;
     TAX                                                        ;81F558|AA      |      ;
     SEP #$20                                                   ;81F559|E220    |      ;
-    LDA.W $09A4,X                                              ;81F55B|BDA409  |0009A4;
+    LDA.W $09A4+!DE_RAM_SHIFT,X                            ;81F55B|BDA409  |0009A4;
     BEQ +                                                      ;81F55E|F034    |81F594;
     TXY                                                        ;81F560|9B      |      ;
     XBA                                                        ;81F561|EB      |      ;
@@ -3606,7 +3645,7 @@ fPlayerInteraction_Return:
     BNE +                                                      ;81F572|D020    |81F594;
     TYX                                                        ;81F574|BB      |      ;
     SEP #$20                                                   ;81F575|E220    |      ;
-    LDA.W $09A4,X                                              ;81F577|BDA409  |0009A4;
+    LDA.W $09A4+!DE_RAM_SHIFT,X                            ;81F577|BDA409  |0009A4;
     CLC                                                        ;81F57A|18      |      ;
     ADC.B #$1D                                                 ;81F57B|691D    |      ;
     STA.W strcPlayerData.carryItemId                           ;81F57D|8D1D09  |00091D;
@@ -3617,8 +3656,8 @@ fPlayerInteraction_Return:
  
   + REP #$30                                                   ;81F594|C230    |      ;
     LDA.W #$00A1                                               ;81F596|A9A100  |      ;
-    LDX.W $09AD                                                ;81F599|AEAD09  |0009AD;
-    LDY.W $09AF                                                ;81F59C|ACAF09  |0009AF;
+    LDX.W $09AD+!DE_RAM_SHIFT                              ;81F599|AEAD09  |0009AD;
+    LDY.W $09AF+!DE_RAM_SHIFT                              ;81F59C|ACAF09  |0009AF;
     JSL.L fMap_UpdateCurrentTilemap                            ;81F59F|223AB082|82B03A;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     RTS                                                        ;81F5AF|60      |      ;

@@ -2,6 +2,25 @@
  
  
 nSystemTranferData_82E666:
+    if !REGION_DE
+    db $FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02
+    db $FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02
+    db $FF,$02,$FF,$02,$FF,$02,$FF,$02,$02,$00,$AE,$00,$80,$00,$AA,$00
+    db $FF,$02,$2C,$00,$6E,$00,$AE,$00,$6E,$00,$FF,$02,$FF,$02,$FF,$02
+    db $FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$12,$00,$BE,$00
+    db $90,$00,$BA,$00,$FF,$02,$3C,$00,$7E,$00,$BE,$00,$7E,$00,$FF,$02
+    db $FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02
+    db $FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02
+    db $FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02
+    db $FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02
+    db $FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02
+    db $FF,$02,$FF,$02,$FF,$02,$FF,$02,$26,$00,$6E,$00,$86,$00,$A0,$00
+    db $FF,$02,$0A,$00,$86,$00,$A0,$00,$AC,$00,$A8,$00,$66,$00,$82,$00
+    db $FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$36,$00,$7E,$00
+    db $96,$00,$B0,$00,$FF,$02,$1A,$00,$96,$00,$B0,$00,$BC,$00,$B8,$00
+    db $76,$00,$92,$00,$FF,$02,$FF,$02
+    nSystemTranferData_82E6D2 = $82E79B
+    else
     db $FF,$02,$FF,$02,$2C,$00,$6E,$00,$C2,$00,$FF,$02         ;82E666|        |      ; 0x03 * [0x24 bytes]
     db $08,$00,$86,$00,$66,$00,$A8,$00,$C6,$00,$FF,$02         ;82E672|        |      ;
     db $FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02         ;82E67E|        |      ;
@@ -18,13 +37,19 @@ nSystemTranferData_82E6D2:
     db $FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02         ;82E6EA|        |      ;
     db $FF,$02,$FF,$02,$3C,$00,$B2,$00,$FF,$02,$18,$00         ;82E6F6|        |      ;
     db $96,$00,$76,$00,$B8,$00,$D6,$00,$FF,$02,$FF,$02         ;82E702|        |      ;
+    endif
     db $FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02         ;82E70E|        |      ;
     db $FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02         ;82E71A|        |      ;
     db $FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02         ;82E726|        |      ;
+    if !REGION_DE
+    db $FF,$02,$FF,$02,$C8,$10,$08,$12
+    aSystemTransferArgument = $82E8B7
+    else
     db $FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02,$FF,$02         ;82E732|        |      ;
  
 aSystemTransferArgument:
     dw $10E8,$1228                                             ;82E73E|        |      ; 0x02 * [n16, n16]
+    endif
  
 fMainMenu_DrawSaveSlotFrames:
     REP #$30                                                   ;82E742|C230    |      ;
@@ -105,7 +130,11 @@ fMainMenu_DrawSaveSlotFrames:
     INX                                                        ;82E7DE|E8      |      ;
     CPX.W #$0010                                               ;82E7DF|E01000  |      ;
     BEQ .justReturn                                            ;82E7E2|F004    |82E7E8;
+    if !REGION_DE
+    JML.L $82E8C4                                          ;82E961|5CC4E882|82E8C4;
+    else
     JML.L $82E747                                              ;82E7E4|5C47E782|82E747;
+    endif
  
  
 .justReturn:
@@ -116,7 +145,7 @@ fLoadAndStartGame:
     SEP #$20                                                   ;82E7E9|E220    |      ;
     LDA.B #$00                                                 ;82E7EB|A900    |      ;
     XBA                                                        ;82E7ED|EB      |      ;
-    LDA.W $098E                                                ;82E7EE|AD8E09  |00098E;
+    LDA.W $098E+!DE_RAM_SHIFT                              ;82E7EE|AD8E09  |00098E;
     JSL.L fGameEngine_LoadGame                                 ;82E7F1|22B1B283|83B2B1;
     JML.L fCore_GameStart                                      ;82E7F5|5C008080|808000;
  

@@ -3,7 +3,11 @@
 fDialog_LoadDialogBoxGraphics:
     REP #$30                                                   ;8392BB|C230    |      ;
     REP #$20                                                   ;8392BD|C220    |      ;
+    if !REGION_DE
+    LDA.W #$CBC3                                           ;8392BF|A9C3CB  |      ;
+    else
     LDA.W #$CB05                                               ;8392BF|A905CB  |      ;
+    endif
     STA.B ptrTemp0x72                                          ;8392C2|8572    |000072;
     LDA.W #$2000                                               ;8392C4|A90020  |      ;
     STA.B ptrUnknown0x75                                       ;8392C7|8575    |000075;
@@ -484,8 +488,19 @@ fDialog_IterateText:
   + SEP #$20                                                   ;83967A|E220    |      ;
     LDA.W strcDialogDisplay.dialogVarSize                      ;83967C|AD8C01  |00018C;
     DEC A                                                      ;83967F|3A      |      ;
+    if !REGION_DE
+    STA.W strcDialogDisplay.dialogVarSize                  ;839680|8D8C01  |      ;
+    BNE .de_83968D                                         ;839683|D008    |83968D;
+    LDA.W strcDialogDisplay.dialogFlags                    ;839685|AD9B01  |      ;
+    ORA.B #$80                                             ;839688|0980    |      ;
+    STA.W strcDialogDisplay.dialogFlags                    ;83968A|8D9B01  |      ;
+.de_83968D:
+    REP #$30                                               ;83968D|C230    |      ;
+    JSL.L fDialog_DrawNumericVarDigit                      ;83968F|22B29783|8397B2;
+    else
     STA.W strcDialogDisplay.dialogVarSize                      ;839680|8D8C01  |00018C;
     JSL.L fDialog_DrawNumericVarDigit                               ;839683|22A69783|8397A6;
+    endif
     SEP #$20                                                   ;839687|E220    |      ;
     STZ.W strcDialogDisplay.fontGlyphType                      ;839689|9C9001  |000190;
     SEP #$20                                                   ;83968C|E220    |      ;
@@ -527,12 +542,20 @@ fDialog_IterateText:
     ASL A                                                      ;8396CA|0A      |      ;
     ASL A                                                      ;8396CB|0A      |      ;
     TAX                                                        ;8396CC|AA      |      ;
+    if !REGION_DE
+    LDA.L aTextDataTableFFFD,X                             ;8396D9|BFBA9A83|      ;
+    else
     LDA.L aTextDataTableFFFD,X                                 ;8396CD|BFAE9A83|839AAE;
+    endif
     STA.B ptrTemp0x72                                          ;8396D1|8572    |000072;
     INX                                                        ;8396D3|E8      |      ;
     INX                                                        ;8396D4|E8      |      ;
     SEP #$20                                                   ;8396D5|E220    |      ;
+    if !REGION_DE
+    LDA.L aTextDataTableFFFD,X                             ;8396E3|BFBA9A83|      ;
+    else
     LDA.L aTextDataTableFFFD,X                                 ;8396D7|BFAE9A83|839AAE;
+    endif
     STA.B ptrTemp0x72+2                                        ;8396DB|8574    |000074;
     SEP #$20                                                   ;8396DD|E220    |      ;
     LDA.W strcDialogDisplay.dialogVarSize                      ;8396DF|AD8C01  |00018C;
@@ -809,7 +832,11 @@ aLetterGlyphsPointers:
     dl sFontGlyphs_0x09                                        ;8398C9|        |95B000;
  
 aTextDataTableFFFE:
+    if !REGION_DE
+    dw $5010,$5170,$5350,$5100,$5260
+    else
     dw $5010,$5170,$5350,$5108,$5268                           ;8398CC|        |      ; 0x05 * [n16] (stored at $185)
+    endif
  
 pTextAmmountTable:
     dl $000001,$00000A,$000064,$0003E8                         ;8398D6|        |      ; 0x06 * [n24/ptr24] (used for example to show any variable number for example: money, logs, etc on text screen. Last entry seems to be ptr24)
@@ -943,9 +970,9 @@ aTextDataTableFFFC:
     db $01                                                     ;8399E9|        |      ;
     dl $7F1F0B                                                 ;8399EA|        |7F1F0B;
     db $01                                                     ;8399ED|        |      ;
-    dl $800917                                                 ;8399EE|        |800917;
+    dl $800917+!DE_RAM_SHIFT                               ;8399EE|        |800917;
     db $01                                                     ;8399F1|        |      ;
-    dl $8009B5                                                 ;8399F2|        |8009B5;
+    dl $8009B5+!DE_RAM_SHIFT                               ;8399F2|        |8009B5;
     db $01                                                     ;8399F5|        |      ;
     dl $7F1F1F                                                 ;8399F6|        |7F1F1F;
     db $02                                                     ;8399F9|        |      ;
@@ -1040,6 +1067,14 @@ aTextDataTableFFFC:
     dl $7F1F56                                                 ;839AAA|        |7F1F56;
     db $02                                                     ;839AAD|        |      ;
 aTextDataTableFFFD:
+    if !REGION_DE
+    db $E3,$08,$80,$08,$EB,$08,$80,$08,$89,$08,$80,$08,$89,$08,$80,$08
+    db $89,$08,$80,$08,$89,$08,$80,$08,$DB,$08,$80,$08,$E3,$08,$80,$08
+    db $DB,$08,$80,$08,$DB,$08,$80,$08,$E3,$08,$80,$08,$C3,$08,$80,$14
+    db $B3,$08,$80,$10,$EB,$08,$80,$08,$C3,$08,$80,$14,$B3,$08,$80,$10
+    db $C3,$08,$80,$14,$B3,$08,$80,$10,$A1,$08,$80,$0A,$E3,$08,$80,$08
+    db $DB,$08,$80,$08,$B3,$08,$80,$10
+    else
     dl $8008DD                                                 ;839AAE|        |8008DD; 0x52 * [ptr28 pData, n8 nSize]
     db $08                                                     ;839AB1|        |      ;
     dl $8008E5                                                 ;839AB2|        |8008E5;
@@ -1092,26 +1127,259 @@ aTextDataTableFFFD:
     db $04                                                     ;839B11|        |      ;
     dl $8008B3                                                 ;839B12|        |8008B3;
     db $0C                                                     ;839B15|        |      ;
+    endif
     dl $800889                                                 ;839B16|        |800889;
     db $08                                                     ;839B19|        |      ;
-    dl $8008D5                                                 ;839B1A|        |8008D5;
+    dl $8008D5+!DE_RAM_SHIFT                               ;839B1A|        |8008D5;
     db $08                                                     ;839B1D|        |      ;
-    dl $8008D5                                                 ;839B1E|        |8008D5;
+    dl $8008D5+!DE_RAM_SHIFT                               ;839B1E|        |8008D5;
     db $08                                                     ;839B21|        |      ;
-    dl $8008ED                                                 ;839B22|        |8008ED;
+    dl $8008ED+!DE_RAM_SHIFT                               ;839B22|        |8008ED;
     db $08                                                     ;839B25|        |      ;
-    dl $8008F5                                                 ;839B26|        |8008F5;
+    dl $8008F5+!DE_RAM_SHIFT                               ;839B26|        |8008F5;
     db $08                                                     ;839B29|        |      ;
-    dl $8008DD                                                 ;839B2A|        |8008DD;
+    dl $8008DD+!DE_RAM_SHIFT                               ;839B2A|        |8008DD;
     db $08                                                     ;839B2D|        |      ;
-    dl $8008DD                                                 ;839B2E|        |8008DD;
+    dl $8008DD+!DE_RAM_SHIFT                               ;839B2E|        |8008DD;
     db $08                                                     ;839B31|        |      ;
-    dl $8008E5                                                 ;839B32|        |8008E5;
+    dl $8008E5+!DE_RAM_SHIFT                               ;839B32|        |8008E5;
     db $08                                                     ;839B35|        |      ;
-    dl $8008E5                                                 ;839B36|        |8008E5;
+    dl $8008E5+!DE_RAM_SHIFT                               ;839B36|        |8008E5;
     db $08                                                     ;839B39|        |      ;
     dl $800889                                                 ;839B3A|        |800889;
     db $08                                                     ;839B3D|        |      ;
+    if !REGION_DE
+    db $C3,$08,$80,$14,$B3,$08,$80,$10,$C3,$08,$80,$14,$B3,$08,$80,$10
+    db $C3,$08,$80,$14,$B3,$08,$80,$10,$C3,$08,$80,$14,$B3,$08,$80,$10
+    db $C3,$08,$80,$14,$B3,$08,$80,$10,$C3,$08,$80,$14,$B3,$08,$80,$10
+    db $C3,$08,$80,$14,$B3,$08,$80,$10,$C3,$08,$80,$14,$B3,$08,$80,$10
+    db $C3,$08,$80,$14,$B3,$08,$80,$10,$C3,$08,$80,$14,$B3,$08,$80,$10
+    db $C3,$08,$80,$14,$B3,$08,$80,$10,$C3,$08,$80,$14,$B3,$08,$80,$10
+    db $C3,$08,$80,$14,$B3,$08,$80,$10,$C3,$08,$80,$14,$B3,$08,$80,$10
+    db $C3,$08,$80,$14,$B3,$08,$80,$10,$DB,$08,$80,$08
+aDialogPointers:
+    db $00,$80,$B6,$BA,$80,$B6,$4C,$81,$B6,$2C,$82,$B6,$C8,$82,$B6,$7C
+    db $83,$B6,$4C,$84,$B6,$E2,$84,$B6,$7C,$85,$B6,$88,$86,$B6,$92,$87
+    db $B6,$44,$88,$B6,$A2,$88,$B6,$2C,$89,$B6,$44,$89,$B6,$F6,$89,$B6
+    db $2E,$8B,$B6,$92,$8C,$B6,$26,$8E,$B6,$78,$8F,$B6,$DC,$90,$B6,$62
+    db $91,$B6,$9A,$92,$B6,$8C,$93,$B6,$36,$95,$B6,$0C,$97,$B6,$8C,$97
+    db $B6,$28,$98,$B6,$B4,$98,$B6,$46,$99,$B6,$F8,$99,$B6,$50,$9A,$B6
+    db $7E,$9A,$B6,$9E,$9A,$B6,$D0,$9A,$B6,$6E,$9B,$B6,$EA,$9B,$B6,$6A
+    db $9C,$B6,$F0,$9C,$B6,$4C,$9D,$B6,$AC,$9D,$B6,$1C,$9E,$B6,$7C,$9E
+    db $B6,$E6,$9E,$B6,$94,$9F,$B6,$F6,$9F,$B6,$1E,$A0,$B6,$4C,$A0,$B6
+    db $B4,$A0,$B6,$E4,$A0,$B6,$70,$A1,$B6,$D4,$A1,$B6,$28,$A2,$B6,$60
+    db $A2,$B6,$E6,$A2,$B6,$1A,$A4,$B6,$68,$A4,$B6,$04,$A5,$B6,$C4,$A5
+    db $B6,$02,$A7,$B6,$DA,$A7,$B6,$72,$A8,$B6,$D4,$A8,$B6,$BC,$A9,$B6
+    db $30,$AB,$B6,$D2,$AB,$B6,$D4,$AC,$B6,$40,$AD,$B6,$EA,$AD,$B6,$2C
+    db $AF,$B6,$60,$B0,$B6,$FA,$B0,$B6,$9E,$B1,$B6,$F4,$B1,$B6,$02,$B2
+    db $B6,$B8,$B2,$B6,$74,$B3,$B6,$D4,$B3,$B6,$46,$B4,$B6,$E0,$B4,$B6
+    db $CA,$B5,$B6,$7E,$B6,$B6,$E0,$B6,$B6,$50,$B7,$B6,$BE,$B7,$B6,$BA
+    db $B8,$B6,$3E,$B9,$B6,$E6,$B9,$B6,$EC,$BA,$B6,$98,$BB,$B6,$B6,$BC
+    db $B6,$BA,$BD,$B6,$A6,$BE,$B6,$D4,$BF,$B6,$22,$C1,$B6,$E0,$C1,$B6
+    db $2C,$C3,$B6,$06,$C4,$B6,$D4,$C4,$B6,$8A,$C5,$B6,$D6,$C6,$B6,$A6
+    db $C7,$B6,$2E,$C8,$B6,$60,$C9,$B6,$B0,$C9,$B6,$9C,$CA,$B6,$F0,$CA
+    db $B6,$B0,$CB,$B6,$22,$CC,$B6,$80,$CC,$B6,$F2,$CC,$B6,$60,$CD,$B6
+    db $8E,$CE,$B6,$0E,$CF,$B6,$44,$D0,$B6,$3A,$D1,$B6,$9E,$D1,$B6,$8E
+    db $D2,$B6,$2E,$D3,$B6,$04,$D4,$B6,$C0,$D4,$B6,$F8,$D5,$B6,$F4,$D6
+    db $B6,$DE,$D7,$B6,$94,$D8,$B6,$06,$D9,$B6,$5E,$D9,$B6,$EE,$D9,$B6
+    db $70,$DA,$B6,$92,$DA,$B6,$C4,$DA,$B6,$06,$DB,$B6,$4C,$DB,$B6,$9C
+    db $DB,$B6,$E8,$DB,$B6,$58,$DC,$B6,$08,$DD,$B6,$DE,$DD,$B6,$74,$DE
+    db $B6,$EA,$DE,$B6,$56,$DF,$B6,$66,$DF,$B6,$FC,$DF,$B6,$96,$E0,$B6
+    db $C8,$E0,$B6,$0E,$E1,$B6,$98,$E1,$B6,$FC,$E1,$B6,$AE,$E2,$B6,$18
+    db $E3,$B6,$82,$E3,$B6,$DA,$E3,$B6,$BE,$E4,$B6,$DA,$E4,$B6,$20,$E5
+    db $B6,$88,$E5,$B6,$20,$E6,$B6,$48,$E6,$B6,$08,$E7,$B6,$C8,$E7,$B6
+    db $18,$E8,$B6,$BC,$E8,$B6,$3E,$E9,$B6,$E2,$E9,$B6,$32,$EA,$B6,$64
+    db $EA,$B6,$EE,$EA,$B6,$6E,$EB,$B6,$9E,$EB,$B6,$FE,$EB,$B6,$62,$EC
+    db $B6,$72,$ED,$B6,$12,$EF,$B6,$4A,$EF,$B6,$04,$F0,$B6,$96,$F0,$B6
+    db $20,$F1,$B6,$70,$F1,$B6,$80,$F1,$B6,$14,$F2,$B6,$FC,$F2,$B6,$30
+    db $F3,$B6,$FE,$F3,$B6,$9E,$F4,$B6,$46,$F5,$B6,$40,$F6,$B6,$E8,$F6
+    db $B6,$68,$F7,$B6,$C4,$F7,$B6,$94,$F8,$B6,$F8,$F8,$B6,$1E,$F9,$B6
+    db $B4,$F9,$B6,$4C,$FA,$B6,$E6,$FB,$B6,$F2,$FC,$B6,$28,$FD,$B6,$8E
+    db $FD,$B6,$DA,$FD,$B6,$88,$FE,$B6,$00,$80,$B7,$D4,$80,$B7,$F0,$80
+    db $B7,$58,$81,$B7,$E4,$81,$B7,$28,$82,$B7,$B2,$82,$B7,$6C,$83,$B7
+    db $72,$84,$B7,$FC,$84,$B7,$7C,$85,$B7,$48,$86,$B7,$24,$87,$B7,$A0
+    db $87,$B7,$30,$88,$B7,$8C,$88,$B7,$D2,$88,$B7,$42,$89,$B7,$FC,$89
+    db $B7,$A6,$8A,$B7,$18,$8B,$B7,$DA,$8B,$B7,$F2,$8B,$B7,$C4,$8C,$B7
+    db $60,$8D,$B7,$CC,$8D,$B7,$02,$8E,$B7,$B6,$8E,$B7,$FE,$8E,$B7,$46
+    db $8F,$B7,$88,$8F,$B7,$6E,$90,$B7,$F4,$90,$B7,$88,$91,$B7,$D8,$91
+    db $B7,$1A,$92,$B7,$52,$92,$B7,$C4,$92,$B7,$8C,$93,$B7,$5E,$94,$B7
+    db $A6,$95,$B7,$F2,$96,$B7,$B6,$97,$B7,$56,$98,$B7,$26,$9A,$B7,$B4
+    db $9B,$B7,$90,$9D,$B7,$B8,$9E,$B7,$A4,$9F,$B7,$02,$A0,$B7,$0C,$A1
+    db $B7,$70,$A1,$B7,$70,$A2,$B7,$8A,$A2,$B7,$DE,$A3,$B7,$CC,$A4,$B7
+    db $AE,$A6,$B7,$A6,$A7,$B7,$9A,$A8,$B7,$56,$A9,$B7,$3A,$AA,$B7,$22
+    db $AB,$B7,$AC,$AC,$B7,$2C,$AD,$B7,$12,$AE,$B7,$70,$AE,$B7,$08,$AF
+    db $B7,$86,$AF,$B7,$D8,$AF,$B7,$C8,$B1,$B7,$90,$B2,$B7,$BE,$B3,$B7
+    db $04,$B5,$B7,$AC,$B5,$B7,$E8,$B7,$B7,$2C,$B9,$B7,$D6,$B9,$B7,$48
+    db $BA,$B7,$52,$BB,$B7,$10,$BC,$B7,$90,$BC,$B7,$76,$BD,$B7,$CA,$BD
+    db $B7,$4E,$BE,$B7,$4A,$BF,$B7,$CA,$BF,$B7,$16,$C0,$B7,$D2,$C0,$B7
+    db $3A,$C1,$B7,$9A,$C1,$B7,$88,$C2,$B7,$CA,$C3,$B7,$78,$C4,$B7,$92
+    db $C4,$B7,$FC,$C5,$B7,$8E,$C6,$B7,$80,$C7,$B7,$1A,$C8,$B7,$64,$C9
+    db $B7,$96,$CA,$B7,$D8,$CB,$B7,$7E,$CC,$B7,$B2,$CC,$B7,$1A,$CD,$B7
+    db $E6,$CD,$B7,$76,$CE,$B7,$D8,$CE,$B7,$42,$CF,$B7,$EE,$CF,$B7,$16
+    db $D1,$B7,$60,$D1,$B7,$B8,$D1,$B7,$E6,$D3,$B7,$E2,$D4,$B7,$32,$D5
+    db $B7,$98,$D5,$B7,$CA,$D6,$B7,$18,$D7,$B7,$A0,$D7,$B7,$EC,$D7,$B7
+    db $D0,$D8,$B7,$BC,$D9,$B7,$DC,$DA,$B7,$FE,$DB,$B7,$2E,$DC,$B7,$D0
+    db $DC,$B7,$6C,$DD,$B7,$10,$DE,$B7,$98,$DE,$B7,$68,$E0,$B7,$62,$E2
+    db $B7,$F6,$E2,$B7,$3E,$E4,$B7,$02,$E5,$B7,$8A,$E7,$B7,$08,$E8,$B7
+    db $8A,$E8,$B7,$D0,$E8,$B7,$22,$E9,$B7,$84,$E9,$B7,$F4,$E9,$B7,$58
+    db $EA,$B7,$C2,$EA,$B7,$6C,$EB,$B7,$06,$EC,$B7,$B4,$EC,$B7,$48,$ED
+    db $B7,$18,$EE,$B7,$26,$EF,$B7,$86,$EF,$B7,$56,$F0,$B7,$00,$F1,$B7
+    db $9C,$F1,$B7,$FC,$F1,$B7,$96,$F2,$B7,$00,$F3,$B7,$44,$F3,$B7,$72
+    db $F3,$B7,$C4,$F3,$B7,$86,$F4,$B7,$36,$F5,$B7,$9A,$F5,$B7,$F2,$F5
+    db $B7,$D4,$F6,$B7,$68,$F7,$B7,$24,$F8,$B7,$0E,$F9,$B7,$A4,$F9,$B7
+    db $F4,$F9,$B7,$52,$FA,$B7,$0E,$FB,$B7,$30,$FC,$B7,$5A,$FC,$B7,$BC
+    db $FC,$B7,$E8,$FC,$B7,$16,$FD,$B7,$2A,$FD,$B7,$82,$FD,$B7,$A0,$FD
+    db $B7,$34,$FE,$B7,$6A,$FE,$B7,$A0,$FE,$B7,$0C,$FF,$B7,$24,$FF,$B7
+    db $4E,$FF,$B7,$A4,$FF,$B7,$00,$80,$B8,$46,$80,$B8,$90,$80,$B8,$7C
+    db $81,$B8,$D8,$81,$B8,$98,$82,$B8,$6C,$83,$B8,$48,$84,$B8,$E2,$84
+    db $B8,$A0,$85,$B8,$54,$86,$B8,$2E,$87,$B8,$FC,$87,$B8,$BA,$88,$B8
+    db $18,$89,$B8,$E6,$89,$B8,$6C,$8A,$B8,$B4,$8A,$B8,$DE,$8A,$B8,$2A
+    db $8B,$B8,$74,$8B,$B8,$C6,$8B,$B8,$4C,$8C,$B8,$D0,$8C,$B8,$3C,$8D
+    db $B8,$92,$8D,$B8,$E6,$8D,$B8,$4A,$8E,$B8,$94,$8E,$B8,$C4,$8E,$B8
+    db $72,$8F,$B8,$04,$90,$B8,$50,$90,$B8,$D6,$90,$B8,$3A,$91,$B8,$96
+    db $91,$B8,$EA,$91,$B8,$3E,$92,$B8,$90,$92,$B8,$10,$93,$B8,$62,$93
+    db $B8,$1A,$94,$B8,$4C,$94,$B8,$82,$94,$B8,$9E,$94,$B8,$E4,$94,$B8
+    db $FE,$94,$B8,$18,$95,$B8,$4A,$95,$B8,$E8,$95,$B8,$08,$96,$B8,$6E
+    db $96,$B8,$88,$96,$B8,$D4,$96,$B8,$6C,$97,$B8,$B4,$97,$B8,$FC,$97
+    db $B8,$58,$98,$B8,$A6,$98,$B8,$FC,$98,$B8,$7C,$99,$B8,$94,$99,$B8
+    db $EE,$99,$B8,$FA,$99,$B8,$0A,$9A,$B8,$1C,$9A,$B8,$86,$9B,$B8,$A8
+    db $9B,$B8,$18,$9C,$B8,$72,$9C,$B8,$D6,$9C,$B8,$06,$9D,$B8,$60,$9D
+    db $B8,$1E,$9E,$B8,$68,$9E,$B8,$4C,$A0,$B8,$CC,$A0,$B8,$D0,$A1,$B8
+    db $54,$A2,$B8,$E0,$A2,$B8,$A8,$A3,$B8,$02,$A4,$B8,$72,$A4,$B8,$F4
+    db $A4,$B8,$B8,$A5,$B8,$2A,$A6,$B8,$58,$A6,$B8,$64,$A7,$B8,$86,$A7
+    db $B8,$C0,$A7,$B8,$12,$A9,$B8,$00,$AA,$B8,$E0,$AA,$B8,$2E,$AB,$B8
+    db $F4,$AB,$B8,$48,$AD,$B8,$DA,$AD,$B8,$90,$AE,$B8,$7E,$AF,$B8,$E0
+    db $AF,$B8,$62,$B0,$B8,$1E,$B1,$B8,$A0,$B1,$B8,$F8,$B1,$B8,$AA,$B2
+    db $B8,$36,$B3,$B8,$0E,$B4,$B8,$66,$B4,$B8,$00,$B5,$B8,$0E,$B5,$B8
+    db $B8,$B5,$B8,$32,$B6,$B8,$8A,$B7,$B8,$EA,$B7,$B8,$36,$B8,$B8,$88
+    db $B8,$B8,$18,$B9,$B8,$52,$B9,$B8,$B4,$B9,$B8,$1A,$BA,$B8,$6C,$BA
+    db $B8,$98,$BA,$B8,$5A,$BB,$B8,$82,$BC,$B8,$10,$BD,$B8,$5E,$BD,$B8
+    db $0C,$BE,$B8,$26,$BE,$B8,$1E,$BF,$B8,$1E,$C1,$B8,$B0,$C1,$B8,$2A
+    db $C2,$B8,$F8,$C2,$B8,$94,$C3,$B8,$44,$C4,$B8,$E6,$C4,$B8,$32,$C5
+    db $B8,$A2,$C5,$B8,$46,$C6,$B8,$E8,$C6,$B8,$92,$C8,$B8,$3E,$CA,$B8
+    db $FE,$CB,$B8,$46,$CC,$B8,$62,$CC,$B8,$C0,$CC,$B8,$10,$CD,$B8,$22
+    db $CF,$B8,$C8,$CF,$B8,$A0,$D0,$B8,$02,$D1,$B8,$90,$D1,$B8,$30,$D2
+    db $B8,$98,$D2,$B8,$F4,$D2,$B8,$64,$D3,$B8,$36,$D4,$B8,$94,$D4,$B8
+    db $E8,$D4,$B8,$EA,$D5,$B8,$DE,$D6,$B8,$46,$D7,$B8,$8C,$D7,$B8,$C0
+    db $D7,$B8,$42,$D8,$B8,$B4,$D8,$B8,$56,$D9,$B8,$02,$DA,$B8,$2E,$DA
+    db $B8,$B8,$DA,$B8,$0E,$DB,$B8,$64,$DB,$B8,$02,$DC,$B8,$82,$DC,$B8
+    db $E6,$DC,$B8,$48,$DD,$B8,$26,$DE,$B8,$C6,$DE,$B8,$82,$DF,$B8,$A8
+    db $E0,$B8,$DC,$E0,$B8,$3A,$E1,$B8,$1A,$E3,$B8,$70,$E3,$B8,$70,$E4
+    db $B8,$B4,$E4,$B8,$56,$E5,$B8,$E6,$E5,$B8,$54,$E6,$B8,$B4,$E6,$B8
+    db $22,$E7,$B8,$BA,$E8,$B8,$36,$E9,$B8,$88,$E9,$B8,$BA,$E9,$B8,$08
+    db $EA,$B8,$50,$EA,$B8,$74,$EB,$B8,$EC,$EC,$B8,$42,$ED,$B8,$5E,$ED
+    db $B8,$38,$EF,$B8,$E2,$F0,$B8,$30,$F1,$B8,$9E,$F1,$B8,$32,$F2,$B8
+    db $14,$F3,$B8,$5C,$F3,$B8,$8E,$F3,$B8,$30,$F4,$B8,$90,$F4,$B8,$FE
+    db $F4,$B8,$52,$F5,$B8,$E0,$F5,$B8,$F8,$F5,$B8,$08,$F6,$B8,$D6,$F6
+    db $B8,$42,$F7,$B8,$AA,$F7,$B8,$72,$F8,$B8,$18,$F9,$B8,$12,$FA,$B8
+    db $46,$FA,$B8,$7A,$FA,$B8,$DE,$FA,$B8,$E0,$FB,$B8,$38,$FC,$B8,$2E
+    db $FD,$B8,$9A,$FD,$B8,$CA,$FD,$B8,$D4,$FE,$B8,$22,$FF,$B8,$00,$80
+    db $B9,$18,$81,$B9,$F2,$81,$B9,$06,$82,$B9,$AC,$82,$B9,$78,$83,$B9
+    db $72,$84,$B9,$CC,$84,$B9,$10,$85,$B9,$2E,$87,$B9,$4A,$88,$B9,$2A
+    db $8A,$B9,$D8,$8A,$B9,$0E,$8B,$B9,$EE,$8B,$B9,$32,$8C,$B9,$82,$8C
+    db $B9,$E4,$8C,$B9,$2C,$8E,$B9,$8E,$8E,$B9,$12,$8F,$B9,$98,$8F,$B9
+    db $B6,$8F,$B9,$FC,$8F,$B9,$8A,$90,$B9,$26,$91,$B9,$82,$91,$B9,$EE
+    db $91,$B9,$18,$92,$B9,$38,$92,$B9,$80,$92,$B9,$C8,$92,$B9,$56,$93
+    db $B9,$DA,$93,$B9,$1C,$94,$B9,$CE,$94,$B9,$CC,$95,$B9,$22,$97,$B9
+    db $00,$98,$B9,$46,$98,$B9,$FC,$98,$B9,$BE,$99,$B9,$EC,$99,$B9,$46
+    db $9A,$B9,$68,$9A,$B9,$54,$9B,$B9,$E8,$9B,$B9,$44,$9C,$B9,$72,$9C
+    db $B9,$DC,$9C,$B9,$3C,$9D,$B9,$8A,$9D,$B9,$1C,$9E,$B9,$7A,$9E,$B9
+    db $D8,$9E,$B9,$E6,$9E,$B9,$40,$9F,$B9,$96,$9F,$B9,$1E,$A0,$B9,$8A
+    db $A0,$B9,$0A,$A1,$B9,$A4,$A1,$B9,$F2,$A1,$B9,$20,$A2,$B9,$A0,$A2
+    db $B9,$00,$A3,$B9,$58,$A3,$B9,$40,$A4,$B9,$D8,$A4,$B9,$56,$A5,$B9
+    db $C2,$A5,$B9,$26,$A6,$B9,$74,$A6,$B9,$FC,$A6,$B9,$32,$A7,$B9,$A0
+    db $A7,$B9,$6C,$A8,$B9,$4C,$A9,$B9,$B4,$A9,$B9,$80,$AA,$B9,$CC,$AA
+    db $B9,$72,$AB,$B9,$EC,$AB,$B9,$6E,$AC,$B9,$60,$AD,$B9,$CE,$AD,$B9
+    db $96,$AF,$B9,$3C,$B0,$B9,$68,$B0,$B9,$82,$B0,$B9,$E6,$B0,$B9,$90
+    db $B1,$B9,$DC,$B1,$B9,$04,$B2,$B9,$9A,$B2,$B9,$34,$B3,$B9,$EE,$B3
+    db $B9,$88,$B4,$B9,$AA,$B5,$B9,$7A,$B6,$B9,$0C,$B7,$B9,$8A,$B7,$B9
+    db $24,$B8,$B9,$CE,$B8,$B9,$78,$B9,$B9,$E6,$B9,$B9,$A8,$BA,$B9,$6C
+    db $BB,$B9,$00,$BC,$B9,$9C,$BC,$B9,$30,$BD,$B9,$52,$BD,$B9,$A6,$BD
+    db $B9,$00,$BE,$B9,$88,$BE,$B9,$A8,$BE,$B9,$64,$C0,$B9,$AA,$C0,$B9
+    db $F4,$C0,$B9,$4C,$C1,$B9,$7E,$C1,$B9,$D2,$C1,$B9,$1E,$C2,$B9,$6A
+    db $C2,$B9,$FA,$C2,$B9,$66,$C3,$B9,$06,$C4,$B9,$A8,$C4,$B9,$00,$C5
+    db $B9,$84,$C5,$B9,$4C,$C6,$B9,$B6,$C6,$B9,$18,$C7,$B9,$6A,$C7,$B9
+    db $C4,$C7,$B9,$30,$C8,$B9,$42,$C8,$B9,$A8,$C8,$B9,$FA,$C8,$B9,$6C
+    db $C9,$B9,$F2,$C9,$B9,$7C,$CB,$B9,$D6,$CB,$B9,$F0,$CB,$B9,$5E,$CC
+    db $B9,$A6,$CC,$B9,$3A,$CE,$B9,$7E,$CF,$B9,$E8,$CF,$B9,$1E,$D0,$B9
+    db $72,$D0,$B9,$58,$D2,$B9,$26,$D4,$B9,$72,$D4,$B9,$7C,$D4,$B9,$64
+    db $D5,$B9,$3E,$D6,$B9,$A4,$D6,$B9,$A0,$D7,$B9,$EE,$D7,$B9,$5E,$D8
+    db $B9,$7E,$D9,$B9,$26,$DA,$B9,$12,$DB,$B9,$D8,$DB,$B9,$CE,$DC,$B9
+    db $10,$DD,$B9,$66,$DD,$B9,$62,$DE,$B9,$84,$DF,$B9,$D2,$DF,$B9,$52
+    db $E1,$B9,$A8,$E1,$B9,$AA,$E2,$B9,$34,$E3,$B9,$B2,$E3,$B9,$E6,$E3
+    db $B9,$90,$E4,$B9,$F0,$E4,$B9,$D2,$E5,$B9,$1A,$E6,$B9,$66,$E7,$B9
+    db $F4,$E7,$B9,$A2,$E9,$B9,$46,$EA,$B9,$B6,$EA,$B9,$FA,$EA,$B9,$E4
+    db $EB,$B9,$3E,$EC,$B9,$68,$EC,$B9,$68,$ED,$B9,$18,$EE,$B9,$84,$EE
+    db $B9,$A6,$EE,$B9,$F6,$EE,$B9,$4A,$EF,$B9,$CA,$F0,$B9,$38,$F1,$B9
+    db $B8,$F1,$B9,$88,$F2,$B9,$74,$F3,$B9,$A0,$F3,$B9,$58,$F4,$B9,$B8
+    db $F4,$B9,$AE,$F5,$B9,$C2,$F6,$B9,$86,$F7,$B9,$D6,$F7,$B9,$0A,$F9
+    db $B9,$08,$FA,$B9,$28,$FC,$B9,$C0,$FD,$B9,$00,$80,$BA,$52,$81,$BA
+    db $9A,$83,$BA,$66,$85,$BA,$56,$87,$BA,$44,$89,$BA,$20,$8B,$BA,$E8
+    db $8C,$BA,$20,$8E,$BA,$BE,$8F,$BA,$1C,$91,$BA,$72,$92,$BA,$E2,$92
+    db $BA,$6A,$93,$BA,$F6,$93,$BA,$20,$94,$BA,$4C,$94,$BA,$A4,$94,$BA
+    db $22,$95,$BA,$1C,$96,$BA,$16,$97,$BA,$10,$98,$BA,$12,$99,$BA,$3E
+    db $9A,$BA,$3A,$9B,$BA,$44,$9C,$BA,$52,$9D,$BA,$3A,$9E,$BA,$D4,$9F
+    db $BA,$F6,$A0,$BA,$FC,$A1,$BA,$0A,$A3,$BA,$9E,$A4,$BA,$AA,$A5,$BA
+    db $C2,$A5,$BA,$78,$A7,$BA,$C4,$A7,$BA,$48,$A8,$BA,$D6,$A8,$BA,$2C
+    db $A9,$BA,$C8,$A9,$BA,$36,$AA,$BA,$B0,$AA,$BA,$32,$AB,$BA,$AC,$AB
+    db $BA,$28,$AC,$BA,$A4,$AC,$BA,$20,$AD,$BA,$82,$AD,$BA,$C4,$AD,$BA
+    db $DA,$AD,$BA,$FE,$AD,$BA,$8C,$AE,$BA,$E8,$AE,$BA,$F4,$AF,$BA,$A6
+    db $B0,$BA,$5E,$B1,$BA,$F8,$B1,$BA,$48,$B2,$BA,$70,$B2,$BA,$AA,$B2
+    db $BA,$12,$B3,$BA,$6E,$B3,$BA,$EA,$B3,$BA,$08,$B4,$BA,$4C,$B4,$BA
+    db $A0,$B4,$BA,$D6,$B4,$BA,$5E,$B5,$BA,$94,$B5,$BA,$EC,$B5,$BA,$AC
+    db $B6,$BA,$E2,$B6,$BA,$0A,$B7,$BA,$CC,$B7,$BA,$06,$B8,$BA,$5C,$B8
+    db $BA,$FE,$B8,$BA,$A4,$B9,$BA,$5A,$BA,$BA,$70,$BA,$BA,$96,$BA,$BA
+    db $3A,$BB,$BA,$8C,$BB,$BA,$F6,$BB,$BA,$24,$BC,$BA,$FC,$BC,$BA,$FC
+    db $BD,$BA,$9E,$BE,$BA,$10,$BF,$BA,$B2,$BF,$BA,$3C,$C0,$BA,$18,$C1
+    db $BA,$80,$C1,$BA,$50,$C2,$BA,$00,$C3,$BA,$8A,$C3,$BA,$F4,$C4,$BA
+    db $24,$C5,$BA,$DC,$C5,$BA,$F4,$C5,$BA,$62,$C6,$BA,$B4,$C6,$BA,$12
+    db $C7,$BA,$34,$C9,$BA,$38,$C9,$BA,$3E,$C9,$BA,$46,$C9,$BA,$50,$C9
+    db $BA,$5C,$C9,$BA,$6A,$C9,$BA,$7A,$C9,$BA,$8C,$C9,$BA,$A0,$C9,$BA
+    db $B8,$C9,$BA,$CE,$C9,$BA,$22,$CA,$BA,$78,$CA,$BA,$DA,$CA,$BA,$2A
+    db $CB,$BA,$78,$CB,$BA,$52,$CC,$BA,$3C,$CD,$BA,$74,$CD,$BA,$A4,$CD
+    db $BA,$C8,$CD,$BA,$14,$CE,$BA,$60,$CE,$BA,$A6,$CE,$BA,$58,$CF,$BA
+    db $E8,$CF,$BA,$74,$D0,$BA,$D0,$D0,$BA,$84,$D1,$BA,$30,$D2,$BA,$FA
+    db $D2,$BA,$00,$D4,$BA,$AE,$D4,$BA,$9E,$D5,$BA,$A2,$D6,$BA,$92,$D7
+    db $BA,$D6,$D7,$BA,$D8,$D8,$BA,$58,$D9,$BA,$48,$DA,$BA,$AC,$DA,$BA
+    db $36,$DC,$BA,$0C,$DD,$BA,$CA,$DD,$BA,$7C,$DE,$BA,$02,$DF,$BA,$98
+    db $DF,$BA,$2C,$E0,$BA,$7E,$E0,$BA,$26,$E1,$BA,$0C,$E2,$BA,$38,$E2
+    db $BA,$2A,$E3,$BA,$B8,$E3,$BA,$24,$E4,$BA,$B2,$E4,$BA,$6C,$E5,$BA
+    db $30,$E6,$BA,$B4,$E6,$BA,$54,$E7,$BA,$02,$E8,$BA,$90,$E8,$BA,$0E
+    db $E9,$BA,$0A,$EA,$BA,$62,$EB,$BA,$B6,$EC,$BA,$14,$EE,$BA,$6A,$EE
+    db $BA,$B8,$EE,$BA,$36,$EF,$BA,$98,$EF,$BA,$04,$F0,$BA,$88,$F0,$BA
+    db $52,$F1,$BA,$A6,$F1,$BA,$06,$F2,$BA,$F6,$F2,$BA,$8A,$F3,$BA,$24
+    db $F4,$BA,$D0,$F4,$BA,$86,$F5,$BA,$F4,$F5,$BA,$D0,$F6,$BA,$A4,$F7
+    db $BA,$4E,$F8,$BA,$E4,$F8,$BA,$8A,$F9,$BA,$96,$FA,$BA,$82,$FB,$BA
+    db $80,$FC,$BA,$EE,$FC,$BA,$5E,$FD,$BA,$CE,$FD,$BA,$BE,$FE,$BA,$4E
+    db $FF,$BA,$00,$80,$BB,$94,$80,$BB,$74,$81,$BB,$50,$82,$BB,$00,$83
+    db $BB,$0E,$84,$BB,$78,$84,$BB,$30,$85,$BB,$92,$85,$BB,$5A,$86,$BB
+    db $C8,$86,$BB,$F8,$86,$BB,$BA,$87,$BB,$36,$88,$BB,$DE,$88,$BB,$6E
+    db $89,$BB,$62,$8A,$BB,$B2,$8A,$BB,$4E,$8B,$BB,$88,$8B,$BB,$F4,$8B
+    db $BB,$6E,$8C,$BB,$DA,$8C,$BB,$EA,$8C,$BB,$AA,$8D,$BB,$12,$8E,$BB
+    db $72,$8E,$BB,$44,$8F,$BB,$E6,$8F,$BB,$76,$90,$BB,$02,$91,$BB,$5E
+    db $91,$BB,$B6,$91,$BB,$62,$92,$BB,$C6,$92,$BB,$32,$93,$BB,$78,$93
+    db $BB,$1A,$94,$BB,$54,$95,$BB,$DC,$95,$BB,$60,$96,$BB,$DE,$96,$BB
+    db $42,$97,$BB,$EE,$97,$BB,$EC,$98,$BB,$5C,$99,$BB,$30,$9B,$BB,$A0
+    db $9B,$BB,$52,$9C,$BB,$5E,$9D,$BB,$66,$9E,$BB,$F8,$9E,$BB,$B2,$9F
+    db $BB,$7C,$A0,$BB,$D0,$A1,$BB,$54,$A2,$BB,$56,$A3,$BB,$6A,$A4,$BB
+    db $A2,$A5,$BB,$92,$A6,$BB,$F2,$A7,$BB,$14,$A8,$BB,$7A,$A8,$BB,$94
+    db $A8,$BB,$EA,$A8,$BB,$06,$A9,$BB,$76,$A9,$BB,$B0,$A9,$BB,$EA,$A9
+    db $BB,$24,$AA,$BB,$5E,$AA,$BB,$98,$AA,$BB,$0A,$AB,$BB,$7C,$AB,$BB
+    db $EE,$AB,$BB,$60,$AC,$BB,$74,$AC,$BB,$94,$AC,$BB,$CE,$AC,$BB,$08
+    db $AD,$BB,$BC,$AD,$BB,$34,$B0,$BB,$68,$B2,$BB,$18,$B4,$BB,$A8,$B4
+    db $BB,$A2,$B7,$BB,$DE,$B9,$BB,$CA,$BB,$BB,$36,$BE,$BB,$76,$C0,$BB
+    db $24,$C1,$BB,$90,$C2,$BB,$1E,$C3,$BB,$38,$C5,$BB,$B2,$C6,$BB,$04
+    db $C9,$BB,$EA,$CA,$BB,$C6,$CC,$BB,$10,$CD,$BB,$72,$CD,$BB,$DC,$CD
+    db $BB,$1A,$CE,$BB,$FC,$CE,$BB,$72,$CF,$BB,$E8,$CF,$BB,$5E,$D0,$BB
+    db $D4,$D0,$BB,$5C,$D1,$BB,$E4,$D1,$BB,$5A,$D2,$BB,$D0,$D2,$BB,$AC
+    db $D3,$BB,$4C,$D4,$BB,$E2,$D4,$BB,$C2,$D5,$BB,$38,$D6,$BB,$4E,$D8
+    db $BB,$38,$D9,$BB,$8A,$D9,$BB,$16,$DA,$BB,$A0,$DA,$BB,$1C,$DB,$BB
+    db $3C,$DC,$BB,$9E,$DC,$BB,$EA,$DC,$BB,$76,$DD,$BB,$D2,$DD,$BB,$54
+    db $DE,$BB,$96,$DE,$BB,$8A,$DF,$BB,$18,$E0,$BB,$88,$E0,$BB,$E4,$E0
+    db $BB,$64,$E1,$BB,$F6,$E1,$BB,$30,$E2,$BB,$96,$E2,$BB,$14,$E3,$BB
+    db $B0,$E3,$BB,$F6,$E3,$BB,$86,$E4,$BB,$26,$E5,$BB,$AC,$E5,$BB,$58
+    db $E6,$BB,$B6,$E6,$BB,$58,$E7,$BB
+    else
     dl $8008BF                                                 ;839B3E|        |8008BF;
     db $12                                                     ;839B41|        |      ;
     dl $8008D1                                                 ;839B42|        |8008D1;
@@ -2381,3 +2649,4 @@ aDialogPointers:
     dl sDialogUS_0x0495                                        ;83A9B5|        |BBBC44;
     dl sDialogUS_0x0496                                        ;83A9B8|        |BBBCBC;
     dl sDialogUS_0x0497                                        ;83A9BB|        |BBBD54;
+    endif

@@ -422,7 +422,7 @@ struct strcNames            $7E0881
     .wMostLovedGirl         : skip 10   ; 8A1-8AA
     .wUnused8AB             : skip 8    ; 8AB-8B2
     .wSeason                : skip 12   ; 8B3-8BE
-    .wWeekday               : skip 18   ; 8BF-8D0
+    .wWeekday               : skip 18+!DE_RAM_SHIFT   ; 8BF-8D0 (DE: 6 bytes longer)
     .wDayOrdinal            : skip 4    ; 8D1-8D4
     .wPlayer                : skip 8    ; 8D5-8DC
     .wDog                   : skip 8    ; 8DD-8E4
@@ -435,7 +435,7 @@ endstruct align 124
 ;
 ; strcAiControlData 8FD-900
 ;
-struct strcAiControlData    $7E08FD
+struct strcAiControlData    $7E08FD+!DE_RAM_SHIFT
     .input                  : skip 2    ; 8FD-8FE
     .counter                : skip 2    ; 8FF-900
 endstruct align 4
@@ -444,7 +444,7 @@ endstruct align 4
 ;
 ; Size and start OK - Object data
 ;
-struct strcObjectData       $7E0901
+struct strcObjectData       $7E0901+!DE_RAM_SHIFT
     .spriteIdx              : skip 2    ; 901-902
     .spriteIdxOld           : skip 2    ; 903-904
     .gameObjectIdx          : skip 2    ; 905-906
@@ -462,7 +462,7 @@ endstruct align 22
 ;
 ; size and start OK - Player data
 ;
-struct strcPlayerData       $7E0917
+struct strcPlayerData       $7E0917+!DE_RAM_SHIFT
     .stamina                : skip 1    ; 917
     .energy                 : skip 1    ; 918
     .unkCounter919          : skip 1    ; 919
@@ -502,7 +502,7 @@ endstruct align 31
 ;
 ; Size and start OK - Animal data ? but also any seed is last
 ;
-struct strcStockData        $7E0937
+struct strcStockData        $7E0937+!DE_RAM_SHIFT
     .unkCow                 : skip 1    ; 937
     .unkDog                 : skip 1    ; 938
     .unkHorse               : skip 1    ; 939
@@ -516,7 +516,7 @@ endstruct align 53
 ;
 ; 96C - 990 ???
 ;
-;struct strcInteractionData  $7E096C
+;struct strcInteractionData  $7E096C+!DE_RAM_SHIFT
 ;    .unk96C                 : skip 1    ; 96C
 ;    .breakCounter           : skip 1    ; 96D
 ;    .index                  : skip 1    ; 96E
@@ -530,7 +530,7 @@ endstruct align 53
 ;
 ; Size and start to be confirmed
 ;
-struct strcMenuData         $7E0991
+struct strcMenuData         $7E0991+!DE_RAM_SHIFT
     .menuIdx                : skip 2    ; 0991
     .tableSelector          : skip 1    ; 0993
     .nameEntryIdx           : skip 1    ; 0994

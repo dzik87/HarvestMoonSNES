@@ -22,7 +22,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 ROM_SIZE = 0x200000
-MAIN = {"US": "src/main.asm"}  # more regions will be added as the migration progresses
+MAIN = {"US": "src/main.asm", "DE": "src/main.asm"}  # DE: same entry, `-DREGION_DE=1` (code banks $80-$85 only)
+DEFINES = {"US": [], "DE": ["-DREGION_DE=1"]}
 
 
 def find_asar(explicit):
@@ -55,6 +56,7 @@ def main() -> int:
     cmd = [asar]
     if args.verbose:
         cmd.append("-v")
+    cmd += DEFINES[args.region]
     cmd += ["-werror", "--no-title-check", "--fix-checksum=off", MAIN[args.region], str(out)]
     print("+", " ".join(cmd))
     rc = subprocess.run(cmd, cwd=ROOT).returncode

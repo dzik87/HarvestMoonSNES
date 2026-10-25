@@ -6,11 +6,11 @@ fItemCarried_Begin:
     SEP #$20                                                   ;818000|E220    |      ;
     REP #$10                                                   ;818002|C210    |      ;
     LDA.B #$01                                                 ;818004|A901    |      ;
-    STA.W $0974                                                ;818006|8D7409  |000974;
+    STA.W $0974+!DE_RAM_SHIFT                              ;818006|8D7409  |000974;
     LDA.B #$01                                                 ;818009|A901    |      ;
-    STA.W $0975                                                ;81800B|8D7509  |000975;
+    STA.W $0975+!DE_RAM_SHIFT                              ;81800B|8D7509  |000975;
     LDA.B #$00                                                 ;81800E|A900    |      ;
-    STA.W $0976                                                ;818010|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;818010|8D7609  |000976;
     LDA.W strcPlayerData.carryItemId                           ;818013|AD1D09  |00091D;
     STA.W nCarriedItemId                                       ;818016|8D8409  |000984;
     REP #$20                                                   ;818019|C220    |      ;
@@ -116,7 +116,7 @@ fItemCarried_LoadPoseData:
     ADC.B strcVariables.n16Temp1                               ;8180E1|657E    |00007E;
     TAY                                                        ;8180E3|A8      |      ;
     LDA.B [ptrTemp0x72],Y                                      ;8180E4|B772    |000072;
-    STA.W $097A                                                ;8180E6|8D7A09  |00097A;
+    STA.W $097A+!DE_RAM_SHIFT                              ;8180E6|8D7A09  |00097A;
     INY                                                        ;8180E9|C8      |      ;
     INY                                                        ;8180EA|C8      |      ;
     SEP #$20                                                   ;8180EB|E220    |      ;
@@ -130,7 +130,7 @@ fItemCarried_LoadPoseData:
     ASL A                                                      ;8180F7|0A      |      ;
     ASL A                                                      ;8180F8|0A      |      ;
     ASL A                                                      ;8180F9|0A      |      ;
-    STA.W $097E                                                ;8180FA|8D7E09  |00097E; A * 64
+    STA.W $097E+!DE_RAM_SHIFT                              ;8180FA|8D7E09  |00097E; A * 64
     RTL                                                        ;8180FD|6B      |      ;
  
  
@@ -203,9 +203,17 @@ subItemCarried_Corn:
     JSR.W fItemCarried_PhaseDispatch_Produce                                      ;818132|20E588  |8188E5;
     REP #$30                                                   ;818135|C230    |      ;
     %CheckFlag(daily3, $0001)
+    if !REGION_DE
+    BEQ L_81814E                                           ;81813E|F00E    |81814E;
+    LDA.L $7F1F4A                                          ;818140|AF4A1F7F|      ;
+    CMP.W #$03E7                                           ;818144|C9E703  |      ;
+    BCS L_81814E                                           ;818147|B005    |81814E;
+    INC A                                                  ;818149|1A      |      ;
+    else
     BEQ +                                                      ;81813E|F009    |818149;
     LDA.L nStatShippedCorns                                    ;818140|AF4A1F7F|7F1F4A;
     INC A                                                      ;818144|1A      |      ;
+    endif
     STA.L nStatShippedCorns                                    ;818145|8F4A1F7F|7F1F4A;
  
   + RTS                                                        ;818149|60      |      ;
@@ -215,9 +223,17 @@ subItemCarried_Tomato:
     JSR.W fItemCarried_PhaseDispatch_Produce                                      ;81814A|20E588  |8188E5;
     REP #$30                                                   ;81814D|C230    |      ;
     %CheckFlag(daily3, $0001)
+    if !REGION_DE
+    BEQ L_81816B                                           ;81815B|F00E    |81816B;
+    LDA.L $7F1F4C                                          ;81815D|AF4C1F7F|      ;
+    CMP.W #$03E7                                           ;818161|C9E703  |      ;
+    BCS L_81816B                                           ;818164|B005    |81816B;
+    INC A                                                  ;818166|1A      |      ;
+    else
     BEQ +                                                      ;818156|F009    |818161;
     LDA.L nStatShippedTomatoes                                 ;818158|AF4C1F7F|7F1F4C;
     INC A                                                      ;81815C|1A      |      ;
+    endif
     STA.L nStatShippedTomatoes                                 ;81815D|8F4C1F7F|7F1F4C;
  
   + RTS                                                        ;818161|60      |      ;
@@ -227,9 +243,17 @@ subItemCarried_Potato:
     JSR.W fItemCarried_PhaseDispatch_Produce                                      ;818162|20E588  |8188E5;
     REP #$30                                                   ;818165|C230    |      ;
     %CheckFlag(daily3, $0001)
+    if !REGION_DE
+    BEQ L_818188                                           ;818178|F00E    |818188;
+    LDA.L $7F1F50                                          ;81817A|AF501F7F|      ;
+    CMP.W #$03E7                                           ;81817E|C9E703  |      ;
+    BCS L_818188                                           ;818181|B005    |818188;
+    INC A                                                  ;818183|1A      |      ;
+    else
     BEQ +                                                      ;81816E|F009    |818179;
     LDA.L nStatShippedPotatoes                                 ;818170|AF501F7F|7F1F50;
     INC A                                                      ;818174|1A      |      ;
+    endif
     STA.L nStatShippedPotatoes                                 ;818175|8F501F7F|7F1F50;
  
   + RTS                                                        ;818179|60      |      ;
@@ -239,9 +263,17 @@ subItemCarried_Turnip:
     JSR.W fItemCarried_PhaseDispatch_Produce                                      ;81817A|20E588  |8188E5; X = 26
     REP #$30                                                   ;81817D|C230    |      ;
     %CheckFlag(daily3, $0001)
+    if !REGION_DE
+    BEQ L_8181A5                                           ;818195|F00E    |8181A5;
+    LDA.L $7F1F4E                                          ;818197|AF4E1F7F|      ;
+    CMP.W #$03E7                                           ;81819B|C9E703  |      ;
+    BCS L_8181A5                                           ;81819E|B005    |8181A5;
+    INC A                                                  ;8181A0|1A      |      ;
+    else
     BEQ +                                                      ;818186|F009    |818191;
     LDA.L nStatShippedTurnips                                  ;818188|AF4E1F7F|7F1F4E;
     INC A                                                      ;81818C|1A      |      ;
+    endif
     STA.L nStatShippedTurnips                                  ;81818D|8F4E1F7F|7F1F4E;
  
   + RTS                                                        ;818191|60      |      ;
@@ -285,11 +317,11 @@ subItemCarried_Feed:
 subItemCarried_GreenPerfume:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;8181AE|202389  |818923;
     SEP #$20                                                   ;8181B1|E220    |      ;
-    LDA.W $0976                                                ;8181B3|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;8181B3|AD7609  |000976;
     CMP.B #$FF                                                 ;8181B6|C9FF    |      ;
     BNE +                                                      ;8181B8|D00D    |8181C7;
     SEP #$20                                                   ;8181BA|E220    |      ;
-    STZ.W $0976                                                ;8181BC|9C7609  |000976;
+    STZ.W $0976+!DE_RAM_SHIFT                              ;8181BC|9C7609  |000976;
     LDA.B #!EITEM_PERFUMEGREEN                                                 
     STA.W nCarriedItemId                                       ;8181C1|8D8409  |000984;
     STA.W strcPlayerData.carryItemId                           ;8181C4|8D1D09  |00091D;
@@ -300,11 +332,11 @@ subItemCarried_GreenPerfume:
 subItemCarried_RedPerfume:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;8181C8|202389  |818923;
     SEP #$20                                                   ;8181CB|E220    |      ;
-    LDA.W $0976                                                ;8181CD|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;8181CD|AD7609  |000976;
     CMP.B #$FF                                                 ;8181D0|C9FF    |      ;
     BNE +                                                      ;8181D2|D00D    |8181E1;
     SEP #$20                                                   ;8181D4|E220    |      ;
-    STZ.W $0976                                                ;8181D6|9C7609  |000976;
+    STZ.W $0976+!DE_RAM_SHIFT                              ;8181D6|9C7609  |000976;
     LDA.B #!EITEM_PERFUMERED                                                 
     STA.W nCarriedItemId                                       ;8181DB|8D8409  |000984;
     STA.W strcPlayerData.carryItemId                           ;8181DE|8D1D09  |00091D;
@@ -315,11 +347,11 @@ subItemCarried_RedPerfume:
 subItemCarried_BluePerfume:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;8181E2|202389  |818923;
     SEP #$20                                                   ;8181E5|E220    |      ;
-    LDA.W $0976                                                ;8181E7|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;8181E7|AD7609  |000976;
     CMP.B #$FF                                                 ;8181EA|C9FF    |      ;
     BNE +                                                      ;8181EC|D00D    |8181FB;
     SEP #$20                                                   ;8181EE|E220    |      ;
-    STZ.W $0976                                                ;8181F0|9C7609  |000976;
+    STZ.W $0976+!DE_RAM_SHIFT                              ;8181F0|9C7609  |000976;
     LDA.B #!EITEM_PERFUMEBLUE                                                 
     STA.W nCarriedItemId                                       ;8181F5|8D8409  |000984;
     STA.W strcPlayerData.carryItemId                           ;8181F8|8D1D09  |00091D;
@@ -336,9 +368,9 @@ subItemCarried_RedEgg:
  
   + SEP #$20                                                   ;81820A|E220    |      ;
     REP #$10                                                   ;81820C|C210    |      ;
-    LDA.W $0976                                                ;81820E|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;81820E|AD7609  |000976;
     BNE ++                                                     ;818211|D019    |81822C;
-    LDA.W $09AC                                                ;818213|ADAC09  |0009AC;
+    LDA.W $09AC+!DE_RAM_SHIFT                              ;818213|ADAC09  |0009AC;
     CMP.B #$01                                                 ;818216|C901    |      ;
     BEQ +                                                      ;818218|F003    |81821D;
     JMP.W fEggFestival_WrongEggDialog                         ;81821A|4C6C83  |81836C;
@@ -346,14 +378,14 @@ subItemCarried_RedEgg:
  
   + REP #$30                                                   ;81821D|C230    |      ;
     LDA.W #$00A1                                               ;81821F|A9A100  |      ;
-    LDX.W $09AD                                                ;818222|AEAD09  |0009AD;
-    LDY.W $09AF                                                ;818225|ACAF09  |0009AF;
+    LDX.W $09AD+!DE_RAM_SHIFT                              ;818222|AEAD09  |0009AD;
+    LDY.W $09AF+!DE_RAM_SHIFT                              ;818225|ACAF09  |0009AF;
     JSL.L fMap_UpdateCurrentTilemap                            ;818228|223AB082|82B03A;
  
  ++ JSR.W fItemCarried_PhaseDispatch_Produce                                      ;81822C|20E588  |8188E5;
     SEP #$20                                                   ;81822F|E220    |      ;
     REP #$10                                                   ;818231|C210    |      ;
-    LDA.W $0976                                                ;818233|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;818233|AD7609  |000976;
     CMP.B #$03                                                 ;818236|C903    |      ;
     BNE +                                                      ;818238|D003    |81823D;
     JMP.W fEggFestival_SetEggFlag0040                           ;81823A|4C5E83  |81835E;
@@ -371,9 +403,9 @@ subItemCarried_LightPurpleEgg:
  
   + SEP #$20                                                   ;81824C|E220    |      ;
     REP #$10                                                   ;81824E|C210    |      ;
-    LDA.W $0976                                                ;818250|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;818250|AD7609  |000976;
     BNE ++                                                     ;818253|D019    |81826E;
-    LDA.W $09AC                                                ;818255|ADAC09  |0009AC;
+    LDA.W $09AC+!DE_RAM_SHIFT                              ;818255|ADAC09  |0009AC;
     CMP.B #$02                                                 ;818258|C902    |      ;
     BEQ +                                                      ;81825A|F003    |81825F;
     JMP.W fEggFestival_WrongEggDialog                         ;81825C|4C6C83  |81836C;
@@ -381,14 +413,14 @@ subItemCarried_LightPurpleEgg:
  
   + REP #$30                                                   ;81825F|C230    |      ;
     LDA.W #$00A1                                               ;818261|A9A100  |      ;
-    LDX.W $09AD                                                ;818264|AEAD09  |0009AD;
-    LDY.W $09AF                                                ;818267|ACAF09  |0009AF;
+    LDX.W $09AD+!DE_RAM_SHIFT                              ;818264|AEAD09  |0009AD;
+    LDY.W $09AF+!DE_RAM_SHIFT                              ;818267|ACAF09  |0009AF;
     JSL.L fMap_UpdateCurrentTilemap                            ;81826A|223AB082|82B03A;
  
  ++ JSR.W fItemCarried_PhaseDispatch_Produce                                      ;81826E|20E588  |8188E5;
     SEP #$20                                                   ;818271|E220    |      ;
     REP #$10                                                   ;818273|C210    |      ;
-    LDA.W $0976                                                ;818275|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;818275|AD7609  |000976;
     CMP.B #$03                                                 ;818278|C903    |      ;
     BNE .return                                                ;81827A|D003    |81827F;
     JMP.W fEggFestival_SetEggFlag0040                           ;81827C|4C5E83  |81835E;
@@ -407,9 +439,9 @@ subItemCarried_BlueEgg:
  
   + SEP #$20                                                   ;81828E|E220    |      ;
     REP #$10                                                   ;818290|C210    |      ;
-    LDA.W $0976                                                ;818292|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;818292|AD7609  |000976;
     BNE ++                                                     ;818295|D019    |8182B0;
-    LDA.W $09AC                                                ;818297|ADAC09  |0009AC;
+    LDA.W $09AC+!DE_RAM_SHIFT                              ;818297|ADAC09  |0009AC;
     CMP.B #$03                                                 ;81829A|C903    |      ;
     BEQ +                                                      ;81829C|F003    |8182A1;
     JMP.W fEggFestival_WrongEggDialog                         ;81829E|4C6C83  |81836C;
@@ -417,14 +449,14 @@ subItemCarried_BlueEgg:
  
   + REP #$30                                                   ;8182A1|C230    |      ;
     LDA.W #$00A1                                               ;8182A3|A9A100  |      ;
-    LDX.W $09AD                                                ;8182A6|AEAD09  |0009AD;
-    LDY.W $09AF                                                ;8182A9|ACAF09  |0009AF;
+    LDX.W $09AD+!DE_RAM_SHIFT                              ;8182A6|AEAD09  |0009AD;
+    LDY.W $09AF+!DE_RAM_SHIFT                              ;8182A9|ACAF09  |0009AF;
     JSL.L fMap_UpdateCurrentTilemap                            ;8182AC|223AB082|82B03A;
  
  ++ JSR.W fItemCarried_PhaseDispatch_Produce                                      ;8182B0|20E588  |8188E5;
     SEP #$20                                                   ;8182B3|E220    |      ;
     REP #$10                                                   ;8182B5|C210    |      ;
-    LDA.W $0976                                                ;8182B7|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;8182B7|AD7609  |000976;
     CMP.B #$03                                                 ;8182BA|C903    |      ;
     BNE +                                                      ;8182BC|D003    |8182C1;
     JMP.W fEggFestival_SetEggFlag0040                           ;8182BE|4C5E83  |81835E;
@@ -439,9 +471,9 @@ subItemCarried_PurpleEgg:
     BNE fEggFestival_DiscardEgg                             ;8182CB|D06A    |818337;
     SEP #$20                                                   ;8182CD|E220    |      ;
     REP #$10                                                   ;8182CF|C210    |      ;
-    LDA.W $0976                                                ;8182D1|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;8182D1|AD7609  |000976;
     BNE ++                                                     ;8182D4|D019    |8182EF;
-    LDA.W $09AC                                                ;8182D6|ADAC09  |0009AC;
+    LDA.W $09AC+!DE_RAM_SHIFT                              ;8182D6|ADAC09  |0009AC;
     CMP.B #$04                                                 ;8182D9|C904    |      ;
     BEQ +                                                      ;8182DB|F003    |8182E0;
     JMP.W fEggFestival_WrongEggDialog                         ;8182DD|4C6C83  |81836C;
@@ -449,14 +481,14 @@ subItemCarried_PurpleEgg:
  
   + REP #$30                                                   ;8182E0|C230    |      ;
     LDA.W #$00A1                                               ;8182E2|A9A100  |      ;
-    LDX.W $09AD                                                ;8182E5|AEAD09  |0009AD;
-    LDY.W $09AF                                                ;8182E8|ACAF09  |0009AF;
+    LDX.W $09AD+!DE_RAM_SHIFT                              ;8182E5|AEAD09  |0009AD;
+    LDY.W $09AF+!DE_RAM_SHIFT                              ;8182E8|ACAF09  |0009AF;
     JSL.L fMap_UpdateCurrentTilemap                            ;8182EB|223AB082|82B03A;
  
  ++ JSR.W fItemCarried_PhaseDispatch_Produce                                      ;8182EF|20E588  |8188E5;
     SEP #$20                                                   ;8182F2|E220    |      ;
     REP #$10                                                   ;8182F4|C210    |      ;
-    LDA.W $0976                                                ;8182F6|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;8182F6|AD7609  |000976;
     CMP.B #$03                                                 ;8182F9|C903    |      ;
     BEQ fEggFestival_SetEggFlag0040                             ;8182FB|F061    |81835E;
     RTS                                                        ;8182FD|60      |      ;
@@ -468,21 +500,21 @@ subItemCarried_GreenEgg:
     BNE fEggFestival_DiscardEgg                             ;818307|D02E    |818337;
     SEP #$20                                                   ;818309|E220    |      ;
     REP #$10                                                   ;81830B|C210    |      ;
-    LDA.W $0976                                                ;81830D|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;81830D|AD7609  |000976;
     BNE +                                                      ;818310|D016    |818328;
-    LDA.W $09AC                                                ;818312|ADAC09  |0009AC;
+    LDA.W $09AC+!DE_RAM_SHIFT                              ;818312|ADAC09  |0009AC;
     CMP.B #$05                                                 ;818315|C905    |      ;
     BNE fEggFestival_WrongEggDialog                           ;818317|D053    |81836C;
     REP #$30                                                   ;818319|C230    |      ;
     LDA.W #$00A1                                               ;81831B|A9A100  |      ;
-    LDX.W $09AD                                                ;81831E|AEAD09  |0009AD;
-    LDY.W $09AF                                                ;818321|ACAF09  |0009AF;
+    LDX.W $09AD+!DE_RAM_SHIFT                              ;81831E|AEAD09  |0009AD;
+    LDY.W $09AF+!DE_RAM_SHIFT                              ;818321|ACAF09  |0009AF;
     JSL.L fMap_UpdateCurrentTilemap                            ;818324|223AB082|82B03A;
  
   + JSR.W fItemCarried_PhaseDispatch_Produce                                      ;818328|20E588  |8188E5;
     SEP #$20                                                   ;81832B|E220    |      ;
     REP #$10                                                   ;81832D|C210    |      ;
-    LDA.W $0976                                                ;81832F|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;81832F|AD7609  |000976;
     CMP.B #$03                                                 ;818332|C903    |      ;
     BEQ fEggFestival_SetEggFlag0040                             ;818334|F028    |81835E;
     RTS                                                        ;818336|60      |      ;
@@ -508,8 +540,8 @@ fEggFestival_SetEggFlag0040:
 fEggFestival_WrongEggDialog:
     REP #$30                                                   ;81836C|C230    |      ;
     LDA.W #$00FC                                               ;81836E|A9FC00  |      ;
-    LDX.W $09AD                                                ;818371|AEAD09  |0009AD;
-    LDY.W $09AF                                                ;818374|ACAF09  |0009AF;
+    LDX.W $09AD+!DE_RAM_SHIFT                              ;818371|AEAD09  |0009AD;
+    LDY.W $09AF+!DE_RAM_SHIFT                              ;818374|ACAF09  |0009AF;
     JSL.L fSetTileAtCoords                                     ;818377|2288A681|81A688;
     REP #$30                                                   ;81837B|C230    |      ;
     LDA.W nGameObjectIdx                                       ;81837D|AD7809  |000978;
@@ -721,7 +753,7 @@ subItemCarried_0x43:
 subItemCarried_0x44:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;818499|202389  |818923;
     SEP #$20                                                   ;81849C|E220    |      ;
-    LDA.W $0976                                                ;81849E|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;81849E|AD7609  |000976;
     CMP.B #$FF                                                 ;8184A1|C9FF    |      ;
     BNE ++                                                     ;8184A3|D02F    |8184D4;
     LDA.L strcShedItems.row2                                   ;8184A5|AF011F7F|7F1F01;
@@ -752,7 +784,7 @@ subItemCarried_0x44:
 subItemCarried_0x45:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;8184D5|202389  |818923;
     SEP #$20                                                   ;8184D8|E220    |      ;
-    LDA.W $0976                                                ;8184DA|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;8184DA|AD7609  |000976;
     CMP.B #$FF                                                 ;8184DD|C9FF    |      ;
     BNE ++                                                     ;8184DF|D02F    |818510;
     LDA.L strcShedItems.row1                                   ;8184E1|AF001F7F|7F1F00;
@@ -783,13 +815,29 @@ subItemCarried_0x45:
 subItemCarried_0x46:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;818511|202389  |818923;
     SEP #$20                                                   ;818514|E220    |      ;
-    LDA.W $0976                                                ;818516|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;818516|AD7609  |000976;
     CMP.B #$FF                                                 ;818519|C9FF    |      ;
     BNE ++                                                     ;81851B|D02F    |81854C;
     LDA.L strcShedItems.row1                                   ;81851D|AF001F7F|7F1F00;
     ORA.B #$20                                                 ;818521|0920    |      ;
     STA.L strcShedItems.row1                                   ;818523|8F001F7F|7F1F00;
     SEP #$20                                                   ;818527|E220    |      ;
+    if !REGION_DE
+    LDA.W strcPlayerData.toolEquipped                      ;81853D|AD2709  |      ;
+    CMP.B #$06                                             ;818540|C906    |      ;
+    BNE .de_818547                                         ;818542|D003    |818547;
+    STZ.W strcPlayerData.toolEquipped                      ;818544|9C2709  |      ;
+.de_818547:
+  + SEP #$20                                               ;818547|E220    |      ;
+    LDA.W strcPlayerData.toolSecond                        ;818549|AD2909  |      ;
+    CMP.B #$06                                             ;81854C|C906    |      ;
+    BNE .de_818553                                         ;81854E|D003    |818553;
+    STZ.W strcPlayerData.toolSecond                        ;818550|9C2909  |      ;
+.de_818553:
+    SEP #$20                                               ;818553|E220    |      ;
+    LDA.W strcPlayerData.leftTomatoSeeds                   ;818555|AD2F09  |      ;
+    CMP.B #$FF                                             ;818558|C9FF    |      ;
+    else
     LDA.W strcPlayerData.toolEquipped                          ;818529|AD2109  |000921;
     CMP.B #$06                                                 ;81852C|C906    |      ;
     BNE +                                                      ;81852E|D003    |818533;
@@ -804,6 +852,7 @@ subItemCarried_0x46:
   + SEP #$20                                                   ;81853F|E220    |      ;
     LDA.W strcPlayerData.leftTomatoSeeds                       ;818541|AD2909  |000929;
     CMP.B #$FF                                                 ;818544|C9FF    |      ;
+    endif
     BEQ ++                                                     ;818546|F004    |81854C;
     INC A                                                      ;818548|1A      |      ;
     STA.W strcPlayerData.leftTomatoSeeds                       ;818549|8D2909  |000929;
@@ -814,7 +863,7 @@ subItemCarried_0x46:
 subItemCarried_0x47:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;81854D|202389  |818923;
     SEP #$20                                                   ;818550|E220    |      ;
-    LDA.W $0976                                                ;818552|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;818552|AD7609  |000976;
     CMP.B #$FF                                                 ;818555|C9FF    |      ;
     BNE ++                                                     ;818557|D02F    |818588;
     LDA.L strcShedItems.row1                                   ;818559|AF001F7F|7F1F00;
@@ -845,7 +894,7 @@ subItemCarried_0x47:
 subItemCarried_0x48:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;818589|202389  |818923;
     SEP #$20                                                   ;81858C|E220    |      ;
-    LDA.W $0976                                                ;81858E|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;81858E|AD7609  |000976;
     CMP.B #$FF                                                 ;818591|C9FF    |      ;
     BNE ++                                                     ;818593|D02F    |8185C4;
     LDA.L strcShedItems.row1                                   ;818595|AF001F7F|7F1F00;
@@ -876,11 +925,11 @@ subItemCarried_0x48:
 subItemCarried_0x49:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;8185C5|202389  |818923;
     SEP #$20                                                   ;8185C8|E220    |      ;
-    LDA.W $0976                                                ;8185CA|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;8185CA|AD7609  |000976;
     CMP.B #$FF                                                 ;8185CD|C9FF    |      ;
     BNE +                                                      ;8185CF|D00D    |8185DE;
     SEP #$20                                                   ;8185D1|E220    |      ;
-    STZ.W $0976                                                ;8185D3|9C7609  |000976;
+    STZ.W $0976+!DE_RAM_SHIFT                              ;8185D3|9C7609  |000976;
     LDA.B #!EITEM_CHICKENFEED                                                 
     STA.W nCarriedItemId                                       ;8185D8|8D8409  |000984;
     STA.W strcPlayerData.carryItemId                           ;8185DB|8D1D09  |00091D;
@@ -891,7 +940,7 @@ subItemCarried_0x49:
 subItemCarried_0x4A:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;8185DF|202389  |818923;
     SEP #$20                                                   ;8185E2|E220    |      ;
-    LDA.W $0976                                                ;8185E4|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;8185E4|AD7609  |000976;
     CMP.B #$FF                                                 ;8185E7|C9FF    |      ;
     BNE +                                                      ;8185E9|D00A    |8185F5;
     LDA.L strcShedItems.row2                                   ;8185EB|AF011F7F|7F1F01;
@@ -904,7 +953,7 @@ subItemCarried_0x4A:
 subItemCarried_0x4B:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;8185F6|202389  |818923;
     SEP #$20                                                   ;8185F9|E220    |      ;
-    LDA.W $0976                                                ;8185FB|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;8185FB|AD7609  |000976;
     CMP.B #$FF                                                 ;8185FE|C9FF    |      ;
     BNE +                                                      ;818600|D00A    |81860C;
     LDA.L strcShedItems.row2                                   ;818602|AF011F7F|7F1F01;
@@ -917,7 +966,7 @@ subItemCarried_0x4B:
 subItemCarried_0x4C:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;81860D|202389  |818923;
     SEP #$20                                                   ;818610|E220    |      ;
-    LDA.W $0976                                                ;818612|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;818612|AD7609  |000976;
     CMP.B #$FF                                                 ;818615|C9FF    |      ;
     BNE +                                                      ;818617|D00A    |818623;
     LDA.L strcShedItems.row2                                   ;818619|AF011F7F|7F1F01;
@@ -930,7 +979,7 @@ subItemCarried_0x4C:
 subItemCarried_0x4D:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;818624|202389  |818923;
     SEP #$20                                                   ;818627|E220    |      ;
-    LDA.W $0976                                                ;818629|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;818629|AD7609  |000976;
     CMP.B #$FF                                                 ;81862C|C9FF    |      ;
     BNE ++                                                     ;81862E|D02A    |81865A;
     LDA.L strcShedItems.row3                                   ;818630|AF021F7F|7F1F02;
@@ -956,7 +1005,7 @@ subItemCarried_0x4D:
 subItemCarried_0x4E:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;81865B|202389  |818923;
     SEP #$20                                                   ;81865E|E220    |      ;
-    LDA.W $0976                                                ;818660|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;818660|AD7609  |000976;
     CMP.B #$FF                                                 ;818663|C9FF    |      ;
     BNE ++                                                     ;818665|D02A    |818691;
     LDA.L strcShedItems.row3                                   ;818667|AF021F7F|7F1F02;
@@ -982,7 +1031,7 @@ subItemCarried_0x4E:
 subItemCarried_0x4F:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;818692|202389  |818923;
     SEP #$20                                                   ;818695|E220    |      ;
-    LDA.W $0976                                                ;818697|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;818697|AD7609  |000976;
     CMP.B #$FF                                                 ;81869A|C9FF    |      ;
     BNE ++                                                     ;81869C|D02A    |8186C8;
     LDA.L strcShedItems.row3                                   ;81869E|AF021F7F|7F1F02;
@@ -1008,7 +1057,7 @@ subItemCarried_0x4F:
 subItemCarried_0x50:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;8186C9|202389  |818923;
     SEP #$20                                                   ;8186CC|E220    |      ;
-    LDA.W $0976                                                ;8186CE|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;8186CE|AD7609  |000976;
     CMP.B #$FF                                                 ;8186D1|C9FF    |      ;
     BNE ++                                                     ;8186D3|D02A    |8186FF;
     LDA.L strcShedItems.row3                                   ;8186D5|AF021F7F|7F1F02;
@@ -1034,7 +1083,7 @@ subItemCarried_0x50:
 subItemCarried_0x51:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;818700|202389  |818923;
     SEP #$20                                                   ;818703|E220    |      ;
-    LDA.W $0976                                                ;818705|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;818705|AD7609  |000976;
     CMP.B #$FF                                                 ;818708|C9FF    |      ;
     BNE ++                                                     ;81870A|D02A    |818736;
     LDA.L strcShedItems.row3                                   ;81870C|AF021F7F|7F1F02;
@@ -1060,7 +1109,7 @@ subItemCarried_0x51:
 subItemCarried_0x52:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;818737|202389  |818923;
     SEP #$20                                                   ;81873A|E220    |      ;
-    LDA.W $0976                                                ;81873C|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;81873C|AD7609  |000976;
     CMP.B #$FF                                                 ;81873F|C9FF    |      ;
     BNE +                                                      ;818741|D00A    |81874D;
     LDA.L strcShedItems.row2                                   ;818743|AF011F7F|7F1F01;
@@ -1073,7 +1122,7 @@ subItemCarried_0x52:
 subItemCarried_0x53:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;81874E|202389  |818923;
     SEP #$20                                                   ;818751|E220    |      ;
-    LDA.W $0976                                                ;818753|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;818753|AD7609  |000976;
     CMP.B #$FF                                                 ;818756|C9FF    |      ;
     BNE +                                                      ;818758|D00A    |818764;
     LDA.L strcShedItems.row2                                   ;81875A|AF011F7F|7F1F01;
@@ -1086,7 +1135,7 @@ subItemCarried_0x53:
 subItemCarried_0x54:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;818765|202389  |818923;
     SEP #$20                                                   ;818768|E220    |      ;
-    LDA.W $0976                                                ;81876A|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;81876A|AD7609  |000976;
     CMP.B #$FF                                                 ;81876D|C9FF    |      ;
     BNE +                                                      ;81876F|D00F    |818780;
     LDA.L strcShedItems.row4                                   ;818771|AF031F7F|7F1F03;
@@ -1101,7 +1150,7 @@ subItemCarried_0x54:
 subItemCarried_0x55:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;818781|202389  |818923;
     SEP #$20                                                   ;818784|E220    |      ;
-    LDA.W $0976                                                ;818786|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;818786|AD7609  |000976;
     CMP.B #$FF                                                 ;818789|C9FF    |      ;
     BNE +                                                      ;81878B|D00F    |81879C;
     LDA.L strcShedItems.row4                                   ;81878D|AF031F7F|7F1F03;
@@ -1116,11 +1165,11 @@ subItemCarried_0x55:
 subItemCarried_0x56:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;81879D|202389  |818923;
     SEP #$20                                                   ;8187A0|E220    |      ;
-    LDA.W $0976                                                ;8187A2|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;8187A2|AD7609  |000976;
     CMP.B #$FF                                                 ;8187A5|C9FF    |      ;
     BNE +                                                      ;8187A7|D00D    |8187B6;
     SEP #$20                                                   ;8187A9|E220    |      ;
-    STZ.W $0976                                                ;8187AB|9C7609  |000976;
+    STZ.W $0976+!DE_RAM_SHIFT                              ;8187AB|9C7609  |000976;
     LDA.B #!EITEM_TOMATOSEED                                                 
     STA.W nCarriedItemId                                       ;8187B0|8D8409  |000984;
     STA.W strcPlayerData.carryItemId                           ;8187B3|8D1D09  |00091D;
@@ -1198,7 +1247,7 @@ fItemCarriedTool_EquipFromShed:
 fItemCarried_PhaseDispatch_Animal:
     SEP #$20                                                   ;81883A|E220    |      ;
     REP #$10                                                   ;81883C|C210    |      ;
-    LDA.W $0976                                                ;81883E|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;81883E|AD7609  |000976;
     BNE +                                                      ;818841|D003    |818846;
     JMP.W fItemCarried_StartHolding                                      ;818843|4C1090  |819010;
  
@@ -1219,7 +1268,7 @@ fItemCarried_PhaseDispatch_Animal:
 fItemCarried_PhaseDispatch_Forage:
     SEP #$20                                                   ;818855|E220    |      ;
     REP #$10                                                   ;818857|C210    |      ;
-    LDA.W $0976                                                ;818859|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;818859|AD7609  |000976;
     BNE +                                                      ;81885C|D003    |818861;
     JMP.W fItemFound_ShowFoundDialog                             ;81885E|4C6B8B  |818B6B;
  
@@ -1270,7 +1319,7 @@ fItemCarried_PhaseDispatch_Forage:
 fItemCarried_PhaseDispatch_NoSell:
     SEP #$20                                                   ;81889A|E220    |      ;
     REP #$10                                                   ;81889C|C210    |      ;
-    LDA.W $0976                                                ;81889E|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;81889E|AD7609  |000976;
     BNE +                                                      ;8188A1|D003    |8188A6;
     JMP.W fItemCarried_StartHolding                                      ;8188A3|4C1090  |819010;
  
@@ -1296,7 +1345,7 @@ fItemCarried_PhaseDispatch_NoSell:
 fItemCarried_PhaseDispatch_Feed:
     SEP #$20                                                   ;8188BC|E220    |      ;
     REP #$10                                                   ;8188BE|C210    |      ;
-    LDA.W $0976                                                ;8188C0|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;8188C0|AD7609  |000976;
     BNE +                                                      ;8188C3|D003    |8188C8;
     JMP.W fItemCarried_StartHolding                                      ;8188C5|4C1090  |819010;
  
@@ -1327,7 +1376,7 @@ fItemCarried_PhaseDispatch_Feed:
 fItemCarried_PhaseDispatch_Produce:
     SEP #$20                                                   ;8188E5|E220    |      ;
     REP #$10                                                   ;8188E7|C210    |      ;
-    LDA.W $0976                                                ;8188E9|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;8188E9|AD7609  |000976;
     BNE +                                                      ;8188EC|D003    |8188F1;
     JMP.W fItemCarried_StartHolding                                      ;8188EE|4C1090  |819010;
  
@@ -1373,7 +1422,7 @@ fItemCarried_PhaseDispatch_Produce:
 fItemCarried_PhaseDispatch_Buyable:
     SEP #$20                                                   ;818923|E220    |      ;
     REP #$10                                                   ;818925|C210    |      ;
-    LDA.W $0976                                                ;818927|AD7609  |000976;
+    LDA.W $0976+!DE_RAM_SHIFT                              ;818927|AD7609  |000976;
     BEQ fItemBuy_ShowPurchaseDialog                                 ;81892A|F013    |81893F;
     CMP.B #$01                                                 ;81892C|C901    |      ;
     BEQ fItemBuy_HandleAnswer                                 ;81892E|F059    |818989;
@@ -1431,7 +1480,7 @@ fItemBuy_ShowPurchaseDialog:
     JSL.L fDialog_DialogHandler                                ;81897B|225F9383|83935F;
     SEP #$20                                                   ;81897F|E220    |      ;
     LDA.B #$01                                                 ;818981|A901    |      ;
-    STA.W $0976                                                ;818983|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;818983|8D7609  |000976;
     JMP.W fReturn_818B6A                                       ;818986|4C6A8B  |818B6A;
  
  
@@ -1547,14 +1596,14 @@ fItemBuy_HandleAnswer:
  
   + SEP #$20                                                   ;818A3A|E220    |      ;
     LDA.B #$03                                                 ;818A3C|A903    |      ;
-    STA.W $0976                                                ;818A3E|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;818A3E|8D7609  |000976;
     JMP.W fReturn_818B6A                                       ;818A41|4C6A8B  |818B6A;
  
  
 fItemBuy_SetPhaseWaitDialog:
     SEP #$20                                                   ;818A44|E220    |      ;
     LDA.B #$02                                                 ;818A46|A902    |      ;
-    STA.W $0976                                                ;818A48|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;818A48|8D7609  |000976;
     JMP.W fReturn_818B6A                                       ;818A4B|4C6A8B  |818B6A;
  
  
@@ -1698,7 +1747,7 @@ fItemBuy_FinishPurchase:
  
   + SEP #$20                                                   ;818B63|E220    |      ;
     LDA.B #$FF                                                 ;818B65|A9FF    |      ;
-    STA.W $0976                                                ;818B67|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;818B67|8D7609  |000976;
  
 fReturn_818B6A:
     RTS                                                        ;818B6A|60      |      ;
@@ -1729,7 +1778,7 @@ fItemFound_ShowFoundDialog:
     JSL.L fDialog_DialogHandler                                ;818B97|225F9383|83935F;
     SEP #$20                                                   ;818B9B|E220    |      ;
     LDA.B #$01                                                 ;818B9D|A901    |      ;
-    STA.W $0976                                                ;818B9F|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;818B9F|8D7609  |000976;
     JMP.W fReturn_818C23                                       ;818BA2|4C238C  |818C23;
  
  
@@ -1780,7 +1829,7 @@ fItemFound_DeclineConsume:
     %SetPlayerFlag(!PFLAGS_HOLDINGITEM)
     SEP #$20                                                   ;818C1C|E220    |      ;
     LDA.B #$02                                                 ;818C1E|A902    |      ;
-    STA.W $0976                                                ;818C20|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;818C20|8D7609  |000976;
  
 fReturn_818C23:
     RTS                                                        ;818C23|60      |      ;
@@ -1804,24 +1853,24 @@ fItemCarried_CarryLoop_NoSell:
     LDY.W #$0001                                               ;818C40|A00100  |      ;
     JSL.L fItemCarried_LoadPoseData                                      ;818C43|22B78081|8180B7;
     SEP #$20                                                   ;818C47|E220    |      ;
-    LDA.W $0974                                                ;818C49|AD7409  |000974;
+    LDA.W $0974+!DE_RAM_SHIFT                              ;818C49|AD7409  |000974;
     AND.B #$FB                                                 ;818C4C|29FB    |      ;
-    STA.W $0974                                                ;818C4E|8D7409  |000974;
+    STA.W $0974+!DE_RAM_SHIFT                              ;818C4E|8D7409  |000974;
     BRA .label3                                                ;818C51|8032    |818C85;
  
  
 .label2:
     SEP #$20                                                   ;818C53|E220    |      ;
     REP #$10                                                   ;818C55|C210    |      ;
-    LDA.W $0974                                                ;818C57|AD7409  |000974;
+    LDA.W $0974+!DE_RAM_SHIFT                              ;818C57|AD7409  |000974;
     AND.B #$04                                                 ;818C5A|2904    |      ;
     BNE .label4                                                ;818C5C|D013    |818C71;
     LDY.W #$000B                                               ;818C5E|A00B00  |      ;
     JSL.L fItemCarried_LoadPoseData                                      ;818C61|22B78081|8180B7;
     SEP #$20                                                   ;818C65|E220    |      ;
-    LDA.W $0974                                                ;818C67|AD7409  |000974;
+    LDA.W $0974+!DE_RAM_SHIFT                              ;818C67|AD7409  |000974;
     ORA.B #$04                                                 ;818C6A|0904    |      ;
-    STA.W $0974                                                ;818C6C|8D7409  |000974;
+    STA.W $0974+!DE_RAM_SHIFT                              ;818C6C|8D7409  |000974;
     BRA .label3                                                ;818C6F|8014    |818C85;
  
  
@@ -1905,7 +1954,7 @@ fItemCarried_CarryLoop_NoSell:
     JSL.L fItemCarried_LoadPoseData                                      ;818D20|22B78081|8180B7;
     SEP #$20                                                   ;818D24|E220    |      ;
     LDA.B #$03                                                 ;818D26|A903    |      ;
-    STA.W $0976                                                ;818D28|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;818D28|8D7609  |000976;
     JMP.W fReturn_818E1A                                       ;818D2B|4C1A8E  |818E1A;
  
  
@@ -2000,12 +2049,12 @@ fItemCarried_StartDropAtTarget:
     LDA.L aFixedDropPositionsXY,X                                    ;818DFA|BF63A381|81A363;
     STA.W nUnknownY                                            ;818DFE|8D8209  |000982;
     LDA.W #$00CA                                               ;818E01|A9CA00  |      ;
-    STA.W $097A                                                ;818E04|8D7A09  |00097A;
+    STA.W $097A+!DE_RAM_SHIFT                              ;818E04|8D7A09  |00097A;
     SEP #$20                                                   ;818E07|E220    |      ;
     STZ.W strcPlayerData.carryItemId                           ;818E09|9C1D09  |00091D;
     SEP #$20                                                   ;818E0C|E220    |      ;
     LDA.B #$04                                                 ;818E0E|A904    |      ;
-    STA.W $0976                                                ;818E10|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;818E10|8D7609  |000976;
     JMP.W fReturn_818E1A                                       ;818E13|4C1A8E  |818E1A;
  
  
@@ -2169,7 +2218,7 @@ fItemSell_ShowPriceDialog:
     JSL.L fDialog_DialogHandler                                ;818F4C|225F9383|83935F;
     SEP #$20                                                   ;818F50|E220    |      ;
     LDA.B #$06                                                 ;818F52|A906    |      ;
-    STA.W $0976                                                ;818F54|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;818F54|8D7609  |000976;
     JMP.W fReturn_81900F                                       ;818F57|4C0F90  |81900F;
  
  
@@ -2255,7 +2304,7 @@ fItemSell_ResumeCarry:
     STA.W nUnknownY                                            ;818FFC|8D8209  |000982;
     SEP #$20                                                   ;818FFF|E220    |      ;
     LDA.B #$02                                                 ;819001|A902    |      ;
-    STA.W $0976                                                ;819003|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;819003|8D7609  |000976;
     %SetPlayerFlag(!PFLAGS_HOLDINGITEM)
  
 fReturn_81900F:
@@ -2268,7 +2317,7 @@ fItemCarried_StartHolding:
     JSL.L fItemCarried_LoadPoseData                                      ;819015|22B78081|8180B7;
     SEP #$20                                                   ;819019|E220    |      ;
     LDA.B #$02                                                 ;81901B|A902    |      ;
-    STA.W $0976                                                ;81901D|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;81901D|8D7609  |000976;
     RTS                                                        ;819020|60      |      ;
  
  
@@ -2303,24 +2352,24 @@ fItemCarried_CarryLoop_ActionJump:
     LDY.W #$0001                                               ;819065|A00100  |      ;
     JSL.L fItemCarried_LoadPoseData                                      ;819068|22B78081|8180B7;
     SEP #$20                                                   ;81906C|E220    |      ;
-    LDA.W $0974                                                ;81906E|AD7409  |000974;
+    LDA.W $0974+!DE_RAM_SHIFT                              ;81906E|AD7409  |000974;
     AND.B #$FB                                                 ;819071|29FB    |      ;
-    STA.W $0974                                                ;819073|8D7409  |000974;
+    STA.W $0974+!DE_RAM_SHIFT                              ;819073|8D7409  |000974;
     BRA fItemCarried_HandleDropAction                                ;819076|8032    |8190AA;
  
  
 fItemCarried_CarryLoop_ActionOther:
     SEP #$20                                                   ;819078|E220    |      ;
     REP #$10                                                   ;81907A|C210    |      ;
-    LDA.W $0974                                                ;81907C|AD7409  |000974;
+    LDA.W $0974+!DE_RAM_SHIFT                              ;81907C|AD7409  |000974;
     AND.B #$04                                                 ;81907F|2904    |      ;
     BNE +                                                      ;819081|D013    |819096;
     LDY.W #$000B                                               ;819083|A00B00  |      ;
     JSL.L fItemCarried_LoadPoseData                                      ;819086|22B78081|8180B7;
     SEP #$20                                                   ;81908A|E220    |      ;
-    LDA.W $0974                                                ;81908C|AD7409  |000974;
+    LDA.W $0974+!DE_RAM_SHIFT                              ;81908C|AD7409  |000974;
     ORA.B #$04                                                 ;81908F|0904    |      ;
-    STA.W $0974                                                ;819091|8D7409  |000974;
+    STA.W $0974+!DE_RAM_SHIFT                              ;819091|8D7409  |000974;
     BRA fItemCarried_HandleDropAction                                ;819094|8014    |8190AA;
  
  
@@ -2425,7 +2474,7 @@ fItemCarried_HandleDropAction:
     JSL.L fItemCarried_LoadPoseData                                      ;81915D|22B78081|8180B7;
     SEP #$20                                                   ;819161|E220    |      ;
     LDA.B #$05                                                 ;819163|A905    |      ;
-    STA.W $0976                                                ;819165|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;819165|8D7609  |000976;
     %SetPlayerAction(!PACTION_NONE)
     %UnsetPlayerFlag(!PFLAGS_HOLDINGITEM)
     JMP.W fReturn_819227                                       ;81917B|4C2792  |819227;
@@ -2440,7 +2489,7 @@ fItemCarried_BeginPutDown:
     JSL.L fItemCarried_LoadPoseData                                      ;819187|22B78081|8180B7;
     SEP #$20                                                   ;81918B|E220    |      ;
     LDA.B #$03                                                 ;81918D|A903    |      ;
-    STA.W $0976                                                ;81918F|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;81918F|8D7609  |000976;
     JMP.W fReturn_819227                                       ;819192|4C2792  |819227;
  
  
@@ -2499,7 +2548,7 @@ fItemShipped_AddProfit:
 fItemCarried_SetPhaseFinish:
     SEP #$20                                                   ;819220|E220    |      ;
     LDA.B #$08                                                 ;819222|A908    |      ;
-    STA.W $0976                                                ;819224|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;819224|8D7609  |000976;
  
 fReturn_819227:
     RTS                                                        ;819227|60      |      ;
@@ -2523,24 +2572,24 @@ fItemCarriedAnimal_CarryLoop:
     LDY.W #$0001                                               ;819244|A00100  |      ;
     JSL.L fItemCarried_LoadPoseData                                      ;819247|22B78081|8180B7;
     SEP #$20                                                   ;81924B|E220    |      ;
-    LDA.W $0974                                                ;81924D|AD7409  |000974;
+    LDA.W $0974+!DE_RAM_SHIFT                              ;81924D|AD7409  |000974;
     AND.B #$FB                                                 ;819250|29FB    |      ;
-    STA.W $0974                                                ;819252|8D7409  |000974;
+    STA.W $0974+!DE_RAM_SHIFT                              ;819252|8D7409  |000974;
     BRA .label2                                                ;819255|8032    |819289;
  
  
 .jump:
     SEP #$20                                                   ;819257|E220    |      ;
     REP #$10                                                   ;819259|C210    |      ;
-    LDA.W $0974                                                ;81925B|AD7409  |000974;
+    LDA.W $0974+!DE_RAM_SHIFT                              ;81925B|AD7409  |000974;
     AND.B #$04                                                 ;81925E|2904    |      ;
     BNE .label1                                                ;819260|D013    |819275;
     LDY.W #$000B                                               ;819262|A00B00  |      ;
     JSL.L fItemCarried_LoadPoseData                                      ;819265|22B78081|8180B7;
     SEP #$20                                                   ;819269|E220    |      ;
-    LDA.W $0974                                                ;81926B|AD7409  |000974;
+    LDA.W $0974+!DE_RAM_SHIFT                              ;81926B|AD7409  |000974;
     ORA.B #$04                                                 ;81926E|0904    |      ;
-    STA.W $0974                                                ;819270|8D7409  |000974;
+    STA.W $0974+!DE_RAM_SHIFT                              ;819270|8D7409  |000974;
     BRA .label2                                                ;819273|8014    |819289;
  
  
@@ -2660,7 +2709,7 @@ fItemCarriedAnimal_CarryLoop:
     JSL.L fItemCarried_LoadPoseData                                      ;819362|22B78081|8180B7;
     SEP #$20                                                   ;819366|E220    |      ;
     LDA.B #$03                                                 ;819368|A903    |      ;
-    STA.W $0976                                                ;81936A|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;81936A|8D7609  |000976;
     BRA .justReturn                                            ;81936D|8009    |819378;
  
  
@@ -2768,7 +2817,7 @@ fItemShipped_InFarmCoopOrBarn:
     JSL.L fTileScript_Start                                ;819430|22E1A581|81A5E1;
     SEP #$20                                                   ;819434|E220    |      ;
     LDA.B #$07                                                 ;819436|A907    |      ;
-    STA.W $0976                                                ;819438|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;819438|8D7609  |000976;
     %UnsetPlayerFlag(!PFLAGS_ACTIVE)
     SEP #$20                                                   ;819447|E220    |      ;
     STZ.W strcPlayerData.carryItemId                           ;819449|9C1D09  |00091D;
@@ -2781,7 +2830,7 @@ fItemShipped_StartCowBarnScript:
     JSL.L fTileScript_Start                                ;819454|22E1A581|81A5E1;
     SEP #$20                                                   ;819458|E220    |      ;
     LDA.B #$07                                                 ;81945A|A907    |      ;
-    STA.W $0976                                                ;81945C|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;81945C|8D7609  |000976;
     %UnsetPlayerFlag(!PFLAGS_ACTIVE)
     SEP #$20                                                   ;81946B|E220    |      ;
     STZ.W strcPlayerData.carryItemId                           ;81946D|9C1D09  |00091D;
@@ -2794,7 +2843,7 @@ fItemShipped_StartCoopScript:
     JSL.L fTileScript_Start                                ;819478|22E1A581|81A5E1;
     SEP #$20                                                   ;81947C|E220    |      ;
     LDA.B #$07                                                 ;81947E|A907    |      ;
-    STA.W $0976                                                ;819480|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;819480|8D7609  |000976;
     %UnsetPlayerFlag(!PFLAGS_ACTIVE)
     SEP #$20                                                   ;81948F|E220    |      ;
     STZ.W strcPlayerData.carryItemId                           ;819491|9C1D09  |00091D;
@@ -2993,12 +3042,12 @@ fItemCarried_ThrowToTarget:
     LDA.L aFixedDropPositionsXY,X                                    ;81963F|BF63A381|81A363;
     STA.W nUnknownY                                            ;819643|8D8209  |000982;
     LDA.W #$00CA                                               ;819646|A9CA00  |      ;
-    STA.W $097A                                                ;819649|8D7A09  |00097A;
+    STA.W $097A+!DE_RAM_SHIFT                              ;819649|8D7A09  |00097A;
     SEP #$20                                                   ;81964C|E220    |      ;
     STZ.W strcPlayerData.carryItemId                           ;81964E|9C1D09  |00091D;
     SEP #$20                                                   ;819651|E220    |      ;
     LDA.B #$04                                                 ;819653|A904    |      ;
-    STA.W $0976                                                ;819655|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;819655|8D7609  |000976;
     JMP.W fReturn_8196AE                                       ;819658|4CAE96  |8196AE;
  
  
@@ -3020,7 +3069,7 @@ fItemCarried_DropInFront:
     STA.W nUnknownY                                            ;819683|8D8209  |000982;
     SEP #$20                                                   ;819686|E220    |      ;
     LDA.B #$04                                                 ;819688|A904    |      ;
-    STA.W $0976                                                ;81968A|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;81968A|8D7609  |000976;
     BRA fReturn_8196AE                                         ;81968D|801F    |8196AE;
  
  

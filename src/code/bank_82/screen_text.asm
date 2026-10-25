@@ -178,7 +178,11 @@ fScreen_NameInput:
     JSL.L fObject_RenderAll                                      ;82E9C2|22E08385|8583E0;
     SEP #$20                                                   ;82E9C6|E220    |      ;
     STZ.B $00                                                  ;82E9C8|6400    |000000;
+    if !REGION_DE
+    JML.L $82EADC                                          ;82EB47|5CDCEA82|82EADC;
+    else
     JML.L $82E95F                                              ;82E9CA|5C5FE982|82E95F;
+    endif
  
  
 .nameHandler:

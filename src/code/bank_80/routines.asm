@@ -486,7 +486,7 @@ fMap_SetupArea:
     LDA.B strcPlayer.posY                                      ;809933|A5D8    |0000D8;
     STA.W strcObjectData.playerY                               ;809935|8D0909  |000909;
     SEP #$20                                                   ;809938|E220    |      ;
-    STZ.W $098A                                                ;80993A|9C8A09  |00098A;
+    STZ.W $098A+!DE_RAM_SHIFT                              ;80993A|9C8A09  |00098A;
     STZ.W strcPlayerData.unkCounter919                         ;80993D|9C1909  |000919;
     %UnsetPlayerFlag(!PFLAGS_INTRANSITION)
     REP #$20                                                   ;80994C|C220    |      ;
@@ -514,11 +514,11 @@ fMap_SetupArea:
     STA.W nUnknownY                                            ;80998C|8D8209  |000982;
     SEP #$20                                                   ;80998F|E220    |      ;
     LDA.B #$01                                                 ;809991|A901    |      ;
-    STA.W $0974                                                ;809993|8D7409  |000974;
+    STA.W $0974+!DE_RAM_SHIFT                              ;809993|8D7409  |000974;
     LDA.B #$01                                                 ;809996|A901    |      ;
-    STA.W $0975                                                ;809998|8D7509  |000975;
+    STA.W $0975+!DE_RAM_SHIFT                              ;809998|8D7509  |000975;
     LDA.B #$02                                                 ;80999B|A902    |      ;
-    STA.W $0976                                                ;80999D|8D7609  |000976;
+    STA.W $0976+!DE_RAM_SHIFT                              ;80999D|8D7609  |000976;
     JSL.L fObjectSlots_Allocate                                      ;8099A0|2200A581|81A500;
     REP #$30                                                   ;8099A4|C230    |      ;
     LDA.W #$0014                                               ;8099A6|A91400  |      ;
@@ -661,7 +661,7 @@ fMapChangeHandler_809A64:
     %SetPlayerAction(!PACTION_NONE)
     %SetPlayerFlag(!PFLAGS_INTRANSITION)
     SEP #$20                                                   ;809AE3|E220    |      ;
-    LDA.W $098A                                                ;809AE5|AD8A09  |00098A;
+    LDA.W $098A+!DE_RAM_SHIFT                              ;809AE5|AD8A09  |00098A;
     CMP.B #$01                                                 ;809AE8|C901    |      ;
     BNE .label8                                                ;809AEA|D003    |809AEF;
     JMP.W .label24                                             ;809AEC|4C5D9C  |809C5D;
@@ -675,7 +675,7 @@ fMapChangeHandler_809A64:
  
 .label9:
     INC A                                                      ;809AF6|1A      |      ;
-    STA.W $098A                                                ;809AF7|8D8A09  |00098A;
+    STA.W $098A+!DE_RAM_SHIFT                              ;809AF7|8D8A09  |00098A;
     REP #$20                                                   ;809AFA|C220    |      ;
     LDA.W $0878                                                ;809AFC|AD7808  |000878;
     ASL A                                                      ;809AFF|0A      |      ;
@@ -836,7 +836,7 @@ fMapChangeHandler_809A64:
     STZ.W $0878                                                ;809C22|9C7808  |000878;
     STZ.W $087A                                                ;809C25|9C7A08  |00087A;
     SEP #$20                                                   ;809C28|E220    |      ;
-    STZ.W $098A                                                ;809C2A|9C8A09  |00098A;
+    STZ.W $098A+!DE_RAM_SHIFT                              ;809C2A|9C8A09  |00098A;
     JMP.W .return                                              ;809C2D|4C0A9D  |809D0A;
  
  
@@ -874,11 +874,11 @@ fMapChangeHandler_809A64:
  
 .label25:
     SEP #$20                                                   ;809C67|E220    |      ;
-    LDA.W $098A                                                ;809C69|AD8A09  |00098A;
+    LDA.W $098A+!DE_RAM_SHIFT                              ;809C69|AD8A09  |00098A;
     CMP.B #$0D                                                 ;809C6C|C90D    |      ;
     BEQ .destinationFarm                                       ;809C6E|F063    |809CD3;
     INC A                                                      ;809C70|1A      |      ;
-    STA.W $098A                                                ;809C71|8D8A09  |00098A;
+    STA.W $098A+!DE_RAM_SHIFT                              ;809C71|8D8A09  |00098A;
     %SetPlayerAction(!PACTION_WALK)
     REP #$20                                                   ;809C7B|C220    |      ;
     LDA.B strcPlayer.direction                                 ;809C7D|A5DA    |0000DA;
