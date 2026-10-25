@@ -84,7 +84,7 @@ def test_roundtrip():
                             str(rom_path)], cwd=ROOT, capture_output=True, text=True)
         assert r.returncode == 0, r.stdout + r.stderr
         rom = rom_path.read_bytes()
-        lines = usmap.annotate_flags(usmap.load_us_source(), rom)
+        lines = usmap.load_us_source(rom)
         # runs of consecutive instruction lines
         runs, cur = [], None
         for ln in lines:
