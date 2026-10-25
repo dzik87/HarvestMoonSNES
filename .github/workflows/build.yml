@@ -6,39 +6,26 @@ on:
   pull_request:
   workflow_dispatch:
 
-env:
-  ASAR_TAG: v1.91
-
 jobs:
   build-us:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: true
 
       - name: Cache asar
         id: cache-asar
         uses: actions/cache@v4
         with:
           path: tools/bin/asar
-          key: asar-${{ env.ASAR_TAG }}-${{ runner.os }}
+          key: asar-${{ hashFiles('third_party/asar/src/**') }}-${{ runner.os }}
 
-      - name: Build asar from source
+      - name: Build asar from the third_party/asar submodule
         if: steps.cache-asar.outputs.cache-hit != 'true'
         run: |
           set -o pipefail
-          {
-            git clone --depth 1 --branch "$ASAR_TAG" https://github.com/RPGHacker/asar "$RUNNER_TEMP/asar"
-            cmake -S "$RUNNER_TEMP/asar/src" -B "$RUNNER_TEMP/asar/build" \
-                  -DCMAKE_BUILD_TYPE=Release \
-                  -DASAR_GEN_EXE=ON -DASAR_GEN_DLL=OFF -DASAR_GEN_LIB=OFF \
-                  -DASAR_GEN_EXE_TEST=OFF -DASAR_GEN_DLL_TEST=OFF
-            cmake --build "$RUNNER_TEMP/asar/build" --target asar-standalone --parallel
-            BIN=$(find "$RUNNER_TEMP/asar/build" -type f -name asar -perm -u+x | head -n1)
-            test -n "$BIN" || { echo "asar binary not found"; find "$RUNNER_TEMP/asar/build" -maxdepth 3 | head -40; exit 1; }
-            mkdir -p tools/bin
-            cp "$BIN" tools/bin/asar
-            chmod +x tools/bin/asar
-          } 2>&1 | tee asar-build.log
+          python3 tools/build_asar.py 2>&1 | tee asar-build.log
 
       - name: Asar build log (on failure)
         if: failure()
