@@ -1,0 +1,61 @@
+# Game object slot tables (bank $85, objects.asm).
+# Table_858BD0[N] = 1 << (2 * N): bit pair of object slot N in a packed flag word.
+# aGameObjectIndexOffsets[N] = N * $24: byte offset of object N in the object array (each object record is $24 = 36 bytes).
+# The last rows are stored as in the original ROM although they are not N * $24 (the original has $0540 where $0510 would continue the
+# series; the offsets are used as they are, see the comment at the row).  Confidence: high.
+
+@label Table_858BD0
+@columns slot:index,mask:flags16
+$00,$0001
+$01,$0004
+$02,$0010
+$03,$0040
+$04,$0100
+$05,$0400
+$06,$1000
+$07,$4000
+
+@label aGameObjectIndexOffsets
+@columns object:index,offset:u16
+$00,$0000
+$01,$0024
+$02,$0048
+$03,$006C
+$04,$0090
+$05,$00B4
+$06,$00D8
+$07,$00FC
+$08,$0120
+$09,$0144
+$0A,$0168
+$0B,$018C
+$0C,$01B0
+$0D,$01D4
+$0E,$01F8
+$0F,$021C
+$10,$0240
+$11,$0264
+$12,$0288
+$13,$02AC
+$14,$02D0
+$15,$02F4
+$16,$0318
+$17,$033C
+$18,$0360
+$19,$0384
+$1A,$03A8
+$1B,$03CC
+$1C,$03F0
+$1D,$0414
+$1E,$0438
+$1F,$045C
+$20,$0480
+$21,$04A4
+$22,$04C8
+$23,$04EC
+# Original quirk: the series is continued with $0540, $0534 ($0510 would follow the pattern); kept byte for byte
+$24,$0540
+$25,$0534
+$26,$0558
+$27,$057C
+

@@ -1,0 +1,1445 @@
+# Carried items (bank $81, item_actions.asm; carried item id = strcPlayerData.carryItemId, 0x5B entries).
+# pItemCarriedTable_8196AF[id] -> aItemCarriedFrames_* (ptr24): the pose list of the item.
+# pItemCarriedSubrutines[id]   -> routine run while the item is carried (ptr16, $FFFF = none).
+# aItemCarriedFrames_*  one row per player pose (fItemCarried_LoadPoseData: pose * 3):
+#   sprite  sprite table index of the item for that pose, flip  flip bits (bit 0 = horizontal)
+# aFoundItemData[N]         found items (mushrooms ..): dialog:dialog16, energy:u8 (stamina change, signed)
+# aDialogData_ShippingProfit[id]   unk:u8, profit:u8 (money per piece in the shipping bin)
+# aDialogData_SellItems[id]        dialog:dialog16, profit:u8
+# aDialogsData_BuyItems[N]  shop items: description / yes / no / too_poor dialogs, unknown:u8, cost:u24 (negative = money spent)
+# nItemCarriedIndexForTilemap[id]  tile placed on the map under a dropped item (0 = none)
+# nSoundItemCarriedTable_81A308[id] 1 = play the pick-up sound
+# aFixedDropPositionsXY[N]  x, y of the fixed drop places
+# Confidence: high for structure; medium for the meaning of unk / flip.
+
+@label pItemCarriedTable_8196AF
+@columns id:index,frames:ptr24
+$00,EMPTY_FFFFFF
+$01,aItemCarriedFrames_01_Mushroom
+$02,aItemCarriedFrames_02_PoisonMushroom
+$03,aItemCarriedFrames_03_WildGrape
+$04,aItemCarriedFrames_04_BerryStrongSmell
+$05,aItemCarriedFrames_05_MoonFlower
+$06,aItemCarriedFrames_06_Cake
+$07,aItemCarriedFrames_07_Fish
+$08,aItemCarriedFrames_08_PowerBerry
+$09,aItemCarriedFrames_09
+$0A,aItemCarriedFrames_0A
+$0B,aItemCarriedFrames_09
+$0C,aItemCarriedFrames_09
+$0D,aItemCarriedFrames_0D
+$0E,aItemCarriedFrames_0E
+$0F,aItemCarriedFrames_0F
+$10,aItemCarriedFrames_10_Corn
+$11,aItemCarriedFrames_11_Tomato
+$12,aItemCarriedFrames_12_Potato
+$13,aItemCarriedFrames_13_Turnip
+$14,aItemCarriedFrames_14_Egg
+$15,aItemCarriedFrames_15_SmallMilk
+$16,aItemCarriedFrames_16_MediumMilk
+$17,aItemCarriedFrames_17_LargeMilk
+$18,aItemCarriedFrames_18_Herb
+$19,aItemCarriedFrames_19_Flower
+$1A,aItemCarriedFrames_1A_Feed
+$1B,aItemCarriedFrames_1B_GreenPerfume
+$1C,aItemCarriedFrames_1C_RedPerfume
+$1D,aItemCarriedFrames_1D_BluePerfume
+$1E,aItemCarriedFrames_1E_RedEgg
+$1F,aItemCarriedFrames_1F_LightPurpleEgg
+$20,aItemCarriedFrames_20_BlueEgg
+$21,aItemCarriedFrames_21_PurpleEgg
+$22,aItemCarriedFrames_22_GreenEgg
+$23,aItemCarriedFrames_23_YellowEgg
+$24,aItemCarriedFrames_24_ChickenWindMeasured
+$25,aItemCarriedFrames_25_Chicken
+$26,aItemCarriedFrames_26_Chick
+$27,aItemCarriedFrames_27
+$28,aItemCarriedFrames_28
+$29,aItemCarriedFrames_29_Mole
+$2A,aItemCarriedFrames_2A
+$2B,aItemCarriedFrames_2B
+$2C,aItemCarriedFrames_2C
+$2D,aItemCarriedFrames_2D
+$2E,aItemCarriedFrames_2E
+$2F,aItemCarriedFrames_2F
+$30,aItemCarriedFrames_30
+$31,aItemCarriedFrames_31
+$32,aItemCarriedFrames_32
+$33,aItemCarriedFrames_33
+$34,aItemCarriedFrames_34
+$35,aItemCarriedFrames_35
+$36,aItemCarriedFrames_36
+$37,aItemCarriedFrames_37
+$38,aItemCarriedFrames_38
+$39,aItemCarriedFrames_39
+$3A,aItemCarriedFrames_3A
+$3B,aItemCarriedFrames_3B
+$3C,aItemCarriedFrames_3C
+$3D,aItemCarriedFrames_3D
+$3E,aItemCarriedFrames_3E
+$3F,aItemCarriedFrames_3F
+$40,aItemCarriedFrames_40
+$41,aItemCarriedFrames_41
+$42,aItemCarriedFrames_42
+$43,aItemCarriedFrames_43
+$44,aItemCarriedFrames_35
+$45,aItemCarriedFrames_2E
+$46,aItemCarriedFrames_2F
+$47,aItemCarriedFrames_30
+$48,aItemCarriedFrames_31
+$49,aItemCarriedFrames_19_Flower
+$4A,aItemCarriedFrames_36
+$4B,aItemCarriedFrames_37
+$4C,aItemCarriedFrames_38
+$4D,aItemCarriedFrames_3A
+$4E,aItemCarriedFrames_3B
+$4F,aItemCarriedFrames_3C
+$50,aItemCarriedFrames_3D
+$51,aItemCarriedFrames_3E
+$52,aItemCarriedFrames_32
+$53,aItemCarriedFrames_33
+$54,aItemCarriedFrames_42
+$55,aItemCarriedFrames_43
+$56,aItemCarriedFrames_06_Cake
+$57,aItemCarriedFrames_0F
+$58,aItemCarriedFrames_1B_GreenPerfume
+$59,aItemCarriedFrames_1C_RedPerfume
+$5A,aItemCarriedFrames_1D_BluePerfume
+
+@label pItemCarriedSubrutines
+@columns id:index,handler:ptr16
+$00,$FFFF
+$01,subItemCarried_Mushroom
+$02,subItemCarried_PoisonMushroom
+$03,subItemCarried_WildGrape
+$04,subItemCarried_BerryStrongSmell
+$05,subItemCarried_MoonFlower
+$06,subItemCarried_Cake
+$07,subItemCarried_Fish
+$08,subItemCarried_PowerBerry
+$09,subItemCarried_Bush
+$0A,subItemCarried_Bush2
+$0B,subItemCarried_Bush
+$0C,subItemCarried_Bush
+$0D,subItemCarried_0x0D
+$0E,subItemCarried_0x0E
+$0F,subItemCarried_0x57
+$10,subItemCarried_Corn
+$11,subItemCarried_Tomato
+$12,subItemCarried_Potato
+$13,subItemCarried_Turnip
+$14,subItemCarried_Egg
+$15,subItemCarried_SmallMilk
+$16,subItemCarried_MediumMilk
+$17,subItemCarried_LargeMilk
+$18,subItemCarried_Herb
+$19,subItemCarried_Flower
+$1A,subItemCarried_Feed
+$1B,subItemCarried_GreenPerfume
+$1C,subItemCarried_RedPerfume
+$1D,subItemCarried_BluePerfume
+$1E,subItemCarried_RedEgg
+$1F,subItemCarried_LightPurpleEgg
+$20,subItemCarried_BlueEgg
+$21,subItemCarried_PurpleEgg
+$22,subItemCarried_GreenEgg
+$23,subItemCarried_YellowEgg
+$24,subItemCarried_ChickenWindMeasured
+$25,subItemCarried_Chicken
+$26,subItemCarried_Chick
+$27,subItemCarried_0x27
+$28,subItemCarried_0x28
+$29,subItemCarried_Mole
+$2A,subItemCarried_0x2A
+$2B,subItemCarried_0x2B
+$2C,subItemCarried_0x2C
+$2D,subItemCarried_0x2D
+$2E,subItemCarried_0x2E
+$2F,subItemCarried_0x2F
+$30,subItemCarried_0x30
+$31,subItemCarried_0x31
+$32,subItemCarried_0x32
+$33,subItemCarried_0x33
+$34,subItemCarried_0x34
+$35,subItemCarried_0x35
+$36,subItemCarried_0x36
+$37,subItemCarried_0x37
+$38,subItemCarried_0x38
+$39,subItemCarried_0x39
+$3A,subItemCarried_0x3A
+$3B,subItemCarried_0x3B
+$3C,subItemCarried_0x3C
+$3D,subItemCarried_0x3D
+$3E,subItemCarried_0x3E
+$3F,subItemCarried_0x3F
+$40,subItemCarried_0x40
+$41,subItemCarried_0x41
+$42,subItemCarried_0x42
+$43,subItemCarried_0x43
+$44,subItemCarried_0x44
+$45,subItemCarried_0x45
+$46,subItemCarried_0x46
+$47,subItemCarried_0x47
+$48,subItemCarried_0x48
+$49,subItemCarried_0x49
+$4A,subItemCarried_0x4A
+$4B,subItemCarried_0x4B
+$4C,subItemCarried_0x4C
+$4D,subItemCarried_0x4D
+$4E,subItemCarried_0x4E
+$4F,subItemCarried_0x4F
+$50,subItemCarried_0x50
+$51,subItemCarried_0x51
+$52,subItemCarried_0x52
+$53,subItemCarried_0x53
+$54,subItemCarried_0x54
+$55,subItemCarried_0x55
+$56,subItemCarried_0x56
+$57,subItemCarried_0x57
+$58,subItemCarried_0x58
+$59,subItemCarried_0x59
+$5A,subItemCarried_0x5A
+
+@label aItemCarriedFrames_01_Mushroom
+@columns pose:index,sprite:u16,flip:u8
+$00,$00F6,$00
+$01,$03A2,$00
+$02,$039C,$00
+$03,$039D,$00
+$04,$039E,$01
+$05,$039E,$00
+$06,$039F,$00
+$07,$03A0,$00
+$08,$03A1,$01
+$09,$03A1,$00
+$0A,$0106,$00
+$0B,$03A3,$00
+
+@label aItemCarriedFrames_02_PoisonMushroom
+@columns pose:index,sprite:u16,flip:u8
+$00,$00F7,$00
+$01,$03AA,$00
+$02,$03A4,$00
+$03,$03A5,$00
+$04,$03A6,$01
+$05,$03A6,$00
+$06,$03A7,$00
+$07,$03A8,$00
+$08,$03A9,$01
+$09,$03A9,$00
+$0A,$0107,$00
+$0B,$03AB,$00
+
+@label aItemCarriedFrames_03_WildGrape
+@columns pose:index,sprite:u16,flip:u8
+$00,$00F4,$00
+$01,$0392,$00
+$02,$038C,$00
+$03,$038D,$00
+$04,$038E,$01
+$05,$038E,$00
+$06,$038F,$00
+$07,$0390,$00
+$08,$0391,$01
+$09,$0391,$00
+$0A,$0104,$00
+$0B,$0393,$00
+
+@label aItemCarriedFrames_04_BerryStrongSmell
+@columns pose:index,sprite:u16,flip:u8
+$00,$00F5,$00
+$01,$039A,$00
+$02,$0394,$00
+$03,$0395,$00
+$04,$0396,$01
+$05,$0396,$00
+$06,$0397,$00
+$07,$0398,$00
+$08,$0399,$01
+$09,$0399,$00
+$0A,$0105,$00
+$0B,$039B,$00
+
+@label aItemCarriedFrames_05_MoonFlower
+@columns pose:index,sprite:u16,flip:u8
+$00,$00F8,$00
+$01,$03B2,$00
+$02,$03AC,$00
+$03,$03AD,$00
+$04,$03AE,$01
+$05,$03AE,$00
+$06,$03AF,$00
+$07,$03B0,$00
+$08,$03B1,$01
+$09,$03B1,$00
+$0A,$0108,$00
+$0B,$03B3,$00
+
+@label aItemCarriedFrames_06_Cake
+@columns pose:index,sprite:u16,flip:u8
+$00,$00F9,$00
+$01,$03BA,$00
+$02,$03B4,$00
+$03,$03B5,$00
+$04,$03B6,$01
+$05,$03B6,$00
+$06,$03B7,$00
+$07,$03B8,$00
+$08,$03B9,$01
+$09,$03B9,$00
+$0A,$0109,$00
+$0B,$03BB,$00
+
+@label aItemCarriedFrames_07_Fish
+@columns pose:index,sprite:u16,flip:u8
+$00,$00BB,$00
+$01,$042C,$00
+$02,$0426,$00
+$03,$0427,$00
+$04,$0428,$01
+$05,$0428,$00
+$06,$0429,$00
+$07,$042A,$00
+$08,$042B,$01
+$09,$042B,$00
+$0A,$00BA,$00
+$0B,$042D,$00
+
+@label aItemCarriedFrames_08_PowerBerry
+@columns pose:index,sprite:u16,flip:u8
+$00,$0000,$00
+$01,$040C,$00
+$02,$0409,$00
+$03,$040A,$00
+$04,$040B,$01
+$05,$040B,$00
+$06,$0000,$00
+$07,$0000,$00
+$08,$0000,$01
+$09,$0000,$00
+$0A,$040D,$00
+$0B,$0000,$00
+
+@label aItemCarriedFrames_09
+@columns pose:index,sprite:u16,flip:u8
+$00,$00E8,$00
+$01,$0129,$00
+$02,$0123,$00
+$03,$0124,$00
+$04,$0125,$01
+$05,$0125,$00
+$06,$0126,$00
+$07,$0127,$00
+$08,$0128,$01
+$09,$0128,$00
+$0A,$00B7,$00
+$0B,$012A,$00
+
+@label aItemCarriedFrames_0A
+@columns pose:index,sprite:u16,flip:u8
+$00,$00E9,$00
+$01,$0131,$00
+$02,$012B,$00
+$03,$012C,$00
+$04,$012D,$01
+$05,$012D,$00
+$06,$012E,$00
+$07,$012F,$00
+$08,$0130,$01
+$09,$0130,$00
+$0A,$00B7,$00
+$0B,$0132,$00
+
+@label aItemCarriedFrames_0D
+@columns pose:index,sprite:u16,flip:u8
+$00,$00EA,$00
+$01,$0121,$00
+$02,$011B,$00
+$03,$011C,$00
+$04,$011D,$01
+$05,$011D,$00
+$06,$011E,$00
+$07,$011F,$00
+$08,$0120,$01
+$09,$0120,$00
+$0A,$00C8,$00
+$0B,$0122,$00
+
+@label aItemCarriedFrames_0E
+@columns pose:index,sprite:u16,flip:u8
+$00,$00EB,$00
+$01,$0139,$00
+$02,$0133,$00
+$03,$0134,$00
+$04,$0135,$01
+$05,$0135,$00
+$06,$0136,$00
+$07,$0137,$00
+$08,$0138,$01
+$09,$0138,$00
+$0A,$00C8,$00
+$0B,$013A,$00
+
+@label aItemCarriedFrames_0F
+@columns pose:index,sprite:u16,flip:u8
+$00,$00E7,$00
+$01,$0141,$00
+$02,$013B,$00
+$03,$013C,$00
+$04,$013D,$01
+$05,$013D,$00
+$06,$013E,$00
+$07,$013F,$00
+$08,$0140,$01
+$09,$0140,$00
+$0A,$0000,$00
+$0B,$0142,$00
+
+@label aItemCarriedFrames_10_Corn
+@columns pose:index,sprite:u16,flip:u8
+$00,$00EC,$00
+$01,$0358,$00
+$02,$0352,$00
+$03,$0353,$00
+$04,$0354,$01
+$05,$0354,$00
+$06,$0355,$00
+$07,$0356,$00
+$08,$0357,$01
+$09,$0357,$00
+$0A,$00FC,$00
+$0B,$0359,$00
+
+@label aItemCarriedFrames_11_Tomato
+@columns pose:index,sprite:u16,flip:u8
+$00,$00ED,$00
+$01,$0360,$00
+$02,$035A,$00
+$03,$035B,$00
+$04,$035C,$01
+$05,$035C,$00
+$06,$035D,$00
+$07,$035E,$00
+$08,$035F,$01
+$09,$035F,$00
+$0A,$00FD,$00
+$0B,$0361,$00
+
+@label aItemCarriedFrames_12_Potato
+@columns pose:index,sprite:u16,flip:u8
+$00,$00EF,$00
+$01,$0370,$00
+$02,$036A,$00
+$03,$036B,$00
+$04,$036C,$01
+$05,$036C,$00
+$06,$036D,$00
+$07,$036E,$00
+$08,$036F,$01
+$09,$036F,$00
+$0A,$00FF,$00
+$0B,$0371,$00
+
+@label aItemCarriedFrames_13_Turnip
+@columns pose:index,sprite:u16,flip:u8
+$00,$00EE,$00
+$01,$0368,$00
+$02,$0362,$00
+$03,$0363,$00
+$04,$0364,$01
+$05,$0364,$00
+$06,$0365,$00
+$07,$0366,$00
+$08,$0367,$01
+$09,$0367,$00
+$0A,$00FE,$00
+$0B,$0369,$00
+
+@label aItemCarriedFrames_14_Egg
+@columns pose:index,sprite:u16,flip:u8
+$00,$00F3,$00
+$01,$038A,$00
+$02,$0384,$00
+$03,$0385,$00
+$04,$0386,$01
+$05,$0386,$00
+$06,$0387,$00
+$07,$0388,$00
+$08,$0389,$01
+$09,$0389,$00
+$0A,$0103,$00
+$0B,$038B,$00
+
+@label aItemCarriedFrames_15_SmallMilk
+@columns pose:index,sprite:u16,flip:u8
+$00,$00F2,$00
+$01,$0382,$00
+$02,$037E,$00
+$03,$037E,$00
+$04,$037E,$01
+$05,$037E,$00
+$06,$037F,$00
+$07,$0380,$00
+$08,$0381,$01
+$09,$0381,$00
+$0A,$0102,$00
+$0B,$0383,$00
+
+@label aItemCarriedFrames_16_MediumMilk
+@columns pose:index,sprite:u16,flip:u8
+$00,$00F1,$00
+$01,$037C,$00
+$02,$0378,$00
+$03,$0378,$00
+$04,$0378,$01
+$05,$0378,$00
+$06,$0379,$00
+$07,$037A,$00
+$08,$037B,$01
+$09,$037B,$00
+$0A,$0101,$00
+$0B,$037D,$00
+
+@label aItemCarriedFrames_17_LargeMilk
+@columns pose:index,sprite:u16,flip:u8
+$00,$00F0,$00
+$01,$0376,$00
+$02,$0372,$00
+$03,$0372,$00
+$04,$0372,$01
+$05,$0372,$00
+$06,$0373,$00
+$07,$0374,$00
+$08,$0375,$01
+$09,$0375,$00
+$0A,$0100,$00
+$0B,$0377,$00
+
+@label aItemCarriedFrames_18_Herb
+@columns pose:index,sprite:u16,flip:u8
+$00,$00FA,$00
+$01,$03C2,$00
+$02,$03BC,$00
+$03,$03BD,$00
+$04,$03BE,$01
+$05,$03BE,$00
+$06,$03BF,$00
+$07,$03C0,$00
+$08,$03C1,$01
+$09,$03C1,$00
+$0A,$010A,$00
+$0B,$03C3,$00
+
+@label aItemCarriedFrames_1A_Feed
+@columns pose:index,sprite:u16,flip:u8
+$00,$00C3,$00
+$01,$0434,$00
+$02,$042E,$00
+$03,$042F,$00
+$04,$0430,$01
+$05,$0430,$00
+$06,$0431,$00
+$07,$0432,$00
+$08,$0433,$01
+$09,$0433,$00
+$0A,$00C4,$00
+$0B,$0435,$00
+
+@label aItemCarriedFrames_1B_GreenPerfume
+@columns pose:index,sprite:u16,flip:u8
+$00,$010B,$00
+$01,$03D0,$00
+$02,$03CC,$00
+$03,$03CC,$00
+$04,$03CC,$01
+$05,$03CC,$00
+$06,$03CD,$00
+$07,$03CE,$00
+$08,$03CF,$01
+$09,$03CF,$00
+$0A,$0113,$00
+$0B,$0000,$00
+
+@label aItemCarriedFrames_1C_RedPerfume
+@columns pose:index,sprite:u16,flip:u8
+$00,$010C,$00
+$01,$03D8,$00
+$02,$03D4,$00
+$03,$03D4,$00
+$04,$03D4,$01
+$05,$03D4,$00
+$06,$03D5,$00
+$07,$03D6,$00
+$08,$03D7,$01
+$09,$03D7,$00
+$0A,$0114,$00
+$0B,$0000,$00
+
+@label aItemCarriedFrames_1D_BluePerfume
+@columns pose:index,sprite:u16,flip:u8
+$00,$010D,$00
+$01,$03E0,$00
+$02,$03DC,$00
+$03,$03DC,$00
+$04,$03DC,$01
+$05,$03DC,$00
+$06,$03DD,$00
+$07,$03DE,$00
+$08,$03DF,$01
+$09,$03DF,$00
+$0A,$0115,$00
+$0B,$0000,$00
+
+@label aItemCarriedFrames_1E_RedEgg
+@columns pose:index,sprite:u16,flip:u8
+$00,$010E,$00
+$01,$03E7,$00
+$02,$03E1,$00
+$03,$03E2,$00
+$04,$03E3,$01
+$05,$03E3,$00
+$06,$03E4,$00
+$07,$03E5,$00
+$08,$03E6,$01
+$09,$03E6,$00
+$0A,$0103,$00
+$0B,$03E8,$00
+
+@label aItemCarriedFrames_1F_LightPurpleEgg
+@columns pose:index,sprite:u16,flip:u8
+$00,$010F,$00
+$01,$03EF,$00
+$02,$03E9,$00
+$03,$03EA,$00
+$04,$03EB,$01
+$05,$03EB,$00
+$06,$03EC,$00
+$07,$03ED,$00
+$08,$03EE,$01
+$09,$03EE,$00
+$0A,$0103,$00
+$0B,$03F0,$00
+
+@label aItemCarriedFrames_20_BlueEgg
+@columns pose:index,sprite:u16,flip:u8
+$00,$0110,$00
+$01,$03F7,$00
+$02,$03F1,$00
+$03,$03F2,$00
+$04,$03F3,$01
+$05,$03F3,$00
+$06,$03F4,$00
+$07,$03F5,$00
+$08,$03F6,$01
+$09,$03F6,$00
+$0A,$0103,$00
+$0B,$03F8,$00
+
+@label aItemCarriedFrames_21_PurpleEgg
+@columns pose:index,sprite:u16,flip:u8
+$00,$0111,$00
+$01,$03FF,$00
+$02,$03F9,$00
+$03,$03FA,$00
+$04,$03FB,$01
+$05,$03FB,$00
+$06,$03FC,$00
+$07,$03FD,$00
+$08,$03FE,$01
+$09,$03FE,$00
+$0A,$0103,$00
+$0B,$0400,$00
+
+@label aItemCarriedFrames_22_GreenEgg
+@columns pose:index,sprite:u16,flip:u8
+$00,$0112,$00
+$01,$0407,$00
+$02,$0401,$00
+$03,$0402,$00
+$04,$0403,$01
+$05,$0403,$00
+$06,$0404,$00
+$07,$0405,$00
+$08,$0406,$01
+$09,$0406,$00
+$0A,$0103,$00
+$0B,$0408,$00
+
+@label aItemCarriedFrames_23_YellowEgg
+@columns pose:index,sprite:u16,flip:u8
+$00,$03D3,$00
+$01,$03D2,$00
+$02,$03D1,$00
+$03,$03D1,$00
+$04,$03D1,$01
+$05,$03D1,$00
+$06,$0000,$00
+$07,$0000,$00
+$08,$0000,$01
+$09,$0000,$00
+$0A,$0000,$00
+$0B,$0000,$00
+
+@label aItemCarriedFrames_24_ChickenWindMeasured
+@columns pose:index,sprite:u16,flip:u8
+$00,$0117,$00
+$01,$00BD,$00
+$02,$0000,$00
+$03,$0000,$00
+$04,$0000,$01
+$05,$0000,$00
+$06,$0000,$00
+$07,$00BC,$00
+$08,$0000,$01
+$09,$0000,$00
+$0A,$0000,$00
+$0B,$0000,$00
+
+@label aItemCarriedFrames_25_Chicken
+@columns pose:index,sprite:u16,flip:u8
+$00,$0212,$00
+$01,$0414,$00
+$02,$040E,$00
+$03,$040F,$00
+$04,$0410,$01
+$05,$0410,$00
+$06,$0411,$00
+$07,$0412,$00
+$08,$0413,$01
+$09,$0413,$00
+$0A,$0000,$00
+$0B,$0415,$00
+
+@label aItemCarriedFrames_26_Chick
+@columns pose:index,sprite:u16,flip:u8
+$00,$0217,$00
+$01,$041C,$00
+$02,$0416,$00
+$03,$0417,$00
+$04,$0418,$01
+$05,$0418,$00
+$06,$0419,$00
+$07,$041A,$00
+$08,$041B,$01
+$09,$041B,$00
+$0A,$0000,$00
+$0B,$041D,$00
+
+@label aItemCarriedFrames_27
+@columns pose:index,sprite:u16,flip:u8
+$00,$01D9,$00
+$01,$0000,$00
+$02,$0000,$00
+$03,$0000,$00
+$04,$0000,$01
+$05,$0000,$00
+$06,$0000,$00
+$07,$0000,$00
+$08,$0000,$01
+$09,$0000,$00
+$0A,$0000,$00
+$0B,$0000,$00
+
+@label aItemCarriedFrames_28
+@columns pose:index,sprite:u16,flip:u8
+$00,$00E5,$00
+$01,$0126,$00
+$02,$0120,$00
+$03,$0121,$00
+$04,$0122,$01
+$05,$0122,$00
+$06,$0123,$00
+$07,$0124,$00
+$08,$0125,$01
+$09,$0125,$00
+$0A,$00B4,$00
+$0B,$0127,$00
+
+@label aItemCarriedFrames_29_Mole
+@columns pose:index,sprite:u16,flip:u8
+$00,$0326,$00
+$01,$0424,$00
+$02,$041E,$00
+$03,$041F,$00
+$04,$0420,$01
+$05,$0420,$00
+$06,$0421,$00
+$07,$0422,$00
+$08,$0423,$01
+$09,$0423,$00
+$0A,$0000,$00
+$0B,$0425,$00
+
+@label aItemCarriedFrames_2A
+@columns pose:index,sprite:u16,flip:u8
+$00,$00D8,$00
+$01,$00D8,$00
+$02,$0167,$00
+$03,$0168,$00
+$04,$0169,$01
+$05,$0169,$00
+
+@label aItemCarriedFrames_2B
+@columns pose:index,sprite:u16,flip:u8
+$00,$00D9,$00
+$01,$00D9,$00
+$02,$016A,$00
+$03,$016B,$00
+$04,$016C,$01
+$05,$016C,$00
+
+@label aItemCarriedFrames_2C
+@columns pose:index,sprite:u16,flip:u8
+$00,$00DA,$00
+$01,$00DA,$00
+$02,$016D,$00
+$03,$016E,$00
+$04,$016F,$01
+$05,$016F,$00
+
+@label aItemCarriedFrames_2D
+@columns pose:index,sprite:u16,flip:u8
+$00,$00DB,$00
+$01,$00DB,$00
+$02,$0170,$00
+$03,$0171,$00
+$04,$0172,$01
+$05,$0172,$00
+
+@label aItemCarriedFrames_2E
+@columns pose:index,sprite:u16,flip:u8
+$00,$00D0,$00
+$01,$00D0,$00
+$02,$014F,$00
+$03,$0150,$00
+$04,$0151,$01
+$05,$0151,$00
+
+@label aItemCarriedFrames_2F
+@columns pose:index,sprite:u16,flip:u8
+$00,$00D1,$00
+$01,$00D1,$00
+$02,$0152,$00
+$03,$0153,$00
+$04,$0154,$01
+$05,$0154,$00
+
+@label aItemCarriedFrames_30
+@columns pose:index,sprite:u16,flip:u8
+$00,$00D2,$00
+$01,$00D2,$00
+$02,$0155,$00
+$03,$0156,$00
+$04,$0157,$01
+$05,$0157,$00
+
+@label aItemCarriedFrames_31
+@columns pose:index,sprite:u16,flip:u8
+$00,$00D3,$00
+$01,$00D3,$00
+$02,$0158,$00
+$03,$0159,$00
+$04,$015A,$01
+$05,$015A,$00
+
+@label aItemCarriedFrames_32
+@columns pose:index,sprite:u16,flip:u8
+$00,$00CC,$00
+$01,$00CC,$00
+$02,$0143,$00
+$03,$0144,$00
+$04,$0145,$01
+$05,$0145,$00
+
+@label aItemCarriedFrames_33
+@columns pose:index,sprite:u16,flip:u8
+$00,$00CD,$00
+$01,$00CD,$00
+$02,$0146,$00
+$03,$0147,$00
+$04,$0148,$01
+$05,$0148,$00
+
+@label aItemCarriedFrames_34
+@columns pose:index,sprite:u16,flip:u8
+$00,$00CE,$00
+$01,$00CE,$00
+$02,$0149,$00
+$03,$014A,$00
+$04,$014B,$01
+$05,$014B,$00
+
+@label aItemCarriedFrames_35
+@columns pose:index,sprite:u16,flip:u8
+$00,$00CF,$00
+$01,$00CF,$00
+$02,$014C,$00
+$03,$014D,$00
+$04,$014E,$01
+$05,$014E,$00
+
+@label aItemCarriedFrames_36
+@columns pose:index,sprite:u16,flip:u8
+$00,$00D4,$00
+$01,$00D4,$00
+$02,$015B,$00
+$03,$015C,$00
+$04,$015D,$01
+$05,$015D,$00
+
+@label aItemCarriedFrames_37
+@columns pose:index,sprite:u16,flip:u8
+$00,$00D5,$00
+$01,$00D5,$00
+$02,$015E,$00
+$03,$015F,$00
+$04,$0160,$01
+$05,$0160,$00
+
+@label aItemCarriedFrames_38
+@columns pose:index,sprite:u16,flip:u8
+$00,$00D6,$00
+$01,$00D6,$00
+$02,$0161,$00
+$03,$0162,$00
+$04,$0163,$01
+$05,$0163,$00
+
+@label aItemCarriedFrames_39
+@columns pose:index,sprite:u16,flip:u8
+$00,$00D7,$00
+$01,$00D7,$00
+$02,$0164,$00
+$03,$0165,$00
+$04,$0166,$01
+$05,$0166,$00
+
+@label aItemCarriedFrames_3A
+@columns pose:index,sprite:u16,flip:u8
+$00,$00E0,$00
+$01,$00E0,$00
+$02,$017C,$00
+$03,$017D,$00
+$04,$017E,$01
+$05,$017E,$00
+
+@label aItemCarriedFrames_3B
+@columns pose:index,sprite:u16,flip:u8
+$00,$00E1,$00
+$01,$00E1,$00
+$02,$017F,$00
+$03,$0180,$00
+$04,$0181,$01
+$05,$0181,$00
+
+@label aItemCarriedFrames_3C
+@columns pose:index,sprite:u16,flip:u8
+$00,$00E3,$00
+$01,$00E3,$00
+$02,$0185,$00
+$03,$0186,$00
+$04,$0187,$01
+$05,$0187,$00
+
+@label aItemCarriedFrames_3D
+@columns pose:index,sprite:u16,flip:u8
+$00,$00E2,$00
+$01,$00E2,$00
+$02,$0182,$00
+$03,$0183,$00
+$04,$0184,$01
+$05,$0184,$00
+
+@label aItemCarriedFrames_3E
+@columns pose:index,sprite:u16,flip:u8
+$00,$00DF,$00
+$01,$00DF,$00
+$02,$0179,$00
+$03,$017A,$00
+$04,$017B,$01
+$05,$017B,$00
+
+@label aItemCarriedFrames_3F
+@columns pose:index,sprite:u16,flip:u8
+$00,$00E4,$00
+$01,$00E4,$00
+$02,$0189,$00
+$03,$0189,$00
+$04,$0189,$01
+$05,$0189,$00
+
+@label aItemCarriedFrames_40
+@columns pose:index,sprite:u16,flip:u8
+$00,$00E5,$00
+$01,$00E5,$00
+$02,$018A,$00
+$03,$018A,$00
+$04,$018A,$01
+$05,$018A,$00
+
+@label aItemCarriedFrames_41
+@columns pose:index,sprite:u16,flip:u8
+$00,$00DC,$00
+$01,$00DC,$00
+$02,$0188,$00
+$03,$0188,$00
+$04,$0188,$01
+$05,$0188,$00
+
+@label aItemCarriedFrames_42
+@columns pose:index,sprite:u16,flip:u8
+$00,$00DE,$00
+$01,$00DE,$00
+$02,$0176,$00
+$03,$0177,$00
+$04,$0178,$01
+$05,$0178,$00
+
+@label aItemCarriedFrames_43
+@columns pose:index,sprite:u16,flip:u8
+$00,$00DD,$00
+$01,$00DD,$00
+$02,$0173,$00
+$03,$0174,$00
+$04,$0175,$01
+$05,$0175,$00
+
+@label aItemCarriedFrames_19_Flower
+@columns pose:index,sprite:u16,flip:u8
+$00,$00FB,$00
+$01,$03CA,$00
+$02,$03C4,$00
+$03,$03C5,$00
+$04,$03C6,$01
+$05,$03C6,$00
+$06,$03C7,$00
+$07,$03C8,$00
+$08,$03C9,$01
+$09,$03C9,$00
+$0A,$010A,$00
+$0B,$03CB,$00
+
+@label aFoundItemData
+@columns id:index,dialog:dialog16,energy:u8,name:note
+$00,$0366,$0A,
+$01,$0367,$F6,Poisonous mushroom
+$02,$0368,$0A,Berry of wild grape
+$03,$0369,$0A,Tropical fruit
+$04,$036A,$32,Berry of Fullmoon Plant
+$05,$036B,$32,Cake
+$06,$036C,$0A,Fish
+$07,$036D,$0A,Power berry
+
+@label aDialogData_ShippingProfit
+@columns id:index,unk:u8,profit:u8
+$00,$00,$00
+$01,$00,$0F
+$02,$00,$14
+$03,$00,$0F
+$04,$00,$14
+$05,$00,$3C
+$06,$00,$00
+$07,$00,$1E
+$08,$00,$00
+$09,$00,$00
+$0A,$00,$00
+$0B,$00,$00
+$0C,$00,$00
+$0D,$10,$00
+$0E,$10,$00
+$0F,$14,$00
+$10,$00,$0C
+$11,$00,$0A
+$12,$00,$08
+$13,$00,$06
+$14,$00,$05
+$15,$00,$0F
+$16,$00,$19
+$17,$00,$23
+$18,$00,$14
+$19,$00,$00
+$1A,$99,$00
+$1B,$00,$00
+$1C,$00,$00
+$1D,$00,$00
+$1E,$00,$00
+$1F,$00,$00
+$20,$00,$00
+$21,$00,$00
+$22,$00,$00
+$23,$00,$00
+$24,$00,$00
+$25,$00,$00
+$26,$00,$00
+$27,$00,$00
+$28,$00,$00
+$29,$00,$00
+$2A,$00,$00
+$2B,$00,$00
+$2C,$00,$00
+$2D,$00,$00
+$2E,$00,$00
+$2F,$00,$00
+$30,$00,$00
+$31,$00,$00
+$32,$00,$00
+$33,$00,$00
+$34,$00,$00
+$35,$00,$00
+$36,$00,$00
+$37,$00,$00
+$38,$00,$00
+$39,$00,$00
+$3A,$00,$00
+$3B,$00,$00
+$3C,$00,$00
+$3D,$00,$00
+$3E,$00,$00
+$3F,$00,$00
+$40,$00,$00
+$41,$00,$00
+$42,$00,$00
+$43,$00,$00
+$44,$00,$00
+$45,$00,$00
+$46,$00,$00
+$47,$00,$00
+$48,$00,$00
+$49,$00,$00
+$4A,$00,$00
+$4B,$00,$00
+$4C,$00,$00
+$4D,$00,$00
+$4E,$00,$00
+$4F,$00,$00
+$50,$00,$00
+$51,$00,$00
+$52,$00,$00
+$53,$00,$00
+$54,$00,$00
+$55,$00,$00
+$56,$00,$00
+$57,$14,$00
+$58,$00,$00
+$59,$00,$00
+$5A,$00,$00
+
+@label aDialogData_SellItems
+@columns id:index,dialog:dialog16,profit:u8,name:note
+$00,$0000,$00,
+$01,$0358,$14,Mushroom
+$02,$0359,$1E,Poisonous mushroom
+$03,$035B,$14,Berry of wild grape
+$04,$035C,$1E,Tropical fruit
+$05,$035D,$3C,Berry of Fullmoon Plant
+$06,$0313,$00,Cake
+$07,$035E,$1E,Fish
+$08,$0000,$00,Power berry
+$09,$0000,$00,
+$0A,$0000,$00,
+$0B,$0000,$00,
+$0C,$0000,$00,
+$0D,$0000,$00,
+$0E,$0000,$00,
+$0F,$0000,$00,
+$10,$0353,$18,Corn
+$11,$0354,$14,Tomato
+$12,$0355,$10,Potato
+$13,$0356,$0C,Turnip
+$14,$0357,$0A,Egg
+$15,$0350,$14,Small milk
+$16,$0351,$1E,Medium milk
+$17,$0352,$28,Large milk
+$18,$035A,$14,Herb
+$19,$0313,$00,Flower
+$1A,$0000,$00,
+$1B,$0000,$00,
+$1C,$0000,$00,
+$1D,$0000,$00,
+$1E,$0000,$00,
+$1F,$0000,$00,
+$20,$0000,$00,
+$21,$0000,$00,
+$22,$0000,$00,
+$23,$0000,$00,
+$24,$0000,$00,
+$25,$0313,$00,
+$26,$0313,$00,
+$27,$0000,$00,
+$28,$0000,$00,
+$29,$0000,$00,
+$2A,$0000,$00,
+$2B,$0000,$00,
+$2C,$0000,$00,
+$2D,$0000,$00,
+$2E,$0000,$00,
+$2F,$0000,$00,
+$30,$0000,$00,
+$31,$0000,$00,
+$32,$0000,$00,
+$33,$0000,$00,
+$34,$0000,$00,
+$35,$0000,$00,
+$36,$0000,$00,
+$37,$0000,$00,
+$38,$0000,$00,
+$39,$0000,$00,
+$3A,$0000,$00,
+$3B,$0000,$00,
+$3C,$0000,$00,
+$3D,$0000,$00,
+$3E,$0000,$00,
+$3F,$0000,$00,
+$40,$0000,$00,
+$41,$0000,$00,
+$42,$0000,$00,
+$43,$0000,$00,
+$44,$0000,$00,
+$45,$0000,$00,
+$46,$0000,$00,
+$47,$0000,$00,
+$48,$0000,$00,
+$49,$0000,$00,
+$4A,$0000,$00,
+$4B,$0000,$00,
+$4C,$0000,$00,
+$4D,$0000,$00,
+$4E,$0000,$00,
+$4F,$0000,$00,
+$50,$0000,$00,
+$51,$0000,$00,
+$52,$0000,$00,
+$53,$0000,$00,
+$54,$0000,$00,
+$55,$0000,$00,
+$56,$0000,$00,
+$57,$0000,$00,
+$58,$0000,$00,
+$59,$0000,$00,
+$5A,$0000,$00,
+
+@label aDialogsData_BuyItems
+@columns id:index,description:dialog16,yes:dialog16,no:dialog16,too_poor:dialog16,unk:u8,cost:u24,name:note
+$00,$02F6,$02F7,$0211,$02F9,$BB,$FFFFCE,Grass seeds
+$01,$033F,$02F7,$0211,$02F9,$B7,$FFFFE2,Corn seeds
+$02,$033C,$02F7,$0211,$02F9,$B8,$FFFFE2,Tomato seeds
+$03,$033D,$02F7,$0211,$02F9,$B9,$FFFFEC,Potato seeds
+$04,$033E,$02F7,$0211,$02F9,$BA,$FFFFEC,Turnip seeds
+$05,$0340,$02F8,$0211,$02F9,$BC,$FFFFE2,Flower
+$06,$02FC,$02FD,$02FE,$02FF,$D1,$FFFF6A,Paint
+$07,$0312,$02FD,$02FE,$02FF,$D0,$FFFF4C,Milker
+$08,$0314,$02FD,$02FE,$02FF,$CF,$FFFFB0,Brush
+$09,$0344,$02FD,$02FE,$02FF,$CA,$FFFF38,Super sickle
+$0A,$0345,$02FD,$02FE,$02FF,$CB,$FFFF38,Super hoe
+$0B,$0346,$02FD,$02FE,$02FF,$CC,$FFFF38,Super hammer
+$0C,$0347,$02FD,$02FE,$02FF,$CD,$FFFF38,Super axe
+$0D,$0343,$02FD,$02FE,$02FF,$CE,$FFFF38,Sprinkler
+$0E,$0301,$0302,$0303,$0304,$D7,$FFFF9C,Cow medicine
+$0F,$033B,$0302,$0303,$0304,$D6,$FFFE70,Miracle potion
+$10,$0342,$0308,$0303,$0304,$D9,$FFFFE2,Chicken feed
+$11,$0341,$0308,$0303,$0304,$D8,$FFFFC4,Cow feed
+$12,$0348,$0349,$034A,$02FF,$C5,$FFFFCE,Cake
+$13,$020E,$0210,$0211,$02F9,$F8,$FFFF9C,Lilac fragrance
+$14,$020D,$0210,$0211,$02F9,$F7,$FFFF9C,Rose fragrance
+$15,$020F,$0210,$0211,$02F9,$F9,$FFFF9C,Violet fragrance
+
+@label nItemCarriedIndexForTilemap
+@columns id:index,tile:u8
+$00,$00
+$01,$01
+$02,$01
+$03,$01
+$04,$01
+$05,$03
+$06,$00
+$07,$00
+$08,$00
+$09,$02
+$0A,$02
+$0B,$02
+$0C,$01
+$0D,$02
+$0E,$02
+$0F,$02
+$10,$4C
+$11,$32
+$12,$07
+$13,$07
+$14,$2E
+$15,$00
+$16,$00
+$17,$00
+$18,$20
+$19,$01
+$1A,$00
+$1B,$12
+$1C,$12
+$1D,$12
+$1E,$00
+$1F,$00
+$20,$00
+$21,$00
+$22,$00
+$23,$00
+$24,$00
+$25,$00
+$26,$00
+$27,$00
+$28,$00
+$29,$00
+$2A,$2A
+$2B,$2B
+$2C,$2B
+$2D,$2D
+$2E,$2A
+$2F,$2B
+$30,$2B
+$31,$2D
+$32,$2A
+$33,$2B
+$34,$2B
+$35,$2C
+$36,$2A
+$37,$2B
+$38,$2B
+$39,$2C
+$3A,$2A
+$3B,$2B
+$3C,$2B
+$3D,$2D
+$3E,$2C
+$3F,$2B
+$40,$2A
+$41,$2B
+$42,$2E
+$43,$2E
+$44,$00
+$45,$00
+$46,$00
+$47,$00
+$48,$00
+$49,$21
+$4A,$21
+$4B,$21
+$4C,$21
+$4D,$20
+$4E,$20
+$4F,$20
+$50,$20
+$51,$20
+$52,$22
+$53,$22
+$54,$22
+$55,$22
+$56,$22
+$57,$00
+$58,$12
+$59,$12
+$5A,$12
+
+@label nSoundItemCarriedTable_81A308
+@columns id:index,sound:u8
+$00,$00
+$01,$01
+$02,$01
+$03,$01
+$04,$01
+$05,$01
+$06,$00
+$07,$00
+$08,$01
+$09,$01
+$0A,$01
+$0B,$01
+$0C,$01
+$0D,$01
+$0E,$01
+$0F,$01
+$10,$01
+$11,$01
+$12,$01
+$13,$01
+$14,$00
+$15,$00
+$16,$00
+$17,$00
+$18,$01
+$19,$01
+$1A,$01
+$1B,$00
+$1C,$00
+$1D,$00
+$1E,$00
+$1F,$00
+$20,$00
+$21,$00
+$22,$00
+$23,$00
+$24,$00
+$25,$00
+$26,$00
+$27,$00
+$28,$00
+$29,$00
+$2A,$00
+$2B,$00
+$2C,$00
+$2D,$00
+$2E,$00
+$2F,$00
+$30,$00
+$31,$00
+$32,$00
+$33,$00
+$34,$00
+$35,$00
+$36,$00
+$37,$00
+$38,$00
+$39,$00
+$3A,$00
+$3B,$00
+$3C,$00
+$3D,$00
+$3E,$00
+$3F,$00
+$40,$00
+$41,$00
+$42,$00
+$43,$00
+$44,$00
+$45,$00
+$46,$00
+$47,$00
+$48,$00
+$49,$00
+$4A,$00
+$4B,$00
+$4C,$00
+$4D,$00
+$4E,$00
+$4F,$00
+$50,$00
+$51,$00
+$52,$00
+$53,$00
+$54,$00
+$55,$00
+$56,$00
+$57,$01
+$58,$00
+$59,$00
+$5A,$00
+
+@label aFixedDropPositionsXY
+@columns slot:index,x:pos16,y:pos16
+# n16 x, n16 y
+$00,$0218,$0208
+$01,$01A8,$00D2
+$02,$02E8,$00F2
+$03,$0318,$0252
+$04,$00E8,$0322
+$05,$0298,$0372
+$06,$02B0,$0170
+$07,$0068,$0250
+

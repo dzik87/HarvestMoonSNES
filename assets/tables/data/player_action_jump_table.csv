@@ -1,0 +1,38 @@
+# Player action handlers (bank $81, player_actions.asm).  aPlayerAction_JumpTable[strcPlayer.action] -> handler routine.
+# Index = !PACTION_* (src/common/enums.asm); several actions share the default handler fPlayerAction0x00.
+#   action   enum name of the index (comment only, generated from enums.asm for orientation)
+#   handler  label of the routine (ptr16, bank $81)
+# Confidence: high (indexed by the player action, called from the player update).
+
+@label aPlayerAction_JumpTable
+@columns index:index,action:note,handler:ptr16
+$00,PACTION_NONE,fPlayerAction0x00
+$01,PACTION_WALK,fPlayerAction0x00
+$02,PACTION_RUN,fPlayerAction0x00
+$03,PACTION_JUMP,fPlayerAction0x03
+$04,PACTION_ITEMONHAND,fPlayerAction0x04
+$05,PACTION_DROPITEM,fPlayerAction0x05
+$06,PACTION_06,fPlayerAction0x00
+$07,PACTION_07,fPlayerAction0x00
+$08,PACTION_CONSUMEITEM,fPlayerAction0x08
+$09,PACTION_EXCERCISE,fPlayerAction0x09
+$0A,PACTION_USINGTOOL,fPlayerAction0x0A
+$0B,PACTION_TIRED,fPlayerAction0x0B
+$0C,PACTION_SHOWTOOL,fPlayerAction0x0C_SelectDialog
+$0D,PACTION_WHISTLEHORSE,fPlayerAction0x0D
+$0E,PACTION_0E,fPlayerAction0x00
+$0F,PACTION_0F,fPlayerAction0x0F
+$10,PACTION_10,fPlayerAction0x10
+$11,PACTION_FISHING,fPlayerAction0x11_Fishing
+$12,PACTION_FISHINGBITE,fPlayerAction0x12_FishingBite
+$13,PACTION_REELING,fPlayerAction0x13
+$14,PACTION_DRUNK,fPlayerAction0x14
+$15,PACTION_DRINKING,fPlayerAction0x15
+$16,PACTION_DROPPINGDOG,fPlayerAction0x16
+$17,PACTION_17,fPlayerAction0x17
+$18,PACTION_18,fPlayerAction0x18
+$19,PACTION_AUTOPILOT,fPlayerAction0x19
+$1A,PACTION_1A,fPlayerAction0x1A
+$1B,PACTION_WHISTLEDOG,fPlayerAction0x1B
+$1C,PACTION_SWAPTOOL,fPlayerAction0x1C
+

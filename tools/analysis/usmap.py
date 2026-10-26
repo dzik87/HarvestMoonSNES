@@ -62,12 +62,31 @@ def _data_len(m):
     return (n + 1) * size
 
 
+_INCSRC_GEN = re.compile(r'^\s*incsrc\s+"(?:\.\./)+(build/gen/blocks/[\w.]+\.asm)"')
+
+
+def _source_lines(rel):
+    """-> [(file, index, text)] of a module; `incsrc` lines of generated data blocks (tools/data/tabledata.py) are replaced by the generated
+    lines, which carry no address comments (the data lines are placed by the run of the code before them)."""
+    out = []
+    for i, text in enumerate((CODE_DIR / rel).read_text(encoding="utf-8").split("\n")):
+        m = _INCSRC_GEN.match(text)
+        if not m:
+            out.append((rel, i, text))
+            continue
+        gen = ROOT / m.group(1)
+        if not gen.exists():
+            import subprocess
+            subprocess.check_call([sys.executable, str(ROOT / "tools" / "data" / "tabledata.py"), "build"])
+        out += [(m.group(1), j, t) for j, t in enumerate(gen.read_text(encoding="utf-8").split("\n"))]
+    return out
+
+
 def parse_module(rel):
-    path = CODE_DIR / rel
     lines = []
     stack = []   # one entry per open `if !REGION_..` block: True while inside a region branch, False in its `else`
-    for i, text in enumerate(path.read_text(encoding="utf-8").split("\n")):
-        ln = Line(rel, i, text)
+    for frel, i, text in _source_lines(rel):
+        ln = Line(frel, i, text)
         s = text.strip()
         if s.startswith("if ") and "!REGION_" in s:
             stack.append(True)

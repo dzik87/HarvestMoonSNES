@@ -1,0 +1,19 @@
+# Dialog shown for a weather forecast / festival day (bank $81, player_update.asm).
+# aWeatherDialogId[weather * 8 + season * 2]: one row per !WEATHER_* value, one column per season; $FFFF = no dialog.
+# Confidence: high.
+
+@label aWeatherDialogId
+@columns weather:note,spring:dialog16,summer:dialog16,fall:dialog16,winter:dialog16
+WEATHER_SUN,$0000,$0001,$0002,$0003
+WEATHER_RAIN,$0004,$0005,$0006,$FFFF
+WEATHER_SNOW,$FFFF,$FFFF,$FFFF,$0007
+WEATHER_HURRICANE,$FFFF,$0008,$FFFF,$FFFF
+WEATHER_FAIR,$FFFF,$FFFF,$FFFF,$0167
+WEATHER_CALM,$0201,$FFFF,$FFFF,$FFFF
+WEATHER_FLOWERFESTIVAL,$FFFF,$FFFF,$0237,$FFFF
+WEATHER_HARVESTFESTIVAL,$FFFF,$FFFF,$FFFF,$028D
+WEATHER_THANKSGIVING,$FFFF,$FFFF,$FFFF,$02AC
+WEATHER_STARNIGHTFESTIVAL,$FFFF,$FFFF,$FFFF,$00FF
+WEATHER_NEWYEARFESTIVAL,$FFFF,$FFFF,$0273,$FFFF
+WEATHER_EGGFESTIVAL,$FFFF,$0049,$FFFF,$FFFF
+

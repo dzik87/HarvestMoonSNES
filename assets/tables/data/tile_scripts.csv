@@ -1,0 +1,826 @@
+# Tile (map object) scripts and tile patterns (bank $81, items_misc.asm).
+# Table_81B363[N]  tile patterns, 6 bytes (fMap_GetTilePatternInfo): a rectangle of the map that fMap_DrawTilePatternAt draws
+#   src_offset  word offset in the tilemap source of the pattern
+#   width, height  size of the rectangle in tiles
+#   object_id   value filled into the object map of the rectangle (0 = do not fill, fMap_FillCurrentTilemapRect)
+# pTable_81B963[N] -> aTileScript_NN: script start (ptr24), started by fTileScript_Start.
+# aTileScript_NN   list of steps, ends with a loop or end record:
+#   step   tile:u16, x:pos16, y:pos16, delay:u8   set the tile at (x, y), then wait `delay` frames
+#   loop:  op=$FFFE, target:ptr24                  continue at target
+#   end:   op=$FFFF                                end of the script
+# nCarriedItemTable_81BE0F[tool] (8 bytes, index = tool id !EITEM_*): where a tool is put away in the shed:
+#   tile_x, tile_y  position of the tile on the map; tile_id  tile placed there; shed_row, shed_mask  byte and bit of strcShedItems
+# aBitMask16[N] = 1 << N.
+# Confidence: high for scripts and patterns, medium for the meaning of the pattern columns.
+
+@record loop op:u16=$FFFE,target:ptr24
+@record end op:u16=$FFFF
+@label Table_81B363
+@columns index:index,src_offset:u16,width:u8,height:u8,object_id:u16
+$00,$0000,$00,$00,$0000
+$01,$0000,$02,$01,$0000
+$02,$0008,$02,$01,$0000
+$03,$0010,$02,$01,$0000
+$04,$0018,$02,$01,$0000
+$05,$0020,$02,$01,$0000
+$06,$0028,$02,$01,$0000
+$07,$0030,$02,$01,$0000
+$08,$0038,$02,$01,$0000
+$09,$0080,$01,$02,$0000
+$0A,$0088,$01,$02,$0000
+$0B,$0090,$02,$02,$0000
+$0C,$00A0,$02,$02,$0000
+$0D,$00B0,$02,$02,$0002
+$0E,$0100,$01,$01,$0002
+$0F,$0104,$01,$01,$0003
+$10,$0108,$01,$01,$0004
+$11,$010C,$01,$01,$0000
+$12,$0110,$01,$01,$0000
+$13,$0114,$01,$01,$0000
+$14,$0118,$01,$01,$0005
+$15,$011C,$01,$01,$0006
+$16,$0120,$01,$01,$0000
+$17,$0124,$01,$01,$0007
+$18,$0128,$01,$01,$0008
+$19,$012C,$01,$01,$003A
+$1A,$012C,$01,$01,$0026
+$1B,$012C,$01,$01,$0054
+$1C,$012C,$01,$01,$0066
+$1D,$0130,$01,$01,$0000
+$1E,$0134,$01,$01,$0070
+$1F,$0138,$01,$01,$0000
+$20,$013C,$01,$01,$0000
+$21,$0180,$01,$01,$0000
+$22,$0184,$01,$01,$0000
+$23,$0188,$01,$01,$0032
+$24,$018C,$01,$01,$0000
+$25,$0190,$01,$01,$0000
+$26,$0194,$01,$01,$0000
+$27,$0198,$01,$01,$0000
+$28,$019C,$01,$01,$0000
+$29,$01A0,$01,$01,$0000
+$2A,$01A4,$01,$01,$0000
+$2B,$01A8,$01,$01,$004C
+$2C,$01AC,$01,$01,$0000
+$2D,$01B0,$01,$01,$0000
+$2E,$01B4,$01,$01,$0000
+$2F,$01B8,$01,$01,$0000
+$30,$01BC,$01,$01,$0000
+$31,$0200,$01,$01,$0000
+$32,$0204,$01,$01,$0000
+$33,$0208,$01,$01,$0000
+$34,$020C,$01,$01,$0000
+$35,$0210,$01,$01,$0000
+$36,$0214,$01,$01,$0000
+$37,$0218,$01,$01,$0000
+$38,$021C,$01,$01,$0000
+$39,$0220,$01,$01,$0000
+$3A,$0224,$01,$01,$0000
+$3B,$0228,$01,$01,$0000
+$3C,$022C,$01,$01,$0000
+$3D,$0230,$01,$01,$0000
+$3E,$0234,$01,$01,$0000
+$3F,$0238,$01,$01,$0000
+$40,$023C,$01,$01,$0000
+$41,$0280,$01,$01,$0000
+$42,$0284,$01,$01,$0000
+$43,$0288,$01,$01,$0000
+$44,$028C,$01,$01,$0000
+$45,$0290,$01,$01,$0000
+$46,$0294,$01,$01,$0000
+$47,$0298,$01,$01,$0000
+$48,$029C,$01,$01,$0000
+$49,$02A0,$01,$01,$0000
+$4A,$02A4,$01,$01,$0000
+$4B,$02A8,$01,$01,$0000
+$4C,$02AC,$01,$01,$0000
+$4D,$02B0,$01,$01,$0000
+$4E,$02B4,$01,$01,$0000
+$4F,$02B8,$01,$01,$0000
+$50,$02BC,$01,$01,$0000
+$51,$0300,$01,$01,$0000
+$52,$0304,$01,$01,$007A
+$53,$0308,$07,$07,$0000
+$54,$048C,$07,$07,$0000
+$55,$0610,$02,$02,$0000
+$56,$0620,$02,$02,$0000
+$57,$0630,$02,$02,$0000
+$58,$0680,$02,$02,$0000
+$59,$0690,$02,$01,$0000
+$5A,$0698,$02,$02,$0000
+$5B,$06A0,$03,$01,$0000
+$5C,$06AC,$02,$02,$0000
+$5D,$06B4,$02,$01,$0000
+$5E,$06BC,$02,$01,$0000
+$5F,$0728,$02,$03,$0000
+$60,$0780,$03,$03,$0000
+$61,$07A4,$01,$02,$0000
+$62,$07AC,$01,$02,$0000
+$63,$07B4,$01,$02,$0000
+$64,$0800,$01,$02,$0000
+$65,$0808,$01,$02,$0000
+$66,$0810,$01,$02,$0000
+$67,$0818,$01,$02,$0000
+$68,$0820,$01,$02,$0000
+$69,$0828,$01,$02,$0000
+$6A,$0830,$01,$02,$0000
+$6B,$0838,$01,$02,$0000
+$6C,$0880,$01,$02,$0000
+$6D,$0888,$01,$02,$0000
+$6E,$0890,$01,$02,$0000
+$6F,$0898,$01,$02,$0000
+$70,$08A0,$01,$02,$0000
+$71,$08A8,$01,$02,$0000
+$72,$08B0,$01,$02,$0000
+$73,$08B8,$01,$02,$0000
+$74,$0900,$01,$02,$0000
+$75,$0EB0,$01,$02,$0000
+$76,$090C,$02,$01,$0000
+$77,$0914,$02,$01,$0000
+$78,$091C,$01,$01,$0010
+$79,$0920,$01,$01,$0011
+$7A,$0924,$01,$01,$0012
+$7B,$0928,$01,$01,$0013
+$7C,$092C,$01,$01,$0014
+$7D,$0930,$01,$01,$0015
+$7E,$0934,$01,$01,$0016
+$7F,$0938,$01,$01,$0017
+$80,$093C,$01,$01,$0018
+$81,$0980,$01,$01,$0019
+$82,$0984,$01,$01,$001A
+$83,$0988,$01,$01,$001B
+$84,$098C,$01,$01,$001C
+$85,$0990,$01,$01,$001D
+$86,$0994,$01,$01,$001E
+$87,$0998,$01,$01,$001F
+$88,$099C,$01,$01,$0020
+$89,$09A0,$01,$01,$0021
+$8A,$09A4,$01,$01,$0022
+$8B,$09A8,$01,$01,$0023
+$8C,$09AC,$01,$01,$0024
+$8D,$09B0,$01,$01,$0025
+$8E,$09B4,$01,$01,$0026
+$8F,$09B8,$01,$01,$0027
+$90,$09BC,$01,$01,$002A
+$91,$0A00,$01,$01,$002B
+$92,$0A04,$01,$01,$002C
+$93,$0A08,$01,$01,$002D
+$94,$0A0C,$01,$01,$0029
+$95,$0A10,$01,$01,$0000
+$96,$0A14,$01,$01,$0000
+$97,$0A18,$01,$01,$0000
+$98,$0A1C,$01,$01,$0000
+$99,$0A20,$01,$01,$002F
+$9A,$0A24,$01,$01,$0000
+$9B,$0A28,$01,$01,$0037
+$9C,$0A2C,$01,$01,$0003
+$9D,$0A30,$01,$01,$0028
+$9E,$0A34,$01,$01,$0000
+$9F,$0A38,$01,$01,$0000
+$A0,$0A3C,$01,$01,$0000
+$A1,$0A80,$02,$02,$0000
+$A2,$0A90,$02,$02,$0000
+$A3,$0AA0,$02,$01,$0000
+$A4,$0AA8,$02,$01,$0000
+$A5,$0AB0,$02,$01,$0000
+$A6,$0AB8,$02,$01,$0000
+$A7,$0B00,$02,$01,$0000
+$A8,$0B08,$02,$01,$0000
+$A9,$0B10,$02,$01,$0000
+$AA,$0B18,$02,$01,$0000
+$AB,$0B20,$02,$02,$0000
+$AC,$0B30,$02,$02,$0000
+$AD,$0B80,$02,$02,$0000
+$AE,$0B90,$02,$01,$0000
+$AF,$0B98,$02,$01,$0000
+$B0,$0BA0,$02,$01,$0000
+$B1,$0BA8,$02,$01,$0000
+$B2,$0BB0,$02,$01,$0000
+$B3,$0BB8,$02,$01,$0000
+$B4,$0C00,$02,$01,$0000
+$B5,$0C08,$02,$01,$0000
+$B6,$0C10,$02,$01,$0000
+$B7,$0C18,$01,$01,$00F2
+$B8,$0C1C,$01,$01,$00F3
+$B9,$0C20,$01,$01,$00F4
+$BA,$0C24,$01,$01,$00F5
+$BB,$0C28,$01,$01,$00F1
+$BC,$0C2C,$01,$01,$00F6
+$BD,$0C30,$01,$01,$0020
+$BE,$0C34,$01,$01,$0000
+$BF,$0C38,$01,$01,$0021
+$C0,$0C3C,$01,$01,$0000
+$C1,$0C80,$02,$01,$0000
+$C2,$0C88,$02,$01,$0000
+$C3,$0C90,$02,$01,$0000
+$C4,$0C98,$02,$01,$0000
+$C5,$0CA0,$01,$01,$00F1
+$C6,$0CA4,$01,$01,$0022
+$C7,$0CA8,$01,$01,$0000
+$C8,$0CAC,$02,$01,$0000
+$C9,$0CB4,$02,$01,$0000
+$CA,$0CBC,$01,$01,$00F8
+$CB,$0D00,$01,$01,$00F9
+$CC,$0D04,$01,$01,$00FA
+$CD,$0D08,$01,$01,$00FB
+$CE,$0D0C,$01,$01,$00F7
+$CF,$0D10,$01,$01,$00F6
+$D0,$0D14,$01,$01,$00F4
+$D1,$0D18,$01,$01,$00F5
+$D2,$0D1C,$01,$01,$0020
+$D3,$0D20,$01,$01,$0021
+$D4,$0D24,$02,$01,$0000
+$D5,$0D2C,$02,$01,$0000
+$D6,$0D34,$01,$01,$00FA
+$D7,$0D38,$01,$01,$00F9
+$D8,$0D3C,$01,$01,$00FC
+$D9,$0D80,$01,$01,$00FB
+$DA,$0D84,$01,$01,$0022
+$DB,$0D88,$02,$01,$0000
+$DC,$0D90,$02,$01,$0000
+$DD,$0D98,$01,$01,$0002
+$DE,$0D9C,$01,$01,$0001
+$DF,$0DA0,$02,$02,$0002
+$E0,$0DB0,$02,$02,$00C3
+$E1,$0E00,$05,$02,$0000
+$E2,$0E28,$01,$01,$00D5
+$E3,$0E2C,$01,$01,$0020
+$E4,$0E30,$01,$01,$0004
+$E5,$0E88,$02,$03,$0000
+$E6,$0EA0,$01,$01,$0000
+$E7,$0EA4,$01,$01,$0000
+$E8,$0EA8,$01,$01,$0000
+$E9,$0EAC,$01,$01,$0000
+$EA,$0EB8,$01,$01,$002E
+$EB,$012C,$01,$01,$001E
+$EC,$0130,$01,$01,$0000
+$ED,$0134,$01,$01,$001D
+$EE,$0E80,$02,$02,$0000
+$EF,$0E90,$02,$02,$0000
+$F0,$0F00,$02,$01,$0000
+$F1,$0F0C,$01,$01,$00F9
+$F2,$0F10,$01,$01,$0000
+$F3,$0F08,$01,$01,$0000
+$F4,$0F18,$02,$01,$00C3
+$F5,$0F20,$03,$02,$0000
+$F6,$0EBC,$01,$01,$0012
+$F7,$0F38,$01,$01,$0062
+$F8,$0F3C,$01,$01,$0063
+$F9,$0F80,$01,$01,$0064
+$FA,$0F84,$01,$01,$00A1
+$FB,$0F88,$01,$01,$0000
+$FC,$0F8C,$01,$01,$0000
+$FD,$0F90,$01,$01,$0000
+$FE,$0F94,$01,$01,$0000
+$FF,$0000,$00,$00,$0000
+@label pTable_81B963
+@columns index:index,script:ptr24
+$00,aTileScript_00
+$01,aTileScript_01
+$02,aTileScript_02
+$03,aTileScript_03
+$04,aTileScript_04
+$05,aTileScript_05
+$06,aTileScript_06
+$07,aTileScript_07
+$08,aTileScript_08
+$09,aTileScript_09
+$0A,aTileScript_0A
+$0B,aTileScript_0B
+$0C,aTileScript_0C
+$0D,aTileScript_0D
+$0E,aTileScript_0E
+$0F,aTileScript_0F
+$10,aTileScript_10
+$11,aTileScript_11
+$12,aTileScript_12
+$13,aTileScript_13
+$14,aTileScript_14
+$15,aTileScript_15
+$16,aTileScript_16
+$17,aTileScript_17
+$18,aTileScript_18
+$19,aTileScript_19
+$1A,aTileScript_1A
+$1B,aTileScript_1B
+$1C,aTileScript_1C
+$1D,aTileScript_1D
+$1E,aTileScript_1E
+$1F,aTileScript_1F
+$20,aTileScript_20
+$21,aTileScript_21
+$22,aTileScript_22
+$23,aTileScript_23
+$24,aTileScript_24
+$25,aTileScript_25
+$26,aTileScript_26
+$27,aTileScript_27
+$28,aTileScript_28
+$29,aTileScript_29
+$2A,aTileScript_2A
+$2B,aTileScript_2B
+$2C,aTileScript_2C
+$2D,aTileScript_2D
+$2E,aTileScript_2E
+$2F,aTileScript_2F
+$30,aTileScript_30
+$31,aTileScript_31
+$32,aTileScript_32
+$33,aTileScript_33
+$34,aTileScript_34
+$35,aTileScript_35
+$36,aTileScript_36
+$37,aTileScript_37
+$38,aTileScript_38
+$39,aTileScript_39
+$3A,aTileScript_3A
+$3B,aTileScript_3B
+$3C,aTileScript_3C
+$3D,aTileScript_3D
+$3E,aTileScript_3E
+$3F,aTileScript_3F
+$40,aTileScript_40
+$41,aTileScript_41
+$42,aTileScript_42
+$43,aTileScript_43
+$44,aTileScript_44
+$45,aTileScript_45
+$46,aTileScript_46
+$47,aTileScript_47
+$48,aTileScript_48
+
+@label aTileScript_00
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+# FFFF ends, FFFE followed by ptr24 (loops)
+$0061,$00B0,$0040,$20
+$0062,$00B0,$0040,$10
+$0061,$00B0,$0040,$20
+$0063,$00B0,$0040,$30
+end: 
+
+@label aTileScript_01
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$0064,$00B0,$0040,$06
+$0065,$00B0,$0040,$06
+loop: aTileScript_01
+
+@label aTileScript_02
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$0066,$00B0,$0040,$06
+$0067,$00B0,$0040,$06
+loop: aTileScript_02
+
+@label aTileScript_03
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$0068,$00B0,$0040,$04
+end: 
+
+@label aTileScript_04
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$0069,$00B0,$0040,$06
+$006A,$00B0,$0040,$06
+loop: aTileScript_04
+
+@label aTileScript_05
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$006B,$00B0,$0040,$06
+$006C,$00B0,$0040,$06
+loop: aTileScript_05
+
+@label aTileScript_06
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$006D,$00B0,$0040,$04
+end: 
+
+@label aTileScript_07
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$006E,$00B0,$0040,$04
+end: 
+
+@label aTileScript_08
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$006F,$00B0,$0040,$04
+end: 
+
+@label aTileScript_09
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$0070,$00B0,$0040,$06
+$0071,$00B0,$0040,$06
+loop: aTileScript_09
+
+@label aTileScript_0A
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$0072,$00B0,$0040,$04
+end: 
+
+@label aTileScript_0B
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$006E,$00B0,$0040,$04
+end: 
+
+@label aTileScript_0C
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$0073,$00B0,$0040,$06
+$0074,$00B0,$0040,$06
+loop: aTileScript_0C
+
+@label aTileScript_0D
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$0002,$0080,$0130,$00
+end: 
+
+@label aTileScript_0E
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$0004,$0140,$0140,$00
+end: 
+
+@label aTileScript_0F
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$0006,$01C0,$0140,$00
+end: 
+
+@label aTileScript_10
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$0008,$01A0,$01C0,$00
+end: 
+
+@label aTileScript_11
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$000A,$0070,$0190,$00
+end: 
+
+@label aTileScript_12
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$0009,$0070,$0190,$00
+end: 
+
+@label aTileScript_13
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$00DC,$0200,$0200,$00
+end: 
+
+@label aTileScript_14
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$00A4,$0090,$0070,$00
+end: 
+
+@label aTileScript_15
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$00AB,$0160,$0070,$08
+$00AC,$0160,$0070,$08
+$00AD,$0160,$0070,$08
+end: 
+
+@label aTileScript_16
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$00A6,$0250,$00C0,$00
+end: 
+
+@label aTileScript_17
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$00A6,$0090,$0340,$00
+end: 
+
+@label aTileScript_18
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$00A6,$0110,$0340,$00
+end: 
+
+@label aTileScript_19
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$00A6,$0190,$0340,$00
+end: 
+
+@label aTileScript_1A
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$00AF,$0250,$0350,$00
+end: 
+
+@label aTileScript_1B
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$00B1,$0240,$0240,$00
+end: 
+
+@label aTileScript_1C
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$00B3,$0090,$0020,$00
+end: 
+
+@label aTileScript_1D
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$00B4,$0090,$0130,$00
+end: 
+
+@label aTileScript_1E
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$00B6,$0060,$0120,$00
+end: 
+
+@label aTileScript_1F
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$00D5,$0050,$0020,$00
+end: 
+
+@label aTileScript_20
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$00C4,$0060,$0120,$00
+end: 
+
+@label aTileScript_21
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$00C9,$0060,$0120,$00
+end: 
+
+@label aTileScript_22
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$00C2,$0080,$0120,$00
+end: 
+
+@label aTileScript_23
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$0077,$0070,$0020,$00
+end: 
+
+@label aTileScript_24
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$000B,$0080,$01D0,$08
+$000C,$0080,$01D0,$08
+end: 
+
+@label aTileScript_25
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$00A1,$0000,$0150,$08
+$00A2,$0000,$0150,$08
+end: 
+
+@label aTileScript_26
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$00A1,$0000,$00B0,$08
+$00A2,$0000,$00B0,$08
+end: 
+
+@label aTileScript_27
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$0061,$00B0,$0040,$20
+$0062,$00B0,$0040,$10
+$0061,$00B0,$0040,$20
+$0063,$00B0,$0040,$30
+end: 
+
+@label aTileScript_28
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$0064,$00B0,$0040,$06
+$0065,$00B0,$0040,$06
+loop: aTileScript_28
+
+@label aTileScript_29
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$0066,$00B0,$0040,$06
+$0067,$00B0,$0040,$06
+loop: aTileScript_29
+
+@label aTileScript_2A
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$0068,$00B0,$0040,$04
+end: 
+
+@label aTileScript_2B
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$0069,$00B0,$0040,$06
+$006A,$00B0,$0040,$06
+loop: aTileScript_2B
+
+@label aTileScript_2C
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$006B,$00B0,$0040,$06
+$006C,$00B0,$0040,$06
+loop: aTileScript_2C
+
+@label aTileScript_2D
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$006D,$00B0,$0040,$04
+end: 
+
+@label aTileScript_2E
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$006E,$00B0,$0040,$04
+end: 
+
+@label aTileScript_2F
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$006F,$00B0,$0040,$04
+end: 
+
+@label aTileScript_30
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$0070,$00B0,$0040,$06
+$0071,$00B0,$0040,$06
+loop: aTileScript_30
+
+@label aTileScript_31
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$0072,$00B0,$0040,$04
+end: 
+
+@label aTileScript_32
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$006E,$00B0,$0040,$04
+end: 
+
+@label aTileScript_33
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$0073,$00B0,$0040,$06
+$0074,$00B0,$0040,$06
+loop: aTileScript_33
+
+@label aTileScript_34
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$0061,$00C0,$0040,$20
+$0062,$00C0,$0040,$10
+$0061,$00C0,$0040,$20
+$0063,$00C0,$0040,$30
+end: 
+
+@label aTileScript_35
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$0064,$00C0,$0040,$06
+$0065,$00C0,$0040,$06
+loop: aTileScript_35
+
+@label aTileScript_36
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$0066,$00C0,$0040,$06
+$0067,$00C0,$0040,$06
+loop: aTileScript_36
+
+@label aTileScript_37
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$0068,$00C0,$0040,$04
+end: 
+
+@label aTileScript_38
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$0069,$00C0,$0040,$06
+$006A,$00C0,$0040,$06
+loop: aTileScript_38
+
+@label aTileScript_39
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$006B,$00C0,$0040,$06
+$006C,$00C0,$0040,$06
+loop: aTileScript_39
+
+@label aTileScript_3A
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$006D,$00C0,$0040,$04
+end: 
+
+@label aTileScript_3B
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$006E,$00C0,$0040,$04
+end: 
+
+@label aTileScript_3C
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$006F,$00C0,$0040,$04
+end: 
+
+@label aTileScript_3D
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$0070,$00C0,$0040,$06
+$0071,$00C0,$0040,$06
+loop: aTileScript_3D
+
+@label aTileScript_3E
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$0072,$00C0,$0040,$04
+end: 
+
+@label aTileScript_3F
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$006E,$00C0,$0040,$04
+end: 
+
+@label aTileScript_40
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$0073,$00C0,$0040,$06
+$0074,$00C0,$0040,$06
+loop: aTileScript_40
+
+@label aTileScript_41
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$00E6,$0080,$0110,$06
+$00E7,$0080,$0110,$06
+$00E8,$0080,$0110,$06
+$00E9,$0080,$0110,$06
+end: 
+
+@label aTileScript_42
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$00F3,$0080,$0110,$06
+end: 
+
+@label aTileScript_43
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$00F4,$0040,$0070,$00
+end: 
+
+@label aTileScript_44
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$0056,$0120,$0140,$08
+$0055,$0120,$0140,$08
+$0057,$0120,$0140,$08
+$0055,$0120,$0140,$08
+end: 
+
+@label aTileScript_45
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$00FA,$0110,$00F0,$08
+end: 
+
+@label aTileScript_46
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$0075,$00B0,$0040,$04
+end: 
+
+@label aTileScript_47
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$0075,$00B0,$0040,$04
+end: 
+
+@label aTileScript_48
+@columns tile:u16,x:pos16,y:pos16,delay:u8
+$0075,$00C0,$0040,$04
+end: 
+
+@label nCarriedItemTable_81BE0F
+@columns tool:note,tile_x:pos16,tile_y:pos16,tile_id:u16,shed_row:u8,shed_mask:u8
+EITEM_NONE,$0000,$0000,$0000,$00,$00
+EITEM_SICKLE,$0090,$0090,$0078,$00,$01
+EITEM_HOE,$00A0,$0090,$0079,$00,$02
+EITEM_HAMMER,$00B0,$0090,$007A,$00,$04
+EITEM_AXE,$00C0,$0090,$007B,$00,$08
+EITEM_CORNSEED,$0090,$0060,$007C,$00,$10
+EITEM_TOMATOSEED,$00A0,$0060,$007D,$00,$20
+EITEM_POTATOSEED,$00B0,$0060,$007E,$00,$40
+EITEM_TURNIPSEED,$00C0,$0060,$007F,$00,$80
+EITEM_MEDICIDE,$0030,$0060,$0080,$01,$01
+EITEM_MIRACLEPOTION,$0040,$0060,$0081,$01,$02
+EITEM_BELL,$0050,$0060,$0082,$01,$04
+EITEM_GRASSSEED,$0060,$0060,$0083,$01,$08
+EITEM_PAINT,$0030,$0090,$0084,$01,$10
+EITEM_MILKER,$0040,$0090,$0085,$01,$20
+EITEM_BRUSH,$0050,$0090,$0086,$01,$40
+EITEM_WATERINGCAN,$0060,$0090,$0087,$01,$80
+EITEM_GOLDSICKLE,$0090,$0090,$0088,$02,$01
+EITEM_GOLDHOE,$00A0,$0090,$0089,$02,$02
+EITEM_GOLDHAMMER,$00B0,$0090,$008A,$02,$04
+EITEM_GOLDAXE,$00C0,$0090,$008B,$02,$08
+EITEM_SPRINKLER,$0060,$0090,$008C,$02,$10
+EITEM_BEANSTALKSEED,$0040,$00C0,$008D,$02,$20
+EITEM_BLUEDIAMOND,$0030,$00C0,$008E,$02,$40
+EITEM_BLUEFEATHER,$00B0,$00C0,$008F,$02,$80
+EITEM_CHICKENFEED,$0040,$00C0,$009D,$03,$01
+EITEM_COWFEED,$0040,$0160,$0094,$03,$02
+EITEM_FISHINGPOLE,$0000,$0000,$0000,$03,$04
+,$0000,$0000,$0000,$00,$00
+,$0090,$0140,$00B7,$00,$10
+,$00A0,$0140,$00B8,$00,$20
+,$00B0,$0140,$00B9,$00,$40
+,$00C0,$0140,$00BA,$00,$80
+,$00D0,$0140,$00BB,$01,$08
+,$00E0,$0150,$00BC,$00,$00
+,$0000,$0000,$0000,$00,$00
+,$00E0,$0170,$00D1,$01,$10
+,$00E0,$0150,$00D0,$01,$20
+,$00E0,$0160,$00CF,$01,$40
+,$0090,$0140,$00CA,$02,$01
+,$00A0,$0140,$00CB,$02,$02
+,$00B0,$0140,$00CC,$02,$04
+,$00C0,$0140,$00CD,$02,$08
+,$00D0,$0140,$00CE,$02,$10
+,$0000,$0000,$0000,$00,$00
+,$0020,$0070,$00D6,$01,$02
+,$0030,$0070,$00D7,$01,$01
+,$0030,$00A0,$00D9,$03,$01
+,$0020,$00A0,$00D8,$03,$02
+
+@label aBitMask16
+@columns bit:index,mask:flags16
+$00,$0001
+$01,$0002
+$02,$0004
+$03,$0008
+$04,$0010
+$05,$0020
+$06,$0040
+$07,$0080
+$08,$0100
+$09,$0200
+$0A,$0400
+$0B,$0800
+$0C,$1000
+$0D,$2000
+$0E,$4000
+$0F,$8000
+

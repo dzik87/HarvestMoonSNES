@@ -1,9 +1,0 @@
-aWeatherDialogId:
-    dw $0000,$0001,$0002,$0003,$0004,$0005   ; 0x0C * [n16 nSpring, n16 nSummer, n16 nFall, n16 nWinter]
-    dw $0006,$FFFF,$FFFF,$FFFF,$FFFF,$0007
-    dw $FFFF,$0008,$FFFF,$FFFF,$FFFF,$FFFF
-    dw $FFFF,$0167,$0201,$FFFF,$FFFF,$FFFF
-    dw $FFFF,$FFFF,$0237,$FFFF,$FFFF,$FFFF
-    dw $FFFF,$028D,$FFFF,$FFFF,$FFFF,$02AC
-    dw $FFFF,$FFFF,$FFFF,$00FF,$FFFF,$FFFF
-    dw $0273,$FFFF,$FFFF,$0049,$FFFF,$FFFF
