@@ -56,3 +56,20 @@ With no assets in the repository a clean checkout cannot rebuild the ROM, so CI 
 CI therefore runs everything that needs no ROM content (unit tests with synthetic fixtures, tool checks, assembling the
 code against generated placeholders where possible). Full ROM verification is a local step (`tests/test_extract_roundtrip.py`)
 or a CI job that is given the dumps by the repository owner (private runner or secret storage).
+
+## Graphics, palettes, fonts and dialogs (steps `palettes`, `fonts`, `dialogs`, `graphics`)
+
+| Step | Writes (`assets/`) | Reads from `defs/` | Notes |
+|---|---|---|---|
+| `palettes` | `gfx/palettes/*.json`, `*.png`, `<region>/*.json` | `gfx/banks.json` (palette order, labels, addresses) | colours only; regional palettes are the ones that differ from US |
+| `fonts` | `fonts/<region>/glyph_*.png`, `glyphs.json` | - (table addresses are in `tools/fonts/font.py`) | 4 releases; the glyph-to-character list comes from `src/common/charmap.asm` and `defs/dialogs/charmap_jp.json` |
+| `dialogs` | `dialogs/<region>/bank_*.txt`, `text_tables.json`, `text_vars.csv`, `dialogs/number_vars.csv` | `dialogs/tables.json` (ROM addresses of the tables), `dialogs/text_vars_shifted.json`, `dialogs/charmap_jp.json` | text = dialog words rendered with the charmap; the extraction verifies that the text re-assembles to the exact bank bytes |
+| `graphics` | `gfx/png/**` (screens, frames, remainder sheets, regional versions), `gfx/tilemaps/**`, sidecar JSON, `gfx/palette_map.json`, `gfx/graphics_loads.json` | `gfx/banks.json` (bank order, blob names and sizes), `gfx/tilemap_columns.json`, `gfx/names/K3` (legacy labels) | needs the output of `palettes`, `areas`, `objects` and `tables`; slowest step (about 1 min) |
+
+Everything that can be computed from the ROM and the code is computed, not stored: the sidecars (bpp, tile sets, VRAM destinations, palette
+assignments, tail bytes), the palette map and the load register are derived from the area descriptors, the palette tables and the object
+data of the same extraction. `defs/gfx/banks.json` records only the layout (ORG, blob order, `*` regional marker, blob sizes, padding);
+`defs/gfx/tilemap_columns.json` the three name tables whose row length is not the default.
+PNG files are written with pinned encoder settings (`optimize`, `compress_level=9`; palette sheets `compress_level=6`) so the output is
+byte-identical on every machine that uses the same zlib; different zlib builds can produce different (equally valid) compressed streams.
+`tests/test_extract_roundtrip.py` (needs `HM_ROM_DIR`, `HM_ROUNDTRIP_BUILD=1` adds the four-region build) proves the equivalence.

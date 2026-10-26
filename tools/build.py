@@ -26,6 +26,17 @@ MAIN = {r: "src/main.asm" for r in ("US", "EU", "DE", "JP")}  # regions share th
 DEFINES = {"US": [], "EU": ["-DREGION_EU=1"], "DE": ["-DREGION_DE=1"], "JP": ["-DREGION_JP=1"]}
 
 
+# sources that tools/extract.py writes from the user's ROM dumps (docs/extraction.md); any one missing = the assets tree is not there
+REQUIRED_ASSETS = ("assets/gfx/png", "assets/gfx/palettes", "assets/fonts/us", "assets/dialogs/us")
+
+
+def check_assets():
+    missing = [d for d in REQUIRED_ASSETS if not (ROOT / d).is_dir()]
+    if missing:
+        sys.exit("The assets tree is missing (%s).\nThe repository holds code and structure only; extract the assets from your own ROM dumps first:\n"
+                 "    python tools/extract.py --rom-dir <folder with your US/EU/DE/JP dumps>\n(see docs/extraction.md)" % ", ".join(missing))
+
+
 def find_asar(explicit):
     candidates = [explicit, os.environ.get("ASAR")]
     exe = "asar.exe" if os.name == "nt" else "asar"
@@ -49,6 +60,7 @@ def main() -> int:
     p.add_argument("-v", "--verbose", action="store_true")
     args = p.parse_args()
 
+    check_assets()
     if not args.no_assets:
         sys.path.insert(0, str(ROOT / "tools"))
         import build_assets

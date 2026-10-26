@@ -109,8 +109,8 @@ $94/$95 differ; bank $9C is identical).
 
 ## Workflow
 
-    python3 tools/fonts/font.py extract --region us            # assets/gfx/tiles -> assets/fonts/us/
-    python3 tools/fonts/font.py extract --region eu --rom ROM/EU/<file>.sfc
+    python3 tools/extract.py --rom-dir <your dumps> --only fonts   # ROM -> assets/fonts/<region>/ (all four releases)
+    python3 tools/fonts/font.py extract --region eu --rom ROM/EU/<file>.sfc   # one release from one ROM file
     python3 tools/fonts/font.py build   --region us --write-assets   # PNGs -> assets/gfx/tiles/sFontGlyphs_*.bin
     python3 tools/fonts/font.py build   --region de --out build/fonts/de
     python3 tools/fonts/font.py seal    --region de            # after an intentional edit: refresh SHA-256 values

@@ -39,7 +39,7 @@ The full version (every scenario with the bit-exact rebuild, width and screen au
 `HM_FULL_TESTS=1 python3 tests/test_pngsync.py`. CI runs the default version; run the full one before changing `composed.py` or `pngsync.py`.
 
 ## Asset converters (`tools/gfx/`)
-- `palette.py` — palettes ($A8/$A9): `extract` (from the old `db` sources), `pack` (JSON -> `.pal`), `emit-asm`, `check`.
+- `palette.py` — palettes ($A8/$A9): `pack` (JSON -> `.pal`), `emit-asm`, `check`; the colours are read from the ROM by `tools/extract.py` (step `palettes`).
   The source of truth is `assets/gfx/palettes/*.json` (edit colours as `#RRGGBB`), packed into `*.pal` files that the
   assembler includes with `incbin`. CI runs `palette.py check` before the build.
 - Editing a palette: change the JSON, run `python tools/gfx/palette.py pack`, commit both files. The ROM hash will of

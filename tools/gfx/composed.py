@@ -256,7 +256,7 @@ class Ctx:
     def _build_frames(self):
         import spriteexport as S
         self.S = S
-        data = S.ObjectData()
+        data = S.ObjectData(str(self.root / "assets" / "objects"))
         fdir = frames_dir(self.root)
         import objdata as OD
         onames = OD.object_names(self.root)
@@ -695,7 +695,7 @@ def render_images(ctx, sheets):
     if ctx.frames:
         S = ctx.S
         import palette_map
-        flat = S.make_palette(palette_map.sprite_palettes(0))
+        flat = S.make_palette(palette_map.sprite_palettes(0, ctx.root))
         view = SheetView(sheets)
         for fr in ctx.frames:
             out[f"frames/{fr.path.parent.name}/{fr.path.name}"] = (fr.w, fr.h, render_frame(ctx, fr, view), flat, True)

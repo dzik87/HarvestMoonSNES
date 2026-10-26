@@ -421,6 +421,18 @@ def read_raw(b):
     return raw, data[used:]
 
 
+_COLUMNS = {}
+
+
+def tilemap_columns(root=ROOT):
+    """{label: row length} of the name tables that do not use the default width (defs/gfx/tilemap_columns.json)."""
+    key = str(root)
+    if key not in _COLUMNS:
+        p = Path(root) / "defs/gfx/tilemap_columns.json"
+        _COLUMNS[key] = json.loads(p.read_text(encoding="utf-8"))["columns"] if p.exists() else {}
+    return _COLUMNS[key]
+
+
 def export_blob(b, raw=None, tail=None, old=None):
     """.bin (or the given raw payload / tail) -> sidecar .json (tiles, sprites; the images come from composed.export_images)
     or .map.txt + .json (name tables)."""
@@ -434,7 +446,7 @@ def export_blob(b, raw=None, tail=None, old=None):
         meta["legacy_label"] = legacy_label(b.label, b.root)
     if b.kind == "tilemaps":
         import composed
-        columns = old.get("columns", composed.default_columns(len(raw) // 2))
+        columns = tilemap_columns(b.root).get(b.label, composed.default_columns(len(raw) // 2))
         meta.update({"format": "bg_name_table", "entries": len(raw) // 2, "columns": columns})
         b.art.parent.mkdir(parents=True, exist_ok=True)
         b.art.write_text(nametable_text(raw, columns), encoding="utf-8", newline="\n")
@@ -477,22 +489,36 @@ def build_bin(b, meta=None):
 # ----------------------------------------------------------------------------------------------------------------------
 # commands
 # ----------------------------------------------------------------------------------------------------------------------
-def export_region_from_rom(a, root=ROOT):
-    """eu/de/jp: write the blobs that differ from US (found by tools/data/regionbanks.py) as .bin and export their sources."""
+def region_banks(roms, region, layout=None):
+    """graphics banks of the layout whose bytes differ between the US ROM and the release's ROM (the only banks with region specific blobs)."""
+    sys.path.insert(0, str(ROOT / "tools" / "data"))
+    import gfxbanks
+    layout = layout or gfxbanks.load_layout(ROOT)
+    out = []
+    for group in ("tiles", "characters"):
+        for bank in layout[group]:
+            o = (int(bank, 16) - 0x80) * BANK
+            if roms["US"][o:o + BANK] != roms[region.upper()][o:o + BANK]:
+                out.append(bank)
+    return out
+
+
+def export_region_from_roms(root, region, roms, label_patterns=None):
+    """eu/de/jp: write the blobs that differ from US (found by tools/data/regionbanks.py) as .bin and export their sources
+    (name tables, sidecars, composed images, remainder sheets).  `roms` = {"US": bytes, "EU": bytes, ...}.  Returns the labels."""
     sys.path.insert(0, str(ROOT / "tools" / "data"))
     import regionbanks as RB
-    roms = RB.find_roms(a.rom_dir)
     n = 0
     labels = []
-    for bank in RB.GFX_BANKS:
-        for placed, us, cls in RB.classify(roms["US"], roms[a.region.upper()], bank, root):
+    for bank in region_banks(roms, region):
+        for placed, us, cls in RB.classify(roms["US"], roms[region.upper()], bank, root):
             e = placed.entry
             if cls != "specific" or e.kind not in ("tiles", "tilemap", "charmap"):
                 continue
-            if a.label and not any(fnmatch.fnmatchcase(e.label, pat) for pat in a.label):
+            if label_patterns and not any(fnmatch.fnmatchcase(e.label, pat) for pat in label_patterns):
                 continue
             kind = "tilemaps" if e.kind in ("tilemap", "charmap") else "tiles"
-            b = Blob(kind, e.label, root, a.region)
+            b = Blob(kind, e.label, root, region)
             b.bin.parent.mkdir(parents=True, exist_ok=True)
             b.bin.write_bytes(placed.data)
             export_blob(b)
@@ -500,8 +526,16 @@ def export_region_from_rom(a, root=ROOT):
             n += 1
     tl = [l for l in labels if l.startswith("Tiles_")]
     if tl:
-        export_composed(root, a.region, tl)
-    print(f"exported {n} {a.region.upper()} specific blobs")
+        export_composed(root, region, tl)
+    return labels
+
+
+def export_region_from_rom(a, root=ROOT):
+    """CLI: pngsync export --region eu|de|jp --rom-dir DIR"""
+    sys.path.insert(0, str(ROOT / "tools" / "data"))
+    import regionbanks as RB
+    labels = export_region_from_roms(root, a.region, RB.find_roms(a.rom_dir), a.label)
+    print(f"exported {len(labels)} {a.region.upper()} specific blobs")
 
 
 def export_composed(root, region, labels=None):

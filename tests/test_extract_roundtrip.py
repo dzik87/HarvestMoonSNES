@@ -19,7 +19,8 @@ ROOT = Path(__file__).resolve().parent.parent
 ROM_DIR = os.environ.get("HM_ROM_DIR")
 
 AUDIO_DATA_STEPS = "audio,objects,maps,areas,tables,menu,ai"      # audio, object banks, maps, areas, tables, menu, AI data
-KINDS = ["audio", "objects", "maps", "areas", "tables", "menu", "ai"]
+GFX_STEPS = "palettes,fonts,dialogs,graphics"                     # palettes, fonts, graphics, dialogs (graphics needs areas, objects, tables)
+KINDS = ["audio", "objects", "maps", "areas", "tables", "menu", "ai", "fonts", "dialogs", "gfx"]
 
 
 def extract(out: Path, steps: str):
@@ -33,13 +34,20 @@ def test_data_steps_reproduce_assets():
         assert r.returncode == 0 and "identical" in r.stdout, r.stdout[-2000:] + r.stderr[-2000:]
 
 
-def test_data_steps_build_all_regions():
+def test_graphics_steps_reproduce_assets():
+    """palettes, fonts, dialogs and graphics (with the steps the graphics need) are byte-identical to assets/."""
+    with tempfile.TemporaryDirectory(prefix="hm_extract_") as tmp:
+        r = extract(Path(tmp) / "assets", GFX_STEPS + ",areas,objects,tables")
+        assert r.returncode == 0 and "identical" in r.stdout, r.stdout[-2000:] + r.stderr[-2000:]
+
+
+def test_steps_build_all_regions():
     if os.environ.get("HM_ROUNDTRIP_BUILD") != "1":
         print("skip: set HM_ROUNDTRIP_BUILD=1 to build the four releases from the extracted tree")
         return
     with tempfile.TemporaryDirectory(prefix="hm_extract_build_") as tmp:
         tmp = Path(tmp)
-        r = extract(tmp / "ex", AUDIO_DATA_STEPS)
+        r = extract(tmp / "ex", AUDIO_DATA_STEPS + "," + GFX_STEPS)
         assert r.returncode == 0, r.stdout[-2000:]
         proj = tmp / "p"
         shutil.copytree(ROOT, proj, ignore=shutil.ignore_patterns(".git", "build", "__pycache__"), symlinks=True)

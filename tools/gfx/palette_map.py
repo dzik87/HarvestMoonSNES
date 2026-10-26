@@ -34,6 +34,19 @@ import spritebanks as SB  # noqa: E402
 import tilemap_codec as C  # noqa: E402
 
 OUT = ROOT / "assets" / "gfx" / "palette_map.json"
+CUR = ROOT                       # tree the derivation reads (the repository, or the scratch tree of tools/extract.py)
+
+
+def derive_in(root):
+    """build() for the tree `root` (defs/, src/ and assets/ below it) instead of the repository: used by the extractor."""
+    global CUR
+    old, CUR = CUR, Path(root)
+    _RAW.clear()                  # decoded blobs are cached per label: never mix trees
+    try:
+        return build()
+    finally:
+        CUR = old
+        _RAW.clear()
 PAD = bytes(64)
 NAMES = ("Spring", "Summer", "Fall", "Winter")
 
@@ -72,7 +85,7 @@ AREA_NAMES = {}      # filled from src/common/enums.asm
 # source parsing
 # ----------------------------------------------------------------------------------------------------------------------
 def read_lines(rel):
-    return (ROOT / rel).read_text(encoding="utf-8", errors="replace").splitlines()
+    return (CUR / rel).read_text(encoding="utf-8", errors="replace").splitlines()
 
 
 def us_lines(lines):
@@ -159,7 +172,7 @@ def num(tok):
 def parse_palette_tables():
     """assets/tables/data/palette_tables.csv (US branch) -> (aPalettes labels, aMapPalettesIndexes bytes, aMapPalettesId bytes)."""
     import tabledata
-    r = tabledata.rows_of("palette_tables", "US", ROOT)
+    r = tabledata.rows_of("palette_tables", "US", CUR)
     a_pal = [row["palette"] for row in r["aPalettes"]]
     idx = [num(row[c]) for row in r["aMapPalettesIndexes"] for c in ("early", "day", "evening", "dusk", "night", "extra")]
     ids = [num(row[c]) for row in r["aMapPalettesId"] for c in ("obj_a", "obj_b")]
@@ -169,12 +182,12 @@ def parse_palette_tables():
 def parse_presets():
     """assets/gfx/presets.csv -> {register: [value per preset]}."""
     import presets
-    return presets.load(ROOT)
+    return presets.load(CUR)
 
 
 def parse_maps():
     """assets/maps/{areas.csv,area_gfx.json} -> (area id -> map label, {map label: decoded map}).  Fields follow fTileMap_MapChangeHandler."""
-    area_labels, desc = AD.load_gfx(ROOT)
+    area_labels, desc = AD.load_gfx(CUR)
     maps = {}
     for area, label in enumerate(area_labels):
         d = desc[label]
@@ -200,7 +213,7 @@ def blob_raw(label):
     if label in _RAW:
         return _RAW[label]
     for d in ("tiles", "characters", "sprites"):
-        p = ROOT / "assets" / "gfx" / d / f"{label}.bin"
+        p = CUR / "assets" / "gfx" / d / f"{label}.bin"
         if p.exists():
             data = p.read_bytes()
             if label.startswith(("Tiles_", "Screen_")):
@@ -283,7 +296,7 @@ def analyse_map(m, layout):
 def analyse_sprites():
     """-> {sprite bank (0x88..0x91): {sprite id & 0xFF: Counter(palette row)}} from every frame component in $86/$87."""
     import objdata as O
-    banks = O.load_banks()
+    banks = O.load_banks(str(CUR / "assets" / "objects"))
     use = defaultdict(lambda: defaultdict(Counter))
     for b, asm in banks.items():
         d = bytes(asm.data)
@@ -444,7 +457,7 @@ def build():
                       "used_by": used_by}
 
     # ---- tile blobs that no map loads ----------------------------------------------------------------------------
-    for p in sorted((ROOT / "assets/gfx/tiles").glob("Tiles_*.bin")):
+    for p in sorted((CUR / "assets/gfx/tiles").glob("Tiles_*.bin")):
         lab = p.stem
         if lab in blobs:
             continue
@@ -535,12 +548,13 @@ def doc_table_ok(d):
     return t.split(TABLE_BEGIN)[1].split(TABLE_END)[0].strip() == markdown_table(d).strip()
 
 
-def sprite_palettes(object_index=None):
+def sprite_palettes(object_index=None, root=None):
     """The 8 OBJ sub-palettes (lists of 16 RGB tuples) objects are drawn with by day: row r of `obj_palettes[0]` of area 0
     (aMapPalettesId $6B = Palette_Obj_Day).  Same signature as the `--palette-module` hook of tools/objects/spriteexport.py;
     the seasonal patches of OBJ row 7 / row 3 (docs/formats/graphics-palettes.md section 4) are not applied."""
-    pid = load()["areas"]["0"]["obj_palettes"][0]
-    cols = json.loads((ROOT / "assets" / "gfx" / "palettes" / f"{pid}.json").read_text(encoding="utf-8"))["colors"]
+    root = Path(root) if root else ROOT
+    pid = load(root)["areas"]["0"]["obj_palettes"][0]
+    cols = json.loads((root / "assets" / "gfx" / "palettes" / f"{pid}.json").read_text(encoding="utf-8"))["colors"]
     rgb = [tuple(int(c[i:i + 2], 16) for i in (1, 3, 5)) for c in cols[:128]]
     return [rgb[r * 16:(r + 1) * 16] for r in range(8)]
 
@@ -549,8 +563,8 @@ def dumps(d):
     return json.dumps(d, indent=1, ensure_ascii=False) + "\n"
 
 
-def load():
-    return json.loads(OUT.read_text(encoding="utf-8"))
+def load(root=None):
+    return json.loads(((Path(root) / "assets" / "gfx" / "palette_map.json") if root else OUT).read_text(encoding="utf-8"))
 
 
 def main(argv=None):
