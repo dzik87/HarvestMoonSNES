@@ -82,14 +82,14 @@ fNameInput_ControlsHandler:
 fNameInput_BButton:
     SEP #$20                                                   ;84C0AB|E220    |      ;
     LDA.W strcMenuData.nameEntryIdx                            ;84C0AD|AD9409  |000994;
-    BEQ .label2                                                ;84C0B0|F029    |84C0DB;
+    BEQ .play_cancel_sound                                                ;84C0B0|F029    |84C0DB;
     CMP.B #$04                                                 ;84C0B2|C904    |      ;
-    BEQ .label1                                                ;84C0B4|F009    |84C0BF;
+    BEQ .clear_previous_char                                                ;84C0B4|F009    |84C0BF;
     REP #$20                                                   ;84C0B6|C220    |      ;
     LDA.W #$00A8                                               ;84C0B8|A9A800  |      ;
     JSL.L fScreen_NameInput_DrawLetterAtCursor                                  ;84C0BB|2260EA82|82EA60;
  
-.label1:
+.clear_previous_char:
     SEP #$20                                                   ;84C0BF|E220    |      ;
     LDA.B #$00                                                 ;84C0C1|A900    |      ;
     XBA                                                        ;84C0C3|EB      |      ;
@@ -105,7 +105,7 @@ fNameInput_BButton:
     DEC A                                                      ;84C0D7|3A      |      ;
     STA.W strcMenuData.nameEntryIdx                            ;84C0D8|8D9409  |000994;
  
-.label2:
+.play_cancel_sound:
     SEP #$20                                                   ;84C0DB|E220    |      ;
     REP #$10                                                   ;84C0DD|C210    |      ;
     LDA.B #!SFX_MENUCANCEL                                                 ;84C0DF|A902    |      ;
@@ -393,32 +393,32 @@ fInput_Case04_State7_ToggleChoice:
     LDA.W strcJoypad1.newInput                                 ;84C300|AD2801  |000128;
     BIT.W #!JOYPAD_DOWN                                               
     BEQ +                                                      ;84C306|F003    |84C30B;
-    JMP.W .label1                                              ;84C308|4C2DC3  |84C32D;
+    JMP.W .toggle_choice                                              ;84C308|4C2DC3  |84C32D;
  
  
   + LDA.W strcJoypad1.newInput                                 ;84C30B|AD2801  |000128;
     BIT.W #!JOYPAD_UP                                               
     BEQ +                                                      ;84C311|F003    |84C316;
-    JMP.W .label1                                              ;84C313|4C2DC3  |84C32D;
+    JMP.W .toggle_choice                                              ;84C313|4C2DC3  |84C32D;
  
  
   + LDA.W strcJoypad1.newInput                                 ;84C316|AD2801  |000128;
     BIT.W #!JOYPAD_B                                               
     BEQ +                                                      ;84C31C|F003    |84C321;
-    JMP.W .label2                                              ;84C31E|4C4EC3  |84C34E;
+    JMP.W .choose_cancel                                              ;84C31E|4C4EC3  |84C34E;
  
  
   + LDA.W strcJoypad1.newInput                                 ;84C321|AD2801  |000128;
     BIT.W #!JOYPAD_A                                               
     BEQ .justReturn                                            ;84C327|F003    |84C32C;
-    JMP.W .label3                                              ;84C329|4C67C3  |84C367;
+    JMP.W .choose_confirm                                              ;84C329|4C67C3  |84C367;
  
  
 .justReturn:
     RTL                                                        ;84C32C|6B      |      ;
  
  
-.label1:
+.toggle_choice:
     SEP #$20                                                   ;84C32D|E220    |      ;
     LDA.W $098E+!RAM_SHIFT                                 ;84C32F|AD8E09  |00098E;
     EOR.B #$01                                                 ;84C332|4901    |      ;
@@ -435,7 +435,7 @@ fInput_Case04_State7_ToggleChoice:
     RTL                                                        ;84C34D|6B      |      ;
  
  
-.label2:
+.choose_cancel:
     SEP #$20                                                   ;84C34E|E220    |      ;
     LDA.B #$01                                                 ;84C350|A901    |      ;
     STA.B strcVariables.n8Temp3                                ;84C352|8594    |000094;
@@ -449,7 +449,7 @@ fInput_Case04_State7_ToggleChoice:
     RTL                                                        ;84C366|6B      |      ;
  
  
-.label3:
+.choose_confirm:
     SEP #$20                                                   ;84C367|E220    |      ;
     LDA.B #$02                                                 ;84C369|A902    |      ;
     STA.B strcVariables.n8Temp3                                ;84C36B|8594    |000094;
@@ -468,32 +468,32 @@ fInput_Case04_State8_LoadChoice:
     LDA.W strcJoypad1.newInput                                 ;84C382|AD2801  |000128;
     BIT.W #!JOYPAD_DOWN                                               
     BEQ +                                                      ;84C388|F003    |84C38D;
-    JMP.W .label1                                              ;84C38A|4CAFC3  |84C3AF;
+    JMP.W .toggle_slot                                              ;84C38A|4CAFC3  |84C3AF;
  
  
   + LDA.W strcJoypad1.newInput                                 ;84C38D|AD2801  |000128;
     BIT.W #!JOYPAD_UP                                               
     BEQ +                                                      ;84C393|F003    |84C398;
-    JMP.W .label1                                              ;84C395|4CAFC3  |84C3AF;
+    JMP.W .toggle_slot                                              ;84C395|4CAFC3  |84C3AF;
  
  
   + LDA.W strcJoypad1.newInput                                 ;84C398|AD2801  |000128;
     BIT.W #!JOYPAD_B                                               
     BEQ +                                                      ;84C39E|F003    |84C3A3;
-    JMP.W .label2                                              ;84C3A0|4CD0C3  |84C3D0;
+    JMP.W .choose_cancel                                              ;84C3A0|4CD0C3  |84C3D0;
  
  
   + LDA.W strcJoypad1.newInput                                 ;84C3A3|AD2801  |000128;
     BIT.W #!JOYPAD_A                                               
     BEQ .justReturn                                            ;84C3A9|F003    |84C3AE;
-    JMP.W .label3                                              ;84C3AB|4CE9C3  |84C3E9;
+    JMP.W .load_selected_slot                                              ;84C3AB|4CE9C3  |84C3E9;
  
  
 .justReturn:
     RTL                                                        ;84C3AE|6B      |      ;
  
  
-.label1:
+.toggle_slot:
     SEP #$20                                                   ;84C3AF|E220    |      ;
     LDA.W $098E+!RAM_SHIFT                                 ;84C3B1|AD8E09  |00098E;
     EOR.B #$01                                                 ;84C3B4|4901    |      ;
@@ -510,7 +510,7 @@ fInput_Case04_State8_LoadChoice:
     RTL                                                        ;84C3CF|6B      |      ;
  
  
-.label2:
+.choose_cancel:
     SEP #$20                                                   ;84C3D0|E220    |      ;
     LDA.B #$01                                                 ;84C3D2|A901    |      ;
     STA.B strcVariables.n8Temp3                                ;84C3D4|8594    |000094;
@@ -524,7 +524,7 @@ fInput_Case04_State8_LoadChoice:
     RTL                                                        ;84C3E8|6B      |      ;
  
  
-.label3:
+.load_selected_slot:
     SEP #$20                                                   ;84C3E9|E220    |      ;
     LDA.B #$00                                                 ;84C3EB|A900    |      ;
     XBA                                                        ;84C3ED|EB      |      ;
@@ -563,14 +563,14 @@ fInput_Case04_StartToState6:
     LDA.W strcJoypad1.newInput                                 ;84C433|AD2801  |000128;
     BIT.W #!JOYPAD_START                                               
     BEQ .justReturn                                            ;84C439|F003    |84C43E;
-    JMP.W .label1                                              ;84C43B|4C3FC4  |84C43F;
+    JMP.W .start_pressed                                              ;84C43B|4C3FC4  |84C43F;
  
  
 .justReturn:
     RTL                                                        ;84C43E|6B      |      ;
  
  
-.label1:
+.start_pressed:
     SEP #$20                                                   ;84C43F|E220    |      ;
     LDA.B #$06                                                 ;84C441|A906    |      ;
     STA.B strcVariables.n8Temp4                                ;84C443|8595    |000095;
@@ -589,25 +589,25 @@ fInput_Case04_State5_ThreeWayChoice:
     LDA.W strcJoypad1.newInput                                 ;84C45A|AD2801  |000128;
     BIT.W #!JOYPAD_DOWN                                               
     BEQ +                                                      ;84C460|F003    |84C465;
-    JMP.W .label1                                              ;84C462|4C7CC4  |84C47C;
+    JMP.W .move_down                                              ;84C462|4C7CC4  |84C47C;
  
  
   + LDA.W strcJoypad1.newInput                                 ;84C465|AD2801  |000128;
     BIT.W #!JOYPAD_UP                                               
     BEQ +                                                      ;84C46B|F003    |84C470;
-    JMP.W .label2                                              ;84C46D|4CC4C4  |84C4C4;
+    JMP.W .move_up                                              ;84C46D|4CC4C4  |84C4C4;
  
  
   + LDA.W strcJoypad1.newInput                                 ;84C470|AD2801  |000128;
     BIT.W #!JOYPAD_A                                               
     BEQ +                                                      ;84C476|F003    |84C47B;
-    JMP.W .label3                                              ;84C478|4C0CC5  |84C50C;
+    JMP.W .confirm_choice                                              ;84C478|4C0CC5  |84C50C;
  
  
   + RTL                                                        ;84C47B|6B      |      ;
  
  
-.label1:
+.move_down:
     REP #$20                                                   ;84C47C|C220    |      ;
     STZ.B strcVariables.n16Unk90                               ;84C47E|6490    |000090;
     SEP #$20                                                   ;84C480|E220    |      ;
@@ -644,7 +644,7 @@ fInput_Case04_State5_ThreeWayChoice:
     RTL                                                        ;84C4C3|6B      |      ;
  
  
-.label2:
+.move_up:
     REP #$20                                                   ;84C4C4|C220    |      ;
     STZ.B strcVariables.n16Unk90                               ;84C4C6|6490    |000090;
     SEP #$20                                                   ;84C4C8|E220    |      ;
@@ -681,25 +681,25 @@ fInput_Case04_State5_ThreeWayChoice:
     RTL                                                        ;84C50B|6B      |      ;
  
  
-.label3:
+.confirm_choice:
     SEP #$20                                                   ;84C50C|E220    |      ;
     LDA.W nUnknownFlags09D                                     ;84C50E|AD8D09  |00098D;
-    BEQ ..label1                                               ;84C511|F00A    |84C51D;
+    BEQ ..first_option                                               ;84C511|F00A    |84C51D;
     CMP.B #$01                                                 ;84C513|C901    |      ;
-    BEQ ..label2                                               ;84C515|F00E    |84C525;
+    BEQ ..second_option                                               ;84C515|F00E    |84C525;
     LDA.B #$0A                                                 ;84C517|A90A    |      ;
     STA.B strcVariables.n8Temp4                                ;84C519|8595    |000095;
     BRA +                                                      ;84C51B|8010    |84C52D;
  
  
-..label1:
+..first_option:
     SEP #$20                                                   ;84C51D|E220    |      ;
     LDA.B #$08                                                 ;84C51F|A908    |      ;
     STA.B strcVariables.n8Temp4                                ;84C521|8595    |000095;
     BRA +                                                      ;84C523|8008    |84C52D;
  
  
-..label2:
+..second_option:
     SEP #$20                                                   ;84C525|E220    |      ;
     LDA.B #$07                                                 ;84C527|A907    |      ;
     STA.B strcVariables.n8Temp4                                ;84C529|8595    |000095;
@@ -768,7 +768,7 @@ fInput_Case03_ConfirmSelection:
     XBA                                                        ;84C59A|EB      |      ;
     LDA.W strcDialogDisplay.dialoUnk18A                        ;84C59B|AD8A01  |00018A;
     CMP.B #$0B                                                 ;84C59E|C90B    |      ;
-    BCC .label1                                                ;84C5A0|9012    |84C5B4;
+    BCC .show_dialog                                                ;84C5A0|9012    |84C5B4;
     SEP #$20                                                   ;84C5A2|E220    |      ;
     LDA.B #$01                                                 ;84C5A4|A901    |      ;
     STA.W strcDialogDisplay.mapUnk19A                          ;84C5A6|8D9A01  |00019A;
@@ -778,7 +778,7 @@ fInput_Case03_ConfirmSelection:
     BRA +                                                      ;84C5B2|8014    |84C5C8;
  
  
-.label1:
+.show_dialog:
     REP #$20                                                   ;84C5B4|C220    |      ;
     ASL A                                                      ;84C5B6|0A      |      ;
     TAX                                                        ;84C5B7|AA      |      ;
@@ -1255,13 +1255,13 @@ fAiInput_PressDown:
     LDA.W strcObjectData.direction                             ;84C950|AD1109  |000911;
     CMP.W #$0001                                               ;84C953|C90100  |      ;
     BNE +                                                      ;84C956|D003    |84C95B;
-    JMP.W .label1                                              ;84C958|4C5EC9  |84C95E;
+    JMP.W .turn_opposite                                              ;84C958|4C5EC9  |84C95E;
  
  
   + JMP.W fInput_PlayerReturn                                  ;84C95B|4CB5C7  |84C7B5;
  
  
-.label1:
+.turn_opposite:
     %SetPlayerAction(!PACTION_WALK)
     %SetPlayerDirection(!PDIR_UP)
     JMP.W fInput_PlayerReturn                                  ;84C96C|4CB5C7  |84C7B5;
@@ -1277,13 +1277,13 @@ fAiInput_PressUp:
     LDA.W strcObjectData.direction                             ;84C98A|AD1109  |000911;
     CMP.W #$0000                                               ;84C98D|C90000  |      ;
     BNE +                                                      ;84C990|D003    |84C995;
-    JMP.W .label1                                              ;84C992|4C98C9  |84C998;
+    JMP.W .turn_opposite                                              ;84C992|4C98C9  |84C998;
  
  
   + JMP.W fInput_PlayerNormalGameplay                          ;84C995|4C40C7  |84C740;
  
  
-.label1:
+.turn_opposite:
     %SetPlayerAction(!PACTION_WALK)
     %SetPlayerDirection(!PDIR_DOWN)
     JMP.W fInput_PlayerReturn                                  ;84C9A6|4CB5C7  |84C7B5;
@@ -1299,13 +1299,13 @@ fAiInput_PressRight:
     LDA.W strcObjectData.direction                             ;84C9C4|AD1109  |000911;
     CMP.W #$0003                                               ;84C9C7|C90300  |      ;
     BNE +                                                      ;84C9CA|D003    |84C9CF;
-    JMP.W .label1                                              ;84C9CC|4CD2C9  |84C9D2;
+    JMP.W .turn_opposite                                              ;84C9CC|4CD2C9  |84C9D2;
  
  
   + JMP.W fInput_PlayerNormalGameplay                          ;84C9CF|4C40C7  |84C740;
  
  
-.label1:
+.turn_opposite:
     %SetPlayerAction(!PACTION_WALK)
     %SetPlayerDirection(!PDIR_RIGHT)
     JMP.W fInput_PlayerReturn                                  ;84C9E0|4CB5C7  |84C7B5;
@@ -1321,13 +1321,13 @@ fAiInput_PressLeft:
     LDA.W strcObjectData.direction                             ;84C9FE|AD1109  |000911;
     CMP.W #$0002                                               ;84CA01|C90200  |      ;
     BNE +                                                      ;84CA04|D003    |84CA09;
-    JMP.W .label1                                              ;84CA06|4C0CCA  |84CA0C;
+    JMP.W .turn_opposite                                              ;84CA06|4C0CCA  |84CA0C;
  
  
   + JMP.W fInput_PlayerNormalGameplay                          ;84CA09|4C40C7  |84C740;
  
  
-.label1:
+.turn_opposite:
     %SetPlayerAction(!PACTION_WALK)
     %SetPlayerDirection(!PDIR_LEFT)
     JMP.W fInput_PlayerReturn                                  ;84CA1A|4CB5C7  |84C7B5;
@@ -1352,14 +1352,14 @@ fInput_PlayerButtonB:
     AND.B #$60                                                 ;84CA47|2960    |      ;
     BEQ .return                                                ;84CA49|F052    |84CA9D;
     AND.B #$20                                                 ;84CA4B|2920    |      ;
-    BNE .label1                                                ;84CA4D|D010    |84CA5F;
+    BNE .tile_flag_20                                                ;84CA4D|D010    |84CA5F;
     %SetPlayerFlag(!PFLAGS_FALLING)
     REP #$20                                                   ;84CA58|C220    |      ;
     LDA.W #$0021                                               ;84CA5A|A92100  |      ;
     BRA .jump                                                  ;84CA5D|8007    |84CA66;
  
  
-.label1:
+.tile_flag_20:
     REP #$20                                                   ;84CA5F|C220    |      ;
     LDA.W #$001C                                               ;84CA61|A91C00  |      ;
     BRA .jump                                                  ;84CA64|8000    |84CA66;
@@ -1400,22 +1400,22 @@ fInput_PlayerButtonB:
 fInput_PlayerButtonA_Interact:
     %CheckPlayerFlags(!PFLAGS_DOGHUGGING)
     BEQ +                                                      ;84CAAC|F003    |84CAB1;
-    JMP.W .label3                                              ;84CAAE|4C2BCB  |84CB2B;
+    JMP.W .drop_dog                                              ;84CAAE|4C2BCB  |84CB2B;
  
  
   + %CheckPlayerFlagsNoReg(!PFLAGS_RIDINGHORSE)
     BEQ +                                                      ;84CAB6|F003    |84CABB;
-    JMP.W .label4                                              ;84CAB8|4C1CCC  |84CC1C;
+    JMP.W .dismount_horse                                              ;84CAB8|4C1CCC  |84CC1C;
  
  
   + %CheckFlag(daily4, $0006)
     BEQ +                                                      ;84CAC2|F003    |84CAC7;
-    JMP.W .label2                                              ;84CAC4|4CFECA  |84CAFE;
+    JMP.W .check_front_object_f5                                              ;84CAC4|4CFECA  |84CAFE;
  
  
   + %CheckPlayerFlags(!PFLAGS_HOLDINGITEM)
     BEQ +                                                      ;84CACE|F003    |84CAD3;
-    JMP.W .label1                                              ;84CAD0|4CF6CA  |84CAF6;
+    JMP.W .drop_item                                              ;84CAD0|4CF6CA  |84CAF6;
  
  
   + REP #$20                                                   ;84CAD3|C220    |      ;
@@ -1432,12 +1432,12 @@ fInput_PlayerButtonA_Interact:
     RTL                                                        ;84CAF5|6B      |      ;
  
  
-.label1:
+.drop_item:
     %SetPlayerAction(!PACTION_DROPITEM)
     RTL                                                        ;84CAFD|6B      |      ;
  
  
-.label2:
+.check_front_object_f5:
     REP #$30                                                   ;84CAFE|C230    |      ;
     LDA.W #$0000                                               ;84CB00|A90000  |      ;
     LDX.W #$0007                                               ;84CB03|A20700  |      ;
@@ -1457,7 +1457,7 @@ fInput_PlayerButtonA_Interact:
     RTL                                                        ;84CB2A|6B      |      ;
  
  
-.label3:
+.drop_dog:
     REP #$30                                                   ;84CB2B|C230    |      ;
     LDA.B strcPlayer.posX                                      ;84CB2D|A5D6    |0000D6;
     STA.B strcPlayer.lastX                                     ;84CB2F|85DF    |0000DF;
@@ -1567,35 +1567,35 @@ fInput_PlayerButtonA_Interact:
     RTL                                                        ;84CC1B|6B      |      ;
  
  
-.label4:
+.dismount_horse:
     REP #$30                                                   ;84CC1C|C230    |      ;
     LDA.B strcPlayer.direction                                 ;84CC1E|A5DA    |0000DA;
     CMP.W #!PDIR_DOWN                                               
     BNE +                                                      ;84CC23|D003    |84CC28;
-    JMP.W .label5                                              ;84CC25|4C40CC  |84CC40;
+    JMP.W .dismount_down                                              ;84CC25|4C40CC  |84CC40;
  
  
   + CMP.W #!PDIR_UP                                               
     BNE +                                                      ;84CC2B|D003    |84CC30;
-    JMP.W .label6                                              ;84CC2D|4C6FCC  |84CC6F;
+    JMP.W .dismount_up                                              ;84CC2D|4C6FCC  |84CC6F;
  
  
   + CMP.W #!PDIR_LEFT                                               
     BNE +                                                      ;84CC33|D003    |84CC38;
-    JMP.W .label7                                              ;84CC35|4C98CC  |84CC98;
+    JMP.W .dismount_left                                              ;84CC35|4C98CC  |84CC98;
  
  
   + CMP.W #!PDIR_RIGHT                                               
-    BNE .label5                                                ;84CC3B|D003    |84CC40;
-    JMP.W .label8                                              ;84CC3D|4CC0CC  |84CCC0;
+    BNE .dismount_down                                                ;84CC3B|D003    |84CC40;
+    JMP.W .dismount_right                                              ;84CC3D|4CC0CC  |84CCC0;
  
  
-.label5:
+.dismount_down:
     %SetObjectDirection(!PDIR_LEFT)
     JSL.L fInput_IsObjectDirectionBlocked                                 ;84CC48|2216CD84|84CD16;
     REP #$30                                                   ;84CC4C|C230    |      ;
     BNE +                                                      ;84CC4E|D003    |84CC53;
-    JMP.W .label9                                              ;84CC50|4CE8CC  |84CCE8;
+    JMP.W .start_dismount                                              ;84CC50|4CE8CC  |84CCE8;
  
  
   + LDA.W #!PDIR_RIGHT                                               
@@ -1603,7 +1603,7 @@ fInput_PlayerButtonA_Interact:
     JSL.L fInput_IsObjectDirectionBlocked                                 ;84CC59|2216CD84|84CD16;
     REP #$30                                                   ;84CC5D|C230    |      ;
     BNE +                                                      ;84CC5F|D003    |84CC64;
-    JMP.W .label9                                              ;84CC61|4CE8CC  |84CCE8;
+    JMP.W .start_dismount                                              ;84CC61|4CE8CC  |84CCE8;
  
  
   + LDA.W #!PDIR_DOWN                                               
@@ -1612,55 +1612,55 @@ fInput_PlayerButtonA_Interact:
     JMP.W .justReturn3                                         ;84CC6C|4C15CD  |84CD15;
  
  
-.label6:
+.dismount_up:
     %SetObjectDirection(!PDIR_RIGHT)
     JSL.L fInput_IsObjectDirectionBlocked                                 ;84CC77|2216CD84|84CD16;
     REP #$30                                                   ;84CC7B|C230    |      ;
-    BEQ .label9                                                ;84CC7D|F069    |84CCE8;
+    BEQ .start_dismount                                                ;84CC7D|F069    |84CCE8;
     LDA.W #!PDIR_LEFT                                               
     STA.W strcObjectData.direction                             ;84CC82|8D1109  |000911;
     JSL.L fInput_IsObjectDirectionBlocked                                 ;84CC85|2216CD84|84CD16;
     REP #$30                                                   ;84CC89|C230    |      ;
-    BEQ .label9                                                ;84CC8B|F05B    |84CCE8;
+    BEQ .start_dismount                                                ;84CC8B|F05B    |84CCE8;
     LDA.W #!PDIR_UP                                               
     STA.B strcPlayer.direction                                 ;84CC90|85DA    |0000DA;
     STA.W strcObjectData.direction                             ;84CC92|8D1109  |000911;
     JMP.W .justReturn3                                         ;84CC95|4C15CD  |84CD15;
  
  
-.label7:
+.dismount_left:
     %SetObjectDirection(!PDIR_DOWN)
     JSL.L fInput_IsObjectDirectionBlocked                                 ;84CCA0|2216CD84|84CD16;
     REP #$30                                                   ;84CCA4|C230    |      ;
-    BEQ .label9                                                ;84CCA6|F040    |84CCE8;
+    BEQ .start_dismount                                                ;84CCA6|F040    |84CCE8;
     LDA.W #!PDIR_UP                                               
     STA.W strcObjectData.direction                             ;84CCAB|8D1109  |000911;
     JSL.L fInput_IsObjectDirectionBlocked                                 ;84CCAE|2216CD84|84CD16;
     REP #$30                                                   ;84CCB2|C230    |      ;
-    BEQ .label9                                                ;84CCB4|F032    |84CCE8;
+    BEQ .start_dismount                                                ;84CCB4|F032    |84CCE8;
     LDA.W #!PDIR_LEFT                                               
     STA.B strcPlayer.direction                                 ;84CCB9|85DA    |0000DA;
     STA.W strcObjectData.direction                             ;84CCBB|8D1109  |000911;
     BRA .justReturn3                                           ;84CCBE|8055    |84CD15;
  
  
-.label8:
+.dismount_right:
     %SetObjectDirection($0000)
     JSL.L fInput_IsObjectDirectionBlocked                                 ;84CCC8|2216CD84|84CD16;
     REP #$30                                                   ;84CCCC|C230    |      ;
-    BEQ .label9                                                ;84CCCE|F018    |84CCE8;
+    BEQ .start_dismount                                                ;84CCCE|F018    |84CCE8;
     LDA.W #!PDIR_UP                                               
     STA.W strcObjectData.direction                             ;84CCD3|8D1109  |000911;
     JSL.L fInput_IsObjectDirectionBlocked                                 ;84CCD6|2216CD84|84CD16;
     REP #$30                                                   ;84CCDA|C230    |      ;
-    BEQ .label9                                                ;84CCDC|F00A    |84CCE8;
+    BEQ .start_dismount                                                ;84CCDC|F00A    |84CCE8;
     LDA.W #!PDIR_RIGHT                                               
     STA.B strcPlayer.direction                                 ;84CCE1|85DA    |0000DA;
     STA.W strcObjectData.direction                             ;84CCE3|8D1109  |000911;
     BRA .justReturn3                                           ;84CCE6|802D    |84CD15;
  
  
-.label9:
+.start_dismount:
     %SetPlayerAction(!PACTION_18)
     REP #$30                                                   ;84CCEF|C230    |      ;
     LDA.B strcPlayer.posX                                      ;84CCF1|A5D6    |0000D6;
@@ -2069,15 +2069,15 @@ fInput_DialogOptions_Down:
     SEP #$20                                                   ;84D008|E220    |      ;
     LDA.W strcDialogDisplay.dialogOptionsAnswer                ;84D00A|AD8F01  |00018F;
     CMP.B #$03                                                 ;84D00D|C903    |      ;
-    BCC .label1                                                ;84D00F|900B    |84D01C;
+    BCC .upper_options                                                ;84D00F|900B    |84D01C;
     CMP.W strcDialogDisplay.dialogOptionsCount                 ;84D011|CD8E01  |00018E;
-    BEQ .label2                                                ;84D014|F01A    |84D030;
+    BEQ .last_option                                                ;84D014|F01A    |84D030;
     INC A                                                      ;84D016|1A      |      ;
     STA.W strcDialogDisplay.dialogOptionsAnswer                ;84D017|8D8F01  |00018F;
     BRA fInput_DialogOptions_ResetBlink                                   ;84D01A|801A    |84D036;
  
  
-.label1:
+.upper_options:
     CMP.W strcDialogDisplay.dialogOptionsCount                 ;84D01C|CD8E01  |00018E;
     BEQ +                                                      ;84D01F|F00A    |84D02B;
     CMP.B #$02                                                 ;84D021|C902    |      ;
@@ -2091,7 +2091,7 @@ fInput_DialogOptions_Down:
     BRA fInput_DialogOptions_ResetBlink                                   ;84D02E|8006    |84D036;
  
  
-.label2:
+.last_option:
     DEC A                                                      ;84D030|3A      |      ;
     STA.W strcDialogDisplay.dialogOptionsAnswer                ;84D031|8D8F01  |00018F;
     BRA fInput_DialogOptions_ResetBlink                                   ;84D034|8000    |84D036;
@@ -2116,15 +2116,15 @@ fInput_DialogOptions_Up:
     JSL.L fDialog_TransferGlyph                                ;84D054|22239883|839823;
     SEP #$20                                                   ;84D058|E220    |      ;
     LDA.W strcDialogDisplay.dialogOptionsAnswer                ;84D05A|AD8F01  |00018F;
-    BEQ .label1                                                ;84D05D|F00A    |84D069;
+    BEQ .wrap_from_first                                                ;84D05D|F00A    |84D069;
     CMP.B #$03                                                 ;84D05F|C903    |      ;
-    BEQ .label2                                                ;84D061|F019    |84D07C;
+    BEQ .from_option_3                                                ;84D061|F019    |84D07C;
     DEC A                                                      ;84D063|3A      |      ;
     STA.W strcDialogDisplay.dialogOptionsAnswer                ;84D064|8D8F01  |00018F;
     BRA fInput_DialogOptions_ResetBlink                                   ;84D067|80CD    |84D036;
  
  
-.label1:
+.wrap_from_first:
     LDA.W strcDialogDisplay.dialogOptionsCount                 ;84D069|AD8E01  |00018E;
     CMP.B #$03                                                 ;84D06C|C903    |      ;
     BCC +                                                      ;84D06E|9007    |84D077;
@@ -2137,7 +2137,7 @@ fInput_DialogOptions_Up:
     BRA .return                                                ;84D07A|800E    |84D08A;
  
  
-.label2:
+.from_option_3:
     LDA.W strcDialogDisplay.dialogOptionsCount                 ;84D07C|AD8E01  |00018E;
     CMP.B #$03                                                 ;84D07F|C903    |      ;
     BEQ .return                                                ;84D081|F007    |84D08A;
