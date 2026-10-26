@@ -1015,12 +1015,12 @@ fPlayerInteraction0x2E_AnimalNPC:
     BEQ .chickenCheck                                          ;81DEAC|F065    |81DF13;
     CMP.B #$02                                                 ;81DEAE|C902    |      ;
     BNE +                                                      ;81DEB0|D003    |81DEB5;
-    JMP.W .setSkipFlag0008                                             ;81DEB2|4C6ADF  |81DF6A;
+    JMP.W .set_skip_flag0008                                             ;81DEB2|4C6ADF  |81DF6A;
  
  
   + CMP.B #$03                                                 ;81DEB5|C903    |      ;
     BNE .cowCheck                                              ;81DEB7|D003    |81DEBC;
-    JMP.W .setSkipFlag0004                                             ;81DEB9|4C99DF  |81DF99;
+    JMP.W .set_skip_flag0004                                             ;81DEB9|4C99DF  |81DF99;
  
  
 .cowCheck:
@@ -1094,7 +1094,7 @@ fPlayerInteraction0x2E_AnimalNPC:
     JMP.W .return                                              ;81DF67|4C21E2  |81E221;
  
  
-.setSkipFlag0008:
+.set_skip_flag0008:
     SEP #$20                                                   ;81DF6A|E220    |      ;
     LDA.B #$02                                                 ;81DF6C|A902    |      ;
     STA.W strcDialogDisplay.mapUnk19A                          ;81DF6E|8D9A01  |00019A;
@@ -1108,7 +1108,7 @@ fPlayerInteraction0x2E_AnimalNPC:
     JMP.W .return                                              ;81DF96|4C21E2  |81E221;
  
  
-.setSkipFlag0004:
+.set_skip_flag0004:
     SEP #$20                                                   ;81DF99|E220    |      ;
     LDA.B #$02                                                 ;81DF9B|A902    |      ;
     STA.W strcDialogDisplay.mapUnk19A                          ;81DF9D|8D9A01  |00019A;
@@ -1132,7 +1132,7 @@ fPlayerInteraction0x2E_AnimalNPC:
  
   + LDA.W strcDialogDisplay.dialogOptionsAnswer                ;81DFD4|AD8F01  |00018F;
     BEQ +                                                      ;81DFD7|F003    |81DFDC;
-    JMP.W .declineCow                                             ;81DFD9|4CCDE0  |81E0CD;
+    JMP.W .decline_cow                                             ;81DFD9|4CCDE0  |81E0CD;
  
  
   + SEP #$20                                                   ;81DFDC|E220    |      ;
@@ -1161,7 +1161,7 @@ fPlayerInteraction0x2E_AnimalNPC:
     STA.B strcVariables.n16Temp1                               ;81E002|857E    |00007E;
     LDA.L nPlantedGrassCount                                   ;81E004|AF291F7F|7F1F29;
     CMP.B strcVariables.n16Temp1                               ;81E008|C57E    |00007E; Checks do we have enough grass to purchase animal
-    BCS .buyCow                                               ;81E00A|B044    |81E050;
+    BCS .buy_cow                                               ;81E00A|B044    |81E050;
     SEP #$20                                                   ;81E00C|E220    |      ;
     LDA.B #$02                                                 ;81E00E|A902    |      ;
     STA.W strcDialogDisplay.mapUnk19A                          ;81E010|8D9A01  |00019A;
@@ -1185,7 +1185,7 @@ fPlayerInteraction0x2E_AnimalNPC:
     JMP.W .return                                              ;81E04D|4C21E2  |81E221;
  
  
-.buyCow:
+.buy_cow:
     REP #$20                                                   ;81E050|C220    |      ;
     LDA.W #$FE0C                                               ;81E052|A90CFE  |      ;
     STA.B ptrTemp0x72                                          ;81E055|8572    |000072;
@@ -1227,7 +1227,7 @@ fPlayerInteraction0x2E_AnimalNPC:
     JMP.W .return                                              ;81E0CA|4C21E2  |81E221;
  
  
-.declineCow:
+.decline_cow:
     SEP #$20                                                   ;81E0CD|E220    |      ;
     LDA.B #$02                                                 ;81E0CF|A902    |      ;
     STA.W strcDialogDisplay.mapUnk19A                          ;81E0D1|8D9A01  |00019A;
@@ -1249,7 +1249,7 @@ fPlayerInteraction0x2E_AnimalNPC:
  
   + LDA.W strcDialogDisplay.dialogOptionsAnswer                ;81E0FB|AD8F01  |00018F;
     BEQ +                                                      ;81E0FE|F003    |81E103;
-    JMP.W .declineChicken                                             ;81E100|4C00E2  |81E200;
+    JMP.W .decline_chicken                                             ;81E100|4C00E2  |81E200;
  
  
   + SEP #$20                                                   ;81E103|E220    |      ;
@@ -1279,7 +1279,7 @@ fPlayerInteraction0x2E_AnimalNPC:
     LDA.L nPlantedGrassCount                                   ;81E12B|AF291F7F|7F1F29;
     CMP.B strcVariables.n16Temp1                               ;81E12F|C57E    |00007E;
     BCC +                                                      ;81E131|9003    |81E136;
-    JMP.W .buyChicken                                             ;81E133|4C7CE1  |81E17C;
+    JMP.W .buy_chicken                                             ;81E133|4C7CE1  |81E17C;
  
  
   + SEP #$20                                                   ;81E136|E220    |      ;
@@ -1306,7 +1306,7 @@ fPlayerInteraction0x2E_AnimalNPC:
     JMP.W .return                                              ;81E179|4C21E2  |81E221;
  
  
-.buyChicken:
+.buy_chicken:
     REP #$20                                                   ;81E17C|C220    |      ;
     LDA.W #$FF9C                                               ;81E17E|A99CFF  |      ;
     STA.B ptrTemp0x72                                          ;81E181|8572    |000072;
@@ -1351,7 +1351,7 @@ fPlayerInteraction0x2E_AnimalNPC:
     BRA .return                                                ;81E1FE|8021    |81E221;
  
  
-.declineChicken:
+.decline_chicken:
     SEP #$20                                                   ;81E200|E220    |      ;
     LDA.B #$02                                                 ;81E202|A902    |      ;
     STA.W strcDialogDisplay.mapUnk19A                          ;81E204|8D9A01  |00019A;
@@ -1805,9 +1805,9 @@ fPlayerInteraction0x42:
     LDA.W nPlayerInteractionArg2                               ;81E724|AD7009  |000970;
     CMP.B #$20                                                 ;81E727|C920    |      ;
     if !REGION_EUDE
-    BEQ .setPhaseOne
+    BEQ .set_phase_one
     JMP.W .return
-.setPhaseOne:
+.set_phase_one:
     LDA.B #$01
     STA.W nPlayerInteractionArg1
     JMP.W .return
@@ -2011,7 +2011,7 @@ fPlayerInteraction0x43:
  
   + REP #$20                                                   ;81E875|C220    |      ;
     %CheckFlag(daily4, $2000)
-    BNE .alreadySoldToday                                               ;81E87E|D071    |81E8F1;
+    BNE .already_sold_today                                               ;81E87E|D071    |81E8F1;
     SEP #$20                                                   ;81E880|E220    |      ;
     LDA.B #$02                                                 ;81E882|A902    |      ;
     STA.W strcDialogDisplay.mapUnk19A                          ;81E884|8D9A01  |00019A;
@@ -2027,10 +2027,10 @@ fPlayerInteraction0x43:
     LDY.W #$0000                                               ;81E89A|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;81E89D|B772    |000072; strcCowData.statusFlags
     AND.B #$06                                                 ;81E89F|2906    |      ; 00000110 = adult, child
-    BNE .showDialog0310                                               ;81E8A1|D01E    |81E8C1;
+    BNE .show_dialog0310                                               ;81E8A1|D01E    |81E8C1;
     LDA.B [ptrTemp0x72],Y                                      ;81E8A3|B772    |000072; strcCowData.statusFlags
     AND.B #$70                                                 ;81E8A5|2970    |      ; 01110000 = pregnacy, sick, cranky
-    BNE .showDialog030D                                               ;81E8A7|D030    |81E8D9;
+    BNE .show_dialog030d                                               ;81E8A7|D030    |81E8D9;
     LDX.W #$030E                                               ;81E8A9|A20E03  |      ;
     SEP #$20                                                   ;81E8AC|E220    |      ;
     LDA.B #$00                                                 ;81E8AE|A900    |      ;
@@ -2042,7 +2042,7 @@ fPlayerInteraction0x43:
     JMP.W .return                                              ;81E8BE|4CD4EB  |81EBD4;
  
  
-.showDialog0310:
+.show_dialog0310:
     LDX.W #$0310                                               ;81E8C1|A21003  |      ; dialog $0310
     SEP #$20                                                   ;81E8C4|E220    |      ;
     LDA.B #$00                                                 ;81E8C6|A900    |      ;
@@ -2054,7 +2054,7 @@ fPlayerInteraction0x43:
     JMP.W .return                                              ;81E8D6|4CD4EB  |81EBD4;
  
  
-.showDialog030D:
+.show_dialog030d:
     LDX.W #$030D                                               ;81E8D9|A20D03  |      ; dialog $030D
     SEP #$20                                                   ;81E8DC|E220    |      ;
     LDA.B #$00                                                 ;81E8DE|A900    |      ;
@@ -2066,7 +2066,7 @@ fPlayerInteraction0x43:
     JMP.W .return                                              ;81E8EE|4CD4EB  |81EBD4;
  
  
-.alreadySoldToday:
+.already_sold_today:
     REP #$30                                                   ;81E8F1|C230    |      ; dialog $0487
     LDX.W #$0487                                               ;81E8F3|A28704  |      ;
     SEP #$20                                                   ;81E8F6|E220    |      ;
@@ -3150,7 +3150,7 @@ fPlayerInteraction0x47:
   + REP #$30                                                   ;81F227|C230    |      ;
     LDA.L nReqWoodForExpansion                                 ;81F229|AF0E1F7F|7F1F0E;
     CMP.W #$00FA                                               ;81F22D|C9FA00  |      ;
-    BEQ .chargeFirstUpgrade                                                ;81F230|F01A    |81F24C;
+    BEQ .charge_first_upgrade                                                ;81F230|F01A    |81F24C;
     REP #$20                                                   ;81F232|C220    |      ;
     LDA.W #$FC18                                               ;81F234|A918FC  |      ;
     STA.B ptrTemp0x72                                          ;81F237|8572    |000072;
@@ -3160,11 +3160,11 @@ fPlayerInteraction0x47:
     JSL.L fGameEngine_AddProfit                                ;81F23F|22C9B183|83B1C9;
     REP #$20                                                   ;81F243|C220    |      ;
     CMP.W #$0000                                               ;81F245|C90000  |      ;
-    BNE .notEnoughMoney                                                ;81F248|D057    |81F2A1;
-    BRA .startConstruction                                                ;81F24A|8018    |81F264;
+    BNE .not_enough_money                                                ;81F248|D057    |81F2A1;
+    BRA .start_construction                                                ;81F24A|8018    |81F264;
  
  
-.chargeFirstUpgrade:
+.charge_first_upgrade:
     REP #$20                                                   ;81F24C|C220    |      ;
     LDA.W #$FE0C                                               ;81F24E|A90CFE  |      ;
     STA.B ptrTemp0x72                                          ;81F251|8572    |000072;
@@ -3174,9 +3174,9 @@ fPlayerInteraction0x47:
     JSL.L fGameEngine_AddProfit                                ;81F259|22C9B183|83B1C9;
     REP #$20                                                   ;81F25D|C220    |      ;
     CMP.W #$0000                                               ;81F25F|C90000  |      ;
-    BNE .notEnoughMoney                                                ;81F262|D03D    |81F2A1;
+    BNE .not_enough_money                                                ;81F262|D03D    |81F2A1;
  
-.startConstruction:
+.start_construction:
     REP #$30                                                   ;81F264|C230    |      ;
     LDA.L nReqWoodForExpansion                                 ;81F266|AF0E1F7F|7F1F0E;
     EOR.W #$FFFF                                               ;81F26A|49FFFF  |      ;
@@ -3199,7 +3199,7 @@ fPlayerInteraction0x47:
     BRA .justReturn                                            ;81F29F|8038    |81F2D9;
  
  
-.notEnoughMoney:
+.not_enough_money:
     SEP #$20                                                   ;81F2A1|E220    |      ;
     LDA.B #$02                                                 ;81F2A3|A902    |      ;
     STA.W strcDialogDisplay.mapUnk19A                          ;81F2A5|8D9A01  |00019A;
@@ -3258,23 +3258,23 @@ fPlayerInteraction0x48:
   + STZ.W nPlayerInteractionArg2                               ;81F302|9C7009  |000970;
     REP #$20                                                   ;81F305|C220    |      ;
     %CheckFlag(event1, $0080)
-    BNE .rewardHigh                                                ;81F30E|D010    |81F320;
+    BNE .reward_high                                                ;81F30E|D010    |81F320;
     REP #$30                                                   ;81F310|C230    |      ;
     LDA.W #$0032                                               ;81F312|A93200  |      ;
     JSL.L fGameEngine_AddHappiness                             ;81F315|2282B283|83B282;
     REP #$30                                                   ;81F319|C230    |      ;
     LDX.W #$013D                                               ;81F31B|A23D01  |      ;
-    BRA .showRewardDialog                                                ;81F31E|800E    |81F32E;
+    BRA .show_reward_dialog                                                ;81F31E|800E    |81F32E;
  
  
-.rewardHigh:
+.reward_high:
     REP #$30                                                   ;81F320|C230    |      ;
     LDA.W #$0064                                               ;81F322|A96400  |      ;
     JSL.L fGameEngine_AddHappiness                             ;81F325|2282B283|83B282;
     REP #$30                                                   ;81F329|C230    |      ;
     LDX.W #$0140                                               ;81F32B|A24001  |      ;
  
-.showRewardDialog:
+.show_reward_dialog:
     SEP #$20                                                   ;81F32E|E220    |      ;
     LDA.B #$02                                                 ;81F330|A902    |      ;
     STA.W strcDialogDisplay.mapUnk19A                          ;81F332|8D9A01  |00019A;
@@ -3611,7 +3611,7 @@ fPlayerInteraction0x51:
  
   + SEP #$20                                                   ;81F5F7|E220    |      ;
     LDA.W strcDialogDisplay.dialogOptionsAnswer                ;81F5F9|AD8F01  |00018F;
-    BNE .declineOffer                                                ;81F5FC|D035    |81F633;
+    BNE .decline_offer                                                ;81F5FC|D035    |81F633;
     REP #$20                                                   ;81F5FE|C220    |      ;
     LDA.W #$FFEC                                               ;81F600|A9ECFF  |      ;
     STA.B ptrTemp0x72                                          ;81F603|8572    |000072;
@@ -3621,7 +3621,7 @@ fPlayerInteraction0x51:
     JSL.L fGameEngine_AddProfit                                ;81F60B|22C9B183|83B1C9;
     REP #$20                                                   ;81F60F|C220    |      ;
     CMP.W #$0000                                               ;81F611|C90000  |      ;
-    BNE .notEnoughMoney                                                ;81F614|D03A    |81F650;
+    BNE .not_enough_money                                                ;81F614|D03A    |81F650;
     SEP #$20                                                   ;81F616|E220    |      ;
     LDA.B #$02                                                 ;81F618|A902    |      ;
     STA.W strcDialogDisplay.mapUnk19A                          ;81F61A|8D9A01  |00019A;
@@ -3635,7 +3635,7 @@ fPlayerInteraction0x51:
     JMP.W fPlayerInteraction_ReturnShared                                       ;81F630|4CD6F6  |81F6D6;
  
  
-.declineOffer:
+.decline_offer:
     SEP #$20                                                   ;81F633|E220    |      ;
     LDA.B #$02                                                 ;81F635|A902    |      ;
     STA.W strcDialogDisplay.mapUnk19A                          ;81F637|8D9A01  |00019A;
@@ -3649,7 +3649,7 @@ fPlayerInteraction0x51:
     JMP.W fPlayerInteraction_ReturnShared                                       ;81F64D|4CD6F6  |81F6D6;
  
  
-.notEnoughMoney:
+.not_enough_money:
     SEP #$20                                                   ;81F650|E220    |      ;
     LDA.B #$02                                                 ;81F652|A902    |      ;
     STA.W strcDialogDisplay.mapUnk19A                          ;81F654|8D9A01  |00019A;
@@ -3751,7 +3751,7 @@ fPlayerInteraction0x52:
  
   + SEP #$20                                                   ;81F71E|E220    |      ;
     LDA.W strcDialogDisplay.dialogOptionsAnswer                ;81F720|AD8F01  |00018F;
-    BNE .declineOffer                                                ;81F723|D035    |81F75A;
+    BNE .decline_offer                                                ;81F723|D035    |81F75A;
     REP #$20                                                   ;81F725|C220    |      ;
     LDA.W #$FFE2                                               ;81F727|A9E2FF  |      ;
     STA.B ptrTemp0x72                                          ;81F72A|8572    |000072;
@@ -3761,7 +3761,7 @@ fPlayerInteraction0x52:
     JSL.L fGameEngine_AddProfit                                ;81F732|22C9B183|83B1C9;
     REP #$20                                                   ;81F736|C220    |      ;
     CMP.W #$0000                                               ;81F738|C90000  |      ;
-    BNE .notEnoughMoney                                                ;81F73B|D03A    |81F777;
+    BNE .not_enough_money                                                ;81F73B|D03A    |81F777;
     SEP #$20                                                   ;81F73D|E220    |      ;
     LDA.B #$02                                                 ;81F73F|A902    |      ;
     STA.W strcDialogDisplay.mapUnk19A                          ;81F741|8D9A01  |00019A;
@@ -3775,7 +3775,7 @@ fPlayerInteraction0x52:
     JMP.W .return                                              ;81F757|4CFEF7  |81F7FE;
  
  
-.declineOffer:
+.decline_offer:
     SEP #$20                                                   ;81F75A|E220    |      ;
     LDA.B #$02                                                 ;81F75C|A902    |      ;
     STA.W strcDialogDisplay.mapUnk19A                          ;81F75E|8D9A01  |00019A;
@@ -3789,7 +3789,7 @@ fPlayerInteraction0x52:
     JMP.W .return                                              ;81F774|4CFEF7  |81F7FE;
  
  
-.notEnoughMoney:
+.not_enough_money:
     SEP #$20                                                   ;81F777|E220    |      ;
     LDA.B #$02                                                 ;81F779|A902    |      ;
     STA.W strcDialogDisplay.mapUnk19A                          ;81F77B|8D9A01  |00019A;

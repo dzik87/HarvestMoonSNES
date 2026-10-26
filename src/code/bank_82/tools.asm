@@ -96,7 +96,7 @@ fToolUsedAnimationHandler:
     REP #$10                                                   ;8290AA|C210    |      ;
     %CheckPlayerFlags(!PFLAGS_OUTOFSTAMINA)
     BEQ +                                                      ;8290B3|F003    |8290B8;
-    JMP.W .tooTired                                              ;8290B5|4CCD90  |8290CD;
+    JMP.W .too_tired                                              ;8290B5|4CCD90  |8290CD;
  
  
   + JSR.W fToolUsed_StoreSoundForFrontTile                              ;8290B8|207D92  |82927D;
@@ -117,7 +117,7 @@ fToolUsedAnimationHandler:
     BRA .return                                                ;8290CB|800F    |8290DC;
  
  
-.tooTired:
+.too_tired:
     REP #$20                                                   ;8290CD|C220    |      ;
     LDA.W #$004D                                               ;8290CF|A94D00  |      ;
     STA.W strcObjectData.spriteIdx                             ;8290D2|8D0109  |000901;
@@ -276,7 +276,7 @@ fToolUsedAnimation0x10_WateringCan:
     JSR.W fToolUsed_GetSoundForFrontTile                              ;8291AD|20A092  |8292A0;
     SEP #$20                                                   ;8291B0|E220    |      ;
     CMP.B #$02                                                 ;8291B2|C902    |      ;
-    BEQ .refillWater                                                ;8291B4|F01F    |8291D5;
+    BEQ .refill_water                                                ;8291B4|F01F    |8291D5;
     LDA.W strcPlayerData.leftWater                             ;8291B6|AD2609  |000926;
     BEQ .haveWater                                             ;8291B9|F00D    |8291C8;
     REP #$30                                                   ;8291BB|C230    |      ;
@@ -296,7 +296,7 @@ fToolUsedAnimation0x10_WateringCan:
     BRA .return                                                ;8291D3|8012    |8291E7;
  
  
-.refillWater:
+.refill_water:
     REP #$30                                                   ;8291D5|C230    |      ;
     LDA.W #$0070                                               ;8291D7|A97000  |      ;
     CLC                                                        ;8291DA|18      |      ;
@@ -511,36 +511,36 @@ fToolUsedAction0x01_Sickle:
  
   + LDA.B strcMap.loadAreaId                                   ;82933F|A522    |000022;
     CMP.B #$04                                                 ;829341|C904    |      ;
-    BCC .farmArea                                                ;829343|9015    |82935A;
+    BCC .farm_area                                                ;829343|9015    |82935A;
     REP #$20                                                   ;829345|C220    |      ;
     CPX.W #$0035                                               ;829347|E03500  |      ;
     BEQ +                                                      ;82934A|F006    |829352;
     LDA.W #$00DD                                               ;82934C|A9DD00  |      ;
-    JMP.W .setTileAndEffect                                              ;82934F|4CC893  |8293C8;
+    JMP.W .set_tile_and_effect                                              ;82934F|4CC893  |8293C8;
  
  
   + REP #$20                                                   ;829352|C220    |      ;
     LDA.W #$00DE                                               ;829354|A9DE00  |      ;
-    JMP.W .setTileAndEffect                                              ;829357|4CC893  |8293C8;
+    JMP.W .set_tile_and_effect                                              ;829357|4CC893  |8293C8;
  
  
-.farmArea:
+.farm_area:
     REP #$20                                                   ;82935A|C220    |      ;
     CPX.W #$0003                                               ;82935C|E00300  |      ;
-    BEQ .cutWeed                                                ;82935F|F00B    |82936C;
+    BEQ .cut_weed                                                ;82935F|F00B    |82936C;
     CPX.W #$0079                                               ;829361|E07900  |      ;
-    BEQ .harvestGrass                                                ;829364|F00E    |829374;
+    BEQ .harvest_grass                                                ;829364|F00E    |829374;
     LDA.W #$0017                                               ;829366|A91700  |      ;
-    JMP.W .setTileAndEffect                                              ;829369|4CC893  |8293C8;
+    JMP.W .set_tile_and_effect                                              ;829369|4CC893  |8293C8;
  
  
-.cutWeed:
+.cut_weed:
     REP #$20                                                   ;82936C|C220    |      ;
     LDA.W #$000E                                               ;82936E|A90E00  |      ;
-    JMP.W .setTileAndEffect                                              ;829371|4CC893  |8293C8;
+    JMP.W .set_tile_and_effect                                              ;829371|4CC893  |8293C8;
  
  
-.harvestGrass:
+.harvest_grass:
     REP #$20                                                   ;829374|C220    |      ;
     LDA.W #$0001                                               ;829376|A90100  |      ;
     JSL.L fGameEngine_AddFeed                                  ;829379|2253B283|83B253;
@@ -571,10 +571,10 @@ fToolUsedAction0x01_Sickle:
     LDA.B #$00                                                 ;8293BD|A900    |      ;
     STA.W $0976+!RAM_SHIFT                                 ;8293BF|8D7609  |000976;
     JSL.L fObjectSlots_Allocate                                      ;8293C2|2200A581|81A500;
-    BRA .rollSummerEvent                                                ;8293C6|803B    |829403;
+    BRA .roll_summer_event                                                ;8293C6|803B    |829403;
  
  
-.setTileAndEffect:
+.set_tile_and_effect:
     LDX.W nTileInFrontOfPlayerX                                ;8293C8|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;8293CB|AC8709  |000987;
     JSL.L fSetTileAtCoords                                     ;8293CE|2288A681|81A688;
@@ -597,7 +597,7 @@ fToolUsedAction0x01_Sickle:
     STA.W $0976+!RAM_SHIFT                                 ;8293FC|8D7609  |000976;
     JSL.L fObjectSlots_Allocate                                      ;8293FF|2200A581|81A500;
  
-.rollSummerEvent:
+.roll_summer_event:
     SEP #$20                                                   ;829403|E220    |      ;
     LDA.L nCurrentSeasonID                                     ;829405|AF191F7F|7F1F19;
     CMP.B #$01                                                 ;829409|C901    |      ;
@@ -643,16 +643,16 @@ fToolUsedAction0x02_Plow:
     SEP #$20                                                   ;829479|E220    |      ;
     LDA.L nCurrentSeasonID                                     ;82947B|AF191F7F|7F1F19;
     CMP.B #$02                                                 ;82947F|C902    |      ;
-    BCS .checkMoneyDig                                                ;829481|B042    |8294C5;
+    BCS .check_money_dig                                                ;829481|B042    |8294C5;
     REP #$20                                                   ;829483|C220    |      ;
     %CheckFlag(daily4, $0008)
-    BNE .checkMoneyDig                                                ;82948C|D037    |8294C5;
+    BNE .check_money_dig                                                ;82948C|D037    |8294C5;
     %CheckFlag(daily1, $1000)
-    BNE .checkMoneyDig                                                ;829495|D02E    |8294C5;
+    BNE .check_money_dig                                                ;829495|D02E    |8294C5;
     SEP #$20                                                   ;829497|E220    |      ;
     LDA.B #$20                                                 ;829499|A920    |      ;
     JSL.L fCore_GetRandomNumber                                ;82949B|22F98980|8089F9;
-    BNE .checkMoneyDig                                                ;82949F|D024    |8294C5;
+    BNE .check_money_dig                                                ;82949F|D024    |8294C5;
     REP #$30                                                   ;8294A1|C230    |      ;
     LDA.W #$0011                                               ;8294A3|A91100  |      ;
     LDX.W #$0000                                               ;8294A6|A20000  |      ;
@@ -665,7 +665,7 @@ fToolUsedAction0x02_Plow:
     JMP.W .return                                              ;8294C2|4CB095  |8295B0;
  
  
-.checkMoneyDig:
+.check_money_dig:
     REP #$30                                                   ;8294C5|C230    |      ;
     %CheckFlag(daily4, $0008)
     BNE .normalDestroy                                         ;8294CE|D07A    |82954A;
@@ -725,18 +725,18 @@ fToolUsedAction0x02_Plow:
     BNE .return                                                ;829566|D048    |8295B0;
     %SetFlag(daily2, $0100)
     %CheckFlag(event1, $0800)
-    BNE .checkEvent1Flag1000                                                ;82957A|D00D    |829589;
+    BNE .check_event1_flag1000                                                ;82957A|D00D    |829589;
     %SetFlag(event1, $0800)
-    BRA .startSlotScript                                                ;829587|8016    |82959F;
+    BRA .start_slot_script                                                ;829587|8016    |82959F;
  
  
-.checkEvent1Flag1000:
+.check_event1_flag1000:
     REP #$30                                                   ;829589|C230    |      ;
     %CheckFlag(event1, $1000)
     BNE .return                                                ;829592|D01C    |8295B0;
     %SetFlag(event1, $1000)
  
-.startSlotScript:
+.start_slot_script:
     REP #$30                                                   ;82959F|C230    |      ;
     LDA.W #$0010                                               ;8295A1|A91000  |      ;
     LDX.W #$0000                                               ;8295A4|A20000  |      ;
@@ -759,32 +759,32 @@ fToolUsedAction0x03_Hammer:
  
  
   + CPX.W #$0006                                               ;8295CA|E00600  |      ;
-    BEQ .smashTile06                                                ;8295CD|F064    |829633;
+    BEQ .smash_tile06                                                ;8295CD|F064    |829633;
     CPX.W #$0004                                               ;8295CF|E00400  |      ;
-    BNE .countStoneHits                                                ;8295D2|D071    |829645;
+    BNE .count_stone_hits                                                ;8295D2|D071    |829645;
     SEP #$20                                                   ;8295D4|E220    |      ;
     LDA.B strcMap.loadAreaId                                   ;8295D6|A522    |000022;
     CMP.B #!AREA_TOWNSPRING                                                 
-    BCC .rockOnFarm                                                ;8295DA|9014    |8295F0;
+    BCC .rock_on_farm                                                ;8295DA|9014    |8295F0;
     LDA.B strcMap.loadAreaId                                   ;8295DC|A522    |000022;
     CMP.B #!AREA_WOODSCAVE                                                 
-    BCS .rockInCave                                                ;8295E0|B007    |8295E9;
+    BCS .rock_in_cave                                                ;8295E0|B007    |8295E9;
     REP #$20                                                   ;8295E2|C220    |      ;
     LDA.W #$00DD                                               ;8295E4|A9DD00  |      ;
-    BRA .setRockTile                                                ;8295E7|800C    |8295F5;
+    BRA .set_rock_tile                                                ;8295E7|800C    |8295F5;
  
  
-.rockInCave:
+.rock_in_cave:
     REP #$20                                                   ;8295E9|C220    |      ;
     LDA.W #$00E3                                               ;8295EB|A9E300  |      ;
-    BRA .setRockTile                                                ;8295EE|8005    |8295F5;
+    BRA .set_rock_tile                                                ;8295EE|8005    |8295F5;
  
  
-.rockOnFarm:
+.rock_on_farm:
     REP #$20                                                   ;8295F0|C220    |      ;
     LDA.W #$000E                                               ;8295F2|A90E00  |      ;
  
-.setRockTile:
+.set_rock_tile:
     LDX.W nTileInFrontOfPlayerX                                ;8295F5|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;8295F8|AC8709  |000987;
     JSL.L fSetTileAtCoords                                     ;8295FB|2288A681|81A688;
@@ -809,7 +809,7 @@ fToolUsedAction0x03_Hammer:
     JMP.W .return                                              ;829630|4C2F97  |82972F;
  
  
-.smashTile06:
+.smash_tile06:
     REP #$20                                                   ;829633|C220    |      ;
     LDA.W #$000E                                               ;829635|A90E00  |      ;
     LDX.W nTileInFrontOfPlayerX                                ;829638|AE8509  |000985;
@@ -818,17 +818,17 @@ fToolUsedAction0x03_Hammer:
     JMP.W .return                                              ;829642|4C2F97  |82972F;
  
  
-.countStoneHits:
+.count_stone_hits:
     SEP #$20                                                   ;829645|E220    |      ;
     LDA.W nBreakHitCounter                                     ;829647|AD6D09  |00096D;
     INC A                                                      ;82964A|1A      |      ;
     STA.W nBreakHitCounter                                     ;82964B|8D6D09  |00096D;
     CMP.B #$06                                                 ;82964E|C906    |      ; 6 hits to break big stone
-    BEQ .breakBigStone                                                ;829650|F003    |829655;
-    JMP.W .hitStoneNotBroken                                             ;829652|4CFE96  |8296FE;
+    BEQ .break_big_stone                                                ;829650|F003    |829655;
+    JMP.W .hit_stone_not_broken                                             ;829652|4CFE96  |8296FE;
  
  
-.breakBigStone:
+.break_big_stone:
     STZ.W nBreakHitCounter                                     ;829655|9C6D09  |00096D;
     REP #$20                                                   ;829658|C220    |      ;
     LDA.W nTileInFrontOfPlayerX                                ;82965A|AD8509  |000985;
@@ -840,13 +840,13 @@ fToolUsedAction0x03_Hammer:
     SBC.W #$0010                                               ;829668|E91000  |      ;
     STA.W nTileInFrontOfPlayerY                                ;82966B|8D8709  |000987;
     CPX.W #$0010                                               ;82966E|E01000  |      ;
-    BEQ .pickBrokenStoneTile                                                ;829671|F032    |8296A5;
+    BEQ .pick_broken_stone_tile                                                ;829671|F032    |8296A5;
     LDA.W nTileInFrontOfPlayerX                                ;829673|AD8509  |000985;
     CLC                                                        ;829676|18      |      ;
     ADC.W #$0010                                               ;829677|691000  |      ;
     STA.W nTileInFrontOfPlayerX                                ;82967A|8D8509  |000985;
     CPX.W #$000F                                               ;82967D|E00F00  |      ;
-    BEQ .pickBrokenStoneTile                                                ;829680|F023    |8296A5;
+    BEQ .pick_broken_stone_tile                                                ;829680|F023    |8296A5;
     LDA.W nTileInFrontOfPlayerX                                ;829682|AD8509  |000985;
     SEC                                                        ;829685|38      |      ;
     SBC.W #$0010                                               ;829686|E91000  |      ;
@@ -856,27 +856,27 @@ fToolUsedAction0x03_Hammer:
     ADC.W #$0010                                               ;829690|691000  |      ;
     STA.W nTileInFrontOfPlayerY                                ;829693|8D8709  |000987;
     CPX.W #$000E                                               ;829696|E00E00  |      ;
-    BEQ .pickBrokenStoneTile                                                ;829699|F00A    |8296A5;
+    BEQ .pick_broken_stone_tile                                                ;829699|F00A    |8296A5;
     LDA.W nTileInFrontOfPlayerX                                ;82969B|AD8509  |000985;
     CLC                                                        ;82969E|18      |      ;
     ADC.W #$0010                                               ;82969F|691000  |      ;
     STA.W nTileInFrontOfPlayerX                                ;8296A2|8D8509  |000985;
  
-.pickBrokenStoneTile:
+.pick_broken_stone_tile:
     SEP #$20                                                   ;8296A5|E220    |      ;
     LDA.B strcMap.loadAreaId                                   ;8296A7|A522    |000022;
     CMP.B #$04                                                 ;8296A9|C904    |      ;
-    BCC .farmStoneTile                                                ;8296AB|9007    |8296B4;
+    BCC .farm_stone_tile                                                ;8296AB|9007    |8296B4;
     REP #$20                                                   ;8296AD|C220    |      ;
     LDA.W #$00DF                                               ;8296AF|A9DF00  |      ;
-    BRA .setBrokenStoneTile                                                ;8296B2|8005    |8296B9;
+    BRA .set_broken_stone_tile                                                ;8296B2|8005    |8296B9;
  
  
-.farmStoneTile:
+.farm_stone_tile:
     REP #$20                                                   ;8296B4|C220    |      ;
     LDA.W #$000D                                               ;8296B6|A90D00  |      ;
  
-.setBrokenStoneTile:
+.set_broken_stone_tile:
     LDX.W nTileInFrontOfPlayerX                                ;8296B9|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;8296BC|AC8709  |000987;
     JSL.L fSetTileAtCoords                                     ;8296BF|2288A681|81A688;
@@ -905,7 +905,7 @@ fToolUsedAction0x03_Hammer:
     BRA .return                                                ;8296FC|8031    |82972F;
  
  
-.hitStoneNotBroken:
+.hit_stone_not_broken:
     REP #$20                                                   ;8296FE|C220    |      ;
     LDA.W nTileInFrontOfPlayerX                                ;829700|AD8509  |000985;
     STA.W nUnknownX                                            ;829703|8D8009  |000980;
@@ -991,7 +991,7 @@ fToolUsedAction0x04_Axe:
     REP #$30                                                   ;8297BD|C230    |      ;
     JSR.W fToolUsed_GetSoundForFrontTile                              ;8297BF|20A092  |8292A0;
     BNE +                                                      ;8297C2|D003    |8297C7;
-    JMP.W .checkSpecialTree                                              ;8297C4|4C4B99  |82994B;
+    JMP.W .check_special_tree                                              ;8297C4|4C4B99  |82994B;
  
  
   + SEP #$20                                                   ;8297C7|E220    |      ;
@@ -1000,7 +1000,7 @@ fToolUsedAction0x04_Axe:
     STA.W nBreakHitCounter                                     ;8297CD|8D6D09  |00096D;
     CMP.B #$06                                                 ;8297D0|C906    |      ;
     BEQ +                                                      ;8297D2|F003    |8297D7;
-    JMP.W .hitTreeNotBroken                                              ;8297D4|4C1899  |829918;
+    JMP.W .hit_tree_not_broken                                              ;8297D4|4C1899  |829918;
  
  
   + STZ.W nBreakHitCounter                                     ;8297D7|9C6D09  |00096D;
@@ -1014,10 +1014,10 @@ fToolUsedAction0x04_Axe:
     SBC.W #$0010                                               ;8297EA|E91000  |      ;
     STA.W nTileInFrontOfPlayerY                                ;8297ED|8D8709  |000987;
     CPX.W #$000C                                               ;8297F0|E00C00  |      ;
-    BEQ .breakTree                                                ;8297F3|F054    |829849;
+    BEQ .break_tree                                                ;8297F3|F054    |829849;
     CPX.W #$0014                                               ;8297F5|E01400  |      ;
     BNE +                                                      ;8297F8|D003    |8297FD;
-    JMP.W .stumpTileE0                                              ;8297FA|4CBC98  |8298BC;
+    JMP.W .stump_tile_e0                                              ;8297FA|4CBC98  |8298BC;
  
  
   + LDA.W nTileInFrontOfPlayerX                                ;8297FD|AD8509  |000985;
@@ -1025,10 +1025,10 @@ fToolUsedAction0x04_Axe:
     ADC.W #$0010                                               ;829801|691000  |      ;
     STA.W nTileInFrontOfPlayerX                                ;829804|8D8509  |000985;
     CPX.W #$000B                                               ;829807|E00B00  |      ;
-    BEQ .breakTree                                                ;82980A|F03D    |829849;
+    BEQ .break_tree                                                ;82980A|F03D    |829849;
     CPX.W #$0013                                               ;82980C|E01300  |      ;
     BNE +                                                      ;82980F|D003    |829814;
-    JMP.W .stumpTileE0                                              ;829811|4CBC98  |8298BC;
+    JMP.W .stump_tile_e0                                              ;829811|4CBC98  |8298BC;
  
  
   + LDA.W nTileInFrontOfPlayerX                                ;829814|AD8509  |000985;
@@ -1040,10 +1040,10 @@ fToolUsedAction0x04_Axe:
     ADC.W #$0010                                               ;829822|691000  |      ;
     STA.W nTileInFrontOfPlayerY                                ;829825|8D8709  |000987;
     CPX.W #$000A                                               ;829828|E00A00  |      ;
-    BEQ .breakTree                                                ;82982B|F01C    |829849;
+    BEQ .break_tree                                                ;82982B|F01C    |829849;
     CPX.W #$0012                                               ;82982D|E01200  |      ;
     BNE +                                                      ;829830|D003    |829835;
-    JMP.W .stumpTileE0                                              ;829832|4CBC98  |8298BC;
+    JMP.W .stump_tile_e0                                              ;829832|4CBC98  |8298BC;
  
  
   + LDA.W nTileInFrontOfPlayerX                                ;829835|AD8509  |000985;
@@ -1051,25 +1051,25 @@ fToolUsedAction0x04_Axe:
     ADC.W #$0010                                               ;829839|691000  |      ;
     STA.W nTileInFrontOfPlayerX                                ;82983C|8D8509  |000985;
     CPX.W #$0009                                               ;82983F|E00900  |      ;
-    BEQ .breakTree                                                ;829842|F005    |829849;
+    BEQ .break_tree                                                ;829842|F005    |829849;
     CPX.W #$0011                                               ;829844|E01100  |      ;
-    BEQ .stumpTileE0                                                ;829847|F073    |8298BC;
+    BEQ .stump_tile_e0                                                ;829847|F073    |8298BC;
  
-.breakTree:
+.break_tree:
     SEP #$20                                                   ;829849|E220    |      ;
     LDA.B strcMap.loadAreaId                                   ;82984B|A522    |000022;
     CMP.B #$04                                                 ;82984D|C904    |      ;
-    BCC .stumpTile0D                                                ;82984F|9072    |8298C3;
+    BCC .stump_tile0d                                                ;82984F|9072    |8298C3;
     REP #$20                                                   ;829851|C220    |      ;
     %CheckFlag(daily4, $0008)
-    BNE .stumpTileDF                                                ;82985A|D059    |8298B5;
+    BNE .stump_tile_df                                                ;82985A|D059    |8298B5;
     SEP #$20                                                   ;82985C|E220    |      ;
     LDA.B #$10                                                 ;82985E|A910    |      ;
     JSL.L fCore_GetRandomNumber                                ;829860|22F98980|8089F9;
-    BNE .stumpTileDF                                                ;829864|D04F    |8298B5;
+    BNE .stump_tile_df                                                ;829864|D04F    |8298B5;
     REP #$30                                                   ;829866|C230    |      ;
     %CheckFlag(event1, $0400)
-    BNE .stumpTileDF                                                ;82986F|D044    |8298B5;
+    BNE .stump_tile_df                                                ;82986F|D044    |8298B5;
     %SetFlag(event1, $0400)
     REP #$30                                                   ;82987C|C230    |      ;
     LDA.W nTileInFrontOfPlayerX                                ;82987E|AD8509  |000985;
@@ -1094,23 +1094,23 @@ fToolUsedAction0x04_Axe:
     SBC.W #$0008                                               ;8298AF|E90800  |      ;
     STA.W nTileInFrontOfPlayerY                                ;8298B2|8D8709  |000987;
  
-.stumpTileDF:
+.stump_tile_df:
     REP #$30                                                   ;8298B5|C230    |      ;
     LDA.W #$00DF                                               ;8298B7|A9DF00  |      ;
-    BRA .setStumpTile                                                ;8298BA|800C    |8298C8;
+    BRA .set_stump_tile                                                ;8298BA|800C    |8298C8;
  
  
-.stumpTileE0:
+.stump_tile_e0:
     REP #$30                                                   ;8298BC|C230    |      ;
     LDA.W #$00E0                                               ;8298BE|A9E000  |      ;
-    BRA .setStumpTile                                                ;8298C1|8005    |8298C8;
+    BRA .set_stump_tile                                                ;8298C1|8005    |8298C8;
  
  
-.stumpTile0D:
+.stump_tile0d:
     REP #$30                                                   ;8298C3|C230    |      ;
     LDA.W #$000D                                               ;8298C5|A90D00  |      ;
  
-.setStumpTile:
+.set_stump_tile:
     REP #$30                                                   ;8298C8|C230    |      ;
     LDX.W nTileInFrontOfPlayerX                                ;8298CA|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;8298CD|AC8709  |000987;
@@ -1143,7 +1143,7 @@ fToolUsedAction0x04_Axe:
     BRA .return                                                ;829916|8071    |829989;
  
  
-.hitTreeNotBroken:
+.hit_tree_not_broken:
     REP #$20                                                   ;829918|C220    |      ;
     LDA.W nTileInFrontOfPlayerX                                ;82991A|AD8509  |000985;
     STA.W nUnknownX                                            ;82991D|8D8009  |000980;
@@ -1165,7 +1165,7 @@ fToolUsedAction0x04_Axe:
     BRA .return                                                ;829949|803E    |829989;
  
  
-.checkSpecialTree:
+.check_special_tree:
     SEP #$20                                                   ;82994B|E220    |      ;
     LDA.B strcMap.loadAreaId                                   ;82994D|A522    |000022;
     CMP.B #$10                                                 ;82994F|C910    |      ;
@@ -1198,7 +1198,7 @@ fToolUsedAction0x05_CornSeedBag:
     LDA.W strcStockData.unkAnyTool                             ;8299A0|AD6B09  |00096B;
     JSR.W fToolUsed_GetSoundForTileOffset                              ;8299A3|20D692  |8292D6;
     BNE +                                                      ;8299A6|D003    |8299AB;
-    JMP.W .countUse                                              ;8299A8|4CCA99  |8299CA;
+    JMP.W .count_use                                              ;8299A8|4CCA99  |8299CA;
  
  
   + REP #$30                                                   ;8299AB|C230    |      ;
@@ -1215,7 +1215,7 @@ fToolUsedAction0x05_CornSeedBag:
     LDY.W nTileInFrontOfPlayerY                                ;8299C3|AC8709  |000987;
     JSL.L fSetTileAtCoords                                     ;8299C6|2288A681|81A688;
  
-.countUse:
+.count_use:
     SEP #$20                                                   ;8299CA|E220    |      ;
     LDA.W strcStockData.unkAnyTool                             ;8299CC|AD6B09  |00096B;
     INC A                                                      ;8299CF|1A      |      ;
@@ -1242,7 +1242,7 @@ fToolUsedAction0x06_TomatoSeedBag:
     LDA.W strcStockData.unkAnyTool                             ;8299FF|AD6B09  |00096B;
     JSR.W fToolUsed_GetSoundForTileOffset                              ;829A02|20D692  |8292D6;
     BNE +                                                      ;829A05|D003    |829A0A;
-    JMP.W .countUse                                              ;829A07|4C299A  |829A29;
+    JMP.W .count_use                                              ;829A07|4C299A  |829A29;
  
  
   + REP #$30                                                   ;829A0A|C230    |      ;
@@ -1259,7 +1259,7 @@ fToolUsedAction0x06_TomatoSeedBag:
     LDY.W nTileInFrontOfPlayerY                                ;829A22|AC8709  |000987;
     JSL.L fSetTileAtCoords                                     ;829A25|2288A681|81A688;
  
-.countUse:
+.count_use:
     SEP #$20                                                   ;829A29|E220    |      ;
     LDA.W strcStockData.unkAnyTool                             ;829A2B|AD6B09  |00096B;
     INC A                                                      ;829A2E|1A      |      ;
@@ -1286,7 +1286,7 @@ fToolUsedAction0x07_PotatoSeedBag:
     LDA.W strcStockData.unkAnyTool                             ;829A5E|AD6B09  |00096B;
     JSR.W fToolUsed_GetSoundForTileOffset                              ;829A61|20D692  |8292D6;
     BNE +                                                      ;829A64|D003    |829A69;
-    JMP.W .countUse                                              ;829A66|4C869A  |829A86;
+    JMP.W .count_use                                              ;829A66|4C869A  |829A86;
  
  
   + REP #$30                                                   ;829A69|C230    |      ;
@@ -1302,7 +1302,7 @@ fToolUsedAction0x07_PotatoSeedBag:
     LDY.W nTileInFrontOfPlayerY                                ;829A7F|AC8709  |000987;
     JSL.L fSetTileAtCoords                                     ;829A82|2288A681|81A688;
  
-.countUse:
+.count_use:
     SEP #$20                                                   ;829A86|E220    |      ;
     LDA.W strcStockData.unkAnyTool                             ;829A88|AD6B09  |00096B;
     INC A                                                      ;829A8B|1A      |      ;
@@ -1329,7 +1329,7 @@ fToolUsedAction0x08_TurnipSeedBag:
     LDA.W strcStockData.unkAnyTool                             ;829ABB|AD6B09  |00096B;
     JSR.W fToolUsed_GetSoundForTileOffset                              ;829ABE|20D692  |8292D6;
     BNE +                                                      ;829AC1|D003    |829AC6;
-    JMP.W .countUse                                              ;829AC3|4CE39A  |829AE3;
+    JMP.W .count_use                                              ;829AC3|4CE39A  |829AE3;
  
  
   + REP #$30                                                   ;829AC6|C230    |      ;
@@ -1345,7 +1345,7 @@ fToolUsedAction0x08_TurnipSeedBag:
     LDY.W nTileInFrontOfPlayerY                                ;829ADC|AC8709  |000987;
     JSL.L fSetTileAtCoords                                     ;829ADF|2288A681|81A688;
  
-.countUse:
+.count_use:
     SEP #$20                                                   ;829AE3|E220    |      ;
     LDA.W strcStockData.unkAnyTool                             ;829AE5|AD6B09  |00096B;
     INC A                                                      ;829AE8|1A      |      ;
@@ -1400,7 +1400,7 @@ fToolUsedAction0x0C_GrassSeedBag:
     LDA.W strcStockData.unkAnyTool                             ;829B68|AD6B09  |00096B;
     JSR.W fToolUsed_GetSoundForTileOffset                              ;829B6B|20D692  |8292D6;
     BNE +                                                      ;829B6E|D003    |829B73;
-    JMP.W .countUse                                              ;829B70|4C9D9B  |829B9D;
+    JMP.W .count_use                                              ;829B70|4C9D9B  |829B9D;
  
  
   + REP #$30                                                   ;829B73|C230    |      ;
@@ -1421,7 +1421,7 @@ fToolUsedAction0x0C_GrassSeedBag:
     LDY.W nTileInFrontOfPlayerY                                ;829B96|AC8709  |000987;
     JSL.L fSetTileAtCoords                                     ;829B99|2288A681|81A688;
  
-.countUse:
+.count_use:
     SEP #$20                                                   ;829B9D|E220    |      ;
     LDA.W strcStockData.unkAnyTool                             ;829B9F|AD6B09  |00096B;
     INC A                                                      ;829BA2|1A      |      ;
@@ -1602,7 +1602,7 @@ fToolUsedAction0x11_GoldenSickle:
     LDA.W strcStockData.unkAnyTool                             ;829D49|AD6B09  |00096B;
     JSR.W fToolUsed_GetSoundForTileOffset                              ;829D4C|20D692  |8292D6;
     BNE +                                                      ;829D4F|D003    |829D54;
-    JMP.W .countUse                                              ;829D51|4C6E9E  |829E6E;
+    JMP.W .count_use                                              ;829D51|4C6E9E  |829E6E;
  
  
   + SEP #$20                                                   ;829D54|E220    |      ;
@@ -1614,36 +1614,36 @@ fToolUsedAction0x11_GoldenSickle:
  
   + LDA.B strcMap.loadAreaId                                   ;829D61|A522    |000022;
     CMP.B #$04                                                 ;829D63|C904    |      ;
-    BCC .farmArea                                                ;829D65|9013    |829D7A;
+    BCC .farm_area                                                ;829D65|9013    |829D7A;
     REP #$20                                                   ;829D67|C220    |      ;
     CPX.W #$0035                                               ;829D69|E03500  |      ;
     BEQ +                                                      ;829D6C|F005    |829D73;
     LDA.W #$00DD                                               ;829D6E|A9DD00  |      ;
-    BRA .setTileAndEffect                                                ;829D71|8073    |829DE6;
+    BRA .set_tile_and_effect                                                ;829D71|8073    |829DE6;
  
  
   + REP #$20                                                   ;829D73|C220    |      ;
     LDA.W #$00DE                                               ;829D75|A9DE00  |      ;
-    BRA .setTileAndEffect                                                ;829D78|806C    |829DE6;
+    BRA .set_tile_and_effect                                                ;829D78|806C    |829DE6;
  
  
-.farmArea:
+.farm_area:
     REP #$20                                                   ;829D7A|C220    |      ;
     CPX.W #$0003                                               ;829D7C|E00300  |      ;
-    BEQ .cutWeed                                                ;829D7F|F00A    |829D8B;
+    BEQ .cut_weed                                                ;829D7F|F00A    |829D8B;
     CPX.W #$0079                                               ;829D81|E07900  |      ;
-    BEQ .harvestGrass                                                ;829D84|F00C    |829D92;
+    BEQ .harvest_grass                                                ;829D84|F00C    |829D92;
     LDA.W #$0017                                               ;829D86|A91700  |      ;
-    BRA .setTileAndEffect                                                ;829D89|805B    |829DE6;
+    BRA .set_tile_and_effect                                                ;829D89|805B    |829DE6;
  
  
-.cutWeed:
+.cut_weed:
     REP #$20                                                   ;829D8B|C220    |      ;
     LDA.W #$000E                                               ;829D8D|A90E00  |      ;
-    BRA .setTileAndEffect                                                ;829D90|8054    |829DE6;
+    BRA .set_tile_and_effect                                                ;829D90|8054    |829DE6;
  
  
-.harvestGrass:
+.harvest_grass:
     REP #$20                                                   ;829D92|C220    |      ;
     LDA.W #$0001                                               ;829D94|A90100  |      ;
     JSL.L fGameEngine_AddFeed                                  ;829D97|2253B283|83B253;
@@ -1674,10 +1674,10 @@ fToolUsedAction0x11_GoldenSickle:
     LDA.B #$00                                                 ;829DDB|A900    |      ;
     STA.W $0976+!RAM_SHIFT                                 ;829DDD|8D7609  |000976;
     JSL.L fObjectSlots_Allocate                                      ;829DE0|2200A581|81A500;
-    BRA .rollSummerEvent                                                ;829DE4|803B    |829E21;
+    BRA .roll_summer_event                                                ;829DE4|803B    |829E21;
  
  
-.setTileAndEffect:
+.set_tile_and_effect:
     LDX.W nTileInFrontOfPlayerX                                ;829DE6|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;829DE9|AC8709  |000987;
     JSL.L fSetTileAtCoords                                     ;829DEC|2288A681|81A688;
@@ -1700,20 +1700,20 @@ fToolUsedAction0x11_GoldenSickle:
     STA.W $0976+!RAM_SHIFT                                 ;829E1A|8D7609  |000976;
     JSL.L fObjectSlots_Allocate                                      ;829E1D|2200A581|81A500;
  
-.rollSummerEvent:
+.roll_summer_event:
     SEP #$20                                                   ;829E21|E220    |      ;
     LDA.L nCurrentSeasonID                                     ;829E23|AF191F7F|7F1F19;
     CMP.B #$01                                                 ;829E27|C901    |      ;
-    BNE .countUse                                                ;829E29|D043    |829E6E;
+    BNE .count_use                                                ;829E29|D043    |829E6E;
     REP #$20                                                   ;829E2B|C220    |      ;
     %CheckFlag(daily4, $0008)
-    BNE .countUse                                                ;829E34|D038    |829E6E;
+    BNE .count_use                                                ;829E34|D038    |829E6E;
     %CheckFlag(daily1, $2000)
-    BNE .countUse                                                ;829E3D|D02F    |829E6E;
+    BNE .count_use                                                ;829E3D|D02F    |829E6E;
     SEP #$20                                                   ;829E3F|E220    |      ;
     LDA.B #$10                                                 ;829E41|A910    |      ;
     JSL.L fCore_GetRandomNumber                                ;829E43|22F98980|8089F9;
-    BNE .countUse                                                ;829E47|D025    |829E6E;
+    BNE .count_use                                                ;829E47|D025    |829E6E;
     REP #$30                                                   ;829E49|C230    |      ;
     LDA.W #$0012                                               ;829E4B|A91200  |      ;
     LDX.W #$0000                                               ;829E4E|A20000  |      ;
@@ -1725,7 +1725,7 @@ fToolUsedAction0x11_GoldenSickle:
     REP #$20                                                   ;829E61|C220    |      ;
     %SetFlag(daily1, $2000)
  
-.countUse:
+.count_use:
     SEP #$20                                                   ;829E6E|E220    |      ;
     LDA.W strcStockData.unkAnyTool                             ;829E70|AD6B09  |00096B;
     INC A                                                      ;829E73|1A      |      ;
@@ -1759,17 +1759,17 @@ fToolUsedAction0x12_GoldenPlow:
     SEP #$20                                                   ;829EAF|E220    |      ;
     LDA.L nCurrentSeasonID                                     ;829EB1|AF191F7F|7F1F19;
     CMP.B #$02                                                 ;829EB5|C902    |      ;
-    BCS .checkMoneyDig                                                ;829EB7|B03F    |829EF8;
+    BCS .check_money_dig                                                ;829EB7|B03F    |829EF8;
     REP #$20                                                   ;829EB9|C220    |      ;
     REP #$20                                                   ;829EBB|C220    |      ;
     %CheckFlag(daily4, $0008)
-    BNE .checkMoneyDig                                                ;829EC4|D032    |829EF8;
+    BNE .check_money_dig                                                ;829EC4|D032    |829EF8;
     %CheckFlag(daily1, $1000)
-    BNE .checkMoneyDig                                                ;829ECD|D029    |829EF8;
+    BNE .check_money_dig                                                ;829ECD|D029    |829EF8;
     SEP #$20                                                   ;829ECF|E220    |      ;
     LDA.B #$20                                                 ;829ED1|A920    |      ;
     JSL.L fCore_GetRandomNumber                                ;829ED3|22F98980|8089F9;
-    BNE .checkMoneyDig                                                ;829ED7|D01F    |829EF8;
+    BNE .check_money_dig                                                ;829ED7|D01F    |829EF8;
     REP #$30                                                   ;829ED9|C230    |      ;
     LDA.W #$0011                                               ;829EDB|A91100  |      ;
     LDX.W #$0000                                               ;829EDE|A20000  |      ;
@@ -1777,19 +1777,19 @@ fToolUsedAction0x12_GoldenPlow:
     JSL.L fAI_StartSlotScriptAtFrontTile                                    ;829EE4|22F88084|8480F8;
     REP #$20                                                   ;829EE8|C220    |      ;
     %SetFlag(daily1, $1000)
-    JMP.W .countUse                                              ;829EF5|4CE39F  |829FE3;
+    JMP.W .count_use                                              ;829EF5|4CE39F  |829FE3;
  
  
-.checkMoneyDig:
+.check_money_dig:
     REP #$30                                                   ;829EF8|C230    |      ;
     %CheckFlag(daily4, $0008)
-    BNE .checkSpecialDrop                                                ;829F01|D07A    |829F7D;
+    BNE .check_special_drop                                                ;829F01|D07A    |829F7D;
     %CheckFlag(daily2, $0200)
-    BNE .checkSpecialDrop                                                ;829F0A|D071    |829F7D;
+    BNE .check_special_drop                                                ;829F0A|D071    |829F7D;
     SEP #$20                                                   ;829F0C|E220    |      ;
     LDA.B #$10                                                 ;829F0E|A910    |      ;
     JSL.L fCore_GetRandomNumber                                ;829F10|22F98980|8089F9;
-    BNE .checkMoneyBag                                                ;829F14|D02E    |829F44;
+    BNE .check_money_bag                                                ;829F14|D02E    |829F44;
     REP #$30                                                   ;829F16|C230    |      ;
     %SetFlag(daily2, $0200)
     LDA.W #$000F                                               ;829F23|A90F00  |      ;
@@ -1803,14 +1803,14 @@ fToolUsedAction0x12_GoldenPlow:
     LDA.B #$00                                                 ;829F39|A900    |      ;
     STA.B ptrTemp0x72+2                                        ;829F3B|8574    |000074;
     JSL.L fGameEngine_AddProfit                                ;829F3D|22C9B183|83B1C9;
-    JMP.W .countUse                                              ;829F41|4CE39F  |829FE3;
+    JMP.W .count_use                                              ;829F41|4CE39F  |829FE3;
  
  
-.checkMoneyBag:
+.check_money_bag:
     SEP #$20                                                   ;829F44|E220    |      ;
     LDA.B #$10                                                 ;829F46|A910    |      ;
     JSL.L fCore_GetRandomNumber                                ;829F48|22F98980|8089F9;
-    BNE .checkSpecialDrop                                                ;829F4C|D02F    |829F7D;
+    BNE .check_special_drop                                                ;829F4C|D02F    |829F7D;
     REP #$30                                                   ;829F4E|C230    |      ;
     %SetFlag(daily2, $0200)
     REP #$30                                                   ;829F5B|C230    |      ;
@@ -1825,42 +1825,42 @@ fToolUsedAction0x12_GoldenPlow:
     LDA.B #$00                                                 ;829F73|A900    |      ;
     STA.B ptrTemp0x72+2                                        ;829F75|8574    |000074;
     JSL.L fGameEngine_AddProfit                                ;829F77|22C9B183|83B1C9;
-    BRA .countUse                                                ;829F7B|8066    |829FE3;
+    BRA .count_use                                                ;829F7B|8066    |829FE3;
  
  
-.checkSpecialDrop:
+.check_special_drop:
     SEP #$20                                                   ;829F7D|E220    |      ;
     LDA.B #$40                                                 ;829F7F|A940    |      ;
     JSL.L fCore_GetRandomNumber                                ;829F81|22F98980|8089F9;
-    BNE .countUse                                                ;829F85|D05C    |829FE3;
+    BNE .count_use                                                ;829F85|D05C    |829FE3;
     REP #$30                                                   ;829F87|C230    |      ;
     %CheckFlag(daily4, $0008)
-    BNE .countUse                                                ;829F90|D051    |829FE3;
+    BNE .count_use                                                ;829F90|D051    |829FE3;
     %CheckFlag(daily2, $0100)
-    BNE .countUse                                                ;829F99|D048    |829FE3;
+    BNE .count_use                                                ;829F99|D048    |829FE3;
     %SetFlag(daily2, $0100)
     %CheckFlag(event1, $0800)
-    BNE .checkEvent1Flag1000                                                ;829FAD|D00D    |829FBC;
+    BNE .check_event1_flag1000                                                ;829FAD|D00D    |829FBC;
     %SetFlag(event1, $0800)
-    BRA .startSlotScript                                                ;829FBA|8016    |829FD2;
+    BRA .start_slot_script                                                ;829FBA|8016    |829FD2;
  
  
-.checkEvent1Flag1000:
+.check_event1_flag1000:
     REP #$30                                                   ;829FBC|C230    |      ;
     %CheckFlag(event1, $1000)
-    BNE .countUse                                                ;829FC5|D01C    |829FE3;
+    BNE .count_use                                                ;829FC5|D01C    |829FE3;
     %SetFlag(event1, $1000)
  
-.startSlotScript:
+.start_slot_script:
     REP #$30                                                   ;829FD2|C230    |      ;
     LDA.W #$0010                                               ;829FD4|A91000  |      ;
     LDX.W #$0000                                               ;829FD7|A20000  |      ;
     LDY.W #$001F                                               ;829FDA|A01F00  |      ;
     JSL.L fAI_StartSlotScriptAtFrontTile                                    ;829FDD|22F88084|8480F8;
-    BRA .countUse                                                ;829FE1|8000    |829FE3;
+    BRA .count_use                                                ;829FE1|8000    |829FE3;
  
  
-.countUse:
+.count_use:
     SEP #$20                                                   ;829FE3|E220    |      ;
     LDA.W strcStockData.unkAnyTool                             ;829FE5|AD6B09  |00096B;
     INC A                                                      ;829FE8|1A      |      ;
@@ -1882,39 +1882,39 @@ fToolUsedAction0x13_GolderHammer:
     REP #$30                                                   ;82A005|C230    |      ;
     JSR.W fToolUsed_GetSoundForFrontTile                              ;82A007|20A092  |8292A0;
     BNE +                                                      ;82A00A|D003    |82A00F;
-    JMP.W .checkChickenStatue                                              ;82A00C|4C41A1  |82A141;
+    JMP.W .check_chicken_statue                                              ;82A00C|4C41A1  |82A141;
  
  
   + CPX.W #$0006                                               ;82A00F|E00600  |      ;
-    BEQ .smashTile06                                                ;82A012|F067    |82A07B;
+    BEQ .smash_tile06                                                ;82A012|F067    |82A07B;
     CPX.W #$0004                                               ;82A014|E00400  |      ;
     BEQ +                                                      ;82A017|F003    |82A01C;
-    JMP.W .breakBigStone                                              ;82A019|4C8DA0  |82A08D;
+    JMP.W .break_big_stone                                              ;82A019|4C8DA0  |82A08D;
  
  
   + SEP #$20                                                   ;82A01C|E220    |      ;
     LDA.B strcMap.loadAreaId                                   ;82A01E|A522    |000022;
     CMP.B #$04                                                 ;82A020|C904    |      ;
-    BCC .rockOnFarm                                                ;82A022|9014    |82A038;
+    BCC .rock_on_farm                                                ;82A022|9014    |82A038;
     LDA.B strcMap.loadAreaId                                   ;82A024|A522    |000022;
     CMP.B #$29                                                 ;82A026|C929    |      ;
-    BCS .rockInCave                                                ;82A028|B007    |82A031;
+    BCS .rock_in_cave                                                ;82A028|B007    |82A031;
     REP #$20                                                   ;82A02A|C220    |      ;
     LDA.W #$00DD                                               ;82A02C|A9DD00  |      ;
-    BRA .setRockTile                                                ;82A02F|800C    |82A03D;
+    BRA .set_rock_tile                                                ;82A02F|800C    |82A03D;
  
  
-.rockInCave:
+.rock_in_cave:
     REP #$20                                                   ;82A031|C220    |      ;
     LDA.W #$00E3                                               ;82A033|A9E300  |      ;
-    BRA .setRockTile                                                ;82A036|8005    |82A03D;
+    BRA .set_rock_tile                                                ;82A036|8005    |82A03D;
  
  
-.rockOnFarm:
+.rock_on_farm:
     REP #$20                                                   ;82A038|C220    |      ;
     LDA.W #$000E                                               ;82A03A|A90E00  |      ;
  
-.setRockTile:
+.set_rock_tile:
     LDX.W nTileInFrontOfPlayerX                                ;82A03D|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;82A040|AC8709  |000987;
     JSL.L fSetTileAtCoords                                     ;82A043|2288A681|81A688;
@@ -1939,7 +1939,7 @@ fToolUsedAction0x13_GolderHammer:
     JMP.W .loop                                                ;82A078|4C31A1  |82A131;
  
  
-.smashTile06:
+.smash_tile06:
     REP #$20                                                   ;82A07B|C220    |      ;
     LDA.W #$000E                                               ;82A07D|A90E00  |      ;
     LDX.W nTileInFrontOfPlayerX                                ;82A080|AE8509  |000985;
@@ -1948,7 +1948,7 @@ fToolUsedAction0x13_GolderHammer:
     JMP.W .loop                                                ;82A08A|4C31A1  |82A131;
  
  
-.breakBigStone:
+.break_big_stone:
     REP #$20                                                   ;82A08D|C220    |      ;
     LDA.W nTileInFrontOfPlayerX                                ;82A08F|AD8509  |000985;
     SEC                                                        ;82A092|38      |      ;
@@ -1959,13 +1959,13 @@ fToolUsedAction0x13_GolderHammer:
     SBC.W #$0010                                               ;82A09D|E91000  |      ;
     STA.W nTileInFrontOfPlayerY                                ;82A0A0|8D8709  |000987;
     CPX.W #$0010                                               ;82A0A3|E01000  |      ;
-    BEQ .pickBrokenStoneTile                                                ;82A0A6|F032    |82A0DA;
+    BEQ .pick_broken_stone_tile                                                ;82A0A6|F032    |82A0DA;
     LDA.W nTileInFrontOfPlayerX                                ;82A0A8|AD8509  |000985;
     CLC                                                        ;82A0AB|18      |      ;
     ADC.W #$0010                                               ;82A0AC|691000  |      ;
     STA.W nTileInFrontOfPlayerX                                ;82A0AF|8D8509  |000985;
     CPX.W #$000F                                               ;82A0B2|E00F00  |      ;
-    BEQ .pickBrokenStoneTile                                                ;82A0B5|F023    |82A0DA;
+    BEQ .pick_broken_stone_tile                                                ;82A0B5|F023    |82A0DA;
     LDA.W nTileInFrontOfPlayerX                                ;82A0B7|AD8509  |000985;
     SEC                                                        ;82A0BA|38      |      ;
     SBC.W #$0010                                               ;82A0BB|E91000  |      ;
@@ -1975,27 +1975,27 @@ fToolUsedAction0x13_GolderHammer:
     ADC.W #$0010                                               ;82A0C5|691000  |      ;
     STA.W nTileInFrontOfPlayerY                                ;82A0C8|8D8709  |000987;
     CPX.W #$000E                                               ;82A0CB|E00E00  |      ;
-    BEQ .pickBrokenStoneTile                                                ;82A0CE|F00A    |82A0DA;
+    BEQ .pick_broken_stone_tile                                                ;82A0CE|F00A    |82A0DA;
     LDA.W nTileInFrontOfPlayerX                                ;82A0D0|AD8509  |000985;
     CLC                                                        ;82A0D3|18      |      ;
     ADC.W #$0010                                               ;82A0D4|691000  |      ;
     STA.W nTileInFrontOfPlayerX                                ;82A0D7|8D8509  |000985;
  
-.pickBrokenStoneTile:
+.pick_broken_stone_tile:
     SEP #$20                                                   ;82A0DA|E220    |      ;
     LDA.B strcMap.loadAreaId                                   ;82A0DC|A522    |000022;
     CMP.B #$04                                                 ;82A0DE|C904    |      ;
-    BCC .farmStoneTile                                                ;82A0E0|9007    |82A0E9;
+    BCC .farm_stone_tile                                                ;82A0E0|9007    |82A0E9;
     REP #$20                                                   ;82A0E2|C220    |      ;
     LDA.W #$00DF                                               ;82A0E4|A9DF00  |      ;
-    BRA .setBrokenStoneTile                                                ;82A0E7|8005    |82A0EE;
+    BRA .set_broken_stone_tile                                                ;82A0E7|8005    |82A0EE;
  
  
-.farmStoneTile:
+.farm_stone_tile:
     REP #$20                                                   ;82A0E9|C220    |      ;
     LDA.W #$000D                                               ;82A0EB|A90D00  |      ;
  
-.setBrokenStoneTile:
+.set_broken_stone_tile:
     LDX.W nTileInFrontOfPlayerX                                ;82A0EE|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;82A0F1|AC8709  |000987;
     JSL.L fSetTileAtCoords                                     ;82A0F4|2288A681|81A688;
@@ -2028,7 +2028,7 @@ fToolUsedAction0x13_GolderHammer:
     RTS                                                        ;82A140|60      |      ;
  
  
-.checkChickenStatue:
+.check_chicken_statue:
     SEP #$20                                                   ;82A141|E220    |      ;
     REP #$10                                                   ;82A143|C210    |      ;
     LDA.B strcMap.loadAreaId                                   ;82A145|A522    |000022;
@@ -2101,10 +2101,10 @@ fToolUsedAction0x14_GoldenAxe:
     SBC.W #$0010                                               ;82A1D9|E91000  |      ;
     STA.W nTileInFrontOfPlayerY                                ;82A1DC|8D8709  |000987;
     CPX.W #$000C                                               ;82A1DF|E00C00  |      ;
-    BEQ .breakTree                                                ;82A1E2|F051    |82A235;
+    BEQ .break_tree                                                ;82A1E2|F051    |82A235;
     CPX.W #$0014                                               ;82A1E4|E01400  |      ;
     BNE +                                                      ;82A1E7|D003    |82A1EC;
-    JMP.W .stumpTileE0                                              ;82A1E9|4C9DA2  |82A29D;
+    JMP.W .stump_tile_e0                                              ;82A1E9|4C9DA2  |82A29D;
  
  
   + LDA.W nTileInFrontOfPlayerX                                ;82A1EC|AD8509  |000985;
@@ -2112,10 +2112,10 @@ fToolUsedAction0x14_GoldenAxe:
     ADC.W #$0010                                               ;82A1F0|691000  |      ;
     STA.W nTileInFrontOfPlayerX                                ;82A1F3|8D8509  |000985;
     CPX.W #$000B                                               ;82A1F6|E00B00  |      ;
-    BEQ .breakTree                                                ;82A1F9|F03A    |82A235;
+    BEQ .break_tree                                                ;82A1F9|F03A    |82A235;
     CPX.W #$0013                                               ;82A1FB|E01300  |      ;
     BNE +                                                      ;82A1FE|D003    |82A203;
-    JMP.W .stumpTileE0                                              ;82A200|4C9DA2  |82A29D;
+    JMP.W .stump_tile_e0                                              ;82A200|4C9DA2  |82A29D;
  
  
   + LDA.W nTileInFrontOfPlayerX                                ;82A203|AD8509  |000985;
@@ -2127,30 +2127,30 @@ fToolUsedAction0x14_GoldenAxe:
     ADC.W #$0010                                               ;82A211|691000  |      ;
     STA.W nTileInFrontOfPlayerY                                ;82A214|8D8709  |000987;
     CPX.W #$000A                                               ;82A217|E00A00  |      ;
-    BEQ .breakTree                                                ;82A21A|F019    |82A235;
+    BEQ .break_tree                                                ;82A21A|F019    |82A235;
     CPX.W #$0012                                               ;82A21C|E01200  |      ;
-    BEQ .stumpTileE0                                                ;82A21F|F07C    |82A29D;
+    BEQ .stump_tile_e0                                                ;82A21F|F07C    |82A29D;
     LDA.W nTileInFrontOfPlayerX                                ;82A221|AD8509  |000985;
     CLC                                                        ;82A224|18      |      ;
     ADC.W #$0010                                               ;82A225|691000  |      ;
     STA.W nTileInFrontOfPlayerX                                ;82A228|8D8509  |000985;
     CPX.W #$0009                                               ;82A22B|E00900  |      ;
-    BEQ .breakTree                                                ;82A22E|F005    |82A235;
+    BEQ .break_tree                                                ;82A22E|F005    |82A235;
     CPX.W #$0011                                               ;82A230|E01100  |      ;
-    BEQ .stumpTileE0                                                ;82A233|F068    |82A29D;
+    BEQ .stump_tile_e0                                                ;82A233|F068    |82A29D;
  
-.breakTree:
+.break_tree:
     SEP #$20                                                   ;82A235|E220    |      ;
     LDA.B strcMap.loadAreaId                                   ;82A237|A522    |000022;
     CMP.B #$04                                                 ;82A239|C904    |      ;
-    BCC .stumpTile0D                                                ;82A23B|9067    |82A2A4;
+    BCC .stump_tile0d                                                ;82A23B|9067    |82A2A4;
     SEP #$20                                                   ;82A23D|E220    |      ;
     LDA.B #$10                                                 ;82A23F|A910    |      ;
     JSL.L fCore_GetRandomNumber                                ;82A241|22F98980|8089F9;
-    BNE .stumpTileDF                                                ;82A245|D04F    |82A296;
+    BNE .stump_tile_df                                                ;82A245|D04F    |82A296;
     REP #$30                                                   ;82A247|C230    |      ;
     %CheckFlag(event1, $0400)
-    BNE .stumpTileDF                                                ;82A250|D044    |82A296;
+    BNE .stump_tile_df                                                ;82A250|D044    |82A296;
     %SetFlag(event1, $0400)
     REP #$30                                                   ;82A25D|C230    |      ;
     LDA.W nTileInFrontOfPlayerX                                ;82A25F|AD8509  |000985;
@@ -2175,19 +2175,19 @@ fToolUsedAction0x14_GoldenAxe:
     SBC.W #$0008                                               ;82A290|E90800  |      ;
     STA.W nTileInFrontOfPlayerY                                ;82A293|8D8709  |000987;
  
-.stumpTileDF:
+.stump_tile_df:
     REP #$30                                                   ;82A296|C230    |      ;
     LDA.W #$00DF                                               ;82A298|A9DF00  |      ;
     BRA +                                                      ;82A29B|800C    |82A2A9;
  
  
-.stumpTileE0:
+.stump_tile_e0:
     REP #$30                                                   ;82A29D|C230    |      ;
     LDA.W #$00E0                                               ;82A29F|A9E000  |      ;
     BRA +                                                      ;82A2A2|8005    |82A2A9;
  
  
-.stumpTile0D:
+.stump_tile0d:
     REP #$30                                                   ;82A2A4|C230    |      ;
     LDA.W #$000D                                               ;82A2A6|A90D00  |      ;
  
@@ -2347,7 +2347,7 @@ fToolUsedAction0x19_ChickenFeed:
     REP #$10                                                   ;82A416|C210    |      ;
     LDA.B strcMap.loadAreaId                                   ;82A418|A522    |000022;
     CMP.B #$28                                                 ;82A41A|C928    |      ;
-    BNE .dropFeedOnGround                                                ;82A41C|D055    |82A473;
+    BNE .drop_feed_on_ground                                                ;82A41C|D055    |82A473;
     REP #$20                                                   ;82A41E|C220    |      ;
     LDA.W #$0001                                               ;82A420|A90100  |      ;
     LDX.W #$0006                                               ;82A423|A20600  |      ;
@@ -2359,9 +2359,9 @@ fToolUsedAction0x19_ChickenFeed:
     LDA.W #$0000                                               ;82A435|A90000  |      ;
     JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;82A438|2261AC82|82AC61;
     CPX.W #$00E2                                               ;82A43C|E0E200  |      ;
-    BCC .dropFeedOnGround                                                ;82A43F|9032    |82A473;
+    BCC .drop_feed_on_ground                                                ;82A43F|9032    |82A473;
     CPX.W #$00EF                                               ;82A441|E0EF00  |      ;
-    BCS .dropFeedOnGround                                                ;82A444|B02D    |82A473;
+    BCS .drop_feed_on_ground                                                ;82A444|B02D    |82A473;
     REP #$20                                                   ;82A446|C220    |      ;
     TXA                                                        ;82A448|8A      |      ;
     SEC                                                        ;82A449|38      |      ;
@@ -2380,10 +2380,10 @@ fToolUsedAction0x19_ChickenFeed:
     LDX.W nTileInFrontOfPlayerX                                ;82A467|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;82A46A|AC8709  |000987;
     JSL.L fSetTileAtCoords                                     ;82A46D|2288A681|81A688;
-    BRA .consumeFeed                                                ;82A471|8031    |82A4A4;
+    BRA .consume_feed                                                ;82A471|8031    |82A4A4;
  
  
-.dropFeedOnGround:
+.drop_feed_on_ground:
     REP #$20                                                   ;82A473|C220    |      ;
     LDA.W nTileInFrontOfPlayerX                                ;82A475|AD8509  |000985;
     STA.W nUnknownX                                            ;82A478|8D8009  |000980;
@@ -2403,7 +2403,7 @@ fToolUsedAction0x19_ChickenFeed:
     STA.W $0976+!RAM_SHIFT                                 ;82A49D|8D7609  |000976;
     JSL.L fObjectSlots_Allocate                                      ;82A4A0|2200A581|81A500;
  
-.consumeFeed:
+.consume_feed:
     %DecreaseStock(leftChickenFood)
     BNE +                                                      ;82A4AD|D003    |82A4B2;
     STZ.W strcPlayerData.toolEquipped                          ;82A4AF|9C2109  |000921;
@@ -2418,7 +2418,7 @@ fToolUsedAction0x1A_CowFeed:
     REP #$10                                                   ;82A4C4|C210    |      ;
     LDA.B strcMap.loadAreaId                                   ;82A4C6|A522    |000022;
     CMP.B #$27                                                 ;82A4C8|C927    |      ;
-    BNE .dropFeedOnGround                                                ;82A4CA|D055    |82A521;
+    BNE .drop_feed_on_ground                                                ;82A4CA|D055    |82A521;
     REP #$20                                                   ;82A4CC|C220    |      ;
     LDA.W #$0001                                               ;82A4CE|A90100  |      ;
     LDX.W #$0006                                               ;82A4D1|A20600  |      ;
@@ -2430,9 +2430,9 @@ fToolUsedAction0x1A_CowFeed:
     LDA.W #$0000                                               ;82A4E3|A90000  |      ;
     JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;82A4E6|2261AC82|82AC61;
     CPX.W #$00E2                                               ;82A4EA|E0E200  |      ;
-    BCC .dropFeedOnGround                                                ;82A4ED|9032    |82A521;
+    BCC .drop_feed_on_ground                                                ;82A4ED|9032    |82A521;
     CPX.W #$00EF                                               ;82A4EF|E0EF00  |      ;
-    BCS .dropFeedOnGround                                                ;82A4F2|B02D    |82A521;
+    BCS .drop_feed_on_ground                                                ;82A4F2|B02D    |82A521;
     REP #$20                                                   ;82A4F4|C220    |      ;
     TXA                                                        ;82A4F6|8A      |      ;
     SEC                                                        ;82A4F7|38      |      ;
@@ -2451,10 +2451,10 @@ fToolUsedAction0x1A_CowFeed:
     LDX.W nTileInFrontOfPlayerX                                ;82A515|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;82A518|AC8709  |000987;
     JSL.L fSetTileAtCoords                                     ;82A51B|2288A681|81A688;
-    BRA .consumeFeed                                                ;82A51F|8031    |82A552;
+    BRA .consume_feed                                                ;82A51F|8031    |82A552;
  
  
-.dropFeedOnGround:
+.drop_feed_on_ground:
     REP #$20                                                   ;82A521|C220    |      ;
     LDA.W nTileInFrontOfPlayerX                                ;82A523|AD8509  |000985;
     STA.W nUnknownX                                            ;82A526|8D8009  |000980;
@@ -2474,7 +2474,7 @@ fToolUsedAction0x1A_CowFeed:
     STA.W $0976+!RAM_SHIFT                                 ;82A54B|8D7609  |000976;
     JSL.L fObjectSlots_Allocate                                      ;82A54E|2200A581|81A500;
  
-.consumeFeed:
+.consume_feed:
     %DecreaseStock(leftCowFood)
     BNE +                                                      ;82A55B|D003    |82A560;
     STZ.W strcPlayerData.toolEquipped                          ;82A55D|9C2109  |000921;

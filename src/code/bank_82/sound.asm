@@ -484,7 +484,7 @@ fPlayer_InteractWithFrontObject:
     LDA.B [strcMap.pSelected],Y                                ;82AD8D|B70D    |00000D;
     AND.B #$80                                                 ;82AD8F|2980    |      ;
     BNE +                                                      ;82AD91|D003    |82AD96;
-    JMP.W .checkInteractFlag                                              ;82AD93|4CC5AD  |82ADC5;
+    JMP.W .check_interact_flag                                              ;82AD93|4CC5AD  |82ADC5;
  
  
   + DEY                                                        ;82AD96|88      |      ;
@@ -510,7 +510,7 @@ fPlayer_InteractWithFrontObject:
     JMP.W .justReturn                                          ;82ADC2|4CE5AE  |82AEE5;
  
  
-.checkInteractFlag:
+.check_interact_flag:
     SEP #$20                                                   ;82ADC5|E220    |      ;
     INY                                                        ;82ADC7|C8      |      ;
     LDA.B [strcMap.pSelected],Y                                ;82ADC8|B70D    |00000D;
@@ -563,7 +563,7 @@ fPlayer_InteractWithFrontObject:
     LDA.L nCurrentTimeID                                       ;82AE11|AF1C1F7F|7F1F1C;
     CMP.B #$11                                                 ;82AE15|C911    |      ;
     BCC +                                                      ;82AE17|9002    |82AE1B;
-    BRA .showClosedDialog                                                ;82AE19|8066    |82AE81;
+    BRA .show_closed_dialog                                                ;82AE19|8066    |82AE81;
  
  
   + SEP #$20                                                   ;82AE1B|E220    |      ;
@@ -573,7 +573,7 @@ fPlayer_InteractWithFrontObject:
     LDA.L nCurrentTimeID                                       ;82AE25|AF1C1F7F|7F1F1C;
     CMP.B #$11                                                 ;82AE29|C911    |      ;
     BCS +                                                      ;82AE2B|B002    |82AE2F;
-    BRA .showClosedDialog                                                ;82AE2D|8052    |82AE81;
+    BRA .show_closed_dialog                                                ;82AE2D|8052    |82AE81;
  
  
   + SEP #$20                                                   ;82AE2F|E220    |      ;
@@ -584,7 +584,7 @@ fPlayer_InteractWithFrontObject:
     BEQ +                                                      ;82AE3D|F006    |82AE45;
     CMP.B #$06                                                 ;82AE3F|C906    |      ;
     BEQ +                                                      ;82AE41|F002    |82AE45;
-    BRA .showClosedDialog                                                ;82AE43|803C    |82AE81;
+    BRA .show_closed_dialog                                                ;82AE43|803C    |82AE81;
  
  
   + SEP #$20                                                   ;82AE45|E220    |      ;
@@ -594,7 +594,7 @@ fPlayer_InteractWithFrontObject:
     LDA.L nCurrentWeekdayID                                    ;82AE4F|AF1A1F7F|7F1F1A;
     CMP.B #$06                                                 ;82AE53|C906    |      ;
     BNE +                                                      ;82AE55|D002    |82AE59;
-    BRA .showClosedDialog                                                ;82AE57|8028    |82AE81;
+    BRA .show_closed_dialog                                                ;82AE57|8028    |82AE81;
  
  
   + SEP #$20                                                   ;82AE59|E220    |      ;
@@ -603,7 +603,7 @@ fPlayer_InteractWithFrontObject:
     BEQ +                                                      ;82AE61|F008    |82AE6B;
     LDA.L nCurrentWeekdayID                                    ;82AE63|AF1A1F7F|7F1F1A;
     BNE +                                                      ;82AE67|D002    |82AE6B;
-    BRA .showClosedDialog                                                ;82AE69|8016    |82AE81;
+    BRA .show_closed_dialog                                                ;82AE69|8016    |82AE81;
  
  
   + SEP #$20                                                   ;82AE6B|E220    |      ;
@@ -614,10 +614,10 @@ fPlayer_InteractWithFrontObject:
     LDA.W strcDialogDisplay.mapFlags                           ;82AE77|AD9601  |000196;
     AND.W #$0010                                               ;82AE7A|291000  |      ;
     BEQ .justReturn                                            ;82AE7D|F066    |82AEE5;
-    BRA .showClosedDialog                                                ;82AE7F|8000    |82AE81;
+    BRA .show_closed_dialog                                                ;82AE7F|8000    |82AE81;
  
  
-.showClosedDialog:
+.show_closed_dialog:
     SEP #$20                                                   ;82AE81|E220    |      ;
     LDA.B #$02                                                 ;82AE83|A902    |      ;
     STA.W strcDialogDisplay.mapUnk19A                          ;82AE85|8D9A01  |00019A;

@@ -32,7 +32,7 @@ fTileMap_MapChangeHandler:
     LDY.W #$0000                                               ;80A7DB|A00000  |      ;
     LDA.B strcMap.loadAreaId                                   ;80A7DE|A522    |000022;
     CMP.B #$57                                                 ;80A7E0|C957    |      ;
-    BCS .readMapSize                                                ;80A7E2|B02E    |80A812;
+    BCS .read_map_size                                                ;80A7E2|B02E    |80A812;
     LDA.B (strcMap.pCurrent),Y                                 ;80A7E4|B118    |000018; Y = 0
     STA.W strcDialogDisplay.mapCurrentPresetId                 ;80A7E6|8D9501  |000195;
     JSL.L fCore_ManageGraphicsPresets                          ;80A7E9|22598C80|808C59;
@@ -43,18 +43,18 @@ fTileMap_MapChangeHandler:
     STA.W strcDialogDisplay.mapFlags                           ;80A7F5|8D9601  |000196;
     REP #$20                                                   ;80A7F8|C220    |      ;
     %CheckFlag(daily2, $0001)
-    BEQ .skipPresetBytes                                                ;80A801|F00B    |80A80E;
+    BEQ .skip_preset_bytes                                                ;80A801|F00B    |80A80E;
     REP #$30                                                   ;80A803|C230    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;80A805|AD9601  |000196;
     AND.W #$FFDF                                               ;80A808|29DFFF  |      ;
     STA.W strcDialogDisplay.mapFlags                           ;80A80B|8D9601  |000196;
  
-.skipPresetBytes:
+.skip_preset_bytes:
     REP #$30                                                   ;80A80E|C230    |      ;
     INY                                                        ;80A810|C8      |      ;
     INY                                                        ;80A811|C8      |      ;
  
-.readMapSize:
+.read_map_size:
     SEP #$20                                                   ;80A812|E220    |      ;
     LDA.B (strcMap.pCurrent),Y                                 ;80A814|B118    |000018; Y = 3
     STA.W strcDialogDisplay.mapMultiWidth                      ;80A816|8D8101  |000181;
@@ -62,13 +62,13 @@ fTileMap_MapChangeHandler:
     LDA.B (strcMap.pCurrent),Y                                 ;80A81A|B118    |000018; Y = 4
     STA.W strcDialogDisplay.mapMultiHeight                     ;80A81C|8D8201  |000182;
     CMP.B #$03                                                 ;80A81F|C903    |      ;
-    BCC .readLayerCounts                                                ;80A821|900B    |80A82E;
+    BCC .read_layer_counts                                                ;80A821|900B    |80A82E;
     REP #$20                                                   ;80A823|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;80A825|AD9601  |000196;
     ORA.W #$0001                                               ;80A828|090100  |      ;
     STA.W strcDialogDisplay.mapFlags                           ;80A82B|8D9601  |000196;
  
-.readLayerCounts:
+.read_layer_counts:
     SEP #$20                                                   ;80A82E|E220    |      ;
     INY                                                        ;80A830|C8      |      ;
     LDA.B (strcMap.pCurrent),Y                                 ;80A831|B118    |000018; Y = 5
@@ -79,7 +79,7 @@ fTileMap_MapChangeHandler:
     INY                                                        ;80A83A|C8      |      ;
     LDA.B strcMap.loadAreaId                                   ;80A83B|A522    |000022;
     CMP.B #$57                                                 ;80A83D|C957    |      ;
-    BCS .checkTilemapCount                                                ;80A83F|B01A    |80A85B;
+    BCS .check_tilemap_count                                                ;80A83F|B01A    |80A85B;
     REP #$20                                                   ;80A841|C220    |      ;
     LDA.B (strcMap.pCurrent),Y                                 ;80A843|B118    |000018; Y = 7
     STA.B strcPlayer.offsetCamX                                ;80A845|85ED    |0000ED;
@@ -98,7 +98,7 @@ fTileMap_MapChangeHandler:
     INY                                                        ;80A859|C8      |      ;
     INY                                                        ;80A85A|C8      |      ;
  
-.checkTilemapCount:
+.check_tilemap_count:
     SEP #$20                                                   ;80A85B|E220    |      ;
     LDA.B strcVariables.n8Temp1                                ;80A85D|A592    |000092;
     BEQ .charactermaps                                         ;80A85F|F05D    |80A8BE;
@@ -177,12 +177,12 @@ fTileMap_MapChangeHandler:
     REP #$20                                                   ;80A8E1|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;80A8E3|AD9601  |000196;
     AND.W #$8000                                               ;80A8E6|290080  |      ;
-    BNE .copyRawCharmap                                                ;80A8E9|D006    |80A8F1;
+    BNE .copy_raw_charmap                                                ;80A8E9|D006    |80A8F1;
     JSL.L fGraphicsDecompressTilemap                           ;80A8EB|22F88183|8381F8;
-    BRA .afterCharmap                                                ;80A8EF|8010    |80A901;
+    BRA .after_charmap                                                ;80A8EF|8010    |80A901;
  
  
-.copyRawCharmap:
+.copy_raw_charmap:
     REP #$30                                                   ;80A8F1|C230    |      ;
     LDY.W #$0000                                               ;80A8F3|A00000  |      ;
  
@@ -194,7 +194,7 @@ fTileMap_MapChangeHandler:
     CPY.W #$8000                                               ;80A8FC|C00080  |      ;
     BNE .loop                                                  ;80A8FF|D0F5    |80A8F6;
  
-.afterCharmap:
+.after_charmap:
     SEP #$20                                                   ;80A901|E220    |      ;
     LDA.B strcMap.loadAreaId                                   ;80A903|A522    |000022;
     CMP.B #!AREA_TOWNSPRING                                                 
@@ -205,13 +205,13 @@ fTileMap_MapChangeHandler:
     SEP #$20                                                   ;80A90D|E220    |      ;
     LDA.B strcVariables.n8Temp2                                ;80A90F|A593    |000093;
     CMP.B #$01                                                 ;80A911|C901    |      ;
-    BNE .resetCamera                                               ;80A913|D00F    |80A924;
+    BNE .reset_camera                                               ;80A913|D00F    |80A924;
     REP #$30                                                   ;80A915|C230    |      ;
     %CheckFlag(daily3, $0002)
-    BNE .resetCamera                                               ;80A91E|D004    |80A924;
+    BNE .reset_camera                                               ;80A91E|D004    |80A924;
     JSL.L fAreaItemSubrutine_Run                         ;80A920|22E5A981|81A9E5;
  
-.resetCamera:
+.reset_camera:
     REP #$20                                                   ;80A924|C220    |      ;
     STZ.B strcCamera.cameraX                                   ;80A926|64F5    |0000F5;
     STZ.B strcCamera.cameraY                                   ;80A928|64F7    |0000F7;
@@ -253,7 +253,7 @@ fTileMap_MapChangeHandler:
     PHA                                                        ;80A973|48      |      ;
     LDA.W #$0000                                               ;80A974|A90000  |      ;
  
-.uploadRowLoop:
+.upload_row_loop:
     REP #$30                                                   ;80A977|C230    |      ;
     PHA                                                        ;80A979|48      |      ;
     JSR.W fTileMap_UploadRowToVRAM                               ;80A97A|2038AA  |80AA38;
@@ -269,16 +269,16 @@ fTileMap_MapChangeHandler:
     SEP #$20                                                   ;80A98D|E220    |      ;
     LDA.B strcMap.loadAreaId                                   ;80A98F|A522    |000022;
     CMP.B #$5B                                                 ;80A991|C95B    |      ;
-    BCS .uploadAltRow                                               ;80A993|B007    |80A99C;
+    BCS .upload_alt_row                                               ;80A993|B007    |80A99C;
     LDY.B strcVariables.n16Unk8A                               ;80A995|A48A    |00008A;
     CPY.W #$7000                                               ;80A997|C00070  |      ;
-    BEQ .advanceRow                                               ;80A99A|F006    |80A9A2;
+    BEQ .advance_row                                               ;80A99A|F006    |80A9A2;
  
-.uploadAltRow:
+.upload_alt_row:
     LDY.W #$0040                                               ;80A99C|A04000  |      ;
     JSR.W fTileMap_UploadRowToVRAM                               ;80A99F|2038AA  |80AA38;
  
-.advanceRow:
+.advance_row:
     REP #$30                                                   ;80A9A2|C230    |      ;
     LDA.B strcVariables.n16Temp1                               ;80A9A4|A57E    |00007E;
     CLC                                                        ;80A9A6|18      |      ;
@@ -292,23 +292,23 @@ fTileMap_MapChangeHandler:
     PLA                                                        ;80A9B4|68      |      ;
     INC A                                                      ;80A9B5|1A      |      ;
     CMP.W #$0020                                               ;80A9B6|C92000  |      ;
-    BNE .uploadRowLoop                                               ;80A9B9|D0BC    |80A977;
+    BNE .upload_row_loop                                               ;80A9B9|D0BC    |80A977;
     SEP #$20                                                   ;80A9BB|E220    |      ;
     LDA.B strcMap.loadAreaId                                   ;80A9BD|A522    |000022;
     CMP.B #$5B                                                 ;80A9BF|C95B    |      ;
-    BCS .advanceVramRow                                               ;80A9C1|B007    |80A9CA;
+    BCS .advance_vram_row                                               ;80A9C1|B007    |80A9CA;
     LDY.B strcVariables.n16Unk8A                               ;80A9C3|A48A    |00008A;
     CPY.W #$7000                                               ;80A9C5|C00070  |      ;
-    BEQ .nextCopyPass                                               ;80A9C8|F008    |80A9D2;
+    BEQ .next_copy_pass                                               ;80A9C8|F008    |80A9D2;
  
-.advanceVramRow:
+.advance_vram_row:
     REP #$20                                                   ;80A9CA|C220    |      ;
     TXA                                                        ;80A9CC|8A      |      ;
     CLC                                                        ;80A9CD|18      |      ;
     ADC.W #$0400                                               ;80A9CE|690004  |      ;
     TAX                                                        ;80A9D1|AA      |      ;
  
-.nextCopyPass:
+.next_copy_pass:
     REP #$30                                                   ;80A9D2|C230    |      ;
     LDY.W #$0040                                               ;80A9D4|A04000  |      ;
     PLA                                                        ;80A9D7|68      |      ;
