@@ -478,26 +478,26 @@ fMap_QueueTilePatternVRAMUpload:
     STA.B strcVariables.n16Unk86                               ;81A6E6|8586    |000086;
     LDA.B strcVariables.n16Temp1                               ;81A6E8|A57E    |00007E;
     CMP.W #$0010                                               ;81A6EA|C91000  |      ;
-    BCC .label2                                                ;81A6ED|9012    |81A701;
+    BCC .wrapRow                                                ;81A6ED|9012    |81A701;
     CMP.W #$0020                                               ;81A6EF|C92000  |      ;
-    BCC .label1                                                ;81A6F2|9005    |81A6F9;
+    BCC .addColumnQuadrant                                                ;81A6F2|9005    |81A6F9;
     CMP.W #$0030                                               ;81A6F4|C93000  |      ;
-    BCC .label2                                                ;81A6F7|9008    |81A701;
+    BCC .wrapRow                                                ;81A6F7|9008    |81A701;
  
-.label1:
+.addColumnQuadrant:
     LDA.B strcVariables.n16Unk86                               ;81A6F9|A586    |000086;
     CLC                                                        ;81A6FB|18      |      ;
     ADC.W #$03E0                                               ;81A6FC|69E003  |      ;
     STA.B strcVariables.n16Unk86                               ;81A6FF|8586    |000086;
  
-.label2:
+.wrapRow:
     LDA.B strcVariables.n16Temp2                               ;81A701|A580    |000080;
     CMP.W #$0020                                               ;81A703|C92000  |      ;
-    BCC .label3                                                ;81A706|9004    |81A70C;
+    BCC .addRowOffset                                                ;81A706|9004    |81A70C;
     SEC                                                        ;81A708|38      |      ;
     SBC.W #$0020                                               ;81A709|E92000  |      ;
  
-.label3:
+.addRowOffset:
     ASL A                                                      ;81A70C|0A      |      ;
     ASL A                                                      ;81A70D|0A      |      ;
     ASL A                                                      ;81A70E|0A      |      ;
@@ -509,19 +509,19 @@ fMap_QueueTilePatternVRAMUpload:
     STA.B strcVariables.n16Unk86                               ;81A715|8586    |000086;
     LDA.B strcVariables.n16Temp2                               ;81A717|A580    |000080;
     CMP.W #$0010                                               ;81A719|C91000  |      ;
-    BCC .label5                                                ;81A71C|9012    |81A730;
+    BCC .loadPatternSource                                                ;81A71C|9012    |81A730;
     CMP.W #$0020                                               ;81A71E|C92000  |      ;
-    BCC .label4                                                ;81A721|9005    |81A728;
+    BCC .addRowQuadrant                                                ;81A721|9005    |81A728;
     CMP.W #$0030                                               ;81A723|C93000  |      ;
-    BCC .label5                                                ;81A726|9008    |81A730;
+    BCC .loadPatternSource                                                ;81A726|9008    |81A730;
  
-.label4:
+.addRowQuadrant:
     LDA.B strcVariables.n16Unk86                               ;81A728|A586    |000086;
     CLC                                                        ;81A72A|18      |      ;
     ADC.W #$0400                                               ;81A72B|690004  |      ;
     STA.B strcVariables.n16Unk86                               ;81A72E|8586    |000086;
  
-.label5:
+.loadPatternSource:
     REP #$20                                                   ;81A730|C220    |      ;
     if !REGION_DE
     LDA.W #$A115
@@ -793,27 +793,27 @@ fMap_CalcTilemapBufferOffset:
     PLA                                                        ;81A8D8|68      |      ;
     PHA                                                        ;81A8D9|48      |      ;
     CMP.W #$0000                                               ;81A8DA|C90000  |      ;
-    BNE .label1                                                ;81A8DD|D010    |81A8EF;
+    BNE .advanceColumn                                                ;81A8DD|D010    |81A8EF;
     INC.B strcVariables.n16Unk90                               ;81A8DF|E690    |000090;
     INC.B strcVariables.n16Unk90                               ;81A8E1|E690    |000090;
     LDA.B strcVariables.n16Temp1                               ;81A8E3|A57E    |00007E;
     CLC                                                        ;81A8E5|18      |      ;
     ADC.B strcVariables.n16Unk90                               ;81A8E6|6590    |000090;
     AND.W #$0040                                               ;81A8E8|294000  |      ;
-    BEQ .label3                                                ;81A8EB|F023    |81A910;
-    BRA .label2                                                ;81A8ED|800E    |81A8FD;
+    BEQ .checkRowEnd                                                ;81A8EB|F023    |81A910;
+    BRA .crossBlockBoundary                                                ;81A8ED|800E    |81A8FD;
  
  
-.label1:
+.advanceColumn:
     INC.B strcVariables.n16Unk90                               ;81A8EF|E690    |000090;
     INC.B strcVariables.n16Unk90                               ;81A8F1|E690    |000090;
     LDA.B strcVariables.n16Temp1                               ;81A8F3|A57E    |00007E;
     CLC                                                        ;81A8F5|18      |      ;
     ADC.B strcVariables.n16Unk90                               ;81A8F6|6590    |000090;
     AND.W #$0040                                               ;81A8F8|294000  |      ;
-    BEQ .label3                                                ;81A8FB|F013    |81A910;
+    BEQ .checkRowEnd                                                ;81A8FB|F013    |81A910;
  
-.label2:
+.crossBlockBoundary:
     LDA.W #$0040                                               ;81A8FD|A94000  |      ;
     STA.B strcVariables.n16Unk8E                               ;81A900|858E    |00008E;
     LDA.B strcVariables.n16Unk90                               ;81A902|A590    |000090;
@@ -825,7 +825,7 @@ fMap_CalcTilemapBufferOffset:
     ADC.W #$0040                                               ;81A90C|694000  |      ;
     TAY                                                        ;81A90F|A8      |      ;
  
-.label3:
+.checkRowEnd:
     CPX.B strcVariables.n16Temp2                               ;81A910|E480    |000080;
     BNE -                                                      ;81A912|D0B9    |81A8CD;
     LDA.B ptrTemp0x72                                          ;81A914|A572    |000072;
@@ -875,33 +875,33 @@ fShed_PlaceEquippedTool:
  
  
   + LDA.W strcPlayerData.toolEquipped                          ;81A956|AD2109  |000921;
-    BEQ .label5                                                ;81A959|F053    |81A9AE;
+    BEQ .markShedSlot                                                ;81A959|F053    |81A9AE;
     CMP.B #$19                                                 ;81A95B|C919    |      ;
-    BCC .label3                                                ;81A95D|901A    |81A979;
+    BCC .checkAreaForLowTools                                                ;81A95D|901A    |81A979;
     CMP.B #$19                                                 ;81A95F|C919    |      ;
-    BEQ .label2                                                ;81A961|F00B    |81A96E;
+    BEQ .checkAreaForTool19                                                ;81A961|F00B    |81A96E;
     SEP #$20                                                   ;81A963|E220    |      ;
     LDA.W strcMap.loadAreaId                                   ;81A965|AD2200  |000022;
     CMP.B #$27                                                 ;81A968|C927    |      ;
-    BNE .label5                                                ;81A96A|D042    |81A9AE;
-    BRA .label4                                                ;81A96C|8014    |81A982;
+    BNE .markShedSlot                                                ;81A96A|D042    |81A9AE;
+    BRA .drawToolInShed                                                ;81A96C|8014    |81A982;
  
  
-.label2:
+.checkAreaForTool19:
     SEP #$20                                                   ;81A96E|E220    |      ;
     LDA.W strcMap.loadAreaId                                   ;81A970|AD2200  |000022;
     CMP.B #$28                                                 ;81A973|C928    |      ;
-    BNE .label5                                                ;81A975|D037    |81A9AE;
-    BRA .label4                                                ;81A977|8009    |81A982;
+    BNE .markShedSlot                                                ;81A975|D037    |81A9AE;
+    BRA .drawToolInShed                                                ;81A977|8009    |81A982;
  
  
-.label3:
+.checkAreaForLowTools:
     SEP #$20                                                   ;81A979|E220    |      ;
     LDA.W strcMap.loadAreaId                                   ;81A97B|AD2200  |000022;
     CMP.B #$26                                                 ;81A97E|C926    |      ;
-    BNE .label5                                                ;81A980|D02C    |81A9AE;
+    BNE .markShedSlot                                                ;81A980|D02C    |81A9AE;
  
-.label4:
+.drawToolInShed:
     SEP #$20                                                   ;81A982|E220    |      ;
     REP #$10                                                   ;81A984|C210    |      ;
     LDA.B #$00                                                 ;81A986|A900    |      ;
@@ -926,7 +926,7 @@ fShed_PlaceEquippedTool:
     JSL.L fSetTileAtCoords                                     ;81A9A6|2288A681|81A688;
     JSL.L fCore_StartTransfer                                  ;81A9AA|22F08A80|808AF0;
  
-.label5:
+.markShedSlot:
     SEP #$20                                                   ;81A9AE|E220    |      ;
     REP #$10                                                   ;81A9B0|C210    |      ;
     LDA.B #$00                                                 ;81A9B2|A900    |      ;
@@ -979,7 +979,7 @@ fItemSubrutineHandler_81A9E5:
 fItemSub81A9F6_0x00to0x03:
     REP #$30                                                   ;81AAB6|C230    |      ;
     %CheckFlag(event1, $0002)
-    BEQ .label1                                                ;81AABF|F019    |81AADA;
+    BEQ .checkEvent1Flag0001                                                ;81AABF|F019    |81AADA;
     LDA.W #$0060                                               ;81AAC1|A96000  |      ;
     LDX.W #$0310                                               ;81AAC4|A21003  |      ;
     LDY.W #$0360                                               ;81AAC7|A06003  |      ;
@@ -993,10 +993,10 @@ fItemSub81A9F6_0x00to0x03:
     PLA                                                        ;81AAD5|68      |      ;
     JSL.L fMap_StampTemplateToCurrentTilemap                                      ;81AAD6|22A7B082|82B0A7;
  
-.label1:
+.checkEvent1Flag0001:
     REP #$30                                                   ;81AADA|C230    |      ;
     %CheckFlag(event1, $0001)
-    BEQ .label2                                                ;81AAE3|F019    |81AAFE;
+    BEQ .checkEvent1Flag0080                                                ;81AAE3|F019    |81AAFE;
     LDA.W #$005F                                               ;81AAE5|A95F00  |      ;
     LDX.W #$0240                                               ;81AAE8|A24002  |      ;
     LDY.W #$02F0                                               ;81AAEB|A0F002  |      ;
@@ -1010,10 +1010,10 @@ fItemSub81A9F6_0x00to0x03:
     PLA                                                        ;81AAF9|68      |      ;
     JSL.L fMap_StampTemplateToCurrentTilemap                                      ;81AAFA|22A7B082|82B0A7;
  
-.label2:
+.checkEvent1Flag0080:
     REP #$30                                                   ;81AAFE|C230    |      ;
     %CheckFlag(event1, $0080)
-    BEQ .label3                                                ;81AB07|F01D    |81AB26;
+    BEQ .checkEvent1Flag0040                                                ;81AB07|F01D    |81AB26;
     REP #$30                                                   ;81AB09|C230    |      ;
     LDA.W #$0054                                               ;81AB0B|A95400  |      ;
     LDX.W #$0060                                               ;81AB0E|A26000  |      ;
@@ -1027,13 +1027,13 @@ fItemSub81A9F6_0x00to0x03:
     PLX                                                        ;81AB1E|FA      |      ;
     PLA                                                        ;81AB1F|68      |      ;
     JSL.L fMap_StampTemplateToCurrentTilemap                                      ;81AB20|22A7B082|82B0A7;
-    BRA .label4                                                ;81AB24|8026    |81AB4C;
+    BRA .checkPowerBerries                                                ;81AB24|8026    |81AB4C;
  
  
-.label3:
+.checkEvent1Flag0040:
     REP #$30                                                   ;81AB26|C230    |      ;
     %CheckFlag(event1, $0040)
-    BEQ .label4                                                ;81AB2F|F01B    |81AB4C;
+    BEQ .checkPowerBerries                                                ;81AB2F|F01B    |81AB4C;
     REP #$30                                                   ;81AB31|C230    |      ;
     LDA.W #$0053                                               ;81AB33|A95300  |      ;
     LDX.W #$0060                                               ;81AB36|A26000  |      ;
@@ -1048,11 +1048,11 @@ fItemSub81A9F6_0x00to0x03:
     PLA                                                        ;81AB47|68      |      ;
     JSL.L fMap_StampTemplateToCurrentTilemap                                      ;81AB48|22A7B082|82B0A7;
  
-.label4:
+.checkPowerBerries:
     SEP #$20                                                   ;81AB4C|E220    |      ;
     REP #$10                                                   ;81AB4E|C210    |      ;
     LDA.L nPowerBerryEaten                                     ;81AB50|AF361F7F|7F1F36;
-    BEQ .label5                                                ;81AB54|F03E    |81AB94;
+    BEQ .checkEvent2Flag0200                                                ;81AB54|F03E    |81AB94;
     LDA.B #$00                                                 ;81AB56|A900    |      ;
  
 .powerberry:
@@ -1091,10 +1091,10 @@ fItemSub81A9F6_0x00to0x03:
     CMP.L nPowerBerryEaten                                     ;81AB8E|CF361F7F|7F1F36;
     BNE .powerberry                                            ;81AB92|D0C4    |81AB58;
  
-.label5:
+.checkEvent2Flag0200:
     REP #$30                                                   ;81AB94|C230    |      ;
     %CheckFlag(event2, $0200)
-    BEQ .label6                                                ;81AB9D|F019    |81ABB8;
+    BEQ .checkEvent2Flag0400                                                ;81AB9D|F019    |81ABB8;
     LDA.W #$0059                                               ;81AB9F|A95900  |      ;
     LDX.W #$0080                                               ;81ABA2|A28000  |      ;
     LDY.W #$0130                                               ;81ABA5|A03001  |      ;
@@ -1108,10 +1108,10 @@ fItemSub81A9F6_0x00to0x03:
     PLA                                                        ;81ABB3|68      |      ;
     JSL.L fMap_StampTemplateToCurrentTilemap                                      ;81ABB4|22A7B082|82B0A7;
  
-.label6:
+.checkEvent2Flag0400:
     REP #$30                                                   ;81ABB8|C230    |      ;
     %CheckFlag(event2, $0400)
-    BEQ .label7                                                ;81ABC1|F019    |81ABDC;
+    BEQ .checkEvent2Flag0800                                                ;81ABC1|F019    |81ABDC;
     LDA.W #$0058                                               ;81ABC3|A95800  |      ;
     LDX.W #$0060                                               ;81ABC6|A26000  |      ;
     LDY.W #$0130                                               ;81ABC9|A03001  |      ;
@@ -1125,10 +1125,10 @@ fItemSub81A9F6_0x00to0x03:
     PLA                                                        ;81ABD7|68      |      ;
     JSL.L fMap_StampTemplateToCurrentTilemap                                      ;81ABD8|22A7B082|82B0A7;
  
-.label7:
+.checkEvent2Flag0800:
     REP #$30                                                   ;81ABDC|C230    |      ;
     %CheckFlag(event2, $0800)
-    BEQ .label8                                                ;81ABE5|F019    |81AC00;
+    BEQ .checkEvent2Flag1000                                                ;81ABE5|F019    |81AC00;
     LDA.W #$005A                                               ;81ABE7|A95A00  |      ;
     LDX.W #$0090                                               ;81ABEA|A29000  |      ;
     LDY.W #$0130                                               ;81ABED|A03001  |      ;
@@ -1142,10 +1142,10 @@ fItemSub81A9F6_0x00to0x03:
     PLA                                                        ;81ABFB|68      |      ;
     JSL.L fMap_StampTemplateToCurrentTilemap                                      ;81ABFC|22A7B082|82B0A7;
  
-.label8:
+.checkEvent2Flag1000:
     REP #$30                                                   ;81AC00|C230    |      ;
     %CheckFlag(event2, $1000)
-    BEQ .label10                                               ;81AC09|F019    |81AC24;
+    BEQ .checkEvent3Flag1000                                               ;81AC09|F019    |81AC24;
     LDA.W #$005C                                               ;81AC0B|A95C00  |      ;
     LDX.W #$00B0                                               ;81AC0E|A2B000  |      ;
     LDY.W #$0130                                               ;81AC11|A03001  |      ;
@@ -1159,7 +1159,7 @@ fItemSub81A9F6_0x00to0x03:
     PLA                                                        ;81AC1F|68      |      ;
     JSL.L fMap_StampTemplateToCurrentTilemap                                      ;81AC20|22A7B082|82B0A7;
  
-.label10:
+.checkEvent3Flag1000:
     REP #$30                                                   ;81AC24|C230    |      ;
     %CheckFlag(event3, $1000)
     BEQ .return                                                ;81AC2D|F019    |81AC48;
@@ -1410,10 +1410,10 @@ fItemSub81A9F6_0x1C:
   + SEP #$20                                                   ;81ADE3|E220    |      ;
     LDA.L nCurrentSeasonID                                     ;81ADE5|AF191F7F|7F1F19;
     CMP.B #$01                                                 ;81ADE9|C901    |      ;
-    BNE .label2                                                ;81ADEB|D01F    |81AE0C;
+    BNE .checkSeasonSpring                                                ;81ADEB|D01F    |81AE0C;
     LDY.W #$0000                                               ;81ADED|A00000  |      ;
  
-.label1:
+.summerLoop:
     PHY                                                        ;81ADF0|5A      |      ;
     REP #$20                                                   ;81ADF1|C220    |      ;
     TYA                                                        ;81ADF3|98      |      ;
@@ -1428,9 +1428,9 @@ fItemSub81A9F6_0x1C:
     PLY                                                        ;81AE05|7A      |      ;
     INY                                                        ;81AE06|C8      |      ;
     CPY.W #$0002                                               ;81AE07|C00200  |      ;
-    BNE .label1                                                ;81AE0A|D0E4    |81ADF0;
+    BNE .summerLoop                                                ;81AE0A|D0E4    |81ADF0;
  
-.label2:
+.checkSeasonSpring:
     SEP #$20                                                   ;81AE0C|E220    |      ;
     REP #$10                                                   ;81AE0E|C210    |      ;
     LDA.L nCurrentSeasonID                                     ;81AE10|AF191F7F|7F1F19;
@@ -2298,23 +2298,23 @@ fShed_DrawItemPatternByFlag:
     REP #$20                                                   ;81B32B|C220    |      ;
     PLA                                                        ;81B32D|68      |      ;
     CMP.W #$0002                                               ;81B32E|C90200  |      ;
-    BEQ .label7                                                ;81B331|F01B    |81B34E;
+    BEQ .drawPattern                                                ;81B331|F01B    |81B34E;
     CMP.W #$0001                                               ;81B333|C90100  |      ;
-    BEQ .label6                                                ;81B336|F00C    |81B344;
+    BEQ .requireFlagSet                                                ;81B336|F00C    |81B344;
     SEP #$20                                                   ;81B338|E220    |      ;
     LDA.L strcShedItems.row1,X                                 ;81B33A|BF001F7F|7F1F00;
     AND.B strcVariables.n8Temp1                                ;81B33E|2592    |000092;
     BNE .return                                                ;81B340|D020    |81B362;
-    BRA .label7                                                ;81B342|800A    |81B34E;
+    BRA .drawPattern                                                ;81B342|800A    |81B34E;
  
  
-.label6:
+.requireFlagSet:
     SEP #$20                                                   ;81B344|E220    |      ;
     LDA.L strcShedItems.row1,X                                 ;81B346|BF001F7F|7F1F00;
     AND.B strcVariables.n8Temp1                                ;81B34A|2592    |000092;
     BEQ .return                                                ;81B34C|F014    |81B362;
  
-.label7:
+.drawPattern:
     REP #$20                                                   ;81B34E|C220    |      ;
     LDA.B [ptrTemp0x72],Y                                      ;81B350|B772    |000072;
     PHA                                                        ;81B352|48      |      ;

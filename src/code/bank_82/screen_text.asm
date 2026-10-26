@@ -251,19 +251,19 @@ fScreen_NameInput_BlinkCursor:
   + SEP #$20                                                   ;82EA39|E220    |      ;
     LDA.W strcDialogDisplay.dialogBlinkTimer                   ;82EA3B|AD8B01  |00018B;
     AND.B #$80                                                 ;82EA3E|2980    |      ;
-    BNE .label1                                                ;82EA40|D00B    |82EA4D;
+    BNE .drawBlank                                                ;82EA40|D00B    |82EA4D;
     REP #$20                                                   ;82EA42|C220    |      ;
     LDA.W #$00A8                                               ;82EA44|A9A800  |      ;
     JSL.L fScreen_NameInput_DrawLetterAtCursor                                  ;82EA47|2260EA82|82EA60;
-    BRA .label2                                                ;82EA4B|8009    |82EA56;
+    BRA .advanceBlinkTimer                                                ;82EA4B|8009    |82EA56;
  
  
-.label1:
+.drawBlank:
     REP #$20                                                   ;82EA4D|C220    |      ;
     LDA.W #!DIALOG_SPACE                                               
     JSL.L fScreen_NameInput_DrawLetterAtCursor                                  ;82EA52|2260EA82|82EA60;
  
-.label2:
+.advanceBlinkTimer:
     SEP #$20                                                   ;82EA56|E220    |      ;
     LDA.W strcDialogDisplay.dialogBlinkTimer                   ;82EA58|AD8B01  |00018B;
     INC A                                                      ;82EA5B|1A      |      ;

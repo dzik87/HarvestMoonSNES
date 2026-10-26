@@ -105,7 +105,7 @@ fAudioEngine_SelectMapMusic:
     BNE .return                                                ;809604|D059    |80965F;
     LDA.W strcDialogDisplay.mapFlags                           ;809606|AD9601  |000196;
     AND.W #$0002                                               ;809609|290200  |      ;
-    BNE .label1                                                ;80960C|D02B    |809639;
+    BNE .specialAreaMusic                                                ;80960C|D02B    |809639;
  
 .default:
     SEP #$20                                                   ;80960E|E220    |      ;
@@ -131,7 +131,7 @@ fAudioEngine_SelectMapMusic:
     BRA .justReturn                                            ;809637|802F    |809668;
  
  
-.label1:
+.specialAreaMusic:
     SEP #$20                                                   ;809639|E220    |      ;
     LDA.B strcMap.loadAreaId                                   ;80963B|A522    |000022;
     CMP.B #$5B                                                 ;80963D|C95B    |      ;
@@ -184,24 +184,24 @@ fAudioEngine_MapChangeHandler:
  
  
   + %CheckFlag(daily3, $8000)
-    BNE .label2                                                ;809685|D024    |8096AB;
+    BNE .startFadeout                                                ;809685|D024    |8096AB;
     %CheckFlag(daily4, $0100)
-    BNE .label1                                                ;80968E|D00C    |80969C;
+    BNE .applyDestinationArea                                                ;80968E|D00C    |80969C;
     %CheckFlag(daily4, $0040)
-    BEQ .label1                                                ;809697|F003    |80969C;
+    BEQ .applyDestinationArea                                                ;809697|F003    |80969C;
  
 .return:
     JMP.W fReturn_80972B                                       ;809699|4C2B97  |80972B; BUG: why not RTL ?
  
  
-.label1:
+.applyDestinationArea:
     SEP #$20                                                   ;80969C|E220    |      ;
     LDA.W nDestinationAreaId                                   ;80969E|AD8B09  |00098B;
     STA.B strcMap.loadAreaId                                   ;8096A1|8522    |000022;
     JSL.L fAudioEngine_MapMusicHandler                         ;8096A3|22DE9580|8095DE;
     JSL.L fAudio_FadeOutOnTrackChangeSlow                                 ;8096A7|22018483|838401;
  
-.label2:
+.startFadeout:
     REP #$20                                                   ;8096AB|C220    |      ;
     %CheckFlag(daily4, $0008)
     BEQ +                                                      ;8096B4|F007    |8096BD;
@@ -261,44 +261,44 @@ fMap_SetupArea:
     SEP #$20                                                   ;809741|E220    |      ;
     PHA                                                        ;809743|48      |      ;
     AND.B #$20                                                 ;809744|2920    |      ;
-    BEQ .label1                                                ;809746|F012    |80975A;
+    BEQ .timeStateDone                                                ;809746|F012    |80975A;
     REP #$20                                                   ;809748|C220    |      ;
     %CheckFlag(daily2, $0001)
-    BNE .label1                                                ;809751|D007    |80975A;
+    BNE .timeStateDone                                                ;809751|D007    |80975A;
     SEP #$20                                                   ;809753|E220    |      ;
     LDA.B #$01                                                 ;809755|A901    |      ;
     STA.W nTimeState                                           ;809757|8D7309  |000973;
  
-.label1:
+.timeStateDone:
     SEP #$20                                                   ;80975A|E220    |      ;
     PLA                                                        ;80975C|68      |      ;
     AND.B #$C0                                                 ;80975D|29C0    |      ;
-    BNE .label2                                                ;80975F|D003    |809764;
-    JMP.W .label8                                              ;809761|4CA898  |8098A8;
+    BNE .checkOverlayMask                                                ;80975F|D003    |809764;
+    JMP.W .loadAreaData                                              ;809761|4CA898  |8098A8;
  
  
-.label2:
+.checkOverlayMask:
     AND.B #$80                                                 ;809764|2980    |      ;
-    BNE .label3                                                ;809766|D00D    |809775;
+    BNE .checkOverlayDisabled                                                ;809766|D00D    |809775;
     REP #$20                                                   ;809768|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;80976A|AD9601  |000196;
     AND.W #$0004                                               ;80976D|290400  |      ;
-    BEQ .label3                                                ;809770|F003    |809775;
-    JMP.W .label8                                              ;809772|4CA898  |8098A8;
+    BEQ .checkOverlayDisabled                                                ;809770|F003    |809775;
+    JMP.W .loadAreaData                                              ;809772|4CA898  |8098A8;
  
  
-.label3:
+.checkOverlayDisabled:
     REP #$20                                                   ;809775|C220    |      ;
     %CheckFlag(daily2, $0002)
-    BEQ .label4                                                ;80977E|F003    |809783;
-    JMP.W .label8                                              ;809780|4CA898  |8098A8;
+    BEQ .selectOverlay                                                ;80977E|F003    |809783;
+    JMP.W .loadAreaData                                              ;809780|4CA898  |8098A8;
  
  
-.label4:
+.selectOverlay:
     REP #$20                                                   ;809783|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;809785|AD9601  |000196;
     AND.W #$0002                                               ;809788|290200  |      ;
-    BEQ .label5                                                ;80978B|F079    |809806;
+    BEQ .checkOverlay58                                                ;80978B|F079    |809806;
     SEP #$20                                                   ;80978D|E220    |      ;
     LDA.B #$57                                                 ;80978F|A957    |      ;
     STA.B strcMap.loadAreaId                                   ;809791|8522    |000022;
@@ -351,33 +351,33 @@ fMap_SetupArea:
     LDX.B #$03                                                 ;8097FB|A203    |      ;
     LDY.B #$00                                                 ;8097FD|A000    |      ;
     JSL.L fCore_Store0x72To0x42AtIndex                         ;8097FF|22488E80|808E48;
-    JMP.W .label8                                              ;809803|4CA898  |8098A8;
+    JMP.W .loadAreaData                                              ;809803|4CA898  |8098A8;
  
  
-.label5:
+.checkOverlay58:
     REP #$20                                                   ;809806|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;809808|AD9601  |000196;
     AND.W #$0004                                               ;80980B|290400  |      ;
-    BEQ .label7                                                ;80980E|F018    |809828;
+    BEQ .checkOverlay59                                                ;80980E|F018    |809828;
     SEP #$20                                                   ;809810|E220    |      ;
     LDA.L nCurrentTimeID                                       ;809812|AF1C1F7F|7F1F1C;
     CMP.B #$11                                                 ;809816|C911    |      ;
-    BCC .label6                                                ;809818|9003    |80981D;
-    JMP.W .label8                                              ;80981A|4CA898  |8098A8;
+    BCC .loadOverlay58                                                ;809818|9003    |80981D;
+    JMP.W .loadAreaData                                              ;80981A|4CA898  |8098A8;
  
  
-.label6:
+.loadOverlay58:
     LDA.B #$58                                                 ;80981D|A958    |      ;
     STA.B strcMap.loadAreaId                                   ;80981F|8522    |000022;
     JSL.L fTileMap_MapChangeHandler                            ;809821|22C6A780|80A7C6;
-    JMP.W .label8                                              ;809825|4CA898  |8098A8;
+    JMP.W .loadAreaData                                              ;809825|4CA898  |8098A8;
  
  
-.label7:
+.checkOverlay59:
     REP #$20                                                   ;809828|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;80982A|AD9601  |000196;
     AND.W #$0008                                               ;80982D|290800  |      ;
-    BEQ .label8                                                ;809830|F076    |8098A8;
+    BEQ .loadAreaData                                                ;809830|F076    |8098A8;
     SEP #$20                                                   ;809832|E220    |      ;
     LDA.B #$59                                                 ;809834|A959    |      ;
     STA.B strcMap.loadAreaId                                   ;809836|8522    |000022;
@@ -431,7 +431,7 @@ fMap_SetupArea:
     LDY.B #$00                                                 ;8098A2|A000    |      ;
     JSL.L fCore_Store0x72To0x42AtIndex                         ;8098A4|22488E80|808E48;
  
-.label8:
+.loadAreaData:
     JSL.L fDialog_LoadDialogBoxGraphics                               ;8098A8|22BB9283|8392BB;
     SEP #$20                                                   ;8098AC|E220    |      ;
     PLA                                                        ;8098AE|68      |      ;
@@ -468,12 +468,12 @@ fMap_SetupArea:
     SEP #$20                                                   ;809902|E220    |      ;
     LDA.B strcMap.loadAreaId                                   ;809904|A522    |000022;
     CMP.B #$26                                                 ;809906|C926    |      ;
-    BNE .label9                                                ;809908|D008    |809912;
+    BNE .clearTransitionState                                                ;809908|D008    |809912;
     REP #$20                                                   ;80990A|C220    |      ;
     LDA.W #$0100                                               ;80990C|A90001  |      ;
     STA.W strcBGScrool.BG2VerOffs                              ;80990F|8D4201  |000142;
  
-.label9:
+.clearTransitionState:
     SEP #$20                                                   ;809912|E220    |      ;
     STZ.W strcPlayerData.unkCounter91C                         ;809914|9C1C09  |00091C;
     REP #$20                                                   ;809917|C220    |      ;
@@ -495,15 +495,15 @@ fMap_SetupArea:
     %UnsetPlayerFlag(!PFLAGS_AISTEERING)
     SEP #$20                                                   ;809960|E220    |      ;
     LDA.W strcPlayerData.carryItemId                           ;809962|AD1D09  |00091D;
-    BEQ .label11                                               ;809965|F055    |8099BC;
+    BEQ .clearCarriedItem                                               ;809965|F055    |8099BC;
     CMP.B #!EITEM_PAINT                                                 
-    BEQ .label10                                               ;809969|F046    |8099B1;
+    BEQ .dropHeldTool                                               ;809969|F046    |8099B1;
     CMP.B #!EITEM_MILKER                                                 
-    BEQ .label10                                               ;80996D|F042    |8099B1;
+    BEQ .dropHeldTool                                               ;80996D|F042    |8099B1;
     CMP.B #!EITEM_BRUSH                                                 
-    BEQ .label10                                               ;809971|F03E    |8099B1;
+    BEQ .dropHeldTool                                               ;809971|F03E    |8099B1;
     CMP.B #$57                                                 ;809973|C957    |      ;
-    BEQ .label10                                               ;809975|F03A    |8099B1;
+    BEQ .dropHeldTool                                               ;809975|F03A    |8099B1;
     STA.W nCarriedItemId                                       ;809977|8D8409  |000984;
     REP #$20                                                   ;80997A|C220    |      ;
     LDY.W #$0001                                               ;80997C|A00100  |      ;
@@ -525,30 +525,30 @@ fMap_SetupArea:
     CLC                                                        ;8099A9|18      |      ;
     ADC.B strcPlayer.direction                                 ;8099AA|65DA    |0000DA;
     STA.W strcObjectData.spriteIdx                             ;8099AC|8D0109  |000901;
-    BRA .label12                                               ;8099AF|801C    |8099CD;
+    BRA .initPlayerSprite                                               ;8099AF|801C    |8099CD;
  
  
-.label10:
+.dropHeldTool:
     REP #$30                                                   ;8099B1|C230    |      ;
     LDA.W #$0000                                               ;8099B3|A90000  |      ;
     CLC                                                        ;8099B6|18      |      ;
     ADC.B strcPlayer.direction                                 ;8099B7|65DA    |0000DA;
     STA.W strcObjectData.spriteIdx                             ;8099B9|8D0109  |000901;
  
-.label11:
+.clearCarriedItem:
     SEP #$20                                                   ;8099BC|E220    |      ;
     STZ.W strcPlayerData.carryItemId                           ;8099BE|9C1D09  |00091D;
     %UnsetPlayerFlag(!PFLAGS_HOLDINGITEM)
  
-.label12:
+.initPlayerSprite:
     JSL.L fPlayer_InitSpriteObject                                      ;8099CD|22A0CF81|81CFA0;
     JSL.L fPlayer_UpdateHandler                      ;8099D1|22B7BF81|81BFB7;
     REP #$30                                                   ;8099D5|C230    |      ;
     %CheckFlag(daily3, $0002)
-    BNE .label13                                               ;8099DE|D004    |8099E4;
+    BNE .afterChickens                                               ;8099DE|D004    |8099E4;
     JSL.L fGameEngine_SpawnChickensOnMap                     ;8099E0|2296C283|83C296;
  
-.label13:
+.afterChickens:
     %SetPlayerAction(!PACTION_NONE)
     JSL.L fAudio_FadeOutOnTrackChangeFast                                 ;8099EB|221F8483|83841F;
     JSL.L fAudio_LoadPendingTrack                                 ;8099EF|22A48383|8383A4;
@@ -596,46 +596,46 @@ fMapChangeHandler_809A64:
     REP #$30                                                   ;809A64|C230    |      ;
     LDA.W $0878                                                ;809A66|AD7808  |000878;
     CMP.W #$00C0                                               ;809A69|C9C000  |      ;
-    BCS .label1                                                ;809A6C|B003    |809A71;
+    BCS .checkFirstTileRange                                                ;809A6C|B003    |809A71;
     JMP.W .return                                              ;809A6E|4C0A9D  |809D0A;
  
  
-.label1:
+.checkFirstTileRange:
     CMP.W #$00D0                                               ;809A71|C9D000  |      ;
-    BCC .label2                                                ;809A74|9003    |809A79;
+    BCC .checkSecondTile                                                ;809A74|9003    |809A79;
     JMP.W .caseD0                                              ;809A76|4C0B9D  |809D0B;
  
  
-.label2:
+.checkSecondTile:
     LDA.W $087A                                                ;809A79|AD7A08  |00087A;
     CMP.W #$00C0                                               ;809A7C|C9C000  |      ;
-    BCS .label3                                                ;809A7F|B003    |809A84;
+    BCS .checkSecondTileRange                                                ;809A7F|B003    |809A84;
     JMP.W .return                                              ;809A81|4C0A9D  |809D0A;
  
  
-.label3:
+.checkSecondTileRange:
     CMP.W #$00D0                                               ;809A84|C9D000  |      ;
-    BCC .label4                                                ;809A87|9003    |809A8C;
+    BCC .checkRidingHorse                                                ;809A87|9003    |809A8C;
     JMP.W .caseD0                                              ;809A89|4C0B9D  |809D0B;
  
  
-.label4:
+.checkRidingHorse:
     %CheckPlayerFlags(!PFLAGS_RIDINGHORSE)
-    BEQ .label5                                                ;809A93|F003    |809A98;
+    BEQ .checkDaily4Block                                                ;809A93|F003    |809A98;
     JMP.W .return                                              ;809A95|4C0A9D  |809D0A;
  
  
-.label5:
+.checkDaily4Block:
     REP #$20                                                   ;809A98|C220    |      ;
     %CheckFlag(daily4, $0006)
-    BEQ .label6                                                ;809AA1|F003    |809AA6;
+    BEQ .checkEvent5Block                                                ;809AA1|F003    |809AA6;
     JMP.W .return                                              ;809AA3|4C0A9D  |809D0A;
  
  
-.label6:
+.checkEvent5Block:
     REP #$20                                                   ;809AA6|C220    |      ;
     %CheckFlag(event5, $0001)
-    BEQ .label7                                                ;809AAF|F022    |809AD3;
+    BEQ .beginTransition                                                ;809AAF|F022    |809AD3;
     REP #$20                                                   ;809AB1|C220    |      ;
     LDA.W $0878                                                ;809AB3|AD7808  |000878;
     ASL A                                                      ;809AB6|0A      |      ;
@@ -653,27 +653,27 @@ fMapChangeHandler_809A64:
     SEP #$20                                                   ;809AC6|E220    |      ;
     LDA.L aScreenTransitionTable,X                             ;809AC8|BFF5B680|80B6F5;
     CMP.B #$1C                                                 ;809ACC|C91C    |      ;
-    BNE .label7                                                ;809ACE|D003    |809AD3;
+    BNE .beginTransition                                                ;809ACE|D003    |809AD3;
     JMP.W .return                                              ;809AD0|4C0A9D  |809D0A;
  
  
-.label7:
+.beginTransition:
     %SetPlayerAction(!PACTION_NONE)
     %SetPlayerFlag(!PFLAGS_INTRANSITION)
     SEP #$20                                                   ;809AE3|E220    |      ;
     LDA.W $098A+!RAM_SHIFT                                 ;809AE5|AD8A09  |00098A;
     CMP.B #$01                                                 ;809AE8|C901    |      ;
-    BNE .label8                                                ;809AEA|D003    |809AEF;
-    JMP.W .label24                                             ;809AEC|4C5D9C  |809C5D;
+    BNE .checkPhaseTwo                                                ;809AEA|D003    |809AEF;
+    JMP.W .checkScriptActive                                             ;809AEC|4C5D9C  |809C5D;
  
  
-.label8:
+.checkPhaseTwo:
     CMP.B #$02                                                 ;809AEF|C902    |      ;
-    BCC .label9                                                ;809AF1|9003    |809AF6;
-    JMP.W .label25                                             ;809AF3|4C679C  |809C67;
+    BCC .advancePhase                                                ;809AF1|9003    |809AF6;
+    JMP.W .walkIntoTransition                                             ;809AF3|4C679C  |809C67;
  
  
-.label9:
+.advancePhase:
     INC A                                                      ;809AF6|1A      |      ;
     STA.W $098A+!RAM_SHIFT                                 ;809AF7|8D8A09  |00098A;
     REP #$20                                                   ;809AFA|C220    |      ;
@@ -701,136 +701,136 @@ fMapChangeHandler_809A64:
     INX                                                        ;809B22|E8      |      ;
     LDA.L aScreenTransitionTable,X                             ;809B23|BFF5B680|80B6F5;
     AND.B #$01                                                 ;809B27|2901    |      ;
-    BEQ .label10                                               ;809B29|F00B    |809B36;
+    BEQ .checkSpecialDayArea                                               ;809B29|F00B    |809B36;
     LDA.W nDestinationAreaId                                   ;809B2B|AD8B09  |00098B;
     CLC                                                        ;809B2E|18      |      ;
     ADC.L nCurrentSeasonID                                     ;809B2F|6F191F7F|7F1F19;
     STA.W nDestinationAreaId                                   ;809B33|8D8B09  |00098B;
  
-.label10:
+.checkSpecialDayArea:
     SEP #$20                                                   ;809B36|E220    |      ;
     LDA.L aScreenTransitionTable,X                             ;809B38|BFF5B680|80B6F5;
     AND.B #$40                                                 ;809B3C|2940    |      ;
-    BEQ .label13                                               ;809B3E|F03D    |809B7D;
+    BEQ .checkEggFestivalArea                                               ;809B3E|F03D    |809B7D;
     LDA.L nCurrentDay                                          ;809B40|AF1B1F7F|7F1F1B;
     CMP.B #$01                                                 ;809B44|C901    |      ;
-    BEQ .label11                                               ;809B46|F017    |809B5F;
+    BEQ .springDay1Area                                               ;809B46|F017    |809B5F;
     CMP.B #$18                                                 ;809B48|C918    |      ;
-    BEQ .label12                                               ;809B4A|F022    |809B6E;
+    BEQ .winterDay24Area                                               ;809B4A|F022    |809B6E;
     CMP.B #$0A                                                 ;809B4C|C90A    |      ;
-    BCC .label13                                               ;809B4E|902D    |809B7D;
+    BCC .checkEggFestivalArea                                               ;809B4E|902D    |809B7D;
     CMP.B #$0D                                                 ;809B50|C90D    |      ;
-    BCS .label13                                               ;809B52|B029    |809B7D;
+    BCS .checkEggFestivalArea                                               ;809B52|B029    |809B7D;
     LDA.W nDestinationAreaId                                   ;809B54|AD8B09  |00098B;
     CLC                                                        ;809B57|18      |      ;
     ADC.B #$04                                                 ;809B58|6904    |      ;
     STA.W nDestinationAreaId                                   ;809B5A|8D8B09  |00098B;
-    BRA .label13                                               ;809B5D|801E    |809B7D;
+    BRA .checkEggFestivalArea                                               ;809B5D|801E    |809B7D;
  
  
-.label11:
+.springDay1Area:
     SEP #$20                                                   ;809B5F|E220    |      ;
     LDA.L nCurrentSeasonID                                     ;809B61|AF191F7F|7F1F19;
-    BNE .label13                                               ;809B65|D016    |809B7D;
+    BNE .checkEggFestivalArea                                               ;809B65|D016    |809B7D;
     LDA.B #$3A                                                 ;809B67|A93A    |      ;
     STA.W nDestinationAreaId                                   ;809B69|8D8B09  |00098B;
-    BRA .label13                                               ;809B6C|800F    |809B7D;
+    BRA .checkEggFestivalArea                                               ;809B6C|800F    |809B7D;
  
  
-.label12:
+.winterDay24Area:
     SEP #$20                                                   ;809B6E|E220    |      ;
     LDA.L nCurrentSeasonID                                     ;809B70|AF191F7F|7F1F19;
     CMP.B #!SEASON_WINTER                                                 
-    BNE .label13                                               ;809B76|D005    |809B7D;
+    BNE .checkEggFestivalArea                                               ;809B76|D005    |809B7D;
     LDA.B #!AREA_NY_MOUNTAINTOP                                                 
     STA.W nDestinationAreaId                                   ;809B7A|8D8B09  |00098B;
  
-.label13:
+.checkEggFestivalArea:
     SEP #$20                                                   ;809B7D|E220    |      ;
     LDA.B strcMap.loadAreaId                                   ;809B7F|A522    |000022;
     CMP.B #!AREA_EGGFESTIVAL                                                 
-    BNE .label14                                               ;809B83|D003    |809B88;
-    JMP.W .label21                                             ;809B85|4C149C  |809C14;
+    BNE .checkClosedEvening                                               ;809B83|D003    |809B88;
+    JMP.W .cancelTransition                                             ;809B85|4C149C  |809C14;
  
  
-.label14:
+.checkClosedEvening:
     LDA.L aScreenTransitionTable,X                             ;809B88|BFF5B680|80B6F5;
     AND.B #$02                                                 ;809B8C|2902    |      ;
-    BEQ .label15                                               ;809B8E|F00A    |809B9A;
+    BEQ .checkClosedDaytime                                               ;809B8E|F00A    |809B9A;
     LDA.L nCurrentTimeID                                       ;809B90|AF1C1F7F|7F1F1C;
     CMP.B #$11                                                 ;809B94|C911    |      ;
-    BCC .label15                                               ;809B96|9002    |809B9A;
-    BRA .label21                                               ;809B98|807A    |809C14;
+    BCC .checkClosedDaytime                                               ;809B96|9002    |809B9A;
+    BRA .cancelTransition                                               ;809B98|807A    |809C14;
  
  
-.label15:
+.checkClosedDaytime:
     SEP #$20                                                   ;809B9A|E220    |      ;
     LDA.L aScreenTransitionTable,X                             ;809B9C|BFF5B680|80B6F5;
     AND.B #$04                                                 ;809BA0|2904    |      ;
-    BEQ .label16                                               ;809BA2|F00A    |809BAE;
+    BEQ .checkWeekendOnly                                               ;809BA2|F00A    |809BAE;
     LDA.L nCurrentTimeID                                       ;809BA4|AF1C1F7F|7F1F1C;
     CMP.B #$11                                                 ;809BA8|C911    |      ;
-    BCS .label16                                               ;809BAA|B002    |809BAE;
-    BRA .label21                                               ;809BAC|8066    |809C14;
+    BCS .checkWeekendOnly                                               ;809BAA|B002    |809BAE;
+    BRA .cancelTransition                                               ;809BAC|8066    |809C14;
  
  
-.label16:
+.checkWeekendOnly:
     SEP #$20                                                   ;809BAE|E220    |      ;
     LDA.L aScreenTransitionTable,X                             ;809BB0|BFF5B680|80B6F5;
     AND.B #$08                                                 ;809BB4|2908    |      ;
-    BEQ .label17                                               ;809BB6|F00C    |809BC4;
+    BEQ .checkSaturdayClosed                                               ;809BB6|F00C    |809BC4;
     LDA.L nCurrentWeekdayID                                    ;809BB8|AF1A1F7F|7F1F1A;
-    BEQ .label17                                               ;809BBC|F006    |809BC4;
+    BEQ .checkSaturdayClosed                                               ;809BBC|F006    |809BC4;
     CMP.B #!DAY_SATURDAY                                                 
-    BEQ .label17                                               ;809BC0|F002    |809BC4;
-    BRA .label21                                               ;809BC2|8050    |809C14;
+    BEQ .checkSaturdayClosed                                               ;809BC0|F002    |809BC4;
+    BRA .cancelTransition                                               ;809BC2|8050    |809C14;
  
  
-.label17:
+.checkSaturdayClosed:
     SEP #$20                                                   ;809BC4|E220    |      ;
     LDA.L aScreenTransitionTable,X                             ;809BC6|BFF5B680|80B6F5;
     AND.B #$10                                                 ;809BCA|2910    |      ;
-    BEQ .label19                                               ;809BCC|F01E    |809BEC;
+    BEQ .checkClosedSunday                                               ;809BCC|F01E    |809BEC;
     LDA.L nCurrentSeasonID                                     ;809BCE|AF191F7F|7F1F19;
     CMP.B #!SEASON_WINTER                                                 
-    BNE .label18                                               ;809BD4|D00A    |809BE0;
+    BNE .checkSaturday                                               ;809BD4|D00A    |809BE0;
     LDA.L nCurrentDay                                          ;809BD6|AF1B1F7F|7F1F1B;
     CMP.B #$0A                                                 ;809BDA|C90A    |      ;
-    BNE .label18                                               ;809BDC|D002    |809BE0;
-    BRA .label21                                               ;809BDE|8034    |809C14;
+    BNE .checkSaturday                                               ;809BDC|D002    |809BE0;
+    BRA .cancelTransition                                               ;809BDE|8034    |809C14;
  
  
-.label18:
+.checkSaturday:
     SEP #$20                                                   ;809BE0|E220    |      ;
     LDA.L nCurrentWeekdayID                                    ;809BE2|AF1A1F7F|7F1F1A;
     CMP.B #!DAY_SATURDAY                                                 
-    BNE .label19                                               ;809BE8|D002    |809BEC;
-    BRA .label21                                               ;809BEA|8028    |809C14;
+    BNE .checkClosedSunday                                               ;809BE8|D002    |809BEC;
+    BRA .cancelTransition                                               ;809BEA|8028    |809C14;
  
  
-.label19:
+.checkClosedSunday:
     SEP #$20                                                   ;809BEC|E220    |      ;
     LDA.L aScreenTransitionTable,X                             ;809BEE|BFF5B680|80B6F5;
     AND.B #$20                                                 ;809BF2|2920    |      ;
-    BEQ .label20                                               ;809BF4|F008    |809BFE;
+    BEQ .checkFestivalClosed                                               ;809BF4|F008    |809BFE;
     LDA.L nCurrentWeekdayID                                    ;809BF6|AF1A1F7F|7F1F1A;
-    BNE .label20                                               ;809BFA|D002    |809BFE;
-    BRA .label21                                               ;809BFC|8016    |809C14;
+    BNE .checkFestivalClosed                                               ;809BFA|D002    |809BFE;
+    BRA .cancelTransition                                               ;809BFC|8016    |809C14;
  
  
-.label20:
+.checkFestivalClosed:
     SEP #$20                                                   ;809BFE|E220    |      ;
     LDA.L aScreenTransitionTable,X                             ;809C00|BFF5B680|80B6F5;
     AND.B #$80                                                 ;809C04|2980    |      ;
-    BEQ .label22                                               ;809C06|F028    |809C30;
+    BEQ .commitTransition                                               ;809C06|F028    |809C30;
     REP #$20                                                   ;809C08|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;809C0A|AD9601  |000196;
     AND.W #$0010                                               ;809C0D|291000  |      ;
-    BEQ .label22                                               ;809C10|F01E    |809C30;
-    BRA .label21                                               ;809C12|8000    |809C14;
+    BEQ .commitTransition                                               ;809C10|F01E    |809C30;
+    BRA .cancelTransition                                               ;809C12|8000    |809C14;
  
  
-.label21:
+.cancelTransition:
     %UnsetPlayerFlag(!PFLAGS_INTRANSITION)
     REP #$20                                                   ;809C20|C220    |      ;
     STZ.W $0878                                                ;809C22|9C7808  |000878;
@@ -840,7 +840,7 @@ fMapChangeHandler_809A64:
     JMP.W .return                                              ;809C2D|4C0A9D  |809D0A;
  
  
-.label22:
+.commitTransition:
     SEP #$20                                                   ;809C30|E220    |      ;
     STZ.W nTimeState                                           ;809C32|9C7309  |000973;
     INX                                                        ;809C35|E8      |      ;
@@ -856,23 +856,23 @@ fMapChangeHandler_809A64:
     XBA                                                        ;809C4C|EB      |      ;
     LDA.B strcVariables.n8Temp1                                ;809C4D|A592    |000092;
     CMP.B #$00                                                 ;809C4F|C900    |      ;
-    BNE .label23                                               ;809C51|D003    |809C56;
+    BNE .startTileScript                                               ;809C51|D003    |809C56;
     JMP.W .return                                              ;809C53|4C0A9D  |809D0A;
  
  
-.label23:
+.startTileScript:
     JSL.L fTileScript_Start                                ;809C56|22E1A581|81A5E1;
     JMP.W .return                                              ;809C5A|4C0A9D  |809D0A;
  
  
-.label24:
+.checkScriptActive:
     REP #$20                                                   ;809C5D|C220    |      ;
     LDA.W ptrUnknown0xCF                                       ;809C5F|ADCF00  |0000CF;
-    BEQ .label25                                               ;809C62|F003    |809C67;
+    BEQ .walkIntoTransition                                               ;809C62|F003    |809C67;
     JMP.W .return                                              ;809C64|4C0A9D  |809D0A;
  
  
-.label25:
+.walkIntoTransition:
     SEP #$20                                                   ;809C67|E220    |      ;
     LDA.W $098A+!RAM_SHIFT                                 ;809C69|AD8A09  |00098A;
     CMP.B #$0D                                                 ;809C6C|C90D    |      ;
@@ -956,131 +956,131 @@ fMapChangeHandler_809A64:
     SEP #$20                                                   ;809D18|E220    |      ;
     LDA.B strcMap.loadAreaId                                   ;809D1A|A522    |000022;
     CMP.B #!AREA_WOODSSPRING                                                 
-    BCS .label34                                               ;809D1E|B003    |809D23;
+    BCS .checkAreaBeforeSpa                                               ;809D1E|B003    |809D23;
     JMP.W .return2                                             ;809D20|4CBB9E  |809EBB;
  
  
-.label34:
+.checkAreaBeforeSpa:
     CMP.B #!AREA_NY_SPA                                                 
-    BCC .label35                                               ;809D25|9003    |809D2A;
+    BCC .checkMapFlagsMask                                               ;809D25|9003    |809D2A;
     JMP.W .return2                                             ;809D27|4CBB9E  |809EBB;
  
  
-.label35:
+.checkMapFlagsMask:
     REP #$30                                                   ;809D2A|C230    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;809D2C|AD9601  |000196;
     AND.W #$001A                                               ;809D2F|291A00  |      ;
-    BEQ .label36                                               ;809D32|F003    |809D37;
+    BEQ .checkFirstTileF9                                               ;809D32|F003    |809D37;
     JMP.W .return2                                             ;809D34|4CBB9E  |809EBB;
  
  
-.label36:
+.checkFirstTileF9:
     LDA.W $0878                                                ;809D37|AD7808  |000878;
     CMP.W #$00F9                                               ;809D3A|C9F900  |      ;
-    BNE .label37                                               ;809D3D|D003    |809D42;
+    BNE .checkSecondTileF9                                               ;809D3D|D003    |809D42;
     JMP.W .caseF9                                              ;809D3F|4CFD9D  |809DFD;
  
  
-.label37:
+.checkSecondTileF9:
     LDA.W $087A                                                ;809D42|AD7A08  |00087A;
     CMP.W #$00F9                                               ;809D45|C9F900  |      ;
-    BNE .label38                                               ;809D48|D003    |809D4D;
+    BNE .checkFirstTileFA                                               ;809D48|D003    |809D4D;
     JMP.W .caseF9                                              ;809D4A|4CFD9D  |809DFD;
  
  
-.label38:
+.checkFirstTileFA:
     LDA.W $0878                                                ;809D4D|AD7808  |000878;
     CMP.W #$00FA                                               ;809D50|C9FA00  |      ;
-    BNE .label39                                               ;809D53|D003    |809D58;
+    BNE .checkSecondTileFA                                               ;809D53|D003    |809D58;
     JMP.W .caseFA                                              ;809D55|4C3F9E  |809E3F;
  
  
-.label39:
+.checkSecondTileFA:
     LDA.W $087A                                                ;809D58|AD7A08  |00087A;
     CMP.W #$00FA                                               ;809D5B|C9FA00  |      ;
-    BNE .label40                                               ;809D5E|D003    |809D63;
+    BNE .checkFirstTileFB                                               ;809D5E|D003    |809D63;
     JMP.W .caseFA                                              ;809D60|4C3F9E  |809E3F;
  
  
-.label40:
+.checkFirstTileFB:
     LDA.W $0878                                                ;809D63|AD7808  |000878;
     CMP.W #$00FB                                               ;809D66|C9FB00  |      ;
-    BNE .label41                                               ;809D69|D003    |809D6E;
+    BNE .checkSecondTileFB                                               ;809D69|D003    |809D6E;
     JMP.W .case7B                                              ;809D6B|4C7D9E  |809E7D;
  
  
-.label41:
+.checkSecondTileFB:
     LDA.W $087A                                                ;809D6E|AD7A08  |00087A;
     CMP.W #$00FB                                               ;809D71|C9FB00  |      ;
-    BNE .label42                                               ;809D74|D003    |809D79;
+    BNE .checkDaily1Flag                                               ;809D74|D003    |809D79;
     JMP.W .case7B                                              ;809D76|4C7D9E  |809E7D;
  
  
-.label42:
+.checkDaily1Flag:
     REP #$20                                                   ;809D79|C220    |      ;
     %CheckFlag(daily1, $0200)
-    BNE .label43                                               ;809D82|D003    |809D87;
+    BNE .checkHolding                                               ;809D82|D003    |809D87;
     JMP.W .return2                                             ;809D84|4CBB9E  |809EBB;
  
  
-.label43:
+.checkHolding:
     %CheckPlayerFlags(!PFLAGS_HOLDINGITEM)
-    BEQ .label44                                               ;809D8E|F003    |809D93;
+    BEQ .checkRiding                                               ;809D8E|F003    |809D93;
     JMP.W .return2                                             ;809D90|4CBB9E  |809EBB;
  
  
-.label44:
+.checkRiding:
     %CheckPlayerFlags(!PFLAGS_RIDINGHORSE)
-    BEQ .label45                                               ;809D9A|F003    |809D9F;
+    BEQ .checkDogHug                                               ;809D9A|F003    |809D9F;
     JMP.W .return2                                             ;809D9C|4CBB9E  |809EBB;
  
  
-.label45:
+.checkDogHug:
     %CheckPlayerFlags(!PFLAGS_DOGHUGGING)
-    BEQ .label46                                               ;809DA6|F003    |809DAB;
+    BEQ .checkFirstTileF8                                               ;809DA6|F003    |809DAB;
     JMP.W .return2                                             ;809DA8|4CBB9E  |809EBB;
  
  
-.label46:
+.checkFirstTileF8:
     REP #$20                                                   ;809DAB|C220    |      ;
     LDA.W $0878                                                ;809DAD|AD7808  |000878;
     CMP.W #$00F8                                               ;809DB0|C9F800  |      ;
-    BEQ .label47                                               ;809DB3|F003    |809DB8;
+    BEQ .checkSecondTileF8                                               ;809DB3|F003    |809DB8;
     JMP.W .return2                                             ;809DB5|4CBB9E  |809EBB;
  
  
-.label47:
+.checkSecondTileF8:
     LDA.W $087A                                                ;809DB8|AD7A08  |00087A;
     CMP.W #$00F8                                               ;809DBB|C9F800  |      ;
-    BEQ .label48                                               ;809DBE|F003    |809DC3;
+    BEQ .checkActionTen                                               ;809DBE|F003    |809DC3;
     JMP.W .return2                                             ;809DC0|4CBB9E  |809EBB;
  
  
-.label48:
+.checkActionTen:
     %CheckPlayerAction(!PACTION_10)
-    BNE .label49                                               ;809DCA|D003    |809DCF;
+    BNE .checkActionFishing                                               ;809DCA|D003    |809DCF;
     JMP.W .return2                                             ;809DCC|4CBB9E  |809EBB;
  
  
-.label49:
+.checkActionFishing:
     %CheckPlayerAction(!PACTION_FISHING)
-    BNE .label50                                               ;809DD6|D003    |809DDB;
+    BNE .checkActionFishingBite                                               ;809DD6|D003    |809DDB;
     JMP.W .return2                                             ;809DD8|4CBB9E  |809EBB;
  
  
-.label50:
+.checkActionFishingBite:
     %CheckPlayerAction(!PACTION_FISHINGBITE)
-    BNE .label51                                               ;809DE2|D003    |809DE7;
+    BNE .checkActionReeling                                               ;809DE2|D003    |809DE7;
     JMP.W .return2                                             ;809DE4|4CBB9E  |809EBB;
  
  
-.label51:
+.checkActionReeling:
     %CheckPlayerAction(!PACTION_REELING)
-    BNE .label52                                               ;809DEE|D003    |809DF3;
+    BNE .setAction0F                                               ;809DEE|D003    |809DF3;
     JMP.W .return2                                             ;809DF0|4CBB9E  |809EBB;
  
  
-.label52:
+.setAction0F:
     %SetPlayerAction(!PACTION_0F)
     JMP.W .return2                                             ;809DFA|4CBB9E  |809EBB;
  
@@ -1089,25 +1089,25 @@ fMapChangeHandler_809A64:
     SEP #$20                                                   ;809DFD|E220    |      ;
     REP #$10                                                   ;809DFF|C210    |      ;
     LDA.L nCurrentSeasonID                                     ;809E01|AF191F7F|7F1F19;
-    BEQ .label54                                               ;809E05|F003    |809E0A;
+    BEQ .rollChanceF9                                               ;809E05|F003    |809E0A;
     JMP.W .return2                                             ;809E07|4CBB9E  |809EBB;
  
  
-.label54:
+.rollChanceF9:
     LDA.B #$10                                                 ;809E0A|A910    |      ;
     JSL.L fCore_GetRandomNumber                                ;809E0C|22F98980|8089F9;
-    BEQ .label55                                               ;809E10|F003    |809E15;
+    BEQ .checkDoneFlagF9                                               ;809E10|F003    |809E15;
     JMP.W .return2                                             ;809E12|4CBB9E  |809EBB;
  
  
-.label55:
+.checkDoneFlagF9:
     REP #$20                                                   ;809E15|C220    |      ;
     %CheckFlag(daily2, $2000)
-    BEQ .label56                                               ;809E1E|F003    |809E23;
+    BEQ .triggerEventF9                                               ;809E1E|F003    |809E23;
     JMP.W .return2                                             ;809E20|4CBB9E  |809EBB;
  
  
-.label56:
+.triggerEventF9:
     %SetFlag(daily2, $2000)
     REP #$30                                                   ;809E2E|C230    |      ;
     %AIExecute($0011, $002C, $0000)
@@ -1122,11 +1122,11 @@ fMapChangeHandler_809A64:
     BNE .return2                                               ;809E49|D070    |809EBB;
     LDA.B #$10                                                 ;809E4B|A910    |      ;
     JSL.L fCore_GetRandomNumber                                ;809E4D|22F98980|8089F9;
-    BEQ .label58                                               ;809E51|F003    |809E56;
+    BEQ .checkDoneFlagFA                                               ;809E51|F003    |809E56;
     JMP.W .return2                                             ;809E53|4CBB9E  |809EBB;
  
  
-.label58:
+.checkDoneFlagFA:
     REP #$20                                                   ;809E56|C220    |      ;
     %CheckFlag(daily2, $4000)
     BNE .return2                                               ;809E5F|D05A    |809EBB;
@@ -1144,11 +1144,11 @@ fMapChangeHandler_809A64:
     BNE .return2                                               ;809E87|D032    |809EBB;
     LDA.B #$10                                                 ;809E89|A910    |      ;
     JSL.L fCore_GetRandomNumber                                ;809E8B|22F98980|8089F9;
-    BEQ .label60                                               ;809E8F|F003    |809E94;
+    BEQ .checkDoneFlag7B                                               ;809E8F|F003    |809E94;
     JMP.W .return2                                             ;809E91|4CBB9E  |809EBB;
  
  
-.label60:
+.checkDoneFlag7B:
     REP #$20                                                   ;809E94|C220    |      ;
     %CheckFlag(daily2, $8000)
     BNE .return2                                               ;809E9D|D01C    |809EBB;
@@ -1168,11 +1168,11 @@ fCamera_UpdateFromPlayerPos:
     SEC                                                        ;809EC0|38      |      ;
     SBC.W #$0080                                               ;809EC1|E98000  |      ;
     CMP.B strcPlayer.offsetCamX                                ;809EC4|C5ED    |0000ED;
-    BMI .label1                                                ;809EC6|3004    |809ECC;
-    BEQ .label1                                                ;809EC8|F002    |809ECC;
-    BCS .label2                                                ;809ECA|B01A    |809EE6;
+    BMI .pinCameraXMin                                                ;809EC6|3004    |809ECC;
+    BEQ .pinCameraXMin                                                ;809EC8|F002    |809ECC;
+    BCS .checkCameraXMax                                                ;809ECA|B01A    |809EE6;
  
-.label1:
+.pinCameraXMin:
     REP #$20                                                   ;809ECC|C220    |      ;
     CLC                                                        ;809ECE|18      |      ;
     ADC.W #$0080                                               ;809ECF|698000  |      ;
@@ -1185,20 +1185,20 @@ fCamera_UpdateFromPlayerPos:
     REP #$20                                                   ;809EDE|C220    |      ;
     LDA.B strcPlayer.offsetCamX                                ;809EE0|A5ED    |0000ED;
     STA.B strcCamera.cameraX                                   ;809EE2|85F5    |0000F5;
-    BRA .label4                                                ;809EE4|8028    |809F0E;
+    BRA .updateCameraY                                                ;809EE4|8028    |809F0E;
  
  
-.label2:
+.checkCameraXMax:
     REP #$20                                                   ;809EE6|C220    |      ;
     CMP.B strcCamera.offsetCamX                                ;809EE8|C5F1    |0000F1;
-    BCS .label3                                                ;809EEA|B00A    |809EF6;
+    BCS .pinCameraXMax                                                ;809EEA|B00A    |809EF6;
     STA.B strcCamera.cameraX                                   ;809EEC|85F5    |0000F5;
     LDA.W #$0080                                               ;809EEE|A98000  |      ;
     STA.W strcObjectData.camX                                  ;809EF1|8D0B09  |00090B;
-    BRA .label4                                                ;809EF4|8018    |809F0E;
+    BRA .updateCameraY                                                ;809EF4|8018    |809F0E;
  
  
-.label3:
+.pinCameraXMax:
     REP #$20                                                   ;809EF6|C220    |      ;
     CLC                                                        ;809EF8|18      |      ;
     ADC.W #$0080                                               ;809EF9|698000  |      ;
@@ -1212,17 +1212,17 @@ fCamera_UpdateFromPlayerPos:
     LDA.B strcCamera.offsetCamX                                ;809F0A|A5F1    |0000F1;
     STA.B strcCamera.cameraX                                   ;809F0C|85F5    |0000F5;
  
-.label4:
+.updateCameraY:
     REP #$20                                                   ;809F0E|C220    |      ;
     LDA.B strcPlayer.posY                                      ;809F10|A5D8    |0000D8;
     SEC                                                        ;809F12|38      |      ;
     SBC.W #$0080                                               ;809F13|E98000  |      ;
     CMP.B strcPlayer.offsetCamY                                ;809F16|C5EF    |0000EF;
-    BMI .label5                                                ;809F18|3004    |809F1E;
-    BEQ .label5                                                ;809F1A|F002    |809F1E;
-    BCS .label6                                                ;809F1C|B01A    |809F38;
+    BMI .pinCameraYMin                                                ;809F18|3004    |809F1E;
+    BEQ .pinCameraYMin                                                ;809F1A|F002    |809F1E;
+    BCS .checkCameraYMax                                                ;809F1C|B01A    |809F38;
  
-.label5:
+.pinCameraYMin:
     REP #$20                                                   ;809F1E|C220    |      ;
     CLC                                                        ;809F20|18      |      ;
     ADC.W #$0080                                               ;809F21|698000  |      ;
@@ -1238,17 +1238,17 @@ fCamera_UpdateFromPlayerPos:
     BRA .return                                                ;809F36|8028    |809F60;
  
  
-.label6:
+.checkCameraYMax:
     REP #$20                                                   ;809F38|C220    |      ;
     CMP.B strcCamera.offsetCamY                                ;809F3A|C5F3    |0000F3;
-    BCS .label7                                                ;809F3C|B00A    |809F48;
+    BCS .pinCameraYMax                                                ;809F3C|B00A    |809F48;
     STA.B strcCamera.cameraY                                   ;809F3E|85F7    |0000F7;
     LDA.W #$0080                                               ;809F40|A98000  |      ;
     STA.W strcObjectData.camY                                  ;809F43|8D0D09  |00090D;
     BRA .return                                                ;809F46|8018    |809F60;
  
  
-.label7:
+.pinCameraYMax:
     REP #$20                                                   ;809F48|C220    |      ;
     CLC                                                        ;809F4A|18      |      ;
     ADC.W #$0080                                               ;809F4B|698000  |      ;
@@ -1271,27 +1271,27 @@ fCamera_UpdateBG2Scroll:
     REP #$10                                                   ;809F63|C210    |      ;
     LDA.B strcMap.loadAreaId                                   ;809F65|A522    |000022;
     CMP.B #!AREA_SHED                                                 
-    BNE .label1                                                ;809F69|D003    |809F6E;
+    BNE .checkAreaRange                                                ;809F69|D003    |809F6E;
     JMP.W .return                                              ;809F6B|4CAAA0  |80A0AA;
  
  
-.label1:
+.checkAreaRange:
     CMP.B #$31                                                 ;809F6E|C931    |      ;
-    BCC .label6                                                ;809F70|9041    |809FB3;
+    BCC .checkMapFlag2                                                ;809F70|9041    |809FB3;
     REP #$20                                                   ;809F72|C220    |      ;
     LDA.B strcCamera.cameraY                                   ;809F74|A5F7    |0000F7;
     CMP.B strcPlayer.offsetCamY                                ;809F76|C5EF    |0000EF;
-    BNE .label2                                                ;809F78|D003    |809F7D;
+    BNE .checkCameraMaxY                                                ;809F78|D003    |809F7D;
     JMP.W .return                                              ;809F7A|4CAAA0  |80A0AA;
  
  
-.label2:
+.checkCameraMaxY:
     CMP.B strcCamera.offsetCamY                                ;809F7D|C5F3    |0000F3;
-    BNE .label3                                                ;809F7F|D003    |809F84;
+    BNE .copyCameraX                                                ;809F7F|D003    |809F84;
     JMP.W .return                                              ;809F81|4CAAA0  |80A0AA;
  
  
-.label3:
+.copyCameraX:
     LDA.B strcCamera.cameraX                                   ;809F84|A5F5    |0000F5;
     STA.W strcBGScrool.BG2HorOffs                              ;809F86|8D4001  |000140;
     LDA.B strcMap.unk1E                                        ;809F89|A51E    |00001E;
@@ -1300,19 +1300,19 @@ fCamera_UpdateBG2Scroll:
     REP #$30                                                   ;809F8E|C230    |      ;
     LDA.B strcPlayer.direction                                 ;809F90|A5DA    |0000DA;
     CMP.W #!PDIR_LEFT                                               
-    BNE .label4                                                ;809F95|D003    |809F9A;
+    BNE .checkDirectionRight                                                ;809F95|D003    |809F9A;
     JMP.W .return                                              ;809F97|4CAAA0  |80A0AA;
  
  
-.label4:
+.checkDirectionRight:
     REP #$30                                                   ;809F9A|C230    |      ;
     LDA.B strcPlayer.direction                                 ;809F9C|A5DA    |0000DA;
     CMP.W #!PDIR_RIGHT                                               
-    BNE .label5                                                ;809FA1|D003    |809FA6;
+    BNE .setVerticalParallax                                                ;809FA1|D003    |809FA6;
     JMP.W .return                                              ;809FA3|4CAAA0  |80A0AA;
  
  
-.label5:
+.setVerticalParallax:
     LDA.B strcCamera.cameraY                                   ;809FA6|A5F7    |0000F7;
     LSR A                                                      ;809FA8|4A      |      ;
     CLC                                                        ;809FA9|18      |      ;
@@ -1321,11 +1321,11 @@ fCamera_UpdateBG2Scroll:
     JMP.W .return                                              ;809FB0|4CAAA0  |80A0AA;
  
  
-.label6:
+.checkMapFlag2:
     REP #$30                                                   ;809FB3|C230    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;809FB5|AD9601  |000196;
     AND.W #$0002                                               ;809FB8|290200  |      ;
-    BEQ .label7                                                ;809FBB|F00D    |809FCA;
+    BEQ .checkMapFlag4                                                ;809FBB|F00D    |809FCA;
     LDA.B strcCamera.cameraX                                   ;809FBD|A5F5    |0000F5;
     STA.W strcBGScrool.BG2HorOffs                              ;809FBF|8D4001  |000140;
     LDA.B strcCamera.cameraY                                   ;809FC2|A5F7    |0000F7;
@@ -1333,39 +1333,39 @@ fCamera_UpdateBG2Scroll:
     JMP.W .return                                              ;809FC7|4CAAA0  |80A0AA;
  
  
-.label7:
+.checkMapFlag4:
     REP #$30                                                   ;809FCA|C230    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;809FCC|AD9601  |000196;
     AND.W #$0004                                               ;809FCF|290400  |      ;
-    BNE .label8                                                ;809FD2|D003    |809FD7;
-    JMP.W .label15                                             ;809FD4|4C96A0  |80A096;
+    BNE .parallaxByDirection                                                ;809FD2|D003    |809FD7;
+    JMP.W .checkMapFlag8                                             ;809FD4|4C96A0  |80A096;
  
  
-.label8:
+.parallaxByDirection:
     REP #$30                                                   ;809FD7|C230    |      ;
     LDA.B strcPlayer.direction                                 ;809FD9|A5DA    |0000DA;
     CMP.W #!PDIR_DOWN                                               
-    BNE .label9                                                ;809FDE|D003    |809FE3;
+    BNE .checkDirectionUp                                                ;809FDE|D003    |809FE3;
     JMP.W .and0000                                             ;809FE0|4C33A0  |80A033;
  
  
-.label9:
+.checkDirectionUp:
     REP #$30                                                   ;809FE3|C230    |      ;
     LDA.B strcPlayer.direction                                 ;809FE5|A5DA    |0000DA;
     CMP.W #!PDIR_UP                                               
-    BNE .label10                                               ;809FEA|D003    |809FEF;
+    BNE .checkDirectionLeft                                               ;809FEA|D003    |809FEF;
     JMP.W .and0001                                             ;809FEC|4C4AA0  |80A04A;
  
  
-.label10:
+.checkDirectionLeft:
     REP #$30                                                   ;809FEF|C230    |      ;
     LDA.B strcPlayer.direction                                 ;809FF1|A5DA    |0000DA;
     CMP.W #!PDIR_LEFT                                               
-    BNE .label11                                               ;809FF6|D003    |809FFB;
+    BNE .checkDirectionRightDrift                                               ;809FF6|D003    |809FFB;
     JMP.W .and0002                                             ;809FF8|4C61A0  |80A061;
  
  
-.label11:
+.checkDirectionRightDrift:
     REP #$30                                                   ;809FFB|C230    |      ;
     LDA.B strcPlayer.direction                                 ;809FFD|A5DA    |0000DA;
     CMP.W #!PDIR_RIGHT                                               
@@ -1379,11 +1379,11 @@ fCamera_UpdateBG2Scroll:
     INC A                                                      ;80A00C|1A      |      ;
     STA.W strcPlayerData.unkCounter91C                         ;80A00D|8D1C09  |00091C;
     CMP.B #$0A                                                 ;80A010|C90A    |      ;
-    BEQ .label12                                               ;80A012|F003    |80A017;
+    BEQ .applyDiagonalDrift                                               ;80A012|F003    |80A017;
     JMP.W .return                                              ;80A014|4CAAA0  |80A0AA;
  
  
-.label12:
+.applyDiagonalDrift:
     STZ.W strcPlayerData.unkCounter91C                         ;80A017|9C1C09  |00091C;
     REP #$20                                                   ;80A01A|C220    |      ;
     LDA.W strcBGScrool.BG2HorOffs                              ;80A01C|AD4001  |000140;
@@ -1443,17 +1443,17 @@ fCamera_UpdateBG2Scroll:
     REP #$30                                                   ;80A078|C230    |      ;
     LDA.B strcCamera.cameraX                                   ;80A07A|A5F5    |0000F5;
     CMP.B strcPlayer.offsetCamX                                ;80A07C|C5ED    |0000ED;
-    BNE .label13                                               ;80A07E|D003    |80A083;
+    BNE .checkCameraMaxX                                               ;80A07E|D003    |80A083;
     JMP.W .back                                                ;80A080|4C07A0  |80A007;
  
  
-.label13:
+.checkCameraMaxX:
     CMP.B strcCamera.offsetCamX                                ;80A083|C5F1    |0000F1;
-    BNE .label14                                               ;80A085|D003    |80A08A;
+    BNE .scrollBG2Left                                               ;80A085|D003    |80A08A;
     JMP.W .back                                                ;80A087|4C07A0  |80A007;
  
  
-.label14:
+.scrollBG2Left:
     LDA.W strcBGScrool.BG2HorOffs                              ;80A08A|AD4001  |000140;
     SEC                                                        ;80A08D|38      |      ;
     SBC.B strcMap.unk1E                                        ;80A08E|E51E    |00001E;
@@ -1461,7 +1461,7 @@ fCamera_UpdateBG2Scroll:
     JMP.W .back                                                ;80A093|4C07A0  |80A007;
  
  
-.label15:
+.checkMapFlag8:
     REP #$30                                                   ;80A096|C230    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;80A098|AD9601  |000196;
     AND.W #$0008                                               ;80A09B|290800  |      ;
@@ -1484,10 +1484,10 @@ fCamera_ScrollDownStep:
     CMP.B strcCamera.offsetCamY                                ;80A0B6|C5F3    |0000F3;
     BEQ .return                                                ;80A0B8|F026    |80A0E0;
     CMP.B strcMap.unk1E                                        ;80A0BA|C51E    |00001E;
-    BCS .label1                                                ;80A0BC|B002    |80A0C0;
+    BCS .checkStreamFlag                                                ;80A0BC|B002    |80A0C0;
     STA.B strcMap.unk1E                                        ;80A0BE|851E    |00001E;
  
-.label1:
+.checkStreamFlag:
     REP #$20                                                   ;80A0C0|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;80A0C2|AD9601  |000196;
     AND.W #$0001                                               ;80A0C5|290100  |      ;
@@ -1520,10 +1520,10 @@ fCamera_ScrollUpStep:
     SEC                                                        ;80A0F2|38      |      ;
     SBC.B strcCamera.cameraY                                   ;80A0F3|E5F7    |0000F7;
     CMP.B strcMap.unk1E                                        ;80A0F5|C51E    |00001E;
-    BCS .label1                                                ;80A0F7|B002    |80A0FB;
+    BCS .checkStreamFlag                                                ;80A0F7|B002    |80A0FB;
     STA.B strcMap.unk1E                                        ;80A0F9|851E    |00001E;
  
-.label1:
+.checkStreamFlag:
     REP #$20                                                   ;80A0FB|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;80A0FD|AD9601  |000196;
     AND.W #$0001                                               ;80A100|290100  |      ;
@@ -1553,10 +1553,10 @@ fCamera_ScrollRightStep:
     CMP.B strcCamera.offsetCamX                                ;80A127|C5F1    |0000F1;
     BEQ .return                                                ;80A129|F026    |80A151;
     CMP.B strcMap.unk1E                                        ;80A12B|C51E    |00001E;
-    BCS .label1                                                ;80A12D|B002    |80A131;
+    BCS .checkStreamFlag                                                ;80A12D|B002    |80A131;
     STA.B strcMap.unk1E                                        ;80A12F|851E    |00001E;
  
-.label1:
+.checkStreamFlag:
     REP #$20                                                   ;80A131|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;80A133|AD9601  |000196;
     AND.W #$0001                                               ;80A136|290100  |      ;
@@ -1589,10 +1589,10 @@ fCamera_ScrollLeftStep:
     SEC                                                        ;80A163|38      |      ;
     SBC.B strcCamera.cameraX                                   ;80A164|E5F5    |0000F5;
     CMP.B strcMap.unk1E                                        ;80A166|C51E    |00001E;
-    BCS .label1                                                ;80A168|B002    |80A16C;
+    BCS .checkStreamFlag                                                ;80A168|B002    |80A16C;
     STA.B strcMap.unk1E                                        ;80A16A|851E    |00001E;
  
-.label1:
+.checkStreamFlag:
     REP #$20                                                   ;80A16C|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;80A16E|AD9601  |000196;
     AND.W #$0001                                               ;80A171|290100  |      ;
@@ -1722,28 +1722,28 @@ fMap_StreamRowDown:
     REP #$20                                                   ;80A23B|C220    |      ;
     LDX.W #$0000                                               ;80A23D|A20000  |      ;
  
-.label1:
+.copyLoop:
     PHX                                                        ;80A240|DA      |      ;
     LDA.B strcVariables.n16Temp2                               ;80A241|A580    |000080;
     CMP.W #$0040                                               ;80A243|C94000  |      ;
-    BNE .label2                                                ;80A246|D00A    |80A252;
+    BNE .checkSecondWrap                                                ;80A246|D00A    |80A252;
     STZ.B strcVariables.n16Temp2                               ;80A248|6480    |000080;
     LDA.B strcVariables.n16Temp1                               ;80A24A|A57E    |00007E;
     CLC                                                        ;80A24C|18      |      ;
     ADC.W #$0040                                               ;80A24D|694000  |      ;
     STA.B strcVariables.n16Temp1                               ;80A250|857E    |00007E;
  
-.label2:
+.checkSecondWrap:
     LDA.B strcVariables.n16Temp4                               ;80A252|A584    |000084;
     CMP.W #$0040                                               ;80A254|C94000  |      ;
-    BNE .label3                                                ;80A257|D00A    |80A263;
+    BNE .copyEntry                                                ;80A257|D00A    |80A263;
     STZ.B strcVariables.n16Temp4                               ;80A259|6484    |000084;
     LDA.B strcVariables.n16Temp3                               ;80A25B|A582    |000082;
     CLC                                                        ;80A25D|18      |      ;
     ADC.W #$0040                                               ;80A25E|694000  |      ;
     STA.B strcVariables.n16Temp3                               ;80A261|8582    |000082;
  
-.label3:
+.copyEntry:
     LDY.B strcVariables.n16Temp1                               ;80A263|A47E    |00007E;
     LDX.B strcVariables.n16Temp2                               ;80A265|A680    |000080;
     LDA.B [ptrTemp0x72],Y                                      ;80A267|B772    |000072;
@@ -1764,7 +1764,7 @@ fMap_StreamRowDown:
     INX                                                        ;80A286|E8      |      ;
     INX                                                        ;80A287|E8      |      ;
     CPX.W #$0040                                               ;80A288|E04000  |      ;
-    BNE .label1                                                ;80A28B|D0B3    |80A240;
+    BNE .copyLoop                                                ;80A28B|D0B3    |80A240;
     SEP #$20                                                   ;80A28D|E220    |      ;
     LDA.B #$00                                                 ;80A28F|A900    |      ;
     STA.B strcSystem.arrayIndex                                ;80A291|8527    |000027;
@@ -1813,12 +1813,12 @@ fMap_StreamRowDown:
     CLC                                                        ;80A2EF|18      |      ;
     ADC.W #$0020                                               ;80A2F0|692000  |      ;
     CMP.W #$0400                                               ;80A2F3|C90004  |      ;
-    BNE .label4                                                ;80A2F6|D005    |80A2FD;
+    BNE .checkRingEnd                                                ;80A2F6|D005    |80A2FD;
     LDA.W #$0800                                               ;80A2F8|A90008  |      ;
     BRA .return                                                ;80A2FB|8008    |80A305;
  
  
-.label4:
+.checkRingEnd:
     CMP.W #$0C00                                               ;80A2FD|C9000C  |      ;
     BNE .return                                                ;80A300|D003    |80A305;
     LDA.W #$0000                                               ;80A302|A90000  |      ;
@@ -1936,28 +1936,28 @@ fMap_StreamRowUp:
     REP #$20                                                   ;80A3B4|C220    |      ;
     LDX.W #$0000                                               ;80A3B6|A20000  |      ;
  
-.label1:
+.copyLoop:
     PHX                                                        ;80A3B9|DA      |      ;
     LDA.B strcVariables.n16Temp2                               ;80A3BA|A580    |000080;
     CMP.W #$0040                                               ;80A3BC|C94000  |      ;
-    BNE .label2                                                ;80A3BF|D00A    |80A3CB;
+    BNE .checkSecondWrap                                                ;80A3BF|D00A    |80A3CB;
     STZ.B strcVariables.n16Temp2                               ;80A3C1|6480    |000080;
     LDA.B strcVariables.n16Temp1                               ;80A3C3|A57E    |00007E;
     CLC                                                        ;80A3C5|18      |      ;
     ADC.W #$0040                                               ;80A3C6|694000  |      ;
     STA.B strcVariables.n16Temp1                               ;80A3C9|857E    |00007E;
  
-.label2:
+.checkSecondWrap:
     LDA.B strcVariables.n16Temp4                               ;80A3CB|A584    |000084;
     CMP.W #$0040                                               ;80A3CD|C94000  |      ;
-    BNE .label3                                                ;80A3D0|D00A    |80A3DC;
+    BNE .copyEntry                                                ;80A3D0|D00A    |80A3DC;
     STZ.B strcVariables.n16Temp4                               ;80A3D2|6484    |000084;
     LDA.B strcVariables.n16Temp3                               ;80A3D4|A582    |000082;
     CLC                                                        ;80A3D6|18      |      ;
     ADC.W #$0040                                               ;80A3D7|694000  |      ;
     STA.B strcVariables.n16Temp3                               ;80A3DA|8582    |000082;
  
-.label3:
+.copyEntry:
     LDY.B strcVariables.n16Temp1                               ;80A3DC|A47E    |00007E;
     LDX.B strcVariables.n16Temp2                               ;80A3DE|A680    |000080;
     LDA.B [ptrTemp0x72],Y                                      ;80A3E0|B772    |000072;
@@ -1978,7 +1978,7 @@ fMap_StreamRowUp:
     INX                                                        ;80A3FF|E8      |      ;
     INX                                                        ;80A400|E8      |      ;
     CPX.W #$0040                                               ;80A401|E04000  |      ;
-    BNE .label1                                                ;80A404|D0B3    |80A3B9;
+    BNE .copyLoop                                                ;80A404|D0B3    |80A3B9;
     SEP #$20                                                   ;80A406|E220    |      ;
     LDA.B #$00                                                 ;80A408|A900    |      ;
     STA.B strcSystem.arrayIndex                                ;80A40A|8527    |000027;
@@ -2027,12 +2027,12 @@ fMap_StreamRowUp:
     SEC                                                        ;80A468|38      |      ;
     SBC.W #$0020                                               ;80A469|E92000  |      ;
     CMP.W #$FFE0                                               ;80A46C|C9E0FF  |      ;
-    BNE .label4                                                ;80A46F|D005    |80A476;
+    BNE .checkRingEnd                                                ;80A46F|D005    |80A476;
     LDA.W #$0BE0                                               ;80A471|A9E00B  |      ;
     BRA .return                                                ;80A474|8008    |80A47E;
  
  
-.label4:
+.checkRingEnd:
     CMP.W #$07E0                                               ;80A476|C9E007  |      ;
     BNE .return                                                ;80A479|D003    |80A47E;
     LDA.W #$03E0                                               ;80A47B|A9E003  |      ;
@@ -2159,28 +2159,28 @@ fMap_StreamColumnRight:
     REP #$20                                                   ;80A541|C220    |      ;
     LDX.W #$0000                                               ;80A543|A20000  |      ;
  
-.label1:
+.copyLoop:
     PHX                                                        ;80A546|DA      |      ;
     LDA.B strcVariables.n16Temp2                               ;80A547|A580    |000080;
     CMP.W #$0040                                               ;80A549|C94000  |      ;
-    BNE .label2                                                ;80A54C|D00A    |80A558;
+    BNE .checkSecondWrap                                                ;80A54C|D00A    |80A558;
     STZ.B strcVariables.n16Temp2                               ;80A54E|6480    |000080;
     LDA.B strcVariables.n16Temp1                               ;80A550|A57E    |00007E;
     CLC                                                        ;80A552|18      |      ;
     ADC.W #$2000                                               ;80A553|690020  |      ;
     STA.B strcVariables.n16Temp1                               ;80A556|857E    |00007E;
  
-.label2:
+.checkSecondWrap:
     LDA.B strcVariables.n16Temp4                               ;80A558|A584    |000084;
     CMP.W #$0040                                               ;80A55A|C94000  |      ;
-    BNE .label3                                                ;80A55D|D00A    |80A569;
+    BNE .copyEntry                                                ;80A55D|D00A    |80A569;
     STZ.B strcVariables.n16Temp4                               ;80A55F|6484    |000084;
     LDA.B strcVariables.n16Temp3                               ;80A561|A582    |000082;
     CLC                                                        ;80A563|18      |      ;
     ADC.W #$2000                                               ;80A564|690020  |      ;
     STA.B strcVariables.n16Temp3                               ;80A567|8582    |000082;
  
-.label3:
+.copyEntry:
     LDY.B strcVariables.n16Temp1                               ;80A569|A47E    |00007E;
     LDX.B strcVariables.n16Temp2                               ;80A56B|A680    |000080;
     LDA.B [ptrTemp0x72],Y                                      ;80A56D|B772    |000072;
@@ -2205,7 +2205,7 @@ fMap_StreamColumnRight:
     INX                                                        ;80A594|E8      |      ;
     INX                                                        ;80A595|E8      |      ;
     CPX.W #$0040                                               ;80A596|E04000  |      ;
-    BNE .label1                                                ;80A599|D0AB    |80A546;
+    BNE .copyLoop                                                ;80A599|D0AB    |80A546;
     SEP #$20                                                   ;80A59B|E220    |      ;
     LDA.B #$00                                                 ;80A59D|A900    |      ;
     STA.B strcSystem.arrayIndex                                ;80A59F|8527    |000027;
@@ -2254,12 +2254,12 @@ fMap_StreamColumnRight:
     CLC                                                        ;80A5FE|18      |      ;
     ADC.W #$0001                                               ;80A5FF|690100  |      ;
     CMP.W #$0020                                               ;80A602|C92000  |      ;
-    BNE .label4                                                ;80A605|D005    |80A60C;
+    BNE .checkRingEnd                                                ;80A605|D005    |80A60C;
     LDA.W #$0400                                               ;80A607|A90004  |      ;
     BRA .return                                                ;80A60A|8008    |80A614;
  
  
-.label4:
+.checkRingEnd:
     CMP.W #$0420                                               ;80A60C|C92004  |      ;
     BNE .return                                                ;80A60F|D003    |80A614;
     LDA.W #$0000                                               ;80A611|A90000  |      ;
@@ -2388,28 +2388,28 @@ fMap_StreamColumnLeft:
     REP #$20                                                   ;80A6D8|C220    |      ;
     LDX.W #$0000                                               ;80A6DA|A20000  |      ;
  
-.label1:
+.copyLoop:
     PHX                                                        ;80A6DD|DA      |      ;
     LDA.B strcVariables.n16Temp2                               ;80A6DE|A580    |000080;
     CMP.W #$0040                                               ;80A6E0|C94000  |      ;
-    BNE .label2                                                ;80A6E3|D00A    |80A6EF;
+    BNE .checkSecondWrap                                                ;80A6E3|D00A    |80A6EF;
     STZ.B strcVariables.n16Temp2                               ;80A6E5|6480    |000080;
     LDA.B strcVariables.n16Temp1                               ;80A6E7|A57E    |00007E;
     CLC                                                        ;80A6E9|18      |      ;
     ADC.W #$2000                                               ;80A6EA|690020  |      ;
     STA.B strcVariables.n16Temp1                               ;80A6ED|857E    |00007E;
  
-.label2:
+.checkSecondWrap:
     LDA.B strcVariables.n16Temp4                               ;80A6EF|A584    |000084;
     CMP.W #$0040                                               ;80A6F1|C94000  |      ;
-    BNE .label3                                                ;80A6F4|D00A    |80A700;
+    BNE .copyEntry                                                ;80A6F4|D00A    |80A700;
     STZ.B strcVariables.n16Temp4                               ;80A6F6|6484    |000084;
     LDA.B strcVariables.n16Temp3                               ;80A6F8|A582    |000082;
     CLC                                                        ;80A6FA|18      |      ;
     ADC.W #$2000                                               ;80A6FB|690020  |      ;
     STA.B strcVariables.n16Temp3                               ;80A6FE|8582    |000082;
  
-.label3:
+.copyEntry:
     LDY.B strcVariables.n16Temp1                               ;80A700|A47E    |00007E;
     LDX.B strcVariables.n16Temp2                               ;80A702|A680    |000080;
     LDA.B [ptrTemp0x72],Y                                      ;80A704|B772    |000072;
@@ -2434,7 +2434,7 @@ fMap_StreamColumnLeft:
     INX                                                        ;80A72B|E8      |      ;
     INX                                                        ;80A72C|E8      |      ;
     CPX.W #$0040                                               ;80A72D|E04000  |      ;
-    BNE .label1                                                ;80A730|D0AB    |80A6DD;
+    BNE .copyLoop                                                ;80A730|D0AB    |80A6DD;
     SEP #$20                                                   ;80A732|E220    |      ;
     LDA.B #$00                                                 ;80A734|A900    |      ;
     STA.B strcSystem.arrayIndex                                ;80A736|8527    |000027;
@@ -2483,12 +2483,12 @@ fMap_StreamColumnLeft:
     SEC                                                        ;80A795|38      |      ;
     SBC.W #$0001                                               ;80A796|E90100  |      ;
     CMP.W #$FFFF                                               ;80A799|C9FFFF  |      ;
-    BNE .label4                                                ;80A79C|D005    |80A7A3;
+    BNE .checkRingEnd                                                ;80A79C|D005    |80A7A3;
     LDA.W #$041F                                               ;80A79E|A91F04  |      ;
     BRA .return                                                ;80A7A1|8008    |80A7AB;
  
  
-.label4:
+.checkRingEnd:
     CMP.W #$03FF                                               ;80A7A3|C9FF03  |      ;
     BNE .return                                                ;80A7A6|D003    |80A7AB;
     LDA.W #$001F                                               ;80A7A8|A91F00  |      ;

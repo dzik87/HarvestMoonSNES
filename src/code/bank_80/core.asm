@@ -772,15 +772,15 @@ fCore_ReadJoypad:
     STA.W strcJoypad2.lastFrame                                ;808740|8D3201  |000132;
     SEP #$20                                                   ;808743|E220    |      ;
     LDA.B $00                                                  ;808745|A500    |000000;
-    BEQ .label1                                                ;808747|F00E    |808757;
+    BEQ .mergeStoredInput                                                ;808747|F00E    |808757;
     LDA.W SNES_JOY1L                                           ;808749|AD1842  |004218;
     STA.W strcJoypad1.unused0A                                 ;80874C|8D2E01  |00012E;
     LDA.W SNES_JOY2L                                           ;80874F|AD1A42  |00421A;
     STA.W strcJoypad2.current                                  ;808752|8D3001  |000130;
-    BRA .label2                                                ;808755|801A    |808771;
+    BRA .computeEdges                                                ;808755|801A    |808771;
  
  
-.label1:
+.mergeStoredInput:
     REP #$20                                                   ;808757|C220    |      ;
     LDA.W SNES_JOY1L                                           ;808759|AD1842  |004218;
     ORA.W strcJoypad1.unused0A                                 ;80875C|0D2E01  |00012E;
@@ -791,7 +791,7 @@ fCore_ReadJoypad:
     STZ.W strcJoypad1.unused0A                                 ;80876B|9C2E01  |00012E;
     STZ.W strcJoypad2.unused0A                                 ;80876E|9C3A01  |00013A;
  
-.label2:
+.computeEdges:
     REP #$20                                                   ;808771|C220    |      ;
     LDA.W SNES_JOY1L                                           ;808773|AD1842  |004218;
     EOR.W strcJoypad1.lastFrame                                ;808776|4D2601  |000126;
@@ -812,23 +812,23 @@ fCore_ReadJoypad:
     AND.W strcJoypad2.lastFrame                                ;8087A3|2D3201  |000132;
     STA.W strcJoypad2.newUnpressed                             ;8087A6|8D3601  |000136;
     LDA.W strcJoypad1.current                                  ;8087A9|AD2401  |000124;
-    BEQ .label3                                                ;8087AC|F004    |8087B2;
+    BEQ .clearHoldCounter                                                ;8087AC|F004    |8087B2;
     INC.B strcSystem.unk23                                     ;8087AE|E623    |000023;
-    BRA .label4                                                ;8087B0|8002    |8087B4;
+    BRA .checkRepeatDelay                                                ;8087B0|8002    |8087B4;
  
  
-.label3:
+.clearHoldCounter:
     STZ.B strcSystem.unk23                                     ;8087B2|6423    |000023;
  
-.label4:
+.checkRepeatDelay:
     SEP #$20                                                   ;8087B4|E220    |      ;
     LDA.B strcSystem.unk23                                     ;8087B6|A523    |000023;
     CMP.B #$1E                                                 ;8087B8|C91E    |      ;
-    BEQ .label5                                                ;8087BA|F002    |8087BE;
+    BEQ .startAutorepeat                                                ;8087BA|F002    |8087BE;
     BRA .return                                                ;8087BC|800E    |8087CC;
  
  
-.label5:
+.startAutorepeat:
     REP #$20                                                   ;8087BE|C220    |      ;
     LDA.W strcJoypad1.current                                  ;8087C0|AD2401  |000124;
     STA.W strcJoypad1.autorepeat                               ;8087C3|8D2C01  |00012C;
@@ -1167,16 +1167,16 @@ fCore_PrepareTransfer:
     SEP #$20                                                   ;808A5C|E220    |      ;
     LDA.B strcSystem.destinationRegister                       ;808A5E|A529    |000029;
     CMP.B #$18                                                 ;808A60|C918    |      ;
-    BNE .label1                                                ;808A62|D007    |808A6B;
+    BNE .dmaModeSingleReg                                                ;808A62|D007    |808A6B;
     LDA.B #$01                                                 ;808A64|A901    |      ;
     STA.W SNES_DMAP0,X                                         ;808A66|9D0043  |004300;
-    BRA .label2                                                ;808A69|8003    |808A6E;
+    BRA .setDmaRegisters                                                ;808A69|8003    |808A6E;
  
  
-.label1:
+.dmaModeSingleReg:
     STZ.W SNES_DMAP0,X                                         ;808A6B|9E0043  |004300;
  
-.label2:
+.setDmaRegisters:
     LDA.B strcSystem.destinationRegister                       ;808A6E|A529    |000029;
     STA.W SNES_BBAD0,X                                         ;808A70|9D0143  |004301;
     REP #$20                                                   ;808A73|C220    |      ;
@@ -1228,7 +1228,7 @@ fCore_StartPreparedTransfer:
     TAX                                                        ;808ABB|AA      |      ;
     LDA.W SNES_BBAD0,X                                         ;808ABC|BD0143  |004301;
     CMP.B #$18                                                 ;808ABF|C918    |      ;
-    BNE .label1                                                ;808AC1|D012    |808AD5;
+    BNE .setCgramAddress                                                ;808AC1|D012    |808AD5;
     PLX                                                        ;808AC3|FA      |      ;
     LDA.B strcSystem.array2A,X                                 ;808AC4|B52A    |00002A;
     STA.W SNES_VMAIN                                           ;808AC6|8D1521  |002115;
@@ -1238,10 +1238,10 @@ fCore_StartPreparedTransfer:
     TAX                                                        ;808ACD|AA      |      ;
     LDA.B strcSystem.array32,X                                 ;808ACE|B532    |000032;
     STA.W SNES_VMADDL                                          ;808AD0|8D1621  |002116;
-    BRA .label2                                                ;808AD3|8009    |808ADE;
+    BRA .fireDma                                                ;808AD3|8009    |808ADE;
  
  
-.label1:
+.setCgramAddress:
     PLX                                                        ;808AD5|FA      |      ;
     TXA                                                        ;808AD6|8A      |      ;
     ASL A                                                      ;808AD7|0A      |      ;
@@ -1249,7 +1249,7 @@ fCore_StartPreparedTransfer:
     LDA.B strcSystem.array32,X                                 ;808AD9|B532    |000032;
     STA.W SNES_CGADD                                           ;808ADB|8D2121  |002121;
  
-.label2:
+.fireDma:
     SEP #$20                                                   ;808ADE|E220    |      ;
     TXA                                                        ;808AE0|8A      |      ;
     LSR A                                                      ;808AE1|4A      |      ;
@@ -1277,7 +1277,7 @@ fCore_StartTransfer:
     TAX                                                        ;808B02|AA      |      ;
     LDA.W SNES_BBAD0,X                                         ;808B03|BD0143  |004301;
     CMP.B #$18                                                 ;808B06|C918    |      ;
-    BNE .label2                                                ;808B08|D012    |808B1C;
+    BNE .setCgramAddress                                                ;808B08|D012    |808B1C;
     PLX                                                        ;808B0A|FA      |      ;
     LDA.B strcSystem.array2A,X                                 ;808B0B|B52A    |00002A;
     STA.W SNES_VMAIN                                           ;808B0D|8D1521  |002115;
@@ -1287,10 +1287,10 @@ fCore_StartTransfer:
     TAX                                                        ;808B14|AA      |      ;
     LDA.B strcSystem.array32,X                                 ;808B15|B532    |000032;
     STA.W SNES_VMADDL                                          ;808B17|8D1621  |002116;
-    BRA .label3                                                ;808B1A|8009    |808B25;
+    BRA .fireDma                                                ;808B1A|8009    |808B25;
  
  
-.label2:
+.setCgramAddress:
     PLX                                                        ;808B1C|FA      |      ;
     TXA                                                        ;808B1D|8A      |      ;
     ASL A                                                      ;808B1E|0A      |      ;
@@ -1298,7 +1298,7 @@ fCore_StartTransfer:
     LDA.B strcSystem.array32,X                                 ;808B20|B532    |000032;
     STA.W SNES_CGADD                                           ;808B22|8D2121  |002121;
  
-.label3:
+.fireDma:
     SEP #$20                                                   ;808B25|E220    |      ;
     TXA                                                        ;808B27|8A      |      ;
     LSR A                                                      ;808B28|4A      |      ;
@@ -1533,10 +1533,10 @@ fPalette_ProcessColorAnimSlots:
     REP #$20                                                   ;808E74|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;808E76|AD9601  |000196;
     AND.W #$000A                                               ;808E79|290A00  |      ;
-    BNE .label1                                                ;808E7C|D003    |808E81;
+    BNE .slotLoop                                                ;808E7C|D003    |808E81;
     LDY.W #$0004                                               ;808E7E|A00400  |      ;
  
-.label1:
+.slotLoop:
     REP #$20                                                   ;808E81|C220    |      ;
     TYA                                                        ;808E83|98      |      ;
     STA.B strcVariables.n16Temp1                               ;808E84|857E    |00007E;
@@ -1545,16 +1545,16 @@ fPalette_ProcessColorAnimSlots:
     ADC.B strcVariables.n16Temp1                               ;808E88|657E    |00007E;
     TAX                                                        ;808E8A|AA      |      ;
     LDA.B ptrPaletteAnimScripts,X                                     ;808E8B|B542    |000042;
-    BNE .label2                                                ;808E8D|D00E    |808E9D;
+    BNE .slotActive                                                ;808E8D|D00E    |808E9D;
     SEP #$20                                                   ;808E8F|E220    |      ;
     LDA.B ptrPaletteAnimScripts+2,X                                   ;808E91|B544    |000044;
-    BNE .label2                                                ;808E93|D008    |808E9D;
+    BNE .slotActive                                                ;808E93|D008    |808E9D;
     CPY.W #$0004                                               ;808E95|C00400  |      ;
-    BCC .label6                                                ;808E98|907F    |808F19;
-    JMP.W .label7                                              ;808E9A|4C2C8F  |808F2C;
+    BCC .nextSlot                                                ;808E98|907F    |808F19;
+    JMP.W .uploadPalette                                              ;808E9A|4C2C8F  |808F2C;
  
  
-.label2:
+.slotActive:
     SEP #$20                                                   ;808E9D|E220    |      ;
     LDA.B #$01                                                 ;808E9F|A901    |      ;
     STA.B strcVariables.n8Temp2                                ;808EA1|8593    |000093;
@@ -1583,11 +1583,11 @@ fPalette_ProcessColorAnimSlots:
     TYX                                                        ;808EC5|BB      |      ;
     SEP #$20                                                   ;808EC6|E220    |      ;
     LDA.W strcPalette.animTimer,X                                 ;808EC8|BD4A01  |00014A;
-    BEQ .label5                                                ;808ECB|F003    |808ED0;
-    JMP.W .label8                                              ;808ECD|4C528F  |808F52;
+    BEQ .timerExpired                                                ;808ECB|F003    |808ED0;
+    JMP.W .decrementTimer                                              ;808ECD|4C528F  |808F52;
  
  
-.label5:
+.timerExpired:
     PHY                                                        ;808ED0|5A      |      ;
     TYX                                                        ;808ED1|BB      |      ;
     LDA.B #$00                                                 ;808ED2|A900    |      ;
@@ -1631,7 +1631,7 @@ fPalette_ProcessColorAnimSlots:
     ADC.B #$00                                                 ;808F15|6900    |      ;
     STA.B ptrPaletteAnimScripts+2,X                                   ;808F17|9544    |000044;
  
-.label6:
+.nextSlot:
     REP #$20                                                   ;808F19|C220    |      ;
     TYA                                                        ;808F1B|98      |      ;
     STA.B strcVariables.n16Temp1                               ;808F1C|857E    |00007E;
@@ -1641,11 +1641,11 @@ fPalette_ProcessColorAnimSlots:
     TAX                                                        ;808F22|AA      |      ;
     INY                                                        ;808F23|C8      |      ;
     CPY.W #$0010                                               ;808F24|C01000  |      ;
-    BEQ .label7                                                ;808F27|F003    |808F2C;
-    JMP.W .label1                                              ;808F29|4C818E  |808E81;
+    BEQ .uploadPalette                                                ;808F27|F003    |808F2C;
+    JMP.W .slotLoop                                              ;808F29|4C818E  |808E81;
  
  
-.label7:
+.uploadPalette:
     SEP #$20                                                   ;808F2C|E220    |      ;
     LDA.B strcVariables.n8Temp2                                ;808F2E|A593    |000093;
     BEQ .return                                                ;808F30|F01F    |808F51;
@@ -1667,9 +1667,9 @@ fPalette_ProcessColorAnimSlots:
     RTL                                                        ;808F51|6B      |      ;
  
  
-.label8:
+.decrementTimer:
     DEC.W strcPalette.animTimer,X                                 ;808F52|DE4A01  |00014A;
-    BRA .label6                                                ;808F55|80C2    |808F19;
+    BRA .nextSlot                                                ;808F55|80C2    |808F19;
  
  
 .noMoreData:

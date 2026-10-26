@@ -69,7 +69,7 @@ fPlayerAction0x1C:
     REP #$30                                                   ;81C061|C230    |      ;
     %CheckPlayerFlags(!PFLAGS_ANIMATING)
     BEQ +                                                      ;81C06A|F003    |81C06F;
-    JMP.W .label2                                              ;81C06C|4C8AC0  |81C08A;
+    JMP.W .updateSprite                                              ;81C06C|4C8AC0  |81C08A;
  
  
   + %SetPlayerFlag(!PFLAGS_ANIMATING)
@@ -83,7 +83,7 @@ fPlayerAction0x1C:
     REP #$20                                                   ;81C085|C220    |      ;
     STA.W strcObjectData.spriteIdx                             ;81C087|8D0109  |000901;
  
-.label2:
+.updateSprite:
     JSR.W fPlayer_UpdateSpriteObject                                      ;81C08A|20E6CF  |81CFE6;
     REP #$30                                                   ;81C08D|C230    |      ;
     LDA.W strcObjectData.exist                                 ;81C08F|AD1509  |000915;
@@ -118,17 +118,17 @@ fPlayerAction0x1A:
     %SetPlayerAction(!PACTION_NONE)
     REP #$30                                                   ;81C0D6|C230    |      ;
     %CheckFlag(daily4, $0004)
-    BNE .label1                                                ;81C0DF|D011    |81C0F2;
+    BNE .executeAlternateAI                                                ;81C0DF|D011    |81C0F2;
     REP #$30                                                   ;81C0E1|C230    |      ;
     %AIExecute($0014, $0045, $0000)
-    BRA .label2                                                ;81C0F0|800F    |81C101;
+    BRA .clearDailyFlags                                                ;81C0F0|800F    |81C101;
  
  
-.label1:
+.executeAlternateAI:
     REP #$30                                                   ;81C0F2|C230    |      ;
     %AIExecute($0015, $0045, $0003)
  
-.label2:
+.clearDailyFlags:
     REP #$30                                                   ;81C101|C230    |      ;
     %UnsetFlag(daily4, $0006)
  
@@ -330,24 +330,24 @@ fPlayerAction0x13:
     REP #$10                                                   ;81C2D0|C210    |      ;
     LDY.W #$0000                                               ;81C2D2|A00000  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;81C2D5|B7CC    |0000CC;
-    BEQ .label1                                                ;81C2D7|F009    |81C2E2;
+    BEQ .checkSpriteIdx                                                ;81C2D7|F009    |81C2E2;
     REP #$30                                                   ;81C2D9|C230    |      ;
     LDA.W #$0014                                               ;81C2DB|A91400  |      ;
     JSL.L fAI_DeactivateSlotAndObject                                    ;81C2DE|22208084|848020;
  
-.label1:
+.checkSpriteIdx:
     REP #$30                                                   ;81C2E2|C230    |      ;
     LDA.W strcObjectData.spriteIdx                             ;81C2E4|AD0109  |000901;
     CMP.W #$008B                                               ;81C2E7|C98B00  |      ;
-    BEQ .label2                                                ;81C2EA|F017    |81C303;
+    BEQ .spriteCase8B                                                ;81C2EA|F017    |81C303;
     CMP.W #$008C                                               ;81C2EC|C98C00  |      ;
-    BEQ .label3                                                ;81C2EF|F02D    |81C31E;
+    BEQ .spriteCase8C                                                ;81C2EF|F02D    |81C31E;
     REP #$30                                                   ;81C2F1|C230    |      ;
     %AIExecute($0014, $0000, $0033)
     JMP.W .exit                                                ;81C300|4C30C3  |81C330;
  
  
-.label2:
+.spriteCase8B:
     REP #$30                                                   ;81C303|C230    |      ;
     %AIExecute($0014, $0000, $0035)
     REP #$20                                                   ;81C312|C220    |      ;
@@ -356,7 +356,7 @@ fPlayerAction0x13:
     JMP.W .exit                                                ;81C31B|4C30C3  |81C330;
  
  
-.label3:
+.spriteCase8C:
     REP #$30                                                   ;81C31E|C230    |      ;
     %AIExecute($0014, $0000, $0034)
     JMP.W .exit                                                ;81C32D|4C30C3  |81C330;
@@ -592,12 +592,12 @@ fPlayerAction0x0B:
     REP #$30                                                   ;81C4EC|C230    |      ;
     %CheckPlayerFlags(!PFLAGS_ANIMATING)
     BEQ +                                                      ;81C4F5|F003    |81C4FA;
-    JMP.W .label1                                              ;81C4F7|4C03C5  |81C503;
+    JMP.W .updateSprite                                              ;81C4F7|4C03C5  |81C503;
  
  
   + %SetPlayerFlag(!PFLAGS_ANIMATING)
  
-.label1:
+.updateSprite:
     JSR.W fPlayer_UpdateSpriteObject                                      ;81C503|20E6CF  |81CFE6;
     REP #$20                                                   ;81C506|C220    |      ;
     LDA.W strcObjectData.exist                                 ;81C508|AD1509  |000915;
@@ -613,12 +613,12 @@ fPlayerAction0x0A:
     REP #$30                                                   ;81C51A|C230    |      ;
     %CheckPlayerFlags(!PFLAGS_ANIMATING)
     BEQ +                                                      ;81C523|F003    |81C528;
-    JMP.W .label1                                              ;81C525|4C31C5  |81C531;
+    JMP.W .updateSprite                                              ;81C525|4C31C5  |81C531;
  
  
   + %SetPlayerFlag(!PFLAGS_ANIMATING)
  
-.label1:
+.updateSprite:
     JSR.W fPlayer_UpdateSpriteObject                                      ;81C531|20E6CF  |81CFE6;
     REP #$20                                                   ;81C534|C220    |      ;
     LDA.W strcObjectData.exist                                 ;81C536|AD1509  |000915;
@@ -648,13 +648,13 @@ fPlayerAction_IdleHandler:
  
   + %CheckPlayerFlags(!PFLAGS_USERCONTROL)
     BNE +                                                      ;81C577|D003    |81C57C;
-    JMP.W .label2                                              ;81C579|4CBDC5  |81C5BD;
+    JMP.W .chooseIdleSprite                                              ;81C579|4CBDC5  |81C5BD;
  
  
   + SEP #$20                                                   ;81C57C|E220    |      ;
     LDA.W strcPlayerData.lastExcercise                         ;81C57E|AD2509  |000925;
     CMP.B #$F0                                                 ;81C581|C9F0    |      ;
-    BNE .label1                                                ;81C583|D030    |81C5B5;
+    BNE .incrementExerciseTimer                                                ;81C583|D030    |81C5B5;
     LDA.B #$78                                                 ;81C585|A978    |      ;
     STA.W strcPlayerData.lastExcercise                         ;81C587|8D2509  |000925;
     %SetPlayerAction(!PACTION_EXCERCISE)
@@ -677,41 +677,41 @@ fPlayerAction_IdleHandler:
     JMP.W fPlayerAction0x09                                    ;81C5B2|4C5ECB  |81CB5E;
  
  
-.label1:
+.incrementExerciseTimer:
     SEP #$20                                                   ;81C5B5|E220    |      ;
     REP #$10                                                   ;81C5B7|C210    |      ;
     INC A                                                      ;81C5B9|1A      |      ;
     STA.W strcPlayerData.lastExcercise                         ;81C5BA|8D2509  |000925;
  
-.label2:
+.chooseIdleSprite:
     %CheckPlayerFlags(!PFLAGS_HOLDINGITEM)
     BEQ +                                                      ;81C5C4|F003    |81C5C9;
-    JMP.W .label3                                              ;81C5C6|4C11C6  |81C611;
+    JMP.W .spriteHolding                                              ;81C5C6|4C11C6  |81C611;
  
  
   + %CheckPlayerFlags(!PFLAGS_RIDINGHORSE)
     BEQ +                                                      ;81C5D0|F003    |81C5D5;
-    JMP.W .label4                                              ;81C5D2|4C1EC6  |81C61E;
+    JMP.W .spriteRiding                                              ;81C5D2|4C1EC6  |81C61E;
  
  
   + %CheckPlayerFlags(!PFLAGS_INSPRINGS)
     BEQ +                                                      ;81C5DC|F003    |81C5E1;
-    JMP.W .label5                                              ;81C5DE|4C2BC6  |81C62B;
+    JMP.W .spriteInSprings                                              ;81C5DE|4C2BC6  |81C62B;
  
  
   + %CheckPlayerFlags(!PFLAGS_SITTING)
     BEQ +                                                      ;81C5E8|F003    |81C5ED;
-    JMP.W .label6                                              ;81C5EA|4C38C6  |81C638;
+    JMP.W .spriteSitting                                              ;81C5EA|4C38C6  |81C638;
  
  
   + %CheckPlayerFlags(!PFLAGS_DOGHUGGING)
     BEQ +                                                      ;81C5F4|F003    |81C5F9;
-    JMP.W .label7                                              ;81C5F6|4C42C6  |81C642;
+    JMP.W .spriteDogHugging                                              ;81C5F6|4C42C6  |81C642;
  
  
   + REP #$20                                                   ;81C5F9|C220    |      ;
     %CheckFlag(daily4, $0006)
-    BNE .label8                                                ;81C602|D04B    |81C64F;
+    BNE .spriteSpecialState                                                ;81C602|D04B    |81C64F;
     REP #$30                                                   ;81C604|C230    |      ;
     LDA.W #$0000                                               ;81C606|A90000  |      ;
     CLC                                                        ;81C609|18      |      ;
@@ -720,7 +720,7 @@ fPlayerAction_IdleHandler:
     BRA .exit1                                                 ;81C60F|804B    |81C65C;
  
  
-.label3:
+.spriteHolding:
     REP #$30                                                   ;81C611|C230    |      ;
     LDA.W #$0014                                               ;81C613|A91400  |      ;
     CLC                                                        ;81C616|18      |      ;
@@ -729,7 +729,7 @@ fPlayerAction_IdleHandler:
     BRA .exit2                                                 ;81C61C|8044    |81C662;
  
  
-.label4:
+.spriteRiding:
     REP #$30                                                   ;81C61E|C230    |      ;
     LDA.W #$00B0                                               ;81C620|A9B000  |      ;
     CLC                                                        ;81C623|18      |      ;
@@ -738,7 +738,7 @@ fPlayerAction_IdleHandler:
     BRA .exit2                                                 ;81C629|8037    |81C662;
  
  
-.label5:
+.spriteInSprings:
     REP #$30                                                   ;81C62B|C230    |      ;
     LDA.W #$00C0                                               ;81C62D|A9C000  |      ;
     CLC                                                        ;81C630|18      |      ;
@@ -747,14 +747,14 @@ fPlayerAction_IdleHandler:
     BRA .exit2                                                 ;81C636|802A    |81C662;
  
  
-.label6:
+.spriteSitting:
     REP #$30                                                   ;81C638|C230    |      ;
     LDA.W #$004F                                               ;81C63A|A94F00  |      ;
     STA.W strcObjectData.spriteIdx                             ;81C63D|8D0109  |000901;
     BRA .exit2                                                 ;81C640|8020    |81C662;
  
  
-.label7:
+.spriteDogHugging:
     REP #$30                                                   ;81C642|C230    |      ;
     LDA.W #$00D0                                               ;81C644|A9D000  |      ;
     CLC                                                        ;81C647|18      |      ;
@@ -763,7 +763,7 @@ fPlayerAction_IdleHandler:
     BRA .exit2                                                 ;81C64D|8013    |81C662;
  
  
-.label8:
+.spriteSpecialState:
     REP #$30                                                   ;81C64F|C230    |      ;
     LDA.W #$00EA                                               ;81C651|A9EA00  |      ;
     CLC                                                        ;81C654|18      |      ;
@@ -793,26 +793,26 @@ fPlayerAction_Walk:
     REP #$20                                                   ;81C67C|C220    |      ;
     %CheckPlayerFlagsNoReg(!PFLAGS_HOLDINGITEM)
     BEQ +                                                      ;81C683|F003    |81C688;
-    JMP.W .label1                                              ;81C685|4CC2C6  |81C6C2;
+    JMP.W .walkHolding                                              ;81C685|4CC2C6  |81C6C2;
  
  
   + %CheckPlayerFlagsNoReg(!PFLAGS_RIDINGHORSE)
     BEQ +                                                      ;81C68D|F003    |81C692;
-    JMP.W .label2                                              ;81C68F|4CD5C6  |81C6D5;
+    JMP.W .walkRiding                                              ;81C68F|4CD5C6  |81C6D5;
  
  
   + %CheckPlayerFlagsNoReg(!PFLAGS_INSPRINGS)
     BEQ +                                                      ;81C697|F003    |81C69C;
-    JMP.W .label3                                              ;81C699|4CE9C6  |81C6E9;
+    JMP.W .walkInSprings                                              ;81C699|4CE9C6  |81C6E9;
  
  
   + %CheckPlayerFlagsNoReg(!PFLAGS_DOGHUGGING)
     BEQ +                                                      ;81C6A1|F003    |81C6A6;
-    JMP.W .label4                                              ;81C6A3|4CFCC6  |81C6FC;
+    JMP.W .walkDogHugging                                              ;81C6A3|4CFCC6  |81C6FC;
  
  
   + %CheckFlag(daily4, $0006)
-    BNE .label5                                                ;81C6AD|D060    |81C70F;
+    BNE .walkSpecialState                                                ;81C6AD|D060    |81C70F;
     REP #$30                                                   ;81C6AF|C230    |      ;
     LDA.W #$0004                                               ;81C6B1|A90400  |      ;
     CLC                                                        ;81C6B4|18      |      ;
@@ -824,7 +824,7 @@ fPlayerAction_Walk:
     BRA .exit                                                  ;81C6C0|8060    |81C722;
  
  
-.label1:
+.walkHolding:
     REP #$30                                                   ;81C6C2|C230    |      ;
     LDA.W #$0028                                               ;81C6C4|A92800  |      ;
     CLC                                                        ;81C6C7|18      |      ;
@@ -836,7 +836,7 @@ fPlayerAction_Walk:
     BRA .exit                                                  ;81C6D3|804D    |81C722;
  
  
-.label2:
+.walkRiding:
     REP #$30                                                   ;81C6D5|C230    |      ;
     LDA.W #$00B4                                               ;81C6D7|A9B400  |      ;
     CLC                                                        ;81C6DA|18      |      ;
@@ -848,7 +848,7 @@ fPlayerAction_Walk:
     JMP.W fPlayerAction_Run_StepSound                                      ;81C6E6|4C06C8  |81C806;
  
  
-.label3:
+.walkInSprings:
     REP #$30                                                   ;81C6E9|C230    |      ;
     LDA.W #$00C4                                               ;81C6EB|A9C400  |      ;
     CLC                                                        ;81C6EE|18      |      ;
@@ -860,7 +860,7 @@ fPlayerAction_Walk:
     BRA .exit                                                  ;81C6FA|8026    |81C722;
  
  
-.label4:
+.walkDogHugging:
     REP #$30                                                   ;81C6FC|C230    |      ;
     LDA.W #$00D4                                               ;81C6FE|A9D400  |      ;
     CLC                                                        ;81C701|18      |      ;
@@ -872,7 +872,7 @@ fPlayerAction_Walk:
     BRA .exit                                                  ;81C70D|8013    |81C722;
  
  
-.label5:
+.walkSpecialState:
     REP #$30                                                   ;81C70F|C230    |      ;
     LDA.W #$00EE                                               ;81C711|A9EE00  |      ;
     CLC                                                        ;81C714|18      |      ;
@@ -913,26 +913,26 @@ fPlayerAction_Run:
     REP #$20                                                   ;81C761|C220    |      ;
     %CheckPlayerFlagsNoReg(!PFLAGS_HOLDINGITEM)
     BEQ +                                                      ;81C768|F003    |81C76D;
-    JMP.W .label1                                              ;81C76A|4CA7C7  |81C7A7;
+    JMP.W .runHolding                                              ;81C76A|4CA7C7  |81C7A7;
  
  
   + %CheckPlayerFlagsNoReg(!PFLAGS_RIDINGHORSE)
     BEQ +                                                      ;81C772|F003    |81C777;
-    JMP.W .label2                                              ;81C774|4CBAC7  |81C7BA;
+    JMP.W .runRiding                                              ;81C774|4CBAC7  |81C7BA;
  
  
   + %CheckPlayerFlagsNoReg(!PFLAGS_INSPRINGS)
     BEQ +                                                      ;81C77C|F003    |81C781;
-    JMP.W .label3                                              ;81C77E|4CCDC7  |81C7CD;
+    JMP.W .runInSprings                                              ;81C77E|4CCDC7  |81C7CD;
  
  
   + %CheckPlayerFlagsNoReg(!PFLAGS_DOGHUGGING)
     BEQ +                                                      ;81C786|F003    |81C78B;
-    JMP.W .label4                                              ;81C788|4CE0C7  |81C7E0;
+    JMP.W .runDogHugging                                              ;81C788|4CE0C7  |81C7E0;
  
  
   + %CheckFlag(daily4, $0006)
-    BNE .label5                                                ;81C792|D05F    |81C7F3;
+    BNE .runSpecialState                                                ;81C792|D05F    |81C7F3;
     REP #$30                                                   ;81C794|C230    |      ;
     LDA.W #$0008                                               ;81C796|A90800  |      ;
     CLC                                                        ;81C799|18      |      ;
@@ -944,7 +944,7 @@ fPlayerAction_Run:
     BRA fPlayerAction_Run_StepSound                                        ;81C7A5|805F    |81C806;
  
  
-.label1:
+.runHolding:
     REP #$30                                                   ;81C7A7|C230    |      ;
     LDA.W #$002C                                               ;81C7A9|A92C00  |      ;
     CLC                                                        ;81C7AC|18      |      ;
@@ -956,7 +956,7 @@ fPlayerAction_Run:
     BRA fPlayerAction_Run_StepSound                                        ;81C7B8|804C    |81C806;
  
  
-.label2:
+.runRiding:
     REP #$30                                                   ;81C7BA|C230    |      ;
     LDA.W #$00B4                                               ;81C7BC|A9B400  |      ;
     CLC                                                        ;81C7BF|18      |      ;
@@ -968,7 +968,7 @@ fPlayerAction_Run:
     BRA fPlayerAction_Run_StepSound                                        ;81C7CB|8039    |81C806;
  
  
-.label3:
+.runInSprings:
     REP #$30                                                   ;81C7CD|C230    |      ;
     LDA.W #$00C4                                               ;81C7CF|A9C400  |      ;
     CLC                                                        ;81C7D2|18      |      ;
@@ -980,7 +980,7 @@ fPlayerAction_Run:
     BRA fHelper_81C827                                         ;81C7DE|8047    |81C827;
  
  
-.label4:
+.runDogHugging:
     REP #$30                                                   ;81C7E0|C230    |      ;
     LDA.W #$00D4                                               ;81C7E2|A9D400  |      ;
     CLC                                                        ;81C7E5|18      |      ;
@@ -992,7 +992,7 @@ fPlayerAction_Run:
     BRA fHelper_81C827                                         ;81C7F1|8034    |81C827;
  
  
-.label5:
+.runSpecialState:
     REP #$30                                                   ;81C7F3|C230    |      ;
     LDA.W #$00EE                                               ;81C7F5|A9EE00  |      ;
     CLC                                                        ;81C7F8|18      |      ;
@@ -1052,24 +1052,24 @@ fPlayerAction0x03:
     REP #$30                                                   ;81C86B|C230    |      ;
     %CheckPlayerFlags(!PFLAGS_ANIMATING)
     BEQ +                                                      ;81C874|F003    |81C879;
-    JMP.W .label4                                              ;81C876|4C23C9  |81C923;
+    JMP.W .setJumpSpeed                                              ;81C876|4C23C9  |81C923;
  
  
   + %SetPlayerFlag(!PFLAGS_ANIMATING)
     REP #$20                                                   ;81C882|C220    |      ;
     %CheckPlayerFlagsNoReg(!PFLAGS_HOLDINGITEM)
     BEQ +                                                      ;81C889|F003    |81C88E;
-    JMP.W .label1                                              ;81C88B|4CC6C8  |81C8C6;
+    JMP.W .jumpHolding                                              ;81C88B|4CC6C8  |81C8C6;
  
  
   + %CheckPlayerFlagsNoReg(!PFLAGS_RIDINGHORSE)
     BEQ +                                                      ;81C893|F003    |81C898;
-    JMP.W .label2                                              ;81C895|4CE5C8  |81C8E5;
+    JMP.W .jumpRiding                                              ;81C895|4CE5C8  |81C8E5;
  
  
   + %CheckPlayerFlagsNoReg(!PFLAGS_INSPRINGS)
     BEQ +                                                      ;81C89D|F003    |81C8A2;
-    JMP.W .label3                                              ;81C89F|4C04C9  |81C904;
+    JMP.W .jumpInSprings                                              ;81C89F|4C04C9  |81C904;
  
  
   + REP #$30                                                   ;81C8A2|C230    |      ;
@@ -1086,10 +1086,10 @@ fPlayerAction0x03:
     JSL.L fAudioSetRegister2to0A                               ;81C8BB|22328383|838332;
     SEP #$20                                                   ;81C8BF|E220    |      ;
     STZ.W $0971+!RAM_SHIFT                                 ;81C8C1|9C7109  |000971;
-    BRA .label4                                                ;81C8C4|805D    |81C923;
+    BRA .setJumpSpeed                                                ;81C8C4|805D    |81C923;
  
  
-.label1:
+.jumpHolding:
     REP #$30                                                   ;81C8C6|C230    |      ;
     LDA.W #$0020                                               ;81C8C8|A92000  |      ;
     CLC                                                        ;81C8CB|18      |      ;
@@ -1102,10 +1102,10 @@ fPlayerAction0x03:
     LDA.B #$06                                                 ;81C8DA|A906    |      ;
     STA.W strcAudio.reg115                                     ;81C8DC|8D1501  |000115;
     JSL.L fAudioSetRegister2to0A                               ;81C8DF|22328383|838332;
-    BRA .label4                                                ;81C8E3|803E    |81C923;
+    BRA .setJumpSpeed                                                ;81C8E3|803E    |81C923;
  
  
-.label2:
+.jumpRiding:
     REP #$30                                                   ;81C8E5|C230    |      ;
     LDA.W #$00B8                                               ;81C8E7|A9B800  |      ;
     CLC                                                        ;81C8EA|18      |      ;
@@ -1118,10 +1118,10 @@ fPlayerAction0x03:
     LDA.B #$06                                                 ;81C8F9|A906    |      ;
     STA.W strcAudio.reg115                                     ;81C8FB|8D1501  |000115;
     JSL.L fAudioSetRegister2to0A                               ;81C8FE|22328383|838332;
-    BRA .label4                                                ;81C902|801F    |81C923;
+    BRA .setJumpSpeed                                                ;81C902|801F    |81C923;
  
  
-.label3:
+.jumpInSprings:
     REP #$30                                                   ;81C904|C230    |      ;
     LDA.W #$00C8                                               ;81C906|A9C800  |      ;
     CLC                                                        ;81C909|18      |      ;
@@ -1134,37 +1134,37 @@ fPlayerAction0x03:
     LDA.B #$06                                                 ;81C918|A906    |      ;
     STA.W strcAudio.reg115                                     ;81C91A|8D1501  |000115;
     JSL.L fAudioSetRegister2to0A                               ;81C91D|22328383|838332;
-    BRA .label6                                                ;81C921|8026    |81C949;
+    BRA .fastJumpSpeed                                                ;81C921|8026    |81C949;
  
  
-.label4:
+.setJumpSpeed:
     SEP #$20                                                   ;81C923|E220    |      ;
     REP #$10                                                   ;81C925|C210    |      ;
     LDA.B #$01                                                 ;81C927|A901    |      ;
     STA.B strcMap.unk1E                                        ;81C929|851E    |00001E;
     %CheckPlayerFlags($0200)
-    BNE .label5                                                ;81C932|D003    |81C937;
-    JMP.W .label7                                              ;81C934|4C51C9  |81C951;
+    BNE .toggleJumpSpeed                                                ;81C932|D003    |81C937;
+    JMP.W .moveAndAnimate                                              ;81C934|4C51C9  |81C951;
  
  
-.label5:
+.toggleJumpSpeed:
     SEP #$20                                                   ;81C937|E220    |      ;
     LDA.W $0971+!RAM_SHIFT                                 ;81C939|AD7109  |000971;
     EOR.B #$01                                                 ;81C93C|4901    |      ;
     STA.W $0971+!RAM_SHIFT                                 ;81C93E|8D7109  |000971;
-    BEQ .label7                                                ;81C941|F00E    |81C951;
+    BEQ .moveAndAnimate                                                ;81C941|F00E    |81C951;
     LDA.B #$02                                                 ;81C943|A902    |      ;
     STA.B strcMap.unk1E                                        ;81C945|851E    |00001E;
-    BRA .label7                                                ;81C947|8008    |81C951;
+    BRA .moveAndAnimate                                                ;81C947|8008    |81C951;
  
  
-.label6:
+.fastJumpSpeed:
     SEP #$20                                                   ;81C949|E220    |      ;
     REP #$10                                                   ;81C94B|C210    |      ;
     LDA.B #$02                                                 ;81C94D|A902    |      ;
     STA.B strcMap.unk1E                                        ;81C94F|851E    |00001E;
  
-.label7:
+.moveAndAnimate:
     JSR.W fPlayer_MoveInDirection                                      ;81C951|2077CB  |81CB77;
     JSR.W fPlayer_UpdateSpriteObject                                      ;81C954|20E6CF  |81CFE6;
     REP #$30                                                   ;81C957|C230    |      ;
@@ -1194,7 +1194,7 @@ fPlayerAction0x04:
     REP #$30                                                   ;81C991|C230    |      ;
     %CheckPlayerFlags(!PFLAGS_ANIMATING)
     BEQ +                                                      ;81C99A|F003    |81C99F;
-    JMP.W .label1                                              ;81C99C|4CB7C9  |81C9B7;
+    JMP.W .updateSprite                                              ;81C99C|4CB7C9  |81C9B7;
  
  
   + %SetPlayerFlag(!PFLAGS_ANIMATING)
@@ -1205,7 +1205,7 @@ fPlayerAction0x04:
     STA.W strcObjectData.spriteIdx                             ;81C9B0|8D0109  |000901;
     JSL.L fItemCarried_Begin                                      ;81C9B3|22008081|818000;
  
-.label1:
+.updateSprite:
     JSR.W fPlayer_UpdateSpriteObject                                      ;81C9B7|20E6CF  |81CFE6;
     REP #$20                                                   ;81C9BA|C220    |      ;
     LDA.W strcObjectData.exist                                 ;81C9BC|AD1509  |000915;
@@ -1225,7 +1225,7 @@ fPlayerAction0x05:
     REP #$30                                                   ;81C9DF|C230    |      ;
     %CheckPlayerFlags(!PFLAGS_ANIMATING)
     BEQ +                                                      ;81C9E8|F003    |81C9ED;
-    JMP.W .label1                                              ;81C9EA|4C13CA  |81CA13;
+    JMP.W .updateSprite                                              ;81C9EA|4C13CA  |81CA13;
  
  
   + %SetPlayerFlag(!PFLAGS_ANIMATING)
@@ -1242,7 +1242,7 @@ fPlayerAction0x05:
     STA.W strcAudio.reg115                                     ;81CA0C|8D1501  |000115;
     JSL.L fAudioSetRegister2to0A                               ;81CA0F|22328383|838332;
  
-.label1:
+.updateSprite:
     JSR.W fPlayer_UpdateSpriteObject                                      ;81CA13|20E6CF  |81CFE6;
     REP #$20                                                   ;81CA16|C220    |      ;
     LDA.W strcObjectData.exist                                 ;81CA18|AD1509  |000915;
@@ -2042,11 +2042,11 @@ fPlayerEnergyHandler:
     STA.B strcVariables.n8Temp1                                ;81D065|8592    |000092;
     STA.B strcVariables.n16Temp3                               ;81D067|8582    |000082;
     STZ.B $83                                                  ;81D069|6483    |000083;
-    BMI .label1                                                ;81D06B|3002    |81D06F;
+    BMI .negativeDelta                                                ;81D06B|3002    |81D06F;
     BRA .recoveredStamina                                      ;81D06D|8006    |81D075;
  
  
-.label1:
+.negativeDelta:
     SEP #$20                                                   ;81D06F|E220    |      ;
     LDA.B #$FF                                                 ;81D071|A9FF    |      ;
     STA.B $83                                                  ;81D073|8583    |000083;
@@ -2074,9 +2074,9 @@ fPlayerEnergyHandler:
     BEQ .outOfStamina                                          ;81D09D|F014    |81D0B3;
     BMI .outOfStamina                                          ;81D09F|3012    |81D0B3;
     CMP.B strcVariables.n16Temp1                               ;81D0A1|C57E    |00007E;
-    BCS .label4                                                ;81D0A3|B02D    |81D0D2;
+    BCS .clampToStamina                                                ;81D0A3|B02D    |81D0D2;
     %UnsetPlayerFlag(!PFLAGS_OUTOFSTAMINA)
-    BRA .label5                                                ;81D0B1|8035    |81D0E8;
+    BRA .addEnergy                                                ;81D0B1|8035    |81D0E8;
  
  
 .outOfStamina:
@@ -2087,47 +2087,47 @@ fPlayerEnergyHandler:
     LDA.W #$004D                                               ;81D0C3|A94D00  |      ;
     STA.W strcObjectData.spriteIdx                             ;81D0C6|8D0109  |000901;
     %SetPlayerAction(!PACTION_TIRED)
-    BRA .label6                                                ;81D0D0|8021    |81D0F3;
+    BRA .updateStaminaStage                                                ;81D0D0|8021    |81D0F3;
  
  
-.label4:
+.clampToStamina:
     SEP #$20                                                   ;81D0D2|E220    |      ;
     LDA.W strcPlayerData.stamina                               ;81D0D4|AD1709  |000917;
     STA.W strcPlayerData.energy                                ;81D0D7|8D1809  |000918;
     %UnsetPlayerFlag(!PFLAGS_OUTOFSTAMINA)
-    BRA .label6                                                ;81D0E6|800B    |81D0F3;
+    BRA .updateStaminaStage                                                ;81D0E6|800B    |81D0F3;
  
  
-.label5:
+.addEnergy:
     SEP #$20                                                   ;81D0E8|E220    |      ;
     LDA.W strcPlayerData.energy                                ;81D0EA|AD1809  |000918;
     CLC                                                        ;81D0ED|18      |      ;
     ADC.B strcVariables.n8Temp1                                ;81D0EE|6592    |000092;
     STA.W strcPlayerData.energy                                ;81D0F0|8D1809  |000918;
  
-.label6:
+.updateStaminaStage:
     SEP #$30                                                   ;81D0F3|E230    |      ;
     LDA.B strcVariables.n8Temp1                                ;81D0F5|A592    |000092;
-    BMI .label8                                                ;81D0F7|3016    |81D10F;
+    BMI .checkStaminaDrop                                                ;81D0F7|3016    |81D10F;
     LDY.B #$00                                                 ;81D0F9|A000    |      ;
     LDA.W strcPlayerData.stamina                               ;81D0FB|AD1709  |000917;
  
 .loop1:
     LSR A                                                      ;81D0FE|4A      |      ;
     CMP.W strcPlayerData.energy                                ;81D0FF|CD1809  |000918;
-    BEQ .label7                                                ;81D102|F005    |81D109;
-    BCC .label7                                                ;81D104|9003    |81D109;
+    BEQ .storeStaminaStage                                                ;81D102|F005    |81D109;
+    BCC .storeStaminaStage                                                ;81D104|9003    |81D109;
     INY                                                        ;81D106|C8      |      ;
     BRA .loop1                                                 ;81D107|80F5    |81D0FE;
  
  
-.label7:
+.storeStaminaStage:
     TYA                                                        ;81D109|98      |      ;
     STA.W $096C+!RAM_SHIFT                                 ;81D10A|8D6C09  |00096C;
     BRA .return                                                ;81D10D|803C    |81D14B;
  
  
-.label8:
+.checkStaminaDrop:
     SEP #$30                                                   ;81D10F|E230    |      ;
     LDA.W $096C+!RAM_SHIFT                                 ;81D111|AD6C09  |00096C;
     CMP.B #$03                                                 ;81D114|C903    |      ;
@@ -2138,18 +2138,18 @@ fPlayerEnergyHandler:
 .loop2:
     LSR A                                                      ;81D11D|4A      |      ;
     CPY.W $096C+!RAM_SHIFT                                 ;81D11E|CC6C09  |00096C;
-    BEQ .label9                                                ;81D121|F003    |81D126;
+    BEQ .compareStageThreshold                                                ;81D121|F003    |81D126;
     INY                                                        ;81D123|C8      |      ;
     BRA .loop2                                                 ;81D124|80F7    |81D11D;
  
  
-.label9:
+.compareStageThreshold:
     CMP.W strcPlayerData.energy                                ;81D126|CD1809  |000918;
-    BCS .label10                                               ;81D129|B002    |81D12D;
+    BCS .advanceStaminaStage                                               ;81D129|B002    |81D12D;
     BRA .return                                                ;81D12B|801E    |81D14B;
  
  
-.label10:
+.advanceStaminaStage:
     LDA.B #$00                                                 ;81D12D|A900    |      ;
     XBA                                                        ;81D12F|EB      |      ;
     LDA.W $096C+!RAM_SHIFT                                 ;81D130|AD6C09  |00096C;

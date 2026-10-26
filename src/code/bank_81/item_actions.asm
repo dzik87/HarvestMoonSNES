@@ -1446,15 +1446,15 @@ fItemBuy_ShowPurchaseDialog:
     SEP #$20                                                   ;818946|E220    |      ;
     LDA.W nCarriedItemId                                       ;818948|AD8409  |000984;
     CMP.B #$44                                                 ;81894B|C944    |      ;
-    BCS .label1                                                ;81894D|B008    |818957;
+    BCS .itemIdHigh                                                ;81894D|B008    |818957;
     SEC                                                        ;81894F|38      |      ;
     SBC.B #$1B                                                 ;818950|E91B    |      ;
     CLC                                                        ;818952|18      |      ;
     ADC.B #$13                                                 ;818953|6913    |      ;
-    BRA .label2                                                ;818955|800D    |818964;
+    BRA .itemIndexReady                                                ;818955|800D    |818964;
  
  
-.label1:
+.itemIdHigh:
     SEP #$20                                                   ;818957|E220    |      ;
     REP #$10                                                   ;818959|C210    |      ;
     LDA.B #$00                                                 ;81895B|A900    |      ;
@@ -1463,7 +1463,7 @@ fItemBuy_ShowPurchaseDialog:
     SEC                                                        ;818961|38      |      ;
     SBC.B #$44                                                 ;818962|E944    |      ;
  
-.label2:
+.itemIndexReady:
     REP #$20                                                   ;818964|C220    |      ;
     STA.B strcVariables.n16Temp1                               ;818966|857E    |00007E;
     ASL A                                                      ;818968|0A      |      ;
@@ -1500,15 +1500,15 @@ fItemBuy_HandleAnswer:
   + SEP #$20                                                   ;81899D|E220    |      ;
     LDA.W nCarriedItemId                                       ;81899F|AD8409  |000984;
     CMP.B #$44                                                 ;8189A2|C944    |      ;
-    BCS .label1                                                ;8189A4|B008    |8189AE;
+    BCS .profitIdHigh                                                ;8189A4|B008    |8189AE;
     SEC                                                        ;8189A6|38      |      ;
     SBC.B #$1B                                                 ;8189A7|E91B    |      ;
     CLC                                                        ;8189A9|18      |      ;
     ADC.B #$13                                                 ;8189AA|6913    |      ;
-    BRA .label2                                                ;8189AC|800D    |8189BB;
+    BRA .profitIndexReady                                                ;8189AC|800D    |8189BB;
  
  
-.label1:
+.profitIdHigh:
     SEP #$20                                                   ;8189AE|E220    |      ;
     REP #$10                                                   ;8189B0|C210    |      ;
     LDA.B #$00                                                 ;8189B2|A900    |      ;
@@ -1517,7 +1517,7 @@ fItemBuy_HandleAnswer:
     SEC                                                        ;8189B8|38      |      ;
     SBC.B #$44                                                 ;8189B9|E944    |      ;
  
-.label2:
+.profitIndexReady:
     REP #$20                                                   ;8189BB|C220    |      ;
     STA.B strcVariables.n16Temp1                               ;8189BD|857E    |00007E;
     ASL A                                                      ;8189BF|0A      |      ;
@@ -1540,28 +1540,28 @@ fItemBuy_HandleAnswer:
     BEQ .zero0x80                                              ;8189E0|F007    |8189E9;
     LDA.W #$0004                                               ;8189E2|A90400  |      ;
     STA.B strcVariables.n16Temp2                               ;8189E5|8580    |000080;
-    BRA .label3                                                ;8189E7|8002    |8189EB;
+    BRA .showResultDialog                                                ;8189E7|8002    |8189EB;
  
  
 .zero0x80:
     STZ.B strcVariables.n16Temp2                               ;8189E9|6480    |000080;
  
-.label3:
+.showResultDialog:
     SEP #$20                                                   ;8189EB|E220    |      ;
     LDA.B #$02                                                 ;8189ED|A902    |      ;
     STA.W strcDialogDisplay.mapUnk19A                          ;8189EF|8D9A01  |00019A;
     SEP #$20                                                   ;8189F2|E220    |      ;
     LDA.W nCarriedItemId                                       ;8189F4|AD8409  |000984;
     CMP.B #$44                                                 ;8189F7|C944    |      ;
-    BCS .label4                                                ;8189F9|B008    |818A03;
+    BCS .dialogIdHigh                                                ;8189F9|B008    |818A03;
     SEC                                                        ;8189FB|38      |      ;
     SBC.B #$1B                                                 ;8189FC|E91B    |      ;
     CLC                                                        ;8189FE|18      |      ;
     ADC.B #$13                                                 ;8189FF|6913    |      ;
-    BRA .label5                                                ;818A01|800D    |818A10;
+    BRA .dialogIndexReady                                                ;818A01|800D    |818A10;
  
  
-.label4:
+.dialogIdHigh:
     SEP #$20                                                   ;818A03|E220    |      ;
     REP #$10                                                   ;818A05|C210    |      ;
     LDA.B #$00                                                 ;818A07|A900    |      ;
@@ -1570,7 +1570,7 @@ fItemBuy_HandleAnswer:
     SEC                                                        ;818A0D|38      |      ;
     SBC.B #$44                                                 ;818A0E|E944    |      ;
  
-.label5:
+.dialogIndexReady:
     REP #$20                                                   ;818A10|C220    |      ;
     STA.B strcVariables.n16Temp1                               ;818A12|857E    |00007E;
     ASL A                                                      ;818A14|0A      |      ;
@@ -1614,15 +1614,15 @@ fItemBuy_ShowDeclineDialog:
     SEP #$20                                                   ;818A55|E220    |      ;
     LDA.W nCarriedItemId                                       ;818A57|AD8409  |000984;
     CMP.B #$44                                                 ;818A5A|C944    |      ;
-    BCS .label1                                                ;818A5C|B008    |818A66;
+    BCS .itemIdHigh                                                ;818A5C|B008    |818A66;
     SEC                                                        ;818A5E|38      |      ;
     SBC.B #$1B                                                 ;818A5F|E91B    |      ;
     CLC                                                        ;818A61|18      |      ;
     ADC.B #$13                                                 ;818A62|6913    |      ;
-    BRA .label2                                                ;818A64|800D    |818A73;
+    BRA .itemIndexReady                                                ;818A64|800D    |818A73;
  
  
-.label1:
+.itemIdHigh:
     SEP #$20                                                   ;818A66|E220    |      ;
     REP #$10                                                   ;818A68|C210    |      ;
     LDA.B #$00                                                 ;818A6A|A900    |      ;
@@ -1631,7 +1631,7 @@ fItemBuy_ShowDeclineDialog:
     SEC                                                        ;818A70|38      |      ;
     SBC.B #$44                                                 ;818A71|E944    |      ;
  
-.label2:
+.itemIndexReady:
     REP #$20                                                   ;818A73|C220    |      ;
     STA.B strcVariables.n16Temp1                               ;818A75|857E    |00007E;
     ASL A                                                      ;818A77|0A      |      ;
@@ -1677,15 +1677,15 @@ fItemBuy_ReturnItemToShelf:
     SEP #$20                                                   ;818AD6|E220    |      ;
     LDA.W nCarriedItemId                                       ;818AD8|AD8409  |000984;
     CMP.B #$44                                                 ;818ADB|C944    |      ;
-    BCS .label2                                                ;818ADD|B008    |818AE7;
+    BCS .itemIdHigh                                                ;818ADD|B008    |818AE7;
     SEC                                                        ;818ADF|38      |      ;
     SBC.B #$1B                                                 ;818AE0|E91B    |      ;
     CLC                                                        ;818AE2|18      |      ;
     ADC.B #$13                                                 ;818AE3|6913    |      ;
-    BRA .label3                                                ;818AE5|800D    |818AF4;
+    BRA .itemIndexReady                                                ;818AE5|800D    |818AF4;
  
  
-.label2:
+.itemIdHigh:
     SEP #$20                                                   ;818AE7|E220    |      ;
     REP #$10                                                   ;818AE9|C210    |      ;
     LDA.B #$00                                                 ;818AEB|A900    |      ;
@@ -1694,7 +1694,7 @@ fItemBuy_ReturnItemToShelf:
     SEC                                                        ;818AF1|38      |      ;
     SBC.B #$44                                                 ;818AF2|E944    |      ;
  
-.label3:
+.itemIndexReady:
     REP #$20                                                   ;818AF4|C220    |      ;
     STA.B strcVariables.n16Temp1                               ;818AF6|857E    |00007E;
     ASL A                                                      ;818AF8|0A      |      ;
@@ -1844,11 +1844,11 @@ fItemCarried_CarryLoop_NoSell:
     INC A                                                      ;818C2E|1A      |      ;
     STA.W nUnknownY                                            ;818C2F|8D8209  |000982;
     %CheckPlayerAction(!PACTION_JUMP)
-    BNE .label1                                                ;818C39|D003    |818C3E;
-    JMP.W .label2                                              ;818C3B|4C538C  |818C53;
+    BNE .notJump                                                ;818C39|D003    |818C3E;
+    JMP.W .jump                                              ;818C3B|4C538C  |818C53;
  
  
-.label1:
+.notJump:
     REP #$30                                                   ;818C3E|C230    |      ;
     LDY.W #$0001                                               ;818C40|A00100  |      ;
     JSL.L fItemCarried_LoadPoseData                                      ;818C43|22B78081|8180B7;
@@ -1856,25 +1856,25 @@ fItemCarried_CarryLoop_NoSell:
     LDA.W $0974+!RAM_SHIFT                                 ;818C49|AD7409  |000974;
     AND.B #$FB                                                 ;818C4C|29FB    |      ;
     STA.W $0974+!RAM_SHIFT                                 ;818C4E|8D7409  |000974;
-    BRA .label3                                                ;818C51|8032    |818C85;
+    BRA .checkDropItem                                                ;818C51|8032    |818C85;
  
  
-.label2:
+.jump:
     SEP #$20                                                   ;818C53|E220    |      ;
     REP #$10                                                   ;818C55|C210    |      ;
     LDA.W $0974+!RAM_SHIFT                                 ;818C57|AD7409  |000974;
     AND.B #$04                                                 ;818C5A|2904    |      ;
-    BNE .label4                                                ;818C5C|D013    |818C71;
+    BNE .checkObjectExists                                                ;818C5C|D013    |818C71;
     LDY.W #$000B                                               ;818C5E|A00B00  |      ;
     JSL.L fItemCarried_LoadPoseData                                      ;818C61|22B78081|8180B7;
     SEP #$20                                                   ;818C65|E220    |      ;
     LDA.W $0974+!RAM_SHIFT                                 ;818C67|AD7409  |000974;
     ORA.B #$04                                                 ;818C6A|0904    |      ;
     STA.W $0974+!RAM_SHIFT                                 ;818C6C|8D7409  |000974;
-    BRA .label3                                                ;818C6F|8014    |818C85;
+    BRA .checkDropItem                                                ;818C6F|8014    |818C85;
  
  
-.label4:
+.checkObjectExists:
     REP #$20                                                   ;818C71|C220    |      ;
     LDA.W nGameObjectIdx                                       ;818C73|AD7809  |000978;
     STA.B strcObject.gameObjectIdx                             ;818C76|85A5    |0000A5;
@@ -1882,15 +1882,15 @@ fItemCarried_CarryLoop_NoSell:
     REP #$20                                                   ;818C7C|C220    |      ;
     LDA.B strcObject.exists                                    ;818C7E|A5A7    |0000A7;
     CMP.W #$FFFF                                               ;818C80|C9FFFF  |      ;
-    BEQ .label1                                                ;818C83|F0B9    |818C3E;
+    BEQ .notJump                                                ;818C83|F0B9    |818C3E;
  
-.label3:
+.checkDropItem:
     %CheckPlayerAction(!PACTION_DROPITEM)
-    BEQ .lable5                                                ;818C8C|F003    |818C91;
+    BEQ .dropOnTile                                                ;818C8C|F003    |818C91;
     JMP.W fReturn_818E1A                                       ;818C8E|4C1A8E  |818E1A;
  
  
-.lable5:
+.dropOnTile:
     REP #$20                                                   ;818C91|C220    |      ;
     LDA.W #$0001                                               ;818C93|A90100  |      ;
     LDX.W #$0006                                               ;818C96|A20600  |      ;
@@ -1903,36 +1903,36 @@ fItemCarried_CarryLoop_NoSell:
     JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;818CAB|2261AC82|82AC61;
     REP #$30                                                   ;818CAF|C230    |      ;
     CPX.W #$0001                                               ;818CB1|E00100  |      ;
-    BEQ .label6                                                ;818CB4|F043    |818CF9;
+    BEQ .tileAcceptsItem                                                ;818CB4|F043    |818CF9;
     CPX.W #$0002                                               ;818CB6|E00200  |      ;
-    BEQ .label6                                                ;818CB9|F03E    |818CF9;
+    BEQ .tileAcceptsItem                                                ;818CB9|F03E    |818CF9;
     CPX.W #$0007                                               ;818CBB|E00700  |      ;
-    BEQ .label6                                                ;818CBE|F039    |818CF9;
+    BEQ .tileAcceptsItem                                                ;818CBE|F039    |818CF9;
     CPX.W #$0008                                               ;818CC0|E00800  |      ;
-    BEQ .label6                                                ;818CC3|F034    |818CF9;
+    BEQ .tileAcceptsItem                                                ;818CC3|F034    |818CF9;
     REP #$20                                                   ;818CC5|C220    |      ;
     LDA.W #$0000                                               ;818CC7|A90000  |      ;
     CPX.W #$00F0                                               ;818CCA|E0F000  |      ;
-    BEQ .label6                                                ;818CCD|F02A    |818CF9;
+    BEQ .tileAcceptsItem                                                ;818CCD|F02A    |818CF9;
     LDA.W #$0001                                               ;818CCF|A90100  |      ;
     CPX.W #$00F9                                               ;818CD2|E0F900  |      ;
-    BEQ .label6                                                ;818CD5|F022    |818CF9;
+    BEQ .tileAcceptsItem                                                ;818CD5|F022    |818CF9;
     LDA.W #$0002                                               ;818CD7|A90200  |      ;
     CPX.W #$00FA                                               ;818CDA|E0FA00  |      ;
-    BEQ .label6                                                ;818CDD|F01A    |818CF9;
+    BEQ .tileAcceptsItem                                                ;818CDD|F01A    |818CF9;
     LDA.W #$0003                                               ;818CDF|A90300  |      ;
     CPX.W #$00FB                                               ;818CE2|E0FB00  |      ;
-    BEQ .label6                                                ;818CE5|F012    |818CF9;
+    BEQ .tileAcceptsItem                                                ;818CE5|F012    |818CF9;
     LDA.W #$0004                                               ;818CE7|A90400  |      ;
     CPX.W #$00FC                                               ;818CEA|E0FC00  |      ;
-    BEQ .label6                                                ;818CED|F00A    |818CF9;
+    BEQ .tileAcceptsItem                                                ;818CED|F00A    |818CF9;
     LDA.W #$0005                                               ;818CEF|A90500  |      ;
     CPX.W #$00FD                                               ;818CF2|E0FD00  |      ;
-    BEQ .label6                                                ;818CF5|F002    |818CF9;
-    BRA .label7                                                ;818CF7|8035    |818D2E;
+    BEQ .tileAcceptsItem                                                ;818CF5|F002    |818CF9;
+    BRA .cancelDrop                                                ;818CF7|8035    |818D2E;
  
  
-.label6:
+.tileAcceptsItem:
     REP #$30                                                   ;818CF9|C230    |      ;
     LDA.B strcPlayer.posX                                      ;818CFB|A5D6    |0000D6;
     STA.B strcPlayer.lastX                                     ;818CFD|85DF    |0000DF;
@@ -1945,7 +1945,7 @@ fItemCarried_CarryLoop_NoSell:
     LDA.B strcPlayer.direction                                 ;818D0C|A5DA    |0000DA;
     JSL.L fGameEngine_DirectionHandler83AD91                   ;818D0E|2291AD83|83AD91;
     CMP.W #$0000                                               ;818D12|C90000  |      ;
-    BNE .label7                                                ;818D15|D017    |818D2E;
+    BNE .cancelDrop                                                ;818D15|D017    |818D2E;
     REP #$30                                                   ;818D17|C230    |      ;
     LDA.W #$0006                                               ;818D19|A90600  |      ;
     CLC                                                        ;818D1C|18      |      ;
@@ -1958,7 +1958,7 @@ fItemCarried_CarryLoop_NoSell:
     JMP.W fReturn_818E1A                                       ;818D2B|4C1A8E  |818E1A;
  
  
-.label7:
+.cancelDrop:
     %SetPlayerAction(!PACTION_NONE)
     JMP.W fReturn_818E1A                                       ;818D35|4C1A8E  |818E1A;
  
@@ -2575,7 +2575,7 @@ fItemCarriedAnimal_CarryLoop:
     LDA.W $0974+!RAM_SHIFT                                 ;81924D|AD7409  |000974;
     AND.B #$FB                                                 ;819250|29FB    |      ;
     STA.W $0974+!RAM_SHIFT                                 ;819252|8D7409  |000974;
-    BRA .label2                                                ;819255|8032    |819289;
+    BRA .checkDropItem                                                ;819255|8032    |819289;
  
  
 .jump:
@@ -2583,17 +2583,17 @@ fItemCarriedAnimal_CarryLoop:
     REP #$10                                                   ;819259|C210    |      ;
     LDA.W $0974+!RAM_SHIFT                                 ;81925B|AD7409  |000974;
     AND.B #$04                                                 ;81925E|2904    |      ;
-    BNE .label1                                                ;819260|D013    |819275;
+    BNE .checkObjectExists                                                ;819260|D013    |819275;
     LDY.W #$000B                                               ;819262|A00B00  |      ;
     JSL.L fItemCarried_LoadPoseData                                      ;819265|22B78081|8180B7;
     SEP #$20                                                   ;819269|E220    |      ;
     LDA.W $0974+!RAM_SHIFT                                 ;81926B|AD7409  |000974;
     ORA.B #$04                                                 ;81926E|0904    |      ;
     STA.W $0974+!RAM_SHIFT                                 ;819270|8D7409  |000974;
-    BRA .label2                                                ;819273|8014    |819289;
+    BRA .checkDropItem                                                ;819273|8014    |819289;
  
  
-.label1:
+.checkObjectExists:
     REP #$20                                                   ;819275|C220    |      ;
     LDA.W nGameObjectIdx                                       ;819277|AD7809  |000978;
     STA.B strcObject.gameObjectIdx                             ;81927A|85A5    |0000A5;
@@ -2603,7 +2603,7 @@ fItemCarriedAnimal_CarryLoop:
     CMP.W #$FFFF                                               ;819284|C9FFFF  |      ;
     BEQ .notjump                                               ;819287|F0B9    |819242;
  
-.label2:
+.checkDropItem:
     %CheckPlayerAction(!PACTION_DROPITEM)
     BEQ +                                                      ;819290|F003    |819295;
     JMP.W .justReturn                                          ;819292|4C7893  |819378;
@@ -2623,7 +2623,7 @@ fItemCarriedAnimal_CarryLoop:
     REP #$30                                                   ;8192AE|C230    |      ;
     CMP.W #$0000                                               ;8192B0|C90000  |      ;
     BEQ +                                                      ;8192B3|F003    |8192B8;
-    JMP.W .label3                                              ;8192B5|4C6F93  |81936F;
+    JMP.W .cancelDrop                                              ;8192B5|4C6F93  |81936F;
  
  
   + REP #$20                                                   ;8192B8|C220    |      ;
@@ -2639,12 +2639,12 @@ fItemCarriedAnimal_CarryLoop:
     SEP #$20                                                   ;8192D6|E220    |      ;
     AND.B #$1F                                                 ;8192D8|291F    |      ;
     BEQ +                                                      ;8192DA|F003    |8192DF;
-    JMP.W .label3                                              ;8192DC|4C6F93  |81936F;
+    JMP.W .cancelDrop                                              ;8192DC|4C6F93  |81936F;
  
  
   + CPX.W #$00FF                                               ;8192DF|E0FF00  |      ;
     BNE +                                                      ;8192E2|D003    |8192E7;
-    JMP.W .label3                                              ;8192E4|4C6F93  |81936F;
+    JMP.W .cancelDrop                                              ;8192E4|4C6F93  |81936F;
  
  
   + REP #$20                                                   ;8192E7|C220    |      ;
@@ -2660,12 +2660,12 @@ fItemCarriedAnimal_CarryLoop:
     SEP #$20                                                   ;819305|E220    |      ;
     AND.B #$1F                                                 ;819307|291F    |      ;
     BEQ +                                                      ;819309|F003    |81930E;
-    JMP.W .label3                                              ;81930B|4C6F93  |81936F;
+    JMP.W .cancelDrop                                              ;81930B|4C6F93  |81936F;
  
  
   + CPX.W #$00FF                                               ;81930E|E0FF00  |      ;
     BNE +                                                      ;819311|D003    |819316;
-    JMP.W .label3                                              ;819313|4C6F93  |81936F;
+    JMP.W .cancelDrop                                              ;819313|4C6F93  |81936F;
  
  
   + REP #$20                                                   ;819316|C220    |      ;
@@ -2681,24 +2681,24 @@ fItemCarriedAnimal_CarryLoop:
     SEP #$20                                                   ;819334|E220    |      ;
     AND.B #$1F                                                 ;819336|291F    |      ;
     BEQ +                                                      ;819338|F003    |81933D;
-    JMP.W .label3                                              ;81933A|4C6F93  |81936F;
+    JMP.W .cancelDrop                                              ;81933A|4C6F93  |81936F;
  
  
   + CPX.W #$00FF                                               ;81933D|E0FF00  |      ;
     BNE +                                                      ;819340|D003    |819345;
-    JMP.W .label3                                              ;819342|4C6F93  |81936F;
+    JMP.W .cancelDrop                                              ;819342|4C6F93  |81936F;
  
  
   + CPX.W #$00E1                                               ;819345|E0E100  |      ;
     BNE +                                                      ;819348|D003    |81934D;
-    JMP.W .label3                                              ;81934A|4C6F93  |81936F;
+    JMP.W .cancelDrop                                              ;81934A|4C6F93  |81936F;
  
  
   + CPX.W #$00C0                                               ;81934D|E0C000  |      ;
     BCC +                                                      ;819350|9007    |819359;
     CPX.W #$00D0                                               ;819352|E0D000  |      ;
     BCS +                                                      ;819355|B002    |819359;
-    BRA .label3                                                ;819357|8016    |81936F;
+    BRA .cancelDrop                                                ;819357|8016    |81936F;
  
  
   + REP #$30                                                   ;819359|C230    |      ;
@@ -2713,7 +2713,7 @@ fItemCarriedAnimal_CarryLoop:
     BRA .justReturn                                            ;81936D|8009    |819378;
  
  
-.label3:
+.cancelDrop:
     %SetPlayerAction(!PACTION_NONE)
     BRA .justReturn                                            ;819376|8000    |819378;
  
