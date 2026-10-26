@@ -77,6 +77,7 @@ jobs:
           python3 tools/gfx/pngsync.py check
           for R in eu de jp; do python3 tools/gfx/pngsync.py check --region $R; done
           python3 tests/test_region_patch.py
+          HM_ROM_DIR=${HM_ROM_DIR:-} python3 tests/test_extract_roundtrip.py   # skipped without ROM dumps
 
       - name: Build and verify (US)
         run: |

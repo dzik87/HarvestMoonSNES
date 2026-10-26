@@ -1,0 +1,142 @@
+# AI engine tables (bank $84, ai_engine.asm).
+# aAIActions[opcode] -> handler of the AI script command (ptr16).  Opcodes are used by the %AICMD macros in src/ai (see docs/formats/ai-scripts.md).
+# pppAISelector[N] -> ptr24 of the list of AI scripts of a set (script list, festival script).
+# aAISetMask[N] = 1 << N, aAIResetMask[N] = ~(1 << N): bit helpers of the AI flag words (commands 0x14, 0x23).
+# Confidence: high.
+
+@label aAIActions
+@columns opcode:index,handler:ptr16
+@at US=$849419 EU=$849419 DE=$849419 JP=$849419
+$00,fAIAction0x00_SetMusicTrack
+$01,fAIAction0x01_UnfreezeTime
+$02,fAIAction0x02_FreezeTime
+$03,fAIAction0x03_SetHour
+$04,fAIAction0x04_DoesNothing
+$05,fAIAction0x05_SetTransferPosition
+$06,fAIAction0x06_SetDestinationArea
+$07,fAIAction0x07_SetPlayerDirection
+$08,fAIAction0x08_EnableAIControl
+$09,fAIAction0x09
+$0A,fAIAction0x0A
+$0B,fAIAction0x0B
+$0C,fAIAction0x0C
+$0D,fAIAction0x0D
+$0E,fAIAction0x0E
+$0F,fAIAction0x0F_ScreenFadeout
+$10,fAIAction0x10_End
+$11,fAIAction0x11_EnableUserControl
+$12,fAIAction0x12_AlwaysJump
+$13,fAIAction0x13_Wait
+$14,fAIAction0x14_JumpIfFlagSet
+$15,fAIAction0x15_JumpIfEquals8
+$16,fAIAction0x16_JumpIfBetween8
+$17,fAIAction0x17
+$18,fAIAction0x18
+$19,fAIAction0x19
+$1A,fAIAction0x1A
+$1B,fAIAction0x1B
+$1C,fAIAction0x1C_ShowDialog
+$1D,fAIAction0x1D_ShowDialog
+$1E,fAIAction0x1F
+$1F,fAIAction0x1F
+$20,fAIAction0x20_JumpIfChoice
+$21,fAIAction0x21_AddValue8
+$22,fAIAction0x22
+$23,fAIAction0x23_OrWithIndexedValue
+$24,fAIAction0x24_NextHourPalette
+$25,fAIAction0x25
+$26,fAIAction0x28
+$27,fAIAction0x28
+$28,fAIAction0x28
+$29,fAIAction0x29_SetMapScrooling
+$2A,fAIAction0x2A
+$2B,fAIAction0x2B
+$2C,fAIAction0x2C
+$2D,fAIAction0x2D
+$2E,fAIAction0x2E
+$2F,fAIAction0x2F
+$30,fAIAction0x30_UpdateChicken
+$31,fAIAction0x31_UpdateCow
+$32,fAIAction0x32
+$33,fAIAction0x33_UpdateMole
+$34,fAIAction0x34
+$35,fAIAction0x35_UpdateHorse
+$36,fAIAction0x36_UpdateDog
+$37,fAIAction0x37
+$38,fAIAction0x38
+$39,fAIAction0x39_WalkForTime
+$3A,fAIAction0x3A_RunForTime
+$3B,fAIAction0x3B
+$3C,fAIAction0x3C
+$3D,fAIAction0x3D_TeleportToArea
+$3E,fAIAction0x3E
+$3F,fAIAction0x3F_ThrowHeldItem
+$40,fAIAction0x40_DisableTileInteractions
+$41,fAIAction0x41_AddValue16
+$42,fAIAction0x42_AddValue24
+$43,fAIAction0x43_JumpIfEqual16
+$44,fAIAction0x44_JumpIfEqual24
+$45,fAIAction0x45_JumpIfBetween16
+$46,fAIAction0x46_JumpIfBetween24
+$47,fAIAction0x47_SetValue8
+$48,fAIAction0x48
+$49,fAIAction0x49
+$4A,fAIAction0x4A
+$4B,fAIAction0x4B
+$4C,fAIAction0x4C
+$4D,fAIAction0x4D
+$4E,fAIAction0x4E
+$4F,fAIAction0x4F
+$50,fAIAction0x50
+$51,fAIAction0x51
+$52,fAIAction0x52
+$53,fAIAction0x53
+$54,fAIAction0x54_ShowDialog
+$55,fAIAction0x55
+$56,fAIAction0x56_UseEquippedItem
+$57,fAIAction0x57_UpdateStamina
+$58,fAIAction0x58_ReplaceFarmTile
+$59,fAIAction0x59_SwapEquippedItems
+@label pppAISelector
+@columns set:index,scripts:ptr24
+$00,ppAIScriptingList
+$01,pAIScripting0x0F_StarNightFestival
+
+@label aAISetMask
+@columns bit:index,mask:flags16
+$00,?
+$01,?
+$02,?
+$03,?
+$04,?
+$05,?
+$06,?
+$07,?
+$08,?
+$09,?
+$0A,?
+$0B,?
+$0C,?
+$0D,?
+$0E,?
+$0F,?
+
+@label aAIResetMask
+@columns bit:index,mask:flags16
+$00,?
+$01,?
+$02,?
+$03,?
+$04,?
+$05,?
+$06,?
+$07,?
+$08,?
+$09,?
+$0A,?
+$0B,?
+$0C,?
+$0D,?
+$0E,?
+$0F,?
+

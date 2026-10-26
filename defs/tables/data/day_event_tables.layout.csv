@@ -1,0 +1,22 @@
+# Random day event tables (bank $82, game_events.asm).  Each label is a row addressed by the season (nCurrentSeasonID): the value is
+# the parameter of the random event of that season (0 = none).  Row names are the former label names; they are what the code refers to.
+#   spring..winter  value per season (u8)
+# Confidence: medium (read as season-indexed byte tables, the event meaning of the value is not fully traced).
+
+@columns label:label,spring:u8,summer:u8,fall:u8,winter:u8
+# Season index based
+@at US=$828EB2 EU=$828EFD DE=$82906F JP=$828CC0
+.e_Summer30thDay,?,?,?,?
+
+# Season index based
+.e_Unknown1,?,?,?,?
+
+# Season index based
+.e_Unknown2,?,?,?,?
+
+# Season index based
+.e_Summer29thDay,?,?,?,?
+
+# Season index based
+.e_Winter7thDay,?,?,?,?
+

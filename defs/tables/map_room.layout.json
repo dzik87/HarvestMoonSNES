@@ -1,0 +1,8 @@
+{"tables": [
+ {"label": "nMapRoomRowStrideTable", "type": "dw", "per_line": 5, "count": 5,
+  "doc": "Indexed by the room width multiplier (strcDialogDisplay.mapMultiWidth 0-4); stored to strcMap.pCurrent+2 by fTileMap_MapChangeHandler.",
+  "values": ["?@US:80AA68;EU:80AA68;DE:80AA68;JP:80AA66", "?", "?", "?", "?"]},
+ {"label": "nMapRoomSizeTable", "type": "dw", "per_line": 5, "count": 5,
+  "doc": "Indexed by the room width multiplier (0-4); stored to strcMap.unk1C by fTileMap_MapChangeHandler.",
+  "values": ["?@US:80AA72;EU:80AA72;DE:80AA72;JP:80AA70", "?", "?", "?", "?"]}
+]}

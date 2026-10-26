@@ -1,0 +1,23 @@
+{"tables": [
+ {"label": "aMainMenu_SlotFrameVramAddr", "doc": "Main menu, save slot boxes: VRAM word address of the frame of each slot part (two entries per slot).", "type": "dw", "values": ["?@US:82F258", "?", "?", "?", "?", "?", "?", "?"], "per_line": 6, "variants": {
+   "EU": {"type": "dw", "values": ["?@EU:82F241", "?", "?", "?", "?", "?", "?", "?"], "per_line": 6},
+   "DE": {"type": "dw", "values": ["?@DE:82F40D", "?", "?", "?", "?", "?", "?", "?"], "per_line": 6},
+   "JP": {"type": "db", "values": ["?@JP:82EFCF", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?"], "per_line": 16}}},
+ {"label": "aMainMenu_SlotFrameTileStart", "doc": "Main menu, save slot boxes: first tile (name table word) of each frame part.", "type": "dw", "values": ["?@US:82F268;EU:82F251", "?", "?", "?", "?", "?", "?", "?"], "per_line": 6, "variants": {
+   "DE": {"type": "dw", "values": ["?@DE:82F41D", "?", "?", "?", "?", "?", "?", "?"], "per_line": 6},
+   "JP": {"type": "db", "values": ["?@JP:82EFDF", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?"], "per_line": 16}}},
+ {"label": "aMainMenu_SlotInfoTextVramAddr", "doc": "Main menu, save slot boxes: VRAM word address where the slot's text (name, date, ...) is written; also indexed by the slot drawing code in main_loop.asm.", "type": "dw", "values": ["?@US:82F278;EU:82F261", "?", "?", "?", "?", "?", "?", "?"], "per_line": 6, "variants": {
+   "DE": {"type": "dw", "values": ["?@DE:82F42D", "?", "?", "?", "?", "?", "?", "?"], "per_line": 6},
+   "JP": {"type": "db", "values": ["?@JP:82EFEF", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?"], "per_line": 16}}},
+ {"label": "aMainMenu_SlotFrameRunLength", "doc": "Main menu, save slot boxes: run length (tiles) of each frame part.", "type": "dw", "values": ["?@US:82F288;EU:82F271", "?", "?", "?", "?", "?", "?", "?"], "per_line": 6, "variants": {
+   "DE": {"type": "dw", "values": ["?@DE:82F43D", "?", "?", "?", "?", "?", "?", "?"], "per_line": 6},
+   "JP": {"type": "db", "values": ["?@JP:82EFFF", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?", "?"], "per_line": 16}}},
+ {"label": "aYearOrdinalString", "doc": "Year ordinal pairs (3 x [s16, s16]) used by the main menu date text; the JP release has no such table (label defined in src/code/region_targets.asm).", "type": "dw", "values": ["?@US:82F298;EU:82F281;DE:82F44D", "?", "?", "?", "?", "?"], "per_line": 6, "variants": {
+   "JP": {"absent": true}}},
+ {"label": "aMainMenu_PalAnimLogoA", "doc": "Palette animation of the title logo, part A: entries are `dl` = colour word (low 16 bits, BGR555) + duration in frames (high byte); `dw $FFFE` + `dl label` = loop.", "rows": [{"type": "dl", "values": ["?@US:82F2A4;EU:82F28D;DE:82F459;JP:82F00F", "?", "?"]}, {"label": "aMainMenu_PalAnimLogoA_Loop"}, {"type": "dl", "values": ["?"]}, {"type": "dw", "values": ["?"]}, {"type": "dl", "values": ["aMainMenu_PalAnimLogoA_Loop"]}]},
+ {"label": "aMainMenu_PalAnimLogoB", "doc": "Palette animation of the title logo, part B (same entry format as part A).", "rows": [{"type": "dl", "values": ["?@US:82F2B5;EU:82F29E;DE:82F46A;JP:82F020", "?", "?", "?"]}, {"label": "aMainMenu_PalAnimLogoB_Loop"}, {"type": "dl", "values": ["?"]}, {"type": "dw", "values": ["?"]}, {"type": "dl", "values": ["aMainMenu_PalAnimLogoB_Loop"]}]},
+ {"label": "aMainMenu_PalAnimItemHighlighted", "doc": "Palette animation of a highlighted menu item (same entry format).", "rows": [{"type": "dl", "values": ["?@US:82F2C9;EU:82F2B2;DE:82F47E;JP:82F034", "?", "?", "?"]}, {"type": "dw", "values": ["?"]}, {"type": "dl", "values": ["aMainMenu_PalAnimItemHighlighted"]}]},
+ {"label": "aMainMenu_PalAnimItemNormal", "doc": "Palette animation of a menu item that is not highlighted (same entry format).", "rows": [{"type": "dl", "values": ["?@US:82F2DA;EU:82F2C3;DE:82F48F;JP:82F045"]}, {"type": "dw", "values": ["?"]}, {"type": "dl", "values": ["aMainMenu_PalAnimItemNormal"]}]},
+ {"label": "aMainMenu_PalAnimSlotHighlighted", "doc": "Palette animation of the highlighted save slot (same entry format).", "rows": [{"type": "dl", "values": ["?@US:82F2E2;EU:82F2CB;DE:82F497;JP:82F04D", "?", "?", "?", "?", "?"]}, {"type": "dw", "values": ["?"]}, {"type": "dl", "values": ["aMainMenu_PalAnimSlotHighlighted"]}]},
+ {"label": "aMainMenu_PalAnimSlotNormal", "doc": "Palette animation of a save slot that is not highlighted (same entry format).", "rows": [{"type": "dl", "values": ["?@US:82F2F9;EU:82F2E2;DE:82F4AE;JP:82F064"]}, {"type": "dw", "values": ["?"]}, {"type": "dl", "values": ["aMainMenu_PalAnimSlotNormal"]}]}
+]}

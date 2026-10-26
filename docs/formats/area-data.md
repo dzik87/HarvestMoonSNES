@@ -1,7 +1,7 @@
 # Per-area data tables
 
 Four tables of the code banks are indexed by the **area id** (`strcMap.loadAreaId`, `!AREA_*` in `src/common/enums.asm`, `$00-$5F`).
-Their sources live under `assets/areas/`, the generator is `tools/maps/areadata.py` (`build` -> `build/gen/maps/*.asm`, `check`), and the
+Their sources live under `assets/areas/` (extracted from the ROM by `tools/extract_steps/areas.py`; the names and the table layout are structure: `defs/areas/{areas.csv,layout.json,blob_addresses.json}`), the generator is `tools/maps/areadata.py` (`build` -> `build/gen/maps/*.asm`, `check`), and the
 generated files are included by the code at the place of the former data (same labels, same offsets, bit-identical ROM).
 
 | Table | ROM | Included by | Source |
@@ -11,7 +11,7 @@ generated files are included by the code at the place of the former data (same l
 | `pObjectMap` (96 x ptr24), `pObjectMap2` (96 x ptr24), `sObjectMap2_0xNN` x 7 | `$82:B174`.. | `src/code/bank_82/object_data.asm` | `areas.csv` (`object_map`, `object_props`) + `object_props/*.txt` |
 | `pAudioEngine_MapMusic` (96 x ptr16) + `aAudioEngine_MapMusicId_*` x 12 | `$80:B8E7` | `src/code/bank_80/audio_data.asm` | `areas.csv` (`music`) + `area_music.json` |
 
-## areas.csv
+## areas.csv (`defs/areas/areas.csv`, committed structure)
 
 `id,name,gfx,object_map,object_props,music` - one row per area. `name` is the enum constant (checked against `enums.asm`), the other columns are the labels
 the four tables point to. `PTR24_None` (object map / property table) and `PTR16_None` (music) mark areas without that data. The object maps
@@ -53,5 +53,5 @@ tile for tool and carry actions (`fSetTileAtCoords`); other bytes hold direction
 
 ## Other small tables
 
-`assets/tables/map_room.json` (`nTable_80AA68`, `nTable_80AA72`, indexed by the room width) and `assets/tables/tool_sounds.json`
-(`nToolSoundData_80B8CD`) are plain value lists handled by `tools/data/smalltables.py` (see `docs/formats/menu-data.md`).
+`assets/tables/map_room.json` (`nMapRoomRowStrideTable`, `nMapRoomSizeTable`, indexed by the room width) and `assets/tables/tool_sounds.json`
+(`nSoundEffectSampleTable`) are plain value lists handled by `tools/data/smalltables.py` (see `docs/formats/menu-data.md`).

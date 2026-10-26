@@ -1,0 +1,2090 @@
+# Colour animation scripts of the maps (bank $80, played by fPalette_ProcessColorAnimSlots; slots are started by the
+# fPaletteAnim_* routines of data_tables.asm with fCore_Store0x72To0x42AtIndex).
+# A script is a list of steps and ends with a loop or end record:
+#   step   color:bgr555  the colour written into the palette buffer (row / colour index come from the slot)
+#          frames:u8     frames to wait before the next step
+#   loop:  op=$FFFE, target:ptr24  continue with the script at target (all scripts here loop to their own start or to another script)
+#   end:   op=$FFFF  stop the animation
+# Confidence: high (reader: core.asm fPalette_ProcessColorAnimSlots).
+
+@record loop op:u16=$FFFE,target:ptr24
+@record end op:u16=$FFFF
+@label aPaletteAnimScript_FarmSpring_FarmSummer_T01_Slot4
+@columns color:bgr555,frames:u8
+@at US=$80DD5B EU=$80DD5B DE=$80DD5B JP=$80DD59
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_FarmSpring_FarmSummer_T01_Slot4
+
+@label aPaletteAnimScript_FarmSpring_FarmSummer_T01_Slot5
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_FarmSpring_FarmSummer_T01_Slot5
+
+@label aPaletteAnimScript_FarmSpring_FarmSummer_T01_Slot6
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_FarmSpring_FarmSummer_T01_Slot6
+
+@label aPaletteAnimScript_FarmSpring_FarmSummer_T01_Slot7
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_FarmSpring_FarmSummer_T01_Slot7
+
+@label aPaletteAnimScript_FarmSpring_FarmSummer_T2_Slot4
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_FarmSpring_FarmSummer_T2_Slot4
+
+@label aPaletteAnimScript_FarmSpring_FarmSummer_T2_Slot5
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_FarmSpring_FarmSummer_T2_Slot5
+
+@label aPaletteAnimScript_FarmSpring_FarmSummer_T2_Slot6
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_FarmSpring_FarmSummer_T2_Slot6
+
+@label aPaletteAnimScript_FarmSpring_FarmSummer_T2_Slot7
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_FarmSpring_FarmSummer_T2_Slot7
+
+@label aPaletteAnimScript_FarmSpring_FarmSummer_T3_Slot4
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_FarmSpring_FarmSummer_T3_Slot4
+
+@label aPaletteAnimScript_FarmSpring_FarmSummer_T3_Slot5
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_FarmSpring_FarmSummer_T3_Slot5
+
+@label aPaletteAnimScript_FarmSpring_FarmSummer_T3_Slot6
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_FarmSpring_FarmSummer_T3_Slot6
+
+@label aPaletteAnimScript_FarmSpring_FarmSummer_T3_Slot7
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_FarmSpring_FarmSummer_T3_Slot7
+
+@label aPaletteAnimScript_FarmSpring_FarmSummer_T4_Slot4
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_FarmSpring_FarmSummer_T4_Slot4
+
+@label aPaletteAnimScript_FarmSpring_FarmSummer_T4_Slot5
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_FarmSpring_FarmSummer_T4_Slot5
+
+@label aPaletteAnimScript_FarmSpring_FarmSummer_T4_Slot6
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_FarmSpring_FarmSummer_T4_Slot6
+
+@label aPaletteAnimScript_FarmSpring_FarmSummer_T4_Slot7
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_FarmSpring_FarmSummer_T4_Slot7
+
+@label aPaletteAnimScript_FarmFall_T01_Slot4
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_FarmFall_T01_Slot4
+
+@label aPaletteAnimScript_FarmFall_T01_Slot5
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_FarmFall_T01_Slot5
+
+@label aPaletteAnimScript_FarmFall_T01_Slot6
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_FarmFall_T01_Slot6
+
+@label aPaletteAnimScript_FarmFall_T01_Slot7
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_FarmFall_T01_Slot7
+
+@label aPaletteAnimScript_FarmFall_T2_Slot4
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_FarmFall_T2_Slot4
+
+@label aPaletteAnimScript_FarmFall_T2_Slot5
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_FarmFall_T2_Slot5
+
+@label aPaletteAnimScript_FarmFall_T2_Slot6
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_FarmFall_T2_Slot6
+
+@label aPaletteAnimScript_FarmFall_T2_Slot7
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_FarmFall_T2_Slot7
+
+@label aPaletteAnimScript_FarmFall_T3_Slot4
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_FarmFall_T3_Slot4
+
+@label aPaletteAnimScript_FarmFall_T3_Slot5
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_FarmFall_T3_Slot5
+
+@label aPaletteAnimScript_FarmFall_T3_Slot6
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_FarmFall_T3_Slot6
+
+@label aPaletteAnimScript_FarmFall_T3_Slot7
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_FarmFall_T3_Slot7
+
+@label aPaletteAnimScript_FarmFall_T4_Slot4
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_FarmFall_T4_Slot4
+
+@label aPaletteAnimScript_FarmFall_T4_Slot5
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_FarmFall_T4_Slot5
+
+@label aPaletteAnimScript_FarmFall_T4_Slot6
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_FarmFall_T4_Slot6
+
+@label aPaletteAnimScript_FarmFall_T4_Slot7
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_FarmFall_T4_Slot7
+
+@label aPaletteAnimScript_ImpUnderground_All_Slot4
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_ImpUnderground_All_Slot4
+
+@label aPaletteAnimScript_ImpUnderground_All_Slot5
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_ImpUnderground_All_Slot5
+
+@label aPaletteAnimScript_ImpUnderground_All_Slot6
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_ImpUnderground_All_Slot6
+
+@label aPaletteAnimScript_ImpUnderground_All_Slot7
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_ImpUnderground_All_Slot7
+
+@label aPaletteAnimScript_ImpUnderground_All_Slot8
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_ImpUnderground_All_Slot8
+
+@label aPaletteAnimScript_ImpUnderground_All_Slot9
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_ImpUnderground_All_Slot9
+
+@label aPaletteAnimScript_ImpUnderground_All_Slot10
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_ImpUnderground_All_Slot10
+
+@label aPaletteAnimScript_House1_House2_House3_All_Slot4
+@columns color:bgr555,frames:u8
+?,?
+?,?
+loop: aPaletteAnimScript_House1_House2_House3_All_Slot4
+
+@label aPaletteAnimScript_House1_House2_House3_All_Slot5
+@columns color:bgr555,frames:u8
+?,?
+?,?
+loop: aPaletteAnimScript_House1_House2_House3_All_Slot5
+
+@label aPaletteAnimScript_House1_House2_House3_All_Slot6
+@columns color:bgr555,frames:u8
+?,?
+?,?
+loop: aPaletteAnimScript_House1_House2_House3_All_Slot6
+
+@label aPaletteAnimScript_House1_House2_House3_All_Slot7
+@columns color:bgr555,frames:u8
+?,?
+?,?
+loop: aPaletteAnimScript_House1_House2_House3_All_Slot7
+
+@label aPaletteAnimScript_MajorHouse_T1234_Slot4
+@columns color:bgr555,frames:u8
+?,?
+?,?
+loop: aPaletteAnimScript_MajorHouse_T1234_Slot4
+
+@label aPaletteAnimScript_MajorHouse_T1234_Slot5
+@columns color:bgr555,frames:u8
+?,?
+?,?
+loop: aPaletteAnimScript_MajorHouse_T1234_Slot5
+
+@label aPaletteAnimScript_MajorHouse_T1234_Slot6
+@columns color:bgr555,frames:u8
+?,?
+?,?
+loop: aPaletteAnimScript_MajorHouse_T1234_Slot6
+
+@label aPaletteAnimScript_MajorHouse_T1234_Slot7
+@columns color:bgr555,frames:u8
+?,?
+?,?
+loop: aPaletteAnimScript_MajorHouse_T1234_Slot7
+
+@label aPaletteAnimScript_Church_T1234_Slot4
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_Church_T1234_Slot4
+
+@label aPaletteAnimScript_Church_T1234_Slot5
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_Church_T1234_Slot5
+
+@label aPaletteAnimScript_Church_T1234_Slot6
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_Church_T1234_Slot6
+
+@label aPaletteAnimScript_Church_T1234_Slot7
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_Church_T1234_Slot7
+
+@label aPaletteAnimScript_Church_T1234_Slot8
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_Church_T1234_Slot8
+
+@label aPaletteAnimScript_Church_T1234_Slot9
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_Church_T1234_Slot9
+
+@label aPaletteAnimScript_Church_T1234_Slot10
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_Church_T1234_Slot10
+
+@label aPaletteAnimScript_Church_T1234_Slot11
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_Church_T1234_Slot11
+
+@label aPaletteAnimScript_FloristBedroom_T1234_Slot4
+@columns color:bgr555,frames:u8
+?,?
+?,?
+loop: aPaletteAnimScript_FloristBedroom_T1234_Slot4
+
+@label aPaletteAnimScript_FloristBedroom_T1234_Slot5
+@columns color:bgr555,frames:u8
+?,?
+?,?
+loop: aPaletteAnimScript_FloristBedroom_T1234_Slot5
+
+@label aPaletteAnimScript_FloristBedroom_T1234_Slot6
+@columns color:bgr555,frames:u8
+?,?
+?,?
+loop: aPaletteAnimScript_FloristBedroom_T1234_Slot6
+
+@label aPaletteAnimScript_FloristBedroom_T1234_Slot7
+@columns color:bgr555,frames:u8
+?,?
+?,?
+loop: aPaletteAnimScript_FloristBedroom_T1234_Slot7
+
+@label aPaletteAnimScript_BarBedroom_T1234_Slot4
+@columns color:bgr555,frames:u8
+?,?
+?,?
+loop: aPaletteAnimScript_BarBedroom_T1234_Slot4
+
+@label aPaletteAnimScript_BarBedroom_T1234_Slot5
+@columns color:bgr555,frames:u8
+?,?
+?,?
+loop: aPaletteAnimScript_BarBedroom_T1234_Slot5
+
+@label aPaletteAnimScript_BarBedroom_T1234_Slot6
+@columns color:bgr555,frames:u8
+?,?
+?,?
+loop: aPaletteAnimScript_BarBedroom_T1234_Slot6
+
+@label aPaletteAnimScript_BarBedroom_T1234_Slot7
+@columns color:bgr555,frames:u8
+?,?
+?,?
+loop: aPaletteAnimScript_BarBedroom_T1234_Slot7
+
+@label aPaletteAnimScript_ToolsShopBedroom_T1234_Slot4
+@columns color:bgr555,frames:u8
+?,?
+?,?
+loop: aPaletteAnimScript_ToolsShopBedroom_T1234_Slot4
+
+@label aPaletteAnimScript_ToolsShopBedroom_T1234_Slot5
+@columns color:bgr555,frames:u8
+?,?
+?,?
+loop: aPaletteAnimScript_ToolsShopBedroom_T1234_Slot5
+
+@label aPaletteAnimScript_ToolsShopBedroom_T1234_Slot6
+@columns color:bgr555,frames:u8
+?,?
+?,?
+loop: aPaletteAnimScript_ToolsShopBedroom_T1234_Slot6
+
+@label aPaletteAnimScript_ToolsShopBedroom_T1234_Slot7
+@columns color:bgr555,frames:u8
+?,?
+?,?
+loop: aPaletteAnimScript_ToolsShopBedroom_T1234_Slot7
+
+@label aPaletteAnimScript_AnimalShop_T1234_Slot4
+@columns color:bgr555,frames:u8
+?,?
+?,?
+loop: aPaletteAnimScript_AnimalShop_T1234_Slot4
+
+@label aPaletteAnimScript_AnimalShop_T1234_Slot5
+@columns color:bgr555,frames:u8
+?,?
+?,?
+loop: aPaletteAnimScript_AnimalShop_T1234_Slot5
+
+@label aPaletteAnimScript_AnimalShop_T1234_Slot6
+@columns color:bgr555,frames:u8
+?,?
+?,?
+loop: aPaletteAnimScript_AnimalShop_T1234_Slot6
+
+@label aPaletteAnimScript_TownSpring_DancingS1_EggFestival_T1_Slot4
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_TownSpring_DancingS1_EggFestival_T1_Slot4
+
+@label aPaletteAnimScript_TownSpring_DancingS1_EggFestival_T1_Slot5
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_TownSpring_DancingS1_EggFestival_T1_Slot5
+
+@label aPaletteAnimScript_TownSpring_DancingS1_EggFestival_T1_Slot6
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_TownSpring_DancingS1_EggFestival_T1_Slot6
+
+@label aPaletteAnimScript_TownSpring_T2_Slot4
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_TownSpring_T2_Slot4
+
+@label aPaletteAnimScript_TownSpring_T2_Slot5
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_TownSpring_T2_Slot5
+
+@label aPaletteAnimScript_TownSpring_T2_Slot6
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_TownSpring_T2_Slot6
+
+@label aPaletteAnimScript_TownSpring_T3_Slot4
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_TownSpring_T3_Slot4
+
+@label aPaletteAnimScript_TownSpring_T3_Slot5
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_TownSpring_T3_Slot5
+
+@label aPaletteAnimScript_TownSpring_T3_Slot6
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_TownSpring_T3_Slot6
+
+@label aPaletteAnimScript_TownSpring_T4_Slot4
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_TownSpring_T4_Slot4
+
+@label aPaletteAnimScript_TownSpring_T4_Slot5
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_TownSpring_T4_Slot5
+
+@label aPaletteAnimScript_TownSpring_T4_Slot6
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_TownSpring_T4_Slot6
+
+@label aPaletteAnimScript_TownSummer_T1_Slot4
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_TownSummer_T1_Slot4
+
+@label aPaletteAnimScript_TownSummer_T1_Slot5
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_TownSummer_T1_Slot5
+
+@label aPaletteAnimScript_TownSummer_T1_Slot6
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_TownSummer_T1_Slot6
+
+@label aPaletteAnimScript_TownSummer_T2_Slot4
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_TownSummer_T2_Slot4
+
+@label aPaletteAnimScript_TownSummer_T2_Slot5
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_TownSummer_T2_Slot5
+
+@label aPaletteAnimScript_TownSummer_T2_Slot6
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_TownSummer_T2_Slot6
+
+@label aPaletteAnimScript_TownSummer_T3_Slot4
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_TownSummer_T3_Slot4
+
+@label aPaletteAnimScript_TownSummer_T3_Slot5
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_TownSummer_T3_Slot5
+
+@label aPaletteAnimScript_TownSummer_T3_Slot6
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_TownSummer_T3_Slot6
+
+@label aPaletteAnimScript_TownSummer_T4_Slot4
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_TownSummer_T4_Slot4
+
+@label aPaletteAnimScript_TownSummer_T4_Slot5
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_TownSummer_T4_Slot5
+
+@label aPaletteAnimScript_TownSummer_T4_Slot6
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_TownSummer_T4_Slot6
+
+@label aPaletteAnimScript_TownFall_NYPublicSquare_T1_Slot4
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnimScript_TownFall_NYPublicSquare_T1_Slot4
+
+@label aPaletteAnim_Row2Col0E_80E455
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row2Col0E_80E455
+
+@label aPaletteAnim_Row2Col0F_80E463
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row2Col0F_80E463
+
+@label aPaletteAnim_Row2Col06_80E471
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row2Col06_80E471
+
+@label aPaletteAnim_Row2Col0E_80E47F
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row2Col0E_80E47F
+
+@label aPaletteAnim_Row2Col0F_80E48D
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row2Col0F_80E48D
+
+@label aPaletteAnim_Row2Col06_80E49B
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row2Col06_80E49B
+
+@label aPaletteAnim_Row2Col0E_80E4A9
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row2Col0E_80E4A9
+
+@label aPaletteAnim_Row2Col0F_80E4B7
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row2Col0F_80E4B7
+
+@label aPaletteAnim_Row2Col06_80E4C5
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row2Col06_80E4C5
+
+@label aPaletteAnim_Row2Col0E_80E4D3
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row2Col0E_80E4D3
+
+@label aPaletteAnim_Row2Col0F_80E4E1
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row2Col0F_80E4E1
+
+@label aPaletteAnim_Row2Col03_80E4EF
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row2Col03_80E4EF
+
+@label aPaletteAnim_Row2Col04_80E500
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row2Col04_80E500
+
+@label aPaletteAnim_Row2Col05_80E511
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row2Col05_80E511
+
+@label aPaletteAnim_Row2Col07_80E522
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row2Col07_80E522
+
+@label aPaletteAnim_Row2Col03_80E533
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row2Col03_80E533
+
+@label aPaletteAnim_Row2Col04_80E544
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row2Col04_80E544
+
+@label aPaletteAnim_Row2Col05_80E555
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row2Col05_80E555
+
+@label aPaletteAnim_Row2Col07_80E566
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row2Col07_80E566
+
+@label aPaletteAnim_Row2Col03_80E577
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row2Col03_80E577
+
+@label aPaletteAnim_Row2Col04_80E588
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row2Col04_80E588
+
+@label aPaletteAnim_Row2Col05_80E599
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row2Col05_80E599
+
+@label aPaletteAnim_Row2Col07_80E5AA
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row2Col07_80E5AA
+
+@label aPaletteAnim_Row2Col03_80E5BB
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row2Col03_80E5BB
+
+@label aPaletteAnim_Row2Col04_80E5CC
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row2Col04_80E5CC
+
+@label aPaletteAnim_Row2Col05_80E5DD
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row2Col05_80E5DD
+
+@label aPaletteAnim_Row2Col07_80E5EE
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row2Col07_80E5EE
+
+@label aPaletteAnim_Row3Col08_80E5FF
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col08_80E5FF
+
+@label aPaletteAnim_Row3Col09_80E616
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col09_80E616
+
+@label aPaletteAnim_Row3Col0A_80E62D
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0A_80E62D
+
+@label aPaletteAnim_Row3Col0B_80E644
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0B_80E644
+
+@label aPaletteAnim_Row3Col0C_80E65B
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0C_80E65B
+
+@label aPaletteAnim_Row3Col08_80E672
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col08_80E672
+
+@label aPaletteAnim_Row3Col09_80E689
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col09_80E689
+
+@label aPaletteAnim_Row3Col0A_80E6A0
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0A_80E6A0
+
+@label aPaletteAnim_Row3Col0B_80E6B7
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0B_80E6B7
+
+@label aPaletteAnim_Row3Col0C_80E6CE
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0C_80E6CE
+
+@label aPaletteAnim_Row3Col08_80E6E5
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col08_80E6E5
+
+@label aPaletteAnim_Row3Col09_80E6FC
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col09_80E6FC
+
+@label aPaletteAnim_Row3Col0A_80E713
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0A_80E713
+
+@label aPaletteAnim_Row3Col0B_80E72A
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0B_80E72A
+
+@label aPaletteAnim_Row3Col0C_80E741
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0C_80E741
+
+@label aPaletteAnim_Row3Col08_80E758
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col08_80E758
+
+@label aPaletteAnim_Row3Col09_80E76F
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col09_80E76F
+
+@label aPaletteAnim_Row3Col0A_80E786
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0A_80E786
+
+@label aPaletteAnim_Row3Col0B_80E79D
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0B_80E79D
+
+@label aPaletteAnim_Row3Col08_80E7B4
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col08_80E7B4
+
+@label aPaletteAnim_Row3Col09_80E7CB
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col09_80E7CB
+
+@label aPaletteAnim_Row3Col0A_80E7E2
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0A_80E7E2
+
+@label aPaletteAnim_Row3Col0B_80E7F9
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0B_80E7F9
+
+@label aPaletteAnim_Row3Col0C_80E810
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0C_80E810
+
+@label aPaletteAnim_Row3Col08_80E827
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col08_80E827
+
+@label aPaletteAnim_Row3Col09_80E83E
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col09_80E83E
+
+@label aPaletteAnim_Row3Col0A_80E855
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0A_80E855
+
+@label aPaletteAnim_Row3Col0B_80E86C
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0B_80E86C
+
+@label aPaletteAnim_Row3Col0C_80E883
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0C_80E883
+
+@label aPaletteAnim_Row3Col08_80E89A
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col08_80E89A
+
+@label aPaletteAnim_Row3Col09_80E8B1
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col09_80E8B1
+
+@label aPaletteAnim_Row3Col0A_80E8C8
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0A_80E8C8
+
+@label aPaletteAnim_Row3Col0B_80E8DF
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0B_80E8DF
+
+@label aPaletteAnim_Row3Col08_80E8F6
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col08_80E8F6
+
+@label aPaletteAnim_Row3Col09_80E90D
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col09_80E90D
+
+@label aPaletteAnim_Row3Col0A_80E924
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0A_80E924
+
+@label aPaletteAnim_Row3Col0B_80E93B
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0B_80E93B
+
+@label aPaletteAnim_Row3Col06_80E952
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col06_80E952
+
+@label aPaletteAnim_Row3Col07_80E969
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col07_80E969
+
+@label aPaletteAnim_Row3Col08_80E980
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col08_80E980
+
+@label aPaletteAnim_Row3Col09_80E997
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col09_80E997
+
+@label aPaletteAnim_Row3Col0A_80E9AE
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0A_80E9AE
+
+@label aPaletteAnim_Row3Col0B_80E9C5
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0B_80E9C5
+
+@label aPaletteAnim_Row3Col0C_80E9DC
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0C_80E9DC
+
+@label aPaletteAnim_Row3Col06_80E9F3
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col06_80E9F3
+
+@label aPaletteAnim_Row3Col07_80EA0A
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col07_80EA0A
+
+@label aPaletteAnim_Row3Col08_80EA21
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col08_80EA21
+
+@label aPaletteAnim_Row3Col09_80EA38
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col09_80EA38
+
+@label aPaletteAnim_Row3Col0A_80EA4F
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0A_80EA4F
+
+@label aPaletteAnim_Row3Col0B_80EA66
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0B_80EA66
+
+@label aPaletteAnim_Row3Col0C_80EA7D
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0C_80EA7D
+
+@label aPaletteAnim_Row3Col08_80EA94
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col08_80EA94
+
+@label aPaletteAnim_Row3Col09_80EAAB
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col09_80EAAB
+
+@label aPaletteAnim_Row3Col0A_80EAC2
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0A_80EAC2
+
+@label aPaletteAnim_Row3Col0B_80EAD9
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0B_80EAD9
+
+@label aPaletteAnim_Row3Col08_80EAF0
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col08_80EAF0
+
+@label aPaletteAnim_Row3Col09_80EB07
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col09_80EB07
+
+@label aPaletteAnim_Row3Col0A_80EB1E
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0A_80EB1E
+
+@label aPaletteAnim_Row3Col0B_80EB35
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0B_80EB35
+
+@label aPaletteAnim_Row4Col0A_80EB4C
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0A_80EB4C
+
+@label aPaletteAnim_Row4Col0B_80EB5D
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0B_80EB5D
+
+@label aPaletteAnim_Row4Col0A_80EB6E
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0A_80EB6E
+
+@label aPaletteAnim_Row4Col0B_80EB7F
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0B_80EB7F
+
+@label aPaletteAnim_Row4Col0A_80EB90
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0A_80EB90
+
+@label aPaletteAnim_Row4Col0B_80EBA1
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0B_80EBA1
+
+@label aPaletteAnim_Row4Col0A_80EBB2
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0A_80EBB2
+
+@label aPaletteAnim_Row4Col0B_80EBC3
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0B_80EBC3
+
+@label aPaletteAnim_Row4Col0A_80EBD4
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0A_80EBD4
+
+@label aPaletteAnim_Row4Col0B_80EBE5
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0B_80EBE5
+
+@label aPaletteAnim_Row4Col0A_80EBF6
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0A_80EBF6
+
+@label aPaletteAnim_Row4Col0B_80EC07
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0B_80EC07
+
+@label aPaletteAnim_Row4Col0A_80EC18
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0A_80EC18
+
+@label aPaletteAnim_Row4Col0B_80EC29
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0B_80EC29
+
+@label aPaletteAnim_Row4Col0A_80EC3A
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0A_80EC3A
+
+@label aPaletteAnim_Row4Col0B_80EC4B
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0B_80EC4B
+
+@label aPaletteAnim_Row4Col0A_80EC5C
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0A_80EC5C
+
+@label aPaletteAnim_Row4Col0B_80EC6D
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0B_80EC6D
+
+@label aPaletteAnim_Row4Col0A_80EC7E
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0A_80EC7E
+
+@label aPaletteAnim_Row4Col0B_80EC8F
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0B_80EC8F
+
+@label aPaletteAnim_Row4Col0A_80ECA0
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0A_80ECA0
+
+@label aPaletteAnim_Row4Col0B_80ECB1
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0B_80ECB1
+
+@label aPaletteAnim_Row4Col0A_80ECC2
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0A_80ECC2
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0A_80ECC2
+
+@label aPaletteAnim_Row4Col0A_80ECE4
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0A_80ECE4
+
+@label aPaletteAnim_Row4Col0B_80ECF5
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0B_80ECF5
+
+@label aPaletteAnim_Row4Col0A_80ED06
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0A_80ED06
+
+@label aPaletteAnim_Row4Col0B_80ED17
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0B_80ED17
+
+@label aPaletteAnim_Row4Col0A_80ED28
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0A_80ED28
+
+@label aPaletteAnim_Row4Col0B_80ED39
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0B_80ED39
+
+@label aPaletteAnim_Row4Col0A_80ED4A
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0A_80ED4A
+
+@label aPaletteAnim_Row4Col0B_80ED5B
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0B_80ED5B
+
+@label aPaletteAnim_Row4Col03_80ED6C
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col03_80ED6C
+
+@label aPaletteAnim_Row4Col05_80ED83
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col05_80ED83
+
+@label aPaletteAnim_Row4Col0B_80ED9A
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0B_80ED9A
+
+@label aPaletteAnim_Row4Col0C_80EDAB
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0C_80EDAB
+
+@label aPaletteAnim_Row4Col0D_80EDBC
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0D_80EDBC
+
+@label aPaletteAnim_Row4Col0E_80EDCD
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0E_80EDCD
+
+@label aPaletteAnim_Row4Col0C_80EDDE
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0C_80EDDE
+
+@label aPaletteAnim_Row4Col0D_80EDEC
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0D_80EDEC
+
+@label aPaletteAnim_Row4Col0E_80EDFA
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row4Col0E_80EDFA
+
+@label aPaletteAnim_Row1Col07_80EE08
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row1Col07_80EE08
+
+@label aPaletteAnim_Row1Col08_80EE16
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row1Col08_80EE16
+
+@label aPaletteAnim_Row1Col0D_80EE24
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row1Col0D_80EE24
+
+@label aPaletteAnim_Row1Col0E_80EE32
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row1Col0E_80EE32
+
+@label aPaletteAnim_Row3Col06_80EE40
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col06_80EE40
+
+@label aPaletteAnim_Row3Col09_80EE4E
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col09_80EE4E
+
+@label aPaletteAnim_Row3Col0A_80EE5C
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0A_80EE5C
+
+@label aPaletteAnim_Row3Col0B_80EE6A
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0B_80EE6A
+
+@label aPaletteAnim_Row3Col0C_80EE78
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0C_80EE78
+
+@label aPaletteAnim_Row3Col0D_80EE86
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0D_80EE86
+
+@label aPaletteAnim_Row3Col0E_80EE94
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row3Col0E_80EE94
+
+@label aPaletteAnim_Row6Col0C_80EEA2
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row6Col0C_80EEA2
+
+@label aPaletteAnim_Row6Col0D_80EEB3
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row6Col0D_80EEB3
+
+@label aPaletteAnim_Row6Col0F_80EEC4
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row6Col0F_80EEC4
+
+@label aPaletteAnim_Row6Col05_80EED5
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row6Col05_80EED5
+
+@label aPaletteAnim_Row6Col0E_80EEEC
+@columns color:bgr555,frames:u8
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+?,?
+loop: aPaletteAnim_Row6Col0E_80EEEC
+
+@label aPaletteAnim_Row2Col07_80EF06
+@columns color:bgr555,frames:u8
+?,?
+?,?
+loop: aPaletteAnim_Row2Col07_80EF06
+
+@label aPaletteAnim_Row2Col0D_80EF11
+@columns color:bgr555,frames:u8
+?,?
+?,?
+loop: aPaletteAnim_Row2Col0D_80EF11
+
+@label aPaletteAnim_Row2Col0E_80EF1C
+@columns color:bgr555,frames:u8
+?,?
+?,?
+loop: aPaletteAnim_Row2Col0E_80EF1C
+

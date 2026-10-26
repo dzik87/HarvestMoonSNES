@@ -1,8 +1,12 @@
 # Typed data tables of the code banks
 
 `tools/data/tabledata.py` (`build`, `check`) turns `assets/tables/data/<name>.csv` into `build/gen/blocks/<name>.asm`; the code includes each table with one `incsrc` at the place of the former
-data (same labels and offsets, so pointers and the ROM bytes are unchanged). `manifest.json` lists the tables and the source file that includes each (`check` requires exactly one include).
+data (same labels and offsets, so pointers and the ROM bytes are unchanged). `defs/tables/data/manifest.json` lists the tables and the source file that includes each (`check` requires exactly one include).
 Tables with other sources: `assets/areas/` (`area-data.md`), `assets/tables/*.json` (`menu-data.md`), `assets/gfx/presets.csv` (below), `assets/dialogs/` (`dialog-tables.md`), `assets/ai/` (AI scripts).
+
+## Structure and content
+
+The committed structure is `defs/tables/data/`: `manifest.json`, the tables that consist only of code labels (`item_subroutines`, `player_action_jump_table`, `player_update_jump_table`, `area_events_jump_table`: jump tables, read from there by the generator) and one `<name>.layout.csv` per table that holds ROM values. A layout is the source text with every numeric cell replaced by `?` (`?SFX` = print as `!SFX_*` name when the value has one) and `@at US=$.. EU=$.. DE=$.. JP=$..` lines giving the ROM address of the next row per release where it is not simply the end of the previous row. `tools/extract_steps/tables.py` fills the cells from the ROMs (rows inside `@if` branches are read from the releases that branch applies to, rows outside must be equal in all four) and writes `assets/tables/data/<name>.csv`. Pointer columns and `index`/`label`/`note` cells are structure and stay in the layout; `tools/migration/table_layout.py` derives layouts from complete sources (it assembles an instrumented copy to get the addresses).
 
 ## Source format
 
@@ -43,8 +47,8 @@ values or columns is inferred; columns named `unk` are kept for bytes whose purp
 | Table | Included from | Records (columns) | Content |
 |---|---|---|---|
 | `palette_anim_scripts` | `bank_80/data_tables.asm` | step: `color:bgr555, frames:u8`; `loop:` `op=$FFFE, target:ptr24`; `end:` `op=$FFFF` | colour animation scripts of the maps (`fPalette_ProcessColorAnimSlots`), 240 scripts. High. |
-| `palette_tables` | `bank_80/data_tables.asm` | `aPalettes`: `palette:ptr24`; `aMapPalettesIndexes`: `early,day,evening,dusk,night,extra:u8` per area; `nPaletteOverwrite_80BD9C`: `color_a,color_b,color_c`; `sPallete_MarriedGirlTable`: `c0..c5`; `aMapPalettesId`: `obj_a,obj_b:u8`; `pSubrutineTable_80BEEC`: `routine:ptr16` (6 per area); sData42 scripts (step/loop/end) | map palettes, time-of-day indexes, colour animation routine table. High (sprite palette ids medium). |
-| `carried_items` | `bank_81/items_misc.asm` | `pItemCarriedTable_8196AF`: `frames:ptr24`; `pItemCarriedSubrutines`: `handler:ptr16`; frames: `sprite:u16, flip:u8` per pose; found / sell / buy / shipping tables (dialog ids, profit, cost); `nItemCarriedIndexForTilemap`, `nSoundItemCarriedTable_81A308`, `aFixedDropPositionsXY` (`x,y`) | carried item poses, handlers, shop and shipping data. High (columns `unk` medium). |
+| `palette_tables` | `bank_80/data_tables.asm` | `aPalettes`: `palette:ptr24`; `aMapPalettesIndexes`: `early,day,evening,dusk,night,extra:u8` per area; `nPaletteSeasonOverwriteTable`: `color_a,color_b,color_c`; `sPallete_MarriedGirlTable`: `c0..c5`; `aMapPalettesId`: `obj_a,obj_b:u8`; `pPaletteAnimRoutineTable`: `routine:ptr16` (6 per area); sData42 scripts (step/loop/end) | map palettes, time-of-day indexes, colour animation routine table. High (sprite palette ids medium). |
+| `carried_items` | `bank_81/items_misc.asm` | `pItemCarriedFramesTable`: `frames:ptr24`; `pItemCarriedSubrutines`: `handler:ptr16`; frames: `sprite:u16, flip:u8` per pose; found / sell / buy / shipping tables (dialog ids, profit, cost); `nItemCarriedIndexForTilemap`, `nItemCarriedPickupSoundTable`, `aFixedDropPositionsXY` (`x,y`) | carried item poses, handlers, shop and shipping data. High (columns `unk` medium). |
 | `item_subroutines` | `bank_81/items_misc.asm` | `handler:ptr16` | item handler per id. Medium. |
 | `tile_scripts` | `bank_81/items_misc.asm` | patterns: `src_offset:u16, width:u8, height:u8, object_id:u16`; `script:ptr24`; steps: `tile:u16, x:pos16, y:pos16, delay:u8`; `loop:`/`end:`; shed: `tile_x,tile_y,tile_id,shed_row,shed_mask` | tile patterns and tile change scripts. High. |
 | `love_ranges` | `bank_81/player_actions.asm` | `min:u16, max:u16` per heart (rows labelled `.loveRangeN`); `sprite_table_idx:u16, flip:u8` | love points -> hearts; player sprite object table. High / medium. |
@@ -63,7 +67,7 @@ values or columns is inferred; columns named `unk` are kept for bytes whose purp
 | `game_object_offsets` | `bank_85/objects.asm` | `mask:flags16`; `offset:u16` | object slot masks and array offsets ($24 bytes per object). High. |
 
 Open questions (columns kept as `unk` or marked medium): `unk` of `aDialogData_ShippingProfit` and `aDialogsData_BuyItems` (first byte of the shop record, looks like the item id given), the sprite palette
-columns `obj_a/obj_b` of `aMapPalettesId`, the meaning of the `extra` phase of `aMapPalettesIndexes` and `pSubrutineTable_80BEEC`, the tile meanings of `system_transfer_data`, and the exact event meaning of the
+columns `obj_a/obj_b` of `aMapPalettesId`, the meaning of the `extra` phase of `aMapPalettesIndexes` and `pPaletteAnimRoutineTable`, the tile meanings of `system_transfer_data`, and the exact event meaning of the
 `day_event_tables` values.
 
 ## Graphics presets - `assets/gfx/presets.csv`

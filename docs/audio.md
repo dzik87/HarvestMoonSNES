@@ -33,7 +33,7 @@ samples, text songs, a text SFX block and an SPC700 assembler listing of the dri
 ## 2. ROM layout of the audio blobs
 
 Generated with `python tools/audio/audio_map.py` (Markdown output). Addresses are computed from the order and sizes of
-the `incbin` lines in the generated `build/gen/audio/bank_*.asm` (layout: `assets/audio/banks.json`); sizes from the generated `assets/audio/*.bin` (run
+the `incbin` lines in the generated `build/gen/audio/bank_*.asm` (layout: `defs/audio/banks.json`); sizes from the generated `assets/audio/*.bin` (run
 `python tools/build_assets.py` first; the tables of section 3/7 come from the generated `build/gen/audio/audio_tables.inc`).
 There are 65 blobs (not 71). Every blob is referenced from code, none is unused. [C]
 
@@ -155,7 +155,7 @@ Sound effects (`fAudio_PlaySoundEffectAndWait`: A = SFX id, X = voice, Y = frame
 (`aAudioSfxSampleIdTable[sfx]`, command 3) if that entry is non-zero; `fAudioSetRegister2to0A` then sends command `$0A`
 with (sfx id, voice, pan = `$0A`). `fAudio_SendPlaySfxCommand` silently drops the request when SPC status bit 4 is set.
 
-`nToolSoundData_80B8CD[trackId]` is the number of sample ids in that track's table entry (verified for all 25 ids), i.e. the
+`nSoundEffectSampleTable[trackId]` is the number of sample ids in that track's table entry (verified for all 25 ids), i.e. the
 first free sample slot. [C]
 
 Track ids: `aAudioTrackDataSizeTable` and `sAudioTrackTable` have 26 entries (ids 0-25); id 0 is never played
@@ -708,7 +708,7 @@ no dump contains.
 
 A sound effect is requested with `fAudio_PlaySoundEffectAndWait` (A = effect id, X = voice, Y = wait in frames) or with the shorter
 `strcAudio.reg114 = id; reg115 = voice; fAudioSetRegister2to0A`, which sends command `$0A` (id, voice, `$0A`). Voices used by the US code are 6
-(UI, player and tool sounds) and 7 (water, house and cutscene sounds). `nToolSoundData_829054` (assets/tables/data/tool_sound_data_82.csv)
+(UI, player and tool sounds) and 7 (water, house and cutscene sounds). `nToolSoundTable` (assets/tables/data/tool_sound_data_82.csv)
 holds, per tool id, `[voice, effect when the target tile has no matching object, effect when it has]`; `fToolUsedSound_PlayOnToolChange`
 preloads the samples of both effects when the tool changes and `fSound_GetToolSound` selects the column at use time. The enum values
 `!SFX_*` live in `src/common/enums.asm`; the stream sources are `assets/audio/sfx/<Name>.sfx.txt` and the id order is `sfx_names` in
@@ -730,15 +730,15 @@ neutral `Sfx_Unk<id>` name (no listening review was done; the names rest on the 
 | $05 | `Sfx_PlayerStep` | `!SFX_PLAYERSTEP` | common | high | fPlayerAction_Run_StepSound: footstep while running |
 | $06 | `Sfx_PlayerJump` | `!SFX_PLAYERJUMP` | common | high | fPlayerAction0x03 (!PACTION_JUMP), played in all four variants (normal, carrying, riding, in the hot spring) |
 | $07 | `Sfx_ItemDrop` | `!SFX_ITEMDROP` | common | high | fPlayerAction0x05 (!PACTION_DROPITEM) |
-| $08 | `Sfx_ItemPickUp` | `!SFX_ITEMPICKUP` | common | high | fItemCarried_Begin: picking an item up when nSoundItemCarriedTable_81A308 has an entry for it |
+| $08 | `Sfx_ItemPickUp` | `!SFX_ITEMPICKUP` | common | high | fItemCarried_Begin: picking an item up when nItemCarriedPickupSoundTable has an entry for it |
 | $09 | `Sfx_Unk09` | `!SFX_UNK09` | common | none | no caller in the US code or data (not referenced by any literal, table or AI script) |
 | $0A | `Sfx_Unk0A` | `!SFX_UNK0A` | common | none | no caller in the US code or data (not referenced by any literal, table or AI script) |
 | $0B | `Sfx_Unk0B` | `!SFX_UNK0B` | common | none | no caller in the US code or data (not referenced by any literal, table or AI script) |
 | $0C | `Sfx_Unk0C` | `!SFX_UNK0C` | 13 | none | no caller in the US code or data (not referenced by any literal, table or AI script) |
 | $0D | `Sfx_Unk0D` | `!SFX_UNK0D` | 19 | none | no caller in the US code or data (not referenced by any literal, table or AI script) |
 | $0E | `Sfx_Unk0E` | `!SFX_UNK0E` | 29 | none | no caller in the US code or data (not referenced by any literal, table or AI script) |
-| $0F | `Sfx_PlowHitObject` | `!SFX_PLOWHITOBJECT` | 38 | medium | nToolSoundData_829054 'object hit' column of the plow (hoe), tool id 2 |
-| $10 | `Sfx_GoldPlowHitObject` | `!SFX_GOLDPLOWHITOBJECT` | common | medium | nToolSoundData_829054 'object hit' column of the golden plow, tool id 18 |
+| $0F | `Sfx_PlowHitObject` | `!SFX_PLOWHITOBJECT` | 38 | medium | nToolSoundTable 'object hit' column of the plow (hoe), tool id 2 |
+| $10 | `Sfx_GoldPlowHitObject` | `!SFX_GOLDPLOWHITOBJECT` | common | medium | nToolSoundTable 'object hit' column of the golden plow, tool id 18 |
 | $11 | `Sfx_ToolHitGround` | `!SFX_TOOLHITGROUND` | common | medium | 'no object' column shared by plow, golden plow, axe and golden axe (the tool hits plain ground) |
 | $12 | `Sfx_SickleCut` | `!SFX_SICKLECUT` | common | medium | 'object hit' column of the sickle (tool id 1): fSound_GetToolSound returns 1 when the tile's object property has bit 0 |
 | $13 | `Sfx_GoldSickleCut` | `!SFX_GOLDSICKLECUT` | common | medium | 'object hit' column of the golden sickle (tool id 17) |
@@ -787,7 +787,7 @@ Notes:
 | 5 | `sAudioTrack_Town` | emulator dump (section 12) |
 | 12 | `sAudioTrack_Funeral` | selected by AI script 0x20 (`AICMD0x00_SetMusic($0C, ...)`), the cutscene whose dialogs are the burial of a cow (dialogs `$0315`, `$0316`, `$038A`) |
 | 20 | `sAudioTrack_RainIndoors` | `fAudioEngine_SelectMapMusic`: rainy map flag in areas `$15`-`$30` (houses and shops) plays track 20, elsewhere track 19 (`Rain`) |
-| 21 | `sAudioTrack_WeatherFair` | `fAreaEvents_House` plays it (then resumes the map music) when event6 flag `$0100` is set, which `fWeatherForecast_828C09` does for `!WEATHER_FAIR` |
+| 21 | `sAudioTrack_WeatherFair` | `fAreaEvents_House` plays it (then resumes the map music) when event6 flag `$0100` is set, which `fWeather_ApplyForecast` does for `!WEATHER_FAIR` |
 | 25 | `sAudioTrack_WeatherCalm` | same, flag `$0080` for `!WEATHER_CALM` |
 | 23 | `sAudioTrack_Id23` | left unnamed: no US code path, map music set or AI script selects it (track 24, `Bell`, is the one with the same sample) |
 

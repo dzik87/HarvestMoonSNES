@@ -4,8 +4,9 @@
 The script bodies (`%AICMDxx_...()` macro calls, `src/ai/us/scripts/script_*.asm`) are the source language of the AI
 scripts and stay in src/ (they are code in a DSL, see docs/regions-ai.md).  Everything that is *data* is generated:
 
-  assets/ai/scripts.json            the 72 scripts: id, label, bank, slot table (entry points of the sub scripts)
+  defs/ai/scripts.json              the 72 scripts: id, label, bank, slot table (entry points of the sub scripts)  [structure, committed]
   assets/ai/npc_sprite_tables.txt   the 214 NPC sprite/direction tables (aAIScriptingData*) used by commands 0x1A / 0x22 / 0x2B / 0x49
+                                    [extracted from the ROM by tools/extract_steps/ai.py, layout in defs/ai/sprite_tables.json]
 
 ->
   build/gen/ai/head_B3.asm   ORG + ppAIScriptingList (72 x ptr24) + the sprite tables
@@ -18,7 +19,6 @@ name is a complete label (a slot that points at another script, e.g. the "empty"
 
   build     write build/gen/ai/*.asm
   check     the sources are consistent and every label referenced from them exists in src/ai/us/scripts/ (fast, no assembler)
-  extract   one-shot migration from the former committed src/ai/us/scripts/head_B*.asm and script headers (kept for history)
 """
 import json
 import re
@@ -26,7 +26,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-SCRIPTS = "assets/ai/scripts.json"
+SCRIPTS = "defs/ai/scripts.json"          # structure: script ids, labels, banks, slot tables (committed)
 TABLES = "assets/ai/npc_sprite_tables.txt"
 GEN = "build/gen/ai"
 SRC = "src/ai/us/scripts"
@@ -147,76 +147,12 @@ def check(root=ROOT):
     return 1 if bad else 0
 
 
-def extract(root=ROOT):
-    """One-shot migration from the committed asm headers."""
-    root = Path(root)
-    sd = root / SRC
-    head = (sd / "head_B3.asm").read_text(encoding="utf-8").split("\n")
-    # sprite tables
-    tables, cur = [], None
-    for l in head[head.index("aAIScriptingData:") if "aAIScriptingData:" in head else 0:]:
-        m = re.match(r"(aAIScriptingData\w*):", l)
-        if m:
-            cur = (m.group(1), [])
-            tables.append(cur)
-            continue
-        m = re.match(r"\s+d([wb]) \$([0-9A-Fa-f]+)", l)
-        if m:
-            cur[1].append((m.group(1), int(m.group(2), 16)))
-    lines = ["; NPC sprite / direction tables of bank $B3 (read by AI commands 0x1A, 0x22, 0x2B, 0x49).",
-             "; Each table is a run of 3-byte entries SSSS:F = sprite table index (word) : flip flags (byte, value<<6 goes to the object flip bits),",
-             "; 4 entries per line = the 4 facing directions (0 down, 1 up, 2 right, 3 left).  Longer tables are several direction sets back to back.",
-             "; Generated into build/gen/ai/head_B3.asm by tools/ai/aidata.py; labels are referenced from src/ai/us/scripts/script_*.asm.", ""]
-    for label, vals in tables:
-        recs = [(vals[i][1], vals[i + 1][1]) for i in range(0, len(vals), 2)]
-        assert all(vals[i][0] == "w" and vals[i + 1][0] == "b" for i in range(0, len(vals), 2))
-        lines.append(f"{label}:")
-        for i in range(0, len(recs), 4):
-            lines.append("  " + " ".join(f"{a:04X}:{b:X}" for a, b in recs[i:i + 4]))
-    (root / TABLES).write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
-    # pointer list + slots
-    order = re.findall(r"^\s+dl (pAIScripting\w+)", "\n".join(head), re.M)
-    scripts = []
-    files = {}
-    for f in sorted(sd.glob("script_*.asm")):
-        files[f.stem.split("_")[1]] = f
-    for i, label in enumerate(order):
-        sid = "%02X" % i
-        f = files[sid]
-        text = f.read_text(encoding="utf-8").split("\n")
-        k = next(j for j, l in enumerate(text) if l.strip() == label + ":")
-        j = k + 1
-        slots = []
-        while j < len(text) and (text[j].lstrip().startswith("dw ") or not text[j].strip()):
-            m = re.match(r"\s+dw (\w+)", text[j])
-            if m:
-                slots.append(m.group(1))
-            j += 1
-        # keep a trailing blank separator line
-        while j > k + 1 and not text[j - 1].strip():
-            j -= 1
-        bank = "B3" if i < 0x0F else "B4" if i < 0x43 else "B5"
-        rel = [x[len(label):] if x.startswith(label + "_") else x for x in slots]
-        scripts.append({"id": sid, "label": label, "bank": bank, "slots": rel})
-        new = text[:k] + [f'    incsrc "../../../../{GEN}/slots_{sid}.asm"'] + text[j:]
-        f.write_text("\n".join(new), encoding="utf-8", newline="\n")
-    out = ['{"scripts": [']
-    for n, s in enumerate(scripts):
-        out.append(' ' + json.dumps({"id": s["id"], "label": s["label"], "bank": s["bank"]}, separators=(", ", ": "))[:-1]
-                   + ', "slots": ' + json.dumps(s["slots"], separators=(", ", ": ")) + "}" + ("," if n < len(scripts) - 1 else ""))
-    out.append("]}")
-    (root / SCRIPTS).write_text("\n".join(out) + "\n", encoding="utf-8", newline="\n")
-    print(f"extracted {len(scripts)} scripts, {len(tables)} sprite tables")
-
-
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "check"
     if cmd == "build":
         print(f"AI data: wrote {build()} files to {GEN}")
     elif cmd == "check":
         sys.exit(check())
-    elif cmd == "extract":
-        extract()
     else:
         print(__doc__)
         sys.exit(2)

@@ -1,0 +1,62 @@
+# Game object slot tables (bank $85, objects.asm).
+# aOamHighBitPairMask[N] = 1 << (2 * N): bit pair of object slot N in a packed flag word.
+# aGameObjectIndexOffsets[N] = N * $24: byte offset of object N in the object array (each object record is $24 = 36 bytes).
+# The last rows are stored as in the original ROM although they are not N * $24 (the original has $0540 where $0510 would continue the
+# series; the offsets are used as they are, see the comment at the row).  Confidence: high.
+
+@label aOamHighBitPairMask
+@columns slot:index,mask:flags16
+@at US=$858BD0 EU=$858BD0 DE=$858BD0 JP=$858BD0
+$00,?
+$01,?
+$02,?
+$03,?
+$04,?
+$05,?
+$06,?
+$07,?
+
+@label aGameObjectIndexOffsets
+@columns object:index,offset:u16
+$00,?
+$01,?
+$02,?
+$03,?
+$04,?
+$05,?
+$06,?
+$07,?
+$08,?
+$09,?
+$0A,?
+$0B,?
+$0C,?
+$0D,?
+$0E,?
+$0F,?
+$10,?
+$11,?
+$12,?
+$13,?
+$14,?
+$15,?
+$16,?
+$17,?
+$18,?
+$19,?
+$1A,?
+$1B,?
+$1C,?
+$1D,?
+$1E,?
+$1F,?
+$20,?
+$21,?
+$22,?
+$23,?
+# Original quirk: the series is continued with $0540, $0534 ($0510 would follow the pattern); kept byte for byte
+$24,?
+$25,?
+$26,?
+$27,?
+

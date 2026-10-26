@@ -2,7 +2,9 @@
 
 ## Name entry grids - `assets/menu/name_input.txt`
 
-`aMenuData_82EBF8`, `aMenuData_82EE30` and `aMenuData_82F0D0` (bank `$82`, `src/code/bank_82/menu.asm`) are the cursor grids of the name entry screen
+Extracted from the ROMs by `tools/extract_steps/menu.py`; the table labels, release groups, row counts and ROM addresses are structure (`defs/menu/name_input.json`), the cell values are content. The small tables below work the same way: `defs/tables/<name>.layout.json` is the spec text with the numeric values replaced by `"?"` / `"#"` placeholders (the first one of a run carries the ROM address per release, `?@US:82F258;EU:82F241`).
+
+`aNameInputGrid0`, `aNameInputGrid1` and `aNameInputGrid2` (bank `$82`, `src/code/bank_82/menu.asm`) are the cursor grids of the name entry screen
 (selected by `strcMenuData.tableSelector` 0, 1, 2). Each cell is 8 bytes, the row number is `strcMenuData.menuIdx`:
 
 `x y down up right left char action`
@@ -21,6 +23,6 @@ optional `count`), mixed tables use `rows` (typed value rows and `{"label": ...}
 
 | Spec | Tables | Included by |
 |---|---|---|
-| `main_menu.json` | save slot box tables (`aMainMenu_Slot*`, JP uses bytes, DE/EU/US words), `sYearOrdinal_82F298`, the palette animation lists `aMainMenu_PalAnim*` (colour word + duration, `$FFFE` + label = loop) | `menu.asm` |
-| `map_room.json` | `nTable_80AA68`, `nTable_80AA72` | `tilemaps.asm` |
-| `tool_sounds.json` | `nToolSoundData_80B8CD` | `audio_data.asm` |
+| `main_menu.json` | save slot box tables (`aMainMenu_Slot*`, JP uses bytes, DE/EU/US words), `aYearOrdinalString`, the palette animation lists `aMainMenu_PalAnim*` (colour word + duration, `$FFFE` + label = loop) | `menu.asm` |
+| `map_room.json` | `nMapRoomRowStrideTable`, `nMapRoomSizeTable` | `tilemaps.asm` |
+| `tool_sounds.json` | `nSoundEffectSampleTable` | `audio_data.asm` |

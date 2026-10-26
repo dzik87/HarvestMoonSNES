@@ -1,0 +1,5 @@
+{"tables": [
+ {"label": "nSoundEffectSampleTable", "type": "db", "per_line": 13, "count": 26,
+  "doc": "Sound effect sample index per strcAudio.unk118; fAudio_PlaySoundEffectAndWait stores value+1 in strcAudio.index.  26 bytes (read as a byte table).",
+  "values": ["#@US:80B8CD;EU:80B8CD;DE:80B8CD;JP:80B8CB", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#"]}
+]}
