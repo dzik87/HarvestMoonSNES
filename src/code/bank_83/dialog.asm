@@ -201,7 +201,7 @@ aDialogBlinkIconTiles_Frame0:
 aDialogBlinkIconTiles_Frame1:
     dw $21A2,$21A3,$21B2,$21B3                                 ;83945F|        |      ;
  
-aDialogDialogPointerIndexes_839467:
+aDialogPointerIndexBySelection:
     dw $000F,$0010,$0011,$0012,$0013,$0014                     ;839467|        |      ; 0x0B * [n16 nDialogPointerIndex]
     dw $0015,$0016,$0017,$0018,$0019                           ;839473|        |      ;
  

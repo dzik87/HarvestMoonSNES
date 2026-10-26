@@ -173,7 +173,7 @@ Size `1 + 5*count`; frames are packed back to back (`ADC #$0005` at `$858B34`, `
   `$8585D9-$8585DF`), so the last component gets the lowest OAM index. [I] The last component of a frame
   is therefore drawn in front of the earlier ones.
 * **Culling** [C]: components whose screen X is in `$0100..$FFEF` or screen Y in `$00F0..$FFEF` are skipped
-  (`$85853B-$858556`); only bit 8 of X is kept in the OAM high table (`Table_858BD0`).
+  (`$85853B-$858556`); only bit 8 of X is kept in the OAM high table (`aOamHighBitPairMask`).
 * A component whose cache slot is `$FF` (tile still queued for DMA) is skipped for that frame
   (`$8584B3-$8584B7`) [C].
 

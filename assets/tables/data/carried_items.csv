@@ -14,7 +14,7 @@
 
 @label pItemCarriedTable_8196AF
 @columns id:index,frames:ptr24
-$00,EMPTY_FFFFFF
+$00,PTR24_None
 $01,aItemCarriedFrames_01_Mushroom
 $02,aItemCarriedFrames_02_PoisonMushroom
 $03,aItemCarriedFrames_03_WildGrape

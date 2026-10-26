@@ -1,8 +1,8 @@
 # Area table: one row per area id ($00-$5F, strcMap.loadAreaId).  The columns feed four tables that are indexed by area id:
 #   gfx          aTileMapData (80:AA7C, ptr16)         graphics descriptor in assets/areas/area_gfx.json
-#   object_map   pObjectMap (82:B174, ptr24)           object map blob in assets/maps/sObjectMap_*.json (EMPTY_FFFFFF = none)
-#   object_props pObjectMap2 (82:B294, ptr24)          object property table assets/areas/object_props/<label>.txt (EMPTY_FFFFFF = none)
-#   music        pAudioEngine_MapMusic (80:B8E7, ptr16) music set (4 tracks, one per season) in assets/areas/area_music.json (PTR16_80FFFF = none)
+#   object_map   pObjectMap (82:B174, ptr24)           object map blob in assets/maps/sObjectMap_*.json (PTR24_None = none)
+#   object_props pObjectMap2 (82:B294, ptr24)          object property table assets/areas/object_props/<label>.txt (PTR24_None = none)
+#   music        pAudioEngine_MapMusic (80:B8E7, ptr16) music set (4 tracks, one per season) in assets/areas/area_music.json (PTR16_None = none)
 # `name` is the !AREA_<name> constant of src/common/enums.asm (checked by tools/maps/areadata.py check).
 id,name,gfx,object_map,object_props,music
 $00,FARMSPRING,sFarmSpringMap,sObjectMap_DefaultFarm,sObjectMap2_0x00,aAudioEngine_MapMusicId_0x00
@@ -46,14 +46,14 @@ $25,FORTUNETELLER,sFortuneTellerHouseMap,sObjectMap_0x18,sObjectMap2_0x06,aAudio
 $26,SHED,sToolShedMap,sObjectMap_0x05,sObjectMap2_0x02,aAudioEngine_MapMusicId_0x00
 $27,COWBARN,sBarnMap,sObjectMap_0x0A,sObjectMap2_0x02,aAudioEngine_MapMusicId_0x00
 $28,COOP,sCoopMap,sObjectMap_0x0B,sObjectMap2_0x02,aAudioEngine_MapMusicId_0x00
-$29,WOODSCAVE,sMountainCaveMap,sObjectMap_0x0D,sObjectMap2_0x04,PTR16_80FFFF
+$29,WOODSCAVE,sMountainCaveMap,sObjectMap_0x0D,sObjectMap2_0x04,PTR16_None
 $2A,IMPUNDERGROUND,sElfTunnelMap,sObjectMap_0x0C,sObjectMap2_0x01,aAudioEngine_MapMusicId_0x07
 $2B,WORKSMANHOUSE,sMap_80B032,sObjectMap_0x0E,sObjectMap2_0x04,aAudioEngine_MapMusicId_0x02
 $2C,GOLDCHICKEN,sMap_80B04B,sObjectMap_0x19,sObjectMap2_0x01,aAudioEngine_MapMusicId_0x08
-$2D,WEDDINGSPRING,sMap_80B064,EMPTY_FFFFFF,EMPTY_FFFFFF,aAudioEngine_MapMusicId_0x00
-$2E,WEDDINGSUMMER,sMap_80B087,EMPTY_FFFFFF,EMPTY_FFFFFF,aAudioEngine_MapMusicId_0x00
-$2F,WEDDINGFALL,sMap_80B0AA,EMPTY_FFFFFF,EMPTY_FFFFFF,aAudioEngine_MapMusicId_0x00
-$30,WEDDINGWINTER,sMap_80B0CD,EMPTY_FFFFFF,EMPTY_FFFFFF,aAudioEngine_MapMusicId_0x00
+$2D,WEDDINGSPRING,sMap_80B064,PTR24_None,PTR24_None,aAudioEngine_MapMusicId_0x00
+$2E,WEDDINGSUMMER,sMap_80B087,PTR24_None,PTR24_None,aAudioEngine_MapMusicId_0x00
+$2F,WEDDINGFALL,sMap_80B0AA,PTR24_None,PTR24_None,aAudioEngine_MapMusicId_0x00
+$30,WEDDINGWINTER,sMap_80B0CD,PTR24_None,PTR24_None,aAudioEngine_MapMusicId_0x00
 $31,MOUNTAINTOPSPRING,sSummitSpringMap,sObjectMap_0x0F,sObjectMap2_0x04,aAudioEngine_MapMusicId_0x02
 $32,MOUNTAINTOPSUMMER,sSummitSummerMap,sObjectMap_0x0F,sObjectMap2_0x04,aAudioEngine_MapMusicId_0x02
 $33,MOUNTAINTOPFALL,sSummitFallMap,sObjectMap_0x0F,sObjectMap2_0x04,aAudioEngine_MapMusicId_0x02
@@ -65,39 +65,39 @@ $38,MOUNTAINTOP2WINTER,sMap_80B1E5,sObjectMap_0x0F,sObjectMap2_0x04,aAudioEngine
 $39,NY_MOUNTAINTOP,sStarNightFestivalMountainTopMap,sObjectMap_0x0F,sObjectMap2_0x04,aAudioEngine_MapMusicId_0x02
 $3A,MOUNTAINTOPSUNRISE,sNewYearsFestivalMap,sObjectMap_0x0F,sObjectMap2_0x04,aAudioEngine_MapMusicId_0x02
 $3B,MOUNTAINTOPBEAN,sMap_80B24E,sObjectMap_0x0F,sObjectMap2_0x04,aAudioEngine_MapMusicId_0x02
-$3C,INTRO,sMap_80B271,EMPTY_FFFFFF,EMPTY_FFFFFF,aAudioEngine_MapMusicId_0x0A
-$3D,ENDING00,sMap_80B28A,EMPTY_FFFFFF,EMPTY_FFFFFF,PTR16_80FFFF
-$3E,ENDING01,sMap_80B2AD,EMPTY_FFFFFF,EMPTY_FFFFFF,PTR16_80FFFF
-$3F,ENDING02,sMap_80B2D0,EMPTY_FFFFFF,EMPTY_FFFFFF,PTR16_80FFFF
-$40,ENDING03,sMap_80B2F3,sObjectMap_0x1F,sObjectMap2_0x00,PTR16_80FFFF
-$41,ENDING04,sMap_80B316,EMPTY_FFFFFF,EMPTY_FFFFFF,PTR16_80FFFF
-$42,ENDING05,sMap_80B339,EMPTY_FFFFFF,EMPTY_FFFFFF,PTR16_80FFFF
-$43,ENDING06,sMap_80B35C,EMPTY_FFFFFF,EMPTY_FFFFFF,PTR16_80FFFF
-$44,ENDING07,sMap_80B37F,sObjectMap_0x20,sObjectMap2_0x00,PTR16_80FFFF
-$45,ENDING08,sMap_80B3A2,sObjectMap_0x21,sObjectMap2_0x00,PTR16_80FFFF
-$46,ENDING09,sMap_80B3C5,sObjectMap_0x22,sObjectMap2_0x00,PTR16_80FFFF
-$47,ENDING10,sMap_80B3E8,sObjectMap_0x23,sObjectMap2_0x00,PTR16_80FFFF
-$48,ENDING11,sMap_80B40B,EMPTY_FFFFFF,EMPTY_FFFFFF,PTR16_80FFFF
-$49,ENDING12,sMap_80B42E,sObjectMap_0x24,sObjectMap2_0x00,PTR16_80FFFF
-$4A,ENDING13,sMap_80B451,EMPTY_FFFFFF,EMPTY_FFFFFF,PTR16_80FFFF
-$4B,CREDITS0,sMap_80B474,EMPTY_FFFFFF,EMPTY_FFFFFF,PTR16_80FFFF
-$4C,CREDITS1,sMap_80B49C,EMPTY_FFFFFF,EMPTY_FFFFFF,PTR16_80FFFF
-$4D,CREDITS2,sMap_80B4C4,EMPTY_FFFFFF,EMPTY_FFFFFF,PTR16_80FFFF
-$4E,CREDITS3,sMap_80B4EC,EMPTY_FFFFFF,EMPTY_FFFFFF,PTR16_80FFFF
-$4F,CREDITS4,sMap_80B514,EMPTY_FFFFFF,EMPTY_FFFFFF,PTR16_80FFFF
-$50,DRIVETOTOWN,sMap_80B537,EMPTY_FFFFFF,EMPTY_FFFFFF,PTR16_80FFFF
-$51,UNKNOWN51,sMap_80B55F,EMPTY_FFFFFF,EMPTY_FFFFFF,PTR16_80FFFF
-$52,UNKNOWN52,sMap_80B587,EMPTY_FFFFFF,EMPTY_FFFFFF,PTR16_80FFFF
-$53,UNKNOWN53,sMap_80B5AF,EMPTY_FFFFFF,EMPTY_FFFFFF,PTR16_80FFFF
-$54,UNKNOWN54,sMap_80B5D2,EMPTY_FFFFFF,EMPTY_FFFFFF,PTR16_80FFFF
-$55,UNKNOWN55,sMap_80B5F5,EMPTY_FFFFFF,EMPTY_FFFFFF,PTR16_80FFFF
-$56,UNKNOWN56,sMap_80B618,EMPTY_FFFFFF,EMPTY_FFFFFF,PTR16_80FFFF
-$57,UNKNOWN57,sRainOverlay,EMPTY_FFFFFF,EMPTY_FFFFFF,PTR16_80FFFF
-$58,UNKNOWN58,sCloudsOverlay,EMPTY_FFFFFF,EMPTY_FFFFFF,PTR16_80FFFF
-$59,UNKNOWN59,sSnowOverlay,EMPTY_FFFFFF,EMPTY_FFFFFF,PTR16_80FFFF
-$5A,UNKNOWN5A,sHeavySnowOverlay,EMPTY_FFFFFF,EMPTY_FFFFFF,PTR16_80FFFF
-$5B,UNKNOWN5B,sIntroFarmScrool,EMPTY_FFFFFF,EMPTY_FFFFFF,aAudioEngine_MapMusicId_0x0A
-$5C,UNKNOWN5C,sHarvestMoonLogo,EMPTY_FFFFFF,EMPTY_FFFFFF,aAudioEngine_MapMusicId_0x09
-$5D,NATSUMELOGO,sNatsumeLogo,EMPTY_FFFFFF,EMPTY_FFFFFF,PTR16_80FFFF
-$5E,UNKNOWN5E,sMenuScreenBackgrounds,EMPTY_FFFFFF,EMPTY_FFFFFF,aAudioEngine_MapMusicId_0x08
-$5F,NAMEINPUT,sMenuCharacters,EMPTY_FFFFFF,EMPTY_FFFFFF,aAudioEngine_MapMusicId_0x08
+$3C,INTRO,sMap_80B271,PTR24_None,PTR24_None,aAudioEngine_MapMusicId_0x0A
+$3D,ENDING00,sMap_80B28A,PTR24_None,PTR24_None,PTR16_None
+$3E,ENDING01,sMap_80B2AD,PTR24_None,PTR24_None,PTR16_None
+$3F,ENDING02,sMap_80B2D0,PTR24_None,PTR24_None,PTR16_None
+$40,ENDING03,sMap_80B2F3,sObjectMap_0x1F,sObjectMap2_0x00,PTR16_None
+$41,ENDING04,sMap_80B316,PTR24_None,PTR24_None,PTR16_None
+$42,ENDING05,sMap_80B339,PTR24_None,PTR24_None,PTR16_None
+$43,ENDING06,sMap_80B35C,PTR24_None,PTR24_None,PTR16_None
+$44,ENDING07,sMap_80B37F,sObjectMap_0x20,sObjectMap2_0x00,PTR16_None
+$45,ENDING08,sMap_80B3A2,sObjectMap_0x21,sObjectMap2_0x00,PTR16_None
+$46,ENDING09,sMap_80B3C5,sObjectMap_0x22,sObjectMap2_0x00,PTR16_None
+$47,ENDING10,sMap_80B3E8,sObjectMap_0x23,sObjectMap2_0x00,PTR16_None
+$48,ENDING11,sMap_80B40B,PTR24_None,PTR24_None,PTR16_None
+$49,ENDING12,sMap_80B42E,sObjectMap_0x24,sObjectMap2_0x00,PTR16_None
+$4A,ENDING13,sMap_80B451,PTR24_None,PTR24_None,PTR16_None
+$4B,CREDITS0,sMap_80B474,PTR24_None,PTR24_None,PTR16_None
+$4C,CREDITS1,sMap_80B49C,PTR24_None,PTR24_None,PTR16_None
+$4D,CREDITS2,sMap_80B4C4,PTR24_None,PTR24_None,PTR16_None
+$4E,CREDITS3,sMap_80B4EC,PTR24_None,PTR24_None,PTR16_None
+$4F,CREDITS4,sMap_80B514,PTR24_None,PTR24_None,PTR16_None
+$50,DRIVETOTOWN,sMap_80B537,PTR24_None,PTR24_None,PTR16_None
+$51,UNKNOWN51,sMap_80B55F,PTR24_None,PTR24_None,PTR16_None
+$52,UNKNOWN52,sMap_80B587,PTR24_None,PTR24_None,PTR16_None
+$53,UNKNOWN53,sMap_80B5AF,PTR24_None,PTR24_None,PTR16_None
+$54,UNKNOWN54,sMap_80B5D2,PTR24_None,PTR24_None,PTR16_None
+$55,UNKNOWN55,sMap_80B5F5,PTR24_None,PTR24_None,PTR16_None
+$56,UNKNOWN56,sMap_80B618,PTR24_None,PTR24_None,PTR16_None
+$57,UNKNOWN57,sRainOverlay,PTR24_None,PTR24_None,PTR16_None
+$58,UNKNOWN58,sCloudsOverlay,PTR24_None,PTR24_None,PTR16_None
+$59,UNKNOWN59,sSnowOverlay,PTR24_None,PTR24_None,PTR16_None
+$5A,UNKNOWN5A,sHeavySnowOverlay,PTR24_None,PTR24_None,PTR16_None
+$5B,UNKNOWN5B,sIntroFarmScrool,PTR24_None,PTR24_None,aAudioEngine_MapMusicId_0x0A
+$5C,UNKNOWN5C,sHarvestMoonLogo,PTR24_None,PTR24_None,aAudioEngine_MapMusicId_0x09
+$5D,NATSUMELOGO,sNatsumeLogo,PTR24_None,PTR24_None,PTR16_None
+$5E,UNKNOWN5E,sMenuScreenBackgrounds,PTR24_None,PTR24_None,aAudioEngine_MapMusicId_0x08
+$5F,NAMEINPUT,sMenuCharacters,PTR24_None,PTR24_None,aAudioEngine_MapMusicId_0x08

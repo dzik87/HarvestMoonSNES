@@ -2575,7 +2575,7 @@ fAreaEvents_MountainTopBean:
     RTS                                                        ;83E74C|60      |      ;
  
  
-aUnusedTable_83E74D:
+aMapBitMask16Unused:
     dw $0001,$0002,$0004,$0008,$0010,$0020                     ;83E74D|        |      ;
     dw $0040,$0080,$0100,$0200,$0400,$0800                     ;83E759|        |      ;
     dw $1000,$2000,$4000,$8000                                 ;83E765|        |      ;

@@ -1,10 +1,10 @@
 # Game object slot tables (bank $85, objects.asm).
-# Table_858BD0[N] = 1 << (2 * N): bit pair of object slot N in a packed flag word.
+# aOamHighBitPairMask[N] = 1 << (2 * N): bit pair of object slot N in a packed flag word.
 # aGameObjectIndexOffsets[N] = N * $24: byte offset of object N in the object array (each object record is $24 = 36 bytes).
 # The last rows are stored as in the original ROM although they are not N * $24 (the original has $0540 where $0510 would continue the
 # series; the offsets are used as they are, see the comment at the row).  Confidence: high.
 
-@label Table_858BD0
+@label aOamHighBitPairMask
 @columns slot:index,mask:flags16
 $00,$0001
 $01,$0004

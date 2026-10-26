@@ -745,7 +745,7 @@ RAM: `ptrAIUnknown0xCC`, `ptrTemp0x72`, `strcObject.gameObjectIdx`, `strcAIUnkno
 
 Calls: `fAI_SetCCPointer`, `fObject_Destroy`
 
-> Open questions: The call to fObject_Destroy contains a known bug (a jump to fReturn_8580B8 instead of RTL) - it does not affect the command. It was not checked what happens to the other slot fields (they are not cleared).
+> Open questions: The call to fObject_Destroy contains a known bug (a jump to fObject_ReturnLong instead of RTL) - it does not affect the command. It was not checked what happens to the other slot fields (they are not cleared).
 
 ## 0x26 — ClearBit
 

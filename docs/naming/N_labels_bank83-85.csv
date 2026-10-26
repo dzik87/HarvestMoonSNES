@@ -1,0 +1,18 @@
+old,new,confidence,reason
+fAudioUnused_838376,fAudio_IncrementSampleIndexUnused,high,Unreferenced routine that only increments strcAudio.index
+fAudioReturn_838400,fAudio_ReturnLong,high,Bare RTL shared as an exit by the track fade routines (the code comments a FIXME about it)
+fAudio_UploadSpcDataBlock_B2D120,fAudio_UploadSpcDriver,high,SPC command 1: uploads the $3F2 byte SPC700 driver blob from $B2D120 (sAudioSpcDriver)
+fAudioUnused_838CF3,fAudio_ResetSpcRegion3Unused,medium,Unreferenced routine that sends SPC command 7 (reset sample region 3) with the given argument
+sAudioData1_838F83,sAudioTrackTable,high,26 entries x (ptr24 track data + 11 sample ids) indexed by track id; read by fAudio_LoadTrackSamples and fAudio_UploadTrackData
+aDialogDialogPointerIndexes_839467,aDialogPointerIndexBySelection,high,Dialog pointer index (words $0F-$19) per selection $00-$0A shown by fInput_Case03_ConfirmSelection
+aUnusedTable_83E74D,aMapBitMask16Unused,high,Unreferenced table of the 16 single-bit masks $0001-$8000
+fReturn_8580B8,fObject_ReturnLong,high,Bare RTL used as the exit of fObject_Create / fObject_Replace / fObject_Destroy
+fReturnWithPullA_858BCE,fObject_PullAAndReturn,high,PLA then RTS: shared exit of the sprite tile slot release helpers
+Table_858BD0,aOamHighBitPairMask,high,1 << (2*N): bit pair of OAM slot N in the OAM high table (only the X bit 8 is kept by fObject_RenderAll)
+Table_858627,aOamBitPairSetMaskUnused,medium,Unreferenced table with the same masks (1 << 2N) as aOamHighBitPairMask
+Table_858637,aOamBitPairClearMaskUnused,medium,Unreferenced table of the inverted 2-bit masks (~(3 << 2N)) next to the set masks
+Table_858C7F,aObjectBitMask16Unused,high,Unreferenced table of the 16 single-bit masks $0001-$8000
+Table_858C8E,Table_Unk_858C8E,low,Constant that points into the middle of aObjectBitMask16Unused and is unreferenced; kept as unknown
+PTR16_80FFFF,PTR16_None,high,Null 16-bit pointer ($FFFF in bank $80) used as "no entry" in the palette and area tables
+EMPTY_FFFFFF,PTR24_None,high,Null 24-bit pointer ($FFFFFF) used as "no entry" in the carried item and area tables
+L_84C2D8,fInput_Case04_StartPressedTarget,high,Region alias of the local label .start_pressed of fInput_Case04_StartToState6 (START on the file select screen)

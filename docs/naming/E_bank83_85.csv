@@ -6,7 +6,7 @@ fAudioUnknown_838380,fAudio_StartPendingTrack,medium,If new track id differs fro
 fAudioUnknown_8383A4,fAudio_LoadPendingTrack,medium,Unloads old samples then uploads new track data and its samples and primes sfx index
 fAudioUnknown_838401,fAudio_FadeOutOnTrackChangeSlow,medium,Sends fade-out command (param $40) when track id changed and old track was playing
 fAudioUnknown_83841F,fAudio_FadeOutOnTrackChangeFast,medium,Same as slow variant but fade parameter $10
-fAudioUnknown_8384D3,fAudio_UploadSpcDataBlock_B2D120,low,SPC command 1 uploads a $3F2-byte block from $B2D120 in 3-byte chunks (purpose unclear)
+fAudioUnknown_8384D3,fAudio_UploadSpcDriver,low,SPC command 1 uploads a $3F2-byte block from $B2D120 in 3-byte chunks (purpose unclear)
 fAudio_PlayAudio_Unknown838598,fAudio_LoadCommonSamples,medium,SPC command 2 uploads the 10 samples listed in aAudioSampleLookupTable at boot
 fAudioUnknown_83878C,fAudio_LoadTrackSamples,medium,Builds strcAudio.list from the 11 sample ids of the track entry and uploads each via command 3
 fAudioUnknown_8389C7,fAudio_FreeSamplesFromSlot,medium,SPC command 4 frees sample slots from A onward and zeroes strcAudio.list tail

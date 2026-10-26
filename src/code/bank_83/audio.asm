@@ -91,7 +91,7 @@ fAudio_PrepareSoundEffectSample:
   + RTL                                                        ;838375|6B      |      ;
  
  
-fAudioUnused_838376:
+fAudio_IncrementSampleIndexUnused:
     SEP #$20                                                   ;838376|E220    |      ;
     LDA.W strcAudio.index                                      ;838378|AD0301  |000103;
     INC A                                                      ;83837B|1A      |      ;
@@ -160,7 +160,7 @@ fAudio_LoadPendingTrack:
     STA.W strcAudio.index                                      ;8383F9|8D0301  |000103;
     JSL.L fAudio_PrepareSoundEffectSample                                 ;8383FC|223E8383|83833E;
  
-fAudioReturn_838400:
+fAudio_ReturnLong:
     RTL                                                        ;838400|6B      |      ; FIXME: I want to be .return
  
  
@@ -170,7 +170,7 @@ fAudio_FadeOutOnTrackChangeSlow:
     CMP.W strcAudio.trackIdCopy                                ;838406|CD1701  |000117;
     BEQ .return                                                ;838409|F013    |83841E;
     LDA.W strcAudio.trackIdCopy                                ;83840B|AD1701  |000117;
-    BEQ fAudioReturn_838400                                    ;83840E|F0F0    |838400; BUG - should be .return in this function rather than previous one since we are out of function scope
+    BEQ fAudio_ReturnLong                                    ;83840E|F0F0    |838400; BUG - should be .return in this function rather than previous one since we are out of function scope
     LDA.B #$01                                                 ;838410|A901    |      ;
     STA.W strcAudio.unk112                                     ;838412|8D1201  |000112;
     LDA.B #$40                                                 ;838415|A940    |      ;
@@ -286,7 +286,7 @@ fAudio_UploadData:
     RTL                                                        ;8384D2|6B      |      ;
  
  
-fAudio_UploadSpcDataBlock_B2D120:
+fAudio_UploadSpcDriver:
     SEP #$20                                                   ;8384D3|E220    |      ;
     REP #$10                                                   ;8384D5|C210    |      ;
     LDA.B #$01                                                 ;8384D7|A901    |      ;
@@ -674,7 +674,7 @@ fAudio_LoadTrackSamples:
  
 .loop:
     SEP #$20                                                   ;8387C0|E220    |      ;
-    LDA.L sAudioData1_838F83,X                                 ;8387C2|BF838F83|838F83;
+    LDA.L sAudioTrackTable,X                                 ;8387C2|BF838F83|838F83;
     STA.B strcVariables.n8Temp3                                ;8387C6|8594    |000094;
     BNE .sample_used                                                ;8387C8|D010    |8387DA;
     REP #$20                                                   ;8387CA|C220    |      ;
@@ -1060,12 +1060,12 @@ fAudio_UploadTrackData:
     LDA.W #$000E                                               ;838A92|A90E00  |      ;
     JSL.L fMathMultiply_7EbyA                                  ;838A95|22008083|838000;
     TAX                                                        ;838A99|AA      |      ;
-    LDA.L sAudioData1_838F83,X                                 ;838A9A|BF838F83|838F83;
+    LDA.L sAudioTrackTable,X                                 ;838A9A|BF838F83|838F83;
     STA.B ptrAudioData                                         ;838A9E|850A    |00000A;
     INX                                                        ;838AA0|E8      |      ;
     INX                                                        ;838AA1|E8      |      ;
     SEP #$20                                                   ;838AA2|E220    |      ;
-    LDA.L sAudioData1_838F83,X                                 ;838AA4|BF838F83|838F83;
+    LDA.L sAudioTrackTable,X                                 ;838AA4|BF838F83|838F83;
     STA.B ptrAudioData+2                                       ;838AA8|850C    |00000C;
     REP #$20                                                   ;838AAA|C220    |      ;
     LDA.B strcVariables.n16Temp2                               ;838AAC|A580    |000080;
@@ -1365,7 +1365,7 @@ fAudio_LoadSfxSample:
     RTL                                                        ;838CF2|6B      |      ;
  
  
-fAudioUnused_838CF3:
+fAudio_ResetSpcRegion3Unused:
     SEP #$20                                                   ;838CF3|E220    |      ;
     REP #$10                                                   ;838CF5|C210    |      ;
     STA.B strcVariables.n8Temp3                                ;838CF7|8594    |000094;

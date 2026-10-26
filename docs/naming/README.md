@@ -25,3 +25,8 @@ Suffixes: `_Idle|_Walk` + `_Down|_Up|_Side` from the AI sprite tables (direction
 
 `J_audio.csv` (blob address -> `sAudioSpcDriver` / `sAudioTrack_<Song>` / `sAudioSample_Id<NN>`) and `L_sfx.csv` (`sfx_NN` -> `Sfx_<Description>`, the 50 sound effects; `Sfx_Unk<hex id>` where no
 caller is known). Evidence and confidence per name: `docs/audio.md` section 13.
+
+## Code labels (banks $83-$85)
+
+`N_labels_bank83-85.csv` lists the renames of labels that embedded a ROM address in banks $83-$85 and the shared null pointer constants.
+All anonymous local labels (`.labelN`) of the code banks are named after their role (`.loop`, `.next_slot`, `.check_down_limit`, ...) and are unique within the scope of the preceding global label.

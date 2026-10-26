@@ -166,7 +166,7 @@ reverse-engineered information yet; rename labels freely (they only have to stay
 
 ## 5. Generated 65816 tables (`audio_tables.inc`)
 
-`aAudioSampleSize`, `aAudioTrackDataSizeTable`, `sAudioData1_838F83` (track table), `sAudioSampleData`, `aAudioSfxSampleIdTable`
+`aAudioSampleSize`, `aAudioTrackDataSizeTable`, `sAudioTrackTable` (track table), `sAudioSampleData`, `aAudioSfxSampleIdTable`
 and `aAudioSampleLookupTable` used to be hand-written `dw`/`db` data in `src/code/bank_83/audio.asm`; they are now produced from
 the sidecars and `audio.json` and included at the same place (same labels, same bytes). Things that stay in the code:
 the number of table entries (26 tracks, 40 samples, 50 SFX), the SFX upload size `$3F2`, the driver upload size `$0FD6` and the

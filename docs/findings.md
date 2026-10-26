@@ -58,7 +58,7 @@ Label names refer to the current sources; see `docs/naming/*.csv` for old -> new
 - Dead code after the `0x4F` handler's RTS ($84BB65-$84BBD9).
 - `!PDIR_LEFT`/`!PDIR_RIGHT` ($02/$03) may be swapped relative to the actual input handling (to be confirmed).
 - `aGameObjectIndexOffsets` carries a "BUG should be $510" note in the source.
-- Three identical 16-entry `1<<n` word tables exist (`aEngineUnknown_83CA78`, `aUnusedTable_83E74D`, `Table_858C7F`).
+- Three identical 16-entry `1<<n` word tables exist (`aEngineUnknown_83CA78`, `aMapBitMask16Unused`, `aObjectBitMask16Unused`).
 
 ## Palettes (bank 80, banks $A8-$A9)
 - Only rows 0-7 (first `$100` bytes) of each 512-byte `sPalette_*` are used: BG rows 0-7 from the area's time slot palette

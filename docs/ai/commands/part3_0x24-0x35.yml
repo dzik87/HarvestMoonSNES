@@ -26,7 +26,7 @@
   details: "The handler saves the current ptrAIUnknown0xCC in ptrTemp0x72, advances ptrAIActionData by 1, reads a byte and calls fAI_SetCCPointer (ptrAIUnknown0xCC = $7E:B586 + n*64). It then clears byte 0 of the slot (activity marker), reads the word at offset $12 (game object index) into strcObject.gameObjectIdx and calls fObject_Destroy, which releases all components (sprites) of the object (fObject_ReleaseSpriteTiles / fObject_ReleaseTileSlot) and clears strcGameObject.initailized. Finally it restores the previous ptrAIUnknown0xCC (the slot executing the script). The command pointer is advanced by 2 bytes in total. It does not block and does not increment the $10 counter. Logically corresponds to the routine fAI_DeactivateSlotAndObject (the same sequence for an arbitrary slot)."
   ram_touched: [ptrAIUnknown0xCC, ptrTemp0x72, strcObject.gameObjectIdx, strcAIUnknown.unk00, strcAIUnknown.unk12, strcGameObject.initailized, ptrAIActionData]
   calls: [fAI_SetCCPointer, fObject_Destroy]
-  open_questions: "The call to fObject_Destroy contains a known bug (a jump to fReturn_8580B8 instead of RTL) - it does not affect the command. It was not checked what happens to the other slot fields (they are not cleared)."
+  open_questions: "The call to fObject_Destroy contains a known bug (a jump to fObject_ReturnLong instead of RTL) - it does not affect the command. It was not checked what happens to the other slot fields (they are not cleared)."
 
 - opcode: 0x26
   macro: AICMD0x26_ClearBitAs0x28

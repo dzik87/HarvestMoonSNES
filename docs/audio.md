@@ -113,7 +113,7 @@ Role summary (counts verified by `audio_map.py --check`):
 | SPC700 engine | 1 (`sAudioSpcDriver`) | `fAudio_UploadData` (boot, IPL protocol) |
 | Track (song) data | 25 distinct (26 table entries, entry 0 duplicates entry 1) | command 5, `fAudio_UploadTrackData` |
 | BRR samples | 39 distinct (40 table entries, entry 0 duplicates entry 1) | commands 2/3, `fAudio_LoadCommonSamples`, `fAudio_LoadTrackSamples`, `fAudio_LoadSfxSample` |
-| SFX block | 1, at `$B2:D120`, `$3F2` bytes | command 1, `fAudio_UploadSpcDataBlock_B2D120` |
+| SFX block | 1, at `$B2:D120`, `$3F2` bytes | command 1, `fAudio_UploadSpcDriver` |
 
 Two details worth knowing [C]:
 
@@ -135,7 +135,7 @@ read from the same-numbered port on the other side (each direction has its own l
 2. `fAudio_SendCommand0B(A=0)` - command `$0B` with parameter 0 (stereo).
 3. `fAudio_LoadCommonSamples` - sends command 2 once per non-zero id in `aAudioSampleLookupTable`
    (`$17,$18,$19,$1A,$15,$06,$0A`), i.e. seven samples.
-4. `fAudio_UploadSpcDataBlock_B2D120` - command 1, `$3F2` bytes from `$B2:D120` (the SFX block).
+4. `fAudio_UploadSpcDriver` - command 1, `$3F2` bytes from `$B2:D120` (the SFX block).
 
 ### 3.2 Per-track sequence (`fAudio_LoadPendingTrack`, `fAudio_StartPendingTrack`) [C]
 
@@ -145,7 +145,7 @@ When they differ (and `trackId` is neither 0 nor `$FF`):
 1. fade the old track out (`fAudio_FadeOutOnTrackChangeSlow/Fast`: command 9, fade length `$40` or `$10`);
 2. `fAudio_FreeSamplesFromSlot(0)` - command 4, slot 0 (waits until the SPC status bits 0 and 4 are clear first);
 3. `fAudio_UploadTrackData` - command 5; size from `aAudioTrackDataSizeTable[trackId]`, source from the 14-byte entry
-   `sAudioData1_838F83[trackId]` (`dl` pointer + 11 sample ids);
+   `sAudioTrackTable[trackId]` (`dl` pointer + 11 sample ids);
 4. `fAudio_LoadTrackSamples` - command 3 per non-zero sample id of that entry, then **one extra** command 3 for sample
    `$06` (64 bytes) when the id list has trailing zeros, which is always the case (<= 7 ids of 11 are used);
 5. `fAudio_StartPendingTrack` - command 8 with parameters (1, `$40`).
@@ -158,7 +158,7 @@ with (sfx id, voice, pan = `$0A`). `fAudio_SendPlaySfxCommand` silently drops th
 `nToolSoundData_80B8CD[trackId]` is the number of sample ids in that track's table entry (verified for all 25 ids), i.e. the
 first free sample slot. [C]
 
-Track ids: `aAudioTrackDataSizeTable` and `sAudioData1_838F83` have 26 entries (ids 0-25); id 0 is never played
+Track ids: `aAudioTrackDataSizeTable` and `sAudioTrackTable` have 26 entries (ids 0-25); id 0 is never played
 (0 = "no track") and duplicates the Spring entry, `$FF` = "stop/none" in `fAudio_LoadPendingTrack`. [C]
 
 | Track id | Label | ROM | Size | Sample ids (slot order) | Patterns | Voice streams |
@@ -258,7 +258,7 @@ The poll routine returns the command id in A; `$104B-$1052` does `CALL !$131A; A
 | `$04` | `$10B3` | slot (port 0) | free slots `slot..10`: zero their entries in the slot-id table `$14B8`, rewind `$CB` to the start address of that slot's sample (or to `$65F4` for slot 0) | 8 |
 | `$05` | `$10F6` | count (2 bytes), chunks | store the track data at **`$19F4`**; set track base `$AC` and song pointer `$B0` to `$19F4` | 4 |
 | `$06` | `$1112` | same as 2 | load one sample into region 3 (pointer `$CD`, slot counter `$0379`, first slot `$15`); sets `$CF.2` when the counter reaches `$19`. **Never sent by the game** | 4 |
-| `$07` | `$1130` | none | reset region 3 (`$CF.2` cleared, `$0379 = $15`, slots `$15-$18` cleared, `$CD = $B7F4`). Only an unused 65816 routine (`fAudioUnused_838CF3`) sends it | 4 |
+| `$07` | `$1130` | none | reset region 3 (`$CF.2` cleared, `$0379 = $15`, slots `$15-$18` cleared, `$CD = $B7F4`). Only an unused 65816 routine (`fAudio_ResetSpcRegion3Unused`) sends it | 4 |
 | `$08` | `$1152` | (p0, p1) | start the track at `$19F4`. p0 = 0: master volume `$E0` immediately. p0 != 0: fade-in from 0 to `$E0` over p1 ticks. The game sends (1, `$40`) | 8 |
 | `$09` | `$1177` | (p0, p1) | p0 = 0: stop at once (clear `$CF.0`, silence). p0 != 0: fade master volume to 0 over p1 ticks, then stop (`$CF.5` while fading). The game sends (1, `$40`) or (1, `$10`) | 8 |
 | `$0A` | `$11A5` | (sfx id, voice 0-7, pan) | start SFX `id` on `voice` (see 8): `$D2 \|= 1<<voice`, voice stream pointer = `word[$1600 + 2*id]`, then pan command with p2 (`$0A` = centre) | 8 |

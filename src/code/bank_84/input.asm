@@ -363,7 +363,7 @@ fInput_Case04_State1:
     BIT.W #!JOYPAD_START                                               
     BEQ .justReturn                                            ;84C2D2|F003    |84C2D7;
     if !REGION_EUDE
-    JMP.W L_84C2D8
+    JMP.W fInput_Case04_StartPressedTarget
     else
     JMP.W $C2D8                                                ;84C2D4|4CD8C2  |84C2D8;
     endif
@@ -782,7 +782,7 @@ fInput_Case03_ConfirmSelection:
     REP #$20                                                   ;84C5B4|C220    |      ;
     ASL A                                                      ;84C5B6|0A      |      ;
     TAX                                                        ;84C5B7|AA      |      ;
-    LDA.L aDialogDialogPointerIndexes_839467,X                 ;84C5B8|BF679483|839467;
+    LDA.L aDialogPointerIndexBySelection,X                 ;84C5B8|BF679483|839467;
     TAX                                                        ;84C5BC|AA      |      ;
     SEP #$20                                                   ;84C5BD|E220    |      ;
     LDA.B #$00                                                 ;84C5BF|A900    |      ;
