@@ -60,6 +60,7 @@ jobs:
           python3 tools/gfx/gfxpipe.py verify
           python3 tools/fonts/font.py check
           python3 tests/test_font.py
+          python3 tests/test_extract_roundtrip.py   # needs the ROM dumps (HM_ROM_DIR); skipped in CI, the repository never holds a ROM
           python3 tests/test_tabledata.py
           python3 tests/test_spc700.py
           python3 tools/audio/audio_map.py --check

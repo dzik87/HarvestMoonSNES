@@ -1,0 +1,8 @@
+{
+ "_doc": "Row length (entries per row) of the BG name tables whose layout is not the default of default_columns() in tools/gfx/composed.py (32 / 64 / 128 entries per row for 1 / 2 / 3+ screens wide). Found by the continuity analysis of `tools/gfx/pngsync.py widths` and by looking at the rendered screens; the same width applies to every release.",
+ "columns": {
+  "ScreenRaw_Unk_A6A096": 64,
+  "Screen_House_Upgrade2": 64,
+  "Screen_Menu_Backgrounds": 32
+ }
+}

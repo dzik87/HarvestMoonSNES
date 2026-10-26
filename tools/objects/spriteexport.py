@@ -157,8 +157,10 @@ class Component:
 class ObjectData:
     """All objects read straight from the two bank byte images (independent of objdata's node model)."""
 
-    def __init__(self):
-        banks = od.load_banks()
+    def __init__(self, objects_dir=None):
+        """objects_dir: the assets/objects directory to read (default: the repository's)."""
+        self.objects_dir = objects_dir
+        banks = od.load_banks(objects_dir)
         self.data = {b: bytes(a.data) for b, a in banks.items()}
         self.count = {0x86: od.OBJ_SPLIT, 0x87: 0x450 - od.OBJ_SPLIT}
 
@@ -197,7 +199,7 @@ class ObjectData:
     def unreferenced_frames(self):
         """Frames that no step points to, found structurally as in objdata (list [(bank, ptr)])."""
         out = []
-        models = {b: od.build_model(a) for b, a in od.load_banks().items()}
+        models = {b: od.build_model(a) for b, a in od.load_banks(self.objects_dir).items()}
         for b, m in models.items():
             for nd in m.nodes:
                 if nd.kind == "Frame" and not nd.referenced:
@@ -251,7 +253,7 @@ def make_png(w, h, pix, palette_flat, transparent_extra=()):
 
 
 def save_png(img, path):
-    img.save(path, optimize=True, transparency=img.info["transparency"])
+    img.save(path, optimize=True, compress_level=9, transparency=img.info["transparency"])      # pinned encoder settings
 
 
 def read_pixels(path):
