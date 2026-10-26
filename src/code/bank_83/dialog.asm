@@ -364,15 +364,15 @@ fDialog_IterateText:
     CMP.W #$00C6                                               ;839594|C9C600  |      ;
     BCS .NUMBERS_wide                                          ;839597|B004    |83959D;
     LDX.B #$00                                                 ;839599|A200    |      ;
-    BRA .label5                                                ;83959B|8007    |8395A4;
+    BRA .set_glyph_type                                                ;83959B|8007    |8395A4;
  
  
 .NUMBERS_wide:
     CMP.W #$0270                                               ;83959D|C97002  |      ;
-    BNE .label5                                                ;8395A0|D002    |8395A4;
+    BNE .set_glyph_type                                                ;8395A0|D002    |8395A4;
     LDX.B #$00                                                 ;8395A2|A200    |      ;
  
-.label5:
+.set_glyph_type:
     STX.W strcDialogDisplay.fontGlyphType                      ;8395A4|8E9001  |000190;
     JSL.L fDialog_TransferGlyph                                ;8395A7|22239883|839823;
     SEP #$20                                                   ;8395AB|E220    |      ;
@@ -497,11 +497,11 @@ fDialog_IterateText:
     DEC A                                                      ;83967F|3A      |      ;
     if !REGION_EUDE
     STA.W strcDialogDisplay.dialogVarSize
-    BNE .r_839680_1
+    BNE .var_not_finished
     LDA.W strcDialogDisplay.dialogFlags
     ORA.B #$80
     STA.W strcDialogDisplay.dialogFlags
-.r_839680_1:
+.var_not_finished:
     REP #$30
     JSL.L fDialog_DrawNumericVarDigit
     else

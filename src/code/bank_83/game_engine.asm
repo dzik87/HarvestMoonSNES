@@ -347,7 +347,7 @@ fGameEngine_DirectionHandler83AD91:
     TAX                                                        ;83AD93|AA      |      ; X = A
     %CheckFlag(daily4, $4000)
     BEQ +                                                      ;83AD9B|F003    |83ADA0;
-    JMP.W .label3                                              ;83AD9D|4CA2AE  |83AEA2;
+    JMP.W .report_new_position                                              ;83AD9D|4CA2AE  |83AEA2;
  
  
   + TXA                                                        ;83ADA0|8A      |      ;
@@ -372,7 +372,7 @@ fGameEngine_DirectionHandler83AD91:
     ADC.B strcPlayer.unkE3                                     ;83ADBB|65E3    |0000E3;
     ADC.W #$000C                                               ;83ADBD|690C00  |      ;
     STA.B strcVariables.n16Temp3                               ;83ADC0|8582    |000082;
-    BRA .label1                                                ;83ADC2|8044    |83AE08;
+    BRA .scan_objects                                                ;83ADC2|8044    |83AE08;
  
  
 .case1:
@@ -387,7 +387,7 @@ fGameEngine_DirectionHandler83AD91:
     CLC                                                        ;83ADD3|18      |      ;
     ADC.W #$000C                                               ;83ADD4|690C00  |      ;
     STA.B strcVariables.n16Temp3                               ;83ADD7|8582    |000082;
-    BRA .label1                                                ;83ADD9|802D    |83AE08;
+    BRA .scan_objects                                                ;83ADD9|802D    |83AE08;
  
  
 .case3:
@@ -401,7 +401,7 @@ fGameEngine_DirectionHandler83AD91:
     CLC                                                        ;83ADE9|18      |      ;
     ADC.W #$000C                                               ;83ADEA|690C00  |      ;
     STA.B strcVariables.n16Temp3                               ;83ADED|8582    |000082;
-    BRA .label1                                                ;83ADEF|8017    |83AE08;
+    BRA .scan_objects                                                ;83ADEF|8017    |83AE08;
  
  
 .case4:
@@ -416,10 +416,10 @@ fGameEngine_DirectionHandler83AD91:
     CLC                                                        ;83AE00|18      |      ;
     ADC.W #$000C                                               ;83AE01|690C00  |      ;
     STA.B strcVariables.n16Temp3                               ;83AE04|8582    |000082;
-    BRA .label1                                                ;83AE06|8000    |83AE08;
+    BRA .scan_objects                                                ;83AE06|8000    |83AE08;
  
  
-.label1:
+.scan_objects:
     REP #$30                                                   ;83AE08|C230    |      ;
     LDA.B ptrAIUnknown0xCC                                     ;83AE0A|A5CC    |0000CC;
     PHA                                                        ;83AE0C|48      |      ;
@@ -447,7 +447,7 @@ fGameEngine_DirectionHandler83AD91:
     LDY.W #$0000                                               ;83AE35|A00000  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;83AE38|B7CC    |0000CC;
     BNE +                                                      ;83AE3A|D003    |83AE3F;
-    JMP.W .label2                                              ;83AE3C|4C81AE  |83AE81;
+    JMP.W .next_object                                              ;83AE3C|4C81AE  |83AE81;
  
  
   + REP #$20                                                   ;83AE3F|C220    |      ;
@@ -456,15 +456,15 @@ fGameEngine_DirectionHandler83AD91:
     LDY.W #$001A                                               ;83AE44|A01A00  |      ;
     SBC.B [ptrAIUnknown0xCC],Y                                 ;83AE47|F7CC    |0000CC;
     CMP.W #$0019                                               ;83AE49|C91900  |      ;
-    BCS .label2                                                ;83AE4C|B033    |83AE81;
+    BCS .next_object                                                ;83AE4C|B033    |83AE81;
     LDA.B strcVariables.n16Temp3                               ;83AE4E|A582    |000082;
     SEC                                                        ;83AE50|38      |      ;
     LDY.W #$001C                                               ;83AE51|A01C00  |      ;
     SBC.B [ptrAIUnknown0xCC],Y                                 ;83AE54|F7CC    |0000CC;
     CMP.W #$0019                                               ;83AE56|C91900  |      ;
-    BCS .label2                                                ;83AE59|B026    |83AE81;
+    BCS .next_object                                                ;83AE59|B026    |83AE81;
     LDA.B strcVariables.n16Unk8C                               ;83AE5B|A58C    |00008C;
-    BNE .label2                                                ;83AE5D|D022    |83AE81;
+    BNE .next_object                                                ;83AE5D|D022    |83AE81;
     SEP #$20                                                   ;83AE5F|E220    |      ;
     REP #$10                                                   ;83AE61|C210    |      ;
     LDY.W #$000C                                               ;83AE63|A00C00  |      ;
@@ -476,14 +476,14 @@ fGameEngine_DirectionHandler83AD91:
     LDA.B [ptrAIUnknown0xCC],Y                                 ;83AE71|B7CC    |0000CC;
     AND.B #$02                                                 ;83AE73|2902    |      ;
     BEQ +                                                      ;83AE75|F003    |83AE7A;
-    JMP.W .label2                                              ;83AE77|4C81AE  |83AE81;
+    JMP.W .next_object                                              ;83AE77|4C81AE  |83AE81;
  
  
   + REP #$20                                                   ;83AE7A|C220    |      ;
     LDA.W #$0001                                               ;83AE7C|A90100  |      ;
     STA.B strcVariables.n16Unk8C                               ;83AE7F|858C    |00008C;
  
-.label2:
+.next_object:
     REP #$20                                                   ;83AE81|C220    |      ;
     LDA.B ptrAIUnknown0xCC                                     ;83AE83|A5CC    |0000CC;
     CLC                                                        ;83AE85|18      |      ;
@@ -504,7 +504,7 @@ fGameEngine_DirectionHandler83AD91:
     PLA                                                        ;83AE9F|68      |      ;
     STA.B ptrAIUnknown0xCC                                     ;83AEA0|85CC    |0000CC;
  
-.label3:
+.report_new_position:
     REP #$30                                                   ;83AEA2|C230    |      ;
     LDX.B strcPlayer.newX                                      ;83AEA4|A6E5    |0000E5;
     LDY.B strcPlayer.newY                                      ;83AEA6|A4E7    |0000E7;
@@ -910,12 +910,12 @@ fGameEngine_CheckTileCollision:
     REP #$20                                                   ;83B120|C220    |      ;
     PLA                                                        ;83B122|68      |      ;
     CMP.W #$0001                                               ;83B123|C90100  |      ;
-    BEQ .label1                                                ;83B126|F004    |83B12C;
+    BEQ .store_pos_y                                                ;83B126|F004    |83B12C;
     STX.B strcPlayer.unkPosX                                   ;83B128|86E9    |0000E9;
     BRA +                                                      ;83B12A|8002    |83B12E;
  
  
-.label1:
+.store_pos_y:
     STX.B strcPlayer.unkPosY                                   ;83B12C|86EB    |0000EB;
  
   + SEP #$20                                                   ;83B12E|E220    |      ;
@@ -927,16 +927,16 @@ fGameEngine_CheckTileCollision:
  
   + LDA.B strcVariables.n8Temp1                                ;83B139|A592    |000092;
     AND.B #$02                                                 ;83B13B|2902    |      ;
-    BNE .label2                                                ;83B13D|D02B    |83B16A;
+    BNE .solid_left_half                                                ;83B13D|D02B    |83B16A;
     LDA.B strcVariables.n8Temp1                                ;83B13F|A592    |000092;
     AND.B #$04                                                 ;83B141|2904    |      ;
-    BNE .label3                                                ;83B143|D039    |83B17E;
+    BNE .solid_right_half                                                ;83B143|D039    |83B17E;
     LDA.B strcVariables.n8Temp1                                ;83B145|A592    |000092;
     AND.B #$08                                                 ;83B147|2908    |      ;
-    BNE .label4                                                ;83B149|D047    |83B192;
+    BNE .solid_top_half                                                ;83B149|D047    |83B192;
     LDA.B strcVariables.n8Temp1                                ;83B14B|A592    |000092;
     AND.B #$10                                                 ;83B14D|2910    |      ;
-    BNE .label5                                                ;83B14F|D055    |83B1A6;
+    BNE .solid_bottom_half                                                ;83B14F|D055    |83B1A6;
     %CheckPlayerFlags(!PFLAGS_RIDINGHORSE)
     BNE +                                                      ;83B158|D003    |83B15D;
     JMP.W .return0                                             ;83B15A|4CC1B1  |83B1C1;
@@ -949,7 +949,7 @@ fGameEngine_CheckTileCollision:
     JMP.W .return1                                             ;83B167|4CBAB1  |83B1BA;
  
  
-.label2:
+.solid_left_half:
     REP #$30                                                   ;83B16A|C230    |      ;
     LDA.B strcPlayer.newY                                      ;83B16C|A5E7    |0000E7;
     BNE +                                                      ;83B16E|D005    |83B175;
@@ -962,7 +962,7 @@ fGameEngine_CheckTileCollision:
     BRA .return1                                               ;83B17C|803C    |83B1BA;
  
  
-.label3:
+.solid_right_half:
     REP #$30                                                   ;83B17E|C230    |      ;
     LDA.B strcPlayer.newY                                      ;83B180|A5E7    |0000E7;
     BNE +                                                      ;83B182|D005    |83B189;
@@ -975,7 +975,7 @@ fGameEngine_CheckTileCollision:
     BRA .return1                                               ;83B190|8028    |83B1BA;
  
  
-.label4:
+.solid_top_half:
     REP #$30                                                   ;83B192|C230    |      ;
     LDA.B strcPlayer.newX                                      ;83B194|A5E5    |0000E5;
     BNE +                                                      ;83B196|D005    |83B19D;
@@ -988,7 +988,7 @@ fGameEngine_CheckTileCollision:
     BRA .return1                                               ;83B1A4|8014    |83B1BA;
  
  
-.label5:
+.solid_bottom_half:
     REP #$30                                                   ;83B1A6|C230    |      ;
     LDA.B strcPlayer.newX                                      ;83B1A8|A5E5    |0000E5;
     BNE +                                                      ;83B1AA|D005    |83B1B1;
@@ -1874,19 +1874,19 @@ fGameEngine_SaveGame:
     REP #$20                                                   ;83BA09|C220    |      ;
     LDY.W #$002E                                               ;83BA0B|A02E00  |      ;
     LDA.B strcVariables.n16Temp1                               ;83BA0E|A57E    |00007E;
-    BEQ .label1                                                ;83BA10|F008    |83BA1A;
+    BEQ .first_block_marker_set                                                ;83BA10|F008    |83BA1A;
     SEP #$20                                                   ;83BA12|E220    |      ;
     LDA.B #$00                                                 ;83BA14|A900    |      ;
     STA.B [ptrTemp0x72],Y                                      ;83BA16|9772    |000072;
-    BRA .label2                                                ;83BA18|8006    |83BA20;
+    BRA .second_block_marker                                                ;83BA18|8006    |83BA20;
  
  
-.label1:
+.first_block_marker_set:
     SEP #$20                                                   ;83BA1A|E220    |      ;
     LDA.B #$01                                                 ;83BA1C|A901    |      ;
     STA.B [ptrTemp0x72],Y                                      ;83BA1E|9772    |000072;
  
-.label2:
+.second_block_marker:
     REP #$20                                                   ;83BA20|C220    |      ;
     LDA.W #$1000                                               ;83BA22|A90010  |      ;
     STA.B ptrTemp0x72                                          ;83BA25|8572    |000072;
@@ -1993,19 +1993,19 @@ fGameEngine_SaveCheck:
     LDY.W #$003C                                               ;83BAF5|A03C00  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BAF8|B772    |000072;
     CMP.B #$46                                                 ;83BAFA|C946    |      ;
-    BNE .label1                                                ;83BAFC|D063    |83BB61;
+    BNE .first_copy_invalid                                                ;83BAFC|D063    |83BB61;
     LDY.W #$003D                                               ;83BAFE|A03D00  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BB01|B772    |000072;
     CMP.B #$41                                                 ;83BB03|C941    |      ;
-    BNE .label1                                                ;83BB05|D05A    |83BB61;
+    BNE .first_copy_invalid                                                ;83BB05|D05A    |83BB61;
     LDY.W #$003E                                               ;83BB07|A03E00  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BB0A|B772    |000072;
     CMP.B #$52                                                 ;83BB0C|C952    |      ;
-    BNE .label1                                                ;83BB0E|D051    |83BB61;
+    BNE .first_copy_invalid                                                ;83BB0E|D051    |83BB61;
     LDY.W #$003F                                               ;83BB10|A03F00  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BB13|B772    |000072;
     CMP.B #$4D                                                 ;83BB15|C94D    |      ;
-    BNE .label1                                                ;83BB17|D048    |83BB61;
+    BNE .first_copy_invalid                                                ;83BB17|D048    |83BB61;
     SEP #$20                                                   ;83BB19|E220    |      ;
     LDY.W #$002E                                               ;83BB1B|A02E00  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BB1E|B772    |000072;
@@ -2032,7 +2032,7 @@ fGameEngine_SaveCheck:
     REP #$30                                                   ;83BB47|C230    |      ;
     LDA.B strcVariables.n16Temp1                               ;83BB49|A57E    |00007E;
     CMP.B strcVariables.n16Temp2                               ;83BB4B|C580    |000080;
-    BNE .label1                                                ;83BB4D|D012    |83BB61;
+    BNE .first_copy_invalid                                                ;83BB4D|D012    |83BB61;
     LDY.W #$002F                                               ;83BB4F|A02F00  |      ;
     LDA.B strcVariables.n16Temp1                               ;83BB52|A57E    |00007E;
     STA.B [ptrTemp0x72],Y                                      ;83BB54|9772    |000072;
@@ -2040,10 +2040,10 @@ fGameEngine_SaveCheck:
     LDY.W #$002E                                               ;83BB58|A02E00  |      ;
     LDA.B strcVariables.n8Temp1                                ;83BB5B|A592    |000092;
     STA.B [ptrTemp0x72],Y                                      ;83BB5D|9772    |000072;
-    BRA .label2                                                ;83BB5F|8036    |83BB97;
+    BRA .check_second_copy                                                ;83BB5F|8036    |83BB97;
  
  
-.label1:
+.first_copy_invalid:
     REP #$30                                                   ;83BB61|C230    |      ;
     LDY.W #$0000                                               ;83BB63|A00000  |      ;
     LDA.W #$0000                                               ;83BB66|A90000  |      ;
@@ -2070,7 +2070,7 @@ fGameEngine_SaveCheck:
     LDA.W #$0001                                               ;83BB92|A90100  |      ;
     STA.B strcVariables.n16Temp3                               ;83BB95|8582    |000082;
  
-.label2:
+.check_second_copy:
     REP #$30                                                   ;83BB97|C230    |      ;
     LDA.W #$1000                                               ;83BB99|A90010  |      ;
     STA.B ptrTemp0x72                                          ;83BB9C|8572    |000072;
@@ -2080,19 +2080,19 @@ fGameEngine_SaveCheck:
     LDY.W #$003C                                               ;83BBA4|A03C00  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BBA7|B772    |000072;
     CMP.B #$46                                                 ;83BBA9|C946    |      ;
-    BNE .label3                                                ;83BBAB|D06C    |83BC19;
+    BNE .second_copy_invalid                                                ;83BBAB|D06C    |83BC19;
     LDY.W #$003D                                               ;83BBAD|A03D00  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BBB0|B772    |000072;
     CMP.B #$41                                                 ;83BBB2|C941    |      ;
-    BNE .label3                                                ;83BBB4|D063    |83BC19;
+    BNE .second_copy_invalid                                                ;83BBB4|D063    |83BC19;
     LDY.W #$003E                                               ;83BBB6|A03E00  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BBB9|B772    |000072;
     CMP.B #$52                                                 ;83BBBB|C952    |      ;
-    BNE .label3                                                ;83BBBD|D05A    |83BC19;
+    BNE .second_copy_invalid                                                ;83BBBD|D05A    |83BC19;
     LDY.W #$003F                                               ;83BBBF|A03F00  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BBC2|B772    |000072;
     CMP.B #$4D                                                 ;83BBC4|C94D    |      ;
-    BNE .label3                                                ;83BBC6|D051    |83BC19;
+    BNE .second_copy_invalid                                                ;83BBC6|D051    |83BC19;
     SEP #$20                                                   ;83BBC8|E220    |      ;
     LDY.W #$002E                                               ;83BBCA|A02E00  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BBCD|B772    |000072;
@@ -2119,7 +2119,7 @@ fGameEngine_SaveCheck:
     REP #$30                                                   ;83BBF6|C230    |      ;
     LDA.B strcVariables.n16Temp1                               ;83BBF8|A57E    |00007E;
     CMP.B strcVariables.n16Temp2                               ;83BBFA|C580    |000080;
-    BNE .label3                                                ;83BBFC|D01B    |83BC19;
+    BNE .second_copy_invalid                                                ;83BBFC|D01B    |83BC19;
     LDY.W #$002F                                               ;83BBFE|A02F00  |      ;
     LDA.B strcVariables.n16Temp1                               ;83BC01|A57E    |00007E;
     STA.B [ptrTemp0x72],Y                                      ;83BC03|9772    |000072;
@@ -2134,7 +2134,7 @@ fGameEngine_SaveCheck:
     BRA .justReturn                                            ;83BC17|8040    |83BC59;
  
  
-.label3:
+.second_copy_invalid:
     REP #$30                                                   ;83BC19|C230    |      ;
     LDY.W #$0000                                               ;83BC1B|A00000  |      ;
     LDA.W #$0000                                               ;83BC1E|A90000  |      ;
@@ -2170,7 +2170,7 @@ fGameEngine_AnimalsDailyUpdate:
     REP #$30                                                   ;83BC5A|C230    |      ;
     %CheckFlag(daily4, $0001)
     BEQ +                                                      ;83BC63|F003    |83BC68;
-    JMP.W .label13                                             ;83BC65|4C4BBE  |83BE4B;
+    JMP.W .start_cow_aging                                             ;83BC65|4C4BBE  |83BE4B;
  
  
   + LDX.W #$0000                                               ;83BC68|A20000  |      ;
@@ -2188,7 +2188,7 @@ fGameEngine_AnimalsDailyUpdate:
     LDA.B [ptrTemp0x72],Y                                      ;83BC7C|B772    |000072;
     AND.B #$01                                                 ;83BC7E|2901    |      ;
     BNE +                                                      ;83BC80|D003    |83BC85;
-    JMP.W .label12                                             ;83BC82|4C3FBE  |83BE3F;
+    JMP.W .next_cow                                             ;83BC82|4C3FBE  |83BE3F;
  
  
   + SEP #$20                                                   ;83BC85|E220    |      ;
@@ -2196,125 +2196,125 @@ fGameEngine_AnimalsDailyUpdate:
     LDA.B [ptrTemp0x72],Y                                      ;83BC8A|B772    |000072;
     AND.B #$02                                                 ;83BC8C|2902    |      ;
     BEQ +                                                      ;83BC8E|F003    |83BC93;
-    JMP.W .label12                                             ;83BC90|4C3FBE  |83BE3F;
+    JMP.W .next_cow                                             ;83BC90|4C3FBE  |83BE3F;
  
  
   + LDY.W #$0000                                               ;83BC93|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BC96|B772    |000072;
     AND.B #$04                                                 ;83BC98|2904    |      ;
     BEQ +                                                      ;83BC9A|F003    |83BC9F;
-    JMP.W .label11                                             ;83BC9C|4C2EBE  |83BE2E;
+    JMP.W .child_graze                                             ;83BC9C|4C2EBE  |83BE2E;
  
  
   + LDY.W #$0002                                               ;83BC9F|A00200  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BCA2|B772    |000072;
     CMP.B #$27                                                 ;83BCA4|C927    |      ;
-    BNE .label2                                                ;83BCA6|D02B    |83BCD3;
+    BNE .cow_outdoors                                                ;83BCA6|D02B    |83BCD3;
     LDY.W #$0000                                               ;83BCA8|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BCAB|B772    |000072;
     AND.B #$40                                                 ;83BCAD|2940    |      ;
-    BNE .label1                                                ;83BCAF|D011    |83BCC2;
+    BNE .pregnant_feed_slot                                                ;83BCAF|D011    |83BCC2;
     REP #$20                                                   ;83BCB1|C220    |      ;
     TXA                                                        ;83BCB3|8A      |      ;
     ASL A                                                      ;83BCB4|0A      |      ;
     TAX                                                        ;83BCB5|AA      |      ;
     LDA.L nCowFeedFlagsTable,X                                 ;83BCB6|BF71A582|82A571;
     AND.W strcPlayerData.placedCowFeedFlags                    ;83BCBA|2D3209  |000932;
-    BEQ .label3                                                ;83BCBD|F051    |83BD10;
-    JMP.W .label8                                              ;83BCBF|4C9EBD  |83BD9E;
+    BEQ .penalty_not_fed                                                ;83BCBD|F051    |83BD10;
+    JMP.W .check_cranky                                              ;83BCBF|4C9EBD  |83BD9E;
  
  
-.label1:
+.pregnant_feed_slot:
     REP #$30                                                   ;83BCC2|C230    |      ;
     LDX.W #$0018                                               ;83BCC4|A21800  |      ;
     LDA.L nCowFeedFlagsTable,X                                 ;83BCC7|BF71A582|82A571;
     AND.W strcPlayerData.placedCowFeedFlags                    ;83BCCB|2D3209  |000932;
-    BEQ .label3                                                ;83BCCE|F040    |83BD10;
-    JMP.W .label8                                              ;83BCD0|4C9EBD  |83BD9E;
+    BEQ .penalty_not_fed                                                ;83BCCE|F040    |83BD10;
+    JMP.W .check_cranky                                              ;83BCD0|4C9EBD  |83BD9E;
  
  
-.label2:
+.cow_outdoors:
     SEP #$20                                                   ;83BCD3|E220    |      ;
     REP #$10                                                   ;83BCD5|C210    |      ;
     LDY.W #$0002                                               ;83BCD7|A00200  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BCDA|B772    |000072;
     CMP.B #$04                                                 ;83BCDC|C904    |      ;
-    BCS .label3                                                ;83BCDE|B030    |83BD10;
+    BCS .penalty_not_fed                                                ;83BCDE|B030    |83BD10;
     JSL.L fObjectMap_EatingGrass                               ;83BCE0|22A0A982|82A9A0;
     REP #$20                                                   ;83BCE4|C220    |      ;
     LDA.W strcPlayerData.leftGrassToCut                        ;83BCE6|AD2E09  |00092E;
-    BEQ .label3                                                ;83BCE9|F025    |83BD10;
+    BEQ .penalty_not_fed                                                ;83BCE9|F025    |83BD10;
     REP #$20                                                   ;83BCEB|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;83BCED|AD9601  |000196;
     AND.W #$0002                                               ;83BCF0|290200  |      ;
-    BNE .label3                                                ;83BCF3|D01B    |83BD10;
+    BNE .penalty_not_fed                                                ;83BCF3|D01B    |83BD10;
     LDA.W strcDialogDisplay.mapFlags                           ;83BCF5|AD9601  |000196;
     AND.W #$0008                                               ;83BCF8|290800  |      ;
-    BNE .label4                                                ;83BCFB|D023    |83BD20;
+    BNE .penalty_flag_0008                                                ;83BCFB|D023    |83BD20;
     LDA.W strcDialogDisplay.mapFlags                           ;83BCFD|AD9601  |000196;
     AND.W #$0010                                               ;83BD00|291000  |      ;
-    BNE .label5                                                ;83BD03|D02B    |83BD30;
+    BNE .penalty_flag_0010                                                ;83BD03|D02B    |83BD30;
     LDA.W strcDialogDisplay.mapFlags                           ;83BD05|AD9601  |000196;
     AND.W #$0200                                               ;83BD08|290002  |      ;
-    BNE .label6                                                ;83BD0B|D033    |83BD40;
-    JMP.W .label8                                              ;83BD0D|4C9EBD  |83BD9E;
+    BNE .penalty_flag_0200                                                ;83BD0B|D033    |83BD40;
+    JMP.W .check_cranky                                              ;83BD0D|4C9EBD  |83BD9E;
  
  
-.label3:
+.penalty_not_fed:
     REP #$20                                                   ;83BD10|C220    |      ;
     LDA.W #$FFF8                                               ;83BD12|A9F8FF  |      ;
     JSL.L fCow_AddHappiness                                      ;83BD15|22D4A584|84A5D4;
     REP #$30                                                   ;83BD19|C230    |      ;
     LDY.W #$0004                                               ;83BD1B|A00400  |      ;
-    BRA .label7                                                ;83BD1E|8030    |83BD50;
+    BRA .roll_for_sickness                                                ;83BD1E|8030    |83BD50;
  
  
-.label4:
+.penalty_flag_0008:
     REP #$20                                                   ;83BD20|C220    |      ;
     LDA.W #$FFF0                                               ;83BD22|A9F0FF  |      ;
     JSL.L fCow_AddHappiness                                      ;83BD25|22D4A584|84A5D4;
     REP #$30                                                   ;83BD29|C230    |      ;
     LDY.W #$0002                                               ;83BD2B|A00200  |      ;
-    BRA .label7                                                ;83BD2E|8020    |83BD50;
+    BRA .roll_for_sickness                                                ;83BD2E|8020    |83BD50;
  
  
-.label5:
+.penalty_flag_0010:
     REP #$20                                                   ;83BD30|C220    |      ;
     LDA.W #$FFE8                                               ;83BD32|A9E8FF  |      ;
     JSL.L fCow_AddHappiness                                      ;83BD35|22D4A584|84A5D4;
     REP #$30                                                   ;83BD39|C230    |      ;
     LDY.W #$0002                                               ;83BD3B|A00200  |      ;
-    BRA .label7                                                ;83BD3E|8010    |83BD50;
+    BRA .roll_for_sickness                                                ;83BD3E|8010    |83BD50;
  
  
-.label6:
+.penalty_flag_0200:
     REP #$20                                                   ;83BD40|C220    |      ;
     LDA.W #$FFF8                                               ;83BD42|A9F8FF  |      ;
     JSL.L fCow_AddHappiness                                      ;83BD45|22D4A584|84A5D4;
     REP #$30                                                   ;83BD49|C230    |      ;
     LDY.W #$0008                                               ;83BD4B|A00800  |      ;
-    BRA .label7                                                ;83BD4E|8000    |83BD50;
+    BRA .roll_for_sickness                                                ;83BD4E|8000    |83BD50;
  
  
-.label7:
+.roll_for_sickness:
     REP #$30                                                   ;83BD50|C230    |      ;
     TYA                                                        ;83BD52|98      |      ;
     JSL.L fCore_GetRandomNumber                                ;83BD53|22F98980|8089F9;
-    BNE .label8                                                ;83BD57|D045    |83BD9E;
+    BNE .check_cranky                                                ;83BD57|D045    |83BD9E;
     SEP #$20                                                   ;83BD59|E220    |      ;
     REP #$10                                                   ;83BD5B|C210    |      ;
     LDY.W #$0000                                               ;83BD5D|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BD60|B772    |000072;
     AND.B #$40                                                 ;83BD62|2940    |      ;
-    BNE .label8                                                ;83BD64|D038    |83BD9E;
+    BNE .check_cranky                                                ;83BD64|D038    |83BD9E;
     LDY.W #$0001                                               ;83BD66|A00100  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BD69|B772    |000072;
     AND.B #$80                                                 ;83BD6B|2980    |      ;
-    BNE .label8                                                ;83BD6D|D02F    |83BD9E;
+    BNE .check_cranky                                                ;83BD6D|D02F    |83BD9E;
     LDY.W #$0000                                               ;83BD6F|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BD72|B772    |000072;
     AND.B #$20                                                 ;83BD74|2920    |      ;
-    BNE .label8                                                ;83BD76|D026    |83BD9E;
+    BNE .check_cranky                                                ;83BD76|D026    |83BD9E;
     SEP #$20                                                   ;83BD78|E220    |      ;
     REP #$10                                                   ;83BD7A|C210    |      ;
     LDY.W #$0000                                               ;83BD7C|A00000  |      ;
@@ -2331,57 +2331,57 @@ fGameEngine_AnimalsDailyUpdate:
     LDA.W #$FFE2                                               ;83BD97|A9E2FF  |      ;
     JSL.L fGameEngine_AddHappiness                             ;83BD9A|2282B283|83B282;
  
-.label8:
+.check_cranky:
     SEP #$20                                                   ;83BD9E|E220    |      ;
     REP #$10                                                   ;83BDA0|C210    |      ;
     LDY.W #$0005                                               ;83BDA2|A00500  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BDA5|B772    |000072;
     CMP.B #$0A                                                 ;83BDA7|C90A    |      ;
-    BEQ .label10                                               ;83BDA9|F040    |83BDEB;
+    BEQ .roll_for_cranky                                               ;83BDA9|F040    |83BDEB;
     REP #$20                                                   ;83BDAB|C220    |      ;
     %CheckFlag(daily1, $1000)
-    BEQ .label9                                                ;83BDB4|F020    |83BDD6;
+    BEQ .check_flag_0400                                                ;83BDB4|F020    |83BDD6;
     SEP #$20                                                   ;83BDB6|E220    |      ;
     LDY.W #$0002                                               ;83BDB8|A00200  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BDBB|B772    |000072;
     CMP.B #$27                                                 ;83BDBD|C927    |      ;
-    BEQ .label12                                               ;83BDBF|F07E    |83BE3F;
+    BEQ .next_cow                                               ;83BDBF|F07E    |83BE3F;
     SEP #$20                                                   ;83BDC1|E220    |      ;
     LDA.B #$10                                                 ;83BDC3|A910    |      ;
     JSL.L fCore_GetRandomNumber                                ;83BDC5|22F98980|8089F9;
-    BNE .label9                                                ;83BDC9|D00B    |83BDD6;
+    BNE .check_flag_0400                                                ;83BDC9|D00B    |83BDD6;
     REP #$20                                                   ;83BDCB|C220    |      ;
     LDA.W #$FFF8                                               ;83BDCD|A9F8FF  |      ;
     JSL.L fCow_AddHappiness                                      ;83BDD0|22D4A584|84A5D4;
-    BRA .label10                                               ;83BDD4|8015    |83BDEB;
+    BRA .roll_for_cranky                                               ;83BDD4|8015    |83BDEB;
  
  
-.label9:
+.check_flag_0400:
     REP #$20                                                   ;83BDD6|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;83BDD8|AD9601  |000196;
     AND.W #$0400                                               ;83BDDB|290004  |      ;
-    BEQ .label12                                               ;83BDDE|F05F    |83BE3F;
+    BEQ .next_cow                                               ;83BDDE|F05F    |83BE3F;
     SEP #$20                                                   ;83BDE0|E220    |      ;
     LDY.W #$0002                                               ;83BDE2|A00200  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BDE5|B772    |000072;
     CMP.B #$27                                                 ;83BDE7|C927    |      ;
-    BEQ .label12                                               ;83BDE9|F054    |83BE3F;
+    BEQ .next_cow                                               ;83BDE9|F054    |83BE3F;
  
-.label10:
+.roll_for_cranky:
     SEP #$20                                                   ;83BDEB|E220    |      ;
     REP #$10                                                   ;83BDED|C210    |      ;
     LDY.W #$0000                                               ;83BDEF|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BDF2|B772    |000072;
     AND.B #$40                                                 ;83BDF4|2940    |      ;
-    BNE .label12                                               ;83BDF6|D047    |83BE3F;
+    BNE .next_cow                                               ;83BDF6|D047    |83BE3F;
     LDY.W #$0001                                               ;83BDF8|A00100  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BDFB|B772    |000072;
     AND.B #$80                                                 ;83BDFD|2980    |      ;
-    BNE .label12                                               ;83BDFF|D03E    |83BE3F;
+    BNE .next_cow                                               ;83BDFF|D03E    |83BE3F;
     LDY.W #$0000                                               ;83BE01|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BE04|B772    |000072;
     AND.B #$20                                                 ;83BE06|2920    |      ;
-    BNE .label12                                               ;83BE08|D035    |83BE3F;
+    BNE .next_cow                                               ;83BE08|D035    |83BE3F;
     SEP #$20                                                   ;83BE0A|E220    |      ;
     LDY.W #$0000                                               ;83BE0C|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BE0F|B772    |000072;
@@ -2396,33 +2396,33 @@ fGameEngine_AnimalsDailyUpdate:
     REP #$20                                                   ;83BE23|C220    |      ;
     LDA.W #$FFE2                                               ;83BE25|A9E2FF  |      ;
     JSL.L fCow_AddHappiness                                      ;83BE28|22D4A584|84A5D4;
-    BRA .label12                                               ;83BE2C|8011    |83BE3F;
+    BRA .next_cow                                               ;83BE2C|8011    |83BE3F;
  
  
-.label11:
+.child_graze:
     SEP #$20                                                   ;83BE2E|E220    |      ;
     REP #$10                                                   ;83BE30|C210    |      ;
     LDY.W #$0002                                               ;83BE32|A00200  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BE35|B772    |000072;
     CMP.B #$04                                                 ;83BE37|C904    |      ;
-    BCS .label12                                               ;83BE39|B004    |83BE3F;
+    BCS .next_cow                                               ;83BE39|B004    |83BE3F;
     JSL.L fObjectMap_EatingGrass                               ;83BE3B|22A0A982|82A9A0;
  
-.label12:
+.next_cow:
     REP #$30                                                   ;83BE3F|C230    |      ;
     PLX                                                        ;83BE41|FA      |      ;
     INX                                                        ;83BE42|E8      |      ;
     CPX.W #$000C                                               ;83BE43|E00C00  |      ;
-    BEQ .label13                                               ;83BE46|F003    |83BE4B;
+    BEQ .start_cow_aging                                               ;83BE46|F003    |83BE4B;
     JMP.W .cow                                                 ;83BE48|4C6BBC  |83BC6B;
  
  
-.label13:
+.start_cow_aging:
     REP #$30                                                   ;83BE4B|C230    |      ;
     %UnsetFlag(event6, $1040)
     LDX.W #$0000                                               ;83BE58|A20000  |      ;
  
-.label14:
+.cow_aging_loop:
     REP #$30                                                   ;83BE5B|C230    |      ;
     PHX                                                        ;83BE5D|DA      |      ;
     PHX                                                        ;83BE5E|DA      |      ;
@@ -2449,7 +2449,7 @@ fGameEngine_AnimalsDailyUpdate:
     LDY.W #$0000                                               ;83BE87|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BE8A|B772    |000072;
     AND.B #$02                                                 ;83BE8C|2902    |      ;
-    BEQ .label15                                               ;83BE8E|F021    |83BEB1;
+    BEQ .cow_check_child                                               ;83BE8E|F021    |83BEB1;
     LDY.W #$0003                                               ;83BE90|A00300  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BE93|B772    |000072;
     INC A                                                      ;83BE95|1A      |      ;
@@ -2469,13 +2469,13 @@ fGameEngine_AnimalsDailyUpdate:
     JMP.W .chicken                                             ;83BEAE|4C1AC0  |83C01A;
  
  
-.label15:
+.cow_check_child:
     SEP #$20                                                   ;83BEB1|E220    |      ;
     REP #$10                                                   ;83BEB3|C210    |      ;
     LDY.W #$0000                                               ;83BEB5|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BEB8|B772    |000072;
     AND.B #$04                                                 ;83BEBA|2904    |      ;
-    BEQ .label16                                               ;83BEBC|F037    |83BEF5;
+    BEQ .cow_check_cranky                                               ;83BEBC|F037    |83BEF5;
     SEP #$20                                                   ;83BEBE|E220    |      ;
     LDY.W #$0003                                               ;83BEC0|A00300  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BEC3|B772    |000072;
@@ -2501,14 +2501,14 @@ fGameEngine_AnimalsDailyUpdate:
     JMP.W .chicken                                             ;83BEF2|4C1AC0  |83C01A;
  
  
-.label16:
+.cow_check_cranky:
     REP #$30                                                   ;83BEF5|C230    |      ;
     %SetFlag(event6, $1000)
     SEP #$20                                                   ;83BF02|E220    |      ;
     LDY.W #$0000                                               ;83BF04|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BF07|B772    |000072;
     AND.B #$10                                                 ;83BF09|2910    |      ;
-    BEQ .label17                                               ;83BF0B|F019    |83BF26;
+    BEQ .cow_check_sick                                               ;83BF0B|F019    |83BF26;
     LDY.W #$0003                                               ;83BF0D|A00300  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BF10|B772    |000072;
     DEC A                                                      ;83BF12|3A      |      ;
@@ -2524,23 +2524,23 @@ fGameEngine_AnimalsDailyUpdate:
     JMP.W .chicken                                             ;83BF23|4C1AC0  |83C01A;
  
  
-.label17:
+.cow_check_sick:
     SEP #$20                                                   ;83BF26|E220    |      ;
     REP #$10                                                   ;83BF28|C210    |      ;
     LDY.W #$0000                                               ;83BF2A|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BF2D|B772    |000072;
     AND.B #$20                                                 ;83BF2F|2920    |      ;
-    BEQ .label19                                               ;83BF31|F054    |83BF87;
+    BEQ .cow_check_pregnant_flag                                               ;83BF31|F054    |83BF87;
     LDY.W #$0003                                               ;83BF33|A00300  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BF36|B772    |000072;
-    BEQ .label18                                               ;83BF38|F008    |83BF42;
+    BEQ .cow_sick_timeout                                               ;83BF38|F008    |83BF42;
     DEC A                                                      ;83BF3A|3A      |      ;
     STA.B [ptrTemp0x72],Y                                      ;83BF3B|9772    |000072;
-    BEQ .label18                                               ;83BF3D|F003    |83BF42;
+    BEQ .cow_sick_timeout                                               ;83BF3D|F003    |83BF42;
     JMP.W .chicken                                             ;83BF3F|4C1AC0  |83C01A;
  
  
-.label18:
+.cow_sick_timeout:
     REP #$30                                                   ;83BF42|C230    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;83BF44|AD9601  |000196;
     AND.W #$001A                                               ;83BF47|291A00  |      ;
@@ -2573,13 +2573,13 @@ fGameEngine_AnimalsDailyUpdate:
     JMP.W .chicken                                             ;83BF84|4C1AC0  |83C01A;
  
  
-.label19:
+.cow_check_pregnant_flag:
     SEP #$20                                                   ;83BF87|E220    |      ;
     REP #$10                                                   ;83BF89|C210    |      ;
     LDY.W #$0001                                               ;83BF8B|A00100  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BF8E|B772    |000072;
     AND.B #$80                                                 ;83BF90|2980    |      ;
-    BEQ .label20                                               ;83BF92|F016    |83BFAA;
+    BEQ .cow_check_pregnancy                                               ;83BF92|F016    |83BFAA;
     SEP #$20                                                   ;83BF94|E220    |      ;
     LDY.W #$0000                                               ;83BF96|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BF99|B772    |000072;
@@ -2592,7 +2592,7 @@ fGameEngine_AnimalsDailyUpdate:
     BRA .chicken                                               ;83BFA8|8070    |83C01A;
  
  
-.label20:
+.cow_check_pregnancy:
     SEP #$20                                                   ;83BFAA|E220    |      ;
     REP #$10                                                   ;83BFAC|C210    |      ;
     LDY.W #$0000                                               ;83BFAE|A00000  |      ;
@@ -2601,7 +2601,7 @@ fGameEngine_AnimalsDailyUpdate:
     BEQ .chicken                                               ;83BFB5|F063    |83C01A;
     LDY.W #$0003                                               ;83BFB7|A00300  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BFBA|B772    |000072;
-    BEQ .label21                                               ;83BFBC|F00E    |83BFCC;
+    BEQ .cow_gives_birth                                               ;83BFBC|F00E    |83BFCC;
     DEC A                                                      ;83BFBE|3A      |      ;
     STA.B [ptrTemp0x72],Y                                      ;83BFBF|9772    |000072;
     LDA.L nCowPregnacyDays                                     ;83BFC1|AF121F7F|7F1F12;
@@ -2609,7 +2609,7 @@ fGameEngine_AnimalsDailyUpdate:
     STA.L nCowPregnacyDays                                     ;83BFC6|8F121F7F|7F1F12;
     BNE .chicken                                               ;83BFCA|D04E    |83C01A;
  
-.label21:
+.cow_gives_birth:
     LDY.W #$0002                                               ;83BFCC|A00200  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BFCF|B772    |000072;
     CMP.B #$27                                                 ;83BFD1|C927    |      ;
@@ -2628,23 +2628,23 @@ fGameEngine_AnimalsDailyUpdate:
     LDY.W #$0004                                               ;83BFF7|A00400  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BFFA|B772    |000072;
     CMP.B #$60                                                 ;83BFFC|C960    |      ;
-    BCC .label23                                               ;83BFFE|9018    |83C018;
+    BCC .after_birth                                               ;83BFFE|9018    |83C018;
     CMP.B #$C0                                                 ;83C000|C9C0    |      ;
-    BCC .label22                                               ;83C002|900A    |83C00E;
+    BCC .newborn_affection_mid                                               ;83C002|900A    |83C00E;
     SEP #$20                                                   ;83C004|E220    |      ;
     LDA.B #$64                                                 ;83C006|A964    |      ;
     STA.L nNewBornCowAffection                                 ;83C008|8F2B1F7F|7F1F2B;
-    BRA .label23                                               ;83C00C|800A    |83C018;
+    BRA .after_birth                                               ;83C00C|800A    |83C018;
  
  
-.label22:
+.newborn_affection_mid:
     SEP #$20                                                   ;83C00E|E220    |      ;
     LDA.B #$32                                                 ;83C010|A932    |      ;
     STA.L nNewBornCowAffection                                 ;83C012|8F2B1F7F|7F1F2B;
-    BRA .label23                                               ;83C016|8000    |83C018;
+    BRA .after_birth                                               ;83C016|8000    |83C018;
  
  
-.label23:
+.after_birth:
     BRA .chicken                                               ;83C018|8000    |83C01A;
  
  
@@ -2654,13 +2654,13 @@ fGameEngine_AnimalsDailyUpdate:
     INX                                                        ;83C01D|E8      |      ;
     CPX.W #$000C                                               ;83C01E|E00C00  |      ;
     BEQ +                                                      ;83C021|F003    |83C026;
-    JMP.W .label14                                             ;83C023|4C5BBE  |83BE5B;
+    JMP.W .cow_aging_loop                                             ;83C023|4C5BBE  |83BE5B;
  
  
   + REP #$30                                                   ;83C026|C230    |      ;
     %CheckFlag(daily4, $0001)
     BEQ +                                                      ;83C02F|F003    |83C034;
-    JMP.W .label38                                             ;83C031|4C25C1  |83C125;
+    JMP.W .start_chicken_aging                                             ;83C031|4C25C1  |83C125;
  
  
   + REP #$30                                                   ;83C034|C230    |      ;
@@ -2679,16 +2679,16 @@ fGameEngine_AnimalsDailyUpdate:
     LDY.W #$0000                                               ;83C052|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C055|B772    |000072;
     AND.B #$01                                                 ;83C057|2901    |      ;
-    BNE .label25                                               ;83C059|D003    |83C05E;
-    JMP.W .label29                                             ;83C05B|4C19C1  |83C119;
+    BNE .chicken_check_valid                                               ;83C059|D003    |83C05E;
+    JMP.W .next_chicken_check                                             ;83C05B|4C19C1  |83C119;
  
  
-.label25:
+.chicken_check_valid:
     SEP #$20                                                   ;83C05E|E220    |      ;
     LDY.W #$0000                                               ;83C060|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C063|B772    |000072;
     AND.B #$0E                                                 ;83C065|290E    |      ;
-    BNE .label26                                               ;83C067|D01B    |83C084;
+    BNE .chicken_check_adult                                               ;83C067|D01B    |83C084;
     SEP #$20                                                   ;83C069|E220    |      ;
     LDY.W #$0000                                               ;83C06B|A00000  |      ;
     LDA.B #$00                                                 ;83C06E|A900    |      ;
@@ -2700,29 +2700,29 @@ fGameEngine_AnimalsDailyUpdate:
     LDA.W #$FFE2                                               ;83C07D|A9E2FF  |      ;
     JSL.L fGameEngine_AddHappiness                             ;83C080|2282B283|83B282; decrease hapiness
  
-.label26:
+.chicken_check_adult:
     SEP #$20                                                   ;83C084|E220    |      ;
     LDY.W #$0000                                               ;83C086|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C089|B772    |000072;
     AND.B #$08                                                 ;83C08B|2908    |      ;
     BNE +                                                      ;83C08D|D003    |83C092;
-    JMP.W .label29                                             ;83C08F|4C19C1  |83C119;
+    JMP.W .next_chicken_check                                             ;83C08F|4C19C1  |83C119;
  
  
   + SEP #$20                                                   ;83C092|E220    |      ;
     LDY.W #$0001                                               ;83C094|A00100  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C097|B772    |000072;
     CMP.B #$28                                                 ;83C099|C928    |      ;
-    BNE .label27                                               ;83C09B|D00E    |83C0AB;
+    BNE .chicken_outdoors                                               ;83C09B|D00E    |83C0AB;
     SEP #$20                                                   ;83C09D|E220    |      ;
     LDA.W strcPlayerData.placedChcikenFeed                     ;83C09F|AD3109  |000931;
     BEQ +                                                      ;83C0A2|F02B    |83C0CF;
     DEC A                                                      ;83C0A4|3A      |      ;
     STA.W strcPlayerData.placedChcikenFeed                     ;83C0A5|8D3109  |000931;
-    JMP.W .label29                                             ;83C0A8|4C19C1  |83C119;
+    JMP.W .next_chicken_check                                             ;83C0A8|4C19C1  |83C119;
  
  
-.label27:
+.chicken_outdoors:
     SEP #$20                                                   ;83C0AB|E220    |      ;
     REP #$10                                                   ;83C0AD|C210    |      ;
     LDY.W #$0001                                               ;83C0AF|A00100  |      ;
@@ -2737,7 +2737,7 @@ fGameEngine_AnimalsDailyUpdate:
     LDA.W strcDialogDisplay.mapFlags                           ;83C0C5|AD9601  |000196;
     AND.W #$020A                                               ;83C0C8|290A02  |      ;
     BNE +                                                      ;83C0CB|D002    |83C0CF;
-    BRA .label28                                               ;83C0CD|8016    |83C0E5;
+    BRA .chicken_check_flag_0410                                               ;83C0CD|8016    |83C0E5;
  
  
   + SEP #$20                                                   ;83C0CF|E220    |      ;
@@ -2749,43 +2749,43 @@ fGameEngine_AnimalsDailyUpdate:
     LDY.W #$0002                                               ;83C0DC|A00200  |      ;
     LDA.B #$03                                                 ;83C0DF|A903    |      ;
     STA.B [ptrTemp0x72],Y                                      ;83C0E1|9772    |000072;
-    BRA .label28                                               ;83C0E3|8000    |83C0E5;
+    BRA .chicken_check_flag_0410                                               ;83C0E3|8000    |83C0E5;
  
  
-.label28:
+.chicken_check_flag_0410:
     REP #$30                                                   ;83C0E5|C230    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;83C0E7|AD9601  |000196;
     AND.W #$0410                                               ;83C0EA|291004  |      ;
-    BEQ .label29                                               ;83C0ED|F02A    |83C119;
+    BEQ .next_chicken_check                                               ;83C0ED|F02A    |83C119;
     %CheckFlag(event6, $0020)
-    BNE .label29                                               ;83C0F6|D021    |83C119;
+    BNE .next_chicken_check                                               ;83C0F6|D021    |83C119;
     SEP #$20                                                   ;83C0F8|E220    |      ;
     LDY.W #$0001                                               ;83C0FA|A00100  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C0FD|B772    |000072;
     CMP.B #$04                                                 ;83C0FF|C904    |      ;
-    BCS .label29                                               ;83C101|B016    |83C119;
+    BCS .next_chicken_check                                               ;83C101|B016    |83C119;
     LDY.W #$0000                                               ;83C103|A00000  |      ;
     LDA.B #$01                                                 ;83C106|A901    |      ;
     STA.B [ptrTemp0x72],Y                                      ;83C108|9772    |000072;
     REP #$20                                                   ;83C10A|C220    |      ;
     %SetFlag(event6, $0020)
-    BRA .label29                                               ;83C117|8000    |83C119;
+    BRA .next_chicken_check                                               ;83C117|8000    |83C119;
  
  
-.label29:
+.next_chicken_check:
     REP #$30                                                   ;83C119|C230    |      ;
     PLX                                                        ;83C11B|FA      |      ;
     INX                                                        ;83C11C|E8      |      ;
     CPX.W #$000D                                               ;83C11D|E00D00  |      ;
-    BEQ .label38                                               ;83C120|F003    |83C125;
+    BEQ .start_chicken_aging                                               ;83C120|F003    |83C125;
     JMP.W .chickenDeath                                        ;83C122|4C44C0  |83C044;
  
  
-.label38:
+.start_chicken_aging:
     REP #$30                                                   ;83C125|C230    |      ;
     LDX.W #$0000                                               ;83C127|A20000  |      ;
  
-.label30:
+.chicken_aging_loop:
     REP #$30                                                   ;83C12A|C230    |      ;
     PHX                                                        ;83C12C|DA      |      ;
     PHX                                                        ;83C12D|DA      |      ;
@@ -2798,14 +2798,14 @@ fGameEngine_AnimalsDailyUpdate:
     LDA.B [ptrTemp0x72],Y                                      ;83C13B|B772    |000072;
     AND.B #$01                                                 ;83C13D|2901    |      ;
     BNE +                                                      ;83C13F|D003    |83C144;
-    JMP.W .label37                                             ;83C141|4CDCC1  |83C1DC;
+    JMP.W .next_chicken_aging                                             ;83C141|4CDCC1  |83C1DC;
  
  
   + SEP #$20                                                   ;83C144|E220    |      ;
     LDY.W #$0000                                               ;83C146|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C149|B772    |000072;
     AND.B #$02                                                 ;83C14B|2902    |      ;
-    BEQ .label32                                               ;83C14D|F05C    |83C1AB;
+    BEQ .chicken_check_child                                               ;83C14D|F05C    |83C1AB;
     SEP #$20                                                   ;83C14F|E220    |      ;
     REP #$10                                                   ;83C151|C210    |      ;
     LDY.W #$0002                                               ;83C153|A00200  |      ;
@@ -2815,12 +2815,12 @@ fGameEngine_AnimalsDailyUpdate:
     INC A                                                      ;83C15C|1A      |      ;
     STA.B [ptrTemp0x72],Y                                      ;83C15D|9772    |000072;
     CMP.B #$03                                                 ;83C15F|C903    |      ;
-    BNE .label37                                               ;83C161|D079    |83C1DC;
+    BNE .next_chicken_aging                                               ;83C161|D079    |83C1DC;
  
   + SEP #$20                                                   ;83C163|E220    |      ;
     LDA.L nOwnedChickens                                       ;83C165|AF0B1F7F|7F1F0B;
     CMP.B #$0C                                                 ;83C169|C90C    |      ;
-    BEQ .label37                                               ;83C16B|F06F    |83C1DC;
+    BEQ .next_chicken_aging                                               ;83C16B|F06F    |83C1DC;
     LDY.W #$0002                                               ;83C16D|A00200  |      ;
     LDA.B #$00                                                 ;83C170|A900    |      ;
     STA.B [ptrTemp0x72],Y                                      ;83C172|9772    |000072;
@@ -2842,22 +2842,22 @@ fGameEngine_AnimalsDailyUpdate:
     STA.L nOwnedChickens                                       ;83C198|8F0B1F7F|7F1F0B;
     REP #$30                                                   ;83C19C|C230    |      ;
     %UnsetFlag(event6, $2000)
-    BRA .label37                                               ;83C1A9|8031    |83C1DC;
+    BRA .next_chicken_aging                                               ;83C1A9|8031    |83C1DC;
  
  
-.label32:
+.chicken_check_child:
     SEP #$20                                                   ;83C1AB|E220    |      ;
     REP #$10                                                   ;83C1AD|C210    |      ;
     LDY.W #$0000                                               ;83C1AF|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C1B2|B772    |000072;
     AND.B #$04                                                 ;83C1B4|2904    |      ;
-    BEQ .label37                                               ;83C1B6|F024    |83C1DC;
+    BEQ .next_chicken_aging                                               ;83C1B6|F024    |83C1DC;
     LDY.W #$0002                                               ;83C1B8|A00200  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C1BB|B772    |000072;
     INC A                                                      ;83C1BD|1A      |      ;
     STA.B [ptrTemp0x72],Y                                      ;83C1BE|9772    |000072;
     CMP.B #$07                                                 ;83C1C0|C907    |      ;
-    BNE .label37                                               ;83C1C2|D018    |83C1DC;
+    BNE .next_chicken_aging                                               ;83C1C2|D018    |83C1DC;
     LDA.B #$00                                                 ;83C1C4|A900    |      ;
     STA.B [ptrTemp0x72],Y                                      ;83C1C6|9772    |000072;
     LDY.W #$0000                                               ;83C1C8|A00000  |      ;
@@ -2868,16 +2868,16 @@ fGameEngine_AnimalsDailyUpdate:
     LDY.W #$0002                                               ;83C1D3|A00200  |      ;
     LDA.B #$00                                                 ;83C1D6|A900    |      ;
     STA.B [ptrTemp0x72],Y                                      ;83C1D8|9772    |000072;
-    BRA .label37                                               ;83C1DA|8000    |83C1DC;
+    BRA .next_chicken_aging                                               ;83C1DA|8000    |83C1DC;
  
  
-.label37:
+.next_chicken_aging:
     REP #$30                                                   ;83C1DC|C230    |      ;
     PLX                                                        ;83C1DE|FA      |      ;
     INX                                                        ;83C1DF|E8      |      ;
     CPX.W #$000D                                               ;83C1E0|E00D00  |      ;
     BEQ +                                                      ;83C1E3|F003    |83C1E8;
-    JMP.W .label30                                             ;83C1E5|4C2AC1  |83C12A;
+    JMP.W .chicken_aging_loop                                             ;83C1E5|4C2AC1  |83C12A;
  
  
   + REP #$30                                                   ;83C1E8|C230    |      ;
@@ -2886,7 +2886,7 @@ fGameEngine_AnimalsDailyUpdate:
     %UnsetFlag(event6, $0400)
     LDX.W #$0000                                               ;83C1FC|A20000  |      ;
  
-.label33:
+.egg_scan_loop:
     REP #$30                                                   ;83C1FF|C230    |      ;
     PHX                                                        ;83C201|DA      |      ;
     PHX                                                        ;83C202|DA      |      ;
@@ -2899,22 +2899,22 @@ fGameEngine_AnimalsDailyUpdate:
     LDA.B [ptrTemp0x72],Y                                      ;83C210|B772    |000072;
     AND.B #$01                                                 ;83C212|2901    |      ;
     BNE +                                                      ;83C214|D003    |83C219;
-    JMP.W .label35                                             ;83C216|4C6FC2  |83C26F;
+    JMP.W .next_egg_scan                                             ;83C216|4C6FC2  |83C26F;
  
  
   + SEP #$20                                                   ;83C219|E220    |      ;
     LDY.W #$0000                                               ;83C21B|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C21E|B772    |000072;
     AND.B #$08                                                 ;83C220|2908    |      ;
-    BEQ .label35                                               ;83C222|F04B    |83C26F;
+    BEQ .next_egg_scan                                               ;83C222|F04B    |83C26F;
     LDY.W #$0000                                               ;83C224|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C227|B772    |000072;
     AND.B #$10                                                 ;83C229|2910    |      ;
-    BNE .label34                                               ;83C22B|D02B    |83C258;
+    BNE .egg_cranky_countdown                                               ;83C22B|D02B    |83C258;
     LDY.W #$0001                                               ;83C22D|A00100  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C230|B772    |000072;
     CMP.B #$28                                                 ;83C232|C928    |      ;
-    BNE .label35                                               ;83C234|D039    |83C26F;
+    BNE .next_egg_scan                                               ;83C234|D039    |83C26F;
     REP #$30                                                   ;83C236|C230    |      ;
     PLX                                                        ;83C238|FA      |      ;
     PHX                                                        ;83C239|DA      |      ;
@@ -2926,32 +2926,32 @@ fGameEngine_AnimalsDailyUpdate:
     STA.L nEggInCoopFlags                                      ;83C245|8F451F7F|7F1F45;
     REP #$20                                                   ;83C249|C220    |      ;
     %SetFlag(event6, $0400)
-    BRA .label35                                               ;83C256|8017    |83C26F;
+    BRA .next_egg_scan                                               ;83C256|8017    |83C26F;
  
  
-.label34:
+.egg_cranky_countdown:
     SEP #$20                                                   ;83C258|E220    |      ;
     REP #$10                                                   ;83C25A|C210    |      ;
     LDY.W #$0002                                               ;83C25C|A00200  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C25F|B772    |000072;
     DEC A                                                      ;83C261|3A      |      ;
     STA.B [ptrTemp0x72],Y                                      ;83C262|9772    |000072;
-    BNE .label35                                               ;83C264|D009    |83C26F;
+    BNE .next_egg_scan                                               ;83C264|D009    |83C26F;
     LDY.W #$0000                                               ;83C266|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C269|B772    |000072;
     AND.B #$EF                                                 ;83C26B|29EF    |      ;
     STA.B [ptrTemp0x72],Y                                      ;83C26D|9772    |000072;
  
-.label35:
+.next_egg_scan:
     REP #$30                                                   ;83C26F|C230    |      ;
     PLX                                                        ;83C271|FA      |      ;
     INX                                                        ;83C272|E8      |      ;
     CPX.W #$000D                                               ;83C273|E00D00  |      ;
-    BEQ .label36                                               ;83C276|F003    |83C27B;
-    JMP.W .label33                                             ;83C278|4CFFC1  |83C1FF;
+    BEQ .age_horse                                               ;83C276|F003    |83C27B;
+    JMP.W .egg_scan_loop                                             ;83C278|4CFFC1  |83C1FF;
  
  
-.label36:
+.age_horse:
     REP #$30                                                   ;83C27B|C230    |      ;
     %CheckFlag(event3, $0100)
     BEQ .justReturn                                            ;83C284|F00F    |83C295;
@@ -2970,7 +2970,7 @@ fGameEngine_SpawnChickensOnMap:
     REP #$30                                                   ;83C296|C230    |      ;
     LDX.W #$0000                                               ;83C298|A20000  |      ;
  
-.label1:
+.chicken_loop:
     REP #$30                                                   ;83C29B|C230    |      ;
     PHX                                                        ;83C29D|DA      |      ;
     PHX                                                        ;83C29E|DA      |      ;
@@ -2983,133 +2983,133 @@ fGameEngine_SpawnChickensOnMap:
     LDA.B [ptrTemp0x72],Y                                      ;83C2AC|B772    |000072;
     AND.B #$01                                                 ;83C2AE|2901    |      ;
     BNE +                                                      ;83C2B0|D003    |83C2B5;
-    JMP.W .label12                                             ;83C2B2|4C01C4  |83C401;
+    JMP.W .next_chicken                                             ;83C2B2|4C01C4  |83C401;
  
  
   + LDY.W #$0000                                               ;83C2B5|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C2B8|B772    |000072;
     AND.B #$20                                                 ;83C2BA|2920    |      ;
-    BEQ .label2                                                ;83C2BC|F003    |83C2C1;
-    JMP.W .label12                                             ;83C2BE|4C01C4  |83C401;
+    BEQ .chicken_area_00_03                                                ;83C2BC|F003    |83C2C1;
+    JMP.W .next_chicken                                             ;83C2BE|4C01C4  |83C401;
  
  
-.label2:
+.chicken_area_00_03:
     SEP #$20                                                   ;83C2C1|E220    |      ;
     LDY.W #$0001                                               ;83C2C3|A00100  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C2C6|B772    |000072;
     CMP.B #$04                                                 ;83C2C8|C904    |      ;
-    BCS .label3                                                ;83C2CA|B00C    |83C2D8;
+    BCS .chicken_area_04_07                                                ;83C2CA|B00C    |83C2D8;
     LDA.B strcMap.loadAreaId                                   ;83C2CC|A522    |000022;
     CMP.B #$04                                                 ;83C2CE|C904    |      ;
     BCC +                                                      ;83C2D0|9003    |83C2D5;
-    JMP.W .label12                                             ;83C2D2|4C01C4  |83C401;
+    JMP.W .next_chicken                                             ;83C2D2|4C01C4  |83C401;
  
  
   + JMP.W .continue                                            ;83C2D5|4C70C3  |83C370;
  
  
-.label3:
+.chicken_area_04_07:
     SEP #$20                                                   ;83C2D8|E220    |      ;
     LDY.W #$0001                                               ;83C2DA|A00100  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C2DD|B772    |000072;
     CMP.B #$08                                                 ;83C2DF|C908    |      ;
-    BCS .label4                                                ;83C2E1|B012    |83C2F5;
+    BCS .chicken_area_08_0f                                                ;83C2E1|B012    |83C2F5;
     LDA.B strcMap.loadAreaId                                   ;83C2E3|A522    |000022;
     CMP.B #$04                                                 ;83C2E5|C904    |      ;
     BCS +                                                      ;83C2E7|B003    |83C2EC;
-    JMP.W .label12                                             ;83C2E9|4C01C4  |83C401;
+    JMP.W .next_chicken                                             ;83C2E9|4C01C4  |83C401;
  
  
   + CMP.B #$08                                                 ;83C2EC|C908    |      ;
     BCC +                                                      ;83C2EE|9003    |83C2F3;
-    JMP.W .label12                                             ;83C2F0|4C01C4  |83C401;
+    JMP.W .next_chicken                                             ;83C2F0|4C01C4  |83C401;
  
  
   + BRA .continue                                              ;83C2F3|807B    |83C370;
  
  
-.label4:
+.chicken_area_08_0f:
     SEP #$20                                                   ;83C2F5|E220    |      ;
     LDY.W #$0001                                               ;83C2F7|A00100  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C2FA|B772    |000072;
     CMP.B #$10                                                 ;83C2FC|C910    |      ;
-    BCS .label5                                                ;83C2FE|B012    |83C312;
+    BCS .chicken_area_10_13                                                ;83C2FE|B012    |83C312;
     LDA.B strcMap.loadAreaId                                   ;83C300|A522    |000022;
     CMP.B #$0C                                                 ;83C302|C90C    |      ;
     BCS +                                                      ;83C304|B003    |83C309;
-    JMP.W .label12                                             ;83C306|4C01C4  |83C401;
+    JMP.W .next_chicken                                             ;83C306|4C01C4  |83C401;
  
  
   + CMP.B #$10                                                 ;83C309|C910    |      ;
     BCC +                                                      ;83C30B|9003    |83C310;
-    JMP.W .label12                                             ;83C30D|4C01C4  |83C401;
+    JMP.W .next_chicken                                             ;83C30D|4C01C4  |83C401;
  
  
   + BRA .continue                                              ;83C310|805E    |83C370;
  
  
-.label5:
+.chicken_area_10_13:
     SEP #$20                                                   ;83C312|E220    |      ;
     LDY.W #$0001                                               ;83C314|A00100  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C317|B772    |000072;
     CMP.B #$14                                                 ;83C319|C914    |      ;
-    BCS .label6                                                ;83C31B|B012    |83C32F;
+    BCS .chicken_area_14_17                                                ;83C31B|B012    |83C32F;
     LDA.B strcMap.loadAreaId                                   ;83C31D|A522    |000022;
     CMP.B #$10                                                 ;83C31F|C910    |      ;
     BCS +                                                      ;83C321|B003    |83C326;
-    JMP.W .label12                                             ;83C323|4C01C4  |83C401;
+    JMP.W .next_chicken                                             ;83C323|4C01C4  |83C401;
  
  
   + CMP.B #$14                                                 ;83C326|C914    |      ;
     BCC +                                                      ;83C328|9003    |83C32D;
-    JMP.W .label12                                             ;83C32A|4C01C4  |83C401;
+    JMP.W .next_chicken                                             ;83C32A|4C01C4  |83C401;
  
  
   + BRA .continue                                              ;83C32D|8041    |83C370;
  
  
-.label6:
+.chicken_area_14_17:
     SEP #$20                                                   ;83C32F|E220    |      ;
     LDY.W #$0001                                               ;83C331|A00100  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C334|B772    |000072;
     CMP.B #$18                                                 ;83C336|C918    |      ;
-    BCS .label7                                                ;83C338|B012    |83C34C;
+    BCS .chicken_area_ge_31                                                ;83C338|B012    |83C34C;
     LDA.B strcMap.loadAreaId                                   ;83C33A|A522    |000022;
     CMP.B #$15                                                 ;83C33C|C915    |      ;
     BCS +                                                      ;83C33E|B003    |83C343;
-    JMP.W .label12                                             ;83C340|4C01C4  |83C401;
+    JMP.W .next_chicken                                             ;83C340|4C01C4  |83C401;
  
  
   + CMP.B #$18                                                 ;83C343|C918    |      ;
     BCC +                                                      ;83C345|9003    |83C34A;
-    JMP.W .label12                                             ;83C347|4C01C4  |83C401;
+    JMP.W .next_chicken                                             ;83C347|4C01C4  |83C401;
  
  
   + BRA .continue                                              ;83C34A|8024    |83C370;
  
  
-.label7:
+.chicken_area_ge_31:
     SEP #$20                                                   ;83C34C|E220    |      ;
     LDY.W #$0001                                               ;83C34E|A00100  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C351|B772    |000072;
     CMP.B #$31                                                 ;83C353|C931    |      ;
-    BCC .label8                                                ;83C355|900B    |83C362;
+    BCC .chicken_area_exact                                                ;83C355|900B    |83C362;
     LDA.B strcMap.loadAreaId                                   ;83C357|A522    |000022;
     CMP.B #$31                                                 ;83C359|C931    |      ;
     BCS +                                                      ;83C35B|B003    |83C360;
-    JMP.W .label12                                             ;83C35D|4C01C4  |83C401;
+    JMP.W .next_chicken                                             ;83C35D|4C01C4  |83C401;
  
  
   + BRA .continue                                              ;83C360|800E    |83C370;
  
  
-.label8:
+.chicken_area_exact:
     SEP #$20                                                   ;83C362|E220    |      ;
     LDY.W #$0001                                               ;83C364|A00100  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C367|B772    |000072;
     CMP.B strcMap.loadAreaId                                   ;83C369|C522    |000022;
     BEQ .continue                                              ;83C36B|F003    |83C370;
-    JMP.W .label12                                             ;83C36D|4C01C4  |83C401;
+    JMP.W .next_chicken                                             ;83C36D|4C01C4  |83C401;
  
  
 .continue:
@@ -3124,7 +3124,7 @@ fGameEngine_SpawnChickensOnMap:
     LDY.W #$0000                                               ;83C384|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C387|B772    |000072;
     AND.B #$02                                                 ;83C389|2902    |      ;
-    BEQ .label9                                                ;83C38B|F01E    |83C3AB;
+    BEQ .chicken_not_egg                                                ;83C38B|F01E    |83C3AB;
     REP #$20                                                   ;83C38D|C220    |      ;
     TXA                                                        ;83C38F|8A      |      ;
     CLC                                                        ;83C390|18      |      ;
@@ -3137,15 +3137,15 @@ fGameEngine_SpawnChickensOnMap:
     LDY.W #$0000                                               ;83C3A2|A00000  |      ;
     LDA.B #$03                                                 ;83C3A5|A903    |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;83C3A7|97CC    |0000CC;
-    BRA .label12                                               ;83C3A9|8056    |83C401;
+    BRA .next_chicken                                               ;83C3A9|8056    |83C401;
  
  
-.label9:
+.chicken_not_egg:
     SEP #$20                                                   ;83C3AB|E220    |      ;
     LDY.W #$0000                                               ;83C3AD|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C3B0|B772    |000072;
     AND.B #$04                                                 ;83C3B2|2904    |      ;
-    BEQ .label10                                               ;83C3B4|F013    |83C3C9;
+    BEQ .chicken_not_child                                               ;83C3B4|F013    |83C3C9;
     REP #$20                                                   ;83C3B6|C220    |      ;
     TXA                                                        ;83C3B8|8A      |      ;
     CLC                                                        ;83C3B9|18      |      ;
@@ -3153,15 +3153,15 @@ fGameEngine_SpawnChickensOnMap:
     LDX.W #$0000                                               ;83C3BD|A20000  |      ;
     LDY.W #$0001                                               ;83C3C0|A00100  |      ;
     JSL.L fAI_StartSlotScriptAtFrontTile                                    ;83C3C3|22F88084|8480F8;
-    BRA .label12                                               ;83C3C7|8038    |83C401;
+    BRA .next_chicken                                               ;83C3C7|8038    |83C401;
  
  
-.label10:
+.chicken_not_child:
     SEP #$20                                                   ;83C3C9|E220    |      ;
     LDY.W #$0000                                               ;83C3CB|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C3CE|B772    |000072;
     AND.B #$08                                                 ;83C3D0|2908    |      ;
-    BEQ .label11                                               ;83C3D2|F01C    |83C3F0;
+    BEQ .chicken_default_script                                               ;83C3D2|F01C    |83C3F0;
     REP #$20                                                   ;83C3D4|C220    |      ;
     TXA                                                        ;83C3D6|8A      |      ;
     CLC                                                        ;83C3D7|18      |      ;
@@ -3175,10 +3175,10 @@ fGameEngine_SpawnChickensOnMap:
     ASL A                                                      ;83C3E9|0A      |      ;
     TAX                                                        ;83C3EA|AA      |      ;
     STZ.W strcStockData.unkEachChicken,X                       ;83C3EB|9E3B09  |00093B;
-    BRA .label12                                               ;83C3EE|8011    |83C401;
+    BRA .next_chicken                                               ;83C3EE|8011    |83C401;
  
  
-.label11:
+.chicken_default_script:
     REP #$20                                                   ;83C3F0|C220    |      ;
     TXA                                                        ;83C3F2|8A      |      ;
     CLC                                                        ;83C3F3|18      |      ;
@@ -3187,18 +3187,18 @@ fGameEngine_SpawnChickensOnMap:
     LDY.W #$005F                                               ;83C3FA|A05F00  |      ;
     JSL.L fAI_StartSlotScriptAtFrontTile                                    ;83C3FD|22F88084|8480F8;
  
-.label12:
+.next_chicken:
     REP #$30                                                   ;83C401|C230    |      ;
     PLX                                                        ;83C403|FA      |      ;
     INX                                                        ;83C404|E8      |      ;
     CPX.W #$000D                                               ;83C405|E00D00  |      ;
     BEQ +                                                      ;83C408|F003    |83C40D;
-    JMP.W .label1                                              ;83C40A|4C9BC2  |83C29B;
+    JMP.W .chicken_loop                                              ;83C40A|4C9BC2  |83C29B;
  
  
   + LDX.W #$0000                                               ;83C40D|A20000  |      ;
  
-.label13:
+.cow_loop:
     REP #$30                                                   ;83C410|C230    |      ;
     PHX                                                        ;83C412|DA      |      ;
     PHX                                                        ;83C413|DA      |      ;
@@ -3211,18 +3211,18 @@ fGameEngine_SpawnChickensOnMap:
     LDA.B [ptrTemp0x72],Y                                      ;83C421|B772    |000072;
     AND.B #$01                                                 ;83C423|2901    |      ;
     BNE +                                                      ;83C425|D003    |83C42A;
-    JMP.W .label29                                             ;83C427|4C3DC6  |83C63D;
+    JMP.W .next_cow                                             ;83C427|4C3DC6  |83C63D;
  
  
   + SEP #$20                                                   ;83C42A|E220    |      ;
     LDA.B strcMap.loadAreaId                                   ;83C42C|A522    |000022;
     CMP.B #$27                                                 ;83C42E|C927    |      ;
-    BNE .label14                                               ;83C430|D03B    |83C46D;
+    BNE .cow_area_00_03                                               ;83C430|D03B    |83C46D;
     LDY.W #$0002                                               ;83C432|A00200  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C435|B772    |000072;
     CMP.B #$27                                                 ;83C437|C927    |      ;
     BEQ +                                                      ;83C439|F003    |83C43E;
-    JMP.W .label29                                             ;83C43B|4C3DC6  |83C63D;
+    JMP.W .next_cow                                             ;83C43B|4C3DC6  |83C63D;
  
  
   + PHX                                                        ;83C43E|DA      |      ;
@@ -3247,129 +3247,129 @@ fGameEngine_SpawnChickensOnMap:
     LDA.L aGameEngine_AddCowPositionsData,X                    ;83C462|BF44CA83|83CA44;
     STA.W nTileInFrontOfPlayerY                                ;83C466|8D8709  |000987;
     PLX                                                        ;83C469|FA      |      ;
-    JMP.W .label20                                             ;83C46A|4C2EC5  |83C52E;
+    JMP.W .cow_start_script                                             ;83C46A|4C2EC5  |83C52E;
  
  
-.label14:
+.cow_area_00_03:
     SEP #$20                                                   ;83C46D|E220    |      ;
     LDY.W #$0002                                               ;83C46F|A00200  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C472|B772    |000072;
     CMP.B #$04                                                 ;83C474|C904    |      ;
-    BCS .label15                                               ;83C476|B00C    |83C484;
+    BCS .cow_area_04_07                                               ;83C476|B00C    |83C484;
     LDA.B strcMap.loadAreaId                                   ;83C478|A522    |000022;
     CMP.B #$04                                                 ;83C47A|C904    |      ;
     BCC +                                                      ;83C47C|9003    |83C481;
-    JMP.W .label29                                             ;83C47E|4C3DC6  |83C63D;
+    JMP.W .next_cow                                             ;83C47E|4C3DC6  |83C63D;
  
  
-  + JMP.W .label19                                             ;83C481|4C1CC5  |83C51C;
+  + JMP.W .cow_load_position                                             ;83C481|4C1CC5  |83C51C;
  
  
-.label15:
+.cow_area_04_07:
     SEP #$20                                                   ;83C484|E220    |      ;
     LDY.W #$0002                                               ;83C486|A00200  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C489|B772    |000072;
     CMP.B #$08                                                 ;83C48B|C908    |      ;
-    BCS .label50                                               ;83C48D|B012    |83C4A1;
+    BCS .cow_area_08_0f                                               ;83C48D|B012    |83C4A1;
     LDA.B strcMap.loadAreaId                                   ;83C48F|A522    |000022;
     CMP.B #$04                                                 ;83C491|C904    |      ;
     BCS +                                                      ;83C493|B003    |83C498;
-    JMP.W .label29                                             ;83C495|4C3DC6  |83C63D;
+    JMP.W .next_cow                                             ;83C495|4C3DC6  |83C63D;
  
  
   + CMP.B #$08                                                 ;83C498|C908    |      ;
     BCC +                                                      ;83C49A|9003    |83C49F;
-    JMP.W .label29                                             ;83C49C|4C3DC6  |83C63D;
+    JMP.W .next_cow                                             ;83C49C|4C3DC6  |83C63D;
  
  
-  + BRA .label19                                               ;83C49F|807B    |83C51C;
+  + BRA .cow_load_position                                               ;83C49F|807B    |83C51C;
  
  
-.label50:
+.cow_area_08_0f:
     SEP #$20                                                   ;83C4A1|E220    |      ;
     LDY.W #$0002                                               ;83C4A3|A00200  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C4A6|B772    |000072;
     CMP.B #$10                                                 ;83C4A8|C910    |      ;
-    BCS .label16                                               ;83C4AA|B012    |83C4BE;
+    BCS .cow_area_10_13                                               ;83C4AA|B012    |83C4BE;
     LDA.B strcMap.loadAreaId                                   ;83C4AC|A522    |000022;
     CMP.B #$0C                                                 ;83C4AE|C90C    |      ;
     BCS +                                                      ;83C4B0|B003    |83C4B5;
-    JMP.W .label29                                             ;83C4B2|4C3DC6  |83C63D;
+    JMP.W .next_cow                                             ;83C4B2|4C3DC6  |83C63D;
  
  
   + CMP.B #$10                                                 ;83C4B5|C910    |      ;
     BCC +                                                      ;83C4B7|9003    |83C4BC;
-    JMP.W .label29                                             ;83C4B9|4C3DC6  |83C63D;
+    JMP.W .next_cow                                             ;83C4B9|4C3DC6  |83C63D;
  
  
-  + BRA .label19                                               ;83C4BC|805E    |83C51C;
+  + BRA .cow_load_position                                               ;83C4BC|805E    |83C51C;
  
  
-.label16:
+.cow_area_10_13:
     SEP #$20                                                   ;83C4BE|E220    |      ;
     LDY.W #$0002                                               ;83C4C0|A00200  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C4C3|B772    |000072;
     CMP.B #$14                                                 ;83C4C5|C914    |      ;
-    BCS .label51                                               ;83C4C7|B012    |83C4DB;
+    BCS .cow_area_14_17                                               ;83C4C7|B012    |83C4DB;
     LDA.B strcMap.loadAreaId                                   ;83C4C9|A522    |000022;
     CMP.B #$10                                                 ;83C4CB|C910    |      ;
     BCS +                                                      ;83C4CD|B003    |83C4D2;
-    JMP.W .label29                                             ;83C4CF|4C3DC6  |83C63D;
+    JMP.W .next_cow                                             ;83C4CF|4C3DC6  |83C63D;
  
  
   + CMP.B #$14                                                 ;83C4D2|C914    |      ;
     BCC +                                                      ;83C4D4|9003    |83C4D9;
-    JMP.W .label29                                             ;83C4D6|4C3DC6  |83C63D;
+    JMP.W .next_cow                                             ;83C4D6|4C3DC6  |83C63D;
  
  
-  + BRA .label19                                               ;83C4D9|8041    |83C51C;
+  + BRA .cow_load_position                                               ;83C4D9|8041    |83C51C;
  
  
-.label51:
+.cow_area_14_17:
     SEP #$20                                                   ;83C4DB|E220    |      ;
     LDY.W #$0002                                               ;83C4DD|A00200  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C4E0|B772    |000072;
     CMP.B #$18                                                 ;83C4E2|C918    |      ;
-    BCS .label17                                               ;83C4E4|B012    |83C4F8;
+    BCS .cow_area_ge_31                                               ;83C4E4|B012    |83C4F8;
     LDA.B strcMap.loadAreaId                                   ;83C4E6|A522    |000022;
     CMP.B #$15                                                 ;83C4E8|C915    |      ;
     BCS +                                                      ;83C4EA|B003    |83C4EF;
-    JMP.W .label29                                             ;83C4EC|4C3DC6  |83C63D;
+    JMP.W .next_cow                                             ;83C4EC|4C3DC6  |83C63D;
  
  
   + CMP.B #$18                                                 ;83C4EF|C918    |      ;
     BCC +                                                      ;83C4F1|9003    |83C4F6;
-    JMP.W .label29                                             ;83C4F3|4C3DC6  |83C63D;
+    JMP.W .next_cow                                             ;83C4F3|4C3DC6  |83C63D;
  
  
-  + BRA .label19                                               ;83C4F6|8024    |83C51C;
+  + BRA .cow_load_position                                               ;83C4F6|8024    |83C51C;
  
  
-.label17:
+.cow_area_ge_31:
     SEP #$20                                                   ;83C4F8|E220    |      ;
     LDY.W #$0002                                               ;83C4FA|A00200  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C4FD|B772    |000072;
     CMP.B #$31                                                 ;83C4FF|C931    |      ;
-    BCC .label18                                               ;83C501|900B    |83C50E;
+    BCC .cow_area_exact                                               ;83C501|900B    |83C50E;
     LDA.B strcMap.loadAreaId                                   ;83C503|A522    |000022;
     CMP.B #$31                                                 ;83C505|C931    |      ;
     BCS +                                                      ;83C507|B003    |83C50C;
-    JMP.W .label29                                             ;83C509|4C3DC6  |83C63D;
+    JMP.W .next_cow                                             ;83C509|4C3DC6  |83C63D;
  
  
-  + BRA .label19                                               ;83C50C|800E    |83C51C;
+  + BRA .cow_load_position                                               ;83C50C|800E    |83C51C;
  
  
-.label18:
+.cow_area_exact:
     SEP #$20                                                   ;83C50E|E220    |      ;
     LDY.W #$0002                                               ;83C510|A00200  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C513|B772    |000072;
     CMP.B strcMap.loadAreaId                                   ;83C515|C522    |000022;
-    BEQ .label19                                               ;83C517|F003    |83C51C;
-    JMP.W .label29                                             ;83C519|4C3DC6  |83C63D;
+    BEQ .cow_load_position                                               ;83C517|F003    |83C51C;
+    JMP.W .next_cow                                             ;83C519|4C3DC6  |83C63D;
  
  
-.label19:
+.cow_load_position:
     REP #$20                                                   ;83C51C|C220    |      ;
     LDY.W #$0008                                               ;83C51E|A00800  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C521|B772    |000072;
@@ -3378,26 +3378,26 @@ fGameEngine_SpawnChickensOnMap:
     LDA.B [ptrTemp0x72],Y                                      ;83C529|B772    |000072;
     STA.W nTileInFrontOfPlayerY                                ;83C52B|8D8709  |000987;
  
-.label20:
+.cow_start_script:
     SEP #$20                                                   ;83C52E|E220    |      ;
     LDY.W #$0000                                               ;83C530|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C533|B772    |000072;
     AND.B #$02                                                 ;83C535|2902    |      ;
-    BEQ .label22                                               ;83C537|F039    |83C572;
+    BEQ .cow_not_baby                                               ;83C537|F039    |83C572;
     REP #$20                                                   ;83C539|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;83C53B|AD9601  |000196;
     AND.W #$0002                                               ;83C53E|290200  |      ;
-    BEQ .label21                                               ;83C541|F010    |83C553;
+    BEQ .cow_baby_default_script                                               ;83C541|F010    |83C553;
     SEP #$20                                                   ;83C543|E220    |      ;
     LDY.W #$0002                                               ;83C545|A00200  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C548|B772    |000072;
     CMP.B #$27                                                 ;83C54A|C927    |      ;
-    BEQ .label21                                               ;83C54C|F005    |83C553;
+    BEQ .cow_baby_default_script                                               ;83C54C|F005    |83C553;
     LDY.W #$0017                                               ;83C54E|A01700  |      ;
     BRA +                                                      ;83C551|8005    |83C558;
  
  
-.label21:
+.cow_baby_default_script:
     REP #$30                                                   ;83C553|C230    |      ;
     LDY.W #$0003                                               ;83C555|A00300  |      ;
  
@@ -3413,29 +3413,29 @@ fGameEngine_SpawnChickensOnMap:
     ASL A                                                      ;83C56A|0A      |      ;
     TAX                                                        ;83C56B|AA      |      ;
     STZ.W strcStockData.unkEachCow,X                           ;83C56C|9E5309  |000953;
-    JMP.W .label29                                             ;83C56F|4C3DC6  |83C63D;
+    JMP.W .next_cow                                             ;83C56F|4C3DC6  |83C63D;
  
  
-.label22:
+.cow_not_baby:
     SEP #$20                                                   ;83C572|E220    |      ;
     LDY.W #$0000                                               ;83C574|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C577|B772    |000072;
     AND.B #$04                                                 ;83C579|2904    |      ;
-    BEQ .label24                                               ;83C57B|F039    |83C5B6;
+    BEQ .cow_not_child                                               ;83C57B|F039    |83C5B6;
     REP #$20                                                   ;83C57D|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;83C57F|AD9601  |000196;
     AND.W #$0002                                               ;83C582|290200  |      ;
-    BEQ .label23                                               ;83C585|F010    |83C597;
+    BEQ .cow_child_default_script                                               ;83C585|F010    |83C597;
     SEP #$20                                                   ;83C587|E220    |      ;
     LDY.W #$0002                                               ;83C589|A00200  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C58C|B772    |000072;
     CMP.B #$27                                                 ;83C58E|C927    |      ;
-    BEQ .label23                                               ;83C590|F005    |83C597;
+    BEQ .cow_child_default_script                                               ;83C590|F005    |83C597;
     LDY.W #$002F                                               ;83C592|A02F00  |      ;
     BRA +                                                      ;83C595|8005    |83C59C;
  
  
-.label23:
+.cow_child_default_script:
     REP #$30                                                   ;83C597|C230    |      ;
     LDY.W #$0004                                               ;83C599|A00400  |      ;
  
@@ -3451,37 +3451,37 @@ fGameEngine_SpawnChickensOnMap:
     ASL A                                                      ;83C5AE|0A      |      ;
     TAX                                                        ;83C5AF|AA      |      ;
     STZ.W strcStockData.unkEachCow,X                           ;83C5B0|9E5309  |000953;
-    JMP.W .label29                                             ;83C5B3|4C3DC6  |83C63D;
+    JMP.W .next_cow                                             ;83C5B3|4C3DC6  |83C63D;
  
  
-.label24:
+.cow_not_child:
     SEP #$20                                                   ;83C5B6|E220    |      ;
     LDY.W #$0000                                               ;83C5B8|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C5BB|B772    |000072;
     AND.B #$08                                                 ;83C5BD|2908    |      ;
-    BEQ .label29                                               ;83C5BF|F07C    |83C63D;
+    BEQ .next_cow                                               ;83C5BF|F07C    |83C63D;
     SEP #$20                                                   ;83C5C1|E220    |      ;
     LDY.W #$0000                                               ;83C5C3|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C5C6|B772    |000072;
     AND.B #$80                                                 ;83C5C8|2980    |      ;
-    BNE .label26                                               ;83C5CA|D04A    |83C616;
+    BNE .cow_clear_birth_flag                                               ;83C5CA|D04A    |83C616;
     SEP #$20                                                   ;83C5CC|E220    |      ;
     LDY.W #$0000                                               ;83C5CE|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C5D1|B772    |000072;
     AND.B #$40                                                 ;83C5D3|2940    |      ;
-    BEQ .label25                                               ;83C5D5|F005    |83C5DC;
+    BEQ .cow_adult_check_sick                                               ;83C5D5|F005    |83C5DC;
     LDY.W #$0008                                               ;83C5D7|A00800  |      ;
-    BRA .label28                                               ;83C5DA|8048    |83C624;
+    BRA .cow_start_adult_script                                               ;83C5DA|8048    |83C624;
  
  
-.label25:
+.cow_adult_check_sick:
     SEP #$20                                                   ;83C5DC|E220    |      ;
     LDY.W #$0000                                               ;83C5DE|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C5E1|B772    |000072;
     AND.B #$20                                                 ;83C5E3|2920    |      ;
     BEQ +                                                      ;83C5E5|F005    |83C5EC;
     LDY.W #$0007                                               ;83C5E7|A00700  |      ;
-    BRA .label28                                               ;83C5EA|8038    |83C624;
+    BRA .cow_start_adult_script                                               ;83C5EA|8038    |83C624;
  
  
   + SEP #$20                                                   ;83C5EC|E220    |      ;
@@ -3490,33 +3490,33 @@ fGameEngine_SpawnChickensOnMap:
     AND.B #$10                                                 ;83C5F3|2910    |      ;
     BEQ +                                                      ;83C5F5|F005    |83C5FC;
     LDY.W #$0006                                               ;83C5F7|A00600  |      ;
-    BRA .label28                                               ;83C5FA|8028    |83C624;
+    BRA .cow_start_adult_script                                               ;83C5FA|8028    |83C624;
  
  
   + REP #$20                                                   ;83C5FC|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;83C5FE|AD9601  |000196;
     AND.W #$0002                                               ;83C601|290200  |      ;
-    BEQ .label27                                               ;83C604|F01B    |83C621;
+    BEQ .cow_adult_default_script                                               ;83C604|F01B    |83C621;
     SEP #$20                                                   ;83C606|E220    |      ;
     LDY.W #$0002                                               ;83C608|A00200  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C60B|B772    |000072;
     CMP.B #$27                                                 ;83C60D|C927    |      ;
-    BEQ .label27                                               ;83C60F|F010    |83C621;
+    BEQ .cow_adult_default_script                                               ;83C60F|F010    |83C621;
     LDY.W #$0009                                               ;83C611|A00900  |      ;
-    BRA .label28                                               ;83C614|800E    |83C624;
+    BRA .cow_start_adult_script                                               ;83C614|800E    |83C624;
  
  
-.label26:
+.cow_clear_birth_flag:
     SEP #$20                                                   ;83C616|E220    |      ;
     LDY.W #$0000                                               ;83C618|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83C61B|B772    |000072;
     AND.B #$7F                                                 ;83C61D|297F    |      ;
     STA.B [ptrTemp0x72],Y                                      ;83C61F|9772    |000072;
  
-.label27:
+.cow_adult_default_script:
     LDY.W #$0005                                               ;83C621|A00500  |      ;
  
-.label28:
+.cow_start_adult_script:
     REP #$20                                                   ;83C624|C220    |      ;
     TXA                                                        ;83C626|8A      |      ;
     CLC                                                        ;83C627|18      |      ;
@@ -3529,138 +3529,138 @@ fGameEngine_SpawnChickensOnMap:
     ASL A                                                      ;83C636|0A      |      ;
     TAX                                                        ;83C637|AA      |      ;
     STZ.W strcStockData.unkEachCow,X                           ;83C638|9E5309  |000953;
-    BRA .label29                                               ;83C63B|8000    |83C63D;
+    BRA .next_cow                                               ;83C63B|8000    |83C63D;
  
  
-.label29:
+.next_cow:
     REP #$30                                                   ;83C63D|C230    |      ;
     PLX                                                        ;83C63F|FA      |      ;
     INX                                                        ;83C640|E8      |      ;
     CPX.W #$000C                                               ;83C641|E00C00  |      ;
     BEQ +                                                      ;83C644|F003    |83C649;
-    JMP.W .label13                                             ;83C646|4C10C4  |83C410;
+    JMP.W .cow_loop                                             ;83C646|4C10C4  |83C410;
  
  
   + REP #$30                                                   ;83C649|C230    |      ;
     %CheckFlag(event3, $0080)
     BNE +                                                      ;83C652|D003    |83C657;
-    JMP.W .label37                                             ;83C654|4C34C7  |83C734;
+    JMP.W .check_horse                                             ;83C654|4C34C7  |83C734;
  
  
   + %CheckPlayerFlagsNoReg(!PFLAGS_DOGHUGGING)
     BEQ +                                                      ;83C65C|F003    |83C661;
-    JMP.W .label37                                             ;83C65E|4C34C7  |83C734;
+    JMP.W .check_horse                                             ;83C65E|4C34C7  |83C734;
  
  
   + SEP #$20                                                   ;83C661|E220    |      ;
     LDA.L nDogAreaId                                           ;83C663|AF301F7F|7F1F30;
     CMP.B #$04                                                 ;83C667|C904    |      ;
-    BCS .label30                                               ;83C669|B00C    |83C677;
+    BCS .dog_area_04_07                                               ;83C669|B00C    |83C677;
     LDA.B strcMap.loadAreaId                                   ;83C66B|A522    |000022;
     CMP.B #$04                                                 ;83C66D|C904    |      ;
     BCC +                                                      ;83C66F|9003    |83C674;
-    JMP.W .label37                                             ;83C671|4C34C7  |83C734;
+    JMP.W .check_horse                                             ;83C671|4C34C7  |83C734;
  
  
   + JMP.W .jump1                                               ;83C674|4C09C7  |83C709;
  
  
-.label30:
+.dog_area_04_07:
     SEP #$20                                                   ;83C677|E220    |      ;
     LDA.L nDogAreaId                                           ;83C679|AF301F7F|7F1F30;
     CMP.B #$08                                                 ;83C67D|C908    |      ;
-    BCS .label31                                               ;83C67F|B012    |83C693;
+    BCS .dog_area_08_0f                                               ;83C67F|B012    |83C693;
     LDA.B strcMap.loadAreaId                                   ;83C681|A522    |000022;
     CMP.B #$04                                                 ;83C683|C904    |      ;
     BCS +                                                      ;83C685|B003    |83C68A;
-    JMP.W .label37                                             ;83C687|4C34C7  |83C734;
+    JMP.W .check_horse                                             ;83C687|4C34C7  |83C734;
  
  
   + CMP.B #$08                                                 ;83C68A|C908    |      ;
     BCC +                                                      ;83C68C|9003    |83C691;
-    JMP.W .label37                                             ;83C68E|4C34C7  |83C734;
+    JMP.W .check_horse                                             ;83C68E|4C34C7  |83C734;
  
  
   + BRA .jump1                                                 ;83C691|8076    |83C709;
  
  
-.label31:
+.dog_area_08_0f:
     SEP #$20                                                   ;83C693|E220    |      ;
     LDA.L nDogAreaId                                           ;83C695|AF301F7F|7F1F30;
     CMP.B #$10                                                 ;83C699|C910    |      ;
-    BCS .label33                                               ;83C69B|B012    |83C6AF;
+    BCS .dog_area_10_13                                               ;83C69B|B012    |83C6AF;
     LDA.B strcMap.loadAreaId                                   ;83C69D|A522    |000022;
     CMP.B #$0C                                                 ;83C69F|C90C    |      ;
     BCS +                                                      ;83C6A1|B003    |83C6A6;
-    JMP.W .label37                                             ;83C6A3|4C34C7  |83C734;
+    JMP.W .check_horse                                             ;83C6A3|4C34C7  |83C734;
  
  
   + CMP.B #$10                                                 ;83C6A6|C910    |      ;
     BCC +                                                      ;83C6A8|9003    |83C6AD;
-    JMP.W .label37                                             ;83C6AA|4C34C7  |83C734;
+    JMP.W .check_horse                                             ;83C6AA|4C34C7  |83C734;
  
  
   + BRA .jump1                                                 ;83C6AD|805A    |83C709;
  
  
-.label33:
+.dog_area_10_13:
     SEP #$20                                                   ;83C6AF|E220    |      ;
     LDA.L nDogAreaId                                           ;83C6B1|AF301F7F|7F1F30;
     CMP.B #$14                                                 ;83C6B5|C914    |      ;
-    BCS .label34                                               ;83C6B7|B012    |83C6CB;
+    BCS .dog_area_14_17                                               ;83C6B7|B012    |83C6CB;
     LDA.B strcMap.loadAreaId                                   ;83C6B9|A522    |000022;
     CMP.B #$10                                                 ;83C6BB|C910    |      ;
     BCS +                                                      ;83C6BD|B003    |83C6C2;
-    JMP.W .label37                                             ;83C6BF|4C34C7  |83C734;
+    JMP.W .check_horse                                             ;83C6BF|4C34C7  |83C734;
  
  
   + CMP.B #$14                                                 ;83C6C2|C914    |      ;
     BCC +                                                      ;83C6C4|9003    |83C6C9;
-    JMP.W .label37                                             ;83C6C6|4C34C7  |83C734;
+    JMP.W .check_horse                                             ;83C6C6|4C34C7  |83C734;
  
  
   + BRA .jump1                                                 ;83C6C9|803E    |83C709;
  
  
-.label34:
+.dog_area_14_17:
     SEP #$20                                                   ;83C6CB|E220    |      ;
     LDA.L nDogAreaId                                           ;83C6CD|AF301F7F|7F1F30;
     CMP.B #$18                                                 ;83C6D1|C918    |      ;
-    BCS .label35                                               ;83C6D3|B012    |83C6E7;
+    BCS .dog_area_ge_31                                               ;83C6D3|B012    |83C6E7;
     LDA.B strcMap.loadAreaId                                   ;83C6D5|A522    |000022;
     CMP.B #$15                                                 ;83C6D7|C915    |      ;
     BCS +                                                      ;83C6D9|B003    |83C6DE;
-    JMP.W .label37                                             ;83C6DB|4C34C7  |83C734;
+    JMP.W .check_horse                                             ;83C6DB|4C34C7  |83C734;
  
  
   + CMP.B #$18                                                 ;83C6DE|C918    |      ;
     BCC +                                                      ;83C6E0|9003    |83C6E5;
-    JMP.W .label37                                             ;83C6E2|4C34C7  |83C734;
+    JMP.W .check_horse                                             ;83C6E2|4C34C7  |83C734;
  
  
   + BRA .jump1                                                 ;83C6E5|8022    |83C709;
  
  
-.label35:
+.dog_area_ge_31:
     SEP #$20                                                   ;83C6E7|E220    |      ;
     LDA.L nDogAreaId                                           ;83C6E9|AF301F7F|7F1F30;
     CMP.B #$31                                                 ;83C6ED|C931    |      ;
-    BCC .label36                                               ;83C6EF|900B    |83C6FC;
+    BCC .dog_area_exact                                               ;83C6EF|900B    |83C6FC;
     LDA.B strcMap.loadAreaId                                   ;83C6F1|A522    |000022;
     CMP.B #$31                                                 ;83C6F3|C931    |      ;
     BCS +                                                      ;83C6F5|B003    |83C6FA;
-    JMP.W .label37                                             ;83C6F7|4C34C7  |83C734;
+    JMP.W .check_horse                                             ;83C6F7|4C34C7  |83C734;
  
  
   + BRA .jump1                                                 ;83C6FA|800D    |83C709;
  
  
-.label36:
+.dog_area_exact:
     SEP #$20                                                   ;83C6FC|E220    |      ;
     LDA.L nDogAreaId                                           ;83C6FE|AF301F7F|7F1F30;
     CMP.B strcMap.loadAreaId                                   ;83C702|C522    |000022;
     BEQ .jump1                                                 ;83C704|F003    |83C709;
-    JMP.W .label37                                             ;83C706|4C34C7  |83C734;
+    JMP.W .check_horse                                             ;83C706|4C34C7  |83C734;
  
  
 .jump1:
@@ -3679,7 +3679,7 @@ fGameEngine_SpawnChickensOnMap:
     SEP #$20                                                   ;83C72F|E220    |      ;
     STZ.W strcStockData.unkDog                                 ;83C731|9C3809  |000938;
  
-.label37:
+.check_horse:
     REP #$30                                                   ;83C734|C230    |      ;
     %CheckFlag(event3, $0100)
     BNE +                                                      ;83C73D|D003    |83C742;
@@ -3694,7 +3694,7 @@ fGameEngine_SpawnChickensOnMap:
   + SEP #$20                                                   ;83C74C|E220    |      ;
     LDA.L nHorseAreaIdMaybe                                    ;83C74E|AF311F7F|7F1F31;
     CMP.B #$04                                                 ;83C752|C904    |      ;
-    BCS .label38                                               ;83C754|B00B    |83C761;
+    BCS .horse_area_04_07                                               ;83C754|B00B    |83C761;
     LDA.B strcMap.loadAreaId                                   ;83C756|A522    |000022;
     CMP.B #$04                                                 ;83C758|C904    |      ;
     BCC +                                                      ;83C75A|9003    |83C75F;
@@ -3704,11 +3704,11 @@ fGameEngine_SpawnChickensOnMap:
   + BRA .jump2                                                 ;83C75F|8076    |83C7D7;
  
  
-.label38:
+.horse_area_04_07:
     SEP #$20                                                   ;83C761|E220    |      ;
     LDA.L nHorseAreaIdMaybe                                    ;83C763|AF311F7F|7F1F31;
     CMP.B #$08                                                 ;83C767|C908    |      ;
-    BCS .label39                                               ;83C769|B012    |83C77D;
+    BCS .horse_area_08_0f                                               ;83C769|B012    |83C77D;
     LDA.B strcMap.loadAreaId                                   ;83C76B|A522    |000022;
     CMP.B #$04                                                 ;83C76D|C904    |      ;
     BCS +                                                      ;83C76F|B003    |83C774;
@@ -3723,11 +3723,11 @@ fGameEngine_SpawnChickensOnMap:
   + BRA .jump2                                                 ;83C77B|805A    |83C7D7;
  
  
-.label39:
+.horse_area_08_0f:
     SEP #$20                                                   ;83C77D|E220    |      ;
     LDA.L nHorseAreaIdMaybe                                    ;83C77F|AF311F7F|7F1F31;
     CMP.B #$10                                                 ;83C783|C910    |      ;
-    BCS .label40                                               ;83C785|B012    |83C799;
+    BCS .horse_area_10_13                                               ;83C785|B012    |83C799;
     LDA.B strcMap.loadAreaId                                   ;83C787|A522    |000022;
     CMP.B #$0C                                                 ;83C789|C90C    |      ;
     BCS +                                                      ;83C78B|B003    |83C790;
@@ -3742,11 +3742,11 @@ fGameEngine_SpawnChickensOnMap:
   + BRA .jump2                                                 ;83C797|803E    |83C7D7;
  
  
-.label40:
+.horse_area_10_13:
     SEP #$20                                                   ;83C799|E220    |      ;
     LDA.L nHorseAreaIdMaybe                                    ;83C79B|AF311F7F|7F1F31;
     CMP.B #$14                                                 ;83C79F|C914    |      ;
-    BCS .label41                                               ;83C7A1|B012    |83C7B5;
+    BCS .horse_area_ge_31                                               ;83C7A1|B012    |83C7B5;
     LDA.B strcMap.loadAreaId                                   ;83C7A3|A522    |000022;
     CMP.B #$10                                                 ;83C7A5|C910    |      ;
     BCS +                                                      ;83C7A7|B003    |83C7AC;
@@ -3761,11 +3761,11 @@ fGameEngine_SpawnChickensOnMap:
   + BRA .jump2                                                 ;83C7B3|8022    |83C7D7;
  
  
-.label41:
+.horse_area_ge_31:
     SEP #$20                                                   ;83C7B5|E220    |      ;
     LDA.L nHorseAreaIdMaybe                                    ;83C7B7|AF311F7F|7F1F31;
     CMP.B #$31                                                 ;83C7BB|C931    |      ;
-    BCC .label42                                               ;83C7BD|900B    |83C7CA;
+    BCC .horse_area_exact                                               ;83C7BD|900B    |83C7CA;
     LDA.B strcMap.loadAreaId                                   ;83C7BF|A522    |000022;
     CMP.B #$31                                                 ;83C7C1|C931    |      ;
     BCS +                                                      ;83C7C3|B003    |83C7C8;
@@ -3775,7 +3775,7 @@ fGameEngine_SpawnChickensOnMap:
   + BRA .jump2                                                 ;83C7C8|800D    |83C7D7;
  
  
-.label42:
+.horse_area_exact:
     SEP #$20                                                   ;83C7CA|E220    |      ;
     LDA.L nHorseAreaIdMaybe                                    ;83C7CC|AF311F7F|7F1F31;
     CMP.B strcMap.loadAreaId                                   ;83C7D0|C522    |000022;
@@ -3855,9 +3855,9 @@ fGameEngine_AddChicken:
     REP #$20                                                   ;83C857|C220    |      ;
     LDA.B strcVariables.n16Temp1                               ;83C859|A57E    |00007E;
     CMP.W #$0001                                               ;83C85B|C90100  |      ;
-    BEQ .label5                                                ;83C85E|F022    |83C882;
+    BEQ .add_hatched                                                ;83C85E|F022    |83C882;
     CMP.W #$0002                                               ;83C860|C90200  |      ;
-    BEQ .label6                                                ;83C863|F028    |83C88D;
+    BEQ .add_outdoor_baby                                                ;83C863|F028    |83C88D;
     SEP #$20                                                   ;83C865|E220    |      ;
     LDY.W #$0000                                               ;83C867|A00000  |      ;
     LDA.B #$43                                                 ;83C86A|A943    |      ;
@@ -3872,15 +3872,15 @@ fGameEngine_AddChicken:
     BRA .return0                                               ;83C880|804E    |83C8D0;
  
  
-.label5:
+.add_hatched:
     SEP #$20                                                   ;83C882|E220    |      ;
     LDY.W #$0000                                               ;83C884|A00000  |      ;
     LDA.B #$09                                                 ;83C887|A909    |      ;
     STA.B [ptrTemp0x72],Y                                      ;83C889|9772    |000072; strcChickenData.statusFlags = 00001001 - baby, exists
-    BRA .label7                                                ;83C88B|8029    |83C8B6;
+    BRA .set_hatched_position                                                ;83C88B|8029    |83C8B6;
  
  
-.label6:
+.add_outdoor_baby:
     SEP #$20                                                   ;83C88D|E220    |      ;
     LDY.W #$0000                                               ;83C88F|A00000  |      ;
     LDA.B #$09                                                 ;83C892|A909    |      ;
@@ -3900,7 +3900,7 @@ fGameEngine_AddChicken:
     BRA .return0                                               ;83C8B4|801A    |83C8D0;
  
  
-.label7:
+.set_hatched_position:
     REP #$30                                                   ;83C8B6|C230    |      ;
     TXA                                                        ;83C8B8|8A      |      ;
     ASL A                                                      ;83C8B9|0A      |      ;

@@ -129,7 +129,7 @@ fMathDivide:
     INY                                                        ;8380EA|C8      |      ;
  
   + CMP.W #$00FF                                               ;8380EB|C9FF00  |      ;
-    BCS .label1                                                ;8380EE|B026    |838116;
+    BCS .software_divide                                                ;8380EE|B026    |838116;
     LDA.B strcVariables.n16Temp1                               ;8380F0|A57E    |00007E;
     STA.L SNES_WRDIVL                                          ;8380F2|8F044200|004204;
     SEP #$20                                                   ;8380F6|E220    |      ;
@@ -152,7 +152,7 @@ fMathDivide:
   + RTL                                                        ;838115|6B      |      ;
  
  
-.label1:
+.software_divide:
     PHY                                                        ;838116|5A      |      ;
     LDY.W #$0010                                               ;838117|A01000  |      ;
     LDA.W #$0000                                               ;83811A|A90000  |      ;
