@@ -676,7 +676,7 @@ fAudio_LoadTrackSamples:
     SEP #$20                                                   ;8387C0|E220    |      ;
     LDA.L sAudioData1_838F83,X                                 ;8387C2|BF838F83|838F83;
     STA.B strcVariables.n8Temp3                                ;8387C6|8594    |000094;
-    BNE .label1                                                ;8387C8|D010    |8387DA;
+    BNE .sample_used                                                ;8387C8|D010    |8387DA;
     REP #$20                                                   ;8387CA|C220    |      ;
     INX                                                        ;8387CC|E8      |      ;
     CPX.B strcVariables.n16Temp4                               ;8387CD|E484    |000084;
@@ -685,17 +685,17 @@ fAudio_LoadTrackSamples:
     LDA.B #$06                                                 ;8387D3|A906    |      ;
     STA.B strcVariables.n8Temp3                                ;8387D5|8594    |000094;
     DEX                                                        ;8387D7|CA      |      ;
-    BRA .label2                                                ;8387D8|800D    |8387E7;
+    BRA .send_load_command                                                ;8387D8|800D    |8387E7;
  
  
-.label1:
+.sample_used:
     SEP #$20                                                   ;8387DA|E220    |      ;
     LDA.B strcVariables.n8Temp3                                ;8387DC|A594    |000094;
     STA.W strcAudio.list,Y                                     ;8387DE|990401  |000104;
     INC.W strcAudio.index                                      ;8387E1|EE0301  |000103;
     INC.W strcAudio.unk10F                                     ;8387E4|EE0F01  |00010F;
  
-.label2:
+.send_load_command:
     SEP #$20                                                   ;8387E7|E220    |      ;
     LDA.B #$03                                                 ;8387E9|A903    |      ;
     STA.B strcVariables.n8Temp1                                ;8387EB|8592    |000092;
@@ -951,11 +951,11 @@ fAudio_FreeSamplesFromSlot:
     STA.B strcVariables.n8Temp3                                ;8389CA|8594    |000094;
  
   - LDA.B strcVariables.n8Temp3                                ;8389CC|A594    |000094;
-    BNE .label1                                                ;8389CE|D005    |8389D5;
+    BNE .send_free_command                                                ;8389CE|D005    |8389D5;
     JSR.W fAudio_ReadSpcStatusBits0And4                                 ;8389D0|20C98E  |838EC9;
     BNE -                                                      ;8389D3|D0F7    |8389CC;
  
-.label1:
+.send_free_command:
     REP #$10                                                   ;8389D5|C210    |      ;
     LDA.B #$04                                                 ;8389D7|A904    |      ;
     STA.B strcVariables.n8Temp1                                ;8389D9|8592    |000092;
