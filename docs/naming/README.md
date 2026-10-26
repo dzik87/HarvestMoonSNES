@@ -34,6 +34,6 @@ All anonymous local labels (`.labelN`) of the code banks are named after their r
 ## Code labels of banks $80-$82
 
 `M_labels_bank80-82.csv` (old,new,confidence,reason) records the renames of address-suffixed global labels (`fReturn_818B6A`, `nTable_80AA68`, `L_82DD80` ...), the regional `.r_<address>_<n>` locals and the 371 anonymous `.labelN` locals of
-`src/code/bank_80..82` (rows `<scope>.<old>` -> `<scope>.<new>`). Conventions: locals are `camelCase` named after the role of the branch target (`.loop`, `.nextTile`, `.checkSaturday`, `.cancelTransition`), unique inside their global label and equal in every
+`src/code/bank_80..82` (rows `<scope>.<old>` -> `<scope>.<new>`). Conventions: locals are `snake_case` named after the role of the branch target (`.loop`, `.next_tile`, `.check_saturday`, `.cancel_transition`), unique inside their global label and equal in every
 `if !REGION_xx` block; shared returns are `<Routine>_Return`; loop heads of region patch targets are `<Routine>_RowLoop` / `_TileLoop` / `_WaitFrame`. Deliberately kept with their address: the 40 `aPaletteAnim_Row<r>Col<c>_<address>` colour scripts (the row / column pair is not unique, the
 address disambiguates them), `sPalette_7F0900/0B00/0D00` (WRAM labels of `src/common/ram.asm`) and `fAudio_UploadSpcDataBlock_B2D120` (defined in bank $83).
