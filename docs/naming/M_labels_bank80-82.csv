@@ -72,6 +72,9 @@ L_82E127,fMainMenu_NewGameSlotSelect_WaitFrame_ResetScrollX,high,Clears the BG1 
 L_82E17D,fMainMenu_NewGameSlotSelect_MoveCursorSlot2_ResetScrollX,high,Clears the BG1 horizontal scroll (JP branch target)
 L_82E747,fMainMenu_DrawSaveSlotFrames_Loop,high,Loop head of fMainMenu_DrawSaveSlotFrames
 L_82E95F,fScreen_NameInput_WaitFrame,high,NMI wait loop of fScreen_NameInput
+L_80FFFF,pPaletteAnimRoutine_None,high,"JP table entry meaning ""no routine"" ($80FFFF stored as a word = $FFFF)"
+L_80CFC3,fPaletteAnim_TownFall_T4_Part2,medium,JP table entry pointing into the middle of fPaletteAnim_TownFall_T4 (second part of the routine)
+L_80D30D,fPaletteAnim_WoodsSpring_T4_Part2,medium,JP table entry pointing into the middle of fPaletteAnim_WoodsSpring_T4 (second part of the routine)
 .r_818529_1,.afterEquippedToolCheck,high,DE-only branch target in subItemCarried_0x46 after clearing the equipped tool
 .r_818529_2,.afterSecondToolCheck,high,DE-only branch target in subItemCarried_0x46 after clearing the second tool
 .r_81E729_1,.setPhaseOne,high,EU/DE-only branch target that sets nPlayerInteractionArg1 = 1

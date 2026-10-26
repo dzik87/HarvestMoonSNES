@@ -421,17 +421,17 @@ $1B,$CB80
 $1C,$CBD2
 $1D,$FFFF
 # area $05 AREA_TOWNSUMMER
-$1E,L_80FFFF
+$1E,pPaletteAnimRoutine_None
 $1F,$CC90
 $20,$CCE2
 $21,$CD34
 $22,$CD86
 $23,$FFFF
 # area $06 AREA_TOWNFALL
-$24,L_80FFFF
+$24,pPaletteAnimRoutine_None
 $25,$CE44
 $26,$CE96
-$27,L_80CFC3
+$27,fPaletteAnim_TownFall_T4_Part2
 $28,$CF3A
 @else
 $19,fPaletteAnim_TownSpring_DancingS1_EggFestival_T1
@@ -538,28 +538,28 @@ $63,$D1E1
 $64,$D29F
 $65,$FFFF
 # area $11 AREA_WOODSSUMMER
-$66,L_80FFFF
-$67,L_80D30D
+$66,pPaletteAnimRoutine_None
+$67,fPaletteAnim_WoodsSpring_T4_Part2
 $68,$D400
 $69,$D4BE
 $6A,$D561
 $6B,$FFFF
 # area $12 AREA_WOODSFALL
-$6C,L_80FFFF
+$6C,pPaletteAnimRoutine_None
 $6D,$D604
 $6E,$D6F8
 $6F,$D7EC
 $70,$D88F
 $71,$FFFF
 # area $13 AREA_WOODSWINTER
-$72,L_80FFFF
+$72,pPaletteAnimRoutine_None
 $73,$D932
 $74,$D969
 $75,$D9A0
 $76,$D9D7
 $77,$FFFF
 # area $14 AREA_NY_SPA
-$78,L_80FFFF
+$78,pPaletteAnimRoutine_None
 $79,$D932
 $7A,$D969
 $7B,$D9A0
