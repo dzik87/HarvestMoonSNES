@@ -1,0 +1,3 @@
+; SFX id $00 (0). Stream body only; the pointer table and the label come from assets/audio/audio.json (sfx_names).
+    end
+    db $00

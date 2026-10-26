@@ -66,7 +66,7 @@ fItemCarried_Begin:
     BEQ +                                                      ;818085|F012    |818099;
     SEP #$20                                                   ;818087|E220    |      ;
     REP #$10                                                   ;818089|C210    |      ;
-    LDA.B #$08                                                 ;81808B|A908    |      ;
+    LDA.B #!SFX_ITEMPICKUP                                                 ;81808B|A908    |      ;
     STA.W strcAudio.reg114                                     ;81808D|8D1401  |000114;
     LDA.B #$06                                                 ;818090|A906    |      ;
     STA.W strcAudio.reg115                                     ;818092|8D1501  |000115;

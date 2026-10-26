@@ -1548,7 +1548,7 @@ fToolUsedAction0x10_WateringCan:
     REP #$10                                                   ;829CDA|C210    |      ;
     SEP #$20                                                   ;829CDC|E220    |      ;
     REP #$10                                                   ;829CDE|C210    |      ;
-    LDA.B #$00                                                 ;829CE0|A900    |      ;
+    LDA.B #!SFX_SILENCE                                                 ;829CE0|A900    |      ;
     STA.W strcAudio.reg114                                     ;829CE2|8D1401  |000114;
     LDA.B #$07                                                 ;829CE5|A907    |      ;
     STA.W strcAudio.reg115                                     ;829CE7|8D1501  |000115;
@@ -2232,7 +2232,7 @@ fToolUsedAction0x15_Sprinkler:
     REP #$10                                                   ;82A309|C210    |      ;
     SEP #$20                                                   ;82A30B|E220    |      ;
     REP #$10                                                   ;82A30D|C210    |      ;
-    LDA.B #$00                                                 ;82A30F|A900    |      ;
+    LDA.B #!SFX_SILENCE                                                 ;82A30F|A900    |      ;
     STA.W strcAudio.reg114                                     ;82A311|8D1401  |000114;
     LDA.B #$07                                                 ;82A314|A907    |      ;
     STA.W strcAudio.reg115                                     ;82A316|8D1501  |000115;

@@ -1,0 +1,7 @@
+; SFX id $26 (38). Stream body only; the pointer table and the label come from assets/audio/audio.json (sfx_names).
+    voicetranspose $00
+    volume $D2
+    pan $0A
+    instrument $1F
+    L96:G7V15 B4 end    ; t=0
+    db $00

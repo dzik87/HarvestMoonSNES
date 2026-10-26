@@ -303,7 +303,7 @@ pAIScripting0x28_L061:
 pAIScripting0x28_L062:
     %AICMD0x08_EnableAIControl()                               ;B4BE02
     %AICMD0x13_Wait(1)                                         ;B4BE03
-    %AICMD0x2C($19, $0006, $005A)                              ;B4BE06
+    %AICMD0x2C(!SFX_BELL, $0006, $005A)                              ;B4BE06
     %AICMD0x11_EnableUserControl()                             ;B4BE0C
     %AICMD0x1C_ShowDialog($02E7, $00)                          ;B4BE0D
 pAIScripting0x28_L063:
@@ -356,7 +356,7 @@ pAIScripting0x28_L076:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $06, pAIScripting0x28_L077) ;B4BEAB
     %AICMD0x08_EnableAIControl()                               ;B4BEB2
     %AICMD0x13_Wait(1)                                         ;B4BEB3
-    %AICMD0x2C($19, $0006, $005A)                              ;B4BEB6
+    %AICMD0x2C(!SFX_BELL, $0006, $005A)                              ;B4BEB6
     %AICMD0x11_EnableUserControl()                             ;B4BEBC
     %AICMD0x1C_ShowDialog($02E9, $00)                          ;B4BEBD
     %AICMD0x12_Jump(pAIScripting0x28_L063)                                   ;B4BEC1
@@ -364,7 +364,7 @@ pAIScripting0x28_L077:
     %AICMD0x28_ClearBit(strcFlags.unknown1, $06)                        ;B4BEC4
     %AICMD0x08_EnableAIControl()                               ;B4BEC9
     %AICMD0x13_Wait(1)                                         ;B4BECA
-    %AICMD0x2C($04, $0006, $005A)                              ;B4BECD
+    %AICMD0x2C(!SFX_EGGFESTIVALTIMEUP, $0006, $005A)                              ;B4BECD
     %AICMD0x11_EnableUserControl()                             ;B4BED3
     %AICMD0x1C_ShowDialog($0390, $00)                          ;B4BED4
     %AICMD0x12_Jump(pAIScripting0x28_L063)                                   ;B4BED8

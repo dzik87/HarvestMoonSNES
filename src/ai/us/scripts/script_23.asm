@@ -8,7 +8,7 @@ pAIScripting0x23_Data01:
     %AICMD0x09_StartScript($0E, pAIScripting0x23_L003)                                   ;B4A3A7
     %AICMD0x08_EnableAIControl()                               ;B4A3AB
     %AICMD0x38_WaitForFadeIn()                                               ;B4A3AC
-    %AICMD0x2C($23, $0007, $003C)                              ;B4A3AD
+    %AICMD0x2C(!SFX_CUTSCENEUNK23, $0007, $003C)                              ;B4A3AD
     %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4A3B3
     %AICMD0x11_EnableUserControl()                             ;B4A3B5
     %AICMD0x10_End()                                           ;B4A3B6

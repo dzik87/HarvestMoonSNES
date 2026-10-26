@@ -377,7 +377,7 @@ fDialog_IterateText:
     JSL.L fDialog_TransferGlyph                                ;8395A7|22239883|839823;
     SEP #$20                                                   ;8395AB|E220    |      ;
     REP #$10                                                   ;8395AD|C210    |      ;
-    LDA.B #$03                                                 ;8395AF|A903    |      ;
+    LDA.B #!SFX_MENUCURSOR                                                 ;8395AF|A903    |      ;
     STA.W strcAudio.reg114                                     ;8395B1|8D1401  |000114;
     LDA.B #$06                                                 ;8395B4|A906    |      ;
     STA.W strcAudio.reg115                                     ;8395B6|8D1501  |000115;

@@ -54,7 +54,7 @@ fPlayerInteraction0x03:
     CMP.B #$01                                                 ;81D677|C901    |      ;
     BEQ +                                                      ;81D679|F044    |81D6BF;
     SEP #$20                                                   ;81D67B|E220    |      ;
-    LDA.B #$19                                                 ;81D67D|A919    |      ;
+    LDA.B #!SFX_BELL                                                 ;81D67D|A919    |      ;
     STA.W strcAudio.reg114                                     ;81D67F|8D1401  |000114;
     LDA.B #$06                                                 ;81D682|A906    |      ;
     STA.W strcAudio.reg115                                     ;81D684|8D1501  |000115;
@@ -1474,7 +1474,7 @@ fPlayerInteraction0x34:
 fPlayerInteraction0x35:
     SEP #$20                                                   ;81E36E|E220    |      ;
     REP #$10                                                   ;81E370|C210    |      ;
-    LDA.B #$24                                                 ;81E372|A924    |      ;
+    LDA.B #!SFX_INTERACTIONUNK24                                                 ;81E372|A924    |      ;
     LDX.W #$0007                                               ;81E374|A20700  |      ;
     LDY.W #$0078                                               ;81E377|A07800  |      ;
     JSL.L fAudio_PlaySoundEffectAndWait                                 ;81E37A|22FE8283|8382FE;

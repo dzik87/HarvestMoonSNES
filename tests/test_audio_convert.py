@@ -228,6 +228,24 @@ def test_midi():
     check(mid[:4] == b"MThd" and mid.count(b"MTrk") >= 5, "MIDI export structure")
 
 
+def test_sfx_names():
+    """Per-effect sources: 50 distinct names, one file each (no stray files), enum values in src/common/enums.asm agree with the ids."""
+    import re
+    man = audioconv.load_manifest()
+    names = audioconv.sfx_names(man)
+    check(all(re.fullmatch(r"Sfx_[A-Za-z0-9]+", n) for n in names), "SFX names are Sfx_<Description>")
+    files = sorted(f.name for f in audioconv.SFXDIR.glob("*.sfx.txt"))
+    check(files == sorted(n + ".sfx.txt" for n in names), "one source file per named effect, no others")
+    enums = open(os.path.join(ROOT, "src", "common", "enums.asm")).read()
+    for i, n in enumerate(names):
+        m = re.search(r"^!SFX_%s\s*= \$([0-9A-F]{2})$" % n[4:].upper(), enums, re.M)
+        check(m and int(m.group(1), 16) == i, "enum !SFX_%s = $%02X" % (n[4:].upper(), i))
+    blob = audioconv.assemble_sfx(man)
+    check(len(blob) == 1010 and blob[:2] == bytes([0x64, 0x16]), "SFX block assembled from the per-effect files (1010 bytes, first stream at $1664)")
+    check(audioconv.resolve_sfx("Sfx_MenuCursor", names) == 3 and audioconv.resolve_sfx("$28", names) == 40 and audioconv.resolve_sfx("49", names) == 49,
+          "--sfx accepts names, $hex and decimal ids")
+
+
 def test_spcmatch():
     """A song snapshot with different runtime state (and a stale sample slot) is still recognised and compared as static-equal."""
     blobs, _, info = audioconv.build_all()
@@ -311,7 +329,7 @@ def test_spc():
 
 
 def main():
-    tests = [test_brr_decoder, test_brr_encoder, test_wav_io, test_spcasm, test_trackfmt, test_sources_build, test_midi, test_spc, test_spcmatch]
+    tests = [test_brr_decoder, test_brr_encoder, test_wav_io, test_spcasm, test_trackfmt, test_sources_build, test_midi, test_spc, test_spcmatch, test_sfx_names]
     for t in tests:
         before = len(failures)
         t()

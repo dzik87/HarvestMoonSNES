@@ -5,7 +5,8 @@ Sources (committed, assets/audio/):
   audio.json                       track table (track id -> blob + sample ids), SFX sample ids, common sample list
   samples/<label>.wav + .json      BRR samples as 16-bit mono PCM + sample-table fields / loop / encoder overrides
   tracks/<label>.track.txt         songs as N-SPC style text (tools/audio/trackfmt.py)
-  sfx/sfx.sfx.txt                  the SFX block uploaded to SPC $1600 (same stream syntax, 50 streams)
+  sfx/<Sfx_Name>.sfx.txt           one sound effect each (stream body); audio.json "sfx_names" gives the id order; together they form
+                                   the SFX block uploaded to SPC $1600 (same stream syntax, 50 streams)
   driver/sAudioSpcDriver.spc.asm   the SPC700 sound engine as assembler source (tools/audio/spcasm.py)
 
 Generated (git-ignored):
@@ -20,7 +21,7 @@ Commands:
   extract [--bins DIR] one-time conversion of existing blobs (+ tables in audio.asm / audio_tables.inc) into sources
   midi [--out DIR] [labels...]   export tracks as Standard MIDI files (rough view only, the text is the source of truth)
   wav [--out DIR]      decode the generated sample blobs to WAV files (for listening; sources already contain WAVs)
-  spc [--track LABEL|--all|--sfx N] [--out DIR]   generated .spc snapshots (derived listening/interop format, not a source)
+  spc [--track LABEL|--all|--sfx NAME|ID] [--out DIR]   generated .spc snapshots (derived listening/interop format, not a source)
   render [--format wav|mp3] [--seconds N] ...      .spc -> audio with ffmpeg (libgme) when available
   spcmatch DUMPS...    identify foreign .spc dumps by RAM content and compare their static data with our generated songs
   spcdiff A.spc B.spc  compare two snapshots (e.g. an emulator dump against a generated one) per memory region
@@ -52,7 +53,6 @@ TABLES_INC = GEN / "audio_tables.inc"
 BANKS = AUDIO / "banks.json"
 DRIVER_LABEL = "sAudioSpcDriver"
 DRIVER_SRC = DRIVER_DIR / (DRIVER_LABEL + ".spc.asm")
-SFX_SRC = SFXDIR / "sfx.sfx.txt"
 SFX_BASE = 0x1600
 SFX_COUNT = 50
 SFX_LABEL_TAIL = "sAudioSample_Id39"       # the SFX block lives in the tail of this blob
@@ -227,6 +227,7 @@ def dump_manifest(man):
            'see docs/formats/audio-sources.md",', '  "tracks": [']
     out.append(",\n".join('    {"id": %d, "blob": "%s", "samples": %s}' % (t["id"], t["blob"], json.dumps(t["samples"])) for t in man["tracks"]))
     out.append("  ],")
+    out.append('  "sfx_names": %s,' % json.dumps(man["sfx_names"]))
     out.append('  "sfx_sample_ids": %s,' % json.dumps(man["sfx_sample_ids"]))
     out.append('  "common_samples": %s' % json.dumps(man["common_samples"]))
     out.append("}")
@@ -286,8 +287,30 @@ def assemble_driver():
     return data
 
 
-def assemble_sfx():
-    return trackfmt.assemble(SFX_SRC.read_text(), kind="sfx", base=SFX_BASE)
+def sfx_names(man=None):
+    """Effect names in id order (assets/audio/audio.json "sfx_names"); the stream of id N is sfx/<name>.sfx.txt."""
+    man = man or load_manifest()
+    names = man["sfx_names"]
+    if len(names) != SFX_COUNT or len(set(names)) != SFX_COUNT:
+        raise ConvError("sfx_names must list %d distinct names" % SFX_COUNT)
+    return names
+
+
+def sfx_source_text(man=None):
+    """The single-block SFX source text composed from the per-effect files (pointer table, then one labelled stream each)."""
+    names = sfx_names(man)
+    out = ["; SFX block uploaded to SPC $%04X by command 1: %d stream pointers, then the streams (composed from sfx/<name>.sfx.txt)." % (SFX_BASE, SFX_COUNT), ""]
+    out += ["    ptr " + n for n in names]
+    for n in names:
+        f = SFXDIR / (n + ".sfx.txt")
+        if not f.exists():
+            raise ConvError("missing SFX source %s" % f.name)
+        out += ["", n + ":", f.read_text().rstrip("\n")]
+    return "\n".join(out) + "\n"
+
+
+def assemble_sfx(man=None):
+    return trackfmt.assemble(sfx_source_text(man), kind="sfx", base=SFX_BASE)
 
 
 def build_all(quiet=False):
@@ -398,7 +421,12 @@ def cmd_extract(a):
         "SFX block uploaded to SPC $%04X by command 1 (%d bytes): %d stream pointers, then the streams." % (SFX_BASE, len(sfxb), SFX_COUNT),
         "Streams use the music stream syntax; `instrument` takes a sample id here and `noise` replaces perc21.",
         "Format: docs/formats/audio-sources.md (tools/audio/trackfmt.py)."], kind="sfx", base=SFX_BASE)
-    write_if_changed(SFX_SRC, text)
+    names = (load_manifest().get("sfx_names") if MANIFEST.exists() else None) or ["sfx_%02d" % i for i in range(SFX_COUNT)]
+    parts = re.split(r"\n(?=sfx_\d\d:)", text)[1:]
+    for i, part in enumerate(parts):
+        body = part.split("\n", 1)[1].rstrip("\n")
+        write_if_changed(SFXDIR / (names[i] + ".sfx.txt"), "; SFX id $%02X (%d). Stream body only; the pointer table and the label come from "
+                         "assets/audio/audio.json (sfx_names).\n%s\n" % (i, i, body))
     # tracks
     seen = {}
     for i, t in enumerate(p.track_table):
@@ -410,7 +438,7 @@ def cmd_extract(a):
             "Format: docs/formats/audio-sources.md (tools/audio/trackfmt.py)."], kind="track")
         write_if_changed(TRACKS / (label + ".track.txt"), txt)
     # manifest
-    man = {"tracks": [{"id": i, "blob": t["label"], "samples": [x for x in t["samples"] if x] if True else []}
+    man = {"sfx_names": names, "tracks": [{"id": i, "blob": t["label"], "samples": [x for x in t["samples"] if x] if True else []}
                       for i, t in enumerate(p.track_table)],
            "sfx_sample_ids": list(p.sfx_sample), "common_samples": list(parse_common(p))}
     write_if_changed(MANIFEST, dump_manifest(man))
@@ -778,6 +806,19 @@ def parse_spc(data):
                 title=data[0x2E:0x4E].rstrip(b"\0").decode("ascii"), game=data[0x4E:0x6E].rstrip(b"\0").decode("ascii"))
 
 
+def resolve_sfx(ref, names):
+    """Effect id from a name (Sfx_MenuCursor), a decimal id or a $hex/0x id."""
+    if ref in names:
+        return names.index(ref)
+    try:
+        n = int(ref.replace("$", "0x"), 0)
+    except ValueError:
+        raise ConvError("unknown SFX %r (names: audio.json sfx_names)" % ref)
+    if not 0 <= n < len(names):
+        raise ConvError("SFX id out of range: %r" % ref)
+    return n
+
+
 def cmd_spc(a):
     blobs, _tables, info = build_all()
     man = info["man"]
@@ -786,8 +827,10 @@ def cmd_spc(a):
     state = spc_boot_state(blobs, info)
     jobs = []
     if a.sfx is not None:
-        for n in a.sfx:
-            jobs.append(("sfx_%02d" % n, "SFX %02d" % n, lambda n=n: spc_for_sfx(state, blobs, info, n)))
+        names = sfx_names(man)
+        for ref in a.sfx:
+            n = resolve_sfx(ref, names)
+            jobs.append((names[n], "%s (SFX id $%02X)" % (names[n], n), lambda n=n: spc_for_sfx(state, blobs, info, n)))
     else:
         by_label = {}
         for t in man["tracks"]:
@@ -933,7 +976,7 @@ def main(argv=None):
     s = sub.add_parser("midi"); s.add_argument("--out", default="build/midi"); s.add_argument("labels", nargs="*"); s.set_defaults(fn=cmd_midi)
     s = sub.add_parser("wav"); s.add_argument("--out", default="build/wav"); s.set_defaults(fn=cmd_wav)
     s = sub.add_parser("spc"); s.add_argument("--out", default="build/spc"); s.add_argument("--track", action="append", metavar="LABEL")
-    s.add_argument("--all", action="store_true"); s.add_argument("--sfx", type=int, action="append", metavar="N"); s.set_defaults(fn=cmd_spc)
+    s.add_argument("--all", action="store_true"); s.add_argument("--sfx", action="append", metavar="NAME|ID"); s.set_defaults(fn=cmd_spc)
     s = sub.add_parser("spcdiff"); s.add_argument("a"); s.add_argument("b"); s.set_defaults(fn=cmd_spcdiff)
     s = sub.add_parser("spcmatch"); s.add_argument("paths", nargs="+", help=".spc files or directories (foreign dumps, never committed)"); s.set_defaults(fn=cmd_spcmatch)
     s = sub.add_parser("render"); s.add_argument("spc", help=".spc file or directory"); s.add_argument("--out", default="build/render")

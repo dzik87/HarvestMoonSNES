@@ -11,7 +11,8 @@ assets/audio/
   audio.json                         track table (id -> blob + sample ids), SFX sample ids, common sample list
   samples/<label>.wav + <label>.json 39 BRR samples: 16-bit mono PCM + table fields / loop / encoder overrides
   tracks/<label>.track.txt           25 songs as N-SPC style text
-  sfx/sfx.sfx.txt                    the SFX block (50 sound effects) uploaded to SPC RAM $1600
+  sfx/<Sfx_Name>.sfx.txt             one sound effect (stream body) each; audio.json `sfx_names` lists the 50 names in id order. Together
+                                     they form the SFX block uploaded to SPC RAM $1600
   driver/sAudioSpcDriver.spc.asm     the SPC700 sound engine as assembler source (4054 bytes)
   <label>.bin                        generated, git-ignored
   banks.json                         bank layout: ORG + blob labels in ROM order
@@ -29,7 +30,7 @@ Tests: `tests/test_audio_convert.py`, `tests/test_spc700.py`.
 | `audioconv.py check` | validates every source: WAV <-> BRR is lossless, text round trips, driver reassembles, limits |
 | `audioconv.py midi [--out DIR] [labels]` | export songs as Standard MIDI Files (viewing / rough editing, **export only**) |
 | `audioconv.py wav [--out DIR]` | decode the generated sample blobs to WAV files (for listening) |
-| `audioconv.py spc [--track LABEL ...\|--all\|--sfx N ...] [--out DIR]` | generated `.spc` snapshots (default `build/spc/`, git-ignored): see section 7 |
+| `audioconv.py spc [--track LABEL ...\|--all\|--sfx NAME|ID ...] [--out DIR]` | generated `.spc` snapshots (default `build/spc/`, git-ignored): see section 7 |
 | `audioconv.py render SPC_OR_DIR [--format wav\|mp3] [--seconds N] [--out DIR]` | `.spc` -> WAV/MP3 with `ffmpeg` (needs libgme), default `build/render/` |
 | `audioconv.py spcdiff A.spc B.spc` | compare two snapshots per memory region (generated vs. an emulator dump) |
 | `audioconv.py spcmatch DUMPS...` | identify foreign `.spc` dumps by RAM content and compare their static data with the generated songs (results: `audio.md` section 12) |
@@ -57,7 +58,7 @@ sidecar is authoritative.
 | `adsr1`, `adsr2`, `gain` | DSP envelope registers of the instrument record (the game uses ADSR1 `$FF`/`$86`, GAIN `$B8`) |
 | `tuning_int`, `tuning_frac` | pitch multiplier (integer part, fraction/256) the engine applies to its pitch table |
 | `pad_byte` | the BRR data is padded with this byte to a multiple of 16 bytes (`aAudioSampleSize`); the originals use `$FF` |
-| `append` | `Id39` only: the SFX block (`sfx/sfx.sfx.txt`) is stored behind the BRR data of this blob (first 1008 bytes) |
+| `append` | `Id39` only: the SFX block (`sfx/*.sfx.txt`) is stored behind the BRR data of this blob (first 1008 bytes) |
 | `canon` | encoder tie-break rule, see below |
 | `overrides` | per-block exceptions to the canonical encoding, see below |
 
@@ -145,9 +146,9 @@ as program changes, note length x gate as duration, subroutines expanded, the so
 Tempo (`tempo` x 500/256 ticks per second, 48 ticks per quarter) and the gate/velocity tables are approximations; the text
 format is the source of truth and nothing is read back from MIDI.
 
-## 3. SFX block (`sfx/sfx.sfx.txt`)
+## 3. SFX block (`sfx/<Sfx_Name>.sfx.txt`)
 
-The block uploaded by command 1 to SPC `$1600` ($3F2 bytes): 50 `ptr` words (`sfx_00`..`sfx_49`) followed by the 50 streams, each
+The block uploaded by command 1 to SPC `$1600` ($3F2 bytes): 50 `ptr` words (one per effect, labels = the effect names) followed by the 50 streams, each
 ending in `end` plus one spare `db $00`. The syntax is the track syntax, with absolute SPC addresses behind the labels
 (`$1600` + offset). Differences: `instrument` takes a sample id, and `noise $xx` is the one-parameter `$DF` command.
 The block lives in the tail of the `sAudioSample_Id39` blob; its length must stay `<= $3F4` bytes (the track area starts at `$19F4`),
@@ -174,7 +175,7 @@ common sample ids' consumers. Adding a *new* track or sample id therefore needs 
 ## 6. SPC snapshots for listening and interop (generated, never committed)
 
 `python3 tools/audio/audioconv.py spc --all` writes one `.spc` file (v0.30, ID666 title/game tags from our labels, no foreign
-data) per song into `build/spc/`; `--track sAudioTrack_Spring` selects songs, `--sfx 14` makes a snapshot that starts sound
+data) per song into `build/spc/`; `--track sAudioTrack_Spring` selects songs, `--sfx Sfx_MenuCursor` (or `--sfx 3`) makes a snapshot that starts sound
 effect 14. Any SPC player works (SPCPlay, foobar2000 + Game Music Emu, VLC, `ffmpeg`/`gme` based tools, snes_spc, emulators).
 With an `ffmpeg` built with libgme (the default Linux builds are), `audioconv.py render build/spc --format mp3` makes listening
 copies in `build/render/`.

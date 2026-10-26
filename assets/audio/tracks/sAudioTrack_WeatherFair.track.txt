@@ -1,0 +1,72 @@
+; sAudioTrack_WeatherFair - song data (song list, patterns, voice streams); pointers are labels.
+; Format: docs/formats/audio-sources.md (tools/audio/trackfmt.py).
+
+songlist:
+    pattern pat0
+    jump songlist 255
+    songend
+
+pat0:
+    voices pat0_v0 pat0_v1 pat0_v2 pat0_v3 pat0_v4 pat0_v5 - -
+
+pat0_v0:
+    percbase $0B
+    echo $FF $5A $5A
+    echoparams $05 $3C $01
+    pan $0A
+    tempo $19
+    voicetranspose $06
+    finetune $00
+    volume $DC
+    instrument $00
+    L8:G7V15 D1 D1 D1 D1 D1 D1 D1 D1 D1 D1 D1 D1    ; t=0
+    call sub0 7
+    end
+
+pat0_v1:
+    pan $0A
+    volume $DC
+    instrument $00
+    pan $0F
+    voicetranspose $06
+    L8:G7V15 E1 E1 E1 E1 E1 E1 E1 E1 E1 E1 E1 E1    ; t=0
+    call sub1 7
+
+pat0_v2:
+    instrument $00
+    volume $FA
+    instrument $01
+    pan $14
+    L96:G7V15 C2 tie tie tie tie tie tie tie    ; t=0
+
+pat0_v3:
+    instrument $00
+    volume $FA
+    instrument $01
+    pan $00
+    L96:G7V15 A1 tie tie tie tie tie tie tie    ; t=0
+
+pat0_v4:
+    pan $0A
+    volume $DC
+    instrument $00
+    L8:G7V15 F1 F1 F1 F1 F1 F1 F1 F1 F1 F1 F1 F1    ; t=0
+    call sub2 7
+
+pat0_v5:
+    pan $0A
+    volume $DC
+    instrument $00
+    pan $05
+    L8:G7V15 E1 E1 E1 E1 E1 E1 E1 E1 E1 E1 E1 E1    ; t=0
+    call sub1 7
+    end
+
+sub0:
+    D1 D1 D1 D1 D1 D1 D1 D1 D1 D1 D1 D1 end    ; t=0
+
+sub1:
+    E1 E1 E1 E1 E1 E1 E1 E1 E1 E1 E1 E1 end    ; t=0
+
+sub2:
+    F1 F1 F1 F1 F1 F1 F1 F1 F1 F1 F1 F1 end    ; t=0
