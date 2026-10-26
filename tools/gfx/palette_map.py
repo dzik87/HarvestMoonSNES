@@ -27,6 +27,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools" / "gfx"))
 sys.path.insert(0, str(ROOT / "tools" / "objects"))
 sys.path.insert(0, str(ROOT / "tools" / "maps"))
+sys.path.insert(0, str(ROOT / "tools" / "data"))
 import areadata as AD  # noqa: E402
 sys.path.insert(0, str(ROOT / "tools" / "gfx"))
 import spritebanks as SB  # noqa: E402
@@ -156,10 +157,12 @@ def num(tok):
 
 
 def parse_palette_tables():
-    lines = us_lines(read_lines("assets/tables/blocks/palette_tables.tbl"))
-    a_pal = table_after(lines, "aPalettes", "dl")
-    idx = [num(t) for t in table_after(lines, "aMapPalettesIndexes", "db")]
-    ids = [num(t) for t in table_after(lines, "aMapPalettesId", "db")]
+    """assets/tables/data/palette_tables.csv (US branch) -> (aPalettes labels, aMapPalettesIndexes bytes, aMapPalettesId bytes)."""
+    import tabledata
+    r = tabledata.rows_of("palette_tables", "US", ROOT)
+    a_pal = [row["palette"] for row in r["aPalettes"]]
+    idx = [num(row[c]) for row in r["aMapPalettesIndexes"] for c in ("early", "day", "evening", "dusk", "night", "extra")]
+    ids = [num(row[c]) for row in r["aMapPalettesId"] for c in ("obj_a", "obj_b")]
     return a_pal, idx, ids
 
 

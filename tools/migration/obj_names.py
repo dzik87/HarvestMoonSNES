@@ -6,7 +6,7 @@
                                                 and rename assets/gfx/png/frames/obj_XXXX -> obj_XXXX_<Name> (git mv)
 
 Evidence, strongest first:
-  1. carried item table (assets/tables/blocks/carried_items.tbl): every carried item lists the objects it uses
+  1. carried item table (assets/tables/data/carried_items.csv): every carried item lists the objects it uses
      (icon, held / arc animations, dropped state, thrown arc); the item names come from the table labels and the enum order. high
   2. NPC sprite tables (assets/ai/npc_sprite_tables.txt): per direction objects (0 down, 1 up, 2 right, 3 left); with the
      rendered frames (build/sprites_assembled) they give the walk / idle / direction suffix. medium
@@ -245,11 +245,14 @@ def direction_of(tabs):
 
 
 def carried():
-    t = (ROOT / "assets/tables/blocks/carried_items.tbl").read_text()
+    sys.path.insert(0, str(ROOT / "tools" / "data"))
+    import tabledata
     res = {}
-    for m in re.finditer(r"^aItemCarriedFrames_([0-9A-F]{2})\w*:\n\s+dl \$([0-9A-F]{6})\n((?:\s+db[^\n]*\n)+)", t, re.M):
-        b = [int(x, 16) for x in re.findall(r"\$([0-9A-F]{2})", m.group(3))]
-        res[int(m.group(1), 16)] = (int(m.group(2), 16), [b[j] | b[j + 1] << 8 for j in range(0, len(b) - 2, 3)])
+    for label, rows in tabledata.rows_of("carried_items", "US", ROOT).items():
+        m = re.match(r"aItemCarriedFrames_([0-9A-F]{2})", label)
+        if m:
+            nums = [(int(r["sprite"][1:], 16), int(r["flip"][1:], 16)) for r in rows]
+            res[int(m.group(1), 16)] = (nums[0][0] | nums[0][1] << 16, [sp for sp, _ in nums[1:]])
     return res
 
 

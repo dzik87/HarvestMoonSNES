@@ -1,0 +1,2089 @@
+# Colour animation scripts of the maps (bank $80, played by fPalette_ProcessColorAnimSlots; slots are started by the
+# fPaletteAnim_* routines of data_tables.asm with fCore_Store0x72To0x42AtIndex).
+# A script is a list of steps and ends with a loop or end record:
+#   step   color:bgr555  the colour written into the palette buffer (row / colour index come from the slot)
+#          frames:u8     frames to wait before the next step
+#   loop:  op=$FFFE, target:ptr24  continue with the script at target (all scripts here loop to their own start or to another script)
+#   end:   op=$FFFF  stop the animation
+# Confidence: high (reader: core.asm fPalette_ProcessColorAnimSlots).
+
+@record loop op:u16=$FFFE,target:ptr24
+@record end op:u16=$FFFF
+@label Table_80DD5B
+@columns color:bgr555,frames:u8
+$7F79,$10
+$3A11,$10
+$6A8E,$10
+$5E0D,$10
+$6AD2,$10
+$5E0D,$10
+$6A8E,$10
+$3A11,$10
+loop: Table_80DD5B
+
+@label aPaletteAnimScript_FarmSpring_FarmSummer_T01_Slot5
+@columns color:bgr555,frames:u8
+$6AD2,$10
+$6A8E,$10
+$5E0D,$10
+$6AD2,$10
+$3A11,$10
+$6AD2,$10
+$5E0D,$10
+$6A8E,$10
+loop: aPaletteAnimScript_FarmSpring_FarmSummer_T01_Slot5
+
+@label aPaletteAnimScript_FarmSpring_FarmSummer_T01_Slot6
+@columns color:bgr555,frames:u8
+$6A8E,$10
+$5E0D,$10
+$6AD2,$10
+$3A11,$10
+$5E0D,$10
+$3A11,$10
+$6AD2,$10
+$5E0D,$10
+loop: aPaletteAnimScript_FarmSpring_FarmSummer_T01_Slot6
+
+@label aPaletteAnimScript_FarmSpring_FarmSummer_T01_Slot7
+@columns color:bgr555,frames:u8
+$5E0D,$10
+$6AD2,$10
+$4253,$10
+$5E0D,$10
+$6A8E,$10
+$5E0D,$10
+$4253,$10
+$6AD2,$10
+loop: aPaletteAnimScript_FarmSpring_FarmSummer_T01_Slot7
+
+@label aPaletteAnimScript_FarmSpring_FarmSummer_T2_Slot4
+@columns color:bgr555,frames:u8
+$539D,$10
+$2E12,$10
+$1DFB,$10
+$1D94,$10
+$2EFE,$10
+$1D94,$10
+$1DFB,$10
+$2E12,$10
+loop: aPaletteAnimScript_FarmSpring_FarmSummer_T2_Slot4
+
+@label aPaletteAnimScript_FarmSpring_FarmSummer_T2_Slot5
+@columns color:bgr555,frames:u8
+$2EFE,$10
+$1DFB,$10
+$1D94,$10
+$2EFE,$10
+$2E12,$10
+$2EFE,$10
+$1D94,$10
+$1DFB,$10
+loop: aPaletteAnimScript_FarmSpring_FarmSummer_T2_Slot5
+
+@label aPaletteAnimScript_FarmSpring_FarmSummer_T2_Slot6
+@columns color:bgr555,frames:u8
+$1DFB,$10
+$1D94,$10
+$2EFE,$10
+$2E12,$10
+$1D94,$10
+$2E12,$10
+$2EFE,$10
+$1D94,$10
+loop: aPaletteAnimScript_FarmSpring_FarmSummer_T2_Slot6
+
+@label aPaletteAnimScript_FarmSpring_FarmSummer_T2_Slot7
+@columns color:bgr555,frames:u8
+$1D94,$10
+$2EFE,$10
+$2E74,$10
+$1DFB,$10
+$1DFB,$10
+$1DFB,$10
+$2E74,$10
+$2EFE,$10
+loop: aPaletteAnimScript_FarmSpring_FarmSummer_T2_Slot7
+
+@label aPaletteAnimScript_FarmSpring_FarmSummer_T3_Slot4
+@columns color:bgr555,frames:u8
+$5A52,$10
+$314C,$10
+$356B,$10
+$2908,$10
+$5A52,$10
+$2908,$10
+$356B,$10
+$314C,$10
+loop: aPaletteAnimScript_FarmSpring_FarmSummer_T3_Slot4
+
+@label aPaletteAnimScript_FarmSpring_FarmSummer_T3_Slot5
+@columns color:bgr555,frames:u8
+$45EF,$10
+$49EF,$10
+$2908,$10
+$5A52,$10
+$314C,$10
+$5A52,$10
+$2908,$10
+$49EF,$10
+loop: aPaletteAnimScript_FarmSpring_FarmSummer_T3_Slot5
+
+@label aPaletteAnimScript_FarmSpring_FarmSummer_T3_Slot6
+@columns color:bgr555,frames:u8
+$356B,$10
+$394A,$10
+$5A52,$10
+$314C,$10
+$2908,$10
+$314C,$10
+$5A52,$10
+$394A,$10
+loop: aPaletteAnimScript_FarmSpring_FarmSummer_T3_Slot6
+
+@label aPaletteAnimScript_FarmSpring_FarmSummer_T3_Slot7
+@columns color:bgr555,frames:u8
+$2908,$10
+$5A52,$10
+$314C,$10
+$356B,$10
+$356B,$10
+$356B,$10
+$314C,$10
+$5A52,$10
+loop: aPaletteAnimScript_FarmSpring_FarmSummer_T3_Slot7
+
+@label aPaletteAnimScript_FarmSpring_FarmSummer_T4_Slot4
+@columns color:bgr555,frames:u8
+$456B,$10
+$1CE7,$10
+$28E7,$10
+$2908,$10
+$456B,$10
+$2908,$10
+$28E7,$10
+$1CE7,$10
+loop: aPaletteAnimScript_FarmSpring_FarmSummer_T4_Slot4
+
+@label aPaletteAnimScript_FarmSpring_FarmSummer_T4_Slot5
+@columns color:bgr555,frames:u8
+$3508,$10
+$3508,$10
+$28E7,$10
+$2908,$10
+$456B,$10
+$2908,$10
+$28E7,$10
+$3508,$10
+loop: aPaletteAnimScript_FarmSpring_FarmSummer_T4_Slot5
+
+@label aPaletteAnimScript_FarmSpring_FarmSummer_T4_Slot6
+@columns color:bgr555,frames:u8
+$28E7,$10
+$28E7,$10
+$456B,$10
+$1CE7,$10
+$290B,$10
+$1CE7,$10
+$456B,$10
+$28E7,$10
+loop: aPaletteAnimScript_FarmSpring_FarmSummer_T4_Slot6
+
+@label aPaletteAnimScript_FarmSpring_FarmSummer_T4_Slot7
+@columns color:bgr555,frames:u8
+$28C5,$10
+$456B,$10
+$3508,$10
+$28E7,$10
+$1CE7,$10
+$28E7,$10
+$3508,$10
+$456B,$10
+loop: aPaletteAnimScript_FarmSpring_FarmSummer_T4_Slot7
+
+@label aPaletteAnimScript_FarmFall_T01_Slot4
+@columns color:bgr555,frames:u8
+$7F99,$10
+$320F,$10
+$5A8E,$10
+$524D,$10
+$62D2,$10
+$524D,$10
+$5A8E,$10
+$320F,$10
+loop: aPaletteAnimScript_FarmFall_T01_Slot4
+
+@label aPaletteAnimScript_FarmFall_T01_Slot5
+@columns color:bgr555,frames:u8
+$62D2,$10
+$5A8E,$10
+$524D,$10
+$62D2,$10
+$320F,$10
+$62D2,$10
+$524D,$10
+$5A8E,$10
+loop: aPaletteAnimScript_FarmFall_T01_Slot5
+
+@label aPaletteAnimScript_FarmFall_T01_Slot6
+@columns color:bgr555,frames:u8
+$5A8E,$10
+$524D,$10
+$62D2,$10
+$320F,$10
+$5A8E,$10
+$320F,$10
+$62D2,$10
+$524D,$10
+loop: aPaletteAnimScript_FarmFall_T01_Slot6
+
+@label aPaletteAnimScript_FarmFall_T01_Slot7
+@columns color:bgr555,frames:u8
+$524D,$10
+$62D2,$10
+$320F,$10
+$5A8E,$10
+$524D,$10
+$5A8E,$10
+$320F,$10
+$62D2,$10
+loop: aPaletteAnimScript_FarmFall_T01_Slot7
+
+@label aPaletteAnimScript_FarmFall_T2_Slot4
+@columns color:bgr555,frames:u8
+$23FE,$10
+$2298,$10
+$11DB,$10
+$029B,$10
+$031F,$10
+$029B,$10
+$11DB,$10
+$2298,$10
+loop: aPaletteAnimScript_FarmFall_T2_Slot4
+
+@label aPaletteAnimScript_FarmFall_T2_Slot5
+@columns color:bgr555,frames:u8
+$031F,$10
+$11DC,$10
+$01B6,$10
+$031F,$10
+$2276,$10
+$031F,$10
+$01B6,$10
+$11DC,$10
+loop: aPaletteAnimScript_FarmFall_T2_Slot5
+
+@label aPaletteAnimScript_FarmFall_T2_Slot6
+@columns color:bgr555,frames:u8
+$11DB,$10
+$01B6,$10
+$031F,$10
+$2276,$10
+$125F,$10
+$2276,$10
+$031F,$10
+$01B6,$10
+loop: aPaletteAnimScript_FarmFall_T2_Slot6
+
+@label aPaletteAnimScript_FarmFall_T2_Slot7
+@columns color:bgr555,frames:u8
+$01B6,$10
+$031F,$10
+$2276,$10
+$11DB,$10
+$01B6,$10
+$11DB,$10
+$2276,$10
+$031F,$10
+loop: aPaletteAnimScript_FarmFall_T2_Slot7
+
+@label aPaletteAnimScript_FarmFall_T3_Slot4
+@columns color:bgr555,frames:u8
+$51CD,$10
+$216B,$10
+$496B,$10
+$4587,$10
+$51CD,$10
+$4587,$10
+$496B,$10
+$216B,$10
+loop: aPaletteAnimScript_FarmFall_T3_Slot4
+
+@label aPaletteAnimScript_FarmFall_T3_Slot5
+@columns color:bgr555,frames:u8
+$496B,$10
+$496B,$10
+$4587,$10
+$51CD,$10
+$216B,$10
+$51CD,$10
+$4587,$10
+$496B,$10
+loop: aPaletteAnimScript_FarmFall_T3_Slot5
+
+@label aPaletteAnimScript_FarmFall_T3_Slot6
+@columns color:bgr555,frames:u8
+$11DB,$10
+$01B6,$10
+$031F,$10
+$2276,$10
+$125F,$10
+$2276,$10
+$031F,$10
+$01B6,$10
+loop: aPaletteAnimScript_FarmFall_T3_Slot6
+
+@label aPaletteAnimScript_FarmFall_T3_Slot7
+@columns color:bgr555,frames:u8
+$3507,$10
+$51CD,$10
+$216B,$10
+$696B,$10
+$4587,$10
+$496B,$10
+$216B,$10
+$51CD,$10
+loop: aPaletteAnimScript_FarmFall_T3_Slot7
+
+@label aPaletteAnimScript_FarmFall_T4_Slot4
+@columns color:bgr555,frames:u8
+$6140,$10
+$20C6,$10
+$4104,$10
+$30C0,$10
+$4564,$10
+$30C0,$10
+$4104,$10
+$20C6,$10
+loop: aPaletteAnimScript_FarmFall_T4_Slot4
+
+@label aPaletteAnimScript_FarmFall_T4_Slot5
+@columns color:bgr555,frames:u8
+$4564,$10
+$4104,$10
+$30C0,$10
+$4564,$10
+$20C6,$10
+$4564,$10
+$30C0,$10
+$4104,$10
+loop: aPaletteAnimScript_FarmFall_T4_Slot5
+
+@label aPaletteAnimScript_FarmFall_T4_Slot6
+@columns color:bgr555,frames:u8
+$4104,$10
+$30C0,$10
+$4564,$10
+$20C6,$10
+$4104,$10
+$20C6,$10
+$4564,$10
+$30C0,$10
+loop: aPaletteAnimScript_FarmFall_T4_Slot6
+
+@label aPaletteAnimScript_FarmFall_T4_Slot7
+@columns color:bgr555,frames:u8
+$30C0,$10
+$4564,$10
+$20C6,$10
+$4104,$10
+$30C0,$10
+$4104,$10
+$20C6,$10
+$4564,$10
+loop: aPaletteAnimScript_FarmFall_T4_Slot7
+
+@label aPaletteAnimScript_ImpUnderground_All_Slot4
+@columns color:bgr555,frames:u8
+$0150,$08
+$0153,$08
+$0150,$08
+$0153,$08
+loop: aPaletteAnimScript_ImpUnderground_All_Slot4
+
+@label aPaletteAnimScript_ImpUnderground_All_Slot5
+@columns color:bgr555,frames:u8
+$09D7,$08
+$09D9,$08
+$09D7,$08
+$09D9,$08
+loop: aPaletteAnimScript_ImpUnderground_All_Slot5
+
+@label aPaletteAnimScript_ImpUnderground_All_Slot6
+@columns color:bgr555,frames:u8
+$029F,$08
+$039F,$08
+$029F,$08
+$039F,$08
+loop: aPaletteAnimScript_ImpUnderground_All_Slot6
+
+@label aPaletteAnimScript_ImpUnderground_All_Slot7
+@columns color:bgr555,frames:u8
+$019C,$08
+$029F,$08
+$019C,$08
+$029F,$08
+loop: aPaletteAnimScript_ImpUnderground_All_Slot7
+
+@label aPaletteAnimScript_ImpUnderground_All_Slot8
+@columns color:bgr555,frames:u8
+$0138,$08
+$019C,$08
+$0138,$08
+$019C,$08
+loop: aPaletteAnimScript_ImpUnderground_All_Slot8
+
+@label aPaletteAnimScript_ImpUnderground_All_Slot9
+@columns color:bgr555,frames:u8
+$00EA,$08
+$011C,$08
+$00EA,$08
+$00EA,$08
+loop: aPaletteAnimScript_ImpUnderground_All_Slot9
+
+@label aPaletteAnimScript_ImpUnderground_All_Slot10
+@columns color:bgr555,frames:u8
+$012D,$08
+$012D,$08
+$012D,$08
+$013B,$08
+loop: aPaletteAnimScript_ImpUnderground_All_Slot10
+
+@label aPaletteAnimScript_House1_House2_House3_All_Slot4
+@columns color:bgr555,frames:u8
+$0048,$08
+$000C,$08
+loop: aPaletteAnimScript_House1_House2_House3_All_Slot4
+
+@label aPaletteAnimScript_House1_House2_House3_All_Slot5
+@columns color:bgr555,frames:u8
+$0017,$08
+$001A,$08
+loop: aPaletteAnimScript_House1_House2_House3_All_Slot5
+
+@label aPaletteAnimScript_House1_House2_House3_All_Slot6
+@columns color:bgr555,frames:u8
+$001F,$08
+$017F,$08
+loop: aPaletteAnimScript_House1_House2_House3_All_Slot6
+
+@label aPaletteAnimScript_House1_House2_House3_All_Slot7
+@columns color:bgr555,frames:u8
+$01B4,$08
+$0219,$08
+loop: aPaletteAnimScript_House1_House2_House3_All_Slot7
+
+@label aPaletteAnimScript_MajorHouse_T1234_Slot4
+@columns color:bgr555,frames:u8
+$004C,$08
+$0052,$08
+loop: aPaletteAnimScript_MajorHouse_T1234_Slot4
+
+@label aPaletteAnimScript_MajorHouse_T1234_Slot5
+@columns color:bgr555,frames:u8
+$02BF,$08
+$017F,$08
+loop: aPaletteAnimScript_MajorHouse_T1234_Slot5
+
+@label aPaletteAnimScript_MajorHouse_T1234_Slot6
+@columns color:bgr555,frames:u8
+$009F,$08
+$035F,$08
+loop: aPaletteAnimScript_MajorHouse_T1234_Slot6
+
+@label aPaletteAnimScript_MajorHouse_T1234_Slot7
+@columns color:bgr555,frames:u8
+$029F,$08
+$039F,$08
+loop: aPaletteAnimScript_MajorHouse_T1234_Slot7
+
+@label aPaletteAnimScript_Church_T1234_Slot4
+@columns color:bgr555,frames:u8
+$218D,$08
+$2E10,$08
+$2E10,$08
+$2E10,$08
+loop: aPaletteAnimScript_Church_T1234_Slot4
+
+@label aPaletteAnimScript_Church_T1234_Slot5
+@columns color:bgr555,frames:u8
+$5F9C,$08
+$5F7B,$08
+$4AF9,$08
+$5F7B,$08
+loop: aPaletteAnimScript_Church_T1234_Slot5
+
+@label aPaletteAnimScript_Church_T1234_Slot6
+@columns color:bgr555,frames:u8
+$4AF9,$08
+$4AF9,$08
+$261F,$08
+$4AF9,$08
+loop: aPaletteAnimScript_Church_T1234_Slot6
+
+@label aPaletteAnimScript_Church_T1234_Slot7
+@columns color:bgr555,frames:u8
+$261F,$08
+$261F,$08
+$053E,$08
+$261F,$08
+loop: aPaletteAnimScript_Church_T1234_Slot7
+
+@label aPaletteAnimScript_Church_T1234_Slot8
+@columns color:bgr555,frames:u8
+$053E,$08
+$261F,$08
+$4AF9,$08
+$261F,$08
+loop: aPaletteAnimScript_Church_T1234_Slot8
+
+@label aPaletteAnimScript_Church_T1234_Slot9
+@columns color:bgr555,frames:u8
+$261F,$08
+$4AF9,$08
+$4AF9,$08
+$4AF9,$08
+loop: aPaletteAnimScript_Church_T1234_Slot9
+
+@label aPaletteAnimScript_Church_T1234_Slot10
+@columns color:bgr555,frames:u8
+$03BF,$08
+$261F,$08
+$03BF,$08
+$261F,$08
+loop: aPaletteAnimScript_Church_T1234_Slot10
+
+@label aPaletteAnimScript_Church_T1234_Slot11
+@columns color:bgr555,frames:u8
+$03BF,$08
+$261F,$08
+$053E,$08
+$261F,$08
+loop: aPaletteAnimScript_Church_T1234_Slot11
+
+@label aPaletteAnimScript_FloristBedroom_T1234_Slot4
+@columns color:bgr555,frames:u8
+$123F,$08
+$06BF,$08
+loop: aPaletteAnimScript_FloristBedroom_T1234_Slot4
+
+@label aPaletteAnimScript_FloristBedroom_T1234_Slot5
+@columns color:bgr555,frames:u8
+$0048,$08
+$004D,$08
+loop: aPaletteAnimScript_FloristBedroom_T1234_Slot5
+
+@label aPaletteAnimScript_FloristBedroom_T1234_Slot6
+@columns color:bgr555,frames:u8
+$021F,$08
+$013A,$08
+loop: aPaletteAnimScript_FloristBedroom_T1234_Slot6
+
+@label aPaletteAnimScript_FloristBedroom_T1234_Slot7
+@columns color:bgr555,frames:u8
+$00FA,$08
+$033F,$08
+loop: aPaletteAnimScript_FloristBedroom_T1234_Slot7
+
+@label aPaletteAnimScript_BarBedroom_T1234_Slot4
+@columns color:bgr555,frames:u8
+$0048,$08
+$004F,$08
+loop: aPaletteAnimScript_BarBedroom_T1234_Slot4
+
+@label aPaletteAnimScript_BarBedroom_T1234_Slot5
+@columns color:bgr555,frames:u8
+$1E9A,$08
+$1F1F,$08
+loop: aPaletteAnimScript_BarBedroom_T1234_Slot5
+
+@label aPaletteAnimScript_BarBedroom_T1234_Slot6
+@columns color:bgr555,frames:u8
+$021F,$08
+$0037,$08
+loop: aPaletteAnimScript_BarBedroom_T1234_Slot6
+
+@label aPaletteAnimScript_BarBedroom_T1234_Slot7
+@columns color:bgr555,frames:u8
+$0019,$08
+$0025,$08
+loop: aPaletteAnimScript_BarBedroom_T1234_Slot7
+
+@label aPaletteAnimScript_ToolsShopBedroom_T1234_Slot4
+@columns color:bgr555,frames:u8
+$2E7F,$08
+$233F,$08
+loop: aPaletteAnimScript_ToolsShopBedroom_T1234_Slot4
+
+@label aPaletteAnimScript_ToolsShopBedroom_T1234_Slot5
+@columns color:bgr555,frames:u8
+$0088,$08
+$008C,$08
+loop: aPaletteAnimScript_ToolsShopBedroom_T1234_Slot5
+
+@label aPaletteAnimScript_ToolsShopBedroom_T1234_Slot6
+@columns color:bgr555,frames:u8
+$009D,$08
+$029F,$08
+loop: aPaletteAnimScript_ToolsShopBedroom_T1234_Slot6
+
+@label aPaletteAnimScript_ToolsShopBedroom_T1234_Slot7
+@columns color:bgr555,frames:u8
+$021F,$08
+$011F,$08
+loop: aPaletteAnimScript_ToolsShopBedroom_T1234_Slot7
+
+@label aPaletteAnimScript_AnimalShop_T1234_Slot4
+@columns color:bgr555,frames:u8
+$0090,$08
+$009C,$08
+loop: aPaletteAnimScript_AnimalShop_T1234_Slot4
+
+@label aPaletteAnimScript_AnimalShop_T1234_Slot5
+@columns color:bgr555,frames:u8
+$01DE,$08
+$02BF,$08
+loop: aPaletteAnimScript_AnimalShop_T1234_Slot5
+
+@label aPaletteAnimScript_AnimalShop_T1234_Slot6
+@columns color:bgr555,frames:u8
+$004F,$08
+$00D0,$08
+loop: aPaletteAnimScript_AnimalShop_T1234_Slot6
+
+@label aPaletteAnimScript_TownSpring_DancingS1_EggFestival_T1_Slot4
+@columns color:bgr555,frames:u8
+$5E0F,$10
+$4A54,$10
+$7F17,$10
+loop: aPaletteAnimScript_TownSpring_DancingS1_EggFestival_T1_Slot4
+
+@label aPaletteAnimScript_TownSpring_DancingS1_EggFestival_T1_Slot5
+@columns color:bgr555,frames:u8
+$4A54,$10
+$7F17,$10
+$5E0F,$10
+loop: aPaletteAnimScript_TownSpring_DancingS1_EggFestival_T1_Slot5
+
+@label aPaletteAnimScript_TownSpring_DancingS1_EggFestival_T1_Slot6
+@columns color:bgr555,frames:u8
+$7F17,$10
+$5E0F,$10
+$4A54,$10
+loop: aPaletteAnimScript_TownSpring_DancingS1_EggFestival_T1_Slot6
+
+@label aPaletteAnimScript_TownSpring_T2_Slot4
+@columns color:bgr555,frames:u8
+$4213,$10
+$4257,$10
+$56FC,$10
+loop: aPaletteAnimScript_TownSpring_T2_Slot4
+
+@label aPaletteAnimScript_TownSpring_T2_Slot5
+@columns color:bgr555,frames:u8
+$4257,$10
+$56FC,$10
+$4213,$10
+loop: aPaletteAnimScript_TownSpring_T2_Slot5
+
+@label aPaletteAnimScript_TownSpring_T2_Slot6
+@columns color:bgr555,frames:u8
+$56FC,$10
+$4213,$10
+$4257,$10
+loop: aPaletteAnimScript_TownSpring_T2_Slot6
+
+@label aPaletteAnimScript_TownSpring_T3_Slot4
+@columns color:bgr555,frames:u8
+$3D4A,$10
+$3D4A,$10
+$458C,$10
+loop: aPaletteAnimScript_TownSpring_T3_Slot4
+
+@label aPaletteAnimScript_TownSpring_T3_Slot5
+@columns color:bgr555,frames:u8
+$3D4A,$10
+$458C,$10
+$3D4A,$10
+loop: aPaletteAnimScript_TownSpring_T3_Slot5
+
+@label aPaletteAnimScript_TownSpring_T3_Slot6
+@columns color:bgr555,frames:u8
+$458C,$10
+$3D4A,$10
+$3D4A,$10
+loop: aPaletteAnimScript_TownSpring_T3_Slot6
+
+@label aPaletteAnimScript_TownSpring_T4_Slot4
+@columns color:bgr555,frames:u8
+$3129,$10
+$2908,$10
+$316B,$10
+loop: aPaletteAnimScript_TownSpring_T4_Slot4
+
+@label aPaletteAnimScript_TownSpring_T4_Slot5
+@columns color:bgr555,frames:u8
+$2908,$10
+$316B,$10
+$3129,$10
+loop: aPaletteAnimScript_TownSpring_T4_Slot5
+
+@label aPaletteAnimScript_TownSpring_T4_Slot6
+@columns color:bgr555,frames:u8
+$316B,$10
+$3129,$10
+$2908,$10
+loop: aPaletteAnimScript_TownSpring_T4_Slot6
+
+@label aPaletteAnimScript_TownSummer_T1_Slot4
+@columns color:bgr555,frames:u8
+$6250,$10
+$7271,$10
+$7F79,$10
+loop: aPaletteAnimScript_TownSummer_T1_Slot4
+
+@label aPaletteAnimScript_TownSummer_T1_Slot5
+@columns color:bgr555,frames:u8
+$7271,$10
+$7F79,$10
+$6250,$10
+loop: aPaletteAnimScript_TownSummer_T1_Slot5
+
+@label aPaletteAnimScript_TownSummer_T1_Slot6
+@columns color:bgr555,frames:u8
+$7F79,$10
+$6250,$10
+$7271,$10
+loop: aPaletteAnimScript_TownSummer_T1_Slot6
+
+@label aPaletteAnimScript_TownSummer_T2_Slot4
+@columns color:bgr555,frames:u8
+$5E78,$10
+$5654,$10
+$7F19,$10
+loop: aPaletteAnimScript_TownSummer_T2_Slot4
+
+@label aPaletteAnimScript_TownSummer_T2_Slot5
+@columns color:bgr555,frames:u8
+$5654,$10
+$7F19,$10
+$5E78,$10
+loop: aPaletteAnimScript_TownSummer_T2_Slot5
+
+@label aPaletteAnimScript_TownSummer_T2_Slot6
+@columns color:bgr555,frames:u8
+$7F19,$10
+$5E78,$10
+$5654,$10
+loop: aPaletteAnimScript_TownSummer_T2_Slot6
+
+@label aPaletteAnimScript_TownSummer_T3_Slot4
+@columns color:bgr555,frames:u8
+$3D4A,$10
+$3D4A,$10
+$458C,$10
+loop: aPaletteAnimScript_TownSummer_T3_Slot4
+
+@label aPaletteAnimScript_TownSummer_T3_Slot5
+@columns color:bgr555,frames:u8
+$3D4A,$10
+$458C,$10
+$3D4A,$10
+loop: aPaletteAnimScript_TownSummer_T3_Slot5
+
+@label aPaletteAnimScript_TownSummer_T3_Slot6
+@columns color:bgr555,frames:u8
+$458C,$10
+$3D4A,$10
+$3D4A,$10
+loop: aPaletteAnimScript_TownSummer_T3_Slot6
+
+@label aPaletteAnimScript_TownSummer_T4_Slot4
+@columns color:bgr555,frames:u8
+$30E7,$10
+$30E7,$10
+$3529,$10
+loop: aPaletteAnimScript_TownSummer_T4_Slot4
+
+@label aPaletteAnimScript_TownSummer_T4_Slot5
+@columns color:bgr555,frames:u8
+$30E7,$10
+$3529,$10
+$30E7,$10
+loop: aPaletteAnimScript_TownSummer_T4_Slot5
+
+@label aPaletteAnimScript_TownSummer_T4_Slot6
+@columns color:bgr555,frames:u8
+$3529,$10
+$30E7,$10
+$30E7,$10
+loop: aPaletteAnimScript_TownSummer_T4_Slot6
+
+@label aPaletteAnimScript_TownFall_NYPublicSquare_T1_Slot4
+@columns color:bgr555,frames:u8
+$4A91,$10
+$62CE,$10
+$6374,$10
+loop: aPaletteAnimScript_TownFall_NYPublicSquare_T1_Slot4
+
+@label aPaletteAnim_Row2Col0E_80E455
+@columns color:bgr555,frames:u8
+$62CE,$10
+$6374,$10
+$4A91,$10
+loop: aPaletteAnim_Row2Col0E_80E455
+
+@label aPaletteAnim_Row2Col0F_80E463
+@columns color:bgr555,frames:u8
+$6374,$10
+$4A91,$10
+$62CE,$10
+loop: aPaletteAnim_Row2Col0F_80E463
+
+@label aPaletteAnim_Row2Col06_80E471
+@columns color:bgr555,frames:u8
+$3694,$10
+$3254,$10
+$3AFC,$10
+loop: aPaletteAnim_Row2Col06_80E471
+
+@label aPaletteAnim_Row2Col0E_80E47F
+@columns color:bgr555,frames:u8
+$3254,$10
+$3AFC,$10
+$3694,$10
+loop: aPaletteAnim_Row2Col0E_80E47F
+
+@label aPaletteAnim_Row2Col0F_80E48D
+@columns color:bgr555,frames:u8
+$3AEC,$10
+$3694,$10
+$3254,$10
+loop: aPaletteAnim_Row2Col0F_80E48D
+
+@label aPaletteAnim_Row2Col06_80E49B
+@columns color:bgr555,frames:u8
+$2DCB,$10
+$2DCB,$10
+$360E,$10
+loop: aPaletteAnim_Row2Col06_80E49B
+
+@label aPaletteAnim_Row2Col0E_80E4A9
+@columns color:bgr555,frames:u8
+$2DCB,$10
+$360E,$10
+$2DCB,$10
+loop: aPaletteAnim_Row2Col0E_80E4A9
+
+@label aPaletteAnim_Row2Col0F_80E4B7
+@columns color:bgr555,frames:u8
+$360E,$10
+$2DCB,$10
+$2DCB,$10
+loop: aPaletteAnim_Row2Col0F_80E4B7
+
+@label aPaletteAnim_Row2Col06_80E4C5
+@columns color:bgr555,frames:u8
+$30E7,$10
+$3127,$10
+$356A,$10
+loop: aPaletteAnim_Row2Col06_80E4C5
+
+@label aPaletteAnim_Row2Col0E_80E4D3
+@columns color:bgr555,frames:u8
+$3127,$10
+$356A,$10
+$30E7,$10
+loop: aPaletteAnim_Row2Col0E_80E4D3
+
+@label aPaletteAnim_Row2Col0F_80E4E1
+@columns color:bgr555,frames:u8
+$356A,$10
+$30E7,$10
+$3127,$10
+loop: aPaletteAnim_Row2Col0F_80E4E1
+
+@label aPaletteAnim_Row2Col03_80E4EF
+@columns color:bgr555,frames:u8
+$2162,$0A
+$2190,$0A
+$25D2,$10
+$2190,$0A
+loop: aPaletteAnim_Row2Col03_80E4EF
+
+@label aPaletteAnim_Row2Col04_80E500
+@columns color:bgr555,frames:u8
+$0E58,$0A
+$129A,$0A
+$16DC,$10
+$129A,$0A
+loop: aPaletteAnim_Row2Col04_80E500
+
+@label aPaletteAnim_Row2Col05_80E511
+@columns color:bgr555,frames:u8
+$377D,$0A
+$479F,$0A
+$53DF,$10
+$479F,$0A
+loop: aPaletteAnim_Row2Col05_80E511
+
+@label aPaletteAnim_Row2Col07_80E522
+@columns color:bgr555,frames:u8
+$092C,$0A
+$116F,$0A
+$11B1,$10
+$116F,$0A
+loop: aPaletteAnim_Row2Col07_80E522
+
+@label aPaletteAnim_Row2Col03_80E533
+@columns color:bgr555,frames:u8
+$0D8E,$0A
+$0DB1,$0A
+$0DB4,$10
+$0DB1,$0A
+loop: aPaletteAnim_Row2Col03_80E533
+
+@label aPaletteAnim_Row2Col04_80E544
+@columns color:bgr555,frames:u8
+$36D7,$0A
+$3719,$0A
+$377F,$10
+$3719,$0A
+loop: aPaletteAnim_Row2Col04_80E544
+
+@label aPaletteAnim_Row2Col05_80E555
+@columns color:bgr555,frames:u8
+$27DE,$0A
+$3FFF,$0A
+$53FF,$10
+$3FFF,$0A
+loop: aPaletteAnim_Row2Col05_80E555
+
+@label aPaletteAnim_Row2Col07_80E566
+@columns color:bgr555,frames:u8
+$196E,$0A
+$1970,$0A
+$1992,$10
+$1970,$0A
+loop: aPaletteAnim_Row2Col07_80E566
+
+@label aPaletteAnim_Row2Col03_80E577
+@columns color:bgr555,frames:u8
+$150A,$0A
+$1D4F,$0A
+$1D90,$10
+$1D4F,$0A
+loop: aPaletteAnim_Row2Col03_80E577
+
+@label aPaletteAnim_Row2Col04_80E588
+@columns color:bgr555,frames:u8
+$0A18,$0A
+$0A1C,$0A
+$0A9F,$10
+$0A1C,$0A
+loop: aPaletteAnim_Row2Col04_80E588
+
+@label aPaletteAnim_Row2Col05_80E599
+@columns color:bgr555,frames:u8
+$2F7C,$0A
+$2FBE,$0A
+$4BDF,$10
+$2FBE,$0A
+loop: aPaletteAnim_Row2Col05_80E599
+
+@label aPaletteAnim_Row2Col07_80E5AA
+@columns color:bgr555,frames:u8
+$090C,$0A
+$116E,$0A
+$1190,$10
+$116E,$0A
+loop: aPaletteAnim_Row2Col07_80E5AA
+
+@label aPaletteAnim_Row2Col03_80E5BB
+@columns color:bgr555,frames:u8
+$1CE8,$0A
+$210A,$0A
+$216F,$10
+$210A,$0A
+loop: aPaletteAnim_Row2Col03_80E5BB
+
+@label aPaletteAnim_Row2Col04_80E5CC
+@columns color:bgr555,frames:u8
+$29F3,$0A
+$2A19,$0A
+$327B,$10
+$2A19,$0A
+loop: aPaletteAnim_Row2Col04_80E5CC
+
+@label aPaletteAnim_Row2Col05_80E5DD
+@columns color:bgr555,frames:u8
+$3EB8,$0A
+$3F3D,$0A
+$437F,$10
+$3F3D,$0A
+loop: aPaletteAnim_Row2Col05_80E5DD
+
+@label aPaletteAnim_Row2Col07_80E5EE
+@columns color:bgr555,frames:u8
+$1D6C,$0A
+$218E,$0A
+$25AF,$10
+$218E,$0A
+loop: aPaletteAnim_Row2Col07_80E5EE
+
+@label aPaletteAnim_Row3Col08_80E5FF
+@columns color:bgr555,frames:u8
+$7F3B,$10
+$6EB5,$10
+$5E2E,$0F
+$51F0,$10
+$5233,$0C
+$6EB7,$10
+loop: aPaletteAnim_Row3Col08_80E5FF
+
+@label aPaletteAnim_Row3Col09_80E616
+@columns color:bgr555,frames:u8
+$6EB7,$10
+$5E2E,$10
+$51F0,$0F
+$7F39,$10
+$51F0,$0C
+$5233,$10
+loop: aPaletteAnim_Row3Col09_80E616
+
+@label aPaletteAnim_Row3Col0A_80E62D
+@columns color:bgr555,frames:u8
+$5E2E,$10
+$51F0,$10
+$7F3B,$0F
+$6EB7,$10
+$7F39,$0C
+$4DD1,$10
+loop: aPaletteAnim_Row3Col0A_80E62D
+
+@label aPaletteAnim_Row3Col0B_80E644
+@columns color:bgr555,frames:u8
+$51F0,$10
+$7F39,$10
+$6EB7,$0F
+$5E2E,$10
+$6EB7,$0C
+$7F39,$10
+loop: aPaletteAnim_Row3Col0B_80E644
+
+@label aPaletteAnim_Row3Col0C_80E65B
+@columns color:bgr555,frames:u8
+$41F0,$10
+$3DF1,$10
+$4211,$0F
+$41F1,$10
+$4211,$0C
+$3DF1,$10
+loop: aPaletteAnim_Row3Col0C_80E65B
+
+@label aPaletteAnim_Row3Col08_80E672
+@columns color:bgr555,frames:u8
+$537B,$10
+$42BB,$10
+$3234,$0F
+$3233,$10
+$3234,$0C
+$42BB,$10
+loop: aPaletteAnim_Row3Col08_80E672
+
+@label aPaletteAnim_Row3Col09_80E689
+@columns color:bgr555,frames:u8
+$42B8,$10
+$3234,$10
+$3233,$0F
+$42DB,$10
+$3233,$0C
+$3234,$10
+loop: aPaletteAnim_Row3Col09_80E689
+
+@label aPaletteAnim_Row3Col0A_80E6A0
+@columns color:bgr555,frames:u8
+$3234,$10
+$3233,$10
+$42DB,$0F
+$32B8,$10
+$42DB,$0C
+$3233,$10
+loop: aPaletteAnim_Row3Col0A_80E6A0
+
+@label aPaletteAnim_Row3Col0B_80E6B7
+@columns color:bgr555,frames:u8
+$3233,$10
+$42DB,$10
+$32B8,$0F
+$3234,$10
+$32B8,$0C
+$42DB,$10
+loop: aPaletteAnim_Row3Col0B_80E6B7
+
+@label aPaletteAnim_Row3Col0C_80E6CE
+@columns color:bgr555,frames:u8
+$21B1,$10
+$25D1,$10
+$29D1,$0F
+$3234,$10
+$29D1,$0C
+$25D1,$10
+loop: aPaletteAnim_Row3Col0C_80E6CE
+
+@label aPaletteAnim_Row3Col08_80E6E5
+@columns color:bgr555,frames:u8
+$3213,$10
+$1D8C,$10
+$29CF,$0F
+$2E11,$10
+$29CF,$0C
+$1D8C,$10
+loop: aPaletteAnim_Row3Col08_80E6E5
+
+@label aPaletteAnim_Row3Col09_80E6FC
+@columns color:bgr555,frames:u8
+$2DF1,$10
+$3233,$10
+$1D8C,$0F
+$29CF,$10
+$1D8C,$0C
+$3233,$10
+loop: aPaletteAnim_Row3Col09_80E6FC
+
+@label aPaletteAnim_Row3Col0A_80E713
+@columns color:bgr555,frames:u8
+$21AF,$10
+$2E11,$10
+$3233,$0F
+$1D8C,$10
+$3233,$0C
+$2E11,$10
+loop: aPaletteAnim_Row3Col0A_80E713
+
+@label aPaletteAnim_Row3Col0B_80E72A
+@columns color:bgr555,frames:u8
+$1D6C,$10
+$29CF,$10
+$2E11,$0F
+$3233,$10
+$2E11,$0C
+$29CF,$10
+loop: aPaletteAnim_Row3Col0B_80E72A
+
+@label aPaletteAnim_Row3Col0C_80E741
+@columns color:bgr555,frames:u8
+$1D4C,$10
+$1D4C,$10
+$214C,$0F
+$214C,$10
+$214C,$0C
+$1D4C,$10
+loop: aPaletteAnim_Row3Col0C_80E741
+
+@label aPaletteAnim_Row3Col08_80E758
+@columns color:bgr555,frames:u8
+$218B,$10
+$192A,$10
+$1D4B,$0F
+$1D4B,$10
+$1D4B,$0C
+$192A,$10
+loop: aPaletteAnim_Row3Col08_80E758
+
+@label aPaletteAnim_Row3Col09_80E76F
+@columns color:bgr555,frames:u8
+$1D4B,$10
+$216B,$10
+$192A,$0F
+$1D4B,$10
+$192A,$0C
+$216B,$10
+loop: aPaletteAnim_Row3Col09_80E76F
+
+@label aPaletteAnim_Row3Col0A_80E786
+@columns color:bgr555,frames:u8
+$1D2A,$10
+$1D48,$10
+$214B,$0F
+$192A,$10
+$214B,$0C
+$1D48,$10
+loop: aPaletteAnim_Row3Col0A_80E786
+
+@label aPaletteAnim_Row3Col0B_80E79D
+@columns color:bgr555,frames:u8
+$1928,$10
+$1D4B,$10
+$1D4B,$0F
+$1D6B,$10
+$1D4B,$0C
+$1D4B,$10
+loop: aPaletteAnim_Row3Col0B_80E79D
+
+@label aPaletteAnim_Row3Col08_80E7B4
+@columns color:bgr555,frames:u8
+$7F52,$10
+$5D66,$10
+$7D86,$0F
+$7E4B,$10
+$7D86,$0C
+$5D66,$10
+loop: aPaletteAnim_Row3Col08_80E7B4
+
+@label aPaletteAnim_Row3Col09_80E7CB
+@columns color:bgr555,frames:u8
+$7E4B,$10
+$4F32,$10
+$5D66,$0F
+$7D86,$10
+$5D66,$0C
+$7F32,$10
+loop: aPaletteAnim_Row3Col09_80E7CB
+
+@label aPaletteAnim_Row3Col0A_80E7E2
+@columns color:bgr555,frames:u8
+$7D86,$10
+$7E4B,$10
+$7F32,$0F
+$5D66,$10
+$7F32,$0C
+$7E4B,$10
+loop: aPaletteAnim_Row3Col0A_80E7E2
+
+@label aPaletteAnim_Row3Col0B_80E7F9
+@columns color:bgr555,frames:u8
+$5D66,$10
+$7D86,$10
+$7E4B,$0F
+$7F32,$10
+$7E4B,$0C
+$7D86,$10
+loop: aPaletteAnim_Row3Col0B_80E7F9
+
+@label aPaletteAnim_Row3Col0C_80E810
+@columns color:bgr555,frames:u8
+$5D66,$10
+$6186,$10
+$6586,$0F
+$69A6,$10
+$6586,$0C
+$6186,$10
+loop: aPaletteAnim_Row3Col0C_80E810
+
+@label aPaletteAnim_Row3Col08_80E827
+@columns color:bgr555,frames:u8
+$3F9E,$10
+$169E,$10
+$1218,$0F
+$1174,$10
+$1218,$0C
+$169E,$10
+loop: aPaletteAnim_Row3Col08_80E827
+
+@label aPaletteAnim_Row3Col09_80E83E
+@columns color:bgr555,frames:u8
+$169E,$10
+$1218,$10
+$1174,$0F
+$2AFA,$10
+$1174,$0C
+$1218,$10
+loop: aPaletteAnim_Row3Col09_80E83E
+
+@label aPaletteAnim_Row3Col0A_80E855
+@columns color:bgr555,frames:u8
+$1218,$10
+$1174,$10
+$3F9E,$0F
+$169E,$10
+$3F9E,$0C
+$1174,$10
+loop: aPaletteAnim_Row3Col0A_80E855
+
+@label aPaletteAnim_Row3Col0B_80E86C
+@columns color:bgr555,frames:u8
+$1174,$10
+$267B,$10
+$169E,$0F
+$1218,$10
+$169E,$0C
+$267B,$10
+loop: aPaletteAnim_Row3Col0B_80E86C
+
+@label aPaletteAnim_Row3Col0C_80E883
+@columns color:bgr555,frames:u8
+$1DB1,$10
+$1DB2,$10
+$1DB3,$0F
+$1DB3,$10
+$1DB3,$0C
+$1DB2,$10
+loop: aPaletteAnim_Row3Col0C_80E883
+
+@label aPaletteAnim_Row3Col08_80E89A
+@columns color:bgr555,frames:u8
+$0DB3,$10
+$09B3,$10
+$0991,$0F
+$0172,$10
+$0991,$0C
+$09B3,$10
+loop: aPaletteAnim_Row3Col08_80E89A
+
+@label aPaletteAnim_Row3Col09_80E8B1
+@columns color:bgr555,frames:u8
+$09B3,$10
+$0991,$10
+$0172,$0F
+$0DB3,$10
+$0172,$0C
+$0991,$10
+loop: aPaletteAnim_Row3Col09_80E8B1
+
+@label aPaletteAnim_Row3Col0A_80E8C8
+@columns color:bgr555,frames:u8
+$0991,$10
+$0172,$10
+$0DB3,$0F
+$09B3,$10
+$0DB3,$0C
+$0172,$10
+loop: aPaletteAnim_Row3Col0A_80E8C8
+
+@label aPaletteAnim_Row3Col0B_80E8DF
+@columns color:bgr555,frames:u8
+$0172,$10
+$0DB3,$10
+$09B3,$0F
+$0991,$10
+$09B3,$0C
+$0DB3,$10
+loop: aPaletteAnim_Row3Col0B_80E8DF
+
+@label aPaletteAnim_Row3Col08_80E8F6
+@columns color:bgr555,frames:u8
+$194E,$10
+$110C,$10
+$110B,$0F
+$110B,$10
+$110B,$0C
+$110C,$10
+loop: aPaletteAnim_Row3Col08_80E8F6
+
+@label aPaletteAnim_Row3Col09_80E90D
+@columns color:bgr555,frames:u8
+$110C,$10
+$110B,$10
+$110B,$0F
+$194E,$10
+$110B,$0C
+$110B,$10
+loop: aPaletteAnim_Row3Col09_80E90D
+
+@label aPaletteAnim_Row3Col0A_80E924
+@columns color:bgr555,frames:u8
+$110B,$10
+$110B,$10
+$194E,$0F
+$110C,$10
+$194E,$0C
+$110B,$10
+loop: aPaletteAnim_Row3Col0A_80E924
+
+@label aPaletteAnim_Row3Col0B_80E93B
+@columns color:bgr555,frames:u8
+$110B,$10
+$194E,$10
+$110C,$0F
+$110B,$10
+$110C,$0C
+$194E,$10
+loop: aPaletteAnim_Row3Col0B_80E93B
+
+@label aPaletteAnim_Row3Col06_80E952
+@columns color:bgr555,frames:u8
+$21AC,$10
+$1D8B,$10
+$0D2B,$0F
+$0D2B,$10
+$0D2B,$0C
+$1D8B,$10
+loop: aPaletteAnim_Row3Col06_80E952
+
+@label aPaletteAnim_Row3Col07_80E969
+@columns color:bgr555,frames:u8
+$0D2B,$10
+$0D2B,$10
+$1D8B,$0F
+$21AC,$10
+$1D8B,$0C
+$0D2B,$10
+loop: aPaletteAnim_Row3Col07_80E969
+
+@label aPaletteAnim_Row3Col08_80E980
+@columns color:bgr555,frames:u8
+$32FE,$10
+$21EE,$10
+$29D1,$0F
+$2214,$10
+$29D1,$0C
+$21EE,$10
+loop: aPaletteAnim_Row3Col08_80E980
+
+@label aPaletteAnim_Row3Col09_80E997
+@columns color:bgr555,frames:u8
+$29F5,$10
+$2E76,$10
+$21EE,$0F
+$29D1,$10
+$21EE,$0C
+$2E76,$10
+loop: aPaletteAnim_Row3Col09_80E997
+
+@label aPaletteAnim_Row3Col0A_80E9AE
+@columns color:bgr555,frames:u8
+$15F4,$10
+$3214,$10
+$2E33,$0F
+$21EE,$10
+$2E33,$0C
+$3214,$10
+loop: aPaletteAnim_Row3Col0A_80E9AE
+
+@label aPaletteAnim_Row3Col0B_80E9C5
+@columns color:bgr555,frames:u8
+$1DD3,$10
+$29D1,$10
+$2E34,$0F
+$1DD1,$10
+$2E34,$0C
+$29D1,$10
+loop: aPaletteAnim_Row3Col0B_80E9C5
+
+@label aPaletteAnim_Row3Col0C_80E9DC
+@columns color:bgr555,frames:u8
+$25EF,$10
+$25CE,$10
+$25AE,$0F
+$25AD,$10
+$25AE,$0C
+$25CE,$10
+loop: aPaletteAnim_Row3Col0C_80E9DC
+
+@label aPaletteAnim_Row3Col06_80E9F3
+@columns color:bgr555,frames:u8
+$214E,$10
+$1D4F,$10
+$1DB4,$0F
+$1DB4,$10
+$1DB4,$0C
+$1D4F,$10
+loop: aPaletteAnim_Row3Col06_80E9F3
+
+@label aPaletteAnim_Row3Col07_80EA0A
+@columns color:bgr555,frames:u8
+$1DB4,$10
+$1D72,$10
+$1D72,$0F
+$1D4F,$10
+$1D72,$0C
+$1D72,$10
+loop: aPaletteAnim_Row3Col07_80EA0A
+
+@label aPaletteAnim_Row3Col08_80EA21
+@columns color:bgr555,frames:u8
+$377F,$10
+$21B0,$10
+$161C,$0F
+$1A59,$10
+$161C,$0C
+$21B0,$10
+loop: aPaletteAnim_Row3Col08_80EA21
+
+@label aPaletteAnim_Row3Col09_80EA38
+@columns color:bgr555,frames:u8
+$1A59,$10
+$1A9B,$10
+$21B0,$0F
+$161C,$10
+$21B0,$0C
+$1A9B,$10
+loop: aPaletteAnim_Row3Col09_80EA38
+
+@label aPaletteAnim_Row3Col0A_80EA4F
+@columns color:bgr555,frames:u8
+$161C,$10
+$1A59,$10
+$1B1F,$0F
+$21B0,$10
+$1B1F,$0C
+$1A59,$10
+loop: aPaletteAnim_Row3Col0A_80EA4F
+
+@label aPaletteAnim_Row3Col0B_80EA66
+@columns color:bgr555,frames:u8
+$0994,$10
+$161C,$10
+$1A59,$0F
+$1A9B,$10
+$1A59,$0C
+$161C,$10
+loop: aPaletteAnim_Row3Col0B_80EA66
+
+@label aPaletteAnim_Row3Col0C_80EA7D
+@columns color:bgr555,frames:u8
+$2190,$10
+$21B0,$10
+$2191,$0F
+$21B1,$10
+$2191,$0C
+$21B0,$10
+loop: aPaletteAnim_Row3Col0C_80EA7D
+
+@label aPaletteAnim_Row3Col08_80EA94
+@columns color:bgr555,frames:u8
+$1D4C,$10
+$218E,$10
+$21B0,$0F
+$21B2,$10
+$21B0,$0C
+$218E,$10
+loop: aPaletteAnim_Row3Col08_80EA94
+
+@label aPaletteAnim_Row3Col09_80EAAB
+@columns color:bgr555,frames:u8
+$21B2,$10
+$1D4C,$10
+$218E,$0F
+$21B0,$10
+$218E,$0C
+$1D4C,$10
+loop: aPaletteAnim_Row3Col09_80EAAB
+
+@label aPaletteAnim_Row3Col0A_80EAC2
+@columns color:bgr555,frames:u8
+$21B0,$10
+$21B2,$10
+$1D4C,$0F
+$218E,$10
+$1D4C,$0C
+$21B2,$10
+loop: aPaletteAnim_Row3Col0A_80EAC2
+
+@label aPaletteAnim_Row3Col0B_80EAD9
+@columns color:bgr555,frames:u8
+$218E,$10
+$21B0,$10
+$21B2,$0F
+$1D4C,$10
+$21B2,$0C
+$21B0,$10
+loop: aPaletteAnim_Row3Col0B_80EAD9
+
+@label aPaletteAnim_Row3Col08_80EAF0
+@columns color:bgr555,frames:u8
+$1D6C,$10
+$1509,$10
+$1D2C,$0F
+$1D4C,$10
+$1D2C,$0C
+$1509,$10
+loop: aPaletteAnim_Row3Col08_80EAF0
+
+@label aPaletteAnim_Row3Col09_80EB07
+@columns color:bgr555,frames:u8
+$1D4C,$10
+$1D6C,$10
+$1509,$0F
+$1D2C,$10
+$1509,$0C
+$1D6C,$10
+loop: aPaletteAnim_Row3Col09_80EB07
+
+@label aPaletteAnim_Row3Col0A_80EB1E
+@columns color:bgr555,frames:u8
+$1D2C,$10
+$1D4C,$10
+$1D6C,$0F
+$1509,$10
+$1D6C,$0C
+$1D4C,$10
+loop: aPaletteAnim_Row3Col0A_80EB1E
+
+@label aPaletteAnim_Row3Col0B_80EB35
+@columns color:bgr555,frames:u8
+$1509,$10
+$1D2C,$10
+$1D4C,$0F
+$1D6C,$10
+$1D4C,$0C
+$1D2C,$10
+loop: aPaletteAnim_Row3Col0B_80EB35
+
+@label aPaletteAnim_Row4Col0A_80EB4C
+@columns color:bgr555,frames:u8
+$77DB,$10
+$7398,$10
+$7398,$10
+$7398,$10
+loop: aPaletteAnim_Row4Col0A_80EB4C
+
+@label aPaletteAnim_Row4Col0B_80EB5D
+@columns color:bgr555,frames:u8
+$7398,$10
+$7398,$10
+$77DB,$10
+$7398,$10
+loop: aPaletteAnim_Row4Col0B_80EB5D
+
+@label aPaletteAnim_Row4Col0A_80EB6E
+@columns color:bgr555,frames:u8
+$5F7D,$10
+$4B3B,$10
+$4B3B,$10
+$4B3B,$10
+loop: aPaletteAnim_Row4Col0A_80EB6E
+
+@label aPaletteAnim_Row4Col0B_80EB7F
+@columns color:bgr555,frames:u8
+$4B3B,$10
+$4B3B,$10
+$5F7D,$10
+$4B3B,$10
+loop: aPaletteAnim_Row4Col0B_80EB7F
+
+@label aPaletteAnim_Row4Col0A_80EB90
+@columns color:bgr555,frames:u8
+$3295,$10
+$2E52,$10
+$2E52,$10
+$2E52,$10
+loop: aPaletteAnim_Row4Col0A_80EB90
+
+@label aPaletteAnim_Row4Col0B_80EBA1
+@columns color:bgr555,frames:u8
+$2E52,$10
+$2E52,$10
+$3295,$10
+$2E52,$10
+loop: aPaletteAnim_Row4Col0B_80EBA1
+
+@label aPaletteAnim_Row4Col0A_80EBB2
+@columns color:bgr555,frames:u8
+$314A,$10
+$2D29,$10
+$2D29,$10
+$2D29,$10
+loop: aPaletteAnim_Row4Col0A_80EBB2
+
+@label aPaletteAnim_Row4Col0B_80EBC3
+@columns color:bgr555,frames:u8
+$2D29,$10
+$2D29,$10
+$314A,$10
+$2D29,$10
+loop: aPaletteAnim_Row4Col0B_80EBC3
+
+@label aPaletteAnim_Row4Col0A_80EBD4
+@columns color:bgr555,frames:u8
+$7799,$10
+$6334,$10
+$6334,$10
+$6334,$10
+loop: aPaletteAnim_Row4Col0A_80EBD4
+
+@label aPaletteAnim_Row4Col0B_80EBE5
+@columns color:bgr555,frames:u8
+$6334,$10
+$6334,$10
+$77DB,$10
+$6334,$10
+loop: aPaletteAnim_Row4Col0B_80EBE5
+
+@label aPaletteAnim_Row4Col0A_80EBF6
+@columns color:bgr555,frames:u8
+$677E,$10
+$471C,$10
+$471C,$10
+$471C,$10
+loop: aPaletteAnim_Row4Col0A_80EBF6
+
+@label aPaletteAnim_Row4Col0B_80EC07
+@columns color:bgr555,frames:u8
+$471C,$10
+$471C,$10
+$677E,$10
+$471C,$10
+loop: aPaletteAnim_Row4Col0B_80EC07
+
+@label aPaletteAnim_Row4Col0A_80EC18
+@columns color:bgr555,frames:u8
+$5694,$10
+$4E31,$10
+$4E31,$10
+$4E31,$10
+loop: aPaletteAnim_Row4Col0A_80EC18
+
+@label aPaletteAnim_Row4Col0B_80EC29
+@columns color:bgr555,frames:u8
+$4E31,$10
+$4E31,$10
+$5694,$10
+$4E31,$10
+loop: aPaletteAnim_Row4Col0B_80EC29
+
+@label aPaletteAnim_Row4Col0A_80EC3A
+@columns color:bgr555,frames:u8
+$498C,$10
+$414A,$10
+$414A,$10
+$414A,$10
+loop: aPaletteAnim_Row4Col0A_80EC3A
+
+@label aPaletteAnim_Row4Col0B_80EC4B
+@columns color:bgr555,frames:u8
+$414A,$10
+$414A,$10
+$498C,$10
+$414A,$10
+loop: aPaletteAnim_Row4Col0B_80EC4B
+
+@label aPaletteAnim_Row4Col0A_80EC5C
+@columns color:bgr555,frames:u8
+$7376,$10
+$6334,$10
+$6334,$10
+$6334,$10
+loop: aPaletteAnim_Row4Col0A_80EC5C
+
+@label aPaletteAnim_Row4Col0B_80EC6D
+@columns color:bgr555,frames:u8
+$6334,$10
+$6334,$10
+$7376,$10
+$6334,$10
+loop: aPaletteAnim_Row4Col0B_80EC6D
+
+@label aPaletteAnim_Row4Col0A_80EC7E
+@columns color:bgr555,frames:u8
+$537F,$10
+$42FB,$10
+$42FB,$10
+$42FB,$10
+loop: aPaletteAnim_Row4Col0A_80EC7E
+
+@label aPaletteAnim_Row4Col0B_80EC8F
+@columns color:bgr555,frames:u8
+$42FB,$10
+$42FB,$10
+$537F,$10
+$42FB,$10
+loop: aPaletteAnim_Row4Col0B_80EC8F
+
+@label aPaletteAnim_Row4Col0A_80ECA0
+@columns color:bgr555,frames:u8
+$4671,$10
+$3E31,$10
+$3E31,$10
+$3E31,$10
+loop: aPaletteAnim_Row4Col0A_80ECA0
+
+@label aPaletteAnim_Row4Col0B_80ECB1
+@columns color:bgr555,frames:u8
+$3E31,$10
+$3E31,$10
+$4671,$10
+$3E31,$10
+loop: aPaletteAnim_Row4Col0B_80ECB1
+
+@label aPaletteAnim_Row4Col0A_80ECC2
+@columns color:bgr555,frames:u8
+$316A,$10
+$2D49,$10
+$2D49,$10
+$2D49,$10
+loop: aPaletteAnim_Row4Col0A_80ECC2
+$2D49,$10
+$2D49,$10
+$316A,$10
+$2D49,$10
+loop: aPaletteAnim_Row4Col0A_80ECC2
+
+@label aPaletteAnim_Row4Col0A_80ECE4
+@columns color:bgr555,frames:u8
+$779B,$10
+$7377,$10
+$7377,$10
+$7377,$10
+loop: aPaletteAnim_Row4Col0A_80ECE4
+
+@label aPaletteAnim_Row4Col0B_80ECF5
+@columns color:bgr555,frames:u8
+$7377,$10
+$7377,$10
+$779B,$10
+$7377,$10
+loop: aPaletteAnim_Row4Col0B_80ECF5
+
+@label aPaletteAnim_Row4Col0A_80ED06
+@columns color:bgr555,frames:u8
+$6F59,$10
+$6B37,$10
+$6B37,$10
+$6B37,$10
+loop: aPaletteAnim_Row4Col0A_80ED06
+
+@label aPaletteAnim_Row4Col0B_80ED17
+@columns color:bgr555,frames:u8
+$6B37,$10
+$6B37,$10
+$6F59,$10
+$6B37,$10
+loop: aPaletteAnim_Row4Col0B_80ED17
+
+@label aPaletteAnim_Row4Col0A_80ED28
+@columns color:bgr555,frames:u8
+$5AB5,$10
+$5273,$10
+$5273,$10
+$5273,$10
+loop: aPaletteAnim_Row4Col0A_80ED28
+
+@label aPaletteAnim_Row4Col0B_80ED39
+@columns color:bgr555,frames:u8
+$5273,$10
+$5273,$10
+$5AB5,$10
+$5273,$10
+loop: aPaletteAnim_Row4Col0B_80ED39
+
+@label aPaletteAnim_Row4Col0A_80ED4A
+@columns color:bgr555,frames:u8
+$4DEE,$10
+$45CE,$10
+$45CE,$10
+$45CE,$10
+loop: aPaletteAnim_Row4Col0A_80ED4A
+
+@label aPaletteAnim_Row4Col0B_80ED5B
+@columns color:bgr555,frames:u8
+$45CE,$10
+$45CE,$10
+$4DEE,$10
+$45CE,$10
+loop: aPaletteAnim_Row4Col0B_80ED5B
+
+@label aPaletteAnim_Row4Col03_80ED6C
+@columns color:bgr555,frames:u8
+$5185,$0C
+$61E8,$0C
+$6E4C,$0C
+$7F0C,$0C
+$6E4C,$0C
+$61E8,$0C
+loop: aPaletteAnim_Row4Col03_80ED6C
+
+@label aPaletteAnim_Row4Col05_80ED83
+@columns color:bgr555,frames:u8
+$69E7,$0C
+$7988,$0C
+$69E7,$0C
+$6167,$0C
+$69E7,$0C
+$7988,$0C
+loop: aPaletteAnim_Row4Col05_80ED83
+
+@label aPaletteAnim_Row4Col0B_80ED9A
+@columns color:bgr555,frames:u8
+$7E2C,$0F
+$7F97,$0F
+$7F53,$0F
+$7EE7,$0F
+loop: aPaletteAnim_Row4Col0B_80ED9A
+
+@label aPaletteAnim_Row4Col0C_80EDAB
+@columns color:bgr555,frames:u8
+$7EEF,$0F
+$7E2C,$0F
+$7F97,$0F
+$7F53,$0F
+loop: aPaletteAnim_Row4Col0C_80EDAB
+
+@label aPaletteAnim_Row4Col0D_80EDBC
+@columns color:bgr555,frames:u8
+$7F53,$0F
+$7EEF,$0F
+$7E2C,$0F
+$7F97,$0F
+loop: aPaletteAnim_Row4Col0D_80EDBC
+
+@label aPaletteAnim_Row4Col0E_80EDCD
+@columns color:bgr555,frames:u8
+$7F97,$0F
+$7F53,$0F
+$7EE7,$0F
+$7E2C,$0F
+loop: aPaletteAnim_Row4Col0E_80EDCD
+
+@label aPaletteAnim_Row4Col0C_80EDDE
+@columns color:bgr555,frames:u8
+$0070,$0F
+$0E5F,$0F
+$03FF,$0F
+loop: aPaletteAnim_Row4Col0C_80EDDE
+
+@label aPaletteAnim_Row4Col0D_80EDEC
+@columns color:bgr555,frames:u8
+$0E5F,$0F
+$0070,$0F
+$03FF,$0F
+loop: aPaletteAnim_Row4Col0D_80EDEC
+
+@label aPaletteAnim_Row4Col0E_80EDFA
+@columns color:bgr555,frames:u8
+$03FF,$0F
+$0E5F,$0F
+$0070,$0F
+loop: aPaletteAnim_Row4Col0E_80EDFA
+
+@label aPaletteAnim_Row1Col07_80EE08
+@columns color:bgr555,frames:u8
+$000C,$08
+$000A,$08
+$0009,$08
+loop: aPaletteAnim_Row1Col07_80EE08
+
+@label aPaletteAnim_Row1Col08_80EE16
+@columns color:bgr555,frames:u8
+$000A,$08
+$00D8,$08
+$027E,$08
+loop: aPaletteAnim_Row1Col08_80EE16
+
+@label aPaletteAnim_Row1Col0D_80EE24
+@columns color:bgr555,frames:u8
+$017F,$08
+$029F,$08
+$00D2,$08
+loop: aPaletteAnim_Row1Col0D_80EE24
+
+@label aPaletteAnim_Row1Col0E_80EE32
+@columns color:bgr555,frames:u8
+$031F,$08
+$035F,$08
+$03FF,$08
+loop: aPaletteAnim_Row1Col0E_80EE32
+
+@label aPaletteAnim_Row3Col06_80EE40
+@columns color:bgr555,frames:u8
+$2279,$10
+$229B,$10
+$22DC,$10
+loop: aPaletteAnim_Row3Col06_80EE40
+
+@label aPaletteAnim_Row3Col09_80EE4E
+@columns color:bgr555,frames:u8
+$0854,$10
+$08DE,$10
+$08DC,$10
+loop: aPaletteAnim_Row3Col09_80EE4E
+
+@label aPaletteAnim_Row3Col0A_80EE5C
+@columns color:bgr555,frames:u8
+$089D,$10
+$08DE,$10
+$091F,$10
+loop: aPaletteAnim_Row3Col0A_80EE5C
+
+@label aPaletteAnim_Row3Col0B_80EE6A
+@columns color:bgr555,frames:u8
+$08DF,$10
+$08DF,$10
+$0A1F,$10
+loop: aPaletteAnim_Row3Col0B_80EE6A
+
+@label aPaletteAnim_Row3Col0C_80EE78
+@columns color:bgr555,frames:u8
+$08DF,$10
+$0A3F,$10
+$0A9F,$10
+loop: aPaletteAnim_Row3Col0C_80EE78
+
+@label aPaletteAnim_Row3Col0D_80EE86
+@columns color:bgr555,frames:u8
+$029F,$10
+$029F,$10
+$031F,$10
+loop: aPaletteAnim_Row3Col0D_80EE86
+
+@label aPaletteAnim_Row3Col0E_80EE94
+@columns color:bgr555,frames:u8
+$035F,$10
+$03DF,$10
+$03FF,$10
+loop: aPaletteAnim_Row3Col0E_80EE94
+
+@label aPaletteAnim_Row6Col0C_80EEA2
+@columns color:bgr555,frames:u8
+$0A3C,$0C
+$00DB,$0C
+$00DF,$0C
+$00DF,$0C
+loop: aPaletteAnim_Row6Col0C_80EEA2
+
+@label aPaletteAnim_Row6Col0D_80EEB3
+@columns color:bgr555,frames:u8
+$09B3,$0C
+$11FF,$0C
+$0A5F,$0C
+$125F,$0C
+loop: aPaletteAnim_Row6Col0D_80EEB3
+
+@label aPaletteAnim_Row6Col0F_80EEC4
+@columns color:bgr555,frames:u8
+$0992,$0C
+$0A15,$0C
+$023A,$0C
+$133F,$0C
+loop: aPaletteAnim_Row6Col0F_80EEC4
+
+@label aPaletteAnim_Row6Col05_80EED5
+@columns color:bgr555,frames:u8
+$2A98,$10
+$433D,$10
+$2A98,$10
+$4F7F,$10
+$4F5F,$10
+$433D,$10
+loop: aPaletteAnim_Row6Col05_80EED5
+
+@label aPaletteAnim_Row6Col0E_80EEEC
+@columns color:bgr555,frames:u8
+$42FA,$10
+$2A98,$10
+$42FA,$10
+$2ADB,$10
+$371C,$10
+$2A98,$10
+$2ADB,$10
+loop: aPaletteAnim_Row6Col0E_80EEEC
+
+@label aPaletteAnim_Row2Col07_80EF06
+@columns color:bgr555,frames:u8
+$0049,$08
+$004C,$08
+loop: aPaletteAnim_Row2Col07_80EF06
+
+@label aPaletteAnim_Row2Col0D_80EF11
+@columns color:bgr555,frames:u8
+$0037,$08
+$013D,$08
+loop: aPaletteAnim_Row2Col0D_80EF11
+
+@label aPaletteAnim_Row2Col0E_80EF1C
+@columns color:bgr555,frames:u8
+$025F,$08
+$02DF,$08
+loop: aPaletteAnim_Row2Col0E_80EF1C
+

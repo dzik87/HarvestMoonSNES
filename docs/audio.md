@@ -708,7 +708,7 @@ no dump contains.
 
 A sound effect is requested with `fAudio_PlaySoundEffectAndWait` (A = effect id, X = voice, Y = wait in frames) or with the shorter
 `strcAudio.reg114 = id; reg115 = voice; fAudioSetRegister2to0A`, which sends command `$0A` (id, voice, `$0A`). Voices used by the US code are 6
-(UI, player and tool sounds) and 7 (water, house and cutscene sounds). `nToolSoundData_829054` (assets/tables/blocks/tool_sound_data_82.tbl)
+(UI, player and tool sounds) and 7 (water, house and cutscene sounds). `nToolSoundData_829054` (assets/tables/data/tool_sound_data_82.csv)
 holds, per tool id, `[voice, effect when the target tile has no matching object, effect when it has]`; `fToolUsedSound_PlayOnToolChange`
 preloads the samples of both effects when the tool changes and `fSound_GetToolSound` selects the column at use time. The enum values
 `!SFX_*` live in `src/common/enums.asm`; the stream sources are `assets/audio/sfx/<Name>.sfx.txt` and the id order is `sfx_names` in

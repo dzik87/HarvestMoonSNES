@@ -1,0 +1,57 @@
+# Farm animal data (bank $83, game_engine.asm).
+# aGameEngine_AddChickenPositionsData / ...AddCowPositionsData[slot]: start position of the animal in slot N
+#   x, y   pixel position on the farm map (13 slots each)
+# aGameEngine_ChickenEggBitMask[N] = 1 << N: bit of the egg / chicken flag word.
+# Confidence: high.
+
+@label aGameEngine_AddChickenPositionsData
+@columns slot:index,x:pos16,y:pos16
+$00,$0018,$0048
+$01,$0038,$0058
+$02,$0048,$0098
+$03,$0058,$0078
+$04,$0068,$00A8
+$05,$0078,$0088
+$06,$0088,$0058
+$07,$0098,$0098
+$08,$00A8,$0078
+$09,$00B8,$00A8
+$0A,$00C8,$0068
+$0B,$00D8,$0088
+$0C,$0028,$00A8
+
+@label aGameEngine_AddCowPositionsData
+@columns slot:index,x:pos16,y:pos16
+$00,$00A8,$0116
+$01,$00A8,$00F6
+$02,$00A8,$00D6
+$03,$00A8,$0096
+$04,$00A8,$0076
+$05,$00A8,$0056
+$06,$0038,$0116
+$07,$0038,$00F6
+$08,$0038,$00D6
+$09,$0038,$0096
+$0A,$0038,$0076
+$0B,$0038,$0056
+$0C,$00D8,$0158
+
+@label aGameEngine_ChickenEggBitMask
+@columns bit:index,mask:flags16
+$00,$0001
+$01,$0002
+$02,$0004
+$03,$0008
+$04,$0010
+$05,$0020
+$06,$0040
+$07,$0080
+$08,$0100
+$09,$0200
+$0A,$0400
+$0B,$0800
+$0C,$1000
+$0D,$2000
+$0E,$4000
+$0F,$8000
+

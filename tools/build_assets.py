@@ -37,7 +37,7 @@ STEPS = [
     ("small data tables", [sys.executable, "tools/data/smalltables.py", "build"]),
     ("name input grids", [sys.executable, "tools/menu/nameinput.py", "build"]),
     ("graphics presets", [sys.executable, "tools/gfx/presets.py", "build"]),
-    ("data blocks", [sys.executable, "tools/data/datablocks.py", "build"]),
+    ("data tables", [sys.executable, "tools/data/tabledata.py", "build"]),
     ("area tables", [sys.executable, "tools/maps/areadata.py", "build"]),
     ("AI script heads", [sys.executable, "tools/ai/aidata.py", "build"]),
 ]

@@ -52,7 +52,7 @@ jobs:
           python3 tools/maps/areadata.py check
           python3 tools/data/smalltables.py check
           python3 tools/menu/nameinput.py check
-          python3 tools/data/datablocks.py check
+          python3 tools/data/tabledata.py check
           python3 tools/gfx/presets.py check
           python3 tools/dialogs/texttables.py check
           python3 tools/data/gfxbanks.py check
@@ -60,6 +60,7 @@ jobs:
           python3 tools/gfx/gfxpipe.py verify
           python3 tools/fonts/font.py check
           python3 tests/test_font.py
+          python3 tests/test_tabledata.py
           python3 tests/test_spc700.py
           python3 tools/audio/audio_map.py --check
           python3 tools/audio/audioconv.py check

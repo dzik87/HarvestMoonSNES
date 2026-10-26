@@ -1,9 +1,0 @@
-aPlayerInteraction_SetFlags:
-    dw $0001,$0002,$0004,$0008,$0010,$0020
-    dw $0040,$0080,$0100,$0200,$0400,$0800
-    dw $1000,$2000,$4000,$8000
-
-aPlayerInteraction_ResetFlags:
-    dw $FFFE,$FFFD,$FFFB,$FFF7,$FFEF,$FFDF
-    dw $FFBF,$FF7F,$FEFF,$FDFF,$FBFF,$F7FF
-    dw $EFFF,$DFFF,$BFFF,$7FFF

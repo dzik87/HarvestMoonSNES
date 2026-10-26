@@ -34,7 +34,7 @@ LITERAL_LOADERS = {
 INDEXED = {
     "sFontGlyphs_0x": ("aLetterGlyphsPointers (src/code/bank_83/dialog.asm): glyph table n of the font, index = font page", "glyph data read by the text renderer"),
     "Sprites_": ("object frame components: sprite id >> 8 = bank - $88, uploaded by the OAM / object code", "OBJ character data"),
-    "Palette_": ("aPalettes (assets/tables/blocks/palette_tables.tbl): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls", "CGRAM"),
+    "Palette_": ("aPalettes (assets/tables/data/palette_tables.csv): index from aMapPalettesIndexes / explicit fPalette_LoadFirstHalf calls", "CGRAM"),
 }
 # blobs no found loader uses: label -> reason
 UNUSED = {

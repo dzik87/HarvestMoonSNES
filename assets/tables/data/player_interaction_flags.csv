@@ -1,0 +1,41 @@
+# Bit masks of the player interaction flag word (bank $81, player_update.asm): bit N set / clear masks.
+# aPlayerInteraction_SetFlags[N] = 1 << N, aPlayerInteraction_ResetFlags[N] = ~(1 << N) (16 bit).  Confidence: certain.
+
+@label aPlayerInteraction_SetFlags
+@columns bit:index,mask:flags16
+$00,$0001
+$01,$0002
+$02,$0004
+$03,$0008
+$04,$0010
+$05,$0020
+$06,$0040
+$07,$0080
+$08,$0100
+$09,$0200
+$0A,$0400
+$0B,$0800
+$0C,$1000
+$0D,$2000
+$0E,$4000
+$0F,$8000
+
+@label aPlayerInteraction_ResetFlags
+@columns bit:index,mask:flags16
+$00,$FFFE
+$01,$FFFD
+$02,$FFFB
+$03,$FFF7
+$04,$FFEF
+$05,$FFDF
+$06,$FFBF
+$07,$FF7F
+$08,$FEFF
+$09,$FDFF
+$0A,$FBFF
+$0B,$F7FF
+$0C,$EFFF
+$0D,$DFFF
+$0E,$BFFF
+$0F,$7FFF
+
