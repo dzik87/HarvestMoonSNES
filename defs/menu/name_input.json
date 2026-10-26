@@ -1,0 +1,17 @@
+{
+"comment": "Name entry cursor grids (structure): per table the release groups (`regions`: the releases that share the bytes, empty = all four), the number of 8-byte rows and the ROM address per release. The cell values are extracted from the ROM (assets/menu/name_input.txt). Format: docs/formats/menu-data.md",
+"header": ["# Name entry screen: cursor grids (selected by strcMenuData.tableSelector 0 / 1 / 2; read by fMenu_LoadNameInputCursorPos and fMenu_GetNameInputCellField).", "# One row per cell (8 bytes, row number = strcMenuData.menuIdx): x y down up right left char action", "#   x, y     cursor position on screen (pixels)", "#   down/up/right/left   index of the neighbouring cell for the D-pad (fNameInput_*Button)", "#   char     glyph index of the letter the cell enters (A button); 00 in the character set switch cells", "#   action   00 = enter the letter `char`; 01-04 = switch to character set 0-3 (fNameInput_SelectCharTable0-3)", "# `table <label> [releases]`: a table that only some releases use lists them (US EU DE JP); the one with US is the default.", "# Generated into build/gen/menu/name_input.asm by tools/menu/nameinput.py."],
+"tables": [
+  {"label": "aNameInputGrid0", "comment": "grid 0 (tableSelector 0)", "groups": [
+   {"regions": ["US", "EU"], "rows": 71, "rom": {"US": "$82EBF8", "EU": "$82EBE1"}},
+   {"regions": ["DE"], "rows": 78, "rom": {"DE": "$82ED75"}},
+   {"regions": ["JP"], "rows": 84, "rom": {"JP": "$82E907"}}
+  ]},
+  {"label": "aNameInputGrid1", "comment": "grid 1 (tableSelector 1)", "groups": [
+   {"regions": [], "rows": 84, "rom": {"US": "$82EE30", "EU": "$82EE19", "DE": "$82EFE5", "JP": "$82EBA7"}}
+  ]},
+  {"label": "aNameInputGrid2", "comment": "grid 2 (tableSelector 2)", "groups": [
+   {"regions": [], "rows": 49, "rom": {"US": "$82F0D0", "EU": "$82F0B9", "DE": "$82F285", "JP": "$82EE47"}}
+  ]}
+]
+}

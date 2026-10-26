@@ -4,7 +4,7 @@ Status legend: **[C]** confirmed from the engine code (routine + address given),
 **[D]** confirmed from the data (checked by `tools/objects/objdata.py`, 100 % of
 both banks parse without exceptions), **[I]** inferred / interpretation, not proven by code.
 
-Tooling: `tools/objects/objdata.py` (`build`, `check`, `extract`, `analyze`), tests in
+Tooling: `tools/objects/objdata.py` (`build`, `check`, `analyze`), tests in
 `tests/test_objdata.py`; the editable sources are described in section 10; how components map to pixels and the exported frame images: `docs/formats/sprite-assembly.md`, the label renames that were applied during the migration are listed in `docs/naming/H_objects_86_87.csv`.
 All offsets below are 16-bit offsets inside the bank unless a full `$BBAAAA` address is given.
 
@@ -67,7 +67,7 @@ frames in bank $86. All 4,878 pointers in the two banks (1,104 table entries + 3
 no 24-bit pointers in these banks.
 
 Index producers (who chooses the object index): `fObject_Create`/`fObject_Replace` callers
-`81A4AE`, `81A57D` (carried items, index from `$097A` table `pItemCarriedTable_8196AF`),
+`81A4AE`, `81A57D` (carried items, index from `$097A` table `pItemCarriedFramesTable`),
 `81CFDA`/`81D035` (`sSmallSpriteData` at `$81D210`, 3-byte entries whose first word is the index),
 `82E8DC` (constant `$0219` menu sprite, `$82E8BA`), `8482DF`/`848304` (AI engine: word at AI slot
 offset `+$16`, `$8482B9`). [C]
@@ -228,5 +228,5 @@ The timer is a plain number (`255` = `$FF` = hold forever, section 5).
 `python3 tools/objects/objdata.py build` (run by `tools/build_assets.py`) writes `build/gen/objects/bank_86.asm` and `bank_87.asm`, which `src/main.asm` includes.
 Labels are generated from the sources and keep the names used by the code and docs: `aObjSlotOamTile_868000`, `aObjAnimListPtrs_86`, `aObjAnimList_XXXX_<Name>` (global object index, then the name),
 `aObjFrame_<id>`, `aObjPadding_<end>`; pointers in the generated asm are symbolic (`dw aObjFrame_86A4AE`). `check [--rom US.sfc]` assembles the sources, re-parses the bytes into the structural model
-and verifies the round trip (and, with a ROM dump, equality with the original banks); `extract --rom US.sfc` regenerates the sources from a dump (overwrites `assets/objects`).
+and verifies the round trip (and, with a ROM dump, equality with the original banks); the sources are extracted from the ROM by `python tools/extract.py --rom-dir DIR --only objects` (names of the 1,104 objects: `defs/objects/names.json`).
 Size: about 170 KB of sources (1,104 object files plus two `frames.txt`), against 1.37 MB of `db`/`dw` text before.

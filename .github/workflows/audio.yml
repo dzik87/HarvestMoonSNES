@@ -9,6 +9,7 @@ on:
     branches: [main]
     paths:
       - 'assets/audio/**'
+      - 'defs/audio/**'
       - 'tools/audio/**'
       - '.github/workflows/audio.yml'
   workflow_dispatch:

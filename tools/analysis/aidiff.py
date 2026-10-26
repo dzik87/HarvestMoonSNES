@@ -174,7 +174,7 @@ def script_names():
     """{script index: name suffix} from assets/ai/scripts.json (label pAIScripting0x<ID><suffix>)."""
     import json
     names = {}
-    for s in json.loads((ROOT / "assets/ai/scripts.json").read_text())["scripts"]:
+    for s in json.loads((ROOT / "defs/ai/scripts.json").read_text())["scripts"]:
         names[int(s["id"], 16)] = s["label"][len("pAIScripting0x"):]
     return names
 

@@ -33,6 +33,23 @@ A step is a `Step` object in a module of `tools/extract_steps/` (see `__init__.p
 region, repository root, output tree, `defs/`) and writes sources into `ctx.assets`. Steps read structure from `defs/` and
 must never write to it. Each step is listed by `python tools/extract.py --list`.
 
+## Steps and the structure behind them
+
+| Step | Reads | Structure in `defs/` | Writes (`assets/`) |
+|---|---|---|---|
+| `audio` | US | `audio/banks.json` (bank layout), `audio/layout.json` (table addresses, driver / SFX block position), `audio/names.json` (song blob and effect names) | `audio/{samples,tracks,sfx,driver}/`, `audio.json` |
+| `objects` | US | `objects/names.json` (1,104 object names) | `objects/bank_86`, `bank_87` |
+| `maps` | US | `maps/layout.json` (label, address, width, height of the 37 object maps), `areas/areas.csv` | `maps/*.json` |
+| `areas` | US | `areas/{areas.csv,layout.json,blob_addresses.json}` | `areas/{area_gfx.json,area_music.json,screen_transitions.csv,object_props/}` |
+| `tables` | US EU DE JP | `tables/*.layout.json`, `tables/data/*.layout.csv` (source text with `?` / `#` placeholders and ROM addresses per release), `tables/data/{manifest.json, <jump tables>.csv}` | `tables/*.json`, `tables/data/*.csv` |
+| `menu` | US EU DE JP | `menu/name_input.json` (tables, release groups, row counts, addresses) | `menu/name_input.txt` |
+| `ai` | US | `ai/scripts.json` (script ids, labels, slot tables), `ai/sprite_tables.json` | `ai/npc_sprite_tables.txt` |
+
+Rules the steps follow: variant structure (`@if !REGION_xx`, release groups) is part of the layout and is regenerated, rows that apply to several releases
+are read from each and must be equal; code labels (pointer columns, table names) are structure, so a label rename has to be applied to `defs/` as well
+as to `src/`; `tools/migration/table_layout.py` re-derives the table layouts from complete sources.
+`python tools/extract.py --rom-dir DIR --only audio,objects,maps,areas,tables,menu,ai --compare assets` proves equality with a committed tree.
+
 ## Consequences for CI
 
 With no assets in the repository a clean checkout cannot rebuild the ROM, so CI can no longer compare hashes by itself.

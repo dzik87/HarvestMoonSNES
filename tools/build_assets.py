@@ -12,7 +12,7 @@ Sources (committed)                                   -> generated, git-ignored 
   assets/maps/*.json                                   -> build/gen/maps/bank_A7.asm                     (tools/maps/objmap.py build)
 
   assets/areas/*, assets/tables/*.json                 -> build/gen/{maps,tables}/*.asm                      (tools/maps/areadata.py, tools/data/smalltables.py build)
-  assets/ai/{scripts.json,npc_sprite_tables.txt}      -> build/gen/ai/{head_B3..B5,slots_NN}.asm       (tools/ai/aidata.py build)
+  defs/ai/scripts.json + assets/ai/npc_sprite_tables.txt     -> build/gen/ai/{head_B3..B5,slots_NN}.asm       (tools/ai/aidata.py build)
 
   assets/audio/{samples,tracks,sfx,driver}/*, audio.json, banks.json -> assets/audio/*.bin + build/gen/audio/{bank_XX.asm,audio_tables.inc} (tools/audio/audioconv.py build)
 

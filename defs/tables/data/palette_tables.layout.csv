@@ -1,0 +1,1146 @@
+# Map palette tables (bank $80).
+# sData42_*          short colour animation scripts (same step / loop / end records as palette_anim_scripts.csv)
+# aPalettes[N]       ROM address (ptr24) of palette N: 256 colours (512 bytes) loaded into CGRAM; names say area, season and time of day
+# aMapPalettesIndexes[area*6+phase]  palette index for each time of day of the area, $FF = none:
+#                    early, day, evening, dusk, night, extra  (phase 4 = night is loaded first, fPalette_LoadMapPallete)
+# nPaletteSeasonOverwriteTable[N]  3 colours written into palette rows $0A..$0C (colour $0F) by the weather / season fix (palette.asm)
+# sPallete_MarriedGirlTable[girl]  6 colours: hair / skin colours of the married girl sprite, index = girl id 0..5
+# aMapPalettesId[area*2+N]  object / sprite palette index (aPalettes) for the area, two entries per area (day, evening sets)
+# pPaletteAnimRoutineTable[area*6+phase] colour animation routine of the area for the time of day (ptr16, $FFFF = none),
+#                    phases early..night + one extra word (n16, $FFFF)
+# JP uses raw addresses for the animation routines in the town rows because the routines are at other places.
+# Confidence: high for aPalettes / indexes / scripts, medium for the sprite palette ids.
+
+@record loop op:u16=$FFFE,target:ptr24
+@record end op:u16=$FFFF
+@label aPaletteAnimScript_Rain_Slot0
+@columns color:bgr555,frames:u8
+@at US=$80B9D7 EU=$80B9D7 DE=$80B9D7 JP=$80B9D5
+?,?
+end: 
+
+@label aPaletteAnimScript_Rain_Slot1
+@columns color:bgr555,frames:u8
+?,?
+
+@label aPaletteAnimScript_Rain_Slot3
+@columns color:bgr555,frames:u8
+?,?
+
+@label aPaletteAnimScript_Rain_Slot2
+@columns color:bgr555,frames:u8
+?,?
+loop: aPaletteAnimScript_Rain_Slot1
+
+@label aPaletteAnimScript_Snow_Slot0
+@columns color:bgr555,frames:u8
+?,?
+end: 
+
+@label aPaletteAnimScript_Snow_Slot1
+@columns color:bgr555,frames:u8
+?,?
+
+@label aPaletteAnimScript_Snow_Slot2
+@columns color:bgr555,frames:u8
+?,?
+
+@label aPaletteAnimScript_Snow_Slot3
+@columns color:bgr555,frames:u8
+?,?
+loop: aPaletteAnimScript_Snow_Slot1
+@label aPalettes
+@columns index:index,palette:ptr24
+$00,Palette_FarmSpring_Early
+$01,Palette_FarmSpring_Day
+$02,Palette_FarmSpring_Evening
+$03,Palette_FarmSummer_Early
+$04,Palette_FarmSummer_Day
+$05,Palette_FarmSummer_Evening
+$06,Palette_FarmSpring_Dusk
+$07,Palette_FarmSpring_Night
+$08,Palette_FarmFall_Early
+$09,Palette_FarmFall_Day
+$0A,Palette_FarmFall_Evening
+$0B,Palette_FarmFall_Dusk
+$0C,Palette_FarmFall_Night
+$0D,Palette_FarmWinter_Early
+$0E,Palette_FarmWinter_Day
+$0F,Palette_FarmWinter_Evening
+$10,Palette_FarmWinter_Dusk
+$11,Palette_FarmWinter_Night
+$12,Palette_TownSpring_Day
+$13,Palette_TownSpring_Evening
+$14,Palette_TownSpring_Dusk
+$15,Palette_TownSpring_Night
+$16,Palette_TownSummer_Day
+$17,Palette_TownSummer_Evening
+$18,Palette_TownSummer_Dusk
+$19,Palette_TownSummer_Night
+$1A,Palette_TownFall_Day
+$1B,Palette_TownFall_Evening
+$1C,Palette_TownFall_Dusk
+$1D,Palette_TownFall_Night
+$1E,Palette_TownWinter_Day
+$1F,Palette_TownWinter_Evening
+$20,Palette_TownWinter_Dusk
+$21,Palette_TownWinter_Night
+$22,Palette_FlowerFestival_Day
+$23,Palette_HarvestFestival_Day
+$24,Palette_StarNightFestivalSquare_Dusk
+$25,Palette_StarNightFestivalSquare_Night
+$26,Palette_EggFestival_Day
+$27,Palette_RoadSpring_Early
+$28,Palette_RoadSpring_Day
+$29,Palette_RoadSpring_Evening
+$2A,Palette_RoadSpring_Dusk
+$2B,Palette_RoadSpring_Night
+$2C,Palette_RoadSummer_Early
+$2D,Palette_RoadSummer_Day
+$2E,Palette_RoadSummer_Evening
+$2F,Palette_RoadSummer_Dusk
+$30,Palette_RoadSummer_Night
+$31,Palette_RoadFall_Early
+$32,Palette_RoadFall_Day
+$33,Palette_RoadFall_Evening
+$34,Palette_RoadFall_Dusk
+$35,Palette_RoadFall_Night
+$36,Palette_RoadWinter_Early
+$37,Palette_RoadWinter_Day
+$38,Palette_RoadWinter_Evening
+$39,Palette_RoadWinter_Dusk
+$3A,Palette_RoadWinter_Night
+$3B,Palette_MountainSpring_Day
+$3C,Palette_MountainSpring_Evening
+$3D,Palette_MountainSpring_Dusk
+$3E,Palette_MountainSpring_Night
+$3F,Palette_MountainSummer_Day
+$40,Palette_MountainSummer_Evening
+$41,Palette_MountainSummer_Dusk
+$42,Palette_MountainSummer_Night
+$43,Palette_MountainFall_Day
+$44,Palette_MountainFall_Evening
+$45,Palette_MountainFall_Dusk
+$46,Palette_MountainFall_Night
+$47,Palette_MountainWinter_Day
+$48,Palette_MountainWinter_Evening
+$49,Palette_MountainWinter_Dusk
+$4A,Palette_MountainWinter_Night
+$4B,Palette_House_Early
+$4C,Palette_Unk_14
+$4D,Palette_MayorHouse_Day
+$4E,Palette_Church_Day
+$4F,Palette_FlowerShop_Day
+$50,Palette_Bar_Dusk
+$51,Palette_Restaurant_Day
+$52,Palette_GeneralStore_Day
+$53,Palette_AnimalShop_Day
+$54,Palette_FortuneTellerHouse_Day
+$55,Palette_ToolShed_Early
+$56,Palette_Barn_Early
+$57,Palette_MountainCave_Day
+$58,Palette_WorksmanHouse_Day
+$59,Palette_GoldChicken_Day
+$5A,Palette_SummitSpring_Day
+$5B,Palette_SummitSpring_Evening
+$5C,Palette_SummitSpring_Dusk
+$5D,Palette_SummitSpring_Night
+$5E,Palette_SummitSummer_Day
+$5F,Palette_SummitSummer_Evening
+$60,Palette_SummitSummer_Dusk
+$61,Palette_SummitSummer_Night
+$62,Palette_SummitFall_Day
+$63,Palette_SummitFall_Evening
+$64,Palette_SummitFall_Dusk
+$65,Palette_SummitFall_Night
+$66,Palette_SummitWinter_Day
+$67,Palette_SummitWinter_Evening
+$68,Palette_SummitWinter_Dusk
+$69,Palette_SummitWinter_Night
+$6A,Palette_NewYearsFestival_Day
+$6B,Palette_Obj_Day
+$6C,Palette_Obj_Evening
+$6D,Palette_IntroFarmScroll_Day
+$6E,Palette_NatsumeLogo_Day
+$6F,Palette_MenuScreenBackgrounds_Day
+$70,Palette_Credits0_Early
+$71,Palette_Unk_71
+$72,Palette_Unk_72
+$73,Palette_Unk_73
+$74,Palette_Unk_74
+
+@label aMapPalettesIndexes
+@columns area:index,early:u8,day:u8,evening:u8,dusk:u8,night:u8,extra:u8
+$00,?,?,?,?,?,?
+$01,?,?,?,?,?,?
+$02,?,?,?,?,?,?
+$03,?,?,?,?,?,?
+$04,?,?,?,?,?,?
+$05,?,?,?,?,?,?
+$06,?,?,?,?,?,?
+$07,?,?,?,?,?,?
+$08,?,?,?,?,?,?
+$09,?,?,?,?,?,?
+$0A,?,?,?,?,?,?
+$0B,?,?,?,?,?,?
+$0C,?,?,?,?,?,?
+$0D,?,?,?,?,?,?
+$0E,?,?,?,?,?,?
+$0F,?,?,?,?,?,?
+$10,?,?,?,?,?,?
+$11,?,?,?,?,?,?
+$12,?,?,?,?,?,?
+$13,?,?,?,?,?,?
+$14,?,?,?,?,?,?
+$15,?,?,?,?,?,?
+$16,?,?,?,?,?,?
+$17,?,?,?,?,?,?
+$18,?,?,?,?,?,?
+$19,?,?,?,?,?,?
+$1A,?,?,?,?,?,?
+$1B,?,?,?,?,?,?
+$1C,?,?,?,?,?,?
+$1D,?,?,?,?,?,?
+$1E,?,?,?,?,?,?
+$1F,?,?,?,?,?,?
+$20,?,?,?,?,?,?
+$21,?,?,?,?,?,?
+$22,?,?,?,?,?,?
+$23,?,?,?,?,?,?
+$24,?,?,?,?,?,?
+$25,?,?,?,?,?,?
+$26,?,?,?,?,?,?
+$27,?,?,?,?,?,?
+$28,?,?,?,?,?,?
+$29,?,?,?,?,?,?
+$2A,?,?,?,?,?,?
+$2B,?,?,?,?,?,?
+$2C,?,?,?,?,?,?
+$2D,?,?,?,?,?,?
+$2E,?,?,?,?,?,?
+$2F,?,?,?,?,?,?
+$30,?,?,?,?,?,?
+$31,?,?,?,?,?,?
+$32,?,?,?,?,?,?
+$33,?,?,?,?,?,?
+$34,?,?,?,?,?,?
+$35,?,?,?,?,?,?
+$36,?,?,?,?,?,?
+$37,?,?,?,?,?,?
+$38,?,?,?,?,?,?
+$39,?,?,?,?,?,?
+$3A,?,?,?,?,?,?
+$3B,?,?,?,?,?,?
+$3C,?,?,?,?,?,?
+$3D,?,?,?,?,?,?
+$3E,?,?,?,?,?,?
+$3F,?,?,?,?,?,?
+$40,?,?,?,?,?,?
+$41,?,?,?,?,?,?
+$42,?,?,?,?,?,?
+$43,?,?,?,?,?,?
+$44,?,?,?,?,?,?
+$45,?,?,?,?,?,?
+$46,?,?,?,?,?,?
+$47,?,?,?,?,?,?
+$48,?,?,?,?,?,?
+$49,?,?,?,?,?,?
+$4A,?,?,?,?,?,?
+$4B,?,?,?,?,?,?
+$4C,?,?,?,?,?,?
+$4D,?,?,?,?,?,?
+$4E,?,?,?,?,?,?
+$4F,?,?,?,?,?,?
+$50,?,?,?,?,?,?
+$51,?,?,?,?,?,?
+$52,?,?,?,?,?,?
+$53,?,?,?,?,?,?
+$54,?,?,?,?,?,?
+$55,?,?,?,?,?,?
+$56,?,?,?,?,?,?
+$57,?,?,?,?,?,?
+$58,?,?,?,?,?,?
+$59,?,?,?,?,?,?
+$5A,?,?,?,?,?,?
+$5B,?,?,?,?,?,?
+$5C,?,?,?,?,?,?
+$5D,?,?,?,?,?,?
+$5E,?,?,?,?,?,?
+$5F,?,?,?,?,?,?
+
+@label nPaletteSeasonOverwriteTable
+@columns index:index,color_a:bgr555,color_b:bgr555,color_c:bgr555
+$00,?,?,?
+$01,?,?,?
+$02,?,?,?
+$03,?,?,?
+$04,?,?,?
+$05,?,?,?
+$06,?,?,?
+$07,?,?,?
+$08,?,?,?
+$09,?,?,?
+$0A,?,?,?
+$0B,?,?,?
+$0C,?,?,?
+$0D,?,?,?
+$0E,?,?,?
+$0F,?,?,?
+
+@label sPallete_MarriedGirlTable
+@columns girl:index,c0:bgr555,c1:bgr555,c2:bgr555,c3:bgr555,c4:bgr555,c5:bgr555
+$00,?,?,?,?,?,?
+$01,?,?,?,?,?,?
+$02,?,?,?,?,?,?
+$03,?,?,?,?,?,?
+$04,?,?,?,?,?,?
+$05,?,?,?,?,?,?
+
+@label aMapPalettesId
+@columns area:index,obj_a:u8,obj_b:u8
+$00,?,?
+$01,?,?
+$02,?,?
+$03,?,?
+$04,?,?
+$05,?,?
+$06,?,?
+$07,?,?
+$08,?,?
+$09,?,?
+$0A,?,?
+$0B,?,?
+$0C,?,?
+$0D,?,?
+$0E,?,?
+$0F,?,?
+$10,?,?
+$11,?,?
+$12,?,?
+$13,?,?
+$14,?,?
+$15,?,?
+$16,?,?
+$17,?,?
+$18,?,?
+$19,?,?
+$1A,?,?
+$1B,?,?
+$1C,?,?
+$1D,?,?
+$1E,?,?
+$1F,?,?
+$20,?,?
+$21,?,?
+$22,?,?
+$23,?,?
+$24,?,?
+$25,?,?
+$26,?,?
+$27,?,?
+$28,?,?
+$29,?,?
+$2A,?,?
+$2B,?,?
+$2C,?,?
+$2D,?,?
+$2E,?,?
+$2F,?,?
+$30,?,?
+$31,?,?
+$32,?,?
+$33,?,?
+$34,?,?
+$35,?,?
+$36,?,?
+$37,?,?
+$38,?,?
+$39,?,?
+$3A,?,?
+$3B,?,?
+$3C,?,?
+$3D,?,?
+$3E,?,?
+$3F,?,?
+$40,?,?
+$41,?,?
+$42,?,?
+$43,?,?
+$44,?,?
+$45,?,?
+$46,?,?
+$47,?,?
+$48,?,?
+$49,?,?
+$4A,?,?
+$4B,?,?
+$4C,?,?
+$4D,?,?
+$4E,?,?
+$4F,?,?
+$50,?,?
+$51,?,?
+$52,?,?
+$53,?,?
+@label pPaletteAnimRoutineTable
+@columns slot:index,routine:ptr16
+# area $00 AREA_FARMSPRING
+$00,fPaletteAnim_FarmSpring_FarmSummer_T01
+$01,fPaletteAnim_FarmSpring_FarmSummer_T01
+$02,fPaletteAnim_FarmSpring_FarmSummer_T2
+$03,fPaletteAnim_FarmSpring_FarmSummer_T3
+$04,fPaletteAnim_FarmSpring_FarmSummer_T4
+$05,$FFFF
+# area $01 AREA_FARMSUMMER
+$06,fPaletteAnim_FarmSpring_FarmSummer_T01
+$07,fPaletteAnim_FarmSpring_FarmSummer_T01
+$08,fPaletteAnim_FarmSpring_FarmSummer_T2
+$09,fPaletteAnim_FarmSpring_FarmSummer_T3
+$0A,fPaletteAnim_FarmSpring_FarmSummer_T4
+$0B,$FFFF
+# area $02 AREA_FARMFALL
+$0C,fPaletteAnim_FarmFall_T01
+$0D,fPaletteAnim_FarmFall_T01
+$0E,fPaletteAnim_FarmFall_T2
+$0F,fPaletteAnim_FarmFall_T3
+$10,fPaletteAnim_FarmFall_T4
+$11,$FFFF
+# area $03 AREA_FARMWINTER
+$12,PTR16_None
+$13,PTR16_None
+$14,PTR16_None
+$15,PTR16_None
+$16,PTR16_None
+$17,$FFFF
+# area $04 AREA_TOWNSPRING
+$18,PTR16_None
+@if !REGION_JP
+$19,$CADC
+$1A,$CB2E
+$1B,$CB80
+$1C,$CBD2
+$1D,$FFFF
+# area $05 AREA_TOWNSUMMER
+$1E,L_80FFFF
+$1F,$CC90
+$20,$CCE2
+$21,$CD34
+$22,$CD86
+$23,$FFFF
+# area $06 AREA_TOWNFALL
+$24,L_80FFFF
+$25,$CE44
+$26,$CE96
+$27,L_80CFC3
+$28,$CF3A
+@else
+$19,fPaletteAnim_TownSpring_DancingS1_EggFestival_T1
+$1A,fPaletteAnim_TownSpring_T2
+$1B,fPaletteAnim_TownSpring_T3
+$1C,fPaletteAnim_TownSpring_T4
+$1D,$FFFF
+# area $05 AREA_TOWNSUMMER
+$1E,PTR16_None
+$1F,fPaletteAnim_TownSummer_T1
+$20,fPaletteAnim_TownSummer_T2
+$21,fPaletteAnim_TownSummer_T3
+$22,fPaletteAnim_TownSummer_T4
+$23,$FFFF
+# area $06 AREA_TOWNFALL
+$24,PTR16_None
+$25,fPaletteAnim_TownFall_NYPublicSquare_T1
+$26,fPaletteAnim_TownFall_T2
+$27,fPaletteAnim_TownFall_T3
+$28,fPaletteAnim_TownFall_T4
+@endif
+$29,$FFFF
+# area $07 AREA_TOWNWINTER
+$2A,PTR16_None
+$2B,PTR16_None
+$2C,PTR16_None
+$2D,PTR16_None
+$2E,fPaletteAnim_TownWinter_T4
+$2F,$FFFF
+# area $08 AREA_DANCINGS1
+$30,PTR16_None
+@if !REGION_JP
+$31,$CADC
+@else
+$31,fPaletteAnim_TownSpring_DancingS1_EggFestival_T1
+@endif
+$32,PTR16_None
+$33,PTR16_None
+$34,PTR16_None
+$35,$FFFF
+# area $09 AREA_DANCINGS2
+$36,PTR16_None
+$37,fPaletteAnim_DancingS2_T1
+$38,PTR16_None
+$39,PTR16_None
+$3A,PTR16_None
+$3B,$FFFF
+# area $0A AREA_NY_PUBLICSQUARE
+$3C,PTR16_None
+@if !REGION_JP
+$3D,$CE44
+@else
+$3D,fPaletteAnim_TownFall_NYPublicSquare_T1
+@endif
+$3E,PTR16_None
+$3F,PTR16_None
+$40,fPaletteAnim_NYPublicSquare_T4
+$41,$FFFF
+# area $0B AREA_EGGFESTIVAL
+$42,PTR16_None
+@if !REGION_JP
+$43,$CADC
+@else
+$43,fPaletteAnim_TownSpring_DancingS1_EggFestival_T1
+@endif
+$44,PTR16_None
+$45,PTR16_None
+$46,PTR16_None
+$47,$FFFF
+# area $0C AREA_CROSSROADSPRING
+$48,PTR16_None
+$49,PTR16_None
+$4A,PTR16_None
+$4B,PTR16_None
+$4C,PTR16_None
+$4D,$FFFF
+# area $0D AREA_CROSSROADSUMMER
+$4E,PTR16_None
+$4F,PTR16_None
+$50,PTR16_None
+$51,PTR16_None
+$52,PTR16_None
+$53,$FFFF
+# area $0E AREA_CROSSROADFALL
+$54,PTR16_None
+$55,PTR16_None
+$56,PTR16_None
+$57,PTR16_None
+$58,PTR16_None
+$59,$FFFF
+# area $0F AREA_CROSSROADWINTER
+$5A,PTR16_None
+$5B,PTR16_None
+$5C,PTR16_None
+$5D,PTR16_None
+$5E,PTR16_None
+$5F,$FFFF
+# area $10 AREA_WOODSSPRING
+$60,PTR16_None
+$61,fPaletteAnim_WoodsSpring_T1
+@if !REGION_JP
+$62,$D123
+$63,$D1E1
+$64,$D29F
+$65,$FFFF
+# area $11 AREA_WOODSSUMMER
+$66,L_80FFFF
+$67,L_80D30D
+$68,$D400
+$69,$D4BE
+$6A,$D561
+$6B,$FFFF
+# area $12 AREA_WOODSFALL
+$6C,L_80FFFF
+$6D,$D604
+$6E,$D6F8
+$6F,$D7EC
+$70,$D88F
+$71,$FFFF
+# area $13 AREA_WOODSWINTER
+$72,L_80FFFF
+$73,$D932
+$74,$D969
+$75,$D9A0
+$76,$D9D7
+$77,$FFFF
+# area $14 AREA_NY_SPA
+$78,L_80FFFF
+$79,$D932
+$7A,$D969
+$7B,$D9A0
+$7C,$D9D7
+@else
+$62,fPaletteAnim_WoodsSpring_T2
+$63,fPaletteAnim_WoodsSpring_T3
+$64,fPaletteAnim_WoodsSpring_T4
+$65,$FFFF
+# area $11 AREA_WOODSSUMMER
+$66,PTR16_None
+$67,fPaletteAnim_WoodsSummer_T1
+$68,fPaletteAnim_WoodsSummer_T2
+$69,fPaletteAnim_WoodsSummer_T3
+$6A,fPaletteAnim_WoodsSummer_T4
+$6B,$FFFF
+# area $12 AREA_WOODSFALL
+$6C,PTR16_None
+$6D,fPaletteAnim_WoodsFall_T1
+$6E,fPaletteAnim_WoodsFall_T2
+$6F,fPaletteAnim_WoodsFall_T3
+$70,fPaletteAnim_WoodsFall_T4
+$71,$FFFF
+# area $13 AREA_WOODSWINTER
+$72,PTR16_None
+$73,fPaletteAnim_WoodsWinter_NYSpa_T1
+$74,fPaletteAnim_WoodsWinter_NYSpa_T2
+$75,fPaletteAnim_WoodsWinter_NYSpa_T3
+$76,fPaletteAnim_WoodsWinter_NYSpa_T4
+$77,$FFFF
+# area $14 AREA_NY_SPA
+$78,PTR16_None
+$79,fPaletteAnim_WoodsWinter_NYSpa_T1
+$7A,fPaletteAnim_WoodsWinter_NYSpa_T2
+$7B,fPaletteAnim_WoodsWinter_NYSpa_T3
+$7C,fPaletteAnim_WoodsWinter_NYSpa_T4
+@endif
+$7D,$FFFF
+# area $15 AREA_HOUSE1
+$7E,fPaletteAnim_House1_House2_House3_All
+$7F,fPaletteAnim_House1_House2_House3_All
+$80,fPaletteAnim_House1_House2_House3_All
+$81,fPaletteAnim_House1_House2_House3_All
+$82,fPaletteAnim_House1_House2_House3_All
+$83,$0001
+# area $16 AREA_HOUSE2
+$84,fPaletteAnim_House1_House2_House3_All
+$85,fPaletteAnim_House1_House2_House3_All
+$86,fPaletteAnim_House1_House2_House3_All
+$87,fPaletteAnim_House1_House2_House3_All
+$88,fPaletteAnim_House1_House2_House3_All
+$89,$0001
+# area $17 AREA_HOUSE3
+$8A,fPaletteAnim_House1_House2_House3_All
+$8B,fPaletteAnim_House1_House2_House3_All
+$8C,fPaletteAnim_House1_House2_House3_All
+$8D,fPaletteAnim_House1_House2_House3_All
+$8E,fPaletteAnim_House1_House2_House3_All
+$8F,$0001
+# area $18 AREA_MAJORHOUSE
+$90,PTR16_None
+$91,fPaletteAnim_MajorHouse_T1234
+$92,fPaletteAnim_MajorHouse_T1234
+$93,fPaletteAnim_MajorHouse_T1234
+$94,fPaletteAnim_MajorHouse_T1234
+$95,$0001
+# area $19 AREA_MAJORCORRIDOR
+$96,PTR16_None
+$97,PTR16_None
+$98,PTR16_None
+$99,PTR16_None
+$9A,PTR16_None
+$9B,$0001
+# area $1A AREA_MAJORBEDROOM
+$9C,PTR16_None
+$9D,PTR16_None
+$9E,PTR16_None
+$9F,PTR16_None
+$A0,PTR16_None
+$A1,$0001
+# area $1B AREA_CHURCH
+$A2,PTR16_None
+$A3,fPaletteAnim_Church_T1234
+$A4,fPaletteAnim_Church_T1234
+$A5,fPaletteAnim_Church_T1234
+$A6,fPaletteAnim_Church_T1234
+$A7,$FFFF
+# area $1C AREA_FLORIST
+$A8,PTR16_None
+$A9,PTR16_None
+$AA,PTR16_None
+$AB,PTR16_None
+$AC,PTR16_None
+$AD,$0001
+# area $1D AREA_FLORISTBEDROOM
+$AE,PTR16_None
+$AF,fPaletteAnim_FloristBedroom_T1234
+$B0,fPaletteAnim_FloristBedroom_T1234
+$B1,fPaletteAnim_FloristBedroom_T1234
+$B2,fPaletteAnim_FloristBedroom_T1234
+$B3,$0001
+# area $1E AREA_BAR
+$B4,PTR16_None
+$B5,PTR16_None
+$B6,PTR16_None
+$B7,PTR16_None
+$B8,PTR16_None
+$B9,$0001
+# area $1F AREA_BARBEDROOM
+$BA,PTR16_None
+$BB,fPaletteAnim_BarBedroom_T1234
+$BC,fPaletteAnim_BarBedroom_T1234
+$BD,fPaletteAnim_BarBedroom_T1234
+$BE,fPaletteAnim_BarBedroom_T1234
+$BF,$0001
+# area $20 AREA_RESTAURANT
+$C0,PTR16_None
+$C1,PTR16_None
+$C2,PTR16_None
+$C3,PTR16_None
+$C4,PTR16_None
+$C5,$0001
+# area $21 AREA_RESTAURANTBEDROOM
+$C6,PTR16_None
+$C7,fPaletteAnim_RestaurantBedroom_T1234
+$C8,fPaletteAnim_RestaurantBedroom_T1234
+$C9,fPaletteAnim_RestaurantBedroom_T1234
+$CA,fPaletteAnim_RestaurantBedroom_T1234
+$CB,$0001
+# area $22 AREA_TOOLSSHOP
+$CC,PTR16_None
+$CD,PTR16_None
+$CE,PTR16_None
+$CF,PTR16_None
+$D0,PTR16_None
+$D1,$0001
+# area $23 AREA_TOOLSSHOPBEDROOM
+$D2,PTR16_None
+$D3,fPaletteAnim_ToolsShopBedroom_T1234
+$D4,fPaletteAnim_ToolsShopBedroom_T1234
+$D5,fPaletteAnim_ToolsShopBedroom_T1234
+$D6,fPaletteAnim_ToolsShopBedroom_T1234
+$D7,$0001
+# area $24 AREA_ANIMALSHOP
+$D8,PTR16_None
+$D9,fPaletteAnim_AnimalShop_T1234
+$DA,fPaletteAnim_AnimalShop_T1234
+$DB,fPaletteAnim_AnimalShop_T1234
+$DC,fPaletteAnim_AnimalShop_T1234
+$DD,$0001
+# area $25 AREA_FORTUNETELLER
+$DE,PTR16_None
+$DF,fPaletteAnim_FortuneTeller_T1234
+$E0,fPaletteAnim_FortuneTeller_T1234
+$E1,fPaletteAnim_FortuneTeller_T1234
+$E2,fPaletteAnim_FortuneTeller_T1234
+$E3,$FFFF
+# area $26 AREA_SHED
+$E4,PTR16_None
+$E5,PTR16_None
+$E6,PTR16_None
+$E7,PTR16_None
+$E8,PTR16_None
+$E9,$FFFF
+# area $27 AREA_COWBARN
+$EA,PTR16_None
+$EB,PTR16_None
+$EC,PTR16_None
+$ED,PTR16_None
+$EE,PTR16_None
+$EF,$FFFF
+# area $28 AREA_COOP
+$F0,PTR16_None
+$F1,PTR16_None
+$F2,PTR16_None
+$F3,PTR16_None
+$F4,PTR16_None
+$F5,$FFFF
+# area $29 AREA_WOODSCAVE
+$F6,PTR16_None
+$F7,PTR16_None
+$F8,PTR16_None
+$F9,PTR16_None
+$FA,PTR16_None
+$FB,$FFFF
+# area $2A AREA_IMPUNDERGROUND
+$FC,fPaletteAnim_ImpUnderground_All
+$FD,fPaletteAnim_ImpUnderground_All
+$FE,fPaletteAnim_ImpUnderground_All
+$FF,fPaletteAnim_ImpUnderground_All
+$100,fPaletteAnim_ImpUnderground_All
+$101,$FFFF
+# area $2B AREA_WORKSMANHOUSE
+$102,PTR16_None
+$103,PTR16_None
+$104,PTR16_None
+$105,PTR16_None
+$106,PTR16_None
+$107,$FFFF
+# area $2C AREA_GOLDCHICKEN
+$108,fPaletteAnim_GoldChicken_All
+$109,fPaletteAnim_GoldChicken_All
+$10A,fPaletteAnim_GoldChicken_All
+$10B,fPaletteAnim_GoldChicken_All
+$10C,fPaletteAnim_GoldChicken_All
+$10D,$FFFF
+# area $2D AREA_WEDDINGSPRING
+$10E,PTR16_None
+$10F,PTR16_None
+$110,PTR16_None
+$111,PTR16_None
+$112,PTR16_None
+$113,$FFFF
+# area $2E AREA_WEDDINGSUMMER
+$114,PTR16_None
+$115,PTR16_None
+$116,PTR16_None
+$117,PTR16_None
+$118,PTR16_None
+$119,$FFFF
+# area $2F AREA_WEDDINGFALL
+$11A,PTR16_None
+$11B,PTR16_None
+$11C,PTR16_None
+$11D,PTR16_None
+$11E,PTR16_None
+$11F,$FFFF
+# area $30 AREA_WEDDINGWINTER
+$120,PTR16_None
+$121,PTR16_None
+$122,PTR16_None
+$123,PTR16_None
+$124,PTR16_None
+$125,$FFFF
+# area $31 AREA_MOUNTAINTOPSPRING
+$126,PTR16_None
+$127,PTR16_None
+$128,PTR16_None
+$129,PTR16_None
+@if !REGION_JP
+$12A,$DA0E
+@else
+$12A,fPaletteAnim_MountainTopAllSeasonsAndNY_T4
+@endif
+$12B,$FFFF
+# area $32 AREA_MOUNTAINTOPSUMMER
+$12C,PTR16_None
+$12D,PTR16_None
+$12E,PTR16_None
+$12F,PTR16_None
+@if !REGION_JP
+$130,$DA0E
+@else
+$130,fPaletteAnim_MountainTopAllSeasonsAndNY_T4
+@endif
+$131,$FFFF
+# area $33 AREA_MOUNTAINTOPFALL
+$132,PTR16_None
+$133,PTR16_None
+$134,PTR16_None
+$135,PTR16_None
+@if !REGION_JP
+$136,$DA0E
+@else
+$136,fPaletteAnim_MountainTopAllSeasonsAndNY_T4
+@endif
+$137,$FFFF
+# area $34 AREA_MOUNTAINTOPWINTER
+$138,PTR16_None
+$139,PTR16_None
+$13A,PTR16_None
+$13B,PTR16_None
+@if !REGION_JP
+$13C,$DA0E
+@else
+$13C,fPaletteAnim_MountainTopAllSeasonsAndNY_T4
+@endif
+$13D,$FFFF
+# area $35 AREA_MOUNTAINTOP2SPRING
+$13E,PTR16_None
+$13F,PTR16_None
+$140,PTR16_None
+$141,PTR16_None
+$142,PTR16_None
+$143,$FFFF
+# area $36 AREA_MNTTOPENDINGSUMMER
+$144,PTR16_None
+$145,PTR16_None
+$146,PTR16_None
+$147,PTR16_None
+$148,PTR16_None
+$149,$FFFF
+# area $37 AREA_MOUNTAINTOP2FALL
+$14A,PTR16_None
+$14B,PTR16_None
+$14C,PTR16_None
+$14D,PTR16_None
+$14E,PTR16_None
+$14F,$FFFF
+# area $38 AREA_MOUNTAINTOP2WINTER
+$150,PTR16_None
+$151,PTR16_None
+$152,PTR16_None
+$153,PTR16_None
+$154,PTR16_None
+$155,$FFFF
+# area $39 AREA_NY_MOUNTAINTOP
+$156,PTR16_None
+$157,PTR16_None
+$158,PTR16_None
+$159,PTR16_None
+@if !REGION_JP
+$15A,$DA0E
+@else
+$15A,fPaletteAnim_MountainTopAllSeasonsAndNY_T4
+@endif
+$15B,$FFFF
+# area $3A AREA_MOUNTAINTOPSUNRISE
+$15C,PTR16_None
+$15D,PTR16_None
+$15E,PTR16_None
+$15F,PTR16_None
+$160,PTR16_None
+$161,$FFFF
+# area $3B AREA_MOUNTAINTOPBEAN
+$162,PTR16_None
+$163,PTR16_None
+$164,PTR16_None
+$165,PTR16_None
+$166,PTR16_None
+$167,$FFFF
+# area $3C AREA_INTRO
+$168,PTR16_None
+$169,PTR16_None
+$16A,PTR16_None
+$16B,PTR16_None
+$16C,PTR16_None
+$16D,$FFFF
+# area $3D AREA_ENDING00
+$16E,PTR16_None
+$16F,PTR16_None
+$170,PTR16_None
+$171,PTR16_None
+$172,PTR16_None
+$173,$FFFF
+# area $3E AREA_ENDING01
+$174,PTR16_None
+$175,PTR16_None
+$176,PTR16_None
+$177,PTR16_None
+$178,PTR16_None
+$179,$FFFF
+# area $3F AREA_ENDING02
+$17A,PTR16_None
+$17B,PTR16_None
+$17C,PTR16_None
+$17D,PTR16_None
+$17E,PTR16_None
+$17F,$FFFF
+# area $40 AREA_ENDING03
+$180,PTR16_None
+$181,PTR16_None
+$182,PTR16_None
+$183,PTR16_None
+$184,PTR16_None
+$185,$FFFF
+# area $41 AREA_ENDING04
+$186,PTR16_None
+$187,PTR16_None
+$188,PTR16_None
+$189,PTR16_None
+$18A,PTR16_None
+$18B,$FFFF
+# area $42 AREA_ENDING05
+$18C,PTR16_None
+$18D,PTR16_None
+$18E,PTR16_None
+$18F,PTR16_None
+$190,PTR16_None
+$191,$FFFF
+# area $43 AREA_ENDING06
+$192,PTR16_None
+$193,PTR16_None
+$194,PTR16_None
+$195,PTR16_None
+$196,PTR16_None
+$197,$FFFF
+# area $44 AREA_ENDING07
+$198,PTR16_None
+$199,PTR16_None
+$19A,PTR16_None
+$19B,PTR16_None
+$19C,PTR16_None
+$19D,$FFFF
+# area $45 AREA_ENDING08
+$19E,PTR16_None
+$19F,PTR16_None
+$1A0,PTR16_None
+$1A1,PTR16_None
+$1A2,PTR16_None
+$1A3,$FFFF
+# area $46 AREA_ENDING09
+$1A4,PTR16_None
+$1A5,PTR16_None
+$1A6,PTR16_None
+$1A7,PTR16_None
+$1A8,PTR16_None
+$1A9,$FFFF
+# area $47 AREA_ENDING10
+$1AA,PTR16_None
+$1AB,PTR16_None
+$1AC,PTR16_None
+$1AD,PTR16_None
+$1AE,PTR16_None
+$1AF,$FFFF
+# area $48 AREA_ENDING11
+$1B0,PTR16_None
+$1B1,PTR16_None
+$1B2,PTR16_None
+$1B3,PTR16_None
+$1B4,PTR16_None
+$1B5,$FFFF
+# area $49 AREA_ENDING12
+$1B6,PTR16_None
+$1B7,PTR16_None
+$1B8,PTR16_None
+$1B9,PTR16_None
+$1BA,PTR16_None
+$1BB,$FFFF
+# area $4A AREA_ENDING13
+$1BC,PTR16_None
+$1BD,PTR16_None
+$1BE,PTR16_None
+$1BF,PTR16_None
+$1C0,PTR16_None
+$1C1,$FFFF
+# area $4B AREA_CREDITS0
+$1C2,PTR16_None
+$1C3,PTR16_None
+$1C4,PTR16_None
+$1C5,PTR16_None
+$1C6,PTR16_None
+$1C7,$FFFF
+# area $4C AREA_CREDITS1
+$1C8,PTR16_None
+$1C9,PTR16_None
+$1CA,PTR16_None
+$1CB,PTR16_None
+$1CC,PTR16_None
+$1CD,$FFFF
+# area $4D AREA_CREDITS2
+$1CE,PTR16_None
+$1CF,PTR16_None
+$1D0,PTR16_None
+$1D1,PTR16_None
+$1D2,PTR16_None
+$1D3,$FFFF
+# area $4E AREA_CREDITS3
+$1D4,PTR16_None
+$1D5,PTR16_None
+$1D6,PTR16_None
+$1D7,PTR16_None
+$1D8,PTR16_None
+$1D9,$FFFF
+# area $4F AREA_CREDITS4
+$1DA,PTR16_None
+$1DB,PTR16_None
+$1DC,PTR16_None
+$1DD,PTR16_None
+$1DE,PTR16_None
+$1DF,$FFFF
+# area $50 AREA_DRIVETOTOWN
+$1E0,PTR16_None
+$1E1,PTR16_None
+$1E2,PTR16_None
+$1E3,PTR16_None
+$1E4,PTR16_None
+$1E5,$FFFF
+# area $51 AREA_UNKNOWN51
+$1E6,PTR16_None
+$1E7,PTR16_None
+$1E8,PTR16_None
+$1E9,PTR16_None
+$1EA,PTR16_None
+$1EB,$FFFF
+# area $52 AREA_UNKNOWN52
+$1EC,PTR16_None
+$1ED,PTR16_None
+$1EE,PTR16_None
+$1EF,PTR16_None
+$1F0,PTR16_None
+$1F1,$FFFF
+# area $53 AREA_UNKNOWN53
+$1F2,PTR16_None
+$1F3,PTR16_None
+$1F4,PTR16_None
+$1F5,PTR16_None
+$1F6,PTR16_None
+$1F7,$FFFF
+# area $54 AREA_UNKNOWN54
+$1F8,PTR16_None
+$1F9,PTR16_None
+$1FA,PTR16_None
+$1FB,PTR16_None
+$1FC,PTR16_None
+$1FD,$FFFF
+# area $55 AREA_UNKNOWN55
+$1FE,PTR16_None
+$1FF,PTR16_None
+$200,PTR16_None
+$201,PTR16_None
+$202,PTR16_None
+$203,$FFFF
+# area $56 AREA_UNKNOWN56
+$204,PTR16_None
+$205,PTR16_None
+$206,PTR16_None
+$207,PTR16_None
+$208,PTR16_None
+$209,$FFFF
+# area $57 AREA_UNKNOWN57
+$20A,PTR16_None
+$20B,PTR16_None
+$20C,PTR16_None
+$20D,PTR16_None
+$20E,PTR16_None
+$20F,$FFFF
+# area $58 AREA_UNKNOWN58
+$210,PTR16_None
+$211,PTR16_None
+$212,PTR16_None
+$213,PTR16_None
+$214,PTR16_None
+$215,$FFFF
+# area $59 AREA_UNKNOWN59
+$216,PTR16_None
+$217,PTR16_None
+$218,PTR16_None
+$219,PTR16_None
+$21A,PTR16_None
+$21B,$FFFF
+# area $5A AREA_UNKNOWN5A
+$21C,PTR16_None
+$21D,PTR16_None
+$21E,PTR16_None
+$21F,PTR16_None
+$220,PTR16_None
+$221,$FFFF
+# area $5B AREA_UNKNOWN5B
+$222,PTR16_None
+$223,PTR16_None
+$224,PTR16_None
+$225,PTR16_None
+$226,PTR16_None
+$227,$FFFF
+# area $5C AREA_UNKNOWN5C
+$228,PTR16_None
+$229,PTR16_None
+$22A,PTR16_None
+$22B,PTR16_None
+$22C,PTR16_None
+$22D,$FFFF
+# area $5D AREA_NATSUMELOGO
+$22E,PTR16_None
+$22F,PTR16_None
+$230,PTR16_None
+$231,PTR16_None
+$232,PTR16_None
+$233,$FFFF
+# area $5E AREA_UNKNOWN5E
+$234,PTR16_None
+$235,PTR16_None
+$236,PTR16_None
+$237,PTR16_None
+$238,PTR16_None
+$239,$FFFF
+# area $5F AREA_NAMEINPUT
+$23A,PTR16_None
+$23B,PTR16_None
+$23C,PTR16_None
+$23D,PTR16_None
+$23E,PTR16_None
+$23F,$FFFF
+

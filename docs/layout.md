@@ -12,8 +12,8 @@ Mapping: LoROM, 64 banks of 32 KB ($80–$BF). Header and vectors: `src/code/hea
 | $A7 | object maps | `assets/maps/*.json` (generated asm: `build/gen/maps/bank_A7.asm`) |
 | $A8–$A9 | palettes | `defs/gfx/banks.json` (generated asm: `build/gen/gfx/palettes/`) |
 | $AA–$AC | JP dialogs (empty in US/EU/DE) | `assets/dialogs/jp/*.txt` (generated asm) |
-| $AD–$B2 | audio (SPC700 driver, BRR samples, songs and SFX; confirmed against 20 emulator dumps, `docs/audio.md` section 12) | `assets/audio/banks.json` (generated asm: `build/gen/audio/`) |
-| $B3–$B5 | AI scripts: bodies = script DSL (one file per script, `src/ai/us/scripts/`; EU/DE/JP as `if !REGION_xx` blocks, `docs/regions-ai.md`); script pointer list, slot tables and NPC sprite tables are data | `src/ai/` (DSL) + `assets/ai/{scripts.json,npc_sprite_tables.txt}` (generated asm: `build/gen/ai/`) |
+| $AD–$B2 | audio (SPC700 driver, BRR samples, songs and SFX; confirmed against 20 emulator dumps, `docs/audio.md` section 12) | `defs/audio/banks.json` + `assets/audio/` (generated asm: `build/gen/audio/`) |
+| $B3–$B5 | AI scripts: bodies = script DSL (one file per script, `src/ai/us/scripts/`; EU/DE/JP as `if !REGION_xx` blocks, `docs/regions-ai.md`); script pointer list, slot tables and NPC sprite tables are data | `src/ai/` (DSL) + `defs/ai/scripts.json` + `assets/ai/npc_sprite_tables.txt` (generated asm: `build/gen/ai/`) |
 | $B6–$BB | US/EU/DE dialogs (empty in JP) | `assets/dialogs/<region>/*.txt` (generated asm) |
 | $BC–$BF | unused (zeros) | — |
 
@@ -23,7 +23,7 @@ Only code (and the script DSL): `src/code`, `src/ai`, `src/common`, `src/main.as
 into git-ignored `build/gen/` (dialogs, object animation banks, object maps, area/menu/dialog tables, AI heads) or `assets/**` (`.bin`/`.pal`), see `docs/workflow.md`.
 The graphics banks ($88-$A6, $A8-$A9) are generated too: `defs/gfx/banks.json` lists per bank the ORG, the blobs in ROM order (`*` = included through `!{REGDIR}`, a release has its own version) and the
 trailing padding; `tools/data/gfxbanks.py build` (step "graphics bank asm" of `tools/build_assets.py`) writes `build/gen/gfx/<kind>/bank_XX.asm` (label + `incbin` + `fill`), which `src/main.asm` includes.
-The audio banks ($AD-$B2) work the same way: `assets/audio/banks.json` (ORG and blob labels in ROM order; every bank ends with `fill align $8000`) -> `build/gen/audio/bank_XX.asm`, written by `tools/audio/audioconv.py build` together with `build/gen/audio/audio_tables.inc` (the 65816-side sample/track tables included by `src/code/bank_83/audio.asm`).
+The audio banks ($AD-$B2) work the same way: `defs/audio/banks.json` (ORG and blob labels in ROM order; every bank ends with `fill align $8000`) -> `build/gen/audio/bank_XX.asm`, written by `tools/audio/audioconv.py build` together with `build/gen/audio/audio_tables.inc` (the 65816-side sample/track tables included by `src/code/bank_83/audio.asm`).
 The AI banks ($B3-$B5): `tools/ai/aidata.py build` writes `build/gen/ai/head_B3..B5.asm` (ORG, `ppAIScriptingList`, the 214 NPC sprite tables) and `slots_NN.asm` (the entry-point table at the start of every script) from `assets/ai/`.
 The script bodies themselves (`%AICMD...` macro calls) stay in `src/ai/us/scripts/` on purpose: they already are a readable high-level script language (code in a DSL), region differences are `if !REGION_xx` blocks inside it, `docs/regions-ai.md`.
 The only file under `src/data/` is `src/data/dialogs/macros.asm`, a macro file (code).
@@ -34,12 +34,12 @@ The tables that used to sit between the routines are generated too (formats: `do
 
 | Former place | Content | Source (`assets/`) | Generator (`build_assets.py` step) |
 |---|---|---|---|
-| `bank_80/tilemaps.asm` | `aTileMapData` + 96 area graphics descriptors, `aScreenTransitionTable`, `nTable_80AA68/72` | `areas/` (`areas.csv`, `area_gfx.json`, `screen_transitions.csv`), `tables/map_room.json` | `tools/maps/areadata.py`, `tools/data/smalltables.py` |
-| `bank_82/object_data.asm` | `pObjectMap`, `pObjectMap2`, 7 object property tables | `areas/` (`areas.csv`, `object_props/*.txt`) | `tools/maps/areadata.py` |
-| `bank_80/audio_data.asm` | `pAudioEngine_MapMusic` + 12 music sets, `nToolSoundData_80B8CD` | `areas/` (`areas.csv`, `area_music.json`), `tables/tool_sounds.json` | `tools/maps/areadata.py`, `tools/data/smalltables.py` |
+| `bank_80/tilemaps.asm` | `aTileMapData` + 96 area graphics descriptors, `aScreenTransitionTable`, `nMapRoomRowStrideTable/72` | `areas/` (`defs/areas/areas.csv`, `area_gfx.json`, `screen_transitions.csv`), `tables/map_room.json` | `tools/maps/areadata.py`, `tools/data/smalltables.py` |
+| `bank_82/object_data.asm` | `pObjectMap`, `pObjectMap2`, 7 object property tables | `areas/` (`defs/areas/areas.csv`, `object_props/*.txt`) | `tools/maps/areadata.py` |
+| `bank_80/audio_data.asm` | `pAudioEngine_MapMusic` + 12 music sets, `nSoundEffectSampleTable` | `areas/` (`defs/areas/areas.csv`, `area_music.json`), `tables/tool_sounds.json` | `tools/maps/areadata.py`, `tools/data/smalltables.py` |
 | `bank_82/menu.asm` | name entry cursor grids, save slot tables, `sYearOrdinal`, title palette animations | `menu/name_input.txt`, `tables/main_menu.json` | `tools/menu/nameinput.py`, `tools/data/smalltables.py` |
 | `bank_83/dialog.asm` | font page pointers, option / number / text variable tables, `aDialogPointers` | `dialogs/number_vars.csv`, `dialogs/<region>/{text_vars.csv,text_tables.json}`, font blobs, dialog texts | `tools/dialogs/texttables.py` |
-| `src/ai` | script pointer list, script slot tables, NPC sprite tables | `ai/scripts.json`, `ai/npc_sprite_tables.txt` | `tools/ai/aidata.py` |
+| `src/ai` | script pointer list, script slot tables, NPC sprite tables | `defs/ai/scripts.json`, `ai/npc_sprite_tables.txt` | `tools/ai/aidata.py` |
 
 The remaining data tables of the code banks are generated from **typed CSV tables with named columns** (`tools/data/tabledata.py`, `assets/tables/data/*.csv`, record formats and inventory in `docs/formats/data-tables.md`):
 palette index/animation tables and scripts (`bank_80/data_tables.asm`), tile scripts, carried item tables and item handler pointers (`bank_81/items_misc.asm`), love ranges and the player action jump table
