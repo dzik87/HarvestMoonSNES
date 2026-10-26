@@ -89,6 +89,7 @@ def clone_tree(tmp, drop_sources=False):
     """scratch copy of everything pngsync reads: assets/gfx (sources + generated .bin), assets/objects, the area graphics descriptors, bank asm."""
     shutil.copytree(ROOT / "assets/gfx", tmp / "assets/gfx", ignore=shutil.ignore_patterns("*.pal"))
     shutil.copytree(ROOT / "assets/objects", tmp / "assets/objects")
+    shutil.copytree(ROOT / "defs", tmp / "defs")
     (tmp / "src/code/bank_80").mkdir(parents=True)
     shutil.copy(ROOT / "assets/gfx/presets.csv", tmp / "assets/gfx/presets.csv")
     (tmp / "assets/areas").mkdir(parents=True)

@@ -1,7 +1,7 @@
 # How graphics get into VRAM (loader register)
 
 `assets/gfx/graphics_loads.json` is derived by `tools/gfx/graphics_loads.py build` (CI runs `check`) and lists, for every blob of
-`assets/gfx/banks.json`, who loads it. `maps` holds the screen definitions: map -> area ids, tile blobs @ VRAM word, name tables @ VRAM word
+`defs/gfx/banks.json`, who loads it. `maps` holds the screen definitions: map -> area ids, tile blobs @ VRAM word, name tables @ VRAM word
 with the character base of the BG that shows them, and the palette(s) of the area. `tools/gfx/pngsync.py` / `composed.py` read the same map table
 (`pngsync.map_table`, `pngsync.bg_chr_base`), so renders, palettes and the register cannot disagree.
 

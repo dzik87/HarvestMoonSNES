@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Meaningful names for the graphics blobs (old label = address-based -> new label), see docs/naming/README.md.
 
-  python3 tools/migration/gfx_names.py csv     write docs/naming/K3_gfx_names.csv and K4_sprites_objects_palettes.csv (old,new,confidence,reason,address)
+  python3 tools/migration/gfx_names.py csv     write defs/gfx/names/K3_gfx_names.csv and K4_sprites_objects_palettes.csv (old,new,confidence,reason,address)
   python3 tools/migration/gfx_names.py apply   rename labels in src/, docs/ai, tools/, tests/, docs/, assets/gfx (files and text)
 
 Convention: Tiles_<Place>[_<Season>][_<slot>]   tile graphics; <slot> = VRAM slot 0-3 ($2000/$3000/$4000/$5000 words)
@@ -16,8 +16,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-CSV = ROOT / "docs" / "naming" / "K3_gfx_names.csv"
-CSV4 = ROOT / "docs" / "naming" / "K4_sprites_objects_palettes.csv"
+CSV = ROOT / "defs" / "gfx" / "names" / "K3_gfx_names.csv"
+CSV4 = ROOT / "defs" / "gfx" / "names" / "K4_sprites_objects_palettes.csv"
 T, M, C = "sCompressedTiles_", "sCompressedTilemap_", "sCharactermap_"
 
 # (old id, new name, confidence, reason)
@@ -279,7 +279,7 @@ def main():
         sys.exit(__doc__)
     files = subprocess.run(["git", "ls-files", "src", "docs", "tools", "tests", "assets/gfx", ".github"], cwd=ROOT, capture_output=True,
                            text=True, check=True).stdout.split()
-    files = [f for f in files if not f.endswith((".bin", ".png", ".pyc", ".pal")) and "docs/naming/K" not in f
+    files = [f for f in files if not f.endswith((".bin", ".png", ".pyc", ".pal")) and "defs/gfx/names/K" not in f
              and f != "tools/migration/gfx_names.py"]
     pats = [(rx(o), n) for o, n, *_ in rows]
     changed = 0

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Dialog engine tables of src/code/bank_83/dialog.asm as a build product (one file per release).
 
-  aLetterGlyphsPointers   dl sFontGlyphs_0xNN x 10     derived from the font blobs of assets/gfx/banks.json (sFontGlyphs_0x00 .. 0x09)
+  aLetterGlyphsPointers   dl sFontGlyphs_0xNN x 10     derived from the font blobs of defs/gfx/banks.json (sFontGlyphs_0x00 .. 0x09)
   aTextDataTableFFFE      dw x 5                        assets/dialogs/<region>/text_tables.json  "option_vram"  (answer cursor VRAM address)
   pTextAmmountTable       dl 10^0 .. 10^7               derived (decimal place values of the <NUM> digit loop)
   aTextDataTableFFFC      [dl address, db size] x 112   assets/dialogs/number_vars.csv            (numeric variables of <NUM n i>)
@@ -41,7 +41,7 @@ def dialog_ids(root, region):
 
 
 def font_labels(root):
-    banks = json.loads((Path(root) / "assets/gfx/banks.json").read_text(encoding="utf-8"))
+    banks = json.loads((Path(root) / "defs/gfx/banks.json").read_text(encoding="utf-8"))
     names = {x.lstrip("*") for kind in banks.values() for b in kind.values() for x in b["blobs"]}
     return [f"sFontGlyphs_0x{i:02X}" for i in range(N_GLYPH_PAGES)], names
 
@@ -112,7 +112,7 @@ def check(root=ROOT):
     labels, names = font_labels(root)
     for l in labels:
         if l not in names:
-            bad.append(f"font blob {l} is not in assets/gfx/banks.json")
+            bad.append(f"font blob {l} is not in defs/gfx/banks.json")
     for m in bad:
         print("TEXT TABLES:", m)
     print("dialog text tables:", "FAILED" if bad else f"OK ({counts['us']} dialogs, {len(nv)} numeric variables)")

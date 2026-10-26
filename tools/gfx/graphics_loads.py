@@ -2,7 +2,7 @@
 """Register of every graphics blob and who loads it: assets/gfx/graphics_loads.json (derived from the source, never edited by hand).
 
   build   write the register
-  check   fail unless the committed register equals the derivation, every blob of assets/gfx/banks.json is covered, and every
+  check   fail unless the committed register equals the derivation, every blob of defs/gfx/banks.json is covered, and every
           blob that nothing loads is listed in UNUSED below (with the reason)
   show LABEL   print the entry of one blob
 

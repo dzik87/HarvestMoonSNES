@@ -29,7 +29,7 @@ that use it. Several areas share one blob (the four seasons of the farm use `sOb
 | `room_w`, `room_h` | `db`,`db` | room size in 16-tile screens (width selects the row stride, `mapMultiWidth`) |
 | `tilemaps`, `charmaps` | `db`,`db` | number of compressed tile blobs / name table blobs that follow |
 | `cam` | 4 x `dw` | player offset X, camera offset X, player offset Y, camera offset Y - full format only |
-| `loads` | (`dw`,`dl`) x (`tilemaps`+`charmaps`) | VRAM word destination, compressed blob label (`Tiles_*`, `Screen_*`/`ScreenRaw_*` in `assets/gfx/banks.json`) |
+| `loads` | (`dw`,`dl`) x (`tilemaps`+`charmaps`) | VRAM word destination, compressed blob label (`Tiles_*`, `Screen_*`/`ScreenRaw_*` in `defs/gfx/banks.json`) |
 
 Areas `$00-$56` use the full format, areas `$57-$5F` (rain / clouds / snow overlays, intro scroll, logos, menu backgrounds) the short one without
 preset, flags and camera values. The tile blobs come first, the name tables last. The descriptors are in area id order (= ROM order); the

@@ -6,11 +6,11 @@ Mapping: LoROM, 64 banks of 32 KB ($80–$BF). Header and vectors: `src/code/hea
 |---|---|---|
 | $80–$85 | 65816 code (core, palette, tools, sound, game engine, maps, AI, input) | `src/code/bank_8x/` |
 | $86–$87 | object animation data | `assets/objects/bank_8x/` (generated asm: `build/gen/objects/`) |
-| $88–$91 | sprite graphics | `assets/gfx/banks.json` (generated asm: `build/gen/gfx/sprites/`) |
-| $92–$A0 | tile graphics | `assets/gfx/banks.json` (generated asm: `build/gen/gfx/tiles/`) |
-| $A1–$A6 | character graphics | `assets/gfx/banks.json` (generated asm: `build/gen/gfx/characters/`) |
+| $88–$91 | sprite graphics | `defs/gfx/banks.json` (generated asm: `build/gen/gfx/sprites/`) |
+| $92–$A0 | tile graphics | `defs/gfx/banks.json` (generated asm: `build/gen/gfx/tiles/`) |
+| $A1–$A6 | character graphics | `defs/gfx/banks.json` (generated asm: `build/gen/gfx/characters/`) |
 | $A7 | object maps | `assets/maps/*.json` (generated asm: `build/gen/maps/bank_A7.asm`) |
-| $A8–$A9 | palettes | `assets/gfx/banks.json` (generated asm: `build/gen/gfx/palettes/`) |
+| $A8–$A9 | palettes | `defs/gfx/banks.json` (generated asm: `build/gen/gfx/palettes/`) |
 | $AA–$AC | JP dialogs (empty in US/EU/DE) | `assets/dialogs/jp/*.txt` (generated asm) |
 | $AD–$B2 | audio (SPC700 driver, BRR samples, songs and SFX; confirmed against 20 emulator dumps, `docs/audio.md` section 12) | `assets/audio/banks.json` (generated asm: `build/gen/audio/`) |
 | $B3–$B5 | AI scripts: bodies = script DSL (one file per script, `src/ai/us/scripts/`; EU/DE/JP as `if !REGION_xx` blocks, `docs/regions-ai.md`); script pointer list, slot tables and NPC sprite tables are data | `src/ai/` (DSL) + `assets/ai/{scripts.json,npc_sprite_tables.txt}` (generated asm: `build/gen/ai/`) |
@@ -21,7 +21,7 @@ Mapping: LoROM, 64 banks of 32 KB ($80–$BF). Header and vectors: `src/code/hea
 
 Only code (and the script DSL): `src/code`, `src/ai`, `src/common`, `src/main.asm` and the region/header files, apart from the table list below. Data is built from the editable sources under `assets/`
 into git-ignored `build/gen/` (dialogs, object animation banks, object maps, area/menu/dialog tables, AI heads) or `assets/**` (`.bin`/`.pal`), see `docs/workflow.md`.
-The graphics banks ($88-$A6, $A8-$A9) are generated too: `assets/gfx/banks.json` lists per bank the ORG, the blobs in ROM order (`*` = included through `!{REGDIR}`, a release has its own version) and the
+The graphics banks ($88-$A6, $A8-$A9) are generated too: `defs/gfx/banks.json` lists per bank the ORG, the blobs in ROM order (`*` = included through `!{REGDIR}`, a release has its own version) and the
 trailing padding; `tools/data/gfxbanks.py build` (step "graphics bank asm" of `tools/build_assets.py`) writes `build/gen/gfx/<kind>/bank_XX.asm` (label + `incbin` + `fill`), which `src/main.asm` includes.
 The audio banks ($AD-$B2) work the same way: `assets/audio/banks.json` (ORG and blob labels in ROM order; every bank ends with `fill align $8000`) -> `build/gen/audio/bank_XX.asm`, written by `tools/audio/audioconv.py build` together with `build/gen/audio/audio_tables.inc` (the 65816-side sample/track tables included by `src/code/bank_83/audio.asm`).
 The AI banks ($B3-$B5): `tools/ai/aidata.py build` writes `build/gen/ai/head_B3..B5.asm` (ORG, `ppAIScriptingList`, the 214 NPC sprite tables) and `slots_NN.asm` (the entry-point table at the start of every script) from `assets/ai/`.

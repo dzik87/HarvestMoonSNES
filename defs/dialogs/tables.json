@@ -1,0 +1,9 @@
+{
+ "_doc": "ROM locations of the dialog tables of src/code/bank_83/dialog.asm per release (24-bit LoROM addresses; layout only, no ROM content). pointers: aDialogPointers (dialog_count x ptr24 to the dialog texts, which start at the first bank of dialog_banks); option_vram: aTextDataTableFFFE (5 words); number_vars: aTextDataTableFFFC (112 x [ptr24, size]); text_vars: aTextDataTableFFFD (up to the pointer table, [ptr24, size] each). number_vars_shift: the WRAM relocation of the release (!RAM_SHIFT in src/common/region.asm), used to write the shared numeric variable table.",
+ "dialog_count": 1176,
+ "number_var_count": 112,
+ "US": {"dialog_banks": ["B6", "B7", "B8", "B9", "BA", "BB"], "pointers": "$839BF6", "option_vram": "$8398CC", "number_vars": "$8398EE", "text_vars": "$839AAE", "ram_shift": 0},
+ "EU": {"dialog_banks": ["B6", "B7", "B8", "B9", "BA", "BB"], "pointers": "$839C02", "option_vram": "$8398D8", "number_vars": "$8398FA", "text_vars": "$839ABA", "ram_shift": 0},
+ "DE": {"dialog_banks": ["B6", "B7", "B8", "B9", "BA", "BB"], "pointers": "$839BB6", "option_vram": "$8398D8", "number_vars": "$8398FA", "text_vars": "$839ABA", "ram_shift": 6},
+ "JP": {"dialog_banks": ["AA", "AB", "AC"], "pointers": "$839B9C", "option_vram": "$8398C6", "number_vars": "$8398E8", "text_vars": "$839AA8", "ram_shift": -32}
+}

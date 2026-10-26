@@ -28,7 +28,7 @@ images is marked transparent (tRNS).  Name tables: 16-bit hex words, `columns` p
 
 `import` refuses to change the size of the blob in the ROM unless --allow-resize is given: a shorter compressed stream is
 padded with zeros automatically (layout unchanged); a longer one needs --allow-resize, which also shrinks the bank's
-trailing padding of the bank in assets/gfx/banks.json (error if the bank is full).
+trailing padding of the bank in defs/gfx/banks.json (error if the bank is full).
 """
 import argparse
 import fnmatch
@@ -65,7 +65,7 @@ KINDS = {
     "tilemaps": Kind("tilemaps", "assets/gfx/characters", ("Screen_", "ScreenRaw_"), "assets/gfx/tilemaps",
                      ".map.txt", "Screen_"),
 }
-LAYOUT_KIND = {"tiles": "tiles", "sprites": "sprites", "tilemaps": "characters"}     # kind -> group in assets/gfx/banks.json
+LAYOUT_KIND = {"tiles": "tiles", "sprites": "sprites", "tilemaps": "characters"}     # kind -> group in defs/gfx/banks.json
 
 # 4bpp was decided from VRAM destination slots (tile blobs are 8192 bytes = 256 4bpp tiles per $1000-word slot), from the
 # plane-correlation statistics and by looking at the rendered sheets.  Blobs whose planes 2-3 are empty or that hold only a
@@ -399,10 +399,10 @@ _LEGACY = {}
 
 
 def legacy_label(label, root=ROOT):
-    """address-based label this blob had before it was named (docs/naming/K3_gfx_names.csv), '' if none."""
+    """address-based label this blob had before it was named (defs/gfx/names/K3_gfx_names.csv), '' if none."""
     key = str(root)
     if key not in _LEGACY:
-        p = Path(root) / "docs/naming/K3_gfx_names.csv"
+        p = Path(root) / "defs/gfx/names/K3_gfx_names.csv"
         rows = list(csv.DictReader(p.open(encoding="utf-8"))) if p.exists() else []
         _LEGACY[key] = {r["new"]: r["old"] for r in rows}
     return _LEGACY[key].get(label, "")
@@ -556,7 +556,7 @@ def cmd_build(a, root=ROOT):
 
 def share_us_blobs(root=ROOT):
     """The generated bank asm (tools/data/gfxbanks.py) includes a blob through `!{REGDIR}` when ANY release has its own version of
-    it (`*` in assets/gfx/banks.json).  For the releases that use the US data, the build copies the shared US file into that
+    it (`*` in defs/gfx/banks.json).  For the releases that use the US data, the build copies the shared US file into that
     release's directory."""
     sys.path.insert(0, str(ROOT / "tools" / "data"))
     import gfxbanks
@@ -653,7 +653,7 @@ def cmd_check(a, root=ROOT):
 
 
 def adjust_padding(b, delta):
-    """blob grew by `delta` bytes: shrink the trailing padding of its bank in assets/gfx/banks.json and regenerate the bank asm."""
+    """blob grew by `delta` bytes: shrink the trailing padding of its bank in defs/gfx/banks.json and regenerate the bank asm."""
     if getattr(b, "region", "us") != "us":
         return None                                     # regional banks end in `fill align`: the padding adapts by itself
     sys.path.insert(0, str(ROOT / "tools" / "data"))
@@ -668,6 +668,8 @@ def adjust_padding(b, delta):
         if left < 0:
             raise ValueError(f"bank ${bank}: bank full, blob would exceed it by {-left} bytes")
         ent["pad"] = left
+        i = [x.lstrip("*") for x in ent["blobs"]].index(b.label)
+        ent["sizes"][i] += delta
         gfxbanks.save_layout(layout, b.root)
         gfxbanks.build(b.root)
         return Path(gfxbanks.LAYOUT)

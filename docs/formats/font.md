@@ -84,7 +84,7 @@ VRAM advance (`fDialog_AdvanceGlyphDestination` $839838: `type*8+8` words).
 `glyphs.json` -> `chars` lists id -> character as used by `tools/dialogs/dialog.py` (`src/common/charmap.asm` plus
 the per-region extras). US: `$00`-`$19` a-z, `$1A`-`$33` A-Z, `$34`-`$41` punctuation, `$42` heart, `$A2` next
 marker, `$B1` space, `$B2`-`$BB` digits (dialog text), `$BC`-`$C5` digits for number variables. JP: kana,
-see `tools/dialogs/glyphs/jp.json` (first occurrence of each character only; the table contains duplicates).
+see `defs/dialogs/charmap_jp.json` (first occurrence of each character only; the table contains duplicates).
 JP blank glyphs: `$00B1` and `$0270` are plain dither (so they have no PNG) but are real spaces. They are not duplicates:
 `$00B1` is type 1 (16 px, full-width space, written `U+3000` in the dialog sources) and `$0270` is type 0 (8 px,
 half-width space, written as an ASCII space). `$00B1` is by far the most used code in JP text (about 6000 uses).
