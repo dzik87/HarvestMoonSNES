@@ -62,9 +62,10 @@ or a CI job that is given the dumps by the repository owner (private runner or s
 | Step | Writes (`assets/`) | Reads from `defs/` | Notes |
 |---|---|---|---|
 | `palettes` | `gfx/palettes/*.json`, `*.png`, `<region>/*.json` | `gfx/banks.json` (palette order, labels, addresses) | colours only; regional palettes are the ones that differ from US |
+| `presets` | `gfx/presets.csv` | `gfx/presets.json` (ROM address, register order, comment lines) | the 24 PPU register tables of the map engine, US ROM |
 | `fonts` | `fonts/<region>/glyph_*.png`, `glyphs.json` | - (table addresses are in `tools/fonts/font.py`) | 4 releases; the glyph-to-character list comes from `src/common/charmap.asm` and `defs/dialogs/charmap_jp.json` |
 | `dialogs` | `dialogs/<region>/bank_*.txt`, `text_tables.json`, `text_vars.csv`, `dialogs/number_vars.csv` | `dialogs/tables.json` (ROM addresses of the tables), `dialogs/text_vars_shifted.json`, `dialogs/charmap_jp.json` | text = dialog words rendered with the charmap; the extraction verifies that the text re-assembles to the exact bank bytes |
-| `graphics` | `gfx/png/**` (screens, frames, remainder sheets, regional versions), `gfx/tilemaps/**`, sidecar JSON, `gfx/palette_map.json`, `gfx/graphics_loads.json` | `gfx/banks.json` (bank order, blob names and sizes), `gfx/tilemap_columns.json`, `gfx/names/K3` (legacy labels) | needs the output of `palettes`, `areas`, `objects` and `tables`; slowest step (about 1 min) |
+| `graphics` | `gfx/png/**` (screens, frames, remainder sheets, regional versions), `gfx/tilemaps/**`, sidecar JSON, `gfx/palette_map.json`, `gfx/graphics_loads.json` | `gfx/banks.json` (bank order, blob names and sizes), `gfx/tilemap_columns.json`, `gfx/names/K3` (legacy labels) | needs the output of `palettes`, `presets`, `areas`, `objects` and `tables`; slowest step (about 1 min) |
 
 Everything that can be computed from the ROM and the code is computed, not stored: the sidecars (bpp, tile sets, VRAM destinations, palette
 assignments, tail bytes), the palette map and the load register are derived from the area descriptors, the palette tables and the object

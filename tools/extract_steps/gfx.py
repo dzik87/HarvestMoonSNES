@@ -49,6 +49,13 @@ def run_dialogs(ctx: Context):
         print("  %d dialogs" % n)
 
 
+def run_presets(ctx: Context):
+    import presets
+    out = ctx.assets / "gfx" / "presets.csv"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_bytes(presets.extract_rom(ctx.rom_bytes("US"), ctx.defs).encode("utf-8"))
+
+
 def run_graphics(ctx: Context):
     from . import gfx_export
     n = gfx_export.extract_graphics(ctx, roms_bytes(ctx))
@@ -58,8 +65,9 @@ def run_graphics(ctx: Context):
 
 STEPS = [
     Step("palettes", run_palettes, ["US"], [], "117 palettes of banks $A8/$A9 as JSON + PNG (colours), regional versions"),
+    Step("presets", run_presets, ["US"], [], "PPU graphics presets (BG modes, name table / character bases, layers) of the map engine, assets/gfx/presets.csv"),
     Step("fonts", run_fonts, ["US", "EU", "DE", "JP"], [], "dialog font glyphs (16x16 2bpp) of every release as PNG + glyphs.json"),
     Step("dialogs", run_dialogs, ["US", "EU", "DE", "JP"], [], "dialog texts of the four releases (banks $B6-$BB / $AA-$AC) and the dialog engine tables"),
-    Step("graphics", run_graphics, ["US", "EU", "DE", "JP"], ["palettes", "areas", "objects", "tables"],
+    Step("graphics", run_graphics, ["US", "EU", "DE", "JP"], ["palettes", "presets", "areas", "objects", "tables"],
          "composed screen / frame PNGs, remainder sheets, name tables and sidecars of all 151 graphics blobs (US and the regional versions), palette map"),
 ]
