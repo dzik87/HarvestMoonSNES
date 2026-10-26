@@ -171,8 +171,8 @@ def load():
     if TABLES_INC.exists():                       # the sample/track tables are generated from assets/audio
         text += "\n" + TABLES_INC.read_text()
     p.sample_size = words(parse_data(_section(text, "aAudioSampleSize", "aAudioTrackDataSizeTable")))
-    p.track_size = words(parse_data(_section(text, "aAudioTrackDataSizeTable", "sAudioData1_838F83")))
-    flat = parse_data(_section(text, "sAudioData1_838F83", "sAudioSampleData"))
+    p.track_size = words(parse_data(_section(text, "aAudioTrackDataSizeTable", "sAudioTrackTable")))
+    flat = parse_data(_section(text, "sAudioTrackTable", "sAudioSampleData"))
     p.track_table = []
     for i in range(0, len(flat), 14):
         e = flat[i:i + 14]
@@ -193,7 +193,7 @@ def load():
     p.engine_rom = ((int(m.group(2), 16) << 16) | int(m.group(1), 16)) if m else 0xAD8000
     m = re.search(r"fAudio_UploadData:.*?LDA\.W #\$([0-9A-F]{4})[^\n]*\n\s*TAX", text, re.S)
     p.engine_size = int(m.group(1), 16) if m else 0x0FD6
-    func = _section(text, "fAudio_UploadSpcDataBlock_B2D120", "fAudio_LoadCommonSamples")
+    func = _section(text, "fAudio_UploadSpcDriver", "fAudio_LoadCommonSamples")
     m_size = re.search(r"LDA\.W #\$([0-9A-F]{4})[^\n]*\n\s*STA\.B strcVariables\.n16Temp1", func)
     m_ptr = re.search(r"LDA\.W #\$([0-9A-F]{4})[^\n]*\n\s*STA\.B ptrAudioData\b", func)
     m_bank = re.search(r"LDA\.B #\$([0-9A-F]{2})[^\n]*\n\s*STA\.B ptrAudioData\+2", func)

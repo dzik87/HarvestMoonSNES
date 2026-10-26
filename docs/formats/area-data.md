@@ -14,7 +14,7 @@ generated files are included by the code at the place of the former data (same l
 ## areas.csv
 
 `id,name,gfx,object_map,object_props,music` - one row per area. `name` is the enum constant (checked against `enums.asm`), the other columns are the labels
-the four tables point to. `EMPTY_FFFFFF` (object map / property table) and `PTR16_80FFFF` (music) mark areas without that data. The object maps
+the four tables point to. `PTR24_None` (object map / property table) and `PTR16_None` (music) mark areas without that data. The object maps
 themselves are `assets/maps/sObjectMap_*.json` (`tools/maps/objmap.py`); `check` verifies that the `areas` list of each map file equals the rows
 that use it. Several areas share one blob (the four seasons of the farm use `sObjectMap_DefaultFarm`).
 

@@ -43,7 +43,7 @@ fObject_Create:
     BNE .find_slot_loop                                                ;85803D|D0F0    |85802F;
     LDA.W #$FFFF                                               ;85803F|A9FFFF  |      ;
     STA.B strcObject.exists                                    ;858042|85A7    |0000A7;
-    BRA fReturn_8580B8                                         ;858044|8072    |8580B8;
+    BRA fObject_ReturnLong                                         ;858044|8072    |8580B8;
  
  
 .slot_found:
@@ -101,7 +101,7 @@ fObject_Create:
     LDA.W #$0000                                               ;8580B3|A90000  |      ;
     STA.B strcObject.exists                                    ;8580B6|85A7    |0000A7;
  
-fReturn_8580B8:
+fObject_ReturnLong:
     RTL                                                        ;8580B8|6B      |      ; FIXME: I want to be .return
  
  
@@ -176,7 +176,7 @@ fObject_Replace:
     STA.B strcObject.gameObjectIdxOffs                         ;858127|85A9    |0000A9;
     JSR.W fObject_CheckComponentsPending                                      ;858129|207B8B  |858B7B;
     LDA.B strcObject.bankAddress                               ;85812C|A5AF    |0000AF;
-    BNE fReturn_8580B8                                         ;85812E|D088    |8580B8; BUG - should be .return in this function rather than previous one since we are out of function scope
+    BNE fObject_ReturnLong                                         ;85812E|D088    |8580B8; BUG - should be .return in this function rather than previous one since we are out of function scope
     JSR.W fObject_ReleaseSpriteTiles                                      ;858130|20418B  |858B41;
     REP #$30                                                   ;858133|C230    |      ;
     LDY.B strcObject.gameObjectIdx                             ;858135|A4A5    |0000A5;
@@ -245,7 +245,7 @@ fObject_Destroy:
     JSR.W fObject_CheckComponentsPending                                      ;8581AE|207B8B  |858B7B;
     LDA.B strcObject.bankAddress                               ;8581B1|A5AF    |0000AF;
     BEQ +                                                      ;8581B3|F003    |8581B8;
-    JMP.W fReturn_8580B8                                       ;8581B5|4CB880  |8580B8; BUG - should be .return in this function rather than JUMP to other RTL
+    JMP.W fObject_ReturnLong                                       ;8581B5|4CB880  |8580B8; BUG - should be .return in this function rather than JUMP to other RTL
  
  
   + JSR.W fObject_ReleaseSpriteTiles                                      ;8581B8|20418B  |858B41;
@@ -761,7 +761,7 @@ fObject_RenderAll:
     AND.W #$FFFC                                               ;85852A|29FCFF  |      ;
     LSR A                                                      ;85852D|4A      |      ;
     TAX                                                        ;85852E|AA      |      ;
-    LDA.L Table_858BD0,X                                       ;85852F|BFD08B85|858BD0;
+    LDA.L aOamHighBitPairMask,X                                       ;85852F|BFD08B85|858BD0;
     ORA.B $C3                                                  ;858533|05C3    |0000C3;
     STA.B $C3                                                  ;858535|85C3    |0000C3;
  
@@ -893,11 +893,11 @@ fObject_SetupOamDma:
     RTL                                                        ;858626|6B      |      ;
  
  
-Table_858627:
+aOamBitPairSetMaskUnused:
     dw $0001,$0004,$0010,$0040,$0100,$0400                     ;858627|        |      ;
     dw $1000,$4000                                             ;858633|        |      ;
  
-Table_858637:
+aOamBitPairClearMaskUnused:
     dw $FFFC,$FFF3,$FFCF,$FF3F,$FCFF,$F3FF                     ;858637|        |      ;
     dw $CFFF,$3FFF                                             ;858643|        |      ;
  
@@ -1349,7 +1349,7 @@ fObject_FlipOffsetX:
     PHA                                                        ;858BB2|48      |      ;
     LDA.B strcObject.flip                                      ;858BB3|A59F    |00009F;
     AND.W #$0040                                               ;858BB5|294000  |      ;
-    BEQ fReturnWithPullA_858BCE                                ;858BB8|F014    |858BCE;
+    BEQ fObject_PullAAndReturn                                ;858BB8|F014    |858BCE;
     BRA fObject_NegateOffsetMinus16                                        ;858BBA|8008    |858BC4;
  
  
@@ -1357,7 +1357,7 @@ fObject_FlipOffsetY:
     PHA                                                        ;858BBC|48      |      ;
     LDA.B strcObject.flip                                      ;858BBD|A59F    |00009F;
     AND.W #$0080                                               ;858BBF|298000  |      ;
-    BEQ fReturnWithPullA_858BCE                                ;858BC2|F00A    |858BCE;
+    BEQ fObject_PullAAndReturn                                ;858BC2|F00A    |858BCE;
  
 fObject_NegateOffsetMinus16:
     PLA                                                        ;858BC4|68      |      ;
@@ -1368,7 +1368,7 @@ fObject_NegateOffsetMinus16:
     RTS                                                        ;858BCD|60      |      ;
  
  
-fReturnWithPullA_858BCE:
+fObject_PullAAndReturn:
     PLA                                                        ;858BCE|68      |      ;
     RTS                                                        ;858BCF|60      |      ;
  
@@ -1422,7 +1422,7 @@ fObject_AcquireTileSlot:
     RTS                                                        ;858C7E|60      |      ;
  
  
-Table_858C7F:
+aObjectBitMask16Unused:
     dw $0001,$0002,$0004,$0008,$0010,$0020                     ;858C7F|        |      ;
     dw $0040,$0080,$0100,$0200,$0400,$0800                     ;858C8B|        |      ;
     dw $1000,$2000,$4000,$8000                                 ;858C97|        |      ;

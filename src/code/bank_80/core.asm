@@ -601,7 +601,7 @@ fCore_InterruptIRQ5:
     LDA.B #$00                                                 ;808602|A900    |      ;
     JSL.L fAudio_SendCommand0B                                 ;808604|22328E83|838E32;
     JSL.L fAudio_LoadCommonSamples                       ;808608|22988583|838598;
-    JSL.L fAudio_UploadSpcDataBlock_B2D120                                 ;80860C|22D38483|8384D3;
+    JSL.L fAudio_UploadSpcDriver                                 ;80860C|22D38483|8384D3;
     JSL.L fCore_InitializeScreenStatus                         ;808610|224C8C80|808C4C;
     JSL.L fCore_ZeroVRAM                                       ;808614|22468880|808846;
     JSL.L fCore_ZeroOAM                                        ;808618|22878880|808887;

@@ -2919,9 +2919,9 @@ fAIAction0x30_UpdateChicken:
     REP #$30
     LDA.L $7F1F5A
     AND.W #$0002
-    BEQ .r_849A4F_1
+    BEQ .continue_update
     JMP.W .finish_update
-.r_849A4F_1:
+.continue_update:
     SEP #$20
     else
     SEP #$20                                                   ;849A4F|E220    |      ;
@@ -4356,9 +4356,9 @@ fAIAction0x31_CowState0xE0:
     REP #$30
     LDA.L $7F1F5A
     AND.W #$0002
-    BEQ .r_84A498_1
+    BEQ .continue_update
     JMP.W fAIAction0x31_CowUpdateTail
-.r_84A498_1:
+.continue_update:
     REP #$30
     else
     REP #$30                                                   ;84A498|C230    |      ;

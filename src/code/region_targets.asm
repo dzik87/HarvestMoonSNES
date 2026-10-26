@@ -25,7 +25,7 @@ if !REGION_DE
     aSystemTransferArgument = $82E8B7
     L_82E747 = $82E8C4
     L_82E95F = $82EADC
-    L_84C2D8 = $84C2F4
+    fInput_Case04_StartPressedTarget = $84C2F4
 elseif !REGION_EU
     L_818149 = $81814E
     L_818161 = $81816B
@@ -47,7 +47,7 @@ elseif !REGION_EU
     fMainMenu_NewGameSlotSelect_MoveCursorSlot2 = $82E18F
     L_82E747 = $82E730
     L_82E95F = $82E948
-    L_84C2D8 = $84C2F4
+    fInput_Case04_StartPressedTarget = $84C2F4
 elseif !REGION_JP
     fPaletteAnim_TownFall_NYPublicSquare_T1 = $80CAA1
     fPaletteAnim_TownFall_T2 = $80CAA1

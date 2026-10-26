@@ -64,7 +64,7 @@ is un-flipped (attribute bit 5 = H, bit 4 = V) and written to `sheet / block / n
   header; all 68 entries of `aTileMapData` (`$80AA7C`) whose header could be read (`s*Map` labels in `src/code/bank_80/tilemaps.asm`, comment
   "Graphic Preset") have preset 0 (56 maps), 1 (11) or 2 (1) [D], so objects in map scenes are drawn with OBSEL `$60`.
 * The OAM size bit is **never set** for object sprites: the only bit the renderer ORs into the OAM high table is the X bit 8
-  (`Table_858BD0` `$858BD0` = `$0001,$0004,$0010,...` i.e. bit 0 of each 2-bit pair; `$85852F`). Every object sprite is therefore a
+  (`aOamHighBitPairMask` `$858BD0` = `$0001,$0004,$0010,...` i.e. bit 0 of each 2-bit pair; `$85852F`). Every object sprite is therefore a
   "small" sprite = 16x16 under OBSEL `$60`. [C]
 * Presets 6-9 (`$03`) would make "small" 8x8; none of those 68 maps uses them (they belong to the non-map screens that call
   `fCore_ManageGraphicsPresets` directly), so objects are never drawn that way in map scenes [I].

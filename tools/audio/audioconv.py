@@ -12,7 +12,7 @@ Sources (extracted from the ROM into assets/audio/, see docs/extraction.md; name
 Generated (git-ignored):
   assets/audio/<label>.bin          one blob per label
   build/gen/audio/bank_XX.asm       ORG + labels + incbin of the blobs of each bank $AD-$B2, layout from defs/audio/banks.json
-  build/gen/audio/audio_tables.inc  aAudioSampleSize / aAudioTrackDataSizeTable / sAudioData1_838F83 / sAudioSampleData /
+  build/gen/audio/audio_tables.inc  aAudioSampleSize / aAudioTrackDataSizeTable / sAudioTrackTable / sAudioSampleData /
                                     aAudioSfxSampleIdTable / aAudioSampleLookupTable (included by code/bank_83/audio.asm)
 
 Commands:
@@ -252,7 +252,7 @@ def gen_tables(man, metas, blobs, sizes):
         out.append("")
     words("aAudioSampleSize", [sizes[ids[i]["label"]] for i in range(n)])
     words("aAudioTrackDataSizeTable", [len(blobs[t["blob"]]) for t in man["tracks"]])
-    out.append("sAudioData1_838F83:   ; 0x1A * [ptr24 pAudioTrack, 11 * n8 sample id]")
+    out.append("sAudioTrackTable:   ; 0x1A * [ptr24 pAudioTrack, 11 * n8 sample id]")
     for t in man["tracks"]:
         sm = list(t["samples"]) + [0] * (11 - len(t["samples"]))
         if len(sm) != 11:
