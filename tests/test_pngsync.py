@@ -93,8 +93,7 @@ def clone_tree(tmp, drop_sources=False):
     (tmp / "src/code/bank_80").mkdir(parents=True)
     shutil.copy(ROOT / "assets/gfx/presets.csv", tmp / "assets/gfx/presets.csv")
     (tmp / "assets/areas").mkdir(parents=True)
-    for f in ("areas.csv", "area_gfx.json"):
-        shutil.copy(ROOT / "assets/areas" / f, tmp / "assets/areas" / f)
+    shutil.copy(ROOT / "assets/areas/area_gfx.json", tmp / "assets/areas/area_gfx.json")      # areas.csv is structure: copied with defs/
     if drop_sources:
         for r in ("", "eu/", "de/", "jp/"):
             base = tmp / "assets/gfx/png" / r
