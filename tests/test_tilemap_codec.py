@@ -20,7 +20,7 @@ VALID_SIZES = {0x800, 0x1000, 0x1800, 0x2000, 0x8000}
 
 def load_blobs():
     """(label, bytes of the label span, span + the first 64 bytes of what follows) of every sCompressed* blob, from the generated
-    assets/gfx/{tiles,characters}/*.bin in ROM order (layout: assets/gfx/banks.json; run tools/build_assets.py first)."""
+    assets/gfx/{tiles,characters}/*.bin in ROM order (layout: defs/gfx/banks.json; run tools/build_assets.py first)."""
     sys.path.insert(0, os.path.join(ROOT, 'tools', 'data'))
     import gfxbanks
     blobs = []
@@ -79,7 +79,7 @@ def test_unit():
 
 def test_game_blobs():
     blobs = load_blobs()
-    check(blobs, 'no sCompressed blobs found in assets/gfx/banks.json')
+    check(blobs, 'no sCompressed blobs found in defs/gfx/banks.json')
     n_blobs = comp_total = decomp_total = exact = 0
     hidden_found = 0
     for label, raw, ext in blobs:

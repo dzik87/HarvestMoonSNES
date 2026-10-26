@@ -71,7 +71,7 @@ def kind_of(label):
 
 
 def us_layout(bank, root=ROOT):
-    """Ordered blobs of a US bank from the layout (assets/gfx/banks.json) and the (generated) .bin sizes."""
+    """Ordered blobs of a US bank from the layout (defs/gfx/banks.json: labels and sizes)."""
     sys.path.insert(0, str(ROOT / "tools" / "data"))
     import gfxbanks
     layout = gfxbanks.load_layout(root)
@@ -79,13 +79,13 @@ def us_layout(bank, root=ROOT):
         if bank in layout[group]:
             break
     else:
-        raise FileNotFoundError(f"bank ${bank}: not in assets/gfx/banks.json")
+        raise FileNotFoundError(f"bank ${bank}: not in defs/gfx/banks.json")
     b = layout[group][bank]
     out = []
-    for name in b["blobs"]:
+    for name, size in zip(b["blobs"], gfxbanks.blob_sizes(group, b)):
         label = name.lstrip("*")
         asset = Path(root) / "assets/gfx" / group / f"{label}.bin"
-        out.append(Entry(label, kind_of(label), asset.stat().st_size, group, asset))
+        out.append(Entry(label, kind_of(label), size, group, asset))
     if b["pad"] is not None:
         out.append(Entry(f"Padding_{bank}0000", "padding", b["pad"] if b["pad"] != "align" else 0, group, None))
     return out

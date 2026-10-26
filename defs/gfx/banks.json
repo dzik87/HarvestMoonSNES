@@ -32,21 +32,21 @@
   ]}
  },
  "tiles": {
-  "92": {"org": "$928000", "pad": 4534, "blobs": [
+  "92": {"org": "$928000", "pad": 4534, "sizes": [715, 6725, 7667, 6312, 6815], "blobs": [
     "Tiles_Overlay_Rain",
     "Tiles_Farm_Fall_0",
     "Tiles_Farm_Fall_1",
     "Tiles_Farm_Fall_2",
     "Tiles_Farm_SpringSummer_0"
   ]},
-  "93": {"org": "$938000", "pad": 2236, "blobs": [
+  "93": {"org": "$938000", "pad": 2236, "sizes": [7822, 6312, 6419, 4322, 5657], "blobs": [
     "Tiles_Farm_SpringSummer_1",
     "Tiles_Farm_SpringSummer_2",
     "Tiles_Farm_Winter_0",
     "Tiles_Farm_Winter_1",
     "Tiles_Farm_Winter_2"
   ]},
-  "94": {"org": "$948000", "pad": "align", "blobs": [
+  "94": {"org": "$948000", "pad": "align", "sizes": [6211, 4096, 4096, 4096, 4096, 4096, 4096], "blobs": [
     "Tiles_MountainCave",
     "*sFontGlyphs_0x00",
     "*sFontGlyphs_0x01",
@@ -55,7 +55,7 @@
     "sFontGlyphs_0x04",
     "sFontGlyphs_0x05"
   ]},
-  "95": {"org": "$958000", "pad": "align", "blobs": [
+  "95": {"org": "$958000", "pad": "align", "sizes": [4096, 4096, 4096, 4096, 5858, 4545, 5899], "blobs": [
     "sFontGlyphs_0x06",
     "sFontGlyphs_0x07",
     "sFontGlyphs_0x08",
@@ -64,14 +64,14 @@
     "Tiles_House_1",
     "Tiles_MayorHouse"
   ]},
-  "96": {"org": "$968000", "pad": 2724, "blobs": [
+  "96": {"org": "$968000", "pad": 2724, "sizes": [5175, 6362, 6008, 6116, 6383], "blobs": [
     "Tiles_Church",
     "Tiles_FlowerShop",
     "Tiles_Bar",
     "Tiles_Restaurant",
     "Tiles_GeneralStore"
   ]},
-  "97": {"org": "$978000", "pad": 974, "blobs": [
+  "97": {"org": "$978000", "pad": 974, "sizes": [6792, 5778, 837, 6337, 6786, 5264], "blobs": [
     "Tiles_AnimalShop",
     "Tiles_FortuneTellerHouse",
     "Tiles_Overlay_Clouds",
@@ -79,21 +79,21 @@
     "Tiles_Town_Summer_1",
     "Tiles_Town_Summer_2"
   ]},
-  "98": {"org": "$988000", "pad": 1666, "blobs": [
+  "98": {"org": "$988000", "pad": 1666, "sizes": [6738, 5257, 7568, 6066, 5473], "blobs": [
     "Tiles_Town_Fall_1",
     "Tiles_Town_Fall_2",
     "Tiles_HarvestFestival_2",
     "Tiles_Road_SpringToFall",
     "Tiles_Road_Winter"
   ]},
-  "99": {"org": "$998000", "pad": 3786, "blobs": [
+  "99": {"org": "$998000", "pad": 3786, "sizes": [6772, 5199, 5423, 6347, 5241], "blobs": [
     "Tiles_Town_Spring_1",
     "Tiles_Town_Spring_2",
     "Tiles_FlowerFestival_2",
     "Tiles_EggFestival_2",
     "Tiles_Town_Winter_0"
   ]},
-  "9A": {"org": "$9A8000", "pad": "align", "blobs": [
+  "9A": {"org": "$9A8000", "pad": "align", "sizes": [6433, 5514, 4332, 1266, 1720, 2070, 3286, 5815], "blobs": [
     "Tiles_Town_Winter_1",
     "Tiles_Town_Winter_2",
     "Tiles_StarNightFestivalSquare_2",
@@ -103,7 +103,7 @@
     "*Tiles_Menu_3",
     "Tiles_ToolShed_0"
   ]},
-  "9B": {"org": "$9B8000", "pad": "align", "blobs": [
+  "9B": {"org": "$9B8000", "pad": "align", "sizes": [1089, 620, 6310, 6170, 6178, 5975], "blobs": [
     "*Tiles_ToolShed_1",
     "Tiles_Overlay_HeavySnow",
     "Tiles_GoldChicken",
@@ -111,7 +111,7 @@
     "Tiles_Summit_SpringToFall_0",
     "Tiles_Summit_Winter_0"
   ]},
-  "9C": {"org": "$9C8000", "pad": 74, "blobs": [
+  "9C": {"org": "$9C8000", "pad": 74, "sizes": [5727, 3501, 6039, 4096, 6106, 7225], "blobs": [
     "Tiles_Summit_SpringToFall_1",
     "Tiles_Summit_Winter_1",
     "Tiles_BarnCoop",
@@ -119,14 +119,14 @@
     "Tiles_Mountain_Summer_0",
     "Tiles_Mountain_Summer_1"
   ]},
-  "9D": {"org": "$9D8000", "pad": 88, "blobs": [
+  "9D": {"org": "$9D8000", "pad": 88, "sizes": [6428, 6210, 7379, 6557, 6106], "blobs": [
     "Tiles_Mountain_SpringSummer_2",
     "Tiles_Mountain_Fall_0",
     "Tiles_Mountain_Fall_1",
     "Tiles_Mountain_Fall_2",
     "Tiles_Mountain_Spring_0"
   ]},
-  "9E": {"org": "$9E8000", "pad": "align", "blobs": [
+  "9E": {"org": "$9E8000", "pad": "align", "sizes": [7277, 623, 6273, 6827, 6453, 1173], "blobs": [
     "Tiles_Mountain_Spring_1",
     "Tiles_Overlay_Snow",
     "Tiles_Mountain_Winter_0",
@@ -134,7 +134,7 @@
     "Tiles_Mountain_Winter_2",
     "*Tiles_Credits_0"
   ]},
-  "9F": {"org": "$9F8000", "pad": "align", "blobs": [
+  "9F": {"org": "$9F8000", "pad": "align", "sizes": [5228, 5641, 5591, 5262, 6845, 2131], "blobs": [
     "*Tiles_IntroFarmScroll_0",
     "*Tiles_IntroFarmScroll_1",
     "*Tiles_IntroFarmScroll_2",
@@ -142,7 +142,7 @@
     "Tiles_Unused_TitleLogoJapanese",
     "*Tiles_NatsumeLogo"
   ]},
-  "A0": {"org": "$A08000", "pad": 822, "blobs": [
+  "A0": {"org": "$A08000", "pad": 822, "sizes": [2281, 2377, 6380, 8081, 7123, 5704], "blobs": [
     "Tiles_Credits_1",
     "Tiles_Credits_2",
     "Tiles_Credits_3",
@@ -152,16 +152,16 @@
   ]}
  },
  "characters": {
-  "A1": {"org": "$A18000", "pad": null, "blobs": [
+  "A1": {"org": "$A18000", "pad": null, "sizes": [32768], "blobs": [
     "ScreenRaw_Farm"
   ]},
-  "A2": {"org": "$A28000", "pad": 8256, "blobs": [
+  "A2": {"org": "$A28000", "pad": 8256, "sizes": [24512], "blobs": [
     "ScreenRaw_Mountain"
   ]},
-  "A3": {"org": "$A38000", "pad": null, "blobs": [
+  "A3": {"org": "$A38000", "pad": null, "sizes": [32768], "blobs": [
     "ScreenRaw_Town"
   ]},
-  "A4": {"org": "$A48000", "pad": 738, "blobs": [
+  "A4": {"org": "$A48000", "pad": 738, "sizes": [430, 2175, 2607, 745, 1087, 682, 1897, 1282, 1020, 1340, 1295, 993, 932, 893, 508, 2509, 974, 2309, 8352], "blobs": [
     "Screen_Overlay_Rain",
     "Screen_ElfTunnel",
     "Screen_MountainCave",
@@ -182,7 +182,7 @@
     "Screen_FlowerFestival",
     "Screen_EggFestival"
   ]},
-  "A5": {"org": "$A58000", "pad": "align", "blobs": [
+  "A5": {"org": "$A58000", "pad": "align", "sizes": [807, 2082, 581, 2433, 1273, 515, 1482, 715, 1655, 811, 799, 730, 776, 1095, 1230, 629, 1160, 432, 643, 1732, 1278, 1338, 975, 891, 937, 900, 862, 1025, 535, 747, 626, 706], "blobs": [
     "*Screen_Menu_Backgrounds",
     "Screen_StarNightFestivalSquare",
     "Screen_ToolShed",
@@ -216,7 +216,7 @@
     "Screen_Ending05",
     "Screen_Ending06"
   ]},
-  "A6": {"org": "$A68000", "pad": "align", "blobs": [
+  "A6": {"org": "$A68000", "pad": "align", "sizes": [553, 522, 587, 486, 1387, 727, 1096, 1192, 1792, 4096], "blobs": [
     "Screen_Ending07",
     "Screen_Ending08",
     "Screen_Ending09",

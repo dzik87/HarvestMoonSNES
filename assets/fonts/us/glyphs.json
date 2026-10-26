@@ -1,6 +1,6 @@
 {
  "region": "us",
- "source": "assets/gfx/tiles/sFontGlyphs_*.bin",
+ "source": "rom",
  "format": {
   "glyph_size": [
    16,

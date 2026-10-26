@@ -8,7 +8,7 @@ The format is a textbook LZSS (Haruhiko Okumura's `LZSS.C`) with a 2048-byte rin
 buffer, 3..34 byte matches, LSB-first flag bytes where `1` means literal, a
 4-byte header and no end marker (the output size in the header terminates the
 stream). It is used for every `sCompressedTiles_*` and
-`sCompressedTilemap_*` blob (banks $92-$A6, layout in `assets/gfx/banks.json`, generated asm in `build/gen/gfx/tiles/` and
+`sCompressedTilemap_*` blob (banks $92-$A6, layout in `defs/gfx/banks.json`, generated asm in `build/gen/gfx/tiles/` and
 `build/gen/gfx/characters/`). Despite the name, several of these blobs are plain
 tile maps for BG layers, others are character (tile graphics) data; the codec
 does not care.
@@ -161,7 +161,7 @@ decoder also accepts streams from other encoders.)
 
 ## Statistics
 
-Counted by `tests/test_tilemap_codec.py` (source: the generated `assets/gfx/{tiles,characters}/*.bin` in the order of `assets/gfx/banks.json`):
+Counted by `tests/test_tilemap_codec.py` (source: the generated `assets/gfx/{tiles,characters}/*.bin` in the order of `defs/gfx/banks.json`):
 
 | Item                                   | Value            |
 |----------------------------------------|------------------|
@@ -191,7 +191,7 @@ API: `decompress(data, offset=0) -> (output, consumed)`, `compress(data) -> byte
 Inspection of the decompressed data (`tools/gfx/gfxpipe.py export --png`) showed that the
 original labels used the opposite of the usual SNES terminology (tile graphics were called
 "tilemaps", name tables "charactermaps"). The labels were corrected in
-`docs/naming/K1_gfx_tiles.csv` and `docs/naming/K2_gfx_tilemaps.csv`:
+`defs/gfx/names/K1_gfx_tiles.csv` and `defs/gfx/names/K2_gfx_tilemaps.csv`:
 
 | Prefix                 | Directory               | Count | Contents |
 |------------------------|-------------------------|-------|----------|

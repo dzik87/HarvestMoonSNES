@@ -1,24 +1,25 @@
 #!/usr/bin/env python3
-"""Graphics data banks ($88-$A9) as a build product: assets/gfx/banks.json (committed layout) -> build/gen/gfx/<kind>/bank_XX.asm.
+"""Graphics data banks ($88-$A9) as a build product: defs/gfx/banks.json (committed layout) -> build/gen/gfx/<kind>/bank_XX.asm.
 
-The layout lists, per bank, the ORG, the blobs in ROM order (labels = file names of the generated assets/gfx/<kind>/<label>.bin|.pal)
-and the trailing padding (`fill N` or `fill align $8000`).  A blob name starting with `*` is included through `!{REGDIR}` (any release
+The layout lists, per bank, the ORG, the blobs in ROM order (labels = file names of the generated assets/gfx/<kind>/<label>.bin|.pal),
+their sizes in bytes (`sizes`, parallel to `blobs`: the label span in the ROM, i.e. a compressed stream plus the bytes up to the next
+label; omitted for the fixed size kinds sprites = $8000 and palettes = $200) and the trailing padding (`fill N` or `fill align $8000`).
+The extractor (tools/extract.py, step `graphics`) cuts the blobs out of the ROM with exactly this layout.  A blob name starting with `*` is included through `!{REGDIR}` (any release
 has its own version, tools/gfx/pngsync.py / palette.py copy the shared US file into the other releases' directories).  src/main.asm
 includes the generated files; nothing of this is committed as assembly.
 
   build   [--root DIR]    write build/gen/gfx/<kind>/bank_XX.asm
-  check                    every bank of the layout adds up to $8000 bytes (needs the generated .bin / .pal files)
-  extract                  one-shot migration from the former committed src/data/gfx/**/bank_*.asm (kept for history; the files no longer exist)
+  check                    every bank of the layout adds up to $8000 bytes
 """
 import json
-import re
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 BANK = 0x8000
 KINDS = {"sprites": "bin", "tiles": "bin", "characters": "bin", "palettes": "pal"}
-LAYOUT = "assets/gfx/banks.json"
+LAYOUT = "defs/gfx/banks.json"
+FIXED_SIZE = {"sprites": BANK, "palettes": 512}
 GEN = "build/gen/gfx"
 
 
@@ -33,7 +34,8 @@ def save_layout(layout, root=ROOT):
         for bi, (bank, b) in enumerate(banks.items()):
             pad = json.dumps(b["pad"])
             blobs = ",\n".join("    " + json.dumps(x) for x in b["blobs"])
-            lines.append(f'  "{bank}": {{"org": "{b["org"]}", "pad": {pad}, "blobs": [\n{blobs}\n  ]}}' + ("," if bi < len(banks) - 1 else ""))
+            sizes = f', "sizes": {json.dumps(b["sizes"])}' if "sizes" in b else ""
+            lines.append(f'  "{bank}": {{"org": "{b["org"]}", "pad": {pad}{sizes}, "blobs": [\n{blobs}\n  ]}}' + ("," if bi < len(banks) - 1 else ""))
         lines.append(" }" + ("," if ki < len(layout) - 1 else ""))
     lines.append("}")
     (Path(root) / LAYOUT).write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
@@ -85,11 +87,21 @@ def bank_of(root, label):
     raise KeyError(label)
 
 
+def blob_sizes(kind, b):
+    """[size] of the blobs of a bank entry in ROM order (from the layout)."""
+    if "sizes" in b:
+        if len(b["sizes"]) != len(b["blobs"]):
+            raise ValueError(f"{kind}: sizes and blobs differ in length")
+        return list(b["sizes"])
+    if kind not in FIXED_SIZE:
+        raise ValueError(f"{kind}: bank entry without sizes")
+    return [FIXED_SIZE[kind]] * len(b["blobs"])
+
+
 def bank_sizes(root, kind, bank, b=None):
-    """[(label, size)] in ROM order from the generated assets; the padding entry last (size from the layout / the rest of the bank)."""
+    """[(label, size)] in ROM order from the layout; the padding entry last (size from the layout / the rest of the bank)."""
     b = b or load_layout(root)[kind][bank]
-    ext = KINDS[kind]
-    out = [(x.lstrip("*"), (Path(root) / "assets/gfx" / kind / f"{x.lstrip('*')}.{ext}").stat().st_size) for x in b["blobs"]]
+    out = [(x.lstrip("*"), n) for x, n in zip(b["blobs"], blob_sizes(kind, b))]
     if b["pad"] is not None:
         out.append((f"Padding_{bank}0000", b["pad"] if b["pad"] != "align" else BANK - sum(s for _, s in out)))
     return out
@@ -108,27 +120,6 @@ def cmd_check(root=ROOT):
     return 1 if bad else 0
 
 
-def extract(root=ROOT):
-    layout = {}
-    for kind in KINDS:
-        banks = {}
-        for f in sorted((Path(root) / "src/data/gfx" / kind).glob("bank_*.asm")):
-            text = f.read_text(encoding="utf-8")
-            bank = f.stem.split("_")[1]
-            org = "$" + re.search(r"ORG \$([0-9A-Fa-f]+)", text).group(1).upper()
-            blobs, pad = [], None
-            for label, body in re.findall(r"^([A-Za-z_]\w*):\n((?:[ \t]+.*\n?)*)", text, re.M):
-                m = re.search(r'incbin "[^"]*/(!\{REGDIR\})?[^/"]+"', body)
-                if m:
-                    blobs.append(("*" if m.group(1) else "") + label)
-                else:
-                    m = re.search(r"fill (\d+|align \$8000)", body)
-                    pad = "align" if m.group(1).startswith("align") else int(m.group(1))
-            banks[bank] = {"org": org, "pad": pad, "blobs": blobs}
-        layout[kind] = banks
-    save_layout(layout, root)
-
-
 def main(argv=None):
     cmd = (argv or sys.argv[1:] or ["build"])[0]
     if cmd == "build":
@@ -136,9 +127,6 @@ def main(argv=None):
         return 0
     if cmd == "check":
         return cmd_check()
-    if cmd == "extract":
-        extract()
-        return 0
     raise SystemExit(__doc__)
 
 

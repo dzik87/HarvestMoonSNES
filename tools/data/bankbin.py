@@ -2,7 +2,7 @@
 """Raw data banks (`db` dumps) <-> binary assets included with incbin, byte-exact.
 
 Groups (source dir -> asset dir):
-  (the graphics banks are generated from assets/gfx/banks.json by tools/data/gfxbanks.py and no longer handled here)
+  (the graphics banks are generated from defs/gfx/banks.json by tools/data/gfxbanks.py and no longer handled here)
   (the audio banks are generated from assets/audio/banks.json by tools/audio/audioconv.py; this module keeps BANK for the tests)
 
 Every label becomes one .bin; the generated .asm keeps ORG and labels (so code references are unchanged) and

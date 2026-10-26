@@ -10,7 +10,7 @@ Dialog banks ($B6-$BB for US/EU/DE, $AA-$AC for JP) are sequences of 16-bit word
     $FFFF          <END>       end of dialog
 Glyph ids with a known character are written as that character (src/common/charmap.asm plus region extras);
 every other id (including repeated glyphs of the JP table) is written as <XXXX> (hex) so that the conversion is
-always lossless. The JP glyph table is tools/dialogs/glyphs/jp.json.
+always lossless. The JP glyph table is defs/dialogs/charmap_jp.json.
 
 Text files (assets/dialogs/<region>/bank_XX.txt): one block per dialog (the label is the same in every release):
     @@ sDialog_0x0000 @@
@@ -20,6 +20,9 @@ The text files are the only source.  `build` generates the assembler input (git-
 build/gen/dialogs/<region>/bank_XX.asm, which src/main.asm includes for the selected release
 (US/EU/DE: banks $B6-$BB, JP: banks $AA-$AC).  The dialog pointer table aDialogPointers refers to the labels, so the
 dialogs may change length freely; every bank is padded with `fill align $8000`.
+
+Extraction from the user's ROM dumps: tools/extract.py (step `dialogs`) calls extract_rom() below: the dialog texts, the tables
+of the dialog engine (option cursor positions, numeric / text variable tables) and the layout defs/dialogs/tables.json.
 
 Commands:
     build [--region R]     txt -> build/gen/dialogs/<region>/bank_XX.asm (canonical `dw` rows)
@@ -51,7 +54,7 @@ def load_charmap(region):
         m.update(EXTRA["all"]); m.update(EXTRA.get(region, {}))
     else:
         m = {}
-        g = json.loads((Path(__file__).parent / "glyphs" / "jp.json").read_text(encoding="utf-8"))["glyphs"]
+        g = json.loads((ROOT / "defs" / "dialogs" / "charmap_jp.json").read_text(encoding="utf-8"))["glyphs"]
         m.update({int(k, 16): v for k, v in g.items()})
     return m
 
@@ -138,6 +141,139 @@ def render_asm(bank, blocks):
     return "\n".join(lines)
 
 
+# ---------------------------------------------------------------- extraction (ROM -> assets/dialogs)
+NUMBER_HEADER = """# Dialog numeric variables (<NUM digits index> in the dialog text, handler .FFFC_numberVariable in src/code/bank_83/dialog.asm).
+# idx: variable index of the text token; address: 24-bit address of the value (`+!RAM_SHIFT` = WRAM that moves with the release's RAM layout); size: bytes read (1-3).
+# Identical in all releases.  Generated into build/gen/dialogs/<region>/text_tables.asm (aTextDataTableFFFC) by tools/dialogs/texttables.py.
+idx,address,size
+"""
+TEXTVAR_HEADER = """# Dialog text variables (<VAR length index>, handler .FFFD_textVariable in src/code/bank_83/dialog.asm): the WRAM string the token prints
+# (player / animal names, ...).  idx = variable index of the token; address: 24-bit address of the string (the name buffers move with the release's RAM layout, so every release has its own file); size: characters.
+# Generated into build/gen/dialogs/%s/text_tables.asm (aTextDataTableFFFD) by tools/dialogs/texttables.py.
+idx,address,size
+"""
+TABLES_DOC = ("Release specific values of the dialog text tables (tools/dialogs/texttables.py).  option_vram: aTextDataTableFFFE, the VRAM word "
+              "address stored in strcDialogDisplay.dialogUnk185 for the selected answer (0-4) of an <OPT n> selection menu.")
+
+
+def _off(addr):
+    return ((addr >> 16) & 0x7F) * BANK_SIZE + (addr & 0x7FFF)
+
+
+def _addr(s):
+    return int(s[1:], 16)
+
+
+def read_var_table(rom, addr, n):
+    """n x [ptr24, size] -> [(address, size)]"""
+    o = _off(addr)
+    return [(int.from_bytes(rom[o + 4 * i:o + 4 * i + 3], "little"), rom[o + 4 * i + 3]) for i in range(n)]
+
+
+def _dialog_words(rom, addr):
+    """words of one dialog starting at the 24-bit address (up to and including <END> / the <OPT n> that ends the text)."""
+    bank = addr & 0xFF0000
+    out = []
+    while True:
+        o = _off(bank | (addr & 0xFFFF))
+        w = rom[o] | rom[o + 1] << 8
+        out.append(w)
+        addr += 2
+        if w in (NUMV, TEXTV):
+            for _ in range(2):
+                o = _off(bank | (addr & 0xFFFF))
+                out.append(rom[o] | rom[o + 1] << 8)
+                addr += 2
+        elif w == OPTS:
+            o = _off(bank | (addr & 0xFFFF))
+            out.append(rom[o] | rom[o + 1] << 8)
+            addr += 2
+            return out, addr
+        elif w == END:
+            return out, addr
+        if addr & 0xFFFF < 0x8000:
+            raise ValueError("dialog runs out of its bank")
+
+
+def extract_dialogs(region, rom, tdef, out):
+    """dialog texts of one release -> out/bank_XX.txt (one block per dialog).  Verifies that re-assembling the blocks gives the ROM bank."""
+    cmap = load_charmap(region)
+    o = _off(_addr(tdef["pointers"]))
+    n = tdef["count"]
+    ptrs = [int.from_bytes(rom[o + 3 * i:o + 3 * i + 3], "little") for i in range(n)]
+    banks = {}
+    expect = ptrs[0]
+    for i, p in enumerate(ptrs):
+        if p != expect and not (p & 0xFFFF == 0x8000 and p >> 16 > expect >> 16):      # the next dialog may start the next bank
+            raise ValueError("%s: dialog %04X starts at $%06X, previous one ends at $%06X" % (region, i, p, expect))
+        words, expect = _dialog_words(rom, p)
+        banks.setdefault("%02X" % (p >> 16), []).append(("sDialog_0x%04X" % i, words))
+    if sorted(banks) != sorted(tdef["dialog_banks"]):
+        raise ValueError("%s: dialogs found in banks %s, expected %s" % (region, sorted(banks), tdef["dialog_banks"]))
+    out = Path(out)
+    out.mkdir(parents=True, exist_ok=True)
+    for bank, blocks in sorted(banks.items()):
+        base = _off(int(bank, 16) << 16 | 0x8000)
+        data = b"".join(w.to_bytes(2, "little") for _, ws in blocks for w in ws)
+        if rom[base:base + len(data)] != data or any(rom[base + len(data):base + BANK_SIZE]):
+            raise ValueError("%s bank $%s: dialog blocks do not reproduce the bank (data after the last dialog)" % (region, bank))
+        text = "\n".join("@@ %s @@\n%s" % (label, words_to_text(ws, cmap)) for label, ws in blocks)
+        (out / ("bank_%s.txt" % bank)).write_bytes(text.encode("utf-8"))
+    return n
+
+
+def extract_tables(R, rom, tdef, shared, shifted, out):
+    """text_tables.json + text_vars.csv of release R; the numeric variable rows go to `shared` {R: rows} for number_vars.csv (written by the caller)."""
+    out = Path(out)
+    o = _off(_addr(tdef["option_vram"]))
+    opts = ["$%04X" % (rom[o + 2 * i] | rom[o + 2 * i + 1] << 8) for i in range(5)]
+    doc = {"_doc": TABLES_DOC, "option_vram": opts}
+    (out / "text_tables.json").write_bytes((json.dumps(doc, indent=1) + "\n").encode("utf-8"))
+    nvars = (_addr(tdef["pointers"]) - _addr(tdef["text_vars"])) // 4
+    rows = read_var_table(rom, _addr(tdef["text_vars"]), nvars)
+    moved = set(shifted.get(R, ()))
+    text = TEXTVAR_HEADER % R.lower() + "".join("$%02X,$%06X%s,%d\n" % (i, a - (tdef["ram_shift"] if i in moved else 0), "+!RAM_SHIFT" if i in moved else "", sz)
+                                                for i, (a, sz) in enumerate(rows))
+    (out / "text_vars.csv").write_bytes(text.encode("utf-8"))
+    shared[R] = read_var_table(rom, _addr(tdef["number_vars"]), tdef["number_count"])
+
+
+def number_vars_csv(shared, defs_tables):
+    """number_vars.csv: identical in all releases except for WRAM above $08D1, which moves with the release's RAM layout (`+!RAM_SHIFT`)."""
+    us = shared["US"]
+    rows = []
+    for i, (a, sz) in enumerate(us):
+        moved = False
+        for r in ("EU", "DE", "JP"):
+            if r not in shared:
+                continue
+            ra, rsz = shared[r][i]
+            shift = defs_tables[r]["ram_shift"]
+            if rsz != sz or ra not in (a, a + shift):
+                raise ValueError("number variable %02X of %s differs from US in a way !RAM_SHIFT does not explain" % (i, r))
+            moved |= ra != a
+        rows.append("$%02X,$%06X%s,%d\n" % (i, a, "+!RAM_SHIFT" if moved else "", sz))
+    return NUMBER_HEADER + "".join(rows)
+
+
+def extract_rom(roms, defs, out):
+    """ROM images {"US": bytes, ...} -> assets/dialogs (out): <region>/bank_XX.txt, text_tables.json, text_vars.csv and number_vars.csv.
+    Layout of the tables: defs/dialogs/tables.json."""
+    d = json.loads((Path(defs) / "dialogs" / "tables.json").read_text(encoding="utf-8"))
+    shifted = json.loads((Path(defs) / "dialogs" / "text_vars_shifted.json").read_text(encoding="utf-8"))
+    out = Path(out)
+    shared = {}
+    n = 0
+    for R, rom in roms.items():
+        t = dict(d[R], count=d["dialog_count"], number_count=d["number_var_count"])
+        reg = R.lower()
+        n += extract_dialogs(reg, rom, t, out / reg)
+        extract_tables(R, rom, t, shared, shifted, out / reg)
+    if "US" in shared:
+        (out / "number_vars.csv").write_bytes(number_vars_csv(shared, d).encode("utf-8"))
+    return n
+
+
 def regions(arg):
     return [arg] if arg else list(REGIONS)
 
@@ -193,3 +329,4 @@ def main():
 
 if __name__ == "__main__":
     sys.exit(main())
+

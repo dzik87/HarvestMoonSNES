@@ -104,7 +104,7 @@ tile-set VRAM address, which reproduces the farm map exactly) and every tile she
   the sidecars and PNGs. A manual `"palette": {"id", "sub"}` sidecar key is only kept for blobs that are not in the map.
 * **Size of the compressed blob.** Edited tile graphics compress to a different length. A shorter stream is padded with zeros
   automatically (layout unchanged). A longer stream is refused unless `--allow-resize` is passed; then `import` also reduces the
-  trailing padding of the bank in `assets/gfx/banks.json` (`pad`; the bank asm in `build/gen/gfx/` is regenerated) by the growth, and fails if the bank is full. All
+  trailing padding of the bank in `defs/gfx/banks.json` (`pad`; the bank asm in `build/gen/gfx/` is regenerated) by the growth, and fails if the bank is full. All
   pointers are labels, so following blobs move automatically. Raw blobs (sprites, `sCharactermap_*`) never change size.
 * Name tables: `.map.txt` has `columns` 16-bit hex words per row (32, 64 or 128, see "Name table width"), a blank line after every
   32 rows, no comments. Entry = tile 0-9, palette 10-12, priority 13, H flip 14, V flip 15.
