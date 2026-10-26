@@ -1,0 +1,39 @@
+{
+ "_doc": "Layout of the PPU graphics presets table of fCore_ManageGraphicsPresets (src/code/bank_80/core.asm, Table_<REG>_Presets): the 24 register tables of `count` bytes each follow each other from `address` in the order of `registers`. The comment lines are written at the top of assets/gfx/presets.csv.",
+ "address": "$808B44",
+ "count": 11,
+ "registers": [
+  "OBSEL",
+  "BGMODE",
+  "BG1SC",
+  "BG2SC",
+  "BG3SC",
+  "BG4SC",
+  "BG12NBA",
+  "BG34NBA",
+  "TM",
+  "TS",
+  "TMW",
+  "TSW",
+  "CGWSEL",
+  "CGADSUB",
+  "SETINI",
+  "W12SEL",
+  "W34SEL",
+  "WOBJSEL",
+  "WH0",
+  "WH1",
+  "WH2",
+  "WH3",
+  "WBGLOG",
+  "WOBJLOG"
+ ],
+ "header": [
+  "Graphics presets (index = byte 0 of an area graphics descriptor, assets/areas/area_gfx.json; fCore_ManageGraphicsPresets in src/code/bank_80/core.asm).",
+  "One row per preset, one column per PPU register the preset sets:",
+  "  OBSEL $2101 object size / name base   BGMODE $2105 BG mode / tile size   BG1SC..BG4SC $2107-$210A name table VRAM address (bits 7-2 = word address / $400) + size",
+  "  BG12NBA $210B / BG34NBA $210C character base addresses (4 bits per BG)   TM/TS $212C/$212D main / sub screen layers   TMW/TSW $212E/$212F window masks",
+  "  CGWSEL $2130 / CGADSUB $2131 colour math   SETINI $2133   W12SEL $2123 / W34SEL $2124 / WOBJSEL $2125 window settings   WH0..WH3 $2126-$2129 window positions",
+  "Generated into build/gen/tables/gfx_presets.asm (Table_<REG>_Presets, one db per preset) by tools/gfx/presets.py."
+ ]
+}

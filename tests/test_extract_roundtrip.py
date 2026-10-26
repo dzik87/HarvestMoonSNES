@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parent.parent
 ROM_DIR = os.environ.get("HM_ROM_DIR")
 
 AUDIO_DATA_STEPS = "audio,objects,maps,areas,tables,menu,ai"      # audio, object banks, maps, areas, tables, menu, AI data
-GFX_STEPS = "palettes,fonts,dialogs,graphics"                     # palettes, fonts, graphics, dialogs (graphics needs areas, objects, tables)
+GFX_STEPS = "palettes,presets,fonts,dialogs,graphics"                   # palettes, fonts, graphics, dialogs (graphics needs areas, objects, tables)
 KINDS = ["audio", "objects", "maps", "areas", "tables", "menu", "ai", "fonts", "dialogs", "gfx"]
 
 
