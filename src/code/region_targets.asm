@@ -61,11 +61,11 @@ elseif !REGION_JP
     fPaletteAnim_TownSummer_T2 = $80CAA1
     fPaletteAnim_TownSummer_T3 = $80CAA1
     fPaletteAnim_TownSummer_T4 = $80CAA1
-    L_80CFC3 = $80CEE8
+    fPaletteAnim_TownFall_T4_Part2 = $80CEE8
     fPaletteAnim_WoodsSpring_T2 = $80D0CD
     fPaletteAnim_WoodsSpring_T3 = $80D0CD
     fPaletteAnim_WoodsSpring_T4 = $80D0CD
-    L_80D30D = $80D342
+    fPaletteAnim_WoodsSpring_T4_Part2 = $80D342
     fPaletteAnim_WoodsFall_T1 = $80D541
     fPaletteAnim_WoodsFall_T2 = $80D541
     fPaletteAnim_WoodsSummer_T1 = $80D541
@@ -78,7 +78,7 @@ elseif !REGION_JP
     fPaletteAnim_WoodsWinter_NYSpa_T2 = $80D63E
     fPaletteAnim_WoodsWinter_NYSpa_T3 = $80D63E
     fPaletteAnim_WoodsWinter_NYSpa_T4 = $80D63E
-    L_80FFFF = $80FFFF
+    pPaletteAnimRoutine_None = $80FFFF
     aDayOrdinalString = $8289F7
     aSeasonString = $8289F7
     aWeekdayString = $8289F7
