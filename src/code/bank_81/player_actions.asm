@@ -1014,7 +1014,7 @@ fPlayerAction_Run_StepSound:
     BNE fHelper_81C827                                         ;81C813|D012    |81C827;
     SEP #$20                                                   ;81C815|E220    |      ;
     REP #$10                                                   ;81C817|C210    |      ;
-    LDA.B #$05                                                 ;81C819|A905    |      ;
+    LDA.B #!SFX_PLAYERSTEP                                                 ;81C819|A905    |      ;
     STA.W strcAudio.reg114                                     ;81C81B|8D1401  |000114;
     LDA.B #$06                                                 ;81C81E|A906    |      ;
     STA.W strcAudio.reg115                                     ;81C820|8D1501  |000115;
@@ -1079,7 +1079,7 @@ fPlayerAction0x03:
     STA.W strcObjectData.spriteIdx                             ;81C8AA|8D0109  |000901;
     SEP #$20                                                   ;81C8AD|E220    |      ;
     REP #$10                                                   ;81C8AF|C210    |      ;
-    LDA.B #$06                                                 ;81C8B1|A906    |      ;
+    LDA.B #!SFX_PLAYERJUMP                                                 ;81C8B1|A906    |      ;
     STA.W strcAudio.reg114                                     ;81C8B3|8D1401  |000114;
     LDA.B #$06                                                 ;81C8B6|A906    |      ;
     STA.W strcAudio.reg115                                     ;81C8B8|8D1501  |000115;
@@ -1097,7 +1097,7 @@ fPlayerAction0x03:
     STA.W strcObjectData.spriteIdx                             ;81C8CE|8D0109  |000901;
     SEP #$20                                                   ;81C8D1|E220    |      ;
     REP #$10                                                   ;81C8D3|C210    |      ;
-    LDA.B #$06                                                 ;81C8D5|A906    |      ;
+    LDA.B #!SFX_PLAYERJUMP                                                 ;81C8D5|A906    |      ;
     STA.W strcAudio.reg114                                     ;81C8D7|8D1401  |000114;
     LDA.B #$06                                                 ;81C8DA|A906    |      ;
     STA.W strcAudio.reg115                                     ;81C8DC|8D1501  |000115;
@@ -1113,7 +1113,7 @@ fPlayerAction0x03:
     STA.W strcObjectData.spriteIdx                             ;81C8ED|8D0109  |000901;
     SEP #$20                                                   ;81C8F0|E220    |      ;
     REP #$10                                                   ;81C8F2|C210    |      ;
-    LDA.B #$06                                                 ;81C8F4|A906    |      ;
+    LDA.B #!SFX_PLAYERJUMP                                                 ;81C8F4|A906    |      ;
     STA.W strcAudio.reg114                                     ;81C8F6|8D1401  |000114;
     LDA.B #$06                                                 ;81C8F9|A906    |      ;
     STA.W strcAudio.reg115                                     ;81C8FB|8D1501  |000115;
@@ -1129,7 +1129,7 @@ fPlayerAction0x03:
     STA.W strcObjectData.spriteIdx                             ;81C90C|8D0109  |000901;
     SEP #$20                                                   ;81C90F|E220    |      ;
     REP #$10                                                   ;81C911|C210    |      ;
-    LDA.B #$06                                                 ;81C913|A906    |      ;
+    LDA.B #!SFX_PLAYERJUMP                                                 ;81C913|A906    |      ;
     STA.W strcAudio.reg114                                     ;81C915|8D1401  |000114;
     LDA.B #$06                                                 ;81C918|A906    |      ;
     STA.W strcAudio.reg115                                     ;81C91A|8D1501  |000115;
@@ -1236,7 +1236,7 @@ fPlayerAction0x05:
     STA.W strcObjectData.spriteIdx                             ;81C9FE|8D0109  |000901;
     SEP #$20                                                   ;81CA01|E220    |      ;
     REP #$10                                                   ;81CA03|C210    |      ;
-    LDA.B #$07                                                 ;81CA05|A907    |      ;
+    LDA.B #!SFX_ITEMDROP                                                 ;81CA05|A907    |      ;
     STA.W strcAudio.reg114                                     ;81CA07|8D1401  |000114;
     LDA.B #$06                                                 ;81CA0A|A906    |      ;
     STA.W strcAudio.reg115                                     ;81CA0C|8D1501  |000115;

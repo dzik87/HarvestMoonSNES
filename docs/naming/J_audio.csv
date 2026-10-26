@@ -1,11 +1,11 @@
 old,new,confidence,reason
 sAudioTrack_AD8000,sAudioSpcDriver,high,Role established from the SPC700 driver analysis (docs/audio.md)
 sAudioTrack_AD9AA7,sAudioTrack_Town,high,Song name confirmed by matching the RAM of a user-supplied emulator dump of the Town theme with this blob (docs/audio.md, SPC validation)
-sAudioTrack_ADA3A8,sAudioTrack_Id12,high,Role established from the SPC700 driver analysis (docs/audio.md)
-sAudioTrack_ADC1A8,sAudioTrack_Id20,high,Role established from the SPC700 driver analysis (docs/audio.md)
-sAudioTrack_ADC228,sAudioTrack_Id21,high,Role established from the SPC700 driver analysis (docs/audio.md)
+sAudioTrack_ADA3A8,sAudioTrack_Funeral,high,Selected by AI script 0x20 (cow funeral cutscene, dialogs about the burial); docs/audio.md section 13
+sAudioTrack_ADC1A8,sAudioTrack_RainIndoors,high,fAudioEngine_SelectMapMusic plays track 20 when it rains in the indoor areas $15-$30 (track 19 outdoors); docs/audio.md section 13
+sAudioTrack_ADC228,sAudioTrack_WeatherFair,high,Played by fAreaEvents_House (event6 $0100) when the forecast is WEATHER_FAIR; docs/audio.md section 13
 sAudioTrack_ADC421,sAudioTrack_Id23,high,Role established from the SPC700 driver analysis (docs/audio.md)
-sAudioTrack_ADC52D,sAudioTrack_Id25,high,Role established from the SPC700 driver analysis (docs/audio.md)
+sAudioTrack_ADC52D,sAudioTrack_WeatherCalm,high,Played by fAreaEvents_House (event6 $0080) when the forecast is WEATHER_CALM; docs/audio.md section 13
 sAudioTrack_ADC5E9,sAudioSample_Id00,high,Role established from the SPC700 driver analysis (docs/audio.md)
 sAudioTrack_ADD6A9,sAudioSample_Id03,high,Role established from the SPC700 driver analysis (docs/audio.md)
 sAudioTrack_ADE259,sAudioSample_Id04,high,Role established from the SPC700 driver analysis (docs/audio.md)

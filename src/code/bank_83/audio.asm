@@ -141,7 +141,7 @@ fAudio_LoadPendingTrack:
   + SEP #$20                                                   ;8383D0|E220    |      ;
     LDA.B #$06                                                 ;8383D2|A906    |      ;
     STA.W strcAudio.reg115                                     ;8383D4|8D1501  |000115;
-    LDA.B #$03                                                 ;8383D7|A903    |      ;
+    LDA.B #!SFX_MENUCURSOR                                                 ;8383D7|A903    |      ;
     STA.W strcAudio.reg114                                     ;8383D9|8D1401  |000114;
     SEP #$20                                                   ;8383DC|E220    |      ;
     LDA.B #$00                                                 ;8383DE|A900    |      ;

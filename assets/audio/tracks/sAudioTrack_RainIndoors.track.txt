@@ -1,0 +1,47 @@
+; sAudioTrack_RainIndoors - song data (song list, patterns, voice streams); pointers are labels.
+; Format: docs/formats/audio-sources.md (tools/audio/trackfmt.py).
+
+songlist:
+    pattern pat0
+    jump songlist 255
+    songend
+
+pat0:
+    voices pat0_v0 pat0_v1 pat0_v2 - - - - -
+
+pat0_v0:
+    percbase $0B
+    echo $FF $5A $5A
+    echoparams $05 $3C $01
+    tempo $19
+    volume $82
+    pan $0C
+    voicetranspose $FD
+    instrument $00
+    vibrato $00 $14 $32
+    L96:G7V15 B4 tie tie tie tie tie tie tie tie tie tie end    ; t=0
+
+pat0_v1:
+    instrument $00
+    volume $B4
+    pan $08
+    voicetranspose $FD
+    vibrato $00 $14 $32
+    volumefade $C0 $14
+    L96:G7V15 C5 C5    ; t=0
+    volumefade $C0 $B4
+    C5 C5    ; t=192
+    volumefade $C0 $14
+    C5 C5    ; t=384
+    volumefade $C0 $B4
+    C5 C5    ; t=576
+    volumefade $C0 $14
+    C5 C5 C5    ; t=768
+
+pat0_v2:
+    instrument $00
+    volume $96
+    pan $05
+    voicetranspose $FD
+    vibrato $00 $32 $05
+    L96:G7V15 A4 tie tie tie tie tie tie tie tie tie tie end    ; t=0

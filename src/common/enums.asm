@@ -190,6 +190,59 @@
 !PFLAGS_ANIMATING           = $8000 ;   any player animation
 
 
+
+; Sound effect ids (SPC SFX block, command $0A; names = assets/audio/audio.json sfx_names, table in docs/audio.md section 13)
+!SFX_SILENCE                      = $00
+!SFX_MENUCONFIRM                  = $01
+!SFX_MENUCANCEL                   = $02
+!SFX_MENUCURSOR                   = $03
+!SFX_EGGFESTIVALTIMEUP            = $04
+!SFX_PLAYERSTEP                   = $05
+!SFX_PLAYERJUMP                   = $06
+!SFX_ITEMDROP                     = $07
+!SFX_ITEMPICKUP                   = $08
+!SFX_UNK09                        = $09
+!SFX_UNK0A                        = $0A
+!SFX_UNK0B                        = $0B
+!SFX_UNK0C                        = $0C
+!SFX_UNK0D                        = $0D
+!SFX_UNK0E                        = $0E
+!SFX_PLOWHITOBJECT                = $0F
+!SFX_GOLDPLOWHITOBJECT            = $10
+!SFX_TOOLHITGROUND                = $11
+!SFX_SICKLECUT                    = $12
+!SFX_GOLDSICKLECUT                = $13
+!SFX_SICKLESWING                  = $14
+!SFX_AXEHITOBJECT                 = $15
+!SFX_GOLDAXEHITOBJECT             = $16
+!SFX_HAMMERHIT                    = $17
+!SFX_GOLDHAMMERHIT                = $18
+!SFX_BELL                         = $19
+!SFX_UNK1A                        = $1A
+!SFX_SEEDSOW                      = $1B
+!SFX_UNK1C                        = $1C
+!SFX_UNK1D                        = $1D
+!SFX_UNK1E                        = $1E
+!SFX_UNK1F                        = $1F
+!SFX_HOUSEEVENTUNK20              = $20
+!SFX_UNK21                        = $21
+!SFX_HOUSEEVENTUNK22              = $22
+!SFX_CUTSCENEUNK23                = $23
+!SFX_INTERACTIONUNK24             = $24
+!SFX_UNK25                        = $25
+!SFX_UNK26                        = $26
+!SFX_UNK27                        = $27
+!SFX_WATERPOUR                    = $28
+!SFX_UNK29                        = $29
+!SFX_UNK2A                        = $2A
+!SFX_UNK2B                        = $2B
+!SFX_UNK2C                        = $2C
+!SFX_UNK2D                        = $2D
+!SFX_UNK2E                        = $2E
+!SFX_UNK2F                        = $2F
+!SFX_UNK30                        = $30
+!SFX_UNK31                        = $31
+
 ; Player actions            $0000D4
 !PACTION_NONE               = $0000
 !PACTION_WALK               = $0001

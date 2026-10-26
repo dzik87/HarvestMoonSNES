@@ -16,3 +16,8 @@ the ROM address of the US blob; sidecars have `legacy_label`), `K4_sprites_objec
 `Tiles_Overlay_*` / `Screen_Overlay_*` are the weather overlays, `Ending00-13`, `Credits`, `Intro*`, `Menu`, `Title` come from the area names of
 `src/common/enums.asm`. Names are English, justified by the map entry that loads the blob (see `reason` in K3). Unchanged: `sFontGlyphs_*`, `obj_XXXX` frame folders
 (object names are not assigned yet, see `docs/formats/graphics-loading.md`, Open questions).
+
+## Audio
+
+`J_audio.csv` (blob address -> `sAudioSpcDriver` / `sAudioTrack_<Song>` / `sAudioSample_Id<NN>`) and `L_sfx.csv` (`sfx_NN` -> `Sfx_<Description>`, the 50 sound effects; `Sfx_Unk<hex id>` where no
+caller is known). Evidence and confidence per name: `docs/audio.md` section 13.

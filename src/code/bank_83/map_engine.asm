@@ -1902,13 +1902,13 @@ fAreaEvents_House:
     %UnsetFlag(event6, $0200)
     SEP #$20                                                   ;83E02C|E220    |      ;
     REP #$10                                                   ;83E02E|C210    |      ;
-    LDA.B #$22                                                 ;83E030|A922    |      ;
+    LDA.B #!SFX_HOUSEEVENTUNK22                                                 ;83E030|A922    |      ;
     LDX.W #$0007                                               ;83E032|A20700  |      ;
     LDY.W #$0014                                               ;83E035|A01400  |      ;
     JSL.L fAudio_PlaySoundEffectAndWait                                 ;83E038|22FE8283|8382FE;
     SEP #$20                                                   ;83E03C|E220    |      ;
     REP #$10                                                   ;83E03E|C210    |      ;
-    LDA.B #$22                                                 ;83E040|A922    |      ;
+    LDA.B #!SFX_HOUSEEVENTUNK22                                                 ;83E040|A922    |      ;
     LDX.W #$0007                                               ;83E042|A20700  |      ;
     LDY.W #$001E                                               ;83E045|A01E00  |      ;
     JSL.L fAudio_PlaySoundEffectAndWait                                 ;83E048|22FE8283|8382FE;
@@ -1918,7 +1918,7 @@ fAreaEvents_House:
     BEQ +                                                      ;83E055|F01D    |83E074;
     SEP #$20                                                   ;83E057|E220    |      ;
     REP #$10                                                   ;83E059|C210    |      ;
-    LDA.B #$20                                                 ;83E05B|A920    |      ;
+    LDA.B #!SFX_HOUSEEVENTUNK20                                                 ;83E05B|A920    |      ;
     LDX.W #$0007                                               ;83E05D|A20700  |      ;
     LDY.W #$003C                                               ;83E060|A03C00  |      ;
     JSL.L fAudio_PlaySoundEffectAndWait                                 ;83E063|22FE8283|8382FE;

@@ -108,7 +108,7 @@ fNameInput_BButton:
 .label2:
     SEP #$20                                                   ;84C0DB|E220    |      ;
     REP #$10                                                   ;84C0DD|C210    |      ;
-    LDA.B #$02                                                 ;84C0DF|A902    |      ;
+    LDA.B #!SFX_MENUCANCEL                                                 ;84C0DF|A902    |      ;
     STA.W strcAudio.reg114                                     ;84C0E1|8D1401  |000114;
     LDA.B #$06                                                 ;84C0E4|A906    |      ;
     STA.W strcAudio.reg115                                     ;84C0E6|8D1501  |000115;
@@ -161,7 +161,7 @@ fNameInput_AButton:
 .lastLetterInput:
     SEP #$20                                                   ;84C144|E220    |      ;
     REP #$10                                                   ;84C146|C210    |      ;
-    LDA.B #$01                                                 ;84C148|A901    |      ;
+    LDA.B #!SFX_MENUCONFIRM                                                 ;84C148|A901    |      ;
     STA.W strcAudio.reg114                                     ;84C14A|8D1401  |000114;
     LDA.B #$06                                                 ;84C14D|A906    |      ;
     STA.W strcAudio.reg115                                     ;84C14F|8D1501  |000115;
@@ -180,7 +180,7 @@ fNameInput_SelectCharTable0:
     STZ.W strcMenuData.menuIdx                                 ;84C168|9C9109  |000991;
     SEP #$20                                                   ;84C16B|E220    |      ;
     REP #$10                                                   ;84C16D|C210    |      ;
-    LDA.B #$01                                                 ;84C16F|A901    |      ;
+    LDA.B #!SFX_MENUCONFIRM                                                 ;84C16F|A901    |      ;
     STA.W strcAudio.reg114                                     ;84C171|8D1401  |000114;
     LDA.B #$06                                                 ;84C174|A906    |      ;
     STA.W strcAudio.reg115                                     ;84C176|8D1501  |000115;
@@ -200,7 +200,7 @@ fNameInput_SelectCharTable1:
     STZ.W strcMenuData.menuIdx                                 ;84C192|9C9109  |000991;
     SEP #$20                                                   ;84C195|E220    |      ;
     REP #$10                                                   ;84C197|C210    |      ;
-    LDA.B #$01                                                 ;84C199|A901    |      ;
+    LDA.B #!SFX_MENUCONFIRM                                                 ;84C199|A901    |      ;
     STA.W strcAudio.reg114                                     ;84C19B|8D1401  |000114;
     LDA.B #$06                                                 ;84C19E|A906    |      ;
     STA.W strcAudio.reg115                                     ;84C1A0|8D1501  |000115;
@@ -220,7 +220,7 @@ fNameInput_SelectCharTable2:
     STZ.W strcMenuData.menuIdx                                 ;84C1BC|9C9109  |000991;
     SEP #$20                                                   ;84C1BF|E220    |      ;
     REP #$10                                                   ;84C1C1|C210    |      ;
-    LDA.B #$01                                                 ;84C1C3|A901    |      ;
+    LDA.B #!SFX_MENUCONFIRM                                                 ;84C1C3|A901    |      ;
     STA.W strcAudio.reg114                                     ;84C1C5|8D1401  |000114;
     LDA.B #$06                                                 ;84C1C8|A906    |      ;
     STA.W strcAudio.reg115                                     ;84C1CA|8D1501  |000115;
@@ -236,7 +236,7 @@ fNameInput_SelectCharTable3:
     STA.W strcMenuData.tableSelector                           ;84C1DB|8D9309  |000993;
     SEP #$20                                                   ;84C1DE|E220    |      ;
     REP #$10                                                   ;84C1E0|C210    |      ;
-    LDA.B #$01                                                 ;84C1E2|A901    |      ;
+    LDA.B #!SFX_MENUCONFIRM                                                 ;84C1E2|A901    |      ;
     STA.W strcAudio.reg114                                     ;84C1E4|8D1401  |000114;
     LDA.B #$06                                                 ;84C1E7|A906    |      ;
     STA.W strcAudio.reg115                                     ;84C1E9|8D1501  |000115;
@@ -246,7 +246,7 @@ fNameInput_SelectCharTable3:
  
   + SEP #$20                                                   ;84C1F1|E220    |      ;
     REP #$10                                                   ;84C1F3|C210    |      ;
-    LDA.B #$02                                                 ;84C1F5|A902    |      ;
+    LDA.B #!SFX_MENUCANCEL                                                 ;84C1F5|A902    |      ;
     STA.W strcAudio.reg114                                     ;84C1F7|8D1401  |000114;
     LDA.B #$06                                                 ;84C1FA|A906    |      ;
     STA.W strcAudio.reg115                                     ;84C1FC|8D1501  |000115;
@@ -262,7 +262,7 @@ fNameInput_DownButton:
     STA.W strcMenuData.menuIdx                                 ;84C20F|8D9109  |000991;
     SEP #$20                                                   ;84C212|E220    |      ;
     REP #$10                                                   ;84C214|C210    |      ;
-    LDA.B #$03                                                 ;84C216|A903    |      ;
+    LDA.B #!SFX_MENUCURSOR                                                 ;84C216|A903    |      ;
     STA.W strcAudio.reg114                                     ;84C218|8D1401  |000114;
     LDA.B #$06                                                 ;84C21B|A906    |      ;
     STA.W strcAudio.reg115                                     ;84C21D|8D1501  |000115;
@@ -278,7 +278,7 @@ fNameInput_UpButton:
     STA.W strcMenuData.menuIdx                                 ;84C230|8D9109  |000991;
     SEP #$20                                                   ;84C233|E220    |      ;
     REP #$10                                                   ;84C235|C210    |      ;
-    LDA.B #$03                                                 ;84C237|A903    |      ;
+    LDA.B #!SFX_MENUCURSOR                                                 ;84C237|A903    |      ;
     STA.W strcAudio.reg114                                     ;84C239|8D1401  |000114;
     LDA.B #$06                                                 ;84C23C|A906    |      ;
     STA.W strcAudio.reg115                                     ;84C23E|8D1501  |000115;
@@ -294,7 +294,7 @@ fNameInput_RightButton:
     STA.W strcMenuData.menuIdx                                 ;84C251|8D9109  |000991;
     SEP #$20                                                   ;84C254|E220    |      ;
     REP #$10                                                   ;84C256|C210    |      ;
-    LDA.B #$03                                                 ;84C258|A903    |      ;
+    LDA.B #!SFX_MENUCURSOR                                                 ;84C258|A903    |      ;
     STA.W strcAudio.reg114                                     ;84C25A|8D1401  |000114;
     LDA.B #$06                                                 ;84C25D|A906    |      ;
     STA.W strcAudio.reg115                                     ;84C25F|8D1501  |000115;
@@ -310,7 +310,7 @@ fNameInput_LeftButton:
     STA.W strcMenuData.menuIdx                                 ;84C272|8D9109  |000991;
     SEP #$20                                                   ;84C275|E220    |      ;
     REP #$10                                                   ;84C277|C210    |      ;
-    LDA.B #$03                                                 ;84C279|A903    |      ;
+    LDA.B #!SFX_MENUCURSOR                                                 ;84C279|A903    |      ;
     STA.W strcAudio.reg114                                     ;84C27B|8D1401  |000114;
     LDA.B #$06                                                 ;84C27E|A906    |      ;
     STA.W strcAudio.reg115                                     ;84C280|8D1501  |000115;
@@ -378,7 +378,7 @@ fInput_Case04_State1:
     STA.B strcVariables.n8Temp4                                ;84C2DC|8595    |000095;
     SEP #$20                                                   ;84C2DE|E220    |      ;
     REP #$10                                                   ;84C2E0|C210    |      ;
-    LDA.B #$03                                                 ;84C2E2|A903    |      ;
+    LDA.B #!SFX_MENUCURSOR                                                 ;84C2E2|A903    |      ;
     STA.W strcAudio.reg114                                     ;84C2E4|8D1401  |000114;
     LDA.B #$06                                                 ;84C2E7|A906    |      ;
     STA.W strcAudio.reg115                                     ;84C2E9|8D1501  |000115;
@@ -427,7 +427,7 @@ fInput_Case04_State7_ToggleChoice:
     STA.B strcVariables.u8Unk97                                ;84C339|8597    |000097;
     SEP #$20                                                   ;84C33B|E220    |      ;
     REP #$10                                                   ;84C33D|C210    |      ;
-    LDA.B #$03                                                 ;84C33F|A903    |      ;
+    LDA.B #!SFX_MENUCURSOR                                                 ;84C33F|A903    |      ;
     STA.W strcAudio.reg114                                     ;84C341|8D1401  |000114;
     LDA.B #$06                                                 ;84C344|A906    |      ;
     STA.W strcAudio.reg115                                     ;84C346|8D1501  |000115;
@@ -441,7 +441,7 @@ fInput_Case04_State7_ToggleChoice:
     STA.B strcVariables.n8Temp3                                ;84C352|8594    |000094;
     SEP #$20                                                   ;84C354|E220    |      ;
     REP #$10                                                   ;84C356|C210    |      ;
-    LDA.B #$03                                                 ;84C358|A903    |      ;
+    LDA.B #!SFX_MENUCURSOR                                                 ;84C358|A903    |      ;
     STA.W strcAudio.reg114                                     ;84C35A|8D1401  |000114;
     LDA.B #$06                                                 ;84C35D|A906    |      ;
     STA.W strcAudio.reg115                                     ;84C35F|8D1501  |000115;
@@ -455,7 +455,7 @@ fInput_Case04_State7_ToggleChoice:
     STA.B strcVariables.n8Temp3                                ;84C36B|8594    |000094;
     SEP #$20                                                   ;84C36D|E220    |      ;
     REP #$10                                                   ;84C36F|C210    |      ;
-    LDA.B #$01                                                 ;84C371|A901    |      ;
+    LDA.B #!SFX_MENUCONFIRM                                                 ;84C371|A901    |      ;
     STA.W strcAudio.reg114                                     ;84C373|8D1401  |000114;
     LDA.B #$06                                                 ;84C376|A906    |      ;
     STA.W strcAudio.reg115                                     ;84C378|8D1501  |000115;
@@ -502,7 +502,7 @@ fInput_Case04_State8_LoadChoice:
     STA.B strcVariables.u8Unk97                                ;84C3BB|8597    |000097;
     SEP #$20                                                   ;84C3BD|E220    |      ;
     REP #$10                                                   ;84C3BF|C210    |      ;
-    LDA.B #$03                                                 ;84C3C1|A903    |      ;
+    LDA.B #!SFX_MENUCURSOR                                                 ;84C3C1|A903    |      ;
     STA.W strcAudio.reg114                                     ;84C3C3|8D1401  |000114;
     LDA.B #$06                                                 ;84C3C6|A906    |      ;
     STA.W strcAudio.reg115                                     ;84C3C8|8D1501  |000115;
@@ -516,7 +516,7 @@ fInput_Case04_State8_LoadChoice:
     STA.B strcVariables.n8Temp3                                ;84C3D4|8594    |000094;
     SEP #$20                                                   ;84C3D6|E220    |      ;
     REP #$10                                                   ;84C3D8|C210    |      ;
-    LDA.B #$03                                                 ;84C3DA|A903    |      ;
+    LDA.B #!SFX_MENUCURSOR                                                 ;84C3DA|A903    |      ;
     STA.W strcAudio.reg114                                     ;84C3DC|8D1401  |000114;
     LDA.B #$06                                                 ;84C3DF|A906    |      ;
     STA.W strcAudio.reg115                                     ;84C3E1|8D1501  |000115;
@@ -538,7 +538,7 @@ fInput_Case04_State8_LoadChoice:
     STA.B strcVariables.n8Temp3                                ;84C400|8594    |000094;
     SEP #$20                                                   ;84C402|E220    |      ;
     REP #$10                                                   ;84C404|C210    |      ;
-    LDA.B #$01                                                 ;84C406|A901    |      ;
+    LDA.B #!SFX_MENUCONFIRM                                                 ;84C406|A901    |      ;
     STA.W strcAudio.reg114                                     ;84C408|8D1401  |000114;
     LDA.B #$06                                                 ;84C40B|A906    |      ;
     STA.W strcAudio.reg115                                     ;84C40D|8D1501  |000115;
@@ -548,7 +548,7 @@ fInput_Case04_State8_LoadChoice:
  
   + SEP #$20                                                   ;84C415|E220    |      ;
     REP #$10                                                   ;84C417|C210    |      ;
-    LDA.B #$02                                                 ;84C419|A902    |      ;
+    LDA.B #!SFX_MENUCANCEL                                                 ;84C419|A902    |      ;
     STA.W strcAudio.reg114                                     ;84C41B|8D1401  |000114;
     LDA.B #$06                                                 ;84C41E|A906    |      ;
     STA.W strcAudio.reg115                                     ;84C420|8D1501  |000115;
@@ -576,7 +576,7 @@ fInput_Case04_StartToState6:
     STA.B strcVariables.n8Temp4                                ;84C443|8595    |000095;
     SEP #$20                                                   ;84C445|E220    |      ;
     REP #$10                                                   ;84C447|C210    |      ;
-    LDA.B #$03                                                 ;84C449|A903    |      ;
+    LDA.B #!SFX_MENUCURSOR                                                 ;84C449|A903    |      ;
     STA.W strcAudio.reg114                                     ;84C44B|8D1401  |000114;
     LDA.B #$06                                                 ;84C44E|A906    |      ;
     STA.W strcAudio.reg115                                     ;84C450|8D1501  |000115;
@@ -620,7 +620,7 @@ fInput_Case04_State5_ThreeWayChoice:
     STA.B strcVariables.u8Unk97                                ;84C48F|8597    |000097;
     SEP #$20                                                   ;84C491|E220    |      ;
     REP #$10                                                   ;84C493|C210    |      ;
-    LDA.B #$03                                                 ;84C495|A903    |      ;
+    LDA.B #!SFX_MENUCURSOR                                                 ;84C495|A903    |      ;
     STA.W strcAudio.reg114                                     ;84C497|8D1401  |000114;
     LDA.B #$06                                                 ;84C49A|A906    |      ;
     STA.W strcAudio.reg115                                     ;84C49C|8D1501  |000115;
@@ -636,7 +636,7 @@ fInput_Case04_State5_ThreeWayChoice:
     STA.B strcVariables.u8Unk97                                ;84C4AF|8597    |000097;
     SEP #$20                                                   ;84C4B1|E220    |      ;
     REP #$10                                                   ;84C4B3|C210    |      ;
-    LDA.B #$03                                                 ;84C4B5|A903    |      ;
+    LDA.B #!SFX_MENUCURSOR                                                 ;84C4B5|A903    |      ;
     STA.W strcAudio.reg114                                     ;84C4B7|8D1401  |000114;
     LDA.B #$06                                                 ;84C4BA|A906    |      ;
     STA.W strcAudio.reg115                                     ;84C4BC|8D1501  |000115;
@@ -656,7 +656,7 @@ fInput_Case04_State5_ThreeWayChoice:
     STA.B strcVariables.u8Unk97                                ;84C4D5|8597    |000097;
     SEP #$20                                                   ;84C4D7|E220    |      ;
     REP #$10                                                   ;84C4D9|C210    |      ;
-    LDA.B #$03                                                 ;84C4DB|A903    |      ;
+    LDA.B #!SFX_MENUCURSOR                                                 ;84C4DB|A903    |      ;
     STA.W strcAudio.reg114                                     ;84C4DD|8D1401  |000114;
     LDA.B #$06                                                 ;84C4E0|A906    |      ;
     STA.W strcAudio.reg115                                     ;84C4E2|8D1501  |000115;
@@ -673,7 +673,7 @@ fInput_Case04_State5_ThreeWayChoice:
     STA.B strcVariables.u8Unk97                                ;84C4F7|8597    |000097;
     SEP #$20                                                   ;84C4F9|E220    |      ;
     REP #$10                                                   ;84C4FB|C210    |      ;
-    LDA.B #$03                                                 ;84C4FD|A903    |      ;
+    LDA.B #!SFX_MENUCURSOR                                                 ;84C4FD|A903    |      ;
     STA.W strcAudio.reg114                                     ;84C4FF|8D1401  |000114;
     LDA.B #$06                                                 ;84C502|A906    |      ;
     STA.W strcAudio.reg115                                     ;84C504|8D1501  |000115;
@@ -708,7 +708,7 @@ fInput_Case04_State5_ThreeWayChoice:
  
   + SEP #$20                                                   ;84C52D|E220    |      ;
     REP #$10                                                   ;84C52F|C210    |      ;
-    LDA.B #$01                                                 ;84C531|A901    |      ;
+    LDA.B #!SFX_MENUCONFIRM                                                 ;84C531|A901    |      ;
     STA.W strcAudio.reg114                                     ;84C533|8D1401  |000114;
     LDA.B #$06                                                 ;84C536|A906    |      ;
     STA.W strcAudio.reg115                                     ;84C538|8D1501  |000115;
@@ -754,7 +754,7 @@ fInput_Handler_case03:
 fInput_Case03_ConfirmSelection:
     SEP #$20                                                   ;84C57A|E220    |      ;
     REP #$10                                                   ;84C57C|C210    |      ;
-    LDA.B #$01                                                 ;84C57E|A901    |      ;
+    LDA.B #!SFX_MENUCONFIRM                                                 ;84C57E|A901    |      ;
     STA.W strcAudio.reg114                                     ;84C580|8D1401  |000114;
     LDA.B #$06                                                 ;84C583|A906    |      ;
     STA.W strcAudio.reg115                                     ;84C585|8D1501  |000115;
@@ -798,7 +798,7 @@ fInput_Case03_ConfirmSelection:
 fInput_Case03_CursorDown:
     SEP #$20                                                   ;84C5D1|E220    |      ;
     REP #$10                                                   ;84C5D3|C210    |      ;
-    LDA.B #$03                                                 ;84C5D5|A903    |      ;
+    LDA.B #!SFX_MENUCURSOR                                                 ;84C5D5|A903    |      ;
     STA.W strcAudio.reg114                                     ;84C5D7|8D1401  |000114;
     LDA.B #$06                                                 ;84C5DA|A906    |      ;
     STA.W strcAudio.reg115                                     ;84C5DC|8D1501  |000115;
@@ -832,7 +832,7 @@ fInput_Case03_CursorDown:
 fInput_Case03_CursorUp:
     SEP #$20                                                   ;84C612|E220    |      ;
     REP #$10                                                   ;84C614|C210    |      ;
-    LDA.B #$03                                                 ;84C616|A903    |      ;
+    LDA.B #!SFX_MENUCURSOR                                                 ;84C616|A903    |      ;
     STA.W strcAudio.reg114                                     ;84C618|8D1401  |000114;
     LDA.B #$06                                                 ;84C61B|A906    |      ;
     STA.W strcAudio.reg115                                     ;84C61D|8D1501  |000115;
@@ -865,7 +865,7 @@ fInput_Case03_CursorUp:
 fInput_Case03_CursorRight:
     SEP #$20                                                   ;84C651|E220    |      ;
     REP #$10                                                   ;84C653|C210    |      ;
-    LDA.B #$03                                                 ;84C655|A903    |      ;
+    LDA.B #!SFX_MENUCURSOR                                                 ;84C655|A903    |      ;
     STA.W strcAudio.reg114                                     ;84C657|8D1401  |000114;
     LDA.B #$06                                                 ;84C65A|A906    |      ;
     STA.W strcAudio.reg115                                     ;84C65C|8D1501  |000115;
@@ -891,7 +891,7 @@ fInput_Case03_CursorRight:
 fInput_Case03_CursorLeft:
     SEP #$20                                                   ;84C684|E220    |      ;
     REP #$10                                                   ;84C686|C210    |      ;
-    LDA.B #$03                                                 ;84C688|A903    |      ;
+    LDA.B #!SFX_MENUCURSOR                                                 ;84C688|A903    |      ;
     STA.W strcAudio.reg114                                     ;84C68A|8D1401  |000114;
     LDA.B #$06                                                 ;84C68D|A906    |      ;
     STA.W strcAudio.reg115                                     ;84C68F|8D1501  |000115;
@@ -2042,7 +2042,7 @@ fInput_DialogOptions:
 fInput_DialogOptions_Confirm:
     SEP #$20                                                   ;84CFCC|E220    |      ;
     REP #$10                                                   ;84CFCE|C210    |      ;
-    LDA.B #$01                                                 ;84CFD0|A901    |      ;
+    LDA.B #!SFX_MENUCONFIRM                                                 ;84CFD0|A901    |      ;
     STA.W strcAudio.reg114                                     ;84CFD2|8D1401  |000114;
     LDA.B #$06                                                 ;84CFD5|A906    |      ;
     STA.W strcAudio.reg115                                     ;84CFD7|8D1501  |000115;
@@ -2057,7 +2057,7 @@ fInput_DialogOptions_Confirm:
 fInput_DialogOptions_Down:
     SEP #$20                                                   ;84CFEA|E220    |      ;
     REP #$10                                                   ;84CFEC|C210    |      ;
-    LDA.B #$03                                                 ;84CFEE|A903    |      ;
+    LDA.B #!SFX_MENUCURSOR                                                 ;84CFEE|A903    |      ;
     STA.W strcAudio.reg114                                     ;84CFF0|8D1401  |000114;
     LDA.B #$06                                                 ;84CFF3|A906    |      ;
     STA.W strcAudio.reg115                                     ;84CFF5|8D1501  |000115;
@@ -2105,7 +2105,7 @@ fInput_DialogOptions_ResetBlink:
 fInput_DialogOptions_Up:
     SEP #$20                                                   ;84D03A|E220    |      ;
     REP #$10                                                   ;84D03C|C210    |      ;
-    LDA.B #$03                                                 ;84D03E|A903    |      ;
+    LDA.B #!SFX_MENUCURSOR                                                 ;84D03E|A903    |      ;
     STA.W strcAudio.reg114                                     ;84D040|8D1401  |000114;
     LDA.B #$06                                                 ;84D043|A906    |      ;
     STA.W strcAudio.reg115                                     ;84D045|8D1501  |000115;
@@ -2153,7 +2153,7 @@ fInput_DialogOptions_Up:
 fInput_DialogOptions_Right:
     SEP #$20                                                   ;84D08E|E220    |      ;
     REP #$10                                                   ;84D090|C210    |      ;
-    LDA.B #$03                                                 ;84D092|A903    |      ;
+    LDA.B #!SFX_MENUCURSOR                                                 ;84D092|A903    |      ;
     STA.W strcAudio.reg114                                     ;84D094|8D1401  |000114;
     LDA.B #$06                                                 ;84D097|A906    |      ;
     STA.W strcAudio.reg115                                     ;84D099|8D1501  |000115;
@@ -2206,7 +2206,7 @@ fInput_DialogOptions_Right:
 fInput_DialogOptions_Left:
     SEP #$20                                                   ;84D0F4|E220    |      ;
     REP #$10                                                   ;84D0F6|C210    |      ;
-    LDA.B #$03                                                 ;84D0F8|A903    |      ;
+    LDA.B #!SFX_MENUCURSOR                                                 ;84D0F8|A903    |      ;
     STA.W strcAudio.reg114                                     ;84D0FA|8D1401  |000114;
     LDA.B #$06                                                 ;84D0FD|A906    |      ;
     STA.W strcAudio.reg115                                     ;84D0FF|8D1501  |000115;

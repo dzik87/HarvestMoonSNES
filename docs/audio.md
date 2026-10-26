@@ -47,7 +47,7 @@ There are 65 blobs (not 71). Every blob is referenced from code, none is unused.
 | `sAudioTrack_Town` | $AD:9AA7 | 1091 ($443) | track data | track id 5; cmd 5 -> SPC $19F4; sample ids $05,$01,$07 |
 | `sAudioTrack_BadEnding` | $AD:9EEA | 275 ($113) | track data | track id 17; cmd 5 -> SPC $19F4; sample ids $05,$03,$07 |
 | `sAudioTrack_HarvestFestival` | $AD:9FFD | 939 ($3AB) | track data | track id 3; cmd 5 -> SPC $19F4; sample ids $03,$07,$01,$16,$05 |
-| `sAudioTrack_Id12` | $AD:A3A8 | 465 ($1D1) | track data | track id 12; cmd 5 -> SPC $19F4; sample ids $05,$07,$01 |
+| `sAudioTrack_Funeral` | $AD:A3A8 | 465 ($1D1) | track data | track id 12; cmd 5 -> SPC $19F4; sample ids $05,$07,$01 |
 | `sAudioTrack_Ending` | $AD:A579 | 1077 ($435) | track data | track id 16; cmd 5 -> SPC $19F4; sample ids $05,$01,$0C |
 | `sAudioTrack_Church` | $AD:A9AE | 608 ($260) | track data | track id 9; cmd 5 -> SPC $19F4; sample ids $02 |
 | `sAudioTrack_Mountain` | $AD:AC0E | 921 ($399) | track data | track id 6; cmd 5 -> SPC $19F4; sample ids $03,$07,$01 |
@@ -59,12 +59,12 @@ There are 65 blobs (not 71). Every blob is referenced from code, none is unused.
 | `sAudioTrack_NamingScreen` | $AD:BE06 | 410 ($19A) | track data | track id 10; cmd 5 -> SPC $19F4; sample ids $05,$07 |
 | `sAudioTrack_Title` | $AD:BFA0 | 398 ($18E) | track data | track id 11; cmd 5 -> SPC $19F4; sample ids $05,$01,$07 |
 | `sAudioTrack_Rain` | $AD:C12E | 122 ($7A) | track data | track id 19; cmd 5 -> SPC $19F4; sample ids $0D |
-| `sAudioTrack_Id20` | $AD:C1A8 | 128 ($80) | track data | track id 20; cmd 5 -> SPC $19F4; sample ids $0D |
-| `sAudioTrack_Id21` | $AD:C228 | 219 ($DB) | track data | track id 21; cmd 5 -> SPC $19F4; sample ids $15,$0D,$18 |
+| `sAudioTrack_RainIndoors` | $AD:C1A8 | 128 ($80) | track data | track id 20; cmd 5 -> SPC $19F4; sample ids $0D |
+| `sAudioTrack_WeatherFair` | $AD:C228 | 219 ($DB) | track data | track id 21; cmd 5 -> SPC $19F4; sample ids $15,$0D,$18 |
 | `sAudioTrack_Hurricane` | $AD:C303 | 286 ($11E) | track data | track id 22; cmd 5 -> SPC $19F4; sample ids $10 |
 | `sAudioTrack_Id23` | $AD:C421 | 176 ($B0) | track data | track id 23; cmd 5 -> SPC $19F4; sample ids $1D |
 | `sAudioTrack_Bell` | $AD:C4D1 | 92 ($5C) | track data | track id 24; cmd 5 -> SPC $19F4; sample ids $1D |
-| `sAudioTrack_Id25` | $AD:C52D | 188 ($BC) | track data | track id 25; cmd 5 -> SPC $19F4; sample ids $13,$15 |
+| `sAudioTrack_WeatherCalm` | $AD:C52D | 188 ($BC) | track data | track id 25; cmd 5 -> SPC $19F4; sample ids $13,$15 |
 | `sAudioSample_Id00` | $AD:C5E9 | 4288 ($10C0) | BRR sample | sample id 0/1; 476 BRR blocks, loop @block 48, ADSR FF E0, GAIN B8, tuning 5+20/256 |
 | `sAudioSample_Id03` | $AD:D6A9 | 2992 ($BB0) | BRR sample | sample id 3; 331 BRR blocks, loop @block 167, ADSR FF E3, GAIN B8, tuning 1+E0/256 |
 | `sAudioSample_Id04` | $AD:E259 | 1920 ($780) | BRR sample | sample id 4; 212 BRR blocks, loop @block 206, ADSR FF EF, GAIN B8, tuning 5+F0/256 |
@@ -175,7 +175,7 @@ Track ids: `aAudioTrackDataSizeTable` and `sAudioData1_838F83` have 26 entries (
 | 9 | `sAudioTrack_Church` | $AD:A9AE | 608 | $02 | 1 | 6 |
 | 10 | `sAudioTrack_NamingScreen` | $AD:BE06 | 410 | $05, $07 | 1 | 6 |
 | 11 | `sAudioTrack_Title` | $AD:BFA0 | 398 | $05, $01, $07 | 1 | 6 |
-| 12 | `sAudioTrack_Id12` | $AD:A3A8 | 465 | $05, $07, $01 | 1 | 6 |
+| 12 | `sAudioTrack_Funeral` | $AD:A3A8 | 465 | $05, $07, $01 | 1 | 6 |
 | 13 | `sAudioTrack_EggFestival` | $AD:B6BC | 659 | $05, $01, $08 | 1 | 6 |
 | 14 | `sAudioTrack_StarNightFestival` | $AD:986A | 573 | $05 | 1 | 6 |
 | 15 | `sAudioTrack_TrollsCave` | $AD:9578 | 754 | $05, $0B, $01, $08 | 1 | 6 |
@@ -183,12 +183,12 @@ Track ids: `aAudioTrackDataSizeTable` and `sAudioData1_838F83` have 26 entries (
 | 17 | `sAudioTrack_BadEnding` | $AD:9EEA | 275 | $05, $03, $07 | 1 | 6 |
 | 18 | `sAudioTrack_Opening` | $AD:B94F | 1207 | $04, $03, $07, $0B | 1 | 8 |
 | 19 | `sAudioTrack_Rain` | $AD:C12E | 122 | $0D | 1 | 3 |
-| 20 | `sAudioTrack_Id20` | $AD:C1A8 | 128 | $0D | 1 | 3 |
-| 21 | `sAudioTrack_Id21` | $AD:C228 | 219 | $15, $0D, $18 | 1 | 6 |
+| 20 | `sAudioTrack_RainIndoors` | $AD:C1A8 | 128 | $0D | 1 | 3 |
+| 21 | `sAudioTrack_WeatherFair` | $AD:C228 | 219 | $15, $0D, $18 | 1 | 6 |
 | 22 | `sAudioTrack_Hurricane` | $AD:C303 | 286 | $10 | 1 | 6 |
 | 23 | `sAudioTrack_Id23` | $AD:C421 | 176 | $1D | 1 | 6 |
 | 24 | `sAudioTrack_Bell` | $AD:C4D1 | 92 | $1D | 1 | 2 |
-| 25 | `sAudioTrack_Id25` | $AD:C52D | 188 | $13, $15 | 2 | 7 |
+| 25 | `sAudioTrack_WeatherCalm` | $AD:C52D | 188 | $13, $15 | 2 | 7 |
 
 ## 4. Port protocol
 
@@ -458,7 +458,7 @@ Capacity check [C]: the common set uses 17680 bytes of sample data (limit 17920)
 
 All pointers in a track blob are **relative to the start of the blob** (the engine adds `$AC`, which is `$19F4`). [C]
 The format was validated by decoding all 25 distinct tracks completely: every byte of 24 of them is accounted for by the
-structures below, the last one (`sAudioTrack_Id25`) has one extra trailing `00`. [C]
+structures below, the last one (`sAudioTrack_WeatherCalm`) has one extra trailing `00`. [C]
 
 ### 8.1 Song list (at offset 0; engine routine `$0BFD`/`$0C7B`)
 
@@ -701,3 +701,95 @@ generated snapshots now feed those bytes; with that all 20 dumps agree with ours
 `assets/audio` equal what the real game puts into SPC RAM, so the editable sources (WAV/JSON, track text, driver listing)
 round-trip to the data the engine actually plays. It does not validate the SPC700 emulator's output (rendered audio), which
 no dump contains.
+
+## 13. Sound effect and song names
+
+### 13.1 How the id reaches the engine
+
+A sound effect is requested with `fAudio_PlaySoundEffectAndWait` (A = effect id, X = voice, Y = wait in frames) or with the shorter
+`strcAudio.reg114 = id; reg115 = voice; fAudioSetRegister2to0A`, which sends command `$0A` (id, voice, `$0A`). Voices used by the US code are 6
+(UI, player and tool sounds) and 7 (water, house and cutscene sounds). `nToolSoundData_829054` (assets/tables/blocks/tool_sound_data_82.tbl)
+holds, per tool id, `[voice, effect when the target tile has no matching object, effect when it has]`; `fToolUsedSound_PlayOnToolChange`
+preloads the samples of both effects when the tool changes and `fSound_GetToolSound` selects the column at use time. The enum values
+`!SFX_*` live in `src/common/enums.asm`; the stream sources are `assets/audio/sfx/<Name>.sfx.txt` and the id order is `sfx_names` in
+`assets/audio/audio.json`. The generated block is byte-identical to the original (the 50 streams do not share data or pointers).
+
+### 13.2 Effects
+
+Confidence: high = the caller and its meaning are unambiguous in the code; medium = the caller is certain, the sound's role is inferred from the
+tool/column it belongs to; low = the caller is certain but its purpose is not understood. Effects without any caller in the US code keep a
+neutral `Sfx_Unk<id>` name (no listening review was done; the names rest on the code only). Names follow the project vocabulary (`Plow` = hoe).
+
+| Id | Name | Enum | Sample | Confidence | Evidence |
+|---|---|---|---|---|---|
+| $00 | `Sfx_Silence` | `!SFX_SILENCE` | common | high | Played with voice 7 by the watering can and sprinkler actions (fToolUsedAction0x10_WateringCan, fToolUsedAction0x15_Sprinkler); empty stream, so it ends the looping water sound on that voice |
+| $01 | `Sfx_MenuConfirm` | `!SFX_MENUCONFIRM` | common | high | A button / confirm: name entry A button and table switches, dialog option confirm (fInput_DialogOptions_Confirm), fInput_Case03_ConfirmSelection, yes/no and load-game choices |
+| $02 | `Sfx_MenuCancel` | `!SFX_MENUCANCEL` | common | medium | Name entry B button, the end cell of the name table and the second choice of yes/no and load-game screens (fInput_Case04_State7_ToggleChoice, fInput_Case04_State8_LoadChoice) |
+| $03 | `Sfx_MenuCursor` | `!SFX_MENUCURSOR` | 5 | high | Cursor movement in name entry, menus and dialog options (fInput_Case03_Cursor*, fInput_DialogOptions_*, fNameInput_*Button) and the text blip written by fDialog_IterateText; also the effect whose sample (id 5) fAudio_LoadPendingTrack preloads |
+| $04 | `Sfx_EggFestivalTimeUp` | `!SFX_EGGFESTIVALTIMEUP` | common | medium | AI script 0x28 (Egg Festival game) with the dialog 'Beep! Time is up! Next egg.' (strcFlags.unknown1 bit 6 branch) |
+| $05 | `Sfx_PlayerStep` | `!SFX_PLAYERSTEP` | common | high | fPlayerAction_Run_StepSound: footstep while running |
+| $06 | `Sfx_PlayerJump` | `!SFX_PLAYERJUMP` | common | high | fPlayerAction0x03 (!PACTION_JUMP), played in all four variants (normal, carrying, riding, in the hot spring) |
+| $07 | `Sfx_ItemDrop` | `!SFX_ITEMDROP` | common | high | fPlayerAction0x05 (!PACTION_DROPITEM) |
+| $08 | `Sfx_ItemPickUp` | `!SFX_ITEMPICKUP` | common | high | fItemCarried_Begin: picking an item up when nSoundItemCarriedTable_81A308 has an entry for it |
+| $09 | `Sfx_Unk09` | `!SFX_UNK09` | common | none | no caller in the US code or data (not referenced by any literal, table or AI script) |
+| $0A | `Sfx_Unk0A` | `!SFX_UNK0A` | common | none | no caller in the US code or data (not referenced by any literal, table or AI script) |
+| $0B | `Sfx_Unk0B` | `!SFX_UNK0B` | common | none | no caller in the US code or data (not referenced by any literal, table or AI script) |
+| $0C | `Sfx_Unk0C` | `!SFX_UNK0C` | 13 | none | no caller in the US code or data (not referenced by any literal, table or AI script) |
+| $0D | `Sfx_Unk0D` | `!SFX_UNK0D` | 19 | none | no caller in the US code or data (not referenced by any literal, table or AI script) |
+| $0E | `Sfx_Unk0E` | `!SFX_UNK0E` | 29 | none | no caller in the US code or data (not referenced by any literal, table or AI script) |
+| $0F | `Sfx_PlowHitObject` | `!SFX_PLOWHITOBJECT` | 38 | medium | nToolSoundData_829054 'object hit' column of the plow (hoe), tool id 2 |
+| $10 | `Sfx_GoldPlowHitObject` | `!SFX_GOLDPLOWHITOBJECT` | common | medium | nToolSoundData_829054 'object hit' column of the golden plow, tool id 18 |
+| $11 | `Sfx_ToolHitGround` | `!SFX_TOOLHITGROUND` | common | medium | 'no object' column shared by plow, golden plow, axe and golden axe (the tool hits plain ground) |
+| $12 | `Sfx_SickleCut` | `!SFX_SICKLECUT` | common | medium | 'object hit' column of the sickle (tool id 1): fSound_GetToolSound returns 1 when the tile's object property has bit 0 |
+| $13 | `Sfx_GoldSickleCut` | `!SFX_GOLDSICKLECUT` | common | medium | 'object hit' column of the golden sickle (tool id 17) |
+| $14 | `Sfx_SickleSwing` | `!SFX_SICKLESWING` | 16 | medium | 'no object' column of sickle and golden sickle (swing on a plain tile) |
+| $15 | `Sfx_AxeHitObject` | `!SFX_AXEHITOBJECT` | 35 | medium | 'object hit' column of the axe (tool id 4), property bit 3 |
+| $16 | `Sfx_GoldAxeHitObject` | `!SFX_GOLDAXEHITOBJECT` | 35 | medium | 'object hit' column of the golden axe (tool id 20) |
+| $17 | `Sfx_HammerHit` | `!SFX_HAMMERHIT` | common | medium | hammer (tool id 3), both columns |
+| $18 | `Sfx_GoldHammerHit` | `!SFX_GOLDHAMMERHIT` | common | medium | golden hammer (tool id 19), both columns |
+| $19 | `Sfx_Bell` | `!SFX_BELL` | 36 | high | US tool table entry for the bell (tool id 11, 'object hit' column) and the 'correct answer' ding of the Egg Festival script (AI script 0x28); the EU/DE table has no sound there |
+| $1A | `Sfx_Unk1A` | `!SFX_UNK1A` | 13 | none | no caller in the US code or data (not referenced by any literal, table or AI script) |
+| $1B | `Sfx_SeedSow` | `!SFX_SEEDSOW` | common | high | seed bags (tool ids 5-8 and 12), both columns |
+| $1C | `Sfx_Unk1C` | `!SFX_UNK1C` | 37 | none | no caller in the US code or data (not referenced by any literal, table or AI script) |
+| $1D | `Sfx_Unk1D` | `!SFX_UNK1D` | 30 | none | no caller in the US code or data (not referenced by any literal, table or AI script) |
+| $1E | `Sfx_Unk1E` | `!SFX_UNK1E` | 30 | none | no caller in the US code or data (not referenced by any literal, table or AI script) |
+| $1F | `Sfx_Unk1F` | `!SFX_UNK1F` | 39 | none | no caller in the US code or data (not referenced by any literal, table or AI script) |
+| $20 | `Sfx_HouseEventUnk20` | `!SFX_HOUSEEVENTUNK20` | 33 | low | fAreaEvents_House when event6 flag $0020 is set (set from fGameEngine map-flag handling when strcDialogDisplay.mapFlags & $0410); purpose unknown |
+| $21 | `Sfx_Unk21` | `!SFX_UNK21` | 20 | none | no caller in the US code or data (not referenced by any literal, table or AI script) |
+| $22 | `Sfx_HouseEventUnk22` | `!SFX_HOUSEEVENTUNK22` | 14 | low | fAreaEvents_House, played twice (waits 20 and 30 frames) when event6 flag $0200 is set (random 1/8 roll in the object-map update); purpose unknown |
+| $23 | `Sfx_CutsceneUnk23` | `!SFX_CUTSCENEUNK23` | 20 | low | AI script 0x23 starts with it right after the fade-in (voice 7, 60 frames); the scene was not identified |
+| $24 | `Sfx_InteractionUnk24` | `!SFX_INTERACTIONUNK24` | 20 | low | fPlayerInteraction0x35 (voice 7, 120 frames); the interaction was not identified |
+| $25 | `Sfx_Unk25` | `!SFX_UNK25` | 28 | none | no caller in the US code or data (not referenced by any literal, table or AI script) |
+| $26 | `Sfx_Unk26` | `!SFX_UNK26` | 31 | none | no caller in the US code or data (not referenced by any literal, table or AI script) |
+| $27 | `Sfx_Unk27` | `!SFX_UNK27` | 20 | none | no caller in the US code or data (not referenced by any literal, table or AI script) |
+| $28 | `Sfx_WaterPour` | `!SFX_WATERPOUR` | 17 | high | watering can and sprinkler entries of the tool table (tool ids 16 and 21), voice 7 |
+| $29 | `Sfx_Unk29` | `!SFX_UNK29` | 15 | none | no caller in the US code or data (not referenced by any literal, table or AI script) |
+| $2A | `Sfx_Unk2A` | `!SFX_UNK2A` | 18 | none | no caller in the US code or data (not referenced by any literal, table or AI script) |
+| $2B | `Sfx_Unk2B` | `!SFX_UNK2B` | 16 | none | no caller in the US code or data (not referenced by any literal, table or AI script) |
+| $2C | `Sfx_Unk2C` | `!SFX_UNK2C` | 17 | none | no caller in the US code or data (not referenced by any literal, table or AI script) |
+| $2D | `Sfx_Unk2D` | `!SFX_UNK2D` | 17 | none | no caller in the US code or data (not referenced by any literal, table or AI script) |
+| $2E | `Sfx_Unk2E` | `!SFX_UNK2E` | 17 | none | no caller in the US code or data (not referenced by any literal, table or AI script) |
+| $2F | `Sfx_Unk2F` | `!SFX_UNK2F` | 7 | none | no caller in the US code or data (not referenced by any literal, table or AI script) |
+| $30 | `Sfx_Unk30` | `!SFX_UNK30` | 38 | none | no caller in the US code or data (not referenced by any literal, table or AI script) |
+| $31 | `Sfx_Unk31` | `!SFX_UNK31` | 6 | none | no caller in the US code or data (not referenced by any literal, table or AI script) |
+
+Notes:
+- The effects used by the tool table are named after the tool and the column, not after their sound, so `Sfx_ToolHitGround` is shared by plow
+  and axe (both tiers) in the 'no object' column.
+- The ids 9-14, 26, 28-31, 33, 37-39 and 41-49 are not requested by any US code path or AI script; they may be used by other regions or be
+  leftovers (sample ids in the table above show that several own dedicated samples).
+- Only EU/DE differ in the tool table (no bell sound); other regions were not checked for further callers.
+
+### 13.3 Song names derived from the code
+
+| Track id | Name | Evidence |
+|---|---|---|
+| 5 | `sAudioTrack_Town` | emulator dump (section 12) |
+| 12 | `sAudioTrack_Funeral` | selected by AI script 0x20 (`AICMD0x00_SetMusic($0C, ...)`), the cutscene whose dialogs are the burial of a cow (dialogs `$0315`, `$0316`, `$038A`) |
+| 20 | `sAudioTrack_RainIndoors` | `fAudioEngine_SelectMapMusic`: rainy map flag in areas `$15`-`$30` (houses and shops) plays track 20, elsewhere track 19 (`Rain`) |
+| 21 | `sAudioTrack_WeatherFair` | `fAreaEvents_House` plays it (then resumes the map music) when event6 flag `$0100` is set, which `fWeatherForecast_828C09` does for `!WEATHER_FAIR` |
+| 25 | `sAudioTrack_WeatherCalm` | same, flag `$0080` for `!WEATHER_CALM` |
+| 23 | `sAudioTrack_Id23` | left unnamed: no US code path, map music set or AI script selects it (track 24, `Bell`, is the one with the same sample) |
+
+The role of ids 21 and 25 is certain (they are jingles played in the house for the weather forecast), the English words describe the
+forecast type they belong to, not their melody.
