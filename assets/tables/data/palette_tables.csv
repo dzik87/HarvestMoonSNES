@@ -3,51 +3,51 @@
 # aPalettes[N]       ROM address (ptr24) of palette N: 256 colours (512 bytes) loaded into CGRAM; names say area, season and time of day
 # aMapPalettesIndexes[area*6+phase]  palette index for each time of day of the area, $FF = none:
 #                    early, day, evening, dusk, night, extra  (phase 4 = night is loaded first, fPalette_LoadMapPallete)
-# nPaletteOverwrite_80BD9C[N]  3 colours written into palette rows $0A..$0C (colour $0F) by the weather / season fix (palette.asm)
+# nPaletteSeasonOverwriteTable[N]  3 colours written into palette rows $0A..$0C (colour $0F) by the weather / season fix (palette.asm)
 # sPallete_MarriedGirlTable[girl]  6 colours: hair / skin colours of the married girl sprite, index = girl id 0..5
 # aMapPalettesId[area*2+N]  object / sprite palette index (aPalettes) for the area, two entries per area (day, evening sets)
-# pSubrutineTable_80BEEC[area*6+phase] colour animation routine of the area for the time of day (ptr16, $FFFF = none),
+# pPaletteAnimRoutineTable[area*6+phase] colour animation routine of the area for the time of day (ptr16, $FFFF = none),
 #                    phases early..night + one extra word (n16, $FFFF)
 # JP uses raw addresses for the animation routines in the town rows because the routines are at other places.
 # Confidence: high for aPalettes / indexes / scripts, medium for the sprite palette ids.
 
 @record loop op:u16=$FFFE,target:ptr24
 @record end op:u16=$FFFF
-@label sData42_80B9D7
+@label aPaletteAnimScript_Rain_Slot0
 @columns color:bgr555,frames:u8
 $4968,$08
 end: 
 
-@label sData42_80B9DC
+@label aPaletteAnimScript_Rain_Slot1
 @columns color:bgr555,frames:u8
 $4968,$08
 
-@label sData42_80B9DF
+@label aPaletteAnimScript_Rain_Slot3
 @columns color:bgr555,frames:u8
 $7F17,$08
 
-@label sData42_80B9E2
+@label aPaletteAnimScript_Rain_Slot2
 @columns color:bgr555,frames:u8
 $7271,$08
-loop: sData42_80B9DC
+loop: aPaletteAnimScript_Rain_Slot1
 
-@label sData42_80B9EA
+@label aPaletteAnimScript_Snow_Slot0
 @columns color:bgr555,frames:u8
 $5210,$28
 end: 
 
-@label sData42_80B9EF
+@label aPaletteAnimScript_Snow_Slot1
 @columns color:bgr555,frames:u8
 $5210,$28
 
-@label sData42_80B9F2
+@label aPaletteAnimScript_Snow_Slot2
 @columns color:bgr555,frames:u8
 $5210,$28
 
-@label sData42_80B9F5
+@label aPaletteAnimScript_Snow_Slot3
 @columns color:bgr555,frames:u8
 $7FBD,$28
-loop: sData42_80B9EF
+loop: aPaletteAnimScript_Snow_Slot1
 @label aPalettes
 @columns index:index,palette:ptr24
 $00,Palette_FarmSpring_Early
@@ -267,7 +267,7 @@ $5D,$FF,$FF,$FF,$FF,$FF,$FF
 $5E,$FF,$FF,$FF,$FF,$FF,$FF
 $5F,$FF,$FF,$FF,$FF,$FF,$FF
 
-@label nPaletteOverwrite_80BD9C
+@label nPaletteSeasonOverwriteTable
 @columns index:index,color_a:bgr555,color_b:bgr555,color_c:bgr555
 $00,$3BF8,$26D0,$0946
 $01,$238C,$1648,$0124
@@ -381,7 +381,7 @@ $50,$FF,$FF
 $51,$FF,$FF
 $52,$FF,$FF
 $53,$FF,$FF
-@label pSubrutineTable_80BEEC
+@label pPaletteAnimRoutineTable
 @columns slot:index,routine:ptr16
 # area $00 AREA_FARMSPRING
 $00,fPaletteAnim_FarmSpring_FarmSummer_T01

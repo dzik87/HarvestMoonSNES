@@ -95,7 +95,7 @@ fObjectSlots_UpdateAll:
     TAX                                                        ;81A43E|AA      |      ;
     CPX.W #$0000                                               ;81A43F|E00000  |      ;
     BEQ .caseFFFD                                              ;81A442|F06E    |81A4B2;
-    JSR.W (pSubrutineTable_81A58B,X)                           ;81A444|FC8BA5  |81A58B;
+    JSR.W (pItemCarriedSlotHandlerTable,X)                           ;81A444|FC8BA5  |81A58B;
     SEP #$20                                                   ;81A447|E220    |      ;
     LDY.W #$0000                                               ;81A449|A00000  |      ;
     LDA.W $0974+!RAM_SHIFT                                 ;81A44C|AD7409  |000974;
@@ -255,7 +255,7 @@ fObjectSlots_Allocate:
     RTL                                                        ;81A58A|6B      |      ;
  
  
-pSubrutineTable_81A58B:
+pItemCarriedSlotHandlerTable:
     dw $FFFF                                                   ;81A58B|        |      ;
     dw fItemCarried_RunHandler                                   ;81A58D|        |81809A;
  
@@ -308,12 +308,12 @@ fTileScript_Start:
     CLC                                                        ;81A5E6|18      |      ;
     ADC.B strcVariables.n16Temp1                               ;81A5E7|657E    |00007E;
     TAX                                                        ;81A5E9|AA      |      ;
-    LDA.L pTable_81B963,X                                      ;81A5EA|BF63B981|81B963;
+    LDA.L pTileScriptTable,X                                      ;81A5EA|BF63B981|81B963;
     STA.B ptrUnknown0xCF                                       ;81A5EE|85CF    |0000CF;
     INX                                                        ;81A5F0|E8      |      ;
     INX                                                        ;81A5F1|E8      |      ;
     SEP #$20                                                   ;81A5F2|E220    |      ;
-    LDA.L pTable_81B963,X                                      ;81A5F4|BF63B981|81B963;
+    LDA.L pTileScriptTable,X                                      ;81A5F4|BF63B981|81B963;
     STA.B ptrUnknown0xCF+2                                     ;81A5F8|85D1    |0000D1;
     SEP #$20                                                   ;81A5FA|E220    |      ;
     STZ.W $0989+!RAM_SHIFT                                 ;81A5FC|9C8909  |000989;
@@ -662,12 +662,12 @@ fMap_GetTilePatternInfo:
     ADC.B strcVariables.n16Temp1                               ;81A808|657E    |00007E;
     ADC.B strcVariables.n16Temp1                               ;81A80A|657E    |00007E;
     TAX                                                        ;81A80C|AA      |      ;
-    LDA.L Table_81B363,X                                       ;81A80D|BF63B381|81B363; index = A * 6 + 0
+    LDA.L aTilePatternTable,X                                       ;81A80D|BF63B381|81B363; index = A * 6 + 0
     STA.B strcVariables.n16Temp1                               ;81A811|857E    |00007E;
     INX                                                        ;81A813|E8      |      ;
     INX                                                        ;81A814|E8      |      ;
     SEP #$20                                                   ;81A815|E220    |      ;
-    LDA.L Table_81B363,X                                       ;81A817|BF63B381|81B363; index = A * 6 + 2
+    LDA.L aTilePatternTable,X                                       ;81A817|BF63B381|81B363; index = A * 6 + 2
     XBA                                                        ;81A81B|EB      |      ;
     LDA.B #$00                                                 ;81A81C|A900    |      ;
     XBA                                                        ;81A81E|EB      |      ;
@@ -675,14 +675,14 @@ fMap_GetTilePatternInfo:
     STA.B strcVariables.n16Temp3                               ;81A821|8582    |000082;
     INX                                                        ;81A823|E8      |      ;
     SEP #$20                                                   ;81A824|E220    |      ;
-    LDA.L Table_81B363,X                                       ;81A826|BF63B381|81B363; index = A * 6 + 3
+    LDA.L aTilePatternTable,X                                       ;81A826|BF63B381|81B363; index = A * 6 + 3
     XBA                                                        ;81A82A|EB      |      ;
     LDA.B #$00                                                 ;81A82B|A900    |      ;
     XBA                                                        ;81A82D|EB      |      ;
     REP #$20                                                   ;81A82E|C220    |      ;
     STA.B strcVariables.n16Temp2                               ;81A830|8580    |000080;
     INX                                                        ;81A832|E8      |      ;
-    LDA.L Table_81B363,X                                       ;81A833|BF63B381|81B363; index = A * 6 + 4
+    LDA.L aTilePatternTable,X                                       ;81A833|BF63B381|81B363; index = A * 6 + 4
     STA.B strcVariables.n16Temp4                               ;81A837|8584    |000084;
     RTL                                                        ;81A839|6B      |      ;
  
@@ -857,7 +857,7 @@ fMap_CalcTilemapBufferOffset:
     CPY.B strcVariables.n16Temp3                               ;81A942|C482    |000082;
     BEQ +                                                      ;81A944|F003    |81A949;
     if !REGION_EUDE
-    JMP.W L_81A8C0
+    JMP.W fMap_CalcTilemapBufferOffset_OuterLoop
     else
     JMP.W $A8C0                                                ;81A946|4CC0A8  |81A8C0;
     endif
@@ -912,15 +912,15 @@ fShed_PlaceEquippedTool:
     ASL A                                                      ;81A98F|0A      |      ;
     ASL A                                                      ;81A990|0A      |      ;
     TAX                                                        ;81A991|AA      |      ;
-    LDA.L nCarriedItemTable_81BE0F,X                           ;81A992|BF0FBE81|81BE0F;
+    LDA.L nShedToolPlacementTable,X                           ;81A992|BF0FBE81|81BE0F;
     PHA                                                        ;81A996|48      |      ;
     INX                                                        ;81A997|E8      |      ;
     INX                                                        ;81A998|E8      |      ;
-    LDA.L nCarriedItemTable_81BE0F,X                           ;81A999|BF0FBE81|81BE0F;
+    LDA.L nShedToolPlacementTable,X                           ;81A999|BF0FBE81|81BE0F;
     PHA                                                        ;81A99D|48      |      ;
     INX                                                        ;81A99E|E8      |      ;
     INX                                                        ;81A99F|E8      |      ;
-    LDA.L nCarriedItemTable_81BE0F,X                           ;81A9A0|BF0FBE81|81BE0F;
+    LDA.L nShedToolPlacementTable,X                           ;81A9A0|BF0FBE81|81BE0F;
     PLY                                                        ;81A9A4|7A      |      ;
     PLX                                                        ;81A9A5|FA      |      ;
     JSL.L fSetTileAtCoords                                     ;81A9A6|2288A681|81A688;
@@ -946,12 +946,12 @@ fShed_PlaceEquippedTool:
     SEP #$20                                                   ;81A9C4|E220    |      ;
     LDA.B #$00                                                 ;81A9C6|A900    |      ;
     XBA                                                        ;81A9C8|EB      |      ;
-    LDA.L nCarriedItemTable_81BE0F,X                           ;81A9C9|BF0FBE81|81BE0F;
+    LDA.L nShedToolPlacementTable,X                           ;81A9C9|BF0FBE81|81BE0F;
     REP #$20                                                   ;81A9CD|C220    |      ;
     TAY                                                        ;81A9CF|A8      |      ; A -> Y
     INX                                                        ;81A9D0|E8      |      ;
     SEP #$20                                                   ;81A9D1|E220    |      ;
-    LDA.L nCarriedItemTable_81BE0F,X                           ;81A9D3|BF0FBE81|81BE0F;
+    LDA.L nShedToolPlacementTable,X                           ;81A9D3|BF0FBE81|81BE0F;
     STA.B strcVariables.n8Temp1                                ;81A9D7|8592    |000092; A -> $92
     TYX                                                        ;81A9D9|BB      |      ;
     LDA.L strcShedItems.row1,X                                 ;81A9DA|BF001F7F|7F1F00;
@@ -962,7 +962,7 @@ fShed_PlaceEquippedTool:
     RTL                                                        ;81A9E4|6B      |      ;
  
  
-fItemSubrutineHandler_81A9E5:
+fAreaItemSubrutine_Run:
     SEP #$20                                                   ;81A9E5|E220    |      ; $22: nItemId
     REP #$10                                                   ;81A9E7|C210    |      ;
     LDA.B #$00                                                 ;81A9E9|A900    |      ;
@@ -971,7 +971,7 @@ fItemSubrutineHandler_81A9E5:
     REP #$20                                                   ;81A9EE|C220    |      ;
     ASL A                                                      ;81A9F0|0A      |      ;
     TAX                                                        ;81A9F1|AA      |      ;
-    JSR.W (pItemSubrutines_81A9F6,X)                           ;81A9F2|FCF6A9  |81A9F6;
+    JSR.W (pAreaItemSubrutineTable,X)                           ;81A9F2|FCF6A9  |81A9F6;
     RTL                                                        ;81A9F5|6B      |      ;
  
     incsrc "../../../build/gen/blocks/item_subroutines.asm"
@@ -2222,7 +2222,7 @@ fShed_DrawItemPatternByFlag:
  
 .case0:
     REP #$20                                                   ;81B2D3|C220    |      ;
-    LDA.W #nCarriedItemTable_81BE0F                        ;81B2D5|A90FBE  |      ;
+    LDA.W #nShedToolPlacementTable                        ;81B2D5|A90FBE  |      ;
     STA.B ptrTemp0x72                                          ;81B2D8|8572    |000072;
     SEP #$20                                                   ;81B2DA|E220    |      ;
     LDA.B #$81                                                 ;81B2DC|A981    |      ;

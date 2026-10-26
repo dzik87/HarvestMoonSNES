@@ -1,8 +1,8 @@
-# Item specific subroutines (bank $81, items_misc.asm).  pItemSubrutines_81A9F6[N] -> handler (ptr16, bank $81), N = value in
-# fItemSubrutineHandler_81A9E5 (the id passed as strcMap.loadAreaId * 2 index; many ids share a handler).
+# Item specific subroutines (bank $81, items_misc.asm).  pAreaItemSubrutineTable[N] -> handler (ptr16, bank $81), N = value in
+# fAreaItemSubrutine_Run (the id passed as strcMap.loadAreaId * 2 index; many ids share a handler).
 # Confidence: medium (index space is the area id as used by the call site).
 
-@label pItemSubrutines_81A9F6
+@label pAreaItemSubrutineTable
 @columns index:index,handler:ptr16
 # 5F * ptr24
 $00,fItemSub81A9F6_0x00to0x03

@@ -1,7 +1,7 @@
 ; Bank $80 module "routines" - starts at $809553
  
  
-fSubrutinesExecute_809553:
+fPaletteAnim_RunAreaRoutine:
     SEP #$20                                                   ;809553|E220    |      ;
     REP #$10                                                   ;809555|C210    |      ;
     LDX.W #$0000                                               ;809557|A20000  |      ;
@@ -35,7 +35,7 @@ fSubrutinesExecute_809553:
     CLC                                                        ;809587|18      |      ;
     ADC.W #$000A                                               ;809588|690A00  |      ;
     TAX                                                        ;80958B|AA      |      ;
-    LDA.W pSubrutineTable_80BEEC,X                             ;80958C|BDECBE  |80BEEC;
+    LDA.W pPaletteAnimRoutineTable,X                             ;80958C|BDECBE  |80BEEC;
     CMP.W #$FFFF                                               ;80958F|C9FFFF  |      ;
     BEQ .load                                                  ;809592|F00A    |80959E;
     SEP #$20                                                   ;809594|E220    |      ;
@@ -50,10 +50,10 @@ fSubrutinesExecute_809553:
     ADC.B strcVariables.n16Temp1                               ;8095A3|657E    |00007E;
     ASL A                                                      ;8095A5|0A      |      ;
     TAX                                                        ;8095A6|AA      |      ;
-    LDA.W pSubrutineTable_80BEEC,X                             ;8095A7|BDECBE  |80BEEC;
+    LDA.W pPaletteAnimRoutineTable,X                             ;8095A7|BDECBE  |80BEEC;
     CMP.W #$FFFF                                               ;8095AA|C9FFFF  |      ;
     BEQ +                                                      ;8095AD|F003    |8095B2;
-    JSR.W (pSubrutineTable_80BEEC,X)                           ;8095AF|FCECBE  |80BEEC;
+    JSR.W (pPaletteAnimRoutineTable,X)                           ;8095AF|FCECBE  |80BEEC;
  
   + RTL                                                        ;8095B2|6B      |      ;
  
@@ -180,7 +180,7 @@ fAudioEngine_MapChangeHandler:
     LDA.W strcDialogDisplay.mapFlags                           ;809673|AD9601  |000196;
     AND.W #!AFLAGS_FORCETELEPORT                                               
     BNE +                                                      ;809679|D003    |80967E;
-    JMP.W fReturn_80972B                                       ;80967B|4C2B97  |80972B; BUG: jump to .return
+    JMP.W fMap_ResetAndLoadDestinationArea_Return                                       ;80967B|4C2B97  |80972B; BUG: jump to .return
  
  
   + %CheckFlag(daily3, $8000)
@@ -191,7 +191,7 @@ fAudioEngine_MapChangeHandler:
     BEQ .applyDestinationArea                                                ;809697|F003    |80969C;
  
 .return:
-    JMP.W fReturn_80972B                                       ;809699|4C2B97  |80972B; BUG: why not RTL ?
+    JMP.W fMap_ResetAndLoadDestinationArea_Return                                       ;809699|4C2B97  |80972B; BUG: why not RTL ?
  
  
 .applyDestinationArea:
@@ -244,7 +244,7 @@ fMap_ResetAndLoadDestinationArea:
     LDA.W nDestinationAreaId                                   ;809724|AD8B09  |00098B;
     JSL.L fMap_SetupArea                                       ;809727|222C9780|80972C;
  
-fReturn_80972B:
+fMap_ResetAndLoadDestinationArea_Return:
     RTL                                                        ;80972B|6B      |      ; FIXME: I want to be .return
  
  
@@ -305,7 +305,7 @@ fMap_SetupArea:
     JSL.L fTileMap_MapChangeHandler                            ;809793|22C6A780|80A7C6;
     REP #$20                                                   ;809797|C220    |      ;
     SEP #$10                                                   ;809799|E210    |      ;
-    LDA.W #sData42_80B9D7                                  ;80979B|A9D7B9  |      ;
+    LDA.W #aPaletteAnimScript_Rain_Slot0                                  ;80979B|A9D7B9  |      ;
     STA.B ptrTemp0x72                                          ;80979E|8572    |000072;
     SEP #$20                                                   ;8097A0|E220    |      ;
     LDA.B #$80                                                 ;8097A2|A980    |      ;
@@ -317,7 +317,7 @@ fMap_SetupArea:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;8097AE|22488E80|808E48;
     REP #$20                                                   ;8097B2|C220    |      ;
     SEP #$10                                                   ;8097B4|E210    |      ;
-    LDA.W #sData42_80B9DC                                  ;8097B6|A9DCB9  |      ;
+    LDA.W #aPaletteAnimScript_Rain_Slot1                                  ;8097B6|A9DCB9  |      ;
     STA.B ptrTemp0x72                                          ;8097B9|8572    |000072;
     SEP #$20                                                   ;8097BB|E220    |      ;
     LDA.B #$80                                                 ;8097BD|A980    |      ;
@@ -329,7 +329,7 @@ fMap_SetupArea:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;8097C9|22488E80|808E48;
     REP #$20                                                   ;8097CD|C220    |      ;
     SEP #$10                                                   ;8097CF|E210    |      ;
-    LDA.W #sData42_80B9E2                                  ;8097D1|A9E2B9  |      ;
+    LDA.W #aPaletteAnimScript_Rain_Slot2                                  ;8097D1|A9E2B9  |      ;
     STA.B ptrTemp0x72                                          ;8097D4|8572    |000072;
     SEP #$20                                                   ;8097D6|E220    |      ;
     LDA.B #$80                                                 ;8097D8|A980    |      ;
@@ -341,7 +341,7 @@ fMap_SetupArea:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;8097E4|22488E80|808E48;
     REP #$20                                                   ;8097E8|C220    |      ;
     SEP #$10                                                   ;8097EA|E210    |      ;
-    LDA.W #sData42_80B9DF                                  ;8097EC|A9DFB9  |      ;
+    LDA.W #aPaletteAnimScript_Rain_Slot3                                  ;8097EC|A9DFB9  |      ;
     STA.B ptrTemp0x72                                          ;8097EF|8572    |000072;
     SEP #$20                                                   ;8097F1|E220    |      ;
     LDA.B #$80                                                 ;8097F3|A980    |      ;
@@ -384,7 +384,7 @@ fMap_SetupArea:
     JSL.L fTileMap_MapChangeHandler                            ;809838|22C6A780|80A7C6;
     REP #$20                                                   ;80983C|C220    |      ;
     SEP #$10                                                   ;80983E|E210    |      ;
-    LDA.W #sData42_80B9EA                                  ;809840|A9EAB9  |      ;
+    LDA.W #aPaletteAnimScript_Snow_Slot0                                  ;809840|A9EAB9  |      ;
     STA.B ptrTemp0x72                                          ;809843|8572    |000072;
     SEP #$20                                                   ;809845|E220    |      ;
     LDA.B #$80                                                 ;809847|A980    |      ;
@@ -396,7 +396,7 @@ fMap_SetupArea:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;809853|22488E80|808E48;
     REP #$20                                                   ;809857|C220    |      ;
     SEP #$10                                                   ;809859|E210    |      ;
-    LDA.W #sData42_80B9EF                                  ;80985B|A9EFB9  |      ;
+    LDA.W #aPaletteAnimScript_Snow_Slot1                                  ;80985B|A9EFB9  |      ;
     STA.B ptrTemp0x72                                          ;80985E|8572    |000072;
     SEP #$20                                                   ;809860|E220    |      ;
     LDA.B #$80                                                 ;809862|A980    |      ;
@@ -408,7 +408,7 @@ fMap_SetupArea:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;80986E|22488E80|808E48;
     REP #$20                                                   ;809872|C220    |      ;
     SEP #$10                                                   ;809874|E210    |      ;
-    LDA.W #sData42_80B9F2                                  ;809876|A9F2B9  |      ;
+    LDA.W #aPaletteAnimScript_Snow_Slot2                                  ;809876|A9F2B9  |      ;
     STA.B ptrTemp0x72                                          ;809879|8572    |000072;
     SEP #$20                                                   ;80987B|E220    |      ;
     LDA.B #$80                                                 ;80987D|A980    |      ;
@@ -420,7 +420,7 @@ fMap_SetupArea:
     JSL.L fCore_Store0x72To0x42AtIndex                         ;809889|22488E80|808E48;
     REP #$20                                                   ;80988D|C220    |      ;
     SEP #$10                                                   ;80988F|E210    |      ;
-    LDA.W #sData42_80B9F5                                  ;809891|A9F5B9  |      ;
+    LDA.W #aPaletteAnimScript_Snow_Slot3                                  ;809891|A9F5B9  |      ;
     STA.B ptrTemp0x72                                          ;809894|8572    |000072;
     SEP #$20                                                   ;809896|E220    |      ;
     LDA.B #$80                                                 ;809898|A980    |      ;
@@ -440,7 +440,7 @@ fMap_SetupArea:
     JSL.L fTileMap_MapChangeHandler                            ;8098B5|22C6A780|80A7C6;
     JSL.L fPalette_ChangeTimePallete                           ;8098B9|22E29280|8092E2;
     JSL.L fPalette_PrepareSpritePalette                        ;8098BD|22299380|809329;
-    JSL.L fSubrutinesExecute_809553                            ;8098C1|22539580|809553;
+    JSL.L fPaletteAnim_RunAreaRoutine                            ;8098C1|22539580|809553;
     JSL.L fPalette_LoadMapPallete                              ;8098C5|22419280|809241;
     JSL.L fPalette_ProcessColorAnimSlots                                  ;8098C9|22698E80|808E69;
     SEP #$20                                                   ;8098CD|E220    |      ;
@@ -592,7 +592,7 @@ fMap_SetupArea:
     RTL                                                        ;809A63|6B      |      ;
  
  
-fMapChangeHandler_809A64:
+fMap_ScreenTransitionHandler:
     REP #$30                                                   ;809A64|C230    |      ;
     LDA.W $0878                                                ;809A66|AD7808  |000878;
     CMP.W #$00C0                                               ;809A69|C9C000  |      ;

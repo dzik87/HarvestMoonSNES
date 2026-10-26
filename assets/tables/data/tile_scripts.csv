@@ -1,21 +1,21 @@
 # Tile (map object) scripts and tile patterns (bank $81, items_misc.asm).
-# Table_81B363[N]  tile patterns, 6 bytes (fMap_GetTilePatternInfo): a rectangle of the map that fMap_DrawTilePatternAt draws
+# aTilePatternTable[N]  tile patterns, 6 bytes (fMap_GetTilePatternInfo): a rectangle of the map that fMap_DrawTilePatternAt draws
 #   src_offset  word offset in the tilemap source of the pattern
 #   width, height  size of the rectangle in tiles
 #   object_id   value filled into the object map of the rectangle (0 = do not fill, fMap_FillCurrentTilemapRect)
-# pTable_81B963[N] -> aTileScript_NN: script start (ptr24), started by fTileScript_Start.
+# pTileScriptTable[N] -> aTileScript_NN: script start (ptr24), started by fTileScript_Start.
 # aTileScript_NN   list of steps, ends with a loop or end record:
 #   step   tile:u16, x:pos16, y:pos16, delay:u8   set the tile at (x, y), then wait `delay` frames
 #   loop:  op=$FFFE, target:ptr24                  continue at target
 #   end:   op=$FFFF                                end of the script
-# nCarriedItemTable_81BE0F[tool] (8 bytes, index = tool id !EITEM_*): where a tool is put away in the shed:
+# nShedToolPlacementTable[tool] (8 bytes, index = tool id !EITEM_*): where a tool is put away in the shed:
 #   tile_x, tile_y  position of the tile on the map; tile_id  tile placed there; shed_row, shed_mask  byte and bit of strcShedItems
 # aBitMask16[N] = 1 << N.
 # Confidence: high for scripts and patterns, medium for the meaning of the pattern columns.
 
 @record loop op:u16=$FFFE,target:ptr24
 @record end op:u16=$FFFF
-@label Table_81B363
+@label aTilePatternTable
 @columns index:index,src_offset:u16,width:u8,height:u8,object_id:u16
 $00,$0000,$00,$00,$0000
 $01,$0000,$02,$01,$0000
@@ -273,7 +273,7 @@ $FC,$0F8C,$01,$01,$0000
 $FD,$0F90,$01,$01,$0000
 $FE,$0F94,$01,$01,$0000
 $FF,$0000,$00,$00,$0000
-@label pTable_81B963
+@label pTileScriptTable
 @columns index:index,script:ptr24
 $00,aTileScript_00
 $01,aTileScript_01
@@ -753,7 +753,7 @@ end:
 $0075,$00C0,$0040,$04
 end: 
 
-@label nCarriedItemTable_81BE0F
+@label nShedToolPlacementTable
 @columns tool:note,tile_x:pos16,tile_y:pos16,tile_id:u16,shed_row:u8,shed_mask:u8
 EITEM_NONE,$0000,$0000,$0000,$00,$00
 EITEM_SICKLE,$0090,$0090,$0078,$00,$01

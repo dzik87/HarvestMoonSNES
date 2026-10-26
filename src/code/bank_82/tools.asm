@@ -21,7 +21,7 @@ fToolUsedSound_PlayToolHit:
     ADC.B strcVariables.n16Temp1                               ;828FCF|657E    |00007E;
     TAX                                                        ;828FD1|AA      |      ;
     SEP #$20                                                   ;828FD2|E220    |      ;
-    LDA.L nToolSoundData_829054,X                              ;828FD4|BF549082|829054; X = nToolEquipped * 3
+    LDA.L nToolSoundTable,X                              ;828FD4|BF549082|829054; X = nToolEquipped * 3
     STA.W strcAudio.reg115                                     ;828FD8|8D1501  |000115;
     INX                                                        ;828FDB|E8      |      ; X++
     REP #$20                                                   ;828FDC|C220    |      ;
@@ -30,7 +30,7 @@ fToolUsedSound_PlayToolHit:
     ADC.B strcVariables.n16Temp2                               ;828FE0|6580    |000080;
     TAX                                                        ;828FE2|AA      |      ;
     SEP #$20                                                   ;828FE3|E220    |      ;
-    LDA.L nToolSoundData_829054,X                              ;828FE5|BF549082|829054; X = nToolEquipped * 3 + $0922
+    LDA.L nToolSoundTable,X                              ;828FE5|BF549082|829054; X = nToolEquipped * 3 + $0922
     BEQ .return                                                ;828FE9|F007    |828FF2;
     STA.W strcAudio.reg114                                     ;828FEB|8D1401  |000114;
     JSL.L fAudioSetRegister2to0A                               ;828FEE|22328383|838332;
@@ -53,12 +53,12 @@ fToolUsedSound_PlayOnToolChange:
     ADC.B strcVariables.n16Temp1                               ;829006|657E    |00007E;
     TAX                                                        ;829008|AA      |      ;
     SEP #$20                                                   ;829009|E220    |      ;
-    LDA.L nToolSoundData_829054,X                              ;82900B|BF549082|829054;
+    LDA.L nToolSoundTable,X                              ;82900B|BF549082|829054;
     BEQ .return                                                ;82900F|F03A    |82904B;
     STA.W strcAudio.reg115                                     ;829011|8D1501  |000115;
     INX                                                        ;829014|E8      |      ;
     PHX                                                        ;829015|DA      |      ;
-    LDA.L nToolSoundData_829054,X                              ;829016|BF549082|829054;
+    LDA.L nToolSoundTable,X                              ;829016|BF549082|829054;
     BEQ +                                                      ;82901A|F01C    |829038;
     STA.W strcAudio.reg114                                     ;82901C|8D1401  |000114;
     SEP #$20                                                   ;82901F|E220    |      ;
@@ -68,7 +68,7 @@ fToolUsedSound_PlayOnToolChange:
     REP #$20                                                   ;829027|C220    |      ;
     TAX                                                        ;829029|AA      |      ;
     SEP #$20                                                   ;82902A|E220    |      ;
-    LDA.L nToolSoundData_80B8CD,X                              ;82902C|BFCDB880|80B8CD;
+    LDA.L nSoundEffectSampleTable,X                              ;82902C|BFCDB880|80B8CD;
     INC A                                                      ;829030|1A      |      ;
     STA.W strcAudio.index                                      ;829031|8D0301  |000103;
     JSL.L fAudio_PrepareSoundEffectSample                                 ;829034|223E8383|83833E;
@@ -77,7 +77,7 @@ fToolUsedSound_PlayOnToolChange:
     REP #$10                                                   ;82903A|C210    |      ;
     PLX                                                        ;82903C|FA      |      ;
     INX                                                        ;82903D|E8      |      ;
-    LDA.L nToolSoundData_829054,X                              ;82903E|BF549082|829054;
+    LDA.L nToolSoundTable,X                              ;82903E|BF549082|829054;
     BEQ .return                                                ;829042|F007    |82904B;
     STA.W strcAudio.reg114                                     ;829044|8D1401  |000114;
     JSL.L fAudio_PrepareSoundEffectSample                                 ;829047|223E8383|83833E;
@@ -412,7 +412,7 @@ fToolUsedActionHandler:
     if !REGION_DE
     JSR.W ($A780,X)
     elseif !REGION_JP
-    JSR.W (L_82A5BF,X)
+    JSR.W (aToolUsedActionTable_JP,X)
     else
     JSR.W (aToolUsedActionTable,X)                             ;82926C|FCC3A5  |82A5C3;
     endif
@@ -468,11 +468,11 @@ fToolUsed_GetSoundForTileOffset:
     ASL A                                                      ;8292D8|0A      |      ;
     ASL A                                                      ;8292D9|0A      |      ;
     TAX                                                        ;8292DA|AA      |      ;
-    LDA.L nFindTileArgsTable_8292FA,X                          ;8292DB|BFFA9282|8292FA;
+    LDA.L nFrontTileOffsetTable,X                          ;8292DB|BFFA9282|8292FA;
     PHA                                                        ;8292DF|48      |      ;
     INX                                                        ;8292E0|E8      |      ;
     INX                                                        ;8292E1|E8      |      ;
-    LDA.L nFindTileArgsTable_8292FA,X                          ;8292E2|BFFA9282|8292FA;
+    LDA.L nFrontTileOffsetTable,X                          ;8292E2|BFFA9282|8292FA;
     TAY                                                        ;8292E6|A8      |      ;
     PLA                                                        ;8292E7|68      |      ;
     TAX                                                        ;8292E8|AA      |      ;
@@ -484,7 +484,7 @@ fToolUsed_GetSoundForTileOffset:
     RTS                                                        ;8292F9|60      |      ;
  
  
-nFindTileArgsTable_8292FA:
+nFrontTileOffsetTable:
     dw $0000,$0000,$0000,$0001,$0001,$0001                     ;8292FA|        |      ; 0x09 * [n16 nRegX, n16 nRegY]
     dw $0001,$0000,$0001,$FFFF,$0000,$FFFF                     ;829306|        |      ;
     dw $FFFF,$FFFF,$FFFF,$0000,$FFFF,$0001                     ;829312|        |      ;

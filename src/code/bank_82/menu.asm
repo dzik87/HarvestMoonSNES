@@ -2,7 +2,7 @@
  
 fMenu_LoadNameInputCursorPos:
     REP #$30                                                   ;82EB57|C230    |      ;
-    LDA.W #aMenuData_82EBF8                                ;82EB59|A9F8EB  |      ;
+    LDA.W #aNameInputGrid0                                ;82EB59|A9F8EB  |      ;
     STA.B ptrTemp0x72                                          ;82EB5C|8572    |000072;
     SEP #$20                                                   ;82EB5E|E220    |      ;
     LDA.B #$82                                                 ;82EB60|A982    |      ;
@@ -12,7 +12,7 @@ fMenu_LoadNameInputCursorPos:
     CMP.B #$01                                                 ;82EB69|C901    |      ;
     BEQ +                                                      ;82EB6B|F00F    |82EB7C;
     REP #$20                                                   ;82EB6D|C220    |      ;
-    LDA.W #aMenuData_82F0D0                                ;82EB6F|A9D0F0  |      ;
+    LDA.W #aNameInputGrid2                                ;82EB6F|A9D0F0  |      ;
     STA.B ptrTemp0x72                                          ;82EB72|8572    |000072;
     SEP #$20                                                   ;82EB74|E220    |      ;
     LDA.B #$82                                                 ;82EB76|A982    |      ;
@@ -21,7 +21,7 @@ fMenu_LoadNameInputCursorPos:
  
  
   + REP #$20                                                   ;82EB7C|C220    |      ;
-    LDA.W #aMenuData_82EE30                                ;82EB7E|A930EE  |      ;
+    LDA.W #aNameInputGrid1                                ;82EB7E|A930EE  |      ;
     STA.B ptrTemp0x72                                          ;82EB81|8572    |000072;
     SEP #$20                                                   ;82EB83|E220    |      ;
     LDA.B #$82                                                 ;82EB85|A982    |      ; 82EE30 -> $72
@@ -53,7 +53,7 @@ fMenu_LoadNameInputCursorPos:
 fMenu_GetNameInputCellField:
     REP #$30                                                   ;82EBAC|C230    |      ; A: nArg, return A: nResult
     PHA                                                        ;82EBAE|48      |      ; nArg -> stack1
-    LDA.W #aMenuData_82EBF8                                ;82EBAF|A9F8EB  |      ;
+    LDA.W #aNameInputGrid0                                ;82EBAF|A9F8EB  |      ;
     STA.B ptrTemp0x72                                          ;82EBB2|8572    |000072;
     SEP #$20                                                   ;82EBB4|E220    |      ;
     LDA.B #$82                                                 ;82EBB6|A982    |      ;
@@ -63,7 +63,7 @@ fMenu_GetNameInputCellField:
     CMP.B #$01                                                 ;82EBBF|C901    |      ;
     BEQ +                                                      ;82EBC1|F00F    |82EBD2;
     REP #$20                                                   ;82EBC3|C220    |      ;
-    LDA.W #aMenuData_82F0D0                                ;82EBC5|A9D0F0  |      ;
+    LDA.W #aNameInputGrid2                                ;82EBC5|A9D0F0  |      ;
     STA.B ptrTemp0x72                                          ;82EBC8|8572    |000072;
     SEP #$20                                                   ;82EBCA|E220    |      ;
     LDA.B #$82                                                 ;82EBCC|A982    |      ;
@@ -72,7 +72,7 @@ fMenu_GetNameInputCellField:
  
  
   + REP #$20                                                   ;82EBD2|C220    |      ;
-    LDA.W #aMenuData_82EE30                                ;82EBD4|A930EE  |      ;
+    LDA.W #aNameInputGrid1                                ;82EBD4|A930EE  |      ;
     STA.B ptrTemp0x72                                          ;82EBD7|8572    |000072;
     SEP #$20                                                   ;82EBD9|E220    |      ;
     LDA.B #$82                                                 ;82EBDB|A982    |      ;

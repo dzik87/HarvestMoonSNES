@@ -1,0 +1,450 @@
+old,new,confidence,reason
+aMenuData_82EBF8,aNameInputGrid0,high,Name entry cursor grid 0 (strcMenuData.tableSelector 0) loaded by the name entry screen setup
+aMenuData_82EE30,aNameInputGrid1,high,Name entry cursor grid 1 (tableSelector 1)
+aMenuData_82F0D0,aNameInputGrid2,high,Name entry cursor grid 2 (tableSelector 2)
+Table_80DD5B,aPaletteAnimScript_FarmSpring_FarmSummer_T01_Slot4,high,Colour animation script stored to slot 4 by fPaletteAnim_FarmSpring_FarmSummer_T01 (sibling of the existing _Slot5.._Slot7 scripts)
+Table_81B363,aTilePatternTable,high,Tile pattern records (src_offset / width / height / object id) read by fMap_GetTilePatternInfo
+pTable_81B963,pTileScriptTable,high,Table of tile script start pointers started by fTileScript_Start
+nCarriedItemTable_81BE0F,nShedToolPlacementTable,high,Per tool record (tile x / y / id and strcShedItems row / mask) for putting a tool away in the shed
+nPaletteOverwrite_80BD9C,nPaletteSeasonOverwriteTable,medium,Three colours per season / time of day written into palette rows $0A..$0C by fPalette_LoadSpritePallete
+nSoundItemCarriedTable_81A308,nItemCarriedPickupSoundTable,high,Flag per carried item id: 1 = play the pick-up sound
+pItemCarriedTable_8196AF,pItemCarriedFramesTable,high,Pointer per carried item id to its aItemCarriedFrames_* pose list
+pItemSubrutines_81A9F6,pAreaItemSubrutineTable,medium,Handler per area id run by fAreaItemSubrutine_Run (index is strcMap.loadAreaId)
+fItemSubrutineHandler_81A9E5,fAreaItemSubrutine_Run,medium,Calls the pAreaItemSubrutineTable handler of the loaded area (restores area dependent item / tile state)
+pSubrutineTable_81A58B,pItemCarriedSlotHandlerTable,medium,Handler table indexed by the byte at +1 of an object slot ($FFFF = none; only fItemCarried_RunHandler is used)
+pSubrutineTable_80BEEC,pPaletteAnimRoutineTable,high,Colour animation setup routine per area and time of day phase (6 words per area)
+fSubrutinesExecute_809553,fPaletteAnim_RunAreaRoutine,high,Runs the pPaletteAnimRoutineTable routine of the current area for the time of day and season
+sData42_80B9D7,aPaletteAnimScript_Rain_Slot0,medium,Colour animation script slot 0 started for the rain overlay area ($57) by fMap_SetupArea
+sData42_80B9DC,aPaletteAnimScript_Rain_Slot1,medium,Colour animation script slot 1 of the rain overlay area ($57)
+sData42_80B9E2,aPaletteAnimScript_Rain_Slot2,medium,Colour animation script slot 2 of the rain overlay area ($57)
+sData42_80B9DF,aPaletteAnimScript_Rain_Slot3,medium,Colour animation script slot 3 of the rain overlay area ($57)
+sData42_80B9EA,aPaletteAnimScript_Snow_Slot0,medium,Colour animation script slot 0 started for the snow overlay area ($59) by fMap_SetupArea
+sData42_80B9EF,aPaletteAnimScript_Snow_Slot1,medium,Colour animation script slot 1 of the snow overlay area ($59)
+sData42_80B9F2,aPaletteAnimScript_Snow_Slot2,medium,Colour animation script slot 2 of the snow overlay area ($59)
+sData42_80B9F5,aPaletteAnimScript_Snow_Slot3,medium,Colour animation script slot 3 of the snow overlay area ($59)
+nTable_80AA68,nMapRoomRowStrideTable,medium,Per room width multiplier value stored to strcMap.pCurrent+2 (row stride used when streaming map rows)
+nTable_80AA72,nMapRoomSizeTable,medium,Per room width multiplier value stored to strcMap.unk1C (size of one room block)
+nToolSoundData_80B8CD,nSoundEffectSampleTable,high,Sound effect sample index per strcAudio.unk118 read by fAudio_PlaySoundEffectAndWait (not tool related)
+nToolSoundData_829054,nToolSoundTable,high,Voice and two sound effects per tool (3 bytes per tool id)
+nSystemTranferData_82E666,nSystemTransferTilemapTable,medium,Tilemap word pairs of the system screen rows (blocks of $24 bytes)
+nSystemTranferData_82E6D2,nSystemTransferTilemapTable_Set2,medium,Second set of system screen tilemap words (region specific location)
+sYearOrdinal_82F298,aYearOrdinalString,medium,Year ordinal text words used by the main menu date text (same family as aDayOrdinalString / aSeasonString)
+fUnreached_82E801,fUnreached_StartNameInput,high,Unreferenced stub: selects name destination 0 and jumps to fScreen_NameInput
+fGetAXYArgs_828270,fObjectMap_GetHuricaneDamageArgs,high,Loads A / X / Y arguments of fObjectMap_HuricaneDamage from nHuricaneDamageArgsTable by damage type
+nArgumentsTable_828298,nHuricaneDamageArgsTable,high,Three argument bytes (A flag / X flag / Y flag) per fObjectMap_HuricaneDamage damage type
+nWeatherTable_828CED,nWeatherMapFlagsTable,high,strcDialogDisplay.mapFlags value per weather forecast
+fWeatherForecast_828C09,fWeather_ApplyForecast,high,Sets map flags and event flags from nWeatherForecast
+nFindTileArgsTable_8292FA,nFrontTileOffsetTable,medium,X / Y step pair per seed bag use counter passed to fFindTileCoordsInFrontOfPLayer
+aUnused_828AC3,aSeasonWordTable,medium,JP season name words copied to the season name (unused data in the other releases)
+fHelper_81C827,fPlayerAction_Run_MoveInDirection,high,Run / walk tail: moves the player one step then finishes the action
+fHelper_81C82A,fPlayerAction_Run_Finish,high,Run / walk tail: resets the player action and the break hit counter then continues with fPlayerAction0x19
+fMapChangeHandler_809A64,fMap_ScreenTransitionHandler,high,Detects stepping on a screen transition tile and starts the transition to the destination area
+fReturn_80972B,fMap_ResetAndLoadDestinationArea_Return,high,Shared RTL at the end of fMap_ResetAndLoadDestinationArea
+fReturn_818B6A,fItemBuy_Return,high,Shared RTS of the fItemBuy_* routines
+fReturn_818C23,fItemFound_Return,high,Shared RTS of the fItemFound_* routines
+fReturn_818E1A,fItemCarried_ReturnShared,high,Shared RTS of the carry loops and put down handlers
+fReturn_81900F,fItemSell_Return,high,Shared RTS of the fItemSell_* routines
+fReturn_819227,fItemCarried_ReturnAfterDropAction,high,Shared RTS of the drop action handlers
+fReturn_8196AE,fItemCarried_ReturnFromPhase,high,Shared RTS of the carried item phase handlers
+fReturn_81F6D6,fPlayerInteraction_ReturnShared,high,Shared RTS of the fPlayerInteraction0x51 / 0x52 handlers
+L_818149,subItemCarried_Corn_Return,high,Final RTS of subItemCarried_Corn (branch target of the US-only skip)
+L_818161,subItemCarried_Tomato_Return,high,Final RTS of subItemCarried_Tomato
+L_818179,subItemCarried_Potato_Return,high,Final RTS of subItemCarried_Potato
+L_818191,subItemCarried_Turnip_Return,high,Final RTS of subItemCarried_Turnip
+L_81A8C0,fMap_CalcTilemapBufferOffset_OuterLoop,high,Start of the outer copy loop of fMap_CalcTilemapBufferOffset
+L_81E749,fPlayerInteraction0x42_ShowDialog,high,Common dialog start of fPlayerInteraction0x42 (after the dialog id is chosen)
+L_81E784,fPlayerInteraction0x42_RequestNameInput,high,Sets AFLAGS_NAMEINPUTREQUEST in the map flags
+L_828ACB,aDayOrdinalWordTable,medium,JP day ordinal words table inside aSeasonWordTable
+L_828BC3,aDayOrdinalString_DE,medium,DE copy of the day ordinal string table
+L_82A5BF,aToolUsedActionTable_JP,high,JP location of aToolUsedActionTable
+L_82A727,fObjectMap_HuricaneDamage_RowLoop,high,Row loop head of fObjectMap_HuricaneDamage
+L_82A72A,fObjectMap_HuricaneDamage_TileLoop,high,Tile loop head of fObjectMap_HuricaneDamage
+L_82A9B1,fObjectMap_EatingGrass_RowLoop,high,Row loop head of fObjectMap_EatingGrass
+L_82A9B4,fObjectMap_EatingGrass_TileLoop,high,Tile loop head of fObjectMap_EatingGrass
+L_82AA21,fObjectMap_CalculateRanchDev_RowLoop,high,Row loop head of fObjectMap_CalculateRanchDev
+L_82AA24,fObjectMap_CalculateRanchDev_TileLoop,high,Tile loop head of fObjectMap_CalculateRanchDev
+L_82D347,fMainMenu_StartHowToPlayDemo_WaitFrame,high,NMI wait loop of fMainMenu_StartHowToPlayDemo
+L_82D6C9,fMainMenu_PrepareHowToPlay_WaitFrame,high,NMI wait loop of fMainMenu_PrepareHowToPlay
+L_82D93F,fMainMenu_StateOpeningDemo_WaitFrame,high,NMI wait loop of fMainMenu_StateOpeningDemo
+L_82DD80,fMainMenu_StateTitleStartCursorAnim_Finish,high,Sets the next state and ends the frame
+L_82E03A,fMainMenu_StateNewGameSlotSelect_CheckSlot2,high,Chooses the initial highlighted save slot
+L_82E127,fMainMenu_NewGameSlotSelect_WaitFrame_ResetScrollX,high,Clears the BG1 horizontal scroll (JP branch target)
+L_82E17D,fMainMenu_NewGameSlotSelect_MoveCursorSlot2_ResetScrollX,high,Clears the BG1 horizontal scroll (JP branch target)
+L_82E747,fMainMenu_DrawSaveSlotFrames_Loop,high,Loop head of fMainMenu_DrawSaveSlotFrames
+L_82E95F,fScreen_NameInput_WaitFrame,high,NMI wait loop of fScreen_NameInput
+.r_818529_1,.afterEquippedToolCheck,high,DE-only branch target in subItemCarried_0x46 after clearing the equipped tool
+.r_818529_2,.afterSecondToolCheck,high,DE-only branch target in subItemCarried_0x46 after clearing the second tool
+.r_81E729_1,.setPhaseOne,high,EU/DE-only branch target that sets nPlayerInteractionArg1 = 1
+.r_82E111_1,.resetScrollXEu,high,EU-only branch target in fMainMenu_NewGameSlotSelect_WaitFrame (clears BG1 scroll)
+.r_82E111_2,.loadSlotPaletteAnimsEu,high,EU-only join point in fMainMenu_NewGameSlotSelect_WaitFrame (loads slot palette animations)
+fAudioEngine_MapChangeHandler.label1,fAudioEngine_MapChangeHandler.applyDestinationArea,medium,anonymous local label named after its role in the routine
+fAudioEngine_MapChangeHandler.label2,fAudioEngine_MapChangeHandler.startFadeout,medium,anonymous local label named after its role in the routine
+fAudioEngine_SelectMapMusic.label1,fAudioEngine_SelectMapMusic.specialAreaMusic,medium,anonymous local label named after its role in the routine
+fCamera_ScrollDownStep.label1,fCamera_ScrollDownStep.checkStreamFlag,medium,anonymous local label named after its role in the routine
+fCamera_ScrollLeftStep.label1,fCamera_ScrollLeftStep.checkStreamFlag,medium,anonymous local label named after its role in the routine
+fCamera_ScrollRightStep.label1,fCamera_ScrollRightStep.checkStreamFlag,medium,anonymous local label named after its role in the routine
+fCamera_ScrollUpStep.label1,fCamera_ScrollUpStep.checkStreamFlag,medium,anonymous local label named after its role in the routine
+fCamera_UpdateBG2Scroll.label1,fCamera_UpdateBG2Scroll.checkAreaRange,medium,anonymous local label named after its role in the routine
+fCamera_UpdateBG2Scroll.label10,fCamera_UpdateBG2Scroll.checkDirectionLeft,medium,anonymous local label named after its role in the routine
+fCamera_UpdateBG2Scroll.label11,fCamera_UpdateBG2Scroll.checkDirectionRightDrift,medium,anonymous local label named after its role in the routine
+fCamera_UpdateBG2Scroll.label12,fCamera_UpdateBG2Scroll.applyDiagonalDrift,medium,anonymous local label named after its role in the routine
+fCamera_UpdateBG2Scroll.label13,fCamera_UpdateBG2Scroll.checkCameraMaxX,medium,anonymous local label named after its role in the routine
+fCamera_UpdateBG2Scroll.label14,fCamera_UpdateBG2Scroll.scrollBG2Left,medium,anonymous local label named after its role in the routine
+fCamera_UpdateBG2Scroll.label15,fCamera_UpdateBG2Scroll.checkMapFlag8,medium,anonymous local label named after its role in the routine
+fCamera_UpdateBG2Scroll.label2,fCamera_UpdateBG2Scroll.checkCameraMaxY,medium,anonymous local label named after its role in the routine
+fCamera_UpdateBG2Scroll.label3,fCamera_UpdateBG2Scroll.copyCameraX,medium,anonymous local label named after its role in the routine
+fCamera_UpdateBG2Scroll.label4,fCamera_UpdateBG2Scroll.checkDirectionRight,medium,anonymous local label named after its role in the routine
+fCamera_UpdateBG2Scroll.label5,fCamera_UpdateBG2Scroll.setVerticalParallax,medium,anonymous local label named after its role in the routine
+fCamera_UpdateBG2Scroll.label6,fCamera_UpdateBG2Scroll.checkMapFlag2,medium,anonymous local label named after its role in the routine
+fCamera_UpdateBG2Scroll.label7,fCamera_UpdateBG2Scroll.checkMapFlag4,medium,anonymous local label named after its role in the routine
+fCamera_UpdateBG2Scroll.label8,fCamera_UpdateBG2Scroll.parallaxByDirection,medium,anonymous local label named after its role in the routine
+fCamera_UpdateBG2Scroll.label9,fCamera_UpdateBG2Scroll.checkDirectionUp,medium,anonymous local label named after its role in the routine
+fCamera_UpdateFromPlayerPos.label1,fCamera_UpdateFromPlayerPos.pinCameraXMin,medium,anonymous local label named after its role in the routine
+fCamera_UpdateFromPlayerPos.label2,fCamera_UpdateFromPlayerPos.checkCameraXMax,medium,anonymous local label named after its role in the routine
+fCamera_UpdateFromPlayerPos.label3,fCamera_UpdateFromPlayerPos.pinCameraXMax,medium,anonymous local label named after its role in the routine
+fCamera_UpdateFromPlayerPos.label4,fCamera_UpdateFromPlayerPos.updateCameraY,medium,anonymous local label named after its role in the routine
+fCamera_UpdateFromPlayerPos.label5,fCamera_UpdateFromPlayerPos.pinCameraYMin,medium,anonymous local label named after its role in the routine
+fCamera_UpdateFromPlayerPos.label6,fCamera_UpdateFromPlayerPos.checkCameraYMax,medium,anonymous local label named after its role in the routine
+fCamera_UpdateFromPlayerPos.label7,fCamera_UpdateFromPlayerPos.pinCameraYMax,medium,anonymous local label named after its role in the routine
+fCore_PrepareTransfer.label1,fCore_PrepareTransfer.dmaModeSingleReg,medium,anonymous local label named after its role in the routine
+fCore_PrepareTransfer.label2,fCore_PrepareTransfer.setDmaRegisters,medium,anonymous local label named after its role in the routine
+fCore_ReadJoypad.label1,fCore_ReadJoypad.mergeStoredInput,medium,anonymous local label named after its role in the routine
+fCore_ReadJoypad.label2,fCore_ReadJoypad.computeEdges,medium,anonymous local label named after its role in the routine
+fCore_ReadJoypad.label3,fCore_ReadJoypad.clearHoldCounter,medium,anonymous local label named after its role in the routine
+fCore_ReadJoypad.label4,fCore_ReadJoypad.checkRepeatDelay,medium,anonymous local label named after its role in the routine
+fCore_ReadJoypad.label5,fCore_ReadJoypad.startAutorepeat,medium,anonymous local label named after its role in the routine
+fCore_StartPreparedTransfer.label1,fCore_StartPreparedTransfer.setCgramAddress,medium,anonymous local label named after its role in the routine
+fCore_StartPreparedTransfer.label2,fCore_StartPreparedTransfer.fireDma,medium,anonymous local label named after its role in the routine
+fCore_StartTransfer.label2,fCore_StartTransfer.setCgramAddress,medium,anonymous local label named after its role in the routine
+fCore_StartTransfer.label3,fCore_StartTransfer.fireDma,medium,anonymous local label named after its role in the routine
+fEvents_UpdateMarriageAndChildGrowth.label0,fEvents_UpdateMarriageAndChildGrowth.checkChildEligibility,medium,anonymous local label named after its role in the routine
+fEvents_UpdateMarriageAndChildGrowth.label3,fEvents_UpdateMarriageAndChildGrowth.firstChildMilestone,medium,anonymous local label named after its role in the routine
+fEvents_UpdateMarriageAndChildGrowth.label4,fEvents_UpdateMarriageAndChildGrowth.checkSecondChild,medium,anonymous local label named after its role in the routine
+fEvents_UpdateMarriageAndChildGrowth.label5,fEvents_UpdateMarriageAndChildGrowth.secondChildMilestone,medium,anonymous local label named after its role in the routine
+fItemBuy_HandleAnswer.label1,fItemBuy_HandleAnswer.profitIdHigh,medium,anonymous local label named after its role in the routine
+fItemBuy_HandleAnswer.label2,fItemBuy_HandleAnswer.profitIndexReady,medium,anonymous local label named after its role in the routine
+fItemBuy_HandleAnswer.label3,fItemBuy_HandleAnswer.showResultDialog,medium,anonymous local label named after its role in the routine
+fItemBuy_HandleAnswer.label4,fItemBuy_HandleAnswer.dialogIdHigh,medium,anonymous local label named after its role in the routine
+fItemBuy_HandleAnswer.label5,fItemBuy_HandleAnswer.dialogIndexReady,medium,anonymous local label named after its role in the routine
+fItemBuy_ReturnItemToShelf.label2,fItemBuy_ReturnItemToShelf.itemIdHigh,medium,anonymous local label named after its role in the routine
+fItemBuy_ReturnItemToShelf.label3,fItemBuy_ReturnItemToShelf.itemIndexReady,medium,anonymous local label named after its role in the routine
+fItemBuy_ShowDeclineDialog.label1,fItemBuy_ShowDeclineDialog.itemIdHigh,medium,anonymous local label named after its role in the routine
+fItemBuy_ShowDeclineDialog.label2,fItemBuy_ShowDeclineDialog.itemIndexReady,medium,anonymous local label named after its role in the routine
+fItemBuy_ShowPurchaseDialog.label1,fItemBuy_ShowPurchaseDialog.itemIdHigh,medium,anonymous local label named after its role in the routine
+fItemBuy_ShowPurchaseDialog.label2,fItemBuy_ShowPurchaseDialog.itemIndexReady,medium,anonymous local label named after its role in the routine
+fItemCarriedAnimal_CarryLoop.label1,fItemCarriedAnimal_CarryLoop.checkObjectExists,medium,anonymous local label named after its role in the routine
+fItemCarriedAnimal_CarryLoop.label2,fItemCarriedAnimal_CarryLoop.checkDropItem,medium,anonymous local label named after its role in the routine
+fItemCarriedAnimal_CarryLoop.label3,fItemCarriedAnimal_CarryLoop.cancelDrop,medium,anonymous local label named after its role in the routine
+fItemCarried_CarryLoop_NoSell.label1,fItemCarried_CarryLoop_NoSell.notJump,medium,anonymous local label named after its role in the routine
+fItemCarried_CarryLoop_NoSell.label2,fItemCarried_CarryLoop_NoSell.jump,medium,anonymous local label named after its role in the routine
+fItemCarried_CarryLoop_NoSell.label3,fItemCarried_CarryLoop_NoSell.checkDropItem,medium,anonymous local label named after its role in the routine
+fItemCarried_CarryLoop_NoSell.label4,fItemCarried_CarryLoop_NoSell.checkObjectExists,medium,anonymous local label named after its role in the routine
+fItemCarried_CarryLoop_NoSell.label6,fItemCarried_CarryLoop_NoSell.tileAcceptsItem,medium,anonymous local label named after its role in the routine
+fItemCarried_CarryLoop_NoSell.label7,fItemCarried_CarryLoop_NoSell.cancelDrop,medium,anonymous local label named after its role in the routine
+fItemCarried_CarryLoop_NoSell.lable5,fItemCarried_CarryLoop_NoSell.dropOnTile,medium,anonymous local label named after its role in the routine
+fItemSub81A9F6_0x00to0x03.label1,fItemSub81A9F6_0x00to0x03.checkEvent1Flag0001,medium,anonymous local label named after its role in the routine
+fItemSub81A9F6_0x00to0x03.label10,fItemSub81A9F6_0x00to0x03.checkEvent3Flag1000,medium,anonymous local label named after its role in the routine
+fItemSub81A9F6_0x00to0x03.label2,fItemSub81A9F6_0x00to0x03.checkEvent1Flag0080,medium,anonymous local label named after its role in the routine
+fItemSub81A9F6_0x00to0x03.label3,fItemSub81A9F6_0x00to0x03.checkEvent1Flag0040,medium,anonymous local label named after its role in the routine
+fItemSub81A9F6_0x00to0x03.label4,fItemSub81A9F6_0x00to0x03.checkPowerBerries,medium,anonymous local label named after its role in the routine
+fItemSub81A9F6_0x00to0x03.label5,fItemSub81A9F6_0x00to0x03.checkEvent2Flag0200,medium,anonymous local label named after its role in the routine
+fItemSub81A9F6_0x00to0x03.label6,fItemSub81A9F6_0x00to0x03.checkEvent2Flag0400,medium,anonymous local label named after its role in the routine
+fItemSub81A9F6_0x00to0x03.label7,fItemSub81A9F6_0x00to0x03.checkEvent2Flag0800,medium,anonymous local label named after its role in the routine
+fItemSub81A9F6_0x00to0x03.label8,fItemSub81A9F6_0x00to0x03.checkEvent2Flag1000,medium,anonymous local label named after its role in the routine
+fItemSub81A9F6_0x1C.label1,fItemSub81A9F6_0x1C.summerLoop,medium,anonymous local label named after its role in the routine
+fItemSub81A9F6_0x1C.label2,fItemSub81A9F6_0x1C.checkSeasonSpring,medium,anonymous local label named after its role in the routine
+fMainMenu_LoadGameSlotSelect_FrameTail.label1,fMainMenu_LoadGameSlotSelect_FrameTail.incrementTimer,medium,anonymous local label named after its role in the routine
+fMainMenu_NewGameSlotSelect_FrameTail.label1,fMainMenu_NewGameSlotSelect_FrameTail.incrementTimer,medium,anonymous local label named after its role in the routine
+fMainMenu_NewGameSlotSelect_MoveCursorSlot2.label1,fMainMenu_NewGameSlotSelect_MoveCursorSlot2.setPaletteAnims,medium,anonymous local label named after its role in the routine
+fMainMenu_NewGameSlotSelect_WaitFrame.label1,fMainMenu_NewGameSlotSelect_WaitFrame.setSlotNormalPalette,medium,anonymous local label named after its role in the routine
+fMainMenu_NewGameSlotSelect_WaitFrame.label2,fMainMenu_NewGameSlotSelect_WaitFrame.highlightSlot,medium,anonymous local label named after its role in the routine
+fMainMenu_StateLoadGameSlotSelect.label1,fMainMenu_StateLoadGameSlotSelect.highlightSecondSlot,medium,anonymous local label named after its role in the routine
+fMainMenu_StateLoadGameSlotSelect.label2,fMainMenu_StateLoadGameSlotSelect.resetScrollAndFadeIn,medium,anonymous local label named after its role in the routine
+fMainMenu_StateLogoScrollHorizontal.label1,fMainMenu_StateLogoScrollHorizontal.advanceCounter,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label1,fMapChangeHandler_809A64.checkFirstTileRange,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label10,fMapChangeHandler_809A64.checkSpecialDayArea,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label11,fMapChangeHandler_809A64.springDay1Area,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label12,fMapChangeHandler_809A64.winterDay24Area,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label13,fMapChangeHandler_809A64.checkEggFestivalArea,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label14,fMapChangeHandler_809A64.checkClosedEvening,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label15,fMapChangeHandler_809A64.checkClosedDaytime,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label16,fMapChangeHandler_809A64.checkWeekendOnly,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label17,fMapChangeHandler_809A64.checkSaturdayClosed,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label18,fMapChangeHandler_809A64.checkSaturday,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label19,fMapChangeHandler_809A64.checkClosedSunday,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label2,fMapChangeHandler_809A64.checkSecondTile,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label20,fMapChangeHandler_809A64.checkFestivalClosed,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label21,fMapChangeHandler_809A64.cancelTransition,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label22,fMapChangeHandler_809A64.commitTransition,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label23,fMapChangeHandler_809A64.startTileScript,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label24,fMapChangeHandler_809A64.checkScriptActive,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label25,fMapChangeHandler_809A64.walkIntoTransition,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label3,fMapChangeHandler_809A64.checkSecondTileRange,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label34,fMapChangeHandler_809A64.checkAreaBeforeSpa,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label35,fMapChangeHandler_809A64.checkMapFlagsMask,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label36,fMapChangeHandler_809A64.checkFirstTileF9,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label37,fMapChangeHandler_809A64.checkSecondTileF9,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label38,fMapChangeHandler_809A64.checkFirstTileFA,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label39,fMapChangeHandler_809A64.checkSecondTileFA,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label4,fMapChangeHandler_809A64.checkRidingHorse,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label40,fMapChangeHandler_809A64.checkFirstTileFB,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label41,fMapChangeHandler_809A64.checkSecondTileFB,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label42,fMapChangeHandler_809A64.checkDaily1Flag,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label43,fMapChangeHandler_809A64.checkHolding,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label44,fMapChangeHandler_809A64.checkRiding,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label45,fMapChangeHandler_809A64.checkDogHug,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label46,fMapChangeHandler_809A64.checkFirstTileF8,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label47,fMapChangeHandler_809A64.checkSecondTileF8,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label48,fMapChangeHandler_809A64.checkActionTen,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label49,fMapChangeHandler_809A64.checkActionFishing,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label5,fMapChangeHandler_809A64.checkDaily4Block,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label50,fMapChangeHandler_809A64.checkActionFishingBite,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label51,fMapChangeHandler_809A64.checkActionReeling,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label52,fMapChangeHandler_809A64.setAction0F,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label54,fMapChangeHandler_809A64.rollChanceF9,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label55,fMapChangeHandler_809A64.checkDoneFlagF9,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label56,fMapChangeHandler_809A64.triggerEventF9,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label58,fMapChangeHandler_809A64.checkDoneFlagFA,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label6,fMapChangeHandler_809A64.checkEvent5Block,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label60,fMapChangeHandler_809A64.checkDoneFlag7B,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label7,fMapChangeHandler_809A64.beginTransition,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label8,fMapChangeHandler_809A64.checkPhaseTwo,medium,anonymous local label named after its role in the routine
+fMapChangeHandler_809A64.label9,fMapChangeHandler_809A64.advancePhase,medium,anonymous local label named after its role in the routine
+fMap_CalcTilemapBufferOffset.label1,fMap_CalcTilemapBufferOffset.advanceColumn,medium,anonymous local label named after its role in the routine
+fMap_CalcTilemapBufferOffset.label2,fMap_CalcTilemapBufferOffset.crossBlockBoundary,medium,anonymous local label named after its role in the routine
+fMap_CalcTilemapBufferOffset.label3,fMap_CalcTilemapBufferOffset.checkRowEnd,medium,anonymous local label named after its role in the routine
+fMap_QueueTilePatternVRAMUpload.label1,fMap_QueueTilePatternVRAMUpload.addColumnQuadrant,medium,anonymous local label named after its role in the routine
+fMap_QueueTilePatternVRAMUpload.label2,fMap_QueueTilePatternVRAMUpload.wrapRow,medium,anonymous local label named after its role in the routine
+fMap_QueueTilePatternVRAMUpload.label3,fMap_QueueTilePatternVRAMUpload.addRowOffset,medium,anonymous local label named after its role in the routine
+fMap_QueueTilePatternVRAMUpload.label4,fMap_QueueTilePatternVRAMUpload.addRowQuadrant,medium,anonymous local label named after its role in the routine
+fMap_QueueTilePatternVRAMUpload.label5,fMap_QueueTilePatternVRAMUpload.loadPatternSource,medium,anonymous local label named after its role in the routine
+fMap_SetupArea.label1,fMap_SetupArea.timeStateDone,medium,anonymous local label named after its role in the routine
+fMap_SetupArea.label10,fMap_SetupArea.dropHeldTool,medium,anonymous local label named after its role in the routine
+fMap_SetupArea.label11,fMap_SetupArea.clearCarriedItem,medium,anonymous local label named after its role in the routine
+fMap_SetupArea.label12,fMap_SetupArea.initPlayerSprite,medium,anonymous local label named after its role in the routine
+fMap_SetupArea.label13,fMap_SetupArea.afterChickens,medium,anonymous local label named after its role in the routine
+fMap_SetupArea.label2,fMap_SetupArea.checkOverlayMask,medium,anonymous local label named after its role in the routine
+fMap_SetupArea.label3,fMap_SetupArea.checkOverlayDisabled,medium,anonymous local label named after its role in the routine
+fMap_SetupArea.label4,fMap_SetupArea.selectOverlay,medium,anonymous local label named after its role in the routine
+fMap_SetupArea.label5,fMap_SetupArea.checkOverlay58,medium,anonymous local label named after its role in the routine
+fMap_SetupArea.label6,fMap_SetupArea.loadOverlay58,medium,anonymous local label named after its role in the routine
+fMap_SetupArea.label7,fMap_SetupArea.checkOverlay59,medium,anonymous local label named after its role in the routine
+fMap_SetupArea.label8,fMap_SetupArea.loadAreaData,medium,anonymous local label named after its role in the routine
+fMap_SetupArea.label9,fMap_SetupArea.clearTransitionState,medium,anonymous local label named after its role in the routine
+fMap_StreamColumnLeft.label1,fMap_StreamColumnLeft.copyLoop,medium,anonymous local label named after its role in the routine
+fMap_StreamColumnLeft.label2,fMap_StreamColumnLeft.checkSecondWrap,medium,anonymous local label named after its role in the routine
+fMap_StreamColumnLeft.label3,fMap_StreamColumnLeft.copyEntry,medium,anonymous local label named after its role in the routine
+fMap_StreamColumnLeft.label4,fMap_StreamColumnLeft.checkRingEnd,medium,anonymous local label named after its role in the routine
+fMap_StreamColumnRight.label1,fMap_StreamColumnRight.copyLoop,medium,anonymous local label named after its role in the routine
+fMap_StreamColumnRight.label2,fMap_StreamColumnRight.checkSecondWrap,medium,anonymous local label named after its role in the routine
+fMap_StreamColumnRight.label3,fMap_StreamColumnRight.copyEntry,medium,anonymous local label named after its role in the routine
+fMap_StreamColumnRight.label4,fMap_StreamColumnRight.checkRingEnd,medium,anonymous local label named after its role in the routine
+fMap_StreamRowDown.label1,fMap_StreamRowDown.copyLoop,medium,anonymous local label named after its role in the routine
+fMap_StreamRowDown.label2,fMap_StreamRowDown.checkSecondWrap,medium,anonymous local label named after its role in the routine
+fMap_StreamRowDown.label3,fMap_StreamRowDown.copyEntry,medium,anonymous local label named after its role in the routine
+fMap_StreamRowDown.label4,fMap_StreamRowDown.checkRingEnd,medium,anonymous local label named after its role in the routine
+fMap_StreamRowUp.label1,fMap_StreamRowUp.copyLoop,medium,anonymous local label named after its role in the routine
+fMap_StreamRowUp.label2,fMap_StreamRowUp.checkSecondWrap,medium,anonymous local label named after its role in the routine
+fMap_StreamRowUp.label3,fMap_StreamRowUp.copyEntry,medium,anonymous local label named after its role in the routine
+fMap_StreamRowUp.label4,fMap_StreamRowUp.checkRingEnd,medium,anonymous local label named after its role in the routine
+fNextDayHandler.label1,fNextDayHandler.setEvent1Flag0040,medium,anonymous local label named after its role in the routine
+fNextDayHandler.label2,fNextDayHandler.checkEvent3Flag0800,medium,anonymous local label named after its role in the routine
+fNextDayHandler.label3,fNextDayHandler.removeToolTwo,medium,anonymous local label named after its role in the routine
+fNextDayHandler.label4,fNextDayHandler.checkSecondTool,medium,anonymous local label named after its role in the routine
+fNextDayHandler.label5,fNextDayHandler.updateShedItems,medium,anonymous local label named after its role in the routine
+fNextDayHandler.label6,fNextDayHandler.checkEvent4Flag0400,medium,anonymous local label named after its role in the routine
+fObjectMap_ApplyHuricaneDamageByMapFlags.label1,fObjectMap_ApplyHuricaneDamageByMapFlags.damageType0,medium,anonymous local label named after its role in the routine
+fObjectMap_ApplyHuricaneDamageByMapFlags.label2,fObjectMap_ApplyHuricaneDamageByMapFlags.damageType1,medium,anonymous local label named after its role in the routine
+fObjectMap_ApplyHuricaneDamageByMapFlags.label3,fObjectMap_ApplyHuricaneDamageByMapFlags.damageType2,medium,anonymous local label named after its role in the routine
+fObjectMap_ApplyHuricaneDamageByMapFlags.label4,fObjectMap_ApplyHuricaneDamageByMapFlags.noDamage,medium,anonymous local label named after its role in the routine
+fObjectMap_ApplyHuricaneDamageByMapFlags.label5,fObjectMap_ApplyHuricaneDamageByMapFlags.damageType3,medium,anonymous local label named after its role in the routine
+fObjectMap_CurrentMapToFarmMap.label5,fObjectMap_CurrentMapToFarmMap.setTile7A,medium,anonymous local label named after its role in the routine
+fObjectMap_CurrentMapToFarmMap.label6,fObjectMap_CurrentMapToFarmMap.setTile07,medium,anonymous local label named after its role in the routine
+fObjectMap_CurrentMapToFarmMap.label7,fObjectMap_CurrentMapToFarmMap.nextTile,medium,anonymous local label named after its role in the routine
+fObjectMap_EatingGrass.label1,fObjectMap_EatingGrass.checkEatenGrass,medium,anonymous local label named after its role in the routine
+fObjectMap_HuricaneDamage.label1,fObjectMap_HuricaneDamage.damageTile05,medium,anonymous local label named after its role in the routine
+fObjectMap_HuricaneDamage.label2,fObjectMap_HuricaneDamage.damageTileHigh,medium,anonymous local label named after its role in the routine
+fObjectMap_HuricaneDamage.label3,fObjectMap_HuricaneDamage.rollClearTile,medium,anonymous local label named after its role in the routine
+fObjectMap_HuricaneDamage.label4,fObjectMap_HuricaneDamage.decrementGrassToCut,medium,anonymous local label named after its role in the routine
+fObjectMap_HuricaneDamage.label5,fObjectMap_HuricaneDamage.damageTile1D,medium,anonymous local label named after its role in the routine
+fObjectMap_HuricaneDamage.label6,fObjectMap_HuricaneDamage.damageTileLow,medium,anonymous local label named after its role in the routine
+fObjectMap_HuricaneDamage.label7,fObjectMap_HuricaneDamage.nextTile,medium,anonymous local label named after its role in the routine
+fObjectMap_LoadData.label2,fObjectMap_LoadData.setSelectedMap,medium,anonymous local label named after its role in the routine
+fObjectMap_UpdateFarmTilesNewDay.label1,fObjectMap_UpdateFarmTilesNewDay.checkRainMapFlag,medium,anonymous local label named after its role in the routine
+fObjectMap_UpdateFarmTilesNewDay.label2,fObjectMap_UpdateFarmTilesNewDay.decrementTile,medium,anonymous local label named after its role in the routine
+fObjectMap_UpdateFarmTilesNewDay.label3,fObjectMap_UpdateFarmTilesNewDay.setTile73,medium,anonymous local label named after its role in the routine
+fObjectMap_UpdateFarmTilesNewDay.label4,fObjectMap_UpdateFarmTilesNewDay.seasonalDecrement,medium,anonymous local label named after its role in the routine
+fObjectMap_UpdateFarmTilesNewDay.label5,fObjectMap_UpdateFarmTilesNewDay.incrementUnlessWinter,medium,anonymous local label named after its role in the routine
+fObjectMap_UpdateFarmTilesNewDay.label6,fObjectMap_UpdateFarmTilesNewDay.incrementTileHigh,medium,anonymous local label named after its role in the routine
+fObjectMap_UpdateFarmTilesNewDay.label7,fObjectMap_UpdateFarmTilesNewDay.rollSpawnTile03,medium,anonymous local label named after its role in the routine
+fObjectMap_UpdateFarmTilesNewDay.label8,fObjectMap_UpdateFarmTilesNewDay.rollTile06Event,medium,anonymous local label named after its role in the routine
+fObjectMap_UpdateFarmTilesNewDay.label9,fObjectMap_UpdateFarmTilesNewDay.nextTile,medium,anonymous local label named after its role in the routine
+fPalette_LoadSpritePallete.label1,fPalette_LoadSpritePallete.useNightVariant,medium,anonymous local label named after its role in the routine
+fPalette_LoadSpritePallete.label2,fPalette_LoadSpritePallete.selectSeason,medium,anonymous local label named after its role in the routine
+fPalette_LoadSpritePallete.label3,fPalette_LoadSpritePallete.seasonFromAreaIndex,medium,anonymous local label named after its role in the routine
+fPalette_LoadSpritePallete.label4,fPalette_LoadSpritePallete.useNightMarriedVariant,medium,anonymous local label named after its role in the routine
+fPalette_ModifyPalette.label1,fPalette_ModifyPalette.writeSecondBuffer,medium,anonymous local label named after its role in the routine
+fPalette_ProcessColorAnimSlots.label1,fPalette_ProcessColorAnimSlots.slotLoop,medium,anonymous local label named after its role in the routine
+fPalette_ProcessColorAnimSlots.label2,fPalette_ProcessColorAnimSlots.slotActive,medium,anonymous local label named after its role in the routine
+fPalette_ProcessColorAnimSlots.label5,fPalette_ProcessColorAnimSlots.timerExpired,medium,anonymous local label named after its role in the routine
+fPalette_ProcessColorAnimSlots.label6,fPalette_ProcessColorAnimSlots.nextSlot,medium,anonymous local label named after its role in the routine
+fPalette_ProcessColorAnimSlots.label7,fPalette_ProcessColorAnimSlots.uploadPalette,medium,anonymous local label named after its role in the routine
+fPalette_ProcessColorAnimSlots.label8,fPalette_ProcessColorAnimSlots.decrementTimer,medium,anonymous local label named after its role in the routine
+fPalette_SetNextHourPalette.label1,fPalette_SetNextHourPalette.useIndexedPalette,medium,anonymous local label named after its role in the routine
+fPalette_WriteColorToBuffer.label1,fPalette_WriteColorToBuffer.writeSecondBuffer,medium,anonymous local label named after its role in the routine
+fPallete_ChangeHandler.label3,fPallete_ChangeHandler.adjustGreen,medium,anonymous local label named after its role in the routine
+fPallete_ChangeHandler.label4,fPallete_ChangeHandler.adjustBlue,medium,anonymous local label named after its role in the routine
+fPallete_ChangeHandler.label5,fPallete_ChangeHandler.packColor,medium,anonymous local label named after its role in the routine
+fPallete_ChangeHandler.label7,fPallete_ChangeHandler.fadeFinished,medium,anonymous local label named after its role in the routine
+fPlayerAction0x03.label1,fPlayerAction0x03.jumpHolding,medium,anonymous local label named after its role in the routine
+fPlayerAction0x03.label2,fPlayerAction0x03.jumpRiding,medium,anonymous local label named after its role in the routine
+fPlayerAction0x03.label3,fPlayerAction0x03.jumpInSprings,medium,anonymous local label named after its role in the routine
+fPlayerAction0x03.label4,fPlayerAction0x03.setJumpSpeed,medium,anonymous local label named after its role in the routine
+fPlayerAction0x03.label5,fPlayerAction0x03.toggleJumpSpeed,medium,anonymous local label named after its role in the routine
+fPlayerAction0x03.label6,fPlayerAction0x03.fastJumpSpeed,medium,anonymous local label named after its role in the routine
+fPlayerAction0x03.label7,fPlayerAction0x03.moveAndAnimate,medium,anonymous local label named after its role in the routine
+fPlayerAction0x04.label1,fPlayerAction0x04.updateSprite,medium,anonymous local label named after its role in the routine
+fPlayerAction0x05.label1,fPlayerAction0x05.updateSprite,medium,anonymous local label named after its role in the routine
+fPlayerAction0x0A.label1,fPlayerAction0x0A.updateSprite,medium,anonymous local label named after its role in the routine
+fPlayerAction0x0B.label1,fPlayerAction0x0B.updateSprite,medium,anonymous local label named after its role in the routine
+fPlayerAction0x13.label1,fPlayerAction0x13.checkSpriteIdx,medium,anonymous local label named after its role in the routine
+fPlayerAction0x13.label2,fPlayerAction0x13.spriteCase8B,medium,anonymous local label named after its role in the routine
+fPlayerAction0x13.label3,fPlayerAction0x13.spriteCase8C,medium,anonymous local label named after its role in the routine
+fPlayerAction0x1A.label1,fPlayerAction0x1A.executeAlternateAI,medium,anonymous local label named after its role in the routine
+fPlayerAction0x1A.label2,fPlayerAction0x1A.clearDailyFlags,medium,anonymous local label named after its role in the routine
+fPlayerAction0x1C.label2,fPlayerAction0x1C.updateSprite,medium,anonymous local label named after its role in the routine
+fPlayerAction_IdleHandler.label1,fPlayerAction_IdleHandler.incrementExerciseTimer,medium,anonymous local label named after its role in the routine
+fPlayerAction_IdleHandler.label2,fPlayerAction_IdleHandler.chooseIdleSprite,medium,anonymous local label named after its role in the routine
+fPlayerAction_IdleHandler.label3,fPlayerAction_IdleHandler.spriteHolding,medium,anonymous local label named after its role in the routine
+fPlayerAction_IdleHandler.label4,fPlayerAction_IdleHandler.spriteRiding,medium,anonymous local label named after its role in the routine
+fPlayerAction_IdleHandler.label5,fPlayerAction_IdleHandler.spriteInSprings,medium,anonymous local label named after its role in the routine
+fPlayerAction_IdleHandler.label6,fPlayerAction_IdleHandler.spriteSitting,medium,anonymous local label named after its role in the routine
+fPlayerAction_IdleHandler.label7,fPlayerAction_IdleHandler.spriteDogHugging,medium,anonymous local label named after its role in the routine
+fPlayerAction_IdleHandler.label8,fPlayerAction_IdleHandler.spriteSpecialState,medium,anonymous local label named after its role in the routine
+fPlayerAction_Run.label1,fPlayerAction_Run.runHolding,medium,anonymous local label named after its role in the routine
+fPlayerAction_Run.label2,fPlayerAction_Run.runRiding,medium,anonymous local label named after its role in the routine
+fPlayerAction_Run.label3,fPlayerAction_Run.runInSprings,medium,anonymous local label named after its role in the routine
+fPlayerAction_Run.label4,fPlayerAction_Run.runDogHugging,medium,anonymous local label named after its role in the routine
+fPlayerAction_Run.label5,fPlayerAction_Run.runSpecialState,medium,anonymous local label named after its role in the routine
+fPlayerAction_Walk.label1,fPlayerAction_Walk.walkHolding,medium,anonymous local label named after its role in the routine
+fPlayerAction_Walk.label2,fPlayerAction_Walk.walkRiding,medium,anonymous local label named after its role in the routine
+fPlayerAction_Walk.label3,fPlayerAction_Walk.walkInSprings,medium,anonymous local label named after its role in the routine
+fPlayerAction_Walk.label4,fPlayerAction_Walk.walkDogHugging,medium,anonymous local label named after its role in the routine
+fPlayerAction_Walk.label5,fPlayerAction_Walk.walkSpecialState,medium,anonymous local label named after its role in the routine
+fPlayerEnergyHandler.label1,fPlayerEnergyHandler.negativeDelta,medium,anonymous local label named after its role in the routine
+fPlayerEnergyHandler.label10,fPlayerEnergyHandler.advanceStaminaStage,medium,anonymous local label named after its role in the routine
+fPlayerEnergyHandler.label4,fPlayerEnergyHandler.clampToStamina,medium,anonymous local label named after its role in the routine
+fPlayerEnergyHandler.label5,fPlayerEnergyHandler.addEnergy,medium,anonymous local label named after its role in the routine
+fPlayerEnergyHandler.label6,fPlayerEnergyHandler.updateStaminaStage,medium,anonymous local label named after its role in the routine
+fPlayerEnergyHandler.label7,fPlayerEnergyHandler.storeStaminaStage,medium,anonymous local label named after its role in the routine
+fPlayerEnergyHandler.label8,fPlayerEnergyHandler.checkStaminaDrop,medium,anonymous local label named after its role in the routine
+fPlayerEnergyHandler.label9,fPlayerEnergyHandler.compareStageThreshold,medium,anonymous local label named after its role in the routine
+fPlayerInteraction0x2E_AnimalNPC.label02,fPlayerInteraction0x2E_AnimalNPC.setSkipFlag0008,medium,anonymous local label named after its role in the routine
+fPlayerInteraction0x2E_AnimalNPC.label04,fPlayerInteraction0x2E_AnimalNPC.setSkipFlag0004,medium,anonymous local label named after its role in the routine
+fPlayerInteraction0x2E_AnimalNPC.label21,fPlayerInteraction0x2E_AnimalNPC.buyCow,medium,anonymous local label named after its role in the routine
+fPlayerInteraction0x2E_AnimalNPC.label23,fPlayerInteraction0x2E_AnimalNPC.declineCow,medium,anonymous local label named after its role in the routine
+fPlayerInteraction0x2E_AnimalNPC.label29,fPlayerInteraction0x2E_AnimalNPC.buyChicken,medium,anonymous local label named after its role in the routine
+fPlayerInteraction0x2E_AnimalNPC.label31,fPlayerInteraction0x2E_AnimalNPC.declineChicken,medium,anonymous local label named after its role in the routine
+fPlayerInteraction0x43.label15,fPlayerInteraction0x43.showDialog0310,medium,anonymous local label named after its role in the routine
+fPlayerInteraction0x43.label16,fPlayerInteraction0x43.showDialog030D,medium,anonymous local label named after its role in the routine
+fPlayerInteraction0x43.label17,fPlayerInteraction0x43.alreadySoldToday,medium,anonymous local label named after its role in the routine
+fPlayerInteraction0x47.label1,fPlayerInteraction0x47.chargeFirstUpgrade,medium,anonymous local label named after its role in the routine
+fPlayerInteraction0x47.label2,fPlayerInteraction0x47.startConstruction,medium,anonymous local label named after its role in the routine
+fPlayerInteraction0x47.label3,fPlayerInteraction0x47.notEnoughMoney,medium,anonymous local label named after its role in the routine
+fPlayerInteraction0x48.label1,fPlayerInteraction0x48.rewardHigh,medium,anonymous local label named after its role in the routine
+fPlayerInteraction0x48.label2,fPlayerInteraction0x48.showRewardDialog,medium,anonymous local label named after its role in the routine
+fPlayerInteraction0x51.label1,fPlayerInteraction0x51.declineOffer,medium,anonymous local label named after its role in the routine
+fPlayerInteraction0x51.label2,fPlayerInteraction0x51.notEnoughMoney,medium,anonymous local label named after its role in the routine
+fPlayerInteraction0x52.label1,fPlayerInteraction0x52.declineOffer,medium,anonymous local label named after its role in the routine
+fPlayerInteraction0x52.label2,fPlayerInteraction0x52.notEnoughMoney,medium,anonymous local label named after its role in the routine
+fPlayer_InteractWithFrontObject.label1,fPlayer_InteractWithFrontObject.checkInteractFlag,medium,anonymous local label named after its role in the routine
+fPlayer_InteractWithFrontObject.label2,fPlayer_InteractWithFrontObject.showClosedDialog,medium,anonymous local label named after its role in the routine
+fScreen_NameInput_BlinkCursor.label1,fScreen_NameInput_BlinkCursor.drawBlank,medium,anonymous local label named after its role in the routine
+fScreen_NameInput_BlinkCursor.label2,fScreen_NameInput_BlinkCursor.advanceBlinkTimer,medium,anonymous local label named after its role in the routine
+fShed_DrawItemPatternByFlag.label6,fShed_DrawItemPatternByFlag.requireFlagSet,medium,anonymous local label named after its role in the routine
+fShed_DrawItemPatternByFlag.label7,fShed_DrawItemPatternByFlag.drawPattern,medium,anonymous local label named after its role in the routine
+fShed_PlaceEquippedTool.label2,fShed_PlaceEquippedTool.checkAreaForTool19,medium,anonymous local label named after its role in the routine
+fShed_PlaceEquippedTool.label3,fShed_PlaceEquippedTool.checkAreaForLowTools,medium,anonymous local label named after its role in the routine
+fShed_PlaceEquippedTool.label4,fShed_PlaceEquippedTool.drawToolInShed,medium,anonymous local label named after its role in the routine
+fShed_PlaceEquippedTool.label5,fShed_PlaceEquippedTool.markShedSlot,medium,anonymous local label named after its role in the routine
+fTileMap_MapChangeHandler.label1,fTileMap_MapChangeHandler.skipPresetBytes,medium,anonymous local label named after its role in the routine
+fTileMap_MapChangeHandler.label11,fTileMap_MapChangeHandler.resetCamera,medium,anonymous local label named after its role in the routine
+fTileMap_MapChangeHandler.label13,fTileMap_MapChangeHandler.uploadRowLoop,medium,anonymous local label named after its role in the routine
+fTileMap_MapChangeHandler.label14,fTileMap_MapChangeHandler.uploadAltRow,medium,anonymous local label named after its role in the routine
+fTileMap_MapChangeHandler.label15,fTileMap_MapChangeHandler.advanceRow,medium,anonymous local label named after its role in the routine
+fTileMap_MapChangeHandler.label16,fTileMap_MapChangeHandler.advanceVramRow,medium,anonymous local label named after its role in the routine
+fTileMap_MapChangeHandler.label17,fTileMap_MapChangeHandler.nextCopyPass,medium,anonymous local label named after its role in the routine
+fTileMap_MapChangeHandler.label2,fTileMap_MapChangeHandler.readMapSize,medium,anonymous local label named after its role in the routine
+fTileMap_MapChangeHandler.label3,fTileMap_MapChangeHandler.readLayerCounts,medium,anonymous local label named after its role in the routine
+fTileMap_MapChangeHandler.label4,fTileMap_MapChangeHandler.checkTilemapCount,medium,anonymous local label named after its role in the routine
+fTileMap_MapChangeHandler.label7,fTileMap_MapChangeHandler.copyRawCharmap,medium,anonymous local label named after its role in the routine
+fTileMap_MapChangeHandler.label9,fTileMap_MapChangeHandler.afterCharmap,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x01_Sickle.label1,fToolUsedAction0x01_Sickle.farmArea,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x01_Sickle.label2,fToolUsedAction0x01_Sickle.cutWeed,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x01_Sickle.label3,fToolUsedAction0x01_Sickle.harvestGrass,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x01_Sickle.label4,fToolUsedAction0x01_Sickle.setTileAndEffect,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x01_Sickle.label5,fToolUsedAction0x01_Sickle.rollSummerEvent,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x02_Plow.label1,fToolUsedAction0x02_Plow.checkMoneyDig,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x02_Plow.label2,fToolUsedAction0x02_Plow.checkEvent1Flag1000,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x02_Plow.label3,fToolUsedAction0x02_Plow.startSlotScript,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x03_Hammer.label1,fToolUsedAction0x03_Hammer.rockInCave,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x03_Hammer.label10,fToolUsedAction0x03_Hammer.hitStoneNotBroken,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x03_Hammer.label2,fToolUsedAction0x03_Hammer.rockOnFarm,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x03_Hammer.label3,fToolUsedAction0x03_Hammer.setRockTile,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x03_Hammer.label4,fToolUsedAction0x03_Hammer.smashTile06,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x03_Hammer.label5,fToolUsedAction0x03_Hammer.countStoneHits,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x03_Hammer.label6,fToolUsedAction0x03_Hammer.breakBigStone,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x03_Hammer.label7,fToolUsedAction0x03_Hammer.pickBrokenStoneTile,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x03_Hammer.label8,fToolUsedAction0x03_Hammer.farmStoneTile,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x03_Hammer.label9,fToolUsedAction0x03_Hammer.setBrokenStoneTile,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x04_Axe.label1,fToolUsedAction0x04_Axe.breakTree,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x04_Axe.label2,fToolUsedAction0x04_Axe.stumpTileDF,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x04_Axe.label3,fToolUsedAction0x04_Axe.stumpTileE0,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x04_Axe.label4,fToolUsedAction0x04_Axe.stumpTile0D,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x04_Axe.label5,fToolUsedAction0x04_Axe.setStumpTile,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x04_Axe.label6,fToolUsedAction0x04_Axe.hitTreeNotBroken,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x04_Axe.label7,fToolUsedAction0x04_Axe.checkSpecialTree,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x05_CornSeedBag.label1,fToolUsedAction0x05_CornSeedBag.countUse,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x06_TomatoSeedBag.label1,fToolUsedAction0x06_TomatoSeedBag.countUse,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x07_PotatoSeedBag.label1,fToolUsedAction0x07_PotatoSeedBag.countUse,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x08_TurnipSeedBag.label1,fToolUsedAction0x08_TurnipSeedBag.countUse,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x0C_GrassSeedBag.label1,fToolUsedAction0x0C_GrassSeedBag.countUse,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x11_GoldenSickle.label1,fToolUsedAction0x11_GoldenSickle.farmArea,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x11_GoldenSickle.label2,fToolUsedAction0x11_GoldenSickle.cutWeed,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x11_GoldenSickle.label3,fToolUsedAction0x11_GoldenSickle.harvestGrass,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x11_GoldenSickle.label4,fToolUsedAction0x11_GoldenSickle.setTileAndEffect,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x11_GoldenSickle.label5,fToolUsedAction0x11_GoldenSickle.rollSummerEvent,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x11_GoldenSickle.label6,fToolUsedAction0x11_GoldenSickle.countUse,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x12_GoldenPlow.label1,fToolUsedAction0x12_GoldenPlow.checkMoneyDig,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x12_GoldenPlow.label2,fToolUsedAction0x12_GoldenPlow.checkMoneyBag,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x12_GoldenPlow.label3,fToolUsedAction0x12_GoldenPlow.checkSpecialDrop,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x12_GoldenPlow.label4,fToolUsedAction0x12_GoldenPlow.checkEvent1Flag1000,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x12_GoldenPlow.label5,fToolUsedAction0x12_GoldenPlow.startSlotScript,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x12_GoldenPlow.label6,fToolUsedAction0x12_GoldenPlow.countUse,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x13_GolderHammer.label1,fToolUsedAction0x13_GolderHammer.rockInCave,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x13_GolderHammer.label2,fToolUsedAction0x13_GolderHammer.rockOnFarm,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x13_GolderHammer.label3,fToolUsedAction0x13_GolderHammer.setRockTile,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x13_GolderHammer.label4,fToolUsedAction0x13_GolderHammer.smashTile06,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x13_GolderHammer.label5,fToolUsedAction0x13_GolderHammer.breakBigStone,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x13_GolderHammer.label6,fToolUsedAction0x13_GolderHammer.pickBrokenStoneTile,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x13_GolderHammer.label7,fToolUsedAction0x13_GolderHammer.farmStoneTile,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x13_GolderHammer.label8,fToolUsedAction0x13_GolderHammer.setBrokenStoneTile,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x13_GolderHammer.label9,fToolUsedAction0x13_GolderHammer.checkChickenStatue,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x14_GoldenAxe.label1,fToolUsedAction0x14_GoldenAxe.breakTree,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x14_GoldenAxe.label2,fToolUsedAction0x14_GoldenAxe.stumpTileE0,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x14_GoldenAxe.label3,fToolUsedAction0x14_GoldenAxe.stumpTile0D,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x14_GoldenAxe.label4,fToolUsedAction0x14_GoldenAxe.stumpTileDF,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x19_ChickenFeed.label1,fToolUsedAction0x19_ChickenFeed.dropFeedOnGround,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x19_ChickenFeed.label2,fToolUsedAction0x19_ChickenFeed.consumeFeed,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x1A_CowFeed.label1,fToolUsedAction0x1A_CowFeed.dropFeedOnGround,medium,anonymous local label named after its role in the routine
+fToolUsedAction0x1A_CowFeed.label2,fToolUsedAction0x1A_CowFeed.consumeFeed,medium,anonymous local label named after its role in the routine
+fToolUsedAnimation0x10_WateringCan.label2,fToolUsedAnimation0x10_WateringCan.refillWater,medium,anonymous local label named after its role in the routine
+fToolUsedAnimationHandler.label1,fToolUsedAnimationHandler.tooTired,medium,anonymous local label named after its role in the routine
+fWeatherRandomizer.label1,fWeatherRandomizer.checkFirstYear,medium,anonymous local label named after its role in the routine
+fWeatherRandomizer.label3,fWeatherRandomizer.calmWeather,medium,anonymous local label named after its role in the routine
+fWeatherRandomizer.label4,fWeatherRandomizer.checkHurricaneDay30,medium,anonymous local label named after its role in the routine
+fWeatherRandomizer.label5,fWeatherRandomizer.rollHurricane,medium,anonymous local label named after its role in the routine
+fWeatherRandomizer.label6,fWeatherRandomizer.checkRain,medium,anonymous local label named after its role in the routine
+fWeatherRandomizer.label7,fWeatherRandomizer.checkSnow,medium,anonymous local label named after its role in the routine
+fWeather_SetForecastDialogIndex.label1,fWeather_SetForecastDialogIndex.useIndex0B,medium,anonymous local label named after its role in the routine
+fWeather_SetForecastDialogIndex.label2,fWeather_SetForecastDialogIndex.useIndex04,medium,anonymous local label named after its role in the routine

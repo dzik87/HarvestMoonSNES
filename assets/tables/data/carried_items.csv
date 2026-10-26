@@ -1,5 +1,5 @@
 # Carried items (bank $81, item_actions.asm; carried item id = strcPlayerData.carryItemId, 0x5B entries).
-# pItemCarriedTable_8196AF[id] -> aItemCarriedFrames_* (ptr24): the pose list of the item.
+# pItemCarriedFramesTable[id] -> aItemCarriedFrames_* (ptr24): the pose list of the item.
 # pItemCarriedSubrutines[id]   -> routine run while the item is carried (ptr16, $FFFF = none).
 # aItemCarriedFrames_*  one row per player pose (fItemCarried_LoadPoseData: pose * 3):
 #   sprite  sprite table index of the item for that pose, flip  flip bits (bit 0 = horizontal)
@@ -8,11 +8,11 @@
 # aDialogData_SellItems[id]        dialog:dialog16, profit:u8
 # aDialogsData_BuyItems[N]  shop items: description / yes / no / too_poor dialogs, unknown:u8, cost:u24 (negative = money spent)
 # nItemCarriedIndexForTilemap[id]  tile placed on the map under a dropped item (0 = none)
-# nSoundItemCarriedTable_81A308[id] 1 = play the pick-up sound
+# nItemCarriedPickupSoundTable[id] 1 = play the pick-up sound
 # aFixedDropPositionsXY[N]  x, y of the fixed drop places
 # Confidence: high for structure; medium for the meaning of unk / flip.
 
-@label pItemCarriedTable_8196AF
+@label pItemCarriedFramesTable
 @columns id:index,frames:ptr24
 $00,PTR24_None
 $01,aItemCarriedFrames_01_Mushroom
@@ -1337,7 +1337,7 @@ $58,$12
 $59,$12
 $5A,$12
 
-@label nSoundItemCarriedTable_81A308
+@label nItemCarriedPickupSoundTable
 @columns id:index,sound:u8
 $00,$00
 $01,$01

@@ -179,9 +179,9 @@ fScreen_NameInput:
     SEP #$20                                                   ;82E9C6|E220    |      ;
     STZ.B $00                                                  ;82E9C8|6400    |000000;
     if !REGION_EUDE
-    JML.L L_82E95F
+    JML.L fScreen_NameInput_WaitFrame
     elseif !REGION_JP
-    JML.L L_82E95F
+    JML.L fScreen_NameInput_WaitFrame
     else
     JML.L $82E95F                                              ;82E9CA|5C5FE982|82E95F;
     endif

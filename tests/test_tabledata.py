@@ -59,8 +59,8 @@ def test_repo_sources():
     rows = T.rows_of("palette_tables", "US", ROOT)
     check(len(rows["aPalettes"]) == 0x75, "aPalettes has 0x75 entries")
     check(len(rows["aMapPalettesIndexes"]) == 0x60, "one index row per area")
-    rows = T.rows_of("tool_sound_data_82", "EU", ROOT)["nToolSoundData_829054"]
-    us = T.rows_of("tool_sound_data_82", "US", ROOT)["nToolSoundData_829054"]
+    rows = T.rows_of("tool_sound_data_82", "EU", ROOT)["nToolSoundTable"]
+    us = T.rows_of("tool_sound_data_82", "US", ROOT)["nToolSoundTable"]
     check(len(rows) == len(us) == 0x1C, "28 tool rows in every release")
     check(us[0x0B]["sfx_object_hit"] == "!SFX_BELL" and rows[0x0B]["sfx_object_hit"] == "$00", "bell sound differs between US and EU")
 

@@ -87,9 +87,9 @@ fMainMenu_DrawSaveSlotFrames:
     CPX.W #$0010                                               ;82E7DF|E01000  |      ;
     BEQ .justReturn                                            ;82E7E2|F004    |82E7E8;
     if !REGION_EUDE
-    JML.L L_82E747
+    JML.L fMainMenu_DrawSaveSlotFrames_Loop
     elseif !REGION_JP
-    JML.L L_82E747
+    JML.L fMainMenu_DrawSaveSlotFrames_Loop
     else
     JML.L $82E747                                              ;82E7E4|5C47E782|82E747;
     endif
@@ -113,7 +113,7 @@ fStartNewGame:
     JML.L fCore_GameStart                                      ;82E7FD|5C008080|808000;
  
  
-fUnreached_82E801:
+fUnreached_StartNameInput:
     SEP #$20                                                   ;82E801|E220    |      ;
     LDA.B #$00                                                 ;82E803|A900    |      ;
     STA.W strcMenuData.nameDestinationIdx                      ;82E805|8D9F09  |00099F;

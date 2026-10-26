@@ -7,15 +7,15 @@ sfx_04,Sfx_EggFestivalTimeUp,medium,AI script 0x28 (Egg Festival game) with the 
 sfx_05,Sfx_PlayerStep,high,fPlayerAction_Run_StepSound: footstep while running
 sfx_06,Sfx_PlayerJump,high,"fPlayerAction0x03 (!PACTION_JUMP), played in all four variants (normal, carrying, riding, in the hot spring)"
 sfx_07,Sfx_ItemDrop,high,fPlayerAction0x05 (!PACTION_DROPITEM)
-sfx_08,Sfx_ItemPickUp,high,fItemCarried_Begin: picking an item up when nSoundItemCarriedTable_81A308 has an entry for it
+sfx_08,Sfx_ItemPickUp,high,fItemCarried_Begin: picking an item up when nItemCarriedPickupSoundTable has an entry for it
 sfx_09,Sfx_Unk09,low,"no caller in the US code or data (not referenced by any literal, table or AI script)"
 sfx_10,Sfx_Unk0A,low,"no caller in the US code or data (not referenced by any literal, table or AI script)"
 sfx_11,Sfx_Unk0B,low,"no caller in the US code or data (not referenced by any literal, table or AI script)"
 sfx_12,Sfx_Unk0C,low,"no caller in the US code or data (not referenced by any literal, table or AI script)"
 sfx_13,Sfx_Unk0D,low,"no caller in the US code or data (not referenced by any literal, table or AI script)"
 sfx_14,Sfx_Unk0E,low,"no caller in the US code or data (not referenced by any literal, table or AI script)"
-sfx_15,Sfx_PlowHitObject,medium,"nToolSoundData_829054 'object hit' column of the plow (hoe), tool id 2"
-sfx_16,Sfx_GoldPlowHitObject,medium,"nToolSoundData_829054 'object hit' column of the golden plow, tool id 18"
+sfx_15,Sfx_PlowHitObject,medium,"nToolSoundTable 'object hit' column of the plow (hoe), tool id 2"
+sfx_16,Sfx_GoldPlowHitObject,medium,"nToolSoundTable 'object hit' column of the golden plow, tool id 18"
 sfx_17,Sfx_ToolHitGround,medium,"'no object' column shared by plow, golden plow, axe and golden axe (the tool hits plain ground)"
 sfx_18,Sfx_SickleCut,medium,'object hit' column of the sickle (tool id 1): fSound_GetToolSound returns 1 when the tile's object property has bit 0
 sfx_19,Sfx_GoldSickleCut,medium,'object hit' column of the golden sickle (tool id 17)

@@ -70,89 +70,89 @@ fUnknown_Zero07Ptr,fObjectSlots_ClearAll,medium,Zeroes the flag byte of all 10 o
 fUnknown_81A4F1,fObjectSlots_FreeCurrent,medium,Clears the flag byte of the current slot pointed by 07 and zeroes 0974
 fUnknown_81A500,fObjectSlots_Allocate,medium,Finds first free slot among 10 and fills it from the 0974-0982 work variables
 fUnknownCF_81A58F,fPlayer_LeaveSnowFootprint,medium,In winter on selected areas and tile types draws pattern 11 under the player every 8 steps
-fUnknownCF_SetPointer,fTileScript_Start,high,Sets script pointer CF from pTable_81B963 by index and resets delay counter
+fUnknownCF_SetPointer,fTileScript_Start,high,Sets script pointer CF from pTileScriptTable by index and resets delay counter
 fUnknownCF_81A600,fTileScript_Update,high,Per-frame tile script interpreter with FFFF end and FFFE jump records calling fSetTileAtCoords
 fUnknown_81A6C1,fMap_QueueTilePatternVRAMUpload,medium,Converts pixel position to tilemap offset and queues DMA rows of the pattern into VRAM
 fUnknown_81A7CE,fMap_DrawTilePatternAt,medium,Draws tile pattern A at X Y into map buffer and VRAM then calls 82B060
-fUnknown_81A801,fMap_GetTilePatternInfo,high,Reads 6-byte Table_81B363 entry for pattern index into 7E-84 temp variables
+fUnknown_81A801,fMap_GetTilePatternInfo,high,Reads 6-byte aTilePatternTable entry for pattern index into 7E-84 temp variables
 fUnknown_81A83A,fMap_CalcTilemapBufferOffset,medium,Converts X Y pixel position into tilemap buffer offset taking map multi-width into account
-fUnknown_81A94A,fShed_PlaceEquippedTool,medium,Draws the equipped tool into the shed and sets its shed-item bit using nCarriedItemTable_81BE0F
+fUnknown_81A94A,fShed_PlaceEquippedTool,medium,Draws the equipped tool into the shed and sets its shed-item bit using nShedToolPlacementTable
 DATA32_81B0ED,aCowFeedPositionsXY,medium,13 pairs of n16 x and n16 y for cow feed pattern 99 indexed like nCowFeedFlagsTable
 DATA32_81B19F,aChickenFeedPositionsXY,medium,12 pairs of n16 x and n16 y for chicken feed pattern 99 indexed like nCowFeedFlagsTable
 fUnknown_81B2BB,fShed_DrawItemPatternByFlag,medium,Selects an 8-byte item table by X then draws its pattern if shed flag matches mode Y
-DATA8_81BA3E,aTileScript_00,medium,Tile pattern change script (7 byte records) selected by index 00 in pTable_81B963 via fTileScript_Start
-DATA8_81BA5C,aTileScript_01,medium,Tile pattern change script (7 byte records) selected by index 01 in pTable_81B963 via fTileScript_Start
-DATA8_81BA6F,aTileScript_02,medium,Tile pattern change script (7 byte records) selected by index 02 in pTable_81B963 via fTileScript_Start
-DATA8_81BA82,aTileScript_03,medium,Tile pattern change script (7 byte records) selected by index 03 in pTable_81B963 via fTileScript_Start
-DATA8_81BA8B,aTileScript_04,medium,Tile pattern change script (7 byte records) selected by index 04 in pTable_81B963 via fTileScript_Start
-DATA8_81BA9E,aTileScript_05,medium,Tile pattern change script (7 byte records) selected by index 05 in pTable_81B963 via fTileScript_Start
-DATA8_81BAB1,aTileScript_06,medium,Tile pattern change script (7 byte records) selected by index 06 in pTable_81B963 via fTileScript_Start
-DATA8_81BABA,aTileScript_07,medium,Tile pattern change script (7 byte records) selected by index 07 in pTable_81B963 via fTileScript_Start
-DATA8_81BAC3,aTileScript_08,medium,Tile pattern change script (7 byte records) selected by index 08 in pTable_81B963 via fTileScript_Start
-DATA8_81BACC,aTileScript_09,medium,Tile pattern change script (7 byte records) selected by index 09 in pTable_81B963 via fTileScript_Start
-DATA8_81BADF,aTileScript_0A,medium,Tile pattern change script (7 byte records) selected by index 0A in pTable_81B963 via fTileScript_Start
-DATA8_81BAE8,aTileScript_0B,medium,Tile pattern change script (7 byte records) selected by index 0B in pTable_81B963 via fTileScript_Start
-DATA8_81BAF1,aTileScript_0C,medium,Tile pattern change script (7 byte records) selected by index 0C in pTable_81B963 via fTileScript_Start
-DATA8_81BB04,aTileScript_0D,medium,Tile pattern change script (7 byte records) selected by index 0D in pTable_81B963 via fTileScript_Start
-DATA8_81BB0D,aTileScript_0E,medium,Tile pattern change script (7 byte records) selected by index 0E in pTable_81B963 via fTileScript_Start
-DATA8_81BB16,aTileScript_0F,medium,Tile pattern change script (7 byte records) selected by index 0F in pTable_81B963 via fTileScript_Start
-DATA8_81BB1F,aTileScript_10,medium,Tile pattern change script (7 byte records) selected by index 10 in pTable_81B963 via fTileScript_Start
-DATA8_81BB28,aTileScript_11,medium,Tile pattern change script (7 byte records) selected by index 11 in pTable_81B963 via fTileScript_Start
-DATA8_81BB31,aTileScript_12,medium,Tile pattern change script (7 byte records) selected by index 12 in pTable_81B963 via fTileScript_Start
-DATA8_81BB3A,aTileScript_13,medium,Tile pattern change script (7 byte records) selected by index 13 in pTable_81B963 via fTileScript_Start
-DATA8_81BB43,aTileScript_14,medium,Tile pattern change script (7 byte records) selected by index 14 in pTable_81B963 via fTileScript_Start
-DATA8_81BB4C,aTileScript_15,medium,Tile pattern change script (7 byte records) selected by index 15 in pTable_81B963 via fTileScript_Start
-DATA8_81BB63,aTileScript_16,medium,Tile pattern change script (7 byte records) selected by index 16 in pTable_81B963 via fTileScript_Start
-DATA8_81BB6C,aTileScript_17,medium,Tile pattern change script (7 byte records) selected by index 17 in pTable_81B963 via fTileScript_Start
-DATA8_81BB75,aTileScript_18,medium,Tile pattern change script (7 byte records) selected by index 18 in pTable_81B963 via fTileScript_Start
-DATA8_81BB7E,aTileScript_19,medium,Tile pattern change script (7 byte records) selected by index 19 in pTable_81B963 via fTileScript_Start
-DATA8_81BB87,aTileScript_1A,medium,Tile pattern change script (7 byte records) selected by index 1A in pTable_81B963 via fTileScript_Start
-DATA8_81BB90,aTileScript_1B,medium,Tile pattern change script (7 byte records) selected by index 1B in pTable_81B963 via fTileScript_Start
-DATA8_81BB99,aTileScript_1C,medium,Tile pattern change script (7 byte records) selected by index 1C in pTable_81B963 via fTileScript_Start
-DATA8_81BBA2,aTileScript_1D,medium,Tile pattern change script (7 byte records) selected by index 1D in pTable_81B963 via fTileScript_Start
-DATA8_81BBAB,aTileScript_1E,medium,Tile pattern change script (7 byte records) selected by index 1E in pTable_81B963 via fTileScript_Start
-DATA8_81BBB4,aTileScript_1F,medium,Tile pattern change script (7 byte records) selected by index 1F in pTable_81B963 via fTileScript_Start
-DATA8_81BBBD,aTileScript_20,medium,Tile pattern change script (7 byte records) selected by index 20 in pTable_81B963 via fTileScript_Start
-DATA8_81BBC6,aTileScript_21,medium,Tile pattern change script (7 byte records) selected by index 21 in pTable_81B963 via fTileScript_Start
-DATA8_81BBCF,aTileScript_22,medium,Tile pattern change script (7 byte records) selected by index 22 in pTable_81B963 via fTileScript_Start
-DATA8_81BBD8,aTileScript_23,medium,Tile pattern change script (7 byte records) selected by index 23 in pTable_81B963 via fTileScript_Start
-DATA8_81BBE1,aTileScript_24,medium,Tile pattern change script (7 byte records) selected by index 24 in pTable_81B963 via fTileScript_Start
-DATA8_81BBF1,aTileScript_25,medium,Tile pattern change script (7 byte records) selected by index 25 in pTable_81B963 via fTileScript_Start
-DATA8_81BC01,aTileScript_26,medium,Tile pattern change script (7 byte records) selected by index 26 in pTable_81B963 via fTileScript_Start
-DATA8_81BC11,aTileScript_27,medium,Tile pattern change script (7 byte records) selected by index 27 in pTable_81B963 via fTileScript_Start
-DATA8_81BC2F,aTileScript_28,medium,Tile pattern change script (7 byte records) selected by index 28 in pTable_81B963 via fTileScript_Start
-DATA8_81BC42,aTileScript_29,medium,Tile pattern change script (7 byte records) selected by index 29 in pTable_81B963 via fTileScript_Start
-DATA8_81BC55,aTileScript_2A,medium,Tile pattern change script (7 byte records) selected by index 2A in pTable_81B963 via fTileScript_Start
-DATA8_81BC5E,aTileScript_2B,medium,Tile pattern change script (7 byte records) selected by index 2B in pTable_81B963 via fTileScript_Start
-DATA8_81BC71,aTileScript_2C,medium,Tile pattern change script (7 byte records) selected by index 2C in pTable_81B963 via fTileScript_Start
-DATA8_81BC84,aTileScript_2D,medium,Tile pattern change script (7 byte records) selected by index 2D in pTable_81B963 via fTileScript_Start
-DATA8_81BC8D,aTileScript_2E,medium,Tile pattern change script (7 byte records) selected by index 2E in pTable_81B963 via fTileScript_Start
-DATA8_81BC96,aTileScript_2F,medium,Tile pattern change script (7 byte records) selected by index 2F in pTable_81B963 via fTileScript_Start
-DATA8_81BC9F,aTileScript_30,medium,Tile pattern change script (7 byte records) selected by index 30 in pTable_81B963 via fTileScript_Start
-DATA8_81BCB2,aTileScript_31,medium,Tile pattern change script (7 byte records) selected by index 31 in pTable_81B963 via fTileScript_Start
-DATA8_81BCBB,aTileScript_32,medium,Tile pattern change script (7 byte records) selected by index 32 in pTable_81B963 via fTileScript_Start
-DATA8_81BCC4,aTileScript_33,medium,Tile pattern change script (7 byte records) selected by index 33 in pTable_81B963 via fTileScript_Start
-DATA8_81BCD7,aTileScript_34,medium,Tile pattern change script (7 byte records) selected by index 34 in pTable_81B963 via fTileScript_Start
-DATA8_81BCF5,aTileScript_35,medium,Tile pattern change script (7 byte records) selected by index 35 in pTable_81B963 via fTileScript_Start
-DATA8_81BD08,aTileScript_36,medium,Tile pattern change script (7 byte records) selected by index 36 in pTable_81B963 via fTileScript_Start
-DATA8_81BD1B,aTileScript_37,medium,Tile pattern change script (7 byte records) selected by index 37 in pTable_81B963 via fTileScript_Start
-DATA8_81BD24,aTileScript_38,medium,Tile pattern change script (7 byte records) selected by index 38 in pTable_81B963 via fTileScript_Start
-DATA8_81BD37,aTileScript_39,medium,Tile pattern change script (7 byte records) selected by index 39 in pTable_81B963 via fTileScript_Start
-DATA8_81BD4A,aTileScript_3A,medium,Tile pattern change script (7 byte records) selected by index 3A in pTable_81B963 via fTileScript_Start
-DATA8_81BD53,aTileScript_3B,medium,Tile pattern change script (7 byte records) selected by index 3B in pTable_81B963 via fTileScript_Start
-DATA8_81BD5C,aTileScript_3C,medium,Tile pattern change script (7 byte records) selected by index 3C in pTable_81B963 via fTileScript_Start
-DATA8_81BD65,aTileScript_3D,medium,Tile pattern change script (7 byte records) selected by index 3D in pTable_81B963 via fTileScript_Start
-DATA8_81BD78,aTileScript_3E,medium,Tile pattern change script (7 byte records) selected by index 3E in pTable_81B963 via fTileScript_Start
-DATA8_81BD81,aTileScript_3F,medium,Tile pattern change script (7 byte records) selected by index 3F in pTable_81B963 via fTileScript_Start
-DATA8_81BD8A,aTileScript_40,medium,Tile pattern change script (7 byte records) selected by index 40 in pTable_81B963 via fTileScript_Start
-DATA8_81BD9D,aTileScript_41,medium,Tile pattern change script (7 byte records) selected by index 41 in pTable_81B963 via fTileScript_Start
-DATA8_81BDBB,aTileScript_42,medium,Tile pattern change script (7 byte records) selected by index 42 in pTable_81B963 via fTileScript_Start
-DATA8_81BDC4,aTileScript_43,medium,Tile pattern change script (7 byte records) selected by index 43 in pTable_81B963 via fTileScript_Start
-DATA8_81BDCD,aTileScript_44,medium,Tile pattern change script (7 byte records) selected by index 44 in pTable_81B963 via fTileScript_Start
-DATA8_81BDEB,aTileScript_45,medium,Tile pattern change script (7 byte records) selected by index 45 in pTable_81B963 via fTileScript_Start
-DATA8_81BDF4,aTileScript_46,medium,Tile pattern change script (7 byte records) selected by index 46 in pTable_81B963 via fTileScript_Start
-DATA8_81BDFD,aTileScript_47,medium,Tile pattern change script (7 byte records) selected by index 47 in pTable_81B963 via fTileScript_Start
-DATA8_81BE06,aTileScript_48,medium,Tile pattern change script (7 byte records) selected by index 48 in pTable_81B963 via fTileScript_Start
+DATA8_81BA3E,aTileScript_00,medium,Tile pattern change script (7 byte records) selected by index 00 in pTileScriptTable via fTileScript_Start
+DATA8_81BA5C,aTileScript_01,medium,Tile pattern change script (7 byte records) selected by index 01 in pTileScriptTable via fTileScript_Start
+DATA8_81BA6F,aTileScript_02,medium,Tile pattern change script (7 byte records) selected by index 02 in pTileScriptTable via fTileScript_Start
+DATA8_81BA82,aTileScript_03,medium,Tile pattern change script (7 byte records) selected by index 03 in pTileScriptTable via fTileScript_Start
+DATA8_81BA8B,aTileScript_04,medium,Tile pattern change script (7 byte records) selected by index 04 in pTileScriptTable via fTileScript_Start
+DATA8_81BA9E,aTileScript_05,medium,Tile pattern change script (7 byte records) selected by index 05 in pTileScriptTable via fTileScript_Start
+DATA8_81BAB1,aTileScript_06,medium,Tile pattern change script (7 byte records) selected by index 06 in pTileScriptTable via fTileScript_Start
+DATA8_81BABA,aTileScript_07,medium,Tile pattern change script (7 byte records) selected by index 07 in pTileScriptTable via fTileScript_Start
+DATA8_81BAC3,aTileScript_08,medium,Tile pattern change script (7 byte records) selected by index 08 in pTileScriptTable via fTileScript_Start
+DATA8_81BACC,aTileScript_09,medium,Tile pattern change script (7 byte records) selected by index 09 in pTileScriptTable via fTileScript_Start
+DATA8_81BADF,aTileScript_0A,medium,Tile pattern change script (7 byte records) selected by index 0A in pTileScriptTable via fTileScript_Start
+DATA8_81BAE8,aTileScript_0B,medium,Tile pattern change script (7 byte records) selected by index 0B in pTileScriptTable via fTileScript_Start
+DATA8_81BAF1,aTileScript_0C,medium,Tile pattern change script (7 byte records) selected by index 0C in pTileScriptTable via fTileScript_Start
+DATA8_81BB04,aTileScript_0D,medium,Tile pattern change script (7 byte records) selected by index 0D in pTileScriptTable via fTileScript_Start
+DATA8_81BB0D,aTileScript_0E,medium,Tile pattern change script (7 byte records) selected by index 0E in pTileScriptTable via fTileScript_Start
+DATA8_81BB16,aTileScript_0F,medium,Tile pattern change script (7 byte records) selected by index 0F in pTileScriptTable via fTileScript_Start
+DATA8_81BB1F,aTileScript_10,medium,Tile pattern change script (7 byte records) selected by index 10 in pTileScriptTable via fTileScript_Start
+DATA8_81BB28,aTileScript_11,medium,Tile pattern change script (7 byte records) selected by index 11 in pTileScriptTable via fTileScript_Start
+DATA8_81BB31,aTileScript_12,medium,Tile pattern change script (7 byte records) selected by index 12 in pTileScriptTable via fTileScript_Start
+DATA8_81BB3A,aTileScript_13,medium,Tile pattern change script (7 byte records) selected by index 13 in pTileScriptTable via fTileScript_Start
+DATA8_81BB43,aTileScript_14,medium,Tile pattern change script (7 byte records) selected by index 14 in pTileScriptTable via fTileScript_Start
+DATA8_81BB4C,aTileScript_15,medium,Tile pattern change script (7 byte records) selected by index 15 in pTileScriptTable via fTileScript_Start
+DATA8_81BB63,aTileScript_16,medium,Tile pattern change script (7 byte records) selected by index 16 in pTileScriptTable via fTileScript_Start
+DATA8_81BB6C,aTileScript_17,medium,Tile pattern change script (7 byte records) selected by index 17 in pTileScriptTable via fTileScript_Start
+DATA8_81BB75,aTileScript_18,medium,Tile pattern change script (7 byte records) selected by index 18 in pTileScriptTable via fTileScript_Start
+DATA8_81BB7E,aTileScript_19,medium,Tile pattern change script (7 byte records) selected by index 19 in pTileScriptTable via fTileScript_Start
+DATA8_81BB87,aTileScript_1A,medium,Tile pattern change script (7 byte records) selected by index 1A in pTileScriptTable via fTileScript_Start
+DATA8_81BB90,aTileScript_1B,medium,Tile pattern change script (7 byte records) selected by index 1B in pTileScriptTable via fTileScript_Start
+DATA8_81BB99,aTileScript_1C,medium,Tile pattern change script (7 byte records) selected by index 1C in pTileScriptTable via fTileScript_Start
+DATA8_81BBA2,aTileScript_1D,medium,Tile pattern change script (7 byte records) selected by index 1D in pTileScriptTable via fTileScript_Start
+DATA8_81BBAB,aTileScript_1E,medium,Tile pattern change script (7 byte records) selected by index 1E in pTileScriptTable via fTileScript_Start
+DATA8_81BBB4,aTileScript_1F,medium,Tile pattern change script (7 byte records) selected by index 1F in pTileScriptTable via fTileScript_Start
+DATA8_81BBBD,aTileScript_20,medium,Tile pattern change script (7 byte records) selected by index 20 in pTileScriptTable via fTileScript_Start
+DATA8_81BBC6,aTileScript_21,medium,Tile pattern change script (7 byte records) selected by index 21 in pTileScriptTable via fTileScript_Start
+DATA8_81BBCF,aTileScript_22,medium,Tile pattern change script (7 byte records) selected by index 22 in pTileScriptTable via fTileScript_Start
+DATA8_81BBD8,aTileScript_23,medium,Tile pattern change script (7 byte records) selected by index 23 in pTileScriptTable via fTileScript_Start
+DATA8_81BBE1,aTileScript_24,medium,Tile pattern change script (7 byte records) selected by index 24 in pTileScriptTable via fTileScript_Start
+DATA8_81BBF1,aTileScript_25,medium,Tile pattern change script (7 byte records) selected by index 25 in pTileScriptTable via fTileScript_Start
+DATA8_81BC01,aTileScript_26,medium,Tile pattern change script (7 byte records) selected by index 26 in pTileScriptTable via fTileScript_Start
+DATA8_81BC11,aTileScript_27,medium,Tile pattern change script (7 byte records) selected by index 27 in pTileScriptTable via fTileScript_Start
+DATA8_81BC2F,aTileScript_28,medium,Tile pattern change script (7 byte records) selected by index 28 in pTileScriptTable via fTileScript_Start
+DATA8_81BC42,aTileScript_29,medium,Tile pattern change script (7 byte records) selected by index 29 in pTileScriptTable via fTileScript_Start
+DATA8_81BC55,aTileScript_2A,medium,Tile pattern change script (7 byte records) selected by index 2A in pTileScriptTable via fTileScript_Start
+DATA8_81BC5E,aTileScript_2B,medium,Tile pattern change script (7 byte records) selected by index 2B in pTileScriptTable via fTileScript_Start
+DATA8_81BC71,aTileScript_2C,medium,Tile pattern change script (7 byte records) selected by index 2C in pTileScriptTable via fTileScript_Start
+DATA8_81BC84,aTileScript_2D,medium,Tile pattern change script (7 byte records) selected by index 2D in pTileScriptTable via fTileScript_Start
+DATA8_81BC8D,aTileScript_2E,medium,Tile pattern change script (7 byte records) selected by index 2E in pTileScriptTable via fTileScript_Start
+DATA8_81BC96,aTileScript_2F,medium,Tile pattern change script (7 byte records) selected by index 2F in pTileScriptTable via fTileScript_Start
+DATA8_81BC9F,aTileScript_30,medium,Tile pattern change script (7 byte records) selected by index 30 in pTileScriptTable via fTileScript_Start
+DATA8_81BCB2,aTileScript_31,medium,Tile pattern change script (7 byte records) selected by index 31 in pTileScriptTable via fTileScript_Start
+DATA8_81BCBB,aTileScript_32,medium,Tile pattern change script (7 byte records) selected by index 32 in pTileScriptTable via fTileScript_Start
+DATA8_81BCC4,aTileScript_33,medium,Tile pattern change script (7 byte records) selected by index 33 in pTileScriptTable via fTileScript_Start
+DATA8_81BCD7,aTileScript_34,medium,Tile pattern change script (7 byte records) selected by index 34 in pTileScriptTable via fTileScript_Start
+DATA8_81BCF5,aTileScript_35,medium,Tile pattern change script (7 byte records) selected by index 35 in pTileScriptTable via fTileScript_Start
+DATA8_81BD08,aTileScript_36,medium,Tile pattern change script (7 byte records) selected by index 36 in pTileScriptTable via fTileScript_Start
+DATA8_81BD1B,aTileScript_37,medium,Tile pattern change script (7 byte records) selected by index 37 in pTileScriptTable via fTileScript_Start
+DATA8_81BD24,aTileScript_38,medium,Tile pattern change script (7 byte records) selected by index 38 in pTileScriptTable via fTileScript_Start
+DATA8_81BD37,aTileScript_39,medium,Tile pattern change script (7 byte records) selected by index 39 in pTileScriptTable via fTileScript_Start
+DATA8_81BD4A,aTileScript_3A,medium,Tile pattern change script (7 byte records) selected by index 3A in pTileScriptTable via fTileScript_Start
+DATA8_81BD53,aTileScript_3B,medium,Tile pattern change script (7 byte records) selected by index 3B in pTileScriptTable via fTileScript_Start
+DATA8_81BD5C,aTileScript_3C,medium,Tile pattern change script (7 byte records) selected by index 3C in pTileScriptTable via fTileScript_Start
+DATA8_81BD65,aTileScript_3D,medium,Tile pattern change script (7 byte records) selected by index 3D in pTileScriptTable via fTileScript_Start
+DATA8_81BD78,aTileScript_3E,medium,Tile pattern change script (7 byte records) selected by index 3E in pTileScriptTable via fTileScript_Start
+DATA8_81BD81,aTileScript_3F,medium,Tile pattern change script (7 byte records) selected by index 3F in pTileScriptTable via fTileScript_Start
+DATA8_81BD8A,aTileScript_40,medium,Tile pattern change script (7 byte records) selected by index 40 in pTileScriptTable via fTileScript_Start
+DATA8_81BD9D,aTileScript_41,medium,Tile pattern change script (7 byte records) selected by index 41 in pTileScriptTable via fTileScript_Start
+DATA8_81BDBB,aTileScript_42,medium,Tile pattern change script (7 byte records) selected by index 42 in pTileScriptTable via fTileScript_Start
+DATA8_81BDC4,aTileScript_43,medium,Tile pattern change script (7 byte records) selected by index 43 in pTileScriptTable via fTileScript_Start
+DATA8_81BDCD,aTileScript_44,medium,Tile pattern change script (7 byte records) selected by index 44 in pTileScriptTable via fTileScript_Start
+DATA8_81BDEB,aTileScript_45,medium,Tile pattern change script (7 byte records) selected by index 45 in pTileScriptTable via fTileScript_Start
+DATA8_81BDF4,aTileScript_46,medium,Tile pattern change script (7 byte records) selected by index 46 in pTileScriptTable via fTileScript_Start
+DATA8_81BDFD,aTileScript_47,medium,Tile pattern change script (7 byte records) selected by index 47 in pTileScriptTable via fTileScript_Start
+DATA8_81BE06,aTileScript_48,medium,Tile pattern change script (7 byte records) selected by index 48 in pTileScriptTable via fTileScript_Start
 nMaskUnknown_81BF97,aBitMask16,high,Table of 16 single-bit word masks 0001 to 8000
 fUnknownSubrutineHandler_81BFB7,fPlayer_UpdateHandler,medium,Main per-frame player handler dispatching to action handler or interaction handler
 fUnknown_81C002,fPlayerAction_CheckIdle,low,Jumps to idle handler when action is none else falls to action finish code

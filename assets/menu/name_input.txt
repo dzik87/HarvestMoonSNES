@@ -7,7 +7,7 @@
 # `table <label> [releases]`: a table that only some releases use lists them (US EU DE JP); the one with US is the default.
 # Generated into build/gen/menu/name_input.asm by tools/menu/nameinput.py.
 
-table aMenuData_82EBF8 US EU   # grid 0 (tableSelector 0)
+table aNameInputGrid0 US EU   # grid 0 (tableSelector 0)
 00: 28 44 05 1F 01 28 1A 00
 01: 38 44 06 20 02 00 1B 00
 02: 48 44 07 21 03 01 1C 00
@@ -80,7 +80,7 @@ table aMenuData_82EBF8 US EU   # grid 0 (tableSelector 0)
 45: A8 B4 46 40 1F 44 42 00
 46: C0 C4 28 45 45 45 00 04
 
-table aMenuData_82EBF8 DE   # grid 0 (tableSelector 0)
+table aNameInputGrid0 DE   # grid 0 (tableSelector 0)
 00: 28 44 05 23 01 2C 1A 00
 01: 38 44 06 24 02 00 1B 00
 02: 48 44 07 25 03 01 1C 00
@@ -160,7 +160,7 @@ table aMenuData_82EBF8 DE   # grid 0 (tableSelector 0)
 4C: A8 B4 4D 47 23 4B 42 00
 4D: C0 C4 2C 4C 4C 4C 00 04
 
-table aMenuData_82EBF8 JP   # grid 0 (tableSelector 0)
+table aNameInputGrid0 JP   # grid 0 (tableSelector 0)
 00: 28 44 05 28 01 31 00 00
 01: 38 44 06 29 02 00 01 00
 02: 48 44 07 2A 03 01 02 00
@@ -246,7 +246,7 @@ table aMenuData_82EBF8 JP   # grid 0 (tableSelector 0)
 52: C8 B4 53 4F 23 51 00 03
 53: C0 C4 31 52 28 2C 00 04
 
-table aMenuData_82EE30   # grid 1 (tableSelector 1)
+table aNameInputGrid1   # grid 1 (tableSelector 1)
 00: 28 44 05 28 01 31 50 00
 01: 38 44 06 29 02 00 51 00
 02: 48 44 07 2A 03 01 52 00
@@ -332,7 +332,7 @@ table aMenuData_82EE30   # grid 1 (tableSelector 1)
 52: C8 B4 53 4F 23 51 00 03
 53: C0 C4 31 52 28 2C 00 04
 
-table aMenuData_82F0D0   # grid 2 (tableSelector 2)
+table aNameInputGrid2   # grid 2 (tableSelector 2)
 00: 28 44 05 23 01 04 C6 00
 01: 38 44 06 24 02 00 C7 00
 02: 48 44 07 25 03 01 C8 00

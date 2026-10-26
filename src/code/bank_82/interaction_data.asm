@@ -129,7 +129,7 @@ fMainMenu_StartHowToPlayDemo:
     LDA.W #$1800                                               ;82D353|A90018  |      ;
     STA.B $C7                                                  ;82D356|85C7    |0000C7;
     JSL.L fAudioEngine_MapChangeHandler                        ;82D358|22719680|809671;
-    JSL.L fMapChangeHandler_809A64                             ;82D35C|22649A80|809A64;
+    JSL.L fMap_ScreenTransitionHandler                             ;82D35C|22649A80|809A64;
     JSL.L fGame_TimeHandler                                    ;82D360|22008082|828000;
     JSL.L fDialog_IterateText                                  ;82D364|221C9583|83951C;
     JSL.L fPallete_ChangeHandler                               ;82D368|220C9080|80900C;
@@ -149,9 +149,9 @@ fMainMenu_StartHowToPlayDemo:
     SEP #$20                                                   ;82D39F|E220    |      ;
     STZ.B $00                                                  ;82D3A1|6400    |000000;
     if !REGION_EUDE
-    JMP.W L_82D347
+    JMP.W fMainMenu_StartHowToPlayDemo_WaitFrame
     elseif !REGION_JP
-    JMP.W L_82D347
+    JMP.W fMainMenu_StartHowToPlayDemo_WaitFrame
     else
     JMP.W $D347                                                ;82D3A3|4C47D3  |82D347;
     endif

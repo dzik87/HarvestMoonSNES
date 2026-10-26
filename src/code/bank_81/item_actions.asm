@@ -62,7 +62,7 @@ fItemCarried_Begin:
     REP #$20                                                   ;81807C|C220    |      ;
     TAX                                                        ;81807E|AA      |      ;
     SEP #$20                                                   ;81807F|E220    |      ;
-    LDA.L nSoundItemCarriedTable_81A308,X                      ;818081|BF08A381|81A308;
+    LDA.L nItemCarriedPickupSoundTable,X                      ;818081|BF08A381|81A308;
     BEQ +                                                      ;818085|F012    |818099;
     SEP #$20                                                   ;818087|E220    |      ;
     REP #$10                                                   ;818089|C210    |      ;
@@ -101,12 +101,12 @@ fItemCarried_LoadPoseData:
     CLC                                                        ;8180C6|18      |      ;
     ADC.B strcVariables.n16Temp1                               ;8180C7|657E    |00007E;
     TAX                                                        ;8180C9|AA      |      ;
-    LDA.L pItemCarriedTable_8196AF,X                           ;8180CA|BFAF9681|8196AF;
+    LDA.L pItemCarriedFramesTable,X                           ;8180CA|BFAF9681|8196AF;
     STA.B ptrTemp0x72                                          ;8180CE|8572    |000072;
     INX                                                        ;8180D0|E8      |      ;
     INX                                                        ;8180D1|E8      |      ;
     SEP #$20                                                   ;8180D2|E220    |      ;
-    LDA.L pItemCarriedTable_8196AF,X                           ;8180D4|BFAF9681|8196AF;
+    LDA.L pItemCarriedFramesTable,X                           ;8180D4|BFAF9681|8196AF;
     STA.B ptrTemp0x72+2                                        ;8180D8|8574    |000074;
     REP #$30                                                   ;8180DA|C230    |      ;
     TYA                                                        ;8180DC|98      |      ;
@@ -204,10 +204,10 @@ subItemCarried_Corn:
     REP #$30                                                   ;818135|C230    |      ;
     %CheckFlag(daily3, $0001)
     if !REGION_EUDE
-    BEQ L_818149
+    BEQ subItemCarried_Corn_Return
     LDA.L $7F1F4A
     CMP.W #$03E7
-    BCS L_818149
+    BCS subItemCarried_Corn_Return
     INC A
     else
     BEQ +                                                      ;81813E|F009    |818149;
@@ -224,10 +224,10 @@ subItemCarried_Tomato:
     REP #$30                                                   ;81814D|C230    |      ;
     %CheckFlag(daily3, $0001)
     if !REGION_EUDE
-    BEQ L_818161
+    BEQ subItemCarried_Tomato_Return
     LDA.L $7F1F4C
     CMP.W #$03E7
-    BCS L_818161
+    BCS subItemCarried_Tomato_Return
     INC A
     else
     BEQ +                                                      ;818156|F009    |818161;
@@ -244,10 +244,10 @@ subItemCarried_Potato:
     REP #$30                                                   ;818165|C230    |      ;
     %CheckFlag(daily3, $0001)
     if !REGION_EUDE
-    BEQ L_818179
+    BEQ subItemCarried_Potato_Return
     LDA.L $7F1F50
     CMP.W #$03E7
-    BCS L_818179
+    BCS subItemCarried_Potato_Return
     INC A
     else
     BEQ +                                                      ;81816E|F009    |818179;
@@ -264,10 +264,10 @@ subItemCarried_Turnip:
     REP #$30                                                   ;81817D|C230    |      ;
     %CheckFlag(daily3, $0001)
     if !REGION_EUDE
-    BEQ L_818191
+    BEQ subItemCarried_Turnip_Return
     LDA.L $7F1F4E
     CMP.W #$03E7
-    BCS L_818191
+    BCS subItemCarried_Turnip_Return
     INC A
     else
     BEQ +                                                      ;818186|F009    |818191;
@@ -825,15 +825,15 @@ subItemCarried_0x46:
     if !REGION_DE
     LDA.W strcPlayerData.toolEquipped
     CMP.B #$06
-    BNE .r_818529_1
+    BNE .afterEquippedToolCheck
     STZ.W strcPlayerData.toolEquipped
-.r_818529_1:
+.afterEquippedToolCheck:
   + SEP #$20
     LDA.W strcPlayerData.toolSecond
     CMP.B #$06
-    BNE .r_818529_2
+    BNE .afterSecondToolCheck
     STZ.W strcPlayerData.toolSecond
-.r_818529_2:
+.afterSecondToolCheck:
     SEP #$20
     LDA.W strcPlayerData.leftTomatoSeeds
     CMP.B #$FF
@@ -1215,10 +1215,10 @@ fItemCarriedTool_EquipFromShed:
     ADC.W #$0006                                               ;8187E6|690600  |      ;
     TAX                                                        ;8187E9|AA      |      ;
     SEP #$20                                                   ;8187EA|E220    |      ;
-    LDA.L nCarriedItemTable_81BE0F,X                           ;8187EC|BF0FBE81|81BE0F;
+    LDA.L nShedToolPlacementTable,X                           ;8187EC|BF0FBE81|81BE0F;
     PHA                                                        ;8187F0|48      |      ;
     INX                                                        ;8187F1|E8      |      ;
-    LDA.L nCarriedItemTable_81BE0F,X                           ;8187F2|BF0FBE81|81BE0F;
+    LDA.L nShedToolPlacementTable,X                           ;8187F2|BF0FBE81|81BE0F;
     EOR.B #$FF                                                 ;8187F6|49FF    |      ;
     STA.B strcVariables.n8Temp1                                ;8187F8|8592    |000092;
     PLA                                                        ;8187FA|68      |      ;
@@ -1481,7 +1481,7 @@ fItemBuy_ShowPurchaseDialog:
     SEP #$20                                                   ;81897F|E220    |      ;
     LDA.B #$01                                                 ;818981|A901    |      ;
     STA.W $0976+!RAM_SHIFT                                 ;818983|8D7609  |000976;
-    JMP.W fReturn_818B6A                                       ;818986|4C6A8B  |818B6A;
+    JMP.W fItemBuy_Return                                       ;818986|4C6A8B  |818B6A;
  
  
 fItemBuy_HandleAnswer:
@@ -1489,7 +1489,7 @@ fItemBuy_HandleAnswer:
     LDA.W strcDialogDisplay.mapUnk19A                          ;81898B|AD9A01  |00019A;
     CMP.B #$02                                                 ;81898E|C902    |      ;
     BNE +                                                      ;818990|D003    |818995;
-    JMP.W fReturn_818B6A                                       ;818992|4C6A8B  |818B6A;
+    JMP.W fItemBuy_Return                                       ;818992|4C6A8B  |818B6A;
  
  
   + LDA.W strcDialogDisplay.dialogOptionsAnswer                ;818995|AD8F01  |00018F;
@@ -1597,14 +1597,14 @@ fItemBuy_HandleAnswer:
   + SEP #$20                                                   ;818A3A|E220    |      ;
     LDA.B #$03                                                 ;818A3C|A903    |      ;
     STA.W $0976+!RAM_SHIFT                                 ;818A3E|8D7609  |000976;
-    JMP.W fReturn_818B6A                                       ;818A41|4C6A8B  |818B6A;
+    JMP.W fItemBuy_Return                                       ;818A41|4C6A8B  |818B6A;
  
  
 fItemBuy_SetPhaseWaitDialog:
     SEP #$20                                                   ;818A44|E220    |      ;
     LDA.B #$02                                                 ;818A46|A902    |      ;
     STA.W $0976+!RAM_SHIFT                                 ;818A48|8D7609  |000976;
-    JMP.W fReturn_818B6A                                       ;818A4B|4C6A8B  |818B6A;
+    JMP.W fItemBuy_Return                                       ;818A4B|4C6A8B  |818B6A;
  
  
 fItemBuy_ShowDeclineDialog:
@@ -1656,7 +1656,7 @@ fItemBuy_WaitDialogClose:
     LDA.W strcDialogDisplay.mapUnk19A                          ;818A96|AD9A01  |00019A;
     CMP.B #$02                                                 ;818A99|C902    |      ;
     BNE fItemBuy_ReturnItemToShelf                                 ;818A9B|D003    |818AA0;
-    JMP.W fReturn_818B6A                                       ;818A9D|4C6A8B  |818B6A;
+    JMP.W fItemBuy_Return                                       ;818A9D|4C6A8B  |818B6A;
  
  
 fItemBuy_ReturnItemToShelf:
@@ -1713,7 +1713,7 @@ fItemBuy_ReturnItemToShelf:
     LDX.W nTileInFrontOfPlayerX                                ;818B0D|AE8509  |000985;
     LDY.W nTileInFrontOfPlayerY                                ;818B10|AC8709  |000987;
     JSL.L fSetTileAtCoords                                     ;818B13|2288A681|81A688;
-    BRA fReturn_818B6A                                         ;818B17|8051    |818B6A;
+    BRA fItemBuy_Return                                         ;818B17|8051    |818B6A;
  
  
 fItemBuy_FinishPurchase:
@@ -1721,7 +1721,7 @@ fItemBuy_FinishPurchase:
     LDA.W strcDialogDisplay.mapUnk19A                          ;818B1B|AD9A01  |00019A;
     CMP.B #$02                                                 ;818B1E|C902    |      ;
     BNE +                                                      ;818B20|D003    |818B25;
-    JMP.W fReturn_818B6A                                       ;818B22|4C6A8B  |818B6A;
+    JMP.W fItemBuy_Return                                       ;818B22|4C6A8B  |818B6A;
  
  
   + LDA.W nCarriedItemId                                       ;818B25|AD8409  |000984;
@@ -1749,7 +1749,7 @@ fItemBuy_FinishPurchase:
     LDA.B #$FF                                                 ;818B65|A9FF    |      ;
     STA.W $0976+!RAM_SHIFT                                 ;818B67|8D7609  |000976;
  
-fReturn_818B6A:
+fItemBuy_Return:
     RTS                                                        ;818B6A|60      |      ;
  
  
@@ -1779,7 +1779,7 @@ fItemFound_ShowFoundDialog:
     SEP #$20                                                   ;818B9B|E220    |      ;
     LDA.B #$01                                                 ;818B9D|A901    |      ;
     STA.W $0976+!RAM_SHIFT                                 ;818B9F|8D7609  |000976;
-    JMP.W fReturn_818C23                                       ;818BA2|4C238C  |818C23;
+    JMP.W fItemFound_Return                                       ;818BA2|4C238C  |818C23;
  
  
 fItemFound_Consume:
@@ -1787,7 +1787,7 @@ fItemFound_Consume:
     LDA.W strcDialogDisplay.mapUnk19A                          ;818BA7|AD9A01  |00019A;
     CMP.B #$02                                                 ;818BAA|C902    |      ;
     BNE +                                                      ;818BAC|D003    |818BB1;
-    JMP.W fReturn_818C23                                       ;818BAE|4C238C  |818C23;
+    JMP.W fItemFound_Return                                       ;818BAE|4C238C  |818C23;
  
  
   + LDA.W strcDialogDisplay.dialogOptionsAnswer                ;818BB1|AD8F01  |00018F;
@@ -1821,7 +1821,7 @@ fItemFound_Consume:
     LDA.L aFoundItemData,X                                     ;818BF6|BFC69F81|819FC6;
     JSL.L fPlayerEnergyHandler                                 ;818BFA|2261D081|81D061;
     %UnsetPlayerFlag(!PFLAGS_HOLDINGITEM)
-    BRA fReturn_818C23                                         ;818C0A|8017    |818C23;
+    BRA fItemFound_Return                                         ;818C0A|8017    |818C23;
  
  
 fItemFound_DeclineConsume:
@@ -1831,7 +1831,7 @@ fItemFound_DeclineConsume:
     LDA.B #$02                                                 ;818C1E|A902    |      ;
     STA.W $0976+!RAM_SHIFT                                 ;818C20|8D7609  |000976;
  
-fReturn_818C23:
+fItemFound_Return:
     RTS                                                        ;818C23|60      |      ;
  
  
@@ -1887,7 +1887,7 @@ fItemCarried_CarryLoop_NoSell:
 .checkDropItem:
     %CheckPlayerAction(!PACTION_DROPITEM)
     BEQ .dropOnTile                                                ;818C8C|F003    |818C91;
-    JMP.W fReturn_818E1A                                       ;818C8E|4C1A8E  |818E1A;
+    JMP.W fItemCarried_ReturnShared                                       ;818C8E|4C1A8E  |818E1A;
  
  
 .dropOnTile:
@@ -1955,12 +1955,12 @@ fItemCarried_CarryLoop_NoSell:
     SEP #$20                                                   ;818D24|E220    |      ;
     LDA.B #$03                                                 ;818D26|A903    |      ;
     STA.W $0976+!RAM_SHIFT                                 ;818D28|8D7609  |000976;
-    JMP.W fReturn_818E1A                                       ;818D2B|4C1A8E  |818E1A;
+    JMP.W fItemCarried_ReturnShared                                       ;818D2B|4C1A8E  |818E1A;
  
  
 .cancelDrop:
     %SetPlayerAction(!PACTION_NONE)
-    JMP.W fReturn_818E1A                                       ;818D35|4C1A8E  |818E1A;
+    JMP.W fItemCarried_ReturnShared                                       ;818D35|4C1A8E  |818E1A;
  
  
 fItemCarried_PutDown_NoSell:
@@ -2006,7 +2006,7 @@ fItemCarried_PutDown_NoSell:
     CPX.W #$00FD                                               ;818D9C|E0FD00  |      ;
     BEQ fItemCarried_StartDropAtTarget                                        ;818D9F|F04B    |818DEC;
     %SetPlayerAction(!PACTION_NONE)
-    JMP.W fReturn_818E1A                                       ;818DA8|4C1A8E  |818E1A;
+    JMP.W fItemCarried_ReturnShared                                       ;818DA8|4C1A8E  |818E1A;
  
  
 fItemShipped_SetBinTileAndRelease:
@@ -2034,7 +2034,7 @@ fItemShipped_SetBinTileAndRelease:
     JSL.L fObjectSlots_FreeCurrent                                      ;818DE1|22F1A481|81A4F1;
     SEP #$20                                                   ;818DE5|E220    |      ;
     STZ.W strcPlayerData.carryItemId                           ;818DE7|9C1D09  |00091D;
-    BRA fReturn_818E1A                                         ;818DEA|802E    |818E1A;
+    BRA fItemCarried_ReturnShared                                         ;818DEA|802E    |818E1A;
  
  
 fItemCarried_StartDropAtTarget:
@@ -2055,13 +2055,13 @@ fItemCarried_StartDropAtTarget:
     SEP #$20                                                   ;818E0C|E220    |      ;
     LDA.B #$04                                                 ;818E0E|A904    |      ;
     STA.W $0976+!RAM_SHIFT                                 ;818E10|8D7609  |000976;
-    JMP.W fReturn_818E1A                                       ;818E13|4C1A8E  |818E1A;
+    JMP.W fItemCarried_ReturnShared                                       ;818E13|4C1A8E  |818E1A;
  
  
 fItemCarried_ClearObjectSlot:
     JSL.L fObjectSlots_FreeCurrent                                      ;818E16|22F1A481|81A4F1;
  
-fReturn_818E1A:
+fItemCarried_ReturnShared:
     RTS                                                        ;818E1A|60      |      ;
  
  
@@ -2118,7 +2118,7 @@ fItemCarriedAnimal_PutDown:
     JSL.L fObjectSlots_FreeCurrent                                      ;818E8C|22F1A481|81A4F1;
     SEP #$20                                                   ;818E90|E220    |      ;
     STZ.W strcPlayerData.carryItemId                           ;818E92|9C1D09  |00091D;
-    JMP.W fReturn_8196AE                                       ;818E95|4CAE96  |8196AE;
+    JMP.W fItemCarried_ReturnFromPhase                                       ;818E95|4CAE96  |8196AE;
  
  
 fItemCarriedFeed_PutDown:
@@ -2219,7 +2219,7 @@ fItemSell_ShowPriceDialog:
     SEP #$20                                                   ;818F50|E220    |      ;
     LDA.B #$06                                                 ;818F52|A906    |      ;
     STA.W $0976+!RAM_SHIFT                                 ;818F54|8D7609  |000976;
-    JMP.W fReturn_81900F                                       ;818F57|4C0F90  |81900F;
+    JMP.W fItemSell_Return                                       ;818F57|4C0F90  |81900F;
  
  
 fItemSell_HandleAnswer:
@@ -2227,7 +2227,7 @@ fItemSell_HandleAnswer:
     LDA.W strcDialogDisplay.mapUnk19A                          ;818F5C|AD9A01  |00019A;
     CMP.B #$02                                                 ;818F5F|C902    |      ;
     BNE +                                                      ;818F61|D003    |818F66;
-    JMP.W fReturn_81900F                                       ;818F63|4C0F90  |81900F;
+    JMP.W fItemSell_Return                                       ;818F63|4C0F90  |81900F;
  
  
   + LDA.W strcDialogDisplay.dialogOptionsAnswer                ;818F66|AD8F01  |00018F;
@@ -2282,7 +2282,7 @@ fItemSell_HandleAnswer:
     JSL.L fGameEngine_AddProfit                                ;818FCC|22C9B183|83B1C9;
     SEP #$20                                                   ;818FD0|E220    |      ;
     STZ.W strcPlayerData.carryItemId                           ;818FD2|9C1D09  |00091D;
-    BRA fReturn_81900F                                         ;818FD5|8038    |81900F;
+    BRA fItemSell_Return                                         ;818FD5|8038    |81900F;
  
  
 fItemSell_ShowCancelDialog:
@@ -2307,7 +2307,7 @@ fItemSell_ResumeCarry:
     STA.W $0976+!RAM_SHIFT                                 ;819003|8D7609  |000976;
     %SetPlayerFlag(!PFLAGS_HOLDINGITEM)
  
-fReturn_81900F:
+fItemSell_Return:
     RTS                                                        ;81900F|60      |      ;
  
  
@@ -2385,7 +2385,7 @@ fItemCarried_CarryLoop_ActionOther:
 fItemCarried_HandleDropAction:
     %CheckPlayerAction(!PACTION_DROPITEM)
     BEQ +                                                      ;8190B1|F003    |8190B6;
-    JMP.W fReturn_819227                                       ;8190B3|4C2792  |819227;
+    JMP.W fItemCarried_ReturnAfterDropAction                                       ;8190B3|4C2792  |819227;
  
  
   + REP #$30                                                   ;8190B6|C230    |      ;
@@ -2477,7 +2477,7 @@ fItemCarried_HandleDropAction:
     STA.W $0976+!RAM_SHIFT                                 ;819165|8D7609  |000976;
     %SetPlayerAction(!PACTION_NONE)
     %UnsetPlayerFlag(!PFLAGS_HOLDINGITEM)
-    JMP.W fReturn_819227                                       ;81917B|4C2792  |819227;
+    JMP.W fItemCarried_ReturnAfterDropAction                                       ;81917B|4C2792  |819227;
  
  
 fItemCarried_BeginPutDown:
@@ -2490,7 +2490,7 @@ fItemCarried_BeginPutDown:
     SEP #$20                                                   ;81918B|E220    |      ;
     LDA.B #$03                                                 ;81918D|A903    |      ;
     STA.W $0976+!RAM_SHIFT                                 ;81918F|8D7609  |000976;
-    JMP.W fReturn_819227                                       ;819192|4C2792  |819227;
+    JMP.W fItemCarried_ReturnAfterDropAction                                       ;819192|4C2792  |819227;
  
  
 fItemShipped_DropInBin:
@@ -2550,7 +2550,7 @@ fItemCarried_SetPhaseFinish:
     LDA.B #$08                                                 ;819222|A908    |      ;
     STA.W $0976+!RAM_SHIFT                                 ;819224|8D7609  |000976;
  
-fReturn_819227:
+fItemCarried_ReturnAfterDropAction:
     RTS                                                        ;819227|60      |      ;
  
  
@@ -2821,7 +2821,7 @@ fItemShipped_InFarmCoopOrBarn:
     %UnsetPlayerFlag(!PFLAGS_ACTIVE)
     SEP #$20                                                   ;819447|E220    |      ;
     STZ.W strcPlayerData.carryItemId                           ;819449|9C1D09  |00091D;
-    JMP.W fReturn_8196AE                                       ;81944C|4CAE96  |8196AE;
+    JMP.W fItemCarried_ReturnFromPhase                                       ;81944C|4CAE96  |8196AE;
  
  
 fItemShipped_StartCowBarnScript:
@@ -2834,7 +2834,7 @@ fItemShipped_StartCowBarnScript:
     %UnsetPlayerFlag(!PFLAGS_ACTIVE)
     SEP #$20                                                   ;81946B|E220    |      ;
     STZ.W strcPlayerData.carryItemId                           ;81946D|9C1D09  |00091D;
-    JMP.W fReturn_8196AE                                       ;819470|4CAE96  |8196AE;
+    JMP.W fItemCarried_ReturnFromPhase                                       ;819470|4CAE96  |8196AE;
  
  
 fItemShipped_StartCoopScript:
@@ -2847,7 +2847,7 @@ fItemShipped_StartCoopScript:
     %UnsetPlayerFlag(!PFLAGS_ACTIVE)
     SEP #$20                                                   ;81948F|E220    |      ;
     STZ.W strcPlayerData.carryItemId                           ;819491|9C1D09  |00091D;
-    JMP.W fReturn_8196AE                                       ;819494|4CAE96  |8196AE;
+    JMP.W fItemCarried_ReturnFromPhase                                       ;819494|4CAE96  |8196AE;
  
  
 fItemCarried_PlaceEggInIncubator:
@@ -2915,7 +2915,7 @@ fItemCarried_PlaceEggInIncubator:
     REP #$30                                                   ;819533|C230    |      ;
     LDA.W #$0005                                               ;819535|A90500  |      ;
     JSL.L fGameEngine_AddHappiness                             ;819538|2282B283|83B282;
-    JMP.W fReturn_8196AE                                       ;81953C|4CAE96  |8196AE;
+    JMP.W fItemCarried_ReturnFromPhase                                       ;81953C|4CAE96  |8196AE;
  
  
 fItemCarried_PutDown_Outdoor:
@@ -3048,7 +3048,7 @@ fItemCarried_ThrowToTarget:
     SEP #$20                                                   ;819651|E220    |      ;
     LDA.B #$04                                                 ;819653|A904    |      ;
     STA.W $0976+!RAM_SHIFT                                 ;819655|8D7609  |000976;
-    JMP.W fReturn_8196AE                                       ;819658|4CAE96  |8196AE;
+    JMP.W fItemCarried_ReturnFromPhase                                       ;819658|4CAE96  |8196AE;
  
  
 fItemCarried_DropInFront:
@@ -3070,23 +3070,23 @@ fItemCarried_DropInFront:
     SEP #$20                                                   ;819686|E220    |      ;
     LDA.B #$04                                                 ;819688|A904    |      ;
     STA.W $0976+!RAM_SHIFT                                 ;81968A|8D7609  |000976;
-    BRA fReturn_8196AE                                         ;81968D|801F    |8196AE;
+    BRA fItemCarried_ReturnFromPhase                                         ;81968D|801F    |8196AE;
  
  
 fItemCarried_PhaseClearSlot:
     JSL.L fObjectSlots_FreeCurrent                                      ;81968F|22F1A481|81A4F1;
-    BRA fReturn_8196AE                                         ;819693|8019    |8196AE;
+    BRA fItemCarried_ReturnFromPhase                                         ;819693|8019    |8196AE;
  
  
 fItemCarried_PhaseWaitScriptEnd:
     REP #$30                                                   ;819695|C230    |      ;
     LDA.B ptrUnknown0xCF                                       ;819697|A5CF    |0000CF;
-    BNE fReturn_8196AE                                         ;819699|D013    |8196AE;
+    BNE fItemCarried_ReturnFromPhase                                         ;819699|D013    |8196AE;
     SEP #$20                                                   ;81969B|E220    |      ;
     LDA.B ptrUnknown0xCF+2                                     ;81969D|A5D1    |0000D1;
-    BNE fReturn_8196AE                                         ;81969F|D00D    |8196AE;
+    BNE fItemCarried_ReturnFromPhase                                         ;81969F|D00D    |8196AE;
     JSL.L fObjectSlots_FreeCurrent                                      ;8196A1|22F1A481|81A4F1;
     %SetPlayerFlag(!PFLAGS_ACTIVE)
  
-fReturn_8196AE:
+fItemCarried_ReturnFromPhase:
     RTS                                                        ;8196AE|60      |      ;
