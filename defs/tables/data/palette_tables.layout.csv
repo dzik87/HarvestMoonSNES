@@ -1,5 +1,5 @@
 # Map palette tables (bank $80).
-# sData42_*          short colour animation scripts (same step / loop / end records as palette_anim_scripts.csv)
+# aPaletteAnimScript_Rain_* / _Snow_*  short colour animation scripts (same step / loop / end records as palette_anim_scripts.csv)
 # aPalettes[N]       ROM address (ptr24) of palette N: 256 colours (512 bytes) loaded into CGRAM; names say area, season and time of day
 # aMapPalettesIndexes[area*6+phase]  palette index for each time of day of the area, $FF = none:
 #                    early, day, evening, dusk, night, extra  (phase 4 = night is loaded first, fPalette_LoadMapPallete)
