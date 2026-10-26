@@ -24,6 +24,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 from extract_steps import Context, all_steps  # noqa: E402
 
 ROM_SIZE = 2 * 1024 * 1024
+GENERATED_SUFFIXES = (".bin", ".pal")      # build products inside assets/ (git-ignored), not extraction results
 
 
 def find_roms(rom_dir: Path, verbose=False):
@@ -107,9 +108,14 @@ def main() -> int:
 
 
 def compare_trees(a: Path, b: Path):
+    """Differences between the extracted tree `a` and the reference tree `b`.  Only the top-level directories that the
+    extraction wrote to (assets/audio, assets/tables, ...) are compared, so `--only` runs and the work of other steps do not
+    show up as missing files."""
     out = []
     fa = {p.relative_to(a).as_posix() for p in a.rglob("*") if p.is_file()}
-    fb = {p.relative_to(b).as_posix() for p in b.rglob("*") if p.is_file()}
+    scope = {f.split("/")[0] for f in fa}
+    fb = {p.relative_to(b).as_posix() for p in b.rglob("*")
+          if p.is_file() and p.relative_to(b).parts[0] in scope and p.suffix not in GENERATED_SUFFIXES}
     for f in sorted(fa - fb):
         out.append("only extracted: " + f)
     for f in sorted(fb - fa):
