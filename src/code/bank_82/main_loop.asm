@@ -294,7 +294,7 @@ fMainMenu_PrepareHowToPlay:
     LDA.W #$1800                                               ;82D6D5|A90018  |      ;
     STA.B $C7                                                  ;82D6D8|85C7    |0000C7;
     JSL.L fAudioEngine_MapChangeHandler                        ;82D6DA|22719680|809671;
-    JSL.L fMapChangeHandler_809A64                             ;82D6DE|22649A80|809A64;
+    JSL.L fMap_ScreenTransitionHandler                             ;82D6DE|22649A80|809A64;
     JSL.L fGame_TimeHandler                                    ;82D6E2|22008082|828000;
     JSL.L fDialog_IterateText                                  ;82D6E6|221C9583|83951C;
     JSL.L fPallete_ChangeHandler                               ;82D6EA|220C9080|80900C;
@@ -316,9 +316,9 @@ fMainMenu_PrepareHowToPlay:
     SEP #$20                                                   ;82D72A|E220    |      ;
     STZ.B $00                                                  ;82D72C|6400    |000000;
     if !REGION_EUDE
-    JMP.W L_82D6C9
+    JMP.W fMainMenu_PrepareHowToPlay_WaitFrame
     elseif !REGION_JP
-    JMP.W L_82D6C9
+    JMP.W fMainMenu_PrepareHowToPlay_WaitFrame
     else
     JMP.W $D6C9                                                ;82D72E|4CC9D6  |82D6C9;
     endif
@@ -569,7 +569,7 @@ fMainMenu_StateOpeningDemo:
     LDA.W #$1800                                               ;82D947|A90018  |      ;
     STA.B $C7                                                  ;82D94A|85C7    |0000C7;
     JSL.L fAudioEngine_MapChangeHandler                        ;82D94C|22719680|809671;
-    JSL.L fMapChangeHandler_809A64                             ;82D950|22649A80|809A64;
+    JSL.L fMap_ScreenTransitionHandler                             ;82D950|22649A80|809A64;
     JSL.L fGame_TimeHandler                                    ;82D954|22008082|828000;
     JSL.L fDialog_IterateText                                  ;82D958|221C9583|83951C;
     JSL.L fPallete_ChangeHandler                               ;82D95C|220C9080|80900C;
@@ -589,9 +589,9 @@ fMainMenu_StateOpeningDemo:
     SEP #$20                                                   ;82D993|E220    |      ;
     STZ.B $00                                                  ;82D995|6400    |000000;
     if !REGION_EUDE
-    JMP.W L_82D93F
+    JMP.W fMainMenu_StateOpeningDemo_WaitFrame
     elseif !REGION_JP
-    JMP.W L_82D93F
+    JMP.W fMainMenu_StateOpeningDemo_WaitFrame
     else
     JMP.W $D93F                                                ;82D997|4C3FD9  |82D93F;
     endif
@@ -962,7 +962,7 @@ fMainMenu_StateTitleStartCursorAnim:
     LDX.B #$08
     LDY.B #$02
     JSL.L fCore_Store0x72To0x42AtIndex
-    JML.L L_82DD80
+    JML.L fMainMenu_StateTitleStartCursorAnim_Finish
 .case01:
     REP #$20
     SEP #$10
@@ -1000,7 +1000,7 @@ fMainMenu_StateTitleStartCursorAnim:
     LDX.B #$08
     LDY.B #$02
     JSL.L fCore_Store0x72To0x42AtIndex
-    JML.L L_82DD80
+    JML.L fMainMenu_StateTitleStartCursorAnim_Finish
     REP #$20
     SEP #$10
     LDA.W #$F045
@@ -1037,7 +1037,7 @@ fMainMenu_StateTitleStartCursorAnim:
     LDX.B #$08
     LDY.B #$02
     JSL.L fCore_Store0x72To0x42AtIndex
-    JML.L L_82DD80
+    JML.L fMainMenu_StateTitleStartCursorAnim_Finish
     else
     JML.L .case02                                              ;82DC7D|5C2BDD82|82DD2B;
  
@@ -1079,7 +1079,7 @@ fMainMenu_StateTitleStartCursorAnim:
     LDY.B #$02                                                 ;82DCCC|A002    |      ;
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82DCCE|22488E80|808E48;
     if !REGION_EUDE
-    JML.L L_82DD80
+    JML.L fMainMenu_StateTitleStartCursorAnim_Finish
     else
     JML.L $82DD80                                              ;82DCD2|5C80DD82|82DD80;
     endif
@@ -1123,7 +1123,7 @@ fMainMenu_StateTitleStartCursorAnim:
     LDY.B #$02                                                 ;82DD21|A002    |      ;
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82DD23|22488E80|808E48;
     if !REGION_EUDE
-    JML.L L_82DD80
+    JML.L fMainMenu_StateTitleStartCursorAnim_Finish
     else
     JML.L $82DD80                                              ;82DD27|5C80DD82|82DD80;
     endif
@@ -1167,7 +1167,7 @@ fMainMenu_StateTitleStartCursorAnim:
     LDY.B #$02                                                 ;82DD76|A002    |      ;
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82DD78|22488E80|808E48;
     if !REGION_EUDE
-    JML.L L_82DD80
+    JML.L fMainMenu_StateTitleStartCursorAnim_Finish
     else
     JML.L $82DD80                                              ;82DD7C|5C80DD82|82DD80;
     endif
@@ -1480,7 +1480,7 @@ fMainMenu_StateNewGameSlotSelect:
     REP #$30                                                   ;82E033|C230    |      ;
     CPX.W #$0000                                               ;82E035|E00000  |      ;
     if !REGION_JP
-    BEQ L_82E03A
+    BEQ fMainMenu_StateNewGameSlotSelect_CheckSlot2
     LDA.W #$0100
     STA.W strcBGScrool.BG1HorOffs
     else
@@ -1593,14 +1593,14 @@ fMainMenu_NewGameSlotSelect_WaitFrame:
     JSL.L fGameEngine_LoadContinue
     REP #$30
     CPX.W #$0000
-    BEQ .r_82E111_1
-    BRA .r_82E111_2
-.r_82E111_1:
+    BEQ .resetScrollXEu
+    BRA .loadSlotPaletteAnimsEu
+.resetScrollXEu:
     REP #$30
     LDA.W #$0000
     STA.W strcBGScrool.BG1HorOffs
-    BRA .r_82E111_2
-.r_82E111_2:
+    BRA .loadSlotPaletteAnimsEu
+.loadSlotPaletteAnimsEu:
     REP #$20
     SEP #$10
     LDA.W #$F2CB
@@ -1639,7 +1639,7 @@ fMainMenu_NewGameSlotSelect_WaitFrame:
     REP #$30                                                   ;82E11E|C230    |      ;
     CPX.W #$0000                                               ;82E120|E00000  |      ;
     if !REGION_JP
-    BEQ L_82E127
+    BEQ fMainMenu_NewGameSlotSelect_WaitFrame_ResetScrollX
     LDA.W #$0100
     STA.W strcBGScrool.BG1HorOffs
     else
@@ -1697,7 +1697,7 @@ fMainMenu_NewGameSlotSelect_MoveCursorSlot2:
     REP #$30                                                   ;82E174|C230    |      ;
     CPX.W #$0000                                               ;82E176|E00000  |      ;
     if !REGION_JP
-    BEQ L_82E17D
+    BEQ fMainMenu_NewGameSlotSelect_MoveCursorSlot2_ResetScrollX
     LDA.W #$0100
     STA.W strcBGScrool.BG1HorOffs
     else
@@ -2120,7 +2120,7 @@ fMainMenu_DrawSaveSlotInfo:
     ASL A                                                      ;82E4A4|0A      |      ;
     ASL A                                                      ;82E4A5|0A      |      ;
     TAX                                                        ;82E4A6|AA      |      ;
-    LDA.L sYearOrdinal_82F298,X                                ;82E4A7|BF98F282|82F298;
+    LDA.L aYearOrdinalString,X                                ;82E4A7|BF98F282|82F298;
     LDX.W #$0000                                               ;82E4AB|A20000  |      ;
     JSL.L fDialog_TransferGlyph                                ;82E4AE|22239883|839823;
     JSL.L fCore_StartTransfer                                  ;82E4B2|22F08A80|808AF0;
@@ -2139,7 +2139,7 @@ fMainMenu_DrawSaveSlotInfo:
     CLC                                                        ;82E4D3|18      |      ;
     ADC.W #$0002                                               ;82E4D4|690200  |      ;
     TAX                                                        ;82E4D7|AA      |      ;
-    LDA.L sYearOrdinal_82F298,X                                ;82E4D8|BF98F282|82F298;
+    LDA.L aYearOrdinalString,X                                ;82E4D8|BF98F282|82F298;
     LDX.W #$0000                                               ;82E4DC|A20000  |      ;
     JSL.L fDialog_TransferGlyph                                ;82E4DF|22239883|839823;
     JSL.L fCore_StartTransfer                                  ;82E4E3|22F08A80|808AF0;
@@ -2310,7 +2310,7 @@ fMainMenu_DrawEmptySaveSlot:
     LDA.B #$18                                                 ;82E618|A918    |      ;
     STA.B strcSystem.destinationRegister                       ;82E61A|8529    |000029; $29 = 0x18
     REP #$20                                                   ;82E61C|C220    |      ;
-    LDA.W #nSystemTranferData_82E666                       ;82E61E|A966E6  |      ;
+    LDA.W #nSystemTransferTilemapTable                       ;82E61E|A966E6  |      ;
     CLC                                                        ;82E621|18      |      ;
     ADC.B strcVariables.n16Temp1                               ;82E622|657E    |00007E; A = 0xE666 / 0xE666 + 0x6C
     STA.B ptrTemp0x72                                          ;82E624|8572    |000072;

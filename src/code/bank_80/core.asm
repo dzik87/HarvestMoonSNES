@@ -62,7 +62,7 @@ fCore_MainLoop:
  
  
   + JSL.L fAudioEngine_MapChangeHandler                        ;80809B|22719680|809671;
-    JSL.L fMapChangeHandler_809A64                             ;80809F|22649A80|809A64;
+    JSL.L fMap_ScreenTransitionHandler                             ;80809F|22649A80|809A64;
     JSL.L fGame_TimeHandler                                    ;8080A3|22008082|828000;
     JSL.L fDialog_IterateText                                  ;8080A7|221C9583|83951C;
     JSL.L fPallete_ChangeHandler                               ;8080AB|220C9080|80900C;

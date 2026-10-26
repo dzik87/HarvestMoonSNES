@@ -336,7 +336,7 @@ in both EU and DE (`!REGION_EUDE`).
   continue loader (`fGameEngine_LoadContinue`) and positions the cursor differently; DE keeps the US flow.
 - **DE only (against EU):** longer weekday names (`!NAME_WEEKDAY_SIZE` = 24, RAM +6) and the code that writes them,
   the day ordinal strings, empty-slot drawing (`fMainMenu_DrawEmptySaveSlot`), `subItemCarried_0x46`; DE and JP
-  (not EU) also differ in `fCore_FindBestLove`, `aMenuData_82EBF8`, the tool animation table / handlers and
+  (not EU) also differ in `fCore_FindBestLove`, `aNameInputGrid0`, the tool animation table / handlers and
   `fMap_QueueTilePatternVRAMUpload`.
 
 ### JP
@@ -347,9 +347,9 @@ in both EU and DE (`!REGION_EUDE`).
   glyph index in X, the glyph tables `aTextDataTableFFFD/FFFE` and dialog iteration / box graphics loading are JP
   specific.
 - **Menus:** the main menu states (`fMainMenu_StateNewGameSlotSelect`, `StateOpeningDemo`, title cursor animation,
-  save slot drawing) are rewritten for the Japanese layout; `aMenuData_82EBF8`, slot frame data.
+  save slot drawing) are rewritten for the Japanese layout; `aNameInputGrid0`, slot frame data.
 - **Palette animation:** three large JP specific data scripts after `fPaletteAnim_AnimalShop_T1234` and
-  `fPaletteAnim_WoodsSpring_T1` (about 1500 data lines), palette animation table pointers (`pSubrutineTable_80BEEC`).
+  `fPaletteAnim_WoodsSpring_T1` (about 1500 data lines), palette animation table pointers (`pPaletteAnimRoutineTable`).
 - **Endings:** `fAreaEvents_Endings` sets the ending step to `$1C` instead of `$20` and does not clear the daily flag.
 - **Maps/tilemaps:** the area graphics descriptors in `assets/areas/area_gfx.json` points to the language specific graphics by label (no patch blocks any more, see "Regional data banks").
 - **Tools and objects:** tool animation tables and handlers (`fToolUsedActionHandler`, `fToolUsedAnimationHandler`),

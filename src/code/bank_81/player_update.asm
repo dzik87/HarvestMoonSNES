@@ -64,7 +64,7 @@ fPlayerInteraction0x03:
     REP #$20                                                   ;81D68D|C220    |      ;
     TAX                                                        ;81D68F|AA      |      ;
     SEP #$20                                                   ;81D690|E220    |      ;
-    LDA.L nToolSoundData_80B8CD,X                              ;81D692|BFCDB880|80B8CD;
+    LDA.L nSoundEffectSampleTable,X                              ;81D692|BFCDB880|80B8CD;
     INC A                                                      ;81D696|1A      |      ;
     STA.W strcAudio.index                                      ;81D697|8D0301  |000103;
     JSL.L fAudio_PrepareSoundEffectSample                                 ;81D69A|223E8383|83833E;
@@ -1805,9 +1805,9 @@ fPlayerInteraction0x42:
     LDA.W nPlayerInteractionArg2                               ;81E724|AD7009  |000970;
     CMP.B #$20                                                 ;81E727|C920    |      ;
     if !REGION_EUDE
-    BEQ .r_81E729_1
+    BEQ .setPhaseOne
     JMP.W .return
-.r_81E729_1:
+.setPhaseOne:
     LDA.B #$01
     STA.W nPlayerInteractionArg1
     JMP.W .return
@@ -1825,10 +1825,10 @@ fPlayerInteraction0x42:
     LDA.L strcShedItems.row2                                   ;81E737|AF011F7F|7F1F01;
     AND.B #$04                                                 ;81E73B|2904    |      ;
     if !REGION_EUDE
-    BNE L_81E749
+    BNE fPlayerInteraction0x42_ShowDialog
     LDA.W strcPlayerData.toolEquipped
     CMP.B #$0B
-    BEQ L_81E749
+    BEQ fPlayerInteraction0x42_ShowDialog
     LDA.W strcPlayerData.toolSecond
     else
     BNE +                                                      ;81E73D|D00A    |81E749;
@@ -1867,13 +1867,13 @@ fPlayerInteraction0x42:
     SEP #$20
     LDA.L $7F1F01
     AND.B #$04
-    BNE L_81E784
+    BNE fPlayerInteraction0x42_RequestNameInput
     LDA.W strcPlayerData.toolEquipped
     CMP.B #$0B
-    BEQ L_81E784
+    BEQ fPlayerInteraction0x42_RequestNameInput
     LDA.W strcPlayerData.toolSecond
     CMP.B #$0B
-    BEQ L_81E784
+    BEQ fPlayerInteraction0x42_RequestNameInput
     LDA.L $7F1F01
     else
     STA.W strcMenuData.nameDestinationIdx                      ;81E777|8D9F09  |00099F;
@@ -2043,7 +2043,7 @@ fPlayerInteraction0x43:
  
  
 .showDialog0310:
-    LDX.W #$0310                                               ;81E8C1|A21003  |      ; TEXT_B9C65A
+    LDX.W #$0310                                               ;81E8C1|A21003  |      ; dialog $0310
     SEP #$20                                                   ;81E8C4|E220    |      ;
     LDA.B #$00                                                 ;81E8C6|A900    |      ;
     STA.W strcDialogDisplay.dialogUnk191                       ;81E8C8|8D9101  |000191;
@@ -2055,7 +2055,7 @@ fPlayerInteraction0x43:
  
  
 .showDialog030D:
-    LDX.W #$030D                                               ;81E8D9|A20D03  |      ; TEXT_B9C3EA
+    LDX.W #$030D                                               ;81E8D9|A20D03  |      ; dialog $030D
     SEP #$20                                                   ;81E8DC|E220    |      ;
     LDA.B #$00                                                 ;81E8DE|A900    |      ;
     STA.W strcDialogDisplay.dialogUnk191                       ;81E8E0|8D9101  |000191;
@@ -2067,7 +2067,7 @@ fPlayerInteraction0x43:
  
  
 .alreadySoldToday:
-    REP #$30                                                   ;81E8F1|C230    |      ; TEXT_BBB4B6
+    REP #$30                                                   ;81E8F1|C230    |      ; dialog $0487
     LDX.W #$0487                                               ;81E8F3|A28704  |      ;
     SEP #$20                                                   ;81E8F6|E220    |      ;
     LDA.B #$02                                                 ;81E8F8|A902    |      ;
@@ -3598,7 +3598,7 @@ fPlayerInteraction0x51:
     JSL.L fDialog_DialogHandler                                ;81F5DF|225F9383|83935F;
     SEP #$20                                                   ;81F5E3|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81F5E5|EE6F09  |00096F;
-    JMP.W fReturn_81F6D6                                       ;81F5E8|4CD6F6  |81F6D6;
+    JMP.W fPlayerInteraction_ReturnShared                                       ;81F5E8|4CD6F6  |81F6D6;
  
  
 .case1:
@@ -3606,7 +3606,7 @@ fPlayerInteraction0x51:
     LDA.W strcDialogDisplay.mapUnk19A                          ;81F5ED|AD9A01  |00019A;
     CMP.B #$02                                                 ;81F5F0|C902    |      ;
     BNE +                                                      ;81F5F2|D003    |81F5F7;
-    JMP.W fReturn_81F6D6                                       ;81F5F4|4CD6F6  |81F6D6;
+    JMP.W fPlayerInteraction_ReturnShared                                       ;81F5F4|4CD6F6  |81F6D6;
  
  
   + SEP #$20                                                   ;81F5F7|E220    |      ;
@@ -3632,7 +3632,7 @@ fPlayerInteraction0x51:
     SEP #$20                                                   ;81F629|E220    |      ;
     LDA.B #$02                                                 ;81F62B|A902    |      ;
     STA.W nPlayerInteractionArg1                               ;81F62D|8D6F09  |00096F;
-    JMP.W fReturn_81F6D6                                       ;81F630|4CD6F6  |81F6D6;
+    JMP.W fPlayerInteraction_ReturnShared                                       ;81F630|4CD6F6  |81F6D6;
  
  
 .declineOffer:
@@ -3646,7 +3646,7 @@ fPlayerInteraction0x51:
     SEP #$20                                                   ;81F646|E220    |      ;
     LDA.B #$03                                                 ;81F648|A903    |      ;
     STA.W nPlayerInteractionArg1                               ;81F64A|8D6F09  |00096F;
-    JMP.W fReturn_81F6D6                                       ;81F64D|4CD6F6  |81F6D6;
+    JMP.W fPlayerInteraction_ReturnShared                                       ;81F64D|4CD6F6  |81F6D6;
  
  
 .notEnoughMoney:
@@ -3660,14 +3660,14 @@ fPlayerInteraction0x51:
     SEP #$20                                                   ;81F663|E220    |      ;
     LDA.B #$03                                                 ;81F665|A903    |      ;
     STA.W nPlayerInteractionArg1                               ;81F667|8D6F09  |00096F;
-    BRA fReturn_81F6D6                                         ;81F66A|806A    |81F6D6;
+    BRA fPlayerInteraction_ReturnShared                                         ;81F66A|806A    |81F6D6;
  
  
 .case2:
     SEP #$20                                                   ;81F66C|E220    |      ;
     LDA.W strcDialogDisplay.mapUnk19A                          ;81F66E|AD9A01  |00019A;
     CMP.B #$02                                                 ;81F671|C902    |      ;
-    BEQ fReturn_81F6D6                                         ;81F673|F061    |81F6D6;
+    BEQ fPlayerInteraction_ReturnShared                                         ;81F673|F061    |81F6D6;
     REP #$20                                                   ;81F675|C220    |      ;
     %SetPlayerAction(!PACTION_AUTOPILOT)
     REP #$30                                                   ;81F67E|C230    |      ;
@@ -3681,16 +3681,16 @@ fPlayerInteraction0x51:
     STZ.W nPlayerInteractionArg2                               ;81F694|9C7009  |000970;
     LDA.B #$04                                                 ;81F697|A904    |      ;
     STA.W nPlayerInteractionArg1                               ;81F699|8D6F09  |00096F;
-    BRA fReturn_81F6D6                                         ;81F69C|8038    |81F6D6;
+    BRA fPlayerInteraction_ReturnShared                                         ;81F69C|8038    |81F6D6;
  
  
 .case3:
     SEP #$20                                                   ;81F69E|E220    |      ;
     LDA.W strcDialogDisplay.mapUnk19A                          ;81F6A0|AD9A01  |00019A;
     CMP.B #$02                                                 ;81F6A3|C902    |      ;
-    BEQ fReturn_81F6D6                                         ;81F6A5|F02F    |81F6D6;
+    BEQ fPlayerInteraction_ReturnShared                                         ;81F6A5|F02F    |81F6D6;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
-    BRA fReturn_81F6D6                                         ;81F6B3|8021    |81F6D6;
+    BRA fPlayerInteraction_ReturnShared                                         ;81F6B3|8021    |81F6D6;
  
  
 .case4:
@@ -3698,13 +3698,13 @@ fPlayerInteraction0x51:
     INC.W nPlayerInteractionArg2                               ;81F6B7|EE7009  |000970;
     LDA.W nPlayerInteractionArg2                               ;81F6BA|AD7009  |000970;
     CMP.B #$64                                                 ;81F6BD|C964    |      ;
-    BNE fReturn_81F6D6                                         ;81F6BF|D015    |81F6D6;
+    BNE fPlayerInteraction_ReturnShared                                         ;81F6BF|D015    |81F6D6;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     %SetPlayerAction(!PACTION_NONE)
-    BRA fReturn_81F6D6                                         ;81F6D4|8000    |81F6D6;
+    BRA fPlayerInteraction_ReturnShared                                         ;81F6D4|8000    |81F6D6;
  
  
-fReturn_81F6D6:
+fPlayerInteraction_ReturnShared:
     RTS                                                        ;81F6D6|60      |      ; FIXME: I want to be .return
  
  
@@ -3800,7 +3800,7 @@ fPlayerInteraction0x52:
     SEP #$20                                                   ;81F78A|E220    |      ;
     LDA.B #$03                                                 ;81F78C|A903    |      ;
     STA.W nPlayerInteractionArg1                               ;81F78E|8D6F09  |00096F;
-    JMP.W fReturn_81F6D6                                       ;81F791|4CD6F6  |81F6D6; BUG - should be .return in this function rather than previous one since we are out of function scope
+    JMP.W fPlayerInteraction_ReturnShared                                       ;81F791|4CD6F6  |81F6D6; BUG - should be .return in this function rather than previous one since we are out of function scope
  
  
 .case2:

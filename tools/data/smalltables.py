@@ -4,7 +4,7 @@
 Each spec file holds a list of tables that are included together at one place of the code (the include sits where the data was,
 so labels and offsets are unchanged).  A table is
 
-  {"label": "nTable_80AA68", "doc": "free text (becomes a comment)", "type": "dw", "per_line": 5, "values": ["$0000", 64, "aLabel"]}
+  {"label": "nMapRoomRowStrideTable", "doc": "free text (becomes a comment)", "type": "dw", "per_line": 5, "values": ["$0000", 64, "aLabel"]}
 
 values are integers (written as hex with the width of the type) or strings that are copied (hex like "$5010", labels, expressions).
 Mixed tables use "rows": [{"type": "dl", "values": [...]}, {"type": "dw", "values": ["$FFFE"]}, {"label": "aLoop"}] (a row with only a "label" defines a label).

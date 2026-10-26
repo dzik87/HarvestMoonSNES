@@ -315,9 +315,9 @@ fObjectMap_HuricaneDamage:
     CPX.W #$0400                                               ;82A7FA|E00004  |      ;
     BEQ +                                                      ;82A7FD|F003    |82A802;
     if !REGION_EUDE
-    JMP.W L_82A72A
+    JMP.W fObjectMap_HuricaneDamage_TileLoop
     elseif !REGION_JP
-    JMP.W L_82A72A
+    JMP.W fObjectMap_HuricaneDamage_TileLoop
     else
     JMP.W $A72A                                                ;82A7FF|4C2AA7  |82A72A;
     endif
@@ -330,9 +330,9 @@ fObjectMap_HuricaneDamage:
     CPY.W #$0400                                               ;82A808|C00004  |      ;
     BEQ .return                                                ;82A80B|F003    |82A810;
     if !REGION_EUDE
-    JMP.W L_82A727
+    JMP.W fObjectMap_HuricaneDamage_RowLoop
     elseif !REGION_JP
-    JMP.W L_82A727
+    JMP.W fObjectMap_HuricaneDamage_RowLoop
     else
     JMP.W $A727                                                ;82A80D|4C27A7  |82A727;
     endif
@@ -626,9 +626,9 @@ fObjectMap_EatingGrass:
     CPX.W #$0400                                               ;82A9F5|E00004  |      ;
     BEQ +                                                      ;82A9F8|F003    |82A9FD;
     if !REGION_EUDE
-    JMP.W L_82A9B4
+    JMP.W fObjectMap_EatingGrass_TileLoop
     elseif !REGION_JP
-    JMP.W L_82A9B4
+    JMP.W fObjectMap_EatingGrass_TileLoop
     else
     JMP.W $A9B4                                                ;82A9FA|4CB4A9  |82A9B4;
     endif
@@ -641,9 +641,9 @@ fObjectMap_EatingGrass:
     CPY.W #$0400                                               ;82AA03|C00004  |      ;
     BEQ .justReturn                                            ;82AA06|F003    |82AA0B;
     if !REGION_EUDE
-    JMP.W L_82A9B1
+    JMP.W fObjectMap_EatingGrass_RowLoop
     elseif !REGION_JP
-    JMP.W L_82A9B1
+    JMP.W fObjectMap_EatingGrass_RowLoop
     else
     JMP.W $A9B1                                                ;82AA08|4CB1A9  |82A9B1;
     endif
@@ -699,9 +699,9 @@ fObjectMap_CalculateRanchDev:
     CPX.W #$0400                                               ;82AA5A|E00004  |      ;
     BEQ +                                                      ;82AA5D|F003    |82AA62;
     if !REGION_EUDE
-    JMP.W L_82AA24
+    JMP.W fObjectMap_CalculateRanchDev_TileLoop
     elseif !REGION_JP
-    JMP.W L_82AA24
+    JMP.W fObjectMap_CalculateRanchDev_TileLoop
     else
     JMP.W $AA24                                                ;82AA5F|4C24AA  |82AA24;
     endif
@@ -714,9 +714,9 @@ fObjectMap_CalculateRanchDev:
     CPY.W #$0400                                               ;82AA68|C00004  |      ;
     BEQ .justReturn                                            ;82AA6B|F003    |82AA70;
     if !REGION_EUDE
-    JMP.W L_82AA21
+    JMP.W fObjectMap_CalculateRanchDev_RowLoop
     elseif !REGION_JP
-    JMP.W L_82AA21
+    JMP.W fObjectMap_CalculateRanchDev_RowLoop
     else
     JMP.W $AA21                                                ;82AA6D|4C21AA  |82AA21;
     endif

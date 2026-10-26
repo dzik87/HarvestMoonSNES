@@ -40,7 +40,7 @@ fAudio_PlaySoundEffectAndWait:
     REP #$20                                                   ;838314|C220    |      ;
     TAX                                                        ;838316|AA      |      ;
     SEP #$20                                                   ;838317|E220    |      ;
-    LDA.L nToolSoundData_80B8CD,X                              ;838319|BFCDB880|80B8CD;
+    LDA.L nSoundEffectSampleTable,X                              ;838319|BFCDB880|80B8CD;
     INC A                                                      ;83831D|1A      |      ;
     STA.W strcAudio.index                                      ;83831E|8D0301  |000103;
     JSL.L fAudio_PrepareSoundEffectSample                                 ;838321|223E8383|83833E;
@@ -156,7 +156,7 @@ fAudio_LoadPendingTrack:
   + REP #$20                                                   ;8383F0|C220    |      ;
     TAX                                                        ;8383F2|AA      |      ;
     SEP #$20                                                   ;8383F3|E220    |      ;
-    LDA.L nToolSoundData_80B8CD,X                              ;8383F5|BFCDB880|80B8CD;
+    LDA.L nSoundEffectSampleTable,X                              ;8383F5|BFCDB880|80B8CD;
     STA.W strcAudio.index                                      ;8383F9|8D0301  |000103;
     JSL.L fAudio_PrepareSoundEffectSample                                 ;8383FC|223E8383|83833E;
  

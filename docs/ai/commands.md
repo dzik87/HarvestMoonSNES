@@ -827,15 +827,15 @@ Starts a sequence of map tile changes (pointer ptrUnknown0xCF) and ends the curr
 
 | Parameter | Offset | Size | Type | Meaning |
 |---|---|---|---|---|
-| `nSequenceIndex` | 1 | 2 | n16 | Index into the table of 24-bit pointers pTable_81B963 ($81:B963, 3 bytes per entry); it points to a sequence of map tile changes. $0041, $0043, $0045 in scripts. |
+| `nSequenceIndex` | 1 | 2 | n16 | Index into the table of 24-bit pointers pTileScriptTable ($81:B963, 3 bytes per entry); it points to a sequence of map tile changes. $0041, $0043, $0045 in scripts. |
 
-The handler reads a word and calls fTileScript_Start ($81:A5E1): ptrUnknown0xCF ($7E:00CF) = pTable_81B963[index], and clears the delay counter $7E:0989. It advances ptrAIActionData by 3 and increments the slot's strcAIUnknown+$10 counter by 1, which ends script execution in this frame (resumed in the next one). The sequence is then played back by fTileScript_Update (called from the main loop, core.asm and main_loop.asm): 7-byte records (3 words: argument/tile, X, Y + a delay byte in frames) passed to fSetTileAtCoords; $FFFF ends the sequence, $FFFE means a jump to a 24-bit pointer.
+The handler reads a word and calls fTileScript_Start ($81:A5E1): ptrUnknown0xCF ($7E:00CF) = pTileScriptTable[index], and clears the delay counter $7E:0989. It advances ptrAIActionData by 3 and increments the slot's strcAIUnknown+$10 counter by 1, which ends script execution in this frame (resumed in the next one). The sequence is then played back by fTileScript_Update (called from the main loop, core.asm and main_loop.asm): 7-byte records (3 words: argument/tile, X, Y + a delay byte in frames) passed to fSetTileAtCoords; $FFFF ends the sequence, $FFFE means a jump to a 24-bit pointer.
 
 RAM: `ptrUnknown0xCF`, `strcAIUnknown.unk10`, `ptrAIActionData`
 
 Calls: `fTileScript_Start`
 
-> Open questions: It was not determined what exactly the sequences $41/$43/$45 change (the contents of pTable_81B963 and fSetTileAtCoords were not analyzed). The name is based on the behavior of the records (tile X/Y), so only probable.
+> Open questions: It was not determined what exactly the sequences $41/$43/$45 change (the contents of pTileScriptTable and fSetTileAtCoords were not analyzed). The name is based on the behavior of the records (tile X/Y), so only probable.
 
 ## 0x2B — SpawnActor
 
@@ -867,10 +867,10 @@ Plays a sound effect (audio registers 114/115), waits the given number of frames
 | Parameter | Offset | Size | Type | Meaning |
 |---|---|---|---|---|
 | `nSoundId` | 1 | 1 | n8 | Goes to A in fAudio_PlaySoundEffectAndWait and to strcAudio.reg114 ($7E:0114) - probably the sound effect id. $04, $19, $23 in scripts. |
-| `nSoundParam` | 2 | 2 | n16 | Goes to X; only the low byte is stored in strcAudio.reg115 ($7E:0115) (6 or 7 in scripts - the same values as the first byte of the entries in nToolSoundData_829054). |
+| `nSoundParam` | 2 | 2 | n16 | Goes to X; only the low byte is stored in strcAudio.reg115 ($7E:0115) (6 or 7 in scripts - the same values as the first byte of the entries in nToolSoundTable). |
 | `nWaitFrames` | 4 | 2 | n16 | Goes to Y; fAudio_PlaySoundEffectAndWait waits this many NMI frames (fCore_WaitForNMITimes). $3C (60) or $5A (90) in scripts. |
 
-The handler advances the pointer by 1, pushes a byte and two words onto the stack, calls fAudio_PlaySoundEffectAndWait: it stores reg114/reg115, sets strcAudio.index = nToolSoundData_80B8CD[strcAudio.unk118]+1, calls fAudio_PrepareSoundEffectSample (if strcAudio.list[index] != 0 it sends data to the APU via fAudio_FreeSamplesFromSlot) and fAudioSetRegister2to0A (reg116 = $0A), and then BLOCKS for nWaitFrames NMI frames (this wait halts the whole engine, called from inside the handler). It then clears strcAudio.toolId and calls fToolUsedSound_PlayOnToolChange, which plays the sounds of the current tool (from nToolSoundData_829054) and restores toolId = strcPlayerData.toolEquipped. The pointer is advanced by 6 bytes in total. Used in scenes with animals/tools (B4A3AD, B4BE06, B4BEB6, B4BECD).
+The handler advances the pointer by 1, pushes a byte and two words onto the stack, calls fAudio_PlaySoundEffectAndWait: it stores reg114/reg115, sets strcAudio.index = nSoundEffectSampleTable[strcAudio.unk118]+1, calls fAudio_PrepareSoundEffectSample (if strcAudio.list[index] != 0 it sends data to the APU via fAudio_FreeSamplesFromSlot) and fAudioSetRegister2to0A (reg116 = $0A), and then BLOCKS for nWaitFrames NMI frames (this wait halts the whole engine, called from inside the handler). It then clears strcAudio.toolId and calls fToolUsedSound_PlayOnToolChange, which plays the sounds of the current tool (from nToolSoundTable) and restores toolId = strcPlayerData.toolEquipped. The pointer is advanced by 6 bytes in total. Used in scenes with animals/tools (B4A3AD, B4BE06, B4BEB6, B4BECD).
 
 RAM: `strcAudio.reg114`, `strcAudio.reg115`, `strcAudio.reg116`, `strcAudio.index`, `strcAudio.list`, `strcAudio.unk118`, `strcAudio.toolId`, `strcPlayerData.toolEquipped`, `ptrAIActionData`
 

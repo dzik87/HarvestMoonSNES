@@ -1,10 +1,10 @@
-# Sounds of the equipped tool (bank $82, tools.asm).  nToolSoundData_829054[tool * 3]; tool = !EITEM_* (rows in the order of the enum).
+# Sounds of the equipped tool (bank $82, tools.asm).  nToolSoundTable[tool * 3]; tool = !EITEM_* (rows in the order of the enum).
 #   voice          reg115 argument: SPC voice / instrument group used for both effects (preloaded when the tool is changed)
 #   sfx_no_object  !SFX_* played when the tool is used without hitting anything (0 = silent)
 #   sfx_object_hit !SFX_* played when it hits an object (0 = silent)
 # The bell row differs in the EU/DE releases (the bell has no hit sound there).  Confidence: high.
 
-@label nToolSoundData_829054
+@label nToolSoundTable
 @columns tool:note,voice:u8,sfx_no_object:enum8,sfx_object_hit:enum8
 EITEM_NONE,$00,$00,$00
 EITEM_SICKLE,$06,!SFX_SICKLESWING,!SFX_SICKLECUT

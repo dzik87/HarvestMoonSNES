@@ -9,7 +9,7 @@
 
 @record loop op:u16=$FFFE,target:ptr24
 @record end op:u16=$FFFF
-@label Table_80DD5B
+@label aPaletteAnimScript_FarmSpring_FarmSummer_T01_Slot4
 @columns color:bgr555,frames:u8
 $7F79,$10
 $3A11,$10
@@ -19,7 +19,7 @@ $6AD2,$10
 $5E0D,$10
 $6A8E,$10
 $3A11,$10
-loop: Table_80DD5B
+loop: aPaletteAnimScript_FarmSpring_FarmSummer_T01_Slot4
 
 @label aPaletteAnimScript_FarmSpring_FarmSummer_T01_Slot5
 @columns color:bgr555,frames:u8

@@ -1,7 +1,7 @@
 old,new,confidence,reason
 fUnknown_818000,fItemCarried_Begin,medium,Initialises carry state ($0974-$0976) and carried item then sets pose and front tile.
-subUnknown81A58B_0x01,fItemCarried_RunHandler,medium,Per-frame callback in pSubrutineTable_81A58B that dispatches pItemCarriedSubrutines by carried item id.
-fUnknown_8180B7,fItemCarried_LoadPoseData,high,Y selects a 3-byte entry (word anim id plus byte shifted left 6) from the per-item pItemCarriedTable_8196AF pose table into $097A/$097E.
+subUnknown81A58B_0x01,fItemCarried_RunHandler,medium,Per-frame callback in pItemCarriedSlotHandlerTable that dispatches pItemCarriedSubrutines by carried item id.
+fUnknown_8180B7,fItemCarried_LoadPoseData,high,Y selects a 3-byte entry (word anim id plus byte shifted left 6) from the per-item pItemCarriedFramesTable pose table into $097A/$097E.
 fEggFestivalUnknown_818337,fEggFestival_DiscardEgg,medium,Frees the carried egg object and clears carry and holding state without further effect.
 fEggFestivalUnknown_81835E,fEggFestival_SetEggFlag0040,low,Sets unknown1 flag $0040 after an egg event; exact meaning unclear.
 fEggFestivalUnknown_WrongEgg,fEggFestival_WrongEggDialog,medium,Sets tile $FC drops the egg and shows dialog $038D.

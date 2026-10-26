@@ -144,8 +144,8 @@ A name table is a flat list of 16-bit entries; the row length (`columns` in the 
 and how `.map.txt` is wrapped. It never changes the `.bin` (entry order is the same). Evidence for the widths:
 
 * **Engine.** The map loader (`src/code/bank_80/tilemaps.asm`) uploads the big name tables row by row with a stride taken from
-  `nTable_80AA68[strcDialogDisplay.mapMultiWidth]` = `$40 / $80 / $100` bytes = **32 / 64 / 128 entries per row**, and the table size from
-  `nTable_80AA72` = `$1000 / $2000 / $4000` bytes. So row-major maps of 32, 64 and 128 entries per row exist (32x64, 64x64, 128x64+).
+  `nMapRoomRowStrideTable[strcDialogDisplay.mapMultiWidth]` = `$40 / $80 / $100` bytes = **32 / 64 / 128 entries per row**, and the table size from
+  `nMapRoomSizeTable` = `$1000 / $2000 / $4000` bytes. So row-major maps of 32, 64 and 128 entries per row exist (32x64, 64x64, 128x64+).
   `ScreenRaw_Farm/A28000/A38000` and `Screen_EggFestival` use 128. The BG tilemaps loaded by the `.tilemaps` path are
   decompressed to `$7E2000` and DMA'd linearly (`$2000` bytes) to the VRAM address of the map header, so the file order is the order in VRAM.
 * **Image continuity** (`pngsync.py widths`, also part of `check`). Every table is rendered with each of 32, 64 and 128 columns and the

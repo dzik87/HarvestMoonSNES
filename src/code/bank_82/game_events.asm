@@ -74,7 +74,7 @@ fGame_TimeHandler:
     BEQ .return                                                ;82809C|F00B    |8280A9;
     LDY.W #$0004                                               ;82809E|A00400  |      ;
     JSL.L fCore_Zero0x42PtrFromIndex                           ;8280A1|22928F80|808F92;
-    JSL.L fSubrutinesExecute_809553                            ;8280A5|22539580|809553;
+    JSL.L fPaletteAnim_RunAreaRoutine                            ;8280A5|22539580|809553;
  
 .return:
     RTL                                                        ;8280A9|6B      |      ;
@@ -271,7 +271,7 @@ fObjectMap_ApplyHuricaneDamageByMapFlags:
 .damageType0:
     REP #$20                                                   ;828234|C220    |      ;
     LDA.W #$0000                                               ;828236|A90000  |      ;
-    JSR.W fGetAXYArgs_828270                                   ;828239|207082  |828270;
+    JSR.W fObjectMap_GetHuricaneDamageArgs                                   ;828239|207082  |828270;
     JSL.L fObjectMap_HuricaneDamage                            ;82823C|2213A782|82A713;
     BRA .return                                                ;828240|80F1    |828233;
  
@@ -279,7 +279,7 @@ fObjectMap_ApplyHuricaneDamageByMapFlags:
 .damageType1:
     REP #$20                                                   ;828242|C220    |      ;
     LDA.W #$0001                                               ;828244|A90100  |      ;
-    JSR.W fGetAXYArgs_828270                                   ;828247|207082  |828270;
+    JSR.W fObjectMap_GetHuricaneDamageArgs                                   ;828247|207082  |828270;
     JSL.L fObjectMap_HuricaneDamage                            ;82824A|2213A782|82A713;
     BRA .return                                                ;82824E|80E3    |828233;
  
@@ -287,7 +287,7 @@ fObjectMap_ApplyHuricaneDamageByMapFlags:
 .damageType2:
     REP #$20                                                   ;828250|C220    |      ;
     LDA.W #$0002                                               ;828252|A90200  |      ;
-    JSR.W fGetAXYArgs_828270                                   ;828255|207082  |828270;
+    JSR.W fObjectMap_GetHuricaneDamageArgs                                   ;828255|207082  |828270;
     JSL.L fObjectMap_HuricaneDamage                            ;828258|2213A782|82A713;
     BRA .return                                                ;82825C|80D5    |828233;
  
@@ -299,14 +299,14 @@ fObjectMap_ApplyHuricaneDamageByMapFlags:
 .damageType3:
     REP #$20                                                   ;828260|C220    |      ;
     LDA.W #$0003                                               ;828262|A90300  |      ;
-    JSR.W fGetAXYArgs_828270                                   ;828265|207082  |828270;
+    JSR.W fObjectMap_GetHuricaneDamageArgs                                   ;828265|207082  |828270;
     JSL.L fObjectMap_HuricaneDamage                            ;828268|2213A782|82A713;
     BRA .return                                                ;82826C|80C5    |828233;
  
     BRA .return                                                ;82826E|80C3    |828233;
  
  
-fGetAXYArgs_828270:
+fObjectMap_GetHuricaneDamageArgs:
     REP #$30                                                   ;828270|C230    |      ; A: nIndex
     ASL A                                                      ;828272|0A      |      ;
     ASL A                                                      ;828273|0A      |      ;
@@ -314,17 +314,17 @@ fGetAXYArgs_828270:
     SEP #$20                                                   ;828275|E220    |      ;
     LDA.B #$00                                                 ;828277|A900    |      ;
     XBA                                                        ;828279|EB      |      ;
-    LDA.L nArgumentsTable_828298,X                             ;82827A|BF988282|828298;
+    LDA.L nHuricaneDamageArgsTable,X                             ;82827A|BF988282|828298;
     REP #$20                                                   ;82827E|C220    |      ;
     PHA                                                        ;828280|48      |      ;
     INX                                                        ;828281|E8      |      ;
     SEP #$20                                                   ;828282|E220    |      ;
-    LDA.L nArgumentsTable_828298,X                             ;828284|BF988282|828298;
+    LDA.L nHuricaneDamageArgsTable,X                             ;828284|BF988282|828298;
     REP #$20                                                   ;828288|C220    |      ;
     PHA                                                        ;82828A|48      |      ;
     INX                                                        ;82828B|E8      |      ;
     SEP #$20                                                   ;82828C|E220    |      ;
-    LDA.L nArgumentsTable_828298,X                             ;82828E|BF988282|828298;
+    LDA.L nHuricaneDamageArgsTable,X                             ;82828E|BF988282|828298;
     REP #$20                                                   ;828292|C220    |      ;
     TAY                                                        ;828294|A8      |      ;
     PLX                                                        ;828295|FA      |      ;
@@ -332,7 +332,7 @@ fGetAXYArgs_828270:
     RTS                                                        ;828297|60      |      ;
  
  
-nArgumentsTable_828298:
+nHuricaneDamageArgsTable:
     db $60,$00,$00,$00,$40,$00,$00,$00,$08,$10,$04,$00         ;828298|        |      ; 0x05 * [8b argA, 8b argX, 8b argY, 8b unused]
     db $08,$00,$04,$00,$00,$40,$20,$00                         ;8282A4|        |      ;
  
@@ -361,7 +361,7 @@ fNextDayHandler:
     STA.L nCurrentYearID                                       ;8282DA|8F181F7F|7F1F18; Store Year Value
     REP #$20                                                   ;8282DE|C220    |      ;
     LDA.W #$0004                                               ;8282E0|A90400  |      ; Load something to A
-    JSR.W fGetAXYArgs_828270                                   ;8282E3|207082  |828270;
+    JSR.W fObjectMap_GetHuricaneDamageArgs                                   ;8282E3|207082  |828270;
     JSL.L fObjectMap_HuricaneDamage                            ;8282E6|2213A782|82A713;
     SEP #$20                                                   ;8282EA|E220    |      ;
     LDA.B #$00                                                 ;8282EC|A900    |      ;
@@ -398,7 +398,7 @@ fNextDayHandler:
     BEQ +                                                      ;828341|F00B    |82834E;
     %SetFlag(event1, $0020)
  
-  + JSL.L fWeatherForecast_828C09                              ;82834E|22098C82|828C09;
+  + JSL.L fWeather_ApplyForecast                              ;82834E|22098C82|828C09;
     REP #$30                                                   ;828352|C230    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;828354|AD9601  |000196;
     AND.W #$0200                                               ;828357|290002  |      ;
@@ -955,7 +955,7 @@ fWriteSeasonWeekdayAndDayOrdinal:
     ASL A                                                      ;8289E3|0A      |      ;
     if !REGION_JP
     TAX
-    LDA.L aUnused_828AC3,X
+    LDA.L aSeasonWordTable,X
     STA.W $08B1
     else
     ASL A                                                      ;8289E4|0A      |      ;
@@ -1030,13 +1030,13 @@ fWriteSeasonWeekdayAndDayOrdinal:
 .loadordinal:
     ASL A
     TAX
-    LDA.L L_828ACB,X
+    LDA.L aDayOrdinalWordTable,X
     STA.W $08B3
     RTL
-aUnused_828AC3:
+aSeasonWordTable:
     db $69,$01,$CB,$01,$15,$01,$27,$01,$29,$01,$3C,$01,$78,$02,$6C,$01
     db $AA,$01,$38,$01,$E4,$00
-fWeatherForecast_828C09:
+fWeather_ApplyForecast:
     REP #$30
     STZ.W strcDialogDisplay.mapFlags
     else
@@ -1171,7 +1171,7 @@ fWeatherForecast_828C09:
 .loadordinal:
     REP #$30                                                   ;828AB0|C230    |      ;
     if !REGION_DE
-    LDA.L L_828BC3,X
+    LDA.L aDayOrdinalString_DE,X
     else
     LDA.L aDayOrdinalString,X                                  ;828AB2|BFF98B82|828BF9;
     endif
@@ -1179,7 +1179,7 @@ fWeatherForecast_828C09:
     INX                                                        ;828AB9|E8      |      ;
     INX                                                        ;828ABA|E8      |      ;
     if !REGION_DE
-    LDA.L L_828BC3,X
+    LDA.L aDayOrdinalString_DE,X
     else
     LDA.L aDayOrdinalString,X                                  ;828ABB|BFF98B82|828BF9;
     endif
@@ -1187,7 +1187,7 @@ fWeatherForecast_828C09:
     RTL                                                        ;828AC2|6B      |      ;
  
  
-aUnused_828AC3:
+aSeasonWordTable:
     db $69,$01,$CB,$01,$15,$01,$27,$01,$29,$01,$3C,$01         ;828AC3|        |      ;
     if !REGION_DE
     db $78,$02,$6C,$01,$AA,$01,$38,$01,$E4,$00,$1F,$00,$11,$00,$45,$00
@@ -1247,7 +1247,7 @@ aDayOrdinalString:
     db $00,$80,$15,$C2,$30,$A2,$00,$00,$80,$0E,$C2,$30,$A2,$04,$00,$80
     db $07,$C2,$30,$A2,$08,$00,$80,$00,$C2,$30,$BF,$63,$8C,$82,$8D,$D7
     db $08,$E8,$E8,$BF,$63,$8C,$82,$8D,$D9,$08,$6B
-fWeatherForecast_828C09:
+fWeather_ApplyForecast:
     REP #$30
     STZ.W strcDialogDisplay.mapFlags
     elseif !REGION_EU
@@ -1271,7 +1271,7 @@ aDayOrdinalString:
     db $0C,$00,$0C,$00,$00,$00,$04,$00,$08,$00,$0C,$00,$0C,$00,$0C,$00
     db $0C,$00,$0C,$00,$0C,$00,$0C,$00,$00,$00,$04,$00,$08,$00,$0C,$00
     db $0C,$00,$0C,$00,$0C,$00,$0C,$00,$0C,$00,$0C,$00
-fWeatherForecast_828C09:
+fWeather_ApplyForecast:
     REP #$30
     STZ.W strcDialogDisplay.mapFlags
     else
@@ -1299,7 +1299,7 @@ aDayOrdinalString:
     dw $0012,$0013,$000D,$0003,$0011,$0003                     ;828BF9|        |      ; 0x04 * [string[2]] - (st, nd, rd, th)
     dw $0013,$0007                                             ;828C05|        |      ;
  
-fWeatherForecast_828C09:
+fWeather_ApplyForecast:
     REP #$30                                                   ;828C09|C230    |      ;
     STZ.W strcDialogDisplay.mapFlags                           ;828C0B|9C9601  |000196;
     endif
@@ -1334,7 +1334,7 @@ fWeatherForecast_828C09:
  
  
   + REP #$20                                                   ;828C3F|C220    |      ;
-    LDA.L nWeatherTable_828CED                                 ;828C41|AFED8C82|828CED;
+    LDA.L nWeatherMapFlagsTable                                 ;828C41|AFED8C82|828CED;
     STA.W strcDialogDisplay.mapFlags                           ;828C45|8D9601  |000196;
     JMP.W .return                                              ;828C48|4CEC8C  |828CEC;
  
@@ -1346,14 +1346,14 @@ fWeatherForecast_828C09:
     BNE +                                                      ;828C53|D00F    |828C64;
     REP #$20                                                   ;828C55|C220    |      ;
     LDX.W #$0004                                               ;828C57|A20400  |      ;
-    LDA.L nWeatherTable_828CED,X                               ;828C5A|BFED8C82|828CED;
+    LDA.L nWeatherMapFlagsTable,X                               ;828C5A|BFED8C82|828CED;
     STA.W strcDialogDisplay.mapFlags                           ;828C5E|8D9601  |000196;
     JMP.W .return                                              ;828C61|4CEC8C  |828CEC;
  
  
   + REP #$20                                                   ;828C64|C220    |      ;
     LDX.W #$0002                                               ;828C66|A20200  |      ;
-    LDA.L nWeatherTable_828CED,X                               ;828C69|BFED8C82|828CED;
+    LDA.L nWeatherMapFlagsTable,X                               ;828C69|BFED8C82|828CED;
     STA.W strcDialogDisplay.mapFlags                           ;828C6D|8D9601  |000196;
     BRA .return                                                ;828C70|807A    |828CEC;
  
@@ -1364,14 +1364,14 @@ fWeatherForecast_828C09:
     BNE +                                                      ;828C78|D00E    |828C88;
     LDX.W #$0002                                               ;828C7A|A20200  |      ;
     REP #$20                                                   ;828C7D|C220    |      ;
-    LDA.L nWeatherTable_828CED,X                               ;828C7F|BFED8C82|828CED;
+    LDA.L nWeatherMapFlagsTable,X                               ;828C7F|BFED8C82|828CED;
     STA.W strcDialogDisplay.mapFlags                           ;828C83|8D9601  |000196;
     BRA .return                                                ;828C86|8064    |828CEC;
  
  
   + REP #$20                                                   ;828C88|C220    |      ;
     LDX.W #$0004                                               ;828C8A|A20400  |      ;
-    LDA.L nWeatherTable_828CED,X                               ;828C8D|BFED8C82|828CED;
+    LDA.L nWeatherMapFlagsTable,X                               ;828C8D|BFED8C82|828CED;
     STA.W strcDialogDisplay.mapFlags                           ;828C91|8D9601  |000196;
     BRA .return                                                ;828C94|8056    |828CEC;
  
@@ -1379,7 +1379,7 @@ fWeatherForecast_828C09:
 .weatherHurricane:
     REP #$20                                                   ;828C96|C220    |      ;
     LDX.W #$0006                                               ;828C98|A20600  |      ;
-    LDA.L nWeatherTable_828CED,X                               ;828C9B|BFED8C82|828CED;
+    LDA.L nWeatherMapFlagsTable,X                               ;828C9B|BFED8C82|828CED;
     STA.W strcDialogDisplay.mapFlags                           ;828C9F|8D9601  |000196;
     BRA .return                                                ;828CA2|8048    |828CEC;
  
@@ -1387,7 +1387,7 @@ fWeatherForecast_828C09:
 .weather04:
     REP #$20                                                   ;828CA4|C220    |      ;
     LDX.W #$0008                                               ;828CA6|A20800  |      ;
-    LDA.L nWeatherTable_828CED,X                               ;828CA9|BFED8C82|828CED;
+    LDA.L nWeatherMapFlagsTable,X                               ;828CA9|BFED8C82|828CED;
     STA.W strcDialogDisplay.mapFlags                           ;828CAD|8D9601  |000196;
     %SetFlag(event1, $0002)
     %SetFlag(event6, $0100)
@@ -1397,7 +1397,7 @@ fWeatherForecast_828C09:
 .weather05:
     REP #$20                                                   ;828CC8|C220    |      ;
     LDX.W #$000A                                               ;828CCA|A20A00  |      ;
-    LDA.L nWeatherTable_828CED,X                               ;828CCD|BFED8C82|828CED;
+    LDA.L nWeatherMapFlagsTable,X                               ;828CCD|BFED8C82|828CED;
     STA.W strcDialogDisplay.mapFlags                           ;828CD1|8D9601  |000196;
     %SetFlag(event1, $0001)
     %SetFlag(event6, $0080)
@@ -1408,7 +1408,7 @@ fWeatherForecast_828C09:
     RTL                                                        ;828CEC|6B      |      ;
  
  
-nWeatherTable_828CED:
+nWeatherMapFlagsTable:
     dw $0004,$0002,$0008,$0010,$0200,$0100                     ;828CED|        |      ; [n16 nSunny, n16 nRainy, n16 nSnowy, n16 nHurricane, n16 nWeather4, n16 nWeather5]
  
 fWeatherRandomizer:

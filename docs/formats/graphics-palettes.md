@@ -59,7 +59,7 @@ constant `aPalettes` index (preset 3 = title, preset 4 = menus, passed to `fCore
 `$80978F-$809838` (`routines.asm`) and have **no palette of their own**: they are drawn with the sub-palette their name table names (always 0) of the
 palette of whichever outdoor map is active. Their tiles only use pixel values 12-15 (rain: 12-15, clouds: 15 only, snow: 12-15,
 heavy snow: 13-15) and the weather code overwrites exactly those colours of row 0 with palette-animation scripts
-(`fCore_Store0x72To0x42AtIndex` with colour index `$0C-$0F`, row 0; scripts `sData42_80B9D7...` at `$80B9D7`; calls `$8097AE`, `$8097C9`,
+(`fCore_Store0x72To0x42AtIndex` with colour index `$0C-$0F`, row 0; scripts `aPaletteAnimScript_Rain_Slot0...` at `$80B9D7`; calls `$8097AE`, `$8097C9`,
 `$8097E4`, `$8097FF` for rain, `$809853` and following for snow). So the real colours of the overlays are the script colours, not the map palette; the PNG shows
 `FARMSPRING` day, row 0, as a stand-in.
 
@@ -113,7 +113,7 @@ roofs, water, pink trees on the town square); the weather overlays confirm the r
   unused), `multi_row_sprites` the 5 sprites that are used with two rows (`Sprites_ItemsCrops` x4, `Sprites_Npc_2_Ui` x1), and the
   sidecar `sub` is the row used by most components of the bank.
 * Run-time colour patches (`fPalette_LoadSpritePallete` $8093A4): OBJ row 7 colours 10-12 are overwritten with the season/time entry of
-  `nPaletteOverwrite_80BD9C` ($80BD9C; `%PaletteModify(.., $000A..$000C, $000F)`), OBJ row 3 colours 8-10 with the wife's dress
+  `nPaletteSeasonOverwriteTable` ($80BD9C; `%PaletteModify(.., $000A..$000C, $000F)`), OBJ row 3 colours 8-10 with the wife's dress
   (`sPallete_MarriedGirlTable` $80BDFC, `$8094CA-$8094F1`). The PNGs show the unpatched palette colours.
 * The title and menu screens (areas $5B-$5F) clear CGRAM (`fCore_ZeroCGRAM`) and set up their own OBJ colours (cursor palette
   init in the title state machine); sprites shown there may therefore use other colours than the bank's primary palette. Not analysed.

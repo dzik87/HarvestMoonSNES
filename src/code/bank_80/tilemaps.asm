@@ -209,7 +209,7 @@ fTileMap_MapChangeHandler:
     REP #$30                                                   ;80A915|C230    |      ;
     %CheckFlag(daily3, $0002)
     BNE .resetCamera                                               ;80A91E|D004    |80A924;
-    JSL.L fItemSubrutineHandler_81A9E5                         ;80A920|22E5A981|81A9E5;
+    JSL.L fAreaItemSubrutine_Run                         ;80A920|22E5A981|81A9E5;
  
 .resetCamera:
     REP #$20                                                   ;80A924|C220    |      ;
@@ -234,12 +234,12 @@ fTileMap_MapChangeHandler:
     REP #$20                                                   ;80A94C|C220    |      ;
     ASL A                                                      ;80A94E|0A      |      ;
     TAX                                                        ;80A94F|AA      |      ;
-    LDA.L nTable_80AA68,X                                      ;80A950|BF68AA80|80AA68;
+    LDA.L nMapRoomRowStrideTable,X                                      ;80A950|BF68AA80|80AA68;
     STA.B strcMap.pCurrent+2                                   ;80A954|851A    |00001A;
     SEC                                                        ;80A956|38      |      ;
     SBC.W #$0040                                               ;80A957|E94000  |      ;
     STA.B strcVariables.n16Temp2                               ;80A95A|8580    |000080;
-    LDA.L nTable_80AA72,X                                      ;80A95C|BF72AA80|80AA72;
+    LDA.L nMapRoomSizeTable,X                                      ;80A95C|BF72AA80|80AA72;
     STA.B strcMap.unk1C                                        ;80A960|851C    |00001C;
     REP #$20                                                   ;80A962|C220    |      ;
     LDA.W #$0000                                               ;80A964|A90000  |      ;

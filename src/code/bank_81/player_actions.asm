@@ -901,12 +901,12 @@ fPlayerAction_Run:
     BNE .skip                                                  ;81C74B|D014    |81C761;
     %CheckPlayerFlagsNoReg(!PFLAGS_KNEEING)
     BEQ +                                                      ;81C752|F003    |81C757;
-    JMP.W fHelper_81C82A                                       ;81C754|4C2AC8  |81C82A;
+    JMP.W fPlayerAction_Run_Finish                                       ;81C754|4C2AC8  |81C82A;
  
  
   + %CheckPlayerFlagsNoReg(!PFLAGS_USERCONTROL)
     BNE .skip                                                  ;81C75C|D003    |81C761;
-    JMP.W fHelper_81C82A                                       ;81C75E|4C2AC8  |81C82A;
+    JMP.W fPlayerAction_Run_Finish                                       ;81C75E|4C2AC8  |81C82A;
  
  
 .skip:
@@ -977,7 +977,7 @@ fPlayerAction_Run:
     SEP #$20                                                   ;81C7D8|E220    |      ;
     LDA.B #$01                                                 ;81C7DA|A901    |      ;
     STA.B strcMap.unk1E                                        ;81C7DC|851E    |00001E;
-    BRA fHelper_81C827                                         ;81C7DE|8047    |81C827;
+    BRA fPlayerAction_Run_MoveInDirection                                         ;81C7DE|8047    |81C827;
  
  
 .runDogHugging:
@@ -989,7 +989,7 @@ fPlayerAction_Run:
     SEP #$20                                                   ;81C7EB|E220    |      ;
     LDA.B #$01                                                 ;81C7ED|A901    |      ;
     STA.B strcMap.unk1E                                        ;81C7EF|851E    |00001E;
-    BRA fHelper_81C827                                         ;81C7F1|8034    |81C827;
+    BRA fPlayerAction_Run_MoveInDirection                                         ;81C7F1|8034    |81C827;
  
  
 .runSpecialState:
@@ -1001,7 +1001,7 @@ fPlayerAction_Run:
     SEP #$20                                                   ;81C7FE|E220    |      ;
     LDA.B #$01                                                 ;81C800|A901    |      ;
     STA.B strcMap.unk1E                                        ;81C802|851E    |00001E;
-    BRA fHelper_81C827                                         ;81C804|8021    |81C827;
+    BRA fPlayerAction_Run_MoveInDirection                                         ;81C804|8021    |81C827;
  
  
 fPlayerAction_Run_StepSound:
@@ -1011,7 +1011,7 @@ fPlayerAction_Run_StepSound:
     INC A                                                      ;81C80D|1A      |      ;
     AND.B #$0F                                                 ;81C80E|290F    |      ;
     STA.W strcPlayerData.unkCounter91A                         ;81C810|8D1A09  |00091A;
-    BNE fHelper_81C827                                         ;81C813|D012    |81C827;
+    BNE fPlayerAction_Run_MoveInDirection                                         ;81C813|D012    |81C827;
     SEP #$20                                                   ;81C815|E220    |      ;
     REP #$10                                                   ;81C817|C210    |      ;
     LDA.B #!SFX_PLAYERSTEP                                                 ;81C819|A905    |      ;
@@ -1020,10 +1020,10 @@ fPlayerAction_Run_StepSound:
     STA.W strcAudio.reg115                                     ;81C820|8D1501  |000115;
     JSL.L fAudioSetRegister2to0A                               ;81C823|22328383|838332;
  
-fHelper_81C827:
+fPlayerAction_Run_MoveInDirection:
     JSR.W fPlayer_MoveInDirection                                      ;81C827|2077CB  |81CB77;
  
-fHelper_81C82A:
+fPlayerAction_Run_Finish:
     %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;81C831|E220    |      ;
     REP #$10                                                   ;81C833|C210    |      ;

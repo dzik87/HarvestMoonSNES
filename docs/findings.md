@@ -11,7 +11,7 @@ Label names refer to the current sources; see `docs/naming/*.csv` for old -> new
   `dw $FFFF` ends the script. Colour is written to `sPalette_7F0900 + row*32 + index*2` via `fPalette_Unknown80916F`;
   if anything changed, a 0x100-byte CGRAM DMA is queued.
 - Slots are started with `fCore_Store0x72To0x42AtIndex` (A = colour index, X = slot, Y = palette row, $72 = script pointer).
-- `pSubrutineTable_80BEEC`: 0x60 entries (one per `strcMap.loadAreaId`) x 6 words: 5 routine pointers (time-of-day slots,
+- `pPaletteAnimRoutineTable`: 0x60 entries (one per `strcMap.loadAreaId`) x 6 words: 5 routine pointers (time-of-day slots,
   chosen from `nCurrentTimeID`: <7, <0xF, <0x11, <0x12, else) and a condition word ($FFFF = always,
   $0001 = only from autumn on).
 
@@ -24,7 +24,7 @@ Label names refer to the current sources; see `docs/naming/*.csv` for old -> new
 ## Carried items (bank 81)
 - State byte `$0976` = phase: 0 start/pickup, 1 prompt/consume, 2 carry loop, 3 put down, 4 clear slot, 5 sell prompt,
   6 sell answer, 7 wait for script end, 8 finish.
-- `pItemCarriedTable_8196AF`: ptr24 per carried-item id -> frame list of 3-byte entries (`dw sprite`, `db flip`).
+- `pItemCarriedFramesTable`: ptr24 per carried-item id -> frame list of 3-byte entries (`dw sprite`, `db flip`).
 - Buy table `aDialogsData_BuyItems`: 12-byte entries; sell table: 3-byte entries (dialog word + price byte);
   shipping table: 2-byte entries (tile + profit).
 - Carried-item ids are a different enum from the `!EITEM_*` tool ids (see issues below).

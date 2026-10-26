@@ -649,18 +649,18 @@ fPalette_LoadSpritePallete:
     ASL A                                                      ;809403|0A      |      ;
     TAX                                                        ;809404|AA      |      ;
     PHX                                                        ;809405|DA      |      ;
-    %PaletteModify(nPaletteOverwrite_80BD9C,X, $000A, $000F)
+    %PaletteModify(nPaletteSeasonOverwriteTable,X, $000A, $000F)
     REP #$30                                                   ;809414|C230    |      ;
     PLX                                                        ;809416|FA      |      ;
     INX                                                        ;809417|E8      |      ;
     INX                                                        ;809418|E8      |      ;
     PHX                                                        ;809419|DA      |      ;
-    %PaletteModify(nPaletteOverwrite_80BD9C,X, $000B, $000F)
+    %PaletteModify(nPaletteSeasonOverwriteTable,X, $000B, $000F)
     REP #$30                                                   ;809428|C230    |      ;
     PLX                                                        ;80942A|FA      |      ;
     INX                                                        ;80942B|E8      |      ;
     INX                                                        ;80942C|E8      |      ;
-    %PaletteModify(nPaletteOverwrite_80BD9C,X, $000C, $000F)
+    %PaletteModify(nPaletteSeasonOverwriteTable,X, $000C, $000F)
     REP #$30                                                   ;80943B|C230    |      ;
     STZ.B strcVariables.n16Temp1                               ;80943D|647E    |00007E;
     SEP #$20                                                   ;80943F|E220    |      ;

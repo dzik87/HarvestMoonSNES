@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Name entry cursor grids (src/code/bank_82/menu.asm: aMenuData_82EBF8 / _82EE30 / _82F0D0) as a build product.
+"""Name entry cursor grids (src/code/bank_82/menu.asm: aNameInputGrid0 / _82EE30 / _82F0D0) as a build product.
 
 Source: assets/menu/name_input.txt - one `table <label> [releases]` block per grid (and release group), rows `NN: x y down up right left char action`.
 A block without a release list is used by every release; otherwise the blocks of one label list disjoint release groups (US EU DE JP) that

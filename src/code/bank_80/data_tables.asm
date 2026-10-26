@@ -5,7 +5,7 @@
 fPaletteAnim_FarmSpring_FarmSummer_T01:
     REP #$20                                                   ;80C36C|C220    |      ;
     SEP #$10                                                   ;80C36E|E210    |      ;
-    LDA.W #Table_80DD5B                                    ;80C370|A95BDD  |      ;
+    LDA.W #aPaletteAnimScript_FarmSpring_FarmSummer_T01_Slot4                                    ;80C370|A95BDD  |      ;
     STA.B ptrTemp0x72                                          ;80C373|8572    |000072;
     SEP #$20                                                   ;80C375|E220    |      ;
     LDA.B #$80                                                 ;80C377|A980    |      ;

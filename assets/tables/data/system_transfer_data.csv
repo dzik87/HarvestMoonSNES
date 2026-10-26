@@ -1,12 +1,12 @@
 # System screen tilemap transfer data (bank $82, system.asm / main_loop.asm).
-# nSystemTranferData_82E666 / _82E6D2: 3 blocks of $24 bytes = 6 rows of 3 tilemap words; a word is the BG tile (name table entry)
+# nSystemTransferTilemapTable / _82E6D2: 3 blocks of $24 bytes = 6 rows of 3 tilemap words; a word is the BG tile (name table entry)
 # drawn for the entry, $02FF = blank tile.  Which block is used is selected by aSystemTransferArgument.
 #   tile    tilemap word (u16: tile number | palette / flip bits)
 # aSystemTransferArgument[N]: VRAM destination words of the two transfers (u16 x2).
 # The content differs per release (text of the menu is part of the tiles).  Confidence: medium (structure by the transfer routine,
 # tile meanings unchecked).
 
-@label nSystemTranferData_82E666
+@label nSystemTransferTilemapTable
 @columns tile_a:tile16,tile_b:tile16
 @if !REGION_JP
 $02FF,$02FF
@@ -147,7 +147,7 @@ $02FF,$02FF
 $02FF,$02FF
 $02FF,$02FF
 
-@label nSystemTranferData_82E6D2
+@label nSystemTransferTilemapTable_Set2
 @columns tile_a:tile16,tile_b:tile16
 $02FF,$02FF
 $002C,$00A2
