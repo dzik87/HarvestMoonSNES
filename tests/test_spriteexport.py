@@ -102,7 +102,7 @@ def test_export_check_and_tamper():
         shutil.copytree(out, pristine)
         # tamper with a PNG pixel
         from PIL import Image
-        p = out / "obj_0000" / "l0_f00.png"
+        p = out / S.obj_dirname(0, S.object_names()) / "l0_f00.png"
         im = Image.open(p)
         px = bytearray(im.tobytes())
         px[len(px) // 2] ^= 0x01
@@ -110,21 +110,21 @@ def test_export_check_and_tamper():
         im2.putpalette(im.getpalette())
         im2.save(p)
         check(S.main(["check", "--out", str(out), "--object", "0"]) == 1, "check detects a changed PNG pixel")
-        shutil.copy(pristine / "obj_0000" / "l0_f00.png", p)
+        shutil.copy(pristine / S.obj_dirname(0, S.object_names()) / "l0_f00.png", p)
         check(S.main(["check", "--out", str(out), "--object", "0"]) == 0, "check passes again after restoring")
         # tamper with a component in the JSON
-        jp = out / "obj_0004" / "index.json"
+        jp = out / S.obj_dirname(4, S.object_names()) / "index.json"
         j = json.loads(jp.read_text())
         j["frames"][0]["components"][0]["x"] += 1
         jp.write_text(S.dump_json(j))
         check(S.main(["check", "--out", str(out), "--object", "4"]) == 1, "check detects a component change in JSON")
         # tamper with a timer
-        j = json.loads((pristine / "obj_0004" / "index.json").read_text())
+        j = json.loads((pristine / S.obj_dirname(4, S.object_names()) / "index.json").read_text())
         j["lists"][0]["steps"][0]["timer"] ^= 1
         jp.write_text(S.dump_json(j))
         check(S.main(["check", "--out", str(out), "--object", "4"]) == 1, "check detects a changed timer")
         # missing file
-        (out / "obj_0001" / "contact.png").unlink()
+        (out / S.obj_dirname(1, S.object_names()) / "contact.png").unlink()
         check(S.main(["check", "--out", str(out), "--object", "1"]) == 1, "check detects a missing contact sheet")
     finally:
         shutil.rmtree(tmp)
@@ -143,7 +143,7 @@ def test_frames_are_the_composed_sources():
             if not comps:
                 continue
             w, h, ox, oy, pix = S.render_frame(sh, comps)
-            pw, ph, ppix = S.read_pixels(ROOT / "assets/gfx/png/frames" / ("obj_%04X" % idx) / ("f_%04X.png" % fp))
+            pw, ph, ppix = S.read_pixels(ROOT / "assets/gfx/png/frames" / S.obj_dirname(idx, S.object_names()) / ("f_%04X.png" % fp))
             check((pw, ph) == (w, h) and ppix == pix, "frame %04X/%04X: source PNG differs from the render" % (idx, fp))
             n += 1
     check(n > 10, "compared %d frames" % n)

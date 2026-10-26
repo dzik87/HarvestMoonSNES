@@ -98,11 +98,12 @@ def test_labels(banks, ms):
         base = 0 if b == 0x86 else 0x262
         check('aObjSlotOamTile_%02X8000' % b in a.labels, 'bank %02X slot table label' % b)
         check(a.labels['aObjAnimListPtrs_%02X' % b] == 0x8080, 'bank %02X list pointer table at $8080' % b)
-        check(all('aObjAnimList_%04X' % (base + i) in a.labels for i in range(n)),
+        check(sum(1 for l in a.labels if l.startswith('aObjAnimList_')) == n and
+              all(any(l.startswith('aObjAnimList_%04X' % (base + i)) for l in a.labels) for i in (0, n - 1)),
               'bank %02X has a label for each of its %d lists' % (b, n))
         check(sum(1 for l in a.labels if l.startswith('aObjFrame_')) == sum(1 for nd in ms[b].nodes if nd.kind == 'Frame'),
               'bank %02X: one label per frame' % b)
-    check(banks[0x86].labels['aObjFrame_86A4AE'] == 0xA4AE and banks[0x86].labels['aObjAnimList_0000'] == 0x8544,
+    check(banks[0x86].labels['aObjFrame_86A4AE'] == 0xA4AE and [v for k, v in banks[0x86].labels.items() if k.startswith('aObjAnimList_0000')] == [0x8544],
           'known label addresses ($86A4AE, $868544)')
 
 

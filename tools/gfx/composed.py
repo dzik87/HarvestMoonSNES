@@ -3,7 +3,7 @@
 
 Tile graphics and sprite banks are edited as COMPOSED images, the build splits them back into the tiles / sprite blocks of the engine:
 
-  sprites   assets/gfx/png/frames/obj_XXXX/f_PPPP.png   one image per object animation frame (components of banks $86/$87 drawn
+  sprites   assets/gfx/png/frames/obj_XXXX_<Name>/f_PPPP.png   one image per object animation frame (components of banks $86/$87 drawn
             as the engine draws them: flips, palette row, last component on top); pixel = (OBJ palette << 4) | colour, 0 = transparent
   screens   assets/gfx/png/screens/<table>[__<map>].png  one image per BG name table and tile-set combination: the name table rendered
             with the tile blobs it is shown with; pixel = (name table palette << 4) | colour
@@ -48,6 +48,11 @@ def png_root(root, region):
 
 def screens_dir(root, region):
     return png_root(root, region) / "screens"
+
+
+def obj_dir(idx, names):
+    """Folder of the frames of object `idx`: obj_XXXX_<Name> (the index is the engine identity)."""
+    return f"obj_{idx:04X}" + (f"_{names[idx]}" if idx in names else "")
 
 
 def frames_dir(root):
@@ -253,6 +258,8 @@ class Ctx:
         self.S = S
         data = S.ObjectData()
         fdir = frames_dir(self.root)
+        import objdata as OD
+        onames = OD.object_names(self.root)
         out = []
         for idx in range(data.total):
             bank, _ = data.list_ptr(idx)
@@ -263,7 +270,7 @@ class Ctx:
             for fp in seen:
                 comps = data.frame(bank, fp)
                 if comps:
-                    out.append(Frame(fdir / f"obj_{idx:04X}" / f"f_{fp:04X}.png", bank, fp, idx, comps, S))
+                    out.append(Frame(fdir / obj_dir(idx, onames) / f"f_{fp:04X}.png", bank, fp, idx, comps, S))
         for bank, ptr in data.unreferenced_frames():
             comps = data.frame(bank, ptr)
             if comps:

@@ -1,4 +1,5 @@
 {
+ "name": "Player_ShowItem_GoldAxe",
  "steps": [
   ["86C19D", 48],
   ["86C19D", 255]

@@ -152,7 +152,7 @@ def check_exported_palettes(tmp):
     check(pal[:128] == P.view_palette128(meta["palette"]["id"], tmp), "exported PLTE (8 rows: every tile has the row of its name table cells)")
     pal, trns = png_palette(P.Blob("sprites", "Sprites_Player_0", tmp).art)
     check(trns == 0, "sprite remainder sheets have transparent colour 0")
-    first = sorted((tmp / "assets/gfx/png/frames/obj_0000").glob("f_*.png"))[0]
+    first = sorted(next((tmp / "assets/gfx/png/frames").glob("obj_0000*")).glob("f_*.png"))[0]
     fpal, ftrns = png_palette(first)
     check(fpal[:128] == [c for p in PM.sprite_palettes(0) for c in p], "frame PLTE = day OBJ palette")
 
@@ -188,7 +188,7 @@ def test_import_flow():
         check(set(totals.values()) == {BB.BANK}, "banks are full before")
 
         # 1. one pixel of the first frame of object 0
-        fr = sorted((tmp / "assets/gfx/png/frames/obj_0000").glob("f_*.png"))[0]
+        fr = sorted(next((tmp / "assets/gfx/png/frames").glob("obj_0000*")).glob("f_*.png"))[0]
         spot = []
 
         def paint(px, w, h):
@@ -280,7 +280,7 @@ def test_conflicts_and_errors():
 
     with shared() as tmp:
         # wrong palette row in a frame
-        fr = sorted((tmp / "assets/gfx/png/frames/obj_0000").glob("f_*.png"))[0]
+        fr = sorted(next((tmp / "assets/gfx/png/frames").glob("obj_0000*")).glob("f_*.png"))[0]
         saved_fr = fr.read_bytes()
 
         def wrong(px, w, h):

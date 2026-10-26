@@ -1,4 +1,5 @@
 {
+ "name": "Player_ShowItem_Syringe",
  "steps": [
   ["86BFCF", 48],
   ["86BFCF", 255]

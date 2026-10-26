@@ -1,4 +1,5 @@
 {
+ "name": "Player_ShowItem_Hoe",
  "steps": [
   ["86C0A1", 48],
   ["86C0A1", 255]

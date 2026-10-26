@@ -1,4 +1,5 @@
 {
+ "name": "Player_ShowItem_GoldSickle",
  "steps": [
   ["86C173", 48],
   ["86C173", 255]

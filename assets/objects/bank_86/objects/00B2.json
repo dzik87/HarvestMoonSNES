@@ -1,4 +1,5 @@
 {
+ "name": "Player_ShowItem_GoldHammer",
  "steps": [
   ["86C1B2", 48],
   ["86C1B2", 255]

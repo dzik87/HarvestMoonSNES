@@ -1,4 +1,5 @@
 {
+ "name": "Cow_Idle_Down",
  "steps": [
   ["86D08C", 8],
   ["86D0A1", 8]

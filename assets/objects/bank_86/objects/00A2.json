@@ -1,4 +1,5 @@
 {
+ "name": "Player_ShowItem_BagCream",
  "steps": [
   ["86C062", 48],
   ["86C062", 255]

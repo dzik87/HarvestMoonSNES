@@ -1,0 +1,1105 @@
+index,old,new,family,confidence,reason
+0000,obj_0000,obj_0000_Player_Idle_Down,Player,medium,"AI table L001 direction 0, 16-tick loop"
+0001,obj_0001,obj_0001_Player_Idle_Up,Player,medium,AI table L001 direction 1
+0002,obj_0002,obj_0002_Player_Idle_Side,Player,medium,AI table L001 directions 2/3 (flipped)
+0003,obj_0003,obj_0003_Player_Walk_Down,Player,medium,"AI table L001 second set, 8-tick loop"
+0004,obj_0004,obj_0004_Player_Walk_Up,Player,medium,"AI table L001 second set, 8-tick loop"
+0005,obj_0005,obj_0005_Player_Stand_Down,Player,medium,"single frame, equals the idle frame; AI table direction 0"
+0006,obj_0006,obj_0006_Player_Stand_Up,Player,medium,single frame; AI table direction 1
+0007,obj_0007,obj_0007_Player_Stand_Side,Player,medium,single frame; AI table direction 2/3
+0008,obj_0008,obj_0008_Player_Pose_0008,Player,low,player cut-scene poses
+0009,obj_0009,obj_0009_Player_Pose_0009,Player,low,player cut-scene poses
+000A,obj_000A,obj_000A_Player_Pose_000A,Player,low,player cut-scene poses
+000B,obj_000B,obj_000B_Player_Pose_000B,Player,low,player cut-scene poses
+000C,obj_000C,obj_000C_Player_Pose_000C,Player,low,player cut-scene poses
+000D,obj_000D,obj_000D_Player_Pose_000D,Player,low,player cut-scene poses
+000E,obj_000E,obj_000E_Player_Walk_Side,Player,medium,AI table L001 second set (side)
+000F,obj_000F,obj_000F_Player_Pose_000F,Player,low,player cut-scene poses
+0010,obj_0010,obj_0010_Player_Pose_0010,Player,low,player cut-scene poses
+0011,obj_0011,obj_0011_Player_Pose_0011,Player,low,player cut-scene poses
+0012,obj_0012,obj_0012_Player_Pose_0012,Player,low,player cut-scene poses
+0013,obj_0013,obj_0013_Player_Pose_0013,Player,low,player cut-scene poses
+0014,obj_0014,obj_0014_Player_Pose_0014,Player,low,player cut-scene poses
+0015,obj_0015,obj_0015_Player_Jump_0015,Player,medium,hop arc with shadow
+0016,obj_0016,obj_0016_Player_Jump_0016,Player,medium,hop arc with shadow
+0017,obj_0017,obj_0017_Player_Pose_0017,Player,low,sweat pose
+0018,obj_0018,obj_0018_Player_Jump_0018,Player,medium,hop arc with shadow
+0019,obj_0019,obj_0019_Player_Jump_0019,Player,medium,hop arc with shadow
+001A,obj_001A,obj_001A_Player_Pose_001A,Player,low,pose
+001B,obj_001B,obj_001B_Player_Jump_001B,Player,medium,hop arc with shadow
+001C,obj_001C,obj_001C_Player_Jump_001C,Player,medium,hop arc with shadow
+001D,obj_001D,obj_001D_Player_Pose_001D,Player,low,sweat pose
+001E,obj_001E,obj_001E_Player_Jump_001E,Player,medium,hop arc with shadow
+001F,obj_001F,obj_001F_Player_Jump_001F,Player,medium,hop arc with shadow
+0020,obj_0020,obj_0020_Player_Sparkle_0020,Player,medium,player with sparkles
+0021,obj_0021,obj_0021_Player_Jump_0021,Player,medium,hop arc with shadow
+0022,obj_0022,obj_0022_Player_Jump_0022,Player,medium,hop arc with shadow
+0023,obj_0023,obj_0023_Player_Pose_0023,Player,low,sweat pose
+0024,obj_0024,obj_0024_Player_Jump_0024,Player,medium,hop arc with shadow
+0025,obj_0025,obj_0025_Player_Jump_0025,Player,medium,hop arc with shadow
+0026,obj_0026,obj_0026_Player_Sparkle_0026,Player,medium,player with sparkles
+0027,obj_0027,obj_0027_Player_CarryWalk_0027,Player,medium,4-frame walk with an item in the hand (item icon beside the player)
+0028,obj_0028,obj_0028_Player_CarryWalk_0028,Player,medium,4-frame walk with an item in the hand (item icon beside the player)
+0029,obj_0029,obj_0029_Player_CarryWalk_0029,Player,medium,4-frame walk with an item in the hand (item icon beside the player)
+002A,obj_002A,obj_002A_Player_CarryWalk_002A,Player,medium,4-frame walk with an item in the hand (item icon beside the player)
+002B,obj_002B,obj_002B_Player_CarryWalk_002B,Player,medium,4-frame walk with an item in the hand (item icon beside the player)
+002C,obj_002C,obj_002C_Player_CarryWalk_002C,Player,medium,4-frame walk with an item in the hand (item icon beside the player)
+002D,obj_002D,obj_002D_Player_CarryWalk_002D,Player,medium,4-frame walk with an item in the hand (item icon beside the player)
+002E,obj_002E,obj_002E_Player_CarryWalk_002E,Player,medium,4-frame walk with an item in the hand (item icon beside the player)
+002F,obj_002F,obj_002F_Player_CarryWalk_002F,Player,medium,4-frame walk with an item in the hand (item icon beside the player)
+0030,obj_0030,obj_0030_Player_CarryWalk_0030,Player,medium,4-frame walk with an item in the hand (item icon beside the player)
+0031,obj_0031,obj_0031_Player_CarryWalk_0031,Player,medium,4-frame walk with an item in the hand (item icon beside the player)
+0032,obj_0032,obj_0032_Player_CarryWalk_0032,Player,medium,4-frame walk with an item in the hand (item icon beside the player)
+0033,obj_0033,obj_0033_Player_Pose_0033,Player,low,cheer / lift poses
+0034,obj_0034,obj_0034_Player_Pose_0034,Player,low,cheer / lift poses
+0035,obj_0035,obj_0035_Player_Pose_0035,Player,low,cheer / lift poses
+0036,obj_0036,obj_0036_Player_Pose_0036,Player,low,cheer / lift poses
+0037,obj_0037,obj_0037_Player_Pose_0037,Player,low,cheer / lift poses
+0038,obj_0038,obj_0038_Player_Pose_0038,Player,low,cheer / lift poses
+0039,obj_0039,obj_0039_Player_Dog_0039,Player,medium,player with the yellow dog (PFLAGS_DOGHUGGING)
+003A,obj_003A,obj_003A_Player_Dog_003A,Player,medium,player with the yellow dog (PFLAGS_DOGHUGGING)
+003B,obj_003B,obj_003B_Player_Dog_003B,Player,medium,player with the yellow dog (PFLAGS_DOGHUGGING)
+003C,obj_003C,obj_003C_Player_Dog_003C,Player,medium,player with the yellow dog (PFLAGS_DOGHUGGING)
+003D,obj_003D,obj_003D_Player_Dog_003D,Player,medium,player with the yellow dog (PFLAGS_DOGHUGGING)
+003E,obj_003E,obj_003E_Player_Dog_003E,Player,medium,player with the yellow dog (PFLAGS_DOGHUGGING)
+003F,obj_003F,obj_003F_Player_Pose_003F,Player,low,pose
+0040,obj_0040,obj_0040_Player_Pose_0040,Player,low,pose
+0041,obj_0041,obj_0041_Player_Dog_0041,Player,medium,player with the yellow dog
+0042,obj_0042,obj_0042_Player_Dog_0042,Player,medium,player with the yellow dog
+0043,obj_0043,obj_0043_Player_Dog_0043,Player,medium,player with the yellow dog
+0044,obj_0044,obj_0044_Player_Tool_0044,Player,medium,tool swing / use animations
+0045,obj_0045,obj_0045_Player_Tool_0045,Player,medium,tool swing / use animations
+0046,obj_0046,obj_0046_Player_Tool_0046,Player,medium,tool swing / use animations
+0047,obj_0047,obj_0047_Player_Tool_0047,Player,medium,tool swing / use animations
+0048,obj_0048,obj_0048_Player_Tool_0048,Player,medium,tool swing / use animations
+0049,obj_0049,obj_0049_Player_Tool_0049,Player,medium,tool swing / use animations
+004A,obj_004A,obj_004A_Player_Tool_004A,Player,medium,tool swing / use animations
+004B,obj_004B,obj_004B_Player_Tool_004B,Player,medium,tool swing / use animations
+004C,obj_004C,obj_004C_Player_Tool_004C,Player,medium,tool swing / use animations
+004D,obj_004D,obj_004D_Player_Tool_004D,Player,medium,tool swing / use animations
+004E,obj_004E,obj_004E_Player_Tool_004E,Player,medium,tool swing / use animations
+004F,obj_004F,obj_004F_Player_Tool_004F,Player,medium,tool swing / use animations
+0050,obj_0050,obj_0050_Player_Tool_0050,Player,medium,tool swing / use animations
+0051,obj_0051,obj_0051_Player_Tool_0051,Player,medium,tool swing / use animations
+0052,obj_0052,obj_0052_Player_Tool_0052,Player,medium,tool swing / use animations
+0053,obj_0053,obj_0053_Player_Tool_0053,Player,medium,tool swing / use animations
+0054,obj_0054,obj_0054_Player_Tool_0054,Player,medium,tool swing / use animations
+0055,obj_0055,obj_0055_Player_Tool_0055,Player,medium,tool swing / use animations
+0056,obj_0056,obj_0056_Player_Tool_0056,Player,medium,tool swing / use animations
+0057,obj_0057,obj_0057_Player_Tool_0057,Player,medium,tool swing / use animations
+0058,obj_0058,obj_0058_Player_Tool_0058,Player,medium,tool swing / use animations
+0059,obj_0059,obj_0059_Player_Tool_0059,Player,medium,tool swing / use animations
+005A,obj_005A,obj_005A_Player_Tool_005A,Player,medium,tool swing / use animations
+005B,obj_005B,obj_005B_Player_Tool_005B,Player,medium,tool swing / use animations
+005C,obj_005C,obj_005C_Player_Pose_005C,Player,low,crouch / lift poses
+005D,obj_005D,obj_005D_Player_Pose_005D,Player,low,crouch / lift poses
+005E,obj_005E,obj_005E_Player_Pose_005E,Player,low,crouch / lift poses
+005F,obj_005F,obj_005F_Player_Pose_005F,Player,low,crouch / lift poses
+0060,obj_0060,obj_0060_Player_Pose_0060,Player,low,crouch / lift poses
+0061,obj_0061,obj_0061_Player_Pose_0061,Player,low,crouch / lift poses
+0062,obj_0062,obj_0062_Player_Pose_0062,Player,low,crouch / lift poses
+0063,obj_0063,obj_0063_Player_Pose_0063,Player,low,crouch / lift poses
+0064,obj_0064,obj_0064_Player_Pose_0064,Player,low,crouch / lift poses
+0065,obj_0065,obj_0065_Player_Pose_0065,Player,low,crouch / lift poses
+0066,obj_0066,obj_0066_Player_Pose_0066,Player,low,crouch / lift poses
+0067,obj_0067,obj_0067_Player_Tool_0067,Player,medium,tool use animations (small frames)
+0068,obj_0068,obj_0068_Player_Tool_0068,Player,medium,tool use animations (small frames)
+0069,obj_0069,obj_0069_Player_Tool_0069,Player,medium,tool use animations (small frames)
+006A,obj_006A,obj_006A_Player_Tool_006A,Player,medium,tool use animations (small frames)
+006B,obj_006B,obj_006B_Player_Tool_006B,Player,medium,tool use animations (small frames)
+006C,obj_006C,obj_006C_Player_Tool_006C,Player,medium,tool use animations (small frames)
+006D,obj_006D,obj_006D_Player_Tool_006D,Player,medium,tool use animations (small frames)
+006E,obj_006E,obj_006E_Player_Tool_006E,Player,medium,tool use animations (small frames)
+006F,obj_006F,obj_006F_Player_Tool_006F,Player,medium,tool use animations (small frames)
+0070,obj_0070,obj_0070_Player_Tool_0070,Player,medium,tool use animations (small frames)
+0071,obj_0071,obj_0071_Player_Tool_0071,Player,medium,tool use animations (small frames)
+0072,obj_0072,obj_0072_Player_Fishing_0072,Player,medium,fishing rod frames (code: fPlayerAction_Fishing / FishingBite / Reeling)
+0073,obj_0073,obj_0073_Player_Fishing_0073,Player,medium,fishing rod frames (code: fPlayerAction_Fishing / FishingBite / Reeling)
+0074,obj_0074,obj_0074_Player_Fishing_0074,Player,medium,fishing rod frames (code: fPlayerAction_Fishing / FishingBite / Reeling)
+0075,obj_0075,obj_0075_Player_Fishing_0075,Player,medium,fishing rod frames (code: fPlayerAction_Fishing / FishingBite / Reeling)
+0076,obj_0076,obj_0076_Player_Fishing_0076,Player,medium,fishing rod frames (code: fPlayerAction_Fishing / FishingBite / Reeling)
+0077,obj_0077,obj_0077_Player_Fishing_0077,Player,medium,fishing rod frames (code: fPlayerAction_Fishing / FishingBite / Reeling)
+0078,obj_0078,obj_0078_Player_Fishing_0078,Player,medium,fishing rod frames (code: fPlayerAction_Fishing / FishingBite / Reeling)
+0079,obj_0079,obj_0079_Player_Pose_0079,Player,low,pose
+007A,obj_007A,obj_007A_Player_Pose_007A,Player,low,pose
+007B,obj_007B,obj_007B_Player_Pose_007B,Player,low,pose
+007C,obj_007C,obj_007C_Player_Pose_007C,Player,low,pose
+007D,obj_007D,obj_007D_Player_Pose_007D,Player,low,pose
+007E,obj_007E,obj_007E_Player_Pose_007E,Player,low,pose
+007F,obj_007F,obj_007F_Player_Head_007F,Player,medium,head close-ups
+0080,obj_0080,obj_0080_Player_Head_0080,Player,medium,head close-ups
+0081,obj_0081,obj_0081_Player_Head_0081,Player,medium,head close-ups
+0082,obj_0082,obj_0082_Player_Head_0082,Player,medium,head close-ups
+0083,obj_0083,obj_0083_Player_Head_0083,Player,medium,head close-ups
+0084,obj_0084,obj_0084_Player_Pose_0084,Player,low,bath / spring pose
+0085,obj_0085,obj_0085_Player_Head_0085,Player,medium,head close-up
+0086,obj_0086,obj_0086_Player_Pose_0086,Player,low,pose
+0087,obj_0087,obj_0087_Player_Pose_0087,Player,low,pose
+0088,obj_0088,obj_0088_Player_Pose_0088,Player,low,pose
+0089,obj_0089,obj_0089_Player_Pose_0089,Player,low,pose
+008A,obj_008A,obj_008A_Player_Pose_008A,Player,low,pose
+008B,obj_008B,obj_008B_Player_Pose_008B,Player,low,pose
+008C,obj_008C,obj_008C_Player_Pose_008C,Player,low,pose
+008D,obj_008D,obj_008D_Player_Pose_008D,Player,low,pose
+008E,obj_008E,obj_008E_Player_Pose_008E,Player,low,pose
+008F,obj_008F,obj_008F_Player_Horse_008F,Player,medium,player riding the horse
+0090,obj_0090,obj_0090_Player_Horse_0090,Player,medium,player riding the horse
+0091,obj_0091,obj_0091_Player_Horse_0091,Player,medium,player riding the horse
+0092,obj_0092,obj_0092_Player_Horse_0092,Player,medium,player riding the horse
+0093,obj_0093,obj_0093_Player_Horse_0093,Player,medium,player riding the horse
+0094,obj_0094,obj_0094_Player_Horse_0094,Player,medium,player riding the horse
+0095,obj_0095,obj_0095_Player_Horse_0095,Player,medium,player riding the horse
+0096,obj_0096,obj_0096_Player_Horse_0096,Player,medium,player riding the horse
+0097,obj_0097,obj_0097_Player_Horse_0097,Player,medium,player riding the horse
+0098,obj_0098,obj_0098_Player_Pose_0098,Player,low,pose
+0099,obj_0099,obj_0099_Player_Pose_0099,Player,low,pose
+009A,obj_009A,obj_009A_Player_ShowItem_Empty,Player,low,player raises the hand without an item
+009B,obj_009B,obj_009B_Player_ShowItem_Syringe,Player,medium,"player holds up the item (PACTION_SHOWTOOL), shape of the held item"
+009C,obj_009C,obj_009C_Player_ShowItem_Emblem,Player,medium,"player holds up the item (PACTION_SHOWTOOL), shape of the held item"
+009D,obj_009D,obj_009D_Player_ShowItem_Bell,Player,medium,"player holds up the item (PACTION_SHOWTOOL), shape of the held item"
+009E,obj_009E,obj_009E_Player_ShowItem_BagGreen,Player,medium,"player holds up the item (PACTION_SHOWTOOL), shape of the held item"
+009F,obj_009F,obj_009F_Player_ShowItem_BagGold,Player,medium,"player holds up the item (PACTION_SHOWTOOL), shape of the held item"
+00A0,obj_00A0,obj_00A0_Player_ShowItem_BagRed,Player,medium,"player holds up the item (PACTION_SHOWTOOL), shape of the held item"
+00A1,obj_00A1,obj_00A1_Player_ShowItem_BagBrown,Player,medium,"player holds up the item (PACTION_SHOWTOOL), shape of the held item"
+00A2,obj_00A2,obj_00A2_Player_ShowItem_BagCream,Player,medium,"player holds up the item (PACTION_SHOWTOOL), shape of the held item"
+00A3,obj_00A3,obj_00A3_Player_ShowItem_Axe,Player,medium,"player holds up the item (PACTION_SHOWTOOL), shape of the held item"
+00A4,obj_00A4,obj_00A4_Player_ShowItem_Hammer,Player,medium,"player holds up the item (PACTION_SHOWTOOL), shape of the held item"
+00A5,obj_00A5,obj_00A5_Player_ShowItem_Hoe,Player,medium,"player holds up the item (PACTION_SHOWTOOL), shape of the held item"
+00A6,obj_00A6,obj_00A6_Player_ShowItem_Sickle,Player,medium,"player holds up the item (PACTION_SHOWTOOL), shape of the held item"
+00A7,obj_00A7,obj_00A7_Player_ShowItem_WateringCan,Player,medium,"player holds up the item (PACTION_SHOWTOOL), shape of the held item"
+00A8,obj_00A8,obj_00A8_Player_ShowItem_Paint,Player,medium,"player holds up the item (PACTION_SHOWTOOL), shape of the held item"
+00A9,obj_00A9,obj_00A9_Player_ShowItem_Milker,Player,medium,"player holds up the item (PACTION_SHOWTOOL), shape of the held item"
+00AA,obj_00AA,obj_00AA_Player_ShowItem_MilkPail,Player,medium,"player holds up the item (PACTION_SHOWTOOL), shape of the held item"
+00AB,obj_00AB,obj_00AB_Player_ShowItem_Feather,Player,medium,"player holds up the item (PACTION_SHOWTOOL), shape of the held item"
+00AC,obj_00AC,obj_00AC_Player_ShowItem_BoxEmblem,Player,medium,"player holds up the item (PACTION_SHOWTOOL), shape of the held item"
+00AD,obj_00AD,obj_00AD_Player_ShowItem_BoxChick,Player,medium,"player holds up the item (PACTION_SHOWTOOL), shape of the held item"
+00AE,obj_00AE,obj_00AE_Player_ShowItem_Sprout,Player,medium,"player holds up the item (PACTION_SHOWTOOL), shape of the held item"
+00AF,obj_00AF,obj_00AF_Player_ShowItem_GoldSickle,Player,medium,"player holds up the item (PACTION_SHOWTOOL), shape of the held item"
+00B0,obj_00B0,obj_00B0_Player_ShowItem_GoldHoe,Player,medium,"player holds up the item (PACTION_SHOWTOOL), shape of the held item"
+00B1,obj_00B1,obj_00B1_Player_ShowItem_GoldAxe,Player,medium,"player holds up the item (PACTION_SHOWTOOL), shape of the held item"
+00B2,obj_00B2,obj_00B2_Player_ShowItem_GoldHammer,Player,medium,"player holds up the item (PACTION_SHOWTOOL), shape of the held item"
+00B3,obj_00B3,obj_00B3_Player_ShowItem_GemGreen,Player,medium,"player holds up the item (PACTION_SHOWTOOL), shape of the held item"
+00B4,obj_00B4,obj_00B4_Item_Gem_Dropped,Item_Gem,low,"Dropped object of carried item $28 (shares icon and arcs with the diamond (item $40)), list position per fCarried layout"
+00B5,obj_00B5,obj_00B5_Player_Sparkle_Stand,Player,low,player with sparkles
+00B6,obj_00B6,obj_00B6_Fx_Particles_00B6,Fx,low,small particles
+00B7,obj_00B7,obj_00B7_Item_GrassBig_Dropped,Item_GrassBig,medium,"Dropped object of carried item $09 (leaf-pile icon, remains = leaf object $00B7), list position per fCarried layout"
+00B8,obj_00B8,obj_00B8_Fx_Dust_00B8,Fx,low,brown particles
+00B9,obj_00B9,obj_00B9_Fx_FishLeap_00B9,Fx,medium,leaping fish
+00BA,obj_00BA,obj_00BA_Item_Fish_Dropped,Item_Fish,medium,"Dropped object of carried item $07 (table label), list position per fCarried layout"
+00BB,obj_00BB,obj_00BB_Item_Fish_Icon,Item_Fish,high,icon of carried item $07 (table label)
+00BC,obj_00BC,obj_00BC_Item_ChickenWindMeasured_ArcB_1,Item_ChickenWindMeasured,medium,"ArcB_1 object of carried item $24 (table label (sic), icon = chicken), list position per fCarried layout"
+00BD,obj_00BD,obj_00BD_Item_ChickenWindMeasured_Big,Item_ChickenWindMeasured,medium,"Big object of carried item $24 (table label (sic), icon = chicken), list position per fCarried layout"
+00BE,obj_00BE,obj_00BE_Fx_Streak_00BE,Fx,low,blue streak
+00BF,obj_00BF,obj_00BF_Fx_CoinSpin,Fx,medium,gold coin spinning (AI table L140)
+00C0,obj_00C0,obj_00C0_Fx_MoneyBag_00C0,Fx,low,money pouch frames
+00C1,obj_00C1,obj_00C1_Item_FodderGrass,Item,low,green fodder
+00C2,obj_00C2,obj_00C2_Item_FodderHay,Item,low,yellow fodder
+00C3,obj_00C3,obj_00C3_Item_Feed_Icon,Item_Feed,high,icon of carried item $1A (table label)
+00C4,obj_00C4,obj_00C4_Item_Feed_Dropped,Item_Feed,medium,"Dropped object of carried item $1A (table label), list position per fCarried layout"
+00C5,obj_00C5,obj_00C5_Item_BootRed,Item,low,red boot
+00C6,obj_00C6,obj_00C6_Item_Unk_00C6,Item,low,teal pail / helmet shape
+00C7,obj_00C7,obj_00C7_Item_FeatherWhite,Item,low,white feather
+00C8,obj_00C8,obj_00C8_Item_StoneGrey_Dropped,Item_StoneGrey,medium,"Dropped object of carried item $0D (rock icon, remains = rubble object $00C8), list position per fCarried layout"
+00C9,obj_00C9,obj_00C9_Fx_RubbleB,Fx,medium,rubble
+00CA,obj_00CA,obj_00CA_Fx_Splash,Fx,medium,water splash frames
+00CB,obj_00CB,obj_00CB_Fx_Stars,Fx,medium,star sparkles
+00CC,obj_00CC,obj_00CC_Item_Medicide_Icon,Item_Medicide,high,icon of carried item $32 (EITEM_MEDICIDE + $29)
+00CD,obj_00CD,obj_00CD_Item_MiraclePotion_Icon,Item_MiraclePotion,high,icon of carried item $33 (EITEM_MIRACLEPOTION + $29)
+00CE,obj_00CE,obj_00CE_Item_Bell_Icon,Item_Bell,high,icon of carried item $34 (EITEM_BELL + $29)
+00CF,obj_00CF,obj_00CF_Item_SeedBagGrass_Icon,Item_SeedBagGrass,high,icon of carried item $35 (EITEM_GRASSSEED + $29)
+00D0,obj_00D0,obj_00D0_Item_SeedBagCorn_Icon,Item_SeedBagCorn,high,icon of carried item $2E (EITEM_CORNSEED + $29)
+00D1,obj_00D1,obj_00D1_Item_SeedBagTomato_Icon,Item_SeedBagTomato,high,icon of carried item $2F (EITEM_TOMATOSEED + $29)
+00D2,obj_00D2,obj_00D2_Item_SeedBagPotato_Icon,Item_SeedBagPotato,high,icon of carried item $30 (EITEM_POTATOSEED + $29)
+00D3,obj_00D3,obj_00D3_Item_SeedBagTurnip_Icon,Item_SeedBagTurnip,high,icon of carried item $31 (EITEM_TURNIPSEED + $29)
+00D4,obj_00D4,obj_00D4_Item_Paint_Icon,Item_Paint,high,icon of carried item $36 (EITEM_PAINT + $29)
+00D5,obj_00D5,obj_00D5_Item_Milker_Icon,Item_Milker,high,icon of carried item $37 (EITEM_MILKER + $29)
+00D6,obj_00D6,obj_00D6_Item_Brush_Icon,Item_Brush,high,icon of carried item $38 (EITEM_BRUSH + $29)
+00D7,obj_00D7,obj_00D7_Item_WateringCan_Icon,Item_WateringCan,high,icon of carried item $39 (EITEM_WATERINGCAN + $29)
+00D8,obj_00D8,obj_00D8_Item_Sickle_Icon,Item_Sickle,high,icon of carried item $2A (EITEM_SICKLE + $29)
+00D9,obj_00D9,obj_00D9_Item_Hoe_Icon,Item_Hoe,high,icon of carried item $2B (EITEM_HOE + $29)
+00DA,obj_00DA,obj_00DA_Item_Hammer_Icon,Item_Hammer,high,icon of carried item $2C (EITEM_HAMMER + $29)
+00DB,obj_00DB,obj_00DB_Item_Axe_Icon,Item_Axe,high,icon of carried item $2D (EITEM_AXE + $29)
+00DC,obj_00DC,obj_00DC_Item_BlueFeather_Icon,Item_BlueFeather,high,icon of carried item $41 (EITEM_BLUEFEATHER + $29)
+00DD,obj_00DD,obj_00DD_Item_CowFeed_Icon,Item_CowFeed,high,icon of carried item $43 (EITEM_COWFEED + $29)
+00DE,obj_00DE,obj_00DE_Item_ChickenFeed_Icon,Item_ChickenFeed,high,icon of carried item $42 (EITEM_CHICKENFEED + $29)
+00DF,obj_00DF,obj_00DF_Item_Sprinkler_Icon,Item_Sprinkler,high,icon of carried item $3E (EITEM_SPRINKLER + $29)
+00E0,obj_00E0,obj_00E0_Item_GoldSickle_Icon,Item_GoldSickle,high,icon of carried item $3A (EITEM_GOLDSICKLE + $29)
+00E1,obj_00E1,obj_00E1_Item_GoldHoe_Icon,Item_GoldHoe,high,icon of carried item $3B (EITEM_GOLDHOE + $29)
+00E2,obj_00E2,obj_00E2_Item_GoldAxe_Icon,Item_GoldAxe,high,icon of carried item $3D (EITEM_GOLDAXE + $29)
+00E3,obj_00E3,obj_00E3_Item_GoldHammer_Icon,Item_GoldHammer,high,icon of carried item $3C (EITEM_GOLDHAMMER + $29)
+00E4,obj_00E4,obj_00E4_Item_BeanstalkSeed_Icon,Item_BeanstalkSeed,high,icon of carried item $3F (EITEM_BEANSTALKSEED + $29)
+00E5,obj_00E5,obj_00E5_Item_BlueDiamond_Icon,Item_BlueDiamond,high,icon of carried item $40 (EITEM_BLUEDIAMOND + $29)
+00E6,obj_00E6,obj_00E6_Item_Unk_00E6,Item,low,plant sprig
+00E7,obj_00E7,obj_00E7_Item_Lumber_Icon,Item_Lumber,medium,icon of carried item $0F (log icon)
+00E8,obj_00E8,obj_00E8_Item_GrassBig_Icon,Item_GrassBig,medium,"icon of carried item $09 (leaf-pile icon, remains = leaf object $00B7)"
+00E9,obj_00E9,obj_00E9_Item_GrassSmall_Icon,Item_GrassSmall,medium,"icon of carried item $0A (leaf icon, remains = leaf object $00B7)"
+00EA,obj_00EA,obj_00EA_Item_StoneGrey_Icon,Item_StoneGrey,medium,"icon of carried item $0D (rock icon, remains = rubble object $00C8)"
+00EB,obj_00EB,obj_00EB_Item_StoneMossy_Icon,Item_StoneMossy,medium,"icon of carried item $0E (mossy rock icon, remains = rubble object $00C8)"
+00EC,obj_00EC,obj_00EC_Item_Corn_Icon,Item_Corn,high,icon of carried item $10 (table label)
+00ED,obj_00ED,obj_00ED_Item_Tomato_Icon,Item_Tomato,high,icon of carried item $11 (table label)
+00EE,obj_00EE,obj_00EE_Item_Turnip_Icon,Item_Turnip,high,icon of carried item $13 (table label)
+00EF,obj_00EF,obj_00EF_Item_Potato_Icon,Item_Potato,high,icon of carried item $12 (table label)
+00F0,obj_00F0,obj_00F0_Item_MilkLarge_Icon,Item_MilkLarge,high,icon of carried item $17 (table label)
+00F1,obj_00F1,obj_00F1_Item_MilkMedium_Icon,Item_MilkMedium,high,icon of carried item $16 (table label)
+00F2,obj_00F2,obj_00F2_Item_MilkSmall_Icon,Item_MilkSmall,high,icon of carried item $15 (table label)
+00F3,obj_00F3,obj_00F3_Item_Egg_Icon,Item_Egg,high,icon of carried item $14 (table label; enum CITEM_EGG)
+00F4,obj_00F4,obj_00F4_Item_WildGrape_Icon,Item_WildGrape,high,icon of carried item $03 (table label)
+00F5,obj_00F5,obj_00F5_Item_BerryStrongSmell_Icon,Item_BerryStrongSmell,high,icon of carried item $04 (table label)
+00F6,obj_00F6,obj_00F6_Item_Mushroom_Icon,Item_Mushroom,high,icon of carried item $01 (table label)
+00F7,obj_00F7,obj_00F7_Item_PoisonMushroom_Icon,Item_PoisonMushroom,high,icon of carried item $02 (table label)
+00F8,obj_00F8,obj_00F8_Item_MoonFlower_Icon,Item_MoonFlower,high,icon of carried item $05 (table label)
+00F9,obj_00F9,obj_00F9_Item_Cake_Icon,Item_Cake,high,icon of carried item $06 (table label)
+00FA,obj_00FA,obj_00FA_Item_Herb_Icon,Item_Herb,high,icon of carried item $18 (table label)
+00FB,obj_00FB,obj_00FB_Item_Flower_Icon,Item_Flower,high,icon of carried item $19 (table label)
+00FC,obj_00FC,obj_00FC_Item_Corn_Dropped,Item_Corn,medium,"Dropped object of carried item $10 (table label), list position per fCarried layout"
+00FD,obj_00FD,obj_00FD_Item_Tomato_Dropped,Item_Tomato,medium,"Dropped object of carried item $11 (table label), list position per fCarried layout"
+00FE,obj_00FE,obj_00FE_Item_Turnip_Dropped,Item_Turnip,medium,"Dropped object of carried item $13 (table label), list position per fCarried layout"
+00FF,obj_00FF,obj_00FF_Item_Potato_Dropped,Item_Potato,medium,"Dropped object of carried item $12 (table label), list position per fCarried layout"
+0100,obj_0100,obj_0100_Item_MilkLarge_Dropped,Item_MilkLarge,medium,"Dropped object of carried item $17 (table label), list position per fCarried layout"
+0101,obj_0101,obj_0101_Item_MilkMedium_Dropped,Item_MilkMedium,medium,"Dropped object of carried item $16 (table label), list position per fCarried layout"
+0102,obj_0102,obj_0102_Item_MilkSmall_Dropped,Item_MilkSmall,medium,"Dropped object of carried item $15 (table label), list position per fCarried layout"
+0103,obj_0103,obj_0103_Item_Egg_Dropped,Item_Egg,medium,"Dropped object of carried item $14 (table label; enum CITEM_EGG), list position per fCarried layout"
+0104,obj_0104,obj_0104_Item_WildGrape_Dropped,Item_WildGrape,medium,"Dropped object of carried item $03 (table label), list position per fCarried layout"
+0105,obj_0105,obj_0105_Item_BerryStrongSmell_Dropped,Item_BerryStrongSmell,medium,"Dropped object of carried item $04 (table label), list position per fCarried layout"
+0106,obj_0106,obj_0106_Item_Mushroom_Dropped,Item_Mushroom,medium,"Dropped object of carried item $01 (table label), list position per fCarried layout"
+0107,obj_0107,obj_0107_Item_PoisonMushroom_Dropped,Item_PoisonMushroom,medium,"Dropped object of carried item $02 (table label), list position per fCarried layout"
+0108,obj_0108,obj_0108_Item_MoonFlower_Dropped,Item_MoonFlower,medium,"Dropped object of carried item $05 (table label), list position per fCarried layout"
+0109,obj_0109,obj_0109_Item_Cake_Dropped,Item_Cake,medium,"Dropped object of carried item $06 (table label), list position per fCarried layout"
+010A,obj_010A,obj_010A_Item_Herb_Dropped,Item_Herb,medium,"Dropped object of carried item $18 (table label), list position per fCarried layout"
+010B,obj_010B,obj_010B_Item_PerfumeGreen_Icon,Item_PerfumeGreen,high,icon of carried item $1B (table label; enum EITEM_PERFUMEGREEN)
+010C,obj_010C,obj_010C_Item_PerfumeRed_Icon,Item_PerfumeRed,high,icon of carried item $1C (table label)
+010D,obj_010D,obj_010D_Item_PerfumeBlue_Icon,Item_PerfumeBlue,high,icon of carried item $1D (table label)
+010E,obj_010E,obj_010E_Item_EggRed_Icon,Item_EggRed,high,icon of carried item $1E (table label)
+010F,obj_010F,obj_010F_Item_EggLightPurple_Icon,Item_EggLightPurple,high,icon of carried item $1F (table label)
+0110,obj_0110,obj_0110_Item_EggBlue_Icon,Item_EggBlue,high,icon of carried item $20 (table label)
+0111,obj_0111,obj_0111_Item_EggPurple_Icon,Item_EggPurple,high,icon of carried item $21 (table label)
+0112,obj_0112,obj_0112_Item_EggGreen_Icon,Item_EggGreen,high,icon of carried item $22 (table label)
+0113,obj_0113,obj_0113_Item_PerfumeGreen_Dropped,Item_PerfumeGreen,medium,"Dropped object of carried item $1B (table label; enum EITEM_PERFUMEGREEN), list position per fCarried layout"
+0114,obj_0114,obj_0114_Item_PerfumeRed_Dropped,Item_PerfumeRed,medium,"Dropped object of carried item $1C (table label), list position per fCarried layout"
+0115,obj_0115,obj_0115_Item_PerfumeBlue_Dropped,Item_PerfumeBlue,medium,"Dropped object of carried item $1D (table label), list position per fCarried layout"
+0116,obj_0116,obj_0116_Item_Unk_0116,Item,low,single item icons without carried-item entry
+0117,obj_0117,obj_0117_Item_ChickenWindMeasured_Icon,Item_ChickenWindMeasured,medium,"icon of carried item $24 (table label (sic), icon = chicken)"
+0118,obj_0118,obj_0118_Item_Unk_0118,Item,low,single item icons without carried-item entry
+0119,obj_0119,obj_0119_Item_Unk_0119,Item,low,single item icons without carried-item entry
+011A,obj_011A,obj_011A_Item_Unk_011A,Item,low,single item icons without carried-item entry
+011B,obj_011B,obj_011B_Item_StoneGrey_ArcA_0,Item_StoneGrey,medium,"ArcA_0 object of carried item $0D (rock icon, remains = rubble object $00C8), list position per fCarried layout"
+011C,obj_011C,obj_011C_Item_StoneGrey_ArcA_1,Item_StoneGrey,medium,"ArcA_1 object of carried item $0D (rock icon, remains = rubble object $00C8), list position per fCarried layout"
+011D,obj_011D,obj_011D_Item_StoneGrey_ArcA_2,Item_StoneGrey,medium,"ArcA_2 object of carried item $0D (rock icon, remains = rubble object $00C8), list position per fCarried layout"
+011E,obj_011E,obj_011E_Item_StoneGrey_ArcB_0,Item_StoneGrey,medium,"ArcB_0 object of carried item $0D (rock icon, remains = rubble object $00C8), list position per fCarried layout"
+011F,obj_011F,obj_011F_Item_StoneGrey_ArcB_1,Item_StoneGrey,medium,"ArcB_1 object of carried item $0D (rock icon, remains = rubble object $00C8), list position per fCarried layout"
+0120,obj_0120,obj_0120_Item_StoneGrey_ArcB_2,Item_StoneGrey,medium,"ArcB_2 object of carried item $0D (rock icon, remains = rubble object $00C8), list position per fCarried layout"
+0121,obj_0121,obj_0121_Item_StoneGrey_Big,Item_StoneGrey,medium,"Big object of carried item $0D (rock icon, remains = rubble object $00C8), list position per fCarried layout"
+0122,obj_0122,obj_0122_Item_StoneGrey_ArcLong,Item_StoneGrey,medium,"ArcLong object of carried item $0D (rock icon, remains = rubble object $00C8), list position per fCarried layout"
+0123,obj_0123,obj_0123_Item_GrassBig_ArcA_0,Item_GrassBig,medium,"ArcA_0 object of carried item $09 (leaf-pile icon, remains = leaf object $00B7), list position per fCarried layout"
+0124,obj_0124,obj_0124_Item_GrassBig_ArcA_1,Item_GrassBig,medium,"ArcA_1 object of carried item $09 (leaf-pile icon, remains = leaf object $00B7), list position per fCarried layout"
+0125,obj_0125,obj_0125_Item_GrassBig_ArcA_2,Item_GrassBig,medium,"ArcA_2 object of carried item $09 (leaf-pile icon, remains = leaf object $00B7), list position per fCarried layout"
+0126,obj_0126,obj_0126_Item_GrassBig_ArcB_0,Item_GrassBig,medium,"ArcB_0 object of carried item $09 (leaf-pile icon, remains = leaf object $00B7), list position per fCarried layout"
+0127,obj_0127,obj_0127_Item_GrassBig_ArcB_1,Item_GrassBig,medium,"ArcB_1 object of carried item $09 (leaf-pile icon, remains = leaf object $00B7), list position per fCarried layout"
+0128,obj_0128,obj_0128_Item_GrassBig_ArcB_2,Item_GrassBig,medium,"ArcB_2 object of carried item $09 (leaf-pile icon, remains = leaf object $00B7), list position per fCarried layout"
+0129,obj_0129,obj_0129_Item_GrassBig_Big,Item_GrassBig,medium,"Big object of carried item $09 (leaf-pile icon, remains = leaf object $00B7), list position per fCarried layout"
+012A,obj_012A,obj_012A_Item_GrassBig_ArcLong,Item_GrassBig,medium,"ArcLong object of carried item $09 (leaf-pile icon, remains = leaf object $00B7), list position per fCarried layout"
+012B,obj_012B,obj_012B_Item_GrassSmall_ArcA_0,Item_GrassSmall,medium,"ArcA_0 object of carried item $0A (leaf icon, remains = leaf object $00B7), list position per fCarried layout"
+012C,obj_012C,obj_012C_Item_GrassSmall_ArcA_1,Item_GrassSmall,medium,"ArcA_1 object of carried item $0A (leaf icon, remains = leaf object $00B7), list position per fCarried layout"
+012D,obj_012D,obj_012D_Item_GrassSmall_ArcA_2,Item_GrassSmall,medium,"ArcA_2 object of carried item $0A (leaf icon, remains = leaf object $00B7), list position per fCarried layout"
+012E,obj_012E,obj_012E_Item_GrassSmall_ArcB_0,Item_GrassSmall,medium,"ArcB_0 object of carried item $0A (leaf icon, remains = leaf object $00B7), list position per fCarried layout"
+012F,obj_012F,obj_012F_Item_GrassSmall_ArcB_1,Item_GrassSmall,medium,"ArcB_1 object of carried item $0A (leaf icon, remains = leaf object $00B7), list position per fCarried layout"
+0130,obj_0130,obj_0130_Item_GrassSmall_ArcB_2,Item_GrassSmall,medium,"ArcB_2 object of carried item $0A (leaf icon, remains = leaf object $00B7), list position per fCarried layout"
+0131,obj_0131,obj_0131_Item_GrassSmall_Big,Item_GrassSmall,medium,"Big object of carried item $0A (leaf icon, remains = leaf object $00B7), list position per fCarried layout"
+0132,obj_0132,obj_0132_Item_GrassSmall_ArcLong,Item_GrassSmall,medium,"ArcLong object of carried item $0A (leaf icon, remains = leaf object $00B7), list position per fCarried layout"
+0133,obj_0133,obj_0133_Item_StoneMossy_ArcA_0,Item_StoneMossy,medium,"ArcA_0 object of carried item $0E (mossy rock icon, remains = rubble object $00C8), list position per fCarried layout"
+0134,obj_0134,obj_0134_Item_StoneMossy_ArcA_1,Item_StoneMossy,medium,"ArcA_1 object of carried item $0E (mossy rock icon, remains = rubble object $00C8), list position per fCarried layout"
+0135,obj_0135,obj_0135_Item_StoneMossy_ArcA_2,Item_StoneMossy,medium,"ArcA_2 object of carried item $0E (mossy rock icon, remains = rubble object $00C8), list position per fCarried layout"
+0136,obj_0136,obj_0136_Item_StoneMossy_ArcB_0,Item_StoneMossy,medium,"ArcB_0 object of carried item $0E (mossy rock icon, remains = rubble object $00C8), list position per fCarried layout"
+0137,obj_0137,obj_0137_Item_StoneMossy_ArcB_1,Item_StoneMossy,medium,"ArcB_1 object of carried item $0E (mossy rock icon, remains = rubble object $00C8), list position per fCarried layout"
+0138,obj_0138,obj_0138_Item_StoneMossy_ArcB_2,Item_StoneMossy,medium,"ArcB_2 object of carried item $0E (mossy rock icon, remains = rubble object $00C8), list position per fCarried layout"
+0139,obj_0139,obj_0139_Item_StoneMossy_Big,Item_StoneMossy,medium,"Big object of carried item $0E (mossy rock icon, remains = rubble object $00C8), list position per fCarried layout"
+013A,obj_013A,obj_013A_Item_StoneMossy_ArcLong,Item_StoneMossy,medium,"ArcLong object of carried item $0E (mossy rock icon, remains = rubble object $00C8), list position per fCarried layout"
+013B,obj_013B,obj_013B_Item_Lumber_ArcA_0,Item_Lumber,medium,"ArcA_0 object of carried item $0F (log icon), list position per fCarried layout"
+013C,obj_013C,obj_013C_Item_Lumber_ArcA_1,Item_Lumber,medium,"ArcA_1 object of carried item $0F (log icon), list position per fCarried layout"
+013D,obj_013D,obj_013D_Item_Lumber_ArcA_2,Item_Lumber,medium,"ArcA_2 object of carried item $0F (log icon), list position per fCarried layout"
+013E,obj_013E,obj_013E_Item_Lumber_ArcB_0,Item_Lumber,medium,"ArcB_0 object of carried item $0F (log icon), list position per fCarried layout"
+013F,obj_013F,obj_013F_Item_Lumber_ArcB_1,Item_Lumber,medium,"ArcB_1 object of carried item $0F (log icon), list position per fCarried layout"
+0140,obj_0140,obj_0140_Item_Lumber_ArcB_2,Item_Lumber,medium,"ArcB_2 object of carried item $0F (log icon), list position per fCarried layout"
+0141,obj_0141,obj_0141_Item_Lumber_Big,Item_Lumber,medium,"Big object of carried item $0F (log icon), list position per fCarried layout"
+0142,obj_0142,obj_0142_Item_Lumber_ArcLong,Item_Lumber,medium,"ArcLong object of carried item $0F (log icon), list position per fCarried layout"
+0143,obj_0143,obj_0143_Item_Medicide_Arc_0,Item_Medicide,medium,arc animation object 0 of carried item $32
+0144,obj_0144,obj_0144_Item_Medicide_Arc_1,Item_Medicide,medium,arc animation object 1 of carried item $32
+0145,obj_0145,obj_0145_Item_Medicide_Arc_2,Item_Medicide,medium,arc animation object 2 of carried item $32
+0146,obj_0146,obj_0146_Item_MiraclePotion_Arc_0,Item_MiraclePotion,medium,arc animation object 0 of carried item $33
+0147,obj_0147,obj_0147_Item_MiraclePotion_Arc_1,Item_MiraclePotion,medium,arc animation object 1 of carried item $33
+0148,obj_0148,obj_0148_Item_MiraclePotion_Arc_2,Item_MiraclePotion,medium,arc animation object 2 of carried item $33
+0149,obj_0149,obj_0149_Item_Bell_Arc_0,Item_Bell,medium,arc animation object 0 of carried item $34
+014A,obj_014A,obj_014A_Item_Bell_Arc_1,Item_Bell,medium,arc animation object 1 of carried item $34
+014B,obj_014B,obj_014B_Item_Bell_Arc_2,Item_Bell,medium,arc animation object 2 of carried item $34
+014C,obj_014C,obj_014C_Item_SeedBagGrass_Arc_0,Item_SeedBagGrass,medium,arc animation object 0 of carried item $35
+014D,obj_014D,obj_014D_Item_SeedBagGrass_Arc_1,Item_SeedBagGrass,medium,arc animation object 1 of carried item $35
+014E,obj_014E,obj_014E_Item_SeedBagGrass_Arc_2,Item_SeedBagGrass,medium,arc animation object 2 of carried item $35
+014F,obj_014F,obj_014F_Item_SeedBagCorn_Arc_0,Item_SeedBagCorn,medium,arc animation object 0 of carried item $2E
+0150,obj_0150,obj_0150_Item_SeedBagCorn_Arc_1,Item_SeedBagCorn,medium,arc animation object 1 of carried item $2E
+0151,obj_0151,obj_0151_Item_SeedBagCorn_Arc_2,Item_SeedBagCorn,medium,arc animation object 2 of carried item $2E
+0152,obj_0152,obj_0152_Item_SeedBagTomato_Arc_0,Item_SeedBagTomato,medium,arc animation object 0 of carried item $2F
+0153,obj_0153,obj_0153_Item_SeedBagTomato_Arc_1,Item_SeedBagTomato,medium,arc animation object 1 of carried item $2F
+0154,obj_0154,obj_0154_Item_SeedBagTomato_Arc_2,Item_SeedBagTomato,medium,arc animation object 2 of carried item $2F
+0155,obj_0155,obj_0155_Item_SeedBagPotato_Arc_0,Item_SeedBagPotato,medium,arc animation object 0 of carried item $30
+0156,obj_0156,obj_0156_Item_SeedBagPotato_Arc_1,Item_SeedBagPotato,medium,arc animation object 1 of carried item $30
+0157,obj_0157,obj_0157_Item_SeedBagPotato_Arc_2,Item_SeedBagPotato,medium,arc animation object 2 of carried item $30
+0158,obj_0158,obj_0158_Item_SeedBagTurnip_Arc_0,Item_SeedBagTurnip,medium,arc animation object 0 of carried item $31
+0159,obj_0159,obj_0159_Item_SeedBagTurnip_Arc_1,Item_SeedBagTurnip,medium,arc animation object 1 of carried item $31
+015A,obj_015A,obj_015A_Item_SeedBagTurnip_Arc_2,Item_SeedBagTurnip,medium,arc animation object 2 of carried item $31
+015B,obj_015B,obj_015B_Item_Paint_Arc_0,Item_Paint,medium,arc animation object 0 of carried item $36
+015C,obj_015C,obj_015C_Item_Paint_Arc_1,Item_Paint,medium,arc animation object 1 of carried item $36
+015D,obj_015D,obj_015D_Item_Paint_Arc_2,Item_Paint,medium,arc animation object 2 of carried item $36
+015E,obj_015E,obj_015E_Item_Milker_Arc_0,Item_Milker,medium,arc animation object 0 of carried item $37
+015F,obj_015F,obj_015F_Item_Milker_Arc_1,Item_Milker,medium,arc animation object 1 of carried item $37
+0160,obj_0160,obj_0160_Item_Milker_Arc_2,Item_Milker,medium,arc animation object 2 of carried item $37
+0161,obj_0161,obj_0161_Item_Brush_Arc_0,Item_Brush,medium,arc animation object 0 of carried item $38
+0162,obj_0162,obj_0162_Item_Brush_Arc_1,Item_Brush,medium,arc animation object 1 of carried item $38
+0163,obj_0163,obj_0163_Item_Brush_Arc_2,Item_Brush,medium,arc animation object 2 of carried item $38
+0164,obj_0164,obj_0164_Item_WateringCan_Arc_0,Item_WateringCan,medium,arc animation object 0 of carried item $39
+0165,obj_0165,obj_0165_Item_WateringCan_Arc_1,Item_WateringCan,medium,arc animation object 1 of carried item $39
+0166,obj_0166,obj_0166_Item_WateringCan_Arc_2,Item_WateringCan,medium,arc animation object 2 of carried item $39
+0167,obj_0167,obj_0167_Item_Sickle_Arc_0,Item_Sickle,medium,arc animation object 0 of carried item $2A
+0168,obj_0168,obj_0168_Item_Sickle_Arc_1,Item_Sickle,medium,arc animation object 1 of carried item $2A
+0169,obj_0169,obj_0169_Item_Sickle_Arc_2,Item_Sickle,medium,arc animation object 2 of carried item $2A
+016A,obj_016A,obj_016A_Item_Hoe_Arc_0,Item_Hoe,medium,arc animation object 0 of carried item $2B
+016B,obj_016B,obj_016B_Item_Hoe_Arc_1,Item_Hoe,medium,arc animation object 1 of carried item $2B
+016C,obj_016C,obj_016C_Item_Hoe_Arc_2,Item_Hoe,medium,arc animation object 2 of carried item $2B
+016D,obj_016D,obj_016D_Item_Hammer_Arc_0,Item_Hammer,medium,arc animation object 0 of carried item $2C
+016E,obj_016E,obj_016E_Item_Hammer_Arc_1,Item_Hammer,medium,arc animation object 1 of carried item $2C
+016F,obj_016F,obj_016F_Item_Hammer_Arc_2,Item_Hammer,medium,arc animation object 2 of carried item $2C
+0170,obj_0170,obj_0170_Item_Axe_Arc_0,Item_Axe,medium,arc animation object 0 of carried item $2D
+0171,obj_0171,obj_0171_Item_Axe_Arc_1,Item_Axe,medium,arc animation object 1 of carried item $2D
+0172,obj_0172,obj_0172_Item_Axe_Arc_2,Item_Axe,medium,arc animation object 2 of carried item $2D
+0173,obj_0173,obj_0173_Item_CowFeed_Arc_0,Item_CowFeed,medium,arc animation object 0 of carried item $43
+0174,obj_0174,obj_0174_Item_CowFeed_Arc_1,Item_CowFeed,medium,arc animation object 1 of carried item $43
+0175,obj_0175,obj_0175_Item_CowFeed_Arc_2,Item_CowFeed,medium,arc animation object 2 of carried item $43
+0176,obj_0176,obj_0176_Item_ChickenFeed_Arc_0,Item_ChickenFeed,medium,arc animation object 0 of carried item $42
+0177,obj_0177,obj_0177_Item_ChickenFeed_Arc_1,Item_ChickenFeed,medium,arc animation object 1 of carried item $42
+0178,obj_0178,obj_0178_Item_ChickenFeed_Arc_2,Item_ChickenFeed,medium,arc animation object 2 of carried item $42
+0179,obj_0179,obj_0179_Item_Sprinkler_Arc_0,Item_Sprinkler,medium,arc animation object 0 of carried item $3E
+017A,obj_017A,obj_017A_Item_Sprinkler_Arc_1,Item_Sprinkler,medium,arc animation object 1 of carried item $3E
+017B,obj_017B,obj_017B_Item_Sprinkler_Arc_2,Item_Sprinkler,medium,arc animation object 2 of carried item $3E
+017C,obj_017C,obj_017C_Item_GoldSickle_Arc_0,Item_GoldSickle,medium,arc animation object 0 of carried item $3A
+017D,obj_017D,obj_017D_Item_GoldSickle_Arc_1,Item_GoldSickle,medium,arc animation object 1 of carried item $3A
+017E,obj_017E,obj_017E_Item_GoldSickle_Arc_2,Item_GoldSickle,medium,arc animation object 2 of carried item $3A
+017F,obj_017F,obj_017F_Item_GoldHoe_Arc_0,Item_GoldHoe,medium,arc animation object 0 of carried item $3B
+0180,obj_0180,obj_0180_Item_GoldHoe_Arc_1,Item_GoldHoe,medium,arc animation object 1 of carried item $3B
+0181,obj_0181,obj_0181_Item_GoldHoe_Arc_2,Item_GoldHoe,medium,arc animation object 2 of carried item $3B
+0182,obj_0182,obj_0182_Item_GoldAxe_Arc_0,Item_GoldAxe,medium,arc animation object 0 of carried item $3D
+0183,obj_0183,obj_0183_Item_GoldAxe_Arc_1,Item_GoldAxe,medium,arc animation object 1 of carried item $3D
+0184,obj_0184,obj_0184_Item_GoldAxe_Arc_2,Item_GoldAxe,medium,arc animation object 2 of carried item $3D
+0185,obj_0185,obj_0185_Item_GoldHammer_Arc_0,Item_GoldHammer,medium,arc animation object 0 of carried item $3C
+0186,obj_0186,obj_0186_Item_GoldHammer_Arc_1,Item_GoldHammer,medium,arc animation object 1 of carried item $3C
+0187,obj_0187,obj_0187_Item_GoldHammer_Arc_2,Item_GoldHammer,medium,arc animation object 2 of carried item $3C
+0188,obj_0188,obj_0188_Item_BlueFeather_Arc_0,Item_BlueFeather,medium,arc animation object 0 of carried item $41
+0189,obj_0189,obj_0189_Item_BeanstalkSeed_Arc_0,Item_BeanstalkSeed,medium,arc animation object 0 of carried item $3F
+018A,obj_018A,obj_018A_Item_BlueDiamond_Arc_0,Item_BlueDiamond,medium,arc animation object 0 of carried item $40
+018B,obj_018B,obj_018B_Cow_Walk_Side,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+018C,obj_018C,obj_018C_Cow_Idle_Side,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+018D,obj_018D,obj_018D_Cow_Walk_Side_018D,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+018E,obj_018E,obj_018E_Cow_Walk_Side_018E,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+018F,obj_018F,obj_018F_Cow_Walk_Side_018F,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+0190,obj_0190,obj_0190_Cow_Walk_Side_0190,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+0191,obj_0191,obj_0191_Cow_Pose_0191,Cow,low,"cow sprites (AI tables of the animal scripts, direction from the table); no table direction"
+0192,obj_0192,obj_0192_Cow_Walk_Side_0192,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+0193,obj_0193,obj_0193_Cow_Pose_0193,Cow,low,"cow sprites (AI tables of the animal scripts, direction from the table); no table direction"
+0194,obj_0194,obj_0194_Cow_Pose_0194,Cow,low,"cow sprites (AI tables of the animal scripts, direction from the table); no table direction"
+0195,obj_0195,obj_0195_Cow_Pose_0195,Cow,low,"cow sprites (AI tables of the animal scripts, direction from the table); no table direction"
+0196,obj_0196,obj_0196_Cow_Walk_Side_0196,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+0197,obj_0197,obj_0197_Cow_Idle_Side_0197,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+0198,obj_0198,obj_0198_Cow_Walk_Side_0198,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+0199,obj_0199,obj_0199_Cow_Pose_0199,Cow,low,"cow sprites (AI tables of the animal scripts, direction from the table); no table direction"
+019A,obj_019A,obj_019A_Cow_Walk_Side_019A,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+019B,obj_019B,obj_019B_Cow_Walk_Side_019B,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+019C,obj_019C,obj_019C_Cow_Idle_Down,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+019D,obj_019D,obj_019D_Cow_Pose_019D,Cow,low,"cow sprites (AI tables of the animal scripts, direction from the table); no table direction"
+019E,obj_019E,obj_019E_Cow_Idle_Down_019E,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+019F,obj_019F,obj_019F_Cow_Walk_Down,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01A0,obj_01A0,obj_01A0_Cow_Walk_Down_01A0,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01A1,obj_01A1,obj_01A1_Cow_Walk_Down_01A1,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01A2,obj_01A2,obj_01A2_Cow_Idle_Down_01A2,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01A3,obj_01A3,obj_01A3_Cow_Walk_Down_01A3,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01A4,obj_01A4,obj_01A4_Cow_Pose_01A4,Cow,low,"cow sprites (AI tables of the animal scripts, direction from the table); no table direction"
+01A5,obj_01A5,obj_01A5_Cow_Walk_Down_01A5,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01A6,obj_01A6,obj_01A6_Cow_Idle_Up,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01A7,obj_01A7,obj_01A7_Cow_Walk_Up,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01A8,obj_01A8,obj_01A8_Cow_Walk_Up_01A8,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01A9,obj_01A9,obj_01A9_Cow_Walk_Side_01A9,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01AA,obj_01AA,obj_01AA_Cow_Walk_Side_01AA,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01AB,obj_01AB,obj_01AB_Cow_Walk_Side_01AB,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01AC,obj_01AC,obj_01AC_Cow_Walk_Side_01AC,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01AD,obj_01AD,obj_01AD_Cow_Walk_Side_01AD,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01AE,obj_01AE,obj_01AE_Cow_Walk_Down_01AE,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01AF,obj_01AF,obj_01AF_Cow_Idle_Down_01AF,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01B0,obj_01B0,obj_01B0_Cow_Walk_Side_01B0,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01B1,obj_01B1,obj_01B1_Cow_Walk_Side_01B1,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01B2,obj_01B2,obj_01B2_Cow_Idle_Down_01B2,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01B3,obj_01B3,obj_01B3_Cow_Pose_01B3,Cow,low,"cow sprites (AI tables of the animal scripts, direction from the table); no table direction"
+01B4,obj_01B4,obj_01B4_Cow_Walk_Down_01B4,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01B5,obj_01B5,obj_01B5_Cow_Idle_Down_01B5,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01B6,obj_01B6,obj_01B6_Cow_Pose_01B6,Cow,low,"cow sprites (AI tables of the animal scripts, direction from the table); no table direction"
+01B7,obj_01B7,obj_01B7_Cow_Walk_Up_01B7,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01B8,obj_01B8,obj_01B8_Cow_Idle_Up_01B8,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01B9,obj_01B9,obj_01B9_Cow_Pose_01B9,Cow,low,"cow sprites (AI tables of the animal scripts, direction from the table); no table direction"
+01BA,obj_01BA,obj_01BA_Cow_Idle_Side_01BA,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01BB,obj_01BB,obj_01BB_Cow_Walk_Side_01BB,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01BC,obj_01BC,obj_01BC_Cow_Idle_Side_01BC,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01BD,obj_01BD,obj_01BD_Cow_Walk_Side_01BD,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01BE,obj_01BE,obj_01BE_Cow_Walk_Down_01BE,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01BF,obj_01BF,obj_01BF_Cow_Walk_Down_01BF,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01C0,obj_01C0,obj_01C0_Cow_Idle_Side_01C0,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01C1,obj_01C1,obj_01C1_Cow_Idle_Down_01C1,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01C2,obj_01C2,obj_01C2_Cow_Walk_Down_01C2,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01C3,obj_01C3,obj_01C3_Cow_Idle_Up_01C3,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01C4,obj_01C4,obj_01C4_Cow_Walk_Up_01C4,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01C5,obj_01C5,obj_01C5_Cow_Pose_01C5,Cow,low,"cow sprites (AI tables of the animal scripts, direction from the table); no table direction"
+01C6,obj_01C6,obj_01C6_Cow_Pose_01C6,Cow,low,"cow sprites (AI tables of the animal scripts, direction from the table); no table direction"
+01C7,obj_01C7,obj_01C7_Cow_Idle_Right,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01C8,obj_01C8,obj_01C8_Cow_Walk_Left,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01C9,obj_01C9,obj_01C9_Cow_Idle_Side_01C9,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01CA,obj_01CA,obj_01CA_Cow_Walk_Side_01CA,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01CB,obj_01CB,obj_01CB_Cow_Walk_Side_01CB,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01CC,obj_01CC,obj_01CC_Cow_Pose_01CC,Cow,low,"cow sprites (AI tables of the animal scripts, direction from the table); no table direction"
+01CD,obj_01CD,obj_01CD_Cow_Idle_Side_01CD,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01CE,obj_01CE,obj_01CE_Cow_Pose_01CE,Cow,low,"cow sprites (AI tables of the animal scripts, direction from the table); no table direction"
+01CF,obj_01CF,obj_01CF_Cow_Pose_01CF,Cow,low,"cow sprites (AI tables of the animal scripts, direction from the table); no table direction"
+01D0,obj_01D0,obj_01D0_Cow_Walk_Side_01D0,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01D1,obj_01D1,obj_01D1_Cow_Walk_Side_01D1,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01D2,obj_01D2,obj_01D2_Cow_Walk_Side_01D2,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01D3,obj_01D3,obj_01D3_Cow_Idle_Down_01D3,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01D4,obj_01D4,obj_01D4_Cow_Walk_Down_01D4,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01D5,obj_01D5,obj_01D5_Cow_Idle_Down_01D5,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01D6,obj_01D6,obj_01D6_Cow_Pose_01D6,Cow,low,"cow sprites (AI tables of the animal scripts, direction from the table); no table direction"
+01D7,obj_01D7,obj_01D7_Cow_Idle_Up_01D7,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01D8,obj_01D8,obj_01D8_Cow_Walk_Up_01D8,Cow,medium,"cow sprites (AI tables of the animal scripts, direction from the table)"
+01D9,obj_01D9,obj_01D9_Item_Dog_Icon,Item_Dog,medium,icon of carried item $27 (icon = dog)
+01DA,obj_01DA,obj_01DA_Dog_Walk_Down,Dog,medium,"yellow dog sprites (AI tables L004-L007, L165-L177)"
+01DB,obj_01DB,obj_01DB_Dog_Idle_Down,Dog,medium,"yellow dog sprites (AI tables L004-L007, L165-L177)"
+01DC,obj_01DC,obj_01DC_Dog_Idle_Down_01DC,Dog,medium,"yellow dog sprites (AI tables L004-L007, L165-L177)"
+01DD,obj_01DD,obj_01DD_Dog_Walk_Down_01DD,Dog,medium,"yellow dog sprites (AI tables L004-L007, L165-L177)"
+01DE,obj_01DE,obj_01DE_Dog_Walk_Down_01DE,Dog,medium,"yellow dog sprites (AI tables L004-L007, L165-L177)"
+01DF,obj_01DF,obj_01DF_Dog_Walk_Down_01DF,Dog,medium,"yellow dog sprites (AI tables L004-L007, L165-L177)"
+01E0,obj_01E0,obj_01E0_Dog_Idle_Up,Dog,medium,"yellow dog sprites (AI tables L004-L007, L165-L177)"
+01E1,obj_01E1,obj_01E1_Dog_Walk_Up,Dog,medium,"yellow dog sprites (AI tables L004-L007, L165-L177)"
+01E2,obj_01E2,obj_01E2_Dog_Walk_Up_01E2,Dog,medium,"yellow dog sprites (AI tables L004-L007, L165-L177)"
+01E3,obj_01E3,obj_01E3_Dog_Idle_Up_01E3,Dog,medium,"yellow dog sprites (AI tables L004-L007, L165-L177)"
+01E4,obj_01E4,obj_01E4_Dog_Walk_Up_01E4,Dog,medium,"yellow dog sprites (AI tables L004-L007, L165-L177)"
+01E5,obj_01E5,obj_01E5_Dog_Walk_Up_01E5,Dog,medium,"yellow dog sprites (AI tables L004-L007, L165-L177)"
+01E6,obj_01E6,obj_01E6_Dog_Pose_01E6,Dog,low,"yellow dog sprites (AI tables L004-L007, L165-L177); no table direction"
+01E7,obj_01E7,obj_01E7_Dog_Idle_Up_01E7,Dog,medium,"yellow dog sprites (AI tables L004-L007, L165-L177)"
+01E8,obj_01E8,obj_01E8_Dog_Idle_Side,Dog,medium,"yellow dog sprites (AI tables L004-L007, L165-L177)"
+01E9,obj_01E9,obj_01E9_Dog_Walk_Side,Dog,medium,"yellow dog sprites (AI tables L004-L007, L165-L177)"
+01EA,obj_01EA,obj_01EA_Dog_Idle_Side_01EA,Dog,medium,"yellow dog sprites (AI tables L004-L007, L165-L177)"
+01EB,obj_01EB,obj_01EB_Dog_Idle_Side_01EB,Dog,medium,"yellow dog sprites (AI tables L004-L007, L165-L177)"
+01EC,obj_01EC,obj_01EC_Dog_Walk_Side_01EC,Dog,medium,"yellow dog sprites (AI tables L004-L007, L165-L177)"
+01ED,obj_01ED,obj_01ED_Dog_Walk_Side_01ED,Dog,medium,"yellow dog sprites (AI tables L004-L007, L165-L177)"
+01EE,obj_01EE,obj_01EE_Dog_Walk_Side_01EE,Dog,medium,"yellow dog sprites (AI tables L004-L007, L165-L177)"
+01EF,obj_01EF,obj_01EF_Dog_Idle_Side_01EF,Dog,medium,"yellow dog sprites (AI tables L004-L007, L165-L177)"
+01F0,obj_01F0,obj_01F0_Dog_Walk_Side_01F0,Dog,medium,"yellow dog sprites (AI tables L004-L007, L165-L177)"
+01F1,obj_01F1,obj_01F1_Dog_Pose_01F1,Dog,low,"yellow dog sprites (AI tables L004-L007, L165-L177); no table direction"
+01F2,obj_01F2,obj_01F2_Dog_Walk_Side_01F2,Dog,medium,"yellow dog sprites (AI tables L004-L007, L165-L177)"
+01F3,obj_01F3,obj_01F3_Dog_Walk_Side_01F3,Dog,medium,"yellow dog sprites (AI tables L004-L007, L165-L177)"
+01F4,obj_01F4,obj_01F4_Dog_Idle_Side_01F4,Dog,medium,"yellow dog sprites (AI tables L004-L007, L165-L177)"
+01F5,obj_01F5,obj_01F5_Dog_Walk_Side_01F5,Dog,medium,"yellow dog sprites (AI tables L004-L007, L165-L177)"
+01F6,obj_01F6,obj_01F6_Dog_Walk_Side_01F6,Dog,medium,"yellow dog sprites (AI tables L004-L007, L165-L177)"
+01F7,obj_01F7,obj_01F7_Dog_Walk_Side_01F7,Dog,medium,"yellow dog sprites (AI tables L004-L007, L165-L177)"
+01F8,obj_01F8,obj_01F8_Dog_Walk_Side_01F8,Dog,medium,"yellow dog sprites (AI tables L004-L007, L165-L177)"
+01F9,obj_01F9,obj_01F9_Horse_Idle_Down,Horse,medium,"horse sprites (AI tables L006, L007, L178-L182)"
+01FA,obj_01FA,obj_01FA_Horse_Walk_Down,Horse,medium,"horse sprites (AI tables L006, L007, L178-L182)"
+01FB,obj_01FB,obj_01FB_Horse_Walk_Down_01FB,Horse,medium,"horse sprites (AI tables L006, L007, L178-L182)"
+01FC,obj_01FC,obj_01FC_Horse_Idle_Up,Horse,medium,"horse sprites (AI tables L006, L007, L178-L182)"
+01FD,obj_01FD,obj_01FD_Horse_Walk_Up,Horse,medium,"horse sprites (AI tables L006, L007, L178-L182)"
+01FE,obj_01FE,obj_01FE_Horse_Pose_01FE,Horse,low,"horse sprites (AI tables L006, L007, L178-L182); no table direction"
+01FF,obj_01FF,obj_01FF_Horse_Walk_Up_01FF,Horse,medium,"horse sprites (AI tables L006, L007, L178-L182)"
+0200,obj_0200,obj_0200_Horse_Idle_Side,Horse,medium,"horse sprites (AI tables L006, L007, L178-L182)"
+0201,obj_0201,obj_0201_Horse_Walk_Side,Horse,medium,"horse sprites (AI tables L006, L007, L178-L182)"
+0202,obj_0202,obj_0202_Horse_Walk_Side_0202,Horse,medium,"horse sprites (AI tables L006, L007, L178-L182)"
+0203,obj_0203,obj_0203_Horse_Walk_Side_0203,Horse,medium,"horse sprites (AI tables L006, L007, L178-L182)"
+0204,obj_0204,obj_0204_Horse_Idle_Side_0204,Horse,medium,"horse sprites (AI tables L006, L007, L178-L182)"
+0205,obj_0205,obj_0205_Horse_Walk_Side_0205,Horse,medium,"horse sprites (AI tables L006, L007, L178-L182)"
+0206,obj_0206,obj_0206_Horse_Pose_0206,Horse,low,"horse sprites (AI tables L006, L007, L178-L182); no table direction"
+0207,obj_0207,obj_0207_Horse_Pose_0207,Horse,low,"horse sprites (AI tables L006, L007, L178-L182); no table direction"
+0208,obj_0208,obj_0208_Horse_Pose_0208,Horse,low,"horse sprites (AI tables L006, L007, L178-L182); no table direction"
+0209,obj_0209,obj_0209_Foal_Idle_Down,Foal,medium,small golden horse (AI tables L129-L131)
+020A,obj_020A,obj_020A_Foal_Walk_Down,Foal,medium,small golden horse (AI tables L129-L131)
+020B,obj_020B,obj_020B_Foal_Walk_Down_020B,Foal,medium,small golden horse (AI tables L129-L131)
+020C,obj_020C,obj_020C_Foal_Idle_Up,Foal,medium,small golden horse (AI tables L129-L131)
+020D,obj_020D,obj_020D_Foal_Walk_Up,Foal,medium,small golden horse (AI tables L129-L131)
+020E,obj_020E,obj_020E_Foal_Walk_Up_020E,Foal,medium,small golden horse (AI tables L129-L131)
+020F,obj_020F,obj_020F_Foal_Idle_Side,Foal,medium,small golden horse (AI tables L129-L131)
+0210,obj_0210,obj_0210_Foal_Walk_Side,Foal,medium,small golden horse (AI tables L129-L131)
+0211,obj_0211,obj_0211_Foal_Walk_Side_0211,Foal,medium,small golden horse (AI tables L129-L131)
+0212,obj_0212,obj_0212_Item_Chicken_Icon,Item_Chicken,high,icon of carried item $25 (table label)
+0213,obj_0213,obj_0213_Chicken_Idle_Up,Chicken,medium,"white chicken (AI tables L008, L164)"
+0214,obj_0214,obj_0214_Chicken_Idle_Side,Chicken,medium,"white chicken (AI tables L008, L164)"
+0215,obj_0215,obj_0215_Chicken_Idle_Down,Chicken,medium,"white chicken (AI tables L008, L164)"
+0216,obj_0216,obj_0216_Chicken_Pose_0216,Chicken,low,"white chicken (AI tables L008, L164); no table direction"
+0217,obj_0217,obj_0217_Item_Chick_Icon,Item_Chick,high,icon of carried item $26 (table label)
+0218,obj_0218,obj_0218_Chick_Idle_Up,Chick,medium,chick (AI table L009)
+0219,obj_0219,obj_0219_Chick_Idle_Down,Chick,medium,chick (AI table L009)
+021A,obj_021A,obj_021A_ChickenGold_Idle_Down,ChickenGold,medium,yellow chicken (AI table L103)
+021B,obj_021B,obj_021B_ChickenGold_Pose_021B,ChickenGold,low,yellow chicken (AI table L103); no table direction
+021C,obj_021C,obj_021C_ChickenGold_Pose_021C,ChickenGold,low,yellow chicken (AI table L103); no table direction
+021D,obj_021D,obj_021D_ChickenGold_Pose_021D,ChickenGold,low,yellow chicken (AI table L103); no table direction
+021E,obj_021E,obj_021E_Maria_Idle_Down,Maria,medium,blue hair; AI table L011 starts script 19 (nLove_Maria)
+021F,obj_021F,obj_021F_Maria_Walk_Down,Maria,medium,blue hair; AI table L011 starts script 19 (nLove_Maria)
+0220,obj_0220,obj_0220_Maria_Idle_Up,Maria,medium,blue hair; AI table L011 starts script 19 (nLove_Maria)
+0221,obj_0221,obj_0221_Maria_Walk_Up,Maria,medium,blue hair; AI table L011 starts script 19 (nLove_Maria)
+0222,obj_0222,obj_0222_Maria_Idle_Side,Maria,medium,blue hair; AI table L011 starts script 19 (nLove_Maria)
+0223,obj_0223,obj_0223_Maria_Walk_Side,Maria,medium,blue hair; AI table L011 starts script 19 (nLove_Maria)
+0224,obj_0224,obj_0224_Maria_Idle_Down_0224,Maria,medium,blue hair; AI table L011 starts script 19 (nLove_Maria)
+0225,obj_0225,obj_0225_Maria_Pose_0225,Maria,low,blue hair; AI table L011 starts script 19 (nLove_Maria); no table direction
+0226,obj_0226,obj_0226_Ann_Idle_Down,Ann,medium,orange hair; AI table L015 starts script 1A (nLove_Ann)
+0227,obj_0227,obj_0227_Ann_Walk_Down,Ann,medium,orange hair; AI table L015 starts script 1A (nLove_Ann)
+0228,obj_0228,obj_0228_Ann_Idle_Up,Ann,medium,orange hair; AI table L015 starts script 1A (nLove_Ann)
+0229,obj_0229,obj_0229_Ann_Walk_Up,Ann,medium,orange hair; AI table L015 starts script 1A (nLove_Ann)
+022A,obj_022A,obj_022A_Ann_Idle_Side,Ann,medium,orange hair; AI table L015 starts script 1A (nLove_Ann)
+022B,obj_022B,obj_022B_Ann_Walk_Side,Ann,medium,orange hair; AI table L015 starts script 1A (nLove_Ann)
+022C,obj_022C,obj_022C_Ann_Idle_Down_022C,Ann,medium,orange hair; AI table L015 starts script 1A (nLove_Ann)
+022D,obj_022D,obj_022D_Ann_Pose_022D,Ann,low,orange hair; AI table L015 starts script 1A (nLove_Ann); no table direction
+022E,obj_022E,obj_022E_Npc_Unk_LilacGirl_Pose_022E,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+022F,obj_022F,obj_022F_Npc_Unk_LilacGirl_Idle_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0230,obj_0230,obj_0230_Maria_Broom_Idle_Up,Maria,medium,blue hair with broom (AI table L014)
+0231,obj_0231,obj_0231_Maria_Broom_Idle_Down,Maria,medium,blue hair with broom (AI table L014)
+0232,obj_0232,obj_0232_Maria_Broom_Idle_Side,Maria,medium,blue hair with broom (AI table L014)
+0233,obj_0233,obj_0233_Npc_Unk_LilacGirl_Idle_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0234,obj_0234,obj_0234_Item_Unk_Bucket_0234,Item,low,metal pail with water drops (AI table L201 / L200)
+0235,obj_0235,obj_0235_Ann_Face_0235,Ann,low,orange hair close-up (AI table L018)
+0236,obj_0236,obj_0236_Ann_Face_0236,Ann,low,orange hair close-up (AI table L018)
+0237,obj_0237,obj_0237_Ann_Face_0237,Ann,low,orange hair close-up (AI table L018)
+0238,obj_0238,obj_0238_Item_Unk_Bucket_0238,Item,low,metal pail with water drops (AI table L201 / L200)
+0239,obj_0239,obj_0239_Item_Unk_Bucket_0239,Item,low,metal pail with water drops (AI table L201 / L200)
+023A,obj_023A,obj_023A_Ellen_Pose_023A,Ellen,low,brown hair; AI table L022 starts script 1C (nLove_Ellen); no table direction
+023B,obj_023B,obj_023B_Ellen_Pose_023B,Ellen,low,brown hair; AI table L022 starts script 1C (nLove_Ellen); no table direction
+023C,obj_023C,obj_023C_Ellen_Idle_Down,Ellen,medium,brown hair; AI table L022 starts script 1C (nLove_Ellen)
+023D,obj_023D,obj_023D_Ellen_Walk_Down,Ellen,medium,brown hair; AI table L022 starts script 1C (nLove_Ellen)
+023E,obj_023E,obj_023E_Ellen_Idle_Up,Ellen,medium,brown hair; AI table L022 starts script 1C (nLove_Ellen)
+023F,obj_023F,obj_023F_Ellen_Walk_Up,Ellen,medium,brown hair; AI table L022 starts script 1C (nLove_Ellen)
+0240,obj_0240,obj_0240_Ellen_Idle_Side,Ellen,medium,brown hair; AI table L022 starts script 1C (nLove_Ellen)
+0241,obj_0241,obj_0241_Ellen_Walk_Side,Ellen,medium,brown hair; AI table L022 starts script 1C (nLove_Ellen)
+0242,obj_0242,obj_0242_Ellen_Pose_0242,Ellen,low,brown hair; AI table L022 starts script 1C (nLove_Ellen); no table direction
+0243,obj_0243,obj_0243_Ellen_Pose_0243,Ellen,low,brown hair; AI table L022 starts script 1C (nLove_Ellen); no table direction
+0244,obj_0244,obj_0244_Eve_Idle_Down,Eve,medium,blond hair; AI table L024 starts script 1D (nLove_Eve)
+0245,obj_0245,obj_0245_Eve_Walk_Down,Eve,medium,blond hair; AI table L024 starts script 1D (nLove_Eve)
+0246,obj_0246,obj_0246_Eve_Idle_Up,Eve,medium,blond hair; AI table L024 starts script 1D (nLove_Eve)
+0247,obj_0247,obj_0247_Eve_Walk_Up,Eve,medium,blond hair; AI table L024 starts script 1D (nLove_Eve)
+0248,obj_0248,obj_0248_Eve_Idle_Side,Eve,medium,blond hair; AI table L024 starts script 1D (nLove_Eve)
+0249,obj_0249,obj_0249_Eve_Walk_Side,Eve,medium,blond hair; AI table L024 starts script 1D (nLove_Eve)
+024A,obj_024A,obj_024A_Eve_Pose_024A,Eve,low,blond hair; AI table L024 starts script 1D (nLove_Eve); no table direction
+024B,obj_024B,obj_024B_Nina_Idle_Down,Nina,medium,"pink hair; by elimination of the other four, script 1B uses $0347 (kneeling)"
+024C,obj_024C,obj_024C_Nina_Walk_Down,Nina,medium,"pink hair; by elimination of the other four, script 1B uses $0347 (kneeling)"
+024D,obj_024D,obj_024D_Nina_Idle_Up,Nina,medium,"pink hair; by elimination of the other four, script 1B uses $0347 (kneeling)"
+024E,obj_024E,obj_024E_Nina_Walk_Up,Nina,medium,"pink hair; by elimination of the other four, script 1B uses $0347 (kneeling)"
+024F,obj_024F,obj_024F_Nina_Idle_Side,Nina,medium,"pink hair; by elimination of the other four, script 1B uses $0347 (kneeling)"
+0250,obj_0250,obj_0250_Nina_Walk_Side,Nina,medium,"pink hair; by elimination of the other four, script 1B uses $0347 (kneeling)"
+0251,obj_0251,obj_0251_Nina_Pose_0251,Nina,low,"pink hair; by elimination of the other four, script 1B uses $0347 (kneeling); no table direction"
+0252,obj_0252,obj_0252_Nina_Pose_0252,Nina,low,"pink hair; by elimination of the other four, script 1B uses $0347 (kneeling); no table direction"
+0253,obj_0253,obj_0253_Npc_Unk_LilacGirl_Idle_Down_0253,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0254,obj_0254,obj_0254_Npc_Unk_LilacGirl_Pose_0254,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+0255,obj_0255,obj_0255_Eve_Face_0255,Eve,low,blond hair close-up (AI table L026)
+0256,obj_0256,obj_0256_Eve_Face_0256,Eve,low,blond hair close-up (AI table L026)
+0257,obj_0257,obj_0257_Eve_Face_0257,Eve,low,blond hair close-up (AI table L026)
+0258,obj_0258,obj_0258_Npc_Unk_LilacGirl_Pose_0258,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+0259,obj_0259,obj_0259_Npc_Unk_LilacGirl_Pose_0259,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+025A,obj_025A,obj_025A_Npc_Unk_BeardedManBlue_Idle_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+025B,obj_025B,obj_025B_Npc_Unk_BeardedManBlue_Walk_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+025C,obj_025C,obj_025C_Npc_Unk_BeardedManBlue_Idle_Up,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+025D,obj_025D,obj_025D_Npc_Unk_BeardedManBlue_Walk_Up,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+025E,obj_025E,obj_025E_Npc_Unk_BeardedManBlue_Idle_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+025F,obj_025F,obj_025F_Npc_Unk_BeardedManBlue_Walk_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0260,obj_0260,obj_0260_Npc_Unk_BeardedManBlue_Pose_0260,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+0261,obj_0261,obj_0261_Npc_Unk_BeardedManBlue_Pose_0261,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+0262,obj_0262,obj_0262_Npc_Unk_BeardedManBlue_Walk_Down_0262,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0263,obj_0263,obj_0263_Npc_Unk_BeardedManBlue_Idle_Down_0263,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0264,obj_0264,obj_0264_Npc_Unk_BeardedManBlue_Walk_Down_0264,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0265,obj_0265,obj_0265_Npc_Unk_OldFarmerStrawHat_Idle_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0266,obj_0266,obj_0266_Npc_Unk_OldFarmerStrawHat_Idle_Left,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0267,obj_0267,obj_0267_Npc_Unk_OldFarmerStrawHat_Idle_Right,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0268,obj_0268,obj_0268_Npc_Unk_OldFarmerStrawHat_Pose_0268,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+0269,obj_0269,obj_0269_Npc_Unk_BlondBoyYellow_Idle_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+026A,obj_026A,obj_026A_Npc_Unk_BlondBoyYellow_Walk_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+026B,obj_026B,obj_026B_Npc_Unk_BlondBoyYellow_Idle_Up,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+026C,obj_026C,obj_026C_Npc_Unk_BlondBoyYellow_Walk_Up,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+026D,obj_026D,obj_026D_Npc_Unk_BlondBoyYellow_Idle_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+026E,obj_026E,obj_026E_Npc_Unk_BlondBoyYellow_Walk_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+026F,obj_026F,obj_026F_Npc_Unk_BlondBoyYellow_Pose_026F,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+0270,obj_0270,obj_0270_Npc_Unk_BlondManBrown_Idle_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0271,obj_0271,obj_0271_Npc_Unk_BlondManBrown_Walk_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0272,obj_0272,obj_0272_Npc_Unk_BlondManBrown_Idle_Up,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0273,obj_0273,obj_0273_Npc_Unk_BlondManBrown_Walk_Up,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0274,obj_0274,obj_0274_Npc_Unk_BlondManBrown_Idle_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0275,obj_0275,obj_0275_Npc_Unk_BlondManBrown_Walk_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0276,obj_0276,obj_0276_Npc_Unk_BlondBoyWhite_Idle_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0277,obj_0277,obj_0277_Npc_Unk_BlondBoyWhite_Walk_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0278,obj_0278,obj_0278_Npc_Unk_BlondBoyWhite_Idle_Up,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0279,obj_0279,obj_0279_Npc_Unk_BlondBoyWhite_Walk_Up,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+027A,obj_027A,obj_027A_Npc_Unk_BlondBoyWhite_Idle_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+027B,obj_027B,obj_027B_Npc_Unk_BlondBoyWhite_Walk_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+027C,obj_027C,obj_027C_Npc_Unk_OldManWhiteBeard_Idle_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+027D,obj_027D,obj_027D_Npc_Unk_OldManWhiteBeard_Walk_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+027E,obj_027E,obj_027E_Npc_Unk_OldManWhiteBeard_Idle_Up,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+027F,obj_027F,obj_027F_Npc_Unk_OldManWhiteBeard_Walk_Up,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0280,obj_0280,obj_0280_Npc_Unk_OldManWhiteBeard_Idle_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0281,obj_0281,obj_0281_Npc_Unk_OldManWhiteBeard_Walk_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0282,obj_0282,obj_0282_Npc_Unk_OldManWhiteBeard_Idle_Left,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0283,obj_0283,obj_0283_Npc_Unk_OldManWhiteBeard_Idle_Down_0283,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0284,obj_0284,obj_0284_Npc_Unk_OldManWhiteBeard_Pose_0284,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+0285,obj_0285,obj_0285_Npc_Unk_BaldMan_Idle_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0286,obj_0286,obj_0286_Npc_Unk_BaldMan_Idle_Left,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0287,obj_0287,obj_0287_Npc_Unk_BaldMan_Idle_Right,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0288,obj_0288,obj_0288_Npc_Unk_RedWizardHat_Idle_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0289,obj_0289,obj_0289_Npc_Unk_RedWizardHat_Walk_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+028A,obj_028A,obj_028A_Npc_Unk_RedWizardHat_Idle_Up,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+028B,obj_028B,obj_028B_Npc_Unk_RedWizardHat_Walk_Up,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+028C,obj_028C,obj_028C_Npc_Unk_RedWizardHat_Idle_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+028D,obj_028D,obj_028D_Npc_Unk_RedWizardHat_Walk_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+028E,obj_028E,obj_028E_Npc_Unk_RedWizardHat_Pose_028E,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+028F,obj_028F,obj_028F_Npc_Unk_BrownHairManBlue_Idle_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0290,obj_0290,obj_0290_Npc_Unk_BrownHairManBlue_Walk_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0291,obj_0291,obj_0291_Npc_Unk_BrownHairManBlue_Idle_Up,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0292,obj_0292,obj_0292_Npc_Unk_BrownHairManBlue_Walk_Up,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0293,obj_0293,obj_0293_Npc_Unk_BrownHairManBlue_Idle_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0294,obj_0294,obj_0294_Npc_Unk_BrownHairManBlue_Walk_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0295,obj_0295,obj_0295_Npc_Unk_BrownHairManBlue_Pose_0295,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+0296,obj_0296,obj_0296_Npc_Unk_BrownHairBoyBlue_Idle_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0297,obj_0297,obj_0297_Npc_Unk_BrownHairBoyBlue_Walk_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0298,obj_0298,obj_0298_Npc_Unk_BrownHairBoyBlue_Idle_Up,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0299,obj_0299,obj_0299_Npc_Unk_BrownHairBoyBlue_Walk_Up,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+029A,obj_029A,obj_029A_Npc_Unk_BrownHairBoyBlue_Idle_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+029B,obj_029B,obj_029B_Npc_Unk_BrownHairBoyBlue_Walk_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+029C,obj_029C,obj_029C_Npc_Unk_BrownHairBoyBlue_Pose_029C,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+029D,obj_029D,obj_029D_Npc_Unk_BigManApron_Idle_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+029E,obj_029E,obj_029E_Npc_Unk_BigManApron_Walk_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+029F,obj_029F,obj_029F_Npc_Unk_BigManApron_Idle_Up,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02A0,obj_02A0,obj_02A0_Npc_Unk_BigManApron_Walk_Up,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02A1,obj_02A1,obj_02A1_Npc_Unk_BigManApron_Idle_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02A2,obj_02A2,obj_02A2_Npc_Unk_BigManApron_Walk_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02A3,obj_02A3,obj_02A3_Npc_Unk_WildManStaff_Idle_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02A4,obj_02A4,obj_02A4_Npc_Unk_WildManStaff_Walk_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02A5,obj_02A5,obj_02A5_Npc_Unk_PriestBlue_Idle_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02A6,obj_02A6,obj_02A6_Npc_Unk_PriestBlue_Walk_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02A7,obj_02A7,obj_02A7_Npc_Unk_PriestBlue_Idle_Up,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02A8,obj_02A8,obj_02A8_Npc_Unk_PriestBlue_Walk_Up,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02A9,obj_02A9,obj_02A9_Npc_Unk_PriestBlue_Idle_Left,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02AA,obj_02AA,obj_02AA_Npc_Unk_PriestBlue_Idle_Right,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02AB,obj_02AB,obj_02AB_Npc_Unk_WhiteHairOldMan_Idle_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02AC,obj_02AC,obj_02AC_Npc_Unk_WhiteHairOldMan_Walk_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02AD,obj_02AD,obj_02AD_Npc_Unk_WhiteHairOldMan_Idle_Up,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02AE,obj_02AE,obj_02AE_Npc_Unk_WhiteHairOldMan_Walk_Up,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02AF,obj_02AF,obj_02AF_Npc_Unk_WhiteHairOldMan_Idle_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02B0,obj_02B0,obj_02B0_Npc_Unk_WhiteHairOldMan_Walk_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02B1,obj_02B1,obj_02B1_Npc_Unk_WhiteHairOldMan_Idle_Down_02B1,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02B2,obj_02B2,obj_02B2_Npc_Unk_OrangeGirlBlue_Walk_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02B3,obj_02B3,obj_02B3_Npc_Unk_OrangeGirlBlue_Idle_Up,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02B4,obj_02B4,obj_02B4_Npc_Unk_OrangeGirlBlue_Walk_Up,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02B5,obj_02B5,obj_02B5_Npc_Unk_OrangeGirlBlue_Idle_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02B6,obj_02B6,obj_02B6_Npc_Unk_OrangeGirlBlue_Walk_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02B7,obj_02B7,obj_02B7_Npc_Unk_OrangeGirlBlue_Idle_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02B8,obj_02B8,obj_02B8_Npc_Unk_OldMonkBrown_Idle_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02B9,obj_02B9,obj_02B9_Npc_Unk_OldMonkBrown_Pose_02B9,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+02BA,obj_02BA,obj_02BA_Npc_Unk_Peddler_Idle_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02BB,obj_02BB,obj_02BB_Npc_Unk_Peddler_Walk_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02BC,obj_02BC,obj_02BC_Npc_Unk_Peddler_Idle_Up,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02BD,obj_02BD,obj_02BD_Npc_Unk_Peddler_Idle_Up_02BD,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02BE,obj_02BE,obj_02BE_Npc_Unk_Peddler_Idle_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02BF,obj_02BF,obj_02BF_Npc_Unk_Peddler_Walk_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02C0,obj_02C0,obj_02C0_Npc_Unk_Peddler_Idle_Down_02C0,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02C1,obj_02C1,obj_02C1_Npc_Unk_Peddler_Walk_Down_02C1,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02C2,obj_02C2,obj_02C2_Npc_Unk_Peddler_Idle_Side_02C2,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02C3,obj_02C3,obj_02C3_Npc_Unk_Peddler_Walk_Side_02C3,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02C4,obj_02C4,obj_02C4_Npc_Unk_GreenDressGirl_Idle_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02C5,obj_02C5,obj_02C5_Npc_Unk_GreenDressGirl_Walk_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02C6,obj_02C6,obj_02C6_Npc_Unk_GreenDressGirl_Idle_Up,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02C7,obj_02C7,obj_02C7_Npc_Unk_GreenDressGirl_Walk_Up,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02C8,obj_02C8,obj_02C8_Npc_Unk_GreenDressGirl_Idle_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02C9,obj_02C9,obj_02C9_Npc_Unk_GreenDressGirl_Walk_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02CA,obj_02CA,obj_02CA_Npc_Unk_GreenDressGirl_Idle_Down_02CA,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02CB,obj_02CB,obj_02CB_Npc_Unk_GreenDressGirl_Idle_Side_02CB,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02CC,obj_02CC,obj_02CC_Npc_Unk_PinkDressGirl_Idle_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02CD,obj_02CD,obj_02CD_Npc_Unk_PinkDressGirl_Walk_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02CE,obj_02CE,obj_02CE_Npc_Unk_PinkDressGirl_Idle_Up,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02CF,obj_02CF,obj_02CF_Npc_Unk_PinkDressGirl_Walk_Up,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02D0,obj_02D0,obj_02D0_Npc_Unk_PinkDressGirl_Idle_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02D1,obj_02D1,obj_02D1_Npc_Unk_PinkDressGirl_Walk_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02D2,obj_02D2,obj_02D2_Npc_Unk_YellowHatBoy_Idle_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02D3,obj_02D3,obj_02D3_Npc_Unk_YellowHatBoy_Walk_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02D4,obj_02D4,obj_02D4_Npc_Unk_YellowHatBoy_Idle_Up,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02D5,obj_02D5,obj_02D5_Npc_Unk_YellowHatBoy_Walk_Up,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02D6,obj_02D6,obj_02D6_Npc_Unk_YellowHatBoy_Idle_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02D7,obj_02D7,obj_02D7_Npc_Unk_YellowHatBoy_Walk_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02D8,obj_02D8,obj_02D8_Npc_Unk_YellowHatBoy_Idle_Down_02D8,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02D9,obj_02D9,obj_02D9_Npc_Unk_BrownVestMan_Idle_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02DA,obj_02DA,obj_02DA_Npc_Unk_BrownVestMan_Walk_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02DB,obj_02DB,obj_02DB_Npc_Unk_BrownVestMan_Idle_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02DC,obj_02DC,obj_02DC_Npc_Unk_BrownVestMan_Walk_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02DD,obj_02DD,obj_02DD_Npc_Unk_BrownVestMan_Pose_02DD,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+02DE,obj_02DE,obj_02DE_Npc_Unk_BrownVestMan_Pose_02DE,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+02DF,obj_02DF,obj_02DF_Npc_Unk_ApronGirl_Walk_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02E0,obj_02E0,obj_02E0_Npc_Unk_ApronGirl_Idle_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02E1,obj_02E1,obj_02E1_Npc_Unk_ApronGirl_Pose_02E1,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+02E2,obj_02E2,obj_02E2_Npc_Unk_LilacBraidGirl_Idle_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02E3,obj_02E3,obj_02E3_Npc_Unk_LilacBraidGirl_Walk_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02E4,obj_02E4,obj_02E4_Npc_Unk_LilacBraidGirl_Idle_Up,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02E5,obj_02E5,obj_02E5_Npc_Unk_LilacBraidGirl_Walk_Up,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02E6,obj_02E6,obj_02E6_Npc_Unk_LilacBraidGirl_Idle_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02E7,obj_02E7,obj_02E7_Npc_Unk_LilacBraidGirl_Walk_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02E8,obj_02E8,obj_02E8_Npc_Unk_LilacBraidGirl_Pose_02E8,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+02E9,obj_02E9,obj_02E9_Npc_Unk_LilacBraidGirl_Idle_Down_02E9,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02EA,obj_02EA,obj_02EA_Npc_Unk_LilacBraidGirl_Idle_Down_02EA,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02EB,obj_02EB,obj_02EB_Npc_Unk_LilacBraidGirl_Walk_Down_02EB,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02EC,obj_02EC,obj_02EC_Npc_Unk_LilacBraidGirl_Idle_Down_02EC,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02ED,obj_02ED,obj_02ED_Npc_Unk_LilacBraidGirl_Idle_Up_02ED,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02EE,obj_02EE,obj_02EE_Npc_Unk_LilacBraidGirl_Idle_Side_02EE,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02EF,obj_02EF,obj_02EF_Npc_Unk_LilacBraidGirl_Walk_Side_02EF,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02F0,obj_02F0,obj_02F0_Npc_Unk_LilacBraidGirl_Pose_02F0,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+02F1,obj_02F1,obj_02F1_Npc_Unk_LilacBraidGirl_Idle_Down_02F1,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02F2,obj_02F2,obj_02F2_Npc_Unk_CreamHoodBaby_Idle_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02F3,obj_02F3,obj_02F3_Npc_Unk_CreamHoodBaby_Walk_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02F4,obj_02F4,obj_02F4_Npc_Unk_CreamHoodBaby_Idle_Up,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02F5,obj_02F5,obj_02F5_Npc_Unk_CreamHoodBaby_Walk_Up,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02F6,obj_02F6,obj_02F6_Npc_Unk_CreamHoodBaby_Idle_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02F7,obj_02F7,obj_02F7_Npc_Unk_CreamHoodBaby_Walk_Side,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02F8,obj_02F8,obj_02F8_Npc_Unk_CreamHoodBaby_Pose_02F8,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+02F9,obj_02F9,obj_02F9_Npc_Unk_CreamHoodBaby_Idle_Down_02F9,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02FA,obj_02FA,obj_02FA_Npc_Unk_CreamHoodBaby_Idle_Down_02FA,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02FB,obj_02FB,obj_02FB_Npc_Unk_CreamHoodBaby_Walk_Down_02FB,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02FC,obj_02FC,obj_02FC_Npc_Unk_CreamHoodBaby_Idle_Up_02FC,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02FD,obj_02FD,obj_02FD_Npc_Unk_CreamHoodBaby_Walk_Up_02FD,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02FE,obj_02FE,obj_02FE_Npc_Unk_CreamHoodBaby_Idle_Side_02FE,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+02FF,obj_02FF,obj_02FF_Npc_Unk_CreamHoodBaby_Walk_Side_02FF,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0300,obj_0300,obj_0300_Npc_Unk_CreamHoodBaby_Pose_0300,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+0301,obj_0301,obj_0301_Npc_Unk_CreamHoodBaby_Idle_Down_0301,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0302,obj_0302,obj_0302_Rabbit_Idle_Down,Rabbit,medium,rabbit (AI table L132)
+0303,obj_0303,obj_0303_Rabbit_Pose_0303,Rabbit,low,rabbit (AI table L132); no table direction
+0304,obj_0304,obj_0304_Fox_Idle_Down,Fox,medium,fox (AI table L133)
+0305,obj_0305,obj_0305_Fox_Pose_0305,Fox,low,fox (AI table L133); no table direction
+0306,obj_0306,obj_0306_Squirrel_Idle_Down,Squirrel,medium,squirrel (AI table L134)
+0307,obj_0307,obj_0307_Squirrel_Pose_0307,Squirrel,low,squirrel (AI table L134); no table direction
+0308,obj_0308,obj_0308_Sprite_Green_Idle_Down,Sprite,low,green-hat gnome (AI table L092)
+0309,obj_0309,obj_0309_Sprite_Pink_Idle_Down,Sprite,low,pink-hat gnomes (AI tables L080-L082)
+030A,obj_030A,obj_030A_Sprite_Pink_Walk_Down,Sprite,low,pink-hat gnomes (AI tables L080-L082)
+030B,obj_030B,obj_030B_Sprite_Pink_Idle_Up,Sprite,low,pink-hat gnomes (AI tables L080-L082)
+030C,obj_030C,obj_030C_Sprite_Pink_Walk_Up,Sprite,low,pink-hat gnomes (AI tables L080-L082)
+030D,obj_030D,obj_030D_Sprite_Pink_Idle_Side,Sprite,low,pink-hat gnomes (AI tables L080-L082)
+030E,obj_030E,obj_030E_Sprite_Pink_Walk_Side,Sprite,low,pink-hat gnomes (AI tables L080-L082)
+030F,obj_030F,obj_030F_Sprite_Pink_Idle_Up_030F,Sprite,low,pink-hat gnomes (AI tables L080-L082)
+0310,obj_0310,obj_0310_Sprite_Pink_Idle_Down_0310,Sprite,low,pink-hat gnomes (AI tables L080-L082)
+0311,obj_0311,obj_0311_Sprite_Pink_Pose_0311,Sprite,low,pink-hat gnomes (AI tables L080-L082); no table direction
+0312,obj_0312,obj_0312_Bird_Flap_0312,Bird,low,small flapping shapes (AI table L083)
+0313,obj_0313,obj_0313_Frog_Walk_Down,Frog,low,green frog (AI table L084)
+0314,obj_0314,obj_0314_Fairy_Blue_Idle_Down,Fairy,medium,blue fairy (AI table L087)
+0315,obj_0315,obj_0315_GoddessGreen_Idle_Down,GoddessGreen,low,green-haired woman with sparkles (AI table L088)
+0316,obj_0316,obj_0316_GoddessGreen_Pose_0316,GoddessGreen,low,green-haired woman with sparkles (AI table L088); no table direction
+0317,obj_0317,obj_0317_GoddessGreen_Walk_Down,GoddessGreen,low,green-haired woman with sparkles (AI table L088)
+0318,obj_0318,obj_0318_Fairy_Blue_Pose_0318,Fairy,low,blue fairy; no table direction
+0319,obj_0319,obj_0319_Monkey_Idle_Down,Monkey,low,brown shaggy animal face (AI table L089)
+031A,obj_031A,obj_031A_Monkey_Pose_031A,Monkey,low,brown shaggy animal face (AI table L089); no table direction
+031B,obj_031B,obj_031B_BirdWhite_Idle_Down,BirdWhite,low,pale bird (AI table L090)
+031C,obj_031C,obj_031C_BirdWhite_Idle_Side,BirdWhite,low,pale bird (AI table L090)
+031D,obj_031D,obj_031D_BirdWhite_Idle_Up,BirdWhite,low,pale bird (AI table L090)
+031E,obj_031E,obj_031E_BirdBlue_Idle_Side,BirdBlue,medium,blue bird; $031F = bird in a cage (script 1C table L091)
+031F,obj_031F,obj_031F_BirdBlue_Idle_Down,BirdBlue,medium,blue bird; $031F = bird in a cage (script 1C table L091)
+0320,obj_0320,obj_0320_BirdBlue_Pose_0320,BirdBlue,low,blue bird; $031F = bird in a cage (script 1C table L091); no table direction
+0321,obj_0321,obj_0321_Mole_Pose_0321,Mole,low,"mole / burrow frames (AI tables L085, L086), icon $0326 = carried Mole; no table direction"
+0322,obj_0322,obj_0322_Mole_Idle_Down,Mole,medium,"mole / burrow frames (AI tables L085, L086), icon $0326 = carried Mole"
+0323,obj_0323,obj_0323_Mole_Idle_Up,Mole,medium,"mole / burrow frames (AI tables L085, L086), icon $0326 = carried Mole"
+0324,obj_0324,obj_0324_Mole_Idle_Side,Mole,medium,"mole / burrow frames (AI tables L085, L086), icon $0326 = carried Mole"
+0325,obj_0325,obj_0325_Mole_Pose_0325,Mole,low,"mole / burrow frames (AI tables L085, L086), icon $0326 = carried Mole; no table direction"
+0326,obj_0326,obj_0326_Item_Mole_Icon,Item_Mole,high,icon of carried item $29 (table label)
+0327,obj_0327,obj_0327_BirdBrown_Idle_Down,BirdBrown,low,brown bird (AI table L093)
+0328,obj_0328,obj_0328_BirdBrown_Idle_Side,BirdBrown,low,brown bird (AI table L093)
+0329,obj_0329,obj_0329_BirdBrown_Pose_0329,BirdBrown,low,brown bird (AI table L093); no table direction
+032A,obj_032A,obj_032A_BirdBrown_Pose_032A,BirdBrown,low,brown bird (AI table L093); no table direction
+032B,obj_032B,obj_032B_Fx_FishLeap_032B,Fx,medium,leaping fish
+032C,obj_032C,obj_032C_Player_WhiteOutfit_Idle_Down,Player,low,"player sprite in a white outfit (AI tables L131, L204)"
+032D,obj_032D,obj_032D_Player_WhiteOutfit_Pose_032D,Player,low,"player sprite in a white outfit (AI tables L131, L204); no table direction"
+032E,obj_032E,obj_032E_Player_WhiteOutfit_Idle_Side,Player,low,"player sprite in a white outfit (AI tables L131, L204)"
+032F,obj_032F,obj_032F_Player_WhiteOutfit_Pose_032F,Player,low,"player sprite in a white outfit (AI tables L131, L204); no table direction"
+0330,obj_0330,obj_0330_Npc_Unk_LilacVeilWoman_Pose_0330,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+0331,obj_0331,obj_0331_Npc_Unk_LilacVeilWoman_Walk_Down,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0332,obj_0332,obj_0332_Npc_Unk_LilacVeilWoman_Pose_0332,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+0333,obj_0333,obj_0333_Npc_Unk_LilacVeilWoman_Pose_0333,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+0334,obj_0334,obj_0334_Npc_Unk_LilacVeilWoman_Pose_0334,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+0335,obj_0335,obj_0335_Npc_Unk_LilacVeilWoman_Walk_Down_0335,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0336,obj_0336,obj_0336_Npc_Unk_LilacVeilWoman_Pose_0336,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+0337,obj_0337,obj_0337_Npc_Unk_LilacVeilWoman_Pose_0337,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+0338,obj_0338,obj_0338_Npc_Unk_LilacVeilWoman_Pose_0338,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+0339,obj_0339,obj_0339_Npc_Unk_LilacVeilWoman_Walk_Down_0339,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+033A,obj_033A,obj_033A_Npc_Unk_LilacVeilWoman_Pose_033A,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+033B,obj_033B,obj_033B_Npc_Unk_LilacVeilWoman_Pose_033B,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+033C,obj_033C,obj_033C_Npc_Unk_LilacVeilWoman_Pose_033C,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+033D,obj_033D,obj_033D_Npc_Unk_LilacVeilWoman_Walk_Down_033D,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+033E,obj_033E,obj_033E_Npc_Unk_LilacVeilWoman_Pose_033E,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+033F,obj_033F,obj_033F_Npc_Unk_LilacVeilWoman_Pose_033F,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+0340,obj_0340,obj_0340_Npc_Unk_LilacVeilWoman_Pose_0340,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+0341,obj_0341,obj_0341_Npc_Unk_LilacVeilWoman_Walk_Down_0341,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present"
+0342,obj_0342,obj_0342_Npc_Unk_LilacVeilWoman_Pose_0342,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+0343,obj_0343,obj_0343_Npc_Unk_LilacVeilWoman_Pose_0343,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+0344,obj_0344,obj_0344_Player_Smoke_0344,Player,low,player with smoke cloud
+0345,obj_0345,obj_0345_Ann_Pose_0345,Ann,low,"orange hair, with smoke cloud in $0346; no table direction"
+0346,obj_0346,obj_0346_Ann_Pose_0346,Ann,low,"orange hair, with smoke cloud in $0346; no table direction"
+0347,obj_0347,obj_0347_Nina_Kneel_0347,Nina,medium,"pink hair, AI table L139 of script 1B (nLove_Nina)"
+0348,obj_0348,obj_0348_Item_GoldPot,Item,low,golden pot (AI table L212)
+0349,obj_0349,obj_0349_Npc_Unk_BrownGirl_Pose_0349,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+034A,obj_034A,obj_034A_Fx_HeartPink,Fx,medium,pink heart (AI tables L205)
+034B,obj_034B,obj_034B_Obj_Unk_034B,Obj,low,mixed animal group
+034C,obj_034C,obj_034C_Npc_Unk_BlueHairOld_Pose_034C,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+034D,obj_034D,obj_034D_Npc_Unk_BlueHairOld_Pose_034D,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+034E,obj_034E,obj_034E_Cart_Shipping,Cart,low,cart / bin with 4 frames (AI table L128)
+034F,obj_034F,obj_034F_Npc_Unk_BrownGirlPair_Pose_034F,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+0350,obj_0350,obj_0350_Eve_Heart_0350,Eve,low,blond hair with heart
+0351,obj_0351,obj_0351_Nina_Heart_0351,Nina,low,pink hair with hearts
+0352,obj_0352,obj_0352_Item_Corn_ArcA_0,Item_Corn,medium,"ArcA_0 object of carried item $10 (table label), list position per fCarried layout"
+0353,obj_0353,obj_0353_Item_Corn_ArcA_1,Item_Corn,medium,"ArcA_1 object of carried item $10 (table label), list position per fCarried layout"
+0354,obj_0354,obj_0354_Item_Corn_ArcA_2,Item_Corn,medium,"ArcA_2 object of carried item $10 (table label), list position per fCarried layout"
+0355,obj_0355,obj_0355_Item_Corn_ArcB_0,Item_Corn,medium,"ArcB_0 object of carried item $10 (table label), list position per fCarried layout"
+0356,obj_0356,obj_0356_Item_Corn_ArcB_1,Item_Corn,medium,"ArcB_1 object of carried item $10 (table label), list position per fCarried layout"
+0357,obj_0357,obj_0357_Item_Corn_ArcB_2,Item_Corn,medium,"ArcB_2 object of carried item $10 (table label), list position per fCarried layout"
+0358,obj_0358,obj_0358_Item_Corn_Big,Item_Corn,medium,"Big object of carried item $10 (table label), list position per fCarried layout"
+0359,obj_0359,obj_0359_Item_Corn_ArcLong,Item_Corn,medium,"ArcLong object of carried item $10 (table label), list position per fCarried layout"
+035A,obj_035A,obj_035A_Item_Tomato_ArcA_0,Item_Tomato,medium,"ArcA_0 object of carried item $11 (table label), list position per fCarried layout"
+035B,obj_035B,obj_035B_Item_Tomato_ArcA_1,Item_Tomato,medium,"ArcA_1 object of carried item $11 (table label), list position per fCarried layout"
+035C,obj_035C,obj_035C_Item_Tomato_ArcA_2,Item_Tomato,medium,"ArcA_2 object of carried item $11 (table label), list position per fCarried layout"
+035D,obj_035D,obj_035D_Item_Tomato_ArcB_0,Item_Tomato,medium,"ArcB_0 object of carried item $11 (table label), list position per fCarried layout"
+035E,obj_035E,obj_035E_Item_Tomato_ArcB_1,Item_Tomato,medium,"ArcB_1 object of carried item $11 (table label), list position per fCarried layout"
+035F,obj_035F,obj_035F_Item_Tomato_ArcB_2,Item_Tomato,medium,"ArcB_2 object of carried item $11 (table label), list position per fCarried layout"
+0360,obj_0360,obj_0360_Item_Tomato_Big,Item_Tomato,medium,"Big object of carried item $11 (table label), list position per fCarried layout"
+0361,obj_0361,obj_0361_Item_Tomato_ArcLong,Item_Tomato,medium,"ArcLong object of carried item $11 (table label), list position per fCarried layout"
+0362,obj_0362,obj_0362_Item_Turnip_ArcA_0,Item_Turnip,medium,"ArcA_0 object of carried item $13 (table label), list position per fCarried layout"
+0363,obj_0363,obj_0363_Item_Turnip_ArcA_1,Item_Turnip,medium,"ArcA_1 object of carried item $13 (table label), list position per fCarried layout"
+0364,obj_0364,obj_0364_Item_Turnip_ArcA_2,Item_Turnip,medium,"ArcA_2 object of carried item $13 (table label), list position per fCarried layout"
+0365,obj_0365,obj_0365_Item_Turnip_ArcB_0,Item_Turnip,medium,"ArcB_0 object of carried item $13 (table label), list position per fCarried layout"
+0366,obj_0366,obj_0366_Item_Turnip_ArcB_1,Item_Turnip,medium,"ArcB_1 object of carried item $13 (table label), list position per fCarried layout"
+0367,obj_0367,obj_0367_Item_Turnip_ArcB_2,Item_Turnip,medium,"ArcB_2 object of carried item $13 (table label), list position per fCarried layout"
+0368,obj_0368,obj_0368_Item_Turnip_Big,Item_Turnip,medium,"Big object of carried item $13 (table label), list position per fCarried layout"
+0369,obj_0369,obj_0369_Item_Turnip_ArcLong,Item_Turnip,medium,"ArcLong object of carried item $13 (table label), list position per fCarried layout"
+036A,obj_036A,obj_036A_Item_Potato_ArcA_0,Item_Potato,medium,"ArcA_0 object of carried item $12 (table label), list position per fCarried layout"
+036B,obj_036B,obj_036B_Item_Potato_ArcA_1,Item_Potato,medium,"ArcA_1 object of carried item $12 (table label), list position per fCarried layout"
+036C,obj_036C,obj_036C_Item_Potato_ArcA_2,Item_Potato,medium,"ArcA_2 object of carried item $12 (table label), list position per fCarried layout"
+036D,obj_036D,obj_036D_Item_Potato_ArcB_0,Item_Potato,medium,"ArcB_0 object of carried item $12 (table label), list position per fCarried layout"
+036E,obj_036E,obj_036E_Item_Potato_ArcB_1,Item_Potato,medium,"ArcB_1 object of carried item $12 (table label), list position per fCarried layout"
+036F,obj_036F,obj_036F_Item_Potato_ArcB_2,Item_Potato,medium,"ArcB_2 object of carried item $12 (table label), list position per fCarried layout"
+0370,obj_0370,obj_0370_Item_Potato_Big,Item_Potato,medium,"Big object of carried item $12 (table label), list position per fCarried layout"
+0371,obj_0371,obj_0371_Item_Potato_ArcLong,Item_Potato,medium,"ArcLong object of carried item $12 (table label), list position per fCarried layout"
+0372,obj_0372,obj_0372_Item_MilkLarge_ArcA_0,Item_MilkLarge,medium,"ArcA_0 object of carried item $17 (table label), list position per fCarried layout"
+0373,obj_0373,obj_0373_Item_MilkLarge_ArcB_0,Item_MilkLarge,medium,"ArcB_0 object of carried item $17 (table label), list position per fCarried layout"
+0374,obj_0374,obj_0374_Item_MilkLarge_ArcB_1,Item_MilkLarge,medium,"ArcB_1 object of carried item $17 (table label), list position per fCarried layout"
+0375,obj_0375,obj_0375_Item_MilkLarge_ArcB_2,Item_MilkLarge,medium,"ArcB_2 object of carried item $17 (table label), list position per fCarried layout"
+0376,obj_0376,obj_0376_Item_MilkLarge_Big,Item_MilkLarge,medium,"Big object of carried item $17 (table label), list position per fCarried layout"
+0377,obj_0377,obj_0377_Item_MilkLarge_ArcLong,Item_MilkLarge,medium,"ArcLong object of carried item $17 (table label), list position per fCarried layout"
+0378,obj_0378,obj_0378_Item_MilkMedium_ArcA_0,Item_MilkMedium,medium,"ArcA_0 object of carried item $16 (table label), list position per fCarried layout"
+0379,obj_0379,obj_0379_Item_MilkMedium_ArcB_0,Item_MilkMedium,medium,"ArcB_0 object of carried item $16 (table label), list position per fCarried layout"
+037A,obj_037A,obj_037A_Item_MilkMedium_ArcB_1,Item_MilkMedium,medium,"ArcB_1 object of carried item $16 (table label), list position per fCarried layout"
+037B,obj_037B,obj_037B_Item_MilkMedium_ArcB_2,Item_MilkMedium,medium,"ArcB_2 object of carried item $16 (table label), list position per fCarried layout"
+037C,obj_037C,obj_037C_Item_MilkMedium_Big,Item_MilkMedium,medium,"Big object of carried item $16 (table label), list position per fCarried layout"
+037D,obj_037D,obj_037D_Item_MilkMedium_ArcLong,Item_MilkMedium,medium,"ArcLong object of carried item $16 (table label), list position per fCarried layout"
+037E,obj_037E,obj_037E_Item_MilkSmall_ArcA_0,Item_MilkSmall,medium,"ArcA_0 object of carried item $15 (table label), list position per fCarried layout"
+037F,obj_037F,obj_037F_Item_MilkSmall_ArcB_0,Item_MilkSmall,medium,"ArcB_0 object of carried item $15 (table label), list position per fCarried layout"
+0380,obj_0380,obj_0380_Item_MilkSmall_ArcB_1,Item_MilkSmall,medium,"ArcB_1 object of carried item $15 (table label), list position per fCarried layout"
+0381,obj_0381,obj_0381_Item_MilkSmall_ArcB_2,Item_MilkSmall,medium,"ArcB_2 object of carried item $15 (table label), list position per fCarried layout"
+0382,obj_0382,obj_0382_Item_MilkSmall_Big,Item_MilkSmall,medium,"Big object of carried item $15 (table label), list position per fCarried layout"
+0383,obj_0383,obj_0383_Item_MilkSmall_ArcLong,Item_MilkSmall,medium,"ArcLong object of carried item $15 (table label), list position per fCarried layout"
+0384,obj_0384,obj_0384_Item_Egg_ArcA_0,Item_Egg,medium,"ArcA_0 object of carried item $14 (table label; enum CITEM_EGG), list position per fCarried layout"
+0385,obj_0385,obj_0385_Item_Egg_ArcA_1,Item_Egg,medium,"ArcA_1 object of carried item $14 (table label; enum CITEM_EGG), list position per fCarried layout"
+0386,obj_0386,obj_0386_Item_Egg_ArcA_2,Item_Egg,medium,"ArcA_2 object of carried item $14 (table label; enum CITEM_EGG), list position per fCarried layout"
+0387,obj_0387,obj_0387_Item_Egg_ArcB_0,Item_Egg,medium,"ArcB_0 object of carried item $14 (table label; enum CITEM_EGG), list position per fCarried layout"
+0388,obj_0388,obj_0388_Item_Egg_ArcB_1,Item_Egg,medium,"ArcB_1 object of carried item $14 (table label; enum CITEM_EGG), list position per fCarried layout"
+0389,obj_0389,obj_0389_Item_Egg_ArcB_2,Item_Egg,medium,"ArcB_2 object of carried item $14 (table label; enum CITEM_EGG), list position per fCarried layout"
+038A,obj_038A,obj_038A_Item_Egg_Big,Item_Egg,medium,"Big object of carried item $14 (table label; enum CITEM_EGG), list position per fCarried layout"
+038B,obj_038B,obj_038B_Item_Egg_ArcLong,Item_Egg,medium,"ArcLong object of carried item $14 (table label; enum CITEM_EGG), list position per fCarried layout"
+038C,obj_038C,obj_038C_Item_WildGrape_ArcA_0,Item_WildGrape,medium,"ArcA_0 object of carried item $03 (table label), list position per fCarried layout"
+038D,obj_038D,obj_038D_Item_WildGrape_ArcA_1,Item_WildGrape,medium,"ArcA_1 object of carried item $03 (table label), list position per fCarried layout"
+038E,obj_038E,obj_038E_Item_WildGrape_ArcA_2,Item_WildGrape,medium,"ArcA_2 object of carried item $03 (table label), list position per fCarried layout"
+038F,obj_038F,obj_038F_Item_WildGrape_ArcB_0,Item_WildGrape,medium,"ArcB_0 object of carried item $03 (table label), list position per fCarried layout"
+0390,obj_0390,obj_0390_Item_WildGrape_ArcB_1,Item_WildGrape,medium,"ArcB_1 object of carried item $03 (table label), list position per fCarried layout"
+0391,obj_0391,obj_0391_Item_WildGrape_ArcB_2,Item_WildGrape,medium,"ArcB_2 object of carried item $03 (table label), list position per fCarried layout"
+0392,obj_0392,obj_0392_Item_WildGrape_Big,Item_WildGrape,medium,"Big object of carried item $03 (table label), list position per fCarried layout"
+0393,obj_0393,obj_0393_Item_WildGrape_ArcLong,Item_WildGrape,medium,"ArcLong object of carried item $03 (table label), list position per fCarried layout"
+0394,obj_0394,obj_0394_Item_BerryStrongSmell_ArcA_0,Item_BerryStrongSmell,medium,"ArcA_0 object of carried item $04 (table label), list position per fCarried layout"
+0395,obj_0395,obj_0395_Item_BerryStrongSmell_ArcA_1,Item_BerryStrongSmell,medium,"ArcA_1 object of carried item $04 (table label), list position per fCarried layout"
+0396,obj_0396,obj_0396_Item_BerryStrongSmell_ArcA_2,Item_BerryStrongSmell,medium,"ArcA_2 object of carried item $04 (table label), list position per fCarried layout"
+0397,obj_0397,obj_0397_Item_BerryStrongSmell_ArcB_0,Item_BerryStrongSmell,medium,"ArcB_0 object of carried item $04 (table label), list position per fCarried layout"
+0398,obj_0398,obj_0398_Item_BerryStrongSmell_ArcB_1,Item_BerryStrongSmell,medium,"ArcB_1 object of carried item $04 (table label), list position per fCarried layout"
+0399,obj_0399,obj_0399_Item_BerryStrongSmell_ArcB_2,Item_BerryStrongSmell,medium,"ArcB_2 object of carried item $04 (table label), list position per fCarried layout"
+039A,obj_039A,obj_039A_Item_BerryStrongSmell_Big,Item_BerryStrongSmell,medium,"Big object of carried item $04 (table label), list position per fCarried layout"
+039B,obj_039B,obj_039B_Item_BerryStrongSmell_ArcLong,Item_BerryStrongSmell,medium,"ArcLong object of carried item $04 (table label), list position per fCarried layout"
+039C,obj_039C,obj_039C_Item_Mushroom_ArcA_0,Item_Mushroom,medium,"ArcA_0 object of carried item $01 (table label), list position per fCarried layout"
+039D,obj_039D,obj_039D_Item_Mushroom_ArcA_1,Item_Mushroom,medium,"ArcA_1 object of carried item $01 (table label), list position per fCarried layout"
+039E,obj_039E,obj_039E_Item_Mushroom_ArcA_2,Item_Mushroom,medium,"ArcA_2 object of carried item $01 (table label), list position per fCarried layout"
+039F,obj_039F,obj_039F_Item_Mushroom_ArcB_0,Item_Mushroom,medium,"ArcB_0 object of carried item $01 (table label), list position per fCarried layout"
+03A0,obj_03A0,obj_03A0_Item_Mushroom_ArcB_1,Item_Mushroom,medium,"ArcB_1 object of carried item $01 (table label), list position per fCarried layout"
+03A1,obj_03A1,obj_03A1_Item_Mushroom_ArcB_2,Item_Mushroom,medium,"ArcB_2 object of carried item $01 (table label), list position per fCarried layout"
+03A2,obj_03A2,obj_03A2_Item_Mushroom_Big,Item_Mushroom,medium,"Big object of carried item $01 (table label), list position per fCarried layout"
+03A3,obj_03A3,obj_03A3_Item_Mushroom_ArcLong,Item_Mushroom,medium,"ArcLong object of carried item $01 (table label), list position per fCarried layout"
+03A4,obj_03A4,obj_03A4_Item_PoisonMushroom_ArcA_0,Item_PoisonMushroom,medium,"ArcA_0 object of carried item $02 (table label), list position per fCarried layout"
+03A5,obj_03A5,obj_03A5_Item_PoisonMushroom_ArcA_1,Item_PoisonMushroom,medium,"ArcA_1 object of carried item $02 (table label), list position per fCarried layout"
+03A6,obj_03A6,obj_03A6_Item_PoisonMushroom_ArcA_2,Item_PoisonMushroom,medium,"ArcA_2 object of carried item $02 (table label), list position per fCarried layout"
+03A7,obj_03A7,obj_03A7_Item_PoisonMushroom_ArcB_0,Item_PoisonMushroom,medium,"ArcB_0 object of carried item $02 (table label), list position per fCarried layout"
+03A8,obj_03A8,obj_03A8_Item_PoisonMushroom_ArcB_1,Item_PoisonMushroom,medium,"ArcB_1 object of carried item $02 (table label), list position per fCarried layout"
+03A9,obj_03A9,obj_03A9_Item_PoisonMushroom_ArcB_2,Item_PoisonMushroom,medium,"ArcB_2 object of carried item $02 (table label), list position per fCarried layout"
+03AA,obj_03AA,obj_03AA_Item_PoisonMushroom_Big,Item_PoisonMushroom,medium,"Big object of carried item $02 (table label), list position per fCarried layout"
+03AB,obj_03AB,obj_03AB_Item_PoisonMushroom_ArcLong,Item_PoisonMushroom,medium,"ArcLong object of carried item $02 (table label), list position per fCarried layout"
+03AC,obj_03AC,obj_03AC_Item_MoonFlower_ArcA_0,Item_MoonFlower,medium,"ArcA_0 object of carried item $05 (table label), list position per fCarried layout"
+03AD,obj_03AD,obj_03AD_Item_MoonFlower_ArcA_1,Item_MoonFlower,medium,"ArcA_1 object of carried item $05 (table label), list position per fCarried layout"
+03AE,obj_03AE,obj_03AE_Item_MoonFlower_ArcA_2,Item_MoonFlower,medium,"ArcA_2 object of carried item $05 (table label), list position per fCarried layout"
+03AF,obj_03AF,obj_03AF_Item_MoonFlower_ArcB_0,Item_MoonFlower,medium,"ArcB_0 object of carried item $05 (table label), list position per fCarried layout"
+03B0,obj_03B0,obj_03B0_Item_MoonFlower_ArcB_1,Item_MoonFlower,medium,"ArcB_1 object of carried item $05 (table label), list position per fCarried layout"
+03B1,obj_03B1,obj_03B1_Item_MoonFlower_ArcB_2,Item_MoonFlower,medium,"ArcB_2 object of carried item $05 (table label), list position per fCarried layout"
+03B2,obj_03B2,obj_03B2_Item_MoonFlower_Big,Item_MoonFlower,medium,"Big object of carried item $05 (table label), list position per fCarried layout"
+03B3,obj_03B3,obj_03B3_Item_MoonFlower_ArcLong,Item_MoonFlower,medium,"ArcLong object of carried item $05 (table label), list position per fCarried layout"
+03B4,obj_03B4,obj_03B4_Item_Cake_ArcA_0,Item_Cake,medium,"ArcA_0 object of carried item $06 (table label), list position per fCarried layout"
+03B5,obj_03B5,obj_03B5_Item_Cake_ArcA_1,Item_Cake,medium,"ArcA_1 object of carried item $06 (table label), list position per fCarried layout"
+03B6,obj_03B6,obj_03B6_Item_Cake_ArcA_2,Item_Cake,medium,"ArcA_2 object of carried item $06 (table label), list position per fCarried layout"
+03B7,obj_03B7,obj_03B7_Item_Cake_ArcB_0,Item_Cake,medium,"ArcB_0 object of carried item $06 (table label), list position per fCarried layout"
+03B8,obj_03B8,obj_03B8_Item_Cake_ArcB_1,Item_Cake,medium,"ArcB_1 object of carried item $06 (table label), list position per fCarried layout"
+03B9,obj_03B9,obj_03B9_Item_Cake_ArcB_2,Item_Cake,medium,"ArcB_2 object of carried item $06 (table label), list position per fCarried layout"
+03BA,obj_03BA,obj_03BA_Item_Cake_Big,Item_Cake,medium,"Big object of carried item $06 (table label), list position per fCarried layout"
+03BB,obj_03BB,obj_03BB_Item_Cake_ArcLong,Item_Cake,medium,"ArcLong object of carried item $06 (table label), list position per fCarried layout"
+03BC,obj_03BC,obj_03BC_Item_Herb_ArcA_0,Item_Herb,medium,"ArcA_0 object of carried item $18 (table label), list position per fCarried layout"
+03BD,obj_03BD,obj_03BD_Item_Herb_ArcA_1,Item_Herb,medium,"ArcA_1 object of carried item $18 (table label), list position per fCarried layout"
+03BE,obj_03BE,obj_03BE_Item_Herb_ArcA_2,Item_Herb,medium,"ArcA_2 object of carried item $18 (table label), list position per fCarried layout"
+03BF,obj_03BF,obj_03BF_Item_Herb_ArcB_0,Item_Herb,medium,"ArcB_0 object of carried item $18 (table label), list position per fCarried layout"
+03C0,obj_03C0,obj_03C0_Item_Herb_ArcB_1,Item_Herb,medium,"ArcB_1 object of carried item $18 (table label), list position per fCarried layout"
+03C1,obj_03C1,obj_03C1_Item_Herb_ArcB_2,Item_Herb,medium,"ArcB_2 object of carried item $18 (table label), list position per fCarried layout"
+03C2,obj_03C2,obj_03C2_Item_Herb_Big,Item_Herb,medium,"Big object of carried item $18 (table label), list position per fCarried layout"
+03C3,obj_03C3,obj_03C3_Item_Herb_ArcLong,Item_Herb,medium,"ArcLong object of carried item $18 (table label), list position per fCarried layout"
+03C4,obj_03C4,obj_03C4_Item_Flower_ArcA_0,Item_Flower,medium,"ArcA_0 object of carried item $19 (table label), list position per fCarried layout"
+03C5,obj_03C5,obj_03C5_Item_Flower_ArcA_1,Item_Flower,medium,"ArcA_1 object of carried item $19 (table label), list position per fCarried layout"
+03C6,obj_03C6,obj_03C6_Item_Flower_ArcA_2,Item_Flower,medium,"ArcA_2 object of carried item $19 (table label), list position per fCarried layout"
+03C7,obj_03C7,obj_03C7_Item_Flower_ArcB_0,Item_Flower,medium,"ArcB_0 object of carried item $19 (table label), list position per fCarried layout"
+03C8,obj_03C8,obj_03C8_Item_Flower_ArcB_1,Item_Flower,medium,"ArcB_1 object of carried item $19 (table label), list position per fCarried layout"
+03C9,obj_03C9,obj_03C9_Item_Flower_ArcB_2,Item_Flower,medium,"ArcB_2 object of carried item $19 (table label), list position per fCarried layout"
+03CA,obj_03CA,obj_03CA_Item_Flower_Big,Item_Flower,medium,"Big object of carried item $19 (table label), list position per fCarried layout"
+03CB,obj_03CB,obj_03CB_Item_Flower_ArcLong,Item_Flower,medium,"ArcLong object of carried item $19 (table label), list position per fCarried layout"
+03CC,obj_03CC,obj_03CC_Item_PerfumeGreen_ArcA_0,Item_PerfumeGreen,medium,"ArcA_0 object of carried item $1B (table label; enum EITEM_PERFUMEGREEN), list position per fCarried layout"
+03CD,obj_03CD,obj_03CD_Item_PerfumeGreen_ArcB_0,Item_PerfumeGreen,medium,"ArcB_0 object of carried item $1B (table label; enum EITEM_PERFUMEGREEN), list position per fCarried layout"
+03CE,obj_03CE,obj_03CE_Item_PerfumeGreen_ArcB_1,Item_PerfumeGreen,medium,"ArcB_1 object of carried item $1B (table label; enum EITEM_PERFUMEGREEN), list position per fCarried layout"
+03CF,obj_03CF,obj_03CF_Item_PerfumeGreen_ArcB_2,Item_PerfumeGreen,medium,"ArcB_2 object of carried item $1B (table label; enum EITEM_PERFUMEGREEN), list position per fCarried layout"
+03D0,obj_03D0,obj_03D0_Item_PerfumeGreen_Big,Item_PerfumeGreen,medium,"Big object of carried item $1B (table label; enum EITEM_PERFUMEGREEN), list position per fCarried layout"
+03D1,obj_03D1,obj_03D1_Item_EggYellow_ArcA_0,Item_EggYellow,medium,"ArcA_0 object of carried item $23 (table label), list position per fCarried layout"
+03D2,obj_03D2,obj_03D2_Item_EggYellow_Big,Item_EggYellow,medium,"Big object of carried item $23 (table label), list position per fCarried layout"
+03D3,obj_03D3,obj_03D3_Item_EggYellow_Icon,Item_EggYellow,high,icon of carried item $23 (table label)
+03D4,obj_03D4,obj_03D4_Item_PerfumeRed_ArcA_0,Item_PerfumeRed,medium,"ArcA_0 object of carried item $1C (table label), list position per fCarried layout"
+03D5,obj_03D5,obj_03D5_Item_PerfumeRed_ArcB_0,Item_PerfumeRed,medium,"ArcB_0 object of carried item $1C (table label), list position per fCarried layout"
+03D6,obj_03D6,obj_03D6_Item_PerfumeRed_ArcB_1,Item_PerfumeRed,medium,"ArcB_1 object of carried item $1C (table label), list position per fCarried layout"
+03D7,obj_03D7,obj_03D7_Item_PerfumeRed_ArcB_2,Item_PerfumeRed,medium,"ArcB_2 object of carried item $1C (table label), list position per fCarried layout"
+03D8,obj_03D8,obj_03D8_Item_PerfumeRed_Big,Item_PerfumeRed,medium,"Big object of carried item $1C (table label), list position per fCarried layout"
+03D9,obj_03D9,obj_03D9_Obj_Unk_03D9,Unk,low,no evidence
+03DA,obj_03DA,obj_03DA_Obj_Unk_03DA,Unk,low,no evidence
+03DB,obj_03DB,obj_03DB_Obj_Unk_03DB,Unk,low,no evidence
+03DC,obj_03DC,obj_03DC_Item_PerfumeBlue_ArcA_0,Item_PerfumeBlue,medium,"ArcA_0 object of carried item $1D (table label), list position per fCarried layout"
+03DD,obj_03DD,obj_03DD_Item_PerfumeBlue_ArcB_0,Item_PerfumeBlue,medium,"ArcB_0 object of carried item $1D (table label), list position per fCarried layout"
+03DE,obj_03DE,obj_03DE_Item_PerfumeBlue_ArcB_1,Item_PerfumeBlue,medium,"ArcB_1 object of carried item $1D (table label), list position per fCarried layout"
+03DF,obj_03DF,obj_03DF_Item_PerfumeBlue_ArcB_2,Item_PerfumeBlue,medium,"ArcB_2 object of carried item $1D (table label), list position per fCarried layout"
+03E0,obj_03E0,obj_03E0_Item_PerfumeBlue_Big,Item_PerfumeBlue,medium,"Big object of carried item $1D (table label), list position per fCarried layout"
+03E1,obj_03E1,obj_03E1_Item_EggRed_ArcA_0,Item_EggRed,medium,"ArcA_0 object of carried item $1E (table label), list position per fCarried layout"
+03E2,obj_03E2,obj_03E2_Item_EggRed_ArcA_1,Item_EggRed,medium,"ArcA_1 object of carried item $1E (table label), list position per fCarried layout"
+03E3,obj_03E3,obj_03E3_Item_EggRed_ArcA_2,Item_EggRed,medium,"ArcA_2 object of carried item $1E (table label), list position per fCarried layout"
+03E4,obj_03E4,obj_03E4_Item_EggRed_ArcB_0,Item_EggRed,medium,"ArcB_0 object of carried item $1E (table label), list position per fCarried layout"
+03E5,obj_03E5,obj_03E5_Item_EggRed_ArcB_1,Item_EggRed,medium,"ArcB_1 object of carried item $1E (table label), list position per fCarried layout"
+03E6,obj_03E6,obj_03E6_Item_EggRed_ArcB_2,Item_EggRed,medium,"ArcB_2 object of carried item $1E (table label), list position per fCarried layout"
+03E7,obj_03E7,obj_03E7_Item_EggRed_Big,Item_EggRed,medium,"Big object of carried item $1E (table label), list position per fCarried layout"
+03E8,obj_03E8,obj_03E8_Item_EggRed_ArcLong,Item_EggRed,medium,"ArcLong object of carried item $1E (table label), list position per fCarried layout"
+03E9,obj_03E9,obj_03E9_Item_EggLightPurple_ArcA_0,Item_EggLightPurple,medium,"ArcA_0 object of carried item $1F (table label), list position per fCarried layout"
+03EA,obj_03EA,obj_03EA_Item_EggLightPurple_ArcA_1,Item_EggLightPurple,medium,"ArcA_1 object of carried item $1F (table label), list position per fCarried layout"
+03EB,obj_03EB,obj_03EB_Item_EggLightPurple_ArcA_2,Item_EggLightPurple,medium,"ArcA_2 object of carried item $1F (table label), list position per fCarried layout"
+03EC,obj_03EC,obj_03EC_Item_EggLightPurple_ArcB_0,Item_EggLightPurple,medium,"ArcB_0 object of carried item $1F (table label), list position per fCarried layout"
+03ED,obj_03ED,obj_03ED_Item_EggLightPurple_ArcB_1,Item_EggLightPurple,medium,"ArcB_1 object of carried item $1F (table label), list position per fCarried layout"
+03EE,obj_03EE,obj_03EE_Item_EggLightPurple_ArcB_2,Item_EggLightPurple,medium,"ArcB_2 object of carried item $1F (table label), list position per fCarried layout"
+03EF,obj_03EF,obj_03EF_Item_EggLightPurple_Big,Item_EggLightPurple,medium,"Big object of carried item $1F (table label), list position per fCarried layout"
+03F0,obj_03F0,obj_03F0_Item_EggLightPurple_ArcLong,Item_EggLightPurple,medium,"ArcLong object of carried item $1F (table label), list position per fCarried layout"
+03F1,obj_03F1,obj_03F1_Item_EggBlue_ArcA_0,Item_EggBlue,medium,"ArcA_0 object of carried item $20 (table label), list position per fCarried layout"
+03F2,obj_03F2,obj_03F2_Item_EggBlue_ArcA_1,Item_EggBlue,medium,"ArcA_1 object of carried item $20 (table label), list position per fCarried layout"
+03F3,obj_03F3,obj_03F3_Item_EggBlue_ArcA_2,Item_EggBlue,medium,"ArcA_2 object of carried item $20 (table label), list position per fCarried layout"
+03F4,obj_03F4,obj_03F4_Item_EggBlue_ArcB_0,Item_EggBlue,medium,"ArcB_0 object of carried item $20 (table label), list position per fCarried layout"
+03F5,obj_03F5,obj_03F5_Item_EggBlue_ArcB_1,Item_EggBlue,medium,"ArcB_1 object of carried item $20 (table label), list position per fCarried layout"
+03F6,obj_03F6,obj_03F6_Item_EggBlue_ArcB_2,Item_EggBlue,medium,"ArcB_2 object of carried item $20 (table label), list position per fCarried layout"
+03F7,obj_03F7,obj_03F7_Item_EggBlue_Big,Item_EggBlue,medium,"Big object of carried item $20 (table label), list position per fCarried layout"
+03F8,obj_03F8,obj_03F8_Item_EggBlue_ArcLong,Item_EggBlue,medium,"ArcLong object of carried item $20 (table label), list position per fCarried layout"
+03F9,obj_03F9,obj_03F9_Item_EggPurple_ArcA_0,Item_EggPurple,medium,"ArcA_0 object of carried item $21 (table label), list position per fCarried layout"
+03FA,obj_03FA,obj_03FA_Item_EggPurple_ArcA_1,Item_EggPurple,medium,"ArcA_1 object of carried item $21 (table label), list position per fCarried layout"
+03FB,obj_03FB,obj_03FB_Item_EggPurple_ArcA_2,Item_EggPurple,medium,"ArcA_2 object of carried item $21 (table label), list position per fCarried layout"
+03FC,obj_03FC,obj_03FC_Item_EggPurple_ArcB_0,Item_EggPurple,medium,"ArcB_0 object of carried item $21 (table label), list position per fCarried layout"
+03FD,obj_03FD,obj_03FD_Item_EggPurple_ArcB_1,Item_EggPurple,medium,"ArcB_1 object of carried item $21 (table label), list position per fCarried layout"
+03FE,obj_03FE,obj_03FE_Item_EggPurple_ArcB_2,Item_EggPurple,medium,"ArcB_2 object of carried item $21 (table label), list position per fCarried layout"
+03FF,obj_03FF,obj_03FF_Item_EggPurple_Big,Item_EggPurple,medium,"Big object of carried item $21 (table label), list position per fCarried layout"
+0400,obj_0400,obj_0400_Item_EggPurple_ArcLong,Item_EggPurple,medium,"ArcLong object of carried item $21 (table label), list position per fCarried layout"
+0401,obj_0401,obj_0401_Item_EggGreen_ArcA_0,Item_EggGreen,medium,"ArcA_0 object of carried item $22 (table label), list position per fCarried layout"
+0402,obj_0402,obj_0402_Item_EggGreen_ArcA_1,Item_EggGreen,medium,"ArcA_1 object of carried item $22 (table label), list position per fCarried layout"
+0403,obj_0403,obj_0403_Item_EggGreen_ArcA_2,Item_EggGreen,medium,"ArcA_2 object of carried item $22 (table label), list position per fCarried layout"
+0404,obj_0404,obj_0404_Item_EggGreen_ArcB_0,Item_EggGreen,medium,"ArcB_0 object of carried item $22 (table label), list position per fCarried layout"
+0405,obj_0405,obj_0405_Item_EggGreen_ArcB_1,Item_EggGreen,medium,"ArcB_1 object of carried item $22 (table label), list position per fCarried layout"
+0406,obj_0406,obj_0406_Item_EggGreen_ArcB_2,Item_EggGreen,medium,"ArcB_2 object of carried item $22 (table label), list position per fCarried layout"
+0407,obj_0407,obj_0407_Item_EggGreen_Big,Item_EggGreen,medium,"Big object of carried item $22 (table label), list position per fCarried layout"
+0408,obj_0408,obj_0408_Item_EggGreen_ArcLong,Item_EggGreen,medium,"ArcLong object of carried item $22 (table label), list position per fCarried layout"
+0409,obj_0409,obj_0409_Item_PowerBerry_ArcA_0,Item_PowerBerry,medium,"ArcA_0 object of carried item $08 (table label), list position per fCarried layout"
+040A,obj_040A,obj_040A_Item_PowerBerry_ArcA_1,Item_PowerBerry,medium,"ArcA_1 object of carried item $08 (table label), list position per fCarried layout"
+040B,obj_040B,obj_040B_Item_PowerBerry_ArcA_2,Item_PowerBerry,medium,"ArcA_2 object of carried item $08 (table label), list position per fCarried layout"
+040C,obj_040C,obj_040C_Item_PowerBerry_Big,Item_PowerBerry,medium,"Big object of carried item $08 (table label), list position per fCarried layout"
+040D,obj_040D,obj_040D_Item_PowerBerry_Dropped,Item_PowerBerry,medium,"Dropped object of carried item $08 (table label), list position per fCarried layout"
+040E,obj_040E,obj_040E_Item_Chicken_ArcA_0,Item_Chicken,medium,"ArcA_0 object of carried item $25 (table label), list position per fCarried layout"
+040F,obj_040F,obj_040F_Item_Chicken_ArcA_1,Item_Chicken,medium,"ArcA_1 object of carried item $25 (table label), list position per fCarried layout"
+0410,obj_0410,obj_0410_Item_Chicken_ArcA_2,Item_Chicken,medium,"ArcA_2 object of carried item $25 (table label), list position per fCarried layout"
+0411,obj_0411,obj_0411_Item_Chicken_ArcB_0,Item_Chicken,medium,"ArcB_0 object of carried item $25 (table label), list position per fCarried layout"
+0412,obj_0412,obj_0412_Item_Chicken_ArcB_1,Item_Chicken,medium,"ArcB_1 object of carried item $25 (table label), list position per fCarried layout"
+0413,obj_0413,obj_0413_Item_Chicken_ArcB_2,Item_Chicken,medium,"ArcB_2 object of carried item $25 (table label), list position per fCarried layout"
+0414,obj_0414,obj_0414_Item_Chicken_Big,Item_Chicken,medium,"Big object of carried item $25 (table label), list position per fCarried layout"
+0415,obj_0415,obj_0415_Item_Chicken_ArcLong,Item_Chicken,medium,"ArcLong object of carried item $25 (table label), list position per fCarried layout"
+0416,obj_0416,obj_0416_Item_Chick_ArcA_0,Item_Chick,medium,"ArcA_0 object of carried item $26 (table label), list position per fCarried layout"
+0417,obj_0417,obj_0417_Item_Chick_ArcA_1,Item_Chick,medium,"ArcA_1 object of carried item $26 (table label), list position per fCarried layout"
+0418,obj_0418,obj_0418_Item_Chick_ArcA_2,Item_Chick,medium,"ArcA_2 object of carried item $26 (table label), list position per fCarried layout"
+0419,obj_0419,obj_0419_Item_Chick_ArcB_0,Item_Chick,medium,"ArcB_0 object of carried item $26 (table label), list position per fCarried layout"
+041A,obj_041A,obj_041A_Item_Chick_ArcB_1,Item_Chick,medium,"ArcB_1 object of carried item $26 (table label), list position per fCarried layout"
+041B,obj_041B,obj_041B_Item_Chick_ArcB_2,Item_Chick,medium,"ArcB_2 object of carried item $26 (table label), list position per fCarried layout"
+041C,obj_041C,obj_041C_Item_Chick_Big,Item_Chick,medium,"Big object of carried item $26 (table label), list position per fCarried layout"
+041D,obj_041D,obj_041D_Item_Chick_ArcLong,Item_Chick,medium,"ArcLong object of carried item $26 (table label), list position per fCarried layout"
+041E,obj_041E,obj_041E_Item_Mole_ArcA_0,Item_Mole,medium,"ArcA_0 object of carried item $29 (table label), list position per fCarried layout"
+041F,obj_041F,obj_041F_Item_Mole_ArcA_1,Item_Mole,medium,"ArcA_1 object of carried item $29 (table label), list position per fCarried layout"
+0420,obj_0420,obj_0420_Item_Mole_ArcA_2,Item_Mole,medium,"ArcA_2 object of carried item $29 (table label), list position per fCarried layout"
+0421,obj_0421,obj_0421_Item_Mole_ArcB_0,Item_Mole,medium,"ArcB_0 object of carried item $29 (table label), list position per fCarried layout"
+0422,obj_0422,obj_0422_Item_Mole_ArcB_1,Item_Mole,medium,"ArcB_1 object of carried item $29 (table label), list position per fCarried layout"
+0423,obj_0423,obj_0423_Item_Mole_ArcB_2,Item_Mole,medium,"ArcB_2 object of carried item $29 (table label), list position per fCarried layout"
+0424,obj_0424,obj_0424_Item_Mole_Big,Item_Mole,medium,"Big object of carried item $29 (table label), list position per fCarried layout"
+0425,obj_0425,obj_0425_Item_Mole_ArcLong,Item_Mole,medium,"ArcLong object of carried item $29 (table label), list position per fCarried layout"
+0426,obj_0426,obj_0426_Item_Fish_ArcA_0,Item_Fish,medium,"ArcA_0 object of carried item $07 (table label), list position per fCarried layout"
+0427,obj_0427,obj_0427_Item_Fish_ArcA_1,Item_Fish,medium,"ArcA_1 object of carried item $07 (table label), list position per fCarried layout"
+0428,obj_0428,obj_0428_Item_Fish_ArcA_2,Item_Fish,medium,"ArcA_2 object of carried item $07 (table label), list position per fCarried layout"
+0429,obj_0429,obj_0429_Item_Fish_ArcB_0,Item_Fish,medium,"ArcB_0 object of carried item $07 (table label), list position per fCarried layout"
+042A,obj_042A,obj_042A_Item_Fish_ArcB_1,Item_Fish,medium,"ArcB_1 object of carried item $07 (table label), list position per fCarried layout"
+042B,obj_042B,obj_042B_Item_Fish_ArcB_2,Item_Fish,medium,"ArcB_2 object of carried item $07 (table label), list position per fCarried layout"
+042C,obj_042C,obj_042C_Item_Fish_Big,Item_Fish,medium,"Big object of carried item $07 (table label), list position per fCarried layout"
+042D,obj_042D,obj_042D_Item_Fish_ArcLong,Item_Fish,medium,"ArcLong object of carried item $07 (table label), list position per fCarried layout"
+042E,obj_042E,obj_042E_Item_Feed_ArcA_0,Item_Feed,medium,"ArcA_0 object of carried item $1A (table label), list position per fCarried layout"
+042F,obj_042F,obj_042F_Item_Feed_ArcA_1,Item_Feed,medium,"ArcA_1 object of carried item $1A (table label), list position per fCarried layout"
+0430,obj_0430,obj_0430_Item_Feed_ArcA_2,Item_Feed,medium,"ArcA_2 object of carried item $1A (table label), list position per fCarried layout"
+0431,obj_0431,obj_0431_Item_Feed_ArcB_0,Item_Feed,medium,"ArcB_0 object of carried item $1A (table label), list position per fCarried layout"
+0432,obj_0432,obj_0432_Item_Feed_ArcB_1,Item_Feed,medium,"ArcB_1 object of carried item $1A (table label), list position per fCarried layout"
+0433,obj_0433,obj_0433_Item_Feed_ArcB_2,Item_Feed,medium,"ArcB_2 object of carried item $1A (table label), list position per fCarried layout"
+0434,obj_0434,obj_0434_Item_Feed_Big,Item_Feed,medium,"Big object of carried item $1A (table label), list position per fCarried layout"
+0435,obj_0435,obj_0435_Item_Feed_ArcLong,Item_Feed,medium,"ArcLong object of carried item $1A (table label), list position per fCarried layout"
+0436,obj_0436,obj_0436_Player_CarrySack_0436,Player,medium,player carrying a sack
+0437,obj_0437,obj_0437_Player_CarrySack_0437,Player,medium,player carrying a sack
+0438,obj_0438,obj_0438_Player_CarrySack_0438,Player,medium,player carrying a sack
+0439,obj_0439,obj_0439_Player_CarrySack_0439,Player,medium,player carrying a sack
+043A,obj_043A,obj_043A_Player_CarrySack_043A,Player,medium,player carrying a sack
+043B,obj_043B,obj_043B_Player_CarrySack_043B,Player,medium,player carrying a sack
+043C,obj_043C,obj_043C_Player_CarrySack_043C,Player,medium,player carrying a sack
+043D,obj_043D,obj_043D_Player_CarrySack_043D,Player,medium,player carrying a sack
+043E,obj_043E,obj_043E_Player_CarrySack_043E,Player,medium,player carrying a sack
+043F,obj_043F,obj_043F_Player_CarrySack_043F,Player,medium,player carrying a sack
+0440,obj_0440,obj_0440_Player_CarryWalk_0440,Player,medium,4-frame walk with an item in the hand
+0441,obj_0441,obj_0441_Player_CarryWalk_0441,Player,medium,4-frame walk with an item in the hand
+0442,obj_0442,obj_0442_Player_CarryWalk_0442,Player,medium,4-frame walk with an item in the hand
+0443,obj_0443,obj_0443_Player_CarryWalk_0443,Player,medium,4-frame walk with an item in the hand
+0444,obj_0444,obj_0444_Player_CarryWalk_0444,Player,medium,4-frame walk with an item in the hand
+0445,obj_0445,obj_0445_Player_CarryWalk_0445,Player,medium,4-frame walk with an item in the hand
+0446,obj_0446,obj_0446_Player_CarryWalk_0446,Player,medium,4-frame walk with an item in the hand
+0447,obj_0447,obj_0447_Player_CarryWalk_0447,Player,medium,4-frame walk with an item in the hand
+0448,obj_0448,obj_0448_Npc_Unk_LilacBraidGirlHorse_Pose_0448,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+0449,obj_0449,obj_0449_Npc_Unk_LilacBraidGirlHorse_Pose_0449,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+044A,obj_044A,obj_044A_Npc_Unk_LilacBraidGirlHorse_Pose_044A,Npc,low,"NPC look without a name source (hair / clothes), AI-table direction where present; no table direction"
+044B,obj_044B,obj_044B_Ending_Text_O,Ending,high,"ending script object, hiragana o"
+044C,obj_044C,obj_044C_Ending_Text_Shi,Ending,high,"ending script object, hiragana shi"
+044D,obj_044D,obj_044D_Ending_Text_Ma,Ending,high,"ending script object, hiragana ma"
+044E,obj_044E,obj_044E_Ending_Text_I,Ending,high,"ending script object, hiragana i"
+044F,obj_044F,obj_044F_Ending_Heart,Ending,high,"ending script object, heart after the text"

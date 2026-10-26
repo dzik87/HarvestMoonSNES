@@ -1,4 +1,5 @@
 {
+ "name": "Item_Gem_Dropped",
  "steps": [
   ["86C1DC", 48],
   ["86C1DC", 255]

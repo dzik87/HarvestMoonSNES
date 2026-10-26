@@ -1,4 +1,5 @@
 {
+ "name": "Player_ShowItem_Hammer",
  "steps": [
   ["86C08C", 48],
   ["86C08C", 255]

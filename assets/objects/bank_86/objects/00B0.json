@@ -1,4 +1,5 @@
 {
+ "name": "Player_ShowItem_GoldHoe",
  "steps": [
   ["86C188", 48],
   ["86C188", 255]

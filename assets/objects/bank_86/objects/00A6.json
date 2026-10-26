@@ -1,4 +1,5 @@
 {
+ "name": "Player_ShowItem_Sickle",
  "steps": [
   ["86C0B6", 48],
   ["86C0B6", 255]

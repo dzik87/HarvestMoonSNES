@@ -1,4 +1,5 @@
 {
+ "name": "Player_ShowItem_BoxChick",
  "steps": [
   ["86C149", 48],
   ["86C149", 255]

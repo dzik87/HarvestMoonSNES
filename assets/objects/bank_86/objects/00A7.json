@@ -1,4 +1,5 @@
 {
+ "name": "Player_ShowItem_WateringCan",
  "steps": [
   ["86C0CB", 48],
   ["86C0CB", 255]
