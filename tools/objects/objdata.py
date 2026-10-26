@@ -9,8 +9,8 @@ The sources live in ``assets/objects/bank_86`` and ``bank_87`` (see docs/formats
 ``build`` turns them into ``build/gen/objects/bank_XX.asm`` (labels and symbolic pointers, the file
 ``src/main.asm`` includes); no object data is committed under ``src/``.  Besides that the tool
 
-  * extracts the sources from the original data (``extract`` from a ROM dump or from the legacy
-    ``db``/``dw`` assembly dumps, ``parse_asm``),
+  * extracts the sources from the original data (``build_model`` + ``model_to_source`` + ``write_sources``, driven by
+    tools/extract_steps/objects.py: ``python tools/extract.py --rom-dir DIR --only objects``),
   * builds a structural model of each bank (``build_model``),
   * re-serialises the model with a fresh layout pass and compares it with the assembled bytes (``check``),
   * prints statistics (``analyze``).
@@ -28,8 +28,6 @@ Format summary (see docs/formats/object-data.md for evidence):
 Usage:
   python3 tools/objects/objdata.py build                    # sources -> build/gen/objects/bank_XX.asm
   python3 tools/objects/objdata.py check [--rom US.sfc]     # sources are consistent (and equal the ROM banks)
-  python3 tools/objects/objdata.py extract --rom US.sfc     # ROM dump -> sources (overwrites assets/objects)
-  python3 tools/objects/objdata.py extract --asm            # legacy src/data/objects/*.asm -> sources
   python3 tools/objects/objdata.py analyze
 """
 import argparse
@@ -40,7 +38,6 @@ import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-SRC_DIR_LEGACY = os.path.join(ROOT, 'src', 'data', 'objects')   # legacy db/dw dumps (extract --asm only)
 OBJ_DIR = os.path.join(ROOT, 'assets', 'objects')
 GEN_DIR = os.path.join(ROOT, 'build', 'gen', 'objects')
 SRC_DIR = os.path.join(ROOT, 'src')
@@ -51,14 +48,13 @@ LIST_TABLE_OFF = 0x8080          # pointer table, one u16 per object index
 SLOT_TABLE_OFF = 0x8000          # 64 x u16 slot -> OAM tile number
 SLOT_COUNT = 0x40
 OBJ_SPLIT = 0x262                # fObject_*: spriteTableIdx >= $262 -> bank $87
-NAME_RE = re.compile(r'^[A-Za-z_][A-Za-z0-9_]*$')
 
 
 # --------------------------------------------------------------------------
-# Assembly source -> bytes
+# Assembled bank (bytes + labels)
 # --------------------------------------------------------------------------
 class AsmBank:
-    """Result of assembling one bank source: bytes, labels and pointer fixups."""
+    """A bank image with its labels: bytes, labels and pointer fixups."""
 
     def __init__(self, bank, org):
         self.bank = bank
@@ -66,88 +62,6 @@ class AsmBank:
         self.data = bytearray()
         self.labels = collections.OrderedDict()   # name -> 16-bit offset
         self.symrefs = {}                # offset of a dw -> label name used there
-
-
-_LABEL_RE = re.compile(r'^([A-Za-z_][A-Za-z0-9_]*):')
-_INSN_RE = re.compile(r'^\s+(db|dw)\s+(.*)$', re.I)
-_ORG_RE = re.compile(r'^\s*ORG\s+\$([0-9A-Fa-f]+)', re.I)
-_SYM_RE = re.compile(r'([A-Za-z_][A-Za-z0-9_]*)(?:\s*([+-])\s*(\$[0-9A-Fa-f]+|\d+))?')
-
-
-def _num(tok):
-    return int(tok[1:], 16) if tok.startswith('$') else int(tok)
-
-
-def _parse_value(tok, labels, size, lineno, resolve):
-    tok = tok.strip()
-    if re.fullmatch(r'\$[0-9A-Fa-f]+|\d+', tok):
-        v = _num(tok)
-        if v >= 1 << (8 * size):
-            raise ValueError('line %d: value %s too large' % (lineno, tok))
-        return v, None
-    m = _SYM_RE.fullmatch(tok)
-    if m and size == 2:
-        name = m.group(1)
-        off = 0
-        if m.group(2):
-            off = _num(m.group(3)) * (1 if m.group(2) == '+' else -1)
-        if not resolve:
-            return 0, name
-        if name not in labels:
-            raise ValueError('line %d: unknown label %s' % (lineno, name))
-        return (labels[name] + off) & 0xFFFF, name
-    raise ValueError('line %d: cannot parse operand %r' % (lineno, tok))
-
-
-def parse_asm(path, bank):
-    """Assemble a bank source file made only of ORG, labels, db and dw."""
-    with open(path, encoding='utf-8') as fh:
-        lines = fh.read().splitlines()
-    out = None
-    for resolve in (False, True):          # pass 1: labels, pass 2: values
-        pos = 0
-        org = None
-        if resolve:
-            out.data = bytearray()
-            out.symrefs = {}
-        for n, raw in enumerate(lines, 1):
-            line = raw.split(';', 1)[0].rstrip()
-            if not line.strip():
-                continue
-            m = _ORG_RE.match(line)
-            if m:
-                org = int(m.group(1), 16)
-                if (org >> 16) != bank:
-                    raise ValueError('%s: ORG bank %02X != %02X' % (path, org >> 16, bank))
-                if out is None:
-                    out = AsmBank(bank, org)
-                continue
-            m = _LABEL_RE.match(line)
-            if m:
-                name = m.group(1)
-                if not resolve:
-                    if name in out.labels:
-                        raise ValueError('line %d: duplicate label %s' % (n, name))
-                    out.labels[name] = (org & 0xFFFF) + pos
-                line = line[m.end():]
-                if not line.strip():
-                    continue
-            m = _INSN_RE.match(line)
-            if not m:
-                raise ValueError('%s:%d: unsupported line %r' % (path, n, raw))
-            size = 1 if m.group(1).lower() == 'db' else 2
-            for tok in m.group(2).split(','):
-                v, sym = _parse_value(tok, out.labels, size, n, resolve)
-                if resolve:
-                    if sym is not None:
-                        out.symrefs[pos] = sym
-                    out.data += v.to_bytes(size, 'little')
-                pos += size
-    return out
-
-
-def load_legacy_asm_banks():
-    return {b: parse_asm(os.path.join(SRC_DIR_LEGACY, f), b) for b, f in BANKS.items()}
 
 
 # --------------------------------------------------------------------------
@@ -806,7 +720,11 @@ def write_sources(src, root=None):
 
 def rom_bank(rom_path, bank):
     with open(rom_path, 'rb') as fh:
-        rom = fh.read()
+        return rom_bank_bytes(fh.read(), bank)
+
+
+def rom_bank_bytes(rom, bank):
+    """The AsmBank of bank `bank` ($86/$87) taken from a headerless 2 MB ROM image."""
     off = (bank - 0x80) * BANK_SIZE
     ab = AsmBank(bank, (bank << 16) | BASE)
     ab.data = bytearray(rom[off:off + BANK_SIZE])
@@ -823,26 +741,6 @@ def cmd_build(_args):
         with open(os.path.join(GEN_DIR, 'bank_%02X.asm' % b), 'w', encoding='utf-8', newline='\n') as fh:
             fh.write(text)
     print('objdata: wrote build/gen/objects/bank_86.asm, bank_87.asm')
-    return 0
-
-
-def cmd_extract(args):
-    if args.rom:
-        banks = {b: rom_bank(args.rom, b) for b in BANKS}
-    elif args.asm:
-        banks = load_legacy_asm_banks()
-    else:
-        print('extract needs --rom <US rom> or --asm', file=sys.stderr)
-        return 2
-    for b, asm in banks.items():
-        m = build_model(asm)
-        src = model_to_source(m)
-        if source_to_asmbank(src).data != asm.data:
-            print('bank $%02X: sources do not reproduce the input bytes' % b, file=sys.stderr)
-            return 1
-        write_sources(src)
-        print('bank $%02X: %d objects, %d frame entries written to %s'
-              % (b, len(src.objects), len(src.entries), os.path.relpath(_bank_dir(b), ROOT)))
     return 0
 
 
@@ -885,11 +783,8 @@ def main(argv=None):
     sub.add_parser('build')
     p = sub.add_parser('check')
     p.add_argument('--rom', help='also compare the assembled banks with this US ROM dump')
-    p = sub.add_parser('extract')
-    p.add_argument('--rom', help='US ROM dump (tool input only)')
-    p.add_argument('--asm', action='store_true', help='legacy src/data/objects/*.asm dumps')
     args = ap.parse_args(argv)
-    return {'analyze': cmd_analyze, 'build': cmd_build, 'check': cmd_check, 'extract': cmd_extract}[args.cmd](args)
+    return {'analyze': cmd_analyze, 'build': cmd_build, 'check': cmd_check}[args.cmd](args)
 
 
 if __name__ == '__main__':

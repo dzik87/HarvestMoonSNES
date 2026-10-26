@@ -1,0 +1,11 @@
+{
+ "comment": "Layout of the per-area tables in the US ROM (docs/formats/area-data.md). The descriptors follow aTileMapData directly (96 pointers first), the object property tables follow pObjectMap2 and the music sets follow pAudioEngine_MapMusic, each in the order listed here.",
+ "tile_map_data": "$80AA7C",
+ "screen_transitions": "$80B6F5",
+ "screen_transition_count": 59,
+ "object_maps": "$82B174",
+ "object_props": "$82B294",
+ "map_music": "$80B8E7",
+ "property_tables": ["sObjectMap2_0x00", "sObjectMap2_0x01", "sObjectMap2_0x02", "sObjectMap2_0x03", "sObjectMap2_0x04", "sObjectMap2_0x05", "sObjectMap2_0x06"],
+ "music_sets": ["aAudioEngine_MapMusicId_0x00", "aAudioEngine_MapMusicId_0x01", "aAudioEngine_MapMusicId_0x02", "aAudioEngine_MapMusicId_0x03", "aAudioEngine_MapMusicId_0x04", "aAudioEngine_MapMusicId_0x05", "aAudioEngine_MapMusicId_0x06", "aAudioEngine_MapMusicId_0x07", "aAudioEngine_MapMusicId_0x08", "aAudioEngine_MapMusicId_0x09", "aAudioEngine_MapMusicId_0x0A", "aAudioEngine_MapMusicId_0x0B"]
+}

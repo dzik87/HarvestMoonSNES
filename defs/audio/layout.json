@@ -1,0 +1,14 @@
+{
+ "comment": "Where the audio data lives in the US ROM (LoROM addresses; layout only). The six 65816 tables follow each other (sample sizes, track sizes, track table, sample table, SFX sample ids, common samples), so the entry counts follow from the addresses; the blobs they point to are read from the pointers. Format: docs/formats/audio-sources.md",
+ "tables": {
+  "sample_size": "$838EFF",
+  "track_size": "$838F4F",
+  "track_table": "$838F83",
+  "sample_data": "$8390EF",
+  "sfx_sample_ids": "$83927F",
+  "common_samples": "$8392B1"
+ },
+ "common_samples_count": 10,
+ "driver": {"rom": "$AD8000", "size": 4054},
+ "sfx_block": {"rom": "$B2D120", "size": 1010}
+}

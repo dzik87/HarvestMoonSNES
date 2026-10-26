@@ -2,16 +2,15 @@
 
 Each sObjectMap_* is a row-major grid of 1-byte object/tile ids.  The row stride is 16 * mapMultiWidth tiles
 (header byte 3 of the area, see fObjectEngine_ConvertCoordsToOffset); widths per map come from
-tools/maps/map_dims.json (derived from the area header table, 3 maps are not referenced and their width is an
-assumption - the bytes are unaffected either way).  The assets/maps/*.json files are the only source: the
-assembly (build/gen/maps/bank_A7.asm, included by src/main.asm) is generated and not committed.
+defs/maps/layout.json (derived from the area header table, 3 maps are not referenced and their width is an
+assumption - the bytes are unaffected either way).  The assets/maps/*.json files (extracted from the ROM, tools/extract_steps/objects.py)
+are the only source: the assembly (build/gen/maps/bank_A7.asm, included by src/main.asm) is generated and not committed.
+Labels, addresses and sizes of the maps are layout and live in defs/maps/layout.json.
 
 Commands:
   build     assets/maps/*.json -> build/gen/maps/bank_A7.asm  (maps in address order, canonical `db` rows, zero padding)
   check     JSON files are consistent: contiguous addresses from $A78000, sizes = width*height, bank not overflown
             (with --rom <US rom>: the maps also equal the ROM bytes)
-  extract   ROM dump -> assets/maps/<label>.json  {"label","address","width","height","areas","rows":["A1 A1 ..",...]}
-            (label/address/size list is taken from the existing JSON files; ROM is a tool input only)
 """
 import argparse, json, sys
 from pathlib import Path
@@ -19,17 +18,18 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 GEN = ROOT / "build" / "gen" / "maps" / "bank_A7.asm"
 ASSETS = ROOT / "assets" / "maps"
-DIMS = json.loads((Path(__file__).parent / "map_dims.json").read_text())
+LAYOUT = json.loads((ROOT / "defs" / "maps" / "layout.json").read_text())["maps"]
+DIMS = {m["label"]: m for m in LAYOUT}
 BANK = 0x8000
 ORG = 0xA78000
 
 
-def to_json(label, address, data):
+def to_json(label, address, data, areas):
     d = DIMS[label]
     w, h = d["width"], len(data) // d["width"]
     assert w * h == len(data)
     rows = [" ".join("%02X" % b for b in data[y * w:(y + 1) * w]) for y in range(h)]
-    return {"label": label, "address": "$%06X" % address, "width": w, "height": h, "areas": d["areas"], "rows": rows}
+    return {"label": label, "address": "$%06X" % address, "width": w, "height": h, "areas": areas, "rows": rows}
 
 
 def from_json(doc):
@@ -57,7 +57,7 @@ def problems(docs):
         if a != addr:
             errs.append(f"{d['label']}: address ${a:06X} expected ${addr:06X} (maps must be contiguous)")
         if d["label"] not in DIMS or DIMS[d["label"]]["width"] != d["width"]:
-            errs.append(f"{d['label']}: width differs from tools/maps/map_dims.json")
+            errs.append(f"{d['label']}: width differs from defs/maps/layout.json")
         addr = a + len(data)
     if addr > ORG + BANK:
         errs.append("maps overflow bank $A7")
@@ -86,20 +86,6 @@ def cmd_build(a):
     return 0
 
 
-def cmd_extract(a):
-    if not a.rom:
-        raise SystemExit("extract needs --rom <US rom>")
-    rom = Path(a.rom).read_bytes()
-    base = (ORG >> 16) - 0x80
-    bank = rom[base * BANK:(base + 1) * BANK]
-    for d in load_docs():
-        off = int(d["address"].lstrip("$"), 16) - ORG
-        n = d["width"] * d["height"]
-        (ASSETS / f"{d['label']}.json").write_text(json.dumps(to_json(d["label"], ORG + off, bank[off:off + n]), indent=1) + "\n", encoding="utf-8", newline="\n")
-    print("extracted maps")
-    return 0
-
-
 def cmd_check(a):
     docs = load_docs()
     errs = problems(docs)
@@ -117,10 +103,10 @@ def cmd_check(a):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("cmd", choices=["build", "check", "extract"])
+    ap.add_argument("cmd", choices=["build", "check"])
     ap.add_argument("--rom")
     a = ap.parse_args()
-    return {"build": cmd_build, "check": cmd_check, "extract": cmd_extract}[a.cmd](a) or 0
+    return {"build": cmd_build, "check": cmd_check}[a.cmd](a) or 0
 
 
 if __name__ == "__main__":
