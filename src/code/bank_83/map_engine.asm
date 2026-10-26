@@ -67,89 +67,89 @@ fAreaEvents_Farm:
     LDA.W strcDialogDisplay.mapFlags                           ;83CC0C|AD9601  |000196;
     AND.W #$001A                                               ;83CC0F|291A00  |      ;
     BEQ +                                                      ;83CC12|F003    |83CC17;
-    JMP.W .label9                                              ;83CC14|4C5BCE  |83CE5B;
+    JMP.W .check_daily1_0002                                              ;83CC14|4C5BCE  |83CE5B;
  
  
   + %CheckFlag(event2, !EFLAGS2_MARRIEDMARIA)
     BEQ +                                                      ;83CC1E|F003    |83CC23;
-    JMP.W .label9                                              ;83CC20|4C5BCE  |83CE5B;
+    JMP.W .check_daily1_0002                                              ;83CC20|4C5BCE  |83CE5B;
  
  
   + %CheckFlag(event2, !EFLAGS2_MARRIEDANN)
     BEQ +                                                      ;83CC2A|F003    |83CC2F;
-    JMP.W .label9                                              ;83CC2C|4C5BCE  |83CE5B;
+    JMP.W .check_daily1_0002                                              ;83CC2C|4C5BCE  |83CE5B;
  
  
   + %CheckFlag(event2, !EFLAGS2_MARRIEDNINA)
     BEQ +                                                      ;83CC36|F003    |83CC3B;
-    JMP.W .label9                                              ;83CC38|4C5BCE  |83CE5B;
+    JMP.W .check_daily1_0002                                              ;83CC38|4C5BCE  |83CE5B;
  
  
   + %CheckFlag(event2, !EFLAGS2_MARRIEDELLEN)
     BEQ +                                                      ;83CC42|F003    |83CC47;
-    JMP.W .label9                                              ;83CC44|4C5BCE  |83CE5B;
+    JMP.W .check_daily1_0002                                              ;83CC44|4C5BCE  |83CE5B;
  
  
   + %CheckFlag(event2, !EFLAGS2_MARRIEDEVE)
     BEQ +                                                      ;83CC4E|F003    |83CC53;
-    JMP.W .label9                                              ;83CC50|4C5BCE  |83CE5B;
+    JMP.W .check_daily1_0002                                              ;83CC50|4C5BCE  |83CE5B;
  
  
   + SEP #$20                                                   ;83CC53|E220    |      ;
     LDA.L nCurrentTimeID                                       ;83CC55|AF1C1F7F|7F1F1C;
     CMP.B #$06                                                 ;83CC59|C906    |      ;
     BEQ +                                                      ;83CC5B|F003    |83CC60;
-    JMP.W .label9                                              ;83CC5D|4C5BCE  |83CE5B;
+    JMP.W .check_daily1_0002                                              ;83CC5D|4C5BCE  |83CE5B;
  
  
   + LDA.L nInGameHourCounter                                   ;83CC60|AF1D1F7F|7F1F1D;
     BEQ +                                                      ;83CC64|F003    |83CC69;
-    JMP.W .label9                                              ;83CC66|4C5BCE  |83CE5B;
+    JMP.W .check_daily1_0002                                              ;83CC66|4C5BCE  |83CE5B;
  
  
   + LDA.L nInGameMinuteCounter                                 ;83CC69|AF1E1F7F|7F1F1E;
     BEQ +                                                      ;83CC6D|F003    |83CC72;
-    JMP.W .label9                                              ;83CC6F|4C5BCE  |83CE5B;
+    JMP.W .check_daily1_0002                                              ;83CC6F|4C5BCE  |83CE5B;
  
  
   + LDA.L nCurrentDay                                          ;83CC72|AF1B1F7F|7F1F1B;
     CMP.B #$01                                                 ;83CC76|C901    |      ;
     BNE +                                                      ;83CC78|D003    |83CC7D;
-    JMP.W .label9                                              ;83CC7A|4C5BCE  |83CE5B;
+    JMP.W .check_daily1_0002                                              ;83CC7A|4C5BCE  |83CE5B;
  
  
   + CMP.B #$08                                                 ;83CC7D|C908    |      ;
-    BCC .label4                                                ;83CC7F|9019    |83CC9A;
+    BCC .check_visit_maria                                                ;83CC7F|9019    |83CC9A;
     CMP.B #$0D                                                 ;83CC81|C90D    |      ;
     BCS +                                                      ;83CC83|B003    |83CC88;
-    JMP.W .label9                                              ;83CC85|4C5BCE  |83CE5B;
+    JMP.W .check_daily1_0002                                              ;83CC85|4C5BCE  |83CE5B;
  
  
   + CMP.B #$12                                                 ;83CC88|C912    |      ;
-    BCC .label4                                                ;83CC8A|900E    |83CC9A;
+    BCC .check_visit_maria                                                ;83CC8A|900E    |83CC9A;
     CMP.B #$19                                                 ;83CC8C|C919    |      ;
     BCS +                                                      ;83CC8E|B003    |83CC93;
-    JMP.W .label9                                              ;83CC90|4C5BCE  |83CE5B;
+    JMP.W .check_daily1_0002                                              ;83CC90|4C5BCE  |83CE5B;
  
  
   + CMP.B #$1D                                                 ;83CC93|C91D    |      ;
-    BCC .label4                                                ;83CC95|9003    |83CC9A;
-    JMP.W .label9                                              ;83CC97|4C5BCE  |83CE5B;
+    BCC .check_visit_maria                                                ;83CC95|9003    |83CC9A;
+    JMP.W .check_daily1_0002                                              ;83CC97|4C5BCE  |83CE5B;
  
  
-.label4:
+.check_visit_maria:
     REP #$20                                                   ;83CC9A|C220    |      ;
     %CheckFlag(event2, !EFLAGS2_MARRIEDMARIA)
-    BNE .label5                                                ;83CCA3|D044    |83CCE9;
+    BNE .check_visit_ann                                                ;83CCA3|D044    |83CCE9;
     %CheckFlag(event2, $0080)
-    BNE .label5                                                ;83CCAC|D03B    |83CCE9;
+    BNE .check_visit_ann                                                ;83CCAC|D03B    |83CCE9;
     %CheckFlag(event4, $2000)
-    BNE .label5                                                ;83CCB5|D032    |83CCE9;
+    BNE .check_visit_ann                                                ;83CCB5|D032    |83CCE9;
     %CheckFlag(event4, $1000)
-    BNE .label5                                                ;83CCBE|D029    |83CCE9;
+    BNE .check_visit_ann                                                ;83CCBE|D029    |83CCE9;
     LDA.L nLove_Maria                                          ;83CCC0|AF1F1F7F|7F1F1F;
     CMP.W #$00C8                                               ;83CCC4|C9C800  |      ;
-    BCC .label5                                                ;83CCC7|9020    |83CCE9;
+    BCC .check_visit_ann                                                ;83CCC7|9020    |83CCE9;
     %SetFlag(event4, $1000)
     REP #$30                                                   ;83CCD4|C230    |      ;
     %AIExecute($0000, $0019, $0000)
@@ -158,19 +158,19 @@ fAreaEvents_Farm:
     RTS                                                        ;83CCE8|60      |      ;
  
  
-.label5:
+.check_visit_ann:
     REP #$20                                                   ;83CCE9|C220    |      ;
     %CheckFlag(event4, $1000)
-    BNE .label6                                                ;83CCF2|D044    |83CD38;
+    BNE .check_visit_nina                                                ;83CCF2|D044    |83CD38;
     %CheckFlag(event2, !EFLAGS2_MARRIEDANN)
-    BNE .label6                                                ;83CCFB|D03B    |83CD38;
+    BNE .check_visit_nina                                                ;83CCFB|D03B    |83CD38;
     %CheckFlag(event4, $8000)
-    BNE .label6                                                ;83CD04|D032    |83CD38;
+    BNE .check_visit_nina                                                ;83CD04|D032    |83CD38;
     %CheckFlag(event4, $4000)
-    BNE .label6                                                ;83CD0D|D029    |83CD38;
+    BNE .check_visit_nina                                                ;83CD0D|D029    |83CD38;
     LDA.L nLove_Ann                                            ;83CD0F|AF211F7F|7F1F21;
     CMP.W #$00C8                                               ;83CD13|C9C800  |      ;
-    BCC .label6                                                ;83CD16|9020    |83CD38;
+    BCC .check_visit_nina                                                ;83CD16|9020    |83CD38;
     %SetFlag(event4, $4000)
     REP #$30                                                   ;83CD23|C230    |      ;
     %AIExecute($0000, $001A, $0000)
@@ -179,21 +179,21 @@ fAreaEvents_Farm:
     RTS                                                        ;83CD37|60      |      ;
  
  
-.label6:
+.check_visit_nina:
     REP #$20                                                   ;83CD38|C220    |      ;
     %CheckFlag(event4, $1000)
-    BNE .label7                                                ;83CD41|D04D    |83CD90;
+    BNE .check_visit_ellen                                                ;83CD41|D04D    |83CD90;
     %CheckFlag(event4, $4000)
-    BNE .label7                                                ;83CD4A|D044    |83CD90;
+    BNE .check_visit_ellen                                                ;83CD4A|D044    |83CD90;
     %CheckFlag(event2, !EFLAGS2_MARRIEDNINA)
-    BNE .label7                                                ;83CD53|D03B    |83CD90;
+    BNE .check_visit_ellen                                                ;83CD53|D03B    |83CD90;
     %CheckFlag(event5, $0002)
-    BNE .label7                                                ;83CD5C|D032    |83CD90;
+    BNE .check_visit_ellen                                                ;83CD5C|D032    |83CD90;
     %CheckFlag(event5, $0001)
-    BNE .label7                                                ;83CD65|D029    |83CD90;
+    BNE .check_visit_ellen                                                ;83CD65|D029    |83CD90;
     LDA.L nLove_Nina                                           ;83CD67|AF231F7F|7F1F23;
     CMP.W #$00C8                                               ;83CD6B|C9C800  |      ;
-    BCC .label7                                                ;83CD6E|9020    |83CD90;
+    BCC .check_visit_ellen                                                ;83CD6E|9020    |83CD90;
     %SetFlag(event5, $0001)
     REP #$30                                                   ;83CD7B|C230    |      ;
     %AIExecute($0000, $001B, $0000)
@@ -202,23 +202,23 @@ fAreaEvents_Farm:
     RTS                                                        ;83CD8F|60      |      ;
  
  
-.label7:
+.check_visit_ellen:
     REP #$20                                                   ;83CD90|C220    |      ;
     %CheckFlag(event4, $1000)
-    BNE .label8                                                ;83CD99|D056    |83CDF1;
+    BNE .check_visit_eve                                                ;83CD99|D056    |83CDF1;
     %CheckFlag(event4, $4000)
-    BNE .label8                                                ;83CDA2|D04D    |83CDF1;
+    BNE .check_visit_eve                                                ;83CDA2|D04D    |83CDF1;
     %CheckFlag(event5, $0001)
-    BNE .label8                                                ;83CDAB|D044    |83CDF1;
+    BNE .check_visit_eve                                                ;83CDAB|D044    |83CDF1;
     %CheckFlag(event2, !EFLAGS2_MARRIEDELLEN)
-    BNE .label8                                                ;83CDB4|D03B    |83CDF1;
+    BNE .check_visit_eve                                                ;83CDB4|D03B    |83CDF1;
     %CheckFlag(event5, $0008)
-    BNE .label8                                                ;83CDBD|D032    |83CDF1;
+    BNE .check_visit_eve                                                ;83CDBD|D032    |83CDF1;
     %CheckFlag(event5, $0004)
-    BNE .label8                                                ;83CDC6|D029    |83CDF1;
+    BNE .check_visit_eve                                                ;83CDC6|D029    |83CDF1;
     LDA.L nLove_Ellen                                          ;83CDC8|AF251F7F|7F1F25;
     CMP.W #$00C8                                               ;83CDCC|C9C800  |      ;
-    BCC .label8                                                ;83CDCF|9020    |83CDF1;
+    BCC .check_visit_eve                                                ;83CDCF|9020    |83CDF1;
     %SetFlag(event5, $0004)
     REP #$30                                                   ;83CDDC|C230    |      ;
     %AIExecute($0000, $001C, $0000)
@@ -227,25 +227,25 @@ fAreaEvents_Farm:
     RTS                                                        ;83CDF0|60      |      ;
  
  
-.label8:
+.check_visit_eve:
     REP #$20                                                   ;83CDF1|C220    |      ;
     %CheckFlag(event4, $1000)
-    BNE .label9                                                ;83CDFA|D05F    |83CE5B;
+    BNE .check_daily1_0002                                                ;83CDFA|D05F    |83CE5B;
     %CheckFlag(event4, $4000)
-    BNE .label9                                                ;83CE03|D056    |83CE5B;
+    BNE .check_daily1_0002                                                ;83CE03|D056    |83CE5B;
     %CheckFlag(event5, $0001)
-    BNE .label9                                                ;83CE0C|D04D    |83CE5B;
+    BNE .check_daily1_0002                                                ;83CE0C|D04D    |83CE5B;
     %CheckFlag(event5, $0004)
-    BNE .label9                                                ;83CE15|D044    |83CE5B;
+    BNE .check_daily1_0002                                                ;83CE15|D044    |83CE5B;
     %CheckFlag(event2, !EFLAGS2_MARRIEDEVE)
-    BNE .label9                                                ;83CE1E|D03B    |83CE5B;
+    BNE .check_daily1_0002                                                ;83CE1E|D03B    |83CE5B;
     %CheckFlag(event5, $0020)
-    BNE .label9                                                ;83CE27|D032    |83CE5B;
+    BNE .check_daily1_0002                                                ;83CE27|D032    |83CE5B;
     %CheckFlag(event5, $0010)
-    BNE .label9                                                ;83CE30|D029    |83CE5B;
+    BNE .check_daily1_0002                                                ;83CE30|D029    |83CE5B;
     LDA.L nLove_Eve                                            ;83CE32|AF271F7F|7F1F27;
     CMP.W #$00C8                                               ;83CE36|C9C800  |      ;
-    BCC .label9                                                ;83CE39|9020    |83CE5B;
+    BCC .check_daily1_0002                                                ;83CE39|9020    |83CE5B;
     %SetFlag(event5, $0010)
     REP #$30                                                   ;83CE46|C230    |      ;
     %AIExecute($0000, $001D, $0000)
@@ -254,10 +254,10 @@ fAreaEvents_Farm:
     RTS                                                        ;83CE5A|60      |      ;
  
  
-.label9:
+.check_daily1_0002:
     REP #$30                                                   ;83CE5B|C230    |      ;
     %CheckFlag(daily1, $0002)
-    BEQ .label10                                               ;83CE64|F02D    |83CE93;
+    BEQ .check_intro                                               ;83CE64|F02D    |83CE93;
     REP #$20                                                   ;83CE66|C220    |      ;
     %AIExecute($0007, $0000, $0020)
     SEP #$20                                                   ;83CE75|E220    |      ;
@@ -270,19 +270,19 @@ fAreaEvents_Farm:
     RTS                                                        ;83CE92|60      |      ;
  
  
-.label10:
+.check_intro:
     REP #$30                                                   ;83CE93|C230    |      ;
     %CheckFlag(event3, $0001)
-    BNE .label11                                               ;83CE9C|D010    |83CEAE;
+    BNE .check_dog_naming                                               ;83CE9C|D010    |83CEAE;
     REP #$30                                                   ;83CE9E|C230    |      ;
     %AIExecute($0000, $000A, $0002)
     RTS                                                        ;83CEAD|60      |      ;
  
  
-.label11:
+.check_dog_naming:
     REP #$30                                                   ;83CEAE|C230    |      ;
     %CheckFlag(event3, $0020)
-    BNE .label12                                               ;83CEB7|D024    |83CEDD;
+    BNE .check_dog_arrival                                               ;83CEB7|D024    |83CEDD;
     REP #$30                                                   ;83CEB9|C230    |      ;
     %AIExecute($0000, $000C, $0000)
     REP #$20                                                   ;83CEC8|C220    |      ;
@@ -293,10 +293,10 @@ fAreaEvents_Farm:
     RTS                                                        ;83CEDC|60      |      ;
  
  
-.label12:
+.check_dog_arrival:
     REP #$30                                                   ;83CEDD|C230    |      ;
     %CheckFlag(event3, $0080)
-    BNE .label13                                               ;83CEE6|D028    |83CF10;
+    BNE .check_festival_morning                                               ;83CEE6|D028    |83CF10;
     REP #$30                                                   ;83CEE8|C230    |      ;
     %AIExecute($0000, $000C, $0001)
     REP #$20                                                   ;83CEF7|C220    |      ;
@@ -310,20 +310,20 @@ fAreaEvents_Farm:
     RTS                                                        ;83CF0F|60      |      ;
  
  
-.label13:
+.check_festival_morning:
     SEP #$20                                                   ;83CF10|E220    |      ;
     REP #$10                                                   ;83CF12|C210    |      ;
     LDA.W nWeatherForecast                                     ;83CF14|AD8C09  |00098C;
     CMP.B #$06                                                 ;83CF17|C906    |      ;
-    BCC .label14                                               ;83CF19|9027    |83CF42;
+    BCC .check_event7_0002_morning                                               ;83CF19|9027    |83CF42;
     LDA.L nCurrentTimeID                                       ;83CF1B|AF1C1F7F|7F1F1C;
     CMP.B #$06                                                 ;83CF1F|C906    |      ;
-    BNE .label14                                               ;83CF21|D01F    |83CF42;
+    BNE .check_event7_0002_morning                                               ;83CF21|D01F    |83CF42;
     LDA.L nInGameHourCounter                                   ;83CF23|AF1D1F7F|7F1F1D;
-    BNE .label14                                               ;83CF27|D019    |83CF42;
+    BNE .check_event7_0002_morning                                               ;83CF27|D019    |83CF42;
     LDA.L nInGameMinuteCounter                                 ;83CF29|AF1E1F7F|7F1F1E;
     BEQ +                                                      ;83CF2D|F003    |83CF32;
-    JMP.W .label17                                             ;83CF2F|4CF8CF  |83CFF8;
+    JMP.W .check_event2_0040                                             ;83CF2F|4CF8CF  |83CFF8;
  
  
   + REP #$30                                                   ;83CF32|C230    |      ;
@@ -331,60 +331,60 @@ fAreaEvents_Farm:
     RTS                                                        ;83CF41|60      |      ;
  
  
-.label14:
+.check_event7_0002_morning:
     REP #$30                                                   ;83CF42|C230    |      ;
     %CheckFlag(event7, $0002)
-    BEQ .label15                                               ;83CF4B|F026    |83CF73;
+    BEQ .check_event1_0010_morning                                               ;83CF4B|F026    |83CF73;
     SEP #$20                                                   ;83CF4D|E220    |      ;
     LDA.L nCurrentTimeID                                       ;83CF4F|AF1C1F7F|7F1F1C;
     CMP.B #$06                                                 ;83CF53|C906    |      ;
-    BNE .label15                                               ;83CF55|D01C    |83CF73;
+    BNE .check_event1_0010_morning                                               ;83CF55|D01C    |83CF73;
     LDA.L nInGameHourCounter                                   ;83CF57|AF1D1F7F|7F1F1D;
-    BNE .label15                                               ;83CF5B|D016    |83CF73;
+    BNE .check_event1_0010_morning                                               ;83CF5B|D016    |83CF73;
     LDA.L nInGameMinuteCounter                                 ;83CF5D|AF1E1F7F|7F1F1E;
-    BNE .label15                                               ;83CF61|D010    |83CF73;
+    BNE .check_event1_0010_morning                                               ;83CF61|D010    |83CF73;
     REP #$30                                                   ;83CF63|C230    |      ;
     %AIExecute($0006, $0024, $0002)
     RTS                                                        ;83CF72|60      |      ;
  
  
-.label15:
+.check_event1_0010_morning:
     REP #$30                                                   ;83CF73|C230    |      ;
     %CheckFlag(event1, $0010)
-    BEQ .label16                                               ;83CF7C|F026    |83CFA4;
+    BEQ .check_summer_event                                               ;83CF7C|F026    |83CFA4;
     SEP #$20                                                   ;83CF7E|E220    |      ;
     LDA.L nCurrentTimeID                                       ;83CF80|AF1C1F7F|7F1F1C;
     CMP.B #$06                                                 ;83CF84|C906    |      ;
-    BNE .label16                                               ;83CF86|D01C    |83CFA4;
+    BNE .check_summer_event                                               ;83CF86|D01C    |83CFA4;
     LDA.L nInGameHourCounter                                   ;83CF88|AF1D1F7F|7F1F1D;
-    BNE .label16                                               ;83CF8C|D016    |83CFA4;
+    BNE .check_summer_event                                               ;83CF8C|D016    |83CFA4;
     LDA.L nInGameMinuteCounter                                 ;83CF8E|AF1E1F7F|7F1F1E;
-    BNE .label16                                               ;83CF92|D010    |83CFA4;
+    BNE .check_summer_event                                               ;83CF92|D010    |83CFA4;
     REP #$30                                                   ;83CF94|C230    |      ;
     %AIExecute($0006, $0024, $0003)
     RTS                                                        ;83CFA3|60      |      ;
  
  
-.label16:
+.check_summer_event:
     REP #$30                                                   ;83CFA4|C230    |      ;
     %CheckFlag(event7, $0001)
-    BNE .label17                                               ;83CFAD|D049    |83CFF8;
+    BNE .check_event2_0040                                               ;83CFAD|D049    |83CFF8;
     SEP #$20                                                   ;83CFAF|E220    |      ;
     LDA.L nCurrentYearID                                       ;83CFB1|AF181F7F|7F1F18;
-    BNE .label17                                               ;83CFB5|D041    |83CFF8;
+    BNE .check_event2_0040                                               ;83CFB5|D041    |83CFF8;
     LDA.L nCurrentSeasonID                                     ;83CFB7|AF191F7F|7F1F19;
     CMP.B #$01                                                 ;83CFBB|C901    |      ;
-    BNE .label17                                               ;83CFBD|D039    |83CFF8;
+    BNE .check_event2_0040                                               ;83CFBD|D039    |83CFF8;
     LDA.L nCurrentDay                                          ;83CFBF|AF1B1F7F|7F1F1B;
     CMP.B #$14                                                 ;83CFC3|C914    |      ;
-    BCS .label17                                               ;83CFC5|B031    |83CFF8;
+    BCS .check_event2_0040                                               ;83CFC5|B031    |83CFF8;
     LDA.L nCurrentTimeID                                       ;83CFC7|AF1C1F7F|7F1F1C;
     CMP.B #$06                                                 ;83CFCB|C906    |      ;
-    BNE .label17                                               ;83CFCD|D029    |83CFF8;
+    BNE .check_event2_0040                                               ;83CFCD|D029    |83CFF8;
     LDA.L nInGameHourCounter                                   ;83CFCF|AF1D1F7F|7F1F1D;
-    BNE .label17                                               ;83CFD3|D023    |83CFF8;
+    BNE .check_event2_0040                                               ;83CFD3|D023    |83CFF8;
     LDA.L nInGameMinuteCounter                                 ;83CFD5|AF1E1F7F|7F1F1E;
-    BNE .label17                                               ;83CFD9|D01D    |83CFF8;
+    BNE .check_event2_0040                                               ;83CFD9|D01D    |83CFF8;
     REP #$20                                                   ;83CFDB|C220    |      ;
     %SetFlag(event7, $0001)
     REP #$30                                                   ;83CFE8|C230    |      ;
@@ -392,10 +392,10 @@ fAreaEvents_Farm:
     RTS                                                        ;83CFF7|60      |      ;
  
  
-.label17:
+.check_event2_0040:
     REP #$30                                                   ;83CFF8|C230    |      ;
     %CheckFlag(event2, $0040)
-    BEQ .label18                                               ;83D001|F03A    |83D03D;
+    BEQ .check_construction                                               ;83D001|F03A    |83D03D;
     REP #$20                                                   ;83D003|C220    |      ;
     %AIExecute($0009, $0000, $002C)
     SEP #$20                                                   ;83D012|E220    |      ;
@@ -410,22 +410,22 @@ fAreaEvents_Farm:
     RTS                                                        ;83D03C|60      |      ;
  
  
-.label18:
+.check_construction:
     REP #$30                                                   ;83D03D|C230    |      ;
     %CheckFlag(event2, $0080)
-    BEQ .label19                                               ;83D046|F018    |83D060;
+    BEQ .check_event2_0100                                               ;83D046|F018    |83D060;
     SEP #$20                                                   ;83D048|E220    |      ;
     LDA.L nConstructionDayCounter                              ;83D04A|AF351F7F|7F1F35;
-    BEQ .label19                                               ;83D04E|F010    |83D060;
+    BEQ .check_event2_0100                                               ;83D04E|F010    |83D060;
     REP #$30                                                   ;83D050|C230    |      ;
     %AIExecute($0000, $0000, $002E)
     RTS                                                        ;83D05F|60      |      ;
  
  
-.label19:
+.check_event2_0100:
     REP #$30                                                   ;83D060|C230    |      ;
     %CheckFlag(event2, $0100)
-    BEQ .label20                                               ;83D069|F047    |83D0B2;
+    BEQ .check_horse_grown                                               ;83D069|F047    |83D0B2;
     %UnsetFlag(event2, $0100)
     REP #$30                                                   ;83D076|C230    |      ;
     %AIExecute($0009, $0000, $0036)
@@ -441,14 +441,14 @@ fAreaEvents_Farm:
     RTS                                                        ;83D0B1|60      |      ;
  
  
-.label20:
+.check_horse_grown:
     REP #$30                                                   ;83D0B2|C230    |      ;
     %CheckFlag(event1, $0100)
-    BNE .label21                                               ;83D0BB|D042    |83D0FF;
+    BNE .check_money_event                                               ;83D0BB|D042    |83D0FF;
     SEP #$20                                                   ;83D0BD|E220    |      ;
     LDA.L nHorseAge                                            ;83D0BF|AF321F7F|7F1F32;
     CMP.B #$15                                                 ;83D0C3|C915    |      ;
-    BNE .label21                                               ;83D0C5|D038    |83D0FF;
+    BNE .check_money_event                                               ;83D0C5|D038    |83D0FF;
     REP #$30                                                   ;83D0C7|C230    |      ;
     %SetFlag(event1, $0100)
     %AIExecute($000B, $0000, $001D)
@@ -462,22 +462,22 @@ fAreaEvents_Farm:
     RTS                                                        ;83D0FE|60      |      ;
  
  
-.label21:
+.check_money_event:
     SEP #$20                                                   ;83D0FF|E220    |      ;
     REP #$10                                                   ;83D101|C210    |      ;
     LDA.L nCurrentYearID                                       ;83D103|AF181F7F|7F1F18;
-    BEQ .label22                                               ;83D107|F05A    |83D163;
+    BEQ .check_saturday_event                                               ;83D107|F05A    |83D163;
     LDA.L nCurrentTimeID                                       ;83D109|AF1C1F7F|7F1F1C;
     CMP.B #$06                                                 ;83D10D|C906    |      ;
-    BNE .label22                                               ;83D10F|D052    |83D163;
+    BNE .check_saturday_event                                               ;83D10F|D052    |83D163;
     LDA.L nInGameHourCounter                                   ;83D111|AF1D1F7F|7F1F1D;
-    BNE .label22                                               ;83D115|D04C    |83D163;
+    BNE .check_saturday_event                                               ;83D115|D04C    |83D163;
     LDA.L nInGameMinuteCounter                                 ;83D117|AF1E1F7F|7F1F1E;
-    BNE .label22                                               ;83D11B|D046    |83D163;
+    BNE .check_saturday_event                                               ;83D11B|D046    |83D163;
     REP #$20                                                   ;83D11D|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;83D11F|AD9601  |000196;
     AND.W #$001A                                               ;83D122|291A00  |      ;
-    BNE .label22                                               ;83D125|D03C    |83D163;
+    BNE .check_saturday_event                                               ;83D125|D03C    |83D163;
     REP #$20                                                   ;83D127|C220    |      ;
     LDA.L nMoney                                               ;83D129|AF041F7F|7F1F04;
     CLC                                                        ;83D12D|18      |      ;
@@ -485,10 +485,10 @@ fAreaEvents_Farm:
     SEP #$20                                                   ;83D131|E220    |      ;
     LDA.L nMoney+2                                             ;83D133|AF061F7F|7F1F06;
     ADC.B #$FF                                                 ;83D137|69FF    |      ;
-    BMI .label22                                               ;83D139|3028    |83D163;
+    BMI .check_saturday_event                                               ;83D139|3028    |83D163;
     REP #$30                                                   ;83D13B|C230    |      ;
     %CheckFlag(event3, $0400)
-    BNE .label22                                               ;83D144|D01D    |83D163;
+    BNE .check_saturday_event                                               ;83D144|D01D    |83D163;
     REP #$30                                                   ;83D146|C230    |      ;
     %AIExecute($0000, $0013, $0000)
     REP #$20                                                   ;83D155|C220    |      ;
@@ -496,117 +496,117 @@ fAreaEvents_Farm:
     RTS                                                        ;83D162|60      |      ;
  
  
-.label22:
+.check_saturday_event:
     SEP #$20                                                   ;83D163|E220    |      ;
     REP #$10                                                   ;83D165|C210    |      ;
     LDA.L nCurrentYearID                                       ;83D167|AF181F7F|7F1F18;
-    BNE .label23                                               ;83D16B|D008    |83D175;
+    BNE .check_saturday_time                                               ;83D16B|D008    |83D175;
     LDA.L nCurrentSeasonID                                     ;83D16D|AF191F7F|7F1F19;
     CMP.B #$03                                                 ;83D171|C903    |      ;
-    BNE .label24                                               ;83D173|D059    |83D1CE;
+    BNE .check_fall_event                                               ;83D173|D059    |83D1CE;
  
-.label23:
+.check_saturday_time:
     SEP #$20                                                   ;83D175|E220    |      ;
     LDA.L nCurrentTimeID                                       ;83D177|AF1C1F7F|7F1F1C;
     CMP.B #$06                                                 ;83D17B|C906    |      ;
-    BNE .label24                                               ;83D17D|D04F    |83D1CE;
+    BNE .check_fall_event                                               ;83D17D|D04F    |83D1CE;
     LDA.L nInGameHourCounter                                   ;83D17F|AF1D1F7F|7F1F1D;
-    BNE .label24                                               ;83D183|D049    |83D1CE;
+    BNE .check_fall_event                                               ;83D183|D049    |83D1CE;
     LDA.L nInGameMinuteCounter                                 ;83D185|AF1E1F7F|7F1F1E;
-    BNE .label24                                               ;83D189|D043    |83D1CE;
+    BNE .check_fall_event                                               ;83D189|D043    |83D1CE;
     LDA.L nCurrentWeekdayID                                    ;83D18B|AF1A1F7F|7F1F1A;
     CMP.B #$06                                                 ;83D18F|C906    |      ;
-    BNE .label24                                               ;83D191|D03B    |83D1CE;
+    BNE .check_fall_event                                               ;83D191|D03B    |83D1CE;
     REP #$20                                                   ;83D193|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;83D195|AD9601  |000196;
     AND.W #$001A                                               ;83D198|291A00  |      ;
-    BNE .label24                                               ;83D19B|D031    |83D1CE;
+    BNE .check_fall_event                                               ;83D19B|D031    |83D1CE;
     REP #$30                                                   ;83D19D|C230    |      ;
     %CheckFlag(event1, $00C0)
-    BEQ .label24                                               ;83D1A6|F026    |83D1CE;
+    BEQ .check_fall_event                                               ;83D1A6|F026    |83D1CE;
     REP #$30                                                   ;83D1A8|C230    |      ;
     %CheckFlag(event3, $4000)
-    BNE .label24                                               ;83D1B1|D01B    |83D1CE;
+    BNE .check_fall_event                                               ;83D1B1|D01B    |83D1CE;
     %SetFlag(event3, $4000)
     REP #$30                                                   ;83D1BE|C230    |      ;
     %AIExecute($0000, $0016, $0000)
     RTS                                                        ;83D1CD|60      |      ;
  
  
-.label24:
+.check_fall_event:
     SEP #$20                                                   ;83D1CE|E220    |      ;
     REP #$10                                                   ;83D1D0|C210    |      ;
     LDA.L nCurrentSeasonID                                     ;83D1D2|AF191F7F|7F1F19;
     CMP.B #$02                                                 ;83D1D6|C902    |      ;
-    BNE .label26                                               ;83D1D8|D064    |83D23E;
+    BNE .check_chicken_event                                               ;83D1D8|D064    |83D23E;
     LDA.L nCurrentDay                                          ;83D1DA|AF1B1F7F|7F1F1B;
     CMP.B #$01                                                 ;83D1DE|C901    |      ;
-    BEQ .label26                                               ;83D1E0|F05C    |83D23E;
+    BEQ .check_chicken_event                                               ;83D1E0|F05C    |83D23E;
     CMP.B #$08                                                 ;83D1E2|C908    |      ;
-    BCC .label25                                               ;83D1E4|9012    |83D1F8;
+    BCC .check_fall_event_flags                                               ;83D1E4|9012    |83D1F8;
     CMP.B #$0D                                                 ;83D1E6|C90D    |      ;
-    BCC .label26                                               ;83D1E8|9054    |83D23E;
+    BCC .check_chicken_event                                               ;83D1E8|9054    |83D23E;
     CMP.B #$12                                                 ;83D1EA|C912    |      ;
-    BCC .label25                                               ;83D1EC|900A    |83D1F8;
+    BCC .check_fall_event_flags                                               ;83D1EC|900A    |83D1F8;
     CMP.B #$19                                                 ;83D1EE|C919    |      ;
-    BCC .label26                                               ;83D1F0|904C    |83D23E;
+    BCC .check_chicken_event                                               ;83D1F0|904C    |83D23E;
     CMP.B #$1D                                                 ;83D1F2|C91D    |      ;
-    BCC .label25                                               ;83D1F4|9002    |83D1F8;
-    BRA .label26                                               ;83D1F6|8046    |83D23E;
+    BCC .check_fall_event_flags                                               ;83D1F4|9002    |83D1F8;
+    BRA .check_chicken_event                                               ;83D1F6|8046    |83D23E;
  
  
-.label25:
+.check_fall_event_flags:
     REP #$20                                                   ;83D1F8|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;83D1FA|AD9601  |000196;
     AND.W #$001A                                               ;83D1FD|291A00  |      ;
-    BNE .label26                                               ;83D200|D03C    |83D23E;
+    BNE .check_chicken_event                                               ;83D200|D03C    |83D23E;
     REP #$30                                                   ;83D202|C230    |      ;
     %CheckFlag(event1, $00C0)
-    BEQ .label26                                               ;83D20B|F031    |83D23E;
+    BEQ .check_chicken_event                                               ;83D20B|F031    |83D23E;
     REP #$30                                                   ;83D20D|C230    |      ;
     %CheckFlag(event3, $2000)
-    BEQ .label26                                               ;83D216|F026    |83D23E;
+    BEQ .check_chicken_event                                               ;83D216|F026    |83D23E;
     REP #$30                                                   ;83D218|C230    |      ;
     %CheckFlag(event4, $0100)
-    BNE .label26                                               ;83D221|D01B    |83D23E;
+    BNE .check_chicken_event                                               ;83D221|D01B    |83D23E;
     %SetFlag(event4, $0080)
     REP #$30                                                   ;83D22E|C230    |      ;
     %AIExecute($0000, $0018, $0000)
     RTS                                                        ;83D23D|60      |      ;
  
  
-.label26:
+.check_chicken_event:
     REP #$30                                                   ;83D23E|C230    |      ;
     %CheckFlag(event4, $0800)
-    BNE .label28                                               ;83D247|D055    |83D29E;
+    BNE .check_random_event                                               ;83D247|D055    |83D29E;
     %CheckFlag(event4, $0400)
-    BNE .label27                                               ;83D250|D03C    |83D28E;
+    BNE .start_chicken_event                                               ;83D250|D03C    |83D28E;
     LDA.W strcDialogDisplay.mapFlags                           ;83D252|AD9601  |000196;
     AND.W #$001E                                               ;83D255|291E00  |      ;
-    BNE .label28                                               ;83D258|D044    |83D29E;
+    BNE .check_random_event                                               ;83D258|D044    |83D29E;
     %CheckFlag(event6, $0400)
-    BEQ .label28                                               ;83D261|F03B    |83D29E;
+    BEQ .check_random_event                                               ;83D261|F03B    |83D29E;
     SEP #$20                                                   ;83D263|E220    |      ;
     LDA.L nOwnedChickens                                       ;83D265|AF0B1F7F|7F1F0B;
     CMP.B #$06                                                 ;83D269|C906    |      ;
-    BCC .label28                                               ;83D26B|9031    |83D29E;
+    BCC .check_random_event                                               ;83D26B|9031    |83D29E;
     LDA.L nCurrentTimeID                                       ;83D26D|AF1C1F7F|7F1F1C;
     CMP.B #$06                                                 ;83D271|C906    |      ;
-    BNE .label28                                               ;83D273|D029    |83D29E;
+    BNE .check_random_event                                               ;83D273|D029    |83D29E;
     LDA.L nInGameHourCounter                                   ;83D275|AF1D1F7F|7F1F1D;
-    BNE .label28                                               ;83D279|D023    |83D29E;
+    BNE .check_random_event                                               ;83D279|D023    |83D29E;
     LDA.L nInGameMinuteCounter                                 ;83D27B|AF1E1F7F|7F1F1E;
-    BNE .label28                                               ;83D27F|D01D    |83D29E;
+    BNE .check_random_event                                               ;83D27F|D01D    |83D29E;
     REP #$20                                                   ;83D281|C220    |      ;
     %SetFlag(event4, $0400)
  
-.label27:
+.start_chicken_event:
     REP #$30                                                   ;83D28E|C230    |      ;
     %AIExecute($0000, $0029, $0000)
     RTS                                                        ;83D29D|60      |      ;
  
  
-.label28:
+.check_random_event:
     REP #$30                                                   ;83D29E|C230    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;83D2A0|AD9601  |000196;
     AND.W #$001A                                               ;83D2A3|291A00  |      ;
@@ -650,19 +650,19 @@ fAreaEvents_Town:
     LDA.L nCurrentSeasonID                                     ;83D308|AF191F7F|7F1F19;
     CMP.B #$02                                                 ;83D30C|C902    |      ;
     BEQ +                                                      ;83D30E|F003    |83D313;
-    JMP.W .label1                                              ;83D310|4CB8D3  |83D3B8;
+    JMP.W .check_fixed_date_events                                              ;83D310|4CB8D3  |83D3B8;
  
  
   + LDA.L nCurrentDay                                          ;83D313|AF1B1F7F|7F1F1B;
     CMP.B #$14                                                 ;83D317|C914    |      ;
     BEQ +                                                      ;83D319|F003    |83D31E;
-    JMP.W .label1                                              ;83D31B|4CB8D3  |83D3B8;
+    JMP.W .check_fixed_date_events                                              ;83D31B|4CB8D3  |83D3B8;
  
  
   + LDA.L nCurrentTimeID                                       ;83D31E|AF1C1F7F|7F1F1C;
     CMP.B #$0F                                                 ;83D322|C90F    |      ;
     BCC +                                                      ;83D324|9003    |83D329;
-    JMP.W .label1                                              ;83D326|4CB8D3  |83D3B8;
+    JMP.W .check_fixed_date_events                                              ;83D326|4CB8D3  |83D3B8;
  
  
   + REP #$30                                                   ;83D329|C230    |      ;
@@ -724,7 +724,7 @@ fAreaEvents_Town:
     RTS                                                        ;83D3B7|60      |      ;
  
  
-.label1:
+.check_fixed_date_events:
     SEP #$20                                                   ;83D3B8|E220    |      ;
     REP #$10                                                   ;83D3BA|C210    |      ;
     LDA.L nCurrentSeasonID                                     ;83D3BC|AF191F7F|7F1F19;
@@ -868,7 +868,7 @@ fAreaEvents_MajorHouseHandler:
   + REP #$20                                                   ;83D546|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;83D548|AD9601  |000196;
     AND.W #$0008                                               ;83D54B|290800  |      ;
-    BNE .label2                                                ;83D54E|D067    |83D5B7;
+    BNE .script_map_flag_0008                                                ;83D54E|D067    |83D5B7;
     SEP #$20                                                   ;83D550|E220    |      ;
     REP #$10                                                   ;83D552|C210    |      ;
     LDA.W nWeatherForecast                                     ;83D554|AD8C09  |00098C;
@@ -882,10 +882,10 @@ fAreaEvents_MajorHouseHandler:
     BNE .hurricane                                             ;83D56B|D05A    |83D5C7;
     LDA.W strcDialogDisplay.mapFlags                           ;83D56D|AD9601  |000196;
     AND.W #$0200                                               ;83D570|290002  |      ;
-    BNE .label3                                                ;83D573|D062    |83D5D7;
+    BNE .script_map_flag_0200                                                ;83D573|D062    |83D5D7;
     LDA.W strcDialogDisplay.mapFlags                           ;83D575|AD9601  |000196;
     AND.W #$0002                                               ;83D578|290200  |      ;
-    BNE .label1                                                ;83D57B|D02A    |83D5A7;
+    BNE .script_map_flag_0002                                                ;83D57B|D02A    |83D5A7;
     SEP #$20                                                   ;83D57D|E220    |      ;
     LDA.L nCurrentWeekdayID                                    ;83D57F|AF1A1F7F|7F1F1A;
     CMP.B #!DAY_SATURDAY                                                 
@@ -903,13 +903,13 @@ fAreaEvents_MajorHouseHandler:
     RTS                                                        ;83D5A6|60      |      ;
  
  
-.label1:
+.script_map_flag_0002:
     REP #$30                                                   ;83D5A7|C230    |      ;
     %AIExecute($0000, $0004, $0000)
     RTS                                                        ;83D5B6|60      |      ;
  
  
-.label2:
+.script_map_flag_0008:
     REP #$30                                                   ;83D5B7|C230    |      ;
     %AIExecute($0000, $0007, $0000)
     RTS                                                        ;83D5C6|60      |      ;
@@ -921,7 +921,7 @@ fAreaEvents_MajorHouseHandler:
     RTS                                                        ;83D5D6|60      |      ;
  
  
-.label3:
+.script_map_flag_0200:
     REP #$30                                                   ;83D5D7|C230    |      ;
     %AIExecute($0000, $0008, $0000)
     RTS                                                        ;83D5E6|60      |      ;
@@ -990,7 +990,7 @@ fAreaEvents_Church:
     LDA.W strcDialogDisplay.mapFlags                           ;83D68B|AD9601  |000196;
     AND.W #!AFLAGS_UNK0008                                               
     BEQ +                                                      ;83D691|F003    |83D696;
-    JMP.W .label4                                              ;83D693|4C1ED7  |83D71E;
+    JMP.W .script_map_flag_0008                                              ;83D693|4C1ED7  |83D71E;
  
  
   + SEP #$20                                                   ;83D696|E220    |      ;
@@ -1010,14 +1010,14 @@ fAreaEvents_Church:
     LDA.W strcDialogDisplay.mapFlags                           ;83D6B6|AD9601  |000196;
     AND.W #$0200                                               ;83D6B9|290002  |      ;
     BEQ +                                                      ;83D6BC|F003    |83D6C1;
-    JMP.W .label5                                              ;83D6BE|4C3ED7  |83D73E;
+    JMP.W .script_map_flag_0200                                              ;83D6BE|4C3ED7  |83D73E;
  
  
   + %CheckFlag(event3, $0001)
     BEQ .justReturn                                            ;83D6C8|F023    |83D6ED;
     LDA.W strcDialogDisplay.mapFlags                           ;83D6CA|AD9601  |000196;
     AND.W #$0002                                               ;83D6CD|290200  |      ;
-    BNE .label3                                                ;83D6D0|D03C    |83D70E;
+    BNE .script_map_flag_0002                                                ;83D6D0|D03C    |83D70E;
     SEP #$20                                                   ;83D6D2|E220    |      ;
     LDA.L nCurrentWeekdayID                                    ;83D6D4|AF1A1F7F|7F1F1A;
     BEQ .notSunday                                             ;83D6D8|F014    |83D6EE;
@@ -1044,13 +1044,13 @@ fAreaEvents_Church:
     RTS                                                        ;83D70D|60      |      ;
  
  
-.label3:
+.script_map_flag_0002:
     REP #$30                                                   ;83D70E|C230    |      ;
     %AIExecute($0000, $0004, $0001)
     RTS                                                        ;83D71D|60      |      ;
  
  
-.label4:
+.script_map_flag_0008:
     REP #$30                                                   ;83D71E|C230    |      ;
     %AIExecute($0000, $0007, $0001)
     RTS                                                        ;83D72D|60      |      ;
@@ -1062,7 +1062,7 @@ fAreaEvents_Church:
     RTS                                                        ;83D73D|60      |      ;
  
  
-.label5:
+.script_map_flag_0200:
     REP #$30                                                   ;83D73E|C230    |      ;
     %AIExecute($0000, $0008, $0001)
     RTS                                                        ;83D74D|60      |      ;
@@ -1095,7 +1095,7 @@ fAreaEvents_FloristHandler:
   + REP #$20                                                   ;83D791|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;83D793|AD9601  |000196;
     AND.W #$0008                                               ;83D796|290800  |      ;
-    BNE .label5                                                ;83D799|D04D    |83D7E8;
+    BNE .script_map_flag_0008                                                ;83D799|D04D    |83D7E8;
     SEP #$20                                                   ;83D79B|E220    |      ;
     REP #$10                                                   ;83D79D|C210    |      ;
     LDA.W nWeatherForecast                                     ;83D79F|AD8C09  |00098C;
@@ -1109,10 +1109,10 @@ fAreaEvents_FloristHandler:
     BNE .hurricane                                             ;83D7B6|D040    |83D7F8;
     LDA.W strcDialogDisplay.mapFlags                           ;83D7B8|AD9601  |000196;
     AND.W #$0200                                               ;83D7BB|290002  |      ;
-    BNE .label7                                                ;83D7BE|D048    |83D808;
+    BNE .script_map_flag_0200                                                ;83D7BE|D048    |83D808;
     LDA.W strcDialogDisplay.mapFlags                           ;83D7C0|AD9601  |000196;
     AND.W #$0002                                               ;83D7C3|290200  |      ;
-    BNE .label4                                                ;83D7C6|D010    |83D7D8;
+    BNE .script_map_flag_0002                                                ;83D7C6|D010    |83D7D8;
  
 .anyFestival:
     REP #$30                                                   ;83D7C8|C230    |      ;
@@ -1120,13 +1120,13 @@ fAreaEvents_FloristHandler:
     RTS                                                        ;83D7D7|60      |      ;
  
  
-.label4:
+.script_map_flag_0002:
     REP #$30                                                   ;83D7D8|C230    |      ;
     %AIExecute($0000, $0004, $0002)
     RTS                                                        ;83D7E7|60      |      ;
  
  
-.label5:
+.script_map_flag_0008:
     REP #$30                                                   ;83D7E8|C230    |      ;
     %AIExecute($0000, $0007, $0002)
     RTS                                                        ;83D7F7|60      |      ;
@@ -1138,7 +1138,7 @@ fAreaEvents_FloristHandler:
     RTS                                                        ;83D807|60      |      ;
  
  
-.label7:
+.script_map_flag_0200:
     REP #$30                                                   ;83D808|C230    |      ;
     %AIExecute($0000, $0008, $0002)
     RTS                                                        ;83D817|60      |      ;
@@ -1188,17 +1188,17 @@ fAreaEvents_ToolshopHandler:
  
   + REP #$30                                                   ;83D887|C230    |      ;
     %CheckFlag(event3, $0001)
-    BNE .label1                                                ;83D890|D010    |83D8A2;
+    BNE .check_map_flags                                                ;83D890|D010    |83D8A2;
     REP #$30                                                   ;83D892|C230    |      ;
     %AIExecute($0000, $000B, $0002)
     RTS                                                        ;83D8A1|60      |      ;
  
  
-.label1:
+.check_map_flags:
     REP #$20                                                   ;83D8A2|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;83D8A4|AD9601  |000196;
     AND.W #$0008                                               ;83D8A7|290800  |      ;
-    BNE .label3                                                ;83D8AA|D04D    |83D8F9;
+    BNE .script_map_flag_0008                                                ;83D8AA|D04D    |83D8F9;
     SEP #$20                                                   ;83D8AC|E220    |      ;
     REP #$10                                                   ;83D8AE|C210    |      ;
     LDA.W nWeatherForecast                                     ;83D8B0|AD8C09  |00098C;
@@ -1212,10 +1212,10 @@ fAreaEvents_ToolshopHandler:
     BNE .hurricane                                             ;83D8C7|D040    |83D909;
     LDA.W strcDialogDisplay.mapFlags                           ;83D8C9|AD9601  |000196;
     AND.W #$0200                                               ;83D8CC|290002  |      ;
-    BNE .label4                                                ;83D8CF|D048    |83D919;
+    BNE .script_map_flag_0200                                                ;83D8CF|D048    |83D919;
     LDA.W strcDialogDisplay.mapFlags                           ;83D8D1|AD9601  |000196;
     AND.W #$0002                                               ;83D8D4|290200  |      ;
-    BNE .label2                                                ;83D8D7|D010    |83D8E9;
+    BNE .script_map_flag_0002                                                ;83D8D7|D010    |83D8E9;
  
 .anyFestival:
     REP #$30                                                   ;83D8D9|C230    |      ;
@@ -1223,13 +1223,13 @@ fAreaEvents_ToolshopHandler:
     RTS                                                        ;83D8E8|60      |      ;
  
  
-.label2:
+.script_map_flag_0002:
     REP #$30                                                   ;83D8E9|C230    |      ;
     %AIExecute($0000, $0004, $0003)
     RTS                                                        ;83D8F8|60      |      ;
  
  
-.label3:
+.script_map_flag_0008:
     REP #$30                                                   ;83D8F9|C230    |      ;
     %AIExecute($0000, $0007, $0003)
     RTS                                                        ;83D908|60      |      ;
@@ -1241,7 +1241,7 @@ fAreaEvents_ToolshopHandler:
     RTS                                                        ;83D918|60      |      ;
  
  
-.label4:
+.script_map_flag_0200:
     REP #$30                                                   ;83D919|C230    |      ;
     %AIExecute($0000, $0008, $0003)
     RTS                                                        ;83D928|60      |      ;
@@ -1292,7 +1292,7 @@ fAreaEvents_RestaurantHandler:
   + REP #$20                                                   ;83D998|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;83D99A|AD9601  |000196;
     AND.W #$0008                                               ;83D99D|290800  |      ;
-    BNE .label2                                                ;83D9A0|D04D    |83D9EF;
+    BNE .script_map_flag_0008                                                ;83D9A0|D04D    |83D9EF;
     SEP #$20                                                   ;83D9A2|E220    |      ;
     REP #$10                                                   ;83D9A4|C210    |      ;
     LDA.W nWeatherForecast                                     ;83D9A6|AD8C09  |00098C;
@@ -1306,10 +1306,10 @@ fAreaEvents_RestaurantHandler:
     BNE .hurricane                                             ;83D9BD|D040    |83D9FF;
     LDA.W strcDialogDisplay.mapFlags                           ;83D9BF|AD9601  |000196;
     AND.W #$0200                                               ;83D9C2|290002  |      ;
-    BNE .label3                                                ;83D9C5|D048    |83DA0F;
+    BNE .script_map_flag_0200                                                ;83D9C5|D048    |83DA0F;
     LDA.W strcDialogDisplay.mapFlags                           ;83D9C7|AD9601  |000196;
     AND.W #$0002                                               ;83D9CA|290200  |      ;
-    BNE .label1                                                ;83D9CD|D010    |83D9DF;
+    BNE .script_map_flag_0002                                                ;83D9CD|D010    |83D9DF;
  
 .anyFestival:
     REP #$30                                                   ;83D9CF|C230    |      ;
@@ -1317,13 +1317,13 @@ fAreaEvents_RestaurantHandler:
     RTS                                                        ;83D9DE|60      |      ;
  
  
-.label1:
+.script_map_flag_0002:
     REP #$30                                                   ;83D9DF|C230    |      ;
     %AIExecute($0000, $0004, $0004)
     RTS                                                        ;83D9EE|60      |      ;
  
  
-.label2:
+.script_map_flag_0008:
     REP #$30                                                   ;83D9EF|C230    |      ;
     %AIExecute($0000, $0007, $0004)
     RTS                                                        ;83D9FE|60      |      ;
@@ -1335,7 +1335,7 @@ fAreaEvents_RestaurantHandler:
     RTS                                                        ;83DA0E|60      |      ;
  
  
-.label3:
+.script_map_flag_0200:
     REP #$30                                                   ;83DA0F|C230    |      ;
     %AIExecute($0000, $0008, $0004)
     RTS                                                        ;83DA1E|60      |      ;
@@ -1371,7 +1371,7 @@ fAreaEvents_FortuneTeller:
   + REP #$20                                                   ;83DA66|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;83DA68|AD9601  |000196;
     AND.W #$0008                                               ;83DA6B|290800  |      ;
-    BNE .label2                                                ;83DA6E|D04D    |83DABD;
+    BNE .script_map_flag_0008                                                ;83DA6E|D04D    |83DABD;
     SEP #$20                                                   ;83DA70|E220    |      ;
     REP #$10                                                   ;83DA72|C210    |      ;
     LDA.W nWeatherForecast                                     ;83DA74|AD8C09  |00098C;
@@ -1385,10 +1385,10 @@ fAreaEvents_FortuneTeller:
     BNE .hurricane                                             ;83DA8B|D040    |83DACD;
     LDA.W strcDialogDisplay.mapFlags                           ;83DA8D|AD9601  |000196;
     AND.W #$0200                                               ;83DA90|290002  |      ;
-    BNE .label3                                                ;83DA93|D048    |83DADD;
+    BNE .script_map_flag_0200                                                ;83DA93|D048    |83DADD;
     LDA.W strcDialogDisplay.mapFlags                           ;83DA95|AD9601  |000196;
     AND.W #$0002                                               ;83DA98|290200  |      ;
-    BNE .label1                                                ;83DA9B|D010    |83DAAD;
+    BNE .script_map_flag_0002                                                ;83DA9B|D010    |83DAAD;
  
 .anyFestival:
     REP #$30                                                   ;83DA9D|C230    |      ;
@@ -1396,13 +1396,13 @@ fAreaEvents_FortuneTeller:
     RTS                                                        ;83DAAC|60      |      ;
  
  
-.label1:
+.script_map_flag_0002:
     REP #$30                                                   ;83DAAD|C230    |      ;
     %AIExecute($0000, $0004, $0005)
     RTS                                                        ;83DABC|60      |      ;
  
  
-.label2:
+.script_map_flag_0008:
     REP #$30                                                   ;83DABD|C230    |      ;
     %AIExecute($0000, $0007, $0005)
     RTS                                                        ;83DACC|60      |      ;
@@ -1414,7 +1414,7 @@ fAreaEvents_FortuneTeller:
     RTS                                                        ;83DADC|60      |      ;
  
  
-.label3:
+.script_map_flag_0200:
     REP #$30                                                   ;83DADD|C230    |      ;
     %AIExecute($0000, $0008, $0005)
     RTS                                                        ;83DAEC|60      |      ;
@@ -1432,7 +1432,7 @@ fAreaEvents_AnimalShop:
   + REP #$20                                                   ;83DB08|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;83DB0A|AD9601  |000196;
     AND.W #$0008                                               ;83DB0D|290800  |      ;
-    BNE .label2                                                ;83DB10|D04D    |83DB5F;
+    BNE .script_map_flag_0008                                                ;83DB10|D04D    |83DB5F;
     SEP #$20                                                   ;83DB12|E220    |      ;
     REP #$10                                                   ;83DB14|C210    |      ;
     LDA.W nWeatherForecast                                     ;83DB16|AD8C09  |00098C;
@@ -1446,10 +1446,10 @@ fAreaEvents_AnimalShop:
     BNE .hurricane                                             ;83DB2D|D040    |83DB6F;
     LDA.W strcDialogDisplay.mapFlags                           ;83DB2F|AD9601  |000196;
     AND.W #$0200                                               ;83DB32|290002  |      ;
-    BNE .label3                                                ;83DB35|D048    |83DB7F;
+    BNE .script_map_flag_0200                                                ;83DB35|D048    |83DB7F;
     LDA.W strcDialogDisplay.mapFlags                           ;83DB37|AD9601  |000196;
     AND.W #$0002                                               ;83DB3A|290200  |      ;
-    BNE .label1                                                ;83DB3D|D010    |83DB4F;
+    BNE .script_map_flag_0002                                                ;83DB3D|D010    |83DB4F;
  
 .anyFestival:
     REP #$30                                                   ;83DB3F|C230    |      ;
@@ -1457,13 +1457,13 @@ fAreaEvents_AnimalShop:
     RTS                                                        ;83DB4E|60      |      ;
  
  
-.label1:
+.script_map_flag_0002:
     REP #$30                                                   ;83DB4F|C230    |      ;
     %AIExecute($0000, $0004, $0006)
     RTS                                                        ;83DB5E|60      |      ;
  
  
-.label2:
+.script_map_flag_0008:
     REP #$30                                                   ;83DB5F|C230    |      ;
     %AIExecute($0000, $0007, $0006)
     RTS                                                        ;83DB6E|60      |      ;
@@ -1475,7 +1475,7 @@ fAreaEvents_AnimalShop:
     RTS                                                        ;83DB7E|60      |      ;
  
  
-.label3:
+.script_map_flag_0200:
     REP #$30                                                   ;83DB7F|C230    |      ;
     %AIExecute($0000, $0008, $0006)
     RTS                                                        ;83DB8E|60      |      ;
@@ -1575,12 +1575,12 @@ fAreaEvents_Woods:
  
   + REP #$30                                                   ;83DCA8|C230    |      ;
     %CheckFlag(event5, $0004)
-    BEQ .label1                                                ;83DCB1|F02C    |83DCDF;
+    BEQ .check_visitor_script                                                ;83DCB1|F02C    |83DCDF;
     %CheckFlag(daily3, $0008)
     BNE +                                                      ;83DCBA|D011    |83DCCD;
     REP #$30                                                   ;83DCBC|C230    |      ;
     %AIExecute($0009, $001C, $0001)
-    BRA .label2                                                ;83DCCB|8072    |83DD3F;
+    BRA .select_day_script                                                ;83DCCB|8072    |83DD3F;
  
  
   + REP #$30                                                   ;83DCCD|C230    |      ;
@@ -1588,47 +1588,47 @@ fAreaEvents_Woods:
     JMP.W .justReturn                                          ;83DCDC|4C74DD  |83DD74;
  
  
-.label1:
+.check_visitor_script:
     SEP #$20                                                   ;83DCDF|E220    |      ;
     REP #$10                                                   ;83DCE1|C210    |      ;
     LDA.L nCurrentYearID                                       ;83DCE3|AF181F7F|7F1F18;
-    BEQ .label2                                                ;83DCE7|F056    |83DD3F;
+    BEQ .select_day_script                                                ;83DCE7|F056    |83DD3F;
     LDA.L nCurrentSeasonID                                     ;83DCE9|AF191F7F|7F1F19;
     CMP.B #$02                                                 ;83DCED|C902    |      ;
-    BCC .label2                                                ;83DCEF|904E    |83DD3F;
+    BCC .select_day_script                                                ;83DCEF|904E    |83DD3F;
     LDA.L nCurrentDay                                          ;83DCF1|AF1B1F7F|7F1F1B;
     CMP.B #$01                                                 ;83DCF5|C901    |      ;
-    BEQ .label2                                                ;83DCF7|F046    |83DD3F;
+    BEQ .select_day_script                                                ;83DCF7|F046    |83DD3F;
     CMP.B #$08                                                 ;83DCF9|C908    |      ;
     BCC +                                                      ;83DCFB|9012    |83DD0F;
     CMP.B #$0D                                                 ;83DCFD|C90D    |      ;
-    BCC .label2                                                ;83DCFF|903E    |83DD3F;
+    BCC .select_day_script                                                ;83DCFF|903E    |83DD3F;
     CMP.B #$12                                                 ;83DD01|C912    |      ;
     BCC +                                                      ;83DD03|900A    |83DD0F;
     CMP.B #$19                                                 ;83DD05|C919    |      ;
-    BCC .label2                                                ;83DD07|9036    |83DD3F;
+    BCC .select_day_script                                                ;83DD07|9036    |83DD3F;
     CMP.B #$1D                                                 ;83DD09|C91D    |      ;
     BCC +                                                      ;83DD0B|9002    |83DD0F;
-    BRA .label2                                                ;83DD0D|8030    |83DD3F;
+    BRA .select_day_script                                                ;83DD0D|8030    |83DD3F;
  
  
   + REP #$20                                                   ;83DD0F|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;83DD11|AD9601  |000196;
     AND.W #$001A                                               ;83DD14|291A00  |      ;
-    BNE .label2                                                ;83DD17|D026    |83DD3F;
+    BNE .select_day_script                                                ;83DD17|D026    |83DD3F;
     %CheckFlag(event4, $0200)
-    BNE .label2                                                ;83DD20|D01D    |83DD3F;
+    BNE .select_day_script                                                ;83DD20|D01D    |83DD3F;
     SEP #$20                                                   ;83DD22|E220    |      ;
     LDA.L nCurrentWeekdayID                                    ;83DD24|AF1A1F7F|7F1F1A;
-    BEQ .label2                                                ;83DD28|F015    |83DD3F;
+    BEQ .select_day_script                                                ;83DD28|F015    |83DD3F;
     CMP.B #$06                                                 ;83DD2A|C906    |      ;
-    BEQ .label2                                                ;83DD2C|F011    |83DD3F;
+    BEQ .select_day_script                                                ;83DD2C|F011    |83DD3F;
     REP #$30                                                   ;83DD2E|C230    |      ;
     %AIExecute($0009, $0021, $0000)
-    BRA .label2                                                ;83DD3D|8000    |83DD3F;
+    BRA .select_day_script                                                ;83DD3D|8000    |83DD3F;
  
  
-.label2:
+.select_day_script:
     REP #$30                                                   ;83DD3F|C230    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;83DD41|AD9601  |000196;
     AND.W #$0008                                               ;83DD44|290800  |      ;
@@ -1676,18 +1676,18 @@ fAreaEvents_WorksmanHouse:
  
   + REP #$30                                                   ;83DDB9|C230    |      ;
     %CheckFlag(event3, $0008)
-    BNE .label2                                                ;83DDC2|D046    |83DE0A;
+    BNE .select_day_script                                                ;83DDC2|D046    |83DE0A;
     SEP #$20                                                   ;83DDC4|E220    |      ;
     LDA.L nCurrentYearID                                       ;83DDC6|AF181F7F|7F1F18;
-    BNE .label1                                                ;83DDCA|D031    |83DDFD;
+    BNE .set_intro_flag                                                ;83DDCA|D031    |83DDFD;
     LDA.L nCurrentSeasonID                                     ;83DDCC|AF191F7F|7F1F19;
     CMP.B #!SEASON_FALL                                                 
-    BCS .label1                                                ;83DDD2|B029    |83DDFD;
+    BCS .set_intro_flag                                                ;83DDD2|B029    |83DDFD;
     CMP.B #!SEASON_SPRING                                                 
     BEQ +                                                      ;83DDD6|F008    |83DDE0;
     LDA.L nCurrentDay                                          ;83DDD8|AF1B1F7F|7F1F1B;
     CMP.B #$1A                                                 ;83DDDC|C91A    |      ;
-    BCS .label1                                                ;83DDDE|B01D    |83DDFD;
+    BCS .set_intro_flag                                                ;83DDDE|B01D    |83DDFD;
  
   + REP #$30                                                   ;83DDE0|C230    |      ;
     %AIExecute($0000, $000B, $000A)
@@ -1696,39 +1696,39 @@ fAreaEvents_WorksmanHouse:
     RTS                                                        ;83DDFC|60      |      ;
  
  
-.label1:
+.set_intro_flag:
     REP #$20                                                   ;83DDFD|C220    |      ;
     %SetFlag(event3, $0008)
  
-.label2:
+.select_day_script:
     REP #$30                                                   ;83DE0A|C230    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;83DE0C|AD9601  |000196;
     AND.W #$0008                                               ;83DE0F|290800  |      ;
-    BNE .label4                                                ;83DE12|D030    |83DE44;
+    BNE .script_map_flag_0008                                                ;83DE12|D030    |83DE44;
     LDA.W strcDialogDisplay.mapFlags                           ;83DE14|AD9601  |000196;
     AND.W #$0200                                               ;83DE17|290002  |      ;
-    BNE .label5                                                ;83DE1A|D038    |83DE54;
+    BNE .script_map_flag_0200                                                ;83DE1A|D038    |83DE54;
     LDA.W strcDialogDisplay.mapFlags                           ;83DE1C|AD9601  |000196;
     AND.W #$0002                                               ;83DE1F|290200  |      ;
-    BNE .label3                                                ;83DE22|D010    |83DE34;
+    BNE .script_map_flag_0002                                                ;83DE22|D010    |83DE34;
     REP #$30                                                   ;83DE24|C230    |      ;
     %AIExecute($0000, $0001, $0009)
     RTS                                                        ;83DE33|60      |      ;
  
  
-.label3:
+.script_map_flag_0002:
     REP #$30                                                   ;83DE34|C230    |      ;
     %AIExecute($0000, $0004, $0007)
     RTS                                                        ;83DE43|60      |      ;
  
  
-.label4:
+.script_map_flag_0008:
     REP #$30                                                   ;83DE44|C230    |      ;
     %AIExecute($0000, $0007, $0007)
     RTS                                                        ;83DE53|60      |      ;
  
  
-.label5:
+.script_map_flag_0200:
     REP #$30                                                   ;83DE54|C230    |      ;
     %AIExecute($0000, $0008, $0007)
     RTS                                                        ;83DE63|60      |      ;
@@ -1823,11 +1823,11 @@ fAreaEvents_House:
  
   + REP #$30                                                   ;83DF47|C230    |      ;
     %CheckFlag(event6, $0080)
-    BNE .label1                                                ;83DF50|D003    |83DF55;
-    JMP.W .label2                                              ;83DF52|4CF8DF  |83DFF8;
+    BNE .update_farm_tiles                                                ;83DF50|D003    |83DF55;
+    JMP.W .check_event6_0100                                              ;83DF52|4CF8DF  |83DFF8;
  
  
-.label1:
+.update_farm_tiles:
     %UnsetFlag(event6, $0080)
     SEP #$20                                                   ;83DF60|E220    |      ;
     LDA.B #$19                                                 ;83DF62|A919    |      ;
@@ -1887,7 +1887,7 @@ fAreaEvents_House:
     LDY.W #$02E0                                               ;83DFF1|A0E002  |      ;
     JSL.L fMap_UpdateFarmTilemapCoords                         ;83DFF4|2249B082|82B049;
  
-.label2:
+.check_event6_0100:
     REP #$30                                                   ;83DFF8|C230    |      ;
     %CheckFlag(event6, $0100)
     BEQ +                                                      ;83E001|F013    |83E016;
@@ -1927,9 +1927,9 @@ fAreaEvents_House:
  
   + REP #$30                                                   ;83E074|C230    |      ;
     %CheckFlag(event6, $0010)
-    BEQ .label6                                                ;83E07D|F05C    |83E0DB;
+    BEQ .check_cow_died_event                                                ;83E07D|F05C    |83E0DB;
     %CheckFlag(daily3, $4000)
-    BNE .label5                                                ;83E086|D043    |83E0CB;
+    BNE .child_event_script_2                                                ;83E086|D043    |83E0CB;
     %CheckFlag(daily3, $2000)
     BNE +                                                      ;83E08F|D010    |83E0A1;
     REP #$30                                                   ;83E091|C230    |      ;
@@ -1955,16 +1955,16 @@ fAreaEvents_House:
     RTS                                                        ;83E0CA|60      |      ;
  
  
-.label5:
+.child_event_script_2:
     REP #$30                                                   ;83E0CB|C230    |      ;
     %AIExecute($0000, $001F, $0002)
     RTS                                                        ;83E0DA|60      |      ;
  
  
-.label6:
+.check_cow_died_event:
     REP #$30                                                   ;83E0DB|C230    |      ;
     %CheckFlag(event6, $0040)
-    BEQ .label7                                                ;83E0E4|F05E    |83E144;
+    BEQ .check_spouse_event                                                ;83E0E4|F05E    |83E144;
     REP #$30                                                   ;83E0E6|C230    |      ;
     %UnsetFlag(event6, $0040)
     SEP #$20                                                   ;83E0F3|E220    |      ;
@@ -2000,254 +2000,254 @@ fAreaEvents_House:
     RTS                                                        ;83E143|60      |      ;
  
  
-.label7:
+.check_spouse_event:
     REP #$30                                                   ;83E144|C230    |      ;
     %CheckFlag(event2, !EFLAGS2_MARRIEDMARIA)
-    BNE .label8                                                ;83E14D|D027    |83E176;
+    BNE .check_love_maria                                                ;83E14D|D027    |83E176;
     %CheckFlag(event2, !EFLAGS2_MARRIEDANN)
-    BNE .label9                                                ;83E156|D02E    |83E186;
+    BNE .check_love_ann                                                ;83E156|D02E    |83E186;
     %CheckFlag(event2, !EFLAGS2_MARRIEDNINA)
-    BNE .label10                                               ;83E15F|D032    |83E193;
+    BNE .check_love_nina                                               ;83E15F|D032    |83E193;
     %CheckFlag(event2, !EFLAGS2_MARRIEDELLEN)
-    BNE .label11                                               ;83E168|D036    |83E1A0;
+    BNE .check_love_ellen                                               ;83E168|D036    |83E1A0;
     %CheckFlag(event2, !EFLAGS2_MARRIEDEVE)
-    BNE .label12                                               ;83E171|D03A    |83E1AD;
-    JMP.W .label23                                             ;83E173|4CC6E2  |83E2C6;
+    BNE .check_love_eve                                               ;83E171|D03A    |83E1AD;
+    JMP.W .check_first_child_age                                             ;83E173|4CC6E2  |83E2C6;
  
  
-.label8:
+.check_love_maria:
     REP #$30                                                   ;83E176|C230    |      ;
     LDA.L nLove_Maria                                          ;83E178|AF1F1F7F|7F1F1F;
     CMP.W #$00C8                                               ;83E17C|C9C800  |      ;
     BCC +                                                      ;83E17F|9003    |83E184;
-    JMP.W .label14                                             ;83E181|4C10E2  |83E210;
+    JMP.W .spouse_daily_script                                             ;83E181|4C10E2  |83E210;
  
  
-  + BRA .label13                                               ;83E184|8034    |83E1BA;
+  + BRA .check_spouse_morning_event                                               ;83E184|8034    |83E1BA;
  
  
-.label9:
+.check_love_ann:
     REP #$30                                                   ;83E186|C230    |      ;
     LDA.L nLove_Ann                                            ;83E188|AF211F7F|7F1F21;
     CMP.W #$00C8                                               ;83E18C|C9C800  |      ;
-    BCS .label14                                               ;83E18F|B07F    |83E210;
-    BRA .label13                                               ;83E191|8027    |83E1BA;
+    BCS .spouse_daily_script                                               ;83E18F|B07F    |83E210;
+    BRA .check_spouse_morning_event                                               ;83E191|8027    |83E1BA;
  
  
-.label10:
+.check_love_nina:
     REP #$30                                                   ;83E193|C230    |      ;
     LDA.L nLove_Nina                                           ;83E195|AF231F7F|7F1F23;
     CMP.W #$00C8                                               ;83E199|C9C800  |      ;
-    BCS .label14                                               ;83E19C|B072    |83E210;
-    BRA .label13                                               ;83E19E|801A    |83E1BA;
+    BCS .spouse_daily_script                                               ;83E19C|B072    |83E210;
+    BRA .check_spouse_morning_event                                               ;83E19E|801A    |83E1BA;
  
  
-.label11:
+.check_love_ellen:
     REP #$30                                                   ;83E1A0|C230    |      ;
     LDA.L nLove_Ellen                                          ;83E1A2|AF251F7F|7F1F25;
     CMP.W #$00C8                                               ;83E1A6|C9C800  |      ;
-    BCS .label14                                               ;83E1A9|B065    |83E210;
-    BRA .label13                                               ;83E1AB|800D    |83E1BA;
+    BCS .spouse_daily_script                                               ;83E1A9|B065    |83E210;
+    BRA .check_spouse_morning_event                                               ;83E1AB|800D    |83E1BA;
  
  
-.label12:
+.check_love_eve:
     REP #$30                                                   ;83E1AD|C230    |      ;
     LDA.L nLove_Eve                                            ;83E1AF|AF271F7F|7F1F27;
     CMP.W #$00C8                                               ;83E1B3|C9C800  |      ;
-    BCS .label14                                               ;83E1B6|B058    |83E210;
-    BRA .label13                                               ;83E1B8|8000    |83E1BA;
+    BCS .spouse_daily_script                                               ;83E1B6|B058    |83E210;
+    BRA .check_spouse_morning_event                                               ;83E1B8|8000    |83E1BA;
  
  
-.label13:
+.check_spouse_morning_event:
     SEP #$20                                                   ;83E1BA|E220    |      ;
     REP #$10                                                   ;83E1BC|C210    |      ;
     LDA.L nCurrentTimeID                                       ;83E1BE|AF1C1F7F|7F1F1C;
     CMP.B #$06                                                 ;83E1C2|C906    |      ;
-    BNE .label14                                               ;83E1C4|D04A    |83E210;
+    BNE .spouse_daily_script                                               ;83E1C4|D04A    |83E210;
     LDA.L nInGameHourCounter                                   ;83E1C6|AF1D1F7F|7F1F1D;
-    BNE .label14                                               ;83E1CA|D044    |83E210;
+    BNE .spouse_daily_script                                               ;83E1CA|D044    |83E210;
     LDA.L nInGameMinuteCounter                                 ;83E1CC|AF1E1F7F|7F1F1E;
-    BNE .label14                                               ;83E1D0|D03E    |83E210;
+    BNE .spouse_daily_script                                               ;83E1D0|D03E    |83E210;
     REP #$20                                                   ;83E1D2|C220    |      ;
     %CheckFlag(event6, $000C)
-    BNE .label14                                               ;83E1DB|D033    |83E210;
+    BNE .spouse_daily_script                                               ;83E1DB|D033    |83E210;
     %CheckFlag(event6, $0001)
-    BNE .label14                                               ;83E1E4|D02A    |83E210;
+    BNE .spouse_daily_script                                               ;83E1E4|D02A    |83E210;
     REP #$30                                                   ;83E1E6|C230    |      ;
     %AIExecute($0000, $0022, $0000)
     REP #$30                                                   ;83E1F5|C230    |      ;
     %SetFlag(event6, $0003)
     %SetFlag(daily3, $1000)
-    JMP.W .label23                                             ;83E20D|4CC6E2  |83E2C6;
+    JMP.W .check_first_child_age                                             ;83E20D|4CC6E2  |83E2C6;
  
  
-.label14:
+.spouse_daily_script:
     REP #$30                                                   ;83E210|C230    |      ;
     %UnsetFlag(daily3, $1000)
     %CheckFlag(event6, $0002)
-    BNE .label17                                               ;83E224|D03C    |83E262;
+    BNE .spouse_skip_script                                               ;83E224|D03C    |83E262;
     %CheckFlag(event2, !EFLAGS2_MARRIEDMARIA)
-    BNE .label18                                               ;83E22D|D042    |83E271;
+    BNE .spouse_script_maria                                               ;83E22D|D042    |83E271;
     %CheckFlag(event2, !EFLAGS2_MARRIEDANN)
     BEQ +                                                      ;83E236|F003    |83E23B;
-    JMP.W .label19                                             ;83E238|4C82E2  |83E282;
+    JMP.W .spouse_script_ann                                             ;83E238|4C82E2  |83E282;
  
  
   + %CheckFlag(event2, !EFLAGS2_MARRIEDNINA)
-    BEQ .label15                                               ;83E242|F003    |83E247;
-    JMP.W .label20                                             ;83E244|4C93E2  |83E293;
+    BEQ .check_married_ellen                                               ;83E242|F003    |83E247;
+    JMP.W .spouse_script_nina                                             ;83E244|4C93E2  |83E293;
  
  
-.label15:
+.check_married_ellen:
     %CheckFlag(event2, !EFLAGS2_MARRIEDELLEN)
-    BEQ .label16                                               ;83E24E|F003    |83E253;
-    JMP.W .label21                                             ;83E250|4CA4E2  |83E2A4;
+    BEQ .check_married_eve                                               ;83E24E|F003    |83E253;
+    JMP.W .spouse_script_ellen                                             ;83E250|4CA4E2  |83E2A4;
  
  
-.label16:
+.check_married_eve:
     %CheckFlag(event2, !EFLAGS2_MARRIEDEVE)
     BEQ +                                                      ;83E25A|F003    |83E25F;
-    JMP.W .label22                                             ;83E25C|4CB5E2  |83E2B5;
+    JMP.W .spouse_script_eve                                             ;83E25C|4CB5E2  |83E2B5;
  
  
-  + JMP.W .label23                                             ;83E25F|4CC6E2  |83E2C6;
+  + JMP.W .check_first_child_age                                             ;83E25F|4CC6E2  |83E2C6;
  
  
-.label17:
+.spouse_skip_script:
     REP #$30                                                   ;83E262|C230    |      ;
     %SetFlag(daily3, $1000)
-    BRA .label23                                               ;83E26F|8055    |83E2C6;
+    BRA .check_first_child_age                                               ;83E26F|8055    |83E2C6;
  
  
-.label18:
+.spouse_script_maria:
     REP #$30                                                   ;83E271|C230    |      ;
     %AIExecute($0013, $0043, $0000)
-    BRA .label23                                               ;83E280|8044    |83E2C6;
+    BRA .check_first_child_age                                               ;83E280|8044    |83E2C6;
  
  
-.label19:
+.spouse_script_ann:
     REP #$30                                                   ;83E282|C230    |      ;
     %AIExecute($0013, $0043, $0001)
-    BRA .label23                                               ;83E291|8033    |83E2C6;
+    BRA .check_first_child_age                                               ;83E291|8033    |83E2C6;
  
  
-.label20:
+.spouse_script_nina:
     REP #$30                                                   ;83E293|C230    |      ;
     %AIExecute($0013, $0043, $0002)
-    BRA .label23                                               ;83E2A2|8022    |83E2C6;
+    BRA .check_first_child_age                                               ;83E2A2|8022    |83E2C6;
  
  
-.label21:
+.spouse_script_ellen:
     REP #$30                                                   ;83E2A4|C230    |      ;
     %AIExecute($0013, $0043, $0003)
-    BRA .label23                                               ;83E2B3|8011    |83E2C6;
+    BRA .check_first_child_age                                               ;83E2B3|8011    |83E2C6;
  
  
-.label22:
+.spouse_script_eve:
     REP #$30                                                   ;83E2B5|C230    |      ;
     %AIExecute($0013, $0043, $0004)
-    BRA .label23                                               ;83E2C4|8000    |83E2C6;
+    BRA .check_first_child_age                                               ;83E2C4|8000    |83E2C6;
  
  
-.label23:
+.check_first_child_age:
     REP #$30                                                   ;83E2C6|C230    |      ;
     %CheckFlag(event6, $0004)
-    BEQ .label24                                               ;83E2CF|F018    |83E2E9;
+    BEQ .check_second_child_age                                               ;83E2CF|F018    |83E2E9;
     LDA.L nFirstChildAge                                       ;83E2D1|AF371F7F|7F1F37;
     CMP.W #$003C                                               ;83E2D5|C93C00  |      ;
-    BCC .label24                                               ;83E2D8|900F    |83E2E9;
+    BCC .check_second_child_age                                               ;83E2D8|900F    |83E2E9;
     REP #$30                                                   ;83E2DA|C230    |      ;
     %AIExecute($0014, $0045, $0000)
  
-.label24:
+.check_second_child_age:
     REP #$30                                                   ;83E2E9|C230    |      ;
     %CheckFlag(event6, $0008)
-    BEQ .label25                                               ;83E2F2|F018    |83E30C;
+    BEQ .select_house_script                                               ;83E2F2|F018    |83E30C;
     LDA.L nSecondChildAge                                      ;83E2F4|AF391F7F|7F1F39;
     CMP.W #$003C                                               ;83E2F8|C93C00  |      ;
-    BCC .label25                                               ;83E2FB|900F    |83E30C;
+    BCC .select_house_script                                               ;83E2FB|900F    |83E30C;
     REP #$30                                                   ;83E2FD|C230    |      ;
     %AIExecute($0015, $0045, $0003)
  
-.label25:
+.select_house_script:
     REP #$30                                                   ;83E30C|C230    |      ;
     %CheckFlag(daily4, $0020)
-    BNE .label26                                               ;83E315|D019    |83E330;
+    BNE .script_returned_home                                               ;83E315|D019    |83E330;
     %CheckFlag(event3, $0001)
-    BNE .label27                                               ;83E31E|D020    |83E340;
+    BNE .check_year1_summer_day1                                               ;83E31E|D020    |83E340;
     REP #$30                                                   ;83E320|C230    |      ;
     %AIExecute($0000, $000A, $0000)
     RTS                                                        ;83E32F|60      |      ;
  
  
-.label26:
+.script_returned_home:
     REP #$30                                                   ;83E330|C230    |      ;
     %AIExecute($0000, $000A, $0003)
     RTS                                                        ;83E33F|60      |      ;
  
  
-.label27:
+.check_year1_summer_day1:
     SEP #$20                                                   ;83E340|E220    |      ;
     REP #$10                                                   ;83E342|C210    |      ;
     LDA.L nCurrentYearID                                       ;83E344|AF181F7F|7F1F18;
     CMP.B #$01                                                 ;83E348|C901    |      ;
-    BNE .label28                                               ;83E34A|D034    |83E380;
+    BNE .check_year2_summer_day29                                               ;83E34A|D034    |83E380;
     LDA.L nCurrentSeasonID                                     ;83E34C|AF191F7F|7F1F19;
     CMP.B #$01                                                 ;83E350|C901    |      ;
-    BNE .label28                                               ;83E352|D02C    |83E380;
+    BNE .check_year2_summer_day29                                               ;83E352|D02C    |83E380;
     LDA.L nCurrentDay                                          ;83E354|AF1B1F7F|7F1F1B;
     CMP.B #$01                                                 ;83E358|C901    |      ;
-    BNE .label28                                               ;83E35A|D024    |83E380;
+    BNE .check_year2_summer_day29                                               ;83E35A|D024    |83E380;
     LDA.L nCurrentTimeID                                       ;83E35C|AF1C1F7F|7F1F1C;
     CMP.B #$06                                                 ;83E360|C906    |      ;
-    BNE .label28                                               ;83E362|D01C    |83E380;
+    BNE .check_year2_summer_day29                                               ;83E362|D01C    |83E380;
     LDA.L nInGameHourCounter                                   ;83E364|AF1D1F7F|7F1F1D;
-    BNE .label28                                               ;83E368|D016    |83E380;
+    BNE .check_year2_summer_day29                                               ;83E368|D016    |83E380;
     LDA.L nInGameMinuteCounter                                 ;83E36A|AF1E1F7F|7F1F1E;
-    BNE .label28                                               ;83E36E|D010    |83E380;
+    BNE .check_year2_summer_day29                                               ;83E36E|D010    |83E380;
     REP #$30                                                   ;83E370|C230    |      ;
     %AIExecute($0000, $000A, $0004)
     RTS                                                        ;83E37F|60      |      ;
  
  
-.label28:
+.check_year2_summer_day29:
     SEP #$20                                                   ;83E380|E220    |      ;
     REP #$10                                                   ;83E382|C210    |      ;
     LDA.L nCurrentYearID                                       ;83E384|AF181F7F|7F1F18;
     CMP.B #$02                                                 ;83E388|C902    |      ;
-    BNE .label29                                               ;83E38A|D034    |83E3C0;
+    BNE .check_new_year                                               ;83E38A|D034    |83E3C0;
     LDA.L nCurrentSeasonID                                     ;83E38C|AF191F7F|7F1F19;
     CMP.B #$01                                                 ;83E390|C901    |      ;
-    BNE .label29                                               ;83E392|D02C    |83E3C0;
+    BNE .check_new_year                                               ;83E392|D02C    |83E3C0;
     LDA.L nCurrentDay                                          ;83E394|AF1B1F7F|7F1F1B;
     CMP.B #$1D                                                 ;83E398|C91D    |      ;
-    BNE .label29                                               ;83E39A|D024    |83E3C0;
+    BNE .check_new_year                                               ;83E39A|D024    |83E3C0;
     LDA.L nCurrentTimeID                                       ;83E39C|AF1C1F7F|7F1F1C;
     CMP.B #$06                                                 ;83E3A0|C906    |      ;
-    BNE .label29                                               ;83E3A2|D01C    |83E3C0;
+    BNE .check_new_year                                               ;83E3A2|D01C    |83E3C0;
     LDA.L nInGameHourCounter                                   ;83E3A4|AF1D1F7F|7F1F1D;
-    BNE .label29                                               ;83E3A8|D016    |83E3C0;
+    BNE .check_new_year                                               ;83E3A8|D016    |83E3C0;
     LDA.L nInGameMinuteCounter                                 ;83E3AA|AF1E1F7F|7F1F1E;
-    BNE .label29                                               ;83E3AE|D010    |83E3C0;
+    BNE .check_new_year                                               ;83E3AE|D010    |83E3C0;
     REP #$30                                                   ;83E3B0|C230    |      ;
     %AIExecute($0000, $000A, $0005)
     RTS                                                        ;83E3BF|60      |      ;
  
  
-.label29:
+.check_new_year:
     SEP #$20                                                   ;83E3C0|E220    |      ;
     REP #$10                                                   ;83E3C2|C210    |      ;
     LDA.L nCurrentSeasonID                                     ;83E3C4|AF191F7F|7F1F19;
-    BNE .label30                                               ;83E3C8|D018    |83E3E2;
+    BNE .check_winter_day_24                                               ;83E3C8|D018    |83E3E2;
     LDA.L nCurrentDay                                          ;83E3CA|AF1B1F7F|7F1F1B;
     CMP.B #$01                                                 ;83E3CE|C901    |      ;
-    BNE .label30                                               ;83E3D0|D010    |83E3E2;
+    BNE .check_winter_day_24                                               ;83E3D0|D010    |83E3E2;
     REP #$30                                                   ;83E3D2|C230    |      ;
     %AIExecute($0000, $0028, $0000)
     RTS                                                        ;83E3E1|60      |      ;
  
  
-.label30:
+.check_winter_day_24:
     SEP #$20                                                   ;83E3E2|E220    |      ;
     REP #$10                                                   ;83E3E4|C210    |      ;
     LDA.L nCurrentSeasonID                                     ;83E3E6|AF191F7F|7F1F19;
@@ -2301,7 +2301,7 @@ fAreaEvents_CrossRoad:
 .launchHorseEvent:
     REP #$20                                                   ;83E478|C220    |      ;
     %CheckFlag(event3, $0040)
-    BNE .label2                                                ;83E481|D024    |83E4A7;
+    BNE .horse_second_event                                                ;83E481|D024    |83E4A7;
     REP #$30                                                   ;83E483|C230    |      ;
     %AIExecute($0000, $000D, $0000)
     REP #$20                                                   ;83E492|C220    |      ;
@@ -2312,7 +2312,7 @@ fAreaEvents_CrossRoad:
     RTS                                                        ;83E4A6|60      |      ;
  
  
-.label2:
+.horse_second_event:
     REP #$30                                                   ;83E4A7|C230    |      ;
     %CheckFlag(event3, $0100)
     BNE .justReturn                                            ;83E4B0|D018    |83E4CA;
@@ -2344,10 +2344,10 @@ fAreaEvents_Mine:
   + REP #$30                                                   ;83E4EF|C230    |      ;
     LDA.B strcPlayer.posY                                      ;83E4F1|A5D8    |0000D8;
     CMP.W #$0200                                               ;83E4F3|C90002  |      ;
-    BCC .label1                                                ;83E4F6|903D    |83E535;
+    BCC .check_mine_visitors                                                ;83E4F6|903D    |83E535;
     %CheckPlayerFlags(!PFLAGS_DOGHUGGING)
     BNE +                                                      ;83E4FF|D003    |83E504;
-    JMP.W .label1                                              ;83E501|4C35E5  |83E535;
+    JMP.W .check_mine_visitors                                              ;83E501|4C35E5  |83E535;
  
  
   + %UnsetPlayerFlag(!PFLAGS_DOGHUGGING)
@@ -2365,7 +2365,7 @@ fAreaEvents_Mine:
     ADC.B strcPlayer.direction                                 ;83E530|65DA    |0000DA;
     STA.W strcObjectData.spriteIdx                             ;83E532|8D0109  |000901;
  
-.label1:
+.check_mine_visitors:
     REP #$30                                                   ;83E535|C230    |      ;
     %CheckFlag(event5, $0010)
     BEQ +                                                      ;83E53E|F010    |83E550;
@@ -2528,27 +2528,27 @@ fAreaEvents_EggFestival:
 fAreaEvents_Shed:
     REP #$30                                                   ;83E6C4|C230    |      ;
     %CheckFlag(event6, $0002)
-    BNE .label3                                                ;83E6CD|D036    |83E705;
+    BNE .check_children                                                ;83E6CD|D036    |83E705;
     %CheckFlag(event2, !EFLAGS2_MARRIEDANN)
-    BNE .label1                                                ;83E6D6|D00B    |83E6E3;
+    BNE .ann                                                ;83E6D6|D00B    |83E6E3;
     %CheckFlag(event2, !EFLAGS2_MARRIEDEVE)
-    BNE .label2                                                ;83E6DF|D013    |83E6F4;
-    BRA .label3                                                ;83E6E1|8022    |83E705;
+    BNE .eve                                                ;83E6DF|D013    |83E6F4;
+    BRA .check_children                                                ;83E6E1|8022    |83E705;
  
  
-.label1:
+.ann:
     REP #$30                                                   ;83E6E3|C230    |      ;
     %AIExecute($0013, $0044, $0001)
-    BRA .label3                                                ;83E6F2|8011    |83E705;
+    BRA .check_children                                                ;83E6F2|8011    |83E705;
  
  
-.label2:
+.eve:
     REP #$30                                                   ;83E6F4|C230    |      ;
     %AIExecute($0013, $0044, $0004)
-    BRA .label3                                                ;83E703|8000    |83E705;
+    BRA .check_children                                                ;83E703|8000    |83E705;
  
  
-.label3:
+.check_children:
     REP #$30                                                   ;83E705|C230    |      ;
     %CheckFlag(event6, $0004)
     BEQ +                                                      ;83E70E|F018    |83E728;
@@ -4055,15 +4055,15 @@ fAreaInit_HouseHelper:
     LDY.W #$0000                                               ;83F526|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83F529|B772    |000072;
     AND.B #$01                                                 ;83F52B|2901    |      ;
-    BEQ .label2                                                ;83F52D|F044    |83F573;
+    BEQ .next_cow                                                ;83F52D|F044    |83F573;
     LDY.W #$0004                                               ;83F52F|A00400  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83F532|B772    |000072;
     CMP.W $09B5+!RAM_SHIFT                                 ;83F534|CDB509  |0009B5;
-    BCS .label1                                                ;83F537|B002    |83F53B;
-    BRA .label2                                                ;83F539|8038    |83F573;
+    BCS .store_best_cow                                                ;83F537|B002    |83F53B;
+    BRA .next_cow                                                ;83F539|8038    |83F573;
  
  
-.label1:
+.store_best_cow:
     SEP #$20                                                   ;83F53B|E220    |      ;
     STA.W $09B5+!RAM_SHIFT                                 ;83F53D|8DB509  |0009B5;
     SEP #$20                                                   ;83F540|E220    |      ;
@@ -4089,7 +4089,7 @@ fAreaInit_HouseHelper:
     REP #$20                                                   ;83F56E|C220    |      ;
     STA.W strcNames.wCurrentCow+6                              ;83F570|8D8F08  |00088F;
  
-.label2:
+.next_cow:
     REP #$30                                                   ;83F573|C230    |      ;
     PLX                                                        ;83F575|FA      |      ;
     INX                                                        ;83F576|E8      |      ;
