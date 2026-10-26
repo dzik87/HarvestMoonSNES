@@ -1,4 +1,5 @@
 {
+ "name": "Item_Fish_Dropped",
  "steps": [
   ["86C51C", 16],
   ["86C522", 16],

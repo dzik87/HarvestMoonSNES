@@ -43,9 +43,12 @@ Blobs reached through an index (sprite banks, glyph tables, palettes) are marked
 
 Facts only.
 
-* `obj_XXXX` frame folders (`assets/gfx/png/frames/`) and object records (`assets/objects/**/objects/NNNN.json`) are named by object id only;
-  1104 objects. The sprite banks (`Sprites_Player_0` ... `Sprites_Npc_2_Ui`) and the palettes (`Palette_<Area>_<Slot>`) are named
-  (`docs/naming/K4_sprites_objects_palettes.csv`), the individual objects are not.
+* Object names (`docs/naming/K5_objects.csv`, 1104 objects): 61 high (carried item icons, ending text objects), 681 medium
+  (carried item animations, player action families, animals, the five main girls), 362 low (cut-scene poses, NPC appearances without a name
+  source, `Obj_Unk_<id>`). No source names the NPCs other than Maria, Ann, Ellen, Eve and Nina (love variables `nLove_*`); the other NPC
+  appearances are `Npc_Unk_<Look>`.
+* Player sprite indexes set by the code (for example `fPlayerAction_Walk`: `$04 + direction`, tools `$50`-`$84`) do not match the object
+  indexes of the rendered tool / walk frames; the mapping from `strcObjectData.spriteIdx` to the object index is not documented.
 * 5 palettes are not referenced by any area slot (`Palette_Unk_14`, `Palette_Unk_71` ... `Palette_Unk_74`); no code path that selects them
   was found.
 * The `Tiles_Unk51_3` and `Tiles_Unused_TitleLogoJapanese` blobs are shown by no name table, so their palette row is a guess.

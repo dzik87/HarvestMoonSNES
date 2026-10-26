@@ -1,4 +1,5 @@
 {
+ "name": "Player_ShowItem_Empty",
  "steps": [
   ["86BFBF", 48],
   ["86BFBF", 255]

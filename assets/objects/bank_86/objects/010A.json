@@ -1,4 +1,5 @@
 {
+ "name": "Item_Herb_Dropped",
  "steps": [
   ["86C7F8", 48],
   ["86C7FE", 2],

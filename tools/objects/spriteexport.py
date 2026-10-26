@@ -48,7 +48,6 @@ CONTACT_SCALE = 2
 CONTACT_COLS = 8
 BG = 255                          # contact sheet background index
 TEXT = 254                        # contact sheet label index
-OBJ_NAMES_CSV = ROOT / "docs" / "naming" / "object_names.csv"   # optional: index,name
 UNREF_DIR = "unreferenced"
 
 
@@ -267,13 +266,9 @@ def read_pixels(path):
 # Index building
 # --------------------------------------------------------------------------------------------------------------------
 def object_names():
-    names = {}
-    if OBJ_NAMES_CSV.exists():
-        for line in OBJ_NAMES_CSV.read_text(encoding="utf-8").splitlines()[1:]:
-            parts = line.split(",", 1)
-            if len(parts) == 2 and parts[0].strip():
-                names[int(parts[0], 0)] = re.sub(r"[^A-Za-z0-9_]+", "_", parts[1].strip())
-    return names
+    """{object index: name} from the object sources (assets/objects/bank_XX/objects/NNNN.json "name")."""
+    import objdata
+    return objdata.object_names(ROOT)
 
 
 def obj_dirname(idx, names):

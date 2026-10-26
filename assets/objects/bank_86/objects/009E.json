@@ -1,4 +1,5 @@
 {
+ "name": "Player_ShowItem_BagGreen",
  "steps": [
   ["86C00E", 48],
   ["86C00E", 255]

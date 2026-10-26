@@ -1,4 +1,5 @@
 {
+ "name": "Player_ShowItem_Sprout",
  "steps": [
   ["86C15E", 16],
   ["86C15E", 255]

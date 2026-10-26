@@ -1,4 +1,5 @@
 {
+ "name": "Player_ShowItem_BoxEmblem",
  "steps": [
   ["86C134", 48],
   ["86C134", 255]

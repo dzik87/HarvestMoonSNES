@@ -1,4 +1,5 @@
 {
+ "name": "Item_Potato_Dropped",
  "steps": [
   ["86C7B6", 48],
   ["86C7FE", 2],

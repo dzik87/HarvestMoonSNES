@@ -4,7 +4,7 @@ Status legend as in `object-data.md`: **[C]** confirmed from engine code (routin
 the tool, **[I]** inferred, **[V]** confirmed visually (rendered output looks like the expected sprite).
 
 This note explains how a frame *component* of the object data (banks $86/$87, `object-data.md` section 6) turns into pixels of the
-sprite tile banks `$88-$91` and documents the assembled frames. The assembled frames **are the editable sprite sources**: `assets/gfx/png/frames/obj_XXXX/f_PPPP.png`
+sprite tile banks `$88-$91` and documents the assembled frames. The assembled frames **are the editable sprite sources**: `assets/gfx/png/frames/obj_XXXX_<Name>/f_PPPP.png`
 (one per distinct frame address of an object), written and read by `tools/gfx/pngsync.py` (`composed.py`); `import` splits an edited frame back into the 16x16
 blocks of the banks `$88-$91`. `tools/objects/spriteexport.py` renders contact sheets / an index of all frames into `build/sprites_assembled/` (derived output, never committed).
 
@@ -110,7 +110,7 @@ which is what the tool does. [C]
 ```
 build/sprites_assembled/
   index.json                     all objects: index, directory, bank, steps / frames / images
-  obj_XXXX/                      one directory per object index $0000-$044F (1104)
+  obj_XXXX_<Name>/               one directory per object index $0000-$044F (1104)
     index.json                   steps (frame + timer), frames (components), images
     l0_f00.png, l0_f01.png ...   one PNG per distinct frame image (l<list>_f<image>)
     contact.png                  all distinct images, aligned on the object origin, 2x, labelled f00, f01, ...
@@ -155,7 +155,7 @@ output does not depend on the Pillow version.
 
 **Reverse direction.** The ROM bytes are *not* generated from this folder: editing an exported PNG or JSON does nothing to the build, and `check` will
 report the difference (the folder is derived output, like `pngsync.py preview`). To change a sprite, edit its frame image
-(`assets/gfx/png/frames/obj_XXXX/f_PPPP.png`, `docs/formats/graphics-png.md`) and run `pngsync.py import`; to change the layout of a frame edit `assets/objects/bank_8x/frames.txt`.
+(`assets/gfx/png/frames/obj_XXXX_<Name>/f_PPPP.png`, `docs/formats/graphics-png.md`) and run `pngsync.py import`; to change the layout of a frame edit `assets/objects/bank_8x/frames.txt`.
 A PNG -> component re-import (finding tile ids for edited pixels, allocating unused blocks, re-pointing frames) is future work; the JSON already
 carries everything that is needed (`tile`, `x`, `y`, `attr`, and the sheet position of each tile). To regenerate after any change of
 the sprite sources or the object data: re-run `export` (nothing is committed).
@@ -178,7 +178,7 @@ coherent sprites (limbs, heads, tools and shadows line up; multi-component anima
 | `$02F6`, `$02F7`, `$0304`, `$0305` | black-and-white dog-like animal (sitting with an exclamation bubble; running) - the dog event object, name not verified |
 
 The names are visual impressions: no code or label in the repository names these object indices, so no `docs/naming/object_names.csv`
-exists. If `docs/naming/object_names.csv` (`index,name`) is added later, `export` uses it for the directory names (`obj_XXXX_<name>`).
+exists. The directory names `obj_XXXX_<Name>` take the name from the `"name"` field of `assets/objects/bank_XX/objects/NNNN.json` (`docs/naming/K5_objects.csv`).
 Objects with an empty (all-transparent) frame image, effects, particles and small items were only skimmed.
 
 ## 5. Open points

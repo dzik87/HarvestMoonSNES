@@ -608,6 +608,18 @@ FRAMES_HEADER = '''; Object animation frames of bank ${bank:02X}, in ROM order (
 '''
 
 
+def object_names(root=None):
+    """{object index: name} from the "name" fields of assets/objects/bank_XX/objects/NNNN.json."""
+    out = {}
+    objdir = os.path.join(root, 'assets', 'objects') if root else None
+    for bank in BANKS:
+        src = read_sources(bank, objdir)
+        for k, (name, _steps) in enumerate(src.objects):
+            if name:
+                out[src.first + k] = name
+    return out
+
+
 def read_sources(bank, root=None):
     d = _bank_dir(bank, root)
     src = BankSource(bank)
@@ -644,6 +656,11 @@ def read_sources(bank, root=None):
     return src
 
 
+def anim_label(idx, name=None):
+    """Label of the animation list of object `idx`: aObjAnimList_XXXX[_<name>] (the index is the engine identity)."""
+    return 'aObjAnimList_%04X' % idx + ('_' + name if name else '')
+
+
 def layout(src):
     """-> (data bytes, labels name->offset, label->pointer symbolic refs not needed) for a BankSource."""
     labels = collections.OrderedDict()
@@ -654,7 +671,7 @@ def layout(src):
     pos += 2 * len(src.objects)
     list_addr = []
     for k, (_n, steps) in enumerate(src.objects):
-        labels['aObjAnimList_%04X' % (src.first + k)] = pos
+        labels[anim_label(src.first + k, _n)] = pos
         list_addr.append(pos)
         pos += 3 * len(steps) + 2
     frame_addr = {}
@@ -710,10 +727,10 @@ def emit_asm(src):
     for i in range(0, len(src.slot), 8):
         lines.append('    dw ' + ','.join('$%04X' % w for w in src.slot[i:i + 8]))
     lines.append('aObjAnimListPtrs_%02X:' % src.bank)
-    for k in range(len(src.objects)):
-        lines.append('    dw aObjAnimList_%04X' % (src.first + k))
+    for k, (name, _steps) in enumerate(src.objects):
+        lines.append('    dw ' + anim_label(src.first + k, name))
     for k, (name, steps) in enumerate(src.objects):
-        lines.append('aObjAnimList_%04X:%s' % (src.first + k, ('   ; ' + name) if name else ''))
+        lines.append(anim_label(src.first + k, name) + ':')
         for f, t in steps:
             lines.append('    dw %s : db $%02X' % (frame_label(f), t))
         lines.append('    dw $0000')

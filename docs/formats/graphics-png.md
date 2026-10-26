@@ -10,7 +10,7 @@ bit-identical to the original ROM data. Converter: `tools/gfx/pngsync.py` (+ `to
 | Kind | Blobs | `.bin` (included by asm) | Editable source | Stored in the ROM as |
 |---|---|---|---|---|
 | `tiles` | 77 | `assets/gfx/tiles/sCompressedTiles_*.bin` | `assets/gfx/png/screens/*.png` (+ remainder sheet `png/tiles/<label>.png`) | LZSS, 8192 bytes decompressed (256 4bpp tiles) |
-| `sprites` | 10 | `assets/gfx/sprites/Sprites_88..91*.bin` | `assets/gfx/png/frames/obj_XXXX/f_PPPP.png` (+ remainder sheet `png/sprites/<label>.png`) | raw, 32768 bytes (1024 4bpp tiles) per bank |
+| `sprites` | 10 | `assets/gfx/sprites/Sprites_88..91*.bin` | `assets/gfx/png/frames/obj_XXXX_<Name>/f_PPPP.png` (+ remainder sheet `png/sprites/<label>.png`) | raw, 32768 bytes (1024 4bpp tiles) per bank |
 | `tilemaps` | 64 | `assets/gfx/characters/sCompressedTilemap_*.bin` (60, LZSS) and `sCharactermap_*.bin` (4, raw) | `assets/gfx/tilemaps/<label>.map.txt` | BG name tables (not graphics) |
 
 Every blob has a `<label>.json` next to its remainder sheet / text file (the sidecar). Palettes were already PNG/JSON before
@@ -77,7 +77,7 @@ python3 tools/gfx/pngsync.py import --label Tiles_Farm_SpringSummer_0    # after
 python3 tools/build.py                                                    # regenerates assets and rebuilds; ROM hash changes (intended)
 ```
 
-1. Edit a composed image (`frames/obj_XXXX/f_PPPP.png`, `screens/<table>.png`), a remainder sheet or the name table text (render a whole sheet for orientation with `pngsync.py sheet --grid`) with any editor that preserves an
+1. Edit a composed image (`frames/obj_XXXX_<Name>/f_PPPP.png`, `screens/<table>.png`), a remainder sheet or the name table text (render a whole sheet for orientation with `pngsync.py sheet --grid`) with any editor that preserves an
    **indexed palette** (Aseprite, GIMP "indexed", Grafx2). Do not convert to RGB: the pixel value *is* the SNES colour index.
 2. `pngsync.py import [--label PAT] [--kind K]` re-encodes blobs whose source changed (PAT is an
    `fnmatch` pattern, repeatable; default all), updating the generated `.bin`, the sidecar tail data and, with `--allow-resize`, the bank padding. Unchanged blobs are not touched.

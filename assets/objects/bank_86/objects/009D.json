@@ -1,4 +1,5 @@
 {
+ "name": "Player_ShowItem_Bell",
  "steps": [
   ["86BFF9", 16],
   ["86BFF9", 255]

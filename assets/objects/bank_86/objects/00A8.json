@@ -1,4 +1,5 @@
 {
+ "name": "Player_ShowItem_Paint",
  "steps": [
   ["86C0E0", 48],
   ["86C0E0", 255]
