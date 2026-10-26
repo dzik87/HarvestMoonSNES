@@ -236,11 +236,11 @@ fAI_HowToPlaySetup:
     LDY.W #$0000                                               ;8481B1|A00000  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;8481B4|B7CC    |0000CC;
     AND.B #$01                                                 ;8481B6|2901    |      ;
-    BEQ .label6                                                ;8481B8|F04F    |848209;
+    BEQ .next_slot                                                ;8481B8|F04F    |848209;
     REP #$30                                                   ;8481BA|C230    |      ;
     LDY.W #$0010                                               ;8481BC|A01000  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;8481BF|B7CC    |0000CC;
-    BNE .label4                                                ;8481C1|D01C    |8481DF;
+    BNE .decrement_timer                                                ;8481C1|D01C    |8481DF;
  
   - SEP #$20                                                   ;8481C3|E220    |      ;
     REP #$10                                                   ;8481C5|C210    |      ;
@@ -257,7 +257,7 @@ fAI_HowToPlaySetup:
     BRA +                                                      ;8481DD|8008    |8481E7;
  
  
-.label4:
+.decrement_timer:
     DEC A                                                      ;8481DF|3A      |      ;
     REP #$30                                                   ;8481E0|C230    |      ;
     LDY.W #$0010                                               ;8481E2|A01000  |      ;
@@ -277,10 +277,10 @@ fAI_HowToPlaySetup:
     LDY.W #$0001                                               ;8481FD|A00100  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;848200|B7CC    |0000CC;
     AND.B #$01                                                 ;848202|2901    |      ;
-    BEQ .label6                                                ;848204|F003    |848209;
+    BEQ .next_slot                                                ;848204|F003    |848209;
     JSR.W fAI_UpdateSlotMovementAndObject                                    ;848206|208682  |848286;
  
-.label6:
+.next_slot:
     REP #$30                                                   ;848209|C230    |      ;
     LDA.B ptrAIUnknown0xCC                                     ;84820B|A5CC    |0000CC;
     CLC                                                        ;84820D|18      |      ;
@@ -365,18 +365,18 @@ fAI_UpdateSlotMovementAndObject:
     LDY.W #$0001                                               ;8482C4|A00100  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;8482C7|B7CC    |0000CC;
     AND.B #$40                                                 ;8482C9|2940    |      ;
-    BNE .label3                                                ;8482CB|D03D    |84830A;
+    BNE .destroy_object                                                ;8482CB|D03D    |84830A;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;8482CD|B7CC    |0000CC;
     AND.B #$02                                                 ;8482CF|2902    |      ;
-    BNE .label1                                                ;8482D1|D00C    |8482DF;
+    BNE .create_object                                                ;8482D1|D00C    |8482DF;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;8482D3|B7CC    |0000CC;
     AND.B #$04                                                 ;8482D5|2904    |      ;
-    BNE .label2                                                ;8482D7|D017    |8482F0;
+    BNE .replace_sprite                                                ;8482D7|D017    |8482F0;
     JSL.L fObject_UpdatePositionAndFlip                                ;8482D9|22B98085|8580B9;
     BRA .return                                                ;8482DD|802F    |84830E;
  
  
-.label1:
+.create_object:
     JSL.L fObject_Create                                      ;8482DF|22008085|858000;
     REP #$30                                                   ;8482E3|C230    |      ;
     LDA.B strcObject.gameObjectIdx                             ;8482E5|A5A5    |0000A5;
@@ -386,7 +386,7 @@ fAI_UpdateSlotMovementAndObject:
     BRA .return                                                ;8482EE|801E    |84830E;
  
  
-.label2:
+.replace_sprite:
     REP #$30                                                   ;8482F0|C230    |      ;
     LDY.W #$0016                                               ;8482F2|A01600  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;8482F5|B7CC    |0000CC;
@@ -400,7 +400,7 @@ fAI_UpdateSlotMovementAndObject:
     BRA .return                                                ;848308|8004    |84830E;
  
  
-.label3:
+.destroy_object:
     JSL.L fObject_Destroy                                ;84830A|22A28185|8581A2;
  
 .return:
@@ -462,7 +462,7 @@ fAI_UpdateSlotStepMove:
     LDY.W #$0003                                               ;84837C|A00300  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;84837F|B7CC    |0000CC;
     BMI +                                                      ;848381|3002    |848385;
-    BRA .label1                                                ;848383|8006    |84838B;
+    BRA .dx_sign_done                                                ;848383|8006    |84838B;
  
  
   + SEP #$20                                                   ;848385|E220    |      ;
@@ -470,7 +470,7 @@ fAI_UpdateSlotStepMove:
     LDA.B #$FF                                                 ;848388|A9FF    |      ;
     XBA                                                        ;84838A|EB      |      ;
  
-.label1:
+.dx_sign_done:
     REP #$20                                                   ;84838B|C220    |      ;
     STA.B strcVariables.n16Temp1                               ;84838D|857E    |00007E;
     LDA.W #$0000                                               ;84838F|A90000  |      ;
@@ -479,7 +479,7 @@ fAI_UpdateSlotStepMove:
     LDY.W #$0004                                               ;848396|A00400  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;848399|B7CC    |0000CC;
     BMI +                                                      ;84839B|3002    |84839F;
-    BRA .label2                                                ;84839D|8006    |8483A5;
+    BRA .dy_sign_done                                                ;84839D|8006    |8483A5;
  
  
   + SEP #$20                                                   ;84839F|E220    |      ;
@@ -487,7 +487,7 @@ fAI_UpdateSlotStepMove:
     LDA.B #$FF                                                 ;8483A2|A9FF    |      ;
     XBA                                                        ;8483A4|EB      |      ;
  
-.label2:
+.dy_sign_done:
     REP #$20                                                   ;8483A5|C220    |      ;
     STA.B strcVariables.n16Temp2                               ;8483A7|8580    |000080;
     REP #$30                                                   ;8483A9|C230    |      ;
@@ -533,7 +533,7 @@ fAI_UpdateSlotWander:
  
   + LDY.W #$0008                                               ;8483EF|A00800  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;8483F2|B7CC    |0000CC;
-    BNE .label2                                                ;8483F4|D050    |848446;
+    BNE .moving_check_limit                                                ;8483F4|D050    |848446;
     LDY.W #$0007                                               ;8483F6|A00700  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;8483F9|B7CC    |0000CC;
     LDY.W #$0008                                               ;8483FB|A00800  |      ;
@@ -584,34 +584,34 @@ fAI_UpdateSlotWander:
     JMP.W .case08                                              ;848440|4C5286  |848652;
  
  
-  + JMP.W .label11                                             ;848443|4CB386  |8486B3;
+  + JMP.W .stop_walking                                             ;848443|4CB386  |8486B3;
  
  
-.label2:
+.moving_check_limit:
     SEP #$20                                                   ;848446|E220    |      ;
     REP #$10                                                   ;848448|C210    |      ;
     LDY.W #$0001                                               ;84844A|A00100  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;84844D|B7CC    |0000CC;
     AND.B #$80                                                 ;84844F|2980    |      ;
     BEQ +                                                      ;848451|F003    |848456;
-    JMP.W .label13                                             ;848453|4C1D87  |84871D;
+    JMP.W .decrement_wait_timer                                             ;848453|4C1D87  |84871D;
  
  
   + SEP #$20                                                   ;848456|E220    |      ;
     LDY.W #$0002                                               ;848458|A00200  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;84845B|B7CC    |0000CC;
     CMP.B #$00                                                 ;84845D|C900    |      ;
-    BEQ .label3                                                ;84845F|F00F    |848470;
+    BEQ .check_down_limit                                                ;84845F|F00F    |848470;
     CMP.B #$01                                                 ;848461|C901    |      ;
-    BEQ .label4                                                ;848463|F03A    |84849F;
+    BEQ .check_up_limit                                                ;848463|F03A    |84849F;
     CMP.B #$02                                                 ;848465|C902    |      ;
-    BEQ .label5                                                ;848467|F065    |8484CE;
+    BEQ .check_left_limit                                                ;848467|F065    |8484CE;
     CMP.B #$03                                                 ;848469|C903    |      ;
-    BNE .label3                                                ;84846B|D003    |848470;
-    JMP.W .label6                                              ;84846D|4CFD84  |8484FD;
+    BNE .check_down_limit                                                ;84846B|D003    |848470;
+    JMP.W .check_right_limit                                              ;84846D|4CFD84  |8484FD;
  
  
-.label3:
+.check_down_limit:
     REP #$20                                                   ;848470|C220    |      ;
     LDA.W #$0000                                               ;848472|A90000  |      ;
     SEP #$20                                                   ;848475|E220    |      ;
@@ -631,13 +631,13 @@ fAI_UpdateSlotWander:
     ADC.B strcVariables.n16Temp1                               ;848493|657E    |00007E;
     CMP.B strcVariables.n16Temp2                               ;848495|C580    |000080;
     BCS +                                                      ;848497|B003    |84849C;
-    JMP.W .label11                                             ;848499|4CB386  |8486B3;
+    JMP.W .stop_walking                                             ;848499|4CB386  |8486B3;
  
  
-  + JMP.W .label13                                             ;84849C|4C1D87  |84871D;
+  + JMP.W .decrement_wait_timer                                             ;84849C|4C1D87  |84871D;
  
  
-.label4:
+.check_up_limit:
     REP #$20                                                   ;84849F|C220    |      ;
     LDA.W #$0000                                               ;8484A1|A90000  |      ;
     SEP #$20                                                   ;8484A4|E220    |      ;
@@ -657,13 +657,13 @@ fAI_UpdateSlotWander:
     SBC.B strcVariables.n16Temp1                               ;8484C2|E57E    |00007E;
     CMP.B strcVariables.n16Temp2                               ;8484C4|C580    |000080;
     BCC +                                                      ;8484C6|9003    |8484CB;
-    JMP.W .label11                                             ;8484C8|4CB386  |8486B3;
+    JMP.W .stop_walking                                             ;8484C8|4CB386  |8486B3;
  
  
-  + JMP.W .label13                                             ;8484CB|4C1D87  |84871D;
+  + JMP.W .decrement_wait_timer                                             ;8484CB|4C1D87  |84871D;
  
  
-.label5:
+.check_left_limit:
     REP #$20                                                   ;8484CE|C220    |      ;
     LDA.W #$0000                                               ;8484D0|A90000  |      ;
     SEP #$20                                                   ;8484D3|E220    |      ;
@@ -683,13 +683,13 @@ fAI_UpdateSlotWander:
     ADC.B strcVariables.n16Temp1                               ;8484F1|657E    |00007E;
     CMP.B strcVariables.n16Temp2                               ;8484F3|C580    |000080;
     BCS +                                                      ;8484F5|B003    |8484FA;
-    JMP.W .label11                                             ;8484F7|4CB386  |8486B3;
+    JMP.W .stop_walking                                             ;8484F7|4CB386  |8486B3;
  
  
-  + JMP.W .label13                                             ;8484FA|4C1D87  |84871D;
+  + JMP.W .decrement_wait_timer                                             ;8484FA|4C1D87  |84871D;
  
  
-.label6:
+.check_right_limit:
     REP #$20                                                   ;8484FD|C220    |      ;
     LDA.W #$0000                                               ;8484FF|A90000  |      ;
     SEP #$20                                                   ;848502|E220    |      ;
@@ -709,10 +709,10 @@ fAI_UpdateSlotWander:
     SBC.B strcVariables.n16Temp1                               ;848520|E57E    |00007E;
     CMP.B strcVariables.n16Temp2                               ;848522|C580    |000080;
     BCC +                                                      ;848524|9003    |848529;
-    JMP.W .label11                                             ;848526|4CB386  |8486B3;
+    JMP.W .stop_walking                                             ;848526|4CB386  |8486B3;
  
  
-  + JMP.W .label13                                             ;848529|4C1D87  |84871D;
+  + JMP.W .decrement_wait_timer                                             ;848529|4C1D87  |84871D;
  
  
 .case01:
@@ -721,7 +721,7 @@ fAI_UpdateSlotWander:
     LDY.W #$0001                                               ;848530|A00100  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;848533|B7CC    |0000CC;
     AND.B #$80                                                 ;848535|2980    |      ;
-    BNE .label7                                                ;848537|D02C    |848565;
+    BNE .start_walk_down                                                ;848537|D02C    |848565;
     REP #$20                                                   ;848539|C220    |      ;
     LDA.W #$0000                                               ;84853B|A90000  |      ;
     SEP #$20                                                   ;84853E|E220    |      ;
@@ -740,11 +740,11 @@ fAI_UpdateSlotWander:
     CLC                                                        ;84855B|18      |      ;
     ADC.B strcVariables.n16Temp1                               ;84855C|657E    |00007E;
     CMP.B strcVariables.n16Temp2                               ;84855E|C580    |000080;
-    BCS .label7                                                ;848560|B003    |848565;
-    JMP.W .label11                                             ;848562|4CB386  |8486B3;
+    BCS .start_walk_down                                                ;848560|B003    |848565;
+    JMP.W .stop_walking                                             ;848562|4CB386  |8486B3;
  
  
-.label7:
+.start_walk_down:
     SEP #$20                                                   ;848565|E220    |      ;
     LDY.W #$000B                                               ;848567|A00B00  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;84856A|B7CC    |0000CC;
@@ -761,7 +761,7 @@ fAI_UpdateSlotWander:
     LDY.W #$0002                                               ;848584|A00200  |      ;
     LDA.B #$00                                                 ;848587|A900    |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;848589|97CC    |0000CC;
-    JMP.W .label12                                             ;84858B|4CF486  |8486F4;
+    JMP.W .set_walk_sprite                                             ;84858B|4CF486  |8486F4;
  
  
 .case02:
@@ -770,7 +770,7 @@ fAI_UpdateSlotWander:
     LDY.W #$0001                                               ;848592|A00100  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;848595|B7CC    |0000CC;
     AND.B #$80                                                 ;848597|2980    |      ;
-    BNE .label8                                                ;848599|D02C    |8485C7;
+    BNE .start_walk_up                                                ;848599|D02C    |8485C7;
     REP #$20                                                   ;84859B|C220    |      ;
     LDA.W #$0000                                               ;84859D|A90000  |      ;
     SEP #$20                                                   ;8485A0|E220    |      ;
@@ -789,11 +789,11 @@ fAI_UpdateSlotWander:
     SEC                                                        ;8485BD|38      |      ;
     SBC.B strcVariables.n16Temp1                               ;8485BE|E57E    |00007E;
     CMP.B strcVariables.n16Temp2                               ;8485C0|C580    |000080;
-    BCC .label8                                                ;8485C2|9003    |8485C7;
-    JMP.W .label11                                             ;8485C4|4CB386  |8486B3;
+    BCC .start_walk_up                                                ;8485C2|9003    |8485C7;
+    JMP.W .stop_walking                                             ;8485C4|4CB386  |8486B3;
  
  
-.label8:
+.start_walk_up:
     SEP #$20                                                   ;8485C7|E220    |      ;
     LDY.W #$000B                                               ;8485C9|A00B00  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;8485CC|B7CC    |0000CC;
@@ -810,7 +810,7 @@ fAI_UpdateSlotWander:
     LDY.W #$0002                                               ;8485E6|A00200  |      ;
     LDA.B #$01                                                 ;8485E9|A901    |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;8485EB|97CC    |0000CC;
-    JMP.W .label12                                             ;8485ED|4CF486  |8486F4;
+    JMP.W .set_walk_sprite                                             ;8485ED|4CF486  |8486F4;
  
  
 .case04:
@@ -819,7 +819,7 @@ fAI_UpdateSlotWander:
     LDY.W #$0001                                               ;8485F4|A00100  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;8485F7|B7CC    |0000CC;
     AND.B #$80                                                 ;8485F9|2980    |      ;
-    BNE .label9                                                ;8485FB|D02C    |848629;
+    BNE .start_walk_left                                                ;8485FB|D02C    |848629;
     REP #$20                                                   ;8485FD|C220    |      ;
     LDA.W #$0000                                               ;8485FF|A90000  |      ;
     SEP #$20                                                   ;848602|E220    |      ;
@@ -838,11 +838,11 @@ fAI_UpdateSlotWander:
     CLC                                                        ;84861F|18      |      ;
     ADC.B strcVariables.n16Temp1                               ;848620|657E    |00007E;
     CMP.B strcVariables.n16Temp2                               ;848622|C580    |000080;
-    BCS .label9                                                ;848624|B003    |848629;
-    JMP.W .label11                                             ;848626|4CB386  |8486B3;
+    BCS .start_walk_left                                                ;848624|B003    |848629;
+    JMP.W .stop_walking                                             ;848626|4CB386  |8486B3;
  
  
-.label9:
+.start_walk_left:
     SEP #$20                                                   ;848629|E220    |      ;
     LDY.W #$000B                                               ;84862B|A00B00  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;84862E|B7CC    |0000CC;
@@ -859,7 +859,7 @@ fAI_UpdateSlotWander:
     LDY.W #$0002                                               ;848648|A00200  |      ;
     LDA.B #$02                                                 ;84864B|A902    |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;84864D|97CC    |0000CC;
-    JMP.W .label12                                             ;84864F|4CF486  |8486F4;
+    JMP.W .set_walk_sprite                                             ;84864F|4CF486  |8486F4;
  
  
 .case08:
@@ -868,7 +868,7 @@ fAI_UpdateSlotWander:
     LDY.W #$0001                                               ;848656|A00100  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;848659|B7CC    |0000CC;
     AND.B #$80                                                 ;84865B|2980    |      ;
-    BNE .label10                                               ;84865D|D02C    |84868B;
+    BNE .start_walk_right                                               ;84865D|D02C    |84868B;
     REP #$20                                                   ;84865F|C220    |      ;
     LDA.W #$0000                                               ;848661|A90000  |      ;
     SEP #$20                                                   ;848664|E220    |      ;
@@ -887,11 +887,11 @@ fAI_UpdateSlotWander:
     SEC                                                        ;848681|38      |      ;
     SBC.B strcVariables.n16Temp1                               ;848682|E57E    |00007E;
     CMP.B strcVariables.n16Temp2                               ;848684|C580    |000080;
-    BCC .label10                                               ;848686|9003    |84868B;
-    JMP.W .label11                                             ;848688|4CB386  |8486B3;
+    BCC .start_walk_right                                               ;848686|9003    |84868B;
+    JMP.W .stop_walking                                             ;848688|4CB386  |8486B3;
  
  
-.label10:
+.start_walk_right:
     SEP #$20                                                   ;84868B|E220    |      ;
     LDY.W #$000B                                               ;84868D|A00B00  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;848690|B7CC    |0000CC;
@@ -908,10 +908,10 @@ fAI_UpdateSlotWander:
     LDY.W #$0002                                               ;8486AA|A00200  |      ;
     LDA.B #$03                                                 ;8486AD|A903    |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;8486AF|97CC    |0000CC;
-    BRA .label12                                               ;8486B1|8041    |8486F4;
+    BRA .set_walk_sprite                                               ;8486B1|8041    |8486F4;
  
  
-.label11:
+.stop_walking:
     SEP #$20                                                   ;8486B3|E220    |      ;
     LDY.W #$0003                                               ;8486B5|A00300  |      ;
     LDA.B #$00                                                 ;8486B8|A900    |      ;
@@ -942,7 +942,7 @@ fAI_UpdateSlotWander:
     JMP.W .justReturn                                          ;8486F1|4C1688  |848816;
  
  
-.label12:
+.set_walk_sprite:
     REP #$30                                                   ;8486F4|C230    |      ;
     LDY.W #$0036                                               ;8486F6|A03600  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;8486F9|B7CC    |0000CC;
@@ -960,10 +960,10 @@ fAI_UpdateSlotWander:
     REP #$10                                                   ;848714|C210    |      ;
     LDY.W #$0001                                               ;848716|A00100  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;848719|97CC    |0000CC;
-    BRA .label14                                               ;84871B|8013    |848730;
+    BRA .check_velocity                                               ;84871B|8013    |848730;
  
  
-.label13:
+.decrement_wait_timer:
     SEP #$20                                                   ;84871D|E220    |      ;
     REP #$10                                                   ;84871F|C210    |      ;
     LDY.W #$0008                                               ;848721|A00800  |      ;
@@ -974,21 +974,21 @@ fAI_UpdateSlotWander:
     LDY.W #$0008                                               ;84872B|A00800  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;84872E|97CC    |0000CC;
  
-.label14:
+.check_velocity:
     SEP #$20                                                   ;848730|E220    |      ;
     REP #$10                                                   ;848732|C210    |      ;
     LDY.W #$0003                                               ;848734|A00300  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;848737|B7CC    |0000CC;
-    BNE .label15                                               ;848739|D00E    |848749;
+    BNE .try_move                                               ;848739|D00E    |848749;
     SEP #$20                                                   ;84873B|E220    |      ;
     REP #$10                                                   ;84873D|C210    |      ;
     LDY.W #$0004                                               ;84873F|A00400  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;848742|B7CC    |0000CC;
-    BNE .label15                                               ;848744|D003    |848749;
+    BNE .try_move                                               ;848744|D003    |848749;
     JMP.W .justReturn                                          ;848746|4C1688  |848816;
  
  
-.label15:
+.try_move:
     REP #$20                                                   ;848749|C220    |      ;
     REP #$30                                                   ;84874B|C230    |      ;
     LDY.W #$001A                                               ;84874D|A01A00  |      ;
@@ -1004,14 +1004,14 @@ fAI_UpdateSlotWander:
     LDY.W #$0003                                               ;848764|A00300  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;848767|B7CC    |0000CC;
     BMI +                                                      ;848769|3002    |84876D;
-    BRA .label16                                               ;84876B|8005    |848772;
+    BRA .dx_abs_done                                               ;84876B|8005    |848772;
  
  
   + SEP #$20                                                   ;84876D|E220    |      ;
     EOR.B #$FF                                                 ;84876F|49FF    |      ;
     INC A                                                      ;848771|1A      |      ;
  
-.label16:
+.dx_abs_done:
     REP #$20                                                   ;848772|C220    |      ;
     STA.B strcPlayer.newX                                      ;848774|85E5    |0000E5;
     LDA.W #$0000                                               ;848776|A90000  |      ;
@@ -1020,14 +1020,14 @@ fAI_UpdateSlotWander:
     LDY.W #$0004                                               ;84877D|A00400  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;848780|B7CC    |0000CC;
     BMI +                                                      ;848782|3002    |848786;
-    BRA .label17                                               ;848784|8005    |84878B;
+    BRA .dy_abs_done                                               ;848784|8005    |84878B;
  
  
   + SEP #$20                                                   ;848786|E220    |      ;
     EOR.B #$FF                                                 ;848788|49FF    |      ;
     INC A                                                      ;84878A|1A      |      ;
  
-.label17:
+.dy_abs_done:
     REP #$20                                                   ;84878B|C220    |      ;
     STA.B strcPlayer.newY                                      ;84878D|85E7    |0000E7;
     STZ.B strcPlayer.unkE3                                     ;84878F|64E3    |0000E3;
@@ -1036,7 +1036,7 @@ fAI_UpdateSlotWander:
     LDY.W #$0001                                               ;848795|A00100  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;848798|B7CC    |0000CC;
     AND.B #$80                                                 ;84879A|2980    |      ;
-    BEQ .label18                                               ;84879C|F045    |8487E3;
+    BEQ .check_tile_y                                               ;84879C|F045    |8487E3;
     REP #$20                                                   ;84879E|C220    |      ;
     LDA.W #$0000                                               ;8487A0|A90000  |      ;
     SEP #$20                                                   ;8487A3|E220    |      ;
@@ -1063,29 +1063,29 @@ fAI_UpdateSlotWander:
     CMP.W #$00FF                                               ;8487CD|C9FF00  |      ;
     BEQ .return                                                ;8487D0|F045    |848817;
     CMP.W #$00E1                                               ;8487D2|C9E100  |      ;
-    BEQ .label20                                               ;8487D5|F07D    |848854;
+    BEQ .tile_e1_x                                               ;8487D5|F07D    |848854;
     CMP.W #$00C0                                               ;8487D7|C9C000  |      ;
-    BCC .label18                                               ;8487DA|9007    |8487E3;
+    BCC .check_tile_y                                               ;8487DA|9007    |8487E3;
     CMP.W #$00D0                                               ;8487DC|C9D000  |      ;
-    BCS .label18                                               ;8487DF|B002    |8487E3;
+    BCS .check_tile_y                                               ;8487DF|B002    |8487E3;
     BRA .return                                                ;8487E1|8034    |848817;
  
  
-.label18:
+.check_tile_y:
     REP #$20                                                   ;8487E3|C220    |      ;
     LDA.B strcPlayer.unkPosY                                   ;8487E5|A5EB    |0000EB;
     CMP.W #$00FF                                               ;8487E7|C9FF00  |      ;
     BEQ .return                                                ;8487EA|F02B    |848817;
     CMP.W #$00E1                                               ;8487EC|C9E100  |      ;
-    BEQ .label21                                               ;8487EF|F077    |848868;
+    BEQ .tile_e1_y                                               ;8487EF|F077    |848868;
     CMP.W #$00C0                                               ;8487F1|C9C000  |      ;
-    BCC .label19                                               ;8487F4|9007    |8487FD;
+    BCC .check_overlap                                               ;8487F4|9007    |8487FD;
     CMP.W #$00D0                                               ;8487F6|C9D000  |      ;
-    BCS .label19                                               ;8487F9|B002    |8487FD;
+    BCS .check_overlap                                               ;8487F9|B002    |8487FD;
     BRA .return                                                ;8487FB|801A    |848817;
  
  
-.label19:
+.check_overlap:
     REP #$20                                                   ;8487FD|C220    |      ;
     LDA.W #$0000                                               ;8487FF|A90000  |      ;
     SEP #$20                                                   ;848802|E220    |      ;
@@ -1132,7 +1132,7 @@ fAI_UpdateSlotWander:
     RTS                                                        ;848853|60      |      ;
  
  
-.label20:
+.tile_e1_x:
     SEP #$20                                                   ;848854|E220    |      ;
     REP #$10                                                   ;848856|C210    |      ;
     LDY.W #$003F                                               ;848858|A03F00  |      ;
@@ -1141,10 +1141,10 @@ fAI_UpdateSlotWander:
     BCS .return                                                ;84885F|B0B6    |848817;
     CMP.B #$18                                                 ;848861|C918    |      ;
     BCC .return                                                ;848863|90B2    |848817;
-    JMP.W .label18                                             ;848865|4CE387  |8487E3;
+    JMP.W .check_tile_y                                             ;848865|4CE387  |8487E3;
  
  
-.label21:
+.tile_e1_y:
     SEP #$20                                                   ;848868|E220    |      ;
     REP #$10                                                   ;84886A|C210    |      ;
     LDY.W #$003F                                               ;84886C|A03F00  |      ;
@@ -1153,7 +1153,7 @@ fAI_UpdateSlotWander:
     BCS .return                                                ;848873|B0A2    |848817;
     CMP.B #$18                                                 ;848875|C918    |      ;
     BCC .return                                                ;848877|909E    |848817;
-    JMP.W .label19                                             ;848879|4CFD87  |8487FD;
+    JMP.W .check_overlap                                             ;848879|4CFD87  |8487FD;
  
  
 fAI_SetCCPointer:
@@ -2684,9 +2684,9 @@ fAIAction0x30_UpdateChicken:
     CMP.B #$E0                                                 ;84989A|C9E0    |      ;
     BNE .loop                                                  ;84989C|D003    |8498A1;
     if !REGION_EUDE
-    JMP.W .label3
+    JMP.W .state_e0
     else
-    JMP.W .label3                                              ;84989E|4C4F9A  |849A4F;
+    JMP.W .state_e0                                              ;84989E|4C4F9A  |849A4F;
     endif
  
  
@@ -2697,74 +2697,74 @@ fAIAction0x30_UpdateChicken:
     LDA.B [ptrAIUnknown0xCC],Y                                 ;8498A8|B7CC    |0000CC;
     CMP.B #$00                                                 ;8498AA|C900    |      ;
     BNE +                                                      ;8498AC|D003    |8498B1;
-    JMP.W .label1                                              ;8498AE|4CC899  |8499C8;
+    JMP.W .idle_roll                                              ;8498AE|4CC899  |8499C8;
  
  
   + REP #$20                                                   ;8498B1|C220    |      ;
     LDA.B strcPlayer.action                                    ;8498B3|A5D4    |0000D4;
     CMP.W #!PACTION_USINGTOOL                                               
     BNE +                                                      ;8498B8|D003    |8498BD;
-    JMP.W .label1                                              ;8498BA|4CC899  |8499C8;
+    JMP.W .idle_roll                                              ;8498BA|4CC899  |8499C8;
  
  
   + CMP.W #!PACTION_SHOWTOOL                                               
     BNE +                                                      ;8498C0|D003    |8498C5;
-    JMP.W .label1                                              ;8498C2|4CC899  |8499C8;
+    JMP.W .idle_roll                                              ;8498C2|4CC899  |8499C8;
  
  
   + CMP.W #!PACTION_WHISTLEHORSE                                               
     BNE +                                                      ;8498C8|D003    |8498CD;
-    JMP.W .label1                                              ;8498CA|4CC899  |8499C8;
+    JMP.W .idle_roll                                              ;8498CA|4CC899  |8499C8;
  
  
   + CMP.W #!PACTION_WHISTLEDOG                                               
     BNE +                                                      ;8498D0|D003    |8498D5;
-    JMP.W .label1                                              ;8498D2|4CC899  |8499C8;
+    JMP.W .idle_roll                                              ;8498D2|4CC899  |8499C8;
  
  
   + %CheckPlayerFlagsNoReg(!PFLAGS_EATINGMEAL)
     BEQ +                                                      ;8498DA|F003    |8498DF;
-    JMP.W .label1                                              ;8498DC|4CC899  |8499C8;
+    JMP.W .idle_roll                                              ;8498DC|4CC899  |8499C8;
  
  
   + %CheckPlayerFlagsNoReg(!PFLAGS_INTERACTING)
     BEQ +                                                      ;8498E4|F003    |8498E9;
-    JMP.W .label1                                              ;8498E6|4CC899  |8499C8;
+    JMP.W .idle_roll                                              ;8498E6|4CC899  |8499C8;
  
  
   + %CheckFlag(daily4, $0006)
     BEQ +                                                      ;8498F0|F003    |8498F5;
-    JMP.W .label1                                              ;8498F2|4CC899  |8499C8;
+    JMP.W .idle_roll                                              ;8498F2|4CC899  |8499C8;
  
  
   + REP #$20                                                   ;8498F5|C220    |      ;
     LDA.W strcJoypad1.newInput                                 ;8498F7|AD2801  |000128;
     BIT.W #!JOYPAD_A                                               
     BNE +                                                      ;8498FD|D003    |849902;
-    JMP.W .label1                                              ;8498FF|4CC899  |8499C8;
+    JMP.W .idle_roll                                              ;8498FF|4CC899  |8499C8;
  
  
   + %CheckPlayerFlags(!PFLAGS_DOGHUGGING)
     BEQ +                                                      ;849909|F003    |84990E;
-    JMP.W .label1                                              ;84990B|4CC899  |8499C8;
+    JMP.W .idle_roll                                              ;84990B|4CC899  |8499C8;
  
  
   + LDA.B strcPlayer.action                                    ;84990E|A5D4    |0000D4;
     CMP.W #!PACTION_17                                               
     BNE +                                                      ;849913|D003    |849918;
-    JMP.W .label1                                              ;849915|4CC899  |8499C8;
+    JMP.W .idle_roll                                              ;849915|4CC899  |8499C8;
  
  
   + LDA.B strcPlayer.action                                    ;849918|A5D4    |0000D4;
     CMP.W #!PACTION_ITEMONHAND                                               
     BNE +                                                      ;84991D|D003    |849922;
-    JMP.W .label1                                              ;84991F|4CC899  |8499C8;
+    JMP.W .idle_roll                                              ;84991F|4CC899  |8499C8;
  
  
   + SEP #$20                                                   ;849922|E220    |      ;
     LDA.W strcPlayerData.carryItemId                           ;849924|AD1D09  |00091D;
     BEQ +                                                      ;849927|F003    |84992C;
-    JMP.W .label1                                              ;849929|4CC899  |8499C8;
+    JMP.W .idle_roll                                              ;849929|4CC899  |8499C8;
  
  
   + SEP #$20                                                   ;84992C|E220    |      ;
@@ -2772,13 +2772,13 @@ fAIAction0x30_UpdateChicken:
     LDA.B [ptrTemp0x72],Y                                      ;849931|B772    |000072;
     AND.B #$40                                                 ;849933|2940    |      ;
     BEQ +                                                      ;849935|F003    |84993A;
-    JMP.W .label2                                              ;849937|4C419A  |849A41;
+    JMP.W .finish_update                                              ;849937|4C419A  |849A41;
  
  
   + LDA.B [ptrTemp0x72],Y                                      ;84993A|B772    |000072;
     AND.B #$0E                                                 ;84993C|290E    |      ;
     BNE +                                                      ;84993E|D003    |849943;
-    JMP.W .label2                                              ;849940|4C419A  |849A41;
+    JMP.W .finish_update                                              ;849940|4C419A  |849A41;
  
  
   + LDA.B [ptrTemp0x72],Y                                      ;849943|B772    |000072;
@@ -2815,7 +2815,7 @@ fAIAction0x30_UpdateChicken:
     LDA.B [ptrAIUnknown0xCC],Y                                 ;849988|B7CC    |0000CC;
     CMP.B #$24                                                 ;84998A|C924    |      ;
     BCS +                                                      ;84998C|B003    |849991;
-    JMP.W .label2                                              ;84998E|4C419A  |849A41;
+    JMP.W .finish_update                                              ;84998E|4C419A  |849A41;
  
  
   + SEP #$20                                                   ;849991|E220    |      ;
@@ -2833,7 +2833,7 @@ fAIAction0x30_UpdateChicken:
     LDA.B [ptrTemp0x72],Y                                      ;8499B0|B772    |000072;
     AND.B #$08                                                 ;8499B2|2908    |      ;
     BNE +                                                      ;8499B4|D003    |8499B9;
-    JMP.W .label2                                              ;8499B6|4C419A  |849A41;
+    JMP.W .finish_update                                              ;8499B6|4C419A  |849A41;
  
  
   + %SetCurrentCarriedItemDirect($25)
@@ -2841,13 +2841,13 @@ fAIAction0x30_UpdateChicken:
     RTS                                                        ;8499C7|60      |      ;
  
  
-.label1:
+.idle_roll:
     SEP #$20                                                   ;8499C8|E220    |      ;
     REP #$10                                                   ;8499CA|C210    |      ;
     LDY.W #$0000                                               ;8499CC|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;8499CF|B772    |000072;
     AND.B #$08                                                 ;8499D1|2908    |      ;
-    BEQ .label2                                                ;8499D3|F06C    |849A41;
+    BEQ .finish_update                                                ;8499D3|F06C    |849A41;
     SEP #$20                                                   ;8499D5|E220    |      ;
     REP #$10                                                   ;8499D7|C210    |      ;
     LDY.W #$003F                                               ;8499D9|A03F00  |      ;
@@ -2865,7 +2865,7 @@ fAIAction0x30_UpdateChicken:
     BEQ +                                                      ;8499EF|F007    |8499F8;
     INC A                                                      ;8499F1|1A      |      ;
     STA.W strcStockData.unkEachChicken,X                       ;8499F2|9D3B09  |00093B;
-    JMP.W .label2                                              ;8499F5|4C419A  |849A41;
+    JMP.W .finish_update                                              ;8499F5|4C419A  |849A41;
  
  
   + REP #$30                                                   ;8499F8|C230    |      ;
@@ -2886,7 +2886,7 @@ fAIAction0x30_UpdateChicken:
     LDX.W #$0000                                               ;849A16|A20000  |      ;
     LDY.W #$005D                                               ;849A19|A05D00  |      ;
     JSL.L fAI_SetSlotScript                                    ;849A1C|223F8084|84803F;
-    JMP.W .label2                                              ;849A20|4C419A  |849A41;
+    JMP.W .finish_update                                              ;849A20|4C419A  |849A41;
  
  
   + REP #$30                                                   ;849A23|C230    |      ;
@@ -2901,10 +2901,10 @@ fAIAction0x30_UpdateChicken:
     LDX.W #$0000                                               ;849A34|A20000  |      ;
     LDY.W #$005C                                               ;849A37|A05C00  |      ;
     JSL.L fAI_SetSlotScript                                    ;849A3A|223F8084|84803F;
-    JMP.W .label2                                              ;849A3E|4C419A  |849A41;
+    JMP.W .finish_update                                              ;849A3E|4C419A  |849A41;
  
  
-.label2:
+.finish_update:
     REP #$30                                                   ;849A41|C230    |      ;
     LDY.W #$0010                                               ;849A43|A01000  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;849A46|B7CC    |0000CC;
@@ -2914,13 +2914,13 @@ fAIAction0x30_UpdateChicken:
     RTS                                                        ;849A4E|60      |      ;
  
  
-.label3:
+.state_e0:
     if !REGION_EUDE
     REP #$30
     LDA.L $7F1F5A
     AND.W #$0002
     BEQ .r_849A4F_1
-    JMP.W .label2
+    JMP.W .finish_update
 .r_849A4F_1:
     SEP #$20
     else
@@ -2973,7 +2973,7 @@ fAIAction0x30_UpdateChicken:
     REP #$10                                                   ;849ACA|C210    |      ;
     LDY.W #$0001                                               ;849ACC|A00100  |      ;
     STA.B [ptrAIUnknown0xCC],Y                                 ;849ACF|97CC    |0000CC;
-    JMP.W .label2                                              ;849AD1|4C419A  |849A41;
+    JMP.W .finish_update                                              ;849AD1|4C419A  |849A41;
  
  
 fAIAction0x31_UpdateCow:
@@ -3090,26 +3090,26 @@ fAIAction0x31_CowDefaultPath:
     LDA.B [ptrTemp0x72],Y                                      ;849BB6|B772    |000072;
     AND.B #$08                                                 ;849BB8|2908    |      ;
     BNE +                                                      ;849BBA|D003    |849BBF;
-    JMP.W .label1                                              ;849BBC|4CDB9B  |849BDB;
+    JMP.W .check_tool_flag                                              ;849BBC|4CDB9B  |849BDB;
  
  
   + REP #$20                                                   ;849BBF|C220    |      ;
     %CheckFlag(daily1, $0100)
     BEQ +                                                      ;849BC8|F003    |849BCD;
-    JMP.W .label21                                             ;849BCA|4C4E9E  |849E4E;
+    JMP.W .make_pregnant                                             ;849BCA|4C4E9E  |849E4E;
  
  
   + REP #$20                                                   ;849BCD|C220    |      ;
     %CheckFlag(daily1, $0080)
-    BEQ .label1                                                ;849BD6|F003    |849BDB;
-    JMP.W .label27                                             ;849BD8|4CBC9F  |849FBC;
+    BEQ .check_tool_flag                                                ;849BD6|F003    |849BDB;
+    JMP.W .cure_sick                                             ;849BD8|4CBC9F  |849FBC;
  
  
-.label1:
+.check_tool_flag:
     REP #$20                                                   ;849BDB|C220    |      ;
     %CheckFlag(daily1, $0040)
     BEQ +                                                      ;849BE4|F003    |849BE9;
-    JMP.W .label18                                             ;849BE6|4CBE9D  |849DBE;
+    JMP.W .use_tool_on_cow                                             ;849BE6|4CBE9D  |849DBE;
  
  
   + JMP.W .continue                                            ;849BE9|4CB9A0  |84A0B9;
@@ -3143,46 +3143,46 @@ fAIAction0x31_CowDefaultPath:
     LDY.W #$0000                                               ;849C23|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;849C26|B772    |000072;
     AND.B #$40                                                 ;849C28|2940    |      ;
-    BNE .label6                                                ;849C2A|D021    |849C4D;
+    BNE .dialog_pregnant                                                ;849C2A|D021    |849C4D;
     LDA.B [ptrTemp0x72],Y                                      ;849C2C|B772    |000072;
     AND.B #$20                                                 ;849C2E|2920    |      ;
-    BNE .label5                                                ;849C30|D014    |849C46;
+    BNE .dialog_sick                                                ;849C30|D014    |849C46;
     LDA.B [ptrTemp0x72],Y                                      ;849C32|B772    |000072;
     AND.B #$10                                                 ;849C34|2910    |      ;
-    BNE .label4                                                ;849C36|D007    |849C3F;
+    BNE .dialog_cranky                                                ;849C36|D007    |849C3F;
     REP #$30                                                   ;849C38|C230    |      ;
     LDX.W #$002F                                               ;849C3A|A22F00  |      ;
-    BRA .label7                                                ;849C3D|8025    |849C64;
+    BRA .show_dialog                                                ;849C3D|8025    |849C64;
  
  
-.label4:
+.dialog_cranky:
     REP #$30                                                   ;849C3F|C230    |      ;
     LDX.W #$0030                                               ;849C41|A23000  |      ;
-    BRA .label7                                                ;849C44|801E    |849C64;
+    BRA .show_dialog                                                ;849C44|801E    |849C64;
  
  
-.label5:
+.dialog_sick:
     REP #$30                                                   ;849C46|C230    |      ;
     LDX.W #$0031                                               ;849C48|A23100  |      ;
-    BRA .label7                                                ;849C4B|8017    |849C64;
+    BRA .show_dialog                                                ;849C4B|8017    |849C64;
  
  
-.label6:
+.dialog_pregnant:
     SEP #$20                                                   ;849C4D|E220    |      ;
     REP #$10                                                   ;849C4F|C210    |      ;
     LDY.W #$0003                                               ;849C51|A00300  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;849C54|B772    |000072;
     BEQ +                                                      ;849C56|F005    |849C5D;
     LDX.W #$0032                                               ;849C58|A23200  |      ;
-    BRA .label7                                                ;849C5B|8007    |849C64;
+    BRA .show_dialog                                                ;849C5B|8007    |849C64;
  
  
   + REP #$30                                                   ;849C5D|C230    |      ;
     LDX.W #$0145                                               ;849C5F|A24501  |      ;
-    BRA .label7                                                ;849C62|8000    |849C64;
+    BRA .show_dialog                                                ;849C62|8000    |849C64;
  
  
-.label7:
+.show_dialog:
     SEP #$20                                                   ;849C64|E220    |      ;
     REP #$10                                                   ;849C66|C210    |      ;
     LDA.B #$00                                                 ;849C68|A900    |      ;
@@ -3220,40 +3220,40 @@ fAIAction0x31_CowDefaultPath:
     LDA.B [ptrTemp0x72],Y                                      ;849CAD|B772    |000072;
     AND.B #$02                                                 ;849CAF|2902    |      ;
     BEQ +                                                      ;849CB1|F003    |849CB6;
-    JMP.W .label8                                              ;849CB3|4CCE9C  |849CCE;
+    JMP.W .baby_script_by_direction                                              ;849CB3|4CCE9C  |849CCE;
  
  
   + LDA.B [ptrTemp0x72],Y                                      ;849CB6|B772    |000072;
     AND.B #$04                                                 ;849CB8|2904    |      ;
     BEQ +                                                      ;849CBA|F003    |849CBF;
-    JMP.W .label13                                             ;849CBC|4C469D  |849D46;
+    JMP.W .child_script_by_direction                                             ;849CBC|4C469D  |849D46;
  
  
   + LDY.W #$0000                                               ;849CBF|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;849CC2|B772    |000072;
     AND.B #$40                                                 ;849CC4|2940    |      ;
     BEQ +                                                      ;849CC6|F003    |849CCB;
-    JMP.W .label33                                             ;849CC8|4C44A0  |84A044;
+    JMP.W .pregnant_script_by_direction                                             ;849CC8|4C44A0  |84A044;
  
  
-  + JMP.W .label28                                             ;849CCB|4CD09F  |849FD0;
+  + JMP.W .adult_script_by_direction                                             ;849CCB|4CD09F  |849FD0;
  
  
-.label8:
+.baby_script_by_direction:
     SEP #$20                                                   ;849CCE|E220    |      ;
     REP #$10                                                   ;849CD0|C210    |      ;
     LDY.W #$0002                                               ;849CD2|A00200  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;849CD5|B7CC    |0000CC;
     CMP.B #$00                                                 ;849CD7|C900    |      ;
-    BEQ .label9                                                ;849CD9|F00C    |849CE7;
+    BEQ .baby_script_down                                                ;849CD9|F00C    |849CE7;
     CMP.B #$01                                                 ;849CDB|C901    |      ;
-    BEQ .label10                                               ;849CDD|F01E    |849CFD;
+    BEQ .baby_script_up                                               ;849CDD|F01E    |849CFD;
     CMP.B #$02                                                 ;849CDF|C902    |      ;
-    BEQ .label11                                               ;849CE1|F030    |849D13;
+    BEQ .baby_script_left                                               ;849CE1|F030    |849D13;
     CMP.B #$03                                                 ;849CE3|C903    |      ;
-    BEQ .label12                                               ;849CE5|F042    |849D29;
+    BEQ .baby_script_right                                               ;849CE5|F042    |849D29;
  
-.label9:
+.baby_script_down:
     REP #$20                                                   ;849CE7|C220    |      ;
     LDA.W #$0000                                               ;849CE9|A90000  |      ;
     SEP #$20                                                   ;849CEC|E220    |      ;
@@ -3265,7 +3265,7 @@ fAIAction0x31_CowDefaultPath:
     BRA .jump1                                                 ;849CFB|8042    |849D3F;
  
  
-.label10:
+.baby_script_up:
     REP #$20                                                   ;849CFD|C220    |      ;
     LDA.W #$0000                                               ;849CFF|A90000  |      ;
     SEP #$20                                                   ;849D02|E220    |      ;
@@ -3277,7 +3277,7 @@ fAIAction0x31_CowDefaultPath:
     BRA .jump1                                                 ;849D11|802C    |849D3F;
  
  
-.label11:
+.baby_script_left:
     REP #$20                                                   ;849D13|C220    |      ;
     LDA.W #$0000                                               ;849D15|A90000  |      ;
     SEP #$20                                                   ;849D18|E220    |      ;
@@ -3289,7 +3289,7 @@ fAIAction0x31_CowDefaultPath:
     BRA .jump1                                                 ;849D27|8016    |849D3F;
  
  
-.label12:
+.baby_script_right:
     REP #$20                                                   ;849D29|C220    |      ;
     LDA.W #$0000                                               ;849D2B|A90000  |      ;
     SEP #$20                                                   ;849D2E|E220    |      ;
@@ -3306,21 +3306,21 @@ fAIAction0x31_CowDefaultPath:
     JMP.W fAIAction0x31_CowUpdateTail                                      ;849D43|4C6EA4  |84A46E;
  
  
-.label13:
+.child_script_by_direction:
     SEP #$20                                                   ;849D46|E220    |      ;
     REP #$10                                                   ;849D48|C210    |      ;
     LDY.W #$0002                                               ;849D4A|A00200  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;849D4D|B7CC    |0000CC;
     CMP.B #$00                                                 ;849D4F|C900    |      ;
-    BEQ .label14                                               ;849D51|F00C    |849D5F;
+    BEQ .child_script_down                                               ;849D51|F00C    |849D5F;
     CMP.B #$01                                                 ;849D53|C901    |      ;
-    BEQ .label15                                               ;849D55|F01E    |849D75;
+    BEQ .child_script_up                                               ;849D55|F01E    |849D75;
     CMP.B #$02                                                 ;849D57|C902    |      ;
-    BEQ .label16                                               ;849D59|F030    |849D8B;
+    BEQ .child_script_left                                               ;849D59|F030    |849D8B;
     CMP.B #$03                                                 ;849D5B|C903    |      ;
-    BEQ .label17                                               ;849D5D|F042    |849DA1;
+    BEQ .child_script_right                                               ;849D5D|F042    |849DA1;
  
-.label14:
+.child_script_down:
     REP #$20                                                   ;849D5F|C220    |      ;
     LDA.W #$0000                                               ;849D61|A90000  |      ;
     SEP #$20                                                   ;849D64|E220    |      ;
@@ -3332,7 +3332,7 @@ fAIAction0x31_CowDefaultPath:
     BRA .jump2                                                 ;849D73|8042    |849DB7;
  
  
-.label15:
+.child_script_up:
     REP #$20                                                   ;849D75|C220    |      ;
     LDA.W #$0000                                               ;849D77|A90000  |      ;
     SEP #$20                                                   ;849D7A|E220    |      ;
@@ -3344,7 +3344,7 @@ fAIAction0x31_CowDefaultPath:
     BRA .jump2                                                 ;849D89|802C    |849DB7;
  
  
-.label16:
+.child_script_left:
     REP #$20                                                   ;849D8B|C220    |      ;
     LDA.W #$0000                                               ;849D8D|A90000  |      ;
     SEP #$20                                                   ;849D90|E220    |      ;
@@ -3356,7 +3356,7 @@ fAIAction0x31_CowDefaultPath:
     BRA .jump2                                                 ;849D9F|8016    |849DB7;
  
  
-.label17:
+.child_script_right:
     REP #$20                                                   ;849DA1|C220    |      ;
     LDA.W #$0000                                               ;849DA3|A90000  |      ;
     SEP #$20                                                   ;849DA6|E220    |      ;
@@ -3373,7 +3373,7 @@ fAIAction0x31_CowDefaultPath:
     JMP.W fAIAction0x31_CowUpdateTail                                      ;849DBB|4C6EA4  |84A46E;
  
  
-.label18:
+.use_tool_on_cow:
     SEP #$20                                                   ;849DBE|E220    |      ;
     REP #$10                                                   ;849DC0|C210    |      ;
     LDA.W strcPlayerData.toolEquipped                          ;849DC2|AD2109  |000921;
@@ -3383,14 +3383,14 @@ fAIAction0x31_CowDefaultPath:
  
   + CMP.B #!PACTION_DROPITEM                                                 
     BCS +                                                      ;849DCC|B003    |849DD1;
-    JMP.W .label23                                             ;849DCE|4C049F  |849F04;
+    JMP.W .tool_hit_cow                                             ;849DCE|4C049F  |849F04;
  
  
   + CMP.B #$0E                                                 ;849DD1|C90E    |      ;
-    BEQ .label19                                               ;849DD3|F018    |849DED;
+    BEQ .milk_cow                                               ;849DD3|F018    |849DED;
     CMP.B #$0F                                                 ;849DD5|C90F    |      ;
     BNE +                                                      ;849DD7|D003    |849DDC;
-    JMP.W .label22                                             ;849DD9|4CAE9E  |849EAE;
+    JMP.W .brush_cow                                             ;849DD9|4CAE9E  |849EAE;
  
  
   + CMP.B #$11                                                 ;849DDC|C911    |      ;
@@ -3400,13 +3400,13 @@ fAIAction0x31_CowDefaultPath:
  
   + CMP.B #$15                                                 ;849DE3|C915    |      ;
     BCS +                                                      ;849DE5|B003    |849DEA;
-    JMP.W .label23                                             ;849DE7|4C049F  |849F04;
+    JMP.W .tool_hit_cow                                             ;849DE7|4C049F  |849F04;
  
  
   + JMP.W .continue                                            ;849DEA|4CB9A0  |84A0B9;
  
  
-.label19:
+.milk_cow:
     SEP #$20                                                   ;849DED|E220    |      ;
     LDY.W #$0000                                               ;849DEF|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;849DF2|B772    |000072;
@@ -3439,21 +3439,21 @@ fAIAction0x31_CowDefaultPath:
     LDY.W #$0004                                               ;849E27|A00400  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;849E2A|B772    |000072;
     CMP.B #$60                                                 ;849E2C|C960    |      ;
-    BCC .label20                                               ;849E2E|9014    |849E44;
+    BCC .milk_item_ready                                               ;849E2E|9014    |849E44;
     CMP.B #$C0                                                 ;849E30|C9C0    |      ;
     BCC +                                                      ;849E32|9009    |849E3D;
     %SetCurrentCarriedItemDirect(!EITEM_BLUEDIAMOND)
-    BRA .label20                                               ;849E3B|8007    |849E44;
+    BRA .milk_item_ready                                               ;849E3B|8007    |849E44;
  
  
   + %SetCurrentCarriedItemDirect(!EITEM_BEANSTALKSEED)
  
-.label20:
+.milk_item_ready:
     %SetPlayerAction(!PACTION_ITEMONHAND)
-    JMP.W .label28                                             ;849E4B|4CD09F  |849FD0;
+    JMP.W .adult_script_by_direction                                             ;849E4B|4CD09F  |849FD0;
  
  
-.label21:
+.make_pregnant:
     REP #$30                                                   ;849E4E|C230    |      ;
     %CheckFlag(event1, $0004)
     BEQ +                                                      ;849E57|F003    |849E5C;
@@ -3490,10 +3490,10 @@ fAIAction0x31_CowDefaultPath:
     LDA.L nOwnedCows                                           ;849EA2|AF0A1F7F|7F1F0A;
     INC A                                                      ;849EA6|1A      |      ;
     STA.L nOwnedCows                                           ;849EA7|8F0A1F7F|7F1F0A;
-    JMP.W .label28                                             ;849EAB|4CD09F  |849FD0;
+    JMP.W .adult_script_by_direction                                             ;849EAB|4CD09F  |849FD0;
  
  
-.label22:
+.brush_cow:
     SEP #$20                                                   ;849EAE|E220    |      ;
     REP #$10                                                   ;849EB0|C210    |      ;
     LDY.W #$0001                                               ;849EB2|A00100  |      ;
@@ -3523,47 +3523,47 @@ fAIAction0x31_CowDefaultPath:
     LDA.B [ptrTemp0x72],Y                                      ;849EE3|B772    |000072;
     AND.B #$02                                                 ;849EE5|2902    |      ;
     BEQ +                                                      ;849EE7|F003    |849EEC;
-    JMP.W .label8                                              ;849EE9|4CCE9C  |849CCE;
+    JMP.W .baby_script_by_direction                                              ;849EE9|4CCE9C  |849CCE;
  
  
   + LDA.B [ptrTemp0x72],Y                                      ;849EEC|B772    |000072;
     AND.B #$04                                                 ;849EEE|2904    |      ;
     BEQ +                                                      ;849EF0|F003    |849EF5;
-    JMP.W .label13                                             ;849EF2|4C469D  |849D46;
+    JMP.W .child_script_by_direction                                             ;849EF2|4C469D  |849D46;
  
  
   + LDY.W #$0000                                               ;849EF5|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;849EF8|B772    |000072;
     AND.B #$40                                                 ;849EFA|2940    |      ;
     BEQ +                                                      ;849EFC|F003    |849F01;
-    JMP.W .label33                                             ;849EFE|4C44A0  |84A044;
+    JMP.W .pregnant_script_by_direction                                             ;849EFE|4C44A0  |84A044;
  
  
-  + JMP.W .label28                                             ;849F01|4CD09F  |849FD0;
+  + JMP.W .adult_script_by_direction                                             ;849F01|4CD09F  |849FD0;
  
  
-.label23:
+.tool_hit_cow:
     SEP #$20                                                   ;849F04|E220    |      ;
     LDY.W #$0000                                               ;849F06|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;849F09|B772    |000072;
     AND.B #$08                                                 ;849F0B|2908    |      ;
     BEQ +                                                      ;849F0D|F003    |849F12;
-    JMP.W .label24                                             ;849F0F|4C249F  |849F24;
+    JMP.W .hit_adult                                             ;849F0F|4C249F  |849F24;
  
  
   + LDA.B [ptrTemp0x72],Y                                      ;849F12|B772    |000072;
     AND.B #$04                                                 ;849F14|2904    |      ;
     BEQ +                                                      ;849F16|F003    |849F1B;
-    JMP.W .label25                                             ;849F18|4C439F  |849F43;
+    JMP.W .hit_child                                             ;849F18|4C439F  |849F43;
  
  
   + LDA.B [ptrTemp0x72],Y                                      ;849F1B|B772    |000072;
     AND.B #$02                                                 ;849F1D|2902    |      ;
-    BEQ .label24                                               ;849F1F|F003    |849F24;
-    JMP.W .label26                                             ;849F21|4C629F  |849F62;
+    BEQ .hit_adult                                               ;849F1F|F003    |849F24;
+    JMP.W .hit_baby                                             ;849F21|4C629F  |849F62;
  
  
-.label24:
+.hit_adult:
     REP #$30                                                   ;849F24|C230    |      ;
     LDA.W #$000A                                               ;849F26|A90A00  |      ;
     STA.B strcVariables.n16Temp1                               ;849F29|857E    |00007E;
@@ -3580,7 +3580,7 @@ fAIAction0x31_CowDefaultPath:
     BRA .jump3                                                 ;849F41|803E    |849F81;
  
  
-.label25:
+.hit_child:
     REP #$30                                                   ;849F43|C230    |      ;
     LDA.W #$0068                                               ;849F45|A96800  |      ;
     STA.B strcVariables.n16Temp1                               ;849F48|857E    |00007E;
@@ -3597,7 +3597,7 @@ fAIAction0x31_CowDefaultPath:
     BRA .jump3                                                 ;849F60|801F    |849F81;
  
  
-.label26:
+.hit_baby:
     REP #$30                                                   ;849F62|C230    |      ;
     LDA.W #$006A                                               ;849F64|A96A00  |      ;
     STA.B strcVariables.n16Temp1                               ;849F67|857E    |00007E;
@@ -3646,7 +3646,7 @@ fAIAction0x31_CowDefaultPath:
     JMP.W .continue                                            ;849FB9|4CB9A0  |84A0B9;
  
  
-.label27:
+.cure_sick:
     SEP #$20                                                   ;849FBC|E220    |      ;
     REP #$10                                                   ;849FBE|C210    |      ;
     LDY.W #$0000                                               ;849FC0|A00000  |      ;
@@ -3657,21 +3657,21 @@ fAIAction0x31_CowDefaultPath:
     LDA.B #$00                                                 ;849FCC|A900    |      ;
     STA.B [ptrTemp0x72],Y                                      ;849FCE|9772    |000072;
  
-.label28:
+.adult_script_by_direction:
     SEP #$20                                                   ;849FD0|E220    |      ;
     REP #$10                                                   ;849FD2|C210    |      ;
     LDY.W #$0002                                               ;849FD4|A00200  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;849FD7|B7CC    |0000CC;
     CMP.B #$00                                                 ;849FD9|C900    |      ;
-    BEQ .label29                                               ;849FDB|F00C    |849FE9;
+    BEQ .adult_script_down                                               ;849FDB|F00C    |849FE9;
     CMP.B #$01                                                 ;849FDD|C901    |      ;
-    BEQ .label30                                               ;849FDF|F01F    |84A000;
+    BEQ .adult_script_up                                               ;849FDF|F01F    |84A000;
     CMP.B #$02                                                 ;849FE1|C902    |      ;
-    BEQ .label31                                               ;849FE3|F032    |84A017;
+    BEQ .adult_script_left                                               ;849FE3|F032    |84A017;
     CMP.B #$03                                                 ;849FE5|C903    |      ;
-    BEQ .label32                                               ;849FE7|F045    |84A02E;
+    BEQ .adult_script_right                                               ;849FE7|F045    |84A02E;
  
-.label29:
+.adult_script_down:
     REP #$20                                                   ;849FE9|C220    |      ;
     LDA.W #$0000                                               ;849FEB|A90000  |      ;
     SEP #$20                                                   ;849FEE|E220    |      ;
@@ -3683,7 +3683,7 @@ fAIAction0x31_CowDefaultPath:
     JMP.W .jump4                                               ;849FFD|4CB5A0  |84A0B5;
  
  
-.label30:
+.adult_script_up:
     REP #$20                                                   ;84A000|C220    |      ;
     LDA.W #$0000                                               ;84A002|A90000  |      ;
     SEP #$20                                                   ;84A005|E220    |      ;
@@ -3695,7 +3695,7 @@ fAIAction0x31_CowDefaultPath:
     JMP.W .jump4                                               ;84A014|4CB5A0  |84A0B5;
  
  
-.label31:
+.adult_script_left:
     REP #$20                                                   ;84A017|C220    |      ;
     LDA.W #$0000                                               ;84A019|A90000  |      ;
     SEP #$20                                                   ;84A01C|E220    |      ;
@@ -3707,7 +3707,7 @@ fAIAction0x31_CowDefaultPath:
     JMP.W .jump4                                               ;84A02B|4CB5A0  |84A0B5;
  
  
-.label32:
+.adult_script_right:
     REP #$20                                                   ;84A02E|C220    |      ;
     LDA.W #$0000                                               ;84A030|A90000  |      ;
     SEP #$20                                                   ;84A033|E220    |      ;
@@ -3719,21 +3719,21 @@ fAIAction0x31_CowDefaultPath:
     BRA .jump4                                                 ;84A042|8071    |84A0B5;
  
  
-.label33:
+.pregnant_script_by_direction:
     SEP #$20                                                   ;84A044|E220    |      ;
     REP #$10                                                   ;84A046|C210    |      ;
     LDY.W #$0002                                               ;84A048|A00200  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;84A04B|B7CC    |0000CC;
     CMP.B #$00                                                 ;84A04D|C900    |      ;
-    BEQ .label34                                               ;84A04F|F00C    |84A05D;
+    BEQ .pregnant_script_down                                               ;84A04F|F00C    |84A05D;
     CMP.B #$01                                                 ;84A051|C901    |      ;
-    BEQ .label35                                               ;84A053|F01E    |84A073;
+    BEQ .pregnant_script_up                                               ;84A053|F01E    |84A073;
     CMP.B #$02                                                 ;84A055|C902    |      ;
-    BEQ .label36                                               ;84A057|F030    |84A089;
+    BEQ .pregnant_script_left                                               ;84A057|F030    |84A089;
     CMP.B #$03                                                 ;84A059|C903    |      ;
-    BEQ .label37                                               ;84A05B|F042    |84A09F;
+    BEQ .pregnant_script_right                                               ;84A05B|F042    |84A09F;
  
-.label34:
+.pregnant_script_down:
     REP #$20                                                   ;84A05D|C220    |      ;
     LDA.W #$0000                                               ;84A05F|A90000  |      ;
     SEP #$20                                                   ;84A062|E220    |      ;
@@ -3745,7 +3745,7 @@ fAIAction0x31_CowDefaultPath:
     BRA .jump4                                                 ;84A071|8042    |84A0B5;
  
  
-.label35:
+.pregnant_script_up:
     REP #$20                                                   ;84A073|C220    |      ;
     LDA.W #$0000                                               ;84A075|A90000  |      ;
     SEP #$20                                                   ;84A078|E220    |      ;
@@ -3757,7 +3757,7 @@ fAIAction0x31_CowDefaultPath:
     BRA .jump4                                                 ;84A087|802C    |84A0B5;
  
  
-.label36:
+.pregnant_script_left:
     REP #$20                                                   ;84A089|C220    |      ;
     LDA.W #$0000                                               ;84A08B|A90000  |      ;
     SEP #$20                                                   ;84A08E|E220    |      ;
@@ -3769,7 +3769,7 @@ fAIAction0x31_CowDefaultPath:
     BRA .jump4                                                 ;84A09D|8016    |84A0B5;
  
  
-.label37:
+.pregnant_script_right:
     REP #$20                                                   ;84A09F|C220    |      ;
     LDA.W #$0000                                               ;84A0A1|A90000  |      ;
     SEP #$20                                                   ;84A0A4|E220    |      ;
@@ -3790,25 +3790,25 @@ fAIAction0x31_CowDefaultPath:
     LDA.B [ptrTemp0x72],Y                                      ;84A0BE|B772    |000072;
     AND.B #$08                                                 ;84A0C0|2908    |      ;
     BEQ +                                                      ;84A0C2|F003    |84A0C7;
-    JMP.W .label49                                             ;84A0C4|4CB6A2  |84A2B6;
+    JMP.W .adult_idle                                             ;84A0C4|4CB6A2  |84A2B6;
  
  
   + LDA.B [ptrTemp0x72],Y                                      ;84A0C7|B772    |000072;
     AND.B #$04                                                 ;84A0C9|2904    |      ;
     BEQ +                                                      ;84A0CB|F003    |84A0D0;
-    JMP.W .label44                                             ;84A0CD|4CC9A1  |84A1C9;
+    JMP.W .child_idle                                             ;84A0CD|4CC9A1  |84A1C9;
  
  
   + LDA.B [ptrTemp0x72],Y                                      ;84A0D0|B772    |000072;
     AND.B #$02                                                 ;84A0D2|2902    |      ;
     BEQ +                                                      ;84A0D4|F003    |84A0D9;
-    JMP.W .label38                                             ;84A0D6|4CDCA0  |84A0DC;
+    JMP.W .baby_idle                                             ;84A0D6|4CDCA0  |84A0DC;
  
  
   + JMP.W fAIAction0x31_CowUpdateTail                                      ;84A0D9|4C6EA4  |84A46E;
  
  
-.label38:
+.baby_idle:
     SEP #$20                                                   ;84A0DC|E220    |      ;
     REP #$10                                                   ;84A0DE|C210    |      ;
     LDY.W #$003F                                               ;84A0E0|A03F00  |      ;
@@ -3823,33 +3823,33 @@ fAIAction0x31_CowDefaultPath:
     TAX                                                        ;84A0EF|AA      |      ;
     LDA.W strcStockData.unkEachCow,X                           ;84A0F0|BD5309  |000953;
     CMP.W #$0100                                               ;84A0F3|C90001  |      ;
-    BEQ .label39                                               ;84A0F6|F007    |84A0FF;
+    BEQ .baby_idle_roll                                               ;84A0F6|F007    |84A0FF;
     INC A                                                      ;84A0F8|1A      |      ;
     STA.W strcStockData.unkEachCow,X                           ;84A0F9|9D5309  |000953;
     JMP.W fAIAction0x31_CowUpdateTail                                      ;84A0FC|4C6EA4  |84A46E;
  
  
-.label39:
+.baby_idle_roll:
     REP #$30                                                   ;84A0FF|C230    |      ;
     STZ.W strcStockData.unkEachCow,X                           ;84A101|9E5309  |000953;
     SEP #$20                                                   ;84A104|E220    |      ;
     LDA.B strcPlayer.lastRandomNumber                          ;84A106|A5DE    |0000DE;
     CMP.B #$40                                                 ;84A108|C940    |      ;
-    BCC .label40                                               ;84A10A|9011    |84A11D;
+    BCC .baby_idle_wander                                               ;84A10A|9011    |84A11D;
     CMP.B #$80                                                 ;84A10C|C980    |      ;
     BCS +                                                      ;84A10E|B003    |84A113;
-    JMP.W .label41                                             ;84A110|4C48A1  |84A148;
+    JMP.W .baby_idle_pose1                                             ;84A110|4C48A1  |84A148;
  
  
   + CMP.B #$C0                                                 ;84A113|C9C0    |      ;
     BCS +                                                      ;84A115|B003    |84A11A;
-    JMP.W .label42                                             ;84A117|4C73A1  |84A173;
+    JMP.W .baby_idle_pose2                                             ;84A117|4C73A1  |84A173;
  
  
-  + JMP.W .label43                                             ;84A11A|4C9EA1  |84A19E;
+  + JMP.W .baby_idle_pose3                                             ;84A11A|4C9EA1  |84A19E;
  
  
-.label40:
+.baby_idle_wander:
     REP #$30                                                   ;84A11D|C230    |      ;
     SEP #$20                                                   ;84A11F|E220    |      ;
     REP #$10                                                   ;84A121|C210    |      ;
@@ -3871,7 +3871,7 @@ fAIAction0x31_CowDefaultPath:
     JMP.W fAIAction0x31_CowUpdateTail                                      ;84A145|4C6EA4  |84A46E;
  
  
-.label41:
+.baby_idle_pose1:
     REP #$30                                                   ;84A148|C230    |      ;
     SEP #$20                                                   ;84A14A|E220    |      ;
     REP #$10                                                   ;84A14C|C210    |      ;
@@ -3893,7 +3893,7 @@ fAIAction0x31_CowDefaultPath:
     JMP.W fAIAction0x31_CowUpdateTail                                      ;84A170|4C6EA4  |84A46E;
  
  
-.label42:
+.baby_idle_pose2:
     REP #$30                                                   ;84A173|C230    |      ;
     SEP #$20                                                   ;84A175|E220    |      ;
     REP #$10                                                   ;84A177|C210    |      ;
@@ -3915,7 +3915,7 @@ fAIAction0x31_CowDefaultPath:
     JMP.W fAIAction0x31_CowUpdateTail                                      ;84A19B|4C6EA4  |84A46E;
  
  
-.label43:
+.baby_idle_pose3:
     REP #$30                                                   ;84A19E|C230    |      ;
     SEP #$20                                                   ;84A1A0|E220    |      ;
     REP #$10                                                   ;84A1A2|C210    |      ;
@@ -3937,7 +3937,7 @@ fAIAction0x31_CowDefaultPath:
     JMP.W fAIAction0x31_CowUpdateTail                                      ;84A1C6|4C6EA4  |84A46E;
  
  
-.label44:
+.child_idle:
     SEP #$20                                                   ;84A1C9|E220    |      ;
     REP #$10                                                   ;84A1CB|C210    |      ;
     LDY.W #$003F                                               ;84A1CD|A03F00  |      ;
@@ -3963,21 +3963,21 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;84A1F1|E220    |      ;
     LDA.B strcPlayer.lastRandomNumber                          ;84A1F3|A5DE    |0000DE;
     CMP.B #$40                                                 ;84A1F5|C940    |      ;
-    BCC .label45                                               ;84A1F7|9011    |84A20A;
+    BCC .child_idle_wander                                               ;84A1F7|9011    |84A20A;
     CMP.B #$80                                                 ;84A1F9|C980    |      ;
     BCS +                                                      ;84A1FB|B003    |84A200;
-    JMP.W .label46                                             ;84A1FD|4C35A2  |84A235;
+    JMP.W .child_idle_pose1                                             ;84A1FD|4C35A2  |84A235;
  
  
   + CMP.B #$C0                                                 ;84A200|C9C0    |      ;
     BCS +                                                      ;84A202|B003    |84A207;
-    JMP.W .label47                                             ;84A204|4C60A2  |84A260;
+    JMP.W .child_idle_pose2                                             ;84A204|4C60A2  |84A260;
  
  
-  + JMP.W .label48                                             ;84A207|4C8BA2  |84A28B;
+  + JMP.W .child_idle_pose3                                             ;84A207|4C8BA2  |84A28B;
  
  
-.label45:
+.child_idle_wander:
     REP #$30                                                   ;84A20A|C230    |      ;
     SEP #$20                                                   ;84A20C|E220    |      ;
     REP #$10                                                   ;84A20E|C210    |      ;
@@ -3999,7 +3999,7 @@ fAIAction0x31_CowDefaultPath:
     JMP.W fAIAction0x31_CowUpdateTail                                      ;84A232|4C6EA4  |84A46E;
  
  
-.label46:
+.child_idle_pose1:
     REP #$30                                                   ;84A235|C230    |      ;
     SEP #$20                                                   ;84A237|E220    |      ;
     REP #$10                                                   ;84A239|C210    |      ;
@@ -4021,7 +4021,7 @@ fAIAction0x31_CowDefaultPath:
     JMP.W fAIAction0x31_CowUpdateTail                                      ;84A25D|4C6EA4  |84A46E;
  
  
-.label47:
+.child_idle_pose2:
     REP #$30                                                   ;84A260|C230    |      ;
     SEP #$20                                                   ;84A262|E220    |      ;
     REP #$10                                                   ;84A264|C210    |      ;
@@ -4043,7 +4043,7 @@ fAIAction0x31_CowDefaultPath:
     JMP.W fAIAction0x31_CowUpdateTail                                      ;84A288|4C6EA4  |84A46E;
  
  
-.label48:
+.child_idle_pose3:
     REP #$30                                                   ;84A28B|C230    |      ;
     SEP #$20                                                   ;84A28D|E220    |      ;
     REP #$10                                                   ;84A28F|C210    |      ;
@@ -4065,7 +4065,7 @@ fAIAction0x31_CowDefaultPath:
     JMP.W fAIAction0x31_CowUpdateTail                                      ;84A2B3|4C6EA4  |84A46E;
  
  
-.label49:
+.adult_idle:
     SEP #$20                                                   ;84A2B6|E220    |      ;
     REP #$10                                                   ;84A2B8|C210    |      ;
     LDY.W #$003F                                               ;84A2BA|A03F00  |      ;
@@ -4100,23 +4100,23 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;84A2EE|E220    |      ;
     LDA.B strcPlayer.lastRandomNumber                          ;84A2F0|A5DE    |0000DE;
     CMP.B #$33                                                 ;84A2F2|C933    |      ;
-    BCC .label50                                               ;84A2F4|9015    |84A30B;
+    BCC .adult_idle_choice0                                               ;84A2F4|9015    |84A30B;
     CMP.B #$66                                                 ;84A2F6|C966    |      ;
-    BCC .label53                                               ;84A2F8|9058    |84A352;
+    BCC .adult_idle_choice1                                               ;84A2F8|9058    |84A352;
     CMP.B #$99                                                 ;84A2FA|C999    |      ;
     BCS +                                                      ;84A2FC|B003    |84A301;
-    JMP.W .label56                                             ;84A2FE|4C99A3  |84A399;
+    JMP.W .adult_idle_choice2                                             ;84A2FE|4C99A3  |84A399;
  
  
   + CMP.B #$CC                                                 ;84A301|C9CC    |      ;
     BCS +                                                      ;84A303|B003    |84A308;
-    JMP.W .label59                                             ;84A305|4CE0A3  |84A3E0;
+    JMP.W .adult_idle_choice3                                             ;84A305|4CE0A3  |84A3E0;
  
  
-  + JMP.W .label62                                             ;84A308|4C27A4  |84A427;
+  + JMP.W .adult_idle_choice4                                             ;84A308|4C27A4  |84A427;
  
  
-.label50:
+.adult_idle_choice0:
     REP #$30                                                   ;84A30B|C230    |      ;
     SEP #$20                                                   ;84A30D|E220    |      ;
     REP #$10                                                   ;84A30F|C210    |      ;
@@ -4128,20 +4128,20 @@ fAIAction0x31_CowDefaultPath:
     LDY.W #$0000                                               ;84A31C|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;84A31F|B772    |000072;
     AND.B #$20                                                 ;84A321|2920    |      ;
-    BNE .label52                                               ;84A323|D010    |84A335;
+    BNE .adult_idle_sick0                                               ;84A323|D010    |84A335;
     LDA.B [ptrTemp0x72],Y                                      ;84A325|B772    |000072;
     AND.B #$10                                                 ;84A327|2910    |      ;
-    BNE .label51                                               ;84A329|D005    |84A330;
+    BNE .adult_idle_cranky0                                               ;84A329|D005    |84A330;
     LDX.W #$005E                                               ;84A32B|A25E00  |      ;
     BRA +                                                      ;84A32E|8008    |84A338;
  
  
-.label51:
+.adult_idle_cranky0:
     LDX.W #$0070                                               ;84A330|A27000  |      ;
     BRA +                                                      ;84A333|8003    |84A338;
  
  
-.label52:
+.adult_idle_sick0:
     LDX.W #$006C                                               ;84A335|A26C00  |      ;
  
   + SEP #$20                                                   ;84A338|E220    |      ;
@@ -4158,7 +4158,7 @@ fAIAction0x31_CowDefaultPath:
     JMP.W fAIAction0x31_CowUpdateTail                                      ;84A34F|4C6EA4  |84A46E;
  
  
-.label53:
+.adult_idle_choice1:
     REP #$30                                                   ;84A352|C230    |      ;
     SEP #$20                                                   ;84A354|E220    |      ;
     REP #$10                                                   ;84A356|C210    |      ;
@@ -4170,20 +4170,20 @@ fAIAction0x31_CowDefaultPath:
     LDY.W #$0000                                               ;84A363|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;84A366|B772    |000072;
     AND.B #$20                                                 ;84A368|2920    |      ;
-    BNE .label55                                               ;84A36A|D010    |84A37C;
+    BNE .adult_idle_sick1                                               ;84A36A|D010    |84A37C;
     LDA.B [ptrTemp0x72],Y                                      ;84A36C|B772    |000072;
     AND.B #$10                                                 ;84A36E|2910    |      ;
-    BNE .label54                                               ;84A370|D005    |84A377;
+    BNE .adult_idle_cranky1                                               ;84A370|D005    |84A377;
     LDX.W #$0051                                               ;84A372|A25100  |      ;
     BRA +                                                      ;84A375|8008    |84A37F;
  
  
-.label54:
+.adult_idle_cranky1:
     LDX.W #$0071                                               ;84A377|A27100  |      ;
     BRA +                                                      ;84A37A|8003    |84A37F;
  
  
-.label55:
+.adult_idle_sick1:
     LDX.W #$006D                                               ;84A37C|A26D00  |      ;
  
   + SEP #$20                                                   ;84A37F|E220    |      ;
@@ -4200,7 +4200,7 @@ fAIAction0x31_CowDefaultPath:
     JMP.W fAIAction0x31_CowUpdateTail                                      ;84A396|4C6EA4  |84A46E;
  
  
-.label56:
+.adult_idle_choice2:
     REP #$30                                                   ;84A399|C230    |      ;
     SEP #$20                                                   ;84A39B|E220    |      ;
     REP #$10                                                   ;84A39D|C210    |      ;
@@ -4212,20 +4212,20 @@ fAIAction0x31_CowDefaultPath:
     LDY.W #$0000                                               ;84A3AA|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;84A3AD|B772    |000072;
     AND.B #$20                                                 ;84A3AF|2920    |      ;
-    BNE .label58                                               ;84A3B1|D010    |84A3C3;
+    BNE .adult_idle_sick2                                               ;84A3B1|D010    |84A3C3;
     LDA.B [ptrTemp0x72],Y                                      ;84A3B3|B772    |000072;
     AND.B #$10                                                 ;84A3B5|2910    |      ;
-    BNE .label57                                               ;84A3B7|D005    |84A3BE;
+    BNE .adult_idle_cranky2                                               ;84A3B7|D005    |84A3BE;
     LDX.W #$0053                                               ;84A3B9|A25300  |      ;
     BRA +                                                      ;84A3BC|8008    |84A3C6;
  
  
-.label57:
+.adult_idle_cranky2:
     LDX.W #$0072                                               ;84A3BE|A27200  |      ;
     BRA +                                                      ;84A3C1|8003    |84A3C6;
  
  
-.label58:
+.adult_idle_sick2:
     LDX.W #$006E                                               ;84A3C3|A26E00  |      ;
  
   + SEP #$20                                                   ;84A3C6|E220    |      ;
@@ -4242,7 +4242,7 @@ fAIAction0x31_CowDefaultPath:
     JMP.W fAIAction0x31_CowUpdateTail                                      ;84A3DD|4C6EA4  |84A46E;
  
  
-.label59:
+.adult_idle_choice3:
     REP #$30                                                   ;84A3E0|C230    |      ;
     SEP #$20                                                   ;84A3E2|E220    |      ;
     REP #$10                                                   ;84A3E4|C210    |      ;
@@ -4254,20 +4254,20 @@ fAIAction0x31_CowDefaultPath:
     LDY.W #$0000                                               ;84A3F1|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;84A3F4|B772    |000072;
     AND.B #$20                                                 ;84A3F6|2920    |      ;
-    BNE .label61                                               ;84A3F8|D010    |84A40A;
+    BNE .adult_idle_sick3                                               ;84A3F8|D010    |84A40A;
     LDA.B [ptrTemp0x72],Y                                      ;84A3FA|B772    |000072;
     AND.B #$10                                                 ;84A3FC|2910    |      ;
-    BNE .label60                                               ;84A3FE|D005    |84A405;
+    BNE .adult_idle_cranky3                                               ;84A3FE|D005    |84A405;
     LDX.W #$0054                                               ;84A400|A25400  |      ;
     BRA +                                                      ;84A403|8008    |84A40D;
  
  
-.label60:
+.adult_idle_cranky3:
     LDX.W #$0073                                               ;84A405|A27300  |      ;
     BRA +                                                      ;84A408|8003    |84A40D;
  
  
-.label61:
+.adult_idle_sick3:
     LDX.W #$006F                                               ;84A40A|A26F00  |      ;
  
   + SEP #$20                                                   ;84A40D|E220    |      ;
@@ -4284,7 +4284,7 @@ fAIAction0x31_CowDefaultPath:
     JMP.W fAIAction0x31_CowUpdateTail                                      ;84A424|4C6EA4  |84A46E;
  
  
-.label62:
+.adult_idle_choice4:
     REP #$30                                                   ;84A427|C230    |      ;
     SEP #$20                                                   ;84A429|E220    |      ;
     REP #$10                                                   ;84A42B|C210    |      ;
@@ -4296,20 +4296,20 @@ fAIAction0x31_CowDefaultPath:
     LDY.W #$0000                                               ;84A438|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;84A43B|B772    |000072;
     AND.B #$20                                                 ;84A43D|2920    |      ;
-    BNE .label64                                               ;84A43F|D010    |84A451;
+    BNE .adult_idle_sick4                                               ;84A43F|D010    |84A451;
     LDA.B [ptrTemp0x72],Y                                      ;84A441|B772    |000072;
     AND.B #$10                                                 ;84A443|2910    |      ;
-    BNE .label63                                               ;84A445|D005    |84A44C;
+    BNE .adult_idle_cranky4                                               ;84A445|D005    |84A44C;
     LDX.W #$0055                                               ;84A447|A25500  |      ;
     BRA +                                                      ;84A44A|8008    |84A454;
  
  
-.label63:
+.adult_idle_cranky4:
     LDX.W #$0071                                               ;84A44C|A27100  |      ;
     BRA +                                                      ;84A44F|8003    |84A454;
  
  
-.label64:
+.adult_idle_sick4:
     LDX.W #$006D                                               ;84A451|A26D00  |      ;
  
   + SEP #$20                                                   ;84A454|E220    |      ;
@@ -4379,19 +4379,19 @@ fAIAction0x31_CowState0xE0:
     LDY.W #$0004                                               ;84A4C4|A00400  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;84A4C7|B772    |000072;
     CMP.B #$60                                                 ;84A4C9|C960    |      ;
-    BCC .label66                                               ;84A4CB|9028    |84A4F5;
+    BCC .price_set                                               ;84A4CB|9028    |84A4F5;
     CMP.B #$C0                                                 ;84A4CD|C9C0    |      ;
-    BCC .label65                                               ;84A4CF|9013    |84A4E4;
+    BCC .price_mid                                               ;84A4CF|9013    |84A4E4;
     REP #$20                                                   ;84A4D1|C220    |      ;
     LDA.W #$03E8                                               ;84A4D3|A9E803  |      ;
     STA.L nGameUnk7F1F15                                       ;84A4D6|8F151F7F|7F1F15;
     SEP #$20                                                   ;84A4DA|E220    |      ;
     LDA.B #$00                                                 ;84A4DC|A900    |      ;
     STA.L nGameUnk7F1F15+2                                     ;84A4DE|8F171F7F|7F1F17;
-    BRA .label66                                               ;84A4E2|8011    |84A4F5;
+    BRA .price_set                                               ;84A4E2|8011    |84A4F5;
  
  
-.label65:
+.price_mid:
     REP #$20                                                   ;84A4E4|C220    |      ;
     LDA.W #$0320                                               ;84A4E6|A92003  |      ;
     STA.L nGameUnk7F1F15                                       ;84A4E9|8F151F7F|7F1F15;
@@ -4399,7 +4399,7 @@ fAIAction0x31_CowState0xE0:
     LDA.B #$00                                                 ;84A4EF|A900    |      ;
     STA.L nGameUnk7F1F15+2                                     ;84A4F1|8F171F7F|7F1F17;
  
-.label66:
+.price_set:
     SEP #$20                                                   ;84A4F5|E220    |      ;
     REP #$10                                                   ;84A4F7|C210    |      ;
     LDY.W #$003F                                               ;84A4F9|A03F00  |      ;
@@ -4511,22 +4511,22 @@ fCow_AddHappiness:
     LDA.B strcVariables.n16Temp2                               ;84A5E6|A580    |000080;
     CLC                                                        ;84A5E8|18      |      ;
     ADC.B strcVariables.n16Temp1                               ;84A5E9|657E    |00007E;
-    BMI .label69                                               ;84A5EB|300B    |84A5F8;
+    BMI .clamp_min                                               ;84A5EB|300B    |84A5F8;
     CMP.W #$0100                                               ;84A5ED|C90001  |      ;
-    BCS .label70                                               ;84A5F0|B00E    |84A600;
+    BCS .clamp_max                                               ;84A5F0|B00E    |84A600;
     SEP #$20                                                   ;84A5F2|E220    |      ;
     STA.B [ptrTemp0x72],Y                                      ;84A5F4|9772    |000072;
     BRA +                                                      ;84A5F6|800E    |84A606;
  
  
-.label69:
+.clamp_min:
     SEP #$20                                                   ;84A5F8|E220    |      ;
     LDA.B #$00                                                 ;84A5FA|A900    |      ;
     STA.B [ptrTemp0x72],Y                                      ;84A5FC|9772    |000072;
     BRA +                                                      ;84A5FE|8006    |84A606;
  
  
-.label70:
+.clamp_max:
     SEP #$20                                                   ;84A600|E220    |      ;
     LDA.B #$FF                                                 ;84A602|A9FF    |      ;
     STA.B [ptrTemp0x72],Y                                      ;84A604|9772    |000072;
@@ -4541,7 +4541,7 @@ fAIAction0x31_CowAnimThenFacePlayerDir:
     LDA.B [ptrTemp0x72],Y                                      ;84A60E|B772    |000072;
     AND.B #$08                                                 ;84A610|2908    |      ;
     BEQ +                                                      ;84A612|F003    |84A617;
-    JMP.W .label77                                             ;84A614|4C0EA7  |84A70E;
+    JMP.W .face_player_direction                                             ;84A614|4C0EA7  |84A70E;
  
  
   + LDY.W #$0001                                               ;84A617|A00100  |      ;
@@ -4566,25 +4566,25 @@ fAIAction0x31_CowAnimThenFacePlayerDir:
     LDA.B [ptrTemp0x72],Y                                      ;84A63C|B772    |000072;
     AND.B #$08                                                 ;84A63E|2908    |      ;
     BEQ +                                                      ;84A640|F003    |84A645;
-    JMP.W .label74                                             ;84A642|4CBDA6  |84A6BD;
+    JMP.W .start_adult_anim                                             ;84A642|4CBDA6  |84A6BD;
  
  
   + LDA.B [ptrTemp0x72],Y                                      ;84A645|B772    |000072;
     AND.B #$04                                                 ;84A647|2904    |      ;
     BEQ +                                                      ;84A649|F003    |84A64E;
-    JMP.W .label73                                             ;84A64B|4C8CA6  |84A68C;
+    JMP.W .start_child_anim                                             ;84A64B|4C8CA6  |84A68C;
  
  
   + LDA.B [ptrTemp0x72],Y                                      ;84A64E|B772    |000072;
     AND.B #$02                                                 ;84A650|2902    |      ;
     BEQ +                                                      ;84A652|F003    |84A657;
-    JMP.W .label72                                             ;84A654|4C5AA6  |84A65A;
+    JMP.W .start_baby_anim                                             ;84A654|4C5AA6  |84A65A;
  
  
-  + JMP.W .label77                                             ;84A657|4C0EA7  |84A70E;
+  + JMP.W .face_player_direction                                             ;84A657|4C0EA7  |84A70E;
  
  
-.label72:
+.start_baby_anim:
     SEP #$20                                                   ;84A65A|E220    |      ;
     REP #$10                                                   ;84A65C|C210    |      ;
     LDY.W #$0001                                               ;84A65E|A00100  |      ;
@@ -4606,10 +4606,10 @@ fAIAction0x31_CowAnimThenFacePlayerDir:
     LDX.W #$0000                                               ;84A67F|A20000  |      ;
     LDY.W #$0078                                               ;84A682|A07800  |      ;
     JSL.L fAI_SetSlotScript                                    ;84A685|223F8084|84803F;
-    JMP.W .label77                                             ;84A689|4C0EA7  |84A70E;
+    JMP.W .face_player_direction                                             ;84A689|4C0EA7  |84A70E;
  
  
-.label73:
+.start_child_anim:
     SEP #$20                                                   ;84A68C|E220    |      ;
     REP #$10                                                   ;84A68E|C210    |      ;
     LDY.W #$0001                                               ;84A690|A00100  |      ;
@@ -4631,31 +4631,31 @@ fAIAction0x31_CowAnimThenFacePlayerDir:
     LDX.W #$0000                                               ;84A6B1|A20000  |      ;
     LDY.W #$0074                                               ;84A6B4|A07400  |      ;
     JSL.L fAI_SetSlotScript                                    ;84A6B7|223F8084|84803F;
-    BRA .label77                                               ;84A6BB|8051    |84A70E;
+    BRA .face_player_direction                                               ;84A6BB|8051    |84A70E;
  
  
-.label74:
+.start_adult_anim:
     SEP #$20                                                   ;84A6BD|E220    |      ;
     LDY.W #$0000                                               ;84A6BF|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;84A6C2|B772    |000072;
     AND.B #$40                                                 ;84A6C4|2940    |      ;
-    BNE .label77                                               ;84A6C6|D046    |84A70E;
+    BNE .face_player_direction                                               ;84A6C6|D046    |84A70E;
     LDA.B [ptrTemp0x72],Y                                      ;84A6C8|B772    |000072;
     AND.B #$20                                                 ;84A6CA|2920    |      ;
-    BNE .label76                                               ;84A6CC|D010    |84A6DE;
+    BNE .adult_anim_sick                                               ;84A6CC|D010    |84A6DE;
     LDA.B [ptrTemp0x72],Y                                      ;84A6CE|B772    |000072;
     AND.B #$10                                                 ;84A6D0|2910    |      ;
-    BNE .label75                                               ;84A6D2|D005    |84A6D9;
+    BNE .adult_anim_cranky                                               ;84A6D2|D005    |84A6D9;
     LDX.W #$005E                                               ;84A6D4|A25E00  |      ;
     BRA +                                                      ;84A6D7|8008    |84A6E1;
  
  
-.label75:
+.adult_anim_cranky:
     LDX.W #$0070                                               ;84A6D9|A27000  |      ;
     BRA +                                                      ;84A6DC|8003    |84A6E1;
  
  
-.label76:
+.adult_anim_sick:
     LDX.W #$006C                                               ;84A6DE|A26C00  |      ;
  
   + SEP #$20                                                   ;84A6E1|E220    |      ;
@@ -4680,7 +4680,7 @@ fAIAction0x31_CowAnimThenFacePlayerDir:
     LDX.W #$0000                                               ;84A707|A20000  |      ;
     JSL.L fAI_SetSlotScript                                    ;84A70A|223F8084|84803F;
  
-.label77:
+.face_player_direction:
     REP #$30                                                   ;84A70E|C230    |      ;
     REP #$30                                                   ;84A710|C230    |      ;
     LDA.B strcPlayer.direction                                 ;84A712|A5DA    |0000DA;
@@ -4717,7 +4717,7 @@ fAIAction0x31_CowAnimThenSteerToPlayer:
     LDA.B [ptrTemp0x72],Y                                      ;84A747|B772    |000072;
     AND.B #$08                                                 ;84A749|2908    |      ;
     BEQ +                                                      ;84A74B|F003    |84A750;
-    JMP.W .label83                                             ;84A74D|4C4AA8  |84A84A;
+    JMP.W .compute_player_delta                                             ;84A74D|4C4AA8  |84A84A;
  
  
   + LDY.W #$0001                                               ;84A750|A00100  |      ;
@@ -4742,25 +4742,25 @@ fAIAction0x31_CowAnimThenSteerToPlayer:
     LDA.B [ptrTemp0x72],Y                                      ;84A775|B772    |000072;
     AND.B #$08                                                 ;84A777|2908    |      ;
     BEQ +                                                      ;84A779|F003    |84A77E;
-    JMP.W .label80                                             ;84A77B|4CF6A7  |84A7F6;
+    JMP.W .start_adult_anim                                             ;84A77B|4CF6A7  |84A7F6;
  
  
   + LDA.B [ptrTemp0x72],Y                                      ;84A77E|B772    |000072;
     AND.B #$04                                                 ;84A780|2904    |      ;
     BEQ +                                                      ;84A782|F003    |84A787;
-    JMP.W .label79                                             ;84A784|4CC5A7  |84A7C5;
+    JMP.W .start_child_anim                                             ;84A784|4CC5A7  |84A7C5;
  
  
   + LDA.B [ptrTemp0x72],Y                                      ;84A787|B772    |000072;
     AND.B #$02                                                 ;84A789|2902    |      ;
     BEQ +                                                      ;84A78B|F003    |84A790;
-    JMP.W .label78                                             ;84A78D|4C93A7  |84A793;
+    JMP.W .start_baby_anim                                             ;84A78D|4C93A7  |84A793;
  
  
-  + JMP.W .label83                                             ;84A790|4C4AA8  |84A84A;
+  + JMP.W .compute_player_delta                                             ;84A790|4C4AA8  |84A84A;
  
  
-.label78:
+.start_baby_anim:
     SEP #$20                                                   ;84A793|E220    |      ;
     REP #$10                                                   ;84A795|C210    |      ;
     LDY.W #$0001                                               ;84A797|A00100  |      ;
@@ -4782,10 +4782,10 @@ fAIAction0x31_CowAnimThenSteerToPlayer:
     LDX.W #$0000                                               ;84A7B8|A20000  |      ;
     LDY.W #$0078                                               ;84A7BB|A07800  |      ;
     JSL.L fAI_SetSlotScript                                    ;84A7BE|223F8084|84803F;
-    JMP.W .label83                                             ;84A7C2|4C4AA8  |84A84A;
+    JMP.W .compute_player_delta                                             ;84A7C2|4C4AA8  |84A84A;
  
  
-.label79:
+.start_child_anim:
     SEP #$20                                                   ;84A7C5|E220    |      ;
     REP #$10                                                   ;84A7C7|C210    |      ;
     LDY.W #$0001                                               ;84A7C9|A00100  |      ;
@@ -4807,34 +4807,34 @@ fAIAction0x31_CowAnimThenSteerToPlayer:
     LDX.W #$0000                                               ;84A7EA|A20000  |      ;
     LDY.W #$0074                                               ;84A7ED|A07400  |      ;
     JSL.L fAI_SetSlotScript                                    ;84A7F0|223F8084|84803F;
-    BRA .label83                                               ;84A7F4|8054    |84A84A;
+    BRA .compute_player_delta                                               ;84A7F4|8054    |84A84A;
  
  
-.label80:
+.start_adult_anim:
     SEP #$20                                                   ;84A7F6|E220    |      ;
     LDY.W #$0000                                               ;84A7F8|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;84A7FB|B772    |000072;
     AND.B #$40                                                 ;84A7FD|2940    |      ;
     BEQ +                                                      ;84A7FF|F003    |84A804;
-    JMP.W .label83                                             ;84A801|4C4AA8  |84A84A;
+    JMP.W .compute_player_delta                                             ;84A801|4C4AA8  |84A84A;
  
  
   + LDA.B [ptrTemp0x72],Y                                      ;84A804|B772    |000072;
     AND.B #$20                                                 ;84A806|2920    |      ;
-    BNE .label82                                               ;84A808|D010    |84A81A;
+    BNE .adult_anim_sick                                               ;84A808|D010    |84A81A;
     LDA.B [ptrTemp0x72],Y                                      ;84A80A|B772    |000072;
     AND.B #$10                                                 ;84A80C|2910    |      ;
-    BNE .label81                                               ;84A80E|D005    |84A815;
+    BNE .adult_anim_cranky                                               ;84A80E|D005    |84A815;
     LDX.W #$005E                                               ;84A810|A25E00  |      ;
     BRA +                                                      ;84A813|8008    |84A81D;
  
  
-.label81:
+.adult_anim_cranky:
     LDX.W #$0070                                               ;84A815|A27000  |      ;
     BRA +                                                      ;84A818|8003    |84A81D;
  
  
-.label82:
+.adult_anim_sick:
     LDX.W #$006C                                               ;84A81A|A26C00  |      ;
  
   + SEP #$20                                                   ;84A81D|E220    |      ;
@@ -4859,7 +4859,7 @@ fAIAction0x31_CowAnimThenSteerToPlayer:
     LDX.W #$0000                                               ;84A843|A20000  |      ;
     JSL.L fAI_SetSlotScript                                    ;84A846|223F8084|84803F;
  
-.label83:
+.compute_player_delta:
     REP #$30                                                   ;84A84A|C230    |      ;
     STZ.B strcVariables.n16Temp3                               ;84A84C|6482    |000082;
     STZ.B strcVariables.n16Temp4                               ;84A84E|6484    |000084;
@@ -4870,7 +4870,7 @@ fAIAction0x31_CowAnimThenSteerToPlayer:
     SBC.B strcPlayer.posX                                      ;84A858|E5D6    |0000D6;
     STA.B strcVariables.n16Temp1                               ;84A85A|857E    |00007E;
     BMI +                                                      ;84A85C|3002    |84A860;
-    BRA .label84                                               ;84A85E|800D    |84A86D;
+    BRA .dx_abs_done                                               ;84A85E|800D    |84A86D;
  
  
   + REP #$20                                                   ;84A860|C220    |      ;
@@ -4880,7 +4880,7 @@ fAIAction0x31_CowAnimThenSteerToPlayer:
     LDA.W #$0001                                               ;84A868|A90100  |      ;
     STA.B strcVariables.n16Temp3                               ;84A86B|8582    |000082;
  
-.label84:
+.dx_abs_done:
     REP #$30                                                   ;84A86D|C230    |      ;
     LDY.W #$001C                                               ;84A86F|A01C00  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;84A872|B7CC    |0000CC;
@@ -4888,7 +4888,7 @@ fAIAction0x31_CowAnimThenSteerToPlayer:
     SBC.B strcPlayer.posY                                      ;84A875|E5D8    |0000D8;
     STA.B strcVariables.n16Temp2                               ;84A877|8580    |000080;
     BMI +                                                      ;84A879|3002    |84A87D;
-    BRA .label85                                               ;84A87B|800D    |84A88A;
+    BRA .dy_abs_done                                               ;84A87B|800D    |84A88A;
  
  
   + REP #$20                                                   ;84A87D|C220    |      ;
@@ -4898,7 +4898,7 @@ fAIAction0x31_CowAnimThenSteerToPlayer:
     LDA.W #$0001                                               ;84A885|A90100  |      ;
     STA.B strcVariables.n16Temp4                               ;84A888|8584    |000084;
  
-.label85:
+.dy_abs_done:
     SEP #$20                                                   ;84A88A|E220    |      ;
     LDA.B #$20                                                 ;84A88C|A920    |      ;
     SEP #$20                                                   ;84A88E|E220    |      ;
@@ -4908,39 +4908,39 @@ fAIAction0x31_CowAnimThenSteerToPlayer:
     REP #$20                                                   ;84A897|C220    |      ;
     LDA.B strcVariables.n16Temp2                               ;84A899|A580    |000080;
     CMP.B strcVariables.n16Temp1                               ;84A89B|C57E    |00007E;
-    BCS .label86                                               ;84A89D|B013    |84A8B2;
+    BCS .steer_vertical                                               ;84A89D|B013    |84A8B2;
     SEP #$20                                                   ;84A89F|E220    |      ;
     LDY.W #$0000                                               ;84A8A1|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;84A8A4|B772    |000072;
     AND.B #$10                                                 ;84A8A6|2910    |      ;
-    BNE .label87                                               ;84A8A8|D01D    |84A8C7;
+    BNE .steer_away_horizontal                                               ;84A8A8|D01D    |84A8C7;
     REP #$20                                                   ;84A8AA|C220    |      ;
     LDA.B strcVariables.n16Temp3                               ;84A8AC|A582    |000082;
     BEQ fAIAction0x31_CowSetDirRight                                ;84A8AE|F051    |84A901;
     BRA fAIAction0x31_CowSetDirLeft                                 ;84A8B0|8041    |84A8F3;
  
  
-.label86:
+.steer_vertical:
     SEP #$20                                                   ;84A8B2|E220    |      ;
     REP #$10                                                   ;84A8B4|C210    |      ;
     LDY.W #$0000                                               ;84A8B6|A00000  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;84A8B9|B772    |000072;
     AND.B #$10                                                 ;84A8BB|2910    |      ;
-    BNE .label88                                               ;84A8BD|D010    |84A8CF;
+    BNE .steer_away_vertical                                               ;84A8BD|D010    |84A8CF;
     REP #$20                                                   ;84A8BF|C220    |      ;
     LDA.B strcVariables.n16Temp4                               ;84A8C1|A584    |000084;
     BEQ fAIAction0x31_CowSetDirUp                                   ;84A8C3|F020    |84A8E5;
     BRA fAIAction0x31_CowSetDirDown                                 ;84A8C5|8010    |84A8D7;
  
  
-.label87:
+.steer_away_horizontal:
     REP #$20                                                   ;84A8C7|C220    |      ;
     LDA.B strcVariables.n16Temp3                               ;84A8C9|A582    |000082;
     BEQ fAIAction0x31_CowSetDirLeft                                 ;84A8CB|F026    |84A8F3;
     BRA fAIAction0x31_CowSetDirRight                                ;84A8CD|8032    |84A901;
  
  
-.label88:
+.steer_away_vertical:
     REP #$20                                                   ;84A8CF|C220    |      ;
     LDA.B strcVariables.n16Temp4                               ;84A8D1|A584    |000084;
     BEQ fAIAction0x31_CowSetDirDown                                 ;84A8D3|F002    |84A8D7;
@@ -5010,56 +5010,56 @@ fAIAction0x33_UpdateMole:
     LDA.B [ptrAIUnknown0xCC],Y                                 ;84A95F|B7CC    |0000CC;
     CMP.B #$00                                                 ;84A961|C900    |      ;
     BNE +                                                      ;84A963|D003    |84A968;
-    JMP.W .label1                                              ;84A965|4C1EAA  |84AA1E;
+    JMP.W .idle_wait                                              ;84A965|4C1EAA  |84AA1E;
  
  
   + %CheckPlayerAction(!PACTION_USINGTOOL)
     BNE +                                                      ;84A96F|D003    |84A974;
-    JMP.W .label1                                              ;84A971|4C1EAA  |84AA1E;
+    JMP.W .idle_wait                                              ;84A971|4C1EAA  |84AA1E;
  
  
   + %CheckPlayerAction(!PACTION_SHOWTOOL)
     BNE +                                                      ;84A97B|D003    |84A980;
-    JMP.W .label1                                              ;84A97D|4C1EAA  |84AA1E;
+    JMP.W .idle_wait                                              ;84A97D|4C1EAA  |84AA1E;
  
  
   + %CheckPlayerAction(!PACTION_WHISTLEHORSE)
     BNE +                                                      ;84A987|D003    |84A98C;
-    JMP.W .label1                                              ;84A989|4C1EAA  |84AA1E;
+    JMP.W .idle_wait                                              ;84A989|4C1EAA  |84AA1E;
  
  
   + %CheckPlayerAction(!PACTION_WHISTLEDOG)
     BNE +                                                      ;84A993|D003    |84A998;
-    JMP.W .label1                                              ;84A995|4C1EAA  |84AA1E;
+    JMP.W .idle_wait                                              ;84A995|4C1EAA  |84AA1E;
  
  
   + REP #$20                                                   ;84A998|C220    |      ;
     %CheckPlayerFlagsNoReg(!PFLAGS_EATINGMEAL)
-    BNE .label1                                                ;84A99F|D07D    |84AA1E;
+    BNE .idle_wait                                                ;84A99F|D07D    |84AA1E;
     %CheckFlag(daily4, $0006)
-    BNE .label1                                                ;84A9A8|D074    |84AA1E;
+    BNE .idle_wait                                                ;84A9A8|D074    |84AA1E;
     REP #$20                                                   ;84A9AA|C220    |      ;
     LDA.W strcJoypad1.newInput                                 ;84A9AC|AD2801  |000128;
     BIT.W #!JOYPAD_A                                               
     BNE +                                                      ;84A9B2|D003    |84A9B7;
-    JMP.W .label1                                              ;84A9B4|4C1EAA  |84AA1E;
+    JMP.W .idle_wait                                              ;84A9B4|4C1EAA  |84AA1E;
  
  
   + %CheckPlayerFlags(!PFLAGS_DOGHUGGING)
     BEQ +                                                      ;84A9BE|F003    |84A9C3;
-    JMP.W .label1                                              ;84A9C0|4C1EAA  |84AA1E;
+    JMP.W .idle_wait                                              ;84A9C0|4C1EAA  |84AA1E;
  
  
   + LDA.B strcPlayer.action                                    ;84A9C3|A5D4    |0000D4;
     CMP.W #!PACTION_17                                               
     BNE +                                                      ;84A9C8|D003    |84A9CD;
-    JMP.W .label1                                              ;84A9CA|4C1EAA  |84AA1E;
+    JMP.W .idle_wait                                              ;84A9CA|4C1EAA  |84AA1E;
  
  
   + SEP #$20                                                   ;84A9CD|E220    |      ;
     LDA.W strcPlayerData.carryItemId                           ;84A9CF|AD1D09  |00091D;
     BEQ +                                                      ;84A9D2|F003    |84A9D7;
-    JMP.W .label1                                              ;84A9D4|4C1EAA  |84AA1E;
+    JMP.W .idle_wait                                              ;84A9D4|4C1EAA  |84AA1E;
  
  
   + SEP #$20                                                   ;84A9D7|E220    |      ;
@@ -5092,7 +5092,7 @@ fAIAction0x33_UpdateMole:
     RTS                                                        ;84AA1D|60      |      ;
  
  
-.label1:
+.idle_wait:
     SEP #$20                                                   ;84AA1E|E220    |      ;
     LDA.W strcStockData.unkMole                                ;84AA20|AD3A09  |00093A;
     CMP.B #$B4                                                 ;84AA23|C9B4    |      ;
@@ -5226,14 +5226,14 @@ fAIAction0x35_UpdateHorse:
     SEP #$20                                                   ;84AB40|E220    |      ;
     LDA.L nHorseAge                                            ;84AB42|AF321F7F|7F1F32;
     CMP.B #$15                                                 ;84AB46|C915    |      ;
-    BEQ .label1                                                ;84AB48|F029    |84AB73;
+    BEQ .grown_horse                                                ;84AB48|F029    |84AB73;
     SEP #$20                                                   ;84AB4A|E220    |      ;
     LDA.W strcStockData.unkHorse                               ;84AB4C|AD3909  |000939;
     CMP.B #$78                                                 ;84AB4F|C978    |      ;
     BEQ +                                                      ;84AB51|F007    |84AB5A;
     INC A                                                      ;84AB53|1A      |      ;
     STA.W strcStockData.unkHorse                               ;84AB54|8D3909  |000939;
-    JMP.W .label8                                              ;84AB57|4C88AD  |84AD88;
+    JMP.W .finish_update                                              ;84AB57|4C88AD  |84AD88;
  
  
   + SEP #$20                                                   ;84AB5A|E220    |      ;
@@ -5244,10 +5244,10 @@ fAIAction0x35_UpdateHorse:
     LDX.W #$0000                                               ;84AB66|A20000  |      ;
     LDY.W #$0080                                               ;84AB69|A08000  |      ;
     JSL.L fAI_SetSlotScript                                    ;84AB6C|223F8084|84803F;
-    JMP.W .label8                                              ;84AB70|4C88AD  |84AD88;
+    JMP.W .finish_update                                              ;84AB70|4C88AD  |84AD88;
  
  
-.label1:
+.grown_horse:
     REP #$20                                                   ;84AB73|C220    |      ;
     %CheckFlag(daily2, $0040)
     BNE +                                                      ;84AB7C|D003    |84AB81;
@@ -5308,12 +5308,12 @@ fAIAction0x35_UpdateHorse:
     REP #$30                                                   ;84ABDF|C230    |      ;
     %CheckFlag(daily2, $0800)
     BEQ +                                                      ;84ABE8|F003    |84ABED;
-    JMP.W .label2                                              ;84ABEA|4CEEAC  |84ACEE;
+    JMP.W .idle_roll                                              ;84ABEA|4CEEAC  |84ACEE;
  
  
   + %CheckFlag(daily2, $0020)
     BEQ +                                                      ;84ABF4|F003    |84ABF9;
-    JMP.W .label9                                              ;84ABF6|4CA4AD  |84ADA4;
+    JMP.W .mount_horse                                              ;84ABF6|4CA4AD  |84ADA4;
  
  
   + SEP #$20                                                   ;84ABF9|E220    |      ;
@@ -5322,38 +5322,38 @@ fAIAction0x35_UpdateHorse:
     LDA.B [ptrAIUnknown0xCC],Y                                 ;84AC00|B7CC    |0000CC;
     CMP.B #$00                                                 ;84AC02|C900    |      ;
     BNE +                                                      ;84AC04|D003    |84AC09;
-    JMP.W .label2                                              ;84AC06|4CEEAC  |84ACEE;
+    JMP.W .idle_roll                                              ;84AC06|4CEEAC  |84ACEE;
  
  
   + %CheckPlayerAction(!PACTION_USINGTOOL)
     BNE +                                                      ;84AC10|D003    |84AC15;
-    JMP.W .label2                                              ;84AC12|4CEEAC  |84ACEE;
+    JMP.W .idle_roll                                              ;84AC12|4CEEAC  |84ACEE;
  
  
   + %CheckPlayerAction(!PACTION_SHOWTOOL)
     BNE +                                                      ;84AC1C|D003    |84AC21;
-    JMP.W .label2                                              ;84AC1E|4CEEAC  |84ACEE;
+    JMP.W .idle_roll                                              ;84AC1E|4CEEAC  |84ACEE;
  
  
   + %CheckPlayerAction(!PACTION_WHISTLEHORSE)
     BNE +                                                      ;84AC28|D003    |84AC2D;
-    JMP.W .label2                                              ;84AC2A|4CEEAC  |84ACEE;
+    JMP.W .idle_roll                                              ;84AC2A|4CEEAC  |84ACEE;
  
  
   + %CheckPlayerAction(!PACTION_WHISTLEDOG)
     BNE +                                                      ;84AC34|D003    |84AC39;
-    JMP.W .label2                                              ;84AC36|4CEEAC  |84ACEE;
+    JMP.W .idle_roll                                              ;84AC36|4CEEAC  |84ACEE;
  
  
   + REP #$20                                                   ;84AC39|C220    |      ;
     %CheckPlayerFlagsNoReg(!PFLAGS_EATINGMEAL)
     BEQ +                                                      ;84AC40|F003    |84AC45;
-    JMP.W .label2                                              ;84AC42|4CEEAC  |84ACEE;
+    JMP.W .idle_roll                                              ;84AC42|4CEEAC  |84ACEE;
  
  
   + %CheckFlag(daily4, $0006)
     BEQ +                                                      ;84AC4C|F003    |84AC51;
-    JMP.W .label2                                              ;84AC4E|4CEEAC  |84ACEE;
+    JMP.W .idle_roll                                              ;84AC4E|4CEEAC  |84ACEE;
  
  
   + REP #$20                                                   ;84AC51|C220    |      ;
@@ -5362,7 +5362,7 @@ fAIAction0x35_UpdateHorse:
     LDA.W strcJoypad1.newInput                                 ;84AC60|AD2801  |000128;
     BIT.W #!JOYPAD_A                                               
     BNE +                                                      ;84AC66|D003    |84AC6B;
-    JMP.W .label2                                              ;84AC68|4CEEAC  |84ACEE;
+    JMP.W .idle_roll                                              ;84AC68|4CEEAC  |84ACEE;
  
  
   + REP #$30                                                   ;84AC6B|C230    |      ;
@@ -5378,7 +5378,7 @@ fAIAction0x35_UpdateHorse:
     JSL.L fGameEngine_DirectionHandler83AF37                   ;84AC81|2237AF83|83AF37;
     REP #$30                                                   ;84AC85|C230    |      ;
     BEQ +                                                      ;84AC87|F003    |84AC8C;
-    JMP.W .label2                                              ;84AC89|4CEEAC  |84ACEE;
+    JMP.W .idle_roll                                              ;84AC89|4CEEAC  |84ACEE;
  
  
   + LDA.B strcPlayer.unkPosX                                   ;84AC8C|A5E9    |0000E9;
@@ -5386,7 +5386,7 @@ fAIAction0x35_UpdateHorse:
     SBC.W #$00C0                                               ;84AC8F|E9C000  |      ;
     CMP.W #$0010                                               ;84AC92|C91000  |      ;
     BCS +                                                      ;84AC95|B003    |84AC9A;
-    JMP.W .label2                                              ;84AC97|4CEEAC  |84ACEE;
+    JMP.W .idle_roll                                              ;84AC97|4CEEAC  |84ACEE;
  
  
   + LDA.B strcPlayer.unkPosY                                   ;84AC9A|A5EB    |0000EB;
@@ -5394,7 +5394,7 @@ fAIAction0x35_UpdateHorse:
     SBC.W #$00C0                                               ;84AC9D|E9C000  |      ;
     CMP.W #$0010                                               ;84ACA0|C91000  |      ;
     BCS +                                                      ;84ACA3|B003    |84ACA8;
-    JMP.W .label2                                              ;84ACA5|4CEEAC  |84ACEE;
+    JMP.W .idle_roll                                              ;84ACA5|4CEEAC  |84ACEE;
  
  
   + REP #$20                                                   ;84ACA8|C220    |      ;
@@ -5405,29 +5405,29 @@ fAIAction0x35_UpdateHorse:
     REP #$30                                                   ;84ACB6|C230    |      ;
     CMP.W #$0000                                               ;84ACB8|C90000  |      ;
     BEQ +                                                      ;84ACBB|F003    |84ACC0;
-    JMP.W .label2                                              ;84ACBD|4CEEAC  |84ACEE;
+    JMP.W .idle_roll                                              ;84ACBD|4CEEAC  |84ACEE;
  
  
   + %CheckPlayerFlags(!PFLAGS_HOLDINGITEM)
     BEQ +                                                      ;84ACC7|F003    |84ACCC;
-    JMP.W .label8                                              ;84ACC9|4C88AD  |84AD88;
+    JMP.W .finish_update                                              ;84ACC9|4C88AD  |84AD88;
  
  
   + %CheckPlayerFlags(!PFLAGS_DOGHUGGING)
     BEQ +                                                      ;84ACD3|F003    |84ACD8;
-    JMP.W .label8                                              ;84ACD5|4C88AD  |84AD88;
+    JMP.W .finish_update                                              ;84ACD5|4C88AD  |84AD88;
  
  
   + %CheckPlayerAction(!PACTION_ITEMONHAND)
     BNE +                                                      ;84ACDF|D003    |84ACE4;
-    JMP.W .label8                                              ;84ACE1|4C88AD  |84AD88;
+    JMP.W .finish_update                                              ;84ACE1|4C88AD  |84AD88;
  
  
   + %SetPlayerAction(!PACTION_17)
-    JMP.W .label8                                              ;84ACEB|4C88AD  |84AD88;
+    JMP.W .finish_update                                              ;84ACEB|4C88AD  |84AD88;
  
  
-.label2:
+.idle_roll:
     REP #$30                                                   ;84ACEE|C230    |      ;
     %UnsetFlag(daily2, $0800)
     SEP #$20                                                   ;84ACFB|E220    |      ;
@@ -5436,7 +5436,7 @@ fAIAction0x35_UpdateHorse:
     BEQ +                                                      ;84AD02|F007    |84AD0B;
     INC A                                                      ;84AD04|1A      |      ;
     STA.W strcStockData.unkHorse                               ;84AD05|8D3909  |000939;
-    JMP.W .label8                                              ;84AD08|4C88AD  |84AD88;
+    JMP.W .finish_update                                              ;84AD08|4C88AD  |84AD88;
  
  
   + SEP #$20                                                   ;84AD0B|E220    |      ;
@@ -5444,70 +5444,70 @@ fAIAction0x35_UpdateHorse:
     SEP #$20                                                   ;84AD10|E220    |      ;
     LDA.B strcPlayer.lastRandomNumber                          ;84AD12|A5DE    |0000DE;
     CMP.B #$24                                                 ;84AD14|C924    |      ;
-    BCC .label3                                                ;84AD16|9016    |84AD2E;
+    BCC .idle_pose1                                                ;84AD16|9016    |84AD2E;
     CMP.B #$48                                                 ;84AD18|C948    |      ;
-    BCC .label3                                                ;84AD1A|9012    |84AD2E;
+    BCC .idle_pose1                                                ;84AD1A|9012    |84AD2E;
     CMP.B #$6C                                                 ;84AD1C|C96C    |      ;
-    BCC .label4                                                ;84AD1E|9020    |84AD40;
+    BCC .idle_pose2                                                ;84AD1E|9020    |84AD40;
     CMP.B #$90                                                 ;84AD20|C990    |      ;
-    BCC .label5                                                ;84AD22|902E    |84AD52;
+    BCC .idle_pose3                                                ;84AD22|902E    |84AD52;
     CMP.B #$B4                                                 ;84AD24|C9B4    |      ;
-    BCC .label6                                                ;84AD26|903C    |84AD64;
+    BCC .idle_pose4                                                ;84AD26|903C    |84AD64;
     CMP.B #$D8                                                 ;84AD28|C9D8    |      ;
-    BCC .label6                                                ;84AD2A|9038    |84AD64;
-    BRA .label7                                                ;84AD2C|8048    |84AD76;
+    BCC .idle_pose4                                                ;84AD2A|9038    |84AD64;
+    BRA .idle_pose5                                                ;84AD2C|8048    |84AD76;
  
  
-.label3:
+.idle_pose1:
     REP #$30                                                   ;84AD2E|C230    |      ;
     LDA.W #$0017                                               ;84AD30|A91700  |      ;
     LDX.W #$0000                                               ;84AD33|A20000  |      ;
     LDY.W #$004B                                               ;84AD36|A04B00  |      ;
     JSL.L fAI_SetSlotScript                                    ;84AD39|223F8084|84803F;
-    JMP.W .label8                                              ;84AD3D|4C88AD  |84AD88;
+    JMP.W .finish_update                                              ;84AD3D|4C88AD  |84AD88;
  
  
-.label4:
+.idle_pose2:
     REP #$30                                                   ;84AD40|C230    |      ;
     LDA.W #$0017                                               ;84AD42|A91700  |      ;
     LDX.W #$0000                                               ;84AD45|A20000  |      ;
     LDY.W #$004D                                               ;84AD48|A04D00  |      ;
     JSL.L fAI_SetSlotScript                                    ;84AD4B|223F8084|84803F;
-    JMP.W .label8                                              ;84AD4F|4C88AD  |84AD88;
+    JMP.W .finish_update                                              ;84AD4F|4C88AD  |84AD88;
  
  
-.label5:
+.idle_pose3:
     REP #$30                                                   ;84AD52|C230    |      ;
     LDA.W #$0017                                               ;84AD54|A91700  |      ;
     LDX.W #$0000                                               ;84AD57|A20000  |      ;
     LDY.W #$004E                                               ;84AD5A|A04E00  |      ;
     JSL.L fAI_SetSlotScript                                    ;84AD5D|223F8084|84803F;
-    JMP.W .label8                                              ;84AD61|4C88AD  |84AD88;
+    JMP.W .finish_update                                              ;84AD61|4C88AD  |84AD88;
  
  
-.label6:
+.idle_pose4:
     REP #$30                                                   ;84AD64|C230    |      ;
     LDA.W #$0017                                               ;84AD66|A91700  |      ;
     LDX.W #$0000                                               ;84AD69|A20000  |      ;
     LDY.W #$004F                                               ;84AD6C|A04F00  |      ;
     JSL.L fAI_SetSlotScript                                    ;84AD6F|223F8084|84803F;
-    JMP.W .label8                                              ;84AD73|4C88AD  |84AD88;
+    JMP.W .finish_update                                              ;84AD73|4C88AD  |84AD88;
  
  
-.label7:
+.idle_pose5:
     REP #$30                                                   ;84AD76|C230    |      ;
     LDA.W #$0017                                               ;84AD78|A91700  |      ;
     LDX.W #$0000                                               ;84AD7B|A20000  |      ;
     LDY.W #$0050                                               ;84AD7E|A05000  |      ;
     JSL.L fAI_SetSlotScript                                    ;84AD81|223F8084|84803F;
-    JMP.W .label8                                              ;84AD85|4C88AD  |84AD88;
+    JMP.W .finish_update                                              ;84AD85|4C88AD  |84AD88;
  
  
-.label8:
+.finish_update:
     REP #$30                                                   ;84AD88|C230    |      ;
     %CheckFlag(daily2, $0400)
     BEQ .loop2                                                 ;84AD91|F003    |84AD96;
-    JMP.W .label10                                             ;84AD93|4CF2AD  |84ADF2;
+    JMP.W .whistle_called                                             ;84AD93|4CF2AD  |84ADF2;
  
  
 .loop2:
@@ -5520,7 +5520,7 @@ fAIAction0x35_UpdateHorse:
     RTS                                                        ;84ADA3|60      |      ;
  
  
-.label9:
+.mount_horse:
     %SetPlayerFlag(!PFLAGS_RIDINGHORSE)
     REP #$20                                                   ;84ADAD|C220    |      ;
     %UnsetFlag(daily2, $0020)
@@ -5552,13 +5552,13 @@ fAIAction0x35_UpdateHorse:
     RTS                                                        ;84ADF1|60      |      ;
  
  
-.label10:
+.whistle_called:
     SEP #$20                                                   ;84ADF2|E220    |      ;
     REP #$10                                                   ;84ADF4|C210    |      ;
     LDA.L nHorseAge                                            ;84ADF6|AF321F7F|7F1F32;
     CMP.B #$15                                                 ;84ADFA|C915    |      ;
     BEQ +                                                      ;84ADFC|F003    |84AE01;
-    JMP.W .label11                                             ;84ADFE|4C35AE  |84AE35;
+    JMP.W .young_horse_whistle                                             ;84ADFE|4C35AE  |84AE35;
  
  
   + STZ.W strcStockData.unkHorse                               ;84AE01|9C3909  |000939;
@@ -5583,10 +5583,10 @@ fAIAction0x35_UpdateHorse:
     LDX.W #$0000                                               ;84AE29|A20000  |      ;
     LDY.W #$004C                                               ;84AE2C|A04C00  |      ;
     JSL.L fAI_SetSlotScript                                    ;84AE2F|223F8084|84803F;
-    BRA .label12                                               ;84AE33|8034    |84AE69;
+    BRA .compute_player_delta                                               ;84AE33|8034    |84AE69;
  
  
-.label11:
+.young_horse_whistle:
     STZ.W strcStockData.unkHorse                               ;84AE35|9C3909  |000939;
     SEP #$20                                                   ;84AE38|E220    |      ;
     REP #$10                                                   ;84AE3A|C210    |      ;
@@ -5609,10 +5609,10 @@ fAIAction0x35_UpdateHorse:
     LDX.W #$0000                                               ;84AE5D|A20000  |      ;
     LDY.W #$004A                                               ;84AE60|A04A00  |      ;
     JSL.L fAI_SetSlotScript                                    ;84AE63|223F8084|84803F;
-    BRA .label12                                               ;84AE67|8000    |84AE69;
+    BRA .compute_player_delta                                               ;84AE67|8000    |84AE69;
  
  
-.label12:
+.compute_player_delta:
     REP #$30                                                   ;84AE69|C230    |      ;
     STZ.B strcVariables.n16Temp3                               ;84AE6B|6482    |000082;
     STZ.B strcVariables.n16Temp4                               ;84AE6D|6484    |000084;
@@ -5623,7 +5623,7 @@ fAIAction0x35_UpdateHorse:
     SBC.B strcPlayer.posX                                      ;84AE77|E5D6    |0000D6;
     STA.B strcVariables.n16Temp1                               ;84AE79|857E    |00007E;
     BMI +                                                      ;84AE7B|3002    |84AE7F;
-    BRA .label13                                               ;84AE7D|800D    |84AE8C;
+    BRA .dx_abs_done                                               ;84AE7D|800D    |84AE8C;
  
  
   + REP #$20                                                   ;84AE7F|C220    |      ;
@@ -5633,7 +5633,7 @@ fAIAction0x35_UpdateHorse:
     LDA.W #$0001                                               ;84AE87|A90100  |      ;
     STA.B strcVariables.n16Temp3                               ;84AE8A|8582    |000082;
  
-.label13:
+.dx_abs_done:
     REP #$30                                                   ;84AE8C|C230    |      ;
     LDY.W #$001C                                               ;84AE8E|A01C00  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;84AE91|B7CC    |0000CC;
@@ -5641,7 +5641,7 @@ fAIAction0x35_UpdateHorse:
     SBC.B strcPlayer.posY                                      ;84AE94|E5D8    |0000D8;
     STA.B strcVariables.n16Temp2                               ;84AE96|8580    |000080;
     BMI +                                                      ;84AE98|3002    |84AE9C;
-    BRA .label14                                               ;84AE9A|800D    |84AEA9;
+    BRA .dy_abs_done                                               ;84AE9A|800D    |84AEA9;
  
  
   + REP #$20                                                   ;84AE9C|C220    |      ;
@@ -5651,7 +5651,7 @@ fAIAction0x35_UpdateHorse:
     LDA.W #$0001                                               ;84AEA4|A90100  |      ;
     STA.B strcVariables.n16Temp4                               ;84AEA7|8584    |000084;
  
-.label14:
+.dy_abs_done:
     SEP #$20                                                   ;84AEA9|E220    |      ;
     LDA.B #$20                                                 ;84AEAB|A920    |      ;
     SEP #$20                                                   ;84AEAD|E220    |      ;
@@ -5661,21 +5661,21 @@ fAIAction0x35_UpdateHorse:
     REP #$20                                                   ;84AEB6|C220    |      ;
     LDA.B strcVariables.n16Temp2                               ;84AEB8|A580    |000080;
     CMP.B strcVariables.n16Temp1                               ;84AEBA|C57E    |00007E;
-    BCS .label15                                               ;84AEBC|B008    |84AEC6;
+    BCS .steer_vertical                                               ;84AEBC|B008    |84AEC6;
     REP #$20                                                   ;84AEBE|C220    |      ;
     LDA.B strcVariables.n16Temp3                               ;84AEC0|A582    |000082;
-    BEQ .label19                                               ;84AEC2|F034    |84AEF8;
-    BRA .label18                                               ;84AEC4|8024    |84AEEA;
+    BEQ .face_right                                               ;84AEC2|F034    |84AEF8;
+    BRA .face_left                                               ;84AEC4|8024    |84AEEA;
  
  
-.label15:
+.steer_vertical:
     REP #$20                                                   ;84AEC6|C220    |      ;
     LDA.B strcVariables.n16Temp4                               ;84AEC8|A584    |000084;
-    BEQ .label17                                               ;84AECA|F010    |84AEDC;
-    BRA .label16                                               ;84AECC|8000    |84AECE;
+    BEQ .face_up                                               ;84AECA|F010    |84AEDC;
+    BRA .face_down                                               ;84AECC|8000    |84AECE;
  
  
-.label16:
+.face_down:
     SEP #$20                                                   ;84AECE|E220    |      ;
     REP #$10                                                   ;84AED0|C210    |      ;
     LDY.W #$000F                                               ;84AED2|A00F00  |      ;
@@ -5684,7 +5684,7 @@ fAIAction0x35_UpdateHorse:
     JMP.W .loop2                                               ;84AED9|4C96AD  |84AD96;
  
  
-.label17:
+.face_up:
     SEP #$20                                                   ;84AEDC|E220    |      ;
     REP #$10                                                   ;84AEDE|C210    |      ;
     LDY.W #$000F                                               ;84AEE0|A00F00  |      ;
@@ -5693,7 +5693,7 @@ fAIAction0x35_UpdateHorse:
     JMP.W .loop2                                               ;84AEE7|4C96AD  |84AD96;
  
  
-.label18:
+.face_left:
     SEP #$20                                                   ;84AEEA|E220    |      ;
     REP #$10                                                   ;84AEEC|C210    |      ;
     LDY.W #$000F                                               ;84AEEE|A00F00  |      ;
@@ -5702,7 +5702,7 @@ fAIAction0x35_UpdateHorse:
     JMP.W .loop2                                               ;84AEF5|4C96AD  |84AD96;
  
  
-.label19:
+.face_right:
     SEP #$20                                                   ;84AEF8|E220    |      ;
     REP #$10                                                   ;84AEFA|C210    |      ;
     LDY.W #$000F                                               ;84AEFC|A00F00  |      ;
@@ -5728,70 +5728,70 @@ fAIAction0x36_UpdateDog:
     LDA.B [ptrAIUnknown0xCC],Y                                 ;84AF2F|B7CC    |0000CC;
     CMP.B #$00                                                 ;84AF31|C900    |      ;
     BNE +                                                      ;84AF33|D003    |84AF38;
-    JMP.W .label1                                              ;84AF35|4CF4AF  |84AFF4;
+    JMP.W .idle_timer                                              ;84AF35|4CF4AF  |84AFF4;
  
  
   + %CheckPlayerAction(!PACTION_USINGTOOL)
     BNE +                                                      ;84AF3F|D003    |84AF44;
-    JMP.W .label1                                              ;84AF41|4CF4AF  |84AFF4;
+    JMP.W .idle_timer                                              ;84AF41|4CF4AF  |84AFF4;
  
  
   + %CheckPlayerAction(!PACTION_SHOWTOOL)
     BNE +                                                      ;84AF4B|D003    |84AF50;
-    JMP.W .label1                                              ;84AF4D|4CF4AF  |84AFF4;
+    JMP.W .idle_timer                                              ;84AF4D|4CF4AF  |84AFF4;
  
  
   + %CheckPlayerAction(!PACTION_WHISTLEHORSE)
     BNE +                                                      ;84AF57|D003    |84AF5C;
-    JMP.W .label1                                              ;84AF59|4CF4AF  |84AFF4;
+    JMP.W .idle_timer                                              ;84AF59|4CF4AF  |84AFF4;
  
  
   + %CheckPlayerAction(!PACTION_WHISTLEDOG)
     BNE +                                                      ;84AF63|D003    |84AF68;
-    JMP.W .label1                                              ;84AF65|4CF4AF  |84AFF4;
+    JMP.W .idle_timer                                              ;84AF65|4CF4AF  |84AFF4;
  
  
   + REP #$20                                                   ;84AF68|C220    |      ;
     %CheckPlayerFlagsNoReg(!PFLAGS_EATINGMEAL)
     BEQ +                                                      ;84AF6F|F003    |84AF74;
-    JMP.W .label1                                              ;84AF71|4CF4AF  |84AFF4;
+    JMP.W .idle_timer                                              ;84AF71|4CF4AF  |84AFF4;
  
  
   + %CheckFlag(daily4, $0006)
-    BNE .label1                                                ;84AF7B|D077    |84AFF4;
+    BNE .idle_timer                                                ;84AF7B|D077    |84AFF4;
     REP #$20                                                   ;84AF7D|C220    |      ;
     LDA.W strcJoypad1.newInput                                 ;84AF7F|AD2801  |000128;
     BIT.W #!JOYPAD_A                                               
     BNE +                                                      ;84AF85|D003    |84AF8A;
-    JMP.W .label1                                              ;84AF87|4CF4AF  |84AFF4;
+    JMP.W .idle_timer                                              ;84AF87|4CF4AF  |84AFF4;
  
  
   + SEP #$20                                                   ;84AF8A|E220    |      ;
     LDA.W strcPlayerData.carryItemId                           ;84AF8C|AD1D09  |00091D;
     BEQ +                                                      ;84AF8F|F003    |84AF94;
-    JMP.W .label1                                              ;84AF91|4CF4AF  |84AFF4;
+    JMP.W .idle_timer                                              ;84AF91|4CF4AF  |84AFF4;
  
  
   + %CheckPlayerFlags(!PFLAGS_DOGHUGGING)
     BEQ +                                                      ;84AF9B|F003    |84AFA0;
-    JMP.W .label1                                              ;84AF9D|4CF4AF  |84AFF4;
+    JMP.W .idle_timer                                              ;84AF9D|4CF4AF  |84AFF4;
  
  
   + %CheckPlayerFlagsNoReg(!PFLAGS_RIDINGHORSE)
     BEQ +                                                      ;84AFA5|F003    |84AFAA;
-    JMP.W .label1                                              ;84AFA7|4CF4AF  |84AFF4;
+    JMP.W .idle_timer                                              ;84AFA7|4CF4AF  |84AFF4;
  
  
   + LDA.B strcPlayer.action                                    ;84AFAA|A5D4    |0000D4;
     CMP.W #!PACTION_17                                               
     BNE +                                                      ;84AFAF|D003    |84AFB4;
-    JMP.W .label1                                              ;84AFB1|4CF4AF  |84AFF4;
+    JMP.W .idle_timer                                              ;84AFB1|4CF4AF  |84AFF4;
  
  
   + LDA.B strcPlayer.action                                    ;84AFB4|A5D4    |0000D4;
     CMP.W #!PACTION_ITEMONHAND                                               
     BNE +                                                      ;84AFB9|D003    |84AFBE;
-    JMP.W .label1                                              ;84AFBB|4CF4AF  |84AFF4;
+    JMP.W .idle_timer                                              ;84AFBB|4CF4AF  |84AFF4;
  
  
   + SEP #$20                                                   ;84AFBE|E220    |      ;
@@ -5813,17 +5813,17 @@ fAIAction0x36_UpdateDog:
     LDA.L nDogHugs                                             ;84AFE8|AF521F7F|7F1F52;
     INC A                                                      ;84AFEC|1A      |      ;
     STA.L nDogHugs                                             ;84AFED|8F521F7F|7F1F52;
-    JMP.W .label24                                             ;84AFF1|4C5CB2  |84B25C;
+    JMP.W .check_whistle                                             ;84AFF1|4C5CB2  |84B25C;
  
  
-.label1:
+.idle_timer:
     SEP #$20                                                   ;84AFF4|E220    |      ;
     LDA.W strcStockData.unkDog                                 ;84AFF6|AD3809  |000938;
     CMP.B #$78                                                 ;84AFF9|C978    |      ;
     BEQ +                                                      ;84AFFB|F007    |84B004;
     INC A                                                      ;84AFFD|1A      |      ;
     STA.W strcStockData.unkDog                                 ;84AFFE|8D3809  |000938;
-    JMP.W .label24                                             ;84B001|4C5CB2  |84B25C;
+    JMP.W .check_whistle                                             ;84B001|4C5CB2  |84B25C;
  
  
   + SEP #$20                                                   ;84B004|E220    |      ;
@@ -5831,48 +5831,48 @@ fAIAction0x36_UpdateDog:
     REP #$30                                                   ;84B009|C230    |      ;
     LDA.L $7F1F58                                              ;84B00B|AF581F7F|7F1F58;
     AND.W #$0001                                               ;84B00F|290100  |      ;
-    BNE .label2                                                ;84B012|D033    |84B047;
+    BNE .idle_state1                                                ;84B012|D033    |84B047;
     LDA.L $7F1F58                                              ;84B014|AF581F7F|7F1F58;
     AND.W #$0002                                               ;84B018|290200  |      ;
     BEQ +                                                      ;84B01B|F003    |84B020;
-    JMP.W .label11                                             ;84B01D|4CFEB0  |84B0FE;
+    JMP.W .idle_state2                                             ;84B01D|4CFEB0  |84B0FE;
  
  
   + LDA.L $7F1F58                                              ;84B020|AF581F7F|7F1F58;
     AND.W #$0004                                               ;84B024|290400  |      ;
     BEQ +                                                      ;84B027|F003    |84B02C;
-    JMP.W .label16                                             ;84B029|4C7FB1  |84B17F;
+    JMP.W .idle_state4                                             ;84B029|4C7FB1  |84B17F;
  
  
   + LDA.L $7F1F58                                              ;84B02C|AF581F7F|7F1F58;
     AND.W #$0008                                               ;84B030|290800  |      ;
     BEQ +                                                      ;84B033|F003    |84B038;
-    JMP.W .label20                                             ;84B035|4CEAB1  |84B1EA;
+    JMP.W .idle_state8                                             ;84B035|4CEAB1  |84B1EA;
  
  
   + LDA.L $7F1F58                                              ;84B038|AF581F7F|7F1F58;
     AND.W #$0010                                               ;84B03C|291000  |      ;
     BEQ +                                                      ;84B03F|F003    |84B044;
-    JMP.W .label23                                             ;84B041|4C2DB2  |84B22D;
+    JMP.W .idle_state10                                             ;84B041|4C2DB2  |84B22D;
  
  
-  + JMP.W .label24                                             ;84B044|4C5CB2  |84B25C;
+  + JMP.W .check_whistle                                             ;84B044|4C5CB2  |84B25C;
  
  
-.label2:
+.idle_state1:
     REP #$30                                                   ;84B047|C230    |      ;
     SEP #$20                                                   ;84B049|E220    |      ;
     LDA.B strcPlayer.lastRandomNumber                          ;84B04B|A5DE    |0000DE;
     CMP.B #$40                                                 ;84B04D|C940    |      ;
-    BCC .label3                                                ;84B04F|900B    |84B05C;
+    BCC .state1_to_state2                                                ;84B04F|900B    |84B05C;
     CMP.B #$80                                                 ;84B051|C980    |      ;
-    BCC .label4                                                ;84B053|9029    |84B07E;
+    BCC .state1_random_move                                                ;84B053|9029    |84B07E;
     CMP.B #$C0                                                 ;84B055|C9C0    |      ;
-    BCC .label4                                                ;84B057|9025    |84B07E;
-    JMP.W .label24                                             ;84B059|4C5CB2  |84B25C;
+    BCC .state1_random_move                                                ;84B057|9025    |84B07E;
+    JMP.W .check_whistle                                             ;84B059|4C5CB2  |84B25C;
  
  
-.label3:
+.state1_to_state2:
     REP #$30                                                   ;84B05C|C230    |      ;
     LDA.W #$0016                                               ;84B05E|A91600  |      ;
     LDX.W #$0000                                               ;84B061|A20000  |      ;
@@ -5883,22 +5883,22 @@ fAIAction0x36_UpdateDog:
     AND.W #$FFFE                                               ;84B071|29FEFF  |      ;
     ORA.W #$0002                                               ;84B074|090200  |      ;
     STA.L $7F1F58                                              ;84B077|8F581F7F|7F1F58;
-    JMP.W .label24                                             ;84B07B|4C5CB2  |84B25C;
+    JMP.W .check_whistle                                             ;84B07B|4C5CB2  |84B25C;
  
  
-.label4:
+.state1_random_move:
     REP #$30                                                   ;84B07E|C230    |      ;
     SEP #$20                                                   ;84B080|E220    |      ;
     LDA.B strcPlayer.lastRandomNumber                          ;84B082|A5DE    |0000DE;
     CMP.B #$33                                                 ;84B084|C933    |      ;
-    BCC .label6                                                ;84B086|9021    |84B0A9;
+    BCC .state1_move0                                                ;84B086|9021    |84B0A9;
     CMP.B #$66                                                 ;84B088|C966    |      ;
-    BCC .label7                                                ;84B08A|902E    |84B0BA;
+    BCC .state1_move1                                                ;84B08A|902E    |84B0BA;
     CMP.B #$99                                                 ;84B08C|C999    |      ;
-    BCC .label8                                                ;84B08E|903B    |84B0CB;
+    BCC .state1_move2                                                ;84B08E|903B    |84B0CB;
     CMP.B #$CC                                                 ;84B090|C9CC    |      ;
-    BCC .label9                                                ;84B092|9048    |84B0DC;
-    BRA .label10                                               ;84B094|8057    |84B0ED;
+    BCC .state1_move3                                                ;84B092|9048    |84B0DC;
+    BRA .state1_move4                                               ;84B094|8057    |84B0ED;
  
  
 .loop:
@@ -5907,10 +5907,10 @@ fAIAction0x36_UpdateDog:
     AND.W #$FFFE                                               ;84B09C|29FEFF  |      ;
     ORA.W #$0010                                               ;84B09F|091000  |      ;
     STA.L $7F1F58                                              ;84B0A2|8F581F7F|7F1F58;
-    JMP.W .label24                                             ;84B0A6|4C5CB2  |84B25C;
+    JMP.W .check_whistle                                             ;84B0A6|4C5CB2  |84B25C;
  
  
-.label6:
+.state1_move0:
     REP #$30                                                   ;84B0A9|C230    |      ;
     LDA.W #$0016                                               ;84B0AB|A91600  |      ;
     LDX.W #$0000                                               ;84B0AE|A20000  |      ;
@@ -5919,7 +5919,7 @@ fAIAction0x36_UpdateDog:
     BRA .loop                                                  ;84B0B8|80DC    |84B096;
  
  
-.label7:
+.state1_move1:
     REP #$30                                                   ;84B0BA|C230    |      ;
     LDA.W #$0016                                               ;84B0BC|A91600  |      ;
     LDX.W #$0000                                               ;84B0BF|A20000  |      ;
@@ -5928,7 +5928,7 @@ fAIAction0x36_UpdateDog:
     BRA .loop                                                  ;84B0C9|80CB    |84B096;
  
  
-.label8:
+.state1_move2:
     REP #$30                                                   ;84B0CB|C230    |      ;
     LDA.W #$0016                                               ;84B0CD|A91600  |      ;
     LDX.W #$0000                                               ;84B0D0|A20000  |      ;
@@ -5937,7 +5937,7 @@ fAIAction0x36_UpdateDog:
     BRA .loop                                                  ;84B0DA|80BA    |84B096;
  
  
-.label9:
+.state1_move3:
     REP #$30                                                   ;84B0DC|C230    |      ;
     LDA.W #$0016                                               ;84B0DE|A91600  |      ;
     LDX.W #$0000                                               ;84B0E1|A20000  |      ;
@@ -5946,7 +5946,7 @@ fAIAction0x36_UpdateDog:
     BRA .loop                                                  ;84B0EB|80A9    |84B096;
  
  
-.label10:
+.state1_move4:
     REP #$30                                                   ;84B0ED|C230    |      ;
     LDA.W #$0016                                               ;84B0EF|A91600  |      ;
     LDX.W #$0000                                               ;84B0F2|A20000  |      ;
@@ -5955,22 +5955,22 @@ fAIAction0x36_UpdateDog:
     BRA .loop                                                  ;84B0FC|8098    |84B096;
  
  
-.label11:
+.idle_state2:
     REP #$30                                                   ;84B0FE|C230    |      ;
     SEP #$20                                                   ;84B100|E220    |      ;
     LDA.B strcPlayer.lastRandomNumber                          ;84B102|A5DE    |0000DE;
     CMP.B #$2A                                                 ;84B104|C92A    |      ;
-    BCC .label12                                               ;84B106|900F    |84B117;
+    BCC .state2_to_state1                                               ;84B106|900F    |84B117;
     CMP.B #$54                                                 ;84B108|C954    |      ;
-    BCC .label13                                               ;84B10A|902D    |84B139;
+    BCC .state2_to_state4                                               ;84B10A|902D    |84B139;
     CMP.B #$7E                                                 ;84B10C|C97E    |      ;
-    BCC .label14                                               ;84B10E|904B    |84B15B;
+    BCC .state2_move0                                               ;84B10E|904B    |84B15B;
     CMP.B #$A8                                                 ;84B110|C9A8    |      ;
-    BCC .label15                                               ;84B112|9059    |84B16D;
-    JMP.W .label24                                             ;84B114|4C5CB2  |84B25C;
+    BCC .state2_move1                                               ;84B112|9059    |84B16D;
+    JMP.W .check_whistle                                             ;84B114|4C5CB2  |84B25C;
  
  
-.label12:
+.state2_to_state1:
     REP #$30                                                   ;84B117|C230    |      ;
     LDA.W #$0016                                               ;84B119|A91600  |      ;
     LDX.W #$0000                                               ;84B11C|A20000  |      ;
@@ -5981,10 +5981,10 @@ fAIAction0x36_UpdateDog:
     AND.W #$FFFD                                               ;84B12C|29FDFF  |      ;
     ORA.W #$0001                                               ;84B12F|090100  |      ;
     STA.L $7F1F58                                              ;84B132|8F581F7F|7F1F58;
-    JMP.W .label24                                             ;84B136|4C5CB2  |84B25C;
+    JMP.W .check_whistle                                             ;84B136|4C5CB2  |84B25C;
  
  
-.label13:
+.state2_to_state4:
     REP #$30                                                   ;84B139|C230    |      ;
     LDA.W #$0016                                               ;84B13B|A91600  |      ;
     LDX.W #$0000                                               ;84B13E|A20000  |      ;
@@ -5995,41 +5995,41 @@ fAIAction0x36_UpdateDog:
     AND.W #$FFFD                                               ;84B14E|29FDFF  |      ;
     ORA.W #$0004                                               ;84B151|090400  |      ;
     STA.L $7F1F58                                              ;84B154|8F581F7F|7F1F58;
-    JMP.W .label24                                             ;84B158|4C5CB2  |84B25C;
+    JMP.W .check_whistle                                             ;84B158|4C5CB2  |84B25C;
  
  
-.label14:
+.state2_move0:
     REP #$30                                                   ;84B15B|C230    |      ;
     LDA.W #$0016                                               ;84B15D|A91600  |      ;
     LDX.W #$0000                                               ;84B160|A20000  |      ;
     LDY.W #$0049                                               ;84B163|A04900  |      ;
     JSL.L fAI_SetSlotScript                                    ;84B166|223F8084|84803F;
-    JMP.W .label24                                             ;84B16A|4C5CB2  |84B25C;
+    JMP.W .check_whistle                                             ;84B16A|4C5CB2  |84B25C;
  
  
-.label15:
+.state2_move1:
     REP #$30                                                   ;84B16D|C230    |      ;
     LDA.W #$0016                                               ;84B16F|A91600  |      ;
     LDX.W #$0000                                               ;84B172|A20000  |      ;
     LDY.W #$0044                                               ;84B175|A04400  |      ;
     JSL.L fAI_SetSlotScript                                    ;84B178|223F8084|84803F;
-    JMP.W .label24                                             ;84B17C|4C5CB2  |84B25C;
+    JMP.W .check_whistle                                             ;84B17C|4C5CB2  |84B25C;
  
  
-.label16:
+.idle_state4:
     REP #$30                                                   ;84B17F|C230    |      ;
     SEP #$20                                                   ;84B181|E220    |      ;
     LDA.B strcPlayer.lastRandomNumber                          ;84B183|A5DE    |0000DE;
     CMP.B #$2A                                                 ;84B185|C92A    |      ;
-    BCC .label17                                               ;84B187|900B    |84B194;
+    BCC .state4_to_state2                                               ;84B187|900B    |84B194;
     CMP.B #$54                                                 ;84B189|C954    |      ;
-    BCC .label18                                               ;84B18B|9029    |84B1B6;
+    BCC .state4_to_state8                                               ;84B18B|9029    |84B1B6;
     CMP.B #$7E                                                 ;84B18D|C97E    |      ;
-    BCC .label19                                               ;84B18F|9047    |84B1D8;
-    JMP.W .label24                                             ;84B191|4C5CB2  |84B25C;
+    BCC .state4_move                                               ;84B18F|9047    |84B1D8;
+    JMP.W .check_whistle                                             ;84B191|4C5CB2  |84B25C;
  
  
-.label17:
+.state4_to_state2:
     REP #$30                                                   ;84B194|C230    |      ;
     LDA.W #$0016                                               ;84B196|A91600  |      ;
     LDX.W #$0000                                               ;84B199|A20000  |      ;
@@ -6040,10 +6040,10 @@ fAIAction0x36_UpdateDog:
     AND.W #$FFFB                                               ;84B1A9|29FBFF  |      ;
     ORA.W #$0002                                               ;84B1AC|090200  |      ;
     STA.L $7F1F58                                              ;84B1AF|8F581F7F|7F1F58;
-    JMP.W .label24                                             ;84B1B3|4C5CB2  |84B25C;
+    JMP.W .check_whistle                                             ;84B1B3|4C5CB2  |84B25C;
  
  
-.label18:
+.state4_to_state8:
     REP #$30                                                   ;84B1B6|C230    |      ;
     LDA.W #$0016                                               ;84B1B8|A91600  |      ;
     LDX.W #$0000                                               ;84B1BB|A20000  |      ;
@@ -6054,30 +6054,30 @@ fAIAction0x36_UpdateDog:
     AND.W #$FFFB                                               ;84B1CB|29FBFF  |      ;
     ORA.W #$0008                                               ;84B1CE|090800  |      ;
     STA.L $7F1F58                                              ;84B1D1|8F581F7F|7F1F58;
-    JMP.W .label24                                             ;84B1D5|4C5CB2  |84B25C;
+    JMP.W .check_whistle                                             ;84B1D5|4C5CB2  |84B25C;
  
  
-.label19:
+.state4_move:
     REP #$30                                                   ;84B1D8|C230    |      ;
     LDA.W #$0016                                               ;84B1DA|A91600  |      ;
     LDX.W #$0000                                               ;84B1DD|A20000  |      ;
     LDY.W #$0043                                               ;84B1E0|A04300  |      ;
     JSL.L fAI_SetSlotScript                                    ;84B1E3|223F8084|84803F;
-    JMP.W .label24                                             ;84B1E7|4C5CB2  |84B25C;
+    JMP.W .check_whistle                                             ;84B1E7|4C5CB2  |84B25C;
  
  
-.label20:
+.idle_state8:
     REP #$30                                                   ;84B1EA|C230    |      ;
     SEP #$20                                                   ;84B1EC|E220    |      ;
     LDA.B strcPlayer.lastRandomNumber                          ;84B1EE|A5DE    |0000DE;
     CMP.B #$2A                                                 ;84B1F0|C92A    |      ;
-    BCC .label21                                               ;84B1F2|9007    |84B1FB;
+    BCC .state8_to_state4                                               ;84B1F2|9007    |84B1FB;
     CMP.B #$54                                                 ;84B1F4|C954    |      ;
-    BCC .label22                                               ;84B1F6|9024    |84B21C;
-    JMP.W .label24                                             ;84B1F8|4C5CB2  |84B25C;
+    BCC .state8_move                                               ;84B1F6|9024    |84B21C;
+    JMP.W .check_whistle                                             ;84B1F8|4C5CB2  |84B25C;
  
  
-.label21:
+.state8_to_state4:
     REP #$30                                                   ;84B1FB|C230    |      ;
     LDA.W #$0016                                               ;84B1FD|A91600  |      ;
     LDX.W #$0000                                               ;84B200|A20000  |      ;
@@ -6088,25 +6088,25 @@ fAIAction0x36_UpdateDog:
     AND.W #$FFF7                                               ;84B210|29F7FF  |      ;
     ORA.W #$0004                                               ;84B213|090400  |      ;
     STA.L $7F1F58                                              ;84B216|8F581F7F|7F1F58;
-    BRA .label24                                               ;84B21A|8040    |84B25C;
+    BRA .check_whistle                                               ;84B21A|8040    |84B25C;
  
  
-.label22:
+.state8_move:
     REP #$30                                                   ;84B21C|C230    |      ;
     LDA.W #$0016                                               ;84B21E|A91600  |      ;
     LDX.W #$0000                                               ;84B221|A20000  |      ;
     LDY.W #$0046                                               ;84B224|A04600  |      ;
     JSL.L fAI_SetSlotScript                                    ;84B227|223F8084|84803F;
-    BRA .label24                                               ;84B22B|802F    |84B25C;
+    BRA .check_whistle                                               ;84B22B|802F    |84B25C;
  
  
-.label23:
+.idle_state10:
     REP #$30                                                   ;84B22D|C230    |      ;
     SEP #$20                                                   ;84B22F|E220    |      ;
     LDA.B strcPlayer.lastRandomNumber                          ;84B231|A5DE    |0000DE;
     CMP.B #$40                                                 ;84B233|C940    |      ;
     BCC +                                                      ;84B235|9003    |84B23A;
-    JMP.W .label24                                             ;84B237|4C5CB2  |84B25C;
+    JMP.W .check_whistle                                             ;84B237|4C5CB2  |84B25C;
  
  
   + REP #$30                                                   ;84B23A|C230    |      ;
@@ -6119,10 +6119,10 @@ fAIAction0x36_UpdateDog:
     AND.W #$FFEF                                               ;84B24F|29EFFF  |      ;
     ORA.W #$0001                                               ;84B252|090100  |      ;
     STA.L $7F1F58                                              ;84B255|8F581F7F|7F1F58;
-    JMP.W .label24                                             ;84B259|4C5CB2  |84B25C;
+    JMP.W .check_whistle                                             ;84B259|4C5CB2  |84B25C;
  
  
-.label24:
+.check_whistle:
     REP #$30                                                   ;84B25C|C230    |      ;
     %CheckFlag(daily4, $0010)
     BEQ .loop2                                                 ;84B265|F003    |84B26A;
@@ -6174,7 +6174,7 @@ fAIAction0x36_UpdateDog:
     SBC.B strcPlayer.posX                                      ;84B2BC|E5D6    |0000D6;
     STA.B strcVariables.n16Temp1                               ;84B2BE|857E    |00007E;
     BMI +                                                      ;84B2C0|3002    |84B2C4;
-    BRA .label26                                               ;84B2C2|800D    |84B2D1;
+    BRA .dx_abs_done                                               ;84B2C2|800D    |84B2D1;
  
  
   + REP #$20                                                   ;84B2C4|C220    |      ;
@@ -6184,7 +6184,7 @@ fAIAction0x36_UpdateDog:
     LDA.W #$0001                                               ;84B2CC|A90100  |      ;
     STA.B strcVariables.n16Temp3                               ;84B2CF|8582    |000082;
  
-.label26:
+.dx_abs_done:
     REP #$30                                                   ;84B2D1|C230    |      ;
     LDY.W #$001C                                               ;84B2D3|A01C00  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;84B2D6|B7CC    |0000CC;
@@ -6192,7 +6192,7 @@ fAIAction0x36_UpdateDog:
     SBC.B strcPlayer.posY                                      ;84B2D9|E5D8    |0000D8;
     STA.B strcVariables.n16Temp2                               ;84B2DB|8580    |000080;
     BMI +                                                      ;84B2DD|3002    |84B2E1;
-    BRA .label27                                               ;84B2DF|800D    |84B2EE;
+    BRA .dy_abs_done                                               ;84B2DF|800D    |84B2EE;
  
  
   + REP #$20                                                   ;84B2E1|C220    |      ;
@@ -6202,7 +6202,7 @@ fAIAction0x36_UpdateDog:
     LDA.W #$0001                                               ;84B2E9|A90100  |      ;
     STA.B strcVariables.n16Temp4                               ;84B2EC|8584    |000084;
  
-.label27:
+.dy_abs_done:
     SEP #$20                                                   ;84B2EE|E220    |      ;
     LDA.B #$20                                                 ;84B2F0|A920    |      ;
     SEP #$20                                                   ;84B2F2|E220    |      ;
@@ -6212,17 +6212,17 @@ fAIAction0x36_UpdateDog:
     REP #$20                                                   ;84B2FB|C220    |      ;
     LDA.B strcVariables.n16Temp2                               ;84B2FD|A580    |000080;
     CMP.B strcVariables.n16Temp1                               ;84B2FF|C57E    |00007E;
-    BCS .label28                                               ;84B301|B008    |84B30B;
+    BCS .steer_vertical                                               ;84B301|B008    |84B30B;
     REP #$20                                                   ;84B303|C220    |      ;
     LDA.B strcVariables.n16Temp3                               ;84B305|A582    |000082;
-    BEQ .label31                                               ;84B307|F034    |84B33D;
-    BRA .label30                                               ;84B309|8024    |84B32F;
+    BEQ .face_right                                               ;84B307|F034    |84B33D;
+    BRA .face_left                                               ;84B309|8024    |84B32F;
  
  
-.label28:
+.steer_vertical:
     REP #$20                                                   ;84B30B|C220    |      ;
     LDA.B strcVariables.n16Temp4                               ;84B30D|A584    |000084;
-    BEQ .label29                                               ;84B30F|F010    |84B321;
+    BEQ .face_up                                               ;84B30F|F010    |84B321;
     BRA +                                                      ;84B311|8000    |84B313;
  
  
@@ -6234,7 +6234,7 @@ fAIAction0x36_UpdateDog:
     JMP.W .loop2                                               ;84B31E|4C6AB2  |84B26A;
  
  
-.label29:
+.face_up:
     SEP #$20                                                   ;84B321|E220    |      ;
     REP #$10                                                   ;84B323|C210    |      ;
     LDY.W #$000F                                               ;84B325|A00F00  |      ;
@@ -6243,7 +6243,7 @@ fAIAction0x36_UpdateDog:
     JMP.W .loop2                                               ;84B32C|4C6AB2  |84B26A;
  
  
-.label30:
+.face_left:
     SEP #$20                                                   ;84B32F|E220    |      ;
     REP #$10                                                   ;84B331|C210    |      ;
     LDY.W #$000F                                               ;84B333|A00F00  |      ;
@@ -6252,7 +6252,7 @@ fAIAction0x36_UpdateDog:
     JMP.W .loop2                                               ;84B33A|4C6AB2  |84B26A;
  
  
-.label31:
+.face_right:
     SEP #$20                                                   ;84B33D|E220    |      ;
     REP #$10                                                   ;84B33F|C210    |      ;
     LDY.W #$000F                                               ;84B341|A00F00  |      ;
@@ -7108,11 +7108,11 @@ fAIAction0x50:
     %AIMoveAction($0001)
     SEP #$20                                                   ;84BBE6|E220    |      ;
     LDA.W strcPlayerData.carryItemId                           ;84BBE8|AD1D09  |00091D;
-    BEQ .label2                                                ;84BBEB|F06F    |84BC5C;
+    BEQ .put_down_dog                                                ;84BBEB|F06F    |84BC5C;
     CMP.B #$25                                                 ;84BBED|C925    |      ;
-    BEQ .label1                                                ;84BBEF|F015    |84BC06;
+    BEQ .put_down_chicken                                                ;84BBEF|F015    |84BC06;
     CMP.B #$26                                                 ;84BBF1|C926    |      ;
-    BEQ .label1                                                ;84BBF3|F011    |84BC06;
+    BEQ .put_down_chicken                                                ;84BBF3|F011    |84BC06;
     STZ.W strcPlayerData.carryItemId                           ;84BBF5|9C1D09  |00091D;
     REP #$30                                                   ;84BBF8|C230    |      ;
     LDA.W #$0000                                               ;84BBFA|A90000  |      ;
@@ -7122,7 +7122,7 @@ fAIAction0x50:
     JMP.W .return                                              ;84BC03|4C9BBC  |84BC9B;
  
  
-.label1:
+.put_down_chicken:
     SEP #$20                                                   ;84BC06|E220    |      ;
     REP #$10                                                   ;84BC08|C210    |      ;
     LDA.B #$00                                                 ;84BC0A|A900    |      ;
@@ -7166,7 +7166,7 @@ fAIAction0x50:
     BRA .return                                                ;84BC5A|803F    |84BC9B;
  
  
-.label2:
+.put_down_dog:
     %CheckPlayerFlags(!PFLAGS_DOGHUGGING)
     BNE +                                                      ;84BC63|D003    |84BC68;
     JMP.W .return                                              ;84BC65|4C9BBC  |84BC9B;
@@ -7198,22 +7198,22 @@ fAIAction0x51:
     %AIMoveAction($0001)
     SEP #$20                                                   ;84BCA8|E220    |      ;
     LDA.W strcPlayerData.carryItemId                           ;84BCAA|AD1D09  |00091D;
-    BEQ .label3                                                ;84BCAD|F060    |84BD0F;
+    BEQ .put_down_dog                                                ;84BCAD|F060    |84BD0F;
     CMP.B #$25                                                 ;84BCAF|C925    |      ;
-    BEQ .label2                                                ;84BCB1|F011    |84BCC4;
+    BEQ .put_down_chicken                                                ;84BCB1|F011    |84BCC4;
     CMP.B #$26                                                 ;84BCB3|C926    |      ;
-    BEQ .label2                                                ;84BCB5|F00D    |84BCC4;
+    BEQ .put_down_chicken                                                ;84BCB5|F00D    |84BCC4;
     CMP.B #$29                                                 ;84BCB7|C929    |      ;
-    BEQ .label1                                                ;84BCB9|F003    |84BCBE;
+    BEQ .clear_carried_item                                                ;84BCB9|F003    |84BCBE;
     JMP.W .return                                              ;84BCBB|4C43BD  |84BD43;
  
  
-.label1:
+.clear_carried_item:
     STZ.W strcPlayerData.carryItemId                           ;84BCBE|9C1D09  |00091D;
     JMP.W .return                                              ;84BCC1|4C43BD  |84BD43;
  
  
-.label2:
+.put_down_chicken:
     SEP #$20                                                   ;84BCC4|E220    |      ;
     REP #$10                                                   ;84BCC6|C210    |      ;
     LDA.B #$00                                                 ;84BCC8|A900    |      ;
@@ -7252,7 +7252,7 @@ fAIAction0x51:
     BRA .return                                                ;84BD0D|8034    |84BD43;
  
  
-.label3:
+.put_down_dog:
     %CheckPlayerFlags(!PFLAGS_DOGHUGGING)
     BNE +                                                      ;84BD16|D003    |84BD1B;
     JMP.W .return                                              ;84BD18|4C43BD  |84BD43;
