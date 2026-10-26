@@ -12,7 +12,7 @@ Mapping: LoROM, 64 banks of 32 KB ($80–$BF). Header and vectors: `src/code/hea
 | $A7 | object maps | `assets/maps/*.json` (generated asm: `build/gen/maps/bank_A7.asm`) |
 | $A8–$A9 | palettes | `assets/gfx/banks.json` (generated asm: `build/gen/gfx/palettes/`) |
 | $AA–$AC | JP dialogs (empty in US/EU/DE) | `assets/dialogs/jp/*.txt` (generated asm) |
-| $AD–$B2 | audio (content looks like SPC700 program and data — to be confirmed) | `assets/audio/banks.json` (generated asm: `build/gen/audio/`) |
+| $AD–$B2 | audio (SPC700 driver, BRR samples, songs and SFX; confirmed against 20 emulator dumps, `docs/audio.md` section 12) | `assets/audio/banks.json` (generated asm: `build/gen/audio/`) |
 | $B3–$B5 | AI scripts: bodies = script DSL (one file per script, `src/ai/us/scripts/`; EU/DE/JP as `if !REGION_xx` blocks, `docs/regions-ai.md`); script pointer list, slot tables and NPC sprite tables are data | `src/ai/` (DSL) + `assets/ai/{scripts.json,npc_sprite_tables.txt}` (generated asm: `build/gen/ai/`) |
 | $B6–$BB | US/EU/DE dialogs (empty in JP) | `assets/dialogs/<region>/*.txt` (generated asm) |
 | $BC–$BF | unused (zeros) | — |

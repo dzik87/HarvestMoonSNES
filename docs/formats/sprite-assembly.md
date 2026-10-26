@@ -177,8 +177,7 @@ coherent sprites (limbs, heads, tools and shadows line up; multi-component anima
 | `$0212-$021D` | chickens/ducks/birds |
 | `$02F6`, `$02F7`, `$0304`, `$0305` | black-and-white dog-like animal (sitting with an exclamation bubble; running) - the dog event object, name not verified |
 
-The names are visual impressions: no code or label in the repository names these object indices, so no `docs/naming/object_names.csv`
-exists. The directory names `obj_XXXX_<Name>` take the name from the `"name"` field of `assets/objects/bank_XX/objects/NNNN.json` (`docs/naming/K5_objects.csv`).
+The names in the table above are visual impressions made before the objects were named. The directory names `obj_XXXX_<Name>` take the name from the `"name"` field of `assets/objects/bank_XX/objects/NNNN.json` (`docs/naming/K5_objects.csv`).
 Objects with an empty (all-transparent) frame image, effects, particles and small items were only skimmed.
 
 ## 5. Open points
