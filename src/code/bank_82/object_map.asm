@@ -16,7 +16,7 @@ fObjectMap_LoadData:
     STA.B ptrTemp0x72+2                                        ;82A613|8574    |000074; $72 = 0x7EA4E6
     LDX.W #$0000                                               ;82A615|A20000  |      ;
     PHX                                                        ;82A618|DA      |      ;
-    BRA .setSelectedMap                                                ;82A619|801A    |82A635;
+    BRA .set_selected_map                                                ;82A619|801A    |82A635;
  
  
 .notFarm:
@@ -35,7 +35,7 @@ fObjectMap_LoadData:
     LDA.L pObjectMap,X                                         ;82A62F|BF74B182|82B174;
     STA.B ptrTemp0x72+2                                        ;82A633|8574    |000074;
  
-.setSelectedMap:
+.set_selected_map:
     REP #$30                                                   ;82A635|C230    |      ;
     PLX                                                        ;82A637|FA      |      ;
     LDA.L pObjectMap2,X                                        ;82A638|BF94B282|82B294;
@@ -122,34 +122,34 @@ fObjectMap_CurrentMapToFarmMap:
     SEP #$20                                                   ;82A6C4|E220    |      ;
     LDA.L sFarmTilemap,X                                       ;82A6C6|BFE6A47E|7EA4E6;
     BNE +                                                      ;82A6CA|D003    |82A6CF;
-    JMP.W .nextTile                                              ;82A6CC|4CF2A6  |82A6F2;
+    JMP.W .next_tile                                              ;82A6CC|4CF2A6  |82A6F2;
  
  
   + CMP.B #$A0                                                 ;82A6CF|C9A0    |      ;
     BCC +                                                      ;82A6D1|9003    |82A6D6;
-    JMP.W .nextTile                                              ;82A6D3|4CF2A6  |82A6F2;
+    JMP.W .next_tile                                              ;82A6D3|4CF2A6  |82A6F2;
  
  
   + CMP.B #$70                                                 ;82A6D6|C970    |      ;
-    BCS .setTile7A                                                ;82A6D8|B006    |82A6E0;
+    BCS .set_tile7a                                                ;82A6D8|B006    |82A6E0;
     CMP.B #$1D                                                 ;82A6DA|C91D    |      ;
-    BCS .setTile07                                                ;82A6DC|B00C    |82A6EA;
-    BRA .nextTile                                                ;82A6DE|8012    |82A6F2;
+    BCS .set_tile07                                                ;82A6DC|B00C    |82A6EA;
+    BRA .next_tile                                                ;82A6DE|8012    |82A6F2;
  
  
-.setTile7A:
+.set_tile7a:
     SEP #$20                                                   ;82A6E0|E220    |      ;
     LDA.B #$7A                                                 ;82A6E2|A97A    |      ;
     STA.L sFarmTilemap,X                                       ;82A6E4|9FE6A47E|7EA4E6;
-    BRA .nextTile                                                ;82A6E8|8008    |82A6F2;
+    BRA .next_tile                                                ;82A6E8|8008    |82A6F2;
  
  
-.setTile07:
+.set_tile07:
     SEP #$20                                                   ;82A6EA|E220    |      ;
     LDA.B #$07                                                 ;82A6EC|A907    |      ;
     STA.L sFarmTilemap,X                                       ;82A6EE|9FE6A47E|7EA4E6;
  
-.nextTile:
+.next_tile:
     REP #$30                                                   ;82A6F2|C230    |      ;
     PLX                                                        ;82A6F4|FA      |      ;
     PLY                                                        ;82A6F5|7A      |      ;
@@ -198,32 +198,32 @@ fObjectMap_HuricaneDamage:
     LDA.L sFarmTilemap,X                                       ;82A735|BFE6A47E|7EA4E6;
     CMP.B #$A0                                                 ;82A739|C9A0    |      ;
     BCC +                                                      ;82A73B|9003    |82A740;
-    JMP.W .nextTile                                              ;82A73D|4CF0A7  |82A7F0;
+    JMP.W .next_tile                                              ;82A73D|4CF0A7  |82A7F0;
  
  
   + CMP.B #$05                                                 ;82A740|C905    |      ;
-    BEQ .damageTile05                                                ;82A742|F01A    |82A75E;
+    BEQ .damage_tile05                                                ;82A742|F01A    |82A75E;
     CMP.B #$1D                                                 ;82A744|C91D    |      ;
-    BEQ .damageTile1D                                                ;82A746|F070    |82A7B8;
+    BEQ .damage_tile1d                                                ;82A746|F070    |82A7B8;
     CMP.B #$70                                                 ;82A748|C970    |      ;
-    BCS .damageTileHigh                                                ;82A74A|B031    |82A77D;
+    BCS .damage_tile_high                                                ;82A74A|B031    |82A77D;
     CMP.B #$07                                                 ;82A74C|C907    |      ;
     BNE +                                                      ;82A74E|D003    |82A753;
-    JMP.W .damageTileLow                                              ;82A750|4CD4A7  |82A7D4;
+    JMP.W .damage_tile_low                                              ;82A750|4CD4A7  |82A7D4;
  
  
   + CMP.B #$08                                                 ;82A753|C908    |      ;
-    BEQ .damageTileLow                                                ;82A755|F07D    |82A7D4;
+    BEQ .damage_tile_low                                                ;82A755|F07D    |82A7D4;
     CMP.B #$1E                                                 ;82A757|C91E    |      ;
-    BCS .damageTileLow                                                ;82A759|B079    |82A7D4;
-    JMP.W .nextTile                                              ;82A75B|4CF0A7  |82A7F0;
+    BCS .damage_tile_low                                                ;82A759|B079    |82A7D4;
+    JMP.W .next_tile                                              ;82A75B|4CF0A7  |82A7F0;
  
  
-.damageTile05:
+.damage_tile05:
     REP #$30                                                   ;82A75E|C230    |      ;
     LDA.B strcVariables.n16Unk86                               ;82A760|A586    |000086;
     BNE +                                                      ;82A762|D003    |82A767;
-    JMP.W .nextTile                                              ;82A764|4CF0A7  |82A7F0;
+    JMP.W .next_tile                                              ;82A764|4CF0A7  |82A7F0;
  
  
   + PHX                                                        ;82A767|DA      |      ;
@@ -232,79 +232,79 @@ fObjectMap_HuricaneDamage:
     REP #$10                                                   ;82A76E|C210    |      ;
     PLX                                                        ;82A770|FA      |      ;
     CMP.B #$00                                                 ;82A771|C900    |      ;
-    BNE .nextTile                                                ;82A773|D07B    |82A7F0;
+    BNE .next_tile                                                ;82A773|D07B    |82A7F0;
     LDA.B #$06                                                 ;82A775|A906    |      ;
     STA.L sFarmTilemap,X                                       ;82A777|9FE6A47E|7EA4E6;
-    BRA .nextTile                                                ;82A77B|8073    |82A7F0;
+    BRA .next_tile                                                ;82A77B|8073    |82A7F0;
  
  
-.damageTileHigh:
+.damage_tile_high:
     REP #$30                                                   ;82A77D|C230    |      ;
     CMP.W #$0079                                               ;82A77F|C97900  |      ;
-    BEQ .decrementGrassToCut                                                ;82A782|F029    |82A7AD;
+    BEQ .decrement_grass_to_cut                                                ;82A782|F029    |82A7AD;
  
-.rollClearTile:
+.roll_clear_tile:
     REP #$30                                                   ;82A784|C230    |      ;
     LDA.B strcVariables.n16Unk88                               ;82A786|A588    |000088;
-    BEQ .nextTile                                                ;82A788|F066    |82A7F0;
+    BEQ .next_tile                                                ;82A788|F066    |82A7F0;
     PHX                                                        ;82A78A|DA      |      ;
     JSL.L fCore_GetRandomNumber                                ;82A78B|22F98980|8089F9;
     SEP #$20                                                   ;82A78F|E220    |      ;
     REP #$10                                                   ;82A791|C210    |      ;
     PLX                                                        ;82A793|FA      |      ;
     CMP.B #$00                                                 ;82A794|C900    |      ;
-    BNE .nextTile                                                ;82A796|D058    |82A7F0;
+    BNE .next_tile                                                ;82A796|D058    |82A7F0;
     LDA.B #$02                                                 ;82A798|A902    |      ;
     STA.L sFarmTilemap,X                                       ;82A79A|9FE6A47E|7EA4E6;
     REP #$20                                                   ;82A79E|C220    |      ;
     LDA.L nPlantedGrassCount                                   ;82A7A0|AF291F7F|7F1F29;
-    BEQ .nextTile                                                ;82A7A4|F04A    |82A7F0;
+    BEQ .next_tile                                                ;82A7A4|F04A    |82A7F0;
     DEC A                                                      ;82A7A6|3A      |      ;
     STA.L nPlantedGrassCount                                   ;82A7A7|8F291F7F|7F1F29;
-    BRA .nextTile                                                ;82A7AB|8043    |82A7F0;
+    BRA .next_tile                                                ;82A7AB|8043    |82A7F0;
  
  
-.decrementGrassToCut:
+.decrement_grass_to_cut:
     REP #$30                                                   ;82A7AD|C230    |      ;
     LDA.W strcPlayerData.leftGrassToCut                        ;82A7AF|AD2E09  |00092E;
     DEC A                                                      ;82A7B2|3A      |      ;
     STA.W strcPlayerData.leftGrassToCut                        ;82A7B3|8D2E09  |00092E;
-    BRA .rollClearTile                                                ;82A7B6|80CC    |82A784;
+    BRA .roll_clear_tile                                                ;82A7B6|80CC    |82A784;
  
  
-.damageTile1D:
+.damage_tile1d:
     REP #$30                                                   ;82A7B8|C230    |      ;
     LDA.B strcVariables.n16Unk88                               ;82A7BA|A588    |000088;
-    BEQ .nextTile                                                ;82A7BC|F032    |82A7F0;
+    BEQ .next_tile                                                ;82A7BC|F032    |82A7F0;
     PHX                                                        ;82A7BE|DA      |      ;
     JSL.L fCore_GetRandomNumber                                ;82A7BF|22F98980|8089F9;
     SEP #$20                                                   ;82A7C3|E220    |      ;
     REP #$10                                                   ;82A7C5|C210    |      ;
     PLX                                                        ;82A7C7|FA      |      ;
     CMP.B #$00                                                 ;82A7C8|C900    |      ;
-    BNE .nextTile                                                ;82A7CA|D024    |82A7F0;
+    BNE .next_tile                                                ;82A7CA|D024    |82A7F0;
     LDA.B #$02                                                 ;82A7CC|A902    |      ;
     STA.L sFarmTilemap,X                                       ;82A7CE|9FE6A47E|7EA4E6;
-    BRA .nextTile                                                ;82A7D2|801C    |82A7F0;
+    BRA .next_tile                                                ;82A7D2|801C    |82A7F0;
  
  
-.damageTileLow:
+.damage_tile_low:
     REP #$30                                                   ;82A7D4|C230    |      ;
     LDA.B strcVariables.n16Unk8A                               ;82A7D6|A58A    |00008A;
-    BEQ .nextTile                                                ;82A7D8|F016    |82A7F0;
+    BEQ .next_tile                                                ;82A7D8|F016    |82A7F0;
     PHX                                                        ;82A7DA|DA      |      ;
     JSL.L fCore_GetRandomNumber                                ;82A7DB|22F98980|8089F9;
     SEP #$20                                                   ;82A7DF|E220    |      ;
     REP #$10                                                   ;82A7E1|C210    |      ;
     PLX                                                        ;82A7E3|FA      |      ;
     CMP.B #$00                                                 ;82A7E4|C900    |      ;
-    BNE .nextTile                                                ;82A7E6|D008    |82A7F0;
+    BNE .next_tile                                                ;82A7E6|D008    |82A7F0;
     LDA.B #$02                                                 ;82A7E8|A902    |      ;
     STA.L sFarmTilemap,X                                       ;82A7EA|9FE6A47E|7EA4E6;
-    BRA .nextTile                                                ;82A7EE|8000    |82A7F0;
+    BRA .next_tile                                                ;82A7EE|8000    |82A7F0;
  
  
-.nextTile:
+.next_tile:
     REP #$30                                                   ;82A7F0|C230    |      ;
     PLX                                                        ;82A7F2|FA      |      ;
     PLY                                                        ;82A7F3|7A      |      ;
@@ -362,161 +362,161 @@ fObjectMap_UpdateFarmTilesNewDay:
     SEP #$20                                                   ;82A82B|E220    |      ;
     LDA.L sFarmTilemap,X                                       ;82A82D|BFE6A47E|7EA4E6;
     BNE +                                                      ;82A831|D003    |82A836;
-    JMP.W .nextTile                                              ;82A833|4C69A9  |82A969;
+    JMP.W .next_tile                                              ;82A833|4C69A9  |82A969;
  
  
   + CMP.B #$03                                                 ;82A836|C903    |      ;
     BCS +                                                      ;82A838|B003    |82A83D;
-    JMP.W .rollSpawnTile03                                              ;82A83A|4C1BA9  |82A91B;
+    JMP.W .roll_spawn_tile03                                              ;82A83A|4C1BA9  |82A91B;
  
  
   + CMP.B #$A0                                                 ;82A83D|C9A0    |      ;
     BCC +                                                      ;82A83F|9003    |82A844;
-    JMP.W .nextTile                                              ;82A841|4C69A9  |82A969;
+    JMP.W .next_tile                                              ;82A841|4C69A9  |82A969;
  
  
   + CMP.B #$06                                                 ;82A844|C906    |      ;
     BNE +                                                      ;82A846|D003    |82A84B;
-    JMP.W .rollTile06Event                                              ;82A848|4C49A9  |82A949;
+    JMP.W .roll_tile06_event                                              ;82A848|4C49A9  |82A949;
  
  
   + CMP.B #$07                                                 ;82A84B|C907    |      ;
-    BEQ .checkRainMapFlag                                                ;82A84D|F055    |82A8A4;
+    BEQ .check_rain_map_flag                                                ;82A84D|F055    |82A8A4;
     CMP.B #$08                                                 ;82A84F|C908    |      ;
     BNE +                                                      ;82A851|D003    |82A856;
-    JMP.W .decrementTile                                              ;82A853|4CB4A8  |82A8B4;
+    JMP.W .decrement_tile                                              ;82A853|4CB4A8  |82A8B4;
  
  
   + CMP.B #$1E                                                 ;82A856|C91E    |      ;
-    BEQ .checkRainMapFlag                                                ;82A858|F04A    |82A8A4;
+    BEQ .check_rain_map_flag                                                ;82A858|F04A    |82A8A4;
     CMP.B #$1F                                                 ;82A85A|C91F    |      ;
     BNE +                                                      ;82A85C|D003    |82A861;
-    JMP.W .decrementTile                                              ;82A85E|4CB4A8  |82A8B4;
+    JMP.W .decrement_tile                                              ;82A85E|4CB4A8  |82A8B4;
  
  
   + CMP.B #$1D                                                 ;82A861|C91D    |      ;
     BNE +                                                      ;82A863|D003    |82A868;
-    JMP.W .nextTile                                              ;82A865|4C69A9  |82A969;
+    JMP.W .next_tile                                              ;82A865|4C69A9  |82A969;
  
  
   + CMP.B #$20                                                 ;82A868|C920    |      ;
     BCS +                                                      ;82A86A|B003    |82A86F;
-    JMP.W .nextTile                                              ;82A86C|4C69A9  |82A969;
+    JMP.W .next_tile                                              ;82A86C|4C69A9  |82A969;
  
  
   + CMP.B #$39                                                 ;82A86F|C939    |      ;
     BNE +                                                      ;82A871|D003    |82A876;
-    JMP.W .decrementTile                                              ;82A873|4CB4A8  |82A8B4;
+    JMP.W .decrement_tile                                              ;82A873|4CB4A8  |82A8B4;
  
  
   + CMP.B #$53                                                 ;82A876|C953    |      ;
     BNE +                                                      ;82A878|D003    |82A87D;
-    JMP.W .decrementTile                                              ;82A87A|4CB4A8  |82A8B4;
+    JMP.W .decrement_tile                                              ;82A87A|4CB4A8  |82A8B4;
  
  
   + CMP.B #$61                                                 ;82A87D|C961    |      ;
     BNE +                                                      ;82A87F|D003    |82A884;
-    JMP.W .decrementTile                                              ;82A881|4CB4A8  |82A8B4;
+    JMP.W .decrement_tile                                              ;82A881|4CB4A8  |82A8B4;
  
  
   + CMP.B #$6F                                                 ;82A884|C96F    |      ;
     BNE +                                                      ;82A886|D003    |82A88B;
-    JMP.W .decrementTile                                              ;82A888|4CB4A8  |82A8B4;
+    JMP.W .decrement_tile                                              ;82A888|4CB4A8  |82A8B4;
  
  
   + CMP.B #$79                                                 ;82A88B|C979    |      ;
     BNE +                                                      ;82A88D|D003    |82A892;
-    JMP.W .nextTile                                              ;82A88F|4C69A9  |82A969;
+    JMP.W .next_tile                                              ;82A88F|4C69A9  |82A969;
  
  
   + CMP.B #$7C                                                 ;82A892|C97C    |      ;
     BNE +                                                      ;82A894|D003    |82A899;
-    JMP.W .setTile73                                              ;82A896|4CCFA8  |82A8CF;
+    JMP.W .set_tile73                                              ;82A896|4CCFA8  |82A8CF;
  
  
   + CMP.B #$70                                                 ;82A899|C970    |      ;
-    BCS .incrementTileHigh                                                ;82A89B|B069    |82A906;
+    BCS .increment_tile_high                                                ;82A89B|B069    |82A906;
     AND.B #$01                                                 ;82A89D|2901    |      ;
-    BEQ .checkRainMapFlag                                                ;82A89F|F003    |82A8A4;
-    JMP.W .seasonalDecrement                                              ;82A8A1|4CDAA8  |82A8DA;
+    BEQ .check_rain_map_flag                                                ;82A89F|F003    |82A8A4;
+    JMP.W .seasonal_decrement                                              ;82A8A1|4CDAA8  |82A8DA;
  
  
-.checkRainMapFlag:
+.check_rain_map_flag:
     REP #$20                                                   ;82A8A4|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;82A8A6|AD9601  |000196;
     AND.W #$0002                                               ;82A8A9|290200  |      ;
     BEQ +                                                      ;82A8AC|F003    |82A8B1;
-    JMP.W .incrementTileHigh                                              ;82A8AE|4C06A9  |82A906;
+    JMP.W .increment_tile_high                                              ;82A8AE|4C06A9  |82A906;
  
  
-  + JMP.W .nextTile                                              ;82A8B1|4C69A9  |82A969;
+  + JMP.W .next_tile                                              ;82A8B1|4C69A9  |82A969;
  
  
-.decrementTile:
+.decrement_tile:
     REP #$20                                                   ;82A8B4|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;82A8B6|AD9601  |000196;
     AND.W #$0002                                               ;82A8B9|290200  |      ;
     BEQ +                                                      ;82A8BC|F003    |82A8C1;
-    JMP.W .nextTile                                              ;82A8BE|4C69A9  |82A969;
+    JMP.W .next_tile                                              ;82A8BE|4C69A9  |82A969;
  
  
   + SEP #$20                                                   ;82A8C1|E220    |      ;
     LDA.L sFarmTilemap,X                                       ;82A8C3|BFE6A47E|7EA4E6;
     DEC A                                                      ;82A8C7|3A      |      ;
     STA.L sFarmTilemap,X                                       ;82A8C8|9FE6A47E|7EA4E6;
-    JMP.W .nextTile                                              ;82A8CC|4C69A9  |82A969;
+    JMP.W .next_tile                                              ;82A8CC|4C69A9  |82A969;
  
  
-.setTile73:
+.set_tile73:
     SEP #$20                                                   ;82A8CF|E220    |      ;
     LDA.B #$73                                                 ;82A8D1|A973    |      ;
     STA.L sFarmTilemap,X                                       ;82A8D3|9FE6A47E|7EA4E6;
-    JMP.W .nextTile                                              ;82A8D7|4C69A9  |82A969;
+    JMP.W .next_tile                                              ;82A8D7|4C69A9  |82A969;
  
  
-.seasonalDecrement:
+.seasonal_decrement:
     SEP #$20                                                   ;82A8DA|E220    |      ;
     LDA.L nCurrentSeasonID                                     ;82A8DC|AF191F7F|7F1F19;
     CMP.B #$02                                                 ;82A8E0|C902    |      ;
-    BNE .incrementUnlessWinter                                                ;82A8E2|D00C    |82A8F0;
+    BNE .increment_unless_winter                                                ;82A8E2|D00C    |82A8F0;
     LDA.L sFarmTilemap,X                                       ;82A8E4|BFE6A47E|7EA4E6;
     DEC A                                                      ;82A8E8|3A      |      ;
     STA.L sFarmTilemap,X                                       ;82A8E9|9FE6A47E|7EA4E6;
-    JMP.W .nextTile                                              ;82A8ED|4C69A9  |82A969;
+    JMP.W .next_tile                                              ;82A8ED|4C69A9  |82A969;
  
  
-.incrementUnlessWinter:
+.increment_unless_winter:
     SEP #$20                                                   ;82A8F0|E220    |      ;
     LDA.L nCurrentSeasonID                                     ;82A8F2|AF191F7F|7F1F19;
     CMP.B #$03                                                 ;82A8F6|C903    |      ;
-    BEQ .nextTile                                                ;82A8F8|F06F    |82A969;
+    BEQ .next_tile                                                ;82A8F8|F06F    |82A969;
     LDA.L sFarmTilemap,X                                       ;82A8FA|BFE6A47E|7EA4E6;
     INC A                                                      ;82A8FE|1A      |      ;
     STA.L sFarmTilemap,X                                       ;82A8FF|9FE6A47E|7EA4E6;
-    JMP.W .checkRainMapFlag                                              ;82A903|4CA4A8  |82A8A4;
+    JMP.W .check_rain_map_flag                                              ;82A903|4CA4A8  |82A8A4;
  
  
-.incrementTileHigh:
+.increment_tile_high:
     SEP #$20                                                   ;82A906|E220    |      ;
     LDA.L nCurrentSeasonID                                     ;82A908|AF191F7F|7F1F19;
     CMP.B #$03                                                 ;82A90C|C903    |      ;
-    BEQ .nextTile                                                ;82A90E|F059    |82A969;
+    BEQ .next_tile                                                ;82A90E|F059    |82A969;
     LDA.L sFarmTilemap,X                                       ;82A910|BFE6A47E|7EA4E6;
     INC A                                                      ;82A914|1A      |      ;
     STA.L sFarmTilemap,X                                       ;82A915|9FE6A47E|7EA4E6;
-    BRA .nextTile                                                ;82A919|804E    |82A969;
+    BRA .next_tile                                                ;82A919|804E    |82A969;
  
  
-.rollSpawnTile03:
+.roll_spawn_tile03:
     SEP #$20                                                   ;82A91B|E220    |      ;
     LDA.L nCurrentSeasonID                                     ;82A91D|AF191F7F|7F1F19;
     CMP.B #$02                                                 ;82A921|C902    |      ;
-    BEQ .nextTile                                                ;82A923|F044    |82A969;
+    BEQ .next_tile                                                ;82A923|F044    |82A969;
     CMP.B #$03                                                 ;82A925|C903    |      ;
-    BEQ .nextTile                                                ;82A927|F040    |82A969;
+    BEQ .next_tile                                                ;82A927|F040    |82A969;
     LDA.L nCurrentDay                                          ;82A929|AF1B1F7F|7F1F1B;
     AND.B #$03                                                 ;82A92D|2903    |      ;
-    BNE .nextTile                                                ;82A92F|D038    |82A969;
+    BNE .next_tile                                                ;82A92F|D038    |82A969;
     REP #$10                                                   ;82A931|C210    |      ;
     PHX                                                        ;82A933|DA      |      ;
     JSL.L fGetRandomNumber                                     ;82A934|22388183|838138;
@@ -524,24 +524,24 @@ fObjectMap_UpdateFarmTilesNewDay:
     REP #$10                                                   ;82A93A|C210    |      ;
     PLX                                                        ;82A93C|FA      |      ;
     CMP.B #$00                                                 ;82A93D|C900    |      ;
-    BNE .nextTile                                                ;82A93F|D028    |82A969;
+    BNE .next_tile                                                ;82A93F|D028    |82A969;
     LDA.B #$03                                                 ;82A941|A903    |      ;
     STA.L sFarmTilemap,X                                       ;82A943|9FE6A47E|7EA4E6;
-    BRA .nextTile                                                ;82A947|8020    |82A969;
+    BRA .next_tile                                                ;82A947|8020    |82A969;
  
  
-.rollTile06Event:
+.roll_tile06_event:
     SEP #$20                                                   ;82A949|E220    |      ;
     LDA.B #$08                                                 ;82A94B|A908    |      ;
     JSL.L fCore_GetRandomNumber                                ;82A94D|22F98980|8089F9;
-    BNE .nextTile                                                ;82A951|D016    |82A969;
+    BNE .next_tile                                                ;82A951|D016    |82A969;
     REP #$20                                                   ;82A953|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;82A955|AD9601  |000196;
     ORA.W #$0400                                               ;82A958|090004  |      ;
     STA.W strcDialogDisplay.mapFlags                           ;82A95B|8D9601  |000196;
     %SetFlag(event6, $0200)
  
-.nextTile:
+.next_tile:
     REP #$30                                                   ;82A969|C230    |      ;
     PLX                                                        ;82A96B|FA      |      ;
     PLY                                                        ;82A96C|7A      |      ;
@@ -602,7 +602,7 @@ fObjectMap_EatingGrass:
     BEQ +                                                      ;82A9CD|F006    |82A9D5;
     CMP.B #$79                                                 ;82A9CF|C979    |      ;
     BEQ +                                                      ;82A9D1|F002    |82A9D5;
-    BRA .checkEatenGrass                                                ;82A9D3|8011    |82A9E6;
+    BRA .check_eaten_grass                                                ;82A9D3|8011    |82A9E6;
  
  
   + SEP #$20                                                   ;82A9D5|E220    |      ;
@@ -613,7 +613,7 @@ fObjectMap_EatingGrass:
     INC A                                                      ;82A9E2|1A      |      ;
     STA.W strcPlayerData.leftGrassToCut                        ;82A9E3|8D2E09  |00092E;
  
-.checkEatenGrass:
+.check_eaten_grass:
     REP #$30                                                   ;82A9E6|C230    |      ;
     PLX                                                        ;82A9E8|FA      |      ;
     PLY                                                        ;82A9E9|7A      |      ;

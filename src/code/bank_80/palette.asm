@@ -14,7 +14,7 @@ fPalette_SetNextHourPalette:
     SEP #$20                                                   ;808FD9|E220    |      ;
     LDA.L nCurrentTimeID                                       ;808FDB|AF1C1F7F|7F1F1C;
     CMP.B #$12                                                 ;808FDF|C912    |      ;
-    BCC .useIndexedPalette                                                ;808FE1|900F    |808FF2;
+    BCC .use_indexed_palette                                                ;808FE1|900F    |808FF2;
     REP #$20                                                   ;808FE3|C220    |      ;
     LDA.W #$0B00                                               ;808FE5|A9000B  |      ;
     STA.B ptrPaletteNext                                       ;808FE8|8504    |000004;
@@ -24,7 +24,7 @@ fPalette_SetNextHourPalette:
     BRA .return                                                ;808FF0|8019    |80900B;
  
  
-.useIndexedPalette:
+.use_indexed_palette:
     REP #$20                                                   ;808FF2|C220    |      ;
     LDA.B strcVariables.n16Temp1                               ;808FF4|A57E    |00007E;
     ASL A                                                      ;808FF6|0A      |      ;
@@ -106,7 +106,7 @@ fPallete_ChangeHandler:
     LDA.B [ptrPaletteNext],Y                                   ;809080|B704    |000004;
     AND.W #$001F                                               ;809082|291F00  |      ;
     CMP.B strcVariables.n16Temp1                               ;809085|C57E    |00007E;
-    BEQ .adjustGreen                                                ;809087|F00E    |809097;
+    BEQ .adjust_green                                                ;809087|F00E    |809097;
     BCS .inc7E                                                 ;809089|B004    |80908F;
     DEC.B strcVariables.n16Temp1                               ;80908B|C67E    |00007E;
     BRA .store01to92                                           ;80908D|8002    |809091;
@@ -120,7 +120,7 @@ fPallete_ChangeHandler:
     LDA.B #$01                                                 ;809093|A901    |      ;
     STA.B strcVariables.n8Temp1                                ;809095|8592    |000092;
  
-.adjustGreen:
+.adjust_green:
     REP #$20                                                   ;809097|C220    |      ;
     LDA.L sPalette_7F0D00,X                                    ;809099|BF000D7F|7F0D00;
     AND.W #$03E0                                               ;80909D|29E003  |      ;
@@ -138,7 +138,7 @@ fPallete_ChangeHandler:
     LSR A                                                      ;8090AF|4A      |      ;
     LSR A                                                      ;8090B0|4A      |      ;
     CMP.B strcVariables.n16Temp2                               ;8090B1|C580    |000080;
-    BEQ .adjustBlue                                                ;8090B3|F00E    |8090C3;
+    BEQ .adjust_blue                                                ;8090B3|F00E    |8090C3;
     BCS .inc80                                                 ;8090B5|B004    |8090BB;
     DEC.B strcVariables.n16Temp2                               ;8090B7|C680    |000080;
     BRA .store011to92ex                                        ;8090B9|8002    |8090BD;
@@ -152,7 +152,7 @@ fPallete_ChangeHandler:
     LDA.B #$01                                                 ;8090BF|A901    |      ;
     STA.B strcVariables.n8Temp1                                ;8090C1|8592    |000092;
  
-.adjustBlue:
+.adjust_blue:
     REP #$20                                                   ;8090C3|C220    |      ;
     LDA.L sPalette_7F0D00,X                                    ;8090C5|BF000D7F|7F0D00;
     AND.W #$7C00                                               ;8090C9|29007C  |      ;
@@ -180,7 +180,7 @@ fPallete_ChangeHandler:
     LSR A                                                      ;8090E5|4A      |      ;
     LSR A                                                      ;8090E6|4A      |      ;
     CMP.B strcVariables.n16Temp3                               ;8090E7|C582    |000082;
-    BEQ .packColor                                                ;8090E9|F00E    |8090F9;
+    BEQ .pack_color                                                ;8090E9|F00E    |8090F9;
     BCS .inc82                                                 ;8090EB|B004    |8090F1;
     DEC.B strcVariables.n16Temp3                               ;8090ED|C682    |000082;
     BRA .store01to92ex2                                        ;8090EF|8002    |8090F3;
@@ -194,7 +194,7 @@ fPallete_ChangeHandler:
     LDA.B #$01                                                 ;8090F5|A901    |      ;
     STA.B strcVariables.n8Temp1                                ;8090F7|8592    |000092;
  
-.packColor:
+.pack_color:
     REP #$20                                                   ;8090F9|C220    |      ;
     ASL.B strcVariables.n16Temp2                               ;8090FB|0680    |000080;
     ASL.B strcVariables.n16Temp2                               ;8090FD|0680    |000080;
@@ -226,7 +226,7 @@ fPallete_ChangeHandler:
 .exit:
     SEP #$20                                                   ;809130|E220    |      ;
     LDA.B strcVariables.n8Temp1                                ;809132|A592    |000092;
-    BEQ .fadeFinished                                                ;809134|F021    |809157;
+    BEQ .fade_finished                                                ;809134|F021    |809157;
     SEP #$20                                                   ;809136|E220    |      ;
     LDA.B #$06                                                 ;809138|A906    |      ;
     STA.B strcSystem.arrayIndex                                ;80913A|8527    |000027;
@@ -246,7 +246,7 @@ fPallete_ChangeHandler:
     RTL                                                        ;809156|6B      |      ;
  
  
-.fadeFinished:
+.fade_finished:
     REP #$20                                                   ;809157|C220    |      ;
     STZ.B ptrPaletteNext                                       ;809159|6404    |000004;
     SEP #$20                                                   ;80915B|E220    |      ;
@@ -282,14 +282,14 @@ fPalette_WriteColorToBuffer:
     TAX                                                        ;809183|AA      |      ;
     SEP #$20                                                   ;809184|E220    |      ;
     LDA.B strcVariables.n8Temp1                                ;809186|A592    |000092;
-    BNE .writeSecondBuffer                                                ;809188|D00A    |809194;
+    BNE .write_second_buffer                                                ;809188|D00A    |809194;
     REP #$20                                                   ;80918A|C220    |      ;
     LDA.B strcVariables.n16Temp3                               ;80918C|A582    |000082;
     STA.L sPalette_7F0900,X                                    ;80918E|9F00097F|7F0900;
     BRA .return                                                ;809192|8008    |80919C;
  
  
-.writeSecondBuffer:
+.write_second_buffer:
     REP #$20                                                   ;809194|C220    |      ;
     LDA.B strcVariables.n16Temp3                               ;809196|A582    |000082;
     STA.L sPalette_7F0B00,X                                    ;809198|9F000B7F|7F0B00;
@@ -316,7 +316,7 @@ fPalette_ModifyPalette:
     TAX                                                        ;8091B1|AA      |      ;
     SEP #$20                                                   ;8091B2|E220    |      ;
     LDA.B strcVariables.n8Temp1                                ;8091B4|A592    |000092;
-    BNE .writeSecondBuffer                                                ;8091B6|D00E    |8091C6;
+    BNE .write_second_buffer                                                ;8091B6|D00E    |8091C6;
     REP #$20                                                   ;8091B8|C220    |      ;
     LDA.B strcVariables.n16Temp3                               ;8091BA|A582    |000082;
     STA.L sPalette_7F0900,X                                    ;8091BC|9F00097F|7F0900;
@@ -324,7 +324,7 @@ fPalette_ModifyPalette:
     BRA .return                                                ;8091C4|8008    |8091CE;
  
  
-.writeSecondBuffer:
+.write_second_buffer:
     REP #$20                                                   ;8091C6|C220    |      ;
     LDA.B strcVariables.n16Temp3                               ;8091C8|A582    |000082;
     STA.L sPalette_7F0B00,X                                    ;8091CA|9F000B7F|7F0B00;
@@ -592,28 +592,28 @@ fPalette_LoadSpritePallete:
     STZ.B strcVariables.n16Temp1                               ;8093A6|647E    |00007E;
     SEP #$20                                                   ;8093A8|E220    |      ;
     LDA.B strcVariables.n8Temp1                                ;8093AA|A592    |000092;
-    BNE .useNightVariant                                                ;8093AC|D012    |8093C0;
+    BNE .use_night_variant                                                ;8093AC|D012    |8093C0;
     LDA.L nCurrentTimeID                                       ;8093AE|AF1C1F7F|7F1F1C;
     CMP.B #$12                                                 ;8093B2|C912    |      ;
-    BCC .selectSeason                                                ;8093B4|9011    |8093C7;
+    BCC .select_season                                                ;8093B4|9011    |8093C7;
     LDA.B strcMap.loadAreaId                                   ;8093B6|A522    |000022;
     CMP.B #$31                                                 ;8093B8|C931    |      ;
-    BCS .useNightVariant                                                ;8093BA|B004    |8093C0;
+    BCS .use_night_variant                                                ;8093BA|B004    |8093C0;
     CMP.B #$15                                                 ;8093BC|C915    |      ;
-    BCS .selectSeason                                                ;8093BE|B007    |8093C7;
+    BCS .select_season                                                ;8093BE|B007    |8093C7;
  
-.useNightVariant:
+.use_night_variant:
     REP #$20                                                   ;8093C0|C220    |      ;
     LDA.W #$0004                                               ;8093C2|A90400  |      ;
     STA.B strcVariables.n16Temp1                               ;8093C5|857E    |00007E;
  
-.selectSeason:
+.select_season:
     SEP #$20                                                   ;8093C7|E220    |      ;
     LDA.B #$00                                                 ;8093C9|A900    |      ;
     XBA                                                        ;8093CB|EB      |      ;
     LDA.W strcMap.loadAreaId                                   ;8093CC|AD2200  |000022;
     CMP.B #$04                                                 ;8093CF|C904    |      ;
-    BCS .seasonFromAreaIndex                                                ;8093D1|B00C    |8093DF;
+    BCS .season_from_area_index                                                ;8093D1|B00C    |8093DF;
  
 .getSeasonId:
     SEP #$20                                                   ;8093D3|E220    |      ;
@@ -623,7 +623,7 @@ fPalette_LoadSpritePallete:
     BRA .loadData                                              ;8093DD|8012    |8093F1;
  
  
-.seasonFromAreaIndex:
+.season_from_area_index:
     SEP #$20                                                   ;8093DF|E220    |      ;
     CMP.B #$10                                                 ;8093E1|C910    |      ;
     BCC .getSeasonId                                           ;8093E3|90EE    |8093D3;
@@ -665,17 +665,17 @@ fPalette_LoadSpritePallete:
     STZ.B strcVariables.n16Temp1                               ;80943D|647E    |00007E;
     SEP #$20                                                   ;80943F|E220    |      ;
     LDA.B strcVariables.n8Temp1                                ;809441|A592    |000092;
-    BNE .useNightMarriedVariant                                                ;809443|D012    |809457;
+    BNE .use_night_married_variant                                                ;809443|D012    |809457;
     LDA.L nCurrentTimeID                                       ;809445|AF1C1F7F|7F1F1C;
     CMP.B #$12                                                 ;809449|C912    |      ;
     BCC .checkPregnacy                                         ;80944B|9013    |809460;
     LDA.B strcMap.loadAreaId                                   ;80944D|A522    |000022;
     CMP.B #$31                                                 ;80944F|C931    |      ;
-    BCS .useNightMarriedVariant                                                ;809451|B004    |809457;
+    BCS .use_night_married_variant                                                ;809451|B004    |809457;
     CMP.B #$15                                                 ;809453|C915    |      ;
     BCS .checkPregnacy                                         ;809455|B009    |809460;
  
-.useNightMarriedVariant:
+.use_night_married_variant:
     REP #$20                                                   ;809457|C220    |      ;
     LDA.W #$0006                                               ;809459|A90600  |      ;
     STA.B strcVariables.n16Temp1                               ;80945C|857E    |00007E;

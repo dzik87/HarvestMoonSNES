@@ -696,7 +696,7 @@ fMainMenu_StateLogoScrollHorizontal:
     SEP #$20                                                   ;82DA8C|E220    |      ;
     LDA.B strcVariables.n8Temp3                                ;82DA8E|A594    |000094;
     AND.B #$01                                                 ;82DA90|2901    |      ;
-    BNE .advanceCounter                                                ;82DA92|D012    |82DAA6;
+    BNE .advance_counter                                                ;82DA92|D012    |82DAA6;
     REP #$20                                                   ;82DA94|C220    |      ;
     LDA.W strcBGScrool.BG2HorOffs                              ;82DA96|AD4001  |000140;
     INC A                                                      ;82DA99|1A      |      ;
@@ -706,7 +706,7 @@ fMainMenu_StateLogoScrollHorizontal:
     DEC A                                                      ;82DAA2|3A      |      ;
     STA.W strcBGScrool.BG1HorOffs                              ;82DAA3|8D3C01  |00013C;
  
-.advanceCounter:
+.advance_counter:
     SEP #$20                                                   ;82DAA6|E220    |      ;
     INC.B strcVariables.n8Temp3                                ;82DAA8|E694    |000094;
     JML.L fMainMenu_EndFrame                                      ;82DAAA|5C71D882|82D871;
@@ -718,7 +718,7 @@ fMainMenu_StateLogoScrollHorizontal:
     STA.B strcVariables.u8Unk96                                ;82DAB3|8596    |000096;
     CMP.B #$3C                                                 ;82DAB5|C93C    |      ;
     BEQ +                                                      ;82DAB7|F004    |82DABD;
-    JML.L .advanceCounter                                              ;82DAB9|5CA6DA82|82DAA6;
+    JML.L .advance_counter                                              ;82DAB9|5CA6DA82|82DAA6;
  
  
   + SEP #$20                                                   ;82DABD|E220    |      ;
@@ -1593,14 +1593,14 @@ fMainMenu_NewGameSlotSelect_WaitFrame:
     JSL.L fGameEngine_LoadContinue
     REP #$30
     CPX.W #$0000
-    BEQ .resetScrollXEu
-    BRA .loadSlotPaletteAnimsEu
-.resetScrollXEu:
+    BEQ .reset_scroll_x_eu
+    BRA .load_slot_palette_anims_eu
+.reset_scroll_x_eu:
     REP #$30
     LDA.W #$0000
     STA.W strcBGScrool.BG1HorOffs
-    BRA .loadSlotPaletteAnimsEu
-.loadSlotPaletteAnimsEu:
+    BRA .load_slot_palette_anims_eu
+.load_slot_palette_anims_eu:
     REP #$20
     SEP #$10
     LDA.W #$F2CB
@@ -1645,16 +1645,16 @@ fMainMenu_NewGameSlotSelect_WaitFrame:
     else
     BEQ +                                                      ;82E123|F002    |82E127;
     endif
-    BRA .highlightSlot                                                ;82E125|800A    |82E131;
+    BRA .highlight_slot                                                ;82E125|800A    |82E131;
  
  
   + REP #$30                                                   ;82E127|C230    |      ;
     LDA.W #$0000                                               ;82E129|A90000  |      ;
     STA.W strcBGScrool.BG1HorOffs                              ;82E12C|8D3C01  |00013C;
-    BRA .highlightSlot                                                ;82E12F|8000    |82E131;
+    BRA .highlight_slot                                                ;82E12F|8000    |82E131;
  
  
-.highlightSlot:
+.highlight_slot:
     REP #$20                                                   ;82E131|C220    |      ;
     SEP #$10                                                   ;82E133|E210    |      ;
     if !REGION_EU
@@ -1674,7 +1674,7 @@ fMainMenu_NewGameSlotSelect_WaitFrame:
     REP #$20                                                   ;82E14C|C220    |      ;
     SEP #$10                                                   ;82E14E|E210    |      ;
     if !REGION_EU
-.setSlotNormalPalette:
+.set_slot_normal_palette:
     LDA.W #$F2CB
     else
     LDA.W #aMainMenu_PalAnimSlotNormal                     ;82E150|A9F9F2  |      ;
@@ -1703,16 +1703,16 @@ fMainMenu_NewGameSlotSelect_MoveCursorSlot2:
     else
     BEQ +                                                      ;82E179|F002    |82E17D;
     endif
-    BRA .setPaletteAnims                                                ;82E17B|800A    |82E187;
+    BRA .set_palette_anims                                                ;82E17B|800A    |82E187;
  
  
   + REP #$30                                                   ;82E17D|C230    |      ;
     LDA.W #$0000                                               ;82E17F|A90000  |      ;
     STA.W strcBGScrool.BG1HorOffs                              ;82E182|8D3C01  |00013C;
-    BRA .setPaletteAnims                                                ;82E185|8000    |82E187;
+    BRA .set_palette_anims                                                ;82E185|8000    |82E187;
  
  
-.setPaletteAnims:
+.set_palette_anims:
     REP #$20                                                   ;82E187|C220    |      ;
     SEP #$10                                                   ;82E189|E210    |      ;
     LDA.W #aMainMenu_PalAnimSlotNormal                     ;82E18B|A9F9F2  |      ;
@@ -1743,7 +1743,7 @@ fMainMenu_NewGameSlotSelect_FrameTail:
     SEP #$20                                                   ;82E1BD|E220    |      ;
     LDA.B strcVariables.u8Unk96                                ;82E1BF|A596    |000096;
     CMP.B #$01                                                 ;82E1C1|C901    |      ;
-    BNE .incrementTimer                                                ;82E1C3|D00C    |82E1D1;
+    BNE .increment_timer                                                ;82E1C3|D00C    |82E1D1;
     STZ.B strcVariables.u8Unk96                                ;82E1C5|6496    |000096;
     REP #$20                                                   ;82E1C7|C220    |      ;
     INC.W strcBGScrool.BG2HorOffs                              ;82E1C9|EE4001  |000140;
@@ -1751,7 +1751,7 @@ fMainMenu_NewGameSlotSelect_FrameTail:
     BRA +                                                      ;82E1CF|8004    |82E1D5;
  
  
-.incrementTimer:
+.increment_timer:
     SEP #$20                                                   ;82E1D1|E220    |      ;
     INC.B strcVariables.u8Unk96                                ;82E1D3|E696    |000096;
  
@@ -1824,7 +1824,7 @@ fMainMenu_StateLoadGameSlotSelect:
     SEP #$20                                                   ;82E272|E220    |      ;
     LDA.W $098E+!RAM_SHIFT                                 ;82E274|AD8E09  |00098E;
     BEQ +                                                      ;82E277|F004    |82E27D;
-    JML.L .highlightSecondSlot                                              ;82E279|5CB7E282|82E2B7;
+    JML.L .highlight_second_slot                                              ;82E279|5CB7E282|82E2B7;
  
  
   + REP #$20                                                   ;82E27D|C220    |      ;
@@ -1851,10 +1851,10 @@ fMainMenu_StateLoadGameSlotSelect:
     LDX.B #$05                                                 ;82E2AB|A205    |      ;
     LDY.B #$01                                                 ;82E2AD|A001    |      ;
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82E2AF|22488E80|808E48;
-    JML.L .resetScrollAndFadeIn                                              ;82E2B3|5CEDE282|82E2ED;
+    JML.L .reset_scroll_and_fade_in                                              ;82E2B3|5CEDE282|82E2ED;
  
  
-.highlightSecondSlot:
+.highlight_second_slot:
     REP #$20                                                   ;82E2B7|C220    |      ;
     SEP #$10                                                   ;82E2B9|E210    |      ;
     LDA.W #aMainMenu_PalAnimSlotNormal                     ;82E2BB|A9F9F2  |      ;
@@ -1880,7 +1880,7 @@ fMainMenu_StateLoadGameSlotSelect:
     LDY.B #$01                                                 ;82E2E7|A001    |      ;
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82E2E9|22488E80|808E48;
  
-.resetScrollAndFadeIn:
+.reset_scroll_and_fade_in:
     REP #$20                                                   ;82E2ED|C220    |      ;
     STZ.W strcBGScrool.BG1HorOffs                              ;82E2EF|9C3C01  |00013C;
     STZ.W strcBGScrool.BG1VerOffs                              ;82E2F2|9C3E01  |00013E;
@@ -1987,7 +1987,7 @@ fMainMenu_LoadGameSlotSelect_FrameTail:
     SEP #$20                                                   ;82E3D1|E220    |      ;
     LDA.B strcVariables.u8Unk96                                ;82E3D3|A596    |000096;
     CMP.B #$01                                                 ;82E3D5|C901    |      ;
-    BNE .incrementTimer                                                ;82E3D7|D00C    |82E3E5;
+    BNE .increment_timer                                                ;82E3D7|D00C    |82E3E5;
     STZ.B strcVariables.u8Unk96                                ;82E3D9|6496    |000096;
     REP #$20                                                   ;82E3DB|C220    |      ;
     INC.W strcBGScrool.BG2HorOffs                              ;82E3DD|EE4001  |000140;
@@ -1995,7 +1995,7 @@ fMainMenu_LoadGameSlotSelect_FrameTail:
     BRA +                                                      ;82E3E3|8004    |82E3E9;
  
  
-.incrementTimer:
+.increment_timer:
     SEP #$20                                                   ;82E3E5|E220    |      ;
     INC.B strcVariables.u8Unk96                                ;82E3E7|E696    |000096;
  

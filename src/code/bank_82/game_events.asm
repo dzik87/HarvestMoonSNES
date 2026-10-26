@@ -218,21 +218,21 @@ fWeather_SetForecastDialogIndex:
     REP #$20                                                   ;8281D6|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;8281D8|AD9601  |000196;
     AND.W #$0010                                               ;8281DB|291000  |      ;
-    BNE .useIndex0B                                                ;8281DE|D00A    |8281EA;
+    BNE .use_index0b                                                ;8281DE|D00A    |8281EA;
     LDA.W strcDialogDisplay.mapFlags                           ;8281E0|AD9601  |000196;
     AND.W #$0200                                               ;8281E3|290002  |      ;
-    BNE .useIndex04                                                ;8281E6|D00B    |8281F3;
+    BNE .use_index04                                                ;8281E6|D00B    |8281F3;
     BRA .return                                                ;8281E8|8012    |8281FC;
  
  
-.useIndex0B:
+.use_index0b:
     SEP #$20                                                   ;8281EA|E220    |      ;
     LDA.B #$0B                                                 ;8281EC|A90B    |      ;
     STA.W nWeatherDialogIdIndex                                ;8281EE|8D9009  |000990;
     BRA .return                                                ;8281F1|8009    |8281FC;
  
  
-.useIndex04:
+.use_index04:
     SEP #$20                                                   ;8281F3|E220    |      ;
     LDA.B #$04                                                 ;8281F5|A904    |      ;
     STA.W nWeatherDialogIdIndex                                ;8281F7|8D9009  |000990;
@@ -250,25 +250,25 @@ fObjectMap_ApplyHuricaneDamageByMapFlags:
     REP #$30                                                   ;828209|C230    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;82820B|AD9601  |000196;
     AND.W #$0002                                               ;82820E|290200  |      ;
-    BNE .damageType0                                                ;828211|D021    |828234;
+    BNE .damage_type0                                                ;828211|D021    |828234;
     LDA.W strcDialogDisplay.mapFlags                           ;828213|AD9601  |000196;
     AND.W #$0008                                               ;828216|290800  |      ;
-    BNE .damageType1                                                ;828219|D027    |828242;
+    BNE .damage_type1                                                ;828219|D027    |828242;
     LDA.W strcDialogDisplay.mapFlags                           ;82821B|AD9601  |000196;
     AND.W #$0010                                               ;82821E|291000  |      ;
-    BNE .damageType2                                                ;828221|D02D    |828250;
+    BNE .damage_type2                                                ;828221|D02D    |828250;
     LDA.W strcDialogDisplay.mapFlags                           ;828223|AD9601  |000196;
     AND.W #$0100                                               ;828226|290001  |      ;
-    BNE .noDamage                                                ;828229|D033    |82825E;
+    BNE .no_damage                                                ;828229|D033    |82825E;
     LDA.W strcDialogDisplay.mapFlags                           ;82822B|AD9601  |000196;
     AND.W #$0200                                               ;82822E|290002  |      ;
-    BNE .damageType3                                                ;828231|D02D    |828260;
+    BNE .damage_type3                                                ;828231|D02D    |828260;
  
 .return:
     RTL                                                        ;828233|6B      |      ;
  
  
-.damageType0:
+.damage_type0:
     REP #$20                                                   ;828234|C220    |      ;
     LDA.W #$0000                                               ;828236|A90000  |      ;
     JSR.W fObjectMap_GetHuricaneDamageArgs                                   ;828239|207082  |828270;
@@ -276,7 +276,7 @@ fObjectMap_ApplyHuricaneDamageByMapFlags:
     BRA .return                                                ;828240|80F1    |828233;
  
  
-.damageType1:
+.damage_type1:
     REP #$20                                                   ;828242|C220    |      ;
     LDA.W #$0001                                               ;828244|A90100  |      ;
     JSR.W fObjectMap_GetHuricaneDamageArgs                                   ;828247|207082  |828270;
@@ -284,7 +284,7 @@ fObjectMap_ApplyHuricaneDamageByMapFlags:
     BRA .return                                                ;82824E|80E3    |828233;
  
  
-.damageType2:
+.damage_type2:
     REP #$20                                                   ;828250|C220    |      ;
     LDA.W #$0002                                               ;828252|A90200  |      ;
     JSR.W fObjectMap_GetHuricaneDamageArgs                                   ;828255|207082  |828270;
@@ -292,11 +292,11 @@ fObjectMap_ApplyHuricaneDamageByMapFlags:
     BRA .return                                                ;82825C|80D5    |828233;
  
  
-.noDamage:
+.no_damage:
     BRA .return                                                ;82825E|80D3    |828233;
  
  
-.damageType3:
+.damage_type3:
     REP #$20                                                   ;828260|C220    |      ;
     LDA.W #$0003                                               ;828262|A90300  |      ;
     JSR.W fObjectMap_GetHuricaneDamageArgs                                   ;828265|207082  |828270;
@@ -485,13 +485,13 @@ fNextDayHandler:
  
   + REP #$20                                                   ;828482|C220    |      ;
     %CheckFlag(event2, $0080)
-    BEQ .checkEvent3Flag0800                                                ;82848B|F055    |8284E2;
+    BEQ .check_event3_flag0800                                                ;82848B|F055    |8284E2;
     SEP #$20                                                   ;82848D|E220    |      ;
     LDA.L nConstructionDayCounter                              ;82848F|AF351F7F|7F1F35;
     INC A                                                      ;828493|1A      |      ;
     STA.L nConstructionDayCounter                              ;828494|8F351F7F|7F1F35;
     CMP.B #$04                                                 ;828498|C904    |      ;
-    BNE .checkEvent3Flag0800                                                ;82849A|D046    |8284E2;
+    BNE .check_event3_flag0800                                                ;82849A|D046    |8284E2;
     REP #$30                                                   ;82849C|C230    |      ;
     %SetFlag(event2, $0100)
     REP #$20                                                   ;8284A9|C220    |      ;
@@ -499,17 +499,17 @@ fNextDayHandler:
     STA.L nReqWoodForExpansion                                 ;8284AE|8F0E1F7F|7F1F0E;
     %UnsetFlag(event2, $0080)
     %CheckFlag(event1, $0040)
-    BEQ .setEvent1Flag0040                                                ;8284C4|F00F    |8284D5;
+    BEQ .set_event1_flag0040                                                ;8284C4|F00F    |8284D5;
     REP #$30                                                   ;8284C6|C230    |      ;
     %SetFlag(event1, $0080)
-    BRA .checkEvent3Flag0800                                                ;8284D3|800D    |8284E2;
+    BRA .check_event3_flag0800                                                ;8284D3|800D    |8284E2;
  
  
-.setEvent1Flag0040:
+.set_event1_flag0040:
     REP #$30                                                   ;8284D5|C230    |      ;
     %SetFlag(event1, $0040)
  
-.checkEvent3Flag0800:
+.check_event3_flag0800:
     REP #$30                                                   ;8284E2|C230    |      ;
     %CheckFlag(event3, $0800)
     BEQ +                                                      ;8284EB|F016    |828503;
@@ -527,29 +527,29 @@ fNextDayHandler:
  
   + REP #$30                                                   ;828525|C230    |      ;
     %CheckFlag(event4, $0080)
-    BEQ .checkEvent4Flag0400                                                ;82852E|F04F    |82857F;
+    BEQ .check_event4_flag0400                                                ;82852E|F04F    |82857F;
     %UnsetFlag(event4, $0080)
     %CheckFlag(event4, $0100)
-    BNE .removeToolTwo                                                ;828542|D00D    |828551;
+    BNE .remove_tool_two                                                ;828542|D00D    |828551;
     %SetFlag(event4, $0102)
-    BRA .checkEvent4Flag0400                                                ;82854F|802E    |82857F;
+    BRA .check_event4_flag0400                                                ;82854F|802E    |82857F;
  
  
-.removeToolTwo:
+.remove_tool_two:
     SEP #$20                                                   ;828551|E220    |      ;
     LDA.W strcPlayerData.toolEquipped                          ;828553|AD2109  |000921;
     CMP.B #$02                                                 ;828556|C902    |      ;
-    BNE .checkSecondTool                                                ;828558|D003    |82855D;
+    BNE .check_second_tool                                                ;828558|D003    |82855D;
     STZ.W strcPlayerData.toolEquipped                          ;82855A|9C2109  |000921;
  
-.checkSecondTool:
+.check_second_tool:
     SEP #$20                                                   ;82855D|E220    |      ;
     LDA.W strcPlayerData.toolSecond                            ;82855F|AD2309  |000923;
     CMP.B #$02                                                 ;828562|C902    |      ;
-    BNE .updateShedItems                                                ;828564|D003    |828569;
+    BNE .update_shed_items                                                ;828564|D003    |828569;
     STZ.W strcPlayerData.toolSecond                            ;828566|9C2309  |000923;
  
-.updateShedItems:
+.update_shed_items:
     SEP #$20                                                   ;828569|E220    |      ;
     LDA.L strcShedItems.row1                                   ;82856B|AF001F7F|7F1F00;
     AND.B #$FD                                                 ;82856F|29FD    |      ;
@@ -558,7 +558,7 @@ fNextDayHandler:
     ORA.B #$02                                                 ;828579|0902    |      ;
     STA.L strcShedItems.row3                                   ;82857B|8F021F7F|7F1F02;
  
-.checkEvent4Flag0400:
+.check_event4_flag0400:
     REP #$30                                                   ;82857F|C230    |      ;
     %CheckFlag(event4, $0400)
     BEQ +                                                      ;828588|F01F    |8285A9;
@@ -774,7 +774,7 @@ fEvents_UpdateMarriageAndChildGrowth:
     LDA.L nLove_Maria                                          ;828837|AF1F1F7F|7F1F1F;
     CMP.W #$01C2                                               ;82883B|C9C201  |      ;
     BCC +                                                      ;82883E|9003    |828843;
-    JMP.W .checkChildEligibility                                              ;828840|4CE788  |8288E7;
+    JMP.W .check_child_eligibility                                              ;828840|4CE788  |8288E7;
  
  
   + JMP.W .canHaveSecondChild                                  ;828843|4C2789  |828927;
@@ -785,7 +785,7 @@ fEvents_UpdateMarriageAndChildGrowth:
     LDA.L nLove_Maria                                          ;828848|AF1F1F7F|7F1F1F;
     CMP.W #$028A                                               ;82884C|C98A02  |      ;
     BCC +                                                      ;82884F|9003    |828854;
-    JMP.W .checkChildEligibility                                              ;828851|4CE788  |8288E7;
+    JMP.W .check_child_eligibility                                              ;828851|4CE788  |8288E7;
  
  
   + JMP.W .canHaveSecondChild                                  ;828854|4C2789  |828927;
@@ -797,14 +797,14 @@ fEvents_UpdateMarriageAndChildGrowth:
     BNE +                                                      ;828860|D00C    |82886E;
     LDA.L nLove_Ann                                            ;828862|AF211F7F|7F1F21;
     CMP.W #$01C2                                               ;828866|C9C201  |      ;
-    BCS .checkChildEligibility                                                ;828869|B07C    |8288E7;
+    BCS .check_child_eligibility                                                ;828869|B07C    |8288E7;
     JMP.W .canHaveSecondChild                                  ;82886B|4C2789  |828927;
  
  
   + REP #$30                                                   ;82886E|C230    |      ;
     LDA.L nLove_Ann                                            ;828870|AF211F7F|7F1F21;
     CMP.W #$028A                                               ;828874|C98A02  |      ;
-    BCS .checkChildEligibility                                                ;828877|B06E    |8288E7;
+    BCS .check_child_eligibility                                                ;828877|B06E    |8288E7;
     JMP.W .canHaveSecondChild                                  ;828879|4C2789  |828927;
  
  
@@ -814,14 +814,14 @@ fEvents_UpdateMarriageAndChildGrowth:
     BNE +                                                      ;828885|D00C    |828893;
     LDA.L nLove_Nina                                           ;828887|AF231F7F|7F1F23;
     CMP.W #$01C2                                               ;82888B|C9C201  |      ;
-    BCS .checkChildEligibility                                                ;82888E|B057    |8288E7;
+    BCS .check_child_eligibility                                                ;82888E|B057    |8288E7;
     JMP.W .canHaveSecondChild                                  ;828890|4C2789  |828927;
  
  
   + REP #$30                                                   ;828893|C230    |      ;
     LDA.L nLove_Nina                                           ;828895|AF231F7F|7F1F23;
     CMP.W #$028A                                               ;828899|C98A02  |      ;
-    BCS .checkChildEligibility                                                ;82889C|B049    |8288E7;
+    BCS .check_child_eligibility                                                ;82889C|B049    |8288E7;
     JMP.W .canHaveSecondChild                                  ;82889E|4C2789  |828927;
  
  
@@ -831,14 +831,14 @@ fEvents_UpdateMarriageAndChildGrowth:
     BNE +                                                      ;8288AA|D00B    |8288B7;
     LDA.L nLove_Ellen                                          ;8288AC|AF251F7F|7F1F25;
     CMP.W #$01C2                                               ;8288B0|C9C201  |      ;
-    BCS .checkChildEligibility                                                ;8288B3|B032    |8288E7;
+    BCS .check_child_eligibility                                                ;8288B3|B032    |8288E7;
     BRA .canHaveSecondChild                                    ;8288B5|8070    |828927;
  
  
   + REP #$30                                                   ;8288B7|C230    |      ;
     LDA.L nLove_Ellen                                          ;8288B9|AF251F7F|7F1F25;
     CMP.W #$028A                                               ;8288BD|C98A02  |      ;
-    BCS .checkChildEligibility                                                ;8288C0|B025    |8288E7;
+    BCS .check_child_eligibility                                                ;8288C0|B025    |8288E7;
     BRA .canHaveSecondChild                                    ;8288C2|8063    |828927;
  
  
@@ -848,18 +848,18 @@ fEvents_UpdateMarriageAndChildGrowth:
     BNE +                                                      ;8288CD|D00B    |8288DA;
     LDA.L nLove_Eve                                            ;8288CF|AF271F7F|7F1F27;
     CMP.W #$01C2                                               ;8288D3|C9C201  |      ;
-    BCS .checkChildEligibility                                                ;8288D6|B00F    |8288E7;
+    BCS .check_child_eligibility                                                ;8288D6|B00F    |8288E7;
     BRA .canHaveSecondChild                                    ;8288D8|804D    |828927;
  
  
   + REP #$30                                                   ;8288DA|C230    |      ;
     LDA.L nLove_Eve                                            ;8288DC|AF271F7F|7F1F27;
     CMP.W #$028A                                               ;8288E0|C98A02  |      ;
-    BCS .checkChildEligibility                                                ;8288E3|B002    |8288E7;
+    BCS .check_child_eligibility                                                ;8288E3|B002    |8288E7;
     BRA .canHaveSecondChild                                    ;8288E5|8040    |828927;
  
  
-.checkChildEligibility:
+.check_child_eligibility:
     REP #$30                                                   ;8288E7|C230    |      ;
     LDA.L nMarriedDaysCounter                                  ;8288E9|AF3B1F7F|7F1F3B;
     CMP.W #$0014                                               ;8288ED|C91400  |      ;
@@ -882,13 +882,13 @@ fEvents_UpdateMarriageAndChildGrowth:
 .canHaveSecondChild:
     REP #$30                                                   ;828927|C230    |      ;
     %CheckFlag(event6, $0004)
-    BEQ .checkSecondChild                                                ;828930|F04C    |82897E;
+    BEQ .check_second_child                                                ;828930|F04C    |82897E;
     LDA.L nFirstChildAge                                       ;828932|AF371F7F|7F1F37;
     INC A                                                      ;828936|1A      |      ;
     STA.L nFirstChildAge                                       ;828937|8F371F7F|7F1F37;
     CMP.W #$003C                                               ;82893B|C93C00  |      ;
-    BCC .checkSecondChild                                                ;82893E|903E    |82897E;
-    BNE .firstChildMilestone                                                ;828940|D016    |828958;
+    BCC .check_second_child                                                ;82893E|903E    |82897E;
+    BNE .first_child_milestone                                                ;828940|D016    |828958;
     %SetFlag(event6, $0010)
     REP #$20                                                   ;82894D|C220    |      ;
     LDA.W #$0032                                               ;82894F|A93200  |      ;
@@ -896,7 +896,7 @@ fEvents_UpdateMarriageAndChildGrowth:
     BRA .return                                                ;828956|807D    |8289D5;
  
  
-.firstChildMilestone:
+.first_child_milestone:
     REP #$30                                                   ;828958|C230    |      ;
     LDA.L nFirstChildAge                                       ;82895A|AF371F7F|7F1F37;
     SEC                                                        ;82895E|38      |      ;
@@ -907,10 +907,10 @@ fEvents_UpdateMarriageAndChildGrowth:
     JSL.L fMathDivide                                          ;828969|22828083|838082;
     REP #$30                                                   ;82896D|C230    |      ;
     LDA.B strcVariables.n16Temp1                               ;82896F|A57E    |00007E;
-    BNE .checkSecondChild                                                ;828971|D00B    |82897E;
+    BNE .check_second_child                                                ;828971|D00B    |82897E;
     %SetFlag(event5, $0100)
  
-.checkSecondChild:
+.check_second_child:
     REP #$30                                                   ;82897E|C230    |      ;
     %CheckFlag(event6, $0008)
     BEQ .return                                                ;828987|F04C    |8289D5;
@@ -919,7 +919,7 @@ fEvents_UpdateMarriageAndChildGrowth:
     STA.L nSecondChildAge                                      ;82898E|8F391F7F|7F1F39;
     CMP.W #$003C                                               ;828992|C93C00  |      ;
     BCC .return                                                ;828995|903E    |8289D5;
-    BNE .secondChildMilestone                                                ;828997|D016    |8289AF;
+    BNE .second_child_milestone                                                ;828997|D016    |8289AF;
     %SetFlag(event6, $0010)
     REP #$20                                                   ;8289A4|C220    |      ;
     LDA.W #$0064                                               ;8289A6|A96400  |      ;
@@ -927,7 +927,7 @@ fEvents_UpdateMarriageAndChildGrowth:
     BRA .return                                                ;8289AD|8026    |8289D5;
  
  
-.secondChildMilestone:
+.second_child_milestone:
     REP #$30                                                   ;8289AF|C230    |      ;
     LDA.L nSecondChildAge                                      ;8289B1|AF391F7F|7F1F39;
     SEC                                                        ;8289B5|38      |      ;
@@ -1419,7 +1419,7 @@ fWeatherRandomizer:
     LDA.L nCurrentDay                                          ;828D03|AF1B1F7F|7F1F1B;
     CMP.B #$16                                                 ;828D07|C916    |      ;
     BEQ .flowerFestival                                        ;828D09|F003    |828D0E;
-    JMP.W .checkRain                                              ;828D0B|4C648E  |828E64;
+    JMP.W .check_rain                                              ;828D0B|4C648E  |828E64;
  
  
 .flowerFestival:
@@ -1448,7 +1448,7 @@ fWeatherRandomizer:
     LDA.L nCurrentDay                                          ;828D36|AF1B1F7F|7F1F1B;
     CMP.B #$13                                                 ;828D3A|C913    |      ;
     BEQ +                                                      ;828D3C|F003    |828D41;
-    JMP.W .checkRain                                              ;828D3E|4C648E  |828E64;
+    JMP.W .check_rain                                              ;828D3E|4C648E  |828E64;
  
  
   + SEP #$20                                                   ;828D41|E220    |      ;
@@ -1489,25 +1489,25 @@ fWeatherRandomizer:
     SEP #$20                                                   ;828D7E|E220    |      ;
     LDA.L nCurrentDay                                          ;828D80|AF1B1F7F|7F1F1B;
     CMP.B #$1E                                                 ;828D84|C91E    |      ;
-    BNE .checkFirstYear                                                ;828D86|D00A    |828D92;
+    BNE .check_first_year                                                ;828D86|D00A    |828D92;
     SEP #$20                                                   ;828D88|E220    |      ;
     LDA.B #!WEATHER_NEWYEARFESTIVAL                                                 
     STA.W nWeatherForecast                                     ;828D8C|8D8C09  |00098C;
     JMP.W .justReturn                                          ;828D8F|4CB18E  |828EB1;
  
  
-.checkFirstYear:
+.check_first_year:
     SEP #$20                                                   ;828D92|E220    |      ;
     LDA.L nCurrentYearID                                       ;828D94|AF181F7F|7F1F18;
     BEQ .thirdYear                                             ;828D98|F003    |828D9D;
-    JMP.W .checkRain                                              ;828D9A|4C648E  |828E64;
+    JMP.W .check_rain                                              ;828D9A|4C648E  |828E64;
  
  
 .thirdYear:
     REP #$20                                                   ;828D9D|C220    |      ;
     %CheckFlag(event1, $0002)
     BEQ +                                                      ;828DA6|F003    |828DAB;
-    JMP.W .checkRain                                              ;828DA8|4C648E  |828E64;
+    JMP.W .check_rain                                              ;828DA8|4C648E  |828E64;
  
  
   + SEP #$20                                                   ;828DAB|E220    |      ;
@@ -1522,13 +1522,13 @@ fWeatherRandomizer:
     SEP #$20                                                   ;828DBF|E220    |      ;
     LDA.L .e_Winter7thDay,X                                    ;828DC1|BFC28E82|828EC2;
     BNE +                                                      ;828DC5|D003    |828DCA;
-    JMP.W .checkRain                                              ;828DC7|4C648E  |828E64;
+    JMP.W .check_rain                                              ;828DC7|4C648E  |828E64;
  
  
   + JSL.L fCore_GetRandomNumber                                ;828DCA|22F98980|8089F9;
     SEP #$20                                                   ;828DCE|E220    |      ;
     BEQ .sunday                                                ;828DD0|F003    |828DD5;
-    JMP.W .checkRain                                              ;828DD2|4C648E  |828E64;
+    JMP.W .check_rain                                              ;828DD2|4C648E  |828E64;
  
  
 .sunday:
@@ -1541,14 +1541,14 @@ fWeatherRandomizer:
 .hurricane:
     SEP #$20                                                   ;828DDF|E220    |      ;
     LDA.L nCurrentYearID                                       ;828DE1|AF181F7F|7F1F18;
-    BNE .checkHurricaneDay30                                                ;828DE5|D039    |828E20;
+    BNE .check_hurricane_day30                                                ;828DE5|D039    |828E20;
     REP #$20                                                   ;828DE7|C220    |      ;
     %CheckFlag(event1, $0001)
-    BNE .checkHurricaneDay30                                                ;828DF0|D02E    |828E20;
+    BNE .check_hurricane_day30                                                ;828DF0|D02E    |828E20;
     SEP #$20                                                   ;828DF2|E220    |      ;
     LDA.L nCurrentDay                                          ;828DF4|AF1B1F7F|7F1F1B;
     CMP.B #$1D                                                 ;828DF8|C91D    |      ;
-    BEQ .calmWeather                                                ;828DFA|F01A    |828E16;
+    BEQ .calm_weather                                                ;828DFA|F01A    |828E16;
     LDA.B #$00                                                 ;828DFC|A900    |      ;
     XBA                                                        ;828DFE|EB      |      ;
     LDA.L nCurrentSeasonID                                     ;828DFF|AF191F7F|7F1F19;
@@ -1556,23 +1556,23 @@ fWeatherRandomizer:
     TAX                                                        ;828E05|AA      |      ;
     SEP #$20                                                   ;828E06|E220    |      ;
     LDA.L .e_Summer29thDay,X                                   ;828E08|BFBE8E82|828EBE;
-    BEQ .checkHurricaneDay30                                                ;828E0C|F012    |828E20;
+    BEQ .check_hurricane_day30                                                ;828E0C|F012    |828E20;
     JSL.L fCore_GetRandomNumber                                ;828E0E|22F98980|8089F9;
     SEP #$20                                                   ;828E12|E220    |      ;
-    BNE .checkHurricaneDay30                                                ;828E14|D00A    |828E20;
+    BNE .check_hurricane_day30                                                ;828E14|D00A    |828E20;
  
-.calmWeather:
+.calm_weather:
     SEP #$20                                                   ;828E16|E220    |      ;
     LDA.B #!WEATHER_CALM                                                 
     STA.W nWeatherForecast                                     ;828E1A|8D8C09  |00098C;
     JMP.W .justReturn                                          ;828E1D|4CB18E  |828EB1;
  
  
-.checkHurricaneDay30:
+.check_hurricane_day30:
     SEP #$20                                                   ;828E20|E220    |      ;
     LDA.L nCurrentDay                                          ;828E22|AF1B1F7F|7F1F1B;
     CMP.B #$1E                                                 ;828E26|C91E    |      ;
-    BEQ .checkRain                                                ;828E28|F03A    |828E64;
+    BEQ .check_rain                                                ;828E28|F03A    |828E64;
     SEP #$20                                                   ;828E2A|E220    |      ;
     LDA.B #$00                                                 ;828E2C|A900    |      ;
     XBA                                                        ;828E2E|EB      |      ;
@@ -1583,28 +1583,28 @@ fWeatherRandomizer:
     LDA.B #$00                                                 ;828E38|A900    |      ;
     XBA                                                        ;828E3A|EB      |      ;
     LDA.L .e_Summer30thDay,X                                   ;828E3B|BFB28E82|828EB2;
-    BEQ .checkRain                                                ;828E3F|F023    |828E64;
+    BEQ .check_rain                                                ;828E3F|F023    |828E64;
     REP #$30                                                   ;828E41|C230    |      ;
     TAY                                                        ;828E43|A8      |      ;
     %CheckFlag(event5, $1000)
-    BEQ .rollHurricane                                                ;828E4B|F003    |828E50;
+    BEQ .roll_hurricane                                                ;828E4B|F003    |828E50;
     TYA                                                        ;828E4D|98      |      ;
     ASL A                                                      ;828E4E|0A      |      ;
     TAY                                                        ;828E4F|A8      |      ;
  
-.rollHurricane:
+.roll_hurricane:
     REP #$30                                                   ;828E50|C230    |      ;
     TYA                                                        ;828E52|98      |      ;
     SEP #$20                                                   ;828E53|E220    |      ;
     JSL.L fCore_GetRandomNumber                                ;828E55|22F98980|8089F9;
     SEP #$20                                                   ;828E59|E220    |      ;
-    BNE .checkRain                                                ;828E5B|D007    |828E64;
+    BNE .check_rain                                                ;828E5B|D007    |828E64;
     LDA.B #!WEATHER_HURRICANE                                                 
     STA.W nWeatherForecast                                     ;828E5F|8D8C09  |00098C;
     BRA .justReturn                                            ;828E62|804D    |828EB1;
  
  
-.checkRain:
+.check_rain:
     SEP #$20                                                   ;828E64|E220    |      ;
     LDA.B #$00                                                 ;828E66|A900    |      ;
     XBA                                                        ;828E68|EB      |      ;
@@ -1613,16 +1613,16 @@ fWeatherRandomizer:
     TAX                                                        ;828E6F|AA      |      ; Move A toX
     SEP #$20                                                   ;828E70|E220    |      ;
     LDA.L .e_Unknown1,X                                        ;828E72|BFB68E82|828EB6;
-    BEQ .checkSnow                                                ;828E76|F00F    |828E87;
+    BEQ .check_snow                                                ;828E76|F00F    |828E87;
     JSL.L fCore_GetRandomNumber                                ;828E78|22F98980|8089F9;
     SEP #$20                                                   ;828E7C|E220    |      ;
-    BNE .checkSnow                                                ;828E7E|D007    |828E87;
+    BNE .check_snow                                                ;828E7E|D007    |828E87;
     LDA.B #!WEATHER_RAIN                                                 
     STA.W nWeatherForecast                                     ;828E82|8D8C09  |00098C;
     BRA .justReturn                                            ;828E85|802A    |828EB1;
  
  
-.checkSnow:
+.check_snow:
     SEP #$20                                                   ;828E87|E220    |      ;
     LDA.B #$00                                                 ;828E89|A900    |      ;
     XBA                                                        ;828E8B|EB      |      ;
