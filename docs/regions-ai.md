@@ -110,7 +110,7 @@ The US scripts in `src/ai/us/scripts/` are authoritative. The other releases are
   `if !REGION_JP` (script `$46`); four blocks in total.
 - **WRAM operands** use `wram80(<label>)` (`src/ai/region.asm`): the label carries `!DE_RAM_SHIFT` (see `src/common/ram.asm`), and the
   function applies the JP delta (`!AI_JP_WRAM_DELTA`, -32) until the common RAM map describes the JP layout. 459 raw
-  `$80xxxx` literals were converted by `tools/migration/ai_wram80.py` (US bytes unchanged).
+  `$80xxxx` literals were converted to this form (US bytes unchanged); operands below `$0917` never move and stay raw.
 - **What is source language and what is generated.** The script bodies are not raw bytes: they are a readable script language
   (`%AICMD0x09_StartScript(...)` macro calls with named commands, `src/ai/commands.asm`). That DSL stays in `src/ai/us/scripts/script_*.asm`
   as the source; no second bytecode/text format is introduced (it would be a 1:1 renaming of the macro calls, and the region

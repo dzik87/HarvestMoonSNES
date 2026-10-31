@@ -132,5 +132,4 @@ dither, so the ROM bytes are unchanged (checked by `font.py check`, `tests/test_
   holds real data that the 8 px engine never shows. These are the candidates for replacement by proper Latin glyphs
   (the original translation reused the Japanese font data and only patched the glyph routines).
 * Counts of 8x16 files are stored in `glyphs.json` (`png_files_8x16`).
-* `font.py narrow --region R` converts existing 16x16 PNGs in place (used once for the migration); `extract` writes the
-  narrow form directly.
+* `font.py extract` writes the narrow form directly.

@@ -1,5 +1,5 @@
 """Helpers to express a range of regional (EU/DE/JP) code or data as asar source, reusing US names
-(used by tools/migration/region_patch.py).
+(used by tools/dev/region_patch.py).
 
 NameResolver  - maps region addresses/RAM values back to US label and RAM names.
 decode_range  - decodes a region byte range into instructions, trying the plausible M/X states.
@@ -7,18 +7,41 @@ emit_code     - produces the text lines of a region specific variant for a block
 
 The emitted text carries no address comments and no region dependent names, so the variants of different regions
 are textually identical when the code is identical (the patch tool then merges them into one block):
-  * branch targets / data pointers without a US label become `L_<US address>` equates (defined per region in
-    src/code/region_targets.asm), generated local labels are numbered `.r_<block>_<n>`,
+  * branch targets / data pointers without a US label become equates (defined per region in src/code/region_targets.asm).
+    Their names come from the rename records in docs/naming/*.csv (placeholder `L_<US address>` -> descriptive name, e.g.
+    `fObjectMap_EatingGrass_RowLoop`); a target without a record keeps the placeholder `L_<US address>` (`L_<REG>_<address>`
+    when the region has no US counterpart), see docs/regions.md. Generated local labels are numbered `.r_<block>_<n>`
+    (the committed sources name them after their role, snake_case),
   * WRAM addresses are written with the US value plus `+!RAM_SHIFT` (the region's shift of the shifted block).
 """
+import csv
 import re
 from collections import Counter, defaultdict
+from pathlib import Path
 
 import usmap
 import align_regions as AR
 from align_regions import (DP_MODES, ADDR_MODES_16, LONG_MODES, RAM_SHIFT_START, RAM_SHIFT_END,
                            split_items, is_symbolic)
 from disasm65816 import Disassembler, decode, lorom_off, _OPS, Insn, _SUFFIX, _OPERAND_FMT
+
+
+NAMING_DIR = Path(__file__).resolve().parent.parent.parent / "docs" / "naming"
+_TARGET_NAMES = None
+
+
+def target_names():
+    """Placeholder equate name (`L_<address>`) -> descriptive name, from the `old,new,...` rename records in docs/naming/*.csv."""
+    global _TARGET_NAMES
+    if _TARGET_NAMES is None:
+        _TARGET_NAMES = {}
+        for p in sorted(NAMING_DIR.glob("*.csv")):
+            with open(p, encoding="utf-8", newline="") as f:
+                for row in csv.DictReader(f):
+                    old, new = row.get("old", ""), row.get("new", "")
+                    if re.fullmatch(r"L_(?:[A-Z]{2}_)?[0-9A-F]{6}", old) and new:
+                        _TARGET_NAMES[old] = new
+    return _TARGET_NAMES
 
 
 class NameResolver:
@@ -109,11 +132,16 @@ class NameResolver:
         return None
 
     def target_equate(self, target, equates):
-        """Name of an `L_` equate for region code address `target` (recorded in `equates`: name -> address)."""
+        """Name of the equate for region code address `target` (recorded in `equates`: name -> address).
+
+        Placeholder: `L_<US address>` (`L_<REG>_<address>` for a region-only address or when two regions' targets would
+        clash); replaced by the descriptive name of the rename records when one exists."""
         u = self.us_addr(target)
+        names = target_names()
         name = "L_%06X" % u if u is not None else "L_%s_%06X" % (self.region, target)
-        if equates.get(name, target) != target:
+        if equates.get(names.get(name, name), target) != target:
             name = "L_%s_%06X" % (self.region, target)
+        name = names.get(name, name)
         equates[name] = target
         return name
 

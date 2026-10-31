@@ -13,7 +13,7 @@ given with --us or built from src/ with asar (tools/bin/asar). Method:
        diff    - anything else: the line needs a region specific variant
   3. Statistics per bank and per function (global label) are printed or written to docs/regions.md.
 
-The same machinery is used by tools/migration/region_patch.py to create the `if !REGION_xx` patch blocks.
+The same machinery is used by tools/dev/region_patch.py to create the `if !REGION_xx` patch blocks.
 
 Usage:
     python tools/analysis/align_regions.py [--eu EU.sfc] [--de DE.sfc] [--jp JP.sfc] [--us US.sfc] [--md docs/regions.md]

@@ -4,7 +4,7 @@ The structure lives in defs/tables/: `<name>.layout.json` (small tables) and `da
 source text with every numeric content value replaced by a placeholder; the first placeholder of a run carries the ROM address of the run per
 release (`?@US:82F258;EU:82F241`).  This step reads the values from the ROMs and writes the original sources back, byte for byte.
 Rows that are the same in several releases are checked to be equal in every release they apply to.  Pointer columns (code labels) and names
-are structure and stay in the layout files; see tools/migration/table_layout.py for how the layouts were derived.
+are structure and stay in the layout files; see tools/dev/table_layout.py for how the layouts were derived.
 """
 import json
 import re

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tests for the region patch tooling (tools/migration/region_patch.py, tools/analysis/align_regions.py RamMap) and the
+"""Tests for the region patch tooling (tools/dev/region_patch.py, tools/analysis/align_regions.py RamMap) and the
 structure of the patch blocks in src/code: balanced if/endif, only the documented !REGION_xx symbols."""
 import re
 import sys
@@ -7,7 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "tools" / "analysis"))
-sys.path.insert(0, str(ROOT / "tools" / "migration"))
+sys.path.insert(0, str(ROOT / "tools" / "dev"))
 import align_regions as AR  # noqa: E402
 import region_patch as RP  # noqa: E402
 

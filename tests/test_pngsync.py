@@ -16,8 +16,8 @@ sys.path.insert(0, str(ROOT / "tools" / "objects"))
 import pngsync as P  # noqa: E402
 import palette_map as PM  # noqa: E402
 import tiles as T  # noqa: E402
-import bankbin as BB  # noqa: E402
 
+BANK_SIZE = 0x8000                          # every data bank is full
 FAILS = []
 FULL = os.environ.get("HM_FULL_TESTS") == "1"       # default: a representative subset (see docs/workflow.md); HM_FULL_TESTS=1: every blob of every release
 
@@ -185,7 +185,7 @@ def test_import_flow():
     import composed as CO
     with shared() as tmp:
         totals = bank_totals(tmp)
-        check(set(totals.values()) == {BB.BANK}, "banks are full before")
+        check(set(totals.values()) == {BANK_SIZE}, "banks are full before")
 
         # 1. one pixel of the first frame of object 0
         fr = sorted(next((tmp / "assets/gfx/png/frames").glob("obj_0000*")).glob("f_*.png"))[0]
@@ -224,7 +224,7 @@ def test_import_flow():
         check(after != want_bins, "tile blob changed")
         check(any(len(after[n]) > len(want_bins[n]) for n in after), "a blob grew")
         check(P.cmd_check(ns(quick=True), tmp) == 0, "check after import")
-        check(set(bank_totals(tmp).values()) == {BB.BANK}, "banks are still $8000 bytes")
+        check(set(bank_totals(tmp).values()) == {BANK_SIZE}, "banks are still $8000 bytes")
         # the sprite pixel landed exactly there, nowhere else (re-render the frame from the new bank)
         ctx = CO.get_ctx(tmp, "us")
         S = ctx.S

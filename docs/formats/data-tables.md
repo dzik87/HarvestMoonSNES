@@ -6,7 +6,7 @@ Tables with other sources: `assets/areas/` (`area-data.md`), `assets/tables/*.js
 
 ## Structure and content
 
-The committed structure is `defs/tables/data/`: `manifest.json`, the tables that consist only of code labels (`item_subroutines`, `player_action_jump_table`, `player_update_jump_table`, `area_events_jump_table`: jump tables, read from there by the generator) and one `<name>.layout.csv` per table that holds ROM values. A layout is the source text with every numeric cell replaced by `?` (`?SFX` = print as `!SFX_*` name when the value has one) and `@at US=$.. EU=$.. DE=$.. JP=$..` lines giving the ROM address of the next row per release where it is not simply the end of the previous row. `tools/extract_steps/tables.py` fills the cells from the ROMs (rows inside `@if` branches are read from the releases that branch applies to, rows outside must be equal in all four) and writes `assets/tables/data/<name>.csv`. Pointer columns and `index`/`label`/`note` cells are structure and stay in the layout; `tools/migration/table_layout.py` derives layouts from complete sources (it assembles an instrumented copy to get the addresses).
+The committed structure is `defs/tables/data/`: `manifest.json`, the tables that consist only of code labels (`item_subroutines`, `player_action_jump_table`, `player_update_jump_table`, `area_events_jump_table`: jump tables, read from there by the generator) and one `<name>.layout.csv` per table that holds ROM values. A layout is the source text with every numeric cell replaced by `?` (`?SFX` = print as `!SFX_*` name when the value has one) and `@at US=$.. EU=$.. DE=$.. JP=$..` lines giving the ROM address of the next row per release where it is not simply the end of the previous row. `tools/extract_steps/tables.py` fills the cells from the ROMs (rows inside `@if` branches are read from the releases that branch applies to, rows outside must be equal in all four) and writes `assets/tables/data/<name>.csv`. Pointer columns and `index`/`label`/`note` cells are structure and stay in the layout; `tools/dev/table_layout.py` derives layouts from complete sources (it assembles an instrumented copy to get the addresses).
 
 ## Source format
 
@@ -36,7 +36,7 @@ Column types (`check` verifies that numbers fit the size):
 | `note` | - | not data: text that becomes a trailing comment (enum name of the row, item name) |
 | `index` | - | not data: the running row number of the table (`$00`, `$01` ...) which `check` verifies, so a row cannot be moved or dropped by accident |
 
-`tools/data/tabledata.py` also offers `rows_of(name, region)` (rows by column name for one release, branches evaluated), used by `palette_map.py` and `obj_names.py`.
+`tools/data/tabledata.py` also offers `rows_of(name, region)` (rows by column name for one release, branches evaluated), used by `palette_map.py`.
 `tools/analysis/usmap.py` replaces the `incsrc` line by the generated lines, so the source <-> ROM address map covers the generated data (the data lines are placed by the code in front of them).
 
 ## Tables

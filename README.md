@@ -27,7 +27,7 @@ CI (GitHub Actions) builds asar from the submodule, assembles the ROM and compar
 | `assets/audio/` | audio sources: BRR samples as WAV + JSON, songs and SFX as text, the SPC700 driver as assembler source (`tools/audio/audioconv.py`) |
 | `assets/objects/`, `assets/maps/` | object animation data (banks $86/$87) and object maps (bank $A7): the editable sources, see `docs/formats/object-data.md` |
 | `assets/gfx/png/`, `assets/gfx/tilemaps/` | graphics sources: composed indexed PNGs (sprite frames in `frames/`, name tables rendered with their tiles in `screens/`, remainder sheets) and name-table text (edit these, then `tools/gfx/pngsync.py import`, which splits the images back into tiles / sprite blocks; whole sheets: `pngsync.py sheet`) |
-| `tools/` | build, verification, migration tools (`tools/migration/`) |
+| `tools/` | build, extraction, verification and converter tools; `tools/dev/` holds maintenance tools (region patch generator, table layout derivation, rename utility) |
 | `docs/` | documentation (layout, workflow, migration log, findings, AI commands, naming maps) |
 | `tests/` | reference hash values |
 

@@ -109,8 +109,18 @@ it with the reference hashes in `tests/expected.json` (keys `EU`, `DE`, `JP`; th
   written `$xxxx+!RAM_SHIFT` (`!DE_RAM_SHIFT` is kept as an alias). `strcNames` has release specific field sizes
   (`!NAME_*_SIZE` in `region.asm`): US/EU girl name 10, season 12, weekday 18, day ordinal 4 bytes; DE weekday 24
   (longer weekday names, +6); JP girl 8, season 2, weekday 2, no ordinal (names are one kanji word, -32).
-- `src/code/region_targets.asm` defines, per region, the `L_<US address>` equates for branch targets / data pointers
-  of region code that have no label in the US sources (plus the few US labels that do not exist in a region's code).
+- `src/code/region_targets.asm` (included last by `src/main.asm`) defines, in one `if !REGION_DE / elseif !REGION_EU / elseif !REGION_JP`
+  chain, the symbols that only the region blocks use: branch targets / data pointers of region code that have no label in
+  the US sources, and US labels that sit at another address in a region. Each line is `name = $BBAAAA` with the address in
+  that release. Names follow the code naming convention (`docs/naming/README.md`): loop heads and re-entry points are
+  `<Routine>_RowLoop` / `_TileLoop` / `_WaitFrame` / `_Return` (e.g. `fObjectMap_EatingGrass_RowLoop`), tables keep their
+  `a<Name>` label (`aToolUsedActionTable_JP`), JP palette animation routines that were merged into one address are several
+  `fPaletteAnim_*` names with the same value. Example use (`src/code/bank_82/object_map.asm`):
+  `if !REGION_EUDE / JMP.W fObjectMap_EatingGrass_RowLoop / elseif !REGION_JP / ... / else / JMP.W $A9B1 / endif`; the US
+  build never reads the equates. The old `L_<US address>` placeholders no longer exist in the sources; the record of old
+  -> new names is `docs/naming/M_labels_bank80-82.csv` (`L_` rows) and `N_labels_bank83-85.csv`.
+- Local labels inside patch blocks are `snake_case`, named after their role and equal in every branch of a block (the
+  generator numbers them `.r_<block>_<n>`; they were renamed by hand, see `docs/naming/README.md`).
 - The ROM header (maker/game code, title, country, checksum) is region specific in `src/code/header.asm`.
 - Verification: CI builds and verifies the complete ROM of all four regions (`tools/build.py --region EU|DE|JP`, `tests/expected.json`).
   The ROM dumps are needed only to regenerate or extend the patches.
@@ -166,7 +176,7 @@ that region):
 
 <!-- ALIGN-END -->
 
-Method (tools in `tools/analysis/` and `tools/migration/`):
+Method (tools in `tools/analysis/` and `tools/dev/`):
 1. `bytealign.py` aligns the regional bank with the US bank (anchor diff + edit-distance refinement) and gives a
    byte-exact US->region address map.
 2. `usmap.py` gives every line of the US sources its ROM range (from the `;ADDR|BYTES|` comments) and its M/X state;
@@ -178,8 +188,15 @@ Method (tools in `tools/analysis/` and `tools/migration/`):
    source (`region_variant.py` chooses US label and RAM names, numbers local labels, writes no address comments so
    texts of different regions can be compared). Blocks that mix code and data lines are cut at the matching
    region addresses so tables are not disassembled as instructions.
-5. `migration/region_patch.py` regenerates the whole thing from the plain US text: layer 1 = DE+EU (identical
-   texts merged into `!REGION_EUDE`), layer 2 = JP (wrapped around layer 1). `--write-expected` stores the hashes.
+5. `tools/dev/region_patch.py` (bootstrap / audit tool, needs the ROM dumps) regenerates the whole thing from the plain US text:
+   layer 1 = DE+EU (identical texts merged into `!REGION_EUDE`), layer 2 = JP (wrapped around layer 1). `--write-expected` stores
+   the hashes. Names it generates: a branch target without a US label is named from the rename records
+   (`L_<US address>` rows of `docs/naming/*.csv` -> descriptive name); when no record exists it emits the placeholder
+   `L_<US address>` (`L_<REG>_<address>` for a target without US counterpart or when two regions would clash) and local labels
+   `.r_<block>_<n>`. Placeholders are meant to be renamed afterwards by role and recorded in `docs/naming/M_labels_bank80-82.csv`.
+   The committed sources have been edited by hand since the generation, so a regeneration is for auditing (`--dry-run
+   --targets-out FILE`; with the current records it reproduces `region_targets.asm` except for a few hand-fixed lines), not for
+   rewriting `src/code`. The tests (`tests/test_region_patch.py`) cover the unpatch/tidy logic, the RAM map and the structure of the blocks.
 
 ## Regional data banks (complete ROMs)
 
@@ -203,7 +220,7 @@ size and all following addresses) differs. That is the design of the unified tre
 * **One label per blob in all releases.** A blob keeps its US label (`Tiles_Menu_1`, `sFontGlyphs_0x01`, ...). In a
   release its address is simply different, the assembler relocates every reference. The pointers in the map table
   (now `assets/areas/area_gfx.json`) used to be raw addresses in `if !REGION_xx` blocks (about 50 blocks); they are now the plain label,
-  and the blocks are gone (`tools/migration/region_labels.py`).
+  and the blocks are gone.
 * **Shared stays shared.** A blob that is identical in every release has one source (`assets/gfx/png/tiles/<label>/`, `assets/gfx/tilemaps/<label>.map.txt`).
   A blob that differs in at least one release is included as `incbin "../../../../assets/gfx/tiles/!{REGDIR}<label>.bin"`; `!REGDIR` is
   `""` (US) or `eu/`, `de/`, `jp/` (`src/common/region.asm`). Only the blobs that really differ are stored per release

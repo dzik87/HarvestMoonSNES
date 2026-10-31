@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""One-off migration: split the ROM-derived value tables into committed structure (defs/tables/) and extracted content (assets/tables/).
+"""Maintenance tool: re-derive the table layouts (committed structure in defs/tables/) from the complete table sources (assets/tables/).
 
 For every table source of the code banks (assets/tables/*.json, assets/tables/data/*.csv) this writes a *layout* into defs/tables/ that is the
 same text with every numeric content value replaced by a placeholder, and the ROM address of each run of values per release.  The extractor
@@ -9,7 +9,7 @@ The addresses come from the assembler: the generated assembly of the tables (bui
 `print hex(pc())` before every data line, the project is assembled for the four releases in a scratch copy and the printed addresses are
 mapped back to the source rows.
 
-    python tools/migration/table_layout.py [--keep DIR]
+    python tools/dev/table_layout.py [--keep DIR]
 
 Requires tools/bin/asar and a complete assets/ tree (the committed one).  Safe to run again; it rewrites defs/tables/.
 """

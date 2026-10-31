@@ -13,11 +13,11 @@
 | 1b | banks 80–85 split into modules (concatenation == original) | US hash matches |
 | 2 | AI scripts (US): 7622 raw addresses → labels (`<script>_Lnnn`) | US hash matches |
 | 2c | AI scripts (US) split into 72 per-script files + 3 bank headers (concatenation == original) | US hash matches |
-| 3 | 697 auto/Unknown labels renamed from agent-produced maps (`docs/naming/*.csv`, `tools/migration/apply_renames.py`) | US hash matches |
+| 3 | 697 auto/Unknown labels renamed from agent-produced maps (`docs/naming/*.csv`, applied with `apply_renames.py`, now `tools/dev/apply_renames.py`) | US hash matches |
 | 4 | palettes ($A8/$A9): `db` dumps replaced by `incbin` of `assets/gfx/palettes/*.pal` + JSON/PNG, `tools/gfx/palette.py` | US hash matches |
 | 2b | documentation of 90 AICMD commands from the interpreter handlers (`docs/ai/commands/*.yml` → `docs/ai/commands.md`) | spot-checked against the code; no source changes |
 | 5 | DE code banks $80-$85 (phase 5a): 65816 disassembler, US/DE alignment, 173 `if !REGION_DE` patch blocks, WRAM shift `!DE_RAM_SHIFT`, DE header; `tools/build.py --region DE` | US hash matches; DE banks $80-$85 hash matches (`tests/expected.json`, key `DE`) |
-| 5b | EU and JP code banks $80-$85 as patch blocks, DE regenerated; unified region switch `src/common/region.asm` (`!REGION_US/EU/DE/JP/EUDE`, `!RAM_SHIFT` 0/+6/-32), `tools/migration/region_patch.py` | US hash matches; EU, DE, JP banks $80-$85 hashes match (`tests/expected.json` keys `EU`, `DE`, `JP`) |
+| 5b | EU and JP code banks $80-$85 as patch blocks, DE regenerated; unified region switch `src/common/region.asm` (`!REGION_US/EU/DE/JP/EUDE`, `!RAM_SHIFT` 0/+6/-32), `tools/dev/region_patch.py` (was `tools/migration/`) | US hash matches; EU, DE, JP banks $80-$85 hashes match (`tests/expected.json` keys `EU`, `DE`, `JP`) |
 
 | 6 | AI scripts per region: 459 raw `$80xxxx` operands -> `wram80(label)`, EU/DE/JP as 4 `if !REGION_xx` blocks on the US scripts (`src/ai/region.asm`), raw `src/ai/{de,eu,jp}` dumps removed, `tools/analysis/aidiff.py` | US hash matches; EU/DE/JP banks $B3-$B5 match (`EU-AI`, `DE-AI`, `JP-AI`) |
 
@@ -47,14 +47,14 @@ releases run the same scripts, see `docs/regions-ai.md`.
   (3) the DE weekday/ordinal routines, dialog number drawing and several text coordinates are the real code changes;
   (4) pointers to the DE-only graphics in banks $9A/$9B/$A5 are kept as raw addresses until those banks are migrated.
 - Tools: `tools/analysis/disasm65816.py` (+ `tests/test_disasm65816.py`, 39258 US instructions round-trip),
-  `bytealign.py`, `usmap.py`, `align_regions.py`, `de_variant.py`, `tools/migration/de_patch.py`.
+  `bytealign.py`, `usmap.py`, `align_regions.py`, `de_variant.py`, `de_patch.py` (the last two became `region_variant.py` and `tools/dev/region_patch.py`).
 - Verification: `python3 tools/build.py --region DE` (CI step "Build and verify (DE code banks)") compares banks $80-$85
   with the hashes in `tests/expected.json`; the DE ROM is needed only to regenerate or extend the patches.
 - Open: generic `fFunc_<addr>` names for DE-only code are `.de_<addr>` sublabels inside the patch blocks (no new
   global functions were needed); DE-only data banks, EU and JP are still to be done.
 
 ## EU and JP code banks, unified region switch (phase 5b)
-- The DE patch blocks were regenerated together with EU and JP from the plain US text by `tools/migration/region_patch.py`
+- The DE patch blocks were regenerated together with EU and JP from the plain US text by `tools/dev/region_patch.py`
   (replaces `de_patch.py`/`de_variant.py` -> `region_variant.py`): layer 1 = DE+EU with identical texts merged into
   `!REGION_EUDE` (41 merged blocks), layer 2 = JP wrapped around layer 1 (flattened to `elseif` where possible).
 - Findings: (1) EU has no WRAM shift; JP is 32 bytes lower from `$7E08D5` (one-kanji names; `strcNames` field sizes are
@@ -72,7 +72,7 @@ releases run the same scripts, see `docs/regions-ai.md`.
   (fonts, title/menu graphics, name tables) plus three JP palettes and the dialogs differ.
 - Regional graphics/fonts/palettes became PNG/text/JSON sources per release (`pngsync.py --region`, `font.py --region`, `palette.py export-region`); bank sources include
   them through `!{REGDIR}`, banks end in `fill align $8000`.
-- Map table pointers are labels (`tools/migration/region_labels.py`), dialog pointer table is one table of labels, dialogs are generated from the text files
+- Map table pointers are labels (done once by a script that has since been removed), dialog pointer table is one table of labels, dialogs are generated from the text files
   (committed per release asm removed).
 - `tools/build.py --region EU|DE|JP` builds and verifies the complete ROM (`tests/expected.json` keys EU, DE, JP now hold full-ROM hashes; the partial
   bank-range keys and `*-AI` keys were dropped).
@@ -90,5 +90,11 @@ releases run the same scripts, see `docs/regions-ai.md`.
 - Inventory of the remaining committed assembly under `src/`: hand-written/disassembled code (`src/code`, `src/ai`, `src/common`, `src/main.asm`, `src/code/header.asm`,
   `src/code/region_targets.asm`) is kept; `src/data/dialogs/macros.asm` is a macro file; pending conversion by the graphics and audio work (not touched here):
   `src/data/gfx/**/bank_*.asm` (sprites, tiles, characters, palettes wrappers) and `src/data/audio/bank_AD..B2.asm`.
-- Kept although old: `tools/migration/{apply_renames,ai_wram80,aicmd_names,region_labels,region_patch}.py` (referenced from docs/tests), `tools/gfx/gfxpipe.py` (CI `verify` step and docs),
-  `docs/naming/*.csv` (old -> new label maps referenced from the docs).
+- Kept although old: `tools/gfx/gfxpipe.py` (CI `verify` step and docs), `docs/naming/*.csv` (old -> new label maps referenced from the docs).
+
+## Cleanup pass (dead migration code)
+- Removed the applied one-shot scripts of `tools/migration/`: `ai_wram80.py`, `aicmd_names.py`, `composed_sources.py`, `gfx_names.py`, `obj_names.py`, `region_labels.py`
+  (their results live in `src/`, `defs/`, `assets/` and the CSV records in `docs/naming/`), `tools/data/bankbin.py` (only a constant was used) and the `font.py narrow` command.
+- Moved to `tools/dev/` (maintenance tools with a docstring stating the purpose): `region_patch.py` (bootstrap / audit of the regional patch blocks, used by `tests/test_region_patch.py`),
+  `table_layout.py` (re-derives `defs/tables/` from complete table sources; running it on the committed tree changes nothing), `apply_renames.py` (label rename utility).
+- `region_patch.py` / `region_variant.py` name region targets from the rename records (`L_` rows of `docs/naming/*.csv`) instead of emitting `L_<address>`; see `docs/regions.md`.

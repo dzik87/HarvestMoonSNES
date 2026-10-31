@@ -47,7 +47,7 @@ must never write to it. Each step is listed by `python tools/extract.py --list`.
 
 Rules the steps follow: variant structure (`@if !REGION_xx`, release groups) is part of the layout and is regenerated, rows that apply to several releases
 are read from each and must be equal; code labels (pointer columns, table names) are structure, so a label rename has to be applied to `defs/` as well
-as to `src/`; `tools/migration/table_layout.py` re-derives the table layouts from complete sources.
+as to `src/`; `tools/dev/table_layout.py` re-derives the table layouts from complete sources.
 `python tools/extract.py --rom-dir DIR --only audio,objects,maps,areas,tables,menu,ai --compare assets` proves equality with a committed tree.
 
 ## Consequences for CI

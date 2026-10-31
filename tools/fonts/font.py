@@ -17,7 +17,6 @@ Commands:
     extract --region R [--rom PATH] [--out DIR]   ROM (or assets/gfx/tiles for us) -> PNGs + glyphs.json
     build   --region R [--src DIR] [--out DIR] [--write-assets]   PNGs -> sFontGlyphs_*.bin
     check   [--region R]... [--rom-dir DIR]       round trip must reproduce every byte (exit 1 otherwise)
-    narrow  --region R                            convert committed PNGs to 8x16 where the engine draws 8 px wide
     seal    --region R                            recompute the SHA-256 values in glyphs.json after an edit
     sheet   --region R [--out FILE]               contact sheet of all glyphs (for viewing only)
 """
@@ -383,29 +382,6 @@ def check_region(region, rom_dir):
     return ok, msgs
 
 
-def cmd_narrow(a):
-    """Convert the committed 16x16 PNGs of a region to 8x16 where the engine draws the glyph 8 px wide and the right
-    half is plain dither (in place; the rebuilt tables must stay identical)."""
-    pngdir = FONT_ASSETS / a.region
-    before = glyphs_to_tables(load_png_dir(pngdir))
-    n = 0
-    for gid, px in sorted(load_png_dir(pngdir).items()):
-        if is_narrow_png(a.region, gid, px):
-            write_png(pngdir / glyph_filename(gid), px, True)
-            n += 1
-    if glyphs_to_tables(load_png_dir(pngdir)) != before:
-        sys.exit("internal error: narrowing changed the built tables")
-    side = pngdir / "glyphs.json"
-    meta = json.loads(side.read_text(encoding="utf-8"))
-    meta["png_files_8x16"] = n
-    meta["format"]["png_sizes"] = ("glyph_XXXX.png is 8x16 (left half only) when the engine draws the glyph 8 px wide and "
-                                   "the right half is plain dither; otherwise 16x16. build accepts both; the right half of "
-                                   "an 8x16 glyph is regenerated as dither.")
-    side.write_text(json.dumps(meta, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
-    print("%s: %d glyph PNGs converted to 8x16" % (a.region, n))
-    return 0
-
-
 def cmd_check(a):
     ok_all = True
     for r in (a.region or REGIONS):
@@ -461,13 +437,12 @@ def main(argv=None):
     p.add_argument("--src"); p.add_argument("--out"); p.add_argument("--write-assets", action="store_true")
     p = sub.add_parser("check"); p.add_argument("--region", action="append", choices=REGIONS)
     p.add_argument("--rom-dir")
-    p = sub.add_parser("narrow"); p.add_argument("--region", required=True, choices=REGIONS)
     p = sub.add_parser("seal"); p.add_argument("--region", required=True, choices=REGIONS)
     p = sub.add_parser("sheet"); p.add_argument("--region", required=True, choices=REGIONS); p.add_argument("--out")
     a = ap.parse_args(argv)
     try:
         return {"extract": cmd_extract, "build": cmd_build, "check": cmd_check,
-                "seal": cmd_seal, "narrow": cmd_narrow, "sheet": cmd_sheet}[a.cmd](a)
+                "seal": cmd_seal, "sheet": cmd_sheet}[a.cmd](a)
     except (ValueError, OSError) as e:
         print("error: %s" % e, file=sys.stderr)
         return 1
