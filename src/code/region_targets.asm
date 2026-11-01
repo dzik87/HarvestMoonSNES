@@ -1,3 +1,11 @@
+;;
+; @file     region_targets.asm
+; @brief    Symbol definitions (`name = $BBAAAA`) for branch targets, data pointers and labels inside the regional `if !REGION_*` patch blocks of banks $80-$85 that have no label in the US sources, plus US labels that sit at another address in a region.
+; @details  Only EU, DE and JP get entries (the US build does not read the file). The generated list is split by region; names follow the US label of the containing routine plus a suffix (_RowLoop, _WaitFrame, ...).
+;           Evidence for each: the original ROM address in that release (tools/dev/region_patch.py). Recorded in docs/naming/M_labels_bank80-82.csv and described in docs/regions.md.
+; @bank     $80-$85
+; @see      docs/regions.md, tools/dev/region_patch.py
+;;
 ; Branch targets, data pointers and labels of the regional patch blocks (if !REGION_xx ... endif in
 ; banks $80-$85) that have no label in the US sources, plus US labels that sit at another address in a region.
 ; Each line is `name = $BBAAAA` (the address in that release); names are described in docs/regions.md and recorded

@@ -125,7 +125,7 @@ fMainMenu_StartHowToPlayDemo:
     %UnsetFlag(daily2, $0004)
     JSL.L fCore_ZeroVRAM                                       ;82D2F3|22468880|808846;
     JSL.L fCore_ZeroCGRAM                                      ;82D2F7|22808980|808980;
-    JSL.L fCore_Zero0x42Ptr                                    ;82D2FB|22AB8F80|808FAB;
+    JSL.L fPalette_StopAllColorAnimSlots                                    ;82D2FB|22AB8F80|808FAB;
     JSL.L fObject_InitTileCache                                  ;82D2FF|22D78E85|858ED7;
     JSL.L fObject_ClearGameObject                              ;82D303|220F8285|85820F;
     JSL.L fObjectSlots_ClearAll                                   ;82D307|22C7A481|81A4C7;
@@ -159,7 +159,7 @@ fMainMenu_StartHowToPlayDemo:
     JSL.L fMap_ScreenTransitionHandler                             ;82D35C|22649A80|809A64;
     JSL.L fGame_TimeHandler                                    ;82D360|22008082|828000;
     JSL.L fDialog_IterateText                                  ;82D364|221C9583|83951C;
-    JSL.L fPallete_ChangeHandler                               ;82D368|220C9080|80900C;
+    JSL.L fPalette_FadeToNextPalette                               ;82D368|220C9080|80900C;
     JSL.L fPalette_ProcessColorAnimSlots                                  ;82D36C|22698E80|808E69;
     JSL.L fInput_Handler                                       ;82D370|2234C084|84C034;
     JSL.L fObjectSlots_UpdateAll                                      ;82D374|2283A381|81A383;

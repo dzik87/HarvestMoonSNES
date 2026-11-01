@@ -101,7 +101,7 @@ fGame_TimeHandler:
     CMP.W strcPalette.nextIdx                                  ;828099|CD7B01  |00017B;
     BEQ .return                                                ;82809C|F00B    |8280A9;
     LDY.W #$0004                                               ;82809E|A00400  |      ;
-    JSL.L fCore_Zero0x42PtrFromIndex                           ;8280A1|22928F80|808F92;
+    JSL.L fPalette_StopColorAnimSlotsFrom                           ;8280A1|22928F80|808F92;
     JSL.L fPaletteAnim_RunAreaRoutine                            ;8280A5|22539580|809553;
  
 .return:

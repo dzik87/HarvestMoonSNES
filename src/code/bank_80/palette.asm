@@ -1,6 +1,27 @@
+;;
+; @file     palette.asm
+; @brief    Palette buffers in WRAM ($7F0900 current, $7F0B00 target day/night set, $7F0D00 fade working copy): loading of area palettes, the time-of-day cross fade, season/wedding colour fixes and single colour writes.
+; @details  The 512 byte CGRAM image is built in sPalette_7F0900 and uploaded by DMA channel 5/6/0. Colours 0..127 are the BG palette, 128..255 the sprite palette
+;           (loaded by fPalette_LoadSecondHalf). Palette ids index aPalettes (ptr24 table, 256 colours each); aMapPalettesIndexes gives five time-of-day ids per area.
+;           Time-of-day phases come from nCurrentTimeID: <7 early, <15 day, <17 evening, <18 dusk, >=18 night.
+; @bank     $80
+; @range    $808FC7-$809552
+; @see      src/code/bank_80/data_tables.asm (palette animation routines), docs/formats/graphics-palettes.md
+;;
+
+
 ; Bank $80 module "palette" - starts at $808FC7
  
  
+;;
+; @brief    Select the palette that the cross fade should reach: set ptrPaletteNext to palette A (or to the night buffer after 18:00).
+; @details  Stores A in strcPalette.nextHourIdx and clears the fade counter. If nCurrentTimeID >= $12 (night) ptrPaletteNext = $7F0B00 (the pre-built night buffer),
+;           otherwise ptrPaletteNext = aPalettes[A].
+; @param    A      palette id (8-bit, index into aPalettes)
+; @modifies strcPalette.nextHourIdx, strcPalette.countDown, ptrPaletteNext
+; @mode     M8X16 -> M16 (after REP)
+; @callers  fPalette_AdjustTimePalette
+;;
 fPalette_SetNextHourPalette:
     SEP #$20                                                   ;808FC7|E220    |      ;
     REP #$10                                                   ;808FC9|C210    |      ;
@@ -43,7 +64,20 @@ fPalette_SetNextHourPalette:
     RTL                                                        ;80900B|6B      |      ;
  
  
-fPallete_ChangeHandler:
+;;
+; @brief    Per-frame palette cross fade: every 32 frames move each colour component of the working palette one step towards the target palette.
+; @details  Active only while nTimeState bit 0 is set (clock running) and ptrPaletteNext is non-null. Counts strcPalette.countDown up to $20, then for each colour
+;           of the 128-colour BG palette (256 bytes; $200 bytes at night) compares R, G, B (5 bit each) of sPalette_7F0D00 with the target [ptrPaletteNext] and increments or decrements each component by one,
+;           writing the result to sPalette_7F0900 (displayed) and sPalette_7F0D00 (working copy). Colour index 1 (Y=2) is replaced by Y=$18 / $20 so the text colour block is taken from a different entry
+;           (Y=$18 if mapFlags bit $0004 is set, else $20) (?). If any component changed the palette is queued for CGRAM (DMA channel 6); otherwise the fade is finished:
+;           ptrPaletteNext is cleared and strcPalette.nextIdx = nextHourIdx.
+; @modifies sPalette_7F0900, sPalette_7F0D00, strcPalette.countDown, strcPalette.nextIdx, ptrPaletteNext, strcSystem.arrayIndex, strcSystem.destinationRegister
+; @mode     M8X16 -> M8X16
+; @calls    fCore_PrepareTransfer
+; @callers  fCore_MainLoop
+; @note     confidence: medium for the Y=$18/$20 substitution: the 3rd colour (Y=4?) handling was derived from the CPY #$0002 test only.
+;;
+fPalette_FadeToNextPalette:
     SEP #$20                                                   ;80900C|E220    |      ;
     REP #$10                                                   ;80900E|C210    |      ;
     LDA.W nTimeState                                           ;809010|AD7309  |000973;
@@ -256,6 +290,12 @@ fPallete_ChangeHandler:
     RTL                                                        ;809165|6B      |      ;
  
  
+;;
+; @brief    Cancel a pending palette fade (ptrPaletteNext = 0).
+; @modifies ptrPaletteNext
+; @mode     M16X16 -> M16X8
+; @callers  fMap_ResetAndLoadDestinationArea
+;;
 fPalette_ZeroNextPalletePtr:
     REP #$30                                                   ;809166|C230    |      ;
     STZ.B ptrPaletteNext                                       ;809168|6404    |000004;
@@ -264,6 +304,16 @@ fPalette_ZeroNextPalletePtr:
     RTL                                                        ;80916E|6B      |      ;
  
  
+;;
+; @brief    Write one BGR555 colour into the palette buffer (the displayed buffer $7F0900, or $7F0B00 when n8Temp1 != 0).
+; @param    A      BGR555 colour value
+; @param    X      colour index within the row (0..15)
+; @param    Y      palette row (offset = 32*Y + 2*X)
+; @param    strcVariables.n8Temp1  0 = write sPalette_7F0900, non-zero = write sPalette_7F0B00
+; @modifies sPalette_7F0900 or sPalette_7F0B00, strcVariables.n16Temp1/n16Temp2/n16Temp3
+; @mode     M16X16 -> M16X16
+; @callers  fPalette_ProcessColorAnimSlots
+;;
 fPalette_WriteColorToBuffer:
     REP #$30                                                   ;80916F|C230    |      ; A: nValue, X: nColorIndex, Y: nOffsetindex (32Y+2X)
     STA.B strcVariables.n16Temp3                               ;809171|8582    |000082;
@@ -298,6 +348,17 @@ fPalette_WriteColorToBuffer:
     RTL                                                        ;80919C|6B      |      ;
  
  
+;;
+; @brief    Write one colour into the displayed buffer $7F0900 and the fade working copy $7F0D00 (or, with n8Temp1 != 0, only into $7F0B00).
+; @details  Used through the %PaletteModify macro to patch single colours (season/weather and married-girl sprite colours).
+; @param    A      BGR555 colour value
+; @param    X      colour index within the row (0..15)
+; @param    Y      palette row (offset = 32*Y + 2*X)
+; @param    strcVariables.n8Temp1  0 = patch $7F0900 and $7F0D00, non-zero = patch the target set $7F0B00
+; @modifies sPalette_7F0900, sPalette_7F0B00, sPalette_7F0D00, strcVariables.n16Temp1/n16Temp2/n16Temp3
+; @mode     M16X16 -> M16X16
+; @callers  %PaletteModify (fPalette_LoadSpritePallete)
+;;
 fPalette_ModifyPalette:
     REP #$30                                                   ;80919D|C230    |      ; A: nValue, X: nColorIndex, Y: nOffsetIndex (32Y+2X)
     STA.B strcVariables.n16Temp3                               ;80919F|8582    |000082;
@@ -333,6 +394,14 @@ fPalette_ModifyPalette:
     RTL                                                        ;8091CE|6B      |      ;
  
  
+;;
+; @brief    Copy palette #A into the first half (BG colours 0..127) of the palette buffers.
+; @details  Looks up the ptr24 in aPalettes[A] and copies $100 bytes (128 colours) to $7F0900 + 0 and the working copy $7F0D00 + 0.
+; @param    A      palette id (index into aPalettes)
+; @modifies sPalette_7F0900, sPalette_7F0D00, ptrTemp0x72, strcVariables.n16Temp1
+; @mode     M16X16 -> M16X16
+; @callers  fPalette_ChangeTimePallete, fMainMenu_*, fScreen_NameInput
+;;
 fPalette_LoadFirstHalf:
     REP #$30                                                   ;8091CF|C230    |      ; A: nIndex
     STA.B strcVariables.n16Temp1                               ;8091D1|857E    |00007E;
@@ -365,6 +434,14 @@ fPalette_LoadFirstHalf:
     RTL                                                        ;809207|6B      |      ;
  
  
+;;
+; @brief    Copy palette #A into the second half (sprite colours 128..255) of the palette buffers.
+; @details  Looks up the ptr24 in aPalettes[A] and copies $100 bytes (128 colours) to $7F0900 + $100 and $7F0D00 + $100.
+; @param    A      palette id (index into aPalettes)
+; @modifies sPalette_7F0900, sPalette_7F0D00, ptrTemp0x72, strcVariables.n16Temp1
+; @mode     M16X16 -> M16X16
+; @callers  fPalette_PrepareSpritePalette
+;;
 fPalette_LoadSecondHalf:
     REP #$30                                                   ;809208|C230    |      ; A: nIndex
     STA.B strcVariables.n16Temp1                               ;80920A|857E    |00007E;
@@ -397,6 +474,15 @@ fPalette_LoadSecondHalf:
     RTL                                                        ;809240|6B      |      ;
  
  
+;;
+; @brief    Build the target palette set $7F0B00 for the area strcMap.loadAreaId: night BG palette and the sprite palette.
+; @details  First half of $7F0B00 = palette aMapPalettesIndexes[area*6+4] (night, phase 4); second half = aPalettes[aMapPalettesId[area*2+1]] (evening/night sprite palette).
+;           Then fPalette_LoadSpritePallete is run with n8Temp1 = 1 to patch the season and married-girl colours into the target set. This buffer is what fPalette_FadeToNextPalette fades to after 18:00.
+; @modifies sPalette_7F0B00, strcVariables.n8Temp1, ptrTemp0x72
+; @mode     M8X16 -> M8X16
+; @calls    fPalette_LoadSpritePallete
+; @callers  fMap_SetupArea
+;;
 fPalette_LoadMapPallete:
     SEP #$20                                                   ;809241|E220    |      ;
     REP #$10                                                   ;809243|C210    |      ;
@@ -485,6 +571,15 @@ fPalette_LoadMapPallete:
     RTL                                                        ;8092E1|6B      |      ;
  
  
+;;
+; @brief    Load the BG palette of the current area for the current time of day phase.
+; @details  phase = 0 (<7), 1 (<15), 2 (<17), 3 (<18), 4 (night); nextIdx = aMapPalettesIndexes[area*6+phase]; then fPalette_LoadFirstHalf(A = id).
+; @modifies strcPalette.nextIdx, sPalette_7F0900, sPalette_7F0D00
+; @mode     M8X16 -> M16X16
+; @calls    fPalette_LoadFirstHalf
+; @callers  fMap_SetupArea
+; @note     A palette id of $FF (none) is not tested here; areas without a palette for the phase are never loaded at that phase. confidence: medium
+;;
 fPalette_ChangeTimePallete:
     SEP #$20                                                   ;8092E2|E220    |      ;
     REP #$10                                                   ;8092E4|C210    |      ;
@@ -526,6 +621,16 @@ fPalette_ChangeTimePallete:
     RTL                                                        ;809328|6B      |      ;
  
  
+;;
+; @brief    Load the sprite palette half (colours 128..255) for the current area/time of day, or a fixed special palette.
+; @details  If daily3 flag $0080 / $0100 / $0200 is set the fixed palettes $71 / $72 / $73 are used (special event / cutscene palettes (?)); otherwise
+;           aMapPalettesId[area*2 + (night ? 1 : 0)]. After loading, fPalette_LoadSpritePallete patches in the season and married-girl colours.
+; @modifies sPalette_7F0900, sPalette_7F0D00, strcVariables.n8Temp1
+; @mode     M16X16 -> M8X16
+; @calls    fPalette_LoadSecondHalf, fPalette_LoadSpritePallete
+; @callers  fMap_SetupArea
+; @note     confidence: medium for the meaning of daily3 flags $0080/$0100/$0200 (palettes $71-$73).
+;;
 fPalette_PrepareSpritePalette:
     REP #$30                                                   ;809329|C230    |      ;
     %CheckFlag(daily3, $0080)
@@ -587,6 +692,18 @@ fPalette_PrepareSpritePalette:
     RTL                                                        ;8093A3|6B      |      ;
  
  
+;;
+; @brief    Patch the season-dependent colours (palette rows $0A..$0C, colour $0F) and the married-girl hair/skin colours into the buffers.
+; @details  Entry = nPaletteSeasonOverwriteTable[season + variant] (3 colours, 6 bytes per entry); variant is 4 when n8Temp1 != 0, at night (>= 18:00) in areas >= $31 and below $15 (otherwise 0).
+;           The season is nCurrentSeasonID, except for areas $10..$13 where the entry is area-8 (the mountain areas use their own rows). The 3 colours are written with fPalette_ModifyPalette to colour indices $0A,$0B,$0C of palette row $0F.
+;           If nMarriedDaysCounter != 0 and one of the event2 flags !EFLAGS2_MARRIEDMARIA..EVE is set (girl id 1..5), the 3 colours of sPallete_MarriedGirlTable entry (girl id + 6 when the night variant applies) are written to colour indices 8,9,10 of palette row $0B.
+; @param    strcVariables.n8Temp1  0 = patch the displayed palette now, 1 = patch the night target set ($7F0B00) used by fPalette_LoadMapPallete
+; @modifies sPalette_7F0900, sPalette_7F0B00, sPalette_7F0D00, strcVariables.n16Temp1/2/3
+; @mode     M16X16 -> M16X16
+; @calls    fPalette_ModifyPalette
+; @callers  fPalette_LoadMapPallete, fPalette_PrepareSpritePalette
+; @note     confidence: medium - the index arithmetic (season*3 + variant) is read from the code but the semantics of "variant 4/6" are inferred.
+;;
 fPalette_LoadSpritePallete:
     REP #$30                                                   ;8093A4|C230    |      ;
     STZ.B strcVariables.n16Temp1                               ;8093A6|647E    |00007E;
@@ -760,6 +877,14 @@ fPalette_LoadSpritePallete:
     RTL                                                        ;809500|6B      |      ;
  
  
+;;
+; @brief    When the clock enters a new time-of-day phase start the fade to that phase's palette.
+; @details  phase from nCurrentTimeID as in fPalette_ChangeTimePallete; id = aMapPalettesIndexes[area*6+phase]. If id differs from strcPalette.nextIdx and is not $FF, fPalette_SetNextHourPalette(id) and nextIdx = id.
+; @modifies strcPalette.nextIdx, strcPalette.nextHourIdx, ptrPaletteNext
+; @mode     M8X16 -> M8X16
+; @calls    fPalette_SetNextHourPalette
+; @callers  fGame_TimeHandler
+;;
 fPalette_AdjustTimePalette:
     SEP #$20                                                   ;809501|E220    |      ;
     REP #$10                                                   ;809503|C210    |      ;

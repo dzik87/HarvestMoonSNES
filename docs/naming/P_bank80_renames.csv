@@ -1,0 +1,15 @@
+old,new,confidence,reason
+fCore_InterruptIRQ5,fCore_Reset,high,Placed in the emulation RESET vector slot ($FFFC) of src/code/header.asm; the routine initialises all hardware and WRAM and jumps to the title screen
+fCore_InterruptNMI1,fCore_InterruptNMI,high,Placed in the native NMI vector slot ($FFEA); saves registers and calls the VBlank update
+fCore_InterruptNMI3,fCore_InterruptIRQ,high,Placed in the native IRQ vector slot ($FFEE); reads SNES_TIMEUP to acknowledge the interrupt
+fCore_Return80872A,fCore_IrqHandlerStub,medium,Single RTS called only by the IRQ handler
+fCore_UpdateGFX,fCore_VBlankUpdate,high,Called only from the NMI handler; runs queued DMA transfers, reads the joypads and writes the BG scroll registers
+fCore_ManageGraphicsPresets,fCore_ApplyGraphicsPreset,high,Writes every PPU register value of preset A (Table_*_Presets) to the hardware and the WRAM shadow
+fCore_Store0x72To0x42AtIndex,fPalette_StartColorAnimSlot,high,Stores the script pointer ptrTemp0x72 into ptrPaletteAnimScripts[X] with colour index and palette row; called by all fPaletteAnim_* routines
+fCore_Zero0x42PtrAtIndex,fPalette_StopColorAnimSlot,high,Clears one ptrPaletteAnimScripts entry
+fCore_Zero0x42PtrFromIndex,fPalette_StopColorAnimSlotsFrom,high,Clears the ptrPaletteAnimScripts entries from slot Y up to 15 (fGame_TimeHandler passes Y=4)
+fCore_Zero0x42Ptr,fPalette_StopAllColorAnimSlots,high,Clears all 16 ptrPaletteAnimScripts entries
+fPallete_ChangeHandler,fPalette_FadeToNextPalette,high,Moves the working palette one step per colour component towards ptrPaletteNext every 32 frames
+fTileMap_SetTileMapPointerGetAreaFlags,fTileMap_GetAreaDescriptorByte,high,Sets strcMap.pCurrent to the area graphics descriptor and returns the byte at offset Y
+fTileMap_MapChangeHandler,fTileMap_LoadAreaGraphics,high,Decompresses and uploads all tile and name table blobs of the area and scrolls to the destination
+DMA_Channels_Flag_Table,aDmaChannelFlagTable,high,Table of one-hot DMA channel masks; project naming convention for tables is a<Name>

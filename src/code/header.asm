@@ -1,4 +1,15 @@
 
+;;
+; @file     header.asm
+; @brief    SNES cartridge header ($80FFB0-$80FFDF), ROM checksum and the CPU interrupt vector table ($80FFE0-$80FFFF) for the four regions.
+; @details  Header fields: maker code (E9 US, 01 EU/DE, 99 JP), game code AYWE/AYWP/AYWD/AYWJ, title "HARVEST MOON" (JP: half-width katakana), map mode $30 (LoROM, FastROM), chipset $02 (ROM + RAM + battery),
+;           ROM size $0B (2 MiB), RAM size $03 (8 KiB SRAM), country code, developer ID $33 (extended header), version 0. The checksum words are fixed values per region and must match the built ROM (tools/build.py verifies it).
+;           Interrupt vectors (word each): native COP, BRK, ABORT, NMI (fCore_InterruptNMI), unused RESET slot, IRQ (fCore_InterruptIRQ); emulation COP, unused, ABORT, NMI, RESET (fCore_Reset = real entry point), IRQ/BRK.
+;           All unused vectors point at fCore_InterruptReturn (RTI).
+; @bank     $80
+; @range    $80FFB0-$80FFFF
+; @see      src/code/bank_80/core.asm, docs/regions.md
+;;
     ORG $80FFB0
 
 ; HEADER
@@ -58,19 +69,19 @@ RomChecksum:
         dw $7E3C                                               ; Checksum
     endif
     
-    dw fCore_InterruptReturn
-    dw fCore_InterruptReturn
-    dw fCore_InterruptReturn
-    dw fCore_InterruptReturn
-    dw fCore_InterruptReturn
-    dw fCore_InterruptNMI1
-    dw fCore_InterruptReturn
-    dw fCore_InterruptNMI3
-    dw fCore_InterruptReturn
-    dw fCore_InterruptReturn
-    dw fCore_InterruptReturn
-    dw fCore_InterruptReturn
-    dw fCore_InterruptReturn
-    dw fCore_InterruptReturn
-    dw fCore_InterruptIRQ5
-    dw fCore_InterruptReturn
+    dw fCore_InterruptReturn    ; $FFE0 unused
+    dw fCore_InterruptReturn    ; $FFE2 unused
+    dw fCore_InterruptReturn    ; $FFE4 native COP
+    dw fCore_InterruptReturn    ; $FFE6 native BRK
+    dw fCore_InterruptReturn    ; $FFE8 native ABORT
+    dw fCore_InterruptNMI    ; $FFEA native NMI (VBlank)
+    dw fCore_InterruptReturn    ; $FFEC native RESET slot (unused)
+    dw fCore_InterruptIRQ    ; $FFEE native IRQ
+    dw fCore_InterruptReturn    ; $FFF0 unused
+    dw fCore_InterruptReturn    ; $FFF2 unused
+    dw fCore_InterruptReturn    ; $FFF4 emulation COP
+    dw fCore_InterruptReturn    ; $FFF6 unused
+    dw fCore_InterruptReturn    ; $FFF8 emulation ABORT
+    dw fCore_InterruptReturn    ; $FFFA emulation NMI
+    dw fCore_Reset    ; $FFFC emulation RESET (entry point after power on)
+    dw fCore_InterruptReturn    ; $FFFE emulation IRQ/BRK

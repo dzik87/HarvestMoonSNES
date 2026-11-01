@@ -1,6 +1,26 @@
+;;
+; @file     routines.asm
+; @brief    Area/map loading and screen transitions, map music selection, camera and background scrolling, and the streaming of new map rows/columns into VRAM while the player walks.
+; @details  fMap_SetupArea is the central "enter area" routine (graphics, palettes, objects, player sprite, music, fade in); fMap_ScreenTransitionHandler decides when a door/exit tile
+;           switches the area (aScreenTransitionTable). The fCamera_* routines keep the 16x16 tile map camera in sync with the player and the fMap_Stream* routines copy one 32-entry tile row/column
+;           of the WRAM map ($7E2000 layer 1, $7E4000 layer 2) into VRAM ring buffers.
+; @bank     $80
+; @range    $809553-$80A7AD
+; @see      src/code/bank_80/tilemaps.asm, src/code/bank_80/palette.asm, docs/formats/area-data.md
+;;
+
+
 ; Bank $80 module "routines" - starts at $809553
  
  
+;;
+; @brief    Start the colour animations of the current area for the current time of day by calling the matching fPaletteAnim_* routine.
+; @details  phase = 0 (<7), 1 (<15), 2 (<17), 3 (<18), 4 (night) from nCurrentTimeID. The routine pointer is pPaletteAnimRoutineTable[area*6+phase]; the sixth word of the area row
+;           decides when it is allowed: $FFFF = always, any other value = only in fall and winter (nCurrentSeasonID >= !SEASON_FALL). A pointer of $FFFF means no animation.
+; @mode     M8X16 -> M8X16
+; @callers  fMap_SetupArea
+; @note     The sixth word is $0001 for the indoor areas (houses ...), which therefore only animate in fall/winter - likely unintended; confidence: medium.
+;;
 fPaletteAnim_RunAreaRoutine:
     SEP #$20                                                   ;809553|E220    |      ;
     REP #$10                                                   ;809555|C210    |      ;
@@ -58,6 +78,14 @@ fPaletteAnim_RunAreaRoutine:
   + RTL                                                        ;8095B2|6B      |      ;
  
  
+;;
+; @brief    Automatic camera scrolling (cutscene scroll): while strcMapScrool.timer > 0 add the scroll speed to the camera and BG1 offsets.
+; @details  Per call decrements strcMapScrool.timer, adds speedX/speedY to strcCamera.cameraX/Y and mirrors the result in strcBGScrool.BG1HorOffs/VerOffs; a negative Y offset is clamped to 0.
+; @modifies strcMapScrool.timer, strcCamera.cameraX, strcCamera.cameraY, strcBGScrool.BG1HorOffs, strcBGScrool.BG1VerOffs
+; @mode     M8X16 -> M16X16
+; @callers  fCore_MainLoop, fMainMenu_PrepareHowToPlay, fMainMenu_StartHowToPlayDemo, fMainMenu_StateOpeningDemo
+; @note     The speed/timer are written by AI script commands (src/code/bank_84/ai_engine.asm) and fGameEngine (bank $83).
+;;
 fGraphics_MapScrool:
     SEP #$20                                                   ;8095B3|E220    |      ;
     REP #$10                                                   ;8095B5|C210    |      ;
@@ -82,6 +110,14 @@ fGraphics_MapScrool:
   + RTL                                                        ;8095DD|6B      |      ;
  
  
+;;
+; @brief    Choose the track for the current area, or silence at night (after 18:00) except in area $1E.
+; @details  Area $1E always selects its music; otherwise nCurrentTimeID >= $12 jumps to fAudioEngine_TurnOffMusic.
+; @modifies strcAudio.trackId
+; @mode     M8X16 -> M8X16
+; @calls    fAudioEngine_SelectMapMusic, fAudioEngine_TurnOffMusic
+; @callers  fCore_GameStart, fAudioEngine_MapChangeHandler
+;;
 fAudioEngine_MapMusicHandler:
     SEP #$20                                                   ;8095DE|E220    |      ;
     REP #$10                                                   ;8095E0|C210    |      ;
@@ -95,6 +131,16 @@ fAudioEngine_MapMusicHandler:
     JMP.W fAudioEngine_TurnOffMusic                            ;8095F2|4C6996  |809669;
  
  
+;;
+; @brief    Look up the music track id of the current area/season and store it in strcAudio.trackId.
+; @details  trackId = 0 by default. If mapFlags has bit $0010 the track $16 is used (festival/event flag (?)). If bit $0002 (rain) is set special tracks are chosen
+;           for areas <$5B: $13 for the farm-side areas ($31..$56), $14 for $15..$30, nothing for the overlay areas $57..$5A. Otherwise the id is
+;           pAudioEngine_MapMusic[area] -> byte [season]; a pointer of $FFFF means no music for the area (trackId stays 0).
+; @modifies strcAudio.trackId
+; @mode     M8X16 -> M8X16
+; @callers  fAudioEngine_MapMusicHandler
+; @note     confidence: medium for the meaning of mapFlags bits $0002 / $0010 (rain / event day); the code only shows the tests.
+;;
 fAudioEngine_SelectMapMusic:
     SEP #$20                                                   ;8095F5|E220    |      ;
     REP #$10                                                   ;8095F7|C210    |      ;
@@ -168,6 +214,11 @@ fAudioEngine_SelectMapMusic:
     RTL                                                        ;809668|6B      |      ;
  
  
+;;
+; @brief    Request silence: strcAudio.trackId = $FF.
+; @modifies strcAudio.trackId
+; @mode     M8
+;;
 fAudioEngine_TurnOffMusic:
     SEP #$20                                                   ;809669|E220    |      ;
     LDA.B #$FF                                                 ;80966B|A9FF    |      ;
@@ -175,6 +226,16 @@ fAudioEngine_TurnOffMusic:
     RTL                                                        ;809670|6B      |      ;
  
  
+;;
+; @brief    Per-frame check whether a forced teleport (area change) was requested; if so fade out and load the destination area.
+; @details  Does nothing unless !AFLAGS_FORCETELEPORT is set in mapFlags. Skips the music/area apply when daily3 flag $8000 (fade already running) is set, or when daily4 $0100 is clear but $0040 is set.
+;           Otherwise copies nDestinationAreaId to strcMap.loadAreaId and updates the music. If daily4 flag $0008 is set the destination becomes area $3C. Then fades out ($0F -> 1, 3 frames per step), forces blank and falls into fMap_ResetAndLoadDestinationArea.
+; @modifies strcMap.loadAreaId, nDestinationAreaId, strcAudio.trackId
+; @mode     M16X16
+; @calls    fAudioEngine_MapMusicHandler, fAudio_FadeOutOnTrackChangeSlow, fCore_ScreenFadeout, fCore_SetForceBlank, fMap_ResetAndLoadDestinationArea
+; @callers  fCore_MainLoop
+; @note     Two `JMP fMap_ResetAndLoadDestinationArea_Return` are used instead of RTL (original behaviour, both end in RTL).
+;;
 fAudioEngine_MapChangeHandler:
     REP #$30                                                   ;809671|C230    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;809673|AD9601  |000196;
@@ -219,6 +280,15 @@ fAudioEngine_MapChangeHandler:
     JSL.L fCore_ScreenFadeout                                  ;8096CB|220A8880|80880A;
     JSL.L fCore_SetForceBlank                                  ;8096CF|220F8E80|808E0F;
  
+;;
+; @brief    Tear down the old area and set up nDestinationAreaId: clears the map flags, VRAM text layer, colour animations, objects and AI, then calls fMap_SetupArea.
+; @details  mapFlags &= $3FDE (clears $0001, $0020, $4000, $8000: streaming flag, preset dependent bit, force teleport, raw charmap), daily2 flags $000F cleared, !PFLAGS_USERCONTROL set,
+;           VRAM $7000 area zeroed, all palette animation slots stopped, object tile cache/game objects/object slots cleared, AI pointer cleared; runs the area events and the how-to-play AI setup, then fMap_SetupArea.
+; @modifies strcDialogDisplay.mapFlags, strcMap.loadAreaId, strcFlags.daily2
+; @mode     M16X16 -> (RTL from fMap_SetupArea)
+; @calls    fCore_ZeroVRAMatOffset, fPalette_StopAllColorAnimSlots, fPalette_ZeroNextPalletePtr, fObject_InitTileCache, fObject_ClearGameObject, fObjectSlots_ClearAll, fAI_ZeroCCPtr, fMapEngine_AreaEvents, fAI_HowToPlaySetup, fMap_SetupArea
+; @callers  fCore_GameStart, fAudioEngine_MapChangeHandler
+;;
 fMap_ResetAndLoadDestinationArea:
     REP #$30                                                   ;8096D3|C230    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;8096D5|AD9601  |000196;
@@ -229,7 +299,7 @@ fMap_ResetAndLoadDestinationArea:
     REP #$20                                                   ;8096F2|C220    |      ;
     LDA.W #$7000                                               ;8096F4|A90070  |      ;
     JSL.L fCore_ZeroVRAMatOffset                               ;8096F7|22BC8980|8089BC;
-    JSL.L fCore_Zero0x42Ptr                                    ;8096FB|22AB8F80|808FAB;
+    JSL.L fPalette_StopAllColorAnimSlots                                    ;8096FB|22AB8F80|808FAB;
     JSL.L fPalette_ZeroNextPalletePtr                          ;8096FF|22669180|809166;
     JSL.L fObject_InitTileCache                                  ;809703|22D78E85|858ED7;
     JSL.L fObject_ClearGameObject                              ;809707|220F8285|85820F;
@@ -248,6 +318,21 @@ fMap_ResetAndLoadDestinationArea_Return:
     RTL                                                        ;80972B|6B      |      ; FIXME: I want to be .return
  
  
+;;
+; @brief    Enter area A: load graphics, palettes, object map, the player sprite and music, run two warm-up frames and fade in.
+; @details  Steps: read the area flag byte (fTileMap_GetAreaDescriptorByte Y=1: bit $20 -> start the clock (nTimeState=1) unless daily2 $0001, bits $C0 -> weather overlay).
+;           For outdoor areas an overlay is loaded first (rain area $57 with 4 rain colour animation scripts in slots 0..3 when mapFlags bit $0002; clouds area $58 when bit $0004 and before 17:00;
+;           snow area $59 with 4 snow scripts when bit $0008). Then: dialog box graphics, the area object map and tilemap (fObjectMap_LoadData, fTileMap_LoadAreaGraphics), BG palette for the time of day,
+;           sprite palette, area colour animations, target palette set, and a full 512 byte palette upload (DMA ch 0). The BG2 scroll is copied from the camera (area $26 uses vertical offset $0100).
+;           Per-area player state is reset (flags INTRANSITION/AISTEERING cleared, counters cleared, daily1 $0200 cleared). A carried item (strcPlayerData.carryItemId) is re-created as a carried object unless it is a tool (paint, milker, brush, $57), which is put away.
+;           The player sprite is rebuilt (fPlayer_InitSpriteObject), chickens are spawned unless daily3 $0002, music is switched, two frames of objects are rendered, force blank is released and the screen fades in ($03 -> $0F, 3 frames/step).
+; @param    A      area id (!AREA_*)
+; @modifies strcMap.loadAreaId, nTimeState, strcBGScrool.BG2HorOffs/VerOffs, strcPlayerData.carryItemId, strcPlayerData.unkCounter91C/919, nCarriedItemId, strcAudio.trackIdCopy, strcFlags.daily1/daily2
+; @mode     M8X16 -> M8X16
+; @calls    fTileMap_GetAreaDescriptorByte, fTileMap_LoadAreaGraphics, fPalette_StartColorAnimSlot, fDialog_LoadDialogBoxGraphics, fObjectMap_LoadData, fPalette_ChangeTimePallete, fPalette_PrepareSpritePalette, fPaletteAnim_RunAreaRoutine, fPalette_LoadMapPallete, fPalette_ProcessColorAnimSlots, fCore_PrepareTransfer, fCore_StartPreparedTransfer, fItemCarried_LoadPoseData, fObjectSlots_Allocate, fPlayer_InitSpriteObject, fPlayer_UpdateHandler, fGameEngine_SpawnChickensOnMap, fAudio_FadeOutOnTrackChangeFast, fAudio_LoadPendingTrack, fAudio_StartPendingTrack, fToolUsedSound_PlayOnToolChange, fCore_WaitForNextNMI, fObjectSlots_UpdateAll, fAI_HowToPlaySetup, fObject_UpdateAllAnimations, fObject_ProcessTileLoadQueue, fObject_RenderAll, fCore_ResetForceBlank, fCore_ScreenFadein
+; @callers  fMap_ResetAndLoadDestinationArea, fMainMenu_PrepareHowToPlay, fMainMenu_StartHowToPlayDemo, fMainMenu_StateOpeningDemo
+; @note     confidence: medium for the weather-overlay details (which bit means rain/clouds/snow was inferred from the overlay area ids and the colour scripts they load).
+;;
 fMap_SetupArea:
     SEP #$20                                                   ;80972C|E220    |      ; A: nAreaId
     REP #$10                                                   ;80972E|C210    |      ;
@@ -257,7 +342,7 @@ fMap_SetupArea:
     STZ.W nTimeState                                           ;809735|9C7309  |000973;
     REP #$30                                                   ;809738|C230    |      ;
     LDY.W #$0001                                               ;80973A|A00100  |      ;
-    JSL.L fTileMap_SetTileMapPointerGetAreaFlags               ;80973D|22AEA780|80A7AE;
+    JSL.L fTileMap_GetAreaDescriptorByte               ;80973D|22AEA780|80A7AE;
     SEP #$20                                                   ;809741|E220    |      ;
     PHA                                                        ;809743|48      |      ;
     AND.B #$20                                                 ;809744|2920    |      ;
@@ -302,7 +387,7 @@ fMap_SetupArea:
     SEP #$20                                                   ;80978D|E220    |      ;
     LDA.B #$57                                                 ;80978F|A957    |      ;
     STA.B strcMap.loadAreaId                                   ;809791|8522    |000022;
-    JSL.L fTileMap_MapChangeHandler                            ;809793|22C6A780|80A7C6;
+    JSL.L fTileMap_LoadAreaGraphics                            ;809793|22C6A780|80A7C6;
     REP #$20                                                   ;809797|C220    |      ;
     SEP #$10                                                   ;809799|E210    |      ;
     LDA.W #aPaletteAnimScript_Rain_Slot0                                  ;80979B|A9D7B9  |      ;
@@ -314,7 +399,7 @@ fMap_SetupArea:
     LDA.B #$0C                                                 ;8097A8|A90C    |      ;
     LDX.B #$00                                                 ;8097AA|A200    |      ;
     LDY.B #$00                                                 ;8097AC|A000    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;8097AE|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;8097AE|22488E80|808E48;
     REP #$20                                                   ;8097B2|C220    |      ;
     SEP #$10                                                   ;8097B4|E210    |      ;
     LDA.W #aPaletteAnimScript_Rain_Slot1                                  ;8097B6|A9DCB9  |      ;
@@ -326,7 +411,7 @@ fMap_SetupArea:
     LDA.B #$0D                                                 ;8097C3|A90D    |      ;
     LDX.B #$01                                                 ;8097C5|A201    |      ;
     LDY.B #$00                                                 ;8097C7|A000    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;8097C9|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;8097C9|22488E80|808E48;
     REP #$20                                                   ;8097CD|C220    |      ;
     SEP #$10                                                   ;8097CF|E210    |      ;
     LDA.W #aPaletteAnimScript_Rain_Slot2                                  ;8097D1|A9E2B9  |      ;
@@ -338,7 +423,7 @@ fMap_SetupArea:
     LDA.B #$0E                                                 ;8097DE|A90E    |      ;
     LDX.B #$02                                                 ;8097E0|A202    |      ;
     LDY.B #$00                                                 ;8097E2|A000    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;8097E4|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;8097E4|22488E80|808E48;
     REP #$20                                                   ;8097E8|C220    |      ;
     SEP #$10                                                   ;8097EA|E210    |      ;
     LDA.W #aPaletteAnimScript_Rain_Slot3                                  ;8097EC|A9DFB9  |      ;
@@ -350,7 +435,7 @@ fMap_SetupArea:
     LDA.B #$0F                                                 ;8097F9|A90F    |      ;
     LDX.B #$03                                                 ;8097FB|A203    |      ;
     LDY.B #$00                                                 ;8097FD|A000    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;8097FF|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;8097FF|22488E80|808E48;
     JMP.W .load_area_data                                              ;809803|4CA898  |8098A8;
  
  
@@ -369,7 +454,7 @@ fMap_SetupArea:
 .load_overlay58:
     LDA.B #$58                                                 ;80981D|A958    |      ;
     STA.B strcMap.loadAreaId                                   ;80981F|8522    |000022;
-    JSL.L fTileMap_MapChangeHandler                            ;809821|22C6A780|80A7C6;
+    JSL.L fTileMap_LoadAreaGraphics                            ;809821|22C6A780|80A7C6;
     JMP.W .load_area_data                                              ;809825|4CA898  |8098A8;
  
  
@@ -381,7 +466,7 @@ fMap_SetupArea:
     SEP #$20                                                   ;809832|E220    |      ;
     LDA.B #$59                                                 ;809834|A959    |      ;
     STA.B strcMap.loadAreaId                                   ;809836|8522    |000022;
-    JSL.L fTileMap_MapChangeHandler                            ;809838|22C6A780|80A7C6;
+    JSL.L fTileMap_LoadAreaGraphics                            ;809838|22C6A780|80A7C6;
     REP #$20                                                   ;80983C|C220    |      ;
     SEP #$10                                                   ;80983E|E210    |      ;
     LDA.W #aPaletteAnimScript_Snow_Slot0                                  ;809840|A9EAB9  |      ;
@@ -393,7 +478,7 @@ fMap_SetupArea:
     LDA.B #$0C                                                 ;80984D|A90C    |      ;
     LDX.B #$00                                                 ;80984F|A200    |      ;
     LDY.B #$00                                                 ;809851|A000    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;809853|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;809853|22488E80|808E48;
     REP #$20                                                   ;809857|C220    |      ;
     SEP #$10                                                   ;809859|E210    |      ;
     LDA.W #aPaletteAnimScript_Snow_Slot1                                  ;80985B|A9EFB9  |      ;
@@ -405,7 +490,7 @@ fMap_SetupArea:
     LDA.B #$0D                                                 ;809868|A90D    |      ;
     LDX.B #$01                                                 ;80986A|A201    |      ;
     LDY.B #$00                                                 ;80986C|A000    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;80986E|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;80986E|22488E80|808E48;
     REP #$20                                                   ;809872|C220    |      ;
     SEP #$10                                                   ;809874|E210    |      ;
     LDA.W #aPaletteAnimScript_Snow_Slot2                                  ;809876|A9F2B9  |      ;
@@ -417,7 +502,7 @@ fMap_SetupArea:
     LDA.B #$0E                                                 ;809883|A90E    |      ;
     LDX.B #$02                                                 ;809885|A202    |      ;
     LDY.B #$00                                                 ;809887|A000    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;809889|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;809889|22488E80|808E48;
     REP #$20                                                   ;80988D|C220    |      ;
     SEP #$10                                                   ;80988F|E210    |      ;
     LDA.W #aPaletteAnimScript_Snow_Slot3                                  ;809891|A9F5B9  |      ;
@@ -429,7 +514,7 @@ fMap_SetupArea:
     LDA.B #$0F                                                 ;80989E|A90F    |      ;
     LDX.B #$03                                                 ;8098A0|A203    |      ;
     LDY.B #$00                                                 ;8098A2|A000    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;8098A4|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;8098A4|22488E80|808E48;
  
 .load_area_data:
     JSL.L fDialog_LoadDialogBoxGraphics                               ;8098A8|22BB9283|8392BB;
@@ -437,7 +522,7 @@ fMap_SetupArea:
     PLA                                                        ;8098AE|68      |      ;
     STA.B strcMap.loadAreaId                                   ;8098AF|8522    |000022;
     JSL.L fObjectMap_LoadData                                  ;8098B1|22FBA582|82A5FB;
-    JSL.L fTileMap_MapChangeHandler                            ;8098B5|22C6A780|80A7C6;
+    JSL.L fTileMap_LoadAreaGraphics                            ;8098B5|22C6A780|80A7C6;
     JSL.L fPalette_ChangeTimePallete                           ;8098B9|22E29280|8092E2;
     JSL.L fPalette_PrepareSpritePalette                        ;8098BD|22299380|809329;
     JSL.L fPaletteAnim_RunAreaRoutine                            ;8098C1|22539580|809553;
@@ -592,6 +677,21 @@ fMap_SetupArea:
     RTL                                                        ;809A63|6B      |      ;
  
  
+;;
+; @brief    Per-frame door/exit handling: when the player stands on a transition tile start the transition to the target area, or walk out of the map edge.
+; @details  $0878/$087A are the tile ids under the player (two probe points). Tile ids $C0..$CF are door/exit tiles (index = tile id, property row in aScreenTransitionTable via the object property byte 0),
+;           $D0..$FF are the special tiles handled in .caseD0 (farm events). For doors: not while riding a horse, not with daily4 flags $0006, and the transition target is cancelled with the shop rules
+;           of the flags byte of the table row: bit0 add season to the area id, bit1 closed from 17:00 (evening), bit2 closed before 17:00, bit3 open only Sunday/Saturday, bit4 closed Saturday (and winter day 10),
+;           bit5 closed Sunday, bit6 day dependent area (spring day 1 -> $3A, winter day 24 -> !AREA_NY_MOUNTAINTOP, days 10..12 -> +4), bit7 closed on festival days (mapFlags $0010).
+;           Phase counter $098A: 0 -> 1 on the first frame (reads the row: destination area, tile-script id, flags, position), 1 -> waits for a running tile script (ptrUnknown0xCF), 2..$0D the player walks into the exit,
+;           $0D finishes the walk: when the current area is a farm area (< !AREA_TOWNSPRING) fObjectMap_LoadFarm runs; when the current area lies in [!AREA_CROSSROADSPRING, !AREA_WOODSSPRING) one hour is added to nCurrentTimeID (unless it is already 18:00) and fEvents_NoonMealCheck runs; then !AFLAGS_FORCETELEPORT is set.
+;           .caseD0 (special tiles $D0..$FF, only in areas !AREA_WOODSSPRING..!AREA_NY_SPA-1 with mapFlags & $1A == 0): tile $F9 in spring (1/16 chance per frame, once per day via daily2 $2000) starts AI script $11 action $2C,
+;           tile $FA in fall (daily2 $4000) script $13 action $2B, tile $FB in winter (daily2 $8000) script $12 action $2A; tile $F8 under the player while fishing switches the player action to !PACTION_0F (?).
+; @mode     M16X16 -> M16X16
+; @calls    fCore_GetRandomNumber, fTileScript_Start, fObjectMap_LoadFarm, fEvents_NoonMealCheck
+; @callers  fCore_MainLoop
+; @note     confidence: medium - the bit assignment of the flags byte comes from the tests above (closed-shop dialog code in bank $82 sound.asm uses the same bits); the $F8..$FB tile semantics are inferred from the AI scripts they start.
+;;
 fMap_ScreenTransitionHandler:
     REP #$30                                                   ;809A64|C230    |      ;
     LDA.W $0878                                                ;809A66|AD7808  |000878;
@@ -1162,6 +1262,14 @@ fMap_ScreenTransitionHandler:
     RTL                                                        ;809EBB|6B      |      ;
  
  
+;;
+; @brief    Compute the camera position from the player's position, clamped to the map's camera limits.
+; @details  cameraX = player.posX - $80 limited to [strcPlayer.offsetCamX, strcCamera.offsetCamX] (min/max set by fTileMap_LoadAreaGraphics); the screen position of the player sprite
+;           strcObjectData.camX = posX - cameraX (+$80 bias). When the camera is pinned to the minimum the scroll sub-pixel strcMap.unk20 is reset to 0, at the maximum set to 8. The same for Y with strcMap.unk21.
+; @modifies strcCamera.cameraX, strcCamera.cameraY, strcObjectData.camX, strcObjectData.camY, strcMap.unk20, strcMap.unk21
+; @mode     M16X16
+; @callers  fTileMap_LoadAreaGraphics and the player movement code
+;;
 fCamera_UpdateFromPlayerPos:
     REP #$30                                                   ;809EBC|C230    |      ;
     LDA.B strcPlayer.posX                                      ;809EBE|A5D6    |0000D6;
@@ -1266,6 +1374,16 @@ fCamera_UpdateFromPlayerPos:
     RTL                                                        ;809F60|6B      |      ;
  
  
+;;
+; @brief    Update the BG2 (background layer) scroll: static, parallax or drifting depending on the area and mapFlags.
+; @details  Area !AREA_SHED: nothing. Areas >= $31: BG2 X = camera X; Y = camera Y / 2 + $80 while the camera is not pinned (parallax) and the player is not walking sideways. Otherwise by mapFlags:
+;           bit $0002 (rain overlay?) and bit $0008: BG2 follows the camera 1:1; bit $0004 (clouds): BG2 scrolls with the player direction (strcMap.unk1E per frame) when the camera is not pinned
+;           and additionally drifts diagonally every 10 frames (strcPlayerData.unkCounter91C).
+; @modifies strcBGScrool.BG2HorOffs, strcBGScrool.BG2VerOffs, strcMap.unk1E, strcPlayerData.unkCounter91C
+; @mode     M8X16 -> M16X16
+; @callers  fPlayerAction_Finish
+; @note     confidence: medium - the effect names (parallax, cloud drift) are inferred from the arithmetic.
+;;
 fCamera_UpdateBG2Scroll:
     SEP #$20                                                   ;809F61|E220    |      ;
     REP #$10                                                   ;809F63|C210    |      ;
@@ -1475,6 +1593,15 @@ fCamera_UpdateBG2Scroll:
     RTL                                                        ;80A0AA|6B      |      ;
  
  
+;;
+; @brief    Camera scroll step down: update BG1 vertical offset and request the streaming of the next row when the scroll crossed a tile boundary.
+; @details  BG1 vertical offset = camera.cameraY. Unless the camera is pinned at its limits, strcMap.unk1E (scroll amount in pixels per call, max 8) is updated; when the map is large (mapFlags bit $0001 set, streaming mode)
+;           strcMap.unk21 accumulates the scroll and after 8 pixels fMap_StreamRowDown is called to load the next tile row.
+; @modifies strcBGScrool.BG1VerOffs, strcMap.unk1E, strcMap.unk21
+; @mode     M16X16 -> M16X16
+; @calls    fMap_StreamRowDown
+; @callers  player movement / scrolling code (bank $81)
+;;
 fCamera_ScrollDownStep:
     REP #$30                                                   ;80A0AB|C230    |      ;
     LDA.B strcCamera.cameraY                                   ;80A0AD|A5F7    |0000F7;
@@ -1508,6 +1635,15 @@ fCamera_ScrollDownStep:
     RTL                                                        ;80A0E0|6B      |      ;
  
  
+;;
+; @brief    Camera scroll step up: update BG1 vertical offset and request the streaming of the next row when the scroll crossed a tile boundary.
+; @details  BG1 vertical offset = camera.cameraY. Unless the camera is pinned at its limits, strcMap.unk1E (scroll amount in pixels per call, max 8) is updated; when the map is large (mapFlags bit $0001 set, streaming mode)
+;           strcMap.unk21 accumulates the scroll and after 8 pixels fMap_StreamRowUp is called to load the next tile row.
+; @modifies strcBGScrool.BG1VerOffs, strcMap.unk1E, strcMap.unk21
+; @mode     M16X16 -> M16X16
+; @calls    fMap_StreamRowUp
+; @callers  player movement / scrolling code (bank $81)
+;;
 fCamera_ScrollUpStep:
     REP #$30                                                   ;80A0E1|C230    |      ;
     LDA.B strcCamera.cameraY                                   ;80A0E3|A5F7    |0000F7;
@@ -1544,6 +1680,15 @@ fCamera_ScrollUpStep:
     RTL                                                        ;80A11B|6B      |      ;
  
  
+;;
+; @brief    Camera scroll step right: update BG1 horizontal offset and request the streaming of the next column when the scroll crossed a tile boundary.
+; @details  BG1 horizontal offset = camera.cameraX. Unless the camera is pinned at its limits, strcMap.unk1E (scroll amount in pixels per call, max 8) is updated; when the map is large (mapFlags bit $0001 set, streaming mode)
+;           strcMap.unk20 accumulates the scroll and after 8 pixels fMap_StreamColumnRight is called to load the next tile column.
+; @modifies strcBGScrool.BG1HorOffs, strcMap.unk1E, strcMap.unk20
+; @mode     M16X16 -> M16X16
+; @calls    fMap_StreamColumnRight
+; @callers  player movement / scrolling code (bank $81)
+;;
 fCamera_ScrollRightStep:
     REP #$30                                                   ;80A11C|C230    |      ;
     LDA.B strcCamera.cameraX                                   ;80A11E|A5F5    |0000F5;
@@ -1577,6 +1722,15 @@ fCamera_ScrollRightStep:
     RTL                                                        ;80A151|6B      |      ;
  
  
+;;
+; @brief    Camera scroll step left: update BG1 horizontal offset and request the streaming of the next column when the scroll crossed a tile boundary.
+; @details  BG1 horizontal offset = camera.cameraX. Unless the camera is pinned at its limits, strcMap.unk1E (scroll amount in pixels per call, max 8) is updated; when the map is large (mapFlags bit $0001 set, streaming mode)
+;           strcMap.unk20 accumulates the scroll and after 8 pixels fMap_StreamColumnLeft is called to load the next tile column.
+; @modifies strcBGScrool.BG1HorOffs, strcMap.unk1E, strcMap.unk20
+; @mode     M16X16 -> M16X16
+; @calls    fMap_StreamColumnLeft
+; @callers  player movement / scrolling code (bank $81)
+;;
 fCamera_ScrollLeftStep:
     REP #$30                                                   ;80A152|C230    |      ;
     LDA.B strcCamera.cameraX                                   ;80A154|A5F5    |0000F5;
@@ -1613,6 +1767,17 @@ fCamera_ScrollLeftStep:
     RTL                                                        ;80A18C|6B      |      ;
  
  
+;;
+; @brief    Streaming: copy one row below the screen of 32 map entries from the WRAM map layers into VRAM (VRAM $6000+ring and +$0400).
+; @details  The room is held in WRAM as 32-entry-wide lines (layer 1 at $7E2000, layer 2 at $7E4000); strcMap.unk12 is the position in the map, strcMap.unk14 the ring-buffer
+;           position in the VRAM tilemap. The code builds two $40 byte vectors in $0746 (layer 1) and $07C6 (layer 2) - taking care of the 32-entry VRAM screen wrap - and queues them with
+;           fCore_PrepareTransfer on DMA channels 0 and 1 (VMAIN $80, word increment). The map position and the ring position are advanced downwards (+$20 words, wrapping $0C00 -> 0).
+; @modifies strcMap.unk12, strcMap.unk14, WRAM $0746-$07C5, ptrTemp0x72, ptrUnknown0x75
+; @mode     M16X16
+; @calls    fCore_PrepareTransfer
+; @callers  fCamera_ScrollDownStep
+; @note     confidence: medium - register/offset meaning of strcMap.unk10..unk16 inferred from usage (unk10/unk14 = VRAM ring positions, unk12/unk16 = map positions).
+;;
 fMap_StreamRowDown:
     REP #$30                                                   ;80A18D|C230    |      ;
     LDA.B strcMap.unk12                                        ;80A18F|A512    |000012;
@@ -1828,6 +1993,17 @@ fMap_StreamRowDown:
     RTL                                                        ;80A307|6B      |      ;
  
  
+;;
+; @brief    Streaming: copy one row above the screen of 32 map entries from the WRAM map layers into VRAM (VRAM $6000+ring and +$0400).
+; @details  The room is held in WRAM as 32-entry-wide lines (layer 1 at $7E2000, layer 2 at $7E4000); strcMap.unk12 is the position in the map, strcMap.unk14 the ring-buffer
+;           position in the VRAM tilemap. The code builds two $40 byte vectors in $0746 (layer 1) and $07C6 (layer 2) - taking care of the 32-entry VRAM screen wrap - and queues them with
+;           fCore_PrepareTransfer on DMA channels 0 and 1 (VMAIN $80, word increment). The map position and the ring position are advanced upwards (-$20 words, wrapping to $03E0).
+; @modifies strcMap.unk12, strcMap.unk14, WRAM $0746-$07C5, ptrTemp0x72, ptrUnknown0x75
+; @mode     M16X16
+; @calls    fCore_PrepareTransfer
+; @callers  fCamera_ScrollUpStep
+; @note     confidence: medium - register/offset meaning of strcMap.unk10..unk16 inferred from usage (unk10/unk14 = VRAM ring positions, unk12/unk16 = map positions).
+;;
 fMap_StreamRowUp:
     REP #$30                                                   ;80A308|C230    |      ;
     LDA.B strcMap.unk12                                        ;80A30A|A512    |000012;
@@ -2042,6 +2218,17 @@ fMap_StreamRowUp:
     RTL                                                        ;80A480|6B      |      ;
  
  
+;;
+; @brief    Streaming: copy one column right of the screen of 32 map entries from the WRAM map layers into VRAM (VRAM $6000+ring and +$0800).
+; @details  The room is held in WRAM as 32-entry-wide lines (layer 1 at $7E2000, layer 2 at $7E4000); strcMap.unk16 is the position in the map, strcMap.unk10 the ring-buffer
+;           position in the VRAM tilemap. The code builds two $40 byte vectors in $0746 (layer 1) and $07C6 (layer 2) - taking care of the 32-entry VRAM screen wrap - and queues them with
+;           fCore_PrepareTransfer on DMA channels 0 and 1 (VMAIN $81, increment by 32 words). The map position and the ring position are advanced to the right (+1 word).
+; @modifies strcMap.unk16, strcMap.unk10, WRAM $0746-$07C5, ptrTemp0x72, ptrUnknown0x75
+; @mode     M16X16
+; @calls    fCore_PrepareTransfer
+; @callers  fCamera_ScrollRightStep
+; @note     confidence: medium - register/offset meaning of strcMap.unk10..unk16 inferred from usage (unk10/unk14 = VRAM ring positions, unk12/unk16 = map positions).
+;;
 fMap_StreamColumnRight:
     REP #$30                                                   ;80A481|C230    |      ;
     LDA.B strcMap.unk16                                        ;80A483|A516    |000016;
@@ -2269,6 +2456,17 @@ fMap_StreamColumnRight:
     RTL                                                        ;80A616|6B      |      ;
  
  
+;;
+; @brief    Streaming: copy one column left of the screen of 32 map entries from the WRAM map layers into VRAM (VRAM $6000+ring and +$0800).
+; @details  The room is held in WRAM as 32-entry-wide lines (layer 1 at $7E2000, layer 2 at $7E4000); strcMap.unk16 is the position in the map, strcMap.unk10 the ring-buffer
+;           position in the VRAM tilemap. The code builds two $40 byte vectors in $0746 (layer 1) and $07C6 (layer 2) - taking care of the 32-entry VRAM screen wrap - and queues them with
+;           fCore_PrepareTransfer on DMA channels 0 and 1 (VMAIN $81, increment by 32 words). The map position and the ring position are advanced to the left (-1 word).
+; @modifies strcMap.unk16, strcMap.unk10, WRAM $0746-$07C5, ptrTemp0x72, ptrUnknown0x75
+; @mode     M16X16
+; @calls    fCore_PrepareTransfer
+; @callers  fCamera_ScrollLeftStep
+; @note     confidence: medium - register/offset meaning of strcMap.unk10..unk16 inferred from usage (unk10/unk14 = VRAM ring positions, unk12/unk16 = map positions).
+;;
 fMap_StreamColumnLeft:
     REP #$30                                                   ;80A617|C230    |      ;
     LDA.B strcMap.unk16                                        ;80A619|A516    |000016;

@@ -118,7 +118,7 @@ fMainMenu_AutoHowToPlay:
     %UnsetFlag(daily2, $0004)
     JSL.L fCore_ZeroVRAM                                       ;82D4F4|22468880|808846;
     JSL.L fCore_ZeroCGRAM                                      ;82D4F8|22808980|808980;
-    JSL.L fCore_Zero0x42Ptr                                    ;82D4FC|22AB8F80|808FAB;
+    JSL.L fPalette_StopAllColorAnimSlots                                    ;82D4FC|22AB8F80|808FAB;
     JSL.L fObject_InitTileCache                                  ;82D500|22D78E85|858ED7;
     JSL.L fObject_ClearGameObject                              ;82D504|220F8285|85820F;
     JSL.L fObjectSlots_ClearAll                                   ;82D508|22C7A481|81A4C7;
@@ -327,7 +327,7 @@ fMainMenu_PrepareHowToPlay:
     JSL.L fMap_ScreenTransitionHandler                             ;82D6DE|22649A80|809A64;
     JSL.L fGame_TimeHandler                                    ;82D6E2|22008082|828000;
     JSL.L fDialog_IterateText                                  ;82D6E6|221C9583|83951C;
-    JSL.L fPallete_ChangeHandler                               ;82D6EA|220C9080|80900C;
+    JSL.L fPalette_FadeToNextPalette                               ;82D6EA|220C9080|80900C;
     JSL.L fPalette_ProcessColorAnimSlots                                  ;82D6EE|22698E80|808E69;
     JSL.L fInput_Handler                                       ;82D6F2|2234C084|84C034;
     JSL.L fObjectSlots_UpdateAll                                      ;82D6F6|2283A381|81A383;
@@ -422,7 +422,7 @@ fMainMenu_TitleScreenInit:
     JSL.L fObjectMap_LoadDefaultFarm                           ;82D78A|225AA682|82A65A;
     SEP #$20                                                   ;82D78E|E220    |      ;
     LDA.B #$03                                                 ;82D790|A903    |      ;
-    JSL.L fCore_ManageGraphicsPresets                          ;82D792|22598C80|808C59;
+    JSL.L fCore_ApplyGraphicsPreset                          ;82D792|22598C80|808C59;
     JSL.L fCore_SetForceBlank                                  ;82D796|220F8E80|808E0F;
     if !REGION_EUDE
     JSL.L fCore_ZeroVRAM
@@ -431,7 +431,7 @@ fMainMenu_TitleScreenInit:
     SEP #$20                                                   ;82D79E|E220    |      ;
     LDA.B #$5D                                                 ;82D7A0|A95D    |      ;
     STA.B strcMap.loadAreaId                                   ;82D7A2|8522    |000022;
-    JSL.L fTileMap_MapChangeHandler                            ;82D7A4|22C6A780|80A7C6;
+    JSL.L fTileMap_LoadAreaGraphics                            ;82D7A4|22C6A780|80A7C6;
     REP #$20                                                   ;82D7A8|C220    |      ;
     LDA.W #$006E                                               ;82D7AA|A96E00  |      ;
     JSL.L fPalette_LoadFirstHalf                               ;82D7AD|22CF9180|8091CF;
@@ -600,7 +600,7 @@ fMainMenu_StateOpeningDemo:
     REP #$30                                                   ;82D8B0|C230    |      ;
     JSL.L fCore_ZeroVRAM                                       ;82D8B2|22468880|808846;
     JSL.L fCore_ZeroCGRAM                                      ;82D8B6|22808980|808980;
-    JSL.L fCore_Zero0x42Ptr                                    ;82D8BA|22AB8F80|808FAB;
+    JSL.L fPalette_StopAllColorAnimSlots                                    ;82D8BA|22AB8F80|808FAB;
     JSL.L fObject_InitTileCache                                  ;82D8BE|22D78E85|858ED7;
     JSL.L fObject_ClearGameObject                              ;82D8C2|220F8285|85820F;
     JSL.L fObjectSlots_ClearAll                                   ;82D8C6|22C7A481|81A4C7;
@@ -645,7 +645,7 @@ fMainMenu_StateOpeningDemo:
     JSL.L fMap_ScreenTransitionHandler                             ;82D950|22649A80|809A64;
     JSL.L fGame_TimeHandler                                    ;82D954|22008082|828000;
     JSL.L fDialog_IterateText                                  ;82D958|221C9583|83951C;
-    JSL.L fPallete_ChangeHandler                               ;82D95C|220C9080|80900C;
+    JSL.L fPalette_FadeToNextPalette                               ;82D95C|220C9080|80900C;
     JSL.L fPalette_ProcessColorAnimSlots                                  ;82D960|22698E80|808E69;
     JSL.L fInput_Handler                                       ;82D964|2234C084|84C034;
     JSL.L fObjectSlots_UpdateAll                                      ;82D968|2283A381|81A383;
@@ -700,10 +700,10 @@ fMainMenu_StateOpeningDemo:
     JSL.L fCore_SetForceBlank                                  ;82D9D0|220F8E80|808E0F;
     SEP #$20                                                   ;82D9D4|E220    |      ;
     LDA.B #$03                                                 ;82D9D6|A903    |      ;
-    JSL.L fCore_ManageGraphicsPresets                          ;82D9D8|22598C80|808C59;
+    JSL.L fCore_ApplyGraphicsPreset                          ;82D9D8|22598C80|808C59;
     JSL.L fCore_ZeroVRAM                                       ;82D9DC|22468880|808846;
     JSL.L fCore_ZeroCGRAM                                      ;82D9E0|22808980|808980;
-    JSL.L fCore_Zero0x42Ptr                                    ;82D9E4|22AB8F80|808FAB;
+    JSL.L fPalette_StopAllColorAnimSlots                                    ;82D9E4|22AB8F80|808FAB;
     JSL.L fObject_InitTileCache                                  ;82D9E8|22D78E85|858ED7;
     JSL.L fObject_ClearGameObject                              ;82D9EC|220F8285|85820F;
     JSL.L fObjectSlots_ClearAll                                   ;82D9F0|22C7A481|81A4C7;
@@ -711,7 +711,7 @@ fMainMenu_StateOpeningDemo:
     SEP #$20                                                   ;82D9F8|E220    |      ;
     LDA.B #$5B                                                 ;82D9FA|A95B    |      ;
     STA.B strcMap.loadAreaId                                   ;82D9FC|8522    |000022;
-    JSL.L fTileMap_MapChangeHandler                            ;82D9FE|22C6A780|80A7C6;
+    JSL.L fTileMap_LoadAreaGraphics                            ;82D9FE|22C6A780|80A7C6;
     REP #$20                                                   ;82DA02|C220    |      ;
     LDA.W #$006D                                               ;82DA04|A96D00  |      ;
     JSL.L fPalette_LoadFirstHalf                               ;82DA07|22CF9180|8091CF;
@@ -858,10 +858,10 @@ fMainMenu_StateReinitTitleScreen:
     JSL.L fCore_SetForceBlank                                  ;82DB15|220F8E80|808E0F;
     SEP #$20                                                   ;82DB19|E220    |      ;
     LDA.B #$03                                                 ;82DB1B|A903    |      ;
-    JSL.L fCore_ManageGraphicsPresets                          ;82DB1D|22598C80|808C59;
+    JSL.L fCore_ApplyGraphicsPreset                          ;82DB1D|22598C80|808C59;
     JSL.L fCore_ZeroVRAM                                       ;82DB21|22468880|808846;
     JSL.L fCore_ZeroCGRAM                                      ;82DB25|22808980|808980;
-    JSL.L fCore_Zero0x42Ptr                                    ;82DB29|22AB8F80|808FAB;
+    JSL.L fPalette_StopAllColorAnimSlots                                    ;82DB29|22AB8F80|808FAB;
     JSL.L fObject_InitTileCache                                  ;82DB2D|22D78E85|858ED7;
     JSL.L fObject_ClearGameObject                              ;82DB31|220F8285|85820F;
     JSL.L fObjectSlots_ClearAll                                   ;82DB35|22C7A481|81A4C7;
@@ -875,7 +875,7 @@ fMainMenu_StateReinitTitleScreen:
     SEP #$20                                                   ;82DB4C|E220    |      ;
     LDA.B #$5B                                                 ;82DB4E|A95B    |      ;
     STA.B strcMap.loadAreaId                                   ;82DB50|8522    |000022;
-    JSL.L fTileMap_MapChangeHandler                            ;82DB52|22C6A780|80A7C6;
+    JSL.L fTileMap_LoadAreaGraphics                            ;82DB52|22C6A780|80A7C6;
     REP #$20                                                   ;82DB56|C220    |      ;
     LDA.W #$006D                                               ;82DB58|A96D00  |      ;
     JSL.L fPalette_LoadFirstHalf                               ;82DB5B|22CF9180|8091CF;
@@ -937,7 +937,7 @@ fMainMenu_ShowTitleScreen:
     STZ.W strcDialogDisplay.mapDestX                           ;82DBC6|9C7D01  |00017D;
     STZ.W strcDialogDisplay.mapDestY                           ;82DBC9|9C7F01  |00017F;
     STZ.W strcDialogDisplay.mapFlags                           ;82DBCC|9C9601  |000196;
-    JSL.L fTileMap_MapChangeHandler                            ;82DBCF|22C6A780|80A7C6;
+    JSL.L fTileMap_LoadAreaGraphics                            ;82DBCF|22C6A780|80A7C6;
     JSL.L fAudio_FadeOutOnTrackChangeFast                                 ;82DBD3|221F8483|83841F;
     JSL.L fAudio_LoadPendingTrack                                 ;82DBD7|22A48383|8383A4;
     JSL.L fAudio_StartPendingTrack                                 ;82DBDB|22808383|838380;
@@ -993,7 +993,7 @@ fMainMenu_StateTitleStartCursorAnim:
     JML.L fMainMenu_EndFrame                                      ;82DC2E|5C71D882|82D871;
  
  
-  + JSL.L fCore_Zero0x42Ptr                                    ;82DC32|22AB8F80|808FAB;
+  + JSL.L fPalette_StopAllColorAnimSlots                                    ;82DC32|22AB8F80|808FAB;
     REP #$20                                                   ;82DC36|C220    |      ;
     SEP #$10                                                   ;82DC38|E210    |      ;
     LDA.W #aMainMenu_PalAnimLogoA                          ;82DC3A|A9A4F2  |      ;
@@ -1005,7 +1005,7 @@ fMainMenu_StateTitleStartCursorAnim:
     LDA.B #$0A                                                 ;82DC47|A90A    |      ;
     LDX.B #$04                                                 ;82DC49|A204    |      ;
     LDY.B #$07                                                 ;82DC4B|A007    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DC4D|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82DC4D|22488E80|808E48;
     REP #$20                                                   ;82DC51|C220    |      ;
     SEP #$10                                                   ;82DC53|E210    |      ;
     LDA.W #aMainMenu_PalAnimLogoB                          ;82DC55|A9B5F2  |      ;
@@ -1017,7 +1017,7 @@ fMainMenu_StateTitleStartCursorAnim:
     LDA.B #$0B                                                 ;82DC62|A90B    |      ;
     LDX.B #$05                                                 ;82DC64|A205    |      ;
     LDY.B #$07                                                 ;82DC66|A007    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DC68|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82DC68|22488E80|808E48;
     SEP #$20                                                   ;82DC6C|E220    |      ;
     LDA.W nUnknownFlags09D                                     ;82DC6E|AD8D09  |00098D;
     CMP.B #$01                                                 ;82DC71|C901    |      ;
@@ -1041,7 +1041,7 @@ fMainMenu_StateTitleStartCursorAnim:
     LDA.B #$0D
     LDX.B #$06
     LDY.B #$07
-    JSL.L fCore_Store0x72To0x42AtIndex
+    JSL.L fPalette_StartColorAnimSlot
     REP #$20
     SEP #$10
     LDA.W #$F045
@@ -1053,7 +1053,7 @@ fMainMenu_StateTitleStartCursorAnim:
     LDA.B #$0F
     LDX.B #$07
     LDY.B #$07
-    JSL.L fCore_Store0x72To0x42AtIndex
+    JSL.L fPalette_StartColorAnimSlot
     REP #$20
     SEP #$10
     LDA.W #$F045
@@ -1065,7 +1065,7 @@ fMainMenu_StateTitleStartCursorAnim:
     LDA.B #$09
     LDX.B #$08
     LDY.B #$02
-    JSL.L fCore_Store0x72To0x42AtIndex
+    JSL.L fPalette_StartColorAnimSlot
     JML.L fMainMenu_StateTitleStartCursorAnim_Finish
 .case01:
     REP #$20
@@ -1079,7 +1079,7 @@ fMainMenu_StateTitleStartCursorAnim:
     LDA.B #$0D
     LDX.B #$06
     LDY.B #$07
-    JSL.L fCore_Store0x72To0x42AtIndex
+    JSL.L fPalette_StartColorAnimSlot
     REP #$20
     SEP #$10
     LDA.W #$F034
@@ -1091,7 +1091,7 @@ fMainMenu_StateTitleStartCursorAnim:
     LDA.B #$0F
     LDX.B #$07
     LDY.B #$07
-    JSL.L fCore_Store0x72To0x42AtIndex
+    JSL.L fPalette_StartColorAnimSlot
     REP #$20
     SEP #$10
     LDA.W #$F045
@@ -1103,7 +1103,7 @@ fMainMenu_StateTitleStartCursorAnim:
     LDA.B #$09
     LDX.B #$08
     LDY.B #$02
-    JSL.L fCore_Store0x72To0x42AtIndex
+    JSL.L fPalette_StartColorAnimSlot
     JML.L fMainMenu_StateTitleStartCursorAnim_Finish
     REP #$20
     SEP #$10
@@ -1116,7 +1116,7 @@ fMainMenu_StateTitleStartCursorAnim:
     LDA.B #$0D
     LDX.B #$06
     LDY.B #$07
-    JSL.L fCore_Store0x72To0x42AtIndex
+    JSL.L fPalette_StartColorAnimSlot
     REP #$20
     SEP #$10
     LDA.W #$F045
@@ -1128,7 +1128,7 @@ fMainMenu_StateTitleStartCursorAnim:
     LDA.B #$0F
     LDX.B #$07
     LDY.B #$07
-    JSL.L fCore_Store0x72To0x42AtIndex
+    JSL.L fPalette_StartColorAnimSlot
     REP #$20
     SEP #$10
     LDA.W #$F034
@@ -1140,7 +1140,7 @@ fMainMenu_StateTitleStartCursorAnim:
     LDA.B #$09
     LDX.B #$08
     LDY.B #$02
-    JSL.L fCore_Store0x72To0x42AtIndex
+    JSL.L fPalette_StartColorAnimSlot
     JML.L fMainMenu_StateTitleStartCursorAnim_Finish
     else
     JML.L .case02                                              ;82DC7D|5C2BDD82|82DD2B;
@@ -1157,7 +1157,7 @@ fMainMenu_StateTitleStartCursorAnim:
     LDA.B #$0D                                                 ;82DC92|A90D    |      ;
     LDX.B #$06                                                 ;82DC94|A206    |      ;
     LDY.B #$07                                                 ;82DC96|A007    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DC98|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82DC98|22488E80|808E48;
     REP #$20                                                   ;82DC9C|C220    |      ;
     SEP #$10                                                   ;82DC9E|E210    |      ;
     LDA.W #aMainMenu_PalAnimItemNormal                     ;82DCA0|A9DAF2  |      ;
@@ -1169,7 +1169,7 @@ fMainMenu_StateTitleStartCursorAnim:
     LDA.B #$0F                                                 ;82DCAD|A90F    |      ;
     LDX.B #$07                                                 ;82DCAF|A207    |      ;
     LDY.B #$07                                                 ;82DCB1|A007    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DCB3|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82DCB3|22488E80|808E48;
     REP #$20                                                   ;82DCB7|C220    |      ;
     SEP #$10                                                   ;82DCB9|E210    |      ;
     LDA.W #aMainMenu_PalAnimItemNormal                     ;82DCBB|A9DAF2  |      ;
@@ -1181,7 +1181,7 @@ fMainMenu_StateTitleStartCursorAnim:
     LDA.B #$09                                                 ;82DCC8|A909    |      ;
     LDX.B #$08                                                 ;82DCCA|A208    |      ;
     LDY.B #$02                                                 ;82DCCC|A002    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DCCE|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82DCCE|22488E80|808E48;
     if !REGION_EUDE
     JML.L fMainMenu_StateTitleStartCursorAnim_Finish
     else
@@ -1201,7 +1201,7 @@ fMainMenu_StateTitleStartCursorAnim:
     LDA.B #$0D                                                 ;82DCE7|A90D    |      ;
     LDX.B #$06                                                 ;82DCE9|A206    |      ;
     LDY.B #$07                                                 ;82DCEB|A007    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DCED|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82DCED|22488E80|808E48;
     REP #$20                                                   ;82DCF1|C220    |      ;
     SEP #$10                                                   ;82DCF3|E210    |      ;
     LDA.W #aMainMenu_PalAnimItemHighlighted                ;82DCF5|A9C9F2  |      ;
@@ -1213,7 +1213,7 @@ fMainMenu_StateTitleStartCursorAnim:
     LDA.B #$0F                                                 ;82DD02|A90F    |      ;
     LDX.B #$07                                                 ;82DD04|A207    |      ;
     LDY.B #$07                                                 ;82DD06|A007    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DD08|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82DD08|22488E80|808E48;
     REP #$20                                                   ;82DD0C|C220    |      ;
     SEP #$10                                                   ;82DD0E|E210    |      ;
     LDA.W #aMainMenu_PalAnimItemNormal                     ;82DD10|A9DAF2  |      ;
@@ -1225,7 +1225,7 @@ fMainMenu_StateTitleStartCursorAnim:
     LDA.B #$09                                                 ;82DD1D|A909    |      ;
     LDX.B #$08                                                 ;82DD1F|A208    |      ;
     LDY.B #$02                                                 ;82DD21|A002    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DD23|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82DD23|22488E80|808E48;
     if !REGION_EUDE
     JML.L fMainMenu_StateTitleStartCursorAnim_Finish
     else
@@ -1245,7 +1245,7 @@ fMainMenu_StateTitleStartCursorAnim:
     LDA.B #$0D                                                 ;82DD3C|A90D    |      ;
     LDX.B #$06                                                 ;82DD3E|A206    |      ;
     LDY.B #$07                                                 ;82DD40|A007    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DD42|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82DD42|22488E80|808E48;
     REP #$20                                                   ;82DD46|C220    |      ;
     SEP #$10                                                   ;82DD48|E210    |      ;
     LDA.W #aMainMenu_PalAnimItemNormal                     ;82DD4A|A9DAF2  |      ;
@@ -1257,7 +1257,7 @@ fMainMenu_StateTitleStartCursorAnim:
     LDA.B #$0F                                                 ;82DD57|A90F    |      ;
     LDX.B #$07                                                 ;82DD59|A207    |      ;
     LDY.B #$07                                                 ;82DD5B|A007    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DD5D|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82DD5D|22488E80|808E48;
     REP #$20                                                   ;82DD61|C220    |      ;
     SEP #$10                                                   ;82DD63|E210    |      ;
     LDA.W #aMainMenu_PalAnimItemHighlighted                ;82DD65|A9C9F2  |      ;
@@ -1269,7 +1269,7 @@ fMainMenu_StateTitleStartCursorAnim:
     LDA.B #$09                                                 ;82DD72|A909    |      ;
     LDX.B #$08                                                 ;82DD74|A208    |      ;
     LDY.B #$02                                                 ;82DD76|A002    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DD78|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82DD78|22488E80|808E48;
     if !REGION_EUDE
     JML.L fMainMenu_StateTitleStartCursorAnim_Finish
     else
@@ -1332,7 +1332,7 @@ fMainMenu_StateTitleMenuInput:
     LDA.B #$0D                                                 ;82DDCF|A90D    |      ;
     LDX.B #$06                                                 ;82DDD1|A206    |      ;
     LDY.B #$07                                                 ;82DDD3|A007    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DDD5|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82DDD5|22488E80|808E48;
     REP #$20                                                   ;82DDD9|C220    |      ;
     SEP #$10                                                   ;82DDDB|E210    |      ;
     LDA.W #aMainMenu_PalAnimItemNormal                     ;82DDDD|A9DAF2  |      ;
@@ -1344,7 +1344,7 @@ fMainMenu_StateTitleMenuInput:
     LDA.B #$0F                                                 ;82DDEA|A90F    |      ;
     LDX.B #$07                                                 ;82DDEC|A207    |      ;
     LDY.B #$07                                                 ;82DDEE|A007    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DDF0|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82DDF0|22488E80|808E48;
     REP #$20                                                   ;82DDF4|C220    |      ;
     SEP #$10                                                   ;82DDF6|E210    |      ;
     LDA.W #aMainMenu_PalAnimItemNormal                     ;82DDF8|A9DAF2  |      ;
@@ -1356,7 +1356,7 @@ fMainMenu_StateTitleMenuInput:
     LDA.B #$09                                                 ;82DE05|A909    |      ;
     LDX.B #$08                                                 ;82DE07|A208    |      ;
     LDY.B #$02                                                 ;82DE09|A002    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DE0B|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82DE0B|22488E80|808E48;
     JML.L .return                                              ;82DE0F|5CBDDE82|82DEBD;
  
  
@@ -1372,7 +1372,7 @@ fMainMenu_StateTitleMenuInput:
     LDA.B #$0D                                                 ;82DE24|A90D    |      ;
     LDX.B #$06                                                 ;82DE26|A206    |      ;
     LDY.B #$07                                                 ;82DE28|A007    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DE2A|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82DE2A|22488E80|808E48;
     REP #$20                                                   ;82DE2E|C220    |      ;
     SEP #$10                                                   ;82DE30|E210    |      ;
     LDA.W #aMainMenu_PalAnimItemHighlighted                ;82DE32|A9C9F2  |      ;
@@ -1384,7 +1384,7 @@ fMainMenu_StateTitleMenuInput:
     LDA.B #$0F                                                 ;82DE3F|A90F    |      ;
     LDX.B #$07                                                 ;82DE41|A207    |      ;
     LDY.B #$07                                                 ;82DE43|A007    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DE45|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82DE45|22488E80|808E48;
     REP #$20                                                   ;82DE49|C220    |      ;
     SEP #$10                                                   ;82DE4B|E210    |      ;
     LDA.W #aMainMenu_PalAnimItemNormal                     ;82DE4D|A9DAF2  |      ;
@@ -1396,7 +1396,7 @@ fMainMenu_StateTitleMenuInput:
     LDA.B #$09                                                 ;82DE5A|A909    |      ;
     LDX.B #$08                                                 ;82DE5C|A208    |      ;
     LDY.B #$02                                                 ;82DE5E|A002    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DE60|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82DE60|22488E80|808E48;
     JML.L .return                                              ;82DE64|5CBDDE82|82DEBD;
  
  
@@ -1412,7 +1412,7 @@ fMainMenu_StateTitleMenuInput:
     LDA.B #$0D                                                 ;82DE79|A90D    |      ;
     LDX.B #$06                                                 ;82DE7B|A206    |      ;
     LDY.B #$07                                                 ;82DE7D|A007    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DE7F|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82DE7F|22488E80|808E48;
     REP #$20                                                   ;82DE83|C220    |      ;
     SEP #$10                                                   ;82DE85|E210    |      ;
     LDA.W #aMainMenu_PalAnimItemNormal                     ;82DE87|A9DAF2  |      ;
@@ -1424,7 +1424,7 @@ fMainMenu_StateTitleMenuInput:
     LDA.B #$0F                                                 ;82DE94|A90F    |      ;
     LDX.B #$07                                                 ;82DE96|A207    |      ;
     LDY.B #$07                                                 ;82DE98|A007    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DE9A|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82DE9A|22488E80|808E48;
     REP #$20                                                   ;82DE9E|C220    |      ;
     SEP #$10                                                   ;82DEA0|E210    |      ;
     LDA.W #aMainMenu_PalAnimItemHighlighted                ;82DEA2|A9C9F2  |      ;
@@ -1436,7 +1436,7 @@ fMainMenu_StateTitleMenuInput:
     LDA.B #$09                                                 ;82DEAF|A909    |      ;
     LDX.B #$08                                                 ;82DEB1|A208    |      ;
     LDY.B #$02                                                 ;82DEB3|A002    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82DEB5|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82DEB5|22488E80|808E48;
     JML.L .return                                              ;82DEB9|5CBDDE82|82DEBD;
  
  
@@ -1469,7 +1469,7 @@ fMainMenu_ReturnToTitleFromSlotSelect:
     JSL.L fCore_ZeroVRAM                                       ;82DEE9|22468880|808846;
     SEP #$20                                                   ;82DEED|E220    |      ;
     LDA.B #$03                                                 ;82DEEF|A903    |      ;
-    JSL.L fCore_ManageGraphicsPresets                          ;82DEF1|22598C80|808C59;
+    JSL.L fCore_ApplyGraphicsPreset                          ;82DEF1|22598C80|808C59;
     REP #$20                                                   ;82DEF5|C220    |      ;
     STZ.W strcBGScrool.BG1HorOffs                              ;82DEF7|9C3C01  |00013C;
     STZ.W strcBGScrool.BG1VerOffs                              ;82DEFA|9C3E01  |00013E;
@@ -1483,11 +1483,11 @@ fMainMenu_ReturnToTitleFromSlotSelect:
     SEP #$20                                                   ;82DF10|E220    |      ;
     LDA.B #$5B                                                 ;82DF12|A95B    |      ;
     STA.B strcMap.loadAreaId                                   ;82DF14|8522    |000022;
-    JSL.L fTileMap_MapChangeHandler                            ;82DF16|22C6A780|80A7C6;
+    JSL.L fTileMap_LoadAreaGraphics                            ;82DF16|22C6A780|80A7C6;
     SEP #$20                                                   ;82DF1A|E220    |      ;
     LDA.B #$5C                                                 ;82DF1C|A95C    |      ;
     STA.B strcMap.loadAreaId                                   ;82DF1E|8522    |000022;
-    JSL.L fTileMap_MapChangeHandler                            ;82DF20|22C6A780|80A7C6;
+    JSL.L fTileMap_LoadAreaGraphics                            ;82DF20|22C6A780|80A7C6;
     REP #$20                                                   ;82DF24|C220    |      ;
     LDA.W #$006D                                               ;82DF26|A96D00  |      ;
     JSL.L fPalette_LoadFirstHalf                               ;82DF29|22CF9180|8091CF;
@@ -1559,8 +1559,8 @@ fMainMenu_StateNewGameSlotSelect:
     JSL.L fCore_ZeroVRAM                                       ;82DFB6|22468880|808846;
     SEP #$20                                                   ;82DFBA|E220    |      ;
     LDA.B #$04                                                 ;82DFBC|A904    |      ;
-    JSL.L fCore_ManageGraphicsPresets                          ;82DFBE|22598C80|808C59;
-    JSL.L fTileMap_MapChangeHandler                            ;82DFC2|22C6A780|80A7C6;
+    JSL.L fCore_ApplyGraphicsPreset                          ;82DFBE|22598C80|808C59;
+    JSL.L fTileMap_LoadAreaGraphics                            ;82DFC2|22C6A780|80A7C6;
     REP #$20                                                   ;82DFC6|C220    |      ;
     LDA.W #$006F                                               ;82DFC8|A96F00  |      ;
     JSL.L fPalette_LoadFirstHalf                               ;82DFCB|22CF9180|8091CF;
@@ -1589,7 +1589,7 @@ fMainMenu_StateNewGameSlotSelect:
     LDA.W #$0001                                               ;82E006|A90100  |      ;
     LDY.W #$0000                                               ;82E009|A00000  |      ;
     JSR.W fMainMenu_DrawSaveSlotInfo                                      ;82E00C|2005E4  |82E405;
-    JSL.L fCore_Zero0x42Ptr                                    ;82E00F|22AB8F80|808FAB;
+    JSL.L fPalette_StopAllColorAnimSlots                                    ;82E00F|22AB8F80|808FAB;
     REP #$20                                                   ;82E013|C220    |      ;
     STZ.W strcBGScrool.BG1HorOffs                              ;82E015|9C3C01  |00013C;
     STZ.W strcBGScrool.BG1VerOffs                              ;82E018|9C3E01  |00013E;
@@ -1629,7 +1629,7 @@ fMainMenu_StateNewGameSlotSelect:
     LDA.B #$06                                                 ;82E056|A906    |      ;
     LDX.B #$04                                                 ;82E058|A204    |      ;
     LDY.B #$00                                                 ;82E05A|A000    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82E05C|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82E05C|22488E80|808E48;
     REP #$20                                                   ;82E060|C220    |      ;
     SEP #$10                                                   ;82E062|E210    |      ;
     LDA.W #aMainMenu_PalAnimSlotNormal                     ;82E064|A9F9F2  |      ;
@@ -1641,7 +1641,7 @@ fMainMenu_StateNewGameSlotSelect:
     LDA.B #$06                                                 ;82E071|A906    |      ;
     LDX.B #$05                                                 ;82E073|A205    |      ;
     LDY.B #$01                                                 ;82E075|A001    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82E077|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82E077|22488E80|808E48;
     JML.L fMainMenu_NewGameSlotSelect_FadeIn                                      ;82E07B|5CB5E082|82E0B5;
  
  
@@ -1660,7 +1660,7 @@ fMainMenu_NewGameSlotSelect_InitCursorSlot2:
     LDA.B #$06                                                 ;82E090|A906    |      ;
     LDX.B #$04                                                 ;82E092|A204    |      ;
     LDY.B #$00                                                 ;82E094|A000    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82E096|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82E096|22488E80|808E48;
     REP #$20                                                   ;82E09A|C220    |      ;
     SEP #$10                                                   ;82E09C|E210    |      ;
     LDA.W #aMainMenu_PalAnimSlotHighlighted                ;82E09E|A9E2F2  |      ;
@@ -1672,7 +1672,7 @@ fMainMenu_NewGameSlotSelect_InitCursorSlot2:
     LDA.B #$06                                                 ;82E0AB|A906    |      ;
     LDX.B #$05                                                 ;82E0AD|A205    |      ;
     LDY.B #$01                                                 ;82E0AF|A001    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82E0B1|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82E0B1|22488E80|808E48;
  
 ;;
 ; @brief   Start the screen music, fade the New Game slot-select screen in and clear the timers.
@@ -1748,7 +1748,7 @@ fMainMenu_NewGameSlotSelect_WaitFrame:
     LDA.B #$06
     LDX.B #$04
     LDY.B #$00
-    JSL.L fCore_Store0x72To0x42AtIndex
+    JSL.L fPalette_StartColorAnimSlot
     REP #$20
     SEP #$10
     LDA.W #$F2E2
@@ -1760,7 +1760,7 @@ fMainMenu_NewGameSlotSelect_WaitFrame:
     LDA.B #$06
     LDX.B #$05
     LDY.B #$01
-    JSL.L fCore_Store0x72To0x42AtIndex
+    JSL.L fPalette_StartColorAnimSlot
     JML.L fMainMenu_NewGameSlotSelect_FrameTail
     REP #$20
     LDA.W #$0001
@@ -1806,7 +1806,7 @@ fMainMenu_NewGameSlotSelect_WaitFrame:
     LDA.B #$06                                                 ;82E142|A906    |      ;
     LDX.B #$04                                                 ;82E144|A204    |      ;
     LDY.B #$00                                                 ;82E146|A000    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82E148|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82E148|22488E80|808E48;
     REP #$20                                                   ;82E14C|C220    |      ;
     SEP #$10                                                   ;82E14E|E210    |      ;
     if !REGION_EU
@@ -1822,7 +1822,7 @@ fMainMenu_NewGameSlotSelect_WaitFrame:
     LDA.B #$06                                                 ;82E15D|A906    |      ;
     LDX.B #$05                                                 ;82E15F|A205    |      ;
     LDY.B #$01                                                 ;82E161|A001    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82E163|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82E163|22488E80|808E48;
     JML.L fMainMenu_NewGameSlotSelect_FrameTail                                      ;82E167|5CBDE182|82E1BD;
  
  
@@ -1863,7 +1863,7 @@ fMainMenu_NewGameSlotSelect_MoveCursorSlot2:
     LDA.B #$06                                                 ;82E198|A906    |      ;
     LDX.B #$04                                                 ;82E19A|A204    |      ;
     LDY.B #$00                                                 ;82E19C|A000    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82E19E|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82E19E|22488E80|808E48;
     REP #$20                                                   ;82E1A2|C220    |      ;
     SEP #$10                                                   ;82E1A4|E210    |      ;
     LDA.W #aMainMenu_PalAnimSlotHighlighted                ;82E1A6|A9E2F2  |      ;
@@ -1876,7 +1876,7 @@ fMainMenu_NewGameSlotSelect_MoveCursorSlot2:
     LDA.B #$06                                                 ;82E1B3|A906    |      ;
     LDX.B #$05                                                 ;82E1B5|A205    |      ;
     LDY.B #$01                                                 ;82E1B7|A001    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82E1B9|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82E1B9|22488E80|808E48;
  
 ;;
 ; @brief   End of a New Game slot-select frame: slowly scroll BG2 diagonally and check the result in strcVariables.n8Temp3 (1 = cancel -> title, 2 = start the game with fStartNewGame).
@@ -1938,8 +1938,8 @@ fMainMenu_StateLoadGameSlotSelect:
     JSL.L fCore_ZeroVRAM                                       ;82E215|22468880|808846;
     SEP #$20                                                   ;82E219|E220    |      ;
     LDA.B #$04                                                 ;82E21B|A904    |      ;
-    JSL.L fCore_ManageGraphicsPresets                          ;82E21D|22598C80|808C59;
-    JSL.L fTileMap_MapChangeHandler                            ;82E221|22C6A780|80A7C6;
+    JSL.L fCore_ApplyGraphicsPreset                          ;82E21D|22598C80|808C59;
+    JSL.L fTileMap_LoadAreaGraphics                            ;82E221|22C6A780|80A7C6;
     REP #$20                                                   ;82E225|C220    |      ;
     LDA.W #$006F                                               ;82E227|A96F00  |      ;
     JSL.L fPalette_LoadFirstHalf                               ;82E22A|22CF9180|8091CF;
@@ -1968,7 +1968,7 @@ fMainMenu_StateLoadGameSlotSelect:
     LDA.W #$0001                                               ;82E265|A90100  |      ;
     LDY.W #$0001                                               ;82E268|A00100  |      ;
     JSR.W fMainMenu_DrawSaveSlotInfo                                      ;82E26B|2005E4  |82E405;
-    JSL.L fCore_Zero0x42Ptr                                    ;82E26E|22AB8F80|808FAB;
+    JSL.L fPalette_StopAllColorAnimSlots                                    ;82E26E|22AB8F80|808FAB;
     SEP #$20                                                   ;82E272|E220    |      ;
     LDA.W $098E+!RAM_SHIFT                                 ;82E274|AD8E09  |00098E;
     BEQ +                                                      ;82E277|F004    |82E27D;
@@ -1986,7 +1986,7 @@ fMainMenu_StateLoadGameSlotSelect:
     LDA.B #$06                                                 ;82E28E|A906    |      ;
     LDX.B #$04                                                 ;82E290|A204    |      ;
     LDY.B #$00                                                 ;82E292|A000    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82E294|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82E294|22488E80|808E48;
     REP #$20                                                   ;82E298|C220    |      ;
     SEP #$10                                                   ;82E29A|E210    |      ;
     LDA.W #aMainMenu_PalAnimSlotNormal                     ;82E29C|A9F9F2  |      ;
@@ -1998,7 +1998,7 @@ fMainMenu_StateLoadGameSlotSelect:
     LDA.B #$06                                                 ;82E2A9|A906    |      ;
     LDX.B #$05                                                 ;82E2AB|A205    |      ;
     LDY.B #$01                                                 ;82E2AD|A001    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82E2AF|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82E2AF|22488E80|808E48;
     JML.L .reset_scroll_and_fade_in                                              ;82E2B3|5CEDE282|82E2ED;
  
  
@@ -2014,7 +2014,7 @@ fMainMenu_StateLoadGameSlotSelect:
     LDA.B #$06                                                 ;82E2C8|A906    |      ;
     LDX.B #$04                                                 ;82E2CA|A204    |      ;
     LDY.B #$00                                                 ;82E2CC|A000    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82E2CE|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82E2CE|22488E80|808E48;
     REP #$20                                                   ;82E2D2|C220    |      ;
     SEP #$10                                                   ;82E2D4|E210    |      ;
     LDA.W #aMainMenu_PalAnimSlotHighlighted                ;82E2D6|A9E2F2  |      ;
@@ -2026,7 +2026,7 @@ fMainMenu_StateLoadGameSlotSelect:
     LDA.B #$06                                                 ;82E2E3|A906    |      ;
     LDX.B #$05                                                 ;82E2E5|A205    |      ;
     LDY.B #$01                                                 ;82E2E7|A001    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82E2E9|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82E2E9|22488E80|808E48;
  
 .reset_scroll_and_fade_in:
     REP #$20                                                   ;82E2ED|C220    |      ;
@@ -2092,7 +2092,7 @@ fMainMenu_LoadGameSlotSelect_WaitFrame:
     LDA.B #$06                                                 ;82E372|A906    |      ;
     LDX.B #$04                                                 ;82E374|A204    |      ;
     LDY.B #$00                                                 ;82E376|A000    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82E378|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82E378|22488E80|808E48;
     REP #$20                                                   ;82E37C|C220    |      ;
     SEP #$10                                                   ;82E37E|E210    |      ;
     LDA.W #aMainMenu_PalAnimSlotNormal                     ;82E380|A9F9F2  |      ;
@@ -2104,7 +2104,7 @@ fMainMenu_LoadGameSlotSelect_WaitFrame:
     LDA.B #$06                                                 ;82E38D|A906    |      ;
     LDX.B #$05                                                 ;82E38F|A205    |      ;
     LDY.B #$01                                                 ;82E391|A001    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82E393|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82E393|22488E80|808E48;
     JML.L fMainMenu_LoadGameSlotSelect_FrameTail                                      ;82E397|5CD1E382|82E3D1;
  
  
@@ -2123,7 +2123,7 @@ fMainMenu_LoadGameSlotSelect_MoveCursorSlot2:
     LDA.B #$06                                                 ;82E3AC|A906    |      ;
     LDX.B #$04                                                 ;82E3AE|A204    |      ;
     LDY.B #$00                                                 ;82E3B0|A000    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82E3B2|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82E3B2|22488E80|808E48;
     REP #$20                                                   ;82E3B6|C220    |      ;
     SEP #$10                                                   ;82E3B8|E210    |      ;
     LDA.W #aMainMenu_PalAnimSlotHighlighted                ;82E3BA|A9E2F2  |      ;
@@ -2135,7 +2135,7 @@ fMainMenu_LoadGameSlotSelect_MoveCursorSlot2:
     LDA.B #$06                                                 ;82E3C7|A906    |      ;
     LDX.B #$05                                                 ;82E3C9|A205    |      ;
     LDY.B #$01                                                 ;82E3CB|A001    |      ;
-    JSL.L fCore_Store0x72To0x42AtIndex                         ;82E3CD|22488E80|808E48;
+    JSL.L fPalette_StartColorAnimSlot                         ;82E3CD|22488E80|808E48;
  
 ;;
 ; @brief   End of a Load Game slot-select frame: scroll BG2 and check strcVariables.n8Temp3 (1 = cancel -> title, 2 = load with fLoadAndStartGame).

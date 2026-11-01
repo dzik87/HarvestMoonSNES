@@ -1,7 +1,26 @@
+;;
+; @file     tilemaps.asm
+; @brief    Area graphics loading (decompress tile/name table blobs of an area and upload them to VRAM) and the generated area tables: area descriptors, screen transition table, map room size tables.
+; @bank     $80
+; @range    $80A7AE-$80B8CC
+; @see      src/code/bank_80/routines.asm, docs/formats/area-data.md
+;;
+
+
 ; Bank $80 module "tilemaps" - starts at $80A7AE
  
  
-fTileMap_SetTileMapPointerGetAreaFlags:
+;;
+; @brief    Point strcMap.pCurrent at the graphics descriptor of the current area and return the descriptor byte at offset Y.
+; @details  strcMap.pCurrent = aTileMapData[strcMap.loadAreaId]. Descriptor layout: +0 preset id, +1 flags word (or-ed into strcDialogDisplay.mapFlags), +3 room width, +4 room height, +5 tile blob count,
+;           +6 name table blob count, +7.. four camera limit words, then (VRAM dest word, ptr24 blob) per blob; see docs/formats/area-data.md.
+; @param    Y      byte offset in the descriptor
+; @return   A      descriptor byte [pCurrent + Y] (8-bit)
+; @modifies strcMap.pCurrent
+; @mode     M8X16 -> M8X16
+; @callers  fMap_SetupArea (Y = 1: area flags byte)
+;;
+fTileMap_GetAreaDescriptorByte:
     SEP #$20                                                   ;80A7AE|E220    |      ; $22: nIndex, Y: nFieldOffset, return A: nPresetId, $18: pTileMap
     REP #$10                                                   ;80A7B0|C210    |      ;
     LDA.B #$00                                                 ;80A7B2|A900    |      ;
@@ -17,7 +36,21 @@ fTileMap_SetTileMapPointerGetAreaFlags:
     RTL                                                        ;80A7C5|6B      |      ;
  
  
-fTileMap_MapChangeHandler:
+;;
+; @brief    Load the graphics of area strcMap.loadAreaId: program the PPU preset, decompress and upload all tile blobs and name tables, build the WRAM map and scroll to the destination.
+; @details  Reads the descriptor from aTileMapData: preset id (-> fCore_ApplyGraphicsPreset, areas < $57), flags (or-ed into mapFlags; bit $0020 removed if daily2 $0001), room size
+;           (height >= 3 sets the streaming flag mapFlags $0001), blob counts and camera limits. Each tile blob is decompressed (fGraphicsDecompressTilemap) to $7E2000 and DMA'd to its VRAM destination.
+;           Each name table (charmap) is decompressed (or copied raw when mapFlags has !AFLAGS_RAWCHARMAP) to $7E2000, uploaded to VRAM row by row (fTileMap_UploadRowToVRAM, 32 rows x 2 screens),
+;           and for the farm/outdoor areas below !AREA_TOWNSPRING the object tiles are connected and the item subroutines of the area run (daily3 $0002 not set, single charmap).
+;           Camera, map position and streaming ring positions are reset (unk10=$0410, unk14=$0A00), strcMap.pCurrent+2 / unk1C get the row stride and size from nMapRoomRowStrideTable / nMapRoomSizeTable.
+;           Finally (areas < $57) the player position is stepped in 8 pixel increments to mapDestX/mapDestY with camera + scroll updates and DMA flushing, so that the visible map is fully loaded around the destination.
+; @modifies strcMap.pCurrent, strcMap.unk10..unk21, strcCamera, strcPlayer.posX, strcPlayer.posY, strcPlayer.offsetCamX/Y, strcCamera.offsetCamX/Y, strcDialogDisplay.mapFlags/mapMultiWidth/mapMultiHeight/mapCurrentPresetId, WRAM $7E2000.., VRAM
+; @mode     M8X16
+; @calls    fCore_ApplyGraphicsPreset, fGraphicsDecompressTilemap, fCore_PrepareTransfer, fCore_StartPreparedTransfer, fTileMap_UploadRowToVRAM, fObjectMap_ConnectAdjacentObjectTiles, fAreaItemSubrutine_Run, fCamera_UpdateFromPlayerPos, fCamera_ScrollRightStep, fCamera_ScrollDownStep, fCore_StartTransfer
+; @callers  fMap_SetupArea
+; @note     The overlay areas $57..$5F use the short descriptor (no preset, flags or camera values).
+;;
+fTileMap_LoadAreaGraphics:
     SEP #$20                                                   ;80A7C6|E220    |      ;
     REP #$10                                                   ;80A7C8|C210    |      ;
     LDA.B #$00                                                 ;80A7CA|A900    |      ;
@@ -35,7 +68,7 @@ fTileMap_MapChangeHandler:
     BCS .read_map_size                                                ;80A7E2|B02E    |80A812;
     LDA.B (strcMap.pCurrent),Y                                 ;80A7E4|B118    |000018; Y = 0
     STA.W strcDialogDisplay.mapCurrentPresetId                 ;80A7E6|8D9501  |000195;
-    JSL.L fCore_ManageGraphicsPresets                          ;80A7E9|22598C80|808C59;
+    JSL.L fCore_ApplyGraphicsPreset                          ;80A7E9|22598C80|808C59;
     REP #$30                                                   ;80A7ED|C230    |      ;
     INY                                                        ;80A7EF|C8      |      ;
     LDA.B (strcMap.pCurrent),Y                                 ;80A7F0|B118    |000018; Y = 1
@@ -368,6 +401,16 @@ fTileMap_MapChangeHandler:
     RTL                                                        ;80AA37|6B      |      ;
  
  
+;;
+; @brief    (JSR subroutine) Queue and immediately run a DMA of Y bytes from WRAM $7E2000 + n16Temp1 to VRAM word address X (one name table row of $40 bytes).
+; @param    X      VRAM word destination
+; @param    Y      length in bytes (callers pass $0040)
+; @param    strcVariables.n16Temp1  source offset inside $7E2000
+; @mode     M16X16
+; @calls    fCore_PrepareTransfer, fCore_StartPreparedTransfer
+; @callers  fTileMap_LoadAreaGraphics
+; @note     confidence: medium - the transfer length register (Y) is whatever the caller holds; both callers set Y=$0040.
+;;
 fTileMap_UploadRowToVRAM:
     REP #$30                                                   ;80AA38|C230    |      ;
     PHX                                                        ;80AA3A|DA      |      ;
@@ -394,6 +437,15 @@ fTileMap_UploadRowToVRAM:
     PLX                                                        ;80AA66|FA      |      ;
     RTS                                                        ;80AA67|60      |      ;
 
+;;
+; @brief    Generated area tables included here: nMapRoomRowStrideTable, nMapRoomSizeTable, aTileMapData and the 96 area descriptors, aScreenTransitionTable.
+; @format   nMapRoomRowStrideTable / nMapRoomSizeTable: 5 words each, indexed by the room width multiplier (0-4), row stride in bytes of the WRAM map and map size.
+;           aTileMapData: 96 x ptr16 to the area descriptors (preset, flags, room size, blob counts, camera limits, VRAM load list; see fTileMap_GetAreaDescriptorByte and docs/formats/area-data.md).
+;           aScreenTransitionTable: 59 rows of 8 bytes `[dest area][tile script id][b2 (unused/unknown)][flags: 0 add season, 1 closed evening, 2 closed day, 3 open weekend only, 4 closed Saturday, 5 closed Sunday, 6 day dependent, 7 closed on festival][word player X][word player Y]`.
+; @index    aTileMapData[area*2]; aScreenTransitionTable[row*8] with row = byte 0 of the object property row of the tile under the player (fMap_ScreenTransitionHandler, fSetTileAtCoords...).
+; @used_by  fTileMap_LoadAreaGraphics, fTileMap_GetAreaDescriptorByte, fMap_ScreenTransitionHandler, bank $82 sound.asm (shop-closed dialogs)
+; @note     Sources: assets/areas/, assets/tables/map_room.json (tools/maps/areadata.py, tools/data/smalltables.py).
+;;
 ; Area graphics data (generated from assets/areas/ and assets/tables/, see docs/formats/area-data.md)
     incsrc "../../../build/gen/tables/map_room.asm"
     incsrc "../../../build/gen/maps/area_gfx.asm"

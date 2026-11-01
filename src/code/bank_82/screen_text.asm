@@ -40,7 +40,7 @@ fScreen_NameInput:
     JSL.L fCore_ScreenFadeout                                  ;82E828|220A8880|80880A;
     JSL.L fCore_SetForceBlank                                  ;82E82C|220F8E80|808E0F;
     JSL.L fCore_ZeroVRAM                                       ;82E830|22468880|808846;
-    JSL.L fCore_Zero0x42Ptr                                    ;82E834|22AB8F80|808FAB;
+    JSL.L fPalette_StopAllColorAnimSlots                                    ;82E834|22AB8F80|808FAB;
     JSL.L fObject_InitTileCache                                  ;82E838|22D78E85|858ED7;
     JSL.L fObject_ClearGameObject                              ;82E83C|220F8285|85820F;
     REP #$20                                                   ;82E840|C220    |      ;
@@ -53,8 +53,8 @@ fScreen_NameInput:
     STA.W strcDialogDisplay.mapUnk19A                          ;82E852|8D9A01  |00019A;
     SEP #$20                                                   ;82E855|E220    |      ;
     LDA.B #$04                                                 ;82E857|A904    |      ;
-    JSL.L fCore_ManageGraphicsPresets                          ;82E859|22598C80|808C59;
-    JSL.L fTileMap_MapChangeHandler                            ;82E85D|22C6A780|80A7C6;
+    JSL.L fCore_ApplyGraphicsPreset                          ;82E859|22598C80|808C59;
+    JSL.L fTileMap_LoadAreaGraphics                            ;82E85D|22C6A780|80A7C6;
     REP #$20                                                   ;82E861|C220    |      ;
     LDA.W #$006F                                               ;82E863|A96F00  |      ;
     JSL.L fPalette_LoadFirstHalf                               ;82E866|22CF9180|8091CF;
