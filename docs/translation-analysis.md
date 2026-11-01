@@ -122,13 +122,17 @@ Required additional letters: ĄĆĘŁŃÓŚŹŻ ąćęłńóśźż = **18**.
 * The DE release used exactly this: `$43-$4A` (ä ö ü Ä Ö Ü ß +) and `$AB-$AE` (arrow cursors) overwritten in table 1/2. Mechanism to reuse: `EXTRA` in `tools/dialogs/dialog.py` maps ids to characters,
   the font tables are rebuilt from `assets/fonts/<region>/glyph_*.png`.
 * **Decision**: Polish uses `$43-$54` (18 consecutive ids, all in table 1 = `sFontGlyphs_0x01`). `$43-$4A` are proven safe by DE; `$4B-$54` are leftover JP glyphs that US
-  text, the US date strings and the US name grid 0 do not use (grid 0 enters `$00-$42` and `$B2-$BB` only). Name grids 1/2 (ids `$50-$A0`, `$A5-$AE`, `$C6-$DF`) are reachable only
-  through the character-set switch cell of the name grid; whether that cell is reachable on the US ROM is an **open question for an emulator test** (if it is, `$50-$54` collide with grid 1).
+  text, the US string tables and the reachable US name grid do not use (grid 0 enters `$00-$33`, `$38 $39 $3B-$3D $40-$42` and `$B2-$BB` only).
+* **Resolved: no collision with name grid 1.** Grid 1 lists ids `$50-$A0` (and grid 2 `$A5-$AE`, `$C6-$DF`), so `$50-$54` would collide *if* grid 1 could be selected. It cannot on the
+  US/EU/DE engine (evidence in section 6.1): the grid is selected only by the switch action of a selected cell, and grid 0 has no cell with action 2 or 3. The ids stay as they are and no
+  fallback ids (`$A3 $A4 $AF $B0`) were needed. The guard is permanent: `check.py` verifies that no glyph id of a language is used by the US dialog text (the untranslated fallback) or
+  entered by a cell of a *reachable* grid (`tools/translate/namegrid.py`, also `python tools/translate/namegrid.py reach`), and the tests assert it for Polish.
 * Other characters: the US charmap has `' ! . ? " / , ( ) % - & : … ♥` and digits; missing for Polish text: typographic quotation marks (use `"`), the dash (use `-`).
   `„` can be added as a glyph if wanted (spare ids exist).
 * A language gets its charmap through `translations/<lang>/lang.json` (`glyphs`): character -> glyph id plus the diacritic recipe. The tools merge it over `src/common/charmap.asm` (+ `EXTRA`).
   Glyph pixels are generated at build time from the extracted US font plus a mark overlay (`defs/translation/marks.json`), so no font pixels are committed.
-* Name entry: the grid (`aNameInputGrid0`, 71 rows in US) has no Polish letters; DE added 7 rows for its 7 extra letters. Names with Polish letters need new grid rows (later phase, section 6).
+* Name entry: the grid (`aNameInputGrid0`, 71 rows in US) has no Polish letters; DE added 7 rows for its 7 extra letters. The Polish translation overrides grid 0 with 89 rows
+  (71 + 18 letters, `translations/pl/name_grids.txt`, docs/translation.md "Name entry grid"); section 6.1 explains where the 18 free cell positions are.
 
 ## 5. Capacity
 
@@ -142,26 +146,53 @@ Required additional letters: ĄĆĘŁŃÓŚŹŻ ąćęłńóśźż = **18**.
 * **Layout decision**: the translation build packs the dialogs in id order into banks `$B6`, `$B7`, ... without splitting a dialog across a bank edge and fills banks up to `$BF`; if more is needed it
   continues in `$AA-$AC`. Unused banks stay zero. The ROM size stays 2 MB, so the header size byte and the mapper do not change; the header checksum is recomputed by the build.
 
-## 6. Other player-visible text (checklist for later phases)
+## 6. Other player-visible text (checklist)
 
-**A. Text as glyph ids (translatable with the tables of this infrastructure, pending a table-driven source):**
+**A. Text as glyph ids.** Inventory of the plain glyph-id streams of the US code and data: a scan of `src/` (runs of `dw`/`db` values that are glyph ids) and of the extracted tables
+(`assets/tables`, `assets/menu`) finds **exactly four string tables** (`game_events.asm`, `main_menu.json`); the other glyph-id uses in code are single ids (space `$B1`, blank cursor `$A8`,
+digit zero `$BC`, `<NEXT>` `$A2`) and the dialogs. Status:
 
-| Item | Where | Notes |
-|---|---|---|
-| Season names | `aSeasonString` (`game_events.asm`, 4 x 16 bytes, 6 characters each) | read into `strcNames.wSeason` |
-| Weekday names | `aWeekdayString` (`game_events.asm`, 7 entries, 9 characters each) | `strcNames.wWeekday` |
-| Day ordinal suffix | `aDayOrdinalString` (`game_events.asm`) | US/EU only; Polish has no use for it (declared optional) |
-| Year ordinal | `aYearOrdinalString` ($82EFCF region data, `assets/tables/main_menu.json`) | main menu date text |
-| Date/status line, save slot info | `main_loop.asm` $82E40F-$82E5DE | draws names, season, day number with `fDialog_TransferGlyph` |
-| Name entry grids | `aNameInputGrid0/1/2` (`assets/menu/name_input.txt`) | grid 0: 71 rows US/EU, 78 DE; needs rows for Polish letters |
-| Shop item descriptions, found/sold items | dialogs (ids from `carried_items`, weather ids) | covered by the dialog translation |
+| Item | Where | Size | Status |
+|---|---|---|---|
+| Season names | `aSeasonString` $828AD9, 4 slots of 16 bytes | 6 characters read per slot (`strcNames.wSeason`, 12 bytes); the shorter names are padded with `$B1` | **table driven** (`strings.season`) |
+| Weekday names | `aWeekdayString` $828B19, 7 slots of 32 bytes | 9 characters read per slot (`strcNames.wWeekday`, 18 bytes) | **table driven** (`strings.weekday`) |
+| Day ordinal suffix | `aDayOrdinalString` $828BF9, 4 slots of 4 bytes | 2 characters; slot 0 = days 1/21, 1 = 2/22, 2 = 3/23, 3 = other (compare chain at $828A85-$828AA9, offsets 0/4/8/12) | **table driven** (`strings.day_ordinal`); US/EU only, Polish uses `.` |
+| Year ordinal | `aYearOrdinalString` $82F298, 3 slots of 4 bytes | 2 characters, indexed by the year id (`main_loop.asm` $82E4A7 / $82E4D8) | **table driven** (`strings.year_ordinal`) |
+| Date / save slot line | `fMainMenu_DrawSaveSlotInfo` $82E405-$82E5E6 | player name (4 cells), year number (digit cells), year ordinal (2 cells), day number (2 digit cells), season (6 cells); positions from `aMainMenu_SlotInfoTextVramAddr` | text part covered by the tables above; the words between the numbers are graphics (6.B) |
+| Date announcements in dialogs | ids 382, 444, 447, 906, 1130-1144 (section 1.3) | | dialogs: covered by the dialog translation (`<VAR weekday>`, `<NUM>`, `<VAR season>`, `<VAR ordinal>`) |
+| Name entry grids | `aNameInputGrid0/1/2` | grid 0: 71 rows | **grid 0 override** (6.1); grids 1 and 2 are dead |
+| Shop item descriptions, found/sold items | dialogs (ids from `carried_items`, weather ids) | | covered by the dialog translation |
+
+The string tables are written into the assembled ROM (`tools/translate/strings.py`); the original releases are not touched. The widths are enforced by the tools (`check.py`).
+The DE release has a second copy of the ordinal table (`aDayOrdinalString_DE`) and different readers (weekday at `strcNames.wWeekday+4..`), which is why the strings are limited to the US engine.
+
+### 6.1 Name entry: which grids and ids are reachable (US)
+
+Evidence (static, `src/code/bank_82/screen_text.asm`, `menu.asm`, `src/code/bank_84/input.asm`, `assets/menu/name_input.txt`):
+
+* `fScreen_NameInput` ($82E80C) sets `strcMenuData.tableSelector` ($0993) to 0 and the game initialisation (`game_engine.asm` $83AC6E) clears it. The grid pointer is chosen from this byte only
+  (`fMenu_LoadNameInputCursorPos` $82EB57, `fMenu_GetNameInputCellField` $82EBAC: 0 = grid 0, 1 = grid 1, else grid 2).
+* The byte is written in exactly four places, `fNameInput_SelectCharTable0-3` ($84C157, $84C17E, $84C1A8, $84C1D2), which the A button handler ($84C0EE) calls for the `action` byte (field 5) of the
+  selected cell: action 1 -> grid 0, 2 -> grid 1, 3 -> grid 2, 4 -> table 3 = "name finished" (only accepted when at least one letter was entered). No other instruction in `src/` addresses $0993; a byte scan of the US ROM for `STA/STZ $0993`, `STA/STZ $0992` (16-bit), `STA $7E0993` and `STA $0993,X` finds only these writers, the
+  two initialisations ($82E93A, $83AC6E) and one coincidental byte pattern inside the AI script data of bank $B3.
+* **US/EU grid 0 has 71 cells and exactly one cell with an action byte, the confirm cell with action 4**; no cell has action 2 or 3. Grid 1 (84 rows) and grid 2 (49 rows) can therefore never be
+  selected: they are data of the Japanese kana pages that the Latin releases carry along. (The JP grid 0 has switch cells with actions 2 and 3; the DE grid 0 has none either.)
+* Reachable letters of the US grid: `$00-$33` (a-z, A-Z), `$38 $39 $3B $3C $3D $40 $41 $42` (punctuation, heart), `$B2-$BB` (digits); the empty name is `$B1`. Names are stored as one byte per
+  character in `strcNames` (`sTemp` -> `sPlayer`, `sDog`, ...), so the grid can enter ids below `$100` only.
+* Grid 0 geometry (cursor pixels): the screen has two blocks of 5 columns (x 40-104 and 136-200), rows y 68-132 hold A-Y / a-y, y 148 holds only Z / z, y 164 and y 180 digits and symbols, and `OK` sits at
+  (192,196). The picture is the BG1 tilemap `Screen_Menu_Characters`, so a cell without a drawn letter is blank. **Free positions in the picture: 4 + 4 in the Z/z row, 2 in the last row of the right
+  block (x 184 and 200, y 180), 5 + 3 in the row of `OK` (y 196)** = 18, exactly the Polish letters (DE used the Z/z row for its 7 letters).
+* Capacity of the data: the three grids are contiguous ($82EBF8, $82EE30, $82F0D0; 71 + 84 + 49 = 204 rows of 8 bytes, 1632 bytes). A grid 0 override may use all of it because grids 1 and 2 are dead;
+  the translation build verifies that the ROM holds the extracted US grids there before it writes (`namegrid.py`).
+* Open for an emulator test (not needed for the decision): that the extra cells show a blank place until the graphics override exists, and the navigation feel of the added links.
 
 **B. Text baked into graphics (needs PNG overrides, later phase):** Regional releases already override these, which marks them as text-as-tiles:
 
 * `Screen_IntroFarmScroll_BG1/BG2`, `Tiles_IntroFarmScroll_0-3` (title/intro; EU, DE and JP versions exist)
-* `Screen_Menu_Backgrounds`, `Screen_Menu_Characters`, `Screen_Menu_BackgroundPattern`, `Tiles_Menu_*` (main menu; DE and JP versions)
+* `Screen_Menu_Backgrounds`, `Screen_Menu_Characters`, `Screen_Menu_BackgroundPattern`, `Tiles_Menu_*` (main menu: the words `year` and `th of` of the save slot boxes, `Choose Diary`; the letters of the
+  name entry grid; DE and JP versions)
 * `Screen_ToolShed`, `Screen_ToolShed_Layer2`, `Tiles_ToolShed_1` (signs; DE and JP)
 * JP only: `Screen_Title_NatsumeLogo`, `Tiles_Credits_0`, `Screen_Credits_0to3`, credits and end-screen text, `Screen_Credits4_DriveToTown__*`, `Screen_Credits_StaffRollJp__*`
 * Candidate unlocalised screens of the US release to inspect: `Screen_Intro`, ending screens `Screen_Ending00-13`, credits `Tiles_Credits_0-3`, HUD/menu tiles, shop and building signs.
 
-The glyph-id strings of A are the first follow-up (small tables); B needs a PNG override mechanism like `assets/gfx/png/<region>/` (regional versions) with a `translations/<lang>/gfx/` directory.
+A PNG override mechanism like `assets/gfx/png/<region>/` (regional versions) with a `translations/<lang>/gfx/` directory is the next phase; it also draws the 18 name grid letters.

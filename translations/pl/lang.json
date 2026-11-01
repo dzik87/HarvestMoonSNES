@@ -6,6 +6,37 @@
  "autopage": true,
  "dialogs": "dialogs.txt",
  "status": "status.csv",
+ "grids": {
+  "file": "name_grids.txt"
+ },
+ "strings": {
+  "season": {
+   "spring": "Wiosna",
+   "summer": "Lato",
+   "autumn": "Jesień",
+   "winter": "Zima"
+  },
+  "weekday": {
+   "sunday": "Niedziela",
+   "monday": "Poniedz.",
+   "tuesday": "Wtorek",
+   "wednesday": "Środa",
+   "thursday": "Czwartek",
+   "friday": "Piątek",
+   "saturday": "Sobota"
+  },
+  "day_ordinal": {
+   "first": ".",
+   "second": ".",
+   "third": ".",
+   "other": "."
+  },
+  "year_ordinal": {
+   "year1": ".",
+   "year2": ".",
+   "year3": "."
+  }
+ },
  "glyphs": {
   "Ą": {
    "id": "0x43",

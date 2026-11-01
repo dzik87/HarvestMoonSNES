@@ -4,11 +4,12 @@
 Called by `python tools/build.py --region US --translation pl` (docs/translation.md); can also be run on its own:
 
   python tools/translate/build.py gen pl [--fallback us|error] [--allow-errors]     write build/gen/dialogs/translation/*.asm (dialog banks + text tables)
-  python tools/translate/build.py post pl build/HarvestMoon_US_pl.sfc               patch glyph tables, header title and checksum of an assembled ROM
+  python tools/translate/build.py post pl build/HarvestMoon_US_pl.sfc [--symbols FILE]   patch glyph tables, string tables, name grid, header title and checksum of an assembled ROM
 
 `gen` packs the dialogs of the language in id order into the banks $B6..$BF (then $AA-$AC) without splitting a dialog; ids without a translation use the US words
-(--fallback us, default) so the ROM builds at every stage.  `post` writes the generated letters into the font tables of the ROM image, optionally the
-header title (lang.json "header_title") and fixes the header checksum; the four original releases are never touched by this code.
+(--fallback us, default) so the ROM builds at every stage.  `post` writes the generated letters into the font tables of the ROM image, the translated string tables (lang.json "strings", tools/translate/strings.py) and the name
+entry grid override (lang.json "grids", tools/translate/namegrid.py), optionally the header title (lang.json "header_title"), and fixes the header checksum; the four original releases
+are never touched by this code.
 """
 import argparse
 import sys
@@ -18,6 +19,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import check                                                # noqa: E402
 import common as C                                          # noqa: E402
 import glyphs as G                                          # noqa: E402
+import namegrid as NG                                       # noqa: E402
+import strings as ST                                        # noqa: E402
 
 sys.path.insert(0, str(C.ROOT / "tools" / "dialogs"))
 import texttables                                           # noqa: E402
@@ -80,8 +83,10 @@ def generate(lang, ctx, fallback="us", allow_errors=False, gen_dir=GEN_DIR, tabl
             "errors": len(rep.errors), "warnings": len(rep.warnings)}
 
 
-def post_process(rom, lang):
-    """Patch an assembled ROM (bytearray): generated glyphs, header title, checksum -> (checksum, list of patched font tables)."""
+def post_process(rom, lang, symbols=None):
+    """Patch an assembled ROM (bytearray): generated glyphs, string tables, name entry grid, header title, checksum
+    -> (checksum, list of patched font tables, info dict {"strings": [(table, slots)], "grid_rows": n}).
+    `symbols` = {label: address} of the assembled ROM (asar --symbols=nocash); with it the addresses of defs/translation/strings.json and defs/menu/name_input.json are verified."""
     from_tables = G.engine_tables(lang.engine_region)
     new_tables = G.apply_glyphs(from_tables, G.build_glyphs(lang, from_tables))
     sys.path.insert(0, str(C.ROOT / "tools" / "fonts"))
@@ -94,18 +99,19 @@ def post_process(rom, lang):
                 raise SystemExit("font table %d in the ROM does not match the extracted font (wrong region or stale assets)" % t)
             rom[o:o + font.TABLE_SIZE] = b
             patched.append(t)
+    info = {"strings": ST.patch_rom(rom, lang, symbols), "grid_rows": NG.patch_rom(rom, lang, symbols)}
     title = lang.cfg.get("header_title")
     if title:
         raw = title.encode("ascii")[:21].ljust(21, b" ")
         rom[HEADER_TITLE:HEADER_TITLE + 21] = raw
-    return fix_checksum(rom), patched
+    return fix_checksum(rom), patched, info
 
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
     g = sub.add_parser("gen"); g.add_argument("lang"); g.add_argument("--fallback", choices=("us", "error"), default="us"); g.add_argument("--allow-errors", action="store_true")
-    p = sub.add_parser("post"); p.add_argument("lang"); p.add_argument("rom")
+    p = sub.add_parser("post"); p.add_argument("lang"); p.add_argument("rom"); p.add_argument("--symbols", help="asar symbol file (--symbols=nocash) of the assembled ROM: verifies the table addresses")
     a = ap.parse_args(argv)
     lang = C.Lang(C.lang_dir(a.lang))
     if a.cmd == "gen":
@@ -113,9 +119,9 @@ def main(argv=None):
         print("generated %d bytes in %d bank(s); %d of %d dialogs translated, %d from the US text" % (s["bytes"], len(s["banks"]), s["translated"], s["total"], s["fallback"]))
     else:
         rom = bytearray(Path(a.rom).read_bytes())
-        chk, patched = post_process(rom, lang)
+        chk, patched, info = post_process(rom, lang, ST.read_symbols(a.symbols) if a.symbols else None)
         Path(a.rom).write_bytes(rom)
-        print("patched font table(s) %s, checksum $%04X" % (patched, chk))
+        print("patched font table(s) %s, %d string slot(s), %d name grid row(s), checksum $%04X" % (patched, sum(len(x[1]) for x in info["strings"]), info["grid_rows"], chk))
     return 0
 
 

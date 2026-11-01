@@ -90,8 +90,9 @@ def main() -> int:
     if args.verbose:
         cmd.append("-v")
     cmd += DEFINES[args.region]
+    symfile = out.with_suffix(".sym")
     if tr:
-        cmd.append("-DTRANSLATION=1")
+        cmd += ["-DTRANSLATION=1", "--symbols=nocash", "--symbols-path=%s" % symfile]
     cmd += ["-werror", "--no-title-check", "--fix-checksum=off", MAIN[args.region], str(out)]
     print("+", " ".join(cmd))
     rc = subprocess.run(cmd, cwd=ROOT).returncode
@@ -105,9 +106,10 @@ def main() -> int:
 
     if tr:
         rom = bytearray(out.read_bytes())
-        checksum, patched = trbuild.post_process(rom, tr)
+        checksum, patched, info = trbuild.post_process(rom, tr, trbuild.ST.read_symbols(symfile))
         out.write_bytes(rom)
         print("\n[US engine + %s] TRANSLATION BUILD: %s, %d bytes, header checksum $%04X, font tables patched %s" % (tr.code, out.relative_to(ROOT) if out.is_relative_to(ROOT) else out, len(rom), checksum, patched))
+        print("  strings: %s; name grid: %s" % (", ".join("%s %d slot(s)" % (t, len(sl)) for t, sl in info["strings"]) or "none", "%d rows" % info["grid_rows"] if info["grid_rows"] else "original"))
         print("  dialogs: %d of %d translated, %d from the US text, %d bytes in %d bank(s); %d check error(s), %d warning(s)"
               % (summary["translated"], summary["total"], summary["fallback"], summary["bytes"], len(summary["banks"]), summary["errors"], summary["warnings"]))
         return 0

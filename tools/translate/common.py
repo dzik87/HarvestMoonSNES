@@ -59,6 +59,7 @@ class Lang:
         self.engine_region = self.cfg.get("engine_region", "us")
         self.layout = self.cfg.get("layout", "wrap")
         self.autopage = bool(self.cfg.get("autopage", True))
+        self.strings = self.cfg.get("strings", {})      # table -> {key: text}  (tools/translate/strings.py)
         self.glyphs = {}                    # char -> {"id": int, "base": str, "mark": str}
         for ch, g in self.cfg.get("glyphs", {}).items():
             gid = int(str(g["id"]), 0)

@@ -1,0 +1,99 @@
+# Name entry grid 0 of the Polish translation (override of aNameInputGrid0, docs/translation.md, "Name entry grid").
+# Same row syntax as assets/menu/name_input.txt: `NN: x y down up right left char action`, row number = cell index (cell 00 is the start cell).
+# Rows 00-46 are the cells of the US grid; the rows with the new links (down/up/right/left) are the cells next to the added letters.
+# Rows 47-58 add the 18 Polish letters at the 18 free cell positions of the US grid picture (glyph ids of translations/pl/lang.json):
+#   upper case  47-4A at x 56-104 / y 148 (row of Z), 4B-4F at x 40-104 / y 196 (row of OK)
+#   lower case  50-53 at x 152-200 / y 148 (row of z), 54-55 at x 184-200 / y 180, 56-58 at x 136-168 / y 196
+# Rows 47-58 are selectable and enter their letter; their picture is not drawn yet (graphics override, later phase).
+# Checked by tools/translate/namegrid.py check pl (links, reachability, characters, capacity).
+
+table aNameInputGrid0
+00: 28 44 05 4B 01 28 1A 00
+01: 38 44 06 4C 02 00 1B 00
+02: 48 44 07 4D 03 01 1C 00
+03: 58 44 08 4E 04 02 1D 00
+04: 68 44 09 4F 24 03 1E 00
+05: 28 54 0A 00 06 2D 1F 00
+06: 38 54 0B 01 07 05 20 00
+07: 48 54 0C 02 08 06 21 00
+08: 58 54 0D 03 09 07 22 00
+09: 68 54 0E 04 29 08 23 00
+0A: 28 64 0F 05 0B 32 24 00
+0B: 38 64 10 06 0C 0A 25 00
+0C: 48 64 11 07 0D 0B 26 00
+0D: 58 64 12 08 0E 0C 27 00
+0E: 68 64 13 09 2E 0D 28 00
+0F: 28 74 14 0A 10 37 29 00
+10: 38 74 15 0B 11 0F 2A 00
+11: 48 74 16 0C 12 10 2B 00
+12: 58 74 17 0D 13 11 2C 00
+13: 68 74 18 0E 33 12 2D 00
+14: 28 84 19 0F 15 3C 2E 00
+15: 38 84 47 10 16 14 2F 00
+16: 48 84 48 11 17 15 30 00
+17: 58 84 49 12 18 16 31 00
+18: 68 84 4A 13 38 17 32 00
+19: 28 94 1A 14 47 53 33 00
+1A: 28 A4 1F 19 1B 42 B2 00
+1B: 38 A4 20 47 1C 1A B3 00
+1C: 48 A4 21 48 1D 1B B4 00
+1D: 58 A4 22 49 1E 1C B5 00
+1E: 68 A4 23 4A 3E 1D B6 00
+1F: 28 B4 4B 1A 20 55 B7 00
+20: 38 B4 4C 1B 21 1F B8 00
+21: 48 B4 4D 1C 22 20 B9 00
+22: 58 B4 4E 1D 23 21 BA 00
+23: 68 B4 4F 1E 43 22 BB 00
+24: 88 44 29 56 25 04 00 00
+25: 98 44 2A 57 26 24 01 00
+26: A8 44 2B 58 27 25 02 00
+27: B8 44 2C 46 28 26 03 00
+28: C8 44 2D 46 00 27 04 00
+29: 88 54 2E 24 2A 09 05 00
+2A: 98 54 2F 25 2B 29 06 00
+2B: A8 54 30 26 2C 2A 07 00
+2C: B8 54 31 27 2D 2B 08 00
+2D: C8 54 32 28 05 2C 09 00
+2E: 88 64 33 29 2F 0E 0A 00
+2F: 98 64 34 2A 30 2E 0B 00
+30: A8 64 35 2B 31 2F 0C 00
+31: B8 64 36 2C 32 30 0D 00
+32: C8 64 37 2D 0A 31 0E 00
+33: 88 74 38 2E 34 13 0F 00
+34: 98 74 39 2F 35 33 10 00
+35: A8 74 3A 30 36 34 11 00
+36: B8 74 3B 31 37 35 12 00
+37: C8 74 3C 32 0F 36 13 00
+38: 88 84 3D 33 39 18 14 00
+39: 98 84 50 34 3A 38 15 00
+3A: A8 84 51 35 3B 39 16 00
+3B: B8 84 52 36 3C 3A 17 00
+3C: C8 84 53 37 14 3B 18 00
+3D: 88 94 3E 38 50 4A 19 00
+3E: 88 A4 43 3D 3F 1E 38 00
+3F: 98 A4 44 50 40 3E 39 00
+40: A8 A4 45 51 41 3F 3B 00
+41: B8 A4 54 52 42 40 3C 00
+42: C8 A4 55 53 1A 41 3D 00
+43: 88 B4 56 3E 44 23 40 00
+44: 98 B4 57 3F 45 43 41 00
+45: A8 B4 58 40 54 44 42 00
+46: C0 C4 28 54 4B 58 00 04
+47: 38 94 1B 15 48 19 43 00
+48: 48 94 1C 16 49 47 44 00
+49: 58 94 1D 17 4A 48 45 00
+4A: 68 94 1E 18 3D 49 46 00
+4B: 28 C4 00 1F 4C 46 47 00
+4C: 38 C4 01 20 4D 4B 48 00
+4D: 48 C4 02 21 4E 4C 49 00
+4E: 58 C4 03 22 4F 4D 4A 00
+4F: 68 C4 04 23 56 4E 4B 00
+50: 98 94 3F 39 51 3D 4C 00
+51: A8 94 40 3A 52 50 4D 00
+52: B8 94 41 3B 53 51 4E 00
+53: C8 94 42 3C 19 52 4F 00
+54: B8 B4 46 41 55 45 50 00
+55: C8 B4 46 42 1F 54 51 00
+56: 88 C4 24 43 57 4F 52 00
+57: 98 C4 25 44 58 56 53 00
+58: A8 C4 26 45 46 57 54 00

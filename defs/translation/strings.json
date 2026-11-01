@@ -1,0 +1,38 @@
+{
+ "_doc": "Plain glyph-id strings of the US engine that are not part of the dialog banks (docs/translation.md, 'Strings outside the dialogs'). Every table is an array of fixed-size slots of 16-bit glyph words; only the first `chars` words of a slot are read by the code, the rest of the slot is padding that is never touched. `label` is the asar label (the translation build resolves it through the symbol file of the assembled ROM and checks it against `rom`), `rom` the SNES address of the US release, `entries` the keys of the slots in slot order. A translation overrides the slots in lang.json (\"strings\": {table: {key or index: text}}); shorter texts are padded with the space glyph. Evidence for the widths and the readers: docs/translation-analysis.md, section 6.",
+ "pad_glyph": "00B1",
+ "tables": {
+  "season": {
+   "label": "aSeasonString",
+   "rom": "$828AD9",
+   "stride": 16,
+   "chars": 6,
+   "entries": ["spring", "summer", "autumn", "winter"],
+   "use": "text variable `season` in dialogs (<VAR season>, 6 cells) and the season word of the save slot line (6 cells); index = season id"
+  },
+  "weekday": {
+   "label": "aWeekdayString",
+   "rom": "$828B19",
+   "stride": 32,
+   "chars": 9,
+   "entries": ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"],
+   "use": "text variable `weekday` in dialogs (<VAR weekday>, 9 cells); index = weekday id (0 = first day of the week as the game counts it)"
+  },
+  "day_ordinal": {
+   "label": "aDayOrdinalString",
+   "rom": "$828BF9",
+   "stride": 4,
+   "chars": 2,
+   "entries": ["first", "second", "third", "other"],
+   "use": "text variable `ordinal` in dialogs (<VAR ordinal>, 2 cells) after the day number: slot 0 for day 1 and 21, slot 1 for 2 and 22, slot 2 for 3 and 23, slot 3 for every other day"
+  },
+  "year_ordinal": {
+   "label": "aYearOrdinalString",
+   "rom": "$82F298",
+   "stride": 4,
+   "chars": 2,
+   "entries": ["year1", "year2", "year3"],
+   "use": "save slot line of the main menu, two cells behind the year number; index = year id. The words around it ('year', 'th of') are tiles of Screen_Menu_Backgrounds (text in graphics, not covered by this table)"
+  }
+ }
+}

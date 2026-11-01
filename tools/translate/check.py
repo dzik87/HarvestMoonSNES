@@ -14,6 +14,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import common as C                                          # noqa: E402
+import namegrid as NG                                       # noqa: E402
+import strings as ST                                        # noqa: E402
 
 
 class Report:
@@ -27,8 +29,48 @@ class Report:
         return not self.errors
 
 
+def check_glyph_ids(lang, ctx):
+    """Glyph ids of the language must not be used by anything that stays in the ROM: the US dialogs (untranslated ids fall back to them) and every letter cell of the
+    name entry grids that can be reached (a grid is reached only through a switch cell, namegrid.reachable_grids).  -> list of messages"""
+    out = []
+    ids = {g["id"]: ch for ch, g in lang.glyphs.items()}
+    if not ids:
+        return out
+    used = {}
+    for i, words in ctx.us.items():
+        for t in C.split_tokens(words):
+            if t[0] == "G" and t[1] in ids:
+                used.setdefault(t[1], []).append(i)
+    for gid, dl in sorted(used.items()):
+        out.append("glyph $%02X (%s) is used by the US text of %d dialog(s) (first 0x%04X); the untranslated fallback would show the letter" % (gid, ids[gid], len(dl), dl[0]))
+    try:
+        base = NG.us_grids()
+        rows = NG.load_override(lang)
+    except (OSError, ValueError):
+        return out
+    after = dict(base)
+    if rows is not None:
+        after[NG.GRID_LABELS[0]] = rows
+    for g, cell, gid in NG.collisions(lang, after):
+        out.append("glyph $%02X (%s) is entered by cell %02X of the reachable name entry grid %d" % (gid, ids[gid], cell, g))
+    return out
+
+
 def check_lang(lang, ctx):
     rep = Report()
+    errs, warns = ST.check_lang_strings(lang)
+    rep.errors += [(-1, m) for m in errs]
+    rep.warnings += [(-1, m) for m in warns]
+    try:
+        grows = NG.load_override(lang)
+    except (OSError, ValueError) as e:
+        grows = None
+        rep.errors.append((-1, "grids: %s" % e))
+    if grows is not None:
+        errs, warns = NG.check_override(lang, grows)
+        rep.errors += [(-1, m) for m in errs]
+        rep.warnings += [(-1, m) for m in warns]
+    rep.errors += [(-1, m) for m in check_glyph_ids(lang, ctx)]
     try:
         tr = C.load_translation(lang)
     except C.SyntaxError_ as e:
@@ -97,7 +139,7 @@ def main(argv=None):
     for i, m in rep.errors:
         print("ERROR   %s %s" % ("0x%04X:" % i if i >= 0 else "file:", m))
     for i, m in rep.warnings:
-        print("warning 0x%04X: %s" % (i, m))
+        print("warning %s %s" % ("0x%04X:" % i if i >= 0 else "file:", m))
     st = C.read_status(lang.path_status)
     total = len(ctx.ids)
     counts = {s: 0 for s in C.STATUSES}
