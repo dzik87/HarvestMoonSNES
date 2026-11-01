@@ -1,3 +1,183 @@
+@@ sDialog_0x0000 @@
+Dzień dobry, prognoza pogody na jutro. Jutro będzie słonecznie i spokojnie przez cały dzień.<END>
+
+@@ sDialog_0x0001 @@
+Upały trwają, prawda? Jutro przez cały dzień będzie bezchmurnie.<END>
+
+@@ sDialog_0x0002 @@
+Jesienne góry pięknie się wybarwiły. Jutro niebo będzie błękitne.<END>
+
+@@ sDialog_0x0003 @@
+Robi się coraz zimniej, jak się miewacie? Jutro będzie słonecznie.<END>
+
+@@ sDialog_0x0004 @@
+Dzień dobry, prognoza na jutro: od północy zacznie padać i deszcz utrzyma się przez cały dzień.<END>
+
+@@ sDialog_0x0005 @@
+Prognoza na jutro: od rana ulewny deszcz, miejscami z burzami.<END>
+
+@@ sDialog_0x0006 @@
+Robi się coraz chłodniej. Jutro przez cały dzień będzie padać.<END>
+
+@@ sDialog_0x0007 @@
+Co dzień zimno, prawda? A oto prognoza na jutro: będzie padać śnieg.<END>
+
+@@ sDialog_0x0008 @@
+Komunikat o tajfunie! Tajfun się nasila i zbliża!<NEXT>Koniecznie schowajcie zwierzęta w zagrodach!<END>
+
+@@ sDialog_0x0009 @@
+Pieniądze<POS 37><NUM 7 1>0G<NEXT>Krowy   <NUM 2 2><POS 28>Kury    <NUM 2 3><NEXT>Pies    <VAR dog><POS 28>Koń     <VAR horse><END>
+
+@@ sDialog_0x000A @@
+Napisać wpis w dzienniku przed snem?<NEXT><OPTLBL 1>Tak<OPTLBL 2>Nie<OPT 2>
+
+@@ sDialog_0x000B @@
+Jutro też dam z siebie wszystko.<END>
+
+@@ sDialog_0x000C @@
+<OPTLBL 1>Idę spać<OPTLBL 2>Mam jeszcze robotę<OPT 2>
+
+@@ sDialog_0x000D @@
+Dobranoc.<END>
+
+@@ sDialog_0x000E @@
+"Miejsce rozbudowy domu"<BR><BR>Potrzebne materiały <NUM 3 4>szt.<END>
+
+@@ sDialog_0x000F @@
+"Sierp"<BR>Kosz trawę na paszę!<NEXT>To jedzenie dla kur i krów, a gdy zabraknie, będzie kiepsko!<END>
+
+@@ sDialog_0x0010 @@
+"Motyka"<BR>Spulchnij ziemię i zrób pole! Uprawiaj na nim warzywa!<NEXT>Wypróbuj różne sposoby zakładania pól!<END>
+
+@@ sDialog_0x0011 @@
+"Siekiera"<BR>Porąb pniaki na drewno! Drewno do wielu rzeczy się przyda!<NEXT>Uderzaj w jeden punkt! Nie naciskaj krzyżaka.<END>
+
+@@ sDialog_0x0012 @@
+"Młot"<BR>Rozbijaj kamienie i połamane płoty!<NEXT>Duże głazy też rozbijesz, jeśli uderzysz w jeden punkt! Nigdy nie naciskaj krzyżaka.<END>
+
+@@ sDialog_0x0013 @@
+"Konewka"<BR>Podlewaj uprawy! Raz dziennie. W deszczowe dni nie trzeba.<NEXT>Gdy zabraknie wody, nabierz ją w studni lub stawie.<END>
+
+@@ sDialog_0x0014 @@
+"Dojarka"<BR>Dój krowy i wysyłaj mleko!<END>
+
+@@ sDialog_0x0015 @@
+"Szczotka"<BR>Szczotkowanie zwiększa przywiązanie krowy!<NEXT>Krowa, która cię lubi, daje dużo mleka!<END>
+
+@@ sDialog_0x0016 @@
+"Dzwonek"<BR>Służy do zaganiania krów! Obserwuj je i prowadź sprawnie!<END>
+
+@@ sDialog_0x0017 @@
+"Nasiona warzyw"<BR>Każde mają swój czas siewu, więcej dowiesz się w kwiaciarni!<NEXT>Nasiona sieje się na polu i trzeba je podlewać, inaczej nie wykiełkują!<END>
+
+@@ sDialog_0x0018 @@
+"Nasiona trawy"<BR>Siej je na polu od wiosny do lata. Rosną i bez podlewania.<NEXT>Bez pastwiska nie utrzymasz krów ani kur!<NEXT>Kosić można, gdy trawa mocno się zazieleni.<END>
+
+@@ sDialog_0x0019 @@
+"Farba"<BR>Pomaluj ładnie dom!<END>
+
+@@ sDialog_0x001A @@
+No już, nie mów, że od Nowego Roku bierzesz się do pracy! Dziś odpocznij sobie.<END>
+
+@@ sDialog_0x001B @@
+Zapas materiałów<POS 37><NUM 3 5>szt.<POS 56>Rąb pniaki i zbieraj drewno!<END>
+
+@@ sDialog_0x001C @@
+Zapas paszy<POS 37><NUM 3 6>szt.<POS 56>Kosz trawę, by było więcej!<END>
+
+@@ sDialog_0x001D @@
+Ach, no tak, zabiłem drzwi deskami przed tajfunem.<END>
+
+@@ sDialog_0x001E @@
+W lewo: sąsiednie miasto<POS 28>Prosto: tylna góra<END>
+
+@@ sDialog_0x001F @@
+Prosto: szczyt<END>
+
+@@ sDialog_0x0020 @@
+Tutaj zdejmij ubranie.<END>
+
+@@ sDialog_0x0021 @@
+Uwaga! Grozi osunięciem!<END>
+
+@@ sDialog_0x0022 @@
+Prosto: dom rzemieślnika. Przyjmujemy zlecenia i porady w sprawie rozbudowy domu.<NEXT>Nieczynne w soboty, niedziele i święta.<END>
+
+@@ sDialog_0x0023 @@
+Znalazłem dziennik!<NEXT><OPTLBL 1>Czytaj<OPTLBL 2>Nie czytaj<OPT 2>
+
+@@ sDialog_0x0024 @@
+"Mity o bogach"<BR>Mnóstwo trudnych książek.<END>
+
+@@ sDialog_0x0025 @@
+"Historia i mity"<BR>Jest tu też wiele innych książek.<END>
+
+@@ sDialog_0x0026 @@
+"Łagodne nauki Boga"<POS 28>"Szczęście w życiu"<END>
+
+@@ sDialog_0x0027 @@
+"Rośliny"<POS 28>"Sztuczne kwiaty"<END>
+
+@@ sDialog_0x0028 @@
+"100 najlepszych koktajli"<POS 28>"Jak zrobić nalewkę z owoców"<END>
+
+@@ sDialog_0x0029 @@
+"Smaczne ciasta"<POS 28>"Dania na dzisiaj"<END>
+
+@@ sDialog_0x002A @@
+"Zachęta do wynalazków"<POS 28>"Dom i drobiazgi"<END>
+
+@@ sDialog_0x002B @@
+"Wielka encyklopedia wróżb"<POS 28>"Bijące serce: wróżby o dopasowaniu"<END>
+
+@@ sDialog_0x002C @@
+"Dom i życie"<POS 28>"Jesteśmy cieślami"<END>
+
+@@ sDialog_0x002D @@
+"Dziś zamknięte"<END>
+
+@@ sDialog_0x002E @@
+"Trwają przygotowania"<END>
+
+@@ sDialog_0x002F @@
+Dobrze, dobrze, <VAR cow>.<BR>Dziś też jesteś w formie.<END>
+
+@@ sDialog_0x0030 @@
+<VAR cow> chyba ma zły humor.<END>
+
+@@ sDialog_0x0031 @@
+<VAR cow> jest chora!<BR>Muszę szybko dać jej lekarstwo!<END>
+
+@@ sDialog_0x0032 @@
+Dni do porodu: <NUM 2 7>.<BR>Dawaj, <VAR cow>.<END>
+
+@@ sDialog_0x0033 @@
+Nie da się otworzyć, zamknięte na klucz.<END>
+
+@@ sDialog_0x0034 @@
+Nie da się otworzyć, coś chyba blokuje.<END>
+
+@@ sDialog_0x0035 @@
+Cześć, jak leci? Nie forsuj się, rób wszystko powoli.<END>
+
+@@ sDialog_0x0036 @@
+O uprawy pytaj w kwiaciarni, o zwierzęta u handlarza,<NEXT>a w sprawach dziewcząt najlepiej babcię wróżkę.<END>
+
+@@ sDialog_0x0037 @@
+Nie kręć się tak, lepiej posłuchaj pastora.<END>
+
+@@ sDialog_0x0038 @@
+Dziś też masz wolne? Od samej pracy człowiek się wykończy.<END>
+
+@@ sDialog_0x0039 @@
+Ludzie w miasteczku mówią co innego zależnie od pogody, dnia tygodnia i pory roku.<END>
+
+@@ sDialog_0x003A @@
+Szczęście każdy rozumie inaczej, prawda? Myślę, że najlepiej robić to, na co ma się ochotę.<NEXT>Ale to chyba nie jest prawdziwe szczęście, jeśli sprawia się innym kłopot albo budzi ich urazę.<END>
+
+@@ sDialog_0x003B @@
+Ciężko pracujesz. Czasem trzeba pogadać z ludźmi albo pójść w góry...<NEXT>Odpoczynek też jest potrzebny.<END>
+
 @@ sDialog_0x003C @@
 W tym kościele czci się boga upraw. Dobrze jest tu porządnie się pomodlić.<END>
 
@@ -962,20 +1142,23 @@ Lepiej sprawdzić to i owo w okolicy.<END>
 Co? Trzęsienie ziemi? Nie zauważyłem.<END>
 
 @@ sDialog_0x016A @@
-Ciekawe, czy dziadkowi nic nie jest. W górach jest mnóstwo miejsc, gdzie łatwo o osunięcie, martwię się.<END>
+Ciekawe, czy dziadkowi nic nie jest. W górach jest mnóstwo miejsc, gdzie łatwo<NEXT>
+o osunięcie, martwię się.<END>
 
 @@ sDialog_0x016B @@
 Ale się wystraszyłam. A na twojej farmie wszystko dobrze?<END>
 
 @@ sDialog_0x016C @@
-Krowy to delikatne stworzenia. W dni tajfunu, deszczu i śniegu nie zostawiaj ich na dworze!<END>
+Krowy to delikatne stworzenia. W dni tajfunu, deszczu i śniegu nie<NEXT>
+zostawiaj ich na dworze!<END>
 
 @@ sDialog_0x016D @@
 Podobno przez trzęsienie ziemi coś się tu i tam zmieniło.<NEXT>
 Właśnie rozmawialiśmy o tym, żeby pójść obejrzeć okolicę.<END>
 
 @@ sDialog_0x016E @@
-Przez trzęsienie ziemi zawalił się ten wielki głaz dalej na drodze. Wiesz o tym?<END>
+Przez trzęsienie ziemi zawalił się ten wielki głaz dalej na drodze.<NEXT>
+Wiesz o tym?<END>
 
 @@ sDialog_0x016F @@
 Tak, bardzo się wystraszyłem.<END>
@@ -1066,7 +1249,8 @@ Piękna pogoda. Wybierzmy się kiedyś razem na piknik na szczyt góry!<END>
 La la la! Niebo jest niebieskie. Aż człowiek się cieszy.<END>
 
 @@ sDialog_0x018B @@
-Te dziwne kwiaty, które rosną w górach... Kiedyś chciałabym je hodować na farmie. To moje marzenie.<END>
+Te dziwne kwiaty, które rosną w górach...<NEXT>
+Kiedyś chciałabym je hodować na farmie. To moje marzenie.<END>
 
 @@ sDialog_0x018C @@
 Dzień dobry, kochanie. Przed chwilą przed domem był wróbel. Taki śliczny.<END>
@@ -1240,7 +1424,8 @@ Pa-pa!<END>
 Pu-pu!<END>
 
 @@ sDialog_0x01C3 @@
-To "Niebieskie Pióro Szczęścia". Cóż, każdy rozumie szczęście po swojemu.<NEXT>
+To "Niebieskie Pióro Szczęścia". Cóż, każdy rozumie szczęście po<NEXT>
+swojemu.<NEXT>
 Teraz tylko 1000G!<NEXT>
 <OPTLBL 1>Kup<OPTLBL 2>Nie kupuj<POS 58>Kasa <NUM 7 14>0G<OPT 2>
 
@@ -1263,7 +1448,8 @@ Dobrze! Dawaj! Powodzenia!<END>
 Hej, hej, nie tej osobie to dajesz.<END>
 
 @@ sDialog_0x01CA @@
-To daje się dziewczynie, którą lubisz. Rozumiesz? Dziewczynie, z którą chcesz się ożenić.<END>
+To daje się dziewczynie, którą lubisz. Rozumiesz?<NEXT>
+Dziewczynie, z którą chcesz się ożenić.<END>
 
 @@ sDialog_0x01CB @@
 Wow, niebieskie pióro! Pokaż, pokaż!<END>
@@ -1277,7 +1463,8 @@ Błagam! Poszukaj Marii!<END>
 Ach, Maria! Tata był niedobry! Wróć do nas!!<END>
 
 @@ sDialog_0x01CE @@
-Zwykle to spokojna dziewczyna... Powód? Hohoho... to wina mojego męża.<NEXT>
+Zwykle to spokojna dziewczyna... Powód? Hohoho...<NEXT>
+to wina mojego męża.<NEXT>
 Przepraszam za kłopot. Proszę o pomoc.<END>
 
 @@ sDialog_0x01CF @@
