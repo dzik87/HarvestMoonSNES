@@ -118,7 +118,7 @@ the PNG has the 128 colours of the blob's palette `palette.id`, pixel = row << 4
 Sidecar keys: `tile_rows_multi` = tiles that are shown with more than one row (`{"tile": [rows, most used first]}`), `tiles_row_guessed` = number
 of tiles no name table shows (these use `palette.sub`, a guess; `palette_confidence` says how good, `low` = no tile is referenced). Blobs whose
 rows are all guessed (no static name table references them): `Tiles_Unused_TitleLogoJapanese` (Japanese title logo left in the US ROM),
-(`Tiles_Credits_3`, `Tiles_Unk51_3` and `Tiles_DriveToTown_3` are NOT unused: the map table loads them to VRAM $5000 - see `docs/formats/graphics-loading.md` - only no static name table cell shows their tiles); they are drawn with `palette.sub` and
+(`Tiles_Credits_3`, `Tiles_Credits4_BL_3` and `Tiles_DriveToTown_3` are NOT unused: the map table loads them to VRAM $5000 - see `docs/formats/graphics-loading.md` - only no static name table cell shows their tiles); they are drawn with `palette.sub` and
 `pngsync.py check` prints a NOTE for each.  The primary `sub` of a blob is the row with the most cells over *all* areas that show it with the same palette
 (`palette_map.py`); `95D6E2` therefore moved from sub 2 (house 1 only, 6 cells, medium) to **sub 1 (36 of 54 cells, high)**; rows 1/2 are both used,
 the per-tile rows are exact.
@@ -227,7 +227,7 @@ widths equal the US one):
 | `Screen_Intro` | 1024 | 32 x 32 | 0.99 | US only |  |
 | `Screen_Credits_0to3` | 4096 | 64 x 64 | 0.72 | jp |  |
 | `Screen_Credits4_DriveToTown` | 4096 | 64 x 64 | 0.77 | de,jp |  |
-| `Screen_Unk53to56` | 4096 | 64 x 64 | 0.65 | US only |  |
+| `Screen_Credits_StaffRollJp` | 4096 | 64 x 64 | 0.65 | US only |  |
 
 Still doubtful (cannot be decided from the picture alone):
 

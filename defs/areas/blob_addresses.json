@@ -72,8 +72,8 @@
  "Tiles_Credits_1": "$A08000",
  "Tiles_Credits_2": "$A088E9",
  "Tiles_Credits_3": "$A09232",
- "Tiles_Unk51_3": "$A0AB1E",
- "Tiles_Unk56_3": "$A0CAAF",
+ "Tiles_Credits4_BL_3": "$A0AB1E",
+ "Tiles_Credits_StaffRollJp_3": "$A0CAAF",
  "Tiles_DriveToTown_3": "$A0E682",
  "ScreenRaw_Farm": "$A18000",
  "ScreenRaw_Mountain": "$A28000",
@@ -136,5 +136,5 @@
  "Screen_Intro": "$A68DCF",
  "Screen_Credits_0to3": "$A690A6",
  "Screen_Credits4_DriveToTown": "$A694EE",
- "Screen_Unk53to56": "$A69996"
+ "Screen_Credits_StaffRollJp": "$A69996"
 }

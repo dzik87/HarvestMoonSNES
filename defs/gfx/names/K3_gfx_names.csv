@@ -69,12 +69,12 @@ sCompressedTiles_9FAA75,Tiles_IntroFarmScroll_2,high,slot $4000 of sIntroFarmScr
 sCompressedTiles_9FC04C,Tiles_IntroFarmScroll_3,high,slot $5000 of sIntroFarmScrool,$9FC04C
 sCompressedTiles_9FEF97,Tiles_NatsumeLogo,high,sNatsumeLogo (area $5D),$9FEF97
 sCompressedTiles_9FD4DA,Tiles_Unused_TitleLogoJapanese,medium,no map and no code loads it; Japanese logo graphics left in the US ROM,$9FD4DA
-sCompressedTiles_9EEB3D,Tiles_Credits_0,high,"slot $2000 of the credits maps (areas $4B-$4F), drive to town, unk $51-$56",$9EEB3D
+sCompressedTiles_9EEB3D,Tiles_Credits_0,high,"slot $2000 of the credits maps (areas $4B-$4F), drive to town, credits pages $51-$56",$9EEB3D
 sCompressedTiles_A08000,Tiles_Credits_1,high,slot $3000 of the same maps,$A08000
 sCompressedTiles_A088E9,Tiles_Credits_2,high,slot $4000 of the same maps,$A088E9
 sCompressedTiles_A09232,Tiles_Credits_3,high,slot $5000 of credits 0-3 and area $52,$A09232
-sCompressedTiles_A0AB1E,Tiles_Unk51_3,medium,slot $5000 of sMap_80B55F (area UNKNOWN51); no name table cell uses it,$A0AB1E
-sCompressedTiles_A0CAAF,Tiles_Unk56_3,medium,slot $5000 of sMap_80B618 (area UNKNOWN56),$A0CAAF
+sCompressedTiles_A0AB1E,Tiles_Credits4_BL_3,medium,"slot $5000 of sMap_80B55F (area CREDITS4_BL); no name table cell uses it; picture tile data (the tiles form a scrambled picture), named after the area that loads it, purpose of the picture not established",$A0AB1E
+sCompressedTiles_A0CAAF,Tiles_Credits_StaffRollJp_3,high,"slot $5000 of sMap_80B618 (area STAFFROLLJP_BR): the illustration (a farm boy with animals) that the staff roll screen shows in its bottom right box; rendering the screen without this slot leaves the box empty",$A0CAAF
 sCompressedTiles_A0E682,Tiles_DriveToTown_3,medium,slot $5000 of sMap_80B537 (area DRIVETOTOWN); no name table cell uses it,$A0E682
 sCompressedTilemap_A48000,Screen_Overlay_Rain,high,BG2 name table of sRainOverlay,$A48000
 sCompressedTilemap_A4C3E2,Screen_Overlay_Clouds,high,BG2 name table of sCloudsOverlay,$A4C3E2
@@ -134,8 +134,8 @@ sCompressedTilemap_A5F059,Screen_Ending12,high,area ENDING12,$A5F059
 sCompressedTilemap_A5F45A,Screen_Ending13,high,area ENDING13,$A5F45A
 sCompressedTilemap_A68DCF,Screen_Intro,high,area INTRO,$A68DCF
 sCompressedTilemap_A690A6,Screen_Credits_0to3,high,areas CREDITS0-3,$A690A6
-sCompressedTilemap_A694EE,Screen_Credits4_DriveToTown,medium,"areas CREDITS4, DRIVETOTOWN, UNKNOWN51/52",$A694EE
-sCompressedTilemap_A69996,Screen_Unk53to56,medium,areas UNKNOWN53-56,$A69996
+sCompressedTilemap_A694EE,Screen_Credits4_DriveToTown,medium,"areas CREDITS4, DRIVETOTOWN, CREDITS4_BL, CREDITS4_BR (the four quadrants of the 64x64 name table; second staff credits page)",$A694EE
+sCompressedTilemap_A69996,Screen_Credits_StaffRollJp,medium,"areas STAFFROLLJP_TL/TR/BL/BR ($53-$56): the four quadrants of a staff roll page with Japanese text (rendered in the JP release: supervisor, original plan, executive producer, production help, publisher and an illustration box); in US/EU/DE the English credits tile sets are loaded so the text looks garbled; displayed by AI script 0x46 after the CREDITS4 pages",$A69996
 sCharactermap_A18000,ScreenRaw_Farm,high,"128x128 world map of the farm, all seasons",$A18000
 sCharactermap_A28000,ScreenRaw_Mountain,high,128x96 world map of the mountain,$A28000
 sCharactermap_A38000,ScreenRaw_Town,high,128x128 world map of the town (and wedding maps),$A38000

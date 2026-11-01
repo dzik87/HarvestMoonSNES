@@ -1483,7 +1483,7 @@
    "palette_via": "aMapPalettesIndexes"
   },
   "81": {
-   "name": "UNKNOWN51",
+   "name": "CREDITS4_BL",
    "map": "sMap_80B55F",
    "preset": 5,
    "bg_palettes": [
@@ -1496,7 +1496,7 @@
    "palette_via": "aMapPalettesIndexes"
   },
   "82": {
-   "name": "UNKNOWN52",
+   "name": "CREDITS4_BR",
    "map": "sMap_80B587",
    "preset": 5,
    "bg_palettes": [
@@ -1509,7 +1509,7 @@
    "palette_via": "aMapPalettesIndexes"
   },
   "83": {
-   "name": "UNKNOWN53",
+   "name": "STAFFROLLJP_TL",
    "map": "sMap_80B5AF",
    "preset": 5,
    "bg_palettes": [
@@ -1522,7 +1522,7 @@
    "palette_via": "aMapPalettesIndexes"
   },
   "84": {
-   "name": "UNKNOWN54",
+   "name": "STAFFROLLJP_TR",
    "map": "sMap_80B5D2",
    "preset": 5,
    "bg_palettes": [
@@ -1535,7 +1535,7 @@
    "palette_via": "aMapPalettesIndexes"
   },
   "85": {
-   "name": "UNKNOWN55",
+   "name": "STAFFROLLJP_BL",
    "map": "sMap_80B5F5",
    "preset": 5,
    "bg_palettes": [
@@ -1548,7 +1548,7 @@
    "palette_via": "aMapPalettesIndexes"
   },
   "86": {
-   "name": "UNKNOWN56",
+   "name": "STAFFROLLJP_BR",
    "map": "sMap_80B618",
    "preset": 5,
    "bg_palettes": [
@@ -1884,6 +1884,37 @@
     }
    ]
   },
+  "Tiles_Credits4_BL_3": {
+   "kind": "tiles",
+   "palette": {
+    "id": "Palette_Credits0_Early",
+    "sub": 0,
+    "area": 81,
+    "slot": "night/early (<7)"
+   },
+   "confidence": "low",
+   "note": "no static BG name table references this sheet (the map table loads it, but no static name table cell shows its tiles); sub-palette 0 assumed",
+   "subs_used": [],
+   "tile_subs": "................................................................................................................................................................................................................................................................",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 81,
+     "name": "CREDITS4_BL",
+     "preset": 5,
+     "vram": "$5000",
+     "bg": [],
+     "sub_cells": {},
+     "bg_palettes": [
+      "Palette_Credits0_Early",
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
   "Tiles_Credits_0": {
    "kind": "tiles",
    "palette": {
@@ -2016,7 +2047,7 @@
     },
     {
      "area": 81,
-     "name": "UNKNOWN51",
+     "name": "CREDITS4_BL",
      "preset": 5,
      "vram": "$2000",
      "bg": [
@@ -2035,7 +2066,7 @@
     },
     {
      "area": 82,
-     "name": "UNKNOWN52",
+     "name": "CREDITS4_BR",
      "preset": 5,
      "vram": "$2000",
      "bg": [
@@ -2054,7 +2085,7 @@
     },
     {
      "area": 83,
-     "name": "UNKNOWN53",
+     "name": "STAFFROLLJP_TL",
      "preset": 5,
      "vram": "$2000",
      "bg": [
@@ -2073,7 +2104,7 @@
     },
     {
      "area": 84,
-     "name": "UNKNOWN54",
+     "name": "STAFFROLLJP_TR",
      "preset": 5,
      "vram": "$2000",
      "bg": [
@@ -2092,7 +2123,7 @@
     },
     {
      "area": 85,
-     "name": "UNKNOWN55",
+     "name": "STAFFROLLJP_BL",
      "preset": 5,
      "vram": "$2000",
      "bg": [
@@ -2111,7 +2142,7 @@
     },
     {
      "area": 86,
-     "name": "UNKNOWN56",
+     "name": "STAFFROLLJP_BR",
      "preset": 5,
      "vram": "$2000",
      "bg": [
@@ -2238,7 +2269,7 @@
     },
     {
      "area": 81,
-     "name": "UNKNOWN51",
+     "name": "CREDITS4_BL",
      "preset": 5,
      "vram": "$3000",
      "bg": [],
@@ -2253,7 +2284,7 @@
     },
     {
      "area": 82,
-     "name": "UNKNOWN52",
+     "name": "CREDITS4_BR",
      "preset": 5,
      "vram": "$3000",
      "bg": [],
@@ -2268,7 +2299,7 @@
     },
     {
      "area": 83,
-     "name": "UNKNOWN53",
+     "name": "STAFFROLLJP_TL",
      "preset": 5,
      "vram": "$3000",
      "bg": [
@@ -2287,7 +2318,7 @@
     },
     {
      "area": 84,
-     "name": "UNKNOWN54",
+     "name": "STAFFROLLJP_TR",
      "preset": 5,
      "vram": "$3000",
      "bg": [
@@ -2306,7 +2337,7 @@
     },
     {
      "area": 85,
-     "name": "UNKNOWN55",
+     "name": "STAFFROLLJP_BL",
      "preset": 5,
      "vram": "$3000",
      "bg": [
@@ -2325,7 +2356,7 @@
     },
     {
      "area": 86,
-     "name": "UNKNOWN56",
+     "name": "STAFFROLLJP_BR",
      "preset": 5,
      "vram": "$3000",
      "bg": [
@@ -2452,7 +2483,7 @@
     },
     {
      "area": 81,
-     "name": "UNKNOWN51",
+     "name": "CREDITS4_BL",
      "preset": 5,
      "vram": "$4000",
      "bg": [],
@@ -2467,7 +2498,7 @@
     },
     {
      "area": 82,
-     "name": "UNKNOWN52",
+     "name": "CREDITS4_BR",
      "preset": 5,
      "vram": "$4000",
      "bg": [],
@@ -2482,7 +2513,7 @@
     },
     {
      "area": 83,
-     "name": "UNKNOWN53",
+     "name": "STAFFROLLJP_TL",
      "preset": 5,
      "vram": "$4000",
      "bg": [
@@ -2501,7 +2532,7 @@
     },
     {
      "area": 84,
-     "name": "UNKNOWN54",
+     "name": "STAFFROLLJP_TR",
      "preset": 5,
      "vram": "$4000",
      "bg": [
@@ -2520,7 +2551,7 @@
     },
     {
      "area": 85,
-     "name": "UNKNOWN55",
+     "name": "STAFFROLLJP_BL",
      "preset": 5,
      "vram": "$4000",
      "bg": [
@@ -2539,7 +2570,7 @@
     },
     {
      "area": 86,
-     "name": "UNKNOWN56",
+     "name": "STAFFROLLJP_BR",
      "preset": 5,
      "vram": "$4000",
      "bg": [
@@ -2634,11 +2665,50 @@
     },
     {
      "area": 82,
-     "name": "UNKNOWN52",
+     "name": "CREDITS4_BR",
      "preset": 5,
      "vram": "$5000",
      "bg": [],
      "sub_cells": {},
+     "bg_palettes": [
+      "Palette_Credits0_Early",
+      null,
+      null,
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  "Tiles_Credits_StaffRollJp_3": {
+   "kind": "tiles",
+   "palette": {
+    "id": "Palette_Credits0_Early",
+    "sub": 3,
+    "area": 86,
+    "slot": "night/early (<7)"
+   },
+   "confidence": "high",
+   "note": "sub-palette 3 covers 224 of 236 name-table cells; per-tile sub-palettes 0/3 (tile_subs)",
+   "subs_used": [
+    0,
+    3
+   ],
+   "tile_subs": "33333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333000000..........000000..........",
+   "alternatives": [],
+   "used_by": [
+    {
+     "area": 86,
+     "name": "STAFFROLLJP_BR",
+     "preset": 5,
+     "vram": "$5000",
+     "bg": [
+      2
+     ],
+     "sub_cells": {
+      "0": 12,
+      "3": 224
+     },
      "bg_palettes": [
       "Palette_Credits0_Early",
       null,
@@ -7851,76 +7921,6 @@
      "bg_palettes": [
       null,
       "Palette_TownWinter_Day",
-      null,
-      null,
-      null
-     ]
-    }
-   ]
-  },
-  "Tiles_Unk51_3": {
-   "kind": "tiles",
-   "palette": {
-    "id": "Palette_Credits0_Early",
-    "sub": 0,
-    "area": 81,
-    "slot": "night/early (<7)"
-   },
-   "confidence": "low",
-   "note": "no static BG name table references this sheet (the map table loads it, but no static name table cell shows its tiles); sub-palette 0 assumed",
-   "subs_used": [],
-   "tile_subs": "................................................................................................................................................................................................................................................................",
-   "alternatives": [],
-   "used_by": [
-    {
-     "area": 81,
-     "name": "UNKNOWN51",
-     "preset": 5,
-     "vram": "$5000",
-     "bg": [],
-     "sub_cells": {},
-     "bg_palettes": [
-      "Palette_Credits0_Early",
-      null,
-      null,
-      null,
-      null
-     ]
-    }
-   ]
-  },
-  "Tiles_Unk56_3": {
-   "kind": "tiles",
-   "palette": {
-    "id": "Palette_Credits0_Early",
-    "sub": 3,
-    "area": 86,
-    "slot": "night/early (<7)"
-   },
-   "confidence": "high",
-   "note": "sub-palette 3 covers 224 of 236 name-table cells; per-tile sub-palettes 0/3 (tile_subs)",
-   "subs_used": [
-    0,
-    3
-   ],
-   "tile_subs": "33333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333000000..........000000..........",
-   "alternatives": [],
-   "used_by": [
-    {
-     "area": 86,
-     "name": "UNKNOWN56",
-     "preset": 5,
-     "vram": "$5000",
-     "bg": [
-      2
-     ],
-     "sub_cells": {
-      "0": 12,
-      "3": 224
-     },
-     "bg_palettes": [
-      "Palette_Credits0_Early",
-      null,
       null,
       null,
       null

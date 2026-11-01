@@ -146,8 +146,8 @@
     "Tiles_Credits_1",
     "Tiles_Credits_2",
     "Tiles_Credits_3",
-    "Tiles_Unk51_3",
-    "Tiles_Unk56_3",
+    "Tiles_Credits4_BL_3",
+    "Tiles_Credits_StaffRollJp_3",
     "Tiles_DriveToTown_3"
   ]}
  },
@@ -225,7 +225,7 @@
     "Screen_Intro",
     "*Screen_Credits_0to3",
     "*Screen_Credits4_DriveToTown",
-    "Screen_Unk53to56",
+    "Screen_Credits_StaffRollJp",
     "ScreenRaw_Unk_A6A096"
   ]}
  },

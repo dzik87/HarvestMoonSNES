@@ -1,7 +1,7 @@
 {
-  "label": "Tiles_Unk56_3",
+  "label": "Tiles_Credits_StaffRollJp_3",
   "kind": "tiles",
-  "bin": "assets/gfx/tiles/Tiles_Unk56_3.bin",
+  "bin": "assets/gfx/tiles/Tiles_Credits_StaffRollJp_3.bin",
   "compression": "lzss",
   "raw_size": 8192,
   "legacy_label": "sCompressedTiles_A0CAAF",

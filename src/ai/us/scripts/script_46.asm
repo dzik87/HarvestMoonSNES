@@ -107,7 +107,7 @@ pAIScripting0x46_Data07:
     %AICMD0x05_SetTransferPosition(128, 384)                   ;B5A7C6
     %AICMD0x19($00E8, $00)                                     ;B5A7CB
     %AICMD0x08_EnableAIControl()                               ;B5A7CF
-    %AICMD0x06_SetDestinationArea(!AREA_UNKNOWN51)             ;B5A7D0
+    %AICMD0x06_SetDestinationArea(!AREA_CREDITS4_BL)             ;B5A7D0
     %AICMD0x38_WaitForFadeIn()                                               ;B5A7D2
     %AICMD0x13_Wait(180)                                       ;B5A7D3
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B5A7D6
@@ -123,7 +123,7 @@ pAIScripting0x46_Data08:
     %AICMD0x05_SetTransferPosition(384, 384)                   ;B5A7E0
     %AICMD0x19($00E8, $00)                                     ;B5A7E5
     %AICMD0x08_EnableAIControl()                               ;B5A7E9
-    %AICMD0x06_SetDestinationArea(!AREA_UNKNOWN52)             ;B5A7EA
+    %AICMD0x06_SetDestinationArea(!AREA_CREDITS4_BR)             ;B5A7EA
     %AICMD0x38_WaitForFadeIn()                                               ;B5A7EC
     %AICMD0x13_Wait(180)                                       ;B5A7ED
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B5A7F0
@@ -139,7 +139,7 @@ pAIScripting0x46_Data09:
     %AICMD0x05_SetTransferPosition(384, 384)                   ;B5A7FA
     %AICMD0x19($00E8, $00)                                     ;B5A7FF
     %AICMD0x08_EnableAIControl()                               ;B5A803
-    %AICMD0x06_SetDestinationArea(!AREA_UNKNOWN56)             ;B5A804
+    %AICMD0x06_SetDestinationArea(!AREA_STAFFROLLJP_BR)             ;B5A804
     %AICMD0x38_WaitForFadeIn()                                               ;B5A806
     %AICMD0x13_Wait(180)                                       ;B5A807
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B5A80A
@@ -155,7 +155,7 @@ pAIScripting0x46_Data10:
     %AICMD0x05_SetTransferPosition(128, 128)                   ;B5A814
     %AICMD0x19($00E8, $00)                                     ;B5A819
     %AICMD0x08_EnableAIControl()                               ;B5A81D
-    %AICMD0x06_SetDestinationArea(!AREA_UNKNOWN53)             ;B5A81E
+    %AICMD0x06_SetDestinationArea(!AREA_STAFFROLLJP_TL)             ;B5A81E
     %AICMD0x38_WaitForFadeIn()                                               ;B5A820
     %AICMD0x13_Wait(180)                                       ;B5A821
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B5A824
@@ -171,7 +171,7 @@ pAIScripting0x46_Data11:
     %AICMD0x05_SetTransferPosition(384, 128)                   ;B5A82E
     %AICMD0x19($00E8, $00)                                     ;B5A833
     %AICMD0x08_EnableAIControl()                               ;B5A837
-    %AICMD0x06_SetDestinationArea(!AREA_UNKNOWN54)             ;B5A838
+    %AICMD0x06_SetDestinationArea(!AREA_STAFFROLLJP_TR)             ;B5A838
     %AICMD0x38_WaitForFadeIn()                                               ;B5A83A
     %AICMD0x13_Wait(180)                                       ;B5A83B
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B5A83E
@@ -189,7 +189,7 @@ pAIScripting0x46_Data12:
     %AICMD0x05_SetTransferPosition(128, 384)                   ;B5A84A
     %AICMD0x19($00E8, $00)                                     ;B5A84F
     %AICMD0x08_EnableAIControl()                               ;B5A853
-    %AICMD0x06_SetDestinationArea(!AREA_UNKNOWN55)             ;B5A854
+    %AICMD0x06_SetDestinationArea(!AREA_STAFFROLLJP_BL)             ;B5A854
     %AICMD0x38_WaitForFadeIn()                                               ;B5A856
     %AICMD0x13_Wait(180)                                       ;B5A857
     %AICMD0x3D_TeleportToArea(!AREA_ENDING00)                  ;B5A85A

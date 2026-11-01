@@ -2127,10 +2127,10 @@ fPlayerInteraction0x43:
  
  
   + REP #$20                                                   ;81E969|C220    |      ;
-    LDA.L nGameUnk7F1F15                                       ;81E96B|AF151F7F|7F1F15;
+    LDA.L nCowSalePrice                                       ;81E96B|AF151F7F|7F1F15;
     STA.B ptrTemp0x72                                          ;81E96F|8572    |000072;
     SEP #$20                                                   ;81E971|E220    |      ;
-    LDA.L nGameUnk7F1F15+2                                     ;81E973|AF171F7F|7F1F17;
+    LDA.L nCowSalePrice+2                                     ;81E973|AF171F7F|7F1F17;
     STA.B ptrTemp0x72+2                                        ;81E977|8574    |000074;
     JSL.L fGameEngine_AddProfit                                ;81E979|22C9B183|83B1C9;
     REP #$20                                                   ;81E97D|C220    |      ;
@@ -2566,10 +2566,10 @@ fPlayerInteraction0x44:
  
  
   + REP #$20                                                   ;81ED2C|C220    |      ;
-    LDA.L nGameUnk7F1F15                                       ;81ED2E|AF151F7F|7F1F15;
+    LDA.L nCowSalePrice                                       ;81ED2E|AF151F7F|7F1F15;
     STA.B ptrTemp0x72                                          ;81ED32|8572    |000072;
     SEP #$20                                                   ;81ED34|E220    |      ;
-    LDA.L nGameUnk7F1F15+2                                     ;81ED36|AF171F7F|7F1F17;
+    LDA.L nCowSalePrice+2                                     ;81ED36|AF171F7F|7F1F17;
     STA.B ptrTemp0x72+2                                        ;81ED3A|8574    |000074;
     JSL.L fGameEngine_AddProfit                                ;81ED3C|22C9B183|83B1C9;
     REP #$20                                                   ;81ED40|C220    |      ;

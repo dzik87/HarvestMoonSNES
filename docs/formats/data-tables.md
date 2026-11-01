@@ -42,7 +42,7 @@ Column types (`check` verifies that numbers fit the size):
 ## Tables
 
 Confidence is the certainty of the *field meaning*: **certain** = proven by the use in the code and the data, **high** = structure and meaning read from the code, **medium** = structure known, the meaning of single
-values or columns is inferred; columns named `unk` are kept for bytes whose purpose is not known.
+values or columns is inferred; columns named `unk` are kept for bytes whose purpose is not known (none remain; the rows `.e_Unknown1/2` of `day_event_tables` are the remaining unknown values, see `docs/naming/open-questions.md`).
 
 | Table | Included from | Records (columns) | Content |
 |---|---|---|---|
@@ -66,7 +66,7 @@ values or columns is inferred; columns named `unk` are kept for bytes whose purp
 | `ai_action_tables` | `bank_84/ai_engine.asm` | `handler:ptr16`; `scripts:ptr24`; `mask:flags16` | AI command table, script set selector, bit masks. High. |
 | `game_object_offsets` | `bank_85/objects.asm` | `mask:flags16`; `offset:u16` | object slot masks and array offsets ($24 bytes per object). High. |
 
-Open questions (columns kept as `unk` or marked medium): `unk` of `aDialogData_ShippingProfit` and `aDialogsData_BuyItems` (first byte of the shop record, looks like the item id given), the sprite palette
+Open questions (columns kept as `unk` or marked medium): the sprite palette
 columns `obj_a/obj_b` of `aMapPalettesId`, the meaning of the `extra` phase of `aMapPalettesIndexes` and `pPaletteAnimRoutineTable`, the tile meanings of `system_transfer_data`, and the exact event meaning of the
 `day_event_tables` values.
 

@@ -11,7 +11,7 @@ import tilemap_codec as tc  # noqa: E402
 # Data files that contain sCompressed* labels.
 
 # Label span continues with non-compressed data after the blob (not a blob).
-TRAILING_DATA = {'Screen_Unk53to56'}
+TRAILING_DATA = {'Screen_Credits_StaffRollJp'}
 HIDDEN = {}
 SPILL = {}
 

@@ -154,20 +154,20 @@
 !AREA_CREDITS3              =   $4E
 !AREA_CREDITS4              =   $4F
 !AREA_DRIVETOTOWN           =   $50
-!AREA_UNKNOWN51             =   $51
-!AREA_UNKNOWN52             =   $52
-!AREA_UNKNOWN53             =   $53
-!AREA_UNKNOWN54             =   $54
-!AREA_UNKNOWN55             =   $55
-!AREA_UNKNOWN56             =   $56
-!AREA_UNKNOWN57             =   $57
-!AREA_UNKNOWN58             =   $58
-!AREA_UNKNOWN59             =   $59
-!AREA_UNKNOWN5A             =   $5A
-!AREA_UNKNOWN5B             =   $5B
-!AREA_UNKNOWN5C             =   $5C
+!AREA_CREDITS4_BL             =   $51
+!AREA_CREDITS4_BR             =   $52
+!AREA_STAFFROLLJP_TL             =   $53
+!AREA_STAFFROLLJP_TR             =   $54
+!AREA_STAFFROLLJP_BL             =   $55
+!AREA_STAFFROLLJP_BR             =   $56
+!AREA_RAINOVERLAY             =   $57
+!AREA_CLOUDSOVERLAY             =   $58
+!AREA_SNOWOVERLAY             =   $59
+!AREA_HEAVYSNOWOVERLAY             =   $5A
+!AREA_INTROFARMSCROLL             =   $5B
+!AREA_HARVESTMOONLOGO             =   $5C
 !AREA_NATSUMELOGO           =   $5D
-!AREA_UNKNOWN5E             =   $5E
+!AREA_MENUSCREENBACKGROUNDS             =   $5E
 !AREA_NAMEINPUT             =   $5F
 
 

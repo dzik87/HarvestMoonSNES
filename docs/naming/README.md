@@ -30,6 +30,11 @@ direction objects (0 down, 1 up, 2 right, 3 left), together with the rendered fr
 into families (player poses, tools, animals, NPC appearances) (medium / low); (4) code: love variables (`nLove_*`) in the NPC scripts 19-1D and the ending script
 text objects (high / medium). Uncertain names are descriptive and carry `Unk`: `Npc_Unk_<Look>_<id>`, `Obj_Unk_<id>` (see `open-questions.md`).
 
+### Renames of `Unk` names and open questions
+
+`O_unk_renames.csv` records the `Unk` / `unk` identifiers that could be named from evidence (area ids, the cow sale price variable, the table columns `release_tile` / `shelf_tile`, the credits graphics).
+What is still unknown, and which emulator or listening test would settle it, is in [`open-questions.md`](open-questions.md).
+
 ## Audio
 
 `J_audio.csv` (blob address -> `sAudioSpcDriver` / `sAudioTrack_<Song>` / `sAudioSample_Id<NN>`) and `L_sfx.csv` (`sfx_NN` -> `Sfx_<Description>`, the 50 sound effects; `Sfx_Unk<hex id>` where no

@@ -143,10 +143,12 @@ the sub-palette; the palette *id* is exact for the primary area. **medium** = th
 | `Tiles_Bar` | `Palette_Bar_Dusk` | 1 | high | 1/2 | bar, barbedroom |
 | `Tiles_BarnCoop` | `Palette_Barn_Early` | 2 | high | 1/2/4 | cowbarn, coop |
 | `Tiles_Church` | `Palette_Church_Day` | 1 | high | 1/2/3/4/5 | church |
+| `Tiles_Credits4_BL_3` | `Palette_Credits0_Early` | 0 | low | - | credits4_bl |
 | `Tiles_Credits_0` | `Palette_Credits0_Early` | 0 | high | 0 | credits0, credits1, credits2 (+9) |
 | `Tiles_Credits_1` | `Palette_Credits0_Early` | 0 | high | 0 | credits0, credits1, credits2 (+9) |
 | `Tiles_Credits_2` | `Palette_Credits0_Early` | 0 | high | 0 | credits0, credits1, credits2 (+9) |
 | `Tiles_Credits_3` | `Palette_Credits0_Early` | 0 | low | - | credits0, credits1, credits2 (+2) |
+| `Tiles_Credits_StaffRollJp_3` | `Palette_Credits0_Early` | 3 | high | 0/3 | staffrolljp_br |
 | `Tiles_DriveToTown_3` | `Palette_Credits0_Early` | 0 | low | - | drivetotown |
 | `Tiles_EggFestival_2` | `Palette_EggFestival_Day` | 1 | high | 1/3/4/5/6/7 | eggfestival |
 | `Tiles_Farm_Fall_0` | `Palette_FarmFall_Day` | 1 | high | 1/2/5 | farmfall |
@@ -212,8 +214,6 @@ the sub-palette; the palette *id* is exact for the primary area. **medium** = th
 | `Tiles_Town_Winter_0` | `Palette_TownWinter_Day` | 3 | high | 1/3 | townwinter, ny_publicsquare, weddingwinter |
 | `Tiles_Town_Winter_1` | `Palette_TownWinter_Day` | 1 | high | 1/2/3/4 | townwinter, ny_publicsquare, weddingwinter |
 | `Tiles_Town_Winter_2` | `Palette_TownWinter_Day` | 1 | high | 1/3/4/5/6 | townwinter, weddingwinter |
-| `Tiles_Unk51_3` | `Palette_Credits0_Early` | 0 | low | - | unknown51 |
-| `Tiles_Unk56_3` | `Palette_Credits0_Early` | 3 | high | 0/3 | unknown56 |
 | `Tiles_WorksmanHouse` | `Palette_WorksmanHouse_Day` | 2 | high | 1/2 | worksmanhouse |
 | `Tiles_Unused_TitleLogoJapanese` | `Palette_IntroFarmScroll_Day` | 7 | low | - | (none) |
 | `Sprites_Player_0` | `Palette_Obj_Day` | 4 | high | 3/4/5/6 | object frames (banks $86/$87) |

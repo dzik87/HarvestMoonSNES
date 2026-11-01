@@ -1,7 +1,7 @@
 {
-  "label": "Screen_Unk53to56",
+  "label": "Screen_Credits_StaffRollJp",
   "kind": "tilemaps",
-  "bin": "assets/gfx/characters/Screen_Unk53to56.bin",
+  "bin": "assets/gfx/characters/Screen_Credits_StaffRollJp.bin",
   "compression": "lzss",
   "raw_size": 8192,
   "legacy_label": "sCompressedTilemap_A69996",

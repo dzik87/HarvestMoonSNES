@@ -2943,10 +2943,10 @@ fAIAction0x30_UpdateChicken:
   + %UnsetFlag(daily1, $0008)
     REP #$20                                                   ;849A78|C220    |      ;
     LDA.W #$0032                                               ;849A7A|A93200  |      ;
-    STA.L nGameUnk7F1F15                                       ;849A7D|8F151F7F|7F1F15;
+    STA.L nCowSalePrice                                       ;849A7D|8F151F7F|7F1F15;
     SEP #$20                                                   ;849A81|E220    |      ;
     LDA.B #$00                                                 ;849A83|A900    |      ;
-    STA.L nGameUnk7F1F15+2                                     ;849A85|8F171F7F|7F1F17;
+    STA.L nCowSalePrice+2                                     ;849A85|8F171F7F|7F1F17;
     SEP #$20                                                   ;849A89|E220    |      ;
     REP #$10                                                   ;849A8B|C210    |      ;
     LDY.W #$003F                                               ;849A8D|A03F00  |      ;
@@ -4371,10 +4371,10 @@ fAIAction0x31_CowState0xE0:
   + %UnsetFlag(daily1, $0004)
     REP #$20                                                   ;84A4B1|C220    |      ;
     LDA.W #$01F4                                               ;84A4B3|A9F401  |      ;
-    STA.L nGameUnk7F1F15                                       ;84A4B6|8F151F7F|7F1F15;
+    STA.L nCowSalePrice                                       ;84A4B6|8F151F7F|7F1F15;
     SEP #$20                                                   ;84A4BA|E220    |      ;
     LDA.B #$00                                                 ;84A4BC|A900    |      ;
-    STA.L nGameUnk7F1F15+2                                     ;84A4BE|8F171F7F|7F1F17;
+    STA.L nCowSalePrice+2                                     ;84A4BE|8F171F7F|7F1F17;
     SEP #$20                                                   ;84A4C2|E220    |      ;
     LDY.W #$0004                                               ;84A4C4|A00400  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;84A4C7|B772    |000072;
@@ -4384,20 +4384,20 @@ fAIAction0x31_CowState0xE0:
     BCC .price_mid                                               ;84A4CF|9013    |84A4E4;
     REP #$20                                                   ;84A4D1|C220    |      ;
     LDA.W #$03E8                                               ;84A4D3|A9E803  |      ;
-    STA.L nGameUnk7F1F15                                       ;84A4D6|8F151F7F|7F1F15;
+    STA.L nCowSalePrice                                       ;84A4D6|8F151F7F|7F1F15;
     SEP #$20                                                   ;84A4DA|E220    |      ;
     LDA.B #$00                                                 ;84A4DC|A900    |      ;
-    STA.L nGameUnk7F1F15+2                                     ;84A4DE|8F171F7F|7F1F17;
+    STA.L nCowSalePrice+2                                     ;84A4DE|8F171F7F|7F1F17;
     BRA .price_set                                               ;84A4E2|8011    |84A4F5;
  
  
 .price_mid:
     REP #$20                                                   ;84A4E4|C220    |      ;
     LDA.W #$0320                                               ;84A4E6|A92003  |      ;
-    STA.L nGameUnk7F1F15                                       ;84A4E9|8F151F7F|7F1F15;
+    STA.L nCowSalePrice                                       ;84A4E9|8F151F7F|7F1F15;
     SEP #$20                                                   ;84A4ED|E220    |      ;
     LDA.B #$00                                                 ;84A4EF|A900    |      ;
-    STA.L nGameUnk7F1F15+2                                     ;84A4F1|8F171F7F|7F1F17;
+    STA.L nCowSalePrice+2                                     ;84A4F1|8F171F7F|7F1F17;
  
 .price_set:
     SEP #$20                                                   ;84A4F5|E220    |      ;

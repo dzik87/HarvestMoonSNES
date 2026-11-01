@@ -3099,7 +3099,7 @@
    ],
    "status": "map table"
   },
-  "Tiles_Unk51_3": {
+  "Tiles_Credits4_BL_3": {
    "kind": "tiles",
    "loaders": [
     {
@@ -3115,7 +3115,7 @@
    ],
    "status": "map table"
   },
-  "Tiles_Unk56_3": {
+  "Tiles_Credits_StaffRollJp_3": {
    "kind": "tiles",
    "loaders": [
     {
@@ -4744,7 +4744,7 @@
    ],
    "status": "map table"
   },
-  "Screen_Unk53to56": {
+  "Screen_Credits_StaffRollJp": {
    "kind": "characters",
    "loaders": [
     {
@@ -7608,7 +7608,7 @@
      "vram_word": "$4000"
     },
     {
-     "blob": "Tiles_Unk51_3",
+     "blob": "Tiles_Credits4_BL_3",
      "vram_word": "$5000"
     }
    ],
@@ -7672,7 +7672,7 @@
    ],
    "name_tables": [
     {
-     "blob": "Screen_Unk53to56",
+     "blob": "Screen_Credits_StaffRollJp",
      "vram_word": "$6000",
      "chr_base": "$2000"
     }
@@ -7699,7 +7699,7 @@
    ],
    "name_tables": [
     {
-     "blob": "Screen_Unk53to56",
+     "blob": "Screen_Credits_StaffRollJp",
      "vram_word": "$6000",
      "chr_base": "$2000"
     }
@@ -7726,7 +7726,7 @@
    ],
    "name_tables": [
     {
-     "blob": "Screen_Unk53to56",
+     "blob": "Screen_Credits_StaffRollJp",
      "vram_word": "$6000",
      "chr_base": "$2000"
     }
@@ -7751,13 +7751,13 @@
      "vram_word": "$4000"
     },
     {
-     "blob": "Tiles_Unk56_3",
+     "blob": "Tiles_Credits_StaffRollJp_3",
      "vram_word": "$5000"
     }
    ],
    "name_tables": [
     {
-     "blob": "Screen_Unk53to56",
+     "blob": "Screen_Credits_StaffRollJp",
      "vram_word": "$6000",
      "chr_base": "$2000"
     }

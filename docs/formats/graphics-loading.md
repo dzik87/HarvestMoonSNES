@@ -19,7 +19,7 @@ ordinary map entries, only without graphic preset byte. Their BG keeps the chara
 
 ## Corrections of earlier assumptions
 
-* "No name table cell references the tile blob" is not "unused". `Tiles_Credits_3`, `Tiles_Unk51_3` and `Tiles_DriveToTown_3` are loaded by the
+* "No name table cell references the tile blob" is not "unused". `Tiles_Credits_3`, `Tiles_Credits4_BL_3` and `Tiles_DriveToTown_3` are loaded by the
   map table to VRAM $5000 (credits / drive-to-town maps); only their palette row is a guess because no static name table shows their tiles
   (probably used by text or effects written at run time).
 * `sFontGlyphs_Dialog` (formerly `sFontGlyphs_UNK`, "not referenced by any code") is the dialog window font: `fDialog_LoadDialogBoxGraphics` DMAs
@@ -27,7 +27,7 @@ ordinary map entries, only without graphic preset byte. Their BG keeps the chara
 * `Screen_DialogBox` ($A5CB05) was thought unloaded: the same function loads it by literal.
 * Tile id n of a name table is the tile at `chr_base + 16 n` of the BG, not at the lowest loaded set (fixed in `composed.py`; the shop
   interiors, whose only set is at $3000, were drawn empty).
-* Sets are not always complete: `Screen_Unk53to56` shows 34 % tiles of a 4th set that only `sMap_80B618` loads.
+* Sets are not always complete: `Screen_Credits_StaffRollJp` shows 34 % tiles of a 4th set that only `sMap_80B618` loads.
 
 ## Not loaded by anything found
 
@@ -51,7 +51,7 @@ Facts only.
   indexes of the rendered tool / walk frames; the mapping from `strcObjectData.spriteIdx` to the object index is not documented.
 * 5 palettes are not referenced by any area slot (`Palette_Unk_14`, `Palette_Unk_71` ... `Palette_Unk_74`); no code path that selects them
   was found.
-* The `Tiles_Unk51_3` and `Tiles_Unused_TitleLogoJapanese` blobs are shown by no name table, so their palette row is a guess.
-* `Screen_Unk53to56__sMap_80B5AF`: 236 of 692 cells use tiles that the map does not load (see `graphics-png.md`).
+* The `Tiles_Credits4_BL_3` and `Tiles_Unused_TitleLogoJapanese` blobs are shown by no name table, so their palette row is a guess.
+* `Screen_Credits_StaffRollJp__sMap_80B5AF`: 236 of 692 cells use tiles that the map does not load (see `graphics-png.md`).
 * VRAM overlap check: `graphics_loads.py check` compares, per map entry, the word ranges of all tile blobs and the name tables; it currently
   finds no overlap, so the layouts shared between screens do not collide. Intended overlaps can be listed in `OVERLAP_OK`.
