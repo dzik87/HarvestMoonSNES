@@ -39,5 +39,7 @@ Audio modding (WAV samples, text songs, SFX, SPC700 driver source -> blobs): [`d
 
 Differences between the releases: [`docs/regions.md`](docs/regions.md) (code, graphics, fonts, palettes and dialogs; the complete EU/DE/JP ROMs are built bit-identically via `tools/build.py --region EU|DE|JP`), [`docs/regions-ai.md`](docs/regions-ai.md) (AI scripts, command level).
 
+Source documentation standard (Doxygen-style blocks, `tools/dev/doclint.py`, `tools/dev/docgen.py`): [`docs/code-documentation.md`](docs/code-documentation.md).
+
 Details: [`docs/layout.md`](docs/layout.md), [`docs/workflow.md`](docs/workflow.md),
 [`docs/migration-log.md`](docs/migration-log.md).

@@ -79,6 +79,9 @@ jobs:
           python3 tools/gfx/pngsync.py check
           for R in eu de jp; do python3 tools/gfx/pngsync.py check --region $R; done
           python3 tests/test_region_patch.py
+          python3 tests/test_doclint.py
+          python3 tools/dev/doclint.py check   # syntax errors in the source documentation blocks fail the build; missing docs are warnings
+          python3 tools/dev/doclint.py report | tail -n 4   # coverage, informational
           HM_ROM_DIR=${HM_ROM_DIR:-} python3 tests/test_extract_roundtrip.py   # skipped without ROM dumps
 
       - name: Build and verify (US)
