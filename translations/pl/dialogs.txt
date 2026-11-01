@@ -2321,7 +2321,7 @@ Naprawdę? Nie chcesz wiedzieć?<END>
 Gdy zamykam oczy, czuję się, jakbym unosiła się na nocnym niebie.<END>
 
 @@ sDialog_0x02BE @@
-O co się modliłam? Żeby wszyscy żyli zdrowo i szczęśliwie... A poza tym...<NEXT>...Reszta to tajemnica.<END>
+O co się modliłam? Żeby wszyscy żyli zdrowo i szczęśliwie...<NEXT>A poza tym...<NEXT>...Reszta to tajemnica.<END>
 
 @@ sDialog_0x02BF @@
 Gwiazdy świecą zawsze. Tylko światła na ziemi i inne rzeczy je zasłaniają.<NEXT>Tak samo prawda i miłość istnieją naprawdę. Tylko ich nie widać.<NEXT>Naprawdę, naprawdę.<END>
@@ -2348,7 +2348,7 @@ No dalej, pijcie! Śpiewajcie! Bawcie się dobrze!<END>
 No, ty też śpiewaj!<END>
 
 @@ sDialog_0x02C7 @@
-Ja tu tylko przypadkiem, no... zbiegiem okoliczności, a ona też jest tu zupełnie przypadkiem.<END>
+Ja tu tylko przypadkiem, no...<NEXT>zbiegiem okoliczności, a ona też jest tu zupełnie przypadkiem.<END>
 
 @@ sDialog_0x02C8 @@
 Oj, dobry wieczór. Nina?<NEXT>Ta dziewczyna zawsze gdzieś znika sama. Ciekawe, dokąd chodzi?<END>
@@ -2489,7 +2489,7 @@ Uff, od czasu do czasu porządnie się spocić - to zdrowo.<END>
 Festiwal Nowego Roku! Idziemy zobaczyć pierwszy wschód słońca!<END>
 
 @@ sDialog_0x02F6 @@
-To nasiona trawy pastwiskowej. Rośnie bez podlewania. Kosztuje 500G, kupisz?<NEXT><OPTLBL 1>Kup<OPTLBL 2>Nie kupuj<POS 58>Kasa <NUM 7 21>0G<OPT 2>
+To nasiona trawy pastwiskowej. Rośnie bez podlewania.<NEXT>Kosztuje 500G, kupisz?<NEXT><OPTLBL 1>Kup<OPTLBL 2>Nie kupuj<POS 58>Kasa <NUM 7 21>0G<OPT 2>
 
 @@ sDialog_0x02F7 @@
 Dziękuję. Dostarczę je do szopy.<END>
@@ -2504,7 +2504,7 @@ Oj, chyba brakuje ci pieniędzy.<END>
 Dziękuję, wpadnij jeszcze.<END>
 
 @@ sDialog_0x02FB @@
-Chcesz hodować krowę? To dam ci ten dzwonek. Jak zadzwonisz, krowy się zbiegną.<NEXT>Tylko nie dzwoń bez potrzeby, bo się zmęczą. No to dostarczę go razem z krową.<END>
+Chcesz hodować krowę? To dam ci ten dzwonek.<NEXT>Jak zadzwonisz, krowy się zbiegną.<NEXT>Tylko nie dzwoń bez potrzeby, bo się zmęczą.<NEXT>Dostarczę go razem z krową.<END>
 
 @@ sDialog_0x02FC @@
 To farba tylko do domów. Kosztuje 1500G, co powiesz?<NEXT><OPTLBL 1>Kup<OPTLBL 2>Nie kupuj<POS 58>Kasa <NUM 7 22>0G<OPT 2>
@@ -2582,7 +2582,7 @@ Przykro mi, ale tego u nas nie przyjmujemy.<END>
 To szczotka dla krów. Jak czeszesz je z miłością, krowy się cieszą.<NEXT>Raz dziennie wystarczy. Kosztuje 800G.<NEXT><OPTLBL 1>Kup<OPTLBL 2>Nie kupuj<POS 58>Kasa <NUM 7 29>0G<OPT 2>
 
 @@ sDialog_0x0315 @@
-Boże nasz, który jesteś w niebie, pozwól jego ukochanej krowie spokojnie spocząć.<END>
+Boże nasz, który jesteś w niebie,<NEXT>pozwól jego ukochanej krowie spokojnie spocząć.<END>
 
 @@ sDialog_0x0316 @@
 ...Ty głupcze! Mówiłem, żebyś pilnował krów!<NEXT>Następnym razem, jak zachorują, od razu daj im lekarstwo.<END>
@@ -2597,7 +2597,7 @@ Co...? Źrebak! No to nadajmy mu imię.<END>
 Imię? ...Ty je nadaj.<END>
 
 @@ sDialog_0x031A @@
-To cała dzisiejsza wysyłka? Razem <NUM 7 30>0G. Pieniądze wrzucę ci jutro do skrzyni.<END>
+To cała dzisiejsza wysyłka? Razem <NUM 7 30>0G.<NEXT>Pieniądze wrzucę ci jutro do skrzyni.<END>
 
 @@ sDialog_0x031B @@
 Dziś nic do wysyłki? No to do zobaczenia!<END>
@@ -2627,7 +2627,7 @@ Dzięki! Oddam go mocniejszy niż był.<END>
 Co?! No to już nie trzeba!!<END>
 
 @@ sDialog_0x0324 @@
-Przed wiosną możesz już uprawiać pole. Ale podobno gdy nadejdzie wiosna, trochę się zniszczy.<END>
+Przed wiosną możesz już uprawiać pole.<NEXT>Ale podobno gdy nadejdzie wiosna, trochę się zniszczy.<END>
 
 @@ sDialog_0x0325 @@
 Miło mi cię poznać! Czy na farmie zrobiło się gwarniej?<END>
@@ -2636,7 +2636,7 @@ Miło mi cię poznać! Czy na farmie zrobiło się gwarniej?<END>
 Stąd możesz wyjść.<END>
 
 @@ sDialog_0x0327 @@
-Hej, ty jesteś z farmy? Używasz tego sierpa, który leżał w szopie? Jak się nim pracuje?<NEXT><OPTLBL 1>Bardzo dobrze<OPTLBL 2>Prawie nie używam<OPT 2>
+Hej, ty jesteś z farmy? Używasz tego sierpa, który leżał w szopie?<NEXT>Jak się nim pracuje?<NEXT><OPTLBL 1>Bardzo dobrze<OPTLBL 2>Prawie nie używam<OPT 2>
 
 @@ sDialog_0x0328 @@
 Hurra!<NEXT>To ja go zrobiłem! Jak się cieszę! Zrobię ci jeszcze lepszy. Czekaj na niego!<END>
@@ -2666,7 +2666,7 @@ G-grzyb... Jak nie grzyb, to nie chcę.<END>
 Hej, ty!!<NEXT>Ten królik jest mój! Co z nim robisz?<NEXT><OPTLBL 1>Wypuść<OPTLBL 2>Tylko patrzę<OPT 2>
 
 @@ sDialog_0x0331 @@
-Co innego, gdybyś go kupił za 1000G.<NEXT><OPTLBL 1>Zapłać<OPTLBL 2>Nie płać<POS 58>Kasa <NUM 6 31>0G<OPT 2>
+Co innego, gdybyś go kupił za 1000G.<NEXT><OPTLBL 1>Zapłać<OPTLBL 2>Nie płać<POS 58>Kasa <NUM 7 31>0G<OPT 2>
 
 @@ sDialog_0x0332 @@
 Tak właśnie żyję. Cześć.<END>
@@ -2699,7 +2699,7 @@ Dziękuję, że pozwoliłeś mi zakwitnąć. Dotąd nikt mnie nie zasadził.<NEX
 To nasienie dla krów. Chcesz zapłodnić krowę? Powodzenia.<NEXT>Jest w tym też lek na poprawę kondycji, więc razem 4000G. Trochę drogo.<NEXT><OPTLBL 1>Kup<OPTLBL 2>Nie kupuj<POS 58>Kasa <NUM 7 32>0G<OPT 2>
 
 @@ sDialog_0x033C @@
-To nasiona pomidora. Opłacają się, bo po zbiorach znów rodzą owoce, jeśli je podlewasz. Kosztują 300G.<NEXT><OPTLBL 1>Kup<OPTLBL 2>Nie kupuj<POS 58>Kasa <NUM 7 33>0G<OPT 2>
+To nasiona pomidora. Opłacają się,<NEXT>bo po zbiorach znów rodzą owoce, jeśli je podlewasz.<NEXT>Kosztują 300G.<NEXT><OPTLBL 1>Kup<OPTLBL 2>Nie kupuj<POS 58>Kasa <NUM 7 33>0G<OPT 2>
 
 @@ sDialog_0x033D @@
 To nasiona ziemniaka. Zbierzesz je, gdy liście urosną. Kosztują 200G.<NEXT><OPTLBL 1>Kup<OPTLBL 2>Nie kupuj<POS 58>Kasa <NUM 7 34>0G<OPT 2>
@@ -2711,16 +2711,16 @@ To nasiona rzepy. Szybko się je zbiera, więc to wygodne. Cena też korzystna, 
 To nasiona kukurydzy. Zbiór trwa najdłużej, ale sprzedaje się drogo.<NEXT>Po zbiorach też rodzi owoce, jeśli podlewasz. Kosztują 300G.<NEXT><OPTLBL 1>Kup<OPTLBL 2>Nie kupuj<POS 58>Kasa <NUM 7 36>0G<OPT 2>
 
 @@ sDialog_0x0340 @@
-To kwiat. Trwa tylko jeden dzień, ale nadaje się na prezent. Wielka promocja! 300G.<NEXT><OPTLBL 1>Kup<OPTLBL 2>Nie kupuj<POS 58>Kasa <NUM 7 37>0G<OPT 2>
+To kwiat. Trwa tylko jeden dzień, ale nadaje się na prezent.<NEXT>Wielka promocja! 300G.<NEXT><OPTLBL 1>Kup<OPTLBL 2>Nie kupuj<POS 58>Kasa <NUM 7 37>0G<OPT 2>
 
 @@ sDialog_0x0341 @@
-To pasza dla krów. Starcza na 12 karmień, ale jak się da, dawaj im raczej paszę ze zbiorów. Kosztuje 1000G.<NEXT><OPTLBL 1>Kup<OPTLBL 2>Nie kupuj<POS 58>Kasa <NUM 7 38>0G<OPT 2>
+To pasza dla krów. Starcza na 12 karmień.<NEXT>Jak się da, dawaj im raczej paszę ze zbiorów.<NEXT>Kosztuje 1000G.<NEXT><OPTLBL 1>Kup<OPTLBL 2>Nie kupuj<POS 58>Kasa <NUM 7 38>0G<OPT 2>
 
 @@ sDialog_0x0342 @@
 To karma dla kur. Starcza na 12 karmień.<NEXT>Używaj jej tylko w kryzysie, a poza tym dawaj paszę. Cena to 300G.<NEXT><OPTLBL 1>Kup<OPTLBL 2>Nie kupuj<POS 58>Kasa <NUM 7 39>0G<OPT 2>
 
 @@ sDialog_0x0343 @@
-To zraszacz. Podlewanie kończy się w mgnieniu oka!<NEXT>Na pewno się opłaca! Jeśli oddasz w rozliczeniu konewkę, sprzedam go za 2000G.<NEXT><OPTLBL 1>Kup<OPTLBL 2>Nie kupuj<POS 58>Kasa <NUM 7 40>0G<OPT 2>
+To zraszacz. Podlewanie kończy się w mgnieniu oka!<NEXT>Na pewno się opłaca!<NEXT>Jeśli oddasz w rozliczeniu konewkę, sprzedam go za 2000G.<NEXT><OPTLBL 1>Kup<OPTLBL 2>Nie kupuj<POS 58>Kasa <NUM 7 40>0G<OPT 2>
 
 @@ sDialog_0x0344 @@
 To super sierp. Sam go wynalazłem.<NEXT>Jeśli oddasz w rozliczeniu sierp, sprzedam go za 2000G.<NEXT><OPTLBL 1>Kup<OPTLBL 2>Nie kupuj<POS 58>Kasa <NUM 7 41>0G<OPT 2>
@@ -2735,7 +2735,7 @@ To super młot. Od razu rozbija nawet wielkie głazy! Co powiesz?<NEXT>Jeśli od
 To super siekiera. Pień rozwali jednym uderzeniem!<NEXT>Jeśli oddasz w rozliczeniu siekierę, sprzedam ją za 2000G.<NEXT><OPTLBL 1>Kup<OPTLBL 2>Nie kupuj<POS 58>Kasa <NUM 7 44>0G<OPT 2>
 
 @@ sDialog_0x0348 @@
-To ciasto. Na prezent, na odzyskanie sił, na pamiątkę - do wszystkiego! Tylko 500G!<NEXT><OPTLBL 1>Kup<OPTLBL 2>Nie kupuj<POS 58>Kasa <NUM 7 45>0G<OPT 2>
+To ciasto. Na prezent, na odzyskanie sił, na pamiątkę -<NEXT>do wszystkiego! Tylko 500G!<NEXT><OPTLBL 1>Kup<OPTLBL 2>Nie kupuj<POS 58>Kasa <NUM 7 45>0G<OPT 2>
 
 @@ sDialog_0x0349 @@
 Dziękuję! To się szybko psuje, więc zjedz jak najprędzej.<END>
@@ -2786,7 +2786,7 @@ Rzepa, tak? Ładny kształt. Kupię ją za 120G, zgoda?<NEXT><OPTLBL 1>Tak<OPTLB
 Grzyb, tak? Co powiesz na 200G?<NEXT><OPTLBL 1>Tak<OPTLBL 2>Nie<POS 58>Kasa <NUM 7 54>0G<OPT 2>
 
 @@ sDialog_0x0359 @@
-Trujący grzyb. Dobrze połączony z innymi składnikami może posłużyć za lek. Co powiesz na 300G?<NEXT><OPTLBL 1>Tak<OPTLBL 2>Nie<POS 58>Kasa <NUM 7 55>0G<OPT 2>
+Trujący grzyb. Dobrze połączony z innymi składnikami<NEXT>może posłużyć za lek. Co powiesz na 300G?<NEXT><OPTLBL 1>Tak<OPTLBL 2>Nie<POS 58>Kasa <NUM 7 55>0G<OPT 2>
 
 @@ sDialog_0x035A @@
 Hm, dobre zioło lecznicze. Mmm. Co powiesz na 200G?<NEXT><OPTLBL 1>Tak<OPTLBL 2>Nie<POS 58>Kasa <NUM 7 56>0G<OPT 2>
@@ -2864,10 +2864,10 @@ W środku jest ulotka. Przeczytać?<NEXT><OPTLBL 1>Czytaj<OPTLBL 2>Nie czytaj<OP
 Na odzyskanie sił - górskie gorące źródło.<END>
 
 @@ sDialog_0x0373 @@
-Specjalna oferta na jesienne wakacje! Grzybobranie w górach pełnych kolorowych liści!<NEXT>Przysmak ze szczytu! Trawa Pełni!!<END>
+Specjalna oferta na jesienne wakacje!<NEXT>Grzybobranie w górach pełnych kolorowych liści!<NEXT>Przysmak ze szczytu! Trawa Pełni!!<END>
 
 @@ sDialog_0x0374 @@
-10 dnia miesiąca zimy jest Święto Dziękczynienia! Z tej okazji zapraszamy po jajka i mleko ze znaczkiem "Uśmiechnięta Buźka"!<END>
+10 dnia miesiąca zimy jest Święto Dziękczynienia!<NEXT>Z tej okazji zapraszamy po jajka i mleko<NEXT>ze znaczkiem "Uśmiechnięta Buźka"!<END>
 
 @@ sDialog_0x0375 @@
 23 dnia miesiąca wiosny jest Festiwal Kwiatów! Ciesz się cudownymi zapachami!<END>
