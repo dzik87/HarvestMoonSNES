@@ -75,4 +75,28 @@ for f, t in yml.items():
     nt = pattern.sub(lambda m: mapping[m.group(1)], t)
     if nt != t and not dry:
         f.write_text(nt, encoding='utf-8')
+# AI slot tables (defs/ai/scripts.json) name their entry points as `_<suffix>` relative to the script label
+# (see tools/ai/aidata.py); a renamed entry point has to be renamed there as well.
+sj = ROOT / 'defs/ai/scripts.json'
+if sj.exists():
+    lines = sj.read_text(encoding='utf-8').split('\n')
+    slots_changed = 0
+    for i, line in enumerate(lines):
+        m = re.search(r'"label": "([^"]+)"', line)
+        if not m:
+            continue
+        base = m.group(1)
+        def fix(sm):
+            global slots_changed
+            old = base + sm.group(1)
+            if old not in mapping:
+                return sm.group(0)
+            slots_changed += 1
+            new = mapping[old]
+            return '"' + (new[len(base):] if new.startswith(base + '_') else new) + '"'
+        lines[i] = re.sub(r'"(_[A-Za-z0-9_]+)"', fix, line)
+    if slots_changed and not dry:
+        sj.write_text('\n'.join(lines), encoding='utf-8')
+    if slots_changed:
+        print(f'{slots_changed} slot-table entries updated in defs/ai/scripts.json')
 print(f'{len(mapping)} labels renamed in {changed} files' + (' (dry run)' if dry else ''))

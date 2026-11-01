@@ -1,0 +1,683 @@
+old,new,confidence,reason
+pAIScripting0x20_L006,pAIScripting0x20_Data01_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x20_L009,pAIScripting0x20_Data01_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x20_L001,pAIScripting0x20_Data01_SetDest_TOWNSPRING,high,Block is AICMD0x06 SetDestinationArea + jump
+pAIScripting0x20_L002,pAIScripting0x20_Data01_SetDest_TOWNSUMMER,high,Block is AICMD0x06 SetDestinationArea + jump
+pAIScripting0x20_L003,pAIScripting0x20_Data01_SetDest_TOWNFALL,high,Block is AICMD0x06 SetDestinationArea + jump
+pAIScripting0x20_L004,pAIScripting0x20_Data01_SetDest_TOWNWINTER,high,Block is AICMD0x06 SetDestinationArea + jump
+pAIScripting0x20_L008,pAIScripting0x20_Data01_Actor01_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x20_L007,pAIScripting0x20_Data01_Actor01_Talk_0315,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x20_L005,pAIScripting0x20_Data01_FuneralSequence,medium,Role read from the dialog text and surrounding commands
+pAIScripting0x21_L001,pAIScripting0x21_Data01_Actor09,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x21_L009,pAIScripting0x21_Data01_Actor13,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x21_L002,pAIScripting0x21_Data01_Actor09_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x21_L010,pAIScripting0x21_Data01_Actor13_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x21_L011,pAIScripting0x21_Data01_Actor13_Talk,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x22_L003,pAIScripting0x22_MajorHouse,high,AI sub-script slot entry named after the room it is started in (fAreaEvents_* caller)
+pAIScripting0x22_L007,pAIScripting0x22_MariaBedroom,high,AI sub-script slot entry named after the room it is started in (fAreaEvents_* caller)
+pAIScripting0x22_L010,pAIScripting0x22_ToolShop,high,AI sub-script slot entry named after the room it is started in (fAreaEvents_* caller)
+pAIScripting0x22_L014,pAIScripting0x22_AnnBedroom,high,AI sub-script slot entry named after the room it is started in (fAreaEvents_* caller)
+pAIScripting0x22_L017,pAIScripting0x22_Florist,high,AI sub-script slot entry named after the room it is started in (fAreaEvents_* caller)
+pAIScripting0x22_L001,pAIScripting0x22_Data01_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x22_L002,pAIScripting0x22_Data02_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x22_L004,pAIScripting0x22_MajorHouse_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x22_L008,pAIScripting0x22_MariaBedroom_Actor01_Maria,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x22_L011,pAIScripting0x22_ToolShop_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x22_L015,pAIScripting0x22_AnnBedroom_Actor01_Ann,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x22_L018,pAIScripting0x22_Florist_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x22_L021,pAIScripting0x22_Data04_Actor01_Nina,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x22_L023,pAIScripting0x22_Data05_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x22_L026,pAIScripting0x22_Data06_Actor01_Ellen,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x22_L028,pAIScripting0x22_Data07_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x22_L031,pAIScripting0x22_Data08_Actor01_Eve,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x22_L005,pAIScripting0x22_MajorHouse_Actor01_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x22_L006,pAIScripting0x22_MajorHouse_Actor01_Talk_01D8,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x22_L009,pAIScripting0x22_MariaBedroom_Actor01_Maria_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x22_L012,pAIScripting0x22_ToolShop_Actor01_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x22_L013,pAIScripting0x22_ToolShop_Actor01_Talk_01DF,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x22_L016,pAIScripting0x22_AnnBedroom_Actor01_Ann_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x22_L019,pAIScripting0x22_Florist_Actor01_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x22_L020,pAIScripting0x22_Florist_Actor01_Talk_01E9,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x22_L022,pAIScripting0x22_Data04_Actor01_Nina_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x22_L024,pAIScripting0x22_Data05_Actor01_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x22_L025,pAIScripting0x22_Data05_Actor01_Talk_01B1,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x22_L027,pAIScripting0x22_Data06_Actor01_Ellen_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x22_L029,pAIScripting0x22_Data07_Actor01_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x22_L030,pAIScripting0x22_Data07_Actor01_Talk_01EA,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x22_L032,pAIScripting0x22_Data08_Actor01_Eve_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x23_L001,pAIScripting0x23_Data01_Actor0C,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x23_L002,pAIScripting0x23_Data01_Actor0D,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x23_L003,pAIScripting0x23_Data01_Actor0E,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x24_L009,pAIScripting0x24_Data01_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x24_L001,pAIScripting0x24_Data01_Announce_FlowerFestival,medium,Role read from the dialog text and surrounding commands
+pAIScripting0x24_L002,pAIScripting0x24_Data01_Announce_HarvestFestival,medium,Role read from the dialog text and surrounding commands
+pAIScripting0x24_L003,pAIScripting0x24_Data01_Announce_Thanksgiving,medium,Role read from the dialog text and surrounding commands
+pAIScripting0x24_L004,pAIScripting0x24_Data01_Announce_StarNightFestival,medium,Role read from the dialog text and surrounding commands
+pAIScripting0x24_L005,pAIScripting0x24_Data01_Announce_NewYear,medium,Role read from the dialog text and surrounding commands
+pAIScripting0x24_L006,pAIScripting0x24_Data01_Announce_EggFestival,medium,Role read from the dialog text and surrounding commands
+pAIScripting0x24_L007,pAIScripting0x24_Data01_AnnounceEnd,medium,Role read from the dialog text and surrounding commands
+pAIScripting0x24_L008,pAIScripting0x24_Data01_AnnounceThanksgivingExtra,medium,Role read from the dialog text and surrounding commands
+pAIScripting0x25_L001,pAIScripting0x25_Data01_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x26_L014,pAIScripting0x26_Data01_Actor12,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x26_L018,pAIScripting0x26_Data01_Actor14,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x26_L031,pAIScripting0x26_Data01_Actor142,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x26_L032,pAIScripting0x26_Data01_Actor143,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x26_L033,pAIScripting0x26_Data01_Actor144,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x26_L034,pAIScripting0x26_Data01_Actor145,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x26_L035,pAIScripting0x26_Data01_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x26_L040,pAIScripting0x26_Data01_Actor13,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x26_L047,pAIScripting0x26_Data01_Actor03,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x26_L059,pAIScripting0x26_Data01_Actor06,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x26_L064,pAIScripting0x26_Data01_Actor07,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x26_L080,pAIScripting0x26_Data01_Actor0B,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x26_L086,pAIScripting0x26_Data01_Actor0D_Maria,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x26_L098,pAIScripting0x26_Data01_Actor0E_Ann,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x26_L114,pAIScripting0x26_Data01_Actor0F_Nina,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x26_L129,pAIScripting0x26_Data01_Actor10_Ellen,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x26_L145,pAIScripting0x26_Data01_Actor11_Eve,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x26_L161,pAIScripting0x26_Data02_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x26_L163,pAIScripting0x26_Data02_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x26_L165,pAIScripting0x26_Data02_Actor03,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x26_L167,pAIScripting0x26_Data02_Actor04,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x26_L169,pAIScripting0x26_Data02_Actor05,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x26_L171,pAIScripting0x26_Data02_Actor06,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x26_L173,pAIScripting0x26_Data01_Actor072,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x26_L175,pAIScripting0x26_Data01_Actor073,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x26_L177,pAIScripting0x26_Data01_Actor074,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x26_L179,pAIScripting0x26_Data01_Actor075,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x26_L181,pAIScripting0x26_Data01_Actor076,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x26_L183,pAIScripting0x26_Data01_Actor077,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x26_L186,pAIScripting0x26_Data02_Actor08,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x26_L015,pAIScripting0x26_Data01_Actor12_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x26_L016,pAIScripting0x26_Data01_Actor12_Talk_0286,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x26_L036,pAIScripting0x26_Data01_Actor01_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x26_L037,pAIScripting0x26_Data01_Actor01_Talk_0247,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x26_L041,pAIScripting0x26_Data01_Actor13_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x26_L042,pAIScripting0x26_Data01_Actor13_Talk_0248,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x26_L044,pAIScripting0x26_Data01_Actor13_WaitTalk2,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x26_L045,pAIScripting0x26_Data01_Actor13_Talk_02482,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x26_L048,pAIScripting0x26_Data01_Actor03_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x26_L050,pAIScripting0x26_Data01_Actor03_Talk_0245,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x26_L049,pAIScripting0x26_Data01_Actor03_WaitTalk2,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x26_L051,pAIScripting0x26_Data01_Actor03_Talk_02452,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x26_L053,pAIScripting0x26_Data01_Actor03_WaitTalk3,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x26_L054,pAIScripting0x26_Data01_Actor03_Talk_0246,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x26_L056,pAIScripting0x26_Data01_Actor03_WaitTalk4,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x26_L057,pAIScripting0x26_Data01_Actor03_Talk_024C,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x26_L060,pAIScripting0x26_Data01_Actor06_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x26_L061,pAIScripting0x26_Data01_Actor06_Talk_0249,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x26_L065,pAIScripting0x26_Data01_Actor07_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x26_L066,pAIScripting0x26_Data01_Actor07_Talk_024F,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x26_L068,pAIScripting0x26_Data01_Actor07_WaitTalk2,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x26_L069,pAIScripting0x26_Data01_Actor07_Talk_024E,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x26_L071,pAIScripting0x26_Data01_Actor07_WaitTalk3,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x26_L072,pAIScripting0x26_Data01_Actor07_Talk_024A,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x26_L074,pAIScripting0x26_Data01_Actor07_WaitTalk4,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x26_L075,pAIScripting0x26_Data01_Actor07_Talk_024B,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x26_L077,pAIScripting0x26_Data01_Actor07_WaitTalk5,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x26_L078,pAIScripting0x26_Data01_Actor07_Talk_024D,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x26_L081,pAIScripting0x26_Data01_Actor0B_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x26_L083,pAIScripting0x26_Data01_Actor0B_Talk_0234,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x26_L082,pAIScripting0x26_Data01_Actor0B_WaitTalk2,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x26_L084,pAIScripting0x26_Data01_Actor0B_Talk_0235,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x26_L088,pAIScripting0x26_Data01_Actor0D_Maria_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x26_L090,pAIScripting0x26_Data01_Actor0D_Maria_Talk,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x26_L089,pAIScripting0x26_Data01_Actor0D_Maria_WaitTalk2,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x26_L096,pAIScripting0x26_Data01_Actor0D_Maria_Talk_027A,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x26_L100,pAIScripting0x26_Data01_Actor0E_Ann_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x26_L102,pAIScripting0x26_Data01_Actor0E_Ann_Talk,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x26_L101,pAIScripting0x26_Data01_Actor0E_Ann_WaitTalk2,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x26_L112,pAIScripting0x26_Data01_Actor0E_Ann_Talk_0255,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x26_L116,pAIScripting0x26_Data01_Actor0F_Nina_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x26_L118,pAIScripting0x26_Data01_Actor0F_Nina_Talk,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x26_L117,pAIScripting0x26_Data01_Actor0F_Nina_WaitTalk2,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x26_L127,pAIScripting0x26_Data01_Actor0F_Nina_Talk_026D,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x26_L131,pAIScripting0x26_Data01_Actor10_Ellen_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x26_L133,pAIScripting0x26_Data01_Actor10_Ellen_Talk,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x26_L132,pAIScripting0x26_Data01_Actor10_Ellen_WaitTalk2,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x26_L143,pAIScripting0x26_Data01_Actor10_Ellen_Talk_027D,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x26_L147,pAIScripting0x26_Data01_Actor11_Eve_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x26_L149,pAIScripting0x26_Data01_Actor11_Eve_Talk,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x26_L148,pAIScripting0x26_Data01_Actor11_Eve_WaitTalk2,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x26_L159,pAIScripting0x26_Data01_Actor11_Eve_Talk_0365,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x27_L008,pAIScripting0x27_Data01_Actor0A,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x27_L010,pAIScripting0x27_Data01_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x27_L014,pAIScripting0x27_Data01_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x27_L018,pAIScripting0x27_Data01_Actor03,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x27_L022,pAIScripting0x27_Data01_Actor04,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x27_L026,pAIScripting0x27_Data01_Actor05,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x27_L029,pAIScripting0x27_Data01_Actor06_Ann,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x27_L036,pAIScripting0x27_Data01_Actor07_Nina,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x27_L043,pAIScripting0x27_Data01_Actor08_Ellen,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x27_L050,pAIScripting0x27_Data01_Actor09_Eve,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x27_L060,pAIScripting0x27_Data02_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x27_L065,pAIScripting0x27_Data02_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x27_L067,pAIScripting0x27_Data03_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x27_L071,pAIScripting0x27_Data03_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x27_L074,pAIScripting0x27_Data03_Actor03,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x27_L077,pAIScripting0x27_Data03_Actor04_Maria,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x27_L084,pAIScripting0x27_Data04_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x27_L087,pAIScripting0x27_Data04_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x27_L009,pAIScripting0x27_Data01_Actor0A_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x27_L011,pAIScripting0x27_Data01_Actor01_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x27_L012,pAIScripting0x27_Data01_Actor01_Talk_0296,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x27_L015,pAIScripting0x27_Data01_Actor02_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x27_L016,pAIScripting0x27_Data01_Actor02_Talk_0299,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x27_L019,pAIScripting0x27_Data01_Actor03_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x27_L020,pAIScripting0x27_Data01_Actor03_Talk_029A,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x27_L023,pAIScripting0x27_Data01_Actor04_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x27_L024,pAIScripting0x27_Data01_Actor04_Talk_0295,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x27_L027,pAIScripting0x27_Data01_Actor05_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x27_L028,pAIScripting0x27_Data01_Actor05_Talk_0294,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x27_L030,pAIScripting0x27_Data01_Actor06_Ann_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x27_L032,pAIScripting0x27_Data01_Actor06_Ann_Talk,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x27_L031,pAIScripting0x27_Data01_Actor06_Ann_WaitTalk2,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x27_L035,pAIScripting0x27_Data01_Actor06_Ann_Talk_02A2,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x27_L037,pAIScripting0x27_Data01_Actor07_Nina_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x27_L039,pAIScripting0x27_Data01_Actor07_Nina_Talk,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x27_L038,pAIScripting0x27_Data01_Actor07_Nina_WaitTalk2,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x27_L042,pAIScripting0x27_Data01_Actor07_Nina_Talk_02A5,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x27_L044,pAIScripting0x27_Data01_Actor08_Ellen_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x27_L046,pAIScripting0x27_Data01_Actor08_Ellen_Talk,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x27_L045,pAIScripting0x27_Data01_Actor08_Ellen_WaitTalk2,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x27_L049,pAIScripting0x27_Data01_Actor08_Ellen_Talk_02A8,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x27_L051,pAIScripting0x27_Data01_Actor09_Eve_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x27_L053,pAIScripting0x27_Data01_Actor09_Eve_Talk,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x27_L052,pAIScripting0x27_Data01_Actor09_Eve_WaitTalk2,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x27_L056,pAIScripting0x27_Data01_Actor09_Eve_Talk_02AB,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x27_L059,pAIScripting0x27_Data02_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x27_L061,pAIScripting0x27_Data02_Actor01_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x27_L063,pAIScripting0x27_Data02_Actor01_Talk_0292,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x27_L062,pAIScripting0x27_Data02_Actor01_WaitTalk2,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x27_L064,pAIScripting0x27_Data02_Actor01_Talk_0293,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x27_L068,pAIScripting0x27_Data03_Actor01_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x27_L069,pAIScripting0x27_Data03_Actor01_Talk_029B,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x27_L072,pAIScripting0x27_Data03_Actor02_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x27_L073,pAIScripting0x27_Data03_Actor02_Talk_029C,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x27_L075,pAIScripting0x27_Data03_Actor03_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x27_L076,pAIScripting0x27_Data03_Actor03_Talk_029D,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x27_L078,pAIScripting0x27_Data03_Actor04_Maria_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x27_L080,pAIScripting0x27_Data03_Actor04_Maria_Talk,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x27_L079,pAIScripting0x27_Data03_Actor04_Maria_WaitTalk2,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x27_L083,pAIScripting0x27_Data03_Actor04_Maria_Talk_029F,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x27_L085,pAIScripting0x27_Data04_Actor01_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x27_L086,pAIScripting0x27_Data04_Actor01_Talk_0297,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x27_L088,pAIScripting0x27_Data04_Actor02_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x27_L089,pAIScripting0x27_Data04_Actor02_Talk_0298,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x28_L001,pAIScripting0x28_Data02_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x28_L006,pAIScripting0x28_Data02_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x28_L011,pAIScripting0x28_Data02_Actor05,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x28_L021,pAIScripting0x28_Data02_Actor03,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x28_L024,pAIScripting0x28_Data02_Actor04,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x28_L029,pAIScripting0x28_Data02_Actor06,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x28_L032,pAIScripting0x28_Data02_Actor07,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x28_L035,pAIScripting0x28_Data02_Actor08_Maria,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x28_L041,pAIScripting0x28_Data02_Actor09_Eve,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x28_L049,pAIScripting0x28_Data03_Actor0A,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x28_L050,pAIScripting0x28_Data03_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x28_L078,pAIScripting0x28_Data04_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x28_L081,pAIScripting0x28_Data03_Actor09,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x28_L088,pAIScripting0x28_Data04_Actor09,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x28_L092,pAIScripting0x28_Data03_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x28_L098,pAIScripting0x28_Data04_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x28_L102,pAIScripting0x28_Data03_Actor03,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x28_L107,pAIScripting0x28_Data04_Actor03,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x28_L110,pAIScripting0x28_Data03_Actor04,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x28_L116,pAIScripting0x28_Data04_Actor04,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x28_L119,pAIScripting0x28_Data03_Actor05,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x28_L124,pAIScripting0x28_Data04_Actor05,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x28_L127,pAIScripting0x28_Data03_Actor06_Ann,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x28_L134,pAIScripting0x28_Data04_Actor06,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x28_L141,pAIScripting0x28_Data03_Actor07_Nina,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x28_L148,pAIScripting0x28_Data04_Actor07,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x28_L155,pAIScripting0x28_Data03_Actor08_Ellen,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x28_L162,pAIScripting0x28_Data04_Actor08,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x28_L002,pAIScripting0x28_Data02_Actor01_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x28_L004,pAIScripting0x28_Data02_Actor01_Talk_02CE,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x28_L003,pAIScripting0x28_Data02_Actor01_WaitTalk2,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x28_L005,pAIScripting0x28_Data02_Actor01_Talk_02CE2,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x28_L007,pAIScripting0x28_Data02_Actor02_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x28_L009,pAIScripting0x28_Data02_Actor02_Talk_02CF,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x28_L008,pAIScripting0x28_Data02_Actor02_WaitTalk2,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x28_L010,pAIScripting0x28_Data02_Actor02_Talk_001A,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x28_L012,pAIScripting0x28_Data02_Actor05_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x28_L014,pAIScripting0x28_Data02_Actor05_Talk_02D3,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x28_L013,pAIScripting0x28_Data02_Actor05_WaitTalk2,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x28_L020,pAIScripting0x28_Data02_Actor05_Talk_02DC,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x28_L022,pAIScripting0x28_Data02_Actor03_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x28_L023,pAIScripting0x28_Data02_Actor03_Talk_02D0,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x28_L025,pAIScripting0x28_Data02_Actor04_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x28_L027,pAIScripting0x28_Data02_Actor04_Talk_02D1,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x28_L026,pAIScripting0x28_Data02_Actor04_WaitTalk2,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x28_L028,pAIScripting0x28_Data02_Actor04_Talk_038E,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x28_L030,pAIScripting0x28_Data02_Actor06_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x28_L031,pAIScripting0x28_Data02_Actor06_Talk_02D9,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x28_L033,pAIScripting0x28_Data02_Actor07_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x28_L034,pAIScripting0x28_Data02_Actor07_Talk_02D2,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x28_L037,pAIScripting0x28_Data02_Actor08_Maria_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x28_L039,pAIScripting0x28_Data02_Actor08_Maria_Talk_02DA,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x28_L038,pAIScripting0x28_Data02_Actor08_Maria_WaitTalk2,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x28_L040,pAIScripting0x28_Data02_Actor08_Maria_Talk_0293,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x28_L043,pAIScripting0x28_Data02_Actor09_Eve_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x28_L045,pAIScripting0x28_Data02_Actor09_Eve_Talk_02DB,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x28_L044,pAIScripting0x28_Data02_Actor09_Eve_WaitTalk2,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x28_L046,pAIScripting0x28_Data02_Actor09_Eve_Talk_0293,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x28_L051,pAIScripting0x28_Data03_Actor01_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x28_L053,pAIScripting0x28_Data03_Actor01_Talk_02DD,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x28_L052,pAIScripting0x28_Data03_Actor01_WaitInteract,high,Block polls AICMD0x2D (interact / item offered)
+pAIScripting0x28_L056,pAIScripting0x28_Data03_Actor01_OnInteract,medium,First target of AICMD0x2D (A pressed without carried item)
+pAIScripting0x28_L057,pAIScripting0x28_Data03_Actor01_OnItemOffered,medium,Second target of AICMD0x2D (A pressed while carrying an item)
+pAIScripting0x28_L079,pAIScripting0x28_Data03_Actor01_WaitTalk2,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x28_L080,pAIScripting0x28_Data03_Actor01_Talk_02ED,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x28_L096,pAIScripting0x28_Data03_Actor02_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x28_L097,pAIScripting0x28_Data03_Actor02_Talk_02E0,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x28_L099,pAIScripting0x28_Data03_Actor02_WaitTalk2,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x28_L100,pAIScripting0x28_Data03_Actor02_Talk_02EF,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x28_L104,pAIScripting0x28_Data03_Actor03_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x28_L108,pAIScripting0x28_Data03_Actor03_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x28_L109,pAIScripting0x28_Data03_Actor03_Talk_02F0,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x28_L112,pAIScripting0x28_Data03_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x28_L114,pAIScripting0x28_Data03_Talk_02E2,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x28_L117,pAIScripting0x28_Data03_Actor04_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x28_L118,pAIScripting0x28_Data03_Actor04_Talk_02F1,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x28_L121,pAIScripting0x28_Data03_Actor05_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x28_L125,pAIScripting0x28_Data03_Actor05_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x28_L126,pAIScripting0x28_Data03_Actor05_Talk_02F1,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x28_L130,pAIScripting0x28_Data03_Actor06_Ann_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x28_L136,pAIScripting0x28_Data03_Actor06_Ann_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x28_L138,pAIScripting0x28_Data03_Actor06_Ann_Talk_02F2,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x28_L137,pAIScripting0x28_Data03_WaitTalk2,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x28_L139,pAIScripting0x28_Data03_Talk_02F1,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x28_L144,pAIScripting0x28_Data03_Actor07_Nina_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x28_L150,pAIScripting0x28_Data03_Actor07_Nina_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x28_L152,pAIScripting0x28_Data03_Actor07_Nina_Talk_02F3,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x28_L151,pAIScripting0x28_Data03_Actor07_Nina_WaitTalk2,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x28_L153,pAIScripting0x28_Data03_Actor07_Nina_Talk_02F1,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x28_L158,pAIScripting0x28_Data03_Actor08_Ellen_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x28_L164,pAIScripting0x28_Data03_Actor08_Ellen_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x28_L166,pAIScripting0x28_Data03_Actor08_Ellen_Talk_02F4,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x28_L165,pAIScripting0x28_Data03_Actor08_Ellen_WaitTalk2,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x28_L167,pAIScripting0x28_Data03_Actor08_Ellen_Talk_02F1,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x29_L001,pAIScripting0x29_Data01_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x29_L002,pAIScripting0x29_Data01_Actor01_WaitInteract,high,Block polls AICMD0x2D (interact / item offered)
+pAIScripting0x29_L004,pAIScripting0x29_Data01_Actor01_OnInteract,medium,First target of AICMD0x2D (A pressed without carried item)
+pAIScripting0x29_L003,pAIScripting0x29_Data01_Actor01_OnItemOffered,medium,Second target of AICMD0x2D (A pressed while carrying an item)
+pAIScripting0x29_L005,pAIScripting0x29_Data01_Actor01_NoEggEvening,medium,Role read from the dialog text and surrounding commands
+pAIScripting0x29_L006,pAIScripting0x29_Data01_Actor01_EggReceived,medium,Role read from the dialog text and surrounding commands
+pAIScripting0x29_L007,pAIScripting0x29_Data01_Actor01_Leave,medium,Role read from the dialog text and surrounding commands
+pAIScripting0x2D_L002,pAIScripting0x2D_Data01_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x2D_L001,pAIScripting0x2D_Data01_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x2E_L006,pAIScripting0x2E_Data01_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x2E_L007,pAIScripting0x2E_Data01_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x2E_L008,pAIScripting0x2E_Data01_Actor03,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x2E_L003,pAIScripting0x2E_Data01_SetDest_HOUSE2,high,Block is AICMD0x06 SetDestinationArea + jump
+pAIScripting0x2E_L004,pAIScripting0x2E_Data01_SetDest_HOUSE3,high,Block is AICMD0x06 SetDestinationArea + jump
+pAIScripting0x2F_L001,pAIScripting0x2F_Data01_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x2F_L002,pAIScripting0x2F_Data01_Actor01_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x30_L001,pAIScripting0x30_Data01_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x30_L003,pAIScripting0x30_Data01_Actor03,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x30_L005,pAIScripting0x30_Data01_Actor04,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x30_L007,pAIScripting0x30_Data01_Actor05,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x30_L009,pAIScripting0x30_Data01_Actor06,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x30_L011,pAIScripting0x30_Data01_Actor07,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x30_L013,pAIScripting0x30_Data01_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x30_L002,pAIScripting0x30_Data01_Actor02_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x30_L004,pAIScripting0x30_Data01_Actor03_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x30_L006,pAIScripting0x30_Data01_Actor04_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x30_L008,pAIScripting0x30_Data01_Actor05_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x30_L010,pAIScripting0x30_Data01_Actor06_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x30_L012,pAIScripting0x30_Data01_Actor07_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x30_L014,pAIScripting0x30_Data01_Actor01_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x31_L001,pAIScripting0x31_Data01_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x31_L003,pAIScripting0x31_Data01_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x31_L005,pAIScripting0x31_Data01_Actor03,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x31_L007,pAIScripting0x31_Data01_Actor04,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x31_L004,pAIScripting0x31_Data01_Actor02_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x31_L006,pAIScripting0x31_Data01_Actor03_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x31_L008,pAIScripting0x31_Data01_Actor04_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x32_L001,pAIScripting0x32_Data01_Actor07,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x32_L002,pAIScripting0x32_Data01_Actor08,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x32_L004,pAIScripting0x32_Data01_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x32_L006,pAIScripting0x32_Data01_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x32_L008,pAIScripting0x32_Data01_Actor03,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x32_L010,pAIScripting0x32_Data01_Actor04,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x32_L012,pAIScripting0x32_Data01_Actor05,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x32_L014,pAIScripting0x32_Data01_Actor06,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x32_L003,pAIScripting0x32_Data01_Actor08_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x32_L005,pAIScripting0x32_Data01_Actor01_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x32_L007,pAIScripting0x32_Data01_Actor02_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x32_L009,pAIScripting0x32_Data01_Actor03_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x32_L011,pAIScripting0x32_Data01_Actor04_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x32_L013,pAIScripting0x32_Data01_Actor05_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x32_L015,pAIScripting0x32_Data01_Actor06_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x33_L001,pAIScripting0x33_Data01_Actor05,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x33_L003,pAIScripting0x33_Data01_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x33_L005,pAIScripting0x33_Data01_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x33_L007,pAIScripting0x33_Data01_Actor03,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x33_L009,pAIScripting0x33_Data01_Actor04,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x33_L002,pAIScripting0x33_Data01_Actor05_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x33_L004,pAIScripting0x33_Data01_Actor01_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x34_L001,pAIScripting0x34_Data01_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x34_L002,pAIScripting0x34_Data01_Actor01_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x35_L001,pAIScripting0x35_Data01_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x35_L003,pAIScripting0x35_Data01_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x35_L002,pAIScripting0x35_Data01_Actor01_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x35_L004,pAIScripting0x35_Data01_Actor02_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x36_L001,pAIScripting0x36_Data01_Actor04,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x36_L002,pAIScripting0x36_Data01_Actor05,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x36_L003,pAIScripting0x36_Data01_Actor06,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x36_L004,pAIScripting0x36_Data01_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x36_L006,pAIScripting0x36_Data01_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x36_L005,pAIScripting0x36_Data01_Actor01_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x37_L001,pAIScripting0x37_Data01_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x37_L003,pAIScripting0x37_Data01_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x37_L004,pAIScripting0x37_Data01_Actor03,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x37_L005,pAIScripting0x37_Data01_Actor04,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x37_L002,pAIScripting0x37_Data01_Actor01_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x38_L001,pAIScripting0x38_Data01_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x38_L003,pAIScripting0x38_Data01_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x38_L002,pAIScripting0x38_Data01_Actor01_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x39_L001,pAIScripting0x39_Data01_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x39_L003,pAIScripting0x39_Data01_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x39_L004,pAIScripting0x39_Data01_Actor05,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x39_L005,pAIScripting0x39_Data01_Actor03,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x39_L007,pAIScripting0x39_Data01_Actor04,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x39_L009,pAIScripting0x39_Data01_Actor06,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x39_L011,pAIScripting0x39_Data01_Actor07,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x39_L013,pAIScripting0x39_Data01_Actor08,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x39_L002,pAIScripting0x39_Data01_Actor01_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x39_L006,pAIScripting0x39_Data01_Actor03_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x39_L008,pAIScripting0x39_Data01_Actor04_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x39_L010,pAIScripting0x39_Data01_Actor06_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x39_L012,pAIScripting0x39_Data01_Actor07_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x39_L014,pAIScripting0x39_Data01_Actor08_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3A_L001,pAIScripting0x3A_Data01_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3A_L003,pAIScripting0x3A_Data01_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3A_L005,pAIScripting0x3A_Data02_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3A_L007,pAIScripting0x3A_Data02_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3A_L009,pAIScripting0x3A_Data02_Actor05,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3A_L011,pAIScripting0x3A_Data02_Actor06,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3A_L013,pAIScripting0x3A_Data02_Actor03,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3A_L015,pAIScripting0x3A_Data02_Actor04,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3A_L017,pAIScripting0x3A_Data02_Actor07,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3A_L019,pAIScripting0x3A_Data02_Actor08,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3A_L002,pAIScripting0x3A_Data01_Actor02_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3A_L004,pAIScripting0x3A_Data01_Actor01_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3A_L006,pAIScripting0x3A_Data02_Actor02_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3A_L008,pAIScripting0x3A_Data02_Actor01_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3A_L010,pAIScripting0x3A_Data02_Actor05_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3A_L012,pAIScripting0x3A_Data02_Actor06_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3A_L014,pAIScripting0x3A_Data02_Actor03_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3A_L016,pAIScripting0x3A_Data02_Actor04_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3A_L018,pAIScripting0x3A_Data02_Actor07_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3A_L020,pAIScripting0x3A_Data02_Actor08_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3B_L001,pAIScripting0x3B_Data01_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3B_L003,pAIScripting0x3B_Data01_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3B_L005,pAIScripting0x3B_Data02_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3B_L007,pAIScripting0x3B_Data02_Actor03,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3B_L009,pAIScripting0x3B_Data02_Actor04,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3B_L011,pAIScripting0x3B_Data02_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3B_L013,pAIScripting0x3B_Data02_Actor05,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3B_L002,pAIScripting0x3B_Data01_Actor01_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3B_L004,pAIScripting0x3B_Data01_Actor02_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3B_L006,pAIScripting0x3B_Data02_Actor01_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3B_L014,pAIScripting0x3B_Data02_Actor05_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3C_L001,pAIScripting0x3C_Data01_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3C_L003,pAIScripting0x3C_Data01_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3C_L005,pAIScripting0x3C_Data01_Actor04,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3C_L007,pAIScripting0x3C_Data01_Actor03,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3C_L009,pAIScripting0x3C_Data02_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3C_L011,pAIScripting0x3C_Data02_Actor07,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3C_L013,pAIScripting0x3C_Data02_Actor06,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3C_L015,pAIScripting0x3C_Data02_Actor03,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3C_L017,pAIScripting0x3C_Data02_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3C_L019,pAIScripting0x3C_Data02_Actor04,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3C_L020,pAIScripting0x3C_Data02_Actor05,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3C_L004,pAIScripting0x3C_Data01_Actor02_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3C_L006,pAIScripting0x3C_Data01_Actor04_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3C_L008,pAIScripting0x3C_Data01_Actor03_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3C_L010,pAIScripting0x3C_Data02_Actor01_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3C_L012,pAIScripting0x3C_Data02_Actor07_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3C_L016,pAIScripting0x3C_Data02_Actor03_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3C_L018,pAIScripting0x3C_Data02_Actor02_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3D_L001,pAIScripting0x3D_Data01_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3D_L003,pAIScripting0x3D_Data01_Actor03,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3D_L005,pAIScripting0x3D_Data01_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3D_L007,pAIScripting0x3D_Data02_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3D_L009,pAIScripting0x3D_Data02_Actor03,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3D_L011,pAIScripting0x3D_Data02_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3D_L013,pAIScripting0x3D_Data02_Actor04,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3D_L002,pAIScripting0x3D_Data01_Actor01_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3D_L008,pAIScripting0x3D_Data02_Actor01_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3D_L010,pAIScripting0x3D_Data02_Actor03_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3D_L012,pAIScripting0x3D_Data02_Actor02_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3E_L001,pAIScripting0x3E_Data01_Actor03,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3E_L003,pAIScripting0x3E_Data01_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3E_L005,pAIScripting0x3E_Data01_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3E_L007,pAIScripting0x3E_Data01_Actor07,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3E_L009,pAIScripting0x3E_Data01_Actor04,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3E_L011,pAIScripting0x3E_Data01_Actor05,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3E_L013,pAIScripting0x3E_Data01_Actor06,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3E_L015,pAIScripting0x3E_Data01_Actor08,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3E_L002,pAIScripting0x3E_Data01_Actor03_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3E_L004,pAIScripting0x3E_Data01_Actor02_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3E_L006,pAIScripting0x3E_Data01_Actor01_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3E_L008,pAIScripting0x3E_Data01_Actor07_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3E_L010,pAIScripting0x3E_Data01_Actor04_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3E_L012,pAIScripting0x3E_Data01_Actor05_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3E_L014,pAIScripting0x3E_Data01_Actor06_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3E_L016,pAIScripting0x3E_Data01_Actor08_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3F_L001,pAIScripting0x3F_Data01_Actor03,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3F_L003,pAIScripting0x3F_Data01_Actor06,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3F_L004,pAIScripting0x3F_Data01_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3F_L006,pAIScripting0x3F_Data01_Actor05,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3F_L008,pAIScripting0x3F_Data01_Actor04,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3F_L010,pAIScripting0x3F_Data01_Actor07,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3F_L011,pAIScripting0x3F_Data01_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3F_L013,pAIScripting0x3F_Data01_Actor062,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x3F_L002,pAIScripting0x3F_Data01_Actor03_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3F_L005,pAIScripting0x3F_Data01_Actor01_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3F_L007,pAIScripting0x3F_Data01_Actor05_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3F_L009,pAIScripting0x3F_Data01_Actor04_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3F_L012,pAIScripting0x3F_Data01_Actor02_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x3F_L014,pAIScripting0x3F_Data01_Actor062_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x40_L001,pAIScripting0x40_Data01_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x40_L003,pAIScripting0x40_Data01_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x40_L005,pAIScripting0x40_Data01_Actor04,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x40_L006,pAIScripting0x40_Data01_Actor03,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x40_L002,pAIScripting0x40_Data01_Actor01_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x40_L004,pAIScripting0x40_Data01_Actor02_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x40_L007,pAIScripting0x40_Data01_Actor03_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x41_L001,pAIScripting0x41_Data01_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x41_L003,pAIScripting0x41_Data01_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x41_L005,pAIScripting0x41_Data01_Actor06,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x41_L007,pAIScripting0x41_Data01_Actor03,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x41_L009,pAIScripting0x41_Data01_Actor04,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x41_L011,pAIScripting0x41_Data01_Actor05,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x41_L002,pAIScripting0x41_Data01_Actor01_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x41_L004,pAIScripting0x41_Data01_Actor02_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x41_L006,pAIScripting0x41_Data01_Actor06_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x41_L008,pAIScripting0x41_Data01_Actor03_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x41_L012,pAIScripting0x41_Data01_Actor05_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x42_L001,pAIScripting0x42_Data01_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x42_L003,pAIScripting0x42_Data01_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x42_L005,pAIScripting0x42_Data01_Actor03,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x42_L007,pAIScripting0x42_Data01_Actor04,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x42_L009,pAIScripting0x42_Data01_Actor0A,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x42_L011,pAIScripting0x42_Data01_Actor0B,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x42_L013,pAIScripting0x42_Data01_Actor06,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x42_L015,pAIScripting0x42_Data01_Actor05,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x42_L017,pAIScripting0x42_Data01_Actor07,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x42_L019,pAIScripting0x42_Data01_Actor08,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x42_L021,pAIScripting0x42_Data01_Actor09,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x42_L023,pAIScripting0x42_Data02_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x42_L025,pAIScripting0x42_Data02_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x42_L027,pAIScripting0x42_Data02_Actor03,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x42_L029,pAIScripting0x42_Data02_Actor04,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x42_L031,pAIScripting0x42_Data02_Actor0A,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x42_L033,pAIScripting0x42_Data02_Actor0B,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x42_L035,pAIScripting0x42_Data02_Actor06,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x42_L037,pAIScripting0x42_Data02_Actor05,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x42_L039,pAIScripting0x42_Data02_Actor07,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x42_L041,pAIScripting0x42_Data02_Actor08,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x42_L043,pAIScripting0x42_Data02_Actor09,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x42_L045,pAIScripting0x42_Data02_Actor0C,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x42_L002,pAIScripting0x42_Data01_Actor01_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x42_L004,pAIScripting0x42_Data01_Actor02_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x42_L006,pAIScripting0x42_Data01_Actor03_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x42_L008,pAIScripting0x42_Data01_Actor04_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x42_L010,pAIScripting0x42_Data01_Actor0A_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x42_L012,pAIScripting0x42_Data01_Actor0B_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x42_L018,pAIScripting0x42_Data01_Actor07_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x42_L020,pAIScripting0x42_Data01_Actor08_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x42_L022,pAIScripting0x42_Data01_Actor09_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x42_L024,pAIScripting0x42_Data02_Actor01_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x42_L026,pAIScripting0x42_Data02_Actor02_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x42_L028,pAIScripting0x42_Data02_Actor03_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x42_L030,pAIScripting0x42_Data02_Actor04_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x42_L032,pAIScripting0x42_Data02_Actor0A_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x42_L034,pAIScripting0x42_Data02_Actor0B_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x42_L036,pAIScripting0x42_Data02_Actor06_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x42_L038,pAIScripting0x42_Data02_Actor05_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x42_L040,pAIScripting0x42_Data02_Actor07_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x42_L042,pAIScripting0x42_Data02_Actor08_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x42_L044,pAIScripting0x42_Data02_Actor09_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x42_L046,pAIScripting0x42_Data02_Actor0C_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x43_L005,pAIScripting0x43_Data01_WaitInteract,high,Block polls AICMD0x2D (interact / item offered)
+pAIScripting0x43_L016,pAIScripting0x43_Data01_OnInteract,medium,First target of AICMD0x2D (A pressed without carried item)
+pAIScripting0x43_L007,pAIScripting0x43_Data01_OnItemOffered,medium,Second target of AICMD0x2D (A pressed while carrying an item)
+pAIScripting0x43_L006,pAIScripting0x43_Data01_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x43_L061,pAIScripting0x43_Data01_Talk_02C2,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x43_L067,pAIScripting0x43_Data02_WaitInteract,high,Block polls AICMD0x2D (interact / item offered)
+pAIScripting0x43_L078,pAIScripting0x43_Data02_OnInteract,medium,First target of AICMD0x2D (A pressed without carried item)
+pAIScripting0x43_L069,pAIScripting0x43_Data02_OnItemOffered,medium,Second target of AICMD0x2D (A pressed while carrying an item)
+pAIScripting0x43_L068,pAIScripting0x43_Data02_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x43_L123,pAIScripting0x43_Data02_Talk_02C2,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x43_L129,pAIScripting0x43_Data03_WaitInteract,high,Block polls AICMD0x2D (interact / item offered)
+pAIScripting0x43_L140,pAIScripting0x43_Data03_OnInteract,medium,First target of AICMD0x2D (A pressed without carried item)
+pAIScripting0x43_L131,pAIScripting0x43_Data03_OnItemOffered,medium,Second target of AICMD0x2D (A pressed while carrying an item)
+pAIScripting0x43_L130,pAIScripting0x43_Data03_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x43_L185,pAIScripting0x43_Data03_Talk_02C2,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x43_L191,pAIScripting0x43_Data04_WaitInteract,high,Block polls AICMD0x2D (interact / item offered)
+pAIScripting0x43_L203,pAIScripting0x43_Data04_OnInteract,medium,First target of AICMD0x2D (A pressed without carried item)
+pAIScripting0x43_L193,pAIScripting0x43_Data04_OnItemOffered,medium,Second target of AICMD0x2D (A pressed while carrying an item)
+pAIScripting0x43_L192,pAIScripting0x43_Data04_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x43_L248,pAIScripting0x43_Data04_Talk_02C2,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x43_L254,pAIScripting0x43_Data05_WaitInteract,high,Block polls AICMD0x2D (interact / item offered)
+pAIScripting0x43_L265,pAIScripting0x43_Data05_OnInteract,medium,First target of AICMD0x2D (A pressed without carried item)
+pAIScripting0x43_L256,pAIScripting0x43_Data05_OnItemOffered,medium,Second target of AICMD0x2D (A pressed while carrying an item)
+pAIScripting0x43_L255,pAIScripting0x43_Data05_WaitTalk,high,Block is only AICMD0x1F (wait for talk) + jump to itself
+pAIScripting0x43_L310,pAIScripting0x43_Data05_Talk_02C2,high,Target of AICMD0x1F; shows the dialog
+pAIScripting0x44_L056,pAIScripting0x44_Data02_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x44_L143,pAIScripting0x44_Data05_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x44_L145,pAIScripting0x44_Data05_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x44_L002,pAIScripting0x44_Data01_WaitInteract,high,Block polls AICMD0x2D (interact / item offered)
+pAIScripting0x44_L012,pAIScripting0x44_Data01_OnInteract,medium,First target of AICMD0x2D (A pressed without carried item)
+pAIScripting0x44_L003,pAIScripting0x44_Data01_OnItemOffered,medium,Second target of AICMD0x2D (A pressed while carrying an item)
+pAIScripting0x44_L030,pAIScripting0x44_Data02_WaitInteract,high,Block polls AICMD0x2D (interact / item offered)
+pAIScripting0x44_L039,pAIScripting0x44_Data02_OnInteract,medium,First target of AICMD0x2D (A pressed without carried item)
+pAIScripting0x44_L031,pAIScripting0x44_Data02_OnItemOffered,medium,Second target of AICMD0x2D (A pressed while carrying an item)
+pAIScripting0x44_L057,pAIScripting0x44_Data02_Actor01_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x44_L059,pAIScripting0x44_Data03_WaitInteract,high,Block polls AICMD0x2D (interact / item offered)
+pAIScripting0x44_L069,pAIScripting0x44_Data03_OnInteract,medium,First target of AICMD0x2D (A pressed without carried item)
+pAIScripting0x44_L060,pAIScripting0x44_Data03_OnItemOffered,medium,Second target of AICMD0x2D (A pressed while carrying an item)
+pAIScripting0x44_L087,pAIScripting0x44_Data04_WaitInteract,high,Block polls AICMD0x2D (interact / item offered)
+pAIScripting0x44_L098,pAIScripting0x44_Data04_OnInteract,medium,First target of AICMD0x2D (A pressed without carried item)
+pAIScripting0x44_L088,pAIScripting0x44_Data04_OnItemOffered,medium,Second target of AICMD0x2D (A pressed while carrying an item)
+pAIScripting0x44_L116,pAIScripting0x44_Data05_WaitInteract,high,Block polls AICMD0x2D (interact / item offered)
+pAIScripting0x44_L126,pAIScripting0x44_Data05_OnInteract,medium,First target of AICMD0x2D (A pressed without carried item)
+pAIScripting0x44_L117,pAIScripting0x44_Data05_OnItemOffered,medium,Second target of AICMD0x2D (A pressed while carrying an item)
+pAIScripting0x44_L144,pAIScripting0x44_Data05_Actor01_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x44_L146,pAIScripting0x44_Data05_Actor02_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x45_L002,pAIScripting0x45_Data01_WaitInteract,high,Block polls AICMD0x2D (interact / item offered)
+pAIScripting0x45_L008,pAIScripting0x45_Data01_OnInteract,medium,First target of AICMD0x2D (A pressed without carried item)
+pAIScripting0x45_L004,pAIScripting0x45_Data01_OnItemOffered,medium,Second target of AICMD0x2D (A pressed while carrying an item)
+pAIScripting0x45_L003,pAIScripting0x45_Data01_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x45_L013,pAIScripting0x45_Data01_WaitInteract2,high,Block polls AICMD0x2D (interact / item offered)
+pAIScripting0x45_L014,pAIScripting0x45_Data01_OnInteract2,medium,First target of AICMD0x2D (A pressed without carried item)
+pAIScripting0x45_L027,pAIScripting0x45_Data02_WaitInteract,high,Block polls AICMD0x2D (interact / item offered)
+pAIScripting0x45_L030,pAIScripting0x45_Data02_WaitInteract2,high,Block polls AICMD0x2D (interact / item offered)
+pAIScripting0x45_L033,pAIScripting0x45_Data02_WaitInteract3,high,Block polls AICMD0x2D (interact / item offered)
+pAIScripting0x45_L043,pAIScripting0x45_Data03_WaitInteract,high,Block polls AICMD0x2D (interact / item offered)
+pAIScripting0x45_L045,pAIScripting0x45_Data04_WaitInteract,high,Block polls AICMD0x2D (interact / item offered)
+pAIScripting0x45_L051,pAIScripting0x45_Data04_OnInteract,medium,First target of AICMD0x2D (A pressed without carried item)
+pAIScripting0x45_L047,pAIScripting0x45_Data04_OnItemOffered,medium,Second target of AICMD0x2D (A pressed while carrying an item)
+pAIScripting0x45_L046,pAIScripting0x45_Data04_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x45_L056,pAIScripting0x45_Data04_WaitInteract2,high,Block polls AICMD0x2D (interact / item offered)
+pAIScripting0x45_L057,pAIScripting0x45_Data04_OnInteract2,medium,First target of AICMD0x2D (A pressed without carried item)
+pAIScripting0x45_L070,pAIScripting0x45_Data05_WaitInteract,high,Block polls AICMD0x2D (interact / item offered)
+pAIScripting0x45_L073,pAIScripting0x45_Data05_WaitInteract2,high,Block polls AICMD0x2D (interact / item offered)
+pAIScripting0x45_L076,pAIScripting0x45_Data05_WaitInteract3,high,Block polls AICMD0x2D (interact / item offered)
+pAIScripting0x45_L086,pAIScripting0x45_Data06_WaitInteract,high,Block polls AICMD0x2D (interact / item offered)
+pAIScripting0x46_L019,pAIScripting0x46_Data13_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x46_L020,pAIScripting0x46_Data13_Actor02_Maria,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x46_L021,pAIScripting0x46_Data13_Actor02_Ann,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x46_L022,pAIScripting0x46_Data13_Actor02_Nina,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x46_L023,pAIScripting0x46_Data13_Actor02_Ellen,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x46_L024,pAIScripting0x46_Data13_Actor02_Eve,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x46_L028,pAIScripting0x46_Data13_Actor04,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x46_L029,pAIScripting0x46_Data13_Actor03,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x46_L033,pAIScripting0x46_Data13_Actor05,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x46_L035,pAIScripting0x46_Data13_Actor06,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x46_L037,pAIScripting0x46_Data13_Actor07,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x46_L039,pAIScripting0x46_Data13_Actor08,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x46_L032,pAIScripting0x46_Data13_Actor03_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x46_L034,pAIScripting0x46_Data13_Actor05_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x46_L036,pAIScripting0x46_Data13_Actor06_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x46_L038,pAIScripting0x46_Data13_Actor07_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x46_L040,pAIScripting0x46_Data13_Actor08_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x46_L003,pAIScripting0x46_Data13_ShowRanchRate,medium,Role read from the dialog text and surrounding commands
+pAIScripting0x46_L004,pAIScripting0x46_Data13_RateStillFarToGo,medium,Role read from the dialog text and surrounding commands
+pAIScripting0x46_L005,pAIScripting0x46_Data13_RateTryHarder,medium,Role read from the dialog text and surrounding commands
+pAIScripting0x46_L006,pAIScripting0x46_Data13_RateAlmost,medium,Role read from the dialog text and surrounding commands
+pAIScripting0x46_L007,pAIScripting0x46_Data13_RateGreat,medium,Role read from the dialog text and surrounding commands
+pAIScripting0x46_L008,pAIScripting0x46_Data13_RatePerfect,medium,Role read from the dialog text and surrounding commands
+pAIScripting0x46_L010,pAIScripting0x46_Data13_SelectSpouseScene,medium,Role read from the dialog text and surrounding commands
+pAIScripting0x46_L018,pAIScripting0x46_Data13_ScrollOut,medium,Role read from the dialog text and surrounding commands
+pAIScripting0x47_HowToPlay_L001,pAIScripting0x47_HowToPlay_Data08_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x47_HowToPlay_L003,pAIScripting0x47_HowToPlay_Data18_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x47_HowToPlay_L005,pAIScripting0x47_HowToPlay_Data18_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x47_HowToPlay_L007,pAIScripting0x47_HowToPlay_Data22_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x47_HowToPlay_L008,pAIScripting0x47_HowToPlay_Data22_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x47_HowToPlay_L010,pAIScripting0x47_HowToPlay_Data23_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x47_HowToPlay_L012,pAIScripting0x47_HowToPlay_Data24_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x47_HowToPlay_L014,pAIScripting0x47_HowToPlay_Data24_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x47_HowToPlay_L016,pAIScripting0x47_HowToPlay_Data25_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x47_HowToPlay_L018,pAIScripting0x47_HowToPlay_Data26_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x47_HowToPlay_L020,pAIScripting0x47_HowToPlay_Data26_Actor03,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x47_HowToPlay_L022,pAIScripting0x47_HowToPlay_Data26_Actor06,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x47_HowToPlay_L024,pAIScripting0x47_HowToPlay_Data26_Actor07,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x47_HowToPlay_L026,pAIScripting0x47_HowToPlay_Data26_Actor0B,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x47_HowToPlay_L028,pAIScripting0x47_HowToPlay_Data26_Actor0D,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x47_HowToPlay_L030,pAIScripting0x47_HowToPlay_Data26_Actor0E,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x47_HowToPlay_L032,pAIScripting0x47_HowToPlay_Data26_Actor0F,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x47_HowToPlay_L034,pAIScripting0x47_HowToPlay_Data26_Actor10,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x47_HowToPlay_L036,pAIScripting0x47_HowToPlay_Data26_Actor11,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x47_HowToPlay_L038,pAIScripting0x47_HowToPlay_Data26_Actor12,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x47_HowToPlay_L040,pAIScripting0x47_HowToPlay_Data26_Actor13,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x47_HowToPlay_L042,pAIScripting0x47_HowToPlay_Data28_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x47_HowToPlay_L044,pAIScripting0x47_HowToPlay_Data28_Actor02,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x47_HowToPlay_L046,pAIScripting0x47_HowToPlay_Data30_Actor01,high,Target of AICMD0x09_StartScript (child script of the entry); NPC from nLove_* when present
+pAIScripting0x47_HowToPlay_L002,pAIScripting0x47_HowToPlay_Data08_Actor01_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x47_HowToPlay_L004,pAIScripting0x47_HowToPlay_Data18_Actor01_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x47_HowToPlay_L006,pAIScripting0x47_HowToPlay_Data18_Actor02_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x47_HowToPlay_L009,pAIScripting0x47_HowToPlay_Data22_Actor02_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x47_HowToPlay_L011,pAIScripting0x47_HowToPlay_Data23_Actor01_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x47_HowToPlay_L013,pAIScripting0x47_HowToPlay_Data24_Actor01_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x47_HowToPlay_L015,pAIScripting0x47_HowToPlay_Data24_Actor02_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x47_HowToPlay_L017,pAIScripting0x47_HowToPlay_Data25_Actor01_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x47_HowToPlay_L019,pAIScripting0x47_HowToPlay_Data26_Actor01_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x47_HowToPlay_L021,pAIScripting0x47_HowToPlay_Data26_Actor03_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x47_HowToPlay_L023,pAIScripting0x47_HowToPlay_Data26_Actor06_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x47_HowToPlay_L025,pAIScripting0x47_HowToPlay_Data26_Actor07_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x47_HowToPlay_L027,pAIScripting0x47_HowToPlay_Data26_Actor0B_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x47_HowToPlay_L029,pAIScripting0x47_HowToPlay_Data26_Actor0D_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x47_HowToPlay_L031,pAIScripting0x47_HowToPlay_Data26_Actor0E_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x47_HowToPlay_L033,pAIScripting0x47_HowToPlay_Data26_Actor0F_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x47_HowToPlay_L035,pAIScripting0x47_HowToPlay_Data26_Actor10_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x47_HowToPlay_L037,pAIScripting0x47_HowToPlay_Data26_Actor11_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x47_HowToPlay_L039,pAIScripting0x47_HowToPlay_Data26_Actor12_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x47_HowToPlay_L041,pAIScripting0x47_HowToPlay_Data26_Actor13_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x47_HowToPlay_L043,pAIScripting0x47_HowToPlay_Data28_Actor01_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x47_HowToPlay_L045,pAIScripting0x47_HowToPlay_Data28_Actor02_Idle,high,Block only waits one frame and jumps to itself
+pAIScripting0x47_HowToPlay_L047,pAIScripting0x47_HowToPlay_Data30_Actor01_Idle,high,Block only waits one frame and jumps to itself
