@@ -605,6 +605,10 @@ def load_translation(lang):
 def render_reference(words, region, ctx):
     """Readable form of the words of an extracted dialog with symbolic variables (`<VAR player>`); used by the worksheet only."""
     cm = dialog.load_charmap(region)
+    if region == "jp":
+        cm = dict(cm)
+        for k, ch in read_json(DEFS / "jp_display_extra.json")["glyphs"].items():
+            cm.setdefault(int(k, 16), ch)           # display only: glyph ids the converter keeps as <XXXX>
     text = dialog.words_to_text(words, cm)
 
     def sub(m):
