@@ -1,7 +1,50 @@
+;;
+; @file   ai_engine.asm
+; @brief  Interpreter of the AI script byte-code ("AI" = NPC / animal / cut-scene scripts) plus the per-actor update
+;         handlers (chicken, cow, mole, horse, dog) that are themselves script commands.
+; @details The engine owns 49 "slots" (strcAIUnknown, 64 bytes each, $7EB586-$7EC1C5). A slot runs one script: the
+;         24-bit script pointer lives at slot +$30 (word) / +$32 (bank) and is copied to ptrAIActionData while a command runs.
+;         Every frame fAI_RunSlots walks the slots: an active slot with wait counter (+$10) = 0 executes commands through
+;         the jump table aAIActions (opcode*2, generated in build/gen/blocks/ai_action_tables.asm; macros: src/ai/commands.asm,
+;         docs: docs/ai/commands.md) until a command leaves a non-zero wait counter; then the slot movement / object update
+;         (fAI_UpdateSlotMovementAndObject) runs.
+;
+;         Command handler convention: entered with JSR from fAI_ExecuteAiAction in M16X16, ptrAIActionData -> opcode byte,
+;         ptrAIUnknown0xCC -> current slot ($7E:xxxx long pointer). The handler advances ptrAIActionData past the opcode and
+;         its operands (macro AIMoveAction) or replaces it with a jump target (16-bit, bank unchanged), may use ptrTemp0x72
+;         and strcVariables.n8Temp*/n16Temp* as scratch, and returns with RTS. To yield it adds 1 to the wait counter (+$10).
+;         Handlers need not preserve the register width (the caller reloads REP #$30).
+;
+;         Slot layout (offsets; names in structures.asm are still unk*; meanings derived from this file):
+;           +00 active (bit0; bit1 = passable, set by 0x4C)      +01 update flags: bit0 object active, bit1 create object,
+;           bit2 refresh/replace sprite, bit3 wander enabled, bit4 skip wander+step move, bit5 step move (0x0D),
+;           bit6 destroy object, bit7 free walk (skip home-range test, use collision)
+;           +02 direction index 0..3 (0 down, 1 up, 2/3 horizontal)   +03/+04 dx/dy per step (signed)
+;           +05/+06 step period / step counter   +07/+08 walk segment length / steps left   +09/+0A range X / range Y
+;           +0B step delay   +0C "player near" flag (written outside this file; read by talk / pick-up commands)
+;           +0D random value (0x17)   +0E animal state ($C2/$E0/$E1 for cows, $E0 for chickens)   +0F preferred direction mask 1/2/4/8
+;           +10 wait counter (word)   +12 game object index (word)   +14 flip bits (word, value<<6)   +16 sprite table index
+;           +18 previous sprite index   +1A/+1C position X/Y (word)   +1E/+20 home point X/Y (wander centre)
+;           +30/+32 script pointer (word/bank)   +33 stop sprite table ptr (bank $B3)   +36 walk sprite table ptr (bank $B3)
+;           +3F entity / slot id (chicken $24+n, cow $18+n, other fixed ids)
+; @bank   $84   @range $848000-$84C033
+; @see    src/ai/commands.asm, docs/ai/commands.md, docs/regions-ai.md, src/common/macros.asm (AIMoveAction, AIExecute)
+;;
  
     ORG $848000
  
  
+;;
+; @brief   Deactivates all 49 AI slots (writes 0 to the active byte +00 of every slot).
+; @details Used when an area is (re)loaded or a new game starts so no script of the previous area keeps running. Only
+;          byte +00 is cleared; the other slot fields stay stale until a script is started in the slot.
+; @mode    M16X16 -> M16X16
+; @clobbers A X Y
+; @modifies ptrAIUnknown0xCC
+; @note    Also writes slot fields: strcAIUnknown[0..48].+00.
+; @calls   fAI_SelectSlot
+; @callers fMap_ResetAndLoadDestinationArea, fMainMenu_StateOpeningDemo, fMainMenu_StartHowToPlayDemo
+;;
 fAI_ClearAllSlots:
     REP #$30                                                   ;848000|C230    |      ;
     LDX.W #$0000                                               ;848002|A20000  |      ;
@@ -22,6 +65,18 @@ fAI_ClearAllSlots:
     RTL                                                        ;84801F|6B      |      ;
  
  
+;;
+; @brief   Stops the script of the currently selected slot and destroys the game object it owns.
+; @details Clears the active byte (+00) of the slot ptrAIUnknown0xCC points to, then loads the game object index from +12
+;          into strcObject.gameObjectIdx and calls fObject_Destroy. Used for animals / pick-ups that vanish when the player
+;          picks them up (chickens, cow, dog, items).
+; @param   ptrAIUnknown0xCC  slot to deactivate (set with fAI_SelectSlot)
+; @modifies strcObject.gameObjectIdx
+; @note    Also writes slot fields: strcAIUnknown.+00.
+; @mode    M16X16 -> M16X16
+; @clobbers A Y
+; @calls   fAI_SelectSlot, fObject_Destroy
+;;
 fAI_DeactivateSlotAndObject:
     REP #$30                                                   ;848020|C230    |      ;
     JSL.L fAI_SelectSlot                                     ;848022|227C8884|84887C;
@@ -38,6 +93,22 @@ fAI_DeactivateSlotAndObject:
     RTL                                                        ;84803E|6B      |      ;
  
  
+;;
+; @brief   Starts script number Y of script set X in slot A while keeping the slot's game object.
+; @details Looks up the 24-bit pointer of script set X in the list pppAISelector (3 bytes per set, bank $B3), then the 16-bit
+;          start address of script Y inside that set, stores the resulting 24-bit pointer in the slot (+30/+32) and in
+;          ptrAIActionData, and re-initialises the slot with fAI_ResetSlotKeepObject (flags = 1, counters 0, object kept).
+;          The animal handlers use it to start behaviour sub-scripts (idle poses, walking, reacting to tools).
+; @param   A  slot number (0..48); the animal handlers pass fixed slots (mole $11, dog $16, horse $17) or their own id from +3F
+; @param   X  script set index (entry of pppAISelector; the animal handlers all use set 0)
+; @param   Y  script index inside the set
+; @modifies ptrAIUnknown0xCC, ptrUnknown0x75, ptrObjectData, ptrAIActionData, strcVariables.n16Temp1, strcVariables.n16Temp2
+; @note    Also writes slot fields: strcAIUnknown.+30/+32 and slot reset fields.
+; @mode    M16X16 -> M16X16
+; @clobbers A X Y
+; @calls   fAI_SelectSlot, fAI_ResetSlotKeepObject
+; @note    confidence: medium - the use of fixed slots for mole / dog / horse is taken from the callers; the script contents were not decoded.
+;;
 fAI_SetSlotScript:
     REP #$30                                                   ;84803F|C230    |      ; A: nArg1, X: nIndex, Y: nSubindex
     JSL.L fAI_SelectSlot                                     ;848041|227C8884|84887C; $0xCC = 7EB586 + A * 64
@@ -85,6 +156,21 @@ fAI_SetSlotScript:
     RTL                                                        ;848096|6B      |      ;
  
  
+;;
+; @brief   Starts script Y of script set X in slot A with a full slot reset (also drops the old game object link).
+; @details Same lookup as fAI_SetSlotScript (pppAISelector -> set -> script address), but the slot is initialised with
+;          fAI_ResetSlotFull (object index, flip, position cleared) and the slot number A is stored in +3F afterwards. This is the
+;          entry used by the AIExecute macro from area event code to start area / cut-scene scripts.
+; @param   A  slot number (0..48); also stored in +3F
+; @param   X  script set index
+; @param   Y  script index inside the set
+; @modifies ptrAIUnknown0xCC, ptrTemp0x72, ptrAIActionData, strcVariables.n16Temp1, strcVariables.n16Temp2
+; @note    Also writes slot fields: slot +30/+32/+3F and reset fields.
+; @mode    M16X16 -> M16X16
+; @clobbers A X Y
+; @calls   fAI_SelectSlot, fAI_ResetSlotFull
+; @note    Old name fAI_SetupAreaScripting.
+;;
 fAI_StartSlotScript:
     REP #$30                                                   ;848097|C230    |      ; A: nArg1, X: nIndex, Y: nSubindex
     PHA                                                        ;848099|48      |      ;
@@ -137,6 +223,20 @@ fAI_StartSlotScript:
     RTL                                                        ;8480F7|6B      |      ;
  
  
+;;
+; @brief   Starts a script in slot A (like fAI_StartSlotScript) and places the actor on the tile in front of the player.
+; @details After the script is installed (full reset, +3F = A) the slot position (+1A/+1C) is copied from
+;          nTileInFrontOfPlayerX / nTileInFrontOfPlayerY. Used by tool / item actions that spawn an effect or item at the
+;          target tile (coins, power berries, crops, fish, sprinkler results, ...).
+; @param   A  slot number
+; @param   X  script set index
+; @param   Y  script index inside the set
+; @modifies ptrAIUnknown0xCC, ptrTemp0x72, ptrAIActionData, strcVariables.n16Temp1, strcVariables.n16Temp2
+; @note    Also writes slot fields: slot fields.
+; @mode    M16X16 -> M16X16
+; @clobbers A X Y
+; @calls   fAI_SelectSlot, fAI_ResetSlotFull
+;;
 fAI_StartSlotScriptAtFrontTile:
     REP #$30                                                   ;8480F8|C230    |      ; A: nArg1, X: nIndex, Y: nSubindex
     PHA                                                        ;8480FA|48      |      ;
@@ -198,6 +298,23 @@ fAI_StartSlotScriptAtFrontTile:
     RTL                                                        ;84816E|6B      |      ;
  
  
+;;
+; @brief   Per-frame AI step: executes script commands and movement of every active slot.
+; @details Skipped completely while a dialog handler runs (strcDialogDisplay.mapUnk19A = 2 or 6) or while the player action is
+;          PACTION_JUMP. Otherwise rolls strcPlayer.lastRandomNumber and walks all 49 slots from $7EB586: for an active slot
+;          (+00 bit0) with wait counter +10 = 0 it clears dx/dy (unless wander flag bit3 is set) and runs fAI_ExecuteAiAction
+;          repeatedly while the counter stays 0 (so a script may run many commands per frame); a non-zero counter is decremented
+;          instead. Afterwards lastRandomNumber += $33 (different pseudo random per slot) and, if the slot is still active,
+;          fAI_UpdateSlotMovementAndObject updates movement and the sprite object. At the end the one-frame event flags
+;          daily1 $01D0, daily2 $0400, daily3 $0040 and daily4 $0010 are cleared.
+; @mode    M8X16 -> M16X16
+; @clobbers A X Y
+; @modifies strcPlayer.lastRandomNumber, ptrAIUnknown0xCC
+; @note    Also writes slot fields: strcFlags.daily1-4 (bits above), all slot fields.
+; @calls   fGetRandomNumber, fAI_ExecuteAiAction, fAI_UpdateSlotMovementAndObject
+; @callers fCore_MainLoop, fMap_SetupArea, fMap_ResetAndLoadDestinationArea, fMainMenu_PrepareHowToPlay, fMainMenu_StateOpeningDemo, fMainMenu_StartHowToPlayDemo
+; @note    A script that never yields (Jump -> Jump without a wait) would hang the game.
+;;
 fAI_RunSlots:
     SEP #$20                                                   ;84816F|E220    |      ;
     REP #$10                                                   ;848171|C210    |      ;
@@ -258,6 +375,7 @@ fAI_RunSlots:
  
  
 .decrement_timer:
+    ; slot is waiting: count the wait counter (+10) down; commands resume when it reaches 0
     DEC A                                                      ;8481DF|3A      |      ;
     REP #$30                                                   ;8481E0|C230    |      ;
     LDY.W #$0010                                               ;8481E2|A01000  |      ;
@@ -281,6 +399,7 @@ fAI_RunSlots:
     JSR.W fAI_UpdateSlotMovementAndObject                                    ;848206|208682  |848286;
  
 .next_slot:
+    ; advance to the next 64-byte slot; 49 slots in total ($31)
     REP #$30                                                   ;848209|C230    |      ;
     LDA.B ptrAIUnknown0xCC                                     ;84820B|A5CC    |0000CC;
     CLC                                                        ;84820D|18      |      ;
@@ -292,6 +411,7 @@ fAI_RunSlots:
     BNE --                                                     ;848218|D090    |8481AA;
  
 .return:
+    ; clear the one-frame event flags (set by tools / player actions, consumed by the AI scripts this frame)
     REP #$20                                                   ;84821A|C220    |      ;
     %UnsetFlag(daily1, $01D0)
     %UnsetFlag(daily2, $0400)
@@ -300,6 +420,17 @@ fAI_RunSlots:
     RTL                                                        ;848248|6B      |      ;
  
  
+;;
+; @brief   Fetches the command opcode of the current slot, dispatches to its handler and stores the new script pointer.
+; @details Loads the 24-bit script pointer from slot +30/+32 into ptrAIActionData, reads the opcode byte, calls
+;          aAIActions[opcode] with JSR and writes the (advanced or jumped) ptrAIActionData back to the slot.
+; @param   ptrAIUnknown0xCC  current slot
+; @modifies ptrAIActionData
+; @note    Also writes slot fields: slot +30/+32.
+; @mode    M16X16 -> M8X16
+; @clobbers A X Y
+; @calls   aAIActions (indexed by opcode: fAIAction0x00 .. fAIAction0x59)
+;;
 fAI_ExecuteAiAction:
     REP #$30                                                   ;848249|C230    |      ;
     REP #$30                                                   ;84824B|C230    |      ;
@@ -333,6 +464,20 @@ fAI_ExecuteAiAction:
     RTS                                                        ;848285|60      |      ;
  
  
+;;
+; @brief   Applies the slot's wander / step movement and synchronises its game object (create, replace sprite, move, destroy).
+; @details If bit4 of the update flags (+01) is clear, runs fAI_UpdateSlotWander and fAI_UpdateSlotStepMove. Then copies object
+;          index (+12), flip (+14), position (+1A/+1C) and sprite index (+16) into strcObject and acts on the flags:
+;          bit6 -> fObject_Destroy; bit1 -> fObject_Create (the new object index is stored in +12); bit2 -> fObject_Replace when
+;          the sprite index changed since +18; otherwise fObject_UpdatePositionAndFlip. Finally +18 = +16 and the one-shot flag
+;          bits 1, 2 and 4 are cleared (flags &= $E9).
+; @param   ptrAIUnknown0xCC  current slot
+; @modifies strcObject.gameObjectIdx, strcObject.flip, strcObject.posX, strcObject.posY, strcObject.spriteTableIdx
+; @note    Also writes slot fields: slot +01/+12/+18.
+; @mode    M16X16 -> M16X16
+; @clobbers A Y
+; @calls   fAI_UpdateSlotWander, fAI_UpdateSlotStepMove, fObject_Create, fObject_Replace, fObject_Destroy, fObject_UpdatePositionAndFlip
+;;
 fAI_UpdateSlotMovementAndObject:
     REP #$30                                                   ;848286|C230    |      ;
     SEP #$20                                                   ;848288|E220    |      ;
@@ -377,6 +522,7 @@ fAI_UpdateSlotMovementAndObject:
  
  
 .create_object:
+    ; new object: remember its index in +12
     JSL.L fObject_Create                                      ;8482DF|22008085|858000;
     REP #$30                                                   ;8482E3|C230    |      ;
     LDA.B strcObject.gameObjectIdx                             ;8482E5|A5A5    |0000A5;
@@ -387,6 +533,7 @@ fAI_UpdateSlotMovementAndObject:
  
  
 .replace_sprite:
+    ; only replace when the sprite index (+16) differs from the shown one (+18)
     REP #$30                                                   ;8482F0|C230    |      ;
     LDY.W #$0016                                               ;8482F2|A01600  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;8482F5|B7CC    |0000CC;
@@ -401,6 +548,7 @@ fAI_UpdateSlotMovementAndObject:
  
  
 .destroy_object:
+    ; flag bit6: remove the object (slot is normally deactivated by the caller)
     JSL.L fObject_Destroy                                ;84830A|22A28185|8581A2;
  
 .return:
@@ -422,6 +570,18 @@ fAI_UpdateSlotMovementAndObject:
     RTS                                                        ;848330|60      |      ;
  
  
+;;
+; @brief   Moves the slot by (dx, dy) pixels every step period while step-move flag bit5 ($20) is set.
+; @details Decrements the step counter (+06); when it reaches 0 it is reloaded from +05 and the sign-extended dx (+03) / dy (+04)
+;          are added to the position (+1A / +1C). Set up by AI command 0x0D (MoveObject) and by the wander code; the flag is never
+;          cleared here, a following 0x0D with dx = dy = 0 stops the motion.
+; @param   ptrAIUnknown0xCC  current slot
+; @modifies strcVariables.n16Temp1, strcVariables.n16Temp2
+; @note    Also writes slot fields: slot +06, +1A, +1C.
+; @mode    M16X16 -> M16X16
+; @clobbers A Y
+; @callers fAI_UpdateSlotMovementAndObject
+;;
 fAI_UpdateSlotStepMove:
     REP #$30                                                   ;848331|C230    |      ;
     SEP #$20                                                   ;848333|E220    |      ;
@@ -471,6 +631,7 @@ fAI_UpdateSlotStepMove:
     XBA                                                        ;84838A|EB      |      ;
  
 .dx_sign_done:
+    ; A = sign-extended dx; same sign extension for dy follows
     REP #$20                                                   ;84838B|C220    |      ;
     STA.B strcVariables.n16Temp1                               ;84838D|857E    |00007E;
     LDA.W #$0000                                               ;84838F|A90000  |      ;
@@ -511,6 +672,26 @@ fAI_UpdateSlotStepMove:
     RTS                                                        ;8483CB|60      |      ;
  
  
+;;
+; @brief   Random walk of an NPC / animal around its home point (wander flag bit3 of +01).
+; @details Only acts on frames where the step counter (+06) equals the step period (+05). When the walk segment counter (+08) is
+;          0 a new segment starts (+08 = +07) and a direction is chosen: from the preferred direction mask (+0F: 1 down, 2 up,
+;          4 and 8 horizontal) when set, otherwise from strcPlayer.lastRandomNumber (values 0..3 pick a direction, anything else
+;          stops). For the chosen direction the slot position is compared with the home point (+1E/+20) +/- the range (+09 X,
+;          +0A Y); when it would leave the range, or the segment ends, the walk stops (dx = dy = 0, stop sprite table from +33
+;          via fAI_LoadSlotSpriteFromDirTable, refresh flag bit2 set). A started walk loads dx/dy (+/-1), direction index (+02),
+;          step period from +0B and the walking sprite table (+36). With flag bit7 (free walk) the range test is skipped and
+;          the move is checked with fGameEngine_DirectionHandler83AF37 / fGameEngine_CheckDirectionalOverlap (map collision and
+;          player overlap; tile ids $E1/$C0-$CF/$FF special cased, +3F in $18-$23 exempt); a blocked step resets velocity and
+;          the preferred direction (+0F).
+; @param   ptrAIUnknown0xCC  current slot
+; @modifies strcPlayer.lastX, strcPlayer.lastY, strcPlayer.newX, strcPlayer.newY, strcPlayer.unkE3, strcVariables.n8Temp1, strcVariables.n16Temp1, strcVariables.n16Temp2, ptrTemp0x72
+; @note    Also writes slot fields: slot +02..+0F.
+; @mode    M16X16 -> M16X16
+; @clobbers A Y
+; @calls   fAI_LoadSlotSpriteFromDirTable, fGameEngine_DirectionHandler83AF37, fGameEngine_CheckDirectionalOverlap
+; @note    Which of the horizontal directions is left or right is not verified (the PDIR enum has 2 = left, 3 = right but this code adds +1 to X for index 2); confidence: low for that detail.
+;;
 fAI_UpdateSlotWander:
     REP #$30                                                   ;8483CC|C230    |      ;
     SEP #$20                                                   ;8483CE|E220    |      ;
@@ -562,6 +743,7 @@ fAI_UpdateSlotWander:
  
  
 .default:
+    ; no preferred direction (+0F = 0): the random byte picks 0 down, 1 up, 2 (+X), 3 (-X)
     SEP #$20                                                   ;848423|E220    |      ;
     LDA.B strcPlayer.lastRandomNumber                          ;848425|A5DE    |0000DE;
     CMP.B #$00                                                 ;848427|C900    |      ;
@@ -588,6 +770,7 @@ fAI_UpdateSlotWander:
  
  
 .moving_check_limit:
+    ; segment still running: stop when the next step would leave the home-point range (skipped with flag bit7)
     SEP #$20                                                   ;848446|E220    |      ;
     REP #$10                                                   ;848448|C210    |      ;
     LDY.W #$0001                                               ;84844A|A00100  |      ;
@@ -912,6 +1095,7 @@ fAI_UpdateSlotWander:
  
  
 .stop_walking:
+    ; end of walk: zero velocity and segment counter, show the standing sprite (+33 table)
     SEP #$20                                                   ;8486B3|E220    |      ;
     LDY.W #$0003                                               ;8486B5|A00300  |      ;
     LDA.B #$00                                                 ;8486B8|A900    |      ;
@@ -943,6 +1127,7 @@ fAI_UpdateSlotWander:
  
  
 .set_walk_sprite:
+    ; walking: use the walking sprite table (+36)
     REP #$30                                                   ;8486F4|C230    |      ;
     LDY.W #$0036                                               ;8486F6|A03600  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;8486F9|B7CC    |0000CC;
@@ -989,6 +1174,7 @@ fAI_UpdateSlotWander:
  
  
 .try_move:
+    ; free walk only: test map collision with the player-move helpers (|dx|, |dy| passed as strcPlayer.newX/newY)
     REP #$20                                                   ;848749|C220    |      ;
     REP #$30                                                   ;84874B|C230    |      ;
     LDY.W #$001A                                               ;84874D|A01A00  |      ;
@@ -1156,6 +1342,13 @@ fAI_UpdateSlotWander:
     JMP.W .check_overlap                                             ;848879|4CFD87  |8487FD;
  
  
+;;
+; @brief   Points ptrAIUnknown0xCC at slot A ($7EB586 + A * 64).
+; @param   A  slot number (0..48)
+; @modifies ptrAIUnknown0xCC, strcVariables.n16Temp1
+; @mode    M16X16 -> M16X16
+; @clobbers A
+;;
 fAI_SelectSlot:
     REP #$30                                                   ;84887C|C230    |      ; A: nIndex, return $0xCC
     ASL A                                                      ;84887E|0A      |      ;
@@ -1175,6 +1368,19 @@ fAI_SelectSlot:
     RTL                                                        ;848894|6B      |      ;
  
  
+;;
+; @brief   Selects sprite index and flip for the slot's direction from a 3-byte-per-direction table.
+; @details The table at [ptrTemp0x72] has one entry per direction: [word sprite table index][byte flip index]. The entry for
+;          the slot direction (+02) is read; the sprite index goes to +16 and flip index * 64 (flip bits shifted to bit 6/7 of the
+;          OAM attribute) to +14.
+; @param   ptrTemp0x72  24-bit pointer to the direction table (bank $B3; usually slot +33 or +36)
+; @param   ptrAIUnknown0xCC  current slot (+02 = direction)
+; @modifies strcVariables.n16Temp1
+; @note    Also writes slot fields: slot +14, +16.
+; @mode    M16X16 -> M16X16
+; @clobbers A Y
+; @callers fAI_UpdateSlotWander, fAIAction0x1A_SpawnNpc, fAIAction0x1F_JumpIfTalkedTo, fAIAction0x2B_SpawnActor, fAIAction0x2D_JumpOnInteract, fAIAction0x2F_SetActorSpriteTable, fAIAction0x49_SetSpriteTableFacingPlayer, fAIAction0x4D_JumpIfBlueFeatherUsed
+;;
 fAI_LoadSlotSpriteFromDirTable:
     REP #$30                                                   ;848895|C230    |      ;
     SEP #$20                                                   ;848897|E220    |      ;
@@ -1216,6 +1422,15 @@ fAI_LoadSlotSpriteFromDirTable:
     RTL                                                        ;8488D3|6B      |      ;
  
  
+;;
+; @brief   Initialises a slot for a freshly started script: active, no flags, no motion, no object, position 0.
+; @details Sets +00 = 1 and clears +01 flags, +03..+06, +0C, +0F, +10, +12, +14, +1A, +1C. Compare fAI_ResetSlotKeepObject.
+; @param   ptrAIUnknown0xCC  slot to reset
+; @note    Also writes slot fields: slot +00 .. +1C (see above).
+; @mode    M16X16 -> M16X16 (JSR)
+; @clobbers A Y
+; @callers fAI_StartSlotScript, fAI_StartSlotScriptAtFrontTile, fAIAction0x09_StartScript
+;;
 fAI_ResetSlotFull:
     REP #$30                                                   ;8488D4|C230    |      ;
     SEP #$20                                                   ;8488D6|E220    |      ;
@@ -1281,6 +1496,15 @@ fAI_ResetSlotFull:
     RTS                                                        ;848960|60      |      ;
  
  
+;;
+; @brief   Re-initialises a running slot for a new script but keeps its game object, flip, sprite and position.
+; @details Sets +00 = 1 and +01 = 1 (object active), clears +03..+06, +0F and the wait counter +10. Used by fAI_SetSlotScript.
+; @param   ptrAIUnknown0xCC  slot to reset
+; @note    Also writes slot fields: slot +00, +01, +03..+06, +0F, +10.
+; @mode    M16X16 -> M16X16 (JSR)
+; @clobbers A Y
+; @callers fAI_SetSlotScript
+;;
 fAI_ResetSlotKeepObject:
     REP #$30                                                   ;848961|C230    |      ;
     SEP #$20                                                   ;848963|E220    |      ;
@@ -1325,6 +1549,14 @@ fAI_ResetSlotKeepObject:
     RTS                                                        ;8489BA|60      |      ;
  
  
+;;
+; @brief   AI command 0x00: request background music track nMusicTrackId.
+; @details Operands: [track id][unused byte, $B4 in US scripts]. Only writes strcAudio.trackId; the audio engine starts the track
+;          when it notices the change (see fAIAction0x0E_ApplyMusicChange).
+; @case    $00
+; @modifies ptrAIActionData, strcAudio.trackId
+; @mode    M16X16 -> ?
+;;
 fAIAction0x00_SetMusicTrack:
     REP #$30                                                   ;8489BB|C230    |      ;
     %AIMoveAction($0001)
@@ -1336,6 +1568,14 @@ fAIAction0x00_SetMusicTrack:
     RTS                                                        ;8489E2|60      |      ;
  
  
+;;
+; @brief   AI command 0x01: let in-game time run again.
+; @details Sets nTimeState = 1, clears daily2 bit $0001 and sets bit $0020 of strcDialogDisplay.mapFlags (meaning of both bits unknown).
+;          Inverse of 0x02.
+; @case    $01
+; @modifies ptrAIActionData, nTimeState, strcFlags.daily2, strcDialogDisplay.mapFlags
+; @mode    M16X16 -> ?
+;;
 fAIAction0x01_UnfreezeTime:
     REP #$30                                                   ;8489E3|C230    |      ;
     %AIMoveAction($0001)
@@ -1350,6 +1590,13 @@ fAIAction0x01_UnfreezeTime:
     RTS                                                        ;848A0C|60      |      ;
  
  
+;;
+; @brief   AI command 0x02: stop in-game time (cut scenes, dialogs).
+; @details Sets nTimeState = 0, sets daily2 bit $0001 and clears bit $0020 of strcDialogDisplay.mapFlags. Inverse of 0x01.
+; @case    $02
+; @modifies ptrAIActionData, nTimeState, strcFlags.daily2, strcDialogDisplay.mapFlags
+; @mode    M16X16 -> ?
+;;
 fAIAction0x02_FreezeTime:
     REP #$30                                                   ;848A0D|C230    |      ;
     %AIMoveAction($0001)
@@ -1365,6 +1612,14 @@ fAIAction0x02_FreezeTime:
     RTS                                                        ;848A38|60      |      ;
  
  
+;;
+; @brief   AI command 0x03: write the operand byte to nCurrentTimeID.
+; @details Operand: [value] (scripts use $07, $11, $12; probably hours). The name SetHour is a guess.
+; @case    $03
+; @modifies ptrAIActionData, nCurrentTimeID
+; @mode    M16X16 -> ?
+; @note    confidence: low - nCurrentTimeID may be a time-of-day index rather than an hour.
+;;
 fAIAction0x03_SetHour:
     REP #$30                                                   ;848A39|C230    |      ;
     %AIMoveAction($0001)
@@ -1375,12 +1630,25 @@ fAIAction0x03_SetHour:
     RTS                                                        ;848A57|60      |      ;
  
  
+;;
+; @brief   AI command 0x04: no operation (only skips the opcode byte).
+; @case    $04
+; @modifies ptrAIActionData
+; @mode    M16X16 -> ?
+;;
 fAIAction0x04_Nop:
     REP #$30                                                   ;848A58|C230    |      ;
     %AIMoveAction($0001)
     RTS                                                        ;848A64|60      |      ;
  
  
+;;
+; @brief   AI command 0x05: set the player position and the map transfer destination to (X, Y).
+; @details Operands: [word X][word Y]; each is stored to strcDialogDisplay.mapDestX/Y and to strcPlayer.posX/posY.
+; @case    $05
+; @modifies ptrAIActionData, strcDialogDisplay.mapDestX, strcDialogDisplay.mapDestY, strcPlayer.posX, strcPlayer.posY
+; @mode    M16X16 -> ?
+;;
 fAIAction0x05_SetTransferPosition:
     REP #$30                                                   ;848A65|C230    |      ;
     %AIMoveAction($0001)
@@ -1395,6 +1663,15 @@ fAIAction0x05_SetTransferPosition:
     RTS                                                        ;848A93|60      |      ;
  
  
+;;
+; @brief   AI command 0x06: choose the area to load next and yield one frame.
+; @details Operand: [area id] (!AREA_*) stored to nDestinationAreaId; the wait counter (+10) is incremented so the area switch
+;          happens outside the script loop.
+; @case    $06
+; @modifies ptrAIActionData, nDestinationAreaId
+; @note    Also increments slot wait counter +10.
+; @mode    M16X16 -> ?
+;;
 fAIAction0x06_SetDestinationArea:
     REP #$30                                                   ;848A94|C230    |      ;
     %AIMoveAction($0001)
@@ -1411,6 +1688,13 @@ fAIAction0x06_SetDestinationArea:
     RTS                                                        ;848ABE|60      |      ;
  
  
+;;
+; @brief   AI command 0x07: turn the player (and its object sprite) to a direction.
+; @details Operand: [direction] (!PDIR_*). Written to strcPlayer.direction, strcObjectData.direction and strcObjectData.spriteIdx.
+; @case    $07
+; @modifies ptrAIActionData, strcPlayer.direction, strcObjectData.direction, strcObjectData.spriteIdx
+; @mode    M16X16 -> ?
+;;
 fAIAction0x07_SetPlayerDirection:
     REP #$30                                                   ;848ABF|C230    |      ;
     %AIMoveAction($0001)
@@ -1426,6 +1710,13 @@ fAIAction0x07_SetPlayerDirection:
     RTS                                                        ;848AE6|60      |      ;
  
  
+;;
+; @brief   AI command 0x08: take control away from the player so scripts can steer (clears PFLAGS_USERCONTROL).
+; @details Also zeroes strcAiControlData.input and .counter used by walk / run commands 0x39 and 0x3A. Inverse of 0x11.
+; @case    $08
+; @modifies ptrAIActionData, strcPlayer.flags, strcAiControlData.input, strcAiControlData.counter
+; @mode    M16X16 -> ?
+;;
 fAIAction0x08_EnableAIControl:
     REP #$30                                                   ;848AE7|C230    |      ;
     %AIMoveAction($0001)
@@ -1436,6 +1727,18 @@ fAIAction0x08_EnableAIControl:
     RTS                                                        ;848B07|60      |      ;
  
  
+;;
+; @brief   AI command 0x09: start a second script in another slot while the current one continues.
+; @details Operands: [slot number][word script address, same bank as the current script]. Switches ptrAIUnknown0xCC to the target
+;          slot (the current slot is kept in ptrTemp0x72), copies the bank, stores the address, resets the slot with
+;          fAI_ResetSlotFull, stores the slot number in +3F and restores the current slot. The target slot is overwritten even
+;          when it is still active.
+; @case    $09
+; @modifies ptrAIActionData, ptrAIUnknown0xCC, ptrTemp0x72
+; @note    Also writes the target slot fields +30/+32/+3F and the fields reset by fAI_ResetSlotFull.
+; @mode    M16X16 -> ?
+; @calls   fAI_SelectSlot, fAI_ResetSlotFull
+;;
 fAIAction0x09_StartScript:
     REP #$30                                                   ;848B08|C230    |      ;
     %AIMoveAction($0001)
@@ -1488,6 +1791,15 @@ fAIAction0x09_StartScript:
     RTS                                                        ;848B82|60      |      ;
  
  
+;;
+; @brief   AI command 0x0A: fade the screen in (brightness 3 -> 15, 3 frames per step) and wait for the end.
+; @details Operand: [unused, always 1]. Used only twice in the US game (earthquake aftermath, see docs/regions-ai.md; removed in EU/DE).
+; @case    $0A
+; @modifies ptrAIActionData, strcVariables.n8Temp1, strcVariables.n8Temp2, strcVariables.n8Temp3
+; @mode    M16X16 -> ?
+; @calls   fCore_ScreenFadein
+; @region  EU/DE: the two scripts that use it no longer contain the command.
+;;
 fAIAction0x0A_ScreenFadein:
     REP #$30                                                   ;848B83|C230    |      ;
     %AIMoveAction($0001)
@@ -1503,6 +1815,14 @@ fAIAction0x0A_ScreenFadein:
     RTS                                                        ;848BAB|60      |      ;
  
  
+;;
+; @brief   AI command 0x0B: set bit n of the global script flag word $7F:1F7A (inter-slot signal).
+; @details Operand: [bit number 0..15]; mask from aAISetMask. The word is cleared on new game and on map load.
+; @case    $0B
+; @modifies ptrAIActionData
+; @note    Writes $7F1F7A (no RAM symbol yet).
+; @mode    M16X16 -> ?
+;;
 fAIAction0x0B_SetScriptFlag:
     REP #$30                                                   ;848BAC|C230    |      ;
     %AIMoveAction($0001)
@@ -1521,6 +1841,15 @@ fAIAction0x0B_SetScriptFlag:
     RTS                                                        ;848BDB|60      |      ;
  
  
+;;
+; @brief   AI command 0x0C: wait until bit n of $7F:1F7A is set (set by 0x0B in another slot).
+; @details Operand: [bit number]. If the bit is clear the pointer is moved back onto the opcode and the wait counter is
+;          incremented, so the command repeats next frame; if set the script continues. The bit is not cleared.
+; @case    $0C
+; @modifies ptrAIActionData
+; @note    Also increments slot wait counter +10; reads $7F1F7A (no RAM symbol yet).
+; @mode    M16X16 -> ?
+;;
 fAIAction0x0C_WaitForScriptFlag:
     REP #$30                                                   ;848BDC|C230    |      ;
     %AIMoveAction($0001)
@@ -1553,6 +1882,17 @@ fAIAction0x0C_WaitForScriptFlag:
     RTS                                                        ;848C21|60      |      ;
  
  
+;;
+; @brief   AI command 0x0D: move the slot's object by (dx, dy) pixels per step for a number of frames.
+; @details Operands: [dx signed][dy signed][duration frames][step period]. Stores dx -> +03, dy -> +04, duration -> wait counter +10,
+;          period -> +05 and +06 and sets update flag bit5 ($20), which makes fAI_UpdateSlotStepMove apply the motion each
+;          period. The flag stays set; a later 0x0D with dx = dy = 0 stops the object.
+; @case    $0D
+; @modifies ptrAIActionData
+; @note    Writes slot fields +01, +03, +04, +05, +06, +10.
+; @mode    M16X16 -> ?
+; @note    confidence: medium - derived from fAI_UpdateSlotStepMove and script usage, not tested in an emulator.
+;;
 fAIAction0x0D_MoveObject:
     REP #$30                                                   ;848C22|C230    |      ;
     %AIMoveAction($0001)
@@ -1600,6 +1940,14 @@ fAIAction0x0D_MoveObject:
     RTS                                                        ;848CA7|60      |      ;
  
  
+;;
+; @brief   AI command 0x0E: let the audio engine switch to the requested track (fade out the old one slowly).
+; @details Operand: [unused]. Calls fAudio_FadeOutOnTrackChangeSlow, which compares strcAudio.trackId with the track in use.
+; @case    $0E
+; @modifies ptrAIActionData
+; @mode    M16X16 -> ?
+; @calls   fAudio_FadeOutOnTrackChangeSlow
+;;
 fAIAction0x0E_ApplyMusicChange:
     REP #$30                                                   ;848CA8|C230    |      ;
     %AIMoveAction($0002)
@@ -1607,6 +1955,14 @@ fAIAction0x0E_ApplyMusicChange:
     RTS                                                        ;848CB8|60      |      ;
  
  
+;;
+; @brief   AI command 0x0F: fade the screen out (brightness 15 -> 0, 3 frames per step) and wait for the end.
+; @details Operand: [unused].
+; @case    $0F
+; @modifies ptrAIActionData, strcVariables.n8Temp1, strcVariables.n8Temp2, strcVariables.n8Temp3
+; @mode    M16X16 -> ?
+; @calls   fCore_ScreenFadeout
+;;
 fAIAction0x0F_ScreenFadeout:
     REP #$30                                                   ;848CB9|C230    |      ;
     %AIMoveAction($0001)
@@ -1622,6 +1978,12 @@ fAIAction0x0F_ScreenFadeout:
     RTS                                                        ;848CE1|60      |      ;
  
  
+;;
+; @brief   AI command 0x10: end the script - the slot becomes inactive.
+; @details Does not advance the pointer; clears the active byte (+00) and bumps the wait counter.
+; @case    $10
+; @mode    M16X16 -> ?
+;;
 fAIAction0x10_End:
     REP #$30                                                   ;848CE2|C230    |      ;
     SEP #$20                                                   ;848CE4|E220    |      ;
@@ -1638,6 +2000,12 @@ fAIAction0x10_End:
     RTS                                                        ;848CFC|60      |      ;
  
  
+;;
+; @brief   AI command 0x11: give control back to the player (sets PFLAGS_USERCONTROL). Inverse of 0x08.
+; @case    $11
+; @modifies ptrAIActionData, strcPlayer.flags
+; @mode    M16X16 -> ?
+;;
 fAIAction0x11_EnableUserControl:
     REP #$30                                                   ;848CFD|C230    |      ;
     %AIMoveAction($0001)
@@ -1645,6 +2013,13 @@ fAIAction0x11_EnableUserControl:
     RTS                                                        ;848D12|60      |      ;
  
  
+;;
+; @brief   AI command 0x12: unconditional jump inside the current script bank.
+; @details Operand: [word target]. Replaces the low 16 bits of ptrAIActionData; does not yield.
+; @case    $12
+; @modifies ptrAIActionData
+; @mode    M16X16 -> ?
+;;
 fAIAction0x12_Jump:
     REP #$30                                                   ;848D13|C230    |      ;
     %AIMoveAction($0001)
@@ -1653,6 +2028,14 @@ fAIAction0x12_Jump:
     RTS                                                        ;848D23|60      |      ;
  
  
+;;
+; @brief   AI command 0x13: suspend this slot's script for n frames.
+; @details Operand: [word frames] stored to the wait counter (+10); fAI_RunSlots decrements it every frame and resumes at 0.
+; @case    $13
+; @modifies ptrAIActionData
+; @note    Writes slot wait counter +10.
+; @mode    M16X16 -> ?
+;;
 fAIAction0x13_Wait:
     REP #$30                                                   ;848D24|C230    |      ;
     %AIMoveAction($0001)
@@ -1664,6 +2047,13 @@ fAIAction0x13_Wait:
     RTS                                                        ;848D43|60      |      ;
  
  
+;;
+; @brief   AI command 0x14: jump when bit n of the 16-bit word at a 24-bit RAM address is set.
+; @details Operands: [24-bit address][bit number][word target]. Mask from aAISetMask. Used with strcFlags.* words. Counterpart of 0x55.
+; @case    $14
+; @modifies ptrAIActionData, ptrTemp0x72, strcVariables.n16Temp1
+; @mode    M16X16 -> ?
+;;
 fAIAction0x14_JumpIfFlagSet:
     REP #$30                                                   ;848D44|C230    |      ;
     %AIMoveAction($0001)
@@ -1699,6 +2089,13 @@ fAIAction0x14_JumpIfFlagSet:
     RTS                                                        ;848DA4|60      |      ;
  
  
+;;
+; @brief   AI command 0x15: jump when the byte at a 24-bit address equals a constant.
+; @details Operands: [24-bit address][value][word target].
+; @case    $15
+; @modifies ptrAIActionData, ptrTemp0x72, strcVariables.n8Temp1
+; @mode    M16X16 -> ?
+;;
 fAIAction0x15_JumpIfEquals8:
     REP #$30                                                   ;848DA5|C230    |      ;
     %AIMoveAction($0001)
@@ -1728,6 +2125,13 @@ fAIAction0x15_JumpIfEquals8:
     RTS                                                        ;848DFA|60      |      ;
  
  
+;;
+; @brief   AI command 0x16: jump when min <= byte at a 24-bit address <= max (unsigned).
+; @details Operands: [24-bit address][min][max][word target]. Implemented as byte >= min and byte < max + 1.
+; @case    $16
+; @modifies ptrAIActionData, ptrTemp0x72, strcVariables.n8Temp1, strcVariables.n8Temp2
+; @mode    M16X16 -> ?
+;;
 fAIAction0x16_JumpIfBetween8:
     REP #$30                                                   ;848DFB|C230    |      ;
     %AIMoveAction($0001)
@@ -1765,6 +2169,15 @@ fAIAction0x16_JumpIfBetween8:
     RTS                                                        ;848E67|60      |      ;
  
  
+;;
+; @brief   AI command 0x17: roll a random number below n and keep it in the slot (+0D).
+; @details Operand: [n]. Calls fCore_GetRandomNumber(n). Tested later with 0x18.
+; @case    $17
+; @modifies ptrAIActionData
+; @note    Writes slot field +0D.
+; @mode    M16X16 -> ?
+; @calls   fCore_GetRandomNumber
+;;
 fAIAction0x17_RollRandom:
     REP #$30                                                   ;848E68|C230    |      ;
     %AIMoveAction($0001)
@@ -1779,6 +2192,13 @@ fAIAction0x17_RollRandom:
     RTS                                                        ;848E8F|60      |      ;
  
  
+;;
+; @brief   AI command 0x18: jump when the value rolled by 0x17 equals a constant.
+; @details Operands: [value][word target]; otherwise skips the whole command (4 bytes).
+; @case    $18
+; @modifies ptrAIActionData, strcVariables.n8Temp1
+; @mode    M16X16 -> ?
+;;
 fAIAction0x18_JumpIfRandomEquals:
     REP #$30                                                   ;848E90|C230    |      ;
     %AIMoveAction($0001)
@@ -1801,6 +2221,14 @@ fAIAction0x18_JumpIfRandomEquals:
     RTS                                                        ;848EC8|60      |      ;
  
  
+;;
+; @brief   AI command 0x19: force the player object to a sprite / flip chosen by the script (and set PFLAGS_KNEEING).
+; @details Operands: [word sprite index][flip index]; the flip index is shifted left by 6 and stored to strcObjectData.flip.
+; @case    $19
+; @modifies ptrAIActionData, strcObjectData.spriteIdx, strcObjectData.flip, strcPlayer.flags
+; @mode    M16X16 -> ?
+; @note    confidence: medium - strcObjectData is assumed to be the player object; the flag name KNEEING may not describe the pose.
+;;
 fAIAction0x19_SetPlayerSprite:
     REP #$30                                                   ;848EC9|C230    |      ;
     %AIMoveAction($0001)
@@ -1824,6 +2252,16 @@ fAIAction0x19_SetPlayerSprite:
     RTS                                                        ;848F09|60      |      ;
  
  
+;;
+; @brief   AI command 0x1A: place an NPC at a position with a sprite table and a direction and create its object.
+; @details Operands: [word X][word Y][word sprite table address in bank $B3][direction]. Stores position (+1A/+1C), table (+33) and
+;          direction (+02), sets update flags bits 0 and 1 (create object), loads the sprite for the direction and yields one frame.
+; @case    $1A
+; @modifies ptrAIActionData, ptrTemp0x72
+; @note    Writes slot fields +01, +02, +10, +1A, +1C, +33 and (through fAI_LoadSlotSpriteFromDirTable) +14, +16.
+; @mode    M16X16 -> ?
+; @calls   fAI_LoadSlotSpriteFromDirTable
+;;
 fAIAction0x1A_SpawnNpc:
     REP #$30                                                   ;848F0A|C230    |      ;
     %AIMoveAction($0001)
@@ -1875,6 +2313,14 @@ fAIAction0x1A_SpawnNpc:
     RTS                                                        ;848F9A|60      |      ;
  
  
+;;
+; @brief   AI command 0x1B: set the slot's sprite index and flip directly and request a refresh.
+; @details Operands: [word sprite index][flip index (<< 6)]; sets update flag bit2 so fAI_UpdateSlotMovementAndObject calls fObject_Replace.
+; @case    $1B
+; @modifies ptrAIActionData
+; @note    Writes slot fields +01, +14, +16.
+; @mode    M16X16 -> ?
+;;
 fAIAction0x1B_SetSprite:
     REP #$30                                                   ;848F9B|C230    |      ;
     %AIMoveAction($0001)
@@ -1910,6 +2356,16 @@ fAIAction0x1B_SetSprite:
     RTS                                                        ;848FEE|60      |      ;
  
  
+;;
+; @brief   AI command 0x1C: show a dialog and wait one frame.
+; @details Operands: [word dialog id][dialogUnk191 byte]. Sets strcDialogDisplay.mapUnk19A = 2 (dialog input mode) and calls
+;          fDialog_DialogHandler; fAI_RunSlots is then skipped while the dialog is open.
+; @case    $1C
+; @modifies ptrAIActionData, strcDialogDisplay.dialogUnk191, strcDialogDisplay.mapUnk19A
+; @note    Also increments slot wait counter +10.
+; @mode    M16X16 -> ?
+; @calls   fDialog_DialogHandler
+;;
 fAIAction0x1C_ShowDialog:
     REP #$30                                                   ;848FEF|C230    |      ;
     %AIMoveAction($0001)
@@ -1934,6 +2390,15 @@ fAIAction0x1C_ShowDialog:
     RTS                                                        ;849033|60      |      ;
  
  
+;;
+; @brief   AI command 0x1D: show a dialog that offers choices (same code as 0x1C; scripts follow it with 0x20 JumpIfChoice).
+; @details Operands: [word dialog id][dialogUnk191 byte].
+; @case    $1D
+; @modifies ptrAIActionData, strcDialogDisplay.dialogUnk191, strcDialogDisplay.mapUnk19A
+; @note    Also increments slot wait counter +10.
+; @mode    M16X16 -> ?
+; @calls   fDialog_DialogHandler
+;;
 fAIAction0x1D_ShowDialogWithChoice:
     REP #$30                                                   ;849034|C230    |      ;
     %AIMoveAction($0001)
@@ -1958,6 +2423,19 @@ fAIAction0x1D_ShowDialogWithChoice:
     RTS                                                        ;849078|60      |      ;
  
  
+;;
+; @brief   AI command 0x1F (also 0x1E): one-frame poll - jump to the conversation script when the player presses A next to this NPC.
+; @details Operand: [word target]. Conditions: slot byte +0C (player near) non-zero, player not using / showing a tool, whistling,
+;          eating or in a blocked state (daily4 $0006), and strcJoypad1.newInput has A. On success: jump to target, stop the NPC
+;          (+08 = +07, dx = dy = 0, +0C = 0), face the player (direction = player direction XOR 1), load the stop sprite,
+;          set update flags $14, request player interaction $56 (nPlayerInteractionIndex) with PFLAGS_INTERACTING and
+;          PACTION_NONE. On failure the command is skipped. In both cases the slot yields one frame, so scripts poll in a loop.
+; @case    $1F
+; @modifies ptrAIActionData, nPlayerInteractionIndex, nPlayerInteractionArg1, nPlayerInteractionArg2, strcPlayer.flags, strcPlayer.action, ptrTemp0x72
+; @note    Writes slot fields +01, +02, +03, +04, +08, +0C, +10; +0C is set outside this file (confidence: medium).
+; @mode    M16X16 -> ?
+; @calls   fAI_LoadSlotSpriteFromDirTable
+;;
 fAIAction0x1F_JumpIfTalkedTo:
     REP #$30                                                   ;849079|C230    |      ;
     %AIMoveAction($0001)
@@ -2009,6 +2487,7 @@ fAIAction0x1F_JumpIfTalkedTo:
  
  
 .continue:
+    ; talk accepted: jump to the conversation script and turn the NPC toward the player
     REP #$20                                                   ;8490EA|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;8490EC|A7C9    |0000C9;
     STA.B ptrAIActionData                                      ;8490EE|85C9    |0000C9;
@@ -2086,6 +2565,13 @@ fAIAction0x1F_JumpIfTalkedTo:
     RTS                                                        ;84919C|60      |      ;
  
  
+;;
+; @brief   AI command 0x20: jump when the player picked answer n in the last dialog.
+; @details Operands: [answer][word target]; compares strcDialogDisplay.dialogOptionsAnswer.
+; @case    $20
+; @modifies ptrAIActionData, strcVariables.n8Temp1
+; @mode    M16X16 -> ?
+;;
 fAIAction0x20_JumpIfChoice:
     REP #$30                                                   ;84919D|C230    |      ;
     %AIMoveAction($0001)
@@ -2106,6 +2592,14 @@ fAIAction0x20_JumpIfChoice:
     RTS                                                        ;8491D1|60      |      ;
  
  
+;;
+; @brief   AI command 0x21: add a signed byte to a byte in RAM, saturating to 0..255.
+; @details Operands: [24-bit address][signed value].
+; @case    $21
+; @modifies ptrAIActionData, ptrTemp0x72, strcVariables.n16Temp1
+; @note    Writes the byte at the operand address.
+; @mode    M16X16 -> ?
+;;
 fAIAction0x21_AddValue8:
     REP #$30                                                   ;8491D2|C230    |      ;
     %AIMoveAction($0001)
@@ -2155,6 +2649,16 @@ fAIAction0x21_AddValue8:
     RTS                                                        ;84923E|60      |      ;
  
  
+;;
+; @brief   AI command 0x22: enable wandering for this slot inside a rectangle around its current position.
+; @details Operands: [range X][range Y][step delay][word walk sprite table (bank $B3)][segment length]. Stored to +09, +0A,
+;          +0B/+05/+06, +36, +07/+08; update flags |= $28 (wander + step move); the current position becomes the home point (+1E/+20).
+;          The walking itself is done by fAI_UpdateSlotWander.
+; @case    $22
+; @modifies ptrAIActionData
+; @note    Writes slot fields +01, +05..+0B, +1E, +20, +36.
+; @mode    M16X16 -> ?
+;;
 fAIAction0x22_StartRandomWalk:
     REP #$30                                                   ;84923F|C230    |      ;
     %AIMoveAction($0001)
@@ -2227,6 +2731,13 @@ fAIAction0x22_StartRandomWalk:
     RTS                                                        ;849305|60      |      ;
  
  
+;;
+; @brief   AI command 0x23: set bit n in the 16-bit word at a 24-bit RAM address.
+; @details Operands: [24-bit address][bit number]; mask from aAISetMask. Used for strcFlags.* event flags.
+; @case    $23
+; @modifies ptrAIActionData, ptrTemp0x72, strcVariables.n16Temp1
+; @mode    M16X16 -> ?
+;;
 fAIAction0x23_OrWithIndexedValue:
     REP #$30                                                   ;849306|C230    |      ;
     %AIMoveAction($0001)
@@ -2255,6 +2766,14 @@ fAIAction0x23_OrWithIndexedValue:
     RTS                                                        ;849355|60      |      ;
  
  
+;;
+; @brief   AI command 0x24: start the colour palette transition to the next time-of-day set.
+; @details Operand: [palette set index], passed in A to fPalette_SetNextHourPalette.
+; @case    $24
+; @modifies ptrAIActionData
+; @mode    M16X16 -> ?
+; @calls   fPalette_SetNextHourPalette
+;;
 fAIAction0x24_NextHourPalette:
     REP #$30                                                   ;849356|C230    |      ;
     %AIMoveAction($0001)
@@ -2265,6 +2784,15 @@ fAIAction0x24_NextHourPalette:
     RTS                                                        ;849374|60      |      ;
  
  
+;;
+; @brief   AI command 0x25: deactivate another slot and destroy its game object.
+; @details Operand: [slot number]. The current slot is restored afterwards.
+; @case    $25
+; @modifies ptrAIActionData, ptrTemp0x72, ptrAIUnknown0xCC, strcObject.gameObjectIdx
+; @note    Clears the target slot's active byte (+00).
+; @mode    M16X16 -> ?
+; @calls   fAI_SelectSlot, fObject_Destroy
+;;
 fAIAction0x25_RemoveActor:
     REP #$30                                                   ;849375|C230    |      ;
     %AIMoveAction($0001)
@@ -2300,6 +2828,13 @@ fAIAction0x25_RemoveActor:
     RTS                                                        ;8493C8|60      |      ;
  
  
+;;
+; @brief   AI commands 0x26, 0x27 and 0x28 (all share this handler): clear bit n in the 16-bit word at a 24-bit RAM address.
+; @details Operands: [24-bit address][bit number]; ANDs with aAIResetMask[n]. Inverse of 0x23.
+; @case    $26, $27, $28
+; @modifies ptrAIActionData, ptrTemp0x72, strcVariables.n16Temp1
+; @mode    M16X16 -> ?
+;;
 fAIAction0x28_ClearBit:
     REP #$30                                                   ;8493C9|C230    |      ;
     %AIMoveAction($0001)
@@ -2329,6 +2864,13 @@ fAIAction0x28_ClearBit:
  
     incsrc "../../../build/gen/blocks/ai_action_tables.asm"
  
+;;
+; @brief   AI command 0x29: start automatic camera scrolling.
+; @details Operands: [speed X][speed Y][frames]; stored to strcMapScrool.speedX / speedY / timer.
+; @case    $29
+; @modifies ptrAIActionData, strcMapScrool.speedX, strcMapScrool.speedY, strcMapScrool.timer
+; @mode    M16X16 -> ?
+;;
 fAIAction0x29_SetMapScroll:
     REP #$30                                                   ;849513|C230    |      ;
     %AIMoveAction($0001)
@@ -2347,6 +2889,15 @@ fAIAction0x29_SetMapScroll:
     RTS                                                        ;849552|60      |      ;
  
  
+;;
+; @brief   AI command 0x2A: start a map tile change sequence (tile script) and yield one frame.
+; @details Operand: [word sequence index] -> fTileScript_Start (table pTileScriptTable).
+; @case    $2A
+; @modifies ptrAIActionData
+; @note    Also increments slot wait counter +10.
+; @mode    M16X16 -> ?
+; @calls   fTileScript_Start
+;;
 fAIAction0x2A_StartTileSequence:
     REP #$30                                                   ;849553|C230    |      ;
     %AIMoveAction($0001)
@@ -2362,6 +2913,15 @@ fAIAction0x2A_StartTileSequence:
     RTS                                                        ;84957C|60      |      ;
  
  
+;;
+; @brief   AI command 0x2B: give the slot a sprite table and direction, create its object and load the sprite.
+; @details Operands: [word sprite table address (bank $B3)][direction index]. Like 0x1A without a position (the position comes from the slot).
+; @case    $2B
+; @modifies ptrAIActionData, ptrTemp0x72
+; @note    Writes slot fields +01 (|= 3), +02, +10, +33 and (via fAI_LoadSlotSpriteFromDirTable) +14, +16.
+; @mode    M16X16 -> ?
+; @calls   fAI_LoadSlotSpriteFromDirTable
+;;
 fAIAction0x2B_SpawnActor:
     REP #$30                                                   ;84957D|C230    |      ;
     %AIMoveAction($0001)
@@ -2403,6 +2963,16 @@ fAIAction0x2B_SpawnActor:
     RTS                                                        ;8495E7|60      |      ;
  
  
+;;
+; @brief   AI command 0x2C: play a sound effect, wait the given number of frames, then restore the tool sound.
+; @details Operands: [sound id][word parameter][word frames]. Passed to fAudio_PlaySoundEffectAndWait (A, X, Y); afterwards
+;          strcAudio.toolId is cleared and fToolUsedSound_PlayOnToolChange re-establishes the tool sound.
+; @case    $2C
+; @modifies ptrAIActionData, strcAudio.toolId
+; @mode    M16X16 -> ?
+; @calls   fAudio_PlaySoundEffectAndWait, fToolUsedSound_PlayOnToolChange
+; @note    confidence: medium - the meaning of the sound id / parameter split is not confirmed in the SPC code.
+;;
 fAIAction0x2C_PlaySoundWait:
     REP #$30                                                   ;8495E8|C230    |      ;
     %AIMoveAction($0001)
@@ -2428,6 +2998,18 @@ fAIAction0x2C_PlaySoundWait:
     RTS                                                        ;849632|60      |      ;
  
  
+;;
+; @brief   AI command 0x2D: one-frame poll like 0x1F with two jump targets (empty hands / dropping a carried item).
+; @details Operands: [word target 1][word target 2]. Same player-state checks as 0x1F and A newly pressed. With
+;          PACTION_DROPITEM and a carried item the item id is remembered in strcPlayerData.carryItemIdPrev and target 2 is
+;          taken, otherwise target 1. On success the NPC stops, faces the player and interaction $56 is requested (as in 0x1F);
+;          on failure the command (5 bytes) is skipped. The slot yields one frame in both cases.
+; @case    $2D
+; @modifies ptrAIActionData, ptrTemp0x72, strcPlayerData.carryItemIdPrev, nPlayerInteractionIndex, nPlayerInteractionArg1, nPlayerInteractionArg2, strcPlayer.flags, strcPlayer.action
+; @note    Writes slot fields +01, +02, +03, +04, +08, +0C, +10.
+; @mode    M16X16 -> ?
+; @calls   fAI_LoadSlotSpriteFromDirTable
+;;
 fAIAction0x2D_JumpOnInteract:
     REP #$30                                                   ;849633|C230    |      ;
     %AIMoveAction($0001)
@@ -2490,6 +3072,7 @@ fAIAction0x2D_JumpOnInteract:
     %AIMoveAction($0002)
  
 .continue:
+    ; interaction accepted: take the jump, stop and face the player (as in 0x1F)
     REP #$20                                                   ;8496C4|C220    |      ;
     LDA.B [ptrAIActionData]                                    ;8496C6|A7C9    |0000C9;
     STA.B ptrAIActionData                                      ;8496C8|85C9    |0000C9;
@@ -2567,6 +3150,15 @@ fAIAction0x2D_JumpOnInteract:
     RTS                                                        ;849776|60      |      ;
  
  
+;;
+; @brief   AI command 0x2E: enable free wandering (with collision) for animals / NPCs; the current position is the home point.
+; @details Operands: [step period][word walk sprite table (bank $B3)][segment length]. Stores +0B/+05/+06, +36, +07/+08, sets update
+;          flags |= $A8 (wander, step move, free walk) and copies the position to the home point (+1E/+20).
+; @case    $2E
+; @modifies ptrAIActionData
+; @note    Writes slot fields +01, +05..+0B, +1E, +20, +36.
+; @mode    M16X16 -> ?
+;;
 fAIAction0x2E_StartWander:
     REP #$30                                                   ;849777|C230    |      ;
     %AIMoveAction($0001)
@@ -2625,6 +3217,15 @@ fAIAction0x2E_StartWander:
     RTS                                                        ;84980F|60      |      ;
  
  
+;;
+; @brief   AI command 0x2F: change the slot's sprite table (+33) and reload the sprite for its current direction.
+; @details Operand: [word table address (bank $B3)]; update flags |= $04 (refresh).
+; @case    $2F
+; @modifies ptrAIActionData, ptrTemp0x72
+; @note    Writes slot fields +01, +14, +16, +33.
+; @mode    M16X16 -> ?
+; @calls   fAI_LoadSlotSpriteFromDirTable
+;;
 fAIAction0x2F_SetActorSpriteTable:
     REP #$30                                                   ;849810|C230    |      ;
     %AIMoveAction($0001)
@@ -2653,6 +3254,25 @@ fAIAction0x2F_SetActorSpriteTable:
     RTS                                                        ;849856|60      |      ;
  
  
+;;
+; @brief   AI command 0x30: one tick of a chicken's behaviour (picking up, idle scripts, sale state).
+; @details Slot +3F is the chicken id ($24 + index into strcChickenData, 12 chickens). Each tick the chicken record gets the slot
+;          position (record +04/+06). Branches: (1) slot state +0E = $E0 jumps to the sale check (adult chicken and daily1 $0008:
+;          price 50 in nCowSalePrice, player interaction $44, state cleared); (2) player next to the chicken (+0C), idle
+;          player, A newly pressed, empty hands, not hugging the dog or in PACTION_17 / ITEMONHAND, chicken not in the incubator
+;          ($40) and egg/child/adult: chicken record gets the held flag ($20), strcPlayerData.nAiArg = chicken id, the slot is
+;          deactivated with the destroy flag and, for chicks / adults, the player carries item $26 (chick) or $25 (chicken) with
+;          PACTION_ITEMONHAND; (3) otherwise an adult chicken counts strcStockData.unkEachChicken[n] up to $200 and then starts
+;          behaviour script $5D (if strcPlayer.lastRandomNumber < $55) or $5C of set 0 through fAI_SetSlotScript.
+;          The slot wait counter is incremented at the end.
+; @case    $30
+; @modifies ptrAIActionData, ptrTemp0x72, strcPlayerData.nAiArg, strcPlayerData.carryItemId, strcPlayer.action, strcStockData.unkEachChicken, nCowSalePrice, nPlayerInteractionIndex, nPlayerInteractionArg1, nPlayerInteractionArg2, strcPlayer.flags, strcFlags.daily1
+; @note    Writes slot fields +00, +01, +0E, +10; chicken record flags (strcChickenData.statusFlags) and position.
+; @mode    M16X16 -> ?
+; @region  EU/DE: the $E0 state is skipped while strcFlags.daily1 bit $0002 ($7F1F5A) is set.
+; @calls   fGameEngine_GetChickenData, fAI_SetSlotScript
+; @note    confidence: medium - the meaning of state $E0 (sold / being shipped?) and the unkEachChicken timer are inferred; the shared nCowSalePrice is reused for the chicken price.
+;;
 fAIAction0x30_UpdateChicken:
     REP #$30                                                   ;849857|C230    |      ;
     %AIMoveAction($0001)
@@ -2842,6 +3462,7 @@ fAIAction0x30_UpdateChicken:
  
  
 .idle_roll:
+    ; adult chicken idle: count to $200, then play one of two behaviour scripts
     SEP #$20                                                   ;8499C8|E220    |      ;
     REP #$10                                                   ;8499CA|C210    |      ;
     LDY.W #$0000                                               ;8499CC|A00000  |      ;
@@ -2976,6 +3597,19 @@ fAIAction0x30_UpdateChicken:
     JMP.W .finish_update                                              ;849AD1|4C419A  |849A41;
  
  
+;;
+; @brief   AI command 0x31: one tick of a cow's behaviour; dispatches on the cow state byte (+0E) and the current area.
+; @details Slot +3F is the cow id ($18 + index into strcCowData, 12 cows). The slot position is stored into the cow record
+;          (+08 / +0A). Dispatch: in the cow barn with state $C2 -> fAIAction0x31_CowSendOutside; for farm areas (below
+;          !AREA_TOWNSPRING) state $E0 -> fAIAction0x31_CowHandleSale and state $E1 -> fAIAction0x31_CowReturnToBarn; everything
+;          else -> fAIAction0x31_CowDefaultPath.
+; @case    $31
+; @modifies ptrTemp0x72
+; @mode    M16X16 -> ?
+; @calls   fGameEngine_GetCowData
+; @region  EU/DE: the jump to the $E0 handler is the same instruction; the extra daily1 test lives inside fAIAction0x31_CowHandleSale.
+; @note    confidence: medium - state ids come from the code, their game meaning is inferred.
+;;
 fAIAction0x31_UpdateCow:
     REP #$30                                                   ;849AD4|C230    |      ; ANOTHER SPAGHETTI
     %AIMoveAction($0001)
@@ -3035,6 +3669,23 @@ fAIAction0x31_UpdateCow:
     JMP.W fAIAction0x31_CowReturnToBarn                                      ;849B42|4C40A5  |84A540;
  
  
+;;
+; @brief   Normal cow behaviour: player interaction (talk, milk, brush, hit, medicine, miracle potion) and idle animation.
+; @details When the player is next to the cow (+0C) and idle: A opens a dialog chosen by cow state (pregnant $32 when the pregnancy counter at record +03 is non-zero else $145, sick $31,
+;          cranky $30, normal $2F) after copying the cow name to strcNames.wCurrentCow; the first talk of the day adds +1 happiness;
+;          then the movement script for the life stage (baby / child / pregnant / adult) and direction is started. Tool flags set
+;          by the tool code (daily1): $0040 a tool was used on the cow, $0080 medicine (cures sickness), $0100 miracle potion
+;          (makes an adult cow pregnant: sets event1 $0004, status birth flag, happiness +10, nCowPregnacyDays = $15, nOwnedCows+1,
+;          max 12 cows). Tools: milker (id $0E; adult cow, not milked yet today, not cranky / sick / pregnant) gives milk (carry item $15 small / $16 medium / $17 large by happiness < $60 / < $C0 /
+;          else), brush ($0F) gives +3 happiness once a day, other tools hit the cow (reaction script, hit counter at record +05 up to 10).
+;          Without interaction the idle code (labels .baby_idle / .child_idle / .adult_idle) counts strcStockData.unkEachCow[n] up to
+;          $100 and then picks a random pose / wander script (adult: 5 choices by strcPlayer.lastRandomNumber thresholds $33 $66 $99 $CC;
+;          sick / cranky cows use their own scripts). Ends in fAIAction0x31_CowUpdateTail.
+; @modifies ptrTemp0x72, strcNames.wCurrentCow, strcDialogDisplay.dialogUnk191, strcDialogDisplay.mapUnk19A, strcPlayerData.carryItemId, strcPlayer.action, strcStockData.unkEachCow, strcFlags.event1, nCowPregnacyDays, nOwnedCows, strcVariables.n16Temp1
+; @mode    M16X16 -> ?
+; @calls   fAI_SetSlotScript, fDialog_DialogHandler, fCow_AddHappiness
+; @note    The milk carry item ids ($15-$17) are written with the equipped-item constants !EITEM_SPRINKLER, !EITEM_BEANSTALKSEED, !EITEM_BLUEDIAMOND, which only coincide numerically (carried-item table: SmallMilk, MediumMilk, LargeMilk). confidence: medium for the detail meanings of cow record bits.
+;;
 fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;849B45|E220    |      ;
     REP #$10                                                   ;849B47|C210    |      ;
@@ -3116,6 +3767,7 @@ fAIAction0x31_CowDefaultPath:
  
  
 .AbuttonPressed:
+    ; A pressed next to the cow: remember the cow name for the dialog, then pick the dialog by status
     SEP #$20                                                   ;849BEC|E220    |      ;
     REP #$10                                                   ;849BEE|C210    |      ;
     LDA.B #$00                                                 ;849BF0|A900    |      ;
@@ -3449,11 +4101,13 @@ fAIAction0x31_CowDefaultPath:
   + %SetCurrentCarriedItemDirect(!EITEM_BEANSTALKSEED)
  
 .milk_item_ready:
+    ; milk item chosen; the player now carries it
     %SetPlayerAction(!PACTION_ITEMONHAND)
     JMP.W .adult_script_by_direction                                             ;849E4B|4CD09F  |849FD0;
  
  
 .make_pregnant:
+    ; miracle potion on an adult cow (once per game day via event1 $0004, max 12 cows)
     REP #$30                                                   ;849E4E|C230    |      ;
     %CheckFlag(event1, $0004)
     BEQ +                                                      ;849E57|F003    |849E5C;
@@ -4326,6 +4980,13 @@ fAIAction0x31_CowDefaultPath:
     JMP.W fAIAction0x31_CowUpdateTail                                      ;84A46B|4C6EA4  |84A46E;
  
  
+;;
+; @brief   End of the cow tick: choose the follow-the-player facing logic or just advance the timer.
+; @details If daily1 $0010 (bell rung) is set -> fAIAction0x31_CowAnimThenSteerToPlayer (cow walks toward / away from the player).
+;          Else if the slot byte +0C (player near) is set -> fAIAction0x31_CowAnimThenFacePlayerDir, otherwise
+;          fAIAction0x31_CowAdvanceTimer.
+; @mode    M16X16 -> ?
+;;
 fAIAction0x31_CowUpdateTail:
     REP #$30                                                   ;84A46E|C230    |      ;
     %CheckFlag(daily1, $0010)
@@ -4341,6 +5002,11 @@ fAIAction0x31_CowUpdateTail:
     JMP.W fAIAction0x31_CowAnimThenFacePlayerDir                                      ;84A487|4C07A6  |84A607;
  
  
+;;
+; @brief   Finish a cow tick: yield one frame (wait counter +10 += 1).
+; @mode    M16X16 -> ?
+; @callers fAIAction0x31_CowUpdateTail, fAIAction0x31_CowSetDirDown, fAIAction0x31_CowSetDirUp, fAIAction0x31_CowSetDirLeft, fAIAction0x31_CowSetDirRight
+;;
 fAIAction0x31_CowAdvanceTimer:
     REP #$30                                                   ;84A48A|C230    |      ;
     LDY.W #$0010                                               ;84A48C|A01000  |      ;
@@ -4351,6 +5017,17 @@ fAIAction0x31_CowAdvanceTimer:
     RTS                                                        ;84A497|60      |      ;
  
  
+;;
+; @brief   Cow state $E0: when the sale was confirmed (daily1 $0004) set the sale price and start the player sale interaction.
+; @details Price in nCowSalePrice: 500 for happiness < $60, 800 for < $C0, otherwise 1000 (24-bit value, high word copied). Stores the cow id
+;          at $09A0+!RAM_SHIFT, requests player interaction $43 (PFLAGS_INTERACTING, PACTION_NONE), clears the state byte and
+;          the slot update flags &= $57 (wander / step move / free walk off). Without the daily1 flag it falls back to fAIAction0x31_CowDefaultPath.
+; @modifies nCowSalePrice, nPlayerInteractionIndex, nPlayerInteractionArg1, nPlayerInteractionArg2, strcPlayer.flags, strcPlayer.action, strcFlags.daily1
+; @note    Writes slot fields +0E and +01.
+; @mode    M16X16 -> ?
+; @region  EU/DE: while strcFlags.daily1 bit $0002 ($7F1F5A) is set the handler skips the sale check and goes to fAIAction0x31_CowUpdateTail.
+; @note    confidence: medium - the name comes from the price table and interaction $43 (cow sale); the origin of state $E0 is not in this file.
+;;
 fAIAction0x31_CowHandleSale:
     if !REGION_EUDE
     REP #$30
@@ -4429,6 +5106,15 @@ fAIAction0x31_CowHandleSale:
     JMP.W fAIAction0x31_CowUpdateTail                                      ;84A53D|4C6EA4  |84A46E;
  
  
+;;
+; @brief   Cow state $E1: remove the cow from the farm and put it back into the cow barn.
+; @details Deactivates the slot (destroy flag), sets the cow record map id to !AREA_COWBARN and copies the barn position
+;          from aGameEngine_AddCowPositionsData[cow * 4] (X, Y words) into the record.
+; @modifies ptrTemp0x72
+; @note    Writes slot fields +00, +01 and cow record +02, +08, +0A.
+; @mode    M16X16 -> ?
+; @calls   fAIAction0x31_CowUpdateTail
+;;
 fAIAction0x31_CowReturnToBarn:
     SEP #$20                                                   ;84A540|E220    |      ;
     REP #$10                                                   ;84A542|C210    |      ;
@@ -4470,6 +5156,15 @@ fAIAction0x31_CowReturnToBarn:
     JMP.W fAIAction0x31_CowUpdateTail                                      ;84A592|4C6EA4  |84A46E;
  
  
+;;
+; @brief   Cow state $C2 inside the barn: send the cow outside to the farm.
+; @details Deactivates the slot (destroy flag), sets the cow record map id to the current farm area (nCurrentSeasonID, farm areas are
+;          numbered by season) and the position to ($0148, $0178).
+; @modifies ptrTemp0x72
+; @note    Writes slot fields +00, +01 and cow record +02, +08, +0A.
+; @mode    M16X16 -> ?
+; @calls   fAIAction0x31_CowUpdateTail
+;;
 fAIAction0x31_CowSendOutside:
     SEP #$20                                                   ;84A595|E220    |      ;
     REP #$10                                                   ;84A597|C210    |      ;
@@ -4499,6 +5194,14 @@ fAIAction0x31_CowSendOutside:
     JMP.W fAIAction0x31_CowUpdateTail                                      ;84A5D1|4C6EA4  |84A46E;
  
  
+;;
+; @brief   Add a signed amount to the happiness byte of the cow record in ptrTemp0x72, clamped to 0..255.
+; @param   A  amount to add (16-bit, positive in all callers)
+; @param   ptrTemp0x72  cow record (strcCowData entry, +04 = happiness)
+; @modifies strcCowData.happiness, strcVariables.n16Temp1, strcVariables.n16Temp2
+; @mode    M16X16 -> ?
+; @callers fAIAction0x31_CowDefaultPath, fGameEngine_AnimalsDailyUpdate
+;;
 fCow_AddHappiness:
     REP #$30                                                   ;84A5D4|C230    |      ;
     STA.B strcVariables.n16Temp1                               ;84A5D6|857E    |00007E;
@@ -4534,6 +5237,15 @@ fCow_AddHappiness:
   + RTL                                                        ;84A606|6B      |      ;
  
  
+;;
+; @brief   Cow with the player nearby: start the idle animation once, then turn to the player's facing direction.
+; @details First call (cow record +01 bit $08 not yet set): sets that flag, clears the cow idle timer and starts the stage
+;          animation script (baby / child / adult; adults not pregnant, sick $006C / cranky $0070 / normal $005E). Then
+;          jumps to the direction setter matching strcPlayer.direction (!PDIR_*); with an unknown direction it falls through
+;          into fAIAction0x31_CowAnimThenSteerToPlayer.
+; @mode    M16X16 -> ?
+; @calls   fAI_SetSlotScript, fAIAction0x31_CowSetDirDown, fAIAction0x31_CowSetDirUp, fAIAction0x31_CowSetDirLeft, fAIAction0x31_CowSetDirRight
+;;
 fAIAction0x31_CowAnimThenFacePlayerDir:
     SEP #$20                                                   ;84A607|E220    |      ;
     REP #$10                                                   ;84A609|C210    |      ;
@@ -4710,6 +5422,17 @@ fAIAction0x31_CowAnimThenFacePlayerDir:
     JMP.W fAIAction0x31_CowSetDirRight                              ;84A73D|4C01A9  |84A901;
  
  
+;;
+; @brief   Cow reacting to the bell / called by the player: start its animation, then walk toward (or away from, when cranky) the player.
+; @details Computes |dx|, |dy| and the signs between the slot position and strcPlayer.posX/posY (into strcVariables.n16Temp1-4),
+;          sets the walk segment counter (+08 = $20) and picks the dominant axis. A cranky cow (status $10) flips the choice (walks away).
+;          Finally one of the fAIAction0x31_CowSetDir* routines stores the preferred direction mask.
+; @modifies strcVariables.n16Temp1, strcVariables.n16Temp2, strcVariables.n16Temp3, strcVariables.n16Temp4
+; @note    Writes slot fields +08 (= $20) and +0F (preferred direction).
+; @mode    M16X16 -> ?
+; @calls   fAI_SetSlotScript
+; @note    confidence: medium - the left / right mapping of the direction masks follows the code but not a verified screen direction.
+;;
 fAIAction0x31_CowAnimThenSteerToPlayer:
     SEP #$20                                                   ;84A740|E220    |      ;
     REP #$10                                                   ;84A742|C210    |      ;
@@ -4947,6 +5670,11 @@ fAIAction0x31_CowAnimThenSteerToPlayer:
     BRA fAIAction0x31_CowSetDirUp                                   ;84A8D5|800E    |84A8E5;
  
  
+;;
+; @brief   Set the slot's preferred walk direction mask (+0F) to $01 (down) and end the tick.
+; @mode    M8X16 -> ?
+; @calls   fAIAction0x31_CowAdvanceTimer
+;;
 fAIAction0x31_CowSetDirDown:
     SEP #$20                                                   ;84A8D7|E220    |      ;
     REP #$10                                                   ;84A8D9|C210    |      ;
@@ -4956,6 +5684,11 @@ fAIAction0x31_CowSetDirDown:
     JMP.W fAIAction0x31_CowAdvanceTimer                               ;84A8E2|4C8AA4  |84A48A;
  
  
+;;
+; @brief   Set the slot's preferred walk direction mask (+0F) to $02 (up) and end the tick.
+; @mode    M8X16 -> ?
+; @calls   fAIAction0x31_CowAdvanceTimer
+;;
 fAIAction0x31_CowSetDirUp:
     SEP #$20                                                   ;84A8E5|E220    |      ;
     REP #$10                                                   ;84A8E7|C210    |      ;
@@ -4965,6 +5698,13 @@ fAIAction0x31_CowSetDirUp:
     JMP.W fAIAction0x31_CowAdvanceTimer                               ;84A8F0|4C8AA4  |84A48A;
  
  
+;;
+; @brief   Set the slot's preferred walk direction mask (+0F) to $04 and end the tick.
+; @details The caller chooses this for the player facing !PDIR_LEFT; in fAI_UpdateSlotWander mask $04 adds +1 to X, so whether $04 is screen-left is unverified.
+; @mode    M8X16 -> ?
+; @calls   fAIAction0x31_CowAdvanceTimer
+; @note    confidence: low - direction naming vs. movement sign.
+;;
 fAIAction0x31_CowSetDirLeft:
     SEP #$20                                                   ;84A8F3|E220    |      ;
     REP #$10                                                   ;84A8F5|C210    |      ;
@@ -4974,6 +5714,13 @@ fAIAction0x31_CowSetDirLeft:
     JMP.W fAIAction0x31_CowAdvanceTimer                               ;84A8FE|4C8AA4  |84A48A;
  
  
+;;
+; @brief   Set the slot's preferred walk direction mask (+0F) to $08 and end the tick.
+; @details Counterpart of fAIAction0x31_CowSetDirLeft (mask $08 subtracts 1 from X in fAI_UpdateSlotWander).
+; @mode    M8X16 -> ?
+; @calls   fAIAction0x31_CowAdvanceTimer
+; @note    confidence: low - direction naming vs. movement sign.
+;;
 fAIAction0x31_CowSetDirRight:
     SEP #$20                                                   ;84A901|E220    |      ;
     REP #$10                                                   ;84A903|C210    |      ;
@@ -4983,6 +5730,14 @@ fAIAction0x31_CowSetDirRight:
     JMP.W fAIAction0x31_CowAdvanceTimer                               ;84A90C|4C8AA4  |84A48A;
  
  
+;;
+; @brief   AI command 0x32: write a 16-bit constant to a 24-bit RAM address.
+; @details Operands: [24-bit address][word value]. Word counterpart of 0x47.
+; @case    $32
+; @modifies ptrAIActionData, ptrTemp0x72
+; @note    Writes the word at the operand address.
+; @mode    M16X16 -> ?
+;;
 fAIAction0x32_SetValue16:
     REP #$30                                                   ;84A90F|C230    |      ;
     %AIMoveAction($0001)
@@ -5001,6 +5756,18 @@ fAIAction0x32_SetValue16:
     RTS                                                        ;84A94B|60      |      ;
  
  
+;;
+; @brief   AI command 0x33: one tick of the mole - the player may catch it; otherwise it pops up now and then.
+; @details Catch: player next to it (+0C), idle, A newly pressed, empty hands, not hugging the dog, not in PACTION_17 -> strcPlayerData.nAiArg = slot
+;          +3F, slot deactivated with the destroy flag, carry item $29 (mole) with PACTION_ITEMONHAND. Otherwise strcStockData.unkMole
+;          counts to $B4, resets, and when strcPlayer.lastRandomNumber has bit7 set script $81 of set 0 is started in slot $11.
+; @case    $33
+; @modifies ptrAIActionData, strcPlayerData.nAiArg, strcPlayerData.carryItemId, strcPlayer.action, strcStockData.unkMole
+; @note    Writes slot fields +00, +01, +10.
+; @mode    M16X16 -> ?
+; @calls   fAI_SetSlotScript
+; @note    confidence: medium - carry item $29 is shown as Mole in the carried item table; the subscript $81 effect was not traced.
+;;
 fAIAction0x33_UpdateMole:
     REP #$30                                                   ;84A94C|C230    |      ;
     %AIMoveAction($0001)
@@ -5128,6 +5895,15 @@ fAIAction0x33_UpdateMole:
     RTS                                                        ;84AA5C|60      |      ;
  
  
+;;
+; @brief   AI command 0x34: actor that the player can pick up with A when the hands are empty; it becomes the carried item !CITEM_FISH.
+; @details Same pick-up conditions as the mole, without the dog-hug / PACTION_17 checks. Used for the fish lying on the ground (spawned by script).
+; @case    $34
+; @modifies ptrAIActionData, strcPlayerData.nAiArg, strcPlayerData.carryItemId, strcPlayer.action
+; @note    Writes slot fields +00, +01, +10.
+; @mode    M16X16 -> ?
+; @note    confidence: medium - old name fAIAction0x34 / UpdatePickup; the only use known is a fish.
+;;
 fAIAction0x34_PickUpFish:
     REP #$30                                                   ;84AA5D|C230    |      ;
     %AIMoveAction($0001)
@@ -5218,6 +5994,22 @@ fAIAction0x34_PickUpFish:
     RTS                                                        ;84AB26|60      |      ;
  
  
+;;
+; @brief   AI command 0x35: one tick of the horse (foal idle scripts, adult reaction to whistle / mounting / A press).
+; @details Clears daily2 $0010. A foal (nHorseAge != $15) counts strcStockData.unkHorse to $78 and then starts script $80 of set 0
+;          in slot $17. An adult handles: daily2 $0040 (set by the carried-item code; meaning unclear) starts a direction-dependent script ($28-$2B);
+;          daily2 $0020 (player mounted, set by the mount action) -> PFLAGS_RIDINGHORSE and the slot is deactivated; with the
+;          player next to the horse and A pressed it tests the free tile behind (fGameEngine_DirectionHandler83AF37 /
+;          fGameEngine_DirectionHandler83AD91) and lets the player mount (PACTION_17); otherwise idle timer to $78 and a random
+;          idle script ($4B-$50 by lastRandomNumber thresholds $24 $48 $6C $90 $B4 $D8). daily2 $0400 (whistle) makes the horse run
+;          to the player with script $4C (adult) or $4A (foal) and a preferred direction toward the player.
+; @case    $35
+; @modifies ptrAIActionData, strcPlayer.unkE3, strcPlayer.lastX, strcPlayer.lastY, strcPlayer.newX, strcPlayer.newY, strcPlayer.action, strcPlayer.flags, strcStockData.unkHorse, strcFlags.daily2, strcVariables.n16Temp1, strcVariables.n16Temp2, strcVariables.n16Temp3, strcVariables.n16Temp4
+; @note    Writes slot fields +00, +01, +08, +0C, +0F, +10.
+; @mode    M16X16 -> ?
+; @calls   fAI_SetSlotScript, fGameEngine_DirectionHandler83AF37, fGameEngine_DirectionHandler83AD91
+; @note    confidence: low - flag meanings of daily2 $0040 / $0800 and the script ids are inferred only from the code paths.
+;;
 fAIAction0x35_UpdateHorse:
     REP #$30                                                   ;84AB27|C230    |      ;
     %AIMoveAction($0001)
@@ -5553,6 +6345,7 @@ fAIAction0x35_UpdateHorse:
  
  
 .whistle_called:
+    ; daily2 $0400: player whistled; the horse (adult or foal) runs to the player
     SEP #$20                                                   ;84ADF2|E220    |      ;
     REP #$10                                                   ;84ADF4|C210    |      ;
     LDA.L nHorseAge                                            ;84ADF6|AF321F7F|7F1F32;
@@ -5711,6 +6504,20 @@ fAIAction0x35_UpdateHorse:
     JMP.W .loop2                                               ;84AF03|4C96AD  |84AD96;
  
  
+;;
+; @brief   AI command 0x36: one tick of the dog - mirrors its position to nDogX / nDogY, lets the player hug it, random idle behaviour, whistle.
+; @details Hug: player next to the dog (+0C), idle, A pressed, empty hands, not hugging, not riding, not in PACTION_17 / ITEMONHAND -> slot
+;          deactivated with the destroy flag, PFLAGS_DOGHUGGING set, nDogHugs += 1. Otherwise strcStockData.unkDog counts to $78 and
+;          a random state machine over the bit field $7F1F58 (bits 1, 2, 4, 8, $10 = different resting / moving poses) starts
+;          scripts $3C-$49 of set 0 in slot $16 with lastRandomNumber thresholds. When daily4 $0010 (whistle) is set the dog runs
+;          to the player with script from +3F and a direction mask toward the player.
+; @case    $36
+; @modifies ptrAIActionData, nDogX, nDogY, nDogHugs, strcPlayer.flags, strcStockData.unkDog, strcVariables.n16Temp1, strcVariables.n16Temp2, strcVariables.n16Temp3, strcVariables.n16Temp4
+; @note    Writes $7F1F58 (dog pose state, no RAM symbol) and slot fields +00, +01, +08, +0F, +10.
+; @mode    M16X16 -> ?
+; @calls   fAI_SetSlotScript
+; @note    confidence: low - the pose meaning of the $7F1F58 bits is not decoded.
+;;
 fAIAction0x36_UpdateDog:
     REP #$30                                                   ;84AF06|C230    |      ;
     %AIMoveAction($0001)
@@ -5817,6 +6624,7 @@ fAIAction0x36_UpdateDog:
  
  
 .idle_timer:
+    ; no hug: idle timer to $78, then random pose changes driven by the $7F1F58 state bits
     SEP #$20                                                   ;84AFF4|E220    |      ;
     LDA.W strcStockData.unkDog                                 ;84AFF6|AD3809  |000938;
     CMP.B #$78                                                 ;84AFF9|C978    |      ;
@@ -6123,6 +6931,7 @@ fAIAction0x36_UpdateDog:
  
  
 .check_whistle:
+    ; daily4 $0010 = player whistled for the dog
     REP #$30                                                   ;84B25C|C230    |      ;
     %CheckFlag(daily4, $0010)
     BEQ .loop2                                                 ;84B265|F003    |84B26A;
@@ -6261,6 +7070,14 @@ fAIAction0x36_UpdateDog:
     JMP.W .loop2                                               ;84B348|4C6AB2  |84B26A;
  
  
+;;
+; @brief   AI command 0x37: destroy the game object (sprite) of the current slot; the slot itself stays active.
+; @details Loads the object index from +12 and calls fObject_Destroy.
+; @case    $37
+; @modifies strcObject.gameObjectIdx
+; @mode    M16X16 -> ?
+; @calls   fObject_Destroy
+;;
 fAIAction0x37_RemoveObject:
     REP #$30                                                   ;84B34B|C230    |      ;
     %AIMoveAction($0001)
@@ -6272,6 +7089,14 @@ fAIAction0x37_RemoveObject:
     RTS                                                        ;84B364|60      |      ;
  
  
+;;
+; @brief   AI command 0x38: block until the screen fade-in has finished (strcFlags.daily1 bit $8000 set).
+; @details If the flag is set the script continues; otherwise the command repeats next frame.
+; @case    $38
+; @modifies ptrAIActionData
+; @note    Also increments slot wait counter +10 while waiting.
+; @mode    M16X16 -> ?
+;;
 fAIAction0x38_WaitForFadeIn:
     REP #$30                                                   ;84B365|C230    |      ;
     %CheckFlag(daily1, $8000)
@@ -6289,6 +7114,17 @@ fAIAction0x38_WaitForFadeIn:
     RTS                                                        ;84B388|60      |      ;
  
  
+;;
+; @brief   AI command 0x39: make the player walk in a direction (simulated pad press) for a number of frames.
+; @details Operands: [direction index 0..4 into aAIJoypadInput][frames]. First execution: ORs the pad bits into
+;          strcAiControlData.input, loads strcAiControlData.counter, sets PFLAGS_AISTEERING and moves the pointer back so the command
+;          repeats; later executions count the counter down (yielding one frame each) and finally clear input / counter /
+;          PFLAGS_AISTEERING and set PACTION_NONE.
+; @case    $39
+; @modifies ptrAIActionData, strcAiControlData.input, strcAiControlData.counter, strcPlayer.flags, strcPlayer.action
+; @note    Also increments slot wait counter +10 while walking.
+; @mode    M16X16 -> ?
+;;
 fAIAction0x39_WalkForTime:
     REP #$30                                                   ;84B389|C230    |      ;
     %CheckPlayerFlags(!PFLAGS_AISTEERING)
@@ -6328,6 +7164,7 @@ fAIAction0x39_WalkForTime:
  
  
 .wait:
+    ; pad bits are held by strcAiControlData until the counter reaches 0
     REP #$20                                                   ;84B3E8|C220    |      ;
     LDA.W strcAiControlData.counter                            ;84B3EA|ADFF08  |0008FF;
     BEQ .doneWaiting                                           ;84B3ED|F012    |84B401;
@@ -6352,6 +7189,14 @@ fAIAction0x39_WalkForTime:
     RTS                                                        ;84B426|60      |      ;
  
  
+;;
+; @brief   AI command 0x3A: like 0x39 but also presses B (run).
+; @details The input word is aAIJoypadInput[direction] | aAIJoypadInput[4] (the B button).
+; @case    $3A
+; @modifies ptrAIActionData, strcAiControlData.input, strcAiControlData.counter, strcPlayer.flags, strcPlayer.action
+; @note    Also increments slot wait counter +10 while running.
+; @mode    M16X16 -> ?
+;;
 fAIAction0x3A_RunForTime:
     REP #$30                                                   ;84B427|C230    |      ;
     %CheckPlayerFlags(!PFLAGS_AISTEERING)
@@ -6419,9 +7264,22 @@ fAIAction0x3A_RunForTime:
     RTS                                                        ;84B4D1|60      |      ;
  
  
+;;
+; @brief   Pad bits that the walk / run commands press for direction index 0..3 plus B.
+; @format  5 words: $0400 (down), $0800 (up), $0100 (right), $0200 (left), $8000 (B). Indexed by the !JOYPAD_* AI input indexes.
+; @index   operand of AI commands 0x39 / 0x3A (index * 2), entry 4 (B) added by 0x3A.
+; @used_by fAIAction0x39_WalkForTime, fAIAction0x3A_RunForTime
+;;
 aAIJoypadInput:
     dw $0400,$0800,$0100,$0200,$8000                           ;84B4D2|        |      ; 0x05 * [n16]
  
+;;
+; @brief   AI command 0x3B: give the player a carried item instantly (no pick-up animation) and set PFLAGS_HOLDINGITEM.
+; @details Operand: [item id] -> strcPlayerData.carryItemId.
+; @case    $3B
+; @modifies ptrAIActionData, strcPlayerData.carryItemId, strcPlayer.flags
+; @mode    M16X16 -> ?
+;;
 fAIAction0x3B_SetCarryItemHolding:
     REP #$30                                                   ;84B4DC|C230    |      ;
     %AIMoveAction($0001)
@@ -6433,6 +7291,12 @@ fAIAction0x3B_SetCarryItemHolding:
     RTS                                                        ;84B502|60      |      ;
  
  
+;;
+; @brief   AI command 0x3C: send the player home (area !AREA_HOUSE1) with a forced transfer and set daily4 $0020.
+; @case    $3C
+; @modifies ptrAIActionData, nDestinationAreaId, strcDialogDisplay.mapFlags, strcFlags.daily4
+; @mode    M16X16 -> ?
+;;
 fAIAction0x3C_TeleportToHouse:
     REP #$30                                                   ;84B503|C230    |      ;
     %AIMoveAction($0001)
@@ -6447,6 +7311,13 @@ fAIAction0x3C_TeleportToHouse:
     RTS                                                        ;84B52C|60      |      ;
  
  
+;;
+; @brief   AI command 0x3D: set the destination area and force the transfer (mapFlags bit $4000).
+; @details Operand: [area id].
+; @case    $3D
+; @modifies ptrAIActionData, nDestinationAreaId, strcDialogDisplay.mapFlags
+; @mode    M16X16 -> ?
+;;
 fAIAction0x3D_TeleportToArea:
     REP #$30                                                   ;84B52D|C230    |      ;
     %AIMoveAction($0001)
@@ -6461,6 +7332,13 @@ fAIAction0x3D_TeleportToArea:
     RTS                                                        ;84B555|60      |      ;
  
  
+;;
+; @brief   AI command 0x3E: set the carried item and start the pick-up pose (PACTION_ITEMONHAND).
+; @details Operand: [item id] -> strcPlayerData.carryItemId.
+; @case    $3E
+; @modifies ptrAIActionData, strcPlayerData.carryItemId, strcPlayer.action
+; @mode    M16X16 -> ?
+;;
 fAIAction0x3E_PickUpCarryItem:
     REP #$30                                                   ;84B556|C230    |      ;
     %AIMoveAction($0001)
@@ -6472,6 +7350,12 @@ fAIAction0x3E_PickUpCarryItem:
     RTS                                                        ;84B57A|60      |      ;
  
  
+;;
+; @brief   AI command 0x3F: make the player drop / throw the carried item (PACTION_DROPITEM).
+; @case    $3F
+; @modifies ptrAIActionData, strcPlayer.action
+; @mode    M16X16 -> ?
+;;
 fAIAction0x3F_ThrowHeldItem:
     REP #$30                                                   ;84B57B|C230    |      ;
     %AIMoveAction($0001)
@@ -6479,6 +7363,12 @@ fAIAction0x3F_ThrowHeldItem:
     RTS                                                        ;84B58E|60      |      ;
  
  
+;;
+; @brief   AI command 0x40: set daily2 $0008 so the tile / object under the player is not checked (cut scenes). Undone by 0x4E.
+; @case    $40
+; @modifies ptrAIActionData, strcFlags.daily2
+; @mode    M16X16 -> ?
+;;
 fAIAction0x40_DisableTileInteractions:
     REP #$30                                                   ;84B58F|C230    |      ;
     %AIMoveAction($0001)
@@ -6487,6 +7377,14 @@ fAIAction0x40_DisableTileInteractions:
     RTS                                                        ;84B5A8|60      |      ;
  
  
+;;
+; @brief   AI command 0x41: add a signed word to a word in RAM, clamped to 0..999.
+; @details Operands: [24-bit address][word value].
+; @case    $41
+; @modifies ptrAIActionData, ptrTemp0x72, strcVariables.n16Temp1
+; @note    Writes the word at the operand address.
+; @mode    M16X16 -> ?
+;;
 fAIAction0x41_AddValue16:
     REP #$30                                                   ;84B5A9|C230    |      ;
     %AIMoveAction($0001)
@@ -6523,6 +7421,15 @@ fAIAction0x41_AddValue16:
     RTS                                                        ;84B601|60      |      ;
  
  
+;;
+; @brief   AI command 0x42: add a signed 24-bit amount to the money (via fGameEngine_AddProfit); a negative result sets nMoney = 0.
+; @details Operands: two 24-bit values; the first is loaded into ptrTemp0x72 and immediately overwritten by the second, which is the amount handed to fGameEngine_AddProfit.
+; @case    $42
+; @modifies ptrAIActionData, ptrTemp0x72, nMoney
+; @mode    M16X16 -> ?
+; @calls   fGameEngine_AddProfit
+; @note    confidence: medium - the role of the first operand is unclear (always overwritten); the add targets nMoney.
+;;
 fAIAction0x42_AddValue24:
     REP #$30                                                   ;84B602|C230    |      ;
     %AIMoveAction($0001)
@@ -6555,6 +7462,13 @@ fAIAction0x42_AddValue24:
     RTS                                                        ;84B665|60      |      ;
  
  
+;;
+; @brief   AI command 0x43: jump when the word at a 24-bit address equals a constant.
+; @details Operands: [24-bit address][word value][word target].
+; @case    $43
+; @modifies ptrAIActionData, ptrTemp0x72, strcVariables.n16Temp1
+; @mode    M16X16 -> ?
+;;
 fAIAction0x43_JumpIfEqual16:
     REP #$30                                                   ;84B666|C230    |      ;
     %AIMoveAction($0001)
@@ -6584,6 +7498,13 @@ fAIAction0x43_JumpIfEqual16:
     RTS                                                        ;84B6BB|60      |      ;
  
  
+;;
+; @brief   AI command 0x44: jump when the 24-bit value at an address equals a constant.
+; @details Operands: [24-bit address][24-bit value (word + word)][word target].
+; @case    $44
+; @modifies ptrAIActionData, ptrTemp0x72, strcVariables.n16Temp1, strcVariables.n16Temp2
+; @mode    M16X16 -> ?
+;;
 fAIAction0x44_JumpIfEqual24:
     REP #$30                                                   ;84B6BC|C230    |      ;
     %AIMoveAction($0001)
@@ -6622,6 +7543,13 @@ fAIAction0x44_JumpIfEqual24:
     RTS                                                        ;84B72C|60      |      ;
  
  
+;;
+; @brief   AI command 0x45: jump when min <= word at a 24-bit address <= max (unsigned).
+; @details Operands: [24-bit address][word min][word max][word target].
+; @case    $45
+; @modifies ptrAIActionData, ptrTemp0x72, strcVariables.n16Temp1, strcVariables.n16Temp2
+; @mode    M16X16 -> ?
+;;
 fAIAction0x45_JumpIfBetween16:
     REP #$30                                                   ;84B72D|C230    |      ;
     %AIMoveAction($0001)
@@ -6659,6 +7587,13 @@ fAIAction0x45_JumpIfBetween16:
     RTS                                                        ;84B799|60      |      ;
  
  
+;;
+; @brief   AI command 0x46: jump when min <= 24-bit value at an address <= max (unsigned, 32-bit compare with carry).
+; @details Operands: [24-bit address][24-bit min][24-bit max][word target]; max is incremented by one before the comparison.
+; @case    $46
+; @modifies ptrAIActionData, ptrTemp0x72, strcVariables.n16Temp1, strcVariables.n16Temp2, strcVariables.n16Temp3, strcVariables.n16Temp4
+; @mode    M16X16 -> ?
+;;
 fAIAction0x46_JumpIfBetween24:
     REP #$30                                                   ;84B79A|C230    |      ;
     %AIMoveAction($0001)
@@ -6721,6 +7656,14 @@ fAIAction0x46_JumpIfBetween24:
     RTS                                                        ;84B84B|60      |      ;
  
  
+;;
+; @brief   AI command 0x47: write a byte constant to a 24-bit address.
+; @details Operands: [24-bit address][value].
+; @case    $47
+; @modifies ptrAIActionData, ptrTemp0x72
+; @note    Writes the byte at the operand address.
+; @mode    M16X16 -> ?
+;;
 fAIAction0x47_SetValue8:
     REP #$30                                                   ;84B84C|C230    |      ;
     %AIMoveAction($0001)
@@ -6739,6 +7682,14 @@ fAIAction0x47_SetValue8:
     RTS                                                        ;84B888|60      |      ;
  
  
+;;
+; @brief   AI command 0x48: write a 24-bit constant to a 24-bit address.
+; @details Operands: [24-bit address][24-bit value] (stored as word + byte-extended word).
+; @case    $48
+; @modifies ptrAIActionData, ptrTemp0x72
+; @note    Writes three bytes at the operand address (word + word write: the 4th byte is also written, confidence: medium).
+; @mode    M16X16 -> ?
+;;
 fAIAction0x48_SetValue24:
     REP #$30                                                   ;84B889|C230    |      ;
     %AIMoveAction($0001)
@@ -6762,6 +7713,15 @@ fAIAction0x48_SetValue24:
     RTS                                                        ;84B8D8|60      |      ;
  
  
+;;
+; @brief   AI command 0x49: like 0x2B but the direction is taken from the player (strcPlayer.direction).
+; @details Operand: [word sprite table address (bank $B3)]; creates the object and loads the sprite for that direction.
+; @case    $49
+; @modifies ptrAIActionData, ptrTemp0x72
+; @note    Writes slot fields +01 (|= 3), +02, +10, +33 and (via fAI_LoadSlotSpriteFromDirTable) +14, +16.
+; @mode    M16X16 -> ?
+; @calls   fAI_LoadSlotSpriteFromDirTable
+;;
 fAIAction0x49_SetSpriteTableFacingPlayer:
     REP #$30                                                   ;84B8D9|C230    |      ;
     %AIMoveAction($0001)
@@ -6803,6 +7763,16 @@ fAIAction0x49_SetSpriteTableFacingPlayer:
     RTS                                                        ;84B93B|60      |      ;
  
  
+;;
+; @brief   AI command 0x4A: one-frame poll - when the player presses A next to the actor with empty hands, pick it up (carry item id $13, turnip).
+; @details Same checks as the pick-up of 0x34 plus not hugging the dog and not in PACTION_17. On success the slot is deactivated with the
+;          destroy flag and the player gets carryItemId = !EITEM_TURNIPSEED (value $13 = Turnip in the carried item table) with PACTION_ITEMONHAND.
+; @case    $4A
+; @modifies ptrAIActionData, strcPlayerData.carryItemId, strcPlayer.action
+; @note    Writes slot fields +00, +01, +10.
+; @mode    M16X16 -> ?
+; @note    confidence: medium - the equipped-item constant is used for a carried item id.
+;;
 fAIAction0x4A_PickUpObjectOnButtonA:
     REP #$30                                                   ;84B93C|C230    |      ;
     %AIMoveAction($0001)
@@ -6899,6 +7869,14 @@ fAIAction0x4A_PickUpObjectOnButtonA:
     RTS                                                        ;84BA0F|60      |      ;
  
  
+;;
+; @brief   AI command 0x4B: replace one tile of the current object map.
+; @details Operands: [tile id][word X pixels][word Y pixels] -> fMap_UpdateCurrentTilemap(A = tile, X, Y).
+; @case    $4B
+; @modifies ptrAIActionData
+; @mode    M16X16 -> ?
+; @calls   fMap_UpdateCurrentTilemap
+;;
 fAIAction0x4B_ReplaceMapTile:
     REP #$30                                                   ;84BA10|C230    |      ;
     %AIMoveAction($0001)
@@ -6921,6 +7899,14 @@ fAIAction0x4B_ReplaceMapTile:
     RTS                                                        ;84BA50|60      |      ;
  
  
+;;
+; @brief   AI command 0x4C: set bit1 of the slot's active byte (+00); marks the actor as passable for collision tests (?).
+; @case    $4C
+; @modifies ptrAIActionData
+; @note    Writes slot field +00.
+; @mode    M16X16 -> ?
+; @note    confidence: low - the consumer of bit1 is outside this file.
+;;
 fAIAction0x4C_SetPassable:
     REP #$30                                                   ;84BA51|C230    |      ;
     %AIMoveAction($0001)
@@ -6936,6 +7922,17 @@ fAIAction0x4C_SetPassable:
     RTS                                                        ;84BA71|60      |      ;
  
  
+;;
+; @brief   AI command 0x4D: jump when the player uses the Blue Feather (daily3 $0040) next to this actor; the actor turns to face the player.
+; @details Operand: [word target]. Conditions: +0C set, PACTION_USINGTOOL, daily3 $0040. On success: jump, +08 = +07, dx = dy = 0, +0C = 0,
+;          direction = player direction XOR 1, stop sprite, update flags |= $14, wait counter +1. Used by the proposal scripts.
+; @case    $4D
+; @modifies ptrAIActionData, ptrTemp0x72
+; @note    Writes slot fields +01, +02, +03, +04, +08, +0C, +10.
+; @mode    M16X16 -> ?
+; @calls   fAI_LoadSlotSpriteFromDirTable
+; @note    confidence: medium - the use in proposal scripts is inferred from the blue feather item.
+;;
 fAIAction0x4D_JumpIfBlueFeatherUsed:
     REP #$30                                                   ;84BA72|C230    |      ;
     %AIMoveAction($0001)
@@ -7023,6 +8020,12 @@ fAIAction0x4D_JumpIfBlueFeatherUsed:
     RTS                                                        ;84BB30|60      |      ;
  
  
+;;
+; @brief   AI command 0x4E: clear daily2 $0008 (re-enable tile / object checks disabled by 0x40).
+; @case    $4E
+; @modifies ptrAIActionData, strcFlags.daily2
+; @mode    M16X16 -> ?
+;;
 fAIAction0x4E_EnableTileInteractions:
     REP #$30                                                   ;84BB31|C230    |      ;
     %AIMoveAction($0001)
@@ -7031,6 +8034,15 @@ fAIAction0x4E_EnableTileInteractions:
     RTS                                                        ;84BB4A|60      |      ;
  
  
+;;
+; @brief   AI command 0x4F: set daily4 $8000 (tool use blocked) and put the equipped tools back into the shed items.
+; @details For toolEquipped and toolSecond the shed bit from nShedToolPlacementTable (entry tool*8+6: row offset, +7: bit mask) is set in
+;          strcShedItems.row1+row and the slot in strcPlayerData is cleared.
+; @case    $4F
+; @modifies ptrAIActionData, strcFlags.daily4, strcShedItems.row1, strcPlayerData.toolEquipped, strcPlayerData.toolSecond, strcVariables.n8Temp1
+; @mode    M16X16 -> ?
+; @note    confidence: medium - the name DisableToolUse follows docs/ai/commands.md; the shed bookkeeping is derived from the code.
+;;
 fAIAction0x4F_DisableToolUse:
     REP #$30                                                   ;84BB4B|C230    |      ;
     %AIMoveAction($0001)
@@ -7103,6 +8115,18 @@ fAIAction0x4F_DisableToolUse:
     RTS                                                        ;84BBD9|60      |      ;
  
  
+;;
+; @brief   AI command 0x50: make the player put down whatever he carries or hugs and reset the player sprite to the facing direction.
+; @details Nothing carried: ends the dog hug (dog placed at area nCurrentSeasonID, (X $78, Y $01A8)). Chicken / chick ($25 / $26): the
+;          chicken record from strcPlayerData.nAiArg is put back into the coop (map id $28, position from aGameEngine_AddChickenPositionsData,
+;          held flag cleared). Any other carry item is simply dropped (carryItemId = 0).
+; @case    $50
+; @modifies ptrAIActionData, ptrTemp0x72, strcPlayerData.carryItemId, strcObjectData.spriteIdx, strcPlayer.flags, nDogAreaId, nDogX, nDogY
+; @note    Writes the chicken record (strcChickenData) fields statusFlags, mapID, positionX, positionY.
+; @mode    M16X16 -> ?
+; @calls   fGameEngine_GetChickenData
+; @note    confidence: medium - map id $28 is !AREA_COOP.
+;;
 fAIAction0x50_ReleaseCarried:
     REP #$30                                                   ;84BBDA|C230    |      ;
     %AIMoveAction($0001)
@@ -7193,6 +8217,14 @@ fAIAction0x50_ReleaseCarried:
     RTS                                                        ;84BC9B|60      |      ;
  
  
+;;
+; @brief   AI command 0x51: like 0x50 for chickens and the dog, but also clears carry item $29 (mole) and does not reset the player sprite.
+; @case    $51
+; @modifies ptrAIActionData, ptrTemp0x72, strcPlayerData.carryItemId, strcPlayer.flags, nDogAreaId, nDogX, nDogY
+; @note    Writes the chicken record (strcChickenData) fields statusFlags, mapID, positionX, positionY.
+; @mode    M16X16 -> ?
+; @calls   fGameEngine_GetChickenData
+;;
 fAIAction0x51_ReleaseCarriedAnimal:
     REP #$30                                                   ;84BC9C|C230    |      ;
     %AIMoveAction($0001)
@@ -7274,6 +8306,15 @@ fAIAction0x51_ReleaseCarriedAnimal:
     RTS                                                        ;84BD43|60      |      ;
  
  
+;;
+; @brief   AI command 0x52: one-frame poll - A press next to the actor with empty hands deactivates it and sets daily4 $0002 (event flag read by script 0x45).
+; @details Same checks as 0x4A without the PACTION_17 test and without the item grant.
+; @case    $52
+; @modifies ptrAIActionData, strcFlags.daily4
+; @note    Writes slot fields +00, +01, +10.
+; @mode    M16X16 -> ?
+; @note    confidence: low - the event that follows is not analysed.
+;;
 fAIAction0x52_PickUpObjectForEventA:
     REP #$30                                                   ;84BD44|C230    |      ;
     %AIMoveAction($0001)
@@ -7364,6 +8405,14 @@ fAIAction0x52_PickUpObjectForEventA:
     RTS                                                        ;84BE0C|60      |      ;
  
  
+;;
+; @brief   AI command 0x53: like 0x52 but sets daily4 $0004 (second event variant).
+; @case    $53
+; @modifies ptrAIActionData, strcFlags.daily4
+; @note    Writes slot fields +00, +01, +10.
+; @mode    M16X16 -> ?
+; @note    confidence: low - the event that follows is not analysed.
+;;
 fAIAction0x53_PickUpObjectForEventB:
     REP #$30                                                   ;84BE0D|C230    |      ;
     %AIMoveAction($0001)
@@ -7454,6 +8503,15 @@ fAIAction0x53_PickUpObjectForEventB:
     RTS                                                        ;84BED5|60      |      ;
  
  
+;;
+; @brief   AI command 0x54: show a dialog in input mode 6 (closes without player input) and wait one frame.
+; @details Operands: [word dialog id][dialogUnk191 byte]; clears the word at $09B1+!RAM_SHIFT and sets strcDialogDisplay.mapUnk19A = 6.
+; @case    $54
+; @modifies ptrAIActionData, strcDialogDisplay.dialogUnk191, strcDialogDisplay.mapUnk19A
+; @note    Also increments slot wait counter +10 and clears $09B1+!RAM_SHIFT.
+; @mode    M16X16 -> ?
+; @calls   fDialog_DialogHandler
+;;
 fAIAction0x54_ShowDialogAutoClose:
     REP #$30                                                   ;84BED6|C230    |      ;
     %AIMoveAction($0001)
@@ -7480,6 +8538,13 @@ fAIAction0x54_ShowDialogAutoClose:
     RTS                                                        ;84BF1F|60      |      ;
  
  
+;;
+; @brief   AI command 0x55: jump when bit n of the 16-bit word at a 24-bit address is NOT set (negation of 0x14).
+; @details Operands: [24-bit address][bit number][word target]; mask from aAICheckFlags.
+; @case    $55
+; @modifies ptrAIActionData, ptrTemp0x72, strcVariables.n16Temp1
+; @mode    M16X16 -> ?
+;;
 fAIAction0x55_JumpIfFlagNotSet:
     REP #$30                                                   ;84BF20|C230    |      ;
     %AIMoveAction($0001)
@@ -7516,6 +8581,13 @@ fAIAction0x55_JumpIfFlagNotSet:
     RTS                                                        ;84BF80|60      |      ;
  
  
+;;
+; @brief   AI command 0x56: when a tool is equipped start using it (PACTION_USINGTOOL and the tool animation).
+; @case    $56
+; @modifies ptrAIActionData, strcPlayer.action
+; @mode    M16X16 -> ?
+; @calls   fToolUsedAnimationHandler
+;;
 fAIAction0x56_UseEquippedItem:
     REP #$30                                                   ;84BF81|C230    |      ;
     %AIMoveAction($0001)
@@ -7529,6 +8601,14 @@ fAIAction0x56_UseEquippedItem:
     RTS                                                        ;84BF9F|60      |      ;
  
  
+;;
+; @brief   AI command 0x57: change the player's stamina by a signed byte via fPlayerEnergyHandler.
+; @details Operand: [signed amount].
+; @case    $57
+; @modifies ptrAIActionData
+; @mode    M16X16 -> ?
+; @calls   fPlayerEnergyHandler
+;;
 fAIAction0x57_UpdateStamina:
     REP #$30                                                   ;84BFA0|C230    |      ;
     %AIMoveAction($0001)
@@ -7539,6 +8619,14 @@ fAIAction0x57_UpdateStamina:
     RTS                                                        ;84BFBE|60      |      ;
  
  
+;;
+; @brief   AI command 0x58: replace one tile of the farm tilemap.
+; @details Operands: [tile id][word X pixels][word Y pixels] -> fMap_UpdateFarmTilemapCoords.
+; @case    $58
+; @modifies ptrAIActionData
+; @mode    M16X16 -> ?
+; @calls   fMap_UpdateFarmTilemapCoords
+;;
 fAIAction0x58_ReplaceFarmTile:
     REP #$30                                                   ;84BFBF|C230    |      ;
     %AIMoveAction($0001)
@@ -7561,6 +8649,12 @@ fAIAction0x58_ReplaceFarmTile:
     RTS                                                        ;84BFFF|60      |      ;
  
  
+;;
+; @brief   AI command 0x59: swap the two equipped tools (PACTION_SWAPTOOL).
+; @case    $59
+; @modifies ptrAIActionData, strcPlayer.action
+; @mode    M16X16 -> ?
+;;
 fAIAction0x59_SwapEquippedItems:
     REP #$30                                                   ;84C000|C230    |      ;
     %AIMoveAction($0001)
@@ -7568,6 +8662,13 @@ fAIAction0x59_SwapEquippedItems:
     RTS                                                        ;84C013|60      |      ;
  
  
+;;
+; @brief   Bit masks 1 << n for n = 0..15 used by AI command 0x55 to test flag bits.
+; @format  16 words: $0001, $0002, $0004 ... $8000.
+; @index   bit number * 2, operand of fAIAction0x55_JumpIfFlagNotSet.
+; @used_by fAIAction0x55_JumpIfFlagNotSet
+; @note    Same values as the generated aAISetMask table (see build/gen/blocks/ai_action_tables.asm).
+;;
 aAICheckFlags:
     dw $0001,$0002,$0004,$0008,$0010,$0020                     ;84C014|        |      ; 0x10 * [n16]
     dw $0040,$0080,$0100,$0200,$0400,$0800                     ;84C020|        |      ;
