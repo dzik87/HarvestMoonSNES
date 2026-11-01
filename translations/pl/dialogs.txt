@@ -1474,7 +1474,7 @@ Przepraszam za kłopot. Proszę o pomoc.<END>
 Chyba siostrzyczka poszła w góry? Mówiła, że chciałaby tam iść sama.<END>
 
 @@ sDialog_0x01D1 @@
-Pytasz, gdzie jest Maria? Dokładnie na północny wschód...
+Pytasz, gdzie jest Maria? Dokładnie na północny wschód...<NEXT>
 Tam, skąd widać staw.<END>
 
 @@ sDialog_0x01D2 @@
@@ -1507,15 +1507,18 @@ To okropne...<END>
 Ten zapach trochę mi nie odpowiada.<END>
 
 @@ sDialog_0x01DB @@
-Hej! Nie widziałeś wiatrowskazu z kogutem? Takiego, który stał na naszym dachu.<NEXT>
-Wczoraj w nocy zdmuchnął go silny wiatr. Chyba poleciał w tę stronę, więc jak go znajdziesz, daj mi znać.<END>
+Hej! Nie widziałeś wiatrowskazu z kogutem?<NEXT>
+Takiego, który stał na naszym dachu.<NEXT>
+Wczoraj w nocy zdmuchnął go silny wiatr.<NEXT>
+Chyba poleciał w tę stronę, więc jak go znajdziesz, daj mi znać.<END>
 
 @@ sDialog_0x01DC @@
 Ten wiatrowskaz zrobiłem kiedyś dla żony, więc dla Ann jest jak pamiątka.<NEXT>
 Zawsze wesoła Ann całkiem posmutniała...<END>
 
 @@ sDialog_0x01DD @@
-Gdzie jest ten wiatrowskaz? Szukaj miejsca, gdzie schowasz się przed deszczem. A słowo klucz to: kura!<END>
+Gdzie jest ten wiatrowskaz? Szukaj miejsca, gdzie schowasz się przed deszczem.<NEXT>
+A słowo klucz to: kura!<END>
 
 @@ sDialog_0x01DE @@
 Nie znalazłeś... no tak...<END>
@@ -1544,7 +1547,8 @@ Tata poszedł opiekować się mamą Niny, bo jest chora.<END>
 ...Zioła lecznicze... Trawa z małymi białymi kwiatkami...<END>
 
 @@ sDialog_0x01E6 @@
-Hmm, w ciemnym, ciasnym miejscu leży dziewczynka. Trzeba tam szybko pójść, bo będzie źle.<END>
+Hmm, w ciemnym, ciasnym miejscu leży dziewczynka.<NEXT>
+Trzeba tam szybko pójść, bo będzie źle.<END>
 
 @@ sDialog_0x01E7 @@
 ...Dziękuję. Uff, jak dobrze. Teraz mama wyzdrowieje.<END>
@@ -1612,7 +1616,8 @@ Przyniosłeś młot? Młot!?<END>
 
 @@ sDialog_0x01FB @@
 Hm? Eve?<NEXT>
-Podobno dziadek wpadł w kłopoty w górach, więc poszła tam i do tej pory nie wróciła.<END>
+Podobno dziadek wpadł w kłopoty w górach,<NEXT>
+więc poszła tam i do tej pory nie wróciła.<END>
 
 @@ sDialog_0x01FC @@
 Uuu, auć, auć...<NEXT>
@@ -1638,16 +1643,19 @@ Zbierzmy się na placu przed trzecią.<END>
 @@ sDialog_0x0202 @@
 Festiwal Kwiatów, wiesz, to święto z dawnych czasów...<NEXT>
 Bogini Ziemi chciała pocieszyć dziewczynę, która straciła ukochanego,<NEXT>
-i podobno właśnie tego dnia po raz pierwszy sprawiła, że na ziemi zakwitły kwiaty. Wcześniej nie było ich na ziemi.<END>
+i podobno właśnie tego dnia po raz pierwszy sprawiła, że na ziemi zakwitły kwiaty.<NEXT>
+Wcześniej nie było ich na ziemi.<END>
 
 @@ sDialog_0x0203 @@
-Jutro na festiwalu będę sprzedawać coś wspaniałego, więc czekaj z niecierpliwością!<END>
+Jutro na festiwalu będę sprzedawać coś wspaniałego,<NEXT>
+więc czekaj z niecierpliwością!<END>
 
 @@ sDialog_0x0204 @@
 W tym roku na pewno dam jej prezent.<END>
 
 @@ sDialog_0x0205 @@
-Bóg nauczył nas łagodnego serca, które podziwia kwiaty, i serca pełnego spokoju.<END>
+Bóg nauczył nas łagodnego serca, które podziwia kwiaty,<NEXT>
+i serca pełnego spokoju.<END>
 
 @@ sDialog_0x0206 @@
 Jutro Festiwal Kwiatów. Świętuje się w nim także nadejście wiosny.<END>
@@ -1672,12 +1680,14 @@ Witamy! Dziś sprzedajemy cudowne perfumy.<NEXT>
 Wybierz zapach, który ci się podoba.<END>
 
 @@ sDialog_0x020D @@
-To perfumy zrobione z kwiatów "Róży". Pachną słodko i romantycznie, prawda?<NEXT>
+To perfumy zrobione z kwiatów "Róży".<NEXT>
+Pachną słodko i romantycznie, prawda?<NEXT>
 Kosztują 1000G. Kupisz?<NEXT>
 <OPTLBL 1>Kupuję<OPTLBL 2>Nie kupuję<OPTLBL 3>Kasa <NUM 7 15>0G<OPT 2>
 
 @@ sDialog_0x020E @@
-To perfumy zrobione z kwiatów "Bzu". Mają delikatny, elegancki zapach, prawda?<NEXT>
+To perfumy zrobione z kwiatów "Bzu".<NEXT>
+Mają delikatny, elegancki zapach, prawda?<NEXT>
 Kosztują 1000G. Kupisz?<NEXT>
 <OPTLBL 1>Kupuję<OPTLBL 2>Nie kupuję<OPTLBL 3>Kasa <NUM 7 16>0G<OPT 2>
 
@@ -1738,7 +1748,8 @@ Podobno Bogini Ziemi mieszka w małym źródle.<END>
 Dobrze przemyśl gust dziewczyny i dopiero wtedy daj jej prezent.<END>
 
 @@ sDialog_0x0220 @@
-Kiedy wszystko wypełnia zapach kwiatów, radość z nadejścia wiosny ogrzewa serce.<END>
+Kiedy wszystko wypełnia zapach kwiatów,<NEXT>
+radość z nadejścia wiosny ogrzewa serce.<END>
 
 @@ sDialog_0x0221 @@
 Kwiaty koją ludzkie serca. Oby wszyscy mogli mieć w sobie łagodność.<END>
@@ -1790,7 +1801,8 @@ Czasem dobrze jest zaszaleć na festiwalu, prawda?<END>
 Hi, hi, od zapachu kwiatów można się chyba upić.<END>
 
 @@ sDialog_0x0231 @@
-Bóg też nie ma wyczucia. Skoro chce nas pocieszyć, to czy nie lepszy byłby alkohol? Nie sądzisz?<END>
+Bóg też nie ma wyczucia.<NEXT>
+Skoro chce nas pocieszyć, to czy nie lepszy byłby alkohol? Nie sądzisz?<END>
 
 @@ sDialog_0x0232 @@
 Co? Że jestem ładniejsza niż kwiaty? Mówisz, że tego nie powiedziałeś? ...Co?<NEXT>
@@ -1800,7 +1812,8 @@ Co? Że jestem ładniejsza niż kwiaty? Mówisz, że tego nie powiedziałeś? ..
 Jak wybierzesz inną dziewczynę, nie daruję ci.<END>
 
 @@ sDialog_0x0234 @@
-Czy możemy już zacząć taniec? Jeśli masz jeszcze coś do zrobienia, zrób to szybko.<NEXT>
+Czy możemy już zacząć taniec?<NEXT>
+Jeśli masz jeszcze coś do zrobienia, zrób to szybko.<NEXT>
 <OPTLBL 1>Zaczynajmy<OPTLBL 2>Chwileczkę<OPT 2>
 
 @@ sDialog_0x0235 @@
@@ -1810,20 +1823,24 @@ W takim razie wybierz sobie partnerkę.<END>
 Jeśli masz jeszcze coś do zrobienia, zrób to szybko.<END>
 
 @@ sDialog_0x0237 @@
-No i znowu nadszedł Festiwal Zbiorów. Czy wszyscy już zdecydowali, co zabiorą ze sobą?<NEXT>
-Festiwal odbędzie się jutro na placu. Trwa do trzeciej po południu, więc nie spóźnijcie się.<END>
+No i znowu nadszedł Festiwal Zbiorów.<NEXT>
+Czy wszyscy już zdecydowali, co zabiorą ze sobą?<NEXT>
+Festiwal odbędzie się jutro na placu.<NEXT>
+Trwa do trzeciej po południu, więc nie spóźnijcie się.<END>
 
 @@ sDialog_0x0238 @@
 Jutro Festiwal Zbiorów.<END>
 
 @@ sDialog_0x0239 @@
-Zdecydowałeś już, co zabierzesz na Festiwal Zbiorów? Ja chcę skończyć maszynę i zaprezentować ją z przytupem.<END>
+Zdecydowałeś już, co zabierzesz na Festiwal Zbiorów?<NEXT>
+Ja chcę skończyć maszynę i zaprezentować ją z przytupem.<END>
 
 @@ sDialog_0x023A @@
 Hmm, co by tu zabrać? Czy zioła albo przyprawy się nie nadadzą?<END>
 
 @@ sDialog_0x023B @@
-Jutro przyniosę coś, na czym naprawdę się wyżyłam kulinarnie, więc czekaj z niecierpliwością.<END>
+Jutro przyniosę coś, na czym naprawdę się wyżyłam kulinarnie,<NEXT>
+więc czekaj z niecierpliwością.<END>
 
 @@ sDialog_0x023C @@
 Jutro Festiwal Zbiorów. Uwielbiam śpiewać i tańczyć. Nie mogę się doczekać.<END>
@@ -1836,10 +1853,12 @@ Festiwal Zbiorów to święto, na którym świętuje się zbiory z całego roku.
 
 @@ sDialog_0x023F @@
 Do jutrzejszego wielkiego gulaszu zbiorów przynieś coś, co da się normalnie zjeść.<NEXT>
-Nie przynoś żadnych sandałów ani takich rzeczy. Wyszedłby z tego gulasz zgrozy.<END>
+Nie przynoś żadnych sandałów ani takich rzeczy.<NEXT>
+Wyszedłby z tego gulasz zgrozy.<END>
 
 @@ sDialog_0x0240 @@
-Jutro Festiwal Zbiorów, szefie! Skończ pracę wcześniej i przyjdź na plac przed trzecią!<NEXT>
+Jutro Festiwal Zbiorów, szefie!<NEXT>
+Skończ pracę wcześniej i przyjdź na plac przed trzecią!<NEXT>
 Jeśli masz zwierzęta, lepiej daj im wcześniej paszę!<NEXT>
 I przynieś coś do gulaszu! No to do widzenia, szefie!<END>
 
@@ -1861,24 +1880,28 @@ W mojej porcji były kwiaty. Ale były zaskakująco smaczne.<END>
 
 @@ sDialog_0x0246 @@
 Było pyszne! No wiesz, u nas nie ma żony.<NEXT>
-Nie, nie mówię, że to, co gotuje Ann, jest niedobre. Całkiem nieźle się to je. Jak się przywyknie.<END>
+Nie, nie mówię, że to, co gotuje Ann, jest niedobre.<NEXT>
+Całkiem nieźle się to je. Jak się przywyknie.<END>
 
 @@ sDialog_0x0247 @@
 Kosisz trawę pastewną? Można ją kosić do jesieni, więc nakoś jak najwięcej.<NEXT>
 Bo inaczej zimą zabraknie paszy dla krów i kur i będziesz w panice.<END>
 
 @@ sDialog_0x0248 @@
-Jeśli w życiu dobre jedzenie smakuje ci jak dobre jedzenie, to już jest szczęście.<END>
+Jeśli w życiu dobre jedzenie smakuje ci jak dobre jedzenie,<NEXT>
+to już jest szczęście.<END>
 
 @@ sDialog_0x0249 @@
 Już jestem pełny po brzegi!<END>
 
 @@ sDialog_0x024A @@
-Hej, zapraszam! Dango w liściu bambusa, specjalność północy! Co powiesz? Tylko 300G!<NEXT>
+Hej, zapraszam! Dango w liściu bambusa,<NEXT>
+specjalność północy! Co powiesz? Tylko 300G!<NEXT>
 <OPTLBL 1>Kupuję<OPTLBL 2>Nie kupuję<OPTLBL 3>Kasa <NUM 7 19>0G<OPT 2>
 
 @@ sDialog_0x024B @@
-Hej, zapraszam! Onigiri w stu procentach z ryżu Hoshihikari! Świeżo ugotowane i parujące!<NEXT>
+Hej, zapraszam! Onigiri w stu procentach z ryżu Hoshihikari!<NEXT>
+Świeżo ugotowane i parujące!<NEXT>
 Co powiesz? Tylko 200G!<NEXT>
 <OPTLBL 1>Kupuję<OPTLBL 2>Nie kupuję<OPTLBL 3>Kasa <NUM 7 20>0G<OPT 2>
 
@@ -1889,7 +1912,8 @@ Dzięki! Uważaj, żeby ci policzki nie odpadły z zachwytu!<END>
 Nie mów tak! Jeden kęs i będziesz po uszy szczęśliwy!<END>
 
 @@ sDialog_0x024E @@
-W tym roku nic nie przyniosłem. Szukanie rzadkich nasion to ciężka sprawa.<END>
+W tym roku nic nie przyniosłem.<NEXT>
+Szukanie rzadkich nasion to ciężka sprawa.<END>
 
 @@ sDialog_0x024F @@
 Owoce z południa są smaczne, ale zapach mają tak ostry, że nie daję rady.<END>
@@ -1986,7 +2010,8 @@ A takie dobre...<END>
 Nawet jeśli coś w nim jest, trzeba jeść z wdzięcznością, prawda?<END>
 
 @@ sDialog_0x026B @@
-Ta-dam! Ulepszona automatyczna maszyna do zbiorów! No, naciśnij przełącznik!<NEXT>
+Ta-dam! Ulepszona automatyczna maszyna do zbiorów!<NEXT>
+No, naciśnij przełącznik!<NEXT>
 <OPTLBL 1>Dobrze<OPTLBL 2>Nie chcę<OPT 2>
 
 @@ sDialog_0x026C @@
@@ -1997,7 +2022,9 @@ Ta-dam! Ulepszona automatyczna maszyna do zbiorów! No, naciśnij przełącznik!
 Ahahaha! Wiesz, jak wypiłam alkohol, to motylki, no, latajo, no!<END>
 
 @@ sDialog_0x026E @@
-Jutro Festiwal Gwiezdnej Nocy, szefie! Miejsca są różne, więc pogadaj z ludźmi z miasta i zdecyduj, dokąd pójść.<END>
+Jutro Festiwal Gwiezdnej Nocy, szefie!<NEXT>
+Miejsca są różne, więc pogadaj z ludźmi z miasta<NEXT>
+i zdecyduj, dokąd pójść.<END>
 
 @@ sDialog_0x026F @@
 To wino z dzikich winogron. Słodkie i smaczne. Co powiesz?<NEXT>
@@ -2010,18 +2037,22 @@ Wypijmy za dary ziemi! Na zdrowie!<END>
 Nie jesteś zbyt towarzyski.<END>
 
 @@ sDialog_0x0272 @@
-Jutro Festiwal Kwiatów, szefie! Skończ pracę wcześniej i przyjdź na plac przed trzecią!<NEXT>
+Jutro Festiwal Kwiatów, szefie!<NEXT>
+Skończ pracę wcześniej i przyjdź na plac przed trzecią!<NEXT>
 Jeśli masz zwierzęta, lepiej daj im wcześniej paszę!<NEXT>
-Rzeczy do wysyłki zostaw w skrzyni, a na pewno je wyślę! No to do widzenia, szefie!<END>
+Rzeczy do wysyłki zostaw w skrzyni,<NEXT>
+a na pewno je wyślę! No to do widzenia, szefie!<END>
 
 @@ sDialog_0x0273 @@
 Informacja o wydarzeniu. Na placu odbędzie się coroczny Festiwal Jajek.<NEXT>
 Pogoda będzie piękna! Zapraszamy wszystkich do udziału.<END>
 
 @@ sDialog_0x0274 @@
-Jutro Festiwal Jajek, szefie! Skończ pracę wcześniej i przyjdź na plac przed trzecią!<NEXT>
+Jutro Festiwal Jajek, szefie!<NEXT>
+Skończ pracę wcześniej i przyjdź na plac przed trzecią!<NEXT>
 Jeśli masz zwierzęta, lepiej daj im wcześniej paszę!<NEXT>
-Rzeczy do wysyłki zostaw w skrzyni, a na pewno je wyślę! No to do widzenia, szefie!<END>
+Rzeczy do wysyłki zostaw w skrzyni,<NEXT>
+a na pewno je wyślę! No to do widzenia, szefie!<END>
 
 @@ sDialog_0x0275 @@
 To mój popisowy pasztecik z nerkami. Masz ochotę?<NEXT>
@@ -2031,7 +2062,8 @@ To mój popisowy pasztecik z nerkami. Masz ochotę?<NEXT>
 A ma tyle wartości odżywczych.<END>
 
 @@ sDialog_0x0277 @@
-Hi, hi, to trzyletnia nalewka z owoców leśnych. Ładnie pachnie, prawda? Wypijesz?<NEXT>
+Hi, hi, to trzyletnia nalewka z owoców leśnych.<NEXT>
+Ładnie pachnie, prawda? Wypijesz?<NEXT>
 <OPTLBL 1>Wypiję<OPTLBL 2>Nie chcę<OPT 2>
 
 @@ sDialog_0x0278 @@
@@ -2089,10 +2121,13 @@ E tam, ja chcę zatańczyć z kimś innym.<END>
 Hurra, ja będę tańczyć z Marią!<END>
 
 @@ sDialog_0x0289 @@
-Jutro Festiwal Nowego Roku, szefie! Dobrze by było pożegnać stary rok i pogadać z ludźmi z miasta!<END>
+Jutro Festiwal Nowego Roku, szefie!<NEXT>
+Dobrze by było pożegnać stary rok<NEXT>
+i pogadać z ludźmi z miasta!<END>
 
 @@ sDialog_0x028A @@
-No wiesz, to tylko taniec, ale wybierasz w nim partnerkę, więc to ma duże znaczenie.<END>
+No wiesz, to tylko taniec,<NEXT>
+ale wybierasz w nim partnerkę, więc to ma duże znaczenie.<END>
 
 @@ sDialog_0x028B @@
 Kogo zamierzasz poprosić do tańca?<NEXT>
@@ -2102,11 +2137,14 @@ Chyba nie...? ...Nie, nieważne.<END>
 Nie da się tego anulować, więc wybieraj tak, żebyś potem nie żałował.<END>
 
 @@ sDialog_0x028D @@
-Jutro Festiwal Dziękczynienia. W mieście pachnie pieczonymi ciastami.<NEXT>
+Jutro Festiwal Dziękczynienia.<NEXT>
+W mieście pachnie pieczonymi ciastami.<NEXT>
 Nie mogę się doczekać, tato!<END>
 
 @@ sDialog_0x028E @@
-Jutro Festiwal Dziękczynienia, szefie! To dzień, w którym kobiety pieką ciasto dla mężów i ojców, którzy zawsze ciężko pracują,<NEXT>
+Jutro Festiwal Dziękczynienia, szefie!<NEXT>
+To dzień, w którym kobiety pieką ciasto<NEXT>
+dla mężów i ojców, którzy zawsze ciężko pracują,<NEXT>
 i w ten sposób okazują im wdzięczność!<NEXT>
 Jeśli możesz, lepiej pokaż się w mieście, tak myślę!<END>
 
@@ -2204,7 +2242,9 @@ To babka z mnóstwem owoców namoczonych w alkoholu.<END>
 Nie upij się.<END>
 
 @@ sDialog_0x02AC @@
-A więc jutro Festiwal Gwiezdnej Nocy. Niebo będzie bezchmurne, więc zobaczymy piękne nocne niebo.<END>
+A więc jutro Festiwal Gwiezdnej Nocy.<NEXT>
+Niebo będzie bezchmurne,<NEXT>
+więc zobaczymy piękne nocne niebo.<END>
 
 @@ sDialog_0x0325 @@
 Miło mi cię poznać! Czy na farmie zrobiło się gwarniej?<END>
