@@ -964,7 +964,7 @@ Dobra! To jutro przyjdę na farmę!<END>
 Jak będziesz chciał rozbudowy, mów śmiało!<END>
 
 @@ sDialog_0x0133 @@
-No i jak się mieszka w "Super Luksusowym Wspaniałym Domu z Bali"? Fajny, co?<END>
+No i jak się mieszka w "Super Luksusowym Wspaniałym Drewnianym Domu"? Fajny, co?<END>
 
 @@ sDialog_0x0134 @@
 Rozbudowa kosztuje 5000G. Zgoda?<NEXT>
@@ -998,7 +998,7 @@ Rozbudowa kosztuje 10000G. Zgoda?<NEXT>
 Daj spokój, zajmij się lepiej swoją robotą!<END>
 
 @@ sDialog_0x013D @@
-Patrz, wspaniały dom, co? Nazywa się "Super Dom z Bali"!<END>
+Patrz, wspaniały dom, co? Nazywa się "Super Drewniany Dom"!<END>
 
 @@ sDialog_0x013E @@
 Co się dziś stało z Eve?<END>
@@ -1008,7 +1008,7 @@ Mama Niny dostała gorączki i się położyła.<NEXT>
 Kiedy tata ją pielęgnuje, nie sprzedaję narzędzi.<END>
 
 @@ sDialog_0x0140 @@
-Gotowe! Patrz, to "Super Luksusowy Wspaniały Dom z Bali"!!<NEXT>
+Gotowe! Patrz, to "Super Luksusowy Wspaniały Drewniany Dom"!!<NEXT>
 Sam jestem nim zachwycony. No to cześć.<END>
 
 @@ sDialog_0x0141 @@
@@ -3463,7 +3463,7 @@ Kasa <NUM 7 62>0G<END>
 Krowy   <NUM 2 63><BR>Kury    <NUM 2 64><END>
 
 @@ sDialog_0x0446 @@
-Kondycja <NUM 3 65><END>
+Wytrzymałość <NUM 3 65><END>
 
 @@ sDialog_0x0447 @@
 Najwyższe przywiązanie krowy<BR><VAR cow> <NUM 3 66><END>
