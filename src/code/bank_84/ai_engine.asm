@@ -2,13 +2,13 @@
     ORG $848000
  
  
-fAI_ZeroCCPtr:
+fAI_ClearAllSlots:
     REP #$30                                                   ;848000|C230    |      ;
     LDX.W #$0000                                               ;848002|A20000  |      ;
  
   - PHX                                                        ;848005|DA      |      ;
     TXA                                                        ;848006|8A      |      ;
-    JSL.L fAI_SetCCPointer                                     ;848007|227C8884|84887C;
+    JSL.L fAI_SelectSlot                                     ;848007|227C8884|84887C;
     SEP #$20                                                   ;84800B|E220    |      ;
     REP #$10                                                   ;84800D|C210    |      ;
     LDY.W #$0000                                               ;84800F|A00000  |      ;
@@ -24,7 +24,7 @@ fAI_ZeroCCPtr:
  
 fAI_DeactivateSlotAndObject:
     REP #$30                                                   ;848020|C230    |      ;
-    JSL.L fAI_SetCCPointer                                     ;848022|227C8884|84887C;
+    JSL.L fAI_SelectSlot                                     ;848022|227C8884|84887C;
     SEP #$20                                                   ;848026|E220    |      ;
     REP #$10                                                   ;848028|C210    |      ;
     LDY.W #$0000                                               ;84802A|A00000  |      ;
@@ -40,7 +40,7 @@ fAI_DeactivateSlotAndObject:
  
 fAI_SetSlotScript:
     REP #$30                                                   ;84803F|C230    |      ; A: nArg1, X: nIndex, Y: nSubindex
-    JSL.L fAI_SetCCPointer                                     ;848041|227C8884|84887C; $0xCC = 7EB586 + A * 64
+    JSL.L fAI_SelectSlot                                     ;848041|227C8884|84887C; $0xCC = 7EB586 + A * 64
     REP #$30                                                   ;848045|C230    |      ;
     STX.B strcVariables.n16Temp1                               ;848047|867E    |00007E;
     STY.B strcVariables.n16Temp2                               ;848049|8480    |000080;
@@ -85,10 +85,10 @@ fAI_SetSlotScript:
     RTL                                                        ;848096|6B      |      ;
  
  
-fAI_SetupAreaScripting:
+fAI_StartSlotScript:
     REP #$30                                                   ;848097|C230    |      ; A: nArg1, X: nIndex, Y: nSubindex
     PHA                                                        ;848099|48      |      ;
-    JSL.L fAI_SetCCPointer                                     ;84809A|227C8884|84887C; $0xCC = 7EB586 + A * 64
+    JSL.L fAI_SelectSlot                                     ;84809A|227C8884|84887C; $0xCC = 7EB586 + A * 64
     REP #$30                                                   ;84809E|C230    |      ;
     STX.B strcVariables.n16Temp1                               ;8480A0|867E    |00007E;
     STY.B strcVariables.n16Temp2                               ;8480A2|8480    |000080;
@@ -140,7 +140,7 @@ fAI_SetupAreaScripting:
 fAI_StartSlotScriptAtFrontTile:
     REP #$30                                                   ;8480F8|C230    |      ; A: nArg1, X: nIndex, Y: nSubindex
     PHA                                                        ;8480FA|48      |      ;
-    JSL.L fAI_SetCCPointer                                     ;8480FB|227C8884|84887C; $0xCC = 7EB586 + A * 64
+    JSL.L fAI_SelectSlot                                     ;8480FB|227C8884|84887C; $0xCC = 7EB586 + A * 64
     REP #$30                                                   ;8480FF|C230    |      ;
     STX.B strcVariables.n16Temp1                               ;848101|867E    |00007E;
     STY.B strcVariables.n16Temp2                               ;848103|8480    |000080;
@@ -198,7 +198,7 @@ fAI_StartSlotScriptAtFrontTile:
     RTL                                                        ;84816E|6B      |      ;
  
  
-fAI_HowToPlaySetup:
+fAI_RunSlots:
     SEP #$20                                                   ;84816F|E220    |      ;
     REP #$10                                                   ;848171|C210    |      ;
     LDA.W strcDialogDisplay.mapUnk19A                          ;848173|AD9A01  |00019A;
@@ -1156,7 +1156,7 @@ fAI_UpdateSlotWander:
     JMP.W .check_overlap                                             ;848879|4CFD87  |8487FD;
  
  
-fAI_SetCCPointer:
+fAI_SelectSlot:
     REP #$30                                                   ;84887C|C230    |      ; A: nIndex, return $0xCC
     ASL A                                                      ;84887E|0A      |      ;
     ASL A                                                      ;84887F|0A      |      ;
@@ -1375,7 +1375,7 @@ fAIAction0x03_SetHour:
     RTS                                                        ;848A57|60      |      ;
  
  
-fAIAction0x04_DoesNothing:
+fAIAction0x04_Nop:
     REP #$30                                                   ;848A58|C230    |      ;
     %AIMoveAction($0001)
     RTS                                                        ;848A64|60      |      ;
@@ -1436,7 +1436,7 @@ fAIAction0x08_EnableAIControl:
     RTS                                                        ;848B07|60      |      ;
  
  
-fAIAction0x09:
+fAIAction0x09_StartScript:
     REP #$30                                                   ;848B08|C230    |      ;
     %AIMoveAction($0001)
     LDA.B ptrAIUnknown0xCC                                     ;848B14|A5CC    |0000CC;
@@ -1455,7 +1455,7 @@ fAIAction0x09:
     XBA                                                        ;848B2E|EB      |      ;
     LDA.B [ptrAIActionData]                                    ;848B2F|A7C9    |0000C9;
     REP #$20                                                   ;848B31|C220    |      ;
-    JSL.L fAI_SetCCPointer                                     ;848B33|227C8884|84887C;
+    JSL.L fAI_SelectSlot                                     ;848B33|227C8884|84887C;
     SEP #$20                                                   ;848B37|E220    |      ;
     REP #$10                                                   ;848B39|C210    |      ;
     PLA                                                        ;848B3B|68      |      ;
@@ -1488,7 +1488,7 @@ fAIAction0x09:
     RTS                                                        ;848B82|60      |      ;
  
  
-fAIAction0x0A:
+fAIAction0x0A_ScreenFadein:
     REP #$30                                                   ;848B83|C230    |      ;
     %AIMoveAction($0001)
     %AIMoveAction($0001)
@@ -1503,7 +1503,7 @@ fAIAction0x0A:
     RTS                                                        ;848BAB|60      |      ;
  
  
-fAIAction0x0B:
+fAIAction0x0B_SetScriptFlag:
     REP #$30                                                   ;848BAC|C230    |      ;
     %AIMoveAction($0001)
     SEP #$20                                                   ;848BB8|E220    |      ;
@@ -1521,7 +1521,7 @@ fAIAction0x0B:
     RTS                                                        ;848BDB|60      |      ;
  
  
-fAIAction0x0C:
+fAIAction0x0C_WaitForScriptFlag:
     REP #$30                                                   ;848BDC|C230    |      ;
     %AIMoveAction($0001)
     SEP #$20                                                   ;848BE8|E220    |      ;
@@ -1553,7 +1553,7 @@ fAIAction0x0C:
     RTS                                                        ;848C21|60      |      ;
  
  
-fAIAction0x0D:
+fAIAction0x0D_MoveObject:
     REP #$30                                                   ;848C22|C230    |      ;
     %AIMoveAction($0001)
     SEP #$20                                                   ;848C2E|E220    |      ;
@@ -1600,7 +1600,7 @@ fAIAction0x0D:
     RTS                                                        ;848CA7|60      |      ;
  
  
-fAIAction0x0E:
+fAIAction0x0E_ApplyMusicChange:
     REP #$30                                                   ;848CA8|C230    |      ;
     %AIMoveAction($0002)
     JSL.L fAudio_FadeOutOnTrackChangeSlow                                 ;848CB4|22018483|838401;
@@ -1645,7 +1645,7 @@ fAIAction0x11_EnableUserControl:
     RTS                                                        ;848D12|60      |      ;
  
  
-fAIAction0x12_AlwaysJump:
+fAIAction0x12_Jump:
     REP #$30                                                   ;848D13|C230    |      ;
     %AIMoveAction($0001)
     LDA.B [ptrAIActionData]                                    ;848D1F|A7C9    |0000C9;
@@ -1765,7 +1765,7 @@ fAIAction0x16_JumpIfBetween8:
     RTS                                                        ;848E67|60      |      ;
  
  
-fAIAction0x17:
+fAIAction0x17_RollRandom:
     REP #$30                                                   ;848E68|C230    |      ;
     %AIMoveAction($0001)
     SEP #$20                                                   ;848E74|E220    |      ;
@@ -1779,7 +1779,7 @@ fAIAction0x17:
     RTS                                                        ;848E8F|60      |      ;
  
  
-fAIAction0x18:
+fAIAction0x18_JumpIfRandomEquals:
     REP #$30                                                   ;848E90|C230    |      ;
     %AIMoveAction($0001)
     LDA.B [ptrAIActionData]                                    ;848E9C|A7C9    |0000C9;
@@ -1801,7 +1801,7 @@ fAIAction0x18:
     RTS                                                        ;848EC8|60      |      ;
  
  
-fAIAction0x19:
+fAIAction0x19_SetPlayerSprite:
     REP #$30                                                   ;848EC9|C230    |      ;
     %AIMoveAction($0001)
     LDA.B [ptrAIActionData]                                    ;848ED5|A7C9    |0000C9;
@@ -1824,7 +1824,7 @@ fAIAction0x19:
     RTS                                                        ;848F09|60      |      ;
  
  
-fAIAction0x1A:
+fAIAction0x1A_SpawnNpc:
     REP #$30                                                   ;848F0A|C230    |      ;
     %AIMoveAction($0001)
     LDA.B [ptrAIActionData]                                    ;848F16|A7C9    |0000C9;
@@ -1875,7 +1875,7 @@ fAIAction0x1A:
     RTS                                                        ;848F9A|60      |      ;
  
  
-fAIAction0x1B:
+fAIAction0x1B_SetSprite:
     REP #$30                                                   ;848F9B|C230    |      ;
     %AIMoveAction($0001)
     LDA.B [ptrAIActionData]                                    ;848FA7|A7C9    |0000C9;
@@ -1934,7 +1934,7 @@ fAIAction0x1C_ShowDialog:
     RTS                                                        ;849033|60      |      ;
  
  
-fAIAction0x1D_ShowDialog:
+fAIAction0x1D_ShowDialogWithChoice:
     REP #$30                                                   ;849034|C230    |      ;
     %AIMoveAction($0001)
     REP #$20                                                   ;849040|C220    |      ;
@@ -1958,7 +1958,7 @@ fAIAction0x1D_ShowDialog:
     RTS                                                        ;849078|60      |      ;
  
  
-fAIAction0x1F:
+fAIAction0x1F_JumpIfTalkedTo:
     REP #$30                                                   ;849079|C230    |      ;
     %AIMoveAction($0001)
     SEP #$20                                                   ;849085|E220    |      ;
@@ -2155,7 +2155,7 @@ fAIAction0x21_AddValue8:
     RTS                                                        ;84923E|60      |      ;
  
  
-fAIAction0x22:
+fAIAction0x22_StartRandomWalk:
     REP #$30                                                   ;84923F|C230    |      ;
     %AIMoveAction($0001)
     SEP #$20                                                   ;84924B|E220    |      ;
@@ -2265,7 +2265,7 @@ fAIAction0x24_NextHourPalette:
     RTS                                                        ;849374|60      |      ;
  
  
-fAIAction0x25:
+fAIAction0x25_RemoveActor:
     REP #$30                                                   ;849375|C230    |      ;
     %AIMoveAction($0001)
     LDA.B ptrAIUnknown0xCC                                     ;849381|A5CC    |0000CC;
@@ -2278,7 +2278,7 @@ fAIAction0x25:
     XBA                                                        ;84938F|EB      |      ;
     LDA.B [ptrAIActionData]                                    ;849390|A7C9    |0000C9;
     REP #$20                                                   ;849392|C220    |      ;
-    JSL.L fAI_SetCCPointer                                     ;849394|227C8884|84887C;
+    JSL.L fAI_SelectSlot                                     ;849394|227C8884|84887C;
     %AIMoveAction($0001)
     REP #$30                                                   ;8493A2|C230    |      ;
     SEP #$20                                                   ;8493A4|E220    |      ;
@@ -2300,7 +2300,7 @@ fAIAction0x25:
     RTS                                                        ;8493C8|60      |      ;
  
  
-fAIAction0x28:
+fAIAction0x28_ClearBit:
     REP #$30                                                   ;8493C9|C230    |      ;
     %AIMoveAction($0001)
     REP #$20                                                   ;8493D5|C220    |      ;
@@ -2329,7 +2329,7 @@ fAIAction0x28:
  
     incsrc "../../../build/gen/blocks/ai_action_tables.asm"
  
-fAIAction0x29_SetMapScrooling:
+fAIAction0x29_SetMapScroll:
     REP #$30                                                   ;849513|C230    |      ;
     %AIMoveAction($0001)
     REP #$20                                                   ;84951F|C220    |      ;
@@ -2347,7 +2347,7 @@ fAIAction0x29_SetMapScrooling:
     RTS                                                        ;849552|60      |      ;
  
  
-fAIAction0x2A:
+fAIAction0x2A_StartTileSequence:
     REP #$30                                                   ;849553|C230    |      ;
     %AIMoveAction($0001)
     LDA.B [ptrAIActionData]                                    ;84955F|A7C9    |0000C9;
@@ -2362,7 +2362,7 @@ fAIAction0x2A:
     RTS                                                        ;84957C|60      |      ;
  
  
-fAIAction0x2B:
+fAIAction0x2B_SpawnActor:
     REP #$30                                                   ;84957D|C230    |      ;
     %AIMoveAction($0001)
     LDA.B [ptrAIActionData]                                    ;849589|A7C9    |0000C9;
@@ -2403,7 +2403,7 @@ fAIAction0x2B:
     RTS                                                        ;8495E7|60      |      ;
  
  
-fAIAction0x2C:
+fAIAction0x2C_PlaySoundWait:
     REP #$30                                                   ;8495E8|C230    |      ;
     %AIMoveAction($0001)
     SEP #$20                                                   ;8495F4|E220    |      ;
@@ -2428,7 +2428,7 @@ fAIAction0x2C:
     RTS                                                        ;849632|60      |      ;
  
  
-fAIAction0x2D:
+fAIAction0x2D_JumpOnInteract:
     REP #$30                                                   ;849633|C230    |      ;
     %AIMoveAction($0001)
     SEP #$20                                                   ;84963F|E220    |      ;
@@ -2567,7 +2567,7 @@ fAIAction0x2D:
     RTS                                                        ;849776|60      |      ;
  
  
-fAIAction0x2E:
+fAIAction0x2E_StartWander:
     REP #$30                                                   ;849777|C230    |      ;
     %AIMoveAction($0001)
     SEP #$20                                                   ;849783|E220    |      ;
@@ -2625,7 +2625,7 @@ fAIAction0x2E:
     RTS                                                        ;84980F|60      |      ;
  
  
-fAIAction0x2F:
+fAIAction0x2F_SetActorSpriteTable:
     REP #$30                                                   ;849810|C230    |      ;
     %AIMoveAction($0001)
     LDA.B [ptrAIActionData]                                    ;84981C|A7C9    |0000C9;
@@ -3024,9 +3024,9 @@ fAIAction0x31_UpdateCow:
     CMP.B #$E0                                                 ;849B37|C9E0    |      ;
     BNE +                                                      ;849B39|D003    |849B3E;
     if !REGION_EUDE
-    JMP.W fAIAction0x31_CowState0xE0
+    JMP.W fAIAction0x31_CowHandleSale
     else
-    JMP.W fAIAction0x31_CowState0xE0                                     ;849B3B|4C98A4  |84A498;
+    JMP.W fAIAction0x31_CowHandleSale                                     ;849B3B|4C98A4  |84A498;
     endif
  
  
@@ -4351,7 +4351,7 @@ fAIAction0x31_CowAdvanceTimer:
     RTS                                                        ;84A497|60      |      ;
  
  
-fAIAction0x31_CowState0xE0:
+fAIAction0x31_CowHandleSale:
     if !REGION_EUDE
     REP #$30
     LDA.L $7F1F5A
@@ -4983,7 +4983,7 @@ fAIAction0x31_CowSetDirRight:
     JMP.W fAIAction0x31_CowAdvanceTimer                               ;84A90C|4C8AA4  |84A48A;
  
  
-fAIAction0x32:
+fAIAction0x32_SetValue16:
     REP #$30                                                   ;84A90F|C230    |      ;
     %AIMoveAction($0001)
     REP #$20                                                   ;84A91B|C220    |      ;
@@ -5128,7 +5128,7 @@ fAIAction0x33_UpdateMole:
     RTS                                                        ;84AA5C|60      |      ;
  
  
-fAIAction0x34:
+fAIAction0x34_PickUpFish:
     REP #$30                                                   ;84AA5D|C230    |      ;
     %AIMoveAction($0001)
     SEP #$20                                                   ;84AA69|E220    |      ;
@@ -6261,7 +6261,7 @@ fAIAction0x36_UpdateDog:
     JMP.W .loop2                                               ;84B348|4C6AB2  |84B26A;
  
  
-fAIAction0x37:
+fAIAction0x37_RemoveObject:
     REP #$30                                                   ;84B34B|C230    |      ;
     %AIMoveAction($0001)
     REP #$30                                                   ;84B357|C230    |      ;
@@ -6272,7 +6272,7 @@ fAIAction0x37:
     RTS                                                        ;84B364|60      |      ;
  
  
-fAIAction0x38:
+fAIAction0x38_WaitForFadeIn:
     REP #$30                                                   ;84B365|C230    |      ;
     %CheckFlag(daily1, $8000)
     BEQ +                                                      ;84B36E|F00B    |84B37B;
@@ -6422,7 +6422,7 @@ fAIAction0x3A_RunForTime:
 aAIJoypadInput:
     dw $0400,$0800,$0100,$0200,$8000                           ;84B4D2|        |      ; 0x05 * [n16]
  
-fAIAction0x3B:
+fAIAction0x3B_SetCarryItemHolding:
     REP #$30                                                   ;84B4DC|C230    |      ;
     %AIMoveAction($0001)
     SEP #$20                                                   ;84B4E8|E220    |      ;
@@ -6433,7 +6433,7 @@ fAIAction0x3B:
     RTS                                                        ;84B502|60      |      ;
  
  
-fAIAction0x3C:
+fAIAction0x3C_TeleportToHouse:
     REP #$30                                                   ;84B503|C230    |      ;
     %AIMoveAction($0001)
     SEP #$20                                                   ;84B50F|E220    |      ;
@@ -6461,7 +6461,7 @@ fAIAction0x3D_TeleportToArea:
     RTS                                                        ;84B555|60      |      ;
  
  
-fAIAction0x3E:
+fAIAction0x3E_PickUpCarryItem:
     REP #$30                                                   ;84B556|C230    |      ;
     %AIMoveAction($0001)
     SEP #$20                                                   ;84B562|E220    |      ;
@@ -6739,7 +6739,7 @@ fAIAction0x47_SetValue8:
     RTS                                                        ;84B888|60      |      ;
  
  
-fAIAction0x48:
+fAIAction0x48_SetValue24:
     REP #$30                                                   ;84B889|C230    |      ;
     %AIMoveAction($0001)
     REP #$20                                                   ;84B895|C220    |      ;
@@ -6762,7 +6762,7 @@ fAIAction0x48:
     RTS                                                        ;84B8D8|60      |      ;
  
  
-fAIAction0x49:
+fAIAction0x49_SetSpriteTableFacingPlayer:
     REP #$30                                                   ;84B8D9|C230    |      ;
     %AIMoveAction($0001)
     LDA.B [ptrAIActionData]                                    ;84B8E5|A7C9    |0000C9;
@@ -6803,7 +6803,7 @@ fAIAction0x49:
     RTS                                                        ;84B93B|60      |      ;
  
  
-fAIAction0x4A:
+fAIAction0x4A_PickUpObjectOnButtonA:
     REP #$30                                                   ;84B93C|C230    |      ;
     %AIMoveAction($0001)
     SEP #$20                                                   ;84B948|E220    |      ;
@@ -6899,7 +6899,7 @@ fAIAction0x4A:
     RTS                                                        ;84BA0F|60      |      ;
  
  
-fAIAction0x4B:
+fAIAction0x4B_ReplaceMapTile:
     REP #$30                                                   ;84BA10|C230    |      ;
     %AIMoveAction($0001)
     SEP #$20                                                   ;84BA1C|E220    |      ;
@@ -6921,7 +6921,7 @@ fAIAction0x4B:
     RTS                                                        ;84BA50|60      |      ;
  
  
-fAIAction0x4C:
+fAIAction0x4C_SetPassable:
     REP #$30                                                   ;84BA51|C230    |      ;
     %AIMoveAction($0001)
     SEP #$20                                                   ;84BA5D|E220    |      ;
@@ -6936,7 +6936,7 @@ fAIAction0x4C:
     RTS                                                        ;84BA71|60      |      ;
  
  
-fAIAction0x4D:
+fAIAction0x4D_JumpIfBlueFeatherUsed:
     REP #$30                                                   ;84BA72|C230    |      ;
     %AIMoveAction($0001)
     SEP #$20                                                   ;84BA7E|E220    |      ;
@@ -7023,7 +7023,7 @@ fAIAction0x4D:
     RTS                                                        ;84BB30|60      |      ;
  
  
-fAIAction0x4E:
+fAIAction0x4E_EnableTileInteractions:
     REP #$30                                                   ;84BB31|C230    |      ;
     %AIMoveAction($0001)
     REP #$20                                                   ;84BB3D|C220    |      ;
@@ -7031,7 +7031,7 @@ fAIAction0x4E:
     RTS                                                        ;84BB4A|60      |      ;
  
  
-fAIAction0x4F:
+fAIAction0x4F_DisableToolUse:
     REP #$30                                                   ;84BB4B|C230    |      ;
     %AIMoveAction($0001)
     REP #$20                                                   ;84BB57|C220    |      ;
@@ -7103,7 +7103,7 @@ fAIAction0x4F:
     RTS                                                        ;84BBD9|60      |      ;
  
  
-fAIAction0x50:
+fAIAction0x50_ReleaseCarried:
     REP #$30                                                   ;84BBDA|C230    |      ;
     %AIMoveAction($0001)
     SEP #$20                                                   ;84BBE6|E220    |      ;
@@ -7193,7 +7193,7 @@ fAIAction0x50:
     RTS                                                        ;84BC9B|60      |      ;
  
  
-fAIAction0x51:
+fAIAction0x51_ReleaseCarriedAnimal:
     REP #$30                                                   ;84BC9C|C230    |      ;
     %AIMoveAction($0001)
     SEP #$20                                                   ;84BCA8|E220    |      ;
@@ -7274,7 +7274,7 @@ fAIAction0x51:
     RTS                                                        ;84BD43|60      |      ;
  
  
-fAIAction0x52:
+fAIAction0x52_PickUpObjectForEventA:
     REP #$30                                                   ;84BD44|C230    |      ;
     %AIMoveAction($0001)
     SEP #$20                                                   ;84BD50|E220    |      ;
@@ -7364,7 +7364,7 @@ fAIAction0x52:
     RTS                                                        ;84BE0C|60      |      ;
  
  
-fAIAction0x53:
+fAIAction0x53_PickUpObjectForEventB:
     REP #$30                                                   ;84BE0D|C230    |      ;
     %AIMoveAction($0001)
     SEP #$20                                                   ;84BE19|E220    |      ;
@@ -7454,7 +7454,7 @@ fAIAction0x53:
     RTS                                                        ;84BED5|60      |      ;
  
  
-fAIAction0x54_ShowDialog:
+fAIAction0x54_ShowDialogAutoClose:
     REP #$30                                                   ;84BED6|C230    |      ;
     %AIMoveAction($0001)
     REP #$20                                                   ;84BEE2|C220    |      ;
@@ -7480,7 +7480,7 @@ fAIAction0x54_ShowDialog:
     RTS                                                        ;84BF1F|60      |      ;
  
  
-fAIAction0x55:
+fAIAction0x55_JumpIfFlagNotSet:
     REP #$30                                                   ;84BF20|C230    |      ;
     %AIMoveAction($0001)
     REP #$20                                                   ;84BF2C|C220    |      ;

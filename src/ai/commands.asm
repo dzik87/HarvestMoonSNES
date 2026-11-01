@@ -217,7 +217,7 @@ macro AICMD0x1D_ShowDialog(nDialogId, nPosition)
     
 endmacro
 
-; AI command 0x1E - Alias of 0x1F - the 0x1E entry in the aAIActions table points to the same handler fAIAction0x1F; it does not occur in any script. [probable]
+; AI command 0x1E - Alias of 0x1F - the 0x1E entry in the aAIActions table points to the same handler fAIAction0x1F_JumpIfTalkedTo; it does not occur in any script. [probable]
 macro AICMD0x1E(pNextAction)
     db $1E
     dw <pNextAction>&$FFFF
@@ -277,7 +277,7 @@ macro AICMD0x25_RemoveActor(nActorIndex)
     
 endmacro
 
-; AI command 0x26 - Alias of opcode 0x28 (clear bit) - in the aAIActions table the entry 0x26 points to fAIAction0x28. [confirmed]
+; AI command 0x26 - Alias of opcode 0x28 (clear bit) - in the aAIActions table the entry 0x26 points to fAIAction0x28_ClearBit. [confirmed]
 macro AICMD0x26_ClearBitAs0x28(pAddress, nBitIndex)
     db $28
     dl <pAddress>
@@ -285,7 +285,7 @@ macro AICMD0x26_ClearBitAs0x28(pAddress, nBitIndex)
     
 endmacro
 
-; AI command 0x27 - Alias of opcode 0x28 (clear bit) - in the aAIActions table the entry 0x27 points to fAIAction0x28. [confirmed]
+; AI command 0x27 - Alias of opcode 0x28 (clear bit) - in the aAIActions table the entry 0x27 points to fAIAction0x28_ClearBit. [confirmed]
 macro AICMD0x27_ClearBitAs0x28(pAddress, nBitIndex)
     db $28
     dl <pAddress>

@@ -1,0 +1,52 @@
+old,new,confidence,reason
+fAI_ZeroCCPtr,fAI_ClearAllSlots,high,Loops over all 49 slots (X < $31) and writes 0 to byte +0 (active flag) of each; callers are area load / new game init
+fAI_SetCCPointer,fAI_SelectSlot,high,Sets ptrAIUnknown0xCC to $7EB586 + A*64 i.e. selects AI slot A
+fAI_HowToPlaySetup,fAI_RunSlots,high,Per-frame interpreter: iterates all active slots, runs script commands via fAI_ExecuteAiAction and updates movement/object; the old name came from the first caller (intro how-to-play)
+fAI_SetupAreaScripting,fAI_StartSlotScript,medium,Selects slot A, loads script (set X sub Y) pointer from pppAISelector and fully resets the slot (fAI_ResetSlotFull) and stores the slot index in +3F; used through the AIExecute macro
+fAIAction0x04_DoesNothing,fAIAction0x04_Nop,high,Handler only advances ptrAIActionData (macro AICMD0x04_Nop)
+fAIAction0x09,fAIAction0x09_StartScript,high,docs/ai/commands 0x09 confirmed: starts a parallel script in another slot
+fAIAction0x0A,fAIAction0x0A_ScreenFadein,high,Sets fade parameters and calls fCore_ScreenFadein (macro AICMD0x0A_ScreenFadein)
+fAIAction0x0B,fAIAction0x0B_SetScriptFlag,high,ORs 1<<n into $7F1F7A (macro AICMD0x0B_SetScriptFlag)
+fAIAction0x0C,fAIAction0x0C_WaitForScriptFlag,high,Polls bit n of $7F1F7A and repeats the command until set (macro AICMD0x0C_WaitForScriptFlag)
+fAIAction0x0D,fAIAction0x0D_MoveObject,medium,Writes dx/dy/duration/step period into the slot and sets step-move flag $20 consumed by fAI_UpdateSlotStepMove
+fAIAction0x0E,fAIAction0x0E_ApplyMusicChange,medium,Skips 2 bytes and calls fAudio_FadeOutOnTrackChangeSlow
+fAIAction0x12_AlwaysJump,fAIAction0x12_Jump,high,Unconditional jump (macro AICMD0x12_Jump)
+fAIAction0x17,fAIAction0x17_RollRandom,high,Stores fCore_GetRandomNumber(nMax) in slot +0D (macro AICMD0x17_RollRandom)
+fAIAction0x18,fAIAction0x18_JumpIfRandomEquals,high,Compares slot +0D with the operand and jumps (macro AICMD0x18_JumpIfRandomEquals)
+fAIAction0x19,fAIAction0x19_SetPlayerSprite,medium,Writes sprite index and flip to strcObjectData (player object) and sets PFLAGS_KNEEING
+fAIAction0x1A,fAIAction0x1A_SpawnNpc,medium,Stores posX/posY/sprite-table ptr/direction in the slot and flags $03 (create object)
+fAIAction0x1B,fAIAction0x1B_SetSprite,medium,Stores sprite index and flip in slot +16/+14 and sets refresh flag $04
+fAIAction0x1D_ShowDialog,fAIAction0x1D_ShowDialogWithChoice,high,Same code as 0x1C but used by scripts for dialogs followed by 0x20 JumpIfChoice (docs/ai/commands.md)
+fAIAction0x1F,fAIAction0x1F_JumpIfTalkedTo,medium,Polls for A-button interaction next to the NPC and jumps to the conversation script (docs/ai/commands.md)
+fAIAction0x22,fAIAction0x22_StartRandomWalk,medium,Stores range X/Y step delay walk sprite table and segment length and enables wander flags $28
+fAIAction0x25,fAIAction0x25_RemoveActor,high,Deactivates slot A and destroys its object (macro AICMD0x25_RemoveActor)
+fAIAction0x28,fAIAction0x28_ClearBit,high,ANDs [addr] with aAIResetMask[bit] (macro AICMD0x28_ClearBit; aliases 0x26 and 0x27)
+fAIAction0x29_SetMapScrooling,fAIAction0x29_SetMapScroll,high,Typo fix; stores strcMapScrool speedX speedY timer
+fAIAction0x2A,fAIAction0x2A_StartTileSequence,medium,Calls fTileScript_Start with the operand index
+fAIAction0x2B,fAIAction0x2B_SpawnActor,medium,Stores sprite table ptr and direction and sets flags $03 then loads the sprite
+fAIAction0x2C,fAIAction0x2C_PlaySoundWait,medium,Calls fAudio_PlaySoundEffectAndWait then restores the tool sound
+fAIAction0x2D,fAIAction0x2D_JumpOnInteract,high,Like 0x1F with two targets depending on carried item (macro AICMD0x2D_JumpOnInteract)
+fAIAction0x2E,fAIAction0x2E_StartWander,medium,Enables wandering with the current position as home point (flags $A8)
+fAIAction0x2F,fAIAction0x2F_SetActorSpriteTable,medium,Stores sprite table ptr in +33 and reloads the sprite for the current direction
+fAIAction0x32,fAIAction0x32_SetValue16,high,Writes a 16-bit constant to a 24-bit address (macro AICMD0x32_SetValue16)
+fAIAction0x34,fAIAction0x34_PickUpFish,medium,After A press with empty hands deactivates the actor and sets carryItemId to !CITEM_FISH
+fAIAction0x37,fAIAction0x37_RemoveObject,medium,Calls fObject_Destroy for slot +12 object
+fAIAction0x38,fAIAction0x38_WaitForFadeIn,high,Repeats until daily1 bit $8000 is set (macro AICMD0x38_WaitForFadeIn)
+fAIAction0x3B,fAIAction0x3B_SetCarryItemHolding,medium,Writes carryItemId and sets PFLAGS_HOLDINGITEM without animation
+fAIAction0x3C,fAIAction0x3C_TeleportToHouse,medium,Sets nDestinationAreaId = !AREA_HOUSE1 and the forced transfer flag
+fAIAction0x3E,fAIAction0x3E_PickUpCarryItem,medium,Writes carryItemId and sets PACTION_ITEMONHAND
+fAIAction0x48,fAIAction0x48_SetValue24,high,Writes a 24-bit constant to a 24-bit address (macro AICMD0x48_SetValue24)
+fAIAction0x49,fAIAction0x49_SetSpriteTableFacingPlayer,medium,Like 0x2B but the direction is taken from strcPlayer.direction
+fAIAction0x4A,fAIAction0x4A_PickUpObjectOnButtonA,medium,A press with empty hands deactivates the slot and sets carry item (turnip seed id) with PACTION_ITEMONHAND
+fAIAction0x4B,fAIAction0x4B_ReplaceMapTile,medium,Calls fMap_UpdateCurrentTilemap with tile id and X/Y
+fAIAction0x4C,fAIAction0x4C_SetPassable,medium,Sets bit 1 of slot byte +0
+fAIAction0x4D,fAIAction0x4D_JumpIfBlueFeatherUsed,high,Jumps when PACTION_USINGTOOL and daily3 $0040 (blue feather) while player near (macro AICMD0x4D_JumpIfBlueFeatherUsed)
+fAIAction0x4E,fAIAction0x4E_EnableTileInteractions,high,Clears daily2 $0008 (macro AICMD0x4E_EnableTileInteractions)
+fAIAction0x4F,fAIAction0x4F_DisableToolUse,high,Sets daily4 $8000 and returns equipped tools to the shed (macro AICMD0x4F_DisableToolUse)
+fAIAction0x50,fAIAction0x50_ReleaseCarried,medium,Puts down carried item / chicken / dog
+fAIAction0x51,fAIAction0x51_ReleaseCarriedAnimal,medium,Variant of 0x50 without the sprite reset
+fAIAction0x52,fAIAction0x52_PickUpObjectForEventA,medium,Like 0x4A but sets daily4 $0002 instead of granting an item
+fAIAction0x53,fAIAction0x53_PickUpObjectForEventB,medium,Like 0x52 but sets daily4 $0004
+fAIAction0x54_ShowDialog,fAIAction0x54_ShowDialogAutoClose,medium,Same as 0x1C but uses dialog input mode 6
+fAIAction0x55,fAIAction0x55_JumpIfFlagNotSet,high,Negation of 0x14 using aAICheckFlags (macro AICMD0x55_JumpIfFlagNotSet)
+fAIAction0x31_CowState0xE0,fAIAction0x31_CowHandleSale,medium,State $E0 branch: when daily1 $0004 is set computes nCowSalePrice from the cow happiness byte (500/800/1000) and starts player interaction $43

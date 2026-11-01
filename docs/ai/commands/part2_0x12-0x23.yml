@@ -1,6 +1,6 @@
 - opcode: 0x12
   macro: AICMD0x12_Jump
-  handler: fAIAction0x12_AlwaysJump
+  handler: fAIAction0x12_Jump
   handler_addr: "848D13"
   suggested_name: Jump
   confidence: confirmed
@@ -8,7 +8,7 @@
   params:
     - {name: pNextAction, offset: 1, size: 2, type: script_ptr, meaning: "Low 16 bits of the address of the next command. The bank (ptrAIActionData+2) remains unchanged, so the jump is only possible within the current script bank ($B3/$B4/$B5)."}
   summary: "Unconditional jump to command pNextAction in the current script bank."
-  details: "The handler advances ptrAIActionData by 1 (to the argument), reads a 16-bit word and stores it to ptrAIActionData (only the 2 low bytes, the bank byte is untouched). It does not change the object's +$10 counter, so the fAI_HowToPlaySetup loop executes the next command in the same frame (does not block). Note: a Jump->Jump loop without a blocking command (Wait/0x1F/dialog) would hang the game, which is why 'polling' loops in scripts always contain a command that increments +$10 (e.g. 0x1F)."
+  details: "The handler advances ptrAIActionData by 1 (to the argument), reads a 16-bit word and stores it to ptrAIActionData (only the 2 low bytes, the bank byte is untouched). It does not change the object's +$10 counter, so the fAI_RunSlots loop executes the next command in the same frame (does not block). Note: a Jump->Jump loop without a blocking command (Wait/0x1F/dialog) would hang the game, which is why 'polling' loops in scripts always contain a command that increments +$10 (e.g. 0x1F)."
   ram_touched: [ptrAIActionData]
   calls: []
   open_questions: null
@@ -21,12 +21,12 @@
   confidence: confirmed
   length_bytes: 3
   params:
-    - {name: nTime, offset: 1, size: 2, type: n16, meaning: "Number of calls of the AI loop (fAI_HowToPlaySetup, called once per frame from the main loop) for which the script of this object waits. A value of 0 = no waiting. Typical: 1, 60, 180, 240."}
+    - {name: nTime, offset: 1, size: 2, type: n16, meaning: "Number of calls of the AI loop (fAI_RunSlots, called once per frame from the main loop) for which the script of this object waits. A value of 0 = no waiting. Typical: 1, 60, 180, 240."}
   summary: "Suspends execution of the script of the given AI object for nTime frames."
-  details: "Stores nTime (16-bit) to field +$10 of the AI object structure pointed to by ptrAIUnknown0xCC (strcAIUnknown.unk10, wait counter). On each call, the fAI_HowToPlaySetup loop decrements +$10 for active objects and executes commands while +$10 = 0; after a command is executed with +$10 != 0, the object is no longer processed in that frame. As a result, the next command executes nTime frames after Wait (Wait(1) = skipping one frame). The script waits only for the current object (each AI object has its own counter); the AI loop is skipped entirely when strcDialogDisplay.mapUnk19A == 2 or 6 (dialog) or when the player action = PACTION_JUMP."
+  details: "Stores nTime (16-bit) to field +$10 of the AI object structure pointed to by ptrAIUnknown0xCC (strcAIUnknown.unk10, wait counter). On each call, the fAI_RunSlots loop decrements +$10 for active objects and executes commands while +$10 = 0; after a command is executed with +$10 != 0, the object is no longer processed in that frame. As a result, the next command executes nTime frames after Wait (Wait(1) = skipping one frame). The script waits only for the current object (each AI object has its own counter); the AI loop is skipped entirely when strcDialogDisplay.mapUnk19A == 2 or 6 (dialog) or when the player action = PACTION_JUMP."
   ram_touched: [ptrAIActionData, ptrAIUnknown0xCC+$10]
   calls: []
-  open_questions: "The time unit is AI loop calls; it is not confirmed that the loop is called exactly once per frame at all 10 call sites of fAI_HowToPlaySetup (core.asm, routines.asm, main_loop.asm, interaction_data.asm)."
+  open_questions: "The time unit is AI loop calls; it is not confirmed that the loop is called exactly once per frame at all 10 call sites of fAI_RunSlots (core.asm, routines.asm, main_loop.asm, interaction_data.asm)."
 
 - opcode: 0x14
   macro: AICMD0x14_JumpIfFlagSet
@@ -82,7 +82,7 @@
 
 - opcode: 0x17
   macro: AICMD0x17_RollRandom
-  handler: fAIAction0x17
+  handler: fAIAction0x17_RollRandom
   handler_addr: "848E68"
   suggested_name: RollRandom
   confidence: confirmed
@@ -97,7 +97,7 @@
 
 - opcode: 0x18
   macro: AICMD0x18_JumpIfRandomEquals
-  handler: fAIAction0x18
+  handler: fAIAction0x18_JumpIfRandomEquals
   handler_addr: "848E90"
   suggested_name: JumpIfRandomEquals
   confidence: confirmed
@@ -113,7 +113,7 @@
 
 - opcode: 0x19
   macro: AICMD0x19
-  handler: fAIAction0x19
+  handler: fAIAction0x19_SetPlayerSprite
   handler_addr: "848EC9"
   suggested_name: SetPlayerSprite
   confidence: probable
@@ -129,7 +129,7 @@
 
 - opcode: 0x1A
   macro: AICMD0x1A
-  handler: fAIAction0x1A
+  handler: fAIAction0x1A_SpawnNpc
   handler_addr: "848F0A"
   suggested_name: SpawnNpc
   confidence: probable
@@ -147,7 +147,7 @@
 
 - opcode: 0x1B
   macro: AICMD0x1B
-  handler: fAIAction0x1B
+  handler: fAIAction0x1B_SetSprite
   handler_addr: "848F9B"
   suggested_name: SetSprite
   confidence: probable
@@ -172,14 +172,14 @@
     - {name: nDialogId, offset: 1, size: 2, type: n16, meaning: "Dialog index (index into aDialogPointers, 3 bytes per entry); goes to X, and in fDialog_DialogHandler to strcDialogDisplay.dialogId."}
     - {name: nPosition, offset: 3, size: 1, type: n8, meaning: "Stored to strcDialogDisplay.dialogUnk191 ($7E:0191). In fDialog_DialogHandler: 0 = automatic (default 1, and 2 when strcObjectData.camY < $81), a non-zero value is used directly for the BG3 offset (by (value-1)*128 px) - so it is probably the position of the dialog window (top/bottom of the screen). 0 or 1 in scripts."}
   summary: "Displays dialog nDialogId and suspends the script for one frame (the AI loop continues to be skipped for the duration of the dialog)."
-  details: "Loads nDialogId into X, stores the nPosition byte to dialogUnk191, sets strcDialogDisplay.mapUnk19A = 2 and calls fDialog_DialogHandler (sets dialogId, dialogFlags |= DFLAGS_PROCESSDIALOG, zeroes the option/answer counters, selects the text pointer from aDialogPointers, sets the BG3 offset and nTimeState = 0, daily1 |= $4000). Then +$10 += 1 (one frame). Because mapUnk19A == 2, fAI_HowToPlaySetup returns immediately at the start until the dialog ends (the dialog code zeroes/changes mapUnk19A), so the script and all AI objects wait until the end of the dialog."
+  details: "Loads nDialogId into X, stores the nPosition byte to dialogUnk191, sets strcDialogDisplay.mapUnk19A = 2 and calls fDialog_DialogHandler (sets dialogId, dialogFlags |= DFLAGS_PROCESSDIALOG, zeroes the option/answer counters, selects the text pointer from aDialogPointers, sets the BG3 offset and nTimeState = 0, daily1 |= $4000). Then +$10 += 1 (one frame). Because mapUnk19A == 2, fAI_RunSlots returns immediately at the start until the dialog ends (the dialog code zeroes/changes mapUnk19A), so the script and all AI objects wait until the end of the dialog."
   ram_touched: [ptrAIActionData, ptrAIUnknown0xCC+$10, strcDialogDisplay.dialogUnk191, strcDialogDisplay.mapUnk19A, strcDialogDisplay.dialogId, strcDialogDisplay.dialogFlags, strcDialogDisplay.dialogOptionsAnswer, strcFlags.daily1, nTimeState, strcBGScrool.BG3VerOffs]
   calls: [fDialog_DialogHandler]
   open_questions: "The exact meaning of nPosition (top/bottom) is unconfirmed; the code that resets mapUnk19A after the dialog is closed was not checked."
 
 - opcode: 0x1D
   macro: AICMD0x1D_ShowDialog
-  handler: fAIAction0x1D_ShowDialog
+  handler: fAIAction0x1D_ShowDialogWithChoice
   handler_addr: "849034"
   suggested_name: ShowDialogWithChoice
   confidence: confirmed
@@ -195,22 +195,22 @@
 
 - opcode: 0x1E
   macro: AICMD0x1E
-  handler: fAIAction0x1F
+  handler: fAIAction0x1F_JumpIfTalkedTo
   handler_addr: "849079"
   suggested_name: JumpIfTalkedTo
   confidence: probable
   length_bytes: 3
   params:
     - {name: pNextAction, offset: 1, size: 2, type: script_ptr, meaning: "As in 0x1F: low 16 bits of the address of the command to jump to after the conversation starts."}
-  summary: "Alias of 0x1F - the 0x1E entry in the aAIActions table points to the same handler fAIAction0x1F; it does not occur in any script."
-  details: "In aAIActions (849455) the entries for opcodes 0x1E and 0x1F point to fAIAction0x1F ($849079). Behavior is identical to 0x1F. The macro AICMD0x1E has the same format (opcode + 16-bit pointer). Command 0x1E was not found in bank_B3/B4/B5."
+  summary: "Alias of 0x1F - the 0x1E entry in the aAIActions table points to the same handler fAIAction0x1F_JumpIfTalkedTo; it does not occur in any script."
+  details: "In aAIActions (849455) the entries for opcodes 0x1E and 0x1F point to fAIAction0x1F_JumpIfTalkedTo ($849079). Behavior is identical to 0x1F. The macro AICMD0x1E has the same format (opcode + 16-bit pointer). Command 0x1E was not found in bank_B3/B4/B5."
   ram_touched: [ptrAIActionData]
   calls: []
   open_questions: "Whether 0x1E was intended as a separate command (e.g. a different condition) - in the US ROM it points to the same handler. See the description of 0x1F for details."
 
 - opcode: 0x1F
   macro: AICMD0x1F
-  handler: fAIAction0x1F
+  handler: fAIAction0x1F_JumpIfTalkedTo
   handler_addr: "849079"
   suggested_name: JumpIfTalkedTo
   confidence: probable
@@ -257,7 +257,7 @@
 
 - opcode: 0x22
   macro: AICMD0x22
-  handler: fAIAction0x22
+  handler: fAIAction0x22_StartRandomWalk
   handler_addr: "84923F"
   suggested_name: StartRandomWalk
   confidence: probable

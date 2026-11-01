@@ -12,7 +12,7 @@ macro AIExecute(nArg, nIndex, nSubIndex)
     LDA.W #<nArg>
     LDX.W #<nIndex>
     LDY.W #<nSubIndex>
-    JSL.L fAI_SetupAreaScripting
+    JSL.L fAI_StartSlotScript
 endmacro
 
 

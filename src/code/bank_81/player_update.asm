@@ -2231,7 +2231,7 @@ fPlayerInteraction0x43:
     LDA.B #$00                                                 ;81EA6D|A900    |      ;
     XBA                                                        ;81EA6F|EB      |      ;
     LDA.W $09A0+!RAM_SHIFT                                 ;81EA70|ADA009  |0009A0;
-    JSL.L fAI_SetCCPointer                                     ;81EA73|227C8884|84887C;
+    JSL.L fAI_SelectSlot                                     ;81EA73|227C8884|84887C;
     SEP #$20                                                   ;81EA77|E220    |      ;
     REP #$10                                                   ;81EA79|C210    |      ;
     LDY.W #$0001                                               ;81EA7B|A00100  |      ;
@@ -2670,7 +2670,7 @@ fPlayerInteraction0x44:
     LDA.B #$00                                                 ;81EE30|A900    |      ;
     XBA                                                        ;81EE32|EB      |      ;
     LDA.W $09A1+!RAM_SHIFT                                 ;81EE33|ADA109  |0009A1;
-    JSL.L fAI_SetCCPointer                                     ;81EE36|227C8884|84887C;
+    JSL.L fAI_SelectSlot                                     ;81EE36|227C8884|84887C;
     SEP #$20                                                   ;81EE3A|E220    |      ;
     REP #$10                                                   ;81EE3C|C210    |      ;
     LDY.W #$0001                                               ;81EE3E|A00100  |      ;

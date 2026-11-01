@@ -607,7 +607,7 @@ struct strcAIUnknown        $7EB586
     .unk3C                  skip 1
     .unk3D                  skip 1
     .unk3E                  skip 1
-    .nArg                   skip 1  ; Saved value from A register passed to fAI_SetupAreaScripting
+    .nArg                   skip 1  ; Saved value from A register passed to fAI_StartSlotScript
 endstruct align 64
 
 !AIFLAGS_UNK00              =  $01

@@ -71,7 +71,7 @@ fCore_MainLoop:
     JSL.L fObjectSlots_UpdateAll                                      ;8080B7|2283A381|81A383;
     JSL.L fPlayer_UpdateHandler                      ;8080BB|22B7BF81|81BFB7;
     JSL.L fGraphics_MapScrool                                  ;8080BF|22B39580|8095B3;
-    JSL.L fAI_HowToPlaySetup                                   ;8080C3|226F8184|84816F;
+    JSL.L fAI_RunSlots                                   ;8080C3|226F8184|84816F;
     JSL.L fTileScript_Update                                    ;8080C7|2200A681|81A600;
     JSL.L fObject_UpdateAllAnimations                                ;8080CB|22C78285|8582C7;
     JSL.L fObject_ProcessTileLoadQueue                                      ;8080CF|22B28C85|858CB2;

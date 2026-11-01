@@ -325,7 +325,7 @@ fPlayerAction0x13:
     %SetPlayerAction(!PACTION_0F)
     REP #$20                                                   ;81C2C5|C220    |      ;
     LDA.W #$0014                                               ;81C2C7|A91400  |      ;
-    JSL.L fAI_SetCCPointer                                     ;81C2CA|227C8884|84887C;
+    JSL.L fAI_SelectSlot                                     ;81C2CA|227C8884|84887C;
     SEP #$20                                                   ;81C2CE|E220    |      ;
     REP #$10                                                   ;81C2D0|C210    |      ;
     LDY.W #$0000                                               ;81C2D2|A00000  |      ;

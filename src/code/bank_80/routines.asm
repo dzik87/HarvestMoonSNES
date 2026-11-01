@@ -234,12 +234,12 @@ fMap_ResetAndLoadDestinationArea:
     JSL.L fObject_InitTileCache                                  ;809703|22D78E85|858ED7;
     JSL.L fObject_ClearGameObject                              ;809707|220F8285|85820F;
     JSL.L fObjectSlots_ClearAll                                   ;80970B|22C7A481|81A4C7;
-    JSL.L fAI_ZeroCCPtr                                        ;80970F|22008084|848000;
+    JSL.L fAI_ClearAllSlots                                        ;80970F|22008084|848000;
     SEP #$20                                                   ;809713|E220    |      ;
     LDA.W nDestinationAreaId                                   ;809715|AD8B09  |00098B;
     STA.B strcMap.loadAreaId                                   ;809718|8522    |000022;
     JSL.L fMapEngine_AreaEvents                                ;80971A|2298CA83|83CA98;
-    JSL.L fAI_HowToPlaySetup                                   ;80971E|226F8184|84816F;
+    JSL.L fAI_RunSlots                                   ;80971E|226F8184|84816F;
     SEP #$20                                                   ;809722|E220    |      ;
     LDA.W nDestinationAreaId                                   ;809724|AD8B09  |00098B;
     JSL.L fMap_SetupArea                                       ;809727|222C9780|80972C;
@@ -562,7 +562,7 @@ fMap_SetupArea:
     LDA.W #$1800                                               ;809A09|A90018  |      ;
     STA.B $C7                                                  ;809A0C|85C7    |0000C7;
     JSL.L fObjectSlots_UpdateAll                                      ;809A0E|2283A381|81A383;
-    JSL.L fAI_HowToPlaySetup                                   ;809A12|226F8184|84816F;
+    JSL.L fAI_RunSlots                                   ;809A12|226F8184|84816F;
     JSL.L fObject_UpdateAllAnimations                                ;809A16|22C78285|8582C7;
     JSL.L fObject_ProcessTileLoadQueue                                      ;809A1A|22B28C85|858CB2;
     JSL.L fObject_RenderAll                                      ;809A1E|22E08385|8583E0;
@@ -573,7 +573,7 @@ fMap_SetupArea:
     LDA.W #$1800                                               ;809A2C|A90018  |      ;
     STA.B $C7                                                  ;809A2F|85C7    |0000C7;
     JSL.L fObjectSlots_UpdateAll                                      ;809A31|2283A381|81A383;
-    JSL.L fAI_HowToPlaySetup                                   ;809A35|226F8184|84816F;
+    JSL.L fAI_RunSlots                                   ;809A35|226F8184|84816F;
     JSL.L fObject_UpdateAllAnimations                                ;809A39|22C78285|8582C7;
     JSL.L fObject_ProcessTileLoadQueue                                      ;809A3D|22B28C85|858CB2;
     JSL.L fObject_RenderAll                                      ;809A41|22E08385|8583E0;

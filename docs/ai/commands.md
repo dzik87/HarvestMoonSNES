@@ -162,7 +162,7 @@ RAM: `nCurrentTimeID`, `ptrAIActionData`
 
 ## 0x04 — Nop
 
-- Macro: `AICMD0x04_Nop` · handler: `fAIAction0x04_DoesNothing` ($848A58) · confidence: **confirmed**
+- Macro: `AICMD0x04_Nop` · handler: `fAIAction0x04_Nop` ($848A58) · confidence: **confirmed**
 - Length: 1 B · usage: 0 calls in 0 scripts
 
 Empty command (NOP) - only advances the pointer by 1 byte.
@@ -232,7 +232,7 @@ RAM: `strcPlayer.flags`, `strcAiControlData.input`, `strcAiControlData.counter`,
 
 ## 0x09 — StartScript
 
-- Macro: `AICMD0x09_StartScript` · handler: `fAIAction0x09` ($848B08) · confidence: **confirmed**
+- Macro: `AICMD0x09_StartScript` · handler: `fAIAction0x09_StartScript` ($848B08) · confidence: **confirmed**
 - Length: 4 B · usage: 0 calls in 0 scripts
 
 Starts a parallel script in another slot (nDataIndex), beginning at pNextAction; the current script continues.
@@ -242,17 +242,17 @@ Starts a parallel script in another slot (nDataIndex), beginning at pNextAction;
 | `nDataIndex` | 1 | 1 | n8 | Index of the target script slot (64-byte structure at $7E:B586 + idx*64, 49 slots). Also stored in the new slot at offset +$3F. |
 | `pNextAction` | 2 | 2 | script_ptr | 16-bit address of the script start in the same bank as the current script (the bank is copied from offset +$32 of the current slot). |
 
-Remembers the current slot (ptrAIUnknown0xCC -> ptrTemp0x72), switches ptrAIUnknown0xCC to slot nDataIndex through fAI_SetCCPointer, copies the bank into it (+$32), stores the 16-bit pointer to +$30, calls fAI_ResetSlotFull (slot initialization: active=1, flags=0, counters, position 0, etc.), stores nDataIndex in +$3F and restores the previous slot. Then ptrAIActionData += 4 in total. Does not block. The new slot starts executing in the slot loop (in the same frame if its index is greater).
+Remembers the current slot (ptrAIUnknown0xCC -> ptrTemp0x72), switches ptrAIUnknown0xCC to slot nDataIndex through fAI_SelectSlot, copies the bank into it (+$32), stores the 16-bit pointer to +$30, calls fAI_ResetSlotFull (slot initialization: active=1, flags=0, counters, position 0, etc.), stores nDataIndex in +$3F and restores the previous slot. Then ptrAIActionData += 4 in total. Does not block. The new slot starts executing in the slot loop (in the same frame if its index is greater).
 
 RAM: `ptrAIUnknown0xCC`, `ptrTemp0x72`, `ptrAIActionData`, `slot[nDataIndex]: +0 +1 +3..+6 +0C +0F +10 +12 +14 +1A +1C +30 +32 +3F`
 
-Calls: `fAI_SetCCPointer`, `fAI_ResetSlotFull`
+Calls: `fAI_SelectSlot`, `fAI_ResetSlotFull`
 
 > Open questions: The meaning of all slot fields reset in fAI_ResetSlotFull (strcAIUnknown.unkXX) is not fully described; what happens when the target slot is already active was not checked (it is overwritten without a check).
 
 ## 0x0A — ScreenFadein
 
-- Macro: `AICMD0x0A_ScreenFadein` · handler: `fAIAction0x0A` ($848B83) · confidence: **confirmed**
+- Macro: `AICMD0x0A_ScreenFadein` · handler: `fAIAction0x0A_ScreenFadein` ($848B83) · confidence: **confirmed**
 - Length: 2 B · usage: 0 calls in 0 scripts
 
 Smoothly brightens the screen (fade-in) from brightness 3 to 15; blocks until finished.
@@ -271,7 +271,7 @@ Calls: `fCore_ScreenFadein`
 
 ## 0x0B — SetScriptFlag
 
-- Macro: `AICMD0x0B_SetScriptFlag` · handler: `fAIAction0x0B` ($848BAC) · confidence: **confirmed**
+- Macro: `AICMD0x0B_SetScriptFlag` · handler: `fAIAction0x0B_SetScriptFlag` ($848BAC) · confidence: **confirmed**
 - Length: 2 B · usage: 0 calls in 0 scripts
 
 Sets bit nFlagBit in the global script flag field $7F:1F7A (synchronization between slots).
@@ -288,7 +288,7 @@ RAM: `$7F1F7A`, `ptrAIActionData`
 
 ## 0x0C — WaitForScriptFlag
 
-- Macro: `AICMD0x0C_WaitForScriptFlag` · handler: `fAIAction0x0C` ($848BDC) · confidence: **confirmed**
+- Macro: `AICMD0x0C_WaitForScriptFlag` · handler: `fAIAction0x0C_WaitForScriptFlag` ($848BDC) · confidence: **confirmed**
 - Length: 2 B · usage: 0 calls in 0 scripts
 
 Waits (frame by frame) until bit nFlagBit in $7F:1F7A is set, then continues.
@@ -303,7 +303,7 @@ RAM: `$7F1F7A`, `ptrAIActionData`, `slot[+0x10] (wait counter)`
 
 ## 0x0D — MoveObject
 
-- Macro: `AICMD0x0D` · handler: `fAIAction0x0D` ($848C22) · confidence: **probable**
+- Macro: `AICMD0x0D` · handler: `fAIAction0x0D_MoveObject` ($848C22) · confidence: **probable**
 - Length: 5 B · usage: 0 calls in 0 scripts
 
 Sets the movement vector (dx, dy) of the script object together with its speed and duration, and waits for it to finish.
@@ -323,7 +323,7 @@ RAM: `slot[+0x01] flags`, `slot[+0x03] dx`, `slot[+0x04] dy`, `slot[+0x05] step`
 
 ## 0x0E — ApplyMusicChange
 
-- Macro: `AICMD0x0E` · handler: `fAIAction0x0E` ($848CA8) · confidence: **probable**
+- Macro: `AICMD0x0E` · handler: `fAIAction0x0E_ApplyMusicChange` ($848CA8) · confidence: **probable**
 - Length: 2 B · usage: 0 calls in 0 scripts
 
 Calls fAudio_FadeOutOnTrackChangeSlow: if the requested trackId differs from the one being played, sends a track change command to the APU.
@@ -381,7 +381,7 @@ RAM: `strcPlayer.flags`, `ptrAIActionData`
 
 ## 0x12 — Jump
 
-- Macro: `AICMD0x12_Jump` · handler: `fAIAction0x12_AlwaysJump` ($848D13) · confidence: **confirmed**
+- Macro: `AICMD0x12_Jump` · handler: `fAIAction0x12_Jump` ($848D13) · confidence: **confirmed**
 - Length: 3 B · usage: 0 calls in 0 scripts
 
 Unconditional jump to command pNextAction in the current script bank.
@@ -390,7 +390,7 @@ Unconditional jump to command pNextAction in the current script bank.
 |---|---|---|---|---|
 | `pNextAction` | 1 | 2 | script_ptr | Low 16 bits of the address of the next command. The bank (ptrAIActionData+2) remains unchanged, so the jump is only possible within the current script bank ($B3/$B4/$B5). |
 
-The handler advances ptrAIActionData by 1 (to the argument), reads a 16-bit word and stores it to ptrAIActionData (only the 2 low bytes, the bank byte is untouched). It does not change the object's +$10 counter, so the fAI_HowToPlaySetup loop executes the next command in the same frame (does not block). Note: a Jump->Jump loop without a blocking command (Wait/0x1F/dialog) would hang the game, which is why 'polling' loops in scripts always contain a command that increments +$10 (e.g. 0x1F).
+The handler advances ptrAIActionData by 1 (to the argument), reads a 16-bit word and stores it to ptrAIActionData (only the 2 low bytes, the bank byte is untouched). It does not change the object's +$10 counter, so the fAI_RunSlots loop executes the next command in the same frame (does not block). Note: a Jump->Jump loop without a blocking command (Wait/0x1F/dialog) would hang the game, which is why 'polling' loops in scripts always contain a command that increments +$10 (e.g. 0x1F).
 
 RAM: `ptrAIActionData`
 
@@ -403,13 +403,13 @@ Suspends execution of the script of the given AI object for nTime frames.
 
 | Parameter | Offset | Size | Type | Meaning |
 |---|---|---|---|---|
-| `nTime` | 1 | 2 | n16 | Number of calls of the AI loop (fAI_HowToPlaySetup, called once per frame from the main loop) for which the script of this object waits. A value of 0 = no waiting. Typical: 1, 60, 180, 240. |
+| `nTime` | 1 | 2 | n16 | Number of calls of the AI loop (fAI_RunSlots, called once per frame from the main loop) for which the script of this object waits. A value of 0 = no waiting. Typical: 1, 60, 180, 240. |
 
-Stores nTime (16-bit) to field +$10 of the AI object structure pointed to by ptrAIUnknown0xCC (strcAIUnknown.unk10, wait counter). On each call, the fAI_HowToPlaySetup loop decrements +$10 for active objects and executes commands while +$10 = 0; after a command is executed with +$10 != 0, the object is no longer processed in that frame. As a result, the next command executes nTime frames after Wait (Wait(1) = skipping one frame). The script waits only for the current object (each AI object has its own counter); the AI loop is skipped entirely when strcDialogDisplay.mapUnk19A == 2 or 6 (dialog) or when the player action = PACTION_JUMP.
+Stores nTime (16-bit) to field +$10 of the AI object structure pointed to by ptrAIUnknown0xCC (strcAIUnknown.unk10, wait counter). On each call, the fAI_RunSlots loop decrements +$10 for active objects and executes commands while +$10 = 0; after a command is executed with +$10 != 0, the object is no longer processed in that frame. As a result, the next command executes nTime frames after Wait (Wait(1) = skipping one frame). The script waits only for the current object (each AI object has its own counter); the AI loop is skipped entirely when strcDialogDisplay.mapUnk19A == 2 or 6 (dialog) or when the player action = PACTION_JUMP.
 
 RAM: `ptrAIActionData`, `ptrAIUnknown0xCC+$10`
 
-> Open questions: The time unit is AI loop calls; it is not confirmed that the loop is called exactly once per frame at all 10 call sites of fAI_HowToPlaySetup (core.asm, routines.asm, main_loop.asm, interaction_data.asm).
+> Open questions: The time unit is AI loop calls; it is not confirmed that the loop is called exactly once per frame at all 10 call sites of fAI_RunSlots (core.asm, routines.asm, main_loop.asm, interaction_data.asm).
 
 ## 0x14 — JumpIfBitSet
 
@@ -469,7 +469,7 @@ RAM: `ptrAIActionData`, `ptrTemp0x72`, `strcVariables.n8Temp1`, `strcVariables.n
 
 ## 0x17 — RollRandom
 
-- Macro: `AICMD0x17_RollRandom` · handler: `fAIAction0x17` ($848E68) · confidence: **confirmed**
+- Macro: `AICMD0x17_RollRandom` · handler: `fAIAction0x17_RollRandom` ($848E68) · confidence: **confirmed**
 - Length: 2 B · usage: 0 calls in 0 scripts
 
 Rolls a number 0..nMax-1 and stores it in field +$0D of the current AI object.
@@ -488,7 +488,7 @@ Calls: `fCore_GetRandomNumber`
 
 ## 0x18 — JumpIfRandomEquals
 
-- Macro: `AICMD0x18_JumpIfRandomEquals` · handler: `fAIAction0x18` ($848E90) · confidence: **confirmed**
+- Macro: `AICMD0x18_JumpIfRandomEquals` · handler: `fAIAction0x18_JumpIfRandomEquals` ($848E90) · confidence: **confirmed**
 - Length: 4 B · usage: 0 calls in 0 scripts
 
 Jumps to pNextAction if the object's last rolled (0x17) value equals nValue.
@@ -506,7 +506,7 @@ RAM: `ptrAIActionData`, `ptrAIUnknown0xCC+$0D`, `strcVariables.n8Temp1`, `strcVa
 
 ## 0x19 — SetPlayerSprite
 
-- Macro: `AICMD0x19` · handler: `fAIAction0x19` ($848EC9) · confidence: **probable**
+- Macro: `AICMD0x19` · handler: `fAIAction0x19_SetPlayerSprite` ($848EC9) · confidence: **probable**
 - Length: 4 B · usage: 0 calls in 0 scripts
 
 Forces a specific sprite and flip for the player and sets the PFLAGS_KNEEING flag.
@@ -524,7 +524,7 @@ RAM: `ptrAIActionData`, `strcObjectData.spriteIdx`, `strcObjectData.flip`, `strc
 
 ## 0x1A — SpawnNpc
 
-- Macro: `AICMD0x1A` · handler: `fAIAction0x1A` ($848F0A) · confidence: **probable**
+- Macro: `AICMD0x1A` · handler: `fAIAction0x1A_SpawnNpc` ($848F0A) · confidence: **probable**
 - Length: 8 B · usage: 0 calls in 0 scripts
 
 Creates/places an NPC object at the given position with a sprite table and an initial direction.
@@ -546,7 +546,7 @@ Calls: `fAI_LoadSlotSpriteFromDirTable`
 
 ## 0x1B — SetSprite
 
-- Macro: `AICMD0x1B` · handler: `fAIAction0x1B` ($848F9B) · confidence: **probable**
+- Macro: `AICMD0x1B` · handler: `fAIAction0x1B_SetSprite` ($848F9B) · confidence: **probable**
 - Length: 4 B · usage: 0 calls in 0 scripts
 
 Directly sets the sprite and flip of the current AI object (NPC) and requests a sprite refresh.
@@ -574,7 +574,7 @@ Displays dialog nDialogId and suspends the script for one frame (the AI loop con
 | `nDialogId` | 1 | 2 | n16 | Dialog index (index into aDialogPointers, 3 bytes per entry); goes to X, and in fDialog_DialogHandler to strcDialogDisplay.dialogId. |
 | `nPosition` | 3 | 1 | n8 | Stored to strcDialogDisplay.dialogUnk191 ($7E:0191). In fDialog_DialogHandler: 0 = automatic (default 1, and 2 when strcObjectData.camY < $81), a non-zero value is used directly for the BG3 offset (by (value-1)*128 px) - so it is probably the position of the dialog window (top/bottom of the screen). 0 or 1 in scripts. |
 
-Loads nDialogId into X, stores the nPosition byte to dialogUnk191, sets strcDialogDisplay.mapUnk19A = 2 and calls fDialog_DialogHandler (sets dialogId, dialogFlags |= DFLAGS_PROCESSDIALOG, zeroes the option/answer counters, selects the text pointer from aDialogPointers, sets the BG3 offset and nTimeState = 0, daily1 |= $4000). Then +$10 += 1 (one frame). Because mapUnk19A == 2, fAI_HowToPlaySetup returns immediately at the start until the dialog ends (the dialog code zeroes/changes mapUnk19A), so the script and all AI objects wait until the end of the dialog.
+Loads nDialogId into X, stores the nPosition byte to dialogUnk191, sets strcDialogDisplay.mapUnk19A = 2 and calls fDialog_DialogHandler (sets dialogId, dialogFlags |= DFLAGS_PROCESSDIALOG, zeroes the option/answer counters, selects the text pointer from aDialogPointers, sets the BG3 offset and nTimeState = 0, daily1 |= $4000). Then +$10 += 1 (one frame). Because mapUnk19A == 2, fAI_RunSlots returns immediately at the start until the dialog ends (the dialog code zeroes/changes mapUnk19A), so the script and all AI objects wait until the end of the dialog.
 
 RAM: `ptrAIActionData`, `ptrAIUnknown0xCC+$10`, `strcDialogDisplay.dialogUnk191`, `strcDialogDisplay.mapUnk19A`, `strcDialogDisplay.dialogId`, `strcDialogDisplay.dialogFlags`, `strcDialogDisplay.dialogOptionsAnswer`, `strcFlags.daily1`, `nTimeState`, `strcBGScrool.BG3VerOffs`
 
@@ -584,7 +584,7 @@ Calls: `fDialog_DialogHandler`
 
 ## 0x1D — ShowDialogWithChoice
 
-- Macro: `AICMD0x1D_ShowDialog` · handler: `fAIAction0x1D_ShowDialog` ($849034) · confidence: **confirmed**
+- Macro: `AICMD0x1D_ShowDialog` · handler: `fAIAction0x1D_ShowDialogWithChoice` ($849034) · confidence: **confirmed**
 - Length: 4 B · usage: 0 calls in 0 scripts
 
 Functionally identical to 0x1C (ShowDialog); in scripts it is used for dialogs with choices, followed by a series of 0x20.
@@ -604,16 +604,16 @@ Calls: `fDialog_DialogHandler`
 
 ## 0x1E — JumpIfTalkedTo
 
-- Macro: `AICMD0x1E` · handler: `fAIAction0x1F` ($849079) · confidence: **probable**
+- Macro: `AICMD0x1E` · handler: `fAIAction0x1F_JumpIfTalkedTo` ($849079) · confidence: **probable**
 - Length: 3 B · usage: 0 calls in 0 scripts
 
-Alias of 0x1F - the 0x1E entry in the aAIActions table points to the same handler fAIAction0x1F; it does not occur in any script.
+Alias of 0x1F - the 0x1E entry in the aAIActions table points to the same handler fAIAction0x1F_JumpIfTalkedTo; it does not occur in any script.
 
 | Parameter | Offset | Size | Type | Meaning |
 |---|---|---|---|---|
 | `pNextAction` | 1 | 2 | script_ptr | As in 0x1F: low 16 bits of the address of the command to jump to after the conversation starts. |
 
-In aAIActions (849455) the entries for opcodes 0x1E and 0x1F point to fAIAction0x1F ($849079). Behavior is identical to 0x1F. The macro AICMD0x1E has the same format (opcode + 16-bit pointer). Command 0x1E was not found in bank_B3/B4/B5.
+In aAIActions (849455) the entries for opcodes 0x1E and 0x1F point to fAIAction0x1F_JumpIfTalkedTo ($849079). Behavior is identical to 0x1F. The macro AICMD0x1E has the same format (opcode + 16-bit pointer). Command 0x1E was not found in bank_B3/B4/B5.
 
 RAM: `ptrAIActionData`
 
@@ -621,7 +621,7 @@ RAM: `ptrAIActionData`
 
 ## 0x1F — JumpIfTalkedTo
 
-- Macro: `AICMD0x1F` · handler: `fAIAction0x1F` ($849079) · confidence: **probable**
+- Macro: `AICMD0x1F` · handler: `fAIAction0x1F_JumpIfTalkedTo` ($849079) · confidence: **probable**
 - Length: 3 B · usage: 0 calls in 0 scripts
 
 Checks whether the player is standing next to the NPC and pressed A; if so - turns the NPC toward the player, locks the player in an interaction and jumps to pNextAction, otherwise waits one frame and continues.
@@ -674,7 +674,7 @@ RAM: `ptrAIActionData`, `ptrTemp0x72`, `strcVariables.n16Temp1`
 
 ## 0x22 — StartRandomWalk
 
-- Macro: `AICMD0x22` · handler: `fAIAction0x22` ($84923F) · confidence: **probable**
+- Macro: `AICMD0x22` · handler: `fAIAction0x22_StartRandomWalk` ($84923F) · confidence: **probable**
 - Length: 7 B · usage: 0 calls in 0 scripts
 
 Enables random wandering for the current NPC within a rectangular area around its current position.
@@ -730,7 +730,7 @@ Calls: `fPalette_SetNextHourPalette`
 
 ## 0x25 — RemoveActor
 
-- Macro: `AICMD0x25_RemoveActor` · handler: `fAIAction0x25` ($849375) · confidence: **confirmed**
+- Macro: `AICMD0x25_RemoveActor` · handler: `fAIAction0x25_RemoveActor` ($849375) · confidence: **confirmed**
 - Length: 2 B · usage: 0 calls in 0 scripts
 
 Deactivates the AI slot with the given number and removes its game object (sprite) from the map.
@@ -739,27 +739,27 @@ Deactivates the AI slot with the given number and removes its game object (sprit
 |---|---|---|---|---|
 | `nActorIndex` | 1 | 1 | n8 | Number of the AI slot (64-byte strcAIUnknown structures at $7E:B586 + n*64) to be removed. In scripts: $01,$02,$03,$09,$13. |
 
-The handler saves the current ptrAIUnknown0xCC in ptrTemp0x72, advances ptrAIActionData by 1, reads a byte and calls fAI_SetCCPointer (ptrAIUnknown0xCC = $7E:B586 + n*64). It then clears byte 0 of the slot (activity marker), reads the word at offset $12 (game object index) into strcObject.gameObjectIdx and calls fObject_Destroy, which releases all components (sprites) of the object (fObject_ReleaseSpriteTiles / fObject_ReleaseTileSlot) and clears strcGameObject.initailized. Finally it restores the previous ptrAIUnknown0xCC (the slot executing the script). The command pointer is advanced by 2 bytes in total. It does not block and does not increment the $10 counter. Logically corresponds to the routine fAI_DeactivateSlotAndObject (the same sequence for an arbitrary slot).
+The handler saves the current ptrAIUnknown0xCC in ptrTemp0x72, advances ptrAIActionData by 1, reads a byte and calls fAI_SelectSlot (ptrAIUnknown0xCC = $7E:B586 + n*64). It then clears byte 0 of the slot (activity marker), reads the word at offset $12 (game object index) into strcObject.gameObjectIdx and calls fObject_Destroy, which releases all components (sprites) of the object (fObject_ReleaseSpriteTiles / fObject_ReleaseTileSlot) and clears strcGameObject.initailized. Finally it restores the previous ptrAIUnknown0xCC (the slot executing the script). The command pointer is advanced by 2 bytes in total. It does not block and does not increment the $10 counter. Logically corresponds to the routine fAI_DeactivateSlotAndObject (the same sequence for an arbitrary slot).
 
 RAM: `ptrAIUnknown0xCC`, `ptrTemp0x72`, `strcObject.gameObjectIdx`, `strcAIUnknown.unk00`, `strcAIUnknown.unk12`, `strcGameObject.initailized`, `ptrAIActionData`
 
-Calls: `fAI_SetCCPointer`, `fObject_Destroy`
+Calls: `fAI_SelectSlot`, `fObject_Destroy`
 
 > Open questions: The call to fObject_Destroy contains a known bug (a jump to fObject_ReturnLong instead of RTL) - it does not affect the command. It was not checked what happens to the other slot fields (they are not cleared).
 
 ## 0x26 — ClearBit
 
-- Macro: `AICMD0x26_ClearBitAs0x28` · handler: `fAIAction0x28` ($8493C9) · confidence: **confirmed**
+- Macro: `AICMD0x26_ClearBitAs0x28` · handler: `fAIAction0x28_ClearBit` ($8493C9) · confidence: **confirmed**
 - Length: 5 B · usage: 0 calls in 0 scripts
 
-Alias of opcode 0x28 (clear bit) - in the aAIActions table the entry 0x26 points to fAIAction0x28.
+Alias of opcode 0x28 (clear bit) - in the aAIActions table the entry 0x26 points to fAIAction0x28_ClearBit.
 
 | Parameter | Offset | Size | Type | Meaning |
 |---|---|---|---|---|
 | `pAddress` | 1 | 3 | ram_ptr | 24-bit address of a 16-bit word in RAM in which a bit is cleared (the macro calls it nUnknown1). |
 | `nBitIndex` | 4 | 1 | n8 | Bit number 0-15 (index into aAIResetMask, the macro calls it nUnknown2). |
 
-The aAIActions table entries for 0x26 and 0x27 are identical to the one for 0x28 (84946B-84946F: fAIAction0x28 three times), so a $26 byte would execute exactly ClearBit. However, the macro AICMD0x26 emits the byte $28, not $26, and is not used anywhere in the US scripts. Format and behavior as in 0x28.
+The aAIActions table entries for 0x26 and 0x27 are identical to the one for 0x28 (84946B-84946F: fAIAction0x28_ClearBit three times), so a $26 byte would execute exactly ClearBit. However, the macro AICMD0x26 emits the byte $28, not $26, and is not used anywhere in the US scripts. Format and behavior as in 0x28.
 
 RAM: `ptrTemp0x72`, `strcVariables.n16Temp1`, `ptrAIActionData`
 
@@ -767,17 +767,17 @@ RAM: `ptrTemp0x72`, `strcVariables.n16Temp1`, `ptrAIActionData`
 
 ## 0x27 — ClearBit
 
-- Macro: `AICMD0x27_ClearBitAs0x28` · handler: `fAIAction0x28` ($8493C9) · confidence: **confirmed**
+- Macro: `AICMD0x27_ClearBitAs0x28` · handler: `fAIAction0x28_ClearBit` ($8493C9) · confidence: **confirmed**
 - Length: 5 B · usage: 0 calls in 0 scripts
 
-Alias of opcode 0x28 (clear bit) - in the aAIActions table the entry 0x27 points to fAIAction0x28.
+Alias of opcode 0x28 (clear bit) - in the aAIActions table the entry 0x27 points to fAIAction0x28_ClearBit.
 
 | Parameter | Offset | Size | Type | Meaning |
 |---|---|---|---|---|
 | `pAddress` | 1 | 3 | ram_ptr | 24-bit address of a 16-bit word in RAM in which a bit is cleared (the macro calls it nUnknown1). |
 | `nBitIndex` | 4 | 1 | n8 | Bit number 0-15 (index into aAIResetMask, the macro calls it nUnknown2). |
 
-Like 0x26: the table entry points to fAIAction0x28, the macro AICMD0x27 emits the byte $28 instead of $27 and there are no uses in the US scripts.
+Like 0x26: the table entry points to fAIAction0x28_ClearBit, the macro AICMD0x27 emits the byte $28 instead of $27 and there are no uses in the US scripts.
 
 RAM: `ptrTemp0x72`, `strcVariables.n16Temp1`, `ptrAIActionData`
 
@@ -785,7 +785,7 @@ RAM: `ptrTemp0x72`, `strcVariables.n16Temp1`, `ptrAIActionData`
 
 ## 0x28 — ClearBit
 
-- Macro: `AICMD0x28_ClearBit` · handler: `fAIAction0x28` ($8493C9) · confidence: **confirmed**
+- Macro: `AICMD0x28_ClearBit` · handler: `fAIAction0x28_ClearBit` ($8493C9) · confidence: **confirmed**
 - Length: 5 B · usage: 0 calls in 0 scripts
 
 Clears a single bit (0-15) in the 16-bit word at the given RAM address.
@@ -803,7 +803,7 @@ RAM: `ptrTemp0x72`, `strcVariables.n16Temp1`, `ptrAIActionData`
 
 ## 0x29 — SetMapScroll
 
-- Macro: `AICMD0x29_SetMapScrooling` · handler: `fAIAction0x29_SetMapScrooling` ($849513) · confidence: **confirmed**
+- Macro: `AICMD0x29_SetMapScrooling` · handler: `fAIAction0x29_SetMapScroll` ($849513) · confidence: **confirmed**
 - Length: 6 B · usage: 0 calls in 0 scripts
 
 Starts automatic camera scrolling at the given X/Y speed for the given number of frames.
@@ -820,7 +820,7 @@ RAM: `strcMapScrool.speedX`, `strcMapScrool.speedY`, `strcMapScrool.timer`, `ptr
 
 ## 0x2A — StartTileSequence
 
-- Macro: `AICMD0x2A` · handler: `fAIAction0x2A` ($849553) · confidence: **probable**
+- Macro: `AICMD0x2A` · handler: `fAIAction0x2A_StartTileSequence` ($849553) · confidence: **probable**
 - Length: 3 B · usage: 0 calls in 0 scripts
 
 Starts a sequence of map tile changes (pointer ptrUnknown0xCF) and ends the current script frame.
@@ -839,7 +839,7 @@ Calls: `fTileScript_Start`
 
 ## 0x2B — SpawnActor
 
-- Macro: `AICMD0x2B` · handler: `fAIAction0x2B` ($84957D) · confidence: **probable**
+- Macro: `AICMD0x2B` · handler: `fAIAction0x2B_SpawnActor` ($84957D) · confidence: **probable**
 - Length: 4 B · usage: 0 calls in 0 scripts
 
 Sets the appearance (sprite table from bank $B3 and direction) of the current AI slot and marks it for game object creation.
@@ -859,7 +859,7 @@ Calls: `fAI_LoadSlotSpriteFromDirTable`
 
 ## 0x2C — PlaySoundWait
 
-- Macro: `AICMD0x2C` · handler: `fAIAction0x2C` ($8495E8) · confidence: **probable**
+- Macro: `AICMD0x2C` · handler: `fAIAction0x2C_PlaySoundWait` ($8495E8) · confidence: **probable**
 - Length: 6 B · usage: 0 calls in 0 scripts
 
 Plays a sound effect (audio registers 114/115), waits the given number of frames and restores the tool sound.
@@ -880,7 +880,7 @@ Calls: `fAudio_PlaySoundEffectAndWait`, `fAudio_PrepareSoundEffectSample`, `fAud
 
 ## 0x2D — JumpOnInteract
 
-- Macro: `AICMD0x2D_JumpOnInteract` · handler: `fAIAction0x2D` ($849633) · confidence: **confirmed**
+- Macro: `AICMD0x2D_JumpOnInteract` · handler: `fAIAction0x2D_JumpOnInteract` ($849633) · confidence: **confirmed**
 - Length: 5 B · usage: 0 calls in 0 scripts
 
 Single-frame interaction test: if the player pressed A near this character, jumps to one of two addresses, otherwise proceeds to the next command.
@@ -900,7 +900,7 @@ Calls: `fAI_LoadSlotSpriteFromDirTable`
 
 ## 0x2E — StartWander
 
-- Macro: `AICMD0x2E` · handler: `fAIAction0x2E` ($849777) · confidence: **probable**
+- Macro: `AICMD0x2E` · handler: `fAIAction0x2E_StartWander` ($849777) · confidence: **probable**
 - Length: 5 B · usage: 0 calls in 0 scripts
 
 Enables random wandering (animals/NPCs) for the current AI slot around its current position, which becomes the home point.
@@ -919,7 +919,7 @@ RAM: `ptrAIUnknown0xCC`, `strcAIUnknown.flags`, `strcAIUnknown.unk05`, `strcAIUn
 
 ## 0x2F — SetActorSpriteTable
 
-- Macro: `AICMD0x2F` · handler: `fAIAction0x2F` ($849810) · confidence: **probable**
+- Macro: `AICMD0x2F` · handler: `fAIAction0x2F_SetActorSpriteTable` ($849810) · confidence: **probable**
 - Length: 3 B · usage: 0 calls in 0 scripts
 
 Changes the sprite table (animation) of the current AI slot while preserving the current direction, and marks the sprite for refresh.
@@ -968,7 +968,7 @@ Calls: `fGameEngine_GetCowData`, `fDialog_DialogHandler`, `fCow_AddHappiness`, `
 
 ## 0x32 — SetValue16
 
-- Macro: `AICMD0x32_SetValue16` · handler: `fAIAction0x32` ($84A90F) · confidence: **confirmed**
+- Macro: `AICMD0x32_SetValue16` · handler: `fAIAction0x32_SetValue16` ($84A90F) · confidence: **confirmed**
 - Length: 6 B · usage: 0 calls in 0 scripts
 
 Writes a 16-bit constant to an arbitrary RAM address (the word counterpart of 0x47 SetValue8).
@@ -1001,7 +1001,7 @@ Calls: `fAI_SetSlotScript`
 
 ## 0x34 — UpdatePickup
 
-- Macro: `AICMD0x34` · handler: `fAIAction0x34` ($84AA5D) · confidence: **probable**
+- Macro: `AICMD0x34` · handler: `fAIAction0x34_PickUpFish` ($84AA5D) · confidence: **probable**
 - Length: 1 B · usage: 0 calls in 0 scripts
 
 One tick of a simple item actor: after A is pressed, a player not holding an item picks it up (carryItemId = 7) and the actor disappears.
@@ -1044,7 +1044,7 @@ Calls: `fAI_SetSlotScript`
 
 ## 0x37 — RemoveObject
 
-- Macro: `AICMD0x37` · handler: `fAIAction0x37` ($84B34B) · confidence: **probable**
+- Macro: `AICMD0x37` · handler: `fAIAction0x37_RemoveObject` ($84B34B) · confidence: **probable**
 - Length: 1 B · usage: 0 calls in 0 scripts
 
 Removes/deactivates the game object associated with the AI slot (index from slot field +0x12).
@@ -1059,7 +1059,7 @@ Calls: `fObject_Destroy`
 
 ## 0x38 — WaitForFadeIn
 
-- Macro: `AICMD0x38_WaitForFadeIn` · handler: `fAIAction0x38` ($84B365) · confidence: **confirmed**
+- Macro: `AICMD0x38_WaitForFadeIn` · handler: `fAIAction0x38_WaitForFadeIn` ($84B365) · confidence: **confirmed**
 - Length: 1 B · usage: 0 calls in 0 scripts
 
 Blocks the script until the flag daily1 $8000 is set (screen fully brightened after fade-in).
@@ -1106,7 +1106,7 @@ RAM: `ptrAIActionData`, `ptrAIUnknown0xCC`, `strcAiControlData.input`, `strcAiCo
 
 ## 0x3B — SetCarryItemHolding
 
-- Macro: `AICMD0x3B` · handler: `fAIAction0x3B` ($84B4DC) · confidence: **probable**
+- Macro: `AICMD0x3B` · handler: `fAIAction0x3B_SetCarryItemHolding` ($84B4DC) · confidence: **probable**
 - Length: 2 B · usage: 0 calls in 0 scripts
 
 Sets the carried item and the PFLAGS_HOLDINGITEM flag (the player carries an item without a pick-up animation).
@@ -1123,7 +1123,7 @@ RAM: `ptrAIActionData`, `strcPlayerData.carryItemId`, `strcPlayer.flags`
 
 ## 0x3C — TeleportToHouse
 
-- Macro: `AICMD0x3C` · handler: `fAIAction0x3C` ($84B503) · confidence: **probable**
+- Macro: `AICMD0x3C` · handler: `fAIAction0x3C_TeleportToHouse` ($84B503) · confidence: **probable**
 - Length: 1 B · usage: 0 calls in 0 scripts
 
 Teleports the player home (nDestinationAreaId=$15=AREA_HOUSE1) with the forced teleport flag and sets the flag daily4 $0020.
@@ -1151,7 +1151,7 @@ RAM: `ptrAIActionData`, `nDestinationAreaId`, `strcDialogDisplay.mapFlags`
 
 ## 0x3E — PickUpCarryItem
 
-- Macro: `AICMD0x3E_SetCarryItem` · handler: `fAIAction0x3E` ($84B556) · confidence: **probable**
+- Macro: `AICMD0x3E_SetCarryItem` · handler: `fAIAction0x3E_PickUpCarryItem` ($84B556) · confidence: **probable**
 - Length: 2 B · usage: 0 calls in 0 scripts
 
 Sets the carried item and starts the player action PACTION_ITEMONHAND (pose/picking up an item).
@@ -1318,7 +1318,7 @@ RAM: `ptrAIActionData`, `ptrTemp0x72`, `[pAddress]`
 
 ## 0x48 — SetValue24
 
-- Macro: `AICMD0x48_SetValue24` · handler: `fAIAction0x48` ($84B889) · confidence: **confirmed**
+- Macro: `AICMD0x48_SetValue24` · handler: `fAIAction0x48_SetValue24` ($84B889) · confidence: **confirmed**
 - Length: 7 B · usage: 0 calls in 0 scripts
 
 Writes a 24-bit value to a 24-bit address (the n24 counterpart of 0x47 SetValue8).
@@ -1336,7 +1336,7 @@ RAM: `ptrAIActionData`, `ptrTemp0x72`
 
 ## 0x49 — SetSpriteTableFacingPlayer
 
-- Macro: `AICMD0x49` · handler: `fAIAction0x49` ($84B8D9) · confidence: **probable**
+- Macro: `AICMD0x49` · handler: `fAIAction0x49_SetSpriteTableFacingPlayer` ($84B8D9) · confidence: **probable**
 - Length: 3 B · usage: 0 calls in 0 scripts
 
 Sets the sprite data table of the AI object and immediately selects the entry matching the player's current direction (the 0x2B variant with index = strcPlayer.direction).
@@ -1355,7 +1355,7 @@ Calls: `fAI_LoadSlotSpriteFromDirTable`
 
 ## 0x4A — PickUpObjectOnButtonA
 
-- Macro: `AICMD0x4A` · handler: `fAIAction0x4A` ($84B93C) · confidence: **probable**
+- Macro: `AICMD0x4A` · handler: `fAIAction0x4A_PickUpObjectOnButtonA` ($84B93C) · confidence: **probable**
 - Length: 1 B · usage: 0 calls in 0 scripts
 
 If the player stands next to the object and presses A (with empty hands), picks the object up - deactivates it and gives the player the carried item id 8.
@@ -1368,7 +1368,7 @@ RAM: `ptrAIActionData`, `ptrAIUnknown0xCC`, `strcPlayer.action`, `strcPlayer.fla
 
 ## 0x4B — ReplaceMapTile
 
-- Macro: `AICMD0x4B` · handler: `fAIAction0x4B` ($84BA10) · confidence: **probable**
+- Macro: `AICMD0x4B` · handler: `fAIAction0x4B_ReplaceMapTile` ($84BA10) · confidence: **probable**
 - Length: 6 B · usage: 0 calls in 0 scripts
 
 Replaces a tile in the current object map (sCurrentObjectMap) at the given coordinates.
@@ -1389,7 +1389,7 @@ Calls: `fMap_UpdateCurrentTilemap`, `fObjectEngine_ConvertCoordsToOffset`
 
 ## 0x4C — SetPassable
 
-- Macro: `AICMD0x4C` · handler: `fAIAction0x4C` ($84BA51) · confidence: **probable**
+- Macro: `AICMD0x4C` · handler: `fAIAction0x4C_SetPassable` ($84BA51) · confidence: **probable**
 - Length: 1 B · usage: 0 calls in 0 scripts
 
 Sets bit 0x02 in the AI object state byte (+0x00); the object no longer blocks the player in collision detection.
@@ -1402,7 +1402,7 @@ RAM: `ptrAIActionData`, `ptrAIUnknown0xCC`
 
 ## 0x4D — JumpIfBlueFeatherUsed
 
-- Macro: `AICMD0x4D_JumpIfBlueFeatherUsed` · handler: `fAIAction0x4D` ($84BA72) · confidence: **confirmed**
+- Macro: `AICMD0x4D_JumpIfBlueFeatherUsed` · handler: `fAIAction0x4D_JumpIfBlueFeatherUsed` ($84BA72) · confidence: **confirmed**
 - Length: 3 B · usage: 0 calls in 0 scripts
 
 Conditional jump: if the player is next to the object and used the Blue Feather (flag daily3 0x0040), the object turns to face the player and the script jumps to pNextAction.
@@ -1421,7 +1421,7 @@ Calls: `fAI_LoadSlotSpriteFromDirTable`
 
 ## 0x4E — EnableTileInteractions
 
-- Macro: `AICMD0x4E_EnableTileInteractions` · handler: `fAIAction0x4E` ($84BB31) · confidence: **confirmed**
+- Macro: `AICMD0x4E_EnableTileInteractions` · handler: `fAIAction0x4E_EnableTileInteractions` ($84BB31) · confidence: **confirmed**
 - Length: 1 B · usage: 0 calls in 0 scripts
 
 Clears flag daily2 0x0008 - restores tile interactions disabled by 0x40.
@@ -1432,7 +1432,7 @@ RAM: `ptrAIActionData`, `strcFlags.daily2`
 
 ## 0x4F — DisableToolUse
 
-- Macro: `AICMD0x4F_DisableToolUse` · handler: `fAIAction0x4F` ($84BB4B) · confidence: **confirmed**
+- Macro: `AICMD0x4F_DisableToolUse` · handler: `fAIAction0x4F_DisableToolUse` ($84BB4B) · confidence: **confirmed**
 - Length: 1 B · usage: 0 calls in 0 scripts
 
 Sets flag daily4 0x8000, which blocks tool use with the Y button.
@@ -1445,7 +1445,7 @@ RAM: `ptrAIActionData`, `strcFlags.daily4`
 
 ## 0x50 — ReleaseCarried
 
-- Macro: `AICMD0x50` · handler: `fAIAction0x50` ($84BBDA) · confidence: **probable**
+- Macro: `AICMD0x50` · handler: `fAIAction0x50_ReleaseCarried` ($84BBDA) · confidence: **probable**
 - Length: 1 B · usage: 0 calls in 0 scripts
 
 Puts down whatever the player is carrying or hugging (item, chicken, dog) and resets the player sprite to the direction.
@@ -1460,7 +1460,7 @@ Calls: `fGameEngine_GetChickenData`
 
 ## 0x51 — ReleaseCarriedAnimal
 
-- Macro: `AICMD0x51` · handler: `fAIAction0x51` ($84BC9C) · confidence: **probable**
+- Macro: `AICMD0x51` · handler: `fAIAction0x51_ReleaseCarriedAnimal` ($84BC9C) · confidence: **probable**
 - Length: 1 B · usage: 0 calls in 0 scripts
 
 Variant of 0x50: returns the chicken to the coop, removes carry 0x29 and lets go of the dog, but does not touch other items and does not reset the player sprite.
@@ -1475,7 +1475,7 @@ Calls: `fGameEngine_GetChickenData`
 
 ## 0x52 — PickUpObjectForEventA
 
-- Macro: `AICMD0x52` · handler: `fAIAction0x52` ($84BD44) · confidence: **probable**
+- Macro: `AICMD0x52` · handler: `fAIAction0x52_PickUpObjectForEventA` ($84BD44) · confidence: **probable**
 - Length: 1 B · usage: 0 calls in 0 scripts
 
 Like 0x4A (picking up an object with the A button next to it), but instead of granting an item it sets flag daily4 0x0002, which triggers an event after the pick-up animation.
@@ -1488,7 +1488,7 @@ RAM: `ptrAIActionData`, `ptrAIUnknown0xCC`, `strcPlayer.action`, `strcPlayer.fla
 
 ## 0x53 — PickUpObjectForEventB
 
-- Macro: `AICMD0x53` · handler: `fAIAction0x53` ($84BE0D) · confidence: **probable**
+- Macro: `AICMD0x53` · handler: `fAIAction0x53_PickUpObjectForEventB` ($84BE0D) · confidence: **probable**
 - Length: 1 B · usage: 0 calls in 0 scripts
 
 Like 0x52, but sets flag daily4 0x0004 (selects the second event variant after the pick-up).
@@ -1501,7 +1501,7 @@ RAM: `ptrAIActionData`, `ptrAIUnknown0xCC`, `strcPlayer.action`, `strcPlayer.fla
 
 ## 0x54 — ShowDialogAutoClose
 
-- Macro: `AICMD0x54_ShowDialog` · handler: `fAIAction0x54_ShowDialog` ($84BED6) · confidence: **probable**
+- Macro: `AICMD0x54_ShowDialog` · handler: `fAIAction0x54_ShowDialogAutoClose` ($84BED6) · confidence: **probable**
 - Length: 4 B · usage: 0 calls in 0 scripts
 
 Shows a dialog in input handler mode 6 (closes by itself when finished, without player input) - a variant of 0x1C/0x1D.
@@ -1521,7 +1521,7 @@ Calls: `fDialog_DialogHandler`
 
 ## 0x55 — JumpIfFlagNotSet
 
-- Macro: `AICMD0x55_JumpIfFlagNotSet` · handler: `fAIAction0x55` ($84BF20) · confidence: **confirmed**
+- Macro: `AICMD0x55_JumpIfFlagNotSet` · handler: `fAIAction0x55_JumpIfFlagNotSet` ($84BF20) · confidence: **confirmed**
 - Length: 7 B · usage: 0 calls in 0 scripts
 
 Jumps to pNextAction if bit nFlagsIndex in the word at pAddress is NOT set (negation of 0x14 JumpIfFlagSet).

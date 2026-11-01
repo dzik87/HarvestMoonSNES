@@ -102,14 +102,14 @@ fMainMenu_StartHowToPlayDemo:
     JSL.L fObject_InitTileCache                                  ;82D2FF|22D78E85|858ED7;
     JSL.L fObject_ClearGameObject                              ;82D303|220F8285|85820F;
     JSL.L fObjectSlots_ClearAll                                   ;82D307|22C7A481|81A4C7;
-    JSL.L fAI_ZeroCCPtr                                        ;82D30B|22008084|848000;
+    JSL.L fAI_ClearAllSlots                                        ;82D30B|22008084|848000;
     JSL.L fObjectMap_LoadDefaultFarm                           ;82D30F|225AA682|82A65A;
     REP #$20                                                   ;82D313|C220    |      ;
     LDA.W #$0100                                               ;82D315|A90001  |      ;
     STA.W strcBGScrool.BG3VerOffs                              ;82D318|8D4601  |000146;
     REP #$30                                                   ;82D31B|C230    |      ;
     %AIExecute($0000, $0047, $0000)
-    JSL.L fAI_HowToPlaySetup                                   ;82D32A|226F8184|84816F;
+    JSL.L fAI_RunSlots                                   ;82D32A|226F8184|84816F;
     SEP #$20                                                   ;82D32E|E220    |      ;
     LDA.W nDestinationAreaId                                   ;82D330|AD8B09  |00098B;
     STA.B strcMap.loadAreaId                                   ;82D333|8522    |000022;
@@ -138,7 +138,7 @@ fMainMenu_StartHowToPlayDemo:
     JSL.L fObjectSlots_UpdateAll                                      ;82D374|2283A381|81A383;
     JSL.L fPlayer_UpdateHandler                      ;82D378|22B7BF81|81BFB7;
     JSL.L fGraphics_MapScrool                                  ;82D37C|22B39580|8095B3;
-    JSL.L fAI_HowToPlaySetup                                   ;82D380|226F8184|84816F;
+    JSL.L fAI_RunSlots                                   ;82D380|226F8184|84816F;
     JSL.L fTileScript_Update                                    ;82D384|2200A681|81A600;
     JSL.L fObject_UpdateAllAnimations                                ;82D388|22C78285|8582C7;
     JSL.L fObject_ProcessTileLoadQueue                                      ;82D38C|22B28C85|858CB2;

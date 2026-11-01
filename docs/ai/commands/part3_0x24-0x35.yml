@@ -15,7 +15,7 @@
 
 - opcode: 0x25
   macro: AICMD0x25_RemoveActor
-  handler: fAIAction0x25
+  handler: fAIAction0x25_RemoveActor
   handler_addr: "849375"
   suggested_name: RemoveActor
   confidence: confirmed
@@ -23,14 +23,14 @@
   params:
     - {name: nActorIndex, offset: 1, size: 1, type: n8, meaning: "Number of the AI slot (64-byte strcAIUnknown structures at $7E:B586 + n*64) to be removed. In scripts: $01,$02,$03,$09,$13."}
   summary: "Deactivates the AI slot with the given number and removes its game object (sprite) from the map."
-  details: "The handler saves the current ptrAIUnknown0xCC in ptrTemp0x72, advances ptrAIActionData by 1, reads a byte and calls fAI_SetCCPointer (ptrAIUnknown0xCC = $7E:B586 + n*64). It then clears byte 0 of the slot (activity marker), reads the word at offset $12 (game object index) into strcObject.gameObjectIdx and calls fObject_Destroy, which releases all components (sprites) of the object (fObject_ReleaseSpriteTiles / fObject_ReleaseTileSlot) and clears strcGameObject.initailized. Finally it restores the previous ptrAIUnknown0xCC (the slot executing the script). The command pointer is advanced by 2 bytes in total. It does not block and does not increment the $10 counter. Logically corresponds to the routine fAI_DeactivateSlotAndObject (the same sequence for an arbitrary slot)."
+  details: "The handler saves the current ptrAIUnknown0xCC in ptrTemp0x72, advances ptrAIActionData by 1, reads a byte and calls fAI_SelectSlot (ptrAIUnknown0xCC = $7E:B586 + n*64). It then clears byte 0 of the slot (activity marker), reads the word at offset $12 (game object index) into strcObject.gameObjectIdx and calls fObject_Destroy, which releases all components (sprites) of the object (fObject_ReleaseSpriteTiles / fObject_ReleaseTileSlot) and clears strcGameObject.initailized. Finally it restores the previous ptrAIUnknown0xCC (the slot executing the script). The command pointer is advanced by 2 bytes in total. It does not block and does not increment the $10 counter. Logically corresponds to the routine fAI_DeactivateSlotAndObject (the same sequence for an arbitrary slot)."
   ram_touched: [ptrAIUnknown0xCC, ptrTemp0x72, strcObject.gameObjectIdx, strcAIUnknown.unk00, strcAIUnknown.unk12, strcGameObject.initailized, ptrAIActionData]
-  calls: [fAI_SetCCPointer, fObject_Destroy]
+  calls: [fAI_SelectSlot, fObject_Destroy]
   open_questions: "The call to fObject_Destroy contains a known bug (a jump to fObject_ReturnLong instead of RTL) - it does not affect the command. It was not checked what happens to the other slot fields (they are not cleared)."
 
 - opcode: 0x26
   macro: AICMD0x26_ClearBitAs0x28
-  handler: fAIAction0x28
+  handler: fAIAction0x28_ClearBit
   handler_addr: "8493C9"
   suggested_name: ClearBit
   confidence: confirmed
@@ -38,15 +38,15 @@
   params:
     - {name: pAddress, offset: 1, size: 3, type: ram_ptr, meaning: "24-bit address of a 16-bit word in RAM in which a bit is cleared (the macro calls it nUnknown1)."}
     - {name: nBitIndex, offset: 4, size: 1, type: n8, meaning: "Bit number 0-15 (index into aAIResetMask, the macro calls it nUnknown2)."}
-  summary: "Alias of opcode 0x28 (clear bit) - in the aAIActions table the entry 0x26 points to fAIAction0x28."
-  details: "The aAIActions table entries for 0x26 and 0x27 are identical to the one for 0x28 (84946B-84946F: fAIAction0x28 three times), so a $26 byte would execute exactly ClearBit. However, the macro AICMD0x26 emits the byte $28, not $26, and is not used anywhere in the US scripts. Format and behavior as in 0x28."
+  summary: "Alias of opcode 0x28 (clear bit) - in the aAIActions table the entry 0x26 points to fAIAction0x28_ClearBit."
+  details: "The aAIActions table entries for 0x26 and 0x27 are identical to the one for 0x28 (84946B-84946F: fAIAction0x28_ClearBit three times), so a $26 byte would execute exactly ClearBit. However, the macro AICMD0x26 emits the byte $28, not $26, and is not used anywhere in the US scripts. Format and behavior as in 0x28."
   ram_touched: [ptrTemp0x72, strcVariables.n16Temp1, ptrAIActionData]
   calls: []
   open_questions: "The macro AICMD0x26 should emit db $26 (or be removed/made an alias of 0x28). The original game most likely does not use this opcode."
 
 - opcode: 0x27
   macro: AICMD0x27_ClearBitAs0x28
-  handler: fAIAction0x28
+  handler: fAIAction0x28_ClearBit
   handler_addr: "8493C9"
   suggested_name: ClearBit
   confidence: confirmed
@@ -54,15 +54,15 @@
   params:
     - {name: pAddress, offset: 1, size: 3, type: ram_ptr, meaning: "24-bit address of a 16-bit word in RAM in which a bit is cleared (the macro calls it nUnknown1)."}
     - {name: nBitIndex, offset: 4, size: 1, type: n8, meaning: "Bit number 0-15 (index into aAIResetMask, the macro calls it nUnknown2)."}
-  summary: "Alias of opcode 0x28 (clear bit) - in the aAIActions table the entry 0x27 points to fAIAction0x28."
-  details: "Like 0x26: the table entry points to fAIAction0x28, the macro AICMD0x27 emits the byte $28 instead of $27 and there are no uses in the US scripts."
+  summary: "Alias of opcode 0x28 (clear bit) - in the aAIActions table the entry 0x27 points to fAIAction0x28_ClearBit."
+  details: "Like 0x26: the table entry points to fAIAction0x28_ClearBit, the macro AICMD0x27 emits the byte $28 instead of $27 and there are no uses in the US scripts."
   ram_touched: [ptrTemp0x72, strcVariables.n16Temp1, ptrAIActionData]
   calls: []
   open_questions: "The macro AICMD0x27 should emit db $27 (or be removed). The original game most likely does not use this opcode."
 
 - opcode: 0x28
   macro: AICMD0x28_ClearBit
-  handler: fAIAction0x28
+  handler: fAIAction0x28_ClearBit
   handler_addr: "8493C9"
   suggested_name: ClearBit
   confidence: confirmed
@@ -78,7 +78,7 @@
 
 - opcode: 0x29
   macro: AICMD0x29_SetMapScrooling
-  handler: fAIAction0x29_SetMapScrooling
+  handler: fAIAction0x29_SetMapScroll
   handler_addr: "849513"
   suggested_name: SetMapScroll
   confidence: confirmed
@@ -95,7 +95,7 @@
 
 - opcode: 0x2A
   macro: AICMD0x2A
-  handler: fAIAction0x2A
+  handler: fAIAction0x2A_StartTileSequence
   handler_addr: "849553"
   suggested_name: StartTileSequence
   confidence: probable
@@ -110,7 +110,7 @@
 
 - opcode: 0x2B
   macro: AICMD0x2B
-  handler: fAIAction0x2B
+  handler: fAIAction0x2B_SpawnActor
   handler_addr: "84957D"
   suggested_name: SpawnActor
   confidence: probable
@@ -126,7 +126,7 @@
 
 - opcode: 0x2C
   macro: AICMD0x2C
-  handler: fAIAction0x2C
+  handler: fAIAction0x2C_PlaySoundWait
   handler_addr: "8495E8"
   suggested_name: PlaySoundWait
   confidence: probable
@@ -143,7 +143,7 @@
 
 - opcode: 0x2D
   macro: AICMD0x2D_JumpOnInteract
-  handler: fAIAction0x2D
+  handler: fAIAction0x2D_JumpOnInteract
   handler_addr: "849633"
   suggested_name: JumpOnInteract
   confidence: confirmed
@@ -159,7 +159,7 @@
 
 - opcode: 0x2E
   macro: AICMD0x2E
-  handler: fAIAction0x2E
+  handler: fAIAction0x2E_StartWander
   handler_addr: "849777"
   suggested_name: StartWander
   confidence: probable
@@ -176,7 +176,7 @@
 
 - opcode: 0x2F
   macro: AICMD0x2F
-  handler: fAIAction0x2F
+  handler: fAIAction0x2F_SetActorSpriteTable
   handler_addr: "849810"
   suggested_name: SetActorSpriteTable
   confidence: probable
@@ -219,7 +219,7 @@
 
 - opcode: 0x32
   macro: AICMD0x32_SetValue16
-  handler: fAIAction0x32
+  handler: fAIAction0x32_SetValue16
   handler_addr: "84A90F"
   suggested_name: SetValue16
   confidence: confirmed
@@ -249,7 +249,7 @@
 
 - opcode: 0x34
   macro: AICMD0x34
-  handler: fAIAction0x34
+  handler: fAIAction0x34_PickUpFish
   handler_addr: "84AA5D"
   suggested_name: UpdatePickup
   confidence: probable

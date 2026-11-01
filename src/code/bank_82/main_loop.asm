@@ -99,7 +99,7 @@ fMainMenu_AutoHowToPlay:
     JSL.L fObject_InitTileCache                                  ;82D500|22D78E85|858ED7;
     JSL.L fObject_ClearGameObject                              ;82D504|220F8285|85820F;
     JSL.L fObjectSlots_ClearAll                                   ;82D508|22C7A481|81A4C7;
-    JSL.L fAI_ZeroCCPtr                                        ;82D50C|22008084|848000;
+    JSL.L fAI_ClearAllSlots                                        ;82D50C|22008084|848000;
     JSL.L fObjectMap_LoadDefaultFarm                           ;82D510|225AA682|82A65A;
     REP #$20                                                   ;82D514|C220    |      ;
     LDA.W #$0100                                               ;82D516|A90001  |      ;
@@ -274,7 +274,7 @@ fMainMenu_AutoHowToPlay:
  
  
 fMainMenu_PrepareHowToPlay:
-    JSL.L fAI_HowToPlaySetup                                   ;82D6AC|226F8184|84816F;
+    JSL.L fAI_RunSlots                                   ;82D6AC|226F8184|84816F;
     SEP #$20                                                   ;82D6B0|E220    |      ;
     LDA.W nDestinationAreaId                                   ;82D6B2|AD8B09  |00098B;
     STA.B strcMap.loadAreaId                                   ;82D6B5|8522    |000022;
@@ -303,7 +303,7 @@ fMainMenu_PrepareHowToPlay:
     JSL.L fObjectSlots_UpdateAll                                      ;82D6F6|2283A381|81A383;
     JSL.L fPlayer_UpdateHandler                      ;82D6FA|22B7BF81|81BFB7;
     JSL.L fGraphics_MapScrool                                  ;82D6FE|22B39580|8095B3;
-    JSL.L fAI_HowToPlaySetup                                   ;82D702|226F8184|84816F;
+    JSL.L fAI_RunSlots                                   ;82D702|226F8184|84816F;
     JSL.L fTileScript_Update                                    ;82D706|2200A681|81A600;
     JSL.L fObject_UpdateAllAnimations                                ;82D70A|22C78285|8582C7;
     JSL.L fObject_ProcessTileLoadQueue                                      ;82D70E|22B28C85|858CB2;
@@ -531,7 +531,7 @@ fMainMenu_StateOpeningDemo:
     JSL.L fObject_InitTileCache                                  ;82D8BE|22D78E85|858ED7;
     JSL.L fObject_ClearGameObject                              ;82D8C2|220F8285|85820F;
     JSL.L fObjectSlots_ClearAll                                   ;82D8C6|22C7A481|81A4C7;
-    JSL.L fAI_ZeroCCPtr                                        ;82D8CA|22008084|848000;
+    JSL.L fAI_ClearAllSlots                                        ;82D8CA|22008084|848000;
     REP #$20                                                   ;82D8CE|C220    |      ;
     %SetPlayerFlag(!PFLAGS_ACTIVE)
     %SetPlayerAction(!PACTION_NONE)
@@ -545,7 +545,7 @@ fMainMenu_StateOpeningDemo:
     STA.W strcBGScrool.BG3VerOffs                              ;82D8FC|8D4601  |000146;
     REP #$30                                                   ;82D8FF|C230    |      ;
     %AIExecute($0000, $0009, $0000)
-    JSL.L fAI_HowToPlaySetup                                   ;82D90E|226F8184|84816F;
+    JSL.L fAI_RunSlots                                   ;82D90E|226F8184|84816F;
     SEP #$20                                                   ;82D912|E220    |      ;
     LDA.W nDestinationAreaId                                   ;82D914|AD8B09  |00098B;
     STA.B strcMap.loadAreaId                                   ;82D917|8522    |000022;
@@ -578,7 +578,7 @@ fMainMenu_StateOpeningDemo:
     JSL.L fObjectSlots_UpdateAll                                      ;82D968|2283A381|81A383;
     JSL.L fPlayer_UpdateHandler                      ;82D96C|22B7BF81|81BFB7;
     JSL.L fGraphics_MapScrool                                  ;82D970|22B39580|8095B3;
-    JSL.L fAI_HowToPlaySetup                                   ;82D974|226F8184|84816F;
+    JSL.L fAI_RunSlots                                   ;82D974|226F8184|84816F;
     JSL.L fTileScript_Update                                    ;82D978|2200A681|81A600;
     JSL.L fObject_UpdateAllAnimations                                ;82D97C|22C78285|8582C7;
     JSL.L fObject_ProcessTileLoadQueue                                      ;82D980|22B28C85|858CB2;
@@ -634,7 +634,7 @@ fMainMenu_StateOpeningDemo:
     JSL.L fObject_InitTileCache                                  ;82D9E8|22D78E85|858ED7;
     JSL.L fObject_ClearGameObject                              ;82D9EC|220F8285|85820F;
     JSL.L fObjectSlots_ClearAll                                   ;82D9F0|22C7A481|81A4C7;
-    JSL.L fAI_ZeroCCPtr                                        ;82D9F4|22008084|848000;
+    JSL.L fAI_ClearAllSlots                                        ;82D9F4|22008084|848000;
     SEP #$20                                                   ;82D9F8|E220    |      ;
     LDA.B #$5B                                                 ;82D9FA|A95B    |      ;
     STA.B strcMap.loadAreaId                                   ;82D9FC|8522    |000022;
@@ -778,7 +778,7 @@ fMainMenu_StateReinitTitleScreen:
     JSL.L fObject_InitTileCache                                  ;82DB2D|22D78E85|858ED7;
     JSL.L fObject_ClearGameObject                              ;82DB31|220F8285|85820F;
     JSL.L fObjectSlots_ClearAll                                   ;82DB35|22C7A481|81A4C7;
-    JSL.L fAI_ZeroCCPtr                                        ;82DB39|22008084|848000;
+    JSL.L fAI_ClearAllSlots                                        ;82DB39|22008084|848000;
     REP #$20                                                   ;82DB3D|C220    |      ;
     STZ.B strcPlayer.posX                                      ;82DB3F|64D6    |0000D6;
     STZ.B strcPlayer.posY                                      ;82DB41|64D8    |0000D8;

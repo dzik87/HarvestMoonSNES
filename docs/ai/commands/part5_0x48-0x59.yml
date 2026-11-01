@@ -1,6 +1,6 @@
 - opcode: 0x48
   macro: AICMD0x48_SetValue24
-  handler: fAIAction0x48
+  handler: fAIAction0x48_SetValue24
   handler_addr: "84B889"
   suggested_name: SetValue24
   confidence: confirmed
@@ -16,7 +16,7 @@
 
 - opcode: 0x49
   macro: AICMD0x49
-  handler: fAIAction0x49
+  handler: fAIAction0x49_SetSpriteTableFacingPlayer
   handler_addr: "84B8D9"
   suggested_name: SetSpriteTableFacingPlayer
   confidence: probable
@@ -31,7 +31,7 @@
 
 - opcode: 0x4A
   macro: AICMD0x4A
-  handler: fAIAction0x4A
+  handler: fAIAction0x4A_PickUpObjectOnButtonA
   handler_addr: "84B93C"
   suggested_name: PickUpObjectOnButtonA
   confidence: probable
@@ -45,7 +45,7 @@
 
 - opcode: 0x4B
   macro: AICMD0x4B
-  handler: fAIAction0x4B
+  handler: fAIAction0x4B_ReplaceMapTile
   handler_addr: "84BA10"
   suggested_name: ReplaceMapTile
   confidence: probable
@@ -62,7 +62,7 @@
 
 - opcode: 0x4C
   macro: AICMD0x4C
-  handler: fAIAction0x4C
+  handler: fAIAction0x4C_SetPassable
   handler_addr: "84BA51"
   suggested_name: SetPassable
   confidence: probable
@@ -76,7 +76,7 @@
 
 - opcode: 0x4D
   macro: AICMD0x4D_JumpIfBlueFeatherUsed
-  handler: fAIAction0x4D
+  handler: fAIAction0x4D_JumpIfBlueFeatherUsed
   handler_addr: "84BA72"
   suggested_name: JumpIfBlueFeatherUsed
   confidence: confirmed
@@ -91,7 +91,7 @@
 
 - opcode: 0x4E
   macro: AICMD0x4E_EnableTileInteractions
-  handler: fAIAction0x4E
+  handler: fAIAction0x4E_EnableTileInteractions
   handler_addr: "84BB31"
   suggested_name: EnableTileInteractions
   confidence: confirmed
@@ -105,7 +105,7 @@
 
 - opcode: 0x4F
   macro: AICMD0x4F_DisableToolUse
-  handler: fAIAction0x4F
+  handler: fAIAction0x4F_DisableToolUse
   handler_addr: "84BB4B"
   suggested_name: DisableToolUse
   confidence: confirmed
@@ -119,7 +119,7 @@
 
 - opcode: 0x50
   macro: AICMD0x50
-  handler: fAIAction0x50
+  handler: fAIAction0x50_ReleaseCarried
   handler_addr: "84BBDA"
   suggested_name: ReleaseCarried
   confidence: probable
@@ -133,7 +133,7 @@
 
 - opcode: 0x51
   macro: AICMD0x51
-  handler: fAIAction0x51
+  handler: fAIAction0x51_ReleaseCarriedAnimal
   handler_addr: "84BC9C"
   suggested_name: ReleaseCarriedAnimal
   confidence: probable
@@ -147,7 +147,7 @@
 
 - opcode: 0x52
   macro: AICMD0x52
-  handler: fAIAction0x52
+  handler: fAIAction0x52_PickUpObjectForEventA
   handler_addr: "84BD44"
   suggested_name: PickUpObjectForEventA
   confidence: probable
@@ -161,7 +161,7 @@
 
 - opcode: 0x53
   macro: AICMD0x53
-  handler: fAIAction0x53
+  handler: fAIAction0x53_PickUpObjectForEventB
   handler_addr: "84BE0D"
   suggested_name: PickUpObjectForEventB
   confidence: probable
@@ -175,7 +175,7 @@
 
 - opcode: 0x54
   macro: AICMD0x54_ShowDialog
-  handler: fAIAction0x54_ShowDialog
+  handler: fAIAction0x54_ShowDialogAutoClose
   handler_addr: "84BED6"
   suggested_name: ShowDialogAutoClose
   confidence: probable
@@ -191,7 +191,7 @@
 
 - opcode: 0x55
   macro: AICMD0x55_JumpIfFlagNotSet
-  handler: fAIAction0x55
+  handler: fAIAction0x55_JumpIfFlagNotSet
   handler_addr: "84BF20"
   suggested_name: JumpIfFlagNotSet
   confidence: confirmed

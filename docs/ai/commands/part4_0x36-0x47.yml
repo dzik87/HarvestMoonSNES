@@ -14,7 +14,7 @@
 
 - opcode: 0x37
   macro: AICMD0x37
-  handler: fAIAction0x37
+  handler: fAIAction0x37_RemoveObject
   handler_addr: "84B34B"
   suggested_name: RemoveObject
   confidence: probable
@@ -28,7 +28,7 @@
 
 - opcode: 0x38
   macro: AICMD0x38_WaitForFadeIn
-  handler: fAIAction0x38
+  handler: fAIAction0x38_WaitForFadeIn
   handler_addr: "84B365"
   suggested_name: WaitForFadeIn
   confidence: confirmed
@@ -74,7 +74,7 @@
 
 - opcode: 0x3B
   macro: AICMD0x3B
-  handler: fAIAction0x3B
+  handler: fAIAction0x3B_SetCarryItemHolding
   handler_addr: "84B4DC"
   suggested_name: SetCarryItemHolding
   confidence: probable
@@ -89,7 +89,7 @@
 
 - opcode: 0x3C
   macro: AICMD0x3C
-  handler: fAIAction0x3C
+  handler: fAIAction0x3C_TeleportToHouse
   handler_addr: "84B503"
   suggested_name: TeleportToHouse
   confidence: probable
@@ -118,7 +118,7 @@
 
 - opcode: 0x3E
   macro: AICMD0x3E_SetCarryItem
-  handler: fAIAction0x3E
+  handler: fAIAction0x3E_PickUpCarryItem
   handler_addr: "84B556"
   suggested_name: PickUpCarryItem
   confidence: probable
