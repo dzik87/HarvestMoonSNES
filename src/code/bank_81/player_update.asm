@@ -10,7 +10,7 @@
 ;   while mapUnk19A == 2 the dialog is still running; afterwards strcDialogDisplay.dialogOptionsAnswer holds the chosen option;
 ;   the handler ends the interaction by clearing !PFLAGS_INTERACTING (macro UnsetPlayerFlag) and usually returns with RTS;
 ;   handlers that give an item set strcPlayerData.carryItemId and !PACTION_ITEMONHAND (pick-up pose, player_actions.asm);
-;   AIExecute(slot, 0, script) starts an AI script on an NPC slot (fAI_SetupAreaScripting);
+;   AIExecute(slot, 0, script) starts an AI script on an NPC slot (fAI_StartSlotScript);
 ;   money is changed with fGameEngine_AddProfit (price in 10G units, 24-bit in ptrTemp0x72; returns A = 0 on success).
 ; Dialog ids are the sDialog_0xNNNN numbers of assets/dialogs; texts quoted in the blocks are paraphrased from the US release.
 ; Entries with no behaviour are plain RTS. Data included at the end: aPlayerInteraction_SetFlags / aPlayerInteraction_ResetFlags.
@@ -20,12 +20,10 @@
 
 ; Bank $81 module "player_update" - starts at $81D510
  
-;;
-; @brief    aWeatherDialogId (generated from assets/tables/data/weather_dialog_ids.csv): TV forecast dialog per weather and season.
-; @format   12 rows (one per !WEATHER_* forecast) x 4 words (spring, summer, fall, winter), dialog id or $FFFF = none
-; @index    nWeatherDialogIdIndex * 8 + nCurrentSeasonID * 2
-; @used_by  fPlayerInteraction0x0F, fPlayerInteraction0x12, fPlayerInteraction0x13
-;;
+; aWeatherDialogId (generated from assets/tables/data/weather_dialog_ids.csv): TV forecast dialog per weather and season.
+; format: 12 rows (one per !WEATHER_* forecast) x 4 words (spring, summer, fall, winter), dialog id or $FFFF = none
+; index: nWeatherDialogIdIndex * 8 + nCurrentSeasonID * 2
+; used_by: fPlayerInteraction0x0F, fPlayerInteraction0x12, fPlayerInteraction0x13
     incsrc "../../../build/gen/blocks/weather_dialog_ids.asm"
  
 ;;
@@ -35,8 +33,8 @@
 ; with the current action in the same frame.
 ; @param    nPlayerInteractionIndex   interaction id $00..$57
 ; @modifies strcPlayerData.lastExcercise
-; @mode     M8X16 -> (see fPlayerAction_Handler)
-; @calls    .aJumpTable handlers, fPlayerAction0x19, fPlayerAction_Handler
+; @mode     M8X16
+; @calls    fPlayerAction0x19, fPlayerAction_Handler
 ; @callers  fPlayer_UpdateHandler
 ;;
 fPlayerInteraction_Handler:
@@ -60,12 +58,10 @@ fPlayerInteraction_Handler:
 .skipToNextDay:
     JMP.W fPlayerAction_Handler                                ;81D590|4CD3BF  |81BFD3;
  
-;;
-; @brief    .aJumpTable (generated from assets/tables/data/player_update_jump_table.csv): interaction handler per interaction id $00..$57.
-; @format   1 word (bank $81) per id
-; @index    nPlayerInteractionIndex * 2
-; @used_by  fPlayerInteraction_Handler
-;;
+; .aJumpTable (generated from assets/tables/data/player_update_jump_table.csv): interaction handler per interaction id $00..$57.
+; format: 1 word (bank $81) per id
+; index: nPlayerInteractionIndex * 2
+; used_by: fPlayerInteraction_Handler
     incsrc "../../../build/gen/blocks/player_update_jump_table.asm"
  
 ;;
@@ -2364,7 +2360,7 @@ fPlayerInteraction0x42:
 ; removed, strcShedItems.row3 |= $20 = beanstalk seed, daily4 |= $2000, -50 happiness) or $014C (declined).
 ; @case     $43
 ; @modifies nOwnedCows, strcFlags.event2, strcFlags.daily4, strcShedItems.row3, strcCowData.statusFlags, nPlayerInteractionArg1/2
-; @calls    fGameEngine_GetCowData, fGameEngine_AddProfit, fGameEngine_AddHappiness, fAI_DeactivateSlotAndObject, fAI_SetSlotScript, fAI_SetCCPointer, fDialog_DialogHandler
+; @calls    fGameEngine_GetCowData, fGameEngine_AddProfit, fGameEngine_AddHappiness, fAI_DeactivateSlotAndObject, fAI_SetSlotScript, fAI_SelectSlot, fDialog_DialogHandler
 ; @region   EU/DE: only the width of the REP before the event2 check differs (no behavioural change)
 ; @note     confidence: medium - the meaning of status bits $06/$70 comes from the inline comments (young / pregnant, sick, cranky)
 ;;
@@ -4784,12 +4780,10 @@ fPlayerInteraction0x57:
     RTS                                                        ;81FAB3|60      |      ;
  
  
-;;
-; @brief    aPlayerInteraction_SetFlags / aPlayerInteraction_ResetFlags: 16 single-bit masks (1<<N) and their complements.
-; @format   16 words each
-; @index    bit number * 2
-; @used_by  fPlayerInteraction_Return (set masks vs. strcFlags.unknown3), fPlayerInteraction0x53 (reset masks on nEggInCoopFlags)
-;;
+; aPlayerInteraction_SetFlags / aPlayerInteraction_ResetFlags: 16 single-bit masks (1<<N) and their complements.
+; format: 16 words each
+; index: bit number * 2
+; used_by: fPlayerInteraction_Return (set masks vs. strcFlags.unknown3), fPlayerInteraction0x53 (reset masks on nEggInCoopFlags)
     incsrc "../../../build/gen/blocks/player_interaction_flags.asm"
  
     pad $81FFFF

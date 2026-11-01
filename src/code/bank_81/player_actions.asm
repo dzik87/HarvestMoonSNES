@@ -21,9 +21,9 @@
 ; @details  Inactive player (!PFLAGS_ACTIVE clear) -> fPlayerAction_CheckIdle. !PFLAGS_INTERACTING set -> fPlayerInteraction_Handler
 ; (player_update.asm). Otherwise falls into fPlayerAction_Handler.
 ; @param    strcPlayer.flags   player flag word (!PFLAGS_*)
-; @mode     M8X16 -> (depends on the handler reached)
+; @mode     M8X16
 ; @calls    fPlayerAction_CheckIdle, fPlayerInteraction_Handler, fPlayerAction_Handler
-; @callers  bank_80/core.asm, bank_80/routines.asm (fMap_SetupArea), bank_82/main_loop.asm, bank_82/interaction_data.asm
+; @callers  fMap_SetupArea
 ;;
 fPlayer_UpdateHandler:
     SEP #$20                                                   ;81BFB7|E220    |      ;
@@ -42,8 +42,7 @@ fPlayer_UpdateHandler:
 ; @brief    Jump-table dispatch on strcPlayer.action.
 ; @details  Doubles the action id and jumps through aPlayerAction_JumpTable (bank $81 pointers).
 ; @param    strcPlayer.action   !PACTION_* id
-; @mode     M16X16 on entry to the handlers
-; @calls    aPlayerAction_JumpTable handlers
+; @mode     M16X16
 ;;
 fPlayerAction_Handler:
     REP #$30                                                   ;81BFD3|C230    |      ;
@@ -116,7 +115,6 @@ fPlayerAction0x19:
 ; @details  Calls fCamera_UpdateBG2Scroll, clears strcMap.unk1E (step length of this frame), and copies
 ; strcObjectData.direction into strcPlayer.direction and strcObjectData.directionNew.
 ; @modifies strcMap.unk1E, strcPlayer.direction, strcObjectData.directionNew
-; @mode     -> M16 (RTL)
 ; @calls    fCamera_UpdateBG2Scroll
 ;;
 fPlayerAction_Finish:
@@ -129,13 +127,11 @@ fPlayerAction_Finish:
     STA.W strcObjectData.directionNew                          ;81C023|8D1309  |000913;
     RTL                                                        ;81C026|6B      |      ;
  
-;;
-; @brief    aPlayerAction_JumpTable (generated from assets/tables/data/player_action_jump_table.csv): handler pointer per !PACTION_* id.
-; @format   1 word (bank $81 address) per action id, !PACTION_NONE..!PACTION_1F
-; @index    strcPlayer.action * 2 in fPlayerAction_Handler
-; @used_by  fPlayerAction_Handler
-; @note     NONE/WALK/RUN/06/07/0E all share fPlayerAction0x00 which then dispatches on the action itself.
-;;
+; aPlayerAction_JumpTable (generated from assets/tables/data/player_action_jump_table.csv): handler pointer per !PACTION_* id.
+; format: 1 word (bank $81 address) per action id, !PACTION_NONE..!PACTION_1F
+; index: strcPlayer.action * 2 in fPlayerAction_Handler
+; used_by: fPlayerAction_Handler
+; note: NONE/WALK/RUN/06/07/0E all share fPlayerAction0x00 which then dispatches on the action itself.
     incsrc "../../../build/gen/blocks/player_action_jump_table.asm"
  
 ;;
@@ -193,7 +189,7 @@ fPlayerAction0x1C:
 ; @case     $1A
 ; @modifies strcPlayer.action, strcFlags.daily4, strcObjectData.spriteIdx
 ; @mode     M16X16
-; @calls    fPlayer_UpdateSpriteObject, fAI_SetupAreaScripting (AIExecute), fPlayerAction_CheckIdle
+; @calls    fPlayer_UpdateSpriteObject, fAI_StartSlotScript (AIExecute), fPlayerAction_CheckIdle
 ; @note     confidence: low - the game meaning of tile $F5 and of daily4 $0002/$0004 is not identified
 ;;
 fPlayerAction0x1A:
@@ -306,7 +302,7 @@ fPlayerAction0x18:
 ; @details  At the end of the animation the dog position (nDogX, nDogY) is stored as the "tile in front" and AI slot $16 is started at that
 ; tile with script $12; $7F1F58 is set to 1 and strcStockData.unkDog is cleared.
 ; @case     $16
-; @modifies nTileInFrontOfPlayerX, nTileInFrontOfPlayerY, $7F1F58, strcStockData.unkDog, strcPlayer.action
+; @modifies nTileInFrontOfPlayerX, nTileInFrontOfPlayerY, strcStockData.unkDog, strcPlayer.action
 ; @mode     M16X16
 ; @calls    fPlayer_UpdateSpriteObject, fAI_StartSlotScriptAtFrontTile
 ; @note     the action is set from bank_84/input.asm
@@ -484,7 +480,7 @@ fPlayerAction0x12_FishingBite:
 ; @case     $13
 ; @modifies strcPlayer.action, ptrAIUnknown0xCC
 ; @mode     M16X16
-; @calls    fPlayer_UpdateSpriteObject, fAI_SetCCPointer, fAI_DeactivateSlotAndObject, fAI_SetupAreaScripting, fGameEngine_AddHappiness
+; @calls    fPlayer_UpdateSpriteObject, fAI_SelectSlot, fAI_DeactivateSlotAndObject, fAI_StartSlotScript, fGameEngine_AddHappiness
 ; @note     confidence: medium - the sprites $8B/$8C are assumed to be the two catch poses (fish vs. junk), not verified in game
 ;;
 fPlayerAction0x13:
@@ -1712,7 +1708,7 @@ fPlayerAction0x09:
 ; copied to strcObjectData.playerX/Y.
 ; @param    strcPlayer.direction, strcMap.unk1E   (step length in pixels)
 ; @modifies strcPlayer.posX, strcPlayer.posY, strcPlayer.lastX, strcPlayer.lastY, strcPlayer.newX, strcPlayer.newY, strcMap.unk1E, strcPlayerData.unkCounter919
-; @mode     M16X16 -> M16 (RTS)
+; @mode     M16X16 -> M16X16
 ; @calls    fPlayer_UpdateSpriteObject, fGameEngine_DirectionHandler83AD91, fGameEngine_DirectionHandler83AF37, fCamera_UpdateFromPlayerPos, fCamera_ScrollDownStep, fCamera_ScrollUpStep, fCamera_ScrollRightStep, fCamera_ScrollLeftStep, fPlayer_LeaveSnowFootprint
 ; @note     !PDIR_LEFT ($02) adds to posX and !PDIR_RIGHT ($03) subtracts; the enum names may be mirrored relative to the screen (?). confidence: low for the sliding rules (.subN branches)
 ;;
@@ -2275,7 +2271,7 @@ fPlayer_MoveInDirection:
 ; @modifies strcObjectData.spriteIdxOld, strcObjectData.flip, strcObjectData.gameObjectIdx
 ; @mode     M16X16
 ; @calls    fObject_Create
-; @callers  fMap_SetupArea (bank_80/routines.asm)
+; @callers  fMap_SetupArea
 ;;
 fPlayer_InitSpriteObject:
     REP #$30                                                   ;81CFA0|C230    |      ;
@@ -2322,7 +2318,7 @@ fPlayer_InitSpriteObject:
 ; looked up and fObject_Replace swaps the animation. Finally fPlayer_RefreshObjectExists updates strcObjectData.exist.
 ; @param    strcObjectData.spriteIdx, strcPlayer.posX, strcPlayer.posY
 ; @modifies strcObjectData.spriteIdxOld, strcObjectData.flip, strcObjectData.exist
-; @mode     M16X16 -> M16 (RTS)
+; @mode     M16X16 -> M16X16
 ; @calls    fObject_UpdatePositionAndFlip, fObject_Replace, fPlayer_RefreshObjectExists
 ;;
 fPlayer_UpdateSpriteObject:
@@ -2402,8 +2398,7 @@ fPlayer_RefreshObjectExists:
 ; when it falls and energy <= stamina >> (stage+1) the sprite $4A + stage is shown (!PACTION_TIRED) and the stage is advanced.
 ; @param    A      signed 8-bit stamina delta (negative = tiring)
 ; @modifies strcPlayerData.energy, $096C, strcPlayer.flags, strcPlayer.action, strcObjectData.spriteIdx
-; @mode     M8X16 -> M16X16 (RTL)
-; @callers  item_actions.asm, bank_82/game_events.asm, bank_82/tools.asm, bank_84/ai_engine.asm (AI command 0x57), macro UpdateStamina
+; @mode     M8X16 -> M16X16
 ; @note     the name keeps "Energy" for the stage logic; strcPlayerData.stamina is the maximum, strcPlayerData.energy the current value
 ;;
 fPlayerEnergyHandler:
@@ -2550,7 +2545,6 @@ fPlayerEnergyHandler:
 ; @param    Y   extra Y offset in pixels (down/up)
 ; @modifies nTileInFrontOfPlayerX, nTileInFrontOfPlayerY, strcVariables.n16Temp1, strcVariables.n16Temp2, strcVariables.n16Temp3
 ; @mode     M16X16
-; @callers  item_actions.asm (many), player_update.asm
 ;;
 fStoreTileOnFrontOfPlayerAtDistance:
     REP #$30                                                   ;81D14E|C230    |      ; A: nArg1, X: nArg2, Y: nArg3
@@ -2612,7 +2606,6 @@ fStoreTileOnFrontOfPlayerAtDistance:
 ; @param    Y   tile offset in Y
 ; @modifies nTileInFrontOfPlayerX, nTileInFrontOfPlayerY
 ; @mode     M16X16
-; @callers  bank_82/tools.asm
 ;;
 fFindTileCoordsInFrontOfPLayer:
     REP #$30                                                   ;81D1A4|C230    |      ; X: nArg1, Y: nArg2
@@ -2645,7 +2638,7 @@ fFindTileCoordsInFrontOfPLayer:
 ; @param    A   love points (nLove_*)
 ; @return   A   hearts 0..9 (10 if above the last range)
 ; @mode     M16X16
-; @callers  fPlayerInteraction0x26_MariaDiary, ..0x2D_NinaDiary, ..0x33_EllenDiary, ..0x36_AnnDiary, ..0x3F_EveDiary
+; @callers  fPlayerInteraction0x26_MariaDiary, fPlayerInteraction0x2D_NinaDiary, fPlayerInteraction0x33_EllenDiary, fPlayerInteraction0x36_AnnDiary, fPlayerInteraction0x3F_EveDiary
 ;;
 fLove_ScaleToHearts:
     REP #$30                                                   ;81D1C5|C230    |      ; A: nArg1
@@ -2676,11 +2669,9 @@ fLove_ScaleToHearts:
     RTS                                                        ;81D1E7|60      |      ;
  
  
-;;
-; @brief    love_ranges.asm (generated from assets/tables/data/love_ranges.csv): .loveRange0..9 and sSmallSpriteData.
-; @format   .loveRangeN = [word min][word max] love-point range of N hearts (only max is compared);
+; love_ranges.asm (generated from assets/tables/data/love_ranges.csv): .loveRange0..9 and sSmallSpriteData.
+; format: .loveRangeN = [word min][word max] love-point range of N hearts (only max is compared);
 ; sSmallSpriteData = 3 bytes per player sprite id: [word index into the object sprite table][byte flip bits, shifted << 6].
-; @index    fLove_ScaleToHearts (.loveRangeN, scans from 0); fPlayer_InitSpriteObject / fPlayer_UpdateSpriteObject (sSmallSpriteData[spriteIdx*3])
-; @used_by  fLove_ScaleToHearts, fPlayer_InitSpriteObject, fPlayer_UpdateSpriteObject
-;;
+; index: fLove_ScaleToHearts (.loveRangeN, scans from 0); fPlayer_InitSpriteObject / fPlayer_UpdateSpriteObject (sSmallSpriteData[spriteIdx*3])
+; used_by: fLove_ScaleToHearts, fPlayer_InitSpriteObject, fPlayer_UpdateSpriteObject
     incsrc "../../../build/gen/blocks/love_ranges.asm"
