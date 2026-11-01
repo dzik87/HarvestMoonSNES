@@ -716,7 +716,8 @@ Zmarzłeś, co? Wtedy najlepiej się napić i rozgrzać od środka.<END>
 Widziałam cię niedawno na farmie. Chyba mnie nie zauważyłeś, bo pracowałeś.<END>
 
 @@ sDialog_0x00EF @@
-Ja bym nie zniosła samotności w tak wielkim miejscu. Nie jest ci smutno?<NEXT>
+Ja bym nie zniosła samotności w tak wielkim miejscu.<NEXT>
+Nie jest ci smutno?<NEXT>
 <OPTLBL 1>Czasem<OPTLBL 2>Wcale nie<OPT 2>
 
 @@ sDialog_0x00F0 @@
@@ -735,12 +736,15 @@ Co wieczór odbieram to, co włożysz do skrzyni wysyłkowej. Miło mi.<NEXT>
 Zanim weźmiesz się za farmę, popytaj ludzi w miasteczku o różne rzeczy.<END>
 
 @@ sDialog_0x00F4 @@
-Cześć, skąd przyjechałeś?... Co, rozstałeś się z rodzicami i sam prowadzisz farmę?<NEXT>
-Niezły jesteś. Ale na farmie nic nie ma, co?... Na naukę zawodu? Masz wspaniałych rodziców.<END>
+Cześć, skąd przyjechałeś?... Co, rozstałeś się z rodzicami i sam prowadzisz<NEXT>
+farmę?<NEXT>
+Niezły jesteś. Ale na farmie nic nie ma, co?... Na naukę zawodu?<NEXT>
+Masz wspaniałych rodziców.<END>
 
 @@ sDialog_0x00F5 @@
 Witaj, miło cię poznać. Jestem burmistrzem tego miasteczka.<NEXT>
-W szopie powinny zostać narzędzia twojego dziadka. I książka o tym, jak ich używać.<END>
+W szopie powinny zostać narzędzia twojego dziadka.<NEXT>
+I książka o tym, jak ich używać.<END>
 
 @@ sDialog_0x00F6 @@
 Twój dziadek kiedyś mi pomógł. Jakbyś miał kłopoty, służę radą.<NEXT>
@@ -754,14 +758,16 @@ Mam córkę... Pewnie poszła do kościoła?<END>
 To ta urocza dziewczyna z długimi włosami.<END>
 
 @@ sDialog_0x00F9 @@
-Nie widziałam cię tu wcześniej. Przyjechałeś na tamtą farmę? Mam na imię Maria.<NEXT>
+Nie widziałam cię tu wcześniej. Przyjechałeś na tamtą farmę?<NEXT>
+Mam na imię Maria.<NEXT>
 Miło mi.<END>
 
 @@ sDialog_0x00FA @@
 Na początku może być ciężko, ale nie poddawaj się.<END>
 
 @@ sDialog_0x00FB @@
-Słuchaj, ja słyszałem! Pod drzewami na farmie ktoś cicho się śmiał! I rozmawiał!<NEXT>
+Słuchaj, ja słyszałem! Pod drzewami na farmie ktoś cicho się śmiał!<NEXT>
+I rozmawiał!<NEXT>
 ...Co to było?<END>
 
 @@ sDialog_0x00FC @@
@@ -778,13 +784,15 @@ Powodzenia.<END>
 
 @@ sDialog_0x00FF @@
 Dziś kończy się ten rok. Jaki był dla ciebie?<NEXT>
-Jutro w miasteczku będzie gwarno od ludzi idących na szczyt, by zobaczyć pierwszy wschód słońca.<END>
+Jutro w miasteczku będzie gwarno od ludzi idących na szczyt, by zobaczyć<NEXT>
+pierwszy wschód słońca.<END>
 
 @@ sDialog_0x0100 @@
 "Skrzynia na zwierzęta" Po rozmowie w sklepie wstaw tu zwierzę. Handlarz zwierząt<END>
 
 @@ sDialog_0x0101 @@
-Narzędzia leżą w szopie i oborze. Podnieś je przyciskiem A, a będziesz je mieć w ręku.<NEXT>
+Narzędzia leżą w szopie i oborze. Podnieś je przyciskiem A, a będziesz<NEXT>
+je mieć w ręku.<NEXT>
 Używa się ich przyciskiem Y.<END>
 
 @@ sDialog_0x0102 @@
@@ -794,7 +802,8 @@ Niestety teraz nic nie mam, ale niedługo coś sprowadzę. Zaglądaj do mnie.<EN
 Och, to ty jesteś właścicielem tamtej farmy? Jestem Ann. Miło mi.<END>
 
 @@ sDialog_0x0104 @@
-Podczas pracy narzędziami spada wytrzymałość. Odzyskasz ją, jedząc albo odpoczywając w łóżku.<END>
+Podczas pracy narzędziami spada wytrzymałość.<NEXT>
+Odzyskasz ją, jedząc albo odpoczywając w łóżku.<END>
 
 @@ sDialog_0x0105 @@
 Ach, to ty z tamtej farmy. Skoro będziesz uprawiać rośliny, dam ci to.<NEXT>
@@ -821,7 +830,8 @@ No, pewnie jest ci ciężko, ale trzymaj się!<END>
 Hik... Nie widziałem tu jeszcze twojej gęby, co?<END>
 
 @@ sDialog_0x010C @@
-Hej, młody. Żeby kupić zwierzęta, trzeba mieć pastwisko. Nie tylko dla krów, ale i dla kur.<NEXT>
+Hej, młody. Żeby kupić zwierzęta, trzeba mieć pastwisko.<NEXT>
+Nie tylko dla krów, ale i dla kur.<NEXT>
 Zostało mi trochę trawy, spróbuj ją wyhodować. Podrzucę ci ją do szopy.<NEXT>
 Jak będziesz chciał kupić zwierzę, zagadaj do mnie przez ladę.<END>
 
@@ -830,7 +840,8 @@ Jak będziesz chciał kupić zwierzę, zagadaj do mnie przez ladę.<END>
 Początkujący niech zaczną od kur.<END>
 
 @@ sDialog_0x010E @@
-Hej! Wstawiłem krowy do obory i jeszcze dorzuciłem dzwonek do ich przywoływania.<NEXT>
+Hej! Wstawiłem krowy do obory i jeszcze dorzuciłem dzwonek do ich<NEXT>
+przywoływania.<NEXT>
 No to na początek nadaj im z miłością imiona! Powodzenia!<END>
 
 @@ sDialog_0x010F @@
@@ -879,7 +890,8 @@ Jak będziesz wracać, daj znać.<END>
 Myślę, że warto jeszcze trochę posłuchać, co mówią ludzie!<END>
 
 @@ sDialog_0x011B @@
-Przyjechałeś na tę zaniedbaną farmę? Hihi, powodzenia. Jestem Eve, miło mi.<NEXT>
+Przyjechałeś na tę zaniedbaną farmę? Hihi, powodzenia.<NEXT>
+Jestem Eve, miło mi.<NEXT>
 Proszę, to na koszt firmy.<END>
 
 @@ sDialog_0x011C @@
@@ -898,7 +910,8 @@ Hik... Jeszcze nie jestem pijany.<END>
 Dobry wieczór. Ha ha, ja też jestem fanem Eve.<END>
 
 @@ sDialog_0x0121 @@
-Eve pracuje w barze wieczorami, więc nie widuje rówieśników. Pewnie jest jej smutno.<NEXT>
+Eve pracuje w barze wieczorami, więc nie widuje rówieśników.<NEXT>
+Pewnie jest jej smutno.<NEXT>
 <VAR player>, tak? Zaglądaj do niej, kiedy możesz.<END>
 
 @@ sDialog_0x0122 @@
@@ -914,14 +927,15 @@ Koro!! Zaczekaj!<END>
 @@ sDialog_0x0125 @@
 Uff, nie wybiegaj tak nagle! Ach... Ty jesteś tym słynnym właścicielem farmy.<NEXT>
 Przepraszam, że tak od razu... ale... Weź proszę tego psa...<NEXT>
-Mamy sklep spożywczy i mama absolutnie się nie zgadza... Proszę cię...<END>
+U nas w domu handluje się żywnością i mama za nic się nie zgadza... Proszę cię...<END>
 
 @@ sDialog_0x0126 @@
 Dziękuję! Udało się, <VAR dog>.<NEXT>
 Niech cię tu rozpieszczają. Trzymaj się!<END>
 
 @@ sDialog_0x0127 @@
-Hej, nowa twarz! Aha, właściciel farmy. Jak na takiego młodego, niezły jesteś.<END>
+Hej, nowa twarz! Aha, właściciel farmy.<NEXT>
+Jak na takiego młodego, niezły jesteś.<END>
 
 @@ sDialog_0x0128 @@
 Jesteśmy cieślami. Jak będziesz chciał powiększyć dom, przyjdź do nas.<END>
@@ -931,7 +945,8 @@ Do rozbudowy domu przyjdź, jak zbierzesz dość drewna.<NEXT>
 Obok domu stoi tabliczka, widzisz? Sprawdź ją.<END>
 
 @@ sDialog_0x012A @@
-Trwa kampania rozbudowy! Rozbuduj dom do końca lata, a dostaniesz gratis specjalną pamiątkę!<END>
+Trwa kampania rozbudowy! Rozbuduj dom do końca lata, a dostaniesz gratis<NEXT>
+specjalną pamiątkę!<END>
 
 @@ sDialog_0x012B @@
 Jestem wędkarzem i żyję sobie swobodnie.<NEXT>
@@ -1000,14 +1015,16 @@ Patrz, wspaniały dom, co? Nazywa się "Super Dom z Bali"!<END>
 Co się dziś stało z Eve?<END>
 
 @@ sDialog_0x013F @@
-Mama Niny dostała gorączki i się położyła. Kiedy tata ją pielęgnuje, nie sprzedaję narzędzi.<END>
+Mama Niny dostała gorączki i się położyła.<NEXT>
+Kiedy tata ją pielęgnuje, nie sprzedaję narzędzi.<END>
 
 @@ sDialog_0x0140 @@
 Gotowe! Patrz, to "Super Luksusowy Wspaniały Dom z Bali"!!<NEXT>
 Sam jestem nim zachwycony. No to cześć.<END>
 
 @@ sDialog_0x0141 @@
-Słuchaj, podobno jest rzadkie nasiono! Wyrasta z niego fasola wysoka aż do nieba!<NEXT>
+Słuchaj, podobno jest rzadkie nasiono! Wyrasta z niego fasola wysoka aż do<NEXT>
+nieba!<NEXT>
 Aż chciałoby się to zobaczyć.<END>
 
 @@ sDialog_0x0142 @@
@@ -1018,7 +1035,8 @@ Jak sprawdzisz farmę, zajrzyj też w góry!<END>
 ...Podoba ci się Nina?<END>
 
 @@ sDialog_0x0144 @@
-Dziś kończy się ten rok. Zdaje się, że dłużył się, a zarazem minął jak z bicza strzelił.<END>
+Dziś kończy się ten rok. Zdaje się, że dłużył się, a zarazem minął jak z bicza<NEXT>
+strzelił.<END>
 
 @@ sDialog_0x0145 @@
 Termin już minął. Trzeba ją czym prędzej wprowadzić do obory.<END>
@@ -1037,7 +1055,8 @@ Jeden kęs i jesteś pełen sił. W ramach wyjątku wymienię go na tamtą kurę
 
 @@ sDialog_0x0149 @@
 Jestem wędrownym handlarzem. Dziś mam bardzo rzadkie nasienie fasoli.<NEXT>
-Zakop je w ziemi, a zobaczysz cud. Teraz wymienię je na twoją krowę! Świetna okazja!<NEXT>
+Zakop je w ziemi, a zobaczysz cud. Teraz wymienię je na twoją krowę!<NEXT>
+Świetna okazja!<NEXT>
 <OPTLBL 1>Wymień<OPTLBL 2>Nie wymieniaj<OPT 2>
 
 @@ sDialog_0x014A @@
@@ -1045,10 +1064,12 @@ No to ją zabieram. Handlarz się cieszy. Do zobaczenia.<END>
 
 @@ sDialog_0x014B @@
 No to ją zabieram, a nasienie włożyłem do szopy.<NEXT>
-Zasadź je na szczycie góry. Na pewno spotka cię coś dobrego. No to do zobaczenia!<END>
+Zasadź je na szczycie góry. Na pewno spotka cię coś dobrego.<NEXT>
+No to do zobaczenia!<END>
 
 @@ sDialog_0x014C @@
-Ale z ciebie twardy klient. Jestem wędrownym handlarzem. Handlarzowi smutno. Do zobaczenia.<END>
+Ale z ciebie twardy klient. Jestem wędrownym handlarzem. Handlarzowi smutno.<NEXT>
+Do zobaczenia.<END>
 
 @@ sDialog_0x014D @@
 Jestem handlarzem wiatru. To jest nasienie drzewa pieniędzy.<NEXT>
@@ -1517,7 +1538,8 @@ Ten wiatrowskaz zrobiłem kiedyś dla żony, więc dla Ann jest jak pamiątka.<N
 Zawsze wesoła Ann całkiem posmutniała...<END>
 
 @@ sDialog_0x01DD @@
-Gdzie jest ten wiatrowskaz? Szukaj miejsca, gdzie schowasz się przed deszczem.<NEXT>
+Gdzie jest ten wiatrowskaz?<NEXT>
+Szukaj miejsca, gdzie schowasz się przed deszczem.<NEXT>
 A słowo klucz to: kura!<END>
 
 @@ sDialog_0x01DE @@
@@ -1852,7 +1874,8 @@ Jutro Festiwal Zbiorów, co? Znowu już ta pora roku.<END>
 Festiwal Zbiorów to święto, na którym świętuje się zbiory z całego roku.<END>
 
 @@ sDialog_0x023F @@
-Do jutrzejszego wielkiego gulaszu zbiorów przynieś coś, co da się normalnie zjeść.<NEXT>
+Do jutrzejszego wielkiego gulaszu zbiorów<NEXT>
+przynieś coś, co da się normalnie zjeść.<NEXT>
 Nie przynoś żadnych sandałów ani takich rzeczy.<NEXT>
 Wyszedłby z tego gulasz zgrozy.<END>
 
@@ -2245,6 +2268,366 @@ Nie upij się.<END>
 A więc jutro Festiwal Gwiezdnej Nocy.<NEXT>
 Niebo będzie bezchmurne,<NEXT>
 więc zobaczymy piękne nocne niebo.<END>
+
+@@ sDialog_0x02AD @@
+Festiwal Gwiezdnej Nocy miał pierwotnie być modlitwą<NEXT>w najpiękniejszą gwiaździstą noc roku.<END>
+
+@@ sDialog_0x02AE @@
+Spójrz w niebo. Jutro gwiazdy będą naprawdę piękne.<END>
+
+@@ sDialog_0x02AF @@
+Będę grać na organach w kościele.<END>
+
+@@ sDialog_0x02B0 @@
+Jutro? Hehe, idę w fajne miejsce.<END>
+
+@@ sDialog_0x02B1 @@
+Wiesz, idę tam, gdzie jest najbliżej do gwiazd.<END>
+
+@@ sDialog_0x02B2 @@
+Będziemy się modlić na placu. Jak romantycznie!<END>
+
+@@ sDialog_0x02B3 @@
+Jutro się zabawimy! Czekam na ciebie.<END>
+
+@@ sDialog_0x02B4 @@
+Jutro Festiwal Gwiezdnej Nocy. Pójdę tam, gdzie zawsze.<END>
+
+@@ sDialog_0x02B5 @@
+Jutro Festiwal Gwiezdnej Nocy! Pójdę tam, gdzie zawsze, więc ty też przyjdź.<END>
+
+@@ sDialog_0x02B6 @@
+Dziś Festiwal Gwiezdnej Nocy! Dokąd by tu pójść?<NEXT><OPTLBL 1>Plac<OPTLBL 4>Szczyt<OPTLBL 2>Kościół<OPTLBL 5>Źródła<OPTLBL 3>Bar<OPT 5>
+
+@@ sDialog_0x02B7 @@
+No to, szanowni państwo, pomódlmy się do gwiazd.<END>
+
+@@ sDialog_0x02B8 @@
+To światło gwiazd sprzed dziesiątek tysięcy lat. Jak pomyślę o tym, to aż dziwne.<END>
+
+@@ sDialog_0x02B9 @@
+...Oby interes dobrze szedł.<END>
+
+@@ sDialog_0x02BA @@
+Powróżyć ci z gwiazd?<NEXT><OPTLBL 1>Jasne<OPTLBL 2>Nie trzeba<OPT 2>
+
+@@ sDialog_0x02BB @@
+Dziewczyna, która do ciebie pasuje, to nie kto inny jak <VAR girl>!<END>
+
+@@ sDialog_0x02BC @@
+Naprawdę? Nie chcesz wiedzieć?<END>
+
+@@ sDialog_0x02BD @@
+Gdy zamykam oczy, czuję się, jakbym unosiła się na nocnym niebie.<END>
+
+@@ sDialog_0x02BE @@
+O co się modliłam? Żeby wszyscy żyli zdrowo i szczęśliwie... A poza tym...<NEXT>...Reszta to tajemnica.<END>
+
+@@ sDialog_0x02BF @@
+Gwiazdy świecą zawsze. Tylko światła na ziemi i inne rzeczy je zasłaniają.<NEXT>Tak samo prawda i miłość istnieją naprawdę. Tylko ich nie widać.<NEXT>Naprawdę, naprawdę.<END>
+
+@@ sDialog_0x02C0 @@
+Czasem sama miłość nie wystarczy, prawda?<NEXT>Wtedy zostaje tylko prosić bogów o pomoc.<END>
+
+@@ sDialog_0x02C1 @@
+...Zrobiłam się jakaś śpiąca.<END>
+
+@@ sDialog_0x02C2 @@
+Zzz... zzz...<END>
+
+@@ sDialog_0x02C3 @@
+Dziś w nocy chyba będę miała piękne sny.<END>
+
+@@ sDialog_0x02C4 @@
+Dobry wieczór.<NEXT>...Hm, byłoby miło, gdybyśmy i w przyszłym roku spędzili ten czas razem.<END>
+
+@@ sDialog_0x02C5 @@
+No dalej, pijcie! Śpiewajcie! Bawcie się dobrze!<END>
+
+@@ sDialog_0x02C6 @@
+No, ty też śpiewaj!<END>
+
+@@ sDialog_0x02C7 @@
+Ja tu tylko przypadkiem, no... zbiegiem okoliczności, a ona też jest tu zupełnie przypadkiem.<END>
+
+@@ sDialog_0x02C8 @@
+Oj, dobry wieczór. Nina?<NEXT>Ta dziewczyna zawsze gdzieś znika sama. Ciekawe, dokąd chodzi?<END>
+
+@@ sDialog_0x02C9 @@
+Na zdrowie, pod pięknym nocnym niebem! No, pij do dna!<END>
+
+@@ sDialog_0x02CA @@
+Hej! Dobrze się bawisz?<NEXT>Wypijmy za gwiazdy, które nas ze sobą spotkały!<END>
+
+@@ sDialog_0x02CB @@
+Widziałeś? Co roku tu spada gwiazda. To miejsce to nasza tajemnica, tylko we dwoje.<END>
+
+@@ sDialog_0x02CC @@
+Wypowiedziałeś jakieś życzenie? A Nina... hihi... to tajemnica.<END>
+
+@@ sDialog_0x02CD @@
+Tak właśnie kąpię się w gorącym źródle i patrzę na gwiazdy.<NEXT>Mmm, raj!<END>
+
+@@ sDialog_0x02CE @@
+Oby i w tym roku wszyscy żyli szczęśliwie. No, módlmy się wszyscy.<END>
+
+@@ sDialog_0x02CF @@
+Pomodliłeś się już? Ważne jest też, by na początku roku wyznaczyć sobie cel.<END>
+
+@@ sDialog_0x02D0 @@
+Oby i w tym roku ziemia obdarzyła nas swoimi darami.<END>
+
+@@ sDialog_0x02D1 @@
+W-w tym roku na pewno jej...<END>
+
+@@ sDialog_0x02D2 @@
+Oby i w tym roku interes dobrze szedł.<END>
+
+@@ sDialog_0x02D3 @@
+No to powróżę ci z kart.<NEXT><OPTLBL 1>Jasne<OPTLBL 2>Nie<OPT 2>
+
+@@ sDialog_0x02D4 @@
+Wybierz kartę, która ci się podoba.<NEXT><OPTLBL 1>Górna<OPTLBL 2>Środkowa<OPTLBL 3>Dolna<OPT 3>
+
+@@ sDialog_0x02D5 @@
+"Wielki fart!"<BR>Obfite zbiory!<BR>Wszystko się uda!<END>
+
+@@ sDialog_0x02D6 @@
+"Fart"<BR>Dobre zbiory.<BR>Przybędzie, kogo wypatrujesz.<END>
+
+@@ sDialog_0x02D7 @@
+"Pech!"<BR>Cokolwiek zrobisz, nic<BR>dobrego z tego nie wyjdzie.<END>
+
+@@ sDialog_0x02D8 @@
+Tak? No to swoją drogę wytyczysz sam.<END>
+
+@@ sDialog_0x02D9 @@
+Hmm, ten rok zapowiada się dobrze.<END>
+
+@@ sDialog_0x02DA @@
+Oby ten rok był dla ciebie dobry.<END>
+
+@@ sDialog_0x02DB @@
+Na początek roku trzeba obejrzeć pierwszy wschód słońca.<END>
+
+@@ sDialog_0x02DC @@
+No, powodzenia.<END>
+
+@@ sDialog_0x02DD @@
+A teraz coroczna jesienna gra w szukanie jajek! Zasady są proste!<NEXT>Wygra ten, kto pierwszy przyniesie jajko w kolorze mojego. Zaczynamy?<NEXT><OPTLBL 1>Tak<OPTLBL 2>Nie<OPT 2>
+
+@@ sDialog_0x02DE @@
+No to ruszamy! Pierwsze jest takie!<END>
+
+@@ sDialog_0x02DF @@
+Szybciej! Czas ucieka!<END>
+
+@@ sDialog_0x02E0 @@
+Młokosom jeszcze nie ustąpię!<END>
+
+@@ sDialog_0x02E1 @@
+Czy nagrodą jest alkohol?<END>
+
+@@ sDialog_0x02E2 @@
+Podobno zwycięzca dostanie wspaniałą nagrodę.<END>
+
+@@ sDialog_0x02E3 @@
+Dzieci powinny dostać fory!<END>
+
+@@ sDialog_0x02E4 @@
+No to w tym roku celuję w zwycięstwo!<END>
+
+@@ sDialog_0x02E5 @@
+Słyszałam, że nagrodą są nasiona rzadkiego kwiatu.<END>
+
+@@ sDialog_0x02E6 @@
+Gdyby tu był <VAR dog>, szybko by je znalazł.<END>
+
+@@ sDialog_0x02E7 @@
+Tak, zgadza się. 1 punkt! Następne jest takie!<END>
+
+@@ sDialog_0x02E8 @@
+No to koniec gry! Ogłaszam zwycięzcę! Wszyscy do mnie!<END>
+
+@@ sDialog_0x02E9 @@
+Ding dong! Zgadza się! Następne jest takie!<END>
+
+@@ sDialog_0x02EA @@
+Zwycięzcą tegorocznego Festiwalu Jajek jest...<NEXT><VAR player>!<END>
+
+@@ sDialog_0x02EB @@
+Tegoroczna nagroda to pasza na cały miesiąc! Dostarczę ją na twoją farmę!<END>
+
+@@ sDialog_0x02EC @@
+Gratulacje! Dostarczę nagrodę do twojego domu.<END>
+
+@@ sDialog_0x02ED @@
+No to, kochani, za rok też się postarajcie!<END>
+
+@@ sDialog_0x02EE @@
+Młodzież się zebrała, a jaka z niej niedojda.<END>
+
+@@ sDialog_0x02EF @@
+Uff, w tym roku jakoś nie szło.<END>
+
+@@ sDialog_0x02F0 @@
+Hik... nie trzeba było tu przychodzić.<END>
+
+@@ sDialog_0x02F1 @@
+Sap, sap...<END>
+
+@@ sDialog_0x02F2 @@
+Sap... sap... nie zagaduj mnie... dobrze?<END>
+
+@@ sDialog_0x02F3 @@
+Ech, z tymi nasionami kwiatów to same kłamstwa!<END>
+
+@@ sDialog_0x02F4 @@
+Uff, od czasu do czasu porządnie się spocić - to zdrowo.<END>
+
+@@ sDialog_0x02F5 @@
+Festiwal Nowego Roku! Idziemy zobaczyć pierwszy wschód słońca!<END>
+
+@@ sDialog_0x02F6 @@
+To nasiona trawy pastwiskowej. Rośnie bez podlewania. Kosztuje 500G, kupisz?<NEXT><OPTLBL 1>Kup<OPTLBL 2>Nie kupuj<POS 58>Kasa <NUM 7 21>0G<OPT 2>
+
+@@ sDialog_0x02F7 @@
+Dziękuję. Dostarczę je do szopy.<END>
+
+@@ sDialog_0x02F8 @@
+Dziękuję bardzo.<END>
+
+@@ sDialog_0x02F9 @@
+Oj, chyba brakuje ci pieniędzy.<END>
+
+@@ sDialog_0x02FA @@
+Dziękuję, wpadnij jeszcze.<END>
+
+@@ sDialog_0x02FB @@
+Chcesz hodować krowę? To dam ci ten dzwonek. Jak zadzwonisz, krowy się zbiegną.<NEXT>Tylko nie dzwoń bez potrzeby, bo się zmęczą. No to dostarczę go razem z krową.<END>
+
+@@ sDialog_0x02FC @@
+To farba tylko do domów. Kosztuje 1500G, co powiesz?<NEXT><OPTLBL 1>Kup<OPTLBL 2>Nie kupuj<POS 58>Kasa <NUM 7 22>0G<OPT 2>
+
+@@ sDialog_0x02FD @@
+Dziękuję. Dostarczę ją do szopy.<END>
+
+@@ sDialog_0x02FE @@
+A to przecież dobry towar...<END>
+
+@@ sDialog_0x02FF @@
+Oj, chyba brakuje ci pieniędzy.<END>
+
+@@ sDialog_0x0300 @@
+Hej, twój koń urósł. Zrobiłem kosze wysyłkowe i je założyłem.<NEXT>Wystarczy rzucić towar w stronę konia, a zostanie wysłany.<NEXT>Nie trzeba nosić rzeczy po jednej, będzie dużo wygodniej.<END>
+
+@@ sDialog_0x0301 @@
+To lek dla krów. Chora? Wystarczy użyć go na krowie, i po sprawie.<NEXT>Cena, hm, 1000G. Na co dzień miej oko na ich stan.<NEXT><OPTLBL 1>Kup<OPTLBL 2>Nie kupuj<POS 58>Kasa <NUM 7 23>0G<OPT 2>
+
+@@ sDialog_0x0302 @@
+Później podrzucę ci to do szopy.<END>
+
+@@ sDialog_0x0303 @@
+Aha.<END>
+
+@@ sDialog_0x0304 @@
+Co jest? Brakuje ci pieniędzy. Wróć, jak uzbierasz.<END>
+
+@@ sDialog_0x0305 @@
+Cześć, w czym mogę pomóc?<NEXT><OPTLBL 1>Kup krowę<OPTLBL 4>Sprz. krowę<OPTLBL 2>Kup kurę<OPTLBL 3>Sprz. kurę<OPT 4>
+
+@@ sDialog_0x0306 @@
+Musisz mieć więcej pastwisk, bo inaczej ich nie wyżywisz.<END>
+
+@@ sDialog_0x0307 @@
+Krowa kosztuje 5000G. Kupujesz?<NEXT><OPTLBL 1>Kup<OPTLBL 2>Nie kupuj<POS 58>Kasa <NUM 7 24>0G<OPT 2>
+
+@@ sDialog_0x0308 @@
+Później przyprowadzę ją do obory.<END>
+
+@@ sDialog_0x0309 @@
+Jak będziesz chciał sprzedać następną, daj znać. Na razie!<END>
+
+@@ sDialog_0x030A @@
+Kura kosztuje 1000G. Kupujesz?<NEXT><OPTLBL 1>Kup<OPTLBL 2>Nie kupuj<POS 58>Kasa <NUM 7 25>0G<OPT 2>
+
+@@ sDialog_0x030B @@
+No to przyjdę po nią, więc wystaw ją dziś przy wejściu na farmę.<END>
+
+@@ sDialog_0x030C @@
+Hej! Wstawiłem krowę do obory. Dobrze się nią zajmuj.<NEXT>Na początek nadaj jej z miłością imię! Na razie!<END>
+
+@@ sDialog_0x030D @@
+Hej, hej, nie myśl o sprzedaży krowy w takim stanie. Zastanów się lepiej.<END>
+
+@@ sDialog_0x030E @@
+Za tę dam <NUM 4 26>0G. Sprzedajesz?<NEXT><OPTLBL 1>Sprzedaj<OPTLBL 2>Nie<POS 58>Kasa <NUM 7 27>0G<OPT 2>
+
+@@ sDialog_0x030F @@
+OK! No to ją zabieram!<END>
+
+@@ sDialog_0x0310 @@
+Tej nie przyjmę, póki nie podrośnie.<END>
+
+@@ sDialog_0x0311 @@
+Czeka na zewnątrz, zabierz ją. Na dworze sama zje trawę.<NEXT>Ale w zagrodzie karm ją porządnie!<END>
+
+@@ sDialog_0x0312 @@
+To dojarka. Użyta na krowie, wydoi mleko. Kosztuje 1800G.<NEXT><OPTLBL 1>Kup<OPTLBL 2>Nie kupuj<POS 58>Kasa <NUM 7 28>0G<OPT 2>
+
+@@ sDialog_0x0313 @@
+Przykro mi, ale tego u nas nie przyjmujemy.<END>
+
+@@ sDialog_0x0314 @@
+To szczotka dla krów. Jak czeszesz je z miłością, krowy się cieszą.<NEXT>Raz dziennie wystarczy. Kosztuje 800G.<NEXT><OPTLBL 1>Kup<OPTLBL 2>Nie kupuj<POS 58>Kasa <NUM 7 29>0G<OPT 2>
+
+@@ sDialog_0x0315 @@
+Boże nasz, który jesteś w niebie, pozwól jego ukochanej krowie spokojnie spocząć.<END>
+
+@@ sDialog_0x0316 @@
+...Ty głupcze! Mówiłem, żebyś pilnował krów!<NEXT>Następnym razem, jak zachorują, od razu daj im lekarstwo.<END>
+
+@@ sDialog_0x0317 @@
+Hurra! Urodziło się cielę! No to damy mu imię!<END>
+
+@@ sDialog_0x0318 @@
+Co...? Źrebak! No to nadajmy mu imię.<END>
+
+@@ sDialog_0x0319 @@
+Imię? ...Ty je nadaj.<END>
+
+@@ sDialog_0x031A @@
+To cała dzisiejsza wysyłka? Razem <NUM 7 30>0G. Pieniądze wrzucę ci jutro do skrzyni.<END>
+
+@@ sDialog_0x031B @@
+Dziś nic do wysyłki? No to do zobaczenia!<END>
+
+@@ sDialog_0x031C @@
+Godziny otwarcia<BR>Dni robocze: 7:00 - 17:00<BR>Sob., niedz., święta: wolne<END>
+
+@@ sDialog_0x031D @@
+Prosimy nie wrzucać niczego do źródełka.<END>
+
+@@ sDialog_0x031E @@
+Heej, miło mi. Jestem boginią źródła. Myślałeś, że wyłonię się ze źródła?<NEXT>A tak w ogóle mam pytanie. Czy to złota siekiera, którą upuściłeś?<NEXT><OPTLBL 1>Tak<OPTLBL 2>Nie<OPT 2>
+
+@@ sDialog_0x031F @@
+Kłamiesz! Twoja siekiera to ta.<NEXT>Nic z tego, bogowie wszystko widzą. Do zobaczenia.<END>
+
+@@ sDialog_0x0320 @@
+Ach! Uczciwy człowiek! Dam ci tę złotą siekierę.<NEXT>...Nie, nie dziękuj. Cieszę się, że spotkałam kogoś tak uczciwego jak ty.<NEXT>Do zobaczenia. Powodzenia w pracy!<END>
+
+@@ sDialog_0x0321 @@
+Przepraszam, pożycz mi na chwilę młot.<NEXT><OPTLBL 1>Jasne<OPTLBL 2>Wolę nie<OPT 2>
+
+@@ sDialog_0x0322 @@
+Dzięki! Oddam go mocniejszy niż był.<END>
+
+@@ sDialog_0x0323 @@
+Co?! No to już nie trzeba!!<END>
+
+@@ sDialog_0x0324 @@
+Przed wiosną możesz już uprawiać pole. Ale podobno gdy nadejdzie wiosna, trochę się zniszczy.<END>
 
 @@ sDialog_0x0325 @@
 Miło mi cię poznać! Czy na farmie zrobiło się gwarniej?<END>
@@ -2950,3 +3333,411 @@ Wiesz, lubię nie tylko kwiaty, ale też chwasty, warzywa, wszystko ♥<NEXT>Chc
 
 @@ sDialog_0x040F @@
 Bardzo lubię kościół, bo mam wrażenie, że serce staje się tam rześkie.<END>
+
+@@ sDialog_0x0410 @@
+Powodzenia w pracy. Pracuj dzielnie!<END>
+
+@@ sDialog_0x0411 @@
+Czy wszystko w porządku? Cieszę się, że chyba nikt nie ucierpiał.<NEXT>Mimo to... człowiek znów przekonuje się, jak straszna potrafi być natura.<END>
+
+@@ sDialog_0x0412 @@
+Ej, jak ty coś powiesz z sensem, to aż człowiek się dziwi.<END>
+
+@@ sDialog_0x0413 @@
+Ale się przestraszyłam! Pierwszy raz w życiu przeżyłam trzęsienie ziemi!<END>
+
+@@ sDialog_0x0414 @@
+Hej, widziałeś, że skała dalej na tej drodze się zawaliła?<END>
+
+@@ sDialog_0x0415 @@
+Słyszałem kiedyś, że w tych górach jest tajemnicze źródło...<NEXT>Tylko gdzie ono było...?<END>
+
+@@ sDialog_0x0416 @@
+Zima jakoś mnie smuci, więc za nią nie przepadam.<END>
+
+@@ sDialog_0x0417 @@
+Po tajfunie dach zaczął przeciekać, więc teraz go naprawiają.<END>
+
+@@ sDialog_0x0418 @@
+Wiesz, chciałabym jajko.<END>
+
+@@ sDialog_0x0419 @@
+Hik... Już dobrze, nie chcę. Głupek!<END>
+
+@@ sDialog_0x041A @@
+Dziękuję! To... pieniądze, które odłożyłam. No to pa!<END>
+
+@@ sDialog_0x041B @@
+Chcę jajko. Wystarczy jedno, no daj mi!<END>
+
+@@ sDialog_0x041C @@
+"Stajnia"<END>
+
+@@ sDialog_0x041D @@
+To święto urodzin <VAR child1>. Minął już rok. Jak ten czas leci!<END>
+
+@@ sDialog_0x041E @@
+Ojej, tort! To urodziny <VAR child2>, prawda?<END>
+
+@@ sDialog_0x041F @@
+Zrobiło się już całkiem ciepło i pogoda jest śliczna.<END>
+
+@@ sDialog_0x0420 @@
+Latem łatwo o różne klęski żywiołowe, więc lepiej codziennie sprawdzać prognozę pogody.<END>
+
+@@ sDialog_0x0421 @@
+Ach, jesień... Niebo jest już takie wysokie.<END>
+
+@@ sDialog_0x0422 @@
+Myślę, że z czasem będę coraz lepiej gotować... Bądź cierpliwy.<END>
+
+@@ sDialog_0x0423 @@
+Może jednak powinnam była trochę poćwiczyć na przyszłą żonę?<END>
+
+@@ sDialog_0x0424 @@
+Wiosna! Mamy wiosnę! Siejmy nasiona!<END>
+
+@@ sDialog_0x0425 @@
+Dzień dobry! Pogoda jest tak cudowna, że aż oślepia!<END>
+
+@@ sDialog_0x0426 @@
+Podobno czasem pojawiają się dzikie psy. Zostawiać zepsuty płot to niebezpieczne.<END>
+
+@@ sDialog_0x0427 @@
+Kiedy pada, trzeba wpuścić psa <VAR dog> do domu. Biedactwo.<END>
+
+@@ sDialog_0x0428 @@
+Kochanie, zabieraj czasem psa <VAR dog> i konia <VAR horse> na spacer.<END>
+
+@@ sDialog_0x0429 @@
+Ja też chciałabym nauczyć się jeździć na koniu <VAR horse>.<END>
+
+@@ sDialog_0x042A @@
+Mm, temperatura i reszta warunków są tu idealne do robienia nalewek z leśnych owoców.<END>
+
+@@ sDialog_0x042B @@
+To nalewka z dzikich winogron. To z woskownicy, a to z borówek brusznicy. Dostałam je od wujka.<NEXT>Jak będą gotowe, podzielę się ze wszystkimi.<END>
+
+@@ sDialog_0x042C @@
+Nastawiłam ją wiosną! Za jakiś czas będzie się nadawała do picia.<END>
+
+@@ sDialog_0x042D @@
+Dłubanie w maszynach odłożę na jakiś czas. Posiedzę spokojnie w domu.<END>
+
+@@ sDialog_0x042E @@
+Pada dużo śniegu, więc płoty dość często się psują.<END>
+
+@@ sDialog_0x042F @@
+Żeby już była wiosna.<END>
+
+@@ sDialog_0x0430 @@
+Pracy jest teraz mniej, więc chętnie zaprosiłabym ludzi i porządnie się zabawiła.<END>
+
+@@ sDialog_0x0431 @@
+Słuchaj, czy trzask płonących polan i zapach dymu nie budzą w tobie nostalgii?<END>
+
+@@ sDialog_0x0432 @@
+Zieleń zupełnie zniknęła i jest tak smutno.<END>
+
+@@ sDialog_0x0433 @@
+Wiesz, właśnie pomyślałam, że ludzi jest tyle, ile gwiazd na niebie, prawda?<NEXT>Samo to, że się spotkaliśmy, to chyba niesamowicie małe prawdopodobieństwo.<NEXT>Dlatego jestem ci bardzo wdzięczna, że przyjechałeś na tę farmę...<END>
+
+@@ sDialog_0x0434 @@
+Ciekawe, czy te gwiazdy będą jeszcze świecić, gdy zostaniemy babciami.<END>
+
+@@ sDialog_0x0435 @@
+Dobry wieczór. Em... jeśli nie masz nic przeciwko, to może pójdziemy potem razem oglądać gwiazdy?<END>
+
+@@ sDialog_0x0436 @@
+Żeby wszyscy byli szczęśliwi i żebyś zawsze był zdrowy...<NEXT>No to jak co roku, popatrzmy na gwiazdy i wracajmy do domu.<END>
+
+@@ sDialog_0x0437 @@
+Przyszedłeś! Tak się cieszę! No to wznieśmy toast!<NEXT>Hihi, jeśli się da, chciałabym spędzić z tobą również przyszły rok.<END>
+
+@@ sDialog_0x0438 @@
+Kochanie! No wiesz, ale się spóźniłeś! Masz, nadrabiaj zaległości!<NEXT>Pij, pij, na zdrowie!<END>
+
+@@ sDialog_0x0439 @@
+...Wiesz...<NEXT>Co roku cieszę się na te spadające gwiazdy, ale kiedy oglądam je z tobą,<NEXT>jestem jeszcze szczęśliwsza.<END>
+
+@@ sDialog_0x043A @@
+...Oby i za rok, i za dwa lata dane mi było oglądać z tobą gwiazdy tak jak teraz.<END>
+
+@@ sDialog_0x043B @@
+...Wiesz, rzadko spotykamy się o takiej porze, i to w takim miejscu...<NEXT>Serce mi wali, choć to do mnie niepodobne...<NEXT>...Hej, słuchasz mnie?<END>
+
+@@ sDialog_0x043C @@
+Mm, jak przyjemnie. Gwiazdy najlepiej oglądać właśnie stąd.<END>
+
+@@ sDialog_0x043D @@
+Dziękuję. Ale nie mogę ci teraz odpowiedzieć.<NEXT>Jeśli będzie ładna pogoda, poczekam na ciebie w sobotę w południe w kościele.<END>
+
+@@ sDialog_0x043E @@
+Co? ...Cieszę się, ale teraz to trochę...<NEXT>W pogodną sobotę będę czekać przed sklepem, więc przyjdź, zanim zrobi się późno, dobrze?<END>
+
+@@ sDialog_0x043F @@
+...Yyy, no, nie potrafię odpowiedzieć od razu.<NEXT>Jeśli będzie ładna pogoda... przyjdziesz w niedzielę w góry? Poczekam na ciebie, zanim zajdzie słońce.<END>
+
+@@ sDialog_0x0440 @@
+E-eee, czyli jednak... Przepraszam, ale nie mogę odpowiedzieć od razu...<NEXT>W sobotę będę w domu handlarza zwierząt, więc jeśli będzie ładna pogoda, przyjdź przed zachodem słońca. Będę czekać.<END>
+
+@@ sDialog_0x0441 @@
+...Co? Ojej, naprawdę? Hmm, muszę jeszcze porozmawiać z dziadkiem...<NEXT>Jeśli w sobotę będzie ładnie, przyjdź jeszcze raz w góry, dobrze? Będę czekać od rana, więc przyjdź wcześnie.<END>
+
+@@ sDialog_0x0442 @@
+To jest krówcia, muu muu.<END>
+
+@@ sDialog_0x0443 @@
+Patrz, ten kombinezonik w krówki uszyłam sama. Śliczny, prawda?<END>
+
+@@ sDialog_0x0444 @@
+Kasa <NUM 7 62>0G<END>
+
+@@ sDialog_0x0445 @@
+Krowy   <NUM 2 63><BR>Kury    <NUM 2 64><END>
+
+@@ sDialog_0x0446 @@
+Kondycja <NUM 3 65><END>
+
+@@ sDialog_0x0447 @@
+Najwyższe przywiązanie krowy<BR><VAR cow> <NUM 3 66><END>
+
+@@ sDialog_0x0448 @@
+Maria - miłość <NUM 3 67><END>
+
+@@ sDialog_0x0449 @@
+Ann - miłość   <NUM 3 68><END>
+
+@@ sDialog_0x044A @@
+Nina - miłość  <NUM 3 69><END>
+
+@@ sDialog_0x044B @@
+Ellen - miłość <NUM 3 70><END>
+
+@@ sDialog_0x044C @@
+Eve - miłość   <NUM 3 71><END>
+
+@@ sDialog_0x044D @@
+Wysłane pomidory <NUM 3 72><END>
+
+@@ sDialog_0x044E @@
+Wysłana kukurydza <NUM 3 73><END>
+
+@@ sDialog_0x044F @@
+Wysłane ziemniaki <NUM 3 74><END>
+
+@@ sDialog_0x0450 @@
+Wysłane rzepy <NUM 3 75><END>
+
+@@ sDialog_0x0451 @@
+Drewniany dom<END>
+
+@@ sDialog_0x0452 @@
+Super drewniany dom<END>
+
+@@ sDialog_0x0453 @@
+Super luksusowy<BR>wielki drewniany dom<END>
+
+@@ sDialog_0x0454 @@
+Wskaźnik szczęścia <NUM 3 76><END>
+
+@@ sDialog_0x0455 @@
+Notatnik kwiaciarza o uprawach<NEXT><OPTLBL 1>"Pomidory, kukurydza"<OPTLBL 2>"Rzepa, ziemniaki"<OPTLBL 3>"Trawa"<OPT 3>
+
+@@ sDialog_0x0456 @@
+Pomidory i kukurydzę sieje się na polu latem.<NEXT>Uwaga! W innych porach roku nie wykiełkują!<NEXT>Jeśli podlewasz je także po zbiorach, wydają kolejne plony. Pomidory owocują szybciej.<NEXT>Jesienią usychają.<NEXT>Ceny skupu:<BR>Pomidor 1 szt. ... 100G<BR>Kukurydza 1 szt. . 120G<END>
+
+@@ sDialog_0x0457 @@
+Rzepę i ziemniaki sieje się na polu wiosną.<NEXT>Rosną szybciej niż pomidory i kukurydza. Zwłaszcza rzepa jest szybka. Plon zbiera się tylko raz.<NEXT>Ceny skupu:<BR>Rzepa 1 szt. ...... 60G<BR>Ziemniak 1 szt. .. 80G<END>
+
+@@ sDialog_0x0458 @@
+Trawę sieje się od wiosny do lata. Można ją kosić do jesieni.<NEXT>Najpierw trzeba uprawić pole, ale podlewać jej nie trzeba.<NEXT>Trawa nie przynosi pieniędzy, ale jest ważna, bo to pasza dla zwierząt.<END>
+
+@@ sDialog_0x0459 @@
+Notatnik o zwierzętach<NEXT><OPTLBL 1>"Krowa"<OPTLBL 4>"Kura"<OPTLBL 2>"Mleko"<OPTLBL 5>"Jajko"<OPTLBL 3>"Trawa"<OPT 5>
+
+@@ sDialog_0x045A @@
+W sprzedaży są młode krowy, które jeszcze nie dają mleka. Po 21 dniach dorastają i można je doić.<NEXT>Jak ich nie rozchorować: nie zapominaj o paszy. Nie wypuszczaj ich na zewnątrz w deszcz, śnieg ani tajfun.<NEXT>Jeśli rano będą mokre, to już po wszystkim. Gdy zachorują lub mają zły humor, przez jakiś czas nie dają mleka.<END>
+
+@@ sDialog_0x045B @@
+Weź dojarkę i naciśnij Y przed krową, a dostaniesz mleko.<NEXT>Doić można tylko raz dziennie. Krowy, które szczotkujesz i do których mówisz, przywiązują się do ciebie coraz bardziej.<NEXT>Od krów, które cię lubią, dostaniesz mleko w rozmiarze M i L.<END>
+
+@@ sDialog_0x045C @@
+Krowy jedzą tę samą trawę, którą można kosić.<NEXT>Młoda trawa nie liczy się jako karmienie, więc uważaj.<NEXT>Skoszona trawa zamienia się w paszę, która służy za jedzenie zimą i w deszczowe dni. Pilnuj, żeby jej nie zabrakło.<END>
+
+@@ sDialog_0x045D @@
+Kura znosi jedno jajko dziennie. Jeśli zapomnisz o paszy albo zmoknie w deszczu, przez 3 dni nie będzie nieść jaj.<NEXT>Zostawiona na zewnątrz w czasie tajfunu może zostać porwana przez wiatr. Czasem zjadają je też dzikie psy.<END>
+
+@@ sDialog_0x045E @@
+Jajko położone w miejscu do wylęgu zmienia się po 3 dniach w pisklę. Pisklęta nie potrzebują paszy.<NEXT>Po 7 dniach stają się kurami. Uważaj, bo jeśli będzie ich za dużo, zabraknie paszy.<END>
+
+@@ sDialog_0x045F @@
+"Lekcje miłości"<NEXT><OPTLBL 1>Prezenty<OPTLBL 4>Rozmowa<OPTLBL 2>Festiwal<OPTLBL 5>Pamiętnik<OPTLBL 3>Ślub<OPT 5>
+
+@@ sDialog_0x0460 @@
+Prezentem może być prawie wszystko, co da się nosić.<NEXT>Każda dziewczyna ma inny gust, więc dobrze obserwuj jej reakcje.<NEXT>Nie chodzi też o to, żeby wydawać dużo pieniędzy.<END>
+
+@@ sDialog_0x0461 @@
+Ważne, żeby jak najczęściej rozmawiać z dziewczyną, na której ci zależy.<END>
+
+@@ sDialog_0x0462 @@
+Festiwal to wielka szansa! Czasem na różnych festiwalach dziewczyny są w różnych miejscach.<NEXT>Dzień wcześniej porozmawiaj z nią i dowiedz się, dokąd się wybiera.<NEXT>Szczęśliwym przedmiotem są perfumy!<END>
+
+@@ sDialog_0x0463 @@
+To, jak bardzo dziewczyny cię lubią, dowiesz się, zaglądając do pamiętników w ich pokojach.<NEXT>Ale nie podglądaj zbyt często.<NEXT>Powodzenia w zdobywaniu jej serca!<END>
+
+@@ sDialog_0x0464 @@
+Przedmiotem do oświadczyn jest niebieskie pióro.<NEXT>Kiedy jej sympatia wzrośnie, sprawdź w niedzielę domokrążcę!<NEXT>Żeby wziąć ślub, trzeba też rozbudować dom!<END>
+
+@@ sDialog_0x0465 @@
+Aha, Ellen. W soboty bywa za domem handlarza zwierząt. Na Festiwalu Gwiezdnej Nocy przychodzi na plac.<NEXT>Na prezent dobre są kwiaty, ale ucieszy ją też mleko, które sam wydoisz, albo jajka.<END>
+
+@@ sDialog_0x0466 @@
+Eve, hmm. Staraj się jak najczęściej chodzić do baru, a w soboty i niedziele idź w góry.<NEXT>Na prezent dobre są kwiaty i leśne owoce, ale ona nie znosi ryb, więc nie wolno ci jej ich dawać.<END>
+
+@@ sDialog_0x0467 @@
+Kochanie... Bądźmy szczęśliwi. Już zawsze.<END>
+
+@@ sDialog_0x0468 @@
+Kochanie... ...Chciałabym mieć dziecko, prawda?<END>
+
+@@ sDialog_0x0469 @@
+...Kochanie, za dużo pracujesz. Nie chcę być sama, poświęcaj mi więcej uwagi.<END>
+
+@@ sDialog_0x046A @@
+<VAR season> <NUM 2 77>, <VAR weekday><BR><BR>Kasa <NUM 7 78>0G<END>
+
+@@ sDialog_0x046B @@
+<VAR season> <NUM 2 79>, <VAR weekday><BR>6:00. Dziś też dam radę!<BR>Kasa <NUM 7 80>0G<END>
+
+@@ sDialog_0x046C @@
+<VAR season> <NUM 2 81>, <VAR weekday><BR>Jest 7:00.<BR>Kasa <NUM 7 82>0G<END>
+
+@@ sDialog_0x046D @@
+<VAR season> <NUM 2 83>, <VAR weekday><BR>Jest 8:00.<BR>Kasa <NUM 7 84>0G<END>
+
+@@ sDialog_0x046E @@
+<VAR season> <NUM 2 85>, <VAR weekday><BR>Jest 9:00.<BR>Kasa <NUM 7 86>0G<END>
+
+@@ sDialog_0x046F @@
+<VAR season> <NUM 2 87>, <VAR weekday><BR>Już 10:00.<BR>Kasa <NUM 7 88>0G<END>
+
+@@ sDialog_0x0470 @@
+<VAR season> <NUM 2 89>, <VAR weekday><BR>11:00. Robię się głodny.<BR>Kasa <NUM 7 90>0G<END>
+
+@@ sDialog_0x0471 @@
+<VAR season> <NUM 2 91>, <VAR weekday><BR>12:00! Siły wróciły!<BR>Kasa <NUM 7 92>0G<END>
+
+@@ sDialog_0x0472 @@
+<VAR season> <NUM 2 93>, <VAR weekday><BR>Jest 13:00.<BR>Kasa <NUM 7 94>0G<END>
+
+@@ sDialog_0x0473 @@
+<VAR season> <NUM 2 95>, <VAR weekday><BR>Już 14:00.<BR>Kasa <NUM 7 96>0G<END>
+
+@@ sDialog_0x0474 @@
+<VAR season> <NUM 2 97>, <VAR weekday><BR>15:00. Czy o czymś nie zapomniałem w sprawie wysyłki?<NEXT>Kasa <NUM 7 98>0G<END>
+
+@@ sDialog_0x0475 @@
+<VAR season> <NUM 2 99>, <VAR weekday><BR>16:00. Zaraz przyjdzie pan od wysyłki.<NEXT>Kasa <NUM 7 100>0G<END>
+
+@@ sDialog_0x0476 @@
+<VAR season> <NUM 2 101>, <VAR weekday><BR>17:00. Już jestem zmęczony.<BR>Kasa <NUM 7 102>0G<END>
+
+@@ sDialog_0x0477 @@
+<VAR season> <NUM 2 103>, <VAR weekday><BR>18:00. Pora wracać do domu i spać.<NEXT>Kasa <NUM 7 104>0G<END>
+
+@@ sDialog_0x0478 @@
+<VAR season> <NUM 2 105>, <VAR weekday><BR>17:00. Muszę szybko wracać, bo będzie awantura.<NEXT>Kasa <NUM 7 106>0G<END>
+
+@@ sDialog_0x0479 @@
+Witaj, <VAR player>. Dziś rano odezwał się do mnie twój ojciec.<NEXT>Mówił, że wróci pod koniec lata w przyszłym roku.<NEXT>Bardzo się martwił, jak ci się tu żyje, więc musisz go uspokoić.<END>
+
+@@ sDialog_0x047A @@
+Witaj! Jutro w końcu przyjadą twoi rodzice. Na pewno będą zaskoczeni, gdy zobaczą, jak wygląda ta farma.<END>
+
+@@ sDialog_0x047B @@
+...No nie, z ciebie to jest jeden. Jeszcze długa droga przed tobą, brakuje ci wprawy.<END>
+
+@@ sDialog_0x047C @@
+Kiedy w niedzielę jest brzydka pogoda, robi się jakoś markotnie.<END>
+
+@@ sDialog_0x047D @@
+Kochanie, dziś jest sobota, więc sklep jest zamknięty.<END>
+
+@@ sDialog_0x047E @@
+Jeśli wyposażysz się w siekierę i użyjesz jej przed górskim źródłem...<END>
+
+@@ sDialog_0x047F @@
+Cześć, jak ci idzie? Robię teraz niesamowite narzędzie!<NEXT>Będzie gotowe około 20. dnia, więc koniecznie wpadnij do sklepu.<END>
+
+@@ sDialog_0x0480 @@
+Kochanie, weź czasem dziecko na ręce.<END>
+
+@@ sDialog_0x0481 @@
+Patrz, nasze maleństwo zaczęło raczkować!<END>
+
+@@ sDialog_0x0482 @@
+To maleństwo świetnie się rozwija, prawda? Zaczęło nawet trochę mówić!<END>
+
+@@ sDialog_0x0483 @@
+Mistrzostwo farmy <NUM 3 107><BR>Jeszcze długa droga przed tobą.<END>
+
+@@ sDialog_0x0484 @@
+To maleństwo jest tak pełne energii, że nie mogę spuścić go z oka.<END>
+
+@@ sDialog_0x0485 @@
+Kochanie, dbaj o zdrowie.<END>
+
+@@ sDialog_0x0486 @@
+Hej, rano słychać tu było potężny huk. Wszystko w porządku?!<NEXT>Lepiej dokładnie sprawdź, czy nie stało się coś dziwnego!<END>
+
+@@ sDialog_0x0487 @@
+Co jest, co jest? Nie chciałeś sprzedawać? No to wracam do domu.<END>
+
+@@ sDialog_0x0488 @@
+Mistrzostwo farmy <NUM 3 108><BR>Postaraj się jeszcze bardziej!<END>
+
+@@ sDialog_0x0489 @@
+Mistrzostwo farmy <NUM 3 109><BR>Dasz radę, jeszcze tylko krok!<END>
+
+@@ sDialog_0x048A @@
+Mistrzostwo farmy <NUM 3 110><BR>Całkiem nieźle! Dąż do tego, by być jeszcze lepszym farmerem!<END>
+
+@@ sDialog_0x048B @@
+Mistrzostwo farmy <NUM 3 111><BR>Gratulacje! Jesteś już farmerem, którego nikt nie zdoła przewyższyć!<END>
+
+@@ sDialog_0x048C @@
+Rozwój farmy <NUM 3 112>%<END>
+
+@@ sDialog_0x048D @@
+Ciekawe, co tam u P-chan? Mam nadzieję, że ma się dobrze.<END>
+
+@@ sDialog_0x048E @@
+W życiu nie chodzi tylko o pieniądze. Zwracaj uwagę na więcej rzeczy.<END>
+
+@@ sDialog_0x048F @@
+Dziwna figurka kury przy drodze wygląda, jakby dało się ją rozbić jakimś narzędziem...<END>
+
+@@ sDialog_0x0490 @@
+Jaki piękny kwiat!<END>
+
+@@ sDialog_0x0491 @@
+Cześć, dziś lepiej najedz się do syta.<NEXT>Nie no, nie ma w tym głębszego sensu... tak tylko.<END>
+
+@@ sDialog_0x0492 @@
+Czy Nina nie zrobiła na farmie jakiegoś kwietnego ogródka? Wszystko w porządku?<END>
+
+@@ sDialog_0x0493 @@
+Kochanie, czy nie zapomniałeś pomalować miejsca przy drzwiach?<END>
+
+@@ sDialog_0x0494 @@
+Maria wygląda na zadowoloną. Bo wiesz, wcześnie rano przyniosła mi ciasto.<END>
+
+@@ sDialog_0x0495 @@
+Dobrze się dogadujesz z żoną? Tylko się nie kłóćcie.<END>
+
+@@ sDialog_0x0496 @@
+Dostałem ciasto od żony kwiaciarza. Jak się cieszę! To jak sen.<END>
+
+@@ sDialog_0x0497 @@
+Aaa! N-nie, to nie tak! Chodzi o różne rzeczy, no, to taki... prezent z podziękowaniem. Tylko podziękowanie.<END>
