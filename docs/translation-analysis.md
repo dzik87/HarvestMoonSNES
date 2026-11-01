@@ -161,7 +161,7 @@ Required additional letters: ĄĆĘŁŃÓŚŹŻ ąćęłńóśźż = **18**.
 * `Screen_IntroFarmScroll_BG1/BG2`, `Tiles_IntroFarmScroll_0-3` (title/intro; EU, DE and JP versions exist)
 * `Screen_Menu_Backgrounds`, `Screen_Menu_Characters`, `Screen_Menu_BackgroundPattern`, `Tiles_Menu_*` (main menu; DE and JP versions)
 * `Screen_ToolShed`, `Screen_ToolShed_Layer2`, `Tiles_ToolShed_1` (signs; DE and JP)
-* JP only: `Screen_Title_NatsumeLogo`, `Tiles_Credits_0`, `Screen_Credits_0to3`, credits and end-screen text, `Screen_Credits4_DriveToTown__*`, `Screen_Unk53to56__*`
+* JP only: `Screen_Title_NatsumeLogo`, `Tiles_Credits_0`, `Screen_Credits_0to3`, credits and end-screen text, `Screen_Credits4_DriveToTown__*`, `Screen_Credits_StaffRollJp__*`
 * Candidate unlocalised screens of the US release to inspect: `Screen_Intro`, ending screens `Screen_Ending00-13`, credits `Tiles_Credits_0-3`, HUD/menu tiles, shop and building signs.
 
 The glyph-id strings of A are the first follow-up (small tables); B needs a PNG override mechanism like `assets/gfx/png/<region>/` (regional versions) with a `translations/<lang>/gfx/` directory.
