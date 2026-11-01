@@ -1,7 +1,44 @@
+;;
+; @file     player_update.asm
+; @brief    Player state machine, part 2: the "interaction" handlers (dialogs with objects, shops, diaries, TVs, livestock dealers,
+; house expansion, egg hunt ...) that run while !PFLAGS_INTERACTING is set.
+; @details  fPlayerInteraction_Handler calls .aJumpTable[nPlayerInteractionIndex] once per frame. The index is the interaction id of
+; the map object / AI script that started the interaction (set by bank $83 map code, bank $82 object code and AI scripts together with
+; nPlayerInteractionArg1/Arg2 = 0). Common conventions of the handlers:
+;   nPlayerInteractionArg1 = phase of the handler (0 on start), nPlayerInteractionArg2 = frame counter / wait timer;
+;   a dialog is started with strcDialogDisplay.mapUnk19A = 2, strcDialogDisplay.dialogUnk191 = 0, X = dialog id and fDialog_DialogHandler;
+;   while mapUnk19A == 2 the dialog is still running; afterwards strcDialogDisplay.dialogOptionsAnswer holds the chosen option;
+;   the handler ends the interaction by clearing !PFLAGS_INTERACTING (macro UnsetPlayerFlag) and usually returns with RTS;
+;   handlers that give an item set strcPlayerData.carryItemId and !PACTION_ITEMONHAND (pick-up pose, player_actions.asm);
+;   AIExecute(slot, 0, script) starts an AI script on an NPC slot (fAI_SetupAreaScripting);
+;   money is changed with fGameEngine_AddProfit (price in 10G units, 24-bit in ptrTemp0x72; returns A = 0 on success).
+; Dialog ids are the sDialog_0xNNNN numbers of assets/dialogs; texts quoted in the blocks are paraphrased from the US release.
+; Entries with no behaviour are plain RTS. Data included at the end: aPlayerInteraction_SetFlags / aPlayerInteraction_ResetFlags.
+; @bank     $81   @range $81D510-$81FFFF
+; @see      player_actions.asm, ../bank_83/map_engine.asm, ../bank_82/interaction_data.asm, ../bank_83/dialog.asm
+;;
+
 ; Bank $81 module "player_update" - starts at $81D510
  
+;;
+; @brief    aWeatherDialogId (generated from assets/tables/data/weather_dialog_ids.csv): TV forecast dialog per weather and season.
+; @format   12 rows (one per !WEATHER_* forecast) x 4 words (spring, summer, fall, winter), dialog id or $FFFF = none
+; @index    nWeatherDialogIdIndex * 8 + nCurrentSeasonID * 2
+; @used_by  fPlayerInteraction0x0F, fPlayerInteraction0x12, fPlayerInteraction0x13
+;;
     incsrc "../../../build/gen/blocks/weather_dialog_ids.asm"
  
+;;
+; @brief    Runs the handler of the current interaction and then continues the normal player update.
+; @details  Dispatches through .aJumpTable[nPlayerInteractionIndex * 2]. Afterwards strcPlayerData.lastExcercise is cleared; when
+; nTimeState has bit 1 (skip to next day) set the player stays in autopilot (fPlayerAction0x19), else fPlayerAction_Handler continues
+; with the current action in the same frame.
+; @param    nPlayerInteractionIndex   interaction id $00..$57
+; @modifies strcPlayerData.lastExcercise
+; @mode     M8X16 -> (see fPlayerAction_Handler)
+; @calls    .aJumpTable handlers, fPlayerAction0x19, fPlayerAction_Handler
+; @callers  fPlayer_UpdateHandler
+;;
 fPlayerInteraction_Handler:
     SEP #$20                                                   ;81D570|E220    |      ;
     REP #$10                                                   ;81D572|C210    |      ;
@@ -23,12 +60,30 @@ fPlayerInteraction_Handler:
 .skipToNextDay:
     JMP.W fPlayerAction_Handler                                ;81D590|4CD3BF  |81BFD3;
  
+;;
+; @brief    .aJumpTable (generated from assets/tables/data/player_update_jump_table.csv): interaction handler per interaction id $00..$57.
+; @format   1 word (bank $81) per id
+; @index    nPlayerInteractionIndex * 2
+; @used_by  fPlayerInteraction_Handler
+;;
     incsrc "../../../build/gen/blocks/player_update_jump_table.asm"
  
+;;
+; @brief    No-op interaction $00 (no interaction).
+; @case     $00
+;;
 fPlayerInteraction0x00:
     RTS                                                        ;81D643|60      |      ;
  
  
+;;
+; @brief    Take wood from the storage: takes 2 units and puts a wood fence item in the hands.
+; @details  fGameEngine_AddWood(-2); if it did not report A == 1 (storage empty) the fence item !EITEM_WOODFENCE is carried
+; (!PACTION_ITEMONHAND). The interaction ends immediately.
+; @case     $01
+; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
+; @calls    fGameEngine_AddWood
+;;
 fPlayerInteraction0x01_WoodStorage:
     REP #$20                                                   ;81D644|C220    |      ;
     LDA.W #$FFFE                                               ;81D646|A9FEFF  |      ;
@@ -43,10 +98,23 @@ fPlayerInteraction0x01_WoodStorage:
     RTS                                                        ;81D66E|60      |      ;
  
  
+;;
+; @brief    No-op interaction $02.
+; @case     $02
+;;
 fPlayerInteraction0x02:
     RTS                                                        ;81D66F|60      |      ;
  
  
+;;
+; @brief    Rings a bell (?): plays !SFX_BELL, starts tile script $44 and holds the interaction for 32 frames.
+; @details  Phase 0 (arg1 != 1): plays the sample through fAudio_PrepareSoundEffectSample/fAudioSetRegister2to0A, sets strcFlags.daily1
+; bit $0010, starts fTileScript_Start($44), arg1++. Phase 1: counts arg2 to $20, then ends and restores the tool sound (toolId 0).
+; @case     $03
+; @modifies strcAudio.index, strcFlags.daily1, nPlayerInteractionArg1, nPlayerInteractionArg2
+; @calls    fAudio_PrepareSoundEffectSample, fAudioSetRegister2to0A, fTileScript_Start, fToolUsedSound_PlayOnToolChange
+; @note     confidence: medium - bell sound only; the object that triggers it is not identified
+;;
 fPlayerInteraction0x03:
     SEP #$20                                                   ;81D670|E220    |      ;
     REP #$10                                                   ;81D672|C210    |      ;
@@ -93,10 +161,19 @@ fPlayerInteraction0x03:
     RTS                                                        ;81D6E0|60      |      ;
  
  
+;;
+; @brief    No-op interaction $04.
+; @case     $04
+;;
 fPlayerInteraction0x04:
     RTS                                                        ;81D6E1|60      |      ;
  
  
+;;
+; @brief    Starts tile script $11 and ends the interaction.
+; @case     $05
+; @calls    fTileScript_Start
+;;
 fPlayerInteraction0x05:
     REP #$20                                                   ;81D6E2|C220    |      ;
     LDA.W #$0011                                               ;81D6E4|A91100  |      ;
@@ -105,6 +182,11 @@ fPlayerInteraction0x05:
     RTS                                                        ;81D6F7|60      |      ;
  
  
+;;
+; @brief    Starts tile script $12 and ends the interaction.
+; @case     $06
+; @calls    fTileScript_Start
+;;
 fPlayerInteraction0x06:
     REP #$20                                                   ;81D6F8|C220    |      ;
     LDA.W #$0012                                               ;81D6FA|A91200  |      ;
@@ -113,38 +195,81 @@ fPlayerInteraction0x06:
     RTS                                                        ;81D70D|60      |      ;
  
  
+;;
+; @brief    No-op interaction $07.
+; @case     $07
+;;
 fPlayerInteraction0x07:
     RTS                                                        ;81D70E|60      |      ;
  
  
+;;
+; @brief    No-op interaction $08.
+; @case     $08
+;;
 fPlayerInteraction0x08:
     RTS                                                        ;81D70F|60      |      ;
  
  
+;;
+; @brief    No-op interaction $09.
+; @case     $09
+;;
 fPlayerInteraction0x09:
     RTS                                                        ;81D710|60      |      ;
  
  
+;;
+; @brief    No-op interaction $0A.
+; @case     $0A
+;;
 fPlayerInteraction0x0A:
     RTS                                                        ;81D711|60      |      ;
  
  
+;;
+; @brief    No-op interaction $0B.
+; @case     $0B
+;;
 fPlayerInteraction0x0B:
     RTS                                                        ;81D712|60      |      ;
  
  
+;;
+; @brief    No-op interaction $0C.
+; @case     $0C
+;;
 fPlayerInteraction0x0C:
     RTS                                                        ;81D713|60      |      ;
  
  
+;;
+; @brief    No-op interaction $0D.
+; @case     $0D
+;;
 fPlayerInteraction0x0D:
     RTS                                                        ;81D714|60      |      ;
  
  
+;;
+; @brief    No-op interaction $0E.
+; @case     $0E
+;;
 fPlayerInteraction0x0E:
     RTS                                                        ;81D715|60      |      ;
  
  
+;;
+; @brief    Watching the weather forecast on TV, variant 1 (player sits down; !PFLAGS_SITTING).
+; @details  Phase 0: sets !PFLAGS_SITTING and starts tile script $00 (TV turn-on; skipped on festival days, mapFlags bit $0010).
+; Phase 1: once the tile script is done (ptrUnknown0xCF == 0) fWeather_SetForecastDialogIndex selects nWeatherDialogIdIndex and the
+; dialog aWeatherDialogId[weather*8 + season*2] is shown ($FFFF = none); tile script $00 + weather index + 1 starts.
+; Phase 2: when the dialog finished, tile script $46 (TV off) runs, !PFLAGS_INTERACTING and !PFLAGS_SITTING are cleared.
+; @case     $0F
+; @modifies nPlayerInteractionArg1, strcPlayer.flags, strcDialogDisplay.mapUnk19A
+; @calls    fTileScript_Start, fWeather_SetForecastDialogIndex, fDialog_DialogHandler
+; @note     the three TV variants differ only in the tile script ids ($00 base): one per house size (?). confidence: medium
+;;
 fPlayerInteraction0x0F:
     SEP #$20                                                   ;81D716|E220    |      ;
     REP #$10                                                   ;81D718|C210    |      ;
@@ -223,6 +348,18 @@ fPlayerInteraction0x0F:
     RTS                                                        ;81D7C4|60      |      ;
  
  
+;;
+; @brief    Going to bed: asks whether to write the diary, then walks the player off and ends the day.
+; @details  Ends at once when strcFlags.event6 bit $0010 is set. Phase 0: when $0878 == $087A (position check), dialog $000A
+; "write in the diary before bed?". Phase 1: yes -> nTimeState |= 4 (save request (?)) and jump to phase 3; no -> dialog $000C, phase 2:
+; answer 0 continues with phase 3, anything else cancels. Phase 3: forces PACTION_WALK to the right (!PFLAGS_INTRANSITION); unmarried:
+; after $16 frames goes to !PACTION_AUTOPILOT with sprite $4E and sets nTimeState |= 2 (skip to next day); married to anyone: sets
+; strcFlags.daily3 bit $0800 (wife script), after $1E frames enters phase 4 which waits for daily3 bit $1000 and then sets nTimeState |= 2.
+; @case     $10
+; @modifies nTimeState, strcFlags.daily3, nPlayerInteractionArg1, nPlayerInteractionArg2, strcPlayer.action, strcPlayer.flags
+; @calls    fDialog_DialogHandler, fPlayer_UpdateSpriteObject
+; @note     confidence: medium for the nTimeState bit 2 meaning of the diary save (?)
+;;
 fPlayerInteraction0x10_PlayerDiary:
     REP #$30                                                   ;81D7C5|C230    |      ;
     %CheckFlag(event6, $0010)
@@ -403,6 +540,14 @@ fPlayerInteraction0x10_PlayerDiary:
     RTS                                                        ;81D978|60      |      ;
  
  
+;;
+; @brief    Forced walk up for 32 frames (!PACTION_0E) before the diary / bed interaction.
+; @details  Phase 0: sets !PFLAGS_INTRANSITION, !PACTION_0E, direction up; after $20 frames arg1 = 1. Phase 1: sets $0878 = $087A = $00C2
+; (makes the check in fPlayerInteraction0x10_PlayerDiary pass) and ends the interaction.
+; @case     $11
+; @modifies strcPlayer.action, strcPlayer.direction, $0878, $087A
+; @note     confidence: low - purpose inferred from the shared $0878/$087A variables
+;;
 fPlayerInteraction0x11:
     SEP #$20                                                   ;81D979|E220    |      ;
     REP #$10                                                   ;81D97B|C210    |      ;
@@ -432,6 +577,17 @@ fPlayerInteraction0x11:
     RTS                                                        ;81D9CB|60      |      ;
  
  
+;;
+; @brief    Watching the weather forecast on TV, variant 2 (player sits down; !PFLAGS_SITTING).
+; @details  Phase 0: sets !PFLAGS_SITTING and starts tile script $27 (TV turn-on; skipped on festival days, mapFlags bit $0010).
+; Phase 1: once the tile script is done (ptrUnknown0xCF == 0) fWeather_SetForecastDialogIndex selects nWeatherDialogIdIndex and the
+; dialog aWeatherDialogId[weather*8 + season*2] is shown ($FFFF = none); tile script $27 + weather index + 1 starts.
+; Phase 2: when the dialog finished, tile script $47 (TV off) runs, !PFLAGS_INTERACTING and !PFLAGS_SITTING are cleared.
+; @case     $12
+; @modifies nPlayerInteractionArg1, strcPlayer.flags, strcDialogDisplay.mapUnk19A
+; @calls    fTileScript_Start, fWeather_SetForecastDialogIndex, fDialog_DialogHandler
+; @note     the three TV variants differ only in the tile script ids ($27 base): one per house size (?). confidence: medium
+;;
 fPlayerInteraction0x12:
     SEP #$20                                                   ;81D9CC|E220    |      ;
     REP #$10                                                   ;81D9CE|C210    |      ;
@@ -515,6 +671,17 @@ fPlayerInteraction0x12:
     RTS                                                        ;81DA81|60      |      ;
  
  
+;;
+; @brief    Watching the weather forecast on TV, variant 3 (player sits down; !PFLAGS_SITTING).
+; @details  Phase 0: sets !PFLAGS_SITTING and starts tile script $34 (TV turn-on; skipped on festival days, mapFlags bit $0010).
+; Phase 1: once the tile script is done (ptrUnknown0xCF == 0) fWeather_SetForecastDialogIndex selects nWeatherDialogIdIndex and the
+; dialog aWeatherDialogId[weather*8 + season*2] is shown ($FFFF = none); tile script $34 + weather index + 1 starts.
+; Phase 2: when the dialog finished, tile script $48 (TV off) runs, !PFLAGS_INTERACTING and !PFLAGS_SITTING are cleared.
+; @case     $13
+; @modifies nPlayerInteractionArg1, strcPlayer.flags, strcDialogDisplay.mapUnk19A
+; @calls    fTileScript_Start, fWeather_SetForecastDialogIndex, fDialog_DialogHandler
+; @note     the three TV variants differ only in the tile script ids ($34 base): one per house size (?). confidence: medium
+;;
 fPlayerInteraction0x13:
     SEP #$20                                                   ;81DA82|E220    |      ;
     REP #$10                                                   ;81DA84|C210    |      ;
@@ -598,6 +765,14 @@ fPlayerInteraction0x13:
     RTS                                                        ;81DB37|60      |      ;
  
  
+;;
+; @brief    Dialog-driven scroll screen: resets BG2 vertical scroll and shows a dialog in mode 3, then loops while it runs.
+; @details  Phase 0: clears strcDialogDisplay.dialoUnk18A; phase 1: BG2VerOffs = 0, mapUnk19A = 3, dialogFlags |= !DFLAGS_UNK20; phases 2/3
+; wait for mapUnk19A to leave 3 (to 2 -> phase 3 -> phase 1 again, otherwise end).
+; @case     $14
+; @modifies strcBGScrool.BG2VerOffs, strcDialogDisplay.mapUnk19A, strcDialogDisplay.dialogFlags
+; @note     confidence: low - the object using this interaction is not identified
+;;
 fPlayerInteraction0x14:
     SEP #$20                                                   ;81DB38|E220    |      ;
     REP #$10                                                   ;81DB3A|C210    |      ;
@@ -654,6 +829,11 @@ fPlayerInteraction0x14:
     RTS                                                        ;81DBA0|60      |      ;
  
  
+;;
+; @brief    Take cow feed from the storage: removes 1 unit and puts a feed sack (!EITEM_COWFEED) in the hands.
+; @case     $15
+; @calls    fGameEngine_AddFeed
+;;
 fPlayerInteraction0x15_FeedStorage:
     REP #$20                                                   ;81DBA1|C220    |      ;
     LDA.W #$FFFF                                               ;81DBA3|A9FFFF  |      ;
@@ -668,34 +848,68 @@ fPlayerInteraction0x15_FeedStorage:
     RTS                                                        ;81DBCB|60      |      ;
  
  
+;;
+; @brief    No-op interaction $16.
+; @case     $16
+;;
 fPlayerInteraction0x16:
     RTS                                                        ;81DBCC|60      |      ;
  
  
+;;
+; @brief    No-op interaction $17.
+; @case     $17
+;;
 fPlayerInteraction0x17:
     RTS                                                        ;81DBCD|60      |      ;
  
  
+;;
+; @brief    No-op interaction $18.
+; @case     $18
+;;
 fPlayerInteraction0x18:
     RTS                                                        ;81DBCE|60      |      ;
  
  
+;;
+; @brief    No-op interaction $19.
+; @case     $19
+;;
 fPlayerInteraction0x19:
     RTS                                                        ;81DBCF|60      |      ;
  
  
+;;
+; @brief    No-op interaction $1A.
+; @case     $1A
+;;
 fPlayerInteraction0x1A:
     RTS                                                        ;81DBD0|60      |      ;
  
  
+;;
+; @brief    No-op interaction $1B.
+; @case     $1B
+;;
 fPlayerInteraction0x1B:
     RTS                                                        ;81DBD1|60      |      ;
  
  
+;;
+; @brief    No-op interaction $1C.
+; @case     $1C
+;;
 fPlayerInteraction0x1C:
     RTS                                                        ;81DBD2|60      |      ;
  
  
+;;
+; @brief    Egg Festival: search egg hiding spot 0 (tile $FB at X=$02E0, Y=$01A0), then resolve it in fPlayerInteraction_Return.
+; @case     $1D
+; @calls    fSetTileAtCoords, fPlayerInteraction_Return
+; @note     confidence: medium - spot numbering follows the order of the handlers
+;;
 fPlayerInteraction0x1D:
     REP #$30                                                   ;81DBD3|C230    |      ;
     LDA.W #$00FB                                               ;81DBD5|A9FB00  |      ;
@@ -709,6 +923,13 @@ fPlayerInteraction0x1D:
     JMP.W fPlayerInteraction_Return                            ;81DBED|4C56F5  |81F556;
  
  
+;;
+; @brief    Read the spa flyer from the mailbox: yes/no dialog, then a seasonal flyer text.
+; @details  Phase 0: dialog $0371 "The flier is in. Do you want to read it?". Phase 1: on yes shows dialog $0372 + nCurrentSeasonID
+; (recovery of stamina at the mountain spa); the interaction ends either way.
+; @case     $1E
+; @calls    fDialog_DialogHandler
+;;
 fPlayerInteraction0x1E:
     SEP #$20                                                   ;81DBF0|E220    |      ;
     REP #$10                                                   ;81DBF2|C210    |      ;
@@ -762,34 +983,69 @@ fPlayerInteraction0x1E:
     RTS                                                        ;81DC56|60      |      ;
  
  
+;;
+; @brief    No-op interaction $1F.
+; @case     $1F
+;;
 fPlayerInteraction0x1F:
     RTS                                                        ;81DC57|60      |      ;
  
  
+;;
+; @brief    No-op interaction $20.
+; @case     $20
+;;
 fPlayerInteraction0x20:
     RTS                                                        ;81DC58|60      |      ;
  
  
+;;
+; @brief    No-op interaction $21.
+; @case     $21
+;;
 fPlayerInteraction0x21:
     RTS                                                        ;81DC59|60      |      ;
  
  
+;;
+; @brief    No-op interaction $22.
+; @case     $22
+;;
 fPlayerInteraction0x22:
     RTS                                                        ;81DC5A|60      |      ;
  
  
+;;
+; @brief    No-op interaction $23.
+; @case     $23
+;;
 fPlayerInteraction0x23:
     RTS                                                        ;81DC5B|60      |      ;
  
  
+;;
+; @brief    No-op interaction $24.
+; @case     $24
+;;
 fPlayerInteraction0x24:
     RTS                                                        ;81DC5C|60      |      ;
  
  
+;;
+; @brief    No-op interaction $25.
+; @case     $25
+;;
 fPlayerInteraction0x25:
     RTS                                                        ;81DC5D|60      |      ;
  
  
+;;
+; @brief    Read Maria's diary: shows how many hearts she has for the player.
+; @details  Phase 0: dialog $0023 "Found the diary! Read / Not read". Phase 1: on "Read" the hearts come from
+; fLove_ScaleToHearts(nLove_Maria) and the dialog $03A6 + hearts (0..9) is shown; reading costs 1 happiness (fGameEngine_AddHappiness(-1)).
+; @case     $26
+; @calls    fDialog_DialogHandler, fLove_ScaleToHearts, fGameEngine_AddHappiness
+;;
 fPlayerInteraction0x26_MariaDiary:
     SEP #$20                                                   ;81DC5E|E220    |      ;
     REP #$10                                                   ;81DC60|C210    |      ;
@@ -845,6 +1101,13 @@ fPlayerInteraction0x26_MariaDiary:
     RTS                                                        ;81DCCD|60      |      ;
  
  
+;;
+; @brief    Pick up a found item: carried item id $44 (aInteractionItemTable[$70], spring column).
+; @details  Sets strcPlayerData.carryItemId from aInteractionItemTable (macro SetCurrentCarriedItemIndex($0070), the season is not added),
+; starts !PACTION_ITEMONHAND and ends the interaction.
+; @case     $27
+; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
+;;
 fPlayerInteraction0x27:
     %SetCurrentCarriedItemIndex($0070)
     %SetPlayerAction(!PACTION_ITEMONHAND)
@@ -852,6 +1115,13 @@ fPlayerInteraction0x27:
     RTS                                                        ;81DCF2|60      |      ;
  
  
+;;
+; @brief    Pick up a found item: carried item id $45 (aInteractionItemTable[$71], spring column).
+; @details  Sets strcPlayerData.carryItemId from aInteractionItemTable (macro SetCurrentCarriedItemIndex($0071), the season is not added),
+; starts !PACTION_ITEMONHAND and ends the interaction.
+; @case     $28
+; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
+;;
 fPlayerInteraction0x28:
     %SetCurrentCarriedItemIndex($0071)
     %SetPlayerAction(!PACTION_ITEMONHAND)
@@ -859,6 +1129,13 @@ fPlayerInteraction0x28:
     RTS                                                        ;81DD17|60      |      ;
  
  
+;;
+; @brief    Pick up a found item: carried item id $46 (aInteractionItemTable[$72], spring column).
+; @details  Sets strcPlayerData.carryItemId from aInteractionItemTable (macro SetCurrentCarriedItemIndex($0072), the season is not added),
+; starts !PACTION_ITEMONHAND and ends the interaction.
+; @case     $29
+; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
+;;
 fPlayerInteraction0x29:
     %SetCurrentCarriedItemIndex($0072)
     %SetPlayerAction(!PACTION_ITEMONHAND)
@@ -866,6 +1143,13 @@ fPlayerInteraction0x29:
     RTS                                                        ;81DD3C|60      |      ;
  
  
+;;
+; @brief    Pick up a found item: carried item id $47 (aInteractionItemTable[$73], spring column).
+; @details  Sets strcPlayerData.carryItemId from aInteractionItemTable (macro SetCurrentCarriedItemIndex($0073), the season is not added),
+; starts !PACTION_ITEMONHAND and ends the interaction.
+; @case     $2A
+; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
+;;
 fPlayerInteraction0x2A:
     %SetCurrentCarriedItemIndex($0073)
     %SetPlayerAction(!PACTION_ITEMONHAND)
@@ -873,6 +1157,13 @@ fPlayerInteraction0x2A:
     RTS                                                        ;81DD61|60      |      ;
  
  
+;;
+; @brief    Pick up a found item: carried item id $48 (aInteractionItemTable[$74], spring column).
+; @details  Sets strcPlayerData.carryItemId from aInteractionItemTable (macro SetCurrentCarriedItemIndex($0074), the season is not added),
+; starts !PACTION_ITEMONHAND and ends the interaction.
+; @case     $2B
+; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
+;;
 fPlayerInteraction0x2B:
     %SetCurrentCarriedItemIndex($0074)
     %SetPlayerAction(!PACTION_ITEMONHAND)
@@ -880,6 +1171,13 @@ fPlayerInteraction0x2B:
     RTS                                                        ;81DD86|60      |      ;
  
  
+;;
+; @brief    Pick up a found item: carried item id $49 (aInteractionItemTable[$75], spring column).
+; @details  Sets strcPlayerData.carryItemId from aInteractionItemTable (macro SetCurrentCarriedItemIndex($0075), the season is not added),
+; starts !PACTION_ITEMONHAND and ends the interaction.
+; @case     $2C
+; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
+;;
 fPlayerInteraction0x2C:
     %SetCurrentCarriedItemIndex($0075)
     %SetPlayerAction(!PACTION_ITEMONHAND)
@@ -887,6 +1185,12 @@ fPlayerInteraction0x2C:
     RTS                                                        ;81DDAB|60      |      ;
  
  
+;;
+; @brief    Read Nina's diary: shows how many hearts she has for the player.
+; @details  Same flow as fPlayerInteraction0x26_MariaDiary with nLove_Nina.
+; @case     $2D
+; @calls    fDialog_DialogHandler, fLove_ScaleToHearts, fGameEngine_AddHappiness
+;;
 fPlayerInteraction0x2D_NinaDiary:
     SEP #$20                                                   ;81DDAC|E220    |      ;
     REP #$10                                                   ;81DDAE|C210    |      ;
@@ -942,6 +1246,21 @@ fPlayerInteraction0x2D_NinaDiary:
     RTS                                                        ;81DE1B|60      |      ;
  
  
+;;
+; @brief    Livestock dealer menu: buy a cow, buy a chicken, sell a cow or sell a chicken.
+; @details  Needs strcFlags.event3 bit $0001, otherwise it ends at once; refuses (dialog $03D0, bad weather) when mapFlags & $000A.
+; Phase 0: dialog $0305 (4 options). Phase 1: B cancels (fDialog_EndDialogRestoreScroll). Option 0 = buy cow: refused if strcFlags.daily1 bit $0020
+; (already bought today, $03B6) or nOwnedCows == 12 ($03B7), else dialog $0307 (5000G) -> phase 2. Option 1 = buy chicken: same checks with
+; nOwnedChickens, dialog $030A (1000G) -> phase 3. Options 2/3 = sell: dialog $030B and strcFlags.daily1 bit $0008 (cow) / $0004 (chicken)
+; request a pick-up at the farm entrance (handled by fPlayerInteraction0x43 / fPlayerInteraction0x44).
+; Phase 2/3 (confirm): the feed check needs nPlantedGrassCount >= 16 * (cows + chickens + 1); error dialog $0306. Then fGameEngine_AddProfit
+; (-5000G cow / -1000G chicken; failure -> dialog $0304); success: cow dialog $0308, daily1 |= $22, nOwnedCows++, +20 happiness;
+; chicken dialog $0311, fGameEngine_AddChicken(2), daily1 |= $20, nOwnedChickens++, +10 happiness. "No" gives dialog $0303.
+; @case     $2E
+; @modifies nOwnedCows, nOwnedChickens, strcFlags.daily1, strcPlayer.flags, nPlayerInteractionArg1
+; @calls    fDialog_DialogHandler, fGameEngine_AddProfit, fGameEngine_AddChicken, fGameEngine_AddHappiness, fDialog_EndDialogRestoreScroll
+; @note     option order follows the code; the on-screen layout of dialog $0305 may differ (?). confidence: medium
+;;
 fPlayerInteraction0x2E_AnimalNPC:
     SEP #$20                                                   ;81DE1C|E220    |      ;
     REP #$10                                                   ;81DE1E|C210    |      ;
@@ -1382,6 +1701,13 @@ fPlayerInteraction0x2E_AnimalNPC:
     RTS                                                        ;81E244|60      |      ;
  
  
+;;
+; @brief    Pick up a found item: carried item id $52 (aInteractionItemTable[$7E], spring column).
+; @details  Sets strcPlayerData.carryItemId from aInteractionItemTable (macro SetCurrentCarriedItemIndex($007E), the season is not added),
+; starts !PACTION_ITEMONHAND and ends the interaction.
+; @case     $2F
+; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
+;;
 fPlayerInteraction0x2F:
     %SetCurrentCarriedItemIndex($007E)
     %SetPlayerAction(!PACTION_ITEMONHAND)
@@ -1389,6 +1715,13 @@ fPlayerInteraction0x2F:
     RTS                                                        ;81E269|60      |      ;
  
  
+;;
+; @brief    Pick up a found item: carried item id $53 (aInteractionItemTable[$7F], spring column).
+; @details  Sets strcPlayerData.carryItemId from aInteractionItemTable (macro SetCurrentCarriedItemIndex($007F), the season is not added),
+; starts !PACTION_ITEMONHAND and ends the interaction.
+; @case     $30
+; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
+;;
 fPlayerInteraction0x30:
     %SetCurrentCarriedItemIndex($007F)
     %SetPlayerAction(!PACTION_ITEMONHAND)
@@ -1396,6 +1729,13 @@ fPlayerInteraction0x30:
     RTS                                                        ;81E28E|60      |      ;
  
  
+;;
+; @brief    Pick up a found item: carried item id $54 (aInteractionItemTable[$80], spring column).
+; @details  Sets strcPlayerData.carryItemId from aInteractionItemTable (macro SetCurrentCarriedItemIndex($0080), the season is not added),
+; starts !PACTION_ITEMONHAND and ends the interaction.
+; @case     $31
+; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
+;;
 fPlayerInteraction0x31:
     %SetCurrentCarriedItemIndex($0080)
     %SetPlayerAction(!PACTION_ITEMONHAND)
@@ -1403,6 +1743,13 @@ fPlayerInteraction0x31:
     RTS                                                        ;81E2B3|60      |      ;
  
  
+;;
+; @brief    Pick up a found item: carried item id $55 (aInteractionItemTable[$81], spring column).
+; @details  Sets strcPlayerData.carryItemId from aInteractionItemTable (macro SetCurrentCarriedItemIndex($0081), the season is not added),
+; starts !PACTION_ITEMONHAND and ends the interaction.
+; @case     $32
+; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
+;;
 fPlayerInteraction0x32:
     %SetCurrentCarriedItemIndex($0081)
     %SetPlayerAction(!PACTION_ITEMONHAND)
@@ -1410,6 +1757,12 @@ fPlayerInteraction0x32:
     RTS                                                        ;81E2D8|60      |      ;
  
  
+;;
+; @brief    Read Ellen's diary: shows how many hearts she has for the player.
+; @details  Same flow as fPlayerInteraction0x26_MariaDiary with nLove_Ellen.
+; @case     $33
+; @calls    fDialog_DialogHandler, fLove_ScaleToHearts, fGameEngine_AddHappiness
+;;
 fPlayerInteraction0x33_EllenDiary:
     SEP #$20                                                   ;81E2D9|E220    |      ;
     REP #$10                                                   ;81E2DB|C210    |      ;
@@ -1464,6 +1817,13 @@ fPlayerInteraction0x33_EllenDiary:
     RTS                                                        ;81E348|60      |      ;
  
  
+;;
+; @brief    Pick up a found item: carried item id $56 (aInteractionItemTable[$82], spring column).
+; @details  Sets strcPlayerData.carryItemId from aInteractionItemTable (macro SetCurrentCarriedItemIndex($0082), the season is not added),
+; starts !PACTION_ITEMONHAND and ends the interaction.
+; @case     $34
+; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
+;;
 fPlayerInteraction0x34:
     %SetCurrentCarriedItemIndex($0082)
     %SetPlayerAction(!PACTION_ITEMONHAND)
@@ -1471,6 +1831,12 @@ fPlayerInteraction0x34:
     RTS                                                        ;81E36D|60      |      ;
  
  
+;;
+; @brief    Plays !SFX_INTERACTIONUNK24 on voice 7 for 120 frames, restores the tool sound and ends.
+; @case     $35
+; @calls    fAudio_PlaySoundEffectAndWait, fToolUsedSound_PlayOnToolChange
+; @note     confidence: low - triggering object unknown (docs/naming/open-questions.md)
+;;
 fPlayerInteraction0x35:
     SEP #$20                                                   ;81E36E|E220    |      ;
     REP #$10                                                   ;81E370|C210    |      ;
@@ -1485,6 +1851,12 @@ fPlayerInteraction0x35:
     RTS                                                        ;81E393|60      |      ;
  
  
+;;
+; @brief    Read Ann's diary: shows how many hearts she has for the player.
+; @details  Same flow as fPlayerInteraction0x26_MariaDiary with nLove_Ann.
+; @case     $36
+; @calls    fDialog_DialogHandler, fLove_ScaleToHearts, fGameEngine_AddHappiness
+;;
 fPlayerInteraction0x36_AnnDiary:
     SEP #$20                                                   ;81E394|E220    |      ;
     REP #$10                                                   ;81E396|C210    |      ;
@@ -1539,6 +1911,13 @@ fPlayerInteraction0x36_AnnDiary:
     RTS                                                        ;81E403|60      |      ;
  
  
+;;
+; @brief    Pick up a found item: carried item id $4B (aInteractionItemTable[$77], spring column).
+; @details  Sets strcPlayerData.carryItemId from aInteractionItemTable (macro SetCurrentCarriedItemIndex($0077), the season is not added),
+; starts !PACTION_ITEMONHAND and ends the interaction.
+; @case     $37
+; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
+;;
 fPlayerInteraction0x37:
     %SetCurrentCarriedItemIndex($0077)
     %SetPlayerAction(!PACTION_ITEMONHAND)
@@ -1546,6 +1925,13 @@ fPlayerInteraction0x37:
     RTS                                                        ;81E428|60      |      ;
  
  
+;;
+; @brief    Pick up a found item: carried item id $4A (aInteractionItemTable[$76], spring column).
+; @details  Sets strcPlayerData.carryItemId from aInteractionItemTable (macro SetCurrentCarriedItemIndex($0076), the season is not added),
+; starts !PACTION_ITEMONHAND and ends the interaction.
+; @case     $38
+; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
+;;
 fPlayerInteraction0x38:
     %SetCurrentCarriedItemIndex($0076)
     %SetPlayerAction(!PACTION_ITEMONHAND)
@@ -1553,6 +1939,13 @@ fPlayerInteraction0x38:
     RTS                                                        ;81E44D|60      |      ;
  
  
+;;
+; @brief    Pick up a found item: carried item id $4C (aInteractionItemTable[$78], spring column).
+; @details  Sets strcPlayerData.carryItemId from aInteractionItemTable (macro SetCurrentCarriedItemIndex($0078), the season is not added),
+; starts !PACTION_ITEMONHAND and ends the interaction.
+; @case     $39
+; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
+;;
 fPlayerInteraction0x39:
     %SetCurrentCarriedItemIndex($0078)
     %SetPlayerAction(!PACTION_ITEMONHAND)
@@ -1560,6 +1953,13 @@ fPlayerInteraction0x39:
     RTS                                                        ;81E472|60      |      ;
  
  
+;;
+; @brief    Pick up a found item: carried item id $51 (aInteractionItemTable[$7D], spring column).
+; @details  Sets strcPlayerData.carryItemId from aInteractionItemTable (macro SetCurrentCarriedItemIndex($007D), the season is not added),
+; starts !PACTION_ITEMONHAND and ends the interaction.
+; @case     $3A
+; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
+;;
 fPlayerInteraction0x3A:
     %SetCurrentCarriedItemIndex($007D)
     %SetPlayerAction(!PACTION_ITEMONHAND)
@@ -1567,6 +1967,13 @@ fPlayerInteraction0x3A:
     RTS                                                        ;81E497|60      |      ;
  
  
+;;
+; @brief    Pick up a found item: carried item id $4D (aInteractionItemTable[$79], spring column).
+; @details  Sets strcPlayerData.carryItemId from aInteractionItemTable (macro SetCurrentCarriedItemIndex($0079), the season is not added),
+; starts !PACTION_ITEMONHAND and ends the interaction.
+; @case     $3B
+; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
+;;
 fPlayerInteraction0x3B:
     %SetCurrentCarriedItemIndex($0079)
     %SetPlayerAction(!PACTION_ITEMONHAND)
@@ -1574,6 +1981,13 @@ fPlayerInteraction0x3B:
     RTS                                                        ;81E4BC|60      |      ;
  
  
+;;
+; @brief    Pick up a found item: carried item id $4E (aInteractionItemTable[$7A], spring column).
+; @details  Sets strcPlayerData.carryItemId from aInteractionItemTable (macro SetCurrentCarriedItemIndex($007A), the season is not added),
+; starts !PACTION_ITEMONHAND and ends the interaction.
+; @case     $3C
+; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
+;;
 fPlayerInteraction0x3C:
     %SetCurrentCarriedItemIndex($007A)
     %SetPlayerAction(!PACTION_ITEMONHAND)
@@ -1581,6 +1995,13 @@ fPlayerInteraction0x3C:
     RTS                                                        ;81E4E1|60      |      ;
  
  
+;;
+; @brief    Pick up a found item: carried item id $4F (aInteractionItemTable[$7B], spring column).
+; @details  Sets strcPlayerData.carryItemId from aInteractionItemTable (macro SetCurrentCarriedItemIndex($007B), the season is not added),
+; starts !PACTION_ITEMONHAND and ends the interaction.
+; @case     $3D
+; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
+;;
 fPlayerInteraction0x3D:
     %SetCurrentCarriedItemIndex($007B)
     %SetPlayerAction(!PACTION_ITEMONHAND)
@@ -1588,6 +2009,13 @@ fPlayerInteraction0x3D:
     RTS                                                        ;81E506|60      |      ;
  
  
+;;
+; @brief    Pick up a found item: carried item id $50 (aInteractionItemTable[$7C], spring column).
+; @details  Sets strcPlayerData.carryItemId from aInteractionItemTable (macro SetCurrentCarriedItemIndex($007C), the season is not added),
+; starts !PACTION_ITEMONHAND and ends the interaction.
+; @case     $3E
+; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
+;;
 fPlayerInteraction0x3E:
     %SetCurrentCarriedItemIndex($007C)
     %SetPlayerAction(!PACTION_ITEMONHAND)
@@ -1595,6 +2023,12 @@ fPlayerInteraction0x3E:
     RTS                                                        ;81E52B|60      |      ;
  
  
+;;
+; @brief    Read Eve's diary: shows how many hearts she has for the player.
+; @details  Same flow as fPlayerInteraction0x26_MariaDiary with nLove_Eve.
+; @case     $3F
+; @calls    fDialog_DialogHandler, fLove_ScaleToHearts, fGameEngine_AddHappiness
+;;
 fPlayerInteraction0x3F_EveDiary:
     SEP #$20                                                   ;81E52C|E220    |      ;
     REP #$10                                                   ;81E52E|C210    |      ;
@@ -1649,6 +2083,13 @@ fPlayerInteraction0x3F_EveDiary:
     RTS                                                        ;81E59B|60      |      ;
  
  
+;;
+; @brief    Read the book "Lessons of Love": menu of five tips (present, conversation, festival, diary, marriage).
+; @details  Phase 0: dialog $045F with a 5-option menu. Phase 1: B cancels; the option selects dialog $0460 (present), $0461 (conversation),
+; $0462 (festival), $0463 (diary), $0464 (marriage: blue feather and enlarged house); the interaction ends after it.
+; @case     $40
+; @calls    fDialog_DialogHandler, fDialog_EndDialogRestoreScroll
+;;
 fPlayerInteraction0x40_LessonsOfLove:
     SEP #$20                                                   ;81E59C|E220    |      ;
     REP #$10                                                   ;81E59E|C210    |      ;
@@ -1773,6 +2214,11 @@ fPlayerInteraction0x40_LessonsOfLove:
     RTS                                                        ;81E6C2|60      |      ;
  
  
+;;
+; @brief    Enter the hot spring: sets !PFLAGS_INSPRINGS, jumps in (!PACTION_JUMP) and restores 12 stamina.
+; @case     $41
+; @calls    fPlayerEnergyHandler (UpdateStamina)
+;;
 fPlayerInteraction0x41_HotSprings:
     REP #$30                                                   ;81E6C3|C230    |      ;
     %SetPlayerFlag(!PFLAGS_INSPRINGS)
@@ -1782,6 +2228,18 @@ fPlayerInteraction0x41_HotSprings:
     RTS                                                        ;81E6E9|60      |      ;
  
  
+;;
+; @brief    Delivery of a bought cow: the dealer's helper walks in, hands it over and the player names the cow.
+; @details  Phase 0: forced walk left (!PFLAGS_INTRANSITION) for $20 frames. Phase 1: dialog $030C ("I put the cow in the pen ... name it"),
+; or $010E (free bell variant) when the bell is not yet in the shed. Phase 2: after the dialog sets strcMenuData.nameDestinationIdx = 1
+; (!NI_COWBOUGHT), marks the bell as obtained in strcShedItems.row2 bit $04 and requests the name input screen (mapFlags |= $2000).
+; Phase 3: ends.
+; @case     $42
+; @region   EU/DE additionally treat a bell in the second tool slot (toolSecond == $0B) like the shed bell; the code is rearranged in the
+; shared labels ShowDialog / RequestNameInput (region_targets.asm). US/JP only test strcPlayerData.toolEquipped.
+; @modifies strcMenuData.nameDestinationIdx, strcShedItems.row2, strcDialogDisplay.mapFlags
+; @calls    fDialog_DialogHandler
+;;
 fPlayerInteraction0x42:
     SEP #$20                                                   ;81E6EA|E220    |      ;
     REP #$10                                                   ;81E6EC|C210    |      ;
@@ -1895,6 +2353,21 @@ fPlayerInteraction0x42:
     RTS                                                        ;81E79D|60      |      ;
  
  
+;;
+; @brief    Sell a cow to the dealer (and the once-per-year hawker trade for the beanstalk seed).
+; @details  Cow index = $09A0 - $18 (fGameEngine_GetCowData). Start: a healthy cow (status bits $06 and $70 clear), nCurrentYearID != 0 and
+; strcFlags.event2 bit $8000 clear -> sets that bit and starts the hawker script (AIExecute slot 8, script $7C), phase 7; any other cow:
+; dealer script (slot 7, script $21), phase 1. Phase 1 (after $40 frames): if daily4 bit $2000 is set dialog $0487, else dialog $0310 (cow
+; too young), $030D (sick/pregnant) or $030E (price question) -> phase 5 or 2. Phase 2: yes -> $030F, phase 3; no -> $0309. Phase 3: adds
+; nCowSalePrice, removes the cow (status = 0, nOwnedCows--, slot script $22), -50 happiness, phase 4. Phases 4-6: timing and
+; cleanup (slot 7 dismissed, daily4 flags checked). Hawker phases 7-$B: dialogs $0149 (offer a bean seed for the cow), $014B (accepted: cow
+; removed, strcShedItems.row3 |= $20 = beanstalk seed, daily4 |= $2000, -50 happiness) or $014C (declined).
+; @case     $43
+; @modifies nOwnedCows, strcFlags.event2, strcFlags.daily4, strcShedItems.row3, strcCowData.statusFlags, nPlayerInteractionArg1/2
+; @calls    fGameEngine_GetCowData, fGameEngine_AddProfit, fGameEngine_AddHappiness, fAI_DeactivateSlotAndObject, fAI_SetSlotScript, fAI_SetCCPointer, fDialog_DialogHandler
+; @region   EU/DE: only the width of the REP before the event2 check differs (no behavioural change)
+; @note     confidence: medium - the meaning of status bits $06/$70 comes from the inline comments (young / pregnant, sick, cranky)
+;;
 fPlayerInteraction0x43:
     SEP #$20                                                   ;81E79E|E220    |      ;
     REP #$10                                                   ;81E7A0|C210    |      ;
@@ -2391,6 +2864,17 @@ fPlayerInteraction0x43:
     RTS                                                        ;81EBD4|60      |      ;
  
  
+;;
+; @brief    Sell a chicken to the dealer (and the autumn hawker trade for the power berry).
+; @details  Same state machine as fPlayerInteraction0x43 with chickens: chicken index = $09A1 - $24 (fGameEngine_GetChickenData), count
+; nOwnedChickens, price nCowSalePrice, flag daily4 $1000, happiness -20 on sale. The hawker variant triggers in the fall (!SEASON_FALL)
+; once per year (strcFlags.event2 bit $4000): dialogs $0148 (offer berries for the chicken), $014A (accepted: the chicken is replaced by
+; AI script $1F at its position and daily4 |= $1000) and $014C (declined).
+; @case     $44
+; @modifies nOwnedChickens, strcFlags.event2, strcFlags.daily4, nPlayerInteractionArg1/2
+; @calls    fGameEngine_GetChickenData, fGameEngine_AddProfit, fGameEngine_AddHappiness, fAI_StartSlotScriptAtFrontTile, fAI_SetSlotScript, fDialog_DialogHandler
+; @note     confidence: medium - the phase numbering mirrors fPlayerInteraction0x43
+;;
 fPlayerInteraction0x44:
     SEP #$20                                                   ;81EBD5|E220    |      ;
     REP #$10                                                   ;81EBD7|C210    |      ;
@@ -2838,6 +3322,14 @@ fPlayerInteraction0x44:
     RTS                                                        ;81EFAC|60      |      ;
  
  
+;;
+; @brief    A calf was born: the farmhand walks in, announces it and the player names the calf.
+; @details  Phase 0: waits 8 frames. Phase 1: forced walk left for $20 frames. Phase 2: dialog $0317. Phase 3: waits for the dialog, sets
+; strcMenuData.nameDestinationIdx = 2 (!NI_COWBORN) and requests the name screen (mapFlags |= $2000). Phase 4: ends.
+; @case     $45
+; @modifies strcMenuData.nameDestinationIdx, strcDialogDisplay.mapFlags
+; @calls    fDialog_DialogHandler
+;;
 fPlayerInteraction0x45:
     SEP #$20                                                   ;81EFAD|E220    |      ;
     REP #$10                                                   ;81EFAF|C210    |      ;
@@ -2924,6 +3416,14 @@ fPlayerInteraction0x45:
     RTS                                                        ;81F060|60      |      ;
  
  
+;;
+; @brief    Shipping payout visit: the shipper (AI slot 6) reports the total of the shipped goods.
+; @details  Phase 0: AIExecute(6,0,$26). Phase 1: after $42 frames dialog $031A with the total (nShippingProfit), or $031B when nothing was
+; shipped. Phase 2: after the dialog the shipper leaves (slot 6 dismissed, script $27). Phase 3: after $42 frames ends.
+; @case     $46
+; @param    nShippingProfit
+; @calls    fAI_DeactivateSlotAndObject, fDialog_DialogHandler
+;;
 fPlayerInteraction0x46:
     SEP #$20                                                   ;81F061|E220    |      ;
     REP #$10                                                   ;81F063|C210    |      ;
@@ -3015,6 +3515,19 @@ fPlayerInteraction0x46:
     RTS                                                        ;81F120|60      |      ;
  
  
+;;
+; @brief    House expansion (carpenter): checks wood and money, charges them and starts the construction.
+; @details  Phase 0 (after $20 frames): in year 0 before fall sets strcFlags.event7 bit $0004. If nReqWoodForExpansion == 250 (first upgrade)
+; the stored wood must be >= 250, otherwise >= 500 (second upgrade); if wood is short dialog $0137 (not enough materials, phase 1),
+; else the offer dialog $0134 (5000G) / $013B (10000G) and phase 3. Phase 1: starts AI slot 9 script $2D (carpenter), phase 2 waits
+; $C6 frames. Phase 3: on yes charges 5000G / 10000G (fGameEngine_AddProfit); a failure shows $0304, success removes the wood
+; (fGameEngine_AddWood), shows $0135, resets nConstructionDayCounter and sets strcFlags.event2 bit $0080 (construction under way);
+; on no shows $0136.
+; @case     $47
+; @modifies nStoredWood, nConstructionDayCounter, strcFlags.event2, strcFlags.event7
+; @calls    fGameEngine_AddProfit, fGameEngine_AddWood, fAI_SetSlotScript, fDialog_DialogHandler
+; @note     the local labels .upgrade and .notEnoughWood are swapped in meaning: .upgrade shows the "not enough materials" dialog, .notEnoughWood the offer
+;;
 fPlayerInteraction0x47:
     SEP #$20                                                   ;81F121|E220    |      ;
     REP #$10                                                   ;81F123|C210    |      ;
@@ -3231,6 +3744,17 @@ fPlayerInteraction0x47:
     RTS                                                        ;81F2D9|60      |      ;
  
  
+;;
+; @brief    House expansion finished: the carpenters present the new house (reward happiness, first-time clock gift).
+; @details  Phase 0 (after $20 frames): strcFlags.event1 bit $0080 set -> +100 happiness and dialog $0140 ("Super Deluxe Great Log House"),
+; else +50 and dialog $013D. Phase 1: if event1 bit $0080 is clear and strcFlags.event7 bit $0004 is set, the player is given the clock
+; (strcFlags.event6 bit $4000, dialog $025C, phase 3); otherwise both carpenter slots (9 and $A, scripts $38/$39) leave and phase 2 waits
+; $C6 frames before ending.
+; @case     $48
+; @modifies strcFlags.event6, nPlayerInteractionArg1/2
+; @calls    fGameEngine_AddHappiness, fAI_SetSlotScript, fDialog_DialogHandler
+; @note     confidence: medium for the clock gift condition
+;;
 fPlayerInteraction0x48:
     SEP #$20                                                   ;81F2DA|E220    |      ;
     REP #$10                                                   ;81F2DC|C210    |      ;
@@ -3374,6 +3898,12 @@ fPlayerInteraction0x48:
     RTS                                                        ;81F40D|60      |      ;
  
  
+;;
+; @brief    The saddle bag maker finishes: dialog $0300 (horse is grown, shipping saddle bags), then AI slot $B script $1E.
+; @details  Phase 0 waits $20 frames, then dialog; phase 1 starts the script; phase 2 waits $C6 frames and ends.
+; @case     $49
+; @calls    fAI_SetSlotScript, fDialog_DialogHandler
+;;
 fPlayerInteraction0x49:
     SEP #$20                                                   ;81F40E|E220    |      ;
     REP #$10                                                   ;81F410|C210    |      ;
@@ -3440,6 +3970,12 @@ fPlayerInteraction0x49:
     RTS                                                        ;81F48F|60      |      ;
  
  
+;;
+; @brief    Egg Festival: search egg hiding spot 1 (tile $FB at X=$0010, Y=$0030), then resolve it in fPlayerInteraction_Return.
+; @case     $4A
+; @calls    fSetTileAtCoords, fPlayerInteraction_Return
+; @note     confidence: medium - spot numbering follows the order of the handlers
+;;
 fPlayerInteraction0x4A:
     REP #$30                                                   ;81F490|C230    |      ;
     LDA.W #$00FB                                               ;81F492|A9FB00  |      ;
@@ -3453,6 +3989,12 @@ fPlayerInteraction0x4A:
     JMP.W fPlayerInteraction_Return                            ;81F4AA|4C56F5  |81F556;
  
  
+;;
+; @brief    Egg Festival: search egg hiding spot 2 (tile $FB at X=$00B0, Y=$0090), then resolve it in fPlayerInteraction_Return.
+; @case     $4B
+; @calls    fSetTileAtCoords, fPlayerInteraction_Return
+; @note     confidence: medium - spot numbering follows the order of the handlers
+;;
 fPlayerInteraction0x4B:
     REP #$30                                                   ;81F4AD|C230    |      ;
     LDA.W #$00FB                                               ;81F4AF|A9FB00  |      ;
@@ -3466,6 +4008,12 @@ fPlayerInteraction0x4B:
     JMP.W fPlayerInteraction_Return                            ;81F4C7|4C56F5  |81F556;
  
  
+;;
+; @brief    Egg Festival: search egg hiding spot 3 (tile $FB at X=$01C0, Y=$0050), then resolve it in fPlayerInteraction_Return.
+; @case     $4C
+; @calls    fSetTileAtCoords, fPlayerInteraction_Return
+; @note     confidence: medium - spot numbering follows the order of the handlers
+;;
 fPlayerInteraction0x4C:
     REP #$30                                                   ;81F4CA|C230    |      ;
     LDA.W #$00FB                                               ;81F4CC|A9FB00  |      ;
@@ -3479,6 +4027,12 @@ fPlayerInteraction0x4C:
     BRA fPlayerInteraction_Return                              ;81F4E4|8070    |81F556;
  
  
+;;
+; @brief    Egg Festival: search egg hiding spot 4 (tile $FB at X=$02A0, Y=$0030), then resolve it in fPlayerInteraction_Return.
+; @case     $4D
+; @calls    fSetTileAtCoords, fPlayerInteraction_Return
+; @note     confidence: medium - spot numbering follows the order of the handlers
+;;
 fPlayerInteraction0x4D:
     REP #$30                                                   ;81F4E6|C230    |      ;
     LDA.W #$00FB                                               ;81F4E8|A9FB00  |      ;
@@ -3492,6 +4046,12 @@ fPlayerInteraction0x4D:
     BRA fPlayerInteraction_Return                              ;81F500|8054    |81F556;
  
  
+;;
+; @brief    Egg Festival: search egg hiding spot 5 (tile $FB at X=$0050, Y=$02C0), then resolve it in fPlayerInteraction_Return.
+; @case     $4E
+; @calls    fSetTileAtCoords, fPlayerInteraction_Return
+; @note     confidence: medium - spot numbering follows the order of the handlers
+;;
 fPlayerInteraction0x4E:
     REP #$30                                                   ;81F502|C230    |      ;
     LDA.W #$00FB                                               ;81F504|A9FB00  |      ;
@@ -3505,6 +4065,12 @@ fPlayerInteraction0x4E:
     BRA fPlayerInteraction_Return                              ;81F51C|8038    |81F556;
  
  
+;;
+; @brief    Egg Festival: search egg hiding spot 6 (tile $FB at X=$0210, Y=$0250), then resolve it in fPlayerInteraction_Return.
+; @case     $4F
+; @calls    fSetTileAtCoords, fPlayerInteraction_Return
+; @note     confidence: medium - spot numbering follows the order of the handlers
+;;
 fPlayerInteraction0x4F:
     REP #$30                                                   ;81F51E|C230    |      ;
     LDA.W #$00FB                                               ;81F520|A9FB00  |      ;
@@ -3518,6 +4084,12 @@ fPlayerInteraction0x4F:
     BRA fPlayerInteraction_Return                              ;81F538|801C    |81F556;
  
  
+;;
+; @brief    Egg Festival: search egg hiding spot 7 (tile $FB at X=$0210, Y=$0330), then resolve it in fPlayerInteraction_Return.
+; @case     $50
+; @calls    fSetTileAtCoords, fPlayerInteraction_Return
+; @note     confidence: medium - spot numbering follows the order of the handlers
+;;
 fPlayerInteraction0x50:
     REP #$30                                                   ;81F53A|C230    |      ;
     LDA.W #$00FB                                               ;81F53C|A9FB00  |      ;
@@ -3531,6 +4103,17 @@ fPlayerInteraction0x50:
     BRA fPlayerInteraction_Return                              ;81F554|8000    |81F556;
  
  
+;;
+; @brief    Egg Festival: resolve the egg hiding spot A (0..7) after its tile was set: pick up the egg or restore the tile.
+; @details  The hidden egg colour is $09A4[spot] (0 = nothing hidden; 1..5 are shuffled over the 8 spots by the town event). If a colour exists
+; and its "already scored" bit (strcFlags.unknown3 bit colour-1, aPlayerInteraction_SetFlags) is clear, the player carries the egg
+; item $1D + colour (!PACTION_ITEMONHAND). Otherwise the empty tile $A1 is drawn back with fMap_UpdateCurrentTilemap at ($09AD, $09AF).
+; The interaction ends in both cases.
+; @param    A   spot index 0..7
+; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
+; @calls    fMap_UpdateCurrentTilemap
+; @note     confidence: medium - flag/egg semantics derived from AI script 0x28 (Egg Festival), not verified in game
+;;
 fPlayerInteraction_Return:
     REP #$30                                                   ;81F556|C230    |      ;
     TAX                                                        ;81F558|AA      |      ;
@@ -3568,6 +4151,13 @@ fPlayerInteraction_Return:
     RTS                                                        ;81F5AF|60      |      ;
  
  
+;;
+; @brief    Food vendor sells a Starshine rice ball for 200G (+1 happiness).
+; @details  Phase 0: dialog $024B (offer). Phase 1: yes -> fGameEngine_AddProfit(-200G) ($024C thanks) or $0213 when too poor; no -> $024D.
+; Phase 2: !PACTION_AUTOPILOT with eating sprite $30 and +1 happiness. Phase 3: waits for the dialog. Phase 4: after $64 frames action NONE and ends.
+; @case     $51
+; @calls    fGameEngine_AddProfit, fGameEngine_AddHappiness, fPlayer_UpdateSpriteObject, fDialog_DialogHandler
+;;
 fPlayerInteraction0x51:
     SEP #$20                                                   ;81F5B0|E220    |      ;
     REP #$10                                                   ;81F5B2|C210    |      ;
@@ -3704,10 +4294,21 @@ fPlayerInteraction0x51:
     BRA fPlayerInteraction_ReturnShared                                         ;81F6D4|8000    |81F6D6;
  
  
+;;
+; @brief    Shared RTS of the vendor handlers (fPlayerInteraction0x51 / 0x52).
+; @note     a FIXME in the trace marks it as a placeholder for a local return label
+;;
 fPlayerInteraction_ReturnShared:
     RTS                                                        ;81F6D6|60      |      ; FIXME: I want to be .return
  
  
+;;
+; @brief    Food vendor sells a dumpling for 300G (+3 happiness); same flow as fPlayerInteraction0x51.
+; @details  Offer dialog $024A, price -300G ($FFE2 x 10G), eating sprite $FB, +3 happiness, ends after $64 frames.
+; @case     $52
+; @calls    fGameEngine_AddProfit, fGameEngine_AddHappiness, fPlayer_UpdateSpriteObject, fDialog_DialogHandler
+; @note     one path (not enough money) jumps to fPlayerInteraction_ReturnShared instead of .return (marked BUG in the trace; harmless RTS)
+;;
 fPlayerInteraction0x52:
     SEP #$20                                                   ;81F6D7|E220    |      ;
     REP #$10                                                   ;81F6D9|C210    |      ;
@@ -3848,6 +4449,15 @@ fPlayerInteraction0x52:
     RTS                                                        ;81F7FE|60      |      ;
  
  
+;;
+; @brief    Take an egg from the coop: carries !CITEM_EGG and clears its bit in nEggInCoopFlags.
+; @details  Computes the tile in front of the player, finds which of the 13 positions of aGameEngine_AddChickenPositionsData matches its
+; X (rounded to 16, entry X - 8) and clears the corresponding bit with aPlayerInteraction_ResetFlags.
+; @case     $53
+; @modifies nEggInCoopFlags, strcPlayerData.carryItemId, strcPlayer.action
+; @calls    fStoreTileOnFrontOfPlayerAtDistance
+; @note     the .deadloop spins forever if no position matches (cannot happen with a valid coop tile)
+;;
 fPlayerInteraction0x53:
     SEP #$20                                                   ;81F7FF|E220    |      ;
     REP #$10                                                   ;81F801|C210    |      ;
@@ -3904,6 +4514,12 @@ fPlayerInteraction0x53:
     RTS                                                        ;81F869|60      |      ;
  
  
+;;
+; @brief    Read the florist's crop note: 3 options (tomato/corn, turnip/potato, grass seeds).
+; @details  Phase 0: dialog $0455. Phase 1: B cancels; option 0 -> $0456, 1 -> $0457, 2 -> $0458; the interaction ends after the text.
+; @case     $54
+; @calls    fDialog_DialogHandler, fDialog_EndDialogRestoreScroll
+;;
 fPlayerInteraction0x54_FloristNotebook:
     SEP #$20                                                   ;81F86A|E220    |      ;
     REP #$10                                                   ;81F86C|C210    |      ;
@@ -3998,6 +4614,12 @@ fPlayerInteraction0x54_FloristNotebook:
     RTS                                                        ;81F941|60      |      ;
  
  
+;;
+; @brief    Read the livestock note: 5 options (cow, chicken, milk, egg, grass).
+; @details  Phase 0: dialog $0459. Phase 1: B cancels; options 0..4 -> $045A..$045E.
+; @case     $55
+; @calls    fDialog_DialogHandler, fDialog_EndDialogRestoreScroll
+;;
 fPlayerInteraction0x55_AnimalNotebook:
     SEP #$20                                                   ;81F942|E220    |      ;
     REP #$10                                                   ;81F944|C210    |      ;
@@ -4122,6 +4744,10 @@ fPlayerInteraction0x55_AnimalNotebook:
     RTS                                                        ;81FA68|60      |      ;
  
  
+;;
+; @brief    Waits two calls (nPlayerInteractionArg2 reaches 2) and ends the interaction.
+; @case     $56
+;;
 fPlayerInteraction0x56:
     SEP #$20                                                   ;81FA69|E220    |      ;
     REP #$10                                                   ;81FA6B|C210    |      ;
@@ -4134,6 +4760,12 @@ fPlayerInteraction0x56:
   + RTS                                                        ;81FA83|60      |      ;
  
  
+;;
+; @brief    Shows dialog $0246 (a patron's remark about Ann's cooking), or $0491 when the player is married to Ann; ends.
+; @case     $57
+; @calls    fDialog_DialogHandler
+; @note     confidence: low - speaker not identified
+;;
 fPlayerInteraction0x57:
     REP #$30                                                   ;81FA84|C230    |      ;
     LDX.W #$0491                                               ;81FA86|A29104  |      ;
@@ -4152,6 +4784,12 @@ fPlayerInteraction0x57:
     RTS                                                        ;81FAB3|60      |      ;
  
  
+;;
+; @brief    aPlayerInteraction_SetFlags / aPlayerInteraction_ResetFlags: 16 single-bit masks (1<<N) and their complements.
+; @format   16 words each
+; @index    bit number * 2
+; @used_by  fPlayerInteraction_Return (set masks vs. strcFlags.unknown3), fPlayerInteraction0x53 (reset masks on nEggInCoopFlags)
+;;
     incsrc "../../../build/gen/blocks/player_interaction_flags.asm"
  
     pad $81FFFF
