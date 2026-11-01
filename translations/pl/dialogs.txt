@@ -1,5 +1,5 @@
 @@ sDialog_0x0000 @@
-Dzień dobry, prognoza pogody na jutro. Jutro będzie słonecznie i spokojnie<NEXT>przez cały dzień.<END>
+Dzień dobry, prognoza pogody na jutro.<NEXT>Jutro będzie słonecznie i spokojnie przez cały dzień.<END>
 
 @@ sDialog_0x0001 @@
 Upały trwają, prawda? Jutro przez cały dzień będzie bezchmurnie.<END>
@@ -11,7 +11,7 @@ Jesienne góry pięknie się wybarwiły. Jutro niebo będzie błękitne.<END>
 Robi się coraz zimniej, jak się miewacie? Jutro będzie słonecznie.<END>
 
 @@ sDialog_0x0004 @@
-Dzień dobry, prognoza na jutro: od północy zacznie padać i deszcz utrzyma się<NEXT>przez cały dzień.<END>
+Dzień dobry, prognoza na jutro:<NEXT>od północy zacznie padać i deszcz utrzyma się przez cały dzień.<END>
 
 @@ sDialog_0x0005 @@
 Prognoza na jutro: od rana ulewny deszcz, miejscami z burzami.<END>
@@ -47,16 +47,16 @@ Dobranoc.<END>
 "Sierp"<BR>Kosz trawę na paszę!<NEXT>To jedzenie dla kur i krów, a gdy zabraknie, będzie kiepsko!<END>
 
 @@ sDialog_0x0010 @@
-"Motyka"<BR>Spulchnij ziemię i zrób pole! Uprawiaj na nim<NEXT>warzywa!<NEXT>Wypróbuj różne sposoby zakładania pól!<END>
+"Motyka"<BR>Spulchnij ziemię i zrób pole!<NEXT>Uprawiaj na nim warzywa!<NEXT>Wypróbuj różne sposoby zakładania pól!<END>
 
 @@ sDialog_0x0011 @@
-"Siekiera"<BR>Porąb pniaki na drewno! Drewno do wielu rzeczy się<NEXT>przyda!<NEXT>Uderzaj w jeden punkt! Nie naciskaj krzyżaka.<END>
+"Siekiera"<BR>Porąb pniaki na drewno!<NEXT>Drewno do wielu rzeczy się przyda!<NEXT>Uderzaj w jeden punkt! Nie naciskaj krzyżaka.<END>
 
 @@ sDialog_0x0012 @@
-"Młot"<BR>Rozbijaj kamienie i połamane płoty!<NEXT>Duże głazy też rozbijesz, jeśli uderzysz w jeden punkt! Nigdy nie naciskaj<NEXT>krzyżaka.<END>
+"Młot"<BR>Rozbijaj kamienie i połamane płoty!<NEXT>Duże głazy też rozbijesz, jeśli uderzysz w jeden punkt!<NEXT>Nigdy nie naciskaj krzyżaka.<END>
 
 @@ sDialog_0x0013 @@
-"Konewka"<BR>Podlewaj uprawy! Raz dziennie. W deszczowe dni<NEXT>nie trzeba.<NEXT>Gdy zabraknie wody, nabierz ją w studni lub stawie.<END>
+"Konewka"<BR>Podlewaj uprawy! Raz dziennie.<NEXT>W deszczowe dni nie trzeba.<NEXT>Gdy zabraknie wody, nabierz ją w studni lub stawie.<END>
 
 @@ sDialog_0x0014 @@
 "Dojarka"<BR>Dój krowy i wysyłaj mleko!<END>
@@ -65,13 +65,13 @@ Dobranoc.<END>
 "Szczotka"<BR>Szczotkowanie zwiększa przywiązanie krowy!<NEXT>Krowa, która cię lubi, daje dużo mleka!<END>
 
 @@ sDialog_0x0016 @@
-"Dzwonek"<BR>Służy do zaganiania krów! Obserwuj je i prowadź<NEXT>sprawnie!<END>
+"Dzwonek"<BR>Służy do zaganiania krów!<NEXT>Obserwuj je i prowadź sprawnie!<END>
 
 @@ sDialog_0x0017 @@
-"Nasiona warzyw"<BR>Każde mają swój czas siewu, więcej dowiesz się w<NEXT>kwiaciarni!<NEXT>Nasiona sieje się na polu i trzeba je podlewać, inaczej nie wykiełkują!<END>
+"Nasiona warzyw"<BR>Każde mają swój czas siewu,<NEXT>więcej dowiesz się w kwiaciarni!<NEXT>Nasiona sieje się na polu i trzeba je podlewać, inaczej nie wykiełkują!<END>
 
 @@ sDialog_0x0018 @@
-"Nasiona trawy"<BR>Siej je na polu od wiosny do lata. Rosną i bez<NEXT>podlewania.<NEXT>Bez pastwiska nie utrzymasz krów ani kur!<NEXT>Kosić można, gdy trawa mocno się zazieleni.<END>
+"Nasiona trawy"<BR>Siej je na polu od wiosny do lata.<NEXT>Rosną i bez podlewania.<NEXT>Bez pastwiska nie utrzymasz krów ani kur!<NEXT>Kosić można, gdy trawa mocno się zazieleni.<END>
 
 @@ sDialog_0x0019 @@
 "Farba"<BR>Pomaluj ładnie dom!<END>
@@ -101,7 +101,7 @@ Tutaj zdejmij ubranie.<END>
 Uwaga! Grozi osunięciem!<END>
 
 @@ sDialog_0x0022 @@
-<00AB>dom rzemieślnika. Przyjmujemy zlecenia i porady w sprawie rozbudowy<NEXT>domu.<NEXT>Nieczynne w soboty, niedziele i święta.<END>
+<00AB>dom rzemieślnika.<NEXT>Przyjmujemy zlecenia i porady w sprawie rozbudowy domu.<NEXT>Nieczynne w soboty, niedziele i święta.<END>
 
 @@ sDialog_0x0023 @@
 Znalazłem dziennik!<NEXT><OPTLBL 1>Czytaj<OPTLBL 2>Nie czytaj<OPT 2>
@@ -173,7 +173,7 @@ Dziś też masz wolne? Od samej pracy człowiek się wykończy.<END>
 Ludzie w miasteczku mówią co innego zależnie od pogody, dnia tygodnia i pory roku.<END>
 
 @@ sDialog_0x003A @@
-Szczęście każdy rozumie inaczej, prawda? Myślę, że najlepiej robić to, na co<NEXT>ma się ochotę.<NEXT>Ale to chyba nie jest prawdziwe szczęście, jeśli sprawia się innym kłopot<NEXT>albo budzi ich urazę.<END>
+Szczęście każdy rozumie inaczej, prawda?<NEXT>Myślę, że najlepiej robić to, na co ma się ochotę.<NEXT>Ale to chyba nie jest prawdziwe szczęście,<NEXT>jeśli sprawia się innym kłopot albo budzi ich urazę.<END>
 
 @@ sDialog_0x003B @@
 Ciężko pracujesz. Czasem trzeba pogadać z ludźmi albo pójść w góry…<NEXT>Odpoczynek też jest potrzebny.<END>
@@ -182,19 +182,19 @@ Ciężko pracujesz. Czasem trzeba pogadać z ludźmi albo pójść w góry…<NE
 W tym kościele czci się boga upraw. Dobrze jest tu porządnie się pomodlić.<END>
 
 @@ sDialog_0x003D @@
-Najlepiej jest tak spokojnie poczytać książkę. Tak, to jedno z moich małych<NEXT>szczęść.<END>
+Najlepiej jest tak spokojnie poczytać książkę.<NEXT>Tak, to jedno z moich małych szczęść.<END>
 
 @@ sDialog_0x003E @@
 Wiesz, co to kappa? Podobno ktoś ją widział w górskim stawie.<END>
 
 @@ sDialog_0x003F @@
-Nie wolno myśleć, że robienie złych rzeczy jest w porządku, byle nikt się nie<NEXT>dowiedział.<NEXT>Każdy człowiek popełnia błędy, nic na to nie poradzimy.<NEXT>Ale nie wolno stracić poczucia winy.<END>
+Nie wolno myśleć, że robienie złych rzeczy jest w porządku,<NEXT>byle nikt się nie dowiedział.<NEXT>Każdy człowiek popełnia błędy, nic na to nie poradzimy.<NEXT>Ale nie wolno stracić poczucia winy.<END>
 
 @@ sDialog_0x0040 @@
 Ann jest taka, jaka jest… Czy ona w ogóle kiedyś wyjdzie za mąż?<END>
 
 @@ sDialog_0x0041 @@
-Cześć, jak tam praca? Podobno pojawiają się dzikie psy, jeśli nie naprawi się<NEXT>płotów.<END>
+Cześć, jak tam praca?<NEXT>Podobno pojawiają się dzikie psy, jeśli nie naprawi się płotów.<END>
 
 @@ sDialog_0x0042 @@
 Ja myślę, że Bóg istnieje. Ty też tak myślisz, prawda?<END>
@@ -209,7 +209,7 @@ Cześć. Też na spacerze? Odpoczynek jest ważny.<NEXT>Jeśli co dzień pracuje
 Nie mogę przestać się martwić o Ann.<NEXT><VAR player>, jesteś w podobnym wieku. Co sądzisz o takiej dziewczynie jak Ann?<NEXT>…Ach, przepraszam. Chyba trochę wypiłem.<END>
 
 @@ sDialog_0x0046 @@
-Dzień dooobry. Zawsze taki żwawy! Jedna torebka nasion starcza na jeden siew, więc<NEXT>warto kupować kilka naraz.<END>
+Dzień dooobry. Zawsze taki żwawy!<NEXT>Jedna torebka nasion starcza na jeden siew, więc warto kupować kilka naraz.<END>
 
 @@ sDialog_0x0047 @@
 Trawa rośnie też jesienią, więc przed zimą warto nakosić jej sporo.<END>
@@ -236,7 +236,7 @@ Uczciwa praca bywa ciężka, ale trzymaj się!<END>
 Niech interes się kręci, niech interes się kręci…<NEXT>Co? To nie jest bóg interesów? No cóż, niech będzie.<END>
 
 @@ sDialog_0x004F @@
-Słońce dobrze robi na zdrowie. Dużo jedz i dużo pracuj! Zdrowie to podstawa<NEXT>szczęścia!<END>
+Słońce dobrze robi na zdrowie. Dużo jedz i dużo pracuj!<NEXT>Zdrowie to podstawa szczęścia!<END>
 
 @@ sDialog_0x0050 @@
 Jak jesteś zmęczony, zjedz coś. Nasze ciasto świetnie przywraca siły.<END>
@@ -266,7 +266,7 @@ W kościele człowiek się uspokaja.<NEXT>Bo ludzi tu mało. W święta za to zb
 Za młodu czas płynął powoli.<NEXT>A teraz rok mija w mgnieniu oka. Dziwne, naprawdę.<END>
 
 @@ sDialog_0x0059 @@
-Miej serce pełne współczucia. Ludzie odpłacają dobrocią za<NEXT>dobroć.<NEXT>Oczywiście ze zwierzętami jest tak samo.<END>
+Miej serce pełne współczucia.<NEXT>Ludzie odpłacają dobrocią za dobroć.<NEXT>Oczywiście ze zwierzętami jest tak samo.<END>
 
 @@ sDialog_0x005A @@
 Codzienne wydarzenia z natury nie są ani dobre, ani złe.<NEXT>Wszystko zależy od nastawienia. Naprawdę.<END>
@@ -275,7 +275,7 @@ Codzienne wydarzenia z natury nie są ani dobre, ani złe.<NEXT>Wszystko zależy
 Przez deszcz siły nie ubywają gwałtownie, ale lepiej odpocząć.<NEXT>Naprawdę.<END>
 
 @@ sDialog_0x005C @@
-Krowy to poważna sprawa. Trzeba o nie dbać, żeby nie zachorowały.<NEXT>Leży tam moja notatka. Przeczytaj ją uważnie i przynajmniej chorobom<NEXT>zapobiegaj.<END>
+Krowy to poważna sprawa. Trzeba o nie dbać, żeby nie zachorowały.<NEXT>Leży tam moja notatka.<NEXT>Przeczytaj ją uważnie i przynajmniej chorobom zapobiegaj.<END>
 
 @@ sDialog_0x005D @@
 Hej, znoszą ci się kury? Muszą być w kurniku. I karm je codziennie!<NEXT>Jak opuścisz choćby jeden dzień, przez 3 dni nie zniosą jajek.<END>
@@ -284,19 +284,19 @@ Hej, znoszą ci się kury? Muszą być w kurniku. I karm je codziennie!<NEXT>Jak
 Hej, młody! Zanim pogoda się popsuje, zapędź zwierzęta do zagrody!<END>
 
 @@ sDialog_0x005F @@
-Wiesz, jak krowami zajmiesz się z miłością, dają więcej mleka… Hej, słuchasz<NEXT>mnie?<NEXT>Przywiązują się, rodzą się z nich dobre cielaki… Słuchaj, jak się do ciebie<NEXT>mówi!<END>
+Wiesz, jak krowami zajmiesz się z miłością, dają więcej mleka…<NEXT>Hej, słuchasz mnie?<NEXT>Przywiązują się, rodzą się z nich dobre cielaki…<NEXT>Słuchaj, jak się do ciebie mówi!<END>
 
 @@ sDialog_0x0060 @@
 W życiu nie ma poprawek… Druga szansa może się już nie trafić.<NEXT>Dobrze się zastanów, zanim coś zrobisz.<END>
 
 @@ sDialog_0x0061 @@
-Pytasz, czemu nie chodzę do kościoła? …Nic nie szkodzi. Bóg jest wszędzie<NEXT>i nigdzie.<NEXT>Hi, hi, hi.<END>
+Pytasz, czemu nie chodzę do kościoła? …Nic nie szkodzi.<NEXT>Bóg jest wszędzie i nigdzie.<NEXT>Hi, hi, hi.<END>
 
 @@ sDialog_0x0062 @@
-Leży tam książka, którą napisałam o dziewczętach. Warto ją przeczytać, nic<NEXT>nie stracisz.<END>
+Leży tam książka, którą napisałam o dziewczętach.<NEXT>Warto ją przeczytać, nic nie stracisz.<END>
 
 @@ sDialog_0x0063 @@
-Tak naprawdę jestem też akuszerką. Maria od burmistrza, Ann ze sklepu<NEXT>ze wszystkim,<NEXT>wszystkie je odebrałam.<END>
+Tak naprawdę jestem też akuszerką.<NEXT>Maria od burmistrza, Ann ze sklepu ze wszystkim,<NEXT>wszystkie je odebrałam.<END>
 
 @@ sDialog_0x0064 @@
 Dorośli decydują o wszystkim sami: tego nie rób, to zrób.<NEXT>Dzieci mają przechlapane, no nie?<END>
@@ -347,16 +347,16 @@ Rzeczy wrzucone do skrzyni w nocy nie przetrwają do rana, a szkoda.<END>
 Rzeczy do wysyłki z szopy też zbieram, więc nie martw się.<END>
 
 @@ sDialog_0x0074 @@
-Oglądasz prognozę pogody? Jak zapowiadają deszcz, od razu zapędź zwierzęta do<NEXT>zagrody.<END>
+Oglądasz prognozę pogody?<NEXT>Jak zapowiadają deszcz, od razu zapędź zwierzęta do zagrody.<END>
 
 @@ sDialog_0x0075 @@
-Gdyby wystarczyło zdać się na Boga, żeby być szczęśliwym, nie byłoby<NEXT>kłopotów.<END>
+Gdyby wystarczyło zdać się na Boga, żeby być szczęśliwym,<NEXT>nie byłoby kłopotów.<END>
 
 @@ sDialog_0x0076 @@
 Nie wiadomo, co się w życiu przydarzy.<NEXT>Na wszelki wypadek lepiej odkładać pieniądze.<END>
 
 @@ sDialog_0x0077 @@
-Pieniądze są ważne, ale najważniejsza jest miłość! Miłość!! Ty też tak<NEXT>myślisz, prawda?<END>
+Pieniądze są ważne, ale najważniejsza jest miłość! Miłość!!<NEXT>Ty też tak myślisz, prawda?<END>
 
 @@ sDialog_0x0078 @@
 Jestem wędrownym handlarzem. Chociaż rzadko cokolwiek sprzedaję.<NEXT>Jak masz coś do sprzedania, połóż to na tamtym stole.<END>
@@ -404,7 +404,7 @@ Oby wiosna przyszła jak najszybciej.<END>
 Wierzysz w Boga?<NEXT><OPTLBL 1>Tak<OPTLBL 2>Nie<OPT 2>
 
 @@ sDialog_0x0087 @@
-Och, w dzisiejszych czasach to rzadkość. W niedzielę koniecznie przyjdź do<NEXT>kościoła.<END>
+Och, w dzisiejszych czasach to rzadkość.<NEXT>W niedzielę koniecznie przyjdź do kościoła.<END>
 
 @@ sDialog_0x0088 @@
 Myślę, że ważne nie jest to, czy Bóg istnieje, ale "wierzące serce".<END>
@@ -470,7 +470,7 @@ Czy ja nie jestem jakaś niedziewczęca?<NEXT><OPTLBL 1>No tak<OPTLBL 2>Wcale ni
 …Mówisz wprost.<END>
 
 @@ sDialog_0x009D @@
-Tata ciągle każe mi być dziewczęcą, ale czym właściwie jest bycie<NEXT>dziewczęcą?<END>
+Tata ciągle każe mi być dziewczęcą,<NEXT>ale czym właściwie jest bycie dziewczęcą?<END>
 
 @@ sDialog_0x009E @@
 Wiosna jest super, no nie? Człowiek od razu ma ochotę zabrać się do roboty!<END>
@@ -506,7 +506,7 @@ Dajmy z siebie wszystko, dobrze?<END>
 Pewnie góry są już całkiem białe.<END>
 
 @@ sDialog_0x00A9 @@
-Nie lubię deszczu. Robi się tak wilgotno! Jak już ma padać, to niech porządnie<NEXT>lunie!<END>
+Nie lubię deszczu. Robi się tak wilgotno!<NEXT>Jak już ma padać, to niech porządnie lunie!<END>
 
 @@ sDialog_0x00AA @@
 …Tata ciągle każe mi wyjść za mąż…<NEXT>A jak wyjdę, zostanie sam jak palec…<NEXT>Czy nie jest mu smutno…?<END>
@@ -554,7 +554,7 @@ O tej porze góry są piękne. I jest tam wiele darów natury.<END>
 Zimą jest smutno…<NEXT>Ale bez zimy nie doceniłoby się wiosny, prawda?<END>
 
 @@ sDialog_0x00B9 @@
-Zioła z głębi jaskini, gdy się je zagotuje i wypije, obniżają gorączkę i<NEXT>pomagają na ból głowy.<END>
+Zioła z głębi jaskini, gdy się je zagotuje i wypije,<NEXT>obniżają gorączkę i pomagają na ból głowy.<END>
 
 @@ sDialog_0x00BA @@
 Kwiaty ze sklepu to te, które hodujemy tutaj.<END>
@@ -617,10 +617,10 @@ Tak? Ja też je uwielbiam.<END>
 Kłamiesz. Zwierzęta nie lgną do ludzi, którzy ich nie lubią.<END>
 
 @@ sDialog_0x00CE @@
-<VAR dog> zaszczeka, jeśli pojawią się dzikie psy. Sprawdź, czy płoty nie są<NEXT>zepsute.<END>
+<VAR dog> zaszczeka, jeśli pojawią się dzikie psy.<NEXT>Sprawdź, czy płoty nie są zepsute.<END>
 
 @@ sDialog_0x00CF @@
-Opieka nad zwierzętami jest trudna. Zawsze trzeba uważać, żeby nie<NEXT>zachorowały…<NEXT>Czuję się jak matka, która pilnuje dziecka.<END>
+Opieka nad zwierzętami jest trudna.<NEXT>Zawsze trzeba uważać, żeby nie zachorowały…<NEXT>Czuję się jak matka, która pilnuje dziecka.<END>
 
 @@ sDialog_0x00D0 @@
 Ciągle biegasz tu i tam, co? Mimo zimna naprawdę masz energię.<END>
@@ -736,10 +736,7 @@ Co wieczór odbieram to, co włożysz do skrzyni wysyłkowej. Miło mi.<NEXT>
 Zanim weźmiesz się za farmę, popytaj ludzi w miasteczku o różne rzeczy.<END>
 
 @@ sDialog_0x00F4 @@
-Cześć, skąd przyjechałeś?… Co, rozstałeś się z rodzicami i sam prowadzisz<NEXT>
-farmę?<NEXT>
-Niezły jesteś. Ale na farmie nic nie ma, co?… Na naukę zawodu?<NEXT>
-Masz wspaniałych rodziców.<END>
+Cześć, skąd przyjechałeś?…<NEXT>Co, rozstałeś się z rodzicami i sam prowadzisz farmę?<NEXT>Niezły jesteś. Ale na farmie nic nie ma, co?… Na naukę zawodu?<NEXT>Masz wspaniałych rodziców.<END>
 
 @@ sDialog_0x00F5 @@
 Witaj, miło cię poznać. Jestem burmistrzem tego miasteczka.<NEXT>
@@ -783,17 +780,13 @@ Czeka cię wiele prób, ale jakoś to będzie.<NEXT>
 Powodzenia.<END>
 
 @@ sDialog_0x00FF @@
-Dziś kończy się ten rok. Jaki był dla ciebie?<NEXT>
-Jutro w miasteczku będzie gwarno od ludzi idących na szczyt, by zobaczyć<NEXT>
-pierwszy wschód słońca.<END>
+Dziś kończy się ten rok. Jaki był dla ciebie?<NEXT>Jutro w miasteczku będzie gwarno od ludzi idących na szczyt,<NEXT>by zobaczyć pierwszy wschód słońca.<END>
 
 @@ sDialog_0x0100 @@
 "Skrzynia na zwierzęta" Po rozmowie w sklepie wstaw tu zwierzę. Handlarz zwierząt<END>
 
 @@ sDialog_0x0101 @@
-Narzędzia leżą w szopie i oborze. Podnieś je przyciskiem A, a będziesz<NEXT>
-je mieć w ręku.<NEXT>
-Używa się ich przyciskiem Y.<END>
+Narzędzia leżą w szopie i oborze.<NEXT>Podnieś je przyciskiem A, a będziesz je mieć w ręku.<NEXT>Używa się ich przyciskiem Y.<END>
 
 @@ sDialog_0x0102 @@
 Niestety teraz nic nie mam, ale niedługo coś sprowadzę. Zaglądaj do mnie.<END>
@@ -840,9 +833,7 @@ Jak będziesz chciał kupić zwierzę, zagadaj do mnie przez ladę.<END>
 Początkujący niech zaczną od kur.<END>
 
 @@ sDialog_0x010E @@
-Hej! Wstawiłem krowy do obory i jeszcze dorzuciłem dzwonek do ich<NEXT>
-przywoływania.<NEXT>
-No to na początek nadaj im z miłością imiona! Powodzenia!<END>
+Hej!<NEXT>Wstawiłem krowy do obory i jeszcze dorzuciłem dzwonek do ich przywoływania.<NEXT>No to na początek nadaj im z miłością imiona! Powodzenia!<END>
 
 @@ sDialog_0x010F @@
 Witaj, jestem wędrownym handlarzem. Teraz nic nie mam.<NEXT>
@@ -883,8 +874,7 @@ No to cię odwiozę. Ja też się szkolę w wysyłce.<NEXT>
 Dążmy każdy do swojego celu! Z hartem ducha!!<END>
 
 @@ sDialog_0x0119 @@
-A tak,<NEXT>
-Jak będziesz wracać, daj znać.<END>
+A tak, Jak będziesz wracać,<NEXT>daj znać.<END>
 
 @@ sDialog_0x011A @@
 Myślę, że warto jeszcze trochę posłuchać, co mówią ludzie!<END>
@@ -945,8 +935,7 @@ Do rozbudowy domu przyjdź, jak zbierzesz dość drewna.<NEXT>
 Obok domu stoi tabliczka, widzisz? Sprawdź ją.<END>
 
 @@ sDialog_0x012A @@
-Trwa kampania rozbudowy! Rozbuduj dom do końca lata, a dostaniesz gratis<NEXT>
-specjalną pamiątkę!<END>
+Trwa kampania rozbudowy!<NEXT>Rozbuduj dom do końca lata, a dostaniesz gratis specjalną pamiątkę!<END>
 
 @@ sDialog_0x012B @@
 Jestem wędkarzem i żyję sobie swobodnie.<NEXT>
@@ -1023,9 +1012,7 @@ Gotowe! Patrz, to "Super Luksusowy Wspaniały Dom z Bali"!!<NEXT>
 Sam jestem nim zachwycony. No to cześć.<END>
 
 @@ sDialog_0x0141 @@
-Słuchaj, podobno jest rzadkie nasiono! Wyrasta z niego fasola wysoka aż do<NEXT>
-nieba!<NEXT>
-Aż chciałoby się to zobaczyć.<END>
+Słuchaj, podobno jest rzadkie nasiono!<NEXT>Wyrasta z niego fasola wysoka aż do nieba!<NEXT>Aż chciałoby się to zobaczyć.<END>
 
 @@ sDialog_0x0142 @@
 Hej! Ale się dziś rano wystraszyłem tego trzęsienia ziemi!<NEXT>
@@ -1035,8 +1022,7 @@ Jak sprawdzisz farmę, zajrzyj też w góry!<END>
 …Podoba ci się Nina?<END>
 
 @@ sDialog_0x0144 @@
-Dziś kończy się ten rok. Zdaje się, że dłużył się, a zarazem minął jak z bicza<NEXT>
-strzelił.<END>
+Dziś kończy się ten rok.<NEXT>Zdaje się, że dłużył się, a zarazem minął jak z bicza strzelił.<END>
 
 @@ sDialog_0x0145 @@
 Termin już minął. Trzeba ją czym prędzej wprowadzić do obory.<END>
@@ -1163,15 +1149,13 @@ Lepiej sprawdzić to i owo w okolicy.<END>
 Co? Trzęsienie ziemi? Nie zauważyłem.<END>
 
 @@ sDialog_0x016A @@
-Ciekawe, czy dziadkowi nic nie jest. W górach jest mnóstwo miejsc, gdzie łatwo<NEXT>
-o osunięcie, martwię się.<END>
+Ciekawe, czy dziadkowi nic nie jest.<NEXT>W górach jest mnóstwo miejsc, gdzie łatwo o osunięcie, martwię się.<END>
 
 @@ sDialog_0x016B @@
 Ale się wystraszyłam. A na twojej farmie wszystko dobrze?<END>
 
 @@ sDialog_0x016C @@
-Krowy to delikatne stworzenia. W dni tajfunu, deszczu i śniegu nie<NEXT>
-zostawiaj ich na dworze!<END>
+Krowy to delikatne stworzenia.<NEXT>W dni tajfunu, deszczu i śniegu nie zostawiaj ich na dworze!<END>
 
 @@ sDialog_0x016D @@
 Podobno przez trzęsienie ziemi coś się tu i tam zmieniło.<NEXT>
@@ -1874,10 +1858,7 @@ Jutro Festiwal Zbiorów, co? Znowu już ta pora roku.<END>
 Festiwal Zbiorów to święto, na którym świętuje się zbiory z całego roku.<END>
 
 @@ sDialog_0x023F @@
-Do jutrzejszego wielkiego gulaszu zbiorów<NEXT>
-przynieś coś, co da się normalnie zjeść.<NEXT>
-Nie przynoś żadnych sandałów ani takich rzeczy.<NEXT>
-Wyszedłby z tego gulasz zgrozy.<END>
+Do jutrzejszego wielkiego gulaszu zbiorów przynieś coś,<NEXT>co da się normalnie zjeść.<NEXT>Nie przynoś żadnych sandałów ani takich rzeczy.<NEXT>Wyszedłby z tego gulasz zgrozy.<END>
 
 @@ sDialog_0x0240 @@
 Jutro Festiwal Zbiorów, szefie!<NEXT>
@@ -2045,9 +2026,7 @@ No, naciśnij przełącznik!<NEXT>
 Ahahaha! Wiesz, jak wypiłam alkohol, to motylki, no, latajo, no!<END>
 
 @@ sDialog_0x026E @@
-Jutro Festiwal Gwiezdnej Nocy, szefie!<NEXT>
-Miejsca są różne, więc pogadaj z ludźmi z miasta<NEXT>
-i zdecyduj, dokąd pójść.<END>
+Jutro Festiwal Gwiezdnej Nocy, szefie!<NEXT>Miejsca są różne, więc pogadaj z ludźmi z miasta i zdecyduj,<NEXT>dokąd pójść.<END>
 
 @@ sDialog_0x026F @@
 To wino z dzikich winogron. Słodkie i smaczne. Co powiesz?<NEXT>
@@ -2060,22 +2039,14 @@ Wypijmy za dary ziemi! Na zdrowie!<END>
 Nie jesteś zbyt towarzyski.<END>
 
 @@ sDialog_0x0272 @@
-Jutro Festiwal Kwiatów, szefie!<NEXT>
-Skończ pracę wcześniej i przyjdź na plac przed trzecią!<NEXT>
-Jeśli masz zwierzęta, lepiej daj im wcześniej paszę!<NEXT>
-Rzeczy do wysyłki zostaw w skrzyni,<NEXT>
-a na pewno je wyślę! No to do widzenia, szefie!<END>
+Jutro Festiwal Kwiatów, szefie!<NEXT>Skończ pracę wcześniej i przyjdź na plac przed trzecią!<NEXT>Jeśli masz zwierzęta, lepiej daj im wcześniej paszę!<NEXT>Rzeczy do wysyłki zostaw w skrzyni, a na pewno je wyślę!<NEXT>No to do widzenia, szefie!<END>
 
 @@ sDialog_0x0273 @@
 Informacja o wydarzeniu. Na placu odbędzie się coroczny Festiwal Jajek.<NEXT>
 Pogoda będzie piękna! Zapraszamy wszystkich do udziału.<END>
 
 @@ sDialog_0x0274 @@
-Jutro Festiwal Jajek, szefie!<NEXT>
-Skończ pracę wcześniej i przyjdź na plac przed trzecią!<NEXT>
-Jeśli masz zwierzęta, lepiej daj im wcześniej paszę!<NEXT>
-Rzeczy do wysyłki zostaw w skrzyni,<NEXT>
-a na pewno je wyślę! No to do widzenia, szefie!<END>
+Jutro Festiwal Jajek, szefie!<NEXT>Skończ pracę wcześniej i przyjdź na plac przed trzecią!<NEXT>Jeśli masz zwierzęta, lepiej daj im wcześniej paszę!<NEXT>Rzeczy do wysyłki zostaw w skrzyni, a na pewno je wyślę!<NEXT>No to do widzenia, szefie!<END>
 
 @@ sDialog_0x0275 @@
 To mój popisowy pasztecik z nerkami. Masz ochotę?<NEXT>
@@ -2149,8 +2120,7 @@ Dobrze by było pożegnać stary rok<NEXT>
 i pogadać z ludźmi z miasta!<END>
 
 @@ sDialog_0x028A @@
-No wiesz, to tylko taniec,<NEXT>
-ale wybierasz w nim partnerkę, więc to ma duże znaczenie.<END>
+No wiesz, to tylko taniec, ale wybierasz w nim partnerkę,<NEXT>więc to ma duże znaczenie.<END>
 
 @@ sDialog_0x028B @@
 Kogo zamierzasz poprosić do tańca?<NEXT>
@@ -2165,11 +2135,7 @@ W mieście pachnie pieczonymi ciastami.<NEXT>
 Nie mogę się doczekać, tato!<END>
 
 @@ sDialog_0x028E @@
-Jutro Festiwal Dziękczynienia, szefie!<NEXT>
-To dzień, w którym kobiety pieką ciasto<NEXT>
-dla mężów i ojców, którzy zawsze ciężko pracują,<NEXT>
-i w ten sposób okazują im wdzięczność!<NEXT>
-Jeśli możesz, lepiej pokaż się w mieście, tak myślę!<END>
+Jutro Festiwal Dziękczynienia, szefie!<NEXT>To dzień, w którym kobiety pieką ciasto dla mężów i ojców,<NEXT>którzy zawsze ciężko pracują,<NEXT>i w ten sposób okazują im wdzięczność!<NEXT>Jeśli możesz, lepiej pokaż się w mieście, tak myślę!<END>
 
 @@ sDialog_0x028F @@
 Dlatego, że dziewczyny dają ciasto także osobom, które lubią.<NEXT>
@@ -2270,7 +2236,7 @@ Niebo będzie bezchmurne,<NEXT>
 więc zobaczymy piękne nocne niebo.<END>
 
 @@ sDialog_0x02AD @@
-Festiwal Gwiezdnej Nocy miał pierwotnie być modlitwą<NEXT>w najpiękniejszą gwiaździstą noc roku.<END>
+Festiwal Gwiezdnej Nocy miał pierwotnie być<NEXT>modlitwą w najpiękniejszą gwiaździstą noc roku.<END>
 
 @@ sDialog_0x02AE @@
 Spójrz w niebo. Jutro gwiazdy będą naprawdę piękne.<END>
@@ -2672,7 +2638,7 @@ Co innego, gdybyś go kupił za 1000G.<NEXT><OPTLBL 1>Zapłać<OPTLBL 2>Nie pła
 Tak właśnie żyję. Cześć.<END>
 
 @@ sDialog_0x0333 @@
-Tak? …Jesteś dobry. Nie chcę pieniędzy. Ale<NEXT>każdy żyje na swój sposób. Zrozum to. Cześć.<END>
+Tak? …Jesteś dobry. Nie chcę pieniędzy. Ale każdy żyje na swój sposób. Zrozum to.<NEXT>Cześć.<END>
 
 @@ sDialog_0x0334 @@
 No to nie oddam ci tego królika.<NEXT>Tak właśnie żyję. Cześć.<END>
@@ -2867,7 +2833,7 @@ Na odzyskanie sił - górskie gorące źródło.<END>
 Specjalna oferta na jesienne wakacje!<NEXT>Grzybobranie w górach pełnych kolorowych liści!<NEXT>Przysmak ze szczytu! Trawa Pełni!!<END>
 
 @@ sDialog_0x0374 @@
-10 dnia miesiąca zimy jest Święto Dziękczynienia!<NEXT>Z tej okazji zapraszamy po jajka i mleko<NEXT>ze znaczkiem "Uśmiechnięta Buźka"!<END>
+10 dnia miesiąca zimy jest Święto Dziękczynienia!<NEXT>Z tej okazji zapraszamy po jajka<NEXT>i mleko ze znaczkiem "Uśmiechnięta Buźka"!<END>
 
 @@ sDialog_0x0375 @@
 23 dnia miesiąca wiosny jest Festiwal Kwiatów! Ciesz się cudownymi zapachami!<END>
@@ -3014,7 +2980,7 @@ Co?! To… to kurze pióro?!<END>
 "Sekretna rabata"<BR>Wstęp wzbroniony!!<END>
 
 @@ sDialog_0x03A5 @@
-Festiwale w roku<BR>Wiosna, dzień 1:<BR>Festiwal Nowego Roku<NEXT>Wiosna, dzień 23:<BR>Festiwal Kwiatów<NEXT>Jesień, dzień 12:<BR>Festiwal Zbiorów<NEXT>Jesień, dzień 20:<BR>Festiwal Jajek<NEXT>Zima, dzień 10:<BR>Festiwal Dziękczynienia<NEXT>Zima, dzień 24:<BR>Festiwal Gwiezdnej Nocy<END>
+Festiwale w roku<BR>Wiosna, dzień 1:<BR>Festiwal Nowego Roku Wiosna,<NEXT>dzień 23:<BR>Festiwal Kwiatów Jesień,<NEXT>dzień 12:<BR>Festiwal Zbiorów Jesień,<NEXT>dzień 20:<BR>Festiwal Jajek Zima,<NEXT>dzień 10:<BR>Festiwal Dziękczynienia Zima,<NEXT>dzień 24:<BR>Festiwal Gwiezdnej Nocy<END>
 
 @@ sDialog_0x03A6 @@
 ♥<END>
@@ -3413,7 +3379,7 @@ Kochanie, zabieraj czasem psa <VAR dog> i konia <VAR horse> na spacer.<END>
 Ja też chciałabym nauczyć się jeździć na koniu <VAR horse>.<END>
 
 @@ sDialog_0x042A @@
-Mm, temperatura i reszta warunków są tu idealne do robienia nalewek z leśnych<NEXT>owoców.<END>
+Mm, temperatura i reszta warunków są tu<NEXT>idealne do robienia nalewek z leśnych owoców.<END>
 
 @@ sDialog_0x042B @@
 To nalewka z dzikich winogron. To z woskownicy, a to z borówek brusznicy.<NEXT>Dostałam je od wujka.<NEXT>Jak będą gotowe, podzielę się ze wszystkimi.<END>
@@ -3434,7 +3400,7 @@ Pada dużo śniegu, więc płoty dość często się psują.<END>
 Pracy jest teraz mniej, więc chętnie zaprosiłabym ludzi i porządnie się zabawiła.<END>
 
 @@ sDialog_0x0431 @@
-Słuchaj, czy trzask płonących polan i zapach dymu nie budzą w tobie<NEXT>nostalgii?<END>
+Słuchaj,<NEXT>czy trzask płonących polan i zapach dymu nie budzą w tobie nostalgii?<END>
 
 @@ sDialog_0x0432 @@
 Zieleń zupełnie zniknęła i jest tak smutno.<END>
@@ -3446,7 +3412,7 @@ Wiesz, właśnie pomyślałam, że ludzi jest tyle, ile gwiazd na niebie, prawda
 Ciekawe, czy te gwiazdy będą jeszcze świecić, gdy zostaniemy babciami.<END>
 
 @@ sDialog_0x0435 @@
-Dobry wieczór. Em…<NEXT>jeśli nie masz nic przeciwko, to może pójdziemy potem razem oglądać<NEXT>gwiazdy?<END>
+Dobry wieczór. Em…<NEXT>jeśli nie masz nic przeciwko,<NEXT>to może pójdziemy potem razem oglądać gwiazdy?<END>
 
 @@ sDialog_0x0436 @@
 Żeby wszyscy byli szczęśliwi i żebyś zawsze był zdrowy…<NEXT>No to jak co roku, popatrzmy na gwiazdy i wracajmy do domu.<END>
@@ -3560,10 +3526,10 @@ Notatnik o zwierzętach<NEXT><OPTLBL 1>"Krowa"<OPTLBL 4>"Kura"<OPTLBL 2>"Mleko"<
 W sprzedaży są młode krowy, które jeszcze nie dają mleka.<NEXT>Po 21 dniach dorastają i można je doić.<NEXT>Jak ich nie rozchorować: nie zapominaj o paszy.<NEXT>Nie wypuszczaj ich na zewnątrz w deszcz, śnieg ani tajfun.<NEXT>Jeśli rano będą mokre, to już po wszystkim.<NEXT>Gdy zachorują lub mają zły humor, przez jakiś czas nie dają mleka.<END>
 
 @@ sDialog_0x045B @@
-Weź dojarkę i naciśnij Y przed krową, a dostaniesz mleko.<NEXT>Doić można tylko raz dziennie.<NEXT>Krowy, które szczotkujesz i do których mówisz, przywiązują się do ciebie<NEXT>coraz bardziej.<NEXT>Od krów, które cię lubią, dostaniesz mleko w rozmiarze M i L.<END>
+Weź dojarkę i naciśnij Y przed krową, a dostaniesz mleko.<NEXT>Doić można tylko raz dziennie.<NEXT>Krowy, które szczotkujesz i do których mówisz,<NEXT>przywiązują się do ciebie coraz bardziej.<NEXT>Od krów, które cię lubią, dostaniesz mleko w rozmiarze M i L.<END>
 
 @@ sDialog_0x045C @@
-Krowy jedzą tę samą trawę, którą można kosić.<NEXT>Młoda trawa nie liczy się jako karmienie, więc uważaj.<NEXT>Skoszona trawa zamienia się w paszę, która służy za jedzenie zimą i w deszczowe<NEXT>dni. Pilnuj, żeby jej nie zabrakło.<END>
+Krowy jedzą tę samą trawę, którą można kosić.<NEXT>Młoda trawa nie liczy się jako karmienie, więc uważaj.<NEXT>Skoszona trawa zamienia się w paszę,<NEXT>która służy za jedzenie zimą i w deszczowe dni. Pilnuj, żeby jej nie zabrakło.<END>
 
 @@ sDialog_0x045D @@
 Kura znosi jedno jajko dziennie.<NEXT>Jeśli zapomnisz o paszy albo zmoknie w deszczu, przez 3 dni nie będzie nieść jaj.<NEXT>Zostawiona na zewnątrz w czasie tajfunu może zostać porwana przez wiatr.<NEXT>Czasem zjadają je też dzikie psy.<END>
@@ -3584,16 +3550,16 @@ Ważne, żeby jak najczęściej rozmawiać z dziewczyną, na której ci zależy.
 Festiwal to wielka szansa!<NEXT>Czasem na różnych festiwalach dziewczyny są w różnych miejscach.<NEXT>Dzień wcześniej porozmawiaj z nią i dowiedz się, dokąd się wybiera.<NEXT>Szczęśliwym przedmiotem są perfumy!<END>
 
 @@ sDialog_0x0463 @@
-To, jak bardzo dziewczyny cię lubią, dowiesz się, zaglądając do pamiętników w<NEXT>ich pokojach.<NEXT>Ale nie podglądaj zbyt często.<NEXT>Powodzenia w zdobywaniu jej serca!<END>
+To, jak bardzo dziewczyny cię lubią, dowiesz się,<NEXT>zaglądając do pamiętników w ich pokojach.<NEXT>Ale nie podglądaj zbyt często.<NEXT>Powodzenia w zdobywaniu jej serca!<END>
 
 @@ sDialog_0x0464 @@
 Przedmiotem do oświadczyn jest niebieskie pióro.<NEXT>Kiedy jej sympatia wzrośnie, sprawdź w niedzielę domokrążcę!<NEXT>Żeby wziąć ślub, trzeba też rozbudować dom!<END>
 
 @@ sDialog_0x0465 @@
-Aha, Ellen. W soboty bywa za domem handlarza zwierząt.<NEXT>Na Festiwalu Gwiezdnej Nocy przychodzi na plac.<NEXT>Na prezent dobre są kwiaty, ale ucieszy ją też mleko, które sam<NEXT>wydoisz, albo jajka.<END>
+Aha, Ellen. W soboty bywa za domem handlarza zwierząt.<NEXT>Na Festiwalu Gwiezdnej Nocy przychodzi na plac.<NEXT>Na prezent dobre są kwiaty, ale ucieszy ją też mleko, które sam wydoisz,<NEXT>albo jajka.<END>
 
 @@ sDialog_0x0466 @@
-Eve, hmm.<NEXT>Staraj się jak najczęściej chodzić do baru, a w soboty i niedziele idź w góry.<NEXT>Na prezent dobre są kwiaty i leśne owoce, ale ona nie znosi ryb, więc nie wolno<NEXT>ci jej ich dawać.<END>
+Eve, hmm.<NEXT>Staraj się jak najczęściej chodzić do baru, a w soboty i niedziele idź w góry.<NEXT>Na prezent dobre są kwiaty i leśne owoce, ale ona nie znosi ryb,<NEXT>więc nie wolno ci jej ich dawać.<END>
 
 @@ sDialog_0x0467 @@
 Kochanie… Bądźmy szczęśliwi. Już zawsze.<END>
@@ -3716,7 +3682,7 @@ Ciekawe, co tam u P-chan? Mam nadzieję, że ma się dobrze.<END>
 W życiu nie chodzi tylko o pieniądze. Zwracaj uwagę na więcej rzeczy.<END>
 
 @@ sDialog_0x048F @@
-Dziwna figurka kury przy drodze wygląda, jakby dało się ją rozbić jakimś<NEXT>narzędziem…<END>
+Dziwna figurka kury przy drodze wygląda,<NEXT>jakby dało się ją rozbić jakimś narzędziem…<END>
 
 @@ sDialog_0x0490 @@
 Jaki piękny kwiat!<END>
