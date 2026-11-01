@@ -1,5 +1,5 @@
 @@ sDialog_0x0000 @@
-Dzień dobry, prognoza pogody na jutro. Jutro będzie słonecznie i spokojnie przez cały dzień.<END>
+Dzień dobry, prognoza pogody na jutro. Jutro będzie słonecznie i spokojnie<NEXT>przez cały dzień.<END>
 
 @@ sDialog_0x0001 @@
 Upały trwają, prawda? Jutro przez cały dzień będzie bezchmurnie.<END>
@@ -11,7 +11,7 @@ Jesienne góry pięknie się wybarwiły. Jutro niebo będzie błękitne.<END>
 Robi się coraz zimniej, jak się miewacie? Jutro będzie słonecznie.<END>
 
 @@ sDialog_0x0004 @@
-Dzień dobry, prognoza na jutro: od północy zacznie padać i deszcz utrzyma się przez cały dzień.<END>
+Dzień dobry, prognoza na jutro: od północy zacznie padać i deszcz utrzyma się<NEXT>przez cały dzień.<END>
 
 @@ sDialog_0x0005 @@
 Prognoza na jutro: od rana ulewny deszcz, miejscami z burzami.<END>
@@ -47,16 +47,16 @@ Dobranoc.<END>
 "Sierp"<BR>Kosz trawę na paszę!<NEXT>To jedzenie dla kur i krów, a gdy zabraknie, będzie kiepsko!<END>
 
 @@ sDialog_0x0010 @@
-"Motyka"<BR>Spulchnij ziemię i zrób pole! Uprawiaj na nim warzywa!<NEXT>Wypróbuj różne sposoby zakładania pól!<END>
+"Motyka"<BR>Spulchnij ziemię i zrób pole! Uprawiaj na nim<NEXT>warzywa!<NEXT>Wypróbuj różne sposoby zakładania pól!<END>
 
 @@ sDialog_0x0011 @@
-"Siekiera"<BR>Porąb pniaki na drewno! Drewno do wielu rzeczy się przyda!<NEXT>Uderzaj w jeden punkt! Nie naciskaj krzyżaka.<END>
+"Siekiera"<BR>Porąb pniaki na drewno! Drewno do wielu rzeczy się<NEXT>przyda!<NEXT>Uderzaj w jeden punkt! Nie naciskaj krzyżaka.<END>
 
 @@ sDialog_0x0012 @@
-"Młot"<BR>Rozbijaj kamienie i połamane płoty!<NEXT>Duże głazy też rozbijesz, jeśli uderzysz w jeden punkt! Nigdy nie naciskaj krzyżaka.<END>
+"Młot"<BR>Rozbijaj kamienie i połamane płoty!<NEXT>Duże głazy też rozbijesz, jeśli uderzysz w jeden punkt! Nigdy nie naciskaj<NEXT>krzyżaka.<END>
 
 @@ sDialog_0x0013 @@
-"Konewka"<BR>Podlewaj uprawy! Raz dziennie. W deszczowe dni nie trzeba.<NEXT>Gdy zabraknie wody, nabierz ją w studni lub stawie.<END>
+"Konewka"<BR>Podlewaj uprawy! Raz dziennie. W deszczowe dni<NEXT>nie trzeba.<NEXT>Gdy zabraknie wody, nabierz ją w studni lub stawie.<END>
 
 @@ sDialog_0x0014 @@
 "Dojarka"<BR>Dój krowy i wysyłaj mleko!<END>
@@ -65,13 +65,13 @@ Dobranoc.<END>
 "Szczotka"<BR>Szczotkowanie zwiększa przywiązanie krowy!<NEXT>Krowa, która cię lubi, daje dużo mleka!<END>
 
 @@ sDialog_0x0016 @@
-"Dzwonek"<BR>Służy do zaganiania krów! Obserwuj je i prowadź sprawnie!<END>
+"Dzwonek"<BR>Służy do zaganiania krów! Obserwuj je i prowadź<NEXT>sprawnie!<END>
 
 @@ sDialog_0x0017 @@
-"Nasiona warzyw"<BR>Każde mają swój czas siewu, więcej dowiesz się w kwiaciarni!<NEXT>Nasiona sieje się na polu i trzeba je podlewać, inaczej nie wykiełkują!<END>
+"Nasiona warzyw"<BR>Każde mają swój czas siewu, więcej dowiesz się w<NEXT>kwiaciarni!<NEXT>Nasiona sieje się na polu i trzeba je podlewać, inaczej nie wykiełkują!<END>
 
 @@ sDialog_0x0018 @@
-"Nasiona trawy"<BR>Siej je na polu od wiosny do lata. Rosną i bez podlewania.<NEXT>Bez pastwiska nie utrzymasz krów ani kur!<NEXT>Kosić można, gdy trawa mocno się zazieleni.<END>
+"Nasiona trawy"<BR>Siej je na polu od wiosny do lata. Rosną i bez<NEXT>podlewania.<NEXT>Bez pastwiska nie utrzymasz krów ani kur!<NEXT>Kosić można, gdy trawa mocno się zazieleni.<END>
 
 @@ sDialog_0x0019 @@
 "Farba"<BR>Pomaluj ładnie dom!<END>
@@ -101,7 +101,7 @@ Tutaj zdejmij ubranie.<END>
 Uwaga! Grozi osunięciem!<END>
 
 @@ sDialog_0x0022 @@
-Prosto: dom rzemieślnika. Przyjmujemy zlecenia i porady w sprawie rozbudowy domu.<NEXT>Nieczynne w soboty, niedziele i święta.<END>
+Prosto: dom rzemieślnika. Przyjmujemy zlecenia i porady w sprawie rozbudowy<NEXT>domu.<NEXT>Nieczynne w soboty, niedziele i święta.<END>
 
 @@ sDialog_0x0023 @@
 Znalazłem dziennik!<NEXT><OPTLBL 1>Czytaj<OPTLBL 2>Nie czytaj<OPT 2>
@@ -173,7 +173,7 @@ Dziś też masz wolne? Od samej pracy człowiek się wykończy.<END>
 Ludzie w miasteczku mówią co innego zależnie od pogody, dnia tygodnia i pory roku.<END>
 
 @@ sDialog_0x003A @@
-Szczęście każdy rozumie inaczej, prawda? Myślę, że najlepiej robić to, na co ma się ochotę.<NEXT>Ale to chyba nie jest prawdziwe szczęście, jeśli sprawia się innym kłopot albo budzi ich urazę.<END>
+Szczęście każdy rozumie inaczej, prawda? Myślę, że najlepiej robić to, na co<NEXT>ma się ochotę.<NEXT>Ale to chyba nie jest prawdziwe szczęście, jeśli sprawia się innym kłopot<NEXT>albo budzi ich urazę.<END>
 
 @@ sDialog_0x003B @@
 Ciężko pracujesz. Czasem trzeba pogadać z ludźmi albo pójść w góry...<NEXT>Odpoczynek też jest potrzebny.<END>
@@ -182,19 +182,19 @@ Ciężko pracujesz. Czasem trzeba pogadać z ludźmi albo pójść w góry...<NE
 W tym kościele czci się boga upraw. Dobrze jest tu porządnie się pomodlić.<END>
 
 @@ sDialog_0x003D @@
-Najlepiej jest tak spokojnie poczytać książkę. Tak, to jedno z moich małych szczęść.<END>
+Najlepiej jest tak spokojnie poczytać książkę. Tak, to jedno z moich małych<NEXT>szczęść.<END>
 
 @@ sDialog_0x003E @@
 Wiesz, co to kappa? Podobno ktoś ją widział w górskim stawie.<END>
 
 @@ sDialog_0x003F @@
-Nie wolno myśleć, że robienie złych rzeczy jest w porządku, byle nikt się nie dowiedział.<NEXT>Każdy człowiek popełnia błędy, nic na to nie poradzimy.<NEXT>Ale nie wolno stracić poczucia winy.<END>
+Nie wolno myśleć, że robienie złych rzeczy jest w porządku, byle nikt się nie<NEXT>dowiedział.<NEXT>Każdy człowiek popełnia błędy, nic na to nie poradzimy.<NEXT>Ale nie wolno stracić poczucia winy.<END>
 
 @@ sDialog_0x0040 @@
 Ann jest taka, jaka jest... Czy ona w ogóle kiedyś wyjdzie za mąż?<END>
 
 @@ sDialog_0x0041 @@
-Cześć, jak tam praca? Podobno pojawiają się dzikie psy, jeśli nie naprawi się płotów.<END>
+Cześć, jak tam praca? Podobno pojawiają się dzikie psy, jeśli nie naprawi się<NEXT>płotów.<END>
 
 @@ sDialog_0x0042 @@
 Ja myślę, że Bóg istnieje. Ty też tak myślisz, prawda?<END>
@@ -209,7 +209,7 @@ Cześć. Też na spacerze? Odpoczynek jest ważny.<NEXT>Jeśli co dzień pracuje
 Nie mogę przestać się martwić o Ann.<NEXT><VAR player>, jesteś w podobnym wieku. Co sądzisz o takiej dziewczynie jak Ann?<NEXT>...Ach, przepraszam. Chyba trochę wypiłem.<END>
 
 @@ sDialog_0x0046 @@
-Dzień dooobry. Zawsze taki żwawy! Jedna torebka nasion starcza na jeden siew, więc warto kupować kilka naraz.<END>
+Dzień dooobry. Zawsze taki żwawy! Jedna torebka nasion starcza na jeden siew, więc<NEXT>warto kupować kilka naraz.<END>
 
 @@ sDialog_0x0047 @@
 Trawa rośnie też jesienią, więc przed zimą warto nakosić jej sporo.<END>
@@ -221,7 +221,7 @@ Oby wszyscy nie zapominali o życzliwości dla innych...<END>
 ........<END>
 
 @@ sDialog_0x004A @@
-Co? W soboty i niedziele sklep jest zamknięty, więc wygrzewam się na słońcu. Fajnie, prawda?<END>
+Co? W soboty i niedziele sklep jest zamknięty, więc wygrzewam się na słońcu.<NEXT>Fajnie, prawda?<END>
 
 @@ sDialog_0x004B @@
 W deszczowe dni jest tak ponuro... i trochę samotnie, prawda?<NEXT>Ale kiedy się uprawia rośliny, deszcz jest błogosławieństwem.<END>
@@ -236,7 +236,7 @@ Uczciwa praca bywa ciężka, ale trzymaj się!<END>
 Niech interes się kręci, niech interes się kręci...<NEXT>Co? To nie jest bóg interesów? No cóż, niech będzie.<END>
 
 @@ sDialog_0x004F @@
-Słońce dobrze robi na zdrowie. Dużo jedz i dużo pracuj! Zdrowie to podstawa szczęścia!<END>
+Słońce dobrze robi na zdrowie. Dużo jedz i dużo pracuj! Zdrowie to podstawa<NEXT>szczęścia!<END>
 
 @@ sDialog_0x0050 @@
 Jak jesteś zmęczony, zjedz coś. Nasze ciasto świetnie przywraca siły.<END>
@@ -266,7 +266,7 @@ W kościele człowiek się uspokaja.<NEXT>Bo ludzi tu mało. W święta za to zb
 Za młodu czas płynął powoli.<NEXT>A teraz rok mija w mgnieniu oka. Dziwne, naprawdę.<END>
 
 @@ sDialog_0x0059 @@
-Miej serce pełne współczucia. Ludzie odpłacają dobrocią za dobroć.<NEXT>Oczywiście ze zwierzętami jest tak samo.<END>
+Miej serce pełne współczucia. Ludzie odpłacają dobrocią za<NEXT>dobroć.<NEXT>Oczywiście ze zwierzętami jest tak samo.<END>
 
 @@ sDialog_0x005A @@
 Codzienne wydarzenia z natury nie są ani dobre, ani złe.<NEXT>Wszystko zależy od nastawienia. Naprawdę.<END>
@@ -275,7 +275,7 @@ Codzienne wydarzenia z natury nie są ani dobre, ani złe.<NEXT>Wszystko zależy
 Przez deszcz siły nie ubywają gwałtownie, ale lepiej odpocząć.<NEXT>Naprawdę.<END>
 
 @@ sDialog_0x005C @@
-Krowy to poważna sprawa. Trzeba o nie dbać, żeby nie zachorowały.<NEXT>Leży tam moja notatka. Przeczytaj ją uważnie i przynajmniej chorobom zapobiegaj.<END>
+Krowy to poważna sprawa. Trzeba o nie dbać, żeby nie zachorowały.<NEXT>Leży tam moja notatka. Przeczytaj ją uważnie i przynajmniej chorobom<NEXT>zapobiegaj.<END>
 
 @@ sDialog_0x005D @@
 Hej, znoszą ci się kury? Muszą być w kurniku. I karm je codziennie!<NEXT>Jak opuścisz choćby jeden dzień, przez 3 dni nie zniosą jajek.<END>
@@ -284,19 +284,19 @@ Hej, znoszą ci się kury? Muszą być w kurniku. I karm je codziennie!<NEXT>Jak
 Hej, młody! Zanim pogoda się popsuje, zapędź zwierzęta do zagrody!<END>
 
 @@ sDialog_0x005F @@
-Wiesz, jak krowami zajmiesz się z miłością, dają więcej mleka... Hej, słuchasz mnie?<NEXT>Przywiązują się, rodzą się z nich dobre cielaki... Słuchaj, jak się do ciebie mówi!<END>
+Wiesz, jak krowami zajmiesz się z miłością, dają więcej mleka... Hej, słuchasz<NEXT>mnie?<NEXT>Przywiązują się, rodzą się z nich dobre cielaki... Słuchaj, jak się do ciebie<NEXT>mówi!<END>
 
 @@ sDialog_0x0060 @@
 W życiu nie ma poprawek... Druga szansa może się już nie trafić.<NEXT>Dobrze się zastanów, zanim coś zrobisz.<END>
 
 @@ sDialog_0x0061 @@
-Pytasz, czemu nie chodzę do kościoła? ...Nic nie szkodzi. Bóg jest wszędzie i nigdzie.<NEXT>Hi, hi, hi.<END>
+Pytasz, czemu nie chodzę do kościoła? ...Nic nie szkodzi. Bóg jest wszędzie<NEXT>i nigdzie.<NEXT>Hi, hi, hi.<END>
 
 @@ sDialog_0x0062 @@
-Leży tam książka, którą napisałam o dziewczętach. Warto ją przeczytać, nic nie stracisz.<END>
+Leży tam książka, którą napisałam o dziewczętach. Warto ją przeczytać, nic<NEXT>nie stracisz.<END>
 
 @@ sDialog_0x0063 @@
-Tak naprawdę jestem też akuszerką. Maria od burmistrza, Ann ze sklepu ze wszystkim,<NEXT>wszystkie je odebrałam.<END>
+Tak naprawdę jestem też akuszerką. Maria od burmistrza, Ann ze sklepu<NEXT>ze wszystkim,<NEXT>wszystkie je odebrałam.<END>
 
 @@ sDialog_0x0064 @@
 Dorośli decydują o wszystkim sami: tego nie rób, to zrób.<NEXT>Dzieci mają przechlapane, no nie?<END>
@@ -338,7 +338,7 @@ Gdy zabraknie sił, nie możesz używać narzędzi, ale nosić rzeczy nadal moż
 Ach, kielich po pracy to najlepsza rzecz.<END>
 
 @@ sDialog_0x0071 @@
-Nie można wysyłać kwiatów, zwierząt ani rzeczy łatwo psujących się, jak ciasta. Proszę nie wrzucać ich do skrzyni przez pomyłkę.<END>
+Nie można wysyłać kwiatów, zwierząt ani rzeczy łatwo psujących się, jak ciasta.<NEXT>Proszę nie wrzucać ich do skrzyni przez pomyłkę.<END>
 
 @@ sDialog_0x0072 @@
 Rzeczy wrzucone do skrzyni w nocy nie przetrwają do rana, a szkoda.<END>
@@ -347,16 +347,16 @@ Rzeczy wrzucone do skrzyni w nocy nie przetrwają do rana, a szkoda.<END>
 Rzeczy do wysyłki z szopy też zbieram, więc nie martw się.<END>
 
 @@ sDialog_0x0074 @@
-Oglądasz prognozę pogody? Jak zapowiadają deszcz, od razu zapędź zwierzęta do zagrody.<END>
+Oglądasz prognozę pogody? Jak zapowiadają deszcz, od razu zapędź zwierzęta do<NEXT>zagrody.<END>
 
 @@ sDialog_0x0075 @@
-Gdyby wystarczyło zdać się na Boga, żeby być szczęśliwym, nie byłoby kłopotów.<END>
+Gdyby wystarczyło zdać się na Boga, żeby być szczęśliwym, nie byłoby<NEXT>kłopotów.<END>
 
 @@ sDialog_0x0076 @@
 Nie wiadomo, co się w życiu przydarzy.<NEXT>Na wszelki wypadek lepiej odkładać pieniądze.<END>
 
 @@ sDialog_0x0077 @@
-Pieniądze są ważne, ale najważniejsza jest miłość! Miłość!! Ty też tak myślisz, prawda?<END>
+Pieniądze są ważne, ale najważniejsza jest miłość! Miłość!! Ty też tak<NEXT>myślisz, prawda?<END>
 
 @@ sDialog_0x0078 @@
 Jestem wędrownym handlarzem. Chociaż rzadko cokolwiek sprzedaję.<NEXT>Jak masz coś do sprzedania, połóż to na tamtym stole.<END>
@@ -404,7 +404,7 @@ Oby wiosna przyszła jak najszybciej.<END>
 Wierzysz w Boga?<NEXT><OPTLBL 1>Tak<OPTLBL 2>Nie<OPT 2>
 
 @@ sDialog_0x0087 @@
-Och, w dzisiejszych czasach to rzadkość. W niedzielę koniecznie przyjdź do kościoła.<END>
+Och, w dzisiejszych czasach to rzadkość. W niedzielę koniecznie przyjdź do<NEXT>kościoła.<END>
 
 @@ sDialog_0x0088 @@
 Myślę, że ważne nie jest to, czy Bóg istnieje, ale "wierzące serce".<END>
@@ -470,7 +470,7 @@ Czy ja nie jestem jakaś niedziewczęca?<NEXT><OPTLBL 1>No tak<OPTLBL 2>Wcale ni
 ...Mówisz wprost.<END>
 
 @@ sDialog_0x009D @@
-Tata ciągle każe mi być dziewczęcą, ale czym właściwie jest bycie dziewczęcą?<END>
+Tata ciągle każe mi być dziewczęcą, ale czym właściwie jest bycie<NEXT>dziewczęcą?<END>
 
 @@ sDialog_0x009E @@
 Wiosna jest super, no nie? Człowiek od razu ma ochotę zabrać się do roboty!<END>
@@ -506,7 +506,7 @@ Dajmy z siebie wszystko, dobrze?<END>
 Pewnie góry są już całkiem białe.<END>
 
 @@ sDialog_0x00A9 @@
-Nie lubię deszczu. Robi się tak wilgotno! Jak już ma padać, to niech porządnie lunie!<END>
+Nie lubię deszczu. Robi się tak wilgotno! Jak już ma padać, to niech porządnie<NEXT>lunie!<END>
 
 @@ sDialog_0x00AA @@
 ...Tata ciągle każe mi wyjść za mąż...<NEXT>A jak wyjdę, zostanie sam jak palec...<NEXT>Czy nie jest mu smutno...?<END>
@@ -545,7 +545,7 @@ Na pewno są piękne.<END>
 Powiem ci, co znaczy język kwiatów z naszego sklepu. Znaczy: "Bardzo cię lubię!"<END>
 
 @@ sDialog_0x00B6 @@
-Hej, myślę, że jeśli podarujesz taki kwiat dziewczynie, którą lubisz, na pewno się ucieszy.<END>
+Hej, myślę, że jeśli podarujesz taki kwiat dziewczynie, którą lubisz,<NEXT>na pewno się ucieszy.<END>
 
 @@ sDialog_0x00B7 @@
 O tej porze góry są piękne. I jest tam wiele darów natury.<END>
@@ -554,7 +554,7 @@ O tej porze góry są piękne. I jest tam wiele darów natury.<END>
 Zimą jest smutno...<NEXT>Ale bez zimy nie doceniłoby się wiosny, prawda?<END>
 
 @@ sDialog_0x00B9 @@
-Zioła z głębi jaskini, gdy się je zagotuje i wypije, obniżają gorączkę i pomagają na ból głowy.<END>
+Zioła z głębi jaskini, gdy się je zagotuje i wypije, obniżają gorączkę i<NEXT>pomagają na ból głowy.<END>
 
 @@ sDialog_0x00BA @@
 Kwiaty ze sklepu to te, które hodujemy tutaj.<END>
@@ -581,7 +581,7 @@ Lubię deszczowe dni. Liście wyglądają wtedy na szczęśliwe.<END>
 Kwiaty nie tylko koją serce, ale też bywają jadalne i lecznicze.<NEXT>Ale nie zrywam ich bez potrzeby. Kwiaty też chcą żyć.<END>
 
 @@ sDialog_0x00C2 @@
-Słyszałam, że na twojej farmie jest "Sekretny ogródek kwiatowy". Naprawdę?<NEXT>Chciałabym go zobaczyć.<NEXT><OPTLBL 1>Dobrze<OPTLBL 2>Nie chcę<OPT 2>
+Słyszałam, że na twojej farmie jest "Sekretny ogródek kwiatowy".<NEXT>Naprawdę?<NEXT>Chciałabym go zobaczyć.<NEXT><OPTLBL 1>Dobrze<OPTLBL 2>Nie chcę<OPT 2>
 
 @@ sDialog_0x00C3 @@
 Wow, nie mogę się doczekać.<END>
@@ -617,10 +617,10 @@ Tak? Ja też je uwielbiam.<END>
 Kłamiesz. Zwierzęta nie lgną do ludzi, którzy ich nie lubią.<END>
 
 @@ sDialog_0x00CE @@
-<VAR dog> zaszczeka, jeśli pojawią się dzikie psy. Sprawdź, czy płoty nie są zepsute.<END>
+<VAR dog> zaszczeka, jeśli pojawią się dzikie psy. Sprawdź, czy płoty nie są<NEXT>zepsute.<END>
 
 @@ sDialog_0x00CF @@
-Opieka nad zwierzętami jest trudna. Zawsze trzeba uważać, żeby nie zachorowały...<NEXT>Czuję się jak matka, która pilnuje dziecka.<END>
+Opieka nad zwierzętami jest trudna. Zawsze trzeba uważać, żeby nie<NEXT>zachorowały...<NEXT>Czuję się jak matka, która pilnuje dziecka.<END>
 
 @@ sDialog_0x00D0 @@
 Ciągle biegasz tu i tam, co? Mimo zimna naprawdę masz energię.<END>
