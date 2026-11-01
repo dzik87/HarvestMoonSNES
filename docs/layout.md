@@ -79,3 +79,13 @@ Prefixes: `f` routine, `a` data array, `p` pointer, `s` structure/complex data, 
 
 Banks whose content differs per release ($94 $95 $9A $9B $9E $9F $A5 $A6 $A9 $AA-$AC $B6-$BB, plus the code/AI banks) are described in
 `docs/regions.md`. In the graphics banks the blob order is the same in every release; padding is `fill align $8000`.
+
+## Translations
+
+| Path | Contents |
+|---|---|
+| `translations/<lang>/` | the translators' work: `lang.json`, `dialogs.txt`, `status.csv`, optional `font/` (see `translations/README.md`) |
+| `defs/translation/` | structure: `engine.json` (text layout numbers), `var_map_jp_us.json` (variables JP <-> US), `marks.json` (diacritics) |
+| `tools/translate/` | `export`, `import`, `check`, `stats`, `glyphs`, `build`, `analyze` (docs/translation.md) |
+| `build/translate/` | worksheets with game text (git-ignored, never commit) |
+| `build/gen/dialogs/translation/` | generated dialog banks of the translation build |

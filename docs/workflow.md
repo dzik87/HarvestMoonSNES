@@ -22,6 +22,9 @@ Tools: `tools/analysis/align_regions.py` (coverage report, `--md docs/regions.md
 `--write-expected` stores the full-ROM hashes). After editing US code that is inside a patch block, edit the `else` branch (US text) and
 check all regions; regenerating with the tool is also possible (it starts from the US text).
 
+## Translations
+Translated ROMs are a separate build on the US engine: `python tools/build.py --region US --translation <lang>` ([translation.md](translation.md)). Source: `translations/<lang>/`; tools: `tools/translate/` (`export`, `import`, `check`, `stats`, `glyphs`, `build`); tests: `python3 tests/test_translate.py` (fast, synthetic fixtures; with `HM_ROM_DIR` it also proves that the identity translation reproduces the US ROM). The four original releases do not change.
+
 ## Audio preview (`.github/workflows/audio.yml`)
 
 Rendering SPC and MP3 copies of all songs and sound effects is slow, so it is not part of the ROM build. The separate

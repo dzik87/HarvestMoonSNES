@@ -12,6 +12,8 @@ python tools/build_assets.py             # only generate the assets (needed befo
 python tools/verify.py build/HarvestMoon.sfc --rom "original.sfc"   # per-bank diff report
 ```
 
+Translations (Polish first, based on the Japanese text; US engine): [docs/translation.md](docs/translation.md), `translations/`, `tools/translate/`.
+
 ROMs are not stored in the repository. Reference values (size, CRC32, MD5, SHA-1) are in `tests/expected.json`.
 CI (GitHub Actions) builds asar from the submodule, assembles the ROM and compares the hashes on every push and PR.
 
