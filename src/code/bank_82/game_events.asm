@@ -1,7 +1,35 @@
+;;
+; @file   game_events.asm
+; @brief  Game clock and calendar events: per-frame time keeping, the 5 pm shipping scene, the noon meal, the next-day
+;         processing (calendar, weather, farm update, flag clean-up, tool/construction events), the weather forecast and
+;         the marriage/child growth counters.
+; @details Time model: nTimeState bit 0 = clock running, bit 1 = go to the next day (set when the player sleeps), bit 2 = save the game
+;          during the day change. nInGameMinuteCounter counts frames (60 per step), nInGameHourCounter counts 15 such steps,
+;          nCurrentTimeID is the hour of the day ($06 = 6:00 .. $12 = 18:00). The calendar is nCurrentYearID/SeasonID/Day (days 1-30).
+;          The weather bits of strcDialogDisplay.mapFlags ($0002 rain, $0004 sunny summer day, $0008 snow, $0010 hurricane, $0100 / $0200
+;          the two special fine days) are set from nWeatherForecast by fWeather_ApplyForecast.
+;          Region text tables for the date strings (season, weekday, day ordinal) are interleaved in this file under `if !REGION_*`.
+; @bank   $82   @range $828000-$828FB0
+; @see    object_map.asm (farm tile simulation), bank_83/game_engine.asm (animals, profit), docs/regions.md
+;;
  
     ORG $828000
  
  
+;;
+; @brief   Per-frame game clock: advances the in-game time and triggers the hourly events.
+; @details If nTimeState bit 1 is set it hands over to fNextDayHandler. If bit 0 is clear nothing happens. While the shipping scene is
+;          running (daily1 flag $0400) the clock is frozen and fEvents_ShippingSceneDialog is polled. Otherwise one frame is added to the
+;          frame counter nInGameMinuteCounter; at 60 it resets and nInGameHourCounter advances; at 15 that resets and
+;          nCurrentTimeID advances by one hour (capped at $12 = 18:00), running fEvents_NoonMealCheck and fEvents_ShippingScene. When the last hour
+;          is reached and daily3 flag $8000 is clear the music is faded out (track $FF). Afterwards fPalette_AdjustTimePalette is called; if the
+;          palette index changed the palette animation scripts are reloaded.
+; @modifies nInGameMinuteCounter, nInGameHourCounter, nCurrentTimeID, strcAudio.trackIdCopy, strcAudio.trackId
+; @mode    M8X16
+; @calls   fNextDayHandler, fEvents_ShippingSceneDialog, fEvents_NoonMealCheck, fEvents_ShippingScene, fAudio_FadeOutOnTrackChangeSlow, fPalette_AdjustTimePalette, fCore_Zero0x42PtrFromIndex, fPaletteAnim_RunAreaRoutine
+; @callers fCore_MainLoop, fMainMenu_PrepareHowToPlay, fMainMenu_StartHowToPlayDemo, fMainMenu_StateOpeningDemo
+; @note    confidence: medium on "minute counter = frames" - inferred from the 60/15 constants and the per-frame call.
+;;
 fGame_TimeHandler:
     SEP #$20                                                   ;828000|E220    |      ;
     REP #$10                                                   ;828002|C210    |      ;
@@ -80,6 +108,15 @@ fGame_TimeHandler:
     RTL                                                        ;8280A9|6B      |      ;
  
  
+;;
+; @brief   At noon (nCurrentTimeID = $0C) restore 20 stamina and, if the player is free, make the player eat a meal.
+; @details The meal (strcPlayerData.eatFood = random 0-2) and the flags !PFLAGS_EATINGMEAL | !PFLAGS_UNK0400 are only set when the player
+;          is not in a spring, riding the horse, hugging the dog or doing actions $0F, $10, fishing, fish bite, reeling, $17, $18.
+; @modifies strcPlayerData.eatFood, strcPlayer.flags
+; @mode    M8X16
+; @calls   fPlayerEnergyHandler, fCore_GetRandomNumber
+; @callers fGame_TimeHandler, fMap_ScreenTransitionHandler
+;;
 fEvents_NoonMealCheck:
     SEP #$20                                                   ;8280AA|E220    |      ;
     REP #$10                                                   ;8280AC|C210    |      ;
@@ -149,6 +186,15 @@ fEvents_NoonMealCheck:
     RTL                                                        ;828130|6B      |      ;
  
  
+;;
+; @brief   At 5 pm (nCurrentTimeID = $11) on the farm, start the shipper's visit: set daily1 flag $0400 and run %AIExecute($0006, $0000, $0026).
+; @details Does nothing at other times or when the player is not on a farm area (strcMap.loadAreaId >= 4). Falls through into
+;          fEvents_ShippingSceneDialog.
+; @modifies strcDialogDisplay.mapUnk19A, strcFlags.daily1
+; @mode    M8X16
+; @calls   fAI_StartSlotScript (via %AIExecute)
+; @callers fGame_TimeHandler
+;;
 fEvents_ShippingScene:
     SEP #$20                                                   ;828131|E220    |      ;
     REP #$10                                                   ;828133|C210    |      ;
@@ -168,6 +214,14 @@ fEvents_ShippingScene:
     %SetFlag(daily1, $0400)
     %AIExecute($0006, $0000, $0026)
  
+;;
+; @brief   Polled while the shipping scene runs: when the script has set daily1 flag $0800 and the player is free, show the shipper's dialog and finish the scene.
+; @details Dialog $031A (reports the shipping profit nShippingProfit) or $031B (nothing was shipped); then fAI_SetSlotScript(6, 0, $27) is
+;          started and daily1 flag $0400 is cleared, which unfreezes the clock.
+; @mode    M16
+; @calls   fDialog_DialogHandler, fAI_SetSlotScript
+; @callers fGame_TimeHandler, fEvents_ShippingScene (fall-through)
+;;
 fEvents_ShippingSceneDialog:
     REP #$20                                                   ;828165|C220    |      ;
     %CheckFlag(daily1, $0800)
@@ -200,10 +254,21 @@ fEvents_ShippingSceneDialog:
     REP #$20                                                   ;8281B2|C220    |      ;
     %UnsetFlag(daily1, $0400)
  
+;;
+; @brief   Common RTL of the shipping-scene routines.
+;;
 fEvents_ShippingSceneReturn:
     RTL                                                        ;8281BF|6B      |      ;
  
  
+;;
+; @brief   Select the TV forecast dialog index nWeatherDialogIdIndex for today's forecast.
+; @details Maps nWeatherForecast through a 12-byte table (0,1,2,3,0,0,5,6,7,8,9,A); a hurricane map flag ($0010) forces index $0B, the
+;          fine-day flag ($0200) forces index $04.
+; @modifies nWeatherDialogIdIndex
+; @mode    M8X16
+; @callers fPlayerInteraction0x0F, fPlayerInteraction0x12, fPlayerInteraction0x13
+;;
 fWeather_SetForecastDialogIndex:
     SEP #$20                                                   ;8281C0|E220    |      ;
     REP #$10                                                   ;8281C2|C210    |      ;
@@ -246,6 +311,13 @@ fWeather_SetForecastDialogIndex:
 .data:
     db $00,$01,$02,$03,$00,$00,$05,$06,$07,$08,$09,$0A         ;8281FD|        |      ; 0x0C * [n8][nWeatherForecast]
  
+;;
+; @brief   Apply the daily weather damage to the farm map according to today's weather bits in strcDialogDisplay.mapFlags.
+; @details Damage type by flag: rain $0002 -> 0, snow $0008 -> 1, hurricane $0010 -> 2, fine day $0200 -> 3, calm day $0100 -> no damage.
+; @calls   fObjectMap_GetHuricaneDamageArgs, fObjectMap_HuricaneDamage
+; @mode    M16X16
+; @callers fNextDayHandler
+;;
 fObjectMap_ApplyHuricaneDamageByMapFlags:
     REP #$30                                                   ;828209|C230    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;82820B|AD9601  |000196;
@@ -306,6 +378,15 @@ fObjectMap_ApplyHuricaneDamageByMapFlags:
     BRA .return                                                ;82826E|80C3    |828233;
  
  
+;;
+; @brief   Fetch the three damage chances of a damage type from nHuricaneDamageArgsTable.
+; @param   A   damage type 0-4
+; @return  A   chance for tile $05
+; @return  X   chance for tile $1D / grass
+; @return  Y   chance for tiles $07, $08, $1E-$6F
+; @mode    M16X16
+; @callers fNextDayHandler, fObjectMap_ApplyHuricaneDamageByMapFlags
+;;
 fObjectMap_GetHuricaneDamageArgs:
     REP #$30                                                   ;828270|C230    |      ; A: nIndex
     ASL A                                                      ;828272|0A      |      ;
@@ -332,10 +413,37 @@ fObjectMap_GetHuricaneDamageArgs:
     RTS                                                        ;828297|60      |      ;
  
  
+;;
+; @brief   Damage chances per damage type (denominator of a 1-in-N roll, 0 = never).
+; @format  5 entries x 4 bytes `[A][X][Y][unused]`: type 0 (rain) $60,0,0; type 1 (snow) $40,0,0; type 2 (hurricane) $08,$10,$04;
+;          type 3 (fine day) $08,0,$04; type 4 (new year) 0,$40,$20.
+; @index   damage type * 4
+; @used_by fObjectMap_GetHuricaneDamageArgs
+;;
 nHuricaneDamageArgsTable:
     db $60,$00,$00,$00,$40,$00,$00,$00,$08,$10,$04,$00         ;828298|        |      ; 0x05 * [8b argA, 8b argX, 8b argY, 8b unused]
     db $08,$00,$04,$00,$00,$40,$20,$00                         ;8282A4|        |      ;
  
+;;
+; @brief   Day change: advance the calendar and weather, update the farm, animals, relationships and event flags, then put the player in bed.
+; @details Order of work: (1) weekday and date +1 (month = 30 days; season rollover; on a year rollover year-end damage type 4);
+;          (2) fade out music and screen; (3) weather: fWeather_ApplyForecast turns the forecast into map flags (event1 $0010/$0020 bookkeeping),
+;          fAudioEngine_SelectMapMusic; (4) clock reset to 6:00; (5) fWriteSeasonWeekdayAndDayOrdinal, fObjectMap_UpdateFarmTilesNewDay,
+;          weather damage, fGameEngine_AnimalsDailyUpdate, fWeatherRandomizer (rolls the next forecast), fCore_FindBestLove,
+;          fEvents_UpdateMarriageAndChildGrowth; (6) player reset (flags, action, energy = stamina, direction down), the shipping profit is paid
+;          with fGameEngine_AddProfit and zeroed, placed feed is cleared; (7) all daily flags (daily1-5) and the unknown1-3 words are cleared;
+;          (8) delayed event flags advance one step per day (house expansion: event2 $0080 construction counted by nConstructionDayCounter, after 4 days
+;          event2 $0100 and nReqWoodForExpansion = $01F4; event3 $0800 -> $1000; event3 $8000 puts the item bit $04 in shed row 3; event4 $0080 swaps
+;          the hoe for the item bit $02 of row 3 on the second pass; event6 $8000 sets row 3 bit $01; 3-day counters at $09A3 for event4 $1000/$4000 and
+;          event5 $0001/$0004/$0010); (9) saves the game when nTimeState bit 2 is set; (10) loads the player's house (area $15) at (136,120) with
+;          fMap_ResetAndLoadDestinationArea, restores 20 stamina and may start a breakfast meal.
+; @modifies nCurrentWeekdayID, nCurrentDay, nCurrentSeasonID, nCurrentYearID, nCurrentTimeID, nInGameHourCounter, nInGameMinuteCounter, strcFlags.*, strcShedItems.*, nShippingProfit, nConstructionDayCounter, nReqWoodForExpansion, strcPlayer.*, strcPlayerData.*, nTimeState
+; @mode    M8X16
+; @calls   fObjectMap_GetHuricaneDamageArgs, fObjectMap_HuricaneDamage, fAudio_FadeOutOnTrackChangeSlow, fCore_ScreenFadeout, fCore_SetForceBlank, fWeather_ApplyForecast, fAudioEngine_SelectMapMusic, fWriteSeasonWeekdayAndDayOrdinal, fObjectMap_UpdateFarmTilesNewDay, fObjectMap_ApplyHuricaneDamageByMapFlags, fGameEngine_AnimalsDailyUpdate, fWeatherRandomizer, fCore_FindBestLove, fEvents_UpdateMarriageAndChildGrowth, fGameEngine_AddProfit, fGameEngine_SaveGame, fMap_ResetAndLoadDestinationArea, fPlayerEnergyHandler
+; @callers fGame_TimeHandler
+; @note    Holding L + R + SELECT on joypad 1 during the day change sets the date to year 3, summer 30 (a hidden shortcut, evidence: the EOR #$2030 test).
+;          The event flag bit meanings in step (8) are only partly known; confidence: medium.
+;;
 fNextDayHandler:
     SEP #$20                                                   ;8282AC|E220    |      ;
     REP #$10                                                   ;8282AE|C210    |      ;
@@ -717,6 +825,19 @@ fNextDayHandler:
     BRA .deadEnd                                               ;82878E|80FE    |82878E;
  
  
+;;
+; @brief   Daily update of the marriage counter and the ages of the first and second child, with their milestone flags.
+; @details Only runs for a married player (any !EFLAGS2_MARRIED* flag). nMarriedDaysCounter increments; every 120 days event5 flag $0080 is set.
+;          The wife's love (nLove_*) is compared to $01C2 (450) before the first child and $028A (650) afterwards; if reached and married for
+;          at least 20 days with event1 flag $0080 set, event6 flag $0004 (first child) is set; once the first child is 90 days old event6 flag
+;          $0008 (second child) is set. A child's age (nFirstChildAge / nSecondChildAge) is incremented daily; at age 60 event6 $0010 is set and happiness +50 (first)
+;          / +100 (second) is granted; beyond that every 120 days event5 flag $0100 (first) / $0200 (second) is set.
+; @modifies nMarriedDaysCounter, nFirstChildAge, nSecondChildAge, strcFlags.event5, strcFlags.event6
+; @mode    M16X16
+; @calls   fMathDivide, fGameEngine_AddHappiness
+; @callers fNextDayHandler
+; @note    The meanings of the event flags are inferred from names of the counters; confidence: low-medium.
+;;
 fEvents_UpdateMarriageAndChildGrowth:
     REP #$30                                                   ;828790|C230    |      ;
     %UnsetFlag(event5, $0380)
@@ -945,6 +1066,16 @@ fEvents_UpdateMarriageAndChildGrowth:
     RTL                                                        ;8289D5|6B      |      ;
  
  
+;;
+; @brief   Write the localized season name, weekday name and day ordinal suffix of the current date into strcNames (wSeason, wWeekday, wDayOrdinal).
+; @details Indexed by nCurrentSeasonID / nCurrentWeekdayID / nCurrentDay. US/EU/DE: the day suffix is st (days 1, 21), nd (2, 22), rd (3, 23), otherwise
+;          th (EU/DE also treat 21-23 this way; US only 1-3). The strings are 16-bit glyph codes, 8 words per season, 16 per weekday (EU/DE: 32 bytes), 2 words per ordinal.
+; @region  JP: only one word per season and weekday (aSeasonWordTable and aDayOrdinalWordTable, no ordinal suffix). DE: season and weekday strings are read directly from $828B03.
+; @modifies strcNames.wSeason, strcNames.wWeekday, strcNames.wDayOrdinal
+; @mode    M8X16 -> M16
+; @callers fGameEngine_FirstNight, fMainMenu_DrawSaveSlotInfo, fNextDayHandler
+; @note    The region branches interleave data tables and the code of fWeather_ApplyForecast in the source; see the labels below.
+;;
 fWriteSeasonWeekdayAndDayOrdinal:
     SEP #$20                                                   ;8289D6|E220    |      ;
     REP #$10                                                   ;8289D8|C210    |      ;
@@ -1033,9 +1164,25 @@ fWriteSeasonWeekdayAndDayOrdinal:
     LDA.L aDayOrdinalWordTable,X
     STA.W $08B3
     RTL
+;;
+; @brief   Season name words (JP: one word per season; other regions: leftover/shared data in front of the string tables).
+; @format  JP: 6 x n16 per season group (?). Other regions: the first 12 bytes are 6 words (spring/summer/fall/winter text ids), DE adds more words.
+; @used_by fWriteSeasonWeekdayAndDayOrdinal
+; @note    confidence: low - this label sits in a region-dependent data block.
+;;
 aSeasonWordTable:
     db $69,$01,$CB,$01,$15,$01,$27,$01,$29,$01,$3C,$01,$78,$02,$6C,$01
     db $AA,$01,$38,$01,$E4,$00
+;;
+; @brief   Turn the forecast nWeatherForecast into the weather bits of strcDialogDisplay.mapFlags for the new day.
+; @details Clears strcDialogDisplay.mapFlags, then: sunny -> $0004 only in summer; rainy -> $0002, or snow $0008 in winter; snowy -> $0008, or rain $0002 in spring;
+;          hurricane -> $0010; fine day (4) -> $0200 plus event1 $0002 and event6 $0100; calm day (5) -> $0100 plus event1 $0001 and event6 $0080;
+;          festival forecasts (6+) leave the flags clear. Values come from nWeatherMapFlagsTable.
+; @modifies strcDialogDisplay.mapFlags, strcFlags.event1, strcFlags.event6
+; @mode    M16 -> M8X16
+; @callers fNextDayHandler
+; @note    The source repeats this entry once per region branch (the label exists four times under `if !REGION_*`).
+;;
 fWeather_ApplyForecast:
     REP #$30
     STZ.W strcDialogDisplay.mapFlags
@@ -1187,6 +1334,9 @@ fWeather_ApplyForecast:
     RTL                                                        ;828AC2|6B      |      ;
  
  
+;;
+; @brief   Region variant of aSeasonWordTable (see the first definition).
+;;
 aSeasonWordTable:
     db $69,$01,$CB,$01,$15,$01,$27,$01,$29,$01,$3C,$01         ;828AC3|        |      ;
     if !REGION_DE
@@ -1199,6 +1349,11 @@ aSeasonWordTable:
     db $78,$02,$6C,$01,$AA,$01,$38,$01,$E4,$00                 ;828ACF|        |      ;
     endif
  
+;;
+; @brief   Season names as glyph-code strings.
+; @format  `dw` glyph codes, 4 strings of 16 bytes, indexed by nCurrentSeasonID * 16
+; @used_by fWriteSeasonWeekdayAndDayOrdinal
+;;
 aSeasonString:
     dw $002C,$000F,$0011,$0008,$000D,$0006                     ;828AD9|        |      ; 0x04 * [string[16]]
     dw $0000,$0000,$002C,$0014,$000C,$000C                     ;828AE5|        |      ;
@@ -1207,6 +1362,12 @@ aSeasonString:
     dw $0030,$0008,$000D,$0013,$0004,$0011                     ;828B09|        |      ;
     dw $0000,$0000                                             ;828B15|        |      ;
  
+;;
+; @brief   Weekday names as glyph-code strings.
+; @format  7 strings, indexed by nCurrentWeekdayID * 32 (16 words per string, $B1 = blank padding); layout differs per region (DE strings are longer).
+; @used_by fWriteSeasonWeekdayAndDayOrdinal
+; @note    In the EU/DE source layout the label is surrounded by region-dependent data and by the entry of fWeather_ApplyForecast.
+;;
 aWeekdayString:
     if !REGION_DE
     db $2C,$00,$0E,$00,$0D,$00,$0D,$00,$13,$00,$00,$00,$06,$00,$B1,$00
@@ -1234,6 +1395,11 @@ aWeekdayString:
     db $E8,$E8,$BF,$43,$8B,$82,$8D,$BB,$08,$E8,$E8,$BF,$43,$8B,$82,$8D
     db $BD,$08,$E8,$E8,$BF,$43,$8B,$82,$8D,$BF,$08,$E8,$E8,$BF,$43,$8B
     db $82,$8D,$C1,$08,$E2,$20,$A9,$00
+;;
+; @brief   Day ordinal suffixes as glyph-code strings: "st", "nd", "rd", "th".
+; @format  4 entries x 2 words (4 bytes), indexed by 0 (st), 4 (nd), 8 (rd), $0C (th)
+; @used_by fWriteSeasonWeekdayAndDayOrdinal
+;;
 aDayOrdinalString:
     db $EB,$AF,$1A,$1F,$7F,$C2,$20,$0A,$0A,$0A,$0A,$0A,$AA,$BF,$83,$8B
     db $82,$8D,$C3,$08,$E8,$E8,$BF,$83,$8B,$82,$8D,$C5,$08,$E8,$E8,$BF
@@ -1247,6 +1413,9 @@ aDayOrdinalString:
     db $00,$80,$15,$C2,$30,$A2,$00,$00,$80,$0E,$C2,$30,$A2,$04,$00,$80
     db $07,$C2,$30,$A2,$08,$00,$80,$00,$C2,$30,$BF,$63,$8C,$82,$8D,$D7
     db $08,$E8,$E8,$BF,$63,$8C,$82,$8D,$D9,$08,$6B
+;;
+; @brief   Region variant entry of fWeather_ApplyForecast (see the first definition).
+;;
 fWeather_ApplyForecast:
     REP #$30
     STZ.W strcDialogDisplay.mapFlags
@@ -1265,12 +1434,18 @@ fWeather_ApplyForecast:
     db $B1,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
     db $2C,$00,$00,$00,$13,$00,$14,$00,$11,$00,$03,$00,$00,$00,$18,$00
     db $B1,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+;;
+; @brief   Region variant of aDayOrdinalString (see the first definition).
+;;
 aDayOrdinalString:
     db $12,$00,$13,$00,$0D,$00,$03,$00,$11,$00,$03,$00,$13,$00,$07,$00
     db $00,$00,$04,$00,$08,$00,$0C,$00,$0C,$00,$0C,$00,$0C,$00,$0C,$00
     db $0C,$00,$0C,$00,$00,$00,$04,$00,$08,$00,$0C,$00,$0C,$00,$0C,$00
     db $0C,$00,$0C,$00,$0C,$00,$0C,$00,$00,$00,$04,$00,$08,$00,$0C,$00
     db $0C,$00,$0C,$00,$0C,$00,$0C,$00,$0C,$00,$0C,$00
+;;
+; @brief   Region variant entry of fWeather_ApplyForecast (see the first definition).
+;;
 fWeather_ApplyForecast:
     REP #$30
     STZ.W strcDialogDisplay.mapFlags
@@ -1295,10 +1470,16 @@ fWeather_ApplyForecast:
     dw $0000,$0018,$00B1,$0000,$0000,$0000                     ;828BE5|        |      ;
     dw $0000,$0000,$0000,$0000                                 ;828BF1|        |      ;
  
+;;
+; @brief   Region variant of aDayOrdinalString (see the first definition).
+;;
 aDayOrdinalString:
     dw $0012,$0013,$000D,$0003,$0011,$0003                     ;828BF9|        |      ; 0x04 * [string[2]] - (st, nd, rd, th)
     dw $0013,$0007                                             ;828C05|        |      ;
  
+;;
+; @brief   Region variant entry of fWeather_ApplyForecast (see the first definition).
+;;
 fWeather_ApplyForecast:
     REP #$30                                                   ;828C09|C230    |      ;
     STZ.W strcDialogDisplay.mapFlags                           ;828C0B|9C9601  |000196;
@@ -1408,9 +1589,29 @@ fWeather_ApplyForecast:
     RTL                                                        ;828CEC|6B      |      ;
  
  
+;;
+; @brief   Weather map flag bits for each forecast value 0-5.
+; @format  6 x n16: sunny $0004, rainy $0002, snowy $0008, hurricane $0010, fine day $0200, calm day $0100
+; @index   forecast * 2 (forecast >= 6 is not looked up)
+; @used_by fWeather_ApplyForecast
+;;
 nWeatherMapFlagsTable:
     dw $0004,$0002,$0008,$0010,$0200,$0100                     ;828CED|        |      ; [n16 nSunny, n16 nRainy, n16 nSnowy, n16 nHurricane, n16 nWeather4, n16 nWeather5]
  
+;;
+; @brief   Roll the forecast nWeatherForecast: festival days first, then special fine/calm days, hurricane, rain, snow, else sunny.
+; @details Festival forecasts (date compared is the current date, result is applied at the next day change): spring 22 flower festival;
+;          fall 11 harvest festival, fall 19 egg festival; winter 9 thanksgiving, 23 star night, 30 new year. Winter in the first year (nCurrentYearID = 0)
+;          can produce the FAIR day (forecast 4) on day 7 or by a 1-in-8 roll (until event1 $0002 is set); summer of the first year can produce the CALM
+;          day (forecast 5) on day 29 or by a 1-in-30 roll (until event1 $0001 is set). Summer (days < 30): hurricane with 1-in-30 (1-in-60 when event5 $1000 is set).
+;          Otherwise rain with 1-in-6 (spring) / 1-in-10 (summer, fall), snow with 1-in-3 in winter, else sunny.
+; @modifies nWeatherForecast
+; @mode    M8X16
+; @calls   fCore_GetRandomNumber
+; @callers fNextDayHandler
+; @note    The per-season chance bytes are the generated rows .e_Unknown1 (rain), .e_Unknown2 (snow), .e_Summer30thDay (hurricane),
+;          .e_Summer29thDay (calm day), .e_Winter7thDay (fair day) in day_event_tables.asm; their old names do not match the code (see renames).
+;;
 fWeatherRandomizer:
     SEP #$20                                                   ;828CF9|E220    |      ;
     REP #$10                                                   ;828CFB|C210    |      ;
@@ -1649,8 +1850,19 @@ fWeatherRandomizer:
     RTL                                                        ;828EB1|6B      |      ;
  
  
+; @brief   Season-indexed chance bytes read by fWeatherRandomizer (local labels .e_*; value = N of a 1-in-N roll, 0 = never).
+; @format  5 rows x 4 bytes [spring][summer][fall][winter]: hurricane, rain, snow, calm day, fair day chances (see fWeatherRandomizer).
+; @used_by fWeatherRandomizer
     incsrc "../../../build/gen/blocks/day_event_tables.asm"
  
+;;
+; @brief   Find the girl with the highest love (Maria, Ann, Nina, Ellen, Eve) and write her name into strcNames.wMostLovedGirl as glyph codes.
+; @details Compares nLove_Maria..nLove_Eve; ties go to the later girl. The name text is used by dialogs.
+; @modifies strcNames.wMostLovedGirl, strcVariables.n16Temp1
+; @mode    M16X16
+; @callers fCore_GameStart, fNextDayHandler
+; @region  JP: names are 4 words in one hiragana layout, other regions use 5 glyph words ending with !DIALOG_SPACE padding; DE/EU Eve differ in one glyph.
+;;
 fCore_FindBestLove:
     REP #$30                                                   ;828EC6|C230    |      ;
     LDY.W #$0000                                               ;828EC8|A00000  |      ;

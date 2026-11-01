@@ -1,6 +1,34 @@
+;;
+; @file   sound.asm
+; @brief  Object property lookups for the player's facing direction and the season, the tool-effectiveness test used for tool sounds and
+;         actions, the "player bumps into / uses the object in front" dispatcher, and the neighbour-aware drawing of object tiles.
+; @details Despite the file name the module is mostly about the 4-byte object property rows (sObjectMap2_0x**, pointer strcMap.pSelected, see
+;          docs/formats/area-data.md): b0 = replacement tile / screen transition index / dialog id (by id range), b1 = tool and pickup flags
+;          (bit0 sickle, bit1 hoe, bit2 hammer, bit3 axe, bit4 watering / sprinkler, bit5 seeds, bit7 can be picked up), b2 = misc flags
+;          (bit0 passable (?), bit7 hidden when the direction/season test fails), b3 = visibility mask (low nibble = facing directions
+;          down/up/left/right $1/$2/$4/$8, high nibble = seasons spring..winter $10/$20/$40/$80; $FF = always).
+;          Object id ranges: $00-$BF map objects, $C0-$CF doors and shop entrances, $D0-$DF readable signs, $E0-$EF (none), $F0-$FF interactions.
+; @bank   $82   @range $82AA71-$82B039
+; @see    object_data.asm, tools.asm, docs/formats/area-data.md
+;;
 ; Bank $82 module "sound" - starts at $82AA71
  
  
+;;
+; @brief   Does the equipped tool work on the object at tile (X, Y)? Returns the class that selects the tool sound and the action path.
+; @details Tool to property bit: sickle and golden sickle -> b1 bit0, hoe/golden hoe -> bit1, hammers -> bit2, axes -> bit3, sprinkler -> bit4,
+;          any seed bag ($05-$08, $0C) -> bit5, watering can -> bit4 plus special water spots (farm: object $F0; elsewhere $F0, $F9-$FD; in towns the
+;          can only works on $F0/$F4 for areas $10-$3C), paint -> only on the farm for objects $C3 and $E2-$E4. The property row comes from
+;          fObjectEngine_GetObjectPropertyByDirSeason(1), objects >= $A0 or $00 never match. Other tools return 1.
+; @param   X   pixel X of the tile
+; @param   Y   pixel Y of the tile
+; @return  A   0 = no effect, 1 = effective, 2 = water spot (refill; watering can only)
+; @return  X   object id of the tile (from the property lookup)
+; @mode    M8X16 -> M16
+; @calls   fObjectEngine_GetObjectPropertyByDirSeason
+; @callers fToolUsed_GetSoundForFrontTile, fToolUsed_GetSoundForFrontTileMode, fToolUsed_GetSoundForTileOffset, fToolUsed_StoreSoundForFrontTile
+; @note    confidence: medium for the water-spot ids and area limits; the A result is stored in strcPlayerData.toolSound and indexes nToolSoundTable.
+;;
 fSound_GetToolSound:
     SEP #$20                                                   ;82AA71|E220    |      ; X: nTileX, Y: nTileY, return A: nToolSoundId (0/1/2)
     REP #$10                                                   ;82AA73|C210    |      ;
@@ -294,6 +322,21 @@ fSound_GetToolSound:
     RTL                                                        ;82AC60|6B      |      ;
  
  
+;;
+; @brief   Read a property byte of the object at (X, Y), but only if the object is visible for the player's facing direction and the current season.
+; @details Fetches the object id with fObjectEngine_GetObjectAtCoords and tests b3 of its property row: bit (facing direction of strcPlayer.direction)
+;          and bit (season nCurrentSeasonID + 4). If both match, A = word at row[A_in] and X = object id. If not, X = 0 and A = row byte only when
+;          b2 bit7 is clear (else A = 0). Returns A = 0, X = 0 while daily2 flag $0008 is set.
+; @param   A   byte offset within the 4-byte property row (0 or 1)
+; @param   X   pixel X
+; @param   Y   pixel Y
+; @return  A   property byte(s)
+; @return  X   object id (0 = none / not visible)
+; @mode    M16X16
+; @calls   fObjectEngine_GetObjectAtCoords
+; @callers fGameEngine_CheckTileCollision, fInput_PlayerButtonA_Interact, fInput_PlayerButtonB, fItemCarriedAnimal_CarryLoop, fSound_GetToolSound, fToolUsedAction0x17_BlueDiamond, fToolUsedAction0x19_ChickenFeed, fToolUsedAction0x1A_CowFeed
+; @note    The old inline comment "Y = A * 7" is wrong: the row offset is id * 4 + 3. A is loaded with 16 bits on the match path.
+;;
 fObjectEngine_GetObjectPropertyByDirSeason:
     REP #$30                                                   ;82AC61|C230    |      ; A: nArg1, X: nPosX, Y: nPosY
     STA.B strcVariables.n16Temp3                               ;82AC63|8582    |000082;
@@ -400,6 +443,23 @@ fObjectEngine_GetObjectPropertyByDirSeason:
 .data2:
     dw $0010,$0020,$0040,$0080                                 ;82AD06|        |      ; 0x04 * [n16][nSeasonId]
  
+;;
+; @brief   Handle the player touching / pressing A at the object in front: pick up, door or shop entrance, sign, or start an interaction.
+; @details By object id range (X): $F0-$FF: if b1 bit0 is set, start interaction nPlayerInteractionIndex = b0 (!PFLAGS_INTERACTING, action none);
+;          $E0-$EF: nothing; $D0-$DF: show the dialog whose id is the word at row[0] (strcDialogDisplay.mapUnk19A = 2);
+;          $C0-$CF: door; b1 is the "closed" dialog id (0 = always open) and the transition entry (b0) in aScreenTransitionTable
+;          decides when it is closed through its flag byte: $02 from 17:00, $04 before 17:00, $08 on weekdays, $10 on Saturday, $20 on Sunday,
+;          $80 on hurricane days (mapFlags $0010) - then the closed dialog is shown; otherwise nothing happens here and the normal transition runs.
+;          Below $C0: if b1 bit7 (pickup) is set the item aInteractionItemTable[id * 4 + season] is put in the hand (carryItemId, action
+;          !PACTION_ITEMONHAND; some crop ids $38/$39/$52/$53/$60/$61/$6E/$6F cannot be picked in fall and winter); otherwise, when b2 bit0 is
+;          clear, the player is pushed back (position reset to the last one, newX/newY cleared, step size $10) through fGameEngine_DirectionHandler83AD91.
+; @param   X   object id
+; @modifies strcPlayerData.carryItemId, strcPlayerData.unkMap91F, strcPlayer.*, nPlayerInteractionIndex, nPlayerInteractionArg1, nPlayerInteractionArg2, strcDialogDisplay.mapUnk19A
+; @mode    M8X16
+; @calls   fDialog_DialogHandler, fGameEngine_DirectionHandler83AD91
+; @callers fInput_PlayerButtonA_Interact
+; @note    confidence: medium - the b2 bit0 meaning and the aScreenTransitionTable flag bits are read from the compare chain only.
+;;
 fPlayer_InteractWithFrontObject:
     SEP #$20                                                   ;82AD0E|E220    |      ;
     REP #$10                                                   ;82AD10|C210    |      ;
@@ -692,6 +752,18 @@ fPlayer_InteractWithFrontObject:
     RTL                                                        ;82AEFF|6B      |      ;
  
  
+;;
+; @brief   Draw all object tiles of the current object map into the BG tilemap buffer, joining neighbouring grass tiles ($73-$79) to their edges.
+; @details For every map cell (ids $00 and >= $A0 are skipped): ids outside $73-$79 are drawn with the replacement tile b0 of their property row
+;          (skipped when b0 = 0). Ids $73-$79 get a bit mask of neighbours in the same range (below $01, right $02, above $04, left $08; left/right
+;          are +-1, above/below +-$40) and are drawn with b0 + .unknownData[mask] - 1, i.e. one of nine border variants. Drawing goes through
+;          fMap_CopyTilePatternToTilemapBuffer.
+; @modifies strcVariables.n16Unk86, strcVariables.n8Temp3
+; @mode    M16X16
+; @calls   fObjectEngine_ConvertCoordsToOffset, fMap_CopyTilePatternToTilemapBuffer
+; @callers fTileMap_MapChangeHandler
+; @note    confidence: medium - the grid is treated as 64 tiles wide ($40 stride); the ids $73-$79 are grass growth tiles in object_map.asm.
+;;
 fObjectMap_ConnectAdjacentObjectTiles:
     REP #$30                                                   ;82AF00|C230    |      ;
     LDY.W #$0000                                               ;82AF02|A00000  |      ;

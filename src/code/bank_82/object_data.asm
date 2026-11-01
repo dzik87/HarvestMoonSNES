@@ -1,5 +1,25 @@
+;;
+; @file   object_data.asm
+; @brief  Tile-object map access: write/read single tiles and rectangles of the current area's object map (sCurrentObjectMap)
+;         or of the farm map (sFarmTilemap), plus the generated per-area object map / object property pointer tables.
+; @details The object map of an area is a grid of bytes ($1000 bytes copied, one byte per 16x16 pixel object tile; the id is the
+;          index into the property table pointed to by strcMap.pSelected, 4 bytes per id). The row stride depends on
+;          strcDialogDisplay.mapMultiWidth (1 = 16 columns, 2 = 32, other = 64); the farm uses width 4 (64 x 64 tiles = $1000 bytes).
+;          Positions are pixel coordinates, converted by fObjectEngine_ConvertCoordsToOffset.
+; @bank   $82   @range $82B03A-$82CFB3
+; @see    object_map.asm, sound.asm, docs/formats/area-data.md
+;;
 ; Bank $82 module "object_data" - starts at $82B03A
  
+;;
+; @brief   Store one object id into the current area's object map.
+; @param   A   object (tile) id
+; @param   X   pixel X
+; @param   Y   pixel Y
+; @modifies sCurrentObjectMap
+; @mode    M8X16
+; @calls   fObjectEngine_ConvertCoordsToOffset
+;;
 fMap_UpdateCurrentTilemap:
     SEP #$20                                                   ;82B03A|E220    |      ; A: nTileId, X: nPosX, Y: nPosY
     REP #$10                                                   ;82B03C|C210    |      ;
@@ -11,6 +31,16 @@ fMap_UpdateCurrentTilemap:
     RTL                                                        ;82B048|6B      |      ;
  
  
+;;
+; @brief   Store one object id into the farm map (sFarmTilemap), forcing the farm row stride (mapMultiWidth = 4).
+; @param   A   object (tile) id
+; @param   X   pixel X
+; @param   Y   pixel Y
+; @modifies sFarmTilemap, strcDialogDisplay.mapMultiWidth
+; @mode    M8X16
+; @calls   fObjectEngine_ConvertCoordsToOffset
+; @callers fAIAction0x58_ReplaceFarmTile, fAreaEvents_House
+;;
 fMap_UpdateFarmTilemapCoords:
     SEP #$20                                                   ;82B049|E220    |      ; A: nTileId, X: nPosX, Y: nPosY
     REP #$10                                                   ;82B04B|C210    |      ;
@@ -26,6 +56,18 @@ fMap_UpdateFarmTilemapCoords:
     RTL                                                        ;82B05F|6B      |      ;
  
  
+;;
+; @brief   Fill a rectangle of the current object map with one object id.
+; @param   A   object id (kept in $99)
+; @param   X   pixel X of the top-left corner (strcVariables.n16Temp3)
+; @param   Y   pixel Y of the top-left corner (strcVariables.n16Temp4)
+; @param   strcVariables.n16Unk86   width in tiles
+; @param   strcVariables.n16Unk88   height in tiles
+; @modifies sCurrentObjectMap, strcVariables.n16Unk8E, strcVariables.n16Unk90
+; @mode    M8X16
+; @calls   fObjectEngine_ConvertCoordsToOffset
+; @callers fMap_DrawTilePatternAt, fSetTileAtCoords
+;;
 fMap_FillCurrentTilemapRect:
     SEP #$20                                                   ;82B060|E220    |      ; A: nArg1, X: nArg2, Y: nArg3
     REP #$10                                                   ;82B062|C210    |      ;
@@ -75,6 +117,20 @@ fMap_FillCurrentTilemapRect:
     RTL                                                        ;82B0A6|6B      |      ;
  
  
+;;
+; @brief   Copy a rectangular template of object ids (from the pattern table at $A7F500) into the current object map.
+; @details fMap_GetTilePatternInfo returns, for pattern index A, the template origin/size in strcVariables.n16Temp1-Temp3 (Temp1: bits 0-6 =
+;          column offset in 4-tile units, high bits = row; Temp2/Temp3 = width and height; ?). Each template byte is written with
+;          fMap_UpdateCurrentTilemap at X/Y + (column, row) * 16.
+; @param   A   pattern index
+; @param   X   pixel X of the top-left corner
+; @param   Y   pixel Y of the top-left corner
+; @modifies sCurrentObjectMap
+; @mode    M16X16
+; @calls   fMap_GetTilePatternInfo, fMap_UpdateCurrentTilemap
+; @callers fAreaItemSub_Farm, fAreaItemSub_Woods, fAreaItemSub_Shed, fAreaItemSub_ImpUnderground
+; @note    confidence: medium - the field layout of the pattern info (Temp1 bit usage) is inferred from the shifts.
+;;
 fMap_StampTemplateToCurrentTilemap:
     REP #$30                                                   ;82B0A7|C230    |      ;
     STX.B strcVariables.n16Unk8E                               ;82B0A9|868E    |00008E;
@@ -159,6 +215,15 @@ fMap_StampTemplateToCurrentTilemap:
     RTL                                                        ;82B123|6B      |      ;
  
  
+;;
+; @brief   Read the object id at a pixel position of the current object map.
+; @param   X   pixel X
+; @param   Y   pixel Y
+; @return  A   object (tile) id (low byte)
+; @mode    M16X16 -> M8
+; @calls   fObjectEngine_ConvertCoordsToOffset
+; @callers fObjectEngine_GetObjectPropertyByDirSeason
+;;
 fObjectEngine_GetObjectAtCoords:
     REP #$30                                                   ;82B124|C230    |      ; X: nPosX, Y: nPosY, return A: nObject
     JSR.W fObjectEngine_ConvertCoordsToOffset                  ;82B126|203CB1  |82B13C;
@@ -167,6 +232,13 @@ fObjectEngine_GetObjectAtCoords:
     RTL                                                        ;82B12E|6B      |      ;
  
  
+;;
+; @brief   Round X and Y down to a multiple of 16 (tile alignment). Unused.
+; @param   X   pixel X
+; @param   Y   pixel Y
+; @return  X, Y   aligned coordinates
+; @mode    M16X16
+;;
 fObjectEngine_AlignCoordsTo16_Unused:
     REP #$30                                                   ;82B12F|C230    |      ; UNUSED
     TXA                                                        ;82B131|8A      |      ;
@@ -178,6 +250,18 @@ fObjectEngine_AlignCoordsTo16_Unused:
     RTL                                                        ;82B13B|6B      |      ;
  
  
+;;
+; @brief   Convert a pixel position to a byte offset in an object map.
+; @details offset = (X >> 4) + (Y & $FFF0) * stride, where the stride factor is 1, 2 or 4 for strcDialogDisplay.mapMultiWidth
+;          = 1, 2 or other (the Y term is already row * 16). Map width in tiles is therefore 16 / 32 / 64.
+; @param   X   pixel X
+; @param   Y   pixel Y
+; @param   strcDialogDisplay.mapMultiWidth   room width in 16-tile screens
+; @return  X   byte offset into the map
+; @modifies strcVariables.n16Temp1, strcVariables.n16Temp2
+; @mode    M16X16 -> M16X16
+; @note    Called with JSR from inside bank $82 (RTS return), unlike the other routines of the module.
+;;
 fObjectEngine_ConvertCoordsToOffset:
     REP #$30                                                   ;82B13C|C230    |      ; X: nPosX, Y: nPosY, return X: nOffsetIndex
     TXA                                                        ;82B13E|8A      |      ;
@@ -214,4 +298,8 @@ fObjectEngine_ConvertCoordsToOffset:
     RTS                                                        ;82B173|60      |      ;
 
 ; Per-area object map / object property pointers and the property tables (generated from assets/areas/, docs/formats/area-data.md)
+; @brief   Generated tables: pObjectMap / pObjectMap2 (per area id: ptr24 to the object map, ptr24 to the object property table)
+;          and the object maps' property tables sObjectMap2_0x00..0x06 (256 rows x 4 bytes, index = object id).
+; @format  see docs/formats/area-data.md ("object_props"); byte 0 of a row is the screen transition index / replacement tile / dialog id depending on the id range.
+; @used_by fObjectMap_LoadData, fObjectEngine_GetObjectPropertyByDirSeason, fPlayer_InteractWithFrontObject
     incsrc "../../../build/gen/maps/object_tables.asm"

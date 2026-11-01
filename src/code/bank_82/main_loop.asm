@@ -1,6 +1,29 @@
+;;
+; @file   main_loop.asm
+; @brief  The title screen and main-menu state machine: logo/opening demo, title menu, New Game / Load Game slot selection screens and the
+;         idle "How to Play" demo, plus the save-slot info and empty-slot drawing.
+; @details State machine: strcVariables.n8Temp4 holds the state, dispatched by fMainMenu_StateLoop every frame (after the NMI frame flag in $00 is set):
+;          $00 initial delay (Natsume logo in US/JP), $01 opening demo (AI script), $02 horizontal logo scroll, $03 diagonal logo scroll,
+;          $04 title screen start (cursor animation set-up), $05 title menu input, $06 skip to title, $07 New Game slot select, $08 Load Game slot select,
+;          $09 re-initialise the title screen, $0A start the How to Play demo. strcVariables.n8Temp3 / u8Unk96 are frame timers, u8Unk97 is set by the input
+;          code when the title cursor (nUnknownFlags09D) changed, strcVariables.n16Unk90 counts idle frames (600 frames without input starts the
+;          automatic How to Play demo). Screens are areas of the intro group: $5B farm scroll, $5C logo, $5D Natsume logo, $5E menu backgrounds.
+; @bank   $82   @range $82D3C7-$82E665
+; @see    interaction_data.asm (fMainMenu_StartHowToPlayDemo), system.asm, bank_84/input.asm (title cursor), bank_80/core.asm (fCore_MainLoop)
+;;
 ; Bank $82 module "main_loop" - starts at $82D3C7
  
  
+;;
+; @brief   Idle timeout on the title screen: start the next scripted How to Play demo clip (cycling through nIntroHowToPlayIndex).
+; @details Fades out, sets the clock to 6:00, clears daily/event flags (daily4 = $0008 marks the demo), gives a starting shed (row1 $8F, row2 $EC),
+;          resets player, object and farm map state and starts the AI subscript of the demo clip nIntroHowToPlayIndex (0..11, sub-indices
+;          $02 $04 $06 $07 $09 $0B $0D $11 $15 $17 $19 $1B of AI list $47), advancing the index (wraps to 0 after 11). Continues in fMainMenu_PrepareHowToPlay.
+; @modifies strcFlags.*, strcShedItems.*, strcPlayerData, strcPlayer.*, strcObjectData, nCurrentTimeID, nCurrentSeasonID, nTimeState, nIntroHowToPlayIndex
+; @calls   fCore_ScreenFadeout, fCore_ZeroVRAM, fCore_ZeroCGRAM, fObject_InitTileCache, fObjectSlots_ClearAll, fObjectMap_LoadDefaultFarm
+; @mode    M8X16
+; @callers fMainMenu_EndFrame
+;;
 fMainMenu_AutoHowToPlay:
     SEP #$20                                                   ;82D3C7|E220    |      ;
     REP #$10                                                   ;82D3C9|C210    |      ;
@@ -273,6 +296,13 @@ fMainMenu_AutoHowToPlay:
     JMP.W fMainMenu_PrepareHowToPlay                           ;82D6A9|4CACD6  |82D6AC;
  
  
+;;
+; @brief   Start the demo area and run its private frame loop until the clip ends (daily2 flag $0004 or daily4 flag $0080), then clean up.
+; @details Runs the same per-frame routine list as the real main loop (map transition, clock, dialog, palette, input, objects, player, scroll,
+;          AI, tile scripts, rendering). The label fMainMenu_PrepareHowToPlay_WaitFrame is the top of the wait-for-NMI loop.
+; @calls   fAI_RunSlots, fAudioEngine_MapMusicHandler, fMap_SetupArea, fGame_TimeHandler, fPlayer_UpdateHandler, fObject_RenderAll
+; @callers fMainMenu_AutoHowToPlay
+;;
 fMainMenu_PrepareHowToPlay:
     JSL.L fAI_RunSlots                                   ;82D6AC|226F8184|84816F;
     SEP #$20                                                   ;82D6B0|E220    |      ;
@@ -324,6 +354,12 @@ fMainMenu_PrepareHowToPlay:
     endif
  
  
+;;
+; @brief   End of a demo clip: clear the chicken table and, if the demo ran on the farm, copy the current map back to the farm map.
+; @modifies strcChickenData (first 8 bytes), sFarmTilemap
+; @calls   fObjectMap_LoadFarm
+; @callers fMainMenu_PrepareHowToPlay
+;;
 fMainMenu_HowToPlayCleanup:
     REP #$30                                                   ;82D731|C230    |      ;
     LDX.W #$0000                                               ;82D733|A20000  |      ;
@@ -340,6 +376,11 @@ fMainMenu_HowToPlayCleanup:
     BCS fMainMenu_SetStateReturnToTitle                                        ;82D74A|B004    |82D750;
     JSL.L fObjectMap_LoadFarm                                  ;82D74C|2282A682|82A682;
  
+;;
+; @brief   Select title state 9 (re-initialise the title screen), reset the idle counter and end the frame.
+; @modifies strcVariables.n8Temp4, strcVariables.n16Unk90
+; @callers fMainMenu_HowToPlayCleanup
+;;
 fMainMenu_SetStateReturnToTitle:
     SEP #$20                                                   ;82D750|E220    |      ;
     LDA.B #$09                                                 ;82D752|A909    |      ;
@@ -349,6 +390,17 @@ fMainMenu_SetStateReturnToTitle:
     JML.L fMainMenu_EndFrame                                      ;82D75A|5C71D882|82D871;
  
  
+;;
+; @brief   Entry of the title screen: reset menu state, load graphics preset 3 and start the state machine.
+; @details Sets strcDialogDisplay.mapUnk19A = 4, the title cursor nUnknownFlags09D = 0 (2 when daily4 flag $0800 is set), clears
+;          nIntroHowToPlayIndex(2), loads the default farm map and graphics preset 3. US/JP: shows the Natsume logo (area $5D, palette $6E) first;
+;          EU/DE skip that screen. Falls into fMainMenu_StateLoop with state 0.
+; @modifies strcDialogDisplay.mapUnk19A, nUnknownFlags09D, nIntroHowToPlayIndex, nIntroHowToPlayIndex2
+; @calls   fObjectMap_LoadDefaultFarm, fCore_ManageGraphicsPresets, fTileMap_MapChangeHandler, fPalette_LoadFirstHalf, fCore_ScreenFadein
+; @mode    M16
+; @callers fCore_InterruptIRQ5
+; @region  EU/DE: no logo screen (initial delay is 1 frame instead of 120).
+;;
 fMainMenu_TitleScreenInit:
     REP #$30                                                   ;82D75E|C230    |      ;
     SEP #$20                                                   ;82D760|E220    |      ;
@@ -422,6 +474,11 @@ fMainMenu_TitleScreenInit:
     LDA.W #$0001                                               ;82D808|A90100  |      ;
     STA.B strcObject.bankAddress                               ;82D80B|85AF    |0000AF;
  
+;;
+; @brief   Main-menu frame loop: wait for the frame flag, update palette animation and input, then jump to the handler of state strcVariables.n8Temp4.
+; @mode    M8
+; @callers fMainMenu_EndFrame
+;;
 fMainMenu_StateLoop:
     SEP #$20                                                   ;82D80D|E220    |      ;
     LDA.B $00                                                  ;82D80F|A500    |000000;
@@ -481,6 +538,10 @@ fMainMenu_StateLoop:
     JML.L fMainMenu_StartHowToPlayDemo                                      ;82D86D|5CC0D182|82D1C0;
  
  
+;;
+; @brief   End of a menu frame: clear the frame flag; after 600 idle frames start fMainMenu_AutoHowToPlay, else return to fMainMenu_StateLoop.
+; @modifies $00
+;;
 fMainMenu_EndFrame:
     SEP #$20                                                   ;82D871|E220    |      ;
     STZ.B $00                                                  ;82D873|6400    |000000;
@@ -494,6 +555,10 @@ fMainMenu_EndFrame:
   + BRA fMainMenu_StateLoop                                        ;82D881|808A    |82D80D;
  
  
+;;
+; @brief   State $00: wait (120 frames in US/JP, 1 in EU/DE), fade out and go to state $01 (opening demo).
+; @modifies strcVariables.n8Temp4
+;;
 fMainMenu_StateInitialDelay:
     LDY.W #$0000                                               ;82D883|A00000  |      ;
  
@@ -523,6 +588,14 @@ fMainMenu_StateInitialDelay:
     BRA fMainMenu_EndFrame                                        ;82D8AE|80C1    |82D871;
  
  
+;;
+; @brief   State $01: play the opening demo (AI %AIExecute($0000, $0009, $0000)) in a private frame loop, then set up the scrolling farm backdrop.
+; @details After the demo (daily2 flag $0004) loads area $5B (farm scroll) with palette $6D, starts the music and fades in, then moves to state $02.
+;          If the state was changed to 9 meanwhile it ends immediately.
+; @modifies strcBGScrool.*, strcVariables.n8Temp4, strcVariables.n8Temp3
+; @calls   fAI_RunSlots, fMap_SetupArea, fTileMap_MapChangeHandler, fPalette_LoadFirstHalf, fCore_PrepareTransfer
+; @note    The first block of the private frame loop follows the same list as fMainMenu_PrepareHowToPlay.
+;;
 fMainMenu_StateOpeningDemo:
     REP #$30                                                   ;82D8B0|C230    |      ;
     JSL.L fCore_ZeroVRAM                                       ;82D8B2|22468880|808846;
@@ -692,6 +765,10 @@ fMainMenu_StateOpeningDemo:
     JML.L fMainMenu_EndFrame                                      ;82DA88|5C71D882|82D871;
  
  
+;;
+; @brief   State $02: scroll BG2 right and BG1 left every other frame until BG1 is at 0, wait 60 frames, then go to state $03.
+; @modifies strcBGScrool.BG1HorOffs, strcBGScrool.BG2HorOffs, strcVariables.u8Unk96
+;;
 fMainMenu_StateLogoScrollHorizontal:
     SEP #$20                                                   ;82DA8C|E220    |      ;
     LDA.B strcVariables.n8Temp3                                ;82DA8E|A594    |000094;
@@ -728,6 +805,11 @@ fMainMenu_StateLogoScrollHorizontal:
     JML.L fMainMenu_EndFrame                                      ;82DAC5|5C71D882|82D871;
  
  
+;;
+; @brief   State $03: scroll BG2 right and both BG1/BG2 vertically every other frame until BG1 vertical offset reaches 0, then show the title.
+; @modifies strcBGScrool.*
+; @calls   fMainMenu_StateSkipToTitleScreen
+;;
 fMainMenu_StateLogoScrollDiagonal:
     SEP #$20                                                   ;82DAC9|E220    |      ;
     LDA.B strcVariables.n8Temp3                                ;82DACB|A594    |000094;
@@ -754,6 +836,11 @@ fMainMenu_StateLogoScrollDiagonal:
     JML.L fMainMenu_EndFrame                                      ;82DAF1|5C71D882|82D871;
  
  
+;;
+; @brief   State $09: rebuild the title screen from scratch after a demo (area $5B backdrop and $5C logo) and show it.
+; @modifies strcMap.loadAreaId, strcPlayer.posX, strcPlayer.posY, strcDialogDisplay.mapFlags
+; @calls   fCore_ManageGraphicsPresets, fTileMap_MapChangeHandler, fPalette_LoadFirstHalf, fMainMenu_ShowTitleScreen
+;;
 fMainMenu_StateReinitTitleScreen:
     SEP #$20                                                   ;82DAF5|E220    |      ;
     LDA.B #$5C                                                 ;82DAF7|A95C    |      ;
@@ -814,6 +901,9 @@ fMainMenu_StateReinitTitleScreen:
     BRA fMainMenu_ShowTitleScreen                                        ;82DB8C|8024    |82DBB2;
  
  
+;;
+; @brief   State $06 (and end of the diagonal scroll): fade the music/screen out and fall into fMainMenu_ShowTitleScreen.
+;;
 fMainMenu_StateSkipToTitleScreen:
     SEP #$20                                                   ;82DB8E|E220    |      ;
     LDA.B #$5C                                                 ;82DB90|A95C    |      ;
@@ -830,6 +920,11 @@ fMainMenu_StateSkipToTitleScreen:
     JSL.L fCore_ScreenFadeout                                  ;82DBAA|220A8880|80880A;
     JSL.L fCore_SetForceBlank                                  ;82DBAE|220F8E80|808E0F;
  
+;;
+; @brief   Show the title logo screen (area $5C): clear scroll offsets, load the area, start the title music, fade in and enter state $04.
+; @modifies strcBGScrool.*, strcDialogDisplay.mapDestX, strcDialogDisplay.mapDestY, strcDialogDisplay.mapFlags, strcPlayer.posX, strcPlayer.posY, strcVariables.n8Temp4
+; @calls   fTileMap_MapChangeHandler, fAudio_LoadPendingTrack, fAudio_StartPendingTrack, fCore_ScreenFadein
+;;
 fMainMenu_ShowTitleScreen:
     REP #$20                                                   ;82DBB2|C220    |      ;
     STZ.B strcVariables.n16Unk90                               ;82DBB4|6490    |000090;
@@ -866,6 +961,15 @@ fMainMenu_ShowTitleScreen:
     JML.L fMainMenu_EndFrame                                      ;82DC09|5C71D882|82D871;
  
  
+;;
+; @brief   State $04: scroll the title for 60 frames, then install the palette animations that highlight the menu entry under the cursor and go to state $05.
+; @details Palette animation slots (fCore_Store0x72To0x42AtIndex): logo animations aMainMenu_PalAnimLogoA/B in slots 4/5, and for the three menu
+;          entries slots 6, 7, 8 get aMainMenu_PalAnimItemHighlighted for the entry selected by nUnknownFlags09D and aMainMenu_PalAnimItemNormal for the others.
+; @param   nUnknownFlags09D   title menu cursor (0-2)
+; @modifies strcVariables.n8Temp3, strcVariables.n8Temp4, ptrTemp0x72, ptrPaletteAnimScripts
+; @calls   fCore_Zero0x42Ptr, fCore_Store0x72To0x42AtIndex
+; @note    The US/EU/DE and JP builds order the code of the three cursor cases differently; the result is the same.
+;;
 fMainMenu_StateTitleStartCursorAnim:
     SEP #$20                                                   ;82DC0D|E220    |      ;
     LDA.B strcVariables.n8Temp3                                ;82DC0F|A594    |000094;
@@ -1181,6 +1285,13 @@ fMainMenu_StateTitleStartCursorAnim:
     JML.L fMainMenu_EndFrame                                      ;82DD88|5C71D882|82D871;
  
  
+;;
+; @brief   State $05: keep scrolling BG2 and, when the cursor changed (strcVariables.u8Unk97), refresh the highlight palette animations of the three entries.
+; @details The cursor and the confirm action are handled by the input code (bank_84/input.asm, fInput_Case04_State5_ThreeWayChoice): cursor 0 -> state $08
+;          (Load Game), 1 -> state $07 (New Game), 2 -> state $0A (How to Play). Counts idle frames in strcVariables.n16Unk90.
+; @param   nUnknownFlags09D   title menu cursor (0-2)
+; @modifies strcVariables.u8Unk97, strcVariables.n16Unk90, strcVariables.n8Temp3
+;;
 fMainMenu_StateTitleMenuInput:
     SEP #$20                                                   ;82DD8C|E220    |      ;
     LDA.B strcVariables.n8Temp3                                ;82DD8E|A594    |000094;
@@ -1335,6 +1446,11 @@ fMainMenu_StateTitleMenuInput:
     JML.L fMainMenu_EndFrame                                      ;82DEC1|5C71D882|82D871;
  
  
+;;
+; @brief   Leave the slot-select screen (cancel): reload the title graphics (areas $5B and $5C), palette, music and fade in; back to state $04.
+; @modifies strcMap.loadAreaId, strcVariables.n8Temp4, strcVariables.n16Unk90
+; @callers fMainMenu_LoadGameSlotSelect_FrameTail, fMainMenu_NewGameSlotSelect_FrameTail
+;;
 fMainMenu_ReturnToTitleFromSlotSelect:
     SEP #$20                                                   ;82DEC5|E220    |      ;
     LDA.B #$5C                                                 ;82DEC7|A95C    |      ;
@@ -1416,6 +1532,15 @@ fMainMenu_ReturnToTitleFromSlotSelect:
     JML.L fMainMenu_EndFrame                                      ;82DF8E|5C71D882|82D871;
  
  
+;;
+; @brief   State $07: build the New Game slot-select screen (area $5E, graphics preset 4, palette $6F) and highlight the initial slot.
+; @details Draws the slot frames and the info of both slots (fMainMenu_DrawSaveSlotInfo mode 0), highlights the slot in $098E with palette animations
+;          (aMainMenu_PalAnimSlotHighlighted / SlotNormal in slots 4 and 5), sets BG1 scroll depending on whether the first slot holds a save
+;          (fGameEngine_LoadContinue), fades in and enters the frame loop fMainMenu_NewGameSlotSelect_WaitFrame.
+; @modifies strcMap.loadAreaId, strcBGScrool.*, ptrTemp0x72
+; @calls   fMainMenu_DrawSaveSlotFrames, fMainMenu_DrawSaveSlotInfo, fGameEngine_LoadContinue, fCore_Store0x72To0x42AtIndex
+; @note    $098E (save slot cursor, 0/1) is addressed as a raw RAM byte.
+;;
 fMainMenu_StateNewGameSlotSelect:
     SEP #$20                                                   ;82DF92|E220    |      ;
     LDA.B #$5E                                                 ;82DF94|A95E    |      ;
@@ -1520,6 +1645,9 @@ fMainMenu_StateNewGameSlotSelect:
     JML.L fMainMenu_NewGameSlotSelect_FadeIn                                      ;82E07B|5CB5E082|82E0B5;
  
  
+;;
+; @brief   Initial highlight when slot 2 is selected: swap the highlight/normal palette animations of the two slot boxes.
+;;
 fMainMenu_NewGameSlotSelect_InitCursorSlot2:
     REP #$20                                                   ;82E07F|C220    |      ;
     SEP #$10                                                   ;82E081|E210    |      ;
@@ -1546,6 +1674,10 @@ fMainMenu_NewGameSlotSelect_InitCursorSlot2:
     LDY.B #$01                                                 ;82E0AF|A001    |      ;
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82E0B1|22488E80|808E48;
  
+;;
+; @brief   Start the screen music, fade the New Game slot-select screen in and clear the timers.
+; @calls   fAudio_FadeOutOnTrackChangeFast, fAudio_LoadPendingTrack, fAudio_StartPendingTrack, fCore_ScreenFadein
+;;
 fMainMenu_NewGameSlotSelect_FadeIn:
     JSL.L fAudio_FadeOutOnTrackChangeFast                                 ;82E0B5|221F8483|83841F;
     JSL.L fAudio_LoadPendingTrack                                 ;82E0B9|22A48383|8383A4;
@@ -1568,6 +1700,10 @@ fMainMenu_NewGameSlotSelect_FadeIn:
     STZ.B strcVariables.u8Unk96                                ;82E0E7|6496    |000096;
     STZ.B strcVariables.u8Unk97                                ;82E0E9|6497    |000097;
  
+;;
+; @brief   Per-frame loop of the New Game slot select: wait for the frame, run input, and when the cursor moved ($098E changed) update the BG1 page and the slot highlights.
+; @region  EU hard-codes the palette animation pointers ($F2CB / $F2E2) in this routine.
+;;
 fMainMenu_NewGameSlotSelect_WaitFrame:
     SEP #$20                                                   ;82E0EB|E220    |      ;
     LDA.B $00                                                  ;82E0ED|A500    |000000;
@@ -1690,6 +1826,9 @@ fMainMenu_NewGameSlotSelect_WaitFrame:
     JML.L fMainMenu_NewGameSlotSelect_FrameTail                                      ;82E167|5CBDE182|82E1BD;
  
  
+;;
+; @brief   Cursor moved to slot 2: reload the slot info (fGameEngine_LoadContinue(1)), set BG1 scroll and the highlight palette animations.
+;;
 fMainMenu_NewGameSlotSelect_MoveCursorSlot2:
     REP #$20                                                   ;82E16B|C220    |      ;
     LDA.W #$0001                                               ;82E16D|A90100  |      ;
@@ -1739,6 +1878,10 @@ fMainMenu_NewGameSlotSelect_MoveCursorSlot2:
     LDY.B #$01                                                 ;82E1B7|A001    |      ;
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82E1B9|22488E80|808E48;
  
+;;
+; @brief   End of a New Game slot-select frame: slowly scroll BG2 diagonally and check the result in strcVariables.n8Temp3 (1 = cancel -> title, 2 = start the game with fStartNewGame).
+; @calls   fMainMenu_ReturnToTitleFromSlotSelect, fStartNewGame
+;;
 fMainMenu_NewGameSlotSelect_FrameTail:
     SEP #$20                                                   ;82E1BD|E220    |      ;
     LDA.B strcVariables.u8Unk96                                ;82E1BF|A596    |000096;
@@ -1772,6 +1915,11 @@ fMainMenu_NewGameSlotSelect_FrameTail:
     JML.L fMainMenu_NewGameSlotSelect_WaitFrame                                      ;82E1ED|5CEBE082|82E0EB;
  
  
+;;
+; @brief   State $08: build the Load Game slot-select screen (same layout as New Game, slot info drawn with mode 1).
+; @details Mirrors fMainMenu_StateNewGameSlotSelect without the BG1 page switching; ends in the frame loop fMainMenu_LoadGameSlotSelect_WaitFrame.
+; @calls   fMainMenu_DrawSaveSlotFrames, fMainMenu_DrawSaveSlotInfo, fCore_Store0x72To0x42AtIndex
+;;
 fMainMenu_StateLoadGameSlotSelect:
     SEP #$20                                                   ;82E1F1|E220    |      ;
     LDA.B #$5E                                                 ;82E1F3|A95E    |      ;
@@ -1909,6 +2057,9 @@ fMainMenu_StateLoadGameSlotSelect:
     STZ.B strcVariables.u8Unk96                                ;82E333|6496    |000096;
     STZ.B strcVariables.u8Unk97                                ;82E335|6497    |000097;
  
+;;
+; @brief   Per-frame loop of the Load Game slot select: wait for the frame, run input and update the highlights when the cursor moved.
+;;
 fMainMenu_LoadGameSlotSelect_WaitFrame:
     SEP #$20                                                   ;82E337|E220    |      ;
     LDA.B $00                                                  ;82E339|A500    |000000;
@@ -1957,6 +2108,9 @@ fMainMenu_LoadGameSlotSelect_WaitFrame:
     JML.L fMainMenu_LoadGameSlotSelect_FrameTail                                      ;82E397|5CD1E382|82E3D1;
  
  
+;;
+; @brief   Cursor moved to slot 2: swap the highlight/normal palette animations of the two slot boxes.
+;;
 fMainMenu_LoadGameSlotSelect_MoveCursorSlot2:
     REP #$20                                                   ;82E39B|C220    |      ;
     SEP #$10                                                   ;82E39D|E210    |      ;
@@ -1983,6 +2137,10 @@ fMainMenu_LoadGameSlotSelect_MoveCursorSlot2:
     LDY.B #$01                                                 ;82E3CB|A001    |      ;
     JSL.L fCore_Store0x72To0x42AtIndex                         ;82E3CD|22488E80|808E48;
  
+;;
+; @brief   End of a Load Game slot-select frame: scroll BG2 and check strcVariables.n8Temp3 (1 = cancel -> title, 2 = load with fLoadAndStartGame).
+; @calls   fMainMenu_ReturnToTitleFromSlotSelect, fLoadAndStartGame
+;;
 fMainMenu_LoadGameSlotSelect_FrameTail:
     SEP #$20                                                   ;82E3D1|E220    |      ;
     LDA.B strcVariables.u8Unk96                                ;82E3D3|A596    |000096;
@@ -2016,6 +2174,18 @@ fMainMenu_LoadGameSlotSelect_FrameTail:
     JML.L fMainMenu_LoadGameSlotSelect_WaitFrame                                      ;82E401|5C37E382|82E337;
  
  
+;;
+; @brief   Draw the summary of one save slot (player name, year, season, day, weekday) with glyph transfers into VRAM, or call the empty-slot drawing.
+; @details fGameEngine_LoadContinue(A = slot) loads the slot header; X = 0 means an empty slot (-> fMainMenu_DrawEmptySaveSlot). Otherwise the
+;          four name glyphs (strcNames.sPlayer), year (nCurrentYearID + 1 as a number), the date strings of fWriteSeasonWeekdayAndDayOrdinal and the day number
+;          are drawn at the VRAM addresses in aMainMenu_SlotInfoTextVramAddr[slot * 8 ..]. DE/EU also draw the year ordinal (aYearOrdinalString).
+; @param   A   slot (0 or 1)
+; @param   Y   mode (0 = New Game screen, 1 = Load Game screen)
+; @mode    M16X16
+; @calls   fGameEngine_LoadContinue, fDialog_TransferGlyph, fDialog_DrawNumericVarDigit, fCore_StartTransfer, fWriteSeasonWeekdayAndDayOrdinal, fMainMenu_DrawEmptySaveSlot
+; @callers fMainMenu_StateLoadGameSlotSelect, fMainMenu_StateNewGameSlotSelect
+; @region  JP: 8-pixel glyph spacing and one season/weekday glyph pair; EU/DE: 16-pixel spacing and the extra year ordinal.
+;;
 fMainMenu_DrawSaveSlotInfo:
     REP #$30                                                   ;82E405|C230    |      ;
     PHA                                                        ;82E407|48      |      ;
@@ -2271,6 +2441,17 @@ fMainMenu_DrawSaveSlotInfo:
     RTS                                                        ;82E5E6|60      |      ; GIGAEND
  
  
+;;
+; @brief   Draw the "no data" panel of an empty save slot by copying a tilemap block from nSystemTransferTilemapTable into two VRAM name table pages.
+; @details VRAM base = aSystemTransferArgument[slot * 2]; for each of two pages ($0400 words apart) three rows (DE: four) of $24 bytes are transferred,
+;          rows $20 words apart. Y selects the variant block (offset 0 for mode 0, $6C - DE: $90 - for the other mode).
+; @param   A   slot (0 or 1)
+; @param   Y   mode (0 = New Game screen, otherwise Load Game screen)
+; @mode    M16X16
+; @calls   fCore_PrepareTransfer, fCore_StartPreparedTransfer
+; @callers fMainMenu_DrawSaveSlotInfo
+; @note    confidence: medium - the meaning of the two variants is inferred from the offset, not from rendering.
+;;
 fMainMenu_DrawEmptySaveSlot:
     REP #$30                                                   ;82E5E7|C230    |      ; A: nArg1, Y: nArg2
     ASL A                                                      ;82E5E9|0A      |      ;

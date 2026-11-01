@@ -1,6 +1,30 @@
+;;
+; @file   tools.asm
+; @brief  Tool use: sound effects of the equipped tool, the use animation (player sprite) and the use action (effect on the tile or animal in
+;         front of the player) for each of the 28 tools, plus the shared front-tile helpers.
+; @details Tool ids are !EITEM_* ($00 empty hand .. $1B fishing pole). fToolUsedAnimationHandler starts the animation (aToolUsedAnimationTable),
+;          fToolUsedActionHandler runs when the swing connects (aToolUsedActionTable, called from fPlayerAction0x0A). Every action handler
+;          first asks fSound_GetToolSound (via fToolUsed_GetSoundForFrontTile) whether the tool works on the object in front: A = 0 nothing,
+;          1 works, 2 water spot (watering can only); X returns the object id. Object ids are those of the area object map (see object_map.asm),
+;          new tiles are written with fSetTileAtCoords, debris/effects are spawned with fObjectSlots_Allocate.
+;          strcStockData.toolUseStep counts the steps of a multi-tile use: seed bags, golden sickle and sprinkler work through a 3x3 area in 9 steps
+;          (nFrontTileOffsetTable), the golden plow works on 6 tiles in a line; the stock is consumed when the last step is done.
+;          daily4 flag $0008 appears to mark the tutorial/demo (set by the how-to-play setup) and suppresses all random finds.
+; @bank   $82   @range $828FB1-$82A5FA
+; @see    sound.asm (fSound_GetToolSound), object_map.asm, docs/formats/data-tables.md (tool tables)
+;;
 ; Bank $82 module "tools" - starts at $828FB1
  
  
+;;
+; @brief   Play the hit/swing sound of the equipped tool for the current front-tile result.
+; @details Reads nToolSoundTable[tool*3]: the voice (reg115) and the sound effect selected by strcPlayerData.toolSound (0 = swing in the air, 1 = hit an object, 2 = none) and starts it with fAudioSetRegister2to0A.
+; @param   strcPlayerData.toolEquipped, strcPlayerData.toolSound
+; @modifies strcAudio.reg114, strcAudio.reg115
+; @mode    M8
+; @calls   fAudioSetRegister2to0A
+; @callers fPlayerAction0x0A
+;;
 fToolUsedSound_PlayToolHit:
     SEP #$20                                                   ;828FB1|E220    |      ;
     LDA.B #$00                                                 ;828FB3|A900    |      ; A = 0
@@ -39,6 +63,15 @@ fToolUsedSound_PlayToolHit:
     RTL                                                        ;828FF2|6B      |      ;
  
  
+;;
+; @brief   When the equipped tool differs from the last one that set up sound (strcAudio.toolId), preload its voice and play its effect samples.
+; @details Uses nToolSoundTable[tool*3] as the voice (reg115); the two effect ids are prepared with fAudio_PrepareSoundEffectSample; nSoundEffectSampleTable maps strcAudio.unk118 to the sample index.
+; @modifies strcAudio.reg114, strcAudio.reg115, strcAudio.index, strcAudio.toolId
+; @mode    M8X16
+; @calls   fAudio_PrepareSoundEffectSample
+; @callers fAIAction0x2C_PlaySoundWait, fItemCarriedTool_EquipFromShed, fMap_SetupArea, fPlayerAction0x1C, fPlayerInteraction0x03, fPlayerInteraction0x35
+; @note    confidence: medium - the role of strcAudio.unk118 and the second sample are only inferred.
+;;
 fToolUsedSound_PlayOnToolChange:
     SEP #$20                                                   ;828FF3|E220    |      ;
     LDA.B #$00                                                 ;828FF5|A900    |      ;
@@ -89,8 +122,20 @@ fToolUsedSound_PlayOnToolChange:
     RTL                                                        ;829053|6B      |      ;
  
  
+; @brief   nToolSoundTable: sounds of the equipped tool (generated from assets/tables/data/tool_sound_data_82.csv).
+; @format  3 bytes per tool id: `[voice for reg115][sfx without object][sfx on object hit]`; EU/DE differ for the bell.
+; @index   !EITEM_* id * 3
+; @used_by fToolUsedSound_PlayToolHit, fToolUsedSound_PlayOnToolChange
     incsrc "../../../build/gen/blocks/tool_sound_data_82.asm"
  
+;;
+; @brief   Start the use animation of the equipped tool (or the tired pose when out of stamina).
+; @details Out of stamina (!PFLAGS_OUTOFSTAMINA): sprite $4D and action !PACTION_TIRED. Otherwise stores the front-tile result in strcPlayerData.toolSound, clears strcPlayerData.unkCounter91B and calls the handler of aToolUsedAnimationTable[tool].
+; @modifies strcObjectData.spriteIdx, strcPlayerData.toolSound, strcPlayerData.unkCounter91B, strcPlayer.action
+; @mode    M8X16
+; @calls   fToolUsed_StoreSoundForFrontTile
+; @callers fAIAction0x56_UseEquippedItem, fInput_SetPlayerAction0x0A
+;;
 fToolUsedAnimationHandler:
     SEP #$20                                                   ;8290A8|E220    |      ;
     REP #$10                                                   ;8290AA|C210    |      ;
@@ -127,10 +172,20 @@ fToolUsedAnimationHandler:
     RTL                                                        ;8290DC|6B      |      ;
  
  
+;;
+; @brief   Use animation for the empty hand: nothing to do.
+; @mode    =
+;;
 fToolUsedAnimation0x00_Empty:
     RTS                                                        ;8290DD|60      |      ;
  
  
+;;
+; @brief   Use animation of the tool: sickle swing.
+; @details Sets the player sprite strcObjectData.spriteIdx = $0050 + direction (direction 0-3 = down, up, left, right).
+; @modifies strcObjectData.spriteIdx
+; @mode    M16X16
+;;
 fToolUsedAnimation0x01_Sickle:
     REP #$30                                                   ;8290DE|C230    |      ;
     REP #$30                                                   ;8290E0|C230    |      ;
@@ -141,6 +196,12 @@ fToolUsedAnimation0x01_Sickle:
     RTS                                                        ;8290EB|60      |      ;
  
  
+;;
+; @brief   Use animation of the tool: hoe swing.
+; @details Sets the player sprite strcObjectData.spriteIdx = $0054 + direction (direction 0-3 = down, up, left, right).
+; @modifies strcObjectData.spriteIdx
+; @mode    M16X16
+;;
 fToolUsedAnimation0x02_Plow:
     REP #$30                                                   ;8290EC|C230    |      ;
     REP #$30                                                   ;8290EE|C230    |      ;
@@ -151,6 +212,12 @@ fToolUsedAnimation0x02_Plow:
     RTS                                                        ;8290F9|60      |      ;
  
  
+;;
+; @brief   Use animation of the tool: hammer swing.
+; @details Sets the player sprite strcObjectData.spriteIdx = $0058 + direction (direction 0-3 = down, up, left, right).
+; @modifies strcObjectData.spriteIdx
+; @mode    M16X16
+;;
 fToolUsedAnimation0x03_Hammer:
     REP #$30                                                   ;8290FA|C230    |      ;
     REP #$30                                                   ;8290FC|C230    |      ;
@@ -161,6 +228,12 @@ fToolUsedAnimation0x03_Hammer:
     RTS                                                        ;829107|60      |      ;
  
  
+;;
+; @brief   Use animation of the tool: axe swing.
+; @details Sets the player sprite strcObjectData.spriteIdx = $005C + direction (direction 0-3 = down, up, left, right).
+; @modifies strcObjectData.spriteIdx
+; @mode    M16X16
+;;
 fToolUsedAnimation0x04_Axe:
     REP #$30                                                   ;829108|C230    |      ;
     REP #$30                                                   ;82910A|C230    |      ;
@@ -171,6 +244,12 @@ fToolUsedAnimation0x04_Axe:
     RTS                                                        ;829115|60      |      ;
  
  
+;;
+; @brief   Use animation of the tool: scattering corn seed.
+; @details Sets the player sprite strcObjectData.spriteIdx = $0046 (direction 0-3 = down, up, left, right).
+; @modifies strcObjectData.spriteIdx
+; @mode    M16X16
+;;
 fToolUsedAnimation0x05_CornSeedBag:
     REP #$30                                                   ;829116|C230    |      ;
     REP #$30                                                   ;829118|C230    |      ;
@@ -179,6 +258,12 @@ fToolUsedAnimation0x05_CornSeedBag:
     RTS                                                        ;829120|60      |      ;
  
  
+;;
+; @brief   Use animation of the tool: scattering tomato seed.
+; @details Sets the player sprite strcObjectData.spriteIdx = $0046 (direction 0-3 = down, up, left, right).
+; @modifies strcObjectData.spriteIdx
+; @mode    M16X16
+;;
 fToolUsedAnimation0x06_TomatoSeedBag:
     REP #$30                                                   ;829121|C230    |      ;
     REP #$30                                                   ;829123|C230    |      ;
@@ -187,6 +272,12 @@ fToolUsedAnimation0x06_TomatoSeedBag:
     RTS                                                        ;82912B|60      |      ;
  
  
+;;
+; @brief   Use animation of the tool: scattering potato seed.
+; @details Sets the player sprite strcObjectData.spriteIdx = $0046 (direction 0-3 = down, up, left, right).
+; @modifies strcObjectData.spriteIdx
+; @mode    M16X16
+;;
 fToolUsedAnimation0x07_PotatoSeedBag:
     REP #$30                                                   ;82912C|C230    |      ;
     REP #$30                                                   ;82912E|C230    |      ;
@@ -195,6 +286,12 @@ fToolUsedAnimation0x07_PotatoSeedBag:
     RTS                                                        ;829136|60      |      ;
  
  
+;;
+; @brief   Use animation of the tool: scattering turnip seed.
+; @details Sets the player sprite strcObjectData.spriteIdx = $0046 (direction 0-3 = down, up, left, right).
+; @modifies strcObjectData.spriteIdx
+; @mode    M16X16
+;;
 fToolUsedAnimation0x08_TurnipSeedBag:
     REP #$30                                                   ;829137|C230    |      ;
     REP #$30                                                   ;829139|C230    |      ;
@@ -203,6 +300,12 @@ fToolUsedAnimation0x08_TurnipSeedBag:
     RTS                                                        ;829141|60      |      ;
  
  
+;;
+; @brief   Use animation of the tool: giving cow medicine.
+; @details Sets the player sprite strcObjectData.spriteIdx = $00AC + direction (direction 0-3 = down, up, left, right).
+; @modifies strcObjectData.spriteIdx
+; @mode    M16X16
+;;
 fToolUsedAnimation0x09_CowMedicine:
     REP #$30                                                   ;829142|C230    |      ;
     REP #$30                                                   ;829144|C230    |      ;
@@ -213,6 +316,12 @@ fToolUsedAnimation0x09_CowMedicine:
     RTS                                                        ;82914F|60      |      ;
  
  
+;;
+; @brief   Use animation of the tool: giving the miracle potion.
+; @details Sets the player sprite strcObjectData.spriteIdx = $00AC + direction (direction 0-3 = down, up, left, right).
+; @modifies strcObjectData.spriteIdx
+; @mode    M16X16
+;;
 fToolUsedAnimation0x0A_MiraclePotion:
     REP #$30                                                   ;829150|C230    |      ;
     REP #$30                                                   ;829152|C230    |      ;
@@ -223,6 +332,12 @@ fToolUsedAnimation0x0A_MiraclePotion:
     RTS                                                        ;82915D|60      |      ;
  
  
+;;
+; @brief   Use animation of the tool: ringing the bell (also sets daily1 flag $0010).
+; @details Sets the player sprite strcObjectData.spriteIdx = $0060 + direction (direction 0-3 = down, up, left, right).
+; @modifies strcObjectData.spriteIdx, strcFlags.daily1
+; @mode    M16X16
+;;
 fToolUsedAnimation0x0B_Bell:
     REP #$30                                                   ;82915E|C230    |      ;
     REP #$30                                                   ;829160|C230    |      ;
@@ -235,6 +350,12 @@ fToolUsedAnimation0x0B_Bell:
     RTS                                                        ;829178|60      |      ;
  
  
+;;
+; @brief   Use animation of the tool: scattering grass seed.
+; @details Sets the player sprite strcObjectData.spriteIdx = $0046 (direction 0-3 = down, up, left, right).
+; @modifies strcObjectData.spriteIdx
+; @mode    M16X16
+;;
 fToolUsedAnimation0x0C_GrassSeedBag:
     REP #$30                                                   ;829179|C230    |      ;
     REP #$30                                                   ;82917B|C230    |      ;
@@ -243,6 +364,12 @@ fToolUsedAnimation0x0C_GrassSeedBag:
     RTS                                                        ;829183|60      |      ;
  
  
+;;
+; @brief   Use animation of the tool: painting.
+; @details Sets the player sprite strcObjectData.spriteIdx = $0044 (direction 0-3 = down, up, left, right).
+; @modifies strcObjectData.spriteIdx
+; @mode    M16X16
+;;
 fToolUsedAnimation0x0D_Paint:
     REP #$30                                                   ;829184|C230    |      ;
     LDA.W #$0044                                               ;829186|A94400  |      ;
@@ -250,6 +377,12 @@ fToolUsedAnimation0x0D_Paint:
     RTS                                                        ;82918C|60      |      ;
  
  
+;;
+; @brief   Use animation of the tool: using the milker.
+; @details Sets the player sprite strcObjectData.spriteIdx = $0078 + direction (direction 0-3 = down, up, left, right).
+; @modifies strcObjectData.spriteIdx
+; @mode    M16X16
+;;
 fToolUsedAnimation0x0E_Milker:
     REP #$30                                                   ;82918D|C230    |      ;
     REP #$30                                                   ;82918F|C230    |      ;
@@ -260,6 +393,12 @@ fToolUsedAnimation0x0E_Milker:
     RTS                                                        ;82919A|60      |      ;
  
  
+;;
+; @brief   Use animation of the tool: brushing an animal.
+; @details Sets the player sprite strcObjectData.spriteIdx = $0064 + direction (direction 0-3 = down, up, left, right).
+; @modifies strcObjectData.spriteIdx
+; @mode    M16X16
+;;
 fToolUsedAnimation0x0F_Brush:
     REP #$30                                                   ;82919B|C230    |      ;
     REP #$30                                                   ;82919D|C230    |      ;
@@ -270,6 +409,13 @@ fToolUsedAnimation0x0F_Brush:
     RTS                                                        ;8291A8|60      |      ;
  
  
+;;
+; @brief   Use animation of the watering can; also refills the can at a water spot.
+; @details Asks fToolUsed_GetSoundForFrontTile: result 2 (water spot) -> sprite $0070 + direction and strcPlayerData.leftWater = $14 (20); can has water -> $0068 + direction; can empty -> $006C + direction.
+; @modifies strcObjectData.spriteIdx, strcPlayerData.leftWater
+; @mode    M8X16
+; @calls   fToolUsed_GetSoundForFrontTile
+;;
 fToolUsedAnimation0x10_WateringCan:
     SEP #$20                                                   ;8291A9|E220    |      ;
     REP #$10                                                   ;8291AB|C210    |      ;
@@ -310,6 +456,12 @@ fToolUsedAnimation0x10_WateringCan:
     RTS                                                        ;8291E7|60      |      ;
  
  
+;;
+; @brief   Use animation of the tool: golden sickle swing.
+; @details Sets the player sprite strcObjectData.spriteIdx = $0048 (direction 0-3 = down, up, left, right).
+; @modifies strcObjectData.spriteIdx
+; @mode    M16X16
+;;
 fToolUsedAnimation0x11_GoldenSickle:
     REP #$30                                                   ;8291E8|C230    |      ;
     LDA.W #$0048                                               ;8291EA|A94800  |      ;
@@ -317,6 +469,12 @@ fToolUsedAnimation0x11_GoldenSickle:
     RTS                                                        ;8291F0|60      |      ;
  
  
+;;
+; @brief   Use animation of the tool: golden hoe swing.
+; @details Sets the player sprite strcObjectData.spriteIdx = $007C + direction (direction 0-3 = down, up, left, right).
+; @modifies strcObjectData.spriteIdx
+; @mode    M16X16
+;;
 fToolUsedAnimation0x12_GoldenPlow:
     REP #$30                                                   ;8291F1|C230    |      ;
     LDA.W #$007C                                               ;8291F3|A97C00  |      ;
@@ -326,6 +484,12 @@ fToolUsedAnimation0x12_GoldenPlow:
     RTS                                                        ;8291FC|60      |      ;
  
  
+;;
+; @brief   Use animation of the tool: golden hammer swing.
+; @details Sets the player sprite strcObjectData.spriteIdx = $0084 + direction (direction 0-3 = down, up, left, right).
+; @modifies strcObjectData.spriteIdx
+; @mode    M16X16
+;;
 fToolUsedAnimation0x13_GoldenHammer:
     REP #$30                                                   ;8291FD|C230    |      ;
     LDA.W #$0084                                               ;8291FF|A98400  |      ;
@@ -335,6 +499,12 @@ fToolUsedAnimation0x13_GoldenHammer:
     RTS                                                        ;829208|60      |      ;
  
  
+;;
+; @brief   Use animation of the tool: golden axe swing.
+; @details Sets the player sprite strcObjectData.spriteIdx = $0080 + direction (direction 0-3 = down, up, left, right).
+; @modifies strcObjectData.spriteIdx
+; @mode    M16X16
+;;
 fToolUsedAnimation0x14_GoldenAxe:
     REP #$30                                                   ;829209|C230    |      ;
     LDA.W #$0080                                               ;82920B|A98000  |      ;
@@ -344,6 +514,12 @@ fToolUsedAnimation0x14_GoldenAxe:
     RTS                                                        ;829214|60      |      ;
  
  
+;;
+; @brief   Use animation of the tool: placing the sprinkler.
+; @details Sets the player sprite strcObjectData.spriteIdx = $0047 (direction 0-3 = down, up, left, right).
+; @modifies strcObjectData.spriteIdx
+; @mode    M16X16
+;;
 fToolUsedAnimation0x15_Sprinkler:
     REP #$30                                                   ;829215|C230    |      ;
     LDA.W #$0047                                               ;829217|A94700  |      ;
@@ -351,6 +527,12 @@ fToolUsedAnimation0x15_Sprinkler:
     RTS                                                        ;82921D|60      |      ;
  
  
+;;
+; @brief   Use animation of the tool: using the beanstalk seed.
+; @details Sets the player sprite strcObjectData.spriteIdx = $00AC + direction (direction 0-3 = down, up, left, right).
+; @modifies strcObjectData.spriteIdx
+; @mode    M16X16
+;;
 fToolUsedAnimation0x16_BeanstalkSeed:
     REP #$30                                                   ;82921E|C230    |      ;
     LDA.W #$00AC                                               ;829220|A9AC00  |      ;
@@ -360,6 +542,12 @@ fToolUsedAnimation0x16_BeanstalkSeed:
     RTS                                                        ;829229|60      |      ;
  
  
+;;
+; @brief   Use animation of the tool: offering the blue diamond (?).
+; @details Sets the player sprite strcObjectData.spriteIdx = $00AC + direction (direction 0-3 = down, up, left, right).
+; @modifies strcObjectData.spriteIdx
+; @mode    M16X16
+;;
 fToolUsedAnimation0x17_BlueDiamond:
     REP #$30                                                   ;82922A|C230    |      ;
     LDA.W #$00AC                                               ;82922C|A9AC00  |      ;
@@ -369,6 +557,12 @@ fToolUsedAnimation0x17_BlueDiamond:
     RTS                                                        ;829235|60      |      ;
  
  
+;;
+; @brief   Use animation of the tool: holding up the blue feather.
+; @details Sets the player sprite strcObjectData.spriteIdx = $00A8 (direction 0-3 = down, up, left, right).
+; @modifies strcObjectData.spriteIdx
+; @mode    M16X16
+;;
 fToolUsedAnimation0x18_BlueFeather:
     REP #$30                                                   ;829236|C230    |      ;
     LDA.W #$00A8                                               ;829238|A9A800  |      ;
@@ -376,6 +570,12 @@ fToolUsedAnimation0x18_BlueFeather:
     RTS                                                        ;82923E|60      |      ;
  
  
+;;
+; @brief   Use animation of the tool: throwing chicken feed.
+; @details Sets the player sprite strcObjectData.spriteIdx = $0074 + direction (direction 0-3 = down, up, left, right).
+; @modifies strcObjectData.spriteIdx
+; @mode    M16X16
+;;
 fToolUsedAnimation0x19_ChickenFood:
     REP #$30                                                   ;82923F|C230    |      ;
     LDA.W #$0074                                               ;829241|A97400  |      ;
@@ -385,6 +585,12 @@ fToolUsedAnimation0x19_ChickenFood:
     RTS                                                        ;82924A|60      |      ;
  
  
+;;
+; @brief   Use animation of the tool: throwing cow feed.
+; @details Sets the player sprite strcObjectData.spriteIdx = $0074 + direction (direction 0-3 = down, up, left, right).
+; @modifies strcObjectData.spriteIdx
+; @mode    M16X16
+;;
 fToolUsedAnimation0x1A_CowFood:
     REP #$30                                                   ;82924B|C230    |      ;
     LDA.W #$0074                                               ;82924D|A97400  |      ;
@@ -394,6 +600,12 @@ fToolUsedAnimation0x1A_CowFood:
     RTS                                                        ;829256|60      |      ;
  
  
+;;
+; @brief   Use animation of the tool: casting the fishing pole.
+; @details Sets the player sprite strcObjectData.spriteIdx = $0088 (direction 0-3 = down, up, left, right).
+; @modifies strcObjectData.spriteIdx
+; @mode    M16X16
+;;
 fToolUsedAnimation0x1B_FishingPole:
     REP #$30                                                   ;829257|C230    |      ;
     LDA.W #$0088                                               ;829259|A98800  |      ;
@@ -401,6 +613,14 @@ fToolUsedAnimation0x1B_FishingPole:
     RTS                                                        ;82925F|60      |      ;
  
  
+;;
+; @brief   Apply the effect of the equipped tool on the front tile: calls aToolUsedActionTable[tool] and sets daily1 flag $0040.
+; @modifies strcFlags.daily1
+; @mode    M8X16
+; @calls   fToolUsedAction0x00_Empty .. fToolUsedAction0x1B_FishingPole (through aToolUsedActionTable)
+; @callers fPlayerAction0x0A
+; @region  DE reads the table at a fixed $A780, JP through aToolUsedActionTable_JP (the two tables are one block there).
+;;
 fToolUsedActionHandler:
     SEP #$20                                                   ;829260|E220    |      ;
     REP #$10                                                   ;829262|C210    |      ;
@@ -421,6 +641,13 @@ fToolUsedActionHandler:
     RTL                                                        ;82927C|6B      |      ;
  
  
+;;
+; @brief   Look at the tile in front of the player and store the tool result (0/1/2) in strcPlayerData.toolSound.
+; @calls   fStoreTileOnFrontOfPlayerAtDistance, fSound_GetToolSound
+; @modifies strcPlayerData.toolSound, nTileInFrontOfPlayerX, nTileInFrontOfPlayerY
+; @mode    M16X16 -> M8X16
+; @callers fToolUsedAnimationHandler
+;;
 fToolUsed_StoreSoundForFrontTile:
     REP #$30                                                   ;82927D|C230    |      ;
     LDA.W #$0001                                               ;82927F|A90100  |      ;
@@ -437,6 +664,15 @@ fToolUsed_StoreSoundForFrontTile:
     RTS                                                        ;82929F|60      |      ;
  
  
+;;
+; @brief   Tool result for the tile directly in front of the player (distance 1).
+; @return  A   0 = tool has no effect there, 1 = works, 2 = water spot; flags set from A
+; @return  X   object id of the front tile (0 if absent)
+; @modifies nTileInFrontOfPlayerX, nTileInFrontOfPlayerY
+; @mode    M16X16
+; @calls   fStoreTileOnFrontOfPlayerAtDistance, fSound_GetToolSound
+; @callers fToolUsedAction0x01_Sickle, fToolUsedAction0x02_Plow, fToolUsedAction0x03_Hammer, fToolUsedAction0x04_Axe, fToolUsedAction0x0D_Paint, fToolUsedAction0x10_WateringCan, fToolUsedAction0x13_GolderHammer, fToolUsedAction0x14_GoldenAxe
+;;
 fToolUsed_GetSoundForFrontTile:
     REP #$30                                                   ;8292A0|C230    |      ;
     LDA.W #$0001                                               ;8292A2|A90100  |      ;
@@ -450,6 +686,14 @@ fToolUsed_GetSoundForFrontTile:
     RTS                                                        ;8292BB|60      |      ;
  
  
+;;
+; @brief   Tool result for the tile `A + 1` tiles in front of the player.
+; @param   A   distance - 1 (the golden plow passes strcStockData.unkAnyTool = 0..5)
+; @return  A, X   as fToolUsed_GetSoundForFrontTile
+; @mode    M16X16
+; @calls   fStoreTileOnFrontOfPlayerAtDistance, fSound_GetToolSound
+; @callers fToolUsedAction0x12_GoldenPlow
+;;
 fToolUsed_GetSoundForFrontTileMode:
     REP #$30                                                   ;8292BC|C230    |      ;
     INC A                                                      ;8292BE|1A      |      ;
@@ -463,6 +707,14 @@ fToolUsed_GetSoundForFrontTileMode:
     RTS                                                        ;8292D5|60      |      ;
  
  
+;;
+; @brief   Tool result for a tile at an offset from the front tile (step of a 3x3 pattern).
+; @param   A   step 0-8, index into nFrontTileOffsetTable
+; @return  A, X   as fToolUsed_GetSoundForFrontTile
+; @mode    M16X16
+; @calls   fFindTileCoordsInFrontOfPLayer, fSound_GetToolSound
+; @callers fToolUsedAction0x05_CornSeedBag, fToolUsedAction0x06_TomatoSeedBag, fToolUsedAction0x07_PotatoSeedBag, fToolUsedAction0x08_TurnipSeedBag, fToolUsedAction0x0C_GrassSeedBag, fToolUsedAction0x11_GoldenSickle, fToolUsedAction0x15_Sprinkler
+;;
 fToolUsed_GetSoundForTileOffset:
     REP #$30                                                   ;8292D6|C230    |      ; A: nArg
     ASL A                                                      ;8292D8|0A      |      ;
@@ -484,17 +736,34 @@ fToolUsed_GetSoundForTileOffset:
     RTS                                                        ;8292F9|60      |      ;
  
  
+;;
+; @brief   Tile offsets of the 9 steps of a 3x3 use pattern around the front tile.
+; @format  9 x `[n16 dx][n16 dy]` in tiles: (0,0) (0,1) (1,1) (1,0) (1,-1) (0,-1) (-1,-1) (-1,0) (-1,1)
+; @index   step * 4
+; @used_by fToolUsed_GetSoundForTileOffset
+;;
 nFrontTileOffsetTable:
     dw $0000,$0000,$0000,$0001,$0001,$0001                     ;8292FA|        |      ; 0x09 * [n16 nRegX, n16 nRegY]
     dw $0001,$0000,$0001,$FFFF,$0000,$FFFF                     ;829306|        |      ;
     dw $FFFF,$FFFF,$FFFF,$0000,$FFFF,$0001                     ;829312|        |      ;
  
+;;
+; @brief   Empty hand: just end the action.
+; @modifies strcPlayer.action
+; @mode    M16X16
+;;
 fToolUsedAction0x00_Empty:
     REP #$30                                                   ;82931E|C230    |      ;
     %SetPlayerAction(!PACTION_NONE)
     RTS                                                        ;829327|60      |      ;
  
  
+;;
+; @brief   Sickle: cut the weed or grass in front of the player.
+; @details Needs result != 0 and not winter. Away from the farm (area >= 4): object $35 becomes tile $DE, anything else $DD. On the farm: weed $03 -> tile $0E; ripe grass $79 -> +1 feed (fGameEngine_AddFeed), strcPlayerData.leftGrassToCut-1, tile $52 and a grass effect object; other sickle-able tiles -> $17. A cut effect object ($B7) is spawned. In summer, unless daily4 $0008 or daily1 $2000, a 1-in-16 roll starts AI slot $12 subscript $32, gives +2 happiness and sets daily1 $2000. Costs 2 stamina.
+; @modifies sCurrentObjectMap, sFarmTilemap, strcPlayerData.leftGrassToCut, strcFlags.daily1, nUnknownX, nUnknownY
+; @mode    M16X16
+;;
 fToolUsedAction0x01_Sickle:
     REP #$30                                                   ;829328|C230    |      ;
     JSR.W fToolUsed_GetSoundForFrontTile                              ;82932A|20A092  |8292A0;
@@ -628,6 +897,13 @@ fToolUsedAction0x01_Sickle:
     RTS                                                        ;82945F|60      |      ;
  
  
+;;
+; @brief   Hoe: till the tile in front of the player (tile $17) with random finds.
+; @details Needs result != 0. Sets tile $17. In spring/summer (not in demo mode, once per day via daily1 $1000) a 1-in-32 roll starts a mole script (AI slot $11 subscript $30, strcStockData.unkMole = 0). Otherwise, if not yet dug up today (daily2 !DFLAGS2_DUGUPMONEY), a 1-in-16 roll starts a coin find (AI slot $0F subscript $3A, +10G profit via fGameEngine_AddProfit(1 = 10G unit)); a second 1-in-16 roll gives a money bag (subscript $3B, 50G). Else a 1-in-64 roll may start AI slot $10 subscript $1F (rare find, once each via event1 $0800 then $1000). Costs 2 stamina.
+; @modifies sFarmTilemap, sCurrentObjectMap, strcFlags.daily1, strcFlags.daily2, strcFlags.event1, strcStockData.unkMole
+; @mode    M16X16
+; @note    confidence: medium - the find scripts are named from their payouts only.
+;;
 fToolUsedAction0x02_Plow:
     REP #$30                                                   ;829460|C230    |      ;
     JSR.W fToolUsed_GetSoundForFrontTile                              ;829462|20A092  |8292A0;
@@ -751,6 +1027,12 @@ fToolUsedAction0x02_Plow:
     RTS                                                        ;8295BF|60      |      ;
  
  
+;;
+; @brief   Hammer: smash small stones and big rocks.
+; @details Result 0: possible chicken statue event (see below). Small stone ids ($04, $06): $06 becomes tile $0E; $04 becomes $0E on the farm, $DD in towns, $E3 in the cave areas (area >= !AREA_WOODSCAVE) with a debris effect ($C8). Other rock part ids: counted in nBreakHitCounter; the 6th hit breaks the rock, finding its top-left part from the ids $10/$0F/$0E and replacing it with tile $0D (farm) or $DF, spawning debris ($C9); earlier hits spawn a spark ($CB). Chicken statue: when no tool result and the object is $F8 on the crossroads/woods areas, the statue breaks (AI slot $15 subscript $16 spawns a power berry; 1-in-4 also AI slot $10 subscript $1F once, event1 $0200). Costs 2 stamina.
+; @modifies sCurrentObjectMap, sFarmTilemap, nBreakHitCounter, strcFlags.event1, strcFlags.daily2
+; @mode    M16X16
+;;
 fToolUsedAction0x03_Hammer:
     REP #$30                                                   ;8295C0|C230    |      ;
     JSR.W fToolUsed_GetSoundForFrontTile                              ;8295C2|20A092  |8292A0;
@@ -987,6 +1269,12 @@ fToolUsedAction0x03_Hammer:
     JMP.W .return                                              ;8297BA|4C2F97  |82972F;
  
  
+;;
+; @brief   Axe: chop stumps and branches into wood.
+; @details Result != 0: each hit increments nBreakHitCounter; the 6th hit breaks the stump (its four part ids $09-$0C / $11-$14 locate the origin), replaces it by tile $0D (farm) / $DF / $E0, adds 6 wood (fGameEngine_AddWood) and spawns chips ($B8); outside the farm a 1-in-16 roll (once, event1 $0400, not in demo mode) starts AI slot $10 subscript $1F. Earlier hits spawn a spark ($CB). Result 0: hitting object $F4 in the woods areas $10-$13 runs %AIExecute($0000, $0017, $0000) once (event4 $0020), unless the mapFlags weather bits $001A are set. Costs 2 stamina.
+; @modifies sCurrentObjectMap, sFarmTilemap, nBreakHitCounter, strcFlags.event1, strcFlags.event4
+; @mode    M16X16
+;;
 fToolUsedAction0x04_Axe:
     REP #$30                                                   ;8297BD|C230    |      ;
     JSR.W fToolUsed_GetSoundForFrontTile                              ;8297BF|20A092  |8292A0;
@@ -1190,6 +1478,12 @@ fToolUsedAction0x04_Axe:
     RTS                                                        ;829998|60      |      ;
  
  
+;;
+; @brief   Seed bag: sow corn seed on one tile of a 3x3 area per step.
+; @details Step strcStockData.unkAnyTool (0-8) selects the tile via nFrontTileOffsetTable. If the tile accepts seed (result != 0) the tile becomes seed tile $19 in summer only, otherwise tile $EB (wasted seed). After 9 steps the counter resets, one unit of the seed stock is used (unequipped when 0) and the action ends with 1 stamina.
+; @modifies strcStockData.unkAnyTool, strcPlayerData.leftCornSeeds, strcPlayerData.toolEquipped
+; @mode    M16X16
+;;
 fToolUsedAction0x05_CornSeedBag:
     SEP #$20                                                   ;829999|E220    |      ;
     REP #$10                                                   ;82999B|C210    |      ;
@@ -1234,6 +1528,12 @@ fToolUsedAction0x05_CornSeedBag:
     RTS                                                        ;8299F7|60      |      ;
  
  
+;;
+; @brief   Seed bag: sow tomato seed on one tile of a 3x3 area per step.
+; @details Step strcStockData.unkAnyTool (0-8) selects the tile via nFrontTileOffsetTable. If the tile accepts seed (result != 0) the tile becomes seed tile $1A in summer only, otherwise tile $EB (wasted seed). After 9 steps the counter resets, one unit of the seed stock is used (unequipped when 0) and the action ends with 1 stamina.
+; @modifies strcStockData.unkAnyTool, strcPlayerData.leftTomatoSeeds, strcPlayerData.toolEquipped
+; @mode    M16X16
+;;
 fToolUsedAction0x06_TomatoSeedBag:
     SEP #$20                                                   ;8299F8|E220    |      ;
     REP #$10                                                   ;8299FA|C210    |      ;
@@ -1278,6 +1578,12 @@ fToolUsedAction0x06_TomatoSeedBag:
     RTS                                                        ;829A56|60      |      ;
  
  
+;;
+; @brief   Seed bag: sow potato seed on one tile of a 3x3 area per step.
+; @details Step strcStockData.unkAnyTool (0-8) selects the tile via nFrontTileOffsetTable. If the tile accepts seed (result != 0) the tile becomes seed tile $1B in spring only, otherwise tile $EB (wasted seed). After 9 steps the counter resets, one unit of the seed stock is used (unequipped when 0) and the action ends with 1 stamina.
+; @modifies strcStockData.unkAnyTool, strcPlayerData.leftPotatoSeeds, strcPlayerData.toolEquipped
+; @mode    M16X16
+;;
 fToolUsedAction0x07_PotatoSeedBag:
     SEP #$20                                                   ;829A57|E220    |      ;
     REP #$10                                                   ;829A59|C210    |      ;
@@ -1321,6 +1627,12 @@ fToolUsedAction0x07_PotatoSeedBag:
     RTS                                                        ;829AB3|60      |      ;
  
  
+;;
+; @brief   Seed bag: sow turnip seed on one tile of a 3x3 area per step.
+; @details Step strcStockData.unkAnyTool (0-8) selects the tile via nFrontTileOffsetTable. If the tile accepts seed (result != 0) the tile becomes seed tile $1C in spring only, otherwise tile $EB (wasted seed). After 9 steps the counter resets, one unit of the seed stock is used (unequipped when 0) and the action ends with 1 stamina.
+; @modifies strcStockData.unkAnyTool, strcPlayerData.leftTurnipSeeds, strcPlayerData.toolEquipped
+; @mode    M16X16
+;;
 fToolUsedAction0x08_TurnipSeedBag:
     SEP #$20                                                   ;829AB4|E220    |      ;
     REP #$10                                                   ;829AB6|C210    |      ;
@@ -1364,6 +1676,11 @@ fToolUsedAction0x08_TurnipSeedBag:
     RTS                                                        ;829B10|60      |      ;
  
  
+;;
+; @brief   Cow medicine: end the action, unequip the item and set daily1 flag $0080 (medicine given).
+; @modifies strcFlags.daily1, strcPlayerData.toolEquipped
+; @mode    M16X16
+;;
 fToolUsedAction0x09_CowMedicine:
     %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;829B18|E220    |      ;
@@ -1375,6 +1692,11 @@ fToolUsedAction0x09_CowMedicine:
     RTS                                                        ;829B30|60      |      ;
  
  
+;;
+; @brief   Miracle potion: end the action, unequip the item and set daily1 flag $0100.
+; @modifies strcFlags.daily1, strcPlayerData.toolEquipped
+; @mode    M16X16
+;;
 fToolUsedAction0x0A_MiraclePotion:
     %SetPlayerAction(!PACTION_NONE)
     SEP #$20                                                   ;829B38|E220    |      ;
@@ -1386,12 +1708,22 @@ fToolUsedAction0x0A_MiraclePotion:
     RTS                                                        ;829B50|60      |      ;
  
  
+;;
+; @brief   Bell: end the action (1 stamina). The sound/flag effect is in the animation.
+; @mode    M16X16
+;;
 fToolUsedAction0x0B_Bell:
     %SetPlayerAction(!PACTION_NONE)
     %UpdateStamina(-1)
     RTS                                                        ;829B60|60      |      ;
  
  
+;;
+; @brief   Grass seed bag: plant grass on one tile of a 3x3 area per step.
+; @details As the other seed bags: tile $1E in spring/summer (increments nPlantedGrassCount), $ED (wasted) in fall/winter; after 9 steps one grass seed is used.
+; @modifies strcStockData.unkAnyTool, nPlantedGrassCount, strcPlayerData.leftGrassSeeds, strcPlayerData.toolEquipped
+; @mode    M16X16
+;;
 fToolUsedAction0x0C_GrassSeedBag:
     SEP #$20                                                   ;829B61|E220    |      ;
     REP #$10                                                   ;829B63|C210    |      ;
@@ -1440,6 +1772,12 @@ fToolUsedAction0x0C_GrassSeedBag:
     RTS                                                        ;829BCA|60      |      ;
  
  
+;;
+; @brief   Paint: paint the house (door, left, centre, right part) once each for +10 happiness.
+; @details Front object $E2 (left), $E3 (centre), $E4 (right), anything else (door); if the matching !EFLAGS2_PAINTEDHOUSE* flag is not yet set it gives 10 happiness, draws the painted tile ($58 left at x=$60, $5A centre at x=$90, $5C right at x=$B0, $59 door at x=$80, all at y=$130) and sets the flag. Costs 2 stamina.
+; @modifies strcFlags.event2
+; @mode    M16X16
+;;
 fToolUsedAction0x0D_Paint:
     REP #$30                                                   ;829BCB|C230    |      ;
     JSR.W fToolUsed_GetSoundForFrontTile                              ;829BCD|20A092  |8292A0;
@@ -1532,17 +1870,31 @@ fToolUsedAction0x0D_Paint:
     RTS                                                        ;829CBF|60      |      ;
  
  
+;;
+; @brief   Milker: end the action (the milking itself is handled by the animal code).
+; @mode    M16X16
+;;
 fToolUsedAction0x0E_Milker:
     %SetPlayerAction(!PACTION_NONE)
     RTS                                                        ;829CC7|60      |      ;
  
  
+;;
+; @brief   Brush: end the action (1 stamina); the brushing effect is in the animal code.
+; @mode    M16X16
+;;
 fToolUsedAction0x0F_Brush:
     %SetPlayerAction(!PACTION_NONE)
     %UpdateStamina(-1)
     RTS                                                        ;829CD7|60      |      ;
  
  
+;;
+; @brief   Watering can: use one unit of water and wet the tile in front.
+; @details Silences the tool voice, then if the front result is 2 (water spot) or the can is empty nothing happens; otherwise strcPlayerData.leftWater-1 and, if the tile accepts water, the object id X is replaced by X+1 (the watered variant) both in the object map and on screen (tile from the property table). Costs 2 stamina.
+; @modifies strcPlayerData.leftWater, sCurrentObjectMap, sFarmTilemap
+; @mode    M16X16
+;;
 fToolUsedAction0x10_WateringCan:
     SEP #$20                                                   ;829CD8|E220    |      ;
     REP #$10                                                   ;829CDA|C210    |      ;
@@ -1594,6 +1946,12 @@ fToolUsedAction0x10_WateringCan:
     RTS                                                        ;829D41|60      |      ;
  
  
+;;
+; @brief   Golden sickle: like the sickle but on a 3x3 area per swing (9 steps), 8 stamina after the last step.
+; @details Same cases as fToolUsedAction0x01_Sickle for every tile of the pattern (no cut in winter); the counter strcStockData.unkAnyTool advances per step and the action only ends after step 9.
+; @modifies sCurrentObjectMap, sFarmTilemap, strcStockData.unkAnyTool, strcPlayerData.leftGrassToCut, strcFlags.daily1
+; @mode    M16X16
+;;
 fToolUsedAction0x11_GoldenSickle:
     SEP #$20                                                   ;829D42|E220    |      ;
     REP #$10                                                   ;829D44|C210    |      ;
@@ -1740,6 +2098,12 @@ fToolUsedAction0x11_GoldenSickle:
     RTS                                                        ;829E8D|60      |      ;
  
  
+;;
+; @brief   Golden hoe: till 6 tiles in a line in front of the player (one per step), 8 stamina at the end.
+; @details Step n (0-5) works on the tile n+1 in front (fToolUsed_GetSoundForFrontTileMode). Same tilling and random finds as fToolUsedAction0x02_Plow (the mole script here does not reset unkMole).
+; @modifies sCurrentObjectMap, sFarmTilemap, strcStockData.unkAnyTool, strcFlags.daily1, strcFlags.daily2, strcFlags.event1
+; @mode    M16X16
+;;
 fToolUsedAction0x12_GoldenPlow:
     SEP #$20                                                   ;829E8E|E220    |      ;
     REP #$10                                                   ;829E90|C210    |      ;
@@ -1878,6 +2242,11 @@ fToolUsedAction0x12_GoldenPlow:
     RTS                                                        ;82A004|60      |      ;
  
  
+;;
+; @brief   Golden hammer: smash small stones and rocks, then end with 4 stamina.
+; @details Same cases as fToolUsedAction0x03_Hammer except that the rock is broken in one hit (no hit counting) and the cave is area >= $29.
+; @mode    M16X16
+;;
 fToolUsedAction0x13_GolderHammer:
     REP #$30                                                   ;82A005|C230    |      ;
     JSR.W fToolUsed_GetSoundForFrontTile                              ;82A007|20A092  |8292A0;
@@ -2084,6 +2453,11 @@ fToolUsedAction0x13_GolderHammer:
     JMP.W .loop                                                ;82A1BC|4C31A1  |82A131;
  
  
+;;
+; @brief   Golden axe: chop a stump in one hit, adds 6 wood, 8 stamina.
+; @details Same as fToolUsedAction0x04_Axe without hit counting (the part ids pick the origin; chance of the AI slot $10 subscript $1F find outside the farm).
+; @mode    M16X16
+;;
 fToolUsedAction0x14_GoldenAxe:
     REP #$30                                                   ;82A1BF|C230    |      ;
     JSR.W fToolUsed_GetSoundForFrontTile                              ;82A1C1|20A092  |8292A0;
@@ -2227,6 +2601,12 @@ fToolUsedAction0x14_GoldenAxe:
     RTS                                                        ;82A306|60      |      ;
  
  
+;;
+; @brief   Sprinkler: water one tile of a 3x3 area per step (no water needed).
+; @details Silences the tool voice; for each step the target tile id X becomes X+1 (watered) in the object map and on screen. After 9 steps the action ends (8 stamina).
+; @modifies sCurrentObjectMap, sFarmTilemap, strcStockData.unkAnyTool
+; @mode    M16X16
+;;
 fToolUsedAction0x15_Sprinkler:
     SEP #$20                                                   ;82A307|E220    |      ;
     REP #$10                                                   ;82A309|C210    |      ;
@@ -2283,6 +2663,11 @@ fToolUsedAction0x15_Sprinkler:
     RTS                                                        ;82A376|60      |      ;
  
  
+;;
+; @brief   Beanstalk seed: before 17:00 in area $31 (mountain top), plant it: sets event3 flag $0200, starts tile script $42 and unequips the seed.
+; @modifies strcFlags.event3, strcPlayerData.toolEquipped
+; @mode    M16X16
+;;
 fToolUsedAction0x16_BeanstalkSeed:
     SEP #$20                                                   ;82A377|E220    |      ;
     REP #$10                                                   ;82A379|C210    |      ;
@@ -2303,6 +2688,12 @@ fToolUsedAction0x16_BeanstalkSeed:
     RTS                                                        ;82A3A9|60      |      ;
  
  
+;;
+; @brief   Blue diamond: before 17:00 in area $34 (mountain top) in front of object $F6 runs %AIExecute($0000, $0012, $0000) and unequips the item.
+; @modifies strcPlayerData.toolEquipped
+; @mode    M16X16
+; @note    confidence: medium - the purpose of the AI script is not traced.
+;;
 fToolUsedAction0x17_BlueDiamond:
     SEP #$20                                                   ;82A3AA|E220    |      ;
     REP #$10                                                   ;82A3AC|C210    |      ;
@@ -2334,6 +2725,11 @@ fToolUsedAction0x17_BlueDiamond:
     RTS                                                        ;82A3FC|60      |      ;
  
  
+;;
+; @brief   Blue feather: end the action and set daily3 flag $0040.
+; @modifies strcFlags.daily3
+; @mode    M16X16
+;;
 fToolUsedAction0x18_BlueFeather:
     REP #$30                                                   ;82A3FD|C230    |      ;
     %SetPlayerAction(!PACTION_NONE)
@@ -2342,6 +2738,12 @@ fToolUsedAction0x18_BlueFeather:
     RTS                                                        ;82A413|60      |      ;
  
  
+;;
+; @brief   Chicken feed: fill a feed slot in the coop (area $28) or throw the feed on the ground.
+; @details In the coop, if the object 6 tiles right/down of the front tile is a feed slot (object ids $E2-$EE) the matching bit of nCowFeedFlagsTable is set in strcPlayerData.placedChickenFeedFlags, placedChcikenFeed+1, and the slot tile becomes $99. Otherwise a thrown-feed object ($C4) is spawned. One feed unit is used (unequipped at 0); 2 stamina.
+; @modifies strcPlayerData.placedChickenFeedFlags, strcPlayerData.placedChcikenFeed, strcPlayerData.leftChickenFood
+; @mode    M16X16
+;;
 fToolUsedAction0x19_ChickenFeed:
     SEP #$20                                                   ;82A414|E220    |      ;
     REP #$10                                                   ;82A416|C210    |      ;
@@ -2413,6 +2815,12 @@ fToolUsedAction0x19_ChickenFeed:
     RTS                                                        ;82A4C1|60      |      ;
  
  
+;;
+; @brief   Cow feed: fill a feed slot in the cow barn (area $27) or throw the feed on the ground.
+; @details Same as fToolUsedAction0x19_ChickenFeed with strcPlayerData.placedCowFeedFlags / placedCowFeed and strcPlayerData.leftCowFood.
+; @modifies strcPlayerData.placedCowFeedFlags, strcPlayerData.placedCowFeed, strcPlayerData.leftCowFood
+; @mode    M16X16
+;;
 fToolUsedAction0x1A_CowFeed:
     SEP #$20                                                   ;82A4C2|E220    |      ;
     REP #$10                                                   ;82A4C4|C210    |      ;
@@ -2484,8 +2892,15 @@ fToolUsedAction0x1A_CowFeed:
     RTS                                                        ;82A56F|60      |      ;
  
  
+;;
+; @brief   Fishing pole: nothing to do here (the fishing is handled by the fishing player actions).
+; @mode    M16X16
+;;
 fToolUsedAction0x1B_FishingPole:
     RTS                                                        ;82A570|60      |      ;
  
  
+; @brief   Generated tool tables (assets/tables/data/tool_action_tables.csv): nCowFeedFlagsTable (1 << N bit masks), aToolUsedAnimationTable and aToolUsedActionTable (ptr16 per tool id, 28 entries each).
+; @format  nCowFeedFlagsTable: 16-bit masks $0001..$8000 indexed by feed slot * 2; handler tables: ptr16 indexed by !EITEM_* * 2
+; @used_by fToolUsedAnimationHandler, fToolUsedActionHandler, fToolUsedAction0x19_ChickenFeed, fToolUsedAction0x1A_CowFeed
     incsrc "../../../build/gen/blocks/tool_action_tables.asm"

@@ -1,5 +1,27 @@
+;;
+; @file   object_map.asm
+; @brief  Farm/area object map management: loading maps into WRAM and the daily farm simulation on the tile map
+;         (weather damage, crop and grass growth, grazing, ranch development).
+; @details Object maps are byte grids of tile (object) ids; the farm map sFarmTilemap ($7EA4E6, 64x64 tiles) is the persistent copy,
+;          sCurrentObjectMap ($7E09B6) is the map of the area currently loaded. The daily routines iterate the farm map with
+;          strcDialogDisplay.mapMultiWidth = 4 and fObjectEngine_ConvertCoordsToOffset (object_data.asm). Ids $00-$9F are farm tile ids,
+;          ids >= $A0 are special object ids that the simulation leaves alone. Observed id groups (derived from the loops, medium
+;          confidence): $03 weed, $05/$06 and $07/$08 field states, $19-$1C seeds, $1E/$1F grass seed (dry/wet), $20-$6F crop growth
+;          stages (even = dry, odd = watered), $70-$79 grass growth ($79 ripe), $7A cut grass.
+; @bank   $82   @range $82A5FB-$82AA70
+; @see    object_data.asm, game_events.asm (fNextDayHandler), docs/formats/area-data.md
+;;
 ; Bank $82 module "object_map" - starts at $82A5FB
  
+;;
+; @brief   Load the object map and the object property table of the area strcMap.loadAreaId into WRAM.
+; @details Areas 0-3 (the farm) take the map from sFarmTilemap, other areas from pObjectMap[area]. The property table pointer
+;          comes from pObjectMap2[area] and is stored in strcMap.pSelected. Copies $1000 bytes to sCurrentObjectMap.
+; @param   strcMap.loadAreaId   area id
+; @modifies sCurrentObjectMap, strcMap.pSelected, ptrTemp0x72
+; @mode    M8X16
+; @callers fMap_SetupArea
+;;
 fObjectMap_LoadData:
     SEP #$20                                                   ;82A5FB|E220    |      ;
     REP #$10                                                   ;82A5FD|C210    |      ;
@@ -57,6 +79,12 @@ fObjectMap_LoadData:
     RTL                                                        ;82A659|6B      |      ;
  
  
+;;
+; @brief   Reset the persistent farm map sFarmTilemap to the default farm layout (pObjectMap entry 0, $1000 bytes).
+; @modifies sFarmTilemap, ptrTemp0x72
+; @mode    M16X16 -> M8X16
+; @callers fGameEngine_LoadGame, fGameEngine_SetDefaults, fMainMenu_AutoHowToPlay, fMainMenu_StartHowToPlayDemo, fMainMenu_TitleScreenInit
+;;
 fObjectMap_LoadDefaultFarm:
     REP #$30                                                   ;82A65A|C230    |      ;
     LDX.W #$0000                                               ;82A65C|A20000  |      ;
@@ -79,6 +107,14 @@ fObjectMap_LoadDefaultFarm:
     RTL                                                        ;82A681|6B      |      ;
  
  
+;;
+; @brief   Copy the current object map (sCurrentObjectMap, read through the bank $80 mirror at $80:09B6) back into sFarmTilemap.
+; @details Used to save changes made while standing on the farm before the area is left.
+; @modifies sFarmTilemap, ptrTemp0x72
+; @mode    M16X16 -> M8X16
+; @callers fMainMenu_HowToPlayCleanup, fMap_ScreenTransitionHandler
+; @note    The name suggests the opposite direction; the code copies sCurrentObjectMap -> sFarmTilemap.
+;;
 fObjectMap_LoadFarm:
     REP #$30                                                   ;82A682|C230    |      ;
     LDA.W #$09B6+!RAM_SHIFT                                ;82A684|A9B609  |      ;
@@ -99,6 +135,15 @@ fObjectMap_LoadFarm:
     RTL                                                        ;82A6A1|6B      |      ;
  
  
+;;
+; @brief   Winter conversion of the farm map: wither all crops and grass.
+; @details Only acts when nCurrentSeasonID = 3 (winter). For every farm tile id: $00 and ids >= $A0 are left alone; ids $70-$9F
+;          become $7A (cut grass); ids $1D-$6F become $07; ids below $1D stay.
+; @modifies sFarmTilemap, strcDialogDisplay.mapMultiWidth
+; @mode    M8X16
+; @callers fObjectMap_UpdateFarmTilesNewDay (winter, day 1)
+; @note    The name does not match the behaviour (no map copy happens here); confidence: medium on the tile meanings.
+;;
 fObjectMap_CurrentMapToFarmMap:
     SEP #$20                                                   ;82A6A2|E220    |      ;
     REP #$10                                                   ;82A6A4|C210    |      ;
@@ -176,6 +221,22 @@ fObjectMap_CurrentMapToFarmMap:
     RTL                                                        ;82A712|6B      |      ;
  
  
+;;
+; @brief   Weather damage on the farm map: randomly turn field, crop and grass tiles back into bare ground.
+; @details Three chances are passed in; each is the denominator of a 1-in-N roll (fCore_GetRandomNumber(N) == 0), 0 disables the class.
+;          Tile $05 becomes $06 (chance A); tile $1D and grass ids >= $70 become $02 (chance X; a destroyed $79 also decrements
+;          strcPlayerData.leftGrassToCut, any destroyed grass decrements nPlantedGrassCount); tiles $07, $08 and $1E-$6F become $02 (chance Y).
+;          Ids >= $A0 are never touched.
+; @param   A   chance denominator for tile $05
+; @param   X   chance denominator for tile $1D and grass tiles
+; @param   Y   chance denominator for tiles $07, $08, $1E-$6F
+; @modifies sFarmTilemap, nPlantedGrassCount, strcPlayerData.leftGrassToCut, strcDialogDisplay.mapMultiWidth, strcVariables.n16Unk86/88/8A
+; @mode    M16X16
+; @calls   fObjectEngine_ConvertCoordsToOffset, fCore_GetRandomNumber
+; @callers fNextDayHandler, fObjectMap_ApplyHuricaneDamageByMapFlags
+; @note    Arguments come from nHuricaneDamageArgsTable via fObjectMap_GetHuricaneDamageArgs. Despite the name it is used for rain, snow,
+;          hurricane and the yearly update.
+;;
 fObjectMap_HuricaneDamage:
     REP #$30                                                   ;82A713|C230    |      ; A: nArg1, X: nArg2, Y: nArg3
     STA.B strcVariables.n16Unk86                               ;82A715|8586    |000086;
@@ -342,6 +403,19 @@ fObjectMap_HuricaneDamage:
     RTL                                                        ;82A810|6B      |      ;
  
  
+;;
+; @brief   Daily farm map update at the start of a day: weeds spawn, watered crops and grass grow, wet tiles dry out.
+; @details For each farm tile (ids >= $A0 skipped): ids 1-2 may spawn a weed ($03) every 4th day outside fall/winter; $06 has a 1/8 chance
+;          to set mapFlags bit $0400 and event6 flag $0200; $07/$1E (dry) become $08/$1F when it rains (mapFlags bit $0002), $08/$1F,
+;          $39, $53, $61 and $6F dry out again (-1) unless it rains; other ids $20-$6F: odd (watered) ids grow one stage (+1) outside
+;          fall/winter (in fall they only dry out, -1), even ids are re-watered (+1) when it rains; ids $70-$9F (grass) grow +1 except in winter;
+;          $7C becomes $73. On winter day 1 it finishes with fObjectMap_CurrentMapToFarmMap.
+; @modifies sFarmTilemap, strcDialogDisplay.mapFlags, strcFlags.event6, strcDialogDisplay.mapMultiWidth
+; @mode    M8X16
+; @calls   fObjectEngine_ConvertCoordsToOffset, fGetRandomNumber, fCore_GetRandomNumber, fObjectMap_CurrentMapToFarmMap
+; @callers fNextDayHandler
+; @note    confidence: medium - the meaning of the individual tile ids is inferred from the arithmetic (parity, +1/-1), not from graphics.
+;;
 fObjectMap_UpdateFarmTilesNewDay:
     SEP #$20                                                   ;82A811|E220    |      ;
     REP #$10                                                   ;82A813|C210    |      ;
@@ -576,6 +650,14 @@ fObjectMap_UpdateFarmTilesNewDay:
     RTL                                                        ;82A99F|6B      |      ;
  
  
+;;
+; @brief   A cow grazes: turn the first grown grass tile ($76-$79) of the farm map into cut grass ($7A).
+; @return  strcPlayerData.leftGrassToCut   1 if a tile was eaten, 0 if there was no suitable grass
+; @modifies sFarmTilemap, strcPlayerData.leftGrassToCut, strcDialogDisplay.mapMultiWidth
+; @mode    M8X16
+; @callers fGameEngine_AnimalsDailyUpdate
+; @note    The routine clears strcPlayerData.leftGrassToCut first and uses it as its result flag; it stops after the first tile.
+;;
 fObjectMap_EatingGrass:
     SEP #$20                                                   ;82A9A0|E220    |      ;
     REP #$10                                                   ;82A9A2|C210    |      ;
@@ -653,6 +735,14 @@ fObjectMap_EatingGrass:
     RTL                                                        ;82AA0B|6B      |      ;
  
  
+;;
+; @brief   Compute the ranch development rate: count of farm tiles that are developed (ids $05, $06 or $1D-$9F).
+; @modifies nRanchDevelopmentRate, strcDialogDisplay.mapMultiWidth
+; @mode    M8X16
+; @callers fAreaInit_HouseHelper
+; @note    The counter is incremented as a 16-bit value although nRanchDevelopmentRate is documented as n8 percent (?);
+;          confidence: medium.
+;;
 fObjectMap_CalculateRanchDev:
     SEP #$20                                                   ;82AA0C|E220    |      ;
     REP #$10                                                   ;82AA0E|C210    |      ;

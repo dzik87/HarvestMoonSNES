@@ -1,7 +1,34 @@
+;;
+; @file   interaction_data.asm
+; @brief  aInteractionItemTable (carried item created by an object interaction, per season) and the "How to Play"
+;         demo launcher of the title screen.
+; @bank   $82   @range $82CFB4-$82D3C6
+; @see    main_loop.asm (title screen state machine, fMainMenu_AutoHowToPlay), docs/formats/data-tables.md
+;;
 ; Bank $82 module "interaction_data" - starts at $82CFB4
  
+; @brief   Carried item produced by an object interaction, for each season.
+; @format  4 bytes per interaction index: `[spring][summer][fall][winter]` = carry item id (strcPlayerData.carryItemId), 0 = nothing.
+; @index   interaction/object index * 4 + nCurrentSeasonID; read by %SetCurrentCarriedItemIndex and fPlayer_InteractWithFrontObject.
+; @used_by fPlayer_InteractWithFrontObject
+; @note    The label itself lives in the generated file included right below.
+; @note    Generated from assets/tables/data/interaction_items.csv.
     incsrc "../../../build/gen/blocks/interaction_items.asm"
  
+;;
+; @brief   Title-menu choice "How to Play": reset the game to a clean demo state and run the scripted demo (%AIExecute($0000, $0047, $0000)).
+; @details Fades out, sets the clock to 6:00 (nCurrentTimeID = 6), clears the daily/event flags (daily4 = $0108), gives a tool shed
+;          with a few starting tools/seeds (strcShedItems.row1 = $8F, row2 = $88; one corn/tomato/turnip/grass seed bag),
+;          resets player/object state and the farm map (fObjectMap_LoadDefaultFarm), starts the scripted demo through
+;          %AIExecute($0000, $0047, $0000) and then runs a private frame loop (the same per-frame call list as the normal main loop)
+;          until the demo script sets daily2 flag $0004. Afterwards the chicken table is cleared and the title state machine
+;          returns to state 9 (re-init title screen).
+; @modifies strcFlags.*, strcShedItems.*, strcPlayerData, strcPlayer.*, strcObjectData, nCurrentTimeID, nCurrentSeasonID, nTimeState, nIntroHowToPlayIndex2, strcChickenData
+; @calls   fCore_ScreenFadeout, fCore_ZeroVRAM, fCore_ZeroCGRAM, fObjectMap_LoadDefaultFarm, fAI_RunSlots, fMap_SetupArea, fGame_TimeHandler, fPlayer_UpdateHandler, fObject_RenderAll
+; @mode    M8X16
+; @callers fMainMenu_StateLoop (title state $0A)
+; @note    Duplicates most of fMainMenu_AutoHowToPlay; this variant plays the demo chosen by the player (index 0), the auto variant cycles nIntroHowToPlayIndex.
+;;
 fMainMenu_StartHowToPlayDemo:
     SEP #$20                                                   ;82D1C0|E220    |      ; GIGASTART
     REP #$10                                                   ;82D1C2|C210    |      ;

@@ -1,6 +1,29 @@
+;;
+; @file   screen_text.asm
+; @brief  The name entry screen (player, cows, dog, horse, children): screen setup, per-frame loop, blinking cursor,
+;         letter/box drawing, and dispatch to the routine that stores the entered name.
+; @details Cursor movement, letter entry and button handling are in bank_84/input.asm (fNameInput_*); the cursor grids are in menu.asm.
+;          The destination of the name is strcMenuData.nameDestinationIdx (!NI_* enum).
+; @bank   $82   @range $82E80C-$82EB56
+; @see    menu.asm, bank_84/input.asm, docs/formats/menu-data.md
+;;
 ; Bank $82 module "screen_text" - starts at $82E80C
  
  
+;;
+; @brief   Run the whole name entry screen until the player finishes, then jump to the routine that stores the name.
+; @details Loads area !AREA_NAMEINPUT, fades out/in, uploads palette/graphics, creates the cursor object (sprite $0219 at 40,68),
+;          draws the name box and four empty letter slots, clears strcNames.sTemp to four $B1 (blank) characters and then loops per
+;          frame: blink the cursor (fScreen_NameInput_BlinkCursor), run input (fInput_Handler), update the cursor position from the
+;          grid and scroll BG2 diagonally. When strcMenuData.tableSelector becomes 3 the screen ends: the map flags are restored from
+;          strcDialogDisplay.mapFlagsBackup and control JMLs to fCore_SetPlayerName / SetBoughtCowName / SetBornCowName /
+;          SetDogName / SetHorseName / SetFirstChildName / SetSecondChildName according to strcMenuData.nameDestinationIdx.
+; @param   strcMenuData.nameDestinationIdx   which name is being entered (!NI_PLAYER .. !NI_SECONDCHILD)
+; @modifies strcMenuData.*, strcDialogDisplay.mapFlags, strcDialogDisplay.mapFlagsBackup, strcNames.sTemp, strcMap.loadAreaId, strcObject.*
+; @mode    M8X16
+; @calls   fScreen_NameInput_DrawNameBox, fScreen_NameInput_DrawEmptyNameSlots, fScreen_NameInput_BlinkCursor, fMenu_LoadNameInputCursorPos, fInput_Handler, fObject_Create, fObject_RenderAll
+; @callers fCore_MainLoop, fUnreached_StartNameInput
+;;
 fScreen_NameInput:
     SEP #$20                                                   ;82E80C|E220    |      ;
     LDA.B #!AREA_NAMEINPUT                                                 
@@ -231,6 +254,15 @@ fScreen_NameInput:
   + BRA .nameHandler                                           ;82EA13|80B9    |82E9CE;
  
  
+;;
+; @brief   Blink the underscore cursor under the current letter slot (20-frame period, bit 7 of dialogBlinkTimer = phase).
+; @details Draws tile $00A8 (underscore) or !DIALOG_SPACE alternately in the slot strcMenuData.nameEntryIdx; does nothing once
+;          all four letters are entered (nameEntryIdx = 4).
+; @modifies strcDialogDisplay.dialogBlinkTimer
+; @mode    M16 -> M8
+; @calls   fScreen_NameInput_DrawLetterAtCursor
+; @callers fScreen_NameInput
+;;
 fScreen_NameInput_BlinkCursor:
     SEP #$20                                                   ;82EA15|E220    |      ;
     REP #$10                                                   ;82EA17|C210    |      ;
@@ -273,6 +305,14 @@ fScreen_NameInput_BlinkCursor:
     RTS                                                        ;82EA5F|60      |      ; BIGEND
  
  
+;;
+; @brief   Draw one glyph into the name slot strcMenuData.nameEntryIdx.
+; @param   A   dialog character code of the glyph
+; @mode    M16
+; @calls   fDialog_TransferGlyph
+; @callers fNameInput_AButton, fNameInput_BButton, fScreen_NameInput_BlinkCursor
+; @note    The VRAM destination comes from aScreen_NameInput_LetterVramAddr[nameEntryIdx].
+;;
 fScreen_NameInput_DrawLetterAtCursor:
     REP #$20                                                   ;82EA60|C220    |      ; A: nLetterCode
     PHA                                                        ;82EA62|48      |      ; nLetterCode -> stack1
@@ -291,6 +331,12 @@ fScreen_NameInput_DrawLetterAtCursor:
     RTL                                                        ;82EA7F|6B      |      ;
  
  
+;;
+; @brief   Draw the four empty (underscore, tile $00A8) letter slots of the name field.
+; @modifies strcVariables.n16Temp3
+; @calls   fDialog_TransferGlyph, fCore_StartTransfer
+; @callers fScreen_NameInput
+;;
 fScreen_NameInput_DrawEmptyNameSlots:
     REP #$20                                                   ;82EA80|C220    |      ;
     LDA.L aScreen_NameInput_LetterVramAddr                                      ;82EA82|AF4DEB82|82EB4D;
@@ -317,6 +363,15 @@ fScreen_NameInput_DrawEmptyNameSlots:
     RTL                                                        ;82EAB3|6B      |      ;
  
  
+;;
+; @brief   Draw the frame of the name box (nScreen_NameInput_BoxTileCount pieces of 2x2 tiles) into the BG tilemap.
+; @details Same piece-drawing scheme as fMainMenu_DrawSaveSlotFrames: two 4-byte DMA transfers per piece (rows $20 words apart),
+;          tile numbers start at nScreen_NameInput_BoxTileStart, VRAM word address starts at nScreen_NameInput_BoxVramAddr.
+; @modifies strcVariables.n16Temp1, strcVariables.n16Temp2, strcVariables.n16Temp3, strcVariables.n16Temp4, strcVariables.n16Unk86, strcVariables.n16Unk88
+; @mode    M16X16
+; @calls   fCore_PrepareTransfer, fCore_StartTransfer
+; @callers fScreen_NameInput
+;;
 fScreen_NameInput_DrawNameBox:
     REP #$30                                                   ;82EAB4|C230    |      ;
     LDA.L nScreen_NameInput_BoxTileStart                                      ;82EAB6|AF4BEB82|82EB4B;
@@ -390,14 +445,35 @@ fScreen_NameInput_DrawNameBox:
     RTS                                                        ;82EB48|60      |      ;
  
  
+;;
+; @brief   VRAM word address of the first name-box piece ($788C).
+; @format  one n16
+; @used_by fScreen_NameInput_DrawNameBox
+;;
 nScreen_NameInput_BoxVramAddr:
     dw $788C                                                   ;82EB49|        |      ; n16
  
+;;
+; @brief   Name table word (tile + attributes, $2002) of the first name-box piece.
+; @format  one n16
+; @used_by fScreen_NameInput_DrawNameBox
+;;
 nScreen_NameInput_BoxTileStart:
     dw $2002                                                   ;82EB4B|        |      ; n16
  
+;;
+; @brief   VRAM word address of each of the four letter slots of the name field.
+; @format  4 x n16 ($5010, $5020, $5030, $5040), indexed by strcMenuData.nameEntryIdx * 2
+; @used_by fScreen_NameInput_DrawLetterAtCursor, fScreen_NameInput_DrawEmptyNameSlots
+; @note    The addresses are the tile slots the glyph transfer writes to (4bpp tiles, 16 words apart), not tilemap addresses (?).
+;;
 aScreen_NameInput_LetterVramAddr:
     dw $5010,$5020,$5030,$5040                                 ;82EB4D|        |      ; 0x04 * [n16]
  
+;;
+; @brief   Number of name-box pieces drawn by fScreen_NameInput_DrawNameBox (4).
+; @format  one n16
+; @used_by fScreen_NameInput_DrawNameBox
+;;
 nScreen_NameInput_BoxTileCount:
     dw $0004                                                   ;82EB55|        |      ; n16

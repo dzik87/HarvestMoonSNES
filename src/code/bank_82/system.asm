@@ -1,8 +1,31 @@
+;;
+; @file   system.asm
+; @brief  Main-menu save-slot plumbing: draws the two save-slot frames of the New Game / Load Game screens and
+;         hands control to the game proper (load a save, or start a fresh game).
+; @details Starts with the generated tilemap block `system_transfer_data.asm` (nSystemTransferTilemapTable and the
+;          VRAM argument table used by fMainMenu_DrawEmptySaveSlot in main_loop.asm).
+; @bank   $82   @range $82E666-$82E80B
+; @see    main_loop.asm (slot select screens), screen_text.asm (name entry), docs/formats/menu-data.md
+;;
 ; Bank $82 module "system" - starts at $82E666
  
  
     incsrc "../../../build/gen/blocks/system_transfer_data.asm"
  
+;;
+; @brief   Draw the frame pieces of the two save-slot boxes on the slot-select screen (BG tilemap in VRAM).
+; @details Walks 8 table entries (X = 0,2,..,$0E). Per entry it reads the first tile word (aMainMenu_SlotFrameTileStart),
+;          the VRAM word address (aMainMenu_SlotFrameVramAddr) and a run length (aMainMenu_SlotFrameRunLength) and writes
+;          that many 2x2-tile pieces (tile, tile+1 / tile+$10, tile+$11) to the name table with two small DMA transfers per piece
+;          (top row, then the row $20 words below). Tile numbers are advanced by 2 per piece.
+; @clobbers A X Y
+; @modifies strcVariables.n16Temp1, strcVariables.n16Temp2, strcVariables.n16Temp3, strcVariables.n16Temp4, strcVariables.n16Unk86, strcVariables.n16Unk88, ptrTemp0x72
+; @mode    M16X16 -> M16X16
+; @calls   fCore_PrepareTransfer, fCore_StartTransfer
+; @callers fMainMenu_StateNewGameSlotSelect, fMainMenu_StateLoadGameSlotSelect
+; @note    The piece layout (2x2 tiles) is derived from the two Y=4 byte transfers; the exact run-length semantics
+;          (Y counts up to the table value) are as read from the loop; confidence: medium.
+;;
 fMainMenu_DrawSaveSlotFrames:
     REP #$30                                                   ;82E742|C230    |      ;
     LDX.W #$0000                                               ;82E744|A20000  |      ;
@@ -99,6 +122,13 @@ fMainMenu_DrawSaveSlotFrames:
     RTS                                                        ;82E7E8|60      |      ;
  
  
+;;
+; @brief   Load the save game from the slot chosen on the Load Game screen and start the game.
+; @param   $098E  selected save slot (0 or 1), read as a raw RAM byte
+; @mode    M8
+; @calls   fGameEngine_LoadGame, fCore_GameStart
+; @note    Does not return: ends with JML fCore_GameStart.
+;;
 fLoadAndStartGame:
     SEP #$20                                                   ;82E7E9|E220    |      ;
     LDA.B #$00                                                 ;82E7EB|A900    |      ;
@@ -108,11 +138,23 @@ fLoadAndStartGame:
     JML.L fCore_GameStart                                      ;82E7F5|5C008080|808000;
  
  
+;;
+; @brief   Start a new game: reset all game state to the defaults, then enter the game.
+; @calls   fGameEngine_SetDefaults, fCore_GameStart
+; @note    Does not return: ends with JML fCore_GameStart.
+;;
 fStartNewGame:
     JSL.L fGameEngine_SetDefaults                              ;82E7F9|22BEA983|83A9BE;
     JML.L fCore_GameStart                                      ;82E7FD|5C008080|808000;
  
  
+;;
+; @brief   Unreferenced stub that would start the name entry screen for the player's name.
+; @modifies strcMenuData.nameDestinationIdx   (set to 0 = !NI_PLAYER)
+; @calls   fScreen_NameInput
+; @note    No caller exists in the code (hence the Unreached prefix); the player name entry is started through the
+;          map flag !AFLAGS_NAMEINPUTREQUEST in fCore_MainLoop instead.
+;;
 fUnreached_StartNameInput:
     SEP #$20                                                   ;82E801|E220    |      ;
     LDA.B #$00                                                 ;82E803|A900    |      ;
