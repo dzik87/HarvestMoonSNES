@@ -98,6 +98,15 @@
         incsrc "../build/gen/dialogs/!{DLGDIR}/bank_B9.asm"
         incsrc "../build/gen/dialogs/!{DLGDIR}/bank_BA.asm"
         incsrc "../build/gen/dialogs/!{DLGDIR}/bank_BB.asm"
+        if !TRANSLATION
+            incsrc "../build/gen/dialogs/!{DLGDIR}/bank_BC.asm"
+            incsrc "../build/gen/dialogs/!{DLGDIR}/bank_BD.asm"
+            incsrc "../build/gen/dialogs/!{DLGDIR}/bank_BE.asm"
+            incsrc "../build/gen/dialogs/!{DLGDIR}/bank_BF.asm"
+            incsrc "../build/gen/dialogs/!{DLGDIR}/bank_AA.asm"
+            incsrc "../build/gen/dialogs/!{DLGDIR}/bank_AB.asm"
+            incsrc "../build/gen/dialogs/!{DLGDIR}/bank_AC.asm"
+        endif
     endif
     
     ; Unused

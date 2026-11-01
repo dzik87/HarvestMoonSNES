@@ -1,0 +1,21 @@
+{
+ "_doc": "Diacritic marks for generated letters (tools/translate/glyphs.py).  A mark is a list of [x, y] pixels (8 x 16 glyph cell, x 0-7, y 0-15) that are painted with ink (pixel value 3) over the base letter taken from the extracted font; `lower` is used for lowercase bases (x-height starts at row 8, ascenders at row 6), `upper` for capitals (cap height starts at row 5).  Hand drawn replacements: translations/<lang>/font/glyph_<ID>.png.  The shapes are plain defaults and need a visual check in an emulator.",
+ "marks": {
+  "acute": {
+   "lower": [[5, 4], [6, 4], [4, 5], [5, 5], [3, 6], [4, 6]],
+   "upper": [[5, 1], [6, 1], [4, 2], [5, 2], [3, 3], [4, 3]]
+  },
+  "dot": {
+   "lower": [[3, 5], [4, 5], [3, 6], [4, 6]],
+   "upper": [[3, 2], [4, 2], [3, 3], [4, 3]]
+  },
+  "ogonek": {
+   "lower": [[5, 15], [6, 15]],
+   "upper": [[5, 15], [6, 15]]
+  },
+  "stroke": {
+   "lower": [[5, 9], [6, 9], [2, 11], [3, 11]],
+   "upper": [[3, 8], [4, 8], [0, 10], [1, 10]]
+  }
+ }
+}

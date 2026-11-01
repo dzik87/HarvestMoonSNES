@@ -68,3 +68,10 @@ else
     !REGDIR = ""
     !DLGDIR = "us"
 endif
+
+; Translation build (tools/build.py --translation <lang>, docs/translation.md): US engine, dialogs generated from translations/<lang>/
+; into build/gen/dialogs/translation/ (banks $B6-$BF and $AA-$AC).  Never defined for the four original releases.
+!TRANSLATION ?= 0
+if !TRANSLATION
+    !DLGDIR = "translation"
+endif

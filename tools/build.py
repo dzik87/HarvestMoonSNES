@@ -58,7 +58,14 @@ def main() -> int:
     p.add_argument("--no-verify", action="store_true")
     p.add_argument("--no-assets", action="store_true", help="skip generating the .bin/.pal files from PNG/JSON sources")
     p.add_argument("-v", "--verbose", action="store_true")
+    p.add_argument("--translation", metavar="LANG", help="build a translated ROM on the US engine (translations/LANG/, docs/translation.md); no original hash exists for it")
+    p.add_argument("--fallback", choices=("us", "error"), default="us", help="translation: text of the ids that are not translated yet (default: the US text)")
+    p.add_argument("--allow-errors", action="store_true", help="translation: build although the check reports errors")
     args = p.parse_args()
+    if args.translation and args.region != "US":
+        sys.exit("--translation uses the US engine: build with --region US")
+    if args.translation and args.out == ROOT / "build" / "HarvestMoon.sfc":
+        args.out = ROOT / "build" / ("HarvestMoon_US_%s.sfc" % args.translation)
 
     check_assets()
     if not args.no_assets:
@@ -67,6 +74,13 @@ def main() -> int:
         rc = build_assets.main(quiet=not args.verbose)
         if rc:
             return rc
+    tr = None
+    if args.translation:
+        sys.path.insert(0, str(ROOT / "tools" / "translate"))
+        import build as trbuild
+        import common as trcommon
+        tr = trcommon.Lang(trcommon.lang_dir(args.translation))
+        summary = trbuild.generate(tr, trcommon.Context(), args.fallback, args.allow_errors)
     asar = find_asar(args.asar)
     out = args.out if args.out.is_absolute() else ROOT / args.out
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -76,6 +90,8 @@ def main() -> int:
     if args.verbose:
         cmd.append("-v")
     cmd += DEFINES[args.region]
+    if tr:
+        cmd.append("-DTRANSLATION=1")
     cmd += ["-werror", "--no-title-check", "--fix-checksum=off", MAIN[args.region], str(out)]
     print("+", " ".join(cmd))
     rc = subprocess.run(cmd, cwd=ROOT).returncode
@@ -87,6 +103,14 @@ def main() -> int:
     if size != ROM_SIZE:
         print(f"WARNING: ROM size = {size}, expected {ROM_SIZE}", file=sys.stderr)
 
+    if tr:
+        rom = bytearray(out.read_bytes())
+        checksum, patched = trbuild.post_process(rom, tr)
+        out.write_bytes(rom)
+        print("\n[US engine + %s] TRANSLATION BUILD: %s, %d bytes, header checksum $%04X, font tables patched %s" % (tr.code, out.relative_to(ROOT) if out.is_relative_to(ROOT) else out, len(rom), checksum, patched))
+        print("  dialogs: %d of %d translated, %d from the US text, %d bytes in %d bank(s); %d check error(s), %d warning(s)"
+              % (summary["translated"], summary["total"], summary["fallback"], summary["bytes"], len(summary["banks"]), summary["errors"], summary["warnings"]))
+        return 0
     if args.no_verify:
         return 0
     # every reference set of the region is checked: "DE" (code banks), "DE-AI" (AI banks $B3-$B5), ...

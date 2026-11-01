@@ -162,10 +162,11 @@ def ranges(ids):
 
 
 def compare(root=None):
-    vm = derive_varmap(root)
+    vm = C.var_map()                          # the reviewed map (defs/translation/var_map_jp_us.json), not the derivation
     tables = {r: {int(k): v for k, v in t.items()} for r, t in vm["tables"].items()}
-    blocks = {r: C.asset_blocks(r, root) for r in REG}
-    toks = {r: {i: C.split_tokens(w) for i, w in blocks[r].items()} for r in REG}
+    present = [r for r in REG if C.have_assets(r, root)]
+    blocks = {r: C.asset_blocks(r, root) for r in present}
+    toks = {r: {i: C.split_tokens(w) for i, w in blocks[r].items()} for r in present}
 
     def logic(r, i):
         v, n, o = [], [], 0
@@ -178,8 +179,8 @@ def compare(root=None):
                 o = t[1]
         return sorted(v), n, o
 
-    res = {"counts": {r: len(blocks[r]) for r in REG}}
-    for r in ("us", "eu", "de"):
+    res = {"counts": {r: len(blocks[r]) for r in present}}
+    for r in [x for x in ("us", "eu", "de") if x in present]:
         d = {"vars_fields": [], "num_digits": [], "num_indices": [], "opt": [], "literal_numbers": []}
         for i in sorted(blocks["jp"]):
             jv, jn, jo = logic("jp", i); rv, rn, ro = logic(r, i)
@@ -194,10 +195,10 @@ def compare(root=None):
             if collections.Counter(literal_numbers(blocks["jp"][i])) != collections.Counter(literal_numbers(blocks[r][i])) and literal_numbers(blocks["jp"][i]):
                 d["literal_numbers"].append(i)
         res[r] = d
-    glyphs = {r: {i: sum(1 for t in toks[r][i] if t[0] == "G") for i in toks[r]} for r in REG}
-    res["short"] = {r: [i for i in glyphs[r] if glyphs[r][i] <= 2] for r in REG}
+    glyphs = {r: {i: sum(1 for t in toks[r][i] if t[0] == "G") for i in toks[r]} for r in present}
+    res["short"] = {r: [i for i in glyphs[r] if glyphs[r][i] <= 2] for r in present}
     dup = {}
-    for r in REG:
+    for r in present:
         g = collections.defaultdict(list)
         for i, w in blocks[r].items():
             g[tuple(w)].append(i)
@@ -208,13 +209,13 @@ def compare(root=None):
 
 def cmd_report(a):
     res = compare()
-    for r in ("us", "eu", "de"):
+    for r in [x for x in ("us", "eu", "de") if x in res]:
         d = res[r]
         print("[%s vs jp]" % r)
         for k, v in d.items():
             print("  %-16s %3d  %s" % (k, len(v), ranges(v)))
-    print("short (<=2 glyphs):", {r: res["short"][r] for r in REG})
-    print("identical-text duplicates:", {r: res["duplicates"][r] for r in REG})
+    print("short (<=2 glyphs):", res["short"])
+    print("identical-text duplicates:", res["duplicates"])
     if a.json:
         Path(a.json).parent.mkdir(parents=True, exist_ok=True)
         Path(a.json).write_text(json.dumps(res, indent=1), encoding="utf-8")

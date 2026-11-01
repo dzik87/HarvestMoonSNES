@@ -161,7 +161,7 @@ def number_digits(root=None, region="us"):
 # ---------------------------------------------------------------- structural reference (from the Japanese dialogs)
 class Reference:
     """Per dialog id the structure the translation has to keep, taken from the Japanese dialogs and mapped to the US engine:
-    {"vars": sorted list of fields, "nums": sorted list of numeric indices, "opt": answers or 0}."""
+    {"vars": sorted list of fields, "nums": sorted list of (numeric variable index, digits), "opt": answers or 0}."""
 
     def __init__(self, jp_blocks, varmap):
         self.vm = varmap
@@ -172,7 +172,7 @@ class Reference:
                 if t[0] == "VAR":
                     vars_.append(varmap.field("jp", t[2]))
                 elif t[0] == "NUM":
-                    nums.append(t[2])
+                    nums.append((t[2], t[1]))
                 elif t[0] == "OPT":
                     opt = t[1]
             self.data[i] = {"vars": sorted(vars_), "nums": sorted(nums), "opt": opt}
@@ -314,6 +314,7 @@ class Layout:
     def __init__(self):
         self.words = []
         self.screens = []           # per screen: number of cells used (index of the last used cell + 1)
+        self.cells = []             # per screen: content of the cells (glyph id; "v" = text variable cell, "n" = number digit cell)
         self.errors = []
         self.notes = []
         self.autopages = 0
@@ -339,34 +340,50 @@ def _emit(words, it):
 
 def layout_items(items, lang, raw=None):
     """Items -> Layout.  `raw` (default: lang.layout == 'raw') keeps the cells as written; otherwise words are wrapped at the line width,
-    explicit <BR>/<POS n> are honoured and, if lang.autopage, <NEXT> is inserted when a screen is full."""
+    explicit <BR>/<POS n> are honoured and, if lang.autopage, <NEXT> is inserted when a screen is full.
+    A screen that ends with <NEXT> must leave the last cell free (the blinking marker is drawn there)."""
     eng = engine()
     W, H = eng["cells_per_line"], eng["lines_per_screen"]
     cap = W * H
+    marker = eng["next_screen_marker_cell"]
     raw = (lang.layout == "raw") if raw is None else raw
     L = Layout()
-    cell = 0                       # next free cell of the current screen (W*line + col); cell % W == 0 and cell > 0 -> pending wrap
-    used = 0
+    cur = []                       # cells of the current screen
 
-    def newscreen():
-        nonlocal cell, used
-        L.screens.append(used)
-        cell, used = 0, 0
+    def close_screen():
+        L.screens.append(len(cur))
+        L.cells.append(list(cur))
+        del cur[:]
 
     def put(it):
-        nonlocal cell, used
         _emit(L.words, it)
-        cell += it.cells
-        used = max(used, cell)
+        if it.kind == "g":
+            cur.append(it.val)
+        else:
+            cur.extend(["v" if it.kind == "var" else "n"] * it.cells)
 
     def pad_to(target):
-        nonlocal cell, used
-        while cell < target:
-            L.words.append(SPACE); cell += 1
-        used = max(used, cell)
+        while len(cur) < target:
+            L.words.append(SPACE); cur.append(SPACE)
+
+    def page(why):
+        """close the screen with <NEXT>"""
+        while cur and cur[-1] == SPACE and (not raw) and L.words and L.words[-1] == SPACE:     # trailing blanks are useless before <NEXT>
+            cur.pop(); L.words.pop()
+        eff = len(cur)
+        while eff and cur[eff - 1] == SPACE:
+            eff -= 1
+        if eff > marker:
+            L.errors.append("a screen that continues with <NEXT> uses cell %d, which holds the blinking marker (%s)" % (marker, why))
+        L.words.append(NEXT)
+        close_screen()
+
+    def more_follows(j):
+        return any(x.kind in ("g", "var", "num") for x in items[j:])
 
     i, n = 0, len(items)
     ended = False
+    last_br = -1
     while i < n:
         it = items[i]
         k = it.kind
@@ -374,41 +391,36 @@ def layout_items(items, lang, raw=None):
             L.errors.append("text after <END>/<OPT>")
             break
         if k == "next":
-            L.words.append(NEXT)
-            L.screens.append(used); cell, used = 0, 0
+            page("explicit <NEXT>")
             i += 1
             continue
         if k in ("end", "opt"):
             L.words.append(END if k == "end" else OPTS)
             if k == "opt":
                 L.words.append(it.val)
-            newscreen()
+            close_screen()
             ended = True
             i += 1
             continue
         if raw:
             if k in ("g", "var", "num", "sp"):
-                if cell >= cap and not L.errors:
-                    L.errors.append("screen holds %d cells, the dialog box shows %d" % (cell + it.cells, cap))
                 put(Item("g", SPACE, 1) if k == "sp" else it)
-            elif k in ("br", "pos"):
+                if len(cur) > cap and not any("screen holds" in e for e in L.errors):
+                    L.errors.append("screen holds more than %d cells (the dialog box shows %d)" % (cap, cap))
+            else:
                 L.errors.append("<BR>/<POS> need the wrap layout (raw text is written cell by cell)")
             i += 1
             continue
         # ---- wrap layout
         if k == "br":
-            if cell % W != 0 or cell == 0:
-                pad_to((cell // W + 1) * W if cell % W else (cell // W + 1) * W)
-            if cell >= cap:
-                if lang.autopage:
-                    L.words.append(NEXT); L.autopages += 1; newscreen()
-                else:
-                    L.errors.append("more than %d lines on a screen" % H)
+            if len(cur) % W != 0 or not cur or last_br == len(cur):      # a second <BR> in a row leaves an empty line
+                pad_to((len(cur) // W + 1) * W)
+            last_br = len(cur)
             i += 1
             continue
         if k == "pos":
-            if it.val < cell or it.val >= cap:
-                L.errors.append("<POS %d> is %s" % (it.val, "behind the text already written (cell %d)" % cell if it.val < cell else "outside the box"))
+            if it.val < len(cur) or it.val >= cap:
+                L.errors.append("<POS %d> is %s" % (it.val, "behind the text already written (cell %d)" % len(cur) if it.val < len(cur) else "outside the box"))
             else:
                 pad_to(it.val)
             i += 1
@@ -417,31 +429,28 @@ def layout_items(items, lang, raw=None):
             j = i
             while j < n and items[j].kind == "sp":
                 j += 1
-            run = j - i
-            if cell % W == 0:                                  # start of a line or pending wrap: spaces are dropped
-                i = j
-                continue
-            room = W - cell % W
-            pad_to(cell + min(run, room))
+            if len(cur) % W != 0:                                  # spaces at a line start (or pending wrap) are dropped
+                pad_to(len(cur) + min(j - i, W - len(cur) % W))
             i = j
             continue
-        # word
+        # a word: glyphs, variables and numbers up to the next space / token
         j, wl = _word_cells(items, i)
         if wl > W:
             L.errors.append("a word of %d cells does not fit into a line of %d" % (wl, W))
-        if cell % W != 0 and cell % W + wl > W:               # does not fit: continue on the next line
-            pad_to((cell // W + 1) * W)
-        if cell >= cap:
-            if lang.autopage:
-                L.words.append(NEXT); L.autopages += 1; newscreen()
+        if len(cur) % W != 0 and len(cur) % W + wl > W:        # does not fit into the rest of the line: next line
+            pad_to((len(cur) // W + 1) * W)
+        end = len(cur) + wl
+        if end > cap or (end > marker and more_follows(j)):
+            if not lang.autopage:
+                L.errors.append("more than %d cells on a screen (set autopage or add <NEXT>)" % cap)
             else:
-                L.errors.append("more than %d lines on a screen" % H)
+                page("automatic page break"); L.autopages += 1
         for it2 in items[i:j]:
             put(it2)
         i = j
     if not ended:
         L.words.append(END)
-        newscreen()
+        close_screen()
     return L
 
 
@@ -458,3 +467,163 @@ def items_signature(items):
     nums = sorted(it.val[1] for it in items if it.kind == "num")
     opt = next((it.val for it in items if it.kind == "opt"), 0)
     return {"vars": vars_, "nums": nums, "opt": opt}
+
+
+# ---------------------------------------------------------------- status file
+STATUSES = ("todo", "draft", "reviewed")
+
+
+def read_status(path):
+    """status.csv -> {id: {"status", "translator", "note"}}.  Columns: id,status,translator,note (id as 0xNNNN or decimal)."""
+    import csv
+    out = {}
+    p = Path(path)
+    if not p.exists():
+        return out
+    rows = [l for l in p.read_text(encoding="utf-8").splitlines() if l.strip() and not l.startswith("#")]
+    for r in csv.DictReader(rows):
+        out[int(r["id"], 0)] = {"status": r.get("status") or "todo", "translator": r.get("translator") or "", "note": r.get("note") or ""}
+    return out
+
+
+def write_status(path, st):
+    import csv
+    import io
+    buf = io.StringIO()
+    buf.write("# Translation status per dialog id (todo / draft / reviewed).  Ids that are not listed are `draft` if translated, else `todo`.\n")
+    w = csv.writer(buf, lineterminator="\n")
+    w.writerow(["id", "status", "translator", "note"])
+    for i in sorted(st):
+        w.writerow(["0x%04X" % i, st[i]["status"], st[i].get("translator", ""), st[i].get("note", "")])
+    Path(path).write_text(buf.getvalue(), encoding="utf-8", newline="\n")
+
+
+def effective_status(i, translated, st):
+    if i in st:
+        return st[i]["status"]
+    return "draft" if translated else "todo"
+
+
+# ---------------------------------------------------------------- context
+class Context:
+    """Everything the checks need: variable map, Japanese structure reference, digit counts and the US words (fallback text)."""
+
+    def __init__(self, root=None):
+        root = Path(root) if root else ASSETS_DIALOGS
+        self.root = root
+        self.vm = VarMap()
+        self.jp = asset_blocks("jp", root)
+        self.us = asset_blocks("us", root)
+        self.ref = Reference(self.jp, self.vm)
+        self.ndigits = number_digits(root, "jp")
+        self.ids = sorted(self.jp)
+        if sorted(self.us) != self.ids:
+            raise ValueError("the Japanese and US dialogs do not have the same ids")
+
+
+def cursor_cells(lang):
+    return engine()["option_cursor_cells"][lang.engine_region]
+
+
+# ---------------------------------------------------------------- checking one translated dialog
+class Result:
+    def __init__(self):
+        self.errors, self.warnings, self.layout, self.items = [], [], None, None
+
+
+def check_entry(i, text, flags, lang, ctx):
+    """Parse + lay out one translation text and compare it with the Japanese structure of the same id -> Result."""
+    r = Result()
+    if i not in ctx.ref:
+        r.errors.append("id 0x%04X does not exist (the game has %d dialogs)" % (i, len(ctx.ids)))
+        return r
+    raw = (lang.layout == "raw") or ("raw" in flags)
+    try:
+        r.items = parse_text(text, lang, ctx.vm, ctx.ndigits, raw=raw)
+    except SyntaxError_ as e:
+        r.errors.append(str(e))
+        return r
+    if not any(it.kind == "g" for it in r.items):
+        r.errors.append("the dialog has no text")
+    r.layout = layout_items(r.items, lang, raw=raw)
+    r.errors += r.layout.errors
+    want = ctx.ref[i]
+    sig = items_signature(r.items)
+    opt_fields = set(ctx.vm.d.get("optional_fields", []))
+    from collections import Counter
+    have_v, want_v = Counter(sig["vars"]), Counter(want["vars"])
+    for f in sorted(want_v - have_v):
+        r.errors.append("missing variable <VAR %s> (the Japanese dialog has it %d time(s))" % (f, want_v[f]))
+    for f in sorted(have_v - want_v):
+        if f in opt_fields:
+            r.warnings.append("optional variable <VAR %s> is not in the Japanese dialog" % f)
+        else:
+            r.errors.append("variable <VAR %s> does not exist in the Japanese dialog" % f)
+    have_n = sorted((it.val[1], it.val[0]) for it in r.items if it.kind == "num")
+    if have_n != want["nums"]:
+        r.errors.append("numbers (index, digits) %s differ from the Japanese dialog %s" % (have_n, want["nums"]))
+    if sig["opt"] != want["opt"]:
+        r.errors.append("answers: <OPT %d> but the Japanese dialog has %d" % (sig["opt"], want["opt"]))
+    if want["opt"] and r.layout.cells:
+        cells = r.layout.cells[-1]
+        cur = cursor_cells(lang)
+        off = engine()["option_text_offset"]
+        for k in range(min(want["opt"], len(cur))):
+            c = cur[k]
+            if len(cells) <= c + off or cells[c + off] == SPACE:
+                r.errors.append("answer %d has no text at cell %d (cursor cell %d); use <OPTLBL %d>" % (k + 1, c + off, c, k + 1))
+            elif c < len(cells) and cells[c] != SPACE:
+                r.warnings.append("the cursor cell %d of answer %d holds text" % (c, k + 1))
+    r.nbytes = len(r.layout.words) * 2
+    return r
+
+
+# ---------------------------------------------------------------- translation files
+def asset_banks(region, root=None):
+    """{id: bank} of the extracted dialogs of a release."""
+    root = Path(root) if root else ASSETS_DIALOGS
+    out = {}
+    for f in sorted((root / region).glob("bank_*.txt")):
+        for label, _ in dialog.read_txt(f):
+            out[int(label.rsplit("_0x", 1)[1], 16)] = f.stem.split("_")[1]
+    return out
+
+
+def load_translation(lang):
+    """-> {id: (flags, text)} from translations/<lang>/dialogs.txt (duplicate ids are an error)."""
+    out = {}
+    if not lang.path_dialogs.exists():
+        return out
+    for i, flags, text in read_blocks(lang.path_dialogs):
+        if i in out:
+            raise SyntaxError_("%s: dialog 0x%04X appears twice" % (lang.path_dialogs, i))
+        out[i] = (flags, text)
+    return out
+
+
+def render_reference(words, region, ctx):
+    """Readable form of the words of an extracted dialog with symbolic variables (`<VAR player>`); used by the worksheet only."""
+    cm = dialog.load_charmap(region)
+    text = dialog.words_to_text(words, cm)
+
+    def sub(m):
+        f = ctx.vm.field(region, int(m.group(2)))
+        return "<VAR %s>" % f if f else m.group(0)
+    return re.sub(r"<VAR (\d+) (\d+)>", sub, text)
+
+
+def structure_line(ref):
+    return "vars=%s nums=%s opt=%d" % (",".join(ref["vars"]) or "-", ",".join("%d:%d" % x for x in ref["nums"]) or "-", ref["opt"])
+
+
+def parse_items_cells(words):
+    """number of cells of the longest screen of extracted words (variables count with their width)"""
+    mx = cur = 0
+    for t in split_tokens(words):
+        if t[0] == "NEXT":
+            mx, cur = max(mx, cur), 0
+        elif t[0] in ("NUM", "VAR"):
+            cur += t[1]
+        elif t[0] == "G":
+            cur += 1
+    return max(mx, cur)

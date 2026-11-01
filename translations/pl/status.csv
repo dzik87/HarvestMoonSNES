@@ -1,0 +1,2 @@
+# Translation status per dialog id (todo / draft / reviewed).  Ids that are not listed are `draft` if translated, else `todo`.
+id,status,translator,note
