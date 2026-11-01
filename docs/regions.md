@@ -343,7 +343,7 @@ in both EU and DE (`!REGION_EUDE`).
 - **Player interactions:** `fPlayerInteraction0x42-0x44` (shed item checks) also look at the second tool slot
   (`strcPlayerData.toolSecond`) next to the equipped tool, the hammer / golden hammer actions
   (`fToolUsedAction0x03/0x13`) and the tool sound data were reworked; `fShed_DrawItemPatternByFlag`,
-  `fMap_CalcTilemapBufferOffset`.
+  `fMap_CopyTilePatternToTilemapBuffer`.
 - **AI:** chicken and cow update (`fAIAction0x30/0x31`) check an extra state flag before continuing.
 - **Input:** `fInput_Case04_State1`.
 - **Text:** weekday/ordinal/season text writer (`fWriteSeasonWeekdayAndDayOrdinal`), dialog variable table
@@ -352,7 +352,7 @@ in both EU and DE (`!REGION_EUDE`).
 - **EU (and JP, differently):** the new-game slot selection (`fMainMenu_NewGameSlotSelect_WaitFrame`) calls the
   continue loader (`fGameEngine_LoadContinue`) and positions the cursor differently; DE keeps the US flow.
 - **DE only (against EU):** longer weekday names (`!NAME_WEEKDAY_SIZE` = 24, RAM +6) and the code that writes them,
-  the day ordinal strings, empty-slot drawing (`fMainMenu_DrawEmptySaveSlot`), `subItemCarried_0x46`; DE and JP
+  the day ordinal strings, empty-slot drawing (`fMainMenu_DrawEmptySaveSlot`), `subItemCarried_ShelfTomatoSeeds`; DE and JP
   (not EU) also differ in `fCore_FindBestLove`, `aNameInputGrid0`, the tool animation table / handlers and
   `fMap_QueueTilePatternVRAMUpload`.
 

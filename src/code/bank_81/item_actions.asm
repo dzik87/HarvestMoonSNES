@@ -174,27 +174,27 @@ subItemCarried_PowerBerry:
     RTS                                                        ;81811D|60      |      ;
  
  
-subItemCarried_Bush:
+subItemCarried_GrassBig:
     JSR.W fItemCarried_PhaseDispatch_Produce                                      ;81811E|20E588  |8188E5;
     RTS                                                        ;818121|60      |      ;
  
  
-subItemCarried_Bush2:
+subItemCarried_GrassSmall:
     JSR.W fItemCarried_PhaseDispatch_Produce                                      ;818122|20E588  |8188E5;
     RTS                                                        ;818125|60      |      ;
  
  
-subItemCarried_0x0D:
+subItemCarried_StoneGrey:
     JSR.W fItemCarried_PhaseDispatch_NoSell                                      ;818126|209A88  |81889A;
     RTS                                                        ;818129|60      |      ;
  
  
-subItemCarried_0x0E:
+subItemCarried_StoneMossy:
     JSR.W fItemCarried_PhaseDispatch_NoSell                                      ;81812A|209A88  |81889A;
     RTS                                                        ;81812D|60      |      ;
  
  
-subItemCarried_0x57:
+subItemCarried_Lumber:
     JSR.W fItemCarried_PhaseDispatch_NoSell                                      ;81812E|209A88  |81889A;
     RTS                                                        ;818131|60      |      ;
  
@@ -314,7 +314,7 @@ subItemCarried_Feed:
     RTS                                                        ;8181AD|60      |      ;
  
  
-subItemCarried_GreenPerfume:
+subItemCarried_ShelfPerfumeGreen:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;8181AE|202389  |818923;
     SEP #$20                                                   ;8181B1|E220    |      ;
     LDA.W $0976+!RAM_SHIFT                                 ;8181B3|AD7609  |000976;
@@ -329,7 +329,7 @@ subItemCarried_GreenPerfume:
   + RTS                                                        ;8181C7|60      |      ;
  
  
-subItemCarried_RedPerfume:
+subItemCarried_ShelfPerfumeRed:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;8181C8|202389  |818923;
     SEP #$20                                                   ;8181CB|E220    |      ;
     LDA.W $0976+!RAM_SHIFT                                 ;8181CD|AD7609  |000976;
@@ -344,7 +344,7 @@ subItemCarried_RedPerfume:
   + RTS                                                        ;8181E1|60      |      ;
  
  
-subItemCarried_BluePerfume:
+subItemCarried_ShelfPerfumeBlue:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;8181E2|202389  |818923;
     SEP #$20                                                   ;8181E5|E220    |      ;
     LDA.W $0976+!RAM_SHIFT                                 ;8181E7|AD7609  |000976;
@@ -581,7 +581,7 @@ subItemCarried_Chick:
     RTS                                                        ;8183C2|60      |      ;
  
  
-subItemCarried_0x27:
+subItemCarried_Dog:
     RTS                                                        ;8183C3|60      |      ;
  
  
@@ -594,163 +594,163 @@ subItemCarried_Mole:
     RTS                                                        ;8183C8|60      |      ;
  
  
-subItemCarried_0x2A:
+subItemCarried_Sickle:
     JSL.L fShed_PlaceEquippedTool                                      ;8183C9|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;8183CD|20C387  |8187C3;
     RTS                                                        ;8183D0|60      |      ;
  
  
-subItemCarried_0x2B:
+subItemCarried_Hoe:
     JSL.L fShed_PlaceEquippedTool                                      ;8183D1|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;8183D5|20C387  |8187C3;
     RTS                                                        ;8183D8|60      |      ;
  
  
-subItemCarried_0x2C:
+subItemCarried_Hammer:
     JSL.L fShed_PlaceEquippedTool                                      ;8183D9|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;8183DD|20C387  |8187C3;
     RTS                                                        ;8183E0|60      |      ;
  
  
-subItemCarried_0x2D:
+subItemCarried_Axe:
     JSL.L fShed_PlaceEquippedTool                                      ;8183E1|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;8183E5|20C387  |8187C3;
     RTS                                                        ;8183E8|60      |      ;
  
  
-subItemCarried_0x2E:
+subItemCarried_SeedBagCorn:
     JSL.L fShed_PlaceEquippedTool                                      ;8183E9|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;8183ED|20C387  |8187C3;
     RTS                                                        ;8183F0|60      |      ;
  
  
-subItemCarried_0x2F:
+subItemCarried_SeedBagTomato:
     JSL.L fShed_PlaceEquippedTool                                      ;8183F1|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;8183F5|20C387  |8187C3;
     RTS                                                        ;8183F8|60      |      ;
  
  
-subItemCarried_0x30:
+subItemCarried_SeedBagPotato:
     JSL.L fShed_PlaceEquippedTool                                      ;8183F9|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;8183FD|20C387  |8187C3;
     RTS                                                        ;818400|60      |      ;
  
  
-subItemCarried_0x31:
+subItemCarried_SeedBagTurnip:
     JSL.L fShed_PlaceEquippedTool                                      ;818401|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;818405|20C387  |8187C3;
     RTS                                                        ;818408|60      |      ;
  
  
-subItemCarried_0x32:
+subItemCarried_Medicide:
     JSL.L fShed_PlaceEquippedTool                                      ;818409|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;81840D|20C387  |8187C3;
     RTS                                                        ;818410|60      |      ;
  
  
-subItemCarried_0x33:
+subItemCarried_MiraclePotion:
     JSL.L fShed_PlaceEquippedTool                                      ;818411|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;818415|20C387  |8187C3;
     RTS                                                        ;818418|60      |      ;
  
  
-subItemCarried_0x34:
+subItemCarried_Bell:
     JSL.L fShed_PlaceEquippedTool                                      ;818419|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;81841D|20C387  |8187C3;
     RTS                                                        ;818420|60      |      ;
  
  
-subItemCarried_0x35:
+subItemCarried_SeedBagGrass:
     JSL.L fShed_PlaceEquippedTool                                      ;818421|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;818425|20C387  |8187C3;
     RTS                                                        ;818428|60      |      ;
  
  
-subItemCarried_0x36:
+subItemCarried_Paint:
     JSL.L fShed_PlaceEquippedTool                                      ;818429|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;81842D|20C387  |8187C3;
     RTS                                                        ;818430|60      |      ;
  
  
-subItemCarried_0x37:
+subItemCarried_Milker:
     JSL.L fShed_PlaceEquippedTool                                      ;818431|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;818435|20C387  |8187C3;
     RTS                                                        ;818438|60      |      ;
  
  
-subItemCarried_0x38:
+subItemCarried_Brush:
     JSL.L fShed_PlaceEquippedTool                                      ;818439|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;81843D|20C387  |8187C3;
     RTS                                                        ;818440|60      |      ;
  
  
-subItemCarried_0x39:
+subItemCarried_WateringCan:
     JSL.L fShed_PlaceEquippedTool                                      ;818441|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;818445|20C387  |8187C3;
     RTS                                                        ;818448|60      |      ;
  
  
-subItemCarried_0x3A:
+subItemCarried_GoldSickle:
     JSL.L fShed_PlaceEquippedTool                                      ;818449|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;81844D|20C387  |8187C3;
     RTS                                                        ;818450|60      |      ;
  
  
-subItemCarried_0x3B:
+subItemCarried_GoldHoe:
     JSL.L fShed_PlaceEquippedTool                                      ;818451|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;818455|20C387  |8187C3;
     RTS                                                        ;818458|60      |      ;
  
  
-subItemCarried_0x3C:
+subItemCarried_GoldHammer:
     JSL.L fShed_PlaceEquippedTool                                      ;818459|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;81845D|20C387  |8187C3;
     RTS                                                        ;818460|60      |      ;
  
  
-subItemCarried_0x3D:
+subItemCarried_GoldAxe:
     JSL.L fShed_PlaceEquippedTool                                      ;818461|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;818465|20C387  |8187C3;
     RTS                                                        ;818468|60      |      ;
  
  
-subItemCarried_0x3E:
+subItemCarried_Sprinkler:
     JSL.L fShed_PlaceEquippedTool                                      ;818469|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;81846D|20C387  |8187C3;
     RTS                                                        ;818470|60      |      ;
  
  
-subItemCarried_0x3F:
+subItemCarried_BeanstalkSeed:
     JSL.L fShed_PlaceEquippedTool                                      ;818471|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;818475|20C387  |8187C3;
     RTS                                                        ;818478|60      |      ;
  
  
-subItemCarried_0x40:
+subItemCarried_BlueDiamond:
     JSL.L fShed_PlaceEquippedTool                                      ;818479|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;81847D|20C387  |8187C3;
     RTS                                                        ;818480|60      |      ;
  
  
-subItemCarried_0x41:
+subItemCarried_BlueFeather:
     JSL.L fShed_PlaceEquippedTool                                      ;818481|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;818485|20C387  |8187C3;
     RTS                                                        ;818488|60      |      ;
  
  
-subItemCarried_0x42:
+subItemCarried_ChickenFeed:
     JSL.L fShed_PlaceEquippedTool                                      ;818489|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;81848D|20C387  |8187C3;
     RTS                                                        ;818490|60      |      ;
  
  
-subItemCarried_0x43:
+subItemCarried_CowFeed:
     JSL.L fShed_PlaceEquippedTool                                      ;818491|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;818495|20C387  |8187C3;
     RTS                                                        ;818498|60      |      ;
  
  
-subItemCarried_0x44:
+subItemCarried_ShelfGrassSeeds:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;818499|202389  |818923;
     SEP #$20                                                   ;81849C|E220    |      ;
     LDA.W $0976+!RAM_SHIFT                                 ;81849E|AD7609  |000976;
@@ -781,7 +781,7 @@ subItemCarried_0x44:
  ++ RTS                                                        ;8184D4|60      |      ;
  
  
-subItemCarried_0x45:
+subItemCarried_ShelfCornSeeds:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;8184D5|202389  |818923;
     SEP #$20                                                   ;8184D8|E220    |      ;
     LDA.W $0976+!RAM_SHIFT                                 ;8184DA|AD7609  |000976;
@@ -812,7 +812,7 @@ subItemCarried_0x45:
  ++ RTS                                                        ;818510|60      |      ;
  
  
-subItemCarried_0x46:
+subItemCarried_ShelfTomatoSeeds:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;818511|202389  |818923;
     SEP #$20                                                   ;818514|E220    |      ;
     LDA.W $0976+!RAM_SHIFT                                 ;818516|AD7609  |000976;
@@ -860,7 +860,7 @@ subItemCarried_0x46:
  ++ RTS                                                        ;81854C|60      |      ;
  
  
-subItemCarried_0x47:
+subItemCarried_ShelfPotatoSeeds:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;81854D|202389  |818923;
     SEP #$20                                                   ;818550|E220    |      ;
     LDA.W $0976+!RAM_SHIFT                                 ;818552|AD7609  |000976;
@@ -891,7 +891,7 @@ subItemCarried_0x47:
  ++ RTS                                                        ;818588|60      |      ;
  
  
-subItemCarried_0x48:
+subItemCarried_ShelfTurnipSeeds:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;818589|202389  |818923;
     SEP #$20                                                   ;81858C|E220    |      ;
     LDA.W $0976+!RAM_SHIFT                                 ;81858E|AD7609  |000976;
@@ -922,7 +922,7 @@ subItemCarried_0x48:
  ++ RTS                                                        ;8185C4|60      |      ;
  
  
-subItemCarried_0x49:
+subItemCarried_ShelfFlower:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;8185C5|202389  |818923;
     SEP #$20                                                   ;8185C8|E220    |      ;
     LDA.W $0976+!RAM_SHIFT                                 ;8185CA|AD7609  |000976;
@@ -937,7 +937,7 @@ subItemCarried_0x49:
   + RTS                                                        ;8185DE|60      |      ;
  
  
-subItemCarried_0x4A:
+subItemCarried_ShelfPaint:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;8185DF|202389  |818923;
     SEP #$20                                                   ;8185E2|E220    |      ;
     LDA.W $0976+!RAM_SHIFT                                 ;8185E4|AD7609  |000976;
@@ -950,7 +950,7 @@ subItemCarried_0x4A:
   + RTS                                                        ;8185F5|60      |      ;
  
  
-subItemCarried_0x4B:
+subItemCarried_ShelfMilker:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;8185F6|202389  |818923;
     SEP #$20                                                   ;8185F9|E220    |      ;
     LDA.W $0976+!RAM_SHIFT                                 ;8185FB|AD7609  |000976;
@@ -963,7 +963,7 @@ subItemCarried_0x4B:
   + RTS                                                        ;81860C|60      |      ;
  
  
-subItemCarried_0x4C:
+subItemCarried_ShelfBrush:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;81860D|202389  |818923;
     SEP #$20                                                   ;818610|E220    |      ;
     LDA.W $0976+!RAM_SHIFT                                 ;818612|AD7609  |000976;
@@ -976,7 +976,7 @@ subItemCarried_0x4C:
   + RTS                                                        ;818623|60      |      ;
  
  
-subItemCarried_0x4D:
+subItemCarried_ShelfSuperSickle:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;818624|202389  |818923;
     SEP #$20                                                   ;818627|E220    |      ;
     LDA.W $0976+!RAM_SHIFT                                 ;818629|AD7609  |000976;
@@ -1002,7 +1002,7 @@ subItemCarried_0x4D:
  ++ RTS                                                        ;81865A|60      |      ;
  
  
-subItemCarried_0x4E:
+subItemCarried_ShelfSuperHoe:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;81865B|202389  |818923;
     SEP #$20                                                   ;81865E|E220    |      ;
     LDA.W $0976+!RAM_SHIFT                                 ;818660|AD7609  |000976;
@@ -1028,7 +1028,7 @@ subItemCarried_0x4E:
  ++ RTS                                                        ;818691|60      |      ;
  
  
-subItemCarried_0x4F:
+subItemCarried_ShelfSuperHammer:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;818692|202389  |818923;
     SEP #$20                                                   ;818695|E220    |      ;
     LDA.W $0976+!RAM_SHIFT                                 ;818697|AD7609  |000976;
@@ -1054,7 +1054,7 @@ subItemCarried_0x4F:
  ++ RTS                                                        ;8186C8|60      |      ;
  
  
-subItemCarried_0x50:
+subItemCarried_ShelfSuperAxe:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;8186C9|202389  |818923;
     SEP #$20                                                   ;8186CC|E220    |      ;
     LDA.W $0976+!RAM_SHIFT                                 ;8186CE|AD7609  |000976;
@@ -1080,7 +1080,7 @@ subItemCarried_0x50:
  ++ RTS                                                        ;8186FF|60      |      ;
  
  
-subItemCarried_0x51:
+subItemCarried_ShelfSprinkler:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;818700|202389  |818923;
     SEP #$20                                                   ;818703|E220    |      ;
     LDA.W $0976+!RAM_SHIFT                                 ;818705|AD7609  |000976;
@@ -1106,7 +1106,7 @@ subItemCarried_0x51:
  ++ RTS                                                        ;818736|60      |      ;
  
  
-subItemCarried_0x52:
+subItemCarried_ShelfCowMedicine:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;818737|202389  |818923;
     SEP #$20                                                   ;81873A|E220    |      ;
     LDA.W $0976+!RAM_SHIFT                                 ;81873C|AD7609  |000976;
@@ -1119,7 +1119,7 @@ subItemCarried_0x52:
   + RTS                                                        ;81874D|60      |      ;
  
  
-subItemCarried_0x53:
+subItemCarried_ShelfMiraclePotion:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;81874E|202389  |818923;
     SEP #$20                                                   ;818751|E220    |      ;
     LDA.W $0976+!RAM_SHIFT                                 ;818753|AD7609  |000976;
@@ -1132,7 +1132,7 @@ subItemCarried_0x53:
   + RTS                                                        ;818764|60      |      ;
  
  
-subItemCarried_0x54:
+subItemCarried_ShelfChickenFeed:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;818765|202389  |818923;
     SEP #$20                                                   ;818768|E220    |      ;
     LDA.W $0976+!RAM_SHIFT                                 ;81876A|AD7609  |000976;
@@ -1147,7 +1147,7 @@ subItemCarried_0x54:
   + RTS                                                        ;818780|60      |      ;
  
  
-subItemCarried_0x55:
+subItemCarried_ShelfCowFeed:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;818781|202389  |818923;
     SEP #$20                                                   ;818784|E220    |      ;
     LDA.W $0976+!RAM_SHIFT                                 ;818786|AD7609  |000976;
@@ -1162,7 +1162,7 @@ subItemCarried_0x55:
   + RTS                                                        ;81879C|60      |      ;
  
  
-subItemCarried_0x56:
+subItemCarried_ShelfCake:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;81879D|202389  |818923;
     SEP #$20                                                   ;8187A0|E220    |      ;
     LDA.W $0976+!RAM_SHIFT                                 ;8187A2|AD7609  |000976;
@@ -1177,17 +1177,17 @@ subItemCarried_0x56:
   + RTS                                                        ;8187B6|60      |      ;
  
  
-subItemCarried_0x58:
+subItemCarried_PerfumeGreen:
     JSR.W fItemCarried_PhaseDispatch_Produce                                      ;8187B7|20E588  |8188E5;
     RTS                                                        ;8187BA|60      |      ;
  
  
-subItemCarried_0x59:
+subItemCarried_PerfumeRed:
     JSR.W fItemCarried_PhaseDispatch_Produce                                      ;8187BB|20E588  |8188E5;
     RTS                                                        ;8187BE|60      |      ;
  
  
-subItemCarried_0x5A:
+subItemCarried_PerfumeBlue:
     JSR.W fItemCarried_PhaseDispatch_Produce                                      ;8187BF|20E588  |8188E5;
     RTS                                                        ;8187C2|60      |      ;
  

@@ -7,7 +7,7 @@ if !REGION_DE
     subItemCarried_Tomato_Return = $81816B
     subItemCarried_Potato_Return = $818188
     subItemCarried_Turnip_Return = $8181A5
-    fMap_CalcTilemapBufferOffset_OuterLoop = $81A8D4
+    fMap_CopyTilePatternToTilemapBuffer_OuterLoop = $81A8D4
     fPlayerInteraction0x42_ShowDialog = $81E768
     fPlayerInteraction0x42_RequestNameInput = $81E7BB
     aDayOrdinalString_DE = $828C63
@@ -32,7 +32,7 @@ elseif !REGION_EU
     subItemCarried_Tomato_Return = $81816B
     subItemCarried_Potato_Return = $818188
     subItemCarried_Turnip_Return = $8181A5
-    fMap_CalcTilemapBufferOffset_OuterLoop = $81A8D4
+    fMap_CopyTilePatternToTilemapBuffer_OuterLoop = $81A8D4
     fPlayerInteraction0x42_ShowDialog = $81E768
     fPlayerInteraction0x42_RequestNameInput = $81E7BB
     fObjectMap_HuricaneDamage_RowLoop = $82A772

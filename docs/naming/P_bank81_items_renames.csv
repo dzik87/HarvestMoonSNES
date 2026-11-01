@@ -1,0 +1,148 @@
+old,new,confidence,reason
+fItemSub81A9F6_0x00to0x03,fAreaItemSub_Farm,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of Farm spring-winter (area ids $00-$03)
+fItemSub81A9F6_0x04to0x07,fAreaItemSub_Town,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of Town spring-winter (area ids $04-$07)
+fItemSub81A9F6_0x08,fAreaItemSub_DancingS1,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $08 (DANCINGS1)
+fItemSub81A9F6_0x09,fAreaItemSub_DancingS2,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $09 (DANCINGS2)
+fItemSub81A9F6_0x0A,fAreaItemSub_NewYearPublicSquare,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $0A (NY_PUBLICSQUARE)
+fItemSub81A9F6_0x0B,fAreaItemSub_EggFestival,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $0B (EGGFESTIVAL)
+fItemSub81A9F6_0x0C,fAreaItemSub_CrossroadsSpring,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $0C (CROSSROADSPRING)
+fItemSub81A9F6_0x0D,fAreaItemSub_CrossroadsSummer,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $0D (CROSSROADSUMMER)
+fItemSub81A9F6_0x0E,fAreaItemSub_CrossroadsFall,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $0E (CROSSROADFALL)
+fItemSub81A9F6_0x0F,fAreaItemSub_CrossroadsWinter,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $0F (CROSSROADWINTER)
+fItemSub81A9F6_0x10to0x13,fAreaItemSub_Woods,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of Woods spring-winter (area ids $10-$13)
+fItemSub81A9F6_0x14,fAreaItemSub_NewYearSpa,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $14 (NY_SPA)
+fItemSub81A9F6_0x15,fAreaItemSub_House1,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $15 (HOUSE1)
+fItemSub81A9F6_0x16,fAreaItemSub_House2,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $16 (HOUSE2)
+fItemSub81A9F6_0x17,fAreaItemSub_House3,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $17 (HOUSE3)
+fItemSub81A9F6_0x18,fAreaItemSub_MajorHouse,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $18 (MAJORHOUSE)
+fItemSub81A9F6_0x19,fAreaItemSub_MajorCorridor,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $19 (MAJORCORRIDOR)
+fItemSub81A9F6_0x1A,fAreaItemSub_MajorBedroom,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $1A (MAJORBEDROOM)
+fItemSub81A9F6_0x1B,fAreaItemSub_Church,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $1B (CHURCH)
+fItemSub81A9F6_0x1C,fAreaItemSub_Florist,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $1C (FLORIST)
+fItemSub81A9F6_0x1D,fAreaItemSub_FloristBedroom,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $1D (FLORISTBEDROOM)
+fItemSub81A9F6_0x1E,fAreaItemSub_Bar,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $1E (BAR)
+fItemSub81A9F6_0x1F,fAreaItemSub_BarBedroom,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $1F (BARBEDROOM)
+fItemSub81A9F6_0x20,fAreaItemSub_Restaurant,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $20 (RESTAURANT)
+fItemSub81A9F6_0x21,fAreaItemSub_RestaurantBedroom,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $21 (RESTAURANTBEDROOM)
+fItemSub81A9F6_0x22,fAreaItemSub_ToolsShop,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $22 (TOOLSSHOP)
+fItemSub81A9F6_0x23,fAreaItemSub_ToolsShopBedroom,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $23 (TOOLSSHOPBEDROOM)
+fItemSub81A9F6_0x24,fAreaItemSub_AnimalShop,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $24 (ANIMALSHOP)
+fItemSub81A9F6_0x25,fAreaItemSub_FortuneTeller,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $25 (FORTUNETELLER)
+fItemSub81A9F6_0x26,fAreaItemSub_Shed,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $26 (SHED)
+fItemSub81A9F6_0x27,fAreaItemSub_CowBarn,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $27 (COWBARN)
+fItemSub81A9F6_0x28,fAreaItemSub_Coop,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $28 (COOP)
+fItemSub81A9F6_0x29,fAreaItemSub_WoodsCave,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $29 (WOODSCAVE)
+fItemSub81A9F6_0x2A,fAreaItemSub_ImpUnderground,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $2A (IMPUNDERGROUND)
+fItemSub81A9F6_0x2B,fAreaItemSub_WorksmanHouse,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $2B (WORKSMANHOUSE)
+fItemSub81A9F6_0x2C,fAreaItemSub_GoldChicken,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $2C (GOLDCHICKEN)
+fItemSub81A9F6_0x2D,fAreaItemSub_WeddingSpring,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $2D (WEDDINGSPRING)
+fItemSub81A9F6_0x2E,fAreaItemSub_WeddingSummer,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $2E (WEDDINGSUMMER)
+fItemSub81A9F6_0x2F,fAreaItemSub_WeddingFall,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $2F (WEDDINGFALL)
+fItemSub81A9F6_0x30,fAreaItemSub_WeddingWinter,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $30 (WEDDINGWINTER)
+fItemSub81A9F6_0x31,fAreaItemSub_MountainTopSpring,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $31 (MOUNTAINTOPSPRING)
+fItemSub81A9F6_0x32,fAreaItemSub_MountainTopSummer,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $32 (MOUNTAINTOPSUMMER)
+fItemSub81A9F6_0x33,fAreaItemSub_MountainTopFall,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $33 (MOUNTAINTOPFALL)
+fItemSub81A9F6_0x34,fAreaItemSub_MountainTopWinter,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $34 (MOUNTAINTOPWINTER)
+fItemSub81A9F6_0x35,fAreaItemSub_MountainTop2Spring,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $35 (MOUNTAINTOP2SPRING)
+fItemSub81A9F6_0x36,fAreaItemSub_MountainTopEndingSummer,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $36 (MNTTOPENDINGSUMMER)
+fItemSub81A9F6_0x37,fAreaItemSub_MountainTop2Fall,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $37 (MOUNTAINTOP2FALL)
+fItemSub81A9F6_0x38,fAreaItemSub_MountainTop2Winter,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $38 (MOUNTAINTOP2WINTER)
+fItemSub81A9F6_0x39,fAreaItemSub_NewYearMountainTop,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $39 (NY_MOUNTAINTOP)
+fItemSub81A9F6_0x3A,fAreaItemSub_MountainTopSunrise,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $3A (MOUNTAINTOPSUNRISE)
+fItemSub81A9F6_0x3B,fAreaItemSub_MountainTopBean,high,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $3B (MOUNTAINTOPBEAN)
+fItemSub81A9F6_0x3C,fAreaItemSub_Intro,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $3C (INTRO)
+fItemSub81A9F6_0x3D,fAreaItemSub_Ending00,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $3D (ENDING00)
+fItemSub81A9F6_0x3E,fAreaItemSub_Ending01,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $3E (ENDING01)
+fItemSub81A9F6_0x3F,fAreaItemSub_Ending02,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $3F (ENDING02)
+fItemSub81A9F6_0x40,fAreaItemSub_Ending03,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $40 (ENDING03)
+fItemSub81A9F6_0x41,fAreaItemSub_Ending04,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $41 (ENDING04)
+fItemSub81A9F6_0x42,fAreaItemSub_Ending05,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $42 (ENDING05)
+fItemSub81A9F6_0x43,fAreaItemSub_Ending06,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $43 (ENDING06)
+fItemSub81A9F6_0x44,fAreaItemSub_Ending07,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $44 (ENDING07)
+fItemSub81A9F6_0x45,fAreaItemSub_Ending08,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $45 (ENDING08)
+fItemSub81A9F6_0x46,fAreaItemSub_Ending09,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $46 (ENDING09)
+fItemSub81A9F6_0x47,fAreaItemSub_Ending10,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $47 (ENDING10)
+fItemSub81A9F6_0x48,fAreaItemSub_Ending11,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $48 (ENDING11)
+fItemSub81A9F6_0x49,fAreaItemSub_Ending12,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $49 (ENDING12)
+fItemSub81A9F6_0x4A,fAreaItemSub_Ending13,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $4A (ENDING13)
+fItemSub81A9F6_0x4B,fAreaItemSub_Credits0,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $4B (CREDITS0)
+fItemSub81A9F6_0x4C,fAreaItemSub_Credits1,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $4C (CREDITS1)
+fItemSub81A9F6_0x4D,fAreaItemSub_Credits2,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $4D (CREDITS2)
+fItemSub81A9F6_0x4E,fAreaItemSub_Credits3,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $4E (CREDITS3)
+fItemSub81A9F6_0x4F,fAreaItemSub_Credits4,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $4F (CREDITS4)
+fItemSub81A9F6_0x50,fAreaItemSub_DriveToTown,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $50 (DRIVETOTOWN)
+fItemSub81A9F6_0x51,fAreaItemSub_Credits4BL,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $51 (CREDITS4_BL)
+fItemSub81A9F6_0x52,fAreaItemSub_Credits4BR,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $52 (CREDITS4_BR)
+fItemSub81A9F6_0x53,fAreaItemSub_StaffRollJPTL,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $53 (STAFFROLLJP_TL)
+fItemSub81A9F6_0x54,fAreaItemSub_StaffRollJPTR,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $54 (STAFFROLLJP_TR)
+fItemSub81A9F6_0x55,fAreaItemSub_StaffRollJPBL,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $55 (STAFFROLLJP_BL)
+fItemSub81A9F6_0x56,fAreaItemSub_StaffRollJPBR,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $56 (STAFFROLLJP_BR)
+fItemSub81A9F6_0x57,fAreaItemSub_RainOverlay,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $57 (RAINOVERLAY)
+fItemSub81A9F6_0x58,fAreaItemSub_CloudsOverlay,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $58 (CLOUDSOVERLAY)
+fItemSub81A9F6_0x59,fAreaItemSub_SnowOverlay,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $59 (SNOWOVERLAY)
+fItemSub81A9F6_0x5A,fAreaItemSub_HeavySnowOverlay,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $5A (HEAVYSNOWOVERLAY)
+fItemSub81A9F6_0x5B,fAreaItemSub_IntroFarmScroll,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $5B (INTROFARMSCROLL)
+fItemSub81A9F6_0x5C,fAreaItemSub_HarvestMoonLogo,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $5C (HARVESTMOONLOGO)
+fItemSub81A9F6_0x5D,fAreaItemSub_NatsumeLogo,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $5D (NATSUMELOGO)
+fItemSub81A9F6_0x5E,fAreaItemSub_MenuScreenBackgrounds,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $5E (MENUSCREENBACKGROUNDS)
+fItemSub81A9F6_0x5F,fAreaItemSub_NameInput,medium,pAreaItemSubrutineTable index is strcMap.loadAreaId (fAreaItemSubrutine_Run); handler of area id $5F (NAMEINPUT)
+subItemCarried_0x2A,subItemCarried_Sickle,high,carried id $2A = !EITEM $01 + $29 (fItemCarriedTool_EquipFromShed); tool taken out of the shed; object name Item_Sickle in K5_objects.csv
+subItemCarried_0x2B,subItemCarried_Hoe,high,carried id $2B = !EITEM $02 + $29 (fItemCarriedTool_EquipFromShed); tool taken out of the shed; object name Item_Hoe in K5_objects.csv
+subItemCarried_0x2C,subItemCarried_Hammer,high,carried id $2C = !EITEM $03 + $29 (fItemCarriedTool_EquipFromShed); tool taken out of the shed; object name Item_Hammer in K5_objects.csv
+subItemCarried_0x2D,subItemCarried_Axe,high,carried id $2D = !EITEM $04 + $29 (fItemCarriedTool_EquipFromShed); tool taken out of the shed; object name Item_Axe in K5_objects.csv
+subItemCarried_0x2E,subItemCarried_SeedBagCorn,high,carried id $2E = !EITEM $05 + $29 (fItemCarriedTool_EquipFromShed); tool taken out of the shed; object name Item_SeedBagCorn in K5_objects.csv
+subItemCarried_0x2F,subItemCarried_SeedBagTomato,high,carried id $2F = !EITEM $06 + $29 (fItemCarriedTool_EquipFromShed); tool taken out of the shed; object name Item_SeedBagTomato in K5_objects.csv
+subItemCarried_0x30,subItemCarried_SeedBagPotato,high,carried id $30 = !EITEM $07 + $29 (fItemCarriedTool_EquipFromShed); tool taken out of the shed; object name Item_SeedBagPotato in K5_objects.csv
+subItemCarried_0x31,subItemCarried_SeedBagTurnip,high,carried id $31 = !EITEM $08 + $29 (fItemCarriedTool_EquipFromShed); tool taken out of the shed; object name Item_SeedBagTurnip in K5_objects.csv
+subItemCarried_0x32,subItemCarried_Medicide,high,carried id $32 = !EITEM $09 + $29 (fItemCarriedTool_EquipFromShed); tool taken out of the shed; object name Item_Medicide in K5_objects.csv
+subItemCarried_0x33,subItemCarried_MiraclePotion,high,carried id $33 = !EITEM $0A + $29 (fItemCarriedTool_EquipFromShed); tool taken out of the shed; object name Item_MiraclePotion in K5_objects.csv
+subItemCarried_0x34,subItemCarried_Bell,high,carried id $34 = !EITEM $0B + $29 (fItemCarriedTool_EquipFromShed); tool taken out of the shed; object name Item_Bell in K5_objects.csv
+subItemCarried_0x35,subItemCarried_SeedBagGrass,high,carried id $35 = !EITEM $0C + $29 (fItemCarriedTool_EquipFromShed); tool taken out of the shed; object name Item_SeedBagGrass in K5_objects.csv
+subItemCarried_0x36,subItemCarried_Paint,high,carried id $36 = !EITEM $0D + $29 (fItemCarriedTool_EquipFromShed); tool taken out of the shed; object name Item_Paint in K5_objects.csv
+subItemCarried_0x37,subItemCarried_Milker,high,carried id $37 = !EITEM $0E + $29 (fItemCarriedTool_EquipFromShed); tool taken out of the shed; object name Item_Milker in K5_objects.csv
+subItemCarried_0x38,subItemCarried_Brush,high,carried id $38 = !EITEM $0F + $29 (fItemCarriedTool_EquipFromShed); tool taken out of the shed; object name Item_Brush in K5_objects.csv
+subItemCarried_0x39,subItemCarried_WateringCan,high,carried id $39 = !EITEM $10 + $29 (fItemCarriedTool_EquipFromShed); tool taken out of the shed; object name Item_WateringCan in K5_objects.csv
+subItemCarried_0x3A,subItemCarried_GoldSickle,high,carried id $3A = !EITEM $11 + $29 (fItemCarriedTool_EquipFromShed); tool taken out of the shed; object name Item_GoldSickle in K5_objects.csv
+subItemCarried_0x3B,subItemCarried_GoldHoe,high,carried id $3B = !EITEM $12 + $29 (fItemCarriedTool_EquipFromShed); tool taken out of the shed; object name Item_GoldHoe in K5_objects.csv
+subItemCarried_0x3C,subItemCarried_GoldHammer,high,carried id $3C = !EITEM $13 + $29 (fItemCarriedTool_EquipFromShed); tool taken out of the shed; object name Item_GoldHammer in K5_objects.csv
+subItemCarried_0x3D,subItemCarried_GoldAxe,high,carried id $3D = !EITEM $14 + $29 (fItemCarriedTool_EquipFromShed); tool taken out of the shed; object name Item_GoldAxe in K5_objects.csv
+subItemCarried_0x3E,subItemCarried_Sprinkler,high,carried id $3E = !EITEM $15 + $29 (fItemCarriedTool_EquipFromShed); tool taken out of the shed; object name Item_Sprinkler in K5_objects.csv
+subItemCarried_0x3F,subItemCarried_BeanstalkSeed,high,carried id $3F = !EITEM $16 + $29 (fItemCarriedTool_EquipFromShed); tool taken out of the shed; object name Item_BeanstalkSeed in K5_objects.csv
+subItemCarried_0x40,subItemCarried_BlueDiamond,high,carried id $40 = !EITEM $17 + $29 (fItemCarriedTool_EquipFromShed); tool taken out of the shed; object name Item_BlueDiamond in K5_objects.csv
+subItemCarried_0x41,subItemCarried_BlueFeather,high,carried id $41 = !EITEM $18 + $29 (fItemCarriedTool_EquipFromShed); tool taken out of the shed; object name Item_BlueFeather in K5_objects.csv
+subItemCarried_0x42,subItemCarried_ChickenFeed,high,carried id $42 = !EITEM $19 + $29 (fItemCarriedTool_EquipFromShed); tool taken out of the shed; object name Item_ChickenFeed in K5_objects.csv
+subItemCarried_0x43,subItemCarried_CowFeed,high,carried id $43 = !EITEM $1A + $29 (fItemCarriedTool_EquipFromShed); tool taken out of the shed; object name Item_CowFeed in K5_objects.csv
+subItemCarried_0x44,subItemCarried_ShelfGrassSeeds,high,"carried id $44 = aDialogsData_BuyItems entry 0 (GrassSeeds); Buyable phase handler, fItemBuy_ShowPurchaseDialog uses id-$44"
+subItemCarried_0x45,subItemCarried_ShelfCornSeeds,high,"carried id $45 = aDialogsData_BuyItems entry 1 (CornSeeds); Buyable phase handler, fItemBuy_ShowPurchaseDialog uses id-$44"
+subItemCarried_0x46,subItemCarried_ShelfTomatoSeeds,high,"carried id $46 = aDialogsData_BuyItems entry 2 (TomatoSeeds); Buyable phase handler, fItemBuy_ShowPurchaseDialog uses id-$44"
+subItemCarried_0x47,subItemCarried_ShelfPotatoSeeds,high,"carried id $47 = aDialogsData_BuyItems entry 3 (PotatoSeeds); Buyable phase handler, fItemBuy_ShowPurchaseDialog uses id-$44"
+subItemCarried_0x48,subItemCarried_ShelfTurnipSeeds,high,"carried id $48 = aDialogsData_BuyItems entry 4 (TurnipSeeds); Buyable phase handler, fItemBuy_ShowPurchaseDialog uses id-$44"
+subItemCarried_0x49,subItemCarried_ShelfFlower,high,"carried id $49 = aDialogsData_BuyItems entry 5 (Flower); Buyable phase handler, fItemBuy_ShowPurchaseDialog uses id-$44"
+subItemCarried_0x4A,subItemCarried_ShelfPaint,high,"carried id $4A = aDialogsData_BuyItems entry 6 (Paint); Buyable phase handler, fItemBuy_ShowPurchaseDialog uses id-$44"
+subItemCarried_0x4B,subItemCarried_ShelfMilker,high,"carried id $4B = aDialogsData_BuyItems entry 7 (Milker); Buyable phase handler, fItemBuy_ShowPurchaseDialog uses id-$44"
+subItemCarried_0x4C,subItemCarried_ShelfBrush,high,"carried id $4C = aDialogsData_BuyItems entry 8 (Brush); Buyable phase handler, fItemBuy_ShowPurchaseDialog uses id-$44"
+subItemCarried_0x4D,subItemCarried_ShelfSuperSickle,high,"carried id $4D = aDialogsData_BuyItems entry 9 (SuperSickle); Buyable phase handler, fItemBuy_ShowPurchaseDialog uses id-$44"
+subItemCarried_0x4E,subItemCarried_ShelfSuperHoe,high,"carried id $4E = aDialogsData_BuyItems entry 10 (SuperHoe); Buyable phase handler, fItemBuy_ShowPurchaseDialog uses id-$44"
+subItemCarried_0x4F,subItemCarried_ShelfSuperHammer,high,"carried id $4F = aDialogsData_BuyItems entry 11 (SuperHammer); Buyable phase handler, fItemBuy_ShowPurchaseDialog uses id-$44"
+subItemCarried_0x50,subItemCarried_ShelfSuperAxe,high,"carried id $50 = aDialogsData_BuyItems entry 12 (SuperAxe); Buyable phase handler, fItemBuy_ShowPurchaseDialog uses id-$44"
+subItemCarried_0x51,subItemCarried_ShelfSprinkler,high,"carried id $51 = aDialogsData_BuyItems entry 13 (Sprinkler); Buyable phase handler, fItemBuy_ShowPurchaseDialog uses id-$44"
+subItemCarried_0x52,subItemCarried_ShelfCowMedicine,high,"carried id $52 = aDialogsData_BuyItems entry 14 (CowMedicine); Buyable phase handler, fItemBuy_ShowPurchaseDialog uses id-$44"
+subItemCarried_0x53,subItemCarried_ShelfMiraclePotion,high,"carried id $53 = aDialogsData_BuyItems entry 15 (MiraclePotion); Buyable phase handler, fItemBuy_ShowPurchaseDialog uses id-$44"
+subItemCarried_0x54,subItemCarried_ShelfChickenFeed,high,"carried id $54 = aDialogsData_BuyItems entry 16 (ChickenFeed); Buyable phase handler, fItemBuy_ShowPurchaseDialog uses id-$44"
+subItemCarried_0x55,subItemCarried_ShelfCowFeed,high,"carried id $55 = aDialogsData_BuyItems entry 17 (CowFeed); Buyable phase handler, fItemBuy_ShowPurchaseDialog uses id-$44"
+subItemCarried_0x56,subItemCarried_ShelfCake,high,"carried id $56 = aDialogsData_BuyItems entry 18 (Cake); Buyable phase handler, fItemBuy_ShowPurchaseDialog uses id-$44"
+subItemCarried_GreenPerfume,subItemCarried_ShelfPerfumeGreen,medium,Buyable phase handler; fItemBuy_ShowPurchaseDialog maps ids $1B-$1D to aDialogsData_BuyItems entries $13-$15 (fragrances)
+subItemCarried_RedPerfume,subItemCarried_ShelfPerfumeRed,medium,Buyable phase handler; fItemBuy_ShowPurchaseDialog maps ids $1B-$1D to aDialogsData_BuyItems entries $13-$15 (fragrances)
+subItemCarried_BluePerfume,subItemCarried_ShelfPerfumeBlue,medium,Buyable phase handler; fItemBuy_ShowPurchaseDialog maps ids $1B-$1D to aDialogsData_BuyItems entries $13-$15 (fragrances)
+subItemCarried_0x58,subItemCarried_PerfumeGreen,medium,carried id $58 = !EITEM_PERFUMEGREEN: the bought perfume (the shelf version $1B-$1D switches to it after the purchase); Produce phases
+subItemCarried_0x59,subItemCarried_PerfumeRed,medium,carried id $59 = !EITEM_PERFUMERED: the bought perfume (the shelf version $1B-$1D switches to it after the purchase); Produce phases
+subItemCarried_0x5A,subItemCarried_PerfumeBlue,medium,carried id $5A = !EITEM_PERFUMEBLUE: the bought perfume (the shelf version $1B-$1D switches to it after the purchase); Produce phases
+subItemCarried_Bush,subItemCarried_GrassBig,medium,items $09/$0B/$0C use the Item_GrassBig icon (K5_objects.csv)
+subItemCarried_Bush2,subItemCarried_GrassSmall,medium,item $0A uses the Item_GrassSmall icon (K5_objects.csv)
+subItemCarried_0x0D,subItemCarried_StoneGrey,medium,item $0D icon Item_StoneGrey (K5_objects.csv); NoSell phases
+subItemCarried_0x0E,subItemCarried_StoneMossy,medium,item $0E icon Item_StoneMossy (K5_objects.csv); NoSell phases
+subItemCarried_0x57,subItemCarried_Lumber,medium,"items $0F and $57 (frames of Item_Lumber, K5_objects.csv); NoSell phases"
+subItemCarried_0x27,subItemCarried_Dog,medium,item $27 icon Item_Dog (K5_objects.csv); empty handler
+nPowerBerryTable,aPowerBerryPositionsXY,high,"Table of 10 (x,y) word pairs: tile pattern $16 is drawn at each position per eaten power berry in fAreaItemSub_Farm"
+fMap_CalcTilemapBufferOffset,fMap_CopyTilePatternToTilemapBuffer,medium,Computes the tilemap shadow buffer ($7E2000) offset of a map position and copies the pattern tile words from the $A6 source tilemap into it (inner copy loops)
+fMap_CalcTilemapBufferOffset_OuterLoop,fMap_CopyTilePatternToTilemapBuffer_OuterLoop,medium,Region target (EU/DE) of the outer loop label of fMap_CopyTilePatternToTilemapBuffer

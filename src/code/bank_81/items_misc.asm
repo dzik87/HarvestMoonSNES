@@ -430,7 +430,7 @@ fSetTileAtCoords:
     PHY                                                        ;81A69E|5A      |      ;
     PHX                                                        ;81A69F|DA      |      ;
     PHA                                                        ;81A6A0|48      |      ;
-    JSL.L fMap_CalcTilemapBufferOffset                                      ;81A6A1|223AA881|81A83A;
+    JSL.L fMap_CopyTilePatternToTilemapBuffer                                      ;81A6A1|223AA881|81A83A;
     REP #$30                                                   ;81A6A5|C230    |      ;
     PLA                                                        ;81A6A7|68      |      ;
     JSL.L fMap_GetTilePatternInfo                                      ;81A6A8|2201A881|81A801;
@@ -634,7 +634,7 @@ fMap_DrawTilePatternAt:
     PHY                                                        ;81A7DC|5A      |      ;
     PHX                                                        ;81A7DD|DA      |      ;
     PHA                                                        ;81A7DE|48      |      ;
-    JSL.L fMap_CalcTilemapBufferOffset                                      ;81A7DF|223AA881|81A83A;
+    JSL.L fMap_CopyTilePatternToTilemapBuffer                                      ;81A7DF|223AA881|81A83A;
     REP #$30                                                   ;81A7E3|C230    |      ;
     PLA                                                        ;81A7E5|68      |      ;
     JSL.L fMap_GetTilePatternInfo                                      ;81A7E6|2201A881|81A801;
@@ -687,7 +687,7 @@ fMap_GetTilePatternInfo:
     RTL                                                        ;81A839|6B      |      ;
  
  
-fMap_CalcTilemapBufferOffset:
+fMap_CopyTilePatternToTilemapBuffer:
     REP #$30                                                   ;81A83A|C230    |      ; A: nIndex
     PHA                                                        ;81A83C|48      |      ;
     TXA                                                        ;81A83D|8A      |      ;
@@ -857,7 +857,7 @@ fMap_CalcTilemapBufferOffset:
     CPY.B strcVariables.n16Temp3                               ;81A942|C482    |000082;
     BEQ +                                                      ;81A944|F003    |81A949;
     if !REGION_EUDE
-    JMP.W fMap_CalcTilemapBufferOffset_OuterLoop
+    JMP.W fMap_CopyTilePatternToTilemapBuffer_OuterLoop
     else
     JMP.W $A8C0                                                ;81A946|4CC0A8  |81A8C0;
     endif
@@ -976,7 +976,7 @@ fAreaItemSubrutine_Run:
  
     incsrc "../../../build/gen/blocks/item_subroutines.asm"
  
-fItemSub81A9F6_0x00to0x03:
+fAreaItemSub_Farm:
     REP #$30                                                   ;81AAB6|C230    |      ;
     %CheckFlag(event1, $0002)
     BEQ .check_event1_flag0001                                                ;81AABF|F019    |81AADA;
@@ -1066,11 +1066,11 @@ fItemSub81A9F6_0x00to0x03:
     ASL A                                                      ;81AB63|0A      |      ;
     ASL A                                                      ;81AB64|0A      |      ;
     TAX                                                        ;81AB65|AA      |      ;
-    LDA.L nPowerBerryTable,X                                   ;81AB66|BF49AC81|81AC49;
+    LDA.L aPowerBerryPositionsXY,X                                   ;81AB66|BF49AC81|81AC49;
     PHA                                                        ;81AB6A|48      |      ;
     INX                                                        ;81AB6B|E8      |      ;
     INX                                                        ;81AB6C|E8      |      ;
-    LDA.L nPowerBerryTable,X                                   ;81AB6D|BF49AC81|81AC49;
+    LDA.L aPowerBerryPositionsXY,X                                   ;81AB6D|BF49AC81|81AC49;
     TAY                                                        ;81AB71|A8      |      ;
     PLX                                                        ;81AB72|FA      |      ;
     LDA.W #$0016                                               ;81AB73|A91600  |      ;
@@ -1180,13 +1180,13 @@ fItemSub81A9F6_0x00to0x03:
     RTS                                                        ;81AC48|60      |      ;
  
  
-nPowerBerryTable:
+aPowerBerryPositionsXY:
     dw $0180,$0050,$0190,$0050,$01A0,$0050                     ;81AC49|        |      ; 16b, 16b / 32b (not sure about this size) * 0A
     dw $01B0,$0050,$01C0,$0050,$0180,$0060                     ;81AC55|        |      ;
     dw $0190,$0060,$01A0,$0060,$01B0,$0060                     ;81AC61|        |      ;
     dw $01C0,$0060                                             ;81AC6D|        |      ;
  
-fItemSub81A9F6_0x04to0x07:
+fAreaItemSub_Town:
     RTS                                                        ;81AC71|60      |      ;
  
     RTS                                                        ;81AC72|60      |      ;
@@ -1202,39 +1202,39 @@ fItemSub81A9F6_0x04to0x07:
     RTS                                                        ;81AC77|60      |      ;
  
  
-fItemSub81A9F6_0x08:
+fAreaItemSub_DancingS1:
     RTS                                                        ;81AC78|60      |      ;
  
  
-fItemSub81A9F6_0x09:
+fAreaItemSub_DancingS2:
     RTS                                                        ;81AC79|60      |      ;
  
  
-fItemSub81A9F6_0x0A:
+fAreaItemSub_NewYearPublicSquare:
     RTS                                                        ;81AC7A|60      |      ;
  
  
-fItemSub81A9F6_0x0B:
+fAreaItemSub_EggFestival:
     RTS                                                        ;81AC7B|60      |      ;
  
  
-fItemSub81A9F6_0x0C:
+fAreaItemSub_CrossroadsSpring:
     RTS                                                        ;81AC7C|60      |      ;
  
  
-fItemSub81A9F6_0x0D:
+fAreaItemSub_CrossroadsSummer:
     RTS                                                        ;81AC7D|60      |      ;
  
  
-fItemSub81A9F6_0x0E:
+fAreaItemSub_CrossroadsFall:
     RTS                                                        ;81AC7E|60      |      ;
  
  
-fItemSub81A9F6_0x0F:
+fAreaItemSub_CrossroadsWinter:
     RTS                                                        ;81AC7F|60      |      ;
  
  
-fItemSub81A9F6_0x10to0x13:
+fAreaItemSub_Woods:
     REP #$30                                                   ;81AC80|C230    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;81AC82|AD9601  |000196;
     AND.W #$0002                                               ;81AC85|290200  |      ;
@@ -1278,11 +1278,11 @@ fItemSub81A9F6_0x10to0x13:
     RTS                                                        ;81ACCA|60      |      ;
  
  
-fItemSub81A9F6_0x14:
+fAreaItemSub_NewYearSpa:
     RTS                                                        ;81ACCB|60      |      ;
  
  
-fItemSub81A9F6_0x15:
+fAreaItemSub_House1:
     REP #$30                                                   ;81ACCC|C230    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;81ACCE|AD9601  |000196;
     AND.W #$0010                                               ;81ACD1|291000  |      ;
@@ -1316,7 +1316,7 @@ fItemSub81A9F6_0x15:
   + RTS                                                        ;81AD22|60      |      ;
  
  
-fItemSub81A9F6_0x16:
+fAreaItemSub_House2:
     REP #$30                                                   ;81AD23|C230    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;81AD25|AD9601  |000196;
     AND.W #$0010                                               ;81AD28|291000  |      ;
@@ -1350,7 +1350,7 @@ fItemSub81A9F6_0x16:
   + RTS                                                        ;81AD79|60      |      ;
  
  
-fItemSub81A9F6_0x17:
+fAreaItemSub_House3:
     REP #$30                                                   ;81AD7A|C230    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;81AD7C|AD9601  |000196;
     AND.W #$0010                                               ;81AD7F|291000  |      ;
@@ -1384,23 +1384,23 @@ fItemSub81A9F6_0x17:
   + RTS                                                        ;81ADD0|60      |      ;
  
  
-fItemSub81A9F6_0x18:
+fAreaItemSub_MajorHouse:
     RTS                                                        ;81ADD1|60      |      ;
  
  
-fItemSub81A9F6_0x19:
+fAreaItemSub_MajorCorridor:
     RTS                                                        ;81ADD2|60      |      ;
  
  
-fItemSub81A9F6_0x1A:
+fAreaItemSub_MajorBedroom:
     RTS                                                        ;81ADD3|60      |      ;
  
  
-fItemSub81A9F6_0x1B:
+fAreaItemSub_Church:
     RTS                                                        ;81ADD4|60      |      ;
  
  
-fItemSub81A9F6_0x1C:
+fAreaItemSub_Florist:
     REP #$30                                                   ;81ADD5|C230    |      ;
     %CheckFlag(event3, $0001)
     BNE +                                                      ;81ADDE|D003    |81ADE3;
@@ -1483,27 +1483,27 @@ fItemSub81A9F6_0x1C:
     RTS                                                        ;81AE69|60      |      ;
  
  
-fItemSub81A9F6_0x1D:
+fAreaItemSub_FloristBedroom:
     RTS                                                        ;81AE6A|60      |      ;
  
  
-fItemSub81A9F6_0x1E:
+fAreaItemSub_Bar:
     RTS                                                        ;81AE6B|60      |      ;
  
  
-fItemSub81A9F6_0x1F:
+fAreaItemSub_BarBedroom:
     RTS                                                        ;81AE6C|60      |      ;
  
  
-fItemSub81A9F6_0x20:
+fAreaItemSub_Restaurant:
     RTS                                                        ;81AE6D|60      |      ;
  
  
-fItemSub81A9F6_0x21:
+fAreaItemSub_RestaurantBedroom:
     RTS                                                        ;81AE6E|60      |      ;
  
  
-fItemSub81A9F6_0x22:
+fAreaItemSub_ToolsShop:
     REP #$30                                                   ;81AE6F|C230    |      ;
     %CheckFlag(event3, $0001)
     BNE .paint                                                 ;81AE78|D003    |81AE7D;
@@ -1653,11 +1653,11 @@ fItemSub81A9F6_0x22:
     RTS                                                        ;81AFBE|60      |      ;
  
  
-fItemSub81A9F6_0x23:
+fAreaItemSub_ToolsShopBedroom:
     RTS                                                        ;81AFBF|60      |      ;
  
  
-fItemSub81A9F6_0x24:
+fAreaItemSub_AnimalShop:
     REP #$30                                                   ;81AFC0|C230    |      ;
     %CheckFlag(event3, $0001)
     BNE +                                                      ;81AFC9|D003    |81AFCE;
@@ -1733,11 +1733,11 @@ fItemSub81A9F6_0x24:
     RTS                                                        ;81B062|60      |      ;
  
  
-fItemSub81A9F6_0x25:
+fAreaItemSub_FortuneTeller:
     RTS                                                        ;81B063|60      |      ;
  
  
-fItemSub81A9F6_0x26:
+fAreaItemSub_Shed:
     REP #$30                                                   ;81B064|C230    |      ;
     LDY.W #$0000                                               ;81B066|A00000  |      ;
  
@@ -1777,7 +1777,7 @@ fItemSub81A9F6_0x26:
     RTS                                                        ;81B0A7|60      |      ;
  
  
-fItemSub81A9F6_0x27:
+fAreaItemSub_CowBarn:
     REP #$30                                                   ;81B0A8|C230    |      ;
     LDA.W #$001A                                               ;81B0AA|A91A00  |      ;
     LDX.W #$0000                                               ;81B0AD|A20000  |      ;
@@ -1825,7 +1825,7 @@ aCowFeedPositionsXY:
     dd $00980058,$00780058,$00580058                           ;81B111|        |      ;
     dd $016800C8                                               ;81B11D|        |      ;
  
-fItemSub81A9F6_0x28:
+fAreaItemSub_Coop:
     REP #$30                                                   ;81B121|C230    |      ;
     LDA.W #$0019                                               ;81B123|A91900  |      ;
     LDX.W #$0000                                               ;81B126|A20000  |      ;
@@ -1903,7 +1903,7 @@ aChickenFeedPositionsXY:
     dd $00200080,$00200090,$002000A0                           ;81B1B7|        |      ;
     dd $002000B0,$002000C0,$002000D0                           ;81B1C3|        |      ;
  
-fItemSub81A9F6_0x29:
+fAreaItemSub_WoodsCave:
     REP #$30                                                   ;81B1CF|C230    |      ;
     %CheckFlag(event5, $0011)
     BEQ .return                                                ;81B1D8|F043    |81B21D;
@@ -1947,7 +1947,7 @@ fItemSub81A9F6_0x29:
     RTS                                                        ;81B21D|60      |      ;
  
  
-fItemSub81A9F6_0x2A:
+fAreaItemSub_ImpUnderground:
     REP #$30                                                   ;81B21E|C230    |      ;
     %CheckFlag(event1, $0002)
     BNE +                                                      ;81B227|D003    |81B22C;
@@ -1984,55 +1984,55 @@ fItemSub81A9F6_0x2A:
     RTS                                                        ;81B260|60      |      ;
  
  
-fItemSub81A9F6_0x2B:
+fAreaItemSub_WorksmanHouse:
     RTS                                                        ;81B261|60      |      ;
  
  
-fItemSub81A9F6_0x2C:
+fAreaItemSub_GoldChicken:
     RTS                                                        ;81B262|60      |      ;
  
  
-fItemSub81A9F6_0x2D:
+fAreaItemSub_WeddingSpring:
     RTS                                                        ;81B263|60      |      ;
  
  
-fItemSub81A9F6_0x2E:
+fAreaItemSub_WeddingSummer:
     RTS                                                        ;81B264|60      |      ;
  
  
-fItemSub81A9F6_0x2F:
+fAreaItemSub_WeddingFall:
     RTS                                                        ;81B265|60      |      ;
  
  
-fItemSub81A9F6_0x30:
+fAreaItemSub_WeddingWinter:
     RTS                                                        ;81B266|60      |      ;
  
  
-fItemSub81A9F6_0x31:
+fAreaItemSub_MountainTopSpring:
     RTS                                                        ;81B267|60      |      ;
  
  
-fItemSub81A9F6_0x32:
+fAreaItemSub_MountainTopSummer:
     RTS                                                        ;81B268|60      |      ;
  
  
-fItemSub81A9F6_0x33:
+fAreaItemSub_MountainTopFall:
     RTS                                                        ;81B269|60      |      ;
  
  
-fItemSub81A9F6_0x34:
+fAreaItemSub_MountainTopWinter:
     RTS                                                        ;81B26A|60      |      ;
  
  
-fItemSub81A9F6_0x35:
+fAreaItemSub_MountainTop2Spring:
     RTS                                                        ;81B26B|60      |      ;
  
  
-fItemSub81A9F6_0x36:
+fAreaItemSub_MountainTopEndingSummer:
     RTS                                                        ;81B26C|60      |      ;
  
  
-fItemSub81A9F6_0x37:
+fAreaItemSub_MountainTop2Fall:
     REP #$30                                                   ;81B26D|C230    |      ;
     %CheckFlag(daily1, $0001)
     BNE .return                                                ;81B276|D01A    |81B292;
@@ -2047,163 +2047,163 @@ fItemSub81A9F6_0x37:
     RTS                                                        ;81B292|60      |      ;
  
  
-fItemSub81A9F6_0x38:
+fAreaItemSub_MountainTop2Winter:
     RTS                                                        ;81B293|60      |      ;
  
  
-fItemSub81A9F6_0x39:
+fAreaItemSub_NewYearMountainTop:
     RTS                                                        ;81B294|60      |      ;
  
  
-fItemSub81A9F6_0x3A:
+fAreaItemSub_MountainTopSunrise:
     RTS                                                        ;81B295|60      |      ;
  
  
-fItemSub81A9F6_0x3B:
+fAreaItemSub_MountainTopBean:
     RTS                                                        ;81B296|60      |      ;
  
  
-fItemSub81A9F6_0x3C:
+fAreaItemSub_Intro:
     RTS                                                        ;81B297|60      |      ;
  
  
-fItemSub81A9F6_0x3D:
+fAreaItemSub_Ending00:
     RTS                                                        ;81B298|60      |      ;
  
  
-fItemSub81A9F6_0x3E:
+fAreaItemSub_Ending01:
     RTS                                                        ;81B299|60      |      ;
  
  
-fItemSub81A9F6_0x3F:
+fAreaItemSub_Ending02:
     RTS                                                        ;81B29A|60      |      ;
  
  
-fItemSub81A9F6_0x40:
+fAreaItemSub_Ending03:
     RTS                                                        ;81B29B|60      |      ;
  
  
-fItemSub81A9F6_0x41:
+fAreaItemSub_Ending04:
     RTS                                                        ;81B29C|60      |      ;
  
  
-fItemSub81A9F6_0x42:
+fAreaItemSub_Ending05:
     RTS                                                        ;81B29D|60      |      ;
  
  
-fItemSub81A9F6_0x43:
+fAreaItemSub_Ending06:
     RTS                                                        ;81B29E|60      |      ;
  
  
-fItemSub81A9F6_0x44:
+fAreaItemSub_Ending07:
     RTS                                                        ;81B29F|60      |      ;
  
  
-fItemSub81A9F6_0x45:
+fAreaItemSub_Ending08:
     RTS                                                        ;81B2A0|60      |      ;
  
  
-fItemSub81A9F6_0x46:
+fAreaItemSub_Ending09:
     RTS                                                        ;81B2A1|60      |      ;
  
  
-fItemSub81A9F6_0x47:
+fAreaItemSub_Ending10:
     RTS                                                        ;81B2A2|60      |      ;
  
  
-fItemSub81A9F6_0x48:
+fAreaItemSub_Ending11:
     RTS                                                        ;81B2A3|60      |      ;
  
  
-fItemSub81A9F6_0x49:
+fAreaItemSub_Ending12:
     RTS                                                        ;81B2A4|60      |      ;
  
  
-fItemSub81A9F6_0x4A:
+fAreaItemSub_Ending13:
     RTS                                                        ;81B2A5|60      |      ;
  
  
-fItemSub81A9F6_0x4B:
+fAreaItemSub_Credits0:
     RTS                                                        ;81B2A6|60      |      ;
  
  
-fItemSub81A9F6_0x4C:
+fAreaItemSub_Credits1:
     RTS                                                        ;81B2A7|60      |      ;
  
  
-fItemSub81A9F6_0x4D:
+fAreaItemSub_Credits2:
     RTS                                                        ;81B2A8|60      |      ;
  
  
-fItemSub81A9F6_0x4E:
+fAreaItemSub_Credits3:
     RTS                                                        ;81B2A9|60      |      ;
  
  
-fItemSub81A9F6_0x4F:
+fAreaItemSub_Credits4:
     RTS                                                        ;81B2AA|60      |      ;
  
  
-fItemSub81A9F6_0x50:
+fAreaItemSub_DriveToTown:
     RTS                                                        ;81B2AB|60      |      ;
  
  
-fItemSub81A9F6_0x51:
+fAreaItemSub_Credits4BL:
     RTS                                                        ;81B2AC|60      |      ;
  
  
-fItemSub81A9F6_0x52:
+fAreaItemSub_Credits4BR:
     RTS                                                        ;81B2AD|60      |      ;
  
  
-fItemSub81A9F6_0x53:
+fAreaItemSub_StaffRollJPTL:
     RTS                                                        ;81B2AE|60      |      ;
  
  
-fItemSub81A9F6_0x54:
+fAreaItemSub_StaffRollJPTR:
     RTS                                                        ;81B2AF|60      |      ;
  
  
-fItemSub81A9F6_0x55:
+fAreaItemSub_StaffRollJPBL:
     RTS                                                        ;81B2B0|60      |      ;
  
  
-fItemSub81A9F6_0x56:
+fAreaItemSub_StaffRollJPBR:
     RTS                                                        ;81B2B1|60      |      ;
  
  
-fItemSub81A9F6_0x57:
+fAreaItemSub_RainOverlay:
     RTS                                                        ;81B2B2|60      |      ;
  
  
-fItemSub81A9F6_0x58:
+fAreaItemSub_CloudsOverlay:
     RTS                                                        ;81B2B3|60      |      ;
  
  
-fItemSub81A9F6_0x59:
+fAreaItemSub_SnowOverlay:
     RTS                                                        ;81B2B4|60      |      ;
  
  
-fItemSub81A9F6_0x5A:
+fAreaItemSub_HeavySnowOverlay:
     RTS                                                        ;81B2B5|60      |      ;
  
  
-fItemSub81A9F6_0x5B:
+fAreaItemSub_IntroFarmScroll:
     RTS                                                        ;81B2B6|60      |      ;
  
  
-fItemSub81A9F6_0x5C:
+fAreaItemSub_HarvestMoonLogo:
     RTS                                                        ;81B2B7|60      |      ;
  
  
-fItemSub81A9F6_0x5D:
+fAreaItemSub_NatsumeLogo:
     RTS                                                        ;81B2B8|60      |      ;
  
  
-fItemSub81A9F6_0x5E:
+fAreaItemSub_MenuScreenBackgrounds:
     RTS                                                        ;81B2B9|60      |      ;
  
  
-fItemSub81A9F6_0x5F:
+fAreaItemSub_NameInput:
     RTS                                                        ;81B2BA|60      |      ;
  
  
