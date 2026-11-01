@@ -1,0 +1,27 @@
+{
+ "_doc": "Text layout rules of the Latin dialog engine (US / EU / DE release); evidence and code addresses in docs/translation-analysis.md, section 3.  Cells are 8 px wide glyph slots; the cell index of a screen counts from 0 in the VRAM stream order of the dialog box (a line is 28 cells, the stream simply continues in the next line).  Used by tools/translate/check.py and the wrap layout of the translation source.",
+ "cell_width_px": 8,
+ "cells_per_line": 28,
+ "lines_per_screen": 3,
+ "cells_per_screen": 84,
+ "next_screen_marker_cell": 83,
+ "max_cells_with_next": 83,
+ "max_cells_end_or_options": 84,
+ "option_cursor_cells": {
+  "us": [0, 28, 56, 15, 43],
+  "eu": [0, 28, 56, 15, 43],
+  "de": [0, 28, 56, 14, 42]
+ },
+ "option_text_offset": 1,
+ "max_options": 5,
+ "dialog_bank_range": ["B6", "BF"],
+ "extra_free_banks": ["AA", "AB", "AC"],
+ "bank_size": 32768,
+ "glyph_ids": {
+  "space": "00B1",
+  "next_marker": "00A2",
+  "first_free_for_new_letters": "0043",
+  "last_free_for_new_letters": "0054"
+ },
+ "text_var_chars_max": {"player": 4, "dog": 4, "horse": 4, "cow": 4, "girl": 5, "child1": 4, "child2": 4, "season": 6, "weekday": 9, "ordinal": 2}
+}

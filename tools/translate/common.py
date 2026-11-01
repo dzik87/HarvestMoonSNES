@@ -1,0 +1,460 @@
+#!/usr/bin/env python3
+"""Shared code of the translation tools (tools/translate/*, docs/translation.md).
+
+Reads the extracted dialog assets (assets/dialogs/<region>/bank_XX.txt, produced by tools/extract.py), the engine rules
+(defs/translation/engine.json), the variable map (defs/translation/var_map_jp_us.json) and a language directory
+(translations/<lang>/), and implements
+
+  * the translation source syntax (tokens, symbolic variable names) and its text -> dialog word conversion,
+  * the text layout of the dialog box (cells, lines, screens, option cursors; evidence in docs/translation-analysis.md),
+  * the structural reference taken from the Japanese dialogs (which variables / numbers / answers a dialog must contain).
+
+Nothing in this module (or in the files it reads from git) contains game text.
+"""
+import importlib.util
+import json
+import re
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+DEFS = ROOT / "defs" / "translation"
+ASSETS_DIALOGS = ROOT / "assets" / "dialogs"
+TRANSLATIONS = ROOT / "translations"
+WORK = ROOT / "build" / "translate"
+
+NEXT, NUMV, TEXTV, OPTS, END = 0x00A2, 0xFFFC, 0xFFFD, 0xFFFE, 0xFFFF
+SPACE = 0x00B1
+
+
+def _load_dialog_module():
+    spec = importlib.util.spec_from_file_location("hm_dialog", ROOT / "tools" / "dialogs" / "dialog.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+dialog = _load_dialog_module()
+
+
+def read_json(path):
+    return json.loads(Path(path).read_text(encoding="utf-8"))
+
+
+def engine():
+    return read_json(DEFS / "engine.json")
+
+
+def var_map():
+    return read_json(DEFS / "var_map_jp_us.json")
+
+
+# ---------------------------------------------------------------- language directory
+class Lang:
+    """translations/<code>/lang.json plus the derived character map."""
+
+    def __init__(self, directory):
+        self.dir = Path(directory)
+        self.cfg = read_json(self.dir / "lang.json")
+        self.code = self.cfg["code"]
+        self.engine_region = self.cfg.get("engine_region", "us")
+        self.layout = self.cfg.get("layout", "wrap")
+        self.autopage = bool(self.cfg.get("autopage", True))
+        self.glyphs = {}                    # char -> {"id": int, "base": str, "mark": str}
+        for ch, g in self.cfg.get("glyphs", {}).items():
+            gid = int(str(g["id"]), 0)
+            self.glyphs[ch] = dict(g, id=gid)
+        self.charmap = self._build_charmap()
+
+    def _build_charmap(self):
+        cm = dict(dialog.load_charmap(self.engine_region))        # glyph id -> char of the engine release
+        for ch, g in self.glyphs.items():
+            if g["id"] in cm and cm[g["id"]] != ch:
+                raise ValueError("%s: glyph id $%X of %r is already used by %r" % (self.code, g["id"], ch, cm[g["id"]]))
+            cm[g["id"]] = ch
+        return cm
+
+    @property
+    def path_dialogs(self):
+        return self.dir / self.cfg.get("dialogs", "dialogs.txt")
+
+    @property
+    def path_status(self):
+        return self.dir / self.cfg.get("status", "status.csv")
+
+
+def lang_dir(code_or_path):
+    p = Path(code_or_path)
+    if p.is_dir():
+        return p
+    return TRANSLATIONS / code_or_path
+
+
+# ---------------------------------------------------------------- dialog assets
+def asset_blocks(region, root=None):
+    """{id: words} of the extracted dialogs of a release (assets/dialogs/<region>)."""
+    root = Path(root) if root else ASSETS_DIALOGS
+    cm = dialog.load_charmap(region)
+    out = {}
+    for f in sorted((root / region).glob("bank_*.txt")):
+        for label, text in dialog.read_txt(f):
+            out[int(label.rsplit("_0x", 1)[1], 16)] = dialog.text_to_words(text, cm)
+    return out
+
+
+def have_assets(region="us", root=None):
+    root = Path(root) if root else ASSETS_DIALOGS
+    return any((root / region).glob("bank_*.txt"))
+
+
+def split_tokens(words):
+    """words -> list of tokens ('G', glyph) | ('NEXT',) | ('END',) | ('OPT', n) | ('NUM', digits, idx) | ('VAR', n, idx)."""
+    out, i = [], 0
+    while i < len(words):
+        w = words[i]
+        i += 1
+        if w == NEXT:
+            out.append(("NEXT",))
+        elif w == END:
+            out.append(("END",))
+        elif w == OPTS:
+            out.append(("OPT", words[i])); i += 1
+        elif w == NUMV:
+            out.append(("NUM", words[i], words[i + 1])); i += 2
+        elif w == TEXTV:
+            out.append(("VAR", words[i], words[i + 1])); i += 2
+        else:
+            out.append(("G", w))
+    return out
+
+
+# ---------------------------------------------------------------- variable map
+class VarMap:
+    """Semantic variable fields (defs/translation/var_map_jp_us.json)."""
+
+    def __init__(self, data=None):
+        self.d = data or var_map()
+        self.fields = self.d["fields"]
+        self.table = {r: {int(k): v for k, v in t.items()} for r, t in self.d["tables"].items()}
+        self.size = {r: {int(k): v for k, v in t.items()} for r, t in self.d["sizes"].items()}
+        self.canonical = self.d["canonical_us"]
+
+    def field(self, region, idx):
+        return self.table[region].get(idx)
+
+    def us_token(self, field):
+        """(chars, index) of a field on the US engine, as used by the original dialogs: <VAR chars index>."""
+        idx = self.canonical[field]
+        return self.size["us"][idx] // 2, idx
+
+
+# ---------------------------------------------------------------- numeric variables
+def number_digits(root=None, region="us"):
+    """{numeric variable index: digit count used by the dialogs of the release} (one count per index)."""
+    out = {}
+    for words in asset_blocks(region, root).values():
+        for t in split_tokens(words):
+            if t[0] == "NUM":
+                out.setdefault(t[2], t[1])
+    return out
+
+
+# ---------------------------------------------------------------- structural reference (from the Japanese dialogs)
+class Reference:
+    """Per dialog id the structure the translation has to keep, taken from the Japanese dialogs and mapped to the US engine:
+    {"vars": sorted list of fields, "nums": sorted list of numeric indices, "opt": answers or 0}."""
+
+    def __init__(self, jp_blocks, varmap):
+        self.vm = varmap
+        self.data = {}
+        for i, words in jp_blocks.items():
+            vars_, nums, opt = [], [], 0
+            for t in split_tokens(words):
+                if t[0] == "VAR":
+                    vars_.append(varmap.field("jp", t[2]))
+                elif t[0] == "NUM":
+                    nums.append(t[2])
+                elif t[0] == "OPT":
+                    opt = t[1]
+            self.data[i] = {"vars": sorted(vars_), "nums": sorted(nums), "opt": opt}
+
+    def __contains__(self, i):
+        return i in self.data
+
+    def __getitem__(self, i):
+        return self.data[i]
+
+
+# ---------------------------------------------------------------- translation source syntax
+HEAD = re.compile(r"^@@ sDialog_0x([0-9A-Fa-f]{4}) @@(?:\s+(.*?))?\s*$")
+TOKEN = re.compile(r"<([^<>\n]*)>")
+HEX4 = re.compile(r"^[0-9A-Fa-f]{4}$")
+
+
+class SyntaxError_(ValueError):
+    pass
+
+
+def read_blocks(path):
+    """translation source -> [(id, flags:set, text)] (file order).  Header: `@@ sDialog_0xNNNN @@ [flag ...]`."""
+    blocks, cur, buf = [], None, []
+    for n, line in enumerate(Path(path).read_text(encoding="utf-8").split("\n"), 1):
+        m = HEAD.match(line)
+        if m:
+            if cur is not None:
+                blocks.append((cur[0], cur[1], "\n".join(buf)))
+            cur = (int(m.group(1), 16), set((m.group(2) or "").split())); buf = []
+        elif cur is not None:
+            if line.startswith(";") or line.startswith("#"):          # comment lines
+                continue
+            buf.append(line)
+        elif line.strip() and not line.startswith(";") and not line.startswith("#"):
+            raise SyntaxError_("%s:%d: text outside of a dialog block" % (path, n))
+    if cur is not None:
+        blocks.append((cur[0], cur[1], "\n".join(buf)))
+    return blocks
+
+
+def write_blocks(path, blocks):
+    """[(id, flags, text)] -> file in the translation source syntax (sorted by id)."""
+    out = []
+    for i, flags, text in sorted(blocks, key=lambda b: b[0]):
+        head = "@@ sDialog_0x%04X @@" % i + ("".join(" " + f for f in sorted(flags)))
+        out.append(head + "\n" + text.strip("\n") + "\n")
+    Path(path).write_text("\n".join(out), encoding="utf-8", newline="\n")
+
+
+class Item:
+    """A parsed element of a translation text."""
+    __slots__ = ("kind", "val", "cells")
+
+    def __init__(self, kind, val=None, cells=0):
+        self.kind, self.val, self.cells = kind, val, cells
+
+    def __repr__(self):
+        return "Item(%s,%r,%d)" % (self.kind, self.val, self.cells)
+
+
+def parse_text(text, lang, vm=None, ndigits=None, raw=False):
+    """Translation text -> list of Item.  kinds: 'g' glyph (val = glyph id), 'sp' space, 'var' (val = (chars, index, field)),
+    'num' (val = (digits, index)), 'next', 'end', 'opt' (val = n), 'br', 'pos' (val = cell), 'optlbl' (val = answer 1..5).
+    A newline is ignored in raw mode and acts as a space otherwise (except directly after a control token)."""
+    rev = {c: k for k, c in lang.charmap.items() if c not in "<>"}
+    eng = engine()
+    items, pos = [], 0
+    text = text.replace("\r", "")
+    after_ctrl = True
+    while pos < len(text):
+        ch = text[pos]
+        if ch == "\n":
+            pos += 1
+            if not raw and not after_ctrl:
+                items.append(Item("sp", SPACE, 1))
+                after_ctrl = True
+            continue
+        if ch == "<":
+            m = TOKEN.match(text, pos)
+            if not m:
+                raise SyntaxError_("unterminated '<' near %r" % text[pos:pos + 16])
+            body = m.group(1).strip()
+            pos = m.end()
+            parts = body.split()
+            head = parts[0].upper() if parts else ""
+            if HEX4.match(body):
+                gid = int(body, 16)
+                items.append(Item("g", gid, 1)); after_ctrl = False
+            elif head == "NEXT" and len(parts) == 1:
+                items.append(Item("next")); after_ctrl = True
+            elif head == "END" and len(parts) == 1:
+                items.append(Item("end")); after_ctrl = True
+            elif head == "BR" and len(parts) == 1:
+                items.append(Item("br")); after_ctrl = True
+            elif head == "OPT" and len(parts) == 2 and parts[1].isdigit():
+                items.append(Item("opt", int(parts[1]))); after_ctrl = True
+            elif head == "POS" and len(parts) == 2 and parts[1].isdigit():
+                items.append(Item("pos", int(parts[1]))); after_ctrl = True
+            elif head == "OPTLBL" and len(parts) == 2 and parts[1].isdigit():
+                k = int(parts[1])
+                cur = eng["option_cursor_cells"][lang.engine_region]
+                if not 1 <= k <= len(cur):
+                    raise SyntaxError_("<OPTLBL %d>: answers are 1..%d" % (k, len(cur)))
+                items.append(Item("pos", cur[k - 1] + 1)); after_ctrl = True
+            elif head == "NUM" and len(parts) in (2, 3) and all(p.isdigit() for p in parts[1:]):
+                if len(parts) == 3:
+                    n, idx = int(parts[1]), int(parts[2])
+                else:
+                    idx = int(parts[1])
+                    if ndigits is None or idx not in ndigits:
+                        raise SyntaxError_("<NUM %d>: digit count unknown, write <NUM digits %d>" % (idx, idx))
+                    n = ndigits[idx]
+                items.append(Item("num", (n, idx), n)); after_ctrl = False
+            elif head == "VAR" and len(parts) == 3 and all(p.isdigit() for p in parts[1:]):
+                n, idx = int(parts[1]), int(parts[2])
+                fld = vm.field("us", idx) if vm else None
+                items.append(Item("var", (n, idx, fld), n)); after_ctrl = False
+            elif head == "VAR" and len(parts) == 2 and vm and parts[1].lower() in vm.fields:
+                fld = parts[1].lower()
+                n, idx = vm.us_token(fld)
+                items.append(Item("var", (n, idx, fld), n)); after_ctrl = False
+            else:
+                raise SyntaxError_("unknown token <%s>" % body)
+            continue
+        if ch == " ":
+            items.append(Item("sp", SPACE, 1)); pos += 1; after_ctrl = False
+            continue
+        if ch not in rev:
+            raise SyntaxError_("character %r (U+%04X) is not in the character map of %s" % (ch, ord(ch), lang.code))
+        items.append(Item("g", rev[ch], 1)); pos += 1; after_ctrl = False
+    return items
+
+
+# ---------------------------------------------------------------- layout
+class Layout:
+    """Result of laying out a dialog: words, screens (list of cells), warnings/errors."""
+
+    def __init__(self):
+        self.words = []
+        self.screens = []           # per screen: number of cells used (index of the last used cell + 1)
+        self.errors = []
+        self.notes = []
+        self.autopages = 0
+
+
+def _word_cells(items, i):
+    """Index range of the unbreakable word starting at items[i] (glyphs, variables, numbers) and its cell count."""
+    j, n = i, 0
+    while j < len(items) and items[j].kind in ("g", "var", "num"):
+        n += items[j].cells
+        j += 1
+    return j, n
+
+
+def _emit(words, it):
+    if it.kind == "g":
+        words.append(it.val)
+    elif it.kind == "var":
+        words += [TEXTV, it.val[0], it.val[1]]
+    elif it.kind == "num":
+        words += [NUMV, it.val[0], it.val[1]]
+
+
+def layout_items(items, lang, raw=None):
+    """Items -> Layout.  `raw` (default: lang.layout == 'raw') keeps the cells as written; otherwise words are wrapped at the line width,
+    explicit <BR>/<POS n> are honoured and, if lang.autopage, <NEXT> is inserted when a screen is full."""
+    eng = engine()
+    W, H = eng["cells_per_line"], eng["lines_per_screen"]
+    cap = W * H
+    raw = (lang.layout == "raw") if raw is None else raw
+    L = Layout()
+    cell = 0                       # next free cell of the current screen (W*line + col); cell % W == 0 and cell > 0 -> pending wrap
+    used = 0
+
+    def newscreen():
+        nonlocal cell, used
+        L.screens.append(used)
+        cell, used = 0, 0
+
+    def put(it):
+        nonlocal cell, used
+        _emit(L.words, it)
+        cell += it.cells
+        used = max(used, cell)
+
+    def pad_to(target):
+        nonlocal cell, used
+        while cell < target:
+            L.words.append(SPACE); cell += 1
+        used = max(used, cell)
+
+    i, n = 0, len(items)
+    ended = False
+    while i < n:
+        it = items[i]
+        k = it.kind
+        if ended:
+            L.errors.append("text after <END>/<OPT>")
+            break
+        if k == "next":
+            L.words.append(NEXT)
+            L.screens.append(used); cell, used = 0, 0
+            i += 1
+            continue
+        if k in ("end", "opt"):
+            L.words.append(END if k == "end" else OPTS)
+            if k == "opt":
+                L.words.append(it.val)
+            newscreen()
+            ended = True
+            i += 1
+            continue
+        if raw:
+            if k in ("g", "var", "num", "sp"):
+                if cell >= cap and not L.errors:
+                    L.errors.append("screen holds %d cells, the dialog box shows %d" % (cell + it.cells, cap))
+                put(Item("g", SPACE, 1) if k == "sp" else it)
+            elif k in ("br", "pos"):
+                L.errors.append("<BR>/<POS> need the wrap layout (raw text is written cell by cell)")
+            i += 1
+            continue
+        # ---- wrap layout
+        if k == "br":
+            if cell % W != 0 or cell == 0:
+                pad_to((cell // W + 1) * W if cell % W else (cell // W + 1) * W)
+            if cell >= cap:
+                if lang.autopage:
+                    L.words.append(NEXT); L.autopages += 1; newscreen()
+                else:
+                    L.errors.append("more than %d lines on a screen" % H)
+            i += 1
+            continue
+        if k == "pos":
+            if it.val < cell or it.val >= cap:
+                L.errors.append("<POS %d> is %s" % (it.val, "behind the text already written (cell %d)" % cell if it.val < cell else "outside the box"))
+            else:
+                pad_to(it.val)
+            i += 1
+            continue
+        if k == "sp":
+            j = i
+            while j < n and items[j].kind == "sp":
+                j += 1
+            run = j - i
+            if cell % W == 0:                                  # start of a line or pending wrap: spaces are dropped
+                i = j
+                continue
+            room = W - cell % W
+            pad_to(cell + min(run, room))
+            i = j
+            continue
+        # word
+        j, wl = _word_cells(items, i)
+        if wl > W:
+            L.errors.append("a word of %d cells does not fit into a line of %d" % (wl, W))
+        if cell % W != 0 and cell % W + wl > W:               # does not fit: continue on the next line
+            pad_to((cell // W + 1) * W)
+        if cell >= cap:
+            if lang.autopage:
+                L.words.append(NEXT); L.autopages += 1; newscreen()
+            else:
+                L.errors.append("more than %d lines on a screen" % H)
+        for it2 in items[i:j]:
+            put(it2)
+        i = j
+    if not ended:
+        L.words.append(END)
+        newscreen()
+    return L
+
+
+def build_words(text, lang, vm=None, ndigits=None, raw=None, flags=()):
+    """Translation text -> (Layout, items).  The block flag `raw` forces cell-by-cell text."""
+    r = (lang.layout == "raw") or ("raw" in flags) if raw is None else raw
+    items = parse_text(text, lang, vm, ndigits, raw=r)
+    return layout_items(items, lang, raw=r), items
+
+
+def items_signature(items):
+    """Structure of a parsed translation: fields of the variables, numeric indices, answers."""
+    vars_ = sorted(it.val[2] or ("idx%d" % it.val[1]) for it in items if it.kind == "var")
+    nums = sorted(it.val[1] for it in items if it.kind == "num")
+    opt = next((it.val for it in items if it.kind == "opt"), 0)
+    return {"vars": vars_, "nums": nums, "opt": opt}
