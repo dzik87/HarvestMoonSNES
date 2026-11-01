@@ -1,7 +1,33 @@
+;;
+; @file   items_misc.asm
+; @brief  Carried-item data tables, object slot management, map tile pattern drawing, tile scripts and the per-area item subroutines.
+; @details Contains the generated carried-item tables (assets/tables/data/carried_items.csv), the 10 object slots of carried items
+;   ($7EB4E6, 16 bytes each), the tile pattern/tile script helpers shared by the whole game (fSetTileAtCoords, fMap_DrawTilePatternAt,
+;   fTileScript_*), the shed tool placement and the handlers run on every area load (fAreaItemSub_*) that restore area dependent
+;   tiles (events, painted house, power berries, shop shelves).
+; @bank   $81   @range $8196AF-$81BFB6
+; @see    item_actions.asm, docs/formats/data-tables.md, assets/tables/data/tile_scripts.csv
+;;
+
 ; Bank $81 module "items_misc" - starts at $8196AF
  
     incsrc "../../../build/gen/blocks/carried_items.asm"
  
+;;
+; @brief   Per-frame update of all 10 carried-item object slots.
+; @details The slots are 16-byte records at $7EB4E6: +0 flags (bit0 active, bit1 free the slot when the object is gone, bit2 jump pose
+;   loaded), +1 handler index (into pItemCarriedSlotHandlerTable), +2 phase, +3 carried item id, +4 game object index, +6 sprite table index,
+;   +8 previous sprite, +A flip/attribute bits, +C x, +E y. For every active slot the record is copied to the working variables
+;   ($0974-$097E, nCarriedItemId, nGameObjectIdx, nUnknownX/Y), the object state is read (fObject_GetSingleObjectData) and, unless the
+;   object was destroyed ($FFFD), the handler runs. Afterwards the record is written back, the object position/flip updated
+;   (fObject_UpdatePositionAndFlip) and the sprite replaced (fObject_Replace) when the sprite index changed.
+; @modifies nCarriedItemId, nGameObjectIdx, nUnknownX, nUnknownY, ptrUnknown0x07
+; @clobbers A X Y
+; @mode    ? -> M16X16
+; @calls   fObject_GetSingleObjectData, fObject_Destroy, fObjectSlots_FreeCurrent, fObject_UpdatePositionAndFlip, fObject_Replace, pItemCarriedSlotHandlerTable (indirect)
+; @callers fCore_MainLoop, fMap_SetupArea, fMainMenu_PrepareHowToPlay, fMainMenu_StartHowToPlayDemo, fMainMenu_StateOpeningDemo
+; @note    The object states $FFFD/$FFFF returned in strcObject.exists are interpreted as "destroyed" and "being created/no sprite" (?). confidence: low
+;;
 fObjectSlots_UpdateAll:
     REP #$30                                                   ;81A383|C230    |      ;
     LDA.W #$B4E6                                               ;81A385|A9E6B4  |      ;
@@ -154,6 +180,12 @@ fObjectSlots_UpdateAll:
   + RTL                                                        ;81A4C6|6B      |      ;
  
  
+;;
+; @brief   Frees all 10 carried-item slots (clears the flag byte of every record).
+; @clobbers A X Y
+; @mode    ? -> M16X16
+; @callers fMap_ResetAndLoadDestinationArea, fScreen_NameInput, fMainMenu_AutoHowToPlay, fMainMenu_StartHowToPlayDemo, fMainMenu_StateOpeningDemo, fMainMenu_StateReinitTitleScreen
+;;
 fObjectSlots_ClearAll:
     REP #$30                                                   ;81A4C7|C230    |      ;
     LDA.W #$B4E6                                               ;81A4C9|A9E6B4  |      ;
@@ -178,6 +210,14 @@ fObjectSlots_ClearAll:
     RTL                                                        ;81A4F0|6B      |      ;
  
  
+;;
+; @brief   Frees the slot that fObjectSlots_UpdateAll is currently processing (clears its flags and the working flag byte $0974).
+; @details The slot pointer ptrUnknown0x07 still points at the record of the running handler.
+; @modifies $0974
+; @clobbers A Y
+; @mode    ? -> M8X16
+; @callers fItemCarried_DestroyAndRelease, fItemCarried_PhaseClearSlot, fItemBuy_FinishPurchase, fItemCarried_ClearObjectSlot
+;;
 fObjectSlots_FreeCurrent:
     SEP #$20                                                   ;81A4F1|E220    |      ;
     REP #$10                                                   ;81A4F3|C210    |      ;
@@ -188,6 +228,25 @@ fObjectSlots_FreeCurrent:
     RTL                                                        ;81A4FF|6B      |      ;
  
  
+;;
+; @brief   Stores the working slot variables ($0974-$097E, nCarriedItemId, nUnknownX/Y) into the first free slot and creates its sprite object.
+; @details Searches for a slot whose flag bit 0 is clear, copies the working copy into it, creates the game object with fObject_Create and stores the
+;   returned game object index at +4.
+; @param   $0974   slot flags
+; @param   $0975   handler index
+; @param   $0976   phase
+; @param   nCarriedItemId   item id (also used as parameter by the tool animation objects)
+; @param   $097A   sprite table index
+; @param   $097E   flip/attribute bits
+; @param   nUnknownX   x position
+; @param   nUnknownY   y position
+; @modifies ptrUnknown0x07
+; @clobbers A X Y
+; @mode    ? -> M16X16
+; @calls   fObject_Create
+; @callers fItemCarried_Begin, fMap_SetupArea, fToolUsedAction0x01_Sickle
+; @note    If all 10 slots are in use the routine hangs in an endless loop (.deadEnd); it cannot happen in the original game.
+;;
 fObjectSlots_Allocate:
     REP #$30                                                   ;81A500|C230    |      ;
     LDA.W #$B4E6                                               ;81A502|A9E6B4  |      ;
@@ -255,10 +314,26 @@ fObjectSlots_Allocate:
     RTL                                                        ;81A58A|6B      |      ;
  
  
+;;
+; @brief   Handler table of the object slots, indexed by the slot's handler index byte.
+; @format  `[word handler]`, 2 entries: $0000 = $FFFF (no handler), 1 = fItemCarried_RunHandler.
+; @index   (handler index byte at slot +1) * 2, used by fObjectSlots_UpdateAll (JSR (table,X)); index 0 means no handler.
+; @used_by fObjectSlots_UpdateAll
+;;
 pItemCarriedSlotHandlerTable:
     dw $FFFF                                                   ;81A58B|        |      ;
     dw fItemCarried_RunHandler                                   ;81A58D|        |81809A;
  
+;;
+; @brief   In winter, leaves a footprint tile pattern ($11) where the player walks on snow.
+; @details Only in !SEASON_WINTER and in the farm/town/woods areas ($00-$03, $10-$14 are excluded?) - the area ids accepted are < 4 or $10-$14;
+;   the object property under the player must be 1, 2, $A8 or $F6 (snow-covered ground types). The pattern is queued for a VRAM upload.
+; @clobbers A X Y
+; @mode    M8X16 -> M16X16
+; @calls   fObjectEngine_GetObjectPropertyByDirSeason, fMap_QueueTilePatternVRAMUpload
+; @callers fPlayer_MoveInDirection
+; @note    confidence: medium - the area range and property values are read from the compares; their exact meaning is not verified in game.
+;;
 fPlayer_LeaveSnowFootprint:
     SEP #$20                                                   ;81A58F|E220    |      ;
     REP #$10                                                   ;81A591|C210    |      ;
@@ -301,6 +376,17 @@ fPlayer_LeaveSnowFootprint:
     RTL                                                        ;81A5E0|6B      |      ;
  
  
+;;
+; @brief   Starts a tile script (a timed list of tile changes, e.g. the shipping animations).
+; @details Stores the 24-bit script pointer pTileScriptTable[A] in ptrUnknown0xCF and resets the step delay counter ($0989).
+;   fTileScript_Update then executes one step per frame.
+; @param   A   tile script index
+; @modifies ptrUnknown0xCF, $0989
+; @clobbers A X
+; @mode    ? -> M8
+; @callers fItemShipped_InFarmCoopOrBarn, fItemShipped_StartCowBarnScript, fItemShipped_StartCoopScript, fAIAction0x2A, fMap_ScreenTransitionHandler, fPlayerInteraction0x03
+; @see     pTileScriptTable, assets/tables/data/tile_scripts.csv
+;;
 fTileScript_Start:
     REP #$30                                                   ;81A5E1|C230    |      ; A: nIndex
     STA.B strcVariables.n16Temp1                               ;81A5E3|857E    |00007E;
@@ -320,6 +406,17 @@ fTileScript_Start:
     RTL                                                        ;81A5FF|6B      |      ;
  
  
+;;
+; @brief   Executes one step of the running tile script per call (frame).
+; @details Script format (7-byte step): `[word tile][word x][word y][byte delay]` = set the tile (fSetTileAtCoords) and wait `delay` frames
+;   ($0989 counts down); `$FFFE` + ptr24 jumps to another script; `$FFFF` ends the script (ptrUnknown0xCF = 0).
+; @modifies ptrUnknown0xCF, $0989, ptrTemp0x72
+; @clobbers A X Y
+; @mode    ? -> M16X16
+; @calls   fSetTileAtCoords
+; @callers fCore_MainLoop, fMainMenu_PrepareHowToPlay, fMainMenu_StartHowToPlayDemo, fMainMenu_StateOpeningDemo
+; @see     fTileScript_Start
+;;
 fTileScript_Update:
     REP #$30                                                   ;81A600|C230    |      ;
     LDA.B ptrUnknown0xCF                                       ;81A602|A5CF    |0000CF;
@@ -412,6 +509,20 @@ fTileScript_Update:
     BRA .loop                                                  ;81A686|80A1    |81A629;
  
  
+;;
+; @brief   Draws a tile pattern at a map position: queues the VRAM update and writes the tilemap buffer and the object map.
+; @details Pattern 0 does nothing. Otherwise fMap_QueueTilePatternVRAMUpload uploads the pattern, fMap_CopyTilePatternToTilemapBuffer prepares the buffer
+;   offset and fMap_GetTilePatternInfo gives the size/object id; when the pattern has an object id (n16Temp4 != 0) the rectangle is also filled
+;   in the object map by fMap_FillCurrentTilemapRect.
+; @param   A   tile pattern index (0 = nothing)
+; @param   X   x position in pixels
+; @param   Y   y position in pixels
+; @modifies strcVariables.n16Unk86, strcVariables.n16Unk88, sCurrentObjectMap
+; @clobbers A X Y
+; @mode    M16X16
+; @calls   fMap_QueueTilePatternVRAMUpload, fMap_CopyTilePatternToTilemapBuffer, fMap_GetTilePatternInfo, fMap_FillCurrentTilemapRect
+; @callers fTileScript_Update, fItemCarried_Begin, fItemShipped_SetBinTileAndRelease, fItemBuy_ReturnItemToShelf, fEggFestival_WrongEggDialog, fShed_PlaceEquippedTool
+;;
 fSetTileAtCoords:
     REP #$30                                                   ;81A688|C230    |      ; A: nArg1, X: nTileX, Y: nTileY
     CMP.W #$0000                                               ;81A68A|C90000  |      ;
@@ -449,6 +560,23 @@ fSetTileAtCoords:
     RTL                                                        ;81A6C0|6B      |      ;
  
  
+;;
+; @brief   Queues the DMA transfers that copy the 16x16 tile pattern at a map position into the BG1 tilemap in VRAM.
+; @details The position is converted to 16-pixel tile units, then to the VRAM word address (base $6000, wrapping per 32x32 quadrant: +$03E0 for the
+;   right half, +$0400 for the lower half). The pattern source is the tilemap data in bank $A6 (the offset of the data is region specific: $A096 US/EU,
+;   $A115 DE, $A77D JP); the pattern width/height come from fMap_GetTilePatternInfo. For every row two $80-byte transfers (the two 8-pixel rows of a
+;   tile) are prepared with fCore_PrepareTransfer to register $18 (VMDATAL).
+; @param   A   tile pattern index
+; @param   X   x position in pixels
+; @param   Y   y position in pixels
+; @modifies strcVariables.n16Temp1, strcVariables.n16Temp2, strcVariables.n16Temp3, strcVariables.n16Unk86, strcVariables.n8Temp1, strcSystem.arrayIndex, strcSystem.destinationRegister, ptrTemp0x72, ptrUnknown0x75
+; @clobbers A X Y
+; @mode    M16X16
+; @region  DE: pattern source offset $A115; JP: $A77D; US/EU: $A096.
+; @calls   fMap_GetTilePatternInfo, fCore_PrepareTransfer
+; @callers fSetTileAtCoords, fPlayer_LeaveSnowFootprint
+; @note    confidence: medium - the quadrant arithmetic is derived from the compares with $10/$20/$30.
+;;
 fMap_QueueTilePatternVRAMUpload:
     REP #$30                                                   ;81A6C1|C230    |      ; A: nArg, X: nPosX, Y: nPosY
     PHA                                                        ;81A6C3|48      |      ;
@@ -621,6 +749,18 @@ fMap_QueueTilePatternVRAMUpload:
     RTL                                                        ;81A7CD|6B      |      ;
  
  
+;;
+; @brief   Draws a tile pattern at a map position into the tilemap buffer and the object map (no VRAM upload).
+; @param   A   tile pattern index
+; @param   X   x position in pixels
+; @param   Y   y position in pixels
+; @modifies strcVariables.n16Unk86, strcVariables.n16Unk88, sCurrentObjectMap
+; @clobbers A X Y
+; @mode    M16X16
+; @calls   fMap_GetTilePatternInfo, fMap_CopyTilePatternToTilemapBuffer, fMap_FillCurrentTilemapRect
+; @callers fAreaItemSub_Farm, fShed_DrawItemPatternByFlag
+; @see     fSetTileAtCoords
+;;
 fMap_DrawTilePatternAt:
     REP #$30                                                   ;81A7CE|C230    |      ; A: nArg1, X: nArg2, Y: nArg3
     PHY                                                        ;81A7D0|5A      |      ;
@@ -653,6 +793,17 @@ fMap_DrawTilePatternAt:
   + RTL                                                        ;81A800|6B      |      ;
  
  
+;;
+; @brief   Reads one 6-byte entry of aTilePatternTable.
+; @param   A   tile pattern index
+; @return  strcVariables.n16Temp1   source offset in the tilemap data
+; @return  strcVariables.n16Temp3   width in tiles
+; @return  strcVariables.n16Temp2   height in tiles
+; @return  strcVariables.n16Temp4   object id to fill into the object map (0 = none)
+; @clobbers A X
+; @mode    M16X16
+; @see     aTilePatternTable
+;;
 fMap_GetTilePatternInfo:
     REP #$30                                                   ;81A801|C230    |      ; A: nIndex, return $7E, $82, $80, $84
     STA.B strcVariables.n16Temp1                               ;81A803|857E    |00007E;
@@ -687,6 +838,22 @@ fMap_GetTilePatternInfo:
     RTL                                                        ;81A839|6B      |      ;
  
  
+;;
+; @brief   Copies a tile pattern into the tilemap buffer (bank $7E, $2000+offset): row by row, column by column, with block boundary handling.
+; @details Computes the buffer offset of the map position (x/16*4 plus y/16 scaled by the map width mapMultiWidth: 1, 2 or other widths
+;   double the row stride), then copies the pattern words from the source tilemap (bank $A6) taking the 32x32 block boundary ($40 mask)
+;   into account.
+; @param   A   tile pattern index
+; @param   X   x position in pixels
+; @param   Y   y position in pixels
+; @modifies strcVariables.n16Temp1, strcVariables.n16Temp2, strcVariables.n16Unk86, strcVariables.n16Unk88, strcVariables.n16Unk8E, strcVariables.n16Unk90, ptrTemp0x72, ptrUnknown0x75, ptrObjectData
+; @clobbers A X Y
+; @mode    M16X16
+; @region  DE: pattern source offset $A115; JP: $A77D; US/EU: $A096. EU/DE jump back to the loop through region_targets.asm.
+; @calls   fMap_GetTilePatternInfo
+; @callers fMap_DrawTilePatternAt, fSetTileAtCoords, fObjectMap_ConnectAdjacentObjectTiles
+; @note    confidence: low - renamed from fMap_CalcTilemapBufferOffset; the output offset in n16Unk86 is the main result the callers use.
+;;
 fMap_CopyTilePatternToTilemapBuffer:
     REP #$30                                                   ;81A83A|C230    |      ; A: nIndex
     PHA                                                        ;81A83C|48      |      ;
@@ -866,6 +1033,18 @@ fMap_CopyTilePatternToTilemapBuffer:
   + RTL                                                        ;81A949|6B      |      ;
  
  
+;;
+; @brief   Puts the currently equipped tool back on its shed hook: draws its tile and marks it as stored in strcShedItems.
+; @details Does nothing when toolSecond is empty (only one tool). The tool tile is drawn only when the player is in the right place: tools below $19 in the
+;   shed ($26), the chicken feed ($19) in the coop ($28) and the other items in the cow barn ($27). nShedToolPlacementTable[tool] gives tile position,
+;   pattern and the shed bit (row byte 6, mask byte 7), which is ORed into strcShedItems.
+; @modifies strcShedItems
+; @clobbers A X Y
+; @mode    M8X16 -> ?
+; @calls   fSetTileAtCoords, fCore_StartTransfer
+; @callers subItemCarried_Sickle, subItemCarried_CowFeed
+; @note    confidence: medium - the area test uses the equipped tool id compares (tool == 0 or < $19 -> shed).
+;;
 fShed_PlaceEquippedTool:
     SEP #$20                                                   ;81A94A|E220    |      ;
     REP #$10                                                   ;81A94C|C210    |      ;
@@ -962,6 +1141,17 @@ fShed_PlaceEquippedTool:
     RTL                                                        ;81A9E4|6B      |      ;
  
  
+;;
+; @brief   Runs the area specific tile restore handler of the loaded area.
+; @details Calls pAreaItemSubrutineTable[strcMap.loadAreaId] (the fAreaItemSub_* routines), which redraw event dependent tiles (painted house,
+;   power berries, shed contents, cow/chicken feed, ...) after an area is loaded.
+; @param   strcMap.loadAreaId   area id ($00-$5F)
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   pAreaItemSubrutineTable (indirect)
+; @callers fTileMap_MapChangeHandler
+; @see     defs/tables/data/item_subroutines.csv
+;;
 fAreaItemSubrutine_Run:
     SEP #$20                                                   ;81A9E5|E220    |      ; $22: nItemId
     REP #$10                                                   ;81A9E7|C210    |      ;
@@ -976,6 +1166,18 @@ fAreaItemSubrutine_Run:
  
     incsrc "../../../build/gen/blocks/item_subroutines.asm"
  
+;;
+; @brief   Area load handler of the farm (spring-winter): redraws the tiles of the built/finished farm events and the eaten power berries.
+; @details Event dependent tile patterns are re-drawn and stamped into the map (fMap_DrawTilePatternAt + fMap_StampTemplateToCurrentTilemap):
+;   strcFlags.event1 bits $0002/$0001 (patterns $60/$5F), $0080 or $0040 (pattern $54 or $53), one power berry pattern $16 per
+;   nPowerBerryEaten at aPowerBerryPositionsXY, strcFlags.event2 bits $0200/$0400/$0800/$1000 (patterns $59/$58/$5A/$5C = painted house door, left, center, right,
+;   see !EFLAGS2_PAINTEDHOUSE*) and strcFlags.event3 bit $1000 (pattern $F5).
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @calls   fMap_DrawTilePatternAt, fMap_StampTemplateToCurrentTilemap
+; @case    $00 $01 $02 $03
+; @note    The meaning of the event1 bits $0001/$0002/$0040/$0080 and event3 $1000 is not known (farm extensions?). confidence: low
+;;
 fAreaItemSub_Farm:
     REP #$30                                                   ;81AAB6|C230    |      ;
     %CheckFlag(event1, $0002)
@@ -1180,12 +1382,24 @@ fAreaItemSub_Farm:
     RTS                                                        ;81AC48|60      |      ;
  
  
+;;
+; @brief   Tile positions where the eaten power berries are drawn on the farm.
+; @format  `[word x][word y]` x 10 (x $180-$1C0 step $10, y $50 or $60).
+; @index   Berry number 0..nPowerBerryEaten-1 (times 4), read by fAreaItemSub_Farm.
+; @used_by fAreaItemSub_Farm
+;;
 aPowerBerryPositionsXY:
     dw $0180,$0050,$0190,$0050,$01A0,$0050                     ;81AC49|        |      ; 16b, 16b / 32b (not sure about this size) * 0A
     dw $01B0,$0050,$01C0,$0050,$0180,$0060                     ;81AC55|        |      ;
     dw $0190,$0060,$01A0,$0060,$01B0,$0060                     ;81AC61|        |      ;
     dw $01C0,$0060                                             ;81AC6D|        |      ;
  
+;;
+; @brief   Area load handler of the town (spring-winter, ids $04-$07): empty (RTS).
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $04 $05 $06 $07
+;;
 fAreaItemSub_Town:
     RTS                                                        ;81AC71|60      |      ;
  
@@ -1202,38 +1416,96 @@ fAreaItemSub_Town:
     RTS                                                        ;81AC77|60      |      ;
  
  
+;;
+; @brief   Area load handler of area DancingS1: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $08
+;;
 fAreaItemSub_DancingS1:
     RTS                                                        ;81AC78|60      |      ;
  
  
+;;
+; @brief   Area load handler of area DancingS2: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $09
+;;
 fAreaItemSub_DancingS2:
     RTS                                                        ;81AC79|60      |      ;
  
  
+;;
+; @brief   Area load handler of area NewYearPublicSquare: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $0A
+;;
 fAreaItemSub_NewYearPublicSquare:
     RTS                                                        ;81AC7A|60      |      ;
  
  
+;;
+; @brief   Area load handler of area EggFestival: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $0B
+;;
 fAreaItemSub_EggFestival:
     RTS                                                        ;81AC7B|60      |      ;
  
  
+;;
+; @brief   Area load handler of area CrossroadsSpring: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $0C
+;;
 fAreaItemSub_CrossroadsSpring:
     RTS                                                        ;81AC7C|60      |      ;
  
  
+;;
+; @brief   Area load handler of area CrossroadsSummer: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $0D
+;;
 fAreaItemSub_CrossroadsSummer:
     RTS                                                        ;81AC7D|60      |      ;
  
  
+;;
+; @brief   Area load handler of area CrossroadsFall: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $0E
+;;
 fAreaItemSub_CrossroadsFall:
     RTS                                                        ;81AC7E|60      |      ;
  
  
+;;
+; @brief   Area load handler of area CrossroadsWinter: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $0F
+;;
 fAreaItemSub_CrossroadsWinter:
     RTS                                                        ;81AC7F|60      |      ;
  
  
+;;
+; @brief   Area load handler of the woods (spring-winter): draws pattern $E1 (event1 bit $0002) and the map-flag dependent pattern $E2.
+; @details When strcDialogDisplay.mapFlags has bit $0002 or $0008 set, pattern $E2 is drawn at (180,20) first. Then, if strcFlags.event1 bit $0002 is set,
+;   pattern $E1 is drawn and stamped at (170,270).
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @calls   fMap_DrawTilePatternAt, fMap_StampTemplateToCurrentTilemap
+; @case    $10 $11 $12 $13
+; @note    confidence: low - the meaning of the event1 bit and map flags is not known.
+;;
 fAreaItemSub_Woods:
     REP #$30                                                   ;81AC80|C230    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;81AC82|AD9601  |000196;
@@ -1278,10 +1550,26 @@ fAreaItemSub_Woods:
     RTS                                                        ;81ACCA|60      |      ;
  
  
+;;
+; @brief   Area load handler of area NewYearSpa: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $14
+;;
 fAreaItemSub_NewYearSpa:
     RTS                                                        ;81ACCB|60      |      ;
  
  
+;;
+; @brief   Area load handler of House1 (player house): redraws decoration tiles that depend on map flag $0010 and the event5/event6 flags.
+; @details mapFlags bit $0010 draws pattern $EE at (70,C0); strcFlags.event5 bit $1000 draws pattern $FD at (90,40) and sets tile $D7 at (90,50);
+;   strcFlags.event6 bit $4000 draws pattern $FE at (A0,30).
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @calls   fMap_DrawTilePatternAt, fMap_UpdateCurrentTilemap
+; @case    $15
+; @note    confidence: low - the decorations are not identified (furniture/diary/TV(?)).
+;;
 fAreaItemSub_House1:
     REP #$30                                                   ;81ACCC|C230    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;81ACCE|AD9601  |000196;
@@ -1316,6 +1604,16 @@ fAreaItemSub_House1:
   + RTS                                                        ;81AD22|60      |      ;
  
  
+;;
+; @brief   Area load handler of House2 (player house): redraws decoration tiles that depend on map flag $0010 and the event5/event6 flags.
+; @details mapFlags bit $0010 draws pattern $EE at (70,C0); strcFlags.event5 bit $1000 draws pattern $FD at (90,40) and sets tile $D7 at (90,50);
+;   strcFlags.event6 bit $4000 draws pattern $FE at (A0,30).
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @calls   fMap_DrawTilePatternAt, fMap_UpdateCurrentTilemap
+; @case    $16
+; @note    confidence: low - the decorations are not identified (furniture/diary/TV(?)).
+;;
 fAreaItemSub_House2:
     REP #$30                                                   ;81AD23|C230    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;81AD25|AD9601  |000196;
@@ -1350,6 +1648,16 @@ fAreaItemSub_House2:
   + RTS                                                        ;81AD79|60      |      ;
  
  
+;;
+; @brief   Area load handler of House3 (player house): redraws decoration tiles that depend on map flag $0010 and the event5/event6 flags.
+; @details mapFlags bit $0010 draws pattern $EE at (70,C0); strcFlags.event5 bit $1000 draws pattern $FD at (140,50) and sets tile $D7 at (140,60);
+;   strcFlags.event6 bit $4000 draws pattern $FE at (150,40).
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @calls   fMap_DrawTilePatternAt, fMap_UpdateCurrentTilemap
+; @case    $17
+; @note    confidence: low - the decorations are not identified (furniture/diary/TV(?)).
+;;
 fAreaItemSub_House3:
     REP #$30                                                   ;81AD7A|C230    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;81AD7C|AD9601  |000196;
@@ -1384,22 +1692,56 @@ fAreaItemSub_House3:
   + RTS                                                        ;81ADD0|60      |      ;
  
  
+;;
+; @brief   Area load handler of area MajorHouse: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $18
+;;
 fAreaItemSub_MajorHouse:
     RTS                                                        ;81ADD1|60      |      ;
  
  
+;;
+; @brief   Area load handler of area MajorCorridor: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $19
+;;
 fAreaItemSub_MajorCorridor:
     RTS                                                        ;81ADD2|60      |      ;
  
  
+;;
+; @brief   Area load handler of area MajorBedroom: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $1A
+;;
 fAreaItemSub_MajorBedroom:
     RTS                                                        ;81ADD3|60      |      ;
  
  
+;;
+; @brief   Area load handler of area Church: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $1B
+;;
 fAreaItemSub_Church:
     RTS                                                        ;81ADD4|60      |      ;
  
  
+;;
+; @brief   Area load handler of the flower shop: draws the seed shelf items that are still available this season.
+; @details Only when strcFlags.event3 bit $0001 is set. Uses fShed_DrawItemPatternByFlag with table 1 (Florist shelf): in summer entries 0-1, in spring
+;   entries 2-3, plus entry 0 (before fall) and entry 1 (spring/summer).
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @calls   fShed_DrawItemPatternByFlag
+; @case    $1C
+; @note    confidence: low - entries and seasons are read from the loops only.
+;;
 fAreaItemSub_Florist:
     REP #$30                                                   ;81ADD5|C230    |      ;
     %CheckFlag(event3, $0001)
@@ -1483,26 +1825,66 @@ fAreaItemSub_Florist:
     RTS                                                        ;81AE69|60      |      ;
  
  
+;;
+; @brief   Area load handler of area FloristBedroom: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $1D
+;;
 fAreaItemSub_FloristBedroom:
     RTS                                                        ;81AE6A|60      |      ;
  
  
+;;
+; @brief   Area load handler of area Bar: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $1E
+;;
 fAreaItemSub_Bar:
     RTS                                                        ;81AE6B|60      |      ;
  
  
+;;
+; @brief   Area load handler of area BarBedroom: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $1F
+;;
 fAreaItemSub_BarBedroom:
     RTS                                                        ;81AE6C|60      |      ;
  
  
+;;
+; @brief   Area load handler of area Restaurant: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $20
+;;
 fAreaItemSub_Restaurant:
     RTS                                                        ;81AE6D|60      |      ;
  
  
+;;
+; @brief   Area load handler of area RestaurantBedroom: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $21
+;;
 fAreaItemSub_RestaurantBedroom:
     RTS                                                        ;81AE6E|60      |      ;
  
  
+;;
+; @brief   Area load handler of the tools shop: draws a shelf item for every tool the player does not own yet.
+; @details Only when strcFlags.event3 bit $0001 is set. Table 2 (tools shop shelf) entries 1-8 are drawn (mode 0 = draw when the tool is neither
+;   equipped nor stored): paint, milker, brush (paint only when event1 bit $0080), gold sickle/hoe/hammer/axe (event4 bits $0001-$0008) and the sprinkler (second year, or fall/winter after day $14).
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @calls   fShed_DrawItemPatternByFlag
+; @case    $22
+; @note    confidence: medium - tool ids compared: $0D paint, $0E milker, $0F brush, $11-$14 gold tools, $15 sprinkler.
+;;
 fAreaItemSub_ToolsShop:
     REP #$30                                                   ;81AE6F|C230    |      ;
     %CheckFlag(event3, $0001)
@@ -1653,10 +2035,25 @@ fAreaItemSub_ToolsShop:
     RTS                                                        ;81AFBE|60      |      ;
  
  
+;;
+; @brief   Area load handler of area ToolsShopBedroom: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $23
+;;
 fAreaItemSub_ToolsShopBedroom:
     RTS                                                        ;81AFBF|60      |      ;
  
  
+;;
+; @brief   Area load handler of the animal shop: draws the shelves of miracle potion, cow medicine, chicken feed and cow feed unless the player owns them.
+; @details Only when strcFlags.event3 bit $0001 is set. Table 3 entries 1-4. The miracle potion shelf requires event6 bit $1000 (and not event1 bit $0004), fewer than 12 cows and the potion not in the player's tools.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @calls   fShed_DrawItemPatternByFlag
+; @case    $24
+; @note    confidence: medium
+;;
 fAreaItemSub_AnimalShop:
     REP #$30                                                   ;81AFC0|C230    |      ;
     %CheckFlag(event3, $0001)
@@ -1733,10 +2130,25 @@ fAreaItemSub_AnimalShop:
     RTS                                                        ;81B062|60      |      ;
  
  
+;;
+; @brief   Area load handler of area FortuneTeller: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $25
+;;
 fAreaItemSub_FortuneTeller:
     RTS                                                        ;81B063|60      |      ;
  
  
+;;
+; @brief   Area load handler of the shed: draws every tool/seed bag that is stored in the shed (24 hooks) and the event3 decoration.
+; @details Calls fShed_DrawItemPatternByFlag(table 0, mode 1) for entries 1-$17 of nShedToolPlacementTable. When strcFlags.event3 bit $2000 is set pattern $F0 is
+;   drawn at (70,20) and stamped into the map.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @calls   fShed_DrawItemPatternByFlag, fMap_DrawTilePatternAt, fMap_StampTemplateToCurrentTilemap
+; @case    $26
+;;
 fAreaItemSub_Shed:
     REP #$30                                                   ;81B064|C230    |      ;
     LDY.W #$0000                                               ;81B066|A00000  |      ;
@@ -1777,6 +2189,15 @@ fAreaItemSub_Shed:
     RTS                                                        ;81B0A7|60      |      ;
  
  
+;;
+; @brief   Area load handler of the cow barn: draws the cow feed hook item and the feed that was already put into the troughs.
+; @details Pattern index $1A of the shed table is drawn (mode 2); every bit of nCowFeedFlagsTable[0..12] set in strcPlayerData.placedCowFeedFlags draws pattern $99 at
+;   the matching aCowFeedPositionsXY entry.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @calls   fShed_DrawItemPatternByFlag, fMap_DrawTilePatternAt
+; @case    $27
+;;
 fAreaItemSub_CowBarn:
     REP #$30                                                   ;81B0A8|C230    |      ;
     LDA.W #$001A                                               ;81B0AA|A91A00  |      ;
@@ -1818,6 +2239,12 @@ fAreaItemSub_CowBarn:
     RTS                                                        ;81B0EC|60      |      ;
  
  
+;;
+; @brief   Tile positions of the 13 cow feed troughs in the cow barn.
+; @format  `[word x][word y]` x 13, packed as 32-bit dd values (y in the high word).
+; @index   Trough number 0..12 times 4; the bit mask for the same index is nCowFeedFlagsTable.
+; @used_by fAreaItemSub_CowBarn
+;;
 aCowFeedPositionsXY:
     dd $01180088,$00F80088,$00D80088                           ;81B0ED|        |      ;
     dd $00980088,$00780088,$00580088                           ;81B0F9|        |      ;
@@ -1825,6 +2252,15 @@ aCowFeedPositionsXY:
     dd $00980058,$00780058,$00580058                           ;81B111|        |      ;
     dd $016800C8                                               ;81B11D|        |      ;
  
+;;
+; @brief   Area load handler of the coop: draws the chicken feed hook item, the placed feed and the eggs lying in the coop.
+; @details Pattern index $19 of the shed table (mode 2); bits of nCowFeedFlagsTable[0..11] set in strcPlayerData.placedChickenFeedFlags draw pattern $99 at aChickenFeedPositionsXY;
+;   bits of nEggInCoopFlags (aBitMask16[0..12]) draw pattern $F1 at aGameEngine_AddChickenPositionsData.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @calls   fShed_DrawItemPatternByFlag, fMap_DrawTilePatternAt
+; @case    $28
+;;
 fAreaItemSub_Coop:
     REP #$30                                                   ;81B121|C230    |      ;
     LDA.W #$0019                                               ;81B123|A91900  |      ;
@@ -1897,12 +2333,27 @@ fAreaItemSub_Coop:
     RTS                                                        ;81B19E|60      |      ;
  
  
+;;
+; @brief   Tile positions of the 12 chicken feed spots in the coop.
+; @format  `[word x][word y]` x 12 (x = $20, y = $20..$D0 step $10), packed as 32-bit dd values.
+; @index   Spot number 0..11 times 4; the bit mask for the same index is nCowFeedFlagsTable.
+; @used_by fAreaItemSub_Coop
+;;
 aChickenFeedPositionsXY:
     dd $00200020,$00200030,$00200040                           ;81B19F|        |      ;
     dd $00200050,$00200060,$00200070                           ;81B1AB|        |      ;
     dd $00200080,$00200090,$002000A0                           ;81B1B7|        |      ;
     dd $002000B0,$002000C0,$002000D0                           ;81B1C3|        |      ;
  
+;;
+; @brief   Area load handler of the woods cave: draws three pattern $E4 tiles when strcFlags.event5 shows the cave event (mask $0011).
+; @details Patterns at (70,160), (70,130) and (60,170).
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @calls   fMap_DrawTilePatternAt
+; @case    $29
+; @note    confidence: low - the AND mask $0011 tests several bits at once; only a non-zero result is checked.
+;;
 fAreaItemSub_WoodsCave:
     REP #$30                                                   ;81B1CF|C230    |      ;
     %CheckFlag(event5, $0011)
@@ -1947,6 +2398,14 @@ fAreaItemSub_WoodsCave:
     RTS                                                        ;81B21D|60      |      ;
  
  
+;;
+; @brief   Area load handler of the imps' underground: draws two pattern $EF tiles when strcFlags.event1 bit $0002 is set.
+; @details Patterns at (30,180) and (20,1B0), both stamped into the map.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @calls   fMap_DrawTilePatternAt, fMap_StampTemplateToCurrentTilemap
+; @case    $2A
+;;
 fAreaItemSub_ImpUnderground:
     REP #$30                                                   ;81B21E|C230    |      ;
     %CheckFlag(event1, $0002)
@@ -1984,54 +2443,135 @@ fAreaItemSub_ImpUnderground:
     RTS                                                        ;81B260|60      |      ;
  
  
+;;
+; @brief   Area load handler of area WorksmanHouse: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $2B
+;;
 fAreaItemSub_WorksmanHouse:
     RTS                                                        ;81B261|60      |      ;
  
  
+;;
+; @brief   Area load handler of area GoldChicken: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $2C
+;;
 fAreaItemSub_GoldChicken:
     RTS                                                        ;81B262|60      |      ;
  
  
+;;
+; @brief   Area load handler of area WeddingSpring: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $2D
+;;
 fAreaItemSub_WeddingSpring:
     RTS                                                        ;81B263|60      |      ;
  
  
+;;
+; @brief   Area load handler of area WeddingSummer: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $2E
+;;
 fAreaItemSub_WeddingSummer:
     RTS                                                        ;81B264|60      |      ;
  
  
+;;
+; @brief   Area load handler of area WeddingFall: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $2F
+;;
 fAreaItemSub_WeddingFall:
     RTS                                                        ;81B265|60      |      ;
  
  
+;;
+; @brief   Area load handler of area WeddingWinter: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $30
+;;
 fAreaItemSub_WeddingWinter:
     RTS                                                        ;81B266|60      |      ;
  
  
+;;
+; @brief   Area load handler of area MountainTopSpring: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $31
+;;
 fAreaItemSub_MountainTopSpring:
     RTS                                                        ;81B267|60      |      ;
  
  
+;;
+; @brief   Area load handler of area MountainTopSummer: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $32
+;;
 fAreaItemSub_MountainTopSummer:
     RTS                                                        ;81B268|60      |      ;
  
  
+;;
+; @brief   Area load handler of area MountainTopFall: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $33
+;;
 fAreaItemSub_MountainTopFall:
     RTS                                                        ;81B269|60      |      ;
  
  
+;;
+; @brief   Area load handler of area MountainTopWinter: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $34
+;;
 fAreaItemSub_MountainTopWinter:
     RTS                                                        ;81B26A|60      |      ;
  
  
+;;
+; @brief   Area load handler of area MountainTop2Spring: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $35
+;;
 fAreaItemSub_MountainTop2Spring:
     RTS                                                        ;81B26B|60      |      ;
  
  
+;;
+; @brief   Area load handler of area MountainTopEndingSummer: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $36
+;;
 fAreaItemSub_MountainTopEndingSummer:
     RTS                                                        ;81B26C|60      |      ;
  
  
+;;
+; @brief   Area load handler of the second mountain top in fall: draws pattern $9B once per day (strcFlags.daily1 bit $0001).
+; @details Sets the daily flag, then draws pattern $9B at (80,110).
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @calls   fMap_DrawTilePatternAt
+; @case    $37
+; @modifies strcFlags.daily1
+;;
 fAreaItemSub_MountainTop2Fall:
     REP #$30                                                   ;81B26D|C230    |      ;
     %CheckFlag(daily1, $0001)
@@ -2047,166 +2587,421 @@ fAreaItemSub_MountainTop2Fall:
     RTS                                                        ;81B292|60      |      ;
  
  
+;;
+; @brief   Area load handler of area MountainTop2Winter: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $38
+;;
 fAreaItemSub_MountainTop2Winter:
     RTS                                                        ;81B293|60      |      ;
  
  
+;;
+; @brief   Area load handler of area NewYearMountainTop: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $39
+;;
 fAreaItemSub_NewYearMountainTop:
     RTS                                                        ;81B294|60      |      ;
  
  
+;;
+; @brief   Area load handler of area MountainTopSunrise: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $3A
+;;
 fAreaItemSub_MountainTopSunrise:
     RTS                                                        ;81B295|60      |      ;
  
  
+;;
+; @brief   Area load handler of area MountainTopBean: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $3B
+;;
 fAreaItemSub_MountainTopBean:
     RTS                                                        ;81B296|60      |      ;
  
  
+;;
+; @brief   Area load handler of area Intro: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $3C
+;;
 fAreaItemSub_Intro:
     RTS                                                        ;81B297|60      |      ;
  
  
+;;
+; @brief   Area load handler of area Ending00: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $3D
+;;
 fAreaItemSub_Ending00:
     RTS                                                        ;81B298|60      |      ;
  
  
+;;
+; @brief   Area load handler of area Ending01: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $3E
+;;
 fAreaItemSub_Ending01:
     RTS                                                        ;81B299|60      |      ;
  
  
+;;
+; @brief   Area load handler of area Ending02: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $3F
+;;
 fAreaItemSub_Ending02:
     RTS                                                        ;81B29A|60      |      ;
  
  
+;;
+; @brief   Area load handler of area Ending03: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $40
+;;
 fAreaItemSub_Ending03:
     RTS                                                        ;81B29B|60      |      ;
  
  
+;;
+; @brief   Area load handler of area Ending04: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $41
+;;
 fAreaItemSub_Ending04:
     RTS                                                        ;81B29C|60      |      ;
  
  
+;;
+; @brief   Area load handler of area Ending05: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $42
+;;
 fAreaItemSub_Ending05:
     RTS                                                        ;81B29D|60      |      ;
  
  
+;;
+; @brief   Area load handler of area Ending06: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $43
+;;
 fAreaItemSub_Ending06:
     RTS                                                        ;81B29E|60      |      ;
  
  
+;;
+; @brief   Area load handler of area Ending07: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $44
+;;
 fAreaItemSub_Ending07:
     RTS                                                        ;81B29F|60      |      ;
  
  
+;;
+; @brief   Area load handler of area Ending08: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $45
+;;
 fAreaItemSub_Ending08:
     RTS                                                        ;81B2A0|60      |      ;
  
  
+;;
+; @brief   Area load handler of area Ending09: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $46
+;;
 fAreaItemSub_Ending09:
     RTS                                                        ;81B2A1|60      |      ;
  
  
+;;
+; @brief   Area load handler of area Ending10: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $47
+;;
 fAreaItemSub_Ending10:
     RTS                                                        ;81B2A2|60      |      ;
  
  
+;;
+; @brief   Area load handler of area Ending11: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $48
+;;
 fAreaItemSub_Ending11:
     RTS                                                        ;81B2A3|60      |      ;
  
  
+;;
+; @brief   Area load handler of area Ending12: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $49
+;;
 fAreaItemSub_Ending12:
     RTS                                                        ;81B2A4|60      |      ;
  
  
+;;
+; @brief   Area load handler of area Ending13: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $4A
+;;
 fAreaItemSub_Ending13:
     RTS                                                        ;81B2A5|60      |      ;
  
  
+;;
+; @brief   Area load handler of area Credits0: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $4B
+;;
 fAreaItemSub_Credits0:
     RTS                                                        ;81B2A6|60      |      ;
  
  
+;;
+; @brief   Area load handler of area Credits1: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $4C
+;;
 fAreaItemSub_Credits1:
     RTS                                                        ;81B2A7|60      |      ;
  
  
+;;
+; @brief   Area load handler of area Credits2: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $4D
+;;
 fAreaItemSub_Credits2:
     RTS                                                        ;81B2A8|60      |      ;
  
  
+;;
+; @brief   Area load handler of area Credits3: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $4E
+;;
 fAreaItemSub_Credits3:
     RTS                                                        ;81B2A9|60      |      ;
  
  
+;;
+; @brief   Area load handler of area Credits4: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $4F
+;;
 fAreaItemSub_Credits4:
     RTS                                                        ;81B2AA|60      |      ;
  
  
+;;
+; @brief   Area load handler of area DriveToTown: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $50
+;;
 fAreaItemSub_DriveToTown:
     RTS                                                        ;81B2AB|60      |      ;
  
  
+;;
+; @brief   Area load handler of area Credits4BL: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $51
+;;
 fAreaItemSub_Credits4BL:
     RTS                                                        ;81B2AC|60      |      ;
  
  
+;;
+; @brief   Area load handler of area Credits4BR: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $52
+;;
 fAreaItemSub_Credits4BR:
     RTS                                                        ;81B2AD|60      |      ;
  
  
+;;
+; @brief   Area load handler of area StaffRollJPTL: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $53
+;;
 fAreaItemSub_StaffRollJPTL:
     RTS                                                        ;81B2AE|60      |      ;
  
  
+;;
+; @brief   Area load handler of area StaffRollJPTR: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $54
+;;
 fAreaItemSub_StaffRollJPTR:
     RTS                                                        ;81B2AF|60      |      ;
  
  
+;;
+; @brief   Area load handler of area StaffRollJPBL: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $55
+;;
 fAreaItemSub_StaffRollJPBL:
     RTS                                                        ;81B2B0|60      |      ;
  
  
+;;
+; @brief   Area load handler of area StaffRollJPBR: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $56
+;;
 fAreaItemSub_StaffRollJPBR:
     RTS                                                        ;81B2B1|60      |      ;
  
  
+;;
+; @brief   Area load handler of area RainOverlay: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $57
+;;
 fAreaItemSub_RainOverlay:
     RTS                                                        ;81B2B2|60      |      ;
  
  
+;;
+; @brief   Area load handler of area CloudsOverlay: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $58
+;;
 fAreaItemSub_CloudsOverlay:
     RTS                                                        ;81B2B3|60      |      ;
  
  
+;;
+; @brief   Area load handler of area SnowOverlay: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $59
+;;
 fAreaItemSub_SnowOverlay:
     RTS                                                        ;81B2B4|60      |      ;
  
  
+;;
+; @brief   Area load handler of area HeavySnowOverlay: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $5A
+;;
 fAreaItemSub_HeavySnowOverlay:
     RTS                                                        ;81B2B5|60      |      ;
  
  
+;;
+; @brief   Area load handler of area IntroFarmScroll: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $5B
+;;
 fAreaItemSub_IntroFarmScroll:
     RTS                                                        ;81B2B6|60      |      ;
  
  
+;;
+; @brief   Area load handler of area HarvestMoonLogo: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $5C
+;;
 fAreaItemSub_HarvestMoonLogo:
     RTS                                                        ;81B2B7|60      |      ;
  
  
+;;
+; @brief   Area load handler of area NatsumeLogo: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $5D
+;;
 fAreaItemSub_NatsumeLogo:
     RTS                                                        ;81B2B8|60      |      ;
  
  
+;;
+; @brief   Area load handler of area MenuScreenBackgrounds: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $5E
+;;
 fAreaItemSub_MenuScreenBackgrounds:
     RTS                                                        ;81B2B9|60      |      ;
  
  
+;;
+; @brief   Area load handler of area NameInput: empty (RTS) - nothing to restore.
+; @clobbers A X Y
+; @mode    M16X16 -> ?
+; @case    $5F
+;;
 fAreaItemSub_NameInput:
     RTS                                                        ;81B2BA|60      |      ;
  
  
+;;
+; @brief   Draws one shelf/hook tile pattern of the shed or a shop, depending on the shed item bit of the entry.
+; @details Each table entry is 8 bytes: `[word x][word y][word pattern][byte shed row][byte shed mask]`. The entry is drawn when
+;   Y = 2, when Y = 1 and the shed bit is set, or when Y = 0 and the shed bit is clear.
+; @param   A   entry index in the selected table
+; @param   X   table selector: 0 = nShedToolPlacementTable, 1 = Florist shelf table, 2 = tools shop shelf table, 3 = animal shop table
+; @param   Y   mode: 2 always draw, 1 draw if the bit in strcShedItems is set, 0 draw if it is clear
+; @modifies ptrTemp0x72, strcVariables.n8Temp1
+; @clobbers A X Y
+; @mode    M16X16
+; @region  EU/DE: the shop tables (selectors 1-3) are at other addresses ($BF03/$BF3B/$BF83 instead of $BEEF/$BF27/$BF6F).
+; @calls   fMap_DrawTilePatternAt
+; @callers fAreaItemSub_Florist, fAreaItemSub_ToolsShop, fAreaItemSub_AnimalShop, fAreaItemSub_Shed, fAreaItemSub_CowBarn, fAreaItemSub_Coop
+; @note    The selector 3 branch is labelled .case4 in the code. confidence: medium - table contents are in tile_scripts.csv
+;;
 fShed_DrawItemPatternByFlag:
     REP #$30                                                   ;81B2BB|C230    |      ; A: nArg, X: nArg, Y: nArg
     PHY                                                        ;81B2BD|5A      |      ;

@@ -146,3 +146,5 @@ subItemCarried_0x27,subItemCarried_Dog,medium,item $27 icon Item_Dog (K5_objects
 nPowerBerryTable,aPowerBerryPositionsXY,high,"Table of 10 (x,y) word pairs: tile pattern $16 is drawn at each position per eaten power berry in fAreaItemSub_Farm"
 fMap_CalcTilemapBufferOffset,fMap_CopyTilePatternToTilemapBuffer,medium,Computes the tilemap shadow buffer ($7E2000) offset of a map position and copies the pattern tile words from the $A6 source tilemap into it (inner copy loops)
 fMap_CalcTilemapBufferOffset_OuterLoop,fMap_CopyTilePatternToTilemapBuffer_OuterLoop,medium,Region target (EU/DE) of the outer loop label of fMap_CopyTilePatternToTilemapBuffer
+fItemCarried_CarryLoop_ActionJump,fItemCarried_CarryLoop_NotJumping,high,Taken when strcPlayer.action != !PACTION_JUMP (BNE after CMP): loads the normal carry pose 1 and clears the jump-pose bit of nItemSlot flags
+fItemCarried_CarryLoop_ActionOther,fItemCarried_CarryLoop_Jumping,high,Taken when strcPlayer.action == !PACTION_JUMP: loads jump pose $0B once (flag bit 2) then checks the object still exists

@@ -1,7 +1,36 @@
+;;
+; @file   item_actions.asm
+; @brief  State machines of the items the player carries in the hands (picked up crops, eggs, rocks, shop goods, tools from the shed).
+; @details strcPlayerData.carryItemId selects the item; fItemCarried_Begin creates one of 10 object slots (fObjectSlots_*, items_misc.asm) whose
+;   per frame handler fItemCarried_RunHandler calls pItemCarriedSubrutines[id] (subItemCarried_*). The handlers run a phase machine
+;   on the slot's phase byte ($0976): 0 start, 1 prompt/answer, 2 carry, 3 put down, 4 free slot, 5/6 Sunday market sell dialog,
+;   7 wait for the shipping tile script, 8 destroy; shop shelf items use phases 0-3 and $FF. The item data tables (frame lists, sell/buy/found
+;   data) are generated from assets/tables/data/carried_items.csv and included at the start of items_misc.asm.
+; @bank   $81   @range $818000-$8196AE
+; @see    items_misc.asm, player_actions.asm (fPlayerAction0x04), docs/findings.md (Carried items), assets/tables/data/carried_items.csv
+;;
+
  
     ORG $818000
  
  
+;;
+; @brief   Starts carrying an item: creates the carried-item object slot and the pick-up pose in front of the player.
+; @details Called when the player picks something up (player action $04). Fills the working copy of the slot
+;   (nItemSlot fields at $0974-$097E: flags = 1 active, handler index = 1 fItemCarried_RunHandler, phase = 0), copies
+;   strcPlayerData.carryItemId to nCarriedItemId, loads the pick-up pose (pose 2 + player direction) and places the
+;   object two pixels below the player. fObjectSlots_Allocate then copies the working copy into a free slot and creates
+;   the sprite object. If nItemCarriedIndexForTilemap[id] is non-zero the tile that was lying in front of the player
+;   is replaced by the tile pattern read from the selected map (strcMap.pSelected, index*4)(?) so that the picked up
+;   object disappears from the map; items with nItemCarriedPickupSoundTable[id] != 0 play !SFX_ITEMPICKUP.
+; @param   strcPlayerData.carryItemId   carried item id ($01-$5A)
+; @modifies nCarriedItemId, nUnknownX, nUnknownY, nTileInFrontOfPlayerX, nTileInFrontOfPlayerY, strcAudio.reg114, strcAudio.reg115
+; @clobbers A X Y
+; @mode    ? -> M8X16
+; @calls   fItemCarried_LoadPoseData, fObjectSlots_Allocate, fStoreTileOnFrontOfPlayerAtDistance, fSetTileAtCoords, fAudioSetRegister2to0A
+; @callers fPlayerAction0x04
+; @note    The pointer read with strcMap.pSelected is not fully understood. confidence: low - only the table lookup is certain.
+;;
 fItemCarried_Begin:
     SEP #$20                                                   ;818000|E220    |      ;
     REP #$10                                                   ;818002|C210    |      ;
@@ -75,6 +104,19 @@ fItemCarried_Begin:
   + RTL                                                        ;818099|6B      |      ;
  
  
+;;
+; @brief   Per-frame update of one carried-item slot: runs the item specific handler, then clears the "item shipped" flag.
+; @details Reached through pItemCarriedSlotHandlerTable (handler index 1) from fObjectSlots_UpdateAll. The handler is taken
+;   from pItemCarriedSubrutines[nCarriedItemId] (the subItemCarried_* routines), which run the phase state machine
+;   (nItemSlot phase byte at $0976, see fItemCarried_PhaseDispatch_*). strcFlags.daily3 bit $0001 (set by the shipping code when an
+;   item was sold into a bin) is read by the crop handlers during that call and cleared afterwards.
+; @param   nCarriedItemId   carried item id of the slot being updated
+; @modifies strcFlags.daily3
+; @clobbers A X Y
+; @mode    ? -> M16X16
+; @calls   pItemCarriedSubrutines (indirect JSR)
+; @see     pItemCarriedSlotHandlerTable, fObjectSlots_UpdateAll
+;;
 fItemCarried_RunHandler:
     SEP #$20                                                   ;81809A|E220    |      ;
     REP #$10                                                   ;81809C|C210    |      ;
@@ -89,6 +131,19 @@ fItemCarried_RunHandler:
     RTS                                                        ;8180B6|60      |      ;
  
  
+;;
+; @brief   Selects one pose of the carried item: loads the sprite index and flip mask from the item's frame list.
+; @details The frame list of the item (pItemCarriedFramesTable[nCarriedItemId], 3-byte entries `[word sprite][byte flip]`) is
+;   indexed with the pose. The sprite goes to $097A, the flip byte multiplied by 64 (shifted into the OAM attribute bits) to $097E.
+;   Poses used by this module: 0 item at its target (bin, stall), 1 carried, 2 + direction pick-up animation,
+;   6 + direction put-down animation, $0A dropped in front, $0B carried while jumping. Tool items ($2A-$43) only have 6 poses.
+; @param   Y   pose index
+; @param   nCarriedItemId   item whose frame list is used
+; @modifies $097A (sprite table index), $097E (flip/attribute bits, = flip * 64), ptrTemp0x72, strcVariables.n16Temp1
+; @clobbers A X Y
+; @mode    ? -> M16X16
+; @see     pItemCarriedFramesTable, assets/tables/data/carried_items.csv
+;;
 fItemCarried_LoadPoseData:
     SEP #$20                                                   ;8180B7|E220    |      ;
     REP #$10                                                   ;8180B9|C210    |      ;
@@ -134,71 +189,177 @@ fItemCarried_LoadPoseData:
     RTL                                                        ;8180FD|6B      |      ;
  
  
+;;
+; @brief   Carried-item handler of the mushroom (forage item): runs the forage phases (found dialog, eat or carry, sell).
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Forage
+; @case    $01
+;;
 subItemCarried_Mushroom:
     JSR.W fItemCarried_PhaseDispatch_Forage                                      ;8180FE|205588  |818855;
     RTS                                                        ;818101|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the poisonous mushroom (forage item): runs the forage phases (found dialog, eat or carry, sell).
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Forage
+; @case    $02
+;;
 subItemCarried_PoisonMushroom:
     JSR.W fItemCarried_PhaseDispatch_Forage                                      ;818102|205588  |818855;
     RTS                                                        ;818105|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the wild grape berry (forage item): runs the forage phases (found dialog, eat or carry, sell).
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Forage
+; @case    $03
+;;
 subItemCarried_WildGrape:
     JSR.W fItemCarried_PhaseDispatch_Forage                                      ;818106|205588  |818855;
     RTS                                                        ;818109|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the strong smelling tropical fruit (forage item): runs the forage phases (found dialog, eat or carry, sell).
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Forage
+; @case    $04
+;;
 subItemCarried_BerryStrongSmell:
     JSR.W fItemCarried_PhaseDispatch_Forage                                      ;81810A|205588  |818855;
     RTS                                                        ;81810D|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the berry of the full moon plant (forage item): runs the forage phases (found dialog, eat or carry, sell).
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Forage
+; @case    $05
+;;
 subItemCarried_MoonFlower:
     JSR.W fItemCarried_PhaseDispatch_Forage                                      ;81810E|205588  |818855;
     RTS                                                        ;818111|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the cake (forage item): runs the forage phases (found dialog, eat or carry, sell).
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Forage
+; @case    $06
+;;
 subItemCarried_Cake:
     JSR.W fItemCarried_PhaseDispatch_Forage                                      ;818112|205588  |818855;
     RTS                                                        ;818115|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the fish (forage item): runs the forage phases (found dialog, eat or carry, sell).
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Forage
+; @case    $07
+;;
 subItemCarried_Fish:
     JSR.W fItemCarried_PhaseDispatch_Forage                                      ;818116|205588  |818855;
     RTS                                                        ;818119|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the power berry (forage item): runs the forage phases (found dialog, eat or carry, sell).
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Forage
+; @case    $08
+;;
 subItemCarried_PowerBerry:
     JSR.W fItemCarried_PhaseDispatch_Forage                                      ;81811A|205588  |818855;
     RTS                                                        ;81811D|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the big grass tuft (also used for ids $0B/$0C): sellable produce phases.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Produce
+; @note    confidence: medium - the ids $09/$0B/$0C share this handler and the Item_GrassBig frames.
+; @case    $09 $0B $0C
+;;
 subItemCarried_GrassBig:
     JSR.W fItemCarried_PhaseDispatch_Produce                                      ;81811E|20E588  |8188E5;
     RTS                                                        ;818121|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the small grass tuft ($0A): sellable produce phases.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Produce
+; @note    confidence: medium - named after the Item_GrassSmall object.
+; @case    $0A
+;;
 subItemCarried_GrassSmall:
     JSR.W fItemCarried_PhaseDispatch_Produce                                      ;818122|20E588  |8188E5;
     RTS                                                        ;818125|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the grey rock: unsellable item phases (carry, put down on a drop tile).
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_NoSell
+; @note    confidence: medium - item meaning from the object name (K5_objects.csv).
+; @case    $0D
+;;
 subItemCarried_StoneGrey:
     JSR.W fItemCarried_PhaseDispatch_NoSell                                      ;818126|209A88  |81889A;
     RTS                                                        ;818129|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the mossy rock: unsellable item phases (carry, put down on a drop tile).
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_NoSell
+; @note    confidence: medium - item meaning from the object name (K5_objects.csv).
+; @case    $0E
+;;
 subItemCarried_StoneMossy:
     JSR.W fItemCarried_PhaseDispatch_NoSell                                      ;81812A|209A88  |81889A;
     RTS                                                        ;81812D|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the lumber (ids $0F and $57): unsellable item phases (carry, put down on a drop tile).
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_NoSell
+; @note    confidence: medium - item meaning from the object name (K5_objects.csv).
+; @case    $0F $57
+;;
 subItemCarried_Lumber:
     JSR.W fItemCarried_PhaseDispatch_NoSell                                      ;81812E|209A88  |81889A;
     RTS                                                        ;818131|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the corn: produce phases, and counts the pieces shipped in nStatShippedCorns.
+; @details After the phase dispatcher ran, strcFlags.daily3 bit $0001 (an item was just shipped) increments nStatShippedCorns.
+; @modifies nStatShippedCorns
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Produce
+; @region  EU/DE: the counter saturates at 999 ($03E7); US/JP: it is incremented without a limit.
+; @case    $10
+;;
 subItemCarried_Corn:
     JSR.W fItemCarried_PhaseDispatch_Produce                                      ;818132|20E588  |8188E5;
     REP #$30                                                   ;818135|C230    |      ;
@@ -219,6 +380,16 @@ subItemCarried_Corn:
   + RTS                                                        ;818149|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the tomato: produce phases, and counts the pieces shipped in nStatShippedTomatoes.
+; @details After the phase dispatcher ran, strcFlags.daily3 bit $0001 (an item was just shipped) increments nStatShippedTomatoes.
+; @modifies nStatShippedTomatoes
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Produce
+; @region  EU/DE: the counter saturates at 999 ($03E7); US/JP: it is incremented without a limit.
+; @case    $11
+;;
 subItemCarried_Tomato:
     JSR.W fItemCarried_PhaseDispatch_Produce                                      ;81814A|20E588  |8188E5;
     REP #$30                                                   ;81814D|C230    |      ;
@@ -239,6 +410,16 @@ subItemCarried_Tomato:
   + RTS                                                        ;818161|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the potato: produce phases, and counts the pieces shipped in nStatShippedPotatoes.
+; @details After the phase dispatcher ran, strcFlags.daily3 bit $0001 (an item was just shipped) increments nStatShippedPotatoes.
+; @modifies nStatShippedPotatoes
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Produce
+; @region  EU/DE: the counter saturates at 999 ($03E7); US/JP: it is incremented without a limit.
+; @case    $12
+;;
 subItemCarried_Potato:
     JSR.W fItemCarried_PhaseDispatch_Produce                                      ;818162|20E588  |8188E5;
     REP #$30                                                   ;818165|C230    |      ;
@@ -259,6 +440,16 @@ subItemCarried_Potato:
   + RTS                                                        ;818179|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the turnip: produce phases, and counts the pieces shipped in nStatShippedTurnips.
+; @details After the phase dispatcher ran, strcFlags.daily3 bit $0001 (an item was just shipped) increments nStatShippedTurnips.
+; @modifies nStatShippedTurnips
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Produce
+; @region  EU/DE: the counter saturates at 999 ($03E7); US/JP: it is incremented without a limit.
+; @case    $13
+;;
 subItemCarried_Turnip:
     JSR.W fItemCarried_PhaseDispatch_Produce                                      ;81817A|20E588  |8188E5; X = 26
     REP #$30                                                   ;81817D|C230    |      ;
@@ -279,41 +470,98 @@ subItemCarried_Turnip:
   + RTS                                                        ;818191|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the egg: sellable produce phases.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Produce
+; @case    $14
+;;
 subItemCarried_Egg:
     JSR.W fItemCarried_PhaseDispatch_Produce                                      ;818192|20E588  |8188E5;
     RTS                                                        ;818195|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the small milk: sellable produce phases.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Produce
+; @case    $15
+;;
 subItemCarried_SmallMilk:
     JSR.W fItemCarried_PhaseDispatch_Produce                                      ;818196|20E588  |8188E5;
     RTS                                                        ;818199|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the medium milk: sellable produce phases.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Produce
+; @case    $16
+;;
 subItemCarried_MediumMilk:
     JSR.W fItemCarried_PhaseDispatch_Produce                                      ;81819A|20E588  |8188E5;
     RTS                                                        ;81819D|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the large milk: sellable produce phases.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Produce
+; @case    $17
+;;
 subItemCarried_LargeMilk:
     JSR.W fItemCarried_PhaseDispatch_Produce                                      ;81819E|20E588  |8188E5;
     RTS                                                        ;8181A1|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the herb: sellable produce phases.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Produce
+; @case    $18
+;;
 subItemCarried_Herb:
     JSR.W fItemCarried_PhaseDispatch_Produce                                      ;8181A2|20E588  |8188E5;
     RTS                                                        ;8181A5|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the flower: sellable produce phases.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Produce
+; @case    $19
+;;
 subItemCarried_Flower:
     JSR.W fItemCarried_PhaseDispatch_Produce                                      ;8181A6|20E588  |8188E5;
     RTS                                                        ;8181A9|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the animal feed: carry it to a trough in the cow barn or coop.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Feed
+; @case    $1A
+;;
 subItemCarried_Feed:
     JSR.W fItemCarried_PhaseDispatch_Feed                                      ;8181AA|20BC88  |8188BC;
     RTS                                                        ;8181AD|60      |      ;
  
  
+;;
+; @brief   Shop shelf fragrance (aDialogsData_BuyItems row $13): after the purchase the item in hand becomes !EITEM_PERFUMEGREEN $58 and the phase restarts at 0.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Buyable
+; @case    $1B
+; @note    The carried ids $1B-$1D are the shelf copies, $58-$5A the bought perfumes (same sprites).
+;;
 subItemCarried_ShelfPerfumeGreen:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;8181AE|202389  |818923;
     SEP #$20                                                   ;8181B1|E220    |      ;
@@ -329,6 +577,14 @@ subItemCarried_ShelfPerfumeGreen:
   + RTS                                                        ;8181C7|60      |      ;
  
  
+;;
+; @brief   Shop shelf fragrance (aDialogsData_BuyItems row $14): after the purchase the item in hand becomes !EITEM_PERFUMERED $59 and the phase restarts at 0.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Buyable
+; @case    $1C
+; @note    The carried ids $1B-$1D are the shelf copies, $58-$5A the bought perfumes (same sprites).
+;;
 subItemCarried_ShelfPerfumeRed:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;8181C8|202389  |818923;
     SEP #$20                                                   ;8181CB|E220    |      ;
@@ -344,6 +600,14 @@ subItemCarried_ShelfPerfumeRed:
   + RTS                                                        ;8181E1|60      |      ;
  
  
+;;
+; @brief   Shop shelf fragrance (aDialogsData_BuyItems row $15): after the purchase the item in hand becomes !EITEM_PERFUMEBLUE $5A and the phase restarts at 0.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Buyable
+; @case    $1D
+; @note    The carried ids $1B-$1D are the shelf copies, $58-$5A the bought perfumes (same sprites).
+;;
 subItemCarried_ShelfPerfumeBlue:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;8181E2|202389  |818923;
     SEP #$20                                                   ;8181E5|E220    |      ;
@@ -359,6 +623,17 @@ subItemCarried_ShelfPerfumeBlue:
   + RTS                                                        ;8181FB|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the red egg: egg festival - the egg must be put down on basket colour 1.
+; @details Phase 0: if strcFlags.unknown1 bit $0020 is set the egg is discarded; the basket colour at map var $09AC must be 1
+;   (else fEggFestival_WrongEggDialog); the basket tile is updated to pattern $A1. Afterwards the produce phases run; when phase 3
+;   is reached fEggFestival_SetEggFlag0040 records the delivery.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fEggFestival_DiscardEgg, fEggFestival_WrongEggDialog, fEggFestival_SetEggFlag0040, fMap_UpdateCurrentTilemap, fItemCarried_PhaseDispatch_Produce
+; @case    $1E
+; @note    confidence: low - the basket colour variable ($09AC/$09AD/$09AF) is only seen here.
+;;
 subItemCarried_RedEgg:
     REP #$30                                                   ;8181FC|C230    |      ;
     %CheckFlag(unknown1, $0020)
@@ -394,6 +669,17 @@ subItemCarried_RedEgg:
   + RTS                                                        ;81823D|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the light purple egg: egg festival - the egg must be put down on basket colour 2.
+; @details Phase 0: if strcFlags.unknown1 bit $0020 is set the egg is discarded; the basket colour at map var $09AC must be 2
+;   (else fEggFestival_WrongEggDialog); the basket tile is updated to pattern $A1. Afterwards the produce phases run; when phase 3
+;   is reached fEggFestival_SetEggFlag0040 records the delivery.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fEggFestival_DiscardEgg, fEggFestival_WrongEggDialog, fEggFestival_SetEggFlag0040, fMap_UpdateCurrentTilemap, fItemCarried_PhaseDispatch_Produce
+; @case    $1F
+; @note    confidence: low - the basket colour variable ($09AC/$09AD/$09AF) is only seen here.
+;;
 subItemCarried_LightPurpleEgg:
     REP #$30                                                   ;81823E|C230    |      ;
     %CheckFlag(unknown1, $0020)
@@ -430,6 +716,17 @@ subItemCarried_LightPurpleEgg:
     RTS                                                        ;81827F|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the blue egg: egg festival - the egg must be put down on basket colour 3.
+; @details Phase 0: if strcFlags.unknown1 bit $0020 is set the egg is discarded; the basket colour at map var $09AC must be 3
+;   (else fEggFestival_WrongEggDialog); the basket tile is updated to pattern $A1. Afterwards the produce phases run; when phase 3
+;   is reached fEggFestival_SetEggFlag0040 records the delivery.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fEggFestival_DiscardEgg, fEggFestival_WrongEggDialog, fEggFestival_SetEggFlag0040, fMap_UpdateCurrentTilemap, fItemCarried_PhaseDispatch_Produce
+; @case    $20
+; @note    confidence: low - the basket colour variable ($09AC/$09AD/$09AF) is only seen here.
+;;
 subItemCarried_BlueEgg:
     REP #$30                                                   ;818280|C230    |      ;
     %CheckFlag(unknown1, $0020)
@@ -465,6 +762,17 @@ subItemCarried_BlueEgg:
   + RTS                                                        ;8182C1|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the purple egg: egg festival - the egg must be put down on basket colour 4.
+; @details Phase 0: if strcFlags.unknown1 bit $0020 is set the egg is discarded; the basket colour at map var $09AC must be 4
+;   (else fEggFestival_WrongEggDialog); the basket tile is updated to pattern $A1. Afterwards the produce phases run; when phase 3
+;   is reached fEggFestival_SetEggFlag0040 records the delivery.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fEggFestival_DiscardEgg, fEggFestival_WrongEggDialog, fEggFestival_SetEggFlag0040, fMap_UpdateCurrentTilemap, fItemCarried_PhaseDispatch_Produce
+; @case    $21
+; @note    confidence: low - the basket colour variable ($09AC/$09AD/$09AF) is only seen here.
+;;
 subItemCarried_PurpleEgg:
     REP #$30                                                   ;8182C2|C230    |      ;
     %CheckFlag(unknown1, $0020)
@@ -494,6 +802,17 @@ subItemCarried_PurpleEgg:
     RTS                                                        ;8182FD|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the green egg: egg festival - the egg must be put down on basket colour 5.
+; @details Phase 0: if strcFlags.unknown1 bit $0020 is set the egg is discarded; the basket colour at map var $09AC must be 5
+;   (else fEggFestival_WrongEggDialog); the basket tile is updated to pattern $A1. Afterwards the produce phases run; when phase 3
+;   is reached fEggFestival_SetEggFlag0040 records the delivery.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fEggFestival_DiscardEgg, fEggFestival_WrongEggDialog, fEggFestival_SetEggFlag0040, fMap_UpdateCurrentTilemap, fItemCarried_PhaseDispatch_Produce
+; @case    $22
+; @note    confidence: low - the basket colour variable ($09AC/$09AD/$09AF) is only seen here.
+;;
 subItemCarried_GreenEgg:
     REP #$30                                                   ;8182FE|C230    |      ;
     %CheckFlag(unknown1, $0020)
@@ -520,6 +839,18 @@ subItemCarried_GreenEgg:
     RTS                                                        ;818336|60      |      ;
  
  
+;;
+; @brief   Egg festival: the wrong kind of egg is thrown away - destroys the carried egg and ends the carry state.
+; @details Shared tail of the coloured egg handlers (subItemCarried_RedEgg ... GreenEgg), entered when strcFlags.unknown1 bit $0020
+;   is set (egg already delivered, (?)). Destroys the object, frees the slot, clears carryItemId and the player's action and
+;   holding flag. Falls through into fEggFestival_SetEggFlag0040.
+; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags, strcFlags.unknown1
+; @clobbers A X Y
+; @mode    M8X16 -> M16X16
+; @calls   fObject_Destroy, fObjectSlots_FreeCurrent
+; @callers subItemCarried_RedEgg, subItemCarried_LightPurpleEgg, subItemCarried_BlueEgg, subItemCarried_PurpleEgg, subItemCarried_GreenEgg
+; @note    confidence: low - the meaning of strcFlags.unknown1 bits $0020/$0040 is a guess from the egg festival context.
+;;
 fEggFestival_DiscardEgg:
     REP #$30                                                   ;818337|C230    |      ;
     LDA.W nGameObjectIdx                                       ;818339|AD7809  |000978;
@@ -531,12 +862,30 @@ fEggFestival_DiscardEgg:
     %SetPlayerAction(!PACTION_NONE)
     %UnsetPlayerFlag(!PFLAGS_HOLDINGITEM)
  
+;;
+; @brief   Egg festival: marks that an egg has been delivered (strcFlags.unknown1 bit $0040).
+; @details Entered when a coloured egg reaches phase 3 (put down) with the correct colour, and by fall-through from fEggFestival_DiscardEgg.
+; @modifies strcFlags.unknown1
+; @mode    ? -> M16X16
+; @callers subItemCarried_RedEgg, subItemCarried_LightPurpleEgg, subItemCarried_BlueEgg, subItemCarried_PurpleEgg, subItemCarried_GreenEgg
+; @note    confidence: low - flag meaning inferred.
+;;
 fEggFestival_SetEggFlag0040:
     REP #$30                                                   ;81835E|C230    |      ;
     %SetFlag(unknown1, $0040)
     RTS                                                        ;81836B|60      |      ;
  
  
+;;
+; @brief   Egg festival: a coloured egg was put down on the wrong basket - fixes the tile, removes the egg and shows dialog $038D.
+; @details The tile at the basket position (map vars $09AD/$09AF) is set to pattern $FC, the object is destroyed, the slot freed,
+;   the carry state cleared and dialog $038D is started.
+; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags, strcDialogDisplay.mapUnk19A, strcDialogDisplay.dialogUnk191
+; @clobbers A X Y
+; @mode    ? -> M8X16
+; @calls   fSetTileAtCoords, fObject_Destroy, fObjectSlots_FreeCurrent, fDialog_DialogHandler
+; @callers subItemCarried_RedEgg, subItemCarried_LightPurpleEgg, subItemCarried_BlueEgg, subItemCarried_PurpleEgg, subItemCarried_GreenEgg
+;;
 fEggFestival_WrongEggDialog:
     REP #$30                                                   ;81836C|C230    |      ;
     LDA.W #$00FC                                               ;81836E|A9FC00  |      ;
@@ -562,194 +911,456 @@ fEggFestival_WrongEggDialog:
     RTS                                                        ;8183B5|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the yellow egg ($23): empty (RTS) - unlike the other coloured eggs it has no festival logic.
+; @case    $23
+;;
 subItemCarried_YellowEgg:
     RTS                                                        ;8183B6|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the chicken (wind-measured, shipped as produce)(?): sellable produce phases.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Produce
+; @note    confidence: low - item meaning from the object name.
+; @case    $24
+;;
 subItemCarried_ChickenWindMeasured:
     JSR.W fItemCarried_PhaseDispatch_Produce                                      ;8183B7|20E588  |8188E5;
     RTS                                                        ;8183BA|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the chicken: animal phases (carry, put down as a walking animal).
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Animal
+; @case    $25
+;;
 subItemCarried_Chicken:
     JSR.W fItemCarried_PhaseDispatch_Animal                                      ;8183BB|203A88  |81883A;
     RTS                                                        ;8183BE|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the chick: animal phases (carry, put down as a walking animal).
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Animal
+; @case    $26
+;;
 subItemCarried_Chick:
     JSR.W fItemCarried_PhaseDispatch_Animal                                      ;8183BF|203A88  |81883A;
     RTS                                                        ;8183C2|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of id $27: empty (RTS), the dog is not carried through this table.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   -
+; @note    confidence: low - the frame list exists (Item_Dog) but the handler does nothing.
+; @case    $27
+;;
 subItemCarried_Dog:
     RTS                                                        ;8183C3|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of id $28 (probably a gem(?)): empty (RTS).
+; @note    confidence: low - K5_objects.csv calls the dropped object Item_Gem and says it shares icon and arcs with the blue diamond.
+; @case    $28
+;;
 subItemCarried_0x28:
     RTS                                                        ;8183C4|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the mole: animal phases (carry, put down as a walking animal).
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Animal
+; @case    $29
+;;
 subItemCarried_Mole:
     JSR.W fItemCarried_PhaseDispatch_Animal                                      ;8183C5|203A88  |81883A;
     RTS                                                        ;8183C8|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of a Sickle that was taken from the shed (!EITEM $01 + $29): puts the current tool away and equips it.
+; @details First fShed_PlaceEquippedTool redraws the previously equipped tool in the shed, then fItemCarriedTool_EquipFromShed makes this tool the equipped one.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fShed_PlaceEquippedTool, fItemCarriedTool_EquipFromShed
+; @case    $2A
+;;
 subItemCarried_Sickle:
     JSL.L fShed_PlaceEquippedTool                                      ;8183C9|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;8183CD|20C387  |8187C3;
     RTS                                                        ;8183D0|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of a Hoe that was taken from the shed (!EITEM $02 + $29): puts the current tool away and equips it.
+; @details First fShed_PlaceEquippedTool redraws the previously equipped tool in the shed, then fItemCarriedTool_EquipFromShed makes this tool the equipped one.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fShed_PlaceEquippedTool, fItemCarriedTool_EquipFromShed
+; @case    $2B
+;;
 subItemCarried_Hoe:
     JSL.L fShed_PlaceEquippedTool                                      ;8183D1|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;8183D5|20C387  |8187C3;
     RTS                                                        ;8183D8|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of a Hammer that was taken from the shed (!EITEM $03 + $29): puts the current tool away and equips it.
+; @details First fShed_PlaceEquippedTool redraws the previously equipped tool in the shed, then fItemCarriedTool_EquipFromShed makes this tool the equipped one.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fShed_PlaceEquippedTool, fItemCarriedTool_EquipFromShed
+; @case    $2C
+;;
 subItemCarried_Hammer:
     JSL.L fShed_PlaceEquippedTool                                      ;8183D9|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;8183DD|20C387  |8187C3;
     RTS                                                        ;8183E0|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of a Axe that was taken from the shed (!EITEM $04 + $29): puts the current tool away and equips it.
+; @details First fShed_PlaceEquippedTool redraws the previously equipped tool in the shed, then fItemCarriedTool_EquipFromShed makes this tool the equipped one.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fShed_PlaceEquippedTool, fItemCarriedTool_EquipFromShed
+; @case    $2D
+;;
 subItemCarried_Axe:
     JSL.L fShed_PlaceEquippedTool                                      ;8183E1|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;8183E5|20C387  |8187C3;
     RTS                                                        ;8183E8|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of a SeedBagCorn that was taken from the shed (!EITEM $05 + $29): puts the current tool away and equips it.
+; @details First fShed_PlaceEquippedTool redraws the previously equipped tool in the shed, then fItemCarriedTool_EquipFromShed makes this tool the equipped one.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fShed_PlaceEquippedTool, fItemCarriedTool_EquipFromShed
+; @case    $2E
+;;
 subItemCarried_SeedBagCorn:
     JSL.L fShed_PlaceEquippedTool                                      ;8183E9|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;8183ED|20C387  |8187C3;
     RTS                                                        ;8183F0|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of a SeedBagTomato that was taken from the shed (!EITEM $06 + $29): puts the current tool away and equips it.
+; @details First fShed_PlaceEquippedTool redraws the previously equipped tool in the shed, then fItemCarriedTool_EquipFromShed makes this tool the equipped one.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fShed_PlaceEquippedTool, fItemCarriedTool_EquipFromShed
+; @case    $2F
+;;
 subItemCarried_SeedBagTomato:
     JSL.L fShed_PlaceEquippedTool                                      ;8183F1|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;8183F5|20C387  |8187C3;
     RTS                                                        ;8183F8|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of a SeedBagPotato that was taken from the shed (!EITEM $07 + $29): puts the current tool away and equips it.
+; @details First fShed_PlaceEquippedTool redraws the previously equipped tool in the shed, then fItemCarriedTool_EquipFromShed makes this tool the equipped one.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fShed_PlaceEquippedTool, fItemCarriedTool_EquipFromShed
+; @case    $30
+;;
 subItemCarried_SeedBagPotato:
     JSL.L fShed_PlaceEquippedTool                                      ;8183F9|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;8183FD|20C387  |8187C3;
     RTS                                                        ;818400|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of a SeedBagTurnip that was taken from the shed (!EITEM $08 + $29): puts the current tool away and equips it.
+; @details First fShed_PlaceEquippedTool redraws the previously equipped tool in the shed, then fItemCarriedTool_EquipFromShed makes this tool the equipped one.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fShed_PlaceEquippedTool, fItemCarriedTool_EquipFromShed
+; @case    $31
+;;
 subItemCarried_SeedBagTurnip:
     JSL.L fShed_PlaceEquippedTool                                      ;818401|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;818405|20C387  |8187C3;
     RTS                                                        ;818408|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of a Medicide that was taken from the shed (!EITEM $09 + $29): puts the current tool away and equips it.
+; @details First fShed_PlaceEquippedTool redraws the previously equipped tool in the shed, then fItemCarriedTool_EquipFromShed makes this tool the equipped one.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fShed_PlaceEquippedTool, fItemCarriedTool_EquipFromShed
+; @case    $32
+;;
 subItemCarried_Medicide:
     JSL.L fShed_PlaceEquippedTool                                      ;818409|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;81840D|20C387  |8187C3;
     RTS                                                        ;818410|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of a MiraclePotion that was taken from the shed (!EITEM $0A + $29): puts the current tool away and equips it.
+; @details First fShed_PlaceEquippedTool redraws the previously equipped tool in the shed, then fItemCarriedTool_EquipFromShed makes this tool the equipped one.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fShed_PlaceEquippedTool, fItemCarriedTool_EquipFromShed
+; @case    $33
+;;
 subItemCarried_MiraclePotion:
     JSL.L fShed_PlaceEquippedTool                                      ;818411|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;818415|20C387  |8187C3;
     RTS                                                        ;818418|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of a Bell that was taken from the shed (!EITEM $0B + $29): puts the current tool away and equips it.
+; @details First fShed_PlaceEquippedTool redraws the previously equipped tool in the shed, then fItemCarriedTool_EquipFromShed makes this tool the equipped one.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fShed_PlaceEquippedTool, fItemCarriedTool_EquipFromShed
+; @case    $34
+;;
 subItemCarried_Bell:
     JSL.L fShed_PlaceEquippedTool                                      ;818419|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;81841D|20C387  |8187C3;
     RTS                                                        ;818420|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of a SeedBagGrass that was taken from the shed (!EITEM $0C + $29): puts the current tool away and equips it.
+; @details First fShed_PlaceEquippedTool redraws the previously equipped tool in the shed, then fItemCarriedTool_EquipFromShed makes this tool the equipped one.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fShed_PlaceEquippedTool, fItemCarriedTool_EquipFromShed
+; @case    $35
+;;
 subItemCarried_SeedBagGrass:
     JSL.L fShed_PlaceEquippedTool                                      ;818421|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;818425|20C387  |8187C3;
     RTS                                                        ;818428|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of a Paint that was taken from the shed (!EITEM $0D + $29): puts the current tool away and equips it.
+; @details First fShed_PlaceEquippedTool redraws the previously equipped tool in the shed, then fItemCarriedTool_EquipFromShed makes this tool the equipped one.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fShed_PlaceEquippedTool, fItemCarriedTool_EquipFromShed
+; @case    $36
+;;
 subItemCarried_Paint:
     JSL.L fShed_PlaceEquippedTool                                      ;818429|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;81842D|20C387  |8187C3;
     RTS                                                        ;818430|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of a Milker that was taken from the shed (!EITEM $0E + $29): puts the current tool away and equips it.
+; @details First fShed_PlaceEquippedTool redraws the previously equipped tool in the shed, then fItemCarriedTool_EquipFromShed makes this tool the equipped one.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fShed_PlaceEquippedTool, fItemCarriedTool_EquipFromShed
+; @case    $37
+;;
 subItemCarried_Milker:
     JSL.L fShed_PlaceEquippedTool                                      ;818431|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;818435|20C387  |8187C3;
     RTS                                                        ;818438|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of a Brush that was taken from the shed (!EITEM $0F + $29): puts the current tool away and equips it.
+; @details First fShed_PlaceEquippedTool redraws the previously equipped tool in the shed, then fItemCarriedTool_EquipFromShed makes this tool the equipped one.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fShed_PlaceEquippedTool, fItemCarriedTool_EquipFromShed
+; @case    $38
+;;
 subItemCarried_Brush:
     JSL.L fShed_PlaceEquippedTool                                      ;818439|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;81843D|20C387  |8187C3;
     RTS                                                        ;818440|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of a WateringCan that was taken from the shed (!EITEM $10 + $29): puts the current tool away and equips it.
+; @details First fShed_PlaceEquippedTool redraws the previously equipped tool in the shed, then fItemCarriedTool_EquipFromShed makes this tool the equipped one.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fShed_PlaceEquippedTool, fItemCarriedTool_EquipFromShed
+; @case    $39
+;;
 subItemCarried_WateringCan:
     JSL.L fShed_PlaceEquippedTool                                      ;818441|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;818445|20C387  |8187C3;
     RTS                                                        ;818448|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of a GoldSickle that was taken from the shed (!EITEM $11 + $29): puts the current tool away and equips it.
+; @details First fShed_PlaceEquippedTool redraws the previously equipped tool in the shed, then fItemCarriedTool_EquipFromShed makes this tool the equipped one.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fShed_PlaceEquippedTool, fItemCarriedTool_EquipFromShed
+; @case    $3A
+;;
 subItemCarried_GoldSickle:
     JSL.L fShed_PlaceEquippedTool                                      ;818449|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;81844D|20C387  |8187C3;
     RTS                                                        ;818450|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of a GoldHoe that was taken from the shed (!EITEM $12 + $29): puts the current tool away and equips it.
+; @details First fShed_PlaceEquippedTool redraws the previously equipped tool in the shed, then fItemCarriedTool_EquipFromShed makes this tool the equipped one.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fShed_PlaceEquippedTool, fItemCarriedTool_EquipFromShed
+; @case    $3B
+;;
 subItemCarried_GoldHoe:
     JSL.L fShed_PlaceEquippedTool                                      ;818451|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;818455|20C387  |8187C3;
     RTS                                                        ;818458|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of a GoldHammer that was taken from the shed (!EITEM $13 + $29): puts the current tool away and equips it.
+; @details First fShed_PlaceEquippedTool redraws the previously equipped tool in the shed, then fItemCarriedTool_EquipFromShed makes this tool the equipped one.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fShed_PlaceEquippedTool, fItemCarriedTool_EquipFromShed
+; @case    $3C
+;;
 subItemCarried_GoldHammer:
     JSL.L fShed_PlaceEquippedTool                                      ;818459|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;81845D|20C387  |8187C3;
     RTS                                                        ;818460|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of a GoldAxe that was taken from the shed (!EITEM $14 + $29): puts the current tool away and equips it.
+; @details First fShed_PlaceEquippedTool redraws the previously equipped tool in the shed, then fItemCarriedTool_EquipFromShed makes this tool the equipped one.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fShed_PlaceEquippedTool, fItemCarriedTool_EquipFromShed
+; @case    $3D
+;;
 subItemCarried_GoldAxe:
     JSL.L fShed_PlaceEquippedTool                                      ;818461|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;818465|20C387  |8187C3;
     RTS                                                        ;818468|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of a Sprinkler that was taken from the shed (!EITEM $15 + $29): puts the current tool away and equips it.
+; @details First fShed_PlaceEquippedTool redraws the previously equipped tool in the shed, then fItemCarriedTool_EquipFromShed makes this tool the equipped one.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fShed_PlaceEquippedTool, fItemCarriedTool_EquipFromShed
+; @case    $3E
+;;
 subItemCarried_Sprinkler:
     JSL.L fShed_PlaceEquippedTool                                      ;818469|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;81846D|20C387  |8187C3;
     RTS                                                        ;818470|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of a BeanstalkSeed that was taken from the shed (!EITEM $16 + $29): puts the current tool away and equips it.
+; @details First fShed_PlaceEquippedTool redraws the previously equipped tool in the shed, then fItemCarriedTool_EquipFromShed makes this tool the equipped one.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fShed_PlaceEquippedTool, fItemCarriedTool_EquipFromShed
+; @case    $3F
+;;
 subItemCarried_BeanstalkSeed:
     JSL.L fShed_PlaceEquippedTool                                      ;818471|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;818475|20C387  |8187C3;
     RTS                                                        ;818478|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of a BlueDiamond that was taken from the shed (!EITEM $17 + $29): puts the current tool away and equips it.
+; @details First fShed_PlaceEquippedTool redraws the previously equipped tool in the shed, then fItemCarriedTool_EquipFromShed makes this tool the equipped one.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fShed_PlaceEquippedTool, fItemCarriedTool_EquipFromShed
+; @case    $40
+;;
 subItemCarried_BlueDiamond:
     JSL.L fShed_PlaceEquippedTool                                      ;818479|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;81847D|20C387  |8187C3;
     RTS                                                        ;818480|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of a BlueFeather that was taken from the shed (!EITEM $18 + $29): puts the current tool away and equips it.
+; @details First fShed_PlaceEquippedTool redraws the previously equipped tool in the shed, then fItemCarriedTool_EquipFromShed makes this tool the equipped one.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fShed_PlaceEquippedTool, fItemCarriedTool_EquipFromShed
+; @case    $41
+;;
 subItemCarried_BlueFeather:
     JSL.L fShed_PlaceEquippedTool                                      ;818481|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;818485|20C387  |8187C3;
     RTS                                                        ;818488|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of a ChickenFeed that was taken from the shed (!EITEM $19 + $29): puts the current tool away and equips it.
+; @details First fShed_PlaceEquippedTool redraws the previously equipped tool in the shed, then fItemCarriedTool_EquipFromShed makes this tool the equipped one.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fShed_PlaceEquippedTool, fItemCarriedTool_EquipFromShed
+; @case    $42
+;;
 subItemCarried_ChickenFeed:
     JSL.L fShed_PlaceEquippedTool                                      ;818489|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;81848D|20C387  |8187C3;
     RTS                                                        ;818490|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of a CowFeed that was taken from the shed (!EITEM $1A + $29): puts the current tool away and equips it.
+; @details First fShed_PlaceEquippedTool redraws the previously equipped tool in the shed, then fItemCarriedTool_EquipFromShed makes this tool the equipped one.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fShed_PlaceEquippedTool, fItemCarriedTool_EquipFromShed
+; @case    $43
+;;
 subItemCarried_CowFeed:
     JSL.L fShed_PlaceEquippedTool                                      ;818491|224AA981|81A94A;
     JSR.W fItemCarriedTool_EquipFromShed                                      ;818495|20C387  |8187C3;
     RTS                                                        ;818498|60      |      ;
  
  
+;;
+; @brief   Shop shelf item GrassSeeds (aDialogsData_BuyItems row $00): after a completed purchase sets the grass seed bit (row 2, $08) in strcShedItems, unequips grass seeds ($0C) from both tool slots and increments strcPlayerData.leftGrassSeeds (max $FF).
+; @details Runs the shop phases (fItemCarried_PhaseDispatch_Buyable); the effect is applied on the frame where the phase byte $0976 is $FF.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Buyable
+; @case    $44
+;;
 subItemCarried_ShelfGrassSeeds:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;818499|202389  |818923;
     SEP #$20                                                   ;81849C|E220    |      ;
@@ -781,6 +1392,14 @@ subItemCarried_ShelfGrassSeeds:
  ++ RTS                                                        ;8184D4|60      |      ;
  
  
+;;
+; @brief   Shop shelf item CornSeeds (aDialogsData_BuyItems row $01): after a completed purchase sets the corn seed bit (row 1, $10) in strcShedItems, unequips corn seeds ($05) and increments strcPlayerData.leftCornSeeds (max $FF).
+; @details Runs the shop phases (fItemCarried_PhaseDispatch_Buyable); the effect is applied on the frame where the phase byte $0976 is $FF.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Buyable
+; @case    $45
+;;
 subItemCarried_ShelfCornSeeds:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;8184D5|202389  |818923;
     SEP #$20                                                   ;8184D8|E220    |      ;
@@ -812,6 +1431,14 @@ subItemCarried_ShelfCornSeeds:
  ++ RTS                                                        ;818510|60      |      ;
  
  
+;;
+; @brief   Shop shelf item TomatoSeeds (aDialogsData_BuyItems row $02): after a completed purchase sets the tomato seed bit (row 1, $20) in strcShedItems, unequips tomato seeds ($06) and increments strcPlayerData.leftTomatoSeeds (max $FF).
+; @details Runs the shop phases (fItemCarried_PhaseDispatch_Buyable); the effect is applied on the frame where the phase byte $0976 is $FF.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Buyable
+; @case    $46
+;;
 subItemCarried_ShelfTomatoSeeds:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;818511|202389  |818923;
     SEP #$20                                                   ;818514|E220    |      ;
@@ -860,6 +1487,14 @@ subItemCarried_ShelfTomatoSeeds:
  ++ RTS                                                        ;81854C|60      |      ;
  
  
+;;
+; @brief   Shop shelf item PotatoSeeds (aDialogsData_BuyItems row $03): after a completed purchase sets the potato seed bit (row 1, $40) in strcShedItems, unequips potato seeds ($07) and increments strcPlayerData.leftPotatoSeeds (max $FF).
+; @details Runs the shop phases (fItemCarried_PhaseDispatch_Buyable); the effect is applied on the frame where the phase byte $0976 is $FF.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Buyable
+; @case    $47
+;;
 subItemCarried_ShelfPotatoSeeds:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;81854D|202389  |818923;
     SEP #$20                                                   ;818550|E220    |      ;
@@ -891,6 +1526,14 @@ subItemCarried_ShelfPotatoSeeds:
  ++ RTS                                                        ;818588|60      |      ;
  
  
+;;
+; @brief   Shop shelf item TurnipSeeds (aDialogsData_BuyItems row $04): after a completed purchase sets the turnip seed bit (row 1, $80) in strcShedItems, unequips turnip seeds ($08) and increments strcPlayerData.leftTurnipSeeds (max $FF).
+; @details Runs the shop phases (fItemCarried_PhaseDispatch_Buyable); the effect is applied on the frame where the phase byte $0976 is $FF.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Buyable
+; @case    $48
+;;
 subItemCarried_ShelfTurnipSeeds:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;818589|202389  |818923;
     SEP #$20                                                   ;81858C|E220    |      ;
@@ -922,6 +1565,14 @@ subItemCarried_ShelfTurnipSeeds:
  ++ RTS                                                        ;8185C4|60      |      ;
  
  
+;;
+; @brief   Shop shelf item Flower (aDialogsData_BuyItems row $05): after a completed purchase turns the carried item into the flower: carried id $19 (written as !EITEM_CHICKENFEED, the same value) and phase 0, so the player keeps a flower.
+; @details Runs the shop phases (fItemCarried_PhaseDispatch_Buyable); the effect is applied on the frame where the phase byte $0976 is $FF.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Buyable
+; @case    $49
+;;
 subItemCarried_ShelfFlower:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;8185C5|202389  |818923;
     SEP #$20                                                   ;8185C8|E220    |      ;
@@ -937,6 +1588,14 @@ subItemCarried_ShelfFlower:
   + RTS                                                        ;8185DE|60      |      ;
  
  
+;;
+; @brief   Shop shelf item Paint (aDialogsData_BuyItems row $06): after a completed purchase sets the paint bit (row 2, $10) in strcShedItems.
+; @details Runs the shop phases (fItemCarried_PhaseDispatch_Buyable); the effect is applied on the frame where the phase byte $0976 is $FF.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Buyable
+; @case    $4A
+;;
 subItemCarried_ShelfPaint:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;8185DF|202389  |818923;
     SEP #$20                                                   ;8185E2|E220    |      ;
@@ -950,6 +1609,14 @@ subItemCarried_ShelfPaint:
   + RTS                                                        ;8185F5|60      |      ;
  
  
+;;
+; @brief   Shop shelf item Milker (aDialogsData_BuyItems row $07): after a completed purchase sets the milker bit (row 2, $20) in strcShedItems.
+; @details Runs the shop phases (fItemCarried_PhaseDispatch_Buyable); the effect is applied on the frame where the phase byte $0976 is $FF.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Buyable
+; @case    $4B
+;;
 subItemCarried_ShelfMilker:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;8185F6|202389  |818923;
     SEP #$20                                                   ;8185F9|E220    |      ;
@@ -963,6 +1630,14 @@ subItemCarried_ShelfMilker:
   + RTS                                                        ;81860C|60      |      ;
  
  
+;;
+; @brief   Shop shelf item Brush (aDialogsData_BuyItems row $08): after a completed purchase sets the brush bit (row 2, $40) in strcShedItems.
+; @details Runs the shop phases (fItemCarried_PhaseDispatch_Buyable); the effect is applied on the frame where the phase byte $0976 is $FF.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Buyable
+; @case    $4C
+;;
 subItemCarried_ShelfBrush:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;81860D|202389  |818923;
     SEP #$20                                                   ;818610|E220    |      ;
@@ -976,6 +1651,14 @@ subItemCarried_ShelfBrush:
   + RTS                                                        ;818623|60      |      ;
  
  
+;;
+; @brief   Shop shelf item SuperSickle (aDialogsData_BuyItems row $09): after a completed purchase upgrade: sets the gold sickle bit (row 3, $01), clears the sickle bit (row 1, $01) and unequips the sickle ($01).
+; @details Runs the shop phases (fItemCarried_PhaseDispatch_Buyable); the effect is applied on the frame where the phase byte $0976 is $FF.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Buyable
+; @case    $4D
+;;
 subItemCarried_ShelfSuperSickle:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;818624|202389  |818923;
     SEP #$20                                                   ;818627|E220    |      ;
@@ -1002,6 +1685,14 @@ subItemCarried_ShelfSuperSickle:
  ++ RTS                                                        ;81865A|60      |      ;
  
  
+;;
+; @brief   Shop shelf item SuperHoe (aDialogsData_BuyItems row $0A): after a completed purchase upgrade: sets the gold hoe bit (row 3, $02), clears the hoe bit (row 1, $02) and unequips the hoe ($02).
+; @details Runs the shop phases (fItemCarried_PhaseDispatch_Buyable); the effect is applied on the frame where the phase byte $0976 is $FF.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Buyable
+; @case    $4E
+;;
 subItemCarried_ShelfSuperHoe:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;81865B|202389  |818923;
     SEP #$20                                                   ;81865E|E220    |      ;
@@ -1028,6 +1719,14 @@ subItemCarried_ShelfSuperHoe:
  ++ RTS                                                        ;818691|60      |      ;
  
  
+;;
+; @brief   Shop shelf item SuperHammer (aDialogsData_BuyItems row $0B): after a completed purchase upgrade: sets the gold hammer bit (row 3, $04), clears the hammer bit (row 1, $04) and unequips the hammer ($03).
+; @details Runs the shop phases (fItemCarried_PhaseDispatch_Buyable); the effect is applied on the frame where the phase byte $0976 is $FF.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Buyable
+; @case    $4F
+;;
 subItemCarried_ShelfSuperHammer:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;818692|202389  |818923;
     SEP #$20                                                   ;818695|E220    |      ;
@@ -1054,6 +1753,14 @@ subItemCarried_ShelfSuperHammer:
  ++ RTS                                                        ;8186C8|60      |      ;
  
  
+;;
+; @brief   Shop shelf item SuperAxe (aDialogsData_BuyItems row $0C): after a completed purchase upgrade: sets the gold axe bit (row 3, $08), clears the axe bit (row 1, $08) and unequips the axe ($04).
+; @details Runs the shop phases (fItemCarried_PhaseDispatch_Buyable); the effect is applied on the frame where the phase byte $0976 is $FF.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Buyable
+; @case    $50
+;;
 subItemCarried_ShelfSuperAxe:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;8186C9|202389  |818923;
     SEP #$20                                                   ;8186CC|E220    |      ;
@@ -1080,6 +1787,14 @@ subItemCarried_ShelfSuperAxe:
  ++ RTS                                                        ;8186FF|60      |      ;
  
  
+;;
+; @brief   Shop shelf item Sprinkler (aDialogsData_BuyItems row $0D): after a completed purchase sets the sprinkler bit (row 3, $10), clears the watering can bit (row 2, $80) and unequips the watering can ($10).
+; @details Runs the shop phases (fItemCarried_PhaseDispatch_Buyable); the effect is applied on the frame where the phase byte $0976 is $FF.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Buyable
+; @case    $51
+;;
 subItemCarried_ShelfSprinkler:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;818700|202389  |818923;
     SEP #$20                                                   ;818703|E220    |      ;
@@ -1106,6 +1821,14 @@ subItemCarried_ShelfSprinkler:
  ++ RTS                                                        ;818736|60      |      ;
  
  
+;;
+; @brief   Shop shelf item CowMedicine (aDialogsData_BuyItems row $0E): after a completed purchase sets the medicine bit (row 2, $01) in strcShedItems.
+; @details Runs the shop phases (fItemCarried_PhaseDispatch_Buyable); the effect is applied on the frame where the phase byte $0976 is $FF.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Buyable
+; @case    $52
+;;
 subItemCarried_ShelfCowMedicine:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;818737|202389  |818923;
     SEP #$20                                                   ;81873A|E220    |      ;
@@ -1119,6 +1842,14 @@ subItemCarried_ShelfCowMedicine:
   + RTS                                                        ;81874D|60      |      ;
  
  
+;;
+; @brief   Shop shelf item MiraclePotion (aDialogsData_BuyItems row $0F): after a completed purchase sets the miracle potion bit (row 2, $02) in strcShedItems.
+; @details Runs the shop phases (fItemCarried_PhaseDispatch_Buyable); the effect is applied on the frame where the phase byte $0976 is $FF.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Buyable
+; @case    $53
+;;
 subItemCarried_ShelfMiraclePotion:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;81874E|202389  |818923;
     SEP #$20                                                   ;818751|E220    |      ;
@@ -1132,6 +1863,14 @@ subItemCarried_ShelfMiraclePotion:
   + RTS                                                        ;818764|60      |      ;
  
  
+;;
+; @brief   Shop shelf item ChickenFeed (aDialogsData_BuyItems row $10): after a completed purchase sets the chicken feed bit (row 4, $01) and sets strcPlayerData.leftChickenFood to 12.
+; @details Runs the shop phases (fItemCarried_PhaseDispatch_Buyable); the effect is applied on the frame where the phase byte $0976 is $FF.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Buyable
+; @case    $54
+;;
 subItemCarried_ShelfChickenFeed:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;818765|202389  |818923;
     SEP #$20                                                   ;818768|E220    |      ;
@@ -1147,6 +1886,14 @@ subItemCarried_ShelfChickenFeed:
   + RTS                                                        ;818780|60      |      ;
  
  
+;;
+; @brief   Shop shelf item CowFeed (aDialogsData_BuyItems row $11): after a completed purchase sets the cow feed bit (row 4, $02) and sets strcPlayerData.leftCowFood to 12.
+; @details Runs the shop phases (fItemCarried_PhaseDispatch_Buyable); the effect is applied on the frame where the phase byte $0976 is $FF.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Buyable
+; @case    $55
+;;
 subItemCarried_ShelfCowFeed:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;818781|202389  |818923;
     SEP #$20                                                   ;818784|E220    |      ;
@@ -1162,6 +1909,14 @@ subItemCarried_ShelfCowFeed:
   + RTS                                                        ;81879C|60      |      ;
  
  
+;;
+; @brief   Shop shelf item Cake (aDialogsData_BuyItems row $12): after a completed purchase turns the carried item into a cake: carried id $06 (written as !EITEM_TOMATOSEED, the same value) and phase 0.
+; @details Runs the shop phases (fItemCarried_PhaseDispatch_Buyable); the effect is applied on the frame where the phase byte $0976 is $FF.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Buyable
+; @case    $56
+;;
 subItemCarried_ShelfCake:
     JSR.W fItemCarried_PhaseDispatch_Buyable                                      ;81879D|202389  |818923;
     SEP #$20                                                   ;8187A0|E220    |      ;
@@ -1177,21 +1932,55 @@ subItemCarried_ShelfCake:
   + RTS                                                        ;8187B6|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the bought green perfume ($58-$5A = !EITEM_PERFUME*): sellable produce phases.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Produce
+; @case    $58
+;;
 subItemCarried_PerfumeGreen:
     JSR.W fItemCarried_PhaseDispatch_Produce                                      ;8187B7|20E588  |8188E5;
     RTS                                                        ;8187BA|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the bought red perfume ($58-$5A = !EITEM_PERFUME*): sellable produce phases.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Produce
+; @case    $59
+;;
 subItemCarried_PerfumeRed:
     JSR.W fItemCarried_PhaseDispatch_Produce                                      ;8187BB|20E588  |8188E5;
     RTS                                                        ;8187BE|60      |      ;
  
  
+;;
+; @brief   Carried-item handler of the bought blue perfume ($58-$5A = !EITEM_PERFUME*): sellable produce phases.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_PhaseDispatch_Produce
+; @case    $5A
+;;
 subItemCarried_PerfumeBlue:
     JSR.W fItemCarried_PhaseDispatch_Produce                                      ;8187BF|20E588  |8188E5;
     RTS                                                        ;8187C2|60      |      ;
  
  
+;;
+; @brief   Takes a tool or seed bag from the shed onto the player's hands: it becomes the equipped tool.
+; @details Shared body of the carried-id $2A-$43 handlers (subItemCarried_Sickle ... CowFeed). The previously equipped tool is moved
+;   to strcPlayerData.toolSecond when that slot is free, the new tool id (carried id - $29 = !EITEM_*) becomes toolEquipped, the
+;   tool's shed bit (nShedToolPlacementTable, byte 6 = row, byte 7 = mask) is cleared in strcShedItems, the carried object is
+;   destroyed and the tool change sound plays.
+; @param   nCarriedItemId   $2A-$43
+; @modifies strcPlayerData.toolSecond, strcPlayerData.toolEquipped, strcShedItems, strcPlayer.action, strcPlayer.flags, strcPlayerData.carryItemId
+; @clobbers A X Y
+; @mode    ? -> M8X16
+; @calls   fObject_Destroy, fObjectSlots_FreeCurrent, fToolUsedSound_PlayOnToolChange
+; @callers subItemCarried_Sickle, subItemCarried_CowFeed
+;;
 fItemCarriedTool_EquipFromShed:
     SEP #$20                                                   ;8187C3|E220    |      ;
     REP #$10                                                   ;8187C5|C210    |      ;
@@ -1244,6 +2033,15 @@ fItemCarriedTool_EquipFromShed:
     RTS                                                        ;818839|60      |      ;
  
  
+;;
+; @brief   Phase state machine of the carried animals (chicken, chick, mole): 0 start, 2 carry, 3 put down.
+; @param   $0976   phase of the current slot
+; @modifies $0976
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_StartHolding, fItemCarriedAnimal_CarryLoop, fItemCarriedAnimal_PutDown
+; @callers subItemCarried_Chicken, subItemCarried_Chick, subItemCarried_Mole
+;;
 fItemCarried_PhaseDispatch_Animal:
     SEP #$20                                                   ;81883A|E220    |      ;
     REP #$10                                                   ;81883C|C210    |      ;
@@ -1265,6 +2063,16 @@ fItemCarried_PhaseDispatch_Animal:
   + RTS                                                        ;818854|60      |      ;
  
  
+;;
+; @brief   Phase state machine of the foraged items (mushrooms, berries, fish, cake): found dialog, eat or keep, carry, sell.
+; @details Phases: 0 show the "found" dialog, 1 answer (eat = consume, keep = carry), 2 carry loop, 3 put down, 4 free the slot,
+;   5 Sunday market price dialog, 6 market answer, 7 wait for the tile script of the bin to end, 8 destroy and release.
+; @param   $0976   phase of the current slot
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemFound_ShowFoundDialog, fItemFound_Consume, fItemCarried_CarryLoop, fItemCarried_PutDown, fItemCarried_PhaseClearSlot, fItemSell_ShowPriceDialog, fItemSell_HandleAnswer, fItemCarried_PhaseWaitScriptEnd, fItemCarried_DestroyAndRelease
+; @callers subItemCarried_Mushroom, subItemCarried_PoisonMushroom, subItemCarried_WildGrape, subItemCarried_BerryStrongSmell, subItemCarried_MoonFlower, subItemCarried_Cake, subItemCarried_Fish, subItemCarried_PowerBerry
+;;
 fItemCarried_PhaseDispatch_Forage:
     SEP #$20                                                   ;818855|E220    |      ;
     REP #$10                                                   ;818857|C210    |      ;
@@ -1316,6 +2124,14 @@ fItemCarried_PhaseDispatch_Forage:
   + RTS                                                        ;818899|60      |      ;
  
  
+;;
+; @brief   Phase state machine of the unsellable carried items (rocks and lumber): 0 start, 2 carry, 3 put down, 4 free the slot.
+; @param   $0976   phase of the current slot
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_StartHolding, fItemCarried_CarryLoop_NoSell, fItemCarried_PutDown_NoSell, fItemCarried_ClearObjectSlot
+; @callers subItemCarried_StoneGrey, subItemCarried_StoneMossy, subItemCarried_Lumber
+;;
 fItemCarried_PhaseDispatch_NoSell:
     SEP #$20                                                   ;81889A|E220    |      ;
     REP #$10                                                   ;81889C|C210    |      ;
@@ -1342,6 +2158,14 @@ fItemCarried_PhaseDispatch_NoSell:
   + RTS                                                        ;8188BB|60      |      ;
  
  
+;;
+; @brief   Phase state machine of the carried animal feed: 0 start, 2 carry, 3 put down into a trough, 4 free the slot, 8 destroy.
+; @param   $0976   phase of the current slot
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_StartHolding, fItemCarried_CarryLoop, fItemCarriedFeed_PutDown, fItemCarried_PhaseClearSlot, fItemCarried_DestroyAndRelease
+; @callers subItemCarried_Feed
+;;
 fItemCarried_PhaseDispatch_Feed:
     SEP #$20                                                   ;8188BC|E220    |      ;
     REP #$10                                                   ;8188BE|C210    |      ;
@@ -1373,6 +2197,16 @@ fItemCarried_PhaseDispatch_Feed:
   + RTS                                                        ;8188E4|60      |      ;
  
  
+;;
+; @brief   Phase state machine of sellable produce (crops, eggs, milk, herbs, flowers, perfume): carry, put down, ship or sell.
+; @details Phases: 0 start holding, 2 carry loop, 3 put down (ships the item when a bin is in front), 4 free the slot,
+;   5 Sunday market price dialog, 6 market answer, 7 wait for the tile script of the bin to end, 8 destroy and release.
+; @param   $0976   phase of the current slot
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_StartHolding, fItemCarried_CarryLoop, fItemCarried_PutDown, fItemCarried_PhaseClearSlot, fItemSell_ShowPriceDialog, fItemSell_HandleAnswer, fItemCarried_PhaseWaitScriptEnd, fItemCarried_DestroyAndRelease
+; @callers subItemCarried_GrassBig, subItemCarried_Corn, subItemCarried_Egg
+;;
 fItemCarried_PhaseDispatch_Produce:
     SEP #$20                                                   ;8188E5|E220    |      ;
     REP #$10                                                   ;8188E7|C210    |      ;
@@ -1419,6 +2253,19 @@ fItemCarried_PhaseDispatch_Produce:
   + RTS                                                        ;818922|60      |      ;
  
  
+;;
+; @brief   Phase state machine of an item that stands on a shop shelf: purchase dialog, payment, hand over.
+; @details Phases: 0 purchase dialog, 1 evaluate the answer, 2 wait until the (yes/no) reply dialog is closed, 3 finish the purchase.
+;   When the purchase is complete the phase becomes $FF, which the per-item wrapper handlers (subItemCarried_Shelf*) use to apply
+;   the effect of the purchase (shed flag, seed count, tool upgrade...).
+; @param   $0976   phase of the current slot
+; @modifies $0976
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemBuy_ShowPurchaseDialog, fItemBuy_HandleAnswer, fItemBuy_WaitDialogClose, fItemBuy_FinishPurchase
+; @callers subItemCarried_ShelfGrassSeeds, subItemCarried_ShelfCake, subItemCarried_ShelfPerfumeGreen
+; @see     aDialogsData_BuyItems
+;;
 fItemCarried_PhaseDispatch_Buyable:
     SEP #$20                                                   ;818923|E220    |      ;
     REP #$10                                                   ;818925|C210    |      ;
@@ -1439,6 +2286,18 @@ fItemCarried_PhaseDispatch_Buyable:
   + RTS                                                        ;81893E|60      |      ;
  
  
+;;
+; @brief   Shop phase 0: shows the description/price dialog of the shelf item (yes/no question).
+; @details The row of aDialogsData_BuyItems is index = carried id - $44 for the shelf ids $44-$56, or carried id - $1B + $13 for the
+;   fragrance ids $1B-$1D (rows $13-$15). The first word of the 12-byte row is the description dialog id. Sets strcDialogDisplay.mapUnk19A to 2
+;   (dialog running) and the phase to 1.
+; @param   nCarriedItemId   shelf item id
+; @modifies $0976, strcDialogDisplay.mapUnk19A, strcDialogDisplay.dialogUnk191
+; @clobbers A X Y
+; @mode    M8 -> M8X16
+; @calls   fDialog_DialogHandler
+; @see     aDialogsData_BuyItems
+;;
 fItemBuy_ShowPurchaseDialog:
     SEP #$20                                                   ;81893F|E220    |      ;
     LDA.B #$02                                                 ;818941|A902    |      ;
@@ -1484,6 +2343,19 @@ fItemBuy_ShowPurchaseDialog:
     JMP.W fItemBuy_Return                                       ;818986|4C6A8B  |818B6A;
  
  
+;;
+; @brief   Shop phase 1: after the dialog, evaluates the yes/no answer and tries to pay.
+; @details Waits while mapUnk19A == 2. A "no" (dialogOptionsAnswer != 0) goes to fItemBuy_ShowDeclineDialog. On "yes" the cost
+;   (24-bit, negative = money spent, offset 9 of the row) is passed to fGameEngine_AddProfit; when it fails (not enough money, Z set)
+;   the "too poor" dialog (row offset 6) is shown and the phase becomes 2 (wait for the dialog), otherwise the "yes" dialog (offset 2)
+;   is shown and the phase becomes 3 (finish).
+; @param   strcDialogDisplay.dialogOptionsAnswer   0 = yes
+; @modifies $0976, strcDialogDisplay.mapUnk19A, strcDialogDisplay.dialogUnk191, nMoney
+; @clobbers A X Y
+; @mode    M8 -> M8X16
+; @calls   fGameEngine_AddProfit, fDialog_DialogHandler, fItemBuy_ShowDeclineDialog, fItemBuy_SetPhaseWaitDialog
+; @note    The Z flag of fGameEngine_AddProfit is read as "payment failed"; confidence: medium - from the branch to the offset-4 dialog.
+;;
 fItemBuy_HandleAnswer:
     SEP #$20                                                   ;818989|E220    |      ;
     LDA.W strcDialogDisplay.mapUnk19A                          ;81898B|AD9A01  |00019A;
@@ -1600,6 +2472,12 @@ fItemBuy_HandleAnswer:
     JMP.W fItemBuy_Return                                       ;818A41|4C6A8B  |818B6A;
  
  
+;;
+; @brief   Shop helper: sets phase 2 (wait until the reply dialog closes) after the "too poor" dialog was started.
+; @modifies $0976
+; @mode    M8
+; @callers fItemBuy_HandleAnswer
+;;
 fItemBuy_SetPhaseWaitDialog:
     SEP #$20                                                   ;818A44|E220    |      ;
     LDA.B #$02                                                 ;818A46|A902    |      ;
@@ -1607,6 +2485,13 @@ fItemBuy_SetPhaseWaitDialog:
     JMP.W fItemBuy_Return                                       ;818A4B|4C6A8B  |818B6A;
  
  
+;;
+; @brief   Shop: the player answered "no" - shows the decline dialog (row offset 4) and returns the item to the shelf.
+; @modifies strcDialogDisplay.mapUnk19A, strcDialogDisplay.dialogUnk191
+; @clobbers A X Y
+; @mode    M8 -> ?
+; @calls   fDialog_DialogHandler, fItemBuy_ReturnItemToShelf
+;;
 fItemBuy_ShowDeclineDialog:
     SEP #$20                                                   ;818A4E|E220    |      ;
     LDA.B #$02                                                 ;818A50|A902    |      ;
@@ -1651,6 +2536,12 @@ fItemBuy_ShowDeclineDialog:
     BRA fItemBuy_ReturnItemToShelf                                 ;818A92|800C    |818AA0;
  
  
+;;
+; @brief   Shop phase 2: waits until the reply dialog is closed, then returns the item to the shelf.
+; @param   strcDialogDisplay.mapUnk19A   2 while the dialog is still running
+; @mode    M8 -> ?
+; @calls   fItemBuy_ReturnItemToShelf
+;;
 fItemBuy_WaitDialogClose:
     SEP #$20                                                   ;818A94|E220    |      ;
     LDA.W strcDialogDisplay.mapUnk19A                          ;818A96|AD9A01  |00019A;
@@ -1659,6 +2550,16 @@ fItemBuy_WaitDialogClose:
     JMP.W fItemBuy_Return                                       ;818A9D|4C6A8B  |818B6A;
  
  
+;;
+; @brief   Shop: puts the unbought item back - destroys the carried copy and re-draws the shelf tile in front of the player.
+; @details Destroys the object, frees the slot, clears carryItemId, the player action and the holding flag, then writes the shelf tile
+;   pattern (row offset 8 of aDialogsData_BuyItems) at the tile two steps in front of the player.
+; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags, nTileInFrontOfPlayerX, nTileInFrontOfPlayerY
+; @clobbers A X Y
+; @mode    ? -> M8
+; @calls   fObject_Destroy, fObjectSlots_FreeCurrent, fStoreTileOnFrontOfPlayerAtDistance, fSetTileAtCoords
+; @see     aDialogsData_BuyItems
+;;
 fItemBuy_ReturnItemToShelf:
     REP #$20                                                   ;818AA0|C220    |      ;
     LDA.W nGameObjectIdx                                       ;818AA2|AD7809  |000978;
@@ -1716,6 +2617,15 @@ fItemBuy_ReturnItemToShelf:
     BRA fItemBuy_Return                                         ;818B17|8051    |818B6A;
  
  
+;;
+; @brief   Shop phase 3: the purchase is paid - hands the item over and sets phase $FF.
+; @details For most items the carried copy is destroyed (the effect is applied by the wrapper handler seeing phase $FF). The ids
+;   $49 (flower), $56 (cake) and $1B-$1D (fragrances) stay in the player's hands because they are real carried items.
+; @modifies $0976 (= $FF), strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
+; @clobbers A X Y
+; @mode    M8 -> ?
+; @calls   fObject_Destroy, fObjectSlots_FreeCurrent
+;;
 fItemBuy_FinishPurchase:
     SEP #$20                                                   ;818B19|E220    |      ;
     LDA.W strcDialogDisplay.mapUnk19A                          ;818B1B|AD9A01  |00019A;
@@ -1753,6 +2663,17 @@ fItemBuy_Return:
     RTS                                                        ;818B6A|60      |      ;
  
  
+;;
+; @brief   Forage phase 0: shows the "you found X - eat it?" dialog of the picked up item.
+; @details The dialog id is aFoundItemData[(item id - 1) * 3] (word). Loads pose 1 (carried), starts the dialog (mapUnk19A = 2)
+;   and moves to phase 1.
+; @param   nCarriedItemId   $01-$08
+; @modifies $0976, strcDialogDisplay.mapUnk19A, strcDialogDisplay.dialogUnk191
+; @clobbers A X Y
+; @mode    ? -> M8X16
+; @calls   fItemCarried_LoadPoseData, fDialog_DialogHandler
+; @see     aFoundItemData
+;;
 fItemFound_ShowFoundDialog:
     REP #$30                                                   ;818B6B|C230    |      ;
     LDY.W #$0001                                               ;818B6D|A00100  |      ;
@@ -1782,6 +2703,18 @@ fItemFound_ShowFoundDialog:
     JMP.W fItemFound_Return                                       ;818BA2|4C238C  |818C23;
  
  
+;;
+; @brief   Forage phase 1: after the dialog, eats the item (answer 0) or goes on carrying it.
+; @details Waits while mapUnk19A == 2. On "eat" the player action becomes !PACTION_CONSUMEITEM, the object is destroyed, carryItemId cleared
+;   and the stamina change (signed byte, aFoundItemData offset 2) is applied by fPlayerEnergyHandler. Otherwise the item stays in the
+;   hands (fItemFound_DeclineConsume).
+; @param   strcDialogDisplay.dialogOptionsAnswer   0 = eat
+; @modifies strcPlayer.action, strcPlayer.flags, strcPlayerData.carryItemId
+; @clobbers A X Y
+; @mode    M8 -> M8X16
+; @calls   fObject_Destroy, fObjectSlots_FreeCurrent, fPlayerEnergyHandler, fItemFound_DeclineConsume
+; @see     aFoundItemData
+;;
 fItemFound_Consume:
     SEP #$20                                                   ;818BA5|E220    |      ;
     LDA.W strcDialogDisplay.mapUnk19A                          ;818BA7|AD9A01  |00019A;
@@ -1824,6 +2757,12 @@ fItemFound_Consume:
     BRA fItemFound_Return                                         ;818C0A|8017    |818C23;
  
  
+;;
+; @brief   Forage: the player did not eat the item - back to the normal carry state (phase 2).
+; @modifies $0976, strcPlayer.action, strcPlayer.flags
+; @mode    ? -> M8
+; @callers fItemFound_Consume
+;;
 fItemFound_DeclineConsume:
     %SetPlayerAction(!PACTION_NONE)
     %SetPlayerFlag(!PFLAGS_HOLDINGITEM)
@@ -1835,6 +2774,18 @@ fItemFound_Return:
     RTS                                                        ;818C23|60      |      ;
  
  
+;;
+; @brief   Carry phase of unsellable items (rock, lumber): follows the player and handles the drop action.
+; @details The object is kept 2 pixels below the player. While the player does not jump the carry pose 1 is shown; during a jump pose $0B is
+;   loaded once (bit 2 of the slot flags remembers it). When !PACTION_DROPITEM is active the tile in front is inspected with
+;   fObjectEngine_GetObjectPropertyByDirSeason(2): only tiles with property 1, 2, 7, 8 or the fixed drop tiles $F0, $F9-$FD accept the
+;   item, otherwise the drop is cancelled. On success pose 6 + direction is loaded and the phase becomes 3.
+; @modifies nUnknownX, nUnknownY, $0974, $0976, strcPlayer.lastX, strcPlayer.lastY, strcPlayer.newX, strcPlayer.newY, strcPlayer.unkE3, strcPlayer.action
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_LoadPoseData, fObject_GetSingleObjectData, fStoreTileOnFrontOfPlayerAtDistance, fObjectEngine_GetObjectPropertyByDirSeason, fGameEngine_DirectionHandler83AD91
+; @callers fItemCarried_PhaseDispatch_NoSell
+;;
 fItemCarried_CarryLoop_NoSell:
     REP #$20                                                   ;818C24|C220    |      ;
     LDA.B strcPlayer.posX                                      ;818C26|A5D6    |0000D6;
@@ -1963,6 +2914,16 @@ fItemCarried_CarryLoop_NoSell:
     JMP.W fItemCarried_ReturnShared                                       ;818D35|4C1A8E  |818E1A;
  
  
+;;
+; @brief   Put-down phase (3) of unsellable items: drops them on a bin-like tile or on a fixed drop place.
+; @details Tile properties 1, 2, 7, 8 call fItemShipped_SetBinTileAndRelease; $F0, $F9-$FD start a drop on the matching fixed target
+;   (index 0-5 of aFixedDropPositionsXY, fItemCarried_StartDropAtTarget); anything else cancels the action.
+; @modifies strcPlayer.action
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fStoreTileOnFrontOfPlayerAtDistance, fObjectEngine_GetObjectPropertyByDirSeason, fItemShipped_SetBinTileAndRelease, fItemCarried_StartDropAtTarget
+; @callers fItemCarried_PhaseDispatch_NoSell
+;;
 fItemCarried_PutDown_NoSell:
     REP #$20                                                   ;818D38|C220    |      ;
     LDA.W #$0001                                               ;818D3A|A90100  |      ;
@@ -2009,6 +2970,17 @@ fItemCarried_PutDown_NoSell:
     JMP.W fItemCarried_ReturnShared                                       ;818DA8|4C1A8E  |818E1A;
  
  
+;;
+; @brief   Writes the item's release tile pattern into the map in front of the player and releases the carried object.
+; @details The tile pattern is aDialogData_ShippingProfit[id * 2] (first byte of the 2-byte row); then the object is destroyed, the slot
+;   freed and carryItemId cleared.
+; @modifies strcPlayerData.carryItemId
+; @clobbers A X Y
+; @mode    ? -> M8
+; @calls   fStoreTileOnFrontOfPlayerAtDistance, fSetTileAtCoords, fObject_Destroy, fObjectSlots_FreeCurrent
+; @callers fItemCarried_PutDown_NoSell, fItemCarriedFeed_PutDown
+; @see     aDialogData_ShippingProfit
+;;
 fItemShipped_SetBinTileAndRelease:
     REP #$20                                                   ;818DAB|C220    |      ;
     LDA.W #$0001                                               ;818DAD|A90100  |      ;
@@ -2037,6 +3009,16 @@ fItemShipped_SetBinTileAndRelease:
     BRA fItemCarried_ReturnShared                                         ;818DEA|802E    |818E1A;
  
  
+;;
+; @brief   Starts flying/placing the item to one of the fixed drop positions and ends the carry state.
+; @param   A   index into aFixedDropPositionsXY
+; @modifies nUnknownX, nUnknownY, $097A (= $00CA), $0976 (= 4), strcPlayerData.carryItemId
+; @clobbers A X
+; @mode    M16 -> M8
+; @callers fItemCarried_PutDown_NoSell
+; @see     aFixedDropPositionsXY, fItemCarried_ThrowToTarget
+; @note    Same code as fItemCarried_ThrowToTarget; the sprite $00CA is the object shown during the drop (?).
+;;
 fItemCarried_StartDropAtTarget:
     REP #$20                                                   ;818DEC|C220    |      ;
     ASL A                                                      ;818DEE|0A      |      ;
@@ -2058,6 +3040,11 @@ fItemCarried_StartDropAtTarget:
     JMP.W fItemCarried_ReturnShared                                       ;818E13|4C1A8E  |818E1A;
  
  
+;;
+; @brief   Phase 4 of the unsellable items: frees the object slot (falls through to the shared RTS).
+; @mode    ? -> =
+; @calls   fObjectSlots_FreeCurrent
+;;
 fItemCarried_ClearObjectSlot:
     JSL.L fObjectSlots_FreeCurrent                                      ;818E16|22F1A481|81A4F1;
  
@@ -2065,6 +3052,20 @@ fItemCarried_ReturnShared:
     RTS                                                        ;818E1A|60      |      ;
  
  
+;;
+; @brief   Put-down phase of a carried chicken, chick or mole: hands the animal back to the AI as a walking animal.
+; @details For the chickens (every id but the mole $29) the chicken record (fGameEngine_GetChickenData, index = nAiArg - $24) gets the current
+;   area id (+1), its flag bit $20 cleared (no longer carried(?)) and the tile position in front of the player (+4/+6). Then an AI slot
+;   script is started at the front tile (script $01 for the chick $26, $02 for the chicken $25, $31 otherwise), and the carried object is
+;   destroyed.
+; @param   strcPlayerData.nAiArg   AI slot of the animal
+; @modifies strcPlayerData.carryItemId
+; @note    Also writes the chicken record (area id, flag byte, tile position) through ptrTemp0x72.
+; @clobbers A X Y
+; @mode    ? -> M8
+; @calls   fGameEngine_GetChickenData, fAI_StartSlotScriptAtFrontTile, fObject_Destroy, fObjectSlots_FreeCurrent
+; @callers fItemCarried_PhaseDispatch_Animal
+;;
 fItemCarriedAnimal_PutDown:
     SEP #$20                                                   ;818E1B|E220    |      ;
     LDA.W strcPlayerData.carryItemId                           ;818E1D|AD1D09  |00091D;
@@ -2121,6 +3122,18 @@ fItemCarriedAnimal_PutDown:
     JMP.W fItemCarried_ReturnFromPhase                                       ;818E95|4CAE96  |8196AE;
  
  
+;;
+; @brief   Put-down phase of the animal feed: drops it into a feed trough of the cow barn or the coop.
+; @details In the cow barn ($27) the property type 0 of the tile in front must be $E2-$EE: the matching bit of nCowFeedFlagsTable is
+;   set in strcPlayerData.placedCowFeedFlags and placedCowFeed is incremented. In the coop ($28) the same with placedChickenFeedFlags
+;   and placedChcikenFeed. In other cases (or outside the trough range) the normal fItemCarried_PutDown is used. The feed item is
+;   then released (fItemShipped_SetBinTileAndRelease).
+; @modifies strcPlayerData.carryItemId, strcPlayerData.placedCowFeedFlags, strcPlayerData.placedCowFeed, strcPlayerData.placedChickenFeedFlags, strcPlayerData.placedChcikenFeed
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fStoreTileOnFrontOfPlayerAtDistance, fObjectEngine_GetObjectPropertyByDirSeason, fItemCarried_PutDown, fItemShipped_SetBinTileAndRelease
+; @callers fItemCarried_PhaseDispatch_Feed
+;;
 fItemCarriedFeed_PutDown:
     SEP #$20                                                   ;818E98|E220    |      ;
     STZ.W strcPlayerData.carryItemId                           ;818E9A|9C1D09  |00091D;
@@ -2197,6 +3210,16 @@ fItemCarriedFeed_PutDown:
     JMP.W fItemShipped_SetBinTileAndRelease                           ;818F27|4CAB8D  |818DAB;
  
  
+;;
+; @brief   Sunday market phase 5: shows the price dialog of the offered item.
+; @details Dialog id = aDialogData_SellItems[id * 3] (word). Sets phase 6 to wait for the answer.
+; @param   nCarriedItemId   item offered
+; @modifies $0976 (= 6), strcDialogDisplay.mapUnk19A, strcDialogDisplay.dialogUnk191
+; @clobbers A X Y
+; @mode    M8 -> M8X16
+; @calls   fDialog_DialogHandler
+; @see     aDialogData_SellItems
+;;
 fItemSell_ShowPriceDialog:
     SEP #$20                                                   ;818F2A|E220    |      ;
     LDA.B #$02                                                 ;818F2C|A902    |      ;
@@ -2222,6 +3245,17 @@ fItemSell_ShowPriceDialog:
     JMP.W fItemSell_Return                                       ;818F57|4C0F90  |81900F;
  
  
+;;
+; @brief   Sunday market phase 6: on "yes" pays the profit and removes the item, on "no" returns it to the player.
+; @details A refused item (price dialog $0313, "Sorry but we can't accept that") also resumes carrying. Otherwise dialog $02FA (thanks) is
+;   shown, the object destroyed and the profit byte (aDialogData_SellItems offset 2) is added with fGameEngine_AddProfit.
+; @param   strcDialogDisplay.dialogOptionsAnswer   0 = sell
+; @modifies strcPlayerData.carryItemId, nMoney
+; @clobbers A X Y
+; @mode    M8 -> M8
+; @calls   fDialog_DialogHandler, fObject_Destroy, fObjectSlots_FreeCurrent, fGameEngine_AddProfit, fItemSell_ShowCancelDialog, fItemSell_ResumeCarry
+; @see     aDialogData_SellItems
+;;
 fItemSell_HandleAnswer:
     SEP #$20                                                   ;818F5A|E220    |      ;
     LDA.W strcDialogDisplay.mapUnk19A                          ;818F5C|AD9A01  |00019A;
@@ -2285,6 +3319,12 @@ fItemSell_HandleAnswer:
     BRA fItemSell_Return                                         ;818FD5|8038    |81900F;
  
  
+;;
+; @brief   Sunday market: the player declined - shows dialog $0303 and resumes carrying (falls through to fItemSell_ResumeCarry).
+; @modifies strcDialogDisplay.mapUnk19A, strcDialogDisplay.dialogUnk191
+; @mode    M8 -> ?
+; @calls   fDialog_DialogHandler
+;;
 fItemSell_ShowCancelDialog:
     SEP #$20                                                   ;818FD7|E220    |      ;
     LDA.B #$02                                                 ;818FD9|A902    |      ;
@@ -2294,6 +3334,13 @@ fItemSell_ShowCancelDialog:
     STA.W strcDialogDisplay.dialogUnk191                       ;818FE3|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;818FE6|225F9383|83935F;
  
+;;
+; @brief   Sunday market: back to the carry state - pose 1 at the camera position, phase 2, player holds the item again.
+; @modifies nUnknownX, nUnknownY, $0976 (= 2), strcPlayer.flags
+; @clobbers A Y
+; @mode    ? -> M8
+; @calls   fItemCarried_LoadPoseData
+;;
 fItemSell_ResumeCarry:
     REP #$20                                                   ;818FEA|C220    |      ;
     LDY.W #$0001                                               ;818FEC|A00100  |      ;
@@ -2311,6 +3358,13 @@ fItemSell_Return:
     RTS                                                        ;81900F|60      |      ;
  
  
+;;
+; @brief   Phase 0 of the plain carry items: loads the carry pose (1) and goes to the carry loop (phase 2).
+; @modifies $0976 (= 2)
+; @clobbers A Y
+; @mode    ? -> M8
+; @calls   fItemCarried_LoadPoseData
+;;
 fItemCarried_StartHolding:
     REP #$30                                                   ;819010|C230    |      ;
     LDY.W #$0001                                               ;819012|A00100  |      ;
@@ -2321,6 +3375,13 @@ fItemCarried_StartHolding:
     RTS                                                        ;819020|60      |      ;
  
  
+;;
+; @brief   Phase 8: destroys the carried object, frees the slot and returns the player to the idle state.
+; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
+; @clobbers A X Y
+; @mode    ? -> M8
+; @calls   fObject_Destroy, fObjectSlots_FreeCurrent
+;;
 fItemCarried_DestroyAndRelease:
     REP #$30                                                   ;819021|C230    |      ;
     LDA.W nGameObjectIdx                                       ;819023|AD7809  |000978;
@@ -2334,6 +3395,18 @@ fItemCarried_DestroyAndRelease:
     RTS                                                        ;819048|60      |      ;
  
  
+;;
+; @brief   Carry phase (2) of sellable items: follows the player and handles the drop action.
+; @details Keeps the object 2 pixels below the player (like fItemCarried_CarryLoop_NoSell). The pose is 1 while the player is not jumping,
+;   $0B once while jumping. When !PACTION_DROPITEM is active, the item is shipped into a bin when the step in front is blocked
+;   (fItemShipped_DropInBin); at the town on Sunday before time id $11 it may be offered on the market stall (tile property $F0 in front,
+;   non-zero aDialogData_SellItems entry): pose 0 at the stall and phase 5; in every other case it is put down (phase 3).
+; @modifies nUnknownX, nUnknownY, $0974, $0976, strcPlayer.lastX, strcPlayer.lastY, strcPlayer.newX, strcPlayer.newY, strcPlayer.unkE3, strcPlayer.action, strcPlayer.flags
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_CarryLoop_NotJumping, fItemCarried_CarryLoop_Jumping
+; @callers fItemCarried_PhaseDispatch_Forage, fItemCarried_PhaseDispatch_Produce, fItemCarried_PhaseDispatch_Feed
+;;
 fItemCarried_CarryLoop:
     REP #$20                                                   ;819049|C220    |      ;
     LDA.B strcPlayer.posX                                      ;81904B|A5D6    |0000D6;
@@ -2343,11 +3416,18 @@ fItemCarried_CarryLoop:
     INC A                                                      ;819053|1A      |      ;
     STA.W nUnknownY                                            ;819054|8D8209  |000982;
     %CheckPlayerAction(!PACTION_JUMP)
-    BNE fItemCarried_CarryLoop_ActionJump                                        ;81905E|D003    |819063;
-    JMP.W fItemCarried_CarryLoop_ActionOther                                      ;819060|4C7890  |819078;
+    BNE fItemCarried_CarryLoop_NotJumping                                        ;81905E|D003    |819063;
+    JMP.W fItemCarried_CarryLoop_Jumping                                      ;819060|4C7890  |819078;
  
  
-fItemCarried_CarryLoop_ActionJump:
+;;
+; @brief   Carry loop branch taken while the player is not jumping: pose 1, clears the "jump pose loaded" bit, then handles drops.
+; @modifies $0974, $097A, $097E
+; @mode    ? -> ?
+; @calls   fItemCarried_LoadPoseData, fItemCarried_HandleDropAction
+; @callers fItemCarried_CarryLoop, fItemCarried_CarryLoop_Jumping
+;;
+fItemCarried_CarryLoop_NotJumping:
     REP #$30                                                   ;819063|C230    |      ;
     LDY.W #$0001                                               ;819065|A00100  |      ;
     JSL.L fItemCarried_LoadPoseData                                      ;819068|22B78081|8180B7;
@@ -2358,7 +3438,15 @@ fItemCarried_CarryLoop_ActionJump:
     BRA fItemCarried_HandleDropAction                                ;819076|8032    |8190AA;
  
  
-fItemCarried_CarryLoop_ActionOther:
+;;
+; @brief   Carry loop branch taken while the player jumps: loads pose $0B once, afterwards checks that the object still exists.
+; @details If the object is gone (fObject_GetSingleObjectData reports $FFFF) the normal path fItemCarried_CarryLoop_NotJumping is used.
+; @modifies $0974, $097A, $097E
+; @mode    ? -> ?
+; @calls   fItemCarried_LoadPoseData, fObject_GetSingleObjectData, fItemCarried_HandleDropAction
+; @callers fItemCarried_CarryLoop
+;;
+fItemCarried_CarryLoop_Jumping:
     SEP #$20                                                   ;819078|E220    |      ;
     REP #$10                                                   ;81907A|C210    |      ;
     LDA.W $0974+!RAM_SHIFT                                 ;81907C|AD7409  |000974;
@@ -2380,7 +3468,7 @@ fItemCarried_CarryLoop_ActionOther:
     REP #$20                                                   ;8190A1|C220    |      ;
     LDA.B strcObject.exists                                    ;8190A3|A5A7    |0000A7;
     CMP.W #$FFFF                                               ;8190A5|C9FFFF  |      ;
-    BEQ fItemCarried_CarryLoop_ActionJump                                        ;8190A8|F0B9    |819063;
+    BEQ fItemCarried_CarryLoop_NotJumping                                        ;8190A8|F0B9    |819063;
  
 fItemCarried_HandleDropAction:
     %CheckPlayerAction(!PACTION_DROPITEM)
@@ -2480,6 +3568,14 @@ fItemCarried_HandleDropAction:
     JMP.W fItemCarried_ReturnAfterDropAction                                       ;81917B|4C2792  |819227;
  
  
+;;
+; @brief   Starts the put-down animation (pose 6 + direction) and moves to phase 3.
+; @modifies $0976 (= 3)
+; @clobbers A Y
+; @mode    ? -> M8
+; @calls   fItemCarried_LoadPoseData
+; @callers fItemCarried_HandleDropAction
+;;
 fItemCarried_BeginPutDown:
     REP #$30                                                   ;81917E|C230    |      ;
     LDA.W #$0006                                               ;819180|A90600  |      ;
@@ -2493,6 +3589,17 @@ fItemCarried_BeginPutDown:
     JMP.W fItemCarried_ReturnAfterDropAction                                       ;819192|4C2792  |819227;
  
  
+;;
+; @brief   Drops the carried item into the shipping spot in front of the player and books the profit.
+; @details Pose 0 at the tile in front; when strcFlags.daily2 bit $0010 is set (shipping possible today (?)) and the item has a profit,
+;   fItemShipped_AddProfit adds it, otherwise the item is only destroyed (phase 8).
+; @modifies nUnknownX, nUnknownY
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fStoreTileOnFrontOfPlayerAtDistance, fItemCarried_LoadPoseData, fItemShipped_AddProfit, fItemCarried_SetPhaseFinish
+; @callers fItemCarried_HandleDropAction
+; @note    confidence: low - the meaning of strcFlags.daily2 bit $0010 is not known.
+;;
 fItemShipped_DropInBin:
     REP #$20                                                   ;819195|C220    |      ;
     LDA.W #$0001                                               ;819197|A90100  |      ;
@@ -2524,6 +3631,17 @@ fItemShipped_DropInBin:
     JMP.W fItemCarried_SetPhaseFinish                                      ;8191DB|4C2092  |819220;
  
  
+;;
+; @brief   Adds the item's shipping profit (aDialogData_ShippingProfit offset 1) to nShippingProfit before time id $11.
+; @details Sets strcFlags.daily3 bit $0001 (read by the crop handlers to count shipped crops) and daily2 bit $0040, then the phase
+;   becomes 8 (destroy). After time id $11 nothing is added.
+; @param   X   offset of the profit byte in aDialogData_ShippingProfit (id * 2 + 1)
+; @modifies nShippingProfit, strcFlags.daily2, strcFlags.daily3
+; @clobbers A
+; @mode    M8 -> M8
+; @calls   fItemCarried_SetPhaseFinish
+; @see     aDialogData_ShippingProfit
+;;
 fItemShipped_AddProfit:
     LDA.L nCurrentTimeID                                       ;8191DE|AF1C1F7F|7F1F1C;
     CMP.B #$11                                                 ;8191E2|C911    |      ;
@@ -2554,6 +3672,18 @@ fItemCarried_ReturnAfterDropAction:
     RTS                                                        ;819227|60      |      ;
  
  
+;;
+; @brief   Carry phase (2) of chickens, chicks and moles: follows the player and validates the drop place.
+; @details Same pose handling as fItemCarried_CarryLoop_NoSell. On !PACTION_DROPITEM the player's step must be free
+;   (fGameEngine_DirectionHandler83AD91 = 0) and three tiles in front (distance 0/7/7, 1/10/10 and 1/0/0) must have no blocking tile
+;   property (type 2 and $1F == 0, not $FF; the nearest one additionally not $E1 and not $C0-$CF); otherwise the drop is cancelled.
+;   On success the put-down pose is loaded and the phase becomes 3 (fItemCarriedAnimal_PutDown).
+; @modifies nUnknownX, nUnknownY, $0974, $0976, strcPlayer.lastX, strcPlayer.lastY, strcPlayer.newX, strcPlayer.newY, strcPlayer.unkE3, strcPlayer.action
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fItemCarried_LoadPoseData, fObject_GetSingleObjectData, fStoreTileOnFrontOfPlayerAtDistance, fObjectEngine_GetObjectPropertyByDirSeason, fGameEngine_DirectionHandler83AD91
+; @callers fItemCarried_PhaseDispatch_Animal
+;;
 fItemCarriedAnimal_CarryLoop:
     REP #$20                                                   ;819228|C220    |      ;
     LDA.B strcPlayer.posX                                      ;81922A|A5D6    |0000D6;
@@ -2722,6 +3852,14 @@ fItemCarriedAnimal_CarryLoop:
     RTS                                                        ;819378|60      |      ;
  
  
+;;
+; @brief   Put-down phase (3) of sellable items: ships the item in a bin, hatches an egg, or drops it on the ground.
+; @details Farm (area < !AREA_TOWNSPRING), cow barn and coop go to fItemShipped_InFarmCoopOrBarn; every other area goes to
+;   fItemCarried_PlaceEggInIncubator, which falls back to dropping the item.
+; @clobbers A X Y
+; @mode    M8X16 -> ?
+; @callers fItemCarriedFeed_PutDown, fItemCarried_PhaseDispatch_Forage, fItemCarried_PhaseDispatch_Produce
+;;
 fItemCarried_PutDown:
     SEP #$20                                                   ;819379|E220    |      ;
     REP #$10                                                   ;81937B|C210    |      ;
@@ -2744,6 +3882,17 @@ fItemCarried_PutDown:
   + JMP.W fItemCarried_PlaceEggInIncubator                                      ;819394|4C9794  |819497;
  
  
+;;
+; @brief   Ships the carried item when the shipping spot (tile property $F2) is two tiles in front of the player.
+; @details The profit (aDialogData_ShippingProfit offset 1) is added to nShippingProfit before time id $11 (strcFlags.daily3 bit $0001 set),
+;   items without profit are not shipped. The object is destroyed and a tile script is started: $24 on the farm, $25 in the cow barn,
+;   $26 in the coop. The phase becomes 7 (wait for the script to finish); the player is made inactive meanwhile.
+; @modifies nShippingProfit, strcFlags.daily3, $0976 (= 7), strcPlayer.flags, strcPlayerData.carryItemId
+; @clobbers A X Y
+; @mode    ? -> M8
+; @calls   fStoreTileOnFrontOfPlayerAtDistance, fObjectEngine_GetObjectPropertyByDirSeason, fObject_Destroy, fTileScript_Start, fItemShipped_StartCowBarnScript, fItemShipped_StartCoopScript, fItemCarried_PlaceEggInIncubator
+; @callers fItemCarried_PutDown
+;;
 fItemShipped_InFarmCoopOrBarn:
     REP #$20                                                   ;819397|C220    |      ;
     LDA.W #$0002                                               ;819399|A90200  |      ;
@@ -2824,6 +3973,13 @@ fItemShipped_InFarmCoopOrBarn:
     JMP.W fItemCarried_ReturnFromPhase                                       ;81944C|4CAE96  |8196AE;
  
  
+;;
+; @brief   Starts tile script $25 (items sliding into the cow barn shipping spot), waits for it (phase 7) and clears the carried item.
+; @modifies $0976 (= 7), strcPlayer.flags, strcPlayerData.carryItemId
+; @mode    ? -> M8
+; @calls   fTileScript_Start
+; @callers fItemShipped_InFarmCoopOrBarn
+;;
 fItemShipped_StartCowBarnScript:
     REP #$20                                                   ;81944F|C220    |      ;
     LDA.W #$0025                                               ;819451|A92500  |      ;
@@ -2837,6 +3993,13 @@ fItemShipped_StartCowBarnScript:
     JMP.W fItemCarried_ReturnFromPhase                                       ;819470|4CAE96  |8196AE;
  
  
+;;
+; @brief   Starts tile script $26 (items sliding into the coop shipping spot), waits for it (phase 7) and clears the carried item.
+; @modifies $0976 (= 7), strcPlayer.flags, strcPlayerData.carryItemId
+; @mode    ? -> M8
+; @calls   fTileScript_Start
+; @callers fItemShipped_InFarmCoopOrBarn
+;;
 fItemShipped_StartCoopScript:
     REP #$20                                                   ;819473|C220    |      ;
     LDA.W #$0026                                               ;819475|A92600  |      ;
@@ -2850,6 +4013,17 @@ fItemShipped_StartCoopScript:
     JMP.W fItemCarried_ReturnFromPhase                                       ;819494|4CAE96  |8196AE;
  
  
+;;
+; @brief   Puts a carried egg into the coop incubator (tile property $F7) and starts a chick hatching.
+; @details Only for !CITEM_EGG in the coop with the incubator free (strcFlags.event6 bit $2000 clear). Starts AI slot script $14 at the tile
+;   in front, adds a chicken (fGameEngine_AddChicken(0)), sets event6 bit $2000, updates the map tile ($A1) at (E0,B0), removes the carried
+;   egg and gives +5 happiness. Otherwise falls back to fItemCarried_PutDown_Outdoor.
+; @modifies strcFlags.event6, strcPlayerData.carryItemId, nPlayerHappiness
+; @clobbers A X Y
+; @mode    M8X16 -> ?
+; @calls   fStoreTileOnFrontOfPlayerAtDistance, fObjectEngine_GetObjectPropertyByDirSeason, fAI_StartSlotScriptAtFrontTile, fGameEngine_AddChicken, fMap_UpdateCurrentTilemap, fObject_Destroy, fObjectSlots_FreeCurrent, fGameEngine_AddHappiness, fItemCarried_PutDown_Outdoor
+; @callers fItemCarried_PutDown, fItemShipped_InFarmCoopOrBarn
+;;
 fItemCarried_PlaceEggInIncubator:
     SEP #$20                                                   ;819497|E220    |      ;
     REP #$10                                                   ;819499|C210    |      ;
@@ -2918,6 +4092,15 @@ fItemCarried_PlaceEggInIncubator:
     JMP.W fItemCarried_ReturnFromPhase                                       ;81953C|4CAE96  |8196AE;
  
  
+;;
+; @brief   Put-down outside the farm: woods springs and the pond throw targets, otherwise drops the item in front.
+; @details Areas below $10 or from $15 up simply drop the item (fItemCarried_DropInFront); the farm areas below !AREA_TOWNSPRING go to
+;   fItemCarried_PutDown_LowAreas. In areas $10-$14 the tile property $F0 selects fEvent_FreedImpFish (target 6), $F4 throws to target 7.
+; @clobbers A X Y
+; @mode    M8X16 -> ?
+; @calls   fStoreTileOnFrontOfPlayerAtDistance, fObjectEngine_GetObjectPropertyByDirSeason, fItemCarried_PutDown_LowAreas, fItemCarried_DropInFront, fEvent_FreedImpFish, fItemCarried_ThrowToTarget
+; @callers fItemCarried_PlaceEggInIncubator
+;;
 fItemCarried_PutDown_Outdoor:
     SEP #$20                                                   ;81953F|E220    |      ;
     REP #$10                                                   ;819541|C210    |      ;
@@ -2960,6 +4143,13 @@ fItemCarried_PutDown_Outdoor:
   + JMP.W fItemCarried_DropInFront                                      ;81958D|4C5B96  |81965B;
  
  
+;;
+; @brief   Put-down on the farm: tile properties $F0, $F9-$FD throw the item to fixed target 0-5, otherwise drop in front.
+; @clobbers A X Y
+; @mode    ? -> ?
+; @calls   fStoreTileOnFrontOfPlayerAtDistance, fObjectEngine_GetObjectPropertyByDirSeason, fItemCarried_ThrowToTarget, fItemCarried_DropInFront
+; @callers fItemCarried_PutDown_Outdoor
+;;
 fItemCarried_PutDown_LowAreas:
     REP #$20                                                   ;819590|C220    |      ;
     LDA.W #$0001                                               ;819592|A90100  |      ;
@@ -3011,6 +4201,15 @@ fItemCarried_PutDown_LowAreas:
   + BRA fItemCarried_DropInFront                                        ;8195F2|8067    |81965B;
  
  
+;;
+; @brief   Throwing the fish into the woods spring: starts the "freed imp" AI event once, then throws to target 6.
+; @details Only for carried !CITEM_FISH before time id $11 and while strcFlags.event2 bit !EFLAGS2_FREEDIMPFISH is clear: executes AI
+;   script $0010 (%AIExecute) and sets the flag. Always continues with A = 6 into fItemCarried_ThrowToTarget.
+; @modifies strcFlags.event2
+; @clobbers A X Y
+; @mode    ? -> M16
+; @callers fItemCarried_PutDown_Outdoor
+;;
 fEvent_FreedImpFish:
     SEP #$20                                                   ;8195F4|E220    |      ;
     LDA.W strcPlayerData.carryItemId                           ;8195F6|AD1D09  |00091D;
@@ -3030,6 +4229,15 @@ fEvent_FreedImpFish:
   + REP #$30                                                   ;81962C|C230    |      ;
     LDA.W #$0006                                               ;81962E|A90600  |      ;
  
+;;
+; @brief   Throws the item to the fixed target and ends the carry state (phase 4).
+; @param   A   index into aFixedDropPositionsXY (0-7)
+; @modifies nUnknownX, nUnknownY, $097A (= $00CA), $0976 (= 4), strcPlayerData.carryItemId
+; @clobbers A X
+; @mode    M16 -> M8
+; @callers fItemCarried_PutDown_LowAreas, fItemCarried_PutDown_Outdoor, fEvent_FreedImpFish
+; @see     aFixedDropPositionsXY
+;;
 fItemCarried_ThrowToTarget:
     REP #$20                                                   ;819631|C220    |      ;
     ASL A                                                      ;819633|0A      |      ;
@@ -3051,6 +4259,14 @@ fItemCarried_ThrowToTarget:
     JMP.W fItemCarried_ReturnFromPhase                                       ;819658|4CAE96  |8196AE;
  
  
+;;
+; @brief   Drops the item on the ground in front of the player (pose $0A), clears carryItemId and moves to phase 4.
+; @modifies nUnknownX, nUnknownY, $0976 (= 4), strcPlayerData.carryItemId
+; @clobbers A X Y
+; @mode    M8X16 -> M8
+; @calls   fItemCarried_LoadPoseData, fStoreTileOnFrontOfPlayerAtDistance
+; @callers fItemCarried_PutDown_LowAreas, fItemCarried_PutDown_Outdoor
+;;
 fItemCarried_DropInFront:
     SEP #$20                                                   ;81965B|E220    |      ;
     REP #$10                                                   ;81965D|C210    |      ;
@@ -3073,11 +4289,22 @@ fItemCarried_DropInFront:
     BRA fItemCarried_ReturnFromPhase                                         ;81968D|801F    |8196AE;
  
  
+;;
+; @brief   Phase 4: frees the object slot after a drop.
+; @calls   fObjectSlots_FreeCurrent
+; @callers fItemCarried_PhaseDispatch_Forage, fItemCarried_PhaseDispatch_Feed, fItemCarried_PhaseDispatch_Produce
+;;
 fItemCarried_PhaseClearSlot:
     JSL.L fObjectSlots_FreeCurrent                                      ;81968F|22F1A481|81A4F1;
     BRA fItemCarried_ReturnFromPhase                                         ;819693|8019    |8196AE;
  
  
+;;
+; @brief   Phase 7: waits until the tile script of the shipping animation ended (ptrUnknown0xCF = 0), then frees the slot and re-activates the player.
+; @modifies strcPlayer.flags
+; @mode    ? -> ?
+; @calls   fObjectSlots_FreeCurrent
+;;
 fItemCarried_PhaseWaitScriptEnd:
     REP #$30                                                   ;819695|C230    |      ;
     LDA.B ptrUnknown0xCF                                       ;819697|A5CF    |0000CF;
