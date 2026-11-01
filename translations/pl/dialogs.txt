@@ -3383,7 +3383,7 @@ Ojej, tort! To urodziny <VAR child2>, prawda?<END>
 Zrobiło się już całkiem ciepło i pogoda jest śliczna.<END>
 
 @@ sDialog_0x0420 @@
-Latem łatwo o różne klęski żywiołowe, więc lepiej codziennie sprawdzać prognozę pogody.<END>
+Latem łatwo o różne klęski żywiołowe,<NEXT>więc lepiej codziennie sprawdzać prognozę pogody.<END>
 
 @@ sDialog_0x0421 @@
 Ach, jesień... Niebo jest już takie wysokie.<END>
@@ -3401,7 +3401,7 @@ Wiosna! Mamy wiosnę! Siejmy nasiona!<END>
 Dzień dobry! Pogoda jest tak cudowna, że aż oślepia!<END>
 
 @@ sDialog_0x0426 @@
-Podobno czasem pojawiają się dzikie psy. Zostawiać zepsuty płot to niebezpieczne.<END>
+Podobno czasem pojawiają się dzikie psy.<NEXT>Zostawiać zepsuty płot to niebezpieczne.<END>
 
 @@ sDialog_0x0427 @@
 Kiedy pada, trzeba wpuścić psa <VAR dog> do domu. Biedactwo.<END>
@@ -3413,10 +3413,10 @@ Kochanie, zabieraj czasem psa <VAR dog> i konia <VAR horse> na spacer.<END>
 Ja też chciałabym nauczyć się jeździć na koniu <VAR horse>.<END>
 
 @@ sDialog_0x042A @@
-Mm, temperatura i reszta warunków są tu idealne do robienia nalewek z leśnych owoców.<END>
+Mm, temperatura i reszta warunków są tu idealne do robienia nalewek z leśnych<NEXT>owoców.<END>
 
 @@ sDialog_0x042B @@
-To nalewka z dzikich winogron. To z woskownicy, a to z borówek brusznicy. Dostałam je od wujka.<NEXT>Jak będą gotowe, podzielę się ze wszystkimi.<END>
+To nalewka z dzikich winogron. To z woskownicy, a to z borówek brusznicy.<NEXT>Dostałam je od wujka.<NEXT>Jak będą gotowe, podzielę się ze wszystkimi.<END>
 
 @@ sDialog_0x042C @@
 Nastawiłam ją wiosną! Za jakiś czas będzie się nadawała do picia.<END>
@@ -3434,7 +3434,7 @@ Pada dużo śniegu, więc płoty dość często się psują.<END>
 Pracy jest teraz mniej, więc chętnie zaprosiłabym ludzi i porządnie się zabawiła.<END>
 
 @@ sDialog_0x0431 @@
-Słuchaj, czy trzask płonących polan i zapach dymu nie budzą w tobie nostalgii?<END>
+Słuchaj, czy trzask płonących polan i zapach dymu nie budzą w tobie<NEXT>nostalgii?<END>
 
 @@ sDialog_0x0432 @@
 Zieleń zupełnie zniknęła i jest tak smutno.<END>
@@ -3446,7 +3446,7 @@ Wiesz, właśnie pomyślałam, że ludzi jest tyle, ile gwiazd na niebie, prawda
 Ciekawe, czy te gwiazdy będą jeszcze świecić, gdy zostaniemy babciami.<END>
 
 @@ sDialog_0x0435 @@
-Dobry wieczór. Em... jeśli nie masz nic przeciwko, to może pójdziemy potem razem oglądać gwiazdy?<END>
+Dobry wieczór. Em...<NEXT>jeśli nie masz nic przeciwko, to może pójdziemy potem razem oglądać<NEXT>gwiazdy?<END>
 
 @@ sDialog_0x0436 @@
 Żeby wszyscy byli szczęśliwi i żebyś zawsze był zdrowy...<NEXT>No to jak co roku, popatrzmy na gwiazdy i wracajmy do domu.<END>
@@ -3473,16 +3473,16 @@ Mm, jak przyjemnie. Gwiazdy najlepiej oglądać właśnie stąd.<END>
 Dziękuję. Ale nie mogę ci teraz odpowiedzieć.<NEXT>Jeśli będzie ładna pogoda, poczekam na ciebie w sobotę w południe w kościele.<END>
 
 @@ sDialog_0x043E @@
-Co? ...Cieszę się, ale teraz to trochę...<NEXT>W pogodną sobotę będę czekać przed sklepem, więc przyjdź, zanim zrobi się późno, dobrze?<END>
+Co? ...Cieszę się, ale teraz to trochę...<NEXT>W pogodną sobotę będę czekać przed sklepem, więc przyjdź, zanim zrobi się późno,<NEXT>dobrze?<END>
 
 @@ sDialog_0x043F @@
-...Yyy, no, nie potrafię odpowiedzieć od razu.<NEXT>Jeśli będzie ładna pogoda... przyjdziesz w niedzielę w góry? Poczekam na ciebie, zanim zajdzie słońce.<END>
+...Yyy, no, nie potrafię odpowiedzieć od razu.<NEXT>Jeśli będzie ładna pogoda... przyjdziesz w niedzielę w góry?<NEXT>Poczekam na ciebie, zanim zajdzie słońce.<END>
 
 @@ sDialog_0x0440 @@
-E-eee, czyli jednak... Przepraszam, ale nie mogę odpowiedzieć od razu...<NEXT>W sobotę będę w domu handlarza zwierząt, więc jeśli będzie ładna pogoda, przyjdź przed zachodem słońca. Będę czekać.<END>
+E-eee, czyli jednak... Przepraszam, ale nie mogę odpowiedzieć od razu...<NEXT>W sobotę będę w domu handlarza zwierząt, więc jeśli będzie ładna pogoda,<NEXT>przyjdź przed zachodem słońca. Będę czekać.<END>
 
 @@ sDialog_0x0441 @@
-...Co? Ojej, naprawdę? Hmm, muszę jeszcze porozmawiać z dziadkiem...<NEXT>Jeśli w sobotę będzie ładnie, przyjdź jeszcze raz w góry, dobrze? Będę czekać od rana, więc przyjdź wcześnie.<END>
+...Co? Ojej, naprawdę? Hmm, muszę jeszcze porozmawiać z dziadkiem...<NEXT>Jeśli w sobotę będzie ładnie, przyjdź jeszcze raz w góry, dobrze?<NEXT>Będę czekać od rana, więc przyjdź wcześnie.<END>
 
 @@ sDialog_0x0442 @@
 To jest krówcia, muu muu.<END>
@@ -3545,10 +3545,10 @@ Wskaźnik szczęścia <NUM 3 76><END>
 Notatnik kwiaciarza o uprawach<NEXT><OPTLBL 1>"Pomidory, kukurydza"<OPTLBL 2>"Rzepa, ziemniaki"<OPTLBL 3>"Trawa"<OPT 3>
 
 @@ sDialog_0x0456 @@
-Pomidory i kukurydzę sieje się na polu latem.<NEXT>Uwaga! W innych porach roku nie wykiełkują!<NEXT>Jeśli podlewasz je także po zbiorach, wydają kolejne plony. Pomidory owocują szybciej.<NEXT>Jesienią usychają.<NEXT>Ceny skupu:<BR>Pomidor 1 szt. ... 100G<BR>Kukurydza 1 szt. . 120G<END>
+Pomidory i kukurydzę sieje się na polu latem.<NEXT>Uwaga! W innych porach roku nie wykiełkują!<NEXT>Jeśli podlewasz je także po zbiorach, wydają kolejne plony.<NEXT>Pomidory owocują szybciej.<NEXT>Jesienią usychają.<NEXT>Ceny skupu:<BR>Pomidor 1 szt. ... 100G<BR>Kukurydza 1 szt. . 120G<END>
 
 @@ sDialog_0x0457 @@
-Rzepę i ziemniaki sieje się na polu wiosną.<NEXT>Rosną szybciej niż pomidory i kukurydza. Zwłaszcza rzepa jest szybka. Plon zbiera się tylko raz.<NEXT>Ceny skupu:<BR>Rzepa 1 szt. ...... 60G<BR>Ziemniak 1 szt. .. 80G<END>
+Rzepę i ziemniaki sieje się na polu wiosną.<NEXT>Rosną szybciej niż pomidory i kukurydza.<NEXT>Zwłaszcza rzepa jest szybka. Plon zbiera się tylko raz.<NEXT>Ceny skupu:<BR>Rzepa 1 szt. ...... 60G<BR>Ziemniak 1 szt. .. 80G<END>
 
 @@ sDialog_0x0458 @@
 Trawę sieje się od wiosny do lata. Można ją kosić do jesieni.<NEXT>Najpierw trzeba uprawić pole, ale podlewać jej nie trzeba.<NEXT>Trawa nie przynosi pieniędzy, ale jest ważna, bo to pasza dla zwierząt.<END>
@@ -3557,19 +3557,19 @@ Trawę sieje się od wiosny do lata. Można ją kosić do jesieni.<NEXT>Najpierw
 Notatnik o zwierzętach<NEXT><OPTLBL 1>"Krowa"<OPTLBL 4>"Kura"<OPTLBL 2>"Mleko"<OPTLBL 5>"Jajko"<OPTLBL 3>"Trawa"<OPT 5>
 
 @@ sDialog_0x045A @@
-W sprzedaży są młode krowy, które jeszcze nie dają mleka. Po 21 dniach dorastają i można je doić.<NEXT>Jak ich nie rozchorować: nie zapominaj o paszy. Nie wypuszczaj ich na zewnątrz w deszcz, śnieg ani tajfun.<NEXT>Jeśli rano będą mokre, to już po wszystkim. Gdy zachorują lub mają zły humor, przez jakiś czas nie dają mleka.<END>
+W sprzedaży są młode krowy, które jeszcze nie dają mleka.<NEXT>Po 21 dniach dorastają i można je doić.<NEXT>Jak ich nie rozchorować: nie zapominaj o paszy.<NEXT>Nie wypuszczaj ich na zewnątrz w deszcz, śnieg ani tajfun.<NEXT>Jeśli rano będą mokre, to już po wszystkim.<NEXT>Gdy zachorują lub mają zły humor, przez jakiś czas nie dają mleka.<END>
 
 @@ sDialog_0x045B @@
-Weź dojarkę i naciśnij Y przed krową, a dostaniesz mleko.<NEXT>Doić można tylko raz dziennie. Krowy, które szczotkujesz i do których mówisz, przywiązują się do ciebie coraz bardziej.<NEXT>Od krów, które cię lubią, dostaniesz mleko w rozmiarze M i L.<END>
+Weź dojarkę i naciśnij Y przed krową, a dostaniesz mleko.<NEXT>Doić można tylko raz dziennie.<NEXT>Krowy, które szczotkujesz i do których mówisz, przywiązują się do ciebie<NEXT>coraz bardziej.<NEXT>Od krów, które cię lubią, dostaniesz mleko w rozmiarze M i L.<END>
 
 @@ sDialog_0x045C @@
-Krowy jedzą tę samą trawę, którą można kosić.<NEXT>Młoda trawa nie liczy się jako karmienie, więc uważaj.<NEXT>Skoszona trawa zamienia się w paszę, która służy za jedzenie zimą i w deszczowe dni. Pilnuj, żeby jej nie zabrakło.<END>
+Krowy jedzą tę samą trawę, którą można kosić.<NEXT>Młoda trawa nie liczy się jako karmienie, więc uważaj.<NEXT>Skoszona trawa zamienia się w paszę, która służy za jedzenie zimą i w deszczowe<NEXT>dni. Pilnuj, żeby jej nie zabrakło.<END>
 
 @@ sDialog_0x045D @@
-Kura znosi jedno jajko dziennie. Jeśli zapomnisz o paszy albo zmoknie w deszczu, przez 3 dni nie będzie nieść jaj.<NEXT>Zostawiona na zewnątrz w czasie tajfunu może zostać porwana przez wiatr. Czasem zjadają je też dzikie psy.<END>
+Kura znosi jedno jajko dziennie.<NEXT>Jeśli zapomnisz o paszy albo zmoknie w deszczu, przez 3 dni nie będzie nieść jaj.<NEXT>Zostawiona na zewnątrz w czasie tajfunu może zostać porwana przez wiatr.<NEXT>Czasem zjadają je też dzikie psy.<END>
 
 @@ sDialog_0x045E @@
-Jajko położone w miejscu do wylęgu zmienia się po 3 dniach w pisklę. Pisklęta nie potrzebują paszy.<NEXT>Po 7 dniach stają się kurami. Uważaj, bo jeśli będzie ich za dużo, zabraknie paszy.<END>
+Jajko położone w miejscu do wylęgu zmienia się po 3 dniach w pisklę.<NEXT>Pisklęta nie potrzebują paszy.<NEXT>Po 7 dniach stają się kurami.<NEXT>Uważaj, bo jeśli będzie ich za dużo, zabraknie paszy.<END>
 
 @@ sDialog_0x045F @@
 "Lekcje miłości"<NEXT><OPTLBL 1>Prezenty<OPTLBL 4>Rozmowa<OPTLBL 2>Festiwal<OPTLBL 5>Pamiętnik<OPTLBL 3>Ślub<OPT 5>
@@ -3581,19 +3581,19 @@ Prezentem może być prawie wszystko, co da się nosić.<NEXT>Każda dziewczyna 
 Ważne, żeby jak najczęściej rozmawiać z dziewczyną, na której ci zależy.<END>
 
 @@ sDialog_0x0462 @@
-Festiwal to wielka szansa! Czasem na różnych festiwalach dziewczyny są w różnych miejscach.<NEXT>Dzień wcześniej porozmawiaj z nią i dowiedz się, dokąd się wybiera.<NEXT>Szczęśliwym przedmiotem są perfumy!<END>
+Festiwal to wielka szansa!<NEXT>Czasem na różnych festiwalach dziewczyny są w różnych miejscach.<NEXT>Dzień wcześniej porozmawiaj z nią i dowiedz się, dokąd się wybiera.<NEXT>Szczęśliwym przedmiotem są perfumy!<END>
 
 @@ sDialog_0x0463 @@
-To, jak bardzo dziewczyny cię lubią, dowiesz się, zaglądając do pamiętników w ich pokojach.<NEXT>Ale nie podglądaj zbyt często.<NEXT>Powodzenia w zdobywaniu jej serca!<END>
+To, jak bardzo dziewczyny cię lubią, dowiesz się, zaglądając do pamiętników w<NEXT>ich pokojach.<NEXT>Ale nie podglądaj zbyt często.<NEXT>Powodzenia w zdobywaniu jej serca!<END>
 
 @@ sDialog_0x0464 @@
 Przedmiotem do oświadczyn jest niebieskie pióro.<NEXT>Kiedy jej sympatia wzrośnie, sprawdź w niedzielę domokrążcę!<NEXT>Żeby wziąć ślub, trzeba też rozbudować dom!<END>
 
 @@ sDialog_0x0465 @@
-Aha, Ellen. W soboty bywa za domem handlarza zwierząt. Na Festiwalu Gwiezdnej Nocy przychodzi na plac.<NEXT>Na prezent dobre są kwiaty, ale ucieszy ją też mleko, które sam wydoisz, albo jajka.<END>
+Aha, Ellen. W soboty bywa za domem handlarza zwierząt.<NEXT>Na Festiwalu Gwiezdnej Nocy przychodzi na plac.<NEXT>Na prezent dobre są kwiaty, ale ucieszy ją też mleko, które sam<NEXT>wydoisz, albo jajka.<END>
 
 @@ sDialog_0x0466 @@
-Eve, hmm. Staraj się jak najczęściej chodzić do baru, a w soboty i niedziele idź w góry.<NEXT>Na prezent dobre są kwiaty i leśne owoce, ale ona nie znosi ryb, więc nie wolno ci jej ich dawać.<END>
+Eve, hmm.<NEXT>Staraj się jak najczęściej chodzić do baru, a w soboty i niedziele idź w góry.<NEXT>Na prezent dobre są kwiaty i leśne owoce, ale ona nie znosi ryb, więc nie wolno<NEXT>ci jej ich dawać.<END>
 
 @@ sDialog_0x0467 @@
 Kochanie... Bądźmy szczęśliwi. Już zawsze.<END>
@@ -3602,7 +3602,7 @@ Kochanie... Bądźmy szczęśliwi. Już zawsze.<END>
 Kochanie... ...Chciałabym mieć dziecko, prawda?<END>
 
 @@ sDialog_0x0469 @@
-...Kochanie, za dużo pracujesz. Nie chcę być sama, poświęcaj mi więcej uwagi.<END>
+...Kochanie, za dużo pracujesz.<NEXT>Nie chcę być sama, poświęcaj mi więcej uwagi.<END>
 
 @@ sDialog_0x046A @@
 <VAR season> <NUM 2 77>, <VAR weekday><BR><BR>Kasa <NUM 7 78>0G<END>
@@ -3635,7 +3635,7 @@ Kochanie... ...Chciałabym mieć dziecko, prawda?<END>
 <VAR season> <NUM 2 95>, <VAR weekday><BR>Już 14:00.<BR>Kasa <NUM 7 96>0G<END>
 
 @@ sDialog_0x0474 @@
-<VAR season> <NUM 2 97>, <VAR weekday><BR>15:00. Czy o czymś nie zapomniałem w sprawie wysyłki?<NEXT>Kasa <NUM 7 98>0G<END>
+<VAR season> <NUM 2 97>, <VAR weekday><BR>15:00. Czy o czymś nie zapomniałem wysłać?<NEXT>Kasa <NUM 7 98>0G<END>
 
 @@ sDialog_0x0475 @@
 <VAR season> <NUM 2 99>, <VAR weekday><BR>16:00. Zaraz przyjdzie pan od wysyłki.<NEXT>Kasa <NUM 7 100>0G<END>
@@ -3653,10 +3653,10 @@ Kochanie... ...Chciałabym mieć dziecko, prawda?<END>
 Witaj, <VAR player>. Dziś rano odezwał się do mnie twój ojciec.<NEXT>Mówił, że wróci pod koniec lata w przyszłym roku.<NEXT>Bardzo się martwił, jak ci się tu żyje, więc musisz go uspokoić.<END>
 
 @@ sDialog_0x047A @@
-Witaj! Jutro w końcu przyjadą twoi rodzice. Na pewno będą zaskoczeni, gdy zobaczą, jak wygląda ta farma.<END>
+Witaj! Jutro w końcu przyjadą twoi rodzice.<NEXT>Na pewno będą zaskoczeni, gdy zobaczą, jak wygląda ta farma.<END>
 
 @@ sDialog_0x047B @@
-...No nie, z ciebie to jest jeden. Jeszcze długa droga przed tobą, brakuje ci wprawy.<END>
+...No nie, z ciebie to jest jeden.<NEXT>Jeszcze długa droga przed tobą, brakuje ci wprawy.<END>
 
 @@ sDialog_0x047C @@
 Kiedy w niedzielę jest brzydka pogoda, robi się jakoś markotnie.<END>
@@ -3701,10 +3701,10 @@ Mistrzostwo farmy <NUM 3 108><BR>Postaraj się jeszcze bardziej!<END>
 Mistrzostwo farmy <NUM 3 109><BR>Dasz radę, jeszcze tylko krok!<END>
 
 @@ sDialog_0x048A @@
-Mistrzostwo farmy <NUM 3 110><BR>Całkiem nieźle! Dąż do tego, by być jeszcze lepszym farmerem!<END>
+Mistrzostwo farmy <NUM 3 110><NEXT>Całkiem nieźle! Dąż do tego, by być jeszcze lepszym farmerem!<END>
 
 @@ sDialog_0x048B @@
-Mistrzostwo farmy <NUM 3 111><BR>Gratulacje! Jesteś już farmerem, którego nikt nie zdoła przewyższyć!<END>
+Mistrzostwo farmy <NUM 3 111><NEXT>Gratulacje! Jesteś już farmerem, którego nikt nie zdoła przewyższyć!<END>
 
 @@ sDialog_0x048C @@
 Rozwój farmy <NUM 3 112>%<END>
@@ -3716,7 +3716,7 @@ Ciekawe, co tam u P-chan? Mam nadzieję, że ma się dobrze.<END>
 W życiu nie chodzi tylko o pieniądze. Zwracaj uwagę na więcej rzeczy.<END>
 
 @@ sDialog_0x048F @@
-Dziwna figurka kury przy drodze wygląda, jakby dało się ją rozbić jakimś narzędziem...<END>
+Dziwna figurka kury przy drodze wygląda, jakby dało się ją rozbić jakimś<NEXT>narzędziem...<END>
 
 @@ sDialog_0x0490 @@
 Jaki piękny kwiat!<END>
@@ -3725,7 +3725,7 @@ Jaki piękny kwiat!<END>
 Cześć, dziś lepiej najedz się do syta.<NEXT>Nie no, nie ma w tym głębszego sensu... tak tylko.<END>
 
 @@ sDialog_0x0492 @@
-Czy Nina nie zrobiła na farmie jakiegoś kwietnego ogródka? Wszystko w porządku?<END>
+Czy Nina nie zrobiła na farmie jakiegoś kwietnego ogródka?<NEXT>Wszystko w porządku?<END>
 
 @@ sDialog_0x0493 @@
 Kochanie, czy nie zapomniałeś pomalować miejsca przy drzwiach?<END>
@@ -3740,4 +3740,4 @@ Dobrze się dogadujesz z żoną? Tylko się nie kłóćcie.<END>
 Dostałem ciasto od żony kwiaciarza. Jak się cieszę! To jak sen.<END>
 
 @@ sDialog_0x0497 @@
-Aaa! N-nie, to nie tak! Chodzi o różne rzeczy, no, to taki... prezent z podziękowaniem. Tylko podziękowanie.<END>
+Aaa! N-nie, to nie tak! Chodzi o różne rzeczy, no, to taki...<NEXT>Prezent z podziękowaniem. Tylko podziękowanie.<END>
