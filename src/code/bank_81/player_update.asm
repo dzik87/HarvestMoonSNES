@@ -23,18 +23,18 @@
 ; aWeatherDialogId (generated from assets/tables/data/weather_dialog_ids.csv): TV forecast dialog per weather and season.
 ; format: 12 rows (one per !WEATHER_* forecast) x 4 words (spring, summer, fall, winter), dialog id or $FFFF = none
 ; index: nWeatherDialogIdIndex * 8 + nCurrentSeasonID * 2
-; used_by: fPlayerInteraction0x0F, fPlayerInteraction0x12, fPlayerInteraction0x13
+; used_by: fPlayerInteraction_WatchTv1, fPlayerInteraction_WatchTv2, fPlayerInteraction_WatchTv3
     incsrc "../../../build/gen/blocks/weather_dialog_ids.asm"
  
 ;;
 ; @brief    Runs the handler of the current interaction and then continues the normal player update.
 ; @details  Dispatches through .aJumpTable[nPlayerInteractionIndex * 2]. Afterwards strcPlayerData.lastExcercise is cleared; when
-; nTimeState has bit 1 (skip to next day) set the player stays in autopilot (fPlayerAction0x19), else fPlayerAction_Handler continues
+; nTimeState has bit 1 (skip to next day) set the player stays in autopilot (fPlayerAction_Autopilot), else fPlayerAction_Handler continues
 ; with the current action in the same frame.
 ; @param    nPlayerInteractionIndex   interaction id $00..$57
 ; @modifies strcPlayerData.lastExcercise
 ; @mode     M8X16
-; @calls    fPlayerAction0x19, fPlayerAction_Handler
+; @calls    fPlayerAction_Autopilot, fPlayerAction_Handler
 ; @callers  fPlayer_UpdateHandler
 ;;
 fPlayerInteraction_Handler:
@@ -52,7 +52,7 @@ fPlayerInteraction_Handler:
     LDA.W nTimeState                                           ;81D586|AD7309  |000973;
     AND.B #$02                                                 ;81D589|2902    |      ;
     BEQ .skipToNextDay                                         ;81D58B|F003    |81D590;
-    JMP.W fPlayerAction0x19                                    ;81D58D|4C0EC0  |81C00E;
+    JMP.W fPlayerAction_Autopilot                                    ;81D58D|4C0EC0  |81C00E;
  
  
 .skipToNextDay:
@@ -68,7 +68,7 @@ fPlayerInteraction_Handler:
 ; @brief    No-op interaction $00 (no interaction).
 ; @case     $00
 ;;
-fPlayerInteraction0x00:
+fPlayerInteraction0x00_Nop:
     RTS                                                        ;81D643|60      |      ;
  
  
@@ -98,7 +98,7 @@ fPlayerInteraction0x01_WoodStorage:
 ; @brief    No-op interaction $02.
 ; @case     $02
 ;;
-fPlayerInteraction0x02:
+fPlayerInteraction0x02_Nop:
     RTS                                                        ;81D66F|60      |      ;
  
  
@@ -111,7 +111,7 @@ fPlayerInteraction0x02:
 ; @calls    fAudio_PrepareSoundEffectSample, fAudioSetRegister2to0A, fTileScript_Start, fToolUsedSound_PlayOnToolChange
 ; @note     confidence: medium - bell sound only; the object that triggers it is not identified
 ;;
-fPlayerInteraction0x03:
+fPlayerInteraction_RingBell:
     SEP #$20                                                   ;81D670|E220    |      ;
     REP #$10                                                   ;81D672|C210    |      ;
     LDA.W nPlayerInteractionArg1                               ;81D674|AD6F09  |00096F;
@@ -161,7 +161,7 @@ fPlayerInteraction0x03:
 ; @brief    No-op interaction $04.
 ; @case     $04
 ;;
-fPlayerInteraction0x04:
+fPlayerInteraction0x04_Nop:
     RTS                                                        ;81D6E1|60      |      ;
  
  
@@ -170,7 +170,7 @@ fPlayerInteraction0x04:
 ; @case     $05
 ; @calls    fTileScript_Start
 ;;
-fPlayerInteraction0x05:
+fPlayerInteraction_StartTileScript11:
     REP #$20                                                   ;81D6E2|C220    |      ;
     LDA.W #$0011                                               ;81D6E4|A91100  |      ;
     JSL.L fTileScript_Start                                ;81D6E7|22E1A581|81A5E1;
@@ -183,7 +183,7 @@ fPlayerInteraction0x05:
 ; @case     $06
 ; @calls    fTileScript_Start
 ;;
-fPlayerInteraction0x06:
+fPlayerInteraction_StartTileScript12:
     REP #$20                                                   ;81D6F8|C220    |      ;
     LDA.W #$0012                                               ;81D6FA|A91200  |      ;
     JSL.L fTileScript_Start                                ;81D6FD|22E1A581|81A5E1;
@@ -195,7 +195,7 @@ fPlayerInteraction0x06:
 ; @brief    No-op interaction $07.
 ; @case     $07
 ;;
-fPlayerInteraction0x07:
+fPlayerInteraction0x07_Nop:
     RTS                                                        ;81D70E|60      |      ;
  
  
@@ -203,7 +203,7 @@ fPlayerInteraction0x07:
 ; @brief    No-op interaction $08.
 ; @case     $08
 ;;
-fPlayerInteraction0x08:
+fPlayerInteraction0x08_Nop:
     RTS                                                        ;81D70F|60      |      ;
  
  
@@ -211,7 +211,7 @@ fPlayerInteraction0x08:
 ; @brief    No-op interaction $09.
 ; @case     $09
 ;;
-fPlayerInteraction0x09:
+fPlayerInteraction0x09_Nop:
     RTS                                                        ;81D710|60      |      ;
  
  
@@ -219,7 +219,7 @@ fPlayerInteraction0x09:
 ; @brief    No-op interaction $0A.
 ; @case     $0A
 ;;
-fPlayerInteraction0x0A:
+fPlayerInteraction0x0A_Nop:
     RTS                                                        ;81D711|60      |      ;
  
  
@@ -227,7 +227,7 @@ fPlayerInteraction0x0A:
 ; @brief    No-op interaction $0B.
 ; @case     $0B
 ;;
-fPlayerInteraction0x0B:
+fPlayerInteraction0x0B_Nop:
     RTS                                                        ;81D712|60      |      ;
  
  
@@ -235,7 +235,7 @@ fPlayerInteraction0x0B:
 ; @brief    No-op interaction $0C.
 ; @case     $0C
 ;;
-fPlayerInteraction0x0C:
+fPlayerInteraction0x0C_Nop:
     RTS                                                        ;81D713|60      |      ;
  
  
@@ -243,7 +243,7 @@ fPlayerInteraction0x0C:
 ; @brief    No-op interaction $0D.
 ; @case     $0D
 ;;
-fPlayerInteraction0x0D:
+fPlayerInteraction0x0D_Nop:
     RTS                                                        ;81D714|60      |      ;
  
  
@@ -251,7 +251,7 @@ fPlayerInteraction0x0D:
 ; @brief    No-op interaction $0E.
 ; @case     $0E
 ;;
-fPlayerInteraction0x0E:
+fPlayerInteraction0x0E_Nop:
     RTS                                                        ;81D715|60      |      ;
  
  
@@ -266,7 +266,7 @@ fPlayerInteraction0x0E:
 ; @calls    fTileScript_Start, fWeather_SetForecastDialogIndex, fDialog_DialogHandler
 ; @note     the three TV variants differ only in the tile script ids ($00 base): one per house size (?). confidence: medium
 ;;
-fPlayerInteraction0x0F:
+fPlayerInteraction_WatchTv1:
     SEP #$20                                                   ;81D716|E220    |      ;
     REP #$10                                                   ;81D718|C210    |      ;
     LDA.W nPlayerInteractionArg1                               ;81D71A|AD6F09  |00096F;
@@ -544,7 +544,7 @@ fPlayerInteraction0x10_PlayerDiary:
 ; @modifies strcPlayer.action, strcPlayer.direction, $0878, $087A
 ; @note     confidence: low - purpose inferred from the shared $0878/$087A variables
 ;;
-fPlayerInteraction0x11:
+fPlayerInteraction_AutoWalkUp:
     SEP #$20                                                   ;81D979|E220    |      ;
     REP #$10                                                   ;81D97B|C210    |      ;
     LDA.W nPlayerInteractionArg1                               ;81D97D|AD6F09  |00096F;
@@ -584,7 +584,7 @@ fPlayerInteraction0x11:
 ; @calls    fTileScript_Start, fWeather_SetForecastDialogIndex, fDialog_DialogHandler
 ; @note     the three TV variants differ only in the tile script ids ($27 base): one per house size (?). confidence: medium
 ;;
-fPlayerInteraction0x12:
+fPlayerInteraction_WatchTv2:
     SEP #$20                                                   ;81D9CC|E220    |      ;
     REP #$10                                                   ;81D9CE|C210    |      ;
     LDA.W nPlayerInteractionArg1                               ;81D9D0|AD6F09  |00096F;
@@ -678,7 +678,7 @@ fPlayerInteraction0x12:
 ; @calls    fTileScript_Start, fWeather_SetForecastDialogIndex, fDialog_DialogHandler
 ; @note     the three TV variants differ only in the tile script ids ($34 base): one per house size (?). confidence: medium
 ;;
-fPlayerInteraction0x13:
+fPlayerInteraction_WatchTv3:
     SEP #$20                                                   ;81DA82|E220    |      ;
     REP #$10                                                   ;81DA84|C210    |      ;
     LDA.W nPlayerInteractionArg1                               ;81DA86|AD6F09  |00096F;
@@ -848,7 +848,7 @@ fPlayerInteraction0x15_FeedStorage:
 ; @brief    No-op interaction $16.
 ; @case     $16
 ;;
-fPlayerInteraction0x16:
+fPlayerInteraction0x16_Nop:
     RTS                                                        ;81DBCC|60      |      ;
  
  
@@ -856,7 +856,7 @@ fPlayerInteraction0x16:
 ; @brief    No-op interaction $17.
 ; @case     $17
 ;;
-fPlayerInteraction0x17:
+fPlayerInteraction0x17_Nop:
     RTS                                                        ;81DBCD|60      |      ;
  
  
@@ -864,7 +864,7 @@ fPlayerInteraction0x17:
 ; @brief    No-op interaction $18.
 ; @case     $18
 ;;
-fPlayerInteraction0x18:
+fPlayerInteraction0x18_Nop:
     RTS                                                        ;81DBCE|60      |      ;
  
  
@@ -872,7 +872,7 @@ fPlayerInteraction0x18:
 ; @brief    No-op interaction $19.
 ; @case     $19
 ;;
-fPlayerInteraction0x19:
+fPlayerInteraction0x19_Nop:
     RTS                                                        ;81DBCF|60      |      ;
  
  
@@ -880,7 +880,7 @@ fPlayerInteraction0x19:
 ; @brief    No-op interaction $1A.
 ; @case     $1A
 ;;
-fPlayerInteraction0x1A:
+fPlayerInteraction0x1A_Nop:
     RTS                                                        ;81DBD0|60      |      ;
  
  
@@ -888,7 +888,7 @@ fPlayerInteraction0x1A:
 ; @brief    No-op interaction $1B.
 ; @case     $1B
 ;;
-fPlayerInteraction0x1B:
+fPlayerInteraction0x1B_Nop:
     RTS                                                        ;81DBD1|60      |      ;
  
  
@@ -896,17 +896,17 @@ fPlayerInteraction0x1B:
 ; @brief    No-op interaction $1C.
 ; @case     $1C
 ;;
-fPlayerInteraction0x1C:
+fPlayerInteraction0x1C_Nop:
     RTS                                                        ;81DBD2|60      |      ;
  
  
 ;;
-; @brief    Egg Festival: search egg hiding spot 0 (tile $FB at X=$02E0, Y=$01A0), then resolve it in fPlayerInteraction_Return.
+; @brief    Egg Festival: search egg hiding spot 0 (tile $FB at X=$02E0, Y=$01A0), then resolve it in fPlayerInteraction_EggHuntResolveSpot.
 ; @case     $1D
-; @calls    fSetTileAtCoords, fPlayerInteraction_Return
+; @calls    fSetTileAtCoords, fPlayerInteraction_EggHuntResolveSpot
 ; @note     confidence: medium - spot numbering follows the order of the handlers
 ;;
-fPlayerInteraction0x1D:
+fPlayerInteraction_EggHuntSpot0:
     REP #$30                                                   ;81DBD3|C230    |      ;
     LDA.W #$00FB                                               ;81DBD5|A9FB00  |      ;
     LDX.W #$02E0                                               ;81DBD8|A2E002  |      ;
@@ -916,7 +916,7 @@ fPlayerInteraction0x1D:
     JSL.L fSetTileAtCoords                                     ;81DBE4|2288A681|81A688;
     REP #$30                                                   ;81DBE8|C230    |      ;
     LDA.W #$0000                                               ;81DBEA|A90000  |      ;
-    JMP.W fPlayerInteraction_Return                            ;81DBED|4C56F5  |81F556;
+    JMP.W fPlayerInteraction_EggHuntResolveSpot                            ;81DBED|4C56F5  |81F556;
  
  
 ;;
@@ -926,7 +926,7 @@ fPlayerInteraction0x1D:
 ; @case     $1E
 ; @calls    fDialog_DialogHandler
 ;;
-fPlayerInteraction0x1E:
+fPlayerInteraction_ReadFlier:
     SEP #$20                                                   ;81DBF0|E220    |      ;
     REP #$10                                                   ;81DBF2|C210    |      ;
     LDA.W nPlayerInteractionArg1                               ;81DBF4|AD6F09  |00096F;
@@ -983,7 +983,7 @@ fPlayerInteraction0x1E:
 ; @brief    No-op interaction $1F.
 ; @case     $1F
 ;;
-fPlayerInteraction0x1F:
+fPlayerInteraction0x1F_Nop:
     RTS                                                        ;81DC57|60      |      ;
  
  
@@ -991,7 +991,7 @@ fPlayerInteraction0x1F:
 ; @brief    No-op interaction $20.
 ; @case     $20
 ;;
-fPlayerInteraction0x20:
+fPlayerInteraction0x20_Nop:
     RTS                                                        ;81DC58|60      |      ;
  
  
@@ -999,7 +999,7 @@ fPlayerInteraction0x20:
 ; @brief    No-op interaction $21.
 ; @case     $21
 ;;
-fPlayerInteraction0x21:
+fPlayerInteraction0x21_Nop:
     RTS                                                        ;81DC59|60      |      ;
  
  
@@ -1007,7 +1007,7 @@ fPlayerInteraction0x21:
 ; @brief    No-op interaction $22.
 ; @case     $22
 ;;
-fPlayerInteraction0x22:
+fPlayerInteraction0x22_Nop:
     RTS                                                        ;81DC5A|60      |      ;
  
  
@@ -1015,7 +1015,7 @@ fPlayerInteraction0x22:
 ; @brief    No-op interaction $23.
 ; @case     $23
 ;;
-fPlayerInteraction0x23:
+fPlayerInteraction0x23_Nop:
     RTS                                                        ;81DC5B|60      |      ;
  
  
@@ -1023,7 +1023,7 @@ fPlayerInteraction0x23:
 ; @brief    No-op interaction $24.
 ; @case     $24
 ;;
-fPlayerInteraction0x24:
+fPlayerInteraction0x24_Nop:
     RTS                                                        ;81DC5C|60      |      ;
  
  
@@ -1031,7 +1031,7 @@ fPlayerInteraction0x24:
 ; @brief    No-op interaction $25.
 ; @case     $25
 ;;
-fPlayerInteraction0x25:
+fPlayerInteraction0x25_Nop:
     RTS                                                        ;81DC5D|60      |      ;
  
  
@@ -1104,7 +1104,7 @@ fPlayerInteraction0x26_MariaDiary:
 ; @case     $27
 ; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
 ;;
-fPlayerInteraction0x27:
+fPlayerInteraction_PickUpItem44:
     %SetCurrentCarriedItemIndex($0070)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
@@ -1118,7 +1118,7 @@ fPlayerInteraction0x27:
 ; @case     $28
 ; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
 ;;
-fPlayerInteraction0x28:
+fPlayerInteraction_PickUpItem45:
     %SetCurrentCarriedItemIndex($0071)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
@@ -1132,7 +1132,7 @@ fPlayerInteraction0x28:
 ; @case     $29
 ; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
 ;;
-fPlayerInteraction0x29:
+fPlayerInteraction_PickUpItem46:
     %SetCurrentCarriedItemIndex($0072)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
@@ -1146,7 +1146,7 @@ fPlayerInteraction0x29:
 ; @case     $2A
 ; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
 ;;
-fPlayerInteraction0x2A:
+fPlayerInteraction_PickUpItem47:
     %SetCurrentCarriedItemIndex($0073)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
@@ -1160,7 +1160,7 @@ fPlayerInteraction0x2A:
 ; @case     $2B
 ; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
 ;;
-fPlayerInteraction0x2B:
+fPlayerInteraction_PickUpItem48:
     %SetCurrentCarriedItemIndex($0074)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
@@ -1174,7 +1174,7 @@ fPlayerInteraction0x2B:
 ; @case     $2C
 ; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
 ;;
-fPlayerInteraction0x2C:
+fPlayerInteraction_PickUpItem49:
     %SetCurrentCarriedItemIndex($0075)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
@@ -1248,7 +1248,7 @@ fPlayerInteraction0x2D_NinaDiary:
 ; Phase 0: dialog $0305 (4 options). Phase 1: B cancels (fDialog_EndDialogRestoreScroll). Option 0 = buy cow: refused if strcFlags.daily1 bit $0020
 ; (already bought today, $03B6) or nOwnedCows == 12 ($03B7), else dialog $0307 (5000G) -> phase 2. Option 1 = buy chicken: same checks with
 ; nOwnedChickens, dialog $030A (1000G) -> phase 3. Options 2/3 = sell: dialog $030B and strcFlags.daily1 bit $0008 (cow) / $0004 (chicken)
-; request a pick-up at the farm entrance (handled by fPlayerInteraction0x43 / fPlayerInteraction0x44).
+; request a pick-up at the farm entrance (handled by fPlayerInteraction_SellCow / fPlayerInteraction_SellChicken).
 ; Phase 2/3 (confirm): the feed check needs nPlantedGrassCount >= 16 * (cows + chickens + 1); error dialog $0306. Then fGameEngine_AddProfit
 ; (-5000G cow / -1000G chicken; failure -> dialog $0304); success: cow dialog $0308, daily1 |= $22, nOwnedCows++, +20 happiness;
 ; chicken dialog $0311, fGameEngine_AddChicken(2), daily1 |= $20, nOwnedChickens++, +10 happiness. "No" gives dialog $0303.
@@ -1257,7 +1257,7 @@ fPlayerInteraction0x2D_NinaDiary:
 ; @calls    fDialog_DialogHandler, fGameEngine_AddProfit, fGameEngine_AddChicken, fGameEngine_AddHappiness, fDialog_EndDialogRestoreScroll
 ; @note     option order follows the code; the on-screen layout of dialog $0305 may differ (?). confidence: medium
 ;;
-fPlayerInteraction0x2E_AnimalNPC:
+fPlayerInteraction_LivestockDealerMenu:
     SEP #$20                                                   ;81DE1C|E220    |      ;
     REP #$10                                                   ;81DE1E|C210    |      ;
     LDA.W nPlayerInteractionArg1                               ;81DE20|AD6F09  |00096F;
@@ -1704,7 +1704,7 @@ fPlayerInteraction0x2E_AnimalNPC:
 ; @case     $2F
 ; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
 ;;
-fPlayerInteraction0x2F:
+fPlayerInteraction_PickUpItem52:
     %SetCurrentCarriedItemIndex($007E)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
@@ -1718,7 +1718,7 @@ fPlayerInteraction0x2F:
 ; @case     $30
 ; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
 ;;
-fPlayerInteraction0x30:
+fPlayerInteraction_PickUpItem53:
     %SetCurrentCarriedItemIndex($007F)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
@@ -1732,7 +1732,7 @@ fPlayerInteraction0x30:
 ; @case     $31
 ; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
 ;;
-fPlayerInteraction0x31:
+fPlayerInteraction_PickUpItem54:
     %SetCurrentCarriedItemIndex($0080)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
@@ -1746,7 +1746,7 @@ fPlayerInteraction0x31:
 ; @case     $32
 ; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
 ;;
-fPlayerInteraction0x32:
+fPlayerInteraction_PickUpItem55:
     %SetCurrentCarriedItemIndex($0081)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
@@ -1820,7 +1820,7 @@ fPlayerInteraction0x33_EllenDiary:
 ; @case     $34
 ; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
 ;;
-fPlayerInteraction0x34:
+fPlayerInteraction_PickUpItem56:
     %SetCurrentCarriedItemIndex($0082)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
@@ -1833,7 +1833,7 @@ fPlayerInteraction0x34:
 ; @calls    fAudio_PlaySoundEffectAndWait, fToolUsedSound_PlayOnToolChange
 ; @note     confidence: low - triggering object unknown (docs/naming/open-questions.md)
 ;;
-fPlayerInteraction0x35:
+fPlayerInteraction_PlaySoundAndWait:
     SEP #$20                                                   ;81E36E|E220    |      ;
     REP #$10                                                   ;81E370|C210    |      ;
     LDA.B #!SFX_INTERACTIONUNK24                                                 ;81E372|A924    |      ;
@@ -1914,7 +1914,7 @@ fPlayerInteraction0x36_AnnDiary:
 ; @case     $37
 ; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
 ;;
-fPlayerInteraction0x37:
+fPlayerInteraction_PickUpItem4B:
     %SetCurrentCarriedItemIndex($0077)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
@@ -1928,7 +1928,7 @@ fPlayerInteraction0x37:
 ; @case     $38
 ; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
 ;;
-fPlayerInteraction0x38:
+fPlayerInteraction_PickUpItem4A:
     %SetCurrentCarriedItemIndex($0076)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
@@ -1942,7 +1942,7 @@ fPlayerInteraction0x38:
 ; @case     $39
 ; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
 ;;
-fPlayerInteraction0x39:
+fPlayerInteraction_PickUpItem4C:
     %SetCurrentCarriedItemIndex($0078)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
@@ -1956,7 +1956,7 @@ fPlayerInteraction0x39:
 ; @case     $3A
 ; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
 ;;
-fPlayerInteraction0x3A:
+fPlayerInteraction_PickUpItem51:
     %SetCurrentCarriedItemIndex($007D)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
@@ -1970,7 +1970,7 @@ fPlayerInteraction0x3A:
 ; @case     $3B
 ; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
 ;;
-fPlayerInteraction0x3B:
+fPlayerInteraction_PickUpItem4D:
     %SetCurrentCarriedItemIndex($0079)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
@@ -1984,7 +1984,7 @@ fPlayerInteraction0x3B:
 ; @case     $3C
 ; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
 ;;
-fPlayerInteraction0x3C:
+fPlayerInteraction_PickUpItem4E:
     %SetCurrentCarriedItemIndex($007A)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
@@ -1998,7 +1998,7 @@ fPlayerInteraction0x3C:
 ; @case     $3D
 ; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
 ;;
-fPlayerInteraction0x3D:
+fPlayerInteraction_PickUpItem4F:
     %SetCurrentCarriedItemIndex($007B)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
@@ -2012,7 +2012,7 @@ fPlayerInteraction0x3D:
 ; @case     $3E
 ; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags
 ;;
-fPlayerInteraction0x3E:
+fPlayerInteraction_PickUpItem50:
     %SetCurrentCarriedItemIndex($007C)
     %SetPlayerAction(!PACTION_ITEMONHAND)
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
@@ -2236,7 +2236,7 @@ fPlayerInteraction0x41_HotSprings:
 ; @modifies strcMenuData.nameDestinationIdx, strcShedItems.row2, strcDialogDisplay.mapFlags
 ; @calls    fDialog_DialogHandler
 ;;
-fPlayerInteraction0x42:
+fPlayerInteraction_DeliverBoughtCow:
     SEP #$20                                                   ;81E6EA|E220    |      ;
     REP #$10                                                   ;81E6EC|C210    |      ;
     LDA.W nPlayerInteractionArg1                               ;81E6EE|AD6F09  |00096F;
@@ -2279,10 +2279,10 @@ fPlayerInteraction0x42:
     LDA.L strcShedItems.row2                                   ;81E737|AF011F7F|7F1F01;
     AND.B #$04                                                 ;81E73B|2904    |      ;
     if !REGION_EUDE
-    BNE fPlayerInteraction0x42_ShowDialog
+    BNE fPlayerInteraction_DeliverBoughtCow_ShowDialog
     LDA.W strcPlayerData.toolEquipped
     CMP.B #$0B
-    BEQ fPlayerInteraction0x42_ShowDialog
+    BEQ fPlayerInteraction_DeliverBoughtCow_ShowDialog
     LDA.W strcPlayerData.toolSecond
     else
     BNE +                                                      ;81E73D|D00A    |81E749;
@@ -2321,13 +2321,13 @@ fPlayerInteraction0x42:
     SEP #$20
     LDA.L $7F1F01
     AND.B #$04
-    BNE fPlayerInteraction0x42_RequestNameInput
+    BNE fPlayerInteraction_DeliverBoughtCow_RequestNameInput
     LDA.W strcPlayerData.toolEquipped
     CMP.B #$0B
-    BEQ fPlayerInteraction0x42_RequestNameInput
+    BEQ fPlayerInteraction_DeliverBoughtCow_RequestNameInput
     LDA.W strcPlayerData.toolSecond
     CMP.B #$0B
-    BEQ fPlayerInteraction0x42_RequestNameInput
+    BEQ fPlayerInteraction_DeliverBoughtCow_RequestNameInput
     LDA.L $7F1F01
     else
     STA.W strcMenuData.nameDestinationIdx                      ;81E777|8D9F09  |00099F;
@@ -2364,7 +2364,7 @@ fPlayerInteraction0x42:
 ; @region   EU/DE: only the width of the REP before the event2 check differs (no behavioural change)
 ; @note     confidence: medium - the meaning of status bits $06/$70 comes from the inline comments (young / pregnant, sick, cranky)
 ;;
-fPlayerInteraction0x43:
+fPlayerInteraction_SellCow:
     SEP #$20                                                   ;81E79E|E220    |      ;
     REP #$10                                                   ;81E7A0|C210    |      ;
     LDA.W nPlayerInteractionArg1                               ;81E7A2|AD6F09  |00096F;
@@ -2862,16 +2862,16 @@ fPlayerInteraction0x43:
  
 ;;
 ; @brief    Sell a chicken to the dealer (and the autumn hawker trade for the power berry).
-; @details  Same state machine as fPlayerInteraction0x43 with chickens: chicken index = $09A1 - $24 (fGameEngine_GetChickenData), count
+; @details  Same state machine as fPlayerInteraction_SellCow with chickens: chicken index = $09A1 - $24 (fGameEngine_GetChickenData), count
 ; nOwnedChickens, price nCowSalePrice, flag daily4 $1000, happiness -20 on sale. The hawker variant triggers in the fall (!SEASON_FALL)
 ; once per year (strcFlags.event2 bit $4000): dialogs $0148 (offer berries for the chicken), $014A (accepted: the chicken is replaced by
 ; AI script $1F at its position and daily4 |= $1000) and $014C (declined).
 ; @case     $44
 ; @modifies nOwnedChickens, strcFlags.event2, strcFlags.daily4, nPlayerInteractionArg1/2
 ; @calls    fGameEngine_GetChickenData, fGameEngine_AddProfit, fGameEngine_AddHappiness, fAI_StartSlotScriptAtFrontTile, fAI_SetSlotScript, fDialog_DialogHandler
-; @note     confidence: medium - the phase numbering mirrors fPlayerInteraction0x43
+; @note     confidence: medium - the phase numbering mirrors fPlayerInteraction_SellCow
 ;;
-fPlayerInteraction0x44:
+fPlayerInteraction_SellChicken:
     SEP #$20                                                   ;81EBD5|E220    |      ;
     REP #$10                                                   ;81EBD7|C210    |      ;
     LDA.W nPlayerInteractionArg1                               ;81EBD9|AD6F09  |00096F;
@@ -3326,7 +3326,7 @@ fPlayerInteraction0x44:
 ; @modifies strcMenuData.nameDestinationIdx, strcDialogDisplay.mapFlags
 ; @calls    fDialog_DialogHandler
 ;;
-fPlayerInteraction0x45:
+fPlayerInteraction_NameNewbornCalf:
     SEP #$20                                                   ;81EFAD|E220    |      ;
     REP #$10                                                   ;81EFAF|C210    |      ;
     LDA.W nPlayerInteractionArg1                               ;81EFB1|AD6F09  |00096F;
@@ -3420,7 +3420,7 @@ fPlayerInteraction0x45:
 ; @param    nShippingProfit
 ; @calls    fAI_DeactivateSlotAndObject, fDialog_DialogHandler
 ;;
-fPlayerInteraction0x46:
+fPlayerInteraction_ShippingPayout:
     SEP #$20                                                   ;81F061|E220    |      ;
     REP #$10                                                   ;81F063|C210    |      ;
     LDA.W nPlayerInteractionArg1                               ;81F065|AD6F09  |00096F;
@@ -3524,7 +3524,7 @@ fPlayerInteraction0x46:
 ; @calls    fGameEngine_AddProfit, fGameEngine_AddWood, fAI_SetSlotScript, fDialog_DialogHandler
 ; @note     the local labels .upgrade and .notEnoughWood are swapped in meaning: .upgrade shows the "not enough materials" dialog, .notEnoughWood the offer
 ;;
-fPlayerInteraction0x47:
+fPlayerInteraction_HouseExpansion:
     SEP #$20                                                   ;81F121|E220    |      ;
     REP #$10                                                   ;81F123|C210    |      ;
     LDA.W nPlayerInteractionArg1                               ;81F125|AD6F09  |00096F;
@@ -3751,7 +3751,7 @@ fPlayerInteraction0x47:
 ; @calls    fGameEngine_AddHappiness, fAI_SetSlotScript, fDialog_DialogHandler
 ; @note     confidence: medium for the clock gift condition
 ;;
-fPlayerInteraction0x48:
+fPlayerInteraction_HouseExpansionDone:
     SEP #$20                                                   ;81F2DA|E220    |      ;
     REP #$10                                                   ;81F2DC|C210    |      ;
     LDA.W nPlayerInteractionArg1                               ;81F2DE|AD6F09  |00096F;
@@ -3900,7 +3900,7 @@ fPlayerInteraction0x48:
 ; @case     $49
 ; @calls    fAI_SetSlotScript, fDialog_DialogHandler
 ;;
-fPlayerInteraction0x49:
+fPlayerInteraction_HorseSaddleBags:
     SEP #$20                                                   ;81F40E|E220    |      ;
     REP #$10                                                   ;81F410|C210    |      ;
     LDA.W nPlayerInteractionArg1                               ;81F412|AD6F09  |00096F;
@@ -3967,12 +3967,12 @@ fPlayerInteraction0x49:
  
  
 ;;
-; @brief    Egg Festival: search egg hiding spot 1 (tile $FB at X=$0010, Y=$0030), then resolve it in fPlayerInteraction_Return.
+; @brief    Egg Festival: search egg hiding spot 1 (tile $FB at X=$0010, Y=$0030), then resolve it in fPlayerInteraction_EggHuntResolveSpot.
 ; @case     $4A
-; @calls    fSetTileAtCoords, fPlayerInteraction_Return
+; @calls    fSetTileAtCoords, fPlayerInteraction_EggHuntResolveSpot
 ; @note     confidence: medium - spot numbering follows the order of the handlers
 ;;
-fPlayerInteraction0x4A:
+fPlayerInteraction_EggHuntSpot1:
     REP #$30                                                   ;81F490|C230    |      ;
     LDA.W #$00FB                                               ;81F492|A9FB00  |      ;
     LDX.W #$0010                                               ;81F495|A21000  |      ;
@@ -3982,16 +3982,16 @@ fPlayerInteraction0x4A:
     JSL.L fSetTileAtCoords                                     ;81F4A1|2288A681|81A688;
     REP #$30                                                   ;81F4A5|C230    |      ;
     LDA.W #$0001                                               ;81F4A7|A90100  |      ;
-    JMP.W fPlayerInteraction_Return                            ;81F4AA|4C56F5  |81F556;
+    JMP.W fPlayerInteraction_EggHuntResolveSpot                            ;81F4AA|4C56F5  |81F556;
  
  
 ;;
-; @brief    Egg Festival: search egg hiding spot 2 (tile $FB at X=$00B0, Y=$0090), then resolve it in fPlayerInteraction_Return.
+; @brief    Egg Festival: search egg hiding spot 2 (tile $FB at X=$00B0, Y=$0090), then resolve it in fPlayerInteraction_EggHuntResolveSpot.
 ; @case     $4B
-; @calls    fSetTileAtCoords, fPlayerInteraction_Return
+; @calls    fSetTileAtCoords, fPlayerInteraction_EggHuntResolveSpot
 ; @note     confidence: medium - spot numbering follows the order of the handlers
 ;;
-fPlayerInteraction0x4B:
+fPlayerInteraction_EggHuntSpot2:
     REP #$30                                                   ;81F4AD|C230    |      ;
     LDA.W #$00FB                                               ;81F4AF|A9FB00  |      ;
     LDX.W #$00B0                                               ;81F4B2|A2B000  |      ;
@@ -4001,16 +4001,16 @@ fPlayerInteraction0x4B:
     JSL.L fSetTileAtCoords                                     ;81F4BE|2288A681|81A688;
     REP #$30                                                   ;81F4C2|C230    |      ;
     LDA.W #$0002                                               ;81F4C4|A90200  |      ;
-    JMP.W fPlayerInteraction_Return                            ;81F4C7|4C56F5  |81F556;
+    JMP.W fPlayerInteraction_EggHuntResolveSpot                            ;81F4C7|4C56F5  |81F556;
  
  
 ;;
-; @brief    Egg Festival: search egg hiding spot 3 (tile $FB at X=$01C0, Y=$0050), then resolve it in fPlayerInteraction_Return.
+; @brief    Egg Festival: search egg hiding spot 3 (tile $FB at X=$01C0, Y=$0050), then resolve it in fPlayerInteraction_EggHuntResolveSpot.
 ; @case     $4C
-; @calls    fSetTileAtCoords, fPlayerInteraction_Return
+; @calls    fSetTileAtCoords, fPlayerInteraction_EggHuntResolveSpot
 ; @note     confidence: medium - spot numbering follows the order of the handlers
 ;;
-fPlayerInteraction0x4C:
+fPlayerInteraction_EggHuntSpot3:
     REP #$30                                                   ;81F4CA|C230    |      ;
     LDA.W #$00FB                                               ;81F4CC|A9FB00  |      ;
     LDX.W #$01C0                                               ;81F4CF|A2C001  |      ;
@@ -4020,16 +4020,16 @@ fPlayerInteraction0x4C:
     JSL.L fSetTileAtCoords                                     ;81F4DB|2288A681|81A688;
     REP #$30                                                   ;81F4DF|C230    |      ;
     LDA.W #$0003                                               ;81F4E1|A90300  |      ;
-    BRA fPlayerInteraction_Return                              ;81F4E4|8070    |81F556;
+    BRA fPlayerInteraction_EggHuntResolveSpot                              ;81F4E4|8070    |81F556;
  
  
 ;;
-; @brief    Egg Festival: search egg hiding spot 4 (tile $FB at X=$02A0, Y=$0030), then resolve it in fPlayerInteraction_Return.
+; @brief    Egg Festival: search egg hiding spot 4 (tile $FB at X=$02A0, Y=$0030), then resolve it in fPlayerInteraction_EggHuntResolveSpot.
 ; @case     $4D
-; @calls    fSetTileAtCoords, fPlayerInteraction_Return
+; @calls    fSetTileAtCoords, fPlayerInteraction_EggHuntResolveSpot
 ; @note     confidence: medium - spot numbering follows the order of the handlers
 ;;
-fPlayerInteraction0x4D:
+fPlayerInteraction_EggHuntSpot4:
     REP #$30                                                   ;81F4E6|C230    |      ;
     LDA.W #$00FB                                               ;81F4E8|A9FB00  |      ;
     LDX.W #$02A0                                               ;81F4EB|A2A002  |      ;
@@ -4039,16 +4039,16 @@ fPlayerInteraction0x4D:
     JSL.L fSetTileAtCoords                                     ;81F4F7|2288A681|81A688;
     REP #$30                                                   ;81F4FB|C230    |      ;
     LDA.W #$0004                                               ;81F4FD|A90400  |      ;
-    BRA fPlayerInteraction_Return                              ;81F500|8054    |81F556;
+    BRA fPlayerInteraction_EggHuntResolveSpot                              ;81F500|8054    |81F556;
  
  
 ;;
-; @brief    Egg Festival: search egg hiding spot 5 (tile $FB at X=$0050, Y=$02C0), then resolve it in fPlayerInteraction_Return.
+; @brief    Egg Festival: search egg hiding spot 5 (tile $FB at X=$0050, Y=$02C0), then resolve it in fPlayerInteraction_EggHuntResolveSpot.
 ; @case     $4E
-; @calls    fSetTileAtCoords, fPlayerInteraction_Return
+; @calls    fSetTileAtCoords, fPlayerInteraction_EggHuntResolveSpot
 ; @note     confidence: medium - spot numbering follows the order of the handlers
 ;;
-fPlayerInteraction0x4E:
+fPlayerInteraction_EggHuntSpot5:
     REP #$30                                                   ;81F502|C230    |      ;
     LDA.W #$00FB                                               ;81F504|A9FB00  |      ;
     LDX.W #$0050                                               ;81F507|A25000  |      ;
@@ -4058,16 +4058,16 @@ fPlayerInteraction0x4E:
     JSL.L fSetTileAtCoords                                     ;81F513|2288A681|81A688;
     REP #$30                                                   ;81F517|C230    |      ;
     LDA.W #$0005                                               ;81F519|A90500  |      ;
-    BRA fPlayerInteraction_Return                              ;81F51C|8038    |81F556;
+    BRA fPlayerInteraction_EggHuntResolveSpot                              ;81F51C|8038    |81F556;
  
  
 ;;
-; @brief    Egg Festival: search egg hiding spot 6 (tile $FB at X=$0210, Y=$0250), then resolve it in fPlayerInteraction_Return.
+; @brief    Egg Festival: search egg hiding spot 6 (tile $FB at X=$0210, Y=$0250), then resolve it in fPlayerInteraction_EggHuntResolveSpot.
 ; @case     $4F
-; @calls    fSetTileAtCoords, fPlayerInteraction_Return
+; @calls    fSetTileAtCoords, fPlayerInteraction_EggHuntResolveSpot
 ; @note     confidence: medium - spot numbering follows the order of the handlers
 ;;
-fPlayerInteraction0x4F:
+fPlayerInteraction_EggHuntSpot6:
     REP #$30                                                   ;81F51E|C230    |      ;
     LDA.W #$00FB                                               ;81F520|A9FB00  |      ;
     LDX.W #$0210                                               ;81F523|A21002  |      ;
@@ -4077,16 +4077,16 @@ fPlayerInteraction0x4F:
     JSL.L fSetTileAtCoords                                     ;81F52F|2288A681|81A688;
     REP #$30                                                   ;81F533|C230    |      ;
     LDA.W #$0006                                               ;81F535|A90600  |      ;
-    BRA fPlayerInteraction_Return                              ;81F538|801C    |81F556;
+    BRA fPlayerInteraction_EggHuntResolveSpot                              ;81F538|801C    |81F556;
  
  
 ;;
-; @brief    Egg Festival: search egg hiding spot 7 (tile $FB at X=$0210, Y=$0330), then resolve it in fPlayerInteraction_Return.
+; @brief    Egg Festival: search egg hiding spot 7 (tile $FB at X=$0210, Y=$0330), then resolve it in fPlayerInteraction_EggHuntResolveSpot.
 ; @case     $50
-; @calls    fSetTileAtCoords, fPlayerInteraction_Return
+; @calls    fSetTileAtCoords, fPlayerInteraction_EggHuntResolveSpot
 ; @note     confidence: medium - spot numbering follows the order of the handlers
 ;;
-fPlayerInteraction0x50:
+fPlayerInteraction_EggHuntSpot7:
     REP #$30                                                   ;81F53A|C230    |      ;
     LDA.W #$00FB                                               ;81F53C|A9FB00  |      ;
     LDX.W #$0210                                               ;81F53F|A21002  |      ;
@@ -4096,7 +4096,7 @@ fPlayerInteraction0x50:
     JSL.L fSetTileAtCoords                                     ;81F54B|2288A681|81A688;
     REP #$30                                                   ;81F54F|C230    |      ;
     LDA.W #$0007                                               ;81F551|A90700  |      ;
-    BRA fPlayerInteraction_Return                              ;81F554|8000    |81F556;
+    BRA fPlayerInteraction_EggHuntResolveSpot                              ;81F554|8000    |81F556;
  
  
 ;;
@@ -4110,7 +4110,7 @@ fPlayerInteraction0x50:
 ; @calls    fMap_UpdateCurrentTilemap
 ; @note     confidence: medium - flag/egg semantics derived from AI script 0x28 (Egg Festival), not verified in game
 ;;
-fPlayerInteraction_Return:
+fPlayerInteraction_EggHuntResolveSpot:
     REP #$30                                                   ;81F556|C230    |      ;
     TAX                                                        ;81F558|AA      |      ;
     SEP #$20                                                   ;81F559|E220    |      ;
@@ -4154,7 +4154,7 @@ fPlayerInteraction_Return:
 ; @case     $51
 ; @calls    fGameEngine_AddProfit, fGameEngine_AddHappiness, fPlayer_UpdateSpriteObject, fDialog_DialogHandler
 ;;
-fPlayerInteraction0x51:
+fPlayerInteraction_BuyRiceBall:
     SEP #$20                                                   ;81F5B0|E220    |      ;
     REP #$10                                                   ;81F5B2|C210    |      ;
     LDA.W nPlayerInteractionArg1                               ;81F5B4|AD6F09  |00096F;
@@ -4184,7 +4184,7 @@ fPlayerInteraction0x51:
     JSL.L fDialog_DialogHandler                                ;81F5DF|225F9383|83935F;
     SEP #$20                                                   ;81F5E3|E220    |      ;
     INC.W nPlayerInteractionArg1                               ;81F5E5|EE6F09  |00096F;
-    JMP.W fPlayerInteraction_ReturnShared                                       ;81F5E8|4CD6F6  |81F6D6;
+    JMP.W fPlayerInteraction_VendorReturn                                       ;81F5E8|4CD6F6  |81F6D6;
  
  
 .case1:
@@ -4192,7 +4192,7 @@ fPlayerInteraction0x51:
     LDA.W strcDialogDisplay.inputMode                          ;81F5ED|AD9A01  |00019A;
     CMP.B #$02                                                 ;81F5F0|C902    |      ;
     BNE +                                                      ;81F5F2|D003    |81F5F7;
-    JMP.W fPlayerInteraction_ReturnShared                                       ;81F5F4|4CD6F6  |81F6D6;
+    JMP.W fPlayerInteraction_VendorReturn                                       ;81F5F4|4CD6F6  |81F6D6;
  
  
   + SEP #$20                                                   ;81F5F7|E220    |      ;
@@ -4218,7 +4218,7 @@ fPlayerInteraction0x51:
     SEP #$20                                                   ;81F629|E220    |      ;
     LDA.B #$02                                                 ;81F62B|A902    |      ;
     STA.W nPlayerInteractionArg1                               ;81F62D|8D6F09  |00096F;
-    JMP.W fPlayerInteraction_ReturnShared                                       ;81F630|4CD6F6  |81F6D6;
+    JMP.W fPlayerInteraction_VendorReturn                                       ;81F630|4CD6F6  |81F6D6;
  
  
 .decline_offer:
@@ -4232,7 +4232,7 @@ fPlayerInteraction0x51:
     SEP #$20                                                   ;81F646|E220    |      ;
     LDA.B #$03                                                 ;81F648|A903    |      ;
     STA.W nPlayerInteractionArg1                               ;81F64A|8D6F09  |00096F;
-    JMP.W fPlayerInteraction_ReturnShared                                       ;81F64D|4CD6F6  |81F6D6;
+    JMP.W fPlayerInteraction_VendorReturn                                       ;81F64D|4CD6F6  |81F6D6;
  
  
 .not_enough_money:
@@ -4246,14 +4246,14 @@ fPlayerInteraction0x51:
     SEP #$20                                                   ;81F663|E220    |      ;
     LDA.B #$03                                                 ;81F665|A903    |      ;
     STA.W nPlayerInteractionArg1                               ;81F667|8D6F09  |00096F;
-    BRA fPlayerInteraction_ReturnShared                                         ;81F66A|806A    |81F6D6;
+    BRA fPlayerInteraction_VendorReturn                                         ;81F66A|806A    |81F6D6;
  
  
 .case2:
     SEP #$20                                                   ;81F66C|E220    |      ;
     LDA.W strcDialogDisplay.inputMode                          ;81F66E|AD9A01  |00019A;
     CMP.B #$02                                                 ;81F671|C902    |      ;
-    BEQ fPlayerInteraction_ReturnShared                                         ;81F673|F061    |81F6D6;
+    BEQ fPlayerInteraction_VendorReturn                                         ;81F673|F061    |81F6D6;
     REP #$20                                                   ;81F675|C220    |      ;
     %SetPlayerAction(!PACTION_AUTOPILOT)
     REP #$30                                                   ;81F67E|C230    |      ;
@@ -4267,16 +4267,16 @@ fPlayerInteraction0x51:
     STZ.W nPlayerInteractionArg2                               ;81F694|9C7009  |000970;
     LDA.B #$04                                                 ;81F697|A904    |      ;
     STA.W nPlayerInteractionArg1                               ;81F699|8D6F09  |00096F;
-    BRA fPlayerInteraction_ReturnShared                                         ;81F69C|8038    |81F6D6;
+    BRA fPlayerInteraction_VendorReturn                                         ;81F69C|8038    |81F6D6;
  
  
 .case3:
     SEP #$20                                                   ;81F69E|E220    |      ;
     LDA.W strcDialogDisplay.inputMode                          ;81F6A0|AD9A01  |00019A;
     CMP.B #$02                                                 ;81F6A3|C902    |      ;
-    BEQ fPlayerInteraction_ReturnShared                                         ;81F6A5|F02F    |81F6D6;
+    BEQ fPlayerInteraction_VendorReturn                                         ;81F6A5|F02F    |81F6D6;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
-    BRA fPlayerInteraction_ReturnShared                                         ;81F6B3|8021    |81F6D6;
+    BRA fPlayerInteraction_VendorReturn                                         ;81F6B3|8021    |81F6D6;
  
  
 .case4:
@@ -4284,28 +4284,28 @@ fPlayerInteraction0x51:
     INC.W nPlayerInteractionArg2                               ;81F6B7|EE7009  |000970;
     LDA.W nPlayerInteractionArg2                               ;81F6BA|AD7009  |000970;
     CMP.B #$64                                                 ;81F6BD|C964    |      ;
-    BNE fPlayerInteraction_ReturnShared                                         ;81F6BF|D015    |81F6D6;
+    BNE fPlayerInteraction_VendorReturn                                         ;81F6BF|D015    |81F6D6;
     %UnsetPlayerFlag(!PFLAGS_INTERACTING)
     %SetPlayerAction(!PACTION_NONE)
-    BRA fPlayerInteraction_ReturnShared                                         ;81F6D4|8000    |81F6D6;
+    BRA fPlayerInteraction_VendorReturn                                         ;81F6D4|8000    |81F6D6;
  
  
 ;;
-; @brief    Shared RTS of the vendor handlers (fPlayerInteraction0x51 / 0x52).
+; @brief    Shared RTS of the vendor handlers (fPlayerInteraction_BuyRiceBall / 0x52).
 ; @note     a FIXME in the trace marks it as a placeholder for a local return label
 ;;
-fPlayerInteraction_ReturnShared:
+fPlayerInteraction_VendorReturn:
     RTS                                                        ;81F6D6|60      |      ; FIXME: I want to be .return
  
  
 ;;
-; @brief    Food vendor sells a dumpling for 300G (+3 happiness); same flow as fPlayerInteraction0x51.
+; @brief    Food vendor sells a dumpling for 300G (+3 happiness); same flow as fPlayerInteraction_BuyRiceBall.
 ; @details  Offer dialog $024A, price -300G ($FFE2 x 10G), eating sprite $FB, +3 happiness, ends after $64 frames.
 ; @case     $52
 ; @calls    fGameEngine_AddProfit, fGameEngine_AddHappiness, fPlayer_UpdateSpriteObject, fDialog_DialogHandler
-; @note     one path (not enough money) jumps to fPlayerInteraction_ReturnShared instead of .return (marked BUG in the trace; harmless RTS)
+; @note     one path (not enough money) jumps to fPlayerInteraction_VendorReturn instead of .return (marked BUG in the trace; harmless RTS)
 ;;
-fPlayerInteraction0x52:
+fPlayerInteraction_BuyDumpling:
     SEP #$20                                                   ;81F6D7|E220    |      ;
     REP #$10                                                   ;81F6D9|C210    |      ;
     LDA.W nPlayerInteractionArg1                               ;81F6DB|AD6F09  |00096F;
@@ -4397,7 +4397,7 @@ fPlayerInteraction0x52:
     SEP #$20                                                   ;81F78A|E220    |      ;
     LDA.B #$03                                                 ;81F78C|A903    |      ;
     STA.W nPlayerInteractionArg1                               ;81F78E|8D6F09  |00096F;
-    JMP.W fPlayerInteraction_ReturnShared                                       ;81F791|4CD6F6  |81F6D6; BUG - should be .return in this function rather than previous one since we are out of function scope
+    JMP.W fPlayerInteraction_VendorReturn                                       ;81F791|4CD6F6  |81F6D6; BUG - should be .return in this function rather than previous one since we are out of function scope
  
  
 .case2:
@@ -4454,7 +4454,7 @@ fPlayerInteraction0x52:
 ; @calls    fStoreTileOnFrontOfPlayerAtDistance
 ; @note     the .deadloop spins forever if no position matches (cannot happen with a valid coop tile)
 ;;
-fPlayerInteraction0x53:
+fPlayerInteraction_TakeEggFromCoop:
     SEP #$20                                                   ;81F7FF|E220    |      ;
     REP #$10                                                   ;81F801|C210    |      ;
     REP #$30                                                   ;81F803|C230    |      ;
@@ -4744,7 +4744,7 @@ fPlayerInteraction0x55_AnimalNotebook:
 ; @brief    Waits two calls (nPlayerInteractionArg2 reaches 2) and ends the interaction.
 ; @case     $56
 ;;
-fPlayerInteraction0x56:
+fPlayerInteraction_EndAfterTwoFrames:
     SEP #$20                                                   ;81FA69|E220    |      ;
     REP #$10                                                   ;81FA6B|C210    |      ;
     INC.W nPlayerInteractionArg2                               ;81FA6D|EE7009  |000970;
@@ -4762,7 +4762,7 @@ fPlayerInteraction0x56:
 ; @calls    fDialog_DialogHandler
 ; @note     confidence: low - speaker not identified
 ;;
-fPlayerInteraction0x57:
+fPlayerInteraction_AnnCookingRemark:
     REP #$30                                                   ;81FA84|C230    |      ;
     LDX.W #$0491                                               ;81FA86|A29104  |      ;
     %CheckFlag(event2, !EFLAGS2_MARRIEDANN)
@@ -4783,7 +4783,7 @@ fPlayerInteraction0x57:
 ; aPlayerInteraction_SetFlags / aPlayerInteraction_ResetFlags: 16 single-bit masks (1<<N) and their complements.
 ; format: 16 words each
 ; index: bit number * 2
-; used_by: fPlayerInteraction_Return (set masks vs. strcFlags.unknown3), fPlayerInteraction0x53 (reset masks on nEggInCoopFlags)
+; used_by: fPlayerInteraction_EggHuntResolveSpot (set masks vs. strcFlags.unknown3), fPlayerInteraction_TakeEggFromCoop (reset masks on nEggInCoopFlags)
     incsrc "../../../build/gen/blocks/player_interaction_flags.asm"
  
     pad $81FFFF

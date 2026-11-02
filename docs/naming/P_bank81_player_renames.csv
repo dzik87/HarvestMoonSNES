@@ -1,0 +1,100 @@
+old,new,confidence,reason
+fPlayerAction0x00,fPlayerAction_Default,high,"Jump-table entry shared by NONE/WALK/RUN/06/07/0E; checks EATINGMEAL, RUN, WALK, 0E then falls back to the idle path."
+fPlayerAction0x19,fPlayerAction_Autopilot,high,Jump-table entry of !PACTION_AUTOPILOT; also the shared exit that clears the exercise timer.
+fPlayerAction0x1C,fPlayerAction_SwapTool,high,!PACTION_SWAPTOOL: exchanges strcPlayerData.toolEquipped and toolSecond after the swap pose.
+fPlayerAction0x17,fPlayerAction_MountHorse,medium,"Mirror of the dismount handler (sprite $DC+dir, step, daily2 $0020); RIDINGHORSE itself is not set here."
+fPlayerAction0x18,fPlayerAction_DismountHorse,high,Clears !PFLAGS_RIDINGHORSE after sprite $E0+dir step.
+fPlayerAction0x16,fPlayerAction_PutDownDog,medium,!PACTION_DROPPINGDOG: at the end starts the dog slot script at nDogX/nDogY and clears strcStockData.unkDog.
+fPlayerAction0x15,fPlayerAction_Drink,medium,!PACTION_DRINKING: sprite $CC then !PACTION_DRUNK.
+fPlayerAction0x14,fPlayerAction_Drunk,medium,!PACTION_DRUNK: reaction sprite $8F; entered after the poison mushroom.
+fPlayerAction0x10,fPlayerAction_FishingCast,medium,Sprite $89 then !PACTION_FISHING; set by fInput_SetPlayerAction0x10.
+fPlayerAction0x13,fPlayerAction_FishingReel,high,!PACTION_REELING: after the animation picks the catch outcome AI script by sprite ($8B/$8C).
+fPlayerAction0x1B,fPlayerAction_WhistleDog,high,!PACTION_WHISTLEDOG: sets strcFlags.daily4 $0010.
+fPlayerAction0x0D,fPlayerAction_WhistleHorse,high,!PACTION_WHISTLEHORSE: sets strcFlags.daily2 $0400.
+fPlayerAction0x0B,fPlayerAction_Tired,high,!PACTION_TIRED: runs the pose chosen by fPlayerEnergyHandler.
+fPlayerAction0x0A,fPlayerAction_UseTool,high,!PACTION_USINGTOOL: calls fToolUsedActionHandler when the swing animation ends.
+fPlayerAction0x0E,fPlayerAction_AutoStep,medium,Forced step with sprite $45; used by interaction $11 to walk the player.
+fPlayerAction0x03,fPlayerAction_Jump,high,"!PACTION_JUMP, plays !SFX_PLAYERJUMP in all variants."
+fPlayerAction0x04,fPlayerAction_PickUpItem,high,"!PACTION_ITEMONHAND: lift pose, fItemCarried_Begin, sets !PFLAGS_HOLDINGITEM."
+fPlayerAction0x05,fPlayerAction_DropItem,high,"!PACTION_DROPITEM: !SFX_ITEMDROP, clears !PFLAGS_HOLDINGITEM."
+fPlayerAction0x08,fPlayerAction_ConsumeItem,high,"!PACTION_CONSUMEITEM: eats carried item; poison mushroom -> DRUNK, power berry -> +stamina."
+fPlayerAction0x09,fPlayerAction_Exercise,medium,!PACTION_EXCERCISE: idle stretching animation started by fPlayerAction_IdleHandler.
+fPlayerInteraction0x03,fPlayerInteraction_RingBell,medium,"Plays !SFX_BELL, daily1 $0010, tile script $44, 32 frame hold."
+fPlayerInteraction0x05,fPlayerInteraction_StartTileScript11,high,Only starts tile script $11 and ends.
+fPlayerInteraction0x06,fPlayerInteraction_StartTileScript12,high,Only starts tile script $12 and ends.
+fPlayerInteraction0x0F,fPlayerInteraction_WatchTv1,medium,"Sits down, shows aWeatherDialogId forecast dialog, tile scripts $00/$46."
+fPlayerInteraction0x12,fPlayerInteraction_WatchTv2,medium,Same flow with tile scripts $27/$47.
+fPlayerInteraction0x13,fPlayerInteraction_WatchTv3,medium,Same flow with tile scripts $34/$48.
+fPlayerInteraction0x11,fPlayerInteraction_AutoWalkUp,medium,Forced !PACTION_0E walk up for 32 frames.
+fPlayerInteraction0x1E,fPlayerInteraction_ReadFlier,high,"Dialogs $0371 ""The flier is in"" and $0372+season (spa flier)."
+fPlayerInteraction0x2E_AnimalNPC,fPlayerInteraction_LivestockDealerMenu,high,"Dialog $0305 buy/sell cow/chicken menu, nOwnedCows/nOwnedChickens, AddProfit."
+fPlayerInteraction0x35,fPlayerInteraction_PlaySoundAndWait,medium,Plays !SFX_INTERACTIONUNK24 for 120 frames and ends.
+fPlayerInteraction0x42,fPlayerInteraction_DeliverBoughtCow,high,Cow delivery dialogs $030C/$010E and name input !NI_COWBOUGHT.
+fPlayerInteraction0x42_ShowDialog,fPlayerInteraction_DeliverBoughtCow_ShowDialog,high,Region label inside the same handler.
+fPlayerInteraction0x42_RequestNameInput,fPlayerInteraction_DeliverBoughtCow_RequestNameInput,high,Region label inside the same handler.
+fPlayerInteraction0x43,fPlayerInteraction_SellCow,high,"Sell-cow dialogs $030D-$0310, nCowSalePrice, nOwnedCows--; hawker bean seed trade."
+fPlayerInteraction0x44,fPlayerInteraction_SellChicken,high,Same flow with chickens; hawker power berry trade in fall.
+fPlayerInteraction0x45,fPlayerInteraction_NameNewbornCalf,high,Dialog $0317 (calf born) and name input !NI_COWBORN.
+fPlayerInteraction0x46,fPlayerInteraction_ShippingPayout,high,Dialogs $031A/$031B report nShippingProfit.
+fPlayerInteraction0x47,fPlayerInteraction_HouseExpansion,high,"nReqWoodForExpansion/nStoredWood checks, AddProfit 5000G/10000G, construction start."
+fPlayerInteraction0x48,fPlayerInteraction_HouseExpansionDone,high,"Reward happiness and dialogs $013D/$0140, clock gift $025C."
+fPlayerInteraction0x49,fPlayerInteraction_HorseSaddleBags,medium,Dialog $0300 saddle bags for the grown horse.
+fPlayerInteraction0x51,fPlayerInteraction_BuyRiceBall,high,"Dialogs $024B-$024D, 200G, +1 happiness."
+fPlayerInteraction0x52,fPlayerInteraction_BuyDumpling,high,"Dialog $024A, 300G, +3 happiness."
+fPlayerInteraction0x53,fPlayerInteraction_TakeEggFromCoop,high,Carries !CITEM_EGG and clears nEggInCoopFlags bit.
+fPlayerInteraction0x56,fPlayerInteraction_EndAfterTwoFrames,high,Counts nPlayerInteractionArg2 to 2 and ends.
+fPlayerInteraction0x57,fPlayerInteraction_AnnCookingRemark,low,Dialog $0246 (remark about Ann's dishes) or $0491 when married to Ann.
+fPlayerInteraction_Return,fPlayerInteraction_EggHuntResolveSpot,medium,Picks up hidden egg $1D+colour or restores tile $A1.
+fPlayerInteraction_ReturnShared,fPlayerInteraction_VendorReturn,high,Shared RTS of the vendor handlers.
+fPlayerInteraction0x1D,fPlayerInteraction_EggHuntSpot0,medium,Sets tile $FB at a fixed Egg Festival spot and calls fPlayerInteraction_Return with index 0.
+fPlayerInteraction0x4A,fPlayerInteraction_EggHuntSpot1,medium,Sets tile $FB at a fixed Egg Festival spot and calls fPlayerInteraction_Return with index 1.
+fPlayerInteraction0x4B,fPlayerInteraction_EggHuntSpot2,medium,Sets tile $FB at a fixed Egg Festival spot and calls fPlayerInteraction_Return with index 2.
+fPlayerInteraction0x4C,fPlayerInteraction_EggHuntSpot3,medium,Sets tile $FB at a fixed Egg Festival spot and calls fPlayerInteraction_Return with index 3.
+fPlayerInteraction0x4D,fPlayerInteraction_EggHuntSpot4,medium,Sets tile $FB at a fixed Egg Festival spot and calls fPlayerInteraction_Return with index 4.
+fPlayerInteraction0x4E,fPlayerInteraction_EggHuntSpot5,medium,Sets tile $FB at a fixed Egg Festival spot and calls fPlayerInteraction_Return with index 5.
+fPlayerInteraction0x4F,fPlayerInteraction_EggHuntSpot6,medium,Sets tile $FB at a fixed Egg Festival spot and calls fPlayerInteraction_Return with index 6.
+fPlayerInteraction0x50,fPlayerInteraction_EggHuntSpot7,medium,Sets tile $FB at a fixed Egg Festival spot and calls fPlayerInteraction_Return with index 7.
+fPlayerInteraction0x27,fPlayerInteraction_PickUpItem44,high,"SetCurrentCarriedItemIndex($0070) -> aInteractionItemTable -> carried item $44, then !PACTION_ITEMONHAND."
+fPlayerInteraction0x28,fPlayerInteraction_PickUpItem45,high,"SetCurrentCarriedItemIndex($0071) -> aInteractionItemTable -> carried item $45, then !PACTION_ITEMONHAND."
+fPlayerInteraction0x29,fPlayerInteraction_PickUpItem46,high,"SetCurrentCarriedItemIndex($0072) -> aInteractionItemTable -> carried item $46, then !PACTION_ITEMONHAND."
+fPlayerInteraction0x2A,fPlayerInteraction_PickUpItem47,high,"SetCurrentCarriedItemIndex($0073) -> aInteractionItemTable -> carried item $47, then !PACTION_ITEMONHAND."
+fPlayerInteraction0x2B,fPlayerInteraction_PickUpItem48,high,"SetCurrentCarriedItemIndex($0074) -> aInteractionItemTable -> carried item $48, then !PACTION_ITEMONHAND."
+fPlayerInteraction0x2C,fPlayerInteraction_PickUpItem49,high,"SetCurrentCarriedItemIndex($0075) -> aInteractionItemTable -> carried item $49, then !PACTION_ITEMONHAND."
+fPlayerInteraction0x2F,fPlayerInteraction_PickUpItem52,high,"SetCurrentCarriedItemIndex($007E) -> aInteractionItemTable -> carried item $52, then !PACTION_ITEMONHAND."
+fPlayerInteraction0x30,fPlayerInteraction_PickUpItem53,high,"SetCurrentCarriedItemIndex($007F) -> aInteractionItemTable -> carried item $53, then !PACTION_ITEMONHAND."
+fPlayerInteraction0x31,fPlayerInteraction_PickUpItem54,high,"SetCurrentCarriedItemIndex($0080) -> aInteractionItemTable -> carried item $54, then !PACTION_ITEMONHAND."
+fPlayerInteraction0x32,fPlayerInteraction_PickUpItem55,high,"SetCurrentCarriedItemIndex($0081) -> aInteractionItemTable -> carried item $55, then !PACTION_ITEMONHAND."
+fPlayerInteraction0x34,fPlayerInteraction_PickUpItem56,high,"SetCurrentCarriedItemIndex($0082) -> aInteractionItemTable -> carried item $56, then !PACTION_ITEMONHAND."
+fPlayerInteraction0x37,fPlayerInteraction_PickUpItem4B,high,"SetCurrentCarriedItemIndex($0077) -> aInteractionItemTable -> carried item $4B, then !PACTION_ITEMONHAND."
+fPlayerInteraction0x38,fPlayerInteraction_PickUpItem4A,high,"SetCurrentCarriedItemIndex($0076) -> aInteractionItemTable -> carried item $4A, then !PACTION_ITEMONHAND."
+fPlayerInteraction0x39,fPlayerInteraction_PickUpItem4C,high,"SetCurrentCarriedItemIndex($0078) -> aInteractionItemTable -> carried item $4C, then !PACTION_ITEMONHAND."
+fPlayerInteraction0x3A,fPlayerInteraction_PickUpItem51,high,"SetCurrentCarriedItemIndex($007D) -> aInteractionItemTable -> carried item $51, then !PACTION_ITEMONHAND."
+fPlayerInteraction0x3B,fPlayerInteraction_PickUpItem4D,high,"SetCurrentCarriedItemIndex($0079) -> aInteractionItemTable -> carried item $4D, then !PACTION_ITEMONHAND."
+fPlayerInteraction0x3C,fPlayerInteraction_PickUpItem4E,high,"SetCurrentCarriedItemIndex($007A) -> aInteractionItemTable -> carried item $4E, then !PACTION_ITEMONHAND."
+fPlayerInteraction0x3D,fPlayerInteraction_PickUpItem4F,high,"SetCurrentCarriedItemIndex($007B) -> aInteractionItemTable -> carried item $4F, then !PACTION_ITEMONHAND."
+fPlayerInteraction0x3E,fPlayerInteraction_PickUpItem50,high,"SetCurrentCarriedItemIndex($007C) -> aInteractionItemTable -> carried item $50, then !PACTION_ITEMONHAND."
+fPlayerInteraction0x00,fPlayerInteraction0x00_Nop,high,Handler body is a single RTS.
+fPlayerInteraction0x02,fPlayerInteraction0x02_Nop,high,Handler body is a single RTS.
+fPlayerInteraction0x04,fPlayerInteraction0x04_Nop,high,Handler body is a single RTS.
+fPlayerInteraction0x07,fPlayerInteraction0x07_Nop,high,Handler body is a single RTS.
+fPlayerInteraction0x08,fPlayerInteraction0x08_Nop,high,Handler body is a single RTS.
+fPlayerInteraction0x09,fPlayerInteraction0x09_Nop,high,Handler body is a single RTS.
+fPlayerInteraction0x0A,fPlayerInteraction0x0A_Nop,high,Handler body is a single RTS.
+fPlayerInteraction0x0B,fPlayerInteraction0x0B_Nop,high,Handler body is a single RTS.
+fPlayerInteraction0x0C,fPlayerInteraction0x0C_Nop,high,Handler body is a single RTS.
+fPlayerInteraction0x0D,fPlayerInteraction0x0D_Nop,high,Handler body is a single RTS.
+fPlayerInteraction0x0E,fPlayerInteraction0x0E_Nop,high,Handler body is a single RTS.
+fPlayerInteraction0x16,fPlayerInteraction0x16_Nop,high,Handler body is a single RTS.
+fPlayerInteraction0x17,fPlayerInteraction0x17_Nop,high,Handler body is a single RTS.
+fPlayerInteraction0x18,fPlayerInteraction0x18_Nop,high,Handler body is a single RTS.
+fPlayerInteraction0x19,fPlayerInteraction0x19_Nop,high,Handler body is a single RTS.
+fPlayerInteraction0x1A,fPlayerInteraction0x1A_Nop,high,Handler body is a single RTS.
+fPlayerInteraction0x1B,fPlayerInteraction0x1B_Nop,high,Handler body is a single RTS.
+fPlayerInteraction0x1C,fPlayerInteraction0x1C_Nop,high,Handler body is a single RTS.
+fPlayerInteraction0x1F,fPlayerInteraction0x1F_Nop,high,Handler body is a single RTS.
+fPlayerInteraction0x20,fPlayerInteraction0x20_Nop,high,Handler body is a single RTS.
+fPlayerInteraction0x21,fPlayerInteraction0x21_Nop,high,Handler body is a single RTS.
+fPlayerInteraction0x22,fPlayerInteraction0x22_Nop,high,Handler body is a single RTS.
+fPlayerInteraction0x23,fPlayerInteraction0x23_Nop,high,Handler body is a single RTS.
+fPlayerInteraction0x24,fPlayerInteraction0x24_Nop,high,Handler body is a single RTS.
+fPlayerInteraction0x25,fPlayerInteraction0x25_Nop,high,Handler body is a single RTS.

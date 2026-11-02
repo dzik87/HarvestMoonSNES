@@ -20,7 +20,7 @@ The three effects that have a caller but an unknown purpose:
 | `Sfx_HouseEventUnk20` | played by `fAreaEvents_House` when `event6` bit `$0020` is set; the bit is set in `fGameEngine_AnimalsDailyUpdate` for a chicken when `mapFlags & $0410` and the chicken state byte 1 is < 4 | emulator: breakpoint on `$83E05B`, note which chicken state / farm situation is on screen |
 | `Sfx_HouseEventUnk22` | played twice (20 and 30 frame gaps) when `event6` bit `$0200` is set; set with `mapFlags |= $0400` in `fObjectMap_UpdateFarmTilesNewDay` when a random 1/8 roll hits for farm tile `$06` | emulator: breakpoint on `$83E030`, check what happens on the farm that morning |
 | `Sfx_CutsceneUnk23` | first action of AI script `0x23`, voice 7, 60 frames, right after the fade-in | emulator: identify the cutscene that starts script `0x23` (dialogs of the script) |
-| `Sfx_InteractionUnk24` | `fPlayerInteraction0x35`, voice 7, 120 frames | emulator: find the object whose interaction type is `0x35` |
+| `Sfx_InteractionUnk24` | `fPlayerInteraction_PlaySoundAndWait`, voice 7, 120 frames | emulator: find the object whose interaction type is `0x35` |
 
 ## Graphics blobs
 

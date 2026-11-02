@@ -5,7 +5,7 @@
 ; @details  fPlayer_UpdateHandler is called once per frame. If the player is inactive it only runs the idle path; if
 ; !PFLAGS_INTERACTING is set it hands over to the interaction state machine (player_update.asm); otherwise it jumps through
 ; aPlayerAction_JumpTable[strcPlayer.action] (indexes are !PACTION_*, enums.asm). Every action handler ends by jumping to
-; fPlayerAction_CheckIdle (fall back to the idle pose when the action is !PACTION_NONE) or to fPlayerAction_Finish / fPlayerAction0x19
+; fPlayerAction_CheckIdle (fall back to the idle pose when the action is !PACTION_NONE) or to fPlayerAction_Finish / fPlayerAction_Autopilot
 ; (common exit: refresh the camera, copy the object direction back). Poses are chosen by writing strcObjectData.spriteIdx
 ; (index into sSmallSpriteData) and calling fPlayer_UpdateSpriteObject; the animation is finished when strcObjectData.exist
 ; becomes $FFFF. Pose bases per state: walk $04, run $08, jump $0C, item pose $10, holding $14/$28/$2C, riding $B0/$B4/$B8,
@@ -55,14 +55,14 @@ fPlayerAction_Handler:
 ;;
 ; @brief    Default action handler (!PACTION_NONE, WALK, RUN, 06, 07 and 0E share this entry of the jump table).
 ; @details  Order of checks: !PFLAGS_EATINGMEAL -> fPlayerAction_EatMeal; action RUN -> fPlayerAction_Run; WALK -> fPlayerAction_Walk;
-; action $0E -> fPlayerAction0x0E (the table entry of $0E points here, so this routine forwards it); anything else falls to
+; action $0E -> fPlayerAction_AutoStep (the table entry of $0E points here, so this routine forwards it); anything else falls to
 ; fPlayerAction_CheckIdle.
 ; @case     $00,$01,$02,$06,$07,$0E
 ; @param    strcPlayer.action, strcPlayer.flags
 ; @mode     M8X16 -> M16X16
-; @calls    fPlayerAction_EatMeal, fPlayerAction_Run, fPlayerAction_Walk, fPlayerAction0x0E, fPlayerAction_CheckIdle
+; @calls    fPlayerAction_EatMeal, fPlayerAction_Run, fPlayerAction_Walk, fPlayerAction_AutoStep, fPlayerAction_CheckIdle
 ;;
-fPlayerAction0x00:
+fPlayerAction_Default:
     %CheckPlayerFlags(!PFLAGS_EATINGMEAL)
     BEQ +                                                      ;81BFE3|F003    |81BFE8;
     JMP.W fPlayerAction_EatMeal                                ;81BFE5|4C14CB  |81CB14;
@@ -81,19 +81,19 @@ fPlayerAction0x00:
  
   + CMP.W #$000E                                               ;81BFFA|C90E00  |      ;
     BNE fPlayerAction_CheckIdle                                        ;81BFFD|D003    |81C002;
-    JMP.W fPlayerAction0x0E                                      ;81BFFF|4C3BC8  |81C83B;
+    JMP.W fPlayerAction_AutoStep                                      ;81BFFF|4C3BC8  |81C83B;
  
  
 ;;
 ; @brief    Common tail of the action handlers: idle pose when the action is !PACTION_NONE, otherwise just finish.
-; @details  If strcPlayer.action == !PACTION_NONE jumps to fPlayerAction_IdleHandler; else falls into fPlayerAction0x19 (reset of the
+; @details  If strcPlayer.action == !PACTION_NONE jumps to fPlayerAction_IdleHandler; else falls into fPlayerAction_Autopilot (reset of the
 ; idle-exercise timer) and fPlayerAction_Finish.
 ; @mode     M16X16 -> M8X16
 ; @calls    fPlayerAction_IdleHandler
 ;;
 fPlayerAction_CheckIdle:
     %CheckPlayerAction(!PACTION_NONE)
-    BNE fPlayerAction0x19                                      ;81C009|D003    |81C00E;
+    BNE fPlayerAction_Autopilot                                      ;81C009|D003    |81C00E;
     JMP.W fPlayerAction_IdleHandler                                      ;81C00B|4C56C5  |81C556;
  
  
@@ -106,7 +106,7 @@ fPlayerAction_CheckIdle:
 ; @mode     M8X16
 ; @calls    fPlayerAction_Finish (falls through)
 ;;
-fPlayerAction0x19:
+fPlayerAction_Autopilot:
     SEP #$20                                                   ;81C00E|E220    |      ;
     STZ.W strcPlayerData.lastExcercise                         ;81C010|9C2509  |000925;
  
@@ -131,7 +131,7 @@ fPlayerAction_Finish:
 ; format: 1 word (bank $81 address) per action id, !PACTION_NONE..!PACTION_1F
 ; index: strcPlayer.action * 2 in fPlayerAction_Handler
 ; used_by: fPlayerAction_Handler
-; note: NONE/WALK/RUN/06/07/0E all share fPlayerAction0x00 which then dispatches on the action itself.
+; note: NONE/WALK/RUN/06/07/0E all share fPlayerAction_Default which then dispatches on the action itself.
     incsrc "../../../build/gen/blocks/player_action_jump_table.asm"
  
 ;;
@@ -143,7 +143,7 @@ fPlayerAction_Finish:
 ; @mode     M16X16 -> M8X16
 ; @calls    fPlayer_UpdateSpriteObject, fToolUsedSound_PlayOnToolChange, fPlayerAction_CheckIdle
 ;;
-fPlayerAction0x1C:
+fPlayerAction_SwapTool:
     REP #$30                                                   ;81C061|C230    |      ;
     %CheckPlayerFlags(!PFLAGS_ANIMATING)
     BEQ +                                                      ;81C06A|F003    |81C06F;
@@ -235,7 +235,7 @@ fPlayerAction0x1A:
 ; @calls    fPlayer_MoveInDirection, fPlayer_UpdateSpriteObject
 ; @note     confidence: medium - symmetrical to the dismount handler, which clears !PFLAGS_RIDINGHORSE
 ;;
-fPlayerAction0x17:
+fPlayerAction_MountHorse:
     REP #$30                                                   ;81C111|C230    |      ;
     LDA.W strcObjectData.directionNew                          ;81C113|AD1309  |000913;
     STA.B strcPlayer.direction                                 ;81C116|85DA    |0000DA;
@@ -269,7 +269,7 @@ fPlayerAction0x17:
 ; @mode     M16X16
 ; @calls    fPlayer_MoveInDirection, fPlayer_UpdateSpriteObject
 ;;
-fPlayerAction0x18:
+fPlayerAction_DismountHorse:
     REP #$30                                                   ;81C153|C230    |      ;
     REP #$30                                                   ;81C155|C230    |      ;
     LDA.W #$00E0                                               ;81C157|A9E000  |      ;
@@ -307,7 +307,7 @@ fPlayerAction0x18:
 ; @calls    fPlayer_UpdateSpriteObject, fAI_StartSlotScriptAtFrontTile
 ; @note     the action is set from bank_84/input.asm
 ;;
-fPlayerAction0x16:
+fPlayerAction_PutDownDog:
     REP #$30                                                   ;81C1A1|C230    |      ;
     REP #$30                                                   ;81C1A3|C230    |      ;
     LDA.W #$00D8                                               ;81C1A5|A9D800  |      ;
@@ -345,7 +345,7 @@ fPlayerAction0x16:
 ; @mode     M16X16
 ; @calls    fPlayer_UpdateSpriteObject
 ;;
-fPlayerAction0x15:
+fPlayerAction_Drink:
     REP #$30                                                   ;81C1F0|C230    |      ;
     REP #$30                                                   ;81C1F2|C230    |      ;
     LDA.W #$00CC                                               ;81C1F4|A9CC00  |      ;
@@ -363,12 +363,12 @@ fPlayerAction0x15:
  
 ;;
 ; @brief    Drunk / poisoned reaction (!PACTION_DRUNK): plays sprite $8F once, then back to NONE.
-; @details  Entered from fPlayerAction0x08 after eating the poison mushroom and from fPlayerAction0x15.
+; @details  Entered from fPlayerAction_ConsumeItem after eating the poison mushroom and from fPlayerAction_Drink.
 ; @case     $14
 ; @mode     M16X16
 ; @calls    fPlayer_UpdateSpriteObject
 ;;
-fPlayerAction0x14:
+fPlayerAction_Drunk:
     REP #$30                                                   ;81C211|C230    |      ;
     REP #$30                                                   ;81C213|C230    |      ;
     LDA.W #$008F                                               ;81C215|A98F00  |      ;
@@ -386,7 +386,7 @@ fPlayerAction0x14:
  
 ;;
 ; @brief    Action $0F: holds sprite $88 (no end condition); entered after a fish was reeled in.
-; @details  Set by fPlayerAction0x13 and by the screen transition (routines.asm) to leave a fishing state. The AI script started
+; @details  Set by fPlayerAction_FishingReel and by the screen transition (routines.asm) to leave a fishing state. The AI script started
 ; by the reel handler ends it.
 ; @case     $0F
 ; @mode     M16X16
@@ -409,7 +409,7 @@ fPlayerAction0x0F:
 ; @mode     M16X16
 ; @calls    fPlayer_UpdateSpriteObject
 ;;
-fPlayerAction0x10:
+fPlayerAction_FishingCast:
     REP #$30                                                   ;81C242|C230    |      ;
     REP #$30                                                   ;81C244|C230    |      ;
     LDA.W #$0089                                               ;81C246|A98900  |      ;
@@ -483,7 +483,7 @@ fPlayerAction0x12_FishingBite:
 ; @calls    fPlayer_UpdateSpriteObject, fAI_SelectSlot, fAI_DeactivateSlotAndObject, fAI_StartSlotScript, fGameEngine_AddHappiness
 ; @note     confidence: medium - the sprites $8B/$8C are assumed to be the two catch poses (fish vs. junk), not verified in game
 ;;
-fPlayerAction0x13:
+fPlayerAction_FishingReel:
     REP #$30                                                   ;81C2AF|C230    |      ;
     JSR.W fPlayer_UpdateSpriteObject                                      ;81C2B1|20E6CF  |81CFE6;
     REP #$20                                                   ;81C2B4|C220    |      ;
@@ -542,7 +542,7 @@ fPlayerAction0x13:
 ; @mode     M16X16
 ; @calls    fPlayer_UpdateSpriteObject
 ;;
-fPlayerAction0x1B:
+fPlayerAction_WhistleDog:
     REP #$30                                                   ;81C333|C230    |      ;
     %SetFlag(daily4, $0010)
     REP #$30                                                   ;81C340|C230    |      ;
@@ -569,7 +569,7 @@ fPlayerAction0x1B:
 ; @mode     M16X16
 ; @calls    fPlayer_UpdateSpriteObject
 ;;
-fPlayerAction0x0D:
+fPlayerAction_WhistleHorse:
     REP #$30                                                   ;81C364|C230    |      ;
     %SetFlag(daily2, $0400)
     REP #$30                                                   ;81C371|C230    |      ;
@@ -620,7 +620,7 @@ fPlayerAction0x0C_SelectDialog:
     REP #$20                                                   ;81C3B9|C220    |      ;
     STA.W strcObjectData.spriteIdx                             ;81C3BB|8D0109  |000901;
     REP #$30                                                   ;81C3BE|C230    |      ;
-    ; event6 $4000 = clock received (see fPlayerInteraction0x48); daily4 $0200 = clock display suppressed (?)
+    ; event6 $4000 = clock received (see fPlayerInteraction_HouseExpansionDone); daily4 $0200 = clock display suppressed (?)
     %CheckFlag(event6, $4000)
     BNE +                                                      ;81C3C7|D003    |81C3CC;
     JMP.W .skip                                                ;81C3C9|4CB2C4  |81C4B2;
@@ -791,7 +791,7 @@ fPlayerAction0x0C_SelectDialog:
 ; @mode     M16X16
 ; @calls    fPlayer_UpdateSpriteObject
 ;;
-fPlayerAction0x0B:
+fPlayerAction_Tired:
     REP #$30                                                   ;81C4EC|C230    |      ;
     %CheckPlayerFlags(!PFLAGS_ANIMATING)
     BEQ +                                                      ;81C4F5|F003    |81C4FA;
@@ -821,7 +821,7 @@ fPlayerAction0x0B:
 ; @mode     M16X16 -> M8X16
 ; @calls    fPlayer_UpdateSpriteObject, fToolUsedActionHandler, fToolUsedSound_PlayToolHit
 ;;
-fPlayerAction0x0A:
+fPlayerAction_UseTool:
     REP #$30                                                   ;81C51A|C230    |      ;
     %CheckPlayerFlags(!PFLAGS_ANIMATING)
     BEQ +                                                      ;81C523|F003    |81C528;
@@ -853,12 +853,12 @@ fPlayerAction0x0A:
 ;;
 ; @brief    Idle pose selection (action NONE): chooses the standing sprite for the current state and starts the exercise animation.
 ; @details  Clears !PFLAGS_ANIMATING. If the player is controllable, strcPlayerData.lastExcercise is incremented each frame; at $F0 it is
-; reset to $78 and !PACTION_EXCERCISE starts with sprite $3C + direction*2 + random(0..1) (jumps to fPlayerAction0x09).
+; reset to $78 and !PACTION_EXCERCISE starts with sprite $3C + direction*2 + random(0..1) (jumps to fPlayerAction_Exercise).
 ; Otherwise the stand sprite is picked by priority: holding an item ($14), riding ($B0), in hot spring ($C0), sitting ($4F, fixed),
 ; hugging the dog ($D0), daily4 "special state" ($EA), normal ($00); all but sitting add the direction (0..3).
 ; @modifies strcPlayerData.lastExcercise, strcObjectData.spriteIdx, strcPlayer.action
 ; @mode     M16X16
-; @calls    fPlayer_UpdateSpriteObject, fPlayerAction_Finish, fPlayerAction0x19, fPlayerAction0x09, fCore_GetRandomNumber
+; @calls    fPlayer_UpdateSpriteObject, fPlayerAction_Finish, fPlayerAction_Autopilot, fPlayerAction_Exercise, fCore_GetRandomNumber
 ;;
 fPlayerAction_IdleHandler:
     REP #$30                                                   ;81C556|C230    |      ;
@@ -896,7 +896,7 @@ fPlayerAction_IdleHandler:
     CLC                                                        ;81C5AB|18      |      ;
     ADC.W strcObjectData.spriteIdx                             ;81C5AC|6D0109  |000901;
     STA.W strcObjectData.spriteIdx                             ;81C5AF|8D0109  |000901;
-    JMP.W fPlayerAction0x09                                    ;81C5B2|4C5ECB  |81CB5E;
+    JMP.W fPlayerAction_Exercise                                    ;81C5B2|4C5ECB  |81CB5E;
  
  
 .increment_exercise_timer:
@@ -1001,12 +1001,12 @@ fPlayerAction_IdleHandler:
  
 .exit2:
     JSR.W fPlayer_UpdateSpriteObject                                      ;81C662|20E6CF  |81CFE6;
-    JMP.W fPlayerAction0x19                                    ;81C665|4C0EC0  |81C00E;
+    JMP.W fPlayerAction_Autopilot                                    ;81C665|4C0EC0  |81C00E;
  
  
 .exit3:
     JSR.W fPlayer_UpdateSpriteObject                                      ;81C668|20E6CF  |81CFE6;
-    JMP.W fPlayerAction0x19                                    ;81C66B|4C0EC0  |81C00E;
+    JMP.W fPlayerAction_Autopilot                                    ;81C66B|4C0EC0  |81C00E;
  
  
 ;;
@@ -1016,7 +1016,7 @@ fPlayerAction_IdleHandler:
 ; and nBreakHitCounter cleared.
 ; @modifies strcObjectData.spriteIdx, strcMap.unk1E, strcPlayer.action, nBreakHitCounter
 ; @mode     M16X16 -> M8X16
-; @calls    fPlayer_MoveInDirection, fPlayerAction_Run_StepSound, fPlayerAction0x19
+; @calls    fPlayer_MoveInDirection, fPlayerAction_Run_StepSound, fPlayerAction_Autopilot
 ;;
 fPlayerAction_Walk:
     REP #$30                                                   ;81C66E|C230    |      ;
@@ -1121,7 +1121,7 @@ fPlayerAction_Walk:
     SEP #$20                                                   ;81C72C|E220    |      ;
     REP #$10                                                   ;81C72E|C210    |      ;
     STZ.W nBreakHitCounter                                     ;81C730|9C6D09  |00096D;
-    JMP.W fPlayerAction0x19                                    ;81C733|4C0EC0  |81C00E;
+    JMP.W fPlayerAction_Autopilot                                    ;81C733|4C0EC0  |81C00E;
  
  
 ;;
@@ -1273,7 +1273,7 @@ fPlayerAction_Run_MoveInDirection:
     JSR.W fPlayer_MoveInDirection                                      ;81C827|2077CB  |81CB77;
  
 ;;
-; @brief    Reset action to NONE and nBreakHitCounter, then exit through fPlayerAction0x19.
+; @brief    Reset action to NONE and nBreakHitCounter, then exit through fPlayerAction_Autopilot.
 ; @modifies strcPlayer.action, nBreakHitCounter
 ;;
 fPlayerAction_Run_Finish:
@@ -1281,19 +1281,19 @@ fPlayerAction_Run_Finish:
     SEP #$20                                                   ;81C831|E220    |      ;
     REP #$10                                                   ;81C833|C210    |      ;
     STZ.W nBreakHitCounter                                     ;81C835|9C6D09  |00096D;
-    JMP.W fPlayerAction0x19                                    ;81C838|4C0EC0  |81C00E;
+    JMP.W fPlayerAction_Autopilot                                    ;81C838|4C0EC0  |81C00E;
  
  
 ;;
 ; @brief    Forced one-pixel step with sprite $45 (action $0E), used by scripted walks.
 ; @details  Clears !PFLAGS_ANIMATING, sets sprite $45 and speed 1, moves once and returns to NONE. Used by interaction
-; fPlayerInteraction0x11 to walk the player up. Reached through fPlayerAction0x00.
+; fPlayerInteraction_AutoWalkUp to walk the player up. Reached through fPlayerAction_Default.
 ; @case     $0E
 ; @modifies strcObjectData.spriteIdx, strcMap.unk1E, strcPlayer.action, nBreakHitCounter
-; @calls    fPlayer_MoveInDirection, fPlayerAction0x19
+; @calls    fPlayer_MoveInDirection, fPlayerAction_Autopilot
 ; @note     confidence: medium - sprite $45 is a player pose (see K5_objects.csv) whose meaning was not checked in game
 ;;
-fPlayerAction0x0E:
+fPlayerAction_AutoStep:
     REP #$30                                                   ;81C83B|C230    |      ;
     %UnsetPlayerFlag(!PFLAGS_ANIMATING)
     REP #$30                                                   ;81C849|C230    |      ;
@@ -1307,7 +1307,7 @@ fPlayerAction0x0E:
     SEP #$20                                                   ;81C861|E220    |      ;
     REP #$10                                                   ;81C863|C210    |      ;
     STZ.W nBreakHitCounter                                     ;81C865|9C6D09  |00096D;
-    JMP.W fPlayerAction0x19                                    ;81C868|4C0EC0  |81C00E;
+    JMP.W fPlayerAction_Autopilot                                    ;81C868|4C0EC0  |81C00E;
  
  
 ;;
@@ -1321,7 +1321,7 @@ fPlayerAction0x0E:
 ; @mode     M16X16
 ; @calls    fAudioSetRegister2to0A, fPlayer_MoveInDirection, fPlayer_UpdateSpriteObject, fPlayerAction_CheckIdle
 ;;
-fPlayerAction0x03:
+fPlayerAction_Jump:
     REP #$30                                                   ;81C86B|C230    |      ;
     %CheckPlayerFlags(!PFLAGS_ANIMATING)
     BEQ +                                                      ;81C874|F003    |81C879;
@@ -1474,7 +1474,7 @@ fPlayerAction0x03:
 ; @mode     M16X16
 ; @calls    fItemCarried_Begin, fPlayer_UpdateSpriteObject
 ;;
-fPlayerAction0x04:
+fPlayerAction_PickUpItem:
     REP #$30                                                   ;81C991|C230    |      ;
     %CheckPlayerFlags(!PFLAGS_ANIMATING)
     BEQ +                                                      ;81C99A|F003    |81C99F;
@@ -1511,7 +1511,7 @@ fPlayerAction0x04:
 ; @modifies strcPlayer.flags, strcAudio.reg114, strcAudio.reg115
 ; @calls    fAudioSetRegister2to0A, fPlayer_UpdateSpriteObject
 ;;
-fPlayerAction0x05:
+fPlayerAction_DropItem:
     REP #$30                                                   ;81C9DF|C230    |      ;
     %CheckPlayerFlags(!PFLAGS_ANIMATING)
     BEQ +                                                      ;81C9E8|F003    |81C9ED;
@@ -1556,7 +1556,7 @@ fPlayerAction0x05:
 ; @mode     M8X16
 ; @calls    fPlayer_UpdateSpriteObject, fGameEngine_AddHappiness
 ;;
-fPlayerAction0x08:
+fPlayerAction_ConsumeItem:
     SEP #$20                                                   ;81CA36|E220    |      ;
     REP #$10                                                   ;81CA38|C210    |      ;
     %CheckPlayerFlags(!PFLAGS_ANIMATING)
@@ -1644,9 +1644,9 @@ fPlayerAction0x08:
  
 ;;
 ; @brief    Eating a meal (!PFLAGS_EATINGMEAL): plays sprite $30 + strcPlayerData.eatFood, then clears the flag.
-; @details  Entered from fPlayerAction0x00 while !PFLAGS_EATINGMEAL is set (restaurant/bar food, rice ball and dumpling vendors).
+; @details  Entered from fPlayerAction_Default while !PFLAGS_EATINGMEAL is set (restaurant/bar food, rice ball and dumpling vendors).
 ; @modifies strcPlayer.flags, strcPlayer.action
-; @calls    fPlayer_UpdateSpriteObject, fPlayerAction_CheckIdle, fPlayerAction0x19
+; @calls    fPlayer_UpdateSpriteObject, fPlayerAction_CheckIdle, fPlayerAction_Autopilot
 ;;
 fPlayerAction_EatMeal:
     SEP #$20                                                   ;81CB14|E220    |      ;
@@ -1675,7 +1675,7 @@ fPlayerAction_EatMeal:
  
  
 .exit:
-    JMP.W fPlayerAction0x19                                    ;81CB5B|4C0EC0  |81C00E;
+    JMP.W fPlayerAction_Autopilot                                    ;81CB5B|4C0EC0  |81C00E;
  
  
 ;;
@@ -1683,7 +1683,7 @@ fPlayerAction_EatMeal:
 ; @case     $09
 ; @calls    fPlayer_UpdateSpriteObject, fPlayerAction_Finish
 ;;
-fPlayerAction0x09:
+fPlayerAction_Exercise:
     REP #$30                                                   ;81CB5E|C230    |      ;
     JSR.W fPlayer_UpdateSpriteObject                                      ;81CB60|20E6CF  |81CFE6;
     REP #$20                                                   ;81CB63|C220    |      ;

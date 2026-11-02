@@ -728,8 +728,8 @@ neutral `Sfx_Unk<id>` name (no listening review was done; the names rest on the 
 | $03 | `Sfx_MenuCursor` | `!SFX_MENUCURSOR` | 5 | high | Cursor movement in name entry, menus and dialog options (fInput_Case03_Cursor*, fInput_DialogOptions_*, fNameInput_*Button) and the text blip written by fDialog_IterateText; also the effect whose sample (id 5) fAudio_LoadPendingTrack preloads |
 | $04 | `Sfx_EggFestivalTimeUp` | `!SFX_EGGFESTIVALTIMEUP` | common | medium | AI script 0x28 (Egg Festival game) with the dialog 'Beep! Time is up! Next egg.' (strcFlags.unknown1 bit 6 branch) |
 | $05 | `Sfx_PlayerStep` | `!SFX_PLAYERSTEP` | common | high | fPlayerAction_Run_StepSound: footstep while running |
-| $06 | `Sfx_PlayerJump` | `!SFX_PLAYERJUMP` | common | high | fPlayerAction0x03 (!PACTION_JUMP), played in all four variants (normal, carrying, riding, in the hot spring) |
-| $07 | `Sfx_ItemDrop` | `!SFX_ITEMDROP` | common | high | fPlayerAction0x05 (!PACTION_DROPITEM) |
+| $06 | `Sfx_PlayerJump` | `!SFX_PLAYERJUMP` | common | high | fPlayerAction_Jump (!PACTION_JUMP), played in all four variants (normal, carrying, riding, in the hot spring) |
+| $07 | `Sfx_ItemDrop` | `!SFX_ITEMDROP` | common | high | fPlayerAction_DropItem (!PACTION_DROPITEM) |
 | $08 | `Sfx_ItemPickUp` | `!SFX_ITEMPICKUP` | common | high | fItemCarried_Begin: picking an item up when nItemCarriedPickupSoundTable has an entry for it |
 | $09 | `Sfx_Unk09` | `!SFX_UNK09` | common | none | no caller in the US code or data (not referenced by any literal, table or AI script) |
 | $0A | `Sfx_Unk0A` | `!SFX_UNK0A` | common | none | no caller in the US code or data (not referenced by any literal, table or AI script) |
@@ -758,7 +758,7 @@ neutral `Sfx_Unk<id>` name (no listening review was done; the names rest on the 
 | $21 | `Sfx_Unk21` | `!SFX_UNK21` | 20 | none | no caller in the US code or data (not referenced by any literal, table or AI script) |
 | $22 | `Sfx_HouseEventUnk22` | `!SFX_HOUSEEVENTUNK22` | 14 | low | fAreaEvents_House, played twice (waits 20 and 30 frames) when event6 flag $0200 is set (random 1/8 roll in the object-map update); purpose unknown |
 | $23 | `Sfx_CutsceneUnk23` | `!SFX_CUTSCENEUNK23` | 20 | low | AI script 0x23 starts with it right after the fade-in (voice 7, 60 frames); the scene was not identified |
-| $24 | `Sfx_InteractionUnk24` | `!SFX_INTERACTIONUNK24` | 20 | low | fPlayerInteraction0x35 (voice 7, 120 frames); the interaction was not identified |
+| $24 | `Sfx_InteractionUnk24` | `!SFX_INTERACTIONUNK24` | 20 | low | fPlayerInteraction_PlaySoundAndWait (voice 7, 120 frames); the interaction was not identified |
 | $25 | `Sfx_Unk25` | `!SFX_UNK25` | 28 | none | no caller in the US code or data (not referenced by any literal, table or AI script) |
 | $26 | `Sfx_Unk26` | `!SFX_UNK26` | 31 | none | no caller in the US code or data (not referenced by any literal, table or AI script) |
 | $27 | `Sfx_Unk27` | `!SFX_UNK27` | 20 | none | no caller in the US code or data (not referenced by any literal, table or AI script) |

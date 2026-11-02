@@ -261,7 +261,7 @@
   length_bytes: 1
   params: []
   summary: "Sets the player action PACTION_SWAPTOOL - swaps the current tool with the second one."
-  details: "Advances the pointer by 1 and sets strcPlayer.action = PACTION_SWAPTOOL (0x1C). fPlayerAction0x1C (81C061), after the animation finishes (PFLAGS_ANIMATING), swaps toolEquipped <-> toolSecond, calls fToolUsedSound_PlayOnToolChange and returns to PACTION_NONE. Does not yield the frame within the command itself; the effect happens in subsequent frames of the player action."
+  details: "Advances the pointer by 1 and sets strcPlayer.action = PACTION_SWAPTOOL (0x1C). fPlayerAction_SwapTool (81C061), after the animation finishes (PFLAGS_ANIMATING), swaps toolEquipped <-> toolSecond, calls fToolUsedSound_PlayOnToolChange and returns to PACTION_NONE. Does not yield the frame within the command itself; the effect happens in subsequent frames of the player action."
   ram_touched: [ptrAIActionData, strcPlayer.action, strcPlayerData.toolEquipped, strcPlayerData.toolSecond]
   calls: []
   open_questions: null

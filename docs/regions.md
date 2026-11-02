@@ -340,7 +340,7 @@ in both EU and DE (`!REGION_EUDE`).
   are adapted; save-slot drawing and slot frame VRAM addresses differ (text layout of the translated menu).
 - **Statistics:** shipped-crop counters (corn, potato, tomato, turnip in `subItemCarried_*`) are clamped at 999
   (`CMP #$03E7`) instead of wrapping.
-- **Player interactions:** `fPlayerInteraction0x42-0x44` (shed item checks) also look at the second tool slot
+- **Player interactions:** `fPlayerInteraction_DeliverBoughtCow-0x44` (shed item checks) also look at the second tool slot
   (`strcPlayerData.toolSecond`) next to the equipped tool, the hammer / golden hammer actions
   (`fToolUsedAction0x03/0x13`) and the tool sound data were reworked; `fShed_DrawItemPatternByFlag`,
   `fMap_CopyTilePatternToTilemapBuffer`.
