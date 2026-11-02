@@ -1502,7 +1502,7 @@ Przepraszam, ja… Wracam do domu. E… dziękuję…<END>
 Co to ma znaczyć, młody człowieku!<END>
 
 @@ sDialog_0x01D8 @@
-Ho, ho, ho, Maria jest na zapleczu. Jednak to moja córka.<NEXT>
+Ho, ho, ho, Maria jest na zapleczu. Cała moja córka.<NEXT>
 Robi to samo, co ja. Po prostu trochę się dąsa.<END>
 
 @@ sDialog_0x01D9 @@
@@ -1537,7 +1537,7 @@ To się nazywa "Błękitne Pióro Szczęścia" i jest tradycją w tych stronach.
 Używa się go przy oświadczynach.<END>
 
 @@ sDialog_0x01E1 @@
-Nie, że uczepiłam się wspomnień. Po prostu jest dla mnie bardzo ważny.<NEXT>
+Nie żebym uczepiła się wspomnień. Po prostu jest dla mnie bardzo ważny.<NEXT>
 …Dziękuję!!<END>
 
 @@ sDialog_0x01E2 @@
@@ -1576,7 +1576,7 @@ Na pewno, dobrze?<END>
 Ostatnio przychodzi tam taki uroczy gość.<END>
 
 @@ sDialog_0x01ED @@
-Ptaszek, którego Ellen tak pilnowała, zniknął i Ellen jest całkiem załamana.<END>
+Ptaszek, którego Ellen tak kochała, zniknął. Jest teraz całkiem załamana.<END>
 
 @@ sDialog_0x01EE @@
 Ech…<END>
@@ -1634,7 +1634,7 @@ Gdyby coś mi się stało, zaopiekuj się Eve.<END>
 Dziadku! …Dobrze, że nic ci nie jest.<END>
 
 @@ sDialog_0x01FE @@
-Sam też bym się stamtąd wydostał.<END>
+Nawet sam bym się stamtąd wydostał.<END>
 
 @@ sDialog_0x01FF @@
 Głuptas z ciebie, dziadku! …Nie przemęczaj się już. …Zejdź z gór.<END>
@@ -1644,7 +1644,7 @@ Dziękuję.<END>
 
 @@ sDialog_0x0201 @@
 A więc jutro Festiwal Kwiatów. Miasto jest już pełne zapachu kwiatów.<NEXT>
-Zbierzmy się na placu przed trzecią.<END>
+Zbierzmy się na placu do 15:00.<END>
 
 @@ sDialog_0x0202 @@
 Festiwal Kwiatów, wiesz, to święto z dawnych czasów…<NEXT>
@@ -1657,7 +1657,7 @@ Jutro na festiwalu będę sprzedawać coś wspaniałego,<NEXT>
 więc czekaj z niecierpliwością!<END>
 
 @@ sDialog_0x0204 @@
-W tym roku na pewno dam jej prezent.<END>
+Tym razem na pewno wręczę prezent!<END>
 
 @@ sDialog_0x0205 @@
 Bóg nauczył nas łagodnego serca, które podziwia kwiaty,<NEXT>
@@ -1670,7 +1670,7 @@ Jutro Festiwal Kwiatów. Świętuje się w nim także nadejście wiosny.<END>
 Jutro Festiwal Kwiatów. Czasem dobrze jest odpocząć od pracy.<END>
 
 @@ sDialog_0x0208 @@
-Jutro Festiwal Kwiatów. Ze wszystkich festiwali to ten lubię najbardziej!<END>
+Jutro Festiwal Kwiatów. Ze wszystkich festiwali to ten lubię najbardziej♥<END>
 
 @@ sDialog_0x0209 @@
 Nie kupuj na festiwalu byle czego tylko dlatego, że jest rzadkie.<END>
@@ -1720,7 +1720,7 @@ Przywiozłem coś rzadkiego. Podobno na świecie nie ma drugiego takiego towaru.
 <OPTLBL 1>Kupuję<OPTLBL 2>Odpuszczam<OPTLBL 3>Kasa <NUM 7 18>0G<OPT 2>
 
 @@ sDialog_0x0215 @@
-To dostarczę ci je do stodoły. Zimą użyj ich na szczycie góry.<END>
+Dostarczę je więc do szopy. Zimą użyj ich na szczycie góry.<END>
 
 @@ sDialog_0x0216 @@
 Szkoda, bo nie ma pewności, że będzie następny raz.<END>
@@ -3358,7 +3358,7 @@ Ach, jesień… Niebo jest już takie wysokie.<END>
 Myślę, że z czasem będę coraz lepiej gotować… Bądź cierpliwy.<END>
 
 @@ sDialog_0x0423 @@
-Może jednak powinnam była trochę poćwiczyć na przyszłą żonę?<END>
+Może jednak powinnam była trochę podszkolić się na żonę?<END>
 
 @@ sDialog_0x0424 @@
 Wiosna! Mamy wiosnę! Siejmy nasiona!<END>
@@ -3382,7 +3382,7 @@ Ja też chciałabym nauczyć się jeździć na koniu <VAR horse>.<END>
 Mm, temperatura i reszta warunków są tu<NEXT>idealne do robienia nalewek z leśnych owoców.<END>
 
 @@ sDialog_0x042B @@
-To nalewka z dzikich winogron. To z woskownicy, a to z borówek brusznicy.<NEXT>Dostałam je od wujka.<NEXT>Jak będą gotowe, podzielę się ze wszystkimi.<END>
+To nalewka z dzikich winogron. To z woskownicy, a to z borówek brusznicy.<NEXT>Borówki dostałam od wujka.<NEXT>Jak będą gotowe, podzielę się ze wszystkimi.<END>
 
 @@ sDialog_0x042C @@
 Nastawiłam ją wiosną! Za jakiś czas będzie się nadawała do picia.<END>
@@ -3532,7 +3532,7 @@ Weź dojarkę i naciśnij Y przed krową, a dostaniesz mleko.<NEXT>Doić można 
 Krowy jedzą tę samą trawę, którą można kosić.<NEXT>Młoda trawa nie liczy się jako karmienie, więc uważaj.<NEXT>Skoszona trawa zamienia się w paszę,<NEXT>która służy za jedzenie zimą i w deszczowe dni. Pilnuj, żeby jej nie zabrakło.<END>
 
 @@ sDialog_0x045D @@
-Kura znosi jedno jajko dziennie.<NEXT>Jeśli zapomnisz o paszy albo zmoknie w deszczu, przez 3 dni nie będzie nieść jaj.<NEXT>Zostawiona na zewnątrz w czasie tajfunu może zostać porwana przez wiatr.<NEXT>Czasem zjadają je też dzikie psy.<END>
+Kura znosi jedno jajko dziennie.<NEXT>Jeśli zapomnisz o paszy albo zmoknie w deszczu, przez 3 dni nie będzie nieść jaj.<NEXT>Zostawiona na zewnątrz w czasie tajfunu może zostać porwana przez wiatr.<NEXT>Czasem kurę mogą też zjeść dzikie psy.<END>
 
 @@ sDialog_0x045E @@
 Jajko położone w miejscu do wylęgu zmienia się po 3 dniach w pisklę.<NEXT>Pisklęta nie potrzebują paszy.<NEXT>Po 7 dniach stają się kurami.<NEXT>Uważaj, bo jeśli będzie ich za dużo, zabraknie paszy.<END>
@@ -3667,10 +3667,10 @@ Mistrzostwo farmy <NUM 3 108><BR>Postaraj się jeszcze bardziej!<END>
 Mistrzostwo farmy <NUM 3 109><BR>Dasz radę, jeszcze tylko krok!<END>
 
 @@ sDialog_0x048A @@
-Mistrzostwo farmy <NUM 3 110><NEXT>Całkiem nieźle! Dąż do tego, by być jeszcze lepszym farmerem!<END>
+Mistrzostwo farmy <NUM 3 110><NEXT>Naprawdę świetnie! Dąż do miana najlepszego farmera!<END>
 
 @@ sDialog_0x048B @@
-Mistrzostwo farmy <NUM 3 111><NEXT>Gratulacje! Jesteś już farmerem, którego nikt nie zdoła przewyższyć!<END>
+Mistrzostwo farmy <NUM 3 111><NEXT>Gratulacje! Jesteś już farmerem z prawdziwego zdarzenia!<END>
 
 @@ sDialog_0x048C @@
 Rozwój farmy <NUM 3 112>%<END>
