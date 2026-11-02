@@ -24,10 +24,10 @@ pAIScripting0x44_Data01:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x44_L028)     ;B59808
     %AICMD0x45_JumpIfBetween16(nFirstChildAge, 60, 89, pAIScripting0x44_L001);B5980F
     %AICMD0x45_JumpIfBetween16(nSecondChildAge, 60, 89, pAIScripting0x44_L001);B59819
-    %AICMD0x1A($0168, $0168, aAIScriptingData_L198, $00)                     ;B59823
+    %AICMD0x1A_SpawnNpc($0168, $0168, aAIScriptingData_L198, $00)                     ;B59823
     %AICMD0x12_Jump(pAIScripting0x44_Data01_WaitInteract)                                   ;B5982B
 pAIScripting0x44_L001:
-    %AICMD0x1A($0168, $0168, aAIScriptingData_L074, $00)                     ;B5982E
+    %AICMD0x1A_SpawnNpc($0168, $0168, aAIScriptingData_L074, $00)                     ;B5982E
 ; Idle until the player presses A at the NPC (AICMD0x2D): jumps to OnInteract, or to OnItemOffered while an item is
 ; carried.
 pAIScripting0x44_Data01_WaitInteract:
@@ -167,10 +167,10 @@ pAIScripting0x44_Data02:
     %AICMD0x09_StartScript($01, pAIScripting0x44_Data02_Actor01)                                   ;B59A09
     %AICMD0x45_JumpIfBetween16(nFirstChildAge, 60, 89, pAIScripting0x44_L029);B59A0D
     %AICMD0x45_JumpIfBetween16(nSecondChildAge, 60, 89, pAIScripting0x44_L029);B59A17
-    %AICMD0x1A($0048, $0048, aAIScriptingData_L199, $00)                     ;B59A21
+    %AICMD0x1A_SpawnNpc($0048, $0048, aAIScriptingData_L199, $00)                     ;B59A21
     %AICMD0x12_Jump(pAIScripting0x44_Data02_WaitInteract)                                   ;B59A29
 pAIScripting0x44_L029:
-    %AICMD0x1A($0048, $0048, aAIScriptingData_L074, $00)                     ;B59A2C
+    %AICMD0x1A_SpawnNpc($0048, $0048, aAIScriptingData_L074, $00)                     ;B59A2C
 ; Idle until the player presses A at the NPC (AICMD0x2D): jumps to OnInteract, or to OnItemOffered while an item is
 ; carried.
 pAIScripting0x44_Data02_WaitInteract:
@@ -291,7 +291,7 @@ pAIScripting0x44_L055:
     %AICMD0x10_End()                                           ;B59BD4
 ; Child script (slot $01) of Data02: actor. Spawns at (88,72).
 pAIScripting0x44_Data02_Actor01:
-    %AICMD0x1A($0058, $0048, aAIScriptingData_L201, $00)                     ;B59BD5
+    %AICMD0x1A_SpawnNpc($0058, $0048, aAIScriptingData_L201, $00)                     ;B59BD5
 ; Idle loop: wait one frame at a time.
 pAIScripting0x44_Data02_Actor01_Idle:
     %AICMD0x13_Wait(1)                                         ;B59BDD
@@ -310,10 +310,10 @@ pAIScripting0x44_Data03:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 15, 18, pAIScripting0x44_L085) ;B59BF9
     %AICMD0x45_JumpIfBetween16(nFirstChildAge, 60, 89, pAIScripting0x44_L058);B59C01
     %AICMD0x45_JumpIfBetween16(nSecondChildAge, 60, 89, pAIScripting0x44_L058);B59C0B
-    %AICMD0x1A($0168, $0168, aAIScriptingData_L200, $00)                     ;B59C15
+    %AICMD0x1A_SpawnNpc($0168, $0168, aAIScriptingData_L200, $00)                     ;B59C15
     %AICMD0x12_Jump(pAIScripting0x44_Data03_WaitInteract)                                   ;B59C1D
 pAIScripting0x44_L058:
-    %AICMD0x1A($0168, $0168, aAIScriptingData_L075, $00)                     ;B59C20
+    %AICMD0x1A_SpawnNpc($0168, $0168, aAIScriptingData_L075, $00)                     ;B59C20
 ; Idle until the player presses A at the NPC (AICMD0x2D): jumps to OnInteract, or to OnItemOffered while an item is
 ; carried.
 pAIScripting0x44_Data03_WaitInteract:
@@ -448,10 +448,10 @@ pAIScripting0x44_Data04:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 17, 18, pAIScripting0x44_L114) ;B59DE1
     %AICMD0x45_JumpIfBetween16(nFirstChildAge, 60, 89, pAIScripting0x44_L086);B59DE9
     %AICMD0x45_JumpIfBetween16(nSecondChildAge, 60, 89, pAIScripting0x44_L086);B59DF3
-    %AICMD0x1A($0168, $0168, aAIScriptingData_L200, $00)                     ;B59DFD
+    %AICMD0x1A_SpawnNpc($0168, $0168, aAIScriptingData_L200, $00)                     ;B59DFD
     %AICMD0x12_Jump(pAIScripting0x44_Data04_WaitInteract)                                   ;B59E05
 pAIScripting0x44_L086:
-    %AICMD0x1A($0168, $0168, aAIScriptingData_L075, $00)                     ;B59E08
+    %AICMD0x1A_SpawnNpc($0168, $0168, aAIScriptingData_L075, $00)                     ;B59E08
 ; Idle until the player presses A at the NPC (AICMD0x2D): jumps to OnInteract, or to OnItemOffered while an item is
 ; carried.
 pAIScripting0x44_Data04_WaitInteract:
@@ -593,10 +593,10 @@ pAIScripting0x44_Data05:
     %AICMD0x09_StartScript($02, pAIScripting0x44_Data05_Actor02)                                   ;B59FEC
     %AICMD0x45_JumpIfBetween16(nFirstChildAge, 60, 89, pAIScripting0x44_L115);B59FF0
     %AICMD0x45_JumpIfBetween16(nSecondChildAge, 60, 89, pAIScripting0x44_L115);B59FFA
-    %AICMD0x1A($0048, $0048, aAIScriptingData_L199, $03)                     ;B5A004
+    %AICMD0x1A_SpawnNpc($0048, $0048, aAIScriptingData_L199, $03)                     ;B5A004
     %AICMD0x12_Jump(pAIScripting0x44_Data05_WaitInteract)                                   ;B5A00C
 pAIScripting0x44_L115:
-    %AICMD0x1A($0048, $0048, aAIScriptingData_L074, $00)                     ;B5A00F
+    %AICMD0x1A_SpawnNpc($0048, $0048, aAIScriptingData_L074, $00)                     ;B5A00F
 ; Idle until the player presses A at the NPC (AICMD0x2D): jumps to OnInteract, or to OnItemOffered while an item is
 ; carried.
 pAIScripting0x44_Data05_WaitInteract:
@@ -721,14 +721,14 @@ pAIScripting0x44_L142:
     %AICMD0x10_End()                                           ;B5A1C8
 ; Child script (slot $01) of Data05: actor. Spawns at (88,72).
 pAIScripting0x44_Data05_Actor01:
-    %AICMD0x1A($0058, $0048, aAIScriptingData_L212, $00)                     ;B5A1C9
+    %AICMD0x1A_SpawnNpc($0058, $0048, aAIScriptingData_L212, $00)                     ;B5A1C9
 ; Idle loop: wait one frame at a time.
 pAIScripting0x44_Data05_Actor01_Idle:
     %AICMD0x13_Wait(1)                                         ;B5A1D1
     %AICMD0x12_Jump(pAIScripting0x44_Data05_Actor01_Idle)                                   ;B5A1D4
 ; Child script (slot $02) of Data05: actor. Spawns at (56,88).
 pAIScripting0x44_Data05_Actor02:
-    %AICMD0x1A($0038, $0058, aAIScriptingData_L212, $00)                     ;B5A1D7
+    %AICMD0x1A_SpawnNpc($0038, $0058, aAIScriptingData_L212, $00)                     ;B5A1D7
 ; Idle loop: wait one frame at a time.
 pAIScripting0x44_Data05_Actor02_Idle:
     %AICMD0x13_Wait(1)                                         ;B5A1DF

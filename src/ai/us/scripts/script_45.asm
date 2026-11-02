@@ -25,8 +25,8 @@ pAIScripting0x45_L001:
     %AICMD0x45_JumpIfBetween16(nFirstChildAge, 0, 89, pAIScripting0x45_L017) ;B5A21B
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 15, 18, pAIScripting0x45_L011) ;B5A225
     %AICMD0x45_JumpIfBetween16(nFirstChildAge, 120, 999, pAIScripting0x45_L012);B5A22D
-    %AICMD0x1A($0158, $0098, aAIScriptingData_L077, $00)                     ;B5A237
-    %AICMD0x22($10, $10, $01, aAIScriptingData_L077, $04)                    ;B5A23F
+    %AICMD0x1A_SpawnNpc($0158, $0098, aAIScriptingData_L077, $00)                     ;B5A237
+    %AICMD0x22_StartRandomWalk($10, $10, $01, aAIScriptingData_L077, $04)                    ;B5A23F
 ; Idle until the player presses A at the NPC (AICMD0x2D): jumps to OnInteract, or to OnItemOffered while an item is
 ; carried.
 pAIScripting0x45_Data01_WaitInteract:
@@ -69,11 +69,11 @@ pAIScripting0x45_L010:
     %AICMD0x1C_ShowDialog($01C2, $00)                          ;B5A2AD
     %AICMD0x12_Jump(pAIScripting0x45_Data01_WaitInteract)                                   ;B5A2B1
 pAIScripting0x45_L011:
-    %AICMD0x1A($0178, $0058, aAIScriptingData_L105, $00)                     ;B5A2B4
+    %AICMD0x1A_SpawnNpc($0178, $0058, aAIScriptingData_L105, $00)                     ;B5A2B4
     %AICMD0x12_Jump(pAIScripting0x45_Data01_Idle)                                   ;B5A2BC
 pAIScripting0x45_L012:
-    %AICMD0x1A($0158, $0098, aAIScriptingData_L079, $00)                     ;B5A2BF
-    %AICMD0x22($10, $10, $01, aAIScriptingData_L079, $04)                    ;B5A2C7
+    %AICMD0x1A_SpawnNpc($0158, $0098, aAIScriptingData_L079, $00)                     ;B5A2BF
+    %AICMD0x22_StartRandomWalk($10, $10, $01, aAIScriptingData_L079, $04)                    ;B5A2C7
 ; Idle until the player presses A at the NPC (AICMD0x2D): jumps to OnInteract, or to OnItemOffered while an item is
 ; carried.
 pAIScripting0x45_Data01_WaitInteract2:
@@ -92,9 +92,9 @@ pAIScripting0x45_L016:
     %AICMD0x1C_ShowDialog($01C2, $00)                          ;B5A2EA
     %AICMD0x12_Jump(pAIScripting0x45_Data01_WaitInteract2)                                   ;B5A2EE
 pAIScripting0x45_L017:
-    %AICMD0x1A($0186, $0098, aAIScriptingData_L106, $00)                     ;B5A2F1
+    %AICMD0x1A_SpawnNpc($0186, $0098, aAIScriptingData_L106, $00)                     ;B5A2F1
 pAIScripting0x45_L018:
-    %AICMD0x52()                                               ;B5A2F9
+    %AICMD0x52_PickUpObjectForEventA()                                               ;B5A2F9
     %AICMD0x12_Jump(pAIScripting0x45_L018)                                   ;B5A2FA
 
 
@@ -128,10 +128,10 @@ pAIScripting0x45_L025:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 15, 18, pAIScripting0x45_L034) ;B5A34C
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x45_L034)     ;B5A354
     %AICMD0x45_JumpIfBetween16(nFirstChildAge, 120, 999, pAIScripting0x45_L026);B5A35B
-    %AICMD0x1A($0160, $0178, aAIScriptingData_L077, $00)                     ;B5A365
+    %AICMD0x1A_SpawnNpc($0160, $0178, aAIScriptingData_L077, $00)                     ;B5A365
     %AICMD0x12_Jump(pAIScripting0x45_Data02_WaitInteract)                                   ;B5A36D
 pAIScripting0x45_L026:
-    %AICMD0x1A($0160, $0178, aAIScriptingData_L079, $00)                     ;B5A370
+    %AICMD0x1A_SpawnNpc($0160, $0178, aAIScriptingData_L079, $00)                     ;B5A370
 ; Idle until the player presses A at the NPC (AICMD0x2D): jumps to OnInteract, or to OnItemOffered while an item is
 ; carried.
 pAIScripting0x45_Data02_WaitInteract:
@@ -143,10 +143,10 @@ pAIScripting0x45_L028:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 15, 18, pAIScripting0x45_L034) ;B5A38F
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x45_L034)     ;B5A397
     %AICMD0x45_JumpIfBetween16(nFirstChildAge, 120, 999, pAIScripting0x45_L029);B5A39E
-    %AICMD0x1A($0160, $0178, aAIScriptingData_L077, $00)                     ;B5A3A8
+    %AICMD0x1A_SpawnNpc($0160, $0178, aAIScriptingData_L077, $00)                     ;B5A3A8
     %AICMD0x12_Jump(pAIScripting0x45_Data02_WaitInteract2)                                   ;B5A3B0
 pAIScripting0x45_L029:
-    %AICMD0x1A($0160, $0178, aAIScriptingData_L079, $00)                     ;B5A3B3
+    %AICMD0x1A_SpawnNpc($0160, $0178, aAIScriptingData_L079, $00)                     ;B5A3B3
 ; Idle until the player presses A at the NPC (AICMD0x2D): jumps to OnInteract, or to OnItemOffered while an item is
 ; carried.
 pAIScripting0x45_Data02_WaitInteract2:
@@ -158,10 +158,10 @@ pAIScripting0x45_L031:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 15, 18, pAIScripting0x45_L034) ;B5A3D2
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x45_L034)     ;B5A3DA
     %AICMD0x45_JumpIfBetween16(nFirstChildAge, 120, 999, pAIScripting0x45_L032);B5A3E1
-    %AICMD0x1A($0160, $0178, aAIScriptingData_L077, $00)                     ;B5A3EB
+    %AICMD0x1A_SpawnNpc($0160, $0178, aAIScriptingData_L077, $00)                     ;B5A3EB
     %AICMD0x12_Jump(pAIScripting0x45_Data02_WaitInteract3)                                   ;B5A3F3
 pAIScripting0x45_L032:
-    %AICMD0x1A($0160, $0178, aAIScriptingData_L079, $00)                     ;B5A3F6
+    %AICMD0x1A_SpawnNpc($0160, $0178, aAIScriptingData_L079, $00)                     ;B5A3F6
 ; Idle until the player presses A at the NPC (AICMD0x2D): jumps to OnInteract, or to OnItemOffered while an item is
 ; carried.
 pAIScripting0x45_Data02_WaitInteract3:
@@ -201,10 +201,10 @@ pAIScripting0x45_L041:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 15, 18, pAIScripting0x45_L034) ;B5A450
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x45_L034)     ;B5A458
     %AICMD0x45_JumpIfBetween16(nFirstChildAge, 120, 999, pAIScripting0x45_L042);B5A45F
-    %AICMD0x1A($0088, $0048, aAIScriptingData_L077, $00)                     ;B5A469
+    %AICMD0x1A_SpawnNpc($0088, $0048, aAIScriptingData_L077, $00)                     ;B5A469
     %AICMD0x12_Jump(pAIScripting0x45_Data03_WaitInteract)                                   ;B5A471
 pAIScripting0x45_L042:
-    %AICMD0x1A($0088, $0048, aAIScriptingData_L079, $00)                     ;B5A474
+    %AICMD0x1A_SpawnNpc($0088, $0048, aAIScriptingData_L079, $00)                     ;B5A474
 ; Idle until the player presses A at the NPC (AICMD0x2D): jumps to OnInteract, or to OnItemOffered while an item is
 ; carried.
 pAIScripting0x45_Data03_WaitInteract:
@@ -225,8 +225,8 @@ pAIScripting0x45_L044:
     %AICMD0x45_JumpIfBetween16(nSecondChildAge, 0, 89, pAIScripting0x45_L060);B5A49A
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 15, 18, pAIScripting0x45_L054) ;B5A4A4
     %AICMD0x45_JumpIfBetween16(nSecondChildAge, 120, 999, pAIScripting0x45_L055);B5A4AC
-    %AICMD0x1A($0168, $0088, aAIScriptingData_L076, $02)                     ;B5A4B6
-    %AICMD0x22($10, $10, $01, aAIScriptingData_L077, $04)                    ;B5A4BE
+    %AICMD0x1A_SpawnNpc($0168, $0088, aAIScriptingData_L076, $02)                     ;B5A4B6
+    %AICMD0x22_StartRandomWalk($10, $10, $01, aAIScriptingData_L077, $04)                    ;B5A4BE
 ; Idle until the player presses A at the NPC (AICMD0x2D): jumps to OnInteract, or to OnItemOffered while an item is
 ; carried.
 pAIScripting0x45_Data04_WaitInteract:
@@ -269,11 +269,11 @@ pAIScripting0x45_L053:
     %AICMD0x1C_ShowDialog($01C2, $00)                          ;B5A52C
     %AICMD0x12_Jump(pAIScripting0x45_Data04_WaitInteract)                                   ;B5A530
 pAIScripting0x45_L054:
-    %AICMD0x1A($0188, $0058, aAIScriptingData_L105, $00)                     ;B5A533
+    %AICMD0x1A_SpawnNpc($0188, $0058, aAIScriptingData_L105, $00)                     ;B5A533
     %AICMD0x12_Jump(pAIScripting0x45_Data04_Idle)                                   ;B5A53B
 pAIScripting0x45_L055:
-    %AICMD0x1A($0168, $0088, aAIScriptingData_L078, $00)                     ;B5A53E
-    %AICMD0x22($10, $0C, $01, aAIScriptingData_L079, $04)                    ;B5A546
+    %AICMD0x1A_SpawnNpc($0168, $0088, aAIScriptingData_L078, $00)                     ;B5A53E
+    %AICMD0x22_StartRandomWalk($10, $0C, $01, aAIScriptingData_L079, $04)                    ;B5A546
 ; Idle until the player presses A at the NPC (AICMD0x2D): jumps to OnInteract, or to OnItemOffered while an item is
 ; carried.
 pAIScripting0x45_Data04_WaitInteract2:
@@ -292,9 +292,9 @@ pAIScripting0x45_L059:
     %AICMD0x1C_ShowDialog($01C2, $00)                          ;B5A569
     %AICMD0x12_Jump(pAIScripting0x45_Data04_WaitInteract2)                                   ;B5A56D
 pAIScripting0x45_L060:
-    %AICMD0x1A($0186, $0098, aAIScriptingData_L106, $00)                     ;B5A570
+    %AICMD0x1A_SpawnNpc($0186, $0098, aAIScriptingData_L106, $00)                     ;B5A570
 pAIScripting0x45_L061:
-    %AICMD0x53()                                               ;B5A578
+    %AICMD0x53_PickUpObjectForEventB()                                               ;B5A578
     %AICMD0x12_Jump(pAIScripting0x45_L061)                                   ;B5A579
 
 
@@ -328,10 +328,10 @@ pAIScripting0x45_L068:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 15, 18, pAIScripting0x45_L077) ;B5A5CB
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x45_L077)     ;B5A5D3
     %AICMD0x45_JumpIfBetween16(nSecondChildAge, 120, 999, pAIScripting0x45_L069);B5A5DA
-    %AICMD0x1A($0170, $0178, aAIScriptingData_L077, $00)                     ;B5A5E4
+    %AICMD0x1A_SpawnNpc($0170, $0178, aAIScriptingData_L077, $00)                     ;B5A5E4
     %AICMD0x12_Jump(pAIScripting0x45_Data05_WaitInteract)                                   ;B5A5EC
 pAIScripting0x45_L069:
-    %AICMD0x1A($0170, $0178, aAIScriptingData_L079, $00)                     ;B5A5EF
+    %AICMD0x1A_SpawnNpc($0170, $0178, aAIScriptingData_L079, $00)                     ;B5A5EF
 ; Idle until the player presses A at the NPC (AICMD0x2D): jumps to OnInteract, or to OnItemOffered while an item is
 ; carried.
 pAIScripting0x45_Data05_WaitInteract:
@@ -343,10 +343,10 @@ pAIScripting0x45_L071:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 15, 18, pAIScripting0x45_L077) ;B5A60E
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x45_L077)     ;B5A616
     %AICMD0x45_JumpIfBetween16(nSecondChildAge, 120, 999, pAIScripting0x45_L072);B5A61D
-    %AICMD0x1A($0170, $0178, aAIScriptingData_L077, $00)                     ;B5A627
+    %AICMD0x1A_SpawnNpc($0170, $0178, aAIScriptingData_L077, $00)                     ;B5A627
     %AICMD0x12_Jump(pAIScripting0x45_Data05_WaitInteract2)                                   ;B5A62F
 pAIScripting0x45_L072:
-    %AICMD0x1A($0170, $0178, aAIScriptingData_L079, $00)                     ;B5A632
+    %AICMD0x1A_SpawnNpc($0170, $0178, aAIScriptingData_L079, $00)                     ;B5A632
 ; Idle until the player presses A at the NPC (AICMD0x2D): jumps to OnInteract, or to OnItemOffered while an item is
 ; carried.
 pAIScripting0x45_Data05_WaitInteract2:
@@ -358,10 +358,10 @@ pAIScripting0x45_L074:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 15, 18, pAIScripting0x45_L077) ;B5A651
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x45_L077)     ;B5A659
     %AICMD0x45_JumpIfBetween16(nSecondChildAge, 120, 999, pAIScripting0x45_L075);B5A660
-    %AICMD0x1A($0170, $0178, aAIScriptingData_L077, $00)                     ;B5A66A
+    %AICMD0x1A_SpawnNpc($0170, $0178, aAIScriptingData_L077, $00)                     ;B5A66A
     %AICMD0x12_Jump(pAIScripting0x45_Data05_WaitInteract3)                                   ;B5A672
 pAIScripting0x45_L075:
-    %AICMD0x1A($0170, $0178, aAIScriptingData_L079, $00)                     ;B5A675
+    %AICMD0x1A_SpawnNpc($0170, $0178, aAIScriptingData_L079, $00)                     ;B5A675
 ; Idle until the player presses A at the NPC (AICMD0x2D): jumps to OnInteract, or to OnItemOffered while an item is
 ; carried.
 pAIScripting0x45_Data05_WaitInteract3:
@@ -400,10 +400,10 @@ pAIScripting0x45_L084:
     %AICMD0x16_JumpIfBetween8(nCurrentTimeID, 15, 18, pAIScripting0x45_L077) ;B5A6CF
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x45_L077)     ;B5A6D7
     %AICMD0x45_JumpIfBetween16(nSecondChildAge, 120, 999, pAIScripting0x45_L085);B5A6DE
-    %AICMD0x1A($0068, $0048, aAIScriptingData_L077, $00)                     ;B5A6E8
+    %AICMD0x1A_SpawnNpc($0068, $0048, aAIScriptingData_L077, $00)                     ;B5A6E8
     %AICMD0x12_Jump(pAIScripting0x45_Data06_WaitInteract)                                   ;B5A6F0
 pAIScripting0x45_L085:
-    %AICMD0x1A($0068, $0048, aAIScriptingData_L079, $00)                     ;B5A6F3
+    %AICMD0x1A_SpawnNpc($0068, $0048, aAIScriptingData_L079, $00)                     ;B5A6F3
 ; Idle until the player presses A at the NPC (AICMD0x2D): jumps to OnInteract, or to OnItemOffered while an item is
 ; carried.
 pAIScripting0x45_Data06_WaitInteract:

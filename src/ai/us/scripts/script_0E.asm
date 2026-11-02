@@ -5,7 +5,7 @@
 pAIScripting0x0E_Data01:
  
     %AICMD0x4F_DisableToolUse()                                               ;B3F106
-    %AICMD0x50()                                               ;B3F107
+    %AICMD0x50_ReleaseCarried()                                               ;B3F107
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B3F108
     %AICMD0x00_SetMusic($07, $B4)                              ;B3F10D
     %AICMD0x02_FreezeTime()                                    ;B3F110
@@ -74,26 +74,26 @@ pAIScripting0x0E_L011:
     %AICMD0x09_StartScript($07, pAIScripting0x0E_L171)                                   ;B3F1EA
     %AICMD0x12_Jump(pAIScripting0x0E_L173)                                   ;B3F1EE
 pAIScripting0x0E_L012:
-    %AICMD0x1A($00B8, $0088, aAIScriptingData_L064, $03)                     ;B3F1F1
+    %AICMD0x1A_SpawnNpc($00B8, $0088, aAIScriptingData_L064, $03)                     ;B3F1F1
 pAIScripting0x0E_L013:
-    %AICMD0x1F(pAIScripting0x0E_L014)                                        ;B3F1F9
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x0E_L014)                                        ;B3F1F9
     %AICMD0x12_Jump(pAIScripting0x0E_L013)                                   ;B3F1FC
 pAIScripting0x0E_L014:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $0B, pAIScripting0x0E_L015) ;B3F1FF
     %AICMD0x1C_ShowDialog($020C, $00)                          ;B3F206
-    %AICMD0x1B($02D0, $00)                                     ;B3F20A
+    %AICMD0x1B_SetSprite($02D0, $00)                                     ;B3F20A
     %AICMD0x28_ClearBit(strcFlags.unknown1, $00)                        ;B3F20E
     %AICMD0x12_Jump(pAIScripting0x0E_L013)                                   ;B3F213
 pAIScripting0x0E_L015:
     %AICMD0x1C_ShowDialog($0284, $00)                          ;B3F216
     %AICMD0x12_Jump(pAIScripting0x0E_L013)                                   ;B3F21A
 pAIScripting0x0E_L016:
-    %AICMD0x1A($0188, $0098, aAIScriptingData_L057, $00)                     ;B3F21D
+    %AICMD0x1A_SpawnNpc($0188, $0098, aAIScriptingData_L057, $00)                     ;B3F21D
 pAIScripting0x0E_L017:
-    %AICMD0x1F(pAIScripting0x0E_L019)                                        ;B3F225
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x0E_L019)                                        ;B3F225
     %AICMD0x12_Jump(pAIScripting0x0E_L017)                                   ;B3F228
 pAIScripting0x0E_L018:
-    %AICMD0x1F(pAIScripting0x0E_L025)                                        ;B3F22B
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x0E_L025)                                        ;B3F22B
     %AICMD0x12_Jump(pAIScripting0x0E_L018)                                   ;B3F22E
 pAIScripting0x0E_L019:
     %AICMD0x28_ClearBit(strcFlags.unknown1, $01)                        ;B3F231
@@ -125,12 +125,12 @@ pAIScripting0x0E_L025:
     %AICMD0x12_Jump(pAIScripting0x0E_L018)                                   ;B3F28C
     %AICMD0x10_End()                                           ;B3F28F
 pAIScripting0x0E_L026:
-    %AICMD0x1A($0078, $00F8, aAIScriptingData_L061, $02)                     ;B3F290
+    %AICMD0x1A_SpawnNpc($0078, $00F8, aAIScriptingData_L061, $02)                     ;B3F290
 pAIScripting0x0E_L027:
-    %AICMD0x1F(pAIScripting0x0E_L029)                                        ;B3F298
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x0E_L029)                                        ;B3F298
     %AICMD0x12_Jump(pAIScripting0x0E_L027)                                   ;B3F29B
 pAIScripting0x0E_L028:
-    %AICMD0x1F(pAIScripting0x0E_L030)                                        ;B3F29E
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x0E_L030)                                        ;B3F29E
     %AICMD0x12_Jump(pAIScripting0x0E_L028)                                   ;B3F2A1
 pAIScripting0x0E_L029:
     %AICMD0x1C_ShowDialog($021F, $00)                          ;B3F2A4
@@ -146,9 +146,9 @@ pAIScripting0x0E_L029:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $09, pAIScripting0x0E_L027) ;B3F2E7
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $0A, pAIScripting0x0E_L027) ;B3F2EE
     %AICMD0x08_EnableAIControl()                               ;B3F2F5
-    %AICMD0x1B($02C7, $00)                                     ;B3F2F6
-    %AICMD0x0D($00, $FF, $30, $01)                             ;B3F2FA
-    %AICMD0x1B($02C4, $00)                                     ;B3F2FF
+    %AICMD0x1B_SetSprite($02C7, $00)                                     ;B3F2F6
+    %AICMD0x0D_MoveObject($00, $FF, $30, $01)                             ;B3F2FA
+    %AICMD0x1B_SetSprite($02C4, $00)                                     ;B3F2FF
     %AICMD0x11_EnableUserControl()                             ;B3F303
     %AICMD0x12_Jump(pAIScripting0x0E_L028)                                   ;B3F304
 pAIScripting0x0E_L030:
@@ -159,9 +159,9 @@ pAIScripting0x0E_L031:
     %AICMD0x1C_ShowDialog($0282, $00)                          ;B3F315
     %AICMD0x12_Jump(pAIScripting0x0E_L028)                                   ;B3F319
 pAIScripting0x0E_L032:
-    %AICMD0x1A($00B8, $00D8, aAIScriptingData_L046, $00)                     ;B3F31C
+    %AICMD0x1A_SpawnNpc($00B8, $00D8, aAIScriptingData_L046, $00)                     ;B3F31C
 pAIScripting0x0E_L033:
-    %AICMD0x1F(pAIScripting0x0E_L034)                                        ;B3F324
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x0E_L034)                                        ;B3F324
     %AICMD0x12_Jump(pAIScripting0x0E_L033)                                   ;B3F327
 pAIScripting0x0E_L034:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $0B, pAIScripting0x0E_L035) ;B3F32A
@@ -172,9 +172,9 @@ pAIScripting0x0E_L035:
     %AICMD0x1C_ShowDialog($0283, $00)                          ;B3F33D
     %AICMD0x12_Jump(pAIScripting0x0E_L033)                                   ;B3F341
 pAIScripting0x0E_L036:
-    %AICMD0x1A($01A8, $00F8, aAIScriptingData_L051, $00)                     ;B3F344
+    %AICMD0x1A_SpawnNpc($01A8, $00F8, aAIScriptingData_L051, $00)                     ;B3F344
 pAIScripting0x0E_L037:
-    %AICMD0x1F(pAIScripting0x0E_L038)                                        ;B3F34C
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x0E_L038)                                        ;B3F34C
     %AICMD0x12_Jump(pAIScripting0x0E_L037)                                   ;B3F34F
 pAIScripting0x0E_L038:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $0B, pAIScripting0x0E_L040) ;B3F352
@@ -189,9 +189,9 @@ pAIScripting0x0E_L040:
     %AICMD0x1C_ShowDialog($028A, $00)                          ;B3F374
     %AICMD0x12_Jump(pAIScripting0x0E_L037)                                   ;B3F378
 pAIScripting0x0E_L041:
-    %AICMD0x1A($00F8, $00F8, aAIScriptingData_L067, $01)                     ;B3F37B
+    %AICMD0x1A_SpawnNpc($00F8, $00F8, aAIScriptingData_L067, $01)                     ;B3F37B
 pAIScripting0x0E_L042:
-    %AICMD0x1F(pAIScripting0x0E_L043)                                        ;B3F383
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x0E_L043)                                        ;B3F383
     %AICMD0x12_Jump(pAIScripting0x0E_L042)                                   ;B3F386
 pAIScripting0x0E_L043:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $0B, pAIScripting0x0E_L045) ;B3F389
@@ -210,9 +210,9 @@ pAIScripting0x0E_L046:
     %AICMD0x1C_ShowDialog($0250, $00)                          ;B3F3B8
     %AICMD0x12_Jump(pAIScripting0x0E_L042)                                   ;B3F3BC
 pAIScripting0x0E_L047:
-    %AICMD0x1A($0118, $00F8, aAIScriptingData_L055, $01)                     ;B3F3BF
+    %AICMD0x1A_SpawnNpc($0118, $00F8, aAIScriptingData_L055, $01)                     ;B3F3BF
 pAIScripting0x0E_L048:
-    %AICMD0x1F(pAIScripting0x0E_L049)                                        ;B3F3C7
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x0E_L049)                                        ;B3F3C7
     %AICMD0x12_Jump(pAIScripting0x0E_L048)                                   ;B3F3CA
 pAIScripting0x0E_L049:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $0B, pAIScripting0x0E_L051) ;B3F3CD
@@ -226,36 +226,36 @@ pAIScripting0x0E_L050:
 pAIScripting0x0E_L051:
     %AICMD0x1C_ShowDialog($0287, $00)                          ;B3F3EE
     %AICMD0x12_Jump(pAIScripting0x0E_L048)                                   ;B3F3F2
-    %AICMD0x1A($0158, $0138, aAIScriptingData_L042, $00)                     ;B3F3F5
+    %AICMD0x1A_SpawnNpc($0158, $0138, aAIScriptingData_L042, $00)                     ;B3F3F5
 pAIScripting0x0E_L052:
-    %AICMD0x1F(pAIScripting0x0E_L053)                                        ;B3F3FD
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x0E_L053)                                        ;B3F3FD
     %AICMD0x12_Jump(pAIScripting0x0E_L052)                                   ;B3F400
 pAIScripting0x0E_L053:
     %AICMD0x1C_ShowDialog($021C, $00)                          ;B3F403
     %AICMD0x12_Jump(pAIScripting0x0E_L052)                                   ;B3F407
     %AICMD0x1C_ShowDialog($028C, $00)                          ;B3F40A
     %AICMD0x12_Jump(pAIScripting0x0E_L052)                                   ;B3F40E
-    %AICMD0x1A($0198, $00C8, aAIScriptingData_L035, $00)                     ;B3F411
+    %AICMD0x1A_SpawnNpc($0198, $00C8, aAIScriptingData_L035, $00)                     ;B3F411
 pAIScripting0x0E_L054:
-    %AICMD0x1F(pAIScripting0x0E_L055)                                        ;B3F419
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x0E_L055)                                        ;B3F419
     %AICMD0x12_Jump(pAIScripting0x0E_L054)                                   ;B3F41C
 pAIScripting0x0E_L055:
     %AICMD0x1C_ShowDialog($021D, $00)                          ;B3F41F
     %AICMD0x12_Jump(pAIScripting0x0E_L054)                                   ;B3F423
     %AICMD0x1C_ShowDialog($0288, $00)                          ;B3F426
     %AICMD0x12_Jump(pAIScripting0x0E_L054)                                   ;B3F42A
-    %AICMD0x1A($0198, $0158, aAIScriptingData_L037, $01)                     ;B3F42D
+    %AICMD0x1A_SpawnNpc($0198, $0158, aAIScriptingData_L037, $01)                     ;B3F42D
 pAIScripting0x0E_L056:
-    %AICMD0x1F(pAIScripting0x0E_L057)                                        ;B3F435
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x0E_L057)                                        ;B3F435
     %AICMD0x12_Jump(pAIScripting0x0E_L056)                                   ;B3F438
 pAIScripting0x0E_L057:
     %AICMD0x1C_ShowDialog($021E, $00)                          ;B3F43B
     %AICMD0x12_Jump(pAIScripting0x0E_L056)                                   ;B3F43F
     %AICMD0x1C_ShowDialog($0289, $00)                          ;B3F442
     %AICMD0x12_Jump(pAIScripting0x0E_L056)                                   ;B3F446
-    %AICMD0x1A($0198, $0158, aAIScriptingData_L033, $01)                     ;B3F449
+    %AICMD0x1A_SpawnNpc($0198, $0158, aAIScriptingData_L033, $01)                     ;B3F449
 pAIScripting0x0E_L058:
-    %AICMD0x1F(pAIScripting0x0E_L059)                                        ;B3F451
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x0E_L059)                                        ;B3F451
     %AICMD0x12_Jump(pAIScripting0x0E_L058)                                   ;B3F454
 pAIScripting0x0E_L059:
     %AICMD0x1C_ShowDialog($021E, $00)                          ;B3F457
@@ -264,11 +264,11 @@ pAIScripting0x0E_L059:
     %AICMD0x12_Jump(pAIScripting0x0E_L058)                                   ;B3F462
 pAIScripting0x0E_L060:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, pAIScripting0x0E_L061)   ;B3F465
-    %AICMD0x1A($0148, $00B8, aAIScriptingData_L011, $00)                     ;B3F46C
+    %AICMD0x1A_SpawnNpc($0148, $00B8, aAIScriptingData_L011, $00)                     ;B3F46C
     %AICMD0x12_Jump(pAIScripting0x0E_L062)                                   ;B3F474
 pAIScripting0x0E_L061:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $04, pAIScripting0x0E_L075)   ;B3F477
-    %AICMD0x1A($0148, $00B8, aAIScriptingData_L071, $00)                     ;B3F47E
+    %AICMD0x1A_SpawnNpc($0148, $00B8, aAIScriptingData_L071, $00)                     ;B3F47E
 pAIScripting0x0E_L062:
     %AICMD0x2D_JumpOnInteract(pAIScripting0x0E_L064, pAIScripting0x0E_L071)                               ;B3F486
     %AICMD0x12_Jump(pAIScripting0x0E_L062)                                   ;B3F48B
@@ -330,11 +330,11 @@ pAIScripting0x0E_L075:
     %AICMD0x10_End()                                           ;B3F55F
 pAIScripting0x0E_L076:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x0E_L077)   ;B3F560
-    %AICMD0x1A($00C8, $0128, aAIScriptingData_L015, $02)                     ;B3F567
+    %AICMD0x1A_SpawnNpc($00C8, $0128, aAIScriptingData_L015, $02)                     ;B3F567
     %AICMD0x12_Jump(pAIScripting0x0E_L078)                                   ;B3F56F
 pAIScripting0x0E_L077:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $04, pAIScripting0x0E_L091)   ;B3F572
-    %AICMD0x1A($00C8, $0128, aAIScriptingData_L071, $00)                     ;B3F579
+    %AICMD0x1A_SpawnNpc($00C8, $0128, aAIScriptingData_L071, $00)                     ;B3F579
 pAIScripting0x0E_L078:
     %AICMD0x2D_JumpOnInteract(pAIScripting0x0E_L080, pAIScripting0x0E_L086)                               ;B3F581
     %AICMD0x12_Jump(pAIScripting0x0E_L078)                                   ;B3F586
@@ -397,11 +397,11 @@ pAIScripting0x0E_L091:
     %AICMD0x10_End()                                           ;B3F65E
 pAIScripting0x0E_L092:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, pAIScripting0x0E_L093)   ;B3F65F
-    %AICMD0x1A($00E8, $0088, aAIScriptingData_L019, $00)                     ;B3F666
+    %AICMD0x1A_SpawnNpc($00E8, $0088, aAIScriptingData_L019, $00)                     ;B3F666
     %AICMD0x12_Jump(pAIScripting0x0E_L094)                                   ;B3F66E
 pAIScripting0x0E_L093:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $04, pAIScripting0x0E_L108)   ;B3F671
-    %AICMD0x1A($00E8, $0088, aAIScriptingData_L071, $00)                     ;B3F678
+    %AICMD0x1A_SpawnNpc($00E8, $0088, aAIScriptingData_L071, $00)                     ;B3F678
 pAIScripting0x0E_L094:
     %AICMD0x2D_JumpOnInteract(pAIScripting0x0E_L097, pAIScripting0x0E_L104)                               ;B3F680
     %AICMD0x12_Jump(pAIScripting0x0E_L094)                                   ;B3F685
@@ -468,11 +468,11 @@ pAIScripting0x0E_L108:
     %AICMD0x10_End()                                           ;B3F76D
 pAIScripting0x0E_L109:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, pAIScripting0x0E_L110)   ;B3F76E
-    %AICMD0x1A($0138, $0148, aAIScriptingData_L021, $03)                     ;B3F775
+    %AICMD0x1A_SpawnNpc($0138, $0148, aAIScriptingData_L021, $03)                     ;B3F775
     %AICMD0x12_Jump(pAIScripting0x0E_L111)                                   ;B3F77D
 pAIScripting0x0E_L110:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $04, pAIScripting0x0E_L125)   ;B3F780
-    %AICMD0x1A($0138, $0148, aAIScriptingData_L071, $03)                     ;B3F787
+    %AICMD0x1A_SpawnNpc($0138, $0148, aAIScriptingData_L071, $03)                     ;B3F787
 pAIScripting0x0E_L111:
     %AICMD0x2D_JumpOnInteract(pAIScripting0x0E_L114, pAIScripting0x0E_L120)                               ;B3F78F
     %AICMD0x12_Jump(pAIScripting0x0E_L111)                                   ;B3F794
@@ -540,11 +540,11 @@ pAIScripting0x0E_L125:
     %AICMD0x10_End()                                           ;B3F880
 pAIScripting0x0E_L126:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, pAIScripting0x0E_L127)   ;B3F881
-    %AICMD0x1A($0118, $0158, aAIScriptingData_L024, $00)                     ;B3F888
+    %AICMD0x1A_SpawnNpc($0118, $0158, aAIScriptingData_L024, $00)                     ;B3F888
     %AICMD0x12_Jump(pAIScripting0x0E_L128)                                   ;B3F890
 pAIScripting0x0E_L127:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $04, pAIScripting0x0E_L142)   ;B3F893
-    %AICMD0x1A($0118, $0158, aAIScriptingData_L071, $00)                     ;B3F89A
+    %AICMD0x1A_SpawnNpc($0118, $0158, aAIScriptingData_L071, $00)                     ;B3F89A
 pAIScripting0x0E_L128:
     %AICMD0x2D_JumpOnInteract(pAIScripting0x0E_L131, pAIScripting0x0E_L137)                               ;B3F8A2
     %AICMD0x12_Jump(pAIScripting0x0E_L128)                                   ;B3F8A7
@@ -609,12 +609,12 @@ pAIScripting0x0E_L142:
     %AICMD0x28_ClearBit(strcFlags.unknown1, $0A)                        ;B3F984
     %AICMD0x10_End()                                           ;B3F989
 pAIScripting0x0E_L143:
-    %AICMD0x1A($0058, $00E8, aAIScriptingData_L044, $02)                     ;B3F98A
+    %AICMD0x1A_SpawnNpc($0058, $00E8, aAIScriptingData_L044, $02)                     ;B3F98A
 pAIScripting0x0E_L144:
-    %AICMD0x1F(pAIScripting0x0E_L146)                                        ;B3F992
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x0E_L146)                                        ;B3F992
     %AICMD0x12_Jump(pAIScripting0x0E_L144)                                   ;B3F995
 pAIScripting0x0E_L145:
-    %AICMD0x1F(pAIScripting0x0E_L147)                                        ;B3F998
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x0E_L147)                                        ;B3F998
     %AICMD0x12_Jump(pAIScripting0x0E_L145)                                   ;B3F99B
 pAIScripting0x0E_L146:
     %AICMD0x1D_ShowDialog($0234, $00)                          ;B3F99E
@@ -629,299 +629,299 @@ pAIScripting0x0E_L148:
     %AICMD0x1C_ShowDialog($0236, $00)                          ;B3F9B9
     %AICMD0x12_Jump(pAIScripting0x0E_L144)                                   ;B3F9BD
 pAIScripting0x0E_L149:
-    %AICMD0x1A($00B8, $00B8, aAIScriptingData_L044, $02)                     ;B3F9C0
+    %AICMD0x1A_SpawnNpc($00B8, $00B8, aAIScriptingData_L044, $02)                     ;B3F9C0
     %AICMD0x0C_WaitForScriptFlag($09)                                            ;B3F9C8
     %AICMD0x13_Wait(180)                                       ;B3F9CA
 pAIScripting0x0E_L150:
-    %AICMD0x1B($0294, $01)                                     ;B3F9CD
+    %AICMD0x1B_SetSprite($0294, $01)                                     ;B3F9CD
     %AICMD0x13_Wait(50)                                        ;B3F9D1
-    %AICMD0x1B($0292, $00)                                     ;B3F9D4
+    %AICMD0x1B_SetSprite($0292, $00)                                     ;B3F9D4
     %AICMD0x13_Wait(10)                                        ;B3F9D8
-    %AICMD0x1B($0294, $00)                                     ;B3F9DB
+    %AICMD0x1B_SetSprite($0294, $00)                                     ;B3F9DB
     %AICMD0x13_Wait(10)                                        ;B3F9DF
-    %AICMD0x1B($0290, $00)                                     ;B3F9E2
+    %AICMD0x1B_SetSprite($0290, $00)                                     ;B3F9E2
     %AICMD0x13_Wait(10)                                        ;B3F9E6
-    %AICMD0x1B($0294, $01)                                     ;B3F9E9
+    %AICMD0x1B_SetSprite($0294, $01)                                     ;B3F9E9
     %AICMD0x13_Wait(10)                                        ;B3F9ED
-    %AICMD0x1B($0294, $01)                                     ;B3F9F0
-    %AICMD0x0D($FF, $00, $20, $02)                             ;B3F9F4
-    %AICMD0x1B($0294, $01)                                     ;B3F9F9
-    %AICMD0x0D($01, $00, $20, $02)                             ;B3F9FD
-    %AICMD0x1B($0294, $01)                                     ;B3FA02
-    %AICMD0x0D($FF, $00, $10, $02)                             ;B3FA06
-    %AICMD0x1B($0294, $01)                                     ;B3FA0B
-    %AICMD0x0D($01, $00, $10, $02)                             ;B3FA0F
+    %AICMD0x1B_SetSprite($0294, $01)                                     ;B3F9F0
+    %AICMD0x0D_MoveObject($FF, $00, $20, $02)                             ;B3F9F4
+    %AICMD0x1B_SetSprite($0294, $01)                                     ;B3F9F9
+    %AICMD0x0D_MoveObject($01, $00, $20, $02)                             ;B3F9FD
+    %AICMD0x1B_SetSprite($0294, $01)                                     ;B3FA02
+    %AICMD0x0D_MoveObject($FF, $00, $10, $02)                             ;B3FA06
+    %AICMD0x1B_SetSprite($0294, $01)                                     ;B3FA0B
+    %AICMD0x0D_MoveObject($01, $00, $10, $02)                             ;B3FA0F
     %AICMD0x12_Jump(pAIScripting0x0E_L150)                                   ;B3FA14
 pAIScripting0x0E_L151:
-    %AICMD0x1A($00C8, $00B8, aAIScriptingData_L061, $03)                     ;B3FA17
+    %AICMD0x1A_SpawnNpc($00C8, $00B8, aAIScriptingData_L061, $03)                     ;B3FA17
     %AICMD0x0C_WaitForScriptFlag($09)                                            ;B3FA1F
     %AICMD0x13_Wait(180)                                       ;B3FA21
 pAIScripting0x0E_L152:
-    %AICMD0x1B($02C5, $00)                                     ;B3FA24
+    %AICMD0x1B_SetSprite($02C5, $00)                                     ;B3FA24
     %AICMD0x13_Wait(10)                                        ;B3FA28
-    %AICMD0x1B($02C9, $01)                                     ;B3FA2B
+    %AICMD0x1B_SetSprite($02C9, $01)                                     ;B3FA2B
     %AICMD0x13_Wait(10)                                        ;B3FA2F
-    %AICMD0x1B($02C7, $00)                                     ;B3FA32
+    %AICMD0x1B_SetSprite($02C7, $00)                                     ;B3FA32
     %AICMD0x13_Wait(10)                                        ;B3FA36
-    %AICMD0x1B($02C9, $00)                                     ;B3FA39
+    %AICMD0x1B_SetSprite($02C9, $00)                                     ;B3FA39
     %AICMD0x13_Wait(10)                                        ;B3FA3D
-    %AICMD0x1B($02C5, $00)                                     ;B3FA40
+    %AICMD0x1B_SetSprite($02C5, $00)                                     ;B3FA40
     %AICMD0x13_Wait(50)                                        ;B3FA44
-    %AICMD0x1B($02C9, $00)                                     ;B3FA47
-    %AICMD0x0D($01, $00, $20, $02)                             ;B3FA4B
-    %AICMD0x1B($02C9, $00)                                     ;B3FA50
-    %AICMD0x0D($FF, $00, $20, $02)                             ;B3FA54
-    %AICMD0x1B($02C9, $00)                                     ;B3FA59
-    %AICMD0x0D($01, $00, $10, $02)                             ;B3FA5D
-    %AICMD0x1B($02C9, $00)                                     ;B3FA62
-    %AICMD0x0D($FF, $00, $10, $02)                             ;B3FA66
+    %AICMD0x1B_SetSprite($02C9, $00)                                     ;B3FA47
+    %AICMD0x0D_MoveObject($01, $00, $20, $02)                             ;B3FA4B
+    %AICMD0x1B_SetSprite($02C9, $00)                                     ;B3FA50
+    %AICMD0x0D_MoveObject($FF, $00, $20, $02)                             ;B3FA54
+    %AICMD0x1B_SetSprite($02C9, $00)                                     ;B3FA59
+    %AICMD0x0D_MoveObject($01, $00, $10, $02)                             ;B3FA5D
+    %AICMD0x1B_SetSprite($02C9, $00)                                     ;B3FA62
+    %AICMD0x0D_MoveObject($FF, $00, $10, $02)                             ;B3FA66
     %AICMD0x12_Jump(pAIScripting0x0E_L152)                                   ;B3FA6B
 pAIScripting0x0E_L153:
-    %AICMD0x1A($0158, $00D8, aAIScriptingData_L046, $02)                     ;B3FA6E
+    %AICMD0x1A_SpawnNpc($0158, $00D8, aAIScriptingData_L046, $02)                     ;B3FA6E
     %AICMD0x0C_WaitForScriptFlag($09)                                            ;B3FA76
     %AICMD0x13_Wait(180)                                       ;B3FA78
 pAIScripting0x0E_L154:
-    %AICMD0x1B($029B, $01)                                     ;B3FA7B
+    %AICMD0x1B_SetSprite($029B, $01)                                     ;B3FA7B
     %AICMD0x13_Wait(50)                                        ;B3FA7F
-    %AICMD0x1B($0299, $00)                                     ;B3FA82
+    %AICMD0x1B_SetSprite($0299, $00)                                     ;B3FA82
     %AICMD0x13_Wait(10)                                        ;B3FA86
-    %AICMD0x1B($029B, $00)                                     ;B3FA89
+    %AICMD0x1B_SetSprite($029B, $00)                                     ;B3FA89
     %AICMD0x13_Wait(10)                                        ;B3FA8D
-    %AICMD0x1B($0297, $00)                                     ;B3FA90
+    %AICMD0x1B_SetSprite($0297, $00)                                     ;B3FA90
     %AICMD0x13_Wait(10)                                        ;B3FA94
-    %AICMD0x1B($029B, $01)                                     ;B3FA97
+    %AICMD0x1B_SetSprite($029B, $01)                                     ;B3FA97
     %AICMD0x13_Wait(10)                                        ;B3FA9B
-    %AICMD0x1B($029B, $01)                                     ;B3FA9E
-    %AICMD0x0D($FF, $00, $20, $02)                             ;B3FAA2
-    %AICMD0x1B($029B, $01)                                     ;B3FAA7
-    %AICMD0x0D($01, $00, $20, $02)                             ;B3FAAB
-    %AICMD0x1B($029B, $01)                                     ;B3FAB0
-    %AICMD0x0D($FF, $00, $10, $02)                             ;B3FAB4
-    %AICMD0x1B($029B, $01)                                     ;B3FAB9
-    %AICMD0x0D($01, $00, $10, $02)                             ;B3FABD
+    %AICMD0x1B_SetSprite($029B, $01)                                     ;B3FA9E
+    %AICMD0x0D_MoveObject($FF, $00, $20, $02)                             ;B3FAA2
+    %AICMD0x1B_SetSprite($029B, $01)                                     ;B3FAA7
+    %AICMD0x0D_MoveObject($01, $00, $20, $02)                             ;B3FAAB
+    %AICMD0x1B_SetSprite($029B, $01)                                     ;B3FAB0
+    %AICMD0x0D_MoveObject($FF, $00, $10, $02)                             ;B3FAB4
+    %AICMD0x1B_SetSprite($029B, $01)                                     ;B3FAB9
+    %AICMD0x0D_MoveObject($01, $00, $10, $02)                             ;B3FABD
     %AICMD0x12_Jump(pAIScripting0x0E_L154)                                   ;B3FAC2
 pAIScripting0x0E_L155:
-    %AICMD0x1A($0168, $00D8, aAIScriptingData_L064, $03)                     ;B3FAC5
+    %AICMD0x1A_SpawnNpc($0168, $00D8, aAIScriptingData_L064, $03)                     ;B3FAC5
     %AICMD0x0C_WaitForScriptFlag($09)                                            ;B3FACD
     %AICMD0x13_Wait(180)                                       ;B3FACF
 pAIScripting0x0E_L156:
-    %AICMD0x1B($02D0, $00)                                     ;B3FAD2
+    %AICMD0x1B_SetSprite($02D0, $00)                                     ;B3FAD2
     %AICMD0x13_Wait(10)                                        ;B3FAD6
-    %AICMD0x1B($02CF, $00)                                     ;B3FAD9
+    %AICMD0x1B_SetSprite($02CF, $00)                                     ;B3FAD9
     %AICMD0x13_Wait(10)                                        ;B3FADD
-    %AICMD0x1B($02D0, $01)                                     ;B3FAE0
+    %AICMD0x1B_SetSprite($02D0, $01)                                     ;B3FAE0
     %AICMD0x13_Wait(10)                                        ;B3FAE4
-    %AICMD0x1B($02CD, $00)                                     ;B3FAE7
+    %AICMD0x1B_SetSprite($02CD, $00)                                     ;B3FAE7
     %AICMD0x13_Wait(10)                                        ;B3FAEB
-    %AICMD0x1B($02D0, $00)                                     ;B3FAEE
+    %AICMD0x1B_SetSprite($02D0, $00)                                     ;B3FAEE
     %AICMD0x13_Wait(50)                                        ;B3FAF2
-    %AICMD0x1B($02D0, $00)                                     ;B3FAF5
-    %AICMD0x0D($01, $00, $20, $02)                             ;B3FAF9
-    %AICMD0x1B($02D0, $00)                                     ;B3FAFE
-    %AICMD0x0D($FF, $00, $20, $02)                             ;B3FB02
-    %AICMD0x1B($02D0, $00)                                     ;B3FB07
-    %AICMD0x0D($01, $00, $10, $02)                             ;B3FB0B
-    %AICMD0x1B($02D0, $00)                                     ;B3FB10
-    %AICMD0x0D($FF, $00, $10, $02)                             ;B3FB14
+    %AICMD0x1B_SetSprite($02D0, $00)                                     ;B3FAF5
+    %AICMD0x0D_MoveObject($01, $00, $20, $02)                             ;B3FAF9
+    %AICMD0x1B_SetSprite($02D0, $00)                                     ;B3FAFE
+    %AICMD0x0D_MoveObject($FF, $00, $20, $02)                             ;B3FB02
+    %AICMD0x1B_SetSprite($02D0, $00)                                     ;B3FB07
+    %AICMD0x0D_MoveObject($01, $00, $10, $02)                             ;B3FB0B
+    %AICMD0x1B_SetSprite($02D0, $00)                                     ;B3FB10
+    %AICMD0x0D_MoveObject($FF, $00, $10, $02)                             ;B3FB14
     %AICMD0x12_Jump(pAIScripting0x0E_L156)                                   ;B3FB19
 pAIScripting0x0E_L157:
-    %AICMD0x1A($00B8, $0138, aAIScriptingData_L067, $02)                     ;B3FB1C
+    %AICMD0x1A_SpawnNpc($00B8, $0138, aAIScriptingData_L067, $02)                     ;B3FB1C
     %AICMD0x0C_WaitForScriptFlag($09)                                            ;B3FB24
     %AICMD0x13_Wait(180)                                       ;B3FB26
 pAIScripting0x0E_L158:
-    %AICMD0x1B($02D7, $01)                                     ;B3FB29
+    %AICMD0x1B_SetSprite($02D7, $01)                                     ;B3FB29
     %AICMD0x13_Wait(50)                                        ;B3FB2D
-    %AICMD0x1B($02D5, $00)                                     ;B3FB30
+    %AICMD0x1B_SetSprite($02D5, $00)                                     ;B3FB30
     %AICMD0x13_Wait(10)                                        ;B3FB34
-    %AICMD0x1B($02D7, $00)                                     ;B3FB37
+    %AICMD0x1B_SetSprite($02D7, $00)                                     ;B3FB37
     %AICMD0x13_Wait(10)                                        ;B3FB3B
-    %AICMD0x1B($02D3, $00)                                     ;B3FB3E
+    %AICMD0x1B_SetSprite($02D3, $00)                                     ;B3FB3E
     %AICMD0x13_Wait(10)                                        ;B3FB42
-    %AICMD0x1B($02D7, $01)                                     ;B3FB45
+    %AICMD0x1B_SetSprite($02D7, $01)                                     ;B3FB45
     %AICMD0x13_Wait(10)                                        ;B3FB49
-    %AICMD0x1B($02D7, $00)                                     ;B3FB4C
-    %AICMD0x0D($01, $00, $0C, $01)                             ;B3FB50
-    %AICMD0x1B($02D7, $00)                                     ;B3FB55
-    %AICMD0x0D($FF, $00, $0C, $01)                             ;B3FB59
-    %AICMD0x1B($02D7, $00)                                     ;B3FB5E
-    %AICMD0x0D($01, $00, $08, $01)                             ;B3FB62
-    %AICMD0x1B($02D7, $00)                                     ;B3FB67
-    %AICMD0x0D($FF, $00, $08, $01)                             ;B3FB6B
+    %AICMD0x1B_SetSprite($02D7, $00)                                     ;B3FB4C
+    %AICMD0x0D_MoveObject($01, $00, $0C, $01)                             ;B3FB50
+    %AICMD0x1B_SetSprite($02D7, $00)                                     ;B3FB55
+    %AICMD0x0D_MoveObject($FF, $00, $0C, $01)                             ;B3FB59
+    %AICMD0x1B_SetSprite($02D7, $00)                                     ;B3FB5E
+    %AICMD0x0D_MoveObject($01, $00, $08, $01)                             ;B3FB62
+    %AICMD0x1B_SetSprite($02D7, $00)                                     ;B3FB67
+    %AICMD0x0D_MoveObject($FF, $00, $08, $01)                             ;B3FB6B
     %AICMD0x12_Jump(pAIScripting0x0E_L158)                                   ;B3FB70
 pAIScripting0x0E_L159:
-    %AICMD0x1A($00C8, $0138, aAIScriptingData_L055, $03)                     ;B3FB73
+    %AICMD0x1A_SpawnNpc($00C8, $0138, aAIScriptingData_L055, $03)                     ;B3FB73
     %AICMD0x0C_WaitForScriptFlag($09)                                            ;B3FB7B
     %AICMD0x13_Wait(180)                                       ;B3FB7D
 pAIScripting0x0E_L160:
-    %AICMD0x1B($02B6, $01)                                     ;B3FB80
+    %AICMD0x1B_SetSprite($02B6, $01)                                     ;B3FB80
     %AICMD0x13_Wait(10)                                        ;B3FB84
-    %AICMD0x1B($02B4, $00)                                     ;B3FB87
+    %AICMD0x1B_SetSprite($02B4, $00)                                     ;B3FB87
     %AICMD0x13_Wait(10)                                        ;B3FB8B
-    %AICMD0x1B($02B6, $00)                                     ;B3FB8E
+    %AICMD0x1B_SetSprite($02B6, $00)                                     ;B3FB8E
     %AICMD0x13_Wait(10)                                        ;B3FB92
-    %AICMD0x1B($02B2, $00)                                     ;B3FB95
+    %AICMD0x1B_SetSprite($02B2, $00)                                     ;B3FB95
     %AICMD0x13_Wait(10)                                        ;B3FB99
-    %AICMD0x1B($02B6, $01)                                     ;B3FB9C
+    %AICMD0x1B_SetSprite($02B6, $01)                                     ;B3FB9C
     %AICMD0x13_Wait(50)                                        ;B3FBA0
-    %AICMD0x1B($02B6, $01)                                     ;B3FBA3
-    %AICMD0x0D($FF, $00, $0C, $01)                             ;B3FBA7
-    %AICMD0x1B($02B6, $01)                                     ;B3FBAC
-    %AICMD0x0D($01, $00, $0C, $01)                             ;B3FBB0
-    %AICMD0x1B($02B6, $01)                                     ;B3FBB5
-    %AICMD0x0D($FF, $00, $08, $01)                             ;B3FBB9
-    %AICMD0x1B($02B6, $01)                                     ;B3FBBE
-    %AICMD0x0D($01, $00, $08, $01)                             ;B3FBC2
+    %AICMD0x1B_SetSprite($02B6, $01)                                     ;B3FBA3
+    %AICMD0x0D_MoveObject($FF, $00, $0C, $01)                             ;B3FBA7
+    %AICMD0x1B_SetSprite($02B6, $01)                                     ;B3FBAC
+    %AICMD0x0D_MoveObject($01, $00, $0C, $01)                             ;B3FBB0
+    %AICMD0x1B_SetSprite($02B6, $01)                                     ;B3FBB5
+    %AICMD0x0D_MoveObject($FF, $00, $08, $01)                             ;B3FBB9
+    %AICMD0x1B_SetSprite($02B6, $01)                                     ;B3FBBE
+    %AICMD0x0D_MoveObject($01, $00, $08, $01)                             ;B3FBC2
     %AICMD0x12_Jump(pAIScripting0x0E_L160)                                   ;B3FBC7
 pAIScripting0x0E_L161:
-    %AICMD0x1A($0110, $0108, aAIScriptingData_L011, $03)                     ;B3FBCA
+    %AICMD0x1A_SpawnNpc($0110, $0108, aAIScriptingData_L011, $03)                     ;B3FBCA
     %AICMD0x0C_WaitForScriptFlag($09)                                            ;B3FBD2
     %AICMD0x13_Wait(200)                                       ;B3FBD4
 pAIScripting0x0E_L162:
-    %AICMD0x1B($0223, $00)                                     ;B3FBD7
+    %AICMD0x1B_SetSprite($0223, $00)                                     ;B3FBD7
     %AICMD0x13_Wait(10)                                        ;B3FBDB
-    %AICMD0x1B($0221, $00)                                     ;B3FBDE
+    %AICMD0x1B_SetSprite($0221, $00)                                     ;B3FBDE
     %AICMD0x13_Wait(10)                                        ;B3FBE2
-    %AICMD0x1B($0223, $01)                                     ;B3FBE5
+    %AICMD0x1B_SetSprite($0223, $01)                                     ;B3FBE5
     %AICMD0x13_Wait(10)                                        ;B3FBE9
-    %AICMD0x1B($021F, $00)                                     ;B3FBEC
+    %AICMD0x1B_SetSprite($021F, $00)                                     ;B3FBEC
     %AICMD0x13_Wait(10)                                        ;B3FBF0
-    %AICMD0x1B($0223, $00)                                     ;B3FBF3
+    %AICMD0x1B_SetSprite($0223, $00)                                     ;B3FBF3
     %AICMD0x13_Wait(50)                                        ;B3FBF7
-    %AICMD0x1B($0223, $00)                                     ;B3FBFA
-    %AICMD0x0D($01, $00, $20, $02)                             ;B3FBFE
-    %AICMD0x1B($0223, $00)                                     ;B3FC03
-    %AICMD0x0D($FF, $00, $20, $02)                             ;B3FC07
-    %AICMD0x1B($0223, $00)                                     ;B3FC0C
-    %AICMD0x0D($01, $00, $10, $02)                             ;B3FC10
-    %AICMD0x1B($0223, $00)                                     ;B3FC15
-    %AICMD0x0D($FF, $00, $10, $02)                             ;B3FC19
+    %AICMD0x1B_SetSprite($0223, $00)                                     ;B3FBFA
+    %AICMD0x0D_MoveObject($01, $00, $20, $02)                             ;B3FBFE
+    %AICMD0x1B_SetSprite($0223, $00)                                     ;B3FC03
+    %AICMD0x0D_MoveObject($FF, $00, $20, $02)                             ;B3FC07
+    %AICMD0x1B_SetSprite($0223, $00)                                     ;B3FC0C
+    %AICMD0x0D_MoveObject($01, $00, $10, $02)                             ;B3FC10
+    %AICMD0x1B_SetSprite($0223, $00)                                     ;B3FC15
+    %AICMD0x0D_MoveObject($FF, $00, $10, $02)                             ;B3FC19
     %AICMD0x12_Jump(pAIScripting0x0E_L162)                                   ;B3FC1E
 pAIScripting0x0E_L163:
-    %AICMD0x1A($0110, $0108, aAIScriptingData_L015, $03)                     ;B3FC21
+    %AICMD0x1A_SpawnNpc($0110, $0108, aAIScriptingData_L015, $03)                     ;B3FC21
     %AICMD0x0C_WaitForScriptFlag($09)                                            ;B3FC29
     %AICMD0x13_Wait(200)                                       ;B3FC2B
 pAIScripting0x0E_L164:
-    %AICMD0x1B($022B, $00)                                     ;B3FC2E
+    %AICMD0x1B_SetSprite($022B, $00)                                     ;B3FC2E
     %AICMD0x13_Wait(10)                                        ;B3FC32
-    %AICMD0x1B($0229, $00)                                     ;B3FC35
+    %AICMD0x1B_SetSprite($0229, $00)                                     ;B3FC35
     %AICMD0x13_Wait(10)                                        ;B3FC39
-    %AICMD0x1B($022B, $01)                                     ;B3FC3C
+    %AICMD0x1B_SetSprite($022B, $01)                                     ;B3FC3C
     %AICMD0x13_Wait(10)                                        ;B3FC40
-    %AICMD0x1B($0227, $00)                                     ;B3FC43
+    %AICMD0x1B_SetSprite($0227, $00)                                     ;B3FC43
     %AICMD0x13_Wait(10)                                        ;B3FC47
-    %AICMD0x1B($022B, $00)                                     ;B3FC4A
+    %AICMD0x1B_SetSprite($022B, $00)                                     ;B3FC4A
     %AICMD0x13_Wait(50)                                        ;B3FC4E
-    %AICMD0x1B($022B, $00)                                     ;B3FC51
-    %AICMD0x0D($01, $00, $20, $02)                             ;B3FC55
-    %AICMD0x1B($022B, $00)                                     ;B3FC5A
-    %AICMD0x0D($FF, $00, $20, $02)                             ;B3FC5E
-    %AICMD0x1B($022B, $00)                                     ;B3FC63
-    %AICMD0x0D($01, $00, $10, $02)                             ;B3FC67
-    %AICMD0x1B($022B, $00)                                     ;B3FC6C
-    %AICMD0x0D($FF, $00, $10, $02)                             ;B3FC70
+    %AICMD0x1B_SetSprite($022B, $00)                                     ;B3FC51
+    %AICMD0x0D_MoveObject($01, $00, $20, $02)                             ;B3FC55
+    %AICMD0x1B_SetSprite($022B, $00)                                     ;B3FC5A
+    %AICMD0x0D_MoveObject($FF, $00, $20, $02)                             ;B3FC5E
+    %AICMD0x1B_SetSprite($022B, $00)                                     ;B3FC63
+    %AICMD0x0D_MoveObject($01, $00, $10, $02)                             ;B3FC67
+    %AICMD0x1B_SetSprite($022B, $00)                                     ;B3FC6C
+    %AICMD0x0D_MoveObject($FF, $00, $10, $02)                             ;B3FC70
     %AICMD0x12_Jump(pAIScripting0x0E_L164)                                   ;B3FC75
 pAIScripting0x0E_L165:
-    %AICMD0x1A($0110, $0108, aAIScriptingData_L019, $03)                     ;B3FC78
+    %AICMD0x1A_SpawnNpc($0110, $0108, aAIScriptingData_L019, $03)                     ;B3FC78
     %AICMD0x0C_WaitForScriptFlag($09)                                            ;B3FC80
     %AICMD0x13_Wait(200)                                       ;B3FC82
 pAIScripting0x0E_L166:
-    %AICMD0x1B($0250, $00)                                     ;B3FC85
+    %AICMD0x1B_SetSprite($0250, $00)                                     ;B3FC85
     %AICMD0x13_Wait(10)                                        ;B3FC89
-    %AICMD0x1B($024E, $00)                                     ;B3FC8C
+    %AICMD0x1B_SetSprite($024E, $00)                                     ;B3FC8C
     %AICMD0x13_Wait(10)                                        ;B3FC90
-    %AICMD0x1B($0250, $01)                                     ;B3FC93
+    %AICMD0x1B_SetSprite($0250, $01)                                     ;B3FC93
     %AICMD0x13_Wait(10)                                        ;B3FC97
-    %AICMD0x1B($024C, $00)                                     ;B3FC9A
+    %AICMD0x1B_SetSprite($024C, $00)                                     ;B3FC9A
     %AICMD0x13_Wait(10)                                        ;B3FC9E
-    %AICMD0x1B($0250, $00)                                     ;B3FCA1
+    %AICMD0x1B_SetSprite($0250, $00)                                     ;B3FCA1
     %AICMD0x13_Wait(50)                                        ;B3FCA5
-    %AICMD0x1B($0250, $00)                                     ;B3FCA8
-    %AICMD0x0D($01, $00, $20, $02)                             ;B3FCAC
-    %AICMD0x1B($0250, $00)                                     ;B3FCB1
-    %AICMD0x0D($FF, $00, $20, $02)                             ;B3FCB5
-    %AICMD0x1B($0250, $00)                                     ;B3FCBA
-    %AICMD0x0D($01, $00, $10, $02)                             ;B3FCBE
-    %AICMD0x1B($0250, $00)                                     ;B3FCC3
-    %AICMD0x0D($FF, $00, $10, $02)                             ;B3FCC7
+    %AICMD0x1B_SetSprite($0250, $00)                                     ;B3FCA8
+    %AICMD0x0D_MoveObject($01, $00, $20, $02)                             ;B3FCAC
+    %AICMD0x1B_SetSprite($0250, $00)                                     ;B3FCB1
+    %AICMD0x0D_MoveObject($FF, $00, $20, $02)                             ;B3FCB5
+    %AICMD0x1B_SetSprite($0250, $00)                                     ;B3FCBA
+    %AICMD0x0D_MoveObject($01, $00, $10, $02)                             ;B3FCBE
+    %AICMD0x1B_SetSprite($0250, $00)                                     ;B3FCC3
+    %AICMD0x0D_MoveObject($FF, $00, $10, $02)                             ;B3FCC7
     %AICMD0x12_Jump(pAIScripting0x0E_L166)                                   ;B3FCCC
 pAIScripting0x0E_L167:
-    %AICMD0x1A($0110, $0108, aAIScriptingData_L021, $03)                     ;B3FCCF
+    %AICMD0x1A_SpawnNpc($0110, $0108, aAIScriptingData_L021, $03)                     ;B3FCCF
     %AICMD0x0C_WaitForScriptFlag($09)                                            ;B3FCD7
     %AICMD0x13_Wait(200)                                       ;B3FCD9
 pAIScripting0x0E_L168:
-    %AICMD0x1B($0241, $00)                                     ;B3FCDC
+    %AICMD0x1B_SetSprite($0241, $00)                                     ;B3FCDC
     %AICMD0x13_Wait(10)                                        ;B3FCE0
-    %AICMD0x1B($023F, $00)                                     ;B3FCE3
+    %AICMD0x1B_SetSprite($023F, $00)                                     ;B3FCE3
     %AICMD0x13_Wait(10)                                        ;B3FCE7
-    %AICMD0x1B($0241, $01)                                     ;B3FCEA
+    %AICMD0x1B_SetSprite($0241, $01)                                     ;B3FCEA
     %AICMD0x13_Wait(10)                                        ;B3FCEE
-    %AICMD0x1B($023D, $00)                                     ;B3FCF1
+    %AICMD0x1B_SetSprite($023D, $00)                                     ;B3FCF1
     %AICMD0x13_Wait(10)                                        ;B3FCF5
-    %AICMD0x1B($0241, $00)                                     ;B3FCF8
+    %AICMD0x1B_SetSprite($0241, $00)                                     ;B3FCF8
     %AICMD0x13_Wait(50)                                        ;B3FCFC
-    %AICMD0x1B($0241, $00)                                     ;B3FCFF
-    %AICMD0x0D($01, $00, $20, $02)                             ;B3FD03
-    %AICMD0x1B($0241, $00)                                     ;B3FD08
-    %AICMD0x0D($FF, $00, $20, $02)                             ;B3FD0C
-    %AICMD0x1B($0241, $00)                                     ;B3FD11
-    %AICMD0x0D($01, $00, $10, $02)                             ;B3FD15
-    %AICMD0x1B($0241, $00)                                     ;B3FD1A
-    %AICMD0x0D($FF, $00, $10, $02)                             ;B3FD1E
+    %AICMD0x1B_SetSprite($0241, $00)                                     ;B3FCFF
+    %AICMD0x0D_MoveObject($01, $00, $20, $02)                             ;B3FD03
+    %AICMD0x1B_SetSprite($0241, $00)                                     ;B3FD08
+    %AICMD0x0D_MoveObject($FF, $00, $20, $02)                             ;B3FD0C
+    %AICMD0x1B_SetSprite($0241, $00)                                     ;B3FD11
+    %AICMD0x0D_MoveObject($01, $00, $10, $02)                             ;B3FD15
+    %AICMD0x1B_SetSprite($0241, $00)                                     ;B3FD1A
+    %AICMD0x0D_MoveObject($FF, $00, $10, $02)                             ;B3FD1E
     %AICMD0x12_Jump(pAIScripting0x0E_L168)                                   ;B3FD23
 pAIScripting0x0E_L169:
-    %AICMD0x1A($0110, $0108, aAIScriptingData_L024, $03)                     ;B3FD26
+    %AICMD0x1A_SpawnNpc($0110, $0108, aAIScriptingData_L024, $03)                     ;B3FD26
     %AICMD0x0C_WaitForScriptFlag($09)                                            ;B3FD2E
     %AICMD0x13_Wait(200)                                       ;B3FD30
 pAIScripting0x0E_L170:
-    %AICMD0x1B($0249, $00)                                     ;B3FD33
+    %AICMD0x1B_SetSprite($0249, $00)                                     ;B3FD33
     %AICMD0x13_Wait(10)                                        ;B3FD37
-    %AICMD0x1B($0247, $00)                                     ;B3FD3A
+    %AICMD0x1B_SetSprite($0247, $00)                                     ;B3FD3A
     %AICMD0x13_Wait(10)                                        ;B3FD3E
-    %AICMD0x1B($0249, $01)                                     ;B3FD41
+    %AICMD0x1B_SetSprite($0249, $01)                                     ;B3FD41
     %AICMD0x13_Wait(10)                                        ;B3FD45
-    %AICMD0x1B($0245, $00)                                     ;B3FD48
+    %AICMD0x1B_SetSprite($0245, $00)                                     ;B3FD48
     %AICMD0x13_Wait(10)                                        ;B3FD4C
-    %AICMD0x1B($0249, $00)                                     ;B3FD4F
+    %AICMD0x1B_SetSprite($0249, $00)                                     ;B3FD4F
     %AICMD0x13_Wait(50)                                        ;B3FD53
-    %AICMD0x1B($0249, $00)                                     ;B3FD56
-    %AICMD0x0D($01, $00, $20, $02)                             ;B3FD5A
-    %AICMD0x1B($0249, $00)                                     ;B3FD5F
-    %AICMD0x0D($FF, $00, $20, $02)                             ;B3FD63
-    %AICMD0x1B($0249, $00)                                     ;B3FD68
-    %AICMD0x0D($01, $00, $10, $02)                             ;B3FD6C
-    %AICMD0x1B($0249, $00)                                     ;B3FD71
-    %AICMD0x0D($FF, $00, $10, $02)                             ;B3FD75
+    %AICMD0x1B_SetSprite($0249, $00)                                     ;B3FD56
+    %AICMD0x0D_MoveObject($01, $00, $20, $02)                             ;B3FD5A
+    %AICMD0x1B_SetSprite($0249, $00)                                     ;B3FD5F
+    %AICMD0x0D_MoveObject($FF, $00, $20, $02)                             ;B3FD63
+    %AICMD0x1B_SetSprite($0249, $00)                                     ;B3FD68
+    %AICMD0x0D_MoveObject($01, $00, $10, $02)                             ;B3FD6C
+    %AICMD0x1B_SetSprite($0249, $00)                                     ;B3FD71
+    %AICMD0x0D_MoveObject($FF, $00, $10, $02)                             ;B3FD75
     %AICMD0x12_Jump(pAIScripting0x0E_L170)                                   ;B3FD7A
 pAIScripting0x0E_L171:
-    %AICMD0x1A($0110, $0108, aAIScriptingData_L071, $03)                     ;B3FD7D
+    %AICMD0x1A_SpawnNpc($0110, $0108, aAIScriptingData_L071, $03)                     ;B3FD7D
     %AICMD0x0C_WaitForScriptFlag($09)                                            ;B3FD85
     %AICMD0x13_Wait(200)                                       ;B3FD87
 pAIScripting0x0E_L172:
-    %AICMD0x1B($02E7, $00)                                     ;B3FD8A
+    %AICMD0x1B_SetSprite($02E7, $00)                                     ;B3FD8A
     %AICMD0x13_Wait(10)                                        ;B3FD8E
-    %AICMD0x1B($02E5, $00)                                     ;B3FD91
+    %AICMD0x1B_SetSprite($02E5, $00)                                     ;B3FD91
     %AICMD0x13_Wait(10)                                        ;B3FD95
-    %AICMD0x1B($02E7, $01)                                     ;B3FD98
+    %AICMD0x1B_SetSprite($02E7, $01)                                     ;B3FD98
     %AICMD0x13_Wait(10)                                        ;B3FD9C
-    %AICMD0x1B($02E3, $00)                                     ;B3FD9F
+    %AICMD0x1B_SetSprite($02E3, $00)                                     ;B3FD9F
     %AICMD0x13_Wait(10)                                        ;B3FDA3
-    %AICMD0x1B($02E7, $00)                                     ;B3FDA6
+    %AICMD0x1B_SetSprite($02E7, $00)                                     ;B3FDA6
     %AICMD0x13_Wait(50)                                        ;B3FDAA
-    %AICMD0x1B($02E7, $00)                                     ;B3FDAD
-    %AICMD0x0D($01, $00, $20, $02)                             ;B3FDB1
-    %AICMD0x1B($02E7, $00)                                     ;B3FDB6
-    %AICMD0x0D($FF, $00, $20, $02)                             ;B3FDBA
-    %AICMD0x1B($02E7, $00)                                     ;B3FDBF
-    %AICMD0x0D($01, $00, $10, $02)                             ;B3FDC3
-    %AICMD0x1B($02E7, $00)                                     ;B3FDC8
-    %AICMD0x0D($FF, $00, $10, $02)                             ;B3FDCC
+    %AICMD0x1B_SetSprite($02E7, $00)                                     ;B3FDAD
+    %AICMD0x0D_MoveObject($01, $00, $20, $02)                             ;B3FDB1
+    %AICMD0x1B_SetSprite($02E7, $00)                                     ;B3FDB6
+    %AICMD0x0D_MoveObject($FF, $00, $20, $02)                             ;B3FDBA
+    %AICMD0x1B_SetSprite($02E7, $00)                                     ;B3FDBF
+    %AICMD0x0D_MoveObject($01, $00, $10, $02)                             ;B3FDC3
+    %AICMD0x1B_SetSprite($02E7, $00)                                     ;B3FDC8
+    %AICMD0x0D_MoveObject($FF, $00, $10, $02)                             ;B3FDCC
     %AICMD0x12_Jump(pAIScripting0x0E_L172)                                   ;B3FDD1
 
 
 pAIScripting0x0E_Data02:
  
     %AICMD0x4F_DisableToolUse()                                               ;B3FDD4
-    %AICMD0x50()                                               ;B3FDD5
+    %AICMD0x50_ReleaseCarried()                                               ;B3FDD5
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B3FDD6
     %AICMD0x00_SetMusic($08, $B4)                              ;B3FDDB
     %AICMD0x02_FreezeTime()                                    ;B3FDDE
@@ -929,7 +929,7 @@ pAIScripting0x0E_Data02:
     %AICMD0x05_SetTransferPosition(264, 264)                   ;B3FDE1
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B3FDE6
     %AICMD0x08_EnableAIControl()                               ;B3FDE8
-    %AICMD0x19($00E8, $00)                                     ;B3FDE9
+    %AICMD0x19_SetPlayerSprite($00E8, $00)                                     ;B3FDE9
     %AICMD0x09_StartScript($01, pAIScripting0x0E_L149)                                   ;B3FDED
     %AICMD0x09_StartScript($02, pAIScripting0x0E_L151)                                   ;B3FDF1
     %AICMD0x09_StartScript($03, pAIScripting0x0E_L153)                                   ;B3FDF5
@@ -948,100 +948,100 @@ pAIScripting0x0E_L173:
     %AICMD0x0B_SetScriptFlag($09)                                            ;B3FE2F
     %AICMD0x10_End()                                           ;B3FE31
 pAIScripting0x0E_L174:
-    %AICMD0x1A($0100, $0108, aAIScriptingData, $02)                     ;B3FE32
+    %AICMD0x1A_SpawnNpc($0100, $0108, aAIScriptingData, $02)                     ;B3FE32
     %AICMD0x0C_WaitForScriptFlag($09)                                            ;B3FE3A
     %AICMD0x13_Wait(200)                                       ;B3FE3C
-    %AICMD0x1B($0002, $01)                                     ;B3FE3F
+    %AICMD0x1B_SetSprite($0002, $01)                                     ;B3FE3F
     %AICMD0x13_Wait(50)                                        ;B3FE43
-    %AICMD0x1B($0000, $00)                                     ;B3FE46
+    %AICMD0x1B_SetSprite($0000, $00)                                     ;B3FE46
     %AICMD0x13_Wait(10)                                        ;B3FE4A
-    %AICMD0x1B($0002, $00)                                     ;B3FE4D
+    %AICMD0x1B_SetSprite($0002, $00)                                     ;B3FE4D
     %AICMD0x13_Wait(10)                                        ;B3FE51
-    %AICMD0x1B($0001, $00)                                     ;B3FE54
+    %AICMD0x1B_SetSprite($0001, $00)                                     ;B3FE54
     %AICMD0x13_Wait(10)                                        ;B3FE58
-    %AICMD0x1B($0002, $01)                                     ;B3FE5B
+    %AICMD0x1B_SetSprite($0002, $01)                                     ;B3FE5B
     %AICMD0x13_Wait(10)                                        ;B3FE5F
-    %AICMD0x1B($0002, $01)                                     ;B3FE62
-    %AICMD0x0D($FF, $00, $20, $02)                             ;B3FE66
-    %AICMD0x1B($0002, $01)                                     ;B3FE6B
-    %AICMD0x0D($01, $00, $20, $02)                             ;B3FE6F
-    %AICMD0x1B($0002, $01)                                     ;B3FE74
-    %AICMD0x0D($FF, $00, $10, $02)                             ;B3FE78
-    %AICMD0x1B($0002, $01)                                     ;B3FE7D
-    %AICMD0x0D($01, $00, $10, $02)                             ;B3FE81
-    %AICMD0x1B($0002, $01)                                     ;B3FE86
+    %AICMD0x1B_SetSprite($0002, $01)                                     ;B3FE62
+    %AICMD0x0D_MoveObject($FF, $00, $20, $02)                             ;B3FE66
+    %AICMD0x1B_SetSprite($0002, $01)                                     ;B3FE6B
+    %AICMD0x0D_MoveObject($01, $00, $20, $02)                             ;B3FE6F
+    %AICMD0x1B_SetSprite($0002, $01)                                     ;B3FE74
+    %AICMD0x0D_MoveObject($FF, $00, $10, $02)                             ;B3FE78
+    %AICMD0x1B_SetSprite($0002, $01)                                     ;B3FE7D
+    %AICMD0x0D_MoveObject($01, $00, $10, $02)                             ;B3FE81
+    %AICMD0x1B_SetSprite($0002, $01)                                     ;B3FE86
     %AICMD0x13_Wait(50)                                        ;B3FE8A
-    %AICMD0x1B($0000, $00)                                     ;B3FE8D
+    %AICMD0x1B_SetSprite($0000, $00)                                     ;B3FE8D
     %AICMD0x13_Wait(10)                                        ;B3FE91
-    %AICMD0x1B($0002, $00)                                     ;B3FE94
+    %AICMD0x1B_SetSprite($0002, $00)                                     ;B3FE94
     %AICMD0x13_Wait(10)                                        ;B3FE98
-    %AICMD0x1B($0001, $00)                                     ;B3FE9B
+    %AICMD0x1B_SetSprite($0001, $00)                                     ;B3FE9B
     %AICMD0x13_Wait(10)                                        ;B3FE9F
-    %AICMD0x1B($0002, $01)                                     ;B3FEA2
+    %AICMD0x1B_SetSprite($0002, $01)                                     ;B3FEA2
     %AICMD0x13_Wait(10)                                        ;B3FEA6
-    %AICMD0x1B($0002, $01)                                     ;B3FEA9
-    %AICMD0x0D($FF, $00, $20, $02)                             ;B3FEAD
-    %AICMD0x1B($0002, $01)                                     ;B3FEB2
-    %AICMD0x0D($01, $00, $20, $02)                             ;B3FEB6
-    %AICMD0x1B($0002, $01)                                     ;B3FEBB
-    %AICMD0x0D($FF, $00, $10, $02)                             ;B3FEBF
-    %AICMD0x1B($0002, $01)                                     ;B3FEC4
-    %AICMD0x0D($01, $00, $10, $02)                             ;B3FEC8
-    %AICMD0x1B($0002, $01)                                     ;B3FECD
+    %AICMD0x1B_SetSprite($0002, $01)                                     ;B3FEA9
+    %AICMD0x0D_MoveObject($FF, $00, $20, $02)                             ;B3FEAD
+    %AICMD0x1B_SetSprite($0002, $01)                                     ;B3FEB2
+    %AICMD0x0D_MoveObject($01, $00, $20, $02)                             ;B3FEB6
+    %AICMD0x1B_SetSprite($0002, $01)                                     ;B3FEBB
+    %AICMD0x0D_MoveObject($FF, $00, $10, $02)                             ;B3FEBF
+    %AICMD0x1B_SetSprite($0002, $01)                                     ;B3FEC4
+    %AICMD0x0D_MoveObject($01, $00, $10, $02)                             ;B3FEC8
+    %AICMD0x1B_SetSprite($0002, $01)                                     ;B3FECD
     %AICMD0x13_Wait(50)                                        ;B3FED1
-    %AICMD0x1B($0000, $00)                                     ;B3FED4
+    %AICMD0x1B_SetSprite($0000, $00)                                     ;B3FED4
     %AICMD0x13_Wait(10)                                        ;B3FED8
-    %AICMD0x1B($0002, $00)                                     ;B3FEDB
+    %AICMD0x1B_SetSprite($0002, $00)                                     ;B3FEDB
     %AICMD0x13_Wait(10)                                        ;B3FEDF
-    %AICMD0x1B($0001, $00)                                     ;B3FEE2
+    %AICMD0x1B_SetSprite($0001, $00)                                     ;B3FEE2
     %AICMD0x13_Wait(10)                                        ;B3FEE6
-    %AICMD0x1B($0002, $01)                                     ;B3FEE9
+    %AICMD0x1B_SetSprite($0002, $01)                                     ;B3FEE9
     %AICMD0x13_Wait(10)                                        ;B3FEED
-    %AICMD0x1B($0002, $01)                                     ;B3FEF0
-    %AICMD0x0D($FF, $00, $20, $02)                             ;B3FEF4
-    %AICMD0x1B($0002, $01)                                     ;B3FEF9
-    %AICMD0x0D($01, $00, $20, $02)                             ;B3FEFD
-    %AICMD0x1B($0002, $01)                                     ;B3FF02
-    %AICMD0x0D($FF, $00, $10, $02)                             ;B3FF06
-    %AICMD0x1B($0002, $01)                                     ;B3FF0B
-    %AICMD0x0D($01, $00, $10, $02)                             ;B3FF0F
-    %AICMD0x1B($0002, $01)                                     ;B3FF14
+    %AICMD0x1B_SetSprite($0002, $01)                                     ;B3FEF0
+    %AICMD0x0D_MoveObject($FF, $00, $20, $02)                             ;B3FEF4
+    %AICMD0x1B_SetSprite($0002, $01)                                     ;B3FEF9
+    %AICMD0x0D_MoveObject($01, $00, $20, $02)                             ;B3FEFD
+    %AICMD0x1B_SetSprite($0002, $01)                                     ;B3FF02
+    %AICMD0x0D_MoveObject($FF, $00, $10, $02)                             ;B3FF06
+    %AICMD0x1B_SetSprite($0002, $01)                                     ;B3FF0B
+    %AICMD0x0D_MoveObject($01, $00, $10, $02)                             ;B3FF0F
+    %AICMD0x1B_SetSprite($0002, $01)                                     ;B3FF14
     %AICMD0x13_Wait(50)                                        ;B3FF18
-    %AICMD0x1B($0000, $00)                                     ;B3FF1B
+    %AICMD0x1B_SetSprite($0000, $00)                                     ;B3FF1B
     %AICMD0x13_Wait(10)                                        ;B3FF1F
-    %AICMD0x1B($0002, $00)                                     ;B3FF22
+    %AICMD0x1B_SetSprite($0002, $00)                                     ;B3FF22
     %AICMD0x13_Wait(10)                                        ;B3FF26
-    %AICMD0x1B($0001, $00)                                     ;B3FF29
+    %AICMD0x1B_SetSprite($0001, $00)                                     ;B3FF29
     %AICMD0x13_Wait(10)                                        ;B3FF2D
-    %AICMD0x1B($0002, $01)                                     ;B3FF30
+    %AICMD0x1B_SetSprite($0002, $01)                                     ;B3FF30
     %AICMD0x13_Wait(10)                                        ;B3FF34
-    %AICMD0x1B($0002, $01)                                     ;B3FF37
-    %AICMD0x0D($FF, $00, $20, $02)                             ;B3FF3B
-    %AICMD0x1B($0002, $01)                                     ;B3FF40
-    %AICMD0x0D($01, $00, $20, $02)                             ;B3FF44
-    %AICMD0x1B($0002, $01)                                     ;B3FF49
-    %AICMD0x0D($FF, $00, $10, $02)                             ;B3FF4D
-    %AICMD0x1B($0002, $01)                                     ;B3FF52
-    %AICMD0x0D($01, $00, $10, $02)                             ;B3FF56
-    %AICMD0x1B($0002, $01)                                     ;B3FF5B
+    %AICMD0x1B_SetSprite($0002, $01)                                     ;B3FF37
+    %AICMD0x0D_MoveObject($FF, $00, $20, $02)                             ;B3FF3B
+    %AICMD0x1B_SetSprite($0002, $01)                                     ;B3FF40
+    %AICMD0x0D_MoveObject($01, $00, $20, $02)                             ;B3FF44
+    %AICMD0x1B_SetSprite($0002, $01)                                     ;B3FF49
+    %AICMD0x0D_MoveObject($FF, $00, $10, $02)                             ;B3FF4D
+    %AICMD0x1B_SetSprite($0002, $01)                                     ;B3FF52
+    %AICMD0x0D_MoveObject($01, $00, $10, $02)                             ;B3FF56
+    %AICMD0x1B_SetSprite($0002, $01)                                     ;B3FF5B
     %AICMD0x13_Wait(50)                                        ;B3FF5F
-    %AICMD0x1B($0000, $00)                                     ;B3FF62
+    %AICMD0x1B_SetSprite($0000, $00)                                     ;B3FF62
     %AICMD0x13_Wait(10)                                        ;B3FF66
-    %AICMD0x1B($0002, $00)                                     ;B3FF69
+    %AICMD0x1B_SetSprite($0002, $00)                                     ;B3FF69
     %AICMD0x13_Wait(10)                                        ;B3FF6D
-    %AICMD0x1B($0001, $00)                                     ;B3FF70
+    %AICMD0x1B_SetSprite($0001, $00)                                     ;B3FF70
     %AICMD0x13_Wait(10)                                        ;B3FF74
-    %AICMD0x1B($0002, $01)                                     ;B3FF77
+    %AICMD0x1B_SetSprite($0002, $01)                                     ;B3FF77
     %AICMD0x13_Wait(10)                                        ;B3FF7B
-    %AICMD0x1B($0002, $01)                                     ;B3FF7E
-    %AICMD0x0D($FF, $00, $20, $02)                             ;B3FF82
-    %AICMD0x1B($0002, $01)                                     ;B3FF87
-    %AICMD0x0D($01, $00, $20, $02)                             ;B3FF8B
-    %AICMD0x1B($0002, $01)                                     ;B3FF90
-    %AICMD0x0D($FF, $00, $10, $02)                             ;B3FF94
-    %AICMD0x1B($0002, $01)                                     ;B3FF99
-    %AICMD0x0D($01, $00, $10, $02)                             ;B3FF9D
-    %AICMD0x3C()                                               ;B3FFA2
+    %AICMD0x1B_SetSprite($0002, $01)                                     ;B3FF7E
+    %AICMD0x0D_MoveObject($FF, $00, $20, $02)                             ;B3FF82
+    %AICMD0x1B_SetSprite($0002, $01)                                     ;B3FF87
+    %AICMD0x0D_MoveObject($01, $00, $20, $02)                             ;B3FF8B
+    %AICMD0x1B_SetSprite($0002, $01)                                     ;B3FF90
+    %AICMD0x0D_MoveObject($FF, $00, $10, $02)                             ;B3FF94
+    %AICMD0x1B_SetSprite($0002, $01)                                     ;B3FF99
+    %AICMD0x0D_MoveObject($01, $00, $10, $02)                             ;B3FF9D
+    %AICMD0x3C_TeleportToHouse()                                               ;B3FFA2
     %AICMD0x10_End()                                           ;B3FFA3
 
 

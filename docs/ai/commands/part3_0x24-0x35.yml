@@ -77,7 +77,7 @@
   open_questions: "No remarks about the format. The macro should have the arguments pAddress, nBitIndex (currently nUnknown2)."
 
 - opcode: 0x29
-  macro: AICMD0x29_SetMapScrooling
+  macro: AICMD0x29_SetMapScrolling
   handler: fAIAction0x29_SetMapScroll
   handler_addr: "849513"
   suggested_name: SetMapScroll
@@ -94,7 +94,7 @@
   open_questions: null
 
 - opcode: 0x2A
-  macro: AICMD0x2A
+  macro: AICMD0x2A_StartTileSequence
   handler: fAIAction0x2A_StartTileSequence
   handler_addr: "849553"
   suggested_name: StartTileSequence
@@ -109,7 +109,7 @@
   open_questions: "It was not determined what exactly the sequences $41/$43/$45 change (the contents of pTileScriptTable and fSetTileAtCoords were not analyzed). The name is based on the behavior of the records (tile X/Y), so only probable."
 
 - opcode: 0x2B
-  macro: AICMD0x2B
+  macro: AICMD0x2B_SpawnActor
   handler: fAIAction0x2B_SpawnActor
   handler_addr: "84957D"
   suggested_name: SpawnActor
@@ -125,7 +125,7 @@
   open_questions: "Full meaning of the values from the table (word +$16 and byte +$14*64) - probably the sprite table index and attributes/flip, not verified in the data file. Agreement of the directions with the PDIR enum (0 DOWN, 1 UP, 2 LEFT, 3 RIGHT) needs checking - in the wander code index 2 corresponds to an X shift of +1 and 3 to an X shift of -1."
 
 - opcode: 0x2C
-  macro: AICMD0x2C
+  macro: AICMD0x2C_PlaySoundWait
   handler: fAIAction0x2C_PlaySoundWait
   handler_addr: "8495E8"
   suggested_name: PlaySoundWait
@@ -158,7 +158,7 @@
   open_questions: "The meaning of slot byte +$0C (probably a 'player is within interaction range' flag, set outside this command - e.g. by command 0x4D) and of the daily4 bits $0002/$0004 was not determined. The value nPlayerInteractionIndex $56 (dialog/NPC interaction handling) was not traced. The names pNextAction1/2 could be refined to pOnInteract/pOnInteractWithItem."
 
 - opcode: 0x2E
-  macro: AICMD0x2E
+  macro: AICMD0x2E_StartWander
   handler: fAIAction0x2E_StartWander
   handler_addr: "849777"
   suggested_name: StartWander
@@ -175,7 +175,7 @@
   open_questions: "Certain: the field writes and the setting of the $A8 flags. Uncertain: the exact meaning of bit $80 (in fAI_UpdateSlotWander setting it skips the home-point range test and enables the map collision test - the role of 'free movement with collision'), and of fields +$05/+$06/+$0B (distinction between period and counter) and +$07/+$08 (walk length vs. countdown). It does not set +$09/+$0A (range) - probably set elsewhere (e.g. at fAI_SetSlotScript)."
 
 - opcode: 0x2F
-  macro: AICMD0x2F
+  macro: AICMD0x2F_SetActorSpriteTable
   handler: fAIAction0x2F_SetActorSpriteTable
   handler_addr: "849810"
   suggested_name: SetActorSpriteTable
@@ -234,7 +234,7 @@
   open_questions: "None - the format fully matches the macro. For strcFlags.unknown1 the values $F7FF/$FFDF look like masks, but the command simply stores them (not AND), so the script probably sets the whole word."
 
 - opcode: 0x33
-  macro: AICMD0x33
+  macro: AICMD0x33_UpdateMole
   handler: fAIAction0x33_UpdateMole
   handler_addr: "84A94C"
   suggested_name: UpdateMole
@@ -248,7 +248,7 @@
   open_questions: "No CITEM enum entry for $29 (judging by the handler name probably a mole). The role of subscript $81 in slot $11 was not traced (probably the mole emerging/hiding). The handler name comes from the repository; the code only confirms item $29 and the counter unkMole."
 
 - opcode: 0x34
-  macro: AICMD0x34
+  macro: AICMD0x34_UpdatePickup
   handler: fAIAction0x34_PickUpFish
   handler_addr: "84AA5D"
   suggested_name: UpdatePickup

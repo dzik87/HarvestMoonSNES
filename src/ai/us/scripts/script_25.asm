@@ -27,13 +27,13 @@ pAIScripting0x25_Data01:
     %AICMD0x10_End()                                           ;B4A5E8
 ; Child script (slot $01) of Data01: actor. Spawns at (104,424).
 pAIScripting0x25_Data01_Actor01:
-    %AICMD0x1A($0068, $01A8, aAIScriptingData_L046, $02)                     ;B4A5E9
+    %AICMD0x1A_SpawnNpc($0068, $01A8, aAIScriptingData_L046, $02)                     ;B4A5E9
     %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4A5F1
     %AICMD0x1C_ShowDialog($0300, $00)                          ;B4A5F3
-    %AICMD0x1B($0297, $00)                                     ;B4A5F7
-    %AICMD0x0D($00, $01, $60, $01)                             ;B4A5FB
-    %AICMD0x1B($029B, $01)                                     ;B4A600
-    %AICMD0x0D($FF, $00, $70, $01)                             ;B4A604
+    %AICMD0x1B_SetSprite($0297, $00)                                     ;B4A5F7
+    %AICMD0x0D_MoveObject($00, $01, $60, $01)                             ;B4A5FB
+    %AICMD0x1B_SetSprite($029B, $01)                                     ;B4A600
+    %AICMD0x0D_MoveObject($FF, $00, $70, $01)                             ;B4A604
     %AICMD0x0B_SetScriptFlag($01)                                            ;B4A609
-    %AICMD0x37()                                               ;B4A60B
+    %AICMD0x37_RemoveObject()                                               ;B4A60B
     %AICMD0x10_End()                                           ;B4A60C

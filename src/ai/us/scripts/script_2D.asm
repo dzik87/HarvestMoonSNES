@@ -24,17 +24,17 @@ pAIScripting0x2D_Data01_Idle:
     %AICMD0x12_Jump(pAIScripting0x2D_Data01_Idle)                                   ;B4C5AF
 ; Child script (slot $01) of Data01: actor. Spawns at (264,26).
 pAIScripting0x2D_Data01_Actor01:
-    %AICMD0x1A($0108, $001A, aAIScriptingData_L083, $00)                     ;B4C5B2
+    %AICMD0x1A_SpawnNpc($0108, $001A, aAIScriptingData_L083, $00)                     ;B4C5B2
 pAIScripting0x2D_L003:
-    %AICMD0x0D($01, $00, $08, $01)                             ;B4C5BA
-    %AICMD0x0D($00, $FF, $06, $01)                             ;B4C5BF
-    %AICMD0x0D($FF, $00, $08, $02)                             ;B4C5C4
-    %AICMD0x0D($FF, $01, $04, $01)                             ;B4C5C9
-    %AICMD0x0D($01, $00, $0C, $02)                             ;B4C5CE
-    %AICMD0x0D($FF, $00, $06, $01)                             ;B4C5D3
-    %AICMD0x0D($00, $FF, $10, $02)                             ;B4C5D8
-    %AICMD0x0D($FF, $01, $04, $01)                             ;B4C5DD
-    %AICMD0x0D($01, $01, $0C, $02)                             ;B4C5E2
-    %AICMD0x0D($01, $00, $08, $02)                             ;B4C5E7
-    %AICMD0x0D($00, $FF, $06, $01)                             ;B4C5EC
+    %AICMD0x0D_MoveObject($01, $00, $08, $01)                             ;B4C5BA
+    %AICMD0x0D_MoveObject($00, $FF, $06, $01)                             ;B4C5BF
+    %AICMD0x0D_MoveObject($FF, $00, $08, $02)                             ;B4C5C4
+    %AICMD0x0D_MoveObject($FF, $01, $04, $01)                             ;B4C5C9
+    %AICMD0x0D_MoveObject($01, $00, $0C, $02)                             ;B4C5CE
+    %AICMD0x0D_MoveObject($FF, $00, $06, $01)                             ;B4C5D3
+    %AICMD0x0D_MoveObject($00, $FF, $10, $02)                             ;B4C5D8
+    %AICMD0x0D_MoveObject($FF, $01, $04, $01)                             ;B4C5DD
+    %AICMD0x0D_MoveObject($01, $01, $0C, $02)                             ;B4C5E2
+    %AICMD0x0D_MoveObject($01, $00, $08, $02)                             ;B4C5E7
+    %AICMD0x0D_MoveObject($00, $FF, $06, $01)                             ;B4C5EC
     %AICMD0x12_Jump(pAIScripting0x2D_L003)                                   ;B4C5F1

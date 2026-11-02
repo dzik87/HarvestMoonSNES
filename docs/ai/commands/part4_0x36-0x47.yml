@@ -13,7 +13,7 @@
   open_questions: "The meaning of the bits of state $7F1F58 (probably: 1=standing, 2=sitting/lying etc.), of the subscript indices $3C-$49, $3F and of slot bytes +0x08/+0x0C/+0x0F is not determined without analyzing the subscripts in B38xxx. It is not known whether byte +0x0C means 'the dog can be picked up' (inference only). To be confirmed whether one command is executed per frame per slot (in which case UpdateDog+Jump = a tick every 2 frames)."
 
 - opcode: 0x37
-  macro: AICMD0x37
+  macro: AICMD0x37_RemoveObject
   handler: fAIAction0x37_RemoveObject
   handler_addr: "84B34B"
   suggested_name: RemoveObject
@@ -73,7 +73,7 @@
   open_questions: null
 
 - opcode: 0x3B
-  macro: AICMD0x3B
+  macro: AICMD0x3B_SetCarryItemHolding
   handler: fAIAction0x3B_SetCarryItemHolding
   handler_addr: "84B4DC"
   suggested_name: SetCarryItemHolding
@@ -88,7 +88,7 @@
   open_questions: "No names for carried item ids other than NONE/FISH. The name 'without animation' is an inference from the difference relative to 0x3E (action ITEMONHAND)."
 
 - opcode: 0x3C
-  macro: AICMD0x3C
+  macro: AICMD0x3C_TeleportToHouse
   handler: fAIAction0x3C_TeleportToHouse
   handler_addr: "84B503"
   suggested_name: TeleportToHouse

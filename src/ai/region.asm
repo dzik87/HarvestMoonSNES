@@ -1,3 +1,12 @@
+;;
+; @file   region.asm
+; @brief  Region support for the AI script banks ($B3-$B5): the WRAM address function used by the script commands.
+; @details The US scripts are the base; EU/DE/JP differ only in a handful of commands (`if !REGION_xx` blocks inside
+;         src/ai/us/scripts/*.asm, catalogue in docs/regions-ai.md) and in WRAM addresses. Script pointers need no handling
+;         because they are labels: a longer or shorter script moves everything behind it automatically.
+; @bank   $B3-$B5   @range $B38000-$B5FFFF
+; @see    src/ai/commands.asm, docs/regions-ai.md, src/common/region.asm
+;;
 ; Region support for the AI script banks ($B3-$B5).
 ;
 ; The US scripts are the base; EU/DE/JP differ in a handful of commands (`if !REGION_xx` blocks inside

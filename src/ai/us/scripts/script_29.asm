@@ -22,7 +22,7 @@ pAIScripting0x29_Data01:
 ; Child script (slot $01) of Data01: actor. Spawns at (104,424).
 pAIScripting0x29_Data01_Actor01:
     %AICMD0x15_JumpIfEquals8(nCurrentTimeID, 18, pAIScripting0x29_L008)      ;B4C44D
-    %AICMD0x1A($0068, $01A8, aAIScriptingData_L055, $02)                     ;B4C454
+    %AICMD0x1A_SpawnNpc($0068, $01A8, aAIScriptingData_L055, $02)                     ;B4C454
 ; Idle until the player presses A at the NPC (AICMD0x2D): jumps to OnInteract, or to OnItemOffered while an item is
 ; carried.
 pAIScripting0x29_Data01_Actor01_WaitInteract:
@@ -53,9 +53,9 @@ pAIScripting0x29_Data01_Actor01_EggReceived:
 pAIScripting0x29_Data01_Actor01_Leave:
     %AICMD0x23_OrWithIndexedValue(strcFlags.event4, $0B)       ;B4C4A2
     %AICMD0x28_ClearBit(strcFlags.event4, $0A)                          ;B4C4A7
-    %AICMD0x1B($02B6, $00)                                     ;B4C4AC
-    %AICMD0x0D($FF, $00, $60, $01)                             ;B4C4B0
-    %AICMD0x37()                                               ;B4C4B5
+    %AICMD0x1B_SetSprite($02B6, $00)                                     ;B4C4AC
+    %AICMD0x0D_MoveObject($FF, $00, $60, $01)                             ;B4C4B0
+    %AICMD0x37_RemoveObject()                                               ;B4C4B5
     %AICMD0x10_End()                                           ;B4C4B6
 pAIScripting0x29_L008:
     %AICMD0x10_End()                                           ;B4C4B7

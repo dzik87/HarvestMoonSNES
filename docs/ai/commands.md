@@ -21,8 +21,8 @@ Description confidence: confirmed: 56, probable: 34
 | 0x0A | `AICMD0x0A_ScreenFadein` | ScreenFadein | confirmed | 2 | 0 | 0 |
 | 0x0B | `AICMD0x0B_SetScriptFlag` | SetScriptFlag | confirmed | 2 | 0 | 0 |
 | 0x0C | `AICMD0x0C_WaitForScriptFlag` | WaitForScriptFlag | confirmed | 2 | 0 | 0 |
-| 0x0D | `AICMD0x0D` | MoveObject | probable | 5 | 0 | 0 |
-| 0x0E | `AICMD0x0E` | ApplyMusicChange | probable | 2 | 0 | 0 |
+| 0x0D | `AICMD0x0D_MoveObject` | MoveObject | probable | 5 | 0 | 0 |
+| 0x0E | `AICMD0x0E_ApplyMusicChange` | ApplyMusicChange | probable | 2 | 0 | 0 |
 | 0x0F | `AICMD0x0F_ScreenFadeout` | ScreenFadeout | confirmed | 2 | 0 | 0 |
 | 0x10 | `AICMD0x10_End` | End | confirmed | 1 | 0 | 0 |
 | 0x11 | `AICMD0x11_EnableUserControl` | EnableUserControl | confirmed | 1 | 0 | 0 |
@@ -33,42 +33,42 @@ Description confidence: confirmed: 56, probable: 34
 | 0x16 | `AICMD0x16_JumpIfBetween8` | JumpIfBetween8 | confirmed | 8 | 0 | 0 |
 | 0x17 | `AICMD0x17_RollRandom` | RollRandom | confirmed | 2 | 0 | 0 |
 | 0x18 | `AICMD0x18_JumpIfRandomEquals` | JumpIfRandomEquals | confirmed | 4 | 0 | 0 |
-| 0x19 | `AICMD0x19` | SetPlayerSprite | probable | 4 | 0 | 0 |
-| 0x1A | `AICMD0x1A` | SpawnNpc | probable | 8 | 0 | 0 |
-| 0x1B | `AICMD0x1B` | SetSprite | probable | 4 | 0 | 0 |
+| 0x19 | `AICMD0x19_SetPlayerSprite` | SetPlayerSprite | probable | 4 | 0 | 0 |
+| 0x1A | `AICMD0x1A_SpawnNpc` | SpawnNpc | probable | 8 | 0 | 0 |
+| 0x1B | `AICMD0x1B_SetSprite` | SetSprite | probable | 4 | 0 | 0 |
 | 0x1C | `AICMD0x1C_ShowDialog` | ShowDialog | confirmed | 4 | 0 | 0 |
 | 0x1D | `AICMD0x1D_ShowDialog` | ShowDialogWithChoice | confirmed | 4 | 0 | 0 |
-| 0x1E | `AICMD0x1E` | JumpIfTalkedTo | probable | 3 | 0 | 0 |
-| 0x1F | `AICMD0x1F` | JumpIfTalkedTo | probable | 3 | 0 | 0 |
+| 0x1E | `AICMD0x1E_JumpIfTalkedToAlias` | JumpIfTalkedTo | probable | 3 | 0 | 0 |
+| 0x1F | `AICMD0x1F_JumpIfTalkedTo` | JumpIfTalkedTo | probable | 3 | 0 | 0 |
 | 0x20 | `AICMD0x20_JumpIfChoice` | JumpIfChoice | confirmed | 4 | 0 | 0 |
 | 0x21 | `AICMD0x21_AddValue8` | AddValue8 | confirmed | 5 | 0 | 0 |
-| 0x22 | `AICMD0x22` | StartRandomWalk | probable | 7 | 0 | 0 |
+| 0x22 | `AICMD0x22_StartRandomWalk` | StartRandomWalk | probable | 7 | 0 | 0 |
 | 0x23 | `AICMD0x23_OrWithIndexedValue` | SetBit | confirmed | 5 | 0 | 0 |
 | 0x24 | `AICMD0x24_NextHourPalette` | SetNextPalette | confirmed | 2 | 0 | 0 |
 | 0x25 | `AICMD0x25_RemoveActor` | RemoveActor | confirmed | 2 | 0 | 0 |
 | 0x26 | `AICMD0x26_ClearBitAs0x28` | ClearBit | confirmed | 5 | 0 | 0 |
 | 0x27 | `AICMD0x27_ClearBitAs0x28` | ClearBit | confirmed | 5 | 0 | 0 |
 | 0x28 | `AICMD0x28_ClearBit` | ClearBit | confirmed | 5 | 0 | 0 |
-| 0x29 | `AICMD0x29_SetMapScrooling` | SetMapScroll | confirmed | 6 | 0 | 0 |
-| 0x2A | `AICMD0x2A` | StartTileSequence | probable | 3 | 0 | 0 |
-| 0x2B | `AICMD0x2B` | SpawnActor | probable | 4 | 0 | 0 |
-| 0x2C | `AICMD0x2C` | PlaySoundWait | probable | 6 | 0 | 0 |
+| 0x29 | `AICMD0x29_SetMapScrolling` | SetMapScroll | confirmed | 6 | 0 | 0 |
+| 0x2A | `AICMD0x2A_StartTileSequence` | StartTileSequence | probable | 3 | 0 | 0 |
+| 0x2B | `AICMD0x2B_SpawnActor` | SpawnActor | probable | 4 | 0 | 0 |
+| 0x2C | `AICMD0x2C_PlaySoundWait` | PlaySoundWait | probable | 6 | 0 | 0 |
 | 0x2D | `AICMD0x2D_JumpOnInteract` | JumpOnInteract | confirmed | 5 | 0 | 0 |
-| 0x2E | `AICMD0x2E` | StartWander | probable | 5 | 0 | 0 |
-| 0x2F | `AICMD0x2F` | SetActorSpriteTable | probable | 3 | 0 | 0 |
+| 0x2E | `AICMD0x2E_StartWander` | StartWander | probable | 5 | 0 | 0 |
+| 0x2F | `AICMD0x2F_SetActorSpriteTable` | SetActorSpriteTable | probable | 3 | 0 | 0 |
 | 0x30 | `AICMD0x30_UpdateChicken` | UpdateChicken | probable | 1 | 0 | 0 |
 | 0x31 | `AICMD0x31_UpdateCow` | UpdateCow | probable | 1 | 0 | 0 |
 | 0x32 | `AICMD0x32_SetValue16` | SetValue16 | confirmed | 6 | 0 | 0 |
-| 0x33 | `AICMD0x33` | UpdateMole | probable | 1 | 0 | 0 |
-| 0x34 | `AICMD0x34` | UpdatePickup | probable | 1 | 0 | 0 |
+| 0x33 | `AICMD0x33_UpdateMole` | UpdateMole | probable | 1 | 0 | 0 |
+| 0x34 | `AICMD0x34_UpdatePickup` | UpdatePickup | probable | 1 | 0 | 0 |
 | 0x35 | `AICMD0x35_UpdateHorse` | UpdateHorse | probable | 1 | 0 | 0 |
 | 0x36 | `AICMD0x36_UpdateDog` | UpdateDog | probable | 1 | 0 | 0 |
-| 0x37 | `AICMD0x37` | RemoveObject | probable | 1 | 0 | 0 |
+| 0x37 | `AICMD0x37_RemoveObject` | RemoveObject | probable | 1 | 0 | 0 |
 | 0x38 | `AICMD0x38_WaitForFadeIn` | WaitForFadeIn | confirmed | 1 | 0 | 0 |
 | 0x39 | `AICMD0x39_WalkForTime` | WalkForTime | confirmed | 4 | 0 | 0 |
 | 0x3A | `AICMD0x3A_RunForTime` | RunForTime | confirmed | 4 | 0 | 0 |
-| 0x3B | `AICMD0x3B` | SetCarryItemHolding | probable | 2 | 0 | 0 |
-| 0x3C | `AICMD0x3C` | TeleportToHouse | probable | 1 | 0 | 0 |
+| 0x3B | `AICMD0x3B_SetCarryItemHolding` | SetCarryItemHolding | probable | 2 | 0 | 0 |
+| 0x3C | `AICMD0x3C_TeleportToHouse` | TeleportToHouse | probable | 1 | 0 | 0 |
 | 0x3D | `AICMD0x3D_TeleportToArea` | TeleportToArea | confirmed | 2 | 0 | 0 |
 | 0x3E | `AICMD0x3E_SetCarryItem` | PickUpCarryItem | probable | 2 | 0 | 0 |
 | 0x3F | `AICMD0x3F_ThrowCarriedItem` | ThrowCarriedItem | confirmed | 1 | 0 | 0 |
@@ -81,17 +81,17 @@ Description confidence: confirmed: 56, probable: 34
 | 0x46 | `AICMD0x46_JumpIfBetween24` | JumpIfBetween24 | confirmed | 12 | 0 | 0 |
 | 0x47 | `AICMD0x47_SetValue8` | SetValue8 | confirmed | 5 | 0 | 0 |
 | 0x48 | `AICMD0x48_SetValue24` | SetValue24 | confirmed | 7 | 0 | 0 |
-| 0x49 | `AICMD0x49` | SetSpriteTableFacingPlayer | probable | 3 | 0 | 0 |
-| 0x4A | `AICMD0x4A` | PickUpObjectOnButtonA | probable | 1 | 0 | 0 |
-| 0x4B | `AICMD0x4B` | ReplaceMapTile | probable | 6 | 0 | 0 |
-| 0x4C | `AICMD0x4C` | SetPassable | probable | 1 | 0 | 0 |
+| 0x49 | `AICMD0x49_SetSpriteTableFacingPlayer` | SetSpriteTableFacingPlayer | probable | 3 | 0 | 0 |
+| 0x4A | `AICMD0x4A_PickUpObjectOnButtonA` | PickUpObjectOnButtonA | probable | 1 | 0 | 0 |
+| 0x4B | `AICMD0x4B_ReplaceMapTile` | ReplaceMapTile | probable | 6 | 0 | 0 |
+| 0x4C | `AICMD0x4C_SetPassable` | SetPassable | probable | 1 | 0 | 0 |
 | 0x4D | `AICMD0x4D_JumpIfBlueFeatherUsed` | JumpIfBlueFeatherUsed | confirmed | 3 | 0 | 0 |
 | 0x4E | `AICMD0x4E_EnableTileInteractions` | EnableTileInteractions | confirmed | 1 | 0 | 0 |
 | 0x4F | `AICMD0x4F_DisableToolUse` | DisableToolUse | confirmed | 1 | 0 | 0 |
-| 0x50 | `AICMD0x50` | ReleaseCarried | probable | 1 | 0 | 0 |
-| 0x51 | `AICMD0x51` | ReleaseCarriedAnimal | probable | 1 | 0 | 0 |
-| 0x52 | `AICMD0x52` | PickUpObjectForEventA | probable | 1 | 0 | 0 |
-| 0x53 | `AICMD0x53` | PickUpObjectForEventB | probable | 1 | 0 | 0 |
+| 0x50 | `AICMD0x50_ReleaseCarried` | ReleaseCarried | probable | 1 | 0 | 0 |
+| 0x51 | `AICMD0x51_ReleaseCarriedAnimal` | ReleaseCarriedAnimal | probable | 1 | 0 | 0 |
+| 0x52 | `AICMD0x52_PickUpObjectForEventA` | PickUpObjectForEventA | probable | 1 | 0 | 0 |
+| 0x53 | `AICMD0x53_PickUpObjectForEventB` | PickUpObjectForEventB | probable | 1 | 0 | 0 |
 | 0x54 | `AICMD0x54_ShowDialog` | ShowDialogAutoClose | probable | 4 | 0 | 0 |
 | 0x55 | `AICMD0x55_JumpIfFlagNotSet` | JumpIfFlagNotSet | confirmed | 7 | 0 | 0 |
 | 0x56 | `AICMD0x56_UseEquippedItem` | UseEquippedItem | confirmed | 1 | 0 | 0 |
@@ -303,7 +303,7 @@ RAM: `$7F1F7A`, `ptrAIActionData`, `slot[+0x10] (wait counter)`
 
 ## 0x0D — MoveObject
 
-- Macro: `AICMD0x0D` · handler: `fAIAction0x0D_MoveObject` ($848C22) · confidence: **probable**
+- Macro: `AICMD0x0D_MoveObject` · handler: `fAIAction0x0D_MoveObject` ($848C22) · confidence: **probable**
 - Length: 5 B · usage: 0 calls in 0 scripts
 
 Sets the movement vector (dx, dy) of the script object together with its speed and duration, and waits for it to finish.
@@ -323,7 +323,7 @@ RAM: `slot[+0x01] flags`, `slot[+0x03] dx`, `slot[+0x04] dy`, `slot[+0x05] step`
 
 ## 0x0E — ApplyMusicChange
 
-- Macro: `AICMD0x0E` · handler: `fAIAction0x0E_ApplyMusicChange` ($848CA8) · confidence: **probable**
+- Macro: `AICMD0x0E_ApplyMusicChange` · handler: `fAIAction0x0E_ApplyMusicChange` ($848CA8) · confidence: **probable**
 - Length: 2 B · usage: 0 calls in 0 scripts
 
 Calls fAudio_FadeOutOnTrackChangeSlow: if the requested trackId differs from the one being played, sends a track change command to the APU.
@@ -506,7 +506,7 @@ RAM: `ptrAIActionData`, `ptrAIUnknown0xCC+$0D`, `strcVariables.n8Temp1`, `strcVa
 
 ## 0x19 — SetPlayerSprite
 
-- Macro: `AICMD0x19` · handler: `fAIAction0x19_SetPlayerSprite` ($848EC9) · confidence: **probable**
+- Macro: `AICMD0x19_SetPlayerSprite` · handler: `fAIAction0x19_SetPlayerSprite` ($848EC9) · confidence: **probable**
 - Length: 4 B · usage: 0 calls in 0 scripts
 
 Forces a specific sprite and flip for the player and sets the PFLAGS_KNEEING flag.
@@ -524,7 +524,7 @@ RAM: `ptrAIActionData`, `strcObjectData.spriteIdx`, `strcObjectData.flip`, `strc
 
 ## 0x1A — SpawnNpc
 
-- Macro: `AICMD0x1A` · handler: `fAIAction0x1A_SpawnNpc` ($848F0A) · confidence: **probable**
+- Macro: `AICMD0x1A_SpawnNpc` · handler: `fAIAction0x1A_SpawnNpc` ($848F0A) · confidence: **probable**
 - Length: 8 B · usage: 0 calls in 0 scripts
 
 Creates/places an NPC object at the given position with a sprite table and an initial direction.
@@ -546,7 +546,7 @@ Calls: `fAI_LoadSlotSpriteFromDirTable`
 
 ## 0x1B — SetSprite
 
-- Macro: `AICMD0x1B` · handler: `fAIAction0x1B_SetSprite` ($848F9B) · confidence: **probable**
+- Macro: `AICMD0x1B_SetSprite` · handler: `fAIAction0x1B_SetSprite` ($848F9B) · confidence: **probable**
 - Length: 4 B · usage: 0 calls in 0 scripts
 
 Directly sets the sprite and flip of the current AI object (NPC) and requests a sprite refresh.
@@ -604,7 +604,7 @@ Calls: `fDialog_DialogHandler`
 
 ## 0x1E — JumpIfTalkedTo
 
-- Macro: `AICMD0x1E` · handler: `fAIAction0x1F_JumpIfTalkedTo` ($849079) · confidence: **probable**
+- Macro: `AICMD0x1E_JumpIfTalkedToAlias` · handler: `fAIAction0x1F_JumpIfTalkedTo` ($849079) · confidence: **probable**
 - Length: 3 B · usage: 0 calls in 0 scripts
 
 Alias of 0x1F - the 0x1E entry in the aAIActions table points to the same handler fAIAction0x1F_JumpIfTalkedTo; it does not occur in any script.
@@ -613,7 +613,7 @@ Alias of 0x1F - the 0x1E entry in the aAIActions table points to the same handle
 |---|---|---|---|---|
 | `pNextAction` | 1 | 2 | script_ptr | As in 0x1F: low 16 bits of the address of the command to jump to after the conversation starts. |
 
-In aAIActions (849455) the entries for opcodes 0x1E and 0x1F point to fAIAction0x1F_JumpIfTalkedTo ($849079). Behavior is identical to 0x1F. The macro AICMD0x1E has the same format (opcode + 16-bit pointer). Command 0x1E was not found in bank_B3/B4/B5.
+In aAIActions (849455) the entries for opcodes 0x1E and 0x1F point to fAIAction0x1F_JumpIfTalkedTo ($849079). Behavior is identical to 0x1F. The macro AICMD0x1E_JumpIfTalkedToAlias has the same format (opcode + 16-bit pointer). Command 0x1E was not found in bank_B3/B4/B5.
 
 RAM: `ptrAIActionData`
 
@@ -621,7 +621,7 @@ RAM: `ptrAIActionData`
 
 ## 0x1F — JumpIfTalkedTo
 
-- Macro: `AICMD0x1F` · handler: `fAIAction0x1F_JumpIfTalkedTo` ($849079) · confidence: **probable**
+- Macro: `AICMD0x1F_JumpIfTalkedTo` · handler: `fAIAction0x1F_JumpIfTalkedTo` ($849079) · confidence: **probable**
 - Length: 3 B · usage: 0 calls in 0 scripts
 
 Checks whether the player is standing next to the NPC and pressed A; if so - turns the NPC toward the player, locks the player in an interaction and jumps to pNextAction, otherwise waits one frame and continues.
@@ -630,7 +630,7 @@ Checks whether the player is standing next to the NPC and pressed A; if so - tur
 |---|---|---|---|---|
 | `pNextAction` | 1 | 2 | script_ptr | Low 16 bits of the address of the command (conversation handler) to jump to when the player starts a conversation with the NPC (bank unchanged). |
 
-This is a polling command: in scripts it is always 'AICMD0x1F(target); Jump(same_command)'. Conditions (all must be met, otherwise the .return path = ptrAIActionData += 3 and +$10 += 1, i.e. a one-frame block): byte +$0C of the object != 0 (player proximity flag set in the loop in game_engine.asm ~83AE26: |NPC posX/posY - player position| < $19), the player action is not PACTION_USINGTOOL / SHOWTOOL / WHISTLEHORSE / WHISTLEDOG, no PFLAGS_EATINGMEAL, (strcFlags.daily4 & $0006) == 0, and strcJoypad1.newInput has bit !JOYPAD_A (A newly pressed). When met: ptrAIActionData = pNextAction (16 bit); +$08 := +$07; +$03 := 0, +$04 := 0 (stop movement); +$0C := 0; +$02 := strcPlayer.direction XOR 1 (NPC faces the player); fAI_LoadSlotSpriteFromDirTable with the table (+$33):$B3 sets the sprite (+$16) and flip (+$14) according to the new direction; +$01 |= $14 (sprite update + auto-movement lock for this frame); nPlayerInteractionIndex := $56, Arg1 = Arg2 = 0; strcPlayer.flags |= PFLAGS_INTERACTING; strcPlayer.action := PACTION_NONE; +$10 += 1. fPlayerInteraction0x56 increments Arg2 and after 2 calls removes PFLAGS_INTERACTING (effect: a short player lock during the transition to the dialog).
+This is a polling command: in scripts it is always 'AICMD0x1F_JumpIfTalkedTo(target); Jump(same_command)'. Conditions (all must be met, otherwise the .return path = ptrAIActionData += 3 and +$10 += 1, i.e. a one-frame block): byte +$0C of the object != 0 (player proximity flag set in the loop in game_engine.asm ~83AE26: |NPC posX/posY - player position| < $19), the player action is not PACTION_USINGTOOL / SHOWTOOL / WHISTLEHORSE / WHISTLEDOG, no PFLAGS_EATINGMEAL, (strcFlags.daily4 & $0006) == 0, and strcJoypad1.newInput has bit !JOYPAD_A (A newly pressed). When met: ptrAIActionData = pNextAction (16 bit); +$08 := +$07; +$03 := 0, +$04 := 0 (stop movement); +$0C := 0; +$02 := strcPlayer.direction XOR 1 (NPC faces the player); fAI_LoadSlotSpriteFromDirTable with the table (+$33):$B3 sets the sprite (+$16) and flip (+$14) according to the new direction; +$01 |= $14 (sprite update + auto-movement lock for this frame); nPlayerInteractionIndex := $56, Arg1 = Arg2 = 0; strcPlayer.flags |= PFLAGS_INTERACTING; strcPlayer.action := PACTION_NONE; +$10 += 1. fPlayerInteraction0x56 increments Arg2 and after 2 calls removes PFLAGS_INTERACTING (effect: a short player lock during the transition to the dialog).
 
 RAM: `ptrAIActionData`, `ptrAIUnknown0xCC+$01`, `ptrAIUnknown0xCC+$02`, `ptrAIUnknown0xCC+$03`, `ptrAIUnknown0xCC+$04`, `ptrAIUnknown0xCC+$07`, `ptrAIUnknown0xCC+$08`, `ptrAIUnknown0xCC+$0C`, `ptrAIUnknown0xCC+$10`, `ptrAIUnknown0xCC+$14`, `ptrAIUnknown0xCC+$16`, `ptrAIUnknown0xCC+$33`, `strcPlayer.flags`, `strcPlayer.action`, `strcPlayer.direction`, `strcJoypad1.newInput`, `strcFlags.daily4`, `nPlayerInteractionIndex`, `nPlayerInteractionArg1`, `nPlayerInteractionArg2`, `ptrTemp0x72`
 
@@ -674,7 +674,7 @@ RAM: `ptrAIActionData`, `ptrTemp0x72`, `strcVariables.n16Temp1`
 
 ## 0x22 — StartRandomWalk
 
-- Macro: `AICMD0x22` · handler: `fAIAction0x22_StartRandomWalk` ($84923F) · confidence: **probable**
+- Macro: `AICMD0x22_StartRandomWalk` · handler: `fAIAction0x22_StartRandomWalk` ($84923F) · confidence: **probable**
 - Length: 7 B · usage: 0 calls in 0 scripts
 
 Enables random wandering for the current NPC within a rectangular area around its current position.
@@ -803,7 +803,7 @@ RAM: `ptrTemp0x72`, `strcVariables.n16Temp1`, `ptrAIActionData`
 
 ## 0x29 — SetMapScroll
 
-- Macro: `AICMD0x29_SetMapScrooling` · handler: `fAIAction0x29_SetMapScroll` ($849513) · confidence: **confirmed**
+- Macro: `AICMD0x29_SetMapScrolling` · handler: `fAIAction0x29_SetMapScroll` ($849513) · confidence: **confirmed**
 - Length: 6 B · usage: 0 calls in 0 scripts
 
 Starts automatic camera scrolling at the given X/Y speed for the given number of frames.
@@ -820,7 +820,7 @@ RAM: `strcMapScrool.speedX`, `strcMapScrool.speedY`, `strcMapScrool.timer`, `ptr
 
 ## 0x2A — StartTileSequence
 
-- Macro: `AICMD0x2A` · handler: `fAIAction0x2A_StartTileSequence` ($849553) · confidence: **probable**
+- Macro: `AICMD0x2A_StartTileSequence` · handler: `fAIAction0x2A_StartTileSequence` ($849553) · confidence: **probable**
 - Length: 3 B · usage: 0 calls in 0 scripts
 
 Starts a sequence of map tile changes (pointer ptrUnknown0xCF) and ends the current script frame.
@@ -839,7 +839,7 @@ Calls: `fTileScript_Start`
 
 ## 0x2B — SpawnActor
 
-- Macro: `AICMD0x2B` · handler: `fAIAction0x2B_SpawnActor` ($84957D) · confidence: **probable**
+- Macro: `AICMD0x2B_SpawnActor` · handler: `fAIAction0x2B_SpawnActor` ($84957D) · confidence: **probable**
 - Length: 4 B · usage: 0 calls in 0 scripts
 
 Sets the appearance (sprite table from bank $B3 and direction) of the current AI slot and marks it for game object creation.
@@ -859,7 +859,7 @@ Calls: `fAI_LoadSlotSpriteFromDirTable`
 
 ## 0x2C — PlaySoundWait
 
-- Macro: `AICMD0x2C` · handler: `fAIAction0x2C_PlaySoundWait` ($8495E8) · confidence: **probable**
+- Macro: `AICMD0x2C_PlaySoundWait` · handler: `fAIAction0x2C_PlaySoundWait` ($8495E8) · confidence: **probable**
 - Length: 6 B · usage: 0 calls in 0 scripts
 
 Plays a sound effect (audio registers 114/115), waits the given number of frames and restores the tool sound.
@@ -900,7 +900,7 @@ Calls: `fAI_LoadSlotSpriteFromDirTable`
 
 ## 0x2E — StartWander
 
-- Macro: `AICMD0x2E` · handler: `fAIAction0x2E_StartWander` ($849777) · confidence: **probable**
+- Macro: `AICMD0x2E_StartWander` · handler: `fAIAction0x2E_StartWander` ($849777) · confidence: **probable**
 - Length: 5 B · usage: 0 calls in 0 scripts
 
 Enables random wandering (animals/NPCs) for the current AI slot around its current position, which becomes the home point.
@@ -919,7 +919,7 @@ RAM: `ptrAIUnknown0xCC`, `strcAIUnknown.flags`, `strcAIUnknown.unk05`, `strcAIUn
 
 ## 0x2F — SetActorSpriteTable
 
-- Macro: `AICMD0x2F` · handler: `fAIAction0x2F_SetActorSpriteTable` ($849810) · confidence: **probable**
+- Macro: `AICMD0x2F_SetActorSpriteTable` · handler: `fAIAction0x2F_SetActorSpriteTable` ($849810) · confidence: **probable**
 - Length: 3 B · usage: 0 calls in 0 scripts
 
 Changes the sprite table (animation) of the current AI slot while preserving the current direction, and marks the sprite for refresh.
@@ -986,7 +986,7 @@ RAM: `ptrTemp0x72`, `ptrAIActionData`
 
 ## 0x33 — UpdateMole
 
-- Macro: `AICMD0x33` · handler: `fAIAction0x33_UpdateMole` ($84A94C) · confidence: **probable**
+- Macro: `AICMD0x33_UpdateMole` · handler: `fAIAction0x33_UpdateMole` ($84A94C) · confidence: **probable**
 - Length: 1 B · usage: 0 calls in 0 scripts
 
 One tick of the mole logic: lets the player pick it up, otherwise periodically starts its appearance subscript at random.
@@ -1001,7 +1001,7 @@ Calls: `fAI_SetSlotScript`
 
 ## 0x34 — UpdatePickup
 
-- Macro: `AICMD0x34` · handler: `fAIAction0x34_PickUpFish` ($84AA5D) · confidence: **probable**
+- Macro: `AICMD0x34_UpdatePickup` · handler: `fAIAction0x34_PickUpFish` ($84AA5D) · confidence: **probable**
 - Length: 1 B · usage: 0 calls in 0 scripts
 
 One tick of a simple item actor: after A is pressed, a player not holding an item picks it up (carryItemId = 7) and the actor disappears.
@@ -1044,7 +1044,7 @@ Calls: `fAI_SetSlotScript`
 
 ## 0x37 — RemoveObject
 
-- Macro: `AICMD0x37` · handler: `fAIAction0x37_RemoveObject` ($84B34B) · confidence: **probable**
+- Macro: `AICMD0x37_RemoveObject` · handler: `fAIAction0x37_RemoveObject` ($84B34B) · confidence: **probable**
 - Length: 1 B · usage: 0 calls in 0 scripts
 
 Removes/deactivates the game object associated with the AI slot (index from slot field +0x12).
@@ -1106,7 +1106,7 @@ RAM: `ptrAIActionData`, `ptrAIUnknown0xCC`, `strcAiControlData.input`, `strcAiCo
 
 ## 0x3B — SetCarryItemHolding
 
-- Macro: `AICMD0x3B` · handler: `fAIAction0x3B_SetCarryItemHolding` ($84B4DC) · confidence: **probable**
+- Macro: `AICMD0x3B_SetCarryItemHolding` · handler: `fAIAction0x3B_SetCarryItemHolding` ($84B4DC) · confidence: **probable**
 - Length: 2 B · usage: 0 calls in 0 scripts
 
 Sets the carried item and the PFLAGS_HOLDINGITEM flag (the player carries an item without a pick-up animation).
@@ -1123,7 +1123,7 @@ RAM: `ptrAIActionData`, `strcPlayerData.carryItemId`, `strcPlayer.flags`
 
 ## 0x3C — TeleportToHouse
 
-- Macro: `AICMD0x3C` · handler: `fAIAction0x3C_TeleportToHouse` ($84B503) · confidence: **probable**
+- Macro: `AICMD0x3C_TeleportToHouse` · handler: `fAIAction0x3C_TeleportToHouse` ($84B503) · confidence: **probable**
 - Length: 1 B · usage: 0 calls in 0 scripts
 
 Teleports the player home (nDestinationAreaId=$15=AREA_HOUSE1) with the forced teleport flag and sets the flag daily4 $0020.
@@ -1336,7 +1336,7 @@ RAM: `ptrAIActionData`, `ptrTemp0x72`
 
 ## 0x49 — SetSpriteTableFacingPlayer
 
-- Macro: `AICMD0x49` · handler: `fAIAction0x49_SetSpriteTableFacingPlayer` ($84B8D9) · confidence: **probable**
+- Macro: `AICMD0x49_SetSpriteTableFacingPlayer` · handler: `fAIAction0x49_SetSpriteTableFacingPlayer` ($84B8D9) · confidence: **probable**
 - Length: 3 B · usage: 0 calls in 0 scripts
 
 Sets the sprite data table of the AI object and immediately selects the entry matching the player's current direction (the 0x2B variant with index = strcPlayer.direction).
@@ -1355,7 +1355,7 @@ Calls: `fAI_LoadSlotSpriteFromDirTable`
 
 ## 0x4A — PickUpObjectOnButtonA
 
-- Macro: `AICMD0x4A` · handler: `fAIAction0x4A_PickUpObjectOnButtonA` ($84B93C) · confidence: **probable**
+- Macro: `AICMD0x4A_PickUpObjectOnButtonA` · handler: `fAIAction0x4A_PickUpObjectOnButtonA` ($84B93C) · confidence: **probable**
 - Length: 1 B · usage: 0 calls in 0 scripts
 
 If the player stands next to the object and presses A (with empty hands), picks the object up - deactivates it and gives the player the carried item id 8.
@@ -1368,7 +1368,7 @@ RAM: `ptrAIActionData`, `ptrAIUnknown0xCC`, `strcPlayer.action`, `strcPlayer.fla
 
 ## 0x4B — ReplaceMapTile
 
-- Macro: `AICMD0x4B` · handler: `fAIAction0x4B_ReplaceMapTile` ($84BA10) · confidence: **probable**
+- Macro: `AICMD0x4B_ReplaceMapTile` · handler: `fAIAction0x4B_ReplaceMapTile` ($84BA10) · confidence: **probable**
 - Length: 6 B · usage: 0 calls in 0 scripts
 
 Replaces a tile in the current object map (sCurrentObjectMap) at the given coordinates.
@@ -1389,7 +1389,7 @@ Calls: `fMap_UpdateCurrentTilemap`, `fObjectEngine_ConvertCoordsToOffset`
 
 ## 0x4C — SetPassable
 
-- Macro: `AICMD0x4C` · handler: `fAIAction0x4C_SetPassable` ($84BA51) · confidence: **probable**
+- Macro: `AICMD0x4C_SetPassable` · handler: `fAIAction0x4C_SetPassable` ($84BA51) · confidence: **probable**
 - Length: 1 B · usage: 0 calls in 0 scripts
 
 Sets bit 0x02 in the AI object state byte (+0x00); the object no longer blocks the player in collision detection.
@@ -1445,7 +1445,7 @@ RAM: `ptrAIActionData`, `strcFlags.daily4`
 
 ## 0x50 — ReleaseCarried
 
-- Macro: `AICMD0x50` · handler: `fAIAction0x50_ReleaseCarried` ($84BBDA) · confidence: **probable**
+- Macro: `AICMD0x50_ReleaseCarried` · handler: `fAIAction0x50_ReleaseCarried` ($84BBDA) · confidence: **probable**
 - Length: 1 B · usage: 0 calls in 0 scripts
 
 Puts down whatever the player is carrying or hugging (item, chicken, dog) and resets the player sprite to the direction.
@@ -1460,7 +1460,7 @@ Calls: `fGameEngine_GetChickenData`
 
 ## 0x51 — ReleaseCarriedAnimal
 
-- Macro: `AICMD0x51` · handler: `fAIAction0x51_ReleaseCarriedAnimal` ($84BC9C) · confidence: **probable**
+- Macro: `AICMD0x51_ReleaseCarriedAnimal` · handler: `fAIAction0x51_ReleaseCarriedAnimal` ($84BC9C) · confidence: **probable**
 - Length: 1 B · usage: 0 calls in 0 scripts
 
 Variant of 0x50: returns the chicken to the coop, removes carry 0x29 and lets go of the dog, but does not touch other items and does not reset the player sprite.
@@ -1475,7 +1475,7 @@ Calls: `fGameEngine_GetChickenData`
 
 ## 0x52 — PickUpObjectForEventA
 
-- Macro: `AICMD0x52` · handler: `fAIAction0x52_PickUpObjectForEventA` ($84BD44) · confidence: **probable**
+- Macro: `AICMD0x52_PickUpObjectForEventA` · handler: `fAIAction0x52_PickUpObjectForEventA` ($84BD44) · confidence: **probable**
 - Length: 1 B · usage: 0 calls in 0 scripts
 
 Like 0x4A (picking up an object with the A button next to it), but instead of granting an item it sets flag daily4 0x0002, which triggers an event after the pick-up animation.
@@ -1488,7 +1488,7 @@ RAM: `ptrAIActionData`, `ptrAIUnknown0xCC`, `strcPlayer.action`, `strcPlayer.fla
 
 ## 0x53 — PickUpObjectForEventB
 
-- Macro: `AICMD0x53` · handler: `fAIAction0x53_PickUpObjectForEventB` ($84BE0D) · confidence: **probable**
+- Macro: `AICMD0x53_PickUpObjectForEventB` · handler: `fAIAction0x53_PickUpObjectForEventB` ($84BE0D) · confidence: **probable**
 - Length: 1 B · usage: 0 calls in 0 scripts
 
 Like 0x52, but sets flag daily4 0x0004 (selects the second event variant after the pick-up).

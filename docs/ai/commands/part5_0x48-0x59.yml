@@ -15,7 +15,7 @@
   open_questions: "The macro names both arguments nUnknown1/nUnknown2 - it should be (pAddress, n24Value). Not used in scripts, so there is no practical confirmation."
 
 - opcode: 0x49
-  macro: AICMD0x49
+  macro: AICMD0x49_SetSpriteTableFacingPlayer
   handler: fAIAction0x49_SetSpriteTableFacingPlayer
   handler_addr: "84B8D9"
   suggested_name: SetSpriteTableFacingPlayer
@@ -30,7 +30,7 @@
   open_questions: "The exact meaning of the +0x01 flag bits (0x03) is not fully established - fAI_UpdateSlotMovementAndObject indicates that bit0 = object drawn/active, bit1/bit2 select the object update variant. The name is a descriptive proposal."
 
 - opcode: 0x4A
-  macro: AICMD0x4A
+  macro: AICMD0x4A_PickUpObjectOnButtonA
   handler: fAIAction0x4A_PickUpObjectOnButtonA
   handler_addr: "84B93C"
   suggested_name: PickUpObjectOnButtonA
@@ -44,7 +44,7 @@
   open_questions: "Item id 8 in carryItemId has no name in CITEM_* (only CITEM_FISH=7 exists); the macro uses !EITEM_TURNIPSEED from a different space - should be fixed to a CITEM constant. What is physically picked up (scripts B4 0x12 / WaterImp) has not been established."
 
 - opcode: 0x4B
-  macro: AICMD0x4B
+  macro: AICMD0x4B_ReplaceMapTile
   handler: fAIAction0x4B_ReplaceMapTile
   handler_addr: "84BA10"
   suggested_name: ReplaceMapTile
@@ -61,7 +61,7 @@
   open_questions: "The exact semantics of sCurrentObjectMap (which layer/map) were not checked; the result depends on mapMultiWidth set earlier (0x58 sets it to 4 and does not restore it)."
 
 - opcode: 0x4C
-  macro: AICMD0x4C
+  macro: AICMD0x4C_SetPassable
   handler: fAIAction0x4C_SetPassable
   handler_addr: "84BA51"
   suggested_name: SetPassable
@@ -118,7 +118,7 @@
   open_questions: "No place that clears bit 0x8000 of daily4 was found (probably a day/area reset). Immediately after the handler's RTS (84BB65-84BBD9) lies unlabeled, unreachable code (storing toolEquipped/toolSecond into strcShedItems and zeroing them) - it does not belong to command 0x4F and has no references to it; an orphaned routine, to be given its own label or removed."
 
 - opcode: 0x50
-  macro: AICMD0x50
+  macro: AICMD0x50_ReleaseCarried
   handler: fAIAction0x50_ReleaseCarried
   handler_addr: "84BBDA"
   suggested_name: ReleaseCarried
@@ -132,7 +132,7 @@
   open_questions: "nDogAreaId is filled with the byte from nCurrentSeasonID ($7F1F19) - either the RAM label is wrong, or this is indeed an unusual assignment; to be verified. The chicken mapID value 0x28 is assumed to be the chicken coop area id (not checked in the enums)."
 
 - opcode: 0x51
-  macro: AICMD0x51
+  macro: AICMD0x51_ReleaseCarriedAnimal
   handler: fAIAction0x51_ReleaseCarriedAnimal
   handler_addr: "84BC9C"
   suggested_name: ReleaseCarriedAnimal
@@ -146,7 +146,7 @@
   open_questions: "What carryItemId 0x29 means (it is not in the CITEM enums) and why it is zeroed without changing the sprite - not established. The name is a proposal."
 
 - opcode: 0x52
-  macro: AICMD0x52
+  macro: AICMD0x52_PickUpObjectForEventA
   handler: fAIAction0x52_PickUpObjectForEventA
   handler_addr: "84BD44"
   suggested_name: PickUpObjectForEventA
@@ -160,7 +160,7 @@
   open_questions: "It was not established what the player physically picks up in script 0x45, nor who sets action 0x1A after this command. The name is a descriptive proposal."
 
 - opcode: 0x53
-  macro: AICMD0x53
+  macro: AICMD0x53_PickUpObjectForEventB
   handler: fAIAction0x53_PickUpObjectForEventB
   handler_addr: "84BE0D"
   suggested_name: PickUpObjectForEventB

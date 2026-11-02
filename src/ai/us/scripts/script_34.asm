@@ -90,27 +90,27 @@ pAIScripting0x34_Data01:
     %AICMD0x10_End()                                           ;B4CFB0
 ; Child script (slot $01) of Data01: actor. Spawns at (152,152).
 pAIScripting0x34_Data01_Actor01:
-    %AICMD0x1A($0098, $0098, aAIScriptingData_L173, $03)                     ;B4CFB1
-    %AICMD0x1B($01EA, $00)                                     ;B4CFB9
+    %AICMD0x1A_SpawnNpc($0098, $0098, aAIScriptingData_L173, $03)                     ;B4CFB1
+    %AICMD0x1B_SetSprite($01EA, $00)                                     ;B4CFB9
     %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4CFBD
     %AICMD0x13_Wait(180)                                       ;B4CFBF
-    %AICMD0x1B($01E1, $00)                                     ;B4CFC2
-    %AICMD0x0D($00, $FF, $20, $01)                             ;B4CFC6
-    %AICMD0x1B($01EE, $01)                                     ;B4CFCB
+    %AICMD0x1B_SetSprite($01E1, $00)                                     ;B4CFC2
+    %AICMD0x0D_MoveObject($00, $FF, $20, $01)                             ;B4CFC6
+    %AICMD0x1B_SetSprite($01EE, $01)                                     ;B4CFCB
     %AICMD0x13_Wait(120)                                       ;B4CFCF
-    %AICMD0x1B($01DA, $00)                                     ;B4CFD2
-    %AICMD0x0D($00, $01, $20, $01)                             ;B4CFD6
-    %AICMD0x1B($01EE, $01)                                     ;B4CFDB
+    %AICMD0x1B_SetSprite($01DA, $00)                                     ;B4CFD2
+    %AICMD0x0D_MoveObject($00, $01, $20, $01)                             ;B4CFD6
+    %AICMD0x1B_SetSprite($01EE, $01)                                     ;B4CFDB
     %AICMD0x13_Wait(90)                                        ;B4CFDF
-    %AICMD0x1B($01F7, $00)                                     ;B4CFE2
+    %AICMD0x1B_SetSprite($01F7, $00)                                     ;B4CFE2
     %AICMD0x13_Wait(90)                                        ;B4CFE6
-    %AICMD0x1B($01E1, $00)                                     ;B4CFE9
-    %AICMD0x0D($00, $FF, $10, $01)                             ;B4CFED
-    %AICMD0x1B($01F7, $00)                                     ;B4CFF2
+    %AICMD0x1B_SetSprite($01E1, $00)                                     ;B4CFE9
+    %AICMD0x0D_MoveObject($00, $FF, $10, $01)                             ;B4CFED
+    %AICMD0x1B_SetSprite($01F7, $00)                                     ;B4CFF2
     %AICMD0x13_Wait(90)                                        ;B4CFF6
-    %AICMD0x1B($01E1, $00)                                     ;B4CFF9
-    %AICMD0x0D($00, $FF, $10, $01)                             ;B4CFFD
-    %AICMD0x1B($01F7, $00)                                     ;B4D002
+    %AICMD0x1B_SetSprite($01E1, $00)                                     ;B4CFF9
+    %AICMD0x0D_MoveObject($00, $FF, $10, $01)                             ;B4CFFD
+    %AICMD0x1B_SetSprite($01F7, $00)                                     ;B4D002
     %AICMD0x13_Wait(90)                                        ;B4D006
     %AICMD0x0B_SetScriptFlag($01)                                            ;B4D009
 ; Idle loop: wait one frame at a time.

@@ -112,7 +112,7 @@
   open_questions: "The side effect on n8Temp2 is probably unintended (16-bit read/write); harmless as long as $93 is not used between commands."
 
 - opcode: 0x19
-  macro: AICMD0x19
+  macro: AICMD0x19_SetPlayerSprite
   handler: fAIAction0x19_SetPlayerSprite
   handler_addr: "848EC9"
   suggested_name: SetPlayerSprite
@@ -128,7 +128,7 @@
   open_questions: "Object $7E:0901 is identified as the player only from the field names in strcObjectData (playerX/playerY); this was not confirmed in the rendering code. The name of the KNEEING flag seems misleading - in fact it is more of a 'pose forced by the script'. It is not determined who clears it after the scene and when (player_actions.asm:2062 clears it in one place)."
 
 - opcode: 0x1A
-  macro: AICMD0x1A
+  macro: AICMD0x1A_SpawnNpc
   handler: fAIAction0x1A_SpawnNpc
   handler_addr: "848F0A"
   suggested_name: SpawnNpc
@@ -146,7 +146,7 @@
   open_questions: "The exact coordinate units (world pixels vs. map pixels) are unconfirmed - the same pair goes to strcObject.posX/posY. The direction convention conflicts with the PDIR_* enum (PDIR_LEFT=2, PDIR_RIGHT=3), while the NPC movement code treats 2 as movement in +X (right); this also affects 0x1F, which uses strcPlayer.direction XOR 1. It should be checked whether the PDIR enum has LEFT/RIGHT swapped. The macro contains &$FFFF masking for pAnimTable - bank B3 is hardcoded in the handler."
 
 - opcode: 0x1B
-  macro: AICMD0x1B
+  macro: AICMD0x1B_SetSprite
   handler: fAIAction0x1B_SetSprite
   handler_addr: "848F9B"
   suggested_name: SetSprite
@@ -194,7 +194,7 @@
   open_questions: "None - the difference between 0x1C and 0x1D exists only in usage convention (there are no differences in the handler code)."
 
 - opcode: 0x1E
-  macro: AICMD0x1E
+  macro: AICMD0x1E_JumpIfTalkedToAlias
   handler: fAIAction0x1F_JumpIfTalkedTo
   handler_addr: "849079"
   suggested_name: JumpIfTalkedTo
@@ -203,13 +203,13 @@
   params:
     - {name: pNextAction, offset: 1, size: 2, type: script_ptr, meaning: "As in 0x1F: low 16 bits of the address of the command to jump to after the conversation starts."}
   summary: "Alias of 0x1F - the 0x1E entry in the aAIActions table points to the same handler fAIAction0x1F_JumpIfTalkedTo; it does not occur in any script."
-  details: "In aAIActions (849455) the entries for opcodes 0x1E and 0x1F point to fAIAction0x1F_JumpIfTalkedTo ($849079). Behavior is identical to 0x1F. The macro AICMD0x1E has the same format (opcode + 16-bit pointer). Command 0x1E was not found in bank_B3/B4/B5."
+  details: "In aAIActions (849455) the entries for opcodes 0x1E and 0x1F point to fAIAction0x1F_JumpIfTalkedTo ($849079). Behavior is identical to 0x1F. The macro AICMD0x1E_JumpIfTalkedToAlias has the same format (opcode + 16-bit pointer). Command 0x1E was not found in bank_B3/B4/B5."
   ram_touched: [ptrAIActionData]
   calls: []
   open_questions: "Whether 0x1E was intended as a separate command (e.g. a different condition) - in the US ROM it points to the same handler. See the description of 0x1F for details."
 
 - opcode: 0x1F
-  macro: AICMD0x1F
+  macro: AICMD0x1F_JumpIfTalkedTo
   handler: fAIAction0x1F_JumpIfTalkedTo
   handler_addr: "849079"
   suggested_name: JumpIfTalkedTo
@@ -218,7 +218,7 @@
   params:
     - {name: pNextAction, offset: 1, size: 2, type: script_ptr, meaning: "Low 16 bits of the address of the command (conversation handler) to jump to when the player starts a conversation with the NPC (bank unchanged)."}
   summary: "Checks whether the player is standing next to the NPC and pressed A; if so - turns the NPC toward the player, locks the player in an interaction and jumps to pNextAction, otherwise waits one frame and continues."
-  details: "This is a polling command: in scripts it is always 'AICMD0x1F(target); Jump(same_command)'. Conditions (all must be met, otherwise the .return path = ptrAIActionData += 3 and +$10 += 1, i.e. a one-frame block): byte +$0C of the object != 0 (player proximity flag set in the loop in game_engine.asm ~83AE26: |NPC posX/posY - player position| < $19), the player action is not PACTION_USINGTOOL / SHOWTOOL / WHISTLEHORSE / WHISTLEDOG, no PFLAGS_EATINGMEAL, (strcFlags.daily4 & $0006) == 0, and strcJoypad1.newInput has bit !JOYPAD_A (A newly pressed). When met: ptrAIActionData = pNextAction (16 bit); +$08 := +$07; +$03 := 0, +$04 := 0 (stop movement); +$0C := 0; +$02 := strcPlayer.direction XOR 1 (NPC faces the player); fAI_LoadSlotSpriteFromDirTable with the table (+$33):$B3 sets the sprite (+$16) and flip (+$14) according to the new direction; +$01 |= $14 (sprite update + auto-movement lock for this frame); nPlayerInteractionIndex := $56, Arg1 = Arg2 = 0; strcPlayer.flags |= PFLAGS_INTERACTING; strcPlayer.action := PACTION_NONE; +$10 += 1. fPlayerInteraction0x56 increments Arg2 and after 2 calls removes PFLAGS_INTERACTING (effect: a short player lock during the transition to the dialog)."
+  details: "This is a polling command: in scripts it is always 'AICMD0x1F_JumpIfTalkedTo(target); Jump(same_command)'. Conditions (all must be met, otherwise the .return path = ptrAIActionData += 3 and +$10 += 1, i.e. a one-frame block): byte +$0C of the object != 0 (player proximity flag set in the loop in game_engine.asm ~83AE26: |NPC posX/posY - player position| < $19), the player action is not PACTION_USINGTOOL / SHOWTOOL / WHISTLEHORSE / WHISTLEDOG, no PFLAGS_EATINGMEAL, (strcFlags.daily4 & $0006) == 0, and strcJoypad1.newInput has bit !JOYPAD_A (A newly pressed). When met: ptrAIActionData = pNextAction (16 bit); +$08 := +$07; +$03 := 0, +$04 := 0 (stop movement); +$0C := 0; +$02 := strcPlayer.direction XOR 1 (NPC faces the player); fAI_LoadSlotSpriteFromDirTable with the table (+$33):$B3 sets the sprite (+$16) and flip (+$14) according to the new direction; +$01 |= $14 (sprite update + auto-movement lock for this frame); nPlayerInteractionIndex := $56, Arg1 = Arg2 = 0; strcPlayer.flags |= PFLAGS_INTERACTING; strcPlayer.action := PACTION_NONE; +$10 += 1. fPlayerInteraction0x56 increments Arg2 and after 2 calls removes PFLAGS_INTERACTING (effect: a short player lock during the transition to the dialog)."
   ram_touched: [ptrAIActionData, ptrAIUnknown0xCC+$01, ptrAIUnknown0xCC+$02, ptrAIUnknown0xCC+$03, ptrAIUnknown0xCC+$04, ptrAIUnknown0xCC+$07, ptrAIUnknown0xCC+$08, ptrAIUnknown0xCC+$0C, ptrAIUnknown0xCC+$10, ptrAIUnknown0xCC+$14, ptrAIUnknown0xCC+$16, ptrAIUnknown0xCC+$33, strcPlayer.flags, strcPlayer.action, strcPlayer.direction, strcJoypad1.newInput, strcFlags.daily4, nPlayerInteractionIndex, nPlayerInteractionArg1, nPlayerInteractionArg2, ptrTemp0x72]
   calls: [fAI_LoadSlotSpriteFromDirTable]
   open_questions: "The meaning of bits $0002/$0004 in strcFlags.daily4 (they block conversation) is not determined. Field +$0C = 'player nearby' was inferred from game_engine.asm:~83AE26-83AE68 (probable). The direction XOR 1 depends on the direction convention (see open_questions in 0x1A: PDIR enum vs. NPC movement code). The aAIActions table points two opcodes (0x1E, 0x1F) to the same handler."
@@ -256,7 +256,7 @@
   open_questions: "The macro describes the argument as n8Value without noting that it is signed - this should be added to the comment in commands.asm."
 
 - opcode: 0x22
-  macro: AICMD0x22
+  macro: AICMD0x22_StartRandomWalk
   handler: fAIAction0x22_StartRandomWalk
   handler_addr: "84923F"
   suggested_name: StartRandomWalk

@@ -34,11 +34,11 @@ pAIScripting0x3A_Data01:
     %AICMD0x13_Wait(60)                                        ;B4D7B5
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 16)                  ;B4D7B8
     %AICMD0x13_Wait(120)                                       ;B4D7BC
-    %AICMD0x19($0023, $00)                                     ;B4D7BF
+    %AICMD0x19_SetPlayerSprite($0023, $00)                                     ;B4D7BF
     %AICMD0x13_Wait(60)                                        ;B4D7C3
-    %AICMD0x19($0003, $00)                                     ;B4D7C6
+    %AICMD0x19_SetPlayerSprite($0003, $00)                                     ;B4D7C6
     %AICMD0x13_Wait(10)                                        ;B4D7CA
-    %AICMD0x19($0023, $00)                                     ;B4D7CD
+    %AICMD0x19_SetPlayerSprite($0023, $00)                                     ;B4D7CD
     %AICMD0x13_Wait(60)                                        ;B4D7D1
     %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4D7D4
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 16)                  ;B4D7D6
@@ -56,34 +56,34 @@ pAIScripting0x3A_Data01:
     %AICMD0x10_End()                                           ;B4D7FC
 ; Child script (slot $02) of Data01: actor. Spawns at (136,344).
 pAIScripting0x3A_Data01_Actor02:
-    %AICMD0x1A($0088, $0158, aAIScriptingData_L071, $00)                     ;B4D7FD
+    %AICMD0x1A_SpawnNpc($0088, $0158, aAIScriptingData_L071, $00)                     ;B4D7FD
     %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4D805
-    %AICMD0x1B($02E3, $00)                                     ;B4D807
-    %AICMD0x0D($00, $01, $20, $01)                             ;B4D80B
-    %AICMD0x1B($02E6, $01)                                     ;B4D810
+    %AICMD0x1B_SetSprite($02E3, $00)                                     ;B4D807
+    %AICMD0x0D_MoveObject($00, $01, $20, $01)                             ;B4D80B
+    %AICMD0x1B_SetSprite($02E6, $01)                                     ;B4D810
     %AICMD0x13_Wait(90)                                        ;B4D814
-    %AICMD0x1B($0233, $01)                                     ;B4D817
+    %AICMD0x1B_SetSprite($0233, $01)                                     ;B4D817
     %AICMD0x13_Wait(120)                                       ;B4D81B
-    %AICMD0x1B($02E9, $00)                                     ;B4D81E
+    %AICMD0x1B_SetSprite($02E9, $00)                                     ;B4D81E
     %AICMD0x13_Wait(120)                                       ;B4D822
     %AICMD0x0B_SetScriptFlag($01)                                            ;B4D825
     %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4D827
-    %AICMD0x1B($02E3, $00)                                     ;B4D829
-    %AICMD0x0D($00, $01, $30, $01)                             ;B4D82D
+    %AICMD0x1B_SetSprite($02E3, $00)                                     ;B4D829
+    %AICMD0x0D_MoveObject($00, $01, $30, $01)                             ;B4D82D
     %AICMD0x13_Wait(10)                                        ;B4D832
-    %AICMD0x1B($02E7, $00)                                     ;B4D835
-    %AICMD0x0D($FF, $00, $30, $01)                             ;B4D839
+    %AICMD0x1B_SetSprite($02E7, $00)                                     ;B4D835
+    %AICMD0x0D_MoveObject($FF, $00, $30, $01)                             ;B4D839
 ; Idle loop: wait one frame at a time.
 pAIScripting0x3A_Data01_Actor02_Idle:
     %AICMD0x13_Wait(1)                                         ;B4D83E
     %AICMD0x12_Jump(pAIScripting0x3A_Data01_Actor02_Idle)                                   ;B4D841
 ; Child script (slot $01) of Data01: actor. Spawns at (136,104).
 pAIScripting0x3A_Data01_Actor01:
-    %AICMD0x1A($0088, $0068, aAIScriptingData_L004, $02)                     ;B4D844
+    %AICMD0x1A_SpawnNpc($0088, $0068, aAIScriptingData_L004, $02)                     ;B4D844
     %AICMD0x13_Wait(120)                                       ;B4D84C
-    %AICMD0x1B($01EA, $01)                                     ;B4D84F
+    %AICMD0x1B_SetSprite($01EA, $01)                                     ;B4D84F
     %AICMD0x13_Wait(160)                                       ;B4D853
-    %AICMD0x1B($01F6, $01)                                     ;B4D856
+    %AICMD0x1B_SetSprite($01F6, $01)                                     ;B4D856
     %AICMD0x12_Jump(pAIScripting0x3A_Data01_Actor01_Idle)                                   ;B4D85A
 ; Idle loop: wait one frame at a time.
 pAIScripting0x3A_Data01_Actor01_Idle:
@@ -140,35 +140,35 @@ pAIScripting0x3A_Data02:
     %AICMD0x10_End()                                           ;B4D8DF
 ; Child script (slot $02) of Data02: actor. Spawns at (760,424).
 pAIScripting0x3A_Data02_Actor02:
-    %AICMD0x1A($02F8, $01A8, aAIScriptingData_L071, $03)                     ;B4D8E0
+    %AICMD0x1A_SpawnNpc($02F8, $01A8, aAIScriptingData_L071, $03)                     ;B4D8E0
     %AICMD0x13_Wait(90)                                        ;B4D8E8
-    %AICMD0x1B($02E7, $00)                                     ;B4D8EB
-    %AICMD0x0D($FF, $00, $38, $01)                             ;B4D8EF
+    %AICMD0x1B_SetSprite($02E7, $00)                                     ;B4D8EB
+    %AICMD0x0D_MoveObject($FF, $00, $38, $01)                             ;B4D8EF
     %AICMD0x13_Wait(30)                                        ;B4D8F4
-    %AICMD0x1B($02E5, $00)                                     ;B4D8F7
-    %AICMD0x0D($00, $FF, $88, $01)                             ;B4D8FB
+    %AICMD0x1B_SetSprite($02E5, $00)                                     ;B4D8F7
+    %AICMD0x0D_MoveObject($00, $FF, $88, $01)                             ;B4D8FB
     %AICMD0x13_Wait(20)                                        ;B4D900
-    %AICMD0x1B($02E7, $00)                                     ;B4D903
-    %AICMD0x0D($FF, $00, $A8, $01)                             ;B4D907
+    %AICMD0x1B_SetSprite($02E7, $00)                                     ;B4D903
+    %AICMD0x0D_MoveObject($FF, $00, $A8, $01)                             ;B4D907
     %AICMD0x13_Wait(20)                                        ;B4D90C
-    %AICMD0x1B($02E7, $00)                                     ;B4D90F
-    %AICMD0x0D($FF, $00, $A0, $01)                             ;B4D913
+    %AICMD0x1B_SetSprite($02E7, $00)                                     ;B4D90F
+    %AICMD0x0D_MoveObject($FF, $00, $A0, $01)                             ;B4D913
     %AICMD0x13_Wait(20)                                        ;B4D918
-    %AICMD0x1B($02E5, $00)                                     ;B4D91B
-    %AICMD0x0D($00, $FF, $70, $01)                             ;B4D91F
+    %AICMD0x1B_SetSprite($02E5, $00)                                     ;B4D91B
+    %AICMD0x0D_MoveObject($00, $FF, $70, $01)                             ;B4D91F
     %AICMD0x0B_SetScriptFlag($02)                                            ;B4D924
     %AICMD0x13_Wait(120)                                       ;B4D926
-    %AICMD0x1B($02E3, $00)                                     ;B4D929
-    %AICMD0x0D($00, $01, $70, $01)                             ;B4D92D
+    %AICMD0x1B_SetSprite($02E3, $00)                                     ;B4D929
+    %AICMD0x0D_MoveObject($00, $01, $70, $01)                             ;B4D92D
     %AICMD0x13_Wait(20)                                        ;B4D932
-    %AICMD0x1B($02E7, $00)                                     ;B4D935
-    %AICMD0x0D($FF, $00, $D4, $01)                             ;B4D939
+    %AICMD0x1B_SetSprite($02E7, $00)                                     ;B4D935
+    %AICMD0x0D_MoveObject($FF, $00, $D4, $01)                             ;B4D939
     %AICMD0x13_Wait(60)                                        ;B4D93E
-    %AICMD0x1B($02E5, $00)                                     ;B4D941
-    %AICMD0x0D($00, $FF, $60, $01)                             ;B4D945
+    %AICMD0x1B_SetSprite($02E5, $00)                                     ;B4D941
+    %AICMD0x0D_MoveObject($00, $FF, $60, $01)                             ;B4D945
     %AICMD0x0B_SetScriptFlag($01)                                            ;B4D94A
     %AICMD0x13_Wait(120)                                       ;B4D94C
-    %AICMD0x1B($02E6, $01)                                     ;B4D94F
+    %AICMD0x1B_SetSprite($02E6, $01)                                     ;B4D94F
     %AICMD0x13_Wait(60)                                        ;B4D953
 ; Idle loop: wait one frame at a time.
 pAIScripting0x3A_Data02_Actor02_Idle:
@@ -176,9 +176,9 @@ pAIScripting0x3A_Data02_Actor02_Idle:
     %AICMD0x12_Jump(pAIScripting0x3A_Data02_Actor02_Idle)                                   ;B4D959
 ; Child script (slot $01) of Data02: actor. Spawns at (376,168).
 pAIScripting0x3A_Data02_Actor01:
-    %AICMD0x1A($0178, $00A8, aAIScriptingData_L051, $00)                     ;B4D95C
+    %AICMD0x1A_SpawnNpc($0178, $00A8, aAIScriptingData_L051, $00)                     ;B4D95C
     %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4D964
-    %AICMD0x1B($02A6, $00)                                     ;B4D966
+    %AICMD0x1B_SetSprite($02A6, $00)                                     ;B4D966
     %AICMD0x13_Wait(120)                                       ;B4D96A
 ; Idle loop: wait one frame at a time.
 pAIScripting0x3A_Data02_Actor01_Idle:
@@ -186,16 +186,16 @@ pAIScripting0x3A_Data02_Actor01_Idle:
     %AICMD0x12_Jump(pAIScripting0x3A_Data02_Actor01_Idle)                                   ;B4D970
 ; Child script (slot $05) of Data02: actor. Spawns at (344,200).
 pAIScripting0x3A_Data02_Actor05:
-    %AICMD0x1A($0158, $00C8, aAIScriptingData_L068, $00)                     ;B4D973
+    %AICMD0x1A_SpawnNpc($0158, $00C8, aAIScriptingData_L068, $00)                     ;B4D973
 ; Idle loop: wait one frame at a time.
 pAIScripting0x3A_Data02_Actor05_Idle:
     %AICMD0x13_Wait(1)                                         ;B4D97B
     %AICMD0x12_Jump(pAIScripting0x3A_Data02_Actor05_Idle)                                   ;B4D97E
 ; Child script (slot $06) of Data02: actor. Spawns at (360,184).
 pAIScripting0x3A_Data02_Actor06:
-    %AICMD0x1A($0168, $00B8, aAIScriptingData_L055, $00)                     ;B4D981
+    %AICMD0x1A_SpawnNpc($0168, $00B8, aAIScriptingData_L055, $00)                     ;B4D981
     %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4D989
-    %AICMD0x1B($02B6, $01)                                     ;B4D98B
+    %AICMD0x1B_SetSprite($02B6, $01)                                     ;B4D98B
     %AICMD0x13_Wait(120)                                       ;B4D98F
 ; Idle loop: wait one frame at a time.
 pAIScripting0x3A_Data02_Actor06_Idle:
@@ -203,13 +203,13 @@ pAIScripting0x3A_Data02_Actor06_Idle:
     %AICMD0x12_Jump(pAIScripting0x3A_Data02_Actor06_Idle)                                   ;B4D995
 ; Child script (slot $03) of Data02: actor. Spawns at (136,184).
 pAIScripting0x3A_Data02_Actor03:
-    %AICMD0x1A($0088, $00B8, aAIScriptingData_L045, $03)                     ;B4D998
+    %AICMD0x1A_SpawnNpc($0088, $00B8, aAIScriptingData_L045, $03)                     ;B4D998
     %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4D9A0
-    %AICMD0x1B($0293, $01)                                     ;B4D9A2
+    %AICMD0x1B_SetSprite($0293, $01)                                     ;B4D9A2
     %AICMD0x13_Wait(60)                                        ;B4D9A6
-    %AICMD0x1B($028F, $00)                                     ;B4D9A9
+    %AICMD0x1B_SetSprite($028F, $00)                                     ;B4D9A9
     %AICMD0x13_Wait(60)                                        ;B4D9AD
-    %AICMD0x1B($0295, $00)                                     ;B4D9B0
+    %AICMD0x1B_SetSprite($0295, $00)                                     ;B4D9B0
     %AICMD0x13_Wait(120)                                       ;B4D9B4
 ; Idle loop: wait one frame at a time.
 pAIScripting0x3A_Data02_Actor03_Idle:
@@ -217,22 +217,22 @@ pAIScripting0x3A_Data02_Actor03_Idle:
     %AICMD0x12_Jump(pAIScripting0x3A_Data02_Actor03_Idle)                                   ;B4D9BA
 ; Child script (slot $04) of Data02: actor. Spawns at (152,168).
 pAIScripting0x3A_Data02_Actor04:
-    %AICMD0x1A($0098, $00A8, aAIScriptingData_L062, $02)                     ;B4D9BD
+    %AICMD0x1A_SpawnNpc($0098, $00A8, aAIScriptingData_L062, $02)                     ;B4D9BD
     %AICMD0x13_Wait(120)                                       ;B4D9C5
-    %AICMD0x1B($02C4, $00)                                     ;B4D9C8
+    %AICMD0x1B_SetSprite($02C4, $00)                                     ;B4D9C8
     %AICMD0x13_Wait(60)                                        ;B4D9CC
-    %AICMD0x1B($02C5, $00)                                     ;B4D9CF
+    %AICMD0x1B_SetSprite($02C5, $00)                                     ;B4D9CF
 ; Idle loop: wait one frame at a time.
 pAIScripting0x3A_Data02_Actor04_Idle:
     %AICMD0x13_Wait(1)                                         ;B4D9D3
     %AICMD0x12_Jump(pAIScripting0x3A_Data02_Actor04_Idle)                                   ;B4D9D6
 ; Child script (slot $07) of Data02: actor. Spawns at (120,184).
 pAIScripting0x3A_Data02_Actor07:
-    %AICMD0x1A($0078, $00B8, aAIScriptingData_L069, $02)                     ;B4D9D9
+    %AICMD0x1A_SpawnNpc($0078, $00B8, aAIScriptingData_L069, $02)                     ;B4D9D9
     %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4D9E1
-    %AICMD0x1B($02DA, $00)                                     ;B4D9E3
-    %AICMD0x0D($00, $01, $10, $01)                             ;B4D9E7
-    %AICMD0x1B($02DD, $01)                                     ;B4D9EC
+    %AICMD0x1B_SetSprite($02DA, $00)                                     ;B4D9E3
+    %AICMD0x0D_MoveObject($00, $01, $10, $01)                             ;B4D9E7
+    %AICMD0x1B_SetSprite($02DD, $01)                                     ;B4D9EC
     %AICMD0x13_Wait(120)                                       ;B4D9F0
 ; Idle loop: wait one frame at a time.
 pAIScripting0x3A_Data02_Actor07_Idle:
@@ -240,13 +240,13 @@ pAIScripting0x3A_Data02_Actor07_Idle:
     %AICMD0x12_Jump(pAIScripting0x3A_Data02_Actor07_Idle)                                   ;B4D9F6
 ; Child script (slot $08) of Data02: actor. Spawns at (168,168).
 pAIScripting0x3A_Data02_Actor08:
-    %AICMD0x1A($00A8, $00A8, aAIScriptingData_L070, $03)                     ;B4D9F9
+    %AICMD0x1A_SpawnNpc($00A8, $00A8, aAIScriptingData_L070, $03)                     ;B4D9F9
     %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4DA01
-    %AICMD0x1B($02E1, $01)                                     ;B4DA03
-    %AICMD0x0D($01, $00, $10, $01)                             ;B4DA07
-    %AICMD0x1B($02DF, $00)                                     ;B4DA0C
-    %AICMD0x0D($00, $01, $10, $01)                             ;B4DA10
-    %AICMD0x1B($02E1, $00)                                     ;B4DA15
+    %AICMD0x1B_SetSprite($02E1, $01)                                     ;B4DA03
+    %AICMD0x0D_MoveObject($01, $00, $10, $01)                             ;B4DA07
+    %AICMD0x1B_SetSprite($02DF, $00)                                     ;B4DA0C
+    %AICMD0x0D_MoveObject($00, $01, $10, $01)                             ;B4DA10
+    %AICMD0x1B_SetSprite($02E1, $00)                                     ;B4DA15
     %AICMD0x13_Wait(120)                                       ;B4DA19
 ; Idle loop: wait one frame at a time.
 pAIScripting0x3A_Data02_Actor08_Idle:

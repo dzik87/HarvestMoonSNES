@@ -3,7 +3,7 @@
     incsrc "../../../../build/gen/ai/slots_11.asm"
  
 pAIScripting0x11_Data01:
-    %AICMD0x50()                                               ;B48838
+    %AICMD0x50_ReleaseCarried()                                               ;B48838
     %AICMD0x09_StartScript($01, pAIScripting0x11_L003)                                   ;B48839
     %AICMD0x38_WaitForFadeIn()                                               ;B4883D
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 80)                  ;B4883E
@@ -27,19 +27,19 @@ pAIScripting0x11_L002:
     %AICMD0x11_EnableUserControl()                             ;B4886A
     %AICMD0x10_End()                                           ;B4886B
 pAIScripting0x11_L003:
-    %AICMD0x1A($0068, $01A8, aAIScriptingData_L058, $02)                     ;B4886C
+    %AICMD0x1A_SpawnNpc($0068, $01A8, aAIScriptingData_L058, $02)                     ;B4886C
     %AICMD0x0C_WaitForScriptFlag($00)                                            ;B48874
-    %AICMD0x1B($02BB, $00)                                     ;B48876
-    %AICMD0x0D($00, $01, $10, $01)                             ;B4887A
-    %AICMD0x1B($02BF, $00)                                     ;B4887F
-    %AICMD0x0D($FF, $00, $A0, $01)                             ;B48883
+    %AICMD0x1B_SetSprite($02BB, $00)                                     ;B48876
+    %AICMD0x0D_MoveObject($00, $01, $10, $01)                             ;B4887A
+    %AICMD0x1B_SetSprite($02BF, $00)                                     ;B4887F
+    %AICMD0x0D_MoveObject($FF, $00, $A0, $01)                             ;B48883
     %AICMD0x0B_SetScriptFlag($01)                                            ;B48888
-    %AICMD0x37()                                               ;B4888A
+    %AICMD0x37_RemoveObject()                                               ;B4888A
     %AICMD0x10_End()                                           ;B4888B
 pAIScripting0x11_L004:
-    %AICMD0x1A($0078, $01A8, aAIScriptingData_L008, $00)                     ;B4888C
+    %AICMD0x1A_SpawnNpc($0078, $01A8, aAIScriptingData_L008, $00)                     ;B4888C
     %AICMD0x0C_WaitForScriptFlag($00)                                            ;B48894
     %AICMD0x13_Wait(30)                                        ;B48896
-    %AICMD0x0D($FF, $00, $A0, $01)                             ;B48899
-    %AICMD0x37()                                               ;B4889E
+    %AICMD0x0D_MoveObject($FF, $00, $A0, $01)                             ;B48899
+    %AICMD0x37_RemoveObject()                                               ;B4889E
     %AICMD0x10_End()                                           ;B4889F

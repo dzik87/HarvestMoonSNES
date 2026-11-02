@@ -4,7 +4,7 @@
  
 AI_ObtainHorse:
  
-    %AICMD0x50()                                               ;B3F088
+    %AICMD0x50_ReleaseCarried()                                               ;B3F088
     %AICMD0x02_FreezeTime()                                    ;B3F089
     %AICMD0x08_EnableAIControl()                               ;B3F08A
     %AICMD0x09_StartScript($17, AI_ObtainHorse_L001)                                   ;B3F08B
@@ -15,12 +15,12 @@ AI_ObtainHorse:
     %AICMD0x23_OrWithIndexedValue($800196, $0D)                ;B3F09A
     %AICMD0x10_End()                                           ;B3F09F
 AI_ObtainHorse_L001:
-    %AICMD0x1A($00A8, $0080, aAIScriptingData_L129, $02)                     ;B3F0A0
+    %AICMD0x1A_SpawnNpc($00A8, $0080, aAIScriptingData_L129, $02)                     ;B3F0A0
     %AICMD0x10_End()                                           ;B3F0A8
 
 
 pAIScripting0x0D_CrossRoadsEvents_Data01:
-    %AICMD0x50()                                               ;B3F0A9
+    %AICMD0x50_ReleaseCarried()                                               ;B3F0A9
     %AICMD0x02_FreezeTime()                                    ;B3F0AA
     %AICMD0x08_EnableAIControl()                               ;B3F0AB
     %AICMD0x05_SetTransferPosition(184, 120)                   ;B3F0AC
@@ -32,12 +32,12 @@ pAIScripting0x0D_CrossRoadsEvents_Data01:
     %AICMD0x41_AddValue16(nPlayerHappiness, 10)                ;B3F0BB
     %AICMD0x10_End()                                           ;B3F0C1
 AI_ObtainHorse_L002:
-    %AICMD0x1A($00A8, $0080, aAIScriptingData_L129, $00)                     ;B3F0C2
+    %AICMD0x1A_SpawnNpc($00A8, $0080, aAIScriptingData_L129, $00)                     ;B3F0C2
     %AICMD0x0C_WaitForScriptFlag($00)                                            ;B3F0CA
-    %AICMD0x1B($020A, $00)                                     ;B3F0CC
-    %AICMD0x0D($00, $01, $10, $01)                             ;B3F0D0
-    %AICMD0x1B($0210, $01)                                     ;B3F0D5
-    %AICMD0x0D($01, $00, $68, $01)                             ;B3F0D9
+    %AICMD0x1B_SetSprite($020A, $00)                                     ;B3F0CC
+    %AICMD0x0D_MoveObject($00, $01, $10, $01)                             ;B3F0D0
+    %AICMD0x1B_SetSprite($0210, $01)                                     ;B3F0D5
+    %AICMD0x0D_MoveObject($01, $00, $68, $01)                             ;B3F0D9
     %AICMD0x0B_SetScriptFlag($01)                                            ;B3F0DE
     %AICMD0x23_OrWithIndexedValue(strcFlags.event3, $08)       ;B3F0E0
     %AICMD0x10_End()                                           ;B3F0E5

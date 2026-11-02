@@ -5,7 +5,7 @@
 pAIScripting0x0A_Data01:
  
     %AICMD0x4F_DisableToolUse()                                               ;B3E85B
-    %AICMD0x50()                                               ;B3E85C
+    %AICMD0x50_ReleaseCarried()                                               ;B3E85C
     %AICMD0x02_FreezeTime()                                    ;B3E85D
     %AICMD0x05_SetTransferPosition(136, 344)                   ;B3E85E
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B3E863
@@ -18,12 +18,12 @@ pAIScripting0x0A_Data01:
     %AICMD0x23_OrWithIndexedValue($800196, $0D)                ;B3E871
     %AICMD0x10_End()                                           ;B3E876
 pAIScripting0x0A_L001:
-    %AICMD0x1A($0068, $01A8, aAIScriptingData_L035, $02)                     ;B3E877
+    %AICMD0x1A_SpawnNpc($0068, $01A8, aAIScriptingData_L035, $02)                     ;B3E877
     %AICMD0x0C_WaitForScriptFlag($00)                                            ;B3E87F
-    %AICMD0x1B($0275, $01)                                     ;B3E881
-    %AICMD0x0D($01, $00, $20, $01)                             ;B3E885
-    %AICMD0x1B($0273, $00)                                     ;B3E88A
-    %AICMD0x0D($00, $FF, $40, $01)                             ;B3E88E
+    %AICMD0x1B_SetSprite($0275, $01)                                     ;B3E881
+    %AICMD0x0D_MoveObject($01, $00, $20, $01)                             ;B3E885
+    %AICMD0x1B_SetSprite($0273, $00)                                     ;B3E88A
+    %AICMD0x0D_MoveObject($00, $FF, $40, $01)                             ;B3E88E
     %AICMD0x1C_ShowDialog($00F2, $00)                          ;B3E893
     %AICMD0x0B_SetScriptFlag($01)                                            ;B3E897
     %AICMD0x10_End()                                           ;B3E899
@@ -32,7 +32,7 @@ pAIScripting0x0A_L001:
 pAIScripting0x0A_Data02:
  
     %AICMD0x4F_DisableToolUse()                                               ;B3E89A
-    %AICMD0x50()                                               ;B3E89B
+    %AICMD0x50_ReleaseCarried()                                               ;B3E89B
     %AICMD0x02_FreezeTime()                                    ;B3E89C
     %AICMD0x05_SetTransferPosition(136, 296)                   ;B3E89D
     %AICMD0x08_EnableAIControl()                               ;B3E8A2
@@ -45,9 +45,9 @@ pAIScripting0x0A_Data02:
     %AICMD0x07_SetPlayerDirection(!PDIR_RIGHT)                 ;B3E8B3
     %AICMD0x10_End()                                           ;B3E8B5
 pAIScripting0x0A_L002:
-    %AICMD0x1A($00F0, $0088, aAIScriptingData_L128, $00)                     ;B3E8B6
+    %AICMD0x1A_SpawnNpc($00F0, $0088, aAIScriptingData_L128, $00)                     ;B3E8B6
     %AICMD0x0C_WaitForScriptFlag($00)                                            ;B3E8BE
-    %AICMD0x0D($FF, $00, $FF, $01)                             ;B3E8C0
+    %AICMD0x0D_MoveObject($FF, $00, $FF, $01)                             ;B3E8C0
     %AICMD0x0B_SetScriptFlag($01)                                            ;B3E8C5
     %AICMD0x10_End()                                           ;B3E8C7
 
@@ -55,7 +55,7 @@ pAIScripting0x0A_L002:
 pAIScripting0x0A_Data03:
  
     %AICMD0x4F_DisableToolUse()                                               ;B3E8C8
-    %AICMD0x50()                                               ;B3E8C9
+    %AICMD0x50_ReleaseCarried()                                               ;B3E8C9
     %AICMD0x02_FreezeTime()                                    ;B3E8CA
     %AICMD0x05_SetTransferPosition(136, 344)                   ;B3E8CB
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B3E8D0
@@ -70,21 +70,21 @@ pAIScripting0x0A_Data03:
     %AICMD0x3D_TeleportToArea(!AREA_CROSSROADSPRING)           ;B3E8E5
     %AICMD0x10_End()                                           ;B3E8E7
 pAIScripting0x0A_L003:
-    %AICMD0x1A($0088, $0168, aAIScriptingData_L035, $01)                     ;B3E8E8
+    %AICMD0x1A_SpawnNpc($0088, $0168, aAIScriptingData_L035, $01)                     ;B3E8E8
     %AICMD0x0C_WaitForScriptFlag($00)                                            ;B3E8F0
     %AICMD0x1C_ShowDialog($00F3, $00)                          ;B3E8F2
     %AICMD0x0B_SetScriptFlag($01)                                            ;B3E8F6
-    %AICMD0x1B($0271, $00)                                     ;B3E8F8
-    %AICMD0x0D($00, $01, $60, $01)                             ;B3E8FC
-    %AICMD0x1B($0275, $00)                                     ;B3E901
-    %AICMD0x0D($FF, $00, $90, $01)                             ;B3E905
+    %AICMD0x1B_SetSprite($0271, $00)                                     ;B3E8F8
+    %AICMD0x0D_MoveObject($00, $01, $60, $01)                             ;B3E8FC
+    %AICMD0x1B_SetSprite($0275, $00)                                     ;B3E901
+    %AICMD0x0D_MoveObject($FF, $00, $90, $01)                             ;B3E905
     %AICMD0x10_End()                                           ;B3E90A
 
 
 pAIScripting0x0A_Data04:
  
     %AICMD0x4F_DisableToolUse()                                               ;B3E90B
-    %AICMD0x50()                                               ;B3E90C
+    %AICMD0x50_ReleaseCarried()                                               ;B3E90C
     %AICMD0x28_ClearBit($8000D2, $05)                                   ;B3E90D
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $0E)       ;B3E912
     %AICMD0x02_FreezeTime()                                    ;B3E917
@@ -100,7 +100,7 @@ pAIScripting0x0A_Data04:
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 16)                  ;B3E93B
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B3E93F
     %AICMD0x54_ShowDialog($0290, $00)                          ;B3E941
-    %AICMD0x50()                                               ;B3E945
+    %AICMD0x50_ReleaseCarried()                                               ;B3E945
     %AICMD0x47_SetValue8(wram80(nTimeState), 3)                           ;B3E946
     %AICMD0x10_End()                                           ;B3E94B
 pAIScripting0x0A_L004:
@@ -110,7 +110,7 @@ pAIScripting0x0A_L004:
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 16)                  ;B3E958
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B3E95C
     %AICMD0x54_ShowDialog($0290, $00)                          ;B3E95E
-    %AICMD0x50()                                               ;B3E962
+    %AICMD0x50_ReleaseCarried()                                               ;B3E962
     %AICMD0x47_SetValue8(wram80(nTimeState), 3)                           ;B3E963
     %AICMD0x10_End()                                           ;B3E968
 pAIScripting0x0A_L005:
@@ -119,7 +119,7 @@ pAIScripting0x0A_L005:
     %AICMD0x39_WalkForTime(!AIINPUT_UP, 96)                    ;B3E971
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B3E975
     %AICMD0x54_ShowDialog($0290, $00)                          ;B3E977
-    %AICMD0x50()                                               ;B3E97B
+    %AICMD0x50_ReleaseCarried()                                               ;B3E97B
     %AICMD0x47_SetValue8(wram80(nTimeState), 3)                           ;B3E97C
     %AICMD0x10_End()                                           ;B3E981
 
@@ -132,14 +132,14 @@ pAIScripting0x0A_Data05:
     %AICMD0x38_WaitForFadeIn()                                               ;B3E988
     %AICMD0x10_End()                                           ;B3E989
 pAIScripting0x0A_L006:
-    %AICMD0x1A($0080, $00C8, aAIScriptingData_L044, $01)                     ;B3E98A
+    %AICMD0x1A_SpawnNpc($0080, $00C8, aAIScriptingData_L044, $01)                     ;B3E98A
     %AICMD0x13_Wait(60)                                        ;B3E992
-    %AICMD0x1B($0292, $00)                                     ;B3E995
-    %AICMD0x0D($00, $FF, $10, $01)                             ;B3E999
+    %AICMD0x1B_SetSprite($0292, $00)                                     ;B3E995
+    %AICMD0x0D_MoveObject($00, $FF, $10, $01)                             ;B3E999
     %AICMD0x1C_ShowDialog($0479, $01)                          ;B3E99E
-    %AICMD0x1B($0290, $00)                                     ;B3E9A2
-    %AICMD0x0D($00, $01, $20, $01)                             ;B3E9A6
-    %AICMD0x37()                                               ;B3E9AB
+    %AICMD0x1B_SetSprite($0290, $00)                                     ;B3E9A2
+    %AICMD0x0D_MoveObject($00, $01, $20, $01)                             ;B3E9A6
+    %AICMD0x37_RemoveObject()                                               ;B3E9AB
     %AICMD0x11_EnableUserControl()                             ;B3E9AC
     %AICMD0x10_End()                                           ;B3E9AD
 
@@ -151,13 +151,13 @@ pAIScripting0x0A_Data06:
     %AICMD0x38_WaitForFadeIn()                                               ;B3E9B4
     %AICMD0x10_End()                                           ;B3E9B5
 pAIScripting0x0A_L007:
-    %AICMD0x1A($0080, $00C8, aAIScriptingData_L044, $01)                     ;B3E9B6
+    %AICMD0x1A_SpawnNpc($0080, $00C8, aAIScriptingData_L044, $01)                     ;B3E9B6
     %AICMD0x13_Wait(60)                                        ;B3E9BE
-    %AICMD0x1B($0292, $00)                                     ;B3E9C1
-    %AICMD0x0D($00, $FF, $10, $01)                             ;B3E9C5
+    %AICMD0x1B_SetSprite($0292, $00)                                     ;B3E9C1
+    %AICMD0x0D_MoveObject($00, $FF, $10, $01)                             ;B3E9C5
     %AICMD0x1C_ShowDialog($047A, $01)                          ;B3E9CA
-    %AICMD0x1B($0290, $00)                                     ;B3E9CE
-    %AICMD0x0D($00, $01, $20, $01)                             ;B3E9D2
-    %AICMD0x37()                                               ;B3E9D7
+    %AICMD0x1B_SetSprite($0290, $00)                                     ;B3E9CE
+    %AICMD0x0D_MoveObject($00, $01, $20, $01)                             ;B3E9D2
+    %AICMD0x37_RemoveObject()                                               ;B3E9D7
     %AICMD0x11_EnableUserControl()                             ;B3E9D8
     %AICMD0x10_End()                                           ;B3E9D9

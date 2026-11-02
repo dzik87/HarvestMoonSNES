@@ -19,7 +19,7 @@
 pAIScripting0x28_Data01:
  
     %AICMD0x4F_DisableToolUse()                                               ;B4BAEB
-    %AICMD0x50()                                               ;B4BAEC
+    %AICMD0x50_ReleaseCarried()                                               ;B4BAEC
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B4BAED
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $00)       ;B4BAF2
     %AICMD0x08_EnableAIControl()                               ;B4BAF7
@@ -41,7 +41,7 @@ pAIScripting0x28_Data01:
 pAIScripting0x28_Data02:
  
     %AICMD0x4F_DisableToolUse()                                               ;B4BB06
-    %AICMD0x50()                                               ;B4BB07
+    %AICMD0x50_ReleaseCarried()                                               ;B4BB07
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B4BB08
     %AICMD0x00_SetMusic($0E, $B4)                              ;B4BB0D
     %AICMD0x02_FreezeTime()                                    ;B4BB10
@@ -73,18 +73,18 @@ pAIScripting0x28_Data02:
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown1, $02)     ;B4BB57
     %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4BB5C
     %AICMD0x13_Wait(60)                                        ;B4BB5E
-    %AICMD0x3C()                                               ;B4BB61
+    %AICMD0x3C_TeleportToHouse()                                               ;B4BB61
     %AICMD0x10_End()                                           ;B4BB62
 ; Child script (slot $01) of Data02: actor. Spawns at (136,296).
 pAIScripting0x28_Data02_Actor01:
-    %AICMD0x1A($0088, $0128, aAIScriptingData_L051, $00)                     ;B4BB63
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+    %AICMD0x1A_SpawnNpc($0088, $0128, aAIScriptingData_L051, $00)                     ;B4BB63
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x28_Data02_Actor01_WaitTalk:
-    %AICMD0x1F(pAIScripting0x28_Data02_Actor01_Talk_02CE)                                        ;B4BB6B
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_Data02_Actor01_Talk_02CE)                                        ;B4BB6B
     %AICMD0x12_Jump(pAIScripting0x28_Data02_Actor01_WaitTalk)                                   ;B4BB6E
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x28_Data02_Actor01_WaitTalk2:
-    %AICMD0x1F(pAIScripting0x28_Data02_Actor01_Talk_02CE2)                                        ;B4BB71
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_Data02_Actor01_Talk_02CE2)                                        ;B4BB71
     %AICMD0x12_Jump(pAIScripting0x28_Data02_Actor01_WaitTalk2)                                   ;B4BB74
 ; Conversation handler: dialog $02CE "May everybody live happily. Now let's pray t...".
 pAIScripting0x28_Data02_Actor01_Talk_02CE:
@@ -103,15 +103,15 @@ pAIScripting0x28_Data02_Actor01_Talk_02CE2:
     %AICMD0x12_Jump(pAIScripting0x28_Data02_Actor01_WaitTalk2)                                   ;B4BB8E
 ; Child script (slot $02) of Data02: actor. Spawns at (128,488).
 pAIScripting0x28_Data02_Actor02:
-    %AICMD0x1A($0080, $01E8, aAIScriptingData_L062, $01)                     ;B4BB91
-    %AICMD0x0D($00, $FF, $30, $01)                             ;B4BB99
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+    %AICMD0x1A_SpawnNpc($0080, $01E8, aAIScriptingData_L062, $01)                     ;B4BB91
+    %AICMD0x0D_MoveObject($00, $FF, $30, $01)                             ;B4BB99
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x28_Data02_Actor02_WaitTalk:
-    %AICMD0x1F(pAIScripting0x28_Data02_Actor02_Talk_02CF)                                        ;B4BB9E
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_Data02_Actor02_Talk_02CF)                                        ;B4BB9E
     %AICMD0x12_Jump(pAIScripting0x28_Data02_Actor02_WaitTalk)                                   ;B4BBA1
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x28_Data02_Actor02_WaitTalk2:
-    %AICMD0x1F(pAIScripting0x28_Data02_Actor02_Talk_001A)                                        ;B4BBA4
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_Data02_Actor02_Talk_001A)                                        ;B4BBA4
     %AICMD0x12_Jump(pAIScripting0x28_Data02_Actor02_WaitTalk2)                                   ;B4BBA7
 ; Conversation handler: dialog $02CF "Have you prayed already? Also it's important...".
 pAIScripting0x28_Data02_Actor02_Talk_02CF:
@@ -125,14 +125,14 @@ pAIScripting0x28_Data02_Actor02_Talk_001A:
     %AICMD0x12_Jump(pAIScripting0x28_Data02_Actor02_WaitTalk2)                                   ;B4BBBE
 ; Child script (slot $05) of Data02: actor. Spawns at (72,360).
 pAIScripting0x28_Data02_Actor05:
-    %AICMD0x1A($0048, $0168, aAIScriptingData_L042, $01)                     ;B4BBC1
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+    %AICMD0x1A_SpawnNpc($0048, $0168, aAIScriptingData_L042, $01)                     ;B4BBC1
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x28_Data02_Actor05_WaitTalk:
-    %AICMD0x1F(pAIScripting0x28_Data02_Actor05_Talk_02D3)                                        ;B4BBC9
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_Data02_Actor05_Talk_02D3)                                        ;B4BBC9
     %AICMD0x12_Jump(pAIScripting0x28_Data02_Actor05_WaitTalk)                                   ;B4BBCC
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x28_Data02_Actor05_WaitTalk2:
-    %AICMD0x1F(pAIScripting0x28_Data02_Actor05_Talk_02DC)                                        ;B4BBCF
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_Data02_Actor05_Talk_02DC)                                        ;B4BBCF
     %AICMD0x12_Jump(pAIScripting0x28_Data02_Actor05_WaitTalk2)                                   ;B4BBD2
 ; Conversation handler: dialog $02D3 "Alright, I'm telling your fortune. Yes No".
 pAIScripting0x28_Data02_Actor05_Talk_02D3:
@@ -172,10 +172,10 @@ pAIScripting0x28_Data02_Actor05_Talk_02DC:
     %AICMD0x12_Jump(pAIScripting0x28_Data02_Actor05_WaitTalk2)                                   ;B4BC33
 ; Child script (slot $03) of Data02: actor. Spawns at (120,344).
 pAIScripting0x28_Data02_Actor03:
-    %AICMD0x1A($0078, $0158, aAIScriptingData_L066, $01)                     ;B4BC36
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+    %AICMD0x1A_SpawnNpc($0078, $0158, aAIScriptingData_L066, $01)                     ;B4BC36
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x28_Data02_Actor03_WaitTalk:
-    %AICMD0x1F(pAIScripting0x28_Data02_Actor03_Talk_02D0)                                        ;B4BC3E
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_Data02_Actor03_Talk_02D0)                                        ;B4BC3E
     %AICMD0x12_Jump(pAIScripting0x28_Data02_Actor03_WaitTalk)                                   ;B4BC41
 ; Conversation handler: dialog $02D0 "May the earth give us gifts this year too.".
 pAIScripting0x28_Data02_Actor03_Talk_02D0:
@@ -184,14 +184,14 @@ pAIScripting0x28_Data02_Actor03_Talk_02D0:
     %AICMD0x12_Jump(pAIScripting0x28_Data02_Actor03_WaitTalk)                                   ;B4BC4A
 ; Child script (slot $04) of Data02: actor. Spawns at (184,360).
 pAIScripting0x28_Data02_Actor04:
-    %AICMD0x1A($00B8, $0168, aAIScriptingData_L046, $01)                     ;B4BC4D
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+    %AICMD0x1A_SpawnNpc($00B8, $0168, aAIScriptingData_L046, $01)                     ;B4BC4D
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x28_Data02_Actor04_WaitTalk:
-    %AICMD0x1F(pAIScripting0x28_Data02_Actor04_Talk_02D1)                                        ;B4BC55
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_Data02_Actor04_Talk_02D1)                                        ;B4BC55
     %AICMD0x12_Jump(pAIScripting0x28_Data02_Actor04_WaitTalk)                                   ;B4BC58
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x28_Data02_Actor04_WaitTalk2:
-    %AICMD0x1F(pAIScripting0x28_Data02_Actor04_Talk_038E)                                        ;B4BC5B
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_Data02_Actor04_Talk_038E)                                        ;B4BC5B
     %AICMD0x12_Jump(pAIScripting0x28_Data02_Actor04_WaitTalk2)                                   ;B4BC5E
 ; Conversation handler: dialog $02D1 "This...this year, I'll tell her...".
 pAIScripting0x28_Data02_Actor04_Talk_02D1:
@@ -205,10 +205,10 @@ pAIScripting0x28_Data02_Actor04_Talk_038E:
     %AICMD0x12_Jump(pAIScripting0x28_Data02_Actor04_WaitTalk2)                                   ;B4BC70
 ; Child script (slot $06) of Data02: actor. Spawns at (184,408).
 pAIScripting0x28_Data02_Actor06:
-    %AICMD0x1A($00B8, $0198, aAIScriptingData_L039, $01)                     ;B4BC73
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+    %AICMD0x1A_SpawnNpc($00B8, $0198, aAIScriptingData_L039, $01)                     ;B4BC73
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x28_Data02_Actor06_WaitTalk:
-    %AICMD0x1F(pAIScripting0x28_Data02_Actor06_Talk_02D9)                                        ;B4BC7B
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_Data02_Actor06_Talk_02D9)                                        ;B4BC7B
     %AICMD0x12_Jump(pAIScripting0x28_Data02_Actor06_WaitTalk)                                   ;B4BC7E
 ; Conversation handler: dialog $02D9 "Whmmm,it's going to be good this year.".
 pAIScripting0x28_Data02_Actor06_Talk_02D9:
@@ -217,10 +217,10 @@ pAIScripting0x28_Data02_Actor06_Talk_02D9:
     %AICMD0x12_Jump(pAIScripting0x28_Data02_Actor06_WaitTalk)                                   ;B4BC87
 ; Child script (slot $07) of Data02: actor. Spawns at (88,392).
 pAIScripting0x28_Data02_Actor07:
-    %AICMD0x1A($0058, $0188, aAIScriptingData_L048, $01)                     ;B4BC8A
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+    %AICMD0x1A_SpawnNpc($0058, $0188, aAIScriptingData_L048, $01)                     ;B4BC8A
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x28_Data02_Actor07_WaitTalk:
-    %AICMD0x1F(pAIScripting0x28_Data02_Actor07_Talk_02D2)                                        ;B4BC92
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_Data02_Actor07_Talk_02D2)                                        ;B4BC92
     %AICMD0x12_Jump(pAIScripting0x28_Data02_Actor07_WaitTalk)                                   ;B4BC95
 ; Conversation handler: dialog $02D2 "May my business go well thisyear too.".
 pAIScripting0x28_Data02_Actor07_Talk_02D2:
@@ -230,17 +230,17 @@ pAIScripting0x28_Data02_Actor07_Talk_02D2:
 ; Child script (slot $08) of Data02: Maria's actor. Spawns at (152,376).
 pAIScripting0x28_Data02_Actor08_Maria:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, pAIScripting0x28_L036)   ;B4BCA1
-    %AICMD0x1A($0098, $0178, aAIScriptingData_L011, $01)                     ;B4BCA8
+    %AICMD0x1A_SpawnNpc($0098, $0178, aAIScriptingData_L011, $01)                     ;B4BCA8
     %AICMD0x12_Jump(pAIScripting0x28_Data02_Actor08_Maria_WaitTalk)                                   ;B4BCB0
 pAIScripting0x28_L036:
-    %AICMD0x1A($0088, $0178, aAIScriptingData_L071, $01)                     ;B4BCB3
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+    %AICMD0x1A_SpawnNpc($0088, $0178, aAIScriptingData_L071, $01)                     ;B4BCB3
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x28_Data02_Actor08_Maria_WaitTalk:
-    %AICMD0x1F(pAIScripting0x28_Data02_Actor08_Maria_Talk_02DA)                                        ;B4BCBB
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_Data02_Actor08_Maria_Talk_02DA)                                        ;B4BCBB
     %AICMD0x12_Jump(pAIScripting0x28_Data02_Actor08_Maria_WaitTalk)                                   ;B4BCBE
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x28_Data02_Actor08_Maria_WaitTalk2:
-    %AICMD0x1F(pAIScripting0x28_Data02_Actor08_Maria_Talk_0293)                                        ;B4BCC1
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_Data02_Actor08_Maria_Talk_0293)                                        ;B4BCC1
     %AICMD0x12_Jump(pAIScripting0x28_Data02_Actor08_Maria_WaitTalk2)                                   ;B4BCC4
 ; Conversation handler: dialog $02DA "May this year be a good yearfor you.".
 pAIScripting0x28_Data02_Actor08_Maria_Talk_02DA:
@@ -255,17 +255,17 @@ pAIScripting0x28_Data02_Actor08_Maria_Talk_0293:
 ; Child script (slot $09) of Data02: Eve's actor. Spawns at (168,408).
 pAIScripting0x28_Data02_Actor09_Eve:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $04, pAIScripting0x28_L042)   ;B4BCDD
-    %AICMD0x1A($00A8, $0198, aAIScriptingData_L024, $01)                     ;B4BCE4
+    %AICMD0x1A_SpawnNpc($00A8, $0198, aAIScriptingData_L024, $01)                     ;B4BCE4
     %AICMD0x12_Jump(pAIScripting0x28_Data02_Actor09_Eve_WaitTalk)                                   ;B4BCEC
 pAIScripting0x28_L042:
-    %AICMD0x1A($00A8, $0198, aAIScriptingData_L071, $01)                     ;B4BCEF
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+    %AICMD0x1A_SpawnNpc($00A8, $0198, aAIScriptingData_L071, $01)                     ;B4BCEF
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x28_Data02_Actor09_Eve_WaitTalk:
-    %AICMD0x1F(pAIScripting0x28_Data02_Actor09_Eve_Talk_02DB)                                        ;B4BCF7
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_Data02_Actor09_Eve_Talk_02DB)                                        ;B4BCF7
     %AICMD0x12_Jump(pAIScripting0x28_Data02_Actor09_Eve_WaitTalk)                                   ;B4BCFA
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x28_Data02_Actor09_Eve_WaitTalk2:
-    %AICMD0x1F(pAIScripting0x28_Data02_Actor09_Eve_Talk_0293)                                        ;B4BCFD
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_Data02_Actor09_Eve_Talk_0293)                                        ;B4BCFD
     %AICMD0x12_Jump(pAIScripting0x28_Data02_Actor09_Eve_WaitTalk2)                                   ;B4BD00
 ; Conversation handler: dialog $02DB "We should see the first sunrise at the begin...".
 pAIScripting0x28_Data02_Actor09_Eve_Talk_02DB:
@@ -288,7 +288,7 @@ pAIScripting0x28_Data02_Actor09_Eve_Talk_0293:
 pAIScripting0x28_Data03:
  
     %AICMD0x4F_DisableToolUse()                                               ;B4BD19
-    %AICMD0x50()                                               ;B4BD1A
+    %AICMD0x50_ReleaseCarried()                                               ;B4BD1A
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B4BD1B
     %AICMD0x00_SetMusic($0D, $B4)                              ;B4BD20
     %AICMD0x02_FreezeTime()                                    ;B4BD23
@@ -321,10 +321,10 @@ pAIScripting0x28_Data03_Actor0A:
     %AICMD0x10_End()                                           ;B4BD6E
 ; Child script (slot $01) of Data03: actor. Spawns at (296,424).
 pAIScripting0x28_Data03_Actor01:
-    %AICMD0x1A($0128, $01A8, aAIScriptingData_L044, $00)                     ;B4BD6F
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+    %AICMD0x1A_SpawnNpc($0128, $01A8, aAIScriptingData_L044, $00)                     ;B4BD6F
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x28_Data03_Actor01_WaitTalk:
-    %AICMD0x1F(pAIScripting0x28_Data03_Actor01_Talk_02DD)                                        ;B4BD77
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_Data03_Actor01_Talk_02DD)                                        ;B4BD77
     %AICMD0x12_Jump(pAIScripting0x28_Data03_Actor01_WaitTalk)                                   ;B4BD7A
 ; Idle until the player presses A at the NPC (AICMD0x2D): jumps to OnInteract, or to OnItemOffered while an item is
 ; carried.
@@ -342,7 +342,7 @@ pAIScripting0x28_L054:
     %AICMD0x08_EnableAIControl()                               ;B4BD9B
     %AICMD0x1C_ShowDialog($02DE, $00)                          ;B4BD9C
     %AICMD0x28_ClearBit(strcFlags.unknown1, $05)                        ;B4BDA0
-    %AICMD0x1B($0295, $00)                                     ;B4BDA5
+    %AICMD0x1B_SetSprite($0295, $00)                                     ;B4BDA5
     %AICMD0x09_StartScript($09, pAIScripting0x28_Data03_Actor09)                                   ;B4BDA9
     %AICMD0x09_StartScript($0A, pAIScripting0x28_Data03_Actor0A)                                   ;B4BDAD
     %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4BDB1
@@ -355,7 +355,7 @@ pAIScripting0x28_L055:
 ; A pressed without a carried item.
 pAIScripting0x28_Data03_Actor01_OnInteract:
     %AICMD0x1C_ShowDialog($02DF, $00)                          ;B4BDC3
-    %AICMD0x1B($0295, $00)                                     ;B4BDC7
+    %AICMD0x1B_SetSprite($0295, $00)                                     ;B4BDC7
     %AICMD0x12_Jump(pAIScripting0x28_Data03_Actor01_WaitInteract)                                   ;B4BDCB
 ; A pressed while carrying an item (strcPlayerData.carryItemIdPrev is tested next).
 pAIScripting0x28_Data03_Actor01_OnItemOffered:
@@ -376,7 +376,7 @@ pAIScripting0x28_L061:
 pAIScripting0x28_L062:
     %AICMD0x08_EnableAIControl()                               ;B4BE02
     %AICMD0x13_Wait(1)                                         ;B4BE03
-    %AICMD0x2C(!SFX_BELL, $0006, $005A)                              ;B4BE06
+    %AICMD0x2C_PlaySoundWait(!SFX_BELL, $0006, $005A)                              ;B4BE06
     %AICMD0x11_EnableUserControl()                             ;B4BE0C
     %AICMD0x1C_ShowDialog($02E7, $00)                          ;B4BE0D
 pAIScripting0x28_L063:
@@ -403,7 +403,7 @@ pAIScripting0x28_L068:
 pAIScripting0x28_L069:
     %AICMD0x25_RemoveActor($09)                                            ;B4BE5C
     %AICMD0x28_ClearBit(strcFlags.unknown1, $05)                        ;B4BE5E
-    %AICMD0x1B($0295, $00)                                     ;B4BE63
+    %AICMD0x1B_SetSprite($0295, $00)                                     ;B4BE63
     %AICMD0x09_StartScript($09, pAIScripting0x28_Data03_Actor09)                                   ;B4BE67
     %AICMD0x09_StartScript($0A, pAIScripting0x28_Data03_Actor0A)                                   ;B4BE6B
     %AICMD0x12_Jump(pAIScripting0x28_Data03_Actor01_WaitInteract)                                   ;B4BE6F
@@ -429,7 +429,7 @@ pAIScripting0x28_L076:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $06, pAIScripting0x28_L077) ;B4BEAB
     %AICMD0x08_EnableAIControl()                               ;B4BEB2
     %AICMD0x13_Wait(1)                                         ;B4BEB3
-    %AICMD0x2C(!SFX_BELL, $0006, $005A)                              ;B4BEB6
+    %AICMD0x2C_PlaySoundWait(!SFX_BELL, $0006, $005A)                              ;B4BEB6
     %AICMD0x11_EnableUserControl()                             ;B4BEBC
     %AICMD0x1C_ShowDialog($02E9, $00)                          ;B4BEBD
     %AICMD0x12_Jump(pAIScripting0x28_L063)                                   ;B4BEC1
@@ -437,16 +437,16 @@ pAIScripting0x28_L077:
     %AICMD0x28_ClearBit(strcFlags.unknown1, $06)                        ;B4BEC4
     %AICMD0x08_EnableAIControl()                               ;B4BEC9
     %AICMD0x13_Wait(1)                                         ;B4BECA
-    %AICMD0x2C(!SFX_EGGFESTIVALTIMEUP, $0006, $005A)                              ;B4BECD
+    %AICMD0x2C_PlaySoundWait(!SFX_EGGFESTIVALTIMEUP, $0006, $005A)                              ;B4BECD
     %AICMD0x11_EnableUserControl()                             ;B4BED3
     %AICMD0x1C_ShowDialog($0390, $00)                          ;B4BED4
     %AICMD0x12_Jump(pAIScripting0x28_L063)                                   ;B4BED8
 ; Child script (slot $01) of Data03: actor. Spawns at (296,424).
 pAIScripting0x28_Data04_Actor01:
-    %AICMD0x1A($0128, $01A8, aAIScriptingData_L044, $00)                     ;B4BEDB
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+    %AICMD0x1A_SpawnNpc($0128, $01A8, aAIScriptingData_L044, $00)                     ;B4BEDB
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x28_Data03_Actor01_WaitTalk2:
-    %AICMD0x1F(pAIScripting0x28_Data03_Actor01_Talk_02ED)                                        ;B4BEE3
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_Data03_Actor01_Talk_02ED)                                        ;B4BEE3
     %AICMD0x12_Jump(pAIScripting0x28_Data03_Actor01_WaitTalk2)                                   ;B4BEE6
 ; Conversation handler: dialog $02ED "Now,everybody,let's do our best this year to...".
 pAIScripting0x28_Data03_Actor01_Talk_02ED:
@@ -466,31 +466,31 @@ pAIScripting0x28_L082:
     %AICMD0x10_End()                                           ;B4BF0B
 pAIScripting0x28_L083:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown2, $00, pAIScripting0x28_L084) ;B4BF0C
-    %AICMD0x1A($0128, $01B0, aAIScriptingData_L097, $00)                     ;B4BF13
+    %AICMD0x1A_SpawnNpc($0128, $01B0, aAIScriptingData_L097, $00)                     ;B4BF13
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown2, $00)     ;B4BF1B
     %AICMD0x47_SetValue8(wram80($7E09AC+!DE_RAM_SHIFT), 1)                           ;B4BF20
     %AICMD0x12_Jump(pAIScripting0x28_L082)                                   ;B4BF25
 pAIScripting0x28_L084:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown2, $01, pAIScripting0x28_L085) ;B4BF28
-    %AICMD0x1A($0128, $01B0, aAIScriptingData_L098, $00)                     ;B4BF2F
+    %AICMD0x1A_SpawnNpc($0128, $01B0, aAIScriptingData_L098, $00)                     ;B4BF2F
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown2, $01)     ;B4BF37
     %AICMD0x47_SetValue8(wram80($7E09AC+!DE_RAM_SHIFT), 2)                           ;B4BF3C
     %AICMD0x12_Jump(pAIScripting0x28_L082)                                   ;B4BF41
 pAIScripting0x28_L085:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown2, $02, pAIScripting0x28_L086) ;B4BF44
-    %AICMD0x1A($0128, $01B0, aAIScriptingData_L099, $00)                     ;B4BF4B
+    %AICMD0x1A_SpawnNpc($0128, $01B0, aAIScriptingData_L099, $00)                     ;B4BF4B
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown2, $02)     ;B4BF53
     %AICMD0x47_SetValue8(wram80($7E09AC+!DE_RAM_SHIFT), 3)                           ;B4BF58
     %AICMD0x12_Jump(pAIScripting0x28_L082)                                   ;B4BF5D
 pAIScripting0x28_L086:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown2, $03, pAIScripting0x28_L087) ;B4BF60
-    %AICMD0x1A($0128, $01B0, aAIScriptingData_L100, $00)                     ;B4BF67
+    %AICMD0x1A_SpawnNpc($0128, $01B0, aAIScriptingData_L100, $00)                     ;B4BF67
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown2, $03)     ;B4BF6F
     %AICMD0x47_SetValue8(wram80($7E09AC+!DE_RAM_SHIFT), 4)                           ;B4BF74
     %AICMD0x12_Jump(pAIScripting0x28_L082)                                   ;B4BF79
 pAIScripting0x28_L087:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown2, $04, pAIScripting0x28_L083) ;B4BF7C
-    %AICMD0x1A($0128, $01B0, aAIScriptingData_L101, $00)                     ;B4BF83
+    %AICMD0x1A_SpawnNpc($0128, $01B0, aAIScriptingData_L101, $00)                     ;B4BF83
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown2, $04)     ;B4BF8B
     %AICMD0x47_SetValue8(wram80($7E09AC+!DE_RAM_SHIFT), 5)                           ;B4BF90
     %AICMD0x12_Jump(pAIScripting0x28_L082)                                   ;B4BF95
@@ -526,29 +526,29 @@ pAIScripting0x28_L091:
     %AICMD0x12_Jump(pAIScripting0x28_L089)                                   ;B4BFFE
 ; Child script (slot $02) of Data03: actor. Spawns at (224,360).
 pAIScripting0x28_Data03_Actor02:
-    %AICMD0x1A($00E0, $0168, aAIScriptingData_L053, $00)                     ;B4C001
+    %AICMD0x1A_SpawnNpc($00E0, $0168, aAIScriptingData_L053, $00)                     ;B4C001
 pAIScripting0x28_L093:
-    %AICMD0x1F(pAIScripting0x28_L094)                                        ;B4C009
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_L094)                                        ;B4C009
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $03, pAIScripting0x28_L095) ;B4C00C
     %AICMD0x12_Jump(pAIScripting0x28_L093)                                   ;B4C013
 pAIScripting0x28_L094:
     %AICMD0x1C_ShowDialog($02E0, $00)                          ;B4C016
     %AICMD0x12_Jump(pAIScripting0x28_L093)                                   ;B4C01A
 pAIScripting0x28_L095:
-    %AICMD0x1B($02AE, $00)                                     ;B4C01D
-    %AICMD0x0D($00, $FF, $40, $01)                             ;B4C021
-    %AICMD0x1B($02B0, $01)                                     ;B4C026
-    %AICMD0x0D($01, $00, $40, $01)                             ;B4C02A
+    %AICMD0x1B_SetSprite($02AE, $00)                                     ;B4C01D
+    %AICMD0x0D_MoveObject($00, $FF, $40, $01)                             ;B4C021
+    %AICMD0x1B_SetSprite($02B0, $01)                                     ;B4C026
+    %AICMD0x0D_MoveObject($01, $00, $40, $01)                             ;B4C02A
     %AICMD0x13_Wait(30)                                        ;B4C02F
-    %AICMD0x1B($02B0, $00)                                     ;B4C032
-    %AICMD0x0D($FF, $00, $40, $01)                             ;B4C036
-    %AICMD0x1B($02AC, $00)                                     ;B4C03B
-    %AICMD0x0D($00, $01, $40, $01)                             ;B4C03F
+    %AICMD0x1B_SetSprite($02B0, $00)                                     ;B4C032
+    %AICMD0x0D_MoveObject($FF, $00, $40, $01)                             ;B4C036
+    %AICMD0x1B_SetSprite($02AC, $00)                                     ;B4C03B
+    %AICMD0x0D_MoveObject($00, $01, $40, $01)                             ;B4C03F
     %AICMD0x13_Wait(60)                                        ;B4C044
     %AICMD0x12_Jump(pAIScripting0x28_L095)                                   ;B4C047
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x28_Data03_Actor02_WaitTalk:
-    %AICMD0x1F(pAIScripting0x28_Data03_Actor02_Talk_02E0)                                        ;B4C04A
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_Data03_Actor02_Talk_02E0)                                        ;B4C04A
     %AICMD0x12_Jump(pAIScripting0x28_Data03_Actor02_WaitTalk)                                   ;B4C04D
 ; Conversation handler: dialog $02E0 "I won't be beaten by those young kids.".
 pAIScripting0x28_Data03_Actor02_Talk_02E0:
@@ -556,11 +556,11 @@ pAIScripting0x28_Data03_Actor02_Talk_02E0:
     %AICMD0x12_Jump(pAIScripting0x28_Data03_Actor02_WaitTalk)                                   ;B4C054
 ; Child script (slot $02) of Data03: actor. Spawns at (344,440).
 pAIScripting0x28_Data04_Actor02:
-    %AICMD0x1A($0158, $01B8, aAIScriptingData_L053, $03)                     ;B4C057
+    %AICMD0x1A_SpawnNpc($0158, $01B8, aAIScriptingData_L053, $03)                     ;B4C057
     %AICMD0x12_Jump(pAIScripting0x28_Data03_Actor02_WaitTalk2)                                   ;B4C05F
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x28_Data03_Actor02_WaitTalk2:
-    %AICMD0x1F(pAIScripting0x28_Data03_Actor02_Talk_02EF)                                        ;B4C062
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_Data03_Actor02_Talk_02EF)                                        ;B4C062
     %AICMD0x12_Jump(pAIScripting0x28_Data03_Actor02_WaitTalk2)                                   ;B4C065
 ; Conversation handler: dialog $02EF "Phew, I just couldn't do it like I usually d...".
 pAIScripting0x28_Data03_Actor02_Talk_02EF:
@@ -576,9 +576,9 @@ pAIScripting0x28_L101:
     %AICMD0x12_Jump(pAIScripting0x28_Data03_Actor02_WaitTalk2)                                   ;B4C08C
 ; Child script (slot $03) of Data03: actor. Spawns at (368,360).
 pAIScripting0x28_Data03_Actor03:
-    %AICMD0x1A($0170, $0168, aAIScriptingData_L050, $00)                     ;B4C08F
+    %AICMD0x1A_SpawnNpc($0170, $0168, aAIScriptingData_L050, $00)                     ;B4C08F
 pAIScripting0x28_L103:
-    %AICMD0x1F(pAIScripting0x28_L105)                                        ;B4C097
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_L105)                                        ;B4C097
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $03, pAIScripting0x28_L106) ;B4C09A
     %AICMD0x12_Jump(pAIScripting0x28_L103)                                   ;B4C0A1
 ; Idle loop: wait one frame at a time.
@@ -589,16 +589,16 @@ pAIScripting0x28_L105:
     %AICMD0x1C_ShowDialog($02E1, $00)                          ;B4C0AA
     %AICMD0x12_Jump(pAIScripting0x28_L103)                                   ;B4C0AE
 pAIScripting0x28_L106:
-    %AICMD0x0D($00, $01, $20, $01)                             ;B4C0B1
-    %AICMD0x22($10, $08, $01, aAIScriptingData_L050, $08)                    ;B4C0B6
+    %AICMD0x0D_MoveObject($00, $01, $20, $01)                             ;B4C0B1
+    %AICMD0x22_StartRandomWalk($10, $08, $01, aAIScriptingData_L050, $08)                    ;B4C0B6
     %AICMD0x12_Jump(pAIScripting0x28_Data03_Actor03_Idle)                                   ;B4C0BD
 ; Child script (slot $03) of Data03: actor. Spawns at (360,376).
 pAIScripting0x28_Data04_Actor03:
-    %AICMD0x1A($0168, $0178, aAIScriptingData_L050, $00)                     ;B4C0C0
+    %AICMD0x1A_SpawnNpc($0168, $0178, aAIScriptingData_L050, $00)                     ;B4C0C0
     %AICMD0x12_Jump(pAIScripting0x28_Data03_Actor03_WaitTalk)                                   ;B4C0C8
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x28_Data03_Actor03_WaitTalk:
-    %AICMD0x1F(pAIScripting0x28_Data03_Actor03_Talk_02F0)                                        ;B4C0CB
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_Data03_Actor03_Talk_02F0)                                        ;B4C0CB
     %AICMD0x12_Jump(pAIScripting0x28_Data03_Actor03_WaitTalk)                                   ;B4C0CE
 ; Conversation handler: dialog $02F0 "Hic...shouldn't have come here.".
 pAIScripting0x28_Data03_Actor03_Talk_02F0:
@@ -607,14 +607,14 @@ pAIScripting0x28_Data03_Actor03_Talk_02F0:
     %AICMD0x12_Jump(pAIScripting0x28_Data03_Actor03_WaitTalk)                                   ;B4C0D7
 ; Child script (slot $04) of Data03: actor. Spawns at (280,624).
 pAIScripting0x28_Data03_Actor04:
-    %AICMD0x1A($0118, $0270, aAIScriptingData_L068, $02)                     ;B4C0DA
+    %AICMD0x1A_SpawnNpc($0118, $0270, aAIScriptingData_L068, $02)                     ;B4C0DA
 pAIScripting0x28_L111:
-    %AICMD0x1F(pAIScripting0x28_L113)                                        ;B4C0E2
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_L113)                                        ;B4C0E2
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $03, pAIScripting0x28_L115) ;B4C0E5
     %AICMD0x12_Jump(pAIScripting0x28_L111)                                   ;B4C0EC
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x28_Data03_WaitTalk:
-    %AICMD0x1F(pAIScripting0x28_Data03_Talk_02E2)                                        ;B4C0EF
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_Data03_Talk_02E2)                                        ;B4C0EF
     %AICMD0x12_Jump(pAIScripting0x28_Data03_WaitTalk)                                   ;B4C0F2
 pAIScripting0x28_L113:
     %AICMD0x1C_ShowDialog($02E2, $00)                          ;B4C0F5
@@ -624,20 +624,20 @@ pAIScripting0x28_Data03_Talk_02E2:
     %AICMD0x1C_ShowDialog($02E2, $00)                          ;B4C0FC
     %AICMD0x12_Jump(pAIScripting0x28_Data03_WaitTalk)                                   ;B4C100
 pAIScripting0x28_L115:
-    %AICMD0x0D($01, $00, $20, $01)                             ;B4C103
-    %AICMD0x1B($02D3, $00)                                     ;B4C108
-    %AICMD0x0D($00, $01, $60, $01)                             ;B4C10C
-    %AICMD0x1B($02D7, $00)                                     ;B4C111
-    %AICMD0x0D($FF, $00, $A0, $01)                             ;B4C115
-    %AICMD0x22($20, $20, $01, aAIScriptingData_L068, $10)                    ;B4C11A
+    %AICMD0x0D_MoveObject($01, $00, $20, $01)                             ;B4C103
+    %AICMD0x1B_SetSprite($02D3, $00)                                     ;B4C108
+    %AICMD0x0D_MoveObject($00, $01, $60, $01)                             ;B4C10C
+    %AICMD0x1B_SetSprite($02D7, $00)                                     ;B4C111
+    %AICMD0x0D_MoveObject($FF, $00, $A0, $01)                             ;B4C115
+    %AICMD0x22_StartRandomWalk($20, $20, $01, aAIScriptingData_L068, $10)                    ;B4C11A
     %AICMD0x12_Jump(pAIScripting0x28_Data03_WaitTalk)                                   ;B4C121
 ; Child script (slot $04) of Data03: actor. Spawns at (264,440).
 pAIScripting0x28_Data04_Actor04:
-    %AICMD0x1A($0108, $01B8, aAIScriptingData_L067, $01)                     ;B4C124
+    %AICMD0x1A_SpawnNpc($0108, $01B8, aAIScriptingData_L067, $01)                     ;B4C124
     %AICMD0x12_Jump(pAIScripting0x28_Data03_Actor04_WaitTalk)                                   ;B4C12C
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x28_Data03_Actor04_WaitTalk:
-    %AICMD0x1F(pAIScripting0x28_Data03_Actor04_Talk_02F1)                                        ;B4C12F
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_Data03_Actor04_Talk_02F1)                                        ;B4C12F
     %AICMD0x12_Jump(pAIScripting0x28_Data03_Actor04_WaitTalk)                                   ;B4C132
 ; Conversation handler: dialog $02F1 "Puff-puff.".
 pAIScripting0x28_Data03_Actor04_Talk_02F1:
@@ -646,9 +646,9 @@ pAIScripting0x28_Data03_Actor04_Talk_02F1:
     %AICMD0x12_Jump(pAIScripting0x28_Data03_Actor04_WaitTalk)                                   ;B4C13B
 ; Child script (slot $05) of Data03: actor. Spawns at (312,664).
 pAIScripting0x28_Data03_Actor05:
-    %AICMD0x1A($0138, $0298, aAIScriptingData_L056, $00)                     ;B4C13E
+    %AICMD0x1A_SpawnNpc($0138, $0298, aAIScriptingData_L056, $00)                     ;B4C13E
 pAIScripting0x28_L120:
-    %AICMD0x1F(pAIScripting0x28_L122)                                        ;B4C146
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_L122)                                        ;B4C146
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $03, pAIScripting0x28_L123) ;B4C149
     %AICMD0x12_Jump(pAIScripting0x28_L120)                                   ;B4C150
 ; Idle loop: wait one frame at a time.
@@ -659,17 +659,17 @@ pAIScripting0x28_L122:
     %AICMD0x1C_ShowDialog($02E3, $00)                          ;B4C159
     %AICMD0x12_Jump(pAIScripting0x28_L120)                                   ;B4C15D
 pAIScripting0x28_L123:
-    %AICMD0x0D($00, $01, $50, $01)                             ;B4C160
-    %AICMD0x1B($02B6, $01)                                     ;B4C165
-    %AICMD0x0D($01, $00, $60, $01)                             ;B4C169
-    %AICMD0x22($18, $20, $01, aAIScriptingData_L056, $10)                    ;B4C16E
+    %AICMD0x0D_MoveObject($00, $01, $50, $01)                             ;B4C160
+    %AICMD0x1B_SetSprite($02B6, $01)                                     ;B4C165
+    %AICMD0x0D_MoveObject($01, $00, $60, $01)                             ;B4C169
+    %AICMD0x22_StartRandomWalk($18, $20, $01, aAIScriptingData_L056, $10)                    ;B4C16E
     %AICMD0x12_Jump(pAIScripting0x28_Data03_WaitTalk)                                   ;B4C175
 ; Child script (slot $05) of Data03: actor. Spawns at (312,536).
 pAIScripting0x28_Data04_Actor05:
-    %AICMD0x1A($0138, $0218, aAIScriptingData_L055, $01)                     ;B4C178
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+    %AICMD0x1A_SpawnNpc($0138, $0218, aAIScriptingData_L055, $01)                     ;B4C178
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x28_Data03_Actor05_WaitTalk:
-    %AICMD0x1F(pAIScripting0x28_Data03_Actor05_Talk_02F1)                                        ;B4C180
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_Data03_Actor05_Talk_02F1)                                        ;B4C180
     %AICMD0x12_Jump(pAIScripting0x28_Data03_Actor05_WaitTalk)                                   ;B4C183
 ; Conversation handler: dialog $02F1 "Puff-puff.".
 pAIScripting0x28_Data03_Actor05_Talk_02F1:
@@ -679,13 +679,13 @@ pAIScripting0x28_Data03_Actor05_Talk_02F1:
 ; Child script (slot $06) of Data03: Ann's actor. Spawns at (216,552).
 pAIScripting0x28_Data03_Actor06_Ann:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x28_L128)   ;B4C18F
-    %AICMD0x1A($00D8, $0228, aAIScriptingData_L016, $01)                     ;B4C196
+    %AICMD0x1A_SpawnNpc($00D8, $0228, aAIScriptingData_L016, $01)                     ;B4C196
     %AICMD0x12_Jump(pAIScripting0x28_L129)                                   ;B4C19E
 pAIScripting0x28_L128:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $04, pAIScripting0x28_L140)   ;B4C1A1
-    %AICMD0x1A($00D8, $0228, aAIScriptingData_L071, $01)                     ;B4C1A8
+    %AICMD0x1A_SpawnNpc($00D8, $0228, aAIScriptingData_L071, $01)                     ;B4C1A8
 pAIScripting0x28_L129:
-    %AICMD0x1F(pAIScripting0x28_L131)                                        ;B4C1B0
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_L131)                                        ;B4C1B0
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $03, pAIScripting0x28_L132) ;B4C1B3
     %AICMD0x12_Jump(pAIScripting0x28_L129)                                   ;B4C1BA
 ; Idle loop: wait one frame at a time.
@@ -697,29 +697,29 @@ pAIScripting0x28_L131:
     %AICMD0x12_Jump(pAIScripting0x28_L129)                                   ;B4C1C7
 pAIScripting0x28_L132:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x28_L133)   ;B4C1CA
-    %AICMD0x1B($022B, $01)                                     ;B4C1D1
-    %AICMD0x0D($01, $00, $84, $01)                             ;B4C1D5
-    %AICMD0x22($20, $20, $01, aAIScriptingData_L016, $10)                    ;B4C1DA
+    %AICMD0x1B_SetSprite($022B, $01)                                     ;B4C1D1
+    %AICMD0x0D_MoveObject($01, $00, $84, $01)                             ;B4C1D5
+    %AICMD0x22_StartRandomWalk($20, $20, $01, aAIScriptingData_L016, $10)                    ;B4C1DA
     %AICMD0x12_Jump(pAIScripting0x28_Data03_Actor06_Ann_Idle)                                   ;B4C1E1
 pAIScripting0x28_L133:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $04, pAIScripting0x28_L140)   ;B4C1E4
-    %AICMD0x22($20, $20, $01, aAIScriptingData_L073, $10)                    ;B4C1EB
+    %AICMD0x22_StartRandomWalk($20, $20, $01, aAIScriptingData_L073, $10)                    ;B4C1EB
     %AICMD0x12_Jump(pAIScripting0x28_Data03_Actor06_Ann_Idle)                                   ;B4C1F2
 ; Child script (slot $06) of Data03: actor. Spawns at (376,472).
 pAIScripting0x28_Data04_Actor06:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $01, pAIScripting0x28_L135)   ;B4C1F5
-    %AICMD0x1A($0178, $01D8, aAIScriptingData_L015, $00)                     ;B4C1FC
+    %AICMD0x1A_SpawnNpc($0178, $01D8, aAIScriptingData_L015, $00)                     ;B4C1FC
     %AICMD0x12_Jump(pAIScripting0x28_Data03_Actor06_Ann_WaitTalk)                                   ;B4C204
 pAIScripting0x28_L135:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $04, pAIScripting0x28_L140)   ;B4C207
-    %AICMD0x1A($0178, $01D8, aAIScriptingData_L071, $00)                     ;B4C20E
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+    %AICMD0x1A_SpawnNpc($0178, $01D8, aAIScriptingData_L071, $00)                     ;B4C20E
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x28_Data03_Actor06_Ann_WaitTalk:
-    %AICMD0x1F(pAIScripting0x28_Data03_Actor06_Ann_Talk_02F2)                                        ;B4C216
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_Data03_Actor06_Ann_Talk_02F2)                                        ;B4C216
     %AICMD0x12_Jump(pAIScripting0x28_Data03_Actor06_Ann_WaitTalk)                                   ;B4C219
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x28_Data03_WaitTalk2:
-    %AICMD0x1F(pAIScripting0x28_Data03_Talk_02F1)                                        ;B4C21C
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_Data03_Talk_02F1)                                        ;B4C21C
     %AICMD0x12_Jump(pAIScripting0x28_Data03_WaitTalk2)                                   ;B4C21F
 ; Conversation handler: dialog $02F2 "Puff-puff...don't...speak...to me...please?".
 pAIScripting0x28_Data03_Actor06_Ann_Talk_02F2:
@@ -736,13 +736,13 @@ pAIScripting0x28_L140:
 ; Child script (slot $07) of Data03: Nina's actor. Spawns at (200,536).
 pAIScripting0x28_Data03_Actor07_Nina:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, pAIScripting0x28_L142)   ;B4C239
-    %AICMD0x1A($00C8, $0218, aAIScriptingData_L020, $02)                     ;B4C240
+    %AICMD0x1A_SpawnNpc($00C8, $0218, aAIScriptingData_L020, $02)                     ;B4C240
     %AICMD0x12_Jump(pAIScripting0x28_L143)                                   ;B4C248
 pAIScripting0x28_L142:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $04, pAIScripting0x28_L154)   ;B4C24B
-    %AICMD0x1A($00C8, $0218, aAIScriptingData_L071, $00)                     ;B4C252
+    %AICMD0x1A_SpawnNpc($00C8, $0218, aAIScriptingData_L071, $00)                     ;B4C252
 pAIScripting0x28_L143:
-    %AICMD0x1F(pAIScripting0x28_L145)                                        ;B4C25A
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_L145)                                        ;B4C25A
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $03, pAIScripting0x28_L146) ;B4C25D
     %AICMD0x12_Jump(pAIScripting0x28_L143)                                   ;B4C264
 ; Idle loop: wait one frame at a time.
@@ -755,29 +755,29 @@ pAIScripting0x28_L145:
 pAIScripting0x28_L146:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, pAIScripting0x28_L147)   ;B4C274
     %AICMD0x13_Wait(80)                                        ;B4C27B
-    %AICMD0x1B($0250, $01)                                     ;B4C27E
-    %AICMD0x0D($01, $00, $40, $01)                             ;B4C282
-    %AICMD0x22($20, $18, $01, aAIScriptingData_L020, $10)                    ;B4C287
+    %AICMD0x1B_SetSprite($0250, $01)                                     ;B4C27E
+    %AICMD0x0D_MoveObject($01, $00, $40, $01)                             ;B4C282
+    %AICMD0x22_StartRandomWalk($20, $18, $01, aAIScriptingData_L020, $10)                    ;B4C287
     %AICMD0x12_Jump(pAIScripting0x28_Data03_Actor07_Nina_Idle)                                   ;B4C28E
 pAIScripting0x28_L147:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $04, pAIScripting0x28_L154)   ;B4C291
-    %AICMD0x22($20, $20, $01, aAIScriptingData_L073, $00)                    ;B4C298
+    %AICMD0x22_StartRandomWalk($20, $20, $01, aAIScriptingData_L073, $00)                    ;B4C298
     %AICMD0x12_Jump(pAIScripting0x28_Data03_Actor07_Nina_Idle)                                   ;B4C29F
 ; Child script (slot $07) of Data03: actor. Spawns at (360,472).
 pAIScripting0x28_Data04_Actor07:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $02, pAIScripting0x28_L149)   ;B4C2A2
-    %AICMD0x1A($0168, $01D8, aAIScriptingData_L019, $00)                     ;B4C2A9
+    %AICMD0x1A_SpawnNpc($0168, $01D8, aAIScriptingData_L019, $00)                     ;B4C2A9
     %AICMD0x12_Jump(pAIScripting0x28_Data03_Actor07_Nina_WaitTalk)                                   ;B4C2B1
 pAIScripting0x28_L149:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $04, pAIScripting0x28_L154)   ;B4C2B4
-    %AICMD0x1A($0168, $01D8, aAIScriptingData_L071, $00)                     ;B4C2BB
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+    %AICMD0x1A_SpawnNpc($0168, $01D8, aAIScriptingData_L071, $00)                     ;B4C2BB
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x28_Data03_Actor07_Nina_WaitTalk:
-    %AICMD0x1F(pAIScripting0x28_Data03_Actor07_Nina_Talk_02F3)                                        ;B4C2C3
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_Data03_Actor07_Nina_Talk_02F3)                                        ;B4C2C3
     %AICMD0x12_Jump(pAIScripting0x28_Data03_Actor07_Nina_WaitTalk)                                   ;B4C2C6
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x28_Data03_Actor07_Nina_WaitTalk2:
-    %AICMD0x1F(pAIScripting0x28_Data03_Actor07_Nina_Talk_02F1)                                        ;B4C2C9
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_Data03_Actor07_Nina_Talk_02F1)                                        ;B4C2C9
     %AICMD0x12_Jump(pAIScripting0x28_Data03_Actor07_Nina_WaitTalk2)                                   ;B4C2CC
 ; Conversation handler: dialog $02F3 "Hey,it's not a seed of a flower. Who said th...".
 pAIScripting0x28_Data03_Actor07_Nina_Talk_02F3:
@@ -794,13 +794,13 @@ pAIScripting0x28_L154:
 ; Child script (slot $08) of Data03: Ellen's actor. Spawns at (216,520).
 pAIScripting0x28_Data03_Actor08_Ellen:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, pAIScripting0x28_L156)   ;B4C2E6
-    %AICMD0x1A($00D8, $0208, aAIScriptingData_L022, $00)                     ;B4C2ED
+    %AICMD0x1A_SpawnNpc($00D8, $0208, aAIScriptingData_L022, $00)                     ;B4C2ED
     %AICMD0x12_Jump(pAIScripting0x28_L157)                                   ;B4C2F5
 pAIScripting0x28_L156:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $04, pAIScripting0x28_L168)   ;B4C2F8
-    %AICMD0x1A($00D8, $0208, aAIScriptingData_L071, $00)                     ;B4C2FF
+    %AICMD0x1A_SpawnNpc($00D8, $0208, aAIScriptingData_L071, $00)                     ;B4C2FF
 pAIScripting0x28_L157:
-    %AICMD0x1F(pAIScripting0x28_L159)                                        ;B4C307
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_L159)                                        ;B4C307
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $03, pAIScripting0x28_L160) ;B4C30A
     %AICMD0x12_Jump(pAIScripting0x28_L157)                                   ;B4C311
 ; Idle loop: wait one frame at a time.
@@ -812,36 +812,36 @@ pAIScripting0x28_L159:
     %AICMD0x12_Jump(pAIScripting0x28_L157)                                   ;B4C31E
 pAIScripting0x28_L160:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, pAIScripting0x28_L161)   ;B4C321
-    %AICMD0x1B($023F, $00)                                     ;B4C328
-    %AICMD0x0D($00, $FF, $40, $01)                             ;B4C32C
+    %AICMD0x1B_SetSprite($023F, $00)                                     ;B4C328
+    %AICMD0x0D_MoveObject($00, $FF, $40, $01)                             ;B4C32C
     %AICMD0x13_Wait(30)                                        ;B4C331
-    %AICMD0x0D($00, $FF, $40, $01)                             ;B4C334
+    %AICMD0x0D_MoveObject($00, $FF, $40, $01)                             ;B4C334
     %AICMD0x13_Wait(30)                                        ;B4C339
-    %AICMD0x0D($00, $FF, $40, $01)                             ;B4C33C
+    %AICMD0x0D_MoveObject($00, $FF, $40, $01)                             ;B4C33C
     %AICMD0x13_Wait(30)                                        ;B4C341
-    %AICMD0x1B($0241, $00)                                     ;B4C344
-    %AICMD0x0D($FF, $00, $A8, $01)                             ;B4C348
-    %AICMD0x22($18, $20, $01, aAIScriptingData_L022, $10)                    ;B4C34D
+    %AICMD0x1B_SetSprite($0241, $00)                                     ;B4C344
+    %AICMD0x0D_MoveObject($FF, $00, $A8, $01)                             ;B4C348
+    %AICMD0x22_StartRandomWalk($18, $20, $01, aAIScriptingData_L022, $10)                    ;B4C34D
     %AICMD0x12_Jump(pAIScripting0x28_Data03_Actor08_Ellen_Idle)                                   ;B4C354
 pAIScripting0x28_L161:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $04, pAIScripting0x28_L168)   ;B4C357
-    %AICMD0x22($20, $20, $01, aAIScriptingData_L073, $10)                    ;B4C35E
+    %AICMD0x22_StartRandomWalk($20, $20, $01, aAIScriptingData_L073, $10)                    ;B4C35E
     %AICMD0x12_Jump(pAIScripting0x28_Data03_Actor08_Ellen_Idle)                                   ;B4C365
 ; Child script (slot $08) of Data03: actor. Spawns at (248,488).
 pAIScripting0x28_Data04_Actor08:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $03, pAIScripting0x28_L163)   ;B4C368
-    %AICMD0x1A($00F8, $01E8, aAIScriptingData_L021, $00)                     ;B4C36F
+    %AICMD0x1A_SpawnNpc($00F8, $01E8, aAIScriptingData_L021, $00)                     ;B4C36F
     %AICMD0x12_Jump(pAIScripting0x28_Data03_Actor08_Ellen_WaitTalk)                                   ;B4C377
 pAIScripting0x28_L163:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event6, $04, pAIScripting0x28_L168)   ;B4C37A
-    %AICMD0x1A($00F8, $01E8, aAIScriptingData_L071, $00)                     ;B4C381
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+    %AICMD0x1A_SpawnNpc($00F8, $01E8, aAIScriptingData_L071, $00)                     ;B4C381
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x28_Data03_Actor08_Ellen_WaitTalk:
-    %AICMD0x1F(pAIScripting0x28_Data03_Actor08_Ellen_Talk_02F4)                                        ;B4C389
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_Data03_Actor08_Ellen_Talk_02F4)                                        ;B4C389
     %AICMD0x12_Jump(pAIScripting0x28_Data03_Actor08_Ellen_WaitTalk)                                   ;B4C38C
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x28_Data03_Actor08_Ellen_WaitTalk2:
-    %AICMD0x1F(pAIScripting0x28_Data03_Actor08_Ellen_Talk_02F1)                                        ;B4C38F
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x28_Data03_Actor08_Ellen_Talk_02F1)                                        ;B4C38F
     %AICMD0x12_Jump(pAIScripting0x28_Data03_Actor08_Ellen_WaitTalk2)                                   ;B4C392
 ; Conversation handler: dialog $02F4 "Phew,it's good for healthy body to do exerci...".
 pAIScripting0x28_Data03_Actor08_Ellen_Talk_02F4:
@@ -864,7 +864,7 @@ pAIScripting0x28_L168:
 ; Started by: fAreaEvents_EggFestival (A=$0000)
 pAIScripting0x28_Data04:
     %AICMD0x4F_DisableToolUse()                                               ;B4C3AC
-    %AICMD0x50()                                               ;B4C3AD
+    %AICMD0x50_ReleaseCarried()                                               ;B4C3AD
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B4C3AE
     %AICMD0x02_FreezeTime()                                    ;B4C3B3
     %AICMD0x03_SetHour($07)                                    ;B4C3B4
@@ -900,5 +900,5 @@ pAIScripting0x28_L170:
     %AICMD0x1C_ShowDialog($02ED, $00)                          ;B4C41D
     %AICMD0x11_EnableUserControl()                             ;B4C421
     %AICMD0x13_Wait(650)                                       ;B4C422
-    %AICMD0x3C()                                               ;B4C425
+    %AICMD0x3C_TeleportToHouse()                                               ;B4C425
     %AICMD0x10_End()                                           ;B4C426

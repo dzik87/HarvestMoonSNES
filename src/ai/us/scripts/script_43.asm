@@ -23,19 +23,19 @@ pAIScripting0x43_Data01:
 pAIScripting0x43_L001:
     %AICMD0x15_JumpIfEquals8(nCurrentTimeID, 18, pAIScripting0x43_L003)      ;B58036
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $07, pAIScripting0x43_L002)   ;B5803D
-    %AICMD0x1A($0058, $0068, aAIScriptingData_L071, $00)                     ;B58044
+    %AICMD0x1A_SpawnNpc($0058, $0068, aAIScriptingData_L071, $00)                     ;B58044
     %AICMD0x12_Jump(pAIScripting0x43_Data01_WaitInteract)                                   ;B5804C
 pAIScripting0x43_L002:
-    %AICMD0x1A($0148, $0078, aAIScriptingData_L071, $00)                     ;B5804F
+    %AICMD0x1A_SpawnNpc($0148, $0078, aAIScriptingData_L071, $00)                     ;B5804F
     %AICMD0x12_Jump(pAIScripting0x43_Data01_WaitInteract)                                   ;B58057
 pAIScripting0x43_L003:
     %AICMD0x41_AddValue16(nLove_Maria, -2)                     ;B5805A
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $07, pAIScripting0x43_L004)   ;B58060
-    %AICMD0x1A($0029, $0053, aAIScriptingData_L072, $00)                     ;B58067
+    %AICMD0x1A_SpawnNpc($0029, $0053, aAIScriptingData_L072, $00)                     ;B58067
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $0C)       ;B5806F
     %AICMD0x12_Jump(pAIScripting0x43_Data01_WaitTalk)                                   ;B58074
 pAIScripting0x43_L004:
-    %AICMD0x1A($0119, $0063, aAIScriptingData_L072, $00)                     ;B58077
+    %AICMD0x1A_SpawnNpc($0119, $0063, aAIScriptingData_L072, $00)                     ;B58077
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $0C)       ;B5807F
     %AICMD0x12_Jump(pAIScripting0x43_Data01_WaitTalk)                                   ;B58084
 ; Idle until the player presses A at the NPC (AICMD0x2D): jumps to OnInteract, or to OnItemOffered while an item is
@@ -44,9 +44,9 @@ pAIScripting0x43_Data01_WaitInteract:
     %AICMD0x14_JumpIfFlagSet(strcFlags.daily3, $0B, pAIScripting0x43_L060)   ;B58087
     %AICMD0x2D_JumpOnInteract(pAIScripting0x43_Data01_OnInteract, pAIScripting0x43_Data01_OnItemOffered)                               ;B5808E
     %AICMD0x12_Jump(pAIScripting0x43_Data01_WaitInteract)                                   ;B58093
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x43_Data01_WaitTalk:
-    %AICMD0x1F(pAIScripting0x43_Data01_Talk_02C2)                                        ;B58096
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x43_Data01_Talk_02C2)                                        ;B58096
     %AICMD0x12_Jump(pAIScripting0x43_Data01_WaitTalk)                                   ;B58099
 ; A pressed while carrying an item (strcPlayerData.carryItemIdPrev is tested next).
 pAIScripting0x43_Data01_OnItemOffered:
@@ -262,14 +262,14 @@ pAIScripting0x43_L048:
     %AICMD0x12_Jump(pAIScripting0x43_Data01_WaitInteract)                                   ;B58403
 pAIScripting0x43_L049:
     %AICMD0x14_JumpIfFlagSet(strcFlags.daily3, $0B, pAIScripting0x43_L060)   ;B58406
-    %AICMD0x1F(pAIScripting0x43_L050)                                        ;B5840D
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x43_L050)                                        ;B5840D
     %AICMD0x12_Jump(pAIScripting0x43_L049)                                   ;B58410
 pAIScripting0x43_L050:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $05, pAIScripting0x43_L051) ;B58413
     %AICMD0x1C_ShowDialog($0292, $00)                          ;B5841A
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown1, $05)     ;B5841E
     %AICMD0x08_EnableAIControl()                               ;B58423
-    %AICMD0x19($0039, $00)                                     ;B58424
+    %AICMD0x19_SetPlayerSprite($0039, $00)                                     ;B58424
     %AICMD0x13_Wait(120)                                       ;B58428
     %AICMD0x11_EnableUserControl()                             ;B5842B
     %AICMD0x41_AddValue16(nPlayerHappiness, 30)                ;B5842C
@@ -298,9 +298,9 @@ pAIScripting0x43_L057:
 pAIScripting0x43_L058:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x43_L059)     ;B58466
     %AICMD0x1C_ShowDialog($0180, $00)                          ;B5846D
-    %AICMD0x1B($022F, $00)                                     ;B58471
+    %AICMD0x1B_SetSprite($022F, $00)                                     ;B58471
     %AICMD0x08_EnableAIControl()                               ;B58475
-    %AICMD0x19($0030, $00)                                     ;B58476
+    %AICMD0x19_SetPlayerSprite($0030, $00)                                     ;B58476
     %AICMD0x13_Wait(120)                                       ;B5847A
     %AICMD0x11_EnableUserControl()                             ;B5847D
     %AICMD0x57_UpdateStamina(30)                               ;B5847E
@@ -308,21 +308,21 @@ pAIScripting0x43_L058:
 pAIScripting0x43_L059:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 10, pAIScripting0x43_L050)         ;B58483
     %AICMD0x1C_ShowDialog($0431, $00)                          ;B5848A
-    %AICMD0x1B($022F, $00)                                     ;B5848E
+    %AICMD0x1B_SetSprite($022F, $00)                                     ;B5848E
     %AICMD0x08_EnableAIControl()                               ;B58492
-    %AICMD0x19($0032, $00)                                     ;B58493
+    %AICMD0x19_SetPlayerSprite($0032, $00)                                     ;B58493
     %AICMD0x13_Wait(120)                                       ;B58497
     %AICMD0x11_EnableUserControl()                             ;B5849A
     %AICMD0x57_UpdateStamina(30)                               ;B5849B
     %AICMD0x12_Jump(pAIScripting0x43_Data01_WaitInteract)                                   ;B5849D
 pAIScripting0x43_L060:
-    %AICMD0x1B($02E7, $00)                                     ;B584A0
-    %AICMD0x0D($FF, $00, $20, $01)                             ;B584A4
-    %AICMD0x1B($02E5, $00)                                     ;B584A9
-    %AICMD0x0D($00, $FF, $14, $01)                             ;B584AD
-    %AICMD0x1B($02E7, $00)                                     ;B584B2
-    %AICMD0x0D($FF, $00, $10, $01)                             ;B584B6
-    %AICMD0x1B($02F1, $00)                                     ;B584BB
+    %AICMD0x1B_SetSprite($02E7, $00)                                     ;B584A0
+    %AICMD0x0D_MoveObject($FF, $00, $20, $01)                             ;B584A4
+    %AICMD0x1B_SetSprite($02E5, $00)                                     ;B584A9
+    %AICMD0x0D_MoveObject($00, $FF, $14, $01)                             ;B584AD
+    %AICMD0x1B_SetSprite($02E7, $00)                                     ;B584B2
+    %AICMD0x0D_MoveObject($FF, $00, $10, $01)                             ;B584B6
+    %AICMD0x1B_SetSprite($02F1, $00)                                     ;B584BB
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $0C)       ;B584BF
     %AICMD0x41_AddValue16(nLove_Maria, 2)                      ;B584C4
     %AICMD0x12_Jump(pAIScripting0x43_Data01_WaitTalk)                                   ;B584CA
@@ -347,19 +347,19 @@ pAIScripting0x43_Data02:
 pAIScripting0x43_L063:
     %AICMD0x15_JumpIfEquals8(nCurrentTimeID, 18, pAIScripting0x43_L065)      ;B584F0
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $07, pAIScripting0x43_L064)   ;B584F7
-    %AICMD0x1A($0058, $0068, aAIScriptingData_L071, $00)                     ;B584FE
+    %AICMD0x1A_SpawnNpc($0058, $0068, aAIScriptingData_L071, $00)                     ;B584FE
     %AICMD0x12_Jump(pAIScripting0x43_Data02_WaitInteract)                                   ;B58506
 pAIScripting0x43_L064:
-    %AICMD0x1A($0148, $0078, aAIScriptingData_L071, $00)                     ;B58509
+    %AICMD0x1A_SpawnNpc($0148, $0078, aAIScriptingData_L071, $00)                     ;B58509
     %AICMD0x12_Jump(pAIScripting0x43_Data02_WaitInteract)                                   ;B58511
 pAIScripting0x43_L065:
     %AICMD0x41_AddValue16(nLove_Ann, -2)                       ;B58514
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $07, pAIScripting0x43_L066)   ;B5851A
-    %AICMD0x1A($0029, $0053, aAIScriptingData_L072, $00)                     ;B58521
+    %AICMD0x1A_SpawnNpc($0029, $0053, aAIScriptingData_L072, $00)                     ;B58521
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $0C)       ;B58529
     %AICMD0x12_Jump(pAIScripting0x43_Data02_WaitTalk)                                   ;B5852E
 pAIScripting0x43_L066:
-    %AICMD0x1A($0119, $0063, aAIScriptingData_L072, $00)                     ;B58531
+    %AICMD0x1A_SpawnNpc($0119, $0063, aAIScriptingData_L072, $00)                     ;B58531
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $0C)       ;B58539
     %AICMD0x12_Jump(pAIScripting0x43_Data02_WaitTalk)                                   ;B5853E
 ; Idle until the player presses A at the NPC (AICMD0x2D): jumps to OnInteract, or to OnItemOffered while an item is
@@ -368,9 +368,9 @@ pAIScripting0x43_Data02_WaitInteract:
     %AICMD0x14_JumpIfFlagSet(strcFlags.daily3, $0B, pAIScripting0x43_L122)   ;B58541
     %AICMD0x2D_JumpOnInteract(pAIScripting0x43_Data02_OnInteract, pAIScripting0x43_Data02_OnItemOffered)                               ;B58548
     %AICMD0x12_Jump(pAIScripting0x43_Data02_WaitInteract)                                   ;B5854D
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x43_Data02_WaitTalk:
-    %AICMD0x1F(pAIScripting0x43_Data02_Talk_02C2)                                        ;B58550
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x43_Data02_Talk_02C2)                                        ;B58550
     %AICMD0x12_Jump(pAIScripting0x43_Data02_WaitTalk)                                   ;B58553
 ; A pressed while carrying an item (strcPlayerData.carryItemIdPrev is tested next).
 pAIScripting0x43_Data02_OnItemOffered:
@@ -586,14 +586,14 @@ pAIScripting0x43_L110:
     %AICMD0x12_Jump(pAIScripting0x43_Data02_WaitInteract)                                   ;B588B9
 pAIScripting0x43_L111:
     %AICMD0x14_JumpIfFlagSet(strcFlags.daily3, $0B, pAIScripting0x43_L122)   ;B588BC
-    %AICMD0x1F(pAIScripting0x43_L112)                                        ;B588C3
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x43_L112)                                        ;B588C3
     %AICMD0x12_Jump(pAIScripting0x43_L111)                                   ;B588C6
 pAIScripting0x43_L112:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $05, pAIScripting0x43_L113) ;B588C9
     %AICMD0x1C_ShowDialog($0292, $00)                          ;B588D0
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown1, $05)     ;B588D4
     %AICMD0x08_EnableAIControl()                               ;B588D9
-    %AICMD0x19($0039, $00)                                     ;B588DA
+    %AICMD0x19_SetPlayerSprite($0039, $00)                                     ;B588DA
     %AICMD0x13_Wait(120)                                       ;B588DE
     %AICMD0x11_EnableUserControl()                             ;B588E1
     %AICMD0x41_AddValue16(nPlayerHappiness, 30)                ;B588E2
@@ -622,9 +622,9 @@ pAIScripting0x43_L119:
 pAIScripting0x43_L120:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x43_L121)     ;B5891C
     %AICMD0x1C_ShowDialog($0180, $00)                          ;B58923
-    %AICMD0x1B($022F, $00)                                     ;B58927
+    %AICMD0x1B_SetSprite($022F, $00)                                     ;B58927
     %AICMD0x08_EnableAIControl()                               ;B5892B
-    %AICMD0x19($003A, $00)                                     ;B5892C
+    %AICMD0x19_SetPlayerSprite($003A, $00)                                     ;B5892C
     %AICMD0x13_Wait(120)                                       ;B58930
     %AICMD0x11_EnableUserControl()                             ;B58933
     %AICMD0x57_UpdateStamina(30)                               ;B58934
@@ -632,21 +632,21 @@ pAIScripting0x43_L120:
 pAIScripting0x43_L121:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 10, pAIScripting0x43_L112)         ;B58939
     %AICMD0x1C_ShowDialog($042E, $00)                          ;B58940
-    %AICMD0x1B($022F, $00)                                     ;B58944
+    %AICMD0x1B_SetSprite($022F, $00)                                     ;B58944
     %AICMD0x08_EnableAIControl()                               ;B58948
-    %AICMD0x19($0030, $00)                                     ;B58949
+    %AICMD0x19_SetPlayerSprite($0030, $00)                                     ;B58949
     %AICMD0x13_Wait(120)                                       ;B5894D
     %AICMD0x11_EnableUserControl()                             ;B58950
     %AICMD0x57_UpdateStamina(30)                               ;B58951
     %AICMD0x12_Jump(pAIScripting0x43_Data02_WaitInteract)                                   ;B58953
 pAIScripting0x43_L122:
-    %AICMD0x1B($02E7, $00)                                     ;B58956
-    %AICMD0x0D($FF, $00, $20, $01)                             ;B5895A
-    %AICMD0x1B($02E5, $00)                                     ;B5895F
-    %AICMD0x0D($00, $FF, $14, $01)                             ;B58963
-    %AICMD0x1B($02E7, $00)                                     ;B58968
-    %AICMD0x0D($FF, $00, $10, $01)                             ;B5896C
-    %AICMD0x1B($02F1, $00)                                     ;B58971
+    %AICMD0x1B_SetSprite($02E7, $00)                                     ;B58956
+    %AICMD0x0D_MoveObject($FF, $00, $20, $01)                             ;B5895A
+    %AICMD0x1B_SetSprite($02E5, $00)                                     ;B5895F
+    %AICMD0x0D_MoveObject($00, $FF, $14, $01)                             ;B58963
+    %AICMD0x1B_SetSprite($02E7, $00)                                     ;B58968
+    %AICMD0x0D_MoveObject($FF, $00, $10, $01)                             ;B5896C
+    %AICMD0x1B_SetSprite($02F1, $00)                                     ;B58971
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $0C)       ;B58975
     %AICMD0x41_AddValue16(nLove_Ann, 2)                        ;B5897A
     %AICMD0x12_Jump(pAIScripting0x43_Data02_WaitTalk)                                   ;B58980
@@ -671,19 +671,19 @@ pAIScripting0x43_Data03:
 pAIScripting0x43_L125:
     %AICMD0x15_JumpIfEquals8(nCurrentTimeID, 18, pAIScripting0x43_L127)      ;B589A6
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $07, pAIScripting0x43_L126)   ;B589AD
-    %AICMD0x1A($0058, $0068, aAIScriptingData_L071, $00)                     ;B589B4
+    %AICMD0x1A_SpawnNpc($0058, $0068, aAIScriptingData_L071, $00)                     ;B589B4
     %AICMD0x12_Jump(pAIScripting0x43_Data03_WaitInteract)                                   ;B589BC
 pAIScripting0x43_L126:
-    %AICMD0x1A($0148, $0078, aAIScriptingData_L071, $00)                     ;B589BF
+    %AICMD0x1A_SpawnNpc($0148, $0078, aAIScriptingData_L071, $00)                     ;B589BF
     %AICMD0x12_Jump(pAIScripting0x43_Data03_WaitInteract)                                   ;B589C7
 pAIScripting0x43_L127:
     %AICMD0x41_AddValue16(nLove_Nina, -2)                      ;B589CA
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $07, pAIScripting0x43_L128)   ;B589D0
-    %AICMD0x1A($0029, $0053, aAIScriptingData_L072, $00)                     ;B589D7
+    %AICMD0x1A_SpawnNpc($0029, $0053, aAIScriptingData_L072, $00)                     ;B589D7
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $0C)       ;B589DF
     %AICMD0x12_Jump(pAIScripting0x43_Data03_WaitTalk)                                   ;B589E4
 pAIScripting0x43_L128:
-    %AICMD0x1A($0119, $0063, aAIScriptingData_L072, $00)                     ;B589E7
+    %AICMD0x1A_SpawnNpc($0119, $0063, aAIScriptingData_L072, $00)                     ;B589E7
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $0C)       ;B589EF
     %AICMD0x12_Jump(pAIScripting0x43_Data03_WaitTalk)                                   ;B589F4
 ; Idle until the player presses A at the NPC (AICMD0x2D): jumps to OnInteract, or to OnItemOffered while an item is
@@ -692,9 +692,9 @@ pAIScripting0x43_Data03_WaitInteract:
     %AICMD0x14_JumpIfFlagSet(strcFlags.daily3, $0B, pAIScripting0x43_L184)   ;B589F7
     %AICMD0x2D_JumpOnInteract(pAIScripting0x43_Data03_OnInteract, pAIScripting0x43_Data03_OnItemOffered)                               ;B589FE
     %AICMD0x12_Jump(pAIScripting0x43_Data03_WaitInteract)                                   ;B58A03
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x43_Data03_WaitTalk:
-    %AICMD0x1F(pAIScripting0x43_Data03_Talk_02C2)                                        ;B58A06
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x43_Data03_Talk_02C2)                                        ;B58A06
     %AICMD0x12_Jump(pAIScripting0x43_Data03_WaitTalk)                                   ;B58A09
 ; A pressed while carrying an item (strcPlayerData.carryItemIdPrev is tested next).
 pAIScripting0x43_Data03_OnItemOffered:
@@ -911,14 +911,14 @@ pAIScripting0x43_L172:
     %AICMD0x12_Jump(pAIScripting0x43_Data03_WaitInteract)                                   ;B58D77
 pAIScripting0x43_L173:
     %AICMD0x14_JumpIfFlagSet(strcFlags.daily3, $0B, pAIScripting0x43_L184)   ;B58D7A
-    %AICMD0x1F(pAIScripting0x43_L174)                                        ;B58D81
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x43_L174)                                        ;B58D81
     %AICMD0x12_Jump(pAIScripting0x43_L173)                                   ;B58D84
 pAIScripting0x43_L174:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $05, pAIScripting0x43_L175) ;B58D87
     %AICMD0x1C_ShowDialog($0292, $00)                          ;B58D8E
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown1, $05)     ;B58D92
     %AICMD0x08_EnableAIControl()                               ;B58D97
-    %AICMD0x19($0039, $00)                                     ;B58D98
+    %AICMD0x19_SetPlayerSprite($0039, $00)                                     ;B58D98
     %AICMD0x13_Wait(120)                                       ;B58D9C
     %AICMD0x11_EnableUserControl()                             ;B58D9F
     %AICMD0x41_AddValue16(nPlayerHappiness, 30)                ;B58DA0
@@ -947,9 +947,9 @@ pAIScripting0x43_L181:
 pAIScripting0x43_L182:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x43_L183)     ;B58DDA
     %AICMD0x1C_ShowDialog($0180, $00)                          ;B58DE1
-    %AICMD0x1B($022F, $00)                                     ;B58DE5
+    %AICMD0x1B_SetSprite($022F, $00)                                     ;B58DE5
     %AICMD0x08_EnableAIControl()                               ;B58DE9
-    %AICMD0x19($0031, $00)                                     ;B58DEA
+    %AICMD0x19_SetPlayerSprite($0031, $00)                                     ;B58DEA
     %AICMD0x13_Wait(120)                                       ;B58DEE
     %AICMD0x11_EnableUserControl()                             ;B58DF1
     %AICMD0x57_UpdateStamina(30)                               ;B58DF2
@@ -957,21 +957,21 @@ pAIScripting0x43_L182:
 pAIScripting0x43_L183:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 10, pAIScripting0x43_L174)         ;B58DF7
     %AICMD0x1C_ShowDialog($0432, $00)                          ;B58DFE
-    %AICMD0x1B($022F, $00)                                     ;B58E02
+    %AICMD0x1B_SetSprite($022F, $00)                                     ;B58E02
     %AICMD0x08_EnableAIControl()                               ;B58E06
-    %AICMD0x19($0032, $00)                                     ;B58E07
+    %AICMD0x19_SetPlayerSprite($0032, $00)                                     ;B58E07
     %AICMD0x13_Wait(120)                                       ;B58E0B
     %AICMD0x11_EnableUserControl()                             ;B58E0E
     %AICMD0x57_UpdateStamina(30)                               ;B58E0F
     %AICMD0x12_Jump(pAIScripting0x43_Data03_WaitInteract)                                   ;B58E11
 pAIScripting0x43_L184:
-    %AICMD0x1B($02E7, $00)                                     ;B58E14
-    %AICMD0x0D($FF, $00, $20, $01)                             ;B58E18
-    %AICMD0x1B($02E5, $00)                                     ;B58E1D
-    %AICMD0x0D($00, $FF, $14, $01)                             ;B58E21
-    %AICMD0x1B($02E7, $00)                                     ;B58E26
-    %AICMD0x0D($FF, $00, $10, $01)                             ;B58E2A
-    %AICMD0x1B($02F1, $00)                                     ;B58E2F
+    %AICMD0x1B_SetSprite($02E7, $00)                                     ;B58E14
+    %AICMD0x0D_MoveObject($FF, $00, $20, $01)                             ;B58E18
+    %AICMD0x1B_SetSprite($02E5, $00)                                     ;B58E1D
+    %AICMD0x0D_MoveObject($00, $FF, $14, $01)                             ;B58E21
+    %AICMD0x1B_SetSprite($02E7, $00)                                     ;B58E26
+    %AICMD0x0D_MoveObject($FF, $00, $10, $01)                             ;B58E2A
+    %AICMD0x1B_SetSprite($02F1, $00)                                     ;B58E2F
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $0C)       ;B58E33
     %AICMD0x41_AddValue16(nLove_Nina, 2)                       ;B58E38
     %AICMD0x12_Jump(pAIScripting0x43_Data03_WaitTalk)                                   ;B58E3E
@@ -996,19 +996,19 @@ pAIScripting0x43_Data04:
 pAIScripting0x43_L187:
     %AICMD0x15_JumpIfEquals8(nCurrentTimeID, 18, pAIScripting0x43_L189)      ;B58E64
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $07, pAIScripting0x43_L188)   ;B58E6B
-    %AICMD0x1A($0058, $0068, aAIScriptingData_L071, $00)                     ;B58E72
+    %AICMD0x1A_SpawnNpc($0058, $0068, aAIScriptingData_L071, $00)                     ;B58E72
     %AICMD0x12_Jump(pAIScripting0x43_Data04_WaitInteract)                                   ;B58E7A
 pAIScripting0x43_L188:
-    %AICMD0x1A($0148, $0078, aAIScriptingData_L071, $00)                     ;B58E7D
+    %AICMD0x1A_SpawnNpc($0148, $0078, aAIScriptingData_L071, $00)                     ;B58E7D
     %AICMD0x12_Jump(pAIScripting0x43_Data04_WaitInteract)                                   ;B58E85
 pAIScripting0x43_L189:
     %AICMD0x41_AddValue16(nLove_Ellen, -2)                     ;B58E88
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $07, pAIScripting0x43_L190)   ;B58E8E
-    %AICMD0x1A($0029, $0053, aAIScriptingData_L072, $00)                     ;B58E95
+    %AICMD0x1A_SpawnNpc($0029, $0053, aAIScriptingData_L072, $00)                     ;B58E95
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $0C)       ;B58E9D
     %AICMD0x12_Jump(pAIScripting0x43_Data04_WaitTalk)                                   ;B58EA2
 pAIScripting0x43_L190:
-    %AICMD0x1A($0119, $0063, aAIScriptingData_L072, $00)                     ;B58EA5
+    %AICMD0x1A_SpawnNpc($0119, $0063, aAIScriptingData_L072, $00)                     ;B58EA5
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $0C)       ;B58EAD
     %AICMD0x12_Jump(pAIScripting0x43_Data04_WaitTalk)                                   ;B58EB2
 ; Idle until the player presses A at the NPC (AICMD0x2D): jumps to OnInteract, or to OnItemOffered while an item is
@@ -1017,9 +1017,9 @@ pAIScripting0x43_Data04_WaitInteract:
     %AICMD0x14_JumpIfFlagSet(strcFlags.daily3, $0B, pAIScripting0x43_L247)   ;B58EB5
     %AICMD0x2D_JumpOnInteract(pAIScripting0x43_Data04_OnInteract, pAIScripting0x43_Data04_OnItemOffered)                               ;B58EBC
     %AICMD0x12_Jump(pAIScripting0x43_Data04_WaitInteract)                                   ;B58EC1
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x43_Data04_WaitTalk:
-    %AICMD0x1F(pAIScripting0x43_Data04_Talk_02C2)                                        ;B58EC4
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x43_Data04_Talk_02C2)                                        ;B58EC4
     %AICMD0x12_Jump(pAIScripting0x43_Data04_WaitTalk)                                   ;B58EC7
 ; A pressed while carrying an item (strcPlayerData.carryItemIdPrev is tested next).
 pAIScripting0x43_Data04_OnItemOffered:
@@ -1239,14 +1239,14 @@ pAIScripting0x43_L235:
     %AICMD0x12_Jump(pAIScripting0x43_Data04_WaitInteract)                                   ;B5923C
 pAIScripting0x43_L236:
     %AICMD0x14_JumpIfFlagSet(strcFlags.daily3, $0B, pAIScripting0x43_L247)   ;B5923F
-    %AICMD0x1F(pAIScripting0x43_L237)                                        ;B59246
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x43_L237)                                        ;B59246
     %AICMD0x12_Jump(pAIScripting0x43_L236)                                   ;B59249
 pAIScripting0x43_L237:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $05, pAIScripting0x43_L238) ;B5924C
     %AICMD0x1C_ShowDialog($0292, $00)                          ;B59253
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown1, $05)     ;B59257
     %AICMD0x08_EnableAIControl()                               ;B5925C
-    %AICMD0x19($0039, $00)                                     ;B5925D
+    %AICMD0x19_SetPlayerSprite($0039, $00)                                     ;B5925D
     %AICMD0x13_Wait(120)                                       ;B59261
     %AICMD0x11_EnableUserControl()                             ;B59264
     %AICMD0x41_AddValue16(nPlayerHappiness, 30)                ;B59265
@@ -1274,9 +1274,9 @@ pAIScripting0x43_L244:
     %AICMD0x12_Jump(pAIScripting0x43_Data04_WaitInteract)                                   ;B5929C
 pAIScripting0x43_L245:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x43_L246)     ;B5929F
-    %AICMD0x1B($022F, $00)                                     ;B592A6
+    %AICMD0x1B_SetSprite($022F, $00)                                     ;B592A6
     %AICMD0x08_EnableAIControl()                               ;B592AA
-    %AICMD0x19($0039, $00)                                     ;B592AB
+    %AICMD0x19_SetPlayerSprite($0039, $00)                                     ;B592AB
     %AICMD0x13_Wait(120)                                       ;B592AF
     %AICMD0x11_EnableUserControl()                             ;B592B2
     %AICMD0x57_UpdateStamina(30)                               ;B592B3
@@ -1285,21 +1285,21 @@ pAIScripting0x43_L245:
 pAIScripting0x43_L246:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 10, pAIScripting0x43_L237)         ;B592BC
     %AICMD0x1C_ShowDialog($042E, $00)                          ;B592C3
-    %AICMD0x1B($022F, $00)                                     ;B592C7
+    %AICMD0x1B_SetSprite($022F, $00)                                     ;B592C7
     %AICMD0x08_EnableAIControl()                               ;B592CB
-    %AICMD0x19($0030, $00)                                     ;B592CC
+    %AICMD0x19_SetPlayerSprite($0030, $00)                                     ;B592CC
     %AICMD0x13_Wait(120)                                       ;B592D0
     %AICMD0x11_EnableUserControl()                             ;B592D3
     %AICMD0x57_UpdateStamina(30)                               ;B592D4
     %AICMD0x12_Jump(pAIScripting0x43_Data04_WaitInteract)                                   ;B592D6
 pAIScripting0x43_L247:
-    %AICMD0x1B($02E7, $00)                                     ;B592D9
-    %AICMD0x0D($FF, $00, $20, $01)                             ;B592DD
-    %AICMD0x1B($02E5, $00)                                     ;B592E2
-    %AICMD0x0D($00, $FF, $14, $01)                             ;B592E6
-    %AICMD0x1B($02E7, $00)                                     ;B592EB
-    %AICMD0x0D($FF, $00, $10, $01)                             ;B592EF
-    %AICMD0x1B($02F1, $00)                                     ;B592F4
+    %AICMD0x1B_SetSprite($02E7, $00)                                     ;B592D9
+    %AICMD0x0D_MoveObject($FF, $00, $20, $01)                             ;B592DD
+    %AICMD0x1B_SetSprite($02E5, $00)                                     ;B592E2
+    %AICMD0x0D_MoveObject($00, $FF, $14, $01)                             ;B592E6
+    %AICMD0x1B_SetSprite($02E7, $00)                                     ;B592EB
+    %AICMD0x0D_MoveObject($FF, $00, $10, $01)                             ;B592EF
+    %AICMD0x1B_SetSprite($02F1, $00)                                     ;B592F4
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $0C)       ;B592F8
     %AICMD0x41_AddValue16(nLove_Ellen, 2)                      ;B592FD
     %AICMD0x12_Jump(pAIScripting0x43_Data04_WaitTalk)                                   ;B59303
@@ -1323,19 +1323,19 @@ pAIScripting0x43_Data05:
 pAIScripting0x43_L250:
     %AICMD0x15_JumpIfEquals8(nCurrentTimeID, 18, pAIScripting0x43_L252)      ;B59329
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $07, pAIScripting0x43_L251)   ;B59330
-    %AICMD0x1A($0058, $0068, aAIScriptingData_L071, $00)                     ;B59337
+    %AICMD0x1A_SpawnNpc($0058, $0068, aAIScriptingData_L071, $00)                     ;B59337
     %AICMD0x12_Jump(pAIScripting0x43_Data05_WaitInteract)                                   ;B5933F
 pAIScripting0x43_L251:
-    %AICMD0x1A($0148, $0078, aAIScriptingData_L071, $00)                     ;B59342
+    %AICMD0x1A_SpawnNpc($0148, $0078, aAIScriptingData_L071, $00)                     ;B59342
     %AICMD0x12_Jump(pAIScripting0x43_Data05_WaitInteract)                                   ;B5934A
 pAIScripting0x43_L252:
     %AICMD0x41_AddValue16(nLove_Eve, -2)                       ;B5934D
     %AICMD0x14_JumpIfFlagSet(strcFlags.event1, $07, pAIScripting0x43_L253)   ;B59353
-    %AICMD0x1A($0029, $0053, aAIScriptingData_L072, $00)                     ;B5935A
+    %AICMD0x1A_SpawnNpc($0029, $0053, aAIScriptingData_L072, $00)                     ;B5935A
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $0C)       ;B59362
     %AICMD0x12_Jump(pAIScripting0x43_Data05_WaitTalk)                                   ;B59367
 pAIScripting0x43_L253:
-    %AICMD0x1A($0119, $0063, aAIScriptingData_L072, $00)                     ;B5936A
+    %AICMD0x1A_SpawnNpc($0119, $0063, aAIScriptingData_L072, $00)                     ;B5936A
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $0C)       ;B59372
     %AICMD0x12_Jump(pAIScripting0x43_Data05_WaitTalk)                                   ;B59377
 ; Idle until the player presses A at the NPC (AICMD0x2D): jumps to OnInteract, or to OnItemOffered while an item is
@@ -1344,9 +1344,9 @@ pAIScripting0x43_Data05_WaitInteract:
     %AICMD0x14_JumpIfFlagSet(strcFlags.daily3, $0B, pAIScripting0x43_L309)   ;B5937A
     %AICMD0x2D_JumpOnInteract(pAIScripting0x43_Data05_OnInteract, pAIScripting0x43_Data05_OnItemOffered)                               ;B59381
     %AICMD0x12_Jump(pAIScripting0x43_Data05_WaitInteract)                                   ;B59386
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x43_Data05_WaitTalk:
-    %AICMD0x1F(pAIScripting0x43_Data05_Talk_02C2)                                        ;B59389
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x43_Data05_Talk_02C2)                                        ;B59389
     %AICMD0x12_Jump(pAIScripting0x43_Data05_WaitTalk)                                   ;B5938C
 ; A pressed while carrying an item (strcPlayerData.carryItemIdPrev is tested next).
 pAIScripting0x43_Data05_OnItemOffered:
@@ -1562,14 +1562,14 @@ pAIScripting0x43_L297:
     %AICMD0x12_Jump(pAIScripting0x43_Data05_WaitInteract)                                   ;B596F6
 pAIScripting0x43_L298:
     %AICMD0x14_JumpIfFlagSet(strcFlags.daily3, $0B, pAIScripting0x43_L309)   ;B596F9
-    %AICMD0x1F(pAIScripting0x43_L299)                                        ;B59700
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x43_L299)                                        ;B59700
     %AICMD0x12_Jump(pAIScripting0x43_L298)                                   ;B59703
 pAIScripting0x43_L299:
     %AICMD0x14_JumpIfFlagSet(strcFlags.unknown1, $05, pAIScripting0x43_L300) ;B59706
     %AICMD0x1C_ShowDialog($0292, $00)                          ;B5970D
     %AICMD0x23_OrWithIndexedValue(strcFlags.unknown1, $05)     ;B59711
     %AICMD0x08_EnableAIControl()                               ;B59716
-    %AICMD0x19($0039, $00)                                     ;B59717
+    %AICMD0x19_SetPlayerSprite($0039, $00)                                     ;B59717
     %AICMD0x13_Wait(120)                                       ;B5971B
     %AICMD0x11_EnableUserControl()                             ;B5971E
     %AICMD0x41_AddValue16(nPlayerHappiness, 30)                ;B5971F
@@ -1598,7 +1598,7 @@ pAIScripting0x43_L306:
 pAIScripting0x43_L307:
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x43_L308)     ;B59759
     %AICMD0x1C_ShowDialog($0180, $00)                          ;B59760
-    %AICMD0x1B($022F, $00)                                     ;B59764
+    %AICMD0x1B_SetSprite($022F, $00)                                     ;B59764
     %AICMD0x08_EnableAIControl()                               ;B59768
     %AICMD0x32_SetValue16($8000D4, $0015)                                 ;B59769
     %AICMD0x13_Wait(120)                                       ;B5976F
@@ -1608,7 +1608,7 @@ pAIScripting0x43_L307:
 pAIScripting0x43_L308:
     %AICMD0x15_JumpIfEquals8(nCurrentDay, 10, pAIScripting0x43_L299)         ;B59778
     %AICMD0x1C_ShowDialog($042F, $00)                          ;B5977F
-    %AICMD0x1B($022F, $00)                                     ;B59783
+    %AICMD0x1B_SetSprite($022F, $00)                                     ;B59783
     %AICMD0x08_EnableAIControl()                               ;B59787
     %AICMD0x32_SetValue16($8000D4, $0015)                                 ;B59788
     %AICMD0x13_Wait(120)                                       ;B5978E
@@ -1616,13 +1616,13 @@ pAIScripting0x43_L308:
     %AICMD0x57_UpdateStamina(30)                               ;B59792
     %AICMD0x12_Jump(pAIScripting0x43_Data05_WaitInteract)                                   ;B59794
 pAIScripting0x43_L309:
-    %AICMD0x1B($02E7, $00)                                     ;B59797
-    %AICMD0x0D($FF, $00, $20, $01)                             ;B5979B
-    %AICMD0x1B($02E5, $00)                                     ;B597A0
-    %AICMD0x0D($00, $FF, $14, $01)                             ;B597A4
-    %AICMD0x1B($02E7, $00)                                     ;B597A9
-    %AICMD0x0D($FF, $00, $10, $01)                             ;B597AD
-    %AICMD0x1B($02F1, $00)                                     ;B597B2
+    %AICMD0x1B_SetSprite($02E7, $00)                                     ;B59797
+    %AICMD0x0D_MoveObject($FF, $00, $20, $01)                             ;B5979B
+    %AICMD0x1B_SetSprite($02E5, $00)                                     ;B597A0
+    %AICMD0x0D_MoveObject($00, $FF, $14, $01)                             ;B597A4
+    %AICMD0x1B_SetSprite($02E7, $00)                                     ;B597A9
+    %AICMD0x0D_MoveObject($FF, $00, $10, $01)                             ;B597AD
+    %AICMD0x1B_SetSprite($02F1, $00)                                     ;B597B2
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $0C)       ;B597B6
     %AICMD0x41_AddValue16(nLove_Eve, -2)                       ;B597BB
     %AICMD0x12_Jump(pAIScripting0x43_Data05_WaitTalk)                                   ;B597C1

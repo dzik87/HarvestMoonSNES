@@ -193,7 +193,7 @@
   open_questions: null
 
 - opcode: 0x0D
-  macro: AICMD0x0D
+  macro: AICMD0x0D_MoveObject
   handler: fAIAction0x0D_MoveObject
   handler_addr: "848C22"
   suggested_name: MoveObject
@@ -211,7 +211,7 @@
   open_questions: "The interpretation is based on fAI_UpdateSlotStepMove and on usage in scripts (e.g. (1,0,$10,1)); the unit of the slot position (pixels) is not verified; it is not established whether this applies only to NPCs or also to the player, nor whether the high byte +$11 is always 0. The macro has parameter names nUnknown1-4 to be renamed."
 
 - opcode: 0x0E
-  macro: AICMD0x0E
+  macro: AICMD0x0E_ApplyMusicChange
   handler: fAIAction0x0E_ApplyMusicChange
   handler_addr: "848CA8"
   suggested_name: ApplyMusicChange

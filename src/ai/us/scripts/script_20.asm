@@ -18,7 +18,7 @@
 ; Slot index: 0
 ; Started by: fAreaEvents_House (A=$0000)
 pAIScripting0x20_Data01:
-    %AICMD0x50()                                               ;B49E51
+    %AICMD0x50_ReleaseCarried()                                               ;B49E51
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B49E52
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $02)       ;B49E57
     %AICMD0x00_SetMusic($0C, $B4)                              ;B49E5C
@@ -55,7 +55,7 @@ pAIScripting0x20_Data01_FuneralSequence:
     %AICMD0x38_WaitForFadeIn()                                               ;B49EA2
     %AICMD0x0B_SetScriptFlag($00)                                            ;B49EA3
     %AICMD0x0C_WaitForScriptFlag($02)                                            ;B49EA5
-    %AICMD0x19($0025, $00)                                     ;B49EA7
+    %AICMD0x19_SetPlayerSprite($0025, $00)                                     ;B49EA7
     %AICMD0x13_Wait(180)                                       ;B49EAB
     %AICMD0x01_UnfreezeTime()                                  ;B49EAE
     %AICMD0x24_NextHourPalette($74)                            ;B49EAF
@@ -67,30 +67,30 @@ pAIScripting0x20_Data01_FuneralSequence:
     %AICMD0x10_End()                                           ;B49EC5
 ; Child script (slot $01) of Data01: actor. Spawns at (408,152).
 pAIScripting0x20_Data01_Actor01:
-    %AICMD0x1A($0198, $0098, aAIScriptingData_L051, $02)                     ;B49EC6
+    %AICMD0x1A_SpawnNpc($0198, $0098, aAIScriptingData_L051, $02)                     ;B49EC6
 ; Conversation handler: dialog $0315 "Our Father in Heaven,please help his preciou...".
 pAIScripting0x20_Data01_Actor01_Talk_0315:
     %AICMD0x0C_WaitForScriptFlag($00)                                            ;B49ECE
     %AICMD0x13_Wait(120)                                       ;B49ED0
     %AICMD0x1C_ShowDialog($0315, $00)                          ;B49ED3
     %AICMD0x0B_SetScriptFlag($01)                                            ;B49ED7
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x20_Data01_Actor01_WaitTalk:
-    %AICMD0x1F(pAIScripting0x20_Data01_Actor01_Talk_0315)                                        ;B49ED9
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x20_Data01_Actor01_Talk_0315)                                        ;B49ED9
     %AICMD0x12_Jump(pAIScripting0x20_Data01_Actor01_WaitTalk)                                   ;B49EDC
 ; Child script (slot $02) of Data01: actor. Spawns at (504,144).
 pAIScripting0x20_Data01_Actor02:
-    %AICMD0x1A($01F8, $0090, aAIScriptingData_L053, $03)                     ;B49EDF
+    %AICMD0x1A_SpawnNpc($01F8, $0090, aAIScriptingData_L053, $03)                     ;B49EDF
     %AICMD0x0C_WaitForScriptFlag($01)                                            ;B49EE7
-    %AICMD0x1B($02B0, $00)                                     ;B49EE9
-    %AICMD0x0D($FF, $00, $30, $01)                             ;B49EED
-    %AICMD0x1B($02AB, $00)                                     ;B49EF2
+    %AICMD0x1B_SetSprite($02B0, $00)                                     ;B49EE9
+    %AICMD0x0D_MoveObject($FF, $00, $30, $01)                             ;B49EED
+    %AICMD0x1B_SetSprite($02AB, $00)                                     ;B49EF2
     %AICMD0x13_Wait(120)                                       ;B49EF6
     %AICMD0x1C_ShowDialog($0316, $00)                          ;B49EF9
-    %AICMD0x1B($02B0, $01)                                     ;B49EFD
-    %AICMD0x0D($01, $00, $30, $01)                             ;B49F01
-    %AICMD0x1B($02AC, $00)                                     ;B49F06
-    %AICMD0x0D($00, $01, $90, $01)                             ;B49F0A
+    %AICMD0x1B_SetSprite($02B0, $01)                                     ;B49EFD
+    %AICMD0x0D_MoveObject($01, $00, $30, $01)                             ;B49F01
+    %AICMD0x1B_SetSprite($02AC, $00)                                     ;B49F06
+    %AICMD0x0D_MoveObject($00, $01, $90, $01)                             ;B49F0A
     %AICMD0x0B_SetScriptFlag($02)                                            ;B49F0F
-    %AICMD0x37()                                               ;B49F11
+    %AICMD0x37_RemoveObject()                                               ;B49F11
     %AICMD0x10_End()                                           ;B49F12

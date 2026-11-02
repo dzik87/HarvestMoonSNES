@@ -4,26 +4,26 @@
  
 pAIScripting0x19_Data01:
  
-    %AICMD0x50()                                               ;B48FB5
+    %AICMD0x50_ReleaseCarried()                                               ;B48FB5
     %AICMD0x08_EnableAIControl()                               ;B48FB6
     %AICMD0x09_StartScript($01, pAIScripting0x19_L001)                                   ;B48FB7
     %AICMD0x38_WaitForFadeIn()                                               ;B48FBB
     %AICMD0x0B_SetScriptFlag($00)                                            ;B48FBC
     %AICMD0x10_End()                                           ;B48FBE
 pAIScripting0x19_L001:
-    %AICMD0x1A($0088, $01B8, aAIScriptingData_L045, $01)                     ;B48FBF
+    %AICMD0x1A_SpawnNpc($0088, $01B8, aAIScriptingData_L045, $01)                     ;B48FBF
     %AICMD0x0C_WaitForScriptFlag($00)                                            ;B48FC7
-    %AICMD0x0D($00, $FF, $50, $01)                             ;B48FC9
+    %AICMD0x0D_MoveObject($00, $FF, $50, $01)                             ;B48FC9
     %AICMD0x1C_ShowDialog($01CC, $00)                          ;B48FCE
-    %AICMD0x1B($0290, $00)                                     ;B48FD2
-    %AICMD0x0D($00, $01, $60, $01)                             ;B48FD6
-    %AICMD0x37()                                               ;B48FDB
+    %AICMD0x1B_SetSprite($0290, $00)                                     ;B48FD2
+    %AICMD0x0D_MoveObject($00, $01, $60, $01)                             ;B48FD6
+    %AICMD0x37_RemoveObject()                                               ;B48FDB
     %AICMD0x11_EnableUserControl()                             ;B48FDC
     %AICMD0x10_End()                                           ;B48FDD
 
 
 pAIScripting0x19_Data02:
-    %AICMD0x50()                                               ;B48FDE
+    %AICMD0x50_ReleaseCarried()                                               ;B48FDE
     %AICMD0x00_SetMusic($0E, $B4)                              ;B48FDF
     %AICMD0x08_EnableAIControl()                               ;B48FE2
     %AICMD0x09_StartScript($01, pAIScripting0x19_L008)                                   ;B48FE3
@@ -43,7 +43,7 @@ pAIScripting0x19_Data02:
     %AICMD0x0C_WaitForScriptFlag($03)                                            ;B4900E
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B49010
     %AICMD0x0C_WaitForScriptFlag($04)                                            ;B49012
-    %AICMD0x19($0007, $00)                                     ;B49014
+    %AICMD0x19_SetPlayerSprite($0007, $00)                                     ;B49014
     %AICMD0x13_Wait(60)                                        ;B49018
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B4901B
     %AICMD0x39_WalkForTime(!AIINPUT_DOWN, 64)                  ;B4901D
@@ -55,51 +55,51 @@ pAIScripting0x19_Data02:
     %AICMD0x13_Wait(60)                                        ;B4902E
     %AICMD0x23_OrWithIndexedValue(strcFlags.event4, $0D)       ;B49031
     %AICMD0x28_ClearBit(strcFlags.event4, $0C)                          ;B49036
-    %AICMD0x3C()                                               ;B4903B
+    %AICMD0x3C_TeleportToHouse()                                               ;B4903B
     %AICMD0x10_End()                                           ;B4903C
 pAIScripting0x19_L002:
-    %AICMD0x1A($0058, $00C8, aAIScriptingData_L027, $02)                     ;B4903D
+    %AICMD0x1A_SpawnNpc($0058, $00C8, aAIScriptingData_L027, $02)                     ;B4903D
     %AICMD0x0C_WaitForScriptFlag($00)                                            ;B49045
     %AICMD0x1C_ShowDialog($01D3, $00)                          ;B49047
 pAIScripting0x19_L003:
     %AICMD0x13_Wait(1)                                         ;B4904B
     %AICMD0x12_Jump(pAIScripting0x19_L003)                                   ;B4904E
 pAIScripting0x19_L004:
-    %AICMD0x1A($00A8, $0098, aAIScriptingData_L027, $03)                     ;B49051
+    %AICMD0x1A_SpawnNpc($00A8, $0098, aAIScriptingData_L027, $03)                     ;B49051
     %AICMD0x0C_WaitForScriptFlag($01)                                            ;B49059
     %AICMD0x1C_ShowDialog($01D4, $00)                          ;B4905B
 pAIScripting0x19_L005:
     %AICMD0x13_Wait(1)                                         ;B4905F
     %AICMD0x12_Jump(pAIScripting0x19_L005)                                   ;B49062
 pAIScripting0x19_L006:
-    %AICMD0x1A($0068, $0068, aAIScriptingData_L027, $00)                     ;B49065
+    %AICMD0x1A_SpawnNpc($0068, $0068, aAIScriptingData_L027, $00)                     ;B49065
     %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4906D
-    %AICMD0x1B($025F, $00)                                     ;B4906F
+    %AICMD0x1B_SetSprite($025F, $00)                                     ;B4906F
     %AICMD0x1C_ShowDialog($01D5, $00)                          ;B49073
     %AICMD0x0B_SetScriptFlag($03)                                            ;B49077
-    %AICMD0x1B($025A, $00)                                     ;B49079
+    %AICMD0x1B_SetSprite($025A, $00)                                     ;B49079
 pAIScripting0x19_L007:
     %AICMD0x13_Wait(1)                                         ;B4907D
     %AICMD0x12_Jump(pAIScripting0x19_L007)                                   ;B49080
 pAIScripting0x19_L008:
-    %AICMD0x1A($0028, $0068, aAIScriptingData_L011, $02)                     ;B49083
+    %AICMD0x1A_SpawnNpc($0028, $0068, aAIScriptingData_L011, $02)                     ;B49083
     %AICMD0x0C_WaitForScriptFlag($03)                                            ;B4908B
-    %AICMD0x1B($0223, $01)                                     ;B4908D
-    %AICMD0x0D($01, $00, $22, $01)                             ;B49091
+    %AICMD0x1B_SetSprite($0223, $01)                                     ;B4908D
+    %AICMD0x0D_MoveObject($01, $00, $22, $01)                             ;B49091
     %AICMD0x1C_ShowDialog($01D6, $00)                          ;B49096
-    %AICMD0x1B($0225, $01)                                     ;B4909A
+    %AICMD0x1B_SetSprite($0225, $01)                                     ;B4909A
     %AICMD0x13_Wait(60)                                        ;B4909E
-    %AICMD0x1B($0223, $01)                                     ;B490A1
-    %AICMD0x0D($FF, $00, $04, $01)                             ;B490A5
+    %AICMD0x1B_SetSprite($0223, $01)                                     ;B490A1
+    %AICMD0x0D_MoveObject($FF, $00, $04, $01)                             ;B490A5
     %AICMD0x41_AddValue16(nLove_Maria, 50)                     ;B490AA
     %AICMD0x0B_SetScriptFlag($04)                                            ;B490B0
     %AICMD0x0C_WaitForScriptFlag($05)                                            ;B490B2
-    %AICMD0x1B($021F, $00)                                     ;B490B4
-    %AICMD0x0D($00, $01, $40, $01)                             ;B490B8
-    %AICMD0x1B($0223, $01)                                     ;B490BD
-    %AICMD0x0D($01, $00, $30, $01)                             ;B490C1
-    %AICMD0x1B($021F, $00)                                     ;B490C6
-    %AICMD0x0D($00, $01, $40, $01)                             ;B490CA
+    %AICMD0x1B_SetSprite($021F, $00)                                     ;B490B4
+    %AICMD0x0D_MoveObject($00, $01, $40, $01)                             ;B490B8
+    %AICMD0x1B_SetSprite($0223, $01)                                     ;B490BD
+    %AICMD0x0D_MoveObject($01, $00, $30, $01)                             ;B490C1
+    %AICMD0x1B_SetSprite($021F, $00)                                     ;B490C6
+    %AICMD0x0D_MoveObject($00, $01, $40, $01)                             ;B490CA
     %AICMD0x0B_SetScriptFlag($06)                                            ;B490CF
-    %AICMD0x37()                                               ;B490D1
+    %AICMD0x37_RemoveObject()                                               ;B490D1
     %AICMD0x10_End()                                           ;B490D2

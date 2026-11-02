@@ -20,10 +20,10 @@ pAIScripting0x21_Data01:
     %AICMD0x10_End()                                           ;B49F37
 ; Child script (slot $09) of Data01: actor. Spawns at (264,424).
 pAIScripting0x21_Data01_Actor09:
-    %AICMD0x1A($0108, $01A8, aAIScriptingData_L039, $03)                     ;B49F38
-    %AICMD0x1B($0281, $00)                                     ;B49F40
-    %AICMD0x0D($FF, $00, $70, $01)                             ;B49F44
-    %AICMD0x1B($0280, $00)                                     ;B49F49
+    %AICMD0x1A_SpawnNpc($0108, $01A8, aAIScriptingData_L039, $03)                     ;B49F38
+    %AICMD0x1B_SetSprite($0281, $00)                                     ;B49F40
+    %AICMD0x0D_MoveObject($FF, $00, $70, $01)                             ;B49F44
+    %AICMD0x1B_SetSprite($0280, $00)                                     ;B49F49
     %AICMD0x1D_ShowDialog($0330, $00)                          ;B49F4D
     %AICMD0x20_JumpIfChoice(0, pAIScripting0x21_L003)                        ;B49F51
     %AICMD0x20_JumpIfChoice(1, pAIScripting0x21_L004)                        ;B49F55
@@ -49,26 +49,26 @@ pAIScripting0x21_L006:
     %AICMD0x12_Jump(pAIScripting0x21_L008)                                   ;B49F8C
 pAIScripting0x21_L007:
     %AICMD0x0B_SetScriptFlag($03)                                            ;B49F8F
-    %AICMD0x1B($0281, $01)                                     ;B49F91
-    %AICMD0x0D($01, $00, $70, $01)                             ;B49F95
-    %AICMD0x37()                                               ;B49F9A
+    %AICMD0x1B_SetSprite($0281, $01)                                     ;B49F91
+    %AICMD0x0D_MoveObject($01, $00, $70, $01)                             ;B49F95
+    %AICMD0x37_RemoveObject()                                               ;B49F9A
     %AICMD0x11_EnableUserControl()                             ;B49F9B
     %AICMD0x10_End()                                           ;B49F9C
 pAIScripting0x21_L008:
-    %AICMD0x0D($FF, $00, $30, $01)                             ;B49F9D
+    %AICMD0x0D_MoveObject($FF, $00, $30, $01)                             ;B49F9D
     %AICMD0x25_RemoveActor($13)                                            ;B49FA2
     %AICMD0x13_Wait(10)                                        ;B49FA4
-    %AICMD0x1B($0284, $00)                                     ;B49FA7
-    %AICMD0x0D($01, $00, $A0, $01)                             ;B49FAB
-    %AICMD0x37()                                               ;B49FB0
+    %AICMD0x1B_SetSprite($0284, $00)                                     ;B49FA7
+    %AICMD0x0D_MoveObject($01, $00, $A0, $01)                             ;B49FAB
+    %AICMD0x37_RemoveObject()                                               ;B49FB0
     %AICMD0x11_EnableUserControl()                             ;B49FB1
     %AICMD0x10_End()                                           ;B49FB2
 ; Child script (slot $13) of Data01: actor. Spawns at (104,424).
 pAIScripting0x21_Data01_Actor13:
-    %AICMD0x1A($0068, $01A8, aAIScriptingData_L132, $00)                     ;B49FB3
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+    %AICMD0x1A_SpawnNpc($0068, $01A8, aAIScriptingData_L132, $00)                     ;B49FB3
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x21_Data01_Actor13_WaitTalk:
-    %AICMD0x1F(pAIScripting0x21_Data01_Actor13_Talk)                                        ;B49FBB
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x21_Data01_Actor13_Talk)                                        ;B49FBB
     %AICMD0x12_Jump(pAIScripting0x21_Data01_Actor13_WaitTalk)                                   ;B49FBE
 ; Conversation handler.
 pAIScripting0x21_Data01_Actor13_Talk:
@@ -76,7 +76,7 @@ pAIScripting0x21_Data01_Actor13_Talk:
     %AICMD0x23_OrWithIndexedValue(strcFlags.event4, $09)       ;B49FC2
     %AICMD0x09_StartScript($09, pAIScripting0x21_Data01_Actor09)                                   ;B49FC7
     %AICMD0x0C_WaitForScriptFlag($03)                                            ;B49FCB
-    %AICMD0x1B($0303, $00)                                     ;B49FCD
-    %AICMD0x0D($FF, $00, $3A, $01)                             ;B49FD1
-    %AICMD0x37()                                               ;B49FD6
+    %AICMD0x1B_SetSprite($0303, $00)                                     ;B49FCD
+    %AICMD0x0D_MoveObject($FF, $00, $3A, $01)                             ;B49FD1
+    %AICMD0x37_RemoveObject()                                               ;B49FD6
     %AICMD0x10_End()                                           ;B49FD7

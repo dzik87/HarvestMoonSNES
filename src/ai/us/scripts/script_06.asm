@@ -18,8 +18,8 @@ pAIScripting0x06_L002:
 pAIScripting0x06_L003:
     %AICMD0x12_Jump(pAIScripting0x06_L001)                                   ;B3D48B
 pAIScripting0x06_L004:
-    %AICMD0x1A($00A8, $0078, aAIScriptingData_L045, $00)                     ;B3D48E
-    %AICMD0x22($20, $18, $01, aAIScriptingData_L045, $10)                    ;B3D496
+    %AICMD0x1A_SpawnNpc($00A8, $0078, aAIScriptingData_L045, $00)                     ;B3D48E
+    %AICMD0x22_StartRandomWalk($20, $18, $01, aAIScriptingData_L045, $10)                    ;B3D496
 pAIScripting0x06_L005:
     %AICMD0x2D_JumpOnInteract(pAIScripting0x06_L008, pAIScripting0x06_L006)                               ;B3D49D
     %AICMD0x12_Jump(pAIScripting0x06_L005)                                   ;B3D4A2
@@ -38,7 +38,7 @@ pAIScripting0x06_L009:
     %AICMD0x1C_ShowDialog($0400, $00)                          ;B3D4C9
     %AICMD0x12_Jump(pAIScripting0x06_L005)                                   ;B3D4CD
 pAIScripting0x06_L010:
-    %AICMD0x1A($0188, $00A0, aAIScriptingData_L061, $00)                     ;B3D4D0
+    %AICMD0x1A_SpawnNpc($0188, $00A0, aAIScriptingData_L061, $00)                     ;B3D4D0
 pAIScripting0x06_L011:
     %AICMD0x2D_JumpOnInteract(pAIScripting0x06_L014, pAIScripting0x06_L012)                               ;B3D4D8
     %AICMD0x12_Jump(pAIScripting0x06_L011)                                   ;B3D4DD
@@ -57,7 +57,7 @@ pAIScripting0x06_L015:
     %AICMD0x1C_ShowDialog($0401, $00)                          ;B3D504
     %AICMD0x12_Jump(pAIScripting0x06_L011)                                   ;B3D508
 pAIScripting0x06_L016:
-    %AICMD0x1A($0048, $0198, aAIScriptingData_L012, $00)                     ;B3D50B
+    %AICMD0x1A_SpawnNpc($0048, $0198, aAIScriptingData_L012, $00)                     ;B3D50B
 pAIScripting0x06_L017:
     %AICMD0x4D_JumpIfBlueFeatherUsed(pAIScripting0x06_L018)                                        ;B3D513
     %AICMD0x2D_JumpOnInteract(pAIScripting0x06_L020, pAIScripting0x06_L022)                               ;B3D516
@@ -106,7 +106,7 @@ pAIScripting0x06_L026:
     %AICMD0x13_Wait(1)                                         ;B3D5A2
     %AICMD0x12_Jump(pAIScripting0x06_L026)                                   ;B3D5A5
 pAIScripting0x06_L027:
-    %AICMD0x1A($0068, $00E8, aAIScriptingData_L051, $00)                     ;B3D5A8
+    %AICMD0x1A_SpawnNpc($0068, $00E8, aAIScriptingData_L051, $00)                     ;B3D5A8
 pAIScripting0x06_L028:
     %AICMD0x2D_JumpOnInteract(pAIScripting0x06_L031, pAIScripting0x06_L029)                               ;B3D5B0
     %AICMD0x12_Jump(pAIScripting0x06_L028)                                   ;B3D5B5
@@ -141,7 +141,7 @@ pAIScripting0x06_L034:
 pAIScripting0x06_L035:
     %AICMD0x12_Jump(pAIScripting0x06_L033)                                   ;B3D603
 pAIScripting0x06_L036:
-    %AICMD0x1A($0028, $0168, aAIScriptingData_L064, $02)                     ;B3D606
+    %AICMD0x1A_SpawnNpc($0028, $0168, aAIScriptingData_L064, $02)                     ;B3D606
 pAIScripting0x06_L037:
     %AICMD0x2D_JumpOnInteract(pAIScripting0x06_L040, pAIScripting0x06_L038)                               ;B3D60E
     %AICMD0x12_Jump(pAIScripting0x06_L037)                                   ;B3D613
@@ -160,7 +160,7 @@ pAIScripting0x06_L041:
     %AICMD0x1C_ShowDialog($016B, $00)                          ;B3D63A
     %AICMD0x12_Jump(pAIScripting0x06_L037)                                   ;B3D63E
 pAIScripting0x06_L042:
-    %AICMD0x1A($0078, $0088, aAIScriptingData_L020, $00)                     ;B3D641
+    %AICMD0x1A_SpawnNpc($0078, $0088, aAIScriptingData_L020, $00)                     ;B3D641
     %AICMD0x12_Jump(pAIScripting0x06_L043)                                   ;B3D649
 pAIScripting0x06_L043:
     %AICMD0x4D_JumpIfBlueFeatherUsed(pAIScripting0x06_L044)                                        ;B3D64C
@@ -215,7 +215,7 @@ pAIScripting0x06_L053:
 pAIScripting0x06_L054:
     %AICMD0x12_Jump(pAIScripting0x06_L052)                                   ;B3D6E8
 pAIScripting0x06_L055:
-    %AICMD0x1A($0028, $0168, aAIScriptingData_L046, $00)                     ;B3D6EB
+    %AICMD0x1A_SpawnNpc($0028, $0168, aAIScriptingData_L046, $00)                     ;B3D6EB
 pAIScripting0x06_L056:
     %AICMD0x2D_JumpOnInteract(pAIScripting0x06_L059, pAIScripting0x06_L057)                               ;B3D6F3
     %AICMD0x12_Jump(pAIScripting0x06_L056)                                   ;B3D6F8
@@ -234,8 +234,8 @@ pAIScripting0x06_L060:
     %AICMD0x1C_ShowDialog($016F, $00)                          ;B3D71F
     %AICMD0x12_Jump(pAIScripting0x06_L056)                                   ;B3D723
 pAIScripting0x06_L061:
-    %AICMD0x1A($00C8, $0098, aAIScriptingData_L015, $00)                     ;B3D726
-    %AICMD0x22($20, $18, $01, aAIScriptingData_L016, $10)                    ;B3D72E
+    %AICMD0x1A_SpawnNpc($00C8, $0098, aAIScriptingData_L015, $00)                     ;B3D726
+    %AICMD0x22_StartRandomWalk($20, $18, $01, aAIScriptingData_L016, $10)                    ;B3D72E
     %AICMD0x12_Jump(pAIScripting0x06_L062)                                   ;B3D735
 pAIScripting0x06_L062:
     %AICMD0x4D_JumpIfBlueFeatherUsed(pAIScripting0x06_L063)                                        ;B3D738
@@ -295,12 +295,12 @@ pAIScripting0x06_L072:
 pAIScripting0x06_L073:
     %AICMD0x12_Jump(pAIScripting0x06_L071)                                   ;B3D7F4
 pAIScripting0x06_L074:
-    %AICMD0x1A($0087, $0097, aAIScriptingData_L091, $00)                     ;B3D7F7
+    %AICMD0x1A_SpawnNpc($0087, $0097, aAIScriptingData_L091, $00)                     ;B3D7F7
 pAIScripting0x06_L075:
     %AICMD0x13_Wait(1)                                         ;B3D7FF
     %AICMD0x12_Jump(pAIScripting0x06_L075)                                   ;B3D802
 pAIScripting0x06_L076:
-    %AICMD0x1A($0028, $0198, aAIScriptingData_L048, $02)                     ;B3D805
+    %AICMD0x1A_SpawnNpc($0028, $0198, aAIScriptingData_L048, $02)                     ;B3D805
 pAIScripting0x06_L077:
     %AICMD0x2D_JumpOnInteract(pAIScripting0x06_L080, pAIScripting0x06_L078)                               ;B3D80D
     %AICMD0x12_Jump(pAIScripting0x06_L077)                                   ;B3D812
@@ -318,7 +318,7 @@ pAIScripting0x06_L080:
 pAIScripting0x06_L081:
     %AICMD0x1C_ShowDialog($0402, $00)                          ;B3D839
     %AICMD0x12_Jump(pAIScripting0x06_L077)                                   ;B3D83D
-    %AICMD0x1A($0098, $0158, aAIScriptingData_L050, $00)                     ;B3D840
+    %AICMD0x1A_SpawnNpc($0098, $0158, aAIScriptingData_L050, $00)                     ;B3D840
 pAIScripting0x06_L082:
     %AICMD0x2D_JumpOnInteract(pAIScripting0x06_L084, pAIScripting0x06_L083)                               ;B3D848
     %AICMD0x12_Jump(pAIScripting0x06_L082)                                   ;B3D84D
@@ -329,7 +329,7 @@ pAIScripting0x06_L084:
     %AICMD0x1C_ShowDialog($0051, $00)                          ;B3D857
     %AICMD0x12_Jump(pAIScripting0x06_L082)                                   ;B3D85B
 pAIScripting0x06_L085:
-    %AICMD0x1A($0058, $01B8, aAIScriptingData_L022, $00)                     ;B3D85E
+    %AICMD0x1A_SpawnNpc($0058, $01B8, aAIScriptingData_L022, $00)                     ;B3D85E
 pAIScripting0x06_L086:
     %AICMD0x4D_JumpIfBlueFeatherUsed(pAIScripting0x06_L087)                                        ;B3D866
     %AICMD0x2D_JumpOnInteract(pAIScripting0x06_L094, pAIScripting0x06_L089)                               ;B3D869
@@ -385,7 +385,7 @@ pAIScripting0x06_L096:
     %AICMD0x13_Wait(1)                                         ;B3D917
     %AICMD0x12_Jump(pAIScripting0x06_L096)                                   ;B3D91A
 pAIScripting0x06_L097:
-    %AICMD0x1A($0088, $0050, aAIScriptingData_L042, $00)                     ;B3D91D
+    %AICMD0x1A_SpawnNpc($0088, $0050, aAIScriptingData_L042, $00)                     ;B3D91D
 pAIScripting0x06_L098:
     %AICMD0x2D_JumpOnInteract(pAIScripting0x06_L101, pAIScripting0x06_L099)                               ;B3D925
     %AICMD0x12_Jump(pAIScripting0x06_L098)                                   ;B3D92A
@@ -405,7 +405,7 @@ pAIScripting0x06_L102:
     %AICMD0x12_Jump(pAIScripting0x06_L098)                                   ;B3D955
 pAIScripting0x06_L103:
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $0A, pAIScripting0x06_L109)   ;B3D958
-    %AICMD0x1A($0038, $0098, aAIScriptingData_L056, $00)                     ;B3D95F
+    %AICMD0x1A_SpawnNpc($0038, $0098, aAIScriptingData_L056, $00)                     ;B3D95F
 pAIScripting0x06_L104:
     %AICMD0x2D_JumpOnInteract(pAIScripting0x06_L107, pAIScripting0x06_L105)                               ;B3D967
     %AICMD0x12_Jump(pAIScripting0x06_L104)                                   ;B3D96C
@@ -434,7 +434,7 @@ pAIScripting0x06_L110:
     %AICMD0x13_Wait(1)                                         ;B3D9A0
     %AICMD0x12_Jump(pAIScripting0x06_L110)                                   ;B3D9A3
 pAIScripting0x06_L111:
-    %AICMD0x1A($00E8, $009C, aAIScriptingData_L054, $03)                     ;B3D9A6
+    %AICMD0x1A_SpawnNpc($00E8, $009C, aAIScriptingData_L054, $03)                     ;B3D9A6
 pAIScripting0x06_L112:
     %AICMD0x2D_JumpOnInteract(pAIScripting0x06_L115, pAIScripting0x06_L113)                               ;B3D9AE
     %AICMD0x12_Jump(pAIScripting0x06_L112)                                   ;B3D9B3

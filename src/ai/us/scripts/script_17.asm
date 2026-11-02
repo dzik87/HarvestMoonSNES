@@ -11,9 +11,9 @@ pAIScripting0x17_Data01:
     %AICMD0x11_EnableUserControl()                             ;B48E31
     %AICMD0x10_End()                                           ;B48E32
 pAIScripting0x17_L001:
-    %AICMD0x1A($0068, $0218, aAIScriptingData_L088, $00)                     ;B48E33
-    %AICMD0x1B($0315, $00)                                     ;B48E3B
-    %AICMD0x0D($00, $03, $10, $01)                             ;B48E3F
+    %AICMD0x1A_SpawnNpc($0068, $0218, aAIScriptingData_L088, $00)                     ;B48E33
+    %AICMD0x1B_SetSprite($0315, $00)                                     ;B48E3B
+    %AICMD0x0D_MoveObject($00, $03, $10, $01)                             ;B48E3F
     %AICMD0x09_StartScript($02, pAIScripting0x17_L005)                                   ;B48E44
     %AICMD0x13_Wait(30)                                        ;B48E48
     %AICMD0x1D_ShowDialog($031E, $00)                          ;B48E4B
@@ -35,22 +35,22 @@ pAIScripting0x17_L003:
     %AICMD0x12_Jump(pAIScripting0x17_L004)                                   ;B48E86
 pAIScripting0x17_L004:
     %AICMD0x13_Wait(120)                                       ;B48E89
-    %AICMD0x1B($0316, $00)                                     ;B48E8C
+    %AICMD0x1B_SetSprite($0316, $00)                                     ;B48E8C
     %AICMD0x0B_SetScriptFlag($00)                                            ;B48E90
-    %AICMD0x37()                                               ;B48E92
+    %AICMD0x37_RemoveObject()                                               ;B48E92
     %AICMD0x10_End()                                           ;B48E93
 pAIScripting0x17_L005:
     %AICMD0x13_Wait(30)                                        ;B48E94
-    %AICMD0x1A($0068, $0238, aAIScriptingData_L138, $00)                     ;B48E97
-    %AICMD0x0D($00, $FF, $20, $04)                             ;B48E9F
-    %AICMD0x0D($00, $01, $30, $01)                             ;B48EA4
+    %AICMD0x1A_SpawnNpc($0068, $0238, aAIScriptingData_L138, $00)                     ;B48E97
+    %AICMD0x0D_MoveObject($00, $FF, $20, $04)                             ;B48E9F
+    %AICMD0x0D_MoveObject($00, $01, $30, $01)                             ;B48EA4
     %AICMD0x13_Wait(60)                                        ;B48EA9
-    %AICMD0x37()                                               ;B48EAC
+    %AICMD0x37_RemoveObject()                                               ;B48EAC
     %AICMD0x10_End()                                           ;B48EAD
 pAIScripting0x17_L006:
-    %AICMD0x1A($0068, $0238, aAIScriptingData_L137, $00)                     ;B48EAE
-    %AICMD0x0D($00, $FF, $20, $04)                             ;B48EB6
-    %AICMD0x0D($00, $01, $30, $01)                             ;B48EBB
+    %AICMD0x1A_SpawnNpc($0068, $0238, aAIScriptingData_L137, $00)                     ;B48EAE
+    %AICMD0x0D_MoveObject($00, $FF, $20, $04)                             ;B48EB6
+    %AICMD0x0D_MoveObject($00, $01, $30, $01)                             ;B48EBB
     %AICMD0x13_Wait(60)                                        ;B48EC0
-    %AICMD0x37()                                               ;B48EC3
+    %AICMD0x37_RemoveObject()                                               ;B48EC3
     %AICMD0x10_End()                                           ;B48EC4

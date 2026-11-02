@@ -20,7 +20,7 @@
 ; Started by: fAreaEvents_House (A=$0000)
 pAIScripting0x22_Data01:
  
-    %AICMD0x50()                                               ;B49FF8
+    %AICMD0x50_ReleaseCarried()                                               ;B49FF8
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B49FF9
     %AICMD0x08_EnableAIControl()                               ;B49FFB
     %AICMD0x09_StartScript($01, pAIScripting0x22_Data01_Actor01)                                   ;B49FFC
@@ -34,19 +34,19 @@ pAIScripting0x22_Data01:
     %AICMD0x10_End()                                           ;B4A011
 ; Child script (slot $01) of Data01: actor. Spawns at (168,120).
 pAIScripting0x22_Data01_Actor01:
-    %AICMD0x1A($00A8, $0078, aAIScriptingData_L071, $03)                     ;B4A012
+    %AICMD0x1A_SpawnNpc($00A8, $0078, aAIScriptingData_L071, $03)                     ;B4A012
     %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4A01A
     %AICMD0x13_Wait(90)                                        ;B4A01C
     %AICMD0x1C_ShowDialog($019A, $00)                          ;B4A01F
-    %AICMD0x1B($02E3, $00)                                     ;B4A023
-    %AICMD0x0D($00, $01, $50, $01)                             ;B4A027
-    %AICMD0x1B($02E7, $00)                                     ;B4A02C
-    %AICMD0x0D($FF, $00, $28, $01)                             ;B4A030
-    %AICMD0x1B($02E3, $00)                                     ;B4A035
-    %AICMD0x0D($00, $01, $30, $01)                             ;B4A039
+    %AICMD0x1B_SetSprite($02E3, $00)                                     ;B4A023
+    %AICMD0x0D_MoveObject($00, $01, $50, $01)                             ;B4A027
+    %AICMD0x1B_SetSprite($02E7, $00)                                     ;B4A02C
+    %AICMD0x0D_MoveObject($FF, $00, $28, $01)                             ;B4A030
+    %AICMD0x1B_SetSprite($02E3, $00)                                     ;B4A035
+    %AICMD0x0D_MoveObject($00, $01, $30, $01)                             ;B4A039
     %AICMD0x13_Wait(60)                                        ;B4A03E
     %AICMD0x0B_SetScriptFlag($01)                                            ;B4A041
-    %AICMD0x37()                                               ;B4A043
+    %AICMD0x37_RemoveObject()                                               ;B4A043
     %AICMD0x10_End()                                           ;B4A044
 
 
@@ -55,7 +55,7 @@ pAIScripting0x22_Data01_Actor01:
 ; Slot index: 1
 pAIScripting0x22_Data02:
  
-    %AICMD0x50()                                               ;B4A045
+    %AICMD0x50_ReleaseCarried()                                               ;B4A045
     %AICMD0x05_SetTransferPosition(136, 120)                   ;B4A046
     %AICMD0x07_SetPlayerDirection(!PDIR_LEFT)                  ;B4A04B
     %AICMD0x08_EnableAIControl()                               ;B4A04D
@@ -69,19 +69,19 @@ pAIScripting0x22_Data02:
     %AICMD0x10_End()                                           ;B4A05D
 ; Child script (slot $01) of Data02: actor. Spawns at (168,120).
 pAIScripting0x22_Data02_Actor01:
-    %AICMD0x1A($00A8, $0078, aAIScriptingData_L071, $03)                     ;B4A05E
+    %AICMD0x1A_SpawnNpc($00A8, $0078, aAIScriptingData_L071, $03)                     ;B4A05E
     %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4A066
     %AICMD0x13_Wait(90)                                        ;B4A068
     %AICMD0x1C_ShowDialog($019A, $00)                          ;B4A06B
-    %AICMD0x1B($02E3, $00)                                     ;B4A06F
-    %AICMD0x0D($00, $01, $50, $01)                             ;B4A073
-    %AICMD0x1B($02E7, $00)                                     ;B4A078
-    %AICMD0x0D($FF, $00, $28, $01)                             ;B4A07C
-    %AICMD0x1B($02E3, $00)                                     ;B4A081
-    %AICMD0x0D($00, $01, $30, $01)                             ;B4A085
+    %AICMD0x1B_SetSprite($02E3, $00)                                     ;B4A06F
+    %AICMD0x0D_MoveObject($00, $01, $50, $01)                             ;B4A073
+    %AICMD0x1B_SetSprite($02E7, $00)                                     ;B4A078
+    %AICMD0x0D_MoveObject($FF, $00, $28, $01)                             ;B4A07C
+    %AICMD0x1B_SetSprite($02E3, $00)                                     ;B4A081
+    %AICMD0x0D_MoveObject($00, $01, $30, $01)                             ;B4A085
     %AICMD0x13_Wait(60)                                        ;B4A08A
     %AICMD0x0B_SetScriptFlag($01)                                            ;B4A08D
-    %AICMD0x37()                                               ;B4A08F
+    %AICMD0x37_RemoveObject()                                               ;B4A08F
     %AICMD0x10_End()                                           ;B4A090
 
 
@@ -89,7 +89,7 @@ pAIScripting0x22_Data02_Actor01:
 ; Slot index: 2
 pAIScripting0x22_Data03:
  
-    %AICMD0x50()                                               ;B4A091
+    %AICMD0x50_ReleaseCarried()                                               ;B4A091
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $00, pAIScripting0x22_MajorHouse)   ;B4A092
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $01, pAIScripting0x22_MariaBedroom)   ;B4A099
     %AICMD0x14_JumpIfFlagSet(strcFlags.event4, $02, pAIScripting0x22_ToolShop)   ;B4A0A0
@@ -104,16 +104,16 @@ pAIScripting0x22_Data03:
 ; Started by: fAreaEvents_MajorHouse (A=$0000)
 pAIScripting0x22_MajorHouse:
  
-    %AICMD0x50()                                               ;B4A0B6
+    %AICMD0x50_ReleaseCarried()                                               ;B4A0B6
     %AICMD0x09_StartScript($01, pAIScripting0x22_MajorHouse_Actor01)                                   ;B4A0B7
     %AICMD0x38_WaitForFadeIn()                                               ;B4A0BB
     %AICMD0x10_End()                                           ;B4A0BC
 ; Child script (slot $01) of MajorHouse: actor. Spawns at (344,88).
 pAIScripting0x22_MajorHouse_Actor01:
-    %AICMD0x1A($0158, $0058, aAIScriptingData_L061, $00)                     ;B4A0BD
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+    %AICMD0x1A_SpawnNpc($0158, $0058, aAIScriptingData_L061, $00)                     ;B4A0BD
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x22_MajorHouse_Actor01_WaitTalk:
-    %AICMD0x1F(pAIScripting0x22_MajorHouse_Actor01_Talk_01D8)                                        ;B4A0C5
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x22_MajorHouse_Actor01_Talk_01D8)                                        ;B4A0C5
     %AICMD0x12_Jump(pAIScripting0x22_MajorHouse_Actor01_WaitTalk)                                   ;B4A0C8
 ; Conversation handler: dialog $01D8 "Ho-ho-ho,Maria is in the back room. She is m...".
 pAIScripting0x22_MajorHouse_Actor01_Talk_01D8:
@@ -127,7 +127,7 @@ pAIScripting0x22_MajorHouse_Actor01_Talk_01D8:
 ; Started by: fAreaEvents_MariaBedroom (A=$0000)
 pAIScripting0x22_MariaBedroom:
  
-    %AICMD0x50()                                               ;B4A0D2
+    %AICMD0x50_ReleaseCarried()                                               ;B4A0D2
     %AICMD0x08_EnableAIControl()                               ;B4A0D3
     %AICMD0x09_StartScript($01, pAIScripting0x22_MariaBedroom_Actor01_Maria)                                   ;B4A0D4
     %AICMD0x38_WaitForFadeIn()                                               ;B4A0D8
@@ -136,18 +136,18 @@ pAIScripting0x22_MariaBedroom:
     %AICMD0x0B_SetScriptFlag($00)                                            ;B4A0E1
     %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4A0E3
     %AICMD0x28_ClearBit(strcFlags.event6, $01)                          ;B4A0E5
-    %AICMD0x3C()                                               ;B4A0EA
+    %AICMD0x3C_TeleportToHouse()                                               ;B4A0EA
     %AICMD0x10_End()                                           ;B4A0EB
 ; Child script (slot $01) of MariaBedroom: Maria's actor. Spawns at (88,360).
 pAIScripting0x22_MariaBedroom_Actor01_Maria:
-    %AICMD0x1A($0058, $0168, aAIScriptingData_L071, $03)                     ;B4A0EC
+    %AICMD0x1A_SpawnNpc($0058, $0168, aAIScriptingData_L071, $03)                     ;B4A0EC
     %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4A0F4
     %AICMD0x13_Wait(60)                                        ;B4A0F6
-    %AICMD0x1B($02E7, $01)                                     ;B4A0F9
-    %AICMD0x0D($01, $00, $20, $01)                             ;B4A0FD
+    %AICMD0x1B_SetSprite($02E7, $01)                                     ;B4A0F9
+    %AICMD0x0D_MoveObject($01, $00, $20, $01)                             ;B4A0FD
     %AICMD0x1C_ShowDialog($019B, $00)                          ;B4A102
     %AICMD0x41_AddValue16(nLove_Maria, 100)                    ;B4A106
-    %AICMD0x1B($02F0, $01)                                     ;B4A10C
+    %AICMD0x1B_SetSprite($02F0, $01)                                     ;B4A10C
     %AICMD0x13_Wait(60)                                        ;B4A110
     %AICMD0x0B_SetScriptFlag($01)                                            ;B4A113
     %AICMD0x12_Jump(pAIScripting0x22_MariaBedroom_Actor01_Maria_Idle)                                   ;B4A115
@@ -163,17 +163,17 @@ pAIScripting0x22_MariaBedroom_Actor01_Maria_Idle:
 ; Started by: fAreaEvents_Toolshop (A=$0000)
 pAIScripting0x22_ToolShop:
  
-    %AICMD0x50()                                               ;B4A11E
+    %AICMD0x50_ReleaseCarried()                                               ;B4A11E
     %AICMD0x09_StartScript($01, pAIScripting0x22_ToolShop_Actor01)                                   ;B4A11F
     %AICMD0x38_WaitForFadeIn()                                               ;B4A123
     %AICMD0x10_End()                                           ;B4A124
 ; Child script (slot $01) of ToolShop: actor. Spawns at (40,356).
 pAIScripting0x22_ToolShop_Actor01:
-    %AICMD0x1A($0028, $0164, aAIScriptingData_L047, $00)                     ;B4A125
-    %AICMD0x22($01, $01, $01, aAIScriptingData_L047, $01)                    ;B4A12D
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+    %AICMD0x1A_SpawnNpc($0028, $0164, aAIScriptingData_L047, $00)                     ;B4A125
+    %AICMD0x22_StartRandomWalk($01, $01, $01, aAIScriptingData_L047, $01)                    ;B4A12D
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x22_ToolShop_Actor01_WaitTalk:
-    %AICMD0x1F(pAIScripting0x22_ToolShop_Actor01_Talk_01DF)                                        ;B4A134
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x22_ToolShop_Actor01_Talk_01DF)                                        ;B4A134
     %AICMD0x12_Jump(pAIScripting0x22_ToolShop_Actor01_WaitTalk)                                   ;B4A137
 ; Conversation handler: dialog $01DF "She came back home in such ahurry,went into...".
 pAIScripting0x22_ToolShop_Actor01_Talk_01DF:
@@ -187,7 +187,7 @@ pAIScripting0x22_ToolShop_Actor01_Talk_01DF:
 ; Started by: fAreaEvents_AnnBedroom (A=$0000)
 pAIScripting0x22_AnnBedroom:
  
-    %AICMD0x50()                                               ;B4A141
+    %AICMD0x50_ReleaseCarried()                                               ;B4A141
     %AICMD0x08_EnableAIControl()                               ;B4A142
     %AICMD0x09_StartScript($01, pAIScripting0x22_AnnBedroom_Actor01_Ann)                                   ;B4A143
     %AICMD0x38_WaitForFadeIn()                                               ;B4A147
@@ -205,24 +205,24 @@ pAIScripting0x22_AnnBedroom:
     %AICMD0x39_WalkForTime(!AIINPUT_LEFT, 64)                  ;B4A16B
     %AICMD0x0C_WaitForScriptFlag($03)                                            ;B4A16F
     %AICMD0x28_ClearBit(strcFlags.event6, $01)                          ;B4A171
-    %AICMD0x3C()                                               ;B4A176
+    %AICMD0x3C_TeleportToHouse()                                               ;B4A176
     %AICMD0x10_End()                                           ;B4A177
 ; Child script (slot $01) of AnnBedroom: Ann's actor. Spawns at (152,136).
 pAIScripting0x22_AnnBedroom_Actor01_Ann:
-    %AICMD0x1A($0098, $0088, aAIScriptingData_L071, $01)                     ;B4A178
+    %AICMD0x1A_SpawnNpc($0098, $0088, aAIScriptingData_L071, $01)                     ;B4A178
     %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4A180
     %AICMD0x13_Wait(30)                                        ;B4A182
-    %AICMD0x1B($02E7, $01)                                     ;B4A185
+    %AICMD0x1B_SetSprite($02E7, $01)                                     ;B4A185
     %AICMD0x0B_SetScriptFlag($01)                                            ;B4A189
     %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4A18B
     %AICMD0x13_Wait(30)                                        ;B4A18D
-    %AICMD0x1B($02E7, $00)                                     ;B4A190
+    %AICMD0x1B_SetSprite($02E7, $00)                                     ;B4A190
     %AICMD0x13_Wait(30)                                        ;B4A194
     %AICMD0x1C_ShowDialog($019C, $00)                          ;B4A197
     %AICMD0x41_AddValue16(nLove_Ann, 100)                      ;B4A19B
-    %AICMD0x1B($02E7, $01)                                     ;B4A1A1
-    %AICMD0x0D($01, $00, $04, $01)                             ;B4A1A5
-    %AICMD0x1B($02F0, $01)                                     ;B4A1AA
+    %AICMD0x1B_SetSprite($02E7, $01)                                     ;B4A1A1
+    %AICMD0x0D_MoveObject($01, $00, $04, $01)                             ;B4A1A5
+    %AICMD0x1B_SetSprite($02F0, $01)                                     ;B4A1AA
     %AICMD0x13_Wait(60)                                        ;B4A1AE
     %AICMD0x0B_SetScriptFlag($03)                                            ;B4A1B1
     %AICMD0x12_Jump(pAIScripting0x22_AnnBedroom_Actor01_Ann_Idle)                                   ;B4A1B3
@@ -238,16 +238,16 @@ pAIScripting0x22_AnnBedroom_Actor01_Ann_Idle:
 ; Started by: fAreaEvents_Florist (A=$0000)
 pAIScripting0x22_Florist:
  
-    %AICMD0x50()                                               ;B4A1BC
+    %AICMD0x50_ReleaseCarried()                                               ;B4A1BC
     %AICMD0x09_StartScript($01, pAIScripting0x22_Florist_Actor01)                                   ;B4A1BD
     %AICMD0x38_WaitForFadeIn()                                               ;B4A1C1
     %AICMD0x10_End()                                           ;B4A1C2
 ; Child script (slot $01) of Florist: actor. Spawns at (40,360).
 pAIScripting0x22_Florist_Actor01:
-    %AICMD0x1A($0028, $0168, aAIScriptingData_L064, $00)                     ;B4A1C3
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+    %AICMD0x1A_SpawnNpc($0028, $0168, aAIScriptingData_L064, $00)                     ;B4A1C3
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x22_Florist_Actor01_WaitTalk:
-    %AICMD0x1F(pAIScripting0x22_Florist_Actor01_Talk_01E9)                                        ;B4A1CB
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x22_Florist_Actor01_Talk_01E9)                                        ;B4A1CB
     %AICMD0x12_Jump(pAIScripting0x22_Florist_Actor01_WaitTalk)                                   ;B4A1CE
 ; Conversation handler: dialog $01E9 "Heh-heh,Nina always wants to make up to ever...".
 pAIScripting0x22_Florist_Actor01_Talk_01E9:
@@ -261,7 +261,7 @@ pAIScripting0x22_Florist_Actor01_Talk_01E9:
 ; Started by: fAreaEvents_NinaBedroom (A=$0000)
 pAIScripting0x22_Data04:
  
-    %AICMD0x50()                                               ;B4A1D8
+    %AICMD0x50_ReleaseCarried()                                               ;B4A1D8
     %AICMD0x08_EnableAIControl()                               ;B4A1D9
     %AICMD0x09_StartScript($01, pAIScripting0x22_Data04_Actor01_Nina)                                   ;B4A1DA
     %AICMD0x38_WaitForFadeIn()                                               ;B4A1DE
@@ -279,36 +279,36 @@ pAIScripting0x22_Data04:
     %AICMD0x0C_WaitForScriptFlag($05)                                            ;B4A1FF
     %AICMD0x07_SetPlayerDirection(!PDIR_DOWN)                  ;B4A201
     %AICMD0x0C_WaitForScriptFlag($06)                                            ;B4A203
-    %AICMD0x19($0024, $00)                                     ;B4A205
+    %AICMD0x19_SetPlayerSprite($0024, $00)                                     ;B4A205
     %AICMD0x13_Wait(60)                                        ;B4A209
     %AICMD0x1C_ShowDialog($019D, $00)                          ;B4A20C
     %AICMD0x28_ClearBit(strcFlags.event6, $01)                          ;B4A210
-    %AICMD0x3C()                                               ;B4A215
+    %AICMD0x3C_TeleportToHouse()                                               ;B4A215
     %AICMD0x10_End()                                           ;B4A216
 ; Child script (slot $01) of Data04: Nina's actor. Spawns at (120,136).
 pAIScripting0x22_Data04_Actor01_Nina:
-    %AICMD0x1A($0078, $0088, aAIScriptingData_L071, $01)                     ;B4A217
+    %AICMD0x1A_SpawnNpc($0078, $0088, aAIScriptingData_L071, $01)                     ;B4A217
     %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4A21F
     %AICMD0x13_Wait(30)                                        ;B4A221
-    %AICMD0x1B($02E5, $00)                                     ;B4A224
-    %AICMD0x0D($00, $FF, $20, $01)                             ;B4A228
+    %AICMD0x1B_SetSprite($02E5, $00)                                     ;B4A224
+    %AICMD0x0D_MoveObject($00, $FF, $20, $01)                             ;B4A228
     %AICMD0x0B_SetScriptFlag($01)                                            ;B4A22D
     %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4A22F
     %AICMD0x13_Wait(30)                                        ;B4A231
-    %AICMD0x1B($02E7, $01)                                     ;B4A234
-    %AICMD0x0D($01, $00, $20, $01)                             ;B4A238
+    %AICMD0x1B_SetSprite($02E7, $01)                                     ;B4A234
+    %AICMD0x0D_MoveObject($01, $00, $20, $01)                             ;B4A238
     %AICMD0x0B_SetScriptFlag($03)                                            ;B4A23D
     %AICMD0x0C_WaitForScriptFlag($04)                                            ;B4A23F
     %AICMD0x13_Wait(30)                                        ;B4A241
-    %AICMD0x1B($02E3, $00)                                     ;B4A244
-    %AICMD0x0D($00, $01, $40, $01)                             ;B4A248
+    %AICMD0x1B_SetSprite($02E3, $00)                                     ;B4A244
+    %AICMD0x0D_MoveObject($00, $01, $40, $01)                             ;B4A248
     %AICMD0x0B_SetScriptFlag($05)                                            ;B4A24D
     %AICMD0x13_Wait(60)                                        ;B4A24F
-    %AICMD0x1B($02E7, $00)                                     ;B4A252
-    %AICMD0x0D($FF, $00, $10, $01)                             ;B4A256
-    %AICMD0x1B($02E5, $00)                                     ;B4A25B
+    %AICMD0x1B_SetSprite($02E7, $00)                                     ;B4A252
+    %AICMD0x0D_MoveObject($FF, $00, $10, $01)                             ;B4A256
+    %AICMD0x1B_SetSprite($02E5, $00)                                     ;B4A25B
     %AICMD0x13_Wait(60)                                        ;B4A25F
-    %AICMD0x0D($00, $FE, $1A, $01)                             ;B4A262
+    %AICMD0x0D_MoveObject($00, $FE, $1A, $01)                             ;B4A262
     %AICMD0x0B_SetScriptFlag($06)                                            ;B4A267
     %AICMD0x41_AddValue16(nLove_Nina, 100)                     ;B4A269
     %AICMD0x12_Jump(pAIScripting0x22_Data04_Actor01_Nina_Idle)                                   ;B4A26F
@@ -324,17 +324,17 @@ pAIScripting0x22_Data04_Actor01_Nina_Idle:
 ; Started by: fAreaEvents_Restaurant (A=$0000)
 pAIScripting0x22_Data05:
  
-    %AICMD0x50()                                               ;B4A278
+    %AICMD0x50_ReleaseCarried()                                               ;B4A278
     %AICMD0x09_StartScript($01, pAIScripting0x22_Data05_Actor01)                                   ;B4A279
     %AICMD0x38_WaitForFadeIn()                                               ;B4A27D
     %AICMD0x10_End()                                           ;B4A27E
 ; Child script (slot $01) of Data05: actor. Spawns at (40,408).
 pAIScripting0x22_Data05_Actor01:
-    %AICMD0x1A($0028, $0198, aAIScriptingData_L048, $00)                     ;B4A27F
+    %AICMD0x1A_SpawnNpc($0028, $0198, aAIScriptingData_L048, $00)                     ;B4A27F
     %AICMD0x12_Jump(pAIScripting0x22_Data05_Actor01_WaitTalk)                                   ;B4A287
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x22_Data05_Actor01_WaitTalk:
-    %AICMD0x1F(pAIScripting0x22_Data05_Actor01_Talk_01B1)                                        ;B4A28A
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x22_Data05_Actor01_Talk_01B1)                                        ;B4A28A
     %AICMD0x12_Jump(pAIScripting0x22_Data05_Actor01_WaitTalk)                                   ;B4A28D
 ; Conversation handler: dialog $01B1 "Don't be walking about.".
 pAIScripting0x22_Data05_Actor01_Talk_01B1:
@@ -348,7 +348,7 @@ pAIScripting0x22_Data05_Actor01_Talk_01B1:
 ; Started by: fAreaEvents_EllenBedroom (A=$0000)
 pAIScripting0x22_Data06:
  
-    %AICMD0x50()                                               ;B4A297
+    %AICMD0x50_ReleaseCarried()                                               ;B4A297
     %AICMD0x08_EnableAIControl()                               ;B4A298
     %AICMD0x09_StartScript($01, pAIScripting0x22_Data06_Actor01_Ellen)                                   ;B4A299
     %AICMD0x38_WaitForFadeIn()                                               ;B4A29D
@@ -364,22 +364,22 @@ pAIScripting0x22_Data06:
     %AICMD0x0C_WaitForScriptFlag($03)                                            ;B4A2B9
     %AICMD0x13_Wait(60)                                        ;B4A2BB
     %AICMD0x28_ClearBit(strcFlags.event6, $01)                          ;B4A2BE
-    %AICMD0x3C()                                               ;B4A2C3
+    %AICMD0x3C_TeleportToHouse()                                               ;B4A2C3
     %AICMD0x10_End()                                           ;B4A2C4
 ; Child script (slot $01) of Data06: Ellen's actor. Spawns at (88,136).
 pAIScripting0x22_Data06_Actor01_Ellen:
-    %AICMD0x1A($0058, $0088, aAIScriptingData_L071, $00)                     ;B4A2C5
+    %AICMD0x1A_SpawnNpc($0058, $0088, aAIScriptingData_L071, $00)                     ;B4A2C5
     %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4A2CD
-    %AICMD0x1B($02E5, $00)                                     ;B4A2CF
-    %AICMD0x0D($00, $FF, $30, $01)                             ;B4A2D3
-    %AICMD0x1B($02E4, $00)                                     ;B4A2D8
+    %AICMD0x1B_SetSprite($02E5, $00)                                     ;B4A2CF
+    %AICMD0x0D_MoveObject($00, $FF, $30, $01)                             ;B4A2D3
+    %AICMD0x1B_SetSprite($02E4, $00)                                     ;B4A2D8
     %AICMD0x0B_SetScriptFlag($01)                                            ;B4A2DC
     %AICMD0x0C_WaitForScriptFlag($02)                                            ;B4A2DE
     %AICMD0x13_Wait(10)                                        ;B4A2E0
     %AICMD0x1C_ShowDialog($019E, $00)                          ;B4A2E3
     %AICMD0x41_AddValue16(nLove_Ellen, 100)                    ;B4A2E7
-    %AICMD0x1B($02E3, $00)                                     ;B4A2ED
-    %AICMD0x0D($00, $01, $08, $02)                             ;B4A2F1
+    %AICMD0x1B_SetSprite($02E3, $00)                                     ;B4A2ED
+    %AICMD0x0D_MoveObject($00, $01, $08, $02)                             ;B4A2F1
     %AICMD0x0B_SetScriptFlag($03)                                            ;B4A2F6
     %AICMD0x12_Jump(pAIScripting0x22_Data06_Actor01_Ellen_Idle)                                   ;B4A2F8
 ; Idle loop: wait one frame at a time.
@@ -394,21 +394,21 @@ pAIScripting0x22_Data06_Actor01_Ellen_Idle:
 ; Started by: fAreaEvents_Bar (A=$0000)
 pAIScripting0x22_Data07:
  
-    %AICMD0x50()                                               ;B4A301
+    %AICMD0x50_ReleaseCarried()                                               ;B4A301
     %AICMD0x09_StartScript($01, pAIScripting0x22_Data07_Actor01)                                   ;B4A302
     %AICMD0x38_WaitForFadeIn()                                               ;B4A306
     %AICMD0x10_End()                                           ;B4A307
 ; Child script (slot $01) of Data07: actor. Spawns at (40,408).
 pAIScripting0x22_Data07_Actor01:
-    %AICMD0x1A($0028, $0198, aAIScriptingData_L041, $00)                     ;B4A308
-; Idle until the player talks to the NPC (AICMD0x1F polls A near the actor), then jump to the conversation.
+    %AICMD0x1A_SpawnNpc($0028, $0198, aAIScriptingData_L041, $00)                     ;B4A308
+; Idle until the player talks to the NPC (AICMD0x1F_JumpIfTalkedTo polls A near the actor), then jump to the conversation.
 pAIScripting0x22_Data07_Actor01_WaitTalk:
-    %AICMD0x1F(pAIScripting0x22_Data07_Actor01_Talk_01EA)                                        ;B4A310
+    %AICMD0x1F_JumpIfTalkedTo(pAIScripting0x22_Data07_Actor01_Talk_01EA)                                        ;B4A310
     %AICMD0x12_Jump(pAIScripting0x22_Data07_Actor01_WaitTalk)                                   ;B4A313
 ; Conversation handler: dialog $01EA "What have you done this time? They all are p...".
 pAIScripting0x22_Data07_Actor01_Talk_01EA:
     %AICMD0x1C_ShowDialog($01EA, $00)                          ;B4A316
-    %AICMD0x1B($0285, $00)                                     ;B4A31A
+    %AICMD0x1B_SetSprite($0285, $00)                                     ;B4A31A
     %AICMD0x12_Jump(pAIScripting0x22_Data07_Actor01_WaitTalk)                                   ;B4A31E
 
 
@@ -417,7 +417,7 @@ pAIScripting0x22_Data07_Actor01_Talk_01EA:
 ; Slot index: 12
 ; Started by: fAreaEvents_EveBedroom (A=$0000)
 pAIScripting0x22_Data08:
-    %AICMD0x50()                                               ;B4A321
+    %AICMD0x50_ReleaseCarried()                                               ;B4A321
     %AICMD0x08_EnableAIControl()                               ;B4A322
     %AICMD0x09_StartScript($01, pAIScripting0x22_Data08_Actor01_Eve)                                   ;B4A323
     %AICMD0x38_WaitForFadeIn()                                               ;B4A327
@@ -431,20 +431,20 @@ pAIScripting0x22_Data08:
     %AICMD0x0C_WaitForScriptFlag($01)                                            ;B4A33C
     %AICMD0x13_Wait(90)                                        ;B4A33E
     %AICMD0x28_ClearBit(strcFlags.event6, $01)                          ;B4A341
-    %AICMD0x3C()                                               ;B4A346
+    %AICMD0x3C_TeleportToHouse()                                               ;B4A346
     %AICMD0x10_End()                                           ;B4A347
 ; Child script (slot $01) of Data08: Eve's actor. Spawns at (32,78).
 pAIScripting0x22_Data08_Actor01_Eve:
-    %AICMD0x1A($0020, $004E, aAIScriptingData_L071, $03)                     ;B4A348
+    %AICMD0x1A_SpawnNpc($0020, $004E, aAIScriptingData_L071, $03)                     ;B4A348
     %AICMD0x0C_WaitForScriptFlag($00)                                            ;B4A350
     %AICMD0x13_Wait(30)                                        ;B4A352
-    %AICMD0x1B($02E7, $01)                                     ;B4A355
-    %AICMD0x0D($01, $00, $18, $01)                             ;B4A359
+    %AICMD0x1B_SetSprite($02E7, $01)                                     ;B4A355
+    %AICMD0x0D_MoveObject($01, $00, $18, $01)                             ;B4A359
     %AICMD0x1C_ShowDialog($019F, $00)                          ;B4A35E
     %AICMD0x41_AddValue16(nLove_Eve, 100)                      ;B4A362
     %AICMD0x13_Wait(10)                                        ;B4A368
-    %AICMD0x0D($02, $00, $01, $01)                             ;B4A36B
-    %AICMD0x1B($02F0, $01)                                     ;B4A370
+    %AICMD0x0D_MoveObject($02, $00, $01, $01)                             ;B4A36B
+    %AICMD0x1B_SetSprite($02F0, $01)                                     ;B4A370
     %AICMD0x0B_SetScriptFlag($01)                                            ;B4A374
     %AICMD0x12_Jump(pAIScripting0x22_Data08_Actor01_Eve_Idle)                                   ;B4A376
 ; Idle loop: wait one frame at a time.
