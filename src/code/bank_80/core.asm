@@ -18,7 +18,7 @@
 ; @details  Sets the load area to !AREA_HOUSE1, starts its music, fades out and clears VRAM/CGRAM, runs the first-night initialisation, then loads the
 ;           destination area $15 (house, player position $0088/$0078) and resets the BG3 vertical scroll to $0100. If event3 flag $0001 is set the
 ;           player starts the day eating a meal: a random meal id 0..2 is stored in strcPlayerData.eatFood and !PFLAGS_EATINGMEAL is set.
-; @modifies strcMap.loadAreaId, nDestinationAreaId, strcBGScrool.BG3VerOffs, strcDialogDisplay.mapDestX, strcDialogDisplay.mapDestY, strcDialogDisplay.mapUnk19A, strcPlayerData.eatFood
+; @modifies strcMap.loadAreaId, nDestinationAreaId, strcBGScrool.BG3VerOffs, strcDialogDisplay.mapDestX, strcDialogDisplay.mapDestY, strcDialogDisplay.inputMode, strcPlayerData.eatFood
 ; @mode     M8X16 -> M16 (never returns, continues in fCore_MainLoop)
 ; @calls    fAudioEngine_MapMusicHandler, fAudio_FadeOutOnTrackChangeSlow, fCore_ScreenFadeout, fCore_SetForceBlank, fCore_ZeroVRAM, fCore_ZeroCGRAM, fGameEngine_FirstNight, fCore_FindBestLove, fMap_ResetAndLoadDestinationArea, fCore_GetRandomNumber
 ; @callers  fLoadAndStartGame, fStartNewGame
@@ -126,7 +126,7 @@ fCore_MainLoop:
 ; @brief    Apply the name typed on the name entry screen to the player, then re-enter the main loop.
 ; @details  Fades out and blanks the screen, copies the 4 character name from strcNames.sTemp (the name entry result) both as the short name (strcNames.sPlayer, 1 byte per char) and as the word form (strcNames.wPlayer, 1 char per word)
 ;           and requests a forced teleport (!AFLAGS_FORCETELEPORT) so the map is reloaded; BG3 vertical scroll is reset to $0100.
-; @modifies strcNames.sPlayer, strcNames.wPlayer, strcDialogDisplay.mapFlags, strcBGScrool.BG3VerOffs, strcDialogDisplay.mapUnk19A
+; @modifies strcNames.sPlayer, strcNames.wPlayer, strcDialogDisplay.mapFlags, strcBGScrool.BG3VerOffs, strcDialogDisplay.inputMode
 ; @mode     M8X16 -> M16 (jumps to fCore_MainLoop)
 ; @calls    fCore_ScreenFadeout, fCore_SetForceBlank, fCore_ZeroVRAM, fCore_ZeroCGRAM, fCore_MainLoop
 ; @callers  fScreen_NameInput (via the JML table in bank $82)
@@ -182,7 +182,7 @@ fCore_SetPlayerName:
 ; @brief    Apply the name typed on the name entry screen to a cow that was just bought, then re-enter the main loop.
 ; @details  Fades out and blanks the screen, copies the 4 character name from strcNames.sTemp (the name entry result) into the new cow record created by fGameEngine_AddCow(0) (bytes 12..15 of the record pointed to by ptrTemp0x72)
 ;           and requests a forced teleport (!AFLAGS_FORCETELEPORT) so the map is reloaded; BG3 vertical scroll is reset to $0100.
-; @modifies strcDialogDisplay.mapFlags, strcBGScrool.BG3VerOffs, strcDialogDisplay.mapUnk19A
+; @modifies strcDialogDisplay.mapFlags, strcBGScrool.BG3VerOffs, strcDialogDisplay.inputMode
 ; @mode     M8X16 -> M16 (jumps to fCore_MainLoop)
 ; @calls    fCore_ScreenFadeout, fCore_SetForceBlank, fCore_ZeroVRAM, fCore_ZeroCGRAM, fCore_MainLoop
 ; @callers  fScreen_NameInput (via the JML table in bank $82)
@@ -235,7 +235,7 @@ fCore_SetBoughtCowName:
 ; @brief    Apply the name typed on the name entry screen to a calf that was just born, then re-enter the main loop.
 ; @details  Fades out and blanks the screen, copies the 4 character name from strcNames.sTemp (the name entry result) into the new cow record created by fGameEngine_AddCow(1) (bytes 12..15 of the record pointed to by ptrTemp0x72)
 ;           and requests a forced teleport (!AFLAGS_FORCETELEPORT) so the map is reloaded; BG3 vertical scroll is reset to $0100.
-; @modifies strcDialogDisplay.mapFlags, strcBGScrool.BG3VerOffs, strcDialogDisplay.mapUnk19A
+; @modifies strcDialogDisplay.mapFlags, strcBGScrool.BG3VerOffs, strcDialogDisplay.inputMode
 ; @mode     M8X16 -> M16 (jumps to fCore_MainLoop)
 ; @calls    fCore_ScreenFadeout, fCore_SetForceBlank, fCore_ZeroVRAM, fCore_ZeroCGRAM, fCore_MainLoop
 ; @callers  fScreen_NameInput (via the JML table in bank $82)
@@ -291,7 +291,7 @@ fCore_SetBornCowName:
 ; @brief    Apply the name typed on the name entry screen to the dog, then re-enter the main loop.
 ; @details  Fades out and blanks the screen, copies the 4 character name from strcNames.sTemp (the name entry result) as strcNames.sDog and strcNames.wDog
 ;           and requests a forced teleport (!AFLAGS_FORCETELEPORT) so the map is reloaded; BG3 vertical scroll is reset to $0100.
-; @modifies strcNames.sDog, strcNames.wDog, strcDialogDisplay.mapFlags, strcBGScrool.BG3VerOffs, strcDialogDisplay.mapUnk19A
+; @modifies strcNames.sDog, strcNames.wDog, strcDialogDisplay.mapFlags, strcBGScrool.BG3VerOffs, strcDialogDisplay.inputMode
 ; @mode     M8X16 -> M16 (jumps to fCore_MainLoop)
 ; @calls    fCore_ScreenFadeout, fCore_SetForceBlank, fCore_ZeroVRAM, fCore_ZeroCGRAM, fCore_MainLoop
 ; @callers  fScreen_NameInput (via the JML table in bank $82)
@@ -347,7 +347,7 @@ fCore_SetDogName:
 ; @brief    Apply the name typed on the name entry screen to the horse, then re-enter the main loop.
 ; @details  Fades out and blanks the screen, copies the 4 character name from strcNames.sTemp (the name entry result) as strcNames.sHorse and strcNames.wHorse
 ;           and requests a forced teleport (!AFLAGS_FORCETELEPORT) so the map is reloaded; BG3 vertical scroll is reset to $0100.
-; @modifies strcNames.sHorse, strcNames.wHorse, strcDialogDisplay.mapFlags, strcBGScrool.BG3VerOffs, strcDialogDisplay.mapUnk19A
+; @modifies strcNames.sHorse, strcNames.wHorse, strcDialogDisplay.mapFlags, strcBGScrool.BG3VerOffs, strcDialogDisplay.inputMode
 ; @mode     M8X16 -> M16 (jumps to fCore_MainLoop)
 ; @calls    fCore_ScreenFadeout, fCore_SetForceBlank, fCore_ZeroVRAM, fCore_ZeroCGRAM, fCore_MainLoop
 ; @callers  fScreen_NameInput (via the JML table in bank $82)
@@ -403,7 +403,7 @@ fCore_SetHorseName:
 ; @brief    Apply the name typed on the name entry screen to the first child, then re-enter the main loop.
 ; @details  Fades out and blanks the screen, copies the 4 character name from strcNames.sTemp (the name entry result) to sFirstChildNameShort (WRAM $7F1F3D) and the word form strcNames.wFirstChild
 ;           and requests a forced teleport (!AFLAGS_FORCETELEPORT) so the map is reloaded; BG3 vertical scroll is reset to $0100.
-; @modifies sFirstChildNameShort, strcNames.wFirstChild, strcDialogDisplay.mapFlags, strcBGScrool.BG3VerOffs, strcDialogDisplay.mapUnk19A
+; @modifies sFirstChildNameShort, strcNames.wFirstChild, strcDialogDisplay.mapFlags, strcBGScrool.BG3VerOffs, strcDialogDisplay.inputMode
 ; @mode     M8X16 -> M16 (jumps to fCore_MainLoop)
 ; @calls    fCore_ScreenFadeout, fCore_SetForceBlank, fCore_ZeroVRAM, fCore_ZeroCGRAM, fCore_MainLoop
 ; @callers  fScreen_NameInput (via the JML table in bank $82)
@@ -459,7 +459,7 @@ fCore_SetFirstChildName:
 ; @brief    Apply the name typed on the name entry screen to the second child, then re-enter the main loop.
 ; @details  Fades out and blanks the screen, copies the 4 character name from strcNames.sTemp (the name entry result) to sSecondChildNameShort (WRAM $7F1F41) and the word form strcNames.wSecondChild
 ;           and requests a forced teleport (!AFLAGS_FORCETELEPORT) so the map is reloaded; BG3 vertical scroll is reset to $0100.
-; @modifies sSecondChildNameShort, strcNames.wSecondChild, strcDialogDisplay.mapFlags, strcBGScrool.BG3VerOffs, strcDialogDisplay.mapUnk19A
+; @modifies sSecondChildNameShort, strcNames.wSecondChild, strcDialogDisplay.mapFlags, strcBGScrool.BG3VerOffs, strcDialogDisplay.inputMode
 ; @mode     M8X16 -> M16 (jumps to fCore_MainLoop)
 ; @calls    fCore_ScreenFadeout, fCore_SetForceBlank, fCore_ZeroVRAM, fCore_ZeroCGRAM, fCore_MainLoop
 ; @callers  fScreen_NameInput (via the JML table in bank $82)
@@ -521,7 +521,7 @@ fCore_SetSecondChildName:
 ; @region   JP: the first instructions are laid out differently (SEP/REP before SEI, NMITIMEN cleared without clearing MDMAEN/HDMAEN).
 ; @mode     M8X16
 ; @note     Never returns; initialises all of WRAM and all PPU/CPU I/O registers.
-; @calls    fAudio_UploadData, fAudio_SendCommand0B, fAudio_LoadCommonSamples, fAudio_UploadSpcDriver, fCore_InitializeScreenStatus, fCore_ZeroVRAM, fCore_ZeroOAM, fCore_ZeroCGRAM, fObject_InitTileCache, fObject_ClearGameObject, fGameEngine_SaveCheck, fMainMenu_TitleScreenInit
+; @calls    fAudio_UploadData, fAudio_SendCommand0B, fAudio_LoadCommonSamples, fAudio_UploadSfxBlock, fCore_InitializeScreenStatus, fCore_ZeroVRAM, fCore_ZeroOAM, fCore_ZeroCGRAM, fObject_InitTileCache, fObject_ClearGameObject, fGameEngine_SaveCheck, fMainMenu_TitleScreenInit
 ;;
 fCore_Reset:
     if !REGION_JP

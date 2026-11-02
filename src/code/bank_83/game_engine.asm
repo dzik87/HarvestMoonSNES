@@ -2099,7 +2099,7 @@ fGameEngine_SaveGame:
 ; @modifies nCurrentYearID, nCurrentSeasonID, nCurrentDay, strcNames.sPlayer, ptrTemp0x72
 ; @clobbers A Y
 ; @mode    M16X16 -> M8X16
-; @callers fMainMenu_DrawSaveSlotInfo, fMainMenu_NewGameSlotSelect_MoveCursorSlot2, fMainMenu_NewGameSlotSelect_WaitFrame, fInput_Case04_State8_LoadChoice 
+; @callers fMainMenu_DrawSaveSlotInfo, fMainMenu_NewGameSlotSelect_MoveCursorSlot2, fMainMenu_NewGameSlotSelect_WaitFrame, fInput_Title_LoadGameSlotSelect 
 ; @note    The old comment "return A: nStatus" was wrong: the result is in X.
 ;;
 fGameEngine_PeekSaveSlot:

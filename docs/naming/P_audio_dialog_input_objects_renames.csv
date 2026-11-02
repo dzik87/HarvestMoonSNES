@@ -19,7 +19,7 @@ fInput_Case04_State1,fInput_Title_OpeningDemo,medium,"main menu state 1 = fMainM
 fInput_Case04_StartToState6,fInput_Title_LogoScrollSkip,medium,"main menu states 2 and 3 (logo scroll): Start switches to state 6 (skip to title screen)"
 fInput_Case04_State5_ThreeWayChoice,fInput_Title_MenuChoice,high,"main menu state 5 = fMainMenu_StateTitleMenuInput; up/down moves nUnknownFlags09D 0-2, A selects state 8 / 7 / $0A"
 fInput_Case04_State7_ToggleChoice,fInput_Title_NewGameSlotSelect,high,"main menu state 7 = fMainMenu_StateNewGameSlotSelect; toggles the save slot, A confirms, B cancels"
-fInput_Case04_State8_LoadChoice,fInput_Title_LoadGameSlotSelect,high,"main menu state 8 = fMainMenu_StateLoadGameSlotSelect; A calls fGameEngine_LoadContinue for the slot"
+fInput_Case04_State8_LoadChoice,fInput_Title_LoadGameSlotSelect,high,"main menu state 8 = fMainMenu_StateLoadGameSlotSelect; A calls fGameEngine_PeekSaveSlot for the slot"
 fInput_Case03_ConfirmSelection,fInput_HelpMenu_Confirm,high,"A in the help menu: shows the tool help dialog or leaves the menu"
 fInput_Case03_CursorDown,fInput_HelpMenu_CursorDown,high,"prefix follows fInput_Mode_HelpMenu"
 fInput_Case03_CursorUp,fInput_HelpMenu_CursorUp,high,"prefix follows fInput_Mode_HelpMenu"

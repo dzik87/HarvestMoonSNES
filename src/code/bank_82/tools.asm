@@ -123,7 +123,7 @@ fToolUsedSound_PlayOnToolChange:
  
  
 ; @brief   nToolSoundTable: sounds of the equipped tool (generated from assets/tables/data/tool_sound_data_82.csv).
-; @format  3 bytes per tool id: `[voice for reg115][sfx without object][sfx on object hit]`; EU/DE differ for the bell.
+; @format  3 bytes per tool id: `[voice for sfxVoice][sfx without object][sfx on object hit]`; EU/DE differ for the bell.
 ; @index   !EITEM_* id * 3
 ; @used_by fToolUsedSound_PlayToolHit, fToolUsedSound_PlayOnToolChange
     incsrc "../../../build/gen/blocks/tool_sound_data_82.asm"

@@ -109,7 +109,7 @@ fMathMultiply:
 ; @modifies strcVariables.n16Temp1, strcVariables.n16Temp3
 ; @clobbers X Y
 ; @mode    M16X16 -> M16X16
-; @callers fCore_GetRandomNumber, fEvents_UpdateMarriageAndChildGrowth, fAreaEvents_House_PrepareEnding, fAudio_LoadCommonSamples, fAudio_LoadSfxSample, fAudio_LoadTrackSamples, fAudio_UploadSpcDriver, fAudio_UploadTrackData
+; @callers fCore_GetRandomNumber, fEvents_UpdateMarriageAndChildGrowth, fAreaEvents_House_PrepareEnding, fAudio_LoadCommonSamples, fAudio_LoadSfxSample, fAudio_LoadTrackSamples, fAudio_UploadSfxBlock, fAudio_UploadTrackData
 ; @note    The code at $8380D0 that follows (see below) is a signed variant that nothing calls.
 ;;
 fMathDivide:

@@ -606,12 +606,12 @@ fInput_Title_NewGameSlotSelect:
  
 ;;
 ; @brief   Slot select for loading a saved game (state 8): up/down toggles the slot, A loads it, B cancels.
-; @details A calls fGameEngine_LoadContinue with the slot; X = 0 on return means the slot is empty/invalid (error sound,
+; @details A calls fGameEngine_PeekSaveSlot with the slot; X = 0 on return means the slot is empty/invalid (error sound,
 ;          stay), otherwise strcVariables.n8Temp3 = 2 (loaded). B sets n8Temp3 = 1.
 ; @modifies strcVariables.n8Temp3, strcVariables.u8Unk97
 ; @clobbers A X
 ; @mode    M16 -> M8X16
-; @calls   fGameEngine_LoadContinue, fAudio_PlaySoundEffect
+; @calls   fGameEngine_PeekSaveSlot, fAudio_PlaySoundEffect
 ;;
 fInput_Title_LoadGameSlotSelect:
     REP #$30                                                   ;84C380|C230    |      ;
@@ -1650,12 +1650,12 @@ fAiInput_PressLeft:
 ; @brief   B button: run, or jump when the tile in front is a ledge/drop and the way is free.
 ; @details Not while hugging the dog. Reads the object property of the tile in front (fObjectEngine_GetObjectPropertyByDirSeason):
 ;          bits $60 set means jumpable (bit $20 -> jump distance code $1C, else sets PFLAGS_FALLING and code $21). If the
-;          collision probes (fGameEngine_DirectionHandler83AF37 / 83AD91) allow it, action = JUMP; otherwise action = RUN.
+;          collision probes (fGameEngine_CheckTileCollisionDir / 83AD91) allow it, action = JUMP; otherwise action = RUN.
 ; @modifies strcPlayer.action, strcPlayer.unkE3, strcPlayer.lastX, strcPlayer.lastY, strcPlayer.newX, strcPlayer.newY
 ; @clobbers A X Y
 ; @mode    M16X16 -> M16X16
-; @calls   fStoreTileOnFrontOfPlayerAtDistance, fObjectEngine_GetObjectPropertyByDirSeason, fGameEngine_DirectionHandler83AF37,
-;          fGameEngine_DirectionHandler83AD91
+; @calls   fStoreTileOnFrontOfPlayerAtDistance, fObjectEngine_GetObjectPropertyByDirSeason, fGameEngine_CheckTileCollisionDir,
+;          fGameEngine_CheckAISlotCollision
 ; @note    confidence: medium on the jump property bits.
 ;;
 fInput_PlayerButtonB:
@@ -1731,7 +1731,7 @@ fInput_PlayerButtonB:
 ; @clobbers A X Y
 ; @mode    M16X16
 ; @calls   fStoreTileOnFrontOfPlayerAtDistance, fObjectEngine_GetObjectPropertyByDirSeason, fPlayer_InteractWithFrontObject,
-;          fInput_IsObjectDirectionBlocked, fAI_StartSlotScriptAtFrontTile, fGameEngine_DirectionHandler83AD91
+;          fInput_IsObjectDirectionBlocked, fAI_StartSlotScriptAtFrontTile, fGameEngine_CheckAISlotCollision
 ;;
 fInput_PlayerButtonA_Interact:
     %CheckPlayerFlags(!PFLAGS_DOGHUGGING)
@@ -2022,7 +2022,7 @@ fInput_PlayerButtonA_Interact:
 ; @return  A      0 = free, 1 = blocked
 ; @clobbers A
 ; @mode    M16X16
-; @calls   fGameEngine_DirectionHandler83AF37, fGameEngine_DirectionHandler83AD91
+; @calls   fGameEngine_CheckTileCollisionDir, fGameEngine_CheckAISlotCollision
 ;;
 fInput_IsObjectDirectionBlocked:
     REP #$30                                                   ;84CD16|C230    |      ;
@@ -2317,6 +2317,7 @@ fInput_Mode_CutsceneDialog:
     LDA.W $09B1+!RAM_SHIFT                                 ;84CEDF|ADB109  |0009B1;
     INC A                                                      ;84CEE2|1A      |      ;
     STA.W $09B1+!RAM_SHIFT                                 ;84CEE3|8DB109  |0009B1;
+    ; $78 = 120 frames of waiting after the last text screen
     CMP.W #$0078                                               ;84CEE6|C97800  |      ;
     BNE .justReturn                                            ;84CEE9|D019    |84CF04;
     STZ.W $09B1+!RAM_SHIFT                                 ;84CEEB|9CB109  |0009B1;
@@ -2326,6 +2327,7 @@ fInput_Mode_CutsceneDialog:
     STA.W strcDialogDisplay.inputMode                          ;84CEF6|8D9A01  |00019A;
     REP #$20                                                   ;84CEF9|C220    |      ;
     LDA.W strcJoypad1.newInput                                 ;84CEFB|AD2801  |000128;
+    ; swallow the A press so it is not seen again by gameplay input
     AND.W #$FF7F                                               ;84CEFE|297FFF  |      ;
     STA.W strcJoypad1.newInput                                 ;84CF01|8D2801  |000128;
  

@@ -1287,7 +1287,7 @@ fMainMenu_StateTitleStartCursorAnim:
  
 ;;
 ; @brief   State $05: keep scrolling BG2 and, when the cursor changed (strcVariables.u8Unk97), refresh the highlight palette animations of the three entries.
-; @details The cursor and the confirm action are handled by the input code (bank_84/input.asm, fInput_Case04_State5_ThreeWayChoice): cursor 0 -> state $08
+; @details The cursor and the confirm action are handled by the input code (bank_84/input.asm, fInput_Title_MenuChoice): cursor 0 -> state $08
 ;          (Load Game), 1 -> state $07 (New Game), 2 -> state $0A (How to Play). Counts idle frames in strcVariables.n16Unk90.
 ; @param   nTitleMenuCursor   title menu cursor (0-2)
 ; @modifies strcVariables.u8Unk97, strcVariables.n16Unk90, strcVariables.n8Temp3

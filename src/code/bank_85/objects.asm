@@ -68,6 +68,7 @@ fObject_Create:
     BEQ .slot_found                                                ;858032|F012    |858046;
     TXA                                                        ;858034|8A      |      ;
     CLC                                                        ;858035|18      |      ;
+    ; each object slot is $24 bytes (strcGameObject)
     ADC.W #$0024                                               ;858036|692400  |      ;
     TAX                                                        ;858039|AA      |      ;
     INY                                                        ;85803A|C8      |      ;
@@ -560,6 +561,7 @@ fObject_UpdateAllAnimations:
 .check_remove_marker:
     SEP #$20                                                   ;858349|E220    |      ;
     LDA.W strcGameObject.objectDataPointer+2,X                 ;85834B|BDAE01  |0001AE;
+    ; timer $FE = remove the object, $FF = hold this frame forever
     CMP.B #$FE                                                 ;85834E|C9FE    |      ;
     BNE .tick_frame_timer                                                ;858350|D010    |858362;
     REP #$20                                                   ;858352|C220    |      ;
@@ -859,6 +861,7 @@ fObject_RenderAll:
     STY.B $C5                                                  ;858500|84C5    |0000C5;
     REP #$30                                                   ;858502|C230    |      ;
     LDA.B strcObject.bankAddress                               ;858504|A5AF    |0000AF;
+    ; OAM byte offset -> index of the 2-bit pair in the high table (8 sprites per word)
     AND.W #$FFE0                                               ;858506|29E0FF  |      ;
     STA.B strcVariables.n16Temp1                               ;858509|857E    |00007E;
     LSR A                                                      ;85850B|4A      |      ;
@@ -875,6 +878,7 @@ fObject_RenderAll:
     LDA.L DMASpriteOBJ2BitQueue,X                              ;85851B|BF00A27E|7EA200;
     STA.B $C3                                                  ;85851F|85C3    |0000C3;
     LDA.B $BF                                                  ;858521|A5BF    |0000BF;
+    ; cull: X in $0100..$FFEF is off screen
     CMP.W #$0100                                               ;858523|C90001  |      ;
     BCC .check_x_visible                                               ;858526|900F    |858537;
     LDA.B strcVariables.n16Temp1                               ;858528|A57E    |00007E;
@@ -1713,6 +1717,7 @@ fObject_ProcessTileLoadQueue:
     STA.B ptrObjectData                                        ;858CDB|8578    |000078;
     LDA.B $C7                                                  ;858CDD|A5C7    |0000C7;
     SEC                                                        ;858CDF|38      |      ;
+    ; one 16x16 sprite load costs $0100 of the per-frame DMA budget
     SBC.W #$0100                                               ;858CE0|E90001  |      ;
     STA.B $C7                                                  ;858CE3|85C7    |0000C7;
     LDA.B $BB                                                  ;858CE5|A5BB    |0000BB;
@@ -1769,6 +1774,7 @@ fObject_ProcessTileLoadQueue:
     BMI .continue                                              ;858D3A|30FC    |858D38;
     LDA.B $C5                                                  ;858D3C|A5C5    |0000C5;
     SEP #$20                                                   ;858D3E|E220    |      ;
+    ; write the cache slot number into the requester's component byte (bank $80 mirror)
     STA.B [ptrObjectData]                                      ;858D40|8778    |000078;
     STA.B ptrUnknown0x75                                       ;858D42|8575    |000075;
     STZ.B $76                                                  ;858D44|6476    |000076;
@@ -1836,6 +1842,7 @@ fObject_ProcessTileLoadQueue:
     LDA.L aObjSlotOamTile_868000,X                          ;858DB8|BF008086|868000;
     SEP #$20                                                   ;858DBC|E220    |      ;
     STA.W SNES_WRMPYA                                          ;858DBE|8D0242  |004202;
+    ; hardware multiplier: slot table value * $20 bytes = source offset inside the 8 KB block
     LDA.B #$20                                                 ;858DC1|A920    |      ;
     STA.W SNES_WRMPYB                                          ;858DC3|8D0342  |004203;
     REP #$20                                                   ;858DC6|C220    |      ;

@@ -477,6 +477,7 @@ fDialog_IterateText:
     SEP #$10                                                   ;83958B|E210    |      ;
     LDX.B #$01                                                 ;83958D|A201    |      ;
     endif
+    ; glyph ids $BC-$C5 are the digits 0-9 (8 px cells)
     CMP.W #$00BC                                               ;83958F|C9BC00  |      ;
     BCC .NUMBERS_wide                                          ;839592|9009    |83959D;
     CMP.W #$00C6                                               ;839594|C9C600  |      ;
@@ -867,6 +868,7 @@ fDialog_DrawNumericVarDigit:
   + REP #$30                                                   ;839810|C230    |      ;
     TXA                                                        ;839812|8A      |      ;
     STA.B strcVariables.n16Temp1                               ;839813|857E    |00007E;
+    ; ZERO GLYPH: digit glyph = $BC + digit
     LDA.W #$00BC                                               ;839815|A9BC00  |      ; ZERO GLYPH
     CLC                                                        ;839818|18      |      ;
     ADC.B strcVariables.n16Temp1                               ;839819|657E    |00007E;
@@ -936,6 +938,7 @@ fDialog_AdvanceGlyphDestination:
     BNE .return                                                ;839855|D00A    |839861;
     LDA.W strcDialogDisplay.glyphVramAddr                       ;839857|AD8501  |000185;
     CLC                                                        ;83985A|18      |      ;
+    ; after 14 cells the low byte hits $80: skip to the second tile row of the box
     ADC.W #$0080                                               ;83985B|698000  |      ;
     STA.W strcDialogDisplay.glyphVramAddr                       ;83985E|8D8501  |000185;
  
