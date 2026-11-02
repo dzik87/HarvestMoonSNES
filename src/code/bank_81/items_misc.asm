@@ -384,7 +384,7 @@ fPlayer_LeaveSnowFootprint:
 ; @modifies ptrUnknown0xCF, $0989
 ; @clobbers A X
 ; @mode    ? -> M8
-; @callers fItemShipped_InFarmCoopOrBarn, fItemShipped_StartCowBarnScript, fItemShipped_StartCoopScript, fAIAction0x2A, fMap_ScreenTransitionHandler, fPlayerInteraction0x03
+; @callers fItemShipped_InFarmCoopOrBarn, fItemShipped_StartCowBarnScript, fItemShipped_StartCoopScript, fAIAction0x2A_StartTileSequence, fMap_ScreenTransitionHandler, fPlayerInteraction0x03
 ; @see     pTileScriptTable, assets/tables/data/tile_scripts.csv
 ;;
 fTileScript_Start:

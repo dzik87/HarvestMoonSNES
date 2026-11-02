@@ -344,7 +344,7 @@ in both EU and DE (`!REGION_EUDE`).
   (`strcPlayerData.toolSecond`) next to the equipped tool, the hammer / golden hammer actions
   (`fToolUsedAction0x03/0x13`) and the tool sound data were reworked; `fShed_DrawItemPatternByFlag`,
   `fMap_CopyTilePatternToTilemapBuffer`.
-- **AI:** chicken and cow update (`fAIAction0x30/0x31`) check an extra state flag before continuing.
+- **AI:** chicken and cow update (`fAIAction0x30_UpdateChicken` / `fAIAction0x31_UpdateCow`) check an extra state flag before continuing.
 - **Input:** `fInput_Case04_State1`.
 - **Text:** weekday/ordinal/season text writer (`fWriteSeasonWeekdayAndDayOrdinal`), dialog variable table
   `aTextDataTableFFFD`, dialog iteration and dialog box graphics loading, name input screen, tilemap pointers
