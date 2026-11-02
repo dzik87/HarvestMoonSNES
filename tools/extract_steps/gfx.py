@@ -14,7 +14,7 @@ from . import Context, Step
 
 
 ROOT = Path(__file__).resolve().parents[2]
-for sub in ("gfx", "fonts", "data", "dialogs"):
+for sub in ("gfx", "translate", "data"):
     sys.path.insert(0, str(ROOT / "tools" / sub))
 
 

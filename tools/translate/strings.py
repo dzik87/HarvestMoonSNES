@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """String tables of a translation: the plain glyph-id strings of the US engine that are not dialogs (season, weekday, day ordinal, year ordinal).
 
-  translations/<lang>/lang.json   "strings": {"season": {"spring": "...", "2": "..."}, "weekday": {...}, ...}
+  translate/<lang>/lang.json   "strings": {"season": {"spring": "...", "2": "..."}, "weekday": {...}, ...}
   defs/translation/strings.json   the tables: asar label, US address, slot stride, characters per slot, keys of the slots
 
 A table is an array of fixed size slots of 16-bit glyph words; the engine reads only the first `chars` words of a slot (the text variables of the dialogs print

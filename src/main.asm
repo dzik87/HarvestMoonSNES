@@ -98,28 +98,27 @@
     incsrc "ai/commands.asm"
     incsrc "ai/us/scripts.asm"
     
-    ; Dialogs (generated from assets/dialogs/<region>/*.txt by tools/dialogs/dialog.py build):
+    ; Dialogs (generated from translate/<lang>/bank_*.txt by tools/translate/dialog.py build):
     ; US/EU/DE in banks $B6-$BB, JP in banks $AA-$AC (the other banks stay zero)
-    incsrc "data/dialogs/macros.asm"
     if !REGION_JP
-        incsrc "../build/gen/dialogs/jp/bank_AA.asm"
-        incsrc "../build/gen/dialogs/jp/bank_AB.asm"
-        incsrc "../build/gen/dialogs/jp/bank_AC.asm"
+        incsrc "../build/gen/text/jp/bank_AA.asm"
+        incsrc "../build/gen/text/jp/bank_AB.asm"
+        incsrc "../build/gen/text/jp/bank_AC.asm"
     else
-        incsrc "../build/gen/dialogs/!{DLGDIR}/bank_B6.asm"
-        incsrc "../build/gen/dialogs/!{DLGDIR}/bank_B7.asm"
-        incsrc "../build/gen/dialogs/!{DLGDIR}/bank_B8.asm"
-        incsrc "../build/gen/dialogs/!{DLGDIR}/bank_B9.asm"
-        incsrc "../build/gen/dialogs/!{DLGDIR}/bank_BA.asm"
-        incsrc "../build/gen/dialogs/!{DLGDIR}/bank_BB.asm"
+        incsrc "../build/gen/text/!{DLGDIR}/bank_B6.asm"
+        incsrc "../build/gen/text/!{DLGDIR}/bank_B7.asm"
+        incsrc "../build/gen/text/!{DLGDIR}/bank_B8.asm"
+        incsrc "../build/gen/text/!{DLGDIR}/bank_B9.asm"
+        incsrc "../build/gen/text/!{DLGDIR}/bank_BA.asm"
+        incsrc "../build/gen/text/!{DLGDIR}/bank_BB.asm"
         if !TRANSLATION
-            incsrc "../build/gen/dialogs/!{DLGDIR}/bank_BC.asm"
-            incsrc "../build/gen/dialogs/!{DLGDIR}/bank_BD.asm"
-            incsrc "../build/gen/dialogs/!{DLGDIR}/bank_BE.asm"
-            incsrc "../build/gen/dialogs/!{DLGDIR}/bank_BF.asm"
-            incsrc "../build/gen/dialogs/!{DLGDIR}/bank_AA.asm"
-            incsrc "../build/gen/dialogs/!{DLGDIR}/bank_AB.asm"
-            incsrc "../build/gen/dialogs/!{DLGDIR}/bank_AC.asm"
+            incsrc "../build/gen/text/!{DLGDIR}/bank_BC.asm"
+            incsrc "../build/gen/text/!{DLGDIR}/bank_BD.asm"
+            incsrc "../build/gen/text/!{DLGDIR}/bank_BE.asm"
+            incsrc "../build/gen/text/!{DLGDIR}/bank_BF.asm"
+            incsrc "../build/gen/text/!{DLGDIR}/bank_AA.asm"
+            incsrc "../build/gen/text/!{DLGDIR}/bank_AB.asm"
+            incsrc "../build/gen/text/!{DLGDIR}/bank_AC.asm"
         endif
     endif
     

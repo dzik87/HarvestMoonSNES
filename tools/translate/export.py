@@ -7,7 +7,7 @@ and must never be committed.
   python tools/translate/export.py pl --format tsv         -> build/translate/pl_worksheet.tsv  (spreadsheet; columns id bank status flags structure jp us translation)
   python tools/translate/export.py pl --bank B6 --status todo --out my.txt
 
-Text worksheet: the same block syntax as translations/<lang>/dialogs.txt; lines starting with `;` are comments (Japanese/US reference, structure).
+Text worksheet: the same block syntax as translate/<lang>/dialogs.txt; lines starting with `;` are comments (Japanese/US reference, structure).
 Write the translation below the comments and feed the file to `import.py`.  Blocks without a translation are ignored by the import.
 """
 import argparse

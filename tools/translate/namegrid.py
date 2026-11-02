@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Name entry grid of a translation (the cursor cells of the name entry screen, extra letters of the language).
 
-  translations/<lang>/lang.json   "grids": {"file": "name_grids.txt", "enabled": true}      ("enabled": false or no "grids" key = the original grid)
-  translations/<lang>/name_grids.txt   `table aNameInputGrid0` + rows `NN: x y down up right left char action` (same syntax as assets/menu/name_input.txt, docs/formats/menu-data.md)
+  translate/<lang>/lang.json   "grids": {"file": "name_grids.txt", "enabled": true}      ("enabled": false or no "grids" key = the original grid)
+  translate/<lang>/name_grids.txt   `table aNameInputGrid0` + rows `NN: x y down up right left char action` (same syntax as assets/menu/name_input.txt, docs/formats/menu-data.md)
 
 What the code does (evidence: docs/translation-analysis.md, section 6): the screen starts on grid 0 (`strcMenuData.tableSelector` = 0, set by `fScreen_NameInput` and the new game
 initialisation); the only code that writes another value is fNameInput_SelectCharTable0-3, called from the A button handler for the `action` byte of the selected cell.  The
@@ -12,7 +12,7 @@ The picture of the grid is a BG1 tilemap (Screen_Menu_Characters, text in graphi
 shape until the tiles are drawn (graphics override, later phase).
 
   python tools/translate/namegrid.py reach            reachability report of the original US grids
-  python tools/translate/namegrid.py check pl         validate translations/pl/name_grids.txt against the US grid
+  python tools/translate/namegrid.py check pl         validate translate/pl/name_grids.txt against the US grid
 """
 import argparse
 import sys

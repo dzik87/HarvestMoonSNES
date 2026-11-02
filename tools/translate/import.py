@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Worksheet -> translations/<lang>/dialogs.txt.  Validates every translated block (syntax, characters, tokens against the Japanese structure,
+"""Worksheet -> translate/<lang>/dialogs.txt.  Validates every translated block (syntax, characters, tokens against the Japanese structure,
 layout in the dialog box) before it is merged; blocks without a translation are ignored.
 
   python tools/translate/import.py pl build/translate/pl_worksheet.txt            (txt worksheet or a translation file in the same syntax)
   python tools/translate/import.py pl build/translate/pl_worksheet.tsv --status reviewed
   python tools/translate/import.py pl my_part.txt --skip-invalid                    import the valid blocks, list the others
 
-Existing translations of the same ids are replaced.  The status of imported ids becomes `draft` (or --status) in translations/<lang>/status.csv unless
+Existing translations of the same ids are replaced.  The status of imported ids becomes `draft` (or --status) in translate/<lang>/status.csv unless
 the id already has a status row (use --status to override).  Exit code 1 if blocks were invalid (nothing is written unless --skip-invalid).
 """
 import argparse

@@ -597,7 +597,7 @@ def share_us_blobs(root=ROOT):
     n = 0
     for lab, group in sorted(gfxbanks.regional_labels(root).items()):
         if lab.startswith("sFontGlyphs_") or group == "palettes":
-            continue                                        # fonts: tools/fonts/font.py; palettes: tools/gfx/palette.py
+            continue                                        # fonts: tools/translate/font.py; palettes: tools/gfx/palette.py
         k = next(k for k in KINDS.values() if lab.startswith(k.prefixes))
         us = Path(root) / k.src / f"{lab}.bin"
         for r in REGIONS[1:]:

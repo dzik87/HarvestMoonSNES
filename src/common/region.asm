@@ -60,7 +60,7 @@ endif
 
 ; Data selection. `!{REGDIR}` is put in front of the file name of every region specific graphics blob / font table
 ; (assets/gfx/{tiles,characters}/<region>/...; the shared US files have no directory) and `!{DLGDIR}` selects the
-; dialog banks generated from assets/dialogs/<region>/ (tools/dialogs/dialog.py build).
+; dialog banks generated from translate/<region>/ (tools/translate/dialog.py build).
 if !REGION_EU
     !REGDIR = "eu/"
     !DLGDIR = "eu"
@@ -75,8 +75,8 @@ else
     !DLGDIR = "us"
 endif
 
-; Translation build (tools/build.py --translation <lang>, docs/translation.md): US engine, dialogs generated from translations/<lang>/
-; into build/gen/dialogs/translation/ (banks $B6-$BF and $AA-$AC).  Never defined for the four original releases.
+; Translation build (tools/build.py --translation <lang>, docs/translation.md): US engine, dialogs generated from translate/<lang>/
+; into build/gen/text/translation/ (banks $B6-$BF and $AA-$AC).  Never defined for the four original releases.
 !TRANSLATION ?= 0
 if !TRANSLATION
     !DLGDIR = "translation"

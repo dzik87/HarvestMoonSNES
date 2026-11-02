@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tests for tools/fonts/font.py.  Run: python3 tests/test_font.py
+"""Tests for tools/translate/font.py.  Run: python3 tests/test_font.py
 
 The US round trip from assets/ needs no ROM.  Parts that need a ROM image are skipped unless the ROMs are found
 via HM_ROM_DIR (directory with US/EU/DE/JP subfolders holding the .sfc files) or HM_ROM_<REGION>.
@@ -12,7 +12,7 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-spec = importlib.util.spec_from_file_location("font", ROOT / "tools" / "fonts" / "font.py")
+spec = importlib.util.spec_from_file_location("font", ROOT / "tools" / "translate" / "font.py")
 font = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(font)
 

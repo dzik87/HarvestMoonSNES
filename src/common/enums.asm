@@ -344,3 +344,12 @@
 !NI_HORSE                   =   $04             ; name entry target $04: horse
 !NI_FIRSTHILD               =   $05             ; name entry target $05: firsthild
 !NI_SECONDCHILD             =   $06             ; name entry target $06: secondchild
+
+
+;; @brief Dialog control words and special glyph ids of the dialog word stream (src/code/bank_83/dialog.asm, docs/formats/dialog-tables.md); the text sources in translate/<lang>/ write them as <NEXT>, <NUM n i>, <VAR n i>, <OPT n>, <END>.
+!DIALOG_NEXTSCREEN          = $00A2             ; dialog word $00A2: next text screen (wait for a button, clear the box)
+!DIALOG_SPACE               = $00B1             ; glyph $00B1: blank cell
+!DIALOG_NUMERICVARIABLE     = $FFFC             ; control word $FFFC: numeric variable (digit count, variable index)
+!DIALOG_TEXTVARIABLE        = $FFFD             ; control word $FFFD: text variable (length, variable index)
+!DIALOG_OPTIONS             = $FFFE             ; control word $FFFE: answer menu (option count), ends the text
+!DIALOG_END                 = $FFFF             ; control word $FFFF: end of the dialog

@@ -3,7 +3,7 @@
 
 Reads the extracted dialog assets (assets/dialogs/<region>/bank_XX.txt, produced by tools/extract.py), the engine rules
 (defs/translation/engine.json), the variable map (defs/translation/var_map_jp_us.json) and a language directory
-(translations/<lang>/), and implements
+(translate/<lang>/), and implements
 
   * the translation source syntax (tokens, symbolic variable names) and its text -> dialog word conversion,
   * the text layout of the dialog box (cells, lines, screens, option cursors; evidence in docs/translation-analysis.md),
@@ -20,7 +20,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 DEFS = ROOT / "defs" / "translation"
 ASSETS_DIALOGS = ROOT / "assets" / "dialogs"
-TRANSLATIONS = ROOT / "translations"
+TRANSLATIONS = ROOT / "translate"
 WORK = ROOT / "build" / "translate"
 
 NEXT, NUMV, TEXTV, OPTS, END = 0x00A2, 0xFFFC, 0xFFFD, 0xFFFE, 0xFFFF
@@ -28,7 +28,7 @@ SPACE = 0x00B1
 
 
 def _load_dialog_module():
-    spec = importlib.util.spec_from_file_location("hm_dialog", ROOT / "tools" / "dialogs" / "dialog.py")
+    spec = importlib.util.spec_from_file_location("hm_dialog", ROOT / "tools" / "translate" / "dialog.py")
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
     return mod
@@ -76,7 +76,7 @@ def var_map():
 
 # ---------------------------------------------------------------- language directory
 class Lang:
-    """translations/<code>/lang.json plus the derived character map."""
+    """translate/<code>/lang.json plus the derived character map."""
 
     def __init__(self, directory):
         self.dir = Path(directory)
@@ -630,7 +630,7 @@ def asset_banks(region, root=None):
 
 
 def load_translation(lang):
-    """-> {id: (flags, text)} from translations/<lang>/dialogs.txt (duplicate ids are an error)."""
+    """-> {id: (flags, text)} from translate/<lang>/dialogs.txt (duplicate ids are an error)."""
     out = {}
     if not lang.path_dialogs.exists():
         return out

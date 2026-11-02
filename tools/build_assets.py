@@ -3,7 +3,7 @@
 
 Sources (committed)                                   -> generated, git-ignored files
   assets/gfx/palettes/Palette_<Area>_<Slot>.json               -> assets/gfx/palettes/Palette_<Area>_<Slot>.pal          (tools/gfx/palette.py pack)
-  assets/fonts/us/glyph_*.png + glyphs.json            -> assets/gfx/tiles/sFontGlyphs_*.bin             (tools/fonts/font.py build)
+  assets/fonts/us/glyph_*.png + glyphs.json            -> assets/gfx/tiles/sFontGlyphs_*.bin             (tools/translate/font.py build)
   assets/gfx/png/{frames,screens,tiles,sprites}/ composed PNGs + <label>.json -> assets/gfx/{tiles,sprites}/*.bin  (tools/gfx/pngsync.py build)
   assets/gfx/tilemaps/*.map.txt + sidecar JSON         -> assets/gfx/characters/*.bin                    (tools/gfx/pngsync.py build)
   defs/gfx/banks.json (bank layout)                  -> build/gen/gfx/<kind>/bank_XX.asm               (tools/data/gfxbanks.py build)
@@ -26,12 +26,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 STEPS = [
     ("palettes", [sys.executable, "tools/gfx/palette.py", "pack"]),
-    ("font tables", [sys.executable, "tools/fonts/font.py", "build", "--region", "us", "--write-assets"]),
+    ("font tables", [sys.executable, "tools/translate/font.py", "build", "--region", "us", "--write-assets"]),
     ("graphics blobs", [sys.executable, "tools/gfx/pngsync.py", "build", "--region", "all"]),
     ("graphics bank asm", [sys.executable, "tools/data/gfxbanks.py", "build"]),
     ("audio blobs", [sys.executable, "tools/audio/audioconv.py", "build", "-q"]),
-    ("dialog banks", [sys.executable, "tools/dialogs/dialog.py", "build"]),
-    ("dialog text tables", [sys.executable, "tools/dialogs/texttables.py", "build"]),
+    ("dialog banks", [sys.executable, "tools/translate/dialog.py", "build"]),
+    ("dialog text tables", [sys.executable, "tools/translate/texttables.py", "build"]),
     ("object animation banks", [sys.executable, "tools/objects/objdata.py", "build"]),
     ("object maps", [sys.executable, "tools/maps/objmap.py", "build"]),
     ("small data tables", [sys.executable, "tools/data/smalltables.py", "build"]),
@@ -42,7 +42,7 @@ STEPS = [
     ("AI script heads", [sys.executable, "tools/ai/aidata.py", "build"]),
 ]
 for _r in ("eu", "de", "jp"):
-    STEPS.insert(2, (f"font tables {_r}", [sys.executable, "tools/fonts/font.py", "build", "--region", _r, "--write-assets"]))
+    STEPS.insert(2, (f"font tables {_r}", [sys.executable, "tools/translate/font.py", "build", "--region", _r, "--write-assets"]))
 
 
 def main(quiet=False):

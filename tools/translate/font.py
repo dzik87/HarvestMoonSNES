@@ -143,7 +143,7 @@ def source_tables(region, rom=None):
 
 # ---------------------------------------------------------------- characters
 def load_dialog_module():
-    spec = importlib.util.spec_from_file_location("hm_dialog", ROOT / "tools" / "dialogs" / "dialog.py")
+    spec = importlib.util.spec_from_file_location("hm_dialog", ROOT / "tools" / "translate" / "dialog.py")
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
     return mod
@@ -263,7 +263,7 @@ def write_sidecar(path, region, tables, source, nfiles, nnarrow=0):
              "referenced_by_engine": t < 10, "sha256": sha(tables[t])}
             for t in range(N_TABLES)],
         "chars": {"%04X" % g: cmap[g] for g in sorted(cmap) if g < N_GLYPHS and (region != "jp" or cmap[g].strip())},     # JP: the two blank glyphs are not listed
-        "chars_note": "from tools/dialogs/dialog.py (informational; edit when adding letters). JP table lists the first "
+        "chars_note": "from tools/translate/dialog.py (informational; edit when adding letters). JP table lists the first "
                       "occurrence of each character only.",
         "png_files_8x16": nnarrow,
     }

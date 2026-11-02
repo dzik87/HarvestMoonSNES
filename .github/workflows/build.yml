@@ -37,7 +37,7 @@ jobs:
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Generate assets and assembly from sources (PNG/JSON/text -> .bin/.pal, build/gen/{dialogs,objects,maps})
+      - name: Generate assets and assembly from sources (PNG/JSON/text -> .bin/.pal, build/gen/{text,objects,maps})
         run: |
           pip install pillow
           python3 tools/build_assets.py
@@ -45,7 +45,7 @@ jobs:
       - name: Check asset sources
         run: |
           python3 tools/gfx/palette.py check
-          python3 tools/dialogs/dialog.py check
+          python3 tools/translate/dialog.py check
           python3 tools/maps/objmap.py check
           python3 tools/objects/objdata.py check
           python3 tools/ai/aidata.py check
@@ -54,11 +54,11 @@ jobs:
           python3 tools/menu/nameinput.py check
           python3 tools/data/tabledata.py check
           python3 tools/gfx/presets.py check
-          python3 tools/dialogs/texttables.py check
+          python3 tools/translate/texttables.py check
           python3 tools/data/gfxbanks.py check
           python3 tools/gfx/graphics_loads.py check
           python3 tools/gfx/gfxpipe.py verify
-          python3 tools/fonts/font.py check
+          python3 tools/translate/font.py check
           python3 tests/test_font.py
           python3 tests/test_make_patch.py   # BPS/IPS patch tool on invented byte arrays
           python3 tests/test_translate_tools.py   # preview, reflow, check diagnostics, status, glossary, graphics overrides, Windows IO (invented fixtures)

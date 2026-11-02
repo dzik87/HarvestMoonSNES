@@ -208,7 +208,7 @@ def test_export_import(lang_dir, ctx, root):
     done, bad = trimport.import_blocks(lang, ctx, trimport.read_worksheet(ws), out=msgs.append)
     ok(done == [0, 1] and not bad, "import takes the two translated blocks: %s %s" % (done, msgs))
     tr = C.load_translation(lang)
-    ok(sorted(tr) == [0, 1] and tr[1][1].strip() == "Dzien dobry <VAR player>.", "translations/<lang>/dialogs.txt written")
+    ok(sorted(tr) == [0, 1] and tr[1][1].strip() == "Dzien dobry <VAR player>.", "translate/<lang>/dialogs.txt written")
     st = C.read_status(lang.path_status)
     ok(st[0]["status"] == "draft" and st[1]["status"] == "draft", "imported ids get the status draft")
     rs = trexport.rows(lang, ctx, with_refs=False)
@@ -295,7 +295,7 @@ def test_glyphs(root):
     over[5 * 16 + 5] = 3
     fontmod.write_png(fd / "glyph_0044.png", over, narrow=True)
     g2 = trglyphs.build_glyphs(lang, tables)
-    ok(g2[0x44] == over and g2[0x43] == g[0x43], "a PNG in translations/<lang>/font replaces the generated glyph")
+    ok(g2[0x44] == over and g2[0x43] == g[0x43], "a PNG in translate/<lang>/font replaces the generated glyph")
     # collisions
     bad = make_lang(tempfile.mkdtemp(), glyphs={"Ą": {"id": "0x05", "base": "A", "mark": "ogonek"}})
     try:

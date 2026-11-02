@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Glyphs of a translation language: letters generated from the extracted font + diacritic marks, plus hand drawn overrides.
 
-  translations/<lang>/lang.json  "glyphs": {"ą": {"id": "0x43", "base": "a", "mark": "ogonek"}, ...}
+  translate/<lang>/lang.json  "glyphs": {"ą": {"id": "0x43", "base": "a", "mark": "ogonek"}, ...}
   defs/translation/marks.json    pixels of the marks
-  translations/<lang>/font/glyph_<ID>.png   optional hand drawn glyph (16x16 or 8x16 indexed PNG, same format as assets/fonts/<region>/); replaces the generated one
+  translate/<lang>/font/glyph_<ID>.png   optional hand drawn glyph (16x16 or 8x16 indexed PNG, same format as assets/fonts/<region>/); replaces the generated one
 
 No font pixel is committed: the base letters come from the font tables of the engine release (assets/fonts/us -> build/assets/gfx/tiles) when the ROM is built.
 
@@ -16,7 +16,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import common as C                                                  # noqa: E402
 
-sys.path.insert(0, str(C.ROOT / "tools" / "fonts"))
+sys.path.insert(0, str(C.ROOT / "tools" / "translate"))
 import font                                                         # noqa: E402
 
 
@@ -25,7 +25,7 @@ def marks():
 
 
 def engine_tables(region="us"):
-    """Font tables (11 x 4096 bytes) of the engine release from the assets (built by tools/build_assets.py or tools/fonts/font.py build)."""
+    """Font tables (11 x 4096 bytes) of the engine release from the assets (built by tools/build_assets.py or tools/translate/font.py build)."""
     tabs = []
     for n in font.TABLE_NAME:
         p = font.ASSETS_TILES / ("%s.bin" % n)

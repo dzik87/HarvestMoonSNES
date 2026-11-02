@@ -58,7 +58,7 @@ def main() -> int:
     p.add_argument("--no-verify", action="store_true")
     p.add_argument("--no-assets", action="store_true", help="skip generating the .bin/.pal files from PNG/JSON sources")
     p.add_argument("-v", "--verbose", action="store_true")
-    p.add_argument("--translation", metavar="LANG", help="build a translated ROM on the US engine (translations/LANG/, docs/translation.md); no original hash exists for it")
+    p.add_argument("--translation", metavar="LANG", help="build a translated ROM on the US engine (translate/LANG/, docs/translation.md); no original hash exists for it")
     p.add_argument("--fallback", choices=("us", "error"), default="us", help="translation: text of the ids that are not translated yet (default: the US text)")
     p.add_argument("--allow-errors", action="store_true", help="translation: build although the check reports errors")
     p.add_argument("--patch", choices=("bps", "ips", "both"), help="translation: also write a patch (original US ROM -> translated ROM) next to the output (tools/translate/make_patch.py); the distribution form")

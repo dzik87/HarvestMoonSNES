@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate a translation (translations/<lang>/): syntax and characters, tokens against the Japanese structure (variables via the variable map,
+"""Validate a translation (translate/<lang>/): syntax and characters, tokens against the Japanese structure (variables via the variable map,
 numbers, answers), the layout in the dialog box (28 x 3 cells, `<NEXT>` marker cell, option cursor cells), bank capacity and coverage.
 
   python tools/translate/check.py pl                 errors (exit 1) and warnings of the translated ids, coverage, capacity
