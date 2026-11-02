@@ -300,7 +300,7 @@ fAI_StartSlotScriptAtFrontTile:
  
 ;;
 ; @brief   Per-frame AI step: executes script commands and movement of every active slot.
-; @details Skipped completely while a dialog handler runs (strcDialogDisplay.mapUnk19A = 2 or 6) or while the player action is
+; @details Skipped completely while a dialog handler runs (strcDialogDisplay.inputMode = 2 or 6) or while the player action is
 ;          PACTION_JUMP. Otherwise rolls strcPlayer.lastRandomNumber and walks all 49 slots from $7EB586: for an active slot
 ;          (+00 bit0) with wait counter +10 = 0 it clears dx/dy (unless wander flag bit3 is set) and runs fAI_ExecuteAiAction
 ;          repeatedly while the counter stays 0 (so a script may run many commands per frame); a non-zero counter is decremented
@@ -2358,10 +2358,10 @@ fAIAction0x1B_SetSprite:
  
 ;;
 ; @brief   AI command 0x1C: show a dialog and wait one frame.
-; @details Operands: [word dialog id][dialogUnk191 byte]. Sets strcDialogDisplay.mapUnk19A = 2 (dialog input mode) and calls
+; @details Operands: [word dialog id][boxPosition byte]. Sets strcDialogDisplay.inputMode = 2 (dialog input mode) and calls
 ;          fDialog_DialogHandler; fAI_RunSlots is then skipped while the dialog is open.
 ; @case    $1C
-; @modifies ptrAIActionData, strcDialogDisplay.dialogUnk191, strcDialogDisplay.mapUnk19A
+; @modifies ptrAIActionData, strcDialogDisplay.boxPosition, strcDialogDisplay.inputMode
 ; @note    Also increments slot wait counter +10.
 ; @mode    M16X16 -> ?
 ; @calls   fDialog_DialogHandler
@@ -2392,9 +2392,9 @@ fAIAction0x1C_ShowDialog:
  
 ;;
 ; @brief   AI command 0x1D: show a dialog that offers choices (same code as 0x1C; scripts follow it with 0x20 JumpIfChoice).
-; @details Operands: [word dialog id][dialogUnk191 byte].
+; @details Operands: [word dialog id][boxPosition byte].
 ; @case    $1D
-; @modifies ptrAIActionData, strcDialogDisplay.dialogUnk191, strcDialogDisplay.mapUnk19A
+; @modifies ptrAIActionData, strcDialogDisplay.boxPosition, strcDialogDisplay.inputMode
 ; @note    Also increments slot wait counter +10.
 ; @mode    M16X16 -> ?
 ; @calls   fDialog_DialogHandler
@@ -3681,7 +3681,7 @@ fAIAction0x31_UpdateCow:
 ;          Without interaction the idle code (labels .baby_idle / .child_idle / .adult_idle) counts strcStockData.unkEachCow[n] up to
 ;          $100 and then picks a random pose / wander script (adult: 5 choices by strcPlayer.lastRandomNumber thresholds $33 $66 $99 $CC;
 ;          sick / cranky cows use their own scripts). Ends in fAIAction0x31_CowUpdateTail.
-; @modifies ptrTemp0x72, strcNames.wCurrentCow, strcDialogDisplay.dialogUnk191, strcDialogDisplay.mapUnk19A, strcPlayerData.carryItemId, strcPlayer.action, strcStockData.unkEachCow, strcFlags.event1, nCowPregnacyDays, nOwnedCows, strcVariables.n16Temp1
+; @modifies ptrTemp0x72, strcNames.wCurrentCow, strcDialogDisplay.boxPosition, strcDialogDisplay.inputMode, strcPlayerData.carryItemId, strcPlayer.action, strcStockData.unkEachCow, strcFlags.event1, nCowPregnacyDays, nOwnedCows, strcVariables.n16Temp1
 ; @mode    M16X16 -> ?
 ; @calls   fAI_SetSlotScript, fDialog_DialogHandler, fCow_AddHappiness
 ; @note    The milk carry item ids ($15-$17) are written with the equipped-item constants !EITEM_SPRINKLER, !EITEM_BEANSTALKSEED, !EITEM_BLUEDIAMOND, which only coincide numerically (carried-item table: SmallMilk, MediumMilk, LargeMilk). confidence: medium for the detail meanings of cow record bits.
@@ -8505,9 +8505,9 @@ fAIAction0x53_PickUpObjectForEventB:
  
 ;;
 ; @brief   AI command 0x54: show a dialog in input mode 6 (closes without player input) and wait one frame.
-; @details Operands: [word dialog id][dialogUnk191 byte]; clears the word at $09B1+!RAM_SHIFT and sets strcDialogDisplay.mapUnk19A = 6.
+; @details Operands: [word dialog id][boxPosition byte]; clears the word at $09B1+!RAM_SHIFT and sets strcDialogDisplay.inputMode = 6.
 ; @case    $54
-; @modifies ptrAIActionData, strcDialogDisplay.dialogUnk191, strcDialogDisplay.mapUnk19A
+; @modifies ptrAIActionData, strcDialogDisplay.boxPosition, strcDialogDisplay.inputMode
 ; @note    Also increments slot wait counter +10 and clears $09B1+!RAM_SHIFT.
 ; @mode    M16X16 -> ?
 ; @calls   fDialog_DialogHandler

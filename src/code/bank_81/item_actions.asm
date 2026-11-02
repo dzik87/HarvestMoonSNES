@@ -24,10 +24,10 @@
 ;   is replaced by the tile pattern read from the selected map (strcMap.pSelected, index*4)(?) so that the picked up
 ;   object disappears from the map; items with nItemCarriedPickupSoundTable[id] != 0 play !SFX_ITEMPICKUP.
 ; @param   strcPlayerData.carryItemId   carried item id ($01-$5A)
-; @modifies nCarriedItemId, nUnknownX, nUnknownY, nTileInFrontOfPlayerX, nTileInFrontOfPlayerY, strcAudio.reg114, strcAudio.reg115
+; @modifies nCarriedItemId, nUnknownX, nUnknownY, nTileInFrontOfPlayerX, nTileInFrontOfPlayerY, strcAudio.sfxId, strcAudio.sfxVoice
 ; @clobbers A X Y
 ; @mode    ? -> M8X16
-; @calls   fItemCarried_LoadPoseData, fObjectSlots_Allocate, fStoreTileOnFrontOfPlayerAtDistance, fSetTileAtCoords, fAudioSetRegister2to0A
+; @calls   fItemCarried_LoadPoseData, fObjectSlots_Allocate, fStoreTileOnFrontOfPlayerAtDistance, fSetTileAtCoords, fAudio_PlaySoundEffect
 ; @callers fPlayerAction0x04
 ; @note    The pointer read with strcMap.pSelected is not fully understood. confidence: low - only the table lookup is certain.
 ;;
@@ -880,7 +880,7 @@ fEggFestival_SetEggFlag0040:
 ; @brief   Egg festival: a coloured egg was put down on the wrong basket - fixes the tile, removes the egg and shows dialog $038D.
 ; @details The tile at the basket position (map vars $09AD/$09AF) is set to pattern $FC, the object is destroyed, the slot freed,
 ;   the carry state cleared and dialog $038D is started.
-; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags, strcDialogDisplay.mapUnk19A, strcDialogDisplay.dialogUnk191
+; @modifies strcPlayerData.carryItemId, strcPlayer.action, strcPlayer.flags, strcDialogDisplay.inputMode, strcDialogDisplay.boxPosition
 ; @clobbers A X Y
 ; @mode    ? -> M8X16
 ; @calls   fSetTileAtCoords, fObject_Destroy, fObjectSlots_FreeCurrent, fDialog_DialogHandler
@@ -2289,10 +2289,10 @@ fItemCarried_PhaseDispatch_Buyable:
 ;;
 ; @brief   Shop phase 0: shows the description/price dialog of the shelf item (yes/no question).
 ; @details The row of aDialogsData_BuyItems is index = carried id - $44 for the shelf ids $44-$56, or carried id - $1B + $13 for the
-;   fragrance ids $1B-$1D (rows $13-$15). The first word of the 12-byte row is the description dialog id. Sets strcDialogDisplay.mapUnk19A to 2
+;   fragrance ids $1B-$1D (rows $13-$15). The first word of the 12-byte row is the description dialog id. Sets strcDialogDisplay.inputMode to 2
 ;   (dialog running) and the phase to 1.
 ; @param   nCarriedItemId   shelf item id
-; @modifies $0976, strcDialogDisplay.mapUnk19A, strcDialogDisplay.dialogUnk191
+; @modifies $0976, strcDialogDisplay.inputMode, strcDialogDisplay.boxPosition
 ; @clobbers A X Y
 ; @mode    M8 -> M8X16
 ; @calls   fDialog_DialogHandler
@@ -2345,12 +2345,12 @@ fItemBuy_ShowPurchaseDialog:
  
 ;;
 ; @brief   Shop phase 1: after the dialog, evaluates the yes/no answer and tries to pay.
-; @details Waits while mapUnk19A == 2. A "no" (dialogOptionsAnswer != 0) goes to fItemBuy_ShowDeclineDialog. On "yes" the cost
+; @details Waits while inputMode == 2. A "no" (dialogOptionsAnswer != 0) goes to fItemBuy_ShowDeclineDialog. On "yes" the cost
 ;   (24-bit, negative = money spent, offset 9 of the row) is passed to fGameEngine_AddProfit; when it fails (not enough money, Z set)
 ;   the "too poor" dialog (row offset 6) is shown and the phase becomes 2 (wait for the dialog), otherwise the "yes" dialog (offset 2)
 ;   is shown and the phase becomes 3 (finish).
 ; @param   strcDialogDisplay.dialogOptionsAnswer   0 = yes
-; @modifies $0976, strcDialogDisplay.mapUnk19A, strcDialogDisplay.dialogUnk191, nMoney
+; @modifies $0976, strcDialogDisplay.inputMode, strcDialogDisplay.boxPosition, nMoney
 ; @clobbers A X Y
 ; @mode    M8 -> M8X16
 ; @calls   fGameEngine_AddProfit, fDialog_DialogHandler, fItemBuy_ShowDeclineDialog, fItemBuy_SetPhaseWaitDialog
@@ -2487,7 +2487,7 @@ fItemBuy_SetPhaseWaitDialog:
  
 ;;
 ; @brief   Shop: the player answered "no" - shows the decline dialog (row offset 4) and returns the item to the shelf.
-; @modifies strcDialogDisplay.mapUnk19A, strcDialogDisplay.dialogUnk191
+; @modifies strcDialogDisplay.inputMode, strcDialogDisplay.boxPosition
 ; @clobbers A X Y
 ; @mode    M8 -> ?
 ; @calls   fDialog_DialogHandler, fItemBuy_ReturnItemToShelf
@@ -2538,7 +2538,7 @@ fItemBuy_ShowDeclineDialog:
  
 ;;
 ; @brief   Shop phase 2: waits until the reply dialog is closed, then returns the item to the shelf.
-; @param   strcDialogDisplay.mapUnk19A   2 while the dialog is still running
+; @param   strcDialogDisplay.inputMode   2 while the dialog is still running
 ; @mode    M8 -> ?
 ; @calls   fItemBuy_ReturnItemToShelf
 ;;
@@ -2665,10 +2665,10 @@ fItemBuy_Return:
  
 ;;
 ; @brief   Forage phase 0: shows the "you found X - eat it?" dialog of the picked up item.
-; @details The dialog id is aFoundItemData[(item id - 1) * 3] (word). Loads pose 1 (carried), starts the dialog (mapUnk19A = 2)
+; @details The dialog id is aFoundItemData[(item id - 1) * 3] (word). Loads pose 1 (carried), starts the dialog (inputMode = 2)
 ;   and moves to phase 1.
 ; @param   nCarriedItemId   $01-$08
-; @modifies $0976, strcDialogDisplay.mapUnk19A, strcDialogDisplay.dialogUnk191
+; @modifies $0976, strcDialogDisplay.inputMode, strcDialogDisplay.boxPosition
 ; @clobbers A X Y
 ; @mode    ? -> M8X16
 ; @calls   fItemCarried_LoadPoseData, fDialog_DialogHandler
@@ -2705,7 +2705,7 @@ fItemFound_ShowFoundDialog:
  
 ;;
 ; @brief   Forage phase 1: after the dialog, eats the item (answer 0) or goes on carrying it.
-; @details Waits while mapUnk19A == 2. On "eat" the player action becomes !PACTION_CONSUMEITEM, the object is destroyed, carryItemId cleared
+; @details Waits while inputMode == 2. On "eat" the player action becomes !PACTION_CONSUMEITEM, the object is destroyed, carryItemId cleared
 ;   and the stamina change (signed byte, aFoundItemData offset 2) is applied by fPlayerEnergyHandler. Otherwise the item stays in the
 ;   hands (fItemFound_DeclineConsume).
 ; @param   strcDialogDisplay.dialogOptionsAnswer   0 = eat
@@ -3214,7 +3214,7 @@ fItemCarriedFeed_PutDown:
 ; @brief   Sunday market phase 5: shows the price dialog of the offered item.
 ; @details Dialog id = aDialogData_SellItems[id * 3] (word). Sets phase 6 to wait for the answer.
 ; @param   nCarriedItemId   item offered
-; @modifies $0976 (= 6), strcDialogDisplay.mapUnk19A, strcDialogDisplay.dialogUnk191
+; @modifies $0976 (= 6), strcDialogDisplay.inputMode, strcDialogDisplay.boxPosition
 ; @clobbers A X Y
 ; @mode    M8 -> M8X16
 ; @calls   fDialog_DialogHandler
@@ -3321,7 +3321,7 @@ fItemSell_HandleAnswer:
  
 ;;
 ; @brief   Sunday market: the player declined - shows dialog $0303 and resumes carrying (falls through to fItemSell_ResumeCarry).
-; @modifies strcDialogDisplay.mapUnk19A, strcDialogDisplay.dialogUnk191
+; @modifies strcDialogDisplay.inputMode, strcDialogDisplay.boxPosition
 ; @mode    M8 -> ?
 ; @calls   fDialog_DialogHandler
 ;;
