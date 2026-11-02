@@ -783,7 +783,7 @@ Powodzenia.<END>
 Dziś kończy się ten rok. Jaki był dla ciebie?<NEXT>Jutro w miasteczku będzie gwarno od ludzi idących na szczyt,<NEXT>by zobaczyć pierwszy wschód słońca.<END>
 
 @@ sDialog_0x0100 @@
-"Skrzynia na zwierzęta" Po rozmowie w sklepie wstaw tu zwierzę. Handlarz zwierząt<END>
+"Skrzynia na zwierzęta"<BR>Po rozmowie w sklepie wstaw tu zwierzęta.<NEXT>Handlarz zwierząt<END>
 
 @@ sDialog_0x0101 @@
 Narzędzia leżą w szopie i oborze.<NEXT>Podnieś je przyciskiem A, a będziesz je mieć w ręku.<NEXT>Używa się ich przyciskiem Y.<END>
@@ -2872,7 +2872,7 @@ Ej, nie dotykaj bez pozwolenia!<END>
 To skarbonka wnuczka.<END>
 
 @@ sDialog_0x0381 @@
-Ten alkohol przyniosła Eve. Kazała mi go wypić z dziadkiem.<END>
+Ten alkohol przyniosła Eve. Powiedziała, żeby wypić go z dziadkiem.<END>
 
 @@ sDialog_0x0382 @@
 Co tam jest napisane?<END>
@@ -3082,7 +3082,7 @@ Nina uwielbia słodycze. Ciasto albo owoce Trawy Pełni.<NEXT>Za nimi przepada n
 Hihi, jak się miewa Nina? Nie dokucza ci swoimi kaprysami?<END>
 
 @@ sDialog_0x03C7 @@
-Jak szukasz żony, to wybieraj taką z szerokimi biodrami!<NEXT>W końcu trzeba rodzić dzieci jedno za drugim!<END>
+Jak szukasz żony, to wybieraj taką z dużym zadkiem!<NEXT>W końcu trzeba rodzić dzieci jedno za drugim!<END>
 
 @@ sDialog_0x03C8 @@
 Oho? Czy ty czasem trochę nie przytyłeś?<NEXT>Ellen jest podobna do mnie: nie dość, że piękna, to jeszcze świetnie gotuje.<END>
@@ -3172,7 +3172,7 @@ Najlepiej wracaj do domu, zanim zajdzie słońce,<NEXT>i połóż się spać raz
 Nie wolno smucić żony! Wracaj szybko do domu!<END>
 
 @@ sDialog_0x03E5 @@
-Powiedz tylko mnie, po cichu.<NEXT>Która dziewczyna zajmuje cię teraz najbardziej?<NEXT> Maria          Ann          Nina           Ellen        Eve<OPT 5>
+Powiedz tylko babci, po cichu.<NEXT>Która dziewczyna zajmuje cię teraz najbardziej?<NEXT> Maria          Ann          Nina           Ellen        Eve<OPT 5>
 
 @@ sDialog_0x03E6 @@
 Aha, Maria. W soboty i niedziele jest w kościele. Dobry prezent to kwiaty.<NEXT>Mężczyzna powinien działać. Głowa do góry, hi, hi, hi.<END>
