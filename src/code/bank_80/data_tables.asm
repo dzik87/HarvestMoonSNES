@@ -2335,7 +2335,7 @@ fPaletteAnim_TownFall_T4:
     JSL.L fPalette_StartColorAnimSlot                         ;80CFDA|22488E80|808E48;
     REP #$20                                                   ;80CFDE|C220    |      ;
     SEP #$10                                                   ;80CFE0|E210    |      ;
-    LDA.W #aPaletteAnim_Row2Col07_80E5AA                   ;80CFE2|A9AAE5  |      ;
+    LDA.W #aPaletteAnimScript_TownFall_T4_Slot10                   ;80CFE2|A9AAE5  |      ;
     STA.B ptrTemp0x72                                          ;80CFE5|8572    |000072;
     SEP #$20                                                   ;80CFE7|E220    |      ;
     LDA.B #$80                                                 ;80CFE9|A980    |      ;
@@ -2359,7 +2359,7 @@ fPaletteAnim_TownFall_T4:
 fPaletteAnim_TownWinter_T4:
     REP #$20                                                   ;80CFFA|C220    |      ;
     SEP #$10                                                   ;80CFFC|E210    |      ;
-    LDA.W #aPaletteAnim_Row2Col03_80E5BB                   ;80CFFE|A9BBE5  |      ;
+    LDA.W #aPaletteAnimScript_TownWinter_T4_Slot4                   ;80CFFE|A9BBE5  |      ;
     STA.B ptrTemp0x72                                          ;80D001|8572    |000072;
     SEP #$20                                                   ;80D003|E220    |      ;
     LDA.B #$80                                                 ;80D005|A980    |      ;
@@ -2371,7 +2371,7 @@ fPaletteAnim_TownWinter_T4:
     JSL.L fPalette_StartColorAnimSlot                         ;80D011|22488E80|808E48;
     REP #$20                                                   ;80D015|C220    |      ;
     SEP #$10                                                   ;80D017|E210    |      ;
-    LDA.W #aPaletteAnim_Row2Col04_80E5CC                   ;80D019|A9CCE5  |      ;
+    LDA.W #aPaletteAnimScript_TownWinter_T4_Slot5                   ;80D019|A9CCE5  |      ;
     STA.B ptrTemp0x72                                          ;80D01C|8572    |000072;
     SEP #$20                                                   ;80D01E|E220    |      ;
     LDA.B #$80                                                 ;80D020|A980    |      ;
@@ -2383,7 +2383,7 @@ fPaletteAnim_TownWinter_T4:
     JSL.L fPalette_StartColorAnimSlot                         ;80D02C|22488E80|808E48;
     REP #$20                                                   ;80D030|C220    |      ;
     SEP #$10                                                   ;80D032|E210    |      ;
-    LDA.W #aPaletteAnim_Row2Col05_80E5DD                   ;80D034|A9DDE5  |      ;
+    LDA.W #aPaletteAnimScript_TownWinter_T4_Slot6                   ;80D034|A9DDE5  |      ;
     STA.B ptrTemp0x72                                          ;80D037|8572    |000072;
     SEP #$20                                                   ;80D039|E220    |      ;
     LDA.B #$80                                                 ;80D03B|A980    |      ;
@@ -2395,7 +2395,7 @@ fPaletteAnim_TownWinter_T4:
     JSL.L fPalette_StartColorAnimSlot                         ;80D047|22488E80|808E48;
     REP #$20                                                   ;80D04B|C220    |      ;
     SEP #$10                                                   ;80D04D|E210    |      ;
-    LDA.W #aPaletteAnim_Row2Col07_80E5EE                   ;80D04F|A9EEE5  |      ;
+    LDA.W #aPaletteAnimScript_TownWinter_T4_Slot7                   ;80D04F|A9EEE5  |      ;
     STA.B ptrTemp0x72                                          ;80D052|8572    |000072;
     SEP #$20                                                   ;80D054|E220    |      ;
     LDA.B #$80                                                 ;80D056|A980    |      ;
@@ -2419,7 +2419,7 @@ fPaletteAnim_TownWinter_T4:
 fPaletteAnim_WoodsSpring_T1:
     REP #$20                                                   ;80D067|C220    |      ;
     SEP #$10                                                   ;80D069|E210    |      ;
-    LDA.W #aPaletteAnim_Row3Col08_80E5FF                   ;80D06B|A9FFE5  |      ;
+    LDA.W #aPaletteAnimScript_WoodsSpring_T1_Slot4                   ;80D06B|A9FFE5  |      ;
     STA.B ptrTemp0x72                                          ;80D06E|8572    |000072;
     SEP #$20                                                   ;80D070|E220    |      ;
     LDA.B #$80                                                 ;80D072|A980    |      ;
@@ -2431,7 +2431,7 @@ fPaletteAnim_WoodsSpring_T1:
     JSL.L fPalette_StartColorAnimSlot                         ;80D07E|22488E80|808E48;
     REP #$20                                                   ;80D082|C220    |      ;
     SEP #$10                                                   ;80D084|E210    |      ;
-    LDA.W #aPaletteAnim_Row3Col09_80E616                   ;80D086|A916E6  |      ;
+    LDA.W #aPaletteAnimScript_WoodsSpring_T1_Slot5                   ;80D086|A916E6  |      ;
     STA.B ptrTemp0x72                                          ;80D089|8572    |000072;
     SEP #$20                                                   ;80D08B|E220    |      ;
     LDA.B #$80                                                 ;80D08D|A980    |      ;
@@ -2443,7 +2443,7 @@ fPaletteAnim_WoodsSpring_T1:
     JSL.L fPalette_StartColorAnimSlot                         ;80D099|22488E80|808E48;
     REP #$20                                                   ;80D09D|C220    |      ;
     SEP #$10                                                   ;80D09F|E210    |      ;
-    LDA.W #aPaletteAnim_Row3Col0A_80E62D                   ;80D0A1|A92DE6  |      ;
+    LDA.W #aPaletteAnimScript_WoodsSpring_T1_Slot6                   ;80D0A1|A92DE6  |      ;
     STA.B ptrTemp0x72                                          ;80D0A4|8572    |000072;
     SEP #$20                                                   ;80D0A6|E220    |      ;
     LDA.B #$80                                                 ;80D0A8|A980    |      ;
@@ -2455,7 +2455,7 @@ fPaletteAnim_WoodsSpring_T1:
     JSL.L fPalette_StartColorAnimSlot                         ;80D0B4|22488E80|808E48;
     REP #$20                                                   ;80D0B8|C220    |      ;
     SEP #$10                                                   ;80D0BA|E210    |      ;
-    LDA.W #aPaletteAnim_Row3Col0B_80E644                   ;80D0BC|A944E6  |      ;
+    LDA.W #aPaletteAnimScript_WoodsSpring_T1_Slot7                   ;80D0BC|A944E6  |      ;
     STA.B ptrTemp0x72                                          ;80D0BF|8572    |000072;
     SEP #$20                                                   ;80D0C1|E220    |      ;
     LDA.B #$80                                                 ;80D0C3|A980    |      ;
@@ -4768,7 +4768,7 @@ fPaletteAnim_MountainTopAllSeasonsAndNY_T4:
     JSL.L fPalette_StartColorAnimSlot                         ;80DA27|22488E80|808E48;
     REP #$20                                                   ;80DA2B|C220    |      ;
     SEP #$10                                                   ;80DA2D|E210    |      ;
-    LDA.W #aPaletteAnim_Row4Col05_80ED83                   ;80DA2F|A983ED  |      ;
+    LDA.W #aPaletteAnimScript_MountainTopAllSeasonsAndNY_T4_Slot5                   ;80DA2F|A983ED  |      ;
     STA.B ptrTemp0x72                                          ;80DA32|8572    |000072;
     SEP #$20                                                   ;80DA34|E220    |      ;
     LDA.B #$80                                                 ;80DA36|A980    |      ;
@@ -4791,7 +4791,7 @@ fPaletteAnim_MountainTopAllSeasonsAndNY_T4:
 fPaletteAnim_GoldChicken_All:
     REP #$20                                                   ;80DA47|C220    |      ;
     SEP #$10                                                   ;80DA49|E210    |      ;
-    LDA.W #aPaletteAnim_Row4Col0B_80ED9A                   ;80DA4B|A99AED  |      ;
+    LDA.W #aPaletteAnimScript_GoldChicken_All_Slot4                   ;80DA4B|A99AED  |      ;
     STA.B ptrTemp0x72                                          ;80DA4E|8572    |000072;
     SEP #$20                                                   ;80DA50|E220    |      ;
     LDA.B #$80                                                 ;80DA52|A980    |      ;
@@ -4803,7 +4803,7 @@ fPaletteAnim_GoldChicken_All:
     JSL.L fPalette_StartColorAnimSlot                         ;80DA5E|22488E80|808E48;
     REP #$20                                                   ;80DA62|C220    |      ;
     SEP #$10                                                   ;80DA64|E210    |      ;
-    LDA.W #aPaletteAnim_Row4Col0C_80EDAB                   ;80DA66|A9ABED  |      ;
+    LDA.W #aPaletteAnimScript_GoldChicken_All_Slot5                   ;80DA66|A9ABED  |      ;
     STA.B ptrTemp0x72                                          ;80DA69|8572    |000072;
     SEP #$20                                                   ;80DA6B|E220    |      ;
     LDA.B #$80                                                 ;80DA6D|A980    |      ;
@@ -4815,7 +4815,7 @@ fPaletteAnim_GoldChicken_All:
     JSL.L fPalette_StartColorAnimSlot                         ;80DA79|22488E80|808E48;
     REP #$20                                                   ;80DA7D|C220    |      ;
     SEP #$10                                                   ;80DA7F|E210    |      ;
-    LDA.W #aPaletteAnim_Row4Col0D_80EDBC                   ;80DA81|A9BCED  |      ;
+    LDA.W #aPaletteAnimScript_GoldChicken_All_Slot6                   ;80DA81|A9BCED  |      ;
     STA.B ptrTemp0x72                                          ;80DA84|8572    |000072;
     SEP #$20                                                   ;80DA86|E220    |      ;
     LDA.B #$80                                                 ;80DA88|A980    |      ;
@@ -4827,7 +4827,7 @@ fPaletteAnim_GoldChicken_All:
     JSL.L fPalette_StartColorAnimSlot                         ;80DA94|22488E80|808E48;
     REP #$20                                                   ;80DA98|C220    |      ;
     SEP #$10                                                   ;80DA9A|E210    |      ;
-    LDA.W #aPaletteAnim_Row4Col0E_80EDCD                   ;80DA9C|A9CDED  |      ;
+    LDA.W #aPaletteAnimScript_GoldChicken_All_Slot7                   ;80DA9C|A9CDED  |      ;
     STA.B ptrTemp0x72                                          ;80DA9F|8572    |000072;
     SEP #$20                                                   ;80DAA1|E220    |      ;
     LDA.B #$80                                                 ;80DAA3|A980    |      ;
@@ -4850,7 +4850,7 @@ fPaletteAnim_GoldChicken_All:
 fPaletteAnim_NYPublicSquare_T4:
     REP #$20                                                   ;80DAB4|C220    |      ;
     SEP #$10                                                   ;80DAB6|E210    |      ;
-    LDA.W #aPaletteAnim_Row4Col0C_80EDDE                   ;80DAB8|A9DEED  |      ;
+    LDA.W #aPaletteAnimScript_NYPublicSquare_T4_Slot4                   ;80DAB8|A9DEED  |      ;
     STA.B ptrTemp0x72                                          ;80DABB|8572    |000072;
     SEP #$20                                                   ;80DABD|E220    |      ;
     LDA.B #$80                                                 ;80DABF|A980    |      ;
@@ -4862,7 +4862,7 @@ fPaletteAnim_NYPublicSquare_T4:
     JSL.L fPalette_StartColorAnimSlot                         ;80DACB|22488E80|808E48;
     REP #$20                                                   ;80DACF|C220    |      ;
     SEP #$10                                                   ;80DAD1|E210    |      ;
-    LDA.W #aPaletteAnim_Row4Col0D_80EDEC                   ;80DAD3|A9ECED  |      ;
+    LDA.W #aPaletteAnimScript_NYPublicSquare_T4_Slot5                   ;80DAD3|A9ECED  |      ;
     STA.B ptrTemp0x72                                          ;80DAD6|8572    |000072;
     SEP #$20                                                   ;80DAD8|E220    |      ;
     LDA.B #$80                                                 ;80DADA|A980    |      ;
@@ -4874,7 +4874,7 @@ fPaletteAnim_NYPublicSquare_T4:
     JSL.L fPalette_StartColorAnimSlot                         ;80DAE6|22488E80|808E48;
     REP #$20                                                   ;80DAEA|C220    |      ;
     SEP #$10                                                   ;80DAEC|E210    |      ;
-    LDA.W #aPaletteAnim_Row4Col0E_80EDFA                   ;80DAEE|A9FAED  |      ;
+    LDA.W #aPaletteAnimScript_NYPublicSquare_T4_Slot6                   ;80DAEE|A9FAED  |      ;
     STA.B ptrTemp0x72                                          ;80DAF1|8572    |000072;
     SEP #$20                                                   ;80DAF3|E220    |      ;
     LDA.B #$80                                                 ;80DAF5|A980    |      ;
@@ -4897,7 +4897,7 @@ fPaletteAnim_NYPublicSquare_T4:
 fPaletteAnim_FortuneTeller_T1234:
     REP #$20                                                   ;80DB06|C220    |      ;
     SEP #$10                                                   ;80DB08|E210    |      ;
-    LDA.W #aPaletteAnim_Row1Col07_80EE08                   ;80DB0A|A908EE  |      ;
+    LDA.W #aPaletteAnimScript_FortuneTeller_T1234_Slot4                   ;80DB0A|A908EE  |      ;
     STA.B ptrTemp0x72                                          ;80DB0D|8572    |000072;
     SEP #$20                                                   ;80DB0F|E220    |      ;
     LDA.B #$80                                                 ;80DB11|A980    |      ;
@@ -4909,7 +4909,7 @@ fPaletteAnim_FortuneTeller_T1234:
     JSL.L fPalette_StartColorAnimSlot                         ;80DB1D|22488E80|808E48;
     REP #$20                                                   ;80DB21|C220    |      ;
     SEP #$10                                                   ;80DB23|E210    |      ;
-    LDA.W #aPaletteAnim_Row1Col08_80EE16                   ;80DB25|A916EE  |      ;
+    LDA.W #aPaletteAnimScript_FortuneTeller_T1234_Slot5                   ;80DB25|A916EE  |      ;
     STA.B ptrTemp0x72                                          ;80DB28|8572    |000072;
     SEP #$20                                                   ;80DB2A|E220    |      ;
     LDA.B #$80                                                 ;80DB2C|A980    |      ;
@@ -4921,7 +4921,7 @@ fPaletteAnim_FortuneTeller_T1234:
     JSL.L fPalette_StartColorAnimSlot                         ;80DB38|22488E80|808E48;
     REP #$20                                                   ;80DB3C|C220    |      ;
     SEP #$10                                                   ;80DB3E|E210    |      ;
-    LDA.W #aPaletteAnim_Row1Col0D_80EE24                   ;80DB40|A924EE  |      ;
+    LDA.W #aPaletteAnimScript_FortuneTeller_T1234_Slot6                   ;80DB40|A924EE  |      ;
     STA.B ptrTemp0x72                                          ;80DB43|8572    |000072;
     SEP #$20                                                   ;80DB45|E220    |      ;
     LDA.B #$80                                                 ;80DB47|A980    |      ;
@@ -4933,7 +4933,7 @@ fPaletteAnim_FortuneTeller_T1234:
     JSL.L fPalette_StartColorAnimSlot                         ;80DB53|22488E80|808E48;
     REP #$20                                                   ;80DB57|C220    |      ;
     SEP #$10                                                   ;80DB59|E210    |      ;
-    LDA.W #aPaletteAnim_Row1Col0E_80EE32                   ;80DB5B|A932EE  |      ;
+    LDA.W #aPaletteAnimScript_FortuneTeller_T1234_Slot7                   ;80DB5B|A932EE  |      ;
     STA.B ptrTemp0x72                                          ;80DB5E|8572    |000072;
     SEP #$20                                                   ;80DB60|E220    |      ;
     LDA.B #$80                                                 ;80DB62|A980    |      ;
@@ -4945,7 +4945,7 @@ fPaletteAnim_FortuneTeller_T1234:
     JSL.L fPalette_StartColorAnimSlot                         ;80DB6E|22488E80|808E48;
     REP #$20                                                   ;80DB72|C220    |      ;
     SEP #$10                                                   ;80DB74|E210    |      ;
-    LDA.W #aPaletteAnim_Row3Col06_80EE40                   ;80DB76|A940EE  |      ;
+    LDA.W #aPaletteAnimScript_FortuneTeller_T1234_Slot8                   ;80DB76|A940EE  |      ;
     STA.B ptrTemp0x72                                          ;80DB79|8572    |000072;
     SEP #$20                                                   ;80DB7B|E220    |      ;
     LDA.B #$80                                                 ;80DB7D|A980    |      ;
@@ -4957,7 +4957,7 @@ fPaletteAnim_FortuneTeller_T1234:
     JSL.L fPalette_StartColorAnimSlot                         ;80DB89|22488E80|808E48;
     REP #$20                                                   ;80DB8D|C220    |      ;
     SEP #$10                                                   ;80DB8F|E210    |      ;
-    LDA.W #aPaletteAnim_Row3Col09_80EE4E                   ;80DB91|A94EEE  |      ;
+    LDA.W #aPaletteAnimScript_FortuneTeller_T1234_Slot9                   ;80DB91|A94EEE  |      ;
     STA.B ptrTemp0x72                                          ;80DB94|8572    |000072;
     SEP #$20                                                   ;80DB96|E220    |      ;
     LDA.B #$80                                                 ;80DB98|A980    |      ;
@@ -4969,7 +4969,7 @@ fPaletteAnim_FortuneTeller_T1234:
     JSL.L fPalette_StartColorAnimSlot                         ;80DBA4|22488E80|808E48;
     REP #$20                                                   ;80DBA8|C220    |      ;
     SEP #$10                                                   ;80DBAA|E210    |      ;
-    LDA.W #aPaletteAnim_Row3Col0A_80EE5C                   ;80DBAC|A95CEE  |      ;
+    LDA.W #aPaletteAnimScript_FortuneTeller_T1234_Slot10                   ;80DBAC|A95CEE  |      ;
     STA.B ptrTemp0x72                                          ;80DBAF|8572    |000072;
     SEP #$20                                                   ;80DBB1|E220    |      ;
     LDA.B #$80                                                 ;80DBB3|A980    |      ;
@@ -4981,7 +4981,7 @@ fPaletteAnim_FortuneTeller_T1234:
     JSL.L fPalette_StartColorAnimSlot                         ;80DBBF|22488E80|808E48;
     REP #$20                                                   ;80DBC3|C220    |      ;
     SEP #$10                                                   ;80DBC5|E210    |      ;
-    LDA.W #aPaletteAnim_Row3Col0B_80EE6A                   ;80DBC7|A96AEE  |      ;
+    LDA.W #aPaletteAnimScript_FortuneTeller_T1234_Slot11                   ;80DBC7|A96AEE  |      ;
     STA.B ptrTemp0x72                                          ;80DBCA|8572    |000072;
     SEP #$20                                                   ;80DBCC|E220    |      ;
     LDA.B #$80                                                 ;80DBCE|A980    |      ;
@@ -4993,7 +4993,7 @@ fPaletteAnim_FortuneTeller_T1234:
     JSL.L fPalette_StartColorAnimSlot                         ;80DBDA|22488E80|808E48;
     REP #$20                                                   ;80DBDE|C220    |      ;
     SEP #$10                                                   ;80DBE0|E210    |      ;
-    LDA.W #aPaletteAnim_Row3Col0C_80EE78                   ;80DBE2|A978EE  |      ;
+    LDA.W #aPaletteAnimScript_FortuneTeller_T1234_Slot12                   ;80DBE2|A978EE  |      ;
     STA.B ptrTemp0x72                                          ;80DBE5|8572    |000072;
     SEP #$20                                                   ;80DBE7|E220    |      ;
     LDA.B #$80                                                 ;80DBE9|A980    |      ;
@@ -5005,7 +5005,7 @@ fPaletteAnim_FortuneTeller_T1234:
     JSL.L fPalette_StartColorAnimSlot                         ;80DBF5|22488E80|808E48;
     REP #$20                                                   ;80DBF9|C220    |      ;
     SEP #$10                                                   ;80DBFB|E210    |      ;
-    LDA.W #aPaletteAnim_Row3Col0D_80EE86                   ;80DBFD|A986EE  |      ;
+    LDA.W #aPaletteAnimScript_FortuneTeller_T1234_Slot13                   ;80DBFD|A986EE  |      ;
     STA.B ptrTemp0x72                                          ;80DC00|8572    |000072;
     SEP #$20                                                   ;80DC02|E220    |      ;
     LDA.B #$80                                                 ;80DC04|A980    |      ;
@@ -5017,7 +5017,7 @@ fPaletteAnim_FortuneTeller_T1234:
     JSL.L fPalette_StartColorAnimSlot                         ;80DC10|22488E80|808E48;
     REP #$20                                                   ;80DC14|C220    |      ;
     SEP #$10                                                   ;80DC16|E210    |      ;
-    LDA.W #aPaletteAnim_Row3Col0E_80EE94                   ;80DC18|A994EE  |      ;
+    LDA.W #aPaletteAnimScript_FortuneTeller_T1234_Slot14                   ;80DC18|A994EE  |      ;
     STA.B ptrTemp0x72                                          ;80DC1B|8572    |000072;
     SEP #$20                                                   ;80DC1D|E220    |      ;
     LDA.B #$80                                                 ;80DC1F|A980    |      ;
@@ -5052,7 +5052,7 @@ fPaletteAnim_DancingS2_T1:
     JSL.L fPalette_StartColorAnimSlot                         ;80DC47|22488E80|808E48;
     REP #$20                                                   ;80DC4B|C220    |      ;
     SEP #$10                                                   ;80DC4D|E210    |      ;
-    LDA.W #aPaletteAnim_Row2Col0E_80E455                   ;80DC4F|A955E4  |      ;
+    LDA.W #aPaletteAnimScript_DancingS2_T1_Slot5                   ;80DC4F|A955E4  |      ;
     STA.B ptrTemp0x72                                          ;80DC52|8572    |000072;
     SEP #$20                                                   ;80DC54|E220    |      ;
     LDA.B #$80                                                 ;80DC56|A980    |      ;
@@ -5064,7 +5064,7 @@ fPaletteAnim_DancingS2_T1:
     JSL.L fPalette_StartColorAnimSlot                         ;80DC62|22488E80|808E48;
     REP #$20                                                   ;80DC66|C220    |      ;
     SEP #$10                                                   ;80DC68|E210    |      ;
-    LDA.W #aPaletteAnim_Row2Col0F_80E463                   ;80DC6A|A963E4  |      ;
+    LDA.W #aPaletteAnimScript_DancingS2_T1_Slot6                   ;80DC6A|A963E4  |      ;
     STA.B ptrTemp0x72                                          ;80DC6D|8572    |000072;
     SEP #$20                                                   ;80DC6F|E220    |      ;
     LDA.B #$80                                                 ;80DC71|A980    |      ;
@@ -5076,7 +5076,7 @@ fPaletteAnim_DancingS2_T1:
     JSL.L fPalette_StartColorAnimSlot                         ;80DC7D|22488E80|808E48;
     REP #$20                                                   ;80DC81|C220    |      ;
     SEP #$10                                                   ;80DC83|E210    |      ;
-    LDA.W #aPaletteAnim_Row6Col0C_80EEA2                   ;80DC85|A9A2EE  |      ;
+    LDA.W #aPaletteAnimScript_DancingS2_T1_Slot7                   ;80DC85|A9A2EE  |      ;
     STA.B ptrTemp0x72                                          ;80DC88|8572    |000072;
     SEP #$20                                                   ;80DC8A|E220    |      ;
     LDA.B #$80                                                 ;80DC8C|A980    |      ;
@@ -5088,7 +5088,7 @@ fPaletteAnim_DancingS2_T1:
     JSL.L fPalette_StartColorAnimSlot                         ;80DC98|22488E80|808E48;
     REP #$20                                                   ;80DC9C|C220    |      ;
     SEP #$10                                                   ;80DC9E|E210    |      ;
-    LDA.W #aPaletteAnim_Row6Col0D_80EEB3                   ;80DCA0|A9B3EE  |      ;
+    LDA.W #aPaletteAnimScript_DancingS2_T1_Slot8                   ;80DCA0|A9B3EE  |      ;
     STA.B ptrTemp0x72                                          ;80DCA3|8572    |000072;
     SEP #$20                                                   ;80DCA5|E220    |      ;
     LDA.B #$80                                                 ;80DCA7|A980    |      ;
@@ -5100,7 +5100,7 @@ fPaletteAnim_DancingS2_T1:
     JSL.L fPalette_StartColorAnimSlot                         ;80DCB3|22488E80|808E48;
     REP #$20                                                   ;80DCB7|C220    |      ;
     SEP #$10                                                   ;80DCB9|E210    |      ;
-    LDA.W #aPaletteAnim_Row6Col0F_80EEC4                   ;80DCBB|A9C4EE  |      ;
+    LDA.W #aPaletteAnimScript_DancingS2_T1_Slot9                   ;80DCBB|A9C4EE  |      ;
     STA.B ptrTemp0x72                                          ;80DCBE|8572    |000072;
     SEP #$20                                                   ;80DCC0|E220    |      ;
     LDA.B #$80                                                 ;80DCC2|A980    |      ;
@@ -5112,7 +5112,7 @@ fPaletteAnim_DancingS2_T1:
     JSL.L fPalette_StartColorAnimSlot                         ;80DCCE|22488E80|808E48;
     REP #$20                                                   ;80DCD2|C220    |      ;
     SEP #$10                                                   ;80DCD4|E210    |      ;
-    LDA.W #aPaletteAnim_Row6Col05_80EED5                   ;80DCD6|A9D5EE  |      ;
+    LDA.W #aPaletteAnimScript_DancingS2_T1_Slot10                   ;80DCD6|A9D5EE  |      ;
     STA.B ptrTemp0x72                                          ;80DCD9|8572    |000072;
     SEP #$20                                                   ;80DCDB|E220    |      ;
     LDA.B #$80                                                 ;80DCDD|A980    |      ;
@@ -5124,7 +5124,7 @@ fPaletteAnim_DancingS2_T1:
     JSL.L fPalette_StartColorAnimSlot                         ;80DCE9|22488E80|808E48;
     REP #$20                                                   ;80DCED|C220    |      ;
     SEP #$10                                                   ;80DCEF|E210    |      ;
-    LDA.W #aPaletteAnim_Row6Col0E_80EEEC                   ;80DCF1|A9ECEE  |      ;
+    LDA.W #aPaletteAnimScript_DancingS2_T1_Slot11                   ;80DCF1|A9ECEE  |      ;
     STA.B ptrTemp0x72                                          ;80DCF4|8572    |000072;
     SEP #$20                                                   ;80DCF6|E220    |      ;
     LDA.B #$80                                                 ;80DCF8|A980    |      ;
@@ -5147,7 +5147,7 @@ fPaletteAnim_DancingS2_T1:
 fPaletteAnim_RestaurantBedroom_T1234:
     REP #$20                                                   ;80DD09|C220    |      ;
     SEP #$10                                                   ;80DD0B|E210    |      ;
-    LDA.W #aPaletteAnim_Row2Col07_80EF06                   ;80DD0D|A906EF  |      ;
+    LDA.W #aPaletteAnimScript_RestaurantBedroom_T1234_Slot4                   ;80DD0D|A906EF  |      ;
     STA.B ptrTemp0x72                                          ;80DD10|8572    |000072;
     SEP #$20                                                   ;80DD12|E220    |      ;
     LDA.B #$80                                                 ;80DD14|A980    |      ;
@@ -5159,7 +5159,7 @@ fPaletteAnim_RestaurantBedroom_T1234:
     JSL.L fPalette_StartColorAnimSlot                         ;80DD20|22488E80|808E48;
     REP #$20                                                   ;80DD24|C220    |      ;
     SEP #$10                                                   ;80DD26|E210    |      ;
-    LDA.W #aPaletteAnim_Row2Col0D_80EF11                   ;80DD28|A911EF  |      ;
+    LDA.W #aPaletteAnimScript_RestaurantBedroom_T1234_Slot5                   ;80DD28|A911EF  |      ;
     STA.B ptrTemp0x72                                          ;80DD2B|8572    |000072;
     SEP #$20                                                   ;80DD2D|E220    |      ;
     LDA.B #$80                                                 ;80DD2F|A980    |      ;
@@ -5171,7 +5171,7 @@ fPaletteAnim_RestaurantBedroom_T1234:
     JSL.L fPalette_StartColorAnimSlot                         ;80DD3B|22488E80|808E48;
     REP #$20                                                   ;80DD3F|C220    |      ;
     SEP #$10                                                   ;80DD41|E210    |      ;
-    LDA.W #aPaletteAnim_Row2Col0E_80EF1C                   ;80DD43|A91CEF  |      ;
+    LDA.W #aPaletteAnimScript_RestaurantBedroom_T1234_Slot6                   ;80DD43|A91CEF  |      ;
     STA.B ptrTemp0x72                                          ;80DD46|8572    |000072;
     SEP #$20                                                   ;80DD48|E220    |      ;
     LDA.B #$80                                                 ;80DD4A|A980    |      ;
