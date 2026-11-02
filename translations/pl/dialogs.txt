@@ -1124,7 +1124,7 @@ Dziś nie da się wyjść na zewnątrz.<END>
 Nie było większych szkód - to na pewno łaska bogów.<END>
 
 @@ sDialog_0x0162 @@
-Bałem się, że zwieje nasz cenny kurek wiatrowy.<END>
+Bałem się, że zwieje nasz cenny wiatrowskaz.<END>
 
 @@ sDialog_0x0163 @@
 Dobrze, że wszyscy są cali.<END>
@@ -1186,7 +1186,7 @@ Cieszę się…<END>
 Ja… jeszcze nigdy o tym nie myślałam…<END>
 
 @@ sDialog_0x0175 @@
-…Naprawdę? Mogę być ja?<END>
+…Naprawdę? Na pewno chcesz, żebym to była ja?<END>
 
 @@ sDialog_0x0176 @@
 No coś ty, żartujesz sobie.<END>
@@ -1248,14 +1248,14 @@ Do przyszłej wiosny jakoś to skończę…<END>
 Czas tak szybko leci. Wydaje mi się, że poznałam cię całkiem niedawno.<END>
 
 @@ sDialog_0x0189 @@
-Piękna pogoda. Wybierzmy się kiedyś razem na piknik na szczyt góry!<END>
+Piękna pogoda. Wybierzmy się kiedyś razem na piknik na szczyt góry♥<END>
 
 @@ sDialog_0x018A @@
-La la la! Niebo jest niebieskie. Aż człowiek się cieszy.<END>
+La la la♥ Niebo jest niebieskie. Aż człowiek się cieszy.<END>
 
 @@ sDialog_0x018B @@
 Te dziwne kwiaty, które rosną w górach…<NEXT>
-Kiedyś chciałabym je hodować na farmie. To moje marzenie.<END>
+Kiedyś chciałabym je hodować na farmie. To moje marzenie♥<END>
 
 @@ sDialog_0x018C @@
 Dzień dobry, kochanie. Przed chwilą przed domem był wróbel. Taki śliczny.<END>
@@ -1268,11 +1268,11 @@ Chcę codziennie gotować dla ciebie coś pysznego.<END>
 Ma taką piękną sierść, prawda?<END>
 
 @@ sDialog_0x018F @@
-Hmm, wiosna jest jednak cudowna!<END>
+Hmm, wiosna jest jednak cudowna♥<END>
 
 @@ sDialog_0x0190 @@
 Powoli przyzwyczajam się do życia tutaj. Co, czy mi smutno?<NEXT>
-Co ty, przecież jesteś ty.<END>
+Co ty, przecież mam ciebie.<END>
 
 @@ sDialog_0x0191 @@
 W górach jest mnóstwo zwierząt. Czujesz się wtedy, jakbyś coś zyskał, prawda?<END>
@@ -1832,7 +1832,7 @@ Jeśli masz jeszcze coś do zrobienia, zrób to szybko.<END>
 No i znowu nadszedł Festiwal Zbiorów.<NEXT>
 Czy wszyscy już zdecydowali, co zabiorą ze sobą?<NEXT>
 Festiwal odbędzie się jutro na placu.<NEXT>
-Trwa do trzeciej po południu, więc nie spóźnijcie się.<END>
+Zbiórka do 15:00, więc nie spóźnijcie się.<END>
 
 @@ sDialog_0x0238 @@
 Jutro Festiwal Zbiorów.<END>
@@ -1852,22 +1852,22 @@ więc czekaj z niecierpliwością.<END>
 Jutro Festiwal Zbiorów. Uwielbiam śpiewać i tańczyć. Nie mogę się doczekać.<END>
 
 @@ sDialog_0x023D @@
-Jutro Festiwal Zbiorów, co? Znowu już ta pora roku.<END>
+Jutro Festiwal Zbiorów, co? To już ta pora roku.<END>
 
 @@ sDialog_0x023E @@
 Festiwal Zbiorów to święto, na którym świętuje się zbiory z całego roku.<END>
 
 @@ sDialog_0x023F @@
-Do jutrzejszego wielkiego gulaszu zbiorów przynieś coś,<NEXT>co da się normalnie zjeść.<NEXT>Nie przynoś żadnych sandałów ani takich rzeczy.<NEXT>Wyszedłby z tego gulasz zgrozy.<END>
+Na jutrzejszy wielki gulasz zbiorów przynieś coś jadalnego.<NEXT>Nie przynoś sandałów ani takich rzeczy.<NEXT>Wyszedłby z tego gulasz zgrozy.<END>
 
 @@ sDialog_0x0240 @@
 Jutro Festiwal Zbiorów, szefie!<NEXT>
-Skończ pracę wcześniej i przyjdź na plac przed trzecią!<NEXT>
+Skończ pracę wcześniej i przyjdź na plac do 15:00!<NEXT>
 Jeśli masz zwierzęta, lepiej daj im wcześniej paszę!<NEXT>
 I przynieś coś do gulaszu! No to do widzenia, szefie!<END>
 
 @@ sDialog_0x0241 @@
-Jesteś. To od razu wrzuć to do gulaszu.<END>
+Przyszedłeś. Wrzuć to od razu do gulaszu.<END>
 
 @@ sDialog_0x0242 @@
 Ojej, przyszedłeś z pustymi rękami? Trudno, nic na to nie poradzę.<END>
@@ -1888,7 +1888,7 @@ Nie, nie mówię, że to, co gotuje Ann, jest niedobre.<NEXT>
 Całkiem nieźle się to je. Jak się przywyknie.<END>
 
 @@ sDialog_0x0247 @@
-Kosisz trawę pastewną? Można ją kosić do jesieni, więc nakoś jak najwięcej.<NEXT>
+Kosisz trawę pastwiskową? Można ją kosić do jesieni, więc nakoś jak najwięcej.<NEXT>
 Bo inaczej zimą zabraknie paszy dla krów i kur i będziesz w panice.<END>
 
 @@ sDialog_0x0248 @@
@@ -1982,7 +1982,7 @@ Czego się boisz?<END>
 …Ojej, nie wyszło.<END>
 
 @@ sDialog_0x0262 @@
-Dobre, prawda? To owoc zwany trawą pełni księżyca.<NEXT>
+Dobre, prawda? To owoc Trawy Pełni.<NEXT>
 Jest wilgotny i miękki, topi się w ustach jak lody. To moje ulubione!<END>
 
 @@ sDialog_0x0263 @@
@@ -2022,7 +2022,7 @@ No, naciśnij przełącznik!<NEXT>
 …Dziwne.<END>
 
 @@ sDialog_0x026D @@
-………………….<NEXT>
+……………<NEXT>
 Ahahaha! Wiesz, jak wypiłam alkohol, to motylki, no, latajo, no!<END>
 
 @@ sDialog_0x026E @@
@@ -2039,14 +2039,14 @@ Wypijmy za dary ziemi! Na zdrowie!<END>
 Nie jesteś zbyt towarzyski.<END>
 
 @@ sDialog_0x0272 @@
-Jutro Festiwal Kwiatów, szefie!<NEXT>Skończ pracę wcześniej i przyjdź na plac przed trzecią!<NEXT>Jeśli masz zwierzęta, lepiej daj im wcześniej paszę!<NEXT>Rzeczy do wysyłki zostaw w skrzyni, a na pewno je wyślę!<NEXT>No to do widzenia, szefie!<END>
+Jutro Festiwal Kwiatów, szefie!<NEXT>Skończ pracę wcześniej i przyjdź na plac do 15:00!<NEXT>Jeśli masz zwierzęta, lepiej daj im wcześniej paszę!<NEXT>Rzeczy do wysyłki zostaw w skrzyni, a na pewno je wyślę!<NEXT>No to do widzenia, szefie!<END>
 
 @@ sDialog_0x0273 @@
 Informacja o wydarzeniu. Na placu odbędzie się coroczny Festiwal Jajek.<NEXT>
 Pogoda będzie piękna! Zapraszamy wszystkich do udziału.<END>
 
 @@ sDialog_0x0274 @@
-Jutro Festiwal Jajek, szefie!<NEXT>Skończ pracę wcześniej i przyjdź na plac przed trzecią!<NEXT>Jeśli masz zwierzęta, lepiej daj im wcześniej paszę!<NEXT>Rzeczy do wysyłki zostaw w skrzyni, a na pewno je wyślę!<NEXT>No to do widzenia, szefie!<END>
+Jutro Festiwal Jajek, szefie!<NEXT>Skończ pracę wcześniej i przyjdź na plac do 15:00!<NEXT>Jeśli masz zwierzęta, lepiej daj im wcześniej paszę!<NEXT>Rzeczy do wysyłki zostaw w skrzyni, a na pewno je wyślę!<NEXT>No to do widzenia, szefie!<END>
 
 @@ sDialog_0x0275 @@
 To mój popisowy pasztecik z nerkami. Masz ochotę?<NEXT>
