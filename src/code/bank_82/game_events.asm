@@ -26,7 +26,7 @@
 ;          palette index changed the palette animation scripts are reloaded.
 ; @modifies nInGameMinuteCounter, nInGameHourCounter, nCurrentTimeID, strcAudio.trackIdCopy, strcAudio.trackId
 ; @mode    M8X16
-; @calls   fNextDayHandler, fEvents_ShippingSceneDialog, fEvents_NoonMealCheck, fEvents_ShippingScene, fAudio_FadeOutOnTrackChangeSlow, fPalette_AdjustTimePalette, fCore_Zero0x42PtrFromIndex, fPaletteAnim_RunAreaRoutine
+; @calls   fNextDayHandler, fEvents_ShippingSceneDialog, fEvents_NoonMealCheck, fEvents_ShippingScene, fAudio_FadeOutOnTrackChangeSlow, fPalette_AdjustTimePalette, fPalette_StopColorAnimSlotsFrom, fPaletteAnim_RunAreaRoutine
 ; @callers fCore_MainLoop, fMainMenu_PrepareHowToPlay, fMainMenu_StartHowToPlayDemo, fMainMenu_StateOpeningDemo
 ; @note    confidence: medium on "minute counter = frames" - inferred from the 60/15 constants and the per-frame call.
 ;;
@@ -190,7 +190,7 @@ fEvents_NoonMealCheck:
 ; @brief   At 5 pm (nCurrentTimeID = $11) on the farm, start the shipper's visit: set daily1 flag $0400 and run %AIExecute($0006, $0000, $0026).
 ; @details Does nothing at other times or when the player is not on a farm area (strcMap.loadAreaId >= 4). Falls through into
 ;          fEvents_ShippingSceneDialog.
-; @modifies strcDialogDisplay.mapUnk19A, strcFlags.daily1
+; @modifies strcDialogDisplay.inputMode, strcFlags.daily1
 ; @mode    M8X16
 ; @calls   fAI_StartSlotScript (via %AIExecute)
 ; @callers fGame_TimeHandler
@@ -1073,7 +1073,7 @@ fEvents_UpdateMarriageAndChildGrowth:
 ; @region  JP: only one word per season and weekday (aSeasonWordTable and aDayOrdinalWordTable, no ordinal suffix). DE: season and weekday strings are read directly from $828B03.
 ; @modifies strcNames.wSeason, strcNames.wWeekday, strcNames.wDayOrdinal
 ; @mode    M8X16 -> M16
-; @callers fGameEngine_FirstNight, fMainMenu_DrawSaveSlotInfo, fNextDayHandler
+; @callers fGameEngine_ResetSessionState, fMainMenu_DrawSaveSlotInfo, fNextDayHandler
 ; @note    The region branches interleave data tables and the code of fWeather_ApplyForecast in the source; see the labels below.
 ;;
 fEvents_WriteDateStrings:

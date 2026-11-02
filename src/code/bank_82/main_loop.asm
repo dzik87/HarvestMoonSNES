@@ -392,13 +392,13 @@ fMainMenu_SetStateReturnToTitle:
  
 ;;
 ; @brief   Entry of the title screen: reset menu state, load graphics preset 3 and start the state machine.
-; @details Sets strcDialogDisplay.mapUnk19A = 4, the title cursor nTitleMenuCursor = 0 (2 when daily4 flag $0800 is set), clears
+; @details Sets strcDialogDisplay.inputMode = 4, the title cursor nTitleMenuCursor = 0 (2 when daily4 flag $0800 is set), clears
 ;          nIntroHowToPlayIndex(2), loads the default farm map and graphics preset 3. US/JP: shows the Natsume logo (area $5D, palette $6E) first;
 ;          EU/DE skip that screen. Falls into fMainMenu_StateLoop with state 0.
-; @modifies strcDialogDisplay.mapUnk19A, nTitleMenuCursor, nIntroHowToPlayIndex, nIntroHowToPlayIndex2
-; @calls   fObjectMap_LoadDefaultFarm, fCore_ManageGraphicsPresets, fTileMap_MapChangeHandler, fPalette_LoadFirstHalf, fCore_ScreenFadein
+; @modifies strcDialogDisplay.inputMode, nTitleMenuCursor, nIntroHowToPlayIndex, nIntroHowToPlayIndex2
+; @calls   fObjectMap_LoadDefaultFarm, fCore_ApplyGraphicsPreset, fTileMap_LoadAreaGraphics, fPalette_LoadFirstHalf, fCore_ScreenFadein
 ; @mode    M16
-; @callers fCore_InterruptIRQ5
+; @callers fCore_Reset
 ; @region  EU/DE: no logo screen (initial delay is 1 frame instead of 120).
 ;;
 fMainMenu_TitleScreenInit:
@@ -593,7 +593,7 @@ fMainMenu_StateInitialDelay:
 ; @details After the demo (daily2 flag $0004) loads area $5B (farm scroll) with palette $6D, starts the music and fades in, then moves to state $02.
 ;          If the state was changed to 9 meanwhile it ends immediately.
 ; @modifies strcBGScrool.*, strcVariables.n8Temp4, strcVariables.n8Temp3
-; @calls   fAI_RunSlots, fMap_SetupArea, fTileMap_MapChangeHandler, fPalette_LoadFirstHalf, fCore_PrepareTransfer
+; @calls   fAI_RunSlots, fMap_SetupArea, fTileMap_LoadAreaGraphics, fPalette_LoadFirstHalf, fCore_PrepareTransfer
 ; @note    The first block of the private frame loop follows the same list as fMainMenu_PrepareHowToPlay.
 ;;
 fMainMenu_StateOpeningDemo:
@@ -839,7 +839,7 @@ fMainMenu_StateLogoScrollDiagonal:
 ;;
 ; @brief   State $09: rebuild the title screen from scratch after a demo (area $5B backdrop and $5C logo) and show it.
 ; @modifies strcMap.loadAreaId, strcPlayer.posX, strcPlayer.posY, strcDialogDisplay.mapFlags
-; @calls   fCore_ManageGraphicsPresets, fTileMap_MapChangeHandler, fPalette_LoadFirstHalf, fMainMenu_ShowTitleScreen
+; @calls   fCore_ApplyGraphicsPreset, fTileMap_LoadAreaGraphics, fPalette_LoadFirstHalf, fMainMenu_ShowTitleScreen
 ;;
 fMainMenu_StateReinitTitleScreen:
     SEP #$20                                                   ;82DAF5|E220    |      ;
@@ -923,7 +923,7 @@ fMainMenu_StateSkipToTitleScreen:
 ;;
 ; @brief   Show the title logo screen (area $5C): clear scroll offsets, load the area, start the title music, fade in and enter state $04.
 ; @modifies strcBGScrool.*, strcDialogDisplay.mapDestX, strcDialogDisplay.mapDestY, strcDialogDisplay.mapFlags, strcPlayer.posX, strcPlayer.posY, strcVariables.n8Temp4
-; @calls   fTileMap_MapChangeHandler, fAudio_LoadPendingTrack, fAudio_StartPendingTrack, fCore_ScreenFadein
+; @calls   fTileMap_LoadAreaGraphics, fAudio_LoadPendingTrack, fAudio_StartPendingTrack, fCore_ScreenFadein
 ;;
 fMainMenu_ShowTitleScreen:
     REP #$20                                                   ;82DBB2|C220    |      ;
@@ -963,11 +963,11 @@ fMainMenu_ShowTitleScreen:
  
 ;;
 ; @brief   State $04: scroll the title for 60 frames, then install the palette animations that highlight the menu entry under the cursor and go to state $05.
-; @details Palette animation slots (fCore_Store0x72To0x42AtIndex): logo animations aMainMenu_PalAnimLogoA/B in slots 4/5, and for the three menu
+; @details Palette animation slots (fPalette_StartColorAnimSlot): logo animations aMainMenu_PalAnimLogoA/B in slots 4/5, and for the three menu
 ;          entries slots 6, 7, 8 get aMainMenu_PalAnimItemHighlighted for the entry selected by nTitleMenuCursor and aMainMenu_PalAnimItemNormal for the others.
 ; @param   nTitleMenuCursor   title menu cursor (0-2)
 ; @modifies strcVariables.n8Temp3, strcVariables.n8Temp4, ptrTemp0x72, ptrPaletteAnimScripts
-; @calls   fCore_Zero0x42Ptr, fCore_Store0x72To0x42AtIndex
+; @calls   fPalette_StopAllColorAnimSlots, fPalette_StartColorAnimSlot
 ; @note    The US/EU/DE and JP builds order the code of the three cursor cases differently; the result is the same.
 ;;
 fMainMenu_StateTitleStartCursorAnim:
@@ -1536,9 +1536,9 @@ fMainMenu_ReturnToTitleFromSlotSelect:
 ; @brief   State $07: build the New Game slot-select screen (area $5E, graphics preset 4, palette $6F) and highlight the initial slot.
 ; @details Draws the slot frames and the info of both slots (fMainMenu_DrawSaveSlotInfo mode 0), highlights the slot in $098E with palette animations
 ;          (aMainMenu_PalAnimSlotHighlighted / SlotNormal in slots 4 and 5), sets BG1 scroll depending on whether the first slot holds a save
-;          (fGameEngine_LoadContinue), fades in and enters the frame loop fMainMenu_NewGameSlotSelect_WaitFrame.
+;          (fGameEngine_PeekSaveSlot), fades in and enters the frame loop fMainMenu_NewGameSlotSelect_WaitFrame.
 ; @modifies strcMap.loadAreaId, strcBGScrool.*, ptrTemp0x72
-; @calls   fMainMenu_DrawSaveSlotFrames, fMainMenu_DrawSaveSlotInfo, fGameEngine_LoadContinue, fCore_Store0x72To0x42AtIndex
+; @calls   fMainMenu_DrawSaveSlotFrames, fMainMenu_DrawSaveSlotInfo, fGameEngine_PeekSaveSlot, fPalette_StartColorAnimSlot
 ; @note    $098E (save slot cursor, 0/1) is addressed as a raw RAM byte.
 ;;
 fMainMenu_StateNewGameSlotSelect:
@@ -1827,7 +1827,7 @@ fMainMenu_NewGameSlotSelect_WaitFrame:
  
  
 ;;
-; @brief   Cursor moved to slot 2: reload the slot info (fGameEngine_LoadContinue(1)), set BG1 scroll and the highlight palette animations.
+; @brief   Cursor moved to slot 2: reload the slot info (fGameEngine_PeekSaveSlot(1)), set BG1 scroll and the highlight palette animations.
 ;;
 fMainMenu_NewGameSlotSelect_MoveCursorSlot2:
     REP #$20                                                   ;82E16B|C220    |      ;
@@ -1918,7 +1918,7 @@ fMainMenu_NewGameSlotSelect_FrameTail:
 ;;
 ; @brief   State $08: build the Load Game slot-select screen (same layout as New Game, slot info drawn with mode 1).
 ; @details Mirrors fMainMenu_StateNewGameSlotSelect without the BG1 page switching; ends in the frame loop fMainMenu_LoadGameSlotSelect_WaitFrame.
-; @calls   fMainMenu_DrawSaveSlotFrames, fMainMenu_DrawSaveSlotInfo, fCore_Store0x72To0x42AtIndex
+; @calls   fMainMenu_DrawSaveSlotFrames, fMainMenu_DrawSaveSlotInfo, fPalette_StartColorAnimSlot
 ;;
 fMainMenu_StateLoadGameSlotSelect:
     SEP #$20                                                   ;82E1F1|E220    |      ;
@@ -2176,13 +2176,13 @@ fMainMenu_LoadGameSlotSelect_FrameTail:
  
 ;;
 ; @brief   Draw the summary of one save slot (player name, year, season, day, weekday) with glyph transfers into VRAM, or call the empty-slot drawing.
-; @details fGameEngine_LoadContinue(A = slot) loads the slot header; X = 0 means an empty slot (-> fMainMenu_DrawEmptySaveSlot). Otherwise the
+; @details fGameEngine_PeekSaveSlot(A = slot) loads the slot header; X = 0 means an empty slot (-> fMainMenu_DrawEmptySaveSlot). Otherwise the
 ;          four name glyphs (strcNames.sPlayer), year (nCurrentYearID + 1 as a number), the date strings of fEvents_WriteDateStrings and the day number
 ;          are drawn at the VRAM addresses in aMainMenu_SlotInfoTextVramAddr[slot * 8 ..]. DE/EU also draw the year ordinal (aYearOrdinalString).
 ; @param   A   slot (0 or 1)
 ; @param   Y   mode (0 = New Game screen, 1 = Load Game screen)
 ; @mode    M16X16
-; @calls   fGameEngine_LoadContinue, fDialog_TransferGlyph, fDialog_DrawNumericVarDigit, fCore_StartTransfer, fEvents_WriteDateStrings, fMainMenu_DrawEmptySaveSlot
+; @calls   fGameEngine_PeekSaveSlot, fDialog_TransferGlyph, fDialog_DrawNumericVarDigit, fCore_StartTransfer, fEvents_WriteDateStrings, fMainMenu_DrawEmptySaveSlot
 ; @callers fMainMenu_StateLoadGameSlotSelect, fMainMenu_StateNewGameSlotSelect
 ; @region  JP: 8-pixel glyph spacing and one season/weekday glyph pair; EU/DE: 16-pixel spacing and the extra year ordinal.
 ;;

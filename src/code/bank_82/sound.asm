@@ -446,17 +446,17 @@ fObjectEngine_GetObjectPropertyByDirSeason:
 ;;
 ; @brief   Handle the player touching / pressing A at the object in front: pick up, door or shop entrance, sign, or start an interaction.
 ; @details By object id range (X): $F0-$FF: if b1 bit0 is set, start interaction nPlayerInteractionIndex = b0 (!PFLAGS_INTERACTING, action none);
-;          $E0-$EF: nothing; $D0-$DF: show the dialog whose id is the word at row[0] (strcDialogDisplay.mapUnk19A = 2);
+;          $E0-$EF: nothing; $D0-$DF: show the dialog whose id is the word at row[0] (strcDialogDisplay.inputMode = 2);
 ;          $C0-$CF: door; b1 is the "closed" dialog id (0 = always open) and the transition entry (b0) in aScreenTransitionTable
 ;          decides when it is closed through its flag byte: $02 from 17:00, $04 before 17:00, $08 on weekdays, $10 on Saturday, $20 on Sunday,
 ;          $80 on hurricane days (mapFlags $0010) - then the closed dialog is shown; otherwise nothing happens here and the normal transition runs.
 ;          Below $C0: if b1 bit7 (pickup) is set the item aInteractionItemTable[id * 4 + season] is put in the hand (carryItemId, action
 ;          !PACTION_ITEMONHAND; some crop ids $38/$39/$52/$53/$60/$61/$6E/$6F cannot be picked in fall and winter); otherwise, when b2 bit0 is
-;          clear, the player is pushed back (position reset to the last one, newX/newY cleared, step size $10) through fGameEngine_DirectionHandler83AD91.
+;          clear, the player is pushed back (position reset to the last one, newX/newY cleared, step size $10) through fGameEngine_CheckAISlotCollision.
 ; @param   X   object id
-; @modifies strcPlayerData.carryItemId, strcPlayerData.unkMap91F, strcPlayer.*, nPlayerInteractionIndex, nPlayerInteractionArg1, nPlayerInteractionArg2, strcDialogDisplay.mapUnk19A
+; @modifies strcPlayerData.carryItemId, strcPlayerData.unkMap91F, strcPlayer.*, nPlayerInteractionIndex, nPlayerInteractionArg1, nPlayerInteractionArg2, strcDialogDisplay.inputMode
 ; @mode    M8X16
-; @calls   fDialog_DialogHandler, fGameEngine_DirectionHandler83AD91
+; @calls   fDialog_DialogHandler, fGameEngine_CheckAISlotCollision
 ; @callers fInput_PlayerButtonA_Interact
 ; @note    confidence: medium - the b2 bit0 meaning and the aScreenTransitionTable flag bits are read from the compare chain only.
 ;;
@@ -761,7 +761,7 @@ fPlayer_InteractWithFrontObject:
 ; @modifies strcVariables.n16Unk86, strcVariables.n8Temp3
 ; @mode    M16X16
 ; @calls   fObjectEngine_ConvertCoordsToOffset, fMap_CopyTilePatternToTilemapBuffer
-; @callers fTileMap_MapChangeHandler
+; @callers fTileMap_LoadAreaGraphics
 ; @note    confidence: medium - the grid is treated as 64 tiles wide ($40 stride); the ids $73-$79 are grass growth tiles in object_map.asm.
 ;;
 fObjectMap_ConnectAdjacentObjectTiles:

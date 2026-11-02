@@ -739,7 +739,7 @@ fObjectMap_CowEatGrassTile:
 ; @brief   Compute the ranch development rate: count of farm tiles that are developed (ids $05, $06 or $1D-$9F).
 ; @modifies nRanchDevelopmentRate, strcDialogDisplay.mapMultiWidth
 ; @mode    M8X16
-; @callers fAreaInit_HouseHelper
+; @callers fAreaEvents_House_PrepareEnding
 ; @note    The counter is incremented as a 16-bit value although nRanchDevelopmentRate is documented as n8 percent (?);
 ;          confidence: medium.
 ;;

@@ -18,11 +18,11 @@
  
 ;;
 ; @brief   Play the hit/swing sound of the equipped tool for the current front-tile result.
-; @details Reads nToolSoundTable[tool*3]: the voice (reg115) and the sound effect selected by strcPlayerData.toolSound (0 = swing in the air, 1 = hit an object, 2 = none) and starts it with fAudioSetRegister2to0A.
+; @details Reads nToolSoundTable[tool*3]: the voice (reg115) and the sound effect selected by strcPlayerData.toolSound (0 = swing in the air, 1 = hit an object, 2 = none) and starts it with fAudio_PlaySoundEffect.
 ; @param   strcPlayerData.toolEquipped, strcPlayerData.toolSound
-; @modifies strcAudio.reg114, strcAudio.reg115
+; @modifies strcAudio.sfxId, strcAudio.sfxVoice
 ; @mode    M8
-; @calls   fAudioSetRegister2to0A
+; @calls   fAudio_PlaySoundEffect
 ; @callers fPlayerAction_UseTool
 ;;
 fToolUsedSound_PlayToolHit:
@@ -65,12 +65,12 @@ fToolUsedSound_PlayToolHit:
  
 ;;
 ; @brief   When the equipped tool differs from the last one that set up sound (strcAudio.toolId), preload its voice and play its effect samples.
-; @details Uses nToolSoundTable[tool*3] as the voice (reg115); the two effect ids are prepared with fAudio_PrepareSoundEffectSample; nSoundEffectSampleTable maps strcAudio.unk118 to the sample index.
-; @modifies strcAudio.reg114, strcAudio.reg115, strcAudio.index, strcAudio.toolId
+; @details Uses nToolSoundTable[tool*3] as the voice (reg115); the two effect ids are prepared with fAudio_PrepareSoundEffectSample; nSoundEffectSampleTable maps strcAudio.sampleTableTrackId to the sample index.
+; @modifies strcAudio.sfxId, strcAudio.sfxVoice, strcAudio.index, strcAudio.toolId
 ; @mode    M8X16
 ; @calls   fAudio_PrepareSoundEffectSample
 ; @callers fAIAction0x2C_PlaySoundWait, fItemCarriedTool_EquipFromShed, fMap_SetupArea, fPlayerAction_SwapTool, fPlayerInteraction_RingBell, fPlayerInteraction_PlaySoundAndWait
-; @note    confidence: medium - the role of strcAudio.unk118 and the second sample are only inferred.
+; @note    confidence: medium - the role of strcAudio.sampleTableTrackId and the second sample are only inferred.
 ;;
 fToolUsedSound_PlayOnToolChange:
     SEP #$20                                                   ;828FF3|E220    |      ;
@@ -134,7 +134,7 @@ fToolUsedSound_PlayOnToolChange:
 ; @modifies strcObjectData.spriteIdx, strcPlayerData.toolSound, strcPlayerData.unkCounter91B, strcPlayer.action
 ; @mode    M8X16
 ; @calls   fToolUsed_StoreSoundForFrontTile
-; @callers fAIAction0x56_UseEquippedItem, fInput_SetPlayerAction0x0A
+; @callers fAIAction0x56_UseEquippedItem, fInput_SetPlayerAction_UseTool
 ;;
 fToolUsedAnimationHandler:
     SEP #$20                                                   ;8290A8|E220    |      ;
