@@ -1163,7 +1163,7 @@ fShed_PlaceEquippedTool:
 ; @clobbers A X Y
 ; @mode    ? -> ?
 ; @calls   pAreaItemSubrutineTable (indirect)
-; @callers fTileMap_MapChangeHandler
+; @callers fTileMap_LoadAreaGraphics
 ; @see     defs/tables/data/item_subroutines.csv
 ;;
 fAreaItemSubrutine_Run:
