@@ -2978,7 +2978,7 @@ Co?! To… to kurze pióro?!<END>
 "Sekretna rabata"<BR>Wstęp wzbroniony!!<END>
 
 @@ sDialog_0x03A5 @@
-Festiwale w roku<BR>Wiosna, dzień 1:<BR>Festiwal Nowego Roku Wiosna,<NEXT>dzień 23:<BR>Festiwal Kwiatów Jesień,<NEXT>dzień 12:<BR>Festiwal Zbiorów Jesień,<NEXT>dzień 20:<BR>Festiwal Jajek Zima,<NEXT>dzień 10:<BR>Festiwal Dziękczynienia Zima,<NEXT>dzień 24:<BR>Festiwal Gwiezdnej Nocy<END>
+Festiwale w roku<BR>Wiosna, dzień 1:<BR>Festiwal Nowego Roku<NEXT>Wiosna, dzień 23:<BR>Festiwal Kwiatów<NEXT>Jesień, dzień 12:<BR>Festiwal Zbiorów<NEXT>Jesień, dzień 20:<BR>Festiwal Jajek<NEXT>Zima, dzień 10:<BR>Festiwal Dziękczynienia<NEXT>Zima, dzień 24:<BR>Festiwal Gwiezdnej Nocy<END>
 
 @@ sDialog_0x03A6 @@
 ♥<END>
