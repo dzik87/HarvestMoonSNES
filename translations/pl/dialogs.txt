@@ -539,16 +539,16 @@ Od jesieni do zimy mamy mało pracy, bo nie ma czego sprzedawać.<END>
 Wierzysz, że są kwiaty, które kwitną zimą?<NEXT><OPTLBL 1>Wierzę<OPTLBL 2>Żartujesz?<OPT 2>
 
 @@ sDialog_0x00B4 @@
-Na pewno są piękne.<END>
+Na pewno są piękne.♥<END>
 
 @@ sDialog_0x00B5 @@
-Powiem ci, co znaczy język kwiatów z naszego sklepu. Znaczy: "Bardzo cię lubię!"<END>
+Powiem ci, co znaczy język kwiatów z naszego sklepu. Znaczy: "Bardzo cię lubię!"♥<END>
 
 @@ sDialog_0x00B6 @@
-Hej, myślę, że jeśli podarujesz taki kwiat dziewczynie, którą lubisz,<NEXT>na pewno się ucieszy.<END>
+Hej, myślę, że jeśli podarujesz taki kwiat dziewczynie, którą lubisz,<NEXT>na pewno się ucieszy.♥<END>
 
 @@ sDialog_0x00B7 @@
-O tej porze góry są piękne. I jest tam wiele darów natury.<END>
+O tej porze góry są piękne. I jest tam wiele darów natury.♥<END>
 
 @@ sDialog_0x00B8 @@
 Zimą jest smutno…<NEXT>Ale bez zimy nie doceniłoby się wiosny, prawda?<END>
@@ -566,7 +566,7 @@ Zbieram opadłe liście na nawóz do kwiatów.<END>
 Pod tym śniegiem rośliny oddychają. Niesamowite, prawda?<NEXT><OPTLBL 1>Niesamowite!<OPTLBL 2>Nic takiego<OPT 2>
 
 @@ sDialog_0x00BD @@
-Ludzie, zwierzęta i rośliny - wszyscy żyją tak samo.<END>
+Ludzie, zwierzęta i rośliny - wszyscy żyją tak samo.♥<END>
 
 @@ sDialog_0x00BE @@
 Niesamowiteee!<END>
@@ -575,16 +575,16 @@ Niesamowiteee!<END>
 Wiem, że jesteś zajęty pracą, ale postaraj się przyjść na festiwal.<END>
 
 @@ sDialog_0x00C0 @@
-Lubię deszczowe dni. Liście wyglądają wtedy na szczęśliwe.<END>
+Lubię deszczowe dni.♥ Liście wyglądają wtedy na szczęśliwe.<END>
 
 @@ sDialog_0x00C1 @@
 Kwiaty nie tylko koją serce, ale też bywają jadalne i lecznicze.<NEXT>Ale nie zrywam ich bez potrzeby. Kwiaty też chcą żyć.<END>
 
 @@ sDialog_0x00C2 @@
-Słyszałam, że na twojej farmie jest "Sekretny ogródek kwiatowy".<NEXT>Naprawdę?<NEXT>Chciałabym go zobaczyć.<NEXT><OPTLBL 1>Dobrze<OPTLBL 2>Nie chcę<OPT 2>
+Słyszałam, że na twojej farmie jest "Sekretny ogródek kwiatowy".<NEXT>Naprawdę?<NEXT>Chciałabym go zobaczyć.♥<NEXT><OPTLBL 1>Dobrze<OPTLBL 2>Nie chcę<OPT 2>
 
 @@ sDialog_0x00C3 @@
-Wow, nie mogę się doczekać.<END>
+Wow, nie mogę się doczekać.♥<END>
 
 @@ sDialog_0x00C4 @@
 Złośliwy! No i już nie chcę!<END>
@@ -656,7 +656,7 @@ Słuchaj, upiekłam nowe ciasto. Spróbujesz?<NEXT><OPTLBL 1>Spróbuję<OPTLBL 2
 Smakuje? To sernik, ale czy nadaje się do sklepu?<END>
 
 @@ sDialog_0x00DB @@
-Widzę, że masz dużo na głowie. Powodzenia w pracy!<END>
+Widzę, że masz dużo na głowie. Powodzenia w pracy!♥<END>
 
 @@ sDialog_0x00DC @@
 Och, spotkać cię tutaj, co za przypadek.<NEXT><OPTLBL 1>Tak<OPTLBL 2>Nie<OPT 2>
@@ -692,10 +692,10 @@ Witaj, dziś też tryskasz energią.<END>
 To moja specjalna nalewka z owoców. Chcesz?<NEXT><OPTLBL 1>Wypiję<OPTLBL 2>Nie trzeba<OPT 2>
 
 @@ sDialog_0x00E7 @@
-Hihi. Jak wypijesz, dam ci buziaka.<END>
+Hihi.♥ Jak wypijesz, dam ci buziaka.♥<END>
 
 @@ sDialog_0x00E8 @@
-Po co przychodzisz do baru? …Aha, już wiem, chodzi ci o mnie.<END>
+Po co przychodzisz do baru? …Aha, już wiem, chodzi ci o mnie.♥<END>
 
 @@ sDialog_0x00E9 @@
 Nawet w nocy nie robi się zbyt chłodno.<END>
