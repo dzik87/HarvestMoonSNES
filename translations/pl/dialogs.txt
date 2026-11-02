@@ -1456,7 +1456,7 @@ To daje się dziewczynie, którą lubisz. Rozumiesz?<NEXT>
 Dziewczynie, z którą chcesz się ożenić.<END>
 
 @@ sDialog_0x01CB @@
-Wow, niebieskie pióro! Pokaż, pokaż!<END>
+Wow, Niebieskie Pióro! Pokaż, pokaż!<END>
 
 @@ sDialog_0x01CC @@
 Dzień dobry, przepraszam, że tak z samego rana, ale nie widziałeś naszej Marii?<NEXT>
@@ -1531,7 +1531,7 @@ Nie znalazłeś… no tak…<END>
 Wpadła do domu jak burza, zamknęła się w pokoju i tak już siedzi…<END>
 
 @@ sDialog_0x01E0 @@
-To się nazywa "Błękitne Pióro Szczęścia" i jest tradycją w tych stronach.<NEXT>
+To się nazywa "Niebieskie Pióro Szczęścia" i jest tradycją w tych stronach.<NEXT>
 Używa się go przy oświadczynach.<END>
 
 @@ sDialog_0x01E1 @@
@@ -3551,7 +3551,7 @@ Festiwal to wielka szansa!<NEXT>Czasem na różnych festiwalach dziewczyny są w
 To, jak bardzo dziewczyny cię lubią, dowiesz się,<NEXT>zaglądając do pamiętników w ich pokojach.<NEXT>Ale nie podglądaj zbyt często.<NEXT>Powodzenia w zdobywaniu jej serca!<END>
 
 @@ sDialog_0x0464 @@
-Przedmiotem do oświadczyn jest niebieskie pióro.<NEXT>Kiedy jej sympatia wzrośnie, sprawdź w niedzielę domokrążcę!<NEXT>Żeby wziąć ślub, trzeba też rozbudować dom!<END>
+Przedmiotem do oświadczyn jest Niebieskie Pióro.<NEXT>Kiedy jej sympatia wzrośnie, sprawdź w niedzielę domokrążcę!<NEXT>Żeby wziąć ślub, trzeba też rozbudować dom!<END>
 
 @@ sDialog_0x0465 @@
 Aha, Ellen. W soboty bywa za domem handlarza zwierząt.<NEXT>Na Festiwalu Gwiezdnej Nocy przychodzi na plac.<NEXT>Na prezent dobre są kwiaty, ale ucieszy ją też mleko, które sam wydoisz,<NEXT>albo jajka.<END>
