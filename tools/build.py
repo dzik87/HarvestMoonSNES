@@ -61,7 +61,11 @@ def main() -> int:
     p.add_argument("--translation", metavar="LANG", help="build a translated ROM on the US engine (translations/LANG/, docs/translation.md); no original hash exists for it")
     p.add_argument("--fallback", choices=("us", "error"), default="us", help="translation: text of the ids that are not translated yet (default: the US text)")
     p.add_argument("--allow-errors", action="store_true", help="translation: build although the check reports errors")
+    p.add_argument("--patch", choices=("bps", "ips", "both"), help="translation: also write a patch (original US ROM -> translated ROM) next to the output (tools/translate/make_patch.py); the distribution form")
+    p.add_argument("--patch-source", metavar="ROM", help="translation: your original US ROM for --patch (default: $HM_ROM_US or $HM_ROM_DIR/US/*.sfc)")
     args = p.parse_args()
+    if args.patch and not args.translation:
+        sys.exit("--patch needs --translation")
     if args.translation and args.region != "US":
         sys.exit("--translation uses the US engine: build with --region US")
     if args.translation and args.out == ROOT / "build" / "HarvestMoon.sfc":
@@ -112,6 +116,13 @@ def main() -> int:
         print("  strings: %s; name grid: %s" % (", ".join("%s %d slot(s)" % (t, len(sl)) for t, sl in info["strings"]) or "none", "%d rows" % info["grid_rows"] if info["grid_rows"] else "original"))
         print("  dialogs: %d of %d translated, %d from the US text, %d bytes in %d bank(s); %d check error(s), %d warning(s)"
               % (summary["translated"], summary["total"], summary["fallback"], summary["bytes"], len(summary["banks"]), summary["errors"], summary["warnings"]))
+        if args.patch:
+            import make_patch
+            try:
+                make_patch.patch_build(out, ("bps", "ips") if args.patch == "both" else (args.patch,), args.patch_source)
+            except make_patch.PatchError as e:
+                print("patch: %s" % e, file=sys.stderr)
+                return 1
         return 0
     if args.no_verify:
         return 0

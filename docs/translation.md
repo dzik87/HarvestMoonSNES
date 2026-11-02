@@ -32,6 +32,24 @@ The translated ROM is written to `build/HarvestMoon_US_<lang>.sfc` (plus its asa
 tables and the name grid it patched, and the header checksum (recomputed). The four original
 releases are built exactly as before (`python tools/build.py [--region EU|DE|JP]`).
 
+## Distribution: patch files
+
+A translated ROM is never distributed; the distribution form is a **patch** that turns the original US ROM into the translated one (a delta: only the changed bytes are in the file, no ROM data is copied).
+
+```sh
+python tools/build.py --region US --translation pl --patch bps          # also writes build/HarvestMoon_US_pl.bps   (--patch ips | both)
+python tools/translate/make_patch.py create  original_us.sfc build/HarvestMoon_US_pl.sfc -o pl.bps     # the same on existing files
+python tools/translate/make_patch.py apply   pl.bps "Harvest Moon (USA).sfc" -o pl.sfc   # what a player does with their own ROM
+python tools/translate/make_patch.py verify  pl.bps --source original_us.sfc --target build/HarvestMoon_US_pl.sfc
+python tools/translate/make_patch.py info    pl.bps
+```
+
+* **BPS** (primary, beat specification): stores the CRC32 of the source, the target and the patch; `apply` refuses any ROM that is not the original US release (`--force` skips only the source check; the CRC of the result is always checked).
+* **IPS** (compatibility): 24 bit offsets, so the ROM must be smaller than 16 MB (the 2 MB game is fine); no checksums. A change at the offset of the text `EOF` is started one byte earlier (one stored unchanged byte), a shorter target uses the truncation extension.
+* `apply` accepts the original with or without a 512 byte copier header (detected from the file size) and writes a headerless ROM (`--keep-header` keeps the header of the input).
+* `--patch` finds your original through `--patch-source FILE`, `$HM_ROM_US` or `$HM_ROM_DIR/US/*.sfc`, checks it against `tests/expected.json` (US) and verifies the patch by applying it before writing.
+* Pure standard library Python, binary file access only, paths with spaces work on Windows.
+
 ## Text syntax (`translations/<lang>/dialogs.txt`)
 
     @@ sDialog_0x0123 @@
