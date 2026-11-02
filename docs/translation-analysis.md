@@ -93,7 +93,7 @@ Evidence: `src/code/bank_83/dialog.asm`, `src/code/bank_84/input.asm`, `src/code
 | Cells per screen | **84** (cells 0-83) | 3 x 28; the observed maximum is 84 in EU/DE, 83 on `<NEXT>` screens in all three |
 | Wrapping | **none in the engine**; the text is a plain stream of cells and cell 28 simply follows cell 27 | `.getCurrentLetter` $839534 loop: one glyph per step, no word logic. The data pads lines with spaces (id `$00B1`) and 276 words in US are split across a line edge in the original |
 | Line breaks | do not exist; `\n` in the dialog sources is cosmetic (`dialog.py`). Padding with spaces produces a visual break | |
-| `<NEXT>` (`$00A2`) | waits for A, then clears the box and restarts at cell 0 (`fInput_DialogNextScreen` $84CF62: `dialogUnk185 = $5010`, reloads the font tiles) | |
+| `<NEXT>` (`$00A2`) | waits for A, then clears the box and restarts at cell 0 (`fInput_DialogNextScreen` $84CF62: `glyphVramAddr = $5010`, reloads the font tiles) | |
 | `<NEXT>` marker | blinking arrow drawn into **cell 83** (VRAM `$5528`, `.A2_nextScreen` $8395F1); a `<NEXT>` screen must leave cell 83 free: max **83** cells (checked: no `<NEXT>` screen in US/EU/DE is longer) | |
 | `<END>` screen | up to 84 cells; the end-of-dialog blink icon is a tilemap icon, not a cell (`fDialog_AnimateBlinkIcon` $839495) | |
 | Overflow | text beyond cell 83 is written behind the box (VRAM garbage); US id 638 (never referenced) has 94 cells | |

@@ -170,7 +170,7 @@ struct strcPlayer           $7E00D2
     .posX                   : skip 2    ; D6-D7     current coords
     .posY                   : skip 2    ; D8-D9     current coords
     .direction              : skip 2    ; DA-DB     
-    .unkDC                  : skip 2    ; DC-DD     
+    .gameObjectSlotLimit    : skip 2    ; DC-DD     object slots in use / search limit (max $28)
     .lastRandomNumber       : skip 1    ; DE        rng + 
     .lastX                  : skip 2    ; DF-E0     last coords
     .lastY                  : skip 2    ; E1-E2     last coords
@@ -219,14 +219,14 @@ struct strcAudio            $7E0103
     .unk10E                 : skip 1    ; 10E
     .unk10F                 : skip 1    ; 10F
     .trackId                : skip 1    ; 110
-    .unk111                 : skip 1    ; 111
-    .unk112                 : skip 1    ; 112
-    .unk113                 : skip 1    ; 113
-    .reg114                 : skip 1    ; 114
-    .reg115                 : skip 1    ; 115
-    .reg116                 : skip 1    ; 116
+    .startFadeFlag          : skip 1    ; 111       p0 of SPC cmd 8: 1 = fade in the new track
+    .fadeOutFlag            : skip 1    ; 112       p0 of SPC cmd 9: 1 = fade out, 0 = stop at once
+    .fadeTicks              : skip 1    ; 113       p1 of SPC cmds 8/9: fade length ($40 slow, $10 fast)
+    .sfxId                  : skip 1    ; 114       SFX id (!SFX_*) for SPC cmd $0A
+    .sfxVoice               : skip 1    ; 115       SPC voice 0-7 (game uses 6)
+    .sfxPan                 : skip 1    ; 116       pan, $0A = centre
     .trackIdCopy            : skip 1    ; 117
-    .unk118                 : skip 1    ; 118
+    .sampleTableTrackId     : skip 1    ; 118       trackId copy ($FF -> 0), index of nSoundEffectSampleTable
     .toolId                 : skip 1    ; 119
     .unkMulti11A            : skip 1    ; 11A
     .unkMulti11B            : skip 1    ; 11B
@@ -304,22 +304,22 @@ struct strcDialogDisplay    $7E017D
     .mapMultiWidth          : skip 1    ; 181
     .mapMultiHeight         : skip 1    ; 182
     .dialogId               : skip 2    ; 183-184
-    .dialogUnk185           : skip 2    ; 185-186   
+    .glyphVramAddr          : skip 2    ; 185-186   VRAM word address of the next text glyph cell ($5010 = cell 0)
     .dialogCurrentOffset    : skip 2    ; 187-188   current offset in current dialog / index
-    .dialoUnk189            : skip 1    ; 189
-    .dialoUnk18A            : skip 1    ; 18A
+    .glyphTimer             : skip 1    ; 189       0-4 frame counter, a glyph is drawn at 4
+    .helpCursor             : skip 1    ; 18A       tool help menu cursor 0-10 (left) / 11-21 (right)
     .dialogBlinkTimer       : skip 1    ; 18B       time used for blinking effect for next screen sign
     .dialogVarSize          : skip 1    ; 18C
     .dialogNameVarSize      : skip 1    ; 18D
     .dialogOptionsCount     : skip 1    ; 18E       stores how many options there was for current dialog
     .dialogOptionsAnswer    : skip 1    ; 18F       stores id of selected option
     .fontGlyphType          : skip 1    ; 190       1 - wide, 0 - thin ???
-    .dialogUnk191           : skip 1    ; 191       TEST THIS - might be dialog display location ?
+    .boxPosition            : skip 1    ; 191       dialog box position 0 auto / 1 / 2 (BG3 scroll offset (n-1)*$80)
     .dialogNumericVarSize   : skip 3    ; 192-194   used to store dialog numeric value - sizes 0-3
     .mapCurrentPresetId     : skip 1    ; 195    
     .mapFlags               : skip 2    ; 196-197
     .mapFlagsBackup         : skip 2    ; 198-199
-    .mapUnk19A              : skip 1    ; 19A
+    .inputMode              : skip 1    ; 19A       fInput_Handler mode: 1 game, 2 dialog, 3 help menu, 4 title, 5 name entry, 6 cutscene dialog
     .dialogFlags            : skip 1    ; 19B
 endstruct
 

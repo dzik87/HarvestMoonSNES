@@ -193,7 +193,7 @@ def load():
     p.engine_rom = ((int(m.group(2), 16) << 16) | int(m.group(1), 16)) if m else 0xAD8000
     m = re.search(r"fAudio_UploadData:.*?LDA\.W #\$([0-9A-F]{4})[^\n]*\n\s*TAX", text, re.S)
     p.engine_size = int(m.group(1), 16) if m else 0x0FD6
-    func = _section(text, "fAudio_UploadSpcDriver", "fAudio_LoadCommonSamples")
+    func = _section(text, "fAudio_UploadSfxBlock", "fAudio_LoadCommonSamples")
     m_size = re.search(r"LDA\.W #\$([0-9A-F]{4})[^\n]*\n\s*STA\.B strcVariables\.n16Temp1", func)
     m_ptr = re.search(r"LDA\.W #\$([0-9A-F]{4})[^\n]*\n\s*STA\.B ptrAudioData\b", func)
     m_bank = re.search(r"LDA\.B #\$([0-9A-F]{2})[^\n]*\n\s*STA\.B ptrAudioData\+2", func)

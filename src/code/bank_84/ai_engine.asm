@@ -318,7 +318,7 @@ fAI_StartSlotScriptAtFrontTile:
 fAI_RunSlots:
     SEP #$20                                                   ;84816F|E220    |      ;
     REP #$10                                                   ;848171|C210    |      ;
-    LDA.W strcDialogDisplay.mapUnk19A                          ;848173|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.inputMode                          ;848173|AD9A01  |00019A;
     CMP.B #$02                                                 ;848176|C902    |      ;
     BNE +                                                      ;848178|D003    |84817D;
     JMP.W .return                                              ;84817A|4C1A82  |84821A;
@@ -2375,10 +2375,10 @@ fAIAction0x1C_ShowDialog:
     %AIMoveAction($0002)
     SEP #$20                                                   ;84900A|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84900C|A7C9    |0000C9;
-    STA.W strcDialogDisplay.dialogUnk191                       ;84900E|8D9101  |000191;
+    STA.W strcDialogDisplay.boxPosition                       ;84900E|8D9101  |000191;
     SEP #$20                                                   ;849011|E220    |      ;
     LDA.B #$02                                                 ;849013|A902    |      ;
-    STA.W strcDialogDisplay.mapUnk19A                          ;849015|8D9A01  |00019A;
+    STA.W strcDialogDisplay.inputMode                          ;849015|8D9A01  |00019A;
     JSL.L fDialog_DialogHandler                                ;849018|225F9383|83935F;
     %AIMoveAction($0001)
     REP #$30                                                   ;849026|C230    |      ;
@@ -2408,10 +2408,10 @@ fAIAction0x1D_ShowDialogWithChoice:
     %AIMoveAction($0002)
     SEP #$20                                                   ;84904F|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;849051|A7C9    |0000C9;
-    STA.W strcDialogDisplay.dialogUnk191                       ;849053|8D9101  |000191;
+    STA.W strcDialogDisplay.boxPosition                       ;849053|8D9101  |000191;
     SEP #$20                                                   ;849056|E220    |      ;
     LDA.B #$02                                                 ;849058|A902    |      ;
-    STA.W strcDialogDisplay.mapUnk19A                          ;84905A|8D9A01  |00019A;
+    STA.W strcDialogDisplay.inputMode                          ;84905A|8D9A01  |00019A;
     JSL.L fDialog_DialogHandler                                ;84905D|225F9383|83935F;
     %AIMoveAction($0001)
     REP #$30                                                   ;84906B|C230    |      ;
@@ -3838,9 +3838,9 @@ fAIAction0x31_CowDefaultPath:
     SEP #$20                                                   ;849C64|E220    |      ;
     REP #$10                                                   ;849C66|C210    |      ;
     LDA.B #$00                                                 ;849C68|A900    |      ;
-    STA.W strcDialogDisplay.dialogUnk191                       ;849C6A|8D9101  |000191;
+    STA.W strcDialogDisplay.boxPosition                       ;849C6A|8D9101  |000191;
     LDA.B #$02                                                 ;849C6D|A902    |      ;
-    STA.W strcDialogDisplay.mapUnk19A                          ;849C6F|8D9A01  |00019A;
+    STA.W strcDialogDisplay.inputMode                          ;849C6F|8D9A01  |00019A;
     JSL.L fDialog_DialogHandler                                ;849C72|225F9383|83935F;
     SEP #$20                                                   ;849C76|E220    |      ;
     REP #$10                                                   ;849C78|C210    |      ;
@@ -8521,12 +8521,12 @@ fAIAction0x54_ShowDialogAutoClose:
     %AIMoveAction($0002)
     SEP #$20                                                   ;84BEF1|E220    |      ;
     LDA.B [ptrAIActionData]                                    ;84BEF3|A7C9    |0000C9;
-    STA.W strcDialogDisplay.dialogUnk191                       ;84BEF5|8D9101  |000191;
+    STA.W strcDialogDisplay.boxPosition                       ;84BEF5|8D9101  |000191;
     REP #$20                                                   ;84BEF8|C220    |      ;
     STZ.W $09B1+!RAM_SHIFT                                 ;84BEFA|9CB109  |0009B1;
     SEP #$20                                                   ;84BEFD|E220    |      ;
     LDA.B #$06                                                 ;84BEFF|A906    |      ;
-    STA.W strcDialogDisplay.mapUnk19A                          ;84BF01|8D9A01  |00019A;
+    STA.W strcDialogDisplay.inputMode                          ;84BF01|8D9A01  |00019A;
     JSL.L fDialog_DialogHandler                                ;84BF04|225F9383|83935F;
     %AIMoveAction($0001)
     REP #$30                                                   ;84BF12|C230    |      ;

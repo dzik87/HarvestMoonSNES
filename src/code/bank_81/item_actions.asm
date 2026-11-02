@@ -96,10 +96,10 @@ fItemCarried_Begin:
     SEP #$20                                                   ;818087|E220    |      ;
     REP #$10                                                   ;818089|C210    |      ;
     LDA.B #!SFX_ITEMPICKUP                                                 ;81808B|A908    |      ;
-    STA.W strcAudio.reg114                                     ;81808D|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;81808D|8D1401  |000114;
     LDA.B #$06                                                 ;818090|A906    |      ;
-    STA.W strcAudio.reg115                                     ;818092|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;818095|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;818092|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;818095|22328383|838332;
  
   + RTL                                                        ;818099|6B      |      ;
  
@@ -903,10 +903,10 @@ fEggFestival_WrongEggDialog:
     %UnsetPlayerFlag(!PFLAGS_HOLDINGITEM)
     SEP #$20                                                   ;8183A2|E220    |      ;
     LDA.B #$02                                                 ;8183A4|A902    |      ;
-    STA.W strcDialogDisplay.mapUnk19A                          ;8183A6|8D9A01  |00019A;
+    STA.W strcDialogDisplay.inputMode                          ;8183A6|8D9A01  |00019A;
     LDX.W #$038D                                               ;8183A9|A28D03  |      ;
     LDA.B #$00                                                 ;8183AC|A900    |      ;
-    STA.W strcDialogDisplay.dialogUnk191                       ;8183AE|8D9101  |000191;
+    STA.W strcDialogDisplay.boxPosition                       ;8183AE|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;8183B1|225F9383|83935F;
     RTS                                                        ;8183B5|60      |      ;
  
@@ -2301,7 +2301,7 @@ fItemCarried_PhaseDispatch_Buyable:
 fItemBuy_ShowPurchaseDialog:
     SEP #$20                                                   ;81893F|E220    |      ;
     LDA.B #$02                                                 ;818941|A902    |      ;
-    STA.W strcDialogDisplay.mapUnk19A                          ;818943|8D9A01  |00019A;
+    STA.W strcDialogDisplay.inputMode                          ;818943|8D9A01  |00019A;
     SEP #$20                                                   ;818946|E220    |      ;
     LDA.W nCarriedItemId                                       ;818948|AD8409  |000984;
     CMP.B #$44                                                 ;81894B|C944    |      ;
@@ -2335,7 +2335,7 @@ fItemBuy_ShowPurchaseDialog:
     TAX                                                        ;818973|AA      |      ;
     SEP #$20                                                   ;818974|E220    |      ;
     LDA.B #$00                                                 ;818976|A900    |      ;
-    STA.W strcDialogDisplay.dialogUnk191                       ;818978|8D9101  |000191;
+    STA.W strcDialogDisplay.boxPosition                       ;818978|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81897B|225F9383|83935F;
     SEP #$20                                                   ;81897F|E220    |      ;
     LDA.B #$01                                                 ;818981|A901    |      ;
@@ -2358,7 +2358,7 @@ fItemBuy_ShowPurchaseDialog:
 ;;
 fItemBuy_HandleAnswer:
     SEP #$20                                                   ;818989|E220    |      ;
-    LDA.W strcDialogDisplay.mapUnk19A                          ;81898B|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.inputMode                          ;81898B|AD9A01  |00019A;
     CMP.B #$02                                                 ;81898E|C902    |      ;
     BNE +                                                      ;818990|D003    |818995;
     JMP.W fItemBuy_Return                                       ;818992|4C6A8B  |818B6A;
@@ -2421,7 +2421,7 @@ fItemBuy_HandleAnswer:
 .show_result_dialog:
     SEP #$20                                                   ;8189EB|E220    |      ;
     LDA.B #$02                                                 ;8189ED|A902    |      ;
-    STA.W strcDialogDisplay.mapUnk19A                          ;8189EF|8D9A01  |00019A;
+    STA.W strcDialogDisplay.inputMode                          ;8189EF|8D9A01  |00019A;
     SEP #$20                                                   ;8189F2|E220    |      ;
     LDA.W nCarriedItemId                                       ;8189F4|AD8409  |000984;
     CMP.B #$44                                                 ;8189F7|C944    |      ;
@@ -2458,7 +2458,7 @@ fItemBuy_HandleAnswer:
     TAX                                                        ;818A25|AA      |      ;
     SEP #$20                                                   ;818A26|E220    |      ;
     LDA.B #$00                                                 ;818A28|A900    |      ;
-    STA.W strcDialogDisplay.dialogUnk191                       ;818A2A|8D9101  |000191;
+    STA.W strcDialogDisplay.boxPosition                       ;818A2A|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;818A2D|225F9383|83935F;
     REP #$20                                                   ;818A31|C220    |      ;
     LDA.B strcVariables.n16Temp2                               ;818A33|A580    |000080;
@@ -2495,7 +2495,7 @@ fItemBuy_SetPhaseWaitDialog:
 fItemBuy_ShowDeclineDialog:
     SEP #$20                                                   ;818A4E|E220    |      ;
     LDA.B #$02                                                 ;818A50|A902    |      ;
-    STA.W strcDialogDisplay.mapUnk19A                          ;818A52|8D9A01  |00019A;
+    STA.W strcDialogDisplay.inputMode                          ;818A52|8D9A01  |00019A;
     SEP #$20                                                   ;818A55|E220    |      ;
     LDA.W nCarriedItemId                                       ;818A57|AD8409  |000984;
     CMP.B #$44                                                 ;818A5A|C944    |      ;
@@ -2531,7 +2531,7 @@ fItemBuy_ShowDeclineDialog:
     TAX                                                        ;818A86|AA      |      ;
     SEP #$20                                                   ;818A87|E220    |      ;
     LDA.B #$00                                                 ;818A89|A900    |      ;
-    STA.W strcDialogDisplay.dialogUnk191                       ;818A8B|8D9101  |000191;
+    STA.W strcDialogDisplay.boxPosition                       ;818A8B|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;818A8E|225F9383|83935F;
     BRA fItemBuy_ReturnItemToShelf                                 ;818A92|800C    |818AA0;
  
@@ -2544,7 +2544,7 @@ fItemBuy_ShowDeclineDialog:
 ;;
 fItemBuy_WaitDialogClose:
     SEP #$20                                                   ;818A94|E220    |      ;
-    LDA.W strcDialogDisplay.mapUnk19A                          ;818A96|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.inputMode                          ;818A96|AD9A01  |00019A;
     CMP.B #$02                                                 ;818A99|C902    |      ;
     BNE fItemBuy_ReturnItemToShelf                                 ;818A9B|D003    |818AA0;
     JMP.W fItemBuy_Return                                       ;818A9D|4C6A8B  |818B6A;
@@ -2628,7 +2628,7 @@ fItemBuy_ReturnItemToShelf:
 ;;
 fItemBuy_FinishPurchase:
     SEP #$20                                                   ;818B19|E220    |      ;
-    LDA.W strcDialogDisplay.mapUnk19A                          ;818B1B|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.inputMode                          ;818B1B|AD9A01  |00019A;
     CMP.B #$02                                                 ;818B1E|C902    |      ;
     BNE +                                                      ;818B20|D003    |818B25;
     JMP.W fItemBuy_Return                                       ;818B22|4C6A8B  |818B6A;
@@ -2693,9 +2693,9 @@ fItemFound_ShowFoundDialog:
     TAX                                                        ;818B8A|AA      |      ;
     SEP #$20                                                   ;818B8B|E220    |      ;
     LDA.B #$02                                                 ;818B8D|A902    |      ;
-    STA.W strcDialogDisplay.mapUnk19A                          ;818B8F|8D9A01  |00019A;
+    STA.W strcDialogDisplay.inputMode                          ;818B8F|8D9A01  |00019A;
     LDA.B #$00                                                 ;818B92|A900    |      ;
-    STA.W strcDialogDisplay.dialogUnk191                       ;818B94|8D9101  |000191;
+    STA.W strcDialogDisplay.boxPosition                       ;818B94|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;818B97|225F9383|83935F;
     SEP #$20                                                   ;818B9B|E220    |      ;
     LDA.B #$01                                                 ;818B9D|A901    |      ;
@@ -2717,7 +2717,7 @@ fItemFound_ShowFoundDialog:
 ;;
 fItemFound_Consume:
     SEP #$20                                                   ;818BA5|E220    |      ;
-    LDA.W strcDialogDisplay.mapUnk19A                          ;818BA7|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.inputMode                          ;818BA7|AD9A01  |00019A;
     CMP.B #$02                                                 ;818BAA|C902    |      ;
     BNE +                                                      ;818BAC|D003    |818BB1;
     JMP.W fItemFound_Return                                       ;818BAE|4C238C  |818C23;
@@ -3223,7 +3223,7 @@ fItemCarriedFeed_PutDown:
 fItemSell_ShowPriceDialog:
     SEP #$20                                                   ;818F2A|E220    |      ;
     LDA.B #$02                                                 ;818F2C|A902    |      ;
-    STA.W strcDialogDisplay.mapUnk19A                          ;818F2E|8D9A01  |00019A;
+    STA.W strcDialogDisplay.inputMode                          ;818F2E|8D9A01  |00019A;
     LDA.B #$00                                                 ;818F31|A900    |      ;
     XBA                                                        ;818F33|EB      |      ;
     LDA.W nCarriedItemId                                       ;818F34|AD8409  |000984;
@@ -3237,7 +3237,7 @@ fItemSell_ShowPriceDialog:
     TAX                                                        ;818F44|AA      |      ;
     SEP #$20                                                   ;818F45|E220    |      ;
     LDA.B #$00                                                 ;818F47|A900    |      ;
-    STA.W strcDialogDisplay.dialogUnk191                       ;818F49|8D9101  |000191;
+    STA.W strcDialogDisplay.boxPosition                       ;818F49|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;818F4C|225F9383|83935F;
     SEP #$20                                                   ;818F50|E220    |      ;
     LDA.B #$06                                                 ;818F52|A906    |      ;
@@ -3258,7 +3258,7 @@ fItemSell_ShowPriceDialog:
 ;;
 fItemSell_HandleAnswer:
     SEP #$20                                                   ;818F5A|E220    |      ;
-    LDA.W strcDialogDisplay.mapUnk19A                          ;818F5C|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.inputMode                          ;818F5C|AD9A01  |00019A;
     CMP.B #$02                                                 ;818F5F|C902    |      ;
     BNE +                                                      ;818F61|D003    |818F66;
     JMP.W fItemSell_Return                                       ;818F63|4C0F90  |81900F;
@@ -3283,10 +3283,10 @@ fItemSell_HandleAnswer:
     BEQ fItemSell_ResumeCarry                                        ;818F84|F064    |818FEA;
     SEP #$20                                                   ;818F86|E220    |      ;
     LDA.B #$02                                                 ;818F88|A902    |      ;
-    STA.W strcDialogDisplay.mapUnk19A                          ;818F8A|8D9A01  |00019A;
+    STA.W strcDialogDisplay.inputMode                          ;818F8A|8D9A01  |00019A;
     LDX.W #$02FA                                               ;818F8D|A2FA02  |      ;
     LDA.B #$00                                                 ;818F90|A900    |      ;
-    STA.W strcDialogDisplay.dialogUnk191                       ;818F92|8D9101  |000191;
+    STA.W strcDialogDisplay.boxPosition                       ;818F92|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;818F95|225F9383|83935F;
     REP #$20                                                   ;818F99|C220    |      ;
     LDA.W nGameObjectIdx                                       ;818F9B|AD7809  |000978;
@@ -3328,10 +3328,10 @@ fItemSell_HandleAnswer:
 fItemSell_ShowCancelDialog:
     SEP #$20                                                   ;818FD7|E220    |      ;
     LDA.B #$02                                                 ;818FD9|A902    |      ;
-    STA.W strcDialogDisplay.mapUnk19A                          ;818FDB|8D9A01  |00019A;
+    STA.W strcDialogDisplay.inputMode                          ;818FDB|8D9A01  |00019A;
     LDX.W #$0303                                               ;818FDE|A20303  |      ;
     LDA.B #$00                                                 ;818FE1|A900    |      ;
-    STA.W strcDialogDisplay.dialogUnk191                       ;818FE3|8D9101  |000191;
+    STA.W strcDialogDisplay.boxPosition                       ;818FE3|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;818FE6|225F9383|83935F;
  
 ;;

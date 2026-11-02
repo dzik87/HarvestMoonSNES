@@ -153,7 +153,7 @@ TEXTVAR_HEADER = """# Dialog text variables (<VAR length index>, handler .FFFD_t
 idx,address,size
 """
 TABLES_DOC = ("Release specific values of the dialog text tables (tools/dialogs/texttables.py).  option_vram: aTextDataTableFFFE, the VRAM word "
-              "address stored in strcDialogDisplay.dialogUnk185 for the selected answer (0-4) of an <OPT n> selection menu.")
+              "address stored in strcDialogDisplay.glyphVramAddr for the selected answer (0-4) of an <OPT n> selection menu.")
 
 
 def _off(addr):

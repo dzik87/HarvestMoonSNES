@@ -1,5 +1,27 @@
+;;
+; @file   dialog.asm
+; @brief  Text-box engine: loads the dialog box graphics, starts a dialog by id, prints it glyph by glyph (control codes:
+;         NEXT, END, options, text variables, numeric variables) and animates the "more text" blink icon.
+; @details A dialog is a stream of 16-bit words read through ptrDialog (24-bit pointer from aDialogPointers[id]). Glyph words
+;         are drawn one per 5 frames (strcDialogDisplay.glyphTimer counts 0-4; holding A forces 4). Control words:
+;         $00A2 NEXT (wait for A, new screen), $00B1 space, $FFFC numeric variable, $FFFD text variable, $FFFE option menu,
+;         $FFFF end. Input is handled by src/code/bank_84/input.asm (fInput_DialogHandler), the flags of the state machine
+;         live in strcDialogDisplay.dialogFlags (!DFLAGS_*). Text rules with numbers: docs/translation-analysis.md section 3;
+;         tables at the end of the file: docs/formats/dialog-tables.md.
+; @bank   $83   @range $8392BB-$839FFF
+; @see    src/code/bank_84/input.asm, docs/formats/dialog-tables.md, docs/translation-analysis.md, src/data/dialogs/macros.asm
+;;
+
 ; Bank $83 module "dialog" - starts at $8392BB
  
+;;
+; @brief   Decompresses the dialog box tilemap (Screen_DialogBox) and uploads it and the dialog font to VRAM.
+; @details Tilemap is decompressed to WRAM $7E2000, then DMA'd to VRAM $7800 ($0400 bytes); the dialog font
+;          sFontGlyphs_Dialog ($1000 bytes) goes to VRAM $5000 (BG3 text tiles).
+; @clobbers A X Y
+; @mode    M8X16 -> M16X16
+; @calls   fGraphicsDecompressTilemap, fCore_PrepareTransfer, fCore_StartPreparedTransfer
+;;
 fDialog_LoadDialogBoxGraphics:
     REP #$30                                                   ;8392BB|C230    |      ;
     REP #$20                                                   ;8392BD|C220    |      ;
@@ -51,6 +73,13 @@ fDialog_LoadDialogBoxGraphics:
     RTL                                                        ;83932C|6B      |      ;
  
  
+;;
+; @brief   Re-uploads $0C00 bytes of the dialog font to VRAM $5000 (clears the text area of the box).
+; @details Used after each NEXT screen and at the end of a dialog so the glyph cells start clean.
+; @clobbers A X Y
+; @mode    M8 -> M16X16
+; @calls   fCore_PrepareTransfer, fCore_RemoveTransfer
+;;
 fDialog_ReloadFontTiles:
     SEP #$20                                                   ;83932D|E220    |      ;
     LDA.B #$06                                                 ;83932F|A906    |      ;
@@ -76,19 +105,32 @@ fDialog_ReloadFontTiles:
     RTL                                                        ;83935E|6B      |      ;
  
  
+;;
+; @brief   Starts a dialog: resets the text state, selects the text stream and shifts the BG3 layer so the box is visible.
+; @details Sets glyph destination (glyphVramAddr) to VRAM $5010 (cell 0), offset 0, clears counters, flags = PROCESSDIALOG,
+;          ptrDialog = aDialogPointers[X]. boxPosition selects the box position: 0 = automatic (position 1, or 2 when
+;          the camera Y < $81), the BG3 vertical scroll is lowered by $100 + (position-1)*$80. Also stops the game clock
+;          (nTimeState = 0) and sets daily1 flag $4000 (dialog active).
+; @param   X       dialog id (index into aDialogPointers, 0-1175)
+; @param   strcDialogDisplay.boxPosition   box position request (0 = auto, 1, 2)
+; @modifies strcDialogDisplay.dialogId, strcDialogDisplay.glyphVramAddr, strcDialogDisplay.dialogFlags, ptrDialog, strcBGScrool.BG3VerOffs, nTimeState
+; @clobbers A X
+; @mode    M16X16 -> M16X16
+; @note    Callers also set strcDialogDisplay.inputMode = 2 so that fInput_Handler runs fInput_DialogHandler.
+;;
 fDialog_DialogHandler:
     REP #$30                                                   ;83935F|C230    |      ; X: nDialogPointerIndex
     STX.W strcDialogDisplay.dialogId                           ;839361|8E8301  |000183;
     LDA.W #$5000                                               ;839364|A90050  |      ;
     CLC                                                        ;839367|18      |      ;
     ADC.W #$0010                                               ;839368|691000  |      ;
-    STA.W strcDialogDisplay.dialogUnk185                       ;83936B|8D8501  |000185;
+    STA.W strcDialogDisplay.glyphVramAddr                       ;83936B|8D8501  |000185;
     STZ.W strcDialogDisplay.dialogCurrentOffset                ;83936E|9C8701  |000187;
     SEP #$20                                                   ;839371|E220    |      ;
     LDA.W strcDialogDisplay.dialogFlags                        ;839373|AD9B01  |00019B;
     ORA.B #!DFLAGS_PROCESSDIALOG                                                 
     STA.W strcDialogDisplay.dialogFlags                        ;839378|8D9B01  |00019B;
-    STZ.W strcDialogDisplay.dialoUnk189                        ;83937B|9C8901  |000189;
+    STZ.W strcDialogDisplay.glyphTimer                        ;83937B|9C8901  |000189;
     STZ.W strcDialogDisplay.dialogBlinkTimer                   ;83937E|9C8B01  |00018B;
     STZ.W strcDialogDisplay.dialogVarSize                      ;839381|9C8C01  |00018C;
     STZ.W strcDialogDisplay.dialogOptionsCount                 ;839384|9C8E01  |00018E;
@@ -108,22 +150,22 @@ fDialog_DialogHandler:
     LDA.L aDialogPointers,X                                    ;8393A2|BFF69B83|839BF6;
     STA.B ptrDialog+2                                          ;8393A6|8503    |000003;
     SEP #$20                                                   ;8393A8|E220    |      ;
-    LDA.W strcDialogDisplay.dialogUnk191                       ;8393AA|AD9101  |000191;
+    LDA.W strcDialogDisplay.boxPosition                       ;8393AA|AD9101  |000191;
     BNE +                                                      ;8393AD|D016    |8393C5;
     LDA.B #$01                                                 ;8393AF|A901    |      ;
-    STA.W strcDialogDisplay.dialogUnk191                       ;8393B1|8D9101  |000191;
+    STA.W strcDialogDisplay.boxPosition                       ;8393B1|8D9101  |000191;
     REP #$20                                                   ;8393B4|C220    |      ;
     LDA.W strcObjectData.camY                                  ;8393B6|AD0D09  |00090D;
     CMP.W #$0081                                               ;8393B9|C98100  |      ;
     BCS +                                                      ;8393BC|B007    |8393C5;
     SEP #$20                                                   ;8393BE|E220    |      ;
     LDA.B #$02                                                 ;8393C0|A902    |      ;
-    STA.W strcDialogDisplay.dialogUnk191                       ;8393C2|8D9101  |000191;
+    STA.W strcDialogDisplay.boxPosition                       ;8393C2|8D9101  |000191;
  
   + SEP #$20                                                   ;8393C5|E220    |      ;
     LDA.B #$00                                                 ;8393C7|A900    |      ;
     XBA                                                        ;8393C9|EB      |      ;
-    LDA.W strcDialogDisplay.dialogUnk191                       ;8393CA|AD9101  |000191;
+    LDA.W strcDialogDisplay.boxPosition                       ;8393CA|AD9101  |000191;
     DEC A                                                      ;8393CD|3A      |      ;
     REP #$30                                                   ;8393CE|C230    |      ;
     ASL A                                                      ;8393D0|0A      |      ;
@@ -147,6 +189,14 @@ fDialog_DialogHandler:
     RTL                                                        ;8393F8|6B      |      ;
  
  
+;;
+; @brief   Ends the dialog: clears the flags, restores the BG3 scroll, reloads the font tiles and resumes the game clock.
+; @details If mapFlags has $0020 set, nTimeState bit 0 is set again (time runs); clears daily1 flag $4000.
+; @modifies strcDialogDisplay.dialogFlags, strcBGScrool.BG3VerOffs, nTimeState
+; @clobbers A
+; @mode    M8X16 -> M16X16
+; @calls   fDialog_ReloadFontTiles
+;;
 fDialog_EndDialogRestoreScroll:
     SEP #$20                                                   ;8393F9|E220    |      ;
     REP #$10                                                   ;8393FB|C210    |      ;
@@ -154,7 +204,7 @@ fDialog_EndDialogRestoreScroll:
     SEP #$20                                                   ;839400|E220    |      ;
     LDA.B #$00                                                 ;839402|A900    |      ;
     XBA                                                        ;839404|EB      |      ;
-    LDA.W strcDialogDisplay.dialogUnk191                       ;839405|AD9101  |000191;
+    LDA.W strcDialogDisplay.boxPosition                       ;839405|AD9101  |000191;
     DEC A                                                      ;839408|3A      |      ;
     REP #$20                                                   ;839409|C220    |      ;
     ASL A                                                      ;83940B|0A      |      ;
@@ -186,29 +236,70 @@ fDialog_EndDialogRestoreScroll:
     RTL                                                        ;839446|6B      |      ;
  
  
+;;
+; @brief   JSL wrapper around fDialog_AnimateBlinkIcon.
+; @mode    M16X16
+; @calls   fDialog_AnimateBlinkIcon
+;;
 fDialog_AnimateBlinkIconLong:
     REP #$30                                                   ;839447|C230    |      ;
     JSR.W fDialog_AnimateBlinkIcon                               ;839449|209594  |839495;
     RTL                                                        ;83944C|6B      |      ;
  
  
+;;
+; @brief   Unreferenced 10-byte table.
+; @format  10 bytes (`$10,$50,$70,$51,$50,$53,$70,$50,$50,$52`); meaning unknown (looks like VRAM address bytes).
+; @note    confidence: low - no reader found.
+;;
 aDialogUnused_83944D:
     db $10,$50,$70,$51,$50,$53,$70,$50,$50,$52                 ;83944D|        |      ;
  
+;;
+; @brief   Tilemap words of the blink icon, frame 0 (2x2 tiles: TL, TR, BL, BR; palette 0, priority 1).
+; @format  4 words; tile numbers $1A0,$1A1,$1B0,$1B1 with attributes $2000.
+; @used_by fDialog_DrawBlinkIconFrame (through the fixed address $839457)
+;;
 aDialogBlinkIconTiles_Frame0:
     dw $21A0,$21A1,$21B0,$21B1                                 ;839457|        |      ;
  
+;;
+; @brief   Tilemap words of the blink icon, frame 1 (alternate arrow shape).
+; @format  4 words; tiles $1A2,$1A3,$1B2,$1B3.
+; @used_by fDialog_DrawBlinkIconFrame (through the fixed address $83945F)
+;;
 aDialogBlinkIconTiles_Frame1:
     dw $21A2,$21A3,$21B2,$21B3                                 ;83945F|        |      ;
  
+;;
+; @brief   Dialog ids of the tool help texts, indexed by the help-menu cursor.
+; @format  11 words: dialog ids $000F-$0019 (Sickle, Hoe, Axe, Hammer, Watering can, Milker, Brush, Bell, seeds, ...).
+; @index   strcDialogDisplay.helpCursor * 2 (cursor 0-10)
+; @used_by fInput_HelpMenu_Confirm
+;;
 aDialogPointerIndexBySelection:
     dw $000F,$0010,$0011,$0012,$0013,$0014                     ;839467|        |      ; 0x0B * [n16 nDialogPointerIndex]
     dw $0015,$0016,$0017,$0018,$0019                           ;839473|        |      ;
  
+;;
+; @brief   BG3 tilemap VRAM addresses of the icon/cursor position for each line of the help menu.
+; @format  12 words, $40 words apart ($7088,$70C8,...,$7308) and a last entry $7090 (second column).
+; @index   min(strcDialogDisplay.helpCursor, 11) * 2
+; @used_by fDialog_DrawBlinkIconFrame
+;;
 aDialogBlinkIconVramAddrByLine:
     dw $7088,$70C8,$7108,$7148,$7188,$71C8                     ;83947D|        |      ;
     dw $7208,$7248,$7288,$72C8,$7308,$7090                     ;839489|        |      ;
  
+;;
+; @brief   Toggles the blink icon between frame 0 and frame 1 every 20 ticks and advances the blink timer.
+; @details dialogBlinkTimer: bits 0-6 = tick counter (wraps at 20 = $14), bit 7 = current phase.
+; @modifies strcDialogDisplay.dialogBlinkTimer
+; @clobbers A
+; @mode    M16X16 -> M8
+; @calls   fDialog_DrawBlinkIconFrame
+; @callers fDialog_AnimateBlinkIconLong
+;;
 fDialog_AnimateBlinkIcon:
     REP #$30                                                   ;839495|C230    |      ;
     STA.B strcVariables.n16Temp1                               ;839497|857E    |00007E;
@@ -244,6 +335,14 @@ fDialog_AnimateBlinkIcon:
     RTS                                                        ;8394D6|60      |      ;
  
  
+;;
+; @brief   Draws one frame of the 2x2-tile blink icon next to the selected line of the help menu.
+; @param   A       0 = frame 0 ($839457), 1 = frame 1 ($83945F)
+; @param   strcDialogDisplay.helpCursor   cursor line (clamped to 11)
+; @clobbers A X
+; @mode    M16X16 -> M16X16
+; @calls   fGraphics_WriteTilemap2x2
+;;
 fDialog_DrawBlinkIconFrame:
     REP #$30                                                   ;8394D7|C230    |      ;
     PHA                                                        ;8394D9|48      |      ;
@@ -251,7 +350,7 @@ fDialog_DrawBlinkIconFrame:
     REP #$10                                                   ;8394DC|C210    |      ;
     LDA.B #$00                                                 ;8394DE|A900    |      ;
     XBA                                                        ;8394E0|EB      |      ;
-    LDA.W strcDialogDisplay.dialoUnk18A                        ;8394E1|AD8A01  |00018A;
+    LDA.W strcDialogDisplay.helpCursor                        ;8394E1|AD8A01  |00018A;
     CMP.B #$0B                                                 ;8394E4|C90B    |      ;
     BCC +                                                      ;8394E6|9002    |8394EA;
     LDA.B #$0B                                                 ;8394E8|A90B    |      ;
@@ -286,6 +385,25 @@ fDialog_DrawBlinkIconFrame:
     RTL                                                        ;83951B|6B      |      ;
  
  
+;;
+; @brief   Per-frame text engine: prints the next glyph / handles the next control word of the current dialog.
+; @details Does nothing unless DFLAGS_PROCESSDIALOG is set. DFLAGS_UNK20 (set by the help menu, mode 3) diverts to the
+;          blink icon animation instead. A glyph is produced every 5th call (glyphTimer counts 0-4, A held = 4).
+;          Control words are handled on every call: NEXT ($00A2) draws the blinking marker in cell 83 and waits;
+;          $00B1 space advances one cell; $FFFC numeric variable (digit by digit, see fDialog_DrawNumericVarDigit);
+;          $FFFD text variable (name etc., 1 glyph per step); $FFFE option menu; $FFFF end (sets DFLAGS_ENDDIALOG).
+;          Glyph type: ids $BC-$C5 (digits) and $0270 are 8 px, everything else 16 px on JP (X=1 = wide).
+; @param   ptrDialog                          dialog stream
+; @param   strcDialogDisplay.dialogCurrentOffset  word index into the stream
+; @modifies strcDialogDisplay.dialogFlags, strcDialogDisplay.dialogCurrentOffset, strcDialogDisplay.glyphVramAddr, strcDialogDisplay.glyphTimer, strcAudio.sfxId, strcAudio.sfxVoice
+; @clobbers A X Y
+; @mode    M8X16 -> M8X16
+; @calls   fDialog_TransferGlyph, fDialog_AdvanceGlyphDestination, fDialog_NextScreenHandler, fDialog_DrawNumericVarDigit,
+;          fDialog_AnimateBlinkIconLong, fAudio_PlaySoundEffect
+; @region  JP: NEXT marker at VRAM $5520 (US/EU/DE $5528), 16 px glyph cells; EU/DE additionally set DFLAGS_NUMERICVAR
+;          when the last digit of a numeric variable has been reached
+; @note    Plays SFX !SFX_MENUCURSOR (voice 6) for every printed glyph.
+;;
 fDialog_IterateText:
     SEP #$20                                                   ;83951C|E220    |      ;
     REP #$10                                                   ;83951E|C210    |      ;
@@ -337,10 +455,10 @@ fDialog_IterateText:
  
  
   + SEP #$20                                                   ;83956F|E220    |      ;
-    LDA.W strcDialogDisplay.dialoUnk189                        ;839571|AD8901  |000189;
+    LDA.W strcDialogDisplay.glyphTimer                        ;839571|AD8901  |000189;
     CMP.B #$04                                                 ;839574|C904    |      ;
     BNE .return                                                ;839576|D06F    |8395E7;
-    STZ.W strcDialogDisplay.dialoUnk189                        ;839578|9C8901  |000189;
+    STZ.W strcDialogDisplay.glyphTimer                        ;839578|9C8901  |000189;
     REP #$20                                                   ;83957B|C220    |      ;
     LDA.B [ptrDialog],Y                                        ;83957D|B701    |000001;
     CMP.W #!DIALOG_TEXTVARIABLE                                               
@@ -378,10 +496,10 @@ fDialog_IterateText:
     SEP #$20                                                   ;8395AB|E220    |      ;
     REP #$10                                                   ;8395AD|C210    |      ;
     LDA.B #!SFX_MENUCURSOR                                                 ;8395AF|A903    |      ;
-    STA.W strcAudio.reg114                                     ;8395B1|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;8395B1|8D1401  |000114;
     LDA.B #$06                                                 ;8395B4|A906    |      ;
-    STA.W strcAudio.reg115                                     ;8395B6|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;8395B9|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;8395B6|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;8395B9|22328383|838332;
     SEP #$20                                                   ;8395BD|E220    |      ;
     LDA.W strcDialogDisplay.dialogFlags                        ;8395BF|AD9B01  |00019B;
     ORA.B #!DFLAGS_UNK02                                                 
@@ -407,9 +525,9 @@ fDialog_IterateText:
  
 .return:
     SEP #$20                                                   ;8395E7|E220    |      ;
-    LDA.W strcDialogDisplay.dialoUnk189                        ;8395E9|AD8901  |000189;
+    LDA.W strcDialogDisplay.glyphTimer                        ;8395E9|AD8901  |000189;
     INC A                                                      ;8395EC|1A      |      ;
-    STA.W strcDialogDisplay.dialoUnk189                        ;8395ED|8D8901  |000189;
+    STA.W strcDialogDisplay.glyphTimer                        ;8395ED|8D8901  |000189;
  
 .justReturn:
     RTL                                                        ;8395F0|6B      |      ;
@@ -426,7 +544,7 @@ fDialog_IterateText:
     else
     LDA.W #$5528                                               ;8395FD|A92855  |      ;
     endif
-    STA.W strcDialogDisplay.dialogUnk185                       ;839600|8D8501  |000185; $0185 = 0x5528
+    STA.W strcDialogDisplay.glyphVramAddr                       ;839600|8D8501  |000185; $0185 = 0x5528
     REP #$20                                                   ;839603|C220    |      ;
     LDA.W #!DIALOG_NEXTSCREEN                                               
     JSR.W fDialog_NextScreenHandler                            ;839608|205F97  |83975F;
@@ -511,7 +629,7 @@ fDialog_IterateText:
     SEP #$20                                                   ;839687|E220    |      ;
     STZ.W strcDialogDisplay.fontGlyphType                      ;839689|9C9001  |000190;
     SEP #$20                                                   ;83968C|E220    |      ;
-    STZ.W strcDialogDisplay.dialoUnk189                        ;83968E|9C8901  |000189;
+    STZ.W strcDialogDisplay.glyphTimer                        ;83968E|9C8901  |000189;
     LDA.W strcDialogDisplay.dialogVarSize                      ;839691|AD8C01  |00018C;
     BNE +                                                      ;839694|D008    |83969E;
     LDA.W strcDialogDisplay.dialogCurrentOffset                ;839696|AD8701  |000187;
@@ -587,7 +705,7 @@ fDialog_IterateText:
     LDA.B #$01                                                 ;8396FF|A901    |      ;
     STA.W strcDialogDisplay.fontGlyphType                      ;839701|8D9001  |000190;
     SEP #$20                                                   ;839704|E220    |      ;
-    STZ.W strcDialogDisplay.dialoUnk189                        ;839706|9C8901  |000189;
+    STZ.W strcDialogDisplay.glyphTimer                        ;839706|9C8901  |000189;
     LDA.W strcDialogDisplay.dialogVarSize                      ;839709|AD8C01  |00018C;
     BNE +                                                      ;83970C|D008    |839716;
     LDA.W strcDialogDisplay.dialogCurrentOffset                ;83970E|AD8701  |000187;
@@ -621,7 +739,7 @@ fDialog_IterateText:
     TAX                                                        ;83973D|AA      |      ;
     REP #$20                                                   ;83973E|C220    |      ;
     LDA.L aTextDataTableFFFE,X                                 ;839740|BFCC9883|8398CC;
-    STA.W strcDialogDisplay.dialogUnk185                       ;839744|8D8501  |000185;
+    STA.W strcDialogDisplay.glyphVramAddr                       ;839744|8D8501  |000185;
     REP #$20                                                   ;839747|C220    |      ;
     LDA.W #$0275                                               ;839749|A97502  |      ;
     JSR.W fDialog_NextScreenHandler                            ;83974C|205F97  |83975F;
@@ -636,6 +754,14 @@ fDialog_IterateText:
     JMP.W .justReturn                                          ;83975C|4CF095  |8395F0;
  
  
+;;
+; @brief   Draws/erases the blinking marker glyph (NEXT arrow or option cursor) at the current glyph cell.
+; @param   A       glyph id to blink ($00A2 for NEXT, $0275 for the option cursor)
+; @modifies strcDialogDisplay.dialogBlinkTimer
+; @clobbers A X
+; @mode    M16 -> M8
+; @calls   fDialog_TransferGlyph
+;;
 fDialog_NextScreenHandler:
     REP #$20                                                   ;83975F|C220    |      ; A: nLetterCode
     STA.B strcVariables.n16Temp1                               ;839761|857E    |00007E;
@@ -674,6 +800,17 @@ fDialog_NextScreenHandler:
     RTS                                                        ;8397A5|60      |      ;
  
  
+;;
+; @brief   Extracts the next decimal digit of the numeric variable and draws it (leading zeros stay blank).
+; @details Repeated subtraction of pTextAmmountTable[dialogVarSize] (10^n) from the 24-bit value in
+;          dialogNumericVarSize; the count is the digit. A zero digit is printed only after the first non-zero digit
+;          (DFLAGS_NUMERICVAR marks "number started"). Digit glyph = $00BC + digit.
+; @param   strcDialogDisplay.dialogVarSize   remaining digits (power of ten index + 1)
+; @modifies strcDialogDisplay.dialogNumericVarSize, strcDialogDisplay.dialogFlags
+; @clobbers A X
+; @mode    M8X16 -> M16X16
+; @calls   fDialog_TransferGlyph
+;;
 fDialog_DrawNumericVarDigit:
     SEP #$20                                                   ;8397A6|E220    |      ;
     REP #$10                                                   ;8397A8|C210    |      ;
@@ -740,6 +877,16 @@ fDialog_DrawNumericVarDigit:
     RTL                                                        ;839822|6B      |      ;
  
  
+;;
+; @brief   Copies one glyph (two 8x8 2bpp tiles of 8x16) from the font to VRAM at the current text cell.
+; @param   A       glyph id
+; @param   X       glyph width type: 0 = one 8x8 tile column, 1 = two columns (16 px; only JP honours it)
+; @modifies strcDialogDisplay.glyphVramAddr
+; @clobbers A X Y
+; @mode    M16X16
+; @calls   fDialog_GetGlyphPointer, fGraphicsTransferData
+; @region  US/EU/DE: X is forced to 0 here (fixed 8 px cells); JP: X is the caller's value (16 px glyphs)
+;;
 fDialog_TransferGlyph:
     REP #$30                                                   ;839823|C230    |      ; A: nLetterCode, X: nUnkown
     if !REGION_JP
@@ -752,11 +899,21 @@ fDialog_TransferGlyph:
     REP #$30                                                   ;83982C|C230    |      ;
     PLX                                                        ;83982E|FA      |      ;
     TXA                                                        ;83982F|8A      |      ;
-    LDX.W strcDialogDisplay.dialogUnk185                       ;839830|AE8501  |000185;
+    LDX.W strcDialogDisplay.glyphVramAddr                       ;839830|AE8501  |000185;
     JSL.L fGraphicsTransferData                                ;839833|22668183|838166;
     RTL                                                        ;839837|6B      |      ;
  
  
+;;
+; @brief   Moves the VRAM write address to the next glyph cell.
+; @details glyphVramAddr += X*8 + 8 words (one tile per cell); when the low byte reaches $80 (14 cells per VRAM row) a further
+;          $80 is added to jump to the second tile row of the box.
+; @param   X       glyph width type (0 or 1)
+; @modifies strcDialogDisplay.glyphVramAddr
+; @clobbers A
+; @mode    M16X16
+; @region  US/EU/DE: X is forced to 0 here (advance 8 words = one tile); JP: X as passed
+;;
 fDialog_AdvanceGlyphDestination:
     REP #$30                                                   ;839838|C230    |      ;
     if !REGION_JP
@@ -770,22 +927,31 @@ fDialog_AdvanceGlyphDestination:
     ASL A                                                      ;839840|0A      |      ;
     ADC.W #$0008                                               ;839841|690800  |      ;
     STA.B strcVariables.n16Temp2                               ;839844|8580    |000080; $80 = A * 8 + 8
-    LDA.W strcDialogDisplay.dialogUnk185                       ;839846|AD8501  |000185;
+    LDA.W strcDialogDisplay.glyphVramAddr                       ;839846|AD8501  |000185;
     CLC                                                        ;839849|18      |      ;
     ADC.B strcVariables.n16Temp2                               ;83984A|6580    |000080;
-    STA.W strcDialogDisplay.dialogUnk185                       ;83984C|8D8501  |000185; $0185 += A * 8 + 8
+    STA.W strcDialogDisplay.glyphVramAddr                       ;83984C|8D8501  |000185; $0185 += A * 8 + 8
     AND.W #$00FF                                               ;83984F|29FF00  |      ;
     CMP.W #$0080                                               ;839852|C98000  |      ;
     BNE .return                                                ;839855|D00A    |839861;
-    LDA.W strcDialogDisplay.dialogUnk185                       ;839857|AD8501  |000185;
+    LDA.W strcDialogDisplay.glyphVramAddr                       ;839857|AD8501  |000185;
     CLC                                                        ;83985A|18      |      ;
     ADC.W #$0080                                               ;83985B|698000  |      ;
-    STA.W strcDialogDisplay.dialogUnk185                       ;83985E|8D8501  |000185;
+    STA.W strcDialogDisplay.glyphVramAddr                       ;83985E|8D8501  |000185;
  
 .return:
     RTS                                                        ;839861|60      |      ;
  
  
+;;
+; @brief   Computes the ROM address of a glyph's graphics from its id.
+; @details Page = id >> 6 selects a ptr24 in aLetterGlyphsPointers (3 bytes each); inside the page
+;          offset = (((id & $3F) >> 3) << 9) + ((id & 7) << 5), i.e. 8 glyphs per row, $20 bytes apart, rows $200 apart.
+; @param   A       glyph id
+; @return  ptrTemp0x72   ptr24 to the glyph data
+; @clobbers A X
+; @mode    M16X16
+;;
 fDialog_GetGlyphPointer:
     REP #$30                                                   ;839862|C230    |      ; A: nLetterCode, return $72: ptr24 pGlyph
     STA.B strcVariables.n16Temp1                               ;839864|857E    |00007E;

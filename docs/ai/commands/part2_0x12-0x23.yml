@@ -23,7 +23,7 @@
   params:
     - {name: nTime, offset: 1, size: 2, type: n16, meaning: "Number of calls of the AI loop (fAI_RunSlots, called once per frame from the main loop) for which the script of this object waits. A value of 0 = no waiting. Typical: 1, 60, 180, 240."}
   summary: "Suspends execution of the script of the given AI object for nTime frames."
-  details: "Stores nTime (16-bit) to field +$10 of the AI object structure pointed to by ptrAIUnknown0xCC (strcAIUnknown.unk10, wait counter). On each call, the fAI_RunSlots loop decrements +$10 for active objects and executes commands while +$10 = 0; after a command is executed with +$10 != 0, the object is no longer processed in that frame. As a result, the next command executes nTime frames after Wait (Wait(1) = skipping one frame). The script waits only for the current object (each AI object has its own counter); the AI loop is skipped entirely when strcDialogDisplay.mapUnk19A == 2 or 6 (dialog) or when the player action = PACTION_JUMP."
+  details: "Stores nTime (16-bit) to field +$10 of the AI object structure pointed to by ptrAIUnknown0xCC (strcAIUnknown.unk10, wait counter). On each call, the fAI_RunSlots loop decrements +$10 for active objects and executes commands while +$10 = 0; after a command is executed with +$10 != 0, the object is no longer processed in that frame. As a result, the next command executes nTime frames after Wait (Wait(1) = skipping one frame). The script waits only for the current object (each AI object has its own counter); the AI loop is skipped entirely when strcDialogDisplay.inputMode == 2 or 6 (dialog) or when the player action = PACTION_JUMP."
   ram_touched: [ptrAIActionData, ptrAIUnknown0xCC+$10]
   calls: []
   open_questions: "The time unit is AI loop calls; it is not confirmed that the loop is called exactly once per frame at all 10 call sites of fAI_RunSlots (core.asm, routines.asm, main_loop.asm, interaction_data.asm)."
@@ -170,12 +170,12 @@
   length_bytes: 4
   params:
     - {name: nDialogId, offset: 1, size: 2, type: n16, meaning: "Dialog index (index into aDialogPointers, 3 bytes per entry); goes to X, and in fDialog_DialogHandler to strcDialogDisplay.dialogId."}
-    - {name: nPosition, offset: 3, size: 1, type: n8, meaning: "Stored to strcDialogDisplay.dialogUnk191 ($7E:0191). In fDialog_DialogHandler: 0 = automatic (default 1, and 2 when strcObjectData.camY < $81), a non-zero value is used directly for the BG3 offset (by (value-1)*128 px) - so it is probably the position of the dialog window (top/bottom of the screen). 0 or 1 in scripts."}
+    - {name: nPosition, offset: 3, size: 1, type: n8, meaning: "Stored to strcDialogDisplay.boxPosition ($7E:0191). In fDialog_DialogHandler: 0 = automatic (default 1, and 2 when strcObjectData.camY < $81), a non-zero value is used directly for the BG3 offset (by (value-1)*128 px) - so it is probably the position of the dialog window (top/bottom of the screen). 0 or 1 in scripts."}
   summary: "Displays dialog nDialogId and suspends the script for one frame (the AI loop continues to be skipped for the duration of the dialog)."
-  details: "Loads nDialogId into X, stores the nPosition byte to dialogUnk191, sets strcDialogDisplay.mapUnk19A = 2 and calls fDialog_DialogHandler (sets dialogId, dialogFlags |= DFLAGS_PROCESSDIALOG, zeroes the option/answer counters, selects the text pointer from aDialogPointers, sets the BG3 offset and nTimeState = 0, daily1 |= $4000). Then +$10 += 1 (one frame). Because mapUnk19A == 2, fAI_RunSlots returns immediately at the start until the dialog ends (the dialog code zeroes/changes mapUnk19A), so the script and all AI objects wait until the end of the dialog."
-  ram_touched: [ptrAIActionData, ptrAIUnknown0xCC+$10, strcDialogDisplay.dialogUnk191, strcDialogDisplay.mapUnk19A, strcDialogDisplay.dialogId, strcDialogDisplay.dialogFlags, strcDialogDisplay.dialogOptionsAnswer, strcFlags.daily1, nTimeState, strcBGScrool.BG3VerOffs]
+  details: "Loads nDialogId into X, stores the nPosition byte to boxPosition, sets strcDialogDisplay.inputMode = 2 and calls fDialog_DialogHandler (sets dialogId, dialogFlags |= DFLAGS_PROCESSDIALOG, zeroes the option/answer counters, selects the text pointer from aDialogPointers, sets the BG3 offset and nTimeState = 0, daily1 |= $4000). Then +$10 += 1 (one frame). Because inputMode == 2, fAI_RunSlots returns immediately at the start until the dialog ends (the dialog code zeroes/changes inputMode), so the script and all AI objects wait until the end of the dialog."
+  ram_touched: [ptrAIActionData, ptrAIUnknown0xCC+$10, strcDialogDisplay.boxPosition, strcDialogDisplay.inputMode, strcDialogDisplay.dialogId, strcDialogDisplay.dialogFlags, strcDialogDisplay.dialogOptionsAnswer, strcFlags.daily1, nTimeState, strcBGScrool.BG3VerOffs]
   calls: [fDialog_DialogHandler]
-  open_questions: "The exact meaning of nPosition (top/bottom) is unconfirmed; the code that resets mapUnk19A after the dialog is closed was not checked."
+  open_questions: "The exact meaning of nPosition (top/bottom) is unconfirmed; the code that resets inputMode after the dialog is closed was not checked."
 
 - opcode: 0x1D
   macro: AICMD0x1D_ShowDialog
@@ -186,10 +186,10 @@
   length_bytes: 4
   params:
     - {name: nDialogId, offset: 1, size: 2, type: n16, meaning: "As in 0x1C: dialog index."}
-    - {name: nPosition, offset: 3, size: 1, type: n8, meaning: "As in 0x1C: goes to strcDialogDisplay.dialogUnk191."}
+    - {name: nPosition, offset: 3, size: 1, type: n8, meaning: "As in 0x1C: goes to strcDialogDisplay.boxPosition."}
   summary: "Functionally identical to 0x1C (ShowDialog); in scripts it is used for dialogs with choices, followed by a series of 0x20."
   details: "The handler code is identical to 0x1C instruction by instruction (only the address differs). Convention observed in scripts: 0x1D is called before a chain of 0x20 JumpIfChoice (a dialog with a question), and 0x1C for ordinary lines - the distinction is purely conventional (by the game's authors), with no effect on behavior."
-  ram_touched: [ptrAIActionData, ptrAIUnknown0xCC+$10, strcDialogDisplay.dialogUnk191, strcDialogDisplay.mapUnk19A, strcDialogDisplay.dialogId, strcDialogDisplay.dialogFlags]
+  ram_touched: [ptrAIActionData, ptrAIUnknown0xCC+$10, strcDialogDisplay.boxPosition, strcDialogDisplay.inputMode, strcDialogDisplay.dialogId, strcDialogDisplay.dialogFlags]
   calls: [fDialog_DialogHandler]
   open_questions: "None - the difference between 0x1C and 0x1D exists only in usage convention (there are no differences in the handler code)."
 

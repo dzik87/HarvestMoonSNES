@@ -49,7 +49,7 @@ fCore_GameStart:
     STA.W strcBGScrool.BG3VerOffs                              ;80803B|8D4601  |000146;
     SEP #$20                                                   ;80803E|E220    |      ;
     LDA.B #$01                                                 ;808040|A901    |      ;
-    STA.W strcDialogDisplay.mapUnk19A                          ;808042|8D9A01  |00019A;
+    STA.W strcDialogDisplay.inputMode                          ;808042|8D9A01  |00019A;
     REP #$30                                                   ;808045|C230    |      ;
     LDA.W #$0088                                               ;808047|A98800  |      ;
     STA.W strcDialogDisplay.mapDestX                           ;80804A|8D7D01  |00017D;
@@ -174,7 +174,7 @@ fCore_SetPlayerName:
     STA.W strcBGScrool.BG3VerOffs                              ;808152|8D4601  |000146;
     SEP #$20                                                   ;808155|E220    |      ;
     LDA.B #$01                                                 ;808157|A901    |      ;
-    STA.W strcDialogDisplay.mapUnk19A                          ;808159|8D9A01  |00019A;
+    STA.W strcDialogDisplay.inputMode                          ;808159|8D9A01  |00019A;
     JMP.W fCore_MainLoop                                       ;80815C|4C8380  |808083;
  
  
@@ -227,7 +227,7 @@ fCore_SetBoughtCowName:
     STA.W strcBGScrool.BG3VerOffs                              ;8081C5|8D4601  |000146;
     SEP #$20                                                   ;8081C8|E220    |      ;
     LDA.B #$01                                                 ;8081CA|A901    |      ;
-    STA.W strcDialogDisplay.mapUnk19A                          ;8081CC|8D9A01  |00019A;
+    STA.W strcDialogDisplay.inputMode                          ;8081CC|8D9A01  |00019A;
     JMP.W fCore_MainLoop                                       ;8081CF|4C8380  |808083;
  
  
@@ -283,7 +283,7 @@ fCore_SetBornCowName:
     STA.W strcBGScrool.BG3VerOffs                              ;808247|8D4601  |000146;
     SEP #$20                                                   ;80824A|E220    |      ;
     LDA.B #$01                                                 ;80824C|A901    |      ;
-    STA.W strcDialogDisplay.mapUnk19A                          ;80824E|8D9A01  |00019A;
+    STA.W strcDialogDisplay.inputMode                          ;80824E|8D9A01  |00019A;
     JMP.W fCore_MainLoop                                       ;808251|4C8380  |808083;
  
  
@@ -339,7 +339,7 @@ fCore_SetDogName:
     STA.W strcBGScrool.BG3VerOffs                              ;8082B9|8D4601  |000146;
     SEP #$20                                                   ;8082BC|E220    |      ;
     LDA.B #$01                                                 ;8082BE|A901    |      ;
-    STA.W strcDialogDisplay.mapUnk19A                          ;8082C0|8D9A01  |00019A;
+    STA.W strcDialogDisplay.inputMode                          ;8082C0|8D9A01  |00019A;
     JMP.W fCore_MainLoop                                       ;8082C3|4C8380  |808083;
  
  
@@ -395,7 +395,7 @@ fCore_SetHorseName:
     STA.W strcBGScrool.BG3VerOffs                              ;80832B|8D4601  |000146;
     SEP #$20                                                   ;80832E|E220    |      ;
     LDA.B #$01                                                 ;808330|A901    |      ;
-    STA.W strcDialogDisplay.mapUnk19A                          ;808332|8D9A01  |00019A;
+    STA.W strcDialogDisplay.inputMode                          ;808332|8D9A01  |00019A;
     JMP.W fCore_MainLoop                                       ;808335|4C8380  |808083;
  
  
@@ -451,7 +451,7 @@ fCore_SetFirstChildName:
     STA.W strcBGScrool.BG3VerOffs                              ;8083A1|8D4601  |000146;
     SEP #$20                                                   ;8083A4|E220    |      ;
     LDA.B #$01                                                 ;8083A6|A901    |      ;
-    STA.W strcDialogDisplay.mapUnk19A                          ;8083A8|8D9A01  |00019A;
+    STA.W strcDialogDisplay.inputMode                          ;8083A8|8D9A01  |00019A;
     JMP.W fCore_MainLoop                                       ;8083AB|4C8380  |808083;
  
  
@@ -507,7 +507,7 @@ fCore_SetSecondChildName:
     STA.W strcBGScrool.BG3VerOffs                              ;808417|8D4601  |000146;
     SEP #$20                                                   ;80841A|E220    |      ;
     LDA.B #$01                                                 ;80841C|A901    |      ;
-    STA.W strcDialogDisplay.mapUnk19A                          ;80841E|8D9A01  |00019A;
+    STA.W strcDialogDisplay.inputMode                          ;80841E|8D9A01  |00019A;
     JMP.W fCore_MainLoop                                       ;808421|4C8380  |808083;
  
     dw $0000,$00F0                                             ;808424|        |      ;
@@ -710,7 +710,7 @@ fCore_Reset:
     LDA.B #$00                                                 ;808602|A900    |      ;
     JSL.L fAudio_SendCommand0B                                 ;808604|22328E83|838E32;
     JSL.L fAudio_LoadCommonSamples                       ;808608|22988583|838598;
-    JSL.L fAudio_UploadSpcDriver                                 ;80860C|22D38483|8384D3;
+    JSL.L fAudio_UploadSfxBlock                                 ;80860C|22D38483|8384D3;
     JSL.L fCore_InitializeScreenStatus                         ;808610|224C8C80|808C4C;
     JSL.L fCore_ZeroVRAM                                       ;808614|22468880|808846;
     JSL.L fCore_ZeroOAM                                        ;808618|22878880|808887;

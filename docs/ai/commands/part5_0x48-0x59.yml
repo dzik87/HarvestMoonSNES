@@ -112,7 +112,7 @@
   length_bytes: 1
   params: []
   summary: "Sets flag daily4 0x8000, which blocks tool use with the Y button."
-  details: "Executes SetFlag(daily4, 0x8000). The only consumer: fInput_SetPlayerAction0x0A (input.asm, 84CDBF) - when the flag is set, pressing Y does not start the USINGTOOL action. Does not block. Used 27 times, usually in the pair '4F; 50' at the start of events."
+  details: "Executes SetFlag(daily4, 0x8000). The only consumer: fInput_SetPlayerAction_UseTool (input.asm, 84CDBF) - when the flag is set, pressing Y does not start the USINGTOOL action. Does not block. Used 27 times, usually in the pair '4F; 50' at the start of events."
   ram_touched: [ptrAIActionData, strcFlags.daily4]
   calls: []
   open_questions: "No place that clears bit 0x8000 of daily4 was found (probably a day/area reset). Immediately after the handler's RTS (84BB65-84BBD9) lies unlabeled, unreachable code (storing toolEquipped/toolSecond into strcShedItems and zeroing them) - it does not belong to command 0x4F and has no references to it; an orphaned routine, to be given its own label or removed."
@@ -182,12 +182,12 @@
   length_bytes: 4
   params:
     - {name: nDialogId, offset: 1, size: 2, type: n16, meaning: "dialog index passed in X to fDialog_DialogHandler"}
-    - {name: nUnknown2, offset: 3, size: 1, type: unknown, meaning: "stored to strcDialogDisplay.dialogUnk191 (always $01 in scripts)"}
+    - {name: nUnknown2, offset: 3, size: 1, type: unknown, meaning: "stored to strcDialogDisplay.boxPosition (always $01 in scripts)"}
   summary: "Shows a dialog in input handler mode 6 (closes by itself when finished, without player input) - a variant of 0x1C/0x1D."
-  details: "Identical to 0x1C/0x1D except: strcDialogDisplay.mapUnk19A = 6 (instead of 2) and additionally zeroing of $09B1 (16-bit). In fInput_Handler mode 6 (fInput_Handler_case06): after the ENDDIALOG flag is set, it counts frames in $09B1 up to 0x78 (120), calls fDialog_EndDialogRestoreScroll, sets mapUnk19A and masks the A button - so the dialog closes by itself after about 2 s. After calling fDialog_DialogHandler, obj+0x10 += 1 (yields the frame). Used 37 times in B5 (scenes/festivals)."
-  ram_touched: [ptrAIActionData, strcDialogDisplay.dialogUnk191, strcDialogDisplay.mapUnk19A, strcDialogDisplay.dialogId, strcDialogDisplay.dialogFlags, "$09B1"]
+  details: "Identical to 0x1C/0x1D except: strcDialogDisplay.inputMode = 6 (instead of 2) and additionally zeroing of $09B1 (16-bit). In fInput_Handler mode 6 (fInput_Mode_CutsceneDialog): after the ENDDIALOG flag is set, it counts frames in $09B1 up to 0x78 (120), calls fDialog_EndDialogRestoreScroll, sets inputMode and masks the A button - so the dialog closes by itself after about 2 s. After calling fDialog_DialogHandler, obj+0x10 += 1 (yields the frame). Used 37 times in B5 (scenes/festivals)."
+  ram_touched: [ptrAIActionData, strcDialogDisplay.boxPosition, strcDialogDisplay.inputMode, strcDialogDisplay.dialogId, strcDialogDisplay.dialogFlags, "$09B1"]
   calls: [fDialog_DialogHandler]
-  open_questions: "The meaning of nUnknown2 (dialogUnk191) is still unknown - it is modified in several places in dialog.asm. The name 'AutoClose' comes from analysis of case06 in input.asm; not confirmed in game."
+  open_questions: "The meaning of nUnknown2 (boxPosition) is still unknown - it is modified in several places in dialog.asm. The name 'AutoClose' comes from analysis of case06 in input.asm; not confirmed in game."
 
 - opcode: 0x55
   macro: AICMD0x55_JumpIfFlagNotSet

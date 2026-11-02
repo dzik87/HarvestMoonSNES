@@ -1,7 +1,39 @@
+;;
+; @file   objects.asm
+; @brief  Game-object (animated sprite) engine: 40 object slots, animation list stepping, draw ordering, OAM buffer building,
+;         and the sprite tile cache that streams 16x16 sprite graphics into VRAM through a DMA queue.
+; @details An object slot (strcGameObject, $24 bytes, 40 slots at $7E019C) holds an object index (strcGameObject.spriteTableIdx),
+;         flip bits ($40 horizontal, $80 vertical), a world position, the animation list pointer, the current frame pointer with
+;         its frame timer and up to 16 "component" bytes = tile cache slot per 16x16 hardware sprite ($FF = not resident).
+;         Indices below $0262 use animation data in bank $86, the others bank $87 (index - $262).
+;         Per frame: fObject_UpdateAllAnimations -> fObject_ProcessTileLoadQueue -> fObject_RenderAll (core.asm main loop);
+;         in NMI: fObject_ExecuteTileDmaQueue. Tile cache: byte table $7F0F00 (tile id -> cache slot or $FF), slot table
+;         $7EA320 (4 bytes per slot: reference count, owner tile id), request ring buffer $7EA220 (64 x [tile id, address
+;         of the requester's component byte]), VRAM DMA list at DMAtoVRAMData ($7EA420, 6 bytes per entry).
+;         OAM shadow: DMASpriteOBJQueue ($7EA000, 128 x [x, y, tile, attr]) and DMASpriteOBJ2BitQueue ($7EA200, high table).
+; @bank   $85   @range $858000-$85FFFF
+; @see    docs/formats/object-data.md, docs/formats/sprite-assembly.md, src/common/structures.asm (strcObject, strcGameObject)
+;;
+
  
     ORG $858000
  
  
+;;
+; @brief   Creates a new game object in the first free slot and loads its first animation frame.
+; @details Selects bank $86/$87 from the object index. The search range strcPlayer.gameObjectSlotLimit grows by one on every
+;          call until it reaches $28 (40 slots). The slot gets initialized = $7777, index, flip, position, list pointer
+;          (word from the pointer table), step pointer (list + 3), frame pointer and timer (first step), then the frame is
+;          parsed (component tile slots acquired).
+; @param   strcObject.spriteTableIdx   object index (animation list)
+; @param   strcObject.flip, strcObject.unkA3, strcObject.posX, strcObject.posY
+; @return  strcObject.exists   0 = created, $FFFF = no free slot
+; @return  strcObject.gameObjectIdx   slot number (0-39)
+; @modifies strcGameObject (slot), strcPlayer.gameObjectSlotLimit, ptrUnknown0x75, ptrObjectData
+; @clobbers A X Y
+; @mode    M16X16
+; @calls   fObject_ParseObjectData
+;;
 fObject_Create:
     REP #$20                                                   ;858000|C220    |      ;
     LDA.B strcObject.spriteTableIdx                            ;858002|A5A1    |0000A1;
@@ -25,11 +57,11 @@ fObject_Create:
     REP #$30                                                   ;85801D|C230    |      ;
     LDX.W #$0000                                               ;85801F|A20000  |      ;
     LDY.W #$0000                                               ;858022|A00000  |      ;
-    LDA.B strcPlayer.unkDC                                     ;858025|A5DC    |0000DC;
+    LDA.B strcPlayer.gameObjectSlotLimit                                     ;858025|A5DC    |0000DC;
     CMP.W #$0028                                               ;858027|C92800  |      ;
     BEQ .find_slot_loop                                                ;85802A|F003    |85802F;
     INC A                                                      ;85802C|1A      |      ;
-    STA.B strcPlayer.unkDC                                     ;85802D|85DC    |0000DC;
+    STA.B strcPlayer.gameObjectSlotLimit                                     ;85802D|85DC    |0000DC;
  
 .find_slot_loop:
     LDA.W strcGameObject.initailized,X                         ;85802F|BD9C01  |00019C;
@@ -39,7 +71,7 @@ fObject_Create:
     ADC.W #$0024                                               ;858036|692400  |      ;
     TAX                                                        ;858039|AA      |      ;
     INY                                                        ;85803A|C8      |      ;
-    CPY.B strcPlayer.unkDC                                     ;85803B|C4DC    |0000DC;
+    CPY.B strcPlayer.gameObjectSlotLimit                                     ;85803B|C4DC    |0000DC;
     BNE .find_slot_loop                                                ;85803D|D0F0    |85802F;
     LDA.W #$FFFF                                               ;85803F|A9FFFF  |      ;
     STA.B strcObject.exists                                    ;858042|85A7    |0000A7;
@@ -101,10 +133,22 @@ fObject_Create:
     LDA.W #$0000                                               ;8580B3|A90000  |      ;
     STA.B strcObject.exists                                    ;8580B6|85A7    |0000A7;
  
+;;
+; @brief   Shared RTL (fObject_Create falls into it, Replace and Destroy jump to it).
+; @note    BUG (original): Replace/Destroy use it as an early exit instead of their own .return; harmless.
+;;
 fObject_ReturnLong:
     RTL                                                        ;8580B8|6B      |      ; FIXME: I want to be .return
  
  
+;;
+; @brief   Updates flip and position of an existing object slot.
+; @param   strcObject.gameObjectIdx, strcObject.flip, strcObject.posX, strcObject.posY
+; @return  strcObject.exists   0 = updated, 1 = slot not in use
+; @modifies strcGameObject.flip, strcGameObject.positionX, strcGameObject.positionY, strcObject.gameObjectIdxOffs
+; @clobbers A X
+; @mode    M16X16
+;;
 fObject_UpdatePositionAndFlip:
     REP #$20                                                   ;8580B9|C220    |      ;
     LDA.B strcObject.spriteTableIdx                            ;8580BB|A5A1    |0000A1;
@@ -148,6 +192,18 @@ fObject_UpdatePositionAndFlip:
     RTL                                                        ;8580FF|6B      |      ;
  
  
+;;
+; @brief   Switches an existing object to another animation (new object index), keeping the slot.
+; @details Does nothing while some tile of the old frame is still queued for loading (fObject_CheckComponentsPending:
+;          the queue entries point at the component bytes). Otherwise releases the old tiles and loads the new list like
+;          fObject_Create.
+; @param   strcObject.gameObjectIdx, strcObject.spriteTableIdx, strcObject.flip, strcObject.unkA3, strcObject.posX, strcObject.posY
+; @return  strcObject.exists   0 = replaced (not written when the call was refused: previous value stays)
+; @modifies strcGameObject (slot)
+; @clobbers A X Y
+; @mode    M16X16
+; @calls   fObject_CheckComponentsPending, fObject_ReleaseSpriteTiles, fObject_ParseObjectData
+;;
 fObject_Replace:
     REP #$30                                                   ;858100|C230    |      ;
     REP #$20                                                   ;858102|C220    |      ;
@@ -235,6 +291,15 @@ fObject_Replace:
     RTL                                                        ;8581A1|6B      |      ;
  
  
+;;
+; @brief   Frees an object slot (releases its tile cache references, initialized = 0).
+; @details Refused (returns without change) while some of its tiles are still queued for loading.
+; @param   strcObject.gameObjectIdx
+; @modifies strcGameObject.initailized
+; @clobbers A X Y
+; @mode    M16X16
+; @calls   fObject_CheckComponentsPending, fObject_ReleaseSpriteTiles
+;;
 fObject_Destroy:
     REP #$30                                                   ;8581A2|C230    |      ;
     LDA.B strcObject.gameObjectIdx                             ;8581A4|A5A5    |0000A5;
@@ -260,6 +325,15 @@ fObject_Destroy:
     RTL                                                        ;8581CA|6B      |      ;
  
  
+;;
+; @brief   Reads flip, position and index of an object slot into the strcObject scratch fields.
+; @param   strcObject.gameObjectIdx
+; @return  strcObject.spriteTableIdx, strcObject.flip, strcObject.unkA3, strcObject.posX, strcObject.posY   (only if the slot is in use)
+; @return  strcObject.exists   sign extension of the frame timer byte (strcGameObject.objectDataPointer+2): 0 or $FFFF - used by callers to detect that the animation reached a $FF-timer step (?)
+; @clobbers A X
+; @mode    M16X16
+; @note    confidence: medium on the meaning of the exists value; callers compare strcObjectData.exist with $FFFF (see fPlayerAction0x10).
+;;
 fObject_GetSingleObjectData:
     REP #$30                                                   ;8581CB|C230    |      ;
     LDA.B strcObject.gameObjectIdx                             ;8581CD|A5A5    |0000A5;
@@ -302,6 +376,13 @@ fObject_GetSingleObjectData:
     RTL                                                        ;85820E|6B      |      ;
  
  
+;;
+; @brief   Resets all 40 object slots (empty, components $FF) and the OAM buffer.
+; @modifies strcGameObject, strcVariables.n16Unk86, strcPlayer.gameObjectSlotLimit
+; @clobbers A X Y
+; @mode    M16X16
+; @calls   fObject_ClearOamBuffer_Init
+;;
 fObject_ClearGameObject:
     REP #$30                                                   ;85820F|C230    |      ;
     REP #$20                                                   ;858211|C220    |      ;
@@ -380,11 +461,24 @@ fObject_ClearGameObject:
  
 .exit:
     REP #$20                                                   ;8582BF|C220    |      ;
-    STZ.B strcPlayer.unkDC                                     ;8582C1|64DC    |0000DC;
+    STZ.B strcPlayer.gameObjectSlotLimit                                     ;8582C1|64DC    |0000DC;
     JSR.W fObject_ClearOamBuffer_Init                                      ;8582C3|204786  |858647;
     RTL                                                        ;8582C6|6B      |      ;
  
  
+;;
+; @brief   Advances the animation of every active object by one tick.
+; @details For each slot below strcPlayer.gameObjectSlotLimit with initailized != 0: timer byte (strcGameObject.objectDataPointer+2)
+;          = 0 -> read the next animation step (a 0 frame pointer loops back to the list start), store frame pointer and timer,
+;          parse the frame; skipped for this tick while tiles of the current frame are not resident yet.
+;          Timer = $FE -> object is destroyed (tiles released). Afterwards the timer is decremented unless it is $FF (hold forever).
+;          Format of lists, steps and timers: docs/formats/object-data.md section 5.
+; @param   strcPlayer.gameObjectSlotLimit
+; @modifies strcGameObject (all active slots), strcObject.gameObjectIdxOffs, strcObject.unkAB
+; @clobbers A X Y
+; @mode    M16X16
+; @calls   fObject_CheckComponentsPending, fObject_ReleaseSpriteTiles, fObject_ParseObjectData
+;;
 fObject_UpdateAllAnimations:
     REP #$30                                                   ;8582C7|C230    |      ;
     STZ.B strcObject.gameObjectIdxOffs                         ;8582C9|64A9    |0000A9;
@@ -402,7 +496,7 @@ fObject_UpdateAllAnimations:
     STA.B strcObject.gameObjectIdxOffs                         ;8582DA|85A9    |0000A9;
     INC.B strcObject.unkAB                                     ;8582DC|E6AB    |0000AB;
     LDA.B strcObject.unkAB                                     ;8582DE|A5AB    |0000AB;
-    CMP.B strcPlayer.unkDC                                     ;8582E0|C5DC    |0000DC;
+    CMP.B strcPlayer.gameObjectSlotLimit                                     ;8582E0|C5DC    |0000DC;
     BNE .loop1                                                 ;8582E2|D0E9    |8582CD;
     JMP.W .return                                              ;8582E4|4C7683  |858376;
  
@@ -494,6 +588,19 @@ fObject_UpdateAllAnimations:
     RTL                                                        ;858376|6B      |      ;
  
  
+;;
+; @brief   Builds the draw order list ($084C, one byte per slot) around the reference object strcObjectData.gameObjectIdx (the player).
+; @details Not a full sort: objects with positionY >= the reference's Y are placed from the front of the list in slot order,
+;          objects with a smaller Y from the back, and the reference object sits between them. The renderer emits OAM
+;          entries in list order, earlier entries get lower OAM indices and therefore appear in front, so objects lower on the
+;          screen (larger Y) are drawn over the reference and objects higher up behind it.
+; @param   strcObjectData.gameObjectIdx   reference slot
+; @return  $084C..$0873   slot numbers in draw order
+; @modifies strcObject.gameObjectIdxOffs, strcObject.totalComponents, strcObject.bankAddress, strcVariables.n16Temp1
+; @clobbers A X Y
+; @mode    M16X16
+; @note    strcObject fields are reused as plain scratch variables here (front index, back index).
+;;
 fObject_BuildDrawOrderByY:
     REP #$30                                                   ;858377|C230    |      ;
     LDA.W strcObjectData.gameObjectIdx                         ;858379|AD0509  |000905;
@@ -505,7 +612,7 @@ fObject_BuildDrawOrderByY:
     STA.B strcObject.gameObjectIdxOffs                         ;858386|85A9    |0000A9;
     LDA.W #$0000                                               ;858388|A90000  |      ;
     STA.B strcObject.totalComponents                           ;85838B|85AD    |0000AD;
-    LDA.B strcPlayer.unkDC                                     ;85838D|A5DC    |0000DC;
+    LDA.B strcPlayer.gameObjectSlotLimit                                     ;85838D|A5DC    |0000DC;
     DEC A                                                      ;85838F|3A      |      ;
     STA.B strcObject.bankAddress                               ;858390|85AF    |0000AF;
     LDA.W #$FFFF                                               ;858392|A9FFFF  |      ;
@@ -546,7 +653,7 @@ fObject_BuildDrawOrderByY:
     ADC.W #$0024                                               ;8583CC|692400  |      ;
     TAX                                                        ;8583CF|AA      |      ;
     INY                                                        ;8583D0|C8      |      ;
-    CPY.B strcPlayer.unkDC                                     ;8583D1|C4DC    |0000DC;
+    CPY.B strcPlayer.gameObjectSlotLimit                                     ;8583D1|C4DC    |0000DC;
     BNE .loop                                                  ;8583D3|D0C8    |85839D;
     LDX.B strcObject.totalComponents                           ;8583D5|A6AD    |0000AD;
     LDA.W strcObjectData.gameObjectIdx                         ;8583D7|AD0509  |000905;
@@ -557,6 +664,19 @@ fObject_BuildDrawOrderByY:
     RTS                                                        ;8583DF|60      |      ;
  
  
+;;
+; @brief   Builds the OAM shadow buffer from all active objects and starts its DMA.
+; @details Clears the buffer, builds the draw order, then for each object (in list order) walks its components from the last
+;          to the first: sign-extended x/y offsets (mirrored by the object flip), minus camera, culled when outside the screen
+;          ($0100-$FFEF in X, $00F0-$FFEF in Y), written as OAM x, y, tile number (from the slot table of bank $86), attribute
+;          (palette from the component attr, flips, priority $20, EOR object flip, preset id << 4) and the X bit 8 in the high
+;          table. Components whose tile is not resident ($FF) are skipped. Details: docs/formats/sprite-assembly.md.
+; @param   strcCamera.cameraX, strcCamera.cameraY, strcDialogDisplay.mapCurrentPresetId
+; @modifies DMASpriteOBJQueue, DMASpriteOBJ2BitQueue, strcObject.bankAddress (running OAM byte offset)
+; @clobbers A X Y
+; @mode    M16X16
+; @calls   fObject_ClearOamBuffer_Frame, fObject_BuildDrawOrderByY, fObject_FlipOffsetX, fObject_FlipOffsetY, fObject_SetupOamDma
+;;
 fObject_RenderAll:
     REP #$30                                                   ;8583E0|C230    |      ;
     REP #$20                                                   ;8583E2|C220    |      ;
@@ -612,7 +732,7 @@ fObject_RenderAll:
     TAX                                                        ;858436|AA      |      ;
     LDA.L aGameObjectIndexOffsets,X                            ;858437|BFE08B85|858BE0;
     STA.B strcObject.gameObjectIdxOffs                         ;85843B|85A9    |0000A9;
-    CPY.B strcPlayer.unkDC                                     ;85843D|C4DC    |0000DC;
+    CPY.B strcPlayer.gameObjectSlotLimit                                     ;85843D|C4DC    |0000DC;
     BNE .draw_object_loop                                                ;85843F|D0E1    |858422;
     JMP.W fObject_SetupOamDma                                      ;858441|4CF485  |8585F4;
  
@@ -869,6 +989,13 @@ fObject_RenderAll:
     JMP.W .component_loop                                              ;8585F1|4CA384  |8584A3;
  
  
+;;
+; @brief   Programs DMA channel 4 to copy the $0220-byte OAM shadow ($7EA000) to OAM and requests it from the NMI handler.
+; @details Stores the number of OAM bytes used (strcObject.bankAddress) at $084A and sets bit $10 in $9A (NMI DMA request mask).
+; @modifies SNES_OAMADDL, SNES_DMAP4, SNES_BBAD4, SNES_A1T4L, SNES_A1T4H, SNES_A1B4, SNES_DAS4L
+; @clobbers A X
+; @mode    M16X16 -> M8X16
+;;
 fObject_SetupOamDma:
     REP #$30                                                   ;8585F4|C230    |      ;
     LDA.B strcObject.bankAddress                               ;8585F6|A5AF    |0000AF;
@@ -893,14 +1020,30 @@ fObject_SetupOamDma:
     RTL                                                        ;858626|6B      |      ;
  
  
+;;
+; @brief   Unused: bit 0 of each 2-bit OAM high-table pair (X bit 8 of sprite n of 8 in a word).
+; @format  8 words $0001,$0004,$0010,...,$4000.
+; @note    The real table used by the renderer, aOamHighBitPairMask, is generated with the offsets table and has the same values.
+;;
 aOamBitPairSetMaskUnused:
     dw $0001,$0004,$0010,$0040,$0100,$0400                     ;858627|        |      ;
     dw $1000,$4000                                             ;858633|        |      ;
  
+;;
+; @brief   Unused: inverse masks ($FFFC,$FFF3,...) to clear a 2-bit pair of the OAM high table.
+; @format  8 words.
+;;
 aOamBitPairClearMaskUnused:
     dw $FFFC,$FFF3,$FFCF,$FF3F,$FCFF,$F3FF                     ;858637|        |      ;
     dw $CFFF,$3FFF                                             ;858643|        |      ;
  
+;;
+; @brief   Hides all 128 sprites: writes $F0F0 (x = y = $F0) to every OAM entry and to the high table, sets $00B7 = 1.
+; @details Code identical to fObject_ClearOamBuffer_Frame (one is called from fObject_ClearGameObject, the other every frame).
+; @modifies DMASpriteOBJQueue, DMASpriteOBJ2BitQueue
+; @clobbers A
+; @mode    M16X16
+;;
 fObject_ClearOamBuffer_Init:
     REP #$30                                                   ;858647|C230    |      ;
     LDA.W #$F0F0                                               ;858649|A9F0F0  |      ;
@@ -1054,6 +1197,13 @@ fObject_ClearOamBuffer_Init:
     RTS                                                        ;858895|60      |      ;
  
  
+;;
+; @brief   Per-frame OAM clear: hides all 128 sprites ($F0F0 into every x/y word and the high table), sets $00B7 = 1.
+; @modifies DMASpriteOBJQueue, DMASpriteOBJ2BitQueue
+; @clobbers A
+; @mode    M16X16
+; @note    confidence: low on the purpose of $00B7 (written, no reader found in src).
+;;
 fObject_ClearOamBuffer_Frame:
     REP #$30                                                   ;858896|C230    |      ;
     LDA.W #$F0F0                                               ;858898|A9F0F0  |      ;
@@ -1207,6 +1357,17 @@ fObject_ClearOamBuffer_Frame:
     RTS                                                        ;858AE4|60      |      ;
  
  
+;;
+; @brief   Reads the current frame header and acquires a tile cache slot for each of its components.
+; @details Frame = count byte + 5-byte components [tile id word, x, y, attr]. The count is stored in strcGameObject.totalComponents;
+;          for each component fObject_AcquireTileSlot returns the cache slot (or $FF and queues a load request that will
+;          write the slot into the component byte later); the result is stored in strcGameObject.components[i].
+; @param   strcObject.gameObjectIdxOffs   slot offset
+; @modifies strcGameObject.totalComponents, strcGameObject.components, strcObject.pData, strcObject.bankAddress, ptrObjectData
+; @clobbers A X Y
+; @mode    M16X16
+; @calls   fObject_AcquireTileSlot
+;;
 fObject_ParseObjectData:
     REP #$30                                                   ;858AE5|C230    |      ;
     LDX.B strcObject.gameObjectIdxOffs                         ;858AE7|A6A9    |0000A9;
@@ -1265,6 +1426,14 @@ fObject_ParseObjectData:
     RTS                                                        ;858B40|60      |      ;
  
  
+;;
+; @brief   Drops the tile cache references of all components of the current slot and marks them $FF.
+; @param   strcObject.gameObjectIdxOffs
+; @modifies strcGameObject.components
+; @clobbers A X Y
+; @mode    M16X16 (internally M8)
+; @calls   fObject_ReleaseTileSlot
+;;
 fObject_ReleaseSpriteTiles:
     REP #$30                                                   ;858B41|C230    |      ;
     LDX.B strcObject.gameObjectIdxOffs                         ;858B43|A6A9    |0000A9;
@@ -1305,6 +1474,15 @@ fObject_ReleaseSpriteTiles:
     RTS                                                        ;858B7A|60      |      ;
  
  
+;;
+; @brief   Tests whether any component of the slot still waits for its tile ($FF).
+; @param   strcObject.gameObjectIdxOffs
+; @return  strcObject.bankAddress   $FFFF = at least one tile pending, 0 = all resident
+; @modifies strcUnknown740.unk740 (incremented per refusal)
+; @clobbers A X Y
+; @mode    M8 -> M16X16
+; @note    Misuse of strcObject.bankAddress as result variable; Replace/Destroy/UpdateAllAnimations act on it.
+;;
 fObject_CheckComponentsPending:
     REP #$10                                                   ;858B7B|C210    |      ;
     LDX.B strcObject.gameObjectIdxOffs                         ;858B7D|A6A9    |0000A9;
@@ -1344,6 +1522,13 @@ fObject_CheckComponentsPending:
     RTS                                                        ;858BAF|60      |      ;
  
  
+;;
+; @brief   Mirrors a component x offset when the object is flipped horizontally (flip bit $40): o -> -o - 16.
+; @param   A       sign-extended offset
+; @return  A       offset to use
+; @mode    M16X16
+; @calls   fObject_NegateOffsetMinus16
+;;
 fObject_FlipOffsetX:
     REP #$30                                                   ;858BB0|C230    |      ;
     PHA                                                        ;858BB2|48      |      ;
@@ -1353,12 +1538,24 @@ fObject_FlipOffsetX:
     BRA fObject_NegateOffsetMinus16                                        ;858BBA|8008    |858BC4;
  
  
+;;
+; @brief   Mirrors a component y offset when the object is flipped vertically (flip bit $80): o -> -o - 16.
+; @param   A       sign-extended offset
+; @return  A       offset to use
+; @mode    M16X16
+;;
 fObject_FlipOffsetY:
     PHA                                                        ;858BBC|48      |      ;
     LDA.B strcObject.flip                                      ;858BBD|A59F    |00009F;
     AND.W #$0080                                               ;858BBF|298000  |      ;
     BEQ fObject_PullAAndReturn                                ;858BC2|F00A    |858BCE;
  
+;;
+; @brief   Computes -A - 16 (the mirrored offset of a 16x16 sprite).
+; @param   A       offset (pushed on the stack by the flip routines)
+; @return  A       -A - 16
+; @mode    M16
+;;
 fObject_NegateOffsetMinus16:
     PLA                                                        ;858BC4|68      |      ;
     EOR.W #$FFFF                                               ;858BC5|49FFFF  |      ;
@@ -1368,6 +1565,11 @@ fObject_NegateOffsetMinus16:
     RTS                                                        ;858BCD|60      |      ;
  
  
+;;
+; @brief   Unflipped case of fObject_FlipOffsetX/Y: pulls the saved offset back into A.
+; @return  A       unchanged offset
+; @mode    M16
+;;
 fObject_PullAAndReturn:
     PLA                                                        ;858BCE|68      |      ;
     RTS                                                        ;858BCF|60      |      ;
@@ -1375,6 +1577,19 @@ fObject_PullAAndReturn:
  
     incsrc "../../../build/gen/blocks/game_object_offsets.asm"
  
+;;
+; @brief   Finds the tile cache slot of a sprite tile id, or queues a load request when it is not resident.
+; @details tile id -> byte at $7F0F00+id. Resident: reference count of that slot ($7EA320+4*slot) is incremented and the slot
+;          number is returned. Not resident ($FF): the request (tile id, address of the requester's component byte) is appended
+;          to the ring buffer at $7EA220 (head $BD, wraps at $100, spins while full) and $FFFF is returned; the load routine later
+;          writes the real slot number to that component byte.
+; @param   strcObject.pData   tile id (word)
+; @param   strcObject.pData+2   address of the component byte of the requester (WRAM, low 8K)
+; @return  strcObject.pData   slot number, or $FFFF (low byte $FF) while queued
+; @note    Writes the reference count table $7EA320, the request ring buffer $7EA220 and its head index $BD.
+; @clobbers A X Y
+; @mode    M16X16
+;;
 fObject_AcquireTileSlot:
     REP #$30                                                   ;858C30|C230    |      ;
     SEP #$20                                                   ;858C32|E220    |      ;
@@ -1422,11 +1637,23 @@ fObject_AcquireTileSlot:
     RTS                                                        ;858C7E|60      |      ;
  
  
+;;
+; @brief   Unused: single-bit masks $0001..$8000.
+; @format  16 words.
+;;
 aObjectBitMask16Unused:
     dw $0001,$0002,$0004,$0008,$0010,$0020                     ;858C7F|        |      ;
     dw $0040,$0080,$0100,$0200,$0400,$0800                     ;858C8B|        |      ;
     dw $1000,$2000,$4000,$8000                                 ;858C97|        |      ;
  
+;;
+; @brief   Decrements the reference count of a tile cache slot.
+; @param   strcObject.pData   slot number
+; @note    Writes the reference count table entry $7EA320 + 4 * slot.
+; @clobbers A X
+; @mode    M16X16
+; @note    Spins forever if the count is already 0 (the BEQ loops on itself); never happens in valid state.
+;;
 fObject_ReleaseTileSlot:
     REP #$30                                                   ;858C9F|C230    |      ;
     LDA.B strcObject.pData                                     ;858CA1|A5B3    |0000B3;
@@ -1441,6 +1668,25 @@ fObject_ReleaseTileSlot:
     RTS                                                        ;858CB1|60      |      ;
  
  
+;;
+; @brief   Per frame: turns queued tile requests into DMA transfers (as far as the per-frame DMA budget $C7 allows).
+; @details For every pending request (ring buffer $7EA220, tail $BB) while $C7 >= $0100: choose a cache slot (first 64 loads
+;          use slots in order via $0846; later it searches from the rotating start $0848 for a slot with reference count 0 -
+;          endless loop if none is free), write the slot number into the requester's component byte (bank $80 mirror),
+;          reset the slot's reference count to 1, clear the previous owner's entry in $7F0F00 and set the new one. The source
+;          is bank $88 + (tile id >> 8) at $8000 + $2000 * ((id >> 6) & 3) + slotTable[id & $3F] * $20; the VRAM destination
+;          is slotTable[slot] * $10 words. Each load appends [source address, bank, VRAM address] to the DMA list at
+;          DMAtoVRAMData and terminates it with $FFFF (max $C0 bytes = 32 loads per frame). $C7 -= $0100 per load.
+;          Finally stores the number of remaining requests in strcUnknown740.unk742.
+; @param   $BB, $BD   ring buffer tail / head
+; @param   $C7        remaining DMA budget this frame (set to $1800 at the top of the main loop)
+; @modifies DMAtoVRAMData, strcUnknown740.unk742
+; @note    Also writes $7EA320 (slot table), $7F0F00 (tile id to slot), $0846 / $0848 (slot allocation counters), $BB (queue tail), $C7 (DMA budget).
+; @clobbers A X Y
+; @mode    M8 -> M16X16
+; @calls   (none; uses the hardware multiplier SNES_WRMPYA/B)
+; @note    The jump at the end of the loop goes to the fixed address $858CBC (the loop head `--`).
+;;
 fObject_ProcessTileLoadQueue:
     SEP #$20                                                   ;858CB2|E220    |      ;
     LDA.B #$80                                                 ;858CB4|A980    |      ;
@@ -1668,10 +1914,26 @@ fObject_ProcessTileLoadQueue:
     RTL                                                        ;858E46|6B      |      ;
  
  
+;;
+; @brief   Offset of each 8 KB sprite block inside a graphics bank.
+; @format  8 words $0000,$2000,...,$E000.
+; @index   ((tile id >> 6) & 3) * 2 (only the first four are reachable for ids < $1000... see ProcessTileLoadQueue)
+; @used_by fObject_ProcessTileLoadQueue
+; @note    confidence: medium - the index expression is derived from the code (tile id >> 6 modulo 4) but all 8 entries are listed.
+;;
 aObject_TileBlockSourceOffsets:
     dw $0000,$2000,$4000,$6000,$8000,$A000                     ;858E47|        |      ; 0x08 * [n16]
     dw $C000,$E000                                             ;858E53|        |      ;
  
+;;
+; @brief   NMI/VBlank: executes the DMA list built by fObject_ProcessTileLoadQueue (channel 0 to VRAM).
+; @details For each 6-byte entry [source address, source bank, VRAM word address] two transfers of $40 bytes are made: the
+;          upper half of the 16x16 sprite to VRAM address and the lower half ($200 bytes further in ROM) to VRAM + $100 words.
+;          Stops at a $FFFF source.
+; @clobbers A X
+; @mode    M8 -> M16X16
+; @calls   (hardware DMA registers)
+;;
 fObject_ExecuteTileDmaQueue:
     SEP #$20                                                   ;858E57|E220    |      ;
     LDA.B #$80                                                 ;858E59|A980    |      ;
@@ -1728,6 +1990,15 @@ fObject_ExecuteTileDmaQueue:
     RTL                                                        ;858ED6|6B      |      ;
  
  
+;;
+; @brief   Empties the sprite tile cache: queue pointers, reference counts, owner table and the id-to-slot table.
+; @details DMA list terminated; $BB = $BD = 0; for all 64 slots reference count 0 and owner/queue words $FFFF; $7F0F00..$7F0FFF filled
+;          with $FF (the loop writes $1000 bytes, i.e. up to $7F1EFF); $0846 = $0848 = 0.
+; @modifies DMAtoVRAMData
+; @note    Also clears $7EA220, $7EA320, $7F0F00, $BB, $BD, $0846, $0848.
+; @clobbers A X Y
+; @mode    M16X16
+;;
 fObject_InitTileCache:
     REP #$30                                                   ;858ED7|C230    |      ;
     LDA.W #$FFFF                                               ;858ED9|A9FFFF  |      ;

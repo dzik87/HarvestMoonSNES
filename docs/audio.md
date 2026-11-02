@@ -113,7 +113,7 @@ Role summary (counts verified by `audio_map.py --check`):
 | SPC700 engine | 1 (`sAudioSpcDriver`) | `fAudio_UploadData` (boot, IPL protocol) |
 | Track (song) data | 25 distinct (26 table entries, entry 0 duplicates entry 1) | command 5, `fAudio_UploadTrackData` |
 | BRR samples | 39 distinct (40 table entries, entry 0 duplicates entry 1) | commands 2/3, `fAudio_LoadCommonSamples`, `fAudio_LoadTrackSamples`, `fAudio_LoadSfxSample` |
-| SFX block | 1, at `$B2:D120`, `$3F2` bytes | command 1, `fAudio_UploadSpcDriver` |
+| SFX block | 1, at `$B2:D120`, `$3F2` bytes | command 1, `fAudio_UploadSfxBlock` |
 
 Two details worth knowing [C]:
 
@@ -135,7 +135,7 @@ read from the same-numbered port on the other side (each direction has its own l
 2. `fAudio_SendCommand0B(A=0)` - command `$0B` with parameter 0 (stereo).
 3. `fAudio_LoadCommonSamples` - sends command 2 once per non-zero id in `aAudioSampleLookupTable`
    (`$17,$18,$19,$1A,$15,$06,$0A`), i.e. seven samples.
-4. `fAudio_UploadSpcDriver` - command 1, `$3F2` bytes from `$B2:D120` (the SFX block).
+4. `fAudio_UploadSfxBlock` - command 1, `$3F2` bytes from `$B2:D120` (the SFX block).
 
 ### 3.2 Per-track sequence (`fAudio_LoadPendingTrack`, `fAudio_StartPendingTrack`) [C]
 
@@ -152,7 +152,7 @@ When they differ (and `trackId` is neither 0 nor `$FF`):
 
 Sound effects (`fAudio_PlaySoundEffectAndWait`: A = SFX id, X = voice, Y = frames to wait):
 `fAudio_PrepareSoundEffectSample` frees the previous SFX sample slot (command 4) and loads the SFX's own sample
-(`aAudioSfxSampleIdTable[sfx]`, command 3) if that entry is non-zero; `fAudioSetRegister2to0A` then sends command `$0A`
+(`aAudioSfxSampleIdTable[sfx]`, command 3) if that entry is non-zero; `fAudio_PlaySoundEffect` then sends command `$0A`
 with (sfx id, voice, pan = `$0A`). `fAudio_SendPlaySfxCommand` silently drops the request when SPC status bit 4 is set.
 
 `nSoundEffectSampleTable[trackId]` is the number of sample ids in that track's table entry (verified for all 25 ids), i.e. the
@@ -707,7 +707,7 @@ no dump contains.
 ### 13.1 How the id reaches the engine
 
 A sound effect is requested with `fAudio_PlaySoundEffectAndWait` (A = effect id, X = voice, Y = wait in frames) or with the shorter
-`strcAudio.reg114 = id; reg115 = voice; fAudioSetRegister2to0A`, which sends command `$0A` (id, voice, `$0A`). Voices used by the US code are 6
+`strcAudio.sfxId = id; sfxVoice = voice; fAudio_PlaySoundEffect`, which sends command `$0A` (id, voice, `$0A`). Voices used by the US code are 6
 (UI, player and tool sounds) and 7 (water, house and cutscene sounds). `nToolSoundTable` (assets/tables/data/tool_sound_data_82.csv)
 holds, per tool id, `[voice, effect when the target tile has no matching object, effect when it has]`; `fToolUsedSound_PlayOnToolChange`
 preloads the samples of both effects when the tool changes and `fSound_GetToolSound` selects the column at use time. The enum values
@@ -723,8 +723,8 @@ neutral `Sfx_Unk<id>` name (no listening review was done; the names rest on the 
 | Id | Name | Enum | Sample | Confidence | Evidence |
 |---|---|---|---|---|---|
 | $00 | `Sfx_Silence` | `!SFX_SILENCE` | common | high | Played with voice 7 by the watering can and sprinkler actions (fToolUsedAction0x10_WateringCan, fToolUsedAction0x15_Sprinkler); empty stream, so it ends the looping water sound on that voice |
-| $01 | `Sfx_MenuConfirm` | `!SFX_MENUCONFIRM` | common | high | A button / confirm: name entry A button and table switches, dialog option confirm (fInput_DialogOptions_Confirm), fInput_Case03_ConfirmSelection, yes/no and load-game choices |
-| $02 | `Sfx_MenuCancel` | `!SFX_MENUCANCEL` | common | medium | Name entry B button, the end cell of the name table and the second choice of yes/no and load-game screens (fInput_Case04_State7_ToggleChoice, fInput_Case04_State8_LoadChoice) |
+| $01 | `Sfx_MenuConfirm` | `!SFX_MENUCONFIRM` | common | high | A button / confirm: name entry A button and table switches, dialog option confirm (fInput_DialogOptions_Confirm), fInput_HelpMenu_Confirm, yes/no and load-game choices |
+| $02 | `Sfx_MenuCancel` | `!SFX_MENUCANCEL` | common | medium | Name entry B button, the end cell of the name table and the second choice of yes/no and load-game screens (fInput_Title_NewGameSlotSelect, fInput_Title_LoadGameSlotSelect) |
 | $03 | `Sfx_MenuCursor` | `!SFX_MENUCURSOR` | 5 | high | Cursor movement in name entry, menus and dialog options (fInput_Case03_Cursor*, fInput_DialogOptions_*, fNameInput_*Button) and the text blip written by fDialog_IterateText; also the effect whose sample (id 5) fAudio_LoadPendingTrack preloads |
 | $04 | `Sfx_EggFestivalTimeUp` | `!SFX_EGGFESTIVALTIMEUP` | common | medium | AI script 0x28 (Egg Festival game) with the dialog 'Beep! Time is up! Next egg.' (strcFlags.unknown1 bit 6 branch) |
 | $05 | `Sfx_PlayerStep` | `!SFX_PLAYERSTEP` | common | high | fPlayerAction_Run_StepSound: footstep while running |

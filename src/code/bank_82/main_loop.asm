@@ -405,7 +405,7 @@ fMainMenu_TitleScreenInit:
     REP #$30                                                   ;82D75E|C230    |      ;
     SEP #$20                                                   ;82D760|E220    |      ;
     LDA.B #$04                                                 ;82D762|A904    |      ;
-    STA.W strcDialogDisplay.mapUnk19A                          ;82D764|8D9A01  |00019A;
+    STA.W strcDialogDisplay.inputMode                          ;82D764|8D9A01  |00019A;
     SEP #$20                                                   ;82D767|E220    |      ;
     STZ.W nUnknownFlags09D                                     ;82D769|9C8D09  |00098D;
     REP #$20                                                   ;82D76C|C220    |      ;
@@ -2211,7 +2211,7 @@ fMainMenu_DrawSaveSlotInfo:
   - REP #$20                                                   ;82E428|C220    |      ;
     PHX                                                        ;82E42A|DA      |      ;
     LDA.B strcVariables.n16Temp3                               ;82E42B|A582    |000082;
-    STA.L strcDialogDisplay.dialogUnk185+$20000                ;82E42D|8F850180|800185;
+    STA.L strcDialogDisplay.glyphVramAddr+$20000                ;82E42D|8F850180|800185;
     SEP #$20                                                   ;82E431|E220    |      ;
     LDA.B #$00                                                 ;82E433|A900    |      ;
     XBA                                                        ;82E435|EB      |      ;
@@ -2242,7 +2242,7 @@ fMainMenu_DrawSaveSlotInfo:
     INX                                                        ;82E459|E8      |      ;
     LDA.L aMainMenu_SlotInfoTextVramAddr,X                                    ;82E45A|BF78F282|82F278;
     PHX                                                        ;82E45E|DA      |      ;
-    STA.L strcDialogDisplay.dialogUnk185+$20000                ;82E45F|8F850180|800185;
+    STA.L strcDialogDisplay.glyphVramAddr+$20000                ;82E45F|8F850180|800185;
     SEP #$20                                                   ;82E463|E220    |      ;
     LDA.L nCurrentYearID                                       ;82E465|AF181F7F|7F1F18;
     INC A                                                      ;82E469|1A      |      ;
@@ -2266,7 +2266,7 @@ fMainMenu_DrawSaveSlotInfo:
     INX
     LDA.L aMainMenu_SlotInfoTextVramAddr,X
     PHX
-    STA.L strcDialogDisplay.dialogUnk185+$20000
+    STA.L strcDialogDisplay.glyphVramAddr+$20000
     LDA.W $08B1
     LDX.W #$0001
     JSL.L fDialog_TransferGlyph
@@ -2278,10 +2278,10 @@ fMainMenu_DrawSaveSlotInfo:
     if !REGION_DE
     ; (no code in this region)
     else
-    LDA.L strcDialogDisplay.dialogUnk185+$20000                ;82E48B|AF850180|800185;
+    LDA.L strcDialogDisplay.glyphVramAddr+$20000                ;82E48B|AF850180|800185;
     CLC                                                        ;82E48F|18      |      ;
     ADC.W #$0008                                               ;82E490|690800  |      ;
-    STA.L strcDialogDisplay.dialogUnk185+$20000                ;82E493|8F850180|800185;
+    STA.L strcDialogDisplay.glyphVramAddr+$20000                ;82E493|8F850180|800185;
     REP #$20                                                   ;82E497|C220    |      ;
     LDA.W #$0000                                               ;82E499|A90000  |      ;
     SEP #$20                                                   ;82E49C|E220    |      ;
@@ -2295,10 +2295,10 @@ fMainMenu_DrawSaveSlotInfo:
     JSL.L fDialog_TransferGlyph                                ;82E4AE|22239883|839823;
     JSL.L fCore_StartTransfer                                  ;82E4B2|22F08A80|808AF0;
     REP #$30                                                   ;82E4B6|C230    |      ;
-    LDA.L strcDialogDisplay.dialogUnk185+$20000                ;82E4B8|AF850180|800185;
+    LDA.L strcDialogDisplay.glyphVramAddr+$20000                ;82E4B8|AF850180|800185;
     CLC                                                        ;82E4BC|18      |      ;
     ADC.W #$0008                                               ;82E4BD|690800  |      ;
-    STA.L strcDialogDisplay.dialogUnk185+$20000                ;82E4C0|8F850180|800185;
+    STA.L strcDialogDisplay.glyphVramAddr+$20000                ;82E4C0|8F850180|800185;
     REP #$20                                                   ;82E4C4|C220    |      ;
     LDA.W #$0000                                               ;82E4C6|A90000  |      ;
     SEP #$20                                                   ;82E4C9|E220    |      ;
@@ -2321,7 +2321,7 @@ fMainMenu_DrawSaveSlotInfo:
     INX                                                        ;82E4EB|E8      |      ;
     LDA.L aMainMenu_SlotInfoTextVramAddr,X                                    ;82E4EC|BF78F282|82F278;
     PHX                                                        ;82E4F0|DA      |      ;
-    STA.L strcDialogDisplay.dialogUnk185+$20000                ;82E4F1|8F850180|800185;
+    STA.L strcDialogDisplay.glyphVramAddr+$20000                ;82E4F1|8F850180|800185;
     SEP #$20                                                   ;82E4F5|E220    |      ;
     LDA.L nCurrentDay                                          ;82E4F7|AF1B1F7F|7F1F1B;
     STA.W strcDialogDisplay.dialogNumericVarSize               ;82E4FB|8D9201  |000192;
@@ -2345,7 +2345,7 @@ fMainMenu_DrawSaveSlotInfo:
     endif
     CLC                                                        ;82E522|18      |      ;
     ADC.W #$0008                                               ;82E523|690800  |      ;
-    STA.L strcDialogDisplay.dialogUnk185+$20000                ;82E526|8F850180|800185;
+    STA.L strcDialogDisplay.glyphVramAddr+$20000                ;82E526|8F850180|800185;
     SEP #$20                                                   ;82E52A|E220    |      ;
     LDA.B #$00                                                 ;82E52C|A900    |      ;
     STA.W strcDialogDisplay.dialogVarSize                      ;82E52E|8D8C01  |00018C;
@@ -2365,71 +2365,71 @@ fMainMenu_DrawSaveSlotInfo:
     INX                                                        ;82E542|E8      |      ;
     INX                                                        ;82E543|E8      |      ;
     LDA.L aMainMenu_SlotInfoTextVramAddr,X                                    ;82E544|BF78F282|82F278;
-    STA.L strcDialogDisplay.dialogUnk185+$20000                ;82E548|8F850180|800185;
+    STA.L strcDialogDisplay.glyphVramAddr+$20000                ;82E548|8F850180|800185;
     LDA.W strcNames.wSeason                                    ;82E54C|ADB308  |0008B3;
     LDX.W #$0000                                               ;82E54F|A20000  |      ;
     JSL.L fDialog_TransferGlyph                                ;82E552|22239883|839823;
     JSL.L fCore_StartTransfer                                  ;82E556|22F08A80|808AF0;
     REP #$30                                                   ;82E55A|C230    |      ;
-    LDA.L strcDialogDisplay.dialogUnk185+$20000                ;82E55C|AF850180|800185;
+    LDA.L strcDialogDisplay.glyphVramAddr+$20000                ;82E55C|AF850180|800185;
     CLC                                                        ;82E560|18      |      ;
     ADC.W #$0008                                               ;82E561|690800  |      ;
-    STA.L strcDialogDisplay.dialogUnk185+$20000                ;82E564|8F850180|800185;
+    STA.L strcDialogDisplay.glyphVramAddr+$20000                ;82E564|8F850180|800185;
     LDA.W strcNames.wSeason+2                                  ;82E568|ADB508  |0008B5;
     LDX.W #$0000                                               ;82E56B|A20000  |      ;
     JSL.L fDialog_TransferGlyph                                ;82E56E|22239883|839823;
     JSL.L fCore_StartTransfer                                  ;82E572|22F08A80|808AF0;
     REP #$30                                                   ;82E576|C230    |      ;
-    LDA.L strcDialogDisplay.dialogUnk185+$20000                ;82E578|AF850180|800185;
+    LDA.L strcDialogDisplay.glyphVramAddr+$20000                ;82E578|AF850180|800185;
     CLC                                                        ;82E57C|18      |      ;
     ADC.W #$0008                                               ;82E57D|690800  |      ;
-    STA.L strcDialogDisplay.dialogUnk185+$20000                ;82E580|8F850180|800185;
+    STA.L strcDialogDisplay.glyphVramAddr+$20000                ;82E580|8F850180|800185;
     LDA.W strcNames.wSeason+4                                  ;82E584|ADB708  |0008B7;
     LDX.W #$0000                                               ;82E587|A20000  |      ;
     JSL.L fDialog_TransferGlyph                                ;82E58A|22239883|839823;
     JSL.L fCore_StartTransfer                                  ;82E58E|22F08A80|808AF0;
     REP #$30                                                   ;82E592|C230    |      ;
-    LDA.L strcDialogDisplay.dialogUnk185+$20000                ;82E594|AF850180|800185;
+    LDA.L strcDialogDisplay.glyphVramAddr+$20000                ;82E594|AF850180|800185;
     CLC                                                        ;82E598|18      |      ;
     ADC.W #$0008                                               ;82E599|690800  |      ;
-    STA.L strcDialogDisplay.dialogUnk185+$20000                ;82E59C|8F850180|800185;
+    STA.L strcDialogDisplay.glyphVramAddr+$20000                ;82E59C|8F850180|800185;
     LDA.W strcNames.wSeason+6                                  ;82E5A0|ADB908  |0008B9;
     LDX.W #$0000                                               ;82E5A3|A20000  |      ;
     JSL.L fDialog_TransferGlyph                                ;82E5A6|22239883|839823;
     JSL.L fCore_StartTransfer                                  ;82E5AA|22F08A80|808AF0;
     REP #$30                                                   ;82E5AE|C230    |      ;
-    LDA.L strcDialogDisplay.dialogUnk185+$20000                ;82E5B0|AF850180|800185;
+    LDA.L strcDialogDisplay.glyphVramAddr+$20000                ;82E5B0|AF850180|800185;
     CLC                                                        ;82E5B4|18      |      ;
     ADC.W #$0008                                               ;82E5B5|690800  |      ;
-    STA.L strcDialogDisplay.dialogUnk185+$20000                ;82E5B8|8F850180|800185;
+    STA.L strcDialogDisplay.glyphVramAddr+$20000                ;82E5B8|8F850180|800185;
     LDA.W strcNames.wSeason+8                                  ;82E5BC|ADBB08  |0008BB;
     LDX.W #$0000                                               ;82E5BF|A20000  |      ;
     JSL.L fDialog_TransferGlyph                                ;82E5C2|22239883|839823;
     JSL.L fCore_StartTransfer                                  ;82E5C6|22F08A80|808AF0;
     REP #$30                                                   ;82E5CA|C230    |      ;
-    LDA.L strcDialogDisplay.dialogUnk185+$20000                ;82E5CC|AF850180|800185;
+    LDA.L strcDialogDisplay.glyphVramAddr+$20000                ;82E5CC|AF850180|800185;
     CLC                                                        ;82E5D0|18      |      ;
     ADC.W #$0008                                               ;82E5D1|690800  |      ;
-    STA.L strcDialogDisplay.dialogUnk185+$20000                ;82E5D4|8F850180|800185;
+    STA.L strcDialogDisplay.glyphVramAddr+$20000                ;82E5D4|8F850180|800185;
     LDA.W strcNames.wSeason+10                                 ;82E5D8|ADBD08  |0008BD;
     LDX.W #$0000                                               ;82E5DB|A20000  |      ;
     if !REGION_DE
     JSL.L fDialog_TransferGlyph
     JSL.L fCore_StartTransfer
     REP #$30
-    LDA.L strcDialogDisplay.dialogUnk185+$20000
+    LDA.L strcDialogDisplay.glyphVramAddr+$20000
     CLC
     ADC.W #$0008
-    STA.L strcDialogDisplay.dialogUnk185+$20000
+    STA.L strcDialogDisplay.glyphVramAddr+$20000
     LDA.W strcNames.wWeekday
     LDX.W #$0000
     JSL.L fDialog_TransferGlyph
     JSL.L fCore_StartTransfer
     REP #$30
-    LDA.L strcDialogDisplay.dialogUnk185+$20000
+    LDA.L strcDialogDisplay.glyphVramAddr+$20000
     CLC
     ADC.W #$0008
-    STA.L strcDialogDisplay.dialogUnk185+$20000
+    STA.L strcDialogDisplay.glyphVramAddr+$20000
     LDA.W strcNames.wWeekday+2
     LDX.W #$0000
     JSL.L fDialog_TransferGlyph

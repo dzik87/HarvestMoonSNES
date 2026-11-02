@@ -1,6 +1,32 @@
+;;
+; @file   audio.asm
+; @brief  65816 side of the sound system: SPC700 driver upload (IPL protocol), the 4-port command protocol, sample/track/SFX
+;         upload and the high-level "play track / play sound effect" entry points used by the rest of the game.
+; @details Every SPC command is a handshake over APUIO0-3 ($2140-$2143), port 3 being the flag byte (SPC writes 1 = ready,
+;         4/8 = packet accepted; the SNES writes 2 = packet present, 0 = acknowledged). Parameters of a command are sent as
+;         packets of up to three bytes in ports 0-2. Bulk data (samples, track, SFX block) travels as 3-byte chunks.
+;         Commands used: 1 SFX block, 2 common sample, 3 track sample, 4 free sample slots, 5 track data, 7 reset region 3
+;         (unused), 8 start track, 9 fade out / stop, $0A play SFX, $0B stereo/mono. Full description: docs/audio.md.
+;         The data tables at the end (sample sizes, track sizes, track table, sample table, SFX sample ids) are generated.
+; @bank   $83   @range $8382C6-$838FFF (code), tables follow
+; @see    docs/audio.md, tools/audio/audioconv.py, src/code/bank_80/core.asm (boot sequence), src/code/bank_80/routines.asm (fAudioEngine_MapMusicHandler)
+;;
+
 ; Bank $83 module "audio" - starts at $8382C6
  
  
+;;
+; @brief   Plays an ambience/jingle track for 3 seconds, then hands the music back to the map's own track.
+; @details Fast-fades the running track, loads and starts track A, waits $B4 (180) frames, then selects the area music of
+;          nDestinationAreaId through fAudioEngine_MapMusicHandler (via strcMap.loadAreaId) and slow-fades the jingle out.
+;          Called with track ids $19 (WeatherCalm) and $15 (WeatherFair) by the farm tile update events (event6 flags).
+; @param   A       8-bit track id (index of sAudioTrackTable)
+; @modifies strcAudio.trackId, strcAudio.trackIdCopy, strcMap.loadAreaId
+; @clobbers A X Y
+; @mode    M8X16 -> M16X16
+; @calls   fAudio_FadeOutOnTrackChangeFast, fAudio_LoadPendingTrack, fAudio_StartPendingTrack, fCore_WaitForNMITimes,
+;          fAudioEngine_MapMusicHandler, fAudio_FadeOutOnTrackChangeSlow
+;;
 fAudio_PlayTrackThenResumeMapMusic:
     SEP #$20                                                   ;8382C6|E220    |      ;
     REP #$10                                                   ;8382C8|C210    |      ;
@@ -25,18 +51,31 @@ fAudio_PlayTrackThenResumeMapMusic:
     RTL                                                        ;8382FD|6B      |      ;
  
  
+;;
+; @brief   Plays a sound effect on a given SPC voice and then waits a number of frames.
+; @details Stores the SFX id and voice, loads the SFX's own BRR sample into the first free slot after the current track's
+;          samples (index = nSoundEffectSampleTable[strcAudio.sampleTableTrackId] + 1), sends the play command with pan $0A (centre)
+;          and finally waits Y frames (so a caller can chain effects).
+; @param   A       8-bit SFX id (!SFX_*)
+; @param   X       SPC voice 0-7 (written to strcAudio.sfxVoice)
+; @param   Y       number of frames to wait after the command
+; @modifies strcAudio.sfxId, strcAudio.sfxVoice, strcAudio.index, strcAudio.list, strcAudio.sfxPan
+; @clobbers A X Y
+; @mode    M8X16 -> M16X16
+; @calls   fAudio_PrepareSoundEffectSample, fAudio_PlaySoundEffect, fCore_WaitForNMITimes
+;;
 fAudio_PlaySoundEffectAndWait:
     SEP #$20                                                   ;8382FE|E220    |      ;
     REP #$10                                                   ;838300|C210    |      ;
-    STA.W strcAudio.reg114                                     ;838302|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;838302|8D1401  |000114;
     PHY                                                        ;838305|5A      |      ;
     REP #$20                                                   ;838306|C220    |      ;
     TXA                                                        ;838308|8A      |      ;
     SEP #$20                                                   ;838309|E220    |      ;
-    STA.W strcAudio.reg115                                     ;83830B|8D1501  |000115;
+    STA.W strcAudio.sfxVoice                                     ;83830B|8D1501  |000115;
     LDA.B #$00                                                 ;83830E|A900    |      ;
     XBA                                                        ;838310|EB      |      ;
-    LDA.W strcAudio.unk118                                     ;838311|AD1801  |000118;
+    LDA.W strcAudio.sampleTableTrackId                                     ;838311|AD1801  |000118;
     REP #$20                                                   ;838314|C220    |      ;
     TAX                                                        ;838316|AA      |      ;
     SEP #$20                                                   ;838317|E220    |      ;
@@ -44,7 +83,7 @@ fAudio_PlaySoundEffectAndWait:
     INC A                                                      ;83831D|1A      |      ;
     STA.W strcAudio.index                                      ;83831E|8D0301  |000103;
     JSL.L fAudio_PrepareSoundEffectSample                                 ;838321|223E8383|83833E;
-    JSL.L fAudioSetRegister2to0A                               ;838325|22328383|838332;
+    JSL.L fAudio_PlaySoundEffect                               ;838325|22328383|838332;
     REP #$30                                                   ;838329|C230    |      ;
     PLY                                                        ;83832B|7A      |      ;
     TYA                                                        ;83832C|98      |      ;
@@ -52,14 +91,41 @@ fAudio_PlaySoundEffectAndWait:
     RTL                                                        ;838331|6B      |      ;
  
  
-fAudioSetRegister2to0A:
+;;
+; @brief   Sends the "play sound effect" command with the pre-set SFX id and voice and centre pan.
+; @details Despite the name, this is the common SFX trigger of the whole game: callers first store the SFX id in
+;          strcAudio.sfxId and the voice in strcAudio.sfxVoice (the game almost always uses voice 6) and call this. It only
+;          sets the pan byte to $0A (centre) and runs fAudio_SendPlaySfxCommand. The command is dropped when the SPC is
+;          busy starting a track (status bit 4).
+; @param   strcAudio.sfxId   SFX id (!SFX_*)
+; @param   strcAudio.sfxVoice   SPC voice (0-7)
+; @modifies strcAudio.sfxPan
+; @clobbers A
+; @mode    M8 (sets SEP #$20)
+; @calls   fAudio_SendPlaySfxCommand
+; @note    Previously named "register 2 to $0A" (the pan value $0A goes into port 2); see docs/naming/P_audio_dialog_input_objects_renames.csv.
+;;
+fAudio_PlaySoundEffect:
     SEP #$20                                                   ;838332|E220    |      ;
     LDA.B #$0A                                                 ;838334|A90A    |      ;
-    STA.W strcAudio.reg116                                     ;838336|8D1601  |000116;
+    STA.W strcAudio.sfxPan                                     ;838336|8D1601  |000116;
     JSL.L fAudio_SendPlaySfxCommand                                 ;838339|22DF8D83|838DDF;
     RTL                                                        ;83833D|6B      |      ;
  
  
+;;
+; @brief   Frees the previous SFX sample slot and uploads the sample that the SFX in strcAudio.sfxId needs.
+; @details Step 1: if strcAudio.list[index] is non-zero, a sample is still loaded in that slot, so command 4 (free
+;          slots from index+1) is sent and one frame is waited. Step 2: aAudioSfxSampleIdTable[strcAudio.sfxId] gives the
+;          BRR sample id of the effect (0 = effect uses only samples that are already resident); a non-zero id is
+;          uploaded with fAudio_LoadSfxSample (command 3).
+; @param   strcAudio.index    first free sample slot (set by the caller from nSoundEffectSampleTable)
+; @param   strcAudio.sfxId   SFX id
+; @modifies strcAudio.list, strcAudio.index
+; @clobbers A X Y
+; @mode    M8X16 -> M8X16
+; @calls   fAudio_FreeSamplesFromSlot, fCore_WaitForNextNMI, fAudio_LoadSfxSample
+;;
 fAudio_PrepareSoundEffectSample:
     SEP #$20                                                   ;83833E|E220    |      ;
     LDA.B #$00                                                 ;838340|A900    |      ;
@@ -80,7 +146,7 @@ fAudio_PrepareSoundEffectSample:
   + SEP #$20                                                   ;83835E|E220    |      ;
     LDA.B #$00                                                 ;838360|A900    |      ;
     XBA                                                        ;838362|EB      |      ;
-    LDA.W strcAudio.reg114                                     ;838363|AD1401  |000114;
+    LDA.W strcAudio.sfxId                                     ;838363|AD1401  |000114;
     REP #$20                                                   ;838366|C220    |      ;
     TAX                                                        ;838368|AA      |      ;
     SEP #$20                                                   ;838369|E220    |      ;
@@ -91,6 +157,12 @@ fAudio_PrepareSoundEffectSample:
   + RTL                                                        ;838375|6B      |      ;
  
  
+;;
+; @brief   Unused: increments strcAudio.index (next free sample slot).
+; @modifies strcAudio.index
+; @mode    M8 (SEP #$20)
+; @note    No caller in the US ROM.
+;;
 fAudio_IncrementSampleIndexUnused:
     SEP #$20                                                   ;838376|E220    |      ;
     LDA.W strcAudio.index                                      ;838378|AD0301  |000103;
@@ -99,6 +171,17 @@ fAudio_IncrementSampleIndexUnused:
     RTL                                                        ;83837F|6B      |      ;
  
  
+;;
+; @brief   Starts the track that fAudio_LoadPendingTrack uploaded (SPC command 8 with fade-in).
+; @details Only acts when trackId is non-zero, different from trackIdCopy (the track currently loaded) and not $FF.
+;          Parameters of command 8: p0 = 1 (fade in), p1 = $40 ticks. Always clears strcAudio.toolId afterwards.
+; @param   strcAudio.trackId, strcAudio.trackIdCopy
+; @modifies strcAudio.startFadeFlag, strcAudio.fadeTicks, strcAudio.toolId
+; @clobbers A
+; @mode    M8 (sets SEP #$20)
+; @calls   fAudio_SendStartTrackCommand
+; @note    strcAudio.trackIdCopy is NOT updated here (the callers do it); see fAudio_PlayTrackThenResumeMapMusic.
+;;
 fAudio_StartPendingTrack:
     SEP #$20                                                   ;838380|E220    |      ;
     LDA.W strcAudio.trackId                                    ;838382|AD1001  |000110;
@@ -108,9 +191,9 @@ fAudio_StartPendingTrack:
     CMP.B #$FF                                                 ;83838C|C9FF    |      ;
     BEQ +                                                      ;83838E|F00E    |83839E;
     LDA.B #$01                                                 ;838390|A901    |      ;
-    STA.W strcAudio.unk111                                     ;838392|8D1101  |000111;
+    STA.W strcAudio.startFadeFlag                                     ;838392|8D1101  |000111;
     LDA.B #$40                                                 ;838395|A940    |      ;
-    STA.W strcAudio.unk113                                     ;838397|8D1301  |000113;
+    STA.W strcAudio.fadeTicks                                     ;838397|8D1301  |000113;
     JSL.L fAudio_SendStartTrackCommand                                 ;83839A|22398D83|838D39;
  
   + SEP #$20                                                   ;83839E|E220    |      ;
@@ -118,6 +201,21 @@ fAudio_StartPendingTrack:
     RTL                                                        ;8383A3|6B      |      ;
  
  
+;;
+; @brief   Uploads the requested track (strcAudio.trackId) and its samples to the SPC when it differs from the loaded one.
+; @details Sequence: free all track sample slots (command 4, slot 0), upload track data (command 5), upload the samples
+;          listed in the track's sAudioTrackTable entry (command 3 each). If trackId is 0 or $FF nothing is uploaded
+;          (the dead code after BRA is a leftover that would clear trackId). Afterwards - always - the SFX sample
+;          bookkeeping is primed: voice 6 / menu-cursor id are stored, strcAudio.sampleTableTrackId = trackId ($FF counts as 0),
+;          strcAudio.index = nSoundEffectSampleTable[sampleTableTrackId] (first free slot after the track's samples) and
+;          fAudio_PrepareSoundEffectSample is called.
+; @param   strcAudio.trackId   requested track id (0 = none, $FF = stop)
+; @modifies strcAudio.sfxId, strcAudio.sfxVoice, strcAudio.sampleTableTrackId, strcAudio.index, strcAudio.list
+; @clobbers A X Y
+; @mode    M8X16 -> M8X16
+; @calls   fAudio_FreeSamplesFromSlot, fAudio_UploadTrackData, fAudio_LoadTrackSamples, fAudio_PrepareSoundEffectSample
+; @note    Falls through into fAudio_ReturnLong (the RTL).
+;;
 fAudio_LoadPendingTrack:
     SEP #$20                                                   ;8383A4|E220    |      ;
     LDA.W strcAudio.trackId                                    ;8383A6|AD1001  |000110;
@@ -140,18 +238,18 @@ fAudio_LoadPendingTrack:
  
   + SEP #$20                                                   ;8383D0|E220    |      ;
     LDA.B #$06                                                 ;8383D2|A906    |      ;
-    STA.W strcAudio.reg115                                     ;8383D4|8D1501  |000115;
+    STA.W strcAudio.sfxVoice                                     ;8383D4|8D1501  |000115;
     LDA.B #!SFX_MENUCURSOR                                                 ;8383D7|A903    |      ;
-    STA.W strcAudio.reg114                                     ;8383D9|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;8383D9|8D1401  |000114;
     SEP #$20                                                   ;8383DC|E220    |      ;
     LDA.B #$00                                                 ;8383DE|A900    |      ;
     XBA                                                        ;8383E0|EB      |      ;
     LDA.W strcAudio.trackId                                    ;8383E1|AD1001  |000110;
-    STA.W strcAudio.unk118                                     ;8383E4|8D1801  |000118;
+    STA.W strcAudio.sampleTableTrackId                                     ;8383E4|8D1801  |000118;
     CMP.B #$FF                                                 ;8383E7|C9FF    |      ;
     BNE +                                                      ;8383E9|D005    |8383F0;
     LDA.B #$00                                                 ;8383EB|A900    |      ;
-    STA.W strcAudio.unk118                                     ;8383ED|8D1801  |000118;
+    STA.W strcAudio.sampleTableTrackId                                     ;8383ED|8D1801  |000118;
  
   + REP #$20                                                   ;8383F0|C220    |      ;
     TAX                                                        ;8383F2|AA      |      ;
@@ -160,10 +258,24 @@ fAudio_LoadPendingTrack:
     STA.W strcAudio.index                                      ;8383F9|8D0301  |000103;
     JSL.L fAudio_PrepareSoundEffectSample                                 ;8383FC|223E8383|83833E;
  
+;;
+; @brief   Shared RTL. fAudio_LoadPendingTrack falls into it; fAudio_FadeOutOnTrackChangeSlow branches to it by mistake.
+; @note    BUG (original): the Slow fade-out jumps here instead of its own .return; harmless because both end in RTL.
+;;
 fAudio_ReturnLong:
     RTL                                                        ;838400|6B      |      ; FIXME: I want to be .return
  
  
+;;
+; @brief   Slowly fades out the loaded track ($40 ticks) when a different track has been requested.
+; @details Does nothing when trackId equals trackIdCopy or when no track is loaded (trackIdCopy = 0). Otherwise sends
+;          command 9 with p0 = 1 (fade) and p1 = $40.
+; @param   strcAudio.trackId, strcAudio.trackIdCopy
+; @modifies strcAudio.fadeOutFlag, strcAudio.fadeTicks
+; @clobbers A
+; @mode    M8 (sets SEP #$20)
+; @calls   fAudio_SendFadeOutCommand
+;;
 fAudio_FadeOutOnTrackChangeSlow:
     SEP #$20                                                   ;838401|E220    |      ;
     LDA.W strcAudio.trackId                                    ;838403|AD1001  |000110;
@@ -172,15 +284,23 @@ fAudio_FadeOutOnTrackChangeSlow:
     LDA.W strcAudio.trackIdCopy                                ;83840B|AD1701  |000117;
     BEQ fAudio_ReturnLong                                    ;83840E|F0F0    |838400; BUG - should be .return in this function rather than previous one since we are out of function scope
     LDA.B #$01                                                 ;838410|A901    |      ;
-    STA.W strcAudio.unk112                                     ;838412|8D1201  |000112;
+    STA.W strcAudio.fadeOutFlag                                     ;838412|8D1201  |000112;
     LDA.B #$40                                                 ;838415|A940    |      ;
-    STA.W strcAudio.unk113                                     ;838417|8D1301  |000113;
+    STA.W strcAudio.fadeTicks                                     ;838417|8D1301  |000113;
     JSL.L fAudio_SendFadeOutCommand                                 ;83841A|228B8D83|838D8B;
  
 .return:
     RTL                                                        ;83841E|6B      |      ;
  
  
+;;
+; @brief   Fast variant of fAudio_FadeOutOnTrackChangeSlow: fade length $10 ticks instead of $40.
+; @param   strcAudio.trackId, strcAudio.trackIdCopy
+; @modifies strcAudio.fadeOutFlag, strcAudio.fadeTicks
+; @clobbers A
+; @mode    M8 (sets SEP #$20)
+; @calls   fAudio_SendFadeOutCommand
+;;
 fAudio_FadeOutOnTrackChangeFast:
     SEP #$20                                                   ;83841F|E220    |      ;
     LDA.W strcAudio.trackId                                    ;838421|AD1001  |000110;
@@ -189,15 +309,27 @@ fAudio_FadeOutOnTrackChangeFast:
     LDA.W strcAudio.trackIdCopy                                ;838429|AD1701  |000117;
     BEQ .return                                                ;83842C|F00E    |83843C;
     LDA.B #$01                                                 ;83842E|A901    |      ;
-    STA.W strcAudio.unk112                                     ;838430|8D1201  |000112;
+    STA.W strcAudio.fadeOutFlag                                     ;838430|8D1201  |000112;
     LDA.B #$10                                                 ;838433|A910    |      ;
-    STA.W strcAudio.unk113                                     ;838435|8D1301  |000113;
+    STA.W strcAudio.fadeTicks                                     ;838435|8D1301  |000113;
     JSL.L fAudio_SendFadeOutCommand                                 ;838438|228B8D83|838D8B;
  
 .return:
     RTL                                                        ;83843C|6B      |      ;
  
  
+;;
+; @brief   Boot-time upload of a blob to SPC RAM with the standard IPL protocol; the SPC then executes it.
+; @details Waits for the IPL signature $BBAA on APUIO0/1, sends the block header (destination $0500 via ports 2/3,
+;          $CC to port 0) and streams the bytes from [ptrAudioData] with the running-counter handshake. The length is
+;          hard-coded $0FD6 (the whole sAudioSpcDriver blob). After the last byte a zero-length block header with the
+;          start address $0500 makes the IPL jump to the driver. The loop uses the same handshake twice (block header and
+;          the closing header; .loop is re-entered by BVS only for a further block).
+; @param   ptrAudioData   ptr24 to the blob (set to $AD:8000 by the boot code)
+; @clobbers A X Y
+; @mode    M16X16 -> =
+; @note    Called once from fCore init (src/code/bank_80/core.asm). Interrupts must not touch the APU ports meanwhile.
+;;
 fAudio_UploadData:
     PHP                                                        ;83843D|08      |      ;
     REP #$30                                                   ;83843E|C230    |      ;
@@ -286,7 +418,16 @@ fAudio_UploadData:
     RTL                                                        ;8384D2|6B      |      ;
  
  
-fAudio_UploadSpcDriver:
+;;
+; @brief   Sends command 1: uploads the $3F2-byte SFX block ($B2:D120) to SPC $1600.
+; @details It does not upload the driver itself (fAudio_UploadData does); the data are the SFX pointer
+;          table and note streams. The count of 3-byte chunks (ceil($3F2 / 3) via fMathDivide) goes out in ports 0/1,
+;          then the chunks follow with the per-chunk handshake (port 3: SNES 2, SPC 0).
+; @clobbers A X Y
+; @mode    M8X16 -> M8X16
+; @calls   fAudio_SendSpcCommand, fMathDivide
+;;
+fAudio_UploadSfxBlock:
     SEP #$20                                                   ;8384D3|E220    |      ;
     REP #$10                                                   ;8384D5|C210    |      ;
     LDA.B #$01                                                 ;8384D7|A901    |      ;
@@ -385,6 +526,16 @@ fAudio_UploadSpcDriver:
     RTL                                                        ;838597|6B      |      ;
  
  
+;;
+; @brief   Boot: sends command 2 for each non-zero id of aAudioSampleLookupTable (7 common samples).
+; @details For every id the 10-byte sAudioSampleData record is sent as four packets: (id, loop offset), (ADSR1, ADSR2, GAIN),
+;          (tuning), (chunk count = ceil(aAudioSampleSize[id] / 3)); then the BRR data from the record's 24-bit
+;          pointer follows in 3-byte chunks. Zero entries of the 10-entry lookup table are skipped.
+; @clobbers A X Y
+; @mode    M8X16 -> M8X16
+; @calls   fAudio_SendSpcCommand, fMathMultiply_7EbyA, fMathDivide
+; @note    The samples land in the SPC "common" region and stay resident; ids: $17 $18 $19 $1A $15 $06 $0A (docs/audio.md 7.3).
+;;
 fAudio_LoadCommonSamples:
     SEP #$20                                                   ;838598|E220    |      ; X: nAudioId (0x00 - 0x09)
     REP #$10                                                   ;83859A|C210    |      ;
@@ -645,6 +796,18 @@ fAudio_LoadCommonSamples:
     RTL                                                        ;83878B|6B      |      ;
  
  
+;;
+; @brief   Sends command 3 for each sample id of the current track's sAudioTrackTable entry, plus the common sample $06.
+; @details Clears strcAudio.list (11 slots), then walks the 11 sample-id bytes of the 14-byte table entry (offset +3 on):
+;          each non-zero id is stored in strcAudio.list[slot] and uploaded (same four packets + BRR chunks as
+;          fAudio_LoadCommonSamples); zero bytes are skipped. When the end of the id list is reached on a zero byte,
+;          sample $06 is uploaded as a last extra (it is not recorded in strcAudio.list) - see docs/audio.md 3.2.
+; @param   strcAudio.trackId
+; @modifies strcAudio.list, strcAudio.index, strcAudio.unk10F
+; @clobbers A X Y
+; @mode    M8X16 -> M8X16
+; @calls   fAudio_SendSpcCommand, fMathMultiply_7EbyA, fMathDivide
+;;
 fAudio_LoadTrackSamples:
     SEP #$20                                                   ;83878C|E220    |      ;
     REP #$10                                                   ;83878E|C210    |      ;
@@ -945,6 +1108,16 @@ fAudio_LoadTrackSamples:
     RTL                                                        ;8389C6|6B      |      ;
  
  
+;;
+; @brief   Command 4: frees all track-sample slots from A upward, then zeroes strcAudio.list from that slot.
+; @details For slot 0 (full track change) it first waits until the SPC reports neither "music playing" nor "song starting"
+;          (status bits 0 and 4 clear). Sends one packet (slot, 0, 0) and waits for the ack value 8.
+; @param   A       first slot to free (0 = all)
+; @modifies strcAudio.list (slots A..10 cleared)
+; @clobbers A X
+; @mode    M8 -> M8X16
+; @calls   fAudio_SendSpcCommand, fAudio_ReadSpcStatusBits0And4
+;;
 fAudio_FreeSamplesFromSlot:
     SEP #$20                                                   ;8389C7|E220    |      ;
     PHA                                                        ;8389C9|48      |      ;
@@ -1002,6 +1175,16 @@ fAudio_FreeSamplesFromSlot:
     RTL                                                        ;838A25|6B      |      ;
  
  
+;;
+; @brief   Command 5: uploads the music data of strcAudio.trackId to SPC $19F4.
+; @details Size = aAudioTrackDataSizeTable[trackId] (words), sent as ceil(size / 3) chunks; source = 24-bit pointer in the
+;          first 3 bytes of sAudioTrackTable[trackId] (14-byte entries).
+; @param   strcAudio.trackId
+; @modifies ptrAudioData
+; @clobbers A X Y
+; @mode    M8X16 -> M8X16
+; @calls   fAudio_SendSpcCommand, fMathDivide, fMathMultiply_7EbyA
+;;
 fAudio_UploadTrackData:
     SEP #$20                                                   ;838A26|E220    |      ;
     REP #$10                                                   ;838A28|C210    |      ;
@@ -1113,6 +1296,17 @@ fAudio_UploadTrackData:
     RTL                                                        ;838AFE|6B      |      ;
  
  
+;;
+; @brief   Command 3 for the sample of the current SFX (aAudioSfxSampleIdTable[strcAudio.sfxId]) in the next free slot.
+; @details Same transfer as in fAudio_LoadTrackSamples (header packets + BRR chunks) but for exactly one sample; the id is
+;          appended to strcAudio.list[index] and index is incremented.
+; @param   strcAudio.sfxId   SFX id
+; @param   strcAudio.index    slot to use
+; @modifies strcAudio.list, strcAudio.index
+; @clobbers A X Y
+; @mode    M8X16 -> M8X16
+; @calls   fAudio_SendSpcCommand, fMathMultiply_7EbyA, fMathDivide
+;;
 fAudio_LoadSfxSample:
     SEP #$20                                                   ;838AFF|E220    |      ;
     REP #$10                                                   ;838B01|C210    |      ;
@@ -1133,7 +1327,7 @@ fAudio_LoadSfxSample:
     BNE .wait1                                                 ;838B20|D0EB    |838B0D;
     LDA.B #$00                                                 ;838B22|A900    |      ;
     XBA                                                        ;838B24|EB      |      ;
-    LDA.W strcAudio.reg114                                     ;838B25|AD1401  |000114;
+    LDA.W strcAudio.sfxId                                     ;838B25|AD1401  |000114;
     TAX                                                        ;838B28|AA      |      ;
     LDA.L aAudioSfxSampleIdTable,X                               ;838B29|BF7F9283|83927F;
     STA.B strcVariables.n8Temp3                                ;838B2D|8594    |000094;
@@ -1365,6 +1559,13 @@ fAudio_LoadSfxSample:
     RTL                                                        ;838CF2|6B      |      ;
  
  
+;;
+; @brief   Unused: sends command 7 (reset sample region 3).
+; @details Region 3 (SPC $B7F4+) is never filled by the game; no caller exists in the US ROM.
+; @clobbers A
+; @mode    M8X16 (REP #$10)
+; @note    Followed by an unlabelled dead stub that would send command $0C (pause toggle); also uncalled.
+;;
 fAudio_ResetSpcRegion3Unused:
     SEP #$20                                                   ;838CF3|E220    |      ;
     REP #$10                                                   ;838CF5|C210    |      ;
@@ -1401,6 +1602,16 @@ fAudio_ResetSpcRegion3Unused:
     RTL                                                        ;838D38|6B      |      ;
  
  
+;;
+; @brief   Command 8: starts the uploaded track (fade-in).
+; @details Spins until the SPC is neither playing nor starting (status bits 0 and 4 clear), then sends parameters
+;          (strcAudio.startFadeFlag, strcAudio.fadeTicks, 0) and waits for ack 8. p0 != 0 means fade in from zero over p1 ticks.
+; @param   strcAudio.startFadeFlag   fade flag (1)
+; @param   strcAudio.fadeTicks   fade ticks ($40)
+; @clobbers A
+; @mode    M8X16
+; @calls   fAudio_ReadSpcStatusBits0And4, fAudio_SendSpcCommand
+;;
 fAudio_SendStartTrackCommand:
     JSR.W fAudio_ReadSpcStatusBits0And4                                 ;838D39|20C98E  |838EC9;
     BNE fAudio_SendStartTrackCommand                                   ;838D3C|D0FB    |838D39;
@@ -1418,9 +1629,9 @@ fAudio_SendStartTrackCommand:
     LDA.B #$01                                                 ;838D55|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838D57|CD4321  |002143;
     BNE -                                                      ;838D5A|D0EB    |838D47;
-    LDA.W strcAudio.unk111                                     ;838D5C|AD1101  |000111;
+    LDA.W strcAudio.startFadeFlag                                     ;838D5C|AD1101  |000111;
     STA.W SNES_APUIO0                                          ;838D5F|8D4021  |002140;
-    LDA.W strcAudio.unk113                                     ;838D62|AD1301  |000113;
+    LDA.W strcAudio.fadeTicks                                     ;838D62|AD1301  |000113;
     STA.W SNES_APUIO1                                          ;838D65|8D4121  |002141;
     STZ.W SNES_APUIO2                                          ;838D68|9C4221  |002142;
     LDA.B #$02                                                 ;838D6B|A902    |      ;
@@ -1442,6 +1653,15 @@ fAudio_SendStartTrackCommand:
     RTL                                                        ;838D8A|6B      |      ;
  
  
+;;
+; @brief   Command 9: fades the running track out (or stops it at once when the flag byte is 0).
+; @details Returns without sending anything when the SPC is not playing (status bits 0/4 clear).
+; @param   strcAudio.fadeOutFlag   fade flag (1 = fade, 0 = stop immediately)
+; @param   strcAudio.fadeTicks   fade ticks ($40 slow / $10 fast)
+; @clobbers A
+; @mode    M8
+; @calls   fAudio_ReadSpcStatusBits0And4, fAudio_SendSpcCommand
+;;
 fAudio_SendFadeOutCommand:
     SEP #$20                                                   ;838D8B|E220    |      ;
     JSR.W fAudio_ReadSpcStatusBits0And4                                 ;838D8D|20C98E  |838EC9;
@@ -1460,9 +1680,9 @@ fAudio_SendFadeOutCommand:
     LDA.B #$01                                                 ;838DA9|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838DAB|CD4321  |002143;
     BNE -                                                      ;838DAE|D0EB    |838D9B;
-    LDA.W strcAudio.unk112                                     ;838DB0|AD1201  |000112;
+    LDA.W strcAudio.fadeOutFlag                                     ;838DB0|AD1201  |000112;
     STA.W SNES_APUIO0                                          ;838DB3|8D4021  |002140;
-    LDA.W strcAudio.unk113                                     ;838DB6|AD1301  |000113;
+    LDA.W strcAudio.fadeTicks                                     ;838DB6|AD1301  |000113;
     STA.W SNES_APUIO1                                          ;838DB9|8D4121  |002141;
     STZ.W SNES_APUIO2                                          ;838DBC|9C4221  |002142;
     LDA.B #$02                                                 ;838DBF|A902    |      ;
@@ -1486,6 +1706,16 @@ fAudio_SendFadeOutCommand:
     RTL                                                        ;838DDE|6B      |      ;
  
  
+;;
+; @brief   Command $0A: starts SFX (sfxId) on voice (sfxVoice) with pan (sfxPan).
+; @details Dropped silently when the SPC status bit 4 ("song starting") is set.
+; @param   strcAudio.sfxId   SFX id
+; @param   strcAudio.sfxVoice   voice 0-7
+; @param   strcAudio.sfxPan   pan ($0A = centre)
+; @clobbers A
+; @mode    M8
+; @calls   fAudio_ReadSpcStatusBit4, fAudio_SendSpcCommand
+;;
 fAudio_SendPlaySfxCommand:
     JSR.W fAudio_ReadSpcStatusBit4                                 ;838DDF|20E48E  |838EE4; A: nArg1
     BNE .return                                                ;838DE2|D04D    |838E31;
@@ -1503,11 +1733,11 @@ fAudio_SendPlaySfxCommand:
     LDA.B #$01                                                 ;838DFB|A901    |      ;
     CMP.W SNES_APUIO3                                          ;838DFD|CD4321  |002143;
     BNE -                                                      ;838E00|D0EB    |838DED;
-    LDA.W strcAudio.reg114                                     ;838E02|AD1401  |000114;
+    LDA.W strcAudio.sfxId                                     ;838E02|AD1401  |000114;
     STA.W SNES_APUIO0                                          ;838E05|8D4021  |002140;
-    LDA.W strcAudio.reg115                                     ;838E08|AD1501  |000115;
+    LDA.W strcAudio.sfxVoice                                     ;838E08|AD1501  |000115;
     STA.W SNES_APUIO1                                          ;838E0B|8D4121  |002141;
-    LDA.W strcAudio.reg116                                     ;838E0E|AD1601  |000116;
+    LDA.W strcAudio.sfxPan                                     ;838E0E|AD1601  |000116;
     STA.W SNES_APUIO2                                          ;838E11|8D4221  |002142;
     LDA.B #$02                                                 ;838E14|A902    |      ;
     STA.W SNES_APUIO3                                          ;838E16|8D4321  |002143;
@@ -1527,6 +1757,14 @@ fAudio_SendPlaySfxCommand:
     RTL                                                        ;838E31|6B      |      ;
  
  
+;;
+; @brief   Command $0B: stereo / mono switch.
+; @param   A       0 = stereo, non-zero = mono (pan forced to centre)
+; @clobbers A
+; @mode    M8 -> M8X16
+; @calls   fAudio_SendSpcCommand
+; @note    Boot code sends 0. The code after the RTL (unlabelled) would send command $0C (pause toggle) and is unused.
+;;
 fAudio_SendCommand0B:
     SEP #$20                                                   ;838E32|E220    |      ;
     STA.B strcVariables.n8Temp3                                ;838E34|8594    |000094;
@@ -1574,6 +1812,14 @@ fAudio_SendCommand0B:
     RTL                                                        ;838E8A|6B      |      ;
  
  
+;;
+; @brief   Local (JSR) helper: sends the command id in strcVariables.n8Temp1 and waits until the SPC has taken it.
+; @details Waits for port 3 = 1 (stable double read), writes the command to APUIO0 and 0 to ports 1/2, then 2 to port 3;
+;          waits for port 3 = 4 and clears it. Parameter packets are the caller's job.
+; @param   strcVariables.n8Temp1   command id
+; @clobbers A
+; @mode    M8
+;;
 fAudio_SendSpcCommand:
     SEP #$20                                                   ;838E8B|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838E8D|AD4321  |002143;
@@ -1608,6 +1854,13 @@ fAudio_SendSpcCommand:
     RTS                                                        ;838EC8|60      |      ;
  
  
+;;
+; @brief   Local (JSR) helper: reads the SPC status byte (port 0) and masks bits 0 and 4.
+; @return  A      status & $11 (non-zero = music playing or song starting); Z flag set accordingly
+; @clobbers A
+; @mode    M8
+; @note    The status byte is only valid while port 3 reads 1; the loop re-reads until stable.
+;;
 fAudio_ReadSpcStatusBits0And4:
     SEP #$20                                                   ;838EC9|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838ECB|AD4321  |002143;
@@ -1623,6 +1876,12 @@ fAudio_ReadSpcStatusBits0And4:
     RTS                                                        ;838EE3|60      |      ;
  
  
+;;
+; @brief   Local (JSR) helper: like fAudio_ReadSpcStatusBits0And4 but masks only bit 4 ("song starting").
+; @return  A      status & $10
+; @clobbers A
+; @mode    M8
+;;
 fAudio_ReadSpcStatusBit4:
     SEP #$20                                                   ;838EE4|E220    |      ;
     LDA.W SNES_APUIO3                                          ;838EE6|AD4321  |002143;

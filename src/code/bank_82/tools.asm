@@ -46,7 +46,7 @@ fToolUsedSound_PlayToolHit:
     TAX                                                        ;828FD1|AA      |      ;
     SEP #$20                                                   ;828FD2|E220    |      ;
     LDA.L nToolSoundTable,X                              ;828FD4|BF549082|829054; X = nToolEquipped * 3
-    STA.W strcAudio.reg115                                     ;828FD8|8D1501  |000115;
+    STA.W strcAudio.sfxVoice                                     ;828FD8|8D1501  |000115;
     INX                                                        ;828FDB|E8      |      ; X++
     REP #$20                                                   ;828FDC|C220    |      ;
     TXA                                                        ;828FDE|8A      |      ;
@@ -56,8 +56,8 @@ fToolUsedSound_PlayToolHit:
     SEP #$20                                                   ;828FE3|E220    |      ;
     LDA.L nToolSoundTable,X                              ;828FE5|BF549082|829054; X = nToolEquipped * 3 + $0922
     BEQ .return                                                ;828FE9|F007    |828FF2;
-    STA.W strcAudio.reg114                                     ;828FEB|8D1401  |000114;
-    JSL.L fAudioSetRegister2to0A                               ;828FEE|22328383|838332;
+    STA.W strcAudio.sfxId                                     ;828FEB|8D1401  |000114;
+    JSL.L fAudio_PlaySoundEffect                               ;828FEE|22328383|838332;
  
 .return:
     RTL                                                        ;828FF2|6B      |      ;
@@ -88,16 +88,16 @@ fToolUsedSound_PlayOnToolChange:
     SEP #$20                                                   ;829009|E220    |      ;
     LDA.L nToolSoundTable,X                              ;82900B|BF549082|829054;
     BEQ .return                                                ;82900F|F03A    |82904B;
-    STA.W strcAudio.reg115                                     ;829011|8D1501  |000115;
+    STA.W strcAudio.sfxVoice                                     ;829011|8D1501  |000115;
     INX                                                        ;829014|E8      |      ;
     PHX                                                        ;829015|DA      |      ;
     LDA.L nToolSoundTable,X                              ;829016|BF549082|829054;
     BEQ +                                                      ;82901A|F01C    |829038;
-    STA.W strcAudio.reg114                                     ;82901C|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;82901C|8D1401  |000114;
     SEP #$20                                                   ;82901F|E220    |      ;
     LDA.B #$00                                                 ;829021|A900    |      ;
     XBA                                                        ;829023|EB      |      ;
-    LDA.W strcAudio.unk118                                     ;829024|AD1801  |000118;
+    LDA.W strcAudio.sampleTableTrackId                                     ;829024|AD1801  |000118;
     REP #$20                                                   ;829027|C220    |      ;
     TAX                                                        ;829029|AA      |      ;
     SEP #$20                                                   ;82902A|E220    |      ;
@@ -112,7 +112,7 @@ fToolUsedSound_PlayOnToolChange:
     INX                                                        ;82903D|E8      |      ;
     LDA.L nToolSoundTable,X                              ;82903E|BF549082|829054;
     BEQ .return                                                ;829042|F007    |82904B;
-    STA.W strcAudio.reg114                                     ;829044|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;829044|8D1401  |000114;
     JSL.L fAudio_PrepareSoundEffectSample                                 ;829047|223E8383|83833E;
  
 .return:
@@ -1901,10 +1901,10 @@ fToolUsedAction0x10_WateringCan:
     SEP #$20                                                   ;829CDC|E220    |      ;
     REP #$10                                                   ;829CDE|C210    |      ;
     LDA.B #!SFX_SILENCE                                                 ;829CE0|A900    |      ;
-    STA.W strcAudio.reg114                                     ;829CE2|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;829CE2|8D1401  |000114;
     LDA.B #$07                                                 ;829CE5|A907    |      ;
-    STA.W strcAudio.reg115                                     ;829CE7|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;829CEA|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;829CE7|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;829CEA|22328383|838332;
     JSR.W fToolUsed_GetSoundForFrontTile                              ;829CEE|20A092  |8292A0;
     SEP #$20                                                   ;829CF1|E220    |      ;
     CMP.B #$02                                                 ;829CF3|C902    |      ;
@@ -2613,10 +2613,10 @@ fToolUsedAction0x15_Sprinkler:
     SEP #$20                                                   ;82A30B|E220    |      ;
     REP #$10                                                   ;82A30D|C210    |      ;
     LDA.B #!SFX_SILENCE                                                 ;82A30F|A900    |      ;
-    STA.W strcAudio.reg114                                     ;82A311|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;82A311|8D1401  |000114;
     LDA.B #$07                                                 ;82A314|A907    |      ;
-    STA.W strcAudio.reg115                                     ;82A316|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;82A319|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;82A316|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;82A319|22328383|838332;
     SEP #$20                                                   ;82A31D|E220    |      ;
     LDA.B #$00                                                 ;82A31F|A900    |      ;
     XBA                                                        ;82A321|EB      |      ;

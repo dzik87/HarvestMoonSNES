@@ -680,9 +680,9 @@ fPlayer_InteractWithFrontObject:
 .show_closed_dialog:
     SEP #$20                                                   ;82AE81|E220    |      ;
     LDA.B #$02                                                 ;82AE83|A902    |      ;
-    STA.W strcDialogDisplay.mapUnk19A                          ;82AE85|8D9A01  |00019A;
+    STA.W strcDialogDisplay.inputMode                          ;82AE85|8D9A01  |00019A;
     LDA.B #$00                                                 ;82AE88|A900    |      ;
-    STA.W strcDialogDisplay.dialogUnk191                       ;82AE8A|8D9101  |000191;
+    STA.W strcDialogDisplay.boxPosition                       ;82AE8A|8D9101  |000191;
     LDA.B #$00                                                 ;82AE8D|A900    |      ;
     XBA                                                        ;82AE8F|EB      |      ;
     LDA.B strcVariables.n8Temp2                                ;82AE90|A593    |000093;
@@ -703,9 +703,9 @@ fPlayer_InteractWithFrontObject:
     SEP #$20                                                   ;82AEA4|E220    |      ;
     REP #$10                                                   ;82AEA6|C210    |      ;
     LDA.B #$02                                                 ;82AEA8|A902    |      ;
-    STA.W strcDialogDisplay.mapUnk19A                          ;82AEAA|8D9A01  |00019A;
+    STA.W strcDialogDisplay.inputMode                          ;82AEAA|8D9A01  |00019A;
     LDA.B #$00                                                 ;82AEAD|A900    |      ;
-    STA.W strcDialogDisplay.dialogUnk191                       ;82AEAF|8D9101  |000191;
+    STA.W strcDialogDisplay.boxPosition                       ;82AEAF|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;82AEB2|225F9383|83935F;
     BRA .justReturn                                            ;82AEB6|802D    |82AEE5;
  

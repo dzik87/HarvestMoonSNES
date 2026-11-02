@@ -242,11 +242,11 @@ fGameEngine_SetDefaults:
 fGameEngine_ResetSessionState:
     REP #$30                                                   ;83ABF0|C230    |      ;
     STZ.W strcDialogDisplay.dialogId                           ;83ABF2|9C8301  |000183;
-    STZ.W strcDialogDisplay.dialogUnk185                       ;83ABF5|9C8501  |000185;
+    STZ.W strcDialogDisplay.glyphVramAddr                       ;83ABF5|9C8501  |000185;
     STZ.W strcDialogDisplay.dialogCurrentOffset                ;83ABF8|9C8701  |000187;
     SEP #$20                                                   ;83ABFB|E220    |      ;
     STZ.W strcDialogDisplay.dialogFlags                        ;83ABFD|9C9B01  |00019B;
-    STZ.W strcDialogDisplay.mapUnk19A                          ;83AC00|9C9A01  |00019A;
+    STZ.W strcDialogDisplay.inputMode                          ;83AC00|9C9A01  |00019A;
     STZ.B strcSystem.DMAchannelFlags                           ;83AC03|6428    |000028;
     REP #$20                                                   ;83AC05|C220    |      ;
     STZ.B ptrPaletteNext                                       ;83AC07|6404    |000004;
@@ -354,9 +354,9 @@ fGameEngine_ResetSessionState:
     STZ.W strcPlayerData.toolSound                             ;83AD2F|9C2209  |000922;
     SEP #$20                                                   ;83AD32|E220    |      ;
     STZ.W strcAudio.trackId                                    ;83AD34|9C1001  |000110;
-    STZ.W strcAudio.reg114                                     ;83AD37|9C1401  |000114;
+    STZ.W strcAudio.sfxId                                     ;83AD37|9C1401  |000114;
     STZ.W strcAudio.trackIdCopy                                ;83AD3A|9C1701  |000117;
-    STZ.W strcAudio.unk118                                     ;83AD3D|9C1801  |000118;
+    STZ.W strcAudio.sampleTableTrackId                                     ;83AD3D|9C1801  |000118;
     STZ.W strcAudio.trackIdCopy                                ;83AD40|9C1701  |000117;
     SEP #$20                                                   ;83AD43|E220    |      ;
     STZ.W strcPlayerData.placedCowFeed                         ;83AD45|9C3009  |000930;
@@ -366,7 +366,7 @@ fGameEngine_ResetSessionState:
     STZ.W strcPlayerData.placedChickenFeedFlags                ;83AD50|9C3409  |000934;
     REP #$20                                                   ;83AD53|C220    |      ;
     STZ.W $084A                                                ;83AD55|9C4A08  |00084A;
-    STZ.B strcPlayer.unkDC                                     ;83AD58|64DC    |0000DC;
+    STZ.B strcPlayer.gameObjectSlotLimit                                     ;83AD58|64DC    |0000DC;
     SEP #$20                                                   ;83AD5A|E220    |      ;
     STZ.W nDestinationAreaId                                   ;83AD5C|9C8B09  |00098B;
     REP #$20                                                   ;83AD5F|C220    |      ;

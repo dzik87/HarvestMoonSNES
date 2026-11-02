@@ -220,8 +220,8 @@
   params:
     - {name: nUnused, offset: 1, size: 1, type: unknown, meaning: "Ignored by the handler (ptr += 2). The command does not occur in US scripts (B3/B4/B5), so the value is unknown."}
   summary: "Calls fAudio_FadeOutOnTrackChangeSlow: if the requested trackId differs from the one being played, sends a track change command to the APU."
-  details: "Advances ptrAIActionData by 2 and calls fAudio_FadeOutOnTrackChangeSlow: it compares strcAudio.trackId with trackIdCopy ($7E:0117); when they differ and trackIdCopy != 0, it sets strcAudio.unk112=1, unk113=$40 and calls fAudio_SendFadeOutCommand, which sends a command (1, parameter $40 - probably fade/track change) to the SPC through the APUIO0-3 ports. May block on the handshake with the APU. Together with 0x00 (setting trackId) it forms the pair 'set track -> apply'."
-  ram_touched: [strcAudio.trackId, strcAudio.trackIdCopy, strcAudio.unk112, strcAudio.unk113, ptrAIActionData]
+  details: "Advances ptrAIActionData by 2 and calls fAudio_FadeOutOnTrackChangeSlow: it compares strcAudio.trackId with trackIdCopy ($7E:0117); when they differ and trackIdCopy != 0, it sets strcAudio.fadeOutFlag=1, fadeTicks=$40 and calls fAudio_SendFadeOutCommand, which sends a command (1, parameter $40 - probably fade/track change) to the SPC through the APUIO0-3 ports. May block on the handshake with the APU. Together with 0x00 (setting trackId) it forms the pair 'set track -> apply'."
+  ram_touched: [strcAudio.trackId, strcAudio.trackIdCopy, strcAudio.fadeOutFlag, strcAudio.fadeTicks, ptrAIActionData]
   calls: [fAudio_FadeOutOnTrackChangeSlow, fAudio_SendFadeOutCommand]
   open_questions: "The exact semantics of the APU command (1/$40) and of fAudio_SendFadeOutCommand were not analyzed (fade-out only? start of a new track?); the command is not used in US scripts, so it cannot be confirmed from context. The name is a hypothesis."
 

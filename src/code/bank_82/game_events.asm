@@ -209,7 +209,7 @@ fEvents_ShippingScene:
     CMP.B #$04                                                 ;828142|C904    |      ;
     BCS fEvents_ShippingSceneReturn                            ;828144|B079    |8281BF;
     LDA.B #$00                                                 ;828146|A900    |      ;
-    STA.W strcDialogDisplay.mapUnk19A                          ;828148|8D9A01  |00019A;
+    STA.W strcDialogDisplay.inputMode                          ;828148|8D9A01  |00019A;
     REP #$20                                                   ;82814B|C220    |      ;
     %SetFlag(daily1, $0400)
     %AIExecute($0006, $0000, $0026)
@@ -232,7 +232,7 @@ fEvents_ShippingSceneDialog:
  
  
   + LDA.W #$0002                                               ;82817C|A90200  |      ;
-    STA.W strcDialogDisplay.mapUnk19A                          ;82817F|8D9A01  |00019A;
+    STA.W strcDialogDisplay.inputMode                          ;82817F|8D9A01  |00019A;
     LDX.W #$031A                                               ;828182|A21A03  |      ;
     REP #$20                                                   ;828185|C220    |      ;
     LDA.L nShippingProfit                                      ;828187|AF071F7F|7F1F07;
@@ -244,7 +244,7 @@ fEvents_ShippingSceneDialog:
  
   + SEP #$20                                                   ;828198|E220    |      ;
     LDA.B #$00                                                 ;82819A|A900    |      ;
-    STA.W strcDialogDisplay.dialogUnk191                       ;82819C|8D9101  |000191;
+    STA.W strcDialogDisplay.boxPosition                       ;82819C|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;82819F|225F9383|83935F;
     REP #$20                                                   ;8281A3|C220    |      ;
     LDA.W #$0006                                               ;8281A5|A90600  |      ;

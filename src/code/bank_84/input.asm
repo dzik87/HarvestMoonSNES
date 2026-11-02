@@ -1,12 +1,36 @@
+;;
+; @file   input.asm
+; @brief  Joypad interpretation for every UI state: player controls in the game world, dialog and option menus, the tool help
+;         menu, the title screen menus and the name-entry grid. Also maps a pressed button to a player action.
+; @details fInput_Handler runs once per frame from the main loops and dispatches on strcDialogDisplay.inputMode:
+;         1 gameplay (fInput_Mode_Gameplay), 2 dialog (fInput_DialogHandler), 3 tool help menu (fInput_Mode_HelpMenu),
+;         4 title screen (fInput_Mode_TitleScreen), 5 name entry (fNameInput_ControlsHandler), 6 dialog during a cutscene
+;         (fInput_Mode_CutsceneDialog). Gameplay input can also come from an AI script (strcAiControlData.input) when
+;         PFLAGS_AISTEERING is set; the AI feeds the same button bits as the joypad.
+;         Joypad bits used here: !JOYPAD_* (strcJoypad1.current = held, .newInput = pressed this frame, .autorepeat = pressed
+;         or repeated). Every menu sound is played through strcAudio.sfxId / sfxVoice (6) + fAudio_PlaySoundEffect.
+; @bank   $84   @range $84C034-$84D0FF
+; @see    src/code/bank_83/dialog.asm, src/code/bank_82/main_loop.asm (title states), src/code/bank_82/menu.asm (name grids)
+;;
+
 ; Bank $84 module "input" - starts at $84C034
  
+;;
+; @brief   Per-frame input dispatcher: jumps to the handler of the current UI mode.
+; @param   strcDialogDisplay.inputMode   1 gameplay, 2 dialog, 3 help menu, 4 title screen, 5 name entry, 6 cutscene dialog
+; @clobbers A
+; @mode    M8X16 -> M8X16
+; @calls   fInput_Mode_Gameplay, fInput_DialogHandler, fInput_Mode_HelpMenu, fInput_Mode_TitleScreen, fNameInput_ControlsHandler,
+;          fInput_Mode_CutsceneDialog
+; @note    Any other mode value returns at once.
+;;
 fInput_Handler:
     SEP #$20                                                   ;84C034|E220    |      ;
     REP #$10                                                   ;84C036|C210    |      ;
-    LDA.W strcDialogDisplay.mapUnk19A                          ;84C038|AD9A01  |00019A;
+    LDA.W strcDialogDisplay.inputMode                          ;84C038|AD9A01  |00019A;
     CMP.B #$01                                                 ;84C03B|C901    |      ;
     BNE +                                                      ;84C03D|D003    |84C042;
-    JMP.W fInput_Handler_case01                                ;84C03F|4CB7C6  |84C6B7;
+    JMP.W fInput_Mode_Gameplay                                ;84C03F|4CB7C6  |84C6B7;
  
  
   + CMP.B #$02                                                 ;84C042|C902    |      ;
@@ -16,12 +40,12 @@ fInput_Handler:
  
   + CMP.B #$03                                                 ;84C049|C903    |      ;
     BNE +                                                      ;84C04B|D003    |84C050;
-    JMP.W fInput_Handler_case03                                ;84C04D|4C40C5  |84C540;
+    JMP.W fInput_Mode_HelpMenu                                ;84C04D|4C40C5  |84C540;
  
  
   + CMP.B #$04                                                 ;84C050|C904    |      ;
     BNE +                                                      ;84C052|D003    |84C057;
-    JMP.W fInput_Handler_case04                                ;84C054|4C88C2  |84C288;
+    JMP.W fInput_Mode_TitleScreen                                ;84C054|4C88C2  |84C288;
  
  
   + CMP.B #$05                                                 ;84C057|C905    |      ;
@@ -31,12 +55,20 @@ fInput_Handler:
  
   + CMP.B #$06                                                 ;84C05E|C906    |      ;
     BNE +                                                      ;84C060|D003    |84C065;
-    JMP.W fInput_Handler_case06                                ;84C062|4CD2CE  |84CED2;
+    JMP.W fInput_Mode_CutsceneDialog                                ;84C062|4CD2CE  |84CED2;
  
  
   + RTL                                                        ;84C065|6B      |      ;
  
  
+;;
+; @brief   Name entry (mode 5): d-pad (with auto-repeat) moves the grid cursor, B erases, A enters the letter.
+; @details Cursor movement and the cell contents come from the name grid data (fMenu_GetNameInputCellField).
+; @modifies strcMenuData.menuIdx (via the handlers)
+; @clobbers A
+; @mode    M16X16
+; @calls   fNameInput_DownButton, fNameInput_UpButton, fNameInput_RightButton, fNameInput_LeftButton, fNameInput_BButton, fNameInput_AButton
+;;
 fNameInput_ControlsHandler:
     REP #$30                                                   ;84C066|C230    |      ;
     LDA.W strcJoypad1.autorepeat                               ;84C068|AD2C01  |00012C;
@@ -79,6 +111,15 @@ fNameInput_ControlsHandler:
     RTL                                                        ;84C0AA|6B      |      ;
  
  
+;;
+; @brief   Name entry, B: deletes the last entered letter (back-space) and plays the cancel sound.
+; @details With 0 letters nothing is deleted. With 4 letters (full) the cursor marker is not redrawn; otherwise glyph $A8
+;          is drawn at the cursor. The previous slot of strcNames.sTemp is set to $B1 (space glyph) and nameEntryIdx decremented.
+; @modifies strcMenuData.nameEntryIdx, strcNames.sTemp
+; @clobbers A X
+; @mode    M8 -> M8X16
+; @calls   fScreen_NameInput_DrawLetterAtCursor, fAudio_PlaySoundEffect
+;;
 fNameInput_BButton:
     SEP #$20                                                   ;84C0AB|E220    |      ;
     LDA.W strcMenuData.nameEntryIdx                            ;84C0AD|AD9409  |000994;
@@ -109,13 +150,24 @@ fNameInput_BButton:
     SEP #$20                                                   ;84C0DB|E220    |      ;
     REP #$10                                                   ;84C0DD|C210    |      ;
     LDA.B #!SFX_MENUCANCEL                                                 ;84C0DF|A902    |      ;
-    STA.W strcAudio.reg114                                     ;84C0E1|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;84C0E1|8D1401  |000114;
     LDA.B #$06                                                 ;84C0E4|A906    |      ;
-    STA.W strcAudio.reg115                                     ;84C0E6|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;84C0E9|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;84C0E6|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;84C0E9|22328383|838332;
     RTL                                                        ;84C0ED|6B      |      ;
  
  
+;;
+; @brief   Name entry, A: acts on the cell under the cursor - grid switch / confirm cell, or enters a letter.
+; @details Cell field 5 (special action) 1-4 selects grid 0-2 or the confirm cell; otherwise the glyph id (cell field 4) is
+;          stored in strcNames.sTemp[nameEntryIdx] and drawn, the index advances (max 4 letters; the 4th replaces itself
+;          silently: index stays 4 and the confirm sound still plays).
+; @modifies strcMenuData.nameEntryIdx, strcNames.sTemp
+; @clobbers A X
+; @mode    M16 -> M8X16
+; @calls   fMenu_GetNameInputCellField, fNameInput_SelectCharTable0, fNameInput_SelectCharTable1, fNameInput_SelectCharTable2,
+;          fNameInput_ConfirmName, fScreen_NameInput_DrawLetterAtCursor, fAudio_PlaySoundEffect
+;;
 fNameInput_AButton:
     REP #$20                                                   ;84C0EE|C220    |      ;
     LDA.W #$0005                                               ;84C0F0|A90500  |      ;
@@ -132,7 +184,7 @@ fNameInput_AButton:
  
   + CMP.W #$0004                                               ;84C10B|C90400  |      ;
     BNE +                                                      ;84C10E|D003    |84C113;
-    JMP.W fNameInput_SelectCharTable3                                 ;84C110|4CD2C1  |84C1D2;
+    JMP.W fNameInput_ConfirmName                                 ;84C110|4CD2C1  |84C1D2;
  
  
   + SEP #$20                                                   ;84C113|E220    |      ;
@@ -162,13 +214,21 @@ fNameInput_AButton:
     SEP #$20                                                   ;84C144|E220    |      ;
     REP #$10                                                   ;84C146|C210    |      ;
     LDA.B #!SFX_MENUCONFIRM                                                 ;84C148|A901    |      ;
-    STA.W strcAudio.reg114                                     ;84C14A|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;84C14A|8D1401  |000114;
     LDA.B #$06                                                 ;84C14D|A906    |      ;
-    STA.W strcAudio.reg115                                     ;84C14F|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;84C152|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;84C14F|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;84C152|22328383|838332;
     RTL                                                        ;84C156|6B      |      ;
  
  
+;;
+; @brief   Name entry: switches to character grid 0 by scrolling BG1 to (0, 0) and homes the cursor (menuIdx = 0).
+; @modifies strcMenuData.tableSelector, strcBGScrool.BG1HorOffs, strcBGScrool.BG1VerOffs, strcMenuData.menuIdx
+; @clobbers A
+; @mode    M8 -> M8X16
+; @calls   fAudio_PlaySoundEffect
+; @note    Plays !SFX_MENUCONFIRM.
+;;
 fNameInput_SelectCharTable0:
     SEP #$20                                                   ;84C157|E220    |      ;
     LDA.B #$00                                                 ;84C159|A900    |      ;
@@ -181,13 +241,21 @@ fNameInput_SelectCharTable0:
     SEP #$20                                                   ;84C16B|E220    |      ;
     REP #$10                                                   ;84C16D|C210    |      ;
     LDA.B #!SFX_MENUCONFIRM                                                 ;84C16F|A901    |      ;
-    STA.W strcAudio.reg114                                     ;84C171|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;84C171|8D1401  |000114;
     LDA.B #$06                                                 ;84C174|A906    |      ;
-    STA.W strcAudio.reg115                                     ;84C176|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;84C179|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;84C176|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;84C179|22328383|838332;
     RTL                                                        ;84C17D|6B      |      ;
  
  
+;;
+; @brief   Name entry: switches to character grid 1 by scrolling BG1 to ($0100, 0) and homes the cursor (menuIdx = 0).
+; @modifies strcMenuData.tableSelector, strcBGScrool.BG1HorOffs, strcBGScrool.BG1VerOffs, strcMenuData.menuIdx
+; @clobbers A
+; @mode    M8 -> M8X16
+; @calls   fAudio_PlaySoundEffect
+; @note    Plays !SFX_MENUCONFIRM.
+;;
 fNameInput_SelectCharTable1:
     SEP #$20                                                   ;84C17E|E220    |      ;
     LDA.B #$01                                                 ;84C180|A901    |      ;
@@ -201,13 +269,21 @@ fNameInput_SelectCharTable1:
     SEP #$20                                                   ;84C195|E220    |      ;
     REP #$10                                                   ;84C197|C210    |      ;
     LDA.B #!SFX_MENUCONFIRM                                                 ;84C199|A901    |      ;
-    STA.W strcAudio.reg114                                     ;84C19B|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;84C19B|8D1401  |000114;
     LDA.B #$06                                                 ;84C19E|A906    |      ;
-    STA.W strcAudio.reg115                                     ;84C1A0|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;84C1A3|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;84C1A0|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;84C1A3|22328383|838332;
     RTL                                                        ;84C1A7|6B      |      ;
  
  
+;;
+; @brief   Name entry: switches to character grid 2 by scrolling BG1 to (0, $0100) and homes the cursor (menuIdx = 0).
+; @modifies strcMenuData.tableSelector, strcBGScrool.BG1HorOffs, strcBGScrool.BG1VerOffs, strcMenuData.menuIdx
+; @clobbers A
+; @mode    M8 -> M8X16
+; @calls   fAudio_PlaySoundEffect
+; @note    Plays !SFX_MENUCONFIRM.
+;;
 fNameInput_SelectCharTable2:
     SEP #$20                                                   ;84C1A8|E220    |      ;
     LDA.B #$02                                                 ;84C1AA|A902    |      ;
@@ -221,14 +297,22 @@ fNameInput_SelectCharTable2:
     SEP #$20                                                   ;84C1BF|E220    |      ;
     REP #$10                                                   ;84C1C1|C210    |      ;
     LDA.B #!SFX_MENUCONFIRM                                                 ;84C1C3|A901    |      ;
-    STA.W strcAudio.reg114                                     ;84C1C5|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;84C1C5|8D1401  |000114;
     LDA.B #$06                                                 ;84C1C8|A906    |      ;
-    STA.W strcAudio.reg115                                     ;84C1CA|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;84C1CD|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;84C1CA|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;84C1CD|22328383|838332;
     RTL                                                        ;84C1D1|6B      |      ;
  
  
-fNameInput_SelectCharTable3:
+;;
+; @brief   Name entry: finishes the entry (tableSelector = 3) if at least one letter was entered, else plays the cancel sound.
+; @details The main name-entry loop in screen_text.asm tests tableSelector = 3 to leave the screen.
+; @modifies strcMenuData.tableSelector
+; @clobbers A
+; @mode    M8 -> M8X16
+; @calls   fAudio_PlaySoundEffect
+;;
+fNameInput_ConfirmName:
     SEP #$20                                                   ;84C1D2|E220    |      ;
     LDA.W strcMenuData.nameEntryIdx                            ;84C1D4|AD9409  |000994;
     BEQ +                                                      ;84C1D7|F018    |84C1F1;
@@ -237,23 +321,30 @@ fNameInput_SelectCharTable3:
     SEP #$20                                                   ;84C1DE|E220    |      ;
     REP #$10                                                   ;84C1E0|C210    |      ;
     LDA.B #!SFX_MENUCONFIRM                                                 ;84C1E2|A901    |      ;
-    STA.W strcAudio.reg114                                     ;84C1E4|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;84C1E4|8D1401  |000114;
     LDA.B #$06                                                 ;84C1E7|A906    |      ;
-    STA.W strcAudio.reg115                                     ;84C1E9|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;84C1EC|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;84C1E9|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;84C1EC|22328383|838332;
     RTL                                                        ;84C1F0|6B      |      ;
  
  
   + SEP #$20                                                   ;84C1F1|E220    |      ;
     REP #$10                                                   ;84C1F3|C210    |      ;
     LDA.B #!SFX_MENUCANCEL                                                 ;84C1F5|A902    |      ;
-    STA.W strcAudio.reg114                                     ;84C1F7|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;84C1F7|8D1401  |000114;
     LDA.B #$06                                                 ;84C1FA|A906    |      ;
-    STA.W strcAudio.reg115                                     ;84C1FC|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;84C1FF|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;84C1FC|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;84C1FF|22328383|838332;
     RTL                                                        ;84C203|6B      |      ;
  
  
+;;
+; @brief   Name entry, d-pad down: moves the grid cursor to the neighbour cell (menuIdx = cell field 0) with the cursor sound.
+; @modifies strcMenuData.menuIdx
+; @clobbers A
+; @mode    M16 -> M8X16
+; @calls   fMenu_GetNameInputCellField, fAudio_PlaySoundEffect
+;;
 fNameInput_DownButton:
     REP #$20                                                   ;84C204|C220    |      ;
     LDA.W #$0000                                               ;84C206|A90000  |      ;
@@ -263,13 +354,20 @@ fNameInput_DownButton:
     SEP #$20                                                   ;84C212|E220    |      ;
     REP #$10                                                   ;84C214|C210    |      ;
     LDA.B #!SFX_MENUCURSOR                                                 ;84C216|A903    |      ;
-    STA.W strcAudio.reg114                                     ;84C218|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;84C218|8D1401  |000114;
     LDA.B #$06                                                 ;84C21B|A906    |      ;
-    STA.W strcAudio.reg115                                     ;84C21D|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;84C220|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;84C21D|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;84C220|22328383|838332;
     RTL                                                        ;84C224|6B      |      ;
  
  
+;;
+; @brief   Name entry, d-pad up: moves the grid cursor to the neighbour cell (menuIdx = cell field 1) with the cursor sound.
+; @modifies strcMenuData.menuIdx
+; @clobbers A
+; @mode    M16 -> M8X16
+; @calls   fMenu_GetNameInputCellField, fAudio_PlaySoundEffect
+;;
 fNameInput_UpButton:
     REP #$20                                                   ;84C225|C220    |      ;
     LDA.W #$0001                                               ;84C227|A90100  |      ;
@@ -279,13 +377,20 @@ fNameInput_UpButton:
     SEP #$20                                                   ;84C233|E220    |      ;
     REP #$10                                                   ;84C235|C210    |      ;
     LDA.B #!SFX_MENUCURSOR                                                 ;84C237|A903    |      ;
-    STA.W strcAudio.reg114                                     ;84C239|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;84C239|8D1401  |000114;
     LDA.B #$06                                                 ;84C23C|A906    |      ;
-    STA.W strcAudio.reg115                                     ;84C23E|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;84C241|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;84C23E|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;84C241|22328383|838332;
     RTL                                                        ;84C245|6B      |      ;
  
  
+;;
+; @brief   Name entry, d-pad right: moves the grid cursor to the neighbour cell (menuIdx = cell field 2) with the cursor sound.
+; @modifies strcMenuData.menuIdx
+; @clobbers A
+; @mode    M16 -> M8X16
+; @calls   fMenu_GetNameInputCellField, fAudio_PlaySoundEffect
+;;
 fNameInput_RightButton:
     REP #$20                                                   ;84C246|C220    |      ;
     LDA.W #$0002                                               ;84C248|A90200  |      ;
@@ -295,13 +400,20 @@ fNameInput_RightButton:
     SEP #$20                                                   ;84C254|E220    |      ;
     REP #$10                                                   ;84C256|C210    |      ;
     LDA.B #!SFX_MENUCURSOR                                                 ;84C258|A903    |      ;
-    STA.W strcAudio.reg114                                     ;84C25A|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;84C25A|8D1401  |000114;
     LDA.B #$06                                                 ;84C25D|A906    |      ;
-    STA.W strcAudio.reg115                                     ;84C25F|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;84C262|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;84C25F|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;84C262|22328383|838332;
     RTL                                                        ;84C266|6B      |      ;
  
  
+;;
+; @brief   Name entry, d-pad left: moves the grid cursor to the neighbour cell (menuIdx = cell field 3) with the cursor sound.
+; @modifies strcMenuData.menuIdx
+; @clobbers A
+; @mode    M16 -> M8X16
+; @calls   fMenu_GetNameInputCellField, fAudio_PlaySoundEffect
+;;
 fNameInput_LeftButton:
     REP #$20                                                   ;84C267|C220    |      ;
     LDA.W #$0003                                               ;84C269|A90300  |      ;
@@ -311,47 +423,67 @@ fNameInput_LeftButton:
     SEP #$20                                                   ;84C275|E220    |      ;
     REP #$10                                                   ;84C277|C210    |      ;
     LDA.B #!SFX_MENUCURSOR                                                 ;84C279|A903    |      ;
-    STA.W strcAudio.reg114                                     ;84C27B|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;84C27B|8D1401  |000114;
     LDA.B #$06                                                 ;84C27E|A906    |      ;
-    STA.W strcAudio.reg115                                     ;84C280|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;84C283|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;84C280|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;84C283|22328383|838332;
     RTL                                                        ;84C287|6B      |      ;
  
  
-fInput_Handler_case04:
+;;
+; @brief   Title screen input (mode 4): dispatch on the main menu state strcVariables.n8Temp4.
+; @details State 1 opening demo, 2/3 logo scroll, 5 title menu, 7 new game slot select, 8 load game slot select; other states
+;          ignore input.
+; @param   strcVariables.n8Temp4   main menu state (fMainMenu_StateLoop)
+; @clobbers A
+; @mode    M8X16
+; @calls   fInput_Title_OpeningDemo, fInput_Title_LogoScrollSkip, fInput_Title_MenuChoice, fInput_Title_NewGameSlotSelect,
+;          fInput_Title_LoadGameSlotSelect
+;;
+fInput_Mode_TitleScreen:
     SEP #$20                                                   ;84C288|E220    |      ;
     LDA.B strcVariables.n8Temp4                                ;84C28A|A595    |000095;
     CMP.B #$01                                                 ;84C28C|C901    |      ;
     BNE +                                                      ;84C28E|D003    |84C293;
-    JMP.W fInput_Case04_State1                                 ;84C290|4CB4C2  |84C2B4;
+    JMP.W fInput_Title_OpeningDemo                                 ;84C290|4CB4C2  |84C2B4;
  
  
   + CMP.B #$02                                                 ;84C293|C902    |      ;
     BNE +                                                      ;84C295|D003    |84C29A;
-    JMP.W fInput_Case04_StartToState6                                 ;84C297|4C28C4  |84C428;
+    JMP.W fInput_Title_LogoScrollSkip                                 ;84C297|4C28C4  |84C428;
  
  
   + CMP.B #$03                                                 ;84C29A|C903    |      ;
     BNE +                                                      ;84C29C|D003    |84C2A1;
-    JMP.W fInput_Case04_StartToState6                                 ;84C29E|4C28C4  |84C428;
+    JMP.W fInput_Title_LogoScrollSkip                                 ;84C29E|4C28C4  |84C428;
  
  
   + CMP.B #$05                                                 ;84C2A1|C905    |      ;
     BNE +                                                      ;84C2A3|D003    |84C2A8;
-    JMP.W fInput_Case04_State5_ThreeWayChoice                                 ;84C2A5|4C58C4  |84C458;
+    JMP.W fInput_Title_MenuChoice                                 ;84C2A5|4C58C4  |84C458;
  
  
   + CMP.B #$07                                                 ;84C2A8|C907    |      ;
-    BEQ fInput_Case04_State7_ToggleChoice                                   ;84C2AA|F052    |84C2FE;
+    BEQ fInput_Title_NewGameSlotSelect                                   ;84C2AA|F052    |84C2FE;
     CMP.B #$08                                                 ;84C2AC|C908    |      ;
     BNE +                                                      ;84C2AE|D003    |84C2B3;
-    JMP.W fInput_Case04_State8_LoadChoice                                  ;84C2B0|4C80C3  |84C380;
+    JMP.W fInput_Title_LoadGameSlotSelect                                  ;84C2B0|4C80C3  |84C380;
  
  
   + RTL                                                        ;84C2B3|6B      |      ;
  
  
-fInput_Case04_State1:
+;;
+; @brief   Opening demo (state 1): feeds the scripted AI input and lets Start skip the demo (jump to the title).
+; @details Runs fInput_AIJoypadHandler unless the player action is JUMP. When daily1 flag $8000 is set and Start is newly pressed,
+;          continues at fInput_Case04_StartPressedTarget (the unlabelled block below the .justReturn RTL: sets main menu
+;          state 9 = re-init title screen, plays the cursor sound, sets daily2 flag $0004).
+; @region  JP: the jump goes to the hard-coded address $84C2D8 instead of the symbol
+; @calls   fInput_AIJoypadHandler
+; @clobbers A
+; @mode    M8 -> M16
+;;
+fInput_Title_OpeningDemo:
     %CheckPlayerAction(!PACTION_JUMP)
     BEQ +                                                      ;84C2BB|F004    |84C2C1;
     JSL.L fInput_AIJoypadHandler                               ;84C2BD|22D6C784|84C7D6;
@@ -379,16 +511,25 @@ fInput_Case04_State1:
     SEP #$20                                                   ;84C2DE|E220    |      ;
     REP #$10                                                   ;84C2E0|C210    |      ;
     LDA.B #!SFX_MENUCURSOR                                                 ;84C2E2|A903    |      ;
-    STA.W strcAudio.reg114                                     ;84C2E4|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;84C2E4|8D1401  |000114;
     LDA.B #$06                                                 ;84C2E7|A906    |      ;
-    STA.W strcAudio.reg115                                     ;84C2E9|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;84C2EC|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;84C2E9|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;84C2EC|22328383|838332;
     REP #$20                                                   ;84C2F0|C220    |      ;
     %SetFlag(daily2, $0004)
     RTL                                                        ;84C2FD|6B      |      ;
  
  
-fInput_Case04_State7_ToggleChoice:
+;;
+; @brief   Slot select for a new game (state 7): up/down toggles the slot, A confirms, B cancels.
+; @details Toggle flips the slot number at $098E (+!RAM_SHIFT) and sets strcVariables.u8Unk97 (redraw request). Cancel sets
+;          strcVariables.n8Temp3 = 1, confirm sets it to 2 (read by fMainMenu_StateNewGameSlotSelect).
+; @modifies strcVariables.n8Temp3, strcVariables.u8Unk97
+; @clobbers A
+; @mode    M16 -> M8X16
+; @calls   fAudio_PlaySoundEffect
+;;
+fInput_Title_NewGameSlotSelect:
     REP #$30                                                   ;84C2FE|C230    |      ;
     LDA.W strcJoypad1.newInput                                 ;84C300|AD2801  |000128;
     BIT.W #!JOYPAD_DOWN                                               
@@ -428,10 +569,10 @@ fInput_Case04_State7_ToggleChoice:
     SEP #$20                                                   ;84C33B|E220    |      ;
     REP #$10                                                   ;84C33D|C210    |      ;
     LDA.B #!SFX_MENUCURSOR                                                 ;84C33F|A903    |      ;
-    STA.W strcAudio.reg114                                     ;84C341|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;84C341|8D1401  |000114;
     LDA.B #$06                                                 ;84C344|A906    |      ;
-    STA.W strcAudio.reg115                                     ;84C346|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;84C349|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;84C346|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;84C349|22328383|838332;
     RTL                                                        ;84C34D|6B      |      ;
  
  
@@ -442,10 +583,10 @@ fInput_Case04_State7_ToggleChoice:
     SEP #$20                                                   ;84C354|E220    |      ;
     REP #$10                                                   ;84C356|C210    |      ;
     LDA.B #!SFX_MENUCURSOR                                                 ;84C358|A903    |      ;
-    STA.W strcAudio.reg114                                     ;84C35A|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;84C35A|8D1401  |000114;
     LDA.B #$06                                                 ;84C35D|A906    |      ;
-    STA.W strcAudio.reg115                                     ;84C35F|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;84C362|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;84C35F|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;84C362|22328383|838332;
     RTL                                                        ;84C366|6B      |      ;
  
  
@@ -456,14 +597,23 @@ fInput_Case04_State7_ToggleChoice:
     SEP #$20                                                   ;84C36D|E220    |      ;
     REP #$10                                                   ;84C36F|C210    |      ;
     LDA.B #!SFX_MENUCONFIRM                                                 ;84C371|A901    |      ;
-    STA.W strcAudio.reg114                                     ;84C373|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;84C373|8D1401  |000114;
     LDA.B #$06                                                 ;84C376|A906    |      ;
-    STA.W strcAudio.reg115                                     ;84C378|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;84C37B|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;84C378|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;84C37B|22328383|838332;
     RTL                                                        ;84C37F|6B      |      ;
  
  
-fInput_Case04_State8_LoadChoice:
+;;
+; @brief   Slot select for loading a saved game (state 8): up/down toggles the slot, A loads it, B cancels.
+; @details A calls fGameEngine_LoadContinue with the slot; X = 0 on return means the slot is empty/invalid (error sound,
+;          stay), otherwise strcVariables.n8Temp3 = 2 (loaded). B sets n8Temp3 = 1.
+; @modifies strcVariables.n8Temp3, strcVariables.u8Unk97
+; @clobbers A X
+; @mode    M16 -> M8X16
+; @calls   fGameEngine_LoadContinue, fAudio_PlaySoundEffect
+;;
+fInput_Title_LoadGameSlotSelect:
     REP #$30                                                   ;84C380|C230    |      ;
     LDA.W strcJoypad1.newInput                                 ;84C382|AD2801  |000128;
     BIT.W #!JOYPAD_DOWN                                               
@@ -503,10 +653,10 @@ fInput_Case04_State8_LoadChoice:
     SEP #$20                                                   ;84C3BD|E220    |      ;
     REP #$10                                                   ;84C3BF|C210    |      ;
     LDA.B #!SFX_MENUCURSOR                                                 ;84C3C1|A903    |      ;
-    STA.W strcAudio.reg114                                     ;84C3C3|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;84C3C3|8D1401  |000114;
     LDA.B #$06                                                 ;84C3C6|A906    |      ;
-    STA.W strcAudio.reg115                                     ;84C3C8|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;84C3CB|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;84C3C8|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;84C3CB|22328383|838332;
     RTL                                                        ;84C3CF|6B      |      ;
  
  
@@ -517,10 +667,10 @@ fInput_Case04_State8_LoadChoice:
     SEP #$20                                                   ;84C3D6|E220    |      ;
     REP #$10                                                   ;84C3D8|C210    |      ;
     LDA.B #!SFX_MENUCURSOR                                                 ;84C3DA|A903    |      ;
-    STA.W strcAudio.reg114                                     ;84C3DC|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;84C3DC|8D1401  |000114;
     LDA.B #$06                                                 ;84C3DF|A906    |      ;
-    STA.W strcAudio.reg115                                     ;84C3E1|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;84C3E4|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;84C3E1|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;84C3E4|22328383|838332;
     RTL                                                        ;84C3E8|6B      |      ;
  
  
@@ -539,24 +689,31 @@ fInput_Case04_State8_LoadChoice:
     SEP #$20                                                   ;84C402|E220    |      ;
     REP #$10                                                   ;84C404|C210    |      ;
     LDA.B #!SFX_MENUCONFIRM                                                 ;84C406|A901    |      ;
-    STA.W strcAudio.reg114                                     ;84C408|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;84C408|8D1401  |000114;
     LDA.B #$06                                                 ;84C40B|A906    |      ;
-    STA.W strcAudio.reg115                                     ;84C40D|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;84C410|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;84C40D|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;84C410|22328383|838332;
     RTL                                                        ;84C414|6B      |      ;
  
  
   + SEP #$20                                                   ;84C415|E220    |      ;
     REP #$10                                                   ;84C417|C210    |      ;
     LDA.B #!SFX_MENUCANCEL                                                 ;84C419|A902    |      ;
-    STA.W strcAudio.reg114                                     ;84C41B|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;84C41B|8D1401  |000114;
     LDA.B #$06                                                 ;84C41E|A906    |      ;
-    STA.W strcAudio.reg115                                     ;84C420|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;84C423|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;84C420|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;84C423|22328383|838332;
     RTL                                                        ;84C427|6B      |      ;
  
  
-fInput_Case04_StartToState6:
+;;
+; @brief   Logo scroll states (2 and 3): Start (while daily1 flag $8000 is set) skips to the title screen (state 6).
+; @modifies strcVariables.n8Temp4
+; @clobbers A
+; @mode    M16 -> M8X16
+; @calls   fAudio_PlaySoundEffect
+;;
+fInput_Title_LogoScrollSkip:
     REP #$30                                                   ;84C428|C230    |      ;
     %CheckFlag(daily1, $8000)
     BEQ .justReturn                                            ;84C431|F00B    |84C43E;
@@ -577,14 +734,23 @@ fInput_Case04_StartToState6:
     SEP #$20                                                   ;84C445|E220    |      ;
     REP #$10                                                   ;84C447|C210    |      ;
     LDA.B #!SFX_MENUCURSOR                                                 ;84C449|A903    |      ;
-    STA.W strcAudio.reg114                                     ;84C44B|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;84C44B|8D1401  |000114;
     LDA.B #$06                                                 ;84C44E|A906    |      ;
-    STA.W strcAudio.reg115                                     ;84C450|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;84C453|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;84C450|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;84C453|22328383|838332;
     RTL                                                        ;84C457|6B      |      ;
  
  
-fInput_Case04_State5_ThreeWayChoice:
+;;
+; @brief   Title menu (state 5): up/down moves the highlighted entry (nUnknownFlags09D = 0-2, wrapping), A selects.
+; @details A: entry 0 -> state 8 (load game slot select), entry 1 -> state 7 (new game slot select), entry 2 -> state $0A
+;          (how-to-play demo). Every move sets strcVariables.u8Unk97 (redraw) and clears n16Unk90.
+; @modifies strcVariables.n8Temp4, nUnknownFlags09D, strcVariables.u8Unk97, strcVariables.n16Unk90
+; @clobbers A
+; @mode    M16 -> M8X16
+; @calls   fAudio_PlaySoundEffect
+;;
+fInput_Title_MenuChoice:
     REP #$30                                                   ;84C458|C230    |      ;
     LDA.W strcJoypad1.newInput                                 ;84C45A|AD2801  |000128;
     BIT.W #!JOYPAD_DOWN                                               
@@ -621,10 +787,10 @@ fInput_Case04_State5_ThreeWayChoice:
     SEP #$20                                                   ;84C491|E220    |      ;
     REP #$10                                                   ;84C493|C210    |      ;
     LDA.B #!SFX_MENUCURSOR                                                 ;84C495|A903    |      ;
-    STA.W strcAudio.reg114                                     ;84C497|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;84C497|8D1401  |000114;
     LDA.B #$06                                                 ;84C49A|A906    |      ;
-    STA.W strcAudio.reg115                                     ;84C49C|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;84C49F|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;84C49C|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;84C49F|22328383|838332;
     RTL                                                        ;84C4A3|6B      |      ;
  
  
@@ -637,10 +803,10 @@ fInput_Case04_State5_ThreeWayChoice:
     SEP #$20                                                   ;84C4B1|E220    |      ;
     REP #$10                                                   ;84C4B3|C210    |      ;
     LDA.B #!SFX_MENUCURSOR                                                 ;84C4B5|A903    |      ;
-    STA.W strcAudio.reg114                                     ;84C4B7|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;84C4B7|8D1401  |000114;
     LDA.B #$06                                                 ;84C4BA|A906    |      ;
-    STA.W strcAudio.reg115                                     ;84C4BC|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;84C4BF|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;84C4BC|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;84C4BF|22328383|838332;
     RTL                                                        ;84C4C3|6B      |      ;
  
  
@@ -657,10 +823,10 @@ fInput_Case04_State5_ThreeWayChoice:
     SEP #$20                                                   ;84C4D7|E220    |      ;
     REP #$10                                                   ;84C4D9|C210    |      ;
     LDA.B #!SFX_MENUCURSOR                                                 ;84C4DB|A903    |      ;
-    STA.W strcAudio.reg114                                     ;84C4DD|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;84C4DD|8D1401  |000114;
     LDA.B #$06                                                 ;84C4E0|A906    |      ;
-    STA.W strcAudio.reg115                                     ;84C4E2|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;84C4E5|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;84C4E2|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;84C4E5|22328383|838332;
     RTL                                                        ;84C4E9|6B      |      ;
  
  
@@ -674,10 +840,10 @@ fInput_Case04_State5_ThreeWayChoice:
     SEP #$20                                                   ;84C4F9|E220    |      ;
     REP #$10                                                   ;84C4FB|C210    |      ;
     LDA.B #!SFX_MENUCURSOR                                                 ;84C4FD|A903    |      ;
-    STA.W strcAudio.reg114                                     ;84C4FF|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;84C4FF|8D1401  |000114;
     LDA.B #$06                                                 ;84C502|A906    |      ;
-    STA.W strcAudio.reg115                                     ;84C504|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;84C507|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;84C504|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;84C507|22328383|838332;
     RTL                                                        ;84C50B|6B      |      ;
  
  
@@ -709,69 +875,86 @@ fInput_Case04_State5_ThreeWayChoice:
   + SEP #$20                                                   ;84C52D|E220    |      ;
     REP #$10                                                   ;84C52F|C210    |      ;
     LDA.B #!SFX_MENUCONFIRM                                                 ;84C531|A901    |      ;
-    STA.W strcAudio.reg114                                     ;84C533|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;84C533|8D1401  |000114;
     LDA.B #$06                                                 ;84C536|A906    |      ;
-    STA.W strcAudio.reg115                                     ;84C538|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;84C53B|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;84C538|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;84C53B|22328383|838332;
     RTL                                                        ;84C53F|6B      |      ;
  
  
-fInput_Handler_case03:
+;;
+; @brief   Tool help menu (mode 3, started by player interaction $14): d-pad moves the cursor, A selects.
+; @details Menu: two columns of 11 lines each; helpCursor 0-10 = left column (tool entries), 11-21 = right column.
+; @clobbers A
+; @mode    M16
+; @calls   fInput_HelpMenu_CursorDown, fInput_HelpMenu_CursorUp, fInput_HelpMenu_CursorRight, fInput_HelpMenu_CursorLeft,
+;          fInput_HelpMenu_Confirm
+;;
+fInput_Mode_HelpMenu:
     REP #$30                                                   ;84C540|C230    |      ;
     LDA.W strcJoypad1.autorepeat                               ;84C542|AD2C01  |00012C;
     BIT.W #$0400                                               ;84C545|890004  |      ;
     BEQ +                                                      ;84C548|F003    |84C54D;
-    JMP.W fInput_Case03_CursorDown                                 ;84C54A|4CD1C5  |84C5D1;
+    JMP.W fInput_HelpMenu_CursorDown                                 ;84C54A|4CD1C5  |84C5D1;
  
  
   + LDA.W strcJoypad1.autorepeat                               ;84C54D|AD2C01  |00012C;
     BIT.W #$0800                                               ;84C550|890008  |      ;
     BEQ +                                                      ;84C553|F003    |84C558;
-    JMP.W fInput_Case03_CursorUp                                 ;84C555|4C12C6  |84C612;
+    JMP.W fInput_HelpMenu_CursorUp                                 ;84C555|4C12C6  |84C612;
  
  
   + LDA.W strcJoypad1.autorepeat                               ;84C558|AD2C01  |00012C;
     BIT.W #$0100                                               ;84C55B|890001  |      ;
     BEQ +                                                      ;84C55E|F003    |84C563;
-    JMP.W fInput_Case03_CursorRight                                 ;84C560|4C51C6  |84C651;
+    JMP.W fInput_HelpMenu_CursorRight                                 ;84C560|4C51C6  |84C651;
  
  
   + LDA.W strcJoypad1.autorepeat                               ;84C563|AD2C01  |00012C;
     BIT.W #$0200                                               ;84C566|890002  |      ;
     BEQ +                                                      ;84C569|F003    |84C56E;
-    JMP.W fInput_Case03_CursorLeft                                 ;84C56B|4C84C6  |84C684;
+    JMP.W fInput_HelpMenu_CursorLeft                                 ;84C56B|4C84C6  |84C684;
  
  
   + LDA.W strcJoypad1.newInput                                 ;84C56E|AD2801  |000128;
     BIT.W #!JOYPAD_A                                               
     BEQ +                                                      ;84C574|F003    |84C579;
-    JMP.W fInput_Case03_ConfirmSelection                                 ;84C576|4C7AC5  |84C57A;
+    JMP.W fInput_HelpMenu_Confirm                                 ;84C576|4C7AC5  |84C57A;
  
  
   + RTL                                                        ;84C579|6B      |      ;
  
  
-fInput_Case03_ConfirmSelection:
+;;
+; @brief   Help menu, A: shows the help dialog of the selected tool (dialog ids $0F-$19), or leaves the menu for cursor >= 11.
+; @details Left column: boxPosition = 0, fDialog_DialogHandler with aDialogPointerIndexBySelection[helpCursor], mode 2.
+;          Right column ("exit"): mode 1 (gameplay), blink icon drawn. Sets BG2 vertical scroll to $0100 in both cases.
+; @modifies strcDialogDisplay.inputMode, strcDialogDisplay.dialogFlags, strcDialogDisplay.boxPosition, strcBGScrool.BG2VerOffs
+; @clobbers A X
+; @mode    M8X16 -> M16X16
+; @calls   fDialog_DrawBlinkIconFrame, fDialog_DialogHandler, fAudio_PlaySoundEffect
+;;
+fInput_HelpMenu_Confirm:
     SEP #$20                                                   ;84C57A|E220    |      ;
     REP #$10                                                   ;84C57C|C210    |      ;
     LDA.B #!SFX_MENUCONFIRM                                                 ;84C57E|A901    |      ;
-    STA.W strcAudio.reg114                                     ;84C580|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;84C580|8D1401  |000114;
     LDA.B #$06                                                 ;84C583|A906    |      ;
-    STA.W strcAudio.reg115                                     ;84C585|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;84C588|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;84C585|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;84C588|22328383|838332;
     SEP #$20                                                   ;84C58C|E220    |      ;
     STZ.W strcDialogDisplay.dialogFlags                        ;84C58E|9C9B01  |00019B;
     SEP #$20                                                   ;84C591|E220    |      ;
     LDA.B #$02                                                 ;84C593|A902    |      ;
-    STA.W strcDialogDisplay.mapUnk19A                          ;84C595|8D9A01  |00019A;
+    STA.W strcDialogDisplay.inputMode                          ;84C595|8D9A01  |00019A;
     LDA.B #$00                                                 ;84C598|A900    |      ;
     XBA                                                        ;84C59A|EB      |      ;
-    LDA.W strcDialogDisplay.dialoUnk18A                        ;84C59B|AD8A01  |00018A;
+    LDA.W strcDialogDisplay.helpCursor                        ;84C59B|AD8A01  |00018A;
     CMP.B #$0B                                                 ;84C59E|C90B    |      ;
     BCC .show_dialog                                                ;84C5A0|9012    |84C5B4;
     SEP #$20                                                   ;84C5A2|E220    |      ;
     LDA.B #$01                                                 ;84C5A4|A901    |      ;
-    STA.W strcDialogDisplay.mapUnk19A                          ;84C5A6|8D9A01  |00019A;
+    STA.W strcDialogDisplay.inputMode                          ;84C5A6|8D9A01  |00019A;
     REP #$20                                                   ;84C5A9|C220    |      ;
     LDA.W #$0001                                               ;84C5AB|A90100  |      ;
     JSL.L fDialog_DrawBlinkIconFrame                               ;84C5AE|22D79483|8394D7;
@@ -786,7 +969,7 @@ fInput_Case03_ConfirmSelection:
     TAX                                                        ;84C5BC|AA      |      ;
     SEP #$20                                                   ;84C5BD|E220    |      ;
     LDA.B #$00                                                 ;84C5BF|A900    |      ;
-    STA.W strcDialogDisplay.dialogUnk191                       ;84C5C1|8D9101  |000191;
+    STA.W strcDialogDisplay.boxPosition                       ;84C5C1|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;84C5C4|225F9383|83935F;
  
   + REP #$20                                                   ;84C5C8|C220    |      ;
@@ -795,126 +978,171 @@ fInput_Case03_ConfirmSelection:
     RTL                                                        ;84C5D0|6B      |      ;
  
  
-fInput_Case03_CursorDown:
+;;
+; @brief   Help menu, d-pad down: moves down; wraps from line 10 to line 0 inside the left column.
+; @details Plays the cursor sound, erases the old icon (fDialog_DrawBlinkIconFrame frame 1) and restarts the blink timer.
+; @modifies strcDialogDisplay.helpCursor, strcDialogDisplay.dialogBlinkTimer
+; @clobbers A
+; @mode    M8X16
+; @calls   fDialog_DrawBlinkIconFrame, fAudio_PlaySoundEffect
+;;
+fInput_HelpMenu_CursorDown:
     SEP #$20                                                   ;84C5D1|E220    |      ;
     REP #$10                                                   ;84C5D3|C210    |      ;
     LDA.B #!SFX_MENUCURSOR                                                 ;84C5D5|A903    |      ;
-    STA.W strcAudio.reg114                                     ;84C5D7|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;84C5D7|8D1401  |000114;
     LDA.B #$06                                                 ;84C5DA|A906    |      ;
-    STA.W strcAudio.reg115                                     ;84C5DC|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;84C5DF|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;84C5DC|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;84C5DF|22328383|838332;
     SEP #$20                                                   ;84C5E3|E220    |      ;
-    LDA.W strcDialogDisplay.dialoUnk18A                        ;84C5E5|AD8A01  |00018A;
+    LDA.W strcDialogDisplay.helpCursor                        ;84C5E5|AD8A01  |00018A;
     CMP.B #$0B                                                 ;84C5E8|C90B    |      ;
     BCS .return                                                ;84C5EA|B025    |84C611;
     REP #$20                                                   ;84C5EC|C220    |      ;
     LDA.W #$0001                                               ;84C5EE|A90100  |      ;
     JSL.L fDialog_DrawBlinkIconFrame                               ;84C5F1|22D79483|8394D7;
     SEP #$20                                                   ;84C5F5|E220    |      ;
-    LDA.W strcDialogDisplay.dialoUnk18A                        ;84C5F7|AD8A01  |00018A;
+    LDA.W strcDialogDisplay.helpCursor                        ;84C5F7|AD8A01  |00018A;
     CMP.B #$0A                                                 ;84C5FA|C90A    |      ;
     BNE +                                                      ;84C5FC|D007    |84C605;
     LDA.B #$00                                                 ;84C5FE|A900    |      ;
-    STA.W strcDialogDisplay.dialoUnk18A                        ;84C600|8D8A01  |00018A;
+    STA.W strcDialogDisplay.helpCursor                        ;84C600|8D8A01  |00018A;
     BRA .return                                                ;84C603|800C    |84C611;
  
  
   + SEP #$20                                                   ;84C605|E220    |      ;
-    LDA.W strcDialogDisplay.dialoUnk18A                        ;84C607|AD8A01  |00018A;
+    LDA.W strcDialogDisplay.helpCursor                        ;84C607|AD8A01  |00018A;
     INC A                                                      ;84C60A|1A      |      ;
-    STA.W strcDialogDisplay.dialoUnk18A                        ;84C60B|8D8A01  |00018A;
+    STA.W strcDialogDisplay.helpCursor                        ;84C60B|8D8A01  |00018A;
     STZ.W strcDialogDisplay.dialogBlinkTimer                   ;84C60E|9C8B01  |00018B;
  
 .return:
     RTL                                                        ;84C611|6B      |      ;
  
  
-fInput_Case03_CursorUp:
+;;
+; @brief   Help menu, d-pad up: moves up; wraps from line 0 to line 10.
+; @details Plays the cursor sound, erases the old icon (fDialog_DrawBlinkIconFrame frame 1) and restarts the blink timer.
+; @modifies strcDialogDisplay.helpCursor, strcDialogDisplay.dialogBlinkTimer
+; @clobbers A
+; @mode    M8X16
+; @calls   fDialog_DrawBlinkIconFrame, fAudio_PlaySoundEffect
+;;
+fInput_HelpMenu_CursorUp:
     SEP #$20                                                   ;84C612|E220    |      ;
     REP #$10                                                   ;84C614|C210    |      ;
     LDA.B #!SFX_MENUCURSOR                                                 ;84C616|A903    |      ;
-    STA.W strcAudio.reg114                                     ;84C618|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;84C618|8D1401  |000114;
     LDA.B #$06                                                 ;84C61B|A906    |      ;
-    STA.W strcAudio.reg115                                     ;84C61D|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;84C620|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;84C61D|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;84C620|22328383|838332;
     SEP #$20                                                   ;84C624|E220    |      ;
-    LDA.W strcDialogDisplay.dialoUnk18A                        ;84C626|AD8A01  |00018A;
+    LDA.W strcDialogDisplay.helpCursor                        ;84C626|AD8A01  |00018A;
     CMP.B #$0B                                                 ;84C629|C90B    |      ;
     BCS .return                                                ;84C62B|B023    |84C650;
     REP #$20                                                   ;84C62D|C220    |      ;
     LDA.W #$0001                                               ;84C62F|A90100  |      ;
     JSL.L fDialog_DrawBlinkIconFrame                               ;84C632|22D79483|8394D7;
     SEP #$20                                                   ;84C636|E220    |      ;
-    LDA.W strcDialogDisplay.dialoUnk18A                        ;84C638|AD8A01  |00018A;
+    LDA.W strcDialogDisplay.helpCursor                        ;84C638|AD8A01  |00018A;
     BNE +                                                      ;84C63B|D007    |84C644;
     LDA.B #$0A                                                 ;84C63D|A90A    |      ;
-    STA.W strcDialogDisplay.dialoUnk18A                        ;84C63F|8D8A01  |00018A;
+    STA.W strcDialogDisplay.helpCursor                        ;84C63F|8D8A01  |00018A;
     BRA .return                                                ;84C642|800C    |84C650;
  
  
   + SEP #$20                                                   ;84C644|E220    |      ;
-    LDA.W strcDialogDisplay.dialoUnk18A                        ;84C646|AD8A01  |00018A;
+    LDA.W strcDialogDisplay.helpCursor                        ;84C646|AD8A01  |00018A;
     DEC A                                                      ;84C649|3A      |      ;
-    STA.W strcDialogDisplay.dialoUnk18A                        ;84C64A|8D8A01  |00018A;
+    STA.W strcDialogDisplay.helpCursor                        ;84C64A|8D8A01  |00018A;
     STZ.W strcDialogDisplay.dialogBlinkTimer                   ;84C64D|9C8B01  |00018B;
  
 .return:
     RTL                                                        ;84C650|6B      |      ;
  
  
-fInput_Case03_CursorRight:
+;;
+; @brief   Help menu, d-pad right: jumps from the left to the right column (cursor + 11).
+; @details Plays the cursor sound, erases the old icon (fDialog_DrawBlinkIconFrame frame 1) and restarts the blink timer.
+; @modifies strcDialogDisplay.helpCursor, strcDialogDisplay.dialogBlinkTimer
+; @clobbers A
+; @mode    M8X16
+; @calls   fDialog_DrawBlinkIconFrame, fAudio_PlaySoundEffect
+;;
+fInput_HelpMenu_CursorRight:
     SEP #$20                                                   ;84C651|E220    |      ;
     REP #$10                                                   ;84C653|C210    |      ;
     LDA.B #!SFX_MENUCURSOR                                                 ;84C655|A903    |      ;
-    STA.W strcAudio.reg114                                     ;84C657|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;84C657|8D1401  |000114;
     LDA.B #$06                                                 ;84C65A|A906    |      ;
-    STA.W strcAudio.reg115                                     ;84C65C|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;84C65F|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;84C65C|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;84C65F|22328383|838332;
     SEP #$20                                                   ;84C663|E220    |      ;
-    LDA.W strcDialogDisplay.dialoUnk18A                        ;84C665|AD8A01  |00018A;
+    LDA.W strcDialogDisplay.helpCursor                        ;84C665|AD8A01  |00018A;
     CMP.B #$0B                                                 ;84C668|C90B    |      ;
     BCS .return                                                ;84C66A|B017    |84C683;
     REP #$20                                                   ;84C66C|C220    |      ;
     LDA.W #$0001                                               ;84C66E|A90100  |      ;
     JSL.L fDialog_DrawBlinkIconFrame                               ;84C671|22D79483|8394D7;
     SEP #$20                                                   ;84C675|E220    |      ;
-    LDA.W strcDialogDisplay.dialoUnk18A                        ;84C677|AD8A01  |00018A;
+    LDA.W strcDialogDisplay.helpCursor                        ;84C677|AD8A01  |00018A;
     CLC                                                        ;84C67A|18      |      ;
     ADC.B #$0B                                                 ;84C67B|690B    |      ;
-    STA.W strcDialogDisplay.dialoUnk18A                        ;84C67D|8D8A01  |00018A;
+    STA.W strcDialogDisplay.helpCursor                        ;84C67D|8D8A01  |00018A;
     STZ.W strcDialogDisplay.dialogBlinkTimer                   ;84C680|9C8B01  |00018B;
  
 .return:
     RTL                                                        ;84C683|6B      |      ;
  
  
-fInput_Case03_CursorLeft:
+;;
+; @brief   Help menu, d-pad left: jumps from the right to the left column (cursor - 11).
+; @details Plays the cursor sound, erases the old icon (fDialog_DrawBlinkIconFrame frame 1) and restarts the blink timer.
+; @modifies strcDialogDisplay.helpCursor, strcDialogDisplay.dialogBlinkTimer
+; @clobbers A
+; @mode    M8X16
+; @calls   fDialog_DrawBlinkIconFrame, fAudio_PlaySoundEffect
+;;
+fInput_HelpMenu_CursorLeft:
     SEP #$20                                                   ;84C684|E220    |      ;
     REP #$10                                                   ;84C686|C210    |      ;
     LDA.B #!SFX_MENUCURSOR                                                 ;84C688|A903    |      ;
-    STA.W strcAudio.reg114                                     ;84C68A|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;84C68A|8D1401  |000114;
     LDA.B #$06                                                 ;84C68D|A906    |      ;
-    STA.W strcAudio.reg115                                     ;84C68F|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;84C692|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;84C68F|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;84C692|22328383|838332;
     SEP #$20                                                   ;84C696|E220    |      ;
-    LDA.W strcDialogDisplay.dialoUnk18A                        ;84C698|AD8A01  |00018A;
+    LDA.W strcDialogDisplay.helpCursor                        ;84C698|AD8A01  |00018A;
     CMP.B #$0B                                                 ;84C69B|C90B    |      ;
     BCC .return                                                ;84C69D|9017    |84C6B6;
     REP #$20                                                   ;84C69F|C220    |      ;
     LDA.W #$0001                                               ;84C6A1|A90100  |      ;
     JSL.L fDialog_DrawBlinkIconFrame                               ;84C6A4|22D79483|8394D7;
     SEP #$20                                                   ;84C6A8|E220    |      ;
-    LDA.W strcDialogDisplay.dialoUnk18A                        ;84C6AA|AD8A01  |00018A;
+    LDA.W strcDialogDisplay.helpCursor                        ;84C6AA|AD8A01  |00018A;
     SEC                                                        ;84C6AD|38      |      ;
     SBC.B #$0B                                                 ;84C6AE|E90B    |      ;
-    STA.W strcDialogDisplay.dialoUnk18A                        ;84C6B0|8D8A01  |00018A;
+    STA.W strcDialogDisplay.helpCursor                        ;84C6B0|8D8A01  |00018A;
     STZ.W strcDialogDisplay.dialogBlinkTimer                   ;84C6B3|9C8B01  |00018B;
  
 .return:
     RTL                                                        ;84C6B6|6B      |      ;
  
  
-fInput_Handler_case01:
+;;
+; @brief   Player control (mode 1): decides whether input is accepted and dispatches d-pad and buttons.
+; @details Input is ignored (fInput_PlayerReturn) while the player is in a transition, interacting or eating, while jumping,
+;          when daily2 flag $0020 is set, or without PFLAGS_USERCONTROL. With PFLAGS_AISTEERING the AI input is used instead.
+;          During fishing / fishing bite only Y is read. Actions listed with 1 in aActionLookupTable block further input.
+;          Held d-pad (strcJoypad1.current) -> fAiInput_Press*, which start walking and then fall into
+;          fInput_PlayerNormalGameplay.
+; @param   strcPlayer.action, strcPlayer flags, strcJoypad1.current
+; @clobbers A X
+; @mode    M16X16 (Z/branches)
+; @calls   fInput_PlayerReturn, fInput_AIJoypadHandler, fInput_PlayerButtonY, fAiInput_PressDown, fAiInput_PressUp,
+;          fAiInput_PressRight, fAiInput_PressLeft, fInput_PlayerNormalGameplay
+;;
+fInput_Mode_Gameplay:
     %CheckPlayerFlags(!PFLAGS_INTRANSITION|!PFLAGS_INTERACTING|!PFLAGS_EATINGMEAL)
     BEQ +                                                      ;84C6BE|F003    |84C6C3;
     JMP.W fInput_PlayerReturn                                  ;84C6C0|4CB5C7  |84C7B5;
@@ -983,6 +1211,16 @@ fInput_Handler_case01:
     JMP.W fAiInput_PressLeft                                   ;84C73D|4CE3C9  |84C9E3;
  
  
+;;
+; @brief   Button dispatch for the player: A interact, B run/jump, Select show tool, X swap tool, R whistle horse, L whistle dog, Y use tool.
+; @details Priority order as coded: AI steering -> fInput_AiControl; action $0F (fishing rod ready) only reacts to Y; A (new
+;          press); in springs (PFLAGS_INSPRINGS) nothing more; B (held); Select; X; R; L; Y.
+; @clobbers A
+; @mode    M16
+; @calls   fInput_AiControl, fInput_PlayerButtonY, fInput_PlayerButtonA_Interact, fInput_PlayerButtonB,
+;          fInput_PlayerButtonSelect_ShowTool, fInput_PlayerButtonX_SwapTool, fInput_PlayerButtonR_WhistleHorse,
+;          fInput_PlayerButtonL_WhistleDog
+;;
 fInput_PlayerNormalGameplay:
     %CheckPlayerFlags(!PFLAGS_AISTEERING)
     BEQ +                                                      ;84C747|F003    |84C74C;
@@ -1037,6 +1275,10 @@ fInput_PlayerNormalGameplay:
     JMP.W fInput_PlayerButtonL_WhistleDog                      ;84C7A7|4C43CE  |84CE43;
  
  
+;;
+; @brief   Y button check (new press) -> fInput_PlayerButtonY_UseTool.
+; @mode    M16
+;;
 fInput_PlayerButtonY:
     LDA.W strcJoypad1.newInput                                 ;84C7AA|AD2801  |000128;
     BIT.W #!JOYPAD_Y                                               
@@ -1044,15 +1286,32 @@ fInput_PlayerButtonY:
     JMP.W fInput_PlayerButtonY_UseTool                         ;84C7B2|4C77CD  |84CD77;
  
  
+;;
+; @brief   Shared RTL of the gameplay input routines.
+;;
 fInput_PlayerReturn:
     RTL                                                        ;84C7B5|6B      |      ;
  
  
+;;
+; @brief   Per player action: 1 = the action blocks new d-pad input (walk/run start) while it is running.
+; @format  32 bytes indexed by !PACTION_* ($00-$1F).
+; @index   strcPlayer.action
+; @used_by fInput_Mode_Gameplay
+; @note    Entries with value 1: $04 $05 $08 $0A $0B $0C $0D $10 $13 $14 $15 $16 $17 $18 $1A $1B $1C (item on hand, drop, consume, tool use, tired, show tool, whistle horse, fishing cast / reel, drunk, drinking, dropping dog, ...).
+;;
 aActionLookupTable:
     db $00,$00,$00,$00,$01,$01,$00,$00,$01,$00,$01,$01         ;84C7B6|        |      ; 0x20 * [n8]
     db $01,$01,$00,$00,$01,$00,$00,$01,$01,$01,$01,$01         ;84C7C2|        |      ;
     db $01,$00,$01,$01,$01,$00,$00,$00                         ;84C7CE|        |      ;
  
+;;
+; @brief   Same dispatch as the joypad path but reads the AI-supplied button word strcAiControlData.input.
+; @details Direction bits go to fAiInput_Press*; the other bits are tested in fInput_AiControl.
+; @clobbers A
+; @mode    M16X16
+; @calls   fAiInput_PressDown, fAiInput_PressUp, fAiInput_PressRight, fAiInput_PressLeft, fInput_AiControl
+;;
 fInput_AIJoypadHandler:
     REP #$30                                                   ;84C7D6|C230    |      ;
     LDA.W strcAiControlData.input                              ;84C7D8|ADFD08  |0008FD;
@@ -1079,6 +1338,15 @@ fInput_AIJoypadHandler:
     JMP.W fAiInput_PressLeft                                   ;84C801|4CE3C9  |84C9E3;
  
  
+;;
+; @brief   Button dispatch for AI-driven input: bit $0080 A, $8000 B, $2000 Select, $0040 X, $0010 R, $0020 L, $4000 Y.
+; @param   strcAiControlData.input
+; @clobbers A
+; @mode    M16
+; @calls   fInput_PlayerButtonA_Interact, fInput_PlayerButtonB, fInput_PlayerButtonSelect_ShowTool, fInput_PlayerButtonX_SwapTool,
+;          fInput_PlayerButtonR_WhistleHorse, fInput_PlayerButtonL_WhistleDog, fInput_PlayerButtonY_UseTool
+; @note    The bit layout differs from the SNES joypad register for the face buttons (A is $0080 here, B $8000, Y $4000).
+;;
 fInput_AiControl:
     LDA.W strcAiControlData.input                              ;84C804|ADFD08  |0008FD;
     BIT.W #$0080                                               ;84C807|898000  |      ;
@@ -1125,6 +1393,11 @@ fInput_AiControl:
   + RTL                                                        ;84C851|6B      |      ;
  
  
+;;
+; @brief   Unused: turns the held d-pad into action $06 / $07 depending on whether it points along or against the object direction.
+; @details Releasing A cancels to action none. Compares strcObjectData.direction with the pressed direction.
+; @note    confidence: low - no caller; $06/$07 are !PACTION_06 / !PACTION_07 (unnamed, probably push / pull a block).
+;;
 fInput_Unused84C852:
     REP #$30                                                   ;84C852|C230    |      ;
     LDA.W strcJoypad1.newUnpressed                             ;84C854|AD2A01  |00012A;
@@ -1245,6 +1518,15 @@ fInput_Unused84C852:
     JMP.W .justReturn                                          ;84C932|4C89C8  |84C889;
  
  
+;;
+; @brief   D-pad down: the player starts walking and faces that way (action WALK, player and object direction = !PDIR_DOWN).
+; @details Then continues in fInput_PlayerNormalGameplay for the buttons. The code after the JMP (a "turn opposite" block)
+;          is unreachable leftover.
+; @modifies strcPlayer.action, strcPlayer.direction, strcObjectData.direction
+; @clobbers A
+; @mode    M16
+; @calls   fInput_PlayerNormalGameplay
+;;
 fAiInput_PressDown:
     %SetPlayerAction(!PACTION_WALK)
     %SetPlayerDirection(!PDIR_DOWN)
@@ -1267,6 +1549,15 @@ fAiInput_PressDown:
     JMP.W fInput_PlayerReturn                                  ;84C96C|4CB5C7  |84C7B5;
  
  
+;;
+; @brief   D-pad up: the player starts walking and faces that way (action WALK, player and object direction = !PDIR_UP).
+; @details Then continues in fInput_PlayerNormalGameplay for the buttons. The code after the JMP (a "turn opposite" block)
+;          is unreachable leftover.
+; @modifies strcPlayer.action, strcPlayer.direction, strcObjectData.direction
+; @clobbers A
+; @mode    M16
+; @calls   fInput_PlayerNormalGameplay
+;;
 fAiInput_PressUp:
     %SetPlayerAction(!PACTION_WALK)
     %SetPlayerDirection(!PDIR_UP)
@@ -1289,6 +1580,17 @@ fAiInput_PressUp:
     JMP.W fInput_PlayerReturn                                  ;84C9A6|4CB5C7  |84C7B5;
  
  
+;;
+; @brief   D-pad right: the player starts walking and faces that way (action WALK, player and object direction = !PDIR_LEFT).
+; @details Then continues in fInput_PlayerNormalGameplay for the buttons. The code after the JMP (a "turn opposite" block)
+;          is unreachable leftover.
+; @modifies strcPlayer.action, strcPlayer.direction, strcObjectData.direction
+; @clobbers A
+; @mode    M16
+; @calls   fInput_PlayerNormalGameplay
+; @note    Right sets !PDIR_LEFT and left sets !PDIR_RIGHT: the enum names of directions 2/3 are probably swapped (docs say
+;          2 = right, 3 = left in the NPC sprite tables); see docs/naming/open-questions.md.
+;;
 fAiInput_PressRight:
     %SetPlayerAction(!PACTION_WALK)
     %SetPlayerDirection(!PDIR_LEFT)
@@ -1311,6 +1613,17 @@ fAiInput_PressRight:
     JMP.W fInput_PlayerReturn                                  ;84C9E0|4CB5C7  |84C7B5;
  
  
+;;
+; @brief   D-pad left: the player starts walking and faces that way (action WALK, player and object direction = !PDIR_RIGHT).
+; @details Then continues in fInput_PlayerNormalGameplay for the buttons. The code after the JMP (a "turn opposite" block)
+;          is unreachable leftover.
+; @modifies strcPlayer.action, strcPlayer.direction, strcObjectData.direction
+; @clobbers A
+; @mode    M16
+; @calls   fInput_PlayerNormalGameplay
+; @note    Right sets !PDIR_LEFT and left sets !PDIR_RIGHT: the enum names of directions 2/3 are probably swapped (docs say
+;          2 = right, 3 = left in the NPC sprite tables); see docs/naming/open-questions.md.
+;;
 fAiInput_PressLeft:
     %SetPlayerAction(!PACTION_WALK)
     %SetPlayerDirection(!PDIR_RIGHT)
@@ -1333,6 +1646,18 @@ fAiInput_PressLeft:
     JMP.W fInput_PlayerReturn                                  ;84CA1A|4CB5C7  |84C7B5;
  
  
+;;
+; @brief   B button: run, or jump when the tile in front is a ledge/drop and the way is free.
+; @details Not while hugging the dog. Reads the object property of the tile in front (fObjectEngine_GetObjectPropertyByDirSeason):
+;          bits $60 set means jumpable (bit $20 -> jump distance code $1C, else sets PFLAGS_FALLING and code $21). If the
+;          collision probes (fGameEngine_DirectionHandler83AF37 / 83AD91) allow it, action = JUMP; otherwise action = RUN.
+; @modifies strcPlayer.action, strcPlayer.unkE3, strcPlayer.lastX, strcPlayer.lastY, strcPlayer.newX, strcPlayer.newY
+; @clobbers A X Y
+; @mode    M16X16 -> M16X16
+; @calls   fStoreTileOnFrontOfPlayerAtDistance, fObjectEngine_GetObjectPropertyByDirSeason, fGameEngine_DirectionHandler83AF37,
+;          fGameEngine_DirectionHandler83AD91
+; @note    confidence: medium on the jump property bits.
+;;
 fInput_PlayerButtonB:
     %CheckPlayerFlags(!PFLAGS_DOGHUGGING)
     BEQ +                                                      ;84CA24|F003    |84CA29;
@@ -1397,6 +1722,17 @@ fInput_PlayerButtonB:
     RTL                                                        ;84CAA4|6B      |      ;
  
  
+;;
+; @brief   A button: context action - drop the dog, dismount, drop the held item, or interact with the object in front.
+; @details Order: hugging dog -> put the dog down if the 3 probe tiles are free (sets nDogX/nDogY/nDogAreaId, action DROPPINGDOG);
+;          riding horse -> dismount (tries the side tiles depending on facing); daily4 flag $0006 -> special check for object $F5
+;          (action $1A); holding an item -> action DROPITEM; else fPlayer_InteractWithFrontObject with the tile in front.
+; @modifies strcPlayer.action, nDogX, nDogY, nDogAreaId, strcObjectData.direction, strcStockData.unkHorse
+; @clobbers A X Y
+; @mode    M16X16
+; @calls   fStoreTileOnFrontOfPlayerAtDistance, fObjectEngine_GetObjectPropertyByDirSeason, fPlayer_InteractWithFrontObject,
+;          fInput_IsObjectDirectionBlocked, fAI_StartSlotScriptAtFrontTile, fGameEngine_DirectionHandler83AD91
+;;
 fInput_PlayerButtonA_Interact:
     %CheckPlayerFlags(!PFLAGS_DOGHUGGING)
     BEQ +                                                      ;84CAAC|F003    |84CAB1;
@@ -1681,6 +2017,13 @@ fInput_PlayerButtonA_Interact:
     RTL                                                        ;84CD15|6B      |      ;
  
  
+;;
+; @brief   Tests whether the player could step in the direction strcObjectData.direction (used to find a free dismount side).
+; @return  A      0 = free, 1 = blocked
+; @clobbers A
+; @mode    M16X16
+; @calls   fGameEngine_DirectionHandler83AF37, fGameEngine_DirectionHandler83AD91
+;;
 fInput_IsObjectDirectionBlocked:
     REP #$30                                                   ;84CD16|C230    |      ;
     LDA.W #$0010                                               ;84CD18|A91000  |      ;
@@ -1736,6 +2079,14 @@ fInput_IsObjectDirectionBlocked:
     RTL                                                        ;84CD76|6B      |      ;
  
  
+;;
+; @brief   Y button: use the equipped tool, or cast / pull the fishing rod. Not allowed while holding an item, riding or hugging the dog.
+; @details Action $0F (rod ready) -> cast; FISHING -> back to $0F; FISHING BITE -> reel; otherwise fInput_SetPlayerAction_UseTool.
+; @clobbers A
+; @mode    M16
+; @calls   fInput_SetPlayerAction_FishingCast, fInput_SetPlayerAction_FishingRodReady, fInput_SetPlayerAction_FishingReel,
+;          fInput_SetPlayerAction_UseTool
+;;
 fInput_PlayerButtonY_UseTool:
     %CheckPlayerFlags(!PFLAGS_HOLDINGITEM)
     BEQ +                                                      ;84CD7E|F003    |84CD83;
@@ -1754,20 +2105,26 @@ fInput_PlayerButtonY_UseTool:
  
   + %CheckPlayerAction(!PACTION_0F)
     BNE +                                                      ;84CDA2|D003    |84CDA7;
-    JMP.W fInput_SetPlayerAction0x10                           ;84CDA4|4CDDCD  |84CDDD;
+    JMP.W fInput_SetPlayerAction_FishingCast                           ;84CDA4|4CDDCD  |84CDDD;
  
  
   + %CheckPlayerAction(!PACTION_FISHING)
     BNE +                                                      ;84CDAE|D003    |84CDB3;
-    JMP.W fInput_SetPlayerAction0x0F                           ;84CDB0|4CE5CD  |84CDE5;
+    JMP.W fInput_SetPlayerAction_FishingRodReady                           ;84CDB0|4CE5CD  |84CDE5;
  
  
   + %CheckPlayerAction(!PACTION_FISHINGBITE)
-    BNE fInput_SetPlayerAction0x0A                             ;84CDBA|D003    |84CDBF;
-    JMP.W fInput_SetPlayerAction0x13                           ;84CDBC|4CEDCD  |84CDED;
+    BNE fInput_SetPlayerAction_UseTool                             ;84CDBA|D003    |84CDBF;
+    JMP.W fInput_SetPlayerAction_FishingReel                           ;84CDBC|4CEDCD  |84CDED;
  
  
-fInput_SetPlayerAction0x0A:
+;;
+; @brief   Starts using the equipped tool: action USINGTOOL and the tool animation, if a tool is equipped and daily4 flag $8000 is clear.
+; @clobbers A
+; @mode    M16 -> M8
+; @calls   fToolUsedAnimationHandler
+;;
+fInput_SetPlayerAction_UseTool:
     REP #$20                                                   ;84CDBF|C220    |      ;
     %CheckFlag(daily4, $8000)
     BNE fInput_PlayerButtonY_Return                            ;84CDC8|D012    |84CDDC;
@@ -1777,21 +2134,39 @@ fInput_SetPlayerAction0x0A:
     %SetPlayerAction(!PACTION_USINGTOOL)
     JSL.L fToolUsedAnimationHandler                            ;84CDD8|22A89082|8290A8;
  
+;;
+; @brief   Shared RTL of the Y/tool routines.
+;;
 fInput_PlayerButtonY_Return:
     RTL                                                        ;84CDDC|6B      |      ;
  
  
-fInput_SetPlayerAction0x10:
+;;
+; @brief   Sets player action $10 (cast the fishing rod).
+; @note    confidence: medium - action $10 shows sprite object $89 and ends in !PACTION_FISHING (fPlayerAction0x10).
+;;
+fInput_SetPlayerAction_FishingCast:
     %SetPlayerAction(!PACTION_10)
     RTL                                                        ;84CDE4|6B      |      ;
  
  
-fInput_SetPlayerAction0x0F:
+;;
+; @brief   Sets player action $0F (fishing rod held ready, sprite $88).
+; @note    confidence: medium
+;;
+fInput_SetPlayerAction_FishingRodReady:
     %SetPlayerAction(!PACTION_0F)
     RTL                                                        ;84CDEC|6B      |      ;
  
  
-fInput_SetPlayerAction0x13:
+;;
+; @brief   Sets !PACTION_REELING and picks a random reel sprite object ($8B-$8D).
+; @modifies strcPlayer.action, strcObjectData.spriteIdx
+; @clobbers A
+; @mode    M16
+; @calls   fCore_GetRandomNumber
+;;
+fInput_SetPlayerAction_FishingReel:
     %SetPlayerAction(!PACTION_REELING)
     SEP #$20                                                   ;84CDF4|E220    |      ;
     LDA.B #$03                                                 ;84CDF6|A903    |      ;
@@ -1807,6 +2182,12 @@ fInput_SetPlayerAction0x13:
     RTL                                                        ;84CE0B|6B      |      ;
  
  
+;;
+; @brief   R button: whistles for the horse (action WHISTLEHORSE) if event3 flag $0100 (horse owned) is set.
+; @details Blocked while holding an item, riding or hugging the dog.
+; @clobbers A
+; @mode    M16
+;;
 fInput_PlayerButtonR_WhistleHorse:
     %CheckPlayerFlags(!PFLAGS_HOLDINGITEM)
     BEQ +                                                      ;84CE13|F003    |84CE18;
@@ -1832,6 +2213,12 @@ fInput_PlayerButtonR_WhistleHorse:
     RTL                                                        ;84CE42|6B      |      ;
  
  
+;;
+; @brief   L button: whistles for the dog (action WHISTLEDOG) if event3 flag $0080 (dog owned) is set.
+; @details Blocked while holding an item, riding or hugging the dog.
+; @clobbers A
+; @mode    M16
+;;
 fInput_PlayerButtonL_WhistleDog:
     %CheckPlayerFlags(!PFLAGS_HOLDINGITEM)
     BEQ +                                                      ;84CE4A|F003    |84CE4F;
@@ -1857,6 +2244,11 @@ fInput_PlayerButtonL_WhistleDog:
     RTL                                                        ;84CE79|6B      |      ;
  
  
+;;
+; @brief   Select button: shows the equipped tool (action SHOWTOOL). Blocked while holding an item, riding or hugging the dog.
+; @clobbers A
+; @mode    M16
+;;
 fInput_PlayerButtonSelect_ShowTool:
     %CheckPlayerFlags(!PFLAGS_HOLDINGITEM)
     BEQ +                                                      ;84CE81|F003    |84CE86;
@@ -1879,6 +2271,11 @@ fInput_PlayerButtonSelect_ShowTool:
     RTL                                                        ;84CEA5|6B      |      ;
  
  
+;;
+; @brief   X button: cycles to the next tool (action SWAPTOOL). Blocked while holding an item, riding or hugging the dog.
+; @clobbers A
+; @mode    M16
+;;
 fInput_PlayerButtonX_SwapTool:
     %CheckPlayerFlags(!PFLAGS_HOLDINGITEM)
     BEQ +                                                      ;84CEAD|F003    |84CEB2;
@@ -1901,7 +2298,16 @@ fInput_PlayerButtonX_SwapTool:
     RTL                                                        ;84CED1|6B      |      ;
  
  
-fInput_Handler_case06:
+;;
+; @brief   Dialog shown by an AI script (mode 6, AI action 0x54): once the end of the text is reached it waits $78 frames,
+;          then closes the dialog without a button press and returns to gameplay mode.
+; @details The frame counter is the word at $09B1 (+!RAM_SHIFT); the new-input A bit is cleared on exit so the A press does not leak.
+; @modifies strcDialogDisplay.inputMode, strcJoypad1.newInput
+; @clobbers A
+; @mode    M8X16 -> M16
+; @calls   fDialog_EndDialogRestoreScroll
+;;
+fInput_Mode_CutsceneDialog:
     SEP #$20                                                   ;84CED2|E220    |      ;
     REP #$10                                                   ;84CED4|C210    |      ;
     LDA.W strcDialogDisplay.dialogFlags                        ;84CED6|AD9B01  |00019B;
@@ -1917,7 +2323,7 @@ fInput_Handler_case06:
     JSL.L fDialog_EndDialogRestoreScroll                               ;84CEEE|22F99383|8393F9;
     SEP #$20                                                   ;84CEF2|E220    |      ;
     LDA.B #$01                                                 ;84CEF4|A901    |      ;
-    STA.W strcDialogDisplay.mapUnk19A                          ;84CEF6|8D9A01  |00019A;
+    STA.W strcDialogDisplay.inputMode                          ;84CEF6|8D9A01  |00019A;
     REP #$20                                                   ;84CEF9|C220    |      ;
     LDA.W strcJoypad1.newInput                                 ;84CEFB|AD2801  |000128;
     AND.W #$FF7F                                               ;84CEFE|297FFF  |      ;
@@ -1927,6 +2333,14 @@ fInput_Handler_case06:
     RTL                                                        ;84CF04|6B      |      ;
  
  
+;;
+; @brief   Dialog input (mode 2): chooses the reaction according to the dialog state flags.
+; @details Order: text still printing (DFLAGS_UNK02) -> A held = fast text; ENDDIALOG -> wait A to close; NEXTSCREEN -> wait A for
+;          next page; OPTIONS -> option menu; UNK20 -> like end.
+; @clobbers A
+; @mode    M8X16
+; @calls   fInput_DialogHoldAFastText, fInput_DialogEndDialog, fInput_DialogNextScreen, fInput_DialogOptions
+;;
 fInput_DialogHandler:
     SEP #$20                                                   ;84CF05|E220    |      ;
     REP #$10                                                   ;84CF07|C210    |      ;
@@ -1948,6 +2362,12 @@ fInput_DialogHandler:
     RTL                                                        ;84CF2C|6B      |      ;
  
  
+;;
+; @brief   While a glyph is printing: holding A sets the glyph timer to 4 so the next glyph is drawn every frame.
+; @modifies strcDialogDisplay.glyphTimer
+; @clobbers A
+; @mode    M16 -> M8
+;;
 fInput_DialogHoldAFastText:
     REP #$30                                                   ;84CF2D|C230    |      ;
     LDA.W strcJoypad1.current                                  ;84CF2F|AD2401  |000124;
@@ -1958,10 +2378,17 @@ fInput_DialogHoldAFastText:
  
   + SEP #$20                                                   ;84CF38|E220    |      ;
     LDA.B #$04                                                 ;84CF3A|A904    |      ;
-    STA.W strcDialogDisplay.dialoUnk189                        ;84CF3C|8D8901  |000189;
+    STA.W strcDialogDisplay.glyphTimer                        ;84CF3C|8D8901  |000189;
     RTL                                                        ;84CF3F|6B      |      ;
  
  
+;;
+; @brief   End of dialog text: A closes the dialog, returns to gameplay mode and swallows the A press.
+; @modifies strcDialogDisplay.inputMode, strcJoypad1.newInput
+; @clobbers A
+; @mode    M16 -> M16
+; @calls   fDialog_EndDialogRestoreScroll
+;;
 fInput_DialogEndDialog:
     REP #$30                                                   ;84CF40|C230    |      ;
     LDA.W strcJoypad1.newInput                                 ;84CF42|AD2801  |000128;
@@ -1973,7 +2400,7 @@ fInput_DialogEndDialog:
   + JSL.L fDialog_EndDialogRestoreScroll                               ;84CF4B|22F99383|8393F9;
     SEP #$20                                                   ;84CF4F|E220    |      ;
     LDA.B #$01                                                 ;84CF51|A901    |      ;
-    STA.W strcDialogDisplay.mapUnk19A                          ;84CF53|8D9A01  |00019A;
+    STA.W strcDialogDisplay.inputMode                          ;84CF53|8D9A01  |00019A;
     REP #$20                                                   ;84CF56|C220    |      ;
     LDA.W strcJoypad1.newInput                                 ;84CF58|AD2801  |000128;
     AND.W #$FF7F                                               ;84CF5B|297FFF  |      ;
@@ -1981,6 +2408,13 @@ fInput_DialogEndDialog:
     RTL                                                        ;84CF61|6B      |      ;
  
  
+;;
+; @brief   Waiting for NEXT: A clears the text area, moves past the NEXT code and restarts at cell 0 (VRAM $5010).
+; @modifies strcDialogDisplay.dialogCurrentOffset, strcDialogDisplay.glyphVramAddr, strcDialogDisplay.dialogBlinkTimer, strcDialogDisplay.dialogFlags, strcDialogDisplay.glyphTimer
+; @clobbers A
+; @mode    M16 -> M8
+; @calls   fDialog_ReloadFontTiles
+;;
 fInput_DialogNextScreen:
     REP #$30                                                   ;84CF62|C230    |      ;
     LDA.W strcJoypad1.newInput                                 ;84CF64|AD2801  |000128;
@@ -1997,16 +2431,24 @@ fInput_DialogNextScreen:
     LDA.W #$5000                                               ;84CF7A|A90050  |      ;
     CLC                                                        ;84CF7D|18      |      ;
     ADC.W #$0010                                               ;84CF7E|691000  |      ;
-    STA.W strcDialogDisplay.dialogUnk185                       ;84CF81|8D8501  |000185;
+    STA.W strcDialogDisplay.glyphVramAddr                       ;84CF81|8D8501  |000185;
     SEP #$20                                                   ;84CF84|E220    |      ;
     STZ.W strcDialogDisplay.dialogBlinkTimer                   ;84CF86|9C8B01  |00018B;
     LDA.W strcDialogDisplay.dialogFlags                        ;84CF89|AD9B01  |00019B;
     AND.B #~!DFLAGS_NEXTSCREEN                                                 
     STA.W strcDialogDisplay.dialogFlags                        ;84CF8E|8D9B01  |00019B;
-    STZ.W strcDialogDisplay.dialoUnk189                        ;84CF91|9C8901  |000189;
+    STZ.W strcDialogDisplay.glyphTimer                        ;84CF91|9C8901  |000189;
     RTL                                                        ;84CF94|6B      |      ;
  
  
+;;
+; @brief   Option menu (<OPT n>): d-pad moves the cursor between answers, A confirms.
+; @details Layout: answers 1-3 in the first column (strcDialogDisplay.dialogOptionsAnswer 0-2), 4-5 in the second (3-4).
+; @clobbers A
+; @mode    M16
+; @calls   fInput_DialogOptions_Down, fInput_DialogOptions_Up, fInput_DialogOptions_Right, fInput_DialogOptions_Left,
+;          fInput_DialogOptions_Confirm
+;;
 fInput_DialogOptions:
     REP #$30                                                   ;84CF95|C230    |      ;
     LDA.W strcJoypad1.newInput                                 ;84CF97|AD2801  |000128;
@@ -2039,29 +2481,43 @@ fInput_DialogOptions:
   + RTL                                                        ;84CFCB|6B      |      ;
  
  
+;;
+; @brief   A on an option: confirm sound, ends the dialog; dialogOptionsAnswer keeps the chosen index for the script.
+; @modifies strcDialogDisplay.inputMode
+; @clobbers A
+; @mode    M8X16
+; @calls   fAudio_PlaySoundEffect, fDialog_EndDialogRestoreScroll
+;;
 fInput_DialogOptions_Confirm:
     SEP #$20                                                   ;84CFCC|E220    |      ;
     REP #$10                                                   ;84CFCE|C210    |      ;
     LDA.B #!SFX_MENUCONFIRM                                                 ;84CFD0|A901    |      ;
-    STA.W strcAudio.reg114                                     ;84CFD2|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;84CFD2|8D1401  |000114;
     LDA.B #$06                                                 ;84CFD5|A906    |      ;
-    STA.W strcAudio.reg115                                     ;84CFD7|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;84CFDA|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;84CFD7|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;84CFDA|22328383|838332;
     JSL.L fDialog_EndDialogRestoreScroll                               ;84CFDE|22F99383|8393F9;
     SEP #$20                                                   ;84CFE2|E220    |      ;
     LDA.B #$01                                                 ;84CFE4|A901    |      ;
-    STA.W strcDialogDisplay.mapUnk19A                          ;84CFE6|8D9A01  |00019A;
+    STA.W strcDialogDisplay.inputMode                          ;84CFE6|8D9A01  |00019A;
     RTL                                                        ;84CFE9|6B      |      ;
  
  
+;;
+; @brief   Option menu, down: erases the old cursor glyph, moves to the next answer in the column (wrapping to the column top).
+; @modifies strcDialogDisplay.dialogOptionsAnswer, strcDialogDisplay.dialogBlinkTimer
+; @clobbers A X
+; @mode    M8X16 -> M8
+; @calls   fDialog_TransferGlyph, fAudio_PlaySoundEffect
+;;
 fInput_DialogOptions_Down:
     SEP #$20                                                   ;84CFEA|E220    |      ;
     REP #$10                                                   ;84CFEC|C210    |      ;
     LDA.B #!SFX_MENUCURSOR                                                 ;84CFEE|A903    |      ;
-    STA.W strcAudio.reg114                                     ;84CFF0|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;84CFF0|8D1401  |000114;
     LDA.B #$06                                                 ;84CFF3|A906    |      ;
-    STA.W strcAudio.reg115                                     ;84CFF5|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;84CFF8|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;84CFF5|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;84CFF8|22328383|838332;
     REP #$30                                                   ;84CFFC|C230    |      ;
     LDX.W #$0001                                               ;84CFFE|A20100  |      ;
     LDA.W #!DIALOG_SPACE                                               
@@ -2097,19 +2553,30 @@ fInput_DialogOptions_Down:
     BRA fInput_DialogOptions_ResetBlink                                   ;84D034|8000    |84D036;
  
  
+;;
+; @brief   Shared tail: restarts the cursor blink timer.
+; @modifies strcDialogDisplay.dialogBlinkTimer
+;;
 fInput_DialogOptions_ResetBlink:
     STZ.W strcDialogDisplay.dialogBlinkTimer                   ;84D036|9C8B01  |00018B;
     RTL                                                        ;84D039|6B      |      ;
  
  
+;;
+; @brief   Option menu, up: moves to the previous answer; wraps from the first answer to the last of the first column.
+; @modifies strcDialogDisplay.dialogOptionsAnswer, strcDialogDisplay.dialogBlinkTimer
+; @clobbers A X
+; @mode    M8X16 -> M8
+; @calls   fDialog_TransferGlyph, fAudio_PlaySoundEffect
+;;
 fInput_DialogOptions_Up:
     SEP #$20                                                   ;84D03A|E220    |      ;
     REP #$10                                                   ;84D03C|C210    |      ;
     LDA.B #!SFX_MENUCURSOR                                                 ;84D03E|A903    |      ;
-    STA.W strcAudio.reg114                                     ;84D040|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;84D040|8D1401  |000114;
     LDA.B #$06                                                 ;84D043|A906    |      ;
-    STA.W strcAudio.reg115                                     ;84D045|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;84D048|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;84D045|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;84D048|22328383|838332;
     REP #$30                                                   ;84D04C|C230    |      ;
     LDX.W #$0001                                               ;84D04E|A20100  |      ;
     LDA.W #!DIALOG_SPACE                                               
@@ -2150,14 +2617,21 @@ fInput_DialogOptions_Up:
     RTL                                                        ;84D08D|6B      |      ;
  
  
+;;
+; @brief   Option menu, right: switches between the first column (answers 1-3) and the second (4-5), if there are more than 3 answers.
+; @modifies strcDialogDisplay.dialogOptionsAnswer, strcDialogDisplay.dialogBlinkTimer
+; @clobbers A X
+; @mode    M8X16 -> M8
+; @calls   fDialog_TransferGlyph, fAudio_PlaySoundEffect
+;;
 fInput_DialogOptions_Right:
     SEP #$20                                                   ;84D08E|E220    |      ;
     REP #$10                                                   ;84D090|C210    |      ;
     LDA.B #!SFX_MENUCURSOR                                                 ;84D092|A903    |      ;
-    STA.W strcAudio.reg114                                     ;84D094|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;84D094|8D1401  |000114;
     LDA.B #$06                                                 ;84D097|A906    |      ;
-    STA.W strcAudio.reg115                                     ;84D099|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;84D09C|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;84D099|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;84D09C|22328383|838332;
     SEP #$20                                                   ;84D0A0|E220    |      ;
     LDA.W strcDialogDisplay.dialogOptionsCount                 ;84D0A2|AD8E01  |00018E;
     CMP.B #$03                                                 ;84D0A5|C903    |      ;
@@ -2203,14 +2677,21 @@ fInput_DialogOptions_Right:
     RTL                                                        ;84D0F3|6B      |      ;
  
  
+;;
+; @brief   Option menu, left: same column switch as right (the code is identical).
+; @modifies strcDialogDisplay.dialogOptionsAnswer, strcDialogDisplay.dialogBlinkTimer
+; @clobbers A X
+; @mode    M8X16 -> M8
+; @calls   fDialog_TransferGlyph, fAudio_PlaySoundEffect
+;;
 fInput_DialogOptions_Left:
     SEP #$20                                                   ;84D0F4|E220    |      ;
     REP #$10                                                   ;84D0F6|C210    |      ;
     LDA.B #!SFX_MENUCURSOR                                                 ;84D0F8|A903    |      ;
-    STA.W strcAudio.reg114                                     ;84D0FA|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;84D0FA|8D1401  |000114;
     LDA.B #$06                                                 ;84D0FD|A906    |      ;
-    STA.W strcAudio.reg115                                     ;84D0FF|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;84D102|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;84D0FF|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;84D102|22328383|838332;
     SEP #$20                                                   ;84D106|E220    |      ;
     LDA.W strcDialogDisplay.dialogOptionsCount                 ;84D108|AD8E01  |00018E;
     CMP.B #$03                                                 ;84D10B|C903    |      ;

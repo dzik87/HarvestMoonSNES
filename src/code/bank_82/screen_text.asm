@@ -50,7 +50,7 @@ fScreen_NameInput:
     STZ.W strcObjectData.gameObjectIdx                         ;82E84B|9C0509  |000905;
     SEP #$20                                                   ;82E84E|E220    |      ;
     LDA.B #$05                                                 ;82E850|A905    |      ;
-    STA.W strcDialogDisplay.mapUnk19A                          ;82E852|8D9A01  |00019A;
+    STA.W strcDialogDisplay.inputMode                          ;82E852|8D9A01  |00019A;
     SEP #$20                                                   ;82E855|E220    |      ;
     LDA.B #$04                                                 ;82E857|A904    |      ;
     JSL.L fCore_ApplyGraphicsPreset                          ;82E859|22598C80|808C59;
@@ -324,7 +324,7 @@ fScreen_NameInput_DrawLetterAtCursor:
     ASL A                                                      ;82EA6D|0A      |      ;
     TAX                                                        ;82EA6E|AA      |      ;
     LDA.L aScreen_NameInput_LetterVramAddr,X                                    ;82EA6F|BF4DEB82|82EB4D;
-    STA.L strcDialogDisplay.dialogUnk185+$20000                ;82EA73|8F850180|800185;
+    STA.L strcDialogDisplay.glyphVramAddr+$20000                ;82EA73|8F850180|800185;
     PLA                                                        ;82EA77|68      |      ; A = nLetterCode
     LDX.W #$0001                                               ;82EA78|A20100  |      ;
     JSL.L fDialog_TransferGlyph                                ;82EA7B|22239883|839823;
@@ -346,7 +346,7 @@ fScreen_NameInput_DrawEmptyNameSlots:
   - REP #$20                                                   ;82EA8B|C220    |      ;
     PHX                                                        ;82EA8D|DA      |      ;
     LDA.B strcVariables.n16Temp3                               ;82EA8E|A582    |000082;
-    STA.L strcDialogDisplay.dialogUnk185+$20000                ;82EA90|8F850180|800185;
+    STA.L strcDialogDisplay.glyphVramAddr+$20000                ;82EA90|8F850180|800185;
     LDA.W #$00A8                                               ;82EA94|A9A800  |      ; nLetterCode
     LDX.W #$0001                                               ;82EA97|A20100  |      ;
     JSL.L fDialog_TransferGlyph                                ;82EA9A|22239883|839823;

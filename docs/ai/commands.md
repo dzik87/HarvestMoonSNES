@@ -332,9 +332,9 @@ Calls fAudio_FadeOutOnTrackChangeSlow: if the requested trackId differs from the
 |---|---|---|---|---|
 | `nUnused` | 1 | 1 | unknown | Ignored by the handler (ptr += 2). The command does not occur in US scripts (B3/B4/B5), so the value is unknown. |
 
-Advances ptrAIActionData by 2 and calls fAudio_FadeOutOnTrackChangeSlow: it compares strcAudio.trackId with trackIdCopy ($7E:0117); when they differ and trackIdCopy != 0, it sets strcAudio.unk112=1, unk113=$40 and calls fAudio_SendFadeOutCommand, which sends a command (1, parameter $40 - probably fade/track change) to the SPC through the APUIO0-3 ports. May block on the handshake with the APU. Together with 0x00 (setting trackId) it forms the pair 'set track -> apply'.
+Advances ptrAIActionData by 2 and calls fAudio_FadeOutOnTrackChangeSlow: it compares strcAudio.trackId with trackIdCopy ($7E:0117); when they differ and trackIdCopy != 0, it sets strcAudio.fadeOutFlag=1, fadeTicks=$40 and calls fAudio_SendFadeOutCommand, which sends a command (1, parameter $40 - probably fade/track change) to the SPC through the APUIO0-3 ports. May block on the handshake with the APU. Together with 0x00 (setting trackId) it forms the pair 'set track -> apply'.
 
-RAM: `strcAudio.trackId`, `strcAudio.trackIdCopy`, `strcAudio.unk112`, `strcAudio.unk113`, `ptrAIActionData`
+RAM: `strcAudio.trackId`, `strcAudio.trackIdCopy`, `strcAudio.fadeOutFlag`, `strcAudio.fadeTicks`, `ptrAIActionData`
 
 Calls: `fAudio_FadeOutOnTrackChangeSlow`, `fAudio_SendFadeOutCommand`
 
@@ -405,7 +405,7 @@ Suspends execution of the script of the given AI object for nTime frames.
 |---|---|---|---|---|
 | `nTime` | 1 | 2 | n16 | Number of calls of the AI loop (fAI_RunSlots, called once per frame from the main loop) for which the script of this object waits. A value of 0 = no waiting. Typical: 1, 60, 180, 240. |
 
-Stores nTime (16-bit) to field +$10 of the AI object structure pointed to by ptrAIUnknown0xCC (strcAIUnknown.unk10, wait counter). On each call, the fAI_RunSlots loop decrements +$10 for active objects and executes commands while +$10 = 0; after a command is executed with +$10 != 0, the object is no longer processed in that frame. As a result, the next command executes nTime frames after Wait (Wait(1) = skipping one frame). The script waits only for the current object (each AI object has its own counter); the AI loop is skipped entirely when strcDialogDisplay.mapUnk19A == 2 or 6 (dialog) or when the player action = PACTION_JUMP.
+Stores nTime (16-bit) to field +$10 of the AI object structure pointed to by ptrAIUnknown0xCC (strcAIUnknown.unk10, wait counter). On each call, the fAI_RunSlots loop decrements +$10 for active objects and executes commands while +$10 = 0; after a command is executed with +$10 != 0, the object is no longer processed in that frame. As a result, the next command executes nTime frames after Wait (Wait(1) = skipping one frame). The script waits only for the current object (each AI object has its own counter); the AI loop is skipped entirely when strcDialogDisplay.inputMode == 2 or 6 (dialog) or when the player action = PACTION_JUMP.
 
 RAM: `ptrAIActionData`, `ptrAIUnknown0xCC+$10`
 
@@ -572,15 +572,15 @@ Displays dialog nDialogId and suspends the script for one frame (the AI loop con
 | Parameter | Offset | Size | Type | Meaning |
 |---|---|---|---|---|
 | `nDialogId` | 1 | 2 | n16 | Dialog index (index into aDialogPointers, 3 bytes per entry); goes to X, and in fDialog_DialogHandler to strcDialogDisplay.dialogId. |
-| `nPosition` | 3 | 1 | n8 | Stored to strcDialogDisplay.dialogUnk191 ($7E:0191). In fDialog_DialogHandler: 0 = automatic (default 1, and 2 when strcObjectData.camY < $81), a non-zero value is used directly for the BG3 offset (by (value-1)*128 px) - so it is probably the position of the dialog window (top/bottom of the screen). 0 or 1 in scripts. |
+| `nPosition` | 3 | 1 | n8 | Stored to strcDialogDisplay.boxPosition ($7E:0191). In fDialog_DialogHandler: 0 = automatic (default 1, and 2 when strcObjectData.camY < $81), a non-zero value is used directly for the BG3 offset (by (value-1)*128 px) - so it is probably the position of the dialog window (top/bottom of the screen). 0 or 1 in scripts. |
 
-Loads nDialogId into X, stores the nPosition byte to dialogUnk191, sets strcDialogDisplay.mapUnk19A = 2 and calls fDialog_DialogHandler (sets dialogId, dialogFlags |= DFLAGS_PROCESSDIALOG, zeroes the option/answer counters, selects the text pointer from aDialogPointers, sets the BG3 offset and nTimeState = 0, daily1 |= $4000). Then +$10 += 1 (one frame). Because mapUnk19A == 2, fAI_RunSlots returns immediately at the start until the dialog ends (the dialog code zeroes/changes mapUnk19A), so the script and all AI objects wait until the end of the dialog.
+Loads nDialogId into X, stores the nPosition byte to boxPosition, sets strcDialogDisplay.inputMode = 2 and calls fDialog_DialogHandler (sets dialogId, dialogFlags |= DFLAGS_PROCESSDIALOG, zeroes the option/answer counters, selects the text pointer from aDialogPointers, sets the BG3 offset and nTimeState = 0, daily1 |= $4000). Then +$10 += 1 (one frame). Because inputMode == 2, fAI_RunSlots returns immediately at the start until the dialog ends (the dialog code zeroes/changes inputMode), so the script and all AI objects wait until the end of the dialog.
 
-RAM: `ptrAIActionData`, `ptrAIUnknown0xCC+$10`, `strcDialogDisplay.dialogUnk191`, `strcDialogDisplay.mapUnk19A`, `strcDialogDisplay.dialogId`, `strcDialogDisplay.dialogFlags`, `strcDialogDisplay.dialogOptionsAnswer`, `strcFlags.daily1`, `nTimeState`, `strcBGScrool.BG3VerOffs`
+RAM: `ptrAIActionData`, `ptrAIUnknown0xCC+$10`, `strcDialogDisplay.boxPosition`, `strcDialogDisplay.inputMode`, `strcDialogDisplay.dialogId`, `strcDialogDisplay.dialogFlags`, `strcDialogDisplay.dialogOptionsAnswer`, `strcFlags.daily1`, `nTimeState`, `strcBGScrool.BG3VerOffs`
 
 Calls: `fDialog_DialogHandler`
 
-> Open questions: The exact meaning of nPosition (top/bottom) is unconfirmed; the code that resets mapUnk19A after the dialog is closed was not checked.
+> Open questions: The exact meaning of nPosition (top/bottom) is unconfirmed; the code that resets inputMode after the dialog is closed was not checked.
 
 ## 0x1D — ShowDialogWithChoice
 
@@ -592,11 +592,11 @@ Functionally identical to 0x1C (ShowDialog); in scripts it is used for dialogs w
 | Parameter | Offset | Size | Type | Meaning |
 |---|---|---|---|---|
 | `nDialogId` | 1 | 2 | n16 | As in 0x1C: dialog index. |
-| `nPosition` | 3 | 1 | n8 | As in 0x1C: goes to strcDialogDisplay.dialogUnk191. |
+| `nPosition` | 3 | 1 | n8 | As in 0x1C: goes to strcDialogDisplay.boxPosition. |
 
 The handler code is identical to 0x1C instruction by instruction (only the address differs). Convention observed in scripts: 0x1D is called before a chain of 0x20 JumpIfChoice (a dialog with a question), and 0x1C for ordinary lines - the distinction is purely conventional (by the game's authors), with no effect on behavior.
 
-RAM: `ptrAIActionData`, `ptrAIUnknown0xCC+$10`, `strcDialogDisplay.dialogUnk191`, `strcDialogDisplay.mapUnk19A`, `strcDialogDisplay.dialogId`, `strcDialogDisplay.dialogFlags`
+RAM: `ptrAIActionData`, `ptrAIUnknown0xCC+$10`, `strcDialogDisplay.boxPosition`, `strcDialogDisplay.inputMode`, `strcDialogDisplay.dialogId`, `strcDialogDisplay.dialogFlags`
 
 Calls: `fDialog_DialogHandler`
 
@@ -866,17 +866,17 @@ Plays a sound effect (audio registers 114/115), waits the given number of frames
 
 | Parameter | Offset | Size | Type | Meaning |
 |---|---|---|---|---|
-| `nSoundId` | 1 | 1 | n8 | Goes to A in fAudio_PlaySoundEffectAndWait and to strcAudio.reg114 ($7E:0114) - probably the sound effect id. $04, $19, $23 in scripts. |
-| `nSoundParam` | 2 | 2 | n16 | Goes to X; only the low byte is stored in strcAudio.reg115 ($7E:0115) (6 or 7 in scripts - the same values as the first byte of the entries in nToolSoundTable). |
+| `nSoundId` | 1 | 1 | n8 | Goes to A in fAudio_PlaySoundEffectAndWait and to strcAudio.sfxId ($7E:0114) - probably the sound effect id. $04, $19, $23 in scripts. |
+| `nSoundParam` | 2 | 2 | n16 | Goes to X; only the low byte is stored in strcAudio.sfxVoice ($7E:0115) (6 or 7 in scripts - the same values as the first byte of the entries in nToolSoundTable). |
 | `nWaitFrames` | 4 | 2 | n16 | Goes to Y; fAudio_PlaySoundEffectAndWait waits this many NMI frames (fCore_WaitForNMITimes). $3C (60) or $5A (90) in scripts. |
 
-The handler advances the pointer by 1, pushes a byte and two words onto the stack, calls fAudio_PlaySoundEffectAndWait: it stores reg114/reg115, sets strcAudio.index = nSoundEffectSampleTable[strcAudio.unk118]+1, calls fAudio_PrepareSoundEffectSample (if strcAudio.list[index] != 0 it sends data to the APU via fAudio_FreeSamplesFromSlot) and fAudioSetRegister2to0A (reg116 = $0A), and then BLOCKS for nWaitFrames NMI frames (this wait halts the whole engine, called from inside the handler). It then clears strcAudio.toolId and calls fToolUsedSound_PlayOnToolChange, which plays the sounds of the current tool (from nToolSoundTable) and restores toolId = strcPlayerData.toolEquipped. The pointer is advanced by 6 bytes in total. Used in scenes with animals/tools (B4A3AD, B4BE06, B4BEB6, B4BECD).
+The handler advances the pointer by 1, pushes a byte and two words onto the stack, calls fAudio_PlaySoundEffectAndWait: it stores sfxId/sfxVoice, sets strcAudio.index = nSoundEffectSampleTable[strcAudio.sampleTableTrackId]+1, calls fAudio_PrepareSoundEffectSample (if strcAudio.list[index] != 0 it sends data to the APU via fAudio_FreeSamplesFromSlot) and fAudio_PlaySoundEffect (sfxPan = $0A), and then BLOCKS for nWaitFrames NMI frames (this wait halts the whole engine, called from inside the handler). It then clears strcAudio.toolId and calls fToolUsedSound_PlayOnToolChange, which plays the sounds of the current tool (from nToolSoundTable) and restores toolId = strcPlayerData.toolEquipped. The pointer is advanced by 6 bytes in total. Used in scenes with animals/tools (B4A3AD, B4BE06, B4BEB6, B4BECD).
 
-RAM: `strcAudio.reg114`, `strcAudio.reg115`, `strcAudio.reg116`, `strcAudio.index`, `strcAudio.list`, `strcAudio.unk118`, `strcAudio.toolId`, `strcPlayerData.toolEquipped`, `ptrAIActionData`
+RAM: `strcAudio.sfxId`, `strcAudio.sfxVoice`, `strcAudio.sfxPan`, `strcAudio.index`, `strcAudio.list`, `strcAudio.sampleTableTrackId`, `strcAudio.toolId`, `strcPlayerData.toolEquipped`, `ptrAIActionData`
 
-Calls: `fAudio_PlaySoundEffectAndWait`, `fAudio_PrepareSoundEffectSample`, `fAudioSetRegister2to0A`, `fAudio_FreeSamplesFromSlot`, `fCore_WaitForNMITimes`, `fToolUsedSound_PlayOnToolChange`
+Calls: `fAudio_PlaySoundEffectAndWait`, `fAudio_PrepareSoundEffectSample`, `fAudio_PlaySoundEffect`, `fAudio_FreeSamplesFromSlot`, `fCore_WaitForNMITimes`, `fToolUsedSound_PlayOnToolChange`
 
-> Open questions: The exact meaning of reg114 vs reg115 (sound id / category) was not confirmed in the SPC code; the function itself (sound effect + waiting) is certain. It is not known why the tool sound is played after the sound (probably a reset of the strcAudio.toolId state).
+> Open questions: The exact meaning of sfxId vs sfxVoice (sound id / category) was not confirmed in the SPC code; the function itself (sound effect + waiting) is certain. It is not known why the tool sound is played after the sound (probably a reset of the strcAudio.toolId state).
 
 ## 0x2D — JumpOnInteract
 
@@ -960,7 +960,7 @@ One tick of the cow logic: synchronizes the position with the cow structure, han
 
 The handler advances ptrAIActionData by 1 (the command appears in a loop with Jump). The cow index = slot byte +$3F minus $18; fGameEngine_GetCowData returns a ptr24 to the cow data ($7E:C1C6 + n*16), and the slot X/Y positions are copied to fields +8/+$0A. In AREA_COWBARN and for +$0E == $C2 it jumps to fAIAction0x31_CowSendOutside; in map areas < AREA_TOWNSPRING with +$0E == $E0/$E1 to fUnknown_84A498 / fAIAction0x31_CowReturnToBarn; in the rest (the farm) it checks the player (no tool/whistling/eating/INTERACTING/DOGHUGGING, daily4 AND $0006 = 0, A pressed) and the day flags daily1 ($0100,$0080,$0040,$0010,$0004) and event1 $0004. Depending on bits in the cow data ($10,$20,$40,$08,$04) it opens a dialog (fDialog_DialogHandler with X = $2F/$30/$31/$32/$145, the cow name copied to strcNames.wCurrentCow), calls fCow_AddHappiness, picks up the cow/sets carryItemId and the action PACTION_ITEMONHAND, increments strcStockData.unkEachCow[n] (cleared after exceeding a threshold) and sets nPlayerInteractionIndex. End: increments the +$10 counter.
 
-RAM: `strcAIUnknown.nArg`, `strcAIUnknown.unk0C`, `strcAIUnknown.unk0E`, `strcAIUnknown.unk10`, `strcAIUnknown.unk1A`, `strcAIUnknown.unk1C`, `strcAIUnknown.flags`, `strcStockData.unkEachCow`, `strcNames.wCurrentCow`, `strcMap.loadAreaId`, `strcPlayerData.carryItemId`, `nPlayerInteractionIndex`, `strcFlags.daily1`, `strcFlags.daily4`, `strcFlags.event1`, `strcPlayer.action`, `strcPlayer.flags`, `strcJoypad1.newInput`, `strcDialogDisplay.mapUnk19A`, `ptrAIActionData`
+RAM: `strcAIUnknown.nArg`, `strcAIUnknown.unk0C`, `strcAIUnknown.unk0E`, `strcAIUnknown.unk10`, `strcAIUnknown.unk1A`, `strcAIUnknown.unk1C`, `strcAIUnknown.flags`, `strcStockData.unkEachCow`, `strcNames.wCurrentCow`, `strcMap.loadAreaId`, `strcPlayerData.carryItemId`, `nPlayerInteractionIndex`, `strcFlags.daily1`, `strcFlags.daily4`, `strcFlags.event1`, `strcPlayer.action`, `strcPlayer.flags`, `strcJoypad1.newInput`, `strcDialogDisplay.inputMode`, `ptrAIActionData`
 
 Calls: `fGameEngine_GetCowData`, `fDialog_DialogHandler`, `fCow_AddHappiness`, `fUnknown_84A498`, `fAIAction0x31_CowReturnToBarn`, `fAIAction0x31_CowSendOutside`, `fAI_SetSlotScript`
 
@@ -1437,7 +1437,7 @@ RAM: `ptrAIActionData`, `strcFlags.daily2`
 
 Sets flag daily4 0x8000, which blocks tool use with the Y button.
 
-Executes SetFlag(daily4, 0x8000). The only consumer: fInput_SetPlayerAction0x0A (input.asm, 84CDBF) - when the flag is set, pressing Y does not start the USINGTOOL action. Does not block. Used 27 times, usually in the pair '4F; 50' at the start of events.
+Executes SetFlag(daily4, 0x8000). The only consumer: fInput_SetPlayerAction_UseTool (input.asm, 84CDBF) - when the flag is set, pressing Y does not start the USINGTOOL action. Does not block. Used 27 times, usually in the pair '4F; 50' at the start of events.
 
 RAM: `ptrAIActionData`, `strcFlags.daily4`
 
@@ -1509,15 +1509,15 @@ Shows a dialog in input handler mode 6 (closes by itself when finished, without 
 | Parameter | Offset | Size | Type | Meaning |
 |---|---|---|---|---|
 | `nDialogId` | 1 | 2 | n16 | dialog index passed in X to fDialog_DialogHandler |
-| `nUnknown2` | 3 | 1 | unknown | stored to strcDialogDisplay.dialogUnk191 (always $01 in scripts) |
+| `nUnknown2` | 3 | 1 | unknown | stored to strcDialogDisplay.boxPosition (always $01 in scripts) |
 
-Identical to 0x1C/0x1D except: strcDialogDisplay.mapUnk19A = 6 (instead of 2) and additionally zeroing of $09B1 (16-bit). In fInput_Handler mode 6 (fInput_Handler_case06): after the ENDDIALOG flag is set, it counts frames in $09B1 up to 0x78 (120), calls fDialog_EndDialogRestoreScroll, sets mapUnk19A and masks the A button - so the dialog closes by itself after about 2 s. After calling fDialog_DialogHandler, obj+0x10 += 1 (yields the frame). Used 37 times in B5 (scenes/festivals).
+Identical to 0x1C/0x1D except: strcDialogDisplay.inputMode = 6 (instead of 2) and additionally zeroing of $09B1 (16-bit). In fInput_Handler mode 6 (fInput_Mode_CutsceneDialog): after the ENDDIALOG flag is set, it counts frames in $09B1 up to 0x78 (120), calls fDialog_EndDialogRestoreScroll, sets inputMode and masks the A button - so the dialog closes by itself after about 2 s. After calling fDialog_DialogHandler, obj+0x10 += 1 (yields the frame). Used 37 times in B5 (scenes/festivals).
 
-RAM: `ptrAIActionData`, `strcDialogDisplay.dialogUnk191`, `strcDialogDisplay.mapUnk19A`, `strcDialogDisplay.dialogId`, `strcDialogDisplay.dialogFlags`, `$09B1`
+RAM: `ptrAIActionData`, `strcDialogDisplay.boxPosition`, `strcDialogDisplay.inputMode`, `strcDialogDisplay.dialogId`, `strcDialogDisplay.dialogFlags`, `$09B1`
 
 Calls: `fDialog_DialogHandler`
 
-> Open questions: The meaning of nUnknown2 (dialogUnk191) is still unknown - it is modified in several places in dialog.asm. The name 'AutoClose' comes from analysis of case06 in input.asm; not confirmed in game.
+> Open questions: The meaning of nUnknown2 (boxPosition) is still unknown - it is modified in several places in dialog.asm. The name 'AutoClose' comes from analysis of case06 in input.asm; not confirmed in game.
 
 ## 0x55 — JumpIfFlagNotSet
 

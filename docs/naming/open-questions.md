@@ -38,7 +38,7 @@ The three effects that have a caller but an unknown purpose:
 - `Table_Unk_858C8E` (`src/common/ram.asm`): an unreferenced constant that points into the middle of `aObjectBitMask16Unused`.
 - `aDialogUnused_83944D`: 10 unreferenced bytes (`$10,$50,$70,$51,...`) between dialog routines; probably a leftover tile / attribute list.
 - `aObjSlotOamTile_868000`: address in the name because the label is the start of a bank (`$868000`) and is the only reference of that kind.
-- `strcDialogDisplay.mapUnk19A`, `dialogUnk191`, `dialogUnk185`, `strcVariables.n16Unk86..90`, `strcMap.unk10..21`, `strcPlayer.unkDC/unkE3`, `strcStockData.unk*`, `strcAIUnknown.unk*`, `strcAudio.unk*`, `PFLAGS_UNK0400`, `DFLAGS_UNK*`
+- `strcVariables.n16Unk86..90`, `strcMap.unk10..21`, `strcPlayer.unkDC/unkE3`, `strcStockData.unk*`, `strcAIUnknown.unk*`, `strcAudio.unk*`, `PFLAGS_UNK0400`, `DFLAGS_UNK*`
   (about 1500 uses in `src/`): structure members whose meaning needs a per-field data-flow study (each is used in many routines). They are the next naming backlog;
   settling test: watchpoints on the field in an emulator (`mapUnk19A` is read as a dialog state: `2` = finished dialog in all `fItemBuy_*` / `fPlayerInteraction*` users, which suggests `dialogState`).
 - `Npc_Unk_<Look>_<id>` / `Obj_Unk_<id>` animation objects (see `K5_objects.csv`): no NPC table or code reference identifies the character; test: play the game with a breakpoint on the object id.

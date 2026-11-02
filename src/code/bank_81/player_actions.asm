@@ -568,9 +568,9 @@ fPlayerAction0x0C_SelectDialog:
 .timeHandler:
     SEP #$20                                                   ;81C4BA|E220    |      ;
     LDA.B #$02                                                 ;81C4BC|A902    |      ;
-    STA.W strcDialogDisplay.mapUnk19A                          ;81C4BE|8D9A01  |00019A;
+    STA.W strcDialogDisplay.inputMode                          ;81C4BE|8D9A01  |00019A;
     LDA.B #$00                                                 ;81C4C1|A900    |      ;
-    STA.W strcDialogDisplay.dialogUnk191                       ;81C4C3|8D9101  |000191;
+    STA.W strcDialogDisplay.boxPosition                       ;81C4C3|8D9101  |000191;
     JSL.L fDialog_DialogHandler                                ;81C4C6|225F9383|83935F;
  
 .continue:
@@ -1015,10 +1015,10 @@ fPlayerAction_Run_StepSound:
     SEP #$20                                                   ;81C815|E220    |      ;
     REP #$10                                                   ;81C817|C210    |      ;
     LDA.B #!SFX_PLAYERSTEP                                                 ;81C819|A905    |      ;
-    STA.W strcAudio.reg114                                     ;81C81B|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;81C81B|8D1401  |000114;
     LDA.B #$06                                                 ;81C81E|A906    |      ;
-    STA.W strcAudio.reg115                                     ;81C820|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;81C823|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;81C820|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;81C823|22328383|838332;
  
 fPlayerAction_Run_MoveInDirection:
     JSR.W fPlayer_MoveInDirection                                      ;81C827|2077CB  |81CB77;
@@ -1080,10 +1080,10 @@ fPlayerAction0x03:
     SEP #$20                                                   ;81C8AD|E220    |      ;
     REP #$10                                                   ;81C8AF|C210    |      ;
     LDA.B #!SFX_PLAYERJUMP                                                 ;81C8B1|A906    |      ;
-    STA.W strcAudio.reg114                                     ;81C8B3|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;81C8B3|8D1401  |000114;
     LDA.B #$06                                                 ;81C8B6|A906    |      ;
-    STA.W strcAudio.reg115                                     ;81C8B8|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;81C8BB|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;81C8B8|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;81C8BB|22328383|838332;
     SEP #$20                                                   ;81C8BF|E220    |      ;
     STZ.W $0971+!RAM_SHIFT                                 ;81C8C1|9C7109  |000971;
     BRA .set_jump_speed                                                ;81C8C4|805D    |81C923;
@@ -1098,10 +1098,10 @@ fPlayerAction0x03:
     SEP #$20                                                   ;81C8D1|E220    |      ;
     REP #$10                                                   ;81C8D3|C210    |      ;
     LDA.B #!SFX_PLAYERJUMP                                                 ;81C8D5|A906    |      ;
-    STA.W strcAudio.reg114                                     ;81C8D7|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;81C8D7|8D1401  |000114;
     LDA.B #$06                                                 ;81C8DA|A906    |      ;
-    STA.W strcAudio.reg115                                     ;81C8DC|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;81C8DF|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;81C8DC|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;81C8DF|22328383|838332;
     BRA .set_jump_speed                                                ;81C8E3|803E    |81C923;
  
  
@@ -1114,10 +1114,10 @@ fPlayerAction0x03:
     SEP #$20                                                   ;81C8F0|E220    |      ;
     REP #$10                                                   ;81C8F2|C210    |      ;
     LDA.B #!SFX_PLAYERJUMP                                                 ;81C8F4|A906    |      ;
-    STA.W strcAudio.reg114                                     ;81C8F6|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;81C8F6|8D1401  |000114;
     LDA.B #$06                                                 ;81C8F9|A906    |      ;
-    STA.W strcAudio.reg115                                     ;81C8FB|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;81C8FE|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;81C8FB|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;81C8FE|22328383|838332;
     BRA .set_jump_speed                                                ;81C902|801F    |81C923;
  
  
@@ -1130,10 +1130,10 @@ fPlayerAction0x03:
     SEP #$20                                                   ;81C90F|E220    |      ;
     REP #$10                                                   ;81C911|C210    |      ;
     LDA.B #!SFX_PLAYERJUMP                                                 ;81C913|A906    |      ;
-    STA.W strcAudio.reg114                                     ;81C915|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;81C915|8D1401  |000114;
     LDA.B #$06                                                 ;81C918|A906    |      ;
-    STA.W strcAudio.reg115                                     ;81C91A|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;81C91D|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;81C91A|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;81C91D|22328383|838332;
     BRA .fast_jump_speed                                                ;81C921|8026    |81C949;
  
  
@@ -1237,10 +1237,10 @@ fPlayerAction0x05:
     SEP #$20                                                   ;81CA01|E220    |      ;
     REP #$10                                                   ;81CA03|C210    |      ;
     LDA.B #!SFX_ITEMDROP                                                 ;81CA05|A907    |      ;
-    STA.W strcAudio.reg114                                     ;81CA07|8D1401  |000114;
+    STA.W strcAudio.sfxId                                     ;81CA07|8D1401  |000114;
     LDA.B #$06                                                 ;81CA0A|A906    |      ;
-    STA.W strcAudio.reg115                                     ;81CA0C|8D1501  |000115;
-    JSL.L fAudioSetRegister2to0A                               ;81CA0F|22328383|838332;
+    STA.W strcAudio.sfxVoice                                     ;81CA0C|8D1501  |000115;
+    JSL.L fAudio_PlaySoundEffect                               ;81CA0F|22328383|838332;
  
 .update_sprite:
     JSR.W fPlayer_UpdateSpriteObject                                      ;81CA13|20E6CF  |81CFE6;
