@@ -488,7 +488,7 @@ struct strcPlayerData       $7E0917+!RAM_SHIFT
     .leftChickenFood        : skip 1    ; 92D
     .leftGrassToCut         : skip 2    ; 92E-92F
     .placedCowFeed          : skip 1    ; 930
-    .placedChcikenFeed      : skip 1    ; 931
+    .placedChickenFeed      : skip 1    ; 931
     .placedCowFeedFlags     : skip 2    ; 932-933
     .placedChickenFeedFlags : skip 2    ; 934-935
 endstruct align 31
@@ -509,7 +509,7 @@ struct strcStockData        $7E0937+!RAM_SHIFT
     .unkMole                : skip 1    ; 93A
     .unkEachChicken         : skip 12*2 ; 93B-952
     .unkEachCow             : skip 12*2 ; 953-96A
-    .unkAnyTool             : skip 1    ; 96B
+    .toolUseStep             : skip 1    ; 96B
 endstruct align 53
 
 

@@ -113,10 +113,10 @@ it with the reference hashes in `tests/expected.json` (keys `EU`, `DE`, `JP`; th
   chain, the symbols that only the region blocks use: branch targets / data pointers of region code that have no label in
   the US sources, and US labels that sit at another address in a region. Each line is `name = $BBAAAA` with the address in
   that release. Names follow the code naming convention (`docs/naming/README.md`): loop heads and re-entry points are
-  `<Routine>_RowLoop` / `_TileLoop` / `_WaitFrame` / `_Return` (e.g. `fObjectMap_EatingGrass_RowLoop`), tables keep their
+  `<Routine>_RowLoop` / `_TileLoop` / `_WaitFrame` / `_Return` (e.g. `fObjectMap_CowEatGrassTile_RowLoop`), tables keep their
   `a<Name>` label (`aToolUsedActionTable_JP`), JP palette animation routines that were merged into one address are several
   `fPaletteAnim_*` names with the same value. Example use (`src/code/bank_82/object_map.asm`):
-  `if !REGION_EUDE / JMP.W fObjectMap_EatingGrass_RowLoop / elseif !REGION_JP / ... / else / JMP.W $A9B1 / endif`; the US
+  `if !REGION_EUDE / JMP.W fObjectMap_CowEatGrassTile_RowLoop / elseif !REGION_JP / ... / else / JMP.W $A9B1 / endif`; the US
   build never reads the equates. The old `L_<US address>` placeholders no longer exist in the sources; the record of old
   -> new names is `docs/naming/M_labels_bank80-82.csv` (`L_` rows) and `N_labels_bank83-85.csv`.
 - Local labels inside patch blocks are `snake_case`, named after their role and equal in every branch of a block (the
@@ -346,20 +346,20 @@ in both EU and DE (`!REGION_EUDE`).
   `fMap_CopyTilePatternToTilemapBuffer`.
 - **AI:** chicken and cow update (`fAIAction0x30_UpdateChicken` / `fAIAction0x31_UpdateCow`) check an extra state flag before continuing.
 - **Input:** `fInput_Title_OpeningDemo`.
-- **Text:** weekday/ordinal/season text writer (`fWriteSeasonWeekdayAndDayOrdinal`), dialog variable table
+- **Text:** weekday/ordinal/season text writer (`fEvents_WriteDateStrings`), dialog variable table
   `aTextDataTableFFFD`, dialog iteration and dialog box graphics loading, name input screen, tilemap pointers
   to the language specific graphics in banks $9A/$9B/$A5.
 - **EU (and JP, differently):** the new-game slot selection (`fMainMenu_NewGameSlotSelect_WaitFrame`) calls the
   continue loader (`fGameEngine_PeekSaveSlot`) and positions the cursor differently; DE keeps the US flow.
 - **DE only (against EU):** longer weekday names (`!NAME_WEEKDAY_SIZE` = 24, RAM +6) and the code that writes them,
   the day ordinal strings, empty-slot drawing (`fMainMenu_DrawEmptySaveSlot`), `subItemCarried_ShelfTomatoSeeds`; DE and JP
-  (not EU) also differ in `fCore_FindBestLove`, `aNameInputGrid0`, the tool animation table / handlers and
+  (not EU) also differ in `fEvents_FindMostLovedGirl`, `aNameInputGrid0`, the tool animation table / handlers and
   `fMap_QueueTilePatternVRAMUpload`.
 
 ### JP
 - **Hardware init:** `fCore_InterruptIRQ5` (reset path) differs (no MDMAEN/HDMAEN clears, different register setup).
 - **Names and calendar:** names are one kanji word (RAM -32); the season/weekday writer
-  (`fWriteSeasonWeekdayAndDayOrdinal`) copies one word per field and has no day ordinal; `fCore_FindBestLove`.
+  (`fEvents_WriteDateStrings`) copies one word per field and has no day ordinal; `fEvents_FindMostLovedGirl`.
 - **Dialog engine:** the 16px kanji font path: `fDialog_TransferGlyph` and `fDialog_AdvanceGlyphDestination` do not use the
   glyph index in X, the glyph tables `aTextDataTableFFFD/FFFE` and dialog iteration / box graphics loading are JP
   specific.

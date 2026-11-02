@@ -115,7 +115,7 @@ fObjectMap_LoadDefaultFarm:
 ; @callers fMainMenu_HowToPlayCleanup, fMap_ScreenTransitionHandler
 ; @note    The name suggests the opposite direction; the code copies sCurrentObjectMap -> sFarmTilemap.
 ;;
-fObjectMap_LoadFarm:
+fObjectMap_SaveCurrentToFarm:
     REP #$30                                                   ;82A682|C230    |      ;
     LDA.W #$09B6+!RAM_SHIFT                                ;82A684|A9B609  |      ;
     STA.B ptrTemp0x72                                          ;82A687|8572    |000072;
@@ -144,7 +144,7 @@ fObjectMap_LoadFarm:
 ; @callers fObjectMap_UpdateFarmTilesNewDay (winter, day 1)
 ; @note    The name does not match the behaviour (no map copy happens here); confidence: medium on the tile meanings.
 ;;
-fObjectMap_CurrentMapToFarmMap:
+fObjectMap_WinterWitherFarm:
     SEP #$20                                                   ;82A6A2|E220    |      ;
     REP #$10                                                   ;82A6A4|C210    |      ;
     LDA.L nCurrentSeasonID                                     ;82A6A6|AF191F7F|7F1F19;
@@ -233,11 +233,11 @@ fObjectMap_CurrentMapToFarmMap:
 ; @modifies sFarmTilemap, nPlantedGrassCount, strcPlayerData.leftGrassToCut, strcDialogDisplay.mapMultiWidth, strcVariables.n16Unk86/88/8A
 ; @mode    M16X16
 ; @calls   fObjectEngine_ConvertCoordsToOffset, fCore_GetRandomNumber
-; @callers fNextDayHandler, fObjectMap_ApplyHuricaneDamageByMapFlags
-; @note    Arguments come from nHuricaneDamageArgsTable via fObjectMap_GetHuricaneDamageArgs. Despite the name it is used for rain, snow,
+; @callers fNextDayHandler, fObjectMap_ApplyHurricaneDamageByMapFlags
+; @note    Arguments come from nHurricaneDamageArgsTable via fObjectMap_GetHurricaneDamageArgs. Despite the name it is used for rain, snow,
 ;          hurricane and the yearly update.
 ;;
-fObjectMap_HuricaneDamage:
+fObjectMap_HurricaneDamage:
     REP #$30                                                   ;82A713|C230    |      ; A: nArg1, X: nArg2, Y: nArg3
     STA.B strcVariables.n16Unk86                               ;82A715|8586    |000086;
     STX.B strcVariables.n16Unk88                               ;82A717|8688    |000088;
@@ -376,9 +376,9 @@ fObjectMap_HuricaneDamage:
     CPX.W #$0400                                               ;82A7FA|E00004  |      ;
     BEQ +                                                      ;82A7FD|F003    |82A802;
     if !REGION_EUDE
-    JMP.W fObjectMap_HuricaneDamage_TileLoop
+    JMP.W fObjectMap_HurricaneDamage_TileLoop
     elseif !REGION_JP
-    JMP.W fObjectMap_HuricaneDamage_TileLoop
+    JMP.W fObjectMap_HurricaneDamage_TileLoop
     else
     JMP.W $A72A                                                ;82A7FF|4C2AA7  |82A72A;
     endif
@@ -391,9 +391,9 @@ fObjectMap_HuricaneDamage:
     CPY.W #$0400                                               ;82A808|C00004  |      ;
     BEQ .return                                                ;82A80B|F003    |82A810;
     if !REGION_EUDE
-    JMP.W fObjectMap_HuricaneDamage_RowLoop
+    JMP.W fObjectMap_HurricaneDamage_RowLoop
     elseif !REGION_JP
-    JMP.W fObjectMap_HuricaneDamage_RowLoop
+    JMP.W fObjectMap_HurricaneDamage_RowLoop
     else
     JMP.W $A727                                                ;82A80D|4C27A7  |82A727;
     endif
@@ -409,10 +409,10 @@ fObjectMap_HuricaneDamage:
 ;          to set mapFlags bit $0400 and event6 flag $0200; $07/$1E (dry) become $08/$1F when it rains (mapFlags bit $0002), $08/$1F,
 ;          $39, $53, $61 and $6F dry out again (-1) unless it rains; other ids $20-$6F: odd (watered) ids grow one stage (+1) outside
 ;          fall/winter (in fall they only dry out, -1), even ids are re-watered (+1) when it rains; ids $70-$9F (grass) grow +1 except in winter;
-;          $7C becomes $73. On winter day 1 it finishes with fObjectMap_CurrentMapToFarmMap.
+;          $7C becomes $73. On winter day 1 it finishes with fObjectMap_WinterWitherFarm.
 ; @modifies sFarmTilemap, strcDialogDisplay.mapFlags, strcFlags.event6, strcDialogDisplay.mapMultiWidth
 ; @mode    M8X16
-; @calls   fObjectEngine_ConvertCoordsToOffset, fGetRandomNumber, fCore_GetRandomNumber, fObjectMap_CurrentMapToFarmMap
+; @calls   fObjectEngine_ConvertCoordsToOffset, fGetRandomNumber, fCore_GetRandomNumber, fObjectMap_WinterWitherFarm
 ; @callers fNextDayHandler
 ; @note    confidence: medium - the meaning of the individual tile ids is inferred from the arithmetic (parity, +1/-1), not from graphics.
 ;;
@@ -644,7 +644,7 @@ fObjectMap_UpdateFarmTilesNewDay:
     LDA.L nCurrentDay                                          ;82A993|AF1B1F7F|7F1F1B;
     CMP.B #$01                                                 ;82A997|C901    |      ;
     BNE .justReturn                                            ;82A999|D004    |82A99F;
-    JSL.L fObjectMap_CurrentMapToFarmMap                       ;82A99B|22A2A682|82A6A2;
+    JSL.L fObjectMap_WinterWitherFarm                       ;82A99B|22A2A682|82A6A2;
  
 .justReturn:
     RTL                                                        ;82A99F|6B      |      ;
@@ -658,7 +658,7 @@ fObjectMap_UpdateFarmTilesNewDay:
 ; @callers fGameEngine_AnimalsDailyUpdate
 ; @note    The routine clears strcPlayerData.leftGrassToCut first and uses it as its result flag; it stops after the first tile.
 ;;
-fObjectMap_EatingGrass:
+fObjectMap_CowEatGrassTile:
     SEP #$20                                                   ;82A9A0|E220    |      ;
     REP #$10                                                   ;82A9A2|C210    |      ;
     LDA.B #$04                                                 ;82A9A4|A904    |      ;
@@ -708,9 +708,9 @@ fObjectMap_EatingGrass:
     CPX.W #$0400                                               ;82A9F5|E00004  |      ;
     BEQ +                                                      ;82A9F8|F003    |82A9FD;
     if !REGION_EUDE
-    JMP.W fObjectMap_EatingGrass_TileLoop
+    JMP.W fObjectMap_CowEatGrassTile_TileLoop
     elseif !REGION_JP
-    JMP.W fObjectMap_EatingGrass_TileLoop
+    JMP.W fObjectMap_CowEatGrassTile_TileLoop
     else
     JMP.W $A9B4                                                ;82A9FA|4CB4A9  |82A9B4;
     endif
@@ -723,9 +723,9 @@ fObjectMap_EatingGrass:
     CPY.W #$0400                                               ;82AA03|C00004  |      ;
     BEQ .justReturn                                            ;82AA06|F003    |82AA0B;
     if !REGION_EUDE
-    JMP.W fObjectMap_EatingGrass_RowLoop
+    JMP.W fObjectMap_CowEatGrassTile_RowLoop
     elseif !REGION_JP
-    JMP.W fObjectMap_EatingGrass_RowLoop
+    JMP.W fObjectMap_CowEatGrassTile_RowLoop
     else
     JMP.W $A9B1                                                ;82AA08|4CB1A9  |82A9B1;
     endif
@@ -743,7 +743,7 @@ fObjectMap_EatingGrass:
 ; @note    The counter is incremented as a 16-bit value although nRanchDevelopmentRate is documented as n8 percent (?);
 ;          confidence: medium.
 ;;
-fObjectMap_CalculateRanchDev:
+fObjectMap_CalcRanchDevelopmentRate:
     SEP #$20                                                   ;82AA0C|E220    |      ;
     REP #$10                                                   ;82AA0E|C210    |      ;
     LDA.B #$04                                                 ;82AA10|A904    |      ;
@@ -789,9 +789,9 @@ fObjectMap_CalculateRanchDev:
     CPX.W #$0400                                               ;82AA5A|E00004  |      ;
     BEQ +                                                      ;82AA5D|F003    |82AA62;
     if !REGION_EUDE
-    JMP.W fObjectMap_CalculateRanchDev_TileLoop
+    JMP.W fObjectMap_CalcRanchDevelopmentRate_TileLoop
     elseif !REGION_JP
-    JMP.W fObjectMap_CalculateRanchDev_TileLoop
+    JMP.W fObjectMap_CalcRanchDevelopmentRate_TileLoop
     else
     JMP.W $AA24                                                ;82AA5F|4C24AA  |82AA24;
     endif
@@ -804,9 +804,9 @@ fObjectMap_CalculateRanchDev:
     CPY.W #$0400                                               ;82AA68|C00004  |      ;
     BEQ .justReturn                                            ;82AA6B|F003    |82AA70;
     if !REGION_EUDE
-    JMP.W fObjectMap_CalculateRanchDev_RowLoop
+    JMP.W fObjectMap_CalcRanchDevelopmentRate_RowLoop
     elseif !REGION_JP
-    JMP.W fObjectMap_CalculateRanchDev_RowLoop
+    JMP.W fObjectMap_CalcRanchDevelopmentRate_RowLoop
     else
     JMP.W $AA21                                                ;82AA6D|4C21AA  |82AA21;
     endif

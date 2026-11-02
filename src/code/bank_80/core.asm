@@ -58,7 +58,7 @@ fCore_GameStart:
     SEP #$20                                                   ;808053|E220    |      ;
     LDA.B #$15                                                 ;808055|A915    |      ;
     STA.W nDestinationAreaId                                   ;808057|8D8B09  |00098B;
-    JSL.L fCore_FindBestLove                                   ;80805A|22C68E82|828EC6;
+    JSL.L fEvents_FindMostLovedGirl                                   ;80805A|22C68E82|828EC6;
     JSL.L fMap_ResetAndLoadDestinationArea                                      ;80805E|22D39680|8096D3;
     REP #$20                                                   ;808062|C220    |      ;
     %CheckFlag(event3, $0001)

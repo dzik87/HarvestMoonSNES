@@ -4474,7 +4474,7 @@ fAreaEvents_House_PrepareEnding:
     INX                                                        ;83F576|E8      |      ;
     CPX.W #$000C                                               ;83F577|E00C00  |      ;
     BNE -                                                      ;83F57A|D09E    |83F51A;
-    JSL.L fObjectMap_CalculateRanchDev                         ;83F57C|220CAA82|82AA0C;
+    JSL.L fObjectMap_CalcRanchDevelopmentRate                         ;83F57C|220CAA82|82AA0C;
     REP #$30                                                   ;83F580|C230    |      ;
     LDA.L nRanchDevelopmentRate                                ;83F582|AF561F7F|7F1F56;
     STA.B strcVariables.n16Temp1                               ;83F586|857E    |00007E;

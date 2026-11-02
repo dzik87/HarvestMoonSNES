@@ -314,11 +314,11 @@ fWeather_SetForecastDialogIndex:
 ;;
 ; @brief   Apply the daily weather damage to the farm map according to today's weather bits in strcDialogDisplay.mapFlags.
 ; @details Damage type by flag: rain $0002 -> 0, snow $0008 -> 1, hurricane $0010 -> 2, fine day $0200 -> 3, calm day $0100 -> no damage.
-; @calls   fObjectMap_GetHuricaneDamageArgs, fObjectMap_HuricaneDamage
+; @calls   fObjectMap_GetHurricaneDamageArgs, fObjectMap_HurricaneDamage
 ; @mode    M16X16
 ; @callers fNextDayHandler
 ;;
-fObjectMap_ApplyHuricaneDamageByMapFlags:
+fObjectMap_ApplyHurricaneDamageByMapFlags:
     REP #$30                                                   ;828209|C230    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;82820B|AD9601  |000196;
     AND.W #$0002                                               ;82820E|290200  |      ;
@@ -343,24 +343,24 @@ fObjectMap_ApplyHuricaneDamageByMapFlags:
 .damage_type0:
     REP #$20                                                   ;828234|C220    |      ;
     LDA.W #$0000                                               ;828236|A90000  |      ;
-    JSR.W fObjectMap_GetHuricaneDamageArgs                                   ;828239|207082  |828270;
-    JSL.L fObjectMap_HuricaneDamage                            ;82823C|2213A782|82A713;
+    JSR.W fObjectMap_GetHurricaneDamageArgs                                   ;828239|207082  |828270;
+    JSL.L fObjectMap_HurricaneDamage                            ;82823C|2213A782|82A713;
     BRA .return                                                ;828240|80F1    |828233;
  
  
 .damage_type1:
     REP #$20                                                   ;828242|C220    |      ;
     LDA.W #$0001                                               ;828244|A90100  |      ;
-    JSR.W fObjectMap_GetHuricaneDamageArgs                                   ;828247|207082  |828270;
-    JSL.L fObjectMap_HuricaneDamage                            ;82824A|2213A782|82A713;
+    JSR.W fObjectMap_GetHurricaneDamageArgs                                   ;828247|207082  |828270;
+    JSL.L fObjectMap_HurricaneDamage                            ;82824A|2213A782|82A713;
     BRA .return                                                ;82824E|80E3    |828233;
  
  
 .damage_type2:
     REP #$20                                                   ;828250|C220    |      ;
     LDA.W #$0002                                               ;828252|A90200  |      ;
-    JSR.W fObjectMap_GetHuricaneDamageArgs                                   ;828255|207082  |828270;
-    JSL.L fObjectMap_HuricaneDamage                            ;828258|2213A782|82A713;
+    JSR.W fObjectMap_GetHurricaneDamageArgs                                   ;828255|207082  |828270;
+    JSL.L fObjectMap_HurricaneDamage                            ;828258|2213A782|82A713;
     BRA .return                                                ;82825C|80D5    |828233;
  
  
@@ -371,23 +371,23 @@ fObjectMap_ApplyHuricaneDamageByMapFlags:
 .damage_type3:
     REP #$20                                                   ;828260|C220    |      ;
     LDA.W #$0003                                               ;828262|A90300  |      ;
-    JSR.W fObjectMap_GetHuricaneDamageArgs                                   ;828265|207082  |828270;
-    JSL.L fObjectMap_HuricaneDamage                            ;828268|2213A782|82A713;
+    JSR.W fObjectMap_GetHurricaneDamageArgs                                   ;828265|207082  |828270;
+    JSL.L fObjectMap_HurricaneDamage                            ;828268|2213A782|82A713;
     BRA .return                                                ;82826C|80C5    |828233;
  
     BRA .return                                                ;82826E|80C3    |828233;
  
  
 ;;
-; @brief   Fetch the three damage chances of a damage type from nHuricaneDamageArgsTable.
+; @brief   Fetch the three damage chances of a damage type from nHurricaneDamageArgsTable.
 ; @param   A   damage type 0-4
 ; @return  A   chance for tile $05
 ; @return  X   chance for tile $1D / grass
 ; @return  Y   chance for tiles $07, $08, $1E-$6F
 ; @mode    M16X16
-; @callers fNextDayHandler, fObjectMap_ApplyHuricaneDamageByMapFlags
+; @callers fNextDayHandler, fObjectMap_ApplyHurricaneDamageByMapFlags
 ;;
-fObjectMap_GetHuricaneDamageArgs:
+fObjectMap_GetHurricaneDamageArgs:
     REP #$30                                                   ;828270|C230    |      ; A: nIndex
     ASL A                                                      ;828272|0A      |      ;
     ASL A                                                      ;828273|0A      |      ;
@@ -395,17 +395,17 @@ fObjectMap_GetHuricaneDamageArgs:
     SEP #$20                                                   ;828275|E220    |      ;
     LDA.B #$00                                                 ;828277|A900    |      ;
     XBA                                                        ;828279|EB      |      ;
-    LDA.L nHuricaneDamageArgsTable,X                             ;82827A|BF988282|828298;
+    LDA.L nHurricaneDamageArgsTable,X                             ;82827A|BF988282|828298;
     REP #$20                                                   ;82827E|C220    |      ;
     PHA                                                        ;828280|48      |      ;
     INX                                                        ;828281|E8      |      ;
     SEP #$20                                                   ;828282|E220    |      ;
-    LDA.L nHuricaneDamageArgsTable,X                             ;828284|BF988282|828298;
+    LDA.L nHurricaneDamageArgsTable,X                             ;828284|BF988282|828298;
     REP #$20                                                   ;828288|C220    |      ;
     PHA                                                        ;82828A|48      |      ;
     INX                                                        ;82828B|E8      |      ;
     SEP #$20                                                   ;82828C|E220    |      ;
-    LDA.L nHuricaneDamageArgsTable,X                             ;82828E|BF988282|828298;
+    LDA.L nHurricaneDamageArgsTable,X                             ;82828E|BF988282|828298;
     REP #$20                                                   ;828292|C220    |      ;
     TAY                                                        ;828294|A8      |      ;
     PLX                                                        ;828295|FA      |      ;
@@ -418,9 +418,9 @@ fObjectMap_GetHuricaneDamageArgs:
 ; @format  5 entries x 4 bytes `[A][X][Y][unused]`: type 0 (rain) $60,0,0; type 1 (snow) $40,0,0; type 2 (hurricane) $08,$10,$04;
 ;          type 3 (fine day) $08,0,$04; type 4 (new year) 0,$40,$20.
 ; @index   damage type * 4
-; @used_by fObjectMap_GetHuricaneDamageArgs
+; @used_by fObjectMap_GetHurricaneDamageArgs
 ;;
-nHuricaneDamageArgsTable:
+nHurricaneDamageArgsTable:
     db $60,$00,$00,$00,$40,$00,$00,$00,$08,$10,$04,$00         ;828298|        |      ; 0x05 * [8b argA, 8b argX, 8b argY, 8b unused]
     db $08,$00,$04,$00,$00,$40,$20,$00                         ;8282A4|        |      ;
  
@@ -428,8 +428,8 @@ nHuricaneDamageArgsTable:
 ; @brief   Day change: advance the calendar and weather, update the farm, animals, relationships and event flags, then put the player in bed.
 ; @details Order of work: (1) weekday and date +1 (month = 30 days; season rollover; on a year rollover year-end damage type 4);
 ;          (2) fade out music and screen; (3) weather: fWeather_ApplyForecast turns the forecast into map flags (event1 $0010/$0020 bookkeeping),
-;          fAudioEngine_SelectMapMusic; (4) clock reset to 6:00; (5) fWriteSeasonWeekdayAndDayOrdinal, fObjectMap_UpdateFarmTilesNewDay,
-;          weather damage, fGameEngine_AnimalsDailyUpdate, fWeatherRandomizer (rolls the next forecast), fCore_FindBestLove,
+;          fAudioEngine_SelectMapMusic; (4) clock reset to 6:00; (5) fEvents_WriteDateStrings, fObjectMap_UpdateFarmTilesNewDay,
+;          weather damage, fGameEngine_AnimalsDailyUpdate, fWeather_RollForecast (rolls the next forecast), fEvents_FindMostLovedGirl,
 ;          fEvents_UpdateMarriageAndChildGrowth; (6) player reset (flags, action, energy = stamina, direction down), the shipping profit is paid
 ;          with fGameEngine_AddProfit and zeroed, placed feed is cleared; (7) all daily flags (daily1-5) and the unknown1-3 words are cleared;
 ;          (8) delayed event flags advance one step per day (house expansion: event2 $0080 construction counted by nConstructionDayCounter, after 4 days
@@ -439,7 +439,7 @@ nHuricaneDamageArgsTable:
 ;          fMap_ResetAndLoadDestinationArea, restores 20 stamina and may start a breakfast meal.
 ; @modifies nCurrentWeekdayID, nCurrentDay, nCurrentSeasonID, nCurrentYearID, nCurrentTimeID, nInGameHourCounter, nInGameMinuteCounter, strcFlags.*, strcShedItems.*, nShippingProfit, nConstructionDayCounter, nReqWoodForExpansion, strcPlayer.*, strcPlayerData.*, nTimeState
 ; @mode    M8X16
-; @calls   fObjectMap_GetHuricaneDamageArgs, fObjectMap_HuricaneDamage, fAudio_FadeOutOnTrackChangeSlow, fCore_ScreenFadeout, fCore_SetForceBlank, fWeather_ApplyForecast, fAudioEngine_SelectMapMusic, fWriteSeasonWeekdayAndDayOrdinal, fObjectMap_UpdateFarmTilesNewDay, fObjectMap_ApplyHuricaneDamageByMapFlags, fGameEngine_AnimalsDailyUpdate, fWeatherRandomizer, fCore_FindBestLove, fEvents_UpdateMarriageAndChildGrowth, fGameEngine_AddProfit, fGameEngine_SaveGame, fMap_ResetAndLoadDestinationArea, fPlayerEnergyHandler
+; @calls   fObjectMap_GetHurricaneDamageArgs, fObjectMap_HurricaneDamage, fAudio_FadeOutOnTrackChangeSlow, fCore_ScreenFadeout, fCore_SetForceBlank, fWeather_ApplyForecast, fAudioEngine_SelectMapMusic, fEvents_WriteDateStrings, fObjectMap_UpdateFarmTilesNewDay, fObjectMap_ApplyHurricaneDamageByMapFlags, fGameEngine_AnimalsDailyUpdate, fWeather_RollForecast, fEvents_FindMostLovedGirl, fEvents_UpdateMarriageAndChildGrowth, fGameEngine_AddProfit, fGameEngine_SaveGame, fMap_ResetAndLoadDestinationArea, fPlayerEnergyHandler
 ; @callers fGame_TimeHandler
 ; @note    Holding L + R + SELECT on joypad 1 during the day change sets the date to year 3, summer 30 (a hidden shortcut, evidence: the EOR #$2030 test).
 ;          The event flag bit meanings in step (8) are only partly known; confidence: medium.
@@ -469,8 +469,8 @@ fNextDayHandler:
     STA.L nCurrentYearID                                       ;8282DA|8F181F7F|7F1F18; Store Year Value
     REP #$20                                                   ;8282DE|C220    |      ;
     LDA.W #$0004                                               ;8282E0|A90400  |      ; Load something to A
-    JSR.W fObjectMap_GetHuricaneDamageArgs                                   ;8282E3|207082  |828270;
-    JSL.L fObjectMap_HuricaneDamage                            ;8282E6|2213A782|82A713;
+    JSR.W fObjectMap_GetHurricaneDamageArgs                                   ;8282E3|207082  |828270;
+    JSL.L fObjectMap_HurricaneDamage                            ;8282E6|2213A782|82A713;
     SEP #$20                                                   ;8282EA|E220    |      ;
     LDA.B #$00                                                 ;8282EC|A900    |      ;
  
@@ -527,12 +527,12 @@ fNextDayHandler:
     STA.L nInGameHourCounter                                   ;82838A|8F1D1F7F|7F1F1D;
     LDA.B #$00                                                 ;82838E|A900    |      ;
     STA.L nInGameMinuteCounter                                 ;828390|8F1E1F7F|7F1F1E;
-    JSL.L fWriteSeasonWeekdayAndDayOrdinal                     ;828394|22D68982|8289D6;
+    JSL.L fEvents_WriteDateStrings                     ;828394|22D68982|8289D6;
     JSL.L fObjectMap_UpdateFarmTilesNewDay                             ;828398|2211A882|82A811;
-    JSL.L fObjectMap_ApplyHuricaneDamageByMapFlags                                      ;82839C|22098282|828209;
+    JSL.L fObjectMap_ApplyHurricaneDamageByMapFlags                                      ;82839C|22098282|828209;
     JSL.L fGameEngine_AnimalsDailyUpdate                     ;8283A0|225ABC83|83BC5A;
-    JSL.L fWeatherRandomizer                                   ;8283A4|22F98C82|828CF9;
-    JSL.L fCore_FindBestLove                                   ;8283A8|22C68E82|828EC6;
+    JSL.L fWeather_RollForecast                                   ;8283A4|22F98C82|828CF9;
+    JSL.L fEvents_FindMostLovedGirl                                   ;8283A8|22C68E82|828EC6;
     JSL.L fEvents_UpdateMarriageAndChildGrowth                                      ;8283AC|22908782|828790;
     REP #$20                                                   ;8283B0|C220    |      ;
     STZ.W strcObjectData.exist                                 ;8283B2|9C1509  |000915;
@@ -564,7 +564,7 @@ fNextDayHandler:
     STA.L nShippingProfit+2                                    ;82840C|8F091F7F|7F1F09;
     SEP #$20                                                   ;828410|E220    |      ;
     STZ.W strcPlayerData.placedCowFeed                         ;828412|9C3009  |000930; clear cow feed counter
-    STZ.W strcPlayerData.placedChcikenFeed                     ;828415|9C3109  |000931; clear chicken feed counter
+    STZ.W strcPlayerData.placedChickenFeed                     ;828415|9C3109  |000931; clear chicken feed counter
     REP #$20                                                   ;828418|C220    |      ;
     STZ.W strcPlayerData.placedCowFeedFlags                    ;82841A|9C3209  |000932; zero cow feed data
     STZ.W strcPlayerData.placedChickenFeedFlags                ;82841D|9C3409  |000934; zero chicken feed data
@@ -1076,7 +1076,7 @@ fEvents_UpdateMarriageAndChildGrowth:
 ; @callers fGameEngine_FirstNight, fMainMenu_DrawSaveSlotInfo, fNextDayHandler
 ; @note    The region branches interleave data tables and the code of fWeather_ApplyForecast in the source; see the labels below.
 ;;
-fWriteSeasonWeekdayAndDayOrdinal:
+fEvents_WriteDateStrings:
     SEP #$20                                                   ;8289D6|E220    |      ;
     REP #$10                                                   ;8289D8|C210    |      ;
     LDA.B #$00                                                 ;8289DA|A900    |      ;
@@ -1167,7 +1167,7 @@ fWriteSeasonWeekdayAndDayOrdinal:
 ;;
 ; @brief   Season name words (JP: one word per season; other regions: leftover/shared data in front of the string tables).
 ; @format  JP: 6 x n16 per season group (?). Other regions: the first 12 bytes are 6 words (spring/summer/fall/winter text ids), DE adds more words.
-; @used_by fWriteSeasonWeekdayAndDayOrdinal
+; @used_by fEvents_WriteDateStrings
 ; @note    confidence: low - this label sits in a region-dependent data block.
 ;;
 aSeasonWordTable:
@@ -1352,7 +1352,7 @@ aSeasonWordTable:
 ;;
 ; @brief   Season names as glyph-code strings.
 ; @format  `dw` glyph codes, 4 strings of 16 bytes, indexed by nCurrentSeasonID * 16
-; @used_by fWriteSeasonWeekdayAndDayOrdinal
+; @used_by fEvents_WriteDateStrings
 ;;
 aSeasonString:
     dw $002C,$000F,$0011,$0008,$000D,$0006                     ;828AD9|        |      ; 0x04 * [string[16]]
@@ -1365,7 +1365,7 @@ aSeasonString:
 ;;
 ; @brief   Weekday names as glyph-code strings.
 ; @format  7 strings, indexed by nCurrentWeekdayID * 32 (16 words per string, $B1 = blank padding); layout differs per region (DE strings are longer).
-; @used_by fWriteSeasonWeekdayAndDayOrdinal
+; @used_by fEvents_WriteDateStrings
 ; @note    In the EU/DE source layout the label is surrounded by region-dependent data and by the entry of fWeather_ApplyForecast.
 ;;
 aWeekdayString:
@@ -1398,7 +1398,7 @@ aWeekdayString:
 ;;
 ; @brief   Day ordinal suffixes as glyph-code strings: "st", "nd", "rd", "th".
 ; @format  4 entries x 2 words (4 bytes), indexed by 0 (st), 4 (nd), 8 (rd), $0C (th)
-; @used_by fWriteSeasonWeekdayAndDayOrdinal
+; @used_by fEvents_WriteDateStrings
 ;;
 aDayOrdinalString:
     db $EB,$AF,$1A,$1F,$7F,$C2,$20,$0A,$0A,$0A,$0A,$0A,$AA,$BF,$83,$8B
@@ -1612,7 +1612,7 @@ nWeatherMapFlagsTable:
 ; @note    The per-season chance bytes are the generated rows .e_Unknown1 (rain), .e_Unknown2 (snow), .e_Summer30thDay (hurricane),
 ;          .e_Summer29thDay (calm day), .e_Winter7thDay (fair day) in day_event_tables.asm; their old names do not match the code (see renames).
 ;;
-fWeatherRandomizer:
+fWeather_RollForecast:
     SEP #$20                                                   ;828CF9|E220    |      ;
     REP #$10                                                   ;828CFB|C210    |      ;
     LDA.L nCurrentSeasonID                                     ;828CFD|AF191F7F|7F1F19;
@@ -1850,9 +1850,9 @@ fWeatherRandomizer:
     RTL                                                        ;828EB1|6B      |      ;
  
  
-; @brief   Season-indexed chance bytes read by fWeatherRandomizer (local labels .e_*; value = N of a 1-in-N roll, 0 = never).
-; @format  5 rows x 4 bytes [spring][summer][fall][winter]: hurricane, rain, snow, calm day, fair day chances (see fWeatherRandomizer).
-; @used_by fWeatherRandomizer
+; @brief   Season-indexed chance bytes read by fWeather_RollForecast (local labels .e_*; value = N of a 1-in-N roll, 0 = never).
+; @format  5 rows x 4 bytes [spring][summer][fall][winter]: hurricane, rain, snow, calm day, fair day chances (see fWeather_RollForecast).
+; @used_by fWeather_RollForecast
     incsrc "../../../build/gen/blocks/day_event_tables.asm"
  
 ;;
@@ -1863,7 +1863,7 @@ fWeatherRandomizer:
 ; @callers fCore_GameStart, fNextDayHandler
 ; @region  JP: names are 4 words in one hiragana layout, other regions use 5 glyph words ending with !DIALOG_SPACE padding; DE/EU Eve differ in one glyph.
 ;;
-fCore_FindBestLove:
+fEvents_FindMostLovedGirl:
     REP #$30                                                   ;828EC6|C230    |      ;
     LDY.W #$0000                                               ;828EC8|A00000  |      ;
     LDA.L nLove_Maria                                          ;828ECB|AF1F1F7F|7F1F1F;

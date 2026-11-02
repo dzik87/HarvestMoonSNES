@@ -1016,7 +1016,7 @@ fMap_ScreenTransitionHandler:
     LDA.W strcMap.loadAreaId                                   ;809CD5|AD2200  |000022;
     CMP.B #!AREA_TOWNSPRING                                                 
     BCS .destinationNotFarm                                    ;809CDA|B004    |809CE0;
-    JSL.L fObjectMap_LoadFarm                                  ;809CDC|2282A682|82A682;
+    JSL.L fObjectMap_SaveCurrentToFarm                                  ;809CDC|2282A682|82A682;
  
 .destinationNotFarm:
     SEP #$20                                                   ;809CE0|E220    |      ;

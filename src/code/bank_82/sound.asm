@@ -26,7 +26,7 @@
 ; @return  X   object id of the tile (from the property lookup)
 ; @mode    M8X16 -> M16
 ; @calls   fObjectEngine_GetObjectPropertyByDirSeason
-; @callers fToolUsed_GetSoundForFrontTile, fToolUsed_GetSoundForFrontTileMode, fToolUsed_GetSoundForTileOffset, fToolUsed_StoreSoundForFrontTile
+; @callers fToolUsed_GetSoundForFrontTile, fToolUsed_GetSoundForTileAtDistance, fToolUsed_GetSoundForTileOffset, fToolUsed_StoreSoundForFrontTile
 ; @note    confidence: medium for the water-spot ids and area limits; the A result is stored in strcPlayerData.toolSound and indexes nToolSoundTable.
 ;;
 fSound_GetToolSound:

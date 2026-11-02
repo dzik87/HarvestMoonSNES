@@ -671,7 +671,7 @@ fToolUsed_StoreSoundForFrontTile:
 ; @modifies nTileInFrontOfPlayerX, nTileInFrontOfPlayerY
 ; @mode    M16X16
 ; @calls   fStoreTileOnFrontOfPlayerAtDistance, fSound_GetToolSound
-; @callers fToolUsedAction0x01_Sickle, fToolUsedAction0x02_Plow, fToolUsedAction0x03_Hammer, fToolUsedAction0x04_Axe, fToolUsedAction0x0D_Paint, fToolUsedAction0x10_WateringCan, fToolUsedAction0x13_GolderHammer, fToolUsedAction0x14_GoldenAxe
+; @callers fToolUsedAction0x01_Sickle, fToolUsedAction0x02_Plow, fToolUsedAction0x03_Hammer, fToolUsedAction0x04_Axe, fToolUsedAction0x0D_Paint, fToolUsedAction0x10_WateringCan, fToolUsedAction0x13_GoldenHammer, fToolUsedAction0x14_GoldenAxe
 ;;
 fToolUsed_GetSoundForFrontTile:
     REP #$30                                                   ;8292A0|C230    |      ;
@@ -688,13 +688,13 @@ fToolUsed_GetSoundForFrontTile:
  
 ;;
 ; @brief   Tool result for the tile `A + 1` tiles in front of the player.
-; @param   A   distance - 1 (the golden plow passes strcStockData.unkAnyTool = 0..5)
+; @param   A   distance - 1 (the golden plow passes strcStockData.toolUseStep = 0..5)
 ; @return  A, X   as fToolUsed_GetSoundForFrontTile
 ; @mode    M16X16
 ; @calls   fStoreTileOnFrontOfPlayerAtDistance, fSound_GetToolSound
 ; @callers fToolUsedAction0x12_GoldenPlow
 ;;
-fToolUsed_GetSoundForFrontTileMode:
+fToolUsed_GetSoundForTileAtDistance:
     REP #$30                                                   ;8292BC|C230    |      ;
     INC A                                                      ;8292BE|1A      |      ;
     LDX.W #$0000                                               ;8292BF|A20000  |      ;
@@ -1480,8 +1480,8 @@ fToolUsedAction0x04_Axe:
  
 ;;
 ; @brief   Seed bag: sow corn seed on one tile of a 3x3 area per step.
-; @details Step strcStockData.unkAnyTool (0-8) selects the tile via nFrontTileOffsetTable. If the tile accepts seed (result != 0) the tile becomes seed tile $19 in summer only, otherwise tile $EB (wasted seed). After 9 steps the counter resets, one unit of the seed stock is used (unequipped when 0) and the action ends with 1 stamina.
-; @modifies strcStockData.unkAnyTool, strcPlayerData.leftCornSeeds, strcPlayerData.toolEquipped
+; @details Step strcStockData.toolUseStep (0-8) selects the tile via nFrontTileOffsetTable. If the tile accepts seed (result != 0) the tile becomes seed tile $19 in summer only, otherwise tile $EB (wasted seed). After 9 steps the counter resets, one unit of the seed stock is used (unequipped when 0) and the action ends with 1 stamina.
+; @modifies strcStockData.toolUseStep, strcPlayerData.leftCornSeeds, strcPlayerData.toolEquipped
 ; @mode    M16X16
 ;;
 fToolUsedAction0x05_CornSeedBag:
@@ -1489,7 +1489,7 @@ fToolUsedAction0x05_CornSeedBag:
     REP #$10                                                   ;82999B|C210    |      ;
     LDA.B #$00                                                 ;82999D|A900    |      ;
     XBA                                                        ;82999F|EB      |      ;
-    LDA.W strcStockData.unkAnyTool                             ;8299A0|AD6B09  |00096B;
+    LDA.W strcStockData.toolUseStep                             ;8299A0|AD6B09  |00096B;
     JSR.W fToolUsed_GetSoundForTileOffset                              ;8299A3|20D692  |8292D6;
     BNE +                                                      ;8299A6|D003    |8299AB;
     JMP.W .count_use                                              ;8299A8|4CCA99  |8299CA;
@@ -1511,12 +1511,12 @@ fToolUsedAction0x05_CornSeedBag:
  
 .count_use:
     SEP #$20                                                   ;8299CA|E220    |      ;
-    LDA.W strcStockData.unkAnyTool                             ;8299CC|AD6B09  |00096B;
+    LDA.W strcStockData.toolUseStep                             ;8299CC|AD6B09  |00096B;
     INC A                                                      ;8299CF|1A      |      ;
-    STA.W strcStockData.unkAnyTool                             ;8299D0|8D6B09  |00096B;
+    STA.W strcStockData.toolUseStep                             ;8299D0|8D6B09  |00096B;
     CMP.B #$09                                                 ;8299D3|C909    |      ;
     BNE .return                                                ;8299D5|D020    |8299F7;
-    STZ.W strcStockData.unkAnyTool                             ;8299D7|9C6B09  |00096B;
+    STZ.W strcStockData.toolUseStep                             ;8299D7|9C6B09  |00096B;
     %DecreaseStock(leftCornSeeds)
     BNE +                                                      ;8299E3|D003    |8299E8;
     STZ.W strcPlayerData.toolEquipped                          ;8299E5|9C2109  |000921;
@@ -1530,8 +1530,8 @@ fToolUsedAction0x05_CornSeedBag:
  
 ;;
 ; @brief   Seed bag: sow tomato seed on one tile of a 3x3 area per step.
-; @details Step strcStockData.unkAnyTool (0-8) selects the tile via nFrontTileOffsetTable. If the tile accepts seed (result != 0) the tile becomes seed tile $1A in summer only, otherwise tile $EB (wasted seed). After 9 steps the counter resets, one unit of the seed stock is used (unequipped when 0) and the action ends with 1 stamina.
-; @modifies strcStockData.unkAnyTool, strcPlayerData.leftTomatoSeeds, strcPlayerData.toolEquipped
+; @details Step strcStockData.toolUseStep (0-8) selects the tile via nFrontTileOffsetTable. If the tile accepts seed (result != 0) the tile becomes seed tile $1A in summer only, otherwise tile $EB (wasted seed). After 9 steps the counter resets, one unit of the seed stock is used (unequipped when 0) and the action ends with 1 stamina.
+; @modifies strcStockData.toolUseStep, strcPlayerData.leftTomatoSeeds, strcPlayerData.toolEquipped
 ; @mode    M16X16
 ;;
 fToolUsedAction0x06_TomatoSeedBag:
@@ -1539,7 +1539,7 @@ fToolUsedAction0x06_TomatoSeedBag:
     REP #$10                                                   ;8299FA|C210    |      ;
     LDA.B #$00                                                 ;8299FC|A900    |      ;
     XBA                                                        ;8299FE|EB      |      ;
-    LDA.W strcStockData.unkAnyTool                             ;8299FF|AD6B09  |00096B;
+    LDA.W strcStockData.toolUseStep                             ;8299FF|AD6B09  |00096B;
     JSR.W fToolUsed_GetSoundForTileOffset                              ;829A02|20D692  |8292D6;
     BNE +                                                      ;829A05|D003    |829A0A;
     JMP.W .count_use                                              ;829A07|4C299A  |829A29;
@@ -1561,12 +1561,12 @@ fToolUsedAction0x06_TomatoSeedBag:
  
 .count_use:
     SEP #$20                                                   ;829A29|E220    |      ;
-    LDA.W strcStockData.unkAnyTool                             ;829A2B|AD6B09  |00096B;
+    LDA.W strcStockData.toolUseStep                             ;829A2B|AD6B09  |00096B;
     INC A                                                      ;829A2E|1A      |      ;
-    STA.W strcStockData.unkAnyTool                             ;829A2F|8D6B09  |00096B;
+    STA.W strcStockData.toolUseStep                             ;829A2F|8D6B09  |00096B;
     CMP.B #$09                                                 ;829A32|C909    |      ;
     BNE .return                                                ;829A34|D020    |829A56;
-    STZ.W strcStockData.unkAnyTool                             ;829A36|9C6B09  |00096B;
+    STZ.W strcStockData.toolUseStep                             ;829A36|9C6B09  |00096B;
     %DecreaseStock(leftTomatoSeeds)
     BNE +                                                      ;829A42|D003    |829A47;
     STZ.W strcPlayerData.toolEquipped                          ;829A44|9C2109  |000921;
@@ -1580,8 +1580,8 @@ fToolUsedAction0x06_TomatoSeedBag:
  
 ;;
 ; @brief   Seed bag: sow potato seed on one tile of a 3x3 area per step.
-; @details Step strcStockData.unkAnyTool (0-8) selects the tile via nFrontTileOffsetTable. If the tile accepts seed (result != 0) the tile becomes seed tile $1B in spring only, otherwise tile $EB (wasted seed). After 9 steps the counter resets, one unit of the seed stock is used (unequipped when 0) and the action ends with 1 stamina.
-; @modifies strcStockData.unkAnyTool, strcPlayerData.leftPotatoSeeds, strcPlayerData.toolEquipped
+; @details Step strcStockData.toolUseStep (0-8) selects the tile via nFrontTileOffsetTable. If the tile accepts seed (result != 0) the tile becomes seed tile $1B in spring only, otherwise tile $EB (wasted seed). After 9 steps the counter resets, one unit of the seed stock is used (unequipped when 0) and the action ends with 1 stamina.
+; @modifies strcStockData.toolUseStep, strcPlayerData.leftPotatoSeeds, strcPlayerData.toolEquipped
 ; @mode    M16X16
 ;;
 fToolUsedAction0x07_PotatoSeedBag:
@@ -1589,7 +1589,7 @@ fToolUsedAction0x07_PotatoSeedBag:
     REP #$10                                                   ;829A59|C210    |      ;
     LDA.B #$00                                                 ;829A5B|A900    |      ;
     XBA                                                        ;829A5D|EB      |      ;
-    LDA.W strcStockData.unkAnyTool                             ;829A5E|AD6B09  |00096B;
+    LDA.W strcStockData.toolUseStep                             ;829A5E|AD6B09  |00096B;
     JSR.W fToolUsed_GetSoundForTileOffset                              ;829A61|20D692  |8292D6;
     BNE +                                                      ;829A64|D003    |829A69;
     JMP.W .count_use                                              ;829A66|4C869A  |829A86;
@@ -1610,12 +1610,12 @@ fToolUsedAction0x07_PotatoSeedBag:
  
 .count_use:
     SEP #$20                                                   ;829A86|E220    |      ;
-    LDA.W strcStockData.unkAnyTool                             ;829A88|AD6B09  |00096B;
+    LDA.W strcStockData.toolUseStep                             ;829A88|AD6B09  |00096B;
     INC A                                                      ;829A8B|1A      |      ;
-    STA.W strcStockData.unkAnyTool                             ;829A8C|8D6B09  |00096B;
+    STA.W strcStockData.toolUseStep                             ;829A8C|8D6B09  |00096B;
     CMP.B #$09                                                 ;829A8F|C909    |      ;
     BNE .return                                                ;829A91|D020    |829AB3;
-    STZ.W strcStockData.unkAnyTool                             ;829A93|9C6B09  |00096B;
+    STZ.W strcStockData.toolUseStep                             ;829A93|9C6B09  |00096B;
     %DecreaseStock(leftPotatoSeeds)
     BNE +                                                      ;829A9F|D003    |829AA4;
     STZ.W strcPlayerData.toolEquipped                          ;829AA1|9C2109  |000921;
@@ -1629,8 +1629,8 @@ fToolUsedAction0x07_PotatoSeedBag:
  
 ;;
 ; @brief   Seed bag: sow turnip seed on one tile of a 3x3 area per step.
-; @details Step strcStockData.unkAnyTool (0-8) selects the tile via nFrontTileOffsetTable. If the tile accepts seed (result != 0) the tile becomes seed tile $1C in spring only, otherwise tile $EB (wasted seed). After 9 steps the counter resets, one unit of the seed stock is used (unequipped when 0) and the action ends with 1 stamina.
-; @modifies strcStockData.unkAnyTool, strcPlayerData.leftTurnipSeeds, strcPlayerData.toolEquipped
+; @details Step strcStockData.toolUseStep (0-8) selects the tile via nFrontTileOffsetTable. If the tile accepts seed (result != 0) the tile becomes seed tile $1C in spring only, otherwise tile $EB (wasted seed). After 9 steps the counter resets, one unit of the seed stock is used (unequipped when 0) and the action ends with 1 stamina.
+; @modifies strcStockData.toolUseStep, strcPlayerData.leftTurnipSeeds, strcPlayerData.toolEquipped
 ; @mode    M16X16
 ;;
 fToolUsedAction0x08_TurnipSeedBag:
@@ -1638,7 +1638,7 @@ fToolUsedAction0x08_TurnipSeedBag:
     REP #$10                                                   ;829AB6|C210    |      ;
     LDA.B #$00                                                 ;829AB8|A900    |      ;
     XBA                                                        ;829ABA|EB      |      ;
-    LDA.W strcStockData.unkAnyTool                             ;829ABB|AD6B09  |00096B;
+    LDA.W strcStockData.toolUseStep                             ;829ABB|AD6B09  |00096B;
     JSR.W fToolUsed_GetSoundForTileOffset                              ;829ABE|20D692  |8292D6;
     BNE +                                                      ;829AC1|D003    |829AC6;
     JMP.W .count_use                                              ;829AC3|4CE39A  |829AE3;
@@ -1659,12 +1659,12 @@ fToolUsedAction0x08_TurnipSeedBag:
  
 .count_use:
     SEP #$20                                                   ;829AE3|E220    |      ;
-    LDA.W strcStockData.unkAnyTool                             ;829AE5|AD6B09  |00096B;
+    LDA.W strcStockData.toolUseStep                             ;829AE5|AD6B09  |00096B;
     INC A                                                      ;829AE8|1A      |      ;
-    STA.W strcStockData.unkAnyTool                             ;829AE9|8D6B09  |00096B;
+    STA.W strcStockData.toolUseStep                             ;829AE9|8D6B09  |00096B;
     CMP.B #$09                                                 ;829AEC|C909    |      ;
     BNE .return                                                ;829AEE|D020    |829B10;
-    STZ.W strcStockData.unkAnyTool                             ;829AF0|9C6B09  |00096B;
+    STZ.W strcStockData.toolUseStep                             ;829AF0|9C6B09  |00096B;
     %DecreaseStock(leftTurnipSeeds)
     BNE +                                                      ;829AFC|D003    |829B01;
     STZ.W strcPlayerData.toolEquipped                          ;829AFE|9C2109  |000921;
@@ -1721,7 +1721,7 @@ fToolUsedAction0x0B_Bell:
 ;;
 ; @brief   Grass seed bag: plant grass on one tile of a 3x3 area per step.
 ; @details As the other seed bags: tile $1E in spring/summer (increments nPlantedGrassCount), $ED (wasted) in fall/winter; after 9 steps one grass seed is used.
-; @modifies strcStockData.unkAnyTool, nPlantedGrassCount, strcPlayerData.leftGrassSeeds, strcPlayerData.toolEquipped
+; @modifies strcStockData.toolUseStep, nPlantedGrassCount, strcPlayerData.leftGrassSeeds, strcPlayerData.toolEquipped
 ; @mode    M16X16
 ;;
 fToolUsedAction0x0C_GrassSeedBag:
@@ -1729,7 +1729,7 @@ fToolUsedAction0x0C_GrassSeedBag:
     REP #$10                                                   ;829B63|C210    |      ;
     LDA.B #$00                                                 ;829B65|A900    |      ;
     XBA                                                        ;829B67|EB      |      ;
-    LDA.W strcStockData.unkAnyTool                             ;829B68|AD6B09  |00096B;
+    LDA.W strcStockData.toolUseStep                             ;829B68|AD6B09  |00096B;
     JSR.W fToolUsed_GetSoundForTileOffset                              ;829B6B|20D692  |8292D6;
     BNE +                                                      ;829B6E|D003    |829B73;
     JMP.W .count_use                                              ;829B70|4C9D9B  |829B9D;
@@ -1755,12 +1755,12 @@ fToolUsedAction0x0C_GrassSeedBag:
  
 .count_use:
     SEP #$20                                                   ;829B9D|E220    |      ;
-    LDA.W strcStockData.unkAnyTool                             ;829B9F|AD6B09  |00096B;
+    LDA.W strcStockData.toolUseStep                             ;829B9F|AD6B09  |00096B;
     INC A                                                      ;829BA2|1A      |      ;
-    STA.W strcStockData.unkAnyTool                             ;829BA3|8D6B09  |00096B;
+    STA.W strcStockData.toolUseStep                             ;829BA3|8D6B09  |00096B;
     CMP.B #$09                                                 ;829BA6|C909    |      ;
     BNE .return                                                ;829BA8|D020    |829BCA;
-    STZ.W strcStockData.unkAnyTool                             ;829BAA|9C6B09  |00096B;
+    STZ.W strcStockData.toolUseStep                             ;829BAA|9C6B09  |00096B;
     %DecreaseStock(leftGrassSeeds)
     BNE +                                                      ;829BB6|D003    |829BBB;
     STZ.W strcPlayerData.toolEquipped                          ;829BB8|9C2109  |000921;
@@ -1948,8 +1948,8 @@ fToolUsedAction0x10_WateringCan:
  
 ;;
 ; @brief   Golden sickle: like the sickle but on a 3x3 area per swing (9 steps), 8 stamina after the last step.
-; @details Same cases as fToolUsedAction0x01_Sickle for every tile of the pattern (no cut in winter); the counter strcStockData.unkAnyTool advances per step and the action only ends after step 9.
-; @modifies sCurrentObjectMap, sFarmTilemap, strcStockData.unkAnyTool, strcPlayerData.leftGrassToCut, strcFlags.daily1
+; @details Same cases as fToolUsedAction0x01_Sickle for every tile of the pattern (no cut in winter); the counter strcStockData.toolUseStep advances per step and the action only ends after step 9.
+; @modifies sCurrentObjectMap, sFarmTilemap, strcStockData.toolUseStep, strcPlayerData.leftGrassToCut, strcFlags.daily1
 ; @mode    M16X16
 ;;
 fToolUsedAction0x11_GoldenSickle:
@@ -1957,7 +1957,7 @@ fToolUsedAction0x11_GoldenSickle:
     REP #$10                                                   ;829D44|C210    |      ;
     LDA.B #$00                                                 ;829D46|A900    |      ;
     XBA                                                        ;829D48|EB      |      ;
-    LDA.W strcStockData.unkAnyTool                             ;829D49|AD6B09  |00096B;
+    LDA.W strcStockData.toolUseStep                             ;829D49|AD6B09  |00096B;
     JSR.W fToolUsed_GetSoundForTileOffset                              ;829D4C|20D692  |8292D6;
     BNE +                                                      ;829D4F|D003    |829D54;
     JMP.W .count_use                                              ;829D51|4C6E9E  |829E6E;
@@ -2085,12 +2085,12 @@ fToolUsedAction0x11_GoldenSickle:
  
 .count_use:
     SEP #$20                                                   ;829E6E|E220    |      ;
-    LDA.W strcStockData.unkAnyTool                             ;829E70|AD6B09  |00096B;
+    LDA.W strcStockData.toolUseStep                             ;829E70|AD6B09  |00096B;
     INC A                                                      ;829E73|1A      |      ;
-    STA.W strcStockData.unkAnyTool                             ;829E74|8D6B09  |00096B;
+    STA.W strcStockData.toolUseStep                             ;829E74|8D6B09  |00096B;
     CMP.B #$09                                                 ;829E77|C909    |      ;
     BNE .justReturn                                            ;829E79|D012    |829E8D;
-    STZ.W strcStockData.unkAnyTool                             ;829E7B|9C6B09  |00096B;
+    STZ.W strcStockData.toolUseStep                             ;829E7B|9C6B09  |00096B;
     %SetPlayerAction(!PACTION_NONE)
     %UpdateStamina(-8)
  
@@ -2100,8 +2100,8 @@ fToolUsedAction0x11_GoldenSickle:
  
 ;;
 ; @brief   Golden hoe: till 6 tiles in a line in front of the player (one per step), 8 stamina at the end.
-; @details Step n (0-5) works on the tile n+1 in front (fToolUsed_GetSoundForFrontTileMode). Same tilling and random finds as fToolUsedAction0x02_Plow (the mole script here does not reset unkMole).
-; @modifies sCurrentObjectMap, sFarmTilemap, strcStockData.unkAnyTool, strcFlags.daily1, strcFlags.daily2, strcFlags.event1
+; @details Step n (0-5) works on the tile n+1 in front (fToolUsed_GetSoundForTileAtDistance). Same tilling and random finds as fToolUsedAction0x02_Plow (the mole script here does not reset unkMole).
+; @modifies sCurrentObjectMap, sFarmTilemap, strcStockData.toolUseStep, strcFlags.daily1, strcFlags.daily2, strcFlags.event1
 ; @mode    M16X16
 ;;
 fToolUsedAction0x12_GoldenPlow:
@@ -2109,8 +2109,8 @@ fToolUsedAction0x12_GoldenPlow:
     REP #$10                                                   ;829E90|C210    |      ;
     LDA.B #$00                                                 ;829E92|A900    |      ;
     XBA                                                        ;829E94|EB      |      ;
-    LDA.W strcStockData.unkAnyTool                             ;829E95|AD6B09  |00096B;
-    JSR.W fToolUsed_GetSoundForFrontTileMode                              ;829E98|20BC92  |8292BC;
+    LDA.W strcStockData.toolUseStep                             ;829E95|AD6B09  |00096B;
+    JSR.W fToolUsed_GetSoundForTileAtDistance                              ;829E98|20BC92  |8292BC;
     BNE +                                                      ;829E9B|D003    |829EA0;
     JMP.W .return                                              ;829E9D|4CF09F  |829FF0;
  
@@ -2226,15 +2226,15 @@ fToolUsedAction0x12_GoldenPlow:
  
 .count_use:
     SEP #$20                                                   ;829FE3|E220    |      ;
-    LDA.W strcStockData.unkAnyTool                             ;829FE5|AD6B09  |00096B;
+    LDA.W strcStockData.toolUseStep                             ;829FE5|AD6B09  |00096B;
     INC A                                                      ;829FE8|1A      |      ;
-    STA.W strcStockData.unkAnyTool                             ;829FE9|8D6B09  |00096B;
+    STA.W strcStockData.toolUseStep                             ;829FE9|8D6B09  |00096B;
     CMP.B #$06                                                 ;829FEC|C906    |      ;
     BNE .justReturn                                            ;829FEE|D014    |82A004;
  
 .return:
     SEP #$20                                                   ;829FF0|E220    |      ;
-    STZ.W strcStockData.unkAnyTool                             ;829FF2|9C6B09  |00096B;
+    STZ.W strcStockData.toolUseStep                             ;829FF2|9C6B09  |00096B;
     %SetPlayerAction(!PACTION_NONE)
     %UpdateStamina(-8)
  
@@ -2247,7 +2247,7 @@ fToolUsedAction0x12_GoldenPlow:
 ; @details Same cases as fToolUsedAction0x03_Hammer except that the rock is broken in one hit (no hit counting) and the cave is area >= $29.
 ; @mode    M16X16
 ;;
-fToolUsedAction0x13_GolderHammer:
+fToolUsedAction0x13_GoldenHammer:
     REP #$30                                                   ;82A005|C230    |      ;
     JSR.W fToolUsed_GetSoundForFrontTile                              ;82A007|20A092  |8292A0;
     BNE +                                                      ;82A00A|D003    |82A00F;
@@ -2604,7 +2604,7 @@ fToolUsedAction0x14_GoldenAxe:
 ;;
 ; @brief   Sprinkler: water one tile of a 3x3 area per step (no water needed).
 ; @details Silences the tool voice; for each step the target tile id X becomes X+1 (watered) in the object map and on screen. After 9 steps the action ends (8 stamina).
-; @modifies sCurrentObjectMap, sFarmTilemap, strcStockData.unkAnyTool
+; @modifies sCurrentObjectMap, sFarmTilemap, strcStockData.toolUseStep
 ; @mode    M16X16
 ;;
 fToolUsedAction0x15_Sprinkler:
@@ -2620,7 +2620,7 @@ fToolUsedAction0x15_Sprinkler:
     SEP #$20                                                   ;82A31D|E220    |      ;
     LDA.B #$00                                                 ;82A31F|A900    |      ;
     XBA                                                        ;82A321|EB      |      ;
-    LDA.W strcStockData.unkAnyTool                             ;82A322|AD6B09  |00096B;
+    LDA.W strcStockData.toolUseStep                             ;82A322|AD6B09  |00096B;
     JSR.W fToolUsed_GetSoundForTileOffset                              ;82A325|20D692  |8292D6;
     BNE +                                                      ;82A328|D003    |82A32D;
     JMP.W .return                                              ;82A32A|4C57A3  |82A357;
@@ -2650,12 +2650,12 @@ fToolUsedAction0x15_Sprinkler:
  
 .return:
     SEP #$20                                                   ;82A357|E220    |      ;
-    LDA.W strcStockData.unkAnyTool                             ;82A359|AD6B09  |00096B;
+    LDA.W strcStockData.toolUseStep                             ;82A359|AD6B09  |00096B;
     INC A                                                      ;82A35C|1A      |      ;
-    STA.W strcStockData.unkAnyTool                             ;82A35D|8D6B09  |00096B;
+    STA.W strcStockData.toolUseStep                             ;82A35D|8D6B09  |00096B;
     CMP.B #$09                                                 ;82A360|C909    |      ;
     BNE .justReturn                                            ;82A362|D012    |82A376;
-    STZ.W strcStockData.unkAnyTool                             ;82A364|9C6B09  |00096B;
+    STZ.W strcStockData.toolUseStep                             ;82A364|9C6B09  |00096B;
     %SetPlayerAction(!PACTION_NONE)
     %UpdateStamina(-8)
  
@@ -2740,8 +2740,8 @@ fToolUsedAction0x18_BlueFeather:
  
 ;;
 ; @brief   Chicken feed: fill a feed slot in the coop (area $28) or throw the feed on the ground.
-; @details In the coop, if the object 6 tiles right/down of the front tile is a feed slot (object ids $E2-$EE) the matching bit of nCowFeedFlagsTable is set in strcPlayerData.placedChickenFeedFlags, placedChcikenFeed+1, and the slot tile becomes $99. Otherwise a thrown-feed object ($C4) is spawned. One feed unit is used (unequipped at 0); 2 stamina.
-; @modifies strcPlayerData.placedChickenFeedFlags, strcPlayerData.placedChcikenFeed, strcPlayerData.leftChickenFood
+; @details In the coop, if the object 6 tiles right/down of the front tile is a feed slot (object ids $E2-$EE) the matching bit of nCowFeedFlagsTable is set in strcPlayerData.placedChickenFeedFlags, placedChickenFeed+1, and the slot tile becomes $99. Otherwise a thrown-feed object ($C4) is spawned. One feed unit is used (unequipped at 0); 2 stamina.
+; @modifies strcPlayerData.placedChickenFeedFlags, strcPlayerData.placedChickenFeed, strcPlayerData.leftChickenFood
 ; @mode    M16X16
 ;;
 fToolUsedAction0x19_ChickenFeed:
@@ -2774,9 +2774,9 @@ fToolUsedAction0x19_ChickenFeed:
     ORA.W strcPlayerData.placedChickenFeedFlags                ;82A453|0D3409  |000934;
     STA.W strcPlayerData.placedChickenFeedFlags                ;82A456|8D3409  |000934;
     SEP #$20                                                   ;82A459|E220    |      ;
-    LDA.W strcPlayerData.placedChcikenFeed                     ;82A45B|AD3109  |000931;
+    LDA.W strcPlayerData.placedChickenFeed                     ;82A45B|AD3109  |000931;
     INC A                                                      ;82A45E|1A      |      ;
-    STA.W strcPlayerData.placedChcikenFeed                     ;82A45F|8D3109  |000931;
+    STA.W strcPlayerData.placedChickenFeed                     ;82A45F|8D3109  |000931;
     REP #$20                                                   ;82A462|C220    |      ;
     LDA.W #$0099                                               ;82A464|A99900  |      ;
     LDX.W nTileInFrontOfPlayerX                                ;82A467|AE8509  |000985;

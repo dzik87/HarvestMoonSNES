@@ -6,7 +6,7 @@
 ;          $00 initial delay (Natsume logo in US/JP), $01 opening demo (AI script), $02 horizontal logo scroll, $03 diagonal logo scroll,
 ;          $04 title screen start (cursor animation set-up), $05 title menu input, $06 skip to title, $07 New Game slot select, $08 Load Game slot select,
 ;          $09 re-initialise the title screen, $0A start the How to Play demo. strcVariables.n8Temp3 / u8Unk96 are frame timers, u8Unk97 is set by the input
-;          code when the title cursor (nUnknownFlags09D) changed, strcVariables.n16Unk90 counts idle frames (600 frames without input starts the
+;          code when the title cursor (nTitleMenuCursor) changed, strcVariables.n16Unk90 counts idle frames (600 frames without input starts the
 ;          automatic How to Play demo). Screens are areas of the intro group: $5B farm scroll, $5C logo, $5D Natsume logo, $5E menu backgrounds.
 ; @bank   $82   @range $82D3C7-$82E665
 ; @see    interaction_data.asm (fMainMenu_StartHowToPlayDemo), system.asm, bank_84/input.asm (title cursor), bank_80/core.asm (fCore_MainLoop)
@@ -357,7 +357,7 @@ fMainMenu_PrepareHowToPlay:
 ;;
 ; @brief   End of a demo clip: clear the chicken table and, if the demo ran on the farm, copy the current map back to the farm map.
 ; @modifies strcChickenData (first 8 bytes), sFarmTilemap
-; @calls   fObjectMap_LoadFarm
+; @calls   fObjectMap_SaveCurrentToFarm
 ; @callers fMainMenu_PrepareHowToPlay
 ;;
 fMainMenu_HowToPlayCleanup:
@@ -374,7 +374,7 @@ fMainMenu_HowToPlayCleanup:
     LDA.B strcMap.loadAreaId                                   ;82D746|A522    |000022;
     CMP.B #$04                                                 ;82D748|C904    |      ;
     BCS fMainMenu_SetStateReturnToTitle                                        ;82D74A|B004    |82D750;
-    JSL.L fObjectMap_LoadFarm                                  ;82D74C|2282A682|82A682;
+    JSL.L fObjectMap_SaveCurrentToFarm                                  ;82D74C|2282A682|82A682;
  
 ;;
 ; @brief   Select title state 9 (re-initialise the title screen), reset the idle counter and end the frame.
@@ -392,10 +392,10 @@ fMainMenu_SetStateReturnToTitle:
  
 ;;
 ; @brief   Entry of the title screen: reset menu state, load graphics preset 3 and start the state machine.
-; @details Sets strcDialogDisplay.mapUnk19A = 4, the title cursor nUnknownFlags09D = 0 (2 when daily4 flag $0800 is set), clears
+; @details Sets strcDialogDisplay.mapUnk19A = 4, the title cursor nTitleMenuCursor = 0 (2 when daily4 flag $0800 is set), clears
 ;          nIntroHowToPlayIndex(2), loads the default farm map and graphics preset 3. US/JP: shows the Natsume logo (area $5D, palette $6E) first;
 ;          EU/DE skip that screen. Falls into fMainMenu_StateLoop with state 0.
-; @modifies strcDialogDisplay.mapUnk19A, nUnknownFlags09D, nIntroHowToPlayIndex, nIntroHowToPlayIndex2
+; @modifies strcDialogDisplay.mapUnk19A, nTitleMenuCursor, nIntroHowToPlayIndex, nIntroHowToPlayIndex2
 ; @calls   fObjectMap_LoadDefaultFarm, fCore_ManageGraphicsPresets, fTileMap_MapChangeHandler, fPalette_LoadFirstHalf, fCore_ScreenFadein
 ; @mode    M16
 ; @callers fCore_InterruptIRQ5
@@ -407,13 +407,13 @@ fMainMenu_TitleScreenInit:
     LDA.B #$04                                                 ;82D762|A904    |      ;
     STA.W strcDialogDisplay.inputMode                          ;82D764|8D9A01  |00019A;
     SEP #$20                                                   ;82D767|E220    |      ;
-    STZ.W nUnknownFlags09D                                     ;82D769|9C8D09  |00098D;
+    STZ.W nTitleMenuCursor                                     ;82D769|9C8D09  |00098D;
     REP #$20                                                   ;82D76C|C220    |      ;
     %CheckFlag(daily4, $0800)
     BEQ +                                                      ;82D775|F007    |82D77E;
     SEP #$20                                                   ;82D777|E220    |      ;
     LDA.B #$02                                                 ;82D779|A902    |      ;
-    STA.W nUnknownFlags09D                                     ;82D77B|8D8D09  |00098D;
+    STA.W nTitleMenuCursor                                     ;82D77B|8D8D09  |00098D;
  
   + SEP #$20                                                   ;82D77E|E220    |      ;
     LDA.B #$00                                                 ;82D780|A900    |      ;
@@ -964,8 +964,8 @@ fMainMenu_ShowTitleScreen:
 ;;
 ; @brief   State $04: scroll the title for 60 frames, then install the palette animations that highlight the menu entry under the cursor and go to state $05.
 ; @details Palette animation slots (fCore_Store0x72To0x42AtIndex): logo animations aMainMenu_PalAnimLogoA/B in slots 4/5, and for the three menu
-;          entries slots 6, 7, 8 get aMainMenu_PalAnimItemHighlighted for the entry selected by nUnknownFlags09D and aMainMenu_PalAnimItemNormal for the others.
-; @param   nUnknownFlags09D   title menu cursor (0-2)
+;          entries slots 6, 7, 8 get aMainMenu_PalAnimItemHighlighted for the entry selected by nTitleMenuCursor and aMainMenu_PalAnimItemNormal for the others.
+; @param   nTitleMenuCursor   title menu cursor (0-2)
 ; @modifies strcVariables.n8Temp3, strcVariables.n8Temp4, ptrTemp0x72, ptrPaletteAnimScripts
 ; @calls   fCore_Zero0x42Ptr, fCore_Store0x72To0x42AtIndex
 ; @note    The US/EU/DE and JP builds order the code of the three cursor cases differently; the result is the same.
@@ -1019,7 +1019,7 @@ fMainMenu_StateTitleStartCursorAnim:
     LDY.B #$07                                                 ;82DC66|A007    |      ;
     JSL.L fPalette_StartColorAnimSlot                         ;82DC68|22488E80|808E48;
     SEP #$20                                                   ;82DC6C|E220    |      ;
-    LDA.W nUnknownFlags09D                                     ;82DC6E|AD8D09  |00098D;
+    LDA.W nTitleMenuCursor                                     ;82DC6E|AD8D09  |00098D;
     CMP.B #$01                                                 ;82DC71|C901    |      ;
     BNE +                                                      ;82DC73|D004    |82DC79;
     JML.L .case01                                              ;82DC75|5CD6DC82|82DCD6;
@@ -1289,7 +1289,7 @@ fMainMenu_StateTitleStartCursorAnim:
 ; @brief   State $05: keep scrolling BG2 and, when the cursor changed (strcVariables.u8Unk97), refresh the highlight palette animations of the three entries.
 ; @details The cursor and the confirm action are handled by the input code (bank_84/input.asm, fInput_Case04_State5_ThreeWayChoice): cursor 0 -> state $08
 ;          (Load Game), 1 -> state $07 (New Game), 2 -> state $0A (How to Play). Counts idle frames in strcVariables.n16Unk90.
-; @param   nUnknownFlags09D   title menu cursor (0-2)
+; @param   nTitleMenuCursor   title menu cursor (0-2)
 ; @modifies strcVariables.u8Unk97, strcVariables.n16Unk90, strcVariables.n8Temp3
 ;;
 fMainMenu_StateTitleMenuInput:
@@ -1310,7 +1310,7 @@ fMainMenu_StateTitleMenuInput:
  
  
   + STZ.B strcVariables.u8Unk97                                ;82DDA9|6497    |000097;
-    LDA.W nUnknownFlags09D                                     ;82DDAB|AD8D09  |00098D;
+    LDA.W nTitleMenuCursor                                     ;82DDAB|AD8D09  |00098D;
     CMP.B #$01                                                 ;82DDAE|C901    |      ;
     BNE +                                                      ;82DDB0|D004    |82DDB6;
     JML.L .case01                                              ;82DDB2|5C13DE82|82DE13;
@@ -2177,12 +2177,12 @@ fMainMenu_LoadGameSlotSelect_FrameTail:
 ;;
 ; @brief   Draw the summary of one save slot (player name, year, season, day, weekday) with glyph transfers into VRAM, or call the empty-slot drawing.
 ; @details fGameEngine_LoadContinue(A = slot) loads the slot header; X = 0 means an empty slot (-> fMainMenu_DrawEmptySaveSlot). Otherwise the
-;          four name glyphs (strcNames.sPlayer), year (nCurrentYearID + 1 as a number), the date strings of fWriteSeasonWeekdayAndDayOrdinal and the day number
+;          four name glyphs (strcNames.sPlayer), year (nCurrentYearID + 1 as a number), the date strings of fEvents_WriteDateStrings and the day number
 ;          are drawn at the VRAM addresses in aMainMenu_SlotInfoTextVramAddr[slot * 8 ..]. DE/EU also draw the year ordinal (aYearOrdinalString).
 ; @param   A   slot (0 or 1)
 ; @param   Y   mode (0 = New Game screen, 1 = Load Game screen)
 ; @mode    M16X16
-; @calls   fGameEngine_LoadContinue, fDialog_TransferGlyph, fDialog_DrawNumericVarDigit, fCore_StartTransfer, fWriteSeasonWeekdayAndDayOrdinal, fMainMenu_DrawEmptySaveSlot
+; @calls   fGameEngine_LoadContinue, fDialog_TransferGlyph, fDialog_DrawNumericVarDigit, fCore_StartTransfer, fEvents_WriteDateStrings, fMainMenu_DrawEmptySaveSlot
 ; @callers fMainMenu_StateLoadGameSlotSelect, fMainMenu_StateNewGameSlotSelect
 ; @region  JP: 8-pixel glyph spacing and one season/weekday glyph pair; EU/DE: 16-pixel spacing and the extra year ordinal.
 ;;
@@ -2259,7 +2259,7 @@ fMainMenu_DrawSaveSlotInfo:
     if !REGION_JP
     JSL.L fCore_StartTransfer
     REP #$30
-    JSL.L fWriteSeasonWeekdayAndDayOrdinal
+    JSL.L fEvents_WriteDateStrings
     REP #$20
     PLX
     INX
@@ -2355,7 +2355,7 @@ fMainMenu_DrawSaveSlotInfo:
     else
     JSL.L fCore_StartTransfer                                  ;82E535|22F08A80|808AF0;
     REP #$30                                                   ;82E539|C230    |      ;
-    JSL.L fWriteSeasonWeekdayAndDayOrdinal                     ;82E53B|22D68982|8289D6;
+    JSL.L fEvents_WriteDateStrings                     ;82E53B|22D68982|8289D6;
     if !REGION_EUDE
     REP #$30
     else

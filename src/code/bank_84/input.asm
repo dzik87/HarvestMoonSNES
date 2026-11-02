@@ -777,11 +777,11 @@ fInput_Title_MenuChoice:
     REP #$20                                                   ;84C47C|C220    |      ;
     STZ.B strcVariables.n16Unk90                               ;84C47E|6490    |000090;
     SEP #$20                                                   ;84C480|E220    |      ;
-    LDA.W nUnknownFlags09D                                     ;84C482|AD8D09  |00098D;
+    LDA.W nTitleMenuCursor                                     ;84C482|AD8D09  |00098D;
     CMP.B #$02                                                 ;84C485|C902    |      ;
     BEQ +                                                      ;84C487|F01B    |84C4A4;
     INC A                                                      ;84C489|1A      |      ;
-    STA.W nUnknownFlags09D                                     ;84C48A|8D8D09  |00098D;
+    STA.W nTitleMenuCursor                                     ;84C48A|8D8D09  |00098D;
     LDA.B #$01                                                 ;84C48D|A901    |      ;
     STA.B strcVariables.u8Unk97                                ;84C48F|8597    |000097;
     SEP #$20                                                   ;84C491|E220    |      ;
@@ -797,7 +797,7 @@ fInput_Title_MenuChoice:
   + REP #$20                                                   ;84C4A4|C220    |      ;
     STZ.B strcVariables.n16Unk90                               ;84C4A6|6490    |000090;
     SEP #$20                                                   ;84C4A8|E220    |      ;
-    STZ.W nUnknownFlags09D                                     ;84C4AA|9C8D09  |00098D;
+    STZ.W nTitleMenuCursor                                     ;84C4AA|9C8D09  |00098D;
     LDA.B #$01                                                 ;84C4AD|A901    |      ;
     STA.B strcVariables.u8Unk97                                ;84C4AF|8597    |000097;
     SEP #$20                                                   ;84C4B1|E220    |      ;
@@ -814,10 +814,10 @@ fInput_Title_MenuChoice:
     REP #$20                                                   ;84C4C4|C220    |      ;
     STZ.B strcVariables.n16Unk90                               ;84C4C6|6490    |000090;
     SEP #$20                                                   ;84C4C8|E220    |      ;
-    LDA.W nUnknownFlags09D                                     ;84C4CA|AD8D09  |00098D;
+    LDA.W nTitleMenuCursor                                     ;84C4CA|AD8D09  |00098D;
     BEQ +                                                      ;84C4CD|F01B    |84C4EA;
     DEC A                                                      ;84C4CF|3A      |      ;
-    STA.W nUnknownFlags09D                                     ;84C4D0|8D8D09  |00098D;
+    STA.W nTitleMenuCursor                                     ;84C4D0|8D8D09  |00098D;
     LDA.B #$01                                                 ;84C4D3|A901    |      ;
     STA.B strcVariables.u8Unk97                                ;84C4D5|8597    |000097;
     SEP #$20                                                   ;84C4D7|E220    |      ;
@@ -834,7 +834,7 @@ fInput_Title_MenuChoice:
     STZ.B strcVariables.n16Unk90                               ;84C4EC|6490    |000090;
     SEP #$20                                                   ;84C4EE|E220    |      ;
     LDA.B #$02                                                 ;84C4F0|A902    |      ;
-    STA.W nUnknownFlags09D                                     ;84C4F2|8D8D09  |00098D;
+    STA.W nTitleMenuCursor                                     ;84C4F2|8D8D09  |00098D;
     LDA.B #$01                                                 ;84C4F5|A901    |      ;
     STA.B strcVariables.u8Unk97                                ;84C4F7|8597    |000097;
     SEP #$20                                                   ;84C4F9|E220    |      ;
@@ -849,7 +849,7 @@ fInput_Title_MenuChoice:
  
 .confirm_choice:
     SEP #$20                                                   ;84C50C|E220    |      ;
-    LDA.W nUnknownFlags09D                                     ;84C50E|AD8D09  |00098D;
+    LDA.W nTitleMenuCursor                                     ;84C50E|AD8D09  |00098D;
     BEQ ..first_option                                               ;84C511|F00A    |84C51D;
     CMP.B #$01                                                 ;84C513|C901    |      ;
     BEQ ..second_option                                               ;84C515|F00E    |84C525;

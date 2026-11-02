@@ -9,7 +9,7 @@ The emitted text carries no address comments and no region dependent names, so t
 are textually identical when the code is identical (the patch tool then merges them into one block):
   * branch targets / data pointers without a US label become equates (defined per region in src/code/region_targets.asm).
     Their names come from the rename records in docs/naming/*.csv (placeholder `L_<US address>` -> descriptive name, e.g.
-    `fObjectMap_EatingGrass_RowLoop`); a target without a record keeps the placeholder `L_<US address>` (`L_<REG>_<address>`
+    `fObjectMap_CowEatGrassTile_RowLoop`); a target without a record keeps the placeholder `L_<US address>` (`L_<REG>_<address>`
     when the region has no US counterpart), see docs/regions.md. Generated local labels are numbered `.r_<block>_<n>`
     (the committed sources name them after their role, snake_case),
   * WRAM addresses are written with the US value plus `+!RAM_SHIFT` (the region's shift of the shifted block).

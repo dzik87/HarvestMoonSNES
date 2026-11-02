@@ -3153,9 +3153,9 @@ fItemCarriedAnimal_PutDown:
 ; @brief   Put-down phase of the animal feed: drops it into a feed trough of the cow barn or the coop.
 ; @details In the cow barn ($27) the property type 0 of the tile in front must be $E2-$EE: the matching bit of nCowFeedFlagsTable is
 ;   set in strcPlayerData.placedCowFeedFlags and placedCowFeed is incremented. In the coop ($28) the same with placedChickenFeedFlags
-;   and placedChcikenFeed. In other cases (or outside the trough range) the normal fItemCarried_PutDown is used. The feed item is
+;   and placedChickenFeed. In other cases (or outside the trough range) the normal fItemCarried_PutDown is used. The feed item is
 ;   then released (fItemShipped_SetBinTileAndRelease).
-; @modifies strcPlayerData.carryItemId, strcPlayerData.placedCowFeedFlags, strcPlayerData.placedCowFeed, strcPlayerData.placedChickenFeedFlags, strcPlayerData.placedChcikenFeed
+; @modifies strcPlayerData.carryItemId, strcPlayerData.placedCowFeedFlags, strcPlayerData.placedCowFeed, strcPlayerData.placedChickenFeedFlags, strcPlayerData.placedChickenFeed
 ; @clobbers A X Y
 ; @mode    ? -> ?
 ; @calls   fStoreTileOnFrontOfPlayerAtDistance, fObjectEngine_GetObjectPropertyByDirSeason, fItemCarried_PutDown, fItemShipped_SetBinTileAndRelease
@@ -3233,9 +3233,9 @@ fItemCarriedFeed_PutDown:
     ORA.W strcPlayerData.placedChickenFeedFlags                ;818F18|0D3409  |000934;
     STA.W strcPlayerData.placedChickenFeedFlags                ;818F1B|8D3409  |000934;
     SEP #$20                                                   ;818F1E|E220    |      ;
-    LDA.W strcPlayerData.placedChcikenFeed                     ;818F20|AD3109  |000931;
+    LDA.W strcPlayerData.placedChickenFeed                     ;818F20|AD3109  |000931;
     INC A                                                      ;818F23|1A      |      ;
-    STA.W strcPlayerData.placedChcikenFeed                     ;818F24|8D3109  |000931;
+    STA.W strcPlayerData.placedChickenFeed                     ;818F24|8D3109  |000931;
     JMP.W fItemShipped_SetBinTileAndRelease                           ;818F27|4CAB8D  |818DAB;
  
  

@@ -266,7 +266,7 @@ fGameEngine_ResetSessionState:
     SEP #$20                                                   ;83AC26|E220    |      ;
     LDA.B #$00                                                 ;83AC28|A900    |      ;
     STA.L nShippingProfit+2                                    ;83AC2A|8F091F7F|7F1F09;
-    JSL.L fWriteSeasonWeekdayAndDayOrdinal                     ;83AC2E|22D68982|8289D6;
+    JSL.L fEvents_WriteDateStrings                     ;83AC2E|22D68982|8289D6;
     SEP #$20                                                   ;83AC32|E220    |      ;
     STZ.W nBreakHitCounter                                     ;83AC34|9C6D09  |00096D;
     REP #$20                                                   ;83AC37|C220    |      ;
@@ -346,7 +346,7 @@ fGameEngine_ResetSessionState:
     STZ.W strcPlayerData.carryItemIdPrev                       ;83AD19|9C1E09  |00091E;
     STZ.W strcPlayerData.unkMap91F                             ;83AD1C|9C1F09  |00091F;
     STZ.W strcPlayerData.nAiArg                                ;83AD1F|9C2009  |000920;
-    STZ.W strcStockData.unkAnyTool                             ;83AD22|9C6B09  |00096B;
+    STZ.W strcStockData.toolUseStep                             ;83AD22|9C6B09  |00096B;
     SEP #$20                                                   ;83AD25|E220    |      ;
     STZ.W $098F+!RAM_SHIFT                                 ;83AD27|9C8F09  |00098F;
     SEP #$20                                                   ;83AD2A|E220    |      ;
@@ -360,7 +360,7 @@ fGameEngine_ResetSessionState:
     STZ.W strcAudio.trackIdCopy                                ;83AD40|9C1701  |000117;
     SEP #$20                                                   ;83AD43|E220    |      ;
     STZ.W strcPlayerData.placedCowFeed                         ;83AD45|9C3009  |000930;
-    STZ.W strcPlayerData.placedChcikenFeed                     ;83AD48|9C3109  |000931;
+    STZ.W strcPlayerData.placedChickenFeed                     ;83AD48|9C3109  |000931;
     REP #$20                                                   ;83AD4B|C220    |      ;
     STZ.W strcPlayerData.placedCowFeedFlags                    ;83AD4D|9C3209  |000932;
     STZ.W strcPlayerData.placedChickenFeedFlags                ;83AD50|9C3409  |000934;
@@ -2475,7 +2475,7 @@ fGameEngine_AnimalsDailyUpdate:
     LDA.B [ptrTemp0x72],Y                                      ;83BCDA|B772    |000072;
     CMP.B #$04                                                 ;83BCDC|C904    |      ;
     BCS .penalty_not_fed                                                ;83BCDE|B030    |83BD10;
-    JSL.L fObjectMap_EatingGrass                               ;83BCE0|22A0A982|82A9A0;
+    JSL.L fObjectMap_CowEatGrassTile                               ;83BCE0|22A0A982|82A9A0;
     REP #$20                                                   ;83BCE4|C220    |      ;
     LDA.W strcPlayerData.leftGrassToCut                        ;83BCE6|AD2E09  |00092E;
     BEQ .penalty_not_fed                                                ;83BCE9|F025    |83BD10;
@@ -2641,7 +2641,7 @@ fGameEngine_AnimalsDailyUpdate:
     LDA.B [ptrTemp0x72],Y                                      ;83BE35|B772    |000072;
     CMP.B #$04                                                 ;83BE37|C904    |      ;
     BCS .next_cow                                               ;83BE39|B004    |83BE3F;
-    JSL.L fObjectMap_EatingGrass                               ;83BE3B|22A0A982|82A9A0;
+    JSL.L fObjectMap_CowEatGrassTile                               ;83BE3B|22A0A982|82A9A0;
  
 .next_cow:
     REP #$30                                                   ;83BE3F|C230    |      ;
@@ -2950,10 +2950,10 @@ fGameEngine_AnimalsDailyUpdate:
     CMP.B #$28                                                 ;83C099|C928    |      ;
     BNE .chicken_outdoors                                               ;83C09B|D00E    |83C0AB;
     SEP #$20                                                   ;83C09D|E220    |      ;
-    LDA.W strcPlayerData.placedChcikenFeed                     ;83C09F|AD3109  |000931;
+    LDA.W strcPlayerData.placedChickenFeed                     ;83C09F|AD3109  |000931;
     BEQ +                                                      ;83C0A2|F02B    |83C0CF;
     DEC A                                                      ;83C0A4|3A      |      ;
-    STA.W strcPlayerData.placedChcikenFeed                     ;83C0A5|8D3109  |000931;
+    STA.W strcPlayerData.placedChickenFeed                     ;83C0A5|8D3109  |000931;
     JMP.W .next_chicken_check                                             ;83C0A8|4C19C1  |83C119;
  
  
@@ -2964,7 +2964,7 @@ fGameEngine_AnimalsDailyUpdate:
     LDA.B [ptrTemp0x72],Y                                      ;83C0B2|B772    |000072;
     CMP.B #$04                                                 ;83C0B4|C904    |      ;
     BCS +                                                      ;83C0B6|B017    |83C0CF;
-    JSL.L fObjectMap_EatingGrass                               ;83C0B8|22A0A982|82A9A0;
+    JSL.L fObjectMap_CowEatGrassTile                               ;83C0B8|22A0A982|82A9A0;
     REP #$20                                                   ;83C0BC|C220    |      ;
     LDA.W strcPlayerData.leftGrassToCut                        ;83C0BE|AD2E09  |00092E;
     BEQ +                                                      ;83C0C1|F00C    |83C0CF;
