@@ -742,10 +742,10 @@ fInput_Title_LogoScrollSkip:
  
  
 ;;
-; @brief   Title menu (state 5): up/down moves the highlighted entry (nUnknownFlags09D = 0-2, wrapping), A selects.
+; @brief   Title menu (state 5): up/down moves the highlighted entry (nTitleMenuCursor = 0-2, wrapping), A selects.
 ; @details A: entry 0 -> state 8 (load game slot select), entry 1 -> state 7 (new game slot select), entry 2 -> state $0A
 ;          (how-to-play demo). Every move sets strcVariables.u8Unk97 (redraw) and clears n16Unk90.
-; @modifies strcVariables.n8Temp4, nUnknownFlags09D, strcVariables.u8Unk97, strcVariables.n16Unk90
+; @modifies strcVariables.n8Temp4, nTitleMenuCursor, strcVariables.u8Unk97, strcVariables.n16Unk90
 ; @clobbers A
 ; @mode    M16 -> M8X16
 ; @calls   fAudio_PlaySoundEffect

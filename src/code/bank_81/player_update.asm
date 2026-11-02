@@ -6,7 +6,7 @@
 ; the map object / AI script that started the interaction (set by bank $83 map code, bank $82 object code and AI scripts together with
 ; nPlayerInteractionArg1/Arg2 = 0). Common conventions of the handlers:
 ;   nPlayerInteractionArg1 = phase of the handler (0 on start), nPlayerInteractionArg2 = frame counter / wait timer;
-;   a dialog is started with strcDialogDisplay.mapUnk19A = 2, strcDialogDisplay.dialogUnk191 = 0, X = dialog id and fDialog_DialogHandler;
+;   a dialog is started with strcDialogDisplay.inputMode = 2, strcDialogDisplay.boxPosition = 0, X = dialog id and fDialog_DialogHandler;
 ;   while mapUnk19A == 2 the dialog is still running; afterwards strcDialogDisplay.dialogOptionsAnswer holds the chosen option;
 ;   the handler ends the interaction by clearing !PFLAGS_INTERACTING (macro UnsetPlayerFlag) and usually returns with RTS;
 ;   handlers that give an item set strcPlayerData.carryItemId and !PACTION_ITEMONHAND (pick-up pose, player_actions.asm);
@@ -104,11 +104,11 @@ fPlayerInteraction0x02_Nop:
  
 ;;
 ; @brief    Rings a bell (?): plays !SFX_BELL, starts tile script $44 and holds the interaction for 32 frames.
-; @details  Phase 0 (arg1 != 1): plays the sample through fAudio_PrepareSoundEffectSample/fAudioSetRegister2to0A, sets strcFlags.daily1
+; @details  Phase 0 (arg1 != 1): plays the sample through fAudio_PrepareSoundEffectSample/fAudio_PlaySoundEffect, sets strcFlags.daily1
 ; bit $0010, starts fTileScript_Start($44), arg1++. Phase 1: counts arg2 to $20, then ends and restores the tool sound (toolId 0).
 ; @case     $03
 ; @modifies strcAudio.index, strcFlags.daily1, nPlayerInteractionArg1, nPlayerInteractionArg2
-; @calls    fAudio_PrepareSoundEffectSample, fAudioSetRegister2to0A, fTileScript_Start, fToolUsedSound_PlayOnToolChange
+; @calls    fAudio_PrepareSoundEffectSample, fAudio_PlaySoundEffect, fTileScript_Start, fToolUsedSound_PlayOnToolChange
 ; @note     confidence: medium - bell sound only; the object that triggers it is not identified
 ;;
 fPlayerInteraction_RingBell:
@@ -262,7 +262,7 @@ fPlayerInteraction0x0E_Nop:
 ; dialog aWeatherDialogId[weather*8 + season*2] is shown ($FFFF = none); tile script $00 + weather index + 1 starts.
 ; Phase 2: when the dialog finished, tile script $46 (TV off) runs, !PFLAGS_INTERACTING and !PFLAGS_SITTING are cleared.
 ; @case     $0F
-; @modifies nPlayerInteractionArg1, strcPlayer.flags, strcDialogDisplay.mapUnk19A
+; @modifies nPlayerInteractionArg1, strcPlayer.flags, strcDialogDisplay.inputMode
 ; @calls    fTileScript_Start, fWeather_SetForecastDialogIndex, fDialog_DialogHandler
 ; @note     the three TV variants differ only in the tile script ids ($00 base): one per house size (?). confidence: medium
 ;;
@@ -580,7 +580,7 @@ fPlayerInteraction_AutoWalkUp:
 ; dialog aWeatherDialogId[weather*8 + season*2] is shown ($FFFF = none); tile script $27 + weather index + 1 starts.
 ; Phase 2: when the dialog finished, tile script $47 (TV off) runs, !PFLAGS_INTERACTING and !PFLAGS_SITTING are cleared.
 ; @case     $12
-; @modifies nPlayerInteractionArg1, strcPlayer.flags, strcDialogDisplay.mapUnk19A
+; @modifies nPlayerInteractionArg1, strcPlayer.flags, strcDialogDisplay.inputMode
 ; @calls    fTileScript_Start, fWeather_SetForecastDialogIndex, fDialog_DialogHandler
 ; @note     the three TV variants differ only in the tile script ids ($27 base): one per house size (?). confidence: medium
 ;;
@@ -674,7 +674,7 @@ fPlayerInteraction_WatchTv2:
 ; dialog aWeatherDialogId[weather*8 + season*2] is shown ($FFFF = none); tile script $34 + weather index + 1 starts.
 ; Phase 2: when the dialog finished, tile script $48 (TV off) runs, !PFLAGS_INTERACTING and !PFLAGS_SITTING are cleared.
 ; @case     $13
-; @modifies nPlayerInteractionArg1, strcPlayer.flags, strcDialogDisplay.mapUnk19A
+; @modifies nPlayerInteractionArg1, strcPlayer.flags, strcDialogDisplay.inputMode
 ; @calls    fTileScript_Start, fWeather_SetForecastDialogIndex, fDialog_DialogHandler
 ; @note     the three TV variants differ only in the tile script ids ($34 base): one per house size (?). confidence: medium
 ;;
@@ -766,7 +766,7 @@ fPlayerInteraction_WatchTv3:
 ; @details  Phase 0: clears strcDialogDisplay.dialoUnk18A; phase 1: BG2VerOffs = 0, mapUnk19A = 3, dialogFlags |= !DFLAGS_UNK20; phases 2/3
 ; wait for mapUnk19A to leave 3 (to 2 -> phase 3 -> phase 1 again, otherwise end).
 ; @case     $14
-; @modifies strcBGScrool.BG2VerOffs, strcDialogDisplay.mapUnk19A, strcDialogDisplay.dialogFlags
+; @modifies strcBGScrool.BG2VerOffs, strcDialogDisplay.inputMode, strcDialogDisplay.dialogFlags
 ; @note     confidence: low - the object using this interaction is not identified
 ;;
 fPlayerInteraction0x14:

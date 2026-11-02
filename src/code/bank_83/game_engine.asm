@@ -236,7 +236,7 @@ fGameEngine_SetDefaults:
 ; @modifies strcDialogDisplay, strcPlayer, strcObjectData, strcPlayerData, strcMenuData, strcAudio, strcMapScrool, strcFlags.daily1-5, nCurrentTimeID, nInGameHourCounter, nInGameMinuteCounter, nReqWoodForExpansion, nShippingProfit
 ; @clobbers A
 ; @mode    M16X16 -> M8X16
-; @calls   fWriteSeasonWeekdayAndDayOrdinal, fCore_WaitForNextNMI
+; @calls   fEvents_WriteDateStrings, fCore_WaitForNextNMI
 ; @callers fCore_GameStart
 ;;
 fGameEngine_ResetSessionState:
@@ -2374,7 +2374,7 @@ fGameEngine_ValidateSaveSlots:
 ; @details Runs once per night from the next-day handler. The care phases are skipped when daily4 bit $0001 is set
 ;          (meaning of that flag unknown (?)). All animals are visited by index through fGameEngine_GetCowData (12 cows) and
 ;          fGameEngine_GetChickenData (13 entries) which return the record pointer in ptrTemp0x72.
-;          1. Cow care: for each adult cow (babies skipped, children only graze via fObjectMap_EatingGrass): in the barn (map
+;          1. Cow care: for each adult cow (babies skipped, children only graze via fObjectMap_CowEatGrassTile): in the barn (map
 ;             $27) it is fed when its bit of nCowFeedFlagsTable[index] is set in strcPlayerData.placedCowFeedFlags (pregnant cows
 ;             use table slot 12); outdoors (map < 4) fed means there is grass left (strcPlayerData.leftGrassToCut) and the weather/map
 ;             flags in strcDialogDisplay.mapFlags do not forbid grazing. Unfed or bad-weather cows lose happiness (-8, -16, -24,
@@ -2395,7 +2395,7 @@ fGameEngine_ValidateSaveSlots:
 ; @modifies strcCowData, strcChickenData, nOwnedCows, nOwnedChickens, nCowPregnacyDays, nNewBornCowAffection, nEggInCoopFlags, nHorseAge, nPlayerHappiness, strcFlags.event1, strcFlags.event6, strcStockData.unkCow
 ; @clobbers A X Y
 ; @mode    M16X16 -> M16X16
-; @calls   fGameEngine_GetCowData, fGameEngine_GetChickenData, fObjectMap_EatingGrass, fCow_AddHappiness, fGameEngine_AddHappiness, fCore_GetRandomNumber
+; @calls   fGameEngine_GetCowData, fGameEngine_GetChickenData, fObjectMap_CowEatGrassTile, fCow_AddHappiness, fGameEngine_AddHappiness, fCore_GetRandomNumber
 ; @callers fNextDayHandler
 ; @note    confidence: medium. Status bit names follow !COWSTATUS_* / !CHICKENSTATUS_*. The meaning of several strcDialogDisplay.mapFlags bits (weather,
 ;          festival days) is not named in the sources; bit values are given as found. strcFlags bit meanings: event6 $1000 is set for any

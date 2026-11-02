@@ -20,7 +20,7 @@
 ;           player starts the day eating a meal: a random meal id 0..2 is stored in strcPlayerData.eatFood and !PFLAGS_EATINGMEAL is set.
 ; @modifies strcMap.loadAreaId, nDestinationAreaId, strcBGScrool.BG3VerOffs, strcDialogDisplay.mapDestX, strcDialogDisplay.mapDestY, strcDialogDisplay.inputMode, strcPlayerData.eatFood
 ; @mode     M8X16 -> M16 (never returns, continues in fCore_MainLoop)
-; @calls    fAudioEngine_MapMusicHandler, fAudio_FadeOutOnTrackChangeSlow, fCore_ScreenFadeout, fCore_SetForceBlank, fCore_ZeroVRAM, fCore_ZeroCGRAM, fGameEngine_FirstNight, fCore_FindBestLove, fMap_ResetAndLoadDestinationArea, fCore_GetRandomNumber
+; @calls    fAudioEngine_MapMusicHandler, fAudio_FadeOutOnTrackChangeSlow, fCore_ScreenFadeout, fCore_SetForceBlank, fCore_ZeroVRAM, fCore_ZeroCGRAM, fGameEngine_ResetSessionState, fEvents_FindMostLovedGirl, fMap_ResetAndLoadDestinationArea, fCore_GetRandomNumber
 ; @callers  fLoadAndStartGame, fStartNewGame
 ; @note     The destination coordinates and the area id $15 are hard-coded; the real start position comes from the loaded save / first-night code (?). confidence: medium
 ;;
@@ -521,7 +521,7 @@ fCore_SetSecondChildName:
 ; @region   JP: the first instructions are laid out differently (SEP/REP before SEI, NMITIMEN cleared without clearing MDMAEN/HDMAEN).
 ; @mode     M8X16
 ; @note     Never returns; initialises all of WRAM and all PPU/CPU I/O registers.
-; @calls    fAudio_UploadData, fAudio_SendCommand0B, fAudio_LoadCommonSamples, fAudio_UploadSfxBlock, fCore_InitializeScreenStatus, fCore_ZeroVRAM, fCore_ZeroOAM, fCore_ZeroCGRAM, fObject_InitTileCache, fObject_ClearGameObject, fGameEngine_SaveCheck, fMainMenu_TitleScreenInit
+; @calls    fAudio_UploadData, fAudio_SendCommand0B, fAudio_LoadCommonSamples, fAudio_UploadSfxBlock, fCore_InitializeScreenStatus, fCore_ZeroVRAM, fCore_ZeroOAM, fCore_ZeroCGRAM, fObject_InitTileCache, fObject_ClearGameObject, fGameEngine_ValidateSaveSlots, fMainMenu_TitleScreenInit
 ;;
 fCore_Reset:
     if !REGION_JP

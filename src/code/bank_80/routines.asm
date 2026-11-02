@@ -684,11 +684,11 @@ fMap_SetupArea:
 ;           of the flags byte of the table row: bit0 add season to the area id, bit1 closed from 17:00 (evening), bit2 closed before 17:00, bit3 open only Sunday/Saturday, bit4 closed Saturday (and winter day 10),
 ;           bit5 closed Sunday, bit6 day dependent area (spring day 1 -> $3A, winter day 24 -> !AREA_NY_MOUNTAINTOP, days 10..12 -> +4), bit7 closed on festival days (mapFlags $0010).
 ;           Phase counter $098A: 0 -> 1 on the first frame (reads the row: destination area, tile-script id, flags, position), 1 -> waits for a running tile script (ptrUnknown0xCF), 2..$0D the player walks into the exit,
-;           $0D finishes the walk: when the current area is a farm area (< !AREA_TOWNSPRING) fObjectMap_LoadFarm runs; when the current area lies in [!AREA_CROSSROADSPRING, !AREA_WOODSSPRING) one hour is added to nCurrentTimeID (unless it is already 18:00) and fEvents_NoonMealCheck runs; then !AFLAGS_FORCETELEPORT is set.
+;           $0D finishes the walk: when the current area is a farm area (< !AREA_TOWNSPRING) fObjectMap_SaveCurrentToFarm runs; when the current area lies in [!AREA_CROSSROADSPRING, !AREA_WOODSSPRING) one hour is added to nCurrentTimeID (unless it is already 18:00) and fEvents_NoonMealCheck runs; then !AFLAGS_FORCETELEPORT is set.
 ;           .caseD0 (special tiles $D0..$FF, only in areas !AREA_WOODSSPRING..!AREA_NY_SPA-1 with mapFlags & $1A == 0): tile $F9 in spring (1/16 chance per frame, once per day via daily2 $2000) starts AI script $11 action $2C,
 ;           tile $FA in fall (daily2 $4000) script $13 action $2B, tile $FB in winter (daily2 $8000) script $12 action $2A; tile $F8 under the player while fishing switches the player action to !PACTION_0F (?).
 ; @mode     M16X16 -> M16X16
-; @calls    fCore_GetRandomNumber, fTileScript_Start, fObjectMap_LoadFarm, fEvents_NoonMealCheck
+; @calls    fCore_GetRandomNumber, fTileScript_Start, fObjectMap_SaveCurrentToFarm, fEvents_NoonMealCheck
 ; @callers  fCore_MainLoop
 ; @note     confidence: medium - the bit assignment of the flags byte comes from the tests above (closed-shop dialog code in bank $82 sound.asm uses the same bits); the $F8..$FB tile semantics are inferred from the AI scripts they start.
 ;;

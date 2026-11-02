@@ -4397,10 +4397,10 @@ fAreaEvents_Endings:
 ; @brief   Final evaluation set-up, started from the house on year 2, summer, day $1E: start the ending and pick the cow shown in it.
 ; @details Starts group 0 sub $2E, clears strcDialogDisplay.mapFlags, sets daily3 bit $0002 and nEndingStep = 0. It blanks strcNames.wCurrentCow and then
 ;          finds the existing cow with the highest happiness (strcCowData +04) and copies its 4-character name there. Finally nRanchDevelopmentRate (from
-;          fObjectMap_CalculateRanchDev) is scaled by 10 / 295 ($0127) with fMathMultiply_7EbyA and fMathDivide and capped at 100.
+;          fObjectMap_CalcRanchDevelopmentRate) is scaled by 10 / 295 ($0127) with fMathMultiply_7EbyA and fMathDivide and capped at 100.
 ; @modifies strcDialogDisplay.mapFlags, strcFlags.daily3, nEndingStep, strcNames.wCurrentCow, nRanchDevelopmentRate
 ; @clobbers A X Y
-; @calls   fAI_StartSlotScript (via %AIExecute), fGameEngine_GetCowData, fObjectMap_CalculateRanchDev, fMathMultiply_7EbyA, fMathDivide
+; @calls   fAI_StartSlotScript (via %AIExecute), fGameEngine_GetCowData, fObjectMap_CalcRanchDevelopmentRate, fMathMultiply_7EbyA, fMathDivide
 ; @mode    M16X16 -> M16X16 (ends with RTS)
 ; @callers fAreaEvents_House (JMP)
 ; @note    confidence: medium. The "$09B5" byte holds the best cow happiness found so far.

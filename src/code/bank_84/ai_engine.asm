@@ -681,7 +681,7 @@ fAI_UpdateSlotStepMove:
 ;          +0A Y); when it would leave the range, or the segment ends, the walk stops (dx = dy = 0, stop sprite table from +33
 ;          via fAI_LoadSlotSpriteFromDirTable, refresh flag bit2 set). A started walk loads dx/dy (+/-1), direction index (+02),
 ;          step period from +0B and the walking sprite table (+36). With flag bit7 (free walk) the range test is skipped and
-;          the move is checked with fGameEngine_DirectionHandler83AF37 / fGameEngine_CheckDirectionalOverlap (map collision and
+;          the move is checked with fGameEngine_CheckTileCollisionDir / fGameEngine_CheckPlayerOverlap (map collision and
 ;          player overlap; tile ids $E1/$C0-$CF/$FF special cased, +3F in $18-$23 exempt); a blocked step resets velocity and
 ;          the preferred direction (+0F).
 ; @param   ptrAIUnknown0xCC  current slot
@@ -689,7 +689,7 @@ fAI_UpdateSlotStepMove:
 ; @note    Also writes slot fields: slot +02..+0F.
 ; @mode    M16X16 -> M16X16
 ; @clobbers A Y
-; @calls   fAI_LoadSlotSpriteFromDirTable, fGameEngine_DirectionHandler83AF37, fGameEngine_CheckDirectionalOverlap
+; @calls   fAI_LoadSlotSpriteFromDirTable, fGameEngine_CheckTileCollisionDir, fGameEngine_CheckPlayerOverlap
 ; @note    Which of the horizontal directions is left or right is not verified (the PDIR enum has 2 = left, 3 = right but this code adds +1 to X for index 2); confidence: low for that detail.
 ;;
 fAI_UpdateSlotWander:
@@ -5999,15 +5999,15 @@ fAIAction0x34_PickUpFish:
 ; @details Clears daily2 $0010. A foal (nHorseAge != $15) counts strcStockData.unkHorse to $78 and then starts script $80 of set 0
 ;          in slot $17. An adult handles: daily2 $0040 (set by the carried-item code; meaning unclear) starts a direction-dependent script ($28-$2B);
 ;          daily2 $0020 (player mounted, set by the mount action) -> PFLAGS_RIDINGHORSE and the slot is deactivated; with the
-;          player next to the horse and A pressed it tests the free tile behind (fGameEngine_DirectionHandler83AF37 /
-;          fGameEngine_DirectionHandler83AD91) and lets the player mount (PACTION_17); otherwise idle timer to $78 and a random
+;          player next to the horse and A pressed it tests the free tile behind (fGameEngine_CheckTileCollisionDir /
+;          fGameEngine_CheckAISlotCollision) and lets the player mount (PACTION_17); otherwise idle timer to $78 and a random
 ;          idle script ($4B-$50 by lastRandomNumber thresholds $24 $48 $6C $90 $B4 $D8). daily2 $0400 (whistle) makes the horse run
 ;          to the player with script $4C (adult) or $4A (foal) and a preferred direction toward the player.
 ; @case    $35
 ; @modifies ptrAIActionData, strcPlayer.unkE3, strcPlayer.lastX, strcPlayer.lastY, strcPlayer.newX, strcPlayer.newY, strcPlayer.action, strcPlayer.flags, strcStockData.unkHorse, strcFlags.daily2, strcVariables.n16Temp1, strcVariables.n16Temp2, strcVariables.n16Temp3, strcVariables.n16Temp4
 ; @note    Writes slot fields +00, +01, +08, +0C, +0F, +10.
 ; @mode    M16X16 -> ?
-; @calls   fAI_SetSlotScript, fGameEngine_DirectionHandler83AF37, fGameEngine_DirectionHandler83AD91
+; @calls   fAI_SetSlotScript, fGameEngine_CheckTileCollisionDir, fGameEngine_CheckAISlotCollision
 ; @note    confidence: low - flag meanings of daily2 $0040 / $0800 and the script ids are inferred only from the code paths.
 ;;
 fAIAction0x35_UpdateHorse:

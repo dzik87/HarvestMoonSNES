@@ -597,7 +597,7 @@ fPlayerAction_WhistleHorse:
 ; The action ends when the pose animation is over and daily1 bit $4000 is clear.
 ; @case     $0C
 ; @param    nCurrentTimeID   hour index (6 = 6 am)
-; @modifies strcDialogDisplay.mapUnk19A, strcDialogDisplay.dialogUnk191, strcPlayer.action
+; @modifies strcDialogDisplay.inputMode, strcDialogDisplay.boxPosition, strcPlayer.action
 ; @mode     M16X16
 ; @calls    fDialog_DialogHandler, fPlayer_UpdateSpriteObject
 ; @region   dialog contents differ per language, ids are the same
@@ -1246,8 +1246,8 @@ fPlayerAction_Run:
  
 ;;
 ; @brief    Footstep sound every 16th call (strcPlayerData.unkCounter91A & $0F == 0), then move.
-; @modifies strcPlayerData.unkCounter91A, strcAudio.reg114, strcAudio.reg115
-; @calls    fAudioSetRegister2to0A, fPlayer_MoveInDirection
+; @modifies strcPlayerData.unkCounter91A, strcAudio.sfxId, strcAudio.sfxVoice
+; @calls    fAudio_PlaySoundEffect, fPlayer_MoveInDirection
 ;;
 fPlayerAction_Run_StepSound:
     SEP #$20                                                   ;81C806|E220    |      ;
@@ -1317,9 +1317,9 @@ fPlayerAction_AutoStep:
 ; speed alternates 1/2 each frame via bit 0 of $0971. fPlayer_MoveInDirection moves without collision (action JUMP is exempt).
 ; At the end: action NONE, !PFLAGS_FALLING cleared, and for PDIR_RIGHT the !PFLAGS_INSPRINGS flag is cleared (leaving the spring).
 ; @case     $03
-; @modifies strcObjectData.spriteIdx, strcMap.unk1E, $0971, strcPlayer.flags, strcAudio.reg114, strcAudio.reg115
+; @modifies strcObjectData.spriteIdx, strcMap.unk1E, $0971, strcPlayer.flags, strcAudio.sfxId, strcAudio.sfxVoice
 ; @mode     M16X16
-; @calls    fAudioSetRegister2to0A, fPlayer_MoveInDirection, fPlayer_UpdateSpriteObject, fPlayerAction_CheckIdle
+; @calls    fAudio_PlaySoundEffect, fPlayer_MoveInDirection, fPlayer_UpdateSpriteObject, fPlayerAction_CheckIdle
 ;;
 fPlayerAction_Jump:
     REP #$30                                                   ;81C86B|C230    |      ;
@@ -1508,8 +1508,8 @@ fPlayerAction_PickUpItem:
 ;;
 ; @brief    Put an item down (!PACTION_DROPITEM): plays sprite $1C + direction and !SFX_ITEMDROP, then clears !PFLAGS_HOLDINGITEM.
 ; @case     $05
-; @modifies strcPlayer.flags, strcAudio.reg114, strcAudio.reg115
-; @calls    fAudioSetRegister2to0A, fPlayer_UpdateSpriteObject
+; @modifies strcPlayer.flags, strcAudio.sfxId, strcAudio.sfxVoice
+; @calls    fAudio_PlaySoundEffect, fPlayer_UpdateSpriteObject
 ;;
 fPlayerAction_DropItem:
     REP #$30                                                   ;81C9DF|C230    |      ;
@@ -1700,8 +1700,8 @@ fPlayerAction_Exercise:
 ; @brief    Moves the player one step (strcMap.unk1E pixels) in strcPlayer.direction with collision, slide-around-corner and camera scroll.
 ; @details  Per direction (down +Y, up -Y, !PDIR_LEFT +X, !PDIR_RIGHT -X; the X signs of the enum names look mirrored, see note): when the
 ; action is JUMP/17/18 or !PFLAGS_INTRANSITION the step is applied unchecked. Otherwise lastX/lastY are saved, newX/newY set to the step
-; and the two collision helpers fGameEngine_DirectionHandler83AD91 (A != 0 = blocked: step cancelled via .return1) and
-; fGameEngine_DirectionHandler83AF37 (A = 1 / 2: obstacle on one side, X/Y = clearance in pixels) are called. When the obstacle edge is
+; and the two collision helpers fGameEngine_CheckAISlotCollision (A != 0 = blocked: step cancelled via .return1) and
+; fGameEngine_CheckTileCollisionDir (A = 1 / 2: obstacle on one side, X/Y = clearance in pixels) are called. When the obstacle edge is
 ; less than 16 px from a tile corner ($00A0..$00B0 window) the player is nudged sideways (direction switched and step 1) so he slides
 ; past corners; otherwise the step is shortened by the clearance. Afterwards fCamera_UpdateFromPlayerPos and the matching
 ; fCamera_Scroll*Step run. Every 8th step (strcPlayerData.unkCounter919) fPlayer_LeaveSnowFootprint is called and the player position is
@@ -1709,7 +1709,7 @@ fPlayerAction_Exercise:
 ; @param    strcPlayer.direction, strcMap.unk1E   (step length in pixels)
 ; @modifies strcPlayer.posX, strcPlayer.posY, strcPlayer.lastX, strcPlayer.lastY, strcPlayer.newX, strcPlayer.newY, strcMap.unk1E, strcPlayerData.unkCounter919
 ; @mode     M16X16 -> M16X16
-; @calls    fPlayer_UpdateSpriteObject, fGameEngine_DirectionHandler83AD91, fGameEngine_DirectionHandler83AF37, fCamera_UpdateFromPlayerPos, fCamera_ScrollDownStep, fCamera_ScrollUpStep, fCamera_ScrollRightStep, fCamera_ScrollLeftStep, fPlayer_LeaveSnowFootprint
+; @calls    fPlayer_UpdateSpriteObject, fGameEngine_CheckAISlotCollision, fGameEngine_CheckTileCollisionDir, fCamera_UpdateFromPlayerPos, fCamera_ScrollDownStep, fCamera_ScrollUpStep, fCamera_ScrollRightStep, fCamera_ScrollLeftStep, fPlayer_LeaveSnowFootprint
 ; @note     !PDIR_LEFT ($02) adds to posX and !PDIR_RIGHT ($03) subtracts; the enum names may be mirrored relative to the screen (?). confidence: low for the sliding rules (.subN branches)
 ;;
 fPlayer_MoveInDirection:

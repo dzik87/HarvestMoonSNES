@@ -280,14 +280,14 @@ endmacro
 ; @brief      Calls fAudio_FadeOutOnTrackChangeSlow: if the requested trackId differs from the one being played, sends
 ;             a track change command to the APU.
 ; @details    Advances ptrAIActionData by 2 and calls fAudio_FadeOutOnTrackChangeSlow: it compares strcAudio.trackId
-;             with trackIdCopy ($7E:0117); when they differ and trackIdCopy != 0, it sets strcAudio.unk112=1,
+;             with trackIdCopy ($7E:0117); when they differ and trackIdCopy != 0, it sets strcAudio.fadeOutFlag=1,
 ;             unk113=$40 and calls fAudio_SendFadeOutCommand, which sends a command (1, parameter $40 - probably
 ;             fade/track change) to the SPC through the APUIO0-3 ports. May block on the handshake with the APU.
 ; @case       $0E; 2 byte(s) including the opcode
 ; @param      nUnused  byte: Ignored by the handler (ptr += 2).
 ; @see        fAIAction0x0E_ApplyMusicChange
 ; @confidence medium
-; @modifies   strcAudio.trackId, strcAudio.trackIdCopy, strcAudio.unk112, strcAudio.unk113, ptrAIActionData
+; @modifies   strcAudio.trackId, strcAudio.trackIdCopy, strcAudio.fadeOutFlag, strcAudio.fadeTicks, ptrAIActionData
 ; @note       The exact semantics of the APU command (1/$40) and of fAudio_SendFadeOutCommand were not analyzed
 ;             (fade-out only? start of a new track?); the command is not used in US scripts, so it cannot be confirmed
 ;             from context. The name is a hypothesis.
@@ -565,17 +565,17 @@ endmacro
 ;;
 ; @brief      Displays dialog nDialogId and suspends the script for one frame (the AI loop continues to be skipped for
 ;             the duration of the dialog).
-; @details    Loads nDialogId into X, stores the nPosition byte to dialogUnk191, sets strcDialogDisplay.mapUnk19A = 2
+; @details    Loads nDialogId into X, stores the nPosition byte to dialogUnk191, sets strcDialogDisplay.inputMode = 2
 ;             and calls fDialog_DialogHandler (sets dialogId, dialogFlags |= DFLAGS_PROCESSDIALOG, zeroes the
 ;             option/answer counters, selects the text pointer from aDialogPointers, sets the BG3 offset and
 ;             nTimeState = 0, daily1 |= $4000). Then +$10 += 1 (one frame).
 ; @case       $1C; 4 byte(s) including the opcode
 ; @param      nDialogId  word: Dialog index (index into aDialogPointers, 3 bytes per entry); goes to X, and in
 ;             fDialog_DialogHandler to strcDialogDisplay.dialogId.
-; @param      nPosition  byte: Stored to strcDialogDisplay.dialogUnk191 ($7E:0191).
+; @param      nPosition  byte: Stored to strcDialogDisplay.boxPosition ($7E:0191).
 ; @see        fAIAction0x1C_ShowDialog
 ; @confidence high
-; @modifies   ptrAIActionData, strcDialogDisplay.dialogUnk191, strcDialogDisplay.mapUnk19A,
+; @modifies   ptrAIActionData, strcDialogDisplay.boxPosition, strcDialogDisplay.inputMode,
 ;             strcDialogDisplay.dialogId, strcDialogDisplay.dialogFlags, strcDialogDisplay.dialogOptionsAnswer
 ; @note       The exact meaning of nPosition (top/bottom) is unconfirmed; the code that resets mapUnk19A after the
 ;             dialog is closed was not checked.
@@ -596,10 +596,10 @@ endmacro
 ;             on behavior.
 ; @case       $1D; 4 byte(s) including the opcode
 ; @param      nDialogId  word: As in 0x1C: dialog index.
-; @param      nPosition  byte: As in 0x1C: goes to strcDialogDisplay.dialogUnk191.
+; @param      nPosition  byte: As in 0x1C: goes to strcDialogDisplay.boxPosition.
 ; @see        fAIAction0x1D_ShowDialogWithChoice
 ; @confidence high
-; @modifies   ptrAIActionData, strcDialogDisplay.dialogUnk191, strcDialogDisplay.mapUnk19A,
+; @modifies   ptrAIActionData, strcDialogDisplay.boxPosition, strcDialogDisplay.inputMode,
 ;             strcDialogDisplay.dialogId, strcDialogDisplay.dialogFlags
 ; @note       None - the difference between 0x1C and 0x1D exists only in usage convention (there are no differences in
 ;             the handler code).
@@ -929,20 +929,20 @@ endmacro
 ;             sound.
 ; @details    The handler advances the pointer by 1, pushes a byte and two words onto the stack, calls
 ;             fAudio_PlaySoundEffectAndWait: it stores reg114/reg115, sets strcAudio.index =
-;             nSoundEffectSampleTable[strcAudio.unk118]+1, calls fAudio_PrepareSoundEffectSample (if
+;             nSoundEffectSampleTable[strcAudio.sampleTableTrackId]+1, calls fAudio_PrepareSoundEffectSample (if
 ;             strcAudio.list[index] != 0 it sends data to the APU via fAudio_FreeSamplesFromSlot) and
-;             fAudioSetRegister2to0A (reg116 = $0A), and then BLOCKS for nWaitFrames NMI frames (this wait halts the
+;             fAudio_PlaySoundEffect (reg116 = $0A), and then BLOCKS for nWaitFrames NMI frames (this wait halts the
 ;             whole engine, called from inside the handler).
 ; @case       $2C; 6 byte(s) including the opcode
-; @param      nSoundId  byte: Goes to A in fAudio_PlaySoundEffectAndWait and to strcAudio.reg114 ($7E:0114) - probably
+; @param      nSoundId  byte: Goes to A in fAudio_PlaySoundEffectAndWait and to strcAudio.sfxId ($7E:0114) - probably
 ;             the sound effect id.
-; @param      nSoundParam  word: Goes to X; only the low byte is stored in strcAudio.reg115 ($7E:0115) (6 or 7 in
+; @param      nSoundParam  word: Goes to X; only the low byte is stored in strcAudio.sfxVoice ($7E:0115) (6 or 7 in
 ;             scripts - the same values as the first byte of the entries in nToolSoundTable).
 ; @param      nWaitFrames  word: Goes to Y; fAudio_PlaySoundEffectAndWait waits this many NMI frames
 ;             (fCore_WaitForNMITimes).
 ; @see        fAIAction0x2C_PlaySoundWait
 ; @confidence medium
-; @modifies   strcAudio.reg114, strcAudio.reg115, strcAudio.reg116, strcAudio.index, strcAudio.list, strcAudio.unk118
+; @modifies   strcAudio.sfxId, strcAudio.sfxVoice, strcAudio.sfxPan, strcAudio.index, strcAudio.list, strcAudio.sampleTableTrackId
 ; @note       The exact meaning of reg114 vs reg115 (sound id / category) was not confirmed in the SPC code; the
 ;             function itself (sound effect + waiting) is certain. It is not known why the tool sound is played after
 ;             the sound (probably a reset of the strcAudio.toolId state).
@@ -1543,7 +1543,7 @@ endmacro
 ; @brief      If the player stands next to the object and presses A (with empty hands), picks the object up -
 ;             deactivates it and gives the player the carried item id 8.
 ; @details    Advances the pointer by 1 and checks the conditions (any unmet condition exits with obj+0x10 += 1, i.e.
-;             yields the frame): proximity flag obj+0x0C != 0 (set by fGameEngine_DirectionHandler83AD91 when the
+;             yields the frame): proximity flag obj+0x0C != 0 (set by fGameEngine_CheckAISlotCollision when the
 ;             player is within a radius of 0x19 px), the player action is not
 ;             USINGTOOL/SHOWTOOL/WHISTLEHORSE/WHISTLEDOG/17, strcPlayer.flags does not have bit 0x0004 (EATINGMEAL) or
 ;             DOGHUGGING, daily4 bits 0x0006 are cleared, strcJoypad1.newInput has A, strcPlayerData.carryItemId == 0.
@@ -1588,7 +1588,7 @@ endmacro
 ;;
 ; @brief      Sets bit 0x02 in the AI object state byte (+0x00); the object no longer blocks the player in collision
 ;             detection.
-; @details    Executes obj+0x00 |= 0x02. In fGameEngine_DirectionHandler83AD91 (player collision with AI objects) an
+; @details    Executes obj+0x00 |= 0x02. In fGameEngine_CheckAISlotCollision (player collision with AI objects) an
 ;             object with this bit still receives the proximity flag +0x0C = 1, but does not set n16Unk8C (movement
 ;             block marker), so the player can pass through it.
 ; @case       $4C; 1 byte(s) including the opcode
@@ -1730,16 +1730,16 @@ endmacro
 ;;
 ; @brief      Shows a dialog in input handler mode 6 (closes by itself when finished, without player input) - a
 ;             variant of 0x1C/0x1D.
-; @details    Identical to 0x1C/0x1D except: strcDialogDisplay.mapUnk19A = 6 (instead of 2) and additionally zeroing
+; @details    Identical to 0x1C/0x1D except: strcDialogDisplay.inputMode = 6 (instead of 2) and additionally zeroing
 ;             of $09B1 (16-bit). In fInput_Handler mode 6 (fInput_Handler_case06): after the ENDDIALOG flag is set, it
 ;             counts frames in $09B1 up to 0x78 (120), calls fDialog_EndDialogRestoreScroll, sets mapUnk19A and masks
 ;             the A button - so the dialog closes by itself after about 2 s.
 ; @case       $54; 4 byte(s) including the opcode
 ; @param      nDialogId  word: dialog index passed in X to fDialog_DialogHandler
-; @param      nUnknown2  byte: stored to strcDialogDisplay.dialogUnk191 (always $01 in scripts)
+; @param      nUnknown2  byte: stored to strcDialogDisplay.boxPosition (always $01 in scripts)
 ; @see        fAIAction0x54_ShowDialogAutoClose
 ; @confidence medium
-; @modifies   ptrAIActionData, strcDialogDisplay.dialogUnk191, strcDialogDisplay.mapUnk19A,
+; @modifies   ptrAIActionData, strcDialogDisplay.boxPosition, strcDialogDisplay.inputMode,
 ;             strcDialogDisplay.dialogId, strcDialogDisplay.dialogFlags
 ; @note       The meaning of nUnknown2 (dialogUnk191) is still unknown - it is modified in several places in
 ;             dialog.asm. The name 'AutoClose' comes from analysis of case06 in input.asm; not confirmed in game.
