@@ -12,13 +12,11 @@
 
     incsrc "../../../../build/gen/ai/slots_20.asm"
  
-;;
-; @brief   Cow funeral sequence in the town square for the current season.
-; @details Entry code: music Funeral; hour $0E; destination !AREA_TOWNSPRING, !AREA_TOWNSUMMER, !AREA_TOWNFALL,
+; Cow funeral sequence in the town square for the current season.
+; Entry code: music Funeral; hour $0E; destination !AREA_TOWNSPRING, !AREA_TOWNSUMMER, !AREA_TOWNFALL,
 ;         !AREA_TOWNWINTER; starts 2 child scripts (slots $01, $02); dialogs $038A, $0315, $0316.
-; @slot    0   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_House (A=$0000)
-;;
+; Slot index: 0
+; Started by: fAreaEvents_House (A=$0000)
 pAIScripting0x20_Data01:
     %AICMD0x50()                                               ;B49E51
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $09)       ;B49E52

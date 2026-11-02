@@ -12,12 +12,10 @@
 
     incsrc "../../../../build/gen/ai/slots_47.asm"
  
-;;
-; @brief   Slot 0: demo scene in !AREA_FARMSPRING (music Spring).
-; @details Entry code: music Spring; hour $07; destination !AREA_FARMSPRING.
-; @slot    0   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fMainMenu_StartHowToPlayDemo (A=$0000)
-;;
+; Slot 0: demo scene in !AREA_FARMSPRING (music Spring).
+; Entry code: music Spring; hour $07; destination !AREA_FARMSPRING.
+; Slot index: 0
+; Started by: fMainMenu_StartHowToPlayDemo (A=$0000)
 pAIScripting0x47_HowToPlay_Data01:
  
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $06)       ;B5ACAE
@@ -38,12 +36,10 @@ pAIScripting0x47_HowToPlay_Data01:
     %AICMD0x10_End()                                           ;B5ACDD
 
 
-;;
-; @brief   Slot 1: demo scene in !AREA_SHED (music Spring).
-; @details Entry code: music Spring; hour $07; destination !AREA_SHED.
-; @slot    1   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Intro (A=$0000)
-;;
+; Slot 1: demo scene in !AREA_SHED (music Spring).
+; Entry code: music Spring; hour $07; destination !AREA_SHED.
+; Slot index: 1
+; Started by: fAreaEvents_Intro (A=$0000)
 pAIScripting0x47_HowToPlay_Data02:
  
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $06)       ;B5ACDE
@@ -72,12 +68,10 @@ pAIScripting0x47_HowToPlay_Data02:
     %AICMD0x10_End()                                           ;B5AD24
 
 
-;;
-; @brief   Slot 2: demo scene in !AREA_FARMSPRING (music Spring).
-; @details Entry code: music Spring; hour $07; destination !AREA_FARMSPRING.
-; @slot    2   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Intro (A=$0000), fMainMenu_AutoHowToPlay (A=$0000)
-;;
+; Slot 2: demo scene in !AREA_FARMSPRING (music Spring).
+; Entry code: music Spring; hour $07; destination !AREA_FARMSPRING.
+; Slot index: 2
+; Started by: fAreaEvents_Intro (A=$0000), fMainMenu_AutoHowToPlay (A=$0000)
 pAIScripting0x47_HowToPlay_Data03:
  
     %AICMD0x47_SetValue8(wram80(strcPlayerData.toolEquipped), 3)                           ;B5AD25
@@ -342,12 +336,10 @@ pAIScripting0x47_HowToPlay_Data03:
     %AICMD0x10_End()                                           ;B5AFF8
 
 
-;;
-; @brief   Slot 3: demo scene in !AREA_SHED (music Spring).
-; @details Entry code: music Spring; hour $07; destination !AREA_SHED.
-; @slot    3   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Intro (A=$0000)
-;;
+; Slot 3: demo scene in !AREA_SHED (music Spring).
+; Entry code: music Spring; hour $07; destination !AREA_SHED.
+; Slot index: 3
+; Started by: fAreaEvents_Intro (A=$0000)
 pAIScripting0x47_HowToPlay_Data04:
  
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $06)       ;B5AFF9
@@ -381,12 +373,10 @@ pAIScripting0x47_HowToPlay_Data04:
     %AICMD0x10_End()                                           ;B5B04F
 
 
-;;
-; @brief   Slot 4: demo scene in !AREA_FARMSPRING (music Spring).
-; @details Entry code: music Spring; hour $07; destination !AREA_FARMSPRING.
-; @slot    4   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Intro (A=$0000), fMainMenu_AutoHowToPlay (A=$0000)
-;;
+; Slot 4: demo scene in !AREA_FARMSPRING (music Spring).
+; Entry code: music Spring; hour $07; destination !AREA_FARMSPRING.
+; Slot index: 4
+; Started by: fAreaEvents_Intro (A=$0000), fMainMenu_AutoHowToPlay (A=$0000)
 pAIScripting0x47_HowToPlay_Data05:
  
     %AICMD0x58_ReplaceFarmTile($02, 448, 528)                  ;B5B050
@@ -527,12 +517,10 @@ pAIScripting0x47_HowToPlay_Data05:
     %AICMD0x10_End()                                           ;B5B260
 
 
-;;
-; @brief   Slot 5: demo scene in !AREA_SHED (music Spring).
-; @details Entry code: music Spring; hour $07; destination !AREA_SHED.
-; @slot    5   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Intro (A=$0000)
-;;
+; Slot 5: demo scene in !AREA_SHED (music Spring).
+; Entry code: music Spring; hour $07; destination !AREA_SHED.
+; Slot index: 5
+; Started by: fAreaEvents_Intro (A=$0000)
 pAIScripting0x47_HowToPlay_Data06:
  
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $06)       ;B5B261
@@ -566,12 +554,10 @@ pAIScripting0x47_HowToPlay_Data06:
     %AICMD0x10_End()                                           ;B5B2B7
 
 
-;;
-; @brief   Slot 6: demo scene in !AREA_FARMSPRING (music Spring).
-; @details Entry code: music Spring; hour $07; destination !AREA_FARMSPRING.
-; @slot    6   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Intro (A=$0000), fMainMenu_AutoHowToPlay (A=$0000)
-;;
+; Slot 6: demo scene in !AREA_FARMSPRING (music Spring).
+; Entry code: music Spring; hour $07; destination !AREA_FARMSPRING.
+; Slot index: 6
+; Started by: fAreaEvents_Intro (A=$0000), fMainMenu_AutoHowToPlay (A=$0000)
 pAIScripting0x47_HowToPlay_Data07:
  
     %AICMD0x58_ReplaceFarmTile($02, 448, 528)                  ;B5B2B8
@@ -707,12 +693,10 @@ pAIScripting0x47_HowToPlay_Data07:
     %AICMD0x10_End()                                           ;B5B500
 
 
-;;
-; @brief   Slot 7: demo scene in !AREA_FARMSUMMER (music Summer).
-; @details Entry code: music Summer; hour $07; destination !AREA_FARMSUMMER; starts 1 child script (slots $01).
-; @slot    7   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Intro (A=$0000), fMainMenu_AutoHowToPlay (A=$0000)
-;;
+; Slot 7: demo scene in !AREA_FARMSUMMER (music Summer).
+; Entry code: music Summer; hour $07; destination !AREA_FARMSUMMER; starts 1 child script (slots $01).
+; Slot index: 7
+; Started by: fAreaEvents_Intro (A=$0000), fMainMenu_AutoHowToPlay (A=$0000)
 pAIScripting0x47_HowToPlay_Data08:
  
     %AICMD0x58_ReplaceFarmTile($02, 448, 528)                  ;B5B501
@@ -920,12 +904,10 @@ pAIScripting0x47_HowToPlay_Data08_Actor01_Idle:
     %AICMD0x12_Jump(pAIScripting0x47_HowToPlay_Data08_Actor01_Idle)                                   ;B5B831
 
 
-;;
-; @brief   Slot 8: demo scene in !AREA_SHED (music Summer).
-; @details Entry code: music Summer; hour $07; destination !AREA_SHED.
-; @slot    8   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Intro (A=$0000)
-;;
+; Slot 8: demo scene in !AREA_SHED (music Summer).
+; Entry code: music Summer; hour $07; destination !AREA_SHED.
+; Slot index: 8
+; Started by: fAreaEvents_Intro (A=$0000)
 pAIScripting0x47_HowToPlay_Data09:
  
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $06)       ;B5B834
@@ -954,12 +936,10 @@ pAIScripting0x47_HowToPlay_Data09:
     %AICMD0x10_End()                                           ;B5B87A
 
 
-;;
-; @brief   Slot 9: demo scene in !AREA_FARMSUMMER (music Summer).
-; @details Entry code: music Summer; hour $07; destination !AREA_FARMSUMMER.
-; @slot    9   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Intro (A=$0000), fMainMenu_AutoHowToPlay (A=$0000)
-;;
+; Slot 9: demo scene in !AREA_FARMSUMMER (music Summer).
+; Entry code: music Summer; hour $07; destination !AREA_FARMSUMMER.
+; Slot index: 9
+; Started by: fAreaEvents_Intro (A=$0000), fMainMenu_AutoHowToPlay (A=$0000)
 pAIScripting0x47_HowToPlay_Data10:
  
     %AICMD0x58_ReplaceFarmTile($02, 448, 528)                  ;B5B87B
@@ -1200,12 +1180,10 @@ pAIScripting0x47_HowToPlay_Data10:
     %AICMD0x10_End()                                           ;B5BBF9
 
 
-;;
-; @brief   Slot 10: demo scene in !AREA_SHED (music Summer).
-; @details Entry code: music Summer; hour $07; destination !AREA_SHED.
-; @slot    10   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Intro (A=$0000)
-;;
+; Slot 10: demo scene in !AREA_SHED (music Summer).
+; Entry code: music Summer; hour $07; destination !AREA_SHED.
+; Slot index: 10
+; Started by: fAreaEvents_Intro (A=$0000)
 pAIScripting0x47_HowToPlay_Data11:
  
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $06)       ;B5BBFA
@@ -1236,12 +1214,10 @@ pAIScripting0x47_HowToPlay_Data11:
     %AICMD0x10_End()                                           ;B5BC44
 
 
-;;
-; @brief   Slot 11: demo scene in !AREA_FARMSUMMER (music Summer).
-; @details Entry code: music Summer; hour $07; destination !AREA_FARMSUMMER.
-; @slot    11   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Intro (A=$0000), fMainMenu_AutoHowToPlay (A=$0000)
-;;
+; Slot 11: demo scene in !AREA_FARMSUMMER (music Summer).
+; Entry code: music Summer; hour $07; destination !AREA_FARMSUMMER.
+; Slot index: 11
+; Started by: fAreaEvents_Intro (A=$0000), fMainMenu_AutoHowToPlay (A=$0000)
 pAIScripting0x47_HowToPlay_Data12:
  
     %AICMD0x58_ReplaceFarmTile($02, 448, 528)                  ;B5BC45
@@ -1371,12 +1347,10 @@ pAIScripting0x47_HowToPlay_Data12:
     %AICMD0x10_End()                                           ;B5BEDD
 
 
-;;
-; @brief   Slot 12: demo scene in !AREA_SHED (music Summer).
-; @details Entry code: music Summer; hour $07; destination !AREA_SHED.
-; @slot    12   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Intro (A=$0000)
-;;
+; Slot 12: demo scene in !AREA_SHED (music Summer).
+; Entry code: music Summer; hour $07; destination !AREA_SHED.
+; Slot index: 12
+; Started by: fAreaEvents_Intro (A=$0000)
 pAIScripting0x47_HowToPlay_Data13:
  
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $06)       ;B5BEDE
@@ -1401,12 +1375,10 @@ pAIScripting0x47_HowToPlay_Data13:
     %AICMD0x10_End()                                           ;B5BF19
 
 
-;;
-; @brief   Slot 13: demo scene in !AREA_FARMSUMMER (music Summer).
-; @details Entry code: music Summer; hour $07; destination !AREA_FARMSUMMER.
-; @slot    13   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Intro (A=$0000), fMainMenu_AutoHowToPlay (A=$0000)
-;;
+; Slot 13: demo scene in !AREA_FARMSUMMER (music Summer).
+; Entry code: music Summer; hour $07; destination !AREA_FARMSUMMER.
+; Slot index: 13
+; Started by: fAreaEvents_Intro (A=$0000), fMainMenu_AutoHowToPlay (A=$0000)
 pAIScripting0x47_HowToPlay_Data14:
  
     %AICMD0x58_ReplaceFarmTile($02, 448, 528)                  ;B5BF1A
@@ -1539,12 +1511,10 @@ pAIScripting0x47_HowToPlay_Data14:
     %AICMD0x10_End()                                           ;B5C1BC
 
 
-;;
-; @brief   Slot 14: demo scene in !AREA_FARMFALL (music Fall).
-; @details Entry code: music Fall; hour $07; destination !AREA_FARMFALL.
-; @slot    14   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Intro (A=$0000)
-;;
+; Slot 14: demo scene in !AREA_FARMFALL (music Fall).
+; Entry code: music Fall; hour $07; destination !AREA_FARMFALL.
+; Slot index: 14
+; Started by: fAreaEvents_Intro (A=$0000)
 pAIScripting0x47_HowToPlay_Data15:
  
     %AICMD0x58_ReplaceFarmTile($02, 448, 528)                  ;B5C1BD
@@ -1665,12 +1635,10 @@ pAIScripting0x47_HowToPlay_Data15:
     %AICMD0x10_End()                                           ;B5C441
 
 
-;;
-; @brief   Slot 15: demo scene in !AREA_SHED (music Fall).
-; @details Entry code: music Fall; hour $07; destination !AREA_SHED.
-; @slot    15   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Intro (A=$0000)
-;;
+; Slot 15: demo scene in !AREA_SHED (music Fall).
+; Entry code: music Fall; hour $07; destination !AREA_SHED.
+; Slot index: 15
+; Started by: fAreaEvents_Intro (A=$0000)
 pAIScripting0x47_HowToPlay_Data16:
  
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $06)       ;B5C442
@@ -1699,12 +1667,10 @@ pAIScripting0x47_HowToPlay_Data16:
     %AICMD0x10_End()                                           ;B5C488
 
 
-;;
-; @brief   Slot 16: demo scene in !AREA_FARMFALL (music Fall).
-; @details Entry code: music Fall; hour $07; destination !AREA_FARMFALL.
-; @slot    16   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Intro (A=$0000)
-;;
+; Slot 16: demo scene in !AREA_FARMFALL (music Fall).
+; Entry code: music Fall; hour $07; destination !AREA_FARMFALL.
+; Slot index: 16
+; Started by: fAreaEvents_Intro (A=$0000)
 pAIScripting0x47_HowToPlay_Data17:
  
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $06)       ;B5C489
@@ -1725,12 +1691,10 @@ pAIScripting0x47_HowToPlay_Data17:
     %AICMD0x10_End()                                           ;B5C4B9
 
 
-;;
-; @brief   Slot 17: demo scene in !AREA_COWBARN (music Fall).
-; @details Entry code: music Fall; hour $07; destination !AREA_COWBARN; starts 2 child scripts (slots $01, $02).
-; @slot    17   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Intro (A=$0000), fMainMenu_AutoHowToPlay (A=$0000)
-;;
+; Slot 17: demo scene in !AREA_COWBARN (music Fall).
+; Entry code: music Fall; hour $07; destination !AREA_COWBARN; starts 2 child scripts (slots $01, $02).
+; Slot index: 17
+; Started by: fAreaEvents_Intro (A=$0000), fMainMenu_AutoHowToPlay (A=$0000)
 pAIScripting0x47_HowToPlay_Data18:
  
     %AICMD0x47_SetValue8(wram80(strcPlayerData.toolEquipped), 15)                          ;B5C4BA
@@ -1827,12 +1791,10 @@ pAIScripting0x47_HowToPlay_Data18_Actor02_Idle:
     %AICMD0x12_Jump(pAIScripting0x47_HowToPlay_Data18_Actor02_Idle)                                   ;B5C5D0
 
 
-;;
-; @brief   Slot 18: demo scene in !AREA_FARMFALL (music Fall).
-; @details Entry code: music Fall; hour $07; destination !AREA_FARMFALL.
-; @slot    18   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Intro (A=$0000)
-;;
+; Slot 18: demo scene in !AREA_FARMFALL (music Fall).
+; Entry code: music Fall; hour $07; destination !AREA_FARMFALL.
+; Slot index: 18
+; Started by: fAreaEvents_Intro (A=$0000)
 pAIScripting0x47_HowToPlay_Data19:
  
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $06)       ;B5C5D3
@@ -1854,12 +1816,10 @@ pAIScripting0x47_HowToPlay_Data19:
     %AICMD0x10_End()                                           ;B5C607
 
 
-;;
-; @brief   Slot 19: demo scene in !AREA_SHED (music Fall).
-; @details Entry code: music Fall; hour $07; destination !AREA_SHED.
-; @slot    19   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Intro (A=$0000)
-;;
+; Slot 19: demo scene in !AREA_SHED (music Fall).
+; Entry code: music Fall; hour $07; destination !AREA_SHED.
+; Slot index: 19
+; Started by: fAreaEvents_Intro (A=$0000)
 pAIScripting0x47_HowToPlay_Data20:
  
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $06)       ;B5C608
@@ -1885,12 +1845,10 @@ pAIScripting0x47_HowToPlay_Data20:
     %AICMD0x10_End()                                           ;B5C647
 
 
-;;
-; @brief   Slot 20: demo scene in !AREA_FARMFALL (music Fall).
-; @details Entry code: music Fall; hour $07; destination !AREA_FARMFALL.
-; @slot    20   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Intro (A=$0000)
-;;
+; Slot 20: demo scene in !AREA_FARMFALL (music Fall).
+; Entry code: music Fall; hour $07; destination !AREA_FARMFALL.
+; Slot index: 20
+; Started by: fAreaEvents_Intro (A=$0000)
 pAIScripting0x47_HowToPlay_Data21:
  
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $06)       ;B5C648
@@ -1911,12 +1869,10 @@ pAIScripting0x47_HowToPlay_Data21:
     %AICMD0x10_End()                                           ;B5C678
 
 
-;;
-; @brief   Slot 21: demo scene in !AREA_COWBARN (music Fall).
-; @details Entry code: music Fall; hour $07; destination !AREA_COWBARN; starts 2 child scripts (slots $01, $02).
-; @slot    21   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Intro (A=$0000), fMainMenu_AutoHowToPlay (A=$0000)
-;;
+; Slot 21: demo scene in !AREA_COWBARN (music Fall).
+; Entry code: music Fall; hour $07; destination !AREA_COWBARN; starts 2 child scripts (slots $01, $02).
+; Slot index: 21
+; Started by: fAreaEvents_Intro (A=$0000), fMainMenu_AutoHowToPlay (A=$0000)
 pAIScripting0x47_HowToPlay_Data22:
  
     %AICMD0x47_SetValue8(wram80(strcPlayerData.toolEquipped), 11)                          ;B5C679
@@ -2010,12 +1966,10 @@ pAIScripting0x47_HowToPlay_Data22_Actor02_Idle:
     %AICMD0x12_Jump(pAIScripting0x47_HowToPlay_Data22_Actor02_Idle)                                   ;B5C790
 
 
-;;
-; @brief   Slot 22: demo scene in !AREA_FARMFALL (music Fall).
-; @details Entry code: music Fall; hour $07; destination !AREA_FARMFALL; starts 1 child script (slots $01).
-; @slot    22   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Intro (A=$0000)
-;;
+; Slot 22: demo scene in !AREA_FARMFALL (music Fall).
+; Entry code: music Fall; hour $07; destination !AREA_FARMFALL; starts 1 child script (slots $01).
+; Slot index: 22
+; Started by: fAreaEvents_Intro (A=$0000)
 pAIScripting0x47_HowToPlay_Data23:
  
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $06)       ;B5C793
@@ -2046,12 +2000,10 @@ pAIScripting0x47_HowToPlay_Data23_Actor01_Idle:
     %AICMD0x12_Jump(pAIScripting0x47_HowToPlay_Data23_Actor01_Idle)                                   ;B5C7DB
 
 
-;;
-; @brief   Slot 23: demo scene in !AREA_COOP (music Fall).
-; @details Entry code: music Fall; hour $07; destination !AREA_COOP; starts 2 child scripts (slots $01, $02).
-; @slot    23   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Intro (A=$0000), fMainMenu_AutoHowToPlay (A=$0000)
-;;
+; Slot 23: demo scene in !AREA_COOP (music Fall).
+; Entry code: music Fall; hour $07; destination !AREA_COOP; starts 2 child scripts (slots $01, $02).
+; Slot index: 23
+; Started by: fAreaEvents_Intro (A=$0000), fMainMenu_AutoHowToPlay (A=$0000)
 pAIScripting0x47_HowToPlay_Data24:
  
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $06)       ;B5C7DE
@@ -2124,12 +2076,10 @@ pAIScripting0x47_HowToPlay_Data24_Actor02_Idle:
     %AICMD0x12_Jump(pAIScripting0x47_HowToPlay_Data24_Actor02_Idle)                                   ;B5C8AC
 
 
-;;
-; @brief   Slot 24: demo scene in !AREA_FARMFALL (music Fall).
-; @details Entry code: music Fall; hour $07; destination !AREA_FARMFALL; starts 1 child script (slots $01).
-; @slot    24   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Intro (A=$0000)
-;;
+; Slot 24: demo scene in !AREA_FARMFALL (music Fall).
+; Entry code: music Fall; hour $07; destination !AREA_FARMFALL; starts 1 child script (slots $01).
+; Slot index: 24
+; Started by: fAreaEvents_Intro (A=$0000)
 pAIScripting0x47_HowToPlay_Data25:
  
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $06)       ;B5C8AF
@@ -2157,13 +2107,11 @@ pAIScripting0x47_HowToPlay_Data25_Actor01_Idle:
     %AICMD0x12_Jump(pAIScripting0x47_HowToPlay_Data25_Actor01_Idle)                                   ;B5C8EB
 
 
-;;
-; @brief   Slot 25: demo scene in !AREA_DANCINGS2 (music HarvestFestival).
-; @details Entry code: music HarvestFestival; hour $07; destination !AREA_DANCINGS2; starts 12 child scripts (slots
+; Slot 25: demo scene in !AREA_DANCINGS2 (music HarvestFestival).
+; Entry code: music HarvestFestival; hour $07; destination !AREA_DANCINGS2; starts 12 child scripts (slots
 ;         $01, $03, $06, $07, $0B, $0D, $0E, $0F, $10, $11, $12, $13); dialogs $0241; then teleports to !AREA_INTRO.
-; @slot    25   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Intro (A=$0000), fMainMenu_AutoHowToPlay (A=$0000)
-;;
+; Slot index: 25
+; Started by: fAreaEvents_Intro (A=$0000), fMainMenu_AutoHowToPlay (A=$0000)
 pAIScripting0x47_HowToPlay_Data26:
  
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $06)       ;B5C8EE
@@ -2284,12 +2232,10 @@ pAIScripting0x47_HowToPlay_Data26_Actor13_Idle:
     %AICMD0x12_Jump(pAIScripting0x47_HowToPlay_Data26_Actor13_Idle)                                   ;B5C9FD
 
 
-;;
-; @brief   Slot 26: demo scene in !AREA_FARMWINTER (music Winter).
-; @details Entry code: music Winter; hour $07; destination !AREA_FARMWINTER.
-; @slot    26   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Intro (A=$0000)
-;;
+; Slot 26: demo scene in !AREA_FARMWINTER (music Winter).
+; Entry code: music Winter; hour $07; destination !AREA_FARMWINTER.
+; Slot index: 26
+; Started by: fAreaEvents_Intro (A=$0000)
 pAIScripting0x47_HowToPlay_Data27:
  
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $06)       ;B5CA00
@@ -2313,13 +2259,11 @@ pAIScripting0x47_HowToPlay_Data27:
     %AICMD0x10_End()                                           ;B5CA3C
 
 
-;;
-; @brief   Slot 27: demo scene in !AREA_TOWNWINTER (music Town).
-; @details Entry code: music Town; hour $07; destination !AREA_TOWNWINTER; starts 2 child scripts (slots $01, $02);
+; Slot 27: demo scene in !AREA_TOWNWINTER (music Town).
+; Entry code: music Town; hour $07; destination !AREA_TOWNWINTER; starts 2 child scripts (slots $01, $02);
 ;         dialogs $03B2; then teleports to !AREA_INTRO.
-; @slot    27   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Intro (A=$0000), fMainMenu_AutoHowToPlay (A=$0000)
-;;
+; Slot index: 27
+; Started by: fAreaEvents_Intro (A=$0000), fMainMenu_AutoHowToPlay (A=$0000)
 pAIScripting0x47_HowToPlay_Data28:
  
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $06)       ;B5CA3D
@@ -2362,12 +2306,10 @@ pAIScripting0x47_HowToPlay_Data28_Actor02_Idle:
     %AICMD0x12_Jump(pAIScripting0x47_HowToPlay_Data28_Actor02_Idle)                                   ;B5CA9F
 
 
-;;
-; @brief   Slot 28: demo scene in !AREA_WOODSWINTER (music Mountain).
-; @details Entry code: music Mountain; hour $07; destination !AREA_WOODSWINTER; then teleports to !AREA_INTRO.
-; @slot    28   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Intro (A=$0000)
-;;
+; Slot 28: demo scene in !AREA_WOODSWINTER (music Mountain).
+; Entry code: music Mountain; hour $07; destination !AREA_WOODSWINTER; then teleports to !AREA_INTRO.
+; Slot index: 28
+; Started by: fAreaEvents_Intro (A=$0000)
 pAIScripting0x47_HowToPlay_Data29:
  
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $06)       ;B5CAA2
@@ -2417,12 +2359,10 @@ pAIScripting0x47_HowToPlay_Data29:
     %AICMD0x10_End()                                           ;B5CB12
 
 
-;;
-; @brief   Slot 29: demo scene in !AREA_FARMSPRING (music Spring).
-; @details Entry code: music Spring; hour $07; destination !AREA_FARMSPRING; starts 1 child script (slots $01).
-; @slot    29   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Intro (A=$0000)
-;;
+; Slot 29: demo scene in !AREA_FARMSPRING (music Spring).
+; Entry code: music Spring; hour $07; destination !AREA_FARMSPRING; starts 1 child script (slots $01).
+; Slot index: 29
+; Started by: fAreaEvents_Intro (A=$0000)
 pAIScripting0x47_HowToPlay_Data30:
  
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily4, $06)       ;B5CB13
@@ -2456,10 +2396,8 @@ pAIScripting0x47_HowToPlay_Data30_Actor01_Idle:
     %AICMD0x12_Jump(pAIScripting0x47_HowToPlay_Data30_Actor01_Idle)                                   ;B5CB66
 
 
-;;
-; @brief   Slot 30: demo scene.
-; @slot    30, 31   (script slot index; AICMD0x09 / %AIExecute second argument)
-;;
+; Slot 30: demo scene.
+; Slot index: 30, 31
 pAIScripting0x47_HowToPlay_Data31:
  
     %AICMD0x10_End()                                           ;B5CB69

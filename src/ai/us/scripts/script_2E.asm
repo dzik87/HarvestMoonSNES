@@ -11,13 +11,11 @@
 
     incsrc "../../../../build/gen/ai/slots_2E.asm"
  
-;;
-; @brief   Slot 0.
-; @details Entry code: music Spring; hour $07; destination !AREA_HOUSE1, !AREA_HOUSE2, !AREA_HOUSE3; starts 3 child
+; Slot 0.
+; Entry code: music Spring; hour $07; destination !AREA_HOUSE1, !AREA_HOUSE2, !AREA_HOUSE3; starts 3 child
 ;         scripts (slots $01, $02, $03); then teleports to !AREA_ENDING00.
-; @slot    0   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaInit_HouseHelper (A=$0000)
-;;
+; Slot index: 0
+; Started by: fAreaInit_HouseHelper (A=$0000)
 pAIScripting0x2E_Data01:
     %AICMD0x00_SetMusic($01, $B4)                              ;B4C614
     %AICMD0x23_OrWithIndexedValue(strcFlags.daily3, $02)       ;B4C617

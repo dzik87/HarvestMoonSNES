@@ -11,13 +11,11 @@
 
     incsrc "../../../../build/gen/ai/slots_42.asm"
  
-;;
-; @brief   Slot 0: ending scene in !AREA_ENDING12.
-; @details Entry code: music Ending; hour $06; destination !AREA_ENDING12; starts 11 child scripts (slots $01, $02,
+; Slot 0: ending scene in !AREA_ENDING12.
+; Entry code: music Ending; hour $06; destination !AREA_ENDING12; starts 11 child scripts (slots $01, $02,
 ;         $03, $04, $05, $06, $07, $08, $09, $0A, $0B); then teleports to !AREA_ENDING00.
-; @slot    0   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Endings (A=$0000)
-;;
+; Slot index: 0
+; Started by: fAreaEvents_Endings (A=$0000)
 pAIScripting0x42_Data01:
  
     %AICMD0x00_SetMusic($10, $B4)                              ;B4E9A9
@@ -201,12 +199,10 @@ pAIScripting0x42_Data01_Actor09_Idle:
     %AICMD0x12_Jump(pAIScripting0x42_Data01_Actor09_Idle)                                   ;B4EB9E
 
 
-;;
-; @brief   Slot 1: ending scene in !AREA_ENDING13.
-; @details Entry code: music Ending; hour $06; destination !AREA_ENDING13; starts 12 child scripts (slots $01, $02,
+; Slot 1: ending scene in !AREA_ENDING13.
+; Entry code: music Ending; hour $06; destination !AREA_ENDING13; starts 12 child scripts (slots $01, $02,
 ;         $03, $04, $05, $06, $07, $08, $09, $0A, $0B, $0C); then teleports to !AREA_ENDING00.
-; @slot    1   (script slot index; AICMD0x09 / %AIExecute second argument)
-;;
+; Slot index: 1
 pAIScripting0x42_Data02:
  
     %AICMD0x00_SetMusic($10, $B4)                              ;B4EBA1
@@ -331,11 +327,9 @@ pAIScripting0x42_Data02_Actor0C_Idle:
     %AICMD0x12_Jump(pAIScripting0x42_Data02_Actor0C_Idle)                                   ;B4ECB1
 
 
-;;
-; @brief   Slot 2: ending scene.
-; @details Entry code: music Spring.
-; @slot    2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15   (script slot index; AICMD0x09 / %AIExecute second argument)
-;;
+; Slot 2: ending scene.
+; Entry code: music Spring.
+; Slot index: 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
 pAIScripting0x42_Data03:
  
     %AICMD0x00_SetMusic($00, $00)                              ;B4ECB4

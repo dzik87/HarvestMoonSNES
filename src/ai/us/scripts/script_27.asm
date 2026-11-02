@@ -13,13 +13,11 @@
 
     incsrc "../../../../build/gen/ai/slots_27.asm"
  
-;;
-; @brief   Slot 0: cake hand-over in the town square.
-; @details Entry code: starts 10 child scripts (slots $01, $02, $03, $04, $05, $0A, $06, $07, $08, $09); dialogs
+; Slot 0: cake hand-over in the town square.
+; Entry code: starts 10 child scripts (slots $01, $02, $03, $04, $05, $0A, $06, $07, $08, $09); dialogs
 ;         $0296, $0495, $0299, $0497, $029A, $0496 (+13 more).
-; @slot    0   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Town (A=$0000)
-;;
+; Slot index: 0
+; Started by: fAreaEvents_Town (A=$0000)
 pAIScripting0x27_Data01:
  
     %AICMD0x4F_DisableToolUse()                                               ;B4B67E
@@ -285,11 +283,9 @@ pAIScripting0x27_Data01_Actor09_Eve_Talk_02AB:
     %AICMD0x12_Jump(pAIScripting0x27_L002)                                   ;B4B944
 
 
-;;
-; @brief   Slot 1: married variant (the wife gives the cake).
-; @details Entry code: hour $06; starts 2 child scripts (slots $01, $02); dialogs $0292, $0293.
-; @slot    1   (script slot index; AICMD0x09 / %AIExecute second argument)
-;;
+; Slot 1: married variant (the wife gives the cake).
+; Entry code: hour $06; starts 2 child scripts (slots $01, $02); dialogs $0292, $0293.
+; Slot index: 1
 pAIScripting0x27_Data02:
  
     %AICMD0x4F_DisableToolUse()                                               ;B4B947
@@ -345,13 +341,11 @@ pAIScripting0x27_Data02_Actor02:
     %AICMD0x12_Jump(pAIScripting0x27_Data02_Idle)                                   ;B4B9BF
 
 
-;;
-; @brief   Slot 2: Thanksgiving cake gifts in the church.
-; @details Entry code: starts 4 child scripts (slots $01, $02, $03, $04); dialogs $029B, $0494, $029C, $029D, $029E,
+; Slot 2: Thanksgiving cake gifts in the church.
+; Entry code: starts 4 child scripts (slots $01, $02, $03, $04); dialogs $029B, $0494, $029C, $029D, $029E,
 ;         $02A0 (+1 more).
-; @slot    2   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Church (A=$0000)
-;;
+; Slot index: 2
+; Started by: fAreaEvents_Church (A=$0000)
 pAIScripting0x27_Data03:
  
     %AICMD0x4F_DisableToolUse()                                               ;B4B9C2
@@ -438,12 +432,10 @@ pAIScripting0x27_Data03_Actor04_Maria_Talk_029F:
     %AICMD0x12_Jump(pAIScripting0x27_Data03_Actor04_Maria_WaitTalk2)                                   ;B4BA8B
 
 
-;;
-; @brief   Slot 3: cake gifts in the Major's house.
-; @details Entry code: starts 2 child scripts (slots $01, $02); dialogs $0297, $0298.
-; @slot    3   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_MajorHouseHandler (A=$0000)
-;;
+; Slot 3: cake gifts in the Major's house.
+; Entry code: starts 2 child scripts (slots $01, $02); dialogs $0297, $0298.
+; Slot index: 3
+; Started by: fAreaEvents_MajorHouseHandler (A=$0000)
 pAIScripting0x27_Data04:
     %AICMD0x4F_DisableToolUse()                                               ;B4BA8E
     %AICMD0x50()                                               ;B4BA8F

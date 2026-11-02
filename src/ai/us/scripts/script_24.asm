@@ -11,12 +11,10 @@
 
     incsrc "../../../../build/gen/ai/slots_24.asm"
  
-;;
-; @brief   Slot 0: neighbour announces the festival of the next day, chosen by nWeatherForecast.
-; @details Entry code: starts 1 child script (slots $02); dialogs $0272, $0240, $028E, $026E, $0289, $0274 (+1 more).
-; @slot    0   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Farm (A=$0006)
-;;
+; Slot 0: neighbour announces the festival of the next day, chosen by nWeatherForecast.
+; Entry code: starts 1 child script (slots $02); dialogs $0272, $0240, $028E, $026E, $0289, $0274 (+1 more).
+; Slot index: 0
+; Started by: fAreaEvents_Farm (A=$0006)
 pAIScripting0x24_Data01:
  
     %AICMD0x08_EnableAIControl()                               ;B4A475
@@ -90,12 +88,10 @@ pAIScripting0x24_Data01_Actor02:
     %AICMD0x10_End()                                           ;B4A530
 
 
-;;
-; @brief   Slot 1: neighbour greeting (dialog $047F).
-; @details Entry code: dialogs $047F.
-; @slot    1   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Farm (A=$000B)
-;;
+; Slot 1: neighbour greeting (dialog $047F).
+; Entry code: dialogs $047F.
+; Slot index: 1
+; Started by: fAreaEvents_Farm (A=$000B)
 pAIScripting0x24_Data02:
  
     %AICMD0x08_EnableAIControl()                               ;B4A531
@@ -114,12 +110,10 @@ pAIScripting0x24_Data02:
     %AICMD0x10_End()                                           ;B4A55C
 
 
-;;
-; @brief   Slot 2: neighbour greeting about a loud noise in the morning (dialog $0486).
-; @details Entry code: dialogs $0486.
-; @slot    2   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Farm (A=$0006)
-;;
+; Slot 2: neighbour greeting about a loud noise in the morning (dialog $0486).
+; Entry code: dialogs $0486.
+; Slot index: 2
+; Started by: fAreaEvents_Farm (A=$0006)
 pAIScripting0x24_Data03:
  
     %AICMD0x08_EnableAIControl()                               ;B4A55D
@@ -138,12 +132,10 @@ pAIScripting0x24_Data03:
     %AICMD0x10_End()                                           ;B4A588
 
 
-;;
-; @brief   Slot 3: neighbour greeting about the earthquake in the morning (dialog $0142).
-; @details Entry code: dialogs $0142.
-; @slot    3   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Farm (A=$0006)
-;;
+; Slot 3: neighbour greeting about the earthquake in the morning (dialog $0142).
+; Entry code: dialogs $0142.
+; Slot index: 3
+; Started by: fAreaEvents_Farm (A=$0006)
 pAIScripting0x24_Data04:
     %AICMD0x08_EnableAIControl()                               ;B4A589
     %AICMD0x1A($FFF8, $01A8, aAIScriptingData_L028, $02)                     ;B4A58A

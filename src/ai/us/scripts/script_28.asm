@@ -12,12 +12,10 @@
 
     incsrc "../../../../build/gen/ai/slots_28.asm"
  
-;;
-; @brief   Slot 0: New Year's morning in the house.
-; @details Entry code: dialogs $02F5; then teleports to !AREA_MOUNTAINTOPSUNRISE.
-; @slot    0   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_House (A=$0000)
-;;
+; Slot 0: New Year's morning in the house.
+; Entry code: dialogs $02F5; then teleports to !AREA_MOUNTAINTOPSUNRISE.
+; Slot index: 0
+; Started by: fAreaEvents_House (A=$0000)
 pAIScripting0x28_Data01:
  
     %AICMD0x4F_DisableToolUse()                                               ;B4BAEB
@@ -34,14 +32,12 @@ pAIScripting0x28_Data01:
     %AICMD0x10_End()                                           ;B4BB05
 
 
-;;
-; @brief   Slot 1: sunrise gathering on the mountain top.
-; @details Entry code: music StarNightFestival; hour $06; destination !AREA_MOUNTAINTOPSUNRISE; starts 9 child scripts
+; Slot 1: sunrise gathering on the mountain top.
+; Entry code: music StarNightFestival; hour $06; destination !AREA_MOUNTAINTOPSUNRISE; starts 9 child scripts
 ;         (slots $01, $02, $03, $04, $05, $06, $07, $08, $09); dialogs $02CE, $02CF, $001A, $02D3, $02D4, $02D8 (+12
 ;         more); changes love of Maria, Eve.
-; @slot    1   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_MountainTopSpringDay1 (A=$0000)
-;;
+; Slot index: 1
+; Started by: fAreaEvents_MountainTopSpringDay1 (A=$0000)
 pAIScripting0x28_Data02:
  
     %AICMD0x4F_DisableToolUse()                                               ;B4BB06
@@ -283,14 +279,12 @@ pAIScripting0x28_Data02_Actor09_Eve_Talk_0293:
     %AICMD0x12_Jump(pAIScripting0x28_Data02_Actor09_Eve_WaitTalk2)                                   ;B4BD16
 
 
-;;
-; @brief   Slot 2: Egg Festival game.
-; @details Entry code: music EggFestival; hour $07; destination !AREA_EGGFESTIVAL; starts 12 child scripts (slots $01,
+; Slot 2: Egg Festival game.
+; Entry code: music EggFestival; hour $07; destination !AREA_EGGFESTIVAL; starts 12 child scripts (slots $01,
 ;         $02, $03, $04, $05, $06, $07, $08, $09, $0A); dialogs $02DD, $02DE, $0236, $02DF, $02E7, $02E8 (+18 more);
 ;         changes love of Ann, Nina, Ellen; then teleports to !AREA_EGGFESTIVAL.
-; @slot    2   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Town (A=$0000)
-;;
+; Slot index: 2
+; Started by: fAreaEvents_Town (A=$0000)
 pAIScripting0x28_Data03:
  
     %AICMD0x4F_DisableToolUse()                                               ;B4BD19
@@ -863,13 +857,11 @@ pAIScripting0x28_L168:
     %AICMD0x10_End()                                           ;B4C3AB
 
 
-;;
-; @brief   Slot 3: Egg Festival prize ceremony.
-; @details Entry code: hour $07; destination !AREA_EGGFESTIVAL; starts 9 child scripts (slots $01, $02, $03, $04, $05,
+; Slot 3: Egg Festival prize ceremony.
+; Entry code: hour $07; destination !AREA_EGGFESTIVAL; starts 9 child scripts (slots $01, $02, $03, $04, $05,
 ;         $06, $07, $08, $09); dialogs $038F, $02EA, $02EC, $02ED.
-; @slot    3   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_EggFestival (A=$0000)
-;;
+; Slot index: 3
+; Started by: fAreaEvents_EggFestival (A=$0000)
 pAIScripting0x28_Data04:
     %AICMD0x4F_DisableToolUse()                                               ;B4C3AC
     %AICMD0x50()                                               ;B4C3AD

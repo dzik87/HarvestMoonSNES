@@ -10,13 +10,11 @@
 
     incsrc "../../../../build/gen/ai/slots_3C.asm"
  
-;;
-; @brief   Slot 0: ending scene in !AREA_ENDING04.
-; @details Entry code: music Ending; hour $06; destination !AREA_ENDING04; starts 4 child scripts (slots $01, $02,
+; Slot 0: ending scene in !AREA_ENDING04.
+; Entry code: music Ending; hour $06; destination !AREA_ENDING04; starts 4 child scripts (slots $01, $02,
 ;         $03, $04); then teleports to !AREA_ENDING00.
-; @slot    0   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Endings (A=$0000)
-;;
+; Slot index: 0
+; Started by: fAreaEvents_Endings (A=$0000)
 pAIScripting0x3C_Data01:
  
     %AICMD0x00_SetMusic($10, $B4)                              ;B4DCED
@@ -132,13 +130,11 @@ pAIScripting0x3C_Data01_Actor03_Idle:
     %AICMD0x12_Jump(pAIScripting0x3C_Data01_Actor03_Idle)                                   ;B4DE3B
 
 
-;;
-; @brief   Slot 1: ending scene in !AREA_WOODSSPRING.
-; @details Entry code: music Ending; hour $07; destination !AREA_WOODSSPRING; starts 7 child scripts (slots $01, $02,
+; Slot 1: ending scene in !AREA_WOODSSPRING.
+; Entry code: music Ending; hour $07; destination !AREA_WOODSSPRING; starts 7 child scripts (slots $01, $02,
 ;         $03, $04, $05, $06, $07); then teleports to !AREA_ENDING00.
-; @slot    1   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Endings (A=$0000)
-;;
+; Slot index: 1
+; Started by: fAreaEvents_Endings (A=$0000)
 pAIScripting0x3C_Data02:
     %AICMD0x00_SetMusic($10, $B4)                              ;B4DE3E
     %AICMD0x02_FreezeTime()                                    ;B4DE41

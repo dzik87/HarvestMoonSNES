@@ -11,12 +11,10 @@
 
     incsrc "../../../../build/gen/ai/slots_29.asm"
  
-;;
-; @brief   Slot 0.
-; @details Entry code: starts 1 child script (slots $01); dialogs $041B, $0418, $0419, $041A.
-; @slot    0   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Farm (A=$0000)
-;;
+; Slot 0.
+; Entry code: starts 1 child script (slots $01); dialogs $041B, $0418, $0419, $041A.
+; Slot index: 0
+; Started by: fAreaEvents_Farm (A=$0000)
 pAIScripting0x29_Data01:
     %AICMD0x09_StartScript($01, pAIScripting0x29_Data01_Actor01)                                   ;B4C447
     %AICMD0x38_WaitForFadeIn()                                               ;B4C44B

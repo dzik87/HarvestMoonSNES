@@ -9,13 +9,11 @@
 
     incsrc "../../../../build/gen/ai/slots_3E.asm"
  
-;;
-; @brief   Slot 0: ending scene in !AREA_WOODSSUMMER.
-; @details Entry code: music Ending; hour $07; destination !AREA_WOODSSUMMER; starts 8 child scripts (slots $01, $02,
+; Slot 0: ending scene in !AREA_WOODSSUMMER.
+; Entry code: music Ending; hour $07; destination !AREA_WOODSSUMMER; starts 8 child scripts (slots $01, $02,
 ;         $03, $04, $05, $06, $07, $08); then teleports to !AREA_ENDING00.
-; @slot    0   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Endings (A=$0000)
-;;
+; Slot index: 0
+; Started by: fAreaEvents_Endings (A=$0000)
 pAIScripting0x3E_Data01:
     %AICMD0x00_SetMusic($10, $B4)                              ;B4E220
     %AICMD0x02_FreezeTime()                                    ;B4E223

@@ -12,12 +12,10 @@
 
     incsrc "../../../../build/gen/ai/slots_45.asm"
  
-;;
-; @brief   Slot 0: first child, variant 1 (age stages and location).
-; @details Entry code: dialogs $01C2, $041D, $041E, $01D9, $01C0, $01C1.
-; @slot    0   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_House (A=$0014), fPlayerAction0x1A (A=$0014)
-;;
+; Slot 0: first child, variant 1 (age stages and location).
+; Entry code: dialogs $01C2, $041D, $041E, $01D9, $01C0, $01C1.
+; Slot index: 0
+; Started by: fAreaEvents_House (A=$0014), fPlayerAction0x1A (A=$0014)
 pAIScripting0x45_Data01:
  
     %AICMD0x14_JumpIfFlagSet($800196, $01, pAIScripting0x45_L001)            ;B5A205
@@ -100,11 +98,9 @@ pAIScripting0x45_L018:
     %AICMD0x12_Jump(pAIScripting0x45_L018)                                   ;B5A2FA
 
 
-;;
-; @brief   Slot 1: first child, variant 2 (age stages and location).
-; @slot    1   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Farm (A=$0014)
-;;
+; Slot 1: first child, variant 2 (age stages and location).
+; Slot index: 1
+; Started by: fAreaEvents_Farm (A=$0014)
 pAIScripting0x45_Data02:
  
     %AICMD0x45_JumpIfBetween16(nFirstChildAge, 0, 89, pAIScripting0x45_L034) ;B5A2FD
@@ -175,11 +171,9 @@ pAIScripting0x45_L034:
     %AICMD0x10_End()                                           ;B5A406
 
 
-;;
-; @brief   Slot 2: first child, variant 3 (age stages and location).
-; @slot    2   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Shed (A=$0014)
-;;
+; Slot 2: first child, variant 3 (age stages and location).
+; Slot index: 2
+; Started by: fAreaEvents_Shed (A=$0014)
 pAIScripting0x45_Data03:
  
     %AICMD0x45_JumpIfBetween16(nFirstChildAge, 0, 89, pAIScripting0x45_L040) ;B5A407
@@ -218,12 +212,10 @@ pAIScripting0x45_Data03_WaitInteract:
     %AICMD0x12_Jump(pAIScripting0x45_Data03_WaitInteract)                                   ;B5A481
 
 
-;;
-; @brief   Slot 3: second child, variant 1 (age stages and location).
-; @details Entry code: dialogs $01C2, $041D, $041E, $01D9, $01C0, $01C1.
-; @slot    3   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_House (A=$0015), fPlayerAction0x1A (A=$0015)
-;;
+; Slot 3: second child, variant 1 (age stages and location).
+; Entry code: dialogs $01C2, $041D, $041E, $01D9, $01C0, $01C1.
+; Slot index: 3
+; Started by: fAreaEvents_House (A=$0015), fPlayerAction0x1A (A=$0015)
 pAIScripting0x45_Data04:
  
     %AICMD0x14_JumpIfFlagSet($800196, $01, pAIScripting0x45_L044)            ;B5A484
@@ -306,11 +298,9 @@ pAIScripting0x45_L061:
     %AICMD0x12_Jump(pAIScripting0x45_L061)                                   ;B5A579
 
 
-;;
-; @brief   Slot 4: second child, variant 2 (age stages and location).
-; @slot    4   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Farm (A=$0015)
-;;
+; Slot 4: second child, variant 2 (age stages and location).
+; Slot index: 4
+; Started by: fAreaEvents_Farm (A=$0015)
 pAIScripting0x45_Data05:
  
     %AICMD0x45_JumpIfBetween16(nSecondChildAge, 0, 89, pAIScripting0x45_L077);B5A57C
@@ -381,11 +371,9 @@ pAIScripting0x45_L077:
     %AICMD0x10_End()                                           ;B5A685
 
 
-;;
-; @brief   Slot 5: second child, variant 3 (age stages and location).
-; @slot    5   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Shed (A=$0015)
-;;
+; Slot 5: second child, variant 3 (age stages and location).
+; Slot index: 5
+; Started by: fAreaEvents_Shed (A=$0015)
 pAIScripting0x45_Data06:
     %AICMD0x45_JumpIfBetween16(nSecondChildAge, 0, 89, pAIScripting0x45_L083);B5A686
     %AICMD0x14_JumpIfFlagSet(strcFlags.event2, $00, pAIScripting0x45_L078)   ;B5A690

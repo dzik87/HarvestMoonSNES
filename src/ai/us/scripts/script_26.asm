@@ -13,14 +13,12 @@
 
     incsrc "../../../../build/gen/ai/slots_26.asm"
  
-;;
-; @brief   Slot 0: Harvest Festival in the town square.
-; @details Entry code: music HarvestFestival; hour $07; destination !AREA_DANCINGS2; starts 25 child scripts (slots
+; Slot 0: Harvest Festival in the town square.
+; Entry code: music HarvestFestival; hour $07; destination !AREA_DANCINGS2; starts 25 child scripts (slots
 ;         $01, $03, $06, $07, $0B, $0D, $0E, $0F, $10, $11, $12, $13, $14); dialogs $0241, $0243, $0242, $0244, $0286,
 ;         $028C (+67 more); changes love of Maria, Ann, Nina, Ellen, Eve; then teleports to !AREA_DANCINGS2.
-; @slot    0   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Town (A=$0000)
-;;
+; Slot index: 0
+; Started by: fAreaEvents_Town (A=$0000)
 pAIScripting0x26_Data01:
  
     %AICMD0x4F_DisableToolUse()                                               ;B4A62D
@@ -1197,13 +1195,11 @@ pAIScripting0x26_L184:
     %AICMD0x12_Jump(pAIScripting0x26_L184)                                   ;B4B48B
 
 
-;;
-; @brief   Slot 1: dance in !AREA_DANCINGS2.
-; @details Entry code: music Dance; hour $07; destination !AREA_DANCINGS2; starts 7 child scripts (slots $01, $02,
+; Slot 1: dance in !AREA_DANCINGS2.
+; Entry code: music Dance; hour $07; destination !AREA_DANCINGS2; starts 7 child scripts (slots $01, $02,
 ;         $03, $04, $05, $06, $08).
-; @slot    1   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Festival2 (A=$0000)
-;;
+; Slot index: 1
+; Started by: fAreaEvents_Festival2 (A=$0000)
 pAIScripting0x26_Data02:
     %AICMD0x4F_DisableToolUse()                                               ;B4B48E
     %AICMD0x50()                                               ;B4B48F

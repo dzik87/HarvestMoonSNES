@@ -11,12 +11,10 @@
  
     incsrc "../../../../build/gen/ai/slots_43.asm"
  
-;;
-; @brief   Slot 0: the wife's behaviour when Maria is the spouse.
-; @details Entry code: dialogs $0200, $03B0, $03B2, $03B5, $01D9, $0212 (+42 more); changes love of Maria.
-; @slot    0   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_House (A=$0013)
-;;
+; Slot 0: the wife's behaviour when Maria is the spouse.
+; Entry code: dialogs $0200, $03B0, $03B2, $03B5, $01D9, $0212 (+42 more); changes love of Maria.
+; Slot index: 0
+; Started by: fAreaEvents_House (A=$0013)
 pAIScripting0x43_Data01:
  
     %AICMD0x14_JumpIfFlagSet($800196, $01, pAIScripting0x43_L001)            ;B58020
@@ -337,12 +335,10 @@ pAIScripting0x43_L062:
     %AICMD0x10_End()                                           ;B584D9
 
 
-;;
-; @brief   Slot 1: the wife's behaviour when Ann is the spouse.
-; @details Entry code: dialogs $0200, $03B4, $0212, $03B2, $01BD, $041D (+40 more); changes love of Ann.
-; @slot    1   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_House (A=$0013)
-;;
+; Slot 1: the wife's behaviour when Ann is the spouse.
+; Entry code: dialogs $0200, $03B4, $0212, $03B2, $01BD, $041D (+40 more); changes love of Ann.
+; Slot index: 1
+; Started by: fAreaEvents_House (A=$0013)
 pAIScripting0x43_Data02:
  
     %AICMD0x14_JumpIfFlagSet($800196, $01, pAIScripting0x43_L063)            ;B584DA
@@ -663,12 +659,10 @@ pAIScripting0x43_L124:
     %AICMD0x10_End()                                           ;B5898F
 
 
-;;
-; @brief   Slot 2: the wife's behaviour when Nina is the spouse.
-; @details Entry code: dialogs $0200, $03B1, $0212, $03B2, $03BA, $01BD (+40 more); changes love of Nina.
-; @slot    2   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_House (A=$0013)
-;;
+; Slot 2: the wife's behaviour when Nina is the spouse.
+; Entry code: dialogs $0200, $03B1, $0212, $03B2, $03BA, $01BD (+40 more); changes love of Nina.
+; Slot index: 2
+; Started by: fAreaEvents_House (A=$0013)
 pAIScripting0x43_Data03:
  
     %AICMD0x14_JumpIfFlagSet($800196, $01, pAIScripting0x43_L125)            ;B58990
@@ -990,12 +984,10 @@ pAIScripting0x43_L186:
     %AICMD0x10_End()                                           ;B58E4D
 
 
-;;
-; @brief   Slot 3: the wife's behaviour when Ellen is the spouse.
-; @details Entry code: dialogs $0200, $01D9, $03B2, $0212, $03B3, $03BA (+42 more); changes love of Ellen.
-; @slot    3   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_House (A=$0013)
-;;
+; Slot 3: the wife's behaviour when Ellen is the spouse.
+; Entry code: dialogs $0200, $01D9, $03B2, $0212, $03B3, $03BA (+42 more); changes love of Ellen.
+; Slot index: 3
+; Started by: fAreaEvents_House (A=$0013)
 pAIScripting0x43_Data04:
  
     %AICMD0x14_JumpIfFlagSet($800196, $01, pAIScripting0x43_L187)            ;B58E4E
@@ -1320,12 +1312,10 @@ pAIScripting0x43_L249:
     %AICMD0x10_End()                                           ;B59312
 
 
-;;
-; @brief   Slot 4: the wife's behaviour when Eve is the spouse.
-; @details Entry code: dialogs $0200, $03B4, $03B2, $0212, $03BA, $01BD (+40 more); changes love of Eve.
-; @slot    4   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_House (A=$0013)
-;;
+; Slot 4: the wife's behaviour when Eve is the spouse.
+; Entry code: dialogs $0200, $03B4, $03B2, $0212, $03BA, $01BD (+40 more); changes love of Eve.
+; Slot index: 4
+; Started by: fAreaEvents_House (A=$0013)
 pAIScripting0x43_Data05:
     %AICMD0x14_JumpIfFlagSet($800196, $01, pAIScripting0x43_L250)            ;B59313
     %AICMD0x15_JumpIfEquals8(nCurrentSeasonID, 3, pAIScripting0x43_L250)     ;B5931A

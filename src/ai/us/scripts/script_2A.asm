@@ -11,11 +11,9 @@
 
     incsrc "../../../../build/gen/ai/slots_2A.asm"
  
-;;
-; @brief   Slot 0.
-; @slot    0   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fMap_ScreenTransitionHandler (A=$0012)
-;;
+; Slot 0.
+; Slot index: 0
+; Started by: fMap_ScreenTransitionHandler (A=$0012)
 pAIScripting0x2A_Data01:
     %AICMD0x1A($0218, $0078, aAIScriptingData_L133, $00)                     ;B4C4D8
     %AICMD0x13_Wait(1)                                         ;B4C4E0

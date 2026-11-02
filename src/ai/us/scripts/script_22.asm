@@ -13,13 +13,11 @@
 
     incsrc "../../../../build/gen/ai/slots_22.asm"
  
-;;
-; @brief   Slot 0: the wife announces she is going home (player standing, happiness -50), with the house still as it was.
-; @details Used by fAreaEvents_House when the wife is angry. Entry code: starts 1 child script (slots $01); dialogs
+; Slot 0: the wife announces she is going home (player standing, happiness -50), with the house still as it was.
+; Used by fAreaEvents_House when the wife is angry. Entry code: starts 1 child script (slots $01); dialogs
 ;         $019A.
-; @slot    0   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_House (A=$0000)
-;;
+; Slot index: 0
+; Started by: fAreaEvents_House (A=$0000)
 pAIScripting0x22_Data01:
  
     %AICMD0x50()                                               ;B49FF8
@@ -52,11 +50,9 @@ pAIScripting0x22_Data01_Actor01:
     %AICMD0x10_End()                                           ;B4A044
 
 
-;;
-; @brief   Slot 1: same scene as Data01 but the player is placed at (136,120) first and no happiness penalty is applied.
-; @details Entry code: starts 1 child script (slots $01); dialogs $019A.
-; @slot    1   (script slot index; AICMD0x09 / %AIExecute second argument)
-;;
+; Slot 1: same scene as Data01 but the player is placed at (136,120) first and no happiness penalty is applied.
+; Entry code: starts 1 child script (slots $01); dialogs $019A.
+; Slot index: 1
 pAIScripting0x22_Data02:
  
     %AICMD0x50()                                               ;B4A045
@@ -89,10 +85,8 @@ pAIScripting0x22_Data02_Actor01:
     %AICMD0x10_End()                                           ;B4A090
 
 
-;;
-; @brief   Slot 2: dispatcher on event4 bits 0-4 that selects one of the parents' scenes. No AIExecute call with slot 2 exists (?).
-; @slot    2   (script slot index; AICMD0x09 / %AIExecute second argument)
-;;
+; Slot 2: dispatcher on event4 bits 0-4 that selects one of the parents' scenes. No AIExecute call with slot 2 exists (?).
+; Slot index: 2
 pAIScripting0x22_Data03:
  
     %AICMD0x50()                                               ;B4A091
@@ -104,12 +98,10 @@ pAIScripting0x22_Data03:
     %AICMD0x10_End()                                           ;B4A0B5
 
 
-;;
-; @brief   Slot 3: the Major's house (Maria's father): he says Maria is in the back room (dialog $01D8).
-; @details Entry code: starts 1 child script (slots $01); dialogs $01D8.
-; @slot    3   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_MajorHouse (A=$0000)
-;;
+; Slot 3: the Major's house (Maria's father): he says Maria is in the back room (dialog $01D8).
+; Entry code: starts 1 child script (slots $01); dialogs $01D8.
+; Slot index: 3
+; Started by: fAreaEvents_MajorHouse (A=$0000)
 pAIScripting0x22_MajorHouse:
  
     %AICMD0x50()                                               ;B4A0B6
@@ -129,12 +121,10 @@ pAIScripting0x22_MajorHouse_Actor01_Talk_01D8:
     %AICMD0x12_Jump(pAIScripting0x22_MajorHouse_Actor01_WaitTalk)                                   ;B4A0CF
 
 
-;;
-; @brief   Slot 4: Maria's bedroom: the player picks her up, +100 love (nLove_Maria).
-; @details Entry code: starts 1 child script (slots $01); dialogs $019B; changes love of Maria.
-; @slot    4   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_MariaBedroom (A=$0000)
-;;
+; Slot 4: Maria's bedroom: the player picks her up, +100 love (nLove_Maria).
+; Entry code: starts 1 child script (slots $01); dialogs $019B; changes love of Maria.
+; Slot index: 4
+; Started by: fAreaEvents_MariaBedroom (A=$0000)
 pAIScripting0x22_MariaBedroom:
  
     %AICMD0x50()                                               ;B4A0D2
@@ -167,12 +157,10 @@ pAIScripting0x22_MariaBedroom_Actor01_Maria_Idle:
     %AICMD0x12_Jump(pAIScripting0x22_MariaBedroom_Actor01_Maria_Idle)                                   ;B4A11B
 
 
-;;
-; @brief   Slot 5: tool shop (Ann's father) comments that she came home in a hurry (dialog $01DF).
-; @details Entry code: starts 1 child script (slots $01); dialogs $01DF.
-; @slot    5   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Toolshop (A=$0000)
-;;
+; Slot 5: tool shop (Ann's father) comments that she came home in a hurry (dialog $01DF).
+; Entry code: starts 1 child script (slots $01); dialogs $01DF.
+; Slot index: 5
+; Started by: fAreaEvents_Toolshop (A=$0000)
 pAIScripting0x22_ToolShop:
  
     %AICMD0x50()                                               ;B4A11E
@@ -193,12 +181,10 @@ pAIScripting0x22_ToolShop_Actor01_Talk_01DF:
     %AICMD0x12_Jump(pAIScripting0x22_ToolShop_Actor01_WaitTalk)                                   ;B4A13E
 
 
-;;
-; @brief   Slot 6: Ann's bedroom: the player makes it up with Ann, +100 love (nLove_Ann).
-; @details Entry code: starts 1 child script (slots $01); dialogs $019C; changes love of Ann.
-; @slot    6   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_AnnBedroom (A=$0000)
-;;
+; Slot 6: Ann's bedroom: the player makes it up with Ann, +100 love (nLove_Ann).
+; Entry code: starts 1 child script (slots $01); dialogs $019C; changes love of Ann.
+; Slot index: 6
+; Started by: fAreaEvents_AnnBedroom (A=$0000)
 pAIScripting0x22_AnnBedroom:
  
     %AICMD0x50()                                               ;B4A141
@@ -246,12 +232,10 @@ pAIScripting0x22_AnnBedroom_Actor01_Ann_Idle:
     %AICMD0x12_Jump(pAIScripting0x22_AnnBedroom_Actor01_Ann_Idle)                                   ;B4A1B9
 
 
-;;
-; @brief   Slot 7: florist (Nina's mother) comments on the situation (dialog $01E9).
-; @details Entry code: starts 1 child script (slots $01); dialogs $01E9.
-; @slot    7   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Florist (A=$0000)
-;;
+; Slot 7: florist (Nina's mother) comments on the situation (dialog $01E9).
+; Entry code: starts 1 child script (slots $01); dialogs $01E9.
+; Slot index: 7
+; Started by: fAreaEvents_Florist (A=$0000)
 pAIScripting0x22_Florist:
  
     %AICMD0x50()                                               ;B4A1BC
@@ -271,12 +255,10 @@ pAIScripting0x22_Florist_Actor01_Talk_01E9:
     %AICMD0x12_Jump(pAIScripting0x22_Florist_Actor01_WaitTalk)                                   ;B4A1D5
 
 
-;;
-; @brief   Slot 8: Nina's bedroom, +100 love (nLove_Nina).
-; @details Entry code: starts 1 child script (slots $01); dialogs $019D; changes love of Nina.
-; @slot    8   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_NinaBedroom (A=$0000)
-;;
+; Slot 8: Nina's bedroom, +100 love (nLove_Nina).
+; Entry code: starts 1 child script (slots $01); dialogs $019D; changes love of Nina.
+; Slot index: 8
+; Started by: fAreaEvents_NinaBedroom (A=$0000)
 pAIScripting0x22_Data04:
  
     %AICMD0x50()                                               ;B4A1D8
@@ -336,12 +318,10 @@ pAIScripting0x22_Data04_Actor01_Nina_Idle:
     %AICMD0x12_Jump(pAIScripting0x22_Data04_Actor01_Nina_Idle)                                   ;B4A275
 
 
-;;
-; @brief   Slot 9: restaurant (Ellen's father), dialog $01B1.
-; @details Entry code: starts 1 child script (slots $01); dialogs $01B1.
-; @slot    9   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Restaurant (A=$0000)
-;;
+; Slot 9: restaurant (Ellen's father), dialog $01B1.
+; Entry code: starts 1 child script (slots $01); dialogs $01B1.
+; Slot index: 9
+; Started by: fAreaEvents_Restaurant (A=$0000)
 pAIScripting0x22_Data05:
  
     %AICMD0x50()                                               ;B4A278
@@ -362,12 +342,10 @@ pAIScripting0x22_Data05_Actor01_Talk_01B1:
     %AICMD0x12_Jump(pAIScripting0x22_Data05_Actor01_WaitTalk)                                   ;B4A294
 
 
-;;
-; @brief   Slot 10: Ellen's bedroom, +100 love (nLove_Ellen).
-; @details Entry code: starts 1 child script (slots $01); dialogs $019E; changes love of Ellen.
-; @slot    10   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_EllenBedroom (A=$0000)
-;;
+; Slot 10: Ellen's bedroom, +100 love (nLove_Ellen).
+; Entry code: starts 1 child script (slots $01); dialogs $019E; changes love of Ellen.
+; Slot index: 10
+; Started by: fAreaEvents_EllenBedroom (A=$0000)
 pAIScripting0x22_Data06:
  
     %AICMD0x50()                                               ;B4A297
@@ -410,12 +388,10 @@ pAIScripting0x22_Data06_Actor01_Ellen_Idle:
     %AICMD0x12_Jump(pAIScripting0x22_Data06_Actor01_Ellen_Idle)                                   ;B4A2FE
 
 
-;;
-; @brief   Slot 11: bar (Eve's grandfather), dialog $01EA.
-; @details Entry code: starts 1 child script (slots $01); dialogs $01EA.
-; @slot    11   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Bar (A=$0000)
-;;
+; Slot 11: bar (Eve's grandfather), dialog $01EA.
+; Entry code: starts 1 child script (slots $01); dialogs $01EA.
+; Slot index: 11
+; Started by: fAreaEvents_Bar (A=$0000)
 pAIScripting0x22_Data07:
  
     %AICMD0x50()                                               ;B4A301
@@ -436,12 +412,10 @@ pAIScripting0x22_Data07_Actor01_Talk_01EA:
     %AICMD0x12_Jump(pAIScripting0x22_Data07_Actor01_WaitTalk)                                   ;B4A31E
 
 
-;;
-; @brief   Slot 12: Eve's bedroom, +100 love (nLove_Eve).
-; @details Entry code: starts 1 child script (slots $01); dialogs $019F; changes love of Eve.
-; @slot    12   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_EveBedroom (A=$0000)
-;;
+; Slot 12: Eve's bedroom, +100 love (nLove_Eve).
+; Entry code: starts 1 child script (slots $01); dialogs $019F; changes love of Eve.
+; Slot index: 12
+; Started by: fAreaEvents_EveBedroom (A=$0000)
 pAIScripting0x22_Data08:
     %AICMD0x50()                                               ;B4A321
     %AICMD0x08_EnableAIControl()                               ;B4A322

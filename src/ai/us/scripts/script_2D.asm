@@ -10,11 +10,9 @@
 
     incsrc "../../../../build/gen/ai/slots_2D.asm"
  
-;;
-; @brief   Slot 0.
-; @details Entry code: starts 1 child script (slots $01).
-; @slot    0   (script slot index; AICMD0x09 / %AIExecute second argument)
-;;
+; Slot 0.
+; Entry code: starts 1 child script (slots $01).
+; Slot index: 0
 pAIScripting0x2D_Data01:
     %AICMD0x07_SetPlayerDirection(!PDIR_UP)                    ;B4C5A4
     %AICMD0x09_StartScript($01, pAIScripting0x2D_Data01_Actor01)                                   ;B4C5A6

@@ -13,12 +13,10 @@
 
     incsrc "../../../../build/gen/ai/slots_46.asm"
  
-;;
-; @brief   Slot 0: credits page on !AREA_CREDITS0.
-; @details Entry code: music Title; hour $06; destination !AREA_CREDITS0; then teleports to !AREA_ENDING00.
-; @slot    0   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Endings (A=$0000)
-;;
+; Slot 0: credits page on !AREA_CREDITS0.
+; Entry code: music Title; hour $06; destination !AREA_CREDITS0; then teleports to !AREA_ENDING00.
+; Slot index: 0
+; Started by: fAreaEvents_Endings (A=$0000)
 pAIScripting0x46_Data01:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A723
@@ -35,12 +33,10 @@ pAIScripting0x46_Data01:
     %AICMD0x10_End()                                           ;B5A73C
 
 
-;;
-; @brief   Slot 1: credits page on !AREA_CREDITS1.
-; @details Entry code: music Title; hour $06; destination !AREA_CREDITS1; then teleports to !AREA_ENDING00.
-; @slot    1   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Endings (A=$0000)
-;;
+; Slot 1: credits page on !AREA_CREDITS1.
+; Entry code: music Title; hour $06; destination !AREA_CREDITS1; then teleports to !AREA_ENDING00.
+; Slot index: 1
+; Started by: fAreaEvents_Endings (A=$0000)
 pAIScripting0x46_Data02:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A73D
@@ -57,12 +53,10 @@ pAIScripting0x46_Data02:
     %AICMD0x10_End()                                           ;B5A756
 
 
-;;
-; @brief   Slot 2: credits page on !AREA_CREDITS2.
-; @details Entry code: music Title; hour $06; destination !AREA_CREDITS2; then teleports to !AREA_ENDING00.
-; @slot    2   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Endings (A=$0000)
-;;
+; Slot 2: credits page on !AREA_CREDITS2.
+; Entry code: music Title; hour $06; destination !AREA_CREDITS2; then teleports to !AREA_ENDING00.
+; Slot index: 2
+; Started by: fAreaEvents_Endings (A=$0000)
 pAIScripting0x46_Data03:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A757
@@ -79,12 +73,10 @@ pAIScripting0x46_Data03:
     %AICMD0x10_End()                                           ;B5A770
 
 
-;;
-; @brief   Slot 3: credits page on !AREA_CREDITS3.
-; @details Entry code: music Title; hour $06; destination !AREA_CREDITS3; then teleports to !AREA_ENDING00.
-; @slot    3   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Endings (A=$0000)
-;;
+; Slot 3: credits page on !AREA_CREDITS3.
+; Entry code: music Title; hour $06; destination !AREA_CREDITS3; then teleports to !AREA_ENDING00.
+; Slot index: 3
+; Started by: fAreaEvents_Endings (A=$0000)
 pAIScripting0x46_Data04:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A771
@@ -101,12 +93,10 @@ pAIScripting0x46_Data04:
     %AICMD0x10_End()                                           ;B5A78A
 
 
-;;
-; @brief   Slot 4: credits page on !AREA_CREDITS4.
-; @details Entry code: music Title; hour $06; destination !AREA_CREDITS4; then teleports to !AREA_ENDING00.
-; @slot    4   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Endings (A=$0000)
-;;
+; Slot 4: credits page on !AREA_CREDITS4.
+; Entry code: music Title; hour $06; destination !AREA_CREDITS4; then teleports to !AREA_ENDING00.
+; Slot index: 4
+; Started by: fAreaEvents_Endings (A=$0000)
 pAIScripting0x46_Data05:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A78B
@@ -123,12 +113,10 @@ pAIScripting0x46_Data05:
     %AICMD0x10_End()                                           ;B5A7A4
 
 
-;;
-; @brief   Slot 5: credits page on !AREA_DRIVETOTOWN.
-; @details Entry code: music Title; hour $06; destination !AREA_DRIVETOTOWN; then teleports to !AREA_ENDING00.
-; @slot    5   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Endings (A=$0000)
-;;
+; Slot 5: credits page on !AREA_DRIVETOTOWN.
+; Entry code: music Title; hour $06; destination !AREA_DRIVETOTOWN; then teleports to !AREA_ENDING00.
+; Slot index: 5
+; Started by: fAreaEvents_Endings (A=$0000)
 pAIScripting0x46_Data06:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A7A5
@@ -145,12 +133,10 @@ pAIScripting0x46_Data06:
     %AICMD0x10_End()                                           ;B5A7BE
 
 
-;;
-; @brief   Slot 6: credits page on !AREA_CREDITS4_BL.
-; @details Entry code: music Title; hour $06; destination !AREA_CREDITS4_BL; then teleports to !AREA_ENDING00.
-; @slot    6   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Endings (A=$0000)
-;;
+; Slot 6: credits page on !AREA_CREDITS4_BL.
+; Entry code: music Title; hour $06; destination !AREA_CREDITS4_BL; then teleports to !AREA_ENDING00.
+; Slot index: 6
+; Started by: fAreaEvents_Endings (A=$0000)
 pAIScripting0x46_Data07:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A7BF
@@ -167,12 +153,10 @@ pAIScripting0x46_Data07:
     %AICMD0x10_End()                                           ;B5A7D8
 
 
-;;
-; @brief   Slot 7: credits page on !AREA_CREDITS4_BR.
-; @details Entry code: music Title; hour $06; destination !AREA_CREDITS4_BR; then teleports to !AREA_ENDING00.
-; @slot    7   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Endings (A=$0000)
-;;
+; Slot 7: credits page on !AREA_CREDITS4_BR.
+; Entry code: music Title; hour $06; destination !AREA_CREDITS4_BR; then teleports to !AREA_ENDING00.
+; Slot index: 7
+; Started by: fAreaEvents_Endings (A=$0000)
 pAIScripting0x46_Data08:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A7D9
@@ -189,12 +173,10 @@ pAIScripting0x46_Data08:
     %AICMD0x10_End()                                           ;B5A7F2
 
 
-;;
-; @brief   Slot 8: credits page on !AREA_STAFFROLLJP_BR.
-; @details Entry code: music Title; hour $06; destination !AREA_STAFFROLLJP_BR; then teleports to !AREA_ENDING00.
-; @slot    8   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Endings (A=$0000)
-;;
+; Slot 8: credits page on !AREA_STAFFROLLJP_BR.
+; Entry code: music Title; hour $06; destination !AREA_STAFFROLLJP_BR; then teleports to !AREA_ENDING00.
+; Slot index: 8
+; Started by: fAreaEvents_Endings (A=$0000)
 pAIScripting0x46_Data09:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A7F3
@@ -211,12 +193,10 @@ pAIScripting0x46_Data09:
     %AICMD0x10_End()                                           ;B5A80C
 
 
-;;
-; @brief   Slot 9: credits page on !AREA_STAFFROLLJP_TL.
-; @details Entry code: music Title; hour $06; destination !AREA_STAFFROLLJP_TL; then teleports to !AREA_ENDING00.
-; @slot    9   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Endings (A=$0000)
-;;
+; Slot 9: credits page on !AREA_STAFFROLLJP_TL.
+; Entry code: music Title; hour $06; destination !AREA_STAFFROLLJP_TL; then teleports to !AREA_ENDING00.
+; Slot index: 9
+; Started by: fAreaEvents_Endings (A=$0000)
 pAIScripting0x46_Data10:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A80D
@@ -233,12 +213,10 @@ pAIScripting0x46_Data10:
     %AICMD0x10_End()                                           ;B5A826
 
 
-;;
-; @brief   Slot 10: credits page on !AREA_STAFFROLLJP_TR.
-; @details Entry code: music Title; hour $06; destination !AREA_STAFFROLLJP_TR; then teleports to !AREA_ENDING00.
-; @slot    10   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Endings (A=$0000)
-;;
+; Slot 10: credits page on !AREA_STAFFROLLJP_TR.
+; Entry code: music Title; hour $06; destination !AREA_STAFFROLLJP_TR; then teleports to !AREA_ENDING00.
+; Slot index: 10
+; Started by: fAreaEvents_Endings (A=$0000)
 pAIScripting0x46_Data11:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A827
@@ -255,12 +233,10 @@ pAIScripting0x46_Data11:
     %AICMD0x10_End()                                           ;B5A840
 
 
-;;
-; @brief   Slot 11: credits page on !AREA_STAFFROLLJP_BL.
-; @details Entry code: music Title; hour $06; destination !AREA_STAFFROLLJP_BL; then teleports to !AREA_ENDING00.
-; @slot    11   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Endings (A=$0000)
-;;
+; Slot 11: credits page on !AREA_STAFFROLLJP_BL.
+; Entry code: music Title; hour $06; destination !AREA_STAFFROLLJP_BL; then teleports to !AREA_ENDING00.
+; Slot index: 11
+; Started by: fAreaEvents_Endings (A=$0000)
 pAIScripting0x46_Data12:
  
     %AICMD0x00_SetMusic($0B, $B4)                              ;B5A841
@@ -279,14 +255,12 @@ pAIScripting0x46_Data12:
     %AICMD0x10_End()                                           ;B5A85C
 
 
-;;
-; @brief   Slot 12: credits page on !AREA_MNTTOPENDINGSUMMER.
-; @details Entry code: music StarNightFestival; hour $10; destination !AREA_MNTTOPENDINGSUMMER; starts 13 child
+; Slot 12: credits page on !AREA_MNTTOPENDINGSUMMER.
+; Entry code: music StarNightFestival; hour $10; destination !AREA_MNTTOPENDINGSUMMER; starts 13 child
 ;         scripts (slots $01, $02, $03, $04, $05, $06, $07, $08); dialogs $0444, $0445, $0446, $044D, $044E, $044F
 ;         (+22 more).
-; @slot    12   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Endings (A=$0000)
-;;
+; Slot index: 12
+; Started by: fAreaEvents_Endings (A=$0000)
 pAIScripting0x46_Data13:
     %AICMD0x00_SetMusic($0E, $B4)                              ;B5A85D
     %AICMD0x01_UnfreezeTime()                                  ;B5A860

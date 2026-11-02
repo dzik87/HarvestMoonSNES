@@ -11,11 +11,9 @@
 
     incsrc "../../../../build/gen/ai/slots_25.asm"
  
-;;
-; @brief   Slot 0.
-; @details Entry code: starts 1 child script (slots $01); dialogs $0300.
-; @slot    0   (script slot index; AICMD0x09 / %AIExecute second argument)
-;;
+; Slot 0.
+; Entry code: starts 1 child script (slots $01); dialogs $0300.
+; Slot index: 0
 pAIScripting0x25_Data01:
     %AICMD0x02_FreezeTime()                                    ;B4A5D5
     %AICMD0x05_SetTransferPosition(136, 344)                   ;B4A5D6

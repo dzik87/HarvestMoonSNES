@@ -11,12 +11,10 @@
 
     incsrc "../../../../build/gen/ai/slots_23.asm"
  
-;;
-; @brief   Slot 0.
-; @details Entry code: starts 3 child scripts (slots $0C, $0D, $0E).
-; @slot    0   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Farm (A=$0000)
-;;
+; Slot 0.
+; Entry code: starts 3 child scripts (slots $0C, $0D, $0E).
+; Slot index: 0
+; Started by: fAreaEvents_Farm (A=$0000)
 pAIScripting0x23_Data01:
     %AICMD0x09_StartScript($0C, pAIScripting0x23_Data01_Actor0C)                                   ;B4A39F
     %AICMD0x09_StartScript($0D, pAIScripting0x23_Data01_Actor0D)                                   ;B4A3A3

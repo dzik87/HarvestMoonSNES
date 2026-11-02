@@ -11,12 +11,10 @@
 
     incsrc "../../../../build/gen/ai/slots_21.asm"
  
-;;
-; @brief   Start of the rabbit scene: starts the child actor and waits for the player to talk to the man.
-; @details Entry code: starts 2 child scripts (slots $13, $09); dialogs $0330, $0331, $0332, $0333, $0334.
-; @slot    0   (script slot index; AICMD0x09 / %AIExecute second argument)
-; @callers fAreaEvents_Woods (A=$0009)
-;;
+; Start of the rabbit scene: starts the child actor and waits for the player to talk to the man.
+; Entry code: starts 2 child scripts (slots $13, $09); dialogs $0330, $0331, $0332, $0333, $0334.
+; Slot index: 0
+; Started by: fAreaEvents_Woods (A=$0009)
 pAIScripting0x21_Data01:
     %AICMD0x09_StartScript($13, pAIScripting0x21_Data01_Actor13)                                   ;B49F33
     %AICMD0x10_End()                                           ;B49F37
