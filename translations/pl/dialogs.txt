@@ -218,7 +218,7 @@ Trawa rośnie też jesienią, więc przed zimą warto nakosić jej sporo.<END>
 Oby wszyscy nie zapominali o życzliwości dla innych…<END>
 
 @@ sDialog_0x0049 @@
-……..<END>
+…………<END>
 
 @@ sDialog_0x004A @@
 Co? W soboty i niedziele sklep jest zamknięty, więc wygrzewam się na słońcu.<NEXT>Fajnie, prawda?<END>
@@ -359,7 +359,7 @@ Nie wiadomo, co się w życiu przydarzy.<NEXT>Na wszelki wypadek lepiej odkłada
 Pieniądze są ważne, ale najważniejsza jest miłość! Miłość!!<NEXT>Ty też tak myślisz, prawda?<END>
 
 @@ sDialog_0x0078 @@
-Jestem wędrownym handlarzem. Chociaż rzadko cokolwiek sprzedaję.<NEXT>Jak masz coś do sprzedania, połóż to na tamtym stole.<END>
+Jestem wędrownym domokrążcą. Chociaż rzadko cokolwiek sprzedaję.<NEXT>Jak masz coś do sprzedania, połóż to na tamtym stole.<END>
 
 @@ sDialog_0x0079 @@
 W dzień po deszczu lub śniegu płoty łatwo się łamią.<NEXT>Złamany płot rozbij młotem i postaw nowy.<END>
@@ -368,7 +368,7 @@ W dzień po deszczu lub śniegu płoty łatwo się łamią.<NEXT>Złamany płot 
 Żyję w górach z polowania.<NEXT>Eve każe mi zejść do miasta, ale nie mam zamiaru zmieniać obecnego życia.<END>
 
 @@ sDialog_0x007B @@
-Znasz owoc siły? Jak go zjesz, trochę sił przybywa.<END>
+Znasz Jagodę Mocy? Jak go zjesz, trochę sił przybywa.<END>
 
 @@ sDialog_0x007C @@
 Gdy pada deszcz, wstęp na szczyt jest zakazany, bo to niebezpieczne.<END>
@@ -2326,7 +2326,7 @@ Na zdrowie, pod pięknym nocnym niebem! No, pij do dna!♥<END>
 Hej! Dobrze się bawisz?<NEXT>Wypijmy za gwiazdy, które nas ze sobą spotkały!<END>
 
 @@ sDialog_0x02CB @@
-Widziałeś? Co roku tu spada gwiazda. To miejsce to nasza tajemnica, tylko we dwoje.<END>
+Widziałeś? Co roku tu spada gwiazda.<NEXT>To miejsce to nasza tajemnica, tylko we dwoje.<END>
 
 @@ sDialog_0x02CC @@
 Wypowiedziałeś jakieś życzenie? A Nina… hihi… to tajemnica.♥<END>
@@ -2890,7 +2890,7 @@ To stare, zniszczone organy.<END>
 No to się pomodlę.<END>
 
 @@ sDialog_0x0387 @@
- Rodzaj wody: siarczana<BR>Działanie: reumatyzm<BR>odzyskanie sił<END>
+Rodzaj wody: siarczana<BR>Działanie: reumatyzm<BR>odzyskanie sił<END>
 
 @@ sDialog_0x0388 @@
 Nic tu nie ma.<END>
