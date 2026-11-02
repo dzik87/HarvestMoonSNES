@@ -1329,7 +1329,7 @@ Jaki ładny dom nam wyszedł.<END>
 
 @@ sDialog_0x01A2 @@
 Wiesz… Ja… no…<NEXT>
-Chyba będziemy mieć dziecko.<END>
+Chyba będziemy mieć dziecko♥<END>
 
 @@ sDialog_0x01A3 @@
 Urodzi się dopiero za jakiś czas.<END>
@@ -1338,7 +1338,7 @@ Urodzi się dopiero za jakiś czas.<END>
 Zastanów się, jakie imię byłoby dobre.<END>
 
 @@ sDialog_0x01A5 @@
-Ciało zrobiło się trochę ciężkie.<END>
+Czuję się trochę ciężka.<END>
 
 @@ sDialog_0x01A6 @@
 Ciekawe, czy to chłopiec, czy dziewczynka.<END>
@@ -1396,7 +1396,7 @@ Brawo!<END>
 Ojej, wykapana Nina. No, ale okolice oczu chyba ma po tobie.<END>
 
 @@ sDialog_0x01B8 @@
-Teraz zacznie się ciężko. Dawaj, trzymaj się.<END>
+Teraz zacznie się ciężko. Trzymaj się dzielnie.<END>
 
 @@ sDialog_0x01B9 @@
 Przypomina mi się, jak rodziła się Eve.<END>
@@ -1429,10 +1429,10 @@ Pa-pa!<END>
 Pu-pu!<END>
 
 @@ sDialog_0x01C3 @@
-To "Niebieskie Pióro Szczęścia". Cóż, każdy rozumie szczęście po<NEXT>
-swojemu.<NEXT>
+To "Niebieskie Pióro Szczęścia". Cóż, każdy inaczej rozumie szczęście.<NEXT>
+
 Teraz tylko 1000G!<NEXT>
-<OPTLBL 1>Kup<OPTLBL 2>Nie kupuj<POS 58>Kasa <NUM 7 14>0G<OPT 2>
+<OPTLBL 1>Kupuję<OPTLBL 2>Nie kupuję<POS 58>Kasa <NUM 7 14>0G<OPT 2>
 
 @@ sDialog_0x01C4 @@
 Szczęścia w życiu!<END>
@@ -1447,7 +1447,7 @@ Ach, daj spokój, jestem mężatką.<END>
 Z kogo ty sobie żarty stroisz, chłopcze!<END>
 
 @@ sDialog_0x01C8 @@
-Dobrze! Dawaj! Powodzenia!<END>
+Dobra! Do dzieła! Powodzenia!<END>
 
 @@ sDialog_0x01C9 @@
 Hej, hej, nie tej osobie to dajesz.<END>
@@ -1468,8 +1468,8 @@ Błagam! Poszukaj Marii!<END>
 Ach, Maria! Tata był niedobry! Wróć do nas!!<END>
 
 @@ sDialog_0x01CE @@
-Zwykle to spokojna dziewczyna… Powód? Hohoho…<NEXT>
-to wina mojego męża.<NEXT>
+Zwykle to spokojna dziewczyna… Powód? Hohoho… To wina mojego męża.<NEXT>
+
 Przepraszam za kłopot. Proszę o pomoc.<END>
 
 @@ sDialog_0x01CF @@
