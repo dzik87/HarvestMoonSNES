@@ -2978,7 +2978,7 @@ Co?! To… to kurze pióro?!<END>
 "Sekretna rabata"<BR>Wstęp wzbroniony!!<END>
 
 @@ sDialog_0x03A5 @@
-Festiwale w roku<BR>Wiosna, dzień 1:<BR>Festiwal Nowego Roku<NEXT>Wiosna, dzień 23:<BR>Festiwal Kwiatów<NEXT>Jesień, dzień 12:<BR>Festiwal Zbiorów<NEXT>Jesień, dzień 20:<BR>Festiwal Jajek<NEXT>Zima, dzień 10:<BR>Festiwal Dziękczynienia<NEXT>Zima, dzień 24:<BR>Festiwal Gwiezdnej Nocy<END>
+Festiwale w roku<BR>Wiosna, dzień 1:<BR>Festiwal Nowego Roku Wiosna,<NEXT>dzień 23:<BR>Festiwal Kwiatów Jesień,<NEXT>dzień 12:<BR>Festiwal Zbiorów Jesień,<NEXT>dzień 20:<BR>Festiwal Jajek Zima,<NEXT>dzień 10:<BR>Festiwal Dziękczynienia Zima,<NEXT>dzień 24:<BR>Festiwal Gwiezdnej Nocy<END>
 
 @@ sDialog_0x03A6 @@
 ♥<END>
@@ -3260,7 +3260,7 @@ Przezwyciężanie trudności to coś bardzo ważnego dla człowieka.<END>
 Ciężko było, co? Ale w życiu każde doświadczenie się liczy! Doświadczenie!<END>
 
 @@ sDialog_0x0403 @@
-Mężczyzna musi być człowiekiem czynu! Trzeba na nim polegać, kiedy przyjdzie co do czego!<END>
+Mężczyzna musi być człowiekiem czynu!<NEXT>Trzeba na nim polegać, kiedy przyjdzie co do czego!<END>
 
 @@ sDialog_0x0404 @@
 Sklep otwieramy o 5, więc wpadnij ♥<END>
