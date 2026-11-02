@@ -2143,7 +2143,7 @@ fInput_PlayerButtonY_Return:
  
 ;;
 ; @brief   Sets player action $10 (cast the fishing rod).
-; @note    confidence: medium - action $10 shows sprite object $89 and ends in !PACTION_FISHING (fPlayerAction0x10).
+; @note    confidence: medium - action $10 shows sprite object $89 and ends in !PACTION_FISHING (fPlayerAction_FishingCast).
 ;;
 fInput_SetPlayerAction_FishingCast:
     %SetPlayerAction(!PACTION_10)

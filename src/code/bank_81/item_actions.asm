@@ -7,7 +7,7 @@
 ;   7 wait for the shipping tile script, 8 destroy; shop shelf items use phases 0-3 and $FF. The item data tables (frame lists, sell/buy/found
 ;   data) are generated from assets/tables/data/carried_items.csv and included at the start of items_misc.asm.
 ; @bank   $81   @range $818000-$8196AE
-; @see    items_misc.asm, player_actions.asm (fPlayerAction0x04), docs/findings.md (Carried items), assets/tables/data/carried_items.csv
+; @see    items_misc.asm, player_actions.asm (fPlayerAction_PickUpItem), docs/findings.md (Carried items), assets/tables/data/carried_items.csv
 ;;
 
  
@@ -28,7 +28,7 @@
 ; @clobbers A X Y
 ; @mode    ? -> M8X16
 ; @calls   fItemCarried_LoadPoseData, fObjectSlots_Allocate, fStoreTileOnFrontOfPlayerAtDistance, fSetTileAtCoords, fAudio_PlaySoundEffect
-; @callers fPlayerAction0x04
+; @callers fPlayerAction_PickUpItem
 ; @note    The pointer read with strcMap.pSelected is not fully understood. confidence: low - only the table lookup is certain.
 ;;
 fItemCarried_Begin:

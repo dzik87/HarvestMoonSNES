@@ -1141,7 +1141,7 @@ fGameEngine_CheckTileCollision:
 ; @return  A      0 = money updated, 1 = result would be negative (money unchanged)
 ; @modifies nMoney, ptrUnknown0x75
 ; @mode    M16X16 -> M16X16
-; @callers fNextDayHandler, fItemBuy_HandleAnswer, fItemSell_HandleAnswer, fToolUsedAction0x02_Plow, fToolUsedAction0x12_GoldenPlow, fAIAction0x42_AddValue24, fPlayerInteraction0x2E_AnimalNPC, fPlayerInteraction0x43, fPlayerInteraction0x44, fPlayerInteraction0x47, fPlayerInteraction0x51, fPlayerInteraction0x52
+; @callers fNextDayHandler, fItemBuy_HandleAnswer, fItemSell_HandleAnswer, fToolUsedAction0x02_Plow, fToolUsedAction0x12_GoldenPlow, fAIAction0x42_AddValue24, fPlayerInteraction_LivestockDealerMenu, fPlayerInteraction_SellCow, fPlayerInteraction_SellChicken, fPlayerInteraction_HouseExpansion, fPlayerInteraction_BuyRiceBall, fPlayerInteraction_BuyDumpling
 ;;
 fGameEngine_AddProfit:
     REP #$30                                                   ;83B1C9|C230    |      ; $72: nProfit24, return A: nStatus
@@ -1198,7 +1198,7 @@ fGameEngine_AddProfit:
 ; @return  A      0 = stored, 1 = result negative (not enough wood, store unchanged)
 ; @modifies nStoredWood, strcVariables.n16Temp1
 ; @mode    M16X16 -> M16X16
-; @callers fPlayerInteraction0x01_WoodStorage, fPlayerInteraction0x47, fToolUsedAction0x04_Axe, fToolUsedAction0x14_GoldenAxe
+; @callers fPlayerInteraction0x01_WoodStorage, fPlayerInteraction_HouseExpansion, fToolUsedAction0x04_Axe, fToolUsedAction0x14_GoldenAxe
 ;;
 fGameEngine_AddWood:
     REP #$30                                                   ;83B224|C230    |      ; A: nWood, return A: nStatus
@@ -1274,7 +1274,7 @@ fGameEngine_AddFeed:
 ; @return  A      0 = stored, 1 = result negative (value unchanged)
 ; @modifies nPlayerHappiness, strcVariables.n16Temp1
 ; @mode    M16X16 -> M16X16
-; @callers fGameEngine_AddCow, fGameEngine_AnimalsDailyUpdate, fEvents_UpdateMarriageAndChildGrowth, fItemCarried_PlaceEggInIncubator, fAreaEvents_Farm, fPlayerAction0x08, fPlayerAction0x13, fPlayerInteraction0x26_MariaDiary, fPlayerInteraction0x2D_NinaDiary, fPlayerInteraction0x2E_AnimalNPC, fPlayerInteraction0x33_EllenDiary, fPlayerInteraction0x36_AnnDiary
+; @callers fGameEngine_AddCow, fGameEngine_AnimalsDailyUpdate, fEvents_UpdateMarriageAndChildGrowth, fItemCarried_PlaceEggInIncubator, fAreaEvents_Farm, fPlayerAction_ConsumeItem, fPlayerAction_FishingReel, fPlayerInteraction0x26_MariaDiary, fPlayerInteraction0x2D_NinaDiary, fPlayerInteraction_LivestockDealerMenu, fPlayerInteraction0x33_EllenDiary, fPlayerInteraction0x36_AnnDiary
 ;;
 fGameEngine_AddHappiness:
     REP #$30                                                   ;83B282|C230    |      ; A: nHappiness, return A: nStatus
@@ -4070,7 +4070,7 @@ fGameEngine_SpawnChickensOnMap:
 ; @clobbers X Y
 ; @mode    M16X16 -> M16X16
 ; @calls   fGameEngine_GetChickenData
-; @callers fItemCarried_PlaceEggInIncubator (kind 0), fPlayerInteraction0x2E_AnimalNPC (kind 2)
+; @callers fItemCarried_PlaceEggInIncubator (kind 0), fPlayerInteraction_LivestockDealerMenu (kind 2)
 ; @note    The in-code comments said "baby" for status $09 and "adult" for $43; with !CHICKENSTATUS_* bits $08 is adult and $43 is egg+incubator (comments fixed).
 ;          Kind 1 has no caller in the US code (?).
 ;;
@@ -4309,7 +4309,7 @@ fGameEngine_AddCow:
 ; @param   A      chicken index (0-12)
 ; @return  ptrTemp0x72  24-bit pointer $7E:C286 + index * 8 (strcChickenData entry)
 ; @mode    M16X16 -> M8X16
-; @callers fGameEngine_AnimalsDailyUpdate, fGameEngine_SpawnChickensOnMap, fGameEngine_AddChicken, fAIAction0x30_UpdateChicken, fAIAction0x50_ReleaseCarried, fAIAction0x51_ReleaseCarriedAnimal, fItemCarriedAnimal_PutDown, fPlayerInteraction0x44
+; @callers fGameEngine_AnimalsDailyUpdate, fGameEngine_SpawnChickensOnMap, fGameEngine_AddChicken, fAIAction0x30_UpdateChicken, fAIAction0x50_ReleaseCarried, fAIAction0x51_ReleaseCarriedAnimal, fItemCarriedAnimal_PutDown, fPlayerInteraction_SellChicken
 ;;
 fGameEngine_GetChickenData:
     REP #$30                                                   ;83C995|C230    |      ; A: nIndex, return $72: ptr24 pChickenData
@@ -4330,7 +4330,7 @@ fGameEngine_GetChickenData:
 ; @param   A      cow index (0-11)
 ; @return  ptrTemp0x72  24-bit pointer $7E:C1C6 + index * 16 (strcCowData entry)
 ; @mode    M16X16 -> M8X16
-; @callers fGameEngine_AnimalsDailyUpdate, fGameEngine_SpawnChickensOnMap, fGameEngine_AddCow, fAIAction0x31_UpdateCow, fAreaEvents_Endings, fAreaEvents_House, fAreaEvents_House_PrepareEnding, fPlayerInteraction0x43
+; @callers fGameEngine_AnimalsDailyUpdate, fGameEngine_SpawnChickensOnMap, fGameEngine_AddCow, fAIAction0x31_UpdateCow, fAreaEvents_Endings, fAreaEvents_House, fAreaEvents_House_PrepareEnding, fPlayerInteraction_SellCow
 ;;
 fGameEngine_GetCowData:
     REP #$30                                                   ;83C9A7|C230    |      ; A: nIndex, return $72: ptr24 pCowData

@@ -332,7 +332,7 @@ fObject_Destroy:
 ; @return  strcObject.exists   sign extension of the frame timer byte (strcGameObject.objectDataPointer+2): 0 or $FFFF - used by callers to detect that the animation reached a $FF-timer step (?)
 ; @clobbers A X
 ; @mode    M16X16
-; @note    confidence: medium on the meaning of the exists value; callers compare strcObjectData.exist with $FFFF (see fPlayerAction0x10).
+; @note    confidence: medium on the meaning of the exists value; callers compare strcObjectData.exist with $FFFF (see fPlayerAction_FishingCast).
 ;;
 fObject_GetSingleObjectData:
     REP #$30                                                   ;8581CB|C230    |      ;

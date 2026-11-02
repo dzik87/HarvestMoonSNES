@@ -3,7 +3,7 @@
 ; @brief  Tool use: sound effects of the equipped tool, the use animation (player sprite) and the use action (effect on the tile or animal in
 ;         front of the player) for each of the 28 tools, plus the shared front-tile helpers.
 ; @details Tool ids are !EITEM_* ($00 empty hand .. $1B fishing pole). fToolUsedAnimationHandler starts the animation (aToolUsedAnimationTable),
-;          fToolUsedActionHandler runs when the swing connects (aToolUsedActionTable, called from fPlayerAction0x0A). Every action handler
+;          fToolUsedActionHandler runs when the swing connects (aToolUsedActionTable, called from fPlayerAction_UseTool). Every action handler
 ;          first asks fSound_GetToolSound (via fToolUsed_GetSoundForFrontTile) whether the tool works on the object in front: A = 0 nothing,
 ;          1 works, 2 water spot (watering can only); X returns the object id. Object ids are those of the area object map (see object_map.asm),
 ;          new tiles are written with fSetTileAtCoords, debris/effects are spawned with fObjectSlots_Allocate.
@@ -23,7 +23,7 @@
 ; @modifies strcAudio.reg114, strcAudio.reg115
 ; @mode    M8
 ; @calls   fAudioSetRegister2to0A
-; @callers fPlayerAction0x0A
+; @callers fPlayerAction_UseTool
 ;;
 fToolUsedSound_PlayToolHit:
     SEP #$20                                                   ;828FB1|E220    |      ;
@@ -69,7 +69,7 @@ fToolUsedSound_PlayToolHit:
 ; @modifies strcAudio.reg114, strcAudio.reg115, strcAudio.index, strcAudio.toolId
 ; @mode    M8X16
 ; @calls   fAudio_PrepareSoundEffectSample
-; @callers fAIAction0x2C_PlaySoundWait, fItemCarriedTool_EquipFromShed, fMap_SetupArea, fPlayerAction0x1C, fPlayerInteraction0x03, fPlayerInteraction0x35
+; @callers fAIAction0x2C_PlaySoundWait, fItemCarriedTool_EquipFromShed, fMap_SetupArea, fPlayerAction_SwapTool, fPlayerInteraction_RingBell, fPlayerInteraction_PlaySoundAndWait
 ; @note    confidence: medium - the role of strcAudio.unk118 and the second sample are only inferred.
 ;;
 fToolUsedSound_PlayOnToolChange:
@@ -618,7 +618,7 @@ fToolUsedAnimation0x1B_FishingPole:
 ; @modifies strcFlags.daily1
 ; @mode    M8X16
 ; @calls   fToolUsedAction0x00_Empty .. fToolUsedAction0x1B_FishingPole (through aToolUsedActionTable)
-; @callers fPlayerAction0x0A
+; @callers fPlayerAction_UseTool
 ; @region  DE reads the table at a fixed $A780, JP through aToolUsedActionTable_JP (the two tables are one block there).
 ;;
 fToolUsedActionHandler:

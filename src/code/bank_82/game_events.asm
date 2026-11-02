@@ -267,7 +267,7 @@ fEvents_ShippingSceneReturn:
 ;          fine-day flag ($0200) forces index $04.
 ; @modifies nWeatherDialogIdIndex
 ; @mode    M8X16
-; @callers fPlayerInteraction0x0F, fPlayerInteraction0x12, fPlayerInteraction0x13
+; @callers fPlayerInteraction_WatchTv1, fPlayerInteraction_WatchTv2, fPlayerInteraction_WatchTv3
 ;;
 fWeather_SetForecastDialogIndex:
     SEP #$20                                                   ;8281C0|E220    |      ;
