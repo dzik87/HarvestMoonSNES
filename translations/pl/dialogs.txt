@@ -920,7 +920,7 @@ Przepraszam, że tak od razu… ale… Weź proszę tego psa…<NEXT>
 U nas w domu handluje się żywnością i mama za nic się nie zgadza… Proszę cię…<END>
 
 @@ sDialog_0x0126 @@
-Dziękuję! Udało się, <VAR dog>.<NEXT>
+Dziękuję! Jak dobrze ci się trafiło, <VAR dog>.<NEXT>
 Niech cię tu rozpieszczają. Trzymaj się!<END>
 
 @@ sDialog_0x0127 @@
@@ -979,7 +979,7 @@ Hmm, tak? No to wołaj, kiedy chcesz.<END>
 @@ sDialog_0x0137 @@
 Do licha! Brakuje materiałów! Nadstaw uszu i słuchaj uważnie!<NEXT>
 Nie robimy fuszerki! Bez materiałów nie ruszymy z robotą!<NEXT>
-Wszystko, co trzeba, jest na tablicy obok, więc przygotuj! No to cześć!<END>
+Wszystko, co trzeba, jest na tablicy obok, więc przygotuj je! No to cześć!<END>
 
 @@ sDialog_0x0138 @@
 Pniaki rąb siekierą. Jakieś 6 uderzeń i pęknie!<END>
@@ -1037,13 +1037,13 @@ Zwierzęta bardzo się cieszą, gdy nadchodzi wiosna.<END>
 @@ sDialog_0x0148 @@
 Jestem wędrownym handlarzem. Dziś mam bardzo rzadki owoc.<NEXT>
 Jeden kęs i jesteś pełen sił. W ramach wyjątku wymienię go na tamtą kurę.<NEXT>
-<OPTLBL 1>Wymień<OPTLBL 2>Nie wymieniaj<OPT 2>
+<OPTLBL 1>Wymieniam<OPTLBL 2>Nie wymieniam<OPT 2>
 
 @@ sDialog_0x0149 @@
 Jestem wędrownym handlarzem. Dziś mam bardzo rzadkie nasienie fasoli.<NEXT>
 Zakop je w ziemi, a zobaczysz cud. Teraz wymienię je na twoją krowę!<NEXT>
 Świetna okazja!<NEXT>
-<OPTLBL 1>Wymień<OPTLBL 2>Nie wymieniaj<OPT 2>
+<OPTLBL 1>Wymieniam<OPTLBL 2>Nie wymieniam<OPT 2>
 
 @@ sDialog_0x014A @@
 No to ją zabieram. Handlarz się cieszy. Do zobaczenia.<END>
@@ -1069,7 +1069,7 @@ No i zasadzone. Szefie, czekaj na jutro.<END>
 Ach, szkoda. Będziesz żałować do końca życia, szefie.<END>
 
 @@ sDialog_0x0150 @@
-Hej, ciężko, jak pogoda zła.<END>
+Hej, przy złej pogodzie ciężko, co?<END>
 
 @@ sDialog_0x0151 @@
 Zajęty, zajęty.<END>
@@ -1096,7 +1096,7 @@ Wiesz, jak przychodzi tajfun, to jakoś tak ekscytująco, nie?<END>
 Wiatr się wzmaga… Nie lubię tajfunów.<END>
 
 @@ sDialog_0x0159 @@
-Deszcz jest w porządku, ale tajfun nie. Zwieje kwiaty.<END>
+Deszcz jest w porządku, ale tajfun nie. Wiatr porwie kwiaty.<END>
 
 @@ sDialog_0x015A @@
 Lepiej pomódl się do bogów, żeby tajfun nie narobił szkód. Naprawdę.<END>
@@ -2806,13 +2806,13 @@ Owoc dzikiego winogrona!<NEXT><OPTLBL 1>Zjedz<OPTLBL 2>Nie jedz<OPT 2>
 Pachnie słodko i miło.<NEXT><OPTLBL 1>Zjedz<OPTLBL 2>Nie jedz<OPT 2>
 
 @@ sDialog_0x036B @@
-Ciasto!<NEXT><OPTLBL 1>Zjedz<OPTLBL 2>Nie jedz<OPT 2>
+Ciasto!♥<NEXT><OPTLBL 1>Zjedz<OPTLBL 2>Nie jedz<OPT 2>
 
 @@ sDialog_0x036C @@
 Ryba!<NEXT><OPTLBL 1>Zjedz<OPTLBL 2>Nie jedz<OPT 2>
 
 @@ sDialog_0x036D @@
-Zdobyłeś owoc mocy!<END>
+Zdobyłeś Jagodę Mocy!<END>
 
 @@ sDialog_0x036E @@
 Główny zawór gazu w porządku!<END>
@@ -2830,13 +2830,13 @@ W środku jest ulotka. Przeczytać?<NEXT><OPTLBL 1>Czytaj<OPTLBL 2>Nie czytaj<OP
 Na odzyskanie sił - górskie gorące źródło.<END>
 
 @@ sDialog_0x0373 @@
-Specjalna oferta na jesienne wakacje!<NEXT>Grzybobranie w górach pełnych kolorowych liści!<NEXT>Przysmak ze szczytu! Trawa Pełni!!<END>
+Specjalna oferta na jesienne wakacje!<NEXT>Grzybobranie w górach pełnych kolorowych liści♥<NEXT>Przysmak ze szczytu! Trawa Pełni!!<END>
 
 @@ sDialog_0x0374 @@
-10 dnia miesiąca zimy jest Święto Dziękczynienia!<NEXT>Z tej okazji zapraszamy po jajka<NEXT>i mleko ze znaczkiem "Uśmiechnięta Buźka"!<END>
+10 dnia miesiąca zimy jest Festiwal Dziękczynienia!<NEXT>Z tej okazji zapraszamy po jajka<NEXT>i mleko ze znaczkiem "Uśmiechnięta Buźka"!<END>
 
 @@ sDialog_0x0375 @@
-23 dnia miesiąca wiosny jest Festiwal Kwiatów! Ciesz się cudownymi zapachami!<END>
+23 dnia miesiąca wiosny jest Festiwal Kwiatów! Ciesz się cudownymi zapachami!♥<END>
 
 @@ sDialog_0x0376 @@
 To moje warzywa kiszone w otrębach ryżowych.<END>
@@ -2887,7 +2887,7 @@ To nagroda z Festiwalu Jajek. Podobno amulet chroniący przed klęskami.<END>
 To stare, zniszczone organy.<END>
 
 @@ sDialog_0x0386 @@
-No to pomódlmy się tutaj.<END>
+No to się pomodlę.<END>
 
 @@ sDialog_0x0387 @@
  Rodzaj wody: siarczana<BR>Działanie: reumatyzm<BR>odzyskanie sił<END>
