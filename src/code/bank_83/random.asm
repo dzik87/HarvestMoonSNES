@@ -16,7 +16,7 @@
 ; @return  A      random value $0000-$00FF (16-bit A, high byte zero)
 ; @modifies strcRandom.a, strcRandom.b, strcRandom.c
 ; @mode    M8X16 -> M16X16
-; @callers fCore_GetRandomNumber, fCore_UpdateGFX, fObjectMap_UpdateFarmTilesNewDay, fAI_RunSlots
+; @callers fCore_GetRandomNumber, fCore_VBlankUpdate, fObjectMap_UpdateFarmTilesNewDay, fAI_RunSlots
 ; @note    No seeding routine is called from this module; the initial state is whatever strcRandom holds at boot (?).
 ;          confidence: medium for the algorithm description (derived from the instruction sequence, not tested).
 ;;

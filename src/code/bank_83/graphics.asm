@@ -133,7 +133,7 @@ fGraphics_WriteTilemap2x2:
 ; @note    ptrTemp0x72 / ptrUnknown0x75 end past the last byte read / written; the ring buffer $7F:0000-$7F:07FF is overwritten.
 ; @clobbers X
 ; @mode    M16X16 -> =
-; @callers fDialog_LoadDialogBoxGraphics, fTileMap_MapChangeHandler (two call sites)
+; @callers fDialog_LoadDialogBoxGraphics, fTileMap_LoadAreaGraphics (two call sites)
 ; @note    The scratch fields n16Temp2 (flag byte), n16Temp3 (flag bit counter), n16Temp4 (ring write position),
 ;          n16Unk86 (ring read position) and n16Unk88 (match length) are the "Unk" ones named in structures.asm.
 ;;

@@ -105,7 +105,7 @@ fAreaEvents_Farm:
     %CheckFlag(event6, $0004)
     BEQ +                                                      ;83CBCD|F018    |83CBE7;
     LDA.L nFirstChildAge                                       ;83CBCF|AF371F7F|7F1F37;
-    CMP.W #$003C                                               ;83CBD3|C93C00  |      ;
+    CMP.W #$003C                                               ;83CBD3|C93C00  |      ; child age >= 60 days
     BCC +                                                      ;83CBD6|900F    |83CBE7;
     REP #$30                                                   ;83CBD8|C230    |      ;
     %AIExecute($0014, $0045, $0001)
@@ -114,14 +114,14 @@ fAreaEvents_Farm:
     %CheckFlag(event6, $0008)
     BEQ +                                                      ;83CBF0|F018    |83CC0A;
     LDA.L nSecondChildAge                                      ;83CBF2|AF391F7F|7F1F39;
-    CMP.W #$003C                                               ;83CBF6|C93C00  |      ;
+    CMP.W #$003C                                               ;83CBF6|C93C00  |      ; child age >= 60 days
     BCC +                                                      ;83CBF9|900F    |83CC0A;
     REP #$30                                                   ;83CBFB|C230    |      ;
     %AIExecute($0015, $0045, $0004)
  
   + REP #$30                                                   ;83CC0A|C230    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;83CC0C|AD9601  |000196;
-    AND.W #$001A                                               ;83CC0F|291A00  |      ;
+    AND.W #$001A                                               ;83CC0F|291A00  |      ; bad-weather / no-outdoor-event mask (mapFlags bits $02 $08 $10)
     BEQ +                                                      ;83CC12|F003    |83CC17;
     JMP.W .check_daily1_0002                                              ;83CC14|4C5BCE  |83CE5B;
  
@@ -152,7 +152,7 @@ fAreaEvents_Farm:
  
  
   + SEP #$20                                                   ;83CC53|E220    |      ;
-    LDA.L nCurrentTimeID                                       ;83CC55|AF1C1F7F|7F1F1C;
+    LDA.L nCurrentTimeID                                       ;83CC55|AF1C1F7F|7F1F1C; 6:00 test, part 1: nCurrentTimeID = 6
     CMP.B #$06                                                 ;83CC59|C906    |      ;
     BEQ +                                                      ;83CC5B|F003    |83CC60;
     JMP.W .check_daily1_0002                                              ;83CC5D|4C5BCE  |83CE5B;
@@ -204,7 +204,7 @@ fAreaEvents_Farm:
     %CheckFlag(event4, $1000)
     BNE .check_visit_ann                                                ;83CCBE|D029    |83CCE9;
     LDA.L nLove_Maria                                          ;83CCC0|AF1F1F7F|7F1F1F;
-    CMP.W #$00C8                                               ;83CCC4|C9C800  |      ;
+    CMP.W #$00C8                                               ;83CCC4|C9C800  |      ; love >= 200: this girl may visit/propose
     BCC .check_visit_ann                                                ;83CCC7|9020    |83CCE9;
     %SetFlag(event4, $1000)
     REP #$30                                                   ;83CCD4|C230    |      ;
@@ -225,7 +225,7 @@ fAreaEvents_Farm:
     %CheckFlag(event4, $4000)
     BNE .check_visit_nina                                                ;83CD0D|D029    |83CD38;
     LDA.L nLove_Ann                                            ;83CD0F|AF211F7F|7F1F21;
-    CMP.W #$00C8                                               ;83CD13|C9C800  |      ;
+    CMP.W #$00C8                                               ;83CD13|C9C800  |      ; love >= 200: this girl may visit/propose
     BCC .check_visit_nina                                                ;83CD16|9020    |83CD38;
     %SetFlag(event4, $4000)
     REP #$30                                                   ;83CD23|C230    |      ;
@@ -248,7 +248,7 @@ fAreaEvents_Farm:
     %CheckFlag(event5, $0001)
     BNE .check_visit_ellen                                                ;83CD65|D029    |83CD90;
     LDA.L nLove_Nina                                           ;83CD67|AF231F7F|7F1F23;
-    CMP.W #$00C8                                               ;83CD6B|C9C800  |      ;
+    CMP.W #$00C8                                               ;83CD6B|C9C800  |      ; love >= 200: this girl may visit/propose
     BCC .check_visit_ellen                                                ;83CD6E|9020    |83CD90;
     %SetFlag(event5, $0001)
     REP #$30                                                   ;83CD7B|C230    |      ;
@@ -273,7 +273,7 @@ fAreaEvents_Farm:
     %CheckFlag(event5, $0004)
     BNE .check_visit_eve                                                ;83CDC6|D029    |83CDF1;
     LDA.L nLove_Ellen                                          ;83CDC8|AF251F7F|7F1F25;
-    CMP.W #$00C8                                               ;83CDCC|C9C800  |      ;
+    CMP.W #$00C8                                               ;83CDCC|C9C800  |      ; love >= 200: this girl may visit/propose
     BCC .check_visit_eve                                                ;83CDCF|9020    |83CDF1;
     %SetFlag(event5, $0004)
     REP #$30                                                   ;83CDDC|C230    |      ;
@@ -300,7 +300,7 @@ fAreaEvents_Farm:
     %CheckFlag(event5, $0010)
     BNE .check_daily1_0002                                                ;83CE30|D029    |83CE5B;
     LDA.L nLove_Eve                                            ;83CE32|AF271F7F|7F1F27;
-    CMP.W #$00C8                                               ;83CE36|C9C800  |      ;
+    CMP.W #$00C8                                               ;83CE36|C9C800  |      ; love >= 200: this girl may visit/propose
     BCC .check_daily1_0002                                                ;83CE39|9020    |83CE5B;
     %SetFlag(event5, $0010)
     REP #$30                                                   ;83CE46|C230    |      ;
@@ -372,12 +372,12 @@ fAreaEvents_Farm:
     LDA.W nWeatherForecast                                     ;83CF14|AD8C09  |00098C;
     CMP.B #$06                                                 ;83CF17|C906    |      ;
     BCC .check_event7_0002_morning                                               ;83CF19|9027    |83CF42;
-    LDA.L nCurrentTimeID                                       ;83CF1B|AF1C1F7F|7F1F1C;
+    LDA.L nCurrentTimeID                                       ;83CF1B|AF1C1F7F|7F1F1C; 6:00 test, part 1: nCurrentTimeID = 6
     CMP.B #$06                                                 ;83CF1F|C906    |      ;
     BNE .check_event7_0002_morning                                               ;83CF21|D01F    |83CF42;
-    LDA.L nInGameHourCounter                                   ;83CF23|AF1D1F7F|7F1F1D;
+    LDA.L nInGameHourCounter                                   ;83CF23|AF1D1F7F|7F1F1D; 6:00 test, part 2: hour = 0
     BNE .check_event7_0002_morning                                               ;83CF27|D019    |83CF42;
-    LDA.L nInGameMinuteCounter                                 ;83CF29|AF1E1F7F|7F1F1E;
+    LDA.L nInGameMinuteCounter                                 ;83CF29|AF1E1F7F|7F1F1E; 6:00 test, part 3: minute = 0 (start of the day)
     BEQ +                                                      ;83CF2D|F003    |83CF32;
     JMP.W .check_event2_0040                                             ;83CF2F|4CF8CF  |83CFF8;
  
@@ -392,12 +392,12 @@ fAreaEvents_Farm:
     %CheckFlag(event7, $0002)
     BEQ .check_event1_0010_morning                                               ;83CF4B|F026    |83CF73;
     SEP #$20                                                   ;83CF4D|E220    |      ;
-    LDA.L nCurrentTimeID                                       ;83CF4F|AF1C1F7F|7F1F1C;
+    LDA.L nCurrentTimeID                                       ;83CF4F|AF1C1F7F|7F1F1C; 6:00 test, part 1: nCurrentTimeID = 6
     CMP.B #$06                                                 ;83CF53|C906    |      ;
     BNE .check_event1_0010_morning                                               ;83CF55|D01C    |83CF73;
-    LDA.L nInGameHourCounter                                   ;83CF57|AF1D1F7F|7F1F1D;
+    LDA.L nInGameHourCounter                                   ;83CF57|AF1D1F7F|7F1F1D; 6:00 test, part 2: hour = 0
     BNE .check_event1_0010_morning                                               ;83CF5B|D016    |83CF73;
-    LDA.L nInGameMinuteCounter                                 ;83CF5D|AF1E1F7F|7F1F1E;
+    LDA.L nInGameMinuteCounter                                 ;83CF5D|AF1E1F7F|7F1F1E; 6:00 test, part 3: minute = 0 (start of the day)
     BNE .check_event1_0010_morning                                               ;83CF61|D010    |83CF73;
     REP #$30                                                   ;83CF63|C230    |      ;
     %AIExecute($0006, $0024, $0002)
@@ -409,12 +409,12 @@ fAreaEvents_Farm:
     %CheckFlag(event1, $0010)
     BEQ .check_summer_event                                               ;83CF7C|F026    |83CFA4;
     SEP #$20                                                   ;83CF7E|E220    |      ;
-    LDA.L nCurrentTimeID                                       ;83CF80|AF1C1F7F|7F1F1C;
+    LDA.L nCurrentTimeID                                       ;83CF80|AF1C1F7F|7F1F1C; 6:00 test, part 1: nCurrentTimeID = 6
     CMP.B #$06                                                 ;83CF84|C906    |      ;
     BNE .check_summer_event                                               ;83CF86|D01C    |83CFA4;
-    LDA.L nInGameHourCounter                                   ;83CF88|AF1D1F7F|7F1F1D;
+    LDA.L nInGameHourCounter                                   ;83CF88|AF1D1F7F|7F1F1D; 6:00 test, part 2: hour = 0
     BNE .check_summer_event                                               ;83CF8C|D016    |83CFA4;
-    LDA.L nInGameMinuteCounter                                 ;83CF8E|AF1E1F7F|7F1F1E;
+    LDA.L nInGameMinuteCounter                                 ;83CF8E|AF1E1F7F|7F1F1E; 6:00 test, part 3: minute = 0 (start of the day)
     BNE .check_summer_event                                               ;83CF92|D010    |83CFA4;
     REP #$30                                                   ;83CF94|C230    |      ;
     %AIExecute($0006, $0024, $0003)
@@ -434,12 +434,12 @@ fAreaEvents_Farm:
     LDA.L nCurrentDay                                          ;83CFBF|AF1B1F7F|7F1F1B;
     CMP.B #$14                                                 ;83CFC3|C914    |      ;
     BCS .check_event2_0040                                               ;83CFC5|B031    |83CFF8;
-    LDA.L nCurrentTimeID                                       ;83CFC7|AF1C1F7F|7F1F1C;
+    LDA.L nCurrentTimeID                                       ;83CFC7|AF1C1F7F|7F1F1C; 6:00 test, part 1: nCurrentTimeID = 6
     CMP.B #$06                                                 ;83CFCB|C906    |      ;
     BNE .check_event2_0040                                               ;83CFCD|D029    |83CFF8;
-    LDA.L nInGameHourCounter                                   ;83CFCF|AF1D1F7F|7F1F1D;
+    LDA.L nInGameHourCounter                                   ;83CFCF|AF1D1F7F|7F1F1D; 6:00 test, part 2: hour = 0
     BNE .check_event2_0040                                               ;83CFD3|D023    |83CFF8;
-    LDA.L nInGameMinuteCounter                                 ;83CFD5|AF1E1F7F|7F1F1E;
+    LDA.L nInGameMinuteCounter                                 ;83CFD5|AF1E1F7F|7F1F1E; 6:00 test, part 3: minute = 0 (start of the day)
     BNE .check_event2_0040                                               ;83CFD9|D01D    |83CFF8;
     REP #$20                                                   ;83CFDB|C220    |      ;
     %SetFlag(event7, $0001)
@@ -523,16 +523,16 @@ fAreaEvents_Farm:
     REP #$10                                                   ;83D101|C210    |      ;
     LDA.L nCurrentYearID                                       ;83D103|AF181F7F|7F1F18;
     BEQ .check_saturday_event                                               ;83D107|F05A    |83D163;
-    LDA.L nCurrentTimeID                                       ;83D109|AF1C1F7F|7F1F1C;
+    LDA.L nCurrentTimeID                                       ;83D109|AF1C1F7F|7F1F1C; 6:00 test, part 1: nCurrentTimeID = 6
     CMP.B #$06                                                 ;83D10D|C906    |      ;
     BNE .check_saturday_event                                               ;83D10F|D052    |83D163;
-    LDA.L nInGameHourCounter                                   ;83D111|AF1D1F7F|7F1F1D;
+    LDA.L nInGameHourCounter                                   ;83D111|AF1D1F7F|7F1F1D; 6:00 test, part 2: hour = 0
     BNE .check_saturday_event                                               ;83D115|D04C    |83D163;
-    LDA.L nInGameMinuteCounter                                 ;83D117|AF1E1F7F|7F1F1E;
+    LDA.L nInGameMinuteCounter                                 ;83D117|AF1E1F7F|7F1F1E; 6:00 test, part 3: minute = 0 (start of the day)
     BNE .check_saturday_event                                               ;83D11B|D046    |83D163;
     REP #$20                                                   ;83D11D|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;83D11F|AD9601  |000196;
-    AND.W #$001A                                               ;83D122|291A00  |      ;
+    AND.W #$001A                                               ;83D122|291A00  |      ; bad-weather / no-outdoor-event mask (mapFlags bits $02 $08 $10)
     BNE .check_saturday_event                                               ;83D125|D03C    |83D163;
     REP #$20                                                   ;83D127|C220    |      ;
     LDA.L nMoney                                               ;83D129|AF041F7F|7F1F04;
@@ -563,19 +563,19 @@ fAreaEvents_Farm:
  
 .check_saturday_time:
     SEP #$20                                                   ;83D175|E220    |      ;
-    LDA.L nCurrentTimeID                                       ;83D177|AF1C1F7F|7F1F1C;
+    LDA.L nCurrentTimeID                                       ;83D177|AF1C1F7F|7F1F1C; 6:00 test, part 1: nCurrentTimeID = 6
     CMP.B #$06                                                 ;83D17B|C906    |      ;
     BNE .check_fall_event                                               ;83D17D|D04F    |83D1CE;
-    LDA.L nInGameHourCounter                                   ;83D17F|AF1D1F7F|7F1F1D;
+    LDA.L nInGameHourCounter                                   ;83D17F|AF1D1F7F|7F1F1D; 6:00 test, part 2: hour = 0
     BNE .check_fall_event                                               ;83D183|D049    |83D1CE;
-    LDA.L nInGameMinuteCounter                                 ;83D185|AF1E1F7F|7F1F1E;
+    LDA.L nInGameMinuteCounter                                 ;83D185|AF1E1F7F|7F1F1E; 6:00 test, part 3: minute = 0 (start of the day)
     BNE .check_fall_event                                               ;83D189|D043    |83D1CE;
     LDA.L nCurrentWeekdayID                                    ;83D18B|AF1A1F7F|7F1F1A;
     CMP.B #$06                                                 ;83D18F|C906    |      ;
     BNE .check_fall_event                                               ;83D191|D03B    |83D1CE;
     REP #$20                                                   ;83D193|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;83D195|AD9601  |000196;
-    AND.W #$001A                                               ;83D198|291A00  |      ;
+    AND.W #$001A                                               ;83D198|291A00  |      ; bad-weather / no-outdoor-event mask (mapFlags bits $02 $08 $10)
     BNE .check_fall_event                                               ;83D19B|D031    |83D1CE;
     REP #$30                                                   ;83D19D|C230    |      ;
     %CheckFlag(event1, $00C0)
@@ -614,7 +614,7 @@ fAreaEvents_Farm:
 .check_fall_event_flags:
     REP #$20                                                   ;83D1F8|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;83D1FA|AD9601  |000196;
-    AND.W #$001A                                               ;83D1FD|291A00  |      ;
+    AND.W #$001A                                               ;83D1FD|291A00  |      ; bad-weather / no-outdoor-event mask (mapFlags bits $02 $08 $10)
     BNE .check_chicken_event                                               ;83D200|D03C    |83D23E;
     REP #$30                                                   ;83D202|C230    |      ;
     %CheckFlag(event1, $00C0)
@@ -646,12 +646,12 @@ fAreaEvents_Farm:
     LDA.L nOwnedChickens                                       ;83D265|AF0B1F7F|7F1F0B;
     CMP.B #$06                                                 ;83D269|C906    |      ;
     BCC .check_random_event                                               ;83D26B|9031    |83D29E;
-    LDA.L nCurrentTimeID                                       ;83D26D|AF1C1F7F|7F1F1C;
+    LDA.L nCurrentTimeID                                       ;83D26D|AF1C1F7F|7F1F1C; 6:00 test, part 1: nCurrentTimeID = 6
     CMP.B #$06                                                 ;83D271|C906    |      ;
     BNE .check_random_event                                               ;83D273|D029    |83D29E;
-    LDA.L nInGameHourCounter                                   ;83D275|AF1D1F7F|7F1F1D;
+    LDA.L nInGameHourCounter                                   ;83D275|AF1D1F7F|7F1F1D; 6:00 test, part 2: hour = 0
     BNE .check_random_event                                               ;83D279|D023    |83D29E;
-    LDA.L nInGameMinuteCounter                                 ;83D27B|AF1E1F7F|7F1F1E;
+    LDA.L nInGameMinuteCounter                                 ;83D27B|AF1E1F7F|7F1F1E; 6:00 test, part 3: minute = 0 (start of the day)
     BNE .check_random_event                                               ;83D27F|D01D    |83D29E;
     REP #$20                                                   ;83D281|C220    |      ;
     %SetFlag(event4, $0400)
@@ -665,15 +665,15 @@ fAreaEvents_Farm:
 .check_random_event:
     REP #$30                                                   ;83D29E|C230    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;83D2A0|AD9601  |000196;
-    AND.W #$001A                                               ;83D2A3|291A00  |      ;
+    AND.W #$001A                                               ;83D2A3|291A00  |      ; bad-weather / no-outdoor-event mask (mapFlags bits $02 $08 $10)
     BNE .justReturn                                            ;83D2A6|D037    |83D2DF;
     SEP #$20                                                   ;83D2A8|E220    |      ;
-    LDA.L nCurrentTimeID                                       ;83D2AA|AF1C1F7F|7F1F1C;
+    LDA.L nCurrentTimeID                                       ;83D2AA|AF1C1F7F|7F1F1C; 6:00 test, part 1: nCurrentTimeID = 6
     CMP.B #$06                                                 ;83D2AE|C906    |      ;
     BNE .justReturn                                            ;83D2B0|D02D    |83D2DF;
-    LDA.L nInGameHourCounter                                   ;83D2B2|AF1D1F7F|7F1F1D;
+    LDA.L nInGameHourCounter                                   ;83D2B2|AF1D1F7F|7F1F1D; 6:00 test, part 2: hour = 0
     BNE .justReturn                                            ;83D2B6|D027    |83D2DF;
-    LDA.L nInGameMinuteCounter                                 ;83D2B8|AF1E1F7F|7F1F1E;
+    LDA.L nInGameMinuteCounter                                 ;83D2B8|AF1E1F7F|7F1F1E; 6:00 test, part 3: minute = 0 (start of the day)
     BNE .justReturn                                            ;83D2BC|D021    |83D2DF;
     LDA.B #$08                                                 ;83D2BE|A908    |      ;
     JSL.L fCore_GetRandomNumber                                ;83D2C0|22F98980|8089F9;
@@ -1811,7 +1811,7 @@ fAreaEvents_Woods:
  
   + REP #$20                                                   ;83DD0F|C220    |      ;
     LDA.W strcDialogDisplay.mapFlags                           ;83DD11|AD9601  |000196;
-    AND.W #$001A                                               ;83DD14|291A00  |      ;
+    AND.W #$001A                                               ;83DD14|291A00  |      ; bad-weather / no-outdoor-event mask (mapFlags bits $02 $08 $10)
     BNE .select_day_script                                                ;83DD17|D026    |83DD3F;
     %CheckFlag(event4, $0200)
     BNE .select_day_script                                                ;83DD20|D01D    |83DD3F;
@@ -2178,7 +2178,7 @@ fAreaEvents_House:
     %AIExecute($0000, $001F, $0001)
     REP #$20                                                   ;83E0B0|C220    |      ;
     LDA.L nFirstChildAge                                       ;83E0B2|AF371F7F|7F1F37;
-    CMP.W #$003C                                               ;83E0B6|C93C00  |      ;
+    CMP.W #$003C                                               ;83E0B6|C93C00  |      ; child age >= 60 days
     BNE +                                                      ;83E0B9|D008    |83E0C3;
     SEP #$20                                                   ;83E0BB|E220    |      ;
     LDA.B #$05                                                 ;83E0BD|A905    |      ;
@@ -2255,7 +2255,7 @@ fAreaEvents_House:
 .check_love_maria:
     REP #$30                                                   ;83E176|C230    |      ;
     LDA.L nLove_Maria                                          ;83E178|AF1F1F7F|7F1F1F;
-    CMP.W #$00C8                                               ;83E17C|C9C800  |      ;
+    CMP.W #$00C8                                               ;83E17C|C9C800  |      ; love >= 200: this girl may visit/propose
     BCC +                                                      ;83E17F|9003    |83E184;
     JMP.W .spouse_daily_script                                             ;83E181|4C10E2  |83E210;
  
@@ -2266,7 +2266,7 @@ fAreaEvents_House:
 .check_love_ann:
     REP #$30                                                   ;83E186|C230    |      ;
     LDA.L nLove_Ann                                            ;83E188|AF211F7F|7F1F21;
-    CMP.W #$00C8                                               ;83E18C|C9C800  |      ;
+    CMP.W #$00C8                                               ;83E18C|C9C800  |      ; love >= 200: this girl may visit/propose
     BCS .spouse_daily_script                                               ;83E18F|B07F    |83E210;
     BRA .check_spouse_morning_event                                               ;83E191|8027    |83E1BA;
  
@@ -2274,7 +2274,7 @@ fAreaEvents_House:
 .check_love_nina:
     REP #$30                                                   ;83E193|C230    |      ;
     LDA.L nLove_Nina                                           ;83E195|AF231F7F|7F1F23;
-    CMP.W #$00C8                                               ;83E199|C9C800  |      ;
+    CMP.W #$00C8                                               ;83E199|C9C800  |      ; love >= 200: this girl may visit/propose
     BCS .spouse_daily_script                                               ;83E19C|B072    |83E210;
     BRA .check_spouse_morning_event                                               ;83E19E|801A    |83E1BA;
  
@@ -2282,7 +2282,7 @@ fAreaEvents_House:
 .check_love_ellen:
     REP #$30                                                   ;83E1A0|C230    |      ;
     LDA.L nLove_Ellen                                          ;83E1A2|AF251F7F|7F1F25;
-    CMP.W #$00C8                                               ;83E1A6|C9C800  |      ;
+    CMP.W #$00C8                                               ;83E1A6|C9C800  |      ; love >= 200: this girl may visit/propose
     BCS .spouse_daily_script                                               ;83E1A9|B065    |83E210;
     BRA .check_spouse_morning_event                                               ;83E1AB|800D    |83E1BA;
  
@@ -2290,7 +2290,7 @@ fAreaEvents_House:
 .check_love_eve:
     REP #$30                                                   ;83E1AD|C230    |      ;
     LDA.L nLove_Eve                                            ;83E1AF|AF271F7F|7F1F27;
-    CMP.W #$00C8                                               ;83E1B3|C9C800  |      ;
+    CMP.W #$00C8                                               ;83E1B3|C9C800  |      ; love >= 200: this girl may visit/propose
     BCS .spouse_daily_script                                               ;83E1B6|B058    |83E210;
     BRA .check_spouse_morning_event                                               ;83E1B8|8000    |83E1BA;
  
@@ -2298,12 +2298,12 @@ fAreaEvents_House:
 .check_spouse_morning_event:
     SEP #$20                                                   ;83E1BA|E220    |      ;
     REP #$10                                                   ;83E1BC|C210    |      ;
-    LDA.L nCurrentTimeID                                       ;83E1BE|AF1C1F7F|7F1F1C;
+    LDA.L nCurrentTimeID                                       ;83E1BE|AF1C1F7F|7F1F1C; 6:00 test, part 1: nCurrentTimeID = 6
     CMP.B #$06                                                 ;83E1C2|C906    |      ;
     BNE .spouse_daily_script                                               ;83E1C4|D04A    |83E210;
-    LDA.L nInGameHourCounter                                   ;83E1C6|AF1D1F7F|7F1F1D;
+    LDA.L nInGameHourCounter                                   ;83E1C6|AF1D1F7F|7F1F1D; 6:00 test, part 2: hour = 0
     BNE .spouse_daily_script                                               ;83E1CA|D044    |83E210;
-    LDA.L nInGameMinuteCounter                                 ;83E1CC|AF1E1F7F|7F1F1E;
+    LDA.L nInGameMinuteCounter                                 ;83E1CC|AF1E1F7F|7F1F1E; 6:00 test, part 3: minute = 0 (start of the day)
     BNE .spouse_daily_script                                               ;83E1D0|D03E    |83E210;
     REP #$20                                                   ;83E1D2|C220    |      ;
     %CheckFlag(event6, $000C)
@@ -2391,7 +2391,7 @@ fAreaEvents_House:
     %CheckFlag(event6, $0004)
     BEQ .check_second_child_age                                               ;83E2CF|F018    |83E2E9;
     LDA.L nFirstChildAge                                       ;83E2D1|AF371F7F|7F1F37;
-    CMP.W #$003C                                               ;83E2D5|C93C00  |      ;
+    CMP.W #$003C                                               ;83E2D5|C93C00  |      ; child age >= 60 days
     BCC .check_second_child_age                                               ;83E2D8|900F    |83E2E9;
     REP #$30                                                   ;83E2DA|C230    |      ;
     %AIExecute($0014, $0045, $0000)
@@ -2401,7 +2401,7 @@ fAreaEvents_House:
     %CheckFlag(event6, $0008)
     BEQ .select_house_script                                               ;83E2F2|F018    |83E30C;
     LDA.L nSecondChildAge                                      ;83E2F4|AF391F7F|7F1F39;
-    CMP.W #$003C                                               ;83E2F8|C93C00  |      ;
+    CMP.W #$003C                                               ;83E2F8|C93C00  |      ; child age >= 60 days
     BCC .select_house_script                                               ;83E2FB|900F    |83E30C;
     REP #$30                                                   ;83E2FD|C230    |      ;
     %AIExecute($0015, $0045, $0003)
@@ -2435,12 +2435,12 @@ fAreaEvents_House:
     LDA.L nCurrentDay                                          ;83E354|AF1B1F7F|7F1F1B;
     CMP.B #$01                                                 ;83E358|C901    |      ;
     BNE .check_year2_summer_day29                                               ;83E35A|D024    |83E380;
-    LDA.L nCurrentTimeID                                       ;83E35C|AF1C1F7F|7F1F1C;
+    LDA.L nCurrentTimeID                                       ;83E35C|AF1C1F7F|7F1F1C; 6:00 test, part 1: nCurrentTimeID = 6
     CMP.B #$06                                                 ;83E360|C906    |      ;
     BNE .check_year2_summer_day29                                               ;83E362|D01C    |83E380;
-    LDA.L nInGameHourCounter                                   ;83E364|AF1D1F7F|7F1F1D;
+    LDA.L nInGameHourCounter                                   ;83E364|AF1D1F7F|7F1F1D; 6:00 test, part 2: hour = 0
     BNE .check_year2_summer_day29                                               ;83E368|D016    |83E380;
-    LDA.L nInGameMinuteCounter                                 ;83E36A|AF1E1F7F|7F1F1E;
+    LDA.L nInGameMinuteCounter                                 ;83E36A|AF1E1F7F|7F1F1E; 6:00 test, part 3: minute = 0 (start of the day)
     BNE .check_year2_summer_day29                                               ;83E36E|D010    |83E380;
     REP #$30                                                   ;83E370|C230    |      ;
     %AIExecute($0000, $000A, $0004)
@@ -2459,12 +2459,12 @@ fAreaEvents_House:
     LDA.L nCurrentDay                                          ;83E394|AF1B1F7F|7F1F1B;
     CMP.B #$1D                                                 ;83E398|C91D    |      ;
     BNE .check_new_year                                               ;83E39A|D024    |83E3C0;
-    LDA.L nCurrentTimeID                                       ;83E39C|AF1C1F7F|7F1F1C;
+    LDA.L nCurrentTimeID                                       ;83E39C|AF1C1F7F|7F1F1C; 6:00 test, part 1: nCurrentTimeID = 6
     CMP.B #$06                                                 ;83E3A0|C906    |      ;
     BNE .check_new_year                                               ;83E3A2|D01C    |83E3C0;
-    LDA.L nInGameHourCounter                                   ;83E3A4|AF1D1F7F|7F1F1D;
+    LDA.L nInGameHourCounter                                   ;83E3A4|AF1D1F7F|7F1F1D; 6:00 test, part 2: hour = 0
     BNE .check_new_year                                               ;83E3A8|D016    |83E3C0;
-    LDA.L nInGameMinuteCounter                                 ;83E3AA|AF1E1F7F|7F1F1E;
+    LDA.L nInGameMinuteCounter                                 ;83E3AA|AF1E1F7F|7F1F1E; 6:00 test, part 3: minute = 0 (start of the day)
     BNE .check_new_year                                               ;83E3AE|D010    |83E3C0;
     REP #$30                                                   ;83E3B0|C230    |      ;
     %AIExecute($0000, $000A, $0005)
@@ -2882,7 +2882,7 @@ fAreaEvents_Shed:
     %CheckFlag(event6, $0004)
     BEQ +                                                      ;83E70E|F018    |83E728;
     LDA.L nFirstChildAge                                       ;83E710|AF371F7F|7F1F37;
-    CMP.W #$003C                                               ;83E714|C93C00  |      ;
+    CMP.W #$003C                                               ;83E714|C93C00  |      ; child age >= 60 days
     BCC +                                                      ;83E717|900F    |83E728;
     REP #$30                                                   ;83E719|C230    |      ;
     %AIExecute($0014, $0045, $0002)
@@ -2891,7 +2891,7 @@ fAreaEvents_Shed:
     %CheckFlag(event6, $0008)
     BEQ .justReturn                                            ;83E731|F018    |83E74B;
     LDA.L nSecondChildAge                                      ;83E733|AF391F7F|7F1F39;
-    CMP.W #$003C                                               ;83E737|C93C00  |      ;
+    CMP.W #$003C                                               ;83E737|C93C00  |      ; child age >= 60 days
     BCC .justReturn                                            ;83E73A|900F    |83E74B;
     REP #$30                                                   ;83E73C|C230    |      ;
     %AIExecute($0015, $0045, $0005)
@@ -3724,7 +3724,7 @@ fAreaEvents_Endings:
 .ending05:
     REP #$30                                                   ;83EDF6|C230    |      ;
     LDA.L nStatShippedCorns                                    ;83EDF8|AF4A1F7F|7F1F4A;
-    CMP.W #$00C8                                               ;83EDFC|C9C800  |      ;
+    CMP.W #$00C8                                               ;83EDFC|C9C800  |      ; love >= 200: this girl may visit/propose
     BCC .ending06                                              ;83EDFF|9018    |83EE19;
     REP #$30                                                   ;83EE01|C230    |      ;
     %AIExecute($0000, $0034, $0000)
@@ -3737,7 +3737,7 @@ fAreaEvents_Endings:
 .ending06:
     REP #$30                                                   ;83EE19|C230    |      ;
     LDA.L nStatShippedTomatoes                                 ;83EE1B|AF4C1F7F|7F1F4C;
-    CMP.W #$00C8                                               ;83EE1F|C9C800  |      ;
+    CMP.W #$00C8                                               ;83EE1F|C9C800  |      ; love >= 200: this girl may visit/propose
     BCC .ending07                                              ;83EE22|9018    |83EE3C;
     REP #$30                                                   ;83EE24|C230    |      ;
     %AIExecute($0000, $0035, $0000)
@@ -3750,7 +3750,7 @@ fAreaEvents_Endings:
 .ending07:
     REP #$30                                                   ;83EE3C|C230    |      ;
     LDA.L nStatShippedTurnips                                  ;83EE3E|AF4E1F7F|7F1F4E;
-    CMP.W #$00C8                                               ;83EE42|C9C800  |      ;
+    CMP.W #$00C8                                               ;83EE42|C9C800  |      ; love >= 200: this girl may visit/propose
     BCC .ending08                                              ;83EE45|9018    |83EE5F;
     REP #$30                                                   ;83EE47|C230    |      ;
     %AIExecute($0000, $0037, $0000)
@@ -3763,7 +3763,7 @@ fAreaEvents_Endings:
 .ending08:
     REP #$30                                                   ;83EE5F|C230    |      ;
     LDA.L nStatShippedPotatoes                                 ;83EE61|AF501F7F|7F1F50;
-    CMP.W #$00C8                                               ;83EE65|C9C800  |      ;
+    CMP.W #$00C8                                               ;83EE65|C9C800  |      ; love >= 200: this girl may visit/propose
     BCC .ending09                                              ;83EE68|9018    |83EE82;
     REP #$30                                                   ;83EE6A|C230    |      ;
     %AIExecute($0000, $0036, $0000)
@@ -3904,7 +3904,7 @@ fAreaEvents_Endings:
     %CheckFlag(event2, !EFLAGS2_MARRIED)
     BNE .ending11                                              ;83EFF2|D03B    |83F02F;
     LDA.L nPlayerHappiness                                     ;83EFF4|AF331F7F|7F1F33;
-    CMP.W #$00C8                                               ;83EFF8|C9C800  |      ;
+    CMP.W #$00C8                                               ;83EFF8|C9C800  |      ; love >= 200: this girl may visit/propose
     BCC .ending11                                              ;83EFFB|9032    |83F02F;
     LDA.L nLove_Maria                                          ;83EFFD|AF1F1F7F|7F1F1F;
     CLC                                                        ;83F001|18      |      ;

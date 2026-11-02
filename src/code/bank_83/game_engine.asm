@@ -1014,12 +1014,12 @@ fGameEngine_CheckTileCollision:
     TYA                                                        ;83B103|98      |      ;
     AND.W #$FFF0                                               ;83B104|29F0FF  |      ;
     STA.B strcVariables.n16Unk8C                               ;83B107|858C    |00008C;
-    LDA.W #$0010                                               ;83B109|A91000  |      ;
+    LDA.W #$0010                                               ;83B109|A91000  |      ; tile size $10: unk8E/unk90 = free span inside the tile (8 for half tiles)
     STA.B strcVariables.n16Unk8E                               ;83B10C|858E    |00008E;
     LDA.W #$0000                                               ;83B10E|A90000  |      ;
     STA.B strcVariables.n16Unk90                               ;83B111|8590    |000090;
     LDA.W #$0002                                               ;83B113|A90200  |      ;
-    JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;83B116|2261AC82|82AC61;
+    JSL.L fObjectEngine_GetObjectPropertyByDirSeason                                      ;83B116|2261AC82|82AC61; property index 2 = collision flags of the tile object
     SEP #$20                                                   ;83B11A|E220    |      ;
     REP #$10                                                   ;83B11C|C210    |      ;
     STA.B strcVariables.n8Temp1                                ;83B11E|8592    |000092;
@@ -1036,29 +1036,29 @@ fGameEngine_CheckTileCollision:
  
   + SEP #$20                                                   ;83B12E|E220    |      ;
     LDA.B strcVariables.n8Temp1                                ;83B130|A592    |000092;
-    AND.B #$01                                                 ;83B132|2901    |      ;
+    AND.B #$01                                                 ;83B132|2901    |      ; bit0: fully solid
     BEQ +                                                      ;83B134|F003    |83B139;
     JMP.W .return1                                             ;83B136|4CBAB1  |83B1BA;
  
  
   + LDA.B strcVariables.n8Temp1                                ;83B139|A592    |000092;
-    AND.B #$02                                                 ;83B13B|2902    |      ;
+    AND.B #$02                                                 ;83B13B|2902    |      ; bit1: left half solid
     BNE .solid_left_half                                                ;83B13D|D02B    |83B16A;
     LDA.B strcVariables.n8Temp1                                ;83B13F|A592    |000092;
-    AND.B #$04                                                 ;83B141|2904    |      ;
+    AND.B #$04                                                 ;83B141|2904    |      ; bit2: right half solid
     BNE .solid_right_half                                                ;83B143|D039    |83B17E;
     LDA.B strcVariables.n8Temp1                                ;83B145|A592    |000092;
-    AND.B #$08                                                 ;83B147|2908    |      ;
+    AND.B #$08                                                 ;83B147|2908    |      ; bit3: top half solid
     BNE .solid_top_half                                                ;83B149|D047    |83B192;
     LDA.B strcVariables.n8Temp1                                ;83B14B|A592    |000092;
-    AND.B #$10                                                 ;83B14D|2910    |      ;
+    AND.B #$10                                                 ;83B14D|2910    |      ; bit4: bottom half solid
     BNE .solid_bottom_half                                                ;83B14F|D055    |83B1A6;
     %CheckPlayerFlags(!PFLAGS_RIDINGHORSE)
     BNE +                                                      ;83B158|D003    |83B15D;
     JMP.W .return0                                             ;83B15A|4CC1B1  |83B1C1;
  
  
-  + CPX.W #$00C0                                               ;83B15D|E0C000  |      ;
+  + CPX.W #$00C0                                               ;83B15D|E0C000  |      ; riding the horse: object ids $C0-$CF are impassable
     BCC .return0                                               ;83B160|905F    |83B1C1;
     CPX.W #$00D0                                               ;83B162|E0D000  |      ;
     BCS .return0                                               ;83B165|B05A    |83B1C1;
@@ -1153,10 +1153,10 @@ fGameEngine_AddProfit:
     LDA.L nMoney+2                                             ;83B1D6|AF061F7F|7F1F06;
     ADC.B ptrTemp0x72+2                                        ;83B1DA|6574    |000074;
     STA.B ptrUnknown0x75+2                                     ;83B1DC|8577    |000077;
-    BMI .ok                                                    ;83B1DE|3026    |83B206;
+    BMI .ok                                                    ;83B1DE|3026    |83B206; sign of the 24-bit sum: negative = not enough money
     REP #$20                                                   ;83B1E0|C220    |      ;
     LDA.B ptrUnknown0x75                                       ;83B1E2|A575    |000075;
-    CMP.W #$423F                                               ;83B1E4|C93F42  |      ;
+    CMP.W #$423F                                               ;83B1E4|C93F42  |      ; cap at 999999 ($0F423F)
     SEP #$20                                                   ;83B1E7|E220    |      ;
     LDA.B ptrUnknown0x75+2                                     ;83B1E9|A577    |000077;
     SBC.B #$0F                                                 ;83B1EB|E90F    |      ;
@@ -1207,7 +1207,7 @@ fGameEngine_AddWood:
     CLC                                                        ;83B22C|18      |      ;
     ADC.B strcVariables.n16Temp1                               ;83B22D|657E    |00007E;
     BMI .ok                                                    ;83B22F|300E    |83B23F;
-    CMP.W #$03E7                                               ;83B231|C9E703  |      ;
+    CMP.W #$03E7                                               ;83B231|C9E703  |      ; cap at 999
     BCS .max                                                   ;83B234|B010    |83B246;
     STA.L nStoredWood                                          ;83B236|8F0C1F7F|7F1F0C;
     LDA.W #$0000                                               ;83B23A|A90000  |      ;
@@ -1331,7 +1331,7 @@ fGameEngine_LoadGame:
     REP #$20                                                   ;83B2BF|C220    |      ;
     PLA                                                        ;83B2C1|68      |      ;
     CMP.W #$0000                                               ;83B2C2|C90000  |      ;
-    BEQ +                                                      ;83B2C5|F00B    |83B2D2;
+    BEQ +                                                      ;83B2C5|F00B    |83B2D2; slot 1 lives at $70:1000
     LDA.W #$1000                                               ;83B2C7|A90010  |      ;
     STA.B ptrTemp0x72                                          ;83B2CA|8572    |000072;
     SEP #$20                                                   ;83B2CC|E220    |      ;
@@ -1667,7 +1667,7 @@ fGameEngine_LoadGame:
     STA.L strcChickenData,X                                    ;83B648|9F86C27E|7EC286;
     INY                                                        ;83B64C|C8      |      ;
     INX                                                        ;83B64D|E8      |      ;
-    CPX.W #$0068                                               ;83B64E|E06800  |      ;
+    CPX.W #$0068                                               ;83B64E|E06800  |      ; $68 = 13 chicken records x 8 bytes
     BNE -                                                      ;83B651|D0F3    |83B646;
     SEP #$20                                                   ;83B653|E220    |      ;
     LDY.W #$0100                                               ;83B655|A00001  |      ;
@@ -1677,7 +1677,7 @@ fGameEngine_LoadGame:
     STA.L strcCowData,X                                        ;83B65D|9FC6C17E|7EC1C6;
     INY                                                        ;83B661|C8      |      ;
     INX                                                        ;83B662|E8      |      ;
-    CPX.W #$00C0                                               ;83B663|E0C000  |      ;
+    CPX.W #$00C0                                               ;83B663|E0C000  |      ; $C0 = 12 cow records x 16 bytes
     BNE -                                                      ;83B666|D0F3    |83B65B;
     REP #$20                                                   ;83B668|C220    |      ;
     LDA.B ptrTemp0x72                                          ;83B66A|A572    |000072;
@@ -1695,7 +1695,7 @@ fGameEngine_LoadGame:
     INY                                                        ;83B686|C8      |      ;
     INX                                                        ;83B687|E8      |      ;
     CPX.W #$0F00                                               ;83B688|E0000F  |      ;
-    BNE -                                                      ;83B68B|D0F3    |83B680;
+    BNE -                                                      ;83B68B|D0F3    |83B680; farm tilemap bytes $0C0-$EFF
     RTL                                                        ;83B68D|6B      |      ;
  
  
@@ -2135,7 +2135,7 @@ fGameEngine_PeekSaveSlot:
     BEQ .return                                                ;83BA88|F049    |83BAD3;
     LDY.W #$003C                                               ;83BA8A|A03C00  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BA8D|B772    |000072;
-    CMP.B #$46                                                 ;83BA8F|C946    |      ;
+    CMP.B #$46                                                 ;83BA8F|C946    |      ; "F" of the FARM signature at slot+$3C
     BNE .return                                                ;83BA91|D040    |83BAD3;
     LDY.W #$003D                                               ;83BA93|A03D00  |      ;
     LDA.B [ptrTemp0x72],Y                                      ;83BA96|B772    |000072;
@@ -2178,7 +2178,7 @@ fGameEngine_PeekSaveSlot:
 ; @note    Also writes $098E (+RAM_SHIFT, last used slot) and may reformat the save slots in SRAM.
 ; @clobbers A X Y
 ; @mode    M8X16 -> M8X16
-; @callers fCore_InterruptIRQ5
+; @callers fCore_Reset
 ; @note    $098E is read by the title screen and by the load/continue paths (fMainMenu_*, fInput_*).
 ;;
 fGameEngine_ValidateSaveSlots:
@@ -2194,7 +2194,7 @@ fGameEngine_ValidateSaveSlots:
     LDA.B #$70                                                 ;83BAF1|A970    |      ;
     STA.B ptrTemp0x72+2                                        ;83BAF3|8574    |000074;
     LDY.W #$003C                                               ;83BAF5|A03C00  |      ;
-    LDA.B [ptrTemp0x72],Y                                      ;83BAF8|B772    |000072;
+    LDA.B [ptrTemp0x72],Y                                      ;83BAF8|B772    |000072; signature check "FARM" ($46 $41 $52 $4D)
     CMP.B #$46                                                 ;83BAFA|C946    |      ;
     BNE .first_copy_invalid                                                ;83BAFC|D063    |83BB61;
     LDY.W #$003D                                               ;83BAFE|A03D00  |      ;
@@ -2231,7 +2231,7 @@ fGameEngine_ValidateSaveSlots:
     INY                                                        ;83BB40|C8      |      ;
     INY                                                        ;83BB41|C8      |      ;
     CPY.W #$1000                                               ;83BB42|C00010  |      ;
-    BNE -                                                      ;83BB45|D0F2    |83BB39;
+    BNE -                                                      ;83BB45|D0F2    |83BB39; checksum covers the whole $1000 byte slot (2048 words)
     REP #$30                                                   ;83BB47|C230    |      ;
     LDA.B strcVariables.n16Temp1                               ;83BB49|A57E    |00007E;
     CMP.B strcVariables.n16Temp2                               ;83BB4B|C580    |000080;
@@ -2254,7 +2254,7 @@ fGameEngine_ValidateSaveSlots:
   - STA.B [ptrTemp0x72],Y                                      ;83BB69|9772    |000072; zero loop
     INY                                                        ;83BB6B|C8      |      ;
     INY                                                        ;83BB6C|C8      |      ;
-    CPY.W #$0800                                               ;83BB6D|C00008  |      ;
+    CPY.W #$0800                                               ;83BB6D|C00008  |      ; invalid: clear first $800 bytes and rewrite the signature
     BNE -                                                      ;83BB70|D0F7    |83BB69;
     SEP #$20                                                   ;83BB72|E220    |      ;
     LDY.W #$003C                                               ;83BB74|A03C00  |      ;
