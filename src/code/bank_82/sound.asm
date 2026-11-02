@@ -748,7 +748,7 @@ fPlayer_InteractWithFrontObject:
     LDA.W #$0010                                               ;82AEF4|A91000  |      ;
     STA.B strcPlayer.unkE3                                     ;82AEF7|85E3    |0000E3;
     LDA.B strcPlayer.direction                                 ;82AEF9|A5DA    |0000DA;
-    JSL.L fGameEngine_DirectionHandler83AD91                   ;82AEFB|2291AD83|83AD91;
+    JSL.L fGameEngine_CheckAISlotCollision                   ;82AEFB|2291AD83|83AD91;
     RTL                                                        ;82AEFF|6B      |      ;
  
  

@@ -1,0 +1,13 @@
+old,new,confidence,reason
+fGameEngine_FirstNight,fGameEngine_ResetSessionState,medium,"called by fCore_GameStart for both new and loaded games; clears dialog/palette/player/object/menu/audio state, daily flags and the clock; nothing about a first night"
+fGameEngine_DirectionHandler83AD91,fGameEngine_CheckAISlotCollision,medium,"scans the 49 AI slots at $7E:B586 for one within 25 px of a probe point in front of the object; returns A=1 blocked"
+fGameEngine_DirectionHandler83AF37,fGameEngine_CheckTileCollisionDir,medium,"probes two leading-edge points per direction with fGameEngine_CheckTileCollision and returns a collision mask plus slide distances"
+fGameEngine_CheckDirectionalOverlap,fGameEngine_CheckPlayerOverlap,medium,"tests whether the next position of an AI object lies within 12 px of strcPlayer.posX/posY; only caller fAI_UpdateSlotWander"
+fGameEngine_LoadContinue,fGameEngine_PeekSaveSlot,high,"reads year/season/day/name of a save slot for the continue screens and returns X=1 when the FARM signature and day are valid; does not load the game"
+fGameEngine_SaveCheck,fGameEngine_ValidateSaveSlots,high,"verifies signature + checksum of both SRAM slots, formats bad slots, sets the last-slot byte"
+fGameEngine_ChickenUnused83C9BA,fGameEngine_UnusedCountChickens,high,"unreferenced; counts chicken entries with the exists bit"
+fGameEngine_CowUnused83C9E5,fGameEngine_UnusedCountCows,high,"unreferenced; counts cow entries with the exists bit"
+fAreaEvents_Festival1,fAreaEvents_FlowerFestivalDance,medium,"area $08 (!AREA_DANCINGS1) starts script group $0E sub 1; the town starts group $0E sub 0 on spring 23 (calendar day of the flower festival; weather enum order puts the flower festival first)"
+fAreaEvents_Festival2,fAreaEvents_HarvestFestivalDance,medium,"area $09 (!AREA_DANCINGS2) starts script group $26 sub 1; the town starts group $26 sub 0 on fall 12 (harvest festival day)"
+fAreaEvents_Festival3,fAreaEvents_SNF_PublicSquare,high,"area $0A (!AREA_NY_PUBLICSQUARE) starts group $0F sub 1; group $0F is the Star Night Festival script (script_0F_StarNightFestival.asm), siblings are already fAreaEvents_SNF_Spa / fAreaEvents_SNF_MountainTop"
+fAreaInit_HouseHelper,fAreaEvents_House_PrepareEnding,medium,"jumped to only from fAreaEvents_House in year 2, summer, day $1E; starts script group 0 sub $2E, sets nEndingStep=0, picks the happiest cow name for the ending and scales nRanchDevelopmentRate"

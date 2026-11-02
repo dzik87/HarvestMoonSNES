@@ -1,7 +1,28 @@
  
+;;
+; @file   math.asm
+; @brief  Integer multiply and divide helpers built on the SNES hardware multiplier ($4202-$4216) and divider, with a
+;         software fallback for large divisors.
+; @bank   $83   @range $838000-$838137
+; @see    graphics.asm, random.asm; math arguments travel in strcVariables.n16Temp1-3 ($7E, $80, $82)
+;;
     ORG $838000
  
  
+;;
+; @brief   Unsigned 16 x 16 -> 16 bit multiply: A * strcVariables.n16Temp1, low 16 bits of the product.
+; @details Built from three 8x8 hardware multiplications (fMathMultiply): lo*lo gives the base product, hi(A)*lo(Temp1) and
+;          lo(A)*hi(Temp1) are only added into the high byte of the result ((product & $FF) << 8); hi*hi never matters for a
+;          16-bit result. The partial results live in strcAudio.unkMulti11E / 120 / 122, scratch is shared with the audio code.
+; @param   A      16-bit factor 1
+; @param   n16Temp1  16-bit factor 2 (strcVariables.n16Temp1, DP $7E)
+; @return  A      (A * n16Temp1) & $FFFF
+; @modifies strcAudio.unkMulti11A, strcAudio.unkMulti11B, strcAudio.unkMulti11C, strcAudio.unkMulti11E, strcAudio.unkMulti120, strcAudio.unkMulti122
+; @mode    M16X16 -> =
+; @calls   fMathMultiply
+; @callers fAudio_LoadCommonSamples, fAudio_LoadSfxSample, fAudio_LoadTrackSamples, fAudio_UploadTrackData, fAreaEvents_House_PrepareEnding
+; @note    Name suffix "7EbyA" means DP $7E (n16Temp1) times A.
+;;
 fMathMultiply_7EbyA:
     PHP                                                        ;838000|08      |      ;
     REP #$30                                                   ;838001|C230    |      ;
@@ -51,6 +72,15 @@ fMathMultiply_7EbyA:
     RTL                                                        ;838066|6B      |      ;
  
  
+;;
+; @brief   Local helper: 8 x 8 unsigned hardware multiply of strcAudio.unkMulti11A and strcAudio.unkMulti11B.
+; @details Writes SNES_WRMPYA/WRMPYB, waits four NOPs for the 8 machine cycles of the multiplier and reads SNES_RDMPYL.
+; @param   strcAudio.unkMulti11A  8-bit factor 1
+; @param   strcAudio.unkMulti11B  8-bit factor 2
+; @return  A      16-bit product
+; @mode    M16X16 -> M16X16
+; @callers fMathMultiply_7EbyA
+;;
 fMathMultiply:
     SEP #$20                                                   ;838067|E220    |      ; $011A: nA, $011B, return A = $011A * $011B
     LDA.W strcAudio.unkMulti11A                                ;838069|AD1A01  |00011A;
@@ -66,6 +96,22 @@ fMathMultiply:
     RTS                                                        ;838081|60      |      ;
  
  
+;;
+; @brief   Unsigned 16-bit divide: A = n16Temp1 / n16Temp2, remainder in n16Temp1.
+; @details Divisor below $00FF uses the hardware divider (SNES_WRDIVL / WRDIVB, 16 / 8 bit, result in RDDIVL, remainder in
+;          RDMPYL after four NOPs). A larger divisor takes the shift-and-subtract loop at .software_divide (16 iterations),
+;          which keeps the quotient in n16Temp3 and the running remainder in A. Both paths leave carry clear (LSR of a zero
+;          Y value). Division by zero is not checked (?).
+; @param   n16Temp1  dividend (strcVariables.n16Temp1, DP $7E)
+; @param   n16Temp2  divisor  (strcVariables.n16Temp2, DP $80)
+; @return  A      quotient
+; @return  n16Temp1  remainder
+; @modifies strcVariables.n16Temp1, strcVariables.n16Temp3
+; @clobbers X Y
+; @mode    M16X16 -> M16X16
+; @callers fCore_GetRandomNumber, fEvents_UpdateMarriageAndChildGrowth, fAreaEvents_House_PrepareEnding, fAudio_LoadCommonSamples, fAudio_LoadSfxSample, fAudio_LoadTrackSamples, fAudio_UploadSpcDriver, fAudio_UploadTrackData
+; @note    The code at $8380D0 that follows (see below) is a signed variant that nothing calls.
+;;
 fMathDivide:
     REP #$30                                                   ;838082|C230    |      ;
     LDY.W #$0000                                               ;838084|A00000  |      ;
@@ -112,6 +158,11 @@ fMathDivide:
     LDA.B strcVariables.n16Temp3                               ;8380CB|A582    |000082;
     JMP.W .justReturn                                          ;8380CD|4CAD80  |8380AD;
  
+; Unreferenced signed divide (no label, entry $8380D0): same contract as fMathDivide but the operands are treated
+; as signed 16-bit values. Both are made positive (Y counts the sign flips); after the unsigned division the quotient is
+; negated when exactly one operand was negative (carry from LSR of Y, then EOR #$FFFF / INC). The remainder in n16Temp1 is
+; always non-negative. It shares fMathDivide's .software_divide loop and jumps back to the epilogue at $83810F.
+; No caller found in any region (confidence: high that it is dead code).
     REP #$30                                                   ;8380D0|C230    |      ;
     LDY.W #$0000                                               ;8380D2|A00000  |      ;
     LDA.B strcVariables.n16Temp1                               ;8380D5|A57E    |00007E;

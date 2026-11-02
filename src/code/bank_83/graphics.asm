@@ -1,6 +1,30 @@
 ; Bank $83 module "graphics" - starts at $838166
+;;
+; @file   graphics.asm
+; @brief  Small VRAM transfer helpers for the dialog box (glyph tile rows, 2x2 tilemap blocks) and the LZSS decompressor
+;         used for compressed tilemaps / character data.
+; @bank   $83   @range $838166-$8382C5
+; @see    dialog.asm (callers), docs/formats/tilemap-compression.md, fCore_PrepareTransfer (bank $80 DMA queue)
+;;
  
  
+;;
+; @brief   Queue two VRAM DMA transfers that copy one glyph (upper and lower tile row of a 2bpp dialog glyph) to VRAM.
+; @details Uses DMA queue slots 6 and 7 (strcSystem.arrayIndex) with destination register $18 (VRAM data port) through
+;          fCore_PrepareTransfer with VMAIN value $80. Transfer size is nArg1 * 16 + $10 bytes, i.e. (nArg1 + 1) 2bpp tiles.
+;          Slot 6 copies from ptrTemp0x72 to VRAM word address X, slot 7 copies from ptrTemp0x72 + $100 to X + $80 (the
+;          tile row below in the VRAM character layout). The transfers are only queued; they run when the queue is started.
+; @param   A      number of extra tiles per row minus one (0 = one 8x8 tile per row; the dialog code passes 0, JP passes its own width value (?))
+; @param   X      VRAM word destination address of the upper row
+; @param   ptrTemp0x72  24-bit pointer to the glyph data (lower row at +$100)
+; @modifies strcSystem.arrayIndex, strcSystem.destinationRegister, strcVariables.n16Temp1, ptrTemp0x72
+; @note    ptrTemp0x72 is advanced by $100 and DMA queue slots 6 and 7 are filled.
+; @clobbers A X Y
+; @mode    M16X16 -> M16X16
+; @calls   fCore_PrepareTransfer
+; @callers fDialog_TransferGlyph
+; @note    confidence: medium for the glyph-row interpretation (derived from the call site fDialog_TransferGlyph).
+;;
 fGraphicsTransferData:
     REP #$30                                                   ;838166|C230    |      ; A: nArg1, X: nArg2
     ASL A                                                      ;838168|0A      |      ;
@@ -47,6 +71,20 @@ fGraphicsTransferData:
     RTL                                                        ;8381B6|6B      |      ;
  
  
+;;
+; @brief   Queue two small VRAM DMA transfers that write a 2 x 2 block of BG tilemap entries (two words per row).
+; @details Slot 6 copies 4 bytes from ptrTemp0x72 to VRAM word address X, slot 7 copies the next 4 bytes
+;          (ptrTemp0x72 + 4) to X + $20, which is the next row of a 32-column tilemap. Both use VMAIN value $80 and
+;          destination register $18.
+; @param   X      VRAM word address of the top-left tilemap entry
+; @param   ptrTemp0x72  24-bit pointer to 4 tilemap words (two rows of two entries)
+; @modifies strcSystem.arrayIndex, strcSystem.destinationRegister, ptrTemp0x72
+; @note    ptrTemp0x72 is advanced by 4 and DMA queue slots 6 and 7 are filled.
+; @clobbers A X Y
+; @mode    M8X16 -> M16X16
+; @calls   fCore_PrepareTransfer
+; @callers fDialog_DrawBlinkIconFrame (next-page blink icon of the dialog box)
+;;
 fGraphics_WriteTilemap2x2:
     SEP #$20                                                   ;8381B7|E220    |      ; X: nArg1, $72: ptr24
     REP #$10                                                   ;8381B9|C210    |      ;
@@ -81,6 +119,24 @@ fGraphics_WriteTilemap2x2:
     RTL                                                        ;8381F7|6B      |      ;
  
  
+;;
+; @brief   Decompress an LZSS blob (N=2048, F=34) from ptrTemp0x72 to the buffer at ptrUnknown0x75.
+; @details Header: word = number of output bytes, followed by 2 more header bytes (skipped). The 2 KB ring buffer is
+;          $7F:0000-$7F:07FF, cleared first, write position starts at $07DE. Flag bytes are read LSB first: 1 = literal byte,
+;          0 = match: byte 1 = ring offset low 8 bits, byte 2 = bits 0-4 length-3, bits 5-7 = ring offset bits 8-10.
+;          Output stops when the counter from the header reaches zero (no end marker). Full format description:
+;          docs/formats/tilemap-compression.md.
+; @param   ptrTemp0x72     24-bit pointer to the compressed blob
+; @param   ptrUnknown0x75  24-bit pointer to the destination buffer
+; @return  A      0 (remaining byte counter, strcVariables.n16Temp1)
+; @modifies ptrTemp0x72, ptrUnknown0x75, strcVariables.n16Temp1, strcVariables.n16Temp2, strcVariables.n16Temp3, strcVariables.n16Temp4, strcVariables.n16Unk86, strcVariables.n16Unk88
+; @note    ptrTemp0x72 / ptrUnknown0x75 end past the last byte read / written; the ring buffer $7F:0000-$7F:07FF is overwritten.
+; @clobbers X
+; @mode    M16X16 -> =
+; @callers fDialog_LoadDialogBoxGraphics, fTileMap_MapChangeHandler (two call sites)
+; @note    The scratch fields n16Temp2 (flag byte), n16Temp3 (flag bit counter), n16Temp4 (ring write position),
+;          n16Unk86 (ring read position) and n16Unk88 (match length) are the "Unk" ones named in structures.asm.
+;;
 fGraphicsDecompressTilemap:
     PHP                                                        ;8381F8|08      |      ;
     REP #$30                                                   ;8381F9|C230    |      ;

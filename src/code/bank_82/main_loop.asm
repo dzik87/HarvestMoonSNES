@@ -1601,7 +1601,7 @@ fMainMenu_StateNewGameSlotSelect:
     LDA.B #$00                                                 ;82E029|A900    |      ;
     XBA                                                        ;82E02B|EB      |      ;
     LDA.W $098E+!RAM_SHIFT                                 ;82E02C|AD8E09  |00098E;
-    JSL.L fGameEngine_LoadContinue                             ;82E02F|2245BA83|83BA45;
+    JSL.L fGameEngine_PeekSaveSlot                             ;82E02F|2245BA83|83BA45;
     REP #$30                                                   ;82E033|C230    |      ;
     CPX.W #$0000                                               ;82E035|E00000  |      ;
     if !REGION_JP
@@ -1726,7 +1726,7 @@ fMainMenu_NewGameSlotSelect_WaitFrame:
     JML.L $82E154
   + REP #$20
     LDA.W #$0000
-    JSL.L fGameEngine_LoadContinue
+    JSL.L fGameEngine_PeekSaveSlot
     REP #$30
     CPX.W #$0000
     BEQ .reset_scroll_x_eu
@@ -1771,7 +1771,7 @@ fMainMenu_NewGameSlotSelect_WaitFrame:
   + REP #$20                                                   ;82E115|C220    |      ;
     LDA.W #$0000                                               ;82E117|A90000  |      ;
     endif
-    JSL.L fGameEngine_LoadContinue                             ;82E11A|2245BA83|83BA45;
+    JSL.L fGameEngine_PeekSaveSlot                             ;82E11A|2245BA83|83BA45;
     REP #$30                                                   ;82E11E|C230    |      ;
     CPX.W #$0000                                               ;82E120|E00000  |      ;
     if !REGION_JP
@@ -1832,7 +1832,7 @@ fMainMenu_NewGameSlotSelect_WaitFrame:
 fMainMenu_NewGameSlotSelect_MoveCursorSlot2:
     REP #$20                                                   ;82E16B|C220    |      ;
     LDA.W #$0001                                               ;82E16D|A90100  |      ;
-    JSL.L fGameEngine_LoadContinue                             ;82E170|2245BA83|83BA45;
+    JSL.L fGameEngine_PeekSaveSlot                             ;82E170|2245BA83|83BA45;
     REP #$30                                                   ;82E174|C230    |      ;
     CPX.W #$0000                                               ;82E176|E00000  |      ;
     if !REGION_JP
@@ -2190,7 +2190,7 @@ fMainMenu_DrawSaveSlotInfo:
     REP #$30                                                   ;82E405|C230    |      ;
     PHA                                                        ;82E407|48      |      ;
     PHY                                                        ;82E408|5A      |      ;
-    JSL.L fGameEngine_LoadContinue                             ;82E409|2245BA83|83BA45;
+    JSL.L fGameEngine_PeekSaveSlot                             ;82E409|2245BA83|83BA45;
     REP #$30                                                   ;82E40D|C230    |      ;
     PLY                                                        ;82E40F|7A      |      ;
     PLA                                                        ;82E410|68      |      ;

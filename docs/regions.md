@@ -350,7 +350,7 @@ in both EU and DE (`!REGION_EUDE`).
   `aTextDataTableFFFD`, dialog iteration and dialog box graphics loading, name input screen, tilemap pointers
   to the language specific graphics in banks $9A/$9B/$A5.
 - **EU (and JP, differently):** the new-game slot selection (`fMainMenu_NewGameSlotSelect_WaitFrame`) calls the
-  continue loader (`fGameEngine_LoadContinue`) and positions the cursor differently; DE keeps the US flow.
+  continue loader (`fGameEngine_PeekSaveSlot`) and positions the cursor differently; DE keeps the US flow.
 - **DE only (against EU):** longer weekday names (`!NAME_WEEKDAY_SIZE` = 24, RAM +6) and the code that writes them,
   the day ordinal strings, empty-slot drawing (`fMainMenu_DrawEmptySaveSlot`), `subItemCarried_ShelfTomatoSeeds`; DE and JP
   (not EU) also differ in `fCore_FindBestLove`, `aNameInputGrid0`, the tool animation table / handlers and

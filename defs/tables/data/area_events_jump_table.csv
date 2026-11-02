@@ -11,9 +11,9 @@ $04,AREA_TOWNSPRING,fAreaEvents_Town
 $05,AREA_TOWNSUMMER,fAreaEvents_Town
 $06,AREA_TOWNFALL,fAreaEvents_Town
 $07,AREA_TOWNWINTER,fAreaEvents_Town
-$08,AREA_DANCINGS1,fAreaEvents_Festival1
-$09,AREA_DANCINGS2,fAreaEvents_Festival2
-$0A,AREA_NY_PUBLICSQUARE,fAreaEvents_Festival3
+$08,AREA_DANCINGS1,fAreaEvents_FlowerFestivalDance
+$09,AREA_DANCINGS2,fAreaEvents_HarvestFestivalDance
+$0A,AREA_NY_PUBLICSQUARE,fAreaEvents_SNF_PublicSquare
 $0B,AREA_EGGFESTIVAL,fAreaEvents_EggFestival
 $0C,AREA_CROSSROADSPRING,fAreaEvents_CrossRoad
 $0D,AREA_CROSSROADSUMMER,fAreaEvents_CrossRoad

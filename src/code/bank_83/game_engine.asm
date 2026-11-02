@@ -1,5 +1,38 @@
 ; Bank $83 module "game_engine" - starts at $83A9BE
+;;
+; @file   game_engine.asm
+; @brief  Game-state engine: new-game defaults and per-session reset, player/object movement collision tests, bounded
+;         resource counters (money, wood, feed, happiness), the save-slot reader/writer/validator, the daily care
+;         simulation of cows, chickens and the horse, placement of the farm animals into the current map, and
+;         add/lookup helpers for the animal tables.
+; @bank   $83   @range $83A9BE-$83CA0F (animal position tables are generated: build/gen/blocks/farm_animal_positions.asm)
+; @see    map_engine.asm, structures.asm (strcCowData, strcChickenData, strcPlayerData, strcFlags), docs/formats/data-tables.md
+; @note   Save slot layout (two slots at $70:0000 and $70:1000, $1000 bytes each; the same offsets are used by
+;         fGameEngine_SaveGame / LoadGame): +00 year, +01 season, +02 weekday, +03 day, +04..+0A seeds and feed left
+;         (grass, corn, tomato, potato, turnip, cow feed, chicken feed), +0B cows, +0C chickens, +0D weather forecast,
+;         +0E stamina, +0F equipped tool, +10 water, +11 cow pregnancy days, +12 newborn cow affection, +13 dog area,
+;         +14 horse area, +15 horse age, +16 construction counter, +17 power berries, +18 $09A3 (unnamed), +19 strcStockData.unkCow,
+;         +1A second tool, +2E latest-slot marker (1 = most recently saved slot), +2F word checksum, +31/+33/+35/+37 shipped
+;         corn/tomato/turnip/potato counters, +39 money (24 bit), +3C "FARM" signature, +40 wood, +42 feed, +44 mapFlags,
+;         +46 planted grass, +48..+50 love of Maria/Ann/Nina/Ellen/Eve, +60..+66 event1-4 flags, +68/+6A dog x/y, +6C happiness,
+;         +6E eggs-in-coop flags, +70..+76 event5-8 flags, +78 married days, +7A/+7C child ages, +7E dog hugs, +80 player
+;         name (4 bytes), +84..+87 shed items, +88 dog name, +8C horse name, +90 first child name, +94 second child name,
+;         +98 chicken table (13 x 8 bytes), +100 cow table (12 x 16 bytes), +1C0 farm tilemap copy (sFarmTilemap+$C0..+$F00).
+;;
  
+;;
+; @brief   Initialise all persistent game state for a new game (called before the intro / first day starts).
+; @details Date = spring 1 of year 0, weekday 1 (Monday). Stamina $64, money 30G ($1E), grass seeds 1, all other seeds,
+;          feed, animals, loves, event flags 1-8, children, statistics and dog/horse state zero. Player, dog, horse, children
+;          names are filled with $B1 (blank glyph) in the short byte form and !DIALOG_SPACE in the word form. The shed
+;          starts with sickle, hoe, hammer, axe (row1 $0F), grass seed and watering can (row2 $88). Finally the default
+;          farm tilemap is loaded.
+; @modifies nCurrentYearID, nCurrentSeasonID, nCurrentWeekdayID, nCurrentDay, nMoney, nLove_Maria, nLove_Ann, nLove_Nina, nLove_Ellen, nLove_Eve, strcFlags.event1, strcFlags.event2, strcFlags.event3, strcFlags.event4, strcFlags.event5, strcFlags.event6, strcFlags.event7, strcFlags.event8, strcNames, strcShedItems, strcPlayerData
+; @clobbers A
+; @mode    M8X16 -> M16X16
+; @calls   fObjectMap_LoadDefaultFarm
+; @callers fStartNewGame
+;;
 fGameEngine_SetDefaults:
     SEP #$20                                                   ;83A9BE|E220    |      ;
     REP #$10                                                   ;83A9C0|C210    |      ;
@@ -192,7 +225,21 @@ fGameEngine_SetDefaults:
     RTL                                                        ;83ABEF|6B      |      ;
  
  
-fGameEngine_FirstNight:
+;;
+; @brief   Reset the transient session state (dialog, palette scripts, player, object, menu, audio, carry state) at game start.
+; @details Called by fCore_GameStart for both "new game" and "load game", just before the player is placed in the house
+;          area (!AREA_HOUSE1). Clears the dialog state, DMA channel flags, palette animation pointers, shipping profit,
+;          the player flags/position/action (then sets PFLAGS_ACTIVE, direction down), item carry/stock/feed-placed bytes and
+;          scroll speeds, clears all daily flags (daily1-5) and the unknown flag words, sets the clock to nCurrentTimeID = 6,
+;          00:00 and sets nReqWoodForExpansion to 250 ($FA), or 500 ($1F4) when event1 bit $0040 is set (house upgrade done (?)).
+;          Ends by waiting for one NMI.
+; @modifies strcDialogDisplay, strcPlayer, strcObjectData, strcPlayerData, strcMenuData, strcAudio, strcMapScrool, strcFlags.daily1-5, nCurrentTimeID, nInGameHourCounter, nInGameMinuteCounter, nReqWoodForExpansion, nShippingProfit
+; @clobbers A
+; @mode    M16X16 -> M8X16
+; @calls   fWriteSeasonWeekdayAndDayOrdinal, fCore_WaitForNextNMI
+; @callers fCore_GameStart
+;;
+fGameEngine_ResetSessionState:
     REP #$30                                                   ;83ABF0|C230    |      ;
     STZ.W strcDialogDisplay.dialogId                           ;83ABF2|9C8301  |000183;
     STZ.W strcDialogDisplay.dialogUnk185                       ;83ABF5|9C8501  |000185;
@@ -342,7 +389,23 @@ fGameEngine_FirstNight:
     RTL                                                        ;83AD90|6B      |      ;
  
  
-fGameEngine_DirectionHandler83AD91:
+;;
+; @brief   Test whether the player's next step would run into an AI slot (NPC, animal or other moving object).
+; @details If daily4 bit $4000 is set the test is skipped and the new position is reported. Otherwise a probe point is built
+;          12 pixels in front of the player's last position in the move direction (lastX/lastY plus newX/newY/unkE3, +12
+;          centring offset). All 49 AI slots ($7E:B586, stride $40, pointer ptrAIUnknown0xCC) are scanned: slot byte +0C is first
+;          cleared, then set to 1 for each active slot (+00 <> 0) whose position (+1A, +1C) is within 25 pixels of the probe.
+;          The first such slot whose +00 bit 1 is clear blocks the movement.
+; @param   A      move direction: 0 down, 1 up, 2 +X, 3 -X (note: !PDIR_LEFT is $02 but this code moves +X for 2; the PDIR names look swapped (?))
+; @param   strcPlayer.lastX, lastY, newX, newY, unkE3  current position and the step to test
+; @return  A      1 = blocked (X = Y = 0), 0 = free (X = strcPlayer.newX, Y = strcPlayer.newY)
+; @modifies strcVariables.n16Temp2, strcVariables.n16Temp3, strcVariables.n16Unk8C
+; @clobbers X Y
+; @mode    M16X16 -> M16X16
+; @callers fPlayer_MoveInDirection, fInput_PlayerButtonA_Interact, fInput_PlayerButtonB, fInput_IsObjectDirectionBlocked, fPlayer_InteractWithFrontObject, fAIAction0x35_UpdateHorse, fItemCarried_CarryLoop_NoSell, fItemCarried_HandleDropAction, fItemCarriedAnimal_CarryLoop
+; @note    Confidence medium: meaning of slot byte +0C and of the bit-1 test of slot byte +00 inferred from the control flow only.
+;;
+fGameEngine_CheckAISlotCollision:
     REP #$30                                                   ;83AD91|C230    |      ; A: nPlayerDirection
     TAX                                                        ;83AD93|AA      |      ; X = A
     %CheckFlag(daily4, $4000)
@@ -528,7 +591,18 @@ fGameEngine_DirectionHandler83AD91:
     RTL                                                        ;83AEC2|6B      |      ;
  
  
-fGameEngine_CheckDirectionalOverlap:
+;;
+; @brief   Test whether the next step of a moving AI object would overlap the player.
+; @details Builds the target point from lastX/lastY plus or minus newX/newY according to the direction and checks that the
+;          point is within 12 pixels of strcPlayer.posX/posY on both axes.
+; @param   A      direction: 0 down, 1 up, 2 +X, 3 -X
+; @param   strcPlayer.lastX, lastY, newX, newY  position and step of the moving object (the same scratch fields are reused for NPCs)
+; @return  A      1 = overlaps the player (X = Y = 0), 0 = free (X = newX, Y = newY)
+; @clobbers X Y
+; @mode    M16X16 -> M16X16
+; @callers fAI_UpdateSlotWander
+;;
+fGameEngine_CheckPlayerOverlap:
     REP #$30                                                   ;83AEC3|C230    |      ; A: nIndex
     ASL A                                                      ;83AEC5|0A      |      ;
     TAX                                                        ;83AEC6|AA      |      ;
@@ -611,7 +685,26 @@ fGameEngine_CheckDirectionalOverlap:
     RTL                                                        ;83AF36|6B      |      ;
  
  
-fGameEngine_DirectionHandler83AF37:
+;;
+; @brief   Test the terrain in front of a moving object: two probe points on the leading edge, 6 pixels either side of centre.
+; @details For each direction the two corner points (for down: x-6 and x+6 at lastY+newY+6+unkE3) are passed to
+;          fGameEngine_CheckTileCollision with A = 0 (first point) and A = 1 (second point). The result mask
+;          is (first << 1) | second. When exactly one corner is blocked the routine returns the distance the object may still
+;          move before reaching the blocking tile edge (a slide value, computed from the tile-aligned coordinates in
+;          n16Unk86-n16Unk90); with both corners blocked a similar value is returned for the full side; with none blocked
+;          the returned distance is 0.
+; @param   A      move direction: 0 down, 1 up, 2 +X, 3 -X (same convention as fGameEngine_CheckAISlotCollision)
+; @param   strcPlayer.lastX, lastY, newX, newY, unkE3  position and step to test
+; @return  A      collision mask: 0 free, 1 second corner blocked, 2 first corner blocked, 3 both blocked
+; @return  X      allowed distance on X axis (directions 2 and 3), otherwise unchanged (?)
+; @return  Y      allowed distance on Y axis (directions 0 and 1), otherwise unchanged (?)
+; @modifies strcVariables.n16Temp1, strcVariables.n16Unk86, strcVariables.n16Unk88, strcVariables.n16Unk8A, strcVariables.n16Unk8C, strcVariables.n16Unk8E, strcVariables.n16Unk90, strcPlayer.unkPosX, strcPlayer.unkPosY
+; @mode    M16X16 -> M16X16
+; @calls   fGameEngine_CheckTileCollision
+; @callers fPlayer_MoveInDirection, fInput_PlayerButtonB, fInput_IsObjectDirectionBlocked, fAI_UpdateSlotWander, fAIAction0x35_UpdateHorse
+; @note    confidence: medium. The X/Y adjustment arithmetic was only read, not tested.
+;;
+fGameEngine_CheckTileCollisionDir:
     REP #$30                                                   ;83AF37|C230    |      ; A: nPlayerDirection
     ASL A                                                      ;83AF39|0A      |      ;
     TAX                                                        ;83AF3A|AA      |      ;
@@ -877,6 +970,11 @@ fGameEngine_DirectionHandler83AF37:
     RTL                                                        ;83B0E5|6B      |      ;
  
  
+;;
+; @brief   Unreferenced stub: clears strcPlayer.unkPosX/unkPosY and returns A = X = 0.
+; @mode    M16X16 -> M16X16
+; @note    No caller in any region; confidence: high that it is dead code.
+;;
 fGameEngine_Unused83B0E6:
     REP #$30                                                   ;83B0E6|C230    |      ;
     LDA.W #$0000                                               ;83B0E8|A90000  |      ;
@@ -887,6 +985,24 @@ fGameEngine_Unused83B0E6:
     RTL                                                        ;83B0F5|6B      |      ;
  
  
+;;
+; @brief   Local helper (JSR): test one 16x16 tile under a probe point and tell whether it blocks movement.
+; @details Looks up the tile properties with fObjectEngine_GetObjectPropertyByDirSeason (property index 2). Property bit 0 =
+;          fully solid; bits 1-4 = solid left / right / top / bottom half (the probe's bit 3 of x or y decides if the probe is in the
+;          solid half; for these half-solid tiles the slide limits n16Unk8E / n16Unk90 are set to 8 when the object is not moving
+;          along the other axis). Otherwise the tile is free, except when riding the horse: object ids $00C0-$00CF are blocked
+;          (terrain the horse cannot enter). The tile object id returned in X is kept in strcPlayer.unkPosX (A = 0) or
+;          strcPlayer.unkPosY (A = 1); the callers copy these to $0878 / $087A.
+; @param   A      probe index: 0 = first corner (result stored to unkPosX), 1 = second corner (unkPosY)
+; @param   X      probe x coordinate
+; @param   Y      probe y coordinate
+; @return  A      1 = blocked, 0 = free
+; @modifies strcVariables.n16Unk86, strcVariables.n16Unk88, strcVariables.n16Unk8A, strcVariables.n16Unk8C, strcVariables.n16Unk8E, strcVariables.n16Unk90, strcVariables.n8Temp1, strcPlayer.unkPosX, strcPlayer.unkPosY
+; @mode    M16X16 -> M16X16
+; @calls   fObjectEngine_GetObjectPropertyByDirSeason
+; @callers fGameEngine_CheckTileCollisionDir
+; @note    Ends with RTS (not RTL): only callable with JSR from this bank.
+;;
 fGameEngine_CheckTileCollision:
     REP #$30                                                   ;83B0F6|C230    |      ; return A: nStatus
     PHA                                                        ;83B0F8|48      |      ;
@@ -1017,6 +1133,16 @@ fGameEngine_CheckTileCollision:
     RTS                                                        ;83B1C8|60      |      ;
  
  
+;;
+; @brief   Add a signed 24-bit amount to the player's money, clamped to 999999.
+; @details A negative amount subtracts. When the result would be negative nothing is stored and 1 is returned
+;          (not enough money); a result above 999999 ($0F423F) is clamped.
+; @param   ptrTemp0x72  24-bit signed amount (DP $72-$74)
+; @return  A      0 = money updated, 1 = result would be negative (money unchanged)
+; @modifies nMoney, ptrUnknown0x75
+; @mode    M16X16 -> M16X16
+; @callers fNextDayHandler, fItemBuy_HandleAnswer, fItemSell_HandleAnswer, fToolUsedAction0x02_Plow, fToolUsedAction0x12_GoldenPlow, fAIAction0x42_AddValue24, fPlayerInteraction0x2E_AnimalNPC, fPlayerInteraction0x43, fPlayerInteraction0x44, fPlayerInteraction0x47, fPlayerInteraction0x51, fPlayerInteraction0x52
+;;
 fGameEngine_AddProfit:
     REP #$30                                                   ;83B1C9|C230    |      ; $72: nProfit24, return A: nStatus
     LDA.L nMoney                                               ;83B1CB|AF041F7F|7F1F04;
@@ -1066,6 +1192,14 @@ fGameEngine_AddProfit:
     RTL                                                        ;83B223|6B      |      ;
  
  
+;;
+; @brief   Add (or subtract) lumber in the wood store, clamped to 999.
+; @param   A      signed 16-bit amount
+; @return  A      0 = stored, 1 = result negative (not enough wood, store unchanged)
+; @modifies nStoredWood, strcVariables.n16Temp1
+; @mode    M16X16 -> M16X16
+; @callers fPlayerInteraction0x01_WoodStorage, fPlayerInteraction0x47, fToolUsedAction0x04_Axe, fToolUsedAction0x14_GoldenAxe
+;;
 fGameEngine_AddWood:
     REP #$30                                                   ;83B224|C230    |      ; A: nWood, return A: nStatus
     STA.B strcVariables.n16Temp1                               ;83B226|857E    |00007E;
@@ -1096,6 +1230,14 @@ fGameEngine_AddWood:
     RTL                                                        ;83B252|6B      |      ;
  
  
+;;
+; @brief   Add (or subtract) fodder in the feed store, clamped to 999.
+; @param   A      signed 16-bit amount
+; @return  A      0 = stored, 1 = result negative (store unchanged)
+; @modifies nStoredFeed, strcVariables.n16Temp1
+; @mode    M16X16 -> M16X16
+; @callers fPlayerInteraction0x15_FeedStorage, fToolUsedAction0x01_Sickle, fToolUsedAction0x11_GoldenSickle
+;;
 fGameEngine_AddFeed:
     REP #$30                                                   ;83B253|C230    |      ; A: nFeed, return A: nStatus
     STA.B strcVariables.n16Temp1                               ;83B255|857E    |00007E;
@@ -1126,6 +1268,14 @@ fGameEngine_AddFeed:
     RTL                                                        ;83B281|6B      |      ;
  
  
+;;
+; @brief   Add (or subtract) player happiness points, clamped to 999.
+; @param   A      signed 16-bit amount (for example $FFE2 = -30)
+; @return  A      0 = stored, 1 = result negative (value unchanged)
+; @modifies nPlayerHappiness, strcVariables.n16Temp1
+; @mode    M16X16 -> M16X16
+; @callers fGameEngine_AddCow, fGameEngine_AnimalsDailyUpdate, fEvents_UpdateMarriageAndChildGrowth, fItemCarried_PlaceEggInIncubator, fAreaEvents_Farm, fPlayerAction0x08, fPlayerAction0x13, fPlayerInteraction0x26_MariaDiary, fPlayerInteraction0x2D_NinaDiary, fPlayerInteraction0x2E_AnimalNPC, fPlayerInteraction0x33_EllenDiary, fPlayerInteraction0x36_AnnDiary
+;;
 fGameEngine_AddHappiness:
     REP #$30                                                   ;83B282|C230    |      ; A: nHappiness, return A: nStatus
     STA.B strcVariables.n16Temp1                               ;83B284|857E    |00007E;
@@ -1156,6 +1306,20 @@ fGameEngine_AddHappiness:
     RTL                                                        ;83B2B0|6B      |      ;
  
  
+;;
+; @brief   Copy one save slot from SRAM into the working RAM and rebuild the farm tilemap.
+; @details Slot 0 is read from $70:0000, any other value from $70:1000. See the save layout in the module header. Names are stored
+;          twice in RAM (short byte form strcNames.s* and widened word form strcNames.w*). The default farm map is loaded first
+;          (fObjectMap_LoadDefaultFarm) and the saved tilemap bytes from slot offset $1C0 are copied over sFarmTilemap+$C0..$F00.
+;          No signature or checksum test is made here; the slot is validated by fGameEngine_ValidateSaveSlots at boot.
+; @param   A      save slot (0 or 1)
+; @modifies ptrTemp0x72, ptrUnknown0x75, strcChickenData, strcCowData, sFarmTilemap
+; @note    Besides the listed fields every persistent value of the save layout above is overwritten.
+; @clobbers A X Y
+; @mode    M16X16 -> M8X16
+; @calls   fObjectMap_LoadDefaultFarm
+; @callers fLoadAndStartGame
+;;
 fGameEngine_LoadGame:
     REP #$30                                                   ;83B2B1|C230    |      ; A: nSaveSlot
     PHA                                                        ;83B2B3|48      |      ;
@@ -1535,6 +1699,19 @@ fGameEngine_LoadGame:
     RTL                                                        ;83B68D|6B      |      ;
  
  
+;;
+; @brief   Write the persistent game state into a save slot, add the checksum and mark it as the latest slot.
+; @details Mirror of fGameEngine_LoadGame (same offsets). After the copy it zeroes the marker byte (+2E) and checksum word
+;          (+2F), sums all 2048 words of the $1000-byte slot into n16Temp1, stores that checksum at +2F and finally sets the marker
+;          byte +2E to 1 in the saved slot and to 0 in the other slot.
+; @param   A      save slot (0 or 1)
+; @modifies ptrTemp0x72, strcVariables.n16Temp1
+; @note    Writes the save slot in SRAM ($70:0000 or $70:1000).
+; @clobbers A X Y
+; @mode    M16X16 -> M8X16
+; @callers fNextDayHandler
+; @note    The header comment "return A: nStatus" in the old source is wrong: nothing meaningful is returned in A.
+;;
 fGameEngine_SaveGame:
     REP #$30                                                   ;83B68E|C230    |      ; A: nSaveSlot, return A: nStatus
     PHA                                                        ;83B690|48      |      ;
@@ -1912,7 +2089,20 @@ fGameEngine_SaveGame:
     RTL                                                        ;83BA44|6B      |      ;
  
  
-fGameEngine_LoadContinue:
+;;
+; @brief   Read the summary of a save slot for the continue / load screens and report whether the slot holds a game.
+; @details A slot is valid when the day byte (+03) is non-zero and the signature "FARM" ($46 $41 $52 $4D) sits at offset +3C..+3F.
+;          When valid, year, season, day and the 4-byte player name are copied to nCurrentYearID, nCurrentSeasonID, nCurrentDay and strcNames.sPlayer
+;          (weekday and everything else are left alone).
+; @param   A      save slot (0 or 1)
+; @return  X      1 = valid slot, 0 = empty / invalid
+; @modifies nCurrentYearID, nCurrentSeasonID, nCurrentDay, strcNames.sPlayer, ptrTemp0x72
+; @clobbers A Y
+; @mode    M16X16 -> M8X16
+; @callers fMainMenu_DrawSaveSlotInfo, fMainMenu_NewGameSlotSelect_MoveCursorSlot2, fMainMenu_NewGameSlotSelect_WaitFrame, fInput_Case04_State8_LoadChoice 
+; @note    The old comment "return A: nStatus" was wrong: the result is in X.
+;;
+fGameEngine_PeekSaveSlot:
     REP #$30                                                   ;83BA45|C230    |      ; A: nSaveSlot, return A: nStatus
     PHA                                                        ;83BA47|48      |      ;
     LDA.W #$0000                                               ;83BA48|A90000  |      ;
@@ -1978,7 +2168,20 @@ fGameEngine_LoadContinue:
     RTL                                                        ;83BAD3|6B      |      ;
  
  
-fGameEngine_SaveCheck:
+;;
+; @brief   Validate both save slots at boot, repairing corrupt ones, and find out which slot was saved last.
+; @details For each slot: the "FARM" signature must be present and the word checksum (computed over the $1000 bytes with
+;          the marker +2E and checksum +2F zeroed) must equal the stored word. A bad slot is formatted: the first $800 bytes are zeroed
+;          and the signature is rewritten. The marker of slot 1 sets $098E = 1 (continue the second slot), otherwise it stays 0.
+;          daily4 bit $0800 is cleared first and set again when both slots had to be formatted (fresh SRAM, no save data).
+; @modifies strcFlags.daily4, ptrTemp0x72, strcVariables.n16Temp1, strcVariables.n16Temp2, strcVariables.n16Temp3, strcVariables.n8Temp1
+; @note    Also writes $098E (+RAM_SHIFT, last used slot) and may reformat the save slots in SRAM.
+; @clobbers A X Y
+; @mode    M8X16 -> M8X16
+; @callers fCore_InterruptIRQ5
+; @note    $098E is read by the title screen and by the load/continue paths (fMainMenu_*, fInput_*).
+;;
+fGameEngine_ValidateSaveSlots:
     SEP #$20                                                   ;83BAD4|E220    |      ;
     REP #$10                                                   ;83BAD6|C210    |      ;
     STZ.W $098E+!RAM_SHIFT                                 ;83BAD8|9C8E09  |00098E;
@@ -2166,6 +2369,38 @@ fGameEngine_SaveCheck:
     RTL                                                        ;83BC59|6B      |      ;
  
  
+;;
+; @brief   Daily simulation of the farm animals: cow care and mood, chicken care, ageing, eggs, and horse growth.
+; @details Runs once per night from the next-day handler. The care phases are skipped when daily4 bit $0001 is set
+;          (meaning of that flag unknown (?)). All animals are visited by index through fGameEngine_GetCowData (12 cows) and
+;          fGameEngine_GetChickenData (13 entries) which return the record pointer in ptrTemp0x72.
+;          1. Cow care: for each adult cow (babies skipped, children only graze via fObjectMap_EatingGrass): in the barn (map
+;             $27) it is fed when its bit of nCowFeedFlagsTable[index] is set in strcPlayerData.placedCowFeedFlags (pregnant cows
+;             use table slot 12); outdoors (map < 4) fed means there is grass left (strcPlayerData.leftGrassToCut) and the weather/map
+;             flags in strcDialogDisplay.mapFlags do not forbid grazing. Unfed or bad-weather cows lose happiness (-8, -16, -24,
+;             -8 depending on mapFlags bits $0008/$0010/$0200) via fCow_AddHappiness and roll 1/4, 1/2, 1/2, 1/8 to fall sick
+;             (status $20, 7 days, cow -12 and player -30 happiness). Cows with a low mood or stayed outside during bad weather
+;             (daily1 bit $1000 / mapFlags bit $0400) can become cranky (status $10, 3 days, -30 happiness).
+;          2. Cow ageing (always): interaction counter bits of byte +01 cleared; babies grow to child after 14 days, children to
+;             adult after 21 days; cranky / sick timers count down (a sick cow whose timer runs out while the weather is not
+;             festival/rain flagged dies: status 0, nOwnedCows-1, event6 bit $0040, strcStockData.unkCow = cow index); a cow marked
+;             "will be pregnant" (+01 bit 7) becomes pregnant (status $40); the pregnancy counter nCowPregnacyDays counts down and
+;             the calf is born (event1 bit $0008, status $80, nNewBornCowAffection 20, or 50/100 for a mother with happiness $60-$BF / $C0+).
+;          3. Chickens (13 entries): invalid entries (exists but not egg/child/adult) are deleted (-30 happiness); adult chickens
+;             eat from placedChcikenFeed in the coop or graze outdoors and may become cranky; eggs hatch after 3 days into
+;             children (nOwnedChickens+1, placed at (216,184)), children grow to adults after 7 days.
+;          4. Eggs: nEggInCoopFlags is rebuilt from the adult chickens in the coop (map $28) using aGameEngine_ChickenEggBitMask; event6 bit $0400 is
+;             set when at least one egg is laid; cranky chickens count their timer down instead.
+;          5. Horse: when owned (event3 bit $0100) nHorseAge grows by one per day up to 21 ($15).
+; @modifies strcCowData, strcChickenData, nOwnedCows, nOwnedChickens, nCowPregnacyDays, nNewBornCowAffection, nEggInCoopFlags, nHorseAge, nPlayerHappiness, strcFlags.event1, strcFlags.event6, strcStockData.unkCow
+; @clobbers A X Y
+; @mode    M16X16 -> M16X16
+; @calls   fGameEngine_GetCowData, fGameEngine_GetChickenData, fObjectMap_EatingGrass, fCow_AddHappiness, fGameEngine_AddHappiness, fCore_GetRandomNumber
+; @callers fNextDayHandler
+; @note    confidence: medium. Status bit names follow !COWSTATUS_* / !CHICKENSTATUS_*. The meaning of several strcDialogDisplay.mapFlags bits (weather,
+;          festival days) is not named in the sources; bit values are given as found. strcFlags bit meanings: event6 $1000 is set for any
+;          non-baby cow every day (?), $2000 is cleared when a chicken hatches (?).
+;;
 fGameEngine_AnimalsDailyUpdate:
     REP #$30                                                   ;83BC5A|C230    |      ;
     %CheckFlag(daily4, $0001)
@@ -2966,6 +3201,24 @@ fGameEngine_AnimalsDailyUpdate:
     RTL                                                        ;83C295|6B      |      ;
  
  
+;;
+; @brief   Start the AI scripts of all farm animals (chickens, cows, dog, horse) that belong to the area that was just loaded.
+; @details For every animal its stored map id is compared with strcMap.loadAreaId using seasonal groups: stored id 0-3 matches current 0-3
+;          (farm), 4-7 matches 4-7 (town), 8-$F matches $C-$F (crossroads), $10-$13 matches $10-$13 (woods), $14-$17 matches $15-$17
+;          (house sizes), $31 and above matches any current id >= $31, and every other id must match exactly (barn $27, coop $28).
+;          For a matching animal the tile position (nTileInFrontOfPlayerX / Y) is taken from its record (cows in the barn from aGameEngine_AddCowPositionsData[slot],
+;          slot 12 for pregnant / birthing cows) and fAI_StartSlotScriptAtFrontTile starts a script in a fixed AI slot: chickens in slot $24+i, cows
+;          in slot $18+i, dog slot $16, horse slot $17. Script (Y) per kind: egg 0, chicken child 1, adult chicken 2 (default $5F), cow baby 3
+;          ($17 when mapFlags bit 1 is set outside the barn), cow child 4 ($2F), adult cow 5 default, cranky 6, sick 7, pregnant 8, bad weather 9, dog $11, horse $13
+;          (or $10 when nHorseAge is $15). The dog only appears when owned (event3 bit $0080) and not being hugged; the horse when owned (event3 bit $0100) and not ridden.
+; @modifies nTileInFrontOfPlayerX, nTileInFrontOfPlayerY, strcStockData.unkEachChicken, strcStockData.unkEachCow, strcStockData.unkDog, strcStockData.unkHorse
+; @note    Also starts scripts in the AI slot table ($7E:B586) and sets $7F1F58 to 1 for the dog.
+; @clobbers A X Y
+; @mode    M16X16 -> M16X16
+; @calls   fGameEngine_GetChickenData, fGameEngine_GetCowData, fAI_StartSlotScriptAtFrontTile
+; @callers fMap_SetupArea
+; @note    confidence: medium. The script ids are the Y argument of fAI_StartSlotScriptAtFrontTile (see docs/ai/commands.md for the script table); the individual animation behaviours were not traced.
+;;
 fGameEngine_SpawnChickensOnMap:
     REP #$30                                                   ;83C296|C230    |      ;
     LDX.W #$0000                                               ;83C298|A20000  |      ;
@@ -3807,8 +4060,22 @@ fGameEngine_SpawnChickensOnMap:
     RTL                                                        ;83C806|6B      |      ;
  
  
+;;
+; @brief   Create a chicken record in the first free entry of the chicken table.
+; @param   A      kind: 0 = egg placed in the incubator (coop, status $43 = exists | egg | in incubator, position (232,184)),
+;                 1 = adult chicken placed at its coop slot position (status $09, position from aGameEngine_AddChickenPositionsData[slot]),
+;                 2 = adult chicken placed outside on the farm (status $09, map $04 + season, position (568,792))
+; @return  A      0 = added, 1 = table full (13 entries in use)
+; @modifies strcChickenData (the free entry), strcVariables.n16Temp1, ptrTemp0x72
+; @clobbers X Y
+; @mode    M16X16 -> M16X16
+; @calls   fGameEngine_GetChickenData
+; @callers fItemCarried_PlaceEggInIncubator (kind 0), fPlayerInteraction0x2E_AnimalNPC (kind 2)
+; @note    The in-code comments said "baby" for status $09 and "adult" for $43; with !CHICKENSTATUS_* bits $08 is adult and $43 is egg+incubator (comments fixed).
+;          Kind 1 has no caller in the US code (?).
+;;
 fGameEngine_AddChicken:
-    REP #$30                                                   ;83C807|C230    |      ; A: nAddType (0 - bought, 1 - hatched), return A: nResult
+    REP #$30                                                   ;83C807|C230    |      ; A: nAddType (0 - egg in incubator, 1 - adult in coop, 2 - adult outside), return A: nResult
     STA.B strcVariables.n16Temp1                               ;83C809|857E    |00007E;
     LDX.W #$0000                                               ;83C80B|A20000  |      ;
  
@@ -3861,7 +4128,7 @@ fGameEngine_AddChicken:
     SEP #$20                                                   ;83C865|E220    |      ;
     LDY.W #$0000                                               ;83C867|A00000  |      ;
     LDA.B #$43                                                 ;83C86A|A943    |      ;
-    STA.B [ptrTemp0x72],Y                                      ;83C86C|9772    |000072; strcChickenData.statusFlags = 01000011 - adult, exists
+    STA.B [ptrTemp0x72],Y                                      ;83C86C|9772    |000072; strcChickenData.statusFlags = 01000011 - egg in incubator, exists
     REP #$30                                                   ;83C86E|C230    |      ;
     LDY.W #$0004                                               ;83C870|A00400  |      ;
     LDA.W #$00E8                                               ;83C873|A9E800  |      ;
@@ -3876,7 +4143,7 @@ fGameEngine_AddChicken:
     SEP #$20                                                   ;83C882|E220    |      ;
     LDY.W #$0000                                               ;83C884|A00000  |      ;
     LDA.B #$09                                                 ;83C887|A909    |      ;
-    STA.B [ptrTemp0x72],Y                                      ;83C889|9772    |000072; strcChickenData.statusFlags = 00001001 - baby, exists
+    STA.B [ptrTemp0x72],Y                                      ;83C889|9772    |000072; strcChickenData.statusFlags = 00001001 - adult, exists
     BRA .set_hatched_position                                                ;83C88B|8029    |83C8B6;
  
  
@@ -3884,7 +4151,7 @@ fGameEngine_AddChicken:
     SEP #$20                                                   ;83C88D|E220    |      ;
     LDY.W #$0000                                               ;83C88F|A00000  |      ;
     LDA.B #$09                                                 ;83C892|A909    |      ;
-    STA.B [ptrTemp0x72],Y                                      ;83C894|9772    |000072; strcChickenData.statusFlags = 00001001 - baby, exists
+    STA.B [ptrTemp0x72],Y                                      ;83C894|9772    |000072; strcChickenData.statusFlags = 00001001 - adult, exists
     LDY.W #$0001                                               ;83C896|A00100  |      ;
     LDA.L nCurrentSeasonID                                     ;83C899|AF191F7F|7F1F19;
     CLC                                                        ;83C89D|18      |      ;
@@ -3927,8 +4194,20 @@ fGameEngine_AddChicken:
     RTL                                                        ;83C8DB|6B      |      ;
  
  
+;;
+; @brief   Create a cow record in the first free entry of the cow table (barn, map $27).
+; @param   A      kind: 0 = bought calf (status $05 = exists | child, happiness 0), 1 = newborn baby (status $03 = exists | baby,
+;                 happiness = nNewBornCowAffection, and the player gains 70 happiness)
+; @return  A      0 = added, 1 = table full (12 cows)
+; @modifies strcCowData (the free entry), nPlayerHappiness (kind 1), strcVariables.n16Temp1, ptrTemp0x72
+; @clobbers X Y
+; @mode    M16X16 -> M16X16
+; @calls   fGameEngine_GetCowData, fGameEngine_AddHappiness
+; @callers fCore_SetBornCowName (kind 1), fCore_SetBoughtCowName (kind 0)
+; @note    Start position comes from aGameEngine_AddCowPositionsData[entry]; comments in the code that called $05 "adult" and $03 "child" were corrected to the enum bits.
+;;
 fGameEngine_AddCow:
-    REP #$30                                                   ;83C8DC|C230    |      ; A: nAddType (0 - bought, 1 - born), return A: nResult
+    REP #$30                                                   ;83C8DC|C230    |      ; A: nAddType (0 - bought calf, 1 - newborn), return A: nResult
     STA.B strcVariables.n16Temp1                               ;83C8DE|857E    |00007E;
     LDX.W #$0000                                               ;83C8E0|A20000  |      ;
  
@@ -3984,14 +4263,14 @@ fGameEngine_AddCow:
     SEP #$20                                                   ;83C941|E220    |      ;
     LDY.W #$0000                                               ;83C943|A00000  |      ;
     LDA.B #$05                                                 ;83C946|A905    |      ;
-    STA.B [ptrTemp0x72],Y                                      ;83C948|9772    |000072; strcCowData.statusFlags = 00000101 - adult, exists
+    STA.B [ptrTemp0x72],Y                                      ;83C948|9772    |000072; strcCowData.statusFlags = 00000101 - child (bought calf), exists
     REP #$20                                                   ;83C94A|C220    |      ;
     LDA.B strcVariables.n16Temp1                               ;83C94C|A57E    |00007E;
     BEQ +                                                      ;83C94E|F01F    |83C96F;
     SEP #$20                                                   ;83C950|E220    |      ;
     LDY.W #$0000                                               ;83C952|A00000  |      ;
     LDA.B #$03                                                 ;83C955|A903    |      ;
-    STA.B [ptrTemp0x72],Y                                      ;83C957|9772    |000072; strcCowData.statusFlags = 00000011 - child, exists
+    STA.B [ptrTemp0x72],Y                                      ;83C957|9772    |000072; strcCowData.statusFlags = 00000011 - baby (newborn), exists
     SEP #$20                                                   ;83C959|E220    |      ;
     LDY.W #$0004                                               ;83C95B|A00400  |      ;
     LDA.L nNewBornCowAffection                                 ;83C95E|AF2B1F7F|7F1F2B;
@@ -4025,6 +4304,13 @@ fGameEngine_AddCow:
     RTL                                                        ;83C994|6B      |      ;
  
  
+;;
+; @brief   Compute the address of a chicken record.
+; @param   A      chicken index (0-12)
+; @return  ptrTemp0x72  24-bit pointer $7E:C286 + index * 8 (strcChickenData entry)
+; @mode    M16X16 -> M8X16
+; @callers fGameEngine_AnimalsDailyUpdate, fGameEngine_SpawnChickensOnMap, fGameEngine_AddChicken, fAIAction0x30_UpdateChicken, fAIAction0x50_ReleaseCarried, fAIAction0x51_ReleaseCarriedAnimal, fItemCarriedAnimal_PutDown, fPlayerInteraction0x44
+;;
 fGameEngine_GetChickenData:
     REP #$30                                                   ;83C995|C230    |      ; A: nIndex, return $72: ptr24 pChickenData
     ASL A                                                      ;83C997|0A      |      ;
@@ -4039,6 +4325,13 @@ fGameEngine_GetChickenData:
     RTL                                                        ;83C9A6|6B      |      ;
  
  
+;;
+; @brief   Compute the address of a cow record.
+; @param   A      cow index (0-11)
+; @return  ptrTemp0x72  24-bit pointer $7E:C1C6 + index * 16 (strcCowData entry)
+; @mode    M16X16 -> M8X16
+; @callers fGameEngine_AnimalsDailyUpdate, fGameEngine_SpawnChickensOnMap, fGameEngine_AddCow, fAIAction0x31_UpdateCow, fAreaEvents_Endings, fAreaEvents_House, fAreaEvents_House_PrepareEnding, fPlayerInteraction0x43
+;;
 fGameEngine_GetCowData:
     REP #$30                                                   ;83C9A7|C230    |      ; A: nIndex, return $72: ptr24 pCowData
     ASL A                                                      ;83C9A9|0A      |      ;
@@ -4054,7 +4347,15 @@ fGameEngine_GetCowData:
     RTL                                                        ;83C9B9|6B      |      ;
  
  
-fGameEngine_ChickenUnused83C9BA:
+;;
+; @brief   Unreferenced: count the chicken entries whose "exists" bit is set.
+; @return  A      number of chickens (0-13)
+; @clobbers X Y
+; @modifies ptrTemp0x72
+; @mode    M8X8 -> M16X16
+; @note    No caller in any region (confidence: high).
+;;
+fGameEngine_UnusedCountChickens:
     LDX.W #$0000                                               ;83C9BA|A20000  |      ;
     LDY.W #$0000                                               ;83C9BD|A00000  |      ;
  
@@ -4082,7 +4383,15 @@ fGameEngine_ChickenUnused83C9BA:
     RTL                                                        ;83C9E4|6B      |      ;
  
  
-fGameEngine_CowUnused83C9E5:
+;;
+; @brief   Unreferenced: count the cow entries whose "exists" bit is set.
+; @return  A      number of cows (0-12)
+; @clobbers X Y
+; @modifies ptrTemp0x72
+; @mode    M8X8 -> M16X16
+; @note    No caller in any region (confidence: high).
+;;
+fGameEngine_UnusedCountCows:
     LDX.W #$0000                                               ;83C9E5|A20000  |      ;
     LDY.W #$0000                                               ;83C9E8|A00000  |      ;
  

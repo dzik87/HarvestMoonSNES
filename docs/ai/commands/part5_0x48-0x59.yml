@@ -38,7 +38,7 @@
   length_bytes: 1
   params: []
   summary: "If the player stands next to the object and presses A (with empty hands), picks the object up - deactivates it and gives the player the carried item id 8."
-  details: "Advances the pointer by 1 and checks the conditions (any unmet condition exits with obj+0x10 += 1, i.e. yields the frame): proximity flag obj+0x0C != 0 (set by fGameEngine_DirectionHandler83AD91 when the player is within a radius of 0x19 px), the player action is not USINGTOOL/SHOWTOOL/WHISTLEHORSE/WHISTLEDOG/17, strcPlayer.flags does not have bit 0x0004 (EATINGMEAL) or DOGHUGGING, daily4 bits 0x0006 are cleared, strcJoypad1.newInput has A, strcPlayerData.carryItemId == 0. When everything is OK - obj+0x00 = 0 (object inactive, the script stops being executed), obj+0x01 |= 0x40 (hidden), obj+0x10 += 1, carryItemId = 8 (macro SetCurrentCarriedItemDirect(!EITEM_TURNIPSEED) - a value from the carryItemId space, the EITEM name is misleading), player action = PACTION_ITEMONHAND. Used in scripts in the loop '4A; Jump to 4A' (B3 General L038, B4 WaterImp)."
+  details: "Advances the pointer by 1 and checks the conditions (any unmet condition exits with obj+0x10 += 1, i.e. yields the frame): proximity flag obj+0x0C != 0 (set by fGameEngine_CheckAISlotCollision when the player is within a radius of 0x19 px), the player action is not USINGTOOL/SHOWTOOL/WHISTLEHORSE/WHISTLEDOG/17, strcPlayer.flags does not have bit 0x0004 (EATINGMEAL) or DOGHUGGING, daily4 bits 0x0006 are cleared, strcJoypad1.newInput has A, strcPlayerData.carryItemId == 0. When everything is OK - obj+0x00 = 0 (object inactive, the script stops being executed), obj+0x01 |= 0x40 (hidden), obj+0x10 += 1, carryItemId = 8 (macro SetCurrentCarriedItemDirect(!EITEM_TURNIPSEED) - a value from the carryItemId space, the EITEM name is misleading), player action = PACTION_ITEMONHAND. Used in scripts in the loop '4A; Jump to 4A' (B3 General L038, B4 WaterImp)."
   ram_touched: [ptrAIActionData, ptrAIUnknown0xCC, strcPlayer.action, strcPlayer.flags, strcFlags.daily4, strcJoypad1.newInput, strcPlayerData.carryItemId]
   calls: []
   open_questions: "Item id 8 in carryItemId has no name in CITEM_* (only CITEM_FISH=7 exists); the macro uses !EITEM_TURNIPSEED from a different space - should be fixed to a CITEM constant. What is physically picked up (scripts B4 0x12 / WaterImp) has not been established."
@@ -69,7 +69,7 @@
   length_bytes: 1
   params: []
   summary: "Sets bit 0x02 in the AI object state byte (+0x00); the object no longer blocks the player in collision detection."
-  details: "Executes obj+0x00 |= 0x02. In fGameEngine_DirectionHandler83AD91 (player collision with AI objects) an object with this bit still receives the proximity flag +0x0C = 1, but does not set n16Unk8C (movement block marker), so the player can pass through it. Does not block script execution, does not change the flow. Used in chicken scripts (B3 General, after 0x2E)."
+  details: "Executes obj+0x00 |= 0x02. In fGameEngine_CheckAISlotCollision (player collision with AI objects) an object with this bit still receives the proximity flag +0x0C = 1, but does not set n16Unk8C (movement block marker), so the player can pass through it. Does not block script execution, does not change the flow. Used in chicken scripts (B3 General, after 0x2E)."
   ram_touched: [ptrAIActionData, ptrAIUnknown0xCC]
   calls: []
   open_questions: "The conclusion that it is 'non-blocking' comes from analysis of the fragment 83AE5B-83AE7F; other places reading bit 0x02 of obj+0x00 were not verified."

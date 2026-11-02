@@ -1230,7 +1230,7 @@ fAI_UpdateSlotWander:
     LDY.W #$0002                                               ;8487A7|A00200  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;8487AA|B7CC    |0000CC;
     REP #$20                                                   ;8487AC|C220    |      ;
-    JSL.L fGameEngine_DirectionHandler83AF37                   ;8487AE|2237AF83|83AF37;
+    JSL.L fGameEngine_CheckTileCollisionDir                   ;8487AE|2237AF83|83AF37;
     REP #$20                                                   ;8487B2|C220    |      ;
     PHA                                                        ;8487B4|48      |      ;
     LDA.B strcPlayer.unkPosX                                   ;8487B5|A5E9    |0000E9;
@@ -1279,7 +1279,7 @@ fAI_UpdateSlotWander:
     LDY.W #$0002                                               ;848806|A00200  |      ;
     LDA.B [ptrAIUnknown0xCC],Y                                 ;848809|B7CC    |0000CC;
     REP #$20                                                   ;84880B|C220    |      ;
-    JSL.L fGameEngine_CheckDirectionalOverlap                            ;84880D|22C3AE83|83AEC3;
+    JSL.L fGameEngine_CheckPlayerOverlap                            ;84880D|22C3AE83|83AEC3;
     CMP.W #$0000                                               ;848811|C90000  |      ;
     BNE .return                                                ;848814|D001    |848817;
  
@@ -6167,7 +6167,7 @@ fAIAction0x35_UpdateHorse:
     STZ.B strcPlayer.newX                                      ;84AC7A|64E5    |0000E5;
     STZ.B strcPlayer.newY                                      ;84AC7C|64E7    |0000E7;
     LDA.W strcObjectData.directionNew                          ;84AC7E|AD1309  |000913;
-    JSL.L fGameEngine_DirectionHandler83AF37                   ;84AC81|2237AF83|83AF37;
+    JSL.L fGameEngine_CheckTileCollisionDir                   ;84AC81|2237AF83|83AF37;
     REP #$30                                                   ;84AC85|C230    |      ;
     BEQ +                                                      ;84AC87|F003    |84AC8C;
     JMP.W .idle_roll                                              ;84AC89|4CEEAC  |84ACEE;
@@ -6193,7 +6193,7 @@ fAIAction0x35_UpdateHorse:
     LDA.W #$0020                                               ;84ACAA|A92000  |      ;
     STA.B strcPlayer.unkE3                                     ;84ACAD|85E3    |0000E3;
     LDA.W strcObjectData.directionNew                          ;84ACAF|AD1309  |000913;
-    JSL.L fGameEngine_DirectionHandler83AD91                   ;84ACB2|2291AD83|83AD91;
+    JSL.L fGameEngine_CheckAISlotCollision                   ;84ACB2|2291AD83|83AD91;
     REP #$30                                                   ;84ACB6|C230    |      ;
     CMP.W #$0000                                               ;84ACB8|C90000  |      ;
     BEQ +                                                      ;84ACBB|F003    |84ACC0;

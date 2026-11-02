@@ -1,6 +1,25 @@
 ; Bank $83 module "random" - starts at $838138
+;;
+; @file   random.asm
+; @brief  Pseudo random number generator of the game (one routine, 24-bit shift register state in strcRandom).
+; @bank   $83   @range $838138-$838165
+; @see    fCore_GetRandomNumber (bank $80 wrapper that scales the result into a range), docs/code-documentation.md
+;;
  
  
+;;
+; @brief   Advance the 24-bit pseudo random generator by one step and return one random byte.
+; @details Feedback bit = bit 1 of (strcRandom.b XOR strcRandom.a). The three state bytes strcRandom.b, .a, .c are shifted
+;          right as one 24-bit register (ROR b, ROR a, ROR c) with the feedback bit entering at the top. The output byte is
+;          ((b + $47) rotated right twice) XOR a, plus c with the carry of the rotations, and it is also stored back into
+;          strcRandom.a, so the output feeds the next step.
+; @return  A      random value $0000-$00FF (16-bit A, high byte zero)
+; @modifies strcRandom.a, strcRandom.b, strcRandom.c
+; @mode    M8X16 -> M16X16
+; @callers fCore_GetRandomNumber, fCore_UpdateGFX, fObjectMap_UpdateFarmTilesNewDay, fAI_RunSlots
+; @note    No seeding routine is called from this module; the initial state is whatever strcRandom holds at boot (?).
+;          confidence: medium for the algorithm description (derived from the instruction sequence, not tested).
+;;
 fGetRandomNumber:
     SEP #$20                                                   ;838138|E220    |      ; return A: nRandomNumber (0x00-0xFF)
     LDA.W strcRandom.b                                         ;83813A|AD0101  |000101;

@@ -42,7 +42,7 @@ fCore_GameStart:
     JSL.L fCore_SetForceBlank                                  ;808022|220F8E80|808E0F;
     JSL.L fCore_ZeroVRAM                                       ;808026|22468880|808846;
     JSL.L fCore_ZeroCGRAM                                      ;80802A|22808980|808980;
-    JSL.L fGameEngine_FirstNight                               ;80802E|22F0AB83|83ABF0;
+    JSL.L fGameEngine_ResetSessionState                               ;80802E|22F0AB83|83ABF0;
     JSL.L fAudioEngine_MapMusicHandler                         ;808032|22DE9580|8095DE;
     REP #$20                                                   ;808036|C220    |      ;
     LDA.W #$0100                                               ;808038|A90001  |      ;
@@ -717,7 +717,7 @@ fCore_Reset:
     JSL.L fCore_ZeroCGRAM                                      ;80861C|22808980|808980;
     JSL.L fObject_InitTileCache                                  ;808620|22D78E85|858ED7;
     JSL.L fObject_ClearGameObject                              ;808624|220F8285|85820F;
-    JSL.L fGameEngine_SaveCheck                                ;808628|22D4BA83|83BAD4;
+    JSL.L fGameEngine_ValidateSaveSlots                                ;808628|22D4BA83|83BAD4;
     SEP #$20                                                   ;80862C|E220    |      ;
     REP #$10                                                   ;80862E|C210    |      ;
     LDA.B #$80                                                 ;808630|A980    |      ;

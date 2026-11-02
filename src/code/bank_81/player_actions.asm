@@ -1441,7 +1441,7 @@ fPlayer_MoveInDirection:
     STZ.B strcPlayer.unkE3                                     ;81CBE1|64E3    |0000E3;
     REP #$20                                                   ;81CBE3|C220    |      ;
     LDA.B strcPlayer.direction                                 ;81CBE5|A5DA    |0000DA;
-    JSL.L fGameEngine_DirectionHandler83AD91                   ;81CBE7|2291AD83|83AD91;
+    JSL.L fGameEngine_CheckAISlotCollision                   ;81CBE7|2291AD83|83AD91;
     CMP.W #$0000                                               ;81CBEB|C90000  |      ;
     BEQ +                                                      ;81CBEE|F003    |81CBF3;
     JMP.W .return1                                             ;81CBF0|4C53CE  |81CE53;
@@ -1449,7 +1449,7 @@ fPlayer_MoveInDirection:
  
   + REP #$20                                                   ;81CBF3|C220    |      ;
     LDA.B strcPlayer.direction                                 ;81CBF5|A5DA    |0000DA;
-    JSL.L fGameEngine_DirectionHandler83AF37                   ;81CBF7|2237AF83|83AF37;
+    JSL.L fGameEngine_CheckTileCollisionDir                   ;81CBF7|2237AF83|83AF37;
     REP #$30                                                   ;81CBFB|C230    |      ;
     STY.B strcVariables.n16Temp1                               ;81CBFD|847E    |00007E;
     CMP.W #$0001                                               ;81CBFF|C90100  |      ;
@@ -1524,7 +1524,7 @@ fPlayer_MoveInDirection:
     STZ.B strcPlayer.unkE3                                     ;81CC85|64E3    |0000E3;
     REP #$20                                                   ;81CC87|C220    |      ;
     LDA.B strcPlayer.direction                                 ;81CC89|A5DA    |0000DA;
-    JSL.L fGameEngine_DirectionHandler83AD91                   ;81CC8B|2291AD83|83AD91;
+    JSL.L fGameEngine_CheckAISlotCollision                   ;81CC8B|2291AD83|83AD91;
     CMP.W #$0000                                               ;81CC8F|C90000  |      ;
     BEQ +                                                      ;81CC92|F003    |81CC97;
     JMP.W .return1                                             ;81CC94|4C53CE  |81CE53;
@@ -1532,7 +1532,7 @@ fPlayer_MoveInDirection:
  
   + REP #$20                                                   ;81CC97|C220    |      ;
     LDA.B strcPlayer.direction                                 ;81CC99|A5DA    |0000DA;
-    JSL.L fGameEngine_DirectionHandler83AF37                   ;81CC9B|2237AF83|83AF37;
+    JSL.L fGameEngine_CheckTileCollisionDir                   ;81CC9B|2237AF83|83AF37;
     REP #$30                                                   ;81CC9F|C230    |      ;
     STY.B strcVariables.n16Temp1                               ;81CCA1|847E    |00007E;
     CMP.W #$0001                                               ;81CCA3|C90100  |      ;
@@ -1607,7 +1607,7 @@ fPlayer_MoveInDirection:
     STZ.B strcPlayer.unkE3                                     ;81CD29|64E3    |0000E3;
     REP #$20                                                   ;81CD2B|C220    |      ;
     LDA.B strcPlayer.direction                                 ;81CD2D|A5DA    |0000DA;
-    JSL.L fGameEngine_DirectionHandler83AD91                   ;81CD2F|2291AD83|83AD91;
+    JSL.L fGameEngine_CheckAISlotCollision                   ;81CD2F|2291AD83|83AD91;
     CMP.W #$0000                                               ;81CD33|C90000  |      ;
     BEQ +                                                      ;81CD36|F003    |81CD3B;
     JMP.W .return1                                             ;81CD38|4C53CE  |81CE53;
@@ -1615,7 +1615,7 @@ fPlayer_MoveInDirection:
  
   + REP #$20                                                   ;81CD3B|C220    |      ;
     LDA.B strcPlayer.direction                                 ;81CD3D|A5DA    |0000DA;
-    JSL.L fGameEngine_DirectionHandler83AF37                   ;81CD3F|2237AF83|83AF37;
+    JSL.L fGameEngine_CheckTileCollisionDir                   ;81CD3F|2237AF83|83AF37;
     REP #$30                                                   ;81CD43|C230    |      ;
     STX.B strcVariables.n16Temp1                               ;81CD45|867E    |00007E;
     CMP.W #$0001                                               ;81CD47|C90100  |      ;
@@ -1690,7 +1690,7 @@ fPlayer_MoveInDirection:
     STZ.B strcPlayer.unkE3                                     ;81CDCD|64E3    |0000E3;
     REP #$20                                                   ;81CDCF|C220    |      ;
     LDA.B strcPlayer.direction                                 ;81CDD1|A5DA    |0000DA;
-    JSL.L fGameEngine_DirectionHandler83AD91                   ;81CDD3|2291AD83|83AD91;
+    JSL.L fGameEngine_CheckAISlotCollision                   ;81CDD3|2291AD83|83AD91;
     CMP.W #$0000                                               ;81CDD7|C90000  |      ;
     BEQ +                                                      ;81CDDA|F003    |81CDDF;
     JMP.W .return1                                             ;81CDDC|4C53CE  |81CE53;
@@ -1698,7 +1698,7 @@ fPlayer_MoveInDirection:
  
   + REP #$20                                                   ;81CDDF|C220    |      ;
     LDA.B strcPlayer.direction                                 ;81CDE1|A5DA    |0000DA;
-    JSL.L fGameEngine_DirectionHandler83AF37                   ;81CDE3|2237AF83|83AF37;
+    JSL.L fGameEngine_CheckTileCollisionDir                   ;81CDE3|2237AF83|83AF37;
     REP #$30                                                   ;81CDE7|C230    |      ;
     STX.B strcVariables.n16Temp1                               ;81CDE9|867E    |00007E;
     CMP.W #$0001                                               ;81CDEB|C90100  |      ;

@@ -529,7 +529,7 @@ fInput_Case04_State8_LoadChoice:
     LDA.B #$00                                                 ;84C3EB|A900    |      ;
     XBA                                                        ;84C3ED|EB      |      ;
     LDA.W $098E+!RAM_SHIFT                                 ;84C3EE|AD8E09  |00098E;
-    JSL.L fGameEngine_LoadContinue                             ;84C3F1|2245BA83|83BA45;
+    JSL.L fGameEngine_PeekSaveSlot                             ;84C3F1|2245BA83|83BA45;
     REP #$30                                                   ;84C3F5|C230    |      ;
     CPX.W #$0000                                               ;84C3F7|E00000  |      ;
     BEQ +                                                      ;84C3FA|F019    |84C415;
@@ -1375,14 +1375,14 @@ fInput_PlayerButtonB:
     STZ.B strcPlayer.newX                                      ;84CA72|64E5    |0000E5;
     STZ.B strcPlayer.newY                                      ;84CA74|64E7    |0000E7;
     LDA.B strcPlayer.direction                                 ;84CA76|A5DA    |0000DA;
-    JSL.L fGameEngine_DirectionHandler83AF37                   ;84CA78|2237AF83|83AF37;
+    JSL.L fGameEngine_CheckTileCollisionDir                   ;84CA78|2237AF83|83AF37;
     REP #$30                                                   ;84CA7C|C230    |      ;
     BNE .return                                                ;84CA7E|D01D    |84CA9D;
     REP #$20                                                   ;84CA80|C220    |      ;
     LDA.W #$0020                                               ;84CA82|A92000  |      ;
     STA.B strcPlayer.unkE3                                     ;84CA85|85E3    |0000E3;
     LDA.B strcPlayer.direction                                 ;84CA87|A5DA    |0000DA;
-    JSL.L fGameEngine_DirectionHandler83AD91                   ;84CA89|2291AD83|83AD91;
+    JSL.L fGameEngine_CheckAISlotCollision                   ;84CA89|2291AD83|83AD91;
     REP #$30                                                   ;84CA8D|C230    |      ;
     CMP.W #$0000                                               ;84CA8F|C90000  |      ;
     BNE .return                                                ;84CA92|D009    |84CA9D;
@@ -1468,7 +1468,7 @@ fInput_PlayerButtonA_Interact:
     LDA.W #$0010                                               ;84CB39|A91000  |      ;
     STA.B strcPlayer.unkE3                                     ;84CB3C|85E3    |0000E3;
     LDA.B strcPlayer.direction                                 ;84CB3E|A5DA    |0000DA;
-    JSL.L fGameEngine_DirectionHandler83AD91                   ;84CB40|2291AD83|83AD91;
+    JSL.L fGameEngine_CheckAISlotCollision                   ;84CB40|2291AD83|83AD91;
     REP #$30                                                   ;84CB44|C230    |      ;
     CMP.W #$0000                                               ;84CB46|C90000  |      ;
     BEQ +                                                      ;84CB49|F003    |84CB4E;
@@ -1692,7 +1692,7 @@ fInput_IsObjectDirectionBlocked:
     STZ.B strcPlayer.newX                                      ;84CD25|64E5    |0000E5;
     STZ.B strcPlayer.newY                                      ;84CD27|64E7    |0000E7;
     LDA.W strcObjectData.direction                             ;84CD29|AD1109  |000911;
-    JSL.L fGameEngine_DirectionHandler83AF37                   ;84CD2C|2237AF83|83AF37;
+    JSL.L fGameEngine_CheckTileCollisionDir                   ;84CD2C|2237AF83|83AF37;
     REP #$30                                                   ;84CD30|C230    |      ;
     BEQ +                                                      ;84CD32|F003    |84CD37;
     JMP.W .return                                              ;84CD34|4C71CD  |84CD71;
@@ -1718,7 +1718,7 @@ fInput_IsObjectDirectionBlocked:
     LDA.W #$0010                                               ;84CD55|A91000  |      ;
     STA.B strcPlayer.unkE3                                     ;84CD58|85E3    |0000E3;
     LDA.W strcObjectData.direction                             ;84CD5A|AD1109  |000911;
-    JSL.L fGameEngine_DirectionHandler83AD91                   ;84CD5D|2291AD83|83AD91;
+    JSL.L fGameEngine_CheckAISlotCollision                   ;84CD5D|2291AD83|83AD91;
     REP #$30                                                   ;84CD61|C230    |      ;
     CMP.W #$0000                                               ;84CD63|C90000  |      ;
     BEQ +                                                      ;84CD66|F003    |84CD6B;

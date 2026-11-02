@@ -1,5 +1,33 @@
 ; Bank $83 module "map_engine" - starts at $83CA98
+;;
+; @file   map_engine.asm
+; @brief  Per-area event handlers that run once whenever an area is loaded. They decide, from the calendar, weather,
+;         the story flags in strcFlags (event1-8, daily1-5) and the girls' love values, which scripted AI event (cutscene,
+;         festival, NPC schedule, proposal, ending scene) to start for the area that is being entered.
+; @bank   $83   @range $83CA98-$83F5AF
+; @see    game_engine.asm, docs/ai/commands.md, src/ai/us/scripts/script_XX.asm, defs/tables/data/area_events_jump_table.csv
+; @details Dispatch: fMapEngine_AreaEvents (called by fMap_ResetAndLoadDestinationArea after strcMap.loadAreaId was set)
+;          jumps through the generated table .areaEventsJumpTable[strcMap.loadAreaId * 2] to one of the fAreaEvents_*
+;          handlers, which end with RTS. Most handlers start at most one event with the macro
+;          %AIExecute(slot, group, sub) = fAI_StartSlotScript(A = AI slot index, X = script group = number of the
+;          file src/ai/us/scripts/script_<group>.asm, Y = script number inside that group) and return immediately.
+;          "At 6:00" below means nCurrentTimeID = 6 with nInGameHourCounter = nInGameMinuteCounter = 0 (the start of the day).
+;          strcDialogDisplay.mapFlags & $001A (bits $02/$08/$10) is the "bad weather / no outdoor events" mask used before
+;          starting outdoor events (individual bit meanings are not named in the sources).
+;          NPC schedule scripts used by the building handlers: group 01 = normal day, 02 = Saturday, 03 = Sunday (town only),
+;          04 / 06 / 07 / 08 = variants selected by strcDialogDisplay.mapFlags $0002 / hurricane forecast / $0008 / $0200 (?),
+;          group $0B = first visit scene of a building guarded by an event3 flag (?). Confidence: medium.
+;;
  
+;;
+; @brief   Entry point: run the event handler of the area stored in strcMap.loadAreaId.
+; @details Multiplies the area id by two and calls the handler through the 96-entry table .areaEventsJumpTable
+;          (generated from defs/tables/data/area_events_jump_table.csv, one entry per !AREA_* id).
+; @param   strcMap.loadAreaId  area to run the handler for
+; @clobbers A X Y
+; @mode    M8X16 -> M16X16
+; @callers fMap_ResetAndLoadDestinationArea
+;;
 fMapEngine_AreaEvents:
     SEP #$20                                                   ;83CA98|E220    |      ;
     REP #$10                                                   ;83CA9A|C210    |      ;
@@ -14,6 +42,34 @@ fMapEngine_AreaEvents:
  
     incsrc "../../../build/gen/blocks/area_events_jump_table.asm"
  
+;;
+; @brief   Event handler of the four farm areas (!AREA_FARMSPRING-WINTER): waiting spouse, children, girl visits, festivals and story events.
+; @details Evaluated top to bottom, the first matching event returns (several of them also queue a player interaction
+;          through nPlayerInteractionIndex and set PFLAGS_INTERACTING):
+;          1. Married to Maria / Nina / Ellen (and event6 bit $0002 clear): spouse script slot $13, group $44, sub 0 / 2 / 3.
+;          2. First / second child exists (event6 $0004 / $0008) and is at least 60 (nFirstChildAge, nSecondChildAge >= $3C):
+;             slots $14 / $15, group $45, sub 1 / 4.
+;          3. At 6:00 on days 2-7, 13-17, 25-28 (not 1, 8-12, 18-24, 29+) when not married and the weather is fine: the girl
+;             whose love (nLove_*) reached 200 ($C8) visits the farm: Maria group $19, Ann $1A, Nina $1B, Ellen $1C, Eve $1D (sub 0);
+;             the matching event4 / event5 flag is set so each visit happens once and the girls exclude each other.
+;          4. daily1 bit $0002: script slot 7 group 0 sub $20 and interaction $42.
+;          5. First days: event3 bit $0001 clear -> group $0A sub 2; event3 $0020 clear -> group $0C sub 0 (dog) and
+;             strcMenuData.nameDestinationIdx = 3 (name the dog); event3 $0080 clear -> group $0C sub 1 and the dog is placed
+;             at (120, 424) in area 0.
+;          6. At 6:00: festival announcement (forecast >= 6) group $24 sub 0 / 2 / 3, summer of year 0 before day 20 group $24 sub 1
+;             (event7 bit $0001), event2 $0040 -> group 0 sub $2C and interaction $47, building work (event2 $0080 with
+;             nConstructionDayCounter) -> sub $2E, event2 $0100 -> subs $36/$37 and interaction $48, horse fully grown
+;             (nHorseAge = $15) -> interaction $49, money event (year > 0 and nMoney >= 3000 (?)) -> group $13, Saturday
+;             events of year/season, fall events, a chicken event (event4 bit $0400/$0800, >= 6 chickens and an egg in the coop) -> group $29, and
+;             finally, at 6:00 in fine weather, a 1/8 random roll (fCore_GetRandomNumber(8) = 0) -> group $23 sub 0 and nPlayerHappiness +2.
+; @modifies strcFlags.event3, strcFlags.event4, strcFlags.event5, strcFlags.event7, nPlayerInteractionIndex, nPlayerInteractionArg1, nPlayerInteractionArg2, strcPlayer.flags, strcPlayer.action, nDogX, nDogY, nDogAreaId, strcMenuData.nameDestinationIdx
+; @clobbers A X Y
+; @calls   fAI_StartSlotScript (via %AIExecute), fCore_GetRandomNumber, fGameEngine_AddHappiness
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+; @note    confidence: medium. The order and conditions are exact, the story meaning of the script ids is inferred from the
+;          flag names and the AI script file names (only 0C = dog, 0F = Star Night Festival, 19-1D = visits of the girls are named in the sources).
+;;
 fAreaEvents_Farm:
     REP #$30                                                   ;83CB69|C230    |      ;
     %CheckFlag(event6, $0002)
@@ -634,6 +690,19 @@ fAreaEvents_Farm:
     RTS                                                        ;83D2DF|60      |      ;
  
  
+;;
+; @brief   Event handler of the four town areas (!AREA_TOWNSPRING-WINTER).
+; @details In order: daily4 bit $0400 set -> group $14 sub 3; fall day 20 before the evening (nCurrentTimeID < $0F):
+;          group 0 slot $15 script $7E, the six-entry table $09A4-$09A9 is shuffled with fCore_GetRandomNumber(8) and group $28 sub 2
+;          is started; spring 23 -> group $0E sub 0 (flower festival (?)); fall 12 -> group $26 (harvest festival (?)); winter 10 -> group $27
+;          (thanksgiving (?)), each before nCurrentTimeID $0F / $11. Otherwise: event4 bit $4000 clear -> slot $15 script $7E; first visit
+;          scene (event3 bit $0001 clear -> group $0B sub 0) or, when the weather allows (no mapFlags $0008/$0200/$0002, not hurricane, event1 bit $0020 clear),
+;          group 01 sub 0 on weekdays, 02 on Saturday, 03 on Sunday.
+; @clobbers A X Y
+; @calls   fAI_StartSlotScript (via %AIExecute), fCore_GetRandomNumber
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+;;
 fAreaEvents_Town:
     REP #$30                                                   ;83D2E0|C230    |      ;
     %CheckFlag(daily4, $0400)
@@ -825,6 +894,14 @@ fAreaEvents_Town:
     RTS                                                        ;83D4D6|60      |      ;
  
  
+;;
+; @brief   Event handler of the mayor's house and corridor (!AREA_MAJORHOUSE, !AREA_MAJORCORRIDOR).
+; @details Maria's home. When the player is married to Maria and event6 bit $0002 is clear the spouse-at-home script is started
+;          (group $22 sub 3); otherwise falls into fAreaEvents_MajorHouseHandler.
+; @calls   fAI_StartSlotScript (via %AIExecute)
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+;;
 fAreaEvents_MajorHouse:
     REP #$30                                                   ;83D4D7|C230    |      ;
     %CheckFlag(event2, !EFLAGS2_MARRIEDMARIA)
@@ -840,6 +917,15 @@ fAreaEvents_MajorHouse:
     RTS                                                        ;83D4FE|60      |      ;
  
  
+;;
+; @brief   Shared NPC-schedule selection for Maria's house and bedroom.
+; @details In order: winter day 10 before the evening (nCurrentTimeID < $11): group $27 sub 3; first visit (event3 bit $0001 clear): group $0B sub 1;
+;          mapFlags bit $0008: group 07 sub 0; forecast >= !WEATHER_FLOWERFESTIVAL (a festival day): group 01 sub 1; forecast = hurricane or event1 bit $0020: group 06 sub 0;
+;          mapFlags $0200: group 08 sub 0; mapFlags $0002: group 04 sub 0; Saturday: group 02 sub 1; otherwise group 01 sub 1.
+; @calls   fAI_StartSlotScript (via %AIExecute)
+; @callers fAreaEvents_MajorHouse, fAreaEvents_MariaBedroom
+; @mode    M16X16 -> M16X16 (ends with RTS)
+;;
 fAreaEvents_MajorHouseHandler:
     SEP #$20                                                   ;83D4FF|E220    |      ;
     REP #$10                                                   ;83D501|C210    |      ;
@@ -927,6 +1013,12 @@ fAreaEvents_MajorHouseHandler:
     RTS                                                        ;83D5E6|60      |      ;
  
  
+;;
+; @brief   Event handler of Maria's bedroom (!AREA_MAJORBEDROOM): spouse-at-home script (group $22 sub 4) when married, else the shared schedule.
+; @calls   fAreaEvents_MajorHouseHandler, fAI_StartSlotScript (via %AIExecute)
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+;;
 fAreaEvents_MariaBedroom:
     REP #$30                                                   ;83D5E7|C230    |      ;
     %CheckFlag(event2, !EFLAGS2_MARRIEDMARIA)
@@ -945,6 +1037,15 @@ fAreaEvents_MariaBedroom:
     RTS                                                        ;83D612|60      |      ;
  
  
+;;
+; @brief   Event handler of the church (!AREA_CHURCH).
+; @details Winter day 10 before the evening (nCurrentTimeID < $11): group $27 sub 2 (thanksgiving (?)); winter day 24 with unknown1 bit $0002:
+;          group $0F sub 2 (Star Night Festival); first visit (event3 bit $0001 clear): group $0B sub $0C; otherwise the NPC schedule:
+;          weekday group 01 sub 2, Sunday 03 sub 1, Saturday 02 sub 2, weather variants 04 / 06 / 07 / 08 sub 1.
+; @calls   fAI_StartSlotScript (via %AIExecute)
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+;;
 fAreaEvents_Church:
     SEP #$20                                                   ;83D613|E220    |      ;
     REP #$10                                                   ;83D615|C210    |      ;
@@ -1068,6 +1169,12 @@ fAreaEvents_Church:
     RTS                                                        ;83D74D|60      |      ;
  
  
+;;
+; @brief   Event handler of the flower shop (!AREA_FLORIST): spouse-at-home script (group $22 sub 7) when married to Nina, else fAreaEvents_FloristHandler.
+; @calls   fAreaEvents_FloristHandler, fAI_StartSlotScript (via %AIExecute)
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+;;
 fAreaEvents_Florist:
     REP #$30                                                   ;83D74E|C230    |      ;
     %CheckFlag(event2, !EFLAGS2_MARRIEDNINA)
@@ -1083,6 +1190,12 @@ fAreaEvents_Florist:
     RTS                                                        ;83D775|60      |      ;
  
  
+;;
+; @brief   Shared NPC-schedule selection for Nina's flower shop and bedroom (first visit group $0B sub 3, schedule group 01 sub 3, weather variants subs 2).
+; @calls   fAI_StartSlotScript (via %AIExecute)
+; @callers fAreaEvents_Florist, fAreaEvents_NinaBedroom
+; @mode    M16X16 -> M16X16 (ends with RTS)
+;;
 fAreaEvents_FloristHandler:
     REP #$30                                                   ;83D776|C230    |      ;
     %CheckFlag(event3, $0001)
@@ -1144,6 +1257,12 @@ fAreaEvents_FloristHandler:
     RTS                                                        ;83D817|60      |      ;
  
  
+;;
+; @brief   Event handler of Nina's bedroom (!AREA_FLORISTBEDROOM): spouse-at-home script (group $22 sub 8) when married, else the shared florist schedule.
+; @calls   fAreaEvents_FloristHandler, fAI_StartSlotScript (via %AIExecute)
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+;;
 fAreaEvents_NinaBedroom:
     REP #$30                                                   ;83D818|C230    |      ;
     %CheckFlag(event2, !EFLAGS2_MARRIEDNINA)
@@ -1162,6 +1281,12 @@ fAreaEvents_NinaBedroom:
     RTS                                                        ;83D843|60      |      ;
  
  
+;;
+; @brief   Event handler of the tool shop (!AREA_TOOLSSHOP): spouse-at-home script (group $22 sub 5) when married to Ann, else fAreaEvents_ToolshopHandler.
+; @calls   fAreaEvents_ToolshopHandler, fAI_StartSlotScript (via %AIExecute)
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+;;
 fAreaEvents_Toolshop:
     REP #$30                                                   ;83D844|C230    |      ;
     %CheckFlag(event2, !EFLAGS2_MARRIEDANN)
@@ -1177,6 +1302,12 @@ fAreaEvents_Toolshop:
     RTS                                                        ;83D86B|60      |      ;
  
  
+;;
+; @brief   Shared NPC-schedule selection for the tool shop and Ann's bedroom (daily3 bit $0010 -> group $1A sub 1; first visit group $0B sub 2; schedule group 01 sub 4, variants sub 3).
+; @calls   fAI_StartSlotScript (via %AIExecute)
+; @callers fAreaEvents_Toolshop, fAreaEvents_AnnBedroom
+; @mode    M16X16 -> M16X16 (ends with RTS)
+;;
 fAreaEvents_ToolshopHandler:
     REP #$30                                                   ;83D86C|C230    |      ;
     %CheckFlag(daily3, $0010)
@@ -1247,6 +1378,12 @@ fAreaEvents_ToolshopHandler:
     RTS                                                        ;83D928|60      |      ;
  
  
+;;
+; @brief   Event handler of Ann's bedroom (!AREA_TOOLSSHOPBEDROOM): spouse-at-home script (group $22 sub 6) when married, else the shared tool shop schedule.
+; @calls   fAreaEvents_ToolshopHandler, fAI_StartSlotScript (via %AIExecute)
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+;;
 fAreaEvents_AnnBedroom:
     REP #$30                                                   ;83D929|C230    |      ;
     %CheckFlag(event2, !EFLAGS2_MARRIEDANN)
@@ -1265,6 +1402,12 @@ fAreaEvents_AnnBedroom:
     RTS                                                        ;83D954|60      |      ;
  
  
+;;
+; @brief   Event handler of the restaurant (!AREA_RESTAURANT): spouse-at-home script (group $22 sub 9) when married to Ellen, else fAreaEvents_RestaurantHandler.
+; @calls   fAreaEvents_RestaurantHandler, fAI_StartSlotScript (via %AIExecute)
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+;;
 fAreaEvents_Restaurant:
     REP #$30                                                   ;83D955|C230    |      ;
     %CheckFlag(event2, !EFLAGS2_MARRIEDELLEN)
@@ -1280,6 +1423,12 @@ fAreaEvents_Restaurant:
     RTS                                                        ;83D97C|60      |      ;
  
  
+;;
+; @brief   Shared NPC-schedule selection for the restaurant and Ellen's bedroom (first visit group $0B sub 4, schedule group 01 sub 5, variants sub 4).
+; @calls   fAI_StartSlotScript (via %AIExecute)
+; @callers fAreaEvents_Restaurant, fAreaEvents_EllenBedroom
+; @mode    M16X16 -> M16X16 (ends with RTS)
+;;
 fAreaEvents_RestaurantHandler:
     REP #$30                                                   ;83D97D|C230    |      ;
     %CheckFlag(event3, $0001)
@@ -1341,6 +1490,12 @@ fAreaEvents_RestaurantHandler:
     RTS                                                        ;83DA1E|60      |      ;
  
  
+;;
+; @brief   Event handler of Ellen's bedroom (!AREA_RESTAURANTBEDROOM): spouse-at-home script (group $22 sub $0A) when married, else the shared restaurant schedule.
+; @calls   fAreaEvents_RestaurantHandler, fAI_StartSlotScript (via %AIExecute)
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+;;
 fAreaEvents_EllenBedroom:
     REP #$30                                                   ;83DA1F|C230    |      ;
     %CheckFlag(event2, !EFLAGS2_MARRIEDELLEN)
@@ -1359,6 +1514,12 @@ fAreaEvents_EllenBedroom:
     RTS                                                        ;83DA4A|60      |      ;
  
  
+;;
+; @brief   Event handler of the fortune teller's house (!AREA_FORTUNETELLER): first visit group $0B sub 5, schedule group 01 sub 6, weather variants sub 5.
+; @calls   fAI_StartSlotScript (via %AIExecute)
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+;;
 fAreaEvents_FortuneTeller:
     REP #$30                                                   ;83DA4B|C230    |      ;
     %CheckFlag(event3, $0001)
@@ -1420,6 +1581,12 @@ fAreaEvents_FortuneTeller:
     RTS                                                        ;83DAEC|60      |      ;
  
  
+;;
+; @brief   Event handler of the animal shop (!AREA_ANIMALSHOP): first visit group $0B sub 6, schedule group 01 sub 7, weather variants sub 6.
+; @calls   fAI_StartSlotScript (via %AIExecute)
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+;;
 fAreaEvents_AnimalShop:
     REP #$30                                                   ;83DAED|C230    |      ;
     %CheckFlag(event3, $0001)
@@ -1481,6 +1648,12 @@ fAreaEvents_AnimalShop:
     RTS                                                        ;83DB8E|60      |      ;
  
  
+;;
+; @brief   Event handler of the bar (!AREA_BAR): spouse-at-home script (group $22 sub $0B) when married to Eve, else fAreaEvents_BarHandler.
+; @calls   fAreaEvents_BarHandler, fAI_StartSlotScript (via %AIExecute)
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+;;
 fAreaEvents_Bar:
     REP #$30                                                   ;83DB8F|C230    |      ;
     %CheckFlag(event2, !EFLAGS2_MARRIEDEVE)
@@ -1496,6 +1669,14 @@ fAreaEvents_Bar:
     RTS                                                        ;83DBB6|60      |      ;
  
  
+;;
+; @brief   Shared logic for the bar and Eve's bedroom.
+; @details unknown1 bit $0004 -> group $0F sub 3 (Star Night Festival); first visit (event3 bit $0002 clear) -> sets it and starts group $0B sub 7;
+;          otherwise group 05 sub 0 (the bar schedule).
+; @calls   fAI_StartSlotScript (via %AIExecute)
+; @callers fAreaEvents_Bar, fAreaEvents_EveBedroom
+; @mode    M16X16 -> M16X16 (ends with RTS)
+;;
 fAreaEvents_BarHandler:
     SEP #$20                                                   ;83DBB7|E220    |      ;
     REP #$10                                                   ;83DBB9|C210    |      ;
@@ -1528,6 +1709,12 @@ fAreaEvents_BarHandler:
     RTS                                                        ;83DC1D|60      |      ;
  
  
+;;
+; @brief   Event handler of Eve's bedroom (!AREA_BARBEDROOM): spouse-at-home script (group $22 sub $0C) when married, else the shared bar logic.
+; @calls   fAreaEvents_BarHandler, fAI_StartSlotScript (via %AIExecute)
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+;;
 fAreaEvents_EveBedroom:
     REP #$30                                                   ;83DC1E|C230    |      ;
     %CheckFlag(event2, !EFLAGS2_MARRIEDEVE)
@@ -1546,6 +1733,16 @@ fAreaEvents_EveBedroom:
     RTS                                                        ;83DC49|60      |      ;
  
  
+;;
+; @brief   Event handler of the four woods areas (!AREA_WOODSSPRING-WINTER, the mountain forest with the pond).
+; @details First visit (event3 bit $0004 clear) sets it and starts group $0B sub 9; daily3 bit $0020 -> group $1D sub 3; event5 bit $0010 -> group $1D sub 1
+;          (scripts 19-1D belong to the girls' love events); event5 bit $0004 -> slot 9 group $1C sub 1 or 2 (daily3 bit $0008 clear / set); otherwise, from fall of
+;          year 1 on, on a weekday in days 2-7, 13-17, 25-28 with event4 bit $0200 clear and fine weather: slot 9 group $21 sub 0. Then, unless mapFlags has
+;          $0008 / $0200 / $0002, the NPC schedule: Sunday group 03 sub 2, Saturday 02 sub 3, otherwise 01 sub 8.
+; @calls   fAI_StartSlotScript (via %AIExecute)
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+;;
 fAreaEvents_Woods:
     REP #$30                                                   ;83DC4A|C230    |      ;
     %CheckFlag(event3, $0004)
@@ -1663,6 +1860,14 @@ fAreaEvents_Woods:
     RTS                                                        ;83DD94|60      |      ;
  
  
+;;
+; @brief   Event handler of the carpenter's (workman's) house (!AREA_WORKSMANHOUSE).
+; @details event4 bit $1000 set with $2000 clear -> group $19 sub 1 (Maria's visit event). First visit (event3 bit $0008 clear): in year 0 before fall (and before
+;          summer day 26) group $0B sub $0A is started; the flag is set in every case. Then the schedule: group 01 sub 9, or group 04 / 07 / 08 sub 7 for mapFlags $0002 / $0008 / $0200.
+; @calls   fAI_StartSlotScript (via %AIExecute)
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+;;
 fAreaEvents_WorksmanHouse:
     REP #$30                                                   ;83DD95|C230    |      ;
     %CheckFlag(event4, $2000)
@@ -1734,6 +1939,12 @@ fAreaEvents_WorksmanHouse:
     RTS                                                        ;83DE63|60      |      ;
  
  
+;;
+; @brief   Event handler of the harvest sprites' (imps) cave (!AREA_IMPUNDERGROUND): event3 bit $2000 clear -> group $15 sub 0; event1 bit $0002 set -> group 01 sub $0A.
+; @calls   fAI_StartSlotScript (via %AIExecute)
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+;;
 fAreaEvents_ImpsUnderground:
     REP #$30                                                   ;83DE64|C230    |      ;
     %CheckFlag(event3, $2000)
@@ -1755,6 +1966,12 @@ fAreaEvents_ImpsUnderground:
     RTS                                                        ;83DE9A|60      |      ;
  
  
+;;
+; @brief   Event handler of the cow barn (!AREA_COWBARN): event1 bit $0008 (a calf was born, set by fGameEngine_AnimalsDailyUpdate) -> script slot $15 group 0 sub $25 and player interaction $45.
+; @calls   fAI_StartSlotScript (via %AIExecute)
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+;;
 fAreaEvents_CowBarn:
     REP #$20                                                   ;83DE9B|C220    |      ;
     %CheckFlag(event1, $0008)
@@ -1773,6 +1990,26 @@ fAreaEvents_CowBarn:
     RTS                                                        ;83DED2|60      |      ;
  
  
+;;
+; @brief   Event handler of the three house sizes (!AREA_HOUSE1-3): end of game check, house upgrades, jingles, spouse, children and calendar events.
+; @details 1. Year 2 (third year), summer, day $1E: jumps to fAreaEvents_House_PrepareEnding (the final evaluation) and returns.
+;          2. Chooses the area variant: event1 bit $0080 -> !AREA_HOUSE3, bit $0040 -> !AREA_HOUSE2 (written to nDestinationAreaId).
+;          3. event5 bit $2000 without $4000: starts slot $10 script $1F at tile (156, 144).
+;          4. event6 bit $0080: plays track $19, refreshes the farm tilemap block 3 x 3 at (x $0240-$0260, y $02C0-$02E0) in steps of $10 with fMap_UpdateFarmTilemapCoords.
+;          5. event6 bit $0100: plays track $15 (fair weather jingle); bit $0200: sound effect !SFX_HOUSEEVENTUNK22 twice; bit $0020: !SFX_HOUSEEVENTUNK20.
+;          6. event6 bit $0010 (child born): group $1F sub 0-2 and name entry (strcMenuData.nameDestinationIdx 5 or 6 depending on nFirstChildAge = $3C).
+;          7. event6 bit $0040 (cow died, cow index in strcStockData.unkCow): copies the cow name to strcNames.wCurrentCow and starts group $20 sub 0.
+;          8. Spouse: when the spouse's love is below 200 or the morning scene is due, starts group $22 sub 0 (daily3 bit $1000 marks it) otherwise
+;             group $43 sub 0-4 for Maria / Ann / Nina / Ellen / Eve; children older than $3C start group $45 sub 0 / 3.
+;          9. Calendar: daily4 bit $0020 -> group $0A sub 3; first day of the game -> sub 2 ... sub 0; year 1 summer 1 -> sub 4, year 2 summer 29 -> sub 5,
+;             spring 1 -> group $28 sub 0 (new year), winter 24 -> group $0F sub 0 (Star Night Festival).
+; @modifies nDestinationAreaId, strcFlags.event6, strcFlags.daily3, strcMenuData.nameDestinationIdx, strcNames.wCurrentCow
+; @clobbers A X Y
+; @calls   fAreaEvents_House_PrepareEnding, fAI_StartSlotScriptAtFrontTile, fAudio_PlayTrackThenResumeMapMusic, fAudio_PlaySoundEffectAndWait, fMap_UpdateFarmTilemapCoords, fGameEngine_GetCowData, fAI_StartSlotScript (via %AIExecute)
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+; @note    confidence: medium. Order and conditions were read from the code; the numbered purposes follow the flag names set elsewhere.
+;;
 fAreaEvents_House:
     SEP #$20                                                   ;83DED3|E220    |      ;
     REP #$10                                                   ;83DED5|C210    |      ;
@@ -1785,7 +2022,7 @@ fAreaEvents_House:
     LDA.L nCurrentDay                                          ;83DEE7|AF1B1F7F|7F1F1B;
     CMP.B #$1E                                                 ;83DEEB|C91E    |      ;
     BNE +                                                      ;83DEED|D003    |83DEF2;
-    JMP.W fAreaInit_HouseHelper                                ;83DEEF|4CD8F4  |83F4D8;
+    JMP.W fAreaEvents_House_PrepareEnding                                ;83DEEF|4CD8F4  |83F4D8;
  
  
   + REP #$30                                                   ;83DEF2|C230    |      ;
@@ -2265,6 +2502,15 @@ fAreaEvents_House:
     RTS                                                        ;83E406|60      |      ;
  
  
+;;
+; @brief   Event handler of the four crossroads areas (!AREA_CROSSROADSPRING-WINTER, where the horse is obtained).
+; @details Clears daily2 bit $0080 and starts slot $15 script $15 (group 0). With event3 bit $0001 clear: first visit (event3 bit $0010 clear) -> group $0A sub 1 and the flag is set;
+;          then group $0B sub $0B (the label in the source is .houseExtensionCampain). Horse events (year >= 1 or winter): event3 bit $0040 clear -> group $0D sub 0
+;          (AI_ObtainHorse), flag set and strcMenuData.nameDestinationIdx = 4 (name the horse); event3 bit $0100 clear -> group $0D sub 1 and nHorseAreaIdMaybe = 0.
+; @calls   fAI_StartSlotScript (via %AIExecute)
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+;;
 fAreaEvents_CrossRoad:
     REP #$30                                                   ;83E407|C230    |      ;
     %UnsetFlag(daily2, $0080)
@@ -2328,6 +2574,15 @@ fAreaEvents_CrossRoad:
     RTS                                                        ;83E4CA|60      |      ;
  
  
+;;
+; @brief   Event handler of the cave in the woods (!AREA_WOODSCAVE, the mine).
+; @details event4 bit $0040 clear: slot $10 script $1F starts at tile (224, 384) (fAI_StartSlotScriptAtFrontTile). If the player is below y $0200 and is hugging the dog
+;          (PFLAGS_DOGHUGGING) the hug is cancelled and the dog is left at (120, 424) in the current season's farm (nDogAreaId = nCurrentSeasonID). Then event5 bit $0010
+;          -> group $1D sub 2; event5 bit $0001 -> group $1B sub 1; on Saturday group 02 sub 4.
+; @calls   fAI_StartSlotScriptAtFrontTile, fAI_StartSlotScript (via %AIExecute)
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+;;
 fAreaEvents_Mine:
     REP #$30                                                   ;83E4CB|C230    |      ;
     %CheckFlag(event4, $0040)
@@ -2395,6 +2650,12 @@ fAreaEvents_Mine:
     RTS                                                        ;83E585|60      |      ;
  
  
+;;
+; @brief   Event handler of the mountain top areas (!AREA_MOUNTAINTOP*): event3 bit $0200 -> group $14 sub 1.
+; @calls   fAI_StartSlotScript (via %AIExecute)
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+;;
 fAreaEvents_MountainTop:
     REP #$30                                                   ;83E586|C230    |      ;
     %CheckFlag(event3, $0200)
@@ -2408,6 +2669,12 @@ fAreaEvents_MountainTop:
     RTS                                                        ;83E5A1|60      |      ;
  
  
+;;
+; @brief   Event handler of the golden chicken area (!AREA_GOLDCHICKEN): always starts group $14 sub 2.
+; @calls   fAI_StartSlotScript (via %AIExecute)
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+;;
 fAreaEvents_GoldChicken:
     REP #$30                                                   ;83E5A2|C230    |      ;
     REP #$30                                                   ;83E5A4|C230    |      ;
@@ -2415,6 +2682,12 @@ fAreaEvents_GoldChicken:
     RTS                                                        ;83E5B3|60      |      ;
  
  
+;;
+; @brief   Event handler of the chicken coop (!AREA_COOP): event4 bit $4000 -> script slot $15 script $7F.
+; @calls   fAI_StartSlotScript (via %AIExecute)
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+;;
 fAreaEvents_Coop:
     REP #$30                                                   ;83E5B4|C230    |      ;
     %CheckFlag(event4, $4000)
@@ -2425,6 +2698,12 @@ fAreaEvents_Coop:
     RTS                                                        ;83E5CC|60      |      ;
  
  
+;;
+; @brief   Event handler of the four wedding areas (!AREA_WEDDINGSPRING-WINTER): starts the wedding scene, group $1E sub 0.
+; @calls   fAI_StartSlotScript (via %AIExecute)
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+;;
 fAreaEvents_Wedding:
     REP #$30                                                   ;83E5CD|C230    |      ;
     REP #$30                                                   ;83E5CF|C230    |      ;
@@ -2432,21 +2711,39 @@ fAreaEvents_Wedding:
     RTS                                                        ;83E5DE|60      |      ;
  
  
-fAreaEvents_Festival1:
+;;
+; @brief   Event handler of !AREA_DANCINGS1 (first dance floor): starts group $0E sub 1 (the scene started on the town on spring 23, flower festival (?)).
+; @calls   fAI_StartSlotScript (via %AIExecute)
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+;;
+fAreaEvents_FlowerFestivalDance:
     REP #$30                                                   ;83E5DF|C230    |      ;
     REP #$30                                                   ;83E5E1|C230    |      ;
     %AIExecute($0000, $000E, $0001)
     RTS                                                        ;83E5F0|60      |      ;
  
  
-fAreaEvents_Festival2:
+;;
+; @brief   Event handler of !AREA_DANCINGS2 (second dance floor): starts group $26 sub 1 (the scene started on the town on fall 12, harvest festival (?)).
+; @calls   fAI_StartSlotScript (via %AIExecute)
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+;;
+fAreaEvents_HarvestFestivalDance:
     REP #$30                                                   ;83E5F1|C230    |      ;
     REP #$30                                                   ;83E5F3|C230    |      ;
     %AIExecute($0000, $0026, $0001)
     RTS                                                        ;83E602|60      |      ;
  
  
-fAreaEvents_Festival3:
+;;
+; @brief   Event handler of !AREA_NY_PUBLICSQUARE: Star Night Festival public square. When unknown1 bit $0001 is set starts group $0F sub 1.
+; @calls   fAI_StartSlotScript (via %AIExecute)
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+;;
+fAreaEvents_SNF_PublicSquare:
     SEP #$20                                                   ;83E603|E220    |      ;
     REP #$10                                                   ;83E605|C210    |      ;
     LDA.L nCurrentSeasonID                                     ;83E607|AF191F7F|7F1F19;
@@ -2465,6 +2762,12 @@ fAreaEvents_Festival3:
     RTS                                                        ;83E631|60      |      ;
  
  
+;;
+; @brief   Event handler of !AREA_NY_MOUNTAINTOP: Star Night Festival on the mountain top (group $0F sub 4 when unknown1 bit $0008 is set).
+; @calls   fAI_StartSlotScript (via %AIExecute)
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+;;
 fAreaEvents_SNF_MountainTop:
     SEP #$20                                                   ;83E632|E220    |      ;
     REP #$10                                                   ;83E634|C210    |      ;
@@ -2484,6 +2787,12 @@ fAreaEvents_SNF_MountainTop:
     RTS                                                        ;83E660|60      |      ;
  
  
+;;
+; @brief   Event handler of !AREA_NY_SPA: Star Night Festival at the hot spring (group $0F sub 5 when unknown1 bit $0010 is set).
+; @calls   fAI_StartSlotScript (via %AIExecute)
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+;;
 fAreaEvents_SNF_Spa:
     SEP #$20                                                   ;83E661|E220    |      ;
     REP #$10                                                   ;83E663|C210    |      ;
@@ -2503,6 +2812,12 @@ fAreaEvents_SNF_Spa:
     RTS                                                        ;83E68F|60      |      ;
  
  
+;;
+; @brief   Event handler of !AREA_MOUNTAINTOPSUNRISE (New Year sunrise on the mountain): starts group $28 sub 1.
+; @calls   fAI_StartSlotScript (via %AIExecute)
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+;;
 fAreaEvents_MountainTopSpringDay1:
     SEP #$20                                                   ;83E690|E220    |      ;
     REP #$10                                                   ;83E692|C210    |      ;
@@ -2518,6 +2833,12 @@ fAreaEvents_MountainTopSpringDay1:
     RTS                                                        ;83E6B1|60      |      ;
  
  
+;;
+; @brief   Event handler of !AREA_EGGFESTIVAL: starts group $28 sub 3 (the egg festival scene).
+; @calls   fAI_StartSlotScript (via %AIExecute)
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+;;
 fAreaEvents_EggFestival:
     REP #$30                                                   ;83E6B2|C230    |      ;
     REP #$30                                                   ;83E6B4|C230    |      ;
@@ -2525,6 +2846,14 @@ fAreaEvents_EggFestival:
     RTS                                                        ;83E6C3|60      |      ;
  
  
+;;
+; @brief   Event handler of the tool shed (!AREA_SHED): the spouses who wait in the shed instead of the farm and their children.
+; @details Married to Ann or Eve (and event6 bit $0002 clear): slot $13 group $44 sub 1 / 4; first child present (event6 $0004): slot $14 group $45 sub 2;
+;          second child (event6 $0008): slot $15 group $45 sub 5.
+; @calls   fAI_StartSlotScript (via %AIExecute)
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+;;
 fAreaEvents_Shed:
     REP #$30                                                   ;83E6C4|C230    |      ;
     %CheckFlag(event6, $0002)
@@ -2571,15 +2900,35 @@ fAreaEvents_Shed:
     RTS                                                        ;83E74B|60      |      ;
  
  
+;;
+; @brief   Event handler used for !AREA_MOUNTAINTOPBEAN and the ending areas !AREA_ENDING01-13: empty (returns immediately).
+; @mode    M16X16 -> =
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+;;
 fAreaEvents_MountainTopBean:
     RTS                                                        ;83E74C|60      |      ;
  
  
+;;
+; @brief   Table of the 16 single-bit masks $0001, $0002, ... $8000 (1 << index).
+; @format  16 words
+; @index   word index = bit number
+; @used_by (none found, unreferenced in all regions)
+;;
 aMapBitMask16Unused:
     dw $0001,$0002,$0004,$0008,$0010,$0020                     ;83E74D|        |      ;
     dw $0040,$0080,$0100,$0200,$0400,$0800                     ;83E759|        |      ;
     dw $1000,$2000,$4000,$8000                                 ;83E765|        |      ;
  
+;;
+; @brief   Event handler of !AREA_INTRO (title, how-to-play demo): resets the player and clock and starts the how-to-play page chosen by nIntroHowToPlayIndex2.
+; @details Sets nCurrentTimeID = 7, 0:00, clears the player flags/action/carry, then jumps by nIntroHowToPlayIndex2 (0-$1C) to one of
+;          29 pages; each page starts group $47 (AI_HowToPlay) with sub = page number + 1 (%AIExecute($0000, $0047, n)).
+; @modifies nCurrentTimeID, nInGameHourCounter, nInGameMinuteCounter, strcPlayer, strcObjectData.exist, strcPlayerData, nTimeState
+; @calls   fAI_StartSlotScript (via %AIExecute)
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+;;
 fAreaEvents_Intro:
     SEP #$20                                                   ;83E76D|E220    |      ;
     REP #$10                                                   ;83E76F|C210    |      ;
@@ -3051,6 +3400,24 @@ fAreaEvents_Intro:
     RTS                                                        ;83EBA5|60      |      ;
  
  
+;;
+; @brief   Event handler of !AREA_ENDING00: drives the whole ending sequence step by step through nEndingStep.
+; @details Sets the clock to 6:00 and resets the player, then dispatches on nEndingStep ($00-$25). Each step starts one ending scene script
+;          (groups $2F-$46, %AIExecute(0, group, sub)), sets nEndingStep to the next step and returns. Which scenes run depends on
+;          the marriage flags (event2 !EFLAGS2_MARRIED*), the children (event6 $0004 / $0008), the house upgrades (event1 $0040 / $0080) and other
+;          flags (event6 $4000, event5 $1000). Group $46 shows the credit / summary pages (subs 0-$0C). Step $20 computes the final
+;          score nRanchMasteringRate: min(nMoney >> 7, 78) + 3 * nOwnedCows + 3 * nOwnedChickens + (stamina - 100) / 2 + sum over the five girls
+;          of (love & $1FF) / 16 + shipped corn / tomato / turnip / potato counts (& $1FF) / 16 + happiness share + bonuses (children $10,
+;          married $20, event6 $4000 $16, event5 $1000 $15) + nRanchDevelopmentRate / 2 + for every cow min(25, happiness / 8); the result is
+;          capped at 999 ($3E7). It then starts group $46 sub $0C and sets nEndingStep = $25.
+; @modifies nEndingStep, nRanchMasteringRate, strcFlags.daily3 (bit $8000), strcPlayer, strcObjectData.exist, strcPlayerData, nCurrentTimeID, nInGameHourCounter, nInGameMinuteCounter
+; @clobbers A X Y
+; @calls   fGameEngine_GetCowData, fAI_StartSlotScript (via %AIExecute)
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fMapEngine_AreaEvents (through .areaEventsJumpTable)
+; @note    confidence: medium for the score formula (exact constants read from the code, weights of some terms only skimmed: the happiness term and the
+;          event6 $0004 / $4000 / event5 $1000 bonuses are listed as found). JP differs in two step ids ($1C instead of $20, see `if !REGION_JP`).
+;;
 fAreaEvents_Endings:
     SEP #$20                                                   ;83EBA6|E220    |      ;
     REP #$10                                                   ;83EBA8|C210    |      ;
@@ -4026,7 +4393,19 @@ fAreaEvents_Endings:
     RTS                                                        ;83F4D7|60      |      ;
  
  
-fAreaInit_HouseHelper:
+;;
+; @brief   Final evaluation set-up, started from the house on year 2, summer, day $1E: start the ending and pick the cow shown in it.
+; @details Starts group 0 sub $2E, clears strcDialogDisplay.mapFlags, sets daily3 bit $0002 and nEndingStep = 0. It blanks strcNames.wCurrentCow and then
+;          finds the existing cow with the highest happiness (strcCowData +04) and copies its 4-character name there. Finally nRanchDevelopmentRate (from
+;          fObjectMap_CalculateRanchDev) is scaled by 10 / 295 ($0127) with fMathMultiply_7EbyA and fMathDivide and capped at 100.
+; @modifies strcDialogDisplay.mapFlags, strcFlags.daily3, nEndingStep, strcNames.wCurrentCow, nRanchDevelopmentRate
+; @clobbers A X Y
+; @calls   fAI_StartSlotScript (via %AIExecute), fGameEngine_GetCowData, fObjectMap_CalculateRanchDev, fMathMultiply_7EbyA, fMathDivide
+; @mode    M16X16 -> M16X16 (ends with RTS)
+; @callers fAreaEvents_House (JMP)
+; @note    confidence: medium. The "$09B5" byte holds the best cow happiness found so far.
+;;
+fAreaEvents_House_PrepareEnding:
     REP #$30                                                   ;83F4D8|C230    |      ;
     %AIExecute($0000, $002E, $0000)
     REP #$30                                                   ;83F4E7|C230    |      ;

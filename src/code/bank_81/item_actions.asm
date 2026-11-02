@@ -2783,7 +2783,7 @@ fItemFound_Return:
 ; @modifies nUnknownX, nUnknownY, $0974, $0976, strcPlayer.lastX, strcPlayer.lastY, strcPlayer.newX, strcPlayer.newY, strcPlayer.unkE3, strcPlayer.action
 ; @clobbers A X Y
 ; @mode    ? -> ?
-; @calls   fItemCarried_LoadPoseData, fObject_GetSingleObjectData, fStoreTileOnFrontOfPlayerAtDistance, fObjectEngine_GetObjectPropertyByDirSeason, fGameEngine_DirectionHandler83AD91
+; @calls   fItemCarried_LoadPoseData, fObject_GetSingleObjectData, fStoreTileOnFrontOfPlayerAtDistance, fObjectEngine_GetObjectPropertyByDirSeason, fGameEngine_CheckAISlotCollision
 ; @callers fItemCarried_PhaseDispatch_NoSell
 ;;
 fItemCarried_CarryLoop_NoSell:
@@ -2894,7 +2894,7 @@ fItemCarried_CarryLoop_NoSell:
     LDA.W #$0010                                               ;818D07|A91000  |      ;
     STA.B strcPlayer.unkE3                                     ;818D0A|85E3    |0000E3;
     LDA.B strcPlayer.direction                                 ;818D0C|A5DA    |0000DA;
-    JSL.L fGameEngine_DirectionHandler83AD91                   ;818D0E|2291AD83|83AD91;
+    JSL.L fGameEngine_CheckAISlotCollision                   ;818D0E|2291AD83|83AD91;
     CMP.W #$0000                                               ;818D12|C90000  |      ;
     BNE .cancel_drop                                                ;818D15|D017    |818D2E;
     REP #$30                                                   ;818D17|C230    |      ;
@@ -3486,7 +3486,7 @@ fItemCarried_HandleDropAction:
     LDA.W #$0010                                               ;8190C4|A91000  |      ;
     STA.B strcPlayer.unkE3                                     ;8190C7|85E3    |0000E3;
     LDA.B strcPlayer.direction                                 ;8190C9|A5DA    |0000DA;
-    JSL.L fGameEngine_DirectionHandler83AD91                   ;8190CB|2291AD83|83AD91;
+    JSL.L fGameEngine_CheckAISlotCollision                   ;8190CB|2291AD83|83AD91;
     REP #$30                                                   ;8190CF|C230    |      ;
     CMP.W #$0000                                               ;8190D1|C90000  |      ;
     BEQ +                                                      ;8190D4|F003    |8190D9;
@@ -3675,13 +3675,13 @@ fItemCarried_ReturnAfterDropAction:
 ;;
 ; @brief   Carry phase (2) of chickens, chicks and moles: follows the player and validates the drop place.
 ; @details Same pose handling as fItemCarried_CarryLoop_NoSell. On !PACTION_DROPITEM the player's step must be free
-;   (fGameEngine_DirectionHandler83AD91 = 0) and three tiles in front (distance 0/7/7, 1/10/10 and 1/0/0) must have no blocking tile
+;   (fGameEngine_CheckAISlotCollision = 0) and three tiles in front (distance 0/7/7, 1/10/10 and 1/0/0) must have no blocking tile
 ;   property (type 2 and $1F == 0, not $FF; the nearest one additionally not $E1 and not $C0-$CF); otherwise the drop is cancelled.
 ;   On success the put-down pose is loaded and the phase becomes 3 (fItemCarriedAnimal_PutDown).
 ; @modifies nUnknownX, nUnknownY, $0974, $0976, strcPlayer.lastX, strcPlayer.lastY, strcPlayer.newX, strcPlayer.newY, strcPlayer.unkE3, strcPlayer.action
 ; @clobbers A X Y
 ; @mode    ? -> ?
-; @calls   fItemCarried_LoadPoseData, fObject_GetSingleObjectData, fStoreTileOnFrontOfPlayerAtDistance, fObjectEngine_GetObjectPropertyByDirSeason, fGameEngine_DirectionHandler83AD91
+; @calls   fItemCarried_LoadPoseData, fObject_GetSingleObjectData, fStoreTileOnFrontOfPlayerAtDistance, fObjectEngine_GetObjectPropertyByDirSeason, fGameEngine_CheckAISlotCollision
 ; @callers fItemCarried_PhaseDispatch_Animal
 ;;
 fItemCarriedAnimal_CarryLoop:
@@ -3749,7 +3749,7 @@ fItemCarriedAnimal_CarryLoop:
     LDA.W #$0010                                               ;8192A3|A91000  |      ;
     STA.B strcPlayer.unkE3                                     ;8192A6|85E3    |0000E3;
     LDA.B strcPlayer.direction                                 ;8192A8|A5DA    |0000DA;
-    JSL.L fGameEngine_DirectionHandler83AD91                   ;8192AA|2291AD83|83AD91;
+    JSL.L fGameEngine_CheckAISlotCollision                   ;8192AA|2291AD83|83AD91;
     REP #$30                                                   ;8192AE|C230    |      ;
     CMP.W #$0000                                               ;8192B0|C90000  |      ;
     BEQ +                                                      ;8192B3|F003    |8192B8;
