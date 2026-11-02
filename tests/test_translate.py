@@ -623,8 +623,13 @@ def test_rom_polish_build():
             allowed.append((o, o + len(t["entries"]) * t["stride"]))
         g0 = trstr.rom_offset(trgrid.grid0_address())
         allowed.append((g0, g0 + len(trgrid.load_override(lang)) * 8))
+        if C.load_translation(lang):                       # translated dialogs: the dialog banks and the pointer table behind them change as well
+            for b in trcheck.bank_list():
+                allowed.append((trstr.rom_offset(int(b, 16) << 16 | 0x8000), trstr.rom_offset(int(b, 16) << 16 | 0x8000) + 0x8000))
+            o = trstr.rom_offset(sym["aDialogPointers"])
+            allowed.append((o, o + 3 * len(C.Context().ids)))
         stray = [i for i in range(len(orig)) if orig[i] != rom[i] and not any(a <= i < b for a, b in allowed)]
-        ok(not stray, "the Polish build changes only the font table, the string tables, the name grid and the checksum (stray bytes: %d, first $%06X)" % (len(stray), stray[0] if stray else 0))
+        ok(not stray, "the Polish build changes only the font table, the string tables, the name grid, the dialog banks and pointers and the checksum (stray bytes: %d, first $%06X)" % (len(stray), stray[0] if stray else 0))
         # every string slot holds the encoded Polish text
         for tname, slots in trstr.resolved(lang).items():
             t = sp["tables"][tname]
