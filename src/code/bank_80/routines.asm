@@ -285,8 +285,8 @@ fAudioEngine_MapChangeHandler:
 ; @details  mapFlags &= $3FDE (clears $0001, $0020, $4000, $8000: streaming flag, preset dependent bit, force teleport, raw charmap), daily2 flags $000F cleared, !PFLAGS_USERCONTROL set,
 ;           VRAM $7000 area zeroed, all palette animation slots stopped, object tile cache/game objects/object slots cleared, AI pointer cleared; runs the area events and the how-to-play AI setup, then fMap_SetupArea.
 ; @modifies strcDialogDisplay.mapFlags, strcMap.loadAreaId, strcFlags.daily2
-; @mode     M16X16 -> (RTL from fMap_SetupArea)
-; @calls    fCore_ZeroVRAMatOffset, fPalette_StopAllColorAnimSlots, fPalette_ZeroNextPalletePtr, fObject_InitTileCache, fObject_ClearGameObject, fObjectSlots_ClearAll, fAI_ZeroCCPtr, fMapEngine_AreaEvents, fAI_HowToPlaySetup, fMap_SetupArea
+; @mode     M16X16
+; @calls    fCore_ZeroVRAMatOffset, fPalette_StopAllColorAnimSlots, fPalette_ZeroNextPalletePtr, fObject_InitTileCache, fObject_ClearGameObject, fObjectSlots_ClearAll, fAI_ClearAllSlots, fMapEngine_AreaEvents, fAI_RunSlots, fMap_SetupArea
 ; @callers  fCore_GameStart, fAudioEngine_MapChangeHandler
 ;;
 fMap_ResetAndLoadDestinationArea:
@@ -327,9 +327,9 @@ fMap_ResetAndLoadDestinationArea_Return:
 ;           Per-area player state is reset (flags INTRANSITION/AISTEERING cleared, counters cleared, daily1 $0200 cleared). A carried item (strcPlayerData.carryItemId) is re-created as a carried object unless it is a tool (paint, milker, brush, $57), which is put away.
 ;           The player sprite is rebuilt (fPlayer_InitSpriteObject), chickens are spawned unless daily3 $0002, music is switched, two frames of objects are rendered, force blank is released and the screen fades in ($03 -> $0F, 3 frames/step).
 ; @param    A      area id (!AREA_*)
-; @modifies strcMap.loadAreaId, nTimeState, strcBGScrool.BG2HorOffs/VerOffs, strcPlayerData.carryItemId, strcPlayerData.unkCounter91C/919, nCarriedItemId, strcAudio.trackIdCopy, strcFlags.daily1/daily2
+; @modifies strcMap.loadAreaId, nTimeState, strcBGScrool.BG2HorOffs, strcBGScrool.BG2VerOffs, strcPlayerData.carryItemId, strcPlayerData.unkCounter91C, strcPlayerData.unkCounter919, nCarriedItemId, strcAudio.trackIdCopy
 ; @mode     M8X16 -> M8X16
-; @calls    fTileMap_GetAreaDescriptorByte, fTileMap_LoadAreaGraphics, fPalette_StartColorAnimSlot, fDialog_LoadDialogBoxGraphics, fObjectMap_LoadData, fPalette_ChangeTimePallete, fPalette_PrepareSpritePalette, fPaletteAnim_RunAreaRoutine, fPalette_LoadMapPallete, fPalette_ProcessColorAnimSlots, fCore_PrepareTransfer, fCore_StartPreparedTransfer, fItemCarried_LoadPoseData, fObjectSlots_Allocate, fPlayer_InitSpriteObject, fPlayer_UpdateHandler, fGameEngine_SpawnChickensOnMap, fAudio_FadeOutOnTrackChangeFast, fAudio_LoadPendingTrack, fAudio_StartPendingTrack, fToolUsedSound_PlayOnToolChange, fCore_WaitForNextNMI, fObjectSlots_UpdateAll, fAI_HowToPlaySetup, fObject_UpdateAllAnimations, fObject_ProcessTileLoadQueue, fObject_RenderAll, fCore_ResetForceBlank, fCore_ScreenFadein
+; @calls    fTileMap_GetAreaDescriptorByte, fTileMap_LoadAreaGraphics, fPalette_StartColorAnimSlot, fDialog_LoadDialogBoxGraphics, fObjectMap_LoadData, fPalette_ChangeTimePallete, fPalette_PrepareSpritePalette, fPaletteAnim_RunAreaRoutine, fPalette_LoadMapPallete, fPalette_ProcessColorAnimSlots, fCore_PrepareTransfer, fCore_StartPreparedTransfer, fItemCarried_LoadPoseData, fObjectSlots_Allocate, fPlayer_InitSpriteObject, fPlayer_UpdateHandler, fGameEngine_SpawnChickensOnMap, fAudio_FadeOutOnTrackChangeFast, fAudio_LoadPendingTrack, fAudio_StartPendingTrack, fToolUsedSound_PlayOnToolChange, fCore_WaitForNextNMI, fObjectSlots_UpdateAll, fAI_RunSlots, fObject_UpdateAllAnimations, fObject_ProcessTileLoadQueue, fObject_RenderAll, fCore_ResetForceBlank, fCore_ScreenFadein
 ; @callers  fMap_ResetAndLoadDestinationArea, fMainMenu_PrepareHowToPlay, fMainMenu_StartHowToPlayDemo, fMainMenu_StateOpeningDemo
 ; @note     confidence: medium for the weather-overlay details (which bit means rain/clouds/snow was inferred from the overlay area ids and the colour scripts they load).
 ;;
@@ -1268,7 +1268,7 @@ fMap_ScreenTransitionHandler:
 ;           strcObjectData.camX = posX - cameraX (+$80 bias). When the camera is pinned to the minimum the scroll sub-pixel strcMap.unk20 is reset to 0, at the maximum set to 8. The same for Y with strcMap.unk21.
 ; @modifies strcCamera.cameraX, strcCamera.cameraY, strcObjectData.camX, strcObjectData.camY, strcMap.unk20, strcMap.unk21
 ; @mode     M16X16
-; @callers  fTileMap_LoadAreaGraphics and the player movement code
+; @callers  fTileMap_LoadAreaGraphics
 ;;
 fCamera_UpdateFromPlayerPos:
     REP #$30                                                   ;809EBC|C230    |      ;
@@ -1600,7 +1600,6 @@ fCamera_UpdateBG2Scroll:
 ; @modifies strcBGScrool.BG1VerOffs, strcMap.unk1E, strcMap.unk21
 ; @mode     M16X16 -> M16X16
 ; @calls    fMap_StreamRowDown
-; @callers  player movement / scrolling code (bank $81)
 ;;
 fCamera_ScrollDownStep:
     REP #$30                                                   ;80A0AB|C230    |      ;
@@ -1642,7 +1641,6 @@ fCamera_ScrollDownStep:
 ; @modifies strcBGScrool.BG1VerOffs, strcMap.unk1E, strcMap.unk21
 ; @mode     M16X16 -> M16X16
 ; @calls    fMap_StreamRowUp
-; @callers  player movement / scrolling code (bank $81)
 ;;
 fCamera_ScrollUpStep:
     REP #$30                                                   ;80A0E1|C230    |      ;
@@ -1687,7 +1685,6 @@ fCamera_ScrollUpStep:
 ; @modifies strcBGScrool.BG1HorOffs, strcMap.unk1E, strcMap.unk20
 ; @mode     M16X16 -> M16X16
 ; @calls    fMap_StreamColumnRight
-; @callers  player movement / scrolling code (bank $81)
 ;;
 fCamera_ScrollRightStep:
     REP #$30                                                   ;80A11C|C230    |      ;
@@ -1729,7 +1726,6 @@ fCamera_ScrollRightStep:
 ; @modifies strcBGScrool.BG1HorOffs, strcMap.unk1E, strcMap.unk20
 ; @mode     M16X16 -> M16X16
 ; @calls    fMap_StreamColumnLeft
-; @callers  player movement / scrolling code (bank $81)
 ;;
 fCamera_ScrollLeftStep:
     REP #$30                                                   ;80A152|C230    |      ;
@@ -1772,7 +1768,7 @@ fCamera_ScrollLeftStep:
 ; @details  The room is held in WRAM as 32-entry-wide lines (layer 1 at $7E2000, layer 2 at $7E4000); strcMap.unk12 is the position in the map, strcMap.unk14 the ring-buffer
 ;           position in the VRAM tilemap. The code builds two $40 byte vectors in $0746 (layer 1) and $07C6 (layer 2) - taking care of the 32-entry VRAM screen wrap - and queues them with
 ;           fCore_PrepareTransfer on DMA channels 0 and 1 (VMAIN $80, word increment). The map position and the ring position are advanced downwards (+$20 words, wrapping $0C00 -> 0).
-; @modifies strcMap.unk12, strcMap.unk14, WRAM $0746-$07C5, ptrTemp0x72, ptrUnknown0x75
+; @modifies strcMap.unk12, strcMap.unk14, ptrTemp0x72, ptrUnknown0x75
 ; @mode     M16X16
 ; @calls    fCore_PrepareTransfer
 ; @callers  fCamera_ScrollDownStep
@@ -1998,7 +1994,7 @@ fMap_StreamRowDown:
 ; @details  The room is held in WRAM as 32-entry-wide lines (layer 1 at $7E2000, layer 2 at $7E4000); strcMap.unk12 is the position in the map, strcMap.unk14 the ring-buffer
 ;           position in the VRAM tilemap. The code builds two $40 byte vectors in $0746 (layer 1) and $07C6 (layer 2) - taking care of the 32-entry VRAM screen wrap - and queues them with
 ;           fCore_PrepareTransfer on DMA channels 0 and 1 (VMAIN $80, word increment). The map position and the ring position are advanced upwards (-$20 words, wrapping to $03E0).
-; @modifies strcMap.unk12, strcMap.unk14, WRAM $0746-$07C5, ptrTemp0x72, ptrUnknown0x75
+; @modifies strcMap.unk12, strcMap.unk14, ptrTemp0x72, ptrUnknown0x75
 ; @mode     M16X16
 ; @calls    fCore_PrepareTransfer
 ; @callers  fCamera_ScrollUpStep
@@ -2223,7 +2219,7 @@ fMap_StreamRowUp:
 ; @details  The room is held in WRAM as 32-entry-wide lines (layer 1 at $7E2000, layer 2 at $7E4000); strcMap.unk16 is the position in the map, strcMap.unk10 the ring-buffer
 ;           position in the VRAM tilemap. The code builds two $40 byte vectors in $0746 (layer 1) and $07C6 (layer 2) - taking care of the 32-entry VRAM screen wrap - and queues them with
 ;           fCore_PrepareTransfer on DMA channels 0 and 1 (VMAIN $81, increment by 32 words). The map position and the ring position are advanced to the right (+1 word).
-; @modifies strcMap.unk16, strcMap.unk10, WRAM $0746-$07C5, ptrTemp0x72, ptrUnknown0x75
+; @modifies strcMap.unk16, strcMap.unk10, ptrTemp0x72, ptrUnknown0x75
 ; @mode     M16X16
 ; @calls    fCore_PrepareTransfer
 ; @callers  fCamera_ScrollRightStep
@@ -2461,7 +2457,7 @@ fMap_StreamColumnRight:
 ; @details  The room is held in WRAM as 32-entry-wide lines (layer 1 at $7E2000, layer 2 at $7E4000); strcMap.unk16 is the position in the map, strcMap.unk10 the ring-buffer
 ;           position in the VRAM tilemap. The code builds two $40 byte vectors in $0746 (layer 1) and $07C6 (layer 2) - taking care of the 32-entry VRAM screen wrap - and queues them with
 ;           fCore_PrepareTransfer on DMA channels 0 and 1 (VMAIN $81, increment by 32 words). The map position and the ring position are advanced to the left (-1 word).
-; @modifies strcMap.unk16, strcMap.unk10, WRAM $0746-$07C5, ptrTemp0x72, ptrUnknown0x75
+; @modifies strcMap.unk16, strcMap.unk10, ptrTemp0x72, ptrUnknown0x75
 ; @mode     M16X16
 ; @calls    fCore_PrepareTransfer
 ; @callers  fCamera_ScrollLeftStep

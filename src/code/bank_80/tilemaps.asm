@@ -44,7 +44,7 @@ fTileMap_GetAreaDescriptorByte:
 ;           and for the farm/outdoor areas below !AREA_TOWNSPRING the object tiles are connected and the item subroutines of the area run (daily3 $0002 not set, single charmap).
 ;           Camera, map position and streaming ring positions are reset (unk10=$0410, unk14=$0A00), strcMap.pCurrent+2 / unk1C get the row stride and size from nMapRoomRowStrideTable / nMapRoomSizeTable.
 ;           Finally (areas < $57) the player position is stepped in 8 pixel increments to mapDestX/mapDestY with camera + scroll updates and DMA flushing, so that the visible map is fully loaded around the destination.
-; @modifies strcMap.pCurrent, strcMap.unk10..unk21, strcCamera, strcPlayer.posX, strcPlayer.posY, strcPlayer.offsetCamX/Y, strcCamera.offsetCamX/Y, strcDialogDisplay.mapFlags/mapMultiWidth/mapMultiHeight/mapCurrentPresetId, WRAM $7E2000.., VRAM
+; @modifies strcMap.pCurrent, strcMap.unk10, strcMap.unk12, strcMap.unk14, strcMap.unk16, strcMap.unk1C, strcMap.unk1E, strcMap.unk20, strcMap.unk21, strcCamera.cameraX, strcCamera.cameraY, strcPlayer.posX, strcPlayer.posY, strcPlayer.offsetCamX, strcPlayer.offsetCamY, strcCamera.offsetCamX, strcCamera.offsetCamY, strcDialogDisplay.mapFlags, strcDialogDisplay.mapMultiWidth, strcDialogDisplay.mapMultiHeight, strcDialogDisplay.mapCurrentPresetId
 ; @mode     M8X16
 ; @calls    fCore_ApplyGraphicsPreset, fGraphicsDecompressTilemap, fCore_PrepareTransfer, fCore_StartPreparedTransfer, fTileMap_UploadRowToVRAM, fObjectMap_ConnectAdjacentObjectTiles, fAreaItemSubrutine_Run, fCamera_UpdateFromPlayerPos, fCamera_ScrollRightStep, fCamera_ScrollDownStep, fCore_StartTransfer
 ; @callers  fMap_SetupArea
@@ -437,15 +437,13 @@ fTileMap_UploadRowToVRAM:
     PLX                                                        ;80AA66|FA      |      ;
     RTS                                                        ;80AA67|60      |      ;
 
-;;
-; @brief    Generated area tables included here: nMapRoomRowStrideTable, nMapRoomSizeTable, aTileMapData and the 96 area descriptors, aScreenTransitionTable.
-; @format   nMapRoomRowStrideTable / nMapRoomSizeTable: 5 words each, indexed by the room width multiplier (0-4), row stride in bytes of the WRAM map and map size.
+; brief    Generated area tables included here: nMapRoomRowStrideTable, nMapRoomSizeTable, aTileMapData and the 96 area descriptors, aScreenTransitionTable.
+; format   nMapRoomRowStrideTable / nMapRoomSizeTable: 5 words each, indexed by the room width multiplier (0-4), row stride in bytes of the WRAM map and map size.
 ;           aTileMapData: 96 x ptr16 to the area descriptors (preset, flags, room size, blob counts, camera limits, VRAM load list; see fTileMap_GetAreaDescriptorByte and docs/formats/area-data.md).
 ;           aScreenTransitionTable: 59 rows of 8 bytes `[dest area][tile script id][b2 (unused/unknown)][flags: 0 add season, 1 closed evening, 2 closed day, 3 open weekend only, 4 closed Saturday, 5 closed Sunday, 6 day dependent, 7 closed on festival][word player X][word player Y]`.
-; @index    aTileMapData[area*2]; aScreenTransitionTable[row*8] with row = byte 0 of the object property row of the tile under the player (fMap_ScreenTransitionHandler, fSetTileAtCoords...).
-; @used_by  fTileMap_LoadAreaGraphics, fTileMap_GetAreaDescriptorByte, fMap_ScreenTransitionHandler, bank $82 sound.asm (shop-closed dialogs)
-; @note     Sources: assets/areas/, assets/tables/map_room.json (tools/maps/areadata.py, tools/data/smalltables.py).
-;;
+; index    aTileMapData[area*2]; aScreenTransitionTable[row*8] with row = byte 0 of the object property row of the tile under the player (fMap_ScreenTransitionHandler, fSetTileAtCoords...).
+; used_by  fTileMap_LoadAreaGraphics, fTileMap_GetAreaDescriptorByte, fMap_ScreenTransitionHandler, bank $82 sound.asm (shop-closed dialogs)
+; note     Sources: assets/areas/, assets/tables/map_room.json (tools/maps/areadata.py, tools/data/smalltables.py).
 ; Area graphics data (generated from assets/areas/ and assets/tables/, see docs/formats/area-data.md)
     incsrc "../../../build/gen/tables/map_room.asm"
     incsrc "../../../build/gen/maps/area_gfx.asm"

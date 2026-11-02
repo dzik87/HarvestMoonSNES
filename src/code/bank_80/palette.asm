@@ -310,7 +310,7 @@ fPalette_ZeroNextPalletePtr:
 ; @param    X      colour index within the row (0..15)
 ; @param    Y      palette row (offset = 32*Y + 2*X)
 ; @param    strcVariables.n8Temp1  0 = write sPalette_7F0900, non-zero = write sPalette_7F0B00
-; @modifies sPalette_7F0900 or sPalette_7F0B00, strcVariables.n16Temp1/n16Temp2/n16Temp3
+; @modifies sPalette_7F0900, sPalette_7F0B00, strcVariables.n16Temp1, strcVariables.n16Temp2, strcVariables.n16Temp3
 ; @mode     M16X16 -> M16X16
 ; @callers  fPalette_ProcessColorAnimSlots
 ;;
@@ -355,7 +355,7 @@ fPalette_WriteColorToBuffer:
 ; @param    X      colour index within the row (0..15)
 ; @param    Y      palette row (offset = 32*Y + 2*X)
 ; @param    strcVariables.n8Temp1  0 = patch $7F0900 and $7F0D00, non-zero = patch the target set $7F0B00
-; @modifies sPalette_7F0900, sPalette_7F0B00, sPalette_7F0D00, strcVariables.n16Temp1/n16Temp2/n16Temp3
+; @modifies sPalette_7F0900, sPalette_7F0B00, sPalette_7F0D00, strcVariables.n16Temp1, strcVariables.n16Temp2, strcVariables.n16Temp3
 ; @mode     M16X16 -> M16X16
 ; @callers  %PaletteModify (fPalette_LoadSpritePallete)
 ;;
@@ -400,7 +400,7 @@ fPalette_ModifyPalette:
 ; @param    A      palette id (index into aPalettes)
 ; @modifies sPalette_7F0900, sPalette_7F0D00, ptrTemp0x72, strcVariables.n16Temp1
 ; @mode     M16X16 -> M16X16
-; @callers  fPalette_ChangeTimePallete, fMainMenu_*, fScreen_NameInput
+; @callers  fPalette_ChangeTimePallete
 ;;
 fPalette_LoadFirstHalf:
     REP #$30                                                   ;8091CF|C230    |      ; A: nIndex

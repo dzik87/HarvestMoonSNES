@@ -54,6 +54,11 @@
     db $33                                                     ; Developer ID
     db $00                                                     ; ROM version (0 = first)
  
+;;
+; @brief    ROM checksum complement and checksum words of the header; fixed per region (US $81C3/$7E3C, EU $9053/$6FAC, DE $0975/$F68A, JP $B159/$4EA6).
+; @format   `[word checksum complement][word checksum]`, 4 bytes at $80FFDC.
+; @note     Must equal the sum of all ROM bytes; tools/build.py verifies it for every region.
+;;
 RomChecksum:
     if !REGION_DE
         dw $0975                                               ; Checksum complement (Checksum ^ $FFFF) (DE)

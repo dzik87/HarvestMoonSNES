@@ -76,8 +76,9 @@ fCore_GameStart:
 ;           (!AFLAGS_NAMEINPUTREQUEST in strcDialogDisplay.mapFlags, which jumps to fScreen_NameInput after clearing the flag), calls the per-frame modules in this order:
 ;           map music change, screen transition, game clock, dialog text, palette fade, colour animation slots, input, object slots, player update,
 ;           map scroll, how-to-play demo AI, tile scripts, object animations, tile-load queue, OAM render. Finally DP $00 is cleared.
-; @modifies DP $00, DP $C7, strcDialogDisplay.mapFlags
-; @calls    fAudioEngine_MapChangeHandler, fMap_ScreenTransitionHandler, fGame_TimeHandler, fDialog_IterateText, fPalette_FadeToNextPalette, fPalette_ProcessColorAnimSlots, fInput_Handler, fObjectSlots_UpdateAll, fPlayer_UpdateHandler, fGraphics_MapScrool, fAI_HowToPlaySetup, fTileScript_Update, fObject_UpdateAllAnimations, fObject_ProcessTileLoadQueue, fObject_RenderAll, fScreen_NameInput
+; @modifies strcDialogDisplay.mapFlags
+; @note     Also writes the frame flag DP $00 and the DMA budget DP $C7.
+; @calls    fAudioEngine_MapChangeHandler, fMap_ScreenTransitionHandler, fGame_TimeHandler, fDialog_IterateText, fPalette_FadeToNextPalette, fPalette_ProcessColorAnimSlots, fInput_Handler, fObjectSlots_UpdateAll, fPlayer_UpdateHandler, fGraphics_MapScrool, fAI_RunSlots, fTileScript_Update, fObject_UpdateAllAnimations, fObject_ProcessTileLoadQueue, fObject_RenderAll, fScreen_NameInput
 ; @note     Runs forever; DP $C7 is the remaining VBlank DMA byte budget consumed by fCore_PrepareTransfer.
 ;;
 fCore_MainLoop:
@@ -181,7 +182,7 @@ fCore_SetPlayerName:
 ; @brief    Apply the name typed on the name entry screen to a cow that was just bought, then re-enter the main loop.
 ; @details  Fades out and blanks the screen, copies the 4 character name from strcNames.sTemp (the name entry result) into the new cow record created by fGameEngine_AddCow(0) (bytes 12..15 of the record pointed to by ptrTemp0x72)
 ;           and requests a forced teleport (!AFLAGS_FORCETELEPORT) so the map is reloaded; BG3 vertical scroll is reset to $0100.
-; @modifies ptrTemp0x72 record (cow name), daily1 flag $0002 cleared, strcDialogDisplay.mapFlags, strcBGScrool.BG3VerOffs, strcDialogDisplay.mapUnk19A
+; @modifies strcDialogDisplay.mapFlags, strcBGScrool.BG3VerOffs, strcDialogDisplay.mapUnk19A
 ; @mode     M8X16 -> M16 (jumps to fCore_MainLoop)
 ; @calls    fCore_ScreenFadeout, fCore_SetForceBlank, fCore_ZeroVRAM, fCore_ZeroCGRAM, fCore_MainLoop
 ; @callers  fScreen_NameInput (via the JML table in bank $82)
@@ -234,7 +235,7 @@ fCore_SetBoughtCowName:
 ; @brief    Apply the name typed on the name entry screen to a calf that was just born, then re-enter the main loop.
 ; @details  Fades out and blanks the screen, copies the 4 character name from strcNames.sTemp (the name entry result) into the new cow record created by fGameEngine_AddCow(1) (bytes 12..15 of the record pointed to by ptrTemp0x72)
 ;           and requests a forced teleport (!AFLAGS_FORCETELEPORT) so the map is reloaded; BG3 vertical scroll is reset to $0100.
-; @modifies ptrTemp0x72 record (cow name), event1 flags $0004 and $0008 cleared, strcDialogDisplay.mapFlags, strcBGScrool.BG3VerOffs, strcDialogDisplay.mapUnk19A
+; @modifies strcDialogDisplay.mapFlags, strcBGScrool.BG3VerOffs, strcDialogDisplay.mapUnk19A
 ; @mode     M8X16 -> M16 (jumps to fCore_MainLoop)
 ; @calls    fCore_ScreenFadeout, fCore_SetForceBlank, fCore_ZeroVRAM, fCore_ZeroCGRAM, fCore_MainLoop
 ; @callers  fScreen_NameInput (via the JML table in bank $82)
@@ -518,8 +519,8 @@ fCore_SetSecondChildName:
 ;           uploads the audio data block at $AD8000 to the SPC700 (fAudio_UploadData), sets the audio mode, loads the common samples and the SPC driver,
 ;           clears VRAM/OAM/CGRAM, the object tile cache and game objects, checks the save RAM, then enables the NMI (NMITIMEN=$80) and jumps to fMainMenu_TitleScreenInit.
 ; @region   JP: the first instructions are laid out differently (SEP/REP before SEI, NMITIMEN cleared without clearing MDMAEN/HDMAEN).
-; @modifies all of WRAM, all PPU registers
-; @mode     M8X16 -> (never returns)
+; @mode     M8X16
+; @note     Never returns; initialises all of WRAM and all PPU/CPU I/O registers.
 ; @calls    fAudio_UploadData, fAudio_SendCommand0B, fAudio_LoadCommonSamples, fAudio_UploadSpcDriver, fCore_InitializeScreenStatus, fCore_ZeroVRAM, fCore_ZeroOAM, fCore_ZeroCGRAM, fObject_InitTileCache, fObject_ClearGameObject, fGameEngine_SaveCheck, fMainMenu_TitleScreenInit
 ;;
 fCore_Reset:
@@ -734,7 +735,7 @@ fCore_Reset:
 ; @details  Enables NMI + auto joypad read (NMITIMEN=$A1), clears the frame flag DP $00 and spins until the NMI handler sets it again.
 ; @modifies DP $00, SNES_NMITIMEN
 ; @mode     = (A is preserved through PHA/PLA, flags through PHP/PLP)
-; @callers  fCore_ScreenFadein, fCore_ScreenFadeout, fMap_SetupArea, fMainMenu_TitleScreenInit, fScreen_NameInput and other blocking screens
+; @callers  fCore_ScreenFadein, fCore_ScreenFadeout, fMap_SetupArea, fMainMenu_TitleScreenInit, fScreen_NameInput
 ;;
 fCore_WaitForNextNMI:
     PHP                                                        ;808645|08      |      ;
@@ -1095,9 +1096,9 @@ fCore_ScreenFadeout:
 ; @brief    Clear the whole VRAM with one fixed-source DMA of zeros.
 ; @details  Forces blank and disables NMI, VMAIN=$80, VRAM address 0, DMA channel 0 mode 9 (fixed source, 2 registers) to $2118 from a zero word at $808424
 ;           (the high word of the interrupt vector table region, i.e. a $0000 constant in ROM), size 0 = 64 KiB.
-; @modifies SNES_INIDISP, SNES_NMITIMEN, VRAM
+; @modifies SNES_INIDISP, SNES_NMITIMEN
 ; @mode     M8X16 -> M16
-; @callers  fCore_GameStart, fCore_Reset, the fCore_Set*Name handlers, fMainMenu_*
+; @callers  fCore_GameStart, fCore_Reset
 ; @note     The DMA source $808424 is the `dw $0000,$00F0` constant that follows fCore_SetSecondChildName.
 ;;
 fCore_ZeroVRAM:
@@ -1132,7 +1133,7 @@ fCore_ZeroVRAM:
  
 ;;
 ; @brief    Clear the whole OAM (544 bytes) with a fixed-source DMA from the zero constant at $808424.
-; @modifies SNES_INIDISP, SNES_NMITIMEN, OAM
+; @modifies SNES_INIDISP, SNES_NMITIMEN
 ; @mode     M8X16 -> M16
 ; @callers  fCore_Reset
 ; @note     DMA mode 9 writes alternately to $2104 and $2105, so BGMODE also receives zeros (harmless).
@@ -1254,9 +1255,9 @@ fCore_Unused8088C3:
 ;;
 ; @brief    Clear the whole CGRAM (512 bytes) with a fixed-source DMA of zeros.
 ; @details  DMA mode 9 alternates between $2122 (CGDATA) and $2123 (W12SEL), length $3FF, so W12SEL is zeroed as a side effect.
-; @modifies SNES_INIDISP (force blank), SNES_NMITIMEN, CGRAM
+; @modifies SNES_INIDISP, SNES_NMITIMEN
 ; @mode     M8X16 -> M16
-; @callers  fCore_GameStart, fCore_Reset, the fCore_Set*Name handlers, fMainMenu_*
+; @callers  fCore_GameStart, fCore_Reset
 ;;
 fCore_ZeroCGRAM:
     SEP #$20                                                   ;808980|E220    |      ;
@@ -1289,7 +1290,7 @@ fCore_ZeroCGRAM:
 ;;
 ; @brief    Clear $1000 words of VRAM starting at a given word address.
 ; @param    A      VRAM word address
-; @modifies SNES_VMADDL, SNES_INIDISP (force blank), SNES_NMITIMEN, VRAM
+; @modifies SNES_VMADDL, SNES_INIDISP, SNES_NMITIMEN
 ; @mode     M16X16 -> M16X16 (ends with M16)
 ; @callers  fMap_ResetAndLoadDestinationArea (A = $7000: the BG3/text tilemap area)
 ;;
@@ -1326,7 +1327,8 @@ fCore_ZeroVRAMatOffset:
 ; @details  Computes step = $FF / A with fMathDivide, takes one byte from the RNG (fGetRandomNumber) and counts how many multiples of `step` are below it, clamped to A-1.
 ; @param    A      8-bit exclusive upper bound (n)
 ; @return   A      random value 0..n-1
-; @clobbers X, strcVariables.n8Temp1..n8Temp3, strcVariables.n16Temp1/n16Temp2
+; @clobbers X
+; @modifies strcVariables.n8Temp1, strcVariables.n8Temp2, strcVariables.n8Temp3, strcVariables.n16Temp1, strcVariables.n16Temp2
 ; @mode     M8X8 -> M8X8
 ; @calls    fMathDivide, fGetRandomNumber
 ; @note     The inline comment on the original label says 0..nMaxValue; with the DEC the maximum returned value is n-1.
@@ -1379,9 +1381,9 @@ fCore_GetRandomNumber:
 ; @param    ptrTemp0x72  24-bit source address
 ; @param    strcSystem.arrayIndex  DMA channel 0..7
 ; @param    strcSystem.destinationRegister  B-bus register ($18 VMDATAL or $22 CGDATA)
-; @modifies strcSystem.array32, strcSystem.array2A, strcSystem.DMAchannelFlags, DP $C7, SNES_DMAPn/BBADn/A1Tn/A1Bn/DASn
+; @modifies strcSystem.array32, strcSystem.array2A, strcSystem.DMAchannelFlags
 ; @mode     M16X16 -> M16 (ends with M8)
-; @callers  fMap_SetupArea, fTileMap_LoadAreaGraphics, fMap_StreamRowDown/Up, fMap_StreamColumnLeft/Right, fPalette_ProcessColorAnimSlots, fPalette_FadeToNextPalette, fDialog_LoadDialogBoxGraphics, fMainMenu_*
+; @callers  fMap_SetupArea, fTileMap_LoadAreaGraphics, fMap_StreamRowDown, fMap_StreamRowUp, fMap_StreamColumnLeft, fMap_StreamColumnRight, fPalette_ProcessColorAnimSlots, fPalette_FadeToNextPalette, fDialog_LoadDialogBoxGraphics
 ;;
 fCore_PrepareTransfer:
     REP #$30                                                   ;808A33|C230    |      ; A: nArg1, X: nArg2, $72: ptr24Destination
@@ -1477,9 +1479,9 @@ fCore_RemoveTransfer:
 ; @brief    Immediately run the single DMA transfer queued in channel strcSystem.arrayIndex (outside VBlank, screen blanked by the caller).
 ; @details  Sets VMAIN/VRAM address (or CGRAM address) from the arrays filled by fCore_PrepareTransfer, writes the channel bit to SNES_MDMAEN and clears strcSystem.DMAchannelFlags.
 ; @param    strcSystem.arrayIndex  DMA channel 0..7
-; @modifies SNES_VMAIN, SNES_VMADDL or SNES_CGADD, SNES_MDMAEN, strcSystem.DMAchannelFlags
+; @modifies SNES_VMAIN, SNES_VMADDL, SNES_CGADD, SNES_MDMAEN, strcSystem.DMAchannelFlags
 ; @mode     M8X8 -> M8 (ends with X8)
-; @callers  fMap_SetupArea, fTileMap_LoadAreaGraphics, fTileMap_UploadRowToVRAM, fDialog_LoadDialogBoxGraphics, fMainMenu_*
+; @callers  fMap_SetupArea, fTileMap_LoadAreaGraphics, fTileMap_UploadRowToVRAM, fDialog_LoadDialogBoxGraphics
 ;;
 fCore_StartPreparedTransfer:
     SEP #$30                                                   ;808AB2|E230    |      ;
@@ -1594,14 +1596,12 @@ fCore_StartTransfer:
 aDmaChannelFlagTable:
     db $01,$02,$04,$08,$10,$20,$40,$80                         ;808B3C|        |      ;
  
-;;
-; @brief    PPU register presets selectable by fCore_ApplyGraphicsPreset (generated, one byte table per register).
-; @format   One table per PPU register: Table_OBSEL_Presets, Table_BGMODE_Presets, Table_BG1SC/BG2SC/BG3SC/BG4SC_Presets, Table_BG12NBA/BG34NBA_Presets, Table_W12SEL/W34SEL/WOBJSEL_Presets,
+; brief    PPU register presets selectable by fCore_ApplyGraphicsPreset (generated, one byte table per register).
+; format   One table per PPU register: Table_OBSEL_Presets, Table_BGMODE_Presets, Table_BG1SC/BG2SC/BG3SC/BG4SC_Presets, Table_BG12NBA/BG34NBA_Presets, Table_W12SEL/W34SEL/WOBJSEL_Presets,
 ;           Table_WH0..WH3_Presets, Table_WBGLOG/WOBJLOG_Presets, Table_TM/TS/TMW/TSW_Presets, Table_CGWSEL/CGADSUB/SETINI_Presets; every table has one byte per preset (11 presets), same order.
-; @index    X = preset id (strcDialogDisplay.mapCurrentPresetId, byte 0 of the area descriptor in aTileMapData).
-; @used_by  fCore_ApplyGraphicsPreset
-; @note     Generated from assets/gfx/presets.csv by tools/gfx/presets.py (docs/formats/data-tables.md).
-;;
+; index    X = preset id (strcDialogDisplay.mapCurrentPresetId, byte 0 of the area descriptor in aTileMapData).
+; used_by  fCore_ApplyGraphicsPreset
+; note     Generated from assets/gfx/presets.csv by tools/gfx/presets.py (docs/formats/data-tables.md).
 ; Graphics presets Table_<REG>_Presets (generated from assets/gfx/presets.csv by tools/gfx/presets.py, docs/formats/data-tables.md)
     incsrc "../../../build/gen/tables/gfx_presets.asm"
 
@@ -1630,9 +1630,9 @@ fCore_InitializeScreenStatus:
 ;           TM/TS/TMW/TSW ($19DA-DD), CGWSEL ($19DE), CGADSUB ($19DF), COLDATA $E0 ($19E0), SETINI ($19E1) and the OBJ tile base word address (OBSEL name base * $2000) in $19EA.
 ;           If the display is in force blank the BG scroll registers are also reset to 0.
 ; @param    A      preset id (8-bit), index into the Table_*_Presets tables
-; @modifies WRAM $7E19B6-$7E19EB, SNES_OBSEL, SNES_BGMODE, SNES_BG1SC..SNES_BG4SC, SNES_BG12NBA, SNES_BG34NBA, SNES_M7SEL, SNES_W12SEL..SNES_WOBJLOG, SNES_TM..SNES_TSW, SNES_CGWSEL, SNES_CGADSUB, SNES_COLDATA, SNES_SETINI
+; @modifies SNES_OBSEL, SNES_BGMODE, SNES_BG1SC..SNES_BG4SC, SNES_BG12NBA, SNES_BG34NBA, SNES_M7SEL, SNES_W12SEL..SNES_WOBJLOG, SNES_TM..SNES_TSW, SNES_CGWSEL, SNES_CGADSUB, SNES_COLDATA, SNES_SETINI
 ; @mode     M8X8 (PHP/PLP restored)
-; @callers  fTileMap_LoadAreaGraphics, fMainMenu_*, fScreen_NameInput
+; @callers  fTileMap_LoadAreaGraphics
 ; @note     The shadow registers have no names in ram.asm yet; the layout above was read from the stores (confidence: high for the order, medium for the meaning of $19E2/$19E4/..).
 ;;
 fCore_ApplyGraphicsPreset:
@@ -1836,7 +1836,7 @@ fCore_SetBrightness:
 ; @param    ptrTemp0x72  24-bit address of the animation script (records: word colour, byte frames; $FFFE ptr24 = jump, $FFFF = end)
 ; @modifies strcPalette.animColorIndex, strcPalette.animPaletteRow, strcPalette.animTimer, ptrPaletteAnimScripts
 ; @mode     M8X8 -> M8X8 (ends with M8)
-; @callers  fMap_SetupArea, all fPaletteAnim_* routines
+; @callers  fMap_SetupArea
 ;;
 fPalette_StartColorAnimSlot:
     SEP #$30                                                   ;808E48|E230    |      ; A: nValue1, X nIndex, Y: nValue2, Y, $72: ptr24
@@ -1867,7 +1867,7 @@ fPalette_StartColorAnimSlot:
 ;           Slots 0..3 (weather overlay: rain/snow) are processed only while strcDialogDisplay.mapFlags has bit $0002 or $0008 set, otherwise the loop starts at slot 4 (area scripts).
 ;           The scan stops at the first empty slot >= 4, so area scripts must occupy contiguous slots from 4. If any slot was active, 128 colours ($100 bytes) of
 ;           sPalette_7F0900 are queued for CGRAM on DMA channel 5 (executed in the next VBlank).
-; @modifies ptrPaletteAnimScripts, strcPalette.animTimer, sPalette_7F0900, strcSystem.arrayIndex, strcSystem.destinationRegister, ptrTemp0x72, strcVariables.n8Temp1/n8Temp2/n16Temp1
+; @modifies ptrPaletteAnimScripts, strcPalette.animTimer, sPalette_7F0900, strcSystem.arrayIndex, strcSystem.destinationRegister, ptrTemp0x72, strcVariables.n8Temp1, strcVariables.n8Temp2, strcVariables.n16Temp1
 ; @mode     M16X16 -> M8
 ; @calls    fPalette_WriteColorToBuffer, fCore_PrepareTransfer
 ; @callers  fCore_MainLoop, fMap_SetupArea

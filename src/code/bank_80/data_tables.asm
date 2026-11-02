@@ -13,11 +13,9 @@
 
 ; Bank $80 module "data_tables" - starts at $80B9D7
  
-;;
-; @brief    Generated palette tables (assets/tables/data/palette_tables.csv): rain/snow colour animation scripts, aPalettes, aMapPalettesIndexes, nPaletteSeasonOverwriteTable, sPallete_MarriedGirlTable, aMapPalettesId, pPaletteAnimRoutineTable.
-; @format   See the documentation blocks at the top of each table in assets/tables/data/palette_tables.csv and docs/formats/graphics-palettes.md.
-; @used_by  fPalette_*, fMap_SetupArea, fPaletteAnim_RunAreaRoutine
-;;
+; brief    Generated palette tables (assets/tables/data/palette_tables.csv): rain/snow colour animation scripts, aPalettes, aMapPalettesIndexes, nPaletteSeasonOverwriteTable, sPallete_MarriedGirlTable, aMapPalettesId, pPaletteAnimRoutineTable.
+; format   See the documentation blocks at the top of each table in assets/tables/data/palette_tables.csv and docs/formats/graphics-palettes.md.
+; used_by  fPalette_*, fMap_SetupArea, fPaletteAnim_RunAreaRoutine
     incsrc "../../../build/gen/blocks/palette_tables.asm"
  
 ;;
@@ -5186,12 +5184,10 @@ fPaletteAnim_RestaurantBedroom_T1234:
     RTS                                                        ;80DD5A|60      |      ;
  
  
-;;
-; @brief    Generated colour animation scripts (assets/tables/data/palette_anim_scripts.csv), labels aPaletteAnimScript_<Routine>_Slot<n> (and aPaletteAnim_Row<r>Col<c>_<address> for old unnamed ones).
-; @format   A script is a list of 3-byte records `[word BGR555 colour][byte frames to hold]`, ended by `$FFFF` or looped with `$FFFE` + ptr24 of the script to continue with.
-; @index    Started into slot n by the fPaletteAnim_* routine of the same name (fPalette_StartColorAnimSlot: A = colour index, X = slot, Y = palette row).
-; @used_by  fPalette_ProcessColorAnimSlots (reads), fPaletteAnim_* (assign)
-;;
+; brief    Generated colour animation scripts (assets/tables/data/palette_anim_scripts.csv), labels aPaletteAnimScript_<Routine>_Slot<n> (and aPaletteAnim_Row<r>Col<c>_<address> for old unnamed ones).
+; format   A script is a list of 3-byte records `[word BGR555 colour][byte frames to hold]`, ended by `$FFFF` or looped with `$FFFE` + ptr24 of the script to continue with.
+; index    Started into slot n by the fPaletteAnim_* routine of the same name (fPalette_StartColorAnimSlot: A = colour index, X = slot, Y = palette row).
+; used_by  fPalette_ProcessColorAnimSlots (reads), fPaletteAnim_* (assign)
     incsrc "../../../build/gen/blocks/palette_anim_scripts.asm"
  
     pad $80FFB0
