@@ -1430,7 +1430,6 @@ Pu-pu!<END>
 
 @@ sDialog_0x01C3 @@
 To "Niebieskie Pióro Szczęścia". Cóż, każdy inaczej rozumie szczęście.<NEXT>
-
 Teraz tylko 1000G!<NEXT>
 <OPTLBL 1>Kupuję<OPTLBL 2>Nie kupuję<POS 58>Kasa <NUM 7 14>0G<OPT 2>
 
